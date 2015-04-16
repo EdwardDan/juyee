@@ -1,0 +1,786 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions name="CheckWebServiceImplService" targetNamespace="http://check.webservice.pagd.justonetech.com/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://check.webservice.pagd.justonetech.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+<xs:schema elementFormDefault="unqualified" targetNamespace="http://check.webservice.pagd.justonetech.com/" version="1.0" xmlns:tns="http://check.webservice.pagd.justonetech.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element name="deleteCheckDeviceInfo" type="tns:deleteCheckDeviceInfo"/>
+<xs:element name="deleteCheckDeviceInfoResponse" type="tns:deleteCheckDeviceInfoResponse"/>
+<xs:element name="deleteCheckFingerPrint" type="tns:deleteCheckFingerPrint"/>
+<xs:element name="deleteCheckFingerPrintResponse" type="tns:deleteCheckFingerPrintResponse"/>
+<xs:element name="deleteCheckManager" type="tns:deleteCheckManager"/>
+<xs:element name="deleteCheckManagerPosition" type="tns:deleteCheckManagerPosition"/>
+<xs:element name="deleteCheckManagerPositionResponse" type="tns:deleteCheckManagerPositionResponse"/>
+<xs:element name="deleteCheckManagerResponse" type="tns:deleteCheckManagerResponse"/>
+<xs:element name="deleteGdInfo" type="tns:deleteGdInfo"/>
+<xs:element name="deleteGdInfoResponse" type="tns:deleteGdInfoResponse"/>
+<xs:element name="getCheckDeviceInfoList" type="tns:getCheckDeviceInfoList"/>
+<xs:element name="getCheckDeviceInfoListForWorker" type="tns:getCheckDeviceInfoListForWorker"/>
+<xs:element name="getCheckDeviceInfoListForWorkerResponse" type="tns:getCheckDeviceInfoListForWorkerResponse"/>
+<xs:element name="getCheckDeviceInfoListResponse" type="tns:getCheckDeviceInfoListResponse"/>
+<xs:element name="getCheckInfoList" type="tns:getCheckInfoList"/>
+<xs:element name="getCheckInfoListForWorker" type="tns:getCheckInfoListForWorker"/>
+<xs:element name="getCheckInfoListForWorkerResponse" type="tns:getCheckInfoListForWorkerResponse"/>
+<xs:element name="getCheckInfoListResponse" type="tns:getCheckInfoListResponse"/>
+<xs:element name="saveCheckDeviceInfo" type="tns:saveCheckDeviceInfo"/>
+<xs:element name="saveCheckDeviceInfoForWorker" type="tns:saveCheckDeviceInfoForWorker"/>
+<xs:element name="saveCheckDeviceInfoForWorkerResponse" type="tns:saveCheckDeviceInfoForWorkerResponse"/>
+<xs:element name="saveCheckDeviceInfoResponse" type="tns:saveCheckDeviceInfoResponse"/>
+<xs:element name="saveCheckFingerPrint" type="tns:saveCheckFingerPrint"/>
+<xs:element name="saveCheckFingerPrintResponse" type="tns:saveCheckFingerPrintResponse"/>
+<xs:element name="saveCheckManager" type="tns:saveCheckManager"/>
+<xs:element name="saveCheckManagerForWorker" type="tns:saveCheckManagerForWorker"/>
+<xs:element name="saveCheckManagerForWorkerResponse" type="tns:saveCheckManagerForWorkerResponse"/>
+<xs:element name="saveCheckManagerPosition" type="tns:saveCheckManagerPosition"/>
+<xs:element name="saveCheckManagerPositionResponse" type="tns:saveCheckManagerPositionResponse"/>
+<xs:element name="saveCheckManagerResponse" type="tns:saveCheckManagerResponse"/>
+<xs:element name="saveGdInfo" type="tns:saveGdInfo"/>
+<xs:element name="saveGdInfoResponse" type="tns:saveGdInfoResponse"/>
+<xs:complexType name="getCheckDeviceInfoListForWorker">
+<xs:sequence>
+<xs:element minOccurs="0" name="arg0" type="xs:string"/>
+<xs:element name="arg1" type="xs:long"/>
+<xs:element name="arg2" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getCheckDeviceInfoListForWorkerResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getCheckInfoListForWorker">
+<xs:sequence>
+<xs:element minOccurs="0" name="arg0" type="xs:string"/>
+<xs:element name="arg1" type="xs:long"/>
+<xs:element name="arg2" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getCheckInfoListForWorkerResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="deleteGdInfo">
+<xs:sequence>
+<xs:element minOccurs="0" name="arg0" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="deleteGdInfoResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="deleteCheckManager">
+<xs:sequence>
+<xs:element minOccurs="0" name="arg0" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="deleteCheckManagerResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="saveCheckManagerPosition">
+<xs:sequence>
+<xs:element minOccurs="0" name="arg0" type="tns:checkManagerPosition"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="checkManagerPosition">
+<xs:complexContent>
+<xs:extension base="tns:baseCheckManagerPosition">
+<xs:sequence>
+<xs:element minOccurs="0" name="managerGuid" type="xs:string"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType abstract="true" name="baseCheckManagerPosition">
+<xs:sequence>
+<xs:element minOccurs="0" name="certificateCode" type="xs:string"/>
+<xs:element minOccurs="0" name="certificateName" type="xs:string"/>
+<xs:element minOccurs="0" name="createTime" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="createUser" type="xs:string"/>
+<xs:element minOccurs="0" name="deleteTime" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="deleteUser" type="xs:string"/>
+<xs:element minOccurs="0" name="flowCode" type="xs:string"/>
+<xs:element minOccurs="0" name="gdCode" type="xs:string"/>
+<xs:element minOccurs="0" name="guid" type="xs:string"/>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="isDelete" type="xs:boolean"/>
+<xs:element minOccurs="0" name="isValid" type="xs:boolean"/>
+<xs:element minOccurs="0" name="manager" type="tns:checkManager"/>
+<xs:element minOccurs="0" name="positionName" type="xs:string"/>
+<xs:element minOccurs="0" name="positionType" type="xs:long"/>
+<xs:element minOccurs="0" name="updateTime" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="updateUser" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="checkManager">
+<xs:complexContent>
+<xs:extension base="tns:baseCheckManager">
+<xs:sequence>
+<xs:element minOccurs="0" name="photo" type="xs:base64Binary"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType abstract="true" name="baseCheckManager">
+<xs:sequence>
+<xs:element minOccurs="0" name="cardNo" type="xs:string"/>
+<xs:element minOccurs="0" name="cardSn" type="xs:string"/>
+<xs:element minOccurs="0" name="category" type="xs:string"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="checkFingerPrints" nillable="true" type="tns:checkFingerPrint"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="checkInfos" nillable="true" type="tns:checkInfo"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="checkManagerPositions" nillable="true" type="tns:checkManagerPosition"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="checkReasons" nillable="true" type="tns:checkReason"/>
+<xs:element minOccurs="0" name="createTime" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="createUser" type="xs:string"/>
+<xs:element minOccurs="0" name="deleteTime" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="deleteUser" type="xs:string"/>
+<xs:element minOccurs="0" name="guid" type="xs:string"/>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="idCard" type="xs:string"/>
+<xs:element minOccurs="0" name="isDelete" type="xs:boolean"/>
+<xs:element minOccurs="0" name="mobile" type="xs:string"/>
+<xs:element minOccurs="0" name="name" type="xs:string"/>
+<xs:element minOccurs="0" name="photoFile" type="xs:string"/>
+<xs:element minOccurs="0" name="sex" type="xs:string"/>
+<xs:element minOccurs="0" name="updateTime" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="updateUser" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="checkFingerPrint">
+<xs:complexContent>
+<xs:extension base="tns:baseCheckFingerPrint">
+<xs:sequence>
+<xs:element minOccurs="0" name="managerGuid" type="xs:string"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType abstract="true" name="baseCheckFingerPrint">
+<xs:sequence>
+<xs:element minOccurs="0" name="bioType" type="xs:long"/>
+<xs:element minOccurs="0" name="createTime" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="createUser" type="xs:string"/>
+<xs:element minOccurs="0" name="deleteTime" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="deleteUser" type="xs:string"/>
+<xs:element minOccurs="0" name="devSn" type="xs:string"/>
+<xs:element minOccurs="0" name="fingerVersion" type="xs:string"/>
+<xs:element minOccurs="0" name="fingerid" type="xs:long"/>
+<xs:element minOccurs="0" name="guid" type="xs:string"/>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="isDelete" type="xs:boolean"/>
+<xs:element minOccurs="0" name="manager" type="tns:checkManager"/>
+<xs:element minOccurs="0" name="template" type="xs:string"/>
+<xs:element minOccurs="0" name="updateTime" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="updateUser" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="checkInfo">
+<xs:complexContent>
+<xs:extension base="tns:baseCheckInfo">
+<xs:sequence>
+<xs:element minOccurs="0" name="belongArea" type="xs:string"/>
+<xs:element minOccurs="0" name="devGuid" type="xs:string"/>
+<xs:element minOccurs="0" name="managerGuid" type="xs:string"/>
+<xs:element minOccurs="0" name="photo" type="xs:base64Binary"/>
+<xs:element minOccurs="0" name="photoString" type="xs:string"/>
+<xs:element name="startInx" type="xs:long"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType abstract="true" name="baseCheckInfo">
+<xs:sequence>
+<xs:element minOccurs="0" name="cardNo" type="xs:string"/>
+<xs:element minOccurs="0" name="checkStatus" type="xs:string"/>
+<xs:element minOccurs="0" name="checkTime" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="createTime" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="createUser" type="xs:string"/>
+<xs:element minOccurs="0" name="deleteTime" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="deleteUser" type="xs:string"/>
+<xs:element minOccurs="0" name="dev" type="tns:checkDeviceInfo"/>
+<xs:element minOccurs="0" name="devSn" type="xs:string"/>
+<xs:element minOccurs="0" name="gdCode" type="xs:string"/>
+<xs:element minOccurs="0" name="guid" type="xs:string"/>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="isDelete" type="xs:boolean"/>
+<xs:element minOccurs="0" name="manager" type="tns:checkManager"/>
+<xs:element minOccurs="0" name="managerName" type="xs:string"/>
+<xs:element minOccurs="0" name="photoFile" type="xs:string"/>
+<xs:element minOccurs="0" name="positionLatitude" type="xs:double"/>
+<xs:element minOccurs="0" name="positionLongitude" type="xs:double"/>
+<xs:element minOccurs="0" name="positionTime" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="updateTime" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="updateUser" type="xs:string"/>
+<xs:element minOccurs="0" name="verifyCode" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="checkDeviceInfo">
+<xs:complexContent>
+<xs:extension base="tns:baseCheckDeviceInfo">
+<xs:sequence>
+<xs:element minOccurs="0" name="belongArea" type="xs:string"/>
+<xs:element name="startInx" type="xs:long"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType abstract="true" name="baseCheckDeviceInfo">
+<xs:sequence>
+<xs:element minOccurs="0" name="cancelDateTime" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="cancelStatus" type="xs:long"/>
+<xs:element minOccurs="0" name="cancelUserName" type="xs:string"/>
+<xs:element minOccurs="0" name="category" type="xs:string"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="checkInfos" nillable="true" type="tns:checkInfo"/>
+<xs:element minOccurs="0" name="createTime" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="createUser" type="xs:string"/>
+<xs:element minOccurs="0" name="deleteTime" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="deleteUser" type="xs:string"/>
+<xs:element minOccurs="0" name="devIp" type="xs:string"/>
+<xs:element minOccurs="0" name="devMode" type="xs:string"/>
+<xs:element minOccurs="0" name="devName" type="xs:string"/>
+<xs:element minOccurs="0" name="devSim" type="xs:string"/>
+<xs:element minOccurs="0" name="devSn" type="xs:string"/>
+<xs:element minOccurs="0" name="gdCode" type="xs:string"/>
+<xs:element minOccurs="0" name="guid" type="xs:string"/>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="isDelete" type="xs:boolean"/>
+<xs:element minOccurs="0" name="lastOnlineTime" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="latitude" type="xs:double"/>
+<xs:element minOccurs="0" name="longitude" type="xs:double"/>
+<xs:element minOccurs="0" name="onlineStatus" type="xs:long"/>
+<xs:element minOccurs="0" name="positionLatitude" type="xs:double"/>
+<xs:element minOccurs="0" name="positionLongitude" type="xs:double"/>
+<xs:element minOccurs="0" name="positionTime" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="regDateTime" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="regUserName" type="xs:string"/>
+<xs:element minOccurs="0" name="updateTime" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="updateUser" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="checkReason">
+<xs:complexContent>
+<xs:extension base="tns:baseCheckReason">
+<xs:sequence/>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType abstract="true" name="baseCheckReason">
+<xs:sequence>
+<xs:element minOccurs="0" name="checkDate" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="checkReason" type="xs:string"/>
+<xs:element minOccurs="0" name="createTime" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="createUser" type="xs:string"/>
+<xs:element minOccurs="0" name="deleteTime" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="deleteUser" type="xs:string"/>
+<xs:element minOccurs="0" name="gdCode" type="xs:string"/>
+<xs:element minOccurs="0" name="guid" type="xs:string"/>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="isDelete" type="xs:boolean"/>
+<xs:element minOccurs="0" name="manager" type="tns:checkManager"/>
+<xs:element minOccurs="0" name="updateTime" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="updateUser" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="saveCheckManagerPositionResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getCheckDeviceInfoList">
+<xs:sequence>
+<xs:element minOccurs="0" name="arg0" type="xs:string"/>
+<xs:element name="arg1" type="xs:long"/>
+<xs:element name="arg2" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getCheckDeviceInfoListResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="saveCheckDeviceInfo">
+<xs:sequence>
+<xs:element minOccurs="0" name="arg0" type="tns:checkDeviceInfo"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="saveCheckDeviceInfoResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="saveCheckManager">
+<xs:sequence>
+<xs:element minOccurs="0" name="arg0" type="tns:checkManager"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="saveCheckManagerResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="saveCheckFingerPrint">
+<xs:sequence>
+<xs:element minOccurs="0" name="arg0" type="tns:checkFingerPrint"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="saveCheckFingerPrintResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="saveGdInfo">
+<xs:sequence>
+<xs:element minOccurs="0" name="arg0" type="xs:string"/>
+<xs:element minOccurs="0" name="arg1" type="xs:string"/>
+<xs:element minOccurs="0" name="arg2" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="saveGdInfoResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="deleteCheckManagerPosition">
+<xs:sequence>
+<xs:element minOccurs="0" name="arg0" type="xs:string"/>
+<xs:element minOccurs="0" name="arg1" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="deleteCheckManagerPositionResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="saveCheckDeviceInfoForWorker">
+<xs:sequence>
+<xs:element minOccurs="0" name="arg0" type="tns:checkDeviceInfo"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="saveCheckDeviceInfoForWorkerResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getCheckInfoList">
+<xs:sequence>
+<xs:element minOccurs="0" name="arg0" type="xs:string"/>
+<xs:element name="arg1" type="xs:long"/>
+<xs:element name="arg2" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getCheckInfoListResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="deleteCheckFingerPrint">
+<xs:sequence>
+<xs:element minOccurs="0" name="arg0" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="deleteCheckFingerPrintResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="deleteCheckDeviceInfo">
+<xs:sequence>
+<xs:element minOccurs="0" name="arg0" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="deleteCheckDeviceInfoResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="saveCheckManagerForWorker">
+<xs:sequence>
+<xs:element minOccurs="0" name="arg0" type="tns:checkManager"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="saveCheckManagerForWorkerResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="saveCheckDeviceInfoForWorker">
+    <wsdl:part element="tns:saveCheckDeviceInfoForWorker" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="saveGdInfo">
+    <wsdl:part element="tns:saveGdInfo" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCheckInfoListForWorker">
+    <wsdl:part element="tns:getCheckInfoListForWorker" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="saveCheckDeviceInfo">
+    <wsdl:part element="tns:saveCheckDeviceInfo" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="saveCheckManagerResponse">
+    <wsdl:part element="tns:saveCheckManagerResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteCheckDeviceInfoResponse">
+    <wsdl:part element="tns:deleteCheckDeviceInfoResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteCheckFingerPrint">
+    <wsdl:part element="tns:deleteCheckFingerPrint" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCheckDeviceInfoListForWorkerResponse">
+    <wsdl:part element="tns:getCheckDeviceInfoListForWorkerResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="saveGdInfoResponse">
+    <wsdl:part element="tns:saveGdInfoResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="saveCheckManager">
+    <wsdl:part element="tns:saveCheckManager" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCheckDeviceInfoListResponse">
+    <wsdl:part element="tns:getCheckDeviceInfoListResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="saveCheckManagerPosition">
+    <wsdl:part element="tns:saveCheckManagerPosition" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="saveCheckDeviceInfoForWorkerResponse">
+    <wsdl:part element="tns:saveCheckDeviceInfoForWorkerResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteCheckManagerResponse">
+    <wsdl:part element="tns:deleteCheckManagerResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="saveCheckManagerForWorkerResponse">
+    <wsdl:part element="tns:saveCheckManagerForWorkerResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="saveCheckFingerPrintResponse">
+    <wsdl:part element="tns:saveCheckFingerPrintResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="saveCheckManagerPositionResponse">
+    <wsdl:part element="tns:saveCheckManagerPositionResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteGdInfo">
+    <wsdl:part element="tns:deleteGdInfo" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="saveCheckDeviceInfoResponse">
+    <wsdl:part element="tns:saveCheckDeviceInfoResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCheckInfoListResponse">
+    <wsdl:part element="tns:getCheckInfoListResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteGdInfoResponse">
+    <wsdl:part element="tns:deleteGdInfoResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteCheckManagerPositionResponse">
+    <wsdl:part element="tns:deleteCheckManagerPositionResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="saveCheckFingerPrint">
+    <wsdl:part element="tns:saveCheckFingerPrint" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCheckDeviceInfoListForWorker">
+    <wsdl:part element="tns:getCheckDeviceInfoListForWorker" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteCheckFingerPrintResponse">
+    <wsdl:part element="tns:deleteCheckFingerPrintResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCheckInfoListForWorkerResponse">
+    <wsdl:part element="tns:getCheckInfoListForWorkerResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteCheckDeviceInfo">
+    <wsdl:part element="tns:deleteCheckDeviceInfo" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCheckDeviceInfoList">
+    <wsdl:part element="tns:getCheckDeviceInfoList" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="saveCheckManagerForWorker">
+    <wsdl:part element="tns:saveCheckManagerForWorker" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteCheckManagerPosition">
+    <wsdl:part element="tns:deleteCheckManagerPosition" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getCheckInfoList">
+    <wsdl:part element="tns:getCheckInfoList" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteCheckManager">
+    <wsdl:part element="tns:deleteCheckManager" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="CheckWebService">
+    <wsdl:operation name="getCheckDeviceInfoListForWorker">
+      <wsdl:input message="tns:getCheckDeviceInfoListForWorker" name="getCheckDeviceInfoListForWorker">
+    </wsdl:input>
+      <wsdl:output message="tns:getCheckDeviceInfoListForWorkerResponse" name="getCheckDeviceInfoListForWorkerResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCheckInfoListForWorker">
+      <wsdl:input message="tns:getCheckInfoListForWorker" name="getCheckInfoListForWorker">
+    </wsdl:input>
+      <wsdl:output message="tns:getCheckInfoListForWorkerResponse" name="getCheckInfoListForWorkerResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteGdInfo">
+      <wsdl:input message="tns:deleteGdInfo" name="deleteGdInfo">
+    </wsdl:input>
+      <wsdl:output message="tns:deleteGdInfoResponse" name="deleteGdInfoResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteCheckManager">
+      <wsdl:input message="tns:deleteCheckManager" name="deleteCheckManager">
+    </wsdl:input>
+      <wsdl:output message="tns:deleteCheckManagerResponse" name="deleteCheckManagerResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="saveCheckManagerPosition">
+      <wsdl:input message="tns:saveCheckManagerPosition" name="saveCheckManagerPosition">
+    </wsdl:input>
+      <wsdl:output message="tns:saveCheckManagerPositionResponse" name="saveCheckManagerPositionResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCheckDeviceInfoList">
+      <wsdl:input message="tns:getCheckDeviceInfoList" name="getCheckDeviceInfoList">
+    </wsdl:input>
+      <wsdl:output message="tns:getCheckDeviceInfoListResponse" name="getCheckDeviceInfoListResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="saveCheckDeviceInfo">
+      <wsdl:input message="tns:saveCheckDeviceInfo" name="saveCheckDeviceInfo">
+    </wsdl:input>
+      <wsdl:output message="tns:saveCheckDeviceInfoResponse" name="saveCheckDeviceInfoResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="saveCheckManager">
+      <wsdl:input message="tns:saveCheckManager" name="saveCheckManager">
+    </wsdl:input>
+      <wsdl:output message="tns:saveCheckManagerResponse" name="saveCheckManagerResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="saveCheckFingerPrint">
+      <wsdl:input message="tns:saveCheckFingerPrint" name="saveCheckFingerPrint">
+    </wsdl:input>
+      <wsdl:output message="tns:saveCheckFingerPrintResponse" name="saveCheckFingerPrintResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="saveGdInfo">
+      <wsdl:input message="tns:saveGdInfo" name="saveGdInfo">
+    </wsdl:input>
+      <wsdl:output message="tns:saveGdInfoResponse" name="saveGdInfoResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteCheckManagerPosition">
+      <wsdl:input message="tns:deleteCheckManagerPosition" name="deleteCheckManagerPosition">
+    </wsdl:input>
+      <wsdl:output message="tns:deleteCheckManagerPositionResponse" name="deleteCheckManagerPositionResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="saveCheckDeviceInfoForWorker">
+      <wsdl:input message="tns:saveCheckDeviceInfoForWorker" name="saveCheckDeviceInfoForWorker">
+    </wsdl:input>
+      <wsdl:output message="tns:saveCheckDeviceInfoForWorkerResponse" name="saveCheckDeviceInfoForWorkerResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCheckInfoList">
+      <wsdl:input message="tns:getCheckInfoList" name="getCheckInfoList">
+    </wsdl:input>
+      <wsdl:output message="tns:getCheckInfoListResponse" name="getCheckInfoListResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteCheckFingerPrint">
+      <wsdl:input message="tns:deleteCheckFingerPrint" name="deleteCheckFingerPrint">
+    </wsdl:input>
+      <wsdl:output message="tns:deleteCheckFingerPrintResponse" name="deleteCheckFingerPrintResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteCheckDeviceInfo">
+      <wsdl:input message="tns:deleteCheckDeviceInfo" name="deleteCheckDeviceInfo">
+    </wsdl:input>
+      <wsdl:output message="tns:deleteCheckDeviceInfoResponse" name="deleteCheckDeviceInfoResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="saveCheckManagerForWorker">
+      <wsdl:input message="tns:saveCheckManagerForWorker" name="saveCheckManagerForWorker">
+    </wsdl:input>
+      <wsdl:output message="tns:saveCheckManagerForWorkerResponse" name="saveCheckManagerForWorkerResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CheckWebServiceImplServiceSoapBinding" type="tns:CheckWebService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getCheckDeviceInfoListForWorker">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getCheckDeviceInfoListForWorker">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getCheckDeviceInfoListForWorkerResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCheckInfoListForWorker">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getCheckInfoListForWorker">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getCheckInfoListForWorkerResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteGdInfo">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="deleteGdInfo">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deleteGdInfoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteCheckManager">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="deleteCheckManager">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deleteCheckManagerResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCheckDeviceInfoList">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getCheckDeviceInfoList">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getCheckDeviceInfoListResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="saveCheckManagerPosition">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="saveCheckManagerPosition">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="saveCheckManagerPositionResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="saveCheckDeviceInfo">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="saveCheckDeviceInfo">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="saveCheckDeviceInfoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="saveCheckManager">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="saveCheckManager">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="saveCheckManagerResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="saveCheckFingerPrint">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="saveCheckFingerPrint">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="saveCheckFingerPrintResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="saveGdInfo">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="saveGdInfo">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="saveGdInfoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteCheckManagerPosition">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="deleteCheckManagerPosition">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deleteCheckManagerPositionResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCheckInfoList">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getCheckInfoList">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getCheckInfoListResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="saveCheckDeviceInfoForWorker">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="saveCheckDeviceInfoForWorker">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="saveCheckDeviceInfoForWorkerResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteCheckFingerPrint">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="deleteCheckFingerPrint">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deleteCheckFingerPrintResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteCheckDeviceInfo">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="deleteCheckDeviceInfo">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deleteCheckDeviceInfoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="saveCheckManagerForWorker">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="saveCheckManagerForWorker">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="saveCheckManagerForWorkerResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CheckWebServiceImplService">
+    <wsdl:port binding="tns:CheckWebServiceImplServiceSoapBinding" name="CheckWebServiceImplPort">
+      <soap:address location="https://localhost/cxf/checkWebService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.justonetech.biz.domain">
+	<class
+		name="MsgMessage"
+		table="MSG_MESSAGE"
+	>
+		
+		<meta attribute="sync-DAO">false</meta>
+		<meta attribute="sync-jsp">true</meta>
+		<meta attribute="sync-boolean">get</meta>
+		<meta attribute="treeable">false</meta>
+		<meta attribute="projectable">false</meta>
+        <meta attribute="tableName">系统消息通知</meta>
+        <meta attribute="tableComment">系统消息通知</meta>
+	    <meta attribute="sync-templatePatterns">list\w*</meta>
+        <meta attribute="sub-system">sms</meta>
+
+		<id
+			name="id"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="com.justonetech.core.orm.hibernate.LongIdGenerator"/>
+		</id>
+
+		<property
+			name="content"
+			column="CONTENT"
+			type="string"
+			not-null="false"
+			length="500"
+        >
+            <meta attribute="ColumnName">消息内容</meta>
+            <meta attribute="ColumnComment">消息内容</meta>
+        </property>
+
+		<property
+			name="sender"
+			column="SENDER"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">发送人姓名</meta>
+            <meta attribute="ColumnComment">发送人姓名</meta>
+        </property>
+
+		<property
+			name="innerPersonIds"
+			column="INNER_PERSON_IDS"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">内部接收人IDS</meta>
+            <meta attribute="ColumnComment">内部接收人ID</meta>
+        </property>
+
+		<property
+			name="innerPersonNames"
+			column="INNER_PERSON_NAMES"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">内部接收人姓名</meta>
+            <meta attribute="ColumnComment">内部接收人姓名</meta>
+        </property>
+
+		<property
+			name="gdPersonIds"
+			column="GD_PERSON_IDS"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">工地接收人IDS</meta>
+            <meta attribute="ColumnComment">工地接收人IDS</meta>
+        </property>
+
+		<property
+			name="gdPersonNames"
+			column="GD_PERSON_NAMES"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">工地接收人姓名</meta>
+            <meta attribute="ColumnComment">工地接收人姓名</meta>
+        </property>
+
+		<property
+			name="mobiles"
+			column="MOBILES"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">手机号码</meta>
+            <meta attribute="ColumnComment">手机号码</meta>
+        </property>
+
+		<property
+			name="isSend"
+			column="IS_SEND"
+			type="java.lang.Boolean"
+			not-null="false"
+			length="1"
+        >
+            <meta attribute="ColumnName">是否已发送</meta>
+            <meta attribute="ColumnComment">是否已发送</meta>
+        </property>
+
+		<property
+			name="sendTime"
+			column="SEND_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">发送时间</meta>
+            <meta attribute="ColumnComment">发送时间</meta>
+        </property>
+
+		<property
+			name="isSendSms"
+			column="IS_SEND_SMS"
+			type="java.lang.Boolean"
+			not-null="false"
+			length="1"
+        >
+            <meta attribute="ColumnName">是否发送短信</meta>
+            <meta attribute="ColumnComment">是否发送短信</meta>
+        </property>
+
+		<property
+			name="createTime"
+			column="CREATE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">创建时间</meta>
+            <meta attribute="ColumnComment">创建时间</meta>
+        </property>
+
+		<property
+			name="createUser"
+			column="CREATE_USER"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">创建用户名</meta>
+            <meta attribute="ColumnComment">创建用户名</meta>
+        </property>
+
+		<property
+			name="updateTime"
+			column="UPDATE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">更新时间</meta>
+            <meta attribute="ColumnComment">更新时间</meta>
+        </property>
+
+		<property
+			name="updateUser"
+			column="UPDATE_USER"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">更新用户名</meta>
+            <meta attribute="ColumnComment">更新用户名</meta>
+        </property>
+
+	
+
+		<set name="msgSendDetails" inverse="true" order-by="ID">
+			<key column="SMS_MESSAGE_ID"/>
+			<one-to-many class="MsgSendDetail"/>
+		</set>
+
+	</class>	
+    <query name="msgmessage_all_data_query">
+        <![CDATA[FROM MsgMessage]]>
+    </query>
+</hibernate-mapping>

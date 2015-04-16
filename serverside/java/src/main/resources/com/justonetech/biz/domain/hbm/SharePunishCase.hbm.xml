@@ -1,0 +1,529 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.justonetech.biz.domain">
+	<class
+		name="SharePunishCase"
+		table="SHARE_PUNISH_CASE"
+	>
+		
+		<meta attribute="sync-DAO">false</meta>
+		<meta attribute="sync-jsp">true</meta>
+		<meta attribute="sync-boolean">get</meta>
+		<meta attribute="treeable">false</meta>
+		<meta attribute="projectable">false</meta>
+        <meta attribute="tableName">行政处罚记录</meta>
+        <meta attribute="tableComment">行政处罚记录</meta>
+	    <meta attribute="sync-templatePatterns">list\w*</meta>
+        <meta attribute="sub-system">share</meta>
+
+		<id
+			name="id"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="com.justonetech.core.orm.hibernate.LongIdGenerator"/>
+		</id>
+
+		<property
+			name="caseCode"
+			column="CASE_CODE"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">案件编号</meta>
+            <meta attribute="ColumnComment">案件编号</meta>
+        </property>
+
+		<property
+			name="decisionCode"
+			column="DECISION_CODE"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">决定书编号</meta>
+            <meta attribute="ColumnComment">决定书编号</meta>
+        </property>
+
+		<property
+			name="happenDatetime"
+			column="HAPPEN_DATETIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">案发日期</meta>
+            <meta attribute="ColumnComment">案发日期</meta>
+        </property>
+
+		<property
+			name="happenAddress"
+			column="HAPPEN_ADDRESS"
+			type="string"
+			not-null="false"
+			length="300"
+        >
+            <meta attribute="ColumnName">案发地点</meta>
+            <meta attribute="ColumnComment">案发地点</meta>
+        </property>
+
+		<property
+			name="laDate"
+			column="LA_DATE"
+			type="date"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">立案日期</meta>
+            <meta attribute="ColumnComment">立案日期</meta>
+        </property>
+
+		<property
+			name="laDatetime"
+			column="LA_DATETIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">立案时间</meta>
+            <meta attribute="ColumnComment">立案时间</meta>
+        </property>
+
+		<property
+			name="jaDatetime"
+			column="JA_DATETIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">结案日期</meta>
+            <meta attribute="ColumnComment">结案日期</meta>
+        </property>
+
+		<property
+			name="laCompleteTime"
+			column="LA_COMPLETE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">立案完成日期</meta>
+            <meta attribute="ColumnComment">立案完成日期</meta>
+        </property>
+
+		<property
+			name="dcCompleteTime"
+			column="DC_COMPLETE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">调查完成日期</meta>
+            <meta attribute="ColumnComment">调查完成日期</meta>
+        </property>
+
+		<property
+			name="bpCompleteTime"
+			column="BP_COMPLETE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">报批完成日期</meta>
+            <meta attribute="ColumnComment">报批完成日期</meta>
+        </property>
+
+		<property
+			name="spCompleteTime"
+			column="SP_COMPLETE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">审批完成日期</meta>
+            <meta attribute="ColumnComment">审批完成日期</meta>
+        </property>
+
+		<property
+			name="zxCompleteTime"
+			column="ZX_COMPLETE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">执行完成日期</meta>
+            <meta attribute="ColumnComment">执行完成日期</meta>
+        </property>
+
+		<property
+			name="jaCompleteTime"
+			column="JA_COMPLETE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">结案完成日期</meta>
+            <meta attribute="ColumnComment">结案完成日期</meta>
+        </property>
+
+		<property
+			name="isCompany"
+			column="IS_COMPANY"
+			type="java.lang.Boolean"
+			not-null="false"
+			length="1"
+        >
+            <meta attribute="ColumnName">是否(单位/个人)(1企业0个人)</meta>
+            <meta attribute="ColumnComment">是否(单位/个人)(1企业0个人)</meta>
+        </property>
+
+		<property
+			name="unitName"
+			column="UNIT_NAME"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">当事人（单位）</meta>
+            <meta attribute="ColumnComment">当事人（单位）</meta>
+        </property>
+
+		<property
+			name="unitId"
+			column="UNIT_ID"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">企业id</meta>
+            <meta attribute="ColumnComment">企业id</meta>
+        </property>
+
+		<property
+			name="unitCode"
+			column="UNIT_CODE"
+			type="string"
+			not-null="false"
+			length="20"
+        >
+            <meta attribute="ColumnName">企业编号</meta>
+            <meta attribute="ColumnComment">企业编号</meta>
+        </property>
+
+		<property
+			name="unitProperty"
+			column="UNIT_PROPERTY"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">企业性质</meta>
+            <meta attribute="ColumnComment">企业性质</meta>
+        </property>
+
+		<property
+			name="unitQualifyType"
+			column="UNIT_QUALIFY_TYPE"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">企业资质分类</meta>
+            <meta attribute="ColumnComment">企业资质分类</meta>
+        </property>
+
+		<property
+			name="unitQualifyTypeDesc"
+			column="UNIT_QUALIFY_TYPE_DESC"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">企业资质分类描述</meta>
+            <meta attribute="ColumnComment">企业资质分类描述</meta>
+        </property>
+
+		<property
+			name="personName"
+			column="PERSON_NAME"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">当事人姓名</meta>
+            <meta attribute="ColumnComment">当事人姓名</meta>
+        </property>
+
+		<property
+			name="personCardType"
+			column="PERSON_CARD_TYPE"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">当事人证件类型</meta>
+            <meta attribute="ColumnComment">当事人证件类型</meta>
+        </property>
+
+		<property
+			name="personCardTypeDesc"
+			column="PERSON_CARD_TYPE_DESC"
+			type="string"
+			not-null="false"
+			length="40"
+        >
+            <meta attribute="ColumnName">当事人证件类型描述</meta>
+            <meta attribute="ColumnComment">当事人证件类型描述</meta>
+        </property>
+
+		<property
+			name="personCardNo"
+			column="PERSON_CARD_NO"
+			type="string"
+			not-null="false"
+			length="20"
+        >
+            <meta attribute="ColumnName">证件号</meta>
+            <meta attribute="ColumnComment">证件号</meta>
+        </property>
+
+		<property
+			name="personWorkUnit"
+			column="PERSON_WORK_UNIT"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">当事人工作单位</meta>
+            <meta attribute="ColumnComment">当事人工作单位</meta>
+        </property>
+
+		<property
+			name="bjbh"
+			column="BJBH"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">报建编号</meta>
+            <meta attribute="ColumnComment">报建编号</meta>
+        </property>
+
+		<property
+			name="proType"
+			column="PRO_TYPE"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">工程类型</meta>
+            <meta attribute="ColumnComment">工程类型</meta>
+        </property>
+
+		<property
+			name="proName"
+			column="PRO_NAME"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">工程名称</meta>
+            <meta attribute="ColumnComment">工程名称</meta>
+        </property>
+
+		<property
+			name="proAddress"
+			column="PRO_ADDRESS"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">工程地址</meta>
+            <meta attribute="ColumnComment">工程地址</meta>
+        </property>
+
+		<property
+			name="proContMoney"
+			column="PRO_CONT_MONEY"
+			type="java.lang.Double"
+			not-null="false"
+			length="15"
+        >
+            <meta attribute="ColumnName">合同价（万元）</meta>
+            <meta attribute="ColumnComment">合同价（万元）</meta>
+        </property>
+
+		<property
+			name="laUnitName"
+			column="LA_UNIT_NAME"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">立案单位</meta>
+            <meta attribute="ColumnComment">立案单位</meta>
+        </property>
+
+		<property
+			name="laUnitCode"
+			column="LA_UNIT_CODE"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">立案单位编号</meta>
+            <meta attribute="ColumnComment">立案单位编号</meta>
+        </property>
+
+		<property
+			name="laUnitJbr"
+			column="LA_UNIT_JBR"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">立案单位经办人</meta>
+            <meta attribute="ColumnComment">立案单位经办人</meta>
+        </property>
+
+		<property
+			name="jaUnitName"
+			column="JA_UNIT_NAME"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">结案单位</meta>
+            <meta attribute="ColumnComment">结案单位</meta>
+        </property>
+
+		<property
+			name="jaUnitCode"
+			column="JA_UNIT_CODE"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">结案单位代码</meta>
+            <meta attribute="ColumnComment">结案单位代码</meta>
+        </property>
+
+		<property
+			name="jaUnitJbr"
+			column="JA_UNIT_JBR"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">结案单位经办人</meta>
+            <meta attribute="ColumnComment">结案单位经办人</meta>
+        </property>
+
+		<property
+			name="breakLawContent"
+			column="BREAK_LAW_CONTENT"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">违法行为</meta>
+            <meta attribute="ColumnComment">违法行为</meta>
+        </property>
+
+		<property
+			name="breakLawRules"
+			column="BREAK_LAW_RULES"
+			type="string"
+			not-null="false"
+			length="1000"
+        >
+            <meta attribute="ColumnName">违反条款</meta>
+            <meta attribute="ColumnComment">违反条款</meta>
+        </property>
+
+		<property
+			name="punishLawRules"
+			column="PUNISH_LAW_RULES"
+			type="string"
+			not-null="false"
+			length="1000"
+        >
+            <meta attribute="ColumnName">处罚依据</meta>
+            <meta attribute="ColumnComment">处罚依据</meta>
+        </property>
+
+		<property
+			name="exeUnitName"
+			column="EXE_UNIT_NAME"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">执法主体</meta>
+            <meta attribute="ColumnComment">执法主体</meta>
+        </property>
+
+		<property
+			name="exeUnitCode"
+			column="EXE_UNIT_CODE"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">执法主体代码</meta>
+            <meta attribute="ColumnComment">执法主体代码</meta>
+        </property>
+
+		<property
+			name="isHearing"
+			column="IS_HEARING"
+			type="java.lang.Boolean"
+			not-null="false"
+			length="1"
+        >
+            <meta attribute="ColumnName">是否听证(1听证0不听证null未到阶段)</meta>
+            <meta attribute="ColumnComment">是否听证(1听证0不听证null未到阶段)</meta>
+        </property>
+
+		<property
+			name="isAbort"
+			column="IS_ABORT"
+			type="java.lang.Boolean"
+			not-null="false"
+			length="1"
+        >
+            <meta attribute="ColumnName">是否中止(1 中止 0或NULL正常)</meta>
+            <meta attribute="ColumnComment">是否中止(1 中止 0或NULL正常)</meta>
+        </property>
+
+		<property
+			name="stage"
+			column="STAGE"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">阶段</meta>
+            <meta attribute="ColumnComment">阶段</meta>
+        </property>
+
+		<property
+			name="updateTime"
+			column="UPDATE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">更新时间</meta>
+            <meta attribute="ColumnComment">更新时间</meta>
+        </property>
+
+
+	</class>	
+    <query name="sharepunishcase_all_data_query">
+        <![CDATA[FROM SharePunishCase]]>
+    </query>
+</hibernate-mapping>

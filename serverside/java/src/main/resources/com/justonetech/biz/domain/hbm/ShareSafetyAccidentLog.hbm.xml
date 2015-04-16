@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.justonetech.biz.domain">
+	<class
+		name="ShareSafetyAccidentLog"
+		table="SHARE_SAFETY_ACCIDENT_LOG"
+	>
+		
+		<meta attribute="sync-DAO">false</meta>
+		<meta attribute="sync-jsp">true</meta>
+		<meta attribute="sync-boolean">get</meta>
+		<meta attribute="treeable">false</meta>
+		<meta attribute="projectable">false</meta>
+        <meta attribute="tableName">安全事故信息日志</meta>
+        <meta attribute="tableComment">安全事故信息日志</meta>
+	    <meta attribute="sync-templatePatterns">list\w*</meta>
+        <meta attribute="sub-system">share</meta>
+
+		<id
+			name="id"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="com.justonetech.core.orm.hibernate.LongIdGenerator"/>
+		</id>
+
+		<property
+			name="accidentId"
+			column="ACCIDENT_ID"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">事故标识</meta>
+            <meta attribute="ColumnComment">事故标识</meta>
+        </property>
+
+		<property
+			name="updateTime"
+			column="UPDATE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">更新时间</meta>
+            <meta attribute="ColumnComment">更新时间</meta>
+        </property>
+
+		<property
+			name="updateStatus"
+			column="UPDATE_STATUS"
+			type="string"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">更新状态</meta>
+            <meta attribute="ColumnComment">更新状态</meta>
+        </property>
+
+
+	</class>	
+    <query name="sharesafetyaccidentlog_all_data_query">
+        <![CDATA[FROM ShareSafetyAccidentLog]]>
+    </query>
+</hibernate-mapping>

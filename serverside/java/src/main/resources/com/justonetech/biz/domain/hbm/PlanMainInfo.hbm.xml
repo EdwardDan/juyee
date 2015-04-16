@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.justonetech.biz.domain">
+	<class
+		name="PlanMainInfo"
+		table="PLAN_MAIN_INFO"
+	>
+		
+		<meta attribute="sync-DAO">false</meta>
+		<meta attribute="sync-jsp">true</meta>
+		<meta attribute="sync-boolean">get</meta>
+		<meta attribute="treeable">false</meta>
+		<meta attribute="projectable">false</meta>
+        <meta attribute="tableName">监督计划</meta>
+        <meta attribute="tableComment">监督计划</meta>
+	    <meta attribute="sync-templatePatterns">list\w*</meta>
+        <meta attribute="sub-system">plan</meta>
+
+		<id
+			name="id"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="com.justonetech.core.orm.hibernate.LongIdGenerator"/>
+		</id>
+
+		<property
+			name="planName"
+			column="PLAN_NAME"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">计划名称</meta>
+            <meta attribute="ColumnComment">计划名称</meta>
+        </property>
+
+		<property
+			name="planCode"
+			column="PLAN_CODE"
+			type="string"
+			not-null="false"
+			length="20"
+        >
+            <meta attribute="ColumnName">计划编号</meta>
+            <meta attribute="ColumnComment">计划编号</meta>
+        </property>
+
+		<property
+			name="planDesc"
+			column="PLAN_DESC"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">计划描述</meta>
+            <meta attribute="ColumnComment">计划描述</meta>
+        </property>
+
+		<property
+			name="createUserName"
+			column="CREATE_USER_NAME"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">创建人姓名</meta>
+            <meta attribute="ColumnComment">创建人姓名</meta>
+        </property>
+
+		<property
+			name="createTime"
+			column="CREATE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="16"
+        >
+            <meta attribute="ColumnName">创建时间</meta>
+            <meta attribute="ColumnComment">创建时间</meta>
+        </property>
+
+		<property
+			name="checkUserName"
+			column="CHECK_USER_NAME"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">审核人姓名</meta>
+            <meta attribute="ColumnComment">审核人姓名</meta>
+        </property>
+
+		<property
+			name="checkDateTime"
+			column="CHECK_DATE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="16"
+        >
+            <meta attribute="ColumnName">审核日期</meta>
+            <meta attribute="ColumnComment">审核日期</meta>
+        </property>
+
+		<property
+			name="checkMemo"
+			column="CHECK_MEMO"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">审核备注</meta>
+            <meta attribute="ColumnComment">审核备注</meta>
+        </property>
+
+		<property
+			name="updateTime"
+			column="UPDATE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="16"
+        >
+            <meta attribute="ColumnName">更新时间</meta>
+            <meta attribute="ColumnComment">更新时间</meta>
+        </property>
+
+		<property
+			name="updateUser"
+			column="UPDATE_USER"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">更新人</meta>
+            <meta attribute="ColumnComment">更新人</meta>
+        </property>
+
+		<many-to-one
+			name="checkUser"
+			column="CHECK_USER_ID"
+			class="com.justonetech.system.domain.SysUser"
+			not-null="false"
+		>
+		</many-to-one>
+		<many-to-one
+			name="planStatus"
+			column="PLAN_STATUS"
+			class="com.justonetech.system.domain.SysCodeDetail"
+			not-null="false"
+		>
+		</many-to-one>
+		<many-to-one
+			name="checkOpinion"
+			column="CHECK_OPINION"
+			class="com.justonetech.system.domain.SysCodeDetail"
+			not-null="false"
+		>
+		</many-to-one>
+        <!--注意:不能改为createUser否则与Auditable冲突 -->
+		<many-to-one
+			name="cUser"
+			column="CREATE_USER_ID"
+			class="com.justonetech.system.domain.SysUser"
+			not-null="false"
+		>
+		</many-to-one>
+		<many-to-one
+			name="planType"
+			column="PLAN_TYPE"
+			class="com.justonetech.system.domain.SysCodeDetail"
+			not-null="false"
+		>
+		</many-to-one>
+	
+
+		<set name="planDetails" inverse="true" order-by="plan_end_time asc">
+			<key column="PLAN_ID"/>
+			<one-to-many class="PlanDetail"/>
+		</set>
+
+	</class>	
+    <query name="planmaininfo_all_data_query">
+        <![CDATA[FROM PlanMainInfo]]>
+    </query>
+</hibernate-mapping>

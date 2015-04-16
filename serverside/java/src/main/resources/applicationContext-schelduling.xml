@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+    <!-- sql到oracle，oracle到oracle数据同步，危险源数据同步  -->
+    <bean id="syncDataListenerJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject">
+            <bean id="workflowService" class="com.justonetech.biz.manager.SyncDatabaseManager"/>
+        </property>
+        <property name="targetMethod" value="syncDatabase"/>
+    </bean>
+
+    <bean id="syncDataCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="syncDataListenerJob"/>
+        <!-- 每天晚上23时59分59秒触发  -->
+        <property name="cronExpression" value="59 59 23 * * ?"/>
+        <!--<property name="cronExpression" value="0 0/50 1-23 * * ?"/>-->
+    </bean>
+
+    <!-- 考勤数据同步，包括上传和下载数据  -->
+    <bean id="syncCheckDataListenerJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject">
+            <bean id="checkWebService" class="com.justonetech.biz.manager.CheckSyncManager"/>
+        </property>
+        <property name="targetMethod" value="syncCheckData"/>
+    </bean>
+
+    <bean id="syncCheckDataCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="syncCheckDataListenerJob"/>
+        <!-- 在6点到18点之间每隔1分钟触发一次  -->
+        <property name="cronExpression" value="0 0/1 6-18 * * ?"/>
+    </bean>
+
+    <!-- 从建昆平台的webservice中对监督任务书数据同步  -->
+    <bean id="excelJdTasksListenerJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject">
+            <bean id="excelJdTasksSyncService" class="com.justonetech.biz.manager.ExcelJdTasksSyncManager"/>
+        </property>
+        <property name="targetMethod" value="syncData"/>
+    </bean>
+
+    <bean id="excelJdTasksCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="excelJdTasksListenerJob"/>
+        <!-- 每天晚上22时10分10秒触发  -->
+        <property name="cronExpression" value="10 10 22 * * ?"/>
+    </bean>
+
+    <!-- 发送短信__每天待办事项和通知提醒  -->
+    <bean id="scanSmsEveryDayListenerJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject">
+            <bean id="scanSmsEveryDayService" class="com.justonetech.biz.manager.MsgAlertManager"/>
+        </property>
+        <property name="targetMethod" value="sendSmsEveryday"/>
+    </bean>
+
+    <bean id="scanSmsEveryDayCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="scanSmsEveryDayListenerJob"/>
+        <!-- 每天早上9点和下午2点各提醒一次  -->
+        <property name="cronExpression" value="0 0 9,14 * * ?"/>
+    </bean>
+
+    <!-- 发送短信__每月待办事项和通知提醒  -->
+    <bean id="scanSmsEveryMonthListenerJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject">
+            <bean id="scanSmsEveryMonthService" class="com.justonetech.biz.manager.MsgAlertManager"/>
+        </property>
+        <property name="targetMethod" value="sendSmsEveryMonth"/>
+    </bean>
+
+    <bean id="scanSmsEveryMonthCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="scanSmsEveryMonthListenerJob"/>
+        <!-- 每天9点5分触发  -->
+        <property name="cronExpression" value="0 5 9 * * ?"/>
+    </bean>
+
+    <!-- 定时器列表  -->
+    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <!--<ref local="syncCheckDataCronTrigger"/>-->
+                <!--<ref local="excelJdTasksCronTrigger"/>-->
+                <!--<ref local="syncDataCronTrigger"/>-->
+                <!--<ref local="scanSmsEveryDayCronTrigger"/>-->
+                <!--<ref local="scanSmsEveryMonthCronTrigger"/>-->
+            </list>
+        </property>
+    </bean>
+</beans>

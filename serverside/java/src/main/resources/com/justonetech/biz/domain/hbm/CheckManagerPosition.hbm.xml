@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.justonetech.biz.domain">
+    <class
+            name="com.justonetech.biz.domain.CheckManagerPosition"
+            table="CHECK_MANAGER_POSITION"
+            >
+
+        <meta attribute="sync-DAO">false</meta>
+        <meta attribute="sync-jsp">true</meta>
+        <meta attribute="sync-boolean">get</meta>
+        <meta attribute="treeable">false</meta>
+        <meta attribute="projectable">false</meta>
+        <meta attribute="tableName">人员岗位表</meta>
+        <meta attribute="tableComment">人员岗位表</meta>
+        <meta attribute="sync-templatePatterns">list\w*</meta>
+        <meta attribute="sub-system">check</meta>
+
+        <id
+                name="id"
+                type="java.lang.Long"
+                column="ID"
+                >
+            <generator class="com.justonetech.core.orm.hibernate.LongIdGenerator"/>
+        </id>
+
+        <property
+                name="jdTaskCode"
+                column="JD_TASK_CODE"
+                type="string"
+                not-null="false"
+                length="10"
+                >
+            <meta attribute="ColumnName">监督任务书编号</meta>
+            <meta attribute="ColumnComment">监督任务书编号</meta>
+        </property>
+
+        <property
+                name="bjbh"
+                column="BJBH"
+                type="string"
+                not-null="false"
+                length="50"
+                >
+            <meta attribute="ColumnName">报建编号</meta>
+            <meta attribute="ColumnComment">报建编号</meta>
+        </property>
+
+        <property
+                name="gdCode"
+                column="GD_CODE"
+                type="string"
+                not-null="false"
+                length="50"
+                >
+            <meta attribute="ColumnName">工地编号</meta>
+            <meta attribute="ColumnComment">工地编号</meta>
+        </property>
+
+        <property
+                name="gdName"
+                column="GD_NAME"
+                type="string"
+                not-null="false"
+                length="200"
+                >
+            <meta attribute="ColumnName">工地名称</meta>
+            <meta attribute="ColumnComment">工地名称</meta>
+        </property>
+
+        <property
+                name="belongArea"
+                column="BELONG_AREA"
+                type="string"
+                not-null="false"
+                length="50"
+                >
+            <meta attribute="ColumnName">所属区县</meta>
+            <meta attribute="ColumnComment">所属区县</meta>
+        </property>
+
+        <property
+                name="streetArea"
+                column="STREET_AREA"
+                type="string"
+                not-null="false"
+                length="50"
+                >
+            <meta attribute="ColumnName">街镇</meta>
+            <meta attribute="ColumnComment">街镇</meta>
+        </property>
+
+        <property
+                name="isValid"
+                column="IS_VALID"
+                type="java.lang.Boolean"
+                not-null="false"
+                length="1"
+                >
+            <meta attribute="ColumnName">是否有效</meta>
+            <meta attribute="ColumnComment">是否有效</meta>
+        </property>
+
+        <property
+                name="positionName"
+                column="POSITION_NAME"
+                type="string"
+                not-null="false"
+                length="50"
+                >
+            <meta attribute="ColumnName">岗位名称</meta>
+            <meta attribute="ColumnComment">岗位名称</meta>
+        </property>
+
+        <property
+                name="certificateCode"
+                column="CERTIFICATE_CODE"
+                type="string"
+                not-null="false"
+                length="50"
+                >
+            <meta attribute="ColumnName">证书编号</meta>
+            <meta attribute="ColumnComment">证书编号</meta>
+        </property>
+
+        <property
+                name="certificateName"
+                column="CERTIFICATE_NAME"
+                type="string"
+                not-null="false"
+                length="100"
+                >
+            <meta attribute="ColumnName">证书名称</meta>
+            <meta attribute="ColumnComment">证书名称</meta>
+        </property>
+
+        <property
+                name="guid"
+                column="GUID"
+                type="string"
+                not-null="false"
+                length="50"
+                >
+            <meta attribute="ColumnName">GUID</meta>
+            <meta attribute="ColumnComment">GUID</meta>
+        </property>
+
+        <property
+                name="createTime"
+                column="CREATE_TIME"
+                type="timestamp"
+                not-null="false"
+                length="19"
+                >
+            <meta attribute="ColumnName">创建时间</meta>
+            <meta attribute="ColumnComment">创建时间</meta>
+        </property>
+
+        <property
+                name="updateTime"
+                column="UPDATE_TIME"
+                type="timestamp"
+                not-null="false"
+                length="19"
+                >
+            <meta attribute="ColumnName">更新时间</meta>
+            <meta attribute="ColumnComment">更新时间</meta>
+        </property>
+
+        <property
+                name="updateUser"
+                column="UPDATE_USER"
+                type="string"
+                not-null="false"
+                length="100"
+                >
+            <meta attribute="ColumnName">更新人</meta>
+            <meta attribute="ColumnComment">更新人</meta>
+        </property>
+
+        <property
+                name="createUser"
+                column="CREATE_USER"
+                type="string"
+                not-null="false"
+                length="100"
+                >
+            <meta attribute="ColumnName">创建人</meta>
+            <meta attribute="ColumnComment">创建人</meta>
+        </property>
+
+        <property
+                name="deleteUser"
+                column="DELETE_USER"
+                type="string"
+                not-null="false"
+                length="100"
+                >
+            <meta attribute="ColumnName">删除人</meta>
+            <meta attribute="ColumnComment">删除人</meta>
+        </property>
+
+        <property
+                name="deleteTime"
+                column="DELETE_TIME"
+                type="timestamp"
+                not-null="false"
+                length="19"
+                >
+            <meta attribute="ColumnName">删除时间</meta>
+            <meta attribute="ColumnComment">删除时间</meta>
+        </property>
+
+        <property
+                name="isDelete"
+                column="IS_DELETE"
+                type="java.lang.Boolean"
+                not-null="false"
+                length="1"
+                >
+            <meta attribute="ColumnName">逻辑删除</meta>
+            <meta attribute="ColumnComment">逻辑删除</meta>
+        </property>
+
+        <many-to-one
+                name="manager"
+                column="MANAGER_ID"
+                class="com.justonetech.biz.domain.CheckManager"
+                not-null="false"
+                >
+        </many-to-one>
+        <many-to-one
+                name="positionType"
+                column="POSITION_TYPE"
+                class="com.justonetech.system.domain.SysCodeDetail"
+                not-null="false"
+                >
+        </many-to-one>
+        <many-to-one
+                name="certificateDoc"
+                column="CERTIFICATE_DOC_ID"
+                class="DocDocument"
+                not-null="false"
+                >
+        </many-to-one>
+
+    </class>
+    <query name="checkmanagerposition_all_data_query">
+        <![CDATA[FROM CheckManagerPosition]]>
+    </query>
+</hibernate-mapping>

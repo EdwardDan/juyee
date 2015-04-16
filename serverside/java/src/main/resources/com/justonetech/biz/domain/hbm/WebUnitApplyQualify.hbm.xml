@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.justonetech.biz.domain">
+	<class
+		name="WebUnitApplyQualify"
+		table="WEB_UNIT_APPLY_QUALIFY"
+	>
+		
+		<meta attribute="sync-DAO">false</meta>
+		<meta attribute="sync-jsp">true</meta>
+		<meta attribute="sync-boolean">get</meta>
+		<meta attribute="treeable">false</meta>
+		<meta attribute="projectable">false</meta>
+        <meta attribute="tableName">企业申请资质</meta>
+        <meta attribute="tableComment">企业申请资质</meta>
+	    <meta attribute="sync-templatePatterns">list\w*</meta>
+        <meta attribute="sub-system">web</meta>
+
+		<id
+			name="id"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="com.justonetech.core.orm.hibernate.LongIdGenerator"/>
+		</id>
+
+		<property
+			name="qualifyOrder"
+			column="QUALIFY_ORDER"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">资质序列</meta>
+            <meta attribute="ColumnComment">资质序列</meta>
+        </property>
+
+		<property
+			name="qualifyCategory"
+			column="QUALIFY_CATEGORY"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">资质类别</meta>
+            <meta attribute="ColumnComment">资质类别</meta>
+        </property>
+
+		<property
+			name="qualifyLevel"
+			column="QUALIFY_LEVEL"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">资质等级</meta>
+            <meta attribute="ColumnComment">资质等级</meta>
+        </property>
+
+		<many-to-one
+			name="qualifyAcceptInfo"
+			column="QUALIFY_ACCEPT_INFO_ID"
+			class="WebQualifyAcceptInfo"
+			not-null="false"
+		>
+		</many-to-one>
+
+	</class>	
+    <query name="webunitapplyqualify_all_data_query">
+        <![CDATA[FROM WebUnitApplyQualify]]>
+    </query>
+</hibernate-mapping>

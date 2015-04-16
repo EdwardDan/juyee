@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Message>
+    <Camera>
+        <Id>25</Id>
+        <IndexCode>13110711001310118431</IndexCode>
+        <Name>8104HF-S-海康01</Name>
+        <ChanNo>0</ChanNo>
+        <Matrix Code='0' Id='0'/>
+    </Camera>
+    <Dev regtype='0' devtype='10001'>
+        <Id>4</Id>
+        <IndexCode>13110711001310904963</IndexCode>
+        <Addr IP='10.64.61.28' Port='8000'/>
+        <Auth User='admin' Pwd='12345'/>
+    </Dev>
+    <Vag IP='10.64.52.49' Port='7302'/>
+    <Voice>
+        <Encode>0</Encode>
+    </Voice>
+    <User>
+        <Name>admin</Name>
+        <IP>10.64.52.49</IP>
+    </User>
+    <Media Protocol='0' Stream='0'>
+        <Vtdu IP='10.64.52.49' Port='554'/>
+    </Media>
+    <Privilege Priority='50' Code='3'/>
+    <Option>
+        <Talk>1</Talk>
+        <PreviewType>1</PreviewType>
+    </Option>
+</Message>

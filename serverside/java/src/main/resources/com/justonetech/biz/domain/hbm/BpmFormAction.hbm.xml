@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.justonetech.biz.domain">
+	<class
+		name="BpmFormAction"
+		table="BPM_FORM_ACTION"
+	>
+		
+		<meta attribute="sync-DAO">false</meta>
+		<meta attribute="sync-jsp">true</meta>
+		<meta attribute="sync-boolean">get</meta>
+		<meta attribute="treeable">false</meta>
+		<meta attribute="projectable">false</meta>
+        <meta attribute="tableName">表单操作</meta>
+        <meta attribute="tableComment">表单操作</meta>
+	    <meta attribute="sync-templatePatterns">list\w*</meta>
+        <meta attribute="sub-system">workflow</meta>
+
+		<id
+			name="id"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="com.justonetech.core.orm.hibernate.LongIdGenerator"/>
+		</id>
+
+		<property
+			name="formXml"
+			column="FORM_XML"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">表单数据</meta>
+            <meta attribute="ColumnComment">表单数据</meta>
+        </property>
+
+		<property
+			name="submitTime"
+			column="SUBMIT_TIME"
+			type="timestamp"
+			not-null="false"
+			length="19"
+        >
+            <meta attribute="ColumnName">提交时间</meta>
+            <meta attribute="ColumnComment">提交时间</meta>
+        </property>
+
+		<many-to-one
+			name="processInstance"
+			column="PROCESS_INSTANCE_ID"
+			class="BpmProcessInstance"
+			not-null="false"
+		>
+		</many-to-one>
+		<!--<many-to-one-->
+			<!--name="taskInstance"-->
+			<!--column="TASK_INSTANCE_ID"-->
+			<!--class="BpmTaskInstance"-->
+			<!--not-null="false"-->
+		<!-->-->
+		<!--</many-to-one>-->
+        <many-to-one name="taskInstance" class="BpmTaskInstance" cascade="save-update">
+            <column name="TASK_INSTANCE_ID" length="10" unique="true" not-null="true"/>
+        </many-to-one>
+		<many-to-one
+			name="formTemplate"
+			column="FORM_TEMPLATE_ID"
+			class="BpmFormTemplate"
+			not-null="false"
+		>
+		</many-to-one>
+		<many-to-one
+			name="document"
+			column="DOCUMENT_ID"
+			class="DocDocument"
+			not-null="false"
+		>
+		</many-to-one>
+		<many-to-one
+			name="submitUser"
+			column="SUBMIT_USER_ID"
+			class="com.justonetech.system.domain.SysUser"
+			not-null="false"
+		>
+		</many-to-one>
+
+	</class>	
+    <query name="bpmformaction_all_data_query">
+        <![CDATA[FROM BpmFormAction]]>
+    </query>
+</hibernate-mapping>

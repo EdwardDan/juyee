@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.justonetech.biz.domain">
+	<class
+		name="BpmProcessDefinition"
+		table="BPM_PROCESS_DEFINITION"
+	>
+		
+		<meta attribute="sync-DAO">false</meta>
+		<meta attribute="sync-jsp">true</meta>
+		<meta attribute="sync-boolean">get</meta>
+		<meta attribute="treeable">false</meta>
+		<meta attribute="projectable">false</meta>
+        <meta attribute="tableName">业务流程定义表</meta>
+        <meta attribute="tableComment">业务流程定义表</meta>
+	    <meta attribute="sync-templatePatterns">list\w*</meta>
+        <meta attribute="sub-system">workflow</meta>
+
+		<id
+			name="id"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="com.justonetech.core.orm.hibernate.LongIdGenerator"/>
+		</id>
+
+		<property
+			name="jbpmDefinitionId"
+			column="JBPM_DEFINITION_ID"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">JBPM流程定义ID</meta>
+            <meta attribute="ColumnComment">JBPM流程定义ID</meta>
+        </property>
+
+		<property
+			name="code"
+			column="CODE"
+			type="string"
+			not-null="true"
+			length="50"
+        >
+            <meta attribute="ColumnName">业务流程编码</meta>
+            <meta attribute="ColumnComment">业务流程编码</meta>
+        </property>
+
+		<property
+			name="name"
+			column="NAME"
+			type="string"
+			not-null="true"
+			length="100"
+        >
+            <meta attribute="ColumnName">业务流程名称</meta>
+            <meta attribute="ColumnComment">业务流程名称</meta>
+        </property>
+
+		<property
+			name="version"
+			column="VERSION"
+			type="integer"
+			not-null="false"
+			length="4"
+        >
+            <meta attribute="ColumnName">版本</meta>
+            <meta attribute="ColumnComment">版本</meta>
+        </property>
+
+		<property
+			name="orderNo"
+			column="ORDER_NO"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">排序</meta>
+            <meta attribute="ColumnComment">排序</meta>
+        </property>
+
+		<property
+			name="isValid"
+			column="IS_VALID"
+			type="java.lang.Boolean"
+			not-null="false"
+			length="1"
+        >
+            <meta attribute="ColumnName">是否有效</meta>
+            <meta attribute="ColumnComment">是否有效</meta>
+        </property>
+
+		<property
+			name="description"
+			column="DESCRIPTION"
+			type="string"
+			not-null="false"
+			length="1000"
+        >
+            <meta attribute="ColumnName">备注</meta>
+            <meta attribute="ColumnComment">备注</meta>
+        </property>
+
+		<property
+			name="workId"
+			column="WORK_ID"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">关联作业ID</meta>
+            <meta attribute="ColumnComment">关联作业ID</meta>
+        </property>
+
+		<property
+			name="updateTime"
+			column="UPDATE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="19"
+        >
+            <meta attribute="ColumnName">最后修改时间</meta>
+            <meta attribute="ColumnComment">最后修改时间</meta>
+        </property>
+
+		<property
+			name="createTime"
+			column="CREATE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="19"
+        >
+            <meta attribute="ColumnName">创建时间</meta>
+            <meta attribute="ColumnComment">创建时间</meta>
+        </property>
+
+		<property
+			name="columnXml"
+			column="COLUMN_XML"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">列表显示配置</meta>
+            <meta attribute="ColumnComment">列表显示配置（针对BpmProcessInstance）</meta>
+        </property>
+
+		<property
+			name="bizObject"
+			column="BIZ_OBJECT"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">业务对象名</meta>
+            <meta attribute="ColumnComment">业务对象名</meta>
+        </property>
+
+		<property
+			name="initScript"
+			column="INIT_SCRIPT"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">初始化脚本</meta>
+            <meta attribute="ColumnComment">初始化脚本</meta>
+        </property>
+
+		<property
+			name="updateScript"
+			column="UPDATE_SCRIPT"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">更新脚本</meta>
+            <meta attribute="ColumnComment">更新脚本</meta>
+        </property>
+
+		<property
+			name="finishScript"
+			column="FINISH_SCRIPT"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">结束脚本</meta>
+            <meta attribute="ColumnComment">结束脚本</meta>
+        </property>
+
+		<many-to-one
+			name="viewSwimlaneDefinition"
+			column="VIEW_SWIMLANE_DEFINITION_ID"
+			class="BpmSwimlaneDefinition"
+			not-null="false"
+		>
+		</many-to-one>
+		<many-to-one
+			name="fileCategory"
+			column="FILE_CATEGORY_ID"
+			class="DocCategory"
+			not-null="false"
+		>
+		</many-to-one>
+		<many-to-one
+			name="processTemplate"
+			column="PROCESS_TEMPLATE_ID"
+			class="BpmProcessTemplate"
+			not-null="false"
+		>
+		</many-to-one>
+        <many-to-one
+			name="category"
+			column="CATEGORY_ID"
+			class="com.justonetech.system.domain.SysCodeDetail"
+			not-null="false"
+		>
+		</many-to-one>
+	
+
+		<set name="bpmNodeDefinitions" inverse="true">
+			<key column="PROCESS_DEFINITION_ID"/>
+			<one-to-many class="BpmNodeDefinition"/>
+		</set>
+
+		<set name="bpmProcessInstances" inverse="true">
+			<key column="PROCESS_DEFINITION_ID"/>
+			<one-to-many class="BpmProcessInstance"/>
+		</set>
+
+		<set name="bpmProcessDefinitionForms" inverse="true">
+			<key column="PROCESS_DEFINITION_ID"/>
+			<one-to-many class="BpmProcessDefinitionForm"/>
+		</set>
+
+		<set name="bpmProcessSwimlanes" inverse="true">
+			<key column="PROCESS_DEFINITION_ID"/>
+			<one-to-many class="BpmProcessSwimlane"/>
+		</set>
+
+		<set name="bpmProcessTransitions" inverse="true">
+			<key column="PROCESS_DEFINITION_ID"/>
+			<one-to-many class="BpmProcessTransition"/>
+		</set>
+
+	</class>	
+    <query name="bpmprocessdefinition_all_data_query">
+        <![CDATA[FROM BpmProcessDefinition]]>
+    </query>
+</hibernate-mapping>

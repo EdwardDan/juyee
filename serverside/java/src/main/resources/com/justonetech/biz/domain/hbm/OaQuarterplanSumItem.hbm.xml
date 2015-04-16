@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.justonetech.biz.domain">
+	<class
+		name="OaQuarterplanSumItem"
+		table="OA_QUARTERPLAN_SUM_ITEM"
+	>
+		
+		<meta attribute="sync-DAO">false</meta>
+		<meta attribute="sync-jsp">true</meta>
+		<meta attribute="sync-boolean">get</meta>
+		<meta attribute="treeable">false</meta>
+		<meta attribute="projectable">false</meta>
+        <meta attribute="tableName">季度年度总结计划汇总明细</meta>
+        <meta attribute="tableComment">季度年度总结计划汇总明细</meta>
+	    <meta attribute="sync-templatePatterns">list\w*</meta>
+        <meta attribute="sub-system">oa</meta>
+
+		<id
+			name="id"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="com.justonetech.core.orm.hibernate.LongIdGenerator"/>
+		</id>
+
+		<property
+			name="orderNo"
+			column="ORDER_NO"
+			type="integer"
+			not-null="false"
+			length="4"
+        >
+            <meta attribute="ColumnName">序号</meta>
+            <meta attribute="ColumnComment">序号</meta>
+        </property>
+
+		<property
+			name="content"
+			column="CONTENT"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">工作内容</meta>
+            <meta attribute="ColumnComment">工作内容</meta>
+        </property>
+
+		<property
+			name="reportDept"
+			column="REPORT_DEPT"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">提交部门</meta>
+            <meta attribute="ColumnComment">提交部门</meta>
+        </property>
+
+		<property
+			name="reportPerson"
+			column="REPORT_PERSON"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">责任人</meta>
+            <meta attribute="ColumnComment">责任人</meta>
+        </property>
+
+		<many-to-one
+			name="quarterplanSum"
+			column="QUARTERPLAN_SUM_ID"
+			class="OaQuarterplanSum"
+			not-null="false"
+		>
+		</many-to-one>
+		<many-to-one
+			name="quarterplanItem"
+			column="QUARTERPLAN_ITEM_ID"
+			class="OaQuarterplan"
+			not-null="false"
+		>
+		</many-to-one>
+
+	</class>	
+    <query name="oaquarterplansumitem_all_data_query">
+        <![CDATA[FROM OaQuarterplanSumItem]]>
+    </query>
+</hibernate-mapping>

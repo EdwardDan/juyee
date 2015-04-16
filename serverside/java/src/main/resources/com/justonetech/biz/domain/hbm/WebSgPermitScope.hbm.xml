@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.justonetech.biz.domain">
+	<class
+		name="WebSgPermitScope"
+		table="WEB_SG_PERMIT_SCOPE"
+	>
+		
+		<meta attribute="sync-DAO">false</meta>
+		<meta attribute="sync-jsp">true</meta>
+		<meta attribute="sync-boolean">get</meta>
+		<meta attribute="treeable">false</meta>
+		<meta attribute="projectable">false</meta>
+        <meta attribute="tableName">施工许可范围</meta>
+        <meta attribute="tableComment">施工许可范围</meta>
+	    <meta attribute="sync-templatePatterns">list\w*</meta>
+        <meta attribute="sub-system">web</meta>
+
+		<id
+			name="id"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="com.justonetech.core.orm.hibernate.LongIdGenerator"/>
+		</id>
+
+		<property
+			name="mainProjectInfo"
+			column="MAIN_PROJECT_INFO"
+			type="string"
+			not-null="false"
+			length="1000"
+        >
+            <meta attribute="ColumnName">总项目信息</meta>
+            <meta attribute="ColumnComment">总项目信息</meta>
+        </property>
+
+		<property
+			name="sgPermitScope"
+			column="SG_PERMIT_SCOPE"
+			type="string"
+			not-null="false"
+			length="1000"
+        >
+            <meta attribute="ColumnName">施工许可范围</meta>
+            <meta attribute="ColumnComment">施工许可范围</meta>
+        </property>
+
+		<many-to-one
+			name="sgPermit"
+			column="SG_PERMIT_ID"
+			class="WebSgPermit"
+			not-null="false"
+		>
+		</many-to-one>
+
+	</class>	
+    <query name="websgpermitscope_all_data_query">
+        <![CDATA[FROM WebSgPermitScope]]>
+    </query>
+</hibernate-mapping>

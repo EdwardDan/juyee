@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.justonetech.biz.domain">
+	<class
+		name="SafeProductCheck"
+		table="SAFE_PRODUCT_CHECK"
+	>
+		
+		<meta attribute="sync-DAO">false</meta>
+		<meta attribute="sync-jsp">true</meta>
+		<meta attribute="sync-boolean">get</meta>
+		<meta attribute="treeable">false</meta>
+		<meta attribute="projectable">false</meta>
+        <meta attribute="tableName">安全生产季度考核</meta>
+        <meta attribute="tableComment">安全生产季度考核</meta>
+	    <meta attribute="sync-templatePatterns">list\w*</meta>
+        <meta attribute="sub-system">safe</meta>
+
+		<id
+			name="id"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="com.justonetech.core.orm.hibernate.LongIdGenerator"/>
+		</id>
+
+		<property
+			name="gdCode"
+			column="GD_CODE"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">工地编号</meta>
+            <meta attribute="ColumnComment">工地编号</meta>
+        </property>
+
+		<property
+			name="projectName"
+			column="PROJECT_NAME"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">项目名称</meta>
+            <meta attribute="ColumnComment">项目名称</meta>
+        </property>
+
+		<property
+			name="sgdwmc"
+			column="SGDWMC"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">施工单位</meta>
+            <meta attribute="ColumnComment">施工单位</meta>
+        </property>
+
+		<property
+			name="jldwmc"
+			column="JLDWMC"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">监理单位</meta>
+            <meta attribute="ColumnComment">监理单位</meta>
+        </property>
+
+		<property
+			name="year"
+			column="YEAR"
+			type="integer"
+			not-null="false"
+			length="4"
+        >
+            <meta attribute="ColumnName">年份</meta>
+            <meta attribute="ColumnComment">年份</meta>
+        </property>
+
+		<property
+			name="quarter"
+			column="QUARTER"
+			type="integer"
+			not-null="false"
+			length="2"
+        >
+            <meta attribute="ColumnName">季度</meta>
+            <meta attribute="ColumnComment">季度</meta>
+        </property>
+
+		<property
+			name="totalScore"
+			column="TOTAL_SCORE"
+			type="integer"
+			not-null="false"
+			length="5"
+        >
+            <meta attribute="ColumnName">总分</meta>
+            <meta attribute="ColumnComment">总分</meta>
+        </property>
+
+		<property
+			name="content"
+			column="CONTENT"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">情况说明</meta>
+            <meta attribute="ColumnComment">情况说明</meta>
+        </property>
+
+		<property
+			name="reformNum"
+			column="REFORM_NUM"
+			type="integer"
+			not-null="false"
+			length="4"
+        >
+            <meta attribute="ColumnName">整改单数量</meta>
+            <meta attribute="ColumnComment">整改单数量</meta>
+        </property>
+
+		<property
+			name="stopformNum"
+			column="STOPFORM_NUM"
+			type="integer"
+			not-null="false"
+			length="4"
+        >
+            <meta attribute="ColumnName">暂缓单数量</meta>
+            <meta attribute="ColumnComment">暂缓单数量</meta>
+        </property>
+
+		<property
+			name="punishNum"
+			column="PUNISH_NUM"
+			type="integer"
+			not-null="false"
+			length="4"
+        >
+            <meta attribute="ColumnName">处罚数量</meta>
+            <meta attribute="ColumnComment">处罚数量</meta>
+        </property>
+
+		<property
+			name="otherNum"
+			column="OTHER_NUM"
+			type="integer"
+			not-null="false"
+			length="4"
+        >
+            <meta attribute="ColumnName">其他数量</meta>
+            <meta attribute="ColumnComment">其他数量</meta>
+        </property>
+
+		<property
+			name="levelDesc"
+			column="LEVEL_DESC"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">确认等级中文描述</meta>
+            <meta attribute="ColumnComment">确认等级中文描述</meta>
+        </property>
+
+		<property
+			name="planCheckNum"
+			column="PLAN_CHECK_NUM"
+			type="integer"
+			not-null="false"
+			length="4"
+        >
+            <meta attribute="ColumnName">企业应到现场检查次数</meta>
+            <meta attribute="ColumnComment">企业应到现场检查次数</meta>
+        </property>
+
+		<property
+			name="actualCheckNum"
+			column="ACTUAL_CHECK_NUM"
+			type="integer"
+			not-null="false"
+			length="4"
+        >
+            <meta attribute="ColumnName">企业实到现场检查次数</meta>
+            <meta attribute="ColumnComment">企业实到现场检查次数</meta>
+        </property>
+
+		<property
+			name="status"
+			column="STATUS"
+			type="integer"
+			not-null="false"
+			length="2"
+        >
+            <meta attribute="ColumnName">状态</meta>
+            <meta attribute="ColumnComment">状态</meta>
+        </property>
+
+		<property
+			name="description"
+			column="DESCRIPTION"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">备注</meta>
+            <meta attribute="ColumnComment">备注</meta>
+        </property>
+
+		<property
+			name="createTime"
+			column="CREATE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">创建时间</meta>
+            <meta attribute="ColumnComment">创建时间</meta>
+        </property>
+
+		<property
+			name="createUser"
+			column="CREATE_USER"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">创建用户名</meta>
+            <meta attribute="ColumnComment">创建用户名</meta>
+        </property>
+
+		<property
+			name="updateTime"
+			column="UPDATE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">更新时间</meta>
+            <meta attribute="ColumnComment">更新时间</meta>
+        </property>
+
+		<property
+			name="updateUser"
+			column="UPDATE_USER"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">更新用户名</meta>
+            <meta attribute="ColumnComment">更新用户名</meta>
+        </property>
+
+        <many-to-one
+                name="levelId"
+                column="LEVEL_ID"
+                class="com.justonetech.system.domain.SysCodeDetail"
+                not-null="false"
+                >
+        </many-to-one>
+
+		<set name="safeProductCheckItems" inverse="true">
+			<key column="PRODUCT_CHECK_ID"/>
+			<one-to-many class="SafeProductCheckItem"/>
+		</set>
+
+	</class>	
+    <query name="safeproductcheck_all_data_query">
+        <![CDATA[FROM SafeProductCheck]]>
+    </query>
+</hibernate-mapping>

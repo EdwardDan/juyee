@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WorkBook xmlVersion="20110221">
+<TableDataMap>
+<TableData name="ds1" class="com.fr.data.impl.DBTableData">
+<Parameters/>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[hkjjw]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[select *　from  HKJJW.WORKER_INSPECT_RECORD where id= '${id}']]></Query>
+</TableData>
+</TableDataMap>
+<Report class="com.fr.report.WorkSheet" name="sheet1">
+<ReportPageAttr>
+<HR/>
+<FR/>
+<HC/>
+<FC/>
+</ReportPageAttr>
+<RowHeight defaultValue="723900">
+<![CDATA[3009900,1066800,723900,876300,685800,876300,723900]]></RowHeight>
+<ColumnWidth defaultValue="2743200">
+<![CDATA[76200,1028700,2590800,3810000,3276600,3771900,723900,2971800,5372100,38100,2743200]]></ColumnWidth>
+<CellElementList>
+<C c="0" r="0">
+<Expand/>
+</C>
+<C c="1" r="0" cs="9" rs="2" s="0">
+<O>
+<![CDATA[现场检查笔录]]></O>
+<Expand/>
+</C>
+<C c="0" r="1">
+<Expand/>
+</C>
+<C c="1" r="2" cs="2" rs="2" s="1">
+<O>
+<![CDATA[检查地点：]]></O>
+<Expand/>
+</C>
+<C c="3" r="2" cs="7" rs="2" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="CHECK_ADDRESS"/>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="1" r="4" cs="2" rs="2" s="1">
+<O>
+<![CDATA[检查时间：]]></O>
+<Expand/>
+</C>
+<C c="3" r="4" cs="2" rs="2" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="CHECK_DATE"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="5" r="4" rs="2" s="3">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="START_TIME"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="6" r="4" rs="2" s="2">
+<O>
+<![CDATA[至]]></O>
+<Expand/>
+</C>
+<C c="7" r="4" cs="2" rs="2" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="END_TIME"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="9" r="4">
+<Expand/>
+</C>
+<C c="9" r="5">
+<Expand/>
+</C>
+<C c="1" r="6" cs="2" rs="2" s="4">
+<O>
+<![CDATA[当事人：]]></O>
+<Expand/>
+</C>
+<C c="3" r="6" cs="2" rs="2" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="CURRENT_PERSON"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="5" r="6" rs="2" s="4">
+<O>
+<![CDATA[地址：]]></O>
+<Expand/>
+</C>
+<C c="6" r="6" cs="3" rs="2" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="ADDRESS"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="9" r="6">
+<Expand/>
+</C>
+<C c="9" r="7">
+<Expand/>
+</C>
+<C c="1" r="8" cs="2" rs="2" s="4">
+<O>
+<![CDATA[法定代表人：]]></O>
+<Expand/>
+</C>
+<C c="3" r="8" cs="2" rs="2" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="FR"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="5" r="8" rs="2" s="4">
+<O>
+<![CDATA[电话：]]></O>
+<Expand/>
+</C>
+<C c="6" r="8" cs="3" rs="2" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="TEL"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="1" r="10" cs="2" rs="2" s="4">
+<O>
+<![CDATA[检查人员：]]></O>
+<Expand/>
+</C>
+<C c="3" r="10" cs="2" rs="2" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="CHECK_PERSON"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="5" r="10" rs="2" s="5">
+<O>
+<![CDATA[记录人：]]></O>
+<Expand/>
+</C>
+<C c="6" r="10" cs="3" rs="2" s="2">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="RECORD_PERSON"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="1" r="12" cs="2" rs="2" s="6">
+<O>
+<![CDATA[现场检查情况：]]></O>
+<Expand/>
+</C>
+<C c="3" r="12" cs="6" rs="8" s="7">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="CHECK_CONTENT"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="3" r="22" rs="2" s="4">
+<O>
+<![CDATA[当事人签名：]]></O>
+<Expand/>
+</C>
+<C c="4" r="22" rs="2" s="2">
+<Expand/>
+</C>
+<C c="5" r="22" rs="2" s="4">
+<O>
+<![CDATA[见证人签名：]]></O>
+<Expand/>
+</C>
+<C c="6" r="22" cs="2" rs="2" s="2">
+<Expand/>
+</C>
+<C c="3" r="25" rs="2" s="4">
+<O>
+<![CDATA[检查人员签名：]]></O>
+<Expand/>
+</C>
+<C c="4" r="25" rs="2" s="2">
+<Expand/>
+</C>
+<C c="5" r="25" rs="2" s="4">
+<O>
+<![CDATA[记录人签名：]]></O>
+<Expand/>
+</C>
+<C c="6" r="25" cs="2" rs="2" s="2">
+<Expand/>
+</C>
+</CellElementList>
+<ReportAttrSet>
+<ReportSettings headerHeight="0" footerHeight="0">
+<PaperSetting/>
+</ReportSettings>
+</ReportAttrSet>
+</Report>
+<ReportParameterAttr>
+<Attributes showWindow="false" delayPlaying="false" windowPosition="1" align="1"/>
+<PWTitle>
+<![CDATA[参数]]></PWTitle>
+<Parameter>
+<Attributes name="JD_DEPT"/>
+<O>
+<![CDATA[]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="xingqi"/>
+<O>
+<![CDATA[1990-01-01]]></O>
+</Parameter>
+</ReportParameterAttr>
+<StyleList>
+<Style horizontal_alignment="0">
+<FRFont name="黑体" style="0" size="144"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="4" textStyle="1">
+<FRFont name="黑体" style="1" size="72"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Bottom style="5"/>
+</Border>
+</Style>
+<Style horizontal_alignment="4">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Bottom style="5"/>
+</Border>
+</Style>
+<Style horizontal_alignment="4">
+<FRFont name="黑体" style="1" size="72"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="4">
+<FRFont name="黑体" style="1" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Bottom style="5"/>
+</Border>
+</Style>
+<Style>
+<FRFont name="黑体" style="1" size="72"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+</StyleList>
+</WorkBook>

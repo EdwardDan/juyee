@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.justonetech.biz.domain">
+	<class
+		name="OaTaskDeal"
+		table="OA_TASK_DEAL"
+	>
+		
+		<meta attribute="sync-DAO">false</meta>
+		<meta attribute="sync-jsp">true</meta>
+		<meta attribute="sync-boolean">get</meta>
+		<meta attribute="treeable">false</meta>
+		<meta attribute="projectable">false</meta>
+        <meta attribute="tableName">任务处理记录</meta>
+        <meta attribute="tableComment">任务处理记录</meta>
+	    <meta attribute="sync-templatePatterns">list\w*</meta>
+        <meta attribute="sub-system">oa</meta>
+
+		<id
+			name="id"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="com.justonetech.core.orm.hibernate.LongIdGenerator"/>
+		</id>
+
+		<property
+			name="acceptTime"
+			column="ACCEPT_TIME"
+			type="timestamp"
+			not-null="false"
+			length="16"
+        >
+            <meta attribute="ColumnName">接收时间</meta>
+            <meta attribute="ColumnComment">接收时间</meta>
+        </property>
+
+		<property
+			name="status"
+			column="STATUS"
+			type="string"
+			not-null="false"
+			length="1"
+        >
+            <meta attribute="ColumnName">状态</meta>
+            <meta attribute="ColumnComment">状态</meta>
+        </property>
+
+		<many-to-one
+			name="user"
+			column="USER_ID"
+			class="com.justonetech.system.domain.SysUser"
+			not-null="false"
+		>
+		</many-to-one>
+		<many-to-one
+			name="task"
+			column="TASK_ID"
+			class="OaTask"
+			not-null="false"
+		>
+		</many-to-one>
+
+	</class>	
+    <query name="oataskdeal_all_data_query">
+        <![CDATA[FROM OaTaskDeal]]>
+    </query>
+</hibernate-mapping>

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.justonetech.biz.domain">
+	<class
+		name="OaPublicInfo"
+		table="OA_PUBLIC_INFO"
+	>
+
+		<meta attribute="sync-DAO">false</meta>
+		<meta attribute="sync-jsp">true</meta>
+		<meta attribute="sync-boolean">get</meta>
+		<meta attribute="treeable">false</meta>
+		<meta attribute="projectable">false</meta>
+        <meta attribute="tableName">公共信息发布</meta>
+        <meta attribute="tableComment">公共信息发布</meta>
+	    <meta attribute="sync-templatePatterns">list\w*</meta>
+        <meta attribute="sub-system">oa</meta>
+
+		<id
+			name="id"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="com.justonetech.core.orm.hibernate.LongIdGenerator"/>
+		</id>
+
+		<property
+			name="title"
+			column="TITLE"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">标题</meta>
+            <meta attribute="ColumnComment">标题</meta>
+        </property>
+
+		<property
+			name="content"
+			column="CONTENT"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">内容</meta>
+            <meta attribute="ColumnComment">内容</meta>
+        </property>
+
+		<property
+			name="createDeptName"
+			column="CREATE_DEPT_NAME"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">来源单位/部门名称</meta>
+            <meta attribute="ColumnComment">来源单位/部门名称</meta>
+        </property>
+
+		<property
+			name="createDate"
+			column="CREATE_DATE"
+			type="date"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">创建日期</meta>
+            <meta attribute="ColumnComment">创建日期</meta>
+        </property>
+
+		<property
+			name="isPublic"
+			column="IS_PUBLIC"
+			type="java.lang.Boolean"
+			not-null="false"
+			length="1"
+        >
+            <meta attribute="ColumnName">是否发布</meta>
+            <meta attribute="ColumnComment">是否发布</meta>
+        </property>
+
+		<property
+			name="reportDate"
+			column="REPORT_DATE"
+			type="date"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">发布时间</meta>
+            <meta attribute="ColumnComment">发布时间</meta>
+        </property>
+
+		<property
+			name="visitTimes"
+			column="VISIT_TIMES"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">访问次数</meta>
+            <meta attribute="ColumnComment">访问次数</meta>
+        </property>
+
+		<property
+			name="isValid"
+			column="IS_VALID"
+			type="java.lang.Boolean"
+			not-null="false"
+			length="1"
+        >
+            <meta attribute="ColumnName">是否有效</meta>
+            <meta attribute="ColumnComment">是否有效</meta>
+        </property>
+
+		<property
+			name="isTop"
+			column="IS_TOP"
+			type="java.lang.Boolean"
+			not-null="false"
+			length="1"
+        >
+            <meta attribute="ColumnName">是否置顶</meta>
+            <meta attribute="ColumnComment">是否置顶</meta>
+        </property>
+
+        <property
+			name="thumbnail"
+			column="THUMBNAIL"
+			type="string"
+			not-null="false"
+			length="1000"
+        >
+            <meta attribute="ColumnName">缩略图</meta>
+            <meta attribute="ColumnComment">缩略图</meta>
+        </property>
+
+        <property
+                name="outerId"
+                column="OUTER_ID"
+                type="java.lang.Long"
+                not-null="false"
+                length="10"
+                >
+            <meta attribute="ColumnName">门户网站记录ID</meta>
+            <meta attribute="ColumnComment">门户网站记录ID</meta>
+        </property>
+
+		<many-to-one
+			name="user"
+			column="USER_ID"
+			class="com.justonetech.system.domain.SysUser"
+			not-null="false"
+		>
+		</many-to-one>
+		<many-to-one
+			name="accessRange"
+			column="ACCESS_RANGE"
+			class="com.justonetech.system.domain.SysCodeDetail"
+			not-null="false"
+		>
+		</many-to-one>
+		<many-to-one
+			name="type"
+			column="TYPE_ID"
+			class="com.justonetech.system.domain.SysCodeDetail"
+			not-null="false"
+		>
+		</many-to-one>
+        <many-to-one
+			name="iconImage"
+			column="ICON_IMAGE"
+			class="DocDocument"
+			not-null="false"
+		>
+		</many-to-one>
+        <many-to-one
+			name="document"
+			column="DOCUMENT_ID"
+			class="DocDocument"
+			not-null="false"
+		>
+		</many-to-one>
+
+	</class>
+    <query name="oapublicinfo_all_data_query">
+        <![CDATA[FROM OaPublicInfo]]>
+    </query>
+</hibernate-mapping>

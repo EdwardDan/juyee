@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.justonetech.biz.domain">
+    <class
+            name="com.justonetech.biz.domain.CheckDeviceInfo"
+            table="CHECK_DEVICE_INFO"
+            >
+
+        <meta attribute="sync-DAO">false</meta>
+        <meta attribute="sync-jsp">true</meta>
+        <meta attribute="sync-boolean">get</meta>
+        <meta attribute="treeable">false</meta>
+        <meta attribute="projectable">false</meta>
+        <meta attribute="tableName">设备注册表</meta>
+        <meta attribute="tableComment">设备注册表</meta>
+        <meta attribute="sync-templatePatterns">list\w*</meta>
+        <meta attribute="sub-system">check</meta>
+
+        <id
+                name="id"
+                type="java.lang.Long"
+                column="ID"
+                >
+            <generator class="com.justonetech.core.orm.hibernate.LongIdGenerator"/>
+        </id>
+
+        <property
+                name="jdTaskCode"
+                column="JD_TASK_CODE"
+                type="string"
+                not-null="false"
+                length="10"
+                >
+            <meta attribute="ColumnName">监督任务书编号</meta>
+            <meta attribute="ColumnComment">监督任务书编号</meta>
+        </property>
+
+        <property
+                name="bjbh"
+                column="BJBH"
+                type="string"
+                not-null="false"
+                length="50"
+                >
+            <meta attribute="ColumnName">报建编号</meta>
+            <meta attribute="ColumnComment">报建编号</meta>
+        </property>
+
+        <property
+                name="gdCode"
+                column="GD_CODE"
+                type="string"
+                not-null="false"
+                length="50"
+                >
+            <meta attribute="ColumnName">工地编号</meta>
+            <meta attribute="ColumnComment">工地编号</meta>
+        </property>
+
+        <property
+                name="gdName"
+                column="GD_NAME"
+                type="string"
+                not-null="false"
+                length="200"
+                >
+            <meta attribute="ColumnName">工地名称</meta>
+            <meta attribute="ColumnComment">工地名称</meta>
+        </property>
+
+        <property
+                name="belongArea"
+                column="BELONG_AREA"
+                type="string"
+                not-null="false"
+                length="50"
+                >
+            <meta attribute="ColumnName">所属区县</meta>
+            <meta attribute="ColumnComment">所属区县</meta>
+        </property>
+
+        <property
+                name="streetArea"
+                column="STREET_AREA"
+                type="string"
+                not-null="false"
+                length="50"
+                >
+            <meta attribute="ColumnName">街镇</meta>
+            <meta attribute="ColumnComment">街镇</meta>
+        </property>
+
+        <property
+                name="longitude"
+                column="LONGITUDE"
+                type="java.lang.Double"
+                not-null="false"
+                length="18"
+                >
+            <meta attribute="ColumnName">工地经度</meta>
+            <meta attribute="ColumnComment">工地经度</meta>
+        </property>
+
+        <property
+                name="latitude"
+                column="LATITUDE"
+                type="java.lang.Double"
+                not-null="false"
+                length="18"
+                >
+            <meta attribute="ColumnName">工地纬度</meta>
+            <meta attribute="ColumnComment">工地纬度</meta>
+        </property>
+
+        <property
+                name="devName"
+                column="DEV_NAME"
+                type="string"
+                not-null="false"
+                length="50"
+                >
+            <meta attribute="ColumnName">设备名称</meta>
+            <meta attribute="ColumnComment">设备名称</meta>
+        </property>
+
+        <property
+                name="devSn"
+                column="DEV_SN"
+                type="string"
+                not-null="false"
+                length="50"
+                >
+            <meta attribute="ColumnName">设备序号</meta>
+            <meta attribute="ColumnComment">设备序号</meta>
+        </property>
+
+        <property
+                name="devMode"
+                column="DEV_MODE"
+                type="string"
+                not-null="false"
+                length="50"
+                >
+            <meta attribute="ColumnName">设备型号</meta>
+            <meta attribute="ColumnComment">设备型号</meta>
+        </property>
+
+        <property
+                name="devSim"
+                column="DEV_SIM"
+                type="string"
+                not-null="false"
+                length="20"
+                >
+            <meta attribute="ColumnName">设备SIM卡</meta>
+            <meta attribute="ColumnComment">设备SIM卡</meta>
+        </property>
+
+        <property
+                name="devIp"
+                column="DEV_IP"
+                type="string"
+                not-null="false"
+                length="50"
+                >
+            <meta attribute="ColumnName">设备IP</meta>
+            <meta attribute="ColumnComment">设备IP</meta>
+        </property>
+
+        <property
+                name="currentLongitude"
+                column="CURRENT_LONGITUDE"
+                type="java.lang.Double"
+                not-null="false"
+                length="18"
+                >
+            <meta attribute="ColumnName">定位经度</meta>
+            <meta attribute="ColumnComment">定位经度</meta>
+        </property>
+
+        <property
+                name="currentLatitude"
+                column="CURRENT_LATITUDE"
+                type="java.lang.Double"
+                not-null="false"
+                length="18"
+                >
+            <meta attribute="ColumnName">定位纬度</meta>
+            <meta attribute="ColumnComment">定位纬度</meta>
+        </property>
+
+        <property
+                name="positionTime"
+                column="POSITION_TIME"
+                type="timestamp"
+                not-null="false"
+                length="19"
+                >
+            <meta attribute="ColumnName">定位时间</meta>
+            <meta attribute="ColumnComment">定位时间</meta>
+        </property>
+
+        <property
+                name="lastOnlineTime"
+                column="LAST_ONLINE_TIME"
+                type="timestamp"
+                not-null="false"
+                length="19"
+                >
+            <meta attribute="ColumnName">最近联机时间</meta>
+            <meta attribute="ColumnComment">最近联机时间</meta>
+        </property>
+
+        <property
+                name="onlineStatus"
+                column="ONLINE_STATUS"
+                type="java.lang.Long"
+                not-null="false"
+                length="10"
+                >
+            <meta attribute="ColumnName">设备联机状态</meta>
+            <meta attribute="ColumnComment">设备联机状态</meta>
+        </property>
+
+        <property
+                name="regDateTime"
+                column="REG_DATE_TIME"
+                type="timestamp"
+                not-null="false"
+                length="19"
+                >
+            <meta attribute="ColumnName">注册时间</meta>
+            <meta attribute="ColumnComment">注册时间</meta>
+        </property>
+
+        <property
+                name="regUserName"
+                column="REG_USER_NAME"
+                type="string"
+                not-null="false"
+                length="50"
+                >
+            <meta attribute="ColumnName">注册操作人</meta>
+            <meta attribute="ColumnComment">注册操作人</meta>
+        </property>
+
+        <property
+                name="cancelDateTime"
+                column="CANCEL_DATE_TIME"
+                type="timestamp"
+                not-null="false"
+                length="19"
+                >
+            <meta attribute="ColumnName">注销时间</meta>
+            <meta attribute="ColumnComment">注销时间</meta>
+        </property>
+
+        <property
+                name="cancelStatus"
+                column="CANCEL_STATUS"
+                type="java.lang.Long"
+                not-null="false"
+                length="10"
+                >
+            <meta attribute="ColumnName">注销状态</meta>
+            <meta attribute="ColumnComment">注销状态</meta>
+        </property>
+
+        <property
+                name="cancelUserName"
+                column="CANCEL_USER_NAME"
+                type="string"
+                not-null="false"
+                length="50"
+                >
+            <meta attribute="ColumnName">注销操作人</meta>
+            <meta attribute="ColumnComment">注销操作人</meta>
+        </property>
+
+        <property
+                name="guid"
+                column="GUID"
+                type="string"
+                not-null="false"
+                length="50"
+                >
+            <meta attribute="ColumnName">GUID</meta>
+            <meta attribute="ColumnComment">GUID</meta>
+        </property>
+
+        <property
+                name="createTime"
+                column="CREATE_TIME"
+                type="timestamp"
+                not-null="false"
+                length="19"
+                >
+            <meta attribute="ColumnName">创建时间</meta>
+            <meta attribute="ColumnComment">创建时间</meta>
+        </property>
+
+        <property
+                name="updateTime"
+                column="UPDATE_TIME"
+                type="timestamp"
+                not-null="false"
+                length="19"
+                >
+            <meta attribute="ColumnName">更新时间</meta>
+            <meta attribute="ColumnComment">更新时间</meta>
+        </property>
+
+        <property
+                name="createUser"
+                column="CREATE_USER"
+                type="string"
+                not-null="false"
+                length="100"
+                >
+            <meta attribute="ColumnName">创建人</meta>
+            <meta attribute="ColumnComment">创建人</meta>
+        </property>
+
+        <property
+                name="updateUser"
+                column="UPDATE_USER"
+                type="string"
+                not-null="false"
+                length="100"
+                >
+            <meta attribute="ColumnName">更新人</meta>
+            <meta attribute="ColumnComment">更新人</meta>
+        </property>
+        <property
+                name="deleteUser"
+                column="DELETE_USER"
+                type="string"
+                not-null="false"
+                length="100"
+                >
+            <meta attribute="ColumnName">删除人</meta>
+            <meta attribute="ColumnComment">删除人</meta>
+        </property>
+
+        <property
+                name="deleteTime"
+                column="DELETE_TIME"
+                type="timestamp"
+                not-null="false"
+                length="19"
+                >
+            <meta attribute="ColumnName">删除时间</meta>
+            <meta attribute="ColumnComment">删除时间</meta>
+        </property>
+
+        <property
+                name="isDelete"
+                column="IS_DELETE"
+                type="java.lang.Boolean"
+                not-null="false"
+                length="1"
+                >
+            <meta attribute="ColumnName">逻辑删除</meta>
+            <meta attribute="ColumnComment">逻辑删除</meta>
+        </property>
+
+        <many-to-one
+                name="regUser"
+                column="REG_USER_ID"
+                class="com.justonetech.system.domain.SysUser"
+                not-null="false"
+                >
+        </many-to-one>
+        <many-to-one
+                name="cancelUser"
+                column="CANCEL_USER_ID"
+                class="com.justonetech.system.domain.SysUser"
+                not-null="false"
+                >
+        </many-to-one>
+
+
+        <set name="checkInfos" inverse="true">
+            <key column="DEV_ID"/>
+            <one-to-many class="com.justonetech.biz.domain.CheckInfo"/>
+        </set>
+
+    </class>
+    <query name="checkdeviceinfo_all_data_query">
+        <![CDATA[FROM CheckDeviceInfo]]>
+    </query>
+</hibernate-mapping>

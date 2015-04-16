@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Message" type="MessageType"/>
+  <xs:complexType name="UserType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="Name"/>
+      <xs:element type="xs:string" name="IP"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="MediaType">
+    <xs:sequence>
+      <xs:element type="VtduType" name="Vtdu"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="Protocol"/>
+    <xs:attribute type="xs:string" name="Stream"/>
+  </xs:complexType>
+  <xs:complexType name="CameraType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="Id"/>
+      <xs:element type="xs:string" name="IndexCode"/>
+      <xs:element type="xs:string" name="Name"/>
+      <xs:element type="xs:string" name="ChanNo"/>
+      <xs:element type="MatrixType" name="Matrix"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="VoiceType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="Encode"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="VtduType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="IP"/>
+        <xs:attribute type="xs:string" name="Port"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="DevType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="Id"/>
+      <xs:element type="xs:string" name="IndexCode"/>
+      <xs:element type="AddrType" name="Addr"/>
+      <xs:element type="AuthType" name="Auth"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="regtype"/>
+    <xs:attribute type="xs:string" name="devtype"/>
+  </xs:complexType>
+  <xs:complexType name="MatrixType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="Code"/>
+        <xs:attribute type="xs:string" name="Id"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="OptionType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="Talk"/>
+      <xs:element type="xs:string" name="PreviewType"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PrivilegeType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="Priority"/>
+        <xs:attribute type="xs:string" name="Code"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="MessageType">
+    <xs:sequence>
+      <xs:element type="CameraType" name="Camera"/>
+      <xs:element type="DevType" name="Dev"/>
+      <xs:element type="VagType" name="Vag"/>
+      <xs:element type="VoiceType" name="Voice"/>
+      <xs:element type="UserType" name="User"/>
+      <xs:element type="MediaType" name="Media"/>
+      <xs:element type="PrivilegeType" name="Privilege"/>
+      <xs:element type="OptionType" name="Option"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AuthType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="User"/>
+        <xs:attribute type="xs:string" name="Pwd"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="VagType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="IP"/>
+        <xs:attribute type="xs:string" name="Port"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="AddrType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="IP"/>
+        <xs:attribute type="xs:string" name="Port"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+</xs:schema>

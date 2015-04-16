@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.justonetech.biz.domain">
+	<class
+		name="WorkerSchool"
+		table="WORKER_SCHOOL"
+	>
+		
+		<meta attribute="sync-DAO">false</meta>
+		<meta attribute="sync-jsp">true</meta>
+		<meta attribute="sync-boolean">get</meta>
+		<meta attribute="treeable">false</meta>
+		<meta attribute="projectable">false</meta>
+        <meta attribute="tableName">务工人员学校管理</meta>
+        <meta attribute="tableComment">务工人员学校管理</meta>
+	    <meta attribute="sync-templatePatterns">list\w*</meta>
+        <meta attribute="sub-system">worker</meta>
+
+		<id
+			name="id"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="com.justonetech.core.orm.hibernate.LongIdGenerator"/>
+		</id>
+
+		<property
+			name="bjbh"
+			column="BJBH"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">报建编号</meta>
+            <meta attribute="ColumnComment">报建编号</meta>
+        </property>
+
+		<property
+			name="projectName"
+			column="PROJECT_NAME"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">项目名称</meta>
+            <meta attribute="ColumnComment">项目名称</meta>
+        </property>
+
+		<property
+			name="projectAddress"
+			column="PROJECT_ADDRESS"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">项目地点</meta>
+            <meta attribute="ColumnComment">项目地点</meta>
+        </property>
+
+		<property
+			name="jsDept"
+			column="JS_DEPT"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">建设单位名称</meta>
+            <meta attribute="ColumnComment">建设单位名称</meta>
+        </property>
+
+		<property
+			name="jsDeptLxr"
+			column="JS_DEPT_LXR"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">建设单位负责人</meta>
+            <meta attribute="ColumnComment">建设单位负责人</meta>
+        </property>
+
+		<property
+			name="jsDeptTel"
+			column="JS_DEPT_TEL"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">建设单位联系电话</meta>
+            <meta attribute="ColumnComment">建设单位联系电话</meta>
+        </property>
+
+		<property
+			name="sgDept"
+			column="SG_DEPT"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">施工单位名称</meta>
+            <meta attribute="ColumnComment">施工单位名称</meta>
+        </property>
+
+		<property
+			name="sgDeptLxr"
+			column="SG_DEPT_LXR"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">施工单位负责人</meta>
+            <meta attribute="ColumnComment">施工单位负责人</meta>
+        </property>
+
+		<property
+			name="sgDeptTel"
+			column="SG_DEPT_TEL"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">施工单位联系电话</meta>
+            <meta attribute="ColumnComment">施工单位联系电话</meta>
+        </property>
+
+		<property
+			name="xzName"
+			column="XZ_NAME"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">校长姓名</meta>
+            <meta attribute="ColumnComment">校长姓名</meta>
+        </property>
+
+		<property
+			name="xzTel"
+			column="XZ_TEL"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">校长电话</meta>
+            <meta attribute="ColumnComment">校长电话</meta>
+        </property>
+
+		<property
+			name="xzDept"
+			column="XZ_DEPT"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">校长所属单位名称</meta>
+            <meta attribute="ColumnComment">校长所属单位名称</meta>
+        </property>
+
+		<property
+			name="zzName"
+			column="ZZ_NAME"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">组长姓名</meta>
+            <meta attribute="ColumnComment">组长姓名</meta>
+        </property>
+
+		<property
+			name="zzTel"
+			column="ZZ_TEL"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">组长电话</meta>
+            <meta attribute="ColumnComment">组长电话</meta>
+        </property>
+
+		<property
+			name="zzDept"
+			column="ZZ_DEPT"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">组长所属单位名称</meta>
+            <meta attribute="ColumnComment">组长所属单位名称</meta>
+        </property>
+
+		<property
+			name="createTime"
+			column="CREATE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">创建时间</meta>
+            <meta attribute="ColumnComment">创建时间</meta>
+        </property>
+
+		<property
+			name="createUser"
+			column="CREATE_USER"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">创建用户名</meta>
+            <meta attribute="ColumnComment">创建用户名</meta>
+        </property>
+
+		<property
+			name="updateTime"
+			column="UPDATE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">更新时间</meta>
+            <meta attribute="ColumnComment">更新时间</meta>
+        </property>
+
+		<property
+			name="updateUser"
+			column="UPDATE_USER"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">更新用户名</meta>
+            <meta attribute="ColumnComment">更新用户名</meta>
+        </property>
+
+	
+
+		<set name="workerSchoolActivities" inverse="true">
+			<key column="SCHOOL_ID"/>
+			<one-to-many class="WorkerSchoolActivity"/>
+		</set>
+
+	</class>	
+    <query name="workerschool_all_data_query">
+        <![CDATA[FROM WorkerSchool]]>
+    </query>
+</hibernate-mapping>

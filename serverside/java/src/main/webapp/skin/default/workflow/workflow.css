@@ -1,0 +1,225 @@
+.popup_form {
+    width: 500px;
+    height: 350px;
+    border: 1px solid #2e8adc;
+    color: #15428b;
+    background-color: #edf4fd
+}
+
+.popup_standard {
+    width: 500px;
+    height: 320px;
+    border: 1px solid #2e8adc;
+    color: #15428b;
+    background-color: #edf4fd
+}
+
+.popup_form_head {
+    background-image: url(tck_1.jpg);
+    background-repeat: repeat-x;
+    text-align: left;
+    font-weight: bold;
+    height: 20px;
+}
+
+/*.popup_form_td {*/
+/*background-image: url(project_select_bg.gif);*/
+/*background-repeat: no-repeat;*/
+/*text-align: center;*/
+/*height: 32px;*/
+/*width: 180px;*/
+/*}*/
+
+.fixed_title_row {
+    position: relative;
+    top: expression(this.offsetParent.scrollTop);
+    z-index: 10; /*background-color: #E6ECF0;*/
+    width:100%
+}
+
+.flow_text_readonly {
+    height: 97%;
+    width: 100%;
+    font-size: 13px;
+    border: 1px solid #F4FFFF;
+    background-color: #F4FFFF;
+    vertical-align: middle;
+
+}
+
+.flow_text {
+    height: 97%;
+    height: expression(autoResize(this));
+    width: 100%;
+    font-size: 13px;
+    border: 1px solid #b9d9f6;
+    background-color: #e6f5ff;
+    vertical-align: middle;
+}
+
+.flow_text_over {
+    height: 97%;
+    width: 100%;
+    font-size: 13px;
+    border: 1px solid #53a3c4;
+    background-color: #cfe5fc;
+}
+
+.flow_textarea {
+    height: 97%;
+    height: expression(autoResize(this));
+    width: 100%;
+    font-size: 13px;
+    border: 1px solid #b9d9f6;
+    background-color: #e6f5ff;
+    vertical-align: middle;
+}
+
+.flow_textarea_over {
+    height: 97%;
+    width: 100%;
+    font-size: 13px;
+    border: 1px solid #53a3c4;
+    background-color: #cfe5fc;
+}
+
+.flow_date {
+    height: 97%;
+    width: 100%;
+    font-size: 13px;
+    border: 1px solid #b9d9f6;
+    background-color: #e6f5ff;
+    vertical-align: middle;
+}
+
+.flow_date_over {
+    height: 97%;
+    width: 100%;
+    font-size: 13px;
+    border: 1px solid #53a3c4;
+    background-color: #cfe5fc;
+}
+
+.flow_button_audit {
+    height: 16px;
+    width: 16px;
+    border: 0px none;
+    cursor: pointer;
+    padding: 4px 2px 2px;
+    background-image: url(auditEnable.gif);
+    background-repeat: no-repeat;
+}
+
+.flow_button_audit_disabled {
+    height: 16px;
+    width: 16px;
+    border: 0px none;
+    cursor: pointer;
+    padding: 4px 2px 2px;
+    background-image: url(auditDisable.gif);
+    background-repeat: no-repeat;
+    vertical-align:middle;
+}
+
+.flow_button_cancel {
+    height: 16px;
+    width: 16px;
+    border: 0px none;
+    cursor: pointer;
+    padding: 4px 2px 2px;
+    background-image: url(file_delete.gif);
+    background-repeat: no-repeat;
+}
+
+.flow_button_end {
+    height: 16px;
+    width: 16px;
+    border: 0px none;
+    cursor: pointer;
+    padding: 4px 2px 2px;
+    background-image: url(StateAccepte.gif);
+    background-repeat: no-repeat;
+}
+
+.flow_button_history {
+    height: 16px;
+    width: 16px;
+    border: 0px none;
+    cursor: pointer;
+    padding: 4px 2px 2px;
+    background-image: url(StateFirst.gif);
+    background-repeat: no-repeat;
+}
+
+/* 审批按钮区域css */
+.sptable_line_blue {
+/*padding: 0px;*/
+/*border: 1px solid #98c9f9;*/
+/*background-color: #eaf4fe;*/
+    background-image: url(flow_button_bg.gif);
+    background-repeat: no-repeat;
+    background-position: right;
+    height: 27px;
+    width: 100%; /*vertical-align:middle;*/
+    text-align:right;
+}
+
+.spbutton_save {
+    height: 22px;
+    width: 71px;
+    border: 0px none;
+    cursor: pointer;
+    padding: 4px 2px 2px;
+    background-image: url(spsave.jpg);
+    background-repeat: no-repeat;
+    text-indent: 12pt;
+    font-size: 12px;
+}
+
+.spbutton_fj {
+    height: 22px;
+    width: 71px;
+    border: 0px none;
+    cursor: pointer;
+    padding: 4px 2px 2px;
+    background-image: url(spfj.jpg);
+    background-repeat: no-repeat;
+    text-indent: 12pt;
+    font-size: 12px;
+}
+
+.spbutton_sh {
+    height: 22px;
+    width: 71px;
+    border: 0px none;
+    cursor: pointer;
+    padding: 4px 2px 2px;
+    background-image: url(spsh.jpg);
+    background-repeat: no-repeat;
+    text-indent: 12pt;
+    font-size: 12px;
+}
+
+.spbutton_fh {
+    height: 22px;
+    width: 71px;
+    border: 0px none;
+    cursor: pointer;
+    padding: 4px 2px 2px;
+    background-image: url(spfh.jpg);
+    background-repeat: no-repeat;
+    text-indent: 12pt;
+    font-size: 12px;
+}
+
+.spbutton_rz {
+    height: 22px;
+    width: 71px;
+    border: 0px none;
+    cursor: pointer;
+    padding: 4px 2px 2px;
+    background-image: url(sprz.jpg);
+    background-repeat: no-repeat;
+    text-indent: 12pt;
+    font-size: 12px;
+}

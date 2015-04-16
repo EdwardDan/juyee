@@ -1,0 +1,13 @@
+css修改说明：
+
+bootstrap-popover.css
+1、去掉宽度限制
+.popover{
+/*max-width: 276px;*/
+}
+2、增加透明度
+.popover{
+  filter:alpha(opacity=80); /*支持IE */
+  -moz-opacity:0.8; /*支持FF */
+  opacity:0.8;
+}

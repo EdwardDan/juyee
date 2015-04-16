@@ -1,0 +1,1333 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns="http://webservice.cms.hikvision.com"
+                  xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+                  xmlns:ax236="http://simple.bo.webservice.cms.hikvision.com/xsd"
+                  xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+                  xmlns:ax234="http://bo.webservice.cms.hikvision.com/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+                  targetNamespace="http://webservice.cms.hikvision.com">
+    <wsdl:documentation>CmsService</wsdl:documentation>
+    <wsdl:types>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://crossing.bo.webservice.cms.hikvision.com/xsd">
+            <xs:complexType name="CrossingServerInfoDTO">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="basType" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="controlPort" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="controlUnitId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="dataPort" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="indexCode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="netZoneId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="serverId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="serverIp" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="serverName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="serverPort" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="serverType" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="shareFlag" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="strXmlRev" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="unitIndexCode" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema xmlns:ax239="http://crossing.bo.webservice.cms.hikvision.com/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://bo.webservice.cms.hikvision.com/xsd">
+            <xs:import namespace="http://crossing.bo.webservice.cms.hikvision.com/xsd"/>
+            <xs:complexType name="CommonResult">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="errorCode" type="xs:int"/>
+                    <xs:element minOccurs="0" name="result" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="strXmlRev" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="LogoutResult">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="errorCode" type="xs:int"/>
+                    <xs:element minOccurs="0" name="result" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="strXmlRev" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="LoginResult">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="controlUnitId" type="xs:int"/>
+                    <xs:element minOccurs="0" name="errorCode" type="xs:int"/>
+                    <xs:element minOccurs="0" name="ipType" type="xs:int"/>
+                    <xs:element minOccurs="0" name="outNetCmsUrl" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="outNetUserName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="outNetUserPwd" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="priority" type="xs:int"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="privilegeCode" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="result" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="strXmlRev" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="userId" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="CmsTimingResult">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="message" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="result" type="xs:boolean"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="VrmRecordScheduleListForPMS">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="allRow" type="xs:int"/>
+                    <xs:element minOccurs="0" name="currentPage" type="xs:int"/>
+                    <xs:element minOccurs="0" name="errorCode" type="xs:int"/>
+                    <xs:element minOccurs="0" name="pageSize" type="xs:int"/>
+                    <xs:element minOccurs="0" name="result" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="totalPage" type="xs:int"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="vrmRecordScheduleArray" nillable="true" type="ax234:VrmRecordScheduleWithPMS"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="VrmRecordScheduleWithPMS">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="cameraId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="createTime" nillable="true" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="delayRecordTime" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="fridaySched" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="isValid" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="mondaySched" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="needRecord" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="nvrSvrId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="preRecordTime" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="recordStyle" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="saturdaySched" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="scheduleId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="storageIndex" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="storeSpace" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="storeTime" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="streamType" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="sundaySched" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="thursdaySched" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="tuesdaySched" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="updateTime" nillable="true" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="vrmSvrId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="wednesdaySched" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="PreviewResult">
+                <xs:complexContent>
+                    <xs:extension base="ax234:CommonResult">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="errorDesc" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="previewXml" nillable="true" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="PlaybackParamReq">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="cameraIndexCode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="playWndIndex" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="recordLocation" nillable="true" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="PlaybackResult">
+                <xs:complexContent>
+                    <xs:extension base="ax234:CommonResult">
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="errorDesc" nillable="true" type="xs:string"/>
+                            <xs:element minOccurs="0" name="playbackXml" nillable="true" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="CameraResult">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="allRow" type="xs:int"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="cameraArray" nillable="true" type="ax234:CameraDTO"/>
+                    <xs:element minOccurs="0" name="currentPage" type="xs:int"/>
+                    <xs:element minOccurs="0" name="errorCode" type="xs:int"/>
+                    <xs:element minOccurs="0" name="pageSize" type="xs:int"/>
+                    <xs:element minOccurs="0" name="result" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="totalPage" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="CameraDTO">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="cameraId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="cameraType" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="chanNum" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="cmsCascadeId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="connectType" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="deviceId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="indexCode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="latitude" nillable="true" type="xs:double"/>
+                    <xs:element minOccurs="0" name="longitude" nillable="true" type="xs:double"/>
+                    <xs:element minOccurs="0" name="matrixCode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="name" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="pixel" nillable="true" type="xs:int"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="privilegeCode" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="ptzType" nillable="true" type="xs:int"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="recLacation" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="sound" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="streamId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="streamType" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="vrmId" nillable="true" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="StreamServerResult">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="errorCode" type="xs:int"/>
+                    <xs:element minOccurs="0" name="result" type="xs:boolean"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="streamServerDTOArray" nillable="true" type="ax234:StreamServerDTO"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="StreamServerDTO">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="controlUnitId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="createTime" nillable="true" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="ctrlPort" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="indexCode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="intRev1" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="intRev2" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="ipAddr" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="name" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="netAgentPort" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="operatorId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="relativePath" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="rtpTcpBasePort" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="rtpUdpBasePort" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="rtspPort" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="secondIp" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="sequenceIdx" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="shareFlag" nillable="true" type="xs:short"/>
+                    <xs:element minOccurs="0" name="strRev1" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="strRev2" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="strXmlRev" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="streamSvId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="udpPortCount" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="updateTime" nillable="true" type="xs:dateTime"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="ServerResult">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="alarmServerDTOArray" nillable="true" type="ax234:AlarmServerDTO"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="crossingServerArray" nillable="true" type="ax239:CrossingServerInfoDTO"/>
+                    <xs:element minOccurs="0" name="errorCode" type="xs:int"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="interAreaArray" nillable="true" type="ax234:InterAreaDTO"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="magServerArray" nillable="true" type="ax234:MagServerDTO"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="networkMonitorServerArray" nillable="true" type="ax234:NetworkMonitorServerDTO"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="pagServerArray" nillable="true" type="ax234:PagServerDTO"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="pcnvrServerArray" nillable="true" type="ax234:PcnvrServerDTO"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="ptzServerArray" nillable="true" type="ax234:PtzServerDTO"/>
+                    <xs:element minOccurs="0" name="result" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="strXmlRev" nillable="true" type="xs:string"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="streamServerDTOArray" nillable="true" type="ax234:StreamServerDTO"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="talkServerArray" nillable="true" type="ax234:TalkServerDTO"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="vrbServerArray" nillable="true" type="ax234:VrbServerDTO"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="vrmServerDTOArray" nillable="true" type="ax234:VrmServerDTO"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="AlarmServerDTO">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="alarmSvId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="controlUnitId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="createTime" nillable="true" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="ctrlPort" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="indexCode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="intRev1" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="intRev2" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="ipAddr" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="name" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="netAgentPort" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="notifyWay" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="operatorId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="secondIp" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="sequenceIdx" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="smsCom" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="strRev1" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="strRev2" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="strXmlRev" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="updateTime" nillable="true" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="useSoftDog" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="workMode" nillable="true" type="xs:short"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="InterAreaDTO">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="clientPort" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="controlUnitId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="createTime" nillable="true" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="ctrlPort" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="indexCode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="interAreaId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="ipAddr" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="name" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="netAgentPort" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="netZoneId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="operatorId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="port" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="ptzPort" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="strXmlRev" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="streamPort" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="type" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="uaPort" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="updateTime" nillable="true" type="xs:dateTime"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="MagServerDTO">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="bTrans" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="controlUnitId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="createTime" nillable="true" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="ctrlPort" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="indexCode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="ipAddr" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="magServerId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="name" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="netAgentPort" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="netZoneId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="operatorId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="outBitRate" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="outEncodeType" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="outFrameRate" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="outResolution" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="port" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="strXmlRev" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="subStream" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="updateTime" nillable="true" type="xs:dateTime"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="NetworkMonitorServerDTO">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="controlUnitId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="createTime" nillable="true" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="ctrlPort" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="dataPort" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="indexCode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="intRev1" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="intRev2" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="ipAddr" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="msgQueue" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="name" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="netMonSvId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="operatorId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="secondIp" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="sequenceIdx" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="strRev1" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="strRev2" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="strXmlRev" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="updateTime" nillable="true" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="useSoftDog" nillable="true" type="xs:boolean"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="PagServerDTO">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="controlUnitId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="createTime" nillable="true" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="ctrlPort" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="dataPort" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="ehomeIp" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="ehomePort" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="indexCode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="ipAddr" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="name" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="netAgentPort" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="operatorId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="pagServerId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="picPort" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="strXmlRev" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="updateTime" nillable="true" type="xs:dateTime"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="PcnvrServerDTO">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="controlUnitId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="createTime" nillable="true" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="ctrlPort" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="indexCode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="intRev1" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="intRev2" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="ipAddr" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="maxRecordTask" nillable="true" type="xs:short"/>
+                    <xs:element minOccurs="0" name="name" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="netAgentPort" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="operatorId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="pcnvrId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="rtpTcpBasePort" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="rtpUdpBasePort" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="rtspPort" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="searchPort" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="secondIp" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="strRev1" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="strRev2" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="strXmlRev" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="udpPortCount" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="updateTime" nillable="true" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="useSoftDog" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="vrmId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="webPort" nillable="true" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="PtzServerDTO">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="controlUnitId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="createTime" nillable="true" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="ctrlPort" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="indexCode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="ipAddr" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="name" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="netAgentPort" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="netZoneId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="operatorId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="port" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="ptzServerId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="strXmlRev" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="updateTime" nillable="true" type="xs:dateTime"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="TalkServerDTO">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="controlUnitId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="createTime" nillable="true" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="ctrlPort" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="indexCode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="ipAddr" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="name" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="netAgentPort" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="netZoneId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="operatorId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="overTime" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="port" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="strXmlRev" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="talkServerId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="updateTime" nillable="true" type="xs:dateTime"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="VrbServerDTO">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="controlUnitId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="ctrlPort" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="ftpPort" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="httpMinSize" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="httpPort" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="indexCode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="ipAddr" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="name" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="netZoneId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="password" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="rtspPort" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="rtspTcpPort" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="rtspUdpCount" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="rtspUdpPort" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="shareFlag" nillable="true" type="xs:short"/>
+                    <xs:element minOccurs="0" name="snmpPort" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="storePath" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="strRev1" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="strXmlRev" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="user" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="vrbServerId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="webServicePort" nillable="true" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="VrmServerDTO">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="controlUnitId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="createTime" nillable="true" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="ctrlPort" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="freeSpace" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="indexCode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="intRev1" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="intRev2" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="ipAddr" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="maxRecordTask" nillable="true" type="xs:short"/>
+                    <xs:element minOccurs="0" name="maxTaskPerIpsan" nillable="true" type="xs:short"/>
+                    <xs:element minOccurs="0" name="maxVodPerIpsan" nillable="true" type="xs:short"/>
+                    <xs:element minOccurs="0" name="name" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="netAgentPort" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="nvtStorePort" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="operatorId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="rtpTcpBasePort" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="rtpUdpBasePort" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="rtspPort" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="searchPort" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="secondIp" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="sequenceIdx" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="shareFlag" nillable="true" type="xs:short"/>
+                    <xs:element minOccurs="0" name="strRev1" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="strRev2" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="strXmlRev" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="totalSpace" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="udpPortCount" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="updateTime" nillable="true" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="useSoftDog" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="vrmId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="webPort" nillable="true" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="RegionInfoResult">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="errorCode" type="xs:int"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="regionInfoArray" nillable="true" type="ax234:RegionInfoDTO"/>
+                    <xs:element minOccurs="0" name="result" type="xs:boolean"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="RegionInfoDTO">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="cascadeInfos" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="cascadeShareIds" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="cmsCascadeId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="controlUnitId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="createTime" nillable="true" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="indexCode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="intRev1" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="intRev2" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="name" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="operatorId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="parentId" nillable="true" type="xs:int"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="privilegeCode" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="regionId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="regionLevel" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="sequenceIdx" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="strRev1" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="strRev2" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="strXmlRev" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="streamSvId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="updateTime" nillable="true" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="useStreamSv" nillable="true" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="CommonPageReq">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="pageItems" type="xs:int"/>
+                    <xs:element minOccurs="0" name="reqPage" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="DeviceResult">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="allRow" type="xs:int"/>
+                    <xs:element minOccurs="0" name="currentPage" type="xs:int"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="deviceArray" nillable="true" type="ax234:DeviceDTO"/>
+                    <xs:element minOccurs="0" name="errorCode" type="xs:int"/>
+                    <xs:element minOccurs="0" name="pageSize" type="xs:int"/>
+                    <xs:element minOccurs="0" name="result" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="totalPage" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="DeviceDTO">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="controlUnitId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="curState" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="deviceId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="dnsAddr" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="dnsPort" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="indexCode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="name" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="networkAddr" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="networkPort" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="pagServerId" nillable="true" type="xs:int"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="privilegeCode" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="registerType" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="serialNo" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="talkChanCount" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="typeCode" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="userName" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="userPwd" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="ControlUnitsResult">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="controlUnitArray" nillable="true" type="ax234:ControlUnitDTO"/>
+                    <xs:element minOccurs="0" name="errorCode" type="xs:int"/>
+                    <xs:element minOccurs="0" name="result" type="xs:boolean"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="ControlUnitDTO">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="cascadeInfos" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="cascadeShareIds" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="cmsCascadeId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="cmsCascadeType" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="controlUnitId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="createTime" nillable="true" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="description" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="indexCode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="intRev1" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="intRev2" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="name" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="operatorId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="parentId" nillable="true" type="xs:int"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="privilegeCode" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="sequenceIdx" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="strRev1" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="strRev2" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="strXmlRev" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="streamSvId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="unitLevel" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="updateTime" nillable="true" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="useStreamSv" nillable="true" type="xs:boolean"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="CameraInfoResult">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="cameraInfoDTOArray" nillable="true" type="ax234:CameraInfoDTO"/>
+                    <xs:element minOccurs="0" name="errorCode" type="xs:int"/>
+                    <xs:element minOccurs="0" name="result" type="xs:boolean"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="CameraInfoDTO">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="cameraId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="cameraType" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="chanNum" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="cmsCascadeId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="connectType" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="createTime" nillable="true" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="decodeTag" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="deviceId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="has_backup" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="indexCode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="intRev1" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="intRev2" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="mainBitRate" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="mainRateType" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="matrixCode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="name" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="operatorId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="pCode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="pixel" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="privilegeCode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="ptzControlType" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="ptzType" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="recLacation" nillable="true" type="xs:string"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="recLacationArray" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="regionId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="sequenceIdx" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="shareFlag" nillable="true" type="xs:short"/>
+                    <xs:element minOccurs="0" name="sound" nillable="true" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="strRev1" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="strRev2" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="strXmlRev" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="streamSvrId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="streamSvrIdForVrm" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="streamType" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="subBitRate" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="subRateType" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="updateTime" nillable="true" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="vrmId" nillable="true" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://simple.bo.webservice.cms.hikvision.com/xsd">
+            <xs:complexType name="VrmServerResult">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="errorCode" type="xs:int"/>
+                    <xs:element minOccurs="0" name="result" type="xs:boolean"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="vrmServerDTOArray" nillable="true" type="ax236:VrmServerDTO1"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="VrmServerDTO1">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="controlUnitId" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="indexCode" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="ipAddr" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="name" nillable="true" type="xs:string"/>
+                    <xs:element minOccurs="0" name="port" nillable="true" type="xs:int"/>
+                    <xs:element minOccurs="0" name="vrmId" nillable="true" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+        <xs:schema xmlns:ax237="http://simple.bo.webservice.cms.hikvision.com/xsd" xmlns:ax235="http://bo.webservice.cms.hikvision.com/xsd" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://webservice.cms.hikvision.com">
+            <xs:import namespace="http://bo.webservice.cms.hikvision.com/xsd"/>
+            <xs:import namespace="http://simple.bo.webservice.cms.hikvision.com/xsd"/>
+            <xs:element name="userOnlineHeartbeat">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="userOnlineHeartbeatResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax235:CommonResult"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="userLogout">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="userLogoutResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax235:LogoutResult"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="userLogin">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="userName" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="pwd" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="clientIp" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="clientPort" type="xs:int"/>
+                        <xs:element minOccurs="0" name="cmsUrl" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="userLoginResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax235:LoginResult"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="setCmsTime">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="time" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="setCmsTimeResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax235:CmsTimingResult"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getVrmRecordScheduleListForCMS">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getVrmRecordScheduleListForCMSResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax235:VrmRecordScheduleListForPMS"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getPreviewParam">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="cameraIndexCode" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getPreviewParamResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax235:PreviewResult"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getPlaybackParam">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="req" nillable="true" type="ax235:PlaybackParamReq"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getPlaybackParamResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax235:PlaybackResult"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getCameraInfoByDeviceInfo">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="indexCode" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getCameraInfoByDeviceInfoResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax235:CameraResult"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAllVrmServer">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAllVrmServerResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax237:VrmServerResult"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAllStreamServer">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAllStreamServerResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax235:StreamServerResult"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAllServers">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAllServersResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax235:ServerResult"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAllRegionInfoForList">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAllRegionInfoForListResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax235:RegionInfoResult"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAllDevice">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="req" nillable="true" type="ax235:CommonPageReq"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAllDeviceResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax235:DeviceResult"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAllControlCenterForList">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAllControlCenterForListResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax235:ControlUnitsResult"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAllCameraInfoForList">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAllCameraInfoForListResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax235:CameraInfoResult"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAllCamera">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="sessionId" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="req" nillable="true" type="ax235:CommonPageReq"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="getAllCameraResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="ax235:CameraResult"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="getCameraInfoByDeviceInfoRequest">
+        <wsdl:part name="parameters" element="ns:getCameraInfoByDeviceInfo"/>
+    </wsdl:message>
+    <wsdl:message name="getCameraInfoByDeviceInfoResponse">
+        <wsdl:part name="parameters" element="ns:getCameraInfoByDeviceInfoResponse"/>
+    </wsdl:message>
+    <wsdl:message name="userLogoutRequest">
+        <wsdl:part name="parameters" element="ns:userLogout"/>
+    </wsdl:message>
+    <wsdl:message name="userLogoutResponse">
+        <wsdl:part name="parameters" element="ns:userLogoutResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getAllControlCenterForListRequest">
+        <wsdl:part name="parameters" element="ns:getAllControlCenterForList"/>
+    </wsdl:message>
+    <wsdl:message name="getAllControlCenterForListResponse">
+        <wsdl:part name="parameters" element="ns:getAllControlCenterForListResponse"/>
+    </wsdl:message>
+    <wsdl:message name="userLoginRequest">
+        <wsdl:part name="parameters" element="ns:userLogin"/>
+    </wsdl:message>
+    <wsdl:message name="userLoginResponse">
+        <wsdl:part name="parameters" element="ns:userLoginResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getAllVrmServerRequest">
+        <wsdl:part name="parameters" element="ns:getAllVrmServer"/>
+    </wsdl:message>
+    <wsdl:message name="getAllVrmServerResponse">
+        <wsdl:part name="parameters" element="ns:getAllVrmServerResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getAllServersRequest">
+        <wsdl:part name="parameters" element="ns:getAllServers"/>
+    </wsdl:message>
+    <wsdl:message name="getAllServersResponse">
+        <wsdl:part name="parameters" element="ns:getAllServersResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getAllCameraInfoForListRequest">
+        <wsdl:part name="parameters" element="ns:getAllCameraInfoForList"/>
+    </wsdl:message>
+    <wsdl:message name="getAllCameraInfoForListResponse">
+        <wsdl:part name="parameters" element="ns:getAllCameraInfoForListResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getVrmRecordScheduleListForCMSRequest">
+        <wsdl:part name="parameters" element="ns:getVrmRecordScheduleListForCMS"/>
+    </wsdl:message>
+    <wsdl:message name="getVrmRecordScheduleListForCMSResponse">
+        <wsdl:part name="parameters" element="ns:getVrmRecordScheduleListForCMSResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getPreviewParamRequest">
+        <wsdl:part name="parameters" element="ns:getPreviewParam"/>
+    </wsdl:message>
+    <wsdl:message name="getPreviewParamResponse">
+        <wsdl:part name="parameters" element="ns:getPreviewParamResponse"/>
+    </wsdl:message>
+    <wsdl:message name="setCmsTimeRequest">
+        <wsdl:part name="parameters" element="ns:setCmsTime"/>
+    </wsdl:message>
+    <wsdl:message name="setCmsTimeResponse">
+        <wsdl:part name="parameters" element="ns:setCmsTimeResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getAllRegionInfoForListRequest">
+        <wsdl:part name="parameters" element="ns:getAllRegionInfoForList"/>
+    </wsdl:message>
+    <wsdl:message name="getAllRegionInfoForListResponse">
+        <wsdl:part name="parameters" element="ns:getAllRegionInfoForListResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getAllStreamServerRequest">
+        <wsdl:part name="parameters" element="ns:getAllStreamServer"/>
+    </wsdl:message>
+    <wsdl:message name="getAllStreamServerResponse">
+        <wsdl:part name="parameters" element="ns:getAllStreamServerResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getPlaybackParamRequest">
+        <wsdl:part name="parameters" element="ns:getPlaybackParam"/>
+    </wsdl:message>
+    <wsdl:message name="getPlaybackParamResponse">
+        <wsdl:part name="parameters" element="ns:getPlaybackParamResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getAllDeviceRequest">
+        <wsdl:part name="parameters" element="ns:getAllDevice"/>
+    </wsdl:message>
+    <wsdl:message name="getAllDeviceResponse">
+        <wsdl:part name="parameters" element="ns:getAllDeviceResponse"/>
+    </wsdl:message>
+    <wsdl:message name="getAllCameraRequest">
+        <wsdl:part name="parameters" element="ns:getAllCamera"/>
+    </wsdl:message>
+    <wsdl:message name="getAllCameraResponse">
+        <wsdl:part name="parameters" element="ns:getAllCameraResponse"/>
+    </wsdl:message>
+    <wsdl:message name="userOnlineHeartbeatRequest">
+        <wsdl:part name="parameters" element="ns:userOnlineHeartbeat"/>
+    </wsdl:message>
+    <wsdl:message name="userOnlineHeartbeatResponse">
+        <wsdl:part name="parameters" element="ns:userOnlineHeartbeatResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="CmsServicePortType">
+        <wsdl:operation name="getCameraInfoByDeviceInfo">
+            <wsdl:input message="ns:getCameraInfoByDeviceInfoRequest" wsaw:Action="urn:getCameraInfoByDeviceInfo"/>
+            <wsdl:output message="ns:getCameraInfoByDeviceInfoResponse" wsaw:Action="urn:getCameraInfoByDeviceInfoResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="userLogout">
+            <wsdl:input message="ns:userLogoutRequest" wsaw:Action="urn:userLogout"/>
+            <wsdl:output message="ns:userLogoutResponse" wsaw:Action="urn:userLogoutResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getAllControlCenterForList">
+            <wsdl:input message="ns:getAllControlCenterForListRequest" wsaw:Action="urn:getAllControlCenterForList"/>
+            <wsdl:output message="ns:getAllControlCenterForListResponse" wsaw:Action="urn:getAllControlCenterForListResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="userLogin">
+            <wsdl:input message="ns:userLoginRequest" wsaw:Action="urn:userLogin"/>
+            <wsdl:output message="ns:userLoginResponse" wsaw:Action="urn:userLoginResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getAllVrmServer">
+            <wsdl:input message="ns:getAllVrmServerRequest" wsaw:Action="urn:getAllVrmServer"/>
+            <wsdl:output message="ns:getAllVrmServerResponse" wsaw:Action="urn:getAllVrmServerResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getAllServers">
+            <wsdl:input message="ns:getAllServersRequest" wsaw:Action="urn:getAllServers"/>
+            <wsdl:output message="ns:getAllServersResponse" wsaw:Action="urn:getAllServersResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getAllCameraInfoForList">
+            <wsdl:input message="ns:getAllCameraInfoForListRequest" wsaw:Action="urn:getAllCameraInfoForList"/>
+            <wsdl:output message="ns:getAllCameraInfoForListResponse" wsaw:Action="urn:getAllCameraInfoForListResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getVrmRecordScheduleListForCMS">
+            <wsdl:input message="ns:getVrmRecordScheduleListForCMSRequest" wsaw:Action="urn:getVrmRecordScheduleListForCMS"/>
+            <wsdl:output message="ns:getVrmRecordScheduleListForCMSResponse" wsaw:Action="urn:getVrmRecordScheduleListForCMSResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getPreviewParam">
+            <wsdl:input message="ns:getPreviewParamRequest" wsaw:Action="urn:getPreviewParam"/>
+            <wsdl:output message="ns:getPreviewParamResponse" wsaw:Action="urn:getPreviewParamResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="setCmsTime">
+            <wsdl:input message="ns:setCmsTimeRequest" wsaw:Action="urn:setCmsTime"/>
+            <wsdl:output message="ns:setCmsTimeResponse" wsaw:Action="urn:setCmsTimeResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getAllRegionInfoForList">
+            <wsdl:input message="ns:getAllRegionInfoForListRequest" wsaw:Action="urn:getAllRegionInfoForList"/>
+            <wsdl:output message="ns:getAllRegionInfoForListResponse" wsaw:Action="urn:getAllRegionInfoForListResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getAllStreamServer">
+            <wsdl:input message="ns:getAllStreamServerRequest" wsaw:Action="urn:getAllStreamServer"/>
+            <wsdl:output message="ns:getAllStreamServerResponse" wsaw:Action="urn:getAllStreamServerResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getPlaybackParam">
+            <wsdl:input message="ns:getPlaybackParamRequest" wsaw:Action="urn:getPlaybackParam"/>
+            <wsdl:output message="ns:getPlaybackParamResponse" wsaw:Action="urn:getPlaybackParamResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getAllDevice">
+            <wsdl:input message="ns:getAllDeviceRequest" wsaw:Action="urn:getAllDevice"/>
+            <wsdl:output message="ns:getAllDeviceResponse" wsaw:Action="urn:getAllDeviceResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="getAllCamera">
+            <wsdl:input message="ns:getAllCameraRequest" wsaw:Action="urn:getAllCamera"/>
+            <wsdl:output message="ns:getAllCameraResponse" wsaw:Action="urn:getAllCameraResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="userOnlineHeartbeat">
+            <wsdl:input message="ns:userOnlineHeartbeatRequest" wsaw:Action="urn:userOnlineHeartbeat"/>
+            <wsdl:output message="ns:userOnlineHeartbeatResponse" wsaw:Action="urn:userOnlineHeartbeatResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="CmsServiceSoap11Binding" type="ns:CmsServicePortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="getCameraInfoByDeviceInfo">
+            <soap:operation soapAction="urn:getCameraInfoByDeviceInfo" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="userLogout">
+            <soap:operation soapAction="urn:userLogout" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getAllControlCenterForList">
+            <soap:operation soapAction="urn:getAllControlCenterForList" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="userLogin">
+            <soap:operation soapAction="urn:userLogin" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getAllServers">
+            <soap:operation soapAction="urn:getAllServers" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getAllVrmServer">
+            <soap:operation soapAction="urn:getAllVrmServer" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getAllCameraInfoForList">
+            <soap:operation soapAction="urn:getAllCameraInfoForList" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="setCmsTime">
+            <soap:operation soapAction="urn:setCmsTime" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getVrmRecordScheduleListForCMS">
+            <soap:operation soapAction="urn:getVrmRecordScheduleListForCMS" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getPreviewParam">
+            <soap:operation soapAction="urn:getPreviewParam" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getAllRegionInfoForList">
+            <soap:operation soapAction="urn:getAllRegionInfoForList" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getAllStreamServer">
+            <soap:operation soapAction="urn:getAllStreamServer" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getPlaybackParam">
+            <soap:operation soapAction="urn:getPlaybackParam" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getAllDevice">
+            <soap:operation soapAction="urn:getAllDevice" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getAllCamera">
+            <soap:operation soapAction="urn:getAllCamera" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="userOnlineHeartbeat">
+            <soap:operation soapAction="urn:userOnlineHeartbeat" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="CmsServiceSoap12Binding" type="ns:CmsServicePortType">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="getCameraInfoByDeviceInfo">
+            <soap12:operation soapAction="urn:getCameraInfoByDeviceInfo" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="userLogout">
+            <soap12:operation soapAction="urn:userLogout" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getAllControlCenterForList">
+            <soap12:operation soapAction="urn:getAllControlCenterForList" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="userLogin">
+            <soap12:operation soapAction="urn:userLogin" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getAllServers">
+            <soap12:operation soapAction="urn:getAllServers" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getAllVrmServer">
+            <soap12:operation soapAction="urn:getAllVrmServer" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getAllCameraInfoForList">
+            <soap12:operation soapAction="urn:getAllCameraInfoForList" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="setCmsTime">
+            <soap12:operation soapAction="urn:setCmsTime" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getVrmRecordScheduleListForCMS">
+            <soap12:operation soapAction="urn:getVrmRecordScheduleListForCMS" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getPreviewParam">
+            <soap12:operation soapAction="urn:getPreviewParam" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getAllRegionInfoForList">
+            <soap12:operation soapAction="urn:getAllRegionInfoForList" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getAllStreamServer">
+            <soap12:operation soapAction="urn:getAllStreamServer" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getPlaybackParam">
+            <soap12:operation soapAction="urn:getPlaybackParam" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getAllDevice">
+            <soap12:operation soapAction="urn:getAllDevice" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getAllCamera">
+            <soap12:operation soapAction="urn:getAllCamera" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="userOnlineHeartbeat">
+            <soap12:operation soapAction="urn:userOnlineHeartbeat" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="CmsService">
+        <wsdl:port name="CmsServiceHttpSoap11Endpoint" binding="ns:CmsServiceSoap11Binding">
+            <soap:address location="http://101.231.188.174:80/services/CmsService.CmsServiceHttpSoap11Endpoint/"/>
+        </wsdl:port>
+        <wsdl:port name="CmsServiceHttpSoap12Endpoint" binding="ns:CmsServiceSoap12Binding">
+            <soap12:address location="http://101.231.188.174:80/services/CmsService.CmsServiceHttpSoap12Endpoint/"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

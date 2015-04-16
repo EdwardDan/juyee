@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.justonetech.biz.domain">
+	<class
+		name="OaBbs"
+		table="OA_BBS"
+	>
+		
+		<meta attribute="sync-DAO">false</meta>
+		<meta attribute="sync-jsp">true</meta>
+		<meta attribute="sync-boolean">get</meta>
+		<meta attribute="treeable">false</meta>
+		<meta attribute="projectable">false</meta>
+        <meta attribute="tableName">员工论坛</meta>
+        <meta attribute="tableComment">员工论坛</meta>
+	    <meta attribute="sync-templatePatterns">list\w*</meta>
+        <meta attribute="sub-system">oa</meta>
+
+		<id
+			name="id"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="com.justonetech.core.orm.hibernate.LongIdGenerator"/>
+		</id>
+
+		<property
+			name="typeName"
+			column="TYPE_NAME"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">类型中文描述(冗余)</meta>
+            <meta attribute="ColumnComment">类型中文描述(冗余)</meta>
+        </property>
+
+		<property
+			name="title"
+			column="TITLE"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">主题名称</meta>
+            <meta attribute="ColumnComment">主题名称</meta>
+        </property>
+
+		<property
+			name="content"
+			column="CONTENT"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">主要内容</meta>
+            <meta attribute="ColumnComment">主要内容</meta>
+        </property>
+
+		<property
+			name="visitTimes"
+			column="VISIT_TIMES"
+			type="integer"
+			not-null="false"
+			length="8"
+        >
+            <meta attribute="ColumnName">访问次数</meta>
+            <meta attribute="ColumnComment">访问次数</meta>
+        </property>
+
+		<property
+			name="createTime"
+			column="CREATE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">创建时间</meta>
+            <meta attribute="ColumnComment">创建时间</meta>
+        </property>
+
+		<property
+			name="createUser"
+			column="CREATE_USER"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">创建用户名</meta>
+            <meta attribute="ColumnComment">创建用户名</meta>
+        </property>
+
+		<property
+			name="updateTime"
+			column="UPDATE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">更新时间</meta>
+            <meta attribute="ColumnComment">更新时间</meta>
+        </property>
+
+		<property
+			name="updateUser"
+			column="UPDATE_USER"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">更新用户名</meta>
+            <meta attribute="ColumnComment">更新用户名</meta>
+        </property>
+
+		<property
+			name="personName"
+			column="PERSON_NAME"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">发布人姓名(冗余)</meta>
+            <meta attribute="ColumnComment">发布人姓名(冗余)</meta>
+        </property>
+
+		<property
+			name="isValid"
+			column="IS_VALID"
+			type="java.lang.Boolean"
+			not-null="false"
+			length="1"
+        >
+            <meta attribute="ColumnName">是否有效</meta>
+            <meta attribute="ColumnComment">是否有效</meta>
+        </property>
+
+		<property
+			name="isTop"
+			column="IS_TOP"
+			type="java.lang.Boolean"
+			not-null="false"
+			length="1"
+        >
+            <meta attribute="ColumnName">是否精华</meta>
+            <meta attribute="ColumnComment">是否精华</meta>
+        </property>
+
+		<property
+			name="replyTimes"
+			column="REPLY_TIMES"
+			type="integer"
+			not-null="false"
+			length="8"
+        >
+            <meta attribute="ColumnName">回复次数</meta>
+            <meta attribute="ColumnComment">回复次数</meta>
+        </property>
+
+		<property
+			name="deptName"
+			column="DEPT_NAME"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">所属部门名称(冗余)</meta>
+            <meta attribute="ColumnComment">所属部门名称(冗余)</meta>
+        </property>
+
+		<many-to-one
+			name="document"
+			column="DOCUMENT_ID"
+			class="DocDocument"
+			not-null="false"
+		>
+		</many-to-one>
+		<many-to-one
+			name="type"
+			column="TYPE_ID"
+			class="com.justonetech.system.domain.SysCodeDetail"
+			not-null="false"
+		>
+		</many-to-one>
+		<many-to-one
+			name="parent"
+			column="PARENT_ID"
+			class="OaBbs"
+			not-null="false"
+		>
+		</many-to-one>
+	
+
+		<set name="oaBbs" inverse="true" order-by="create_time desc">
+			<key column="PARENT_ID"/>
+			<one-to-many class="OaBbs"/>
+		</set>
+
+	</class>	
+    <query name="oabbs_all_data_query">
+        <![CDATA[FROM OaBbs]]>
+    </query>
+</hibernate-mapping>

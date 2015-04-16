@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.justonetech.biz.domain">
+	<class
+		name="ProjectBidSignDept"
+		table="PROJECT_BID_SIGN_DEPT"
+	>
+		
+		<meta attribute="sync-DAO">false</meta>
+		<meta attribute="sync-jsp">true</meta>
+		<meta attribute="sync-boolean">get</meta>
+		<meta attribute="treeable">false</meta>
+		<meta attribute="projectable">false</meta>
+        <meta attribute="tableName">招标报名单位</meta>
+        <meta attribute="tableComment">招标报名单位</meta>
+	    <meta attribute="sync-templatePatterns">list\w*</meta>
+        <meta attribute="sub-system">project</meta>
+
+		<id
+			name="id"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="com.justonetech.core.orm.hibernate.LongIdGenerator"/>
+		</id>
+
+        <property
+                name="isAfford"
+                column="IS_AFFORD"
+                type="java.lang.Long"
+                not-null="false"
+                length="10"
+                >
+            <meta attribute="ColumnName">是否已缴纳保证金</meta>
+            <meta attribute="ColumnComment">是否已缴纳保证金</meta>
+        </property>
+
+        <property
+                name="needBack"
+                column="NEED_BACK"
+                type="java.lang.Long"
+                not-null="false"
+                length="10"
+                >
+            <meta attribute="ColumnName">是否需要退款</meta>
+            <meta attribute="ColumnComment">是否需要退款</meta>
+        </property>
+
+		<property
+			name="signUnit"
+			column="SIGN_UNIT"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">报名单位</meta>
+            <meta attribute="ColumnComment">报名单位</meta>
+        </property>
+
+		<property
+			name="linkPerson"
+			column="LINK_PERSON"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">联系人</meta>
+            <meta attribute="ColumnComment">联系人</meta>
+        </property>
+
+		<property
+			name="linkTel"
+			column="LINK_TEL"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">联系电话</meta>
+            <meta attribute="ColumnComment">联系电话</meta>
+        </property>
+
+		<property
+			name="signDate"
+			column="SIGN_DATE"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">报名时间</meta>
+            <meta attribute="ColumnComment">报名时间</meta>
+        </property>
+
+		<property
+			name="payDate"
+			column="PAY_DATE"
+			type="date"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">缴纳时间</meta>
+            <meta attribute="ColumnComment">缴纳时间</meta>
+        </property>
+
+		<property
+			name="payAccount"
+			column="PAY_ACCOUNT"
+			type="java.lang.Double"
+			not-null="false"
+			length="12"
+        >
+            <meta attribute="ColumnName">缴纳金额</meta>
+            <meta attribute="ColumnComment">缴纳金额</meta>
+        </property>
+
+		<property
+			name="returnAccount"
+			column="RETURN_ACCOUNT"
+			type="java.lang.Double"
+			not-null="false"
+			length="12"
+        >
+            <meta attribute="ColumnName">退还金额</meta>
+            <meta attribute="ColumnComment">退还金额</meta>
+        </property>
+
+		<property
+			name="returnDate"
+			column="RETURN_DATE"
+			type="date"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">退还日期</meta>
+            <meta attribute="ColumnComment">退还日期</meta>
+        </property>
+
+		<property
+			name="createTime"
+			column="CREATE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">创建时间</meta>
+            <meta attribute="ColumnComment">创建时间</meta>
+        </property>
+
+		<property
+			name="createUser"
+			column="CREATE_USER"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">创建用户名</meta>
+            <meta attribute="ColumnComment">创建用户名</meta>
+        </property>
+
+		<property
+			name="updateTime"
+			column="UPDATE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">更新时间</meta>
+            <meta attribute="ColumnComment">更新时间</meta>
+        </property>
+
+		<property
+			name="updateUser"
+			column="UPDATE_USER"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">更新用户名</meta>
+            <meta attribute="ColumnComment">更新用户名</meta>
+        </property>
+
+		<many-to-one
+			name="projectBidSign"
+			column="PROJECT_BID_SIGN_ID"
+			class="ProjectBidSign"
+			not-null="false"
+		>
+		</many-to-one>
+
+	</class>	
+    <query name="projectbidsigndept_all_data_query">
+        <![CDATA[FROM ProjectBidSignDept]]>
+    </query>
+</hibernate-mapping>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.justonetech.biz.domain">
+	<class
+		name="ShareProJlInfoLog"
+		table="SHARE_PRO_JL_INFO_LOG"
+	>
+		
+		<meta attribute="sync-DAO">false</meta>
+		<meta attribute="sync-jsp">true</meta>
+		<meta attribute="sync-boolean">get</meta>
+		<meta attribute="treeable">false</meta>
+		<meta attribute="projectable">false</meta>
+        <meta attribute="tableName">施工监理承发包信息日志</meta>
+        <meta attribute="tableComment">施工监理承发包信息日志</meta>
+	    <meta attribute="sync-templatePatterns">list\w*</meta>
+        <meta attribute="sub-system">share</meta>
+
+		<id
+			name="id"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="com.justonetech.core.orm.hibernate.LongIdGenerator"/>
+		</id>
+
+		<property
+			name="bjbh"
+			column="BJBH"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">报建编号</meta>
+            <meta attribute="ColumnComment">报建编号</meta>
+        </property>
+
+		<property
+			name="bdh"
+			column="BDH"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">标段号</meta>
+            <meta attribute="ColumnComment">标段号</meta>
+        </property>
+
+		<property
+			name="updateTime"
+			column="UPDATE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">更新时间</meta>
+            <meta attribute="ColumnComment">更新时间</meta>
+        </property>
+
+		<property
+			name="updateStatus"
+			column="UPDATE_STATUS"
+			type="string"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">更新状态 0更新，1 删除</meta>
+            <meta attribute="ColumnComment">更新状态 0更新，1 删除</meta>
+        </property>
+
+
+	</class>	
+    <query name="shareprojlinfolog_all_data_query">
+        <![CDATA[FROM ShareProJlInfoLog]]>
+    </query>
+</hibernate-mapping>

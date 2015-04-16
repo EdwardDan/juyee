@@ -1,0 +1,133 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions name="MonitorWebServiceImplService" targetNamespace="http://monitor.webservice.pagd.justonetech.com/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://monitor.webservice.pagd.justonetech.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <wsdl:types>
+        <xs:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://monitor.webservice.pagd.justonetech.com/" xmlns:tns="http://monitor.webservice.pagd.justonetech.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <xs:element name="getMonitorList" type="tns:getMonitorList"/>
+            <xs:element name="getMonitorListResponse" type="tns:getMonitorListResponse"/>
+            <xs:element name="getMonitorService" type="tns:getMonitorService"/>
+            <xs:element name="getMonitorServiceResponse" type="tns:getMonitorServiceResponse"/>
+            <xs:complexType name="getMonitorList">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="arg0" type="tns:monitorParam"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="monitorParam">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="bjbh" type="xs:string"/>
+                    <xs:element minOccurs="0" name="gdbh" type="xs:string"/>
+                    <xs:element minOccurs="0" name="qxbh" type="xs:string"/>
+                    <xs:element minOccurs="0" name="qydm" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="getMonitorListResponse">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:monitor"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="monitor">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="gdbh" type="xs:string"/>
+                    <xs:element minOccurs="0" name="guid" type="xs:string"/>
+                    <xs:element minOccurs="0" name="monRegion" type="xs:string"/>
+                    <xs:element minOccurs="0" name="name" type="xs:string"/>
+                    <xs:element minOccurs="0" name="settingPosition" type="xs:string"/>
+                    <xs:element minOccurs="0" name="type" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="getMonitorService">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="getMonitorServiceResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="return" type="tns:monitorService"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="monitorService">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="loginName" type="xs:string"/>
+                    <xs:element minOccurs="0" name="loginPassword" type="xs:string"/>
+                    <xs:element minOccurs="0" name="port" type="xs:long"/>
+                    <xs:element minOccurs="0" name="serverIp" type="xs:string"/>
+                    <xs:element minOccurs="0" name="sp" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="Exception" type="tns:Exception"/>
+            <xs:complexType name="Exception">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="message" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="getMonitorService">
+        <wsdl:part element="tns:getMonitorService" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getMonitorServiceResponse">
+        <wsdl:part element="tns:getMonitorServiceResponse" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getMonitorList">
+        <wsdl:part element="tns:getMonitorList" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getMonitorListResponse">
+        <wsdl:part element="tns:getMonitorListResponse" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="Exception">
+        <wsdl:part element="tns:Exception" name="Exception">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="MonitorWebService">
+        <wsdl:operation name="getMonitorList">
+            <wsdl:input message="tns:getMonitorList" name="getMonitorList">
+            </wsdl:input>
+            <wsdl:output message="tns:getMonitorListResponse" name="getMonitorListResponse">
+            </wsdl:output>
+            <wsdl:fault message="tns:Exception" name="Exception">
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getMonitorService">
+            <wsdl:input message="tns:getMonitorService" name="getMonitorService">
+            </wsdl:input>
+            <wsdl:output message="tns:getMonitorServiceResponse" name="getMonitorServiceResponse">
+            </wsdl:output>
+            <wsdl:fault message="tns:Exception" name="Exception">
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="MonitorWebServiceImplServiceSoapBinding" type="tns:MonitorWebService">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="getMonitorList">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="getMonitorList">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getMonitorListResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="Exception">
+                <soap:fault name="Exception" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="getMonitorService">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="getMonitorService">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getMonitorServiceResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="Exception">
+                <soap:fault name="Exception" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="MonitorWebServiceImplService">
+        <wsdl:port binding="tns:MonitorWebServiceImplServiceSoapBinding" name="MonitorWebServiceImplPort">
+            <soap:address location="http://www.pingan365.net/cxf/monitorWebService"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

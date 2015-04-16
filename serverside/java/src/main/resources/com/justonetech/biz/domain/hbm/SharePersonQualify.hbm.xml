@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.justonetech.biz.domain">
+	<class
+		name="SharePersonQualify"
+		table="SHARE_PERSON_QUALIFY"
+	>
+		
+		<meta attribute="sync-DAO">false</meta>
+		<meta attribute="sync-jsp">true</meta>
+		<meta attribute="sync-boolean">get</meta>
+		<meta attribute="treeable">false</meta>
+		<meta attribute="projectable">false</meta>
+        <meta attribute="tableName">注册人员资质证书</meta>
+        <meta attribute="tableComment">注册人员资质证书</meta>
+	    <meta attribute="sync-templatePatterns">list\w*</meta>
+        <meta attribute="sub-system">share</meta>
+
+		<id
+			name="id"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="com.justonetech.core.orm.hibernate.LongIdGenerator"/>
+		</id>
+
+		<property
+			name="personId"
+			column="PERSON_ID"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">人员标识</meta>
+            <meta attribute="ColumnComment">人员标识</meta>
+        </property>
+
+		<property
+			name="personName"
+			column="PERSON_NAME"
+			type="string"
+			not-null="false"
+			length="40"
+        >
+            <meta attribute="ColumnName">姓名</meta>
+            <meta attribute="ColumnComment">姓名</meta>
+        </property>
+
+		<property
+			name="personCardType"
+			column="PERSON_CARD_TYPE"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">证件类型</meta>
+            <meta attribute="ColumnComment">证件类型</meta>
+        </property>
+
+		<property
+			name="personCardTypeDesc"
+			column="PERSON_CARD_TYPE_DESC"
+			type="string"
+			not-null="false"
+			length="40"
+        >
+            <meta attribute="ColumnName">证件类型描述</meta>
+            <meta attribute="ColumnComment">证件类型描述</meta>
+        </property>
+
+		<property
+			name="cardNo"
+			column="CARD_NO"
+			type="string"
+			not-null="false"
+			length="20"
+        >
+            <meta attribute="ColumnName">证件号</meta>
+            <meta attribute="ColumnComment">证件号</meta>
+        </property>
+
+		<property
+			name="cardNo15"
+			column="CARD_NO_15"
+			type="string"
+			not-null="false"
+			length="20"
+        >
+            <meta attribute="ColumnName">15位身份证号</meta>
+            <meta attribute="ColumnComment">15位身份证号</meta>
+        </property>
+
+		<property
+			name="personSex"
+			column="PERSON_SEX"
+			type="string"
+			not-null="false"
+			length="4"
+        >
+            <meta attribute="ColumnName">性别</meta>
+            <meta attribute="ColumnComment">性别</meta>
+        </property>
+
+		<property
+			name="personBirthDate"
+			column="PERSON_BIRTH_DATE"
+			type="date"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">出生日期</meta>
+            <meta attribute="ColumnComment">出生日期</meta>
+        </property>
+
+		<property
+			name="qualifyType"
+			column="QUALIFY_TYPE"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">注册证书类型</meta>
+            <meta attribute="ColumnComment">注册证书类型</meta>
+        </property>
+
+		<property
+			name="qualifyTypeDesc"
+			column="QUALIFY_TYPE_DESC"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">注册证书类型(中文)</meta>
+            <meta attribute="ColumnComment">注册证书类型(中文)</meta>
+        </property>
+
+		<property
+			name="qualifyLevel"
+			column="QUALIFY_LEVEL"
+			type="string"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">注册证书等级</meta>
+            <meta attribute="ColumnComment">注册证书等级</meta>
+        </property>
+
+		<property
+			name="qualifyLevelDesc"
+			column="QUALIFY_LEVEL_DESC"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">注册证书等级(中文)</meta>
+            <meta attribute="ColumnComment">注册证书等级(中文)</meta>
+        </property>
+
+		<property
+			name="regUnitName"
+			column="REG_UNIT_NAME"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">注册证书单位名称</meta>
+            <meta attribute="ColumnComment">注册证书单位名称</meta>
+        </property>
+
+		<property
+			name="regUnitCode"
+			column="REG_UNIT_CODE"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">注册单位代码</meta>
+            <meta attribute="ColumnComment">注册单位代码</meta>
+        </property>
+
+		<property
+			name="regUnitId"
+			column="REG_UNIT_ID"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">注册单位ID</meta>
+            <meta attribute="ColumnComment">注册单位ID</meta>
+        </property>
+
+		<property
+			name="regQualifyCode"
+			column="REG_QUALIFY_CODE"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">注册证书编号</meta>
+            <meta attribute="ColumnComment">注册证书编号</meta>
+        </property>
+
+		<property
+			name="regCode"
+			column="REG_CODE"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">注册号</meta>
+            <meta attribute="ColumnComment">注册号</meta>
+        </property>
+
+		<property
+			name="sealCode"
+			column="SEAL_CODE"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">印章号</meta>
+            <meta attribute="ColumnComment">印章号</meta>
+        </property>
+
+		<property
+			name="validDate"
+			column="VALID_DATE"
+			type="date"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">有效期</meta>
+            <meta attribute="ColumnComment">有效期</meta>
+        </property>
+
+		<property
+			name="regDatetime"
+			column="REG_DATETIME"
+			type="timestamp"
+			not-null="false"
+			length="16"
+        >
+            <meta attribute="ColumnName">注册时间</meta>
+            <meta attribute="ColumnComment">注册时间</meta>
+        </property>
+
+		<property
+			name="qualifyStatus"
+			column="QUALIFY_STATUS"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">证书状态</meta>
+            <meta attribute="ColumnComment">证书状态</meta>
+        </property>
+
+		<property
+			name="qualifyStatusDesc"
+			column="QUALIFY_STATUS_DESC"
+			type="string"
+			not-null="false"
+			length="20"
+        >
+            <meta attribute="ColumnName">证书状态（中文）</meta>
+            <meta attribute="ColumnComment">证书状态（中文）</meta>
+        </property>
+
+		<property
+			name="qualifyBelong"
+			column="QUALIFY_BELONG"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">证书管理属地</meta>
+            <meta attribute="ColumnComment">证书管理属地</meta>
+        </property>
+
+		<property
+			name="qualifyBelongDesc"
+			column="QUALIFY_BELONG_DESC"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">证书管理属地(中文)</meta>
+            <meta attribute="ColumnComment">证书管理属地(中文)</meta>
+        </property>
+
+		<property
+			name="jlSpecialityType1"
+			column="JL_SPECIALITY_TYPE1"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">注册监理工程师证书专业1</meta>
+            <meta attribute="ColumnComment">注册监理工程师证书专业1</meta>
+        </property>
+
+		<property
+			name="jlSpecialityTypeDesc1"
+			column="JL_SPECIALITY_TYPE_DESC1"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">注册监理工程师证书专业1(中文)</meta>
+            <meta attribute="ColumnComment">注册监理工程师证书专业1(中文)</meta>
+        </property>
+
+		<property
+			name="jlSpecialityType2"
+			column="JL_SPECIALITY_TYPE2"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">注册监理工程师证书专业2</meta>
+            <meta attribute="ColumnComment">注册监理工程师证书专业2</meta>
+        </property>
+
+		<property
+			name="jlSpecialityTypeDesc2"
+			column="JL_SPECIALITY_TYPE_DESC2"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">注册监理工程师证书专业2(中文)</meta>
+            <meta attribute="ColumnComment">注册监理工程师证书专业2(中文)</meta>
+        </property>
+
+		<property
+			name="jzSpecialityType"
+			column="JZ_SPECIALITY_TYPE"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">建造师、临时建造师专业</meta>
+            <meta attribute="ColumnComment">建造师、临时建造师专业</meta>
+        </property>
+
+		<property
+			name="jzSpecialityTypeDesc"
+			column="JZ_SPECIALITY_TYPE_DESC"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">建造师、临时建造师专业(中文)</meta>
+            <meta attribute="ColumnComment">建造师、临时建造师专业(中文)</meta>
+        </property>
+
+		<property
+			name="updateTime"
+			column="UPDATE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">中间数据库数据更新时间</meta>
+            <meta attribute="ColumnComment">中间数据库数据更新时间</meta>
+        </property>
+
+
+	</class>	
+    <query name="sharepersonqualify_all_data_query">
+        <![CDATA[FROM SharePersonQualify]]>
+    </query>
+</hibernate-mapping>

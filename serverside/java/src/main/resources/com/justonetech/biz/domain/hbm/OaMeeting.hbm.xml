@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.justonetech.biz.domain">
+	<class
+		name="OaMeeting"
+		table="OA_MEETING"
+	>
+		
+		<meta attribute="sync-DAO">false</meta>
+		<meta attribute="sync-jsp">true</meta>
+		<meta attribute="sync-boolean">get</meta>
+		<meta attribute="treeable">false</meta>
+		<meta attribute="projectable">false</meta>
+        <meta attribute="tableName">会议管理</meta>
+        <meta attribute="tableComment">会议管理</meta>
+	    <meta attribute="sync-templatePatterns">list\w*</meta>
+        <meta attribute="sub-system">car</meta>
+
+		<id
+			name="id"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="com.justonetech.core.orm.hibernate.LongIdGenerator"/>
+		</id>
+
+		<property
+			name="applyDept"
+			column="APPLY_DEPT"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">申请部门名称</meta>
+            <meta attribute="ColumnComment">申请部门名称</meta>
+        </property>
+
+		<property
+			name="applyPerson"
+			column="APPLY_PERSON"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">申请人</meta>
+            <meta attribute="ColumnComment">申请人</meta>
+        </property>
+
+		<property
+			name="roomDesc"
+			column="ROOM_DESC"
+			type="string"
+			not-null="false"
+			length="500"
+        >
+            <meta attribute="ColumnName">申请会议室中文描述</meta>
+            <meta attribute="ColumnComment">申请会议室中文描述</meta>
+        </property>
+
+		<property
+			name="useDate"
+			column="USE_DATE"
+			type="date"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">会议召开时间</meta>
+            <meta attribute="ColumnComment">会议召开时间</meta>
+        </property>
+
+		<property
+			name="useTime"
+			column="USE_TIME"
+			type="string"
+			not-null="false"
+			length="20"
+        >
+            <meta attribute="ColumnName">会议召开时间上下午</meta>
+            <meta attribute="ColumnComment">会议召开时间上下午</meta>
+        </property>
+
+		<property
+			name="personNum"
+			column="PERSON_NUM"
+			type="integer"
+			not-null="false"
+			length="4"
+        >
+            <meta attribute="ColumnName">预计参与人数</meta>
+            <meta attribute="ColumnComment">预计参与人数</meta>
+        </property>
+
+		<property
+			name="outerPersons"
+			column="OUTER_PERSONS"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">外部人员</meta>
+            <meta attribute="ColumnComment">外部人员</meta>
+        </property>
+
+		<property
+			name="title"
+			column="TITLE"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">会议主题</meta>
+            <meta attribute="ColumnComment">会议主题</meta>
+        </property>
+
+		<property
+			name="content"
+			column="CONTENT"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">会议内容</meta>
+            <meta attribute="ColumnComment">会议内容</meta>
+        </property>
+
+		<property
+			name="description"
+			column="DESCRIPTION"
+			type="string"
+			not-null="false"
+			length="500"
+        >
+            <meta attribute="ColumnName">备注</meta>
+            <meta attribute="ColumnComment">备注</meta>
+        </property>
+
+		<property
+			name="status"
+			column="STATUS"
+			type="integer"
+			not-null="false"
+			length="2"
+        >
+            <meta attribute="ColumnName">状态</meta>
+            <meta attribute="ColumnComment">状态</meta>
+        </property>
+
+		<property
+			name="auditOpinion"
+			column="AUDIT_OPINION"
+			type="string"
+			not-null="false"
+			length="1000"
+        >
+            <meta attribute="ColumnName">审核意见</meta>
+            <meta attribute="ColumnComment">审核意见</meta>
+        </property>
+
+		<property
+			name="auditTime"
+			column="AUDIT_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">审核时间</meta>
+            <meta attribute="ColumnComment">审核时间</meta>
+        </property>
+
+		<property
+			name="auditUser"
+			column="AUDIT_USER"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">审核用户名</meta>
+            <meta attribute="ColumnComment">审核用户名</meta>
+        </property>
+
+		<property
+			name="createTime"
+			column="CREATE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">创建时间</meta>
+            <meta attribute="ColumnComment">创建时间</meta>
+        </property>
+
+		<property
+			name="createUser"
+			column="CREATE_USER"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">创建用户名</meta>
+            <meta attribute="ColumnComment">创建用户名</meta>
+        </property>
+
+		<property
+			name="updateTime"
+			column="UPDATE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">更新时间</meta>
+            <meta attribute="ColumnComment">更新时间</meta>
+        </property>
+
+		<property
+			name="updateUser"
+			column="UPDATE_USER"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">更新用户名</meta>
+            <meta attribute="ColumnComment">更新用户名</meta>
+        </property>
+
+		<many-to-one
+			name="room"
+			column="ROOM_ID"
+			class="com.justonetech.system.domain.SysCodeDetail"
+			not-null="false"
+		>
+		</many-to-one>
+
+	</class>	
+    <query name="oameeting_all_data_query">
+        <![CDATA[FROM OaMeeting]]>
+    </query>
+</hibernate-mapping>

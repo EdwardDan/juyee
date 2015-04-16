@@ -1,0 +1,283 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions name="JdrwsServiceImplService" targetNamespace="http://jdrwsWebService.webService.utils.biz.justonetech.com/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://jdrwsWebService.webService.utils.biz.justonetech.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://jdrwsWebService.webService.utils.biz.justonetech.com/" xmlns:tns="http://jdrwsWebService.webService.utils.biz.justonetech.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:complexType name="jdrws">
+<xs:sequence>
+<xs:element minOccurs="0" name="bdh" type="xs:string"/>
+<xs:element minOccurs="0" name="bjbh" type="xs:string"/>
+<xs:element minOccurs="0" name="bz" type="xs:string"/>
+<xs:element minOccurs="0" name="changeTime" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="dataId" type="xs:long"/>
+<xs:element minOccurs="0" name="gcdd" type="xs:string"/>
+<xs:element minOccurs="0" name="htj" type="xs:double"/>
+<xs:element minOccurs="0" name="jdDateTime" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="jdrwsBh" type="xs:string"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="jdrwsDwGcList" nillable="true" type="tns:jdrwsDwGc"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="jdrwsDwList" nillable="true" type="tns:jdrwsDw"/>
+<xs:element minOccurs="0" name="jsdw" type="xs:string"/>
+<xs:element minOccurs="0" name="jsdwDm" type="xs:string"/>
+<xs:element minOccurs="0" name="jsdwDz" type="xs:string"/>
+<xs:element minOccurs="0" name="lxr" type="xs:string"/>
+<xs:element minOccurs="0" name="lxrDh" type="xs:string"/>
+<xs:element minOccurs="0" name="status" type="xs:string"/>
+<xs:element minOccurs="0" name="szqx" type="xs:string"/>
+<xs:element minOccurs="0" name="timeflag" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="xmlx" type="xs:string"/>
+<xs:element minOccurs="0" name="xmmc" type="xs:string"/>
+<xs:element minOccurs="0" name="yzbm" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="jdrwsDwGc">
+<xs:sequence>
+<xs:element minOccurs="0" name="changeTime" type="xs:dateTime"/>
+<xs:element name="dsCs" type="xs:int"/>
+<xs:element minOccurs="0" name="dwgcBh" type="xs:string"/>
+<xs:element minOccurs="0" name="dwgcMc" type="xs:string"/>
+<xs:element name="dxCs" type="xs:int"/>
+<xs:element minOccurs="0" name="gcLx" type="xs:string"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="jdrwsDwList" nillable="true" type="tns:jdrwsDw"/>
+<xs:element minOccurs="0" name="jgLx" type="xs:string"/>
+<xs:element minOccurs="0" name="mj" type="xs:double"/>
+<xs:element minOccurs="0" name="timeflag" type="xs:dateTime"/>
+<xs:element name="ts" type="xs:int"/>
+<xs:element minOccurs="0" name="zj" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="jdrwsDw">
+<xs:sequence>
+<xs:element minOccurs="0" name="dwDm" type="xs:string"/>
+<xs:element minOccurs="0" name="dwLx" type="xs:string"/>
+<xs:element minOccurs="0" name="dwMc" type="xs:string"/>
+<xs:element minOccurs="0" name="lxr" type="xs:string"/>
+<xs:element minOccurs="0" name="lxrDh" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="getJdrwsBhByLastTime" type="tns:getJdrwsBhByLastTime"/>
+<xs:complexType name="getJdrwsBhByLastTime">
+<xs:sequence>
+<xs:element minOccurs="0" name="arg0" type="xs:string"/>
+<xs:element minOccurs="0" name="arg1" type="xs:string"/>
+<xs:element name="arg2" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="getJdrwsBhByLastTimeResponse" type="tns:getJdrwsBhByLastTimeResponse"/>
+<xs:complexType name="getJdrwsBhByLastTimeResponse">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="getJdrwsBhByLastId" type="tns:getJdrwsBhByLastId"/>
+<xs:complexType name="getJdrwsBhByLastId">
+<xs:sequence>
+<xs:element minOccurs="0" name="arg0" type="xs:string"/>
+<xs:element minOccurs="0" name="arg1" type="xs:string"/>
+<xs:element name="arg2" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="getJdrwsBhByLastIdResponse" type="tns:getJdrwsBhByLastIdResponse"/>
+<xs:complexType name="getJdrwsBhByLastIdResponse">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="getJdrwsCountByLastTime" type="tns:getJdrwsCountByLastTime"/>
+<xs:complexType name="getJdrwsCountByLastTime">
+<xs:sequence>
+<xs:element minOccurs="0" name="arg0" type="xs:string"/>
+<xs:element minOccurs="0" name="arg1" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="getJdrwsCountByLastTimeResponse" type="tns:getJdrwsCountByLastTimeResponse"/>
+<xs:complexType name="getJdrwsCountByLastTimeResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="getJdrwsByBjbh" type="tns:getJdrwsByBjbh"/>
+<xs:complexType name="getJdrwsByBjbh">
+<xs:sequence>
+<xs:element minOccurs="0" name="arg0" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="getJdrwsByBjbhResponse" type="tns:getJdrwsByBjbhResponse"/>
+<xs:complexType name="getJdrwsByBjbhResponse">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:jdrws"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="getJdrwsCountByLastId" type="tns:getJdrwsCountByLastId"/>
+<xs:complexType name="getJdrwsCountByLastId">
+<xs:sequence>
+<xs:element minOccurs="0" name="arg0" type="xs:string"/>
+<xs:element minOccurs="0" name="arg1" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="getJdrwsCountByLastIdResponse" type="tns:getJdrwsCountByLastIdResponse"/>
+<xs:complexType name="getJdrwsCountByLastIdResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="getJdrwsByJdrwsbh" type="tns:getJdrwsByJdrwsbh"/>
+<xs:complexType name="getJdrwsByJdrwsbh">
+<xs:sequence>
+<xs:element minOccurs="0" name="arg0" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:element name="getJdrwsByJdrwsbhResponse" type="tns:getJdrwsByJdrwsbhResponse"/>
+<xs:complexType name="getJdrwsByJdrwsbhResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:jdrws"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getJdrwsBhByLastTime">
+    <wsdl:part element="tns:getJdrwsBhByLastTime" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getJdrwsByBjbhResponse">
+    <wsdl:part element="tns:getJdrwsByBjbhResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getJdrwsBhByLastTimeResponse">
+    <wsdl:part element="tns:getJdrwsBhByLastTimeResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getJdrwsCountByLastTimeResponse">
+    <wsdl:part element="tns:getJdrwsCountByLastTimeResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getJdrwsByJdrwsbh">
+    <wsdl:part element="tns:getJdrwsByJdrwsbh" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getJdrwsCountByLastIdResponse">
+    <wsdl:part element="tns:getJdrwsCountByLastIdResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getJdrwsByBjbh">
+    <wsdl:part element="tns:getJdrwsByBjbh" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getJdrwsByJdrwsbhResponse">
+    <wsdl:part element="tns:getJdrwsByJdrwsbhResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getJdrwsCountByLastId">
+    <wsdl:part element="tns:getJdrwsCountByLastId" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getJdrwsBhByLastIdResponse">
+    <wsdl:part element="tns:getJdrwsBhByLastIdResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getJdrwsCountByLastTime">
+    <wsdl:part element="tns:getJdrwsCountByLastTime" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getJdrwsBhByLastId">
+    <wsdl:part element="tns:getJdrwsBhByLastId" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="JdrwsService">
+    <wsdl:operation name="getJdrwsBhByLastTime">
+      <wsdl:input message="tns:getJdrwsBhByLastTime" name="getJdrwsBhByLastTime">
+    </wsdl:input>
+      <wsdl:output message="tns:getJdrwsBhByLastTimeResponse" name="getJdrwsBhByLastTimeResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getJdrwsBhByLastId">
+      <wsdl:input message="tns:getJdrwsBhByLastId" name="getJdrwsBhByLastId">
+    </wsdl:input>
+      <wsdl:output message="tns:getJdrwsBhByLastIdResponse" name="getJdrwsBhByLastIdResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getJdrwsCountByLastTime">
+      <wsdl:input message="tns:getJdrwsCountByLastTime" name="getJdrwsCountByLastTime">
+    </wsdl:input>
+      <wsdl:output message="tns:getJdrwsCountByLastTimeResponse" name="getJdrwsCountByLastTimeResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getJdrwsByBjbh">
+      <wsdl:input message="tns:getJdrwsByBjbh" name="getJdrwsByBjbh">
+    </wsdl:input>
+      <wsdl:output message="tns:getJdrwsByBjbhResponse" name="getJdrwsByBjbhResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getJdrwsCountByLastId">
+      <wsdl:input message="tns:getJdrwsCountByLastId" name="getJdrwsCountByLastId">
+    </wsdl:input>
+      <wsdl:output message="tns:getJdrwsCountByLastIdResponse" name="getJdrwsCountByLastIdResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getJdrwsByJdrwsbh">
+      <wsdl:input message="tns:getJdrwsByJdrwsbh" name="getJdrwsByJdrwsbh">
+    </wsdl:input>
+      <wsdl:output message="tns:getJdrwsByJdrwsbhResponse" name="getJdrwsByJdrwsbhResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="JdrwsServiceImplServiceSoapBinding" type="tns:JdrwsService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getJdrwsBhByLastTime">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getJdrwsBhByLastTime">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getJdrwsBhByLastTimeResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getJdrwsBhByLastId">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getJdrwsBhByLastId">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getJdrwsBhByLastIdResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getJdrwsCountByLastTime">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getJdrwsCountByLastTime">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getJdrwsCountByLastTimeResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getJdrwsByBjbh">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getJdrwsByBjbh">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getJdrwsByBjbhResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getJdrwsCountByLastId">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getJdrwsCountByLastId">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getJdrwsCountByLastIdResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getJdrwsByJdrwsbh">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getJdrwsByJdrwsbh">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getJdrwsByJdrwsbhResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="JdrwsServiceImplService">
+    <wsdl:port binding="tns:JdrwsServiceImplServiceSoapBinding" name="JdrwsServiceImplPort">
+      <soap:address location="http://10.101.78.35:8080/jdrws/service/jdrwsWebService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

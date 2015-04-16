@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.justonetech.biz.domain">
+	<class
+		name="OaLeaveApply"
+		table="OA_LEAVE_APPLY"
+	>
+		
+		<meta attribute="sync-DAO">false</meta>
+		<meta attribute="sync-jsp">true</meta>
+		<meta attribute="sync-boolean">get</meta>
+		<meta attribute="treeable">false</meta>
+		<meta attribute="projectable">false</meta>
+        <meta attribute="tableName">请假单</meta>
+        <meta attribute="tableComment">请假单</meta>
+	    <meta attribute="sync-templatePatterns">list\w*</meta>
+        <meta attribute="sub-system">oa</meta>
+
+		<id
+			name="id"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="com.justonetech.core.orm.hibernate.LongIdGenerator"/>
+		</id>
+
+		<property
+			name="reportPerson"
+			column="REPORT_PERSON"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">申请人</meta>
+            <meta attribute="ColumnComment">申请人</meta>
+        </property>
+
+		<property
+			name="reportDept"
+			column="REPORT_DEPT"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">申请部门</meta>
+            <meta attribute="ColumnComment">申请部门</meta>
+        </property>
+
+		<property
+			name="reportDate"
+			column="REPORT_DATE"
+			type="date"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">申请时间</meta>
+            <meta attribute="ColumnComment">申请时间</meta>
+        </property>
+
+		<property
+			name="duty"
+			column="DUTY"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">岗位</meta>
+            <meta attribute="ColumnComment">岗位</meta>
+        </property>
+
+		<property
+			name="durationTime"
+			column="DURATION_TIME"
+			type="string"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">请假起始时间</meta>
+            <meta attribute="ColumnComment">请假起始时间</meta>
+        </property>
+
+		<property
+			name="cause"
+			column="CAUSE"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">请假事由</meta>
+            <meta attribute="ColumnComment">请假事由</meta>
+        </property>
+
+		<property
+			name="status"
+			column="STATUS"
+			type="integer"
+			not-null="false"
+			length="2"
+        >
+            <meta attribute="ColumnName">状态</meta>
+            <meta attribute="ColumnComment">状态</meta>
+        </property>
+
+		<property
+			name="officeOpinion"
+			column="OFFICE_OPINION"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">办公室审核意见</meta>
+            <meta attribute="ColumnComment">办公室审核意见</meta>
+        </property>
+
+		<property
+			name="officeAuditTime"
+			column="OFFICE_AUDIT_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">办公室审核时间</meta>
+            <meta attribute="ColumnComment">办公室审核时间</meta>
+        </property>
+
+		<property
+			name="officeAuditUser"
+			column="OFFICE_AUDIT_USER"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">办公室审核用户名</meta>
+            <meta attribute="ColumnComment">办公室审核用户名</meta>
+        </property>
+
+		<property
+			name="leaderOpinion"
+			column="LEADER_OPINION"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">主管领导审核意见</meta>
+            <meta attribute="ColumnComment">主管领导审核意见</meta>
+        </property>
+
+		<property
+			name="leaderAuditTime"
+			column="LEADER_AUDIT_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">主管领导审核时间</meta>
+            <meta attribute="ColumnComment">主管领导审核时间</meta>
+        </property>
+
+		<property
+			name="leaderAuditUser"
+			column="LEADER_AUDIT_USER"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">主管领导审核用户名</meta>
+            <meta attribute="ColumnComment">主管领导审核用户名</meta>
+        </property>
+
+		<property
+			name="createTime"
+			column="CREATE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">创建时间</meta>
+            <meta attribute="ColumnComment">创建时间</meta>
+        </property>
+
+		<property
+			name="createUser"
+			column="CREATE_USER"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">创建用户名</meta>
+            <meta attribute="ColumnComment">创建用户名</meta>
+        </property>
+
+		<property
+			name="updateTime"
+			column="UPDATE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">更新时间</meta>
+            <meta attribute="ColumnComment">更新时间</meta>
+        </property>
+
+		<property
+			name="updateUser"
+			column="UPDATE_USER"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">更新用户名</meta>
+            <meta attribute="ColumnComment">更新用户名</meta>
+        </property>
+
+        <property
+                name="dayCount"
+                column="DAY_COUNT"
+                type="double"
+                not-null="false"
+                length="5"
+                >
+            <meta attribute="ColumnName">请假天数</meta>
+            <meta attribute="ColumnComment">请假天数</meta>
+        </property>
+
+        <property
+                name="smsTimearea"
+                column="SMS_TIMEAREA"
+                type="string"
+                not-null="false"
+                length="200"
+                >
+            <meta attribute="ColumnName">短信时间段</meta>
+            <meta attribute="ColumnComment">短信时间段</meta>
+        </property>
+
+        <property
+                name="smsContent"
+                column="SMS_CONTENT"
+                type="string"
+                not-null="false"
+                length="500"
+                >
+            <meta attribute="ColumnName">短信内容</meta>
+            <meta attribute="ColumnComment">短信内容</meta>
+        </property>
+
+        <property
+                name="isSendSms"
+                column="IS_SEND_SMS"
+                type="java.lang.Boolean"
+                not-null="false"
+                length="1"
+                >
+            <meta attribute="ColumnName">是否发送短信</meta>
+            <meta attribute="ColumnComment">是否发送短信</meta>
+        </property>
+	</class>	
+    <query name="oaleaveapply_all_data_query">
+        <![CDATA[FROM OaLeaveApply]]>
+    </query>
+</hibernate-mapping>

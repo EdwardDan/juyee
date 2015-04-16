@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v4.1 U (http://www.xmlspy.com) by munn (munn) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="Attributes">
+		<xs:annotation>
+			<xs:documentation>record all related attributes and their values</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Attribute" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Attribute">
+		<xs:annotation>
+			<xs:documentation>you can get Attibute name by code</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:choice>
+				<xs:element ref="All" minOccurs="0"/>
+				<xs:element ref="None" minOccurs="0"/>
+				<xs:element ref="Values" minOccurs="0"/>
+				<xs:element ref="Expression" minOccurs="0"/>
+			</xs:choice>
+			<xs:attribute name="Code" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="All">
+		<xs:annotation>
+			<xs:documentation>equal findall sql</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="None"/>
+	<xs:element name="Expression" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>use hql to get the values</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="Values">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Value" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Value">
+		<xs:annotation>
+			<xs:documentation>each Value should be the key(id)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+</xs:schema>

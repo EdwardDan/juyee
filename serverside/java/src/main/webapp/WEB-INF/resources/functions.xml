@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FunctionManager xmlVersion="20110221">
+<FunctionDefList>
+<FunctionDef name="Widget2Image">
+<Class className="com.fr.function.Widget2Image"/>
+<Description>
+<![CDATA[]]></Description>
+</FunctionDef>
+</FunctionDefList>
+</FunctionManager>

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.justonetech.biz.domain">
+	<class
+		name="BpmFormTemplate"
+		table="BPM_FORM_TEMPLATE"
+	>
+		
+		<meta attribute="sync-DAO">false</meta>
+		<meta attribute="sync-jsp">true</meta>
+		<meta attribute="sync-boolean">get</meta>
+		<meta attribute="treeable">false</meta>
+		<meta attribute="projectable">false</meta>
+        <meta attribute="tableName">表单模板库</meta>
+        <meta attribute="tableComment">表单模板库</meta>
+	    <meta attribute="sync-templatePatterns">list\w*</meta>
+        <meta attribute="sub-system">workflow</meta>
+
+		<id
+			name="id"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="com.justonetech.core.orm.hibernate.LongIdGenerator"/>
+		</id>
+
+		<property
+			name="name"
+			column="NAME"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">名称</meta>
+            <meta attribute="ColumnComment">名称</meta>
+        </property>
+
+		<property
+			name="uploadTime"
+			column="UPLOAD_TIME"
+			type="timestamp"
+			not-null="false"
+			length="19"
+        >
+            <meta attribute="ColumnName">上传时间</meta>
+            <meta attribute="ColumnComment">上传时间</meta>
+        </property>
+
+		<property
+			name="htmlTemplate"
+			column="HTML_TEMPLATE"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">页面模板</meta>
+            <meta attribute="ColumnComment">页面模板</meta>
+        </property>
+
+		<property
+			name="columnXml"
+			column="COLUMN_XML"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">数据映射配置</meta>
+            <meta attribute="ColumnComment">数据提取映射配置（针对BpmFormData）</meta>
+        </property>
+
+		<property
+			name="formPar"
+			column="FORM_PAR"
+			type="binary"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">模板压缩包</meta>
+            <meta attribute="ColumnComment">模板压缩包</meta>
+        </property>
+
+		<property
+			name="parHtml"
+			column="PAR_HTML"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">模板定义HTML</meta>
+            <meta attribute="ColumnComment">模板定义HTML</meta>
+        </property>
+
+		<property
+			name="parXml"
+			column="PAR_XML"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">模板定义XML</meta>
+            <meta attribute="ColumnComment">模板定义XML</meta>
+        </property>
+
+		<property
+			name="code"
+			column="CODE"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">编号</meta>
+            <meta attribute="ColumnComment">编号</meta>
+        </property>
+
+		<property
+			name="orderNo"
+			column="ORDER_NO"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">序号</meta>
+            <meta attribute="ColumnComment">序号</meta>
+        </property>
+
+		<many-to-one
+			name="category"
+			column="CATEGORY_ID"
+			class="com.justonetech.system.domain.SysCodeDetail"
+			not-null="false"
+		>
+		</many-to-one>
+	
+
+		<set name="bpmProcessDefinitionForms" inverse="true">
+			<key column="FORM_TEMPLATE_ID"/>
+			<one-to-many class="BpmProcessDefinitionForm"/>
+		</set>
+
+		<set name="bpmFormDatas" inverse="true">
+			<key column="FORM_TEMPLATE_ID"/>
+			<one-to-many class="BpmFormData"/>
+		</set>
+
+		<set name="bpmFormActions" inverse="true">
+			<key column="FORM_TEMPLATE_ID"/>
+			<one-to-many class="BpmFormAction"/>
+		</set>
+
+	</class>	
+    <query name="bpmformtemplate_all_data_query">
+        <![CDATA[FROM BpmFormTemplate]]>
+    </query>
+</hibernate-mapping>

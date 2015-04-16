@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.justonetech.biz.domain">
+	<class
+		name="JdReformReply"
+		table="JD_REFORM_REPLY"
+	>
+		
+		<meta attribute="sync-DAO">false</meta>
+		<meta attribute="sync-jsp">true</meta>
+		<meta attribute="sync-boolean">get</meta>
+		<meta attribute="treeable">false</meta>
+		<meta attribute="projectable">false</meta>
+        <meta attribute="tableName">安全质量监督--整改回复单</meta>
+        <meta attribute="tableComment">安全质量监督--整改回复单</meta>
+	    <meta attribute="sync-templatePatterns">list\w*</meta>
+        <meta attribute="sub-system">jd</meta>
+
+		<id
+			name="id"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="com.justonetech.core.orm.hibernate.LongIdGenerator"/>
+		</id>
+
+		<property
+			name="replyContent"
+			column="REPLY_CONTENT"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">回复内容</meta>
+            <meta attribute="ColumnComment">回复内容</meta>
+        </property>
+
+		<property
+			name="replyUsername"
+			column="REPLY_USERNAME"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">回复人用户名</meta>
+            <meta attribute="ColumnComment">回复人用户名</meta>
+        </property>
+
+		<property
+			name="replyPerson"
+			column="REPLY_PERSON"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">回复人姓名</meta>
+            <meta attribute="ColumnComment">回复人姓名</meta>
+        </property>
+
+		<property
+			name="replyDate"
+			column="REPLY_DATE"
+			type="date"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">回复日期</meta>
+            <meta attribute="ColumnComment">回复日期</meta>
+        </property>
+
+		<property
+			name="receiveUsername"
+			column="RECEIVE_USERNAME"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">接收人用户名</meta>
+            <meta attribute="ColumnComment">接收人用户名</meta>
+        </property>
+
+		<property
+			name="receivePerson"
+			column="RECEIVE_PERSON"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">接收人姓名</meta>
+            <meta attribute="ColumnComment">接收人姓名</meta>
+        </property>
+
+		<property
+			name="existQuestion"
+			column="EXIST_QUESTION"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">存在问题</meta>
+            <meta attribute="ColumnComment">存在问题</meta>
+        </property>
+
+		<property
+			name="limitDate"
+			column="LIMIT_DATE"
+			type="date"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">整改时限</meta>
+            <meta attribute="ColumnComment">整改时限</meta>
+        </property>
+
+		<property
+			name="signUsername"
+			column="SIGN_USERNAME"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">签发人用户名</meta>
+            <meta attribute="ColumnComment">签发人用户名</meta>
+        </property>
+
+		<property
+			name="signPerson"
+			column="SIGN_PERSON"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">签发人姓名</meta>
+            <meta attribute="ColumnComment">签发人姓名</meta>
+        </property>
+
+		<property
+			name="signDate"
+			column="SIGN_DATE"
+			type="date"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">签发日期</meta>
+            <meta attribute="ColumnComment">签发日期</meta>
+        </property>
+
+		<property
+			name="createTime"
+			column="CREATE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">创建时间</meta>
+            <meta attribute="ColumnComment">创建时间</meta>
+        </property>
+
+		<property
+			name="createUser"
+			column="CREATE_USER"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">创建用户名</meta>
+            <meta attribute="ColumnComment">创建用户名</meta>
+        </property>
+
+		<property
+			name="updateTime"
+			column="UPDATE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">更新时间</meta>
+            <meta attribute="ColumnComment">更新时间</meta>
+        </property>
+
+		<property
+			name="updateUser"
+			column="UPDATE_USER"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">更新用户名</meta>
+            <meta attribute="ColumnComment">更新用户名</meta>
+        </property>
+        
+        <property
+			name="status"
+			column="STATUS"
+			type="integer"
+			not-null="false"
+			length="2"
+        >
+            <meta attribute="ColumnName">状态</meta>
+            <meta attribute="ColumnComment">状态</meta>
+        </property>
+
+		<many-to-one
+			name="stopForm"
+			column="STOP_FORM_ID"
+			class="JdStopOrder"
+			not-null="false"
+		>
+		</many-to-one>
+
+        <many-to-one
+                name="document"
+                column="DOCUMENT_ID"
+                class="DocDocument"
+                not-null="false"
+                >
+        </many-to-one>
+
+        <many-to-one
+                name="opinion"
+                column="OPINION_ID"
+                class="com.justonetech.system.domain.SysCodeDetail"
+                not-null="false"
+                >
+        </many-to-one>
+
+	</class>	
+    <query name="jdreformreply_all_data_query">
+        <![CDATA[FROM JdReformReply]]>
+    </query>
+</hibernate-mapping>

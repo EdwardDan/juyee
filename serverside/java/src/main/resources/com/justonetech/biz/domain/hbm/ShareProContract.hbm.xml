@@ -1,0 +1,550 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.justonetech.biz.domain">
+	<class
+		name="ShareProContract"
+		table="SHARE_PRO_CONTRACT"
+	>
+		
+		<meta attribute="sync-DAO">false</meta>
+		<meta attribute="sync-jsp">true</meta>
+		<meta attribute="sync-boolean">get</meta>
+		<meta attribute="treeable">false</meta>
+		<meta attribute="projectable">false</meta>
+        <meta attribute="tableName">合同备案信息</meta>
+        <meta attribute="tableComment">合同备案信息</meta>
+	    <meta attribute="sync-templatePatterns">list\w*</meta>
+        <meta attribute="sub-system">share</meta>
+
+        <id
+			name="netCode"
+			column="NET_CODE"
+			type="string"
+			length="50"
+        />
+		<property
+			name="bjbh"
+			column="BJBH"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">报建编号</meta>
+            <meta attribute="ColumnComment">报建编号</meta>
+        </property>
+
+		<property
+			name="zbContCode"
+			column="ZB_CONT_CODE"
+			type="string"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">总包合同编号</meta>
+            <meta attribute="ColumnComment">总包合同编号</meta>
+        </property>
+
+		<property
+			name="fbContCode"
+			column="FB_CONT_CODE"
+			type="string"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">分包合同编号</meta>
+            <meta attribute="ColumnComment">分包合同编号</meta>
+        </property>
+
+		<property
+			name="lwContCode"
+			column="LW_CONT_CODE"
+			type="string"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">劳务分包合同编号</meta>
+            <meta attribute="ColumnComment">劳务分包合同编号</meta>
+        </property>
+
+		<property
+			name="cbType"
+			column="CB_TYPE"
+			type="string"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">承包方式</meta>
+            <meta attribute="ColumnComment">承包方式</meta>
+        </property>
+
+		<property
+			name="cbTypeName"
+			column="CB_TYPE_NAME"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">承包方式(中文)</meta>
+            <meta attribute="ColumnComment">承包方式(中文)</meta>
+        </property>
+
+		<property
+			name="proName"
+			column="PRO_NAME"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">项目名称</meta>
+            <meta attribute="ColumnComment">项目名称</meta>
+        </property>
+
+		<property
+			name="fbdw"
+			column="FBDW"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">发包方</meta>
+            <meta attribute="ColumnComment">发包方</meta>
+        </property>
+
+		<property
+			name="zbUnit"
+			column="ZB_UNIT"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">总包单位</meta>
+            <meta attribute="ColumnComment">总包单位</meta>
+        </property>
+
+		<property
+			name="zbUnitCode"
+			column="ZB_UNIT_CODE"
+			type="string"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">总包单位代码</meta>
+            <meta attribute="ColumnComment">总包单位代码</meta>
+        </property>
+
+		<property
+			name="cbUnit"
+			column="CB_UNIT"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">承包单位</meta>
+            <meta attribute="ColumnComment">承包单位</meta>
+        </property>
+
+		<property
+			name="cbUnitCode"
+			column="CB_UNIT_CODE"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">承包单位代码</meta>
+            <meta attribute="ColumnComment">承包单位代码</meta>
+        </property>
+
+		<property
+			name="cbUnitId"
+			column="CB_UNIT_ID"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">承包单位_ID</meta>
+            <meta attribute="ColumnComment">承包单位_ID</meta>
+        </property>
+
+		<property
+			name="proHeader"
+			column="PRO_HEADER"
+			type="string"
+			not-null="false"
+			length="40"
+        >
+            <meta attribute="ColumnName">项目负责人姓名</meta>
+            <meta attribute="ColumnComment">项目负责人姓名</meta>
+        </property>
+
+		<property
+			name="proHeaderPhone"
+			column="PRO_HEADER_PHONE"
+			type="string"
+			not-null="false"
+			length="40"
+        >
+            <meta attribute="ColumnName">项目负责人电话</meta>
+            <meta attribute="ColumnComment">项目负责人电话</meta>
+        </property>
+
+		<property
+			name="proHeaderCard"
+			column="PRO_HEADER_CARD"
+			type="string"
+			not-null="false"
+			length="40"
+        >
+            <meta attribute="ColumnName">项目负责人证件号</meta>
+            <meta attribute="ColumnComment">项目负责人证件号</meta>
+        </property>
+
+		<property
+			name="proHeaderCert"
+			column="PRO_HEADER_CERT"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">项目负责人证件类型</meta>
+            <meta attribute="ColumnComment">项目负责人证件类型</meta>
+        </property>
+
+		<property
+			name="proHeaderCertDesc"
+			column="PRO_HEADER_CERT_DESC"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">项目负责人证件类型（中文）</meta>
+            <meta attribute="ColumnComment">项目负责人证件类型（中文）</meta>
+        </property>
+
+		<property
+			name="ythKcUnit"
+			column="YTH_KC_UNIT"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">一体化勘察单位</meta>
+            <meta attribute="ColumnComment">一体化勘察单位</meta>
+        </property>
+
+		<property
+			name="ythKcUnitCode"
+			column="YTH_KC_UNIT_CODE"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">一体化勘察单位代码</meta>
+            <meta attribute="ColumnComment">一体化勘察单位代码</meta>
+        </property>
+
+		<property
+			name="ythKcUnitId"
+			column="YTH_KC_UNIT_ID"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">一体化勘察单位ID</meta>
+            <meta attribute="ColumnComment">一体化勘察单位ID</meta>
+        </property>
+
+		<property
+			name="ythKcHeader"
+			column="YTH_KC_HEADER"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">一体化勘察单位负责人</meta>
+            <meta attribute="ColumnComment">一体化勘察单位负责人</meta>
+        </property>
+
+		<property
+			name="ythKcHeaderPhone"
+			column="YTH_KC_HEADER_PHONE"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">一体化勘察单位负责人电话</meta>
+            <meta attribute="ColumnComment">一体化勘察单位负责人电话</meta>
+        </property>
+
+		<property
+			name="ythKcHeaderCard"
+			column="YTH_KC_HEADER_CARD"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">一体化勘察单位负责人证件号</meta>
+            <meta attribute="ColumnComment">一体化勘察单位负责人证件号</meta>
+        </property>
+
+		<property
+			name="ythKcHeaderCert"
+			column="YTH_KC_HEADER_CERT"
+			type="string"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">一体化勘察单位负责人证件类型</meta>
+            <meta attribute="ColumnComment">一体化勘察单位负责人证件类型</meta>
+        </property>
+
+		<property
+			name="ythKcHeaderCertDesc"
+			column="YTH_KC_HEADER_CERT_DESC"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">一体化勘察单位负责人证件类型（中文）</meta>
+            <meta attribute="ColumnComment">一体化勘察单位负责人证件类型（中文）</meta>
+        </property>
+
+		<property
+			name="ythSgUnit"
+			column="YTH_SG_UNIT"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">一体化施工单位</meta>
+            <meta attribute="ColumnComment">一体化施工单位</meta>
+        </property>
+
+		<property
+			name="ythSgUnitCode"
+			column="YTH_SG_UNIT_CODE"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">一体化施工单位代码</meta>
+            <meta attribute="ColumnComment">一体化施工单位代码</meta>
+        </property>
+
+		<property
+			name="ythSgUnitId"
+			column="YTH_SG_UNIT_ID"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">一体化施工单位ID</meta>
+            <meta attribute="ColumnComment">一体化施工单位ID</meta>
+        </property>
+
+		<property
+			name="ythSgHeader"
+			column="YTH_SG_HEADER"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">一体化施工单位负责人</meta>
+            <meta attribute="ColumnComment">一体化施工单位负责人</meta>
+        </property>
+
+		<property
+			name="ythSgHeaderPhone"
+			column="YTH_SG_HEADER_PHONE"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">一体化施工单位负责人电话</meta>
+            <meta attribute="ColumnComment">一体化施工单位负责人电话</meta>
+        </property>
+
+		<property
+			name="ythSgHeaderCard"
+			column="YTH_SG_HEADER_CARD"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">一体化施工单位负责人证件号</meta>
+            <meta attribute="ColumnComment">一体化施工单位负责人证件号</meta>
+        </property>
+
+		<property
+			name="ythSgHeaderCert"
+			column="YTH_SG_HEADER_CERT"
+			type="string"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">一体化施工单位负责人证件类型</meta>
+            <meta attribute="ColumnComment">一体化施工单位负责人证件类型</meta>
+        </property>
+
+		<property
+			name="ythSgHeaderCertDesc"
+			column="YTH_SG_HEADER_CERT_DESC"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">一体化施工单位负责人证件类型（中文）</meta>
+            <meta attribute="ColumnComment">一体化施工单位负责人证件类型（中文）</meta>
+        </property>
+
+		<property
+			name="lhtCbUnit"
+			column="LHT_CB_UNIT"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">联合体承包单位</meta>
+            <meta attribute="ColumnComment">联合体承包单位</meta>
+        </property>
+
+		<property
+			name="lhtCbUnitCode"
+			column="LHT_CB_UNIT_CODE"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">联合体承包单位代码</meta>
+            <meta attribute="ColumnComment">联合体承包单位代码</meta>
+        </property>
+
+		<property
+			name="ythKcFee"
+			column="YTH_KC_FEE"
+			type="java.lang.Double"
+			not-null="false"
+			length="15"
+        >
+            <meta attribute="ColumnName">一体化勘察费</meta>
+            <meta attribute="ColumnComment">一体化勘察费</meta>
+        </property>
+
+		<property
+			name="ythSjFee"
+			column="YTH_SJ_FEE"
+			type="java.lang.Double"
+			not-null="false"
+			length="15"
+        >
+            <meta attribute="ColumnName">一体化设计费</meta>
+            <meta attribute="ColumnComment">一体化设计费</meta>
+        </property>
+
+		<property
+			name="contMoney"
+			column="CONT_MONEY"
+			type="java.lang.Double"
+			not-null="false"
+			length="15"
+        >
+            <meta attribute="ColumnName">合同金额</meta>
+            <meta attribute="ColumnComment">合同金额</meta>
+        </property>
+
+		<property
+			name="acceptTime"
+			column="ACCEPT_TIME"
+			type="timestamp"
+			not-null="false"
+			length="16"
+        >
+            <meta attribute="ColumnName">受理时间</meta>
+            <meta attribute="ColumnComment">受理时间</meta>
+        </property>
+
+		<property
+			name="isCancel"
+			column="IS_CANCEL"
+			type="string"
+			not-null="false"
+			length="1"
+        >
+            <meta attribute="ColumnName">是否核销</meta>
+            <meta attribute="ColumnComment">是否核销</meta>
+        </property>
+
+		<property
+			name="cancelTime"
+			column="CANCEL_TIME"
+			type="timestamp"
+			not-null="false"
+			length="16"
+        >
+            <meta attribute="ColumnName">核销完成时间</meta>
+            <meta attribute="ColumnComment">核销完成时间</meta>
+        </property>
+
+		<property
+			name="contTypeDesc"
+			column="CONT_TYPE_DESC"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">合同类别描述</meta>
+            <meta attribute="ColumnComment">合同类别描述</meta>
+        </property>
+
+		<property
+			name="slr"
+			column="SLR"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">受理人</meta>
+            <meta attribute="ColumnComment">受理人</meta>
+        </property>
+
+		<property
+			name="slrUnitCode"
+			column="SLR_UNIT_CODE"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">受理人单位代码</meta>
+            <meta attribute="ColumnComment">受理人单位代码</meta>
+        </property>
+
+		<property
+			name="slrUnitName"
+			column="SLR_UNIT_NAME"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">受理人单位代码名称</meta>
+            <meta attribute="ColumnComment">受理人单位代码名称</meta>
+        </property>
+
+		<property
+			name="updatetime"
+			column="UPDATETIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">更新时间</meta>
+            <meta attribute="ColumnComment">更新时间</meta>
+        </property>
+
+
+	</class>	
+    <query name="shareprocontract_all_data_query">
+        <![CDATA[FROM ShareProContract]]>
+    </query>
+</hibernate-mapping>

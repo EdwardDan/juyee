@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v4.1 U (http://www.xmlspy.com) by dingweiqing (dingweiqing) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="Configuration">
+		<xs:annotation>
+			<xs:documentation>Comment describing your root element</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ExtAttrDef" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ExtAttrDef">
+		<xs:complexType>
+			<xs:attribute name="Code" type="xs:string" use="required"/>
+			<xs:attribute name="Name" type="xs:string" use="required">
+				<xs:annotation>
+					<xs:documentation>for display,eg. 标段 </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="ClassName" type="xs:string" use="required"/>
+			<xs:attribute name="ClassProperty" type="xs:string" use="optional" default="name"/>
+			<xs:attribute name="ClassPropertyName" type="xs:string" use="optional"/>
+			<xs:attribute name="FetchHqlFrom" type="xs:string" use="optional"/>
+			<xs:attribute name="FetchHqlWhere" type="xs:string" use="optional" default="1=1"/>
+			<xs:attribute name="FetchHqlOrderBy" type="xs:string" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

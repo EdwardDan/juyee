@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.justonetech.biz.domain">
+	<class
+		name="BpmFormData"
+		table="BPM_FORM_DATA"
+	>
+		
+		<meta attribute="sync-DAO">false</meta>
+		<meta attribute="sync-jsp">true</meta>
+		<meta attribute="sync-boolean">get</meta>
+		<meta attribute="treeable">false</meta>
+		<meta attribute="projectable">false</meta>
+        <meta attribute="tableName">表单数据</meta>
+        <meta attribute="tableComment">表单数据</meta>
+	    <meta attribute="sync-templatePatterns">list\w*</meta>
+        <meta attribute="sub-system">workflow</meta>
+
+		<id
+			name="id"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="com.justonetech.core.orm.hibernate.LongIdGenerator"/>
+		</id>
+
+		<property
+			name="code"
+			column="CODE"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">表单编号</meta>
+            <meta attribute="ColumnComment">表单编号</meta>
+        </property>
+
+		<property
+			name="title"
+			column="TITLE"
+			type="string"
+			not-null="false"
+			length="255"
+        >
+            <meta attribute="ColumnName">表单名称</meta>
+            <meta attribute="ColumnComment">表单名称</meta>
+        </property>
+
+		<property
+			name="startTime"
+			column="START_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">开始时间</meta>
+            <meta attribute="ColumnComment">开始时间</meta>
+        </property>
+
+		<property
+			name="endTime"
+			column="END_TIME"
+			type="timestamp"
+			not-null="false"
+			length="19"
+        >
+            <meta attribute="ColumnName">结束时间</meta>
+            <meta attribute="ColumnComment">结束时间</meta>
+        </property>
+
+		<property
+			name="reportDate"
+			column="REPORT_DATE"
+			type="date"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">填写日期</meta>
+            <meta attribute="ColumnComment">填写日期</meta>
+        </property>
+
+		<property
+			name="deptName"
+			column="DEPT_NAME"
+			type="string"
+			not-null="false"
+			length="255"
+        >
+            <meta attribute="ColumnName">单位名称</meta>
+            <meta attribute="ColumnComment">单位名称</meta>
+        </property>
+
+		<property
+			name="personName"
+			column="PERSON_NAME"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">填写人</meta>
+            <meta attribute="ColumnComment">填写人</meta>
+        </property>
+
+		<property
+			name="content"
+			column="CONTENT"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">内容提要</meta>
+            <meta attribute="ColumnComment">内容提要</meta>
+        </property>
+
+		<property
+			name="bizData1"
+			column="BIZ_DATA1"
+			type="string"
+			not-null="false"
+			length="255"
+        >
+            <meta attribute="ColumnName">BIZ_DATA1</meta>
+            <meta attribute="ColumnComment">BIZ_DATA1</meta>
+        </property>
+
+		<property
+			name="bizData2"
+			column="BIZ_DATA2"
+			type="string"
+			not-null="false"
+			length="255"
+        >
+            <meta attribute="ColumnName">BIZ_DATA2</meta>
+            <meta attribute="ColumnComment">BIZ_DATA1</meta>
+        </property>
+
+		<property
+			name="bizData3"
+			column="BIZ_DATA3"
+			type="string"
+			not-null="false"
+			length="255"
+        >
+            <meta attribute="ColumnName">BIZ_DATA3</meta>
+            <meta attribute="ColumnComment">BIZ_DATA1</meta>
+        </property>
+
+		<property
+			name="bizData4"
+			column="BIZ_DATA4"
+			type="string"
+			not-null="false"
+			length="255"
+        >
+            <meta attribute="ColumnName">BIZ_DATA4</meta>
+            <meta attribute="ColumnComment">BIZ_DATA1</meta>
+        </property>
+
+		<property
+			name="bizData5"
+			column="BIZ_DATA5"
+			type="string"
+			not-null="false"
+			length="255"
+        >
+            <meta attribute="ColumnName">BIZ_DATA5</meta>
+            <meta attribute="ColumnComment">BIZ_DATA1</meta>
+        </property>
+
+		<property
+			name="formXml"
+			column="FORM_XML"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">表单数据</meta>
+            <meta attribute="ColumnComment">表单数据</meta>
+        </property>
+
+		<many-to-one
+			name="processInstance"
+			column="PROCESS_INSTANCE_ID"
+			class="BpmProcessInstance"
+			not-null="false"
+		>
+		</many-to-one>
+		<many-to-one
+			name="formTemplate"
+			column="FORM_TEMPLATE_ID"
+			class="BpmFormTemplate"
+			not-null="false"
+		>
+		</many-to-one>
+
+	</class>	
+    <query name="bpmformdata_all_data_query">
+        <![CDATA[FROM BpmFormData]]>
+    </query>
+</hibernate-mapping>

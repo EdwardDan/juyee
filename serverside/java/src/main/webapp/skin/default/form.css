@@ -1,0 +1,77 @@
+body
+{
+    font-size: 14px;
+    font-family: "Trebuchet MS" , Verdana, Helvetica, Sans-Serif;
+    /*color: #232323; font-family:helvetica,tahoma,verdana,sans-serif;*/
+    font-family: Arial, Helvetica, sans-serif; color: #232323;
+    background-color: #ccccff;
+    padding: 0;
+    margin: 0;
+}
+
+img
+{
+    border-style:none;
+}
+
+.title
+{
+    /*font-size: 20px;*/
+    /*font-family:"微软雅黑","宋体";*/
+    /*font-weight:bold;*/
+    /*margin-top: 15px;*/
+    /*display:inline-block;*/
+    /*color:#FFFFFF;*/
+    width:625px;
+    height:50px;
+    /*padding-left:0px;*/
+    margin:0 auto auto 0;
+    /*background-image: url('themes/base/login/images/logo.png');*/
+    /*background-repeat: no-repeat;*/
+    display:inline-block;
+}
+.title_right
+{
+    width:291px;
+    height:50px;
+    margin:0 0 auto auto;
+    /*background-image: url('themes/base/login/images/top_right.png');*/
+    /*background-repeat: no-repeat;*/
+    display:inline-block;
+    float: right;
+}
+
+.search{
+    text-align: left;
+    width:200px;
+    background-color: #ffffff;
+    border:1px solid #ccccff;
+    position:relative;
+}
+.autocomplete{
+    border: 1px solid #cccccc;
+    background-color: white;
+    z-index:998;
+    position:absolute;
+    text-align: left;
+}
+.autocomplete li{
+    list-style-type: none;
+}
+.clickable {
+    cursor: default;
+}
+.highlight {
+    background-color: #9ACCFB;
+}
+.label{
+    width:100px;
+    float:left;
+    text-align:right;
+}
+.content {
+   float:none;
+}
+.line{
+    /*border-bottom:#fff8dc dotted 1px;*/
+}

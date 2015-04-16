@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.justonetech.biz.domain">
+	<class
+		name="ShareGdDwgc"
+		table="SHARE_GD_DWGC"
+	>
+		
+		<meta attribute="sync-DAO">false</meta>
+		<meta attribute="sync-jsp">true</meta>
+		<meta attribute="sync-boolean">get</meta>
+		<meta attribute="treeable">false</meta>
+		<meta attribute="projectable">false</meta>
+        <meta attribute="tableName">工地单位工程</meta>
+        <meta attribute="tableComment">工地单位工程</meta>
+	    <meta attribute="sync-templatePatterns">list\w*</meta>
+        <meta attribute="sub-system">share</meta>
+
+		<composite-id name="id" class="ShareGdDwgcPK">
+			<key-property
+				name="gdCode"
+				column="GD_CODE"
+				type="string"
+			/>
+			<key-property
+				name="dwgcCard"
+				column="DWGC_CARD"
+				type="string"
+			/>
+		</composite-id>
+
+		<property
+			name="bjbh"
+			column="BJBH"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">报建编号</meta>
+            <meta attribute="ColumnComment">报建编号</meta>
+        </property>
+
+		<property
+			name="dwgcCode"
+			column="DWGC_CODE"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">单位工程号</meta>
+            <meta attribute="ColumnComment">单位工程号</meta>
+        </property>
+
+		<property
+			name="dwgcName"
+			column="DWGC_NAME"
+			type="string"
+			not-null="false"
+			length="300"
+        >
+            <meta attribute="ColumnName">单位工程名称</meta>
+            <meta attribute="ColumnComment">单位工程名称</meta>
+        </property>
+
+		<property
+			name="proType"
+			column="PRO_TYPE"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">工程类型</meta>
+            <meta attribute="ColumnComment">工程类型</meta>
+        </property>
+
+		<property
+			name="proTypeName"
+			column="PRO_TYPE_NAME"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">工程类型翻译</meta>
+            <meta attribute="ColumnComment">工程类型翻译</meta>
+        </property>
+
+		<property
+			name="buildArea"
+			column="BUILD_AREA"
+			type="java.lang.Double"
+			not-null="false"
+			length="15"
+        >
+            <meta attribute="ColumnName">建筑面积</meta>
+            <meta attribute="ColumnComment">建筑面积</meta>
+        </property>
+
+		<property
+			name="proCost"
+			column="PRO_COST"
+			type="java.lang.Double"
+			not-null="false"
+			length="15"
+        >
+            <meta attribute="ColumnName">工程造价</meta>
+            <meta attribute="ColumnComment">工程造价</meta>
+        </property>
+
+		<property
+			name="floorCount"
+			column="FLOOR_COUNT"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">层数</meta>
+            <meta attribute="ColumnComment">层数</meta>
+        </property>
+
+		<property
+			name="groundFloorCount"
+			column="GROUND_FLOOR_COUNT"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">地下层数</meta>
+            <meta attribute="ColumnComment">地下层数</meta>
+        </property>
+
+		<property
+			name="updateTime"
+			column="UPDATE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="16"
+        >
+            <meta attribute="ColumnName">更新时间</meta>
+            <meta attribute="ColumnComment">更新时间</meta>
+        </property>
+
+		<property
+			name="zjStatus"
+			column="ZJ_STATUS"
+			type="string"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">在监状态</meta>
+            <meta attribute="ColumnComment">在监状态</meta>
+        </property>
+
+		<property
+			name="zjStatusName"
+			column="ZJ_STATUS_NAME"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">在监状态翻译</meta>
+            <meta attribute="ColumnComment">在监状态翻译</meta>
+        </property>
+
+
+	</class>	
+    <query name="sharegddwgc_all_data_query">
+        <![CDATA[FROM ShareGdDwgc]]>
+    </query>
+</hibernate-mapping>

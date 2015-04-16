@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.justonetech.biz.domain">
+	<class
+		name="NetOpLog"
+		table="NET_OP_LOG"
+	>
+		
+		<meta attribute="sync-DAO">false</meta>
+		<meta attribute="sync-jsp">true</meta>
+		<meta attribute="sync-boolean">get</meta>
+		<meta attribute="treeable">false</meta>
+		<meta attribute="projectable">false</meta>
+        <meta attribute="tableName">项目审批操作日志</meta>
+        <meta attribute="tableComment">项目审批操作日志</meta>
+	    <meta attribute="sync-templatePatterns">list\w*</meta>
+        <meta attribute="sub-system">net</meta>
+
+		<id
+			name="id"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="com.justonetech.core.orm.hibernate.LongIdGenerator"/>
+		</id>
+
+		<property
+			name="bizClass"
+			column="BIZ_CLASS"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">业务对象编码</meta>
+            <meta attribute="ColumnComment">业务对象编码</meta>
+        </property>
+
+		<property
+			name="bizId"
+			column="BIZ_ID"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">业务记录ID</meta>
+            <meta attribute="ColumnComment">业务记录ID</meta>
+        </property>
+
+		<property
+			name="opPerson"
+			column="OP_PERSON"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">操作人</meta>
+            <meta attribute="ColumnComment">操作人</meta>
+        </property>
+
+		<property
+			name="acceptDate"
+			column="ACCEPT_DATE"
+			type="date"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">受理日期</meta>
+            <meta attribute="ColumnComment">受理日期</meta>
+        </property>
+
+		<property
+			name="backCause"
+			column="BACK_CAUSE"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">退回原因</meta>
+            <meta attribute="ColumnComment">退回原因</meta>
+        </property>
+
+		<property
+			name="description"
+			column="DESCRIPTION"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">备注</meta>
+            <meta attribute="ColumnComment">备注</meta>
+        </property>
+
+		<property
+			name="createTime"
+			column="CREATE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">操作时间</meta>
+            <meta attribute="ColumnComment">操作时间</meta>
+        </property>
+
+		<property
+			name="createUser"
+			column="CREATE_USER"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">操作用户名</meta>
+            <meta attribute="ColumnComment">操作用户名</meta>
+        </property>
+
+		<many-to-one
+			name="acceptStatus"
+			column="ACCEPT_STATUS_ID"
+			class="NetAcceptStatus"
+			not-null="false"
+		>
+		</many-to-one>
+
+	</class>	
+    <query name="netoplog_all_data_query">
+        <![CDATA[FROM NetOpLog]]>
+    </query>
+</hibernate-mapping>

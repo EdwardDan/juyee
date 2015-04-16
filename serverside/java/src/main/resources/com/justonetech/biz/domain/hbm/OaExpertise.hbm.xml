@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.justonetech.biz.domain">
+	<class
+		name="OaExpertise"
+		table="OA_EXPERTISE"
+	>
+		
+		<meta attribute="sync-DAO">false</meta>
+		<meta attribute="sync-jsp">true</meta>
+		<meta attribute="sync-boolean">get</meta>
+		<meta attribute="treeable">false</meta>
+		<meta attribute="projectable">false</meta>
+        <meta attribute="tableName">专业知识学习</meta>
+        <meta attribute="tableComment">专业知识学习</meta>
+	    <meta attribute="sync-templatePatterns">list\w*</meta>
+        <meta attribute="sub-system">oa</meta>
+
+		<id
+			name="id"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="com.justonetech.core.orm.hibernate.LongIdGenerator"/>
+		</id>
+
+		<property
+			name="title"
+			column="TITLE"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">主题</meta>
+            <meta attribute="ColumnComment">主题</meta>
+        </property>
+
+		<property
+			name="beginDate"
+			column="BEGIN_DATE"
+			type="date"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">学习开始日期</meta>
+            <meta attribute="ColumnComment">学习开始日期</meta>
+        </property>
+
+		<property
+			name="endDate"
+			column="END_DATE"
+			type="date"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">学习结束日期</meta>
+            <meta attribute="ColumnComment">学习结束日期</meta>
+        </property>
+
+		<property
+			name="duration"
+			column="DURATION"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">学习时长</meta>
+            <meta attribute="ColumnComment">学习时长</meta>
+        </property>
+
+		<property
+			name="reportPerson"
+			column="REPORT_PERSON"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">责任人</meta>
+            <meta attribute="ColumnComment">责任人</meta>
+        </property>
+
+		<property
+			name="method"
+			column="METHOD"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">措施与方法</meta>
+            <meta attribute="ColumnComment">措施与方法</meta>
+        </property>
+
+		<property
+			name="fee"
+			column="FEE"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">费用</meta>
+            <meta attribute="ColumnComment">费用</meta>
+        </property>
+
+		<property
+			name="studyTarget"
+			column="STUDY_TARGET"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">学习目标</meta>
+            <meta attribute="ColumnComment">学习目标</meta>
+        </property>
+
+		<property
+			name="studyContent"
+			column="STUDY_CONTENT"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">学习内容</meta>
+            <meta attribute="ColumnComment">学习内容</meta>
+        </property>
+
+		<property
+			name="reportDate"
+			column="REPORT_DATE"
+			type="date"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">提交时间</meta>
+            <meta attribute="ColumnComment">提交时间</meta>
+        </property>
+
+		<property
+			name="status"
+			column="STATUS"
+			type="integer"
+			not-null="false"
+			length="2"
+        >
+            <meta attribute="ColumnName">状态</meta>
+            <meta attribute="ColumnComment">状态</meta>
+        </property>
+
+		<property
+			name="auditMemo"
+			column="AUDIT_MEMO"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">审核备注</meta>
+            <meta attribute="ColumnComment">审核备注</meta>
+        </property>
+
+		<property
+			name="studyDesc"
+			column="STUDY_DESC"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">学习情况描述</meta>
+            <meta attribute="ColumnComment">学习情况描述</meta>
+        </property>
+
+		<property
+			name="createTime"
+			column="CREATE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">创建时间</meta>
+            <meta attribute="ColumnComment">创建时间</meta>
+        </property>
+
+		<property
+			name="createUser"
+			column="CREATE_USER"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">创建用户名</meta>
+            <meta attribute="ColumnComment">创建用户名</meta>
+        </property>
+
+		<property
+			name="updateTime"
+			column="UPDATE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">更新时间</meta>
+            <meta attribute="ColumnComment">更新时间</meta>
+        </property>
+
+		<property
+			name="updateUser"
+			column="UPDATE_USER"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">更新用户名</meta>
+            <meta attribute="ColumnComment">更新用户名</meta>
+        </property>
+
+        <many-to-one
+                name="document"
+                column="DOCUMENT_ID"
+                class="DocDocument"
+                not-null="false"
+                >
+        </many-to-one>
+
+		<set name="oaExpertiseUsers" inverse="true">
+			<key column="EXPERTISE_ID"/>
+			<one-to-many class="OaExpertiseUser"/>
+		</set>
+
+	</class>	
+    <query name="oaexpertise_all_data_query">
+        <![CDATA[FROM OaExpertise]]>
+    </query>
+</hibernate-mapping>
