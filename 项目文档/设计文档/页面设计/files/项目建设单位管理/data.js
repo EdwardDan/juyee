@@ -1,0 +1,65 @@
+﻿$axure.loadCurrentPage({
+  "url":"项目建设单位管理.html",
+  "generationDate":new Date(1430724551651.91),
+  "isCanvasEnabled":false,
+  "variables":["OnLoadVariable"],
+  "page":{
+    "packageId":"5dc17961bed8488fa063858161c0d624",
+    "type":"Axure:Page",
+    "name":"项目建设单位管理",
+    "notes":{
+},
+    "style":{
+      "baseStyle":"627587b6038d43cca051c114ac41ad32",
+      "pageAlignment":"near",
+      "fill":{
+        "fillType":"solid",
+        "color":0xFFFFFFFF},
+      "image":null,
+      "imageHorizontalAlignment":"near",
+      "imageVerticalAlignment":"near",
+      "imageRepeat":"auto",
+      "favicon":null,
+      "sketchFactor":"0",
+      "colorStyle":"appliedColor",
+      "fontName":"应用字体",
+      "borderWidth":"0"},
+    "adaptiveStyles":{
+},
+    "interactionMap":{
+},
+    "diagram":{
+      "objects":[{
+          "id":"01468981b84843b982c4b9bbb04b1301",
+          "label":"",
+          "type":"imageBox",
+          "styleType":"imageBox",
+          "visible":true,
+          "style":{
+            "size":{
+              "width":1000,
+              "height":471}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"80c6ddc822834c66a5f305caa529802a",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "size":{
+                  "width":1000,
+                  "height":471}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"images/项目建设单位管理/u0.png"}}]}},
+  "masters":{
+},
+  "objectPaths":{
+    "01468981b84843b982c4b9bbb04b1301":{
+      "scriptId":"u0"},
+    "80c6ddc822834c66a5f305caa529802a":{
+      "scriptId":"u1"}}});

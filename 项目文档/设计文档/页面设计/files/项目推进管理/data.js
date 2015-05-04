@@ -1,0 +1,36 @@
+﻿$axure.loadCurrentPage({
+  "url":"项目推进管理.html",
+  "generationDate":new Date(1430724550126.82),
+  "isCanvasEnabled":false,
+  "variables":["OnLoadVariable"],
+  "page":{
+    "packageId":"b83d71e7c72a4a1c89e1823d1f362e4c",
+    "type":"Axure:Page",
+    "name":"项目推进管理",
+    "notes":{
+},
+    "style":{
+      "baseStyle":"627587b6038d43cca051c114ac41ad32",
+      "pageAlignment":"near",
+      "fill":{
+        "fillType":"solid",
+        "color":0xFFFFFFFF},
+      "image":null,
+      "imageHorizontalAlignment":"near",
+      "imageVerticalAlignment":"near",
+      "imageRepeat":"auto",
+      "favicon":null,
+      "sketchFactor":"0",
+      "colorStyle":"appliedColor",
+      "fontName":"应用字体",
+      "borderWidth":"0"},
+    "adaptiveStyles":{
+},
+    "interactionMap":{
+},
+    "diagram":{
+      "objects":[]}},
+  "masters":{
+},
+  "objectPaths":{
+}});

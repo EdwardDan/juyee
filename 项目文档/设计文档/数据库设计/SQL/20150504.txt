@@ -1,0 +1,98 @@
+-- Add/modify columns 
+alter table OA_LEAVE_APPLY add SMS_TIMEAREA VARCHAR2(200 CHAR);
+alter table OA_LEAVE_APPLY add SMS_CONTENT VARCHAR2(500 CHAR);
+alter table OA_LEAVE_APPLY add IS_SEND_SMS NUMBER(1);
+-- Add comments to the columns 
+comment on column OA_LEAVE_APPLY.SMS_TIMEAREA
+  is '短信时间段';
+comment on column OA_LEAVE_APPLY.SMS_CONTENT
+  is '短信内容';
+comment on column OA_LEAVE_APPLY.IS_SEND_SMS
+  is '是否发送短信';
+
+
+drop table OA_BBS cascade constraints;
+
+/*==============================================================*/
+/* Table: OA_BBS                                                */
+/*==============================================================*/
+create table OA_BBS  (
+   ID                   NUMBER(10)                      not null,
+   TYPE_ID              NUMBER(10),
+   TYPE_NAME            VARCHAR2(200 CHAR),
+   TITLE                VARCHAR2(200 CHAR),
+   CONTENT              CLOB,
+   VISIT_TIMES          NUMBER(8)                      default 0,
+   DOCUMENT_ID          NUMBER(10),
+   PARENT_ID            NUMBER(10),
+   CREATE_TIME          DATE,
+   CREATE_USER          VARCHAR2(100),
+   UPDATE_TIME          DATE,
+   UPDATE_USER          VARCHAR2(100),
+   PERSON_NAME          VARCHAR2(100),
+   IS_VALID             NUMBER(1)                      default 1,
+   IS_TOP               NUMBER(1)                      default 0,
+   REPLY_TIMES          NUMBER(8)                      default 0,
+   DEPT_NAME            VARCHAR2(200 CHAR),
+   constraint PK_OA_BBS primary key (ID),
+   constraint FK_OA_BBS_PARENT foreign key (PARENT_ID)
+         references OA_BBS (ID),
+   constraint FK_OA_BBS_TYPE foreign key (TYPE_ID)
+         references SYS_CODE_DETAIL (ID),
+   constraint FK_OA_BBS_DOC foreign key (DOCUMENT_ID)
+         references DOC_DOCUMENT (ID)
+);
+
+comment on table OA_BBS is
+'员工论坛';
+
+comment on column OA_BBS.ID is
+'标识';
+
+comment on column OA_BBS.TYPE_ID is
+'类型标识';
+
+comment on column OA_BBS.TYPE_NAME is
+'类型中文描述(冗余)';
+
+comment on column OA_BBS.TITLE is
+'主题名称';
+
+comment on column OA_BBS.CONTENT is
+'主要内容';
+
+comment on column OA_BBS.VISIT_TIMES is
+'访问次数';
+
+comment on column OA_BBS.DOCUMENT_ID is
+'附件ID';
+
+comment on column OA_BBS.PARENT_ID is
+'关联主题ID';
+
+comment on column OA_BBS.CREATE_TIME is
+'创建时间';
+
+comment on column OA_BBS.CREATE_USER is
+'创建用户名';
+
+comment on column OA_BBS.UPDATE_TIME is
+'更新时间';
+
+comment on column OA_BBS.UPDATE_USER is
+'更新用户名';
+
+comment on column OA_BBS.PERSON_NAME is
+'发布人姓名(冗余)';
+
+comment on column OA_BBS.IS_VALID is
+'是否有效';
+
+comment on column OA_BBS.IS_TOP is
+'是否精华';
+
+comment on column OA_BBS.REPLY_TIMES is
+'回复次数';
+
+comment on column OA_BBS.DEPT_NAME is
+'所属部门名称(冗余)';
