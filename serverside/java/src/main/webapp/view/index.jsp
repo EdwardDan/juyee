@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>${projectArea}区建设工程综合信息管理系统</title>
+    <title>${siteName}</title>
     <%@include file="/common/header.jsp" %>
     <script src="${ctx}/js/jquery/easyui/outlook2.js" type="text/javascript"></script>
     <link href="${ctx}/js/bootstrap/css/bootstrap-popover.css" rel="stylesheet" media="screen">

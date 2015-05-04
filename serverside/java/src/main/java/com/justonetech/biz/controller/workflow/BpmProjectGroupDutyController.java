@@ -1,9 +1,5 @@
 package com.justonetech.biz.controller.workflow;
 
-import com.justonetech.core.controller.BaseCRUDActionController;
-import com.justonetech.core.orm.hibernate.Page;
-import com.justonetech.core.utils.ReflectionUtils;
-import com.justonetech.core.utils.StringHelper;
 import com.justonetech.biz.core.orm.hibernate.GridJq;
 import com.justonetech.biz.core.orm.hibernate.QueryTranslateJq;
 import com.justonetech.biz.daoservice.BpmDutyPersonService;
@@ -15,8 +11,6 @@ import com.justonetech.biz.domain.BpmProjectGroup;
 import com.justonetech.biz.domain.BpmProjectGroupDuty;
 import com.justonetech.biz.manager.ConfigManager;
 import com.justonetech.biz.manager.DocumentManager;
-import com.justonetech.biz.manager.ProjectManager;
-import com.justonetech.biz.manager.RelateManager;
 import com.justonetech.biz.manager.workflow.ExtAttrManager;
 import com.justonetech.biz.utils.Constants;
 import com.justonetech.biz.utils.jbpm.extattr.ExtAttrItem;
@@ -26,6 +20,10 @@ import com.justonetech.biz.utils.jbpm.extattr.instance.Attribute;
 import com.justonetech.biz.utils.jbpm.extattr.instance.Attributes;
 import com.justonetech.biz.utils.jbpm.extattr.instance.AttributesUtils;
 import com.justonetech.biz.utils.jbpm.extattr.instance.Values;
+import com.justonetech.core.controller.BaseCRUDActionController;
+import com.justonetech.core.orm.hibernate.Page;
+import com.justonetech.core.utils.ReflectionUtils;
+import com.justonetech.core.utils.StringHelper;
 import com.justonetech.system.daoservice.SysPersonService;
 import com.justonetech.system.domain.SysPerson;
 import com.justonetech.system.manager.SimpleQueryManager;
@@ -62,12 +60,6 @@ public class BpmProjectGroupDutyController extends BaseCRUDActionController<BpmP
 
     @Autowired
     private SysCodeManager sysCodeManager;
-
-    @Autowired
-    private RelateManager relateManager;
-
-    @Autowired
-    private ProjectManager projectManager;
 
     @Autowired
     private ConfigManager configManager;

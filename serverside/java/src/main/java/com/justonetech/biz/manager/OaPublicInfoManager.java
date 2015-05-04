@@ -33,14 +33,14 @@ public class OaPublicInfoManager {
     public final int IS_SHOW_TOP_TRUE = 1;
     public final int IS_SHOW_TOP_ALL = 2;
 
+    //图片类型
+    public final String PIC_TYPE = "gif|jpg|png|bmp|tif";
+
     @Autowired
     private OaPublicInfoService oaPublicInfoService;
 
     @Autowired
     private DocumentManager documentManager;
-
-    @Autowired
-    private SiteManager siteManager;
 
     /**
      * 获取公告信息发布记录
@@ -149,7 +149,7 @@ public class OaPublicInfoManager {
      */
     public String saveFromBlob(HttpServletRequest request, OaPublicInfo target, String thumbnailPath, String thumbnailPathtoSave) {
         String ctx = request.getRealPath("");
-        Pattern p1 = Pattern.compile("src=\"(.+?).(" + siteManager.PIC_TYPE + ")\"");//判断是不是gif或jpg等
+        Pattern p1 = Pattern.compile("src=\"(.+?).(" + PIC_TYPE + ")\"");//判断是不是gif或jpg等
         Pattern p2 = Pattern.compile("src=\"(.+?)\"");//取出src后面内容
         Matcher matcher = p1.matcher(target.getContent());
         String contextPath = request.getContextPath();

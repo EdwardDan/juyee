@@ -19,23 +19,11 @@
         <!--<intercept-url pattern="/sys*/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>-->
         <intercept-url pattern="/sys*/**" access="ROLE_USER"/>
         <intercept-url pattern="/view/**" access="ROLE_USER"/>
-        <intercept-url pattern="/jd*/**" access="ROLE_USER"/>
         <intercept-url pattern="/oa*/**" access="ROLE_USER"/>
-        <intercept-url pattern="/order*/**" access="ROLE_USER"/>
-        <intercept-url pattern="/petiton*/**" access="ROLE_USER"/>
-        <intercept-url pattern="/plan*/**" access="ROLE_USER"/>
-        <intercept-url pattern="/polling*/**" access="ROLE_USER"/>
-        <intercept-url pattern="/pro*/**" access="ROLE_USER"/>
         <intercept-url pattern="/sms*/**" access="ROLE_USER"/>
         <intercept-url pattern="/bpm*/**" access="ROLE_USER"/>
-        <intercept-url pattern="/platform/**" access="ROLE_USER"/>
-        <intercept-url pattern="/sqlQuery*/**" access="ROLE_USER"/>
         <intercept-url pattern="/mainPage/index.do*" access="ROLE_USER"/>
-        <intercept-url pattern="/check*/**" access="ROLE_USER"/>
         <intercept-url pattern="/DocDocument*/**" access="ROLE_USER"/>
-
-        <!--项目地图查询权限放开-->
-        <intercept-url pattern="/projectQuery/**" filters="none"/>
 
         <!--头文件及引入文件不验证权限-->
         <intercept-url pattern="/**/header.jsp*" filters="none"/>
@@ -43,22 +31,10 @@
         <intercept-url pattern="/skin/**" filters="none"/>
         <intercept-url pattern="/js/**" filters="none"/>
 
-        <!--网站不验证权限-->
-        <intercept-url pattern="/view/www/**" filters="none"/>
-        <intercept-url pattern="/view/platform/**" filters="none"/>
-        <intercept-url pattern="/reg/**" filters="none"/>
-
         <!--单点登录不验证权限-->
         <intercept-url pattern="/view/loginForSite" filters="none"/>
         <intercept-url pattern="/login/loginForSite.do*" filters="none"/>
         <intercept-url pattern="/login/passSync.do*" filters="none"/>
-
-        <!--远程视频监督上报接口不验证权限-->
-        <intercept-url pattern="/pollingRemoteQuestion/remoteUpload**" filters="none"/>
-        <intercept-url pattern="/pollingRecordDetail/getPolling**" filters="none"/>
-
-        <!--外网注册不验证用户-->
-        <!--<intercept-url pattern="/sysRegPerson/getReg.do**" filters="none"/>-->
 
         <form-login login-page="/login.jsp" authentication-failure-url="/login.jsp?login_error=1"
                     default-target-url="/login/dispatch.do"/>
@@ -159,7 +135,7 @@
 
     <b:bean id="sas" class=
             "org.springframework.security.web.authentication.session.ConcurrentSessionControlStrategy">
-        <b:property name="maximumSessions" value="1" />
+        <b:property name="maximumSessions" value="5" />
         <b:constructor-arg name="sessionRegistry" ref="sessionRegistry"  />
         <b:property name="exceptionIfMaximumExceeded" value="false" />
     </b:bean>

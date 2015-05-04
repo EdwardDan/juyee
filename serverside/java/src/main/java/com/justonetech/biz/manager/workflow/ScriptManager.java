@@ -1,9 +1,5 @@
 package com.justonetech.biz.manager.workflow;
 
-import com.justonetech.biz.domain.ShareGdInfo;
-import com.justonetech.biz.manager.ProjectManager;
-import com.justonetech.biz.manager.RegPersonManager;
-import com.justonetech.biz.manager.RelateManager;
 import com.justonetech.biz.utils.Constants;
 import com.justonetech.system.domain.SysPerson;
 import com.justonetech.system.domain.SysRegPerson;
@@ -25,16 +21,6 @@ import java.util.Set;
  */
 @Service
 public class ScriptManager {
-
-    @Autowired
-    RegPersonManager regPersonManager;
-
-    @Autowired
-    ProjectManager projectManager;
-
-    @Autowired
-    RelateManager relateManager;
-
     @Autowired
     SysUserManager sysUserManager;
 
@@ -72,13 +58,13 @@ public class ScriptManager {
             return null;
         }
         if (regPerson.getRegType().getCode().equals(Constants.SYS_REGPERSON_TYPE_Gd)) {      //获取工地用户报建编号
-            String gdCode = regPerson.getGdCode();
-            if (gdCode != null) {
-                ShareGdInfo gdInfo = projectManager.getGDInfo(gdCode);
-                if (gdInfo != null) {
-                    bjbh = gdInfo.getBjbh();
-                }
-            }
+//            String gdCode = regPerson.getGdCode();
+//            if (gdCode != null) {
+//                ShareGdInfo gdInfo = projectManager.getGDInfo(gdCode);
+//                if (gdInfo != null) {
+//                    bjbh = gdInfo.getBjbh();
+//                }
+//            }
 
         } else if (regPerson.getRegType().getCode().equals(Constants.SYS_REGPERSON_TYPE_Gd) || regPerson.getRegType().getCode().equals(Constants.SYS_REGPERSON_TYPE_UNIT_JS)) {
             bjbh = regPerson.getBjbh();

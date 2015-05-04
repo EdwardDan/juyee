@@ -3,8 +3,8 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
-    <description>qpjjw</description>
-    <display-name>qpjjw</display-name>
+    <description>jtjs</description>
+    <display-name>jtjs</display-name>
 
     <!--
      默认的spring配置文件是在WEB-INF下的applicationContext.xml
@@ -34,72 +34,6 @@
         <filter-name>encodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-
-    <!-- CAS配置 begin -->
-    <context-param>
-        <param-name>serverName</param-name>
-        <param-value>mis.hkjgzx.sh.cn:8080</param-value>
-    </context-param>
-    <filter>
-        <filter-name>CAS Single Sign Out Filter</filter-name>
-        <filter-class>org.jasig.cas.client.session.SingleSignOutFilter</filter-class>
-    </filter>
-
-    <filter-mapping>
-        <filter-name>CAS Single Sign Out Filter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-
-    <listener>
-        <listener-class>org.jasig.cas.client.session.SingleSignOutHttpSessionListener</listener-class>
-    </listener>
-
-    <filter>
-        <filter-name>CAS Validation Filter</filter-name>
-        <filter-class>org.jasig.cas.client.validation.Cas20ProxyReceivingTicketValidationFilter</filter-class>
-        <init-param>
-            <param-name>casServerUrlPrefix</param-name>
-            <param-value>https://www.hkjgzx.sh.cn/</param-value>
-        </init-param>
-    </filter>
-
-    <filter>
-        <filter-name>CAS Authentication Filter</filter-name>
-        <filter-class>org.jasig.cas.client.authentication.AuthenticationFilter</filter-class>
-        <init-param>
-            <param-name>casServerLoginUrl</param-name>
-            <param-value>https://www.hkjgzx.sh.cn/login</param-value>
-        </init-param>
-    </filter>
-
-    <filter>
-        <filter-name>CAS HttpServletRequest Wrapper Filter</filter-name>
-        <filter-class>org.jasig.cas.client.util.HttpServletRequestWrapperFilter</filter-class>
-    </filter>
-
-    <filter-mapping>
-        <filter-name>CAS Validation Filter</filter-name>
-        <url-pattern>/login/loginForSite.do</url-pattern>
-    </filter-mapping>
-    <!--<filter-mapping>-->
-        <!--<filter-name>CAS Validation Filter</filter-name>-->
-        <!--<url-pattern>/login/passSync.do</url-pattern>-->
-    <!--</filter-mapping>-->
-
-    <filter-mapping>
-        <filter-name>CAS Authentication Filter</filter-name>
-        <url-pattern>/login/loginForSite.do</url-pattern>
-    </filter-mapping>
-    <!--<filter-mapping>-->
-        <!--<filter-name>CAS Authentication Filter</filter-name>-->
-        <!--<url-pattern>/login/passSync.do</url-pattern>-->
-    <!--</filter-mapping>-->
-
-    <filter-mapping>
-        <filter-name>CAS HttpServletRequest Wrapper Filter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-    <!-- CAS配置 end -->
 
 
     <!--&lt;!&ndash; invalid sql char filter&ndash;&gt;-->
@@ -262,17 +196,6 @@
     <servlet-mapping>
         <servlet-name>CXFServlet</servlet-name>
         <url-pattern>/service/*</url-pattern>
-    </servlet-mapping>
-
-    <!--report servlet-->
-    <servlet>
-        <servlet-name>ReportServer</servlet-name>
-        <servlet-class>com.fr.web.ReportServlet</servlet-class>
-        <load-on-startup>0</load-on-startup>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ReportServer</servlet-name>
-        <url-pattern>/ReportServer</url-pattern>
     </servlet-mapping>
 
     <!--jBPM job executor servlet-->

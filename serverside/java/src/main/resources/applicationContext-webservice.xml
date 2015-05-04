@@ -8,24 +8,6 @@
     <import resource="classpath:META-INF/cxf/cxf-servlet.xml"/>
     <import resource="classpath:META-INF/cxf/cxf-extension-wstx-msv-validation.xml"/>
 
-    <!--发布报建信息webservice-->
-    <jaxws:endpoint address="/getProBuildService" implementor="#getProBuildService"/>
-    <bean id="getProBuildService"
-          class="com.justonetech.biz.utils.webService.projectPubservice.ProjectPubserviceImpl"/>
-
-    <!--发布工地信息webservice，暂不使用密码验证 -->
-    <jaxws:endpoint address="/getWorkSiteService" implementor="#getWorkSiteService">
-        <!--<jaxws:inInterceptors>-->
-        <!--<bean class="org.apache.cxf.binding.soap.saaj.SAAJInInterceptor"/>-->
-        <!--<ref bean="wss4jInInterceptor"/>-->
-        <!--</jaxws:inInterceptors>-->
-        <!--<jaxws:handlers>-->
-        <!--<ref bean="loggerHandler"></ref>-->
-        <!--</jaxws:handlers>-->
-    </jaxws:endpoint>
-    <bean id="getWorkSiteService"
-          class="com.justonetech.biz.utils.webService.workSiteWebservice.server.WorkSiteWebServiceImpl"/>
-
     <!-- ****************************************** 获取信息 ****************************************** -->
     <!--短信的webservice接口-->
     <bean id="smsWSClientService"
@@ -34,44 +16,4 @@
         <property name="user" value="${smsUser}"/>
         <property name="password" value="${smsPass}"/>
     </bean>
-
-    <!--从建管办平台获取报监任务、报监单位工程-->
-    <bean id="integratedServiceClient"
-          class="com.justonetech.biz.utils.webService.integratedService.IntegratedServiceClient">
-        <property name="endPointURL" value="http://ciacdata.ciac.sh.cn/Service/IntegratedService.asmx?wsdl"/>
-    </bean>
-
-    <!--&lt;!&ndash;从建管办平台获取重大危险源接口&ndash;&gt;-->
-    <!--<bean id="wxyServiceClient" class="com.justonetech.biz.utils.webService.wxyWebservice.WxyServiceClient">-->
-    <!--<property name="endPointURL" value="http://ciacdata.ciac.sh.cn/service/IntegratedService.asmx?wsdl"/>-->
-    <!--</bean>-->
-
-    <!--从建昆平台获取监督任务书信息-->
-    <bean id="jdrwsServiceClient"
-          class="com.justonetech.biz.utils.webService.jdrwsWebService.JdrwsServiceClient">
-        <property name="endPointURL" value="${jdrwsWebserviceWsdl}"/>
-    </bean>
-
-    <!--从平安工地平台获取视频监控接口-->
-    <bean id="monitorWebServiceClient"
-          class="com.justonetech.biz.utils.webService.monitorWebService.MonitorWebServiceClient">
-        <property name="endPointURL" value="https://www.pingan365.net/cxf/monitorWebService?wsdl"/>
-        <property name="user" value="hkjjw"/>
-        <property name="password" value="hkjjw"/>
-    </bean>
-
-    <!--从平安工地平台同步考勤数据接口-->
-    <bean id="checkWebServiceClient"
-          class="com.justonetech.biz.utils.webService.checkWebservice.CheckWebServiceClient">
-        <property name="endPointURL" value="${syncCheckWebserviceWsdl}"/>
-        <property name="user" value="hkjjw"/>
-        <property name="password" value="hkjjw"/>
-    </bean>
-
-    <!--从海康平台获取视频信息-->
-    <bean id="hkVideoServiceClient"
-          class="com.justonetech.biz.utils.webService.hkVideoWebservice.HkVideoServiceClient">
-        <property name="endPointURL" value="${hkVideoWsdl}"/>
-    </bean>
-
 </beans>

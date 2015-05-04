@@ -215,11 +215,11 @@
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
-        <dependency>
-            <groupId>sqljdbc</groupId>
-            <artifactId>sqljdbc</artifactId>
-            <version>1.0</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>sqljdbc</groupId>-->
+            <!--<artifactId>sqljdbc</artifactId>-->
+            <!--<version>1.0</version>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -398,24 +398,6 @@
         </dependency>
 
         <dependency>
-            <groupId>com.fr</groupId>
-            <artifactId>fr-server</artifactId>
-            <version>7.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.fr</groupId>
-            <artifactId>fr-third</artifactId>
-            <version>7.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>hsqldb</groupId>
-            <artifactId>hsqldb</artifactId>
-            <version>1.8.0.10</version>
-        </dependency>
-
-        <dependency>
             <groupId>jexcelapi</groupId>
             <artifactId>jxl</artifactId>
             <version>2.4.2</version>
@@ -459,28 +441,28 @@
             <version>1.7.2</version>
         </dependency>
 
-        <!-- 数字证书 begin -->
-        <dependency>
-            <groupId>com.sheca</groupId>
-            <artifactId>javasafeengine</artifactId>
-            <version>1.5.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.bouncycastle</groupId>
-            <artifactId>bcprov-jdk14</artifactId>
-            <version>1.43</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpcore</artifactId>
-            <version>4.3.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-            <version>4.3.3</version>
-        </dependency>
-        <!-- 数字证书 end -->
+        <!--&lt;!&ndash; 数字证书 begin &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>com.sheca</groupId>-->
+            <!--<artifactId>javasafeengine</artifactId>-->
+            <!--<version>1.5.1</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.bouncycastle</groupId>-->
+            <!--<artifactId>bcprov-jdk14</artifactId>-->
+            <!--<version>1.43</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.apache.httpcomponents</groupId>-->
+            <!--<artifactId>httpcore</artifactId>-->
+            <!--<version>4.3.2</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.apache.httpcomponents</groupId>-->
+            <!--<artifactId>httpclient</artifactId>-->
+            <!--<version>4.3.3</version>-->
+        <!--</dependency>-->
+        <!--&lt;!&ndash; 数字证书 end &ndash;&gt;-->
 
         <!-- 缩略图 begin -->
         <dependency>
@@ -490,29 +472,29 @@
         </dependency>
         <!-- 缩略图 end -->
 
-        <!-- 网站接口 begin -->
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-            <version>4.2.2</version>
-            <!--<scope>test</scope>-->
-        </dependency>
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>2.0</version>
-        </dependency>
-        <dependency>
-            <groupId>fakepath</groupId>
-            <artifactId>jgs_api</artifactId>
-            <version>1.4</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jasig.cas.client</groupId>
-            <artifactId>cas-client-core</artifactId>
-            <version>3.2.1</version>
-        </dependency>
-        <!-- 网站接口 end -->
+        <!--&lt;!&ndash; 网站接口 begin &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>org.apache.httpcomponents</groupId>-->
+            <!--<artifactId>httpclient</artifactId>-->
+            <!--<version>4.2.2</version>-->
+            <!--&lt;!&ndash;<scope>test</scope>&ndash;&gt;-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>com.google.code.gson</groupId>-->
+            <!--<artifactId>gson</artifactId>-->
+            <!--<version>2.0</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>fakepath</groupId>-->
+            <!--<artifactId>jgs_api</artifactId>-->
+            <!--<version>1.4</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.jasig.cas.client</groupId>-->
+            <!--<artifactId>cas-client-core</artifactId>-->
+            <!--<version>3.2.1</version>-->
+        <!--</dependency>-->
+        <!--&lt;!&ndash; 网站接口 end &ndash;&gt;-->
 
         <!-- cxf会使用到 -->
         <dependency>
@@ -592,32 +574,32 @@
                 </configuration>
             </plugin>
 
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>2.1.1</version>
-                <configuration>
-                    <overlays>
-                        <overlay>
-                            <id>sqlQuery</id>
-                            <groupId>com.justonetech</groupId>
-                            <artifactId>sqlQuery</artifactId>
-                            <includes>
-                                <include>WEB-INF/lib/commons-jexl-2*</include>
-                            </includes>
-                        </overlay>
-                        <overlay/>
-                        <overlay>
-                            <id>sqlQuery2</id>
-                            <groupId>com.justonetech</groupId>
-                            <artifactId>sqlQuery</artifactId>
-                            <excludes>
-                                <exclude>WEB-INF/lib/*.jar</exclude>
-                            </excludes>
-                        </overlay>
-                    </overlays>
-                </configuration>
-            </plugin>
+            <!--<plugin>-->
+                <!--<groupId>org.apache.maven.plugins</groupId>-->
+                <!--<artifactId>maven-war-plugin</artifactId>-->
+                <!--<version>2.1.1</version>-->
+                <!--<configuration>-->
+                    <!--<overlays>-->
+                        <!--<overlay>-->
+                            <!--<id>sqlQuery</id>-->
+                            <!--<groupId>com.justonetech</groupId>-->
+                            <!--<artifactId>sqlQuery</artifactId>-->
+                            <!--<includes>-->
+                                <!--<include>WEB-INF/lib/commons-jexl-2*</include>-->
+                            <!--</includes>-->
+                        <!--</overlay>-->
+                        <!--<overlay/>-->
+                        <!--<overlay>-->
+                            <!--<id>sqlQuery2</id>-->
+                            <!--<groupId>com.justonetech</groupId>-->
+                            <!--<artifactId>sqlQuery</artifactId>-->
+                            <!--<excludes>-->
+                                <!--<exclude>WEB-INF/lib/*.jar</exclude>-->
+                            <!--</excludes>-->
+                        <!--</overlay>-->
+                    <!--</overlays>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -665,24 +647,6 @@
                 <sms.user>admin</sms.user>
                 <sms.pass>juyee</sms.pass>
                 <sms.switch>false</sms.switch>
-                <!-- 共享库数据同步开关 -->
-                <syncDatabase.switch>false</syncDatabase.switch>
-                <!-- 考勤同步 -->
-                <syncCheckWebservice.wsdl>https://192.168.1.41/cxf/checkWebService?wsdl</syncCheckWebservice.wsdl>
-                <syncCheckData.area>hkq</syncCheckData.area>
-                <syncCheckData.switch>false</syncCheckData.switch>
-                <!-- 数字证书验证 -->
-                <cert.switch>true</cert.switch>
-                <cert.path>C:\SHECA_G2.spc</cert.path>
-                <!-- 监督任务书获取 -->
-                <jdrwsWebservice.wsdl>http://10.101.78.35:8080/jdrws/service/jdrwsWebService?wsdl</jdrwsWebservice.wsdl>
-                <!-- 海康视频获取 -->
-                <hkVideoService.wsdl>http://101.231.79.178:6800/services/CmsService?wsdl</hkVideoService.wsdl>
-                <hkVideoService.ip>101.231.79.178</hkVideoService.ip>
-                <hkVideoService.user>admin</hkVideoService.user>
-                <hkVideoService.pass>12345</hkVideoService.pass>
-                <!-- 日志文件路径 -->
-                <sync.log.path>E:/attach/jtjs/log</sync.log.path>
             </properties>
         </profile>
         <profile>

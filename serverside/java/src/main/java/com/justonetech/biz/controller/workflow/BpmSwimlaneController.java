@@ -1,27 +1,20 @@
 package com.justonetech.biz.controller.workflow;
 
-import com.justonetech.core.controller.BaseCRUDActionController;
-import com.justonetech.core.orm.hibernate.Page;
-import com.justonetech.core.utils.ReflectionUtils;
 import com.justonetech.biz.core.orm.hibernate.GridJq;
 import com.justonetech.biz.core.orm.hibernate.QueryTranslateJq;
 import com.justonetech.biz.daoservice.BpmProcessSwimlaneService;
 import com.justonetech.biz.daoservice.BpmSwimlaneDefinitionService;
 import com.justonetech.biz.daoservice.BpmSwimlaneService;
-import com.justonetech.biz.daoservice.DocDocumentService;
 import com.justonetech.biz.domain.BpmProcessSwimlane;
 import com.justonetech.biz.domain.BpmSwimlane;
 import com.justonetech.biz.domain.BpmSwimlaneDefinition;
-import com.justonetech.biz.manager.ConfigManager;
-import com.justonetech.biz.manager.DocumentManager;
-import com.justonetech.biz.manager.ProjectManager;
-import com.justonetech.biz.manager.RelateManager;
 import com.justonetech.biz.manager.workflow.BpmSwimlaneManager;
 import com.justonetech.biz.utils.Constants;
+import com.justonetech.core.controller.BaseCRUDActionController;
+import com.justonetech.core.orm.hibernate.Page;
+import com.justonetech.core.utils.ReflectionUtils;
 import com.justonetech.system.daoservice.SysCodeDetailService;
 import com.justonetech.system.domain.SysCodeDetail;
-import com.justonetech.system.manager.SimpleQueryManager;
-import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
 import com.justonetech.system.utils.PrivilegeCode;
 import org.slf4j.Logger;
@@ -54,27 +47,6 @@ public class BpmSwimlaneController extends BaseCRUDActionController<BpmSwimlane>
 
     @Autowired
     private SysUserManager sysUserManager;
-
-    @Autowired
-    private SysCodeManager sysCodeManager;
-
-    @Autowired
-    private RelateManager relateManager;
-
-    @Autowired
-    private ProjectManager projectManager;
-
-    @Autowired
-    private ConfigManager configManager;
-
-    @Autowired
-    private DocumentManager documentManager;
-
-    @Autowired
-    private SimpleQueryManager simpleQueryManager;
-
-    @Autowired
-    private DocDocumentService docDocumentService;
 
     @Autowired
     private BpmSwimlaneService bpmSwimlaneService;

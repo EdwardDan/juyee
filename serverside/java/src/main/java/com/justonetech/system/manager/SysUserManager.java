@@ -1,6 +1,5 @@
 package com.justonetech.system.manager;
 
-import com.justonetech.biz.manager.NetAuthManager;
 import com.justonetech.biz.utils.Constants;
 import com.justonetech.core.security.user.BaseUser;
 import com.justonetech.core.security.util.SpringSecurityUtils;
@@ -44,9 +43,6 @@ public class SysUserManager {
     private Map<Long, Set<String>> USER_PRIVILEGE_CODES = null;
 
     @Autowired
-    private NetAuthManager netAuthManager;
-
-    @Autowired
     private SysPersonDeptService sysPersonDeptService;
 
     /**
@@ -66,7 +62,7 @@ public class SysUserManager {
                 return hasPrivilege(loginUser != null ? loginUser.getId() : null, privilegeCode);
             } else {
                 //网上报建--数字证书用户
-                return netAuthManager.getNetProjectPrivilegeCodes().contains(privilegeCode);
+//                return netAuthManager.getNetProjectPrivilegeCodes().contains(privilegeCode);
             }
         }
         return false;

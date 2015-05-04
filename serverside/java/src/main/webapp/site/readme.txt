@@ -1,1 +1,0 @@
-设置空文件是为了将首页转向到site/index.do，tomcat会先检查site目录下是否存在index.do，如有再转给spring处理，否则会报404错误。

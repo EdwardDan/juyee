@@ -95,7 +95,7 @@ public class MsgMessageManager {
             if (!StringHelper.isEmpty(content)) {
                 String mobile = JspHelper.getString(msgSendDetail.getReceiveMobile());
                 if (mobile.length() == 11) {
-                    content = "[" + configManager.getProjectArea() + "区建管中心]" + content;  //添加短信抬头
+                    content = "[" + configManager.getSiteName()+"]" + content;  //添加短信抬头
                     int ret = smsWSClientService.sendMessage(mobile, true, content, '0');
                     msgSendDetail.setSendSmsTime(new Timestamp(System.currentTimeMillis()));  //设置发送时间
                     msgSendDetailService.save(msgSendDetail);

@@ -1,14 +1,11 @@
 package com.justonetech.biz.controller;
 
-import com.justonetech.biz.daoservice.NetSgpermitService;
 import com.justonetech.biz.manager.*;
 import com.justonetech.biz.utils.Constants;
-import com.justonetech.biz.utils.enums.JdStopOrderType;
 import com.justonetech.biz.utils.enums.Platform;
 import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.utils.CryptUtil;
 import com.justonetech.core.utils.DateTimeHelper;
-import com.justonetech.core.utils.JspHelper;
 import com.justonetech.system.domain.SysMenu;
 import com.justonetech.system.domain.SysUser;
 import com.justonetech.system.manager.SimpleQueryManager;
@@ -64,12 +61,6 @@ public class MainPageController extends BaseCRUDActionController {
     private MsgMessageManager msgMessageManager;
 
     @Autowired
-    private JdStopOrderManager jdStopOrderManager;
-
-    @Autowired
-    private NetSgpermitService netSgpermitService;
-
-    @Autowired
     private SimpleQueryManager simpleQueryManager;
 
     private static final String IM_LOGIN_SWITCH = "IM_LOGIN_SWITCH";    //即时通信登录--只需要登录一次，刷新主页不再登录
@@ -98,7 +89,6 @@ public class MainPageController extends BaseCRUDActionController {
             model.addAttribute("password", password);
             model.addAttribute("Md5Pass", sysUser.getMd5Pass());
         }
-        model.addAttribute("projectArea", configManager.getProjectArea());
         model.addAttribute("siteName", configManager.getSiteName());
 
         //初始时间
@@ -210,85 +200,6 @@ public class MainPageController extends BaseCRUDActionController {
         model.addAttribute("typeCodeBulletin", Constants.OA_PUBLIC_INFO_TYPE_BULLETIN);
 
         return "view/index/mainBulletin";
-    }
-
-    /**
-     * 监督管理单据
-     *
-     * @param model .
-     * @return .
-     */
-    @RequestMapping
-    public String mainJdForm(Model model, HttpServletRequest request) throws ParseException {
-        Calendar c = Calendar.getInstance();      //当前日期
-
-        //查询日期
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String curdate = request.getParameter("curdate") == null ? DateTimeHelper.getCurrentDate() : request.getParameter("curdate");
-        String query = request.getParameter("query") == null ? "" : request.getParameter("query");
-
-        c.setTime(sdf.parse(curdate));
-        if ("prev".equals(query)) {
-            c.add(Calendar.MONTH, -1);
-        } else if ("next".equals(query)) {
-            c.add(Calendar.MONTH, 1);
-        }
-        String newcurdate = sdf.format(c.getTime()).substring(0, 7);
-        //开据整改单
-        int reformNum = jdStopOrderManager.getNum(JdStopOrderType.TYPE_REFORM.getCode(), newcurdate);
-        model.addAttribute("reformNum", reformNum);
-
-        //开据局部暂缓指令单
-        int suspendNum = jdStopOrderManager.getNum(JdStopOrderType.TYPE_SUSPEND.getCode(), newcurdate);
-        model.addAttribute("suspendNum", suspendNum);
-
-        //开据停工指令单
-        int stopNum = jdStopOrderManager.getNum(JdStopOrderType.TYPE_STOP.getCode(), newcurdate);
-        model.addAttribute("stopNum", stopNum);
-
-        //发放中标通知书
-        String projectAreaCode = configManager.getProjectAreaCode().toUpperCase();
-        String sqlFirst = "select count(bdh) num ,";
-        String sqlLast = " where bid_date is not null and to_char(bid_date,'yyyy-mm')='" + newcurdate + "' and (bjbh like '__01" + projectAreaCode + "%' or bjbh like '__02" + projectAreaCode + "%') ";
-        String sqlCfb = "select sum(num) from (" +
-                sqlFirst + "'jl' as type from share_pro_jl_info" + sqlLast +
-                "union " +
-                sqlFirst + "'sg' as type from share_pro_sg_info" + sqlLast +
-                "union " +
-                sqlFirst + "'sj' as type from share_pro_sj_info" + sqlLast +
-                "union " +
-                sqlFirst + "'kc' as type from share_pro_kc_info" + sqlLast +
-                ")";
-        List listCfb = simpleQueryManager.getListBySql(sqlCfb);
-
-        int cfbNum = 0;
-        if (null != listCfb && listCfb.size() > 0) {
-            cfbNum = JspHelper.getInteger(listCfb.iterator().next());
-        }
-        model.addAttribute("cfbNum", cfbNum);
-
-        //发放施工许可
-        String sqlSgpermit = "select count(bdh) from share_pro_sg_permit where issue_datetime is not null and to_char(issue_datetime,'yyyy-mm') = '" + newcurdate + "' and (bjbh like '__01" + projectAreaCode + "%' or bjbh like '__02" + projectAreaCode + "%') ";
-        List listSgpermit = netSgpermitService.findBySql(sqlSgpermit);
-        int sgpermitNum = 0;
-        if (null != listSgpermit && listSgpermit.size() > 0) {
-            sgpermitNum = JspHelper.getInteger(listSgpermit.iterator().next());
-        }
-        model.addAttribute("sgpermitNum", sgpermitNum);
-
-        //企业资质
-        String sqlUnitQualitify = "select count(a.id) from share_unit_qualify a,share_unit_info b where to_char(a.accept_datetime,'yyyy-mm')= '" + newcurdate + "' and a.unit_id=b.id and b.reg_city_code='310109'";
-        int unitqualifyNum = simpleQueryManager.getIntegerBySql(sqlUnitQualitify);
-        model.addAttribute("unitqualifyNum", unitqualifyNum);
-
-        //标题
-        String title = c.get(Calendar.YEAR) + "年" + (c.get(Calendar.MONTH) + 1) + "月";
-        model.addAttribute("title", title);
-        //当前查询日期
-        curdate = c.get(Calendar.YEAR) + "-" + (c.get(Calendar.MONTH) + 1) + "-" + c.get(Calendar.DATE);
-        model.addAttribute("curdate", curdate);
-
-        return "view/index/mainJdForm";
     }
 
     /**

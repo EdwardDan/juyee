@@ -12,13 +12,10 @@
         loadForBulletin();
     }
     function loadForBulletin() {
-        loadAjaxDataCallback("bulletinDivId", "${ctx}/mainPage/mainBulletin.do?typeCode=${code_bulletin}", loadForMainJdForm);
+        loadAjaxDataCallback("bulletinDivId", "${ctx}/mainPage/mainBulletin.do?typeCode=${code_bulletin}", loadForDaily);
     }
     function loadForDaily() {
         loadAjaxDataCallback("dailyDivId", "${ctx}/mainPage/mainDaily.do", loadForMsg);
-    }
-    function loadForMainJdForm() {
-        loadAjaxDataCallback("mainJdFormDivId", "${ctx}/mainPage/mainJdForm.do", loadForMsg);
     }
     function loadForMsg() {
         loadInfoData();
@@ -165,28 +162,17 @@
                 <!-- bulletin end -->
 
                 <div class="index_space"></div>
-                <%--<!-- daily begin -->--%>
-                <%--<table width="240" border="0" align="center" cellpadding="0" cellspacing="0">--%>
-                    <%--<tr>--%>
-                        <%--<td align="center" id="dailyDivId">--%>
-                            <%--<!--  daily content begin -->--%>
-
-                            <%--<!--  daily content end -->--%>
-                        <%--</td>--%>
-                    <%--</tr>--%>
-                <%--</table>--%>
-                <%--<!-- daily end -->--%>
-                <!-- mainJdForm begin -->
+                <!-- daily begin -->
                 <table width="240" border="0" align="center" cellpadding="0" cellspacing="0">
                     <tr>
-                        <td align="center" id="mainJdFormDivId">
-                            <!--  mainJdForm content begin -->
+                        <td align="center" id="dailyDivId">
+                            <!--  daily content begin -->
 
-                            <!--  mainJdForm content end -->
+                            <!--  daily content end -->
                         </td>
                     </tr>
                 </table>
-                <!-- mainJdForm end -->
+                <!-- daily end -->
             </td>
         </tr>
     </table>
