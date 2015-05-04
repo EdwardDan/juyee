@@ -5,19 +5,12 @@ import com.justonetech.biz.utils.Constants;
 import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.security.user.BaseUser;
 import com.justonetech.core.security.util.SpringSecurityUtils;
-import com.justonetech.core.utils.CryptUtil;
 import com.justonetech.core.utils.JspHelper;
-import com.justonetech.core.utils.RandomUtils;
-import com.justonetech.core.utils.StringHelper;
 import com.justonetech.system.daoservice.SysUserService;
 import com.justonetech.system.domain.SysUser;
-import com.justonetech.system.filter.CustomAuthenticationProcessingFilter;
 import com.justonetech.system.manager.SysLogCustomManager;
 import com.justonetech.system.manager.SysUserManager;
 import com.justonetech.system.manager.UserManager;
-import com.justonetech.system.utils.Md5Utils;
-import net.sf.json.JSONArray;
-import org.jasig.cas.client.authentication.AttributePrincipal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,9 +20,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.Timestamp;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * <p>
@@ -145,114 +135,5 @@ public class LoginController extends BaseCRUDActionController {
         model.addAttribute("url", url);
 
         return "logout";
-    }
-
-    /**
-     * 提供给外部网站单点登录验证
-     *
-     * @param model    .
-     * @param request  .
-     * @param response .
-     * @return .
-     * @throws Exception
-     */
-    @RequestMapping
-    public String loginForSite(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
-        String loginName = "";
-        AttributePrincipal principal = (AttributePrincipal) request.getUserPrincipal();
-//        System.out.println("request.getRemoteUser() = " + request.getRemoteUser());
-        if (principal != null) {
-            loginName = principal.getName();// 获取用户名
-            System.out.println("loginName = " + loginName);
-        }
-
-        if (StringHelper.isEmpty(loginName)) {
-
-            response.sendRedirect("../login.jsp");
-            return null;
-
-        } else {
-
-            SysUser sysUser = sysUserManager.getSysUser(loginName);
-
-            HttpSession session = request.getSession();
-//            String j_password = RandomUtils.generateString("0123456789", 6);
-            String j_validation_code = RandomUtils.generateString("0123456789", 4);
-            session.setAttribute(CustomAuthenticationProcessingFilter.VALIDATION_CODE, j_validation_code);
-
-            model.addAttribute("j_username", loginName);
-            String password = sysUser.getPassword();
-            if (!StringHelper.isEmpty(password)) {
-                if (password.length() > 20) {
-                    password = CryptUtil.decrypt(password);
-                }
-            }
-            model.addAttribute("j_password", password);
-            model.addAttribute("j_validation_code", j_validation_code);
-
-            model.addAttribute("UUID", "");
-            model.addAttribute("errMsg", "");
-            session.setAttribute("isFromSite", "1");    //是否来自网站，如果是，那么在退出系统的时候必须返回到http://www.hkjgzx.sh.cn
-            System.out.println("session = " + session.getAttribute("isFromSite"));
-//            session.setAttribute(userManager.USERTYPE_KEY, sysUser.getUserType().getCode());
-            return "view/loginForSite/dispatch";
-        }
-    }
-
-    /**
-     * 同步密码--网站修改密码后同步修改MIS系统密码
-     *
-     * @param model   .
-     * @param request .
-     * @return .
-     */
-    @RequestMapping
-    public String passSync(Model model, HttpServletRequest request) {
-        String msg = "无法获取用户信息";
-        String loginName = request.getParameter("loginName");
-        try {
-            if (StringHelper.isEmpty(loginName)) {
-                AttributePrincipal principal = (AttributePrincipal) request.getUserPrincipal();
-//                System.out.println("request.getRemoteUser() = " + request.getRemoteUser());
-                if (principal != null) {
-                    loginName = principal.getName();// 获取用户名
-                }
-            }
-        } catch (Exception e) {
-            loginName = "";
-        }
-
-        if (!StringHelper.isEmpty(loginName)) {
-            String oldPass = request.getParameter("oldPass");
-            String newPass = request.getParameter("newPass");
-            if (!StringHelper.isEmpty(oldPass) && !StringHelper.isEmpty(newPass)) {
-                SysUser sysUser = sysUserManager.getSysUser(loginName);
-                if (sysUser != null) {
-                    if (Md5Utils.md5(oldPass).equals(JspHelper.getString(sysUser.getMd5Pass()))) {
-                        sysUser.setMd5Pass(Md5Utils.md5(newPass));
-                        sysUser.setPassword(CryptUtil.encrypt(newPass));
-                        sysUser.setPasswordUpdateTime(new Timestamp(System.currentTimeMillis()));
-                        sysUserService.save(sysUser);
-                        msg = "";
-
-                    } else {
-                        msg = "原密码不正确";
-                    }
-                } else {
-                    msg = "用户无法匹配";
-                }
-            } else {
-                msg = "原密码和新密码均不能为空";
-            }
-        }
-
-        //返回信息
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("msg", StringHelper.isEmpty(msg)?"密码修改成功" : msg);
-        map.put("success", StringHelper.isEmpty(msg));
-        String ret = JSONArray.fromObject(map).toString();
-
-        model.addAttribute("msg", ret);
-        return "common/msg";
     }
 }
