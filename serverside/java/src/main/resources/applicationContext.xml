@@ -92,9 +92,9 @@
         </property>
     </bean>
 
-    <bean name="dataSourceManager" class="com.justonetech.query.core.stat.dataSource.DataSourceManager">
-        <constructor-arg ref="dataSource"/>
-    </bean>
+    <!--<bean name="dataSourceManager" class="com.justonetech.query.core.stat.dataSource.DataSourceManager">-->
+        <!--<constructor-arg ref="dataSource"/>-->
+    <!--</bean>-->
 
     <!-- Hibernate配置 -->
     <bean name="treeIdIncrease" class="java.lang.Integer">
