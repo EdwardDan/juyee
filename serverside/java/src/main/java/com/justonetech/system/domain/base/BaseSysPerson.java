@@ -46,6 +46,7 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 	public static String PROP_UPDATE_TIME = "updateTime";
 	public static String PROP_MSN_CODE = "msnCode";
 	public static String PROP_NAME = "name";
+	public static String PROP_CATEGORY = "category";
 	public static String PROP_EDUCATION = "education";
 	public static String PROP_EMAIL = "email";
 	public static String PROP_MEMO = "memo";
@@ -65,7 +66,7 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 	/**
 	 * Constructor for primary key
 	 */
-	public BaseSysPerson (java.lang.Long id) {
+	public BaseSysPerson (Long id) {
 		this.setId(id);
 		initialize();
 	}
@@ -77,28 +78,28 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 	private int hashCode = Integer.MIN_VALUE;
 
 	// primary key
-	private java.lang.Long id;
+	private Long id;
 
 	// fields
     /*编号*/
     /*编号*/
-	private java.lang.String code;
+	private String code;
 	
     /*姓名*/
     /*姓名*/
-	private java.lang.String name;
+	private String name;
 	
     /*身份证号*/
     /*身份证号*/
-	private java.lang.String card;
+	private String card;
 	
     /*年龄*/
     /*年龄*/
-	private java.lang.Integer age;
+	private Integer age;
 	
     /*性别*/
     /*性别*/
-	private java.lang.Boolean sex;
+	private Boolean sex;
 	
     /*出生年月*/
     /*出生年月*/
@@ -106,43 +107,43 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 	
     /*籍贯*/
     /*籍贯*/
-	private java.lang.String bornPlace;
+	private String bornPlace;
 	
     /*移动电话*/
     /*移动电话*/
-	private java.lang.String mobile;
+	private String mobile;
 	
     /*固定电话*/
     /*固定电话*/
-	private java.lang.String officeTel;
+	private String officeTel;
 	
     /*传真*/
     /*传真*/
-	private java.lang.String faxTel;
+	private String faxTel;
 	
     /*邮件*/
     /*邮件*/
-	private java.lang.String email;
+	private String email;
 	
     /*邮政编码*/
     /*邮政编码*/
-	private java.lang.String zipcode;
+	private String zipcode;
 	
     /*工作年限*/
     /*工作年限*/
-	private java.lang.Integer workYear;
+	private Integer workYear;
 	
     /*MSN_CODE*/
     /*MSN_CODE*/
-	private java.lang.String msnCode;
+	private String msnCode;
 	
     /*QQ_CODE*/
     /*QQ_CODE*/
-	private java.lang.String qqCode;
+	private String qqCode;
 	
     /*备注*/
     /*备注*/
-	private java.lang.String memo;
+	private String memo;
 	
     /*创建时间*/
     /*创建时间*/
@@ -154,37 +155,38 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 	
     /*更新人*/
     /*更新人*/
-	private java.lang.String updateUser;
+	private String updateUser;
 	
     /*创建人*/
     /*创建人*/
-	private java.lang.String createUser;
+	private String createUser;
 	
     /*是否显示在去向列表*/
     /*是否显示在去向列表*/
-	private java.lang.Boolean isShowPersonOut;
+	private Boolean isShowPersonOut;
 	
     /*学历中文描述*/
     /*学历中文描述*/
-	private java.lang.String educationDesc;
+	private String educationDesc;
 	
     /*政治面貌中文描述*/
     /*政治面貌中文描述*/
-	private java.lang.String politicalDesc;
+	private String politicalDesc;
 	
     /*技术职称或等级*/
     /*技术职称或等级*/
-	private java.lang.String technicalLevel;
+	private String technicalLevel;
 	
     /*是否编内*/
     /*是否编内*/
-	private java.lang.Boolean isWorking;
+	private Boolean isWorking;
 	
 
 	// many to one
 	private com.justonetech.system.domain.SysCodeDetail education;
 	private com.justonetech.system.domain.SysCodeDetail political;
 	private com.justonetech.biz.domain.DocDocument doc;
+	private com.justonetech.system.domain.SysCodeDetail category;
 
 	// collections
 	private java.util.Set<com.justonetech.system.domain.SysPersonDept> sysPersonDepts;
@@ -198,7 +200,7 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
      *  generator-class="com.justonetech.core.orm.hibernate.LongIdGenerator"
      *  column="ID"
      */
-	public java.lang.Long getId () {
+	public Long getId () {
 		return id;
 	}
 
@@ -207,7 +209,7 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 	 * @param id the new ID
 	 * @deprecated
 	 */
-	public void setId (java.lang.Long id) {
+	public void setId (Long id) {
 		this.id = id;
 		this.hashCode = Integer.MIN_VALUE;
 	}
@@ -218,7 +220,7 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 	/**
 	 * Return the value associated with the column: CODE
 	 */
-	public java.lang.String getCode () {
+	public String getCode () {
 		return code;
 	}
 
@@ -226,7 +228,7 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 	 * Set the value related to the column: CODE
 	 * @param code the CODE value
 	 */
-	public void setCode (java.lang.String code) {
+	public void setCode (String code) {
 		this.code = code;
 	}
 
@@ -234,7 +236,7 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 	/**
 	 * Return the value associated with the column: NAME
 	 */
-	public java.lang.String getName () {
+	public String getName () {
 		return name;
 	}
 
@@ -242,7 +244,7 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 	 * Set the value related to the column: NAME
 	 * @param name the NAME value
 	 */
-	public void setName (java.lang.String name) {
+	public void setName (String name) {
 		this.name = name;
 	}
 
@@ -250,7 +252,7 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 	/**
 	 * Return the value associated with the column: CARD
 	 */
-	public java.lang.String getCard () {
+	public String getCard () {
 		return card;
 	}
 
@@ -258,7 +260,7 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 	 * Set the value related to the column: CARD
 	 * @param card the CARD value
 	 */
-	public void setCard (java.lang.String card) {
+	public void setCard (String card) {
 		this.card = card;
 	}
 
@@ -266,7 +268,7 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 	/**
 	 * Return the value associated with the column: AGE
 	 */
-	public java.lang.Integer getAge () {
+	public Integer getAge () {
 		return age;
 	}
 
@@ -274,7 +276,7 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 	 * Set the value related to the column: AGE
 	 * @param age the AGE value
 	 */
-	public void setAge (java.lang.Integer age) {
+	public void setAge (Integer age) {
 		this.age = age;
 	}
 
@@ -282,7 +284,7 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 	/**
 	 * Return the value associated with the column: SEX
 	 */
-	public java.lang.Boolean getSex () {
+	public Boolean getSex () {
 		return sex;
 	}
 
@@ -290,7 +292,7 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 	 * Set the value related to the column: SEX
 	 * @param sex the SEX value
 	 */
-	public void setSex (java.lang.Boolean sex) {
+	public void setSex (Boolean sex) {
 		this.sex = sex;
 	}
 
@@ -314,7 +316,7 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 	/**
 	 * Return the value associated with the column: BORN_PLACE
 	 */
-	public java.lang.String getBornPlace () {
+	public String getBornPlace () {
 		return bornPlace;
 	}
 
@@ -322,7 +324,7 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 	 * Set the value related to the column: BORN_PLACE
 	 * @param bornPlace the BORN_PLACE value
 	 */
-	public void setBornPlace (java.lang.String bornPlace) {
+	public void setBornPlace (String bornPlace) {
 		this.bornPlace = bornPlace;
 	}
 
@@ -330,7 +332,7 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 	/**
 	 * Return the value associated with the column: MOBILE
 	 */
-	public java.lang.String getMobile () {
+	public String getMobile () {
 		return mobile;
 	}
 
@@ -338,7 +340,7 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 	 * Set the value related to the column: MOBILE
 	 * @param mobile the MOBILE value
 	 */
-	public void setMobile (java.lang.String mobile) {
+	public void setMobile (String mobile) {
 		this.mobile = mobile;
 	}
 
@@ -346,7 +348,7 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 	/**
 	 * Return the value associated with the column: OFFICE_TEL
 	 */
-	public java.lang.String getOfficeTel () {
+	public String getOfficeTel () {
 		return officeTel;
 	}
 
@@ -354,7 +356,7 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 	 * Set the value related to the column: OFFICE_TEL
 	 * @param officeTel the OFFICE_TEL value
 	 */
-	public void setOfficeTel (java.lang.String officeTel) {
+	public void setOfficeTel (String officeTel) {
 		this.officeTel = officeTel;
 	}
 
@@ -362,7 +364,7 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 	/**
 	 * Return the value associated with the column: FAX_TEL
 	 */
-	public java.lang.String getFaxTel () {
+	public String getFaxTel () {
 		return faxTel;
 	}
 
@@ -370,7 +372,7 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 	 * Set the value related to the column: FAX_TEL
 	 * @param faxTel the FAX_TEL value
 	 */
-	public void setFaxTel (java.lang.String faxTel) {
+	public void setFaxTel (String faxTel) {
 		this.faxTel = faxTel;
 	}
 
@@ -378,7 +380,7 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 	/**
 	 * Return the value associated with the column: EMAIL
 	 */
-	public java.lang.String getEmail () {
+	public String getEmail () {
 		return email;
 	}
 
@@ -386,7 +388,7 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 	 * Set the value related to the column: EMAIL
 	 * @param email the EMAIL value
 	 */
-	public void setEmail (java.lang.String email) {
+	public void setEmail (String email) {
 		this.email = email;
 	}
 
@@ -394,7 +396,7 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 	/**
 	 * Return the value associated with the column: ZIPCODE
 	 */
-	public java.lang.String getZipcode () {
+	public String getZipcode () {
 		return zipcode;
 	}
 
@@ -402,7 +404,7 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 	 * Set the value related to the column: ZIPCODE
 	 * @param zipcode the ZIPCODE value
 	 */
-	public void setZipcode (java.lang.String zipcode) {
+	public void setZipcode (String zipcode) {
 		this.zipcode = zipcode;
 	}
 
@@ -410,7 +412,7 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 	/**
 	 * Return the value associated with the column: WORK_YEAR
 	 */
-	public java.lang.Integer getWorkYear () {
+	public Integer getWorkYear () {
 		return workYear;
 	}
 
@@ -418,7 +420,7 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 	 * Set the value related to the column: WORK_YEAR
 	 * @param workYear the WORK_YEAR value
 	 */
-	public void setWorkYear (java.lang.Integer workYear) {
+	public void setWorkYear (Integer workYear) {
 		this.workYear = workYear;
 	}
 
@@ -426,7 +428,7 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 	/**
 	 * Return the value associated with the column: MSN_CODE
 	 */
-	public java.lang.String getMsnCode () {
+	public String getMsnCode () {
 		return msnCode;
 	}
 
@@ -434,7 +436,7 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 	 * Set the value related to the column: MSN_CODE
 	 * @param msnCode the MSN_CODE value
 	 */
-	public void setMsnCode (java.lang.String msnCode) {
+	public void setMsnCode (String msnCode) {
 		this.msnCode = msnCode;
 	}
 
@@ -442,7 +444,7 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 	/**
 	 * Return the value associated with the column: QQ_CODE
 	 */
-	public java.lang.String getQqCode () {
+	public String getQqCode () {
 		return qqCode;
 	}
 
@@ -450,7 +452,7 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 	 * Set the value related to the column: QQ_CODE
 	 * @param qqCode the QQ_CODE value
 	 */
-	public void setQqCode (java.lang.String qqCode) {
+	public void setQqCode (String qqCode) {
 		this.qqCode = qqCode;
 	}
 
@@ -458,7 +460,7 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 	/**
 	 * Return the value associated with the column: MEMO
 	 */
-	public java.lang.String getMemo () {
+	public String getMemo () {
 		return memo;
 	}
 
@@ -466,7 +468,7 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 	 * Set the value related to the column: MEMO
 	 * @param memo the MEMO value
 	 */
-	public void setMemo (java.lang.String memo) {
+	public void setMemo (String memo) {
 		this.memo = memo;
 	}
 
@@ -506,7 +508,7 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 	/**
 	 * Return the value associated with the column: UPDATE_USER
 	 */
-	public java.lang.String getUpdateUser () {
+	public String getUpdateUser () {
 		return updateUser;
 	}
 
@@ -514,7 +516,7 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 	 * Set the value related to the column: UPDATE_USER
 	 * @param updateUser the UPDATE_USER value
 	 */
-	public void setUpdateUser (java.lang.String updateUser) {
+	public void setUpdateUser (String updateUser) {
 		this.updateUser = updateUser;
 	}
 
@@ -522,7 +524,7 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 	/**
 	 * Return the value associated with the column: CREATE_USER
 	 */
-	public java.lang.String getCreateUser () {
+	public String getCreateUser () {
 		return createUser;
 	}
 
@@ -530,7 +532,7 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 	 * Set the value related to the column: CREATE_USER
 	 * @param createUser the CREATE_USER value
 	 */
-	public void setCreateUser (java.lang.String createUser) {
+	public void setCreateUser (String createUser) {
 		this.createUser = createUser;
 	}
 
@@ -538,7 +540,7 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 	/**
 	 * Return the value associated with the column: IS_SHOW_PERSON_OUT
 	 */
-	public java.lang.Boolean getIsShowPersonOut () {
+	public Boolean getIsShowPersonOut () {
 		return isShowPersonOut;
 	}
 
@@ -546,7 +548,7 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 	 * Set the value related to the column: IS_SHOW_PERSON_OUT
 	 * @param isShowPersonOut the IS_SHOW_PERSON_OUT value
 	 */
-	public void setIsShowPersonOut (java.lang.Boolean isShowPersonOut) {
+	public void setIsShowPersonOut (Boolean isShowPersonOut) {
 		this.isShowPersonOut = isShowPersonOut;
 	}
 
@@ -554,7 +556,7 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 	/**
 	 * Return the value associated with the column: EDUCATION_DESC
 	 */
-	public java.lang.String getEducationDesc () {
+	public String getEducationDesc () {
 		return educationDesc;
 	}
 
@@ -562,7 +564,7 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 	 * Set the value related to the column: EDUCATION_DESC
 	 * @param educationDesc the EDUCATION_DESC value
 	 */
-	public void setEducationDesc (java.lang.String educationDesc) {
+	public void setEducationDesc (String educationDesc) {
 		this.educationDesc = educationDesc;
 	}
 
@@ -570,7 +572,7 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 	/**
 	 * Return the value associated with the column: POLITICAL_DESC
 	 */
-	public java.lang.String getPoliticalDesc () {
+	public String getPoliticalDesc () {
 		return politicalDesc;
 	}
 
@@ -578,7 +580,7 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 	 * Set the value related to the column: POLITICAL_DESC
 	 * @param politicalDesc the POLITICAL_DESC value
 	 */
-	public void setPoliticalDesc (java.lang.String politicalDesc) {
+	public void setPoliticalDesc (String politicalDesc) {
 		this.politicalDesc = politicalDesc;
 	}
 
@@ -586,7 +588,7 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 	/**
 	 * Return the value associated with the column: TECHNICAL_LEVEL
 	 */
-	public java.lang.String getTechnicalLevel () {
+	public String getTechnicalLevel () {
 		return technicalLevel;
 	}
 
@@ -594,7 +596,7 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 	 * Set the value related to the column: TECHNICAL_LEVEL
 	 * @param technicalLevel the TECHNICAL_LEVEL value
 	 */
-	public void setTechnicalLevel (java.lang.String technicalLevel) {
+	public void setTechnicalLevel (String technicalLevel) {
 		this.technicalLevel = technicalLevel;
 	}
 
@@ -602,7 +604,7 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 	/**
 	 * Return the value associated with the column: IS_WORKING
 	 */
-	public java.lang.Boolean getIsWorking () {
+	public Boolean getIsWorking () {
 		return isWorking;
 	}
 
@@ -610,7 +612,7 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 	 * Set the value related to the column: IS_WORKING
 	 * @param isWorking the IS_WORKING value
 	 */
-	public void setIsWorking (java.lang.Boolean isWorking) {
+	public void setIsWorking (Boolean isWorking) {
 		this.isWorking = isWorking;
 	}
 
@@ -664,12 +666,25 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 
 
 	/**
+	 * Return the value associated with the column: CATEGORY_ID
+	 */
+	public com.justonetech.system.domain.SysCodeDetail getCategory () {
+		return category;
+	}
+
+	/**
+	 * Set the value related to the column: CATEGORY_ID
+	 * @param category the CATEGORY_ID value
+	 */
+	public void setCategory (com.justonetech.system.domain.SysCodeDetail category) {
+		this.category = category;
+	}
+
+
+	/**
 	 * Return the value associated with the column: sysPersonDepts
 	 */
 	public java.util.Set<com.justonetech.system.domain.SysPersonDept> getSysPersonDepts () {
-        if(sysPersonDepts==null){
-            sysPersonDepts = new java.util.LinkedHashSet<com.justonetech.system.domain.SysPersonDept>();
-        }
 		return sysPersonDepts;
 	}
 
@@ -686,9 +701,6 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 	 * Return the value associated with the column: sysUsers
 	 */
 	public java.util.Set<com.justonetech.system.domain.SysUser> getSysUsers () {
-        if(sysUsers==null){
-            sysUsers = new java.util.LinkedHashSet<com.justonetech.system.domain.SysUser>();
-        }
 		return sysUsers;
 	}
 

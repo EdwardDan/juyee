@@ -323,6 +323,13 @@
                 not-null="false"
                 >
         </many-to-one>
+        <many-to-one
+                name="category"
+                column="CATEGORY_ID"
+                class="SysCodeDetail"
+                not-null="false"
+                >
+        </many-to-one>
 
         <set name="sysPersonDepts" inverse="true">
             <key column="PERSON_ID"/>

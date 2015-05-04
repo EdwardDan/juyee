@@ -1,11 +1,9 @@
 package com.justonetech.system.domain.base;
 
-import com.justonetech.system.domain.SysDept;
-import com.justonetech.system.domain.SysPersonDept;
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import com.justonetech.core.entity.Auditable;
+import com.justonetech.core.entity.Treeable;
 
 import java.io.Serializable;
-import java.util.Set;
 
 
 /**
@@ -25,31 +23,37 @@ import java.util.Set;
  * @hibernate.class
  *  table="SYS_DEPT"
  */
-@JsonIgnoreProperties(value={"hibernateLazyInitializer"})
-public abstract class BaseSysDept  implements Serializable,com.justonetech.core.entity.Treeable{
+
+public abstract class BaseSysDept  implements Serializable,Auditable,Treeable {
 
 	public static String REF = "SysDept";
-	public static String PROP_CITY_CODE = "cityCode";
-	public static String PROP_ORDER_NO = "orderNo";
-	public static String PROP_UPDATE_TIME = "updateTime";
-	public static String PROP_CREATE_TIME = "createTime";
-	public static String PROP_MEMO = "memo";
-	public static String PROP_PROVINCE_NAME = "provinceName";
-	public static String PROP_IS_LEAF = "isLeaf";
-	public static String PROP_PROVINCE_CODE = "provinceCode";
-	public static String PROP_CREATE_USER = "createUser";
-	public static String PROP_CARD_NO = "cardNo";
-	public static String PROP_TREE_ID = "treeId";
 	public static String PROP_CITY_NAME = "cityName";
-	public static String PROP_SHORT_NAME = "shortName";
-	public static String PROP_PARENT = "parent";
 	public static String PROP_CODE = "code";
-	public static String PROP_ADDRESS = "address";
-	public static String PROP_NAME = "name";
-	public static String PROP_IS_TAG = "isTag";
-	public static String PROP_ID = "id";
-	public static String PROP_UPDATE_USER = "updateUser";
+	public static String PROP_ZIPCODE = "zipcode";
+	public static String PROP_CARD_NO = "cardNo";
+	public static String PROP_CREATE_USER = "createUser";
+	public static String PROP_ORDER_NO = "orderNo";
+	public static String PROP_IS_LEAF = "isLeaf";
+	public static String PROP_LINK_ADDRESS = "linkAddress";
 	public static String PROP_IS_VALID = "isValid";
+	public static String PROP_MANAGER = "manager";
+	public static String PROP_PROVINCE_CODE = "provinceCode";
+	public static String PROP_PROVINCE_NAME = "provinceName";
+	public static String PROP_TEL = "tel";
+	public static String PROP_UPDATE_USER = "updateUser";
+	public static String PROP_PARENT = "parent";
+	public static String PROP_FAX = "fax";
+	public static String PROP_UPDATE_TIME = "updateTime";
+	public static String PROP_CITY_CODE = "cityCode";
+	public static String PROP_NAME = "name";
+	public static String PROP_CATEGORY = "category";
+	public static String PROP_IS_TAG = "isTag";
+	public static String PROP_ADDRESS = "address";
+	public static String PROP_SHORT_NAME = "shortName";
+	public static String PROP_MEMO = "memo";
+	public static String PROP_CREATE_TIME = "createTime";
+	public static String PROP_ID = "id";
+	public static String PROP_TREE_ID = "treeId";
 
 
 	// constructors
@@ -124,17 +128,13 @@ public abstract class BaseSysDept  implements Serializable,com.justonetech.core.
 	private Long orderNo;
 	
     /*单位标志*/
-    /*单位标志  1：单位  0：部门*/
+    /*单位标志  0：单位  1：部门*/
 	private Boolean isTag;
 	
     /*备注*/
     /*备注*/
 	private String memo;
-
-    /*是否有效*/
-    /*是否有效*/
-	private Boolean isValid;
-
+	
     /*创建时间*/
     /*创建时间*/
 	private java.sql.Timestamp createTime;
@@ -151,13 +151,38 @@ public abstract class BaseSysDept  implements Serializable,com.justonetech.core.
     /*更新人(记录帐号）*/
 	private String updateUser;
 	
+    /*是否有效*/
+    /*是否有效*/
+	private Boolean isValid;
+	
+    /*单位负责人*/
+    /*单位负责人*/
+	private String manager;
+	
+    /*通讯地址*/
+    /*通讯地址*/
+	private String linkAddress;
+	
+    /*邮编*/
+    /*邮编*/
+	private String zipcode;
+	
+    /*电话*/
+    /*电话*/
+	private String tel;
+	
+    /*传真*/
+    /*传真*/
+	private String fax;
+	
 
 	// many to one
 	private com.justonetech.system.domain.SysDept parent;
+	private com.justonetech.system.domain.SysCodeDetail category;
 
-    // collections
-	private java.util.Set<SysDept> children;
-	private java.util.Set<SysPersonDept> sysPersonDepts;
+	// collections
+	private java.util.Set<com.justonetech.system.domain.SysDept> children;
+	private java.util.Set<com.justonetech.system.domain.SysPersonDept> sysPersonDepts;
 
 
 
@@ -471,15 +496,104 @@ public abstract class BaseSysDept  implements Serializable,com.justonetech.core.
 		this.updateUser = updateUser;
 	}
 
-    public Boolean getIsValid() {
-        return isValid;
-    }
 
-    public void setIsValid(Boolean isValid) {
-        this.isValid = isValid;
-    }
+	/**
+	 * Return the value associated with the column: IS_VALID
+	 */
+	public Boolean getIsValid () {
+		return isValid;
+	}
 
-    /**
+	/**
+	 * Set the value related to the column: IS_VALID
+	 * @param isValid the IS_VALID value
+	 */
+	public void setIsValid (Boolean isValid) {
+		this.isValid = isValid;
+	}
+
+
+	/**
+	 * Return the value associated with the column: MANAGER
+	 */
+	public String getManager () {
+		return manager;
+	}
+
+	/**
+	 * Set the value related to the column: MANAGER
+	 * @param manager the MANAGER value
+	 */
+	public void setManager (String manager) {
+		this.manager = manager;
+	}
+
+
+	/**
+	 * Return the value associated with the column: LINK_ADDRESS
+	 */
+	public String getLinkAddress () {
+		return linkAddress;
+	}
+
+	/**
+	 * Set the value related to the column: LINK_ADDRESS
+	 * @param linkAddress the LINK_ADDRESS value
+	 */
+	public void setLinkAddress (String linkAddress) {
+		this.linkAddress = linkAddress;
+	}
+
+
+	/**
+	 * Return the value associated with the column: ZIPCODE
+	 */
+	public String getZipcode () {
+		return zipcode;
+	}
+
+	/**
+	 * Set the value related to the column: ZIPCODE
+	 * @param zipcode the ZIPCODE value
+	 */
+	public void setZipcode (String zipcode) {
+		this.zipcode = zipcode;
+	}
+
+
+	/**
+	 * Return the value associated with the column: TEL
+	 */
+	public String getTel () {
+		return tel;
+	}
+
+	/**
+	 * Set the value related to the column: TEL
+	 * @param tel the TEL value
+	 */
+	public void setTel (String tel) {
+		this.tel = tel;
+	}
+
+
+	/**
+	 * Return the value associated with the column: FAX
+	 */
+	public String getFax () {
+		return fax;
+	}
+
+	/**
+	 * Set the value related to the column: FAX
+	 * @param fax the FAX value
+	 */
+	public void setFax (String fax) {
+		this.fax = fax;
+	}
+
+
+	/**
 	 * Return the value associated with the column: PARENT_ID
 	 */
 	public com.justonetech.system.domain.SysDept getParent () {
@@ -490,33 +604,69 @@ public abstract class BaseSysDept  implements Serializable,com.justonetech.core.
 	 * Set the value related to the column: PARENT_ID
 	 * @param parent the PARENT_ID value
 	 */
-	public void setParent (SysDept parent) {
+	public void setParent (com.justonetech.system.domain.SysDept parent) {
 		this.parent = parent;
 	}
 
-    public Set<SysDept> getChildren() {
-        if(children == null){
-			children = new java.util.LinkedHashSet<SysDept>();
+
+	/**
+	 * Return the value associated with the column: CATEGORY_ID
+	 */
+	public com.justonetech.system.domain.SysCodeDetail getCategory () {
+		return category;
+	}
+
+	/**
+	 * Set the value related to the column: CATEGORY_ID
+	 * @param category the CATEGORY_ID value
+	 */
+	public void setCategory (com.justonetech.system.domain.SysCodeDetail category) {
+		this.category = category;
+	}
+
+
+	/**
+	 * Return the value associated with the column: children
+	 */
+	public java.util.Set<com.justonetech.system.domain.SysDept> getChildren () {
+		if(children == null){
+			children = new java.util.LinkedHashSet<com.justonetech.system.domain.SysDept>();
 		}
-        return children;
-    }
+		return children;
+	}
 
-    public void setChildren(Set<SysDept> children) {
-        this.children = children;
-    }
+	/**
+	 * Set the value related to the column: children
+	 * @param children the children value
+	 */
+	public void setChildren (java.util.Set<com.justonetech.system.domain.SysDept> children) {
+		this.children = children;
+	}
 
-    public Set<SysPersonDept> getSysPersonDepts() {
-        if(sysPersonDepts == null){
-			sysPersonDepts = new java.util.LinkedHashSet<SysPersonDept>();
-		}
-        return sysPersonDepts;
-    }
+	public void addTochildren (com.justonetech.system.domain.SysDept sysDept) {
+		if (null == getChildren()) setChildren(new java.util.LinkedHashSet<com.justonetech.system.domain.SysDept>());
+		getChildren().add(sysDept);
+	}
 
-    public void setSysPersonDepts(Set<SysPersonDept> sysPersonDepts) {
-        this.sysPersonDepts = sysPersonDepts;
-    }
 
-    public boolean equals (Object obj) {
+	/**
+	 * Return the value associated with the column: sysPersonDepts
+	 */
+	public java.util.Set<com.justonetech.system.domain.SysPersonDept> getSysPersonDepts () {
+		return sysPersonDepts;
+	}
+
+	/**
+	 * Set the value related to the column: sysPersonDepts
+	 * @param sysPersonDepts the sysPersonDepts value
+	 */
+	public void setSysPersonDepts (java.util.Set<com.justonetech.system.domain.SysPersonDept> sysPersonDepts) {
+		this.sysPersonDepts = sysPersonDepts;
+	}
+
+
+
+	public boolean equals (Object obj) {
 		if (null == obj) return false;
 		if (!(obj instanceof com.justonetech.system.domain.SysDept)) return false;
 		else {
@@ -559,6 +709,12 @@ public abstract class BaseSysDept  implements Serializable,com.justonetech.core.
 		builder.append(updateTime);
 		builder.append(createUser);
 		builder.append(updateUser);
+		builder.append(isValid);
+		builder.append(manager);
+		builder.append(linkAddress);
+		builder.append(zipcode);
+		builder.append(tel);
+		builder.append(fax);
 		return builder.toString();
 	}
 

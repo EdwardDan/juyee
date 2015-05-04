@@ -235,6 +235,60 @@
             <meta attribute="ColumnName">是否有效</meta>
             <meta attribute="ColumnComment">是否有效</meta>
         </property>
+        <property
+                name="manager"
+                column="MANAGER"
+                type="string"
+                not-null="false"
+                length="50"
+                >
+            <meta attribute="ColumnName">单位负责人</meta>
+            <meta attribute="ColumnComment">单位负责人</meta>
+        </property>
+
+        <property
+                name="linkAddress"
+                column="LINK_ADDRESS"
+                type="string"
+                not-null="false"
+                length="500"
+                >
+            <meta attribute="ColumnName">通讯地址</meta>
+            <meta attribute="ColumnComment">通讯地址</meta>
+        </property>
+
+        <property
+                name="zipcode"
+                column="ZIPCODE"
+                type="string"
+                not-null="false"
+                length="50"
+                >
+            <meta attribute="ColumnName">邮编</meta>
+            <meta attribute="ColumnComment">邮编</meta>
+        </property>
+
+        <property
+                name="tel"
+                column="TEL"
+                type="string"
+                not-null="false"
+                length="50"
+                >
+            <meta attribute="ColumnName">电话</meta>
+            <meta attribute="ColumnComment">电话</meta>
+        </property>
+
+        <property
+                name="fax"
+                column="FAX"
+                type="string"
+                not-null="false"
+                length="50"
+                >
+            <meta attribute="ColumnName">传真</meta>
+            <meta attribute="ColumnComment">传真</meta>
+        </property>
 
 		<many-to-one
 			name="parent"
@@ -243,6 +297,13 @@
 			not-null="false"
 		>
 		</many-to-one>
+        <many-to-one
+                name="category"
+                column="CATEGORY_ID"
+                class="SysCodeDetail"
+                not-null="false"
+                >
+        </many-to-one>
 
         <set name="children" inverse="true">
 			<key column="PARENT_ID"/>
@@ -253,28 +314,6 @@
 			<key column="DEPT_ID"/>
 			<one-to-many class="SysPersonDept"/>
 		</set>
-
-<!--
-
-		<set name="sysDeptUsers" inverse="true">
-			<key column="DEPT_ID"/>
-			<one-to-many class="SysDeptUser"/>
-		</set>
-
--->
-<!--
-
-
-
--->
-<!--
-
-		<set name="projectWorkSites" inverse="true">
-			<key column="DEPT_ID"/>
-			<one-to-many class="ProjectWorkSite"/>
-		</set>
-
--->
 
 	</class>	
     <query name="sysdept_all_data_query">
