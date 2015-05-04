@@ -1,98 +1,361 @@
--- Add/modify columns 
-alter table OA_LEAVE_APPLY add SMS_TIMEAREA VARCHAR2(200 CHAR);
-alter table OA_LEAVE_APPLY add SMS_CONTENT VARCHAR2(500 CHAR);
-alter table OA_LEAVE_APPLY add IS_SEND_SMS NUMBER(1);
--- Add comments to the columns 
-comment on column OA_LEAVE_APPLY.SMS_TIMEAREA
-  is '短信时间段';
-comment on column OA_LEAVE_APPLY.SMS_CONTENT
-  is '短信内容';
-comment on column OA_LEAVE_APPLY.IS_SEND_SMS
-  is '是否发送短信';
+drop table PROJ_BID cascade constraints;
 
+drop table PROJ_INFO cascade constraints;
 
-drop table OA_BBS cascade constraints;
+drop table PROJ_NODE cascade constraints;
+
+drop table PROJ_RELATE_DEPT cascade constraints;
+
+drop table PROJ_RELATE_PERSON cascade constraints;
+
+drop table PROJ_STAGE cascade constraints;
 
 /*==============================================================*/
-/* Table: OA_BBS                                                */
+/* Table: PROJ_INFO                                             */
 /*==============================================================*/
-create table OA_BBS  (
-   ID                   NUMBER(10)                      not null,
-   TYPE_ID              NUMBER(10),
-   TYPE_NAME            VARCHAR2(200 CHAR),
-   TITLE                VARCHAR2(200 CHAR),
-   CONTENT              CLOB,
-   VISIT_TIMES          NUMBER(8)                      default 0,
-   DOCUMENT_ID          NUMBER(10),
-   PARENT_ID            NUMBER(10),
-   CREATE_TIME          DATE,
-   CREATE_USER          VARCHAR2(100),
-   UPDATE_TIME          DATE,
-   UPDATE_USER          VARCHAR2(100),
-   PERSON_NAME          VARCHAR2(100),
-   IS_VALID             NUMBER(1)                      default 1,
-   IS_TOP               NUMBER(1)                      default 0,
-   REPLY_TIMES          NUMBER(8)                      default 0,
-   DEPT_NAME            VARCHAR2(200 CHAR),
-   constraint PK_OA_BBS primary key (ID),
-   constraint FK_OA_BBS_PARENT foreign key (PARENT_ID)
-         references OA_BBS (ID),
-   constraint FK_OA_BBS_TYPE foreign key (TYPE_ID)
+create table PROJ_INFO 
+(
+   ID                   number(10)           not null,
+   NAME                 VARCHAR(500),
+   YEAR                 number(4),
+   NO                   number(5),
+   PROPERTY_ID          number(10),
+   STAGE_ID             number(10),
+   CATEGORY_ID          number(10),
+   BUILD_MILEAGE        VARCHAR(50),
+   LOCATION             VARCHAR(500),
+   BELONG_AREA_ID       number(10),
+   START_DATE           date,
+   INTRO                CLOB,
+   JS_DEPT              VARCHAR(300),
+   SG_DEPT              VARCHAR(300),
+   SG_DEPT_PERSON       VARCHAR(50),
+   SG_DEPT_TEL          VARCHAR(50),
+   JL_DEPT              VARCHAR(300),
+   JL_DEPT_PERSON       VARCHAR(50),
+   JL_DEPT_TEL          VARCHAR(50),
+   constraint PK_PROJ_INFO primary key (ID),
+   constraint FK_PROJ_INFO_PROPERTY foreign key (PROPERTY_ID)
          references SYS_CODE_DETAIL (ID),
-   constraint FK_OA_BBS_DOC foreign key (DOCUMENT_ID)
-         references DOC_DOCUMENT (ID)
+   constraint FK_PROJ_INFO_STAGE foreign key (STAGE_ID)
+         references SYS_CODE_DETAIL (ID),
+   constraint FK_PROJ_INFO_CATE foreign key (CATEGORY_ID)
+         references SYS_CODE_DETAIL (ID),
+   constraint FK_PROJ_INFO_AREA foreign key (BELONG_AREA_ID)
+         references SYS_CODE_DETAIL (ID)
 );
 
-comment on table OA_BBS is
-'员工论坛';
+comment on table PROJ_INFO is
+'项目基本信息管理';
 
-comment on column OA_BBS.ID is
-'标识';
+comment on column PROJ_INFO.ID is
+'ID';
 
-comment on column OA_BBS.TYPE_ID is
-'类型标识';
+comment on column PROJ_INFO.NAME is
+'项目名称';
 
-comment on column OA_BBS.TYPE_NAME is
-'类型中文描述(冗余)';
+comment on column PROJ_INFO.YEAR is
+'年份';
 
-comment on column OA_BBS.TITLE is
-'主题名称';
+comment on column PROJ_INFO.NO is
+'项目序号';
 
-comment on column OA_BBS.CONTENT is
-'主要内容';
+comment on column PROJ_INFO.PROPERTY_ID is
+'项目性质ID';
 
-comment on column OA_BBS.VISIT_TIMES is
-'访问次数';
+comment on column PROJ_INFO.STAGE_ID is
+'项目阶段ID';
 
-comment on column OA_BBS.DOCUMENT_ID is
-'附件ID';
+comment on column PROJ_INFO.CATEGORY_ID is
+'项目类型ID';
 
-comment on column OA_BBS.PARENT_ID is
-'关联主题ID';
+comment on column PROJ_INFO.BUILD_MILEAGE is
+'建设里程';
 
-comment on column OA_BBS.CREATE_TIME is
-'创建时间';
+comment on column PROJ_INFO.LOCATION is
+'起讫地点';
 
-comment on column OA_BBS.CREATE_USER is
-'创建用户名';
+comment on column PROJ_INFO.BELONG_AREA_ID is
+'涉及区县ID';
 
-comment on column OA_BBS.UPDATE_TIME is
-'更新时间';
+comment on column PROJ_INFO.START_DATE is
+'开工日期';
 
-comment on column OA_BBS.UPDATE_USER is
-'更新用户名';
+comment on column PROJ_INFO.INTRO is
+'工程简介';
 
-comment on column OA_BBS.PERSON_NAME is
-'发布人姓名(冗余)';
+comment on column PROJ_INFO.JS_DEPT is
+'建设单位';
 
-comment on column OA_BBS.IS_VALID is
+comment on column PROJ_INFO.SG_DEPT is
+'施工单位';
+
+comment on column PROJ_INFO.SG_DEPT_PERSON is
+'施工单位联系人';
+
+comment on column PROJ_INFO.SG_DEPT_TEL is
+'施工单位联系电话';
+
+comment on column PROJ_INFO.JL_DEPT is
+'监理单位';
+
+comment on column PROJ_INFO.JL_DEPT_PERSON is
+'监理单位联系人';
+
+comment on column PROJ_INFO.JL_DEPT_TEL is
+'监理单位联系电话';
+
+/*==============================================================*/
+/* Table: PROJ_BID                                              */
+/*==============================================================*/
+create table PROJ_BID 
+(
+   ID                   number(10)           not null,
+   POJECT_ID            number(10),
+   CODE                 varchar(50),
+   NAME                 varchar(500),
+   BELONG_AREA_ID       number(10),
+   BUILD_MILEAGE        varchar(50),
+   PROJ_LINK            varchar(50),
+   LINK_TEL             varchar(50),
+   START_DATE           date,
+   constraint PK_PROJ_BID primary key (ID),
+   constraint FK_PROJ_BID_PROJ foreign key (POJECT_ID)
+         references PROJ_INFO (ID),
+   constraint FK_PROJ_BID_AREA foreign key (BELONG_AREA_ID)
+         references SYS_CODE_DETAIL (ID)
+);
+
+comment on table PROJ_BID is
+'项目标段管理';
+
+comment on column PROJ_BID.ID is
+'ID';
+
+comment on column PROJ_BID.POJECT_ID is
+'项目ID';
+
+comment on column PROJ_BID.CODE is
+'标段编号';
+
+comment on column PROJ_BID.NAME is
+'标段名称';
+
+comment on column PROJ_BID.BELONG_AREA_ID is
+'涉及区县ID';
+
+comment on column PROJ_BID.BUILD_MILEAGE is
+'建设里程';
+
+comment on column PROJ_BID.PROJ_LINK is
+'项目联系人';
+
+comment on column PROJ_BID.LINK_TEL is
+'联系电话';
+
+comment on column PROJ_BID.START_DATE is
+'开工日期';
+
+/*==============================================================*/
+/* Table: PROJ_NODE                                             */
+/*==============================================================*/
+create table PROJ_NODE 
+(
+   ID                   number(10)           not null,
+   CODE                 varchar(200),
+   NAME                 varchar(200),
+   IS_VALID             number(1),
+   DESCRIPTION          varchar(2000),
+   PARENT_ID            number(10),
+   IS_LEAF              number(1),
+   TREE_ID              varchar(300),
+   constraint PK_PROJ_NODE primary key (ID),
+   constraint FK_PROJ_NODE_PARENT foreign key (PARENT_ID)
+         references PROJ_NODE (ID)
+);
+
+comment on table PROJ_NODE is
+'项目形象进度节点管理';
+
+comment on column PROJ_NODE.ID is
+'ID';
+
+comment on column PROJ_NODE.CODE is
+'编码';
+
+comment on column PROJ_NODE.NAME is
+'名称';
+
+comment on column PROJ_NODE.IS_VALID is
 '是否有效';
 
-comment on column OA_BBS.IS_TOP is
-'是否精华';
+comment on column PROJ_NODE.DESCRIPTION is
+'备注';
 
-comment on column OA_BBS.REPLY_TIMES is
-'回复次数';
+comment on column PROJ_NODE.PARENT_ID is
+'父节点';
 
-comment on column OA_BBS.DEPT_NAME is
-'所属部门名称(冗余)';
+comment on column PROJ_NODE.IS_LEAF is
+'是否叶节点';
+
+comment on column PROJ_NODE.TREE_ID is
+'树形层次';
+
+/*==============================================================*/
+/* Table: PROJ_RELATE_DEPT                                      */
+/*==============================================================*/
+create table PROJ_RELATE_DEPT 
+(
+   ID                   number(10)           not null,
+   PROJECT_ID           number(10),
+   DEPT_ID              number(10),
+   constraint PK_PROJ_RELATE_DEPT primary key (ID),
+   constraint FK_PROJ_REL_DEPT_DE foreign key (DEPT_ID)
+         references SYS_DEPT (ID),
+   constraint FK_PROJ_REL_DEPT_PROJ foreign key (PROJECT_ID)
+         references PROJ_INFO (ID)
+);
+
+comment on table PROJ_RELATE_DEPT is
+'项目与单位关联';
+
+comment on column PROJ_RELATE_DEPT.ID is
+'ID';
+
+comment on column PROJ_RELATE_DEPT.PROJECT_ID is
+'项目ID';
+
+comment on column PROJ_RELATE_DEPT.DEPT_ID is
+'单位ID';
+
+/*==============================================================*/
+/* Table: PROJ_RELATE_PERSON                                    */
+/*==============================================================*/
+create table PROJ_RELATE_PERSON 
+(
+   ID                   number(10)           not null,
+   PROJECT_ID           number(10),
+   PERSON_ID              number(10),
+   DUTY_ROLE            varchar(20),
+   constraint PK_PROJ_RELATE_PERSON primary key (ID),
+   constraint FK_PROJ_REL_PERSON_PER foreign key (PERSON_ID)
+         references SYS_PERSON (ID),
+   constraint FK_PROJ_REL_PERSON_PROJ foreign key (PROJECT_ID)
+         references PROJ_INFO (ID)
+);
+
+comment on table PROJ_RELATE_PERSON is
+'项目与人员关联';
+
+comment on column PROJ_RELATE_PERSON.ID is
+'ID';
+
+comment on column PROJ_RELATE_PERSON.PROJECT_ID is
+'项目ID';
+
+comment on column PROJ_RELATE_PERSON.PERSON_ID is
+'人员ID';
+
+comment on column PROJ_RELATE_PERSON.DUTY_ROLE is
+'承担AB角';
+
+/*==============================================================*/
+/* Table: PROJ_STAGE                                            */
+/*==============================================================*/
+create table PROJ_STAGE 
+(
+   ID                   number(10)           not null,
+   CODE                 varchar(200),
+   NAME                 varchar(200),
+   AUDIT_DEPT           varchar(200),
+   IS_VALID             number(1),
+   DEFAULT_DAYS         number(5),
+   ALERT_DAYS           number(5),
+   LINK_INFO            clob,
+   PARENT_ID            number(10),
+   IS_LEAF              number(1),
+   TREE_ID              varchar(300),
+   constraint PK_PROJ_STAGE primary key (ID),
+   constraint FK_PROJ_STAGE_PARENT foreign key (PARENT_ID)
+         references PROJ_STAGE (ID)
+);
+
+comment on table PROJ_STAGE is
+'项目办证阶段管理';
+
+comment on column PROJ_STAGE.ID is
+'ID';
+
+comment on column PROJ_STAGE.CODE is
+'编码';
+
+comment on column PROJ_STAGE.NAME is
+'名称';
+
+comment on column PROJ_STAGE.AUDIT_DEPT is
+'审批部门';
+
+comment on column PROJ_STAGE.IS_VALID is
+'是否有效';
+
+comment on column PROJ_STAGE.DEFAULT_DAYS is
+'缺省工作周期(天)';
+
+comment on column PROJ_STAGE.ALERT_DAYS is
+'预警期限(天)';
+
+comment on column PROJ_STAGE.LINK_INFO is
+'办证联系信息';
+
+comment on column PROJ_STAGE.PARENT_ID is
+'父节点';
+
+comment on column PROJ_STAGE.IS_LEAF is
+'是否叶节点';
+
+comment on column PROJ_STAGE.TREE_ID is
+'树形层次';
+
+
+
+
+alter table SYS_DEPT add CATEGORY_ID          number(10);
+alter table SYS_DEPT add MANAGER              varchar(50);
+alter table SYS_DEPT add LINK_ADDRESS         varchar(500);
+alter table SYS_DEPT add ZIPCODE              varchar(50);
+alter table SYS_DEPT add TEL                  varchar(50);
+alter table SYS_DEPT add FAX                  varchar(50);
+alter table SYS_DEPT add constraint FK_SYS_DEPT_CATE foreign key (CATEGORY_ID)  references SYS_CODE_DETAIL (ID);
+
+comment on table SYS_DEPT is
+'系统部门';
+
+comment on column SYS_DEPT.ID is
+'id';
+
+comment on column SYS_DEPT.CATEGORY_ID is
+'单位类型ID(业主/建设/监理)';
+
+comment on column SYS_DEPT.MANAGER is
+'单位负责人';
+
+comment on column SYS_DEPT.LINK_ADDRESS is
+'通讯地址';
+
+comment on column SYS_DEPT.ZIPCODE is
+'邮编';
+
+comment on column SYS_DEPT.TEL is
+'电话';
+
+comment on column SYS_DEPT.FAX is
+'传真';
+
+
+
+
+alter table SYS_PERSON add  CATEGORY_ID          number(10);
+alter table SYS_PERSON add  constraint FK_SYS_PERSON_CATE foreign key (CATEGORY_ID) references SYS_CODE_DETAIL (ID);
+
+comment on column SYS_PERSON.CATEGORY_ID is
+'用户类型ID(系统/外部)';
