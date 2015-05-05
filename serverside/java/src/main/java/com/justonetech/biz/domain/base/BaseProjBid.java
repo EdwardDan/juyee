@@ -1,5 +1,7 @@
 package com.justonetech.biz.domain.base;
 
+import com.justonetech.core.entity.Auditable;
+
 import java.io.Serializable;
 
 
@@ -21,18 +23,22 @@ import java.io.Serializable;
  *  table="PROJ_BID"
  */
 
-public abstract class BaseProjBid  implements Serializable {
+public abstract class BaseProjBid  implements Serializable,Auditable {
 
 	public static String REF = "ProjBid";
 	public static String PROP_POJECT = "poject";
+	public static String PROP_UPDATE_TIME = "updateTime";
+	public static String PROP_CODE = "code";
 	public static String PROP_NAME = "name";
+	public static String PROP_CREATE_USER = "createUser";
 	public static String PROP_START_DATE = "startDate";
 	public static String PROP_LINK_TEL = "linkTel";
+	public static String PROP_CREATE_TIME = "createTime";
 	public static String PROP_BUILD_MILEAGE = "buildMileage";
 	public static String PROP_ID = "id";
-	public static String PROP_BELONG_AREA = "belongArea";
 	public static String PROP_PROJ_LINK = "projLink";
-	public static String PROP_CODE = "code";
+	public static String PROP_BELONG_AREA = "belongArea";
+	public static String PROP_UPDATE_USER = "updateUser";
 
 
 	// constructors
@@ -81,6 +87,22 @@ public abstract class BaseProjBid  implements Serializable {
     /*开工日期*/
     /*开工日期*/
 	private java.sql.Date startDate;
+	
+    /*创建时间*/
+    /*创建时间*/
+	private java.sql.Timestamp createTime;
+	
+    /*更新时间*/
+    /*更新时间*/
+	private java.sql.Timestamp updateTime;
+	
+    /*创建人*/
+    /*创建人(记录帐号）*/
+	private String createUser;
+	
+    /*更新人*/
+    /*更新人(记录帐号）*/
+	private String updateUser;
 	
 
 	// many to one
@@ -209,6 +231,70 @@ public abstract class BaseProjBid  implements Serializable {
 
 
 	/**
+	 * Return the value associated with the column: CREATE_TIME
+	 */
+	public java.sql.Timestamp getCreateTime () {
+		return createTime;
+	}
+
+	/**
+	 * Set the value related to the column: CREATE_TIME
+	 * @param createTime the CREATE_TIME value
+	 */
+	public void setCreateTime (java.sql.Timestamp createTime) {
+		this.createTime = createTime;
+	}
+
+
+	/**
+	 * Return the value associated with the column: UPDATE_TIME
+	 */
+	public java.sql.Timestamp getUpdateTime () {
+		return updateTime;
+	}
+
+	/**
+	 * Set the value related to the column: UPDATE_TIME
+	 * @param updateTime the UPDATE_TIME value
+	 */
+	public void setUpdateTime (java.sql.Timestamp updateTime) {
+		this.updateTime = updateTime;
+	}
+
+
+	/**
+	 * Return the value associated with the column: CREATE_USER
+	 */
+	public String getCreateUser () {
+		return createUser;
+	}
+
+	/**
+	 * Set the value related to the column: CREATE_USER
+	 * @param createUser the CREATE_USER value
+	 */
+	public void setCreateUser (String createUser) {
+		this.createUser = createUser;
+	}
+
+
+	/**
+	 * Return the value associated with the column: UPDATE_USER
+	 */
+	public String getUpdateUser () {
+		return updateUser;
+	}
+
+	/**
+	 * Set the value related to the column: UPDATE_USER
+	 * @param updateUser the UPDATE_USER value
+	 */
+	public void setUpdateUser (String updateUser) {
+		this.updateUser = updateUser;
+	}
+
+
+	/**
 	 * Return the value associated with the column: BELONG_AREA_ID
 	 */
 	public com.justonetech.system.domain.SysCodeDetail getBelongArea () {
@@ -272,6 +358,10 @@ public abstract class BaseProjBid  implements Serializable {
 		builder.append(projLink);
 		builder.append(linkTel);
 		builder.append(startDate);
+		builder.append(createTime);
+		builder.append(updateTime);
+		builder.append(createUser);
+		builder.append(updateUser);
 		return builder.toString();
 	}
 

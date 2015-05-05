@@ -93,6 +93,50 @@
             <meta attribute="ColumnComment">开工日期</meta>
         </property>
 
+        <property
+                name="createTime"
+                column="CREATE_TIME"
+                type="timestamp"
+                not-null="false"
+                length="16"
+                >
+            <meta attribute="ColumnName">创建时间</meta>
+            <meta attribute="ColumnComment">创建时间</meta>
+        </property>
+
+        <property
+                name="updateTime"
+                column="UPDATE_TIME"
+                type="timestamp"
+                not-null="false"
+                length="16"
+                >
+            <meta attribute="ColumnName">更新时间</meta>
+            <meta attribute="ColumnComment">更新时间</meta>
+        </property>
+
+        <property
+                name="createUser"
+                column="CREATE_USER"
+                type="string"
+                not-null="false"
+                length="100"
+                >
+            <meta attribute="ColumnName">创建人</meta>
+            <meta attribute="ColumnComment">创建人(记录帐号）</meta>
+        </property>
+
+        <property
+                name="updateUser"
+                column="UPDATE_USER"
+                type="string"
+                not-null="false"
+                length="100"
+                >
+            <meta attribute="ColumnName">更新人</meta>
+            <meta attribute="ColumnComment">更新人(记录帐号）</meta>
+        </property>
+
         <many-to-one
                 name="belongArea"
                 column="BELONG_AREA_ID"

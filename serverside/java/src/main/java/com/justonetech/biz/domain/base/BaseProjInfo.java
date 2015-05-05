@@ -1,5 +1,7 @@
 package com.justonetech.biz.domain.base;
 
+import com.justonetech.core.entity.Auditable;
+
 import java.io.Serializable;
 
 
@@ -21,11 +23,12 @@ import java.io.Serializable;
  *  table="PROJ_INFO"
  */
 
-public abstract class BaseProjInfo  implements Serializable {
+public abstract class BaseProjInfo  implements Serializable,Auditable {
 
 	public static String REF = "ProjInfo";
 	public static String PROP_SG_DEPT_PERSON = "sgDeptPerson";
 	public static String PROP_SG_DEPT = "sgDept";
+	public static String PROP_UPDATE_TIME = "updateTime";
 	public static String PROP_LOCATION = "location";
 	public static String PROP_PROPERTY = "property";
 	public static String PROP_NO = "no";
@@ -33,16 +36,19 @@ public abstract class BaseProjInfo  implements Serializable {
 	public static String PROP_NAME = "name";
 	public static String PROP_YEAR = "year";
 	public static String PROP_CATEGORY = "category";
+	public static String PROP_CREATE_USER = "createUser";
 	public static String PROP_JL_DEPT_TEL = "jlDeptTel";
 	public static String PROP_JL_DEPT = "jlDept";
 	public static String PROP_START_DATE = "startDate";
 	public static String PROP_JL_DEPT_PERSON = "jlDeptPerson";
+	public static String PROP_CREATE_TIME = "createTime";
 	public static String PROP_BUILD_MILEAGE = "buildMileage";
 	public static String PROP_ID = "id";
 	public static String PROP_BELONG_AREA = "belongArea";
 	public static String PROP_INTRO = "intro";
 	public static String PROP_STAGE = "stage";
 	public static String PROP_SG_DEPT_TEL = "sgDeptTel";
+	public static String PROP_UPDATE_USER = "updateUser";
 
 
 	// constructors
@@ -123,6 +129,22 @@ public abstract class BaseProjInfo  implements Serializable {
     /*监理单位联系电话*/
     /*监理单位联系电话*/
 	private String jlDeptTel;
+	
+    /*创建时间*/
+    /*创建时间*/
+	private java.sql.Timestamp createTime;
+	
+    /*更新时间*/
+    /*更新时间*/
+	private java.sql.Timestamp updateTime;
+	
+    /*创建人*/
+    /*创建人(记录帐号）*/
+	private String createUser;
+	
+    /*更新人*/
+    /*更新人(记录帐号）*/
+	private String updateUser;
 	
 
 	// many to one
@@ -386,6 +408,70 @@ public abstract class BaseProjInfo  implements Serializable {
 
 
 	/**
+	 * Return the value associated with the column: CREATE_TIME
+	 */
+	public java.sql.Timestamp getCreateTime () {
+		return createTime;
+	}
+
+	/**
+	 * Set the value related to the column: CREATE_TIME
+	 * @param createTime the CREATE_TIME value
+	 */
+	public void setCreateTime (java.sql.Timestamp createTime) {
+		this.createTime = createTime;
+	}
+
+
+	/**
+	 * Return the value associated with the column: UPDATE_TIME
+	 */
+	public java.sql.Timestamp getUpdateTime () {
+		return updateTime;
+	}
+
+	/**
+	 * Set the value related to the column: UPDATE_TIME
+	 * @param updateTime the UPDATE_TIME value
+	 */
+	public void setUpdateTime (java.sql.Timestamp updateTime) {
+		this.updateTime = updateTime;
+	}
+
+
+	/**
+	 * Return the value associated with the column: CREATE_USER
+	 */
+	public String getCreateUser () {
+		return createUser;
+	}
+
+	/**
+	 * Set the value related to the column: CREATE_USER
+	 * @param createUser the CREATE_USER value
+	 */
+	public void setCreateUser (String createUser) {
+		this.createUser = createUser;
+	}
+
+
+	/**
+	 * Return the value associated with the column: UPDATE_USER
+	 */
+	public String getUpdateUser () {
+		return updateUser;
+	}
+
+	/**
+	 * Set the value related to the column: UPDATE_USER
+	 * @param updateUser the UPDATE_USER value
+	 */
+	public void setUpdateUser (String updateUser) {
+		this.updateUser = updateUser;
+	}
+
+
+	/**
 	 * Return the value associated with the column: PROPERTY_ID
 	 */
 	public com.justonetech.system.domain.SysCodeDetail getProperty () {
@@ -561,6 +647,10 @@ public abstract class BaseProjInfo  implements Serializable {
 		builder.append(jlDept);
 		builder.append(jlDeptPerson);
 		builder.append(jlDeptTel);
+		builder.append(createTime);
+		builder.append(updateTime);
+		builder.append(createUser);
+		builder.append(updateUser);
 		return builder.toString();
 	}
 

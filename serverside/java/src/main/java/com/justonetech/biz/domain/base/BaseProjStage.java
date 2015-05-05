@@ -1,5 +1,8 @@
 package com.justonetech.biz.domain.base;
 
+import com.justonetech.core.entity.Auditable;
+import com.justonetech.core.entity.Treeable;
+
 import java.io.Serializable;
 
 
@@ -21,20 +24,25 @@ import java.io.Serializable;
  *  table="PROJ_STAGE"
  */
 
-public abstract class BaseProjStage  implements Serializable {
+public abstract class BaseProjStage  implements Serializable,Auditable,Treeable {
 
 	public static String REF = "ProjStage";
-	public static String PROP_NAME = "name";
 	public static String PROP_PARENT = "parent";
+	public static String PROP_DEFAULT_DAYS = "defaultDays";
+	public static String PROP_UPDATE_TIME = "updateTime";
+	public static String PROP_CODE = "code";
+	public static String PROP_LINK_INFO = "linkInfo";
+	public static String PROP_NAME = "name";
+	public static String PROP_YEAR = "year";
+	public static String PROP_CREATE_USER = "createUser";
 	public static String PROP_IS_LEAF = "isLeaf";
 	public static String PROP_IS_VALID = "isValid";
 	public static String PROP_ALERT_DAYS = "alertDays";
-	public static String PROP_DEFAULT_DAYS = "defaultDays";
+	public static String PROP_CREATE_TIME = "createTime";
 	public static String PROP_ID = "id";
 	public static String PROP_TREE_ID = "treeId";
-	public static String PROP_LINK_INFO = "linkInfo";
-	public static String PROP_CODE = "code";
 	public static String PROP_AUDIT_DEPT = "auditDept";
+	public static String PROP_UPDATE_USER = "updateUser";
 
 
 	// constructors
@@ -60,6 +68,10 @@ public abstract class BaseProjStage  implements Serializable {
 	private Long id;
 
 	// fields
+    /*年份*/
+    /*年份*/
+	private Integer year;
+	
     /*编码*/
     /*编码*/
 	private String code;
@@ -96,6 +108,22 @@ public abstract class BaseProjStage  implements Serializable {
     /*树形层次*/
 	private String treeId;
 	
+    /*创建时间*/
+    /*创建时间*/
+	private java.sql.Timestamp createTime;
+	
+    /*更新时间*/
+    /*更新时间*/
+	private java.sql.Timestamp updateTime;
+	
+    /*创建人*/
+    /*创建人(记录帐号）*/
+	private String createUser;
+	
+    /*更新人*/
+    /*更新人(记录帐号）*/
+	private String updateUser;
+	
 
 	// many to one
 	private com.justonetech.biz.domain.ProjStage parent;
@@ -126,6 +154,22 @@ public abstract class BaseProjStage  implements Serializable {
 	}
 
 
+
+
+	/**
+	 * Return the value associated with the column: YEAR
+	 */
+	public Integer getYear () {
+		return year;
+	}
+
+	/**
+	 * Set the value related to the column: YEAR
+	 * @param year the YEAR value
+	 */
+	public void setYear (Integer year) {
+		this.year = year;
+	}
 
 
 	/**
@@ -273,6 +317,70 @@ public abstract class BaseProjStage  implements Serializable {
 
 
 	/**
+	 * Return the value associated with the column: CREATE_TIME
+	 */
+	public java.sql.Timestamp getCreateTime () {
+		return createTime;
+	}
+
+	/**
+	 * Set the value related to the column: CREATE_TIME
+	 * @param createTime the CREATE_TIME value
+	 */
+	public void setCreateTime (java.sql.Timestamp createTime) {
+		this.createTime = createTime;
+	}
+
+
+	/**
+	 * Return the value associated with the column: UPDATE_TIME
+	 */
+	public java.sql.Timestamp getUpdateTime () {
+		return updateTime;
+	}
+
+	/**
+	 * Set the value related to the column: UPDATE_TIME
+	 * @param updateTime the UPDATE_TIME value
+	 */
+	public void setUpdateTime (java.sql.Timestamp updateTime) {
+		this.updateTime = updateTime;
+	}
+
+
+	/**
+	 * Return the value associated with the column: CREATE_USER
+	 */
+	public String getCreateUser () {
+		return createUser;
+	}
+
+	/**
+	 * Set the value related to the column: CREATE_USER
+	 * @param createUser the CREATE_USER value
+	 */
+	public void setCreateUser (String createUser) {
+		this.createUser = createUser;
+	}
+
+
+	/**
+	 * Return the value associated with the column: UPDATE_USER
+	 */
+	public String getUpdateUser () {
+		return updateUser;
+	}
+
+	/**
+	 * Set the value related to the column: UPDATE_USER
+	 * @param updateUser the UPDATE_USER value
+	 */
+	public void setUpdateUser (String updateUser) {
+		this.updateUser = updateUser;
+	}
+
+
+	/**
 	 * Return the value associated with the column: PARENT_ID
 	 */
 	public com.justonetech.biz.domain.ProjStage getParent () {
@@ -338,6 +446,7 @@ public abstract class BaseProjStage  implements Serializable {
 	public String toString () {
 		org.apache.commons.lang.builder.ToStringBuilder builder = new org.apache.commons.lang.builder.ToStringBuilder(this);
 		builder.append(id);
+		builder.append(year);
 		builder.append(code);
 		builder.append(name);
 		builder.append(auditDept);
@@ -347,6 +456,10 @@ public abstract class BaseProjStage  implements Serializable {
 		builder.append(linkInfo);
 		builder.append(isLeaf);
 		builder.append(treeId);
+		builder.append(createTime);
+		builder.append(updateTime);
+		builder.append(createUser);
+		builder.append(updateUser);
 		return builder.toString();
 	}
 
