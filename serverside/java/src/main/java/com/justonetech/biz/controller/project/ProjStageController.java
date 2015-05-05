@@ -243,8 +243,8 @@ public class ProjStageController extends BaseCRUDActionController<ProjStage> {
                         "defaultDays",
                         "alertDays",
                         "linkInfo",
-                        "isLeaf",
-                        "treeId"
+//                        "isLeaf",
+//                        "treeId"
                 });
                 /*String parentId = request.getParameter("parent");
                 if (!StringHelper.isEmpty(parentId)) {
