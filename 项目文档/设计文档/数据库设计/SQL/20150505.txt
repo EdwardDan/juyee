@@ -241,3 +241,13 @@ comment on column DATA_NODE_REPORT_ITEM.UPDATE_TIME is
 
 comment on column DATA_NODE_REPORT_ITEM.UPDATE_USER is
 '更新用户名';
+
+
+-- Add/modify columns 
+alter table PROJ_BID rename column POJECT_ID to PROJECT_ID;
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table PROJ_BID
+  drop constraint FK_PROJ_BID_PROJ;
+alter table PROJ_BID
+  add constraint FK_PROJ_BID_PROJ foreign key (PROJECT_ID)
+  references PROJ_INFO (ID);
