@@ -4,7 +4,7 @@
     $(function () {
         var conf = {
             gridOpts:{
-                url:"${ctx}/projInfo/gridDataCustom.do",
+                url:"${ctx}/projectQuery/gridDataCustom.do",
                 colNames:['ID',
                     '年份',
                     '项目序号',
@@ -45,7 +45,7 @@
             },
             userOpts:{
                 defaultQuery:{ "groupOp":"AND", "rules":[
-                    { "field":"年份", "op":"cn", "data":""},
+                    { "field":"年份", "op":"eq", "data":""},
                     { "field":"项目序号", "op":"cn", "data":""},
                     { "field":"项目名称", "op":"cn", "data":""},
                     { "field":"项目性质", "op":"cn", "data":""},
