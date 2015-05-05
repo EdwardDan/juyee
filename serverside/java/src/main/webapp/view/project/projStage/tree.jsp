@@ -29,11 +29,12 @@
                             menu.push(["下移", "moveDown"]);
 //                            menu.push([]);
 //                            menu.push(["自定义操作", function (treeNode, zTree) {}, true]);
+                        } else {
+                            menu.push(["重排", "treeReorder"]);
                         }
                         menu.push([]);
                     }
                     menu.push(["刷新", "refreshNode"]);
-
                     return menu;
                 }
             }
