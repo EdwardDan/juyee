@@ -109,6 +109,10 @@ public abstract class BaseProjBid  implements Serializable,Auditable {
 	private com.justonetech.system.domain.SysCodeDetail belongArea;
 	private com.justonetech.biz.domain.ProjInfo poject;
 
+	// collections
+	private java.util.Set<com.justonetech.biz.domain.DataNodeReport> dataNodeReports;
+	private java.util.Set<com.justonetech.biz.domain.DataStageReport> dataStageReports;
+
 
 
 	/**
@@ -323,6 +327,38 @@ public abstract class BaseProjBid  implements Serializable,Auditable {
 	 */
 	public void setPoject (com.justonetech.biz.domain.ProjInfo poject) {
 		this.poject = poject;
+	}
+
+
+	/**
+	 * Return the value associated with the column: dataNodeReports
+	 */
+	public java.util.Set<com.justonetech.biz.domain.DataNodeReport> getDataNodeReports () {
+		return dataNodeReports;
+	}
+
+	/**
+	 * Set the value related to the column: dataNodeReports
+	 * @param dataNodeReports the dataNodeReports value
+	 */
+	public void setDataNodeReports (java.util.Set<com.justonetech.biz.domain.DataNodeReport> dataNodeReports) {
+		this.dataNodeReports = dataNodeReports;
+	}
+
+
+	/**
+	 * Return the value associated with the column: dataStageReports
+	 */
+	public java.util.Set<com.justonetech.biz.domain.DataStageReport> getDataStageReports () {
+		return dataStageReports;
+	}
+
+	/**
+	 * Set the value related to the column: dataStageReports
+	 * @param dataStageReports the dataStageReports value
+	 */
+	public void setDataStageReports (java.util.Set<com.justonetech.biz.domain.DataStageReport> dataStageReports) {
+		this.dataStageReports = dataStageReports;
 	}
 
 

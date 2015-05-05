@@ -115,6 +115,7 @@ public abstract class BaseProjNode  implements Serializable,Auditable,Treeable {
 
 	// collections
 	private java.util.Set<com.justonetech.biz.domain.ProjNode> projNodes;
+	private java.util.Set<com.justonetech.biz.domain.DataNodeReportItem> dataNodeReportItems;
 
 
 
@@ -354,6 +355,22 @@ public abstract class BaseProjNode  implements Serializable,Auditable,Treeable {
 	public void addToprojNodes (com.justonetech.biz.domain.ProjNode projNode) {
 		if (null == getProjNodes()) setProjNodes(new java.util.LinkedHashSet<com.justonetech.biz.domain.ProjNode>());
 		getProjNodes().add(projNode);
+	}
+
+
+	/**
+	 * Return the value associated with the column: dataNodeReportItems
+	 */
+	public java.util.Set<com.justonetech.biz.domain.DataNodeReportItem> getDataNodeReportItems () {
+		return dataNodeReportItems;
+	}
+
+	/**
+	 * Set the value related to the column: dataNodeReportItems
+	 * @param dataNodeReportItems the dataNodeReportItems value
+	 */
+	public void setDataNodeReportItems (java.util.Set<com.justonetech.biz.domain.DataNodeReportItem> dataNodeReportItems) {
+		this.dataNodeReportItems = dataNodeReportItems;
 	}
 
 

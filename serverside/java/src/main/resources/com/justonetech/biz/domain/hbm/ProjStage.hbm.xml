@@ -193,6 +193,10 @@
 			<key column="PARENT_ID"/>
 			<one-to-many class="ProjStage"/>
 		</set>
+        <set name="dataStageReportItems" inverse="true">
+            <key column="STAGE_ID"/>
+            <one-to-many class="DataStageReportItem"/>
+        </set>
 
 	</class>	
     <query name="projstage_all_data_query">

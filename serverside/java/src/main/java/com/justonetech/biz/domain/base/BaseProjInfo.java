@@ -157,6 +157,8 @@ public abstract class BaseProjInfo  implements Serializable,Auditable {
 	private java.util.Set<com.justonetech.biz.domain.ProjBid> projBids;
 	private java.util.Set<com.justonetech.biz.domain.ProjRelatePerson> projRelatePersons;
 	private java.util.Set<com.justonetech.biz.domain.ProjRelateDept> projRelateDepts;
+	private java.util.Set<com.justonetech.biz.domain.DataNodeReport> dataNodeReports;
+	private java.util.Set<com.justonetech.biz.domain.DataStageReport> dataStageReports;
 
 
 
@@ -563,9 +565,6 @@ public abstract class BaseProjInfo  implements Serializable,Auditable {
 	 * Return the value associated with the column: projRelatePersons
 	 */
 	public java.util.Set<com.justonetech.biz.domain.ProjRelatePerson> getProjRelatePersons () {
-		if(projRelatePersons == null){
-			projRelatePersons = new java.util.LinkedHashSet<com.justonetech.biz.domain.ProjRelatePerson>();
-		}
 		return projRelatePersons;
 	}
 
@@ -577,19 +576,11 @@ public abstract class BaseProjInfo  implements Serializable,Auditable {
 		this.projRelatePersons = projRelatePersons;
 	}
 
-	public void addToprojRelatePersons (com.justonetech.biz.domain.ProjRelatePerson projRelatePerson) {
-		if (null == getProjRelatePersons()) setProjRelatePersons(new java.util.LinkedHashSet<com.justonetech.biz.domain.ProjRelatePerson>());
-		getProjRelatePersons().add(projRelatePerson);
-	}
-
 
 	/**
 	 * Return the value associated with the column: projRelateDepts
 	 */
 	public java.util.Set<com.justonetech.biz.domain.ProjRelateDept> getProjRelateDepts () {
-		if(projRelateDepts == null){
-			projRelateDepts = new java.util.LinkedHashSet<com.justonetech.biz.domain.ProjRelateDept>();
-		}
 		return projRelateDepts;
 	}
 
@@ -601,9 +592,36 @@ public abstract class BaseProjInfo  implements Serializable,Auditable {
 		this.projRelateDepts = projRelateDepts;
 	}
 
-	public void addToprojRelateDepts (com.justonetech.biz.domain.ProjRelateDept projRelateDept) {
-		if (null == getProjRelateDepts()) setProjRelateDepts(new java.util.LinkedHashSet<com.justonetech.biz.domain.ProjRelateDept>());
-		getProjRelateDepts().add(projRelateDept);
+
+	/**
+	 * Return the value associated with the column: dataNodeReports
+	 */
+	public java.util.Set<com.justonetech.biz.domain.DataNodeReport> getDataNodeReports () {
+		return dataNodeReports;
+	}
+
+	/**
+	 * Set the value related to the column: dataNodeReports
+	 * @param dataNodeReports the dataNodeReports value
+	 */
+	public void setDataNodeReports (java.util.Set<com.justonetech.biz.domain.DataNodeReport> dataNodeReports) {
+		this.dataNodeReports = dataNodeReports;
+	}
+
+
+	/**
+	 * Return the value associated with the column: dataStageReports
+	 */
+	public java.util.Set<com.justonetech.biz.domain.DataStageReport> getDataStageReports () {
+		return dataStageReports;
+	}
+
+	/**
+	 * Set the value related to the column: dataStageReports
+	 * @param dataStageReports the dataStageReports value
+	 */
+	public void setDataStageReports (java.util.Set<com.justonetech.biz.domain.DataStageReport> dataStageReports) {
+		this.dataStageReports = dataStageReports;
 	}
 
 

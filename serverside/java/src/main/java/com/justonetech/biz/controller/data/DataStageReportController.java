@@ -1,39 +1,22 @@
 package com.justonetech.biz.controller.data;
 
-import java.util.List;
-import java.util.Set;
-import java.util.Map;
-import java.util.HashMap;
-import org.apache.commons.lang.StringUtils;
-
-import com.justonetech.core.controller.BaseCRUDActionController;
-import com.justonetech.core.orm.hibernate.Page;
-import com.justonetech.core.ui.grid.Grid;
-import com.justonetech.core.utils.ReflectionUtils;
-import com.justonetech.core.utils.StringHelper;
-import com.justonetech.core.security.user.BaseUser;
-import com.justonetech.core.security.util.SpringSecurityUtils;
-import com.justonetech.core.utils.FormatUtils;
 import com.justonetech.biz.core.orm.hibernate.GridJq;
 import com.justonetech.biz.core.orm.hibernate.QueryTranslateJq;
 import com.justonetech.biz.daoservice.DataStageReportService;
+import com.justonetech.biz.daoservice.DocDocumentService;
 import com.justonetech.biz.domain.DataStageReport;
-
+import com.justonetech.biz.manager.ConfigManager;
 import com.justonetech.biz.manager.DocumentManager;
 import com.justonetech.biz.utils.Constants;
-import com.justonetech.biz.daoservice.DocDocumentService;
-import com.justonetech.biz.manager.ConfigManager;
-import com.justonetech.system.daoservice.SysCodeDetailService;
-import com.justonetech.system.domain.SysCodeDetail;
+import com.justonetech.core.controller.BaseCRUDActionController;
+import com.justonetech.core.orm.hibernate.Page;
+import com.justonetech.core.utils.ReflectionUtils;
+import com.justonetech.system.manager.SimpleQueryManager;
 import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
 import com.justonetech.system.utils.PrivilegeCode;
-import com.justonetech.system.manager.SimpleQueryManager;
-
-import com.justonetech.system.tree.ZTreeBranch;
-import com.justonetech.system.tree.ZTreeNode;
-import com.justonetech.system.manager.SysUserManager;
-import com.justonetech.system.utils.PrivilegeCode;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,9 +26,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 
 /**

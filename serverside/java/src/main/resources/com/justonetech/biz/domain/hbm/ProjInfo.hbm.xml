@@ -267,6 +267,14 @@
 			<key column="PROJECT_ID"/>
 			<one-to-many class="ProjRelateDept"/>
 		</set>
+        <set name="dataNodeReports" inverse="true">
+            <key column="PROJECT_ID"/>
+            <one-to-many class="DataNodeReport"/>
+        </set>
+        <set name="dataStageReports" inverse="true">
+            <key column="PROJECT_ID"/>
+            <one-to-many class="DataStageReport"/>
+        </set>
 
 	</class>	
     <query name="projinfo_all_data_query">

@@ -160,6 +160,10 @@
 			<key column="PARENT_ID"/>
 			<one-to-many class="ProjNode"/>
 		</set>
+        <set name="dataNodeReportItems" inverse="true">
+            <key column="NODE_ID"/>
+            <one-to-many class="DataNodeReportItem"/>
+        </set>
 
 	</class>	
     <query name="projnode_all_data_query">

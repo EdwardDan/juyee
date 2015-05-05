@@ -152,6 +152,15 @@
 		>
 		</many-to-one>
 
+        <set name="dataNodeReports" inverse="true">
+            <key column="BID_ID"/>
+            <one-to-many class="DataNodeReport"/>
+        </set>
+        <set name="dataStageReports" inverse="true">
+            <key column="BID_ID"/>
+            <one-to-many class="DataStageReport"/>
+        </set>
+
 	</class>	
     <query name="projbid_all_data_query">
         <![CDATA[FROM ProjBid]]>

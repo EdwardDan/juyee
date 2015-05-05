@@ -21,5 +21,20 @@ public class ProjNode extends BaseProjNode {
 
 /*[CONSTRUCTOR MARKER END]*/
 
-
+    /**
+     * 获取第1层父节点
+     * @return .
+     */
+    public Long getFirstNodeId(){
+        ProjNode parent = getParent();
+        if(parent != null){
+            ProjNode parent1 = parent.getParent();
+            if(parent1 != null){
+                 return parent1.getId();
+            }else{
+                return parent.getId();
+            }
+        }
+        return getId();
+    }
 }
