@@ -187,6 +187,7 @@ public class ProjStageController extends BaseCRUDActionController<ProjStage> {
             projStage.setParent(projStageService.get(Long.valueOf(parentId)));
         }
         projStage.setIsValid(true);
+        projStage.setYear(Calendar.getInstance().getTime().getYear());
         model.addAttribute("bean", projStage);
         return "view/project/projStage/input";
     }
