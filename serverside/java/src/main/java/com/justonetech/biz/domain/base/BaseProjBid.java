@@ -26,7 +26,7 @@ import java.io.Serializable;
 public abstract class BaseProjBid  implements Serializable,Auditable {
 
 	public static String REF = "ProjBid";
-	public static String PROP_POJECT = "poject";
+	public static String PROP_PROJECT = "project";
 	public static String PROP_UPDATE_TIME = "updateTime";
 	public static String PROP_CODE = "code";
 	public static String PROP_NAME = "name";
@@ -107,7 +107,7 @@ public abstract class BaseProjBid  implements Serializable,Auditable {
 
 	// many to one
 	private com.justonetech.system.domain.SysCodeDetail belongArea;
-	private com.justonetech.biz.domain.ProjInfo poject;
+	private com.justonetech.biz.domain.ProjInfo project;
 
 	// collections
 	private java.util.Set<com.justonetech.biz.domain.DataNodeReport> dataNodeReports;
@@ -317,16 +317,16 @@ public abstract class BaseProjBid  implements Serializable,Auditable {
 	/**
 	 * Return the value associated with the column: POJECT_ID
 	 */
-	public com.justonetech.biz.domain.ProjInfo getPoject () {
-		return poject;
+	public com.justonetech.biz.domain.ProjInfo getProject () {
+		return project;
 	}
 
 	/**
-	 * Set the value related to the column: POJECT_ID
-	 * @param poject the POJECT_ID value
+	 * Set the value related to the column: PROJECT_ID
+	 * @param project the PROJECT_ID value
 	 */
-	public void setPoject (com.justonetech.biz.domain.ProjInfo poject) {
-		this.poject = poject;
+	public void setProject (com.justonetech.biz.domain.ProjInfo project) {
+		this.project = project;
 	}
 
 

@@ -140,7 +140,7 @@ public class ProjBidController extends BaseCRUDActionController<ProjBid> {
     public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, Long projId, HttpSession session) {
         try {
             Page pageModel = new Page(page, rows, true);
-            String hql = "from ProjBid where poject.id=" + projId + " order by id desc";
+            String hql = "from ProjBid where project.id=" + projId + " order by id desc";
             //增加自定义查询条件
 
             //执行查询
@@ -168,7 +168,7 @@ public class ProjBidController extends BaseCRUDActionController<ProjBid> {
     @RequestMapping
     public String add(Model model, Long projId) {
         ProjBid projBid = new ProjBid();
-        projBid.setPoject(projInfoService.get(projId));
+        projBid.setProject(projInfoService.get(projId));
         //如需增加其他默认值请在此添加
         model.addAttribute("bean", projBid);
 
@@ -237,7 +237,7 @@ public class ProjBidController extends BaseCRUDActionController<ProjBid> {
             String projInfoId = request.getParameter("projInfoId");
 
             target.setBelongArea(sysCodeDetailService.get(Long.valueOf(projBelongArea)));
-            target.setPoject(projInfoService.get(Long.valueOf(projInfoId)));
+            target.setProject(projInfoService.get(Long.valueOf(projInfoId)));
             projBidService.save(target);
 
         } catch (Exception e) {

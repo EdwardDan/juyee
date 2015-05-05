@@ -156,6 +156,7 @@ public class ProjectQueryController extends BaseCRUDActionController<ProjInfo> {
                 oneBidHS.add(bidId);
                 Map<String, Object> map = new HashMap<String, Object>();
                 map.put("resultCode", item.getResult().getCode());
+                map.put("resultName", item.getResult().getName());
                 map.put("dealDate", item.getDealDate());
                 dataMap.put(bidId + "_" + item.getStep().getId() + "_" + item.getStage().getId(), map);
             }

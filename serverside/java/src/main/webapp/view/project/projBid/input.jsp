@@ -33,7 +33,7 @@
 </script>
 <form:form commandName="bean">
     <form:hidden path="id"/>
-    <input type="hidden" name="projInfoId" value="${bean.poject.id}">
+    <input type="hidden" name="projInfoId" value="${bean.project.id}">
 
     <div class="form_div">
         <table cellpadding="0" cellspacing="0" class="form_table">

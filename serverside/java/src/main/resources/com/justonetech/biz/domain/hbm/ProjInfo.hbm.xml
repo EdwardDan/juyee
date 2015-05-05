@@ -254,7 +254,7 @@
         </many-to-one>
 
 		<set name="projBids" inverse="true">
-			<key column="POJECT_ID"/>
+			<key column="PROJECT_ID"/>
 			<one-to-many class="ProjBid"/>
 		</set>
 
