@@ -164,7 +164,7 @@
                            value="${bean.personDept.orderNo}">
                 </td>
             </tr>
-            <tr class="tr_light">
+            <tr class="tr_light" style="display: none">
                 <td class="form_label">是否显示在去向报表中:</td>
                 <td class="form_content">
                     <form:checkbox path="isShowPersonOut"/>

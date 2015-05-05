@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.justonetech.biz.domain">
+	<class
+		name="DataStageReportItem"
+		table="DATA_STAGE_REPORT_ITEM"
+	>
+		
+		<meta attribute="sync-DAO">false</meta>
+		<meta attribute="sync-jsp">true</meta>
+		<meta attribute="sync-boolean">get</meta>
+		<meta attribute="treeable">false</meta>
+		<meta attribute="projectable">false</meta>
+        <meta attribute="tableName">办证推进填报明细</meta>
+        <meta attribute="tableComment">办证推进填报明细</meta>
+	    <meta attribute="sync-templatePatterns">list\w*</meta>
+        <meta attribute="sub-system">data</meta>
+
+		<id
+			name="id"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="com.justonetech.core.orm.hibernate.LongIdGenerator"/>
+		</id>
+
+		<property
+			name="resultDesc"
+			column="RESULT_DESC"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">推进结果中文描述</meta>
+            <meta attribute="ColumnComment">推进结果中文描述</meta>
+        </property>
+
+		<property
+			name="dealDate"
+			column="DEAL_DATE"
+			type="string"
+			not-null="false"
+			length="500"
+        >
+            <meta attribute="ColumnName">计划日期/办结日期/问题</meta>
+            <meta attribute="ColumnComment">计划日期/办结日期/问题</meta>
+        </property>
+
+		<property
+			name="createTime"
+			column="CREATE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">创建时间</meta>
+            <meta attribute="ColumnComment">创建时间</meta>
+        </property>
+
+		<property
+			name="createUser"
+			column="CREATE_USER"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">创建用户名</meta>
+            <meta attribute="ColumnComment">创建用户名</meta>
+        </property>
+
+		<property
+			name="updateTime"
+			column="UPDATE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">更新时间</meta>
+            <meta attribute="ColumnComment">更新时间</meta>
+        </property>
+
+		<property
+			name="updateUser"
+			column="UPDATE_USER"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">更新用户名</meta>
+            <meta attribute="ColumnComment">更新用户名</meta>
+        </property>
+
+		<many-to-one
+			name="result"
+			column="RESULT_ID"
+			class="com.justonetech.system.domain.SysCodeDetail"
+			not-null="false"
+		>
+		</many-to-one>
+		<many-to-one
+			name="stageReport"
+			column="STAGE_REPORT_ID"
+			class="DataStageReport"
+			not-null="false"
+		>
+		</many-to-one>
+		<many-to-one
+			name="step"
+			column="STEP_ID"
+			class="com.justonetech.system.domain.SysCodeDetail"
+			not-null="false"
+		>
+		</many-to-one>
+		<many-to-one
+			name="stage"
+			column="STAGE_ID"
+			class="ProjStage"
+			not-null="false"
+		>
+		</many-to-one>
+
+	</class>	
+    <query name="datastagereportitem_all_data_query">
+        <![CDATA[FROM DataStageReportItem]]>
+    </query>
+</hibernate-mapping>
