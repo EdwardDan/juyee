@@ -379,4 +379,14 @@ public class Constants {
     public static final String WORKER_TALK_FORM_LISTS ="WorkerTalkFormLists"; //视频服务器类型
 
     /****************************************** 执法监督管理 end *******************************************************/
+
+    /**
+     * ***************************************项目管理begin*********************************************************
+     */
+    public static final String PROJ_INFO_PROPERTY ="ProjProperty"; //项目性质
+    public static final String PROJ_INFO_STAGE ="ProjStage"; //项目阶段
+    public static final String PROJ_INFO_CATEGORY ="ProjCategory"; //项目阶段
+    public static final String PROJ_INFO_BELONG_AREA ="ProjBelongArea"; //项目阶段
+
+    /****************************************** 项目管理 end *******************************************************/
 }
