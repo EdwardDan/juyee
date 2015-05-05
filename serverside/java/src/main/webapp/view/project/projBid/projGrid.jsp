@@ -1,10 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/common/taglibs.jsp" %>
+<script src="${ctx}/js/jquery/easyui/outlook2.js" type="text/javascript"></script>
 <script type="text/javascript">
     $(function () {
         var conf = {
             gridOpts: {
-                url: "${ctx}/projInfo/gridDataCustom.do",
+                url: "${ctx}/projBid/projGridDataCustom.do",
                 colNames: ['ID',
                     '开始年份',
                     '项目序号',
@@ -23,7 +24,7 @@
                     {name: "property.name", width: "30", align: "center", searchtype: "string", sortable: true},
                     {name: "stage.name", width: "30", align: "center", searchtype: "string", sortable: true},
                     {name: "category.name", width: "30", align: "center", searchtype: "string", sortable: true},
-                    {name: "bidCount", width: "30", align: "center", searchtype: "integer", sortable: true, formatter: viewBidInfoFormat}
+                    {name: "bidCount", width: "30", align: "center", searchtype: "integer", sortable: true}
                 ],
                 actModel: [
                     {name: 'operation', width: 60, align: 'center'}
@@ -35,11 +36,7 @@
                     var ids = jQuery("#listGrid").jqGrid('getDataIDs');
                     for (var i = 0; i < ids.length; i++) {
                         var id = ids[i];
-                        var opButton = '<input type="button" value="查看" onclick="doView(' + id + ')" class="button_normal"/> ';
-                        <%--<c:if test="${canEdit}">--%>
-                        opButton += '<input type="button" value="编辑" onclick="doEdit(' + id + ')" class="button_normal"/> ';
-                        opButton += '<input type="button" value="删除" onclick="doDelete(' + id + ')" class="button_normal"/>';
-                        <%--</c:if>--%>
+                        var opButton = '<input type="button" value="维护标段" onclick="doToBid(' + id + ')" class="button_normal_long"/> ';
                         jQuery("#listGrid").jqGrid('setRowData', ids[i], { operation: opButton});
                     }
                 }, rownumbers: true
@@ -74,20 +71,9 @@
         doGridDelete("${ctx}/projInfo/delete.do?id=" + id);
     }
     <%--</c:if>--%>
-    function viewBidInfoFormat(cellvalue, options, rowObject) {
-        var title = "查看标段";
-        return "<a href='javascript:void(0)' onclick=loadBidInfoFormat('" + title + "','" + rowObject["id"] + "',true,false) class='grid_link'>" + cellvalue + "</a>";
+    function doToBid(projId) {
+        loadAjaxData("mainContent", "${ctx}/projBid/bidGrid.do?projId=" + projId);
     }
-    function loadBidInfoFormat(title, projInfoId, isParentWindow, isOpenNewWindow) {
-        var url = "${ctx}/projInfo/viewBid.do?id=" + projInfoId;
-        var windowId = isOpenNewWindow ? "newWinId" : null;
-        if (isParentWindow) {
-            parent.openNewWindow(windowId, title, url, false);
-        } else {
-            openNewWindow(windowId, title, url, false);
-        }
-    }
-
     //custom formatter
     //function customeFormat(cellvalue, options, rowObject) {
     //    return cellvalue == "true"?"是":"否";
@@ -104,10 +90,6 @@
                    readonly="true"/>
         </div>
         <div style="float:right;padding-right: 10px">
-            <%--<c:if test="${canEdit}">--%>
-            <input type="button" value="添加" class="button_add"
-                   onclick="doAdd()"/>
-            <%--</c:if>--%>
         </div>
     </div>
 </div>

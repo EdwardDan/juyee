@@ -4,13 +4,16 @@ import com.justonetech.biz.core.orm.hibernate.GridJq;
 import com.justonetech.biz.core.orm.hibernate.QueryTranslateJq;
 import com.justonetech.biz.daoservice.DocDocumentService;
 import com.justonetech.biz.daoservice.ProjInfoService;
+import com.justonetech.biz.domain.ProjBid;
 import com.justonetech.biz.domain.ProjInfo;
 import com.justonetech.biz.manager.ConfigManager;
 import com.justonetech.biz.manager.DocumentManager;
 import com.justonetech.biz.utils.Constants;
 import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.orm.hibernate.Page;
+import com.justonetech.core.utils.DateTimeHelper;
 import com.justonetech.core.utils.ReflectionUtils;
+import com.justonetech.system.daoservice.SysCodeDetailService;
 import com.justonetech.system.manager.SimpleQueryManager;
 import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
@@ -26,6 +29,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.Calendar;
+import java.util.Set;
 
 
 /**
@@ -37,29 +42,32 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class ProjInfoController extends BaseCRUDActionController<ProjInfo> {
     private Logger logger = LoggerFactory.getLogger(ProjInfoController.class);
-    
+
     @Autowired
     private SysUserManager sysUserManager;
-    
+
     @Autowired
     private SysCodeManager sysCodeManager;
 
     @Autowired
     private ConfigManager configManager;
-    
+
     @Autowired
     private DocumentManager documentManager;
-    
+
     @Autowired
     private SimpleQueryManager simpleQueryManager;
-    
+
     @Autowired
     private DocDocumentService docDocumentService;
 
     @Autowired
+    private SysCodeDetailService sysCodeDetailService;
+
+    @Autowired
     private ProjInfoService projInfoService;
 
-   /**
+    /**
      * 列表显示页面
      *
      * @param model .
@@ -67,20 +75,20 @@ public class ProjInfoController extends BaseCRUDActionController<ProjInfo> {
      */
     @RequestMapping
     public String grid(Model model) {
-      //判断是否有编辑权限
-      model.addAttribute("canEdit",sysUserManager.hasPrivilege(PrivilegeCode.SYS_SAMPLE_EDIT));
-            
-      return "view/project/projInfo/grid";
+        //判断是否有编辑权限
+        model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.SYS_SAMPLE_EDIT));
+
+        return "view/project/projInfo/grid";
     }
-    
+
     /**
      * 获取列表数据
      *
      * @param response .
-     * @param filters .
-     * @param columns .
-     * @param page .
-     * @param rows .
+     * @param filters  .
+     * @param columns  .
+     * @param page     .
+     * @param rows     .
      */
     @RequestMapping
     public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session) {
@@ -93,7 +101,7 @@ public class ProjInfoController extends BaseCRUDActionController<ProjInfo> {
             QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);
             String query = queryTranslate.toString();
             session.setAttribute(Constants.GRID_SQL_KEY, query);
-            pageModel = projInfoService.findByPage(pageModel, query);            
+            pageModel = projInfoService.findByPage(pageModel, query);
 
             //输出显示
             String json = GridJq.toJSON(columns, pageModel);
@@ -104,7 +112,7 @@ public class ProjInfoController extends BaseCRUDActionController<ProjInfo> {
             super.processException(response, e);
         }
     }
-    
+
     /**
      * 新增录入页面
      *
@@ -114,13 +122,15 @@ public class ProjInfoController extends BaseCRUDActionController<ProjInfo> {
     @RequestMapping
     public String add(Model model) {
         ProjInfo projInfo = new ProjInfo();
-
         //如需增加其他默认值请在此添加
+        Calendar c = Calendar.getInstance();
+        String yearSelectOptions = DateTimeHelper.getYearSelectOptions(c.get(Calendar.YEAR) + "");
+        model.addAttribute("yearSelectOptions", yearSelectOptions);
         model.addAttribute("bean", projInfo);
 
         return "view/project/projInfo/input";
     }
-    
+
     /**
      * 修改显示页面
      *
@@ -131,13 +141,14 @@ public class ProjInfoController extends BaseCRUDActionController<ProjInfo> {
     @RequestMapping
     public String modify(Model model, Long id) {
         ProjInfo projInfo = projInfoService.get(id);
-
+        String yearSelectOptions = DateTimeHelper.getYearSelectOptions(projInfo.getYear() + "");
         //处理其他业务逻辑
+        model.addAttribute("yearSelectOptions", yearSelectOptions);
         model.addAttribute("bean", projInfo);
-        
+
         return "view/project/projInfo/input";
     }
-    
+
     /**
      * 查看页面
      *
@@ -148,11 +159,26 @@ public class ProjInfoController extends BaseCRUDActionController<ProjInfo> {
     @RequestMapping
     public String view(Model model, Long id) {
         ProjInfo projInfo = projInfoService.get(id);
-        
-        model.addAttribute("bean", projInfo);        
+
+        model.addAttribute("bean", projInfo);
         return "view/project/projInfo/view";
     }
-    
+
+    /**
+     * 查看标段信息
+     *
+     * @param id    .
+     * @param model .
+     * @return .
+     */
+    @RequestMapping
+    public String viewBid(Model model, Long id) {
+        ProjInfo projInfo = projInfoService.get(id);
+        Set<ProjBid> projBids = projInfo.getProjBids();
+        model.addAttribute("projBids", projBids);
+        return "view/project/projInfo/viewBid";
+    }
+
     /**
      * 保存操作
      *
@@ -169,25 +195,39 @@ public class ProjInfoController extends BaseCRUDActionController<ProjInfo> {
             if (entity.getId() != null) {
                 target = projInfoService.get(entity.getId());
                 ReflectionUtils.copyBean(entity, target, new String[]{
-                                                "name",                                      
-                                                                "year",                                      
-                                                                "no",                                      
-                                                                "buildMileage",                                      
-                                                                "location",                                      
-                                                                "startDate",                                      
-                                                                "intro",                                      
-                                                                "jsDept",                                      
-                                                                "sgDept",                                      
-                                                                "sgDeptPerson",                                      
-                                                                "sgDeptTel",                                      
-                                                                "jlDept",                                      
-                                                                "jlDeptPerson",                                      
-                                                                "jlDeptTel"                                      
-                                                });
+                        "name",
+//                        "year",
+                        "no",
+                        "buildMileage",
+                        "location",
+                        "startDate",
+//                        "intro",
+                        "jsDept",
+                        "sgDept",
+                        "sgDeptPerson",
+                        "sgDeptTel",
+                        "jlDept",
+                        "jlDeptPerson",
+                        "jlDeptTel"
+                });
 
             } else {
                 target = entity;
             }
+
+            String year = request.getParameter("year");
+            String projProperty = request.getParameter("ProjProperty");
+            String projStage = request.getParameter("ProjStage");
+            String projCategory = request.getParameter("ProjCategory");
+            String projBelongArea = request.getParameter("ProjBelongArea");
+            String intro = request.getParameter("intro");
+
+            target.setYear(Integer.valueOf(year));
+            target.setProperty(sysCodeDetailService.get(Long.valueOf(projProperty)));
+            target.setStage(sysCodeDetailService.get(Long.valueOf(projStage)));
+            target.setCategory(sysCodeDetailService.get(Long.valueOf(projCategory)));
+            target.setBelongArea(sysCodeDetailService.get(Long.valueOf(projBelongArea)));
+            target.setIntro(intro);
             projInfoService.save(target);
 
         } catch (Exception e) {
@@ -197,13 +237,13 @@ public class ProjInfoController extends BaseCRUDActionController<ProjInfo> {
         }
         sendSuccessJSON(response, "保存成功");
     }
-    
+
     /**
      * 删除操作
      *
      * @param response .
-     * @param id  .
-     * @throws Exception  .
+     * @param id       .
+     * @throws Exception .
      */
     @RequestMapping
     public void delete(HttpServletResponse response, Long id) throws Exception {
