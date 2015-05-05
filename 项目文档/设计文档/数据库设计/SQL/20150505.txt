@@ -1,0 +1,243 @@
+drop table DATA_STAGE_REPORT cascade constraints;
+
+/*==============================================================*/
+/* Table: DATA_STAGE_REPORT                                     */
+/*==============================================================*/
+create table DATA_STAGE_REPORT 
+(
+   ID                   number(10)           not null,
+   YEAR                 number(4),
+   MONTH                number(2),
+   PROJECT_ID           number(10),
+   BID_ID               number(10),
+   STEP_ID              number(10),
+   CREATE_TIME          DATE,
+   CREATE_USER          VARCHAR2(100),
+   UPDATE_TIME          DATE,
+   UPDATE_USER          VARCHAR2(100),
+   constraint PK_DATA_STAGE_REPORT primary key (ID),
+   constraint FK_DATA_STAGE_REPORT_PROJ foreign key (PROJECT_ID)
+         references PROJ_INFO (ID),
+   constraint FK_DATA_STAGE_REPORT_BID foreign key (BID_ID)
+         references PROJ_BID (ID),
+   constraint FK_DATA_STAGE_REPORT_STEP foreign key (STEP_ID)
+         references SYS_CODE_DETAIL (ID)
+);
+
+comment on table DATA_STAGE_REPORT is
+'办证推进填报';
+
+comment on column DATA_STAGE_REPORT.ID is
+'ID';
+
+comment on column DATA_STAGE_REPORT.YEAR is
+'年份';
+
+comment on column DATA_STAGE_REPORT.MONTH is
+'月份';
+
+comment on column DATA_STAGE_REPORT.PROJECT_ID is
+'项目ID';
+
+comment on column DATA_STAGE_REPORT.BID_ID is
+'标段ID';
+
+comment on column DATA_STAGE_REPORT.STEP_ID is
+'当前步骤ID';
+
+comment on column DATA_STAGE_REPORT.CREATE_TIME is
+'创建时间';
+
+comment on column DATA_STAGE_REPORT.CREATE_USER is
+'创建用户名';
+
+comment on column DATA_STAGE_REPORT.UPDATE_TIME is
+'更新时间';
+
+comment on column DATA_STAGE_REPORT.UPDATE_USER is
+'更新用户名';
+
+drop table DATA_STAGE_REPORT_ITEM cascade constraints;
+
+/*==============================================================*/
+/* Table: DATA_STAGE_REPORT_ITEM                                */
+/*==============================================================*/
+create table DATA_STAGE_REPORT_ITEM 
+(
+   ID                   number(10)           not null,
+   STAGE_REPORT_ID      number(10),
+   STAGE_ID             number(10),
+   STEP_ID              number(10),
+   RESULT_ID            number(10),
+   RESULT_DESC          varchar(200),
+   DEAL_DATE            varchar(500),
+   CREATE_TIME          DATE,
+   CREATE_USER          VARCHAR2(100),
+   UPDATE_TIME          DATE,
+   UPDATE_USER          VARCHAR2(100),
+   constraint PK_DATA_STAGE_REPORT_ITEM primary key (ID),
+   constraint FK_DATA_STAGE_REPORT_ITEM foreign key (STAGE_REPORT_ID)
+         references DATA_STAGE_REPORT (ID),
+   constraint FK_DATA_STAGE_REP_ITEM_ST foreign key (STAGE_ID)
+         references PROJ_STAGE (ID),
+   constraint FK_DATA_STAGE_REP_ITEM_STEP foreign key (STEP_ID)
+         references SYS_CODE_DETAIL (ID),
+   constraint FK_DATA_STAGE_REP_ITEM_RES foreign key (RESULT_ID)
+         references SYS_CODE_DETAIL (ID)
+);
+
+comment on table DATA_STAGE_REPORT_ITEM is
+'办证推进填报明细';
+
+comment on column DATA_STAGE_REPORT_ITEM.ID is
+'ID';
+
+comment on column DATA_STAGE_REPORT_ITEM.STAGE_REPORT_ID is
+'推进填报ID';
+
+comment on column DATA_STAGE_REPORT_ITEM.STAGE_ID is
+'阶段ID';
+
+comment on column DATA_STAGE_REPORT_ITEM.STEP_ID is
+'步骤ID';
+
+comment on column DATA_STAGE_REPORT_ITEM.RESULT_ID is
+'推进结果ID';
+
+comment on column DATA_STAGE_REPORT_ITEM.RESULT_DESC is
+'推进结果中文描述';
+
+comment on column DATA_STAGE_REPORT_ITEM.DEAL_DATE is
+'计划日期/办结日期/问题';
+
+comment on column DATA_STAGE_REPORT_ITEM.CREATE_TIME is
+'创建时间';
+
+comment on column DATA_STAGE_REPORT_ITEM.CREATE_USER is
+'创建用户名';
+
+comment on column DATA_STAGE_REPORT_ITEM.UPDATE_TIME is
+'更新时间';
+
+comment on column DATA_STAGE_REPORT_ITEM.UPDATE_USER is
+'更新用户名';
+
+
+drop table DATA_NODE_REPORT cascade constraints;
+
+/*==============================================================*/
+/* Table: DATA_NODE_REPORT                                      */
+/*==============================================================*/
+create table DATA_NODE_REPORT 
+(
+   ID                   number(10)           not null,
+   YEAR                 number(4),
+   MONTH                number(2),
+   PROJECT_ID           number(10),
+   BID_ID               number(10),
+   STEP_ID              number(10),
+   CREATE_TIME          DATE,
+   CREATE_USER          VARCHAR2(100),
+   UPDATE_TIME          DATE,
+   UPDATE_USER          VARCHAR2(100),
+   constraint PK_DATA_NODE_REPORT primary key (ID),
+   constraint FK_DATA_NODE_REPORT_PROJ foreign key (PROJECT_ID)
+         references PROJ_INFO (ID),
+   constraint FK_DATA_NODE_REPORT_BID foreign key (BID_ID)
+         references PROJ_BID (ID),
+   constraint FK_DATA_NODE_REPORT_STEP foreign key (STEP_ID)
+         references SYS_CODE_DETAIL (ID)
+);
+
+comment on table DATA_NODE_REPORT is
+'形象进度推进填报';
+
+comment on column DATA_NODE_REPORT.ID is
+'ID';
+
+comment on column DATA_NODE_REPORT.YEAR is
+'年份';
+
+comment on column DATA_NODE_REPORT.MONTH is
+'月份';
+
+comment on column DATA_NODE_REPORT.PROJECT_ID is
+'项目ID';
+
+comment on column DATA_NODE_REPORT.BID_ID is
+'标段ID';
+
+comment on column DATA_NODE_REPORT.STEP_ID is
+'当前步骤ID';
+
+comment on column DATA_NODE_REPORT.CREATE_TIME is
+'创建时间';
+
+comment on column DATA_NODE_REPORT.CREATE_USER is
+'创建用户名';
+
+comment on column DATA_NODE_REPORT.UPDATE_TIME is
+'更新时间';
+
+comment on column DATA_NODE_REPORT.UPDATE_USER is
+'更新用户名';
+
+
+drop table DATA_NODE_REPORT_ITEM cascade constraints;
+
+/*==============================================================*/
+/* Table: DATA_NODE_REPORT_ITEM                                 */
+/*==============================================================*/
+create table DATA_NODE_REPORT_ITEM 
+(
+   ID                   number(10)           not null,
+   STAGE_REPORT_ID      number(10),
+   NODE_ID              number(10),
+   STEP_ID              number(10),
+   CONTENT              varchar(2000),
+   PROBLEM              varchar(2000),
+   CREATE_TIME          DATE,
+   CREATE_USER          VARCHAR2(100),
+   UPDATE_TIME          DATE,
+   UPDATE_USER          VARCHAR2(100),
+   constraint PK_DATA_NODE_REPORT_ITEM primary key (ID),
+   constraint FK_DATA_NODE_REPORT_ITEM foreign key (STAGE_REPORT_ID)
+         references DATA_NODE_REPORT (ID),
+   constraint FK_DATA_NODE_REP_ITEM_NODE foreign key (NODE_ID)
+         references PROJ_NODE (ID),
+   constraint FK_DATA_NODE_REP_ITEM_STEP foreign key (STEP_ID)
+         references SYS_CODE_DETAIL (ID)
+);
+
+comment on table DATA_NODE_REPORT_ITEM is
+'形象进度推进填报明细';
+
+comment on column DATA_NODE_REPORT_ITEM.ID is
+'ID';
+
+comment on column DATA_NODE_REPORT_ITEM.STAGE_REPORT_ID is
+'推进填报ID';
+
+comment on column DATA_NODE_REPORT_ITEM.NODE_ID is
+'形象进度节点ID';
+
+comment on column DATA_NODE_REPORT_ITEM.STEP_ID is
+'步骤ID';
+
+comment on column DATA_NODE_REPORT_ITEM.CONTENT is
+'本月完成情况';
+
+comment on column DATA_NODE_REPORT_ITEM.PROBLEM is
+'本月存在问题';
+
+comment on column DATA_NODE_REPORT_ITEM.CREATE_TIME is
+'创建时间';
+
+comment on column DATA_NODE_REPORT_ITEM.CREATE_USER is
+'创建用户名';
+
+comment on column DATA_NODE_REPORT_ITEM.UPDATE_TIME is
+'更新时间';
+
+comment on column DATA_NODE_REPORT_ITEM.UPDATE_USER is
+'更新用户名';

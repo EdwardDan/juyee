@@ -359,3 +359,81 @@ alter table SYS_PERSON add  constraint FK_SYS_PERSON_CATE foreign key (CATEGORY_
 
 comment on column SYS_PERSON.CATEGORY_ID is
 '用户类型ID(系统/外部)';
+
+
+-- Add/modify columns 
+alter table PROJ_NODE add YEAR NUMBER(4);
+-- Add comments to the columns 
+comment on column PROJ_NODE.YEAR
+  is '年份';
+
+-- Add/modify columns 
+alter table PROJ_STAGE add YEAR NUMBER(4);
+-- Add comments to the columns 
+comment on column PROJ_STAGE.YEAR
+  is '年份';
+
+
+-- Add/modify columns 
+alter table PROJ_INFO add CREATE_TIME DATE;
+alter table PROJ_INFO add UPDATE_TIME DATE;
+alter table PROJ_INFO add CREATE_USER VARCHAR2(100 CHAR);
+alter table PROJ_INFO add UPDATE_USER VARCHAR2(100 CHAR);
+-- Add comments to the columns 
+comment on column PROJ_INFO.CREATE_TIME
+  is '创建时间';
+comment on column PROJ_INFO.UPDATE_TIME
+  is '更新时间';
+comment on column PROJ_INFO.CREATE_USER
+  is '创建人(记录帐号）';
+comment on column PROJ_INFO.UPDATE_USER
+  is '更新人(记录帐号）';
+
+
+-- Add/modify columns 
+alter table PROJ_STAGE add CREATE_TIME DATE;
+alter table PROJ_STAGE add UPDATE_TIME DATE;
+alter table PROJ_STAGE add CREATE_USER VARCHAR2(100 CHAR);
+alter table PROJ_STAGE add UPDATE_USER VARCHAR2(100 CHAR);
+-- Add comments to the columns 
+comment on column PROJ_STAGE.CREATE_TIME
+  is '创建时间';
+comment on column PROJ_STAGE.UPDATE_TIME
+  is '更新时间';
+comment on column PROJ_STAGE.CREATE_USER
+  is '创建人(记录帐号）';
+comment on column PROJ_STAGE.UPDATE_USER
+  is '更新人(记录帐号）';
+
+
+-- Add/modify columns 
+alter table PROJ_NODE add CREATE_TIME DATE;
+alter table PROJ_NODE add UPDATE_TIME DATE;
+alter table PROJ_NODE add CREATE_USER VARCHAR2(100 CHAR);
+alter table PROJ_NODE add UPDATE_USER VARCHAR2(100 CHAR);
+-- Add comments to the columns 
+comment on column PROJ_NODE.CREATE_TIME
+  is '创建时间';
+comment on column PROJ_NODE.UPDATE_TIME
+  is '更新时间';
+comment on column PROJ_NODE.CREATE_USER
+  is '创建人(记录帐号）';
+comment on column PROJ_NODE.UPDATE_USER
+  is '更新人(记录帐号）';
+
+
+-- Add/modify columns 
+alter table PROJ_BID add CREATE_TIME DATE;
+alter table PROJ_BID add UPDATE_TIME DATE;
+alter table PROJ_BID add CREATE_USER VARCHAR2(100 CHAR);
+alter table PROJ_BID add UPDATE_USER VARCHAR2(100 CHAR);
+-- Add comments to the columns 
+comment on column PROJ_BID.CREATE_TIME
+  is '创建时间';
+comment on column PROJ_BID.UPDATE_TIME
+  is '更新时间';
+comment on column PROJ_BID.CREATE_USER
+  is '创建人(记录帐号）';
+comment on column PROJ_BID.UPDATE_USER
+  is '更新人(记录帐号）';
+
