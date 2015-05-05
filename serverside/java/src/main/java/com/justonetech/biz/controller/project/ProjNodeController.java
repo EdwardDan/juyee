@@ -2,18 +2,13 @@ package com.justonetech.biz.controller.project;
 
 import com.justonetech.biz.core.orm.hibernate.GridJq;
 import com.justonetech.biz.core.orm.hibernate.QueryTranslateJq;
-import com.justonetech.biz.daoservice.DocDocumentService;
 import com.justonetech.biz.daoservice.ProjNodeService;
 import com.justonetech.biz.domain.ProjNode;
-import com.justonetech.biz.manager.ConfigManager;
-import com.justonetech.biz.manager.DocumentManager;
 import com.justonetech.biz.utils.Constants;
 import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.orm.hibernate.Page;
 import com.justonetech.core.utils.ReflectionUtils;
 import com.justonetech.core.utils.StringHelper;
-import com.justonetech.system.manager.SimpleQueryManager;
-import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
 import com.justonetech.system.tree.ZTreeBranch;
 import com.justonetech.system.tree.ZTreeNode;
@@ -35,35 +30,20 @@ import java.util.List;
 
 /**
  * note:项目形象进度节点管理
- * author: system
+ * author:hgr
  * create date:
- * modify date:
+ * modify date:2015-05-05
  */
 @Controller
 public class ProjNodeController extends BaseCRUDActionController<ProjNode> {
     private Logger logger = LoggerFactory.getLogger(ProjNodeController.class);
-    
-    @Autowired
-    private SysUserManager sysUserManager;
-    
-    @Autowired
-    private SysCodeManager sysCodeManager;
 
     @Autowired
-    private ConfigManager configManager;
-    
-    @Autowired
-    private DocumentManager documentManager;
-    
-    @Autowired
-    private SimpleQueryManager simpleQueryManager;
-    
-    @Autowired
-    private DocDocumentService docDocumentService;
+    private SysUserManager sysUserManager;
 
     @Autowired
     private ProjNodeService projNodeService;
-    
+
     /**
      * 树+列表显示页面
      *
@@ -72,7 +52,7 @@ public class ProjNodeController extends BaseCRUDActionController<ProjNode> {
      */
     @RequestMapping
     public String init(Model model) {
-         return "view/project/projNode/init";
+        return "view/project/projNode/init";
     }
 
     /**
@@ -83,10 +63,10 @@ public class ProjNodeController extends BaseCRUDActionController<ProjNode> {
      */
     @RequestMapping
     public String tree(Model model, HttpServletRequest request) {
-    
+
         //判断是否有编辑权限
-        model.addAttribute("canEdit",sysUserManager.hasPrivilege(PrivilegeCode.SYS_SAMPLE_EDIT));
-        
+        model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.PROJ_NODE_EDIT));
+
         //上下移动使用
         model.addAttribute("clazz", ProjNode.class.getName());
 
@@ -135,7 +115,7 @@ public class ProjNodeController extends BaseCRUDActionController<ProjNode> {
         return "common/msg";
     }
 
-   /**
+    /**
      * 列表显示页面
      *
      * @param model .
@@ -143,20 +123,20 @@ public class ProjNodeController extends BaseCRUDActionController<ProjNode> {
      */
     @RequestMapping
     public String grid(Model model) {
-      //判断是否有编辑权限
-      model.addAttribute("canEdit",sysUserManager.hasPrivilege(PrivilegeCode.SYS_SAMPLE_EDIT));
-            
-      return "view/project/projNode/grid";
+        //判断是否有编辑权限
+        model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.PROJ_NODE_EDIT));
+
+        return "view/project/projNode/grid";
     }
-    
+
     /**
      * 获取列表数据
      *
      * @param response .
-     * @param filters .
-     * @param columns .
-     * @param page .
-     * @param rows .     
+     * @param filters  .
+     * @param columns  .
+     * @param page     .
+     * @param rows     .
      */
     @RequestMapping
     public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session) {
@@ -180,7 +160,7 @@ public class ProjNodeController extends BaseCRUDActionController<ProjNode> {
             super.processException(response, e);
         }
     }
-    
+
     /**
      * 新增录入页面
      *
@@ -190,16 +170,16 @@ public class ProjNodeController extends BaseCRUDActionController<ProjNode> {
     @RequestMapping
     public String add(Model model, String parentId) {
         ProjNode projNode = new ProjNode();
-
+        projNode.setIsValid(true);//默认有效
         //如需增加其他默认值请在此添加
-        if (!StringHelper.isEmpty(parentId) && "root".equals(parentId)) {
-           projNode.setParent(projNodeService.get(Long.valueOf(parentId)));
+        if (!StringHelper.isEmpty(parentId) && !"root".equals(parentId)) {
+            projNode.setParent(projNodeService.get(Long.valueOf(parentId)));
         }
         model.addAttribute("bean", projNode);
 
         return "view/project/projNode/input";
     }
-    
+
     /**
      * 修改显示页面
      *
@@ -213,10 +193,10 @@ public class ProjNodeController extends BaseCRUDActionController<ProjNode> {
 
         //处理其他业务逻辑
         model.addAttribute("bean", projNode);
-        
+
         return "view/project/projNode/input";
     }
-    
+
     /**
      * 查看页面
      *
@@ -227,11 +207,11 @@ public class ProjNodeController extends BaseCRUDActionController<ProjNode> {
     @RequestMapping
     public String view(Model model, Long id) {
         ProjNode projNode = projNodeService.get(id);
-        
-        model.addAttribute("bean", projNode);        
+
+        model.addAttribute("bean", projNode);
         return "view/project/projNode/view";
     }
-    
+
     /**
      * 保存操作
      *
@@ -248,13 +228,13 @@ public class ProjNodeController extends BaseCRUDActionController<ProjNode> {
             if (entity.getId() != null) {
                 target = projNodeService.get(entity.getId());
                 ReflectionUtils.copyBean(entity, target, new String[]{
-                                                  "code",              
-                                                                  "name",              
-                                                                  "isValid",              
-                                                                  "description",              
-                                                                  "isLeaf",              
-                                                                  "treeId"              
-                                                });
+                        "code",
+                        "name",
+                        "isValid",
+                        "description"
+//                        ,
+//                        "isLeaf"
+                });
 
             } else {
                 target = entity;
@@ -268,13 +248,13 @@ public class ProjNodeController extends BaseCRUDActionController<ProjNode> {
         }
         sendSuccessJSON(response, "保存成功");
     }
-    
+
     /**
      * 删除操作
      *
      * @param response .
-     * @param id  .
-     * @throws Exception  .
+     * @param id       .
+     * @throws Exception .
      */
     @RequestMapping
     public void delete(HttpServletResponse response, Long id) throws Exception {
