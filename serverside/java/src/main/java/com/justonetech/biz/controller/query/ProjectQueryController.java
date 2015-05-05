@@ -3,10 +3,14 @@ package com.justonetech.biz.controller.query;
 import com.justonetech.biz.core.orm.hibernate.GridJq;
 import com.justonetech.biz.core.orm.hibernate.QueryTranslateJq;
 import com.justonetech.biz.daoservice.*;
+import com.justonetech.biz.domain.DataStageReportItem;
+import com.justonetech.biz.domain.ProjBid;
 import com.justonetech.biz.domain.ProjInfo;
+import com.justonetech.biz.domain.ProjStage;
 import com.justonetech.biz.utils.Constants;
 import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.orm.hibernate.Page;
+import com.justonetech.system.domain.SysCodeDetail;
 import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
 import org.slf4j.Logger;
@@ -18,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.*;
 
 
 /**
@@ -49,7 +54,13 @@ public class ProjectQueryController extends BaseCRUDActionController<ProjInfo> {
     private DataStageReportService dataStageReportService;
 
     @Autowired
+    private DataStageReportItemService dataStageReportItemService;
+
+    @Autowired
     private DataNodeReportService dataNodeReportService;
+
+    @Autowired
+    private DataNodeReportItemService dataNodeReportItemService;
 
     /**
      * 列表显示页面
@@ -106,6 +117,50 @@ public class ProjectQueryController extends BaseCRUDActionController<ProjInfo> {
      */
     @RequestMapping
     public String viewStage(Model model, Long id) {
+        //办证阶段
+        List<ProjStage> firstStages = new ArrayList<ProjStage>();
+        List<ProjStage> secondStages = new ArrayList<ProjStage>();
+        List<ProjStage> leafStages = new ArrayList<ProjStage>();
+        List<ProjStage> projStages = projStageService.findByQuery("from ProjStage where isValid=1 order by treeId asc");
+        for (ProjStage stage : projStages) {
+            if (stage.getParent() == null) {
+                firstStages.add(stage);
+            } else {
+                secondStages.add(stage);
+            }
+            if (stage.getIsLeaf()) {
+                leafStages.add(stage);
+            }
+        }
+        model.addAttribute("firstStages", firstStages);
+        model.addAttribute("secondStages", secondStages);
+        model.addAttribute("leafStages", leafStages);
+
+        //审核步骤
+        List<SysCodeDetail> steps = sysCodeManager.getCodeListByCode(Constants.DATA_REPORT_STEP);
+        model.addAttribute("steps", steps);
+
+        //标段列表
+        ProjInfo projInfo = projInfoService.get(id);
+        Set<ProjBid> bids = projInfo.getProjBids();
+        model.addAttribute("bids", bids);
+
+        //填报数据
+        Map<String, Object> dataMap = new HashMap<String, Object>();
+        Set<Long> oneBidHS = new HashSet<Long>();  //只取最新上报的数据
+        String hql = "from DataStageReportItem where stageReport.project.id=? order by stageReport.year desc,stageReport.month desc,id desc";
+        List<DataStageReportItem> dataStageReportItems = dataStageReportItemService.findByQuery(hql, id);
+        for (DataStageReportItem item : dataStageReportItems) {
+            Long bidId = item.getStageReport().getBid().getId();
+            if (!oneBidHS.contains(bidId)) {
+                oneBidHS.add(bidId);
+                Map<String, Object> map = new HashMap<String, Object>();
+                map.put("resultCode", item.getResult().getCode());
+                map.put("dealDate", item.getDealDate());
+                dataMap.put(bidId + "_" + item.getStep().getId() + "_" + item.getStage().getId(), map);
+            }
+        }
+        model.addAttribute("dataMap", dataMap);
 
         return "view/query/projectQuery/viewStage";
     }
