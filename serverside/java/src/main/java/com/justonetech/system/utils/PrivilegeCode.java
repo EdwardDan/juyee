@@ -57,5 +57,9 @@ public class PrivilegeCode {
     public static final String DOC_CATEGORY_EDIT = DocCategory.class.getSimpleName() + "_edit"; //文档目录_编辑
     public static final String DOC_DOCUMENT_EDIT = DocDocument.class.getSimpleName() + "_edit"; //文档管理_编辑
 
+    /**
+     * ***************************************项目管理******************************************************
+     */
+    public static final String PROJ_STAGE_EDIT = ProjStage.class.getSimpleName() + "_edit";//项目办证阶段管理_编辑
 }
 
