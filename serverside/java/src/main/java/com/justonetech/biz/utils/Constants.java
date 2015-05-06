@@ -21,6 +21,12 @@ public class Constants {
     public static final String SYS_PRIVILEGE_TYPE_PAGE = "page"; //权限类型---页面权限
     public static final String SYS_PRIVILEGE_TYPE_BUTTON = "button"; //权限类型---按钮权限
 
+
+    public static final String SYS_DEPT_CATAGORY = "SysDeptCatagory";//单位类型
+    public static final String OWNER_UNIT = "OwnerUnit";//单位类型---业主单位
+    public static final String CONSTRUCTION_UNIT = "ConstructionUnit";//单位类型---建设单位
+    public static final String SUPERVISING_UNIT = "SupervisingUnit";//单位类型---监理单位
+
     public static final String SYS_EDUCATION = "education"; //学历/文化程度
     public static final String SYS_POLITICAL = "political"; //政治面貌
 
