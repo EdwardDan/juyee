@@ -25,7 +25,7 @@ public abstract class BaseDataNodeReportItem  implements Serializable {
 
 	public static String REF = "DataNodeReportItem";
 	public static String PROP_STEP = "step";
-	public static String PROP_STAGE_REPORT = "stageReport";
+	public static String PROP_STAGE_REPORT = "nodeReport";
 	public static String PROP_CREATE_USER = "createUser";
 	public static String PROP_PROBLEM = "problem";
 	public static String PROP_NODE = "node";
@@ -86,7 +86,7 @@ public abstract class BaseDataNodeReportItem  implements Serializable {
 
 	// many to one
 	private com.justonetech.biz.domain.ProjNode node;
-	private com.justonetech.biz.domain.DataNodeReport stageReport;
+	private com.justonetech.biz.domain.DataNodeReport nodeReport;
 	private com.justonetech.system.domain.SysCodeDetail step;
 
 
@@ -229,16 +229,16 @@ public abstract class BaseDataNodeReportItem  implements Serializable {
 	/**
 	 * Return the value associated with the column: STAGE_REPORT_ID
 	 */
-	public com.justonetech.biz.domain.DataNodeReport getStageReport () {
-		return stageReport;
+	public com.justonetech.biz.domain.DataNodeReport getNodeReport () {
+		return nodeReport;
 	}
 
 	/**
 	 * Set the value related to the column: STAGE_REPORT_ID
-	 * @param stageReport the STAGE_REPORT_ID value
+	 * @param nodeReport the STAGE_REPORT_ID value
 	 */
-	public void setStageReport (com.justonetech.biz.domain.DataNodeReport stageReport) {
-		this.stageReport = stageReport;
+	public void setNodeReport (com.justonetech.biz.domain.DataNodeReport nodeReport) {
+		this.nodeReport = nodeReport;
 	}
 
 

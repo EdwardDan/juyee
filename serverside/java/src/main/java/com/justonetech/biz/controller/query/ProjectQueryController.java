@@ -3,13 +3,11 @@ package com.justonetech.biz.controller.query;
 import com.justonetech.biz.core.orm.hibernate.GridJq;
 import com.justonetech.biz.core.orm.hibernate.QueryTranslateJq;
 import com.justonetech.biz.daoservice.*;
-import com.justonetech.biz.domain.DataStageReportItem;
-import com.justonetech.biz.domain.ProjBid;
-import com.justonetech.biz.domain.ProjInfo;
-import com.justonetech.biz.domain.ProjStage;
+import com.justonetech.biz.domain.*;
 import com.justonetech.biz.utils.Constants;
 import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.orm.hibernate.Page;
+import com.justonetech.core.utils.DateTimeHelper;
 import com.justonetech.system.domain.SysCodeDetail;
 import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
@@ -174,6 +172,10 @@ public class ProjectQueryController extends BaseCRUDActionController<ProjInfo> {
      */
     @RequestMapping
     public String viewNode(Model model, Long id) {
+        Calendar c = Calendar.getInstance();
+        model.addAttribute("yearOptions", DateTimeHelper.getYearSelectOptions(String.valueOf(c.get(Calendar.YEAR))));
+        model.addAttribute("id", id);
+        model.addAttribute("currentMonth", c.get(Calendar.MONTH) + 1);
 
         return "view/query/projectQuery/viewNode";
     }
@@ -186,6 +188,51 @@ public class ProjectQueryController extends BaseCRUDActionController<ProjInfo> {
      */
     @RequestMapping
     public String viewNodeData(Model model, Long id, int year, int month) {
+        //办证阶段
+        List<ProjNode> firstNodes = new ArrayList<ProjNode>();
+        List<ProjNode> secondNodes = new ArrayList<ProjNode>();
+        List<ProjNode> thirdNodes = new ArrayList<ProjNode>();
+        List<ProjNode> leafNodes = new ArrayList<ProjNode>();
+        List<ProjNode> projNodes = projNodeService.findByQuery("from ProjNode where isValid=1 order by treeId asc");
+        for (ProjNode stage : projNodes) {
+            String treeId = stage.getTreeId();
+            if (stage.getParent() == null) {
+                firstNodes.add(stage);
+            } else if (treeId.split(".").length == 2) {
+                secondNodes.add(stage);
+            } else {
+                thirdNodes.add(stage);
+            }
+            if (stage.getIsLeaf()) {
+                leafNodes.add(stage);
+            }
+        }
+        model.addAttribute("firstNodes", firstNodes);
+        model.addAttribute("secondNodes", secondNodes);
+        model.addAttribute("thirdNodes", thirdNodes);
+        model.addAttribute("leafNodes", leafNodes);
+
+        //审核步骤
+        List<SysCodeDetail> steps = sysCodeManager.getCodeListByCode(Constants.DATA_REPORT_STEP);
+        model.addAttribute("steps", steps);
+
+        //标段列表
+        ProjInfo projInfo = projInfoService.get(id);
+        Set<ProjBid> bids = projInfo.getProjBids();
+        model.addAttribute("bids", bids);
+
+        //填报数据
+        Map<String, Object> dataMap = new HashMap<String, Object>();
+        String hql = "from DataNodeReportItem where stageReport.project.id=? and stageReport.year=? and stageReport.month=? order by id asc";
+        List<DataNodeReportItem> dataNodeReportItems = dataNodeReportItemService.findByQuery(hql, id, year, month);
+        for (DataNodeReportItem item : dataNodeReportItems) {
+            Long bidId = item.getNodeReport().getBid().getId();
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("content", item.getContent());
+            map.put("problem", item.getProblem());
+            dataMap.put(bidId + "_" + item.getStep().getId() + "_" + item.getNode().getId(), map);
+        }
+        model.addAttribute("dataMap", dataMap);
 
         return "view/query/projectQuery/viewNodeData";
     }
