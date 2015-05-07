@@ -16,13 +16,13 @@
                 colModel: [
                     {name: 'id', width: 10, align: "center", searchtype: "integer", hidden: true},
                     {name: 'year', width: 30, align: "center", searchtype: "string", sortable: true},
-                    {name: 'pi.name', width: 140, align: "left", searchtype: "string", sortable: true},
-                    {name: 'spname', width: 60, align: "center", searchtype: "string", sortable: true},
-                    {name: 'office_tel', width: 80, align: "center", searchtype: "string", sortable: true},
-                    {name: 'mobile', width: 80, align: "center", searchtype: "string", sortable: true}
+                    {name: 'pi.name', width: 100, align: "left", searchtype: "string", sortable: true},
+                    {name: 'spname', width: 50, align: "center", searchtype: "string", sortable: true},
+                    {name: 'office_tel', width: 50, align: "center", searchtype: "string", sortable: true},
+                    {name: 'mobile', width: 50, align: "center", searchtype: "string", sortable: true}
                 ],
                 actModel: [
-                    {name: 'operation', width: 60, align: 'center'}
+                    {name: 'operation', width: 30, align: 'center'}
                 ],
                 pager: '#pager3',
                 caption: "单位承担项目列表",
@@ -38,7 +38,7 @@
                         var id = ids[i];
                         var opButton = "";
                         <c:if test="${canEdit}">
-                        opButton += '<input type="button" value="编辑" onclick="doEdit(' + id + ')" class="button_normal"/> ';
+//                        opButton += '<input type="button" value="编辑" onclick="doEdit(' + id + ')" class="button_normal"/> ';
                         opButton += '<input type="button" value="删除" onclick="doDelete(' + id + ')" class="button_normal"/>';
                         </c:if>
                         jQuery("#listGrid3").jqGrid('setRowData', ids[i], { operation: opButton});
@@ -54,8 +54,6 @@
              { "field": "项目负责人座机", "op": "cn", "data": ""},
              { "field": "项目负责人手机", "op": "cn", "data": ""}
              ]},
-             queryButton: $("#queryButton3"),
-             queryDesc: $("#queryConditionDesc3")
              }*/
             userOpts: {
                 defaultQuery: { "groupOp": "AND", "rules": []},
@@ -67,44 +65,72 @@
     });
 
     <c:if test="${canEdit}">
-    function doAdd() {
-        openWindow("添加承担项目", "${ctx}/projRelateDept/add2.do", true);
+    function doAddPrj(button) {
+        removeRepeatOption(document.getElementById("unitPrjInfo"));
+        $.ajax({
+            type: "POST",
+            url: "${ctx}/projRelateDept/savePrjRelateDept.do",
+            data: {deptId: "${deptId}", projectIds: $("#unitPrjInfoIds").val()},
+            dataType: "json",
+            success: function (data) {
+                if (data.success) {
+                    showInfoMsg(data.msg);
+                    refreshGrid("listGrid3");
+                } else {
+                    showErrorMsg(data.msg);
+                }
+                button.disabled = false;
+            },
+            error: function (xmlR, status, e) {
+                showErrorMsg("[" + e + "]" + xmlR.responseText);
+                button.disabled = false;
+            }
+        });
     }
 
-    function doEdit(id) {
-        openWindow("修改承担项目明细", "${ctx}/projRelateDept/modify2.do?id=" + id, true);
-    }
+    <%--function doEdit(id) {--%>
+    <%--openWindow("修改承担项目明细", "${ctx}/projRelateDept/modify2.do?id=" + id, true);--%>
+    <%--}--%>
 
     function doDelete(id) {
         doGridDelete("${ctx}/projRelateDept/delete2.do?id=" + id);
     }
     </c:if>
 
-    function doQuery() {
-        var year = $("#yearQuery").val();
-        var piName = $("#piNameQuery").val();
-        var spname = $("#spnameQuery").val();
-        var officetel = $("#officetelQuery").val();
-        var mobile = $("#mobileQuery").val();
-        jQuery("#listGrid3").jqGrid('setGridParam',{postData: {'year': year, 'piName': piName, 'spname': spname, 'officetel': officetel, 'mobile': mobile}}).trigger('reloadGrid');
+    function doQuery(ele) {
+        var year = ele != null ? $("#yearQuery").val() : $("#yearQuery").val("").val();
+        var piName = ele != null ? $("#piNameQuery").val() : $("#piNameQuery").val("").val();
+//        var spname = $("#spnameQuery").val();
+//        var officetel = $("#officetelQuery").val();
+//        var mobile = $("#mobileQuery").val();
+        jQuery("#listGrid3").jqGrid('setGridParam', {postData: {'year': year, 'piName': piName/*, 'spname': spname, 'officetel': officetel, 'mobile': mobile*/}}).trigger('reloadGrid');
     }
 
 </script>
 
-<div style="width: 100%">
+<div style="width: 1050px">
     <div class="title_Search">
         <div class="gridQueryArea">
             <div style="float:left;padding-left: 10px" id="conditionsDesc3">
-                年份：<input type="text" name="yearQuery" id="yearQuery" value="" style="width: 6%" class="input_text">
-                项目名称：<input type="text" name="piNameQuery" id="piNameQuery" value="" style="width: 13%"
-                            class="input_text">
-                项目负责人姓名：<input type="text" name="spnameQuery" id="spnameQuery" value="" style="width: 8%"
+                年份：<input type="text" name="yearQuery" id="yearQuery" value="" class="input_text">
+                项目名称：<input type="text" name="piNameQuery" id="piNameQuery" value="" class="input_text">
+                <%--项目负责人姓名：<input type="text" name="spnameQuery" id="spnameQuery" value="" style="width: 8%"
                                class="input_text">
-                项目负责人座机：<input type="text" name="officetelQuery" id="officetelQuery" value="" style="width: 13%"
+                项目负责人座机：<input type="text" name="officetelQuery" id="officetelQuery" value="" style="width: 8%"
                                class="input_text">
-                项目负责人手机：<input type="text" name="mobileQuery" id="mobileQuery" value="" style="width: 13%"
-                               class="input_text">
-                <input type="button" value="查询" class="btn_Search" style="text-align: left" onclick="doQuery()">&nbsp;
+                项目负责人手机：<input type="text" name="mobileQuery" id="mobileQuery" value="" style="width: 8%"
+                               class="input_text">--%>
+            </div>
+            <div style="float: right;padding-right: 10px;">
+                <input type="button" value="查询" class="btn_Search" style="text-align: left" onclick="doQuery(this)">&nbsp;
+                <input type="button" value="重置" class="btn_Search" style="text-align: left" onclick="doQuery()">&nbsp;
+                <c:if test="${canEdit}">
+                    <select multiple="multiple" id="unitPrjInfo" name="unitPrjInfo"
+                            style="display:none;width:250px;height:110px;">${unitPrjInfoOptions}</select>
+                    <input type="button" value="添加" title="点击添加单位承担项目" class="button_add"
+                           onclick="multiSelectUnitPrjs('unitPrjInfo', 'unitPrjInfoIds', '', doAddPrj)"/>
+                    <input type="hidden" id="unitPrjInfoIds" name="unitPrjInfoIds" value=""/>
+                </c:if>
             </div>
         </div>
     </div>
