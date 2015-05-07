@@ -194,17 +194,18 @@ public class ProjectQueryController extends BaseCRUDActionController<ProjInfo> {
         List<ProjNode> thirdNodes = new ArrayList<ProjNode>();
         List<ProjNode> leafNodes = new ArrayList<ProjNode>();
         List<ProjNode> projNodes = projNodeService.findByQuery("from ProjNode where isValid=1 order by treeId asc");
-        for (ProjNode stage : projNodes) {
-            String treeId = stage.getTreeId();
-            if (stage.getParent() == null) {
-                firstNodes.add(stage);
-            } else if (treeId.split(".").length == 2) {
-                secondNodes.add(stage);
+        for (ProjNode node : projNodes) {
+            int currentLevel = node.getCurrentLevel();
+            int totalLevel = node.getTotalLevel();
+            if (currentLevel==1) {
+                firstNodes.add(node);
+            } else if (currentLevel == 2 && totalLevel==3) {
+                secondNodes.add(node);
             } else {
-                thirdNodes.add(stage);
+                thirdNodes.add(node);
             }
-            if (stage.getIsLeaf()) {
-                leafNodes.add(stage);
+            if (node.getIsLeaf()) {
+                leafNodes.add(node);
             }
         }
         model.addAttribute("firstNodes", firstNodes);
@@ -223,7 +224,7 @@ public class ProjectQueryController extends BaseCRUDActionController<ProjInfo> {
 
         //填报数据
         Map<String, Object> dataMap = new HashMap<String, Object>();
-        String hql = "from DataNodeReportItem where stageReport.project.id=? and stageReport.year=? and stageReport.month=? order by id asc";
+        String hql = "from DataNodeReportItem where nodeReport.project.id=? and nodeReport.year=? and nodeReport.month=? order by id asc";
         List<DataNodeReportItem> dataNodeReportItems = dataNodeReportItemService.findByQuery(hql, id, year, month);
         for (DataNodeReportItem item : dataNodeReportItems) {
             Long bidId = item.getNodeReport().getBid().getId();
