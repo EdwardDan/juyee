@@ -79,17 +79,18 @@ public class ProjNode extends BaseProjNode {
     }
 
     /**
-     * 获取子节点总数量
+     * 获取当前节点下所有叶子节点的总数
      *
      * @return .
      */
     public int getTotalChildCount() {
         int count = 0;
         Set<ProjNode> childs = getProjNodes();
-        if (childs.size() > 0)
+        if (childs.size() > 0) {
             for (ProjNode child : childs) {
                 count += child.getProjNodes().size();
             }
+        }
         if (count == 0) {
             count = childs.size();
         }

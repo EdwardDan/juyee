@@ -197,9 +197,9 @@ public class ProjectQueryController extends BaseCRUDActionController<ProjInfo> {
         for (ProjNode node : projNodes) {
             int currentLevel = node.getCurrentLevel();
             int totalLevel = node.getTotalLevel();
-            if (currentLevel==1) {
+            if (currentLevel == 1) {
                 firstNodes.add(node);
-            } else if (currentLevel == 2 && totalLevel==3) {
+            } else if (currentLevel == 2 && totalLevel == 3) {
                 secondNodes.add(node);
             } else {
                 thirdNodes.add(node);
