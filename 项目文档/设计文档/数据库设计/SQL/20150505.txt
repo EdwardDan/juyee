@@ -251,3 +251,13 @@ alter table PROJ_BID
 alter table PROJ_BID
   add constraint FK_PROJ_BID_PROJ foreign key (PROJECT_ID)
   references PROJ_INFO (ID);
+
+
+-- Add/modify columns 
+alter table DATA_NODE_REPORT_ITEM rename column STAGE_REPORT_ID to NODE_REPORT_ID;
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table DATA_NODE_REPORT_ITEM
+  drop constraint FK_DATA_NODE_REPORT_ITEM;
+alter table DATA_NODE_REPORT_ITEM
+  add constraint FK_DATA_NODE_REPORT_ITEM foreign key (NODE_REPORT_ID)
+  references DATA_NODE_REPORT (ID);
