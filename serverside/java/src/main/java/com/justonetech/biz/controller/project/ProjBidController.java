@@ -78,6 +78,9 @@ public class ProjBidController extends BaseCRUDActionController<ProjBid> {
     @RequestMapping
     public String grid(Model model,String typeCode) {
         model.addAttribute("typeCode",typeCode);
+        model.addAttribute("typeName", ProjBidType.getNameByCode(typeCode));
+        model.addAttribute("TYPE_STAGE", ProjBidType.TYPE_STAGE.getCode());
+        model.addAttribute("TYPE_NODE", ProjBidType.TYPE_NODE.getCode());
 
         return "view/project/projBid/projGrid";
     }
@@ -96,6 +99,7 @@ public class ProjBidController extends BaseCRUDActionController<ProjBid> {
         try {
             Page pageModel = new Page(page, rows, true);
             String hql = "from ProjInfo order by id desc";
+
             //执行查询
             QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);
             String query = queryTranslate.toString();
@@ -122,13 +126,14 @@ public class ProjBidController extends BaseCRUDActionController<ProjBid> {
     @RequestMapping
     public String bidGrid(Model model, Long projId,String typeCode) {
         //判断是否有编辑权限
-        if(ProjBidType.PLATFORM_STAGE.getCode().equals(typeCode)){
+        if(ProjBidType.TYPE_STAGE.getCode().equals(typeCode)){
             model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.PROJ_BID_STAGE_EDIT));
-        }else if(ProjBidType.PLATFORM_NODE.getCode().equals(typeCode)){
+        }else if(ProjBidType.TYPE_NODE.getCode().equals(typeCode)){
             model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.PROJ_BID_NODE_EDIT));
         }
         model.addAttribute("typeCode", typeCode);
         model.addAttribute("projId", projId);
+        model.addAttribute("projName", projInfoService.get(projId).getName());
 
         return "view/project/projBid/grid";
     }

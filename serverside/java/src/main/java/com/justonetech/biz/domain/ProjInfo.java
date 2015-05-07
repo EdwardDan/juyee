@@ -1,6 +1,8 @@
 package com.justonetech.biz.domain;
 
 import com.justonetech.biz.domain.base.BaseProjInfo;
+import com.justonetech.biz.utils.enums.ProjBidType;
+import com.justonetech.core.utils.JspHelper;
 
 import java.util.Calendar;
 import java.util.HashSet;
@@ -25,7 +27,7 @@ public class ProjInfo extends BaseProjInfo {
 /*[CONSTRUCTOR MARKER END]*/
 
     /**
-     * 获取标段数量
+     * 获取总标段数量
      *
      * @return .
      */
@@ -34,11 +36,43 @@ public class ProjInfo extends BaseProjInfo {
     }
 
     /**
-     * 获取已填报办证进度的标段数量
+     * 获取办证进度的标段数量
      *
      * @return .
      */
     public int getBidCountOfStage() {
+        int count = 0;
+        Set<ProjBid> projBids = getProjBids();
+        for (ProjBid projBid : projBids) {
+            if (ProjBidType.TYPE_STAGE.getCode().equals(JspHelper.getString(projBid.getTypeCode()))) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    /**
+     * 获取形象进度的标段数量
+     *
+     * @return .
+     */
+    public int getBidCountOfNode() {
+        int count = 0;
+        Set<ProjBid> projBids = getProjBids();
+        for (ProjBid projBid : projBids) {
+            if (ProjBidType.TYPE_NODE.getCode().equals(JspHelper.getString(projBid.getTypeCode()))) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    /**
+     * 获取已填报办证进度的标段数量
+     *
+     * @return .
+     */
+    public int getFillBidCountOfStage() {
         Set<Long> bids = new HashSet<Long>();
         Set<DataStageReport> dataStageReports = getDataStageReports();
         for (DataStageReport dataStageReport : dataStageReports) {
@@ -52,7 +86,7 @@ public class ProjInfo extends BaseProjInfo {
      *
      * @return .
      */
-    public int getBidCountOfNode() {
+    public int getFillBidCountOfNode() {
         Calendar c = Calendar.getInstance();
         Set<Long> bids = new HashSet<Long>();
         Set<DataNodeReport> dataNodeReports = getDataNodeReports();

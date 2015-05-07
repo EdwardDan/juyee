@@ -4,7 +4,7 @@
     $(function () {
         var conf = {
             gridOpts:{
-                url:"${ctx}/projectQuery/gridDataCustom.do",
+                url:"${ctx}/projectQueryNode/gridDataCustom.do",
                 colNames:['ID',
                     '年份',
                     '项目序号',
@@ -23,13 +23,13 @@
                     {name:"property.name",width:"40",align:"center",searchtype:"string",sortable:true},
                     {name:"stage.name",width:"40",align:"center",searchtype:"string",sortable:true},
                     {name:"category.name",width:"40",align:"center",searchtype:"date",sortable:true},
-                    {name:"bidCount",width:"25",align:"center",searchtype:"string",sortable:true},
+                    {name:"bidCountOfNode",width:"25",align:"center",searchtype:"string",sortable:true},
                 ],
                 actModel:[
                     {name:'operation', width:50, align:'center'}
                 ],
                 pager: '#pager2',
-                caption:"项目查询列表",
+                caption:"项目形象进度查询",
                 shrinkToFit:true,
                 gridComplete:function () {  //在此事件中循环为每一行添加修改和删除链接
                     var ids = jQuery("#listGrid").jqGrid('getDataIDs');
@@ -37,8 +37,7 @@
                         var id = ids[i];
                         var rowData = jQuery("#listGrid").jqGrid('getRowData', id);
                         var name = rowData["name"];
-                        var opButton = '<input type="button" value="办证推进" onclick="doViewStage(\'' + id + '\', \'' + name + '\')" class="button_normal_long"/> ';
-                        opButton += '<input type="button" value="形象进度" onclick="doViewNode(\'' + id + '\', \'' + name + '\')" class="button_normal_long"/> ';
+                        var opButton = '<input type="button" value="形象进度" onclick="doViewNode(\'' + id + '\', \'' + name + '\')" class="button_normal_long"/> ';
                         jQuery("#listGrid").jqGrid('setRowData', ids[i], { operation:opButton});
                     }
                 }, rownumbers:true
@@ -59,11 +58,8 @@
         };
         gridinit($("#listGrid"), conf);
     });
-    function doViewStage(id, name) {
-        openWindow("查看办证推进信息（" + name + "）", "${ctx}/projectQuery/viewStage.do?id=" + id, false, 1000, 550);
-    }
     function doViewNode(id, name) {
-        openWindow("查看形象进度信息（" + name + "）", "${ctx}/projectQuery/viewNode.do?id=" + id, false, 1000, 550);
+        openWindow("查看形象进度信息（" + name + "）", "${ctx}/projectQueryNode/viewNode.do?id=" + id, false, 1000, 550);
     }
 </script>
 
@@ -77,7 +73,6 @@
         </div>
         <div style="float:right;padding-right: 10px">
             <c:if test="${canViewAll}">
-                <input type="button" value="办证推进汇总" class="button_normal_long" onclick="doViewStage()"/>
                 <input type="button" value="形象进度汇总" class="button_normal_long" onclick="doViewNode()"/>
             </c:if>
         </div>

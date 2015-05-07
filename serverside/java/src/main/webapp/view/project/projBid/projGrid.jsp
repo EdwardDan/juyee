@@ -20,17 +20,22 @@
                     {name: 'id', width: 10, align: "center", searchtype: "integer", hidden: true},
                     {name: "year", width: "30", align: "center", searchtype: "integer", sortable: true},
                     {name: "no", width: "30", align: "center", searchtype: "string", sortable: true},
-                    {name: "name", width: "80", align: "center", searchtype: "string", sortable: true},
+                    {name: "name", width: "80", align: "left", searchtype: "string", sortable: true},
                     {name: "property.name", width: "30", align: "center", searchtype: "string", sortable: true},
                     {name: "stage.name", width: "30", align: "center", searchtype: "string", sortable: true},
-                    {name: "category.name", width: "30", align: "center", searchtype: "string", sortable: true},
-                    {name: "bidCount", width: "30", align: "center", searchtype: "integer", sortable: true}
+                    {name: "category.name", width: "30", align: "center", searchtype: "string", sortable: true}
+                    <c:if test="${TYPE_STAGE==typeCode}">
+                    ,{name: "bidCountOfStage", width: "30", align: "center", searchtype: "integer", sortable: true}
+                    </c:if>
+                    <c:if test="${TYPE_NODE==typeCode}">
+                    ,{name: "bidCountOfNode", width: "30", align: "center", searchtype: "integer", sortable: true}
+                    </c:if>
                 ],
                 actModel: [
                     {name: 'operation', width: 60, align: 'center'}
                 ],
                 pager: '#pager2',
-                caption: "项目基本信息管理列表",
+                caption: "项目基本信息列表（${typeName}）",
                 shrinkToFit: true,
                 gridComplete: function () {  //在此事件中循环为每一行添加修改和删除链接
                     var ids = jQuery("#listGrid").jqGrid('getDataIDs');

@@ -9,9 +9,11 @@ import com.justonetech.biz.domain.ProjInfo;
 import com.justonetech.biz.manager.ConfigManager;
 import com.justonetech.biz.manager.DocumentManager;
 import com.justonetech.biz.utils.Constants;
+import com.justonetech.biz.utils.enums.ProjBidType;
 import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.orm.hibernate.Page;
 import com.justonetech.core.utils.DateTimeHelper;
+import com.justonetech.core.utils.JspHelper;
 import com.justonetech.core.utils.ReflectionUtils;
 import com.justonetech.system.daoservice.SysCodeDetailService;
 import com.justonetech.system.manager.SimpleQueryManager;
@@ -29,7 +31,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Set;
 
 
@@ -76,7 +80,9 @@ public class ProjInfoController extends BaseCRUDActionController<ProjInfo> {
     @RequestMapping
     public String grid(Model model) {
         //判断是否有编辑权限
-        model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.SYS_SAMPLE_EDIT));
+        model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.PROJ_INFO_EDIT));
+        model.addAttribute("TYPE_STAGE", ProjBidType.TYPE_STAGE.getCode());
+        model.addAttribute("TYPE_NODE", ProjBidType.TYPE_NODE.getCode());
 
         return "view/project/projInfo/grid";
     }
@@ -95,7 +101,6 @@ public class ProjInfoController extends BaseCRUDActionController<ProjInfo> {
         try {
             Page pageModel = new Page(page, rows, true);
             String hql = "from ProjInfo order by id desc";
-            //增加自定义查询条件
 
             //执行查询
             QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);
@@ -172,10 +177,18 @@ public class ProjInfoController extends BaseCRUDActionController<ProjInfo> {
      * @return .
      */
     @RequestMapping
-    public String viewBid(Model model, Long id) {
+    public String viewBid(Model model, Long id,String typeCode) {
         ProjInfo projInfo = projInfoService.get(id);
+
+        List<ProjBid> ret = new ArrayList<ProjBid>();
         Set<ProjBid> projBids = projInfo.getProjBids();
-        model.addAttribute("projBids", projBids);
+        for (ProjBid projBid : projBids) {
+            if(JspHelper.getString(typeCode).equals(JspHelper.getString(projBid.getTypeCode()))){
+                ret.add(projBid);
+            }
+        }
+        model.addAttribute("projBids", ret);
+
         return "view/project/projInfo/viewBid";
     }
 

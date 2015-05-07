@@ -11,7 +11,7 @@
             <td class="">联系电话</td>
             <td class="">开工日期</td>
         </tr>
-        <c:forEach items="${projBids}" var="bid" varStatus="st">
+        <c:forEach items="${projBids}" var="bid">
             <tr
                     <c:if test="${st/2==0}">class="tr_dark"</c:if> <c:if test="${st/2==1}">class="tr_light"</c:if>>
                 <td class="">${bid.code}</td>
@@ -25,7 +25,7 @@
         </c:forEach>
         <tr class="tr_button">
             <td class="form_content" colspan="7" style="text-align: center">
-                <input type="button" value="取消" class="button_cancel" onclick="closeWindow()">
+                <input type="button" value="关闭" class="button_cancel" onclick="closeWindow()">
             </td>
         </tr>
     </table>

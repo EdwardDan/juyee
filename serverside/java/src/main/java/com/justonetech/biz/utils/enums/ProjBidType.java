@@ -4,8 +4,8 @@ package com.justonetech.biz.utils.enums;
  * 标段类别--分别用户办证推进和形象进度
  */
 public enum ProjBidType {
-    PLATFORM_STAGE("certStage", "办证推进"),
-    PLATFORM_NODE("scheduleNode", "形象进度");
+    TYPE_STAGE("certStage", "办证推进"),
+    TYPE_NODE("scheduleNode", "形象进度");
 
     private String code;
     private String name;

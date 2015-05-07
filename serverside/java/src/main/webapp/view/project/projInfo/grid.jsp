@@ -12,18 +12,20 @@
                     '项目性质',
                     '项目阶段',
                     '项目类型',
-                    '标段数',
+                    '办证推进标段数',
+                    '形象进度标段数',
                     '操作'
                 ],
                 colModel: [
                     {name: 'id', width: 10, align: "center", searchtype: "integer", hidden: true},
                     {name: "year", width: "30", align: "center", searchtype: "integer", sortable: true},
                     {name: "no", width: "30", align: "center", searchtype: "string", sortable: true},
-                    {name: "name", width: "80", align: "center", searchtype: "string", sortable: true},
+                    {name: "name", width: "80", align: "left", searchtype: "string", sortable: true},
                     {name: "property.name", width: "30", align: "center", searchtype: "string", sortable: true},
                     {name: "stage.name", width: "30", align: "center", searchtype: "string", sortable: true},
                     {name: "category.name", width: "30", align: "center", searchtype: "string", sortable: true},
-                    {name: "bidCount", width: "30", align: "center", searchtype: "integer", sortable: true, formatter: viewBidInfoFormat}
+                    {name: "bidCountOfStage", width: "30", align: "center", searchtype: "integer", sortable: true, formatter: viewBidInfoFormat1},
+                    {name: "bidCountOfNode", width: "30", align: "center", searchtype: "integer", sortable: true, formatter: viewBidInfoFormat2}
                 ],
                 actModel: [
                     {name: 'operation', width: 60, align: 'center'}
@@ -36,10 +38,10 @@
                     for (var i = 0; i < ids.length; i++) {
                         var id = ids[i];
                         var opButton = '<input type="button" value="查看" onclick="doView(' + id + ')" class="button_normal"/> ';
-                        <%--<c:if test="${canEdit}">--%>
+                        <c:if test="${canEdit}">
                         opButton += '<input type="button" value="编辑" onclick="doEdit(' + id + ')" class="button_normal"/> ';
                         opButton += '<input type="button" value="删除" onclick="doDelete(' + id + ')" class="button_normal"/>';
-                        <%--</c:if>--%>
+                        </c:if>
                         jQuery("#listGrid").jqGrid('setRowData', ids[i], { operation: opButton});
                     }
                 }, rownumbers: true
@@ -63,7 +65,7 @@
     function doView(id) {
         openWindow("查看项目基本信息管理", "${ctx}/projInfo/view.do?id=" + id, false);
     }
-    <%--<c:if test="${canEdit}">--%>
+    <c:if test="${canEdit}">
     function doAdd() {
         openWindow("添加项目基本信息管理", "${ctx}/projInfo/add.do", true);
     }
@@ -73,13 +75,18 @@
     function doDelete(id) {
         doGridDelete("${ctx}/projInfo/delete.do?id=" + id);
     }
-    <%--</c:if>--%>
-    function viewBidInfoFormat(cellvalue, options, rowObject) {
-        var title = "查看标段";
-        return "<a href='javascript:void(0)' onclick=loadBidInfoFormat('" + title + "','" + rowObject["id"] + "',true,false) class='grid_link'>" + cellvalue + "</a>";
+    </c:if>
+
+    function viewBidInfoFormat1(cellvalue, options, rowObject) {
+        var title = "查看办证推进标段（"+rowObject["name"]+"）";
+        return "<a href='javascript:void(0)' onclick=loadBidInfoFormat('" + title + "','" + rowObject["id"] + "','${TYPE_STAGE}',true,false) class='grid_link'>" + cellvalue + "</a>";
     }
-    function loadBidInfoFormat(title, projInfoId, isParentWindow, isOpenNewWindow) {
-        var url = "${ctx}/projInfo/viewBid.do?id=" + projInfoId;
+    function viewBidInfoFormat2(cellvalue, options, rowObject) {
+        var title = "查看形象进度标段（"+rowObject["name"]+"）";
+        return "<a href='javascript:void(0)' onclick=loadBidInfoFormat('" + title + "','" + rowObject["id"] + "','${TYPE_NODE}',true,false) class='grid_link'>" + cellvalue + "</a>";
+    }
+    function loadBidInfoFormat(title, projInfoId, typeCode, isParentWindow, isOpenNewWindow) {
+        var url = "${ctx}/projInfo/viewBid.do?id=" + projInfoId+"&typeCode="+typeCode;
         var windowId = isOpenNewWindow ? "newWinId" : null;
         if (isParentWindow) {
             parent.openNewWindow(windowId, title, url, false);
@@ -87,11 +94,6 @@
             openNewWindow(windowId, title, url, false);
         }
     }
-
-    //custom formatter
-    //function customeFormat(cellvalue, options, rowObject) {
-    //    return cellvalue == "true"?"是":"否";
-    //}
 </script>
 
 <div class="title_Search">
@@ -104,10 +106,10 @@
                    readonly="true"/>
         </div>
         <div style="float:right;padding-right: 10px">
-            <%--<c:if test="${canEdit}">--%>
+            <c:if test="${canEdit}">
             <input type="button" value="添加" class="button_add"
                    onclick="doAdd()"/>
-            <%--</c:if>--%>
+            </c:if>
         </div>
     </div>
 </div>

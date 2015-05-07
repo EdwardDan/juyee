@@ -27,17 +27,17 @@
                     {name: 'operation', width: 60, align: 'center'}
                 ],
                 pager: '#pager2',
-                caption: "项目标段管理列表",
+                caption: "项目标段列表（${projName}）",
                 shrinkToFit: true,
                 gridComplete: function () {  //在此事件中循环为每一行添加修改和删除链接
                     var ids = jQuery("#listGrid").jqGrid('getDataIDs');
                     for (var i = 0; i < ids.length; i++) {
                         var id = ids[i];
                         var opButton = '<input type="button" value="查看" onclick="doView(' + id + ')" class="button_normal"/> ';
-                    <%--<c:if test="${canEdit}">--%>
+                    <c:if test="${canEdit}">
                         opButton += '<input type="button" value="编辑" onclick="doEdit(' + id + ')" class="button_normal"/> ';
                         opButton += '<input type="button" value="删除" onclick="doDelete(' + id + ')" class="button_normal"/>';
-                    <%--</c:if>--%>
+                    </c:if>
                         jQuery("#listGrid").jqGrid('setRowData', ids[i], { operation: opButton});
                     }
                 }, rownumbers: true
@@ -73,7 +73,7 @@
     }
     </c:if>
     function jumpProjInfoGrid() {
-        loadAjaxData("mainContent", "${ctx}/projBid/grid.do");
+        loadAjaxData("mainContent", "${ctx}/projBid/grid.do?typeCode=${typeCode}");
     }
 </script>
 

@@ -78,7 +78,6 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         try {
             Page pageModel = new Page(page, rows, true);
             String hql = "from ProjInfo order by id desc";
-            //根据权限过滤项目
 
             //执行查询
             QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);
