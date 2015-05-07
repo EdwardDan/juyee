@@ -11,7 +11,7 @@
             last_m = month;
         }
         var year = $("#year").val();
-        loadAjaxData("monthReportDiv", "${ctx}/projectQuery/viewNodeData.do?id=${id}&year=" + year + "&month=" + month);
+        loadAjaxData("monthReportDiv", "${ctx}/projectQueryNode/viewNodeData.do?id=${id}&year=" + year + "&month=" + month);
     }
 
     $(function () {

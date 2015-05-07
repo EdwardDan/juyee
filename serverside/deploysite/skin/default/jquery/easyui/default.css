@@ -104,6 +104,24 @@ a.page_link:hover
 {
    color: #F26521;
 }
+/******************grid中的链接样式**********************/
+a.grid_link:link
+{
+    color: blue;
+    text-decoration: underline
+}
+a.grid_link:visited
+{
+    color: blue;
+}
+a.grid_link:active
+{
+    color: blue;
+}
+a.grid_link:hover
+{
+    color: #F26521;
+}
 /******************add custom**********************/
 /***重写jqgird底部分页css增加高度设置，否则在IE9下会缺少分页栏***/
 .ui-jqgrid .ui-pager-control {position: relative;height:24px;}

@@ -49,6 +49,17 @@
             <meta attribute="ColumnComment">标段名称</meta>
         </property>
 
+        <property
+                name="typeCode"
+                column="TYPE_CODE"
+                type="string"
+                not-null="false"
+                length="50"
+                >
+            <meta attribute="ColumnName">标段类别编码(形象进度/办证推进)</meta>
+            <meta attribute="ColumnComment">标段类别编码(形象进度/办证推进)</meta>
+        </property>
+
 		<property
 			name="buildMileage"
 			column="BUILD_MILEAGE"
