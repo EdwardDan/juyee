@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.justonetech.system.domain">
+	<class
+		name="SysRegPerson"
+		table="SYS_REG_PERSON"
+	>
+		
+		<meta attribute="sync-DAO">false</meta>
+		<meta attribute="sync-jsp">true</meta>
+		<meta attribute="sync-boolean">get</meta>
+		<meta attribute="treeable">false</meta>
+		<meta attribute="projectable">false</meta>
+        <meta attribute="tableName">注册人员</meta>
+        <meta attribute="tableComment">注册人员</meta>
+	    <meta attribute="sync-templatePatterns">list\w*</meta>
+        <meta attribute="sub-system">system</meta>
+
+		<id
+			name="id"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="com.justonetech.core.orm.hibernate.LongIdGenerator"/>
+		</id>
+
+		<property
+			name="personName"
+			column="PERSON_NAME"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">联系人</meta>
+            <meta attribute="ColumnComment">联系人</meta>
+        </property>
+
+		<property
+			name="mobile"
+			column="MOBILE"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">手机号码</meta>
+            <meta attribute="ColumnComment">手机号码</meta>
+        </property>
+
+		<property
+			name="gdCode"
+			column="GD_CODE"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">工地编号</meta>
+            <meta attribute="ColumnComment">工地编号</meta>
+        </property>
+
+		<property
+			name="bjbh"
+			column="BJBH"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">报建编号</meta>
+            <meta attribute="ColumnComment">报建编号</meta>
+        </property>
+
+		<property
+			name="projectCard"
+			column="PROJECT_CARD"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">项目卡号</meta>
+            <meta attribute="ColumnComment">项目卡号</meta>
+        </property>
+
+		<property
+			name="projectName"
+			column="PROJECT_NAME"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">工程名称</meta>
+            <meta attribute="ColumnComment">工程名称</meta>
+        </property>
+
+		<property
+			name="unitCode"
+			column="UNIT_CODE"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">企业编码</meta>
+            <meta attribute="ColumnComment">企业编码</meta>
+        </property>
+
+		<property
+			name="unitIdentifyCode"
+			column="UNIT_IDENTIFY_CODE"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">企业标识码</meta>
+            <meta attribute="ColumnComment">企业标识码</meta>
+        </property>
+
+		<property
+			name="unitName"
+			column="UNIT_NAME"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">企业名称</meta>
+            <meta attribute="ColumnComment">企业名称</meta>
+        </property>
+
+		<property
+			name="regResource"
+			column="REG_RESOURCE"
+			type="java.lang.Integer"
+			not-null="false"
+			length="1"
+        >
+            <meta attribute="ColumnName">注册来源：网站、窗口</meta>
+            <meta attribute="ColumnComment">注册来源：网站、窗口</meta>
+        </property>
+
+		<property
+			name="acceptOpinion"
+			column="ACCEPT_OPINION"
+			type="java.lang.Integer"
+			not-null="false"
+			length="1"
+        >
+            <meta attribute="ColumnName">受理意见：已通过、未通过、未受理</meta>
+            <meta attribute="ColumnComment">受理意见：已通过、未通过、未受理</meta>
+        </property>
+
+		<property
+			name="acceptDesc"
+			column="ACCEPT_DESC"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">受理描述</meta>
+            <meta attribute="ColumnComment">受理描述</meta>
+        </property>
+
+		<property
+			name="acceptDatetime"
+			column="ACCEPT_DATETIME"
+			type="timestamp"
+			not-null="false"
+			length="19"
+        >
+            <meta attribute="ColumnName">受理日期</meta>
+            <meta attribute="ColumnComment">受理日期</meta>
+        </property>
+
+		<many-to-one
+			name="regType"
+			column="REG_TYPE"
+			class="com.justonetech.system.domain.SysCodeDetail"
+			not-null="false"
+		>
+		</many-to-one>
+		<many-to-one
+			name="acceptUser"
+			column="ACCEPT_USER_ID"
+			class="com.justonetech.system.domain.SysUser"
+			not-null="false"
+		>
+		</many-to-one>
+	
+
+		<set name="sysUsers" inverse="true">
+			<key column="REG_PERSON_ID"/>
+			<one-to-many class="SysUser"/>
+		</set>
+
+	</class>	
+    <query name="sysregperson_all_data_query">
+        <![CDATA[FROM SysRegPerson]]>
+    </query>
+</hibernate-mapping>

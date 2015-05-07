@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.justonetech.system.domain">
+	<class
+		name="Sample"
+		table="SAMPLE"
+	>
+		
+		<meta attribute="sync-DAO">false</meta>
+		<meta attribute="sync-jsp">true</meta>
+		<meta attribute="sync-boolean">get</meta>
+		<meta attribute="treeable">true</meta>
+		<meta attribute="projectable">false</meta>
+            <meta attribute="sync-templatePatterns">tree\w*</meta>
+        <meta attribute="sub-system">system</meta>
+
+		<id
+			name="id"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="com.justonetech.core.orm.hibernate.LongIdGenerator"/>
+		</id>
+
+		<property
+			name="name"
+			column="NAME"
+			type="string"
+			not-null="true"
+			length="100"
+        />
+
+		<property
+			name="birthday"
+			column="BIRTHDAY"
+			type="date"
+			not-null="false"
+			length="10"
+        />
+
+		<property
+			name="possession"
+			column="POSSESSION"
+			type="double"
+			not-null="false"
+			length="18"
+        />
+
+		<property
+			name="age"
+			column="AGE"
+			type="integer"
+			not-null="false"
+			length="3"
+        />
+
+		<property
+			name="registerTime"
+			column="REGISTER_TIME"
+			type="timestamp"
+			not-null="false"
+			length="16"
+        />
+
+		<property
+			name="isMarried"
+			column="IS_MARRIED"
+			type="java.lang.Boolean"
+			not-null="false"
+			length="1"
+        />
+
+		<property
+			name="description"
+			column="DESCRIPTION"
+			type="string"
+			not-null="false"
+        />
+
+		<property
+			name="isLeaf"
+			column="IS_LEAF"
+			type="java.lang.Boolean"
+			not-null="false"
+			length="1"
+        />
+
+		<property
+			name="treeId"
+			column="TREE_ID"
+			type="string"
+			not-null="false"
+			length="255"
+        />
+
+		<property
+			name="image"
+			column="IMAGE"
+			type="Byte[]"
+			not-null="false"
+        />
+
+		<many-to-one
+			name="sysDept"
+			column="DEPT_ID"
+			class="SysDept"
+			not-null="false"
+		>
+		</many-to-one>
+		<many-to-one
+			name="education"
+			column="EDUCATION_ID"
+			class="SysCodeDetail"
+			not-null="false"
+		>
+		</many-to-one>
+		<many-to-one
+			name="parent"
+			column="PARENT_ID"
+			class="Sample"
+			not-null="false"
+		>
+		</many-to-one>
+	
+
+		<set name="samples" inverse="true">
+			<key column="PARENT_ID"/>
+			<one-to-many class="Sample"/>
+		</set>
+
+	</class>	
+    <query name="sample_all_data_query">
+        <![CDATA[FROM Sample]]>
+    </query>
+</hibernate-mapping>

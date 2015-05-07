@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.justonetech.biz.domain">
+	<class
+		name="DataNodeReportItem"
+		table="DATA_NODE_REPORT_ITEM"
+	>
+		
+		<meta attribute="sync-DAO">false</meta>
+		<meta attribute="sync-jsp">true</meta>
+		<meta attribute="sync-boolean">get</meta>
+		<meta attribute="treeable">false</meta>
+		<meta attribute="projectable">false</meta>
+        <meta attribute="tableName">形象进度推进填报明细</meta>
+        <meta attribute="tableComment">形象进度推进填报明细</meta>
+	    <meta attribute="sync-templatePatterns">list\w*</meta>
+        <meta attribute="sub-system">data</meta>
+
+		<id
+			name="id"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="com.justonetech.core.orm.hibernate.LongIdGenerator"/>
+		</id>
+
+		<property
+			name="content"
+			column="CONTENT"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">本月完成情况</meta>
+            <meta attribute="ColumnComment">本月完成情况</meta>
+        </property>
+
+		<property
+			name="problem"
+			column="PROBLEM"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">本月存在问题</meta>
+            <meta attribute="ColumnComment">本月存在问题</meta>
+        </property>
+
+		<property
+			name="createTime"
+			column="CREATE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">创建时间</meta>
+            <meta attribute="ColumnComment">创建时间</meta>
+        </property>
+
+		<property
+			name="createUser"
+			column="CREATE_USER"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">创建用户名</meta>
+            <meta attribute="ColumnComment">创建用户名</meta>
+        </property>
+
+		<property
+			name="updateTime"
+			column="UPDATE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">更新时间</meta>
+            <meta attribute="ColumnComment">更新时间</meta>
+        </property>
+
+		<property
+			name="updateUser"
+			column="UPDATE_USER"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">更新用户名</meta>
+            <meta attribute="ColumnComment">更新用户名</meta>
+        </property>
+
+		<many-to-one
+			name="node"
+			column="NODE_ID"
+			class="ProjNode"
+			not-null="false"
+		>
+		</many-to-one>
+		<many-to-one
+			name="nodeReport"
+			column="NODE_REPORT_ID"
+			class="DataNodeReport"
+			not-null="false"
+		>
+		</many-to-one>
+		<many-to-one
+			name="step"
+			column="STEP_ID"
+			class="com.justonetech.system.domain.SysCodeDetail"
+			not-null="false"
+		>
+		</many-to-one>
+
+	</class>	
+    <query name="datanodereportitem_all_data_query">
+        <![CDATA[FROM DataNodeReportItem]]>
+    </query>
+</hibernate-mapping>

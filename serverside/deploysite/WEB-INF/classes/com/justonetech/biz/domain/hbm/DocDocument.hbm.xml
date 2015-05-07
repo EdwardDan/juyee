@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.justonetech.biz.domain">
+	<class
+		name="DocDocument"
+		table="DOC_DOCUMENT"
+	>
+		
+		<meta attribute="sync-DAO">false</meta>
+		<meta attribute="sync-jsp">true</meta>
+		<meta attribute="sync-boolean">get</meta>
+		<meta attribute="treeable">false</meta>
+		<meta attribute="projectable">false</meta>
+        <meta attribute="tableName">文档信息</meta>
+        <meta attribute="tableComment">文档信息</meta>
+	    <meta attribute="sync-templatePatterns">list\w*</meta>
+        <meta attribute="sub-system">document</meta>
+
+		<id
+			name="id"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="com.justonetech.core.orm.hibernate.LongIdGenerator"/>
+		</id>
+
+		<property
+			name="originCode"
+			column="ORIGIN_CODE"
+			type="string"
+			not-null="false"
+			length="40"
+        >
+            <meta attribute="ColumnName">原始编号</meta>
+            <meta attribute="ColumnComment">原始编号</meta>
+        </property>
+
+		<property
+			name="code"
+			column="CODE"
+			type="string"
+			not-null="false"
+			length="40"
+        >
+            <meta attribute="ColumnName">编号</meta>
+            <meta attribute="ColumnComment">编号</meta>
+        </property>
+
+		<property
+			name="name"
+			column="NAME"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">标题</meta>
+            <meta attribute="ColumnComment">标题</meta>
+        </property>
+
+		<property
+			name="author"
+			column="AUTHOR"
+			type="string"
+			not-null="false"
+			length="40"
+        >
+            <meta attribute="ColumnName">作者</meta>
+            <meta attribute="ColumnComment">作者</meta>
+        </property>
+
+		<property
+			name="keywords"
+			column="KEYWORDS"
+			type="string"
+			not-null="false"
+			length="500"
+        >
+            <meta attribute="ColumnName">关键字</meta>
+            <meta attribute="ColumnComment">关键字</meta>
+        </property>
+
+		<property
+			name="abstractContent"
+			column="ABSTRACT_CONTENT"
+			type="string"
+			not-null="false"
+			length="1000"
+        >
+            <meta attribute="ColumnName">摘要</meta>
+            <meta attribute="ColumnComment">摘要</meta>
+        </property>
+
+		<property
+			name="achStatus"
+			column="ACH_STATUS"
+			type="integer"
+			not-null="false"
+			length="2"
+        >
+            <meta attribute="ColumnName">归档状态</meta>
+            <meta attribute="ColumnComment">归档状态</meta>
+        </property>
+
+		<property
+			name="description"
+			column="DESCRIPTION"
+			type="string"
+			not-null="false"
+			length="1000"
+        >
+            <meta attribute="ColumnName">描述</meta>
+            <meta attribute="ColumnComment">描述</meta>
+        </property>
+
+        <property
+			name="createTime"
+			column="CREATE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="16"
+        >
+            <meta attribute="ColumnName">创建时间</meta>
+            <meta attribute="ColumnComment">创建时间</meta>
+        </property>
+
+		<property
+			name="updateTime"
+			column="UPDATE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="16"
+        >
+            <meta attribute="ColumnName">更新时间</meta>
+            <meta attribute="ColumnComment">更新时间</meta>
+        </property>
+
+		<property
+			name="updateUser"
+			column="UPDATE_USER"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">更新人</meta>
+            <meta attribute="ColumnComment">更新人</meta>
+        </property>
+
+		<property
+			name="createUser"
+			column="CREATE_USER"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">创建人</meta>
+            <meta attribute="ColumnComment">创建人</meta>
+        </property>
+
+		<many-to-one
+			name="dept"
+			column="DEPT_ID"
+			class="com.justonetech.system.domain.SysDept"
+			not-null="false"
+		>
+		</many-to-one>
+		<many-to-one
+			name="category"
+			column="CATEGORY_ID"
+			class="DocCategory"
+			not-null="false"
+		>
+		</many-to-one>
+		<many-to-one
+			name="format"
+			column="FORMAT_ID"
+			class="com.justonetech.system.domain.SysCodeDetail"
+			not-null="false"
+		>
+		</many-to-one>
+	
+
+		<set name="docDocumentAttachs" inverse="true" order-by="UPDATE_DATE">
+			<key column="DOCUMENT_ID"/>
+			<one-to-many class="DocDocumentAttach"/>
+		</set>
+
+	</class>	
+    <query name="docdocument_all_data_query">
+        <![CDATA[FROM DocDocument]]>
+    </query>
+</hibernate-mapping>

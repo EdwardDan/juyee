@@ -1,0 +1,73 @@
+.Header{
+    width: 100%;
+    background-image: url(index_new/title_bg.jpg);
+    background-repeat: repeat-x;
+    height: 83px;
+    margin-top: 0;
+    margin-right: auto;
+    margin-bottom: 0;
+    margin-left: auto;
+}
+.Header .titlelogo{
+    background-repeat: no-repeat;
+    height: 50px;
+    width: 480px;
+    float: left;
+}
+.Header .titlebutton{
+    background-repeat: no-repeat;
+    height: 50px;
+    width: 373px;
+    padding: 0px;
+    float: right;
+}
+.Header .bar{
+    float: left;
+    background-repeat: repeat-x;
+    height: 33px;
+    width: 100%;
+    background-image: url(index_new/title2.jpg);
+}
+.Header .bar .left{
+    float: left;
+    height: 33px;
+    width: 40%;
+    font-family: "宋体";
+    font-size: 12px;
+    line-height: 33px;
+    color: #777676;
+    letter-spacing: 0.05em;
+    text-indent: 15px;
+}
+.Header .bar .right{
+    float: right;
+    height: 33px;
+    width: 255px;
+    font-size: 12px;
+    line-height: 33px;
+}
+
+.menu1{
+    width:80px;height: 60px;background-color: #6593CF;margin-top: 5px;margin-left: 5px
+}
+
+.index_space{
+    height: 15px;
+}
+
+/**************jqgird标题行样式重写（不换行和自适应高度）**************/
+.ui-th-column, .ui-jqgrid .ui-jqgrid-htable th.ui-th-column {
+    overflow: hidden;
+    white-space: nowrap;
+    text-align: center;
+    border-top: 0 none;
+    border-bottom: 0 none;
+    height: auto !important;
+    min-height: 22px;
+}
+
+th.ui-th-column div {
+    white-space: normal !important;
+    height: auto !important;
+    padding: 0;
+}

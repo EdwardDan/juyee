@@ -1,0 +1,16 @@
+1、jquery.easyui.min.1.2.2.js
+其中zIndex:9000调整为900，否则弹出树会被遮挡。
+$.fn.window.defaults=$.extend({},$.fn.panel.defaults,{zIndex:900,draggable:true,resizable:true,shadow:true,modal:false,inline:false,title:"New Window",collapsible:false,minimizable:false,maximizable:true,closable:true,closed:false});
+
+2、panel-header
+导航菜单处的样式单独设置，避免跟菜单字体一致。
+
+//var _167=$("<div class=\"panel-header\"><div class=\"panel-title\">"+opts.title+"</div></div>").prependTo(_166);
+    if(opts.title == "系统菜单"){
+//        alert(opts.title);
+//        var fixButton = "<input type='button' value='fix' onclick='setFix(true)'>";
+        var fixButton = "";
+        var _167=$("<div class=\"panel-header\"><div class=\"panel-all-top\">"+opts.title+fixButton+"</div></div>").prependTo(_166);
+    }else{
+        var _167=$("<div class=\"panel-header\"><div class=\"panel-title\">"+opts.title+"</div></div>").prependTo(_166);
+    }

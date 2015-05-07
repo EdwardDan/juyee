@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+    <!--&lt;!&ndash; 发送短信__每月待办事项和通知提醒  &ndash;&gt;-->
+    <!--<bean id="scanSmsEveryMonthListenerJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
+        <!--<property name="targetObject">-->
+            <!--<bean id="scanSmsEveryMonthService" class="com.justonetech.biz.manager.MsgAlertManager"/>-->
+        <!--</property>-->
+        <!--<property name="targetMethod" value="sendSmsEveryMonth"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="scanSmsEveryMonthCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">-->
+        <!--<property name="jobDetail" ref="scanSmsEveryMonthListenerJob"/>-->
+        <!--&lt;!&ndash; 每天9点5分触发  &ndash;&gt;-->
+        <!--<property name="cronExpression" value="0 5 9 * * ?"/>-->
+    <!--</bean>-->
+
+    <!--&lt;!&ndash; 定时器列表  &ndash;&gt;-->
+    <!--<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">-->
+        <!--<property name="triggers">-->
+            <!--<list>-->
+                <!--<ref local="scanSmsEveryMonthCronTrigger"/>-->
+            <!--</list>-->
+        <!--</property>-->
+    <!--</bean>-->
+</beans>

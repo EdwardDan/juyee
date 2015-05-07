@@ -1,0 +1,1755 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WorkBook xmlVersion="20130114" releaseVersion="7.0.3">
+<TableDataMap>
+<TableData name="ds1" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="id"/>
+<O>
+<![CDATA[1]]></O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[hkjjw]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[select * from HKJJW.JD_INFORM a,HKJJW.SHARE_PRO_TOBUILD b where a.id=${id} and b.bjbh=a.bjbh]]></Query>
+</TableData>
+<TableData name="ds2" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="bjbh"/>
+<O>
+<![CDATA[1302HK0015]]></O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[hkjjw]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[select count(bjbh) dtsl from HKJJW.SHARE_GD_DWGC where bjbh='${bjbh}']]></Query>
+</TableData>
+</TableDataMap>
+<Report class="com.fr.report.worksheet.WorkSheet" name="sheet1">
+<ReportPageAttr>
+<HR/>
+<FR/>
+<HC/>
+<FC/>
+</ReportPageAttr>
+<RowHeight defaultValue="723900">
+<![CDATA[1524000,2476500,1714500,723900,723900,723900,1524000,723900,723900,723900,1524000,723900,723900,723900,1524000,723900,723900,723900,1524000,723900,723900,723900,1524000,723900,723900,723900,1524000,723900,723900,723900,1524000,723900,723900,723900,723900,723900,723900,723900,1638300,723900,723900,723900,1828800,1295400,1295400,1295400,1295400,1295400,1295400,1447800,1295400,1295400,1295400,1295400,1295400,1295400,1295400,1295400,1295400,1295400,1295400,1295400,1295400,1295400,1295400,1295400,1295400,1295400,1295400,1295400,1295400,1447800,1447800,1447800,1295400,1295400,1295400,1295400,1295400,1295400,1181100,1295400,1295400,1295400,1295400,1295400,1181100,1295400,1295400,1181100,1295400,1524000,1295400,1295400,1295400,1295400,1447800,1524000,1295400,1295400,1295400,1295400,1295400,723900,723900,1295400,1295400,1447800,1295400,1295400,1295400,1295400,1295400,1447800,1295400,1295400,1295400,1295400,1295400,1295400,1295400,1295400,1295400,1447800,1295400,1295400,1295400,1295400,1447800,1295400,1295400,1524000,1295400,1295400,723900,723900,1295400,1295400,2286000,1600200,1295400,1295400,1600200,1295400,1295400,1524000,1295400,1600200,1295400,1295400,1600200,1295400,1295400,1600200,1295400,1295400,1295400,1295400,1295400,1295400,1295400,1295400,1295400,723900,723900,1600200,1447800,1295400,1295400,1295400,1447800,2247900,1447800,1447800,1447800,1447800,1447800,1447800,1447800,2247900,1600200,1295400,1295400,1295400,1371600,2590800,1447800,1447800,1447800,1447800,723900,723900,1447800,1447800,723900,723900,723900,1447800,723900,723900,723900,1447800,723900,723900,723900,1447800,723900,723900,723900,1447800,723900,723900,723900,1447800,1447800,1447800,1447800,1447800,1447800,1447800,1447800,1447800,1447800,1447800,723900]]></RowHeight>
+<ColumnWidth defaultValue="2743200">
+<![CDATA[2133600,1600200,2933700,3467100,2743200,2743200,1219200,4686300,2971800,2743200,2743200]]></ColumnWidth>
+<CellElementList>
+<C c="0" r="1" cs="9" s="0">
+<O>
+<![CDATA[上海市建设工程质量监督告知书（2014版）]]></O>
+<Expand/>
+</C>
+<C c="0" r="2" cs="9" s="1">
+<O>
+<![CDATA[（房屋建筑工程）]]></O>
+<Expand/>
+</C>
+<C c="1" r="6" cs="2" s="2">
+<O>
+<![CDATA[工地编号：]]></O>
+<Expand/>
+</C>
+<C c="3" r="6" cs="3" s="3">
+<Expand/>
+</C>
+<C c="1" r="10" cs="2" s="2">
+<O>
+<![CDATA[工地名称：]]></O>
+<Expand/>
+</C>
+<C c="3" r="10" cs="5" s="3">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="PROJECT_NAME"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="1" r="14" cs="2" s="2">
+<O>
+<![CDATA[建设单位：]]></O>
+<Expand/>
+</C>
+<C c="3" r="14" cs="5" s="3">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="BUILD_UNIT_NAME"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="1" r="18" cs="2" s="2">
+<O>
+<![CDATA[施工单位：]]></O>
+<Expand/>
+</C>
+<C c="3" r="18" cs="5" s="3">
+<Expand/>
+</C>
+<C c="1" r="22" cs="2" s="2">
+<O>
+<![CDATA[监理单位：]]></O>
+<Expand/>
+</C>
+<C c="3" r="22" cs="5" s="3">
+<Expand/>
+</C>
+<C c="1" r="26" cs="2" s="2">
+<O>
+<![CDATA[设计单位：]]></O>
+<Expand/>
+</C>
+<C c="3" r="26" cs="5" s="3">
+<Expand/>
+</C>
+<C c="1" r="30" cs="2" s="2">
+<O>
+<![CDATA[勘察单位：]]></O>
+<Expand/>
+</C>
+<C c="3" r="30" cs="5" s="3">
+<Expand/>
+</C>
+<C c="0" r="38" cs="9" s="4">
+<O>
+<![CDATA[监督机构：上海市虹口区建筑业管理署]]></O>
+<Expand/>
+</C>
+<C c="0" r="42" cs="9" s="5">
+<O>
+<![CDATA[上海市建设工程质量监督告知书]]></O>
+<Expand/>
+</C>
+<C c="0" r="43" cs="9" s="6">
+<O>
+<![CDATA[ 本监督机构受政府行政主管部门委托，对本工地实施质量监督。]]></O>
+<Expand/>
+</C>
+<C c="0" r="44" cs="9" s="7">
+<O>
+<![CDATA[ 建设工程质量监督，是指监督机构依据有关法律法规和工程建设强制性标准，对]]></O>
+<Expand/>
+</C>
+<C c="0" r="45" cs="9" s="8">
+<O>
+<![CDATA[涉及工程主体结构安全、主要使用功能的工程实体质量情况，以及工程建设参与各方]]></O>
+<Expand/>
+</C>
+<C c="0" r="46" cs="9" s="8">
+<O>
+<![CDATA[和人员在施工现场履行法定质量责任和义务的情况（即质量行为）实施监督的行政执]]></O>
+<Expand/>
+</C>
+<C c="0" r="47" cs="9" s="9">
+<O>
+<![CDATA[法活动。]]></O>
+<Expand/>
+</C>
+<C c="0" r="48" cs="9" s="10">
+<O>
+<![CDATA[ 为了使工程质量监督工作的顺利开展,现对以下事项进行告知,请予以配合支持。]]></O>
+<Expand/>
+</C>
+<C c="0" r="49" cs="9" s="11">
+<O>
+<![CDATA[一、工程建设参与各方质量责任、义务及配合事项]]></O>
+<Expand/>
+</C>
+<C c="0" r="50" cs="9" s="10">
+<O>
+<![CDATA[（一）通用要求]]></O>
+<Expand/>
+</C>
+<C c="0" r="51" cs="9" s="10">
+<O>
+<![CDATA[ 1、工程建设参与各方应当严格遵守法律、法规、工程建设规范标准和相关文件]]></O>
+<Expand/>
+</C>
+<C c="0" r="52" cs="9" s="12">
+<O>
+<![CDATA[的规定、以及合同约定，对建设工程承担相应的质量责任。监督机构对建设工程的监]]></O>
+<Expand/>
+</C>
+<C c="0" r="53" cs="9" s="12">
+<O>
+<![CDATA[督检查，不取代建设参与各方应当承担的相应质量责任。]]></O>
+<Expand/>
+</C>
+<C c="0" r="54" cs="9" s="10">
+<O>
+<![CDATA[ 2、禁止施工许可范围以外的任何施工行为，若擅自施工的，建设单位与相关责]]></O>
+<Expand/>
+</C>
+<C c="0" r="55" cs="9" s="12">
+<O>
+<![CDATA[任单位承担一切后果及责任。]]></O>
+<Expand/>
+</C>
+<C c="0" r="56" cs="9" s="10">
+<O>
+<![CDATA[ 3、工程建设参与各方在工程建设中应当尽量避免或减少对周边的不利影响。]]></O>
+<Expand/>
+</C>
+<C c="0" r="57" cs="9" s="10">
+<O>
+<![CDATA[ 4、建设参与各方应当将涉及工程质量、技术、经营行为等资料常备现场，以备]]></O>
+<Expand/>
+</C>
+<C c="0" r="58" cs="9" s="12">
+<O>
+<![CDATA[监督机构检查。]]></O>
+<Expand/>
+</C>
+<C c="0" r="59" cs="9" s="10">
+<O>
+<![CDATA[ 5、工程建设参与各方应当对提交监督机构的材料的真实性、有效性负责。对涉]]></O>
+<Expand/>
+</C>
+<C c="0" r="60" cs="9" s="12">
+<O>
+<![CDATA[及通过信息平台进行填报的内容，工程建设参与各方应当按照要求，及时、准确进行]]></O>
+<Expand/>
+</C>
+<C c="0" r="61" cs="9" s="12">
+<O>
+<![CDATA[信息采集和上报。]]></O>
+<Expand/>
+</C>
+<C c="0" r="62" cs="9" s="10">
+<O>
+<![CDATA[ 6、工程建设参与各方应当针对包括不限于监督机构提出的问题，举一反三，全]]></O>
+<Expand/>
+</C>
+<C c="0" r="63" cs="9" s="12">
+<O>
+<![CDATA[面自查并整改，经整改合格后方可进行下道工序的施工，整改结果应当以书面形式及]]></O>
+<Expand/>
+</C>
+<C c="0" r="64" cs="9" s="12">
+<O>
+<![CDATA[时回复监督机构，并附相关证明材料。]]></O>
+<Expand/>
+</C>
+<C c="0" r="65" cs="9" s="10">
+<O>
+<![CDATA[ 7、工地现场发生质量事故的，应当依照规定及时报告监督机构，不得无故拖延]]></O>
+<Expand/>
+</C>
+<C c="0" r="66" cs="9" s="12">
+<O>
+<![CDATA[或隐瞒不报或擅自处理。 ]]></O>
+<Expand/>
+</C>
+<C c="0" r="67" cs="9" s="10">
+<O>
+<![CDATA[ 8、监督机构对工地现场发现的违法违规行为有权采取相应的行政措施，工程建]]></O>
+<Expand/>
+</C>
+<C c="0" r="68" cs="9" s="12">
+<O>
+<![CDATA[设参与各方应予以配合。]]></O>
+<Expand/>
+</C>
+<C c="0" r="69" cs="9" s="10">
+<O>
+<![CDATA[ 9、对于监督人员提出有关工程质量的意见，如有不同看法，可以向监督人员或]]></O>
+<Expand/>
+</C>
+<C c="0" r="70" cs="9" s="12">
+<O>
+<![CDATA[本监督机构提出。]]></O>
+<Expand/>
+</C>
+<C c="0" r="72" cs="9" s="10">
+<O>
+<![CDATA[（二）其他要求]]></O>
+<Expand/>
+</C>
+<C c="0" r="73" cs="9" s="13">
+<O>
+<![CDATA[ 1、对建设单位的要求]]></O>
+<Expand/>
+</C>
+<C c="0" r="74" cs="9" s="10">
+<O>
+<![CDATA[（1）做好工地内工程建设参与各方的组织协调工作，做好工地周边被影响区域]]></O>
+<Expand/>
+</C>
+<C c="0" r="75" cs="9" s="12">
+<O>
+<![CDATA[的社会稳定协调工作，并建立相应机制。]]></O>
+<Expand/>
+</C>
+<C c="0" r="76" cs="9" s="10">
+<O>
+<![CDATA[（2）建设单位对设计文件的施工方案提出修改意见时，应当经过设计同意并提]]></O>
+<Expand/>
+</C>
+<C c="0" r="77" cs="9" s="12">
+<O>
+<![CDATA[出设计变更或工程联系单，方可作为施工的依据。凡涉及结构、节能、消防等重大]]></O>
+<Expand/>
+</C>
+<C c="0" r="78" cs="9" s="12">
+<O>
+<![CDATA[设计变更，应当由原审图单位重新审图。]]></O>
+<Expand/>
+</C>
+<C c="0" r="79" cs="9" s="10">
+<O>
+<![CDATA[（3）工程质量检测应当由建设单位委托经认可的检测机构进行，建设单位应当]]></O>
+<Expand/>
+</C>
+<C c="0" r="80" cs="9" s="12">
+<O>
+<![CDATA[保证监理平行检测的费用。]]></O>
+<Expand/>
+</C>
+<C c="0" r="81" cs="9" s="10">
+<O>
+<![CDATA[（4）禁止建设单位指定工程分包单位。承包单位对其承包范围内的部分专业工]]></O>
+<Expand/>
+</C>
+<C c="0" r="82" cs="9" s="12">
+<O>
+<![CDATA[程依法进行分包时，建设单位不得指定分包单位；建设单位不得指定按照合同约定]]></O>
+<Expand/>
+</C>
+<C c="0" r="83" cs="9" s="12">
+<O>
+<![CDATA[应由承包单位采购的建筑材料、构配件和设备；不得采用与总承包单位、分包单位]]></O>
+<Expand/>
+</C>
+<C c="0" r="84" cs="9" s="12">
+<O>
+<![CDATA[签订“三方协议”的方式变相指定分包单位。]]></O>
+<Expand/>
+</C>
+<C c="0" r="85" cs="9" s="10">
+<O>
+<![CDATA[（5）施工单位现场关键岗位人员相对于招标承诺人员发生变更后，应做好相应]]></O>
+<Expand/>
+</C>
+<C c="0" r="86" cs="9" s="12">
+<O>
+<![CDATA[审核工作。]]></O>
+<Expand/>
+</C>
+<C c="0" r="87" cs="9" s="10">
+<O>
+<![CDATA[（6）建设工程竣工验收合格后，建设单位应当在建筑物的明显部位镶刻建筑铭]]></O>
+<Expand/>
+</C>
+<C c="0" r="88" cs="9" s="12">
+<O>
+<![CDATA[牌，标注竣工时间，建设、勘察、设计、施工、监理等单位名称和项目主要负责人]]></O>
+<Expand/>
+</C>
+<C c="0" r="89" cs="9" s="12">
+<O>
+<![CDATA[姓名。]]></O>
+<Expand/>
+</C>
+<C c="0" r="90" cs="9" s="10">
+<O>
+<![CDATA[（7）在建的建设工程因故中止施工的，除按照《建筑工程施工许可管理办法》]]></O>
+<Expand/>
+</C>
+<C c="0" r="91" cs="9" s="12">
+<O>
+<![CDATA[要求向有关部门进行报告外，建设单位应当向本监督机构提交有建设单位、监理单位]]></O>
+<Expand/>
+</C>
+<C c="0" r="92" cs="9" s="12">
+<O>
+<![CDATA[施工总包单位共同签署确认的工地中止施工报告，中止施工报告应说明中止施工的原]]></O>
+<Expand/>
+</C>
+<C c="0" r="93" cs="9" s="12">
+<O>
+<![CDATA[因、工地中止施工时间以及停工条件的自查情况（包括维护保养措施、现场设施设备]]></O>
+<Expand/>
+</C>
+<C c="0" r="94" cs="9" s="12">
+<O>
+<![CDATA[停用检查情况、作业人员安置情况、日常巡视值班安排情况等），并做好建设工程的]]></O>
+<Expand/>
+</C>
+<C c="0" r="95" cs="9" s="12">
+<O>
+<![CDATA[维护管理工作。工程恢复施工前，应当书面报本监督机构进行复工条件检查。]]></O>
+<Expand/>
+</C>
+<C c="0" r="96" cs="9" s="13">
+<O>
+<![CDATA[ 2、对施工单位的要求（涉及分包事项，由总包负责告知）]]></O>
+<Expand/>
+</C>
+<C c="0" r="97" cs="9" s="10">
+<O>
+<![CDATA[（1）施工总承包单位对施工质量负总责，做好分包单位的管理和组织协调工作]]></O>
+<Expand/>
+</C>
+<C c="0" r="98" cs="9" s="12">
+<O>
+<![CDATA[分包单位应当服从总承包单位的管理，对施工范围内的质量负责。]]></O>
+<Expand/>
+</C>
+<C c="0" r="99" cs="9" s="10">
+<O>
+<![CDATA[（2）施工单位应及时办理分包合同备案，合同未备案的分包单位不得进场施工；]]></O>
+<Expand/>
+</C>
+<C c="0" r="100" cs="9" s="10">
+<O>
+<![CDATA[（3）施工单位应当组建施工现场项目管理机构，并根据合同约定配备相应的项]]></O>
+<Expand/>
+</C>
+<C c="0" r="101" cs="9" s="12">
+<O>
+<![CDATA[目负责人、技术负责人、专职质量管理等人员。上述人员不得擅自更换，确需更换]]></O>
+<Expand/>
+</C>
+<C c="0" r="102" cs="9" s="12">
+<O>
+<![CDATA[的，应当经发包单位同意，并不得降低相应的资格条件。]]></O>
+<Expand/>
+</C>
+<C c="0" r="105" cs="9" s="10">
+<O>
+<![CDATA[（4）项目负责人应当根据《建筑施工企业负责人及项目负责人施工现场带班暂]]></O>
+<Expand/>
+</C>
+<C c="0" r="106" cs="9" s="12">
+<O>
+<![CDATA[行办法》的要求履行带班生产职责。]]></O>
+<Expand/>
+</C>
+<C c="0" r="107" cs="9" s="13">
+<O>
+<![CDATA[ 3、对设计单位的要求]]></O>
+<Expand/>
+</C>
+<C c="0" r="108" cs="9" s="10">
+<O>
+<![CDATA[（1）设计文件应当满足国家规定的深度要求，应对建设工程本体可能存在的重]]></O>
+<Expand/>
+</C>
+<C c="0" r="109" cs="9" s="12">
+<O>
+<![CDATA[大风险控制进行专项设计，对涉及工程质量和安全的重点部位和环节，以及使用建]]></O>
+<Expand/>
+</C>
+<C c="0" r="110" cs="9" s="12">
+<O>
+<![CDATA[筑材料、设备的性能等要依规定在设计文件中注明。]]></O>
+<Expand/>
+</C>
+<C c="0" r="111" cs="9" s="10">
+<O>
+<![CDATA[（2）设计交底，应对涉及重要部位进行专项交底。]]></O>
+<Expand/>
+</C>
+<C c="0" r="112" cs="9" s="10">
+<O>
+<![CDATA[（3）应按规定做好施工现场服务工作。]]></O>
+<Expand/>
+</C>
+<C c="0" r="113" cs="9" s="13">
+<O>
+<![CDATA[ 4、对监理单位的要求]]></O>
+<Expand/>
+</C>
+<C c="0" r="114" cs="9" s="10">
+<O>
+<![CDATA[（1）监理单位应当根据监理合同的约定，在施工现场设置项目监理机构，配备]]></O>
+<Expand/>
+</C>
+<C c="0" r="115" cs="9" s="12">
+<O>
+<![CDATA[相应的总监理工程师、专业监理工程师和监理员等人员。项目监理机构实行总监理]]></O>
+<Expand/>
+</C>
+<C c="0" r="116" cs="9" s="12">
+<O>
+<![CDATA[工程师负责制。]]></O>
+<Expand/>
+</C>
+<C c="0" r="117" cs="9" s="10">
+<O>
+<![CDATA[（2）充分利用监理手段，对建设工程尤其是关键节点，危险性较大分部分项工]]></O>
+<Expand/>
+</C>
+<C c="0" r="118" cs="9" s="12">
+<O>
+<![CDATA[程实施有效监督。]]></O>
+<Expand/>
+</C>
+<C c="0" r="119" cs="9" s="10">
+<O>
+<![CDATA[（3）严格执行监理报告制度，完成监理月报、监理专报和监理紧急报告三类报]]></O>
+<Expand/>
+</C>
+<C c="0" r="120" cs="9" s="12">
+<O>
+<![CDATA[告，并对时效性、真实性负责。]]></O>
+<Expand/>
+</C>
+<C c="0" r="121" cs="9" s="10">
+<O>
+<![CDATA[（4）监理平行检测中的检测工作，应当委托经认可的检测机构实施。检测比例]]></O>
+<Expand/>
+</C>
+<C c="0" r="122" cs="9" s="12">
+<O>
+<![CDATA[应当符合国家和本市的有关规定。]]></O>
+<Expand/>
+</C>
+<C c="0" r="123" cs="9" s="13">
+<O>
+<![CDATA[ 5、对检测单位的要求（由建设单位告知）]]></O>
+<Expand/>
+</C>
+<C c="0" r="124" cs="9" s="10">
+<O>
+<![CDATA[检测单位应在执业范围内进行检测活动，同一建设工程项目或者标段中不得同]]></O>
+<Expand/>
+</C>
+<C c="0" r="125" cs="9" s="12">
+<O>
+<![CDATA[时接受建设、施工或者监理单位等多方的检测委托，不得出具虚假数据和报告，过]]></O>
+<Expand/>
+</C>
+<C c="0" r="126" cs="9" s="12">
+<O>
+<![CDATA[程中及时向本监督机构上报不合格试验报告、数据，有特殊情况时及时与受监监督]]></O>
+<Expand/>
+</C>
+<C c="0" r="127" cs="9" s="12">
+<O>
+<![CDATA[机构沟通，并在阶段验收时提供《检测确认证明单》。]]></O>
+<Expand/>
+</C>
+<C c="0" r="128" cs="9" s="11">
+<O>
+<![CDATA[二、质量监督程序要求]]></O>
+<Expand/>
+</C>
+<C c="0" r="129" cs="9" s="10">
+<O>
+<![CDATA[ 1、重要分部、分项工程、关键节点（如桩基、基坑开挖条件、地基基础、主]]></O>
+<Expand/>
+</C>
+<C c="0" r="130" cs="9" s="12">
+<O>
+<![CDATA[体、幕墙、节能开工条件、电梯）的验收，应在验收前3个工作日前通知监督机构。]]></O>
+<Expand/>
+</C>
+<C c="0" r="131" cs="9" s="10">
+<O>
+<![CDATA[ 2、未通过地基与基础分部验收的，不得进行回填土和上部结构施工，未通过主]]></O>
+<Expand/>
+</C>
+<C c="0" r="132" cs="9" s="12">
+<O>
+<![CDATA[体结构分部验收的，不得进行内外粉刷，未通过建筑节能分部验收，不得进行竣工]]></O>
+<Expand/>
+</C>
+<C c="0" r="133" cs="9" s="12">
+<O>
+<![CDATA[验收，未通过竣工验收，不得交付使用。]]></O>
+<Expand/>
+</C>
+<C c="0" r="136" cs="9" s="10">
+<O>
+<![CDATA[ 对于特殊工程的地基与基础分部及主体结构分部，需分阶段进行质量验收时，]]></O>
+<Expand/>
+</C>
+<C c="0" r="137" cs="9" s="12">
+<O>
+<![CDATA[建设单位应编制分阶段验收计划，并报监督机构。]]></O>
+<Expand/>
+</C>
+<C c="0" r="138" cs="9" s="11">
+<O>
+<![CDATA[三、特别告知事项]]></O>
+<Expand/>
+</C>
+<C c="0" r="139" cs="9" s="10">
+<O>
+<![CDATA[ 1、深基坑工程]]></O>
+<Expand/>
+</C>
+<C c="0" r="140" cs="9" s="10">
+<O>
+<![CDATA[ 工程建设参与各方应按照沪建交[2006]A105号《上海市深基坑工程管理规定》]]></O>
+<Expand/>
+</C>
+<C c="0" r="141" cs="9" s="12">
+<O>
+<![CDATA[等文件执行。]]></O>
+<Expand/>
+</C>
+<C c="0" r="142" cs="9" s="10">
+<O>
+<![CDATA[ 2、建筑节能工程]]></O>
+<Expand/>
+</C>
+<C c="0" r="143" cs="9" s="10">
+<O>
+<![CDATA[ 工程建设参与各方应按照公通字[2009]A46号《民用建筑外保温系统及外墙装饰]]></O>
+<Expand/>
+</C>
+<C c="0" r="144" cs="9" s="12">
+<O>
+<![CDATA[防火暂行规定》、沪建交[2010]A493号《关于执行上海市工程建设规范《建筑节能]]></O>
+<Expand/>
+</C>
+<C c="0" r="145" cs="9" s="12">
+<O>
+<![CDATA[工程施工质量验收规程》(DGJ08-113-2009)有关事项的通知》、沪建安质监[2010]A]]></O>
+<Expand/>
+</C>
+<C c="0" r="146" cs="9" s="12">
+<O>
+<![CDATA[134号《关于加强本市民用建筑外保温系统防火质量管理的通知》等文件执行。]]></O>
+<Expand/>
+</C>
+<C c="0" r="147" cs="9" s="10">
+<O>
+<![CDATA[ 3、玻璃幕墙工程]]></O>
+<Expand/>
+</C>
+<C c="0" r="148" cs="9" s="10">
+<O>
+<![CDATA[ 工程建设参与各方应按照沪建交[2012]A81号《关于废止《关于在建设工程中使]]></O>
+<Expand/>
+</C>
+<C c="0" r="149" cs="9" s="12">
+<O>
+<![CDATA[用幕墙玻璃有关规定的通知》的通知》等文件执行。]]></O>
+<Expand/>
+</C>
+<C c="0" r="150" cs="9" s="10">
+<O>
+<![CDATA[ 4、建设工程材料]]></O>
+<Expand/>
+</C>
+<C c="0" r="151" cs="9" s="10">
+<O>
+<![CDATA[ 采购建设参与各方应按照沪建安质监[2006]A第156号《上海市建设工程材料监督]]></O>
+<Expand/>
+</C>
+<C c="0" r="152" cs="9" s="12">
+<O>
+<![CDATA[管理告知要求》等文件执行。]]></O>
+<Expand/>
+</C>
+<C c="0" r="153" cs="9" s="10">
+<O>
+<![CDATA[ 5、竣工验收]]></O>
+<Expand/>
+</C>
+<C c="0" r="154" cs="9" s="10">
+<O>
+<![CDATA[ 建设单位组织竣工验收前应符合以下条件：]]></O>
+<Expand/>
+</C>
+<C c="0" r="155" cs="9" s="10">
+<O>
+<![CDATA[（1）有建设单位、施工单位出具的完成设计和合同约定内容的证明文件；]]></O>
+<Expand/>
+</C>
+<C c="0" r="156" cs="9" s="10">
+<O>
+<![CDATA[（2）有勘察、设计、施工、监理单位分别签署的质量合格文件；]]></O>
+<Expand/>
+</C>
+<C c="0" r="157" cs="9" s="10">
+<O>
+<![CDATA[（3）有完整的技术档案盒施工管理资料；]]></O>
+<Expand/>
+</C>
+<C c="0" r="158" cs="9" s="10">
+<O>
+<![CDATA[（4）有工程使用的主要建筑材料、建筑构配件和设备的进场试验报告，以及工]]></O>
+<Expand/>
+</C>
+<C c="0" r="159" cs="9" s="12">
+<O>
+<![CDATA[程质量检测和功能性试验资料；]]></O>
+<Expand/>
+</C>
+<C c="0" r="160" cs="9" s="10">
+<O>
+<![CDATA[（5）建设单位已按合同约定支付工程款；]]></O>
+<Expand/>
+</C>
+<C c="0" r="161" cs="9" s="10">
+<O>
+<![CDATA[（6）有施工单位签署的工程质量保修书；]]></O>
+<Expand/>
+</C>
+<C c="0" r="162" cs="9" s="10">
+<O>
+<![CDATA[（7）有法律法规规定的其他条件。]]></O>
+<Expand/>
+</C>
+<C c="0" r="165" cs="9" s="10">
+<O>
+<![CDATA[ 6、分户验收]]></O>
+<Expand/>
+</C>
+<C c="0" r="166" cs="9" s="10">
+<O>
+<![CDATA[ 涉及住宅工程的，建设参与各方应按照建质[2009]A291号《关于做好住宅工程质]]></O>
+<Expand/>
+</C>
+<C c="0" r="167" cs="9" s="12">
+<O>
+<![CDATA[量分户验收工作的通知》、沪建交联[2009]A770号《上海市住宅工程质量分户验收管]]></O>
+<Expand/>
+</C>
+<C c="0" r="168" cs="9" s="12">
+<O>
+<![CDATA[理规定》、沪建安质监[2009]A105号《上海市住宅工程质量分户验收实施细则（试]]></O>
+<Expand/>
+</C>
+<C c="0" r="169" cs="9" s="12">
+<O>
+<![CDATA[行）》沪建交联[2010]A869号《关于加强本市保障性住宅工程质量管理的通知》等文]]></O>
+<Expand/>
+</C>
+<C c="0" r="170" cs="9" s="12">
+<O>
+<![CDATA[件执行相关分户验收。]]></O>
+<Expand/>
+</C>
+<C c="0" r="171" cs="9" s="11">
+<O>
+<![CDATA[四、其他说明：]]></O>
+<Expand/>
+</C>
+<C c="0" r="172" cs="9" s="10">
+<O>
+<![CDATA[ 1、按照沪建交[2013]A233号“上海市城乡建设和交通委员会关于发布《上海市]]></O>
+<Expand/>
+</C>
+<C c="0" r="173" cs="9" s="12">
+<O>
+<![CDATA[建设工程施工监理平行检测的若干规定》的通知”文件要求，监理平行检测数量不]]></O>
+<Expand/>
+</C>
+<C c="0" r="174" cs="9" s="12">
+<O>
+<![CDATA[低于规范要求检测数量：保障性住宅为30%，其他房屋和基础设施工程为20%。]]></O>
+<Expand/>
+</C>
+<C c="0" r="175" cs="9" s="10">
+<O>
+<![CDATA[ 2、按照市府73号令《上海市建设工程检测管理办法》要求，检测试样抽取、]]></O>
+<Expand/>
+</C>
+<C c="0" r="176" cs="9" s="12">
+<O>
+<![CDATA[制作时，见证人员应当对检测试样张贴或者嵌入唯一性识别标识。]]></O>
+<Expand/>
+</C>
+<C c="0" r="177" cs="9" s="10">
+<O>
+<![CDATA[ 3、幕墙、钢结构、土石方桩基等专业类承发包交易凭证以及商品混凝土、水]]></O>
+<Expand/>
+</C>
+<C c="0" r="178" cs="9" s="12">
+<O>
+<![CDATA[泥、砂石料、墙体材料、涂料、建筑门窗等建材应办理交易。]]></O>
+<Expand/>
+</C>
+<C c="0" r="179" cs="9" s="11">
+<O>
+<![CDATA[五、公开办事制度]]></O>
+<Expand/>
+</C>
+<C c="0" r="180" cs="9" s="14">
+<O>
+<![CDATA[1、联系人员]]></O>
+<Expand/>
+</C>
+<C c="0" r="181" s="12">
+<Expand/>
+</C>
+<C c="1" r="181" s="12">
+<O>
+<![CDATA[我站]]></O>
+<Expand/>
+</C>
+<C c="2" r="181" s="15">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="LXR"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="3" r="181" cs="6" s="12">
+<O>
+<![CDATA[工程师作为本工程项目监督联系人。]]></O>
+<Expand/>
+</C>
+<C c="0" r="182" s="12">
+<Expand/>
+</C>
+<C c="1" r="182" cs="2" s="12">
+<O>
+<![CDATA[联系电话：]]></O>
+<Expand/>
+</C>
+<C c="3" r="182" cs="2" s="16">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="TEL"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="5" r="182" cs="2" s="12">
+<O>
+<![CDATA[邮政编码：]]></O>
+<Expand/>
+</C>
+<C c="7" r="182" s="16">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="ZIP_CODE"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="8" r="182">
+<Expand/>
+</C>
+<C c="0" r="183" s="12">
+<Expand/>
+</C>
+<C c="1" r="183" cs="2" s="12">
+<O>
+<![CDATA[联系地址：]]></O>
+<Expand/>
+</C>
+<C c="3" r="183" cs="5" s="16">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="ADDRESS"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="8" r="183" s="12">
+<Expand/>
+</C>
+<C c="0" r="184" s="12">
+<Expand/>
+</C>
+<C c="1" r="184" cs="2" s="12">
+<O>
+<![CDATA[传真号码：]]></O>
+<Expand/>
+</C>
+<C c="3" r="184" s="16">
+<O t="DSColumn">
+<Attributes dsName="ds1" columnName="FAX"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="4" r="184" cs="5" s="12">
+<O>
+<![CDATA[（传真件请注明工地名称及监督人员姓名）]]></O>
+<Expand/>
+</C>
+<C c="0" r="185" cs="9" s="14">
+<O>
+<![CDATA[2、工作纪律]]></O>
+<Expand/>
+</C>
+<C c="0" r="186" cs="9" s="14">
+<O>
+<![CDATA[我监督机构监督人员在质量监督检查过程中，每次到场监督人员应不少于两]]></O>
+<Expand/>
+</C>
+<C c="0" r="187" cs="9" s="12">
+<O>
+<![CDATA[人，事先应出示监督证或行政执法证；如有滥用职权、徇私舞弊、玩忽职守行为，请]]></O>
+<Expand/>
+</C>
+<C c="0" r="188" cs="9" s="12">
+<O>
+<![CDATA[建设、勘察、设计、施工、监理等工程建设参与各方及时向我机构举报投诉。]]></O>
+<Expand/>
+</C>
+<C c="0" r="189" cs="3" s="17">
+<O>
+<![CDATA[投诉举报电话：]]></O>
+<Expand/>
+</C>
+<C c="3" r="189" cs="3" s="18">
+<O>
+<![CDATA[ 65350661 ]]></O>
+<Expand/>
+</C>
+<C c="6" r="189">
+<Expand/>
+</C>
+<C c="7" r="189">
+<Expand/>
+</C>
+<C c="8" r="189">
+<Expand/>
+</C>
+<C c="0" r="193" cs="3" s="19">
+<O>
+<![CDATA[部门负责人（签名）：]]></O>
+<Expand/>
+</C>
+<C c="3" r="193" cs="4" s="20">
+<Expand/>
+</C>
+<C c="7" r="193" s="12">
+<Expand/>
+</C>
+<C c="8" r="193" s="12">
+<Expand/>
+</C>
+<C c="0" r="194" s="12">
+<Expand/>
+</C>
+<C c="1" r="194" s="12">
+<Expand/>
+</C>
+<C c="2" r="194" s="12">
+<Expand/>
+</C>
+<C c="3" r="194" s="12">
+<Expand/>
+</C>
+<C c="4" r="194" s="12">
+<Expand/>
+</C>
+<C c="5" r="194" s="12">
+<Expand/>
+</C>
+<C c="6" r="194" s="12">
+<Expand/>
+</C>
+<C c="7" r="194" s="12">
+<Expand/>
+</C>
+<C c="8" r="194" s="12">
+<Expand/>
+</C>
+<C c="0" r="195" s="12">
+<Expand/>
+</C>
+<C c="1" r="195" s="12">
+<Expand/>
+</C>
+<C c="2" r="195" s="12">
+<Expand/>
+</C>
+<C c="3" r="195" s="12">
+<Expand/>
+</C>
+<C c="4" r="195" s="12">
+<Expand/>
+</C>
+<C c="5" r="195" s="12">
+<Expand/>
+</C>
+<C c="6" r="195" s="12">
+<Expand/>
+</C>
+<C c="7" r="195" s="12">
+<Expand/>
+</C>
+<C c="8" r="195" s="12">
+<Expand/>
+</C>
+<C c="0" r="196" s="12">
+<Expand/>
+</C>
+<C c="1" r="196" s="12">
+<Expand/>
+</C>
+<C c="2" r="196" s="12">
+<Expand/>
+</C>
+<C c="3" r="196" s="12">
+<Expand/>
+</C>
+<C c="4" r="196" s="12">
+<Expand/>
+</C>
+<C c="5" r="196" s="12">
+<Expand/>
+</C>
+<C c="6" r="196" s="12">
+<Expand/>
+</C>
+<C c="7" r="196" s="12">
+<Expand/>
+</C>
+<C c="8" r="196" s="12">
+<Expand/>
+</C>
+<C c="0" r="197" cs="3" s="19">
+<O>
+<![CDATA[技术负责人（签名）：]]></O>
+<Expand/>
+</C>
+<C c="3" r="197" cs="4" s="20">
+<Expand/>
+</C>
+<C c="7" r="197" s="12">
+<Expand/>
+</C>
+<C c="8" r="197" s="12">
+<Expand/>
+</C>
+<C c="0" r="198" s="12">
+<Expand/>
+</C>
+<C c="1" r="198" s="12">
+<Expand/>
+</C>
+<C c="2" r="198" s="12">
+<Expand/>
+</C>
+<C c="3" r="198" s="12">
+<Expand/>
+</C>
+<C c="4" r="198" s="12">
+<Expand/>
+</C>
+<C c="5" r="198" s="12">
+<Expand/>
+</C>
+<C c="6" r="198" s="12">
+<Expand/>
+</C>
+<C c="7" r="198" s="12">
+<Expand/>
+</C>
+<C c="8" r="198" s="12">
+<Expand/>
+</C>
+<C c="0" r="199" s="12">
+<Expand/>
+</C>
+<C c="1" r="199" s="12">
+<Expand/>
+</C>
+<C c="2" r="199" s="12">
+<Expand/>
+</C>
+<C c="3" r="199" s="12">
+<Expand/>
+</C>
+<C c="4" r="199" s="12">
+<Expand/>
+</C>
+<C c="5" r="199" s="12">
+<Expand/>
+</C>
+<C c="6" r="199" s="12">
+<Expand/>
+</C>
+<C c="7" r="199" s="12">
+<Expand/>
+</C>
+<C c="8" r="199" s="12">
+<Expand/>
+</C>
+<C c="0" r="200" s="12">
+<Expand/>
+</C>
+<C c="1" r="200" s="12">
+<Expand/>
+</C>
+<C c="2" r="200" s="12">
+<Expand/>
+</C>
+<C c="3" r="200" s="12">
+<Expand/>
+</C>
+<C c="4" r="200" s="12">
+<Expand/>
+</C>
+<C c="5" r="200" s="12">
+<Expand/>
+</C>
+<C c="6" r="200" s="12">
+<Expand/>
+</C>
+<C c="7" r="200" s="12">
+<Expand/>
+</C>
+<C c="8" r="200" s="12">
+<Expand/>
+</C>
+<C c="0" r="201" cs="3" s="21">
+<O>
+<![CDATA[监督机构（章）]]></O>
+<Expand/>
+</C>
+<C c="3" r="201" cs="4" s="20">
+<Expand/>
+</C>
+<C c="7" r="201" s="12">
+<Expand/>
+</C>
+<C c="8" r="201" s="12">
+<Expand/>
+</C>
+<C c="0" r="202" s="12">
+<Expand/>
+</C>
+<C c="1" r="202" s="12">
+<Expand/>
+</C>
+<C c="2" r="202" s="12">
+<Expand/>
+</C>
+<C c="3" r="202" s="12">
+<Expand/>
+</C>
+<C c="4" r="202" s="12">
+<Expand/>
+</C>
+<C c="5" r="202" s="12">
+<Expand/>
+</C>
+<C c="6" r="202" s="12">
+<Expand/>
+</C>
+<C c="7" r="202" s="12">
+<Expand/>
+</C>
+<C c="8" r="202" s="12">
+<Expand/>
+</C>
+<C c="0" r="203" s="12">
+<Expand/>
+</C>
+<C c="1" r="203" s="12">
+<Expand/>
+</C>
+<C c="2" r="203" s="12">
+<Expand/>
+</C>
+<C c="3" r="203" s="12">
+<Expand/>
+</C>
+<C c="4" r="203" s="12">
+<Expand/>
+</C>
+<C c="5" r="203" s="12">
+<Expand/>
+</C>
+<C c="6" r="203" s="12">
+<Expand/>
+</C>
+<C c="7" r="203" s="12">
+<Expand/>
+</C>
+<C c="8" r="203" s="12">
+<Expand/>
+</C>
+<C c="0" r="204" s="12">
+<Expand/>
+</C>
+<C c="1" r="204" s="12">
+<Expand/>
+</C>
+<C c="2" r="204" s="12">
+<Expand/>
+</C>
+<C c="3" r="204" s="12">
+<Expand/>
+</C>
+<C c="4" r="204" s="12">
+<Expand/>
+</C>
+<C c="5" r="204" s="12">
+<Expand/>
+</C>
+<C c="6" r="204" s="12">
+<Expand/>
+</C>
+<C c="7" r="204" s="12">
+<Expand/>
+</C>
+<C c="8" r="204" s="12">
+<Expand/>
+</C>
+<C c="0" r="205" s="12">
+<Expand/>
+</C>
+<C c="1" r="205" s="12">
+<Expand/>
+</C>
+<C c="2" r="205" s="12">
+<Expand/>
+</C>
+<C c="3" r="205" s="12">
+<Expand/>
+</C>
+<C c="4" r="205" s="12">
+<Expand/>
+</C>
+<C c="5" r="205" s="12">
+<Expand/>
+</C>
+<C c="6" r="205" cs="3" s="12">
+<O>
+<![CDATA[     年     月     日]]></O>
+<Expand/>
+</C>
+<C c="0" r="206" s="12">
+<Expand/>
+</C>
+<C c="1" r="206" s="12">
+<Expand/>
+</C>
+<C c="2" r="206" s="12">
+<Expand/>
+</C>
+<C c="3" r="206" s="12">
+<Expand/>
+</C>
+<C c="4" r="206" s="12">
+<Expand/>
+</C>
+<C c="5" r="206" s="12">
+<Expand/>
+</C>
+<C c="6" r="206" s="12">
+<Expand/>
+</C>
+<C c="7" r="206" s="12">
+<Expand/>
+</C>
+<C c="8" r="206" s="12">
+<Expand/>
+</C>
+<C c="0" r="207" s="12">
+<Expand/>
+</C>
+<C c="1" r="207" s="12">
+<Expand/>
+</C>
+<C c="2" r="207" s="12">
+<Expand/>
+</C>
+<C c="3" r="207" s="12">
+<Expand/>
+</C>
+<C c="4" r="207" s="12">
+<Expand/>
+</C>
+<C c="5" r="207" s="12">
+<Expand/>
+</C>
+<C c="6" r="207" s="12">
+<Expand/>
+</C>
+<C c="7" r="207" s="12">
+<Expand/>
+</C>
+<C c="8" r="207" s="12">
+<Expand/>
+</C>
+<C c="0" r="208" s="12">
+<Expand/>
+</C>
+<C c="1" r="208" s="12">
+<Expand/>
+</C>
+<C c="2" r="208" s="12">
+<Expand/>
+</C>
+<C c="3" r="208" s="12">
+<Expand/>
+</C>
+<C c="4" r="208" s="12">
+<Expand/>
+</C>
+<C c="5" r="208" s="12">
+<Expand/>
+</C>
+<C c="6" r="208" s="12">
+<Expand/>
+</C>
+<C c="7" r="208" s="12">
+<Expand/>
+</C>
+<C c="8" r="208" s="12">
+<Expand/>
+</C>
+<C c="0" r="209" cs="9" s="12">
+<O>
+<![CDATA[本告知一式两份，由建设单位抄送工程建设参与各方。]]></O>
+<Expand/>
+</C>
+<C c="0" r="210" s="12">
+<Expand/>
+</C>
+<C c="1" r="210" s="12">
+<Expand/>
+</C>
+<C c="2" r="210" s="12">
+<Expand/>
+</C>
+<C c="3" r="210" s="12">
+<Expand/>
+</C>
+<C c="4" r="210" s="12">
+<Expand/>
+</C>
+<C c="5" r="210" s="12">
+<Expand/>
+</C>
+<C c="6" r="210" s="12">
+<Expand/>
+</C>
+<C c="7" r="210" s="12">
+<Expand/>
+</C>
+<C c="8" r="210" s="12">
+<Expand/>
+</C>
+<C c="0" r="211" s="12">
+<Expand/>
+</C>
+<C c="1" r="211" s="12">
+<Expand/>
+</C>
+<C c="2" r="211" s="12">
+<Expand/>
+</C>
+<C c="3" r="211" s="12">
+<Expand/>
+</C>
+<C c="4" r="211" s="12">
+<Expand/>
+</C>
+<C c="5" r="211" s="12">
+<Expand/>
+</C>
+<C c="6" r="211" s="12">
+<Expand/>
+</C>
+<C c="7" r="211" s="12">
+<Expand/>
+</C>
+<C c="8" r="211" s="12">
+<Expand/>
+</C>
+<C c="0" r="212" s="12">
+<Expand/>
+</C>
+<C c="1" r="212" s="12">
+<Expand/>
+</C>
+<C c="2" r="212" s="12">
+<Expand/>
+</C>
+<C c="3" r="212" s="12">
+<Expand/>
+</C>
+<C c="4" r="212" s="12">
+<Expand/>
+</C>
+<C c="5" r="212" s="12">
+<Expand/>
+</C>
+<C c="6" r="212" s="12">
+<Expand/>
+</C>
+<C c="7" r="212" s="12">
+<Expand/>
+</C>
+<C c="8" r="212" s="12">
+<Expand/>
+</C>
+<C c="0" r="213" cs="7" s="12">
+<O>
+<![CDATA[以上告知事项已知晓，建设单位项目负责人（签名）：]]></O>
+<Expand/>
+</C>
+<C c="7" r="213" s="20">
+<Expand/>
+</C>
+<C c="8" r="213" s="12">
+<Expand/>
+</C>
+<C c="0" r="214" s="12">
+<Expand/>
+</C>
+<C c="1" r="214" s="12">
+<Expand/>
+</C>
+<C c="2" r="214" s="12">
+<Expand/>
+</C>
+<C c="3" r="214" s="12">
+<Expand/>
+</C>
+<C c="4" r="214" s="12">
+<Expand/>
+</C>
+<C c="5" r="214" s="12">
+<Expand/>
+</C>
+<C c="6" r="214" s="12">
+<Expand/>
+</C>
+<C c="7" r="214" s="12">
+<Expand/>
+</C>
+<C c="8" r="214" s="12">
+<Expand/>
+</C>
+<C c="0" r="215" cs="7" s="12">
+<O>
+<![CDATA[以上告知事项已知晓，施工单位项目经理  （签名）：]]></O>
+<Expand/>
+</C>
+<C c="7" r="215" s="20">
+<Expand/>
+</C>
+<C c="8" r="215" s="12">
+<Expand/>
+</C>
+<C c="0" r="216" s="12">
+<Expand/>
+</C>
+<C c="1" r="216" s="12">
+<Expand/>
+</C>
+<C c="2" r="216" s="12">
+<Expand/>
+</C>
+<C c="3" r="216" s="12">
+<Expand/>
+</C>
+<C c="4" r="216" s="12">
+<Expand/>
+</C>
+<C c="5" r="216" s="12">
+<Expand/>
+</C>
+<C c="6" r="216" s="12">
+<Expand/>
+</C>
+<C c="7" r="216" s="12">
+<Expand/>
+</C>
+<C c="8" r="216" s="12">
+<Expand/>
+</C>
+<C c="0" r="217" cs="7" s="12">
+<O>
+<![CDATA[以上告知事项已知晓，监理单位项目总监  （签名）：]]></O>
+<Expand/>
+</C>
+<C c="7" r="217" s="20">
+<Expand/>
+</C>
+<C c="8" r="217" s="12">
+<Expand/>
+</C>
+<C c="0" r="218" s="12">
+<Expand/>
+</C>
+<C c="1" r="218" s="12">
+<Expand/>
+</C>
+<C c="2" r="218" s="12">
+<Expand/>
+</C>
+<C c="3" r="218" s="12">
+<Expand/>
+</C>
+<C c="4" r="218" s="12">
+<Expand/>
+</C>
+<C c="5" r="218" s="12">
+<Expand/>
+</C>
+<C c="6" r="218" s="12">
+<Expand/>
+</C>
+<C c="7" r="218" s="12">
+<Expand/>
+</C>
+<C c="8" r="218" s="12">
+<Expand/>
+</C>
+<C c="0" r="219" cs="7" s="12">
+<O>
+<![CDATA[以上告知事项已知晓，设计单位项目负责人（签名）：]]></O>
+<Expand/>
+</C>
+<C c="7" r="219" s="20">
+<Expand/>
+</C>
+<C c="8" r="219" s="12">
+<Expand/>
+</C>
+<C c="0" r="220" s="12">
+<Expand/>
+</C>
+<C c="1" r="220" s="12">
+<Expand/>
+</C>
+<C c="2" r="220" s="12">
+<Expand/>
+</C>
+<C c="3" r="220" s="12">
+<Expand/>
+</C>
+<C c="4" r="220" s="12">
+<Expand/>
+</C>
+<C c="5" r="220" s="12">
+<Expand/>
+</C>
+<C c="6" r="220" s="12">
+<Expand/>
+</C>
+<C c="7" r="220" s="12">
+<Expand/>
+</C>
+<C c="8" r="220" s="12">
+<Expand/>
+</C>
+<C c="0" r="221" cs="7" s="12">
+<O>
+<![CDATA[以上告知事项已知晓，勘察单位项目负责人（签名）：]]></O>
+<Expand/>
+</C>
+<C c="7" r="221" s="20">
+<Expand/>
+</C>
+<C c="8" r="221" s="12">
+<Expand/>
+</C>
+<C c="0" r="222" s="12">
+<Expand/>
+</C>
+<C c="1" r="222" s="12">
+<Expand/>
+</C>
+<C c="2" r="222" s="12">
+<Expand/>
+</C>
+<C c="3" r="222" s="12">
+<Expand/>
+</C>
+<C c="4" r="222" s="12">
+<Expand/>
+</C>
+<C c="5" r="222" s="12">
+<Expand/>
+</C>
+<C c="6" r="222" s="12">
+<Expand/>
+</C>
+<C c="7" r="222" s="12">
+<Expand/>
+</C>
+<C c="8" r="222" s="12">
+<Expand/>
+</C>
+<C c="0" r="223" cs="3" s="12">
+<O>
+<![CDATA[以上告知事项已知晓，]]></O>
+<Expand/>
+</C>
+<C c="3" r="223" s="20">
+<Expand/>
+</C>
+<C c="4" r="223" cs="3" s="12">
+<O>
+<![CDATA[单位签收人（签名）：]]></O>
+<Expand/>
+</C>
+<C c="7" r="223" s="20">
+<Expand/>
+</C>
+<C c="8" r="223" s="12">
+<Expand/>
+</C>
+</CellElementList>
+<ReportAttrSet>
+<ReportSettings headerHeight="0" footerHeight="0">
+<PaperSetting/>
+</ReportSettings>
+<Header reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Header>
+<Footer reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Footer>
+</ReportAttrSet>
+</Report>
+<ReportParameterAttr>
+<Attributes showWindow="true" delayPlaying="true" windowPosition="1" align="0"/>
+<PWTitle>
+<![CDATA[参数]]></PWTitle>
+</ReportParameterAttr>
+<StyleList>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="黑体" style="1" size="160"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="0" size="120"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="4" imageLayout="1">
+<FRFont name="SimSun" style="0" size="120"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style imageLayout="1">
+<FRFont name="SimSun" style="0" size="120"/>
+<Background name="NullBackground"/>
+<Border>
+<Bottom style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="0" size="128"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="1" size="120"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="2" imageLayout="4" paddingLeft="27" paddingRight="0">
+<FRFont name="SimSun" style="0" size="104"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="2" imageLayout="1" paddingLeft="27" paddingRight="0">
+<FRFont name="SimSun" style="0" size="104"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="2" imageLayout="1" paddingLeft="0" paddingRight="0">
+<FRFont name="SimSun" style="0" size="104"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style imageLayout="1" paddingLeft="0" paddingRight="0">
+<FRFont name="SimSun" style="0" size="104"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style imageLayout="1" paddingLeft="27" paddingRight="0">
+<FRFont name="SimSun" style="0" size="104"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style imageLayout="1">
+<FRFont name="SimSun" style="0" size="120"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style imageLayout="1">
+<FRFont name="SimSun" style="0" size="104"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style imageLayout="1" paddingLeft="27" paddingRight="0">
+<FRFont name="SimSun" style="1" size="104"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style imageLayout="1" paddingLeft="54" paddingRight="0">
+<FRFont name="SimSun" style="0" size="104"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="0" size="104" underline="1"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="2" imageLayout="1">
+<FRFont name="SimSun" style="0" size="104" underline="1"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="4" imageLayout="1" paddingLeft="0" paddingRight="0">
+<FRFont name="SimSun" style="0" size="104"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style imageLayout="1">
+<FRFont name="SimSun" style="0" size="104" underline="1"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="4" imageLayout="1">
+<FRFont name="SimSun" style="0" size="104"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style imageLayout="1">
+<FRFont name="SimSun" style="0" size="104"/>
+<Background name="NullBackground"/>
+<Border>
+<Bottom style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="2" imageLayout="1">
+<FRFont name="SimSun" style="0" size="104"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+</StyleList>
+<DesignerVersion DesignerVersion="HAD"/>
+<PreviewType PreviewType="0"/>
+</WorkBook>

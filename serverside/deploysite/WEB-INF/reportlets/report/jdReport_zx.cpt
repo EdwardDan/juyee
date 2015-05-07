@@ -1,0 +1,2456 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WorkBook xmlVersion="20110221">
+<TableDataMap>
+<TableData name="程序1" class="com.fr.data.impl.ClassTableData">
+<ClassTableDataAttr className="com.fr.report.JdReportPrint"/>
+</TableData>
+<TableData name="程序2" class="com.fr.data.impl.ClassTableData">
+<ClassTableDataAttr className="com.fr.report.JdReportDwgcPrint"/>
+</TableData>
+</TableDataMap>
+<Report class="com.fr.report.WorkSheet" name="sheet1">
+<ReportPageAttr>
+<HR/>
+<FR/>
+<HC/>
+<FC/>
+</ReportPageAttr>
+<RowHeight defaultValue="723900">
+<![CDATA[504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,432000,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,403200,360000,360000,360000,403200,403200,403200,406080,406080,406080,406080,406080,406080,406080,406080,571500,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,420480,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,429120,429120,429120,429120,429120,429120,429120,429120,429120,429120,429120,429120,429120,429120,429120,429120,429120,429120,429120,429120,429120,429120,429120,429120,429120,429120,429120,429120,429120,429120,429120,429120,429120,429120,429120,429120,429120,429120,429120,429120,429120,429120,429120,429120,429120,429120,429120,429120,429120,429120,429120,429120,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,388800,388800,388800,388800,432000,432000,432000,432000,432000,432000,432000,432000,460800,460800,460800,460800,460800,460800,460800,460800,460800,460800,460800,460800,460800,460800,460800,460800,532800,532800,532800,532800,532800,532800,532800,532800,532800,532800,532800,532800,532800,532800,532800,532800,532800,532800,532800,532800,532800,532800,532800,532800,532800,532800,532800,532800,532800,532800,532800,532800,532800,532800,532800,532800,532800,532800,532800,532800,532800,532800,532800,532800,532800,532800,532800,532800,532800,532800,532800,532800,532800,532800,532800,532800,532800,532800,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,432000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,504000,723900]]></RowHeight>
+<ColumnWidth defaultValue="2743200">
+<![CDATA[648000,648000,648000,648000,648000,648000,648000,648000,648000,648000,648000,648000,648000,648000,648000,648000,648000,648000,648000,648000,648000,648000,648000,648000,648000,648000,648000,648000,648000,648000,648000,648000,648000,648000,648000,648000,648000,228600,648000,648000,648000,648000,648000,648000,648000,648000,648000,648000,648000,648000,648000,648000,648000,648000,648000,648000,648000,648000,648000,648000,648000,648000,648000,648000,648000,648000,648000,648000,648000,648000,648000,648000,648000,2743200]]></ColumnWidth>
+<CellElementList>
+<C c="0" r="0">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="0" r="1">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="27" r="3" cs="5" rs="3" s="0">
+<O>
+<![CDATA[编号：]]></O>
+<Expand/>
+</C>
+<C c="32" r="3" cs="6" rs="3" s="1">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="code"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="27" r="6">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="0" r="14" cs="38" rs="4" s="2">
+<O>
+<![CDATA[建设工程质量监督报告]]></O>
+<Expand/>
+</C>
+<C c="5" r="19">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="14" r="23" s="3">
+<Expand/>
+</C>
+<C c="0" r="26" cs="11" rs="3" s="0">
+<O>
+<![CDATA[建设单位名称：]]></O>
+<Expand/>
+</C>
+<C c="11" r="26" cs="24" rs="3" s="4">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="buildUnit"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="35" r="26">
+<Expand/>
+</C>
+<C c="36" r="26">
+<Expand/>
+</C>
+<C c="37" r="26">
+<Expand/>
+</C>
+<C c="35" r="27">
+<Expand/>
+</C>
+<C c="36" r="27">
+<Expand/>
+</C>
+<C c="37" r="27">
+<Expand/>
+</C>
+<C c="35" r="28">
+<Expand/>
+</C>
+<C c="36" r="28">
+<Expand/>
+</C>
+<C c="37" r="28">
+<Expand/>
+</C>
+<C c="5" r="29">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="0" r="34" cs="11" rs="3" s="0">
+<O>
+<![CDATA[单位工程名称：]]></O>
+<Expand/>
+</C>
+<C c="11" r="34" cs="24" rs="3" s="4">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="projectName"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="3" r="37">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="7" r="38">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="0" r="43" cs="11" rs="3" s="0">
+<O>
+<![CDATA[质量监督单位：]]></O>
+<Expand/>
+</C>
+<C c="11" r="43" cs="24" rs="3" s="4">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="zljddw"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="11" r="46">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="0" r="52" cs="11" rs="3" s="0">
+<O>
+<![CDATA[监督报告日期：]]></O>
+<Expand/>
+</C>
+<C c="11" r="52" cs="24" rs="3" s="4">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="reportDate"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="0" r="61" cs="38" rs="4" s="5">
+<O>
+<![CDATA[上海市建设工程质量监督总站制]]></O>
+<Expand/>
+</C>
+<C c="0" r="70" cs="20" rs="3" s="0">
+<O>
+<![CDATA[注：本表不得翻印，复印无效]]></O>
+<Expand/>
+</C>
+<C c="3" r="73">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="5" r="73">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="0" r="80" cs="7" rs="3" s="6">
+<O>
+<![CDATA[工程名称]]></O>
+<Expand/>
+</C>
+<C c="7" r="80" cs="12" rs="3" s="7">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="projectName"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="19" r="80" cs="7" rs="3" s="6">
+<O>
+<![CDATA[工程造价]]></O>
+<Expand/>
+</C>
+<C c="26" r="80" cs="12" rs="3" s="7">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="gczj"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="0" r="83" cs="7" rs="3" s="6">
+<O>
+<![CDATA[建筑面积]]></O>
+<Expand/>
+</C>
+<C c="7" r="83" cs="12" rs="3" s="7">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="jzmj"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="19" r="83" cs="7" rs="3" s="6">
+<O>
+<![CDATA[工程类型]]></O>
+<Expand/>
+</C>
+<C c="26" r="83" cs="12" rs="3" s="7">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="gclx"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="0" r="86" cs="7" rs="3" s="6">
+<O>
+<![CDATA[开工时间]]></O>
+<Expand/>
+</C>
+<C c="7" r="86" cs="12" rs="3" s="7">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="kgsj"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="19" r="86" cs="7" rs="3" s="6">
+<O>
+<![CDATA[竣工验收时间]]></O>
+<Expand/>
+</C>
+<C c="26" r="86" cs="12" rs="3" s="7">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="jgyssj"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="0" r="89" cs="7" rs="3" s="6">
+<O>
+<![CDATA[建设单位名称]]></O>
+<Expand/>
+</C>
+<C c="7" r="89" cs="12" rs="3" s="7">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="buildUnit"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="19" r="89" cs="7" rs="3" s="6">
+<O>
+<![CDATA[项目负责人]]></O>
+<Expand/>
+</C>
+<C c="26" r="89" cs="12" rs="3" s="7">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="jsdw_fzr"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="0" r="92" cs="7" rs="3" s="6">
+<O>
+<![CDATA[勘察单位名称]]></O>
+<Expand/>
+</C>
+<C c="7" r="92" cs="12" rs="3" s="7">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="kcdwmc"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="19" r="92" cs="7" rs="3" s="6">
+<O>
+<![CDATA[项目负责人]]></O>
+<Expand/>
+</C>
+<C c="26" r="92" cs="12" rs="3" s="7">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="kcdw_fzr"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="0" r="95" cs="7" rs="3" s="6">
+<O>
+<![CDATA[设计单位名称]]></O>
+<Expand/>
+</C>
+<C c="7" r="95" cs="12" rs="3" s="7">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="sjdwmc"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="19" r="95" cs="7" rs="3" s="6">
+<O>
+<![CDATA[项目负责人]]></O>
+<Expand/>
+</C>
+<C c="26" r="95" cs="12" rs="3" s="7">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="sjdw_fzr"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="0" r="98" cs="7" rs="3" s="6">
+<O>
+<![CDATA[施工单位名称]]></O>
+<Expand/>
+</C>
+<C c="7" r="98" cs="12" rs="3" s="7">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="sgdwmc"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="19" r="98" cs="7" rs="3" s="6">
+<O>
+<![CDATA[项目经理]]></O>
+<Expand/>
+</C>
+<C c="26" r="98" cs="12" rs="3" s="7">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="sgdw_fzr"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="0" r="101" cs="7" rs="3" s="6">
+<O>
+<![CDATA[监理单位名称]]></O>
+<Expand/>
+</C>
+<C c="7" r="101" cs="12" rs="3" s="7">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="jldwmc"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="19" r="101" cs="7" rs="3" s="6">
+<O>
+<![CDATA[项目负责人]]></O>
+<Expand/>
+</C>
+<C c="26" r="101" cs="12" rs="3" s="7">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="jldw_fzr"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="0" r="104" cs="7" rs="3" s="6">
+<O>
+<![CDATA[审图单位名称]]></O>
+<Expand/>
+</C>
+<C c="7" r="104" cs="12" rs="3" s="7">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="stdwmc"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="19" r="104" cs="19" rs="3" s="8">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="0" r="107" cs="7" rs="3" s="6">
+<O>
+<![CDATA[检测单位名称]]></O>
+<Expand/>
+</C>
+<C c="7" r="107" cs="12" rs="3" s="7">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="jcdwmc"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="19" r="107" cs="7" rs="3" s="6">
+<O>
+<![CDATA[节能检测单位]]></O>
+<Expand/>
+</C>
+<C c="26" r="107" cs="12" rs="3" s="7">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="jnjcdwmc"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="0" r="110" cs="10" rs="3" s="6">
+<O>
+<![CDATA[质量监督申报时间]]></O>
+<Expand/>
+</C>
+<C c="10" r="110" cs="9" rs="3" s="7">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="zljd_sbrq"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="19" r="110" cs="7" rs="3" s="6">
+<O>
+<![CDATA[报建编号]]></O>
+<Expand/>
+</C>
+<C c="26" r="110" cs="12" rs="3" s="7">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="bjbh"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="0" r="113" cs="10" rs="3" s="8">
+<Expand/>
+</C>
+<C c="10" r="113" cs="9" rs="3" s="6">
+<O>
+<![CDATA[姓名]]></O>
+<Expand/>
+</C>
+<C c="19" r="113" cs="10" rs="3" s="6">
+<O>
+<![CDATA[专业]]></O>
+<Expand/>
+</C>
+<C c="29" r="113" cs="9" rs="3" s="6">
+<O>
+<![CDATA[监督证编号]]></O>
+<Expand/>
+</C>
+<C c="0" r="116" cs="10" rs="3" s="6">
+<O>
+<![CDATA[监督部门负责人]]></O>
+<Expand/>
+</C>
+<C c="10" r="116" cs="9" rs="3" s="9">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="zljd_bmfzr_xm"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="19" r="116" cs="10" rs="3" s="9">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="zljd_bmfzr_zy"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="29" r="116" cs="9" rs="3" s="9">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="zljd_bmfzr_bh"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="0" r="119" cs="10" rs="3" s="6">
+<O>
+<![CDATA[质量监督工程师]]></O>
+<Expand/>
+</C>
+<C c="10" r="119" cs="9" rs="3" s="9">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="zljd_gcs_xm"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="19" r="119" cs="10" rs="3" s="9">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="zljd_gcs_zy"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="29" r="119" cs="9" rs="3" s="9">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="zljd_gcs_bh"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="0" r="122" cs="10" rs="9" s="6">
+<O>
+<![CDATA[质量监督人员]]></O>
+<Expand/>
+</C>
+<C c="10" r="122" cs="9" rs="3" s="9">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="zljd_ry1_xm"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="19" r="122" cs="10" rs="3" s="9">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="zljd_ry1_zy"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="29" r="122" cs="9" rs="3" s="9">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="zljd_ry1_bh"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="10" r="125" cs="9" rs="3" s="9">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="zljd_ry2_xm"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="19" r="125" cs="10" rs="3" s="9">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="zljd_ry2_zy"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="29" r="125" cs="9" rs="3" s="9">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="zljd_ry2_bh"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="10" r="128" cs="9" rs="3" s="9">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="zljd_ry3_xm"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="19" r="128" cs="10" rs="3" s="9">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="zljd_ry3_zy"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="29" r="128" cs="9" rs="3" s="9">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="zljd_ry3_bh"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="0" r="131" s="10">
+<Expand/>
+</C>
+<C c="1" r="131">
+<Expand/>
+</C>
+<C c="2" r="131">
+<Expand/>
+</C>
+<C c="3" r="131">
+<Expand/>
+</C>
+<C c="4" r="131">
+<Expand/>
+</C>
+<C c="5" r="131">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="6" r="131">
+<Expand/>
+</C>
+<C c="7" r="131">
+<Expand/>
+</C>
+<C c="8" r="131">
+<Expand/>
+</C>
+<C c="9" r="131">
+<Expand/>
+</C>
+<C c="26" r="131">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="37" r="131" s="11">
+<Expand/>
+</C>
+<C c="0" r="132" cs="38" rs="3" s="12">
+<O>
+<![CDATA[工程报监、开工前质量监督情况：]]></O>
+<Expand/>
+</C>
+<C c="0" r="135" cs="5" rs="3" s="13">
+<O>
+<![CDATA[1、本站于]]></O>
+<Expand/>
+</C>
+<C c="5" r="135" cs="7" rs="3" s="14">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="kgq_scjdhy_rq"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="12" r="135" cs="26" rs="3" s="15">
+<O>
+<![CDATA[参加首次会议将《质量监督方案》（告知书）送交建设单]]></O>
+<Expand/>
+</C>
+<C c="0" r="138" cs="38" rs="3" s="16">
+<O>
+<![CDATA[位，同时由其转交给相关参建单位。对参建各方的“质量保证条件”进行了监督]]></O>
+<Expand/>
+</C>
+<C c="0" r="141" cs="38" rs="3" s="16">
+<O>
+<![CDATA[检查，对其中的问题提出了整改要求。]]></O>
+<Expand/>
+</C>
+<C c="0" r="144" cs="5" rs="3" s="13">
+<O>
+<![CDATA[2、本站于]]></O>
+<Expand/>
+</C>
+<C c="5" r="144" cs="7" rs="3" s="14">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="kgq_jnjdsc_rq"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="12" r="144" cs="26" rs="3" s="15">
+<O>
+<![CDATA[对该工程的“建筑节能开工条件”进行了监督检查，对其]]></O>
+<Expand/>
+</C>
+<C c="0" r="147" cs="38" rs="3" s="16">
+<O>
+<![CDATA[中的问题提出了整改要求。]]></O>
+<Expand/>
+</C>
+<C c="0" r="150" cs="38" rs="3" s="17">
+<O>
+<![CDATA[3、其它应说明情况：]]></O>
+<Expand/>
+</C>
+<C c="0" r="153" cs="38" rs="8" s="18">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="kgq_sm"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="0" r="161" cs="38" s="19">
+<Expand/>
+</C>
+<C c="0" r="162" cs="38" rs="3" s="17">
+<O>
+<![CDATA[施工过程中质量监督检查情况：]]></O>
+<Expand/>
+</C>
+<C c="0" r="165" cs="9" rs="3" s="13">
+<O>
+<![CDATA[1、监督部门共抽查]]></O>
+<Expand/>
+</C>
+<C c="9" r="165" cs="2" rs="3" s="14">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="gcz_cccs"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="11" r="165" cs="5" rs="3" s="20">
+<O>
+<![CDATA[次，涉及]]></O>
+<Expand/>
+</C>
+<C c="16" r="165" cs="22" rs="3" s="15">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="gcz_ccbw_desc"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="0" r="168" cs="38" rs="3" s="16">
+<O>
+<![CDATA[等部位结构，未见违反工程建设标准强制性条文要求的问题存在。]]></O>
+<Expand/>
+</C>
+<C c="0" r="171" cs="38" rs="3" s="17">
+<O>
+<![CDATA[2、建设参与各方质保体系经审查达到规定要求，有关人员质量责任制基本落实，质量]]></O>
+<Expand/>
+</C>
+<C c="0" r="174" cs="38" rs="3" s="16">
+<O>
+<![CDATA[文件与技术资料基本齐全，钢筋、砌体、砼等未见存在重大质量缺陷。]]></O>
+<Expand/>
+</C>
+<C c="0" r="177" cs="38" rs="3" s="17">
+<O>
+<![CDATA[3、经抽查工程质保资料基本完整、及时、准确、真实、经各方签字盖章的：]]></O>
+<Expand/>
+</C>
+<C c="0" r="180" cs="38" rs="6" s="16">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="gcz_fbyszm_desc"/>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$+'分部质量验收证明已分别报送我站。']]></Result>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="0" r="186" cs="25" rs="3" s="21">
+<O>
+<![CDATA[4、在施工中签发《建设工程局部暂停施工整改指令单》]]></O>
+<Expand/>
+</C>
+<C c="25" r="186" cs="2" rs="3" s="14">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="gcz_zgzld"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="27" r="186" cs="11" rs="3" s="15">
+<O>
+<![CDATA[份，《建设工程质量]]></O>
+<Expand/>
+</C>
+<C c="0" r="189" cs="9" rs="3" s="22">
+<O>
+<![CDATA[问题整改通知》]]></O>
+<Expand/>
+</C>
+<C c="9" r="189" cs="2" rs="3" s="14">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="gcz_zgtz"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="11" r="189" cs="27" rs="3" s="15">
+<O>
+<![CDATA[份，收到整改完成报告，存在问题得到整改。]]></O>
+<Expand/>
+</C>
+<C c="0" r="192" cs="38" rs="3" s="17">
+<O>
+<![CDATA[5、其它应说明情况：]]></O>
+<Expand/>
+</C>
+<C c="0" r="195" cs="38" rs="6" s="18">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="gcz_sm"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="0" r="201" cs="38" rs="3" s="23">
+<O>
+<![CDATA[桩基、基础、主体、节能部位质量检测抽查情况：]]></O>
+<Expand/>
+</C>
+<C c="0" r="204" cs="38" rs="3" s="17">
+<O>
+<![CDATA[1、查阅桩基检测报告，检测结论符合设计和规范要求。]]></O>
+<Expand/>
+</C>
+<C c="0" r="207" cs="38" rs="3" s="17">
+<O>
+<![CDATA[2、查阅监理单位相关资料，反映地基与基础、主体结构、节能分部达到合格标准。]]></O>
+<Expand/>
+</C>
+<C c="0" r="210" cs="38" rs="3" s="17">
+<O>
+<![CDATA[3、其它应说明的情况：]]></O>
+<Expand/>
+</C>
+<C c="0" r="213" cs="38" rs="6" s="18">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="zjbw_sm"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="0" r="219" cs="38" rs="3" s="23">
+<O>
+<![CDATA[节能保湿工程质量监督检查情况：]]></O>
+<Expand/>
+</C>
+<C c="0" r="222" cs="38" rs="3" s="17">
+<O>
+<![CDATA[1、节能形式：]]></O>
+<Expand/>
+</C>
+<C c="0" r="225" cs="9" rs="3" s="24">
+<O>
+<![CDATA[1）墙体保温系统：]]></O>
+<Expand/>
+</C>
+<C c="9" r="225" cs="29" rs="3" s="15">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="jnbwgc_xt_lx"/>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Result>
+<![CDATA[if(FIND('无',$$$)>0,'■','□')+'无']]></Result>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="0" r="228" cs="8" rs="3" s="24">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="jnbwgc_xt_wqwbw_xx"/>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Result>
+<![CDATA[if(FIND('外墙外保温',$$$)>0,'■','□')+'外墙外保温']]></Result>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="8" r="228" cs="30" rs="3" s="15">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="jnbwgc_xt_wqwbw_desc"/>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Result>
+<![CDATA['('+$$$+')']]></Result>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="0" r="231" cs="8" rs="3" s="24">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="jnbwgc_xt_wqnbw_xx"/>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Result>
+<![CDATA[if(FIND('外墙内保温',$$$)>0,'■','□')+'外墙内保温']]></Result>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="8" r="231" cs="30" rs="3" s="15">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="jnbwgc_xt_wqnbw_desc"/>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Result>
+<![CDATA['('+$$$+')']]></Result>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="0" r="234" cs="8" rs="3" s="24">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="jnbwgc_xt_qtzbw_xx"/>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Result>
+<![CDATA[if(FIND('墙体自保温',$$$)>0,'■','□')+'墙体自保温']]></Result>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="8" r="234" cs="30" rs="3" s="15">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="jnbwgc_xt_qtzbw_desc"/>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Result>
+<![CDATA['('+$$$+')']]></Result>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="0" r="237" cs="8" rs="3" s="24">
+<O>
+<![CDATA[2）屋面保温：]]></O>
+<Expand/>
+</C>
+<C c="8" r="237" cs="30" rs="3" s="15">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="jnbwgc_wmbw_desc"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="0" r="240" cs="8" rs="3" s="24">
+<O>
+<![CDATA[3）门窗保温：]]></O>
+<Expand/>
+</C>
+<C c="8" r="240" cs="30" rs="3" s="15">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="jnbwgc_mcbw_desc"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="0" r="243" cs="8" rs="3" s="24">
+<O>
+<![CDATA[4）其它节能：]]></O>
+<Expand/>
+</C>
+<C c="8" r="243" cs="30" rs="3" s="15">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="jnbwgc_qtjn_qt"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="0" r="246" cs="12" rs="3" s="13">
+<O>
+<![CDATA[2、节能施工过程中共抽查]]></O>
+<Expand/>
+</C>
+<C c="12" r="246" cs="2" rs="3" s="14">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="jnbwgc_cccs"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="14" r="246" cs="18" rs="3" s="25">
+<O>
+<![CDATA[次，开具《建设工程质量问题整改通知》]]></O>
+<Expand/>
+</C>
+<C c="32" r="246" cs="2" rs="3" s="14">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="jnbwgc_zgs"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="34" r="246" cs="4" rs="3" s="15">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="0" r="249" cs="38" rs="3" s="16">
+<O>
+<![CDATA[份，收到整改完成报告，存在问题得到整改。]]></O>
+<Expand/>
+</C>
+<C c="0" r="252" cs="38" rs="3" s="17">
+<O>
+<![CDATA[3、其它应说明情况：]]></O>
+<Expand/>
+</C>
+<C c="0" r="255" cs="38" rs="6" s="26">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="jnbwgc_sm"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="0" r="261" cs="38" s="19">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="0" r="262" cs="38" rs="3" s="17">
+<O>
+<![CDATA[工程建设参与各方执行国家强制性标准，质量行为及质量责任制履行情况：]]></O>
+<Expand/>
+</C>
+<C c="0" r="265" cs="38" rs="3" s="17">
+<O>
+<![CDATA[1、经抽查，各参建单位的质量行为以及工程项目所采用的材料、设备及施工验收阶段]]></O>
+<Expand/>
+</C>
+<C c="0" r="268" cs="38" rs="3" s="16">
+<O>
+<![CDATA[中未见存在参与各方违反国家及地方强制性标准情况 。]]></O>
+<Expand/>
+</C>
+<C c="0" r="271" cs="38" rs="3" s="17">
+<O>
+<![CDATA[2、监理单位资料与施工单位资料对建设项目的情况反映基本一致。]]></O>
+<Expand/>
+</C>
+<C c="0" r="274" cs="38" rs="3" s="17">
+<O>
+<![CDATA[3、其它应说明情况：]]></O>
+<Expand/>
+</C>
+<C c="0" r="277" cs="38" rs="6" s="18">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="zlxw_sm"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="0" r="283" cs="38" s="19">
+<Expand/>
+</C>
+<C c="0" r="284" cs="38" rs="3" s="17">
+<O>
+<![CDATA[工程竣工质量、技术资料抽查情况：]]></O>
+<Expand/>
+</C>
+<C c="0" r="287" cs="38" rs="3" s="27">
+<O>
+<![CDATA[1、经抽查，工程实物质量情况基本满足使用功能和使用安全要求，未发现明显质量缺陷。]]></O>
+<Expand/>
+</C>
+<C c="0" r="290" cs="38" rs="3" s="17">
+<O>
+<![CDATA[2、经抽查，工程技术保证资料基本符合规定要求。]]></O>
+<Expand/>
+</C>
+<C c="0" r="293" cs="38" rs="3" s="17">
+<O>
+<![CDATA[3、建设参与各方分别提供了签字盖章齐全的工程质量竣工报告（合格证明书）。]]></O>
+<Expand/>
+</C>
+<C c="0" r="296" cs="38" rs="3" s="17">
+<O>
+<![CDATA[4、其它应说明情况]]></O>
+<Expand/>
+</C>
+<C c="0" r="299" cs="38" rs="6" s="18">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="jszlcc_sm"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="0" r="305" cs="38" s="19">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="0" r="306" cs="38" rs="3" s="17">
+<O>
+<![CDATA[竣工质量检测、试验抽查情况：]]></O>
+<Expand/>
+</C>
+<C c="0" r="309" cs="38" rs="3" s="17">
+<O>
+<![CDATA[1、查阅施工单位提供、监理单位签证的各类设备安装（含水电）及结构质量检测]]></O>
+<Expand/>
+</C>
+<C c="0" r="312" cs="38" rs="3" s="16">
+<O>
+<![CDATA[试验抽查结果，反映各项指标达到要求，未见重大质量缺陷。]]></O>
+<Expand/>
+</C>
+<C c="0" r="315" cs="14" rs="3" s="13">
+<O>
+<![CDATA[2、已通过室内环境质量检测：]]></O>
+<Expand dir="0"/>
+</C>
+<C c="14" r="315" cs="24" rs="3" s="28">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="syccqk_hjjc"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="0" r="318" cs="38" rs="6" s="17">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="syccqk_whjg_desc"/>
+<Condition class="com.fr.data.condition.ListCondition"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Result>
+<![CDATA['3、抽查建筑物的围护结构（'+$$$+')供热采暖和制冷系统，照明和通风等电器设备节能标准及有关规定执行情况。']]></Result>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="0" r="324" cs="38" rs="3" s="17">
+<O>
+<![CDATA[4、外门窗气密性检测、外墙节能构造实体钻芯等取样满足设计及规范要求。]]></O>
+<Expand/>
+</C>
+<C c="0" r="327" cs="38" rs="3" s="17">
+<O>
+<![CDATA[5、经抽查无障碍设施建设的执行情况，符合设计规范要求。]]></O>
+<Expand/>
+</C>
+<C c="0" r="330" cs="38" rs="3" s="17">
+<O>
+<![CDATA[6、其它应说明情况：]]></O>
+<Expand/>
+</C>
+<C c="0" r="333" cs="38" rs="6" s="18">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="syccqk_sm"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="0" r="339" cs="38" s="19">
+<Expand/>
+</C>
+<C c="0" r="340" cs="38" rs="3" s="17">
+<O>
+<![CDATA[对工程遗留质量缺陷的监督意见：]]></O>
+<Expand/>
+</C>
+<C c="0" r="343" cs="38" rs="3" s="17">
+<O>
+<![CDATA[1、建设单位组织的竣工验收中，在我站的监督过程中未发现存在明显遗留问题。]]></O>
+<Expand/>
+</C>
+<C c="0" r="346" cs="38" rs="3" s="17">
+<O>
+<![CDATA[2、其它应说明情况：]]></O>
+<Expand/>
+</C>
+<C c="0" r="349" cs="38" rs="9" s="18">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="zlqx_sm"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="0" r="358" cs="38" s="19">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="0" r="359" cs="38" rs="3" s="17">
+<O>
+<![CDATA[工程竣工验收监督意见：]]></O>
+<Expand/>
+</C>
+<C c="0" r="362" cs="38" rs="3" s="17">
+<O>
+<![CDATA[1、该工程竣工组织形式、验收程序、执行标准、验收内容、验收方案基本符合要求。]]></O>
+<Expand/>
+</C>
+<C c="0" r="365" cs="38" rs="3" s="17">
+<O>
+<![CDATA[2、在竣工验收中，建设单位组织的竣工验收小组给出的“工程验收意见及结论”比较]]></O>
+<Expand/>
+</C>
+<C c="0" r="368" cs="38" rs="3" s="16">
+<O>
+<![CDATA[公正、客观、科学。]]></O>
+<Expand/>
+</C>
+<C c="0" r="371" cs="38" rs="3" s="29">
+<O>
+<![CDATA[3、竣工验收后，在保修范围内和保修期限内出现的严重缺陷，施工单位应履行保修义务。]]></O>
+<Expand/>
+</C>
+<C c="0" r="374" cs="38" rs="3" s="17">
+<O>
+<![CDATA[4、认定该工程已具备备案条件。]]></O>
+<Expand/>
+</C>
+<C c="0" r="377" cs="38" s="30">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="0" r="378" cs="38" rs="4" s="31">
+<O>
+<![CDATA[监  督  部  门  签  证]]></O>
+<Expand/>
+</C>
+<C c="0" r="382" cs="9" rs="4" s="31">
+<O>
+<![CDATA[职务]]></O>
+<Expand/>
+</C>
+<C c="9" r="382" cs="10" rs="4" s="8">
+<Expand/>
+</C>
+<C c="19" r="382" cs="9" rs="4" s="8">
+<Expand/>
+</C>
+<C c="28" r="382" cs="10" rs="4" s="8">
+<Expand/>
+</C>
+<C c="0" r="386" cs="9" rs="4" s="31">
+<O>
+<![CDATA[站长]]></O>
+<Expand/>
+</C>
+<C c="9" r="386" cs="10" rs="4" s="8">
+<Expand/>
+</C>
+<C c="19" r="386" cs="9" rs="4" s="8">
+<Expand/>
+</C>
+<C c="28" r="386" cs="10" rs="4" s="8">
+<Expand/>
+</C>
+<C c="0" r="390" cs="9" rs="4" s="31">
+<O>
+<![CDATA[部门负责人]]></O>
+<Expand/>
+</C>
+<C c="9" r="390" cs="10" rs="4" s="8">
+<Expand/>
+</C>
+<C c="19" r="390" cs="9" rs="4" s="8">
+<Expand/>
+</C>
+<C c="28" r="390" cs="10" rs="4" s="8">
+<Expand/>
+</C>
+<C c="0" r="394" cs="9" rs="6" s="32">
+<O>
+<![CDATA[质量监督]]></O>
+<Expand/>
+</C>
+<C c="9" r="394" cs="10" rs="4" s="8">
+<Expand/>
+</C>
+<C c="19" r="394" cs="9" rs="4" s="8">
+<Expand/>
+</C>
+<C c="28" r="394" cs="10" rs="4" s="8">
+<Expand/>
+</C>
+<C c="9" r="398" cs="10" rs="4" s="8">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="19" r="398" cs="9" rs="4" s="8">
+<Expand/>
+</C>
+<C c="28" r="398" cs="10" rs="4" s="8">
+<Expand/>
+</C>
+<C c="0" r="400" cs="9" rs="6" s="33">
+<O>
+<![CDATA[工程师]]></O>
+<Expand/>
+</C>
+<C c="9" r="402" cs="10" rs="4" s="8">
+<Expand/>
+</C>
+<C c="19" r="402" cs="9" rs="4" s="8">
+<Expand/>
+</C>
+<C c="28" r="402" cs="10" rs="4" s="8">
+<Expand/>
+</C>
+<C c="0" r="406" cs="9" rs="24" s="31">
+<O>
+<![CDATA[监督人员]]></O>
+<Expand/>
+</C>
+<C c="9" r="406" cs="10" rs="4" s="8">
+<Expand/>
+</C>
+<C c="19" r="406" cs="9" rs="4" s="8">
+<Expand/>
+</C>
+<C c="28" r="406" cs="10" rs="4" s="8">
+<Expand/>
+</C>
+<C c="9" r="410" cs="10" rs="4" s="8">
+<Expand/>
+</C>
+<C c="19" r="410" cs="9" rs="4" s="8">
+<Expand/>
+</C>
+<C c="28" r="410" cs="10" rs="4" s="8">
+<Expand/>
+</C>
+<C c="9" r="414" cs="10" rs="4" s="8">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="19" r="414" cs="9" rs="4" s="8">
+<Expand/>
+</C>
+<C c="28" r="414" cs="10" rs="4" s="8">
+<Expand/>
+</C>
+<C c="9" r="418" cs="10" rs="4" s="8">
+<Expand/>
+</C>
+<C c="19" r="418" cs="9" rs="4" s="8">
+<Expand/>
+</C>
+<C c="28" r="418" cs="10" rs="4" s="8">
+<Expand/>
+</C>
+<C c="9" r="422" cs="10" rs="4" s="8">
+<Expand/>
+</C>
+<C c="19" r="422" cs="9" rs="4" s="8">
+<Expand/>
+</C>
+<C c="28" r="422" cs="10" rs="4" s="8">
+<Expand/>
+</C>
+<C c="9" r="426" cs="10" rs="4" s="8">
+<Expand/>
+</C>
+<C c="19" r="426" cs="9" rs="4" s="8">
+<Expand/>
+</C>
+<C c="28" r="426" cs="10" rs="4" s="8">
+<Expand/>
+</C>
+<C c="0" r="430" rs="22" s="34">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="37" r="430" rs="21" s="11">
+<Expand/>
+</C>
+<C c="1" r="433" cs="10" rs="3" s="25">
+<O>
+<![CDATA[质量监督机构公章]]></O>
+<Expand/>
+</C>
+<C c="3" r="436">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="5" r="439">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="26" r="447" cs="2" rs="3" s="25">
+<O>
+<![CDATA[年]]></O>
+<Expand/>
+</C>
+<C c="30" r="447" cs="2" rs="3" s="25">
+<O>
+<![CDATA[月]]></O>
+<Expand/>
+</C>
+<C c="34" r="447" cs="2" rs="3" s="25">
+<O>
+<![CDATA[日]]></O>
+<Expand/>
+</C>
+<C c="1" r="451" cs="37" s="35">
+<Expand/>
+</C>
+<C c="0" r="452" cs="37" rs="4" s="36">
+<O>
+<![CDATA[单位工程监督完成名细表]]></O>
+<Expand/>
+</C>
+<C c="37" r="452" rs="4" s="37">
+<Expand/>
+</C>
+<C c="0" r="456" cs="2" rs="4" s="6">
+<O>
+<![CDATA[序号]]></O>
+<Expand/>
+</C>
+<C c="2" r="456" cs="12" rs="4" s="6">
+<O>
+<![CDATA[单位工程名称]]></O>
+<Expand/>
+</C>
+<C c="14" r="456" cs="8" rs="4" s="6">
+<O>
+<![CDATA[结构类型/层数]]></O>
+<Expand/>
+</C>
+<C c="22" r="456" cs="7" rs="4" s="38">
+<O>
+<![CDATA[建筑面积]]></O>
+<Expand/>
+</C>
+<C c="29" r="456" cs="8" rs="4" s="39">
+<O>
+<![CDATA[备注]]></O>
+<Expand/>
+</C>
+<C c="37" r="456" rs="4" s="40">
+<Expand/>
+</C>
+<C c="0" r="460" cs="2" rs="4" s="6">
+<O t="DSColumn">
+<Attributes dsName="程序2" columnName="序号"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<HighlightList>
+<Highlight class="com.fr.report.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.FormulaCondition">
+<Formula>
+<![CDATA[461 % 22 = 0]]></Formula>
+</Condition>
+<HighlightAction class="com.fr.report.highlight.PageHighlightAction">
+<P i="1"/>
+</HighlightAction>
+</Highlight>
+</HighlightList>
+<Expand dir="0"/>
+</C>
+<C c="2" r="460" cs="12" rs="4" s="38">
+<O t="DSColumn">
+<Attributes dsName="程序2" columnName="单位工程名称"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="14" r="460" cs="8" rs="4" s="38">
+<O t="DSColumn">
+<Attributes dsName="程序2" columnName="建筑面积/层数"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="22" r="460" cs="7" rs="4" s="38">
+<O t="DSColumn">
+<Attributes dsName="程序2" columnName="面积"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="29" r="460" cs="8" rs="4" s="39">
+<O t="DSColumn">
+<Attributes dsName="程序2" columnName="备注"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="37" r="460" rs="4" s="40">
+<Expand/>
+</C>
+<C c="0" r="464" cs="14" rs="4" s="41">
+<O>
+<![CDATA[合计]]></O>
+<Expand/>
+</C>
+<C c="14" r="464" cs="8" rs="4" s="8">
+<Expand/>
+</C>
+<C c="22" r="464" cs="7" rs="4" s="38">
+<O t="DSColumn">
+<Attributes dsName="程序2" columnName="面积"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.SummaryGrouper">
+<FN>
+<![CDATA[com.fr.data.util.function.SumFunction]]></FN>
+</RG>
+<Parameters/>
+</O>
+<Expand/>
+</C>
+<C c="29" r="464" cs="8" rs="4" s="34">
+<Expand/>
+</C>
+<C c="37" r="464" rs="4" s="40">
+<Expand/>
+</C>
+<C c="0" r="468" cs="38" rs="4" s="42">
+<O>
+<![CDATA[建设工程竣工验收综合执法核查表]]></O>
+<CellPageAttr pageBeforeRow="true"/>
+<CellInsertPolicy/>
+<Expand/>
+</C>
+<C c="0" r="472" cs="7" rs="4" s="6">
+<O>
+<![CDATA[工程名称]]></O>
+<Expand/>
+</C>
+<C c="7" r="472" cs="12" rs="4" s="43">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="projectName"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="19" r="472" cs="7" rs="4" s="6">
+<O>
+<![CDATA[施工单位]]></O>
+<Expand/>
+</C>
+<C c="26" r="472" cs="12" rs="4" s="43">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="sgdwmc"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="0" r="476" cs="7" rs="4" s="6">
+<O>
+<![CDATA[建设单位]]></O>
+<Expand/>
+</C>
+<C c="7" r="476" cs="12" rs="4" s="43">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="buildUnit"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="19" r="476" cs="7" rs="4" s="6">
+<O>
+<![CDATA[监理单位]]></O>
+<Expand/>
+</C>
+<C c="26" r="476" cs="12" rs="4" s="43">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="jldwmc"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="0" r="480" cs="7" rs="4" s="6">
+<O>
+<![CDATA[勘察单位]]></O>
+<Expand/>
+</C>
+<C c="7" r="480" cs="12" rs="4" s="43">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="kcdwmc"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="19" r="480" cs="7" rs="4" s="6">
+<O>
+<![CDATA[设计单位]]></O>
+<Expand/>
+</C>
+<C c="26" r="480" cs="12" rs="4" s="43">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="sjdwmc"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="0" r="484" cs="7" rs="4" s="6">
+<O>
+<![CDATA[检测单位]]></O>
+<Expand/>
+</C>
+<C c="7" r="484" cs="12" rs="4" s="43">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="jcdwmc"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="19" r="484" cs="7" rs="4" s="6">
+<O>
+<![CDATA[审图单位]]></O>
+<Expand/>
+</C>
+<C c="26" r="484" cs="12" rs="4" s="43">
+<O t="DSColumn">
+<Attributes dsName="程序1" columnName="stdwmc"/>
+<Complex/>
+<RG class="com.fr.report.cellElement.core.FunctionGrouper"/>
+<Parameters/>
+</O>
+<Expand dir="0"/>
+</C>
+<C c="0" r="488" cs="3" rs="6" s="44">
+<O t="I">
+<![CDATA[1]]></O>
+<Expand/>
+</C>
+<C c="3" r="488" cs="34" rs="2" s="45">
+<O>
+<![CDATA[    本工程发生质量事故及结案情况：]]></O>
+<Expand/>
+</C>
+<C c="37" r="488" rs="6" s="40">
+<Expand/>
+</C>
+<C c="3" r="490" cs="34" rs="2" s="46">
+<O>
+<![CDATA[     （  ）同意竣工验收   （  ）暂不同意竣工验收           审核人：]]></O>
+<Expand/>
+</C>
+<C c="3" r="492" cs="34" rs="2" s="47">
+<O>
+<![CDATA[年        月        日   ]]></O>
+<Expand/>
+</C>
+<C c="0" r="494" cs="3" rs="6" s="44">
+<O t="I">
+<![CDATA[2]]></O>
+<Expand/>
+</C>
+<C c="3" r="494" cs="34" rs="2" s="45">
+<O>
+<![CDATA[    本工程发生质量事故及结案情况：]]></O>
+<Expand/>
+</C>
+<C c="37" r="494" rs="6" s="40">
+<Expand/>
+</C>
+<C c="3" r="496" cs="34" rs="2" s="46">
+<O>
+<![CDATA[     （  ）同意竣工验收   （  ）暂不同意竣工验收           审核人：]]></O>
+<Expand/>
+</C>
+<C c="3" r="498" cs="34" rs="2" s="47">
+<O>
+<![CDATA[年        月        日   ]]></O>
+<Expand/>
+</C>
+<C c="0" r="500" cs="3" rs="6" s="44">
+<O t="I">
+<![CDATA[3]]></O>
+<Expand/>
+</C>
+<C c="3" r="500" cs="34" rs="2" s="45">
+<O>
+<![CDATA[    本工程发生质量事故及结案情况：]]></O>
+<Expand/>
+</C>
+<C c="37" r="500" rs="6" s="40">
+<Expand/>
+</C>
+<C c="3" r="502" cs="34" rs="2" s="46">
+<O>
+<![CDATA[     （  ）同意竣工验收   （  ）暂不同意竣工验收           审核人：]]></O>
+<Expand/>
+</C>
+<C c="3" r="504" cs="34" rs="2" s="47">
+<O>
+<![CDATA[年        月        日   ]]></O>
+<Expand/>
+</C>
+<C c="0" r="506" cs="3" rs="6" s="44">
+<O t="I">
+<![CDATA[4]]></O>
+<Expand/>
+</C>
+<C c="3" r="506" cs="34" rs="2" s="45">
+<O>
+<![CDATA[    本工程发生质量事故及结案情况：]]></O>
+<Expand/>
+</C>
+<C c="37" r="506" rs="6" s="40">
+<Expand/>
+</C>
+<C c="3" r="508" cs="34" rs="2" s="46">
+<O>
+<![CDATA[     （  ）同意竣工验收   （  ）暂不同意竣工验收           审核人：]]></O>
+<Expand/>
+</C>
+<C c="3" r="510" cs="34" rs="2" s="47">
+<O>
+<![CDATA[年        月        日   ]]></O>
+<Expand/>
+</C>
+<C c="0" r="512" cs="3" rs="6" s="44">
+<O t="I">
+<![CDATA[5]]></O>
+<Expand/>
+</C>
+<C c="3" r="512" cs="34" rs="2" s="45">
+<O>
+<![CDATA[    本工程发生质量事故及结案情况：]]></O>
+<Expand/>
+</C>
+<C c="37" r="512" rs="6" s="40">
+<Expand/>
+</C>
+<C c="3" r="514" cs="34" rs="2" s="46">
+<O>
+<![CDATA[     （  ）同意竣工验收   （  ）暂不同意竣工验收           审核人：]]></O>
+<Expand/>
+</C>
+<C c="3" r="516" cs="34" rs="2" s="47">
+<O>
+<![CDATA[年        月        日   ]]></O>
+<Expand/>
+</C>
+<C c="0" r="518" cs="3" rs="6" s="44">
+<O t="I">
+<![CDATA[6]]></O>
+<Expand/>
+</C>
+<C c="3" r="518" cs="34" rs="2" s="45">
+<O>
+<![CDATA[    本工程发生质量事故及结案情况：]]></O>
+<Expand/>
+</C>
+<C c="37" r="518" rs="6" s="40">
+<Expand/>
+</C>
+<C c="3" r="520" cs="34" rs="2" s="46">
+<O>
+<![CDATA[     （  ）同意竣工验收   （  ）暂不同意竣工验收           审核人：]]></O>
+<Expand/>
+</C>
+<C c="3" r="522" cs="34" rs="2" s="47">
+<O>
+<![CDATA[年        月        日   ]]></O>
+<Expand/>
+</C>
+<C c="0" r="524" cs="3" rs="6" s="44">
+<O t="I">
+<![CDATA[7]]></O>
+<Expand/>
+</C>
+<C c="3" r="524" cs="34" rs="2" s="45">
+<O>
+<![CDATA[    本工程发生质量事故及结案情况：]]></O>
+<Expand/>
+</C>
+<C c="37" r="524" rs="6" s="40">
+<Expand/>
+</C>
+<C c="3" r="526" cs="34" rs="2" s="46">
+<O>
+<![CDATA[     （  ）同意竣工验收   （  ）暂不同意竣工验收           审核人：]]></O>
+<Expand/>
+</C>
+<C c="3" r="528" cs="34" rs="2" s="47">
+<O>
+<![CDATA[年        月        日   ]]></O>
+<Expand/>
+</C>
+<C c="0" r="530" cs="3" rs="6" s="44">
+<O t="I">
+<![CDATA[8]]></O>
+<Expand/>
+</C>
+<C c="3" r="530" cs="34" rs="2" s="45">
+<O>
+<![CDATA[    本工程发生质量事故及结案情况：]]></O>
+<Expand/>
+</C>
+<C c="37" r="530" rs="6" s="40">
+<Expand/>
+</C>
+<C c="3" r="532" cs="34" rs="2" s="46">
+<O>
+<![CDATA[     （  ）同意竣工验收   （  ）暂不同意竣工验收           审核人：]]></O>
+<Expand/>
+</C>
+<C c="3" r="534" cs="34" rs="2" s="47">
+<O>
+<![CDATA[年        月        日   ]]></O>
+<Expand/>
+</C>
+<C c="0" r="536">
+<Expand/>
+</C>
+<C c="1" r="536">
+<Expand/>
+</C>
+<C c="2" r="536">
+<Expand/>
+</C>
+<C c="0" r="537">
+<Expand/>
+</C>
+<C c="1" r="537">
+<Expand/>
+</C>
+<C c="2" r="537">
+<Expand/>
+</C>
+<C c="21" r="537">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="0" r="538">
+<Expand/>
+</C>
+<C c="1" r="538">
+<Expand/>
+</C>
+<C c="2" r="538">
+<Expand/>
+</C>
+<C c="19" r="538">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="0" r="539">
+<Expand/>
+</C>
+<C c="1" r="539" cs="17" rs="3" s="25">
+<O>
+<![CDATA[上海市虹口区建设工程安全质量监督站]]></O>
+<Expand/>
+</C>
+<C c="18" r="539">
+<Expand/>
+</C>
+<C c="19" r="539">
+<Expand/>
+</C>
+<C c="24" r="539" cs="4" rs="3" s="20">
+<O>
+<![CDATA[签发人：]]></O>
+<Expand/>
+</C>
+<C c="28" r="539" cs="7" rs="3" s="48">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="35" r="539" cs="3" rs="3" s="25">
+<O>
+<![CDATA[站长]]></O>
+<Expand/>
+</C>
+<C c="0" r="540">
+<Expand/>
+</C>
+<C c="18" r="540">
+<Expand/>
+</C>
+<C c="19" r="540">
+<Expand/>
+</C>
+<C c="0" r="541">
+<Expand/>
+</C>
+<C c="18" r="541">
+<Expand/>
+</C>
+<C c="19" r="541">
+<Expand/>
+</C>
+<C c="10" r="543">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="11" r="543">
+<O>
+<![CDATA[]]></O>
+<Expand/>
+</C>
+<C c="28" r="543" cs="2" rs="3" s="25">
+<O>
+<![CDATA[年]]></O>
+<Expand/>
+</C>
+<C c="30" r="543">
+<Expand/>
+</C>
+<C c="32" r="543" cs="2" rs="3" s="25">
+<O>
+<![CDATA[月]]></O>
+<Expand/>
+</C>
+<C c="34" r="543">
+<Expand/>
+</C>
+<C c="36" r="543" cs="2" rs="3" s="25">
+<O>
+<![CDATA[日]]></O>
+<Expand/>
+</C>
+<C c="30" r="544">
+<Expand/>
+</C>
+<C c="34" r="544">
+<Expand/>
+</C>
+<C c="30" r="545">
+<Expand/>
+</C>
+<C c="34" r="545">
+<Expand/>
+</C>
+</CellElementList>
+<ReportAttrSet>
+<ReportSettings headerHeight="0" footerHeight="0">
+<PaperSetting/>
+</ReportSettings>
+</ReportAttrSet>
+</Report>
+<StyleList>
+<Style horizontal_alignment="4">
+<FRFont name="楷体" style="0" size="144"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="144"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="宋体" style="1" size="256"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style>
+<FRFont name="SimSun" style="1" size="72"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="144"/>
+<Background name="NullBackground"/>
+<Border>
+<Bottom style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="黑体" style="0" size="208"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="96"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style paddingLeft="5" paddingRight="5">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Left style="1"/>
+</Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Right style="1"/>
+</Border>
+</Style>
+<Style paddingLeft="10">
+<FRFont name="SimSun" style="0" size="104"/>
+<Background name="NullBackground"/>
+<Border>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style paddingLeft="10">
+<FRFont name="SimSun" style="0" size="96"/>
+<Background name="NullBackground"/>
+<Border>
+<Left style="1"/>
+</Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="96"/>
+<Background name="NullBackground"/>
+<Border>
+<Bottom style="1"/>
+</Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="96"/>
+<Background name="NullBackground"/>
+<Border>
+<Right style="1"/>
+</Border>
+</Style>
+<Style paddingLeft="35">
+<FRFont name="SimSun" style="0" size="96"/>
+<Background name="NullBackground"/>
+<Border>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style paddingLeft="10">
+<FRFont name="SimSun" style="0" size="96"/>
+<Background name="NullBackground"/>
+<Border>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style paddingLeft="35">
+<FRFont name="黑体" style="0" size="96"/>
+<Background name="NullBackground"/>
+<Border>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style textStyle="1">
+<FRFont name="SimSun" style="0" size="96"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style textStyle="1" paddingLeft="10">
+<FRFont name="SimSun" style="0" size="96"/>
+<Background name="NullBackground"/>
+<Border>
+<Left style="1"/>
+</Border>
+</Style>
+<Style paddingLeft="35">
+<FRFont name="SimSun" style="0" size="96"/>
+<Background name="NullBackground"/>
+<Border>
+<Left style="1"/>
+</Border>
+</Style>
+<Style paddingLeft="10">
+<FRFont name="SimSun" style="0" size="96"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style paddingLeft="15">
+<FRFont name="SimSun" style="0" size="96"/>
+<Background name="NullBackground"/>
+<Border>
+<Left style="1"/>
+</Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="96"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style paddingLeft="35">
+<FRFont name="黑体" style="0" size="88"/>
+<Background name="NullBackground"/>
+<Border>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style paddingLeft="10">
+<FRFont name="SimSun" style="0" size="88"/>
+<Background name="NullBackground"/>
+<Border>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="96" underline="1"/>
+<Background name="NullBackground"/>
+<Border>
+<Right style="1"/>
+</Border>
+</Style>
+<Style paddingLeft="10">
+<FRFont name="SimSun" style="0" size="92"/>
+<Background name="NullBackground"/>
+<Border>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="104"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" vertical_alignment="3">
+<FRFont name="SimSun" style="0" size="104"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" vertical_alignment="1">
+<FRFont name="SimSun" style="0" size="104"/>
+<Background name="NullBackground"/>
+<Border>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+</Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Bottom style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="104"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Left style="1"/>
+</Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="96"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="96"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+</Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="4">
+<FRFont name="SimSun" style="0" size="96"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="120"/>
+<Background name="NullBackground"/>
+<Border/>
+</Style>
+<Style paddingLeft="5">
+<FRFont name="SimSun" style="0" size="88"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0">
+<FRFont name="SimSun" style="0" size="80"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="88"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Left style="1"/>
+</Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="88"/>
+<Background name="NullBackground"/>
+<Border>
+<Left style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="4">
+<FRFont name="SimSun" style="0" size="88"/>
+<Background name="NullBackground"/>
+<Border>
+<Bottom style="1"/>
+<Left style="1"/>
+</Border>
+</Style>
+<Style>
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Bottom style="1"/>
+</Border>
+</Style>
+</StyleList>
+</WorkBook>

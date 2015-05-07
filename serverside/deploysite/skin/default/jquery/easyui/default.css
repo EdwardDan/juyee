@@ -1,0 +1,783 @@
+﻿/**{font-size:12px; font-family:"Arial","simsun",serif}*/
+body{background:#ffffff; }
+*{font-family:"Verdana","宋体",serif;font-size:12px;}
+a{ color:Black; text-decoration:none;}
+a:hover{ color:Red; text-decoration:underline;}
+a:link, a:visited
+{
+    text-decoration: none;
+    color: #666;
+}
+.textbox03 {border: #878787 1px solid;padding: 4px 3px;font:"simsun","Arial",serif;line-height: 14px; background-color: #fff;  height: auto; font-size: 14px;  font-weight: bold; width: 190px; }
+
+.txt01{font:"Arial","simsun",serif;padding:3px 2px 2px 2px; border-width:1px; border-color:#ddd;  color:#000;}
+.txt {border: #878787 1px solid;padding: 4px 3px;font:"Arial","simsun",serif;line-height: 14px; background-color: #fff;  height: auto; font-size: 14px;}
+.footer{text-align:center;color:#15428B; margin:0px; padding:0px;line-height:23px;}
+
+.head a{color:White;text-decoration:underline;}
+
+.easyui-accordion ul{list-style-type:none;margin:0px; padding:10px;}
+.easyui-accordion ul li{ padding:0px;}
+.easyui-accordion ul li a{line-height:24px;}
+.easyui-accordion ul li div{margin:2px 0px;padding-left:10px;padding-top:2px;}
+.easyui-accordion ul li div.hover{border:1px dashed #99BBE8; background:#E0ECFF;cursor:pointer;}
+.easyui-accordion ul li div.hover a{color:#416AA3;}
+.easyui-accordion ul li div.selected{border:1px solid #99BBE8; background:#E0ECFF;cursor:default;}
+.easyui-accordion ul li div.selected a{color:#416AA3; font-weight:bold;}
+
+
+/****** icons for left menu *******/
+.icon{ background:url(images/tabicons.png) no-repeat;width:18px; line-height:18px; display:inline-block;}
+.icon-sys{ background-position:0px -200px;}
+.icon-set{ background-position:-380px -200px;}
+.icon-add{background-position: -20px 0px;}
+.icon-nav{background-position: -100px -20px; }
+.icon-users{background-position: -100px -480px;}
+.icon-role{background-position: -360px -200px;}
+.icon-log{background-position: -380px -80px;}
+.icon-delete{ background-position:-140px -120px;}
+.icon-edit{ background-position:-380px -320px;}
+.icon-magic{ background-position:0px -500px;}
+.icon-database{ background-position:-20px -140px;}
+/*.icon-expand{ background:url('images/coll2.gif') no-repeat;}*/
+/*.icon-collapse{ background:url('images/coll3.gif') no-repeat;}*/
+
+.icon-softdisk{ background-position:0px -180px;}
+.icon-leftarrow{ background-position:0px -160px;}
+.icon-harddisk{ background-position:0px -140px;}
+.icon-stop{ background-position:-380px -240px;}
+.icon-clock{ background-position:0px -100px;}
+.icon-setting{ background-position:-0px -220px;}
+.icon-money{ background-position:-40px -100px;}
+.icon-double{ background-position:-60px -100px;}
+.icon-ractang{ background-position:-80px -100px;}
+.icon-pub{ background-position:-100px -100px;}
+.icon-ring{ background-position:-320px -40px;}
+.icon-info{ background-position:-40px -200px;}
+.icon-gantai{ background-position:-60px -200px;}
+.icon-query{ background-position:-60px -260px;}
+.icon-bulltin{ background-position:-340px -240px;}
+.icon-monitor{ background-position:-140px -500px;}
+.icon-log2{ background-position:-60px -240px;}
+.icon-key{ background-position:-380px -220px;}
+.icon-stop2{ background-position:-40px -140px;}
+.icon-focus{ background-position:0px -40px;}
+.icon-file{ background-position:-260px -200px;}
+
+.text_title{
+	width: 100%;
+	color: #777676;
+	padding-right: 10px;
+}
+/******************首页顶部链接样式**********************/
+a.top_link:link
+{
+    color: #FFF799;
+}
+a.top_link:visited
+{
+   color: #FFF799;
+}
+a.top_link:active
+{
+   color: #FFF799;
+}
+a.top_link:hover
+{
+   color: #F26521;
+}
+
+/******************页面中的链接样式**********************/
+a.page_link:link
+{
+    color: blue;
+}
+a.page_link:visited
+{
+   color: blue;
+}
+a.page_link:active
+{
+   color: blue;
+}
+a.page_link:hover
+{
+   color: #F26521;
+}
+/******************add custom**********************/
+/***重写jqgird底部分页css增加高度设置，否则在IE9下会缺少分页栏***/
+.ui-jqgrid .ui-pager-control {position: relative;height:24px;}
+
+/************************* tree init 区域**************************/
+.treeLeft {
+    width: 25%;
+    float: left;
+    min-height: 300px;
+    overflow-y: auto;
+}
+
+.treeBorder {
+    width: 1px;
+    background-color: #95B9CD;
+    float: left;
+    min-height:300px;
+}
+
+.treeRight {
+    width: 74%;
+    float: left;
+    min-height:300px;
+}
+
+/************************* 查询区域 **************************/
+.mainLocation {
+    width: 100%;
+    min-width: 700px;
+    height: 29px;
+    background-color: #E0ECFF;
+    background-image:url("images/location_bg.jpg");
+    background-repeat:repeat-x;
+    vertical-align:middle;
+}
+.gridBody{
+    min-width: 700px;
+    /*background-image:url("images/gridBg.gif");*/
+    /*background-repeat:repeat-x;*/
+}
+.gridQueryArea{
+    min-width: 700px;
+    height:28px;
+    padding-left:10px;
+    padding-top:5px;
+}
+.gridQueryTable{
+    padding-top:5px;
+    padding-left:10px;
+    padding-right:10px;
+}
+.title_Search{
+	background-image:url(images/title_search_bg.jpg);
+	background-repeat:repeat-x;
+	height: 34px;
+}
+.btn_Search {
+	FONT-SIZE: 12px;
+	COLOR: #333;
+	background-image: url(images/title_search_pic.jpg);
+	background-repeat: no-repeat;
+	text-indent: 15px;
+	padding: 2px;
+	height: 23px;
+	width: 54px;
+    border: 0px none;
+    padding: 2px;
+    cursor: pointer;
+}
+.title_input {
+	font-size: 12px;
+	border: 1px none #8db4d1;
+	color: #333;
+	background-color: #FFFFFF;
+	width: 448px;
+	height: 19px;
+	background-image: url(images/title_search.gif);
+	background-repeat: no-repeat;
+	text-indent: 5px;
+	background-position: top;
+}
+.title_input_short {
+    font-size: 12px;
+    border: 1px none #8db4d1;
+    color: #333;
+    background-color: #FFFFFF;
+    width: 300px;
+    height: 19px;
+    background-image: url(images/title_search_short.gif);
+    background-repeat: no-repeat;
+    text-indent: 5px;
+    background-position: top;
+}
+.errMsg{
+    font-size: 12px;
+    padding-top:20px;
+    padding-left:20px;
+    color:red;
+}
+/*************************表单输入**************************/
+.tr_title{
+    font-weight: bold;
+	line-height:30px;
+	background-image: url(images/tr_header.gif);
+	background-repeat: repeat-x;    /*background-color:#EEEEEE;*/
+}
+.tr_header{
+    font-weight: bold;
+	line-height:30px;
+    background-color:#A3C5DA;
+    text-align:center;
+}
+.tr_over{
+	line-height:30px;
+	background-color:#FFF799;
+
+}
+.tr_light{
+	line-height:30px;
+	/*background-color:#e0ebf2;*/
+	background-color:#F7F7F7;
+
+}
+.tr_dark{
+	line-height:30px;
+	/*background-color: #ecf1f7;*/
+	background-color: #F2F2F2;
+
+}
+.tr_button{
+    height: 33px;
+	line-height:33px;
+	background-image: url(images/windows_buttonbg_new.jpg);
+	background-repeat: repeat-x;
+}
+.no_scrollbar{
+    margin:0;
+    overflow:hidden; /*解决IE下出现底部滚动条的问题*/
+}
+form{
+    margin:0;
+    overflow:hidden; /*解决IE下出现底部滚动条的问题*/
+}
+
+.form_legend {
+    font-weight:bold;
+    text-align: left;
+}
+.form_fieldset {
+    width: 90%;
+    text-align: center;
+    background-color: #ecf1f7;
+    margin: 0 auto;
+}
+.form_fieldset_space{
+    height: 20px;
+}
+.form_div{
+    width:100%;
+    text-align:center;
+}
+.form_table{
+	width:99.5%;
+	text-align:center;
+}
+.form_td_line{
+    border-top-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-left-style: solid;
+	border-top-color: #ffffff;
+	border-left-color: #ffffff;
+}
+.form_td_line_dark{
+    border-top-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-left-style: solid;
+	border-top-color: #ffffff;
+	border-left-color: #ffffff;
+    font-weight: bold;
+    background-color:#A3C5DA;
+}
+.form_label{
+    width:35%;
+    text-align:right;
+	border-top-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-left-style: solid;
+	border-top-color: #ffffff;
+	border-left-color: #ffffff;
+}
+.form_label_right{
+    text-align:right;
+	border-top-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-left-style: solid;
+	border-top-color: #ffffff;
+	border-left-color: #ffffff;
+}
+.form_content{
+    text-align:left;
+	border-top-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-left-style: solid;
+	border-top-color: #ffffff;
+	border-left-color: #ffffff;
+}
+.form_border{
+    border-top-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-left-style: solid;
+	border-top-color: #ffffff;
+	border-left-color: #ffffff;
+}
+.div_space{
+    height:10px;
+}
+/*************************输入框**************************/
+.form_select{
+    width: 150px;
+    height:22px;
+    border: 1px solid #b8b6b9;
+}
+.form_multi_select{
+    width: 150px;
+    height:80px;
+    border: 1px solid #b8b6b9;
+}
+.form_select_long{
+    width: 250px;
+    height:22px;
+    border: 1px solid #b8b6b9;
+}
+.form_multi_select_long{
+    width: 250px;
+    height:80px;
+    border: 1px solid #b8b6b9;
+}
+.input_text_long{
+    font-size: 12px;
+    border: 1px solid #b8b6b9;
+    color: #007DBC;
+    background-color: #FFFFFF;
+    width: 250px;
+    height: 20px;
+}
+.input_text{
+    font-size: 12px;
+    border: 1px solid #b8b6b9;
+    color: #007DBC;
+    background-color: #FFFFFF;
+    width: 150px;
+    height: 20px;
+}
+
+/*add by guoqiong begin*/
+.input_text_short {
+    font-size: 12px;
+    border: 1px solid #b8b6b9;
+    color: #007DBC;
+    background-color: #FFFFFF;
+    width: 30px;
+    height: 20px;
+}
+
+.input_number_short {
+    text-align: center;
+    font-size: 12px;
+    height: 22px;
+    width: 40px;
+    background-color: #ffffff;
+    border: 1px solid #bbbbbb;
+    vertical-align: middle;
+}
+/*add by guoqiong end*/
+
+.input_textarea {
+    font-size: 12px;
+    border: 1px solid #b8b6b9;
+    color: #007DBC;
+    background-color: #FFFFFF;
+    width: 250px;
+    height: 100px;
+}
+.input_textarea_long {
+    font-size: 12px;
+    border: 1px solid #b8b6b9;
+    color: #007DBC;
+    background-color: #FFFFFF;
+    width: 500px;
+    height: 100px;
+}
+
+.input_line_long{
+    font-size: 12px;
+    border-style: none;
+    border-bottom: 1px solid #b8b6b9;
+    color: #007DBC;
+    width: 250px;
+    height: 20px;
+}
+
+.input_datetime {
+    font-size: 12px;
+    color: #007DBC;
+    border: 1px solid #b8b6b9;
+    background-color: #FFFFFF;
+    width: 150px;
+    height: 20px;
+}
+
+.input_date {
+    font-size: 12px;
+    color: #007DBC;
+    border: 1px solid #b8b6b9;
+    background-color: #FFFFFF;
+    width: 80px;
+    height: 20px;
+}
+
+.input_number {
+    font-size: 12px;
+    color: #007DBC;
+    border: 1px solid #b8b6b9;
+    background-color: #FFFFFF;
+    width: 80px;
+    height: 20px;
+}
+
+/*************************按钮**************************/
+.button_refresh {
+    font-size: 12px;
+    width: 16px;
+    height: 16px;
+    border: 0px none;
+    cursor: pointer;
+    background-image: url(buttons/refresh.png);
+    background-repeat: no-repeat;
+    text-indent: 12pt;
+    cursor:pointer;
+}
+.button_select {
+    font-size: 12px;
+    width: 16px;
+    height: 16px;
+    border: 0px none;
+    cursor: pointer;
+    background-image: url(buttons/select.gif);
+    background-repeat: no-repeat;
+    text-indent: 12pt;
+    cursor:pointer;
+}
+.button_select_add {
+    font-size: 12px;
+    width: 16px;
+    height: 16px;
+    border: 0px none;
+    cursor: pointer;
+    background-image: url(buttons/select_add.png);
+    background-repeat: no-repeat;
+    text-indent: 12pt;
+    cursor:pointer;
+}
+.button_select_remove {
+    font-size: 12px;
+    width: 16px;
+    height: 16px;
+    border: 0px none;
+    cursor: pointer;
+    background-image: url(buttons/select_remove.png);
+    background-repeat: no-repeat;
+    text-indent: 12pt;
+    cursor:pointer;
+}
+.button_person_add {
+    font-size: 12px;
+    width: 16px;
+    height: 16px;
+    border: 0px none;
+    cursor: pointer;
+    background-image: url(buttons/person_add.png);
+    background-repeat: no-repeat;
+    text-indent: 12pt;
+    cursor:pointer;
+}
+.button_person_remove {
+    font-size: 12px;
+    width: 16px;
+    height: 16px;
+    border: 0px none;
+    cursor: pointer;
+    background-image: url(buttons/person_remove.png);
+    background-repeat: no-repeat;
+    text-indent: 12pt;
+    cursor:pointer;
+}
+.button_add {
+    font-size: 12px;
+    color: #333;
+    width: 54px;
+    height: 23px;
+    border: 0px none;
+    cursor: pointer;
+    background-image: url(buttons/add.png);
+    background-repeat: no-repeat;
+    text-indent: 12pt;
+    cursor:pointer;
+}
+.button_add_long {
+    font-size: 12px;
+    color: #333;
+    width: 115px;
+    height: 23px;
+    border: 0px none;
+    cursor: pointer;
+    background-image: url(buttons/add_long.png);
+    background-repeat: no-repeat;
+    text-indent: 0pt;
+    cursor:pointer;
+}
+.button_confirm{
+    font-size: 12px;
+    color: #333;
+    width: 54px;
+    height: 23px;
+    border: 0px none;
+    background-image: url(buttons/confirm.png);
+    text-indent: 15px;
+    cursor:pointer;
+}
+.button_cancel{
+    font-size: 12px;
+    color: #333;
+    width: 54px;
+    height: 23px;
+    border: 0px none;
+    background-image: url(buttons/cancel.png);
+    text-indent: 15px;
+    cursor:pointer;
+}
+.button_back{
+    font-size: 12px;
+    color: #333;
+    width: 54px;
+    height: 23px;
+    border: 0px none;
+    background-image: url(buttons/back.png);
+    text-indent: 15px;
+    cursor:pointer;
+}
+/*通用*/
+.button_all{
+    font-size: 12px;
+    color: #333;
+    width: 54px;
+    height: 23px;
+    border: 0px none;
+    background-image: url(buttons/all.png);
+    text-indent: 15px;
+    cursor:pointer;
+}
+/*grid button*/
+.button_normal{
+    font-size: 12px;
+    color: #333;
+    width: 34px;
+    height: 23px;
+    border: 0px none;
+    background-image: url(buttons/normal.png);
+    cursor:pointer;
+}
+.button_normal_special{
+    font-size: 12px;
+    color: #333;
+    width: 34px;
+    height: 23px;
+    border: 0px none;
+    background-image: url(buttons/normal_special.png);
+    cursor:pointer;
+}
+.button_normal_pass{
+    font-size: 12px;
+    color: #333;
+    width: 34px;
+    height: 23px;
+    border: 0px none;
+    background-image: url(buttons/normal_pass.png);
+    cursor:pointer;
+}
+.button_normal_long{
+    font-size: 12px;
+    color: #333;
+    width: 70px;
+    height: 23px;
+    border: 0px none;
+    background-image: url(buttons/normal_long.png);
+    cursor:pointer;
+}
+.button_calendar{
+    width: 21px;
+    height: 14px;
+    border: 0px none;
+    cursor: pointer;
+    padding: 4px 2px 2px;
+    background-image: url(buttons/calendar.gif);
+    background-repeat: no-repeat;
+    text-indent: 12pt;
+    font-size: 12px;
+    vertical-align:middle;
+}
+.button_new{
+    width: 22px;
+    height: 20px;
+    border: 0px none;
+    background-image: url(buttons/new.png);
+    background-repeat: no-repeat;
+    vertical-align:middle;
+}
+.button_netfile{
+    font-size: 12px;
+    color: #333;
+    width: 70px;
+    height: 23px;
+    border: 0px none;
+    background-image: url(buttons/normal_netfile.png);
+    cursor:pointer;
+}
+.button_ckfile{
+    font-size: 12px;
+    color: #333;
+    width: 57px;
+    height: 23px;
+    border: 0px none;
+    background-image: url(buttons/button_ckfile.png);
+    cursor:pointer;
+}
+.button_ckfile_red{
+    font-size: 12px;
+    color: #333;
+    width: 57px;
+    height: 23px;
+    border: 0px none;
+    background-image: url(buttons/button_ckfile_red.png);
+    cursor:pointer;
+}
+
+.button_edit{
+    width: 16px;
+    height: 16px;
+    border: 0px none;
+    background-image: url(buttons/edit.gif);
+    background-repeat: no-repeat;
+    vertical-align:middle;
+}
+
+/*************************文档按钮**************************/
+.button_doc {
+    font-size: 12px;
+    width: 16px;
+    height: 16px;
+    border: 0px none;
+    cursor: pointer;
+    background-image: url(buttons/doc.gif);
+    background-repeat: no-repeat;
+    text-indent: 12pt;
+    cursor:pointer;
+}
+.button_doc_upload {
+    font-size: 12px;
+    width: 77px;
+    height: 23px;
+    border: 0px none;
+    cursor: pointer;
+    background-image: url(buttons/docup.png);
+    background-repeat: no-repeat;
+    text-indent: 12pt;
+    cursor:pointer;
+}
+.button_doc_select {
+    font-size: 12px;
+    width: 77px;
+    height: 23px;
+    border: 0px none;
+    cursor: pointer;
+    background-image: url(buttons/docadd.png);
+    background-repeat: no-repeat;
+    text-indent: 12pt;
+    cursor:pointer;
+}
+.button_doc_delete {
+    font-size: 12px;
+    width: 54px;
+    height: 23px;
+    border: 0px none;
+    cursor: pointer;
+    background-image: url(buttons/docdel.png);
+    background-repeat: no-repeat;
+    text-indent: 12pt;
+    cursor:pointer;
+}
+
+/*************************弹出窗口**************************/
+.window {
+	font-size:12px;
+	position:absolute;
+	overflow:hidden;
+	/*border:1px solid #fff;*/
+    border:1px solid #CFCFCF;
+    border-radius:5px;
+	-moz-border-radius:5px;
+	-webkit-border-radius: 5px;
+	background-color: transparent;
+	background-image: url(themes/default/images/panel_title_new.png);
+	padding-top: 5;
+	padding-right: 0px;
+	padding-bottom: 25px;
+	padding-left: 0px;
+}
+.window .window-body{
+	/*border:1px solid #99BBE8;*/
+    border-width: 0;
+    background-color: #f2f2f2;
+}
+.window .icon-edit{
+    width: 16px;
+    height: 16px;
+    background:url('images/pannel_icon-edit.png') no-repeat;
+    vertical-align:text-bottom;
+}
+.window-mask{
+    background:#CCCCCC;
+    filter:alpha(opacity=40);
+    opacity:0.40;
+}
+
+.table_thin_line {
+    border: 1px #cccccc;
+    border-collapse:collapse;
+}
+.table_thin_line_center {
+    width:100%;
+    text-align:center;
+    border: 1px #cccccc;
+    border-collapse:collapse;
+}
+/*************************页面布局**************************/
+.layout-split-north{
+    border-bottom:4px solid #f1f1f1;
+}
+.layout-split-south{
+    border-top:4px solid #f1f1f1;
+}
+.layout-split-east{
+    border-left:4px solid #f1f1f1;
+}
+.layout-split-west{
+    border-right:4px solid #f1f1f1;
+}
+
+/*************************网上报建**************************/
+.net_form_fieldset {
+    width: 95%;
+    text-align: center;
+    background-color: #ecf1f7;
+}
+.net_form_title {
+    font-weight: bold;
+    font-size: x-large;
+}
+.net_form_title2 {
+    font-weight: bold;font-size: larger;
+}

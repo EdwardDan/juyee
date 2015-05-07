@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.justonetech.biz.domain">
+	<class
+		name="MsgSendDetail"
+		table="MSG_SEND_DETAIL"
+	>
+		
+		<meta attribute="sync-DAO">false</meta>
+		<meta attribute="sync-jsp">true</meta>
+		<meta attribute="sync-boolean">get</meta>
+		<meta attribute="treeable">false</meta>
+		<meta attribute="projectable">false</meta>
+        <meta attribute="tableName">系统消息通知发送明细</meta>
+        <meta attribute="tableComment">系统消息通知发送明细</meta>
+	    <meta attribute="sync-templatePatterns">list\w*</meta>
+        <meta attribute="sub-system">sms</meta>
+
+		<id
+			name="id"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="com.justonetech.core.orm.hibernate.LongIdGenerator"/>
+		</id>
+
+		<property
+			name="receiveName"
+			column="RECEIVE_NAME"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">接收人姓名</meta>
+            <meta attribute="ColumnComment">接收人姓名</meta>
+        </property>
+
+		<property
+			name="sysPersonId"
+			column="SYS_PERSON_ID"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">系统人员ID</meta>
+            <meta attribute="ColumnComment">系统人员ID</meta>
+        </property>
+
+		<property
+			name="gdPersonId"
+			column="GD_PERSON_ID"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">工地人员ID</meta>
+            <meta attribute="ColumnComment">工地人员ID</meta>
+        </property>
+
+		<property
+			name="receiveMobile"
+			column="RECEIVE_MOBILE"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">接收手机号码</meta>
+            <meta attribute="ColumnComment">接收手机号码</meta>
+        </property>
+
+		<property
+			name="sendSmsTime"
+			column="SEND_SMS_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">发送短信时间</meta>
+            <meta attribute="ColumnComment">发送短信时间</meta>
+        </property>
+
+		<property
+			name="readTime"
+			column="READ_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">阅读时间</meta>
+            <meta attribute="ColumnComment">阅读时间</meta>
+        </property>
+
+		<many-to-one
+			name="smsMessage"
+			column="SMS_MESSAGE_ID"
+			class="MsgMessage"
+			not-null="false"
+		>
+		</many-to-one>
+
+	</class>	
+    <query name="msgsenddetail_all_data_query">
+        <![CDATA[FROM MsgSendDetail]]>
+    </query>
+</hibernate-mapping>

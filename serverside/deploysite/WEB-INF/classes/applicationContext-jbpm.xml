@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
+       default-lazy-init="true">
+    <!--jBPM configuration-->
+    <bean id="jbpmConfiguration" class="org.springmodules.workflow.jbpm31.LocalJbpmConfigurationFactoryBean">
+        <property name="sessionFactory" ref="sessionFactory"/>
+        <property name="configuration" value="classpath:jbpm.cfg.xml"/>
+    </bean>
+
+    <!--jBPM template-->
+    <bean id="jbpmTemplate" class="org.springmodules.workflow.jbpm31.JbpmTemplate">
+        <constructor-arg index="0" ref="jbpmConfiguration"/>
+    </bean>
+
+    <bean id="jbpmService" class="com.justonetech.biz.utils.jbpm.service.JbpmService">
+        <property name="template" ref="jbpmTemplate"/>
+    </bean>
+
+</beans>

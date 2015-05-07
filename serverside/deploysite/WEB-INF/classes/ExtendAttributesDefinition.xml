@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v4.1 U (http://www.xmlspy.com) by dingweiqing (dingweiqing) -->
+<Configuration>
+    <ExtAttrDef Code="BID" Name="工地" ClassName="com.justonetech.biz.domain.ProjectWorkSite" ClassProperty="workName"
+                ClassPropertyName="工地名称" FetchHqlFrom="" FetchHqlWhere="" FetchHqlOrderBy=""/>
+</Configuration>

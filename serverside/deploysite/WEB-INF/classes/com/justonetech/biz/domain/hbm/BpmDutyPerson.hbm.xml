@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.justonetech.biz.domain">
+	<class
+		name="BpmDutyPerson"
+		table="BPM_DUTY_PERSON"
+	>
+		
+		<meta attribute="sync-DAO">false</meta>
+		<meta attribute="sync-jsp">true</meta>
+		<meta attribute="sync-boolean">get</meta>
+		<meta attribute="treeable">false</meta>
+		<meta attribute="projectable">false</meta>
+	    <meta attribute="sync-templatePatterns">list\w*</meta>
+        <meta attribute="sub-system">workflow</meta>
+
+		<id
+			name="id"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="com.justonetech.core.orm.hibernate.LongIdGenerator"/>
+		</id>
+
+		<many-to-one
+			name="groupDuty"
+			column="GROUP_DUTY_ID"
+			class="BpmProjectGroupDuty"
+			not-null="true"
+		>
+		</many-to-one>
+		<many-to-one
+			name="person"
+			column="PERSON_ID"
+			class="com.justonetech.system.domain.SysPerson"
+			not-null="true"
+		>
+		</many-to-one>
+
+	</class>	
+    <query name="bpmdutyperson_all_data_query">
+        <![CDATA[FROM BpmDutyPerson]]>
+    </query>
+</hibernate-mapping>

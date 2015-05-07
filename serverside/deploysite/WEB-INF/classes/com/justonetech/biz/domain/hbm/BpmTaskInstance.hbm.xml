@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.justonetech.biz.domain">
+	<class
+		name="BpmTaskInstance"
+		table="BPM_TASK_INSTANCE"
+	>
+		
+		<meta attribute="sync-DAO">false</meta>
+		<meta attribute="sync-jsp">true</meta>
+		<meta attribute="sync-boolean">get</meta>
+		<meta attribute="treeable">false</meta>
+		<meta attribute="projectable">false</meta>
+        <meta attribute="tableName">业务流程任务实例表</meta>
+        <meta attribute="tableComment">业务流程任务实例表</meta>
+	    <meta attribute="sync-templatePatterns">list\w*</meta>
+        <meta attribute="sub-system">workflow</meta>
+
+		<id
+			name="id"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="com.justonetech.core.orm.hibernate.LongIdGenerator"/>
+		</id>
+
+		<property
+			name="jbpmTaskInstanceId"
+			column="JBPM_TASK_INSTANCE_ID"
+			type="java.lang.Long"
+			not-null="false"
+			length="19"
+        >
+            <meta attribute="ColumnName">任务实例ID</meta>
+            <meta attribute="ColumnComment">任务实例ID</meta>
+        </property>
+
+		<property
+			name="startTime"
+			column="START_TIME"
+			type="timestamp"
+			not-null="false"
+			length="19"
+        >
+            <meta attribute="ColumnName">开始时间</meta>
+            <meta attribute="ColumnComment">开始时间</meta>
+        </property>
+
+		<property
+			name="endTime"
+			column="END_TIME"
+			type="timestamp"
+			not-null="false"
+			length="19"
+        >
+            <meta attribute="ColumnName">结束时间</meta>
+            <meta attribute="ColumnComment">结束时间</meta>
+        </property>
+
+		<property
+			name="taskData"
+			column="TASK_DATA"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">任务数据(XML)</meta>
+            <meta attribute="ColumnComment">任务数据(XML)</meta>
+        </property>
+
+		<property
+			name="referId"
+			column="REFER_ID"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">业务ID</meta>
+            <meta attribute="ColumnComment">业务ID</meta>
+        </property>
+
+		<many-to-one
+			name="processInstance"
+			column="PROCESS_INSTANCE_ID"
+			class="BpmProcessInstance"
+			not-null="false"
+		>
+		</many-to-one>
+		<many-to-one
+			name="taskDefinition"
+			column="TASK_DEFINITION_ID"
+			class="BpmNodeDefinition"
+			not-null="false"
+		>
+		</many-to-one>
+	
+
+		<!--<set name="bpmStandardActions" inverse="true">-->
+			<!--<key column="TASK_INSTANCE_ID"/>-->
+			<!--<one-to-many class="BpmStandardAction"/>-->
+		<!--</set>-->
+        <one-to-one name="bpmStandardAction" class="BpmStandardAction" property-ref="taskInstance"/>
+
+		<!--<set name="bpmFormActions" inverse="true">-->
+			<!--<key column="TASK_INSTANCE_ID"/>-->
+			<!--<one-to-many class="BpmFormAction"/>-->
+		<!--</set>-->
+        <one-to-one name="bpmFormAction" class="BpmFormAction" property-ref="taskInstance"></one-to-one>
+
+	</class>	
+    <query name="bpmtaskinstance_all_data_query">
+        <![CDATA[FROM BpmTaskInstance]]>
+    </query>
+</hibernate-mapping>

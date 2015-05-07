@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+    <session-factory>
+        <property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
+        <mapping resource="com/justonetech/system/domain/hbm/ConfigTable.hbm.xml"/>
+        <mapping resource="com/justonetech/system/domain/hbm/Sample.hbm.xml"/>
+        <mapping resource="com/justonetech/system/domain/hbm/SysCode.hbm.xml"/>
+        <mapping resource="com/justonetech/system/domain/hbm/SysCodeDetail.hbm.xml"/>
+        <mapping resource="com/justonetech/system/domain/hbm/SysDept.hbm.xml"/>
+        <mapping resource="com/justonetech/system/domain/hbm/SysDeptUser.hbm.xml"/>
+        <mapping resource="com/justonetech/system/domain/hbm/SysLog.hbm.xml"/>
+        <mapping resource="com/justonetech/system/domain/hbm/SysMenu.hbm.xml"/>
+        <mapping resource="com/justonetech/system/domain/hbm/SysOperationTableLog.hbm.xml"/>
+        <mapping resource="com/justonetech/system/domain/hbm/SysParameter.hbm.xml"/>
+        <mapping resource="com/justonetech/system/domain/hbm/SysPerson.hbm.xml"/>
+        <mapping resource="com/justonetech/system/domain/hbm/SysPersonDept.hbm.xml"/>
+        <mapping resource="com/justonetech/system/domain/hbm/SysPrivilege.hbm.xml"/>
+        <mapping resource="com/justonetech/system/domain/hbm/SysRegPerson.hbm.xml"/>
+        <mapping resource="com/justonetech/system/domain/hbm/SysRole.hbm.xml"/>
+        <mapping resource="com/justonetech/system/domain/hbm/SysRolePrivilege.hbm.xml"/>
+        <mapping resource="com/justonetech/system/domain/hbm/SysSequence.hbm.xml"/>
+        <mapping resource="com/justonetech/system/domain/hbm/SysUser.hbm.xml"/>
+        <mapping resource="com/justonetech/system/domain/hbm/SysUserPrivilege.hbm.xml"/>
+        <mapping resource="com/justonetech/system/domain/hbm/SysUserRole.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/BpmDutyPerson.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/BpmFormAction.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/BpmFormData.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/BpmFormTemplate.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/BpmNodeDefinition.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/BpmProcessDefinition.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/BpmProcessDefinitionForm.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/BpmProcessInstance.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/BpmProcessSwimlane.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/BpmProcessTemplate.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/BpmProcessTransition.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/BpmProjectGroup.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/BpmProjectGroupDuty.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/BpmStandardAction.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/BpmSwimlane.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/BpmSwimlaneDefinition.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/BpmTaskInstance.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/BpmTaskSwimlane.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/CheckDeviceInfo.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/CheckFingerPrint.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/CheckInfo.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/CheckManager.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/CheckManagerPosition.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/CheckReason.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/DocCategory.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/DocDocument.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/DocDocumentAttach.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/OaPublicInfo.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/OaTask.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/OaTaskDeal.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/OaTaskDealLog.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/OaTaskLog.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/OaTaskType.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/OaTaskTypePrivilege.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/ShareAccidentSwry.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/ShareBidUnit.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/ShareGdDwgc.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/ShareGdInfo.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/ShareGdInfoLog.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/ShareGdStdSq.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/ShareGdStdSqLog.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/ShareGreatDanger.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/SharePersonQualify.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/SharePersonQualifyLog.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/ShareProCompletedRecord.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/ShareProCompletedRecordLog.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/ShareProComRecordDwgc.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/ShareProContract.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/ShareProContractLog.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/ShareProDwgcMonitor.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/ShareProDwgcMonitorLog.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/ShareProJlInfo.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/ShareProJlInfoLog.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/ShareProKcInfo.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/ShareProKcInfoLog.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/ShareProSgInfo.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/ShareProSgInfoLog.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/ShareProSgPermit.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/ShareProSgPermitDwgc.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/ShareProSgPermitLog.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/ShareProSjInfo.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/ShareProSjInfoLog.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/ShareProTobuild.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/ShareProTobuildLog.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/SharePunishCase.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/SharePunishCaseLog.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/SharePunishResult.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/ShareSafetyAccident.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/ShareSafetyAccidentLog.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/ShareUnitInfo.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/ShareUnitInfoLog.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/ShareUnitQualify.hbm.xml"/>
+        <mapping resource="com/justonetech/biz/domain/hbm/ShareUnitQualifyLog.hbm.xml"/>
+    </session-factory>
+
+</hibernate-configuration>

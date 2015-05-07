@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PrivilegeManager xmlVersion="20110221">
+<rootManagerName>
+<![CDATA[admin]]></rootManagerName>
+<rootManagerPassword>
+<![CDATA[juyee]]></rootManagerPassword>
+<AP class="com.fr.privilege.providers.NoAuthenticationProvider"/>
+<Control class="com.fr.privilege.authority.NoAuthorityControl"/>
+<FormControl class="com.fr.privilege.authority.NoAuthorityControl"/>
+<ForwardUrl>
+<![CDATA[${servletURL}?op=fr_platform]]></ForwardUrl>
+<LoginUI class="com.fr.privilege.ui.EmbeddedLogin"/>
+</PrivilegeManager>
