@@ -19,7 +19,7 @@
                     {name:'id', width:10, align:"center", searchtype:"integer",hidden:true},
                     {name:"year",width:"30",align:"center",searchtype:"integer",sortable:true},
                     {name:"no",width:"30",align:"center",searchtype:"integer",sortable:true},
-                    {name:"name",width:"60",align:"center",searchtype:"string",sortable:true},
+                    {name:"name",width:"70",align:"left",searchtype:"string",sortable:true},
                     {name:"property.name",width:"40",align:"center",searchtype:"string",sortable:true},
                     {name:"stage.name",width:"40",align:"center",searchtype:"string",sortable:true},
                     {name:"category.name",width:"40",align:"center",searchtype:"date",sortable:true},
@@ -77,8 +77,8 @@
         </div>
         <div style="float:right;padding-right: 10px">
             <c:if test="${canViewAll}">
-                <input type="button" value="添加" class="button_add"
-                       onclick="doAdd()"/>
+                <input type="button" value="办证推进汇总" class="button_normal_long" onclick="doViewStage()"/>
+                <input type="button" value="形象进度汇总" class="button_normal_long" onclick="doViewNode()"/>
             </c:if>
         </div>
     </div>

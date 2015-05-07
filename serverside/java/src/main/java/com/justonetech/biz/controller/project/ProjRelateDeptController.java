@@ -77,7 +77,7 @@ public class ProjRelateDeptController extends BaseCRUDActionController<ProjRelat
      */
     @RequestMapping
     public String grid(Model model) {
-        model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.PROJ_RELATE_DEPT));
+        model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.PROJ_RELATE_DEPT_EDIT));
         return "view/project/projRelateDept/grid";
     }
 

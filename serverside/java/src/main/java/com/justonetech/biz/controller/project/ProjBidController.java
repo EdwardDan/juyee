@@ -9,9 +9,11 @@ import com.justonetech.biz.domain.ProjBid;
 import com.justonetech.biz.manager.ConfigManager;
 import com.justonetech.biz.manager.DocumentManager;
 import com.justonetech.biz.utils.Constants;
+import com.justonetech.biz.utils.enums.ProjBidType;
 import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.orm.hibernate.Page;
 import com.justonetech.core.utils.ReflectionUtils;
+import com.justonetech.core.utils.StringHelper;
 import com.justonetech.system.daoservice.SysCodeDetailService;
 import com.justonetech.system.manager.SimpleQueryManager;
 import com.justonetech.system.manager.SysCodeManager;
@@ -31,7 +33,7 @@ import javax.servlet.http.HttpSession;
 
 
 /**
- * note:项目标段管理
+ * note:项目标段管理(包括办证推进和形象进度2种标段)
  * author: system
  * create date:
  * modify date:
@@ -68,15 +70,14 @@ public class ProjBidController extends BaseCRUDActionController<ProjBid> {
     private SysCodeDetailService sysCodeDetailService;
 
     /**
-     * projInfo 列表显示页面
+     * projBid 列表显示页面
      *
      * @param model .
      * @return .
      */
     @RequestMapping
-    public String grid(Model model) {
-        //判断是否有编辑权限
-        model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.SYS_SAMPLE_EDIT));
+    public String grid(Model model,String typeCode) {
+        model.addAttribute("typeCode",typeCode);
 
         return "view/project/projBid/projGrid";
     }
@@ -91,7 +92,7 @@ public class ProjBidController extends BaseCRUDActionController<ProjBid> {
      * @param rows     .
      */
     @RequestMapping
-    public void projGridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session) {
+    public void projGridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows,String typeCode, HttpSession session) {
         try {
             Page pageModel = new Page(page, rows, true);
             String hql = "from ProjInfo order by id desc";
@@ -119,9 +120,14 @@ public class ProjBidController extends BaseCRUDActionController<ProjBid> {
      * @return .
      */
     @RequestMapping
-    public String bidGrid(Model model, Long projId) {
+    public String bidGrid(Model model, Long projId,String typeCode) {
         //判断是否有编辑权限
-        model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.SYS_SAMPLE_EDIT));
+        if(ProjBidType.PLATFORM_STAGE.getCode().equals(typeCode)){
+            model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.PROJ_BID_STAGE_EDIT));
+        }else if(ProjBidType.PLATFORM_NODE.getCode().equals(typeCode)){
+            model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.PROJ_BID_NODE_EDIT));
+        }
+        model.addAttribute("typeCode", typeCode);
         model.addAttribute("projId", projId);
 
         return "view/project/projBid/grid";
@@ -137,11 +143,15 @@ public class ProjBidController extends BaseCRUDActionController<ProjBid> {
      * @param rows     .
      */
     @RequestMapping
-    public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, Long projId, HttpSession session) {
+    public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, Long projId,String typeCode, HttpSession session) {
         try {
             Page pageModel = new Page(page, rows, true);
-            String hql = "from ProjBid where project.id=" + projId + " order by id desc";
+            String hql = "from ProjBid where project.id=" + projId;
             //增加自定义查询条件
+            if (!StringHelper.isEmpty(typeCode)) {
+                hql += " and typeCode='"+typeCode+"'";
+            }
+            hql += " order by id desc";
 
             //执行查询
             QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);
@@ -166,10 +176,12 @@ public class ProjBidController extends BaseCRUDActionController<ProjBid> {
      * @return .
      */
     @RequestMapping
-    public String add(Model model, Long projId) {
+    public String add(Model model, Long projId,String typeCode) {
         ProjBid projBid = new ProjBid();
-        projBid.setProject(projInfoService.get(projId));
+
         //如需增加其他默认值请在此添加
+        projBid.setProject(projInfoService.get(projId));
+        projBid.setTypeCode(typeCode);
         model.addAttribute("bean", projBid);
 
         return "view/project/projBid/input";
@@ -185,7 +197,6 @@ public class ProjBidController extends BaseCRUDActionController<ProjBid> {
     @RequestMapping
     public String modify(Model model, Long id) {
         ProjBid projBid = projBidService.get(id);
-        //处理其他业务逻辑
         model.addAttribute("bean", projBid);
 
         return "view/project/projBid/input";
@@ -227,7 +238,8 @@ public class ProjBidController extends BaseCRUDActionController<ProjBid> {
                         "buildMileage",
                         "projLink",
                         "linkTel",
-                        "startDate"
+                        "startDate",
+                        "typeCode"
                 });
 
             } else {

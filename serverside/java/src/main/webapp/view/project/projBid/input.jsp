@@ -5,12 +5,8 @@
     $(function () {
         //页面验证初始化
         var validateCondition = [
-            //{name:"code", rule:"validate[required,maxSize[50]]"},
-            //{name:"name", rule:"validate[required,maxSize[500]]"},
-            //{name:"buildMileage", rule:"validate[required,maxSize[50]]"},
-            //{name:"projLink", rule:"validate[required,maxSize[50]]"},
-            //{name:"linkTel", rule:"validate[required,maxSize[50]]"},
-            //{name:"startDate", rule:"validate[required,custom[date],maxSize[7]"},
+            {name:"code", rule:"validate[required,maxSize[50]]"},
+            {name:"name", rule:"validate[required,maxSize[300]]"}
         ];
         validateInit(validateCondition, formId);
     });
@@ -21,18 +17,13 @@
             return;
         }
 
-        //加入其他业务判断
-//        if ($('#name').val() == '') {
-//            showInfoMsg('请输入姓名！',null);
-//            return;
-//        }
-
         //提交表单
         saveAjaxData("${ctx}/projBid/save.do", formId);
     }
 </script>
 <form:form commandName="bean">
     <form:hidden path="id"/>
+    <form:hidden path="typeCode"/>
     <input type="hidden" name="projInfoId" value="${bean.project.id}">
 
     <div class="form_div">

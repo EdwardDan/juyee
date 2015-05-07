@@ -5,7 +5,7 @@
     $(function () {
         var conf = {
             gridOpts: {
-                url: "${ctx}/projBid/projGridDataCustom.do",
+                url: "${ctx}/projBid/projGridDataCustom.do?typeCode=${typeCode}",
                 colNames: ['ID',
                     '开始年份',
                     '项目序号',
@@ -57,27 +57,9 @@
         };
         gridinit($("#listGrid"), conf);
     });
-    function doView(id) {
-        openWindow("查看项目基本信息管理", "${ctx}/projInfo/view.do?id=" + id, false);
-    }
-    <%--<c:if test="${canEdit}">--%>
-    function doAdd() {
-        openWindow("添加项目基本信息管理", "${ctx}/projInfo/add.do", true);
-    }
-    function doEdit(id) {
-        openWindow("修改项目基本信息管理", "${ctx}/projInfo/modify.do?id=" + id, true);
-    }
-    function doDelete(id) {
-        doGridDelete("${ctx}/projInfo/delete.do?id=" + id);
-    }
-    <%--</c:if>--%>
     function doToBid(projId) {
-        loadAjaxData("mainContent", "${ctx}/projBid/bidGrid.do?projId=" + projId);
+        loadAjaxData("mainContent", "${ctx}/projBid/bidGrid.do?projId=" + projId+"&typeCode=${typeCode}");
     }
-    //custom formatter
-    //function customeFormat(cellvalue, options, rowObject) {
-    //    return cellvalue == "true"?"是":"否";
-    //}
 </script>
 
 <div class="title_Search">

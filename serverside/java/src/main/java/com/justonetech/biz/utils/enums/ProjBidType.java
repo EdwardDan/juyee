@@ -1,18 +1,16 @@
 package com.justonetech.biz.utils.enums;
 
 /**
- * 所属平台——OA、业务管理
- * User: Chen Junping
- * Date: 12-6-12
+ * 标段类别--分别用户办证推进和形象进度
  */
-public enum Platform {
-    PLATFORM_OA("oa", "OA管理"),
-    PLATFORM_BIZ("biz", "业务管理");
+public enum ProjBidType {
+    PLATFORM_STAGE("certStage", "办证推进"),
+    PLATFORM_NODE("scheduleNode", "形象进度");
 
     private String code;
     private String name;
 
-    Platform(String code, String name) {
+    ProjBidType(String code, String name) {
         this.code = code;
         this.name = name;
     }
@@ -32,7 +30,7 @@ public enum Platform {
      * @return .
      */
     public static String getNameByCode(String code) {
-        for (Platform aType : values()) {
+        for (ProjBidType aType : values()) {
             if (aType.getCode().equals(code))
                 return aType.getName();
         }
