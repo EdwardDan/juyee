@@ -1,0 +1,71 @@
+-- Add/modify columns 
+alter table PROJ_BID add TYPE_CODE VARCHAR2(50);
+-- Add comments to the columns 
+comment on column PROJ_BID.TYPE_CODE
+  is '标段类别编码(形象进度/办证推进)';
+
+
+drop table DATA_STAGE_REPORT_LOG cascade constraints;
+
+/*==============================================================*/
+/* Table: DATA_STAGE_REPORT_LOG                                 */
+/*==============================================================*/
+create table DATA_STAGE_REPORT_LOG 
+(
+   ID                   number(10)           not null,
+   STAGE_REPORT_ID      number(10),
+   STAGE_ID             number(10),
+   STEP_ID              number(10),
+   RESULT_ID            number(10),
+   RESULT_DESC          varchar(200),
+   DEAL_DATE            varchar(500),
+   CREATE_TIME          DATE,
+   CREATE_USER          VARCHAR2(100),
+   UPDATE_TIME          DATE,
+   UPDATE_USER          VARCHAR2(100),
+   constraint PK_DATA_STAGE_REPORT_LOG primary key (ID),
+   constraint FK_DATA_STAGE_REPORT_LOG foreign key (STAGE_REPORT_ID)
+         references DATA_STAGE_REPORT (ID),
+   constraint FK_DATA_STAGE_REP_LOG_STEP foreign key (STEP_ID)
+         references SYS_CODE_DETAIL (ID),
+   constraint FK_DATA_STAGE_REP_LOG_RES foreign key (RESULT_ID)
+         references SYS_CODE_DETAIL (ID),
+   constraint FK_DATA_STAGE_REP_LOG_ST foreign key (STAGE_ID)
+         references PROJ_STAGE (ID)
+);
+
+comment on table DATA_STAGE_REPORT_LOG is
+'办证推进填报历史';
+
+comment on column DATA_STAGE_REPORT_LOG.ID is
+'ID';
+
+comment on column DATA_STAGE_REPORT_LOG.STAGE_REPORT_ID is
+'推进填报ID';
+
+comment on column DATA_STAGE_REPORT_LOG.STAGE_ID is
+'阶段ID';
+
+comment on column DATA_STAGE_REPORT_LOG.STEP_ID is
+'步骤ID';
+
+comment on column DATA_STAGE_REPORT_LOG.RESULT_ID is
+'推进结果ID';
+
+comment on column DATA_STAGE_REPORT_LOG.RESULT_DESC is
+'推进结果中文描述';
+
+comment on column DATA_STAGE_REPORT_LOG.DEAL_DATE is
+'计划日期/办结日期/问题';
+
+comment on column DATA_STAGE_REPORT_LOG.CREATE_TIME is
+'创建时间';
+
+comment on column DATA_STAGE_REPORT_LOG.CREATE_USER is
+'创建用户名';
+
+comment on column DATA_STAGE_REPORT_LOG.UPDATE_TIME is
+'更新时间';
+
+comment on column DATA_STAGE_REPORT_LOG.UPDATE_USER is
+'更新用户名';
