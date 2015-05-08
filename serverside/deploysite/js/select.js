@@ -22,36 +22,36 @@ function removeMultiSelectOpt(selectObj, inputId, inputName) {
 function selectSysDept(inputId, inputName, callback) {
     var icon = addIcons("company.gif,dept.gif");
     new PopTree({
-        url:CONTEXT_NAME + '/sysDept/treeDataForSelect.do?icon=' + icon,
-        targetId:inputId,
-        targetValueId:inputName,
-        callback:callback
+        url: CONTEXT_NAME + '/sysDept/treeDataForSelect.do?icon=' + icon,
+        targetId: inputId,
+        targetValueId: inputName,
+        callback: callback
     });
 }
 //单位部门-多选
 function multiSelectSysDept(selectObj, inputId, inputName, callback) {
     var icon = addIcons("company.gif,dept.gif");
     new PopTree({
-        url:CONTEXT_NAME + '/sysDept/treeDataForSelect.do?icon=' + icon,
-        selectObj:selectObj,
-        targetId:inputId,
-        check:true,
-        targetValueId:inputName,
-        setMultiValues:setMultiValues,
-        callback:callback
+        url: CONTEXT_NAME + '/sysDept/treeDataForSelect.do?icon=' + icon,
+        selectObj: selectObj,
+        targetId: inputId,
+        check: true,
+        targetValueId: inputName,
+        setMultiValues: setMultiValues,
+        callback: callback
     });
 }
 //Excel监督单位工程-多选
 function multiSelectExcelJdDwgc(jdTaskCode, selectObj, inputId, inputName, callback) {
     var icon = addIcons("company.gif,dept.gif");
     new PopTree({
-        url:CONTEXT_NAME + '/jdRecordComplete/treeDataForSelect.do?icon=' + icon + "&jdTaskCode=" + jdTaskCode,
-        selectObj:selectObj,
-        targetId:inputId,
-        check:true,
-        targetValueId:inputName,
-        setMultiValues:setMultiValues,
-        callback:callback
+        url: CONTEXT_NAME + '/jdRecordComplete/treeDataForSelect.do?icon=' + icon + "&jdTaskCode=" + jdTaskCode,
+        selectObj: selectObj,
+        targetId: inputId,
+        check: true,
+        targetValueId: inputName,
+        setMultiValues: setMultiValues,
+        callback: callback
     });
 }
 function setMultiValues(checkNodes) {
@@ -97,13 +97,13 @@ function uniqueSort(arr) {
 function multiSelectSysPersonBpmperson(selectObj, inputId, inputName, callback) {
     var icon = addIcons("company.gif,dept.gif,person.gif");
     new PopTree({
-        url:CONTEXT_NAME + '/sysPerson/treeDataForSelect.do?icon=' + icon,
-        selectObj:selectObj,
-        targetId:inputId,
-        check:true,
-        targetValueId:inputName,
-        setMultiValues:setMultiValuesBpmperson,
-        callback:callback
+        url: CONTEXT_NAME + '/sysPerson/treeDataForSelect.do?icon=' + icon,
+        selectObj: selectObj,
+        targetId: inputId,
+        check: true,
+        targetValueId: inputName,
+        setMultiValues: setMultiValuesBpmperson,
+        callback: callback
     });
 }
 //仅用于bpmduty人员添加
@@ -146,11 +146,11 @@ function setMultiValuesBpmperson(checkNodes) {
 function selectSysPerson(inputId, inputName, callback) {
     var icon = addIcons("company.gif,dept.gif,person.gif");
     new PopTree({
-        url:CONTEXT_NAME + '/sysPerson/treeDataForSelect.do?icon=' + icon,
-        targetId:inputId,
-        targetValueId:inputName,
-        callback:callback,
-        targetType:'person'
+        url: CONTEXT_NAME + '/sysPerson/treeDataForSelect.do?icon=' + icon,
+        targetId: inputId,
+        targetValueId: inputName,
+        callback: callback,
+        targetType: 'person'
     });
 
 }
@@ -158,11 +158,11 @@ function selectSysPerson(inputId, inputName, callback) {
 function selectSysPersonDriver(inputId, inputName, callback) {
     var icon = addIcons("company.gif,dept.gif,person.gif");
     new PopTree({
-        url:CONTEXT_NAME + '/sysPerson/treeDataForSelectDriver.do?icon=' + icon,
-        targetId:inputId,
-        targetValueId:inputName,
-        callback:callback,
-        targetType:'person'
+        url: CONTEXT_NAME + '/sysPerson/treeDataForSelectDriver.do?icon=' + icon,
+        targetId: inputId,
+        targetValueId: inputName,
+        callback: callback,
+        targetType: 'person'
     });
 
 }
@@ -171,13 +171,13 @@ function selectSysPersonDriver(inputId, inputName, callback) {
 function multiSelectSysPerson(selectObj, inputId, inputName, callback) {
     var icon = addIcons("company.gif,dept.gif,person.gif");
     new PopTree({
-        url:CONTEXT_NAME + '/sysPerson/treeDataForSelect.do?icon=' + icon,
-        selectObj:selectObj,
-        targetId:inputId,
-        check:true,
-        targetValueId:inputName,
-        setMultiValues:setMultiValues,
-        callback:callback
+        url: CONTEXT_NAME + '/sysPerson/treeDataForSelect.do?icon=' + icon,
+        selectObj: selectObj,
+        targetId: inputId,
+        check: true,
+        targetValueId: inputName,
+        setMultiValues: setMultiValues,
+        callback: callback
     });
 }
 
@@ -185,13 +185,13 @@ function multiSelectSysPerson(selectObj, inputId, inputName, callback) {
 function multiSelectSysRegPerson(selectObj, inputId, inputName, callback) {
     var icon = addIcons("company.gif,dept.gif,person.gif");
     new PopTree({
-        url:CONTEXT_NAME + '/sysRegPerson/treeDataForSelect.do?icon=' + icon,
-        selectObj:selectObj,
-        targetId:inputId,
-        check:true,
-        targetValueId:inputName,
-        setMultiValues:setMultiValues,
-        callback:callback
+        url: CONTEXT_NAME + '/sysRegPerson/treeDataForSelect.do?icon=' + icon,
+        selectObj: selectObj,
+        targetId: inputId,
+        check: true,
+        targetValueId: inputName,
+        setMultiValues: setMultiValues,
+        callback: callback
     });
 }
 
@@ -199,14 +199,14 @@ function multiSelectSysRegPerson(selectObj, inputId, inputName, callback) {
 function multiSelectSysCode(code, selectObj, inputId, inputName, callback) {
     var icon = addIcons("code.gif,code_detail.gif");
     new PopTree({
-        url:CONTEXT_NAME + '/sysCode/treeDataForSelect.do?icon=' + icon + "&code=" + code,
-        selectObj:selectObj,
-        targetId:inputId,
-        check:true,
-        targetValueId:inputName,
-        setMultiValues:setMultiValues,
-        callback:callback,
-        targetType:'detail'
+        url: CONTEXT_NAME + '/sysCode/treeDataForSelect.do?icon=' + icon + "&code=" + code,
+        selectObj: selectObj,
+        targetId: inputId,
+        check: true,
+        targetValueId: inputName,
+        setMultiValues: setMultiValues,
+        callback: callback,
+        targetType: 'detail'
     });
 }
 
@@ -234,13 +234,13 @@ function selectorAdapt(selector) {
 function multiSelectSysUser(selectObj, inputId, inputName, callback) {
     var icon = addIcons("company.gif,dept.gif,person.gif");
     new PopTree({
-        url:CONTEXT_NAME + '/sysUser/treeDataForSelect.do?icon=' + icon,
-        selectObj:selectObj,
-        targetId:inputId,
-        check:true,
-        targetValueId:inputName,
-        setMultiValues:setMultiValues,
-        callback:callback
+        url: CONTEXT_NAME + '/sysUser/treeDataForSelect.do?icon=' + icon,
+        selectObj: selectObj,
+        targetId: inputId,
+        check: true,
+        targetValueId: inputName,
+        setMultiValues: setMultiValues,
+        callback: callback
     });
 }
 
@@ -248,10 +248,10 @@ function multiSelectSysUser(selectObj, inputId, inputName, callback) {
 function selectSysUser(inputId, inputName, callback) {
     var icon = addIcons("company.gif,dept.gif,person.gif");
     new PopTree({
-        url:CONTEXT_NAME + '/sysUser/treeDataForSelect.do?icon=' + icon,
-        targetId:inputId,
-        targetValueId:inputName,
-        callback:callback
+        url: CONTEXT_NAME + '/sysUser/treeDataForSelect.do?icon=' + icon,
+        targetId: inputId,
+        targetValueId: inputName,
+        callback: callback
     });
 }
 
@@ -259,13 +259,13 @@ function selectSysUser(inputId, inputName, callback) {
 function multiSelectPrivilege(selectObj, inputId, inputName, callback) {
     var icon = addIcons("privilege.gif,button.gif");
     new PopTree({
-        url:CONTEXT_NAME + '/sysPrivilege/treeData.do?icon=' + icon,
-        selectObj:selectObj,
-        targetId:inputId,
-        check:true,
-        targetValueId:inputName,
-        setMultiValues:setMultiValues,
-        callback:callback
+        url: CONTEXT_NAME + '/sysPrivilege/treeData.do?icon=' + icon,
+        selectObj: selectObj,
+        targetId: inputId,
+        check: true,
+        targetValueId: inputName,
+        setMultiValues: setMultiValues,
+        callback: callback
     });
 }
 
@@ -273,13 +273,13 @@ function multiSelectPrivilege(selectObj, inputId, inputName, callback) {
 function multiSelectFormPrivilege(formId, selectObj, inputId, inputName, callback) {
     var icon = addIcons("privilege.gif,button.gif");
     new PopTree({
-        url:CONTEXT_NAME + '/bpmFormTemplate/privilegeDataForSelect.do?icon=' + icon + "&formId=" + formId,
-        selectObj:selectObj,
-        targetId:inputId,
-        check:true,
-        targetValueId:inputName,
-        setMultiValues:setMultiValues,
-        callback:callback
+        url: CONTEXT_NAME + '/bpmFormTemplate/privilegeDataForSelect.do?icon=' + icon + "&formId=" + formId,
+        selectObj: selectObj,
+        targetId: inputId,
+        check: true,
+        targetValueId: inputName,
+        setMultiValues: setMultiValues,
+        callback: callback
     });
 }
 
@@ -287,10 +287,10 @@ function multiSelectFormPrivilege(formId, selectObj, inputId, inputName, callbac
 function selectProcessTemplate(inputId, inputName, callback) {
     var icon = addIcons("company.gif,dept.gif,person.gif");
     new PopTree({
-        url:CONTEXT_NAME + '/bpmProcessTemplate/treeData.do?icon=' + icon,
-        targetId:inputId,
-        targetValueId:inputName,
-        callback:callback
+        url: CONTEXT_NAME + '/bpmProcessTemplate/treeData.do?icon=' + icon,
+        targetId: inputId,
+        targetValueId: inputName,
+        callback: callback
     });
 }
 
@@ -298,13 +298,13 @@ function selectProcessTemplate(inputId, inputName, callback) {
 function multiSelectFormTemplate(selectObj, inputId, inputName, callback) {
     var icon = addIcons("privilege.gif,button.gif");
     new PopTree({
-        url:CONTEXT_NAME + '/bpmFormTemplate/treeData.do?icon=' + icon,
-        selectObj:selectObj,
-        targetId:inputId,
-        check:true,
-        targetValueId:inputName,
-        setMultiValues:setMultiValues,
-        callback:callback
+        url: CONTEXT_NAME + '/bpmFormTemplate/treeData.do?icon=' + icon,
+        selectObj: selectObj,
+        targetId: inputId,
+        check: true,
+        targetValueId: inputName,
+        setMultiValues: setMultiValues,
+        callback: callback
     });
 }
 
@@ -312,10 +312,10 @@ function multiSelectFormTemplate(selectObj, inputId, inputName, callback) {
 function selectDocCategory(inputId, inputName, callback) {
     var icon = addIcons("root.gif,default.gif");
     new PopTree({
-        url:CONTEXT_NAME + '/docCategory/treeData.do?icon=' + icon,
-        targetId:inputId,
-        targetValueId:inputName,
-        callback:callback
+        url: CONTEXT_NAME + '/docCategory/treeData.do?icon=' + icon,
+        targetId: inputId,
+        targetValueId: inputName,
+        callback: callback
     });
 }
 
@@ -323,10 +323,10 @@ function selectDocCategory(inputId, inputName, callback) {
 function selectFormTemplateForDefinition(bpmProcessDefinitionId, inputId, inputName, callback) {
     var icon = addIcons("root.gif,default.gif");
     new PopTree({
-        url:CONTEXT_NAME + '/bpmFormTemplate/treeDataForDefinition.do?bpmProcessDefinitionId=' + bpmProcessDefinitionId + '&icon=' + icon,
-        targetId:inputId,
-        targetValueId:inputName,
-        callback:callback
+        url: CONTEXT_NAME + '/bpmFormTemplate/treeDataForDefinition.do?bpmProcessDefinitionId=' + bpmProcessDefinitionId + '&icon=' + icon,
+        targetId: inputId,
+        targetValueId: inputName,
+        callback: callback
     });
 }
 
@@ -334,10 +334,10 @@ function selectFormTemplateForDefinition(bpmProcessDefinitionId, inputId, inputN
 function selectFormKey(formId, inputId, inputName, callback) {
     var icon = addIcons("root.gif,default.gif");
     new PopTree({
-        url:CONTEXT_NAME + '/bpmFormTemplate/treeDataForSelectKey.do?formId=' + formId + '&icon=' + icon,
-        targetId:inputId,
-        targetValueId:inputName,
-        callback:callback
+        url: CONTEXT_NAME + '/bpmFormTemplate/treeDataForSelectKey.do?formId=' + formId + '&icon=' + icon,
+        targetId: inputId,
+        targetValueId: inputName,
+        callback: callback
     });
 }
 
@@ -345,13 +345,13 @@ function selectFormKey(formId, inputId, inputName, callback) {
 function multiSelectTaskDwgc(selectObj, inputId, inputName, jdTaskCode, callback) {
     var icon = addIcons("company.gif,dept.gif");
     new PopTree({
-        url:CONTEXT_NAME + '/excelJdDwgc/treeDataForSelect.do?icon=' + icon + "&jdTaskCode=" + jdTaskCode,
-        selectObj:selectObj,
-        targetId:inputId,
-        check:true,
-        targetValueId:inputName,
-        setMultiValues:setMultiValues,
-        callback:callback
+        url: CONTEXT_NAME + '/excelJdDwgc/treeDataForSelect.do?icon=' + icon + "&jdTaskCode=" + jdTaskCode,
+        selectObj: selectObj,
+        targetId: inputId,
+        check: true,
+        targetValueId: inputName,
+        setMultiValues: setMultiValues,
+        callback: callback
     });
 }
 /*******************************************************************
@@ -385,25 +385,25 @@ function multiSelectCourse(selectObj, inputId, inputName, callback) {
 
     var icon = addIcons("company.gif,dept.gif");
     new PopTree({
-        url:CONTEXT_NAME + '/platSpecialWorker/treeDataForSelect.do?icon=' + icon,
-        selectObj:selectObj,
-        targetId:inputId,
-        targetValueId:inputName,
-        check:true,
-        setMultiValues:setMultiValues,
-        callback:callback
+        url: CONTEXT_NAME + '/platSpecialWorker/treeDataForSelect.do?icon=' + icon,
+        selectObj: selectObj,
+        targetId: inputId,
+        targetValueId: inputName,
+        check: true,
+        setMultiValues: setMultiValues,
+        callback: callback
     });
 }
 
 // 监督问题人员列表--单选
-function selectQuestionRerson( inputId, inputName, callback) {
+function selectQuestionRerson(inputId, inputName, callback) {
     var icon = addIcons("root.gif,default.gif");
     new PopTree({
-        url:CONTEXT_NAME + '/sysPerson/treeDataForSelect.do?icon=' + icon,
-        targetId:inputId,
-        targetValueId:inputName,
-        callback:callback,
-        targetType:'person'
+        url: CONTEXT_NAME + '/sysPerson/treeDataForSelect.do?icon=' + icon,
+        targetId: inputId,
+        targetValueId: inputName,
+        callback: callback,
+        targetType: 'person'
     });
 }
 
@@ -412,6 +412,20 @@ function multiSelectMenu(selectObj, inputId, inputName, callback) {
     var icon = addIcons("menu.gif,menu_disable.gif,oa.gif,biz.gif");
     new PopTree({
         url: CONTEXT_NAME + '/sysMenu/treeData.do?icon=' + icon,
+        selectObj: selectObj,
+        targetId: inputId,
+        check: true,
+        targetValueId: inputName,
+        setMultiValues: setMultiValues,
+        callback: callback
+    });
+}
+
+//选择单位承担项目-多选
+function multiSelectUnitPrjs(selectObj, inputId, inputName, callback) {
+    var icon = addIcons("company.gif,dept.gif,person.gif");
+    new PopTree({
+        url: CONTEXT_NAME + '/projRelateDept/treeDataForSelect.do?icon=' + icon,
         selectObj: selectObj,
         targetId: inputId,
         check: true,

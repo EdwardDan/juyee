@@ -67,7 +67,7 @@
     }
 
     function doViewPrjCharged(deptId, deptName) {
-        openWindow("查看" + deptName + "所承担的项目", "${ctx}/projRelateDept/grid2.do?deptId=" + deptId, true, 750, 550);
+        openWindow("查看" + deptName + "所承担的项目", "${ctx}/projRelateDept/grid2.do?deptId=" + deptId, true, 1061, 531);
     }
     <c:if test="${canEdit}">
     function doAdd() {
