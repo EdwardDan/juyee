@@ -375,7 +375,6 @@ public class ProjRelateDeptController extends BaseCRUDActionController<ProjRelat
                             projRelatePersonService.delete(prp);
                         }
                     }
-
                     //删除人员
                     sysPersonService.delete(sp);
                 }
