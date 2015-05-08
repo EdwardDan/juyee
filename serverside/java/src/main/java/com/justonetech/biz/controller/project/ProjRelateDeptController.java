@@ -4,8 +4,10 @@ import com.justonetech.biz.core.orm.hibernate.GridJq;
 import com.justonetech.biz.core.orm.hibernate.QueryTranslateJq;
 import com.justonetech.biz.daoservice.ProjInfoService;
 import com.justonetech.biz.daoservice.ProjRelateDeptService;
+import com.justonetech.biz.daoservice.ProjRelatePersonService;
 import com.justonetech.biz.domain.ProjInfo;
 import com.justonetech.biz.domain.ProjRelateDept;
+import com.justonetech.biz.domain.ProjRelatePerson;
 import com.justonetech.biz.utils.Constants;
 import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.orm.hibernate.Page;
@@ -13,7 +15,11 @@ import com.justonetech.core.utils.JspHelper;
 import com.justonetech.core.utils.ReflectionUtils;
 import com.justonetech.core.utils.StringHelper;
 import com.justonetech.system.daoservice.SysDeptService;
+import com.justonetech.system.daoservice.SysPersonDeptService;
+import com.justonetech.system.daoservice.SysPersonService;
 import com.justonetech.system.domain.SysDept;
+import com.justonetech.system.domain.SysPerson;
+import com.justonetech.system.domain.SysPersonDept;
 import com.justonetech.system.manager.SimpleQueryManager;
 import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
@@ -34,6 +40,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -59,10 +66,19 @@ public class ProjRelateDeptController extends BaseCRUDActionController<ProjRelat
     private ProjRelateDeptService projRelateDeptService;
 
     @Autowired
+    private ProjRelatePersonService projRelatePersonService;
+
+    @Autowired
     private ProjInfoService projInfoService;
 
     @Autowired
     private SysDeptService sysDeptService;
+
+    @Autowired
+    private SysPersonService sysPersonService;
+
+    @Autowired
+    private SysPersonDeptService sysPersonDeptService;
 
     /**
      * 项目建设单位列表显示页面
@@ -334,12 +350,37 @@ public class ProjRelateDeptController extends BaseCRUDActionController<ProjRelat
     @RequestMapping
     public void delete(HttpServletResponse response, Long id) throws Exception {
         try {
+            //删除单位关联项目
             List<ProjRelateDept> prjRelDepts = projRelateDeptService.findByQuery("from ProjRelateDept where dept.id = ?", id);
             if (prjRelDepts != null && !prjRelDepts.isEmpty()) {
                 for (ProjRelateDept prjRelDept : prjRelDepts) {
                     projRelateDeptService.delete(prjRelDept);
                 }
-            }//todo 需要删除项目关联的人员
+            }
+            //删除人员--部门从属关系
+            Set<SysPersonDept> spds = sysDeptService.get(id).getSysPersonDepts();
+            List<SysPerson> sps = new ArrayList<SysPerson>();
+            if (spds != null && !spds.isEmpty()) {
+                for (SysPersonDept spd : spds) {
+                    sps.add(spd.getPerson());
+                    sysPersonDeptService.delete(spd);
+                }
+            }
+            //删除单位下属人员关联项目
+            if (!sps.isEmpty()) {
+                for (SysPerson sp : sps) {
+                    List<ProjRelatePerson> prps = projRelatePersonService.findByQuery("from ProjRelatePerson where person.id = ?", sp.getId());
+                    if (prps != null && !prps.isEmpty()) {
+                        for (ProjRelatePerson prp : prps) {
+                            projRelatePersonService.delete(prp);
+                        }
+                    }
+
+                    //删除人员
+                    sysPersonService.delete(sp);
+                }
+            }
+            //删除单位
             sysDeptService.delete(id);
             sendSuccessJSON(response, "删除成功");
         } catch (Exception e) {

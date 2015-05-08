@@ -14,7 +14,6 @@ import com.justonetech.system.daoservice.SysPersonService;
 import com.justonetech.system.domain.SysDept;
 import com.justonetech.system.domain.SysPerson;
 import com.justonetech.system.domain.SysPersonDept;
-import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
 import com.justonetech.system.tree.ZTreeBranch;
 import com.justonetech.system.tree.ZTreeNode;
