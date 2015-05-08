@@ -34,6 +34,11 @@
                 <td class="form_content">
                     <form:input path="name" cssClass="input_text_long"/>
                 </td>
+                <td class="form_label_right">单位类别&nbsp;</td>
+                <td class="form_content">
+                    <sys:code type="select" code="${category}" id="categoryId" name="categoryId"
+                              sysCodeDetailId="${bean.category.id}"></sys:code>
+                </td>
             </tr>
             <tr class="tr_dark">
                 <td class="form_label_right">单位简称&nbsp;</td>

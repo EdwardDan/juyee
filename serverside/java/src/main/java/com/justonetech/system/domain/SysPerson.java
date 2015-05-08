@@ -38,7 +38,7 @@ public class SysPerson extends BaseSysPerson {
     }
 
     private SysDept getParentCompany(SysDept dept) {
-        if(dept.getIsTag() != null && dept.getIsTag()){
+        if (dept.getIsTag() != null && dept.getIsTag()) {
             return dept;
         }
         if (dept.getParent() != null) {
@@ -50,11 +50,12 @@ public class SysPerson extends BaseSysPerson {
 
     /**
      * 获取单位名称
+     *
      * @return .
      */
-    public String getCompanyName(){
+    public String getCompanyName() {
         SysDept company = getCompany();
-        if(company != null){
+        if (company != null) {
             return company.getName();
         }
         return "";
@@ -67,6 +68,9 @@ public class SysPerson extends BaseSysPerson {
      */
     public SysDept getDept() {
         Set<SysPersonDept> sysPersonDepts = getSysPersonDepts();
+        if (sysPersonDepts == null) {
+            return null;
+        }
         if (sysPersonDepts.size() > 0) {
             SysPersonDept next = sysPersonDepts.iterator().next();
             return next.getDept();
@@ -76,11 +80,12 @@ public class SysPerson extends BaseSysPerson {
 
     /**
      * 获取单位名称
+     *
      * @return .
      */
-    public String getDeptName(){
+    public String getDeptName() {
         SysDept dept = getDept();
-        if(dept != null){
+        if (dept != null) {
             return dept.getName();
         }
         return "";
@@ -88,10 +93,14 @@ public class SysPerson extends BaseSysPerson {
 
     /**
      * 获取人员与部门关联对象
+     *
      * @return 。
      */
     public SysPersonDept getPersonDept() {
         Set<SysPersonDept> sysPersonDepts = getSysPersonDepts();
+        if (sysPersonDepts == null) {
+            return null;
+        }
         if (sysPersonDepts.size() > 0) {
             return sysPersonDepts.iterator().next();
         }
@@ -100,11 +109,12 @@ public class SysPerson extends BaseSysPerson {
 
     /**
      * 获取人员职务信息
+     *
      * @return .
      */
-    public String getPositionName(){
+    public String getPositionName() {
         SysPersonDept personDept = getPersonDept();
-        if(personDept != null){
+        if (personDept != null) {
             return JspHelper.getString(personDept.getPosition());
         }
         return "";

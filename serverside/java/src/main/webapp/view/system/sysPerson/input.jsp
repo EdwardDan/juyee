@@ -5,26 +5,46 @@
     $(function () {
         //页面验证初始化
         var validateCondition = [
-            {name:"code", rule:"validate[required]"},
-            {name:"name", rule:"validate[required]"},
-            {name:"card", rule:"validate[required]"},
+            {name: "code", rule: "validate[required]"},
+            {name: "name", rule: "validate[required]"},
+            {name: "card", rule: "validate[required]"},
 //            {name:"age", rule:"validate[required,custom[integer],max[5]"},
             //{name:"sex", rule:"validate[required]"},
             //{name:"bornDate", rule:"validate[required]"},
             //{name:"bornPlace", rule:"validate[required]"},
-            {name:"mobile", rule:"validate[required]"},
+            {name: "mobile", rule: "validate[required]"},
             //{name:"officeTel", rule:"validate[required]"},
             //{name:"faxTel", rule:"validate[required]"},
             //{name:"email", rule:"validate[required]"},
             //{name:"zipcode", rule:"validate[required]"},
-            {name:"workYear", rule:"validate[custom[integer],maxSize[2]"},
+            {name: "workYear", rule: "validate[custom[integer],maxSize[2]"},
             //{name:"msnCode", rule:"validate[required]"},
             //{name:"qqCode", rule:"validate[required]"},
             //{name:"memo", rule:"validate[required]"},
-            {name:"orderNo", rule:"validate[custom[integer]]"}
+            {name: "orderNo", rule: "validate[custom[integer]]"}
         ];
         validateInit(validateCondition, formId);
+        verifyGivenDept();
     });
+
+    function verifyGivenDept() {
+        if ("${deptId}" != "" && "${deptName}" != "") {
+            var deptName = $("#deptName").val();
+            if (deptName != "") {
+                $("#deptName").attr("disabled", "true");
+                $("#deptSelBtn").attr("disabled", "disabled");
+            } else {
+                $("#deptName").val("${deptName}");
+                if ($("#sysDeptId").val() == "") {
+                    $("#sysDeptId").val("${deptId}");
+                }
+                if ("${bean.id}" == "") {
+                    $("#deptName").attr("readonly", "readonly");
+                    $("#deptSelBtn").attr("disabled", "disabled");
+                }
+            }
+        }
+    }
 
     //保存操作
     function save(btn) {
@@ -60,7 +80,8 @@
                            readonly="true">
                     <input type="hidden" name="sysDeptId" id="sysDeptId"
                            value="<c:if test="${bean.dept!=null}">${bean.dept.id}</c:if>"/>
-                    <input type="button" value=" " class="button_select" onclick="selectSysDept('sysDeptId','deptName')"
+                    <input type="button" id="deptSelBtn" value=" " class="button_select"
+                           onclick="selectSysDept('sysDeptId','deptName')"
                            title="点击选择所属单位（部门）">
                 </td>
             </tr>

@@ -14,6 +14,7 @@ import com.justonetech.system.daoservice.SysPersonService;
 import com.justonetech.system.domain.SysDept;
 import com.justonetech.system.domain.SysPerson;
 import com.justonetech.system.domain.SysPersonDept;
+import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
 import com.justonetech.system.tree.ZTreeBranch;
 import com.justonetech.system.tree.ZTreeNode;
@@ -35,9 +36,10 @@ import java.util.*;
 
 
 /**
- * author:
- * create date:
- * modify date:
+ * author: Chen Junping
+ * revised : Stanley
+ * create date: 2015-04-16
+ * modify date: 2015-05-08
  */
 @Controller
 public class SysPersonController extends BaseCRUDActionController {
@@ -66,6 +68,20 @@ public class SysPersonController extends BaseCRUDActionController {
         model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.SYS_PERSON_EDIT));
 //        model.addAttribute("canEditPro", sysUserManager.hasPrivilege(PrivilegeCode.JD_PERSON_SUBJECT_EDIT));
         return "view/system/sysPerson/grid";
+    }
+
+    /**
+     * 根据给定单位的列表显示页面
+     *
+     * @param model .
+     */
+    @RequestMapping
+    public String grid2(Model model, Long deptId, String deptName, String originalUrl, String originalLocation) {
+        model.addAttribute("deptId", deptId);
+        model.addAttribute("deptName", deptName);
+        model.addAttribute("originalUrl", originalUrl);
+        model.addAttribute("originalLocation", originalLocation);
+        return grid(model);
     }
 
     /**
@@ -123,6 +139,39 @@ public class SysPersonController extends BaseCRUDActionController {
     }
 
     /**
+     * 根据给定单位获取列表数据
+     *
+     * @param request
+     * @param response
+     * @param filters
+     * @param columns
+     * @param page
+     * @param rows
+     * @param deptId
+     */
+    @RequestMapping
+    public void gridDataCustom2(HttpServletRequest request, HttpServletResponse response, String filters, String columns, int page, int rows, Long deptId) {
+        try {
+            Page pageModel = new Page(page, rows, true);
+            String hql = "select sp from SysPerson sp left join sp.sysPersonDepts spd left join spd.dept dept " +
+                    " where dept.id = " + deptId.longValue() + " order by dept.treeId asc, spd.orderNo asc, sp.name asc ";
+            //增加自定义查询条件
+            //执行查询
+            filters = filters.replaceAll("\"field\":\"(?!dept\\.name)", "\"field\":\"sp.");   //统一添加别名
+            filters = filters.replaceAll("\"orderColumn\":\"company", "\"orderColumn\":\"dept");   //表头排序，单位排序有问题
+            filters = filters.replaceAll("\"orderColumn\":\"(?!dept\\.name|\")", "\"orderColumn\":\"sp.");   //表头排序
+            QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);
+            pageModel = sysPersonService.findByPage(pageModel, queryTranslate.toString());
+            //输出显示
+            String json = GridJq.toJSON(columns, pageModel);
+            sendJSON(response, json);
+        } catch (Exception e) {
+            log.error("error", e);
+            super.processException(response, e);
+        }
+    }
+
+    /**
      * 新增录入页面
      *
      * @param model .
@@ -130,11 +179,20 @@ public class SysPersonController extends BaseCRUDActionController {
     @RequestMapping
     public String add(Model model) {
         SysPerson sysPerson = new SysPerson();
-
-        //如需增加其他默认值请在此添加
         model.addAttribute("bean", sysPerson);
-
         return "view/system/sysPerson/input";
+    }
+
+    /**
+     * 给定某一部门新增录入页面
+     *
+     * @param model .
+     */
+    @RequestMapping
+    public String add2(Model model, Long deptId, String deptName) {
+        model.addAttribute("deptId", deptId);
+        model.addAttribute("deptName", deptName);
+        return add(model);
     }
 
     /**
@@ -147,11 +205,22 @@ public class SysPersonController extends BaseCRUDActionController {
     @RequestMapping
     public String modify(Model model, Long id) {
         SysPerson sysPerson = sysPersonService.get(id);
-
-        //处理其他业务逻辑
         model.addAttribute("bean", sysPerson);
-
         return "view/system/sysPerson/input";
+    }
+
+    /**
+     * 给定某一部门修改显示页面
+     *
+     * @param id    .
+     * @param model .
+     * @return .
+     */
+    @RequestMapping
+    public String modify2(Model model, Long id, Long deptId, String deptName) {
+        model.addAttribute("deptId", deptId);
+        model.addAttribute("deptName", deptName);
+        return modify(model, id);
     }
 
     /**
@@ -163,7 +232,6 @@ public class SysPersonController extends BaseCRUDActionController {
     @RequestMapping
     public String view(Model model, Long id) {
         SysPerson sysPerson = sysPersonService.get(id);
-
         model.addAttribute("bean", sysPerson);
         return "view/system/sysPerson/view";
     }
@@ -203,18 +271,19 @@ public class SysPersonController extends BaseCRUDActionController {
                         "isShowPersonOut",
                         "zipcode"
                 });
-
             } else {
                 target = entity;
             }
+            String sysDeptId = request.getParameter("sysDeptId");
+            target.setCategory(StringHelper.isEmpty(sysDeptId) ? null : sysDeptService.get(Long.valueOf(sysDeptId)).getCategory());
             sysPersonService.save(target);
-
             //所属部门
             Set<SysPersonDept> personDepts = target.getSysPersonDepts();
-            for (SysPersonDept personDept : personDepts) {
-                sysPersonDeptService.delete(personDept);
+            if (personDepts != null) {
+                for (SysPersonDept personDept : personDepts) {
+                    sysPersonDeptService.delete(personDept);
+                }
             }
-            String sysDeptId = request.getParameter("sysDeptId");
             if (!StringHelper.isEmpty(sysDeptId)) {
                 SysPersonDept personDept = new SysPersonDept();
                 personDept.setPerson(target);
@@ -224,7 +293,6 @@ public class SysPersonController extends BaseCRUDActionController {
                 personDept.setPosition(request.getParameter("position"));
                 sysPersonDeptService.save(personDept);
             }
-
         } catch (Exception e) {
             log.error("error", e);
             super.processException(response, e);
@@ -250,9 +318,7 @@ public class SysPersonController extends BaseCRUDActionController {
             for (SysPersonDept personDept : personDepts) {
                 sysPersonDeptService.delete(personDept);
             }
-
             sysPersonService.delete(id);
-
             sendSuccessJSON(response, "删除成功");
         }
     }
@@ -266,7 +332,6 @@ public class SysPersonController extends BaseCRUDActionController {
     public String treeDataForSelect(String type, String id, String icon, Model model) {
         ZTreeBranch treeBranch = new ZTreeBranch();
         treeBranch.setIcons(icon.split(","));
-
         if (StringUtils.isEmpty(id)) {
             treeBranch.addTreeNode(treeBranch.getRootNode("根节点"));
         } else if (StringUtils.equals(id, "root")) {
@@ -331,16 +396,16 @@ public class SysPersonController extends BaseCRUDActionController {
         model.addAttribute("msg", s);
         return "common/msg";
     }
+
     /**
      * 司机选择树
      *
      * @param model 。
      */
     @RequestMapping
-    public String treeDataForSelectDriver(String type, String id, String icon, Model model){
+    public String treeDataForSelectDriver(String type, String id, String icon, Model model) {
         ZTreeBranch treeBranch = new ZTreeBranch();
         treeBranch.setIcons(icon.split(","));
-
         if (StringUtils.isEmpty(id)) {
             treeBranch.addTreeNode(treeBranch.getRootNode("根节点"));
         } else if (StringUtils.equals(id, "root")) {
@@ -389,8 +454,8 @@ public class SysPersonController extends BaseCRUDActionController {
             }
 
             //人员
-            String position="司机";
-            List<SysPersonDept> personDeptList = sysPersonDeptService.findByQuery("from SysPersonDept where dept.id=" + id + " and position='" + position +"'order by orderNo,person.name asc");
+            String position = "司机";
+            List<SysPersonDept> personDeptList = sysPersonDeptService.findByQuery("from SysPersonDept where dept.id=" + id + " and position='" + position + "'order by orderNo,person.name asc");
             for (SysPersonDept personDept : personDeptList) {
                 SysPerson person = personDept.getPerson();
                 ZTreeNode treeNode = new ZTreeNode();
@@ -413,7 +478,7 @@ public class SysPersonController extends BaseCRUDActionController {
      * @param personId 。
      */
     @RequestMapping
-    public String getPersonInfo(Model model, Long personId){
+    public String getPersonInfo(Model model, Long personId) {
         SysPerson sysPerson = sysPersonService.get(personId);
         SysDept sysDept = sysPerson.getDept();  //根据personId获取单位信息
         String personName = sysPerson.getName(); //人员姓名
@@ -421,15 +486,12 @@ public class SysPersonController extends BaseCRUDActionController {
         String deptId = JspHelper.getString(sysDept.getId());  //单位id
         String deptName = sysDept.getName(); //单位名称
         Map<String, String> map = new HashMap<String, String>();
-        map.put("personName",personName);
-        map.put("personMobile",personMobile);
-        map.put("deptId",deptId);
-        map.put("deptName",deptName);
-
+        map.put("personName", personName);
+        map.put("personMobile", personMobile);
+        map.put("deptId", deptId);
+        map.put("deptName", deptName);
         String string = JSONObject.fromObject(map).toString();
         model.addAttribute("msg", string);
-
         return "common/msg";
-
     }
 }

@@ -78,6 +78,7 @@ public class ProjRelateDeptController extends BaseCRUDActionController<ProjRelat
 
     /**
      * 项目建设单位承担项目列表显示页面
+     *
      * @param model
      * @param deptId
      * @return
@@ -102,7 +103,7 @@ public class ProjRelateDeptController extends BaseCRUDActionController<ProjRelat
     public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session) {
         try {
             Page pageModel = new Page(page, rows, true);
-            String sql = "select sd.id, scd.name as depttype, sd.name, sd.manager, sd.tel, sd.fax, '' as prjCharged from sys_dept sd left join sys_code_detail scd " +
+            String sql = "select sd.id, scd.name as depttype, sd.name, sd.manager, sd.tel, sd.fax, '' as prjCharged, '' as deptPersons from sys_dept sd left join sys_code_detail scd " +
                     "on sd.category_id = scd.id order by sd.name asc ";
             //增加自定义查询条件
             //执行查询
@@ -181,12 +182,13 @@ public class ProjRelateDeptController extends BaseCRUDActionController<ProjRelat
         SysDept sd = new SysDept();
         if (parentId != null) {
             sd.setParent(sysDeptService.get(parentId));
-        } else {
+        } /*else {
             sd.setParent(sysDeptService.findUniqueByProperty("code", "CJDW"));
-        }
+        }*/
         sd.setCategory(sysCodeManager.getCodeDetailByCode(Constants.SYS_DEPT_CATAGORY, Constants.CONSTRUCTION_UNIT));
         sd.setIsTag(true);
         model.addAttribute("bean", sd);
+        model.addAttribute("category", Constants.SYS_DEPT_CATAGORY);
         return "view/project/projRelateDept/input";
     }
 
@@ -217,6 +219,7 @@ public class ProjRelateDeptController extends BaseCRUDActionController<ProjRelat
             sd.setCategory(sysCodeManager.getCodeDetailByCode(Constants.SYS_DEPT_CATAGORY, Constants.CONSTRUCTION_UNIT));
         }
         model.addAttribute("bean", sd);
+        model.addAttribute("category", Constants.SYS_DEPT_CATAGORY);
         return "view/project/projRelateDept/input";
     }
 
@@ -242,7 +245,7 @@ public class ProjRelateDeptController extends BaseCRUDActionController<ProjRelat
      */
     @SuppressWarnings("unchecked")
     @RequestMapping
-    public void save(HttpServletResponse response, @ModelAttribute("bean") SysDept entity, HttpServletRequest request) throws Exception {
+    public void save(HttpServletResponse response, @ModelAttribute("bean") SysDept entity, HttpServletRequest request, Long categoryId) throws Exception {
         try {
             SysDept target;
             if (entity.getId() != null) {
@@ -262,6 +265,7 @@ public class ProjRelateDeptController extends BaseCRUDActionController<ProjRelat
             } else {
                 target = entity;
             }
+            target.setCategory(sysCodeManager.getCodeListById(categoryId));
             target.setIsValid(true);
             sysDeptService.save(target);
         } catch (Exception e) {
@@ -274,6 +278,7 @@ public class ProjRelateDeptController extends BaseCRUDActionController<ProjRelat
 
     /**
      * 保存建设单位关联项目操作
+     *
      * @param response
      * @param deptId
      * @param projectIds
@@ -288,6 +293,7 @@ public class ProjRelateDeptController extends BaseCRUDActionController<ProjRelat
         if (StringHelper.isEmpty(projectIds)) {
             sendFailureJSON(response, "您未添加新的承担项目！");
         } else {
+            boolean hasNewPrjDeptAddded = false;
             String originalPrjIds = "";
             String[] prjIds = projectIds.split(",");
             try {
@@ -302,9 +308,14 @@ public class ProjRelateDeptController extends BaseCRUDActionController<ProjRelat
                         nprd.setDept(sysDeptService.get(deptId));
                         nprd.setProject(projInfoService.get(Long.parseLong(prjId)));
                         projRelateDeptService.save(nprd);
+                        hasNewPrjDeptAddded = true;
                     }
                 }
-                sendSuccessJSON(response, "添加新承担项目成功！");
+                if (hasNewPrjDeptAddded) {
+                    sendSuccessJSON(response, "添加新承担项目成功！");
+                } else {
+                    sendSuccessJSON(response, "添加重复承担项目！");
+                }
             } catch (Exception e) {
                 log.error("很抱歉，添加新承担项目时发生错误！", e);
                 super.processException(response, e);
@@ -359,6 +370,7 @@ public class ProjRelateDeptController extends BaseCRUDActionController<ProjRelat
 
     /**
      * 企业承担项目选择树
+     *
      * @param type
      * @param id
      * @param icon
@@ -386,7 +398,7 @@ public class ProjRelateDeptController extends BaseCRUDActionController<ProjRelat
                 treeBranch.addTreeNode(propNode);
             }
         } else if (StringUtils.equals(type, "prjProperty") || StringUtils.equals(type, "prjYear")) {
-            // 项目年份： e.g. 2015
+            // 项目年份： e.g. 2015  或者  项目名称 e.g. xxxprj
             List<ProjInfo> grpYearPrjs = new ArrayList<ProjInfo>();
             if (StringUtils.equals(type, "prjProperty")) {
                 grpYearPrjs = projInfoService.findByQuery("from ProjInfo where property.id = " + id + " order by year asc ");
