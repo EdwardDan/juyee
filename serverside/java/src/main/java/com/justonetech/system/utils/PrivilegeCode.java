@@ -64,6 +64,7 @@ public class PrivilegeCode {
     public static final String PROJ_STAGE_EDIT = ProjStage.class.getSimpleName() + "_edit";//项目办证阶段管理_编辑
     public static final String PROJ_NODE_EDIT = ProjNode.class.getSimpleName() + "_edit";//形象进度节点管理_编辑
     public static final String PROJ_RELATE_DEPT_EDIT = ProjRelateDept.class.getSimpleName() + "_edit";//建设单位管理_编辑
+    public static final String PROJ_RELATE_PERSON_EDIT = ProjRelatePerson.class.getSimpleName() + "_edit";//建设单位人员管理_编辑
     public static final String PROJ_BID_STAGE_EDIT = ProjBid.class.getSimpleName()+"Stage_edit";//办证推进标段_编辑
     public static final String PROJ_BID_NODE_EDIT = ProjBid.class.getSimpleName()+"Node_edit";//形象进度标段_编辑
 
