@@ -13,15 +13,15 @@
                 isOpenRoot:true, //是否打开根节点
                 clickOpts:{
                     "root":CONTEXT_NAME + "/projNode/grid.do",
-                    "data":["查看样例", CONTEXT_NAME + "/projNode/view.do?id={id}"]
+                    "data":["查看项目形象进度节点", CONTEXT_NAME + "/projNode/view.do?id={id}"]
                 },
                 rightMenuOpts:function (treeNode, zTree) {
                     var menu = [];
                     if (canEdit) {
-                        menu.push(["添加", ["添加样例", CONTEXT_NAME + "/projNode/add.do?parentId={id}"]]);
+                        menu.push(["添加", ["添加项目形象进度节点", CONTEXT_NAME + "/projNode/add.do?parentId={id}"]]);
 
                         if (treeNode.id != 'root') {
-                            menu.push(["修改", ["修改样例", CONTEXT_NAME + "/projNode/modify.do?id={id}"]]);
+                            menu.push(["修改", ["修改项目形象进度节点", CONTEXT_NAME + "/projNode/modify.do?id={id}"]]);
                             menu.push([]);
                             menu.push(["删除", CONTEXT_NAME + "/projNode/delete.do?id={id}", true]);
                             menu.push([]);

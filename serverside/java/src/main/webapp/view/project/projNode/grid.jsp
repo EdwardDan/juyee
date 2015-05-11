@@ -34,10 +34,10 @@
                     for (var i = 0; i < ids.length; i++) {
                         var id = ids[i];
                         var opButton = '<input type="button" value="查看" onclick="doView(' + id + ')" class="button_normal"/> ';
-                    <c:if test="${canEdit}">
-                        opButton += '<input type="button" value="编辑" onclick="doEdit(' + id + ')" class="button_normal"/> ';
-                        opButton += '<input type="button" value="删除" onclick="doDelete(' + id + ')" class="button_normal"/>';
-                    </c:if>
+                    <%--<c:if test="${canEdit}">--%>
+                        <%--opButton += '<input type="button" value="编辑" onclick="doEdit(' + id + ')" class="button_normal"/> ';--%>
+                        <%--opButton += '<input type="button" value="删除" onclick="doDelete(' + id + ')" class="button_normal"/>';--%>
+                    <%--</c:if>--%>
                         jQuery("#listGrid").jqGrid('setRowData', ids[i], { operation:opButton});
                     }
                 }, rownumbers:true
