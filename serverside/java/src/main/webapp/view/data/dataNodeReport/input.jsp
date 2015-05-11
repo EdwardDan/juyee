@@ -1,17 +1,18 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/common/taglibs.jsp" %>
 <script type="text/javascript">
-    var formId = "bean";    
+    var formId = "bean";
+    var last_m = "";
     $(function () {
         //页面验证初始化
         var validateCondition = [
-                                                                        //{name:"year", rule:"validate[required,custom[integer],maxSize[4]"},            
-                                                                                                      //{name:"month", rule:"validate[required,custom[integer],maxSize[2]"},            
-                                                                                                      //{name:"createTime", rule:"validate[required,maxSize[7]]"},            
-                                                                                                      //{name:"createUser", rule:"validate[required,maxSize[100]]"},            
-                                                                                                      //{name:"updateTime", rule:"validate[required,maxSize[7]]"},            
-                                                                                                      //{name:"updateUser", rule:"validate[required,maxSize[100]]"},            
-                                                  ];
+            //{name:"year", rule:"validate[required,custom[integer],maxSize[4]"},
+            //{name:"month", rule:"validate[required,custom[integer],maxSize[2]"},
+            //{name:"createTime", rule:"validate[required,maxSize[7]]"},
+            //{name:"createUser", rule:"validate[required,maxSize[100]]"},
+            //{name:"updateTime", rule:"validate[required,maxSize[7]]"},
+            //{name:"updateUser", rule:"validate[required,maxSize[100]]"},
+        ];
         validateInit(validateCondition, formId);
     });
 
@@ -21,71 +22,86 @@
             return;
         }
 
-        //加入其他业务判断
-//        if ($('#name').val() == '') {
-//            showInfoMsg('请输入姓名！',null);
-//            return;
-//        }
-
         //提交表单
-        saveAjaxData("${ctx}/dataNodeReport/save.do", formId);
+        saveAjaxData("${ctx}/dataNodeReport/save.do?month="+last_m, formId);
     }
+
+    function loadMonthReport(month) {
+        if (last_m != month) {
+            if (last_m != "") {
+                $("#td" + last_m).attr("class", "td_normal");
+            }
+            $("#td" + month).attr("class", "td_active");
+            last_m = month;
+        }
+      var bidId=$("#projBid").val();
+        loadAjaxData("monthReportDiv", "${ctx}/dataNodeReport/nodeDataItem.do?id=${id}&month=" + month+"&bidId="+bidId);
+    }
+    $(function () {
+        loadMonthReport("${currentMonth}");
+    });
 </script>
+<style type="text/css">
+    .td_normal{
+        height: 20px;
+        background-color: white;
+    }
+    .td_active{
+        height: 20px;
+        background-color: #0074cc;
+        font-weight: bold;
+    }
+</style>
+<div class="form_div">
 <form:form commandName="bean">
     <form:hidden path="id"/>
-
-    <div class="form_div">
+    <input type="hidden" name="projectId" value="${projInfo.id}">
         <table cellpadding="0" cellspacing="0" class="form_table">
-                                    <tr class="tr_light">
-              <td class="form_label">年份：</td>
-              <td class="form_content">
-                        <form:input path="year" cssClass="input_text"/>						
-                          </td>                                
+            <tr class="tr_light">
+                <td class="form_label_right" width="20%">项目名称：</td>
+                <td class="form_content" width="80%">
+                    ${projInfo.name}
+                </td>
             </tr>
-                                                <tr class="tr_dark">
-              <td class="form_label">月份：</td>
-              <td class="form_content">
-                        <form:input path="month" cssClass="input_text"/>						
-                          </td>                                
-            </tr>
-                                    <tr class="tr_light">
-              <td class="form_label">创建时间：</td>
-              <td class="form_content">
-                                <input type="text" name="createTime" id="createTime" class="input_datetime"
-                           value="<fmt:formatDate value="${bean.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/>" readonly="true"/>
-                    <input type="button" class="button_calendar" value=" " onClick="calendar('createTime','all')">                                                        
-            
-                          </td>                                
-            </tr>
-                                                <tr class="tr_dark">
-              <td class="form_label">创建用户名：</td>
-              <td class="form_content">
-                        <form:input path="createUser" cssClass="input_text"/>						
-                          </td>                                
-            </tr>
-                                    <tr class="tr_light">
-              <td class="form_label">更新时间：</td>
-              <td class="form_content">
-                                <input type="text" name="updateTime" id="updateTime" class="input_datetime"
-                           value="<fmt:formatDate value="${bean.updateTime}" pattern="yyyy-MM-dd HH:mm:ss"/>" readonly="true"/>
-                    <input type="button" class="button_calendar" value=" " onClick="calendar('updateTime','all')">                                                        
-            
-                          </td>                                
-            </tr>
-                                                <tr class="tr_dark">
-              <td class="form_label">更新用户名：</td>
-              <td class="form_content">
-                        <form:input path="updateUser" cssClass="input_text"/>						
-                          </td>                                
-            </tr>
-                                     
-            <tr class="tr_button">
-                <td class="form_label"></td>
+            <tr class="tr_light">
+                <td class="form_label_right">建设单位：</td>
                 <td class="form_content">
+                        ${projInfo.jsDept}
+                </td>
+            </tr>
+            <tr class="tr_light">
+                <td class="form_label_right">选择标段：</td>
+                <td class="form_content">
+                    <select name="projBid" id="projBid" class="form_select_long" onchange="loadMonthReport('${currentMonth}')">
+                        <c:forEach items="${projBids}"  var="item">
+                            <option value="${item.id}">${item.name}</option>
+                        </c:forEach>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">&nbsp;上报月份：</td>
+                <td align="left">
+                    <table cellpadding="0" cellspacing="0" border="1" class="table_thin_line" width="500">
+                        <tr align="center">
+                            <c:forEach var="m" begin="1" end="12" step="1">
+                                <td width="8%" id="td${m}" onclick="loadMonthReport('${m}')" <c:choose><c:when test="${currentMonth==m}">class="td_active"</c:when><c:otherwise>class="td_normal" style="cursor: pointer" title="查看当月数据"</c:otherwise></c:choose>>${m}月</td>
+                            </c:forEach>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" id="monthReportDiv" align="center">
+                    &nbsp;
+                </td>
+            </tr>
+            <tr class="tr_button">
+                <td align="center"  colspan="2">
                     <input type="button" value="确定" class="button_confirm" onclick="save(this)">&nbsp;
                     <input type="button" value="取消" class="button_cancel" onclick="closeWindow()">
                 </td>
             </tr>
         </table>
-    </div>
 </form:form>
+</div>

@@ -2,16 +2,13 @@ package com.justonetech.biz.controller.data;
 
 import com.justonetech.biz.core.orm.hibernate.GridJq;
 import com.justonetech.biz.core.orm.hibernate.QueryTranslateJq;
-import com.justonetech.biz.daoservice.DataNodeReportService;
-import com.justonetech.biz.daoservice.DocDocumentService;
-import com.justonetech.biz.domain.DataNodeReport;
-import com.justonetech.biz.manager.ConfigManager;
-import com.justonetech.biz.manager.DocumentManager;
+import com.justonetech.biz.daoservice.*;
+import com.justonetech.biz.domain.*;
 import com.justonetech.biz.utils.Constants;
+import com.justonetech.biz.utils.enums.ProjBidType;
 import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.orm.hibernate.Page;
-import com.justonetech.core.utils.ReflectionUtils;
-import com.justonetech.system.manager.SimpleQueryManager;
+import com.justonetech.system.domain.SysCodeDetail;
 import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
 import com.justonetech.system.utils.PrivilegeCode;
@@ -26,40 +23,41 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.*;
 
 
 /**
  * note:形象进度推进填报
- * author: system
+ * author: hgr
  * create date:
- * modify date:
+ * modify date:2015-05-11
  */
 @Controller
 public class DataNodeReportController extends BaseCRUDActionController<DataNodeReport> {
     private Logger logger = LoggerFactory.getLogger(DataNodeReportController.class);
-    
+
     @Autowired
     private SysUserManager sysUserManager;
-    
+
     @Autowired
     private SysCodeManager sysCodeManager;
 
     @Autowired
-    private ConfigManager configManager;
-    
+    private ProjBidService projBidService;
+
     @Autowired
-    private DocumentManager documentManager;
-    
+    private ProjNodeService projNodeService;
+
     @Autowired
-    private SimpleQueryManager simpleQueryManager;
-    
-    @Autowired
-    private DocDocumentService docDocumentService;
+    private DataNodeReportItemService dataNodeReportItemService;
 
     @Autowired
     private DataNodeReportService dataNodeReportService;
 
-   /**
+    @Autowired
+    private ProjInfoService projInfoService;
+
+    /**
      * 列表显示页面
      *
      * @param model .
@@ -67,33 +65,33 @@ public class DataNodeReportController extends BaseCRUDActionController<DataNodeR
      */
     @RequestMapping
     public String grid(Model model) {
-      //判断是否有编辑权限
-      model.addAttribute("canEdit",sysUserManager.hasPrivilege(PrivilegeCode.SYS_SAMPLE_EDIT));
-            
-      return "view/data/dataNodeReport/grid";
+        //判断是否有编辑权限
+        model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.DATA_NODE_REPORT_EDIT));
+        model.addAttribute("TYPE_NODE", ProjBidType.TYPE_NODE.getCode());
+        return "view/data/dataNodeReport/grid";
     }
-    
+
     /**
      * 获取列表数据
      *
      * @param response .
-     * @param filters .
-     * @param columns .
-     * @param page .
-     * @param rows .
+     * @param filters  .
+     * @param columns  .
+     * @param page     .
+     * @param rows     .
      */
     @RequestMapping
     public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session) {
         try {
             Page pageModel = new Page(page, rows, true);
-            String hql = "from DataNodeReport order by id desc";
+            String hql = "from ProjInfo order by id desc";
             //增加自定义查询条件
 
             //执行查询
             QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);
             String query = queryTranslate.toString();
             session.setAttribute(Constants.GRID_SQL_KEY, query);
-            pageModel = dataNodeReportService.findByPage(pageModel, query);            
+            pageModel = projInfoService.findByPage(pageModel, query);
 
             //输出显示
             String json = GridJq.toJSON(columns, pageModel);
@@ -104,7 +102,7 @@ public class DataNodeReportController extends BaseCRUDActionController<DataNodeR
             super.processException(response, e);
         }
     }
-    
+
     /**
      * 新增录入页面
      *
@@ -120,24 +118,93 @@ public class DataNodeReportController extends BaseCRUDActionController<DataNodeR
 
         return "view/data/dataNodeReport/input";
     }
-    
+
     /**
      * 修改显示页面
      *
-     * @param id    .
+     * @param projectId .
+     * @param model     .
+     * @return .
+     */
+    @RequestMapping
+    public String modify(Model model, Long projectId) {
+        Calendar c = Calendar.getInstance();
+
+        ProjInfo projInfo = projInfoService.get(projectId);
+        List<DataNodeReport> dataNodeReportList = dataNodeReportService.findByProperty("project.id", projectId);
+        List<ProjBid> projBids = projBidService.findByQuery(" from ProjBid where project.id=" + projectId + " and  typeCode='" + ProjBidType.TYPE_NODE.getCode() + "'");
+        DataNodeReport dataNodeReport = new DataNodeReport();
+        if (dataNodeReportList.size() > 0) {
+            dataNodeReport = dataNodeReportList.iterator().next();
+        }
+        //处理其他业务逻辑
+        model.addAttribute("currentMonth", c.get(Calendar.MONTH) + 1);
+        model.addAttribute("projInfo", projInfo);
+        model.addAttribute("projBids", projBids);
+        model.addAttribute("bean", dataNodeReport);
+        model.addAttribute("id", projInfo.getId());
+        return "view/data/dataNodeReport/input";
+    }
+
+    /**
+     * 查看形象进度信息
+     *
      * @param model .
      * @return .
      */
     @RequestMapping
-    public String modify(Model model, Long id) {
-        DataNodeReport dataNodeReport = dataNodeReportService.get(id);
+    public String nodeDataItem(Model model, Long id, int month, Long bidId) {
+        //办证阶段
+        List<ProjNode> firstNodes = new ArrayList<ProjNode>();
+        List<ProjNode> secondNodes = new ArrayList<ProjNode>();
+        List<ProjNode> thirdNodes = new ArrayList<ProjNode>();
+        List<ProjNode> leafNodes = new ArrayList<ProjNode>();
+        List<ProjNode> projNodes = projNodeService.findByQuery("from ProjNode where isValid=1 order by treeId asc");
+        for (ProjNode stage : projNodes) {
+            String treeId = stage.getTreeId();
+            if (stage.getParent() == null) {
+                firstNodes.add(stage);
+            } else if (treeId.split("\\.").length == 2) {
+                secondNodes.add(stage);
+            } else {
+                thirdNodes.add(stage);
+            }
+            if (stage.getIsLeaf()) {
+                leafNodes.add(stage);
+            }
+        }
+        model.addAttribute("firstNodes", firstNodes);
+        model.addAttribute("secondNodes", secondNodes);
+        model.addAttribute("thirdNodes", thirdNodes);
+        model.addAttribute("leafNodes", leafNodes);
 
-        //处理其他业务逻辑
-        model.addAttribute("bean", dataNodeReport);
-        
-        return "view/data/dataNodeReport/input";
+        //审核步骤
+        List<SysCodeDetail> steps = sysCodeManager.getCodeListByCode(Constants.DATA_REPORT_STEP);
+        model.addAttribute("steps", steps);
+        if (id != null && !id.equals("")) {
+            //标段列表
+            ProjInfo projInfo = projInfoService.get(id);
+            Set<ProjBid> bids = projInfo.getProjBids();
+            if (bidId == null && bids.size() > 0) {
+                bidId = bids.iterator().next().getId();
+            }
+
+            //填报数据
+            Map<String, Object> dataMap = new HashMap<String, Object>();
+            String hql = "from DataNodeReportItem where nodeReport.project.id=? and nodeReport.year=? and nodeReport.month=?  and nodeReport.bid.id=? order by id asc";
+            List<DataNodeReportItem> dataNodeReportItems = dataNodeReportItemService.findByQuery(hql, id, projInfo.getYear(), month, bidId);
+            for (DataNodeReportItem item : dataNodeReportItems) {
+                Map<String, Object> map = new HashMap<String, Object>();
+                map.put("content", item.getContent());
+                map.put("problem", item.getProblem());
+                dataMap.put(item.getNode().getId() + "_" + item.getStep().getId(), map);
+            }
+            model.addAttribute("dataMap", dataMap);
+        }
+
+        return "view/data/dataNodeReport/nodeDataItem";
     }
-    
+
     /**
      * 查看页面
      *
@@ -148,11 +215,11 @@ public class DataNodeReportController extends BaseCRUDActionController<DataNodeR
     @RequestMapping
     public String view(Model model, Long id) {
         DataNodeReport dataNodeReport = dataNodeReportService.get(id);
-        
-        model.addAttribute("bean", dataNodeReport);        
+
+        model.addAttribute("bean", dataNodeReport);
         return "view/data/dataNodeReport/view";
     }
-    
+
     /**
      * 保存操作
      *
@@ -165,23 +232,63 @@ public class DataNodeReportController extends BaseCRUDActionController<DataNodeR
     @RequestMapping
     public void save(HttpServletResponse response, @ModelAttribute("bean") DataNodeReport entity, HttpServletRequest request) throws Exception {
         try {
-            DataNodeReport target;
+            String month = request.getParameter("month");
+            DataNodeReport target = new DataNodeReport();
             if (entity.getId() != null) {
-                target = dataNodeReportService.get(entity.getId());
-                ReflectionUtils.copyBean(entity, target, new String[]{
-                                                "year",                                      
-                                                                "month",                                      
-                                                                "createTime",                                      
-                                                                "createUser",                                      
-                                                                "updateTime",                                      
-                                                                "updateUser"                                      
-                                                });
-
-            } else {
-                target = entity;
+                DataNodeReport dataNodeReport = dataNodeReportService.get(entity.getId());
+                if (dataNodeReport.getMonth() == Integer.valueOf(month)) {
+                    target = dataNodeReport;
+                }
+            }
+            if (month != null && !month.equals("")) {
+                target.setMonth(Integer.valueOf(month));
+            }
+            String projectId = request.getParameter("projectId");
+            String projBidId = request.getParameter("projBid");
+            if (projectId != null && !projectId.equals("")) {
+                ProjInfo projInfo = projInfoService.get(Long.valueOf(projectId));
+                target.setProject(projInfo);
+                target.setYear(projInfo.getYear());
+            }
+            if (projBidId != null && !projBidId.equals("")) {
+                ProjBid projBid = projBidService.get(Long.valueOf(projBidId));
+                target.setBid(projBid);
             }
             dataNodeReportService.save(target);
+            //保存之前先删除旧数据
+            if (target.getProject() != null && target.getBid() != null) {
+                String hql = "from DataNodeReportItem where nodeReport.project.id=? and nodeReport.year=? and nodeReport.month=?  and nodeReport.bid.id=? order by id asc";
+                List<DataNodeReportItem> dataNodeReportItems = dataNodeReportItemService.findByQuery(hql, target.getProject().getId(), target.getProject().getYear(), Integer.valueOf(month), target.getBid().getId());
+                for (DataNodeReportItem dataNodeReportItem : dataNodeReportItems) {
+                    dataNodeReportItemService.delete(dataNodeReportItem);
+                }
+            }
 
+            //保存填报明细
+            Set<DataNodeReportItem> dataItems = new HashSet<DataNodeReportItem>();
+            List<ProjNode> leafNodes = projNodeService.findByQuery("from ProjNode where isValid=1 and isLeaf=1  order by treeId asc");
+            //审核步骤
+            List<SysCodeDetail> steps = sysCodeManager.getCodeListByCode(Constants.DATA_REPORT_STEP);
+            for (ProjNode leafNode : leafNodes) {
+                for (SysCodeDetail step : steps) {
+                    String content = request.getParameter("" + leafNode.getId() + "_" + step.getId() + "");
+                    if (content != null && !content.equals("")) {
+                        DataNodeReportItem dataItem = new DataNodeReportItem();
+                        String problem = request.getParameter(leafNode.getId() + "_" + step.getId() + "_problem");
+                        if (problem != null && !problem.equals("")) {
+                            dataItem.setProblem(problem);
+                        }
+                        dataItem.setContent(content);
+                        dataItem.setNode(leafNode);
+                        dataItem.setStep(step);
+                        dataItem.setNodeReport(target);
+                        dataNodeReportItemService.save(dataItem);
+                        dataItems.add(dataItem);
+                    }
+                }
+            }
+            target.setDataNodeReportItems(dataItems);
+            dataNodeReportService.save(target);
         } catch (Exception e) {
             log.error("error", e);
             super.processException(response, e);
@@ -189,13 +296,13 @@ public class DataNodeReportController extends BaseCRUDActionController<DataNodeR
         }
         sendSuccessJSON(response, "保存成功");
     }
-    
+
     /**
      * 删除操作
      *
      * @param response .
-     * @param id  .
-     * @throws Exception  .
+     * @param id       .
+     * @throws Exception .
      */
     @RequestMapping
     public void delete(HttpServletResponse response, Long id) throws Exception {
