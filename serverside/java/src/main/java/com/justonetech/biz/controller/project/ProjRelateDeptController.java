@@ -329,8 +329,6 @@ public class ProjRelateDeptController extends BaseCRUDActionController<ProjRelat
                 }
                 if (hasNewPrjDeptAddded) {
                     sendSuccessJSON(response, "添加新承担项目成功！");
-                } else {
-                    sendSuccessJSON(response, "添加重复承担项目！");
                 }
             } catch (Exception e) {
                 log.error("很抱歉，添加新承担项目时发生错误！", e);

@@ -14,10 +14,12 @@ import com.justonetech.system.daoservice.SysPersonService;
 import com.justonetech.system.domain.SysDept;
 import com.justonetech.system.domain.SysPerson;
 import com.justonetech.system.domain.SysPersonDept;
+import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
 import com.justonetech.system.tree.ZTreeBranch;
 import com.justonetech.system.tree.ZTreeNode;
 import com.justonetech.system.utils.PrivilegeCode;
+import com.sun.tools.jxc.ap.Const;
 import net.sf.json.JSONObject;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -55,6 +57,9 @@ public class SysPersonController extends BaseCRUDActionController {
 
     @Autowired
     private SysDeptService sysDeptService;
+
+    @Autowired
+    private SysCodeManager sysCodeManager;
 
     /**
      * 列表显示页面
@@ -100,7 +105,7 @@ public class SysPersonController extends BaseCRUDActionController {
                     " from SysPerson sp left join sp.sysPersonDepts spd " +
                     " left join spd.dept dept ";
             //增加自定义查询条件
-
+            String extFilter = " dept.category.id = " + sysCodeManager.getCodeDetailByCode(Constants.SYS_DEPT_CATAGORY, Constants.OWNER_UNIT).getId();
             String unitName = request.getParameter("unitName");
             if (StringUtils.isNotEmpty(unitName)) {
                 List<SysDept> sysDepts = sysDeptService.findByQuery("from SysDept where name like '%" + unitName + "%' and isTag=" + Constants.FLAG_TRUE);
@@ -113,8 +118,11 @@ public class SysPersonController extends BaseCRUDActionController {
                     unitHql += StringUtils.join(likeHqls, " or ") + "))";
                     hql += " where dept.id in " + unitHql;
                 } else {
-                    hql += " where 1=2";
+                    hql += " where 1 = 2 ";
                 }
+                hql += " and " + extFilter;
+            } else {
+                hql = hql.concat("where " + extFilter);
             }
             hql += " order by dept.treeId asc,spd.orderNo asc,sp.name asc";
 

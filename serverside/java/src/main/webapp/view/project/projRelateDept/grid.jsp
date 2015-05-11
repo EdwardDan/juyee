@@ -78,7 +78,7 @@
 
     <c:if test="${canEdit}">
     function doAdd() {
-        openWindow("综合资源单位维护", "${ctx}/projRelateDept/add.do", true);
+        openWindow("添加项目建设单位", "${ctx}/projRelateDept/add.do", true);
     }
 
     function doEdit(id) {
