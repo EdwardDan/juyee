@@ -132,7 +132,7 @@ public class DataNodeReportController extends BaseCRUDActionController<DataNodeR
 
         ProjInfo projInfo = projInfoService.get(projectId);
         List<DataNodeReport> dataNodeReportList = dataNodeReportService.findByProperty("project.id", projectId);
-        List<ProjBid> projBids = projBidService.findByQuery(" from ProjBid where project.id=" + projectId + " and  typeCode='" + ProjBidType.TYPE_NODE.getCode() + "'");
+        List<ProjBid> projBids = getBids(projectId);
         DataNodeReport dataNodeReport = new DataNodeReport();
         if (dataNodeReportList.size() > 0) {
             dataNodeReport = dataNodeReportList.iterator().next();
@@ -147,7 +147,7 @@ public class DataNodeReportController extends BaseCRUDActionController<DataNodeR
     }
 
     /**
-     * 查看形象进度信息
+     * 形象进度填报详情
      *
      * @param model .
      * @return .
@@ -155,44 +155,21 @@ public class DataNodeReportController extends BaseCRUDActionController<DataNodeR
     @RequestMapping
     public String nodeDataItem(Model model, Long id, int month, Long bidId) {
         //办证阶段
-        List<ProjNode> firstNodes = new ArrayList<ProjNode>();
-        List<ProjNode> secondNodes = new ArrayList<ProjNode>();
-        List<ProjNode> thirdNodes = new ArrayList<ProjNode>();
-        List<ProjNode> leafNodes = new ArrayList<ProjNode>();
-        List<ProjNode> projNodes = projNodeService.findByQuery("from ProjNode where isValid=1 order by treeId asc");
-        for (ProjNode stage : projNodes) {
-            String treeId = stage.getTreeId();
-            if (stage.getParent() == null) {
-                firstNodes.add(stage);
-            } else if (treeId.split("\\.").length == 2) {
-                secondNodes.add(stage);
-            } else {
-                thirdNodes.add(stage);
-            }
-            if (stage.getIsLeaf()) {
-                leafNodes.add(stage);
-            }
-        }
+        List<ProjNode> firstNodes = projNodeService.findByQuery("from ProjNode where isValid=1 and parent.id is null order by treeId asc");
         model.addAttribute("firstNodes", firstNodes);
-        model.addAttribute("secondNodes", secondNodes);
-        model.addAttribute("thirdNodes", thirdNodes);
-        model.addAttribute("leafNodes", leafNodes);
-
         //审核步骤
         List<SysCodeDetail> steps = sysCodeManager.getCodeListByCode(Constants.DATA_REPORT_STEP);
         model.addAttribute("steps", steps);
         if (id != null && !id.equals("")) {
             //标段列表
             ProjInfo projInfo = projInfoService.get(id);
-            Set<ProjBid> bids = projInfo.getProjBids();
+            List<ProjBid> bids = getBids(id);
             if (bidId == null && bids.size() > 0) {
                 bidId = bids.iterator().next().getId();
             }
-
             //填报数据
             Map<String, Object> dataMap = new HashMap<String, Object>();
-            String hql = "from DataNodeReportItem where nodeReport.project.id=? and nodeReport.year=? and nodeReport.month=?  and nodeReport.bid.id=? order by id asc";
-            List<DataNodeReportItem> dataNodeReportItems = dataNodeReportItemService.findByQuery(hql, id, projInfo.getYear(), month, bidId);
+            List<DataNodeReportItem> dataNodeReportItems = findDataItems(id, projInfo.getYear(), month, bidId);
             for (DataNodeReportItem item : dataNodeReportItems) {
                 Map<String, Object> map = new HashMap<String, Object>();
                 map.put("content", item.getContent());
@@ -257,8 +234,7 @@ public class DataNodeReportController extends BaseCRUDActionController<DataNodeR
             dataNodeReportService.save(target);
             //保存之前先删除旧数据
             if (target.getProject() != null && target.getBid() != null) {
-                String hql = "from DataNodeReportItem where nodeReport.project.id=? and nodeReport.year=? and nodeReport.month=?  and nodeReport.bid.id=? order by id asc";
-                List<DataNodeReportItem> dataNodeReportItems = dataNodeReportItemService.findByQuery(hql, target.getProject().getId(), target.getProject().getYear(), Integer.valueOf(month), target.getBid().getId());
+                List<DataNodeReportItem> dataNodeReportItems = findDataItems(target.getProject().getId(), target.getProject().getYear(), Integer.valueOf(month), target.getBid().getId());
                 for (DataNodeReportItem dataNodeReportItem : dataNodeReportItems) {
                     dataNodeReportItemService.delete(dataNodeReportItem);
                 }
@@ -271,7 +247,7 @@ public class DataNodeReportController extends BaseCRUDActionController<DataNodeR
             List<SysCodeDetail> steps = sysCodeManager.getCodeListByCode(Constants.DATA_REPORT_STEP);
             for (ProjNode leafNode : leafNodes) {
                 for (SysCodeDetail step : steps) {
-                    String content = request.getParameter("" + leafNode.getId() + "_" + step.getId() + "");
+                    String content = request.getParameter(leafNode.getId() + "_" + step.getId());
                     if (content != null && !content.equals("")) {
                         DataNodeReportItem dataItem = new DataNodeReportItem();
                         String problem = request.getParameter(leafNode.getId() + "_" + step.getId() + "_problem");
@@ -311,4 +287,29 @@ public class DataNodeReportController extends BaseCRUDActionController<DataNodeR
         sendSuccessJSON(response, "删除成功");
     }
 
+    /**
+     * 获取已填报的信息
+     *
+     * @param projectId
+     * @param year
+     * @param month
+     * @param bidId
+     * @return
+     */
+    private List<DataNodeReportItem> findDataItems(Long projectId, Integer year, Integer month, Long bidId) {
+        String hql = "from DataNodeReportItem where nodeReport.project.id=? and nodeReport.year=? and nodeReport.month=?  and nodeReport.bid.id=? order by id asc";
+        List<DataNodeReportItem> dataNodeReportItems = dataNodeReportItemService.findByQuery(hql, projectId, year, month, bidId);
+        return dataNodeReportItems;
+    }
+
+    /**
+     * 获取形象进度标段
+     *
+     * @param projectId
+     * @return
+     */
+    private List<ProjBid> getBids(Long projectId) {
+        List<ProjBid> projBids = projBidService.findByQuery(" from ProjBid where project.id=" + projectId + " and  typeCode='" + ProjBidType.TYPE_NODE.getCode() + "'");
+        return projBids;
+    }
 }

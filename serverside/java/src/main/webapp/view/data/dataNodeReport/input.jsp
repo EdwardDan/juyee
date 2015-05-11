@@ -3,6 +3,7 @@
 <script type="text/javascript">
     var formId = "bean";
     var last_m = "";
+    var changeFlag=false;
     $(function () {
         //页面验证初始化
         var validateCondition = [
@@ -15,27 +16,30 @@
         ];
         validateInit(validateCondition, formId);
     });
-
     //保存操作
     function save(btn) {
         if (!validateForm(formId)) {
             return;
         }
-
         //提交表单
         saveAjaxData("${ctx}/dataNodeReport/save.do?month="+last_m, formId);
     }
 
     function loadMonthReport(month) {
-        if (last_m != month) {
-            if (last_m != "") {
-                $("#td" + last_m).attr("class", "td_normal");
+        if(changeFlag ==true){
+            //如果changeFlag的值为true则提示
+            alert("页面值已经修改，请先保存数据！")
+        }else{
+            if (last_m != month) {
+                if (last_m != "") {
+                    $("#td" + last_m).attr("class", "td_normal");
+                }
+                $("#td" + month).attr("class", "td_active");
+                last_m = month;
             }
-            $("#td" + month).attr("class", "td_active");
-            last_m = month;
+            var bidId=$("#projBid").val();
+            loadAjaxData("monthReportDiv", "${ctx}/dataNodeReport/nodeDataItem.do?id=${id}&month=" + month+"&bidId="+bidId);
         }
-      var bidId=$("#projBid").val();
-        loadAjaxData("monthReportDiv", "${ctx}/dataNodeReport/nodeDataItem.do?id=${id}&month=" + month+"&bidId="+bidId);
     }
     $(function () {
         loadMonthReport("${currentMonth}");

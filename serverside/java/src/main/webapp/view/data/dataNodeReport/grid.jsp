@@ -67,7 +67,7 @@
         if(bidCountOfNode==0){
          alert("该项目形象进度标段数为零，请先在[形象进度标段管理]中添加标段！");
         }else{
-            openWindow("修改项目基本信息管理", "${ctx}/dataNodeReport/modify.do?projectId=" + projectId, true,1125,500);
+            openWindow("修改项目形象进度推进", "${ctx}/dataNodeReport/modify.do?projectId=" + projectId, true,1125,500);
         }
     }
 

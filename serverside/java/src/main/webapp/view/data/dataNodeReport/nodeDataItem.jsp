@@ -6,6 +6,21 @@
         background-color: white;
     }
 </style>
+<script type="text/javascript">
+    changeFlag ==false;
+    $(document).ready(function(){
+        //文本框值改变即触发
+        $("input[type='text']").change(function(){
+            changeFlag=true;   //全局变量控制页面跳转时提示未保存的数据
+            this.title=this.value;//改变内容时，动态修改title
+        });
+        //文本域改变即触发
+        $("textarea").change(function(){
+            changeFlag=true;
+            this.title=this.value;
+        });
+    });
+</script>
 <table cellpadding="0" cellspacing="0" border="1" class="table_thin_line" width="99%">
     <tr class="tr_header">
         <td nowrap colspan="3" width="12%">形象进度</td>
@@ -24,11 +39,11 @@
               <c:forEach items="${steps}" var="step">
                   <c:set var="dataKey" value="${secondNode.id}_${step.id}" />
                 <c:if test="${status.index%2==0}">
-                    <td width="8%"><input type="text" name="${secondNode.id}_${step.id}" id="${secondNode.id}_${step.id}" value="${dataMap[dataKey].content}" class="input_number"></td>
-                    <td rowspan="2" width="8%"> <textarea  class="input_textarea" style="width:80px;height:46px" name="${secondNode.id}_${step.id}_problem" id="${secondNode.id}_${step.id}_problem">${dataMap[dataKey].problem}</textarea></td>
+                    <td width="8%"><input type="text" name="${secondNode.id}_${step.id}" id="${secondNode.id}_${step.id}" value="${dataMap[dataKey].content}"  title="${dataMap[dataKey].content}" class="input_number"></td>
+                    <td rowspan="2" width="8%"> <textarea  class="input_textarea" style="width:80px;height:46px" name="${secondNode.id}_${step.id}_problem" id="${secondNode.id}_${step.id}_problem" title="${dataMap[dataKey].problem}">${dataMap[dataKey].problem}</textarea></td>
                 </c:if>
                 <c:if test="${status.index%2==1}">
-                    <td><input type="text" name="${secondNode.id}_${step.id}" id="${secondNode.id}_${step.id}" value="${dataMap[dataKey].content}" class="input_number"></td>
+                    <td><input type="text" name="${secondNode.id}_${step.id}" id="${secondNode.id}_${step.id}" value="${dataMap[dataKey].content}" title="${dataMap[dataKey].content}" class="input_number"></td>
                 </c:if>
        </c:forEach>
             </tr>
@@ -48,11 +63,11 @@
                     <c:forEach items="${steps}" var="step">
                         <c:set var="dataKey" value="${thirdNode.id}_${step.id}" />
                         <c:if test="${thirdStatus.index%2==0}">
-                            <td width="8%"><input type="text"  name="${thirdNode.id}_${step.id}" id="${thirdNode.id}_${step.id}" value="${dataMap[dataKey].content}" class="input_number"></td>
-                            <td rowspan="2" width="8%"> <textarea  class="input_textarea" style="width:80px;height: 46px" name="${thirdNode.id}_${step.id}_problem" id="${thirdNode.id}_${step.id}_problem">${dataMap[dataKey].problem}</textarea></td>
+                            <td width="8%"><input type="text"  name="${thirdNode.id}_${step.id}" id="${thirdNode.id}_${step.id}" value="${dataMap[dataKey].content}" title="${dataMap[dataKey].content}" class="input_number"></td>
+                            <td rowspan="2" width="8%"> <textarea  class="input_textarea" style="width:80px;height: 46px" name="${thirdNode.id}_${step.id}_problem" id="${thirdNode.id}_${step.id}_problem" title="${dataMap[dataKey].problem}">${dataMap[dataKey].problem}</textarea></td>
                         </c:if>
                         <c:if test="${thirdStatus.index%2==1}">
-                            <td width="8%"><input type="text" name="${thirdNode.id}_${step.id}" id="${thirdNode.id}_${step.id}" value="${dataMap[dataKey].content}" class="input_number"></td>
+                            <td width="8%"><input type="text" name="${thirdNode.id}_${step.id}" id="${thirdNode.id}_${step.id}" value="${dataMap[dataKey].content}" title="${dataMap[dataKey].content}" class="input_number"></td>
                         </c:if>
                     </c:forEach>
                 </tr>
