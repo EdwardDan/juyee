@@ -117,7 +117,7 @@
 	
 
 		<set name="dataNodeReportItems" inverse="true">
-			<key column="STAGE_REPORT_ID"/>
+			<key column="NODE_REPORT_ID"/>
 			<one-to-many class="DataNodeReportItem"/>
 		</set>
 

@@ -91,7 +91,7 @@
             <tr class="tr_button">
                 <td class="form_content" colspan="4" style="text-align: center">
                     <input type="button" value="确定" class="button_confirm" onclick="save(this)">&nbsp;
-                    <input type="button" value="重置" class="button_cancel" onclick="closeWindow()">
+                    <input type="button" value="取消" class="button_cancel" onclick="closeWindow()">
                 </td>
             </tr>
         </table>

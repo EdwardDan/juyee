@@ -25,12 +25,12 @@
                     {name: "isValid", width: "88", align: "center", searchtype: "integer", sortable: true, formatter: booleanFormat},
                     {name: "defaultDays", width: "88", align: "center", searchtype: "integer", sortable: true, formatter: 'integer', formatoptions: {thousandsSeparator: ",", defaulValue: 0}},
                     {name: "alertDays", width: "70", align: "center", searchtype: "integer", sortable: true, formatter: 'integer', formatoptions: {thousandsSeparator: ",", defaulValue: 0}},
-                    {name: "linkInfo", width: "88", align: "center", searchtype: "string", sortable: true},
+                    {name: "linkInfo", width: "100", align: "center", searchtype: "string", sortable: true},
                     {name: "isLeaf", width: "60", align: "center", searchtype: "integer", sortable: true, hidden: true, formatter: booleanFormat},
                     {name: "treeId", width: "88", align: "center", searchtype: "string", sortable: true, hidden: true}
                 ],
                 actModel: [
-                    {name: 'operation', width: 120, align: 'center'}
+                    {name: 'operation', width: 40, align: 'center'}
                 ],
                 pager: '#pager2',
                 caption: "项目办证阶段管理列表",
@@ -40,10 +40,10 @@
                     for (var i = 0; i < ids.length; i++) {
                         var id = ids[i];
                         var opButton = '<input type="button" value="查看" onclick="doView(' + id + ')" class="button_normal"/> ';
-                        <c:if test="${canEdit}">
+                        <%--<c:if test="${canEdit}">
                         opButton += '<input type="button" value="编辑" onclick="doEdit(' + id + ')" class="button_normal"/> ';
                         opButton += '<input type="button" value="删除" onclick="doDelete(' + id + ')" class="button_normal"/>';
-                        </c:if>
+                        </c:if>--%>
                         jQuery("#listGrid").jqGrid('setRowData', ids[i], { operation: opButton});
                     }
                 }, rownumbers: true
@@ -68,14 +68,14 @@
         gridinit($("#listGrid"), conf);
     });
     function doView(id) {
-        openWindow("查看项目办证阶段管理", "${ctx}/projStage/view.do?id=" + id, false);
+        openWindow("查看项目办证阶段", "${ctx}/projStage/view.do?id=" + id, false);
     }
     <c:if test="${canEdit}">
     function doAdd() {
-        openWindow("添加项目办证阶段管理", "${ctx}/projStage/add.do", true);
+        openWindow("添加项目办证阶段", "${ctx}/projStage/add.do", true);
     }
     function doEdit(id) {
-        openWindow("修改项目办证阶段管理", "${ctx}/projStage/modify.do?id=" + id, true);
+        openWindow("修改项目办证阶段", "${ctx}/projStage/modify.do?id=" + id, true);
     }
     function doDelete(id) {
         doGridDelete("${ctx}/projStage/delete.do?id=" + id);

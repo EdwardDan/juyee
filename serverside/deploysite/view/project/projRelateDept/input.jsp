@@ -30,39 +30,44 @@
     <div class="form_div">
         <table cellpadding="0" cellspacing="0" class="form_table">
             <tr class="tr_light">
-                <td class="form_label_right">单位名称&nbsp;</td>
+                <td class="form_label_right">单位名称:&nbsp;</td>
                 <td class="form_content">
                     <form:input path="name" cssClass="input_text_long"/>
                 </td>
+                <td class="form_label_right">单位类别:&nbsp;</td>
+                <td class="form_content">
+                    <sys:code type="select" code="${category}" id="categoryId" name="categoryId"
+                              sysCodeDetailId="${bean.category.id}"></sys:code>
+                </td>
             </tr>
             <tr class="tr_dark">
-                <td class="form_label_right">单位简称&nbsp;</td>
+                <td class="form_label_right">单位简称:&nbsp;</td>
                 <td class="form_content">
                     <form:input path="shortName" cssClass="input_text"/>
                 </td>
-                <td class="form_label_right">单位负责人&nbsp;</td>
+                <td class="form_label_right">单位负责人:&nbsp;</td>
                 <td class="form_content">
                     <form:input path="manager" cssClass="input_text"/>
                 </td>
             </tr>
             <tr class="tr_light">
-                <td class="form_label_right">通讯地址&nbsp;</td>
+                <td class="form_label_right">通讯地址:&nbsp;</td>
                 <td class="form_content">
                     <form:input path="linkAddress" cssClass="input_text_long"/>
                 </td>
             </tr>
             <tr class="tr_dark">
-                <td class="form_label_right">公司邮编&nbsp;</td>
+                <td class="form_label_right">公司邮编:&nbsp;</td>
                 <td class="form_content">
                     <form:input path="zipcode" cssClass="input_text"/>
                 </td>
-                <td class="form_label_right">公司电话&nbsp;</td>
+                <td class="form_label_right">公司电话:&nbsp;</td>
                 <td class="form_content">
                     <form:input path="tel" cssClass="input_text"/>
                 </td>
             </tr>
             <tr class="tr_light">
-                <td class="form_label_right">传真&nbsp;</td>
+                <td class="form_label_right">传真:&nbsp;</td>
                 <td class="form_content">
                     <form:input path="fax" cssClass="input_text"/>
                 </td>

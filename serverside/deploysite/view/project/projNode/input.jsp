@@ -6,7 +6,7 @@
         //页面验证初始化
         var validateCondition = [
             //{name:"code", rule:"validate[required,maxSize[200]]"},
-            //{name:"name", rule:"validate[required,maxSize[200]]"},
+            {name:"name", rule:"validate[required,maxSize[200]]"},
             //{name:"isValid", rule:"validate[required,maxSize[1]]"},
             //{name:"description", rule:"validate[required,maxSize[${prop.length}]]"},
             //{name:"isLeaf", rule:"validate[required,maxSize[1]]"},
@@ -56,7 +56,7 @@
             <tr class="tr_button">
                 <td class="form_border" colspan="4" align="center">
                     <input type="button" value="确定" class="button_confirm" onclick="save(this)">&nbsp;
-                    <input name="button_reset" type="reset" class="button_cancel" value="重置">
+                    <input type="button" value="取消" class="button_cancel" onclick="closeWindow()">
                 </td>
             </tr>
         </table>

@@ -12,6 +12,7 @@
                     '电话',
                     '传真',
                     '承担项目',
+                    '下属人员',
                     '操作'
                 ],
                 colModel: [
@@ -19,9 +20,10 @@
                     {name: 'depttype', width: 25, align: "center", searchtype: "string", sortable: true, formatter: customFormat1},
                     {name: 'sd.name', width: 120, align: "left", searchtype: "string", sortable: true},
                     {name: 'manager', width: 35, align: "center", searchtype: "string", sortable: true},
-                    {name: 'tel', width: 60, align: "center", searchtype: "string", sortable: true},
-                    {name: 'fax', width: 60, align: "center", searchtype: "string", sortable: true},
-                    {name: 'prjCharged', width: 30, align: "center", searchtype: "string", sortable: true, formatter: customFormat2}
+                    {name: 'tel', width: 50, align: "center", searchtype: "string", sortable: true},
+                    {name: 'fax', width: 50, align: "center", searchtype: "string", sortable: true},
+                    {name: 'prjCharged', width: 30, align: "center", searchtype: "string", sortable: true, formatter: customFormat2},
+                    {name: 'deptPersons', width: 25, align: "center", searchtype: "string", sortable: true, formatter: customFormat3}
                 ],
                 actModel: [
                     {name: 'operation', width: 40, align: 'center'}
@@ -66,12 +68,17 @@
         openWindow("查看项目建设单位明细", "${ctx}/projRelateDept/view.do?id=" + id, false);
     }
 
-    function doViewPrjCharged(deptId, deptName) {
+    function doViewPrjChargedByDept(deptId, deptName) {
         openWindow("查看" + deptName + "所承担的项目", "${ctx}/projRelateDept/grid2.do?deptId=" + deptId, true, 1061, 531);
     }
+
+    function doViewDeptPersons(deptId, deptName) {
+        loadMainPage("${ctx}/sysPerson/grid2.do?deptId=" + encodeURI(deptId) + "&deptName=" + encodeURI(deptName) + "&originalUrl=${ctx}/projRelateDept/grid.do&originalLocation=" + encodeURI("项目建设单位列表"), "建设单位 > 人员列表");
+    }
+
     <c:if test="${canEdit}">
     function doAdd() {
-        openWindow("综合资源单位维护", "${ctx}/projRelateDept/add.do", true);
+        openWindow("添加项目建设单位", "${ctx}/projRelateDept/add.do", true);
     }
 
     function doEdit(id) {
@@ -90,7 +97,13 @@
     function customFormat2(cellvalue, options, rowObject) {
         var deptid = rowObject[0];
         var deptName = rowObject[2];
-        return "<a href='#' onclick='doViewPrjCharged(" + deptid + ", \"" + deptName + "\")' class='grid_link'>" + "查看承担项目" + "</a>";
+        return "<a href='#' onclick='doViewPrjChargedByDept(" + deptid + ", \"" + deptName + "\")' class='grid_link'>" + "查看承担项目" + "</a>";
+    }
+
+    function customFormat3(cellvalue, options, rowObject) {
+        var deptid = rowObject[0];
+        var deptName = rowObject[2];
+        return "<a href='javascript:void(0)' onclick='doViewDeptPersons(" + deptid + ", \"" + deptName + "\")' class='grid_link'>" + "查看下属人员" + "</a>";
     }
 </script>
 

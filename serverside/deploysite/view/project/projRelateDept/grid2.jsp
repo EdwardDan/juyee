@@ -108,7 +108,26 @@
 
 </script>
 
-<div style="width: 1050px">
+<%--<div style="width: 100%">--%>
+    <%--<div class="title_Search">--%>
+        <%--<div class="gridQueryArea">--%>
+            <%--<div style="float:left;padding-left: 10px" id="conditionsDesc3">--%>
+                <%--报建编号：<input type="text" name="bjbhQuery" id="bjbhQuery" value="" style="width: 6%" class="input_text">--%>
+                <%--工程名称：<input type="text" name="gdmcQuery" id="gdmcQuery" value="" style="width: 13%" class="input_text">--%>
+                <%--建设单位：<input type="text" name="jsdwQuery" id="jsdwQuery" value="" style="width: 13%" class="input_text">--%>
+                <%--施工单位：<input type="text" name="sgdwQuery" id="sgdwQuery" value="" style="width: 13%" class="input_text">--%>
+                <%--<input type="button" value="查询" class="btn_Search" style="text-align: left" onclick="doQuery()">&nbsp;--%>
+                <%--<input type="button" value="确定" class="button_confirm" style="text-align: left" onclick="doGdConfirm()">--%>
+            <%--</div>--%>
+        <%--</div>--%>
+    <%--</div>--%>
+    <%--<div class="gridQueryTable">--%>
+        <%--<table id="listGrid3"></table>--%>
+        <%--<div id="pager3"></div>--%>
+    <%--</div>--%>
+<%--</div>--%>
+
+<div style="width: 100%">
     <div class="title_Search">
         <div class="gridQueryArea">
             <div style="float:left;padding-left: 10px" id="conditionsDesc3">
@@ -122,8 +141,8 @@
                                class="input_text">--%>
             </div>
             <div style="float: right;padding-right: 10px;">
-                <input type="button" value="查询" class="btn_Search" style="text-align: left" onclick="doQuery(this)">&nbsp;
-                <input type="button" value="重置" class="btn_Search" style="text-align: left" onclick="doQuery()">&nbsp;
+                <input type="button" value="查询" class="btn_Search" onclick="doQuery(this)">&nbsp;
+                <input type="button" value="全部" class="btn_Search" onclick="doQuery()">&nbsp;
                 <c:if test="${canEdit}">
                     <select multiple="multiple" id="unitPrjInfo" name="unitPrjInfo"
                             style="display:none;width:250px;height:110px;">${unitPrjInfoOptions}</select>
