@@ -28,21 +28,20 @@
     });
 
     function verifyGivenDept() {
-        if ("${deptId}" != "" && "${deptName}" != "") {
+        if ("${deptId}" != "") {
             var deptName = $("#deptName").val();
             if (deptName != "") {
                 $("#deptName").attr("disabled", "true");
-                $("#deptSelBtn").attr("disabled", "disabled");
             } else {
                 $("#deptName").val("${deptName}");
                 if ($("#sysDeptId").val() == "") {
                     $("#sysDeptId").val("${deptId}");
                 }
-                if ("${bean.id}" == "") {
+                if ("${bean.id}" == "" && $("#deptName").val() != "") {
                     $("#deptName").attr("readonly", "readonly");
-                    $("#deptSelBtn").attr("disabled", "disabled");
                 }
             }
+            $("#deptSelBtn").attr("disabled", "disabled");
         }
     }
 
