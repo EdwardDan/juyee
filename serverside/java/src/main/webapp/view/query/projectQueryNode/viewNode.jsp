@@ -38,7 +38,7 @@
             </td>
         </tr>
         <tr>
-            <td align="right">&nbsp;上报月份：</td>
+            <td align="right" nowrap>&nbsp;上报月份：</td>
             <td align="left">
                 <table cellpadding="0" cellspacing="0" border="1" class="table_thin_line" width="500">
                     <tr align="center">

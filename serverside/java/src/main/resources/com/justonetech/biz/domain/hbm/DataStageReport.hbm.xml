@@ -121,6 +121,11 @@
 			<one-to-many class="DataStageReportItem"/>
 		</set>
 
+        <set name="dataStageReportLogs" inverse="true">
+            <key column="STAGE_REPORT_ID"/>
+            <one-to-many class="DataStageReportLog"/>
+        </set>
+
 	</class>	
     <query name="datastagereport_all_data_query">
         <![CDATA[FROM DataStageReport]]>

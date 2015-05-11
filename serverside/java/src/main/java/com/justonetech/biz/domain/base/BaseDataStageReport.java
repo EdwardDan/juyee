@@ -1,8 +1,10 @@
 package com.justonetech.biz.domain.base;
 
+import com.justonetech.biz.domain.DataStageReportLog;
 import com.justonetech.core.entity.Auditable;
 
 import java.io.Serializable;
+import java.util.Set;
 
 
 /**
@@ -93,6 +95,7 @@ public abstract class BaseDataStageReport  implements Serializable, Auditable {
 
 	// collections
 	private java.util.Set<com.justonetech.biz.domain.DataStageReportItem> dataStageReportItems;
+	private java.util.Set<com.justonetech.biz.domain.DataStageReportLog> dataStageReportLogs;
 
 
 
@@ -286,9 +289,18 @@ public abstract class BaseDataStageReport  implements Serializable, Auditable {
 		getDataStageReportItems().add(dataStageReportItem);
 	}
 
+    public Set<DataStageReportLog> getDataStageReportLogs() {
+        if(dataStageReportLogs == null){
+            dataStageReportLogs = new java.util.LinkedHashSet<com.justonetech.biz.domain.DataStageReportLog>();
+        }
+        return dataStageReportLogs;
+    }
 
+    public void setDataStageReportLogs(Set<DataStageReportLog> dataStageReportLogs) {
+        this.dataStageReportLogs = dataStageReportLogs;
+    }
 
-	public boolean equals (Object obj) {
+    public boolean equals (Object obj) {
 		if (null == obj) return false;
 		if (!(obj instanceof com.justonetech.biz.domain.DataStageReport)) return false;
 		else {

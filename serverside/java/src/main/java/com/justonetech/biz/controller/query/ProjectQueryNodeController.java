@@ -105,9 +105,9 @@ public class ProjectQueryNodeController extends BaseCRUDActionController<ProjInf
      */
     @RequestMapping
     public String viewNode(Model model, Long id) {
+        model.addAttribute("id", id);
         Calendar c = Calendar.getInstance();
         model.addAttribute("yearOptions", DateTimeHelper.getYearSelectOptions(String.valueOf(c.get(Calendar.YEAR))));
-        model.addAttribute("id", id);
         model.addAttribute("currentMonth", c.get(Calendar.MONTH) + 1);
 
         return "view/query/projectQueryNode/viewNode";

@@ -2,20 +2,18 @@ package com.justonetech.biz.controller.query;
 
 import com.justonetech.biz.core.orm.hibernate.GridJq;
 import com.justonetech.biz.core.orm.hibernate.QueryTranslateJq;
-import com.justonetech.biz.daoservice.DataStageReportItemService;
-import com.justonetech.biz.daoservice.ProjInfoService;
-import com.justonetech.biz.daoservice.ProjStageService;
-import com.justonetech.biz.domain.DataStageReportItem;
-import com.justonetech.biz.domain.ProjBid;
-import com.justonetech.biz.domain.ProjInfo;
-import com.justonetech.biz.domain.ProjStage;
+import com.justonetech.biz.daoservice.*;
+import com.justonetech.biz.domain.*;
 import com.justonetech.biz.utils.Constants;
+import com.justonetech.biz.utils.enums.ProjBidType;
 import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.orm.hibernate.Page;
+import com.justonetech.core.utils.DateTimeHelper;
 import com.justonetech.system.domain.SysCodeDetail;
 import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
 import com.justonetech.system.utils.PrivilegeCode;
+import org.hibernate.annotations.common.util.StringHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +21,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.sql.Timestamp;
 import java.util.*;
 
 
@@ -45,10 +45,16 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
     private ProjInfoService projInfoService;
 
     @Autowired
+    private ProjBidService projBidService;
+
+    @Autowired
     private ProjStageService projStageService;
 
     @Autowired
     private DataStageReportItemService dataStageReportItemService;
+
+    @Autowired
+    private DataStageReportLogService dataStageReportLogService;
 
     /**
      * 列表显示页面
@@ -103,6 +109,29 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
      */
     @RequestMapping
     public String viewStage(Model model, Long id) {
+        model.addAttribute("id", id);
+        Calendar c = Calendar.getInstance();
+        model.addAttribute("yearOptions", DateTimeHelper.getYearSelectOptions(String.valueOf(c.get(Calendar.YEAR))));
+
+        return "view/query/projectQueryStage/viewStage";
+    }
+
+    /**
+     * 查看办证推进信息--获取数据
+     *
+     * @param model .
+     * @return .
+     */
+    @RequestMapping
+    public String viewStageData(Model model, HttpServletRequest request) {
+        String projectId = request.getParameter("id");
+        String projectName = request.getParameter("projectName");
+        String bidName = request.getParameter("bidName");
+        String jsDept = request.getParameter("jsDept");
+        String year = request.getParameter("year");
+        Boolean isSum = StringHelper.isEmpty(projectId);   //是否汇总
+        model.addAttribute("isSum", isSum);
+
         //办证阶段
         List<ProjStage> firstStages = new ArrayList<ProjStage>();
         List<ProjStage> secondStages = new ArrayList<ProjStage>();
@@ -127,15 +156,34 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         model.addAttribute("steps", steps);
 
         //标段列表
-        ProjInfo projInfo = projInfoService.get(id);
-        Set<ProjBid> bids = projInfo.getProjBids();
+        String conditionHql = "from ProjBid where typeCode='" + ProjBidType.TYPE_STAGE.getCode() + "'";
+        if (isSum) {
+            if (!StringHelper.isEmpty(projectName)) {
+                conditionHql += " and project.name like '%" + projectName + "%'";
+            }
+            if (!StringHelper.isEmpty(bidName)) {
+                conditionHql += " and name like '%" + bidName + "%'";
+            }
+            if (!StringHelper.isEmpty(jsDept)) {
+                conditionHql += " and project.jsDept like '%" + jsDept + "%'";
+            }
+            if (!StringHelper.isEmpty(year)) {
+                conditionHql += " and project.year='" + year + "'";
+            }
+        } else {
+            conditionHql += " and project.id=" + projectId;
+        }
+        List<ProjBid> bids = projBidService.findByQuery(conditionHql + " order by project.id asc,id asc");
         model.addAttribute("bids", bids);
+
+        conditionHql = "select id " + conditionHql;
 
         //填报数据
         Map<String, Object> dataMap = new HashMap<String, Object>();
         Set<Long> oneBidHS = new HashSet<Long>();  //只取最新上报的数据
-        String hql = "from DataStageReportItem where stageReport.project.id=? order by stageReport.year desc,stageReport.month desc,id desc";
-        List<DataStageReportItem> dataStageReportItems = dataStageReportItemService.findByQuery(hql, id);
+        String hql = "from DataStageReportItem where stageReport.bid.id in(" + conditionHql + ") order by stageReport.year desc,stageReport.month desc,id desc";
+//        System.out.println("hql = " + hql);
+        List<DataStageReportItem> dataStageReportItems = dataStageReportItemService.findByQuery(hql);
         for (DataStageReportItem item : dataStageReportItems) {
             Long bidId = item.getStageReport().getBid().getId();
             if (!oneBidHS.contains(bidId)) {
@@ -144,11 +192,44 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
                 map.put("resultCode", item.getResult().getCode());
                 map.put("resultName", item.getResult().getName());
                 map.put("dealDate", item.getDealDate());
+                map.put("updateTime", item.getUpdateTime());
                 dataMap.put(bidId + "_" + item.getStep().getId() + "_" + item.getStage().getId(), map);
             }
         }
         model.addAttribute("dataMap", dataMap);
 
-        return "view/query/projectQueryStage/viewStage";
+        //上次填报数据
+        Map<String, Object> lastMap = new HashMap<String, Object>();
+        Set<String> keyHS = new HashSet<String>();
+        String lastHql = "from DataStageReportLog where stageReport.bid.id in(" + conditionHql + ") order by updateTime desc";
+        List<DataStageReportLog> lastLogs = dataStageReportLogService.findByQuery(lastHql);
+        for (DataStageReportLog item : lastLogs) {
+            Long bidId = item.getStageReport().getBid().getId();
+            String key = bidId + "_" + item.getStep().getId() + "_" + item.getStage().getId();
+            if (!keyHS.contains(key)) {
+                Object currentData = dataMap.get(key);
+                if (currentData != null) {
+                    Map<String, Object> currentDataMap = (Map<String, Object>) currentData;
+                    if (item.getUpdateTime().before((Timestamp) currentDataMap.get("updateTime"))) {
+                        keyHS.add(key);
+                        Map<String, Object> map = new HashMap<String, Object>();
+                        map.put("resultCode", item.getResult().getCode());
+                        map.put("resultName", item.getResult().getName());
+                        map.put("dealDate", item.getDealDate());
+                        lastMap.put(key + "_last", map);
+                    }
+                } else {
+                    keyHS.add(key);
+                    Map<String, Object> map = new HashMap<String, Object>();
+                    map.put("resultCode", item.getResult().getCode());
+                    map.put("resultName", item.getResult().getName());
+                    map.put("dealDate", item.getDealDate());
+                    lastMap.put(key + "_last", map);
+                }
+            }
+        }
+        model.addAttribute("lastMap", lastMap);
+
+        return "view/query/projectQueryStage/viewStageData";
     }
 }

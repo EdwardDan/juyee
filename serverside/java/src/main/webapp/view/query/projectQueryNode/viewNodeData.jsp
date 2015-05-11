@@ -35,13 +35,13 @@
         <c:forEach items="${steps}" var="step" varStatus="stepIndex">
             <tr class="tr_light">
                 <c:if test="${stepIndex.index == 0}">
-                    <td rowspan="${stepCount}" width="2%">${bidIndex.index+1}</td>
+                    <td rowspan="${stepCount}" width="2%" nowrap>${bidIndex.index+1}</td>
                     <td rowspan="${stepCount}">${bid.project.name}</td>
                     <td rowspan="${stepCount}">${bid.project.location}</td>
                     <td rowspan="${stepCount}">${bid.name}</td>
                     <td rowspan="${stepCount}">${bid.buildMileage}</td>
                     <td rowspan="${stepCount}">${bid.belongArea.name}</td>
-                    <td rowspan="${stepCount}">${bid.startDate}</td>
+                    <td rowspan="${stepCount}" nowrap>${bid.startDate}</td>
                 </c:if>
                 <td rowspan="2">${step.name}</td>
                 <c:forEach items="${leafNodes}" var="leafNode">
