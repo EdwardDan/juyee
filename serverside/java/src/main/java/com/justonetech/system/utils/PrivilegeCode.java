@@ -71,6 +71,7 @@ public class PrivilegeCode {
      * ***************************************数据上报******************************************************
      */
     public static final String DATA_NODE_REPORT_EDIT = DataNodeReport.class.getSimpleName() + "_edit";//形象进度推进填报_编辑
+    public static final String DATA_STAGE_REPORT_EDIT = DataStageReport.class.getSimpleName() + "_edit";//承担项目办证推进_编辑
 
     /**
      * ***************************************项目查询******************************************************
