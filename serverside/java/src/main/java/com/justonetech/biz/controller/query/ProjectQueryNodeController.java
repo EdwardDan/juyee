@@ -10,6 +10,7 @@ import com.justonetech.biz.domain.DataNodeReportItem;
 import com.justonetech.biz.domain.ProjBid;
 import com.justonetech.biz.domain.ProjInfo;
 import com.justonetech.biz.domain.ProjNode;
+import com.justonetech.biz.manager.ProjectRelateManager;
 import com.justonetech.biz.utils.Constants;
 import com.justonetech.biz.utils.enums.ProjBidType;
 import com.justonetech.core.controller.BaseCRUDActionController;
@@ -59,6 +60,9 @@ public class ProjectQueryNodeController extends BaseCRUDActionController<ProjInf
     @Autowired
     private DataNodeReportItemService dataNodeReportItemService;
 
+    @Autowired
+    private ProjectRelateManager projectRelateManager;
+
     /**
      * 列表显示页面
      *
@@ -86,8 +90,11 @@ public class ProjectQueryNodeController extends BaseCRUDActionController<ProjInf
     public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session) {
         try {
             Page pageModel = new Page(page, rows, true);
-            String hql = "from ProjInfo order by id desc";
-            //todo 根据权限过滤项目
+            String hql = "from ProjInfo where 1=1";
+//            //增加项目过滤
+//            hql += projectRelateManager.getRelateProjectHql("id");
+
+            hql += "order by id asc";
 
             //执行查询
             QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);

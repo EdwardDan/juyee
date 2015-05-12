@@ -26,13 +26,11 @@
 </script>
 <style type="text/css">
     .td_normal{
-        height: 20px;
-        background-color: white;
+        min-width: 60px;
+        height: 30px;
     }
-    .td_active{
-        height: 20px;
-        background-color: #0074cc;
-        font-weight: bold;
+    .td_change{
+        color: red;
     }
 </style>
 <div class="form_div">

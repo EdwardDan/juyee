@@ -4,6 +4,7 @@ import com.justonetech.biz.core.orm.hibernate.GridJq;
 import com.justonetech.biz.core.orm.hibernate.QueryTranslateJq;
 import com.justonetech.biz.daoservice.*;
 import com.justonetech.biz.domain.*;
+import com.justonetech.biz.manager.ProjectRelateManager;
 import com.justonetech.biz.utils.Constants;
 import com.justonetech.biz.utils.enums.ProjBidType;
 import com.justonetech.core.controller.BaseCRUDActionController;
@@ -56,6 +57,9 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
     @Autowired
     private DataStageReportLogService dataStageReportLogService;
 
+    @Autowired
+    private ProjectRelateManager projectRelateManager;
+
     /**
      * 列表显示页面
      *
@@ -83,8 +87,11 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
     public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session) {
         try {
             Page pageModel = new Page(page, rows, true);
-            String hql = "from ProjInfo order by id desc";
-            //todo 根据权限过滤项目
+            String hql = "from ProjInfo where 1=1";
+//            //增加项目过滤
+//            hql += projectRelateManager.getRelateProjectHql("id");
+
+            hql += "order by id asc";
 
             //执行查询
             QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);
@@ -185,20 +192,21 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
 
         //填报数据
         Map<String, Object> dataMap = new HashMap<String, Object>();
-        Set<Long> oneBidHS = new HashSet<Long>();  //只取最新上报的数据
+        Set<String> oneBidHS = new HashSet<String>();  //只取最新上报的数据
         String hql = "from DataStageReportItem where stageReport.bid.id in(" + conditionHql + ") order by stageReport.year desc,stageReport.month desc,id desc";
 //        System.out.println("hql = " + hql);
         List<DataStageReportItem> dataStageReportItems = dataStageReportItemService.findByQuery(hql);
         for (DataStageReportItem item : dataStageReportItems) {
             Long bidId = item.getStageReport().getBid().getId();
-            if (!oneBidHS.contains(bidId)) {
-                oneBidHS.add(bidId);
+            String key = bidId + "_" + item.getStep().getId() + "_" + item.getStage().getId();
+            if (!oneBidHS.contains(key)) {
+                oneBidHS.add(key);
                 Map<String, Object> map = new HashMap<String, Object>();
                 map.put("resultCode", item.getResult().getCode());
                 map.put("resultName", item.getResult().getName());
                 map.put("dealDate", item.getDealDate());
                 map.put("updateTime", item.getUpdateTime());
-                dataMap.put(bidId + "_" + item.getStep().getId() + "_" + item.getStage().getId(), map);
+                dataMap.put(key, map);
             }
         }
         model.addAttribute("dataMap", dataMap);
@@ -221,7 +229,7 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
                         map.put("resultCode", item.getResult().getCode());
                         map.put("resultName", item.getResult().getName());
                         map.put("dealDate", item.getDealDate());
-                        lastMap.put(key + "_last", map);
+                        lastMap.put(key, map);
                     }
                 } else {
                     keyHS.add(key);
@@ -229,7 +237,7 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
                     map.put("resultCode", item.getResult().getCode());
                     map.put("resultName", item.getResult().getName());
                     map.put("dealDate", item.getDealDate());
-                    lastMap.put(key + "_last", map);
+                    lastMap.put(key, map);
                 }
             }
         }
