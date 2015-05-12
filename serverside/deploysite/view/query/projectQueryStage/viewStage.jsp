@@ -2,14 +2,15 @@
 <%@ include file="/common/taglibs.jsp" %>
 <script type="text/javascript">
     function loadStageData(flag) {
-        if(flag == "all"){
-           $("#projectName").val("");
-           $("#bidName").val("");
-           $("#jsDept").val("");
-           $("#year").val("");
+        if (flag == "all") {
+            $("#projectName").val("");
+            $("#bidName").val("");
+            $("#jsDept").val("");
+            $("#year").val("${currentYear}");
         }
+        var str = "projectName=" + $("#projectName").val() + "&bidName=" + $("#bidName").val() + "&jsDept=" + $("#jsDept").val() + "&year=" + $("#year").val();
         setButton(true);
-        loadAjaxDataCallback("stageDataDiv", "${ctx}/projectQueryStage/viewStageData.do?id=${id}",resetButton);
+        loadAjaxDataCallback("stageDataDiv", "${ctx}/projectQueryStage/viewStageData.do?id=${id}&" + str, resetButton);
     }
     function resetButton(){
         setButton(false);
@@ -57,8 +58,8 @@
             </td>
             <td align="right">&nbsp;</td>
             <td align="left" colspan="3">
-                <input type="button" value="查询" id="btnQueryThis" class="button_go" onclick="loadStageData(null)"/>
-                <input type="button" value="显示全部" id="btnQueryAll" class="button_go" onclick="loadStageData('all')"/>
+                <input type="button" value="查询" id="btnQueryThis" class="button_all" onclick="loadStageData(null)"/>
+                <input type="button" value="显示全部" id="btnQueryAll" class="button_normal_long" onclick="loadStageData('all')"/>
             </td>
         </tr>
     </table>
