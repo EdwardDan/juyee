@@ -8,9 +8,10 @@
                     年度项目办证推进表
                 </c:when>
                 <c:otherwise>
-                    共有${fn:length(bids)}个标段&nbsp; <input type="button" value="关闭" class="button_cancel" onclick="closeWindow()">
+                    共有${fn:length(bids)}个标段
                 </c:otherwise>
             </c:choose>
+            &nbsp; <input type="button" value="关闭" class="button_cancel" onclick="closeWindow()">
         </td>
 </table>
 <table cellpadding="0" cellspacing="0" border="1" class="table_thin_line">

@@ -84,6 +84,7 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         try {
             Page pageModel = new Page(page, rows, true);
             String hql = "from ProjInfo order by id desc";
+            //todo 根据权限过滤项目
 
             //执行查询
             QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);
@@ -112,6 +113,8 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         model.addAttribute("id", id);
         Calendar c = Calendar.getInstance();
         model.addAttribute("yearOptions", DateTimeHelper.getYearSelectOptions(String.valueOf(c.get(Calendar.YEAR))));
+        model.addAttribute("currentYear", c.get(Calendar.YEAR));
+        model.addAttribute("currentMonth", c.get(Calendar.MONTH) + 1);
 
         return "view/query/projectQueryStage/viewStage";
     }
@@ -173,9 +176,11 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         } else {
             conditionHql += " and project.id=" + projectId;
         }
+//        System.out.println("conditionHql = " + conditionHql);
         List<ProjBid> bids = projBidService.findByQuery(conditionHql + " order by project.id asc,id asc");
         model.addAttribute("bids", bids);
 
+        //用于数据过滤
         conditionHql = "select id " + conditionHql;
 
         //填报数据

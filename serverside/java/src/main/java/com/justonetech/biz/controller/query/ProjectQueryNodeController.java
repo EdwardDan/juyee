@@ -3,6 +3,7 @@ package com.justonetech.biz.controller.query;
 import com.justonetech.biz.core.orm.hibernate.GridJq;
 import com.justonetech.biz.core.orm.hibernate.QueryTranslateJq;
 import com.justonetech.biz.daoservice.DataNodeReportItemService;
+import com.justonetech.biz.daoservice.ProjBidService;
 import com.justonetech.biz.daoservice.ProjInfoService;
 import com.justonetech.biz.daoservice.ProjNodeService;
 import com.justonetech.biz.domain.DataNodeReportItem;
@@ -10,13 +11,16 @@ import com.justonetech.biz.domain.ProjBid;
 import com.justonetech.biz.domain.ProjInfo;
 import com.justonetech.biz.domain.ProjNode;
 import com.justonetech.biz.utils.Constants;
+import com.justonetech.biz.utils.enums.ProjBidType;
 import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.orm.hibernate.Page;
 import com.justonetech.core.utils.DateTimeHelper;
+import com.justonetech.core.utils.FormatUtils;
 import com.justonetech.system.domain.SysCodeDetail;
 import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
 import com.justonetech.system.utils.PrivilegeCode;
+import org.hibernate.annotations.common.util.StringHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +28,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.*;
@@ -44,6 +49,9 @@ public class ProjectQueryNodeController extends BaseCRUDActionController<ProjInf
 
     @Autowired
     private ProjInfoService projInfoService;
+
+    @Autowired
+    private ProjBidService projBidService;
 
     @Autowired
     private ProjNodeService projNodeService;
@@ -79,7 +87,7 @@ public class ProjectQueryNodeController extends BaseCRUDActionController<ProjInf
         try {
             Page pageModel = new Page(page, rows, true);
             String hql = "from ProjInfo order by id desc";
-            //根据权限过滤项目
+            //todo 根据权限过滤项目
 
             //执行查询
             QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);
@@ -108,6 +116,7 @@ public class ProjectQueryNodeController extends BaseCRUDActionController<ProjInf
         model.addAttribute("id", id);
         Calendar c = Calendar.getInstance();
         model.addAttribute("yearOptions", DateTimeHelper.getYearSelectOptions(String.valueOf(c.get(Calendar.YEAR))));
+        model.addAttribute("currentYear", c.get(Calendar.YEAR));
         model.addAttribute("currentMonth", c.get(Calendar.MONTH) + 1);
 
         return "view/query/projectQueryNode/viewNode";
@@ -120,7 +129,16 @@ public class ProjectQueryNodeController extends BaseCRUDActionController<ProjInf
      * @return .
      */
     @RequestMapping
-    public String viewNodeData(Model model, Long id, int year, int month) {
+    public String viewNodeData(Model model, HttpServletRequest request) {
+        String projectId = request.getParameter("id");
+        String projectName = request.getParameter("projectName");
+        String bidName = request.getParameter("bidName");
+        String jsDept = request.getParameter("jsDept");
+        String year = request.getParameter("year");
+        String month = request.getParameter("month");
+        Boolean isSum = StringHelper.isEmpty(projectId);   //是否汇总
+        model.addAttribute("isSum", isSum);
+
         //办证阶段
         List<ProjNode> firstNodes = new ArrayList<ProjNode>();
         List<ProjNode> secondNodes = new ArrayList<ProjNode>();
@@ -151,14 +169,35 @@ public class ProjectQueryNodeController extends BaseCRUDActionController<ProjInf
         model.addAttribute("steps", steps);
 
         //标段列表
-        ProjInfo projInfo = projInfoService.get(id);
-        Set<ProjBid> bids = projInfo.getProjBids();
+        String conditionHql = "from ProjBid where typeCode='" + ProjBidType.TYPE_NODE.getCode() + "'";
+        if (isSum) {
+            if (!StringHelper.isEmpty(projectName)) {
+                conditionHql += " and project.name like '%" + projectName + "%'";
+            }
+            if (!StringHelper.isEmpty(bidName)) {
+                conditionHql += " and name like '%" + bidName + "%'";
+            }
+            if (!StringHelper.isEmpty(jsDept)) {
+                conditionHql += " and project.jsDept like '%" + jsDept + "%'";
+            }
+            if (!StringHelper.isEmpty(year)) {
+                conditionHql += " and project.year='" + year + "'";
+            }
+        } else {
+            conditionHql += " and project.id=" + projectId;
+        }
+//        System.out.println("conditionHql = " + conditionHql);
+        List<ProjBid> bids = projBidService.findByQuery(conditionHql + " order by project.id asc,id asc");
         model.addAttribute("bids", bids);
+
+        //用于数据过滤
+        conditionHql = "select id " + conditionHql;
 
         //填报数据
         Map<String, Object> dataMap = new HashMap<String, Object>();
-        String hql = "from DataNodeReportItem where nodeReport.project.id=? and nodeReport.year=? and nodeReport.month=? order by id asc";
-        List<DataNodeReportItem> dataNodeReportItems = dataNodeReportItemService.findByQuery(hql, id, year, month);
+        String hql = "from DataNodeReportItem where nodeReport.bid.id in({0}) and nodeReport.year={1} and nodeReport.month={2} order by id asc";
+        hql = FormatUtils.format(hql, conditionHql, year, month);
+        List<DataNodeReportItem> dataNodeReportItems = dataNodeReportItemService.findByQuery(hql);
         for (DataNodeReportItem item : dataNodeReportItems) {
             Long bidId = item.getNodeReport().getBid().getId();
             Map<String, Object> map = new HashMap<String, Object>();
