@@ -1,8 +1,11 @@
 package com.justonetech.system.domain.base;
 
+import com.justonetech.biz.domain.ProjRelatePerson;
 import com.justonetech.core.entity.Auditable;
+import com.justonetech.system.domain.SysUser;
 
 import java.io.Serializable;
+import java.util.Set;
 
 
 /**
@@ -191,6 +194,7 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 	// collections
 	private java.util.Set<com.justonetech.system.domain.SysPersonDept> sysPersonDepts;
 	private java.util.Set<com.justonetech.system.domain.SysUser> sysUsers;
+	private java.util.Set<ProjRelatePerson> projRelatePersons;
 
 
 
@@ -701,6 +705,9 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 	 * Return the value associated with the column: sysUsers
 	 */
 	public java.util.Set<com.justonetech.system.domain.SysUser> getSysUsers () {
+        if(sysUsers == null){
+            sysUsers = new java.util.LinkedHashSet<SysUser>();
+        }
 		return sysUsers;
 	}
 
@@ -712,9 +719,18 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 		this.sysUsers = sysUsers;
 	}
 
+    public Set<ProjRelatePerson> getProjRelatePersons() {
+        if(projRelatePersons == null){
+            projRelatePersons = new java.util.LinkedHashSet<ProjRelatePerson>();
+        }
+        return projRelatePersons;
+    }
 
+    public void setProjRelatePersons(Set<ProjRelatePerson> projRelatePersons) {
+        this.projRelatePersons = projRelatePersons;
+    }
 
-	public boolean equals (Object obj) {
+    public boolean equals (Object obj) {
 		if (null == obj) return false;
 		if (!(obj instanceof com.justonetech.system.domain.SysPerson)) return false;
 		else {

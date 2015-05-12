@@ -2,12 +2,10 @@ package com.justonetech.biz.controller.project;
 
 import com.justonetech.biz.core.orm.hibernate.GridJq;
 import com.justonetech.biz.core.orm.hibernate.QueryTranslateJq;
-import com.justonetech.biz.daoservice.DocDocumentService;
 import com.justonetech.biz.daoservice.ProjBidService;
 import com.justonetech.biz.daoservice.ProjInfoService;
 import com.justonetech.biz.domain.ProjBid;
-import com.justonetech.biz.manager.ConfigManager;
-import com.justonetech.biz.manager.DocumentManager;
+import com.justonetech.biz.manager.ProjectRelateManager;
 import com.justonetech.biz.utils.Constants;
 import com.justonetech.biz.utils.enums.ProjBidType;
 import com.justonetech.core.controller.BaseCRUDActionController;
@@ -15,8 +13,6 @@ import com.justonetech.core.orm.hibernate.Page;
 import com.justonetech.core.utils.ReflectionUtils;
 import com.justonetech.core.utils.StringHelper;
 import com.justonetech.system.daoservice.SysCodeDetailService;
-import com.justonetech.system.manager.SimpleQueryManager;
-import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
 import com.justonetech.system.utils.PrivilegeCode;
 import org.slf4j.Logger;
@@ -46,19 +42,7 @@ public class ProjBidController extends BaseCRUDActionController<ProjBid> {
     private SysUserManager sysUserManager;
 
     @Autowired
-    private SysCodeManager sysCodeManager;
-
-    @Autowired
-    private ConfigManager configManager;
-
-    @Autowired
-    private DocumentManager documentManager;
-
-    @Autowired
-    private SimpleQueryManager simpleQueryManager;
-
-    @Autowired
-    private DocDocumentService docDocumentService;
+    private ProjectRelateManager projectRelateManager;
 
     @Autowired
     private ProjBidService projBidService;
@@ -98,7 +82,11 @@ public class ProjBidController extends BaseCRUDActionController<ProjBid> {
     public void projGridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows,String typeCode, HttpSession session) {
         try {
             Page pageModel = new Page(page, rows, true);
-            String hql = "from ProjInfo order by id desc";
+            String hql = "from ProjInfo where 1=1";
+            //增加项目过滤
+            hql += projectRelateManager.getRelateProjectHql("id");
+
+            hql += "order by id desc";
 
             //执行查询
             QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);

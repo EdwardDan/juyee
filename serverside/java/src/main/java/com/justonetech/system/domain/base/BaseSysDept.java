@@ -1,9 +1,11 @@
 package com.justonetech.system.domain.base;
 
+import com.justonetech.biz.domain.ProjRelateDept;
 import com.justonetech.core.entity.Auditable;
 import com.justonetech.core.entity.Treeable;
 
 import java.io.Serializable;
+import java.util.Set;
 
 
 /**
@@ -183,6 +185,7 @@ public abstract class BaseSysDept  implements Serializable,Auditable,Treeable {
 	// collections
 	private java.util.Set<com.justonetech.system.domain.SysDept> children;
 	private java.util.Set<com.justonetech.system.domain.SysPersonDept> sysPersonDepts;
+	private java.util.Set<ProjRelateDept> projRelateDepts;
 
 
 
@@ -664,9 +667,18 @@ public abstract class BaseSysDept  implements Serializable,Auditable,Treeable {
 		this.sysPersonDepts = sysPersonDepts;
 	}
 
+    public Set<ProjRelateDept> getProjRelateDepts() {
+        if(projRelateDepts == null){
+            projRelateDepts = new java.util.LinkedHashSet<ProjRelateDept>();
+        }
+        return projRelateDepts;
+    }
 
+    public void setProjRelateDepts(Set<ProjRelateDept> projRelateDepts) {
+        this.projRelateDepts = projRelateDepts;
+    }
 
-	public boolean equals (Object obj) {
+    public boolean equals (Object obj) {
 		if (null == obj) return false;
 		if (!(obj instanceof com.justonetech.system.domain.SysDept)) return false;
 		else {
