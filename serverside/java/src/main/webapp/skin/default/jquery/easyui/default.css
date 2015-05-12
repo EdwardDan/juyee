@@ -625,6 +625,15 @@ form{
     background-image: url(buttons/normal_long.png);
     cursor:pointer;
 }
+.button_normal_longer{
+    font-size: 12px;
+    color: #333;
+    width: 100px;
+    height: 23px;
+    border: 0px none;
+    background-image: url(buttons/normal_longer.png);
+    cursor:pointer;
+}
 .button_calendar{
     width: 21px;
     height: 14px;
