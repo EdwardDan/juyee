@@ -73,7 +73,7 @@
         </div>
         <div style="float:right;padding-right: 10px">
             <c:if test="${canViewAll}">
-                <input type="button" value="形象进度汇总" class="button_normal_long" onclick="doViewNode('','汇总')"/>
+                <input type="button" value="形象进度汇总" class="button_normal_longer" onclick="doViewNode('','汇总')"/>
             </c:if>
         </div>
     </div>
