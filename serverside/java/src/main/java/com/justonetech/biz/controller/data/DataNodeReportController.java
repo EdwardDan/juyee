@@ -8,6 +8,7 @@ import com.justonetech.biz.utils.Constants;
 import com.justonetech.biz.utils.enums.ProjBidType;
 import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.orm.hibernate.Page;
+import com.justonetech.core.utils.StringHelper;
 import com.justonetech.system.domain.SysCodeDetail;
 import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
@@ -241,30 +242,29 @@ public class DataNodeReportController extends BaseCRUDActionController<DataNodeR
             }
 
             //保存填报明细
-            Set<DataNodeReportItem> dataItems = new HashSet<DataNodeReportItem>();
             List<ProjNode> leafNodes = projNodeService.findByQuery("from ProjNode where isValid=1 and isLeaf=1  order by treeId asc");
             //审核步骤
             List<SysCodeDetail> steps = sysCodeManager.getCodeListByCode(Constants.DATA_REPORT_STEP);
             for (ProjNode leafNode : leafNodes) {
                 for (SysCodeDetail step : steps) {
-                    String content = request.getParameter(leafNode.getId() + "_" + step.getId());
-                    if (content != null && !content.equals("")) {
+                    String name=leafNode.getId() + "_" + step.getId();
+                    String content = request.getParameter(name);
+                    String problem = request.getParameter(name+ "_problem");
+                    if (!StringHelper.isEmpty(problem)||!StringHelper.isEmpty(content)) {
                         DataNodeReportItem dataItem = new DataNodeReportItem();
-                        String problem = request.getParameter(leafNode.getId() + "_" + step.getId() + "_problem");
-                        if (problem != null && !problem.equals("")) {
+                        if (!StringHelper.isEmpty(problem)) {
                             dataItem.setProblem(problem);
                         }
-                        dataItem.setContent(content);
+                        if (!StringHelper.isEmpty(content)) {
+                            dataItem.setContent(content);
+                        }
                         dataItem.setNode(leafNode);
                         dataItem.setStep(step);
                         dataItem.setNodeReport(target);
                         dataNodeReportItemService.save(dataItem);
-                        dataItems.add(dataItem);
                     }
                 }
             }
-            target.setDataNodeReportItems(dataItems);
-            dataNodeReportService.save(target);
         } catch (Exception e) {
             log.error("error", e);
             super.processException(response, e);
