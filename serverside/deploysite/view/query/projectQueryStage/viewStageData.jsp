@@ -49,13 +49,13 @@
                 <td rowspan="2">${step.name}</td>
                 <c:forEach items="${leafStages}" var="leafStage">
                     <c:set var="dataKey" value="${bid.id}_${step.id}_${leafStage.id}" />
-                    <td>&nbsp;${dataMap[dataKey].resultName}</td>
+                    <td class="td_normal" title="${dataMap[dataKey].resultName}"><span <c:if test="${dataMap[dataKey].resultName!=lastMap[dataKey].resultName}">class="td_change"</c:if>>${dataMap[dataKey].resultName}</span></td>
                 </c:forEach>
             </tr>
             <tr class="tr_dark">
                 <c:forEach items="${leafStages}" var="leafStage">
                     <c:set var="dataKey" value="${bid.id}_${step.id}_${leafStage.id}" />
-                    <td>&nbsp;${dataMap[dataKey].dealDate}</td>
+                    <td class="td_normal" title="${dataMap[dataKey].dealDate}"><span <c:if test="${dataMap[dataKey].dealDate!=lastMap[dataKey].dealDate}">class="td_change"</c:if>><sys:cutString length="10">${dataMap[dataKey].dealDate}</sys:cutString></span></td>
                 </c:forEach>
             </tr>
         </c:forEach>
