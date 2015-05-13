@@ -236,15 +236,14 @@ public class DataNodeReportController extends BaseCRUDActionController<DataNodeR
             //保存之前先删除旧数据
             if (target.getProject() != null && target.getBid() != null) {
                 List<DataNodeReportItem> dataNodeReportItems = findDataItems(target.getProject().getId(), target.getProject().getYear(), Integer.valueOf(month), target.getBid().getId());
-                for (DataNodeReportItem dataNodeReportItem : dataNodeReportItems) {
-                    dataNodeReportItemService.delete(dataNodeReportItem);
-                }
+                    dataNodeReportItemService.batchDelete(dataNodeReportItems,dataNodeReportItems.size());
             }
 
             //保存填报明细
             List<ProjNode> leafNodes = projNodeService.findByQuery("from ProjNode where isValid=1 and isLeaf=1  order by treeId asc");
             //审核步骤
             List<SysCodeDetail> steps = sysCodeManager.getCodeListByCode(Constants.DATA_REPORT_STEP);
+            List<DataNodeReportItem> dataItems=new ArrayList<DataNodeReportItem>();
             for (ProjNode leafNode : leafNodes) {
                 for (SysCodeDetail step : steps) {
                     String name=leafNode.getId() + "_" + step.getId();
@@ -261,10 +260,11 @@ public class DataNodeReportController extends BaseCRUDActionController<DataNodeR
                         dataItem.setNode(leafNode);
                         dataItem.setStep(step);
                         dataItem.setNodeReport(target);
-                        dataNodeReportItemService.save(dataItem);
+                        dataItems.add(dataItem);
                     }
                 }
             }
+            dataNodeReportItemService.batchSave(dataItems, dataItems.size());
         } catch (Exception e) {
             log.error("error", e);
             super.processException(response, e);
