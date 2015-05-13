@@ -5,12 +5,13 @@
         <td align="left" nowrap>&nbsp;
             <c:choose>
                 <c:when test="${isSum}">
-                    年度项目办证推进表
+                    ${year}年度项目办证推进表
                 </c:when>
                 <c:otherwise>
                     共有${fn:length(bids)}个标段
                 </c:otherwise>
             </c:choose>
+            &nbsp;<input type="button" value="导出" class="button_all" onclick="printStageData(this)"/>
             &nbsp; <input type="button" value="关闭" class="button_cancel" onclick="closeWindow()">
         </td>
 </table>

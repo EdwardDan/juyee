@@ -2,8 +2,17 @@
 <%@ include file="/common/taglibs.jsp" %>
 <table cellpadding="0" cellspacing="0" class="form_table">
     <tr class="tr_light">
-        <td align="left" nowrap>
-            &nbsp;共有${fn:length(bids)}个标段&nbsp; <input type="button" value="关闭" class="button_cancel" onclick="closeWindow()">
+        <td align="left" nowrap>&nbsp;
+            <c:choose>
+                <c:when test="${isSum}">
+                    项目形象进度汇总表
+                </c:when>
+                <c:otherwise>
+                    &nbsp;共有${fn:length(bids)}个标段
+                </c:otherwise>
+            </c:choose>
+            &nbsp;<input type="button" value="导出" class="button_all" onclick="printMonthReport(this)"/>
+            &nbsp; <input type="button" value="关闭" class="button_cancel" onclick="closeWindow()">
         </td>
 </table>
 <table cellpadding="0" cellspacing="0" border="1" class="table_thin_line">
