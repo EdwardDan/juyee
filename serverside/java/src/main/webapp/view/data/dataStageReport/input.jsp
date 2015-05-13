@@ -1,91 +1,82 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/common/taglibs.jsp" %>
 <script type="text/javascript">
-    var formId = "bean";    
+    var formId = "bean";
+    var flag = false;
     $(function () {
         //页面验证初始化
-        var validateCondition = [
-                                                                        //{name:"year", rule:"validate[required,custom[integer],maxSize[4]"},            
-                                                                                                      //{name:"month", rule:"validate[required,custom[integer],maxSize[2]"},            
-                                                                                                      //{name:"createTime", rule:"validate[required,maxSize[7]]"},            
-                                                                                                      //{name:"createUser", rule:"validate[required,maxSize[100]]"},            
-                                                                                                      //{name:"updateTime", rule:"validate[required,maxSize[7]]"},            
-                                                                                                      //{name:"updateUser", rule:"validate[required,maxSize[100]]"},            
-                                                  ];
+        var validateCondition = [];
         validateInit(validateCondition, formId);
+        <c:if test="${fn:length(bean.project.projBids)>0}">
+        checkBid(document.getElementById("projectBidId"));
+        </c:if>
     });
-
     //保存操作
     function save(btn) {
         if (!validateForm(formId)) {
             return;
         }
-
-        //加入其他业务判断
-//        if ($('#name').val() == '') {
-//            showInfoMsg('请输入姓名！',null);
-//            return;
-//        }
-
-        //提交表单
-        saveAjaxData("${ctx}/dataStageReport/save.do", formId);
+        if (flag) {
+            alert("页面数据有改动，需要保存历史数据！");
+            saveAjaxData("${ctx}/dataStageReport/save.do?reportLog=reportLog", formId);
+        } else {
+            saveAjaxData("${ctx}/dataStageReport/save.do", formId);
+        }
+    }
+    //选择填报内容
+    function changeResult(objValue, bidId, stepId, stageId) {
+        if (objValue == 1 || objValue == 2 || objValue == 3) {
+            var dealDate = $("#dealDate_" + bidId + "_" + stepId + "_" + stageId).val();
+            openNewWindow("new", "填报页面", "${ctx}/dataStageReport/resultInput.do?resultCode=" + objValue + "&bidId=" + bidId + "&stepId=" + stepId + "&stageId=" + stageId + "&dealDate=" + dealDate, false, 500, 300);
+        } else {
+            $("#dealDate_" + bidId + "_" + stepId + "_" + stageId).val("");
+        }
+    }
+    //切换标段
+    function checkBid(obj) {
+        loadAjaxData("checkBid", "${ctx}/dataStageReport/checkBidData.do?bidId=" + obj.value + "&projectId=${bean.project.id}&id=${bean.id}");
     }
 </script>
 <form:form commandName="bean">
     <form:hidden path="id"/>
+    <form:hidden path="year"/>
+    <form:hidden path="month"/>
+    <input type="hidden" name="projectId" value="${bean.project.id}">
 
     <div class="form_div">
         <table cellpadding="0" cellspacing="0" class="form_table">
-                                    <tr class="tr_light">
-              <td class="form_label">年份：</td>
-              <td class="form_content">
-                        <form:input path="year" cssClass="input_text"/>						
-                          </td>                                
+            <tr class="tr_dark">
+                <td class="form_label_right" style="width: 15%;">项目名称：</td>
+                <td class="form_content">${bean.project.name}</td>
             </tr>
-                                                <tr class="tr_dark">
-              <td class="form_label">月份：</td>
-              <td class="form_content">
-                        <form:input path="month" cssClass="input_text"/>						
-                          </td>                                
+            <tr class="tr_light">
+                <td class="form_label_right" style="width: 15%;">建设单位：</td>
+                <td class="form_content">${bean.project.jsDept}</td>
             </tr>
-                                    <tr class="tr_light">
-              <td class="form_label">创建时间：</td>
-              <td class="form_content">
-                                <input type="text" name="createTime" id="createTime" class="input_datetime"
-                           value="<fmt:formatDate value="${bean.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/>" readonly="true"/>
-                    <input type="button" class="button_calendar" value=" " onClick="calendar('createTime','all')">                                                        
-            
-                          </td>                                
-            </tr>
-                                                <tr class="tr_dark">
-              <td class="form_label">创建用户名：</td>
-              <td class="form_content">
-                        <form:input path="createUser" cssClass="input_text"/>						
-                          </td>                                
-            </tr>
-                                    <tr class="tr_light">
-              <td class="form_label">更新时间：</td>
-              <td class="form_content">
-                                <input type="text" name="updateTime" id="updateTime" class="input_datetime"
-                           value="<fmt:formatDate value="${bean.updateTime}" pattern="yyyy-MM-dd HH:mm:ss"/>" readonly="true"/>
-                    <input type="button" class="button_calendar" value=" " onClick="calendar('updateTime','all')">                                                        
-            
-                          </td>                                
-            </tr>
-                                                <tr class="tr_dark">
-              <td class="form_label">更新用户名：</td>
-              <td class="form_content">
-                        <form:input path="updateUser" cssClass="input_text"/>						
-                          </td>                                
-            </tr>
-                                     
-            <tr class="tr_button">
-                <td class="form_label"></td>
+            <tr class="tr_dark">
+                <td class="form_label_right" style="width: 15%;">选择标段：</td>
                 <td class="form_content">
-                    <input type="button" value="确定" class="button_confirm" onclick="save(this)">&nbsp;
-                    <input type="button" value="取消" class="button_cancel" onclick="closeWindow()">
+                    <c:if test="${fn:length(bean.project.projBids)>0}">
+                        <select class="form_select" name="projectBidId" id="projectBidId" onchange="checkBid(this)">
+                            <c:forEach items="${bean.project.projBids}" var="projectBid">
+                                <c:if test="${projectBid.typeCode == bidTypeCode}">
+                                    <option value="${projectBid.id}">${projectBid.name}</option>
+                                </c:if>
+                            </c:forEach>
+                        </select>
+                    </c:if>
                 </td>
             </tr>
         </table>
+        <div class="div_space"></div>
+        <c:if test="${fn:length(bean.project.projBids)>0}">
+            <div class="form_div" id="checkBid"></div>
+        </c:if>
+        <div class="div_space"></div>
+        <div class="form_div" style="text-align: center;">
+            <input type="button" value="保存" class="button_confirm" onclick="save(this)">&nbsp;
+            <input type="button" value="取消" class="button_cancel" onclick="closeWindow()">
+        </div>
+        <div class="div_space"></div>
     </div>
 </form:form>
