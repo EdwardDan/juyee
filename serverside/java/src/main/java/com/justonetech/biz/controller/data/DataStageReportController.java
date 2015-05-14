@@ -90,7 +90,7 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
     public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session) {
         try {
             Page pageModel = new Page(page, rows, true);
-            String hql = "from ProjInfo order by year desc,no asc";
+            String hql = "from ProjInfo order by id desc";
             //执行查询
             QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);
             String query = queryTranslate.toString();

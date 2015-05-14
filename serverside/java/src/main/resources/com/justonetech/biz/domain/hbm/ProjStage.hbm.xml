@@ -189,7 +189,7 @@
 		</many-to-one>
 	
 
-		<set name="projStages" inverse="true">
+		<set name="projStages" inverse="true" order-by="TREE_ID asc">
 			<key column="PARENT_ID"/>
 			<one-to-many class="ProjStage"/>
 		</set>
