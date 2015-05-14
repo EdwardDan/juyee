@@ -40,7 +40,7 @@
                   <c:set var="dataKey" value="${secondNode.id}_${step.id}" />
                 <c:if test="${status.index%2==0}">
                     <td width="8%"><input type="text" name="${secondNode.id}_${step.id}" id="${secondNode.id}_${step.id}" value="${dataMap[dataKey].content}"  title="${dataMap[dataKey].content}" class="input_number"></td>
-                    <td rowspan="2" width="8%"> <textarea  class="input_textarea" style="width:80px;height:46px" name="${secondNode.id}_${step.id}_problem" id="${secondNode.id}_${step.id}_problem" title="${dataMap[dataKey].problem}">${dataMap[dataKey].problem}</textarea></td>
+                    <td rowspan="2" width="8%"> <textarea  class="input_textarea" style="width:80px;height:46px" name="${firstNode.id}_${step.id}_problem" id="${firstNode.id}_${step.id}_problem" title="${dataMap[dataKey].problem}">${dataMap[dataKey].problem}</textarea></td>
                 </c:if>
                 <c:if test="${status.index%2==1}">
                     <td><input type="text" name="${secondNode.id}_${step.id}" id="${secondNode.id}_${step.id}" value="${dataMap[dataKey].content}" title="${dataMap[dataKey].content}" class="input_number"></td>
@@ -61,12 +61,12 @@
                     </c:if>
                     <td  nowrap>${thirdNode.name}&nbsp;</td>
                     <c:forEach items="${steps}" var="step">
-                        <c:set var="dataKey" value="${thirdNode.id}_${step.id}" />
-                        <c:if test="${thirdStatus.index%2==0}">
+                        <c:set var="dataKey" value="${thirdNode.id}_${step.id}"/>
+                        <c:if test="${thirdStatus.index==0&&secondStatus.index ==0}">
                             <td width="8%"><input type="text"  name="${thirdNode.id}_${step.id}" id="${thirdNode.id}_${step.id}" value="${dataMap[dataKey].content}" title="${dataMap[dataKey].content}" class="input_number"></td>
-                            <td rowspan="2" width="8%"> <textarea  class="input_textarea" style="width:80px;height: 46px" name="${thirdNode.id}_${step.id}_problem" id="${thirdNode.id}_${step.id}_problem" title="${dataMap[dataKey].problem}">${dataMap[dataKey].problem}</textarea></td>
+                            <td rowspan="${firstNode.totalChildCount}" width="8%"> <textarea  class="input_textarea" style="width:80px;height:140px" name="${firstNode.id}_${step.id}_problem" id="${firstNode.id}_${step.id}_problem" title="${dataMap[dataKey].problem}">${dataMap[dataKey].problem}</textarea></td>
                         </c:if>
-                        <c:if test="${thirdStatus.index%2==1}">
+                        <c:if test="${thirdStatus.index!=0||secondStatus.index !=0}">
                             <td width="8%"><input type="text" name="${thirdNode.id}_${step.id}" id="${thirdNode.id}_${step.id}" value="${dataMap[dataKey].content}" title="${dataMap[dataKey].content}" class="input_number"></td>
                         </c:if>
                     </c:forEach>

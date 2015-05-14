@@ -245,10 +245,12 @@ public class DataNodeReportController extends BaseCRUDActionController<DataNodeR
             List<SysCodeDetail> steps = sysCodeManager.getCodeListByCode(Constants.DATA_REPORT_STEP);
             List<DataNodeReportItem> dataItems=new ArrayList<DataNodeReportItem>();
             for (ProjNode leafNode : leafNodes) {
+                Long firstNodeId = leafNode.getFirstNodeId();
                 for (SysCodeDetail step : steps) {
-                    String name=leafNode.getId() + "_" + step.getId();
-                    String content = request.getParameter(name);
-                    String problem = request.getParameter(name+ "_problem");
+                    String contentName=leafNode.getId() + "_" + step.getId();
+                    String problemName=firstNodeId + "_" + step.getId()+"_problem";
+                    String content = request.getParameter(contentName);
+                    String problem = request.getParameter(problemName);
                     if (!StringHelper.isEmpty(problem)||!StringHelper.isEmpty(content)) {
                         DataNodeReportItem dataItem = new DataNodeReportItem();
                         if (!StringHelper.isEmpty(problem)) {
