@@ -4,6 +4,7 @@ import com.justonetech.core.utils.StringHelper;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.net.util.Base64;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
@@ -452,7 +453,7 @@ public class FileUtils {
             } else if (isFirefox || isSafari) {
                 newFileName = new String(fileName.getBytes(encoding), "ISO8859-1"); //Firefox,Safari
             } else if (isChrome) {
-                newFileName = new String(org.apache.commons.codec.binary.Base64.encodeBase64(fileName.getBytes(encoding)));//Chrome
+                newFileName = new String(Base64.encodeBase64(fileName.getBytes(encoding)));//Chrome
             }
             response.setHeader("Content-disposition", "attachment;filename=\"" + newFileName + "\"");
         }
