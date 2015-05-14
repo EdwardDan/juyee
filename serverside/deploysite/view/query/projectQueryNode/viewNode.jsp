@@ -34,9 +34,7 @@
 
     //导出
     function printMonthReport(btn){
-//        btn.disabled = true;
         var str = "projectName=" + $("#projectName").val() + "&bidName=" + $("#bidName").val() + "&jsDept=" + $("#jsDept").val() + "&year=" + $("#year").val();
-        <%--loadAjaxDataCallback("nodeDataPrintDiv", "${ctx}/projectQueryNode/printExcel.do?id=${id}&month=" + last_m+"&" + str, resetButton);--%>
         window.open("${ctx}/projectQueryNode/printExcel.do?id=${id}&month=" + last_m+"&" + str);
     }
 
@@ -57,8 +55,8 @@
     }
 </style>
 <div class="form_div">
-    <table cellpadding="1" cellspacing="1" width="500" border="0" <c:if test="${not empty id}">style="display: none"</c:if>>
-        <tr class="tr_light">
+    <table cellpadding="1" cellspacing="1" width="500" border="0">
+        <tr class="tr_light" <c:if test="${not empty id}">style="display: none"</c:if>>
             <td align="right" width="70" nowrap>项目名称：</td>
             <td align="left" nowrap>
                 <input type="text" name="projectName" id="projectName" class="input_text"/>
@@ -72,7 +70,7 @@
                 <select name="year" id="year">${yearOptions}</select>
             </td>
         </tr>
-        <tr>
+        <tr <c:if test="${not empty id}">style="display: none"</c:if>>
             <td align="right" nowrap>建设单位：</td>
             <td align="left" nowrap>
                 <input type="text" name="jsDept" id="jsDept" class="input_text"/>
@@ -84,8 +82,8 @@
             </td>
         </tr>
         <tr>
-            <td align="right" nowrap>&nbsp;上报月份：</td>
-            <td align="left" colspan="5">
+            <td align="right" nowrap>上报月份：</td>
+            <td align="left" nowrap colspan="5">
                 <table cellpadding="0" cellspacing="0" border="1" class="table_thin_line" width="500">
                     <tr align="center">
                         <c:forEach var="m" begin="1" end="12" step="1">
@@ -97,11 +95,6 @@
         </tr>
     </table>
     <table cellpadding="0" cellspacing="0" class="form_table">
-        <tr class="tr_light" style="display: none">
-            <td id="nodeDataPrintDiv">
-                &nbsp;
-            </td>
-        </tr>
         <tr class="tr_light">
             <td id="nodeDataDiv">
                 &nbsp;

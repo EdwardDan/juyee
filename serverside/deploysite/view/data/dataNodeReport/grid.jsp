@@ -20,7 +20,7 @@
                     {name: 'id', width: 10, align: "center", searchtype: "integer", hidden: true},
                     {name: "year", width: "30", align: "center", searchtype: "integer", sortable: true},
                     {name: "no", width: "30", align: "center", searchtype: "string", sortable: true},
-                    {name: "name", width: "80", align: "center", searchtype: "string", sortable: true},
+                    {name: "name", width: "80", align: "left", searchtype: "string", sortable: true},
                     {name: "property.name", width: "30", align: "center", searchtype: "string", sortable: true},
                     {name: "stage.name", width: "30", align: "center", searchtype: "string", sortable: true},
                     {name: "category.name", width: "30", align: "center", searchtype: "string", sortable: true},

@@ -17,7 +17,7 @@
             return;
         }
         if (flag) {
-            alert("页面数据有改动，需要保存历史数据！");
+//            alert("页面数据有改动，需要保存历史数据！");
             saveAjaxData("${ctx}/dataStageReport/save.do?reportLog=reportLog", formId);
         } else {
             saveAjaxData("${ctx}/dataStageReport/save.do", formId);
