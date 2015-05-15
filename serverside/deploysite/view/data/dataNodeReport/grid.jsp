@@ -40,8 +40,9 @@
                         var rowData = jQuery("#listGrid").jqGrid('getRowData', projectId);
                         var bidCountOfNode = rowData["bidCountOfNode"];
                         var year = rowData["year"];
+                        var opButton = '<input type="button" value="查看" onclick="doView(' + projectId + ','+bidCountOfNode+')" class="button_normal"> ';
                     <c:if test="${canEdit}">
-                        var opButton = '<input type="button" value="形象进度维护" onclick="doEdit(' + projectId + ','+bidCountOfNode+')" class="button_add_long" /> ';
+                        opButton += '<input type="button" value="形象进度维护" onclick="doEdit(' + projectId + ','+bidCountOfNode+')" class="button_add_long" /> ';
                     </c:if>
                         jQuery("#listGrid").jqGrid('setRowData', ids[i], { operation: opButton});
                     }
@@ -70,11 +71,17 @@
             openWindow("修改项目形象进度推进", "${ctx}/dataNodeReport/modify.do?projectId=" + projectId, true,1125,500);
         }
     }
+    function doView(projectId,bidCountOfNode) {
+        if(bidCountOfNode==0){
+            alert("该项目形象进度标段数为零，请先在[形象进度标段管理]中添加标段！");
+        }else{
+        openWindow("查看项目形象进度推进", "${ctx}/dataNodeReport/view.do?projectId=" + projectId, false,1125,500);
+        }
+    }
 
     function viewBidInfoFormat(cellvalue, options, rowObject) {
         var title = "查看标段";
         return "<a href='javascript:void(0)' onclick=loadBidInfoFormat('" + title + "','" + rowObject["id"] + "','${TYPE_NODE}',true,false) class='grid_link'>" + cellvalue + "</a>";
-
     }
     function loadBidInfoFormat(title, projInfoId, typeCode, isParentWindow, isOpenNewWindow) {
         var url = "${ctx}/projInfo/viewBid.do?id=" + projInfoId+"&typeCode="+typeCode;
