@@ -186,15 +186,26 @@ public class DataNodeReportController extends BaseCRUDActionController<DataNodeR
     /**
      * 查看页面
      *
-     * @param id    .
-     * @param model .
+     * @param projectId .
+     * @param model     .
      * @return .
      */
     @RequestMapping
-    public String view(Model model, Long id) {
-        DataNodeReport dataNodeReport = dataNodeReportService.get(id);
-
+    public String view(Model model, Long projectId) {
+        Calendar c = Calendar.getInstance();
+        ProjInfo projInfo = projInfoService.get(projectId);
+        List<DataNodeReport> dataNodeReportList = dataNodeReportService.findByProperty("project.id", projectId);
+        List<ProjBid> projBids = getBids(projectId);
+        DataNodeReport dataNodeReport = new DataNodeReport();
+        if (dataNodeReportList.size() > 0) {
+            dataNodeReport = dataNodeReportList.iterator().next();
+        }
+        //处理其他业务逻辑
+        model.addAttribute("currentMonth", c.get(Calendar.MONTH) + 1);
+        model.addAttribute("projInfo", projInfo);
+        model.addAttribute("projBids", projBids);
         model.addAttribute("bean", dataNodeReport);
+        model.addAttribute("id", projInfo.getId());
         return "view/data/dataNodeReport/view";
     }
 
@@ -214,12 +225,12 @@ public class DataNodeReportController extends BaseCRUDActionController<DataNodeR
             DataNodeReport target;
             if (entity.getId() != null) {
                 DataNodeReport dataNodeReport = dataNodeReportService.get(entity.getId());
-                if (dataNodeReport.getMonth() .equals(Integer.valueOf(month)) ) {
+                if (dataNodeReport.getMonth().equals(Integer.valueOf(month))) {
                     target = dataNodeReport;
-                }else{
+                } else {
                     target = new DataNodeReport();
                 }
-            }else{
+            } else {
                 target = new DataNodeReport();
             }
             if (month != null && !month.equals("")) {
@@ -240,22 +251,22 @@ public class DataNodeReportController extends BaseCRUDActionController<DataNodeR
             //保存之前先删除旧数据
             if (target.getProject() != null && target.getBid() != null) {
                 List<DataNodeReportItem> dataNodeReportItems = findDataItems(target.getProject().getId(), target.getProject().getYear(), Integer.valueOf(month), target.getBid().getId());
-                    dataNodeReportItemService.batchDelete(dataNodeReportItems,dataNodeReportItems.size());
+                dataNodeReportItemService.batchDelete(dataNodeReportItems, dataNodeReportItems.size());
             }
 
             //保存填报明细
             List<ProjNode> leafNodes = projNodeService.findByQuery("from ProjNode where isValid=1 and isLeaf=1  order by treeId asc");
             //审核步骤
             List<SysCodeDetail> steps = sysCodeManager.getCodeListByCode(Constants.DATA_REPORT_STEP);
-            List<DataNodeReportItem> dataItems=new ArrayList<DataNodeReportItem>();
+            List<DataNodeReportItem> dataItems = new ArrayList<DataNodeReportItem>();
             for (ProjNode leafNode : leafNodes) {
                 Long firstNodeId = leafNode.getFirstNodeId();
                 for (SysCodeDetail step : steps) {
-                    String contentName=leafNode.getId() + "_" + step.getId();
-                    String problemName=firstNodeId + "_" + step.getId()+"_problem";
+                    String contentName = leafNode.getId() + "_" + step.getId();
+                    String problemName = firstNodeId + "_" + step.getId() + "_problem";
                     String content = request.getParameter(contentName);
                     String problem = request.getParameter(problemName);
-                    if (!StringHelper.isEmpty(problem)||!StringHelper.isEmpty(content)) {
+                    if (!StringHelper.isEmpty(problem) || !StringHelper.isEmpty(content)) {
                         DataNodeReportItem dataItem = new DataNodeReportItem();
                         if (!StringHelper.isEmpty(problem)) {
                             dataItem.setProblem(problem);
