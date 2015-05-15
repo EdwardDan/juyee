@@ -51,6 +51,25 @@ public class ProjNode extends BaseProjNode {
     }
 
     /**
+     * 获取叶子节点中第1个节点--用于问题的显示
+     *
+     * @return .
+     */
+    public Long getChildFirstLeafId() {
+        Set<ProjNode> projNodes = getProjNodes();
+        if (projNodes.size() > 0) {
+            ProjNode child = projNodes.iterator().next();
+            Set<ProjNode> children = child.getProjNodes();
+            if (children.size() > 0) {
+                return children.iterator().next().getId();
+            } else {
+                return child.getId();
+            }
+        }
+        return getId();
+    }
+
+    /**
      * 获取本节点所在层次的所有层次数
      *
      * @return .

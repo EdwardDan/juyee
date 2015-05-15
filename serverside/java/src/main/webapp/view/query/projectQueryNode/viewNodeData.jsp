@@ -60,7 +60,7 @@
             </tr>
             <tr class="tr_dark">
                 <c:forEach items="${firstNodes}" var="firstNode">
-                    <c:set var="dataKey" value="${bid.id}_${step.id}_${firstNode.id}" />
+                    <c:set var="dataKey" value="${bid.id}_${step.id}_${firstNode.childFirstLeafId}" />
                     <td colspan="${firstNode.totalChildCount}">&nbsp;${dataMap[dataKey].problem}</td>
                 </c:forEach>
             </tr>
