@@ -211,12 +211,16 @@ public class DataNodeReportController extends BaseCRUDActionController<DataNodeR
     public void save(HttpServletResponse response, @ModelAttribute("bean") DataNodeReport entity, HttpServletRequest request) throws Exception {
         try {
             String month = request.getParameter("month");
-            DataNodeReport target = new DataNodeReport();
+            DataNodeReport target;
             if (entity.getId() != null) {
                 DataNodeReport dataNodeReport = dataNodeReportService.get(entity.getId());
-                if (dataNodeReport.getMonth() == Integer.valueOf(month)) {
+                if (dataNodeReport.getMonth() .equals(Integer.valueOf(month)) ) {
                     target = dataNodeReport;
+                }else{
+                    target = new DataNodeReport();
                 }
+            }else{
+                target = new DataNodeReport();
             }
             if (month != null && !month.equals("")) {
                 target.setMonth(Integer.valueOf(month));
