@@ -115,22 +115,8 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
      */
     @RequestMapping
     public String modify(Model model, Long projectId) {
-        Calendar c = Calendar.getInstance();
-        ProjInfo projInfo = projInfoService.get(projectId);
-        List<DataStageReport> reportList = dataStageReportService.findByProperty("project.id", projectId);
 
-        DataStageReport dataStageReport = new DataStageReport();
-        if (null != reportList && reportList.size() > 0) {
-            dataStageReport = reportList.iterator().next();
-        } else {
-            dataStageReport.setProject(projInfo);
-            dataStageReport.setYear(c.get(Calendar.YEAR));
-            dataStageReport.setMonth(c.get(Calendar.MONTH) + 1);
-        }
-        //处理其他业务逻辑
-        model.addAttribute("bean", dataStageReport);
-        //标段类别--办证推进
-        model.addAttribute("bidTypeCode", ProjBidType.TYPE_STAGE.getCode());
+        doEditViewData(projectId, model);
 
         return "view/data/dataStageReport/input";
     }
@@ -145,32 +131,8 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
      */
     @RequestMapping
     public String checkBidData(Model model, Long bidId, Long projectId) {
-        model.addAttribute("bidId", bidId);
-        //办证阶段(表格维护)
-        List<ProjStage> projStages = projStageService.findByQuery("from ProjStage where isValid=1 order by treeId asc");
-        model.addAttribute("projStages", projStages);
 
-        //审核步骤
-        List<SysCodeDetail> steps = sysCodeManager.getCodeListByCode(Constants.DATA_REPORT_STEP);
-        model.addAttribute("steps", steps);
-
-        //办证推进结果
-        List<SysCodeDetail> results = sysCodeManager.getCodeListByCode(Constants.DATA_STAGE_RESULT);
-        model.addAttribute("results", results);
-
-        //填报数据
-        Map<String, Object> dataMap = new HashMap<String, Object>();
-        String hql = "from DataStageReportItem where stageReport.project.id=? and stageReport.bid.id=? order by stageReport.year desc,stageReport.month desc,id desc";
-        List<DataStageReportItem> dataStageReportItems = dataStageReportItemService.findByQuery(hql, projectId, bidId);
-        for (DataStageReportItem item : dataStageReportItems) {
-            Map<String, Object> map = new HashMap<String, Object>();
-            map.put("resultId", item.getResult().getId());
-            map.put("resultCode", item.getResult().getCode());
-            map.put("resultName", item.getResult().getName());
-            map.put("dealDate", item.getDealDate());
-            dataMap.put(bidId + "_" + item.getStep().getId() + "_" + item.getStage().getId(), map);
-        }
-        model.addAttribute("dataMap", dataMap);
+        doCheckBidData(bidId, projectId, model);
 
         return "view/data/dataStageReport/checkBidData";
     }
@@ -199,6 +161,37 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
         }
 
         return "view/data/dataStageReport/resultInput";
+    }
+
+    /**
+     * 查看显示页面
+     *
+     * @param projectId .
+     * @param model     .
+     * @return .
+     */
+    @RequestMapping
+    public String view(Model model, Long projectId) {
+
+        doEditViewData(projectId, model);
+
+        return "view/data/dataStageReport/view";
+    }
+
+    /**
+     * 数据处理页面
+     *
+     * @param model     。
+     * @param bidId     。
+     * @param projectId 。
+     * @return 。
+     */
+    @RequestMapping
+    public String checkBidDataView(Model model, Long bidId, Long projectId) {
+
+        doCheckBidData(bidId, projectId, model);
+
+        return "view/data/dataStageReport/checkBidDataView";
     }
 
     /**
@@ -294,5 +287,66 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
             return;
         }
         sendSuccessJSON(response, "保存成功");
+    }
+
+    /**
+     * 处理编辑和查看页面的数据
+     *
+     * @param projectId 。
+     * @param model     。
+     */
+    private void doEditViewData(Long projectId, Model model) {
+        Calendar c = Calendar.getInstance();
+        ProjInfo projInfo = projInfoService.get(projectId);
+        List<DataStageReport> reportList = dataStageReportService.findByProperty("project.id", projectId);
+
+        DataStageReport dataStageReport = new DataStageReport();
+        if (null != reportList && reportList.size() > 0) {
+            dataStageReport = reportList.iterator().next();
+        } else {
+            dataStageReport.setProject(projInfo);
+            dataStageReport.setYear(c.get(Calendar.YEAR));
+            dataStageReport.setMonth(c.get(Calendar.MONTH) + 1);
+        }
+        //处理其他业务逻辑
+        model.addAttribute("bean", dataStageReport);
+        //标段类别--办证推进
+        model.addAttribute("bidTypeCode", ProjBidType.TYPE_STAGE.getCode());
+    }
+
+    /**
+     * 处理页面详细数据
+     *
+     * @param bidId     。
+     * @param projectId 。
+     * @param model     。
+     */
+    private void doCheckBidData(Long bidId, Long projectId, Model model) {
+        model.addAttribute("bidId", bidId);
+        //办证阶段(表格维护)
+        List<ProjStage> projStages = projStageService.findByQuery("from ProjStage where isValid=1 order by treeId asc");
+        model.addAttribute("projStages", projStages);
+
+        //审核步骤
+        List<SysCodeDetail> steps = sysCodeManager.getCodeListByCode(Constants.DATA_REPORT_STEP);
+        model.addAttribute("steps", steps);
+
+        //办证推进结果
+        List<SysCodeDetail> results = sysCodeManager.getCodeListByCode(Constants.DATA_STAGE_RESULT);
+        model.addAttribute("results", results);
+
+        //填报数据
+        Map<String, Object> dataMap = new HashMap<String, Object>();
+        String hql = "from DataStageReportItem where stageReport.project.id=? and stageReport.bid.id=? order by stageReport.year desc,stageReport.month desc,id desc";
+        List<DataStageReportItem> dataStageReportItems = dataStageReportItemService.findByQuery(hql, projectId, bidId);
+        for (DataStageReportItem item : dataStageReportItems) {
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("resultId", item.getResult().getId());
+            map.put("resultCode", item.getResult().getCode());
+            map.put("resultName", item.getResult().getName());
+            map.put("dealDate", item.getDealDate());
+            dataMap.put(bidId + "_" + item.getStep().getId() + "_" + item.getStage().getId(), map);
+        }
+        model.addAttribute("dataMap", dataMap);
     }
 }

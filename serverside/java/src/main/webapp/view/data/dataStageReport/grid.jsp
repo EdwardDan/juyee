@@ -23,12 +23,12 @@
                     {name: "name", width: "70", align: "left", searchtype: "string", sortable: true},
                     {name: "property.name", width: "40", align: "center", searchtype: "string", sortable: true},
                     {name: "stage.name", width: "40", align: "center", searchtype: "string", sortable: true},
-                    {name: "category.name", width: "40", align: "center", searchtype: "date", sortable: true},
+                    {name: "category.name", width: "40", align: "center", searchtype: "string", sortable: true},
                     {name: "bidCountOfStage", width: "25", align: "center", searchtype: "integer", sortable: true, formatter: viewBidInfoFormat},
                     {name: "bidCountOfStage", width: "5", align: "center", searchtype: "integer", hidden: true}
                 ],
                 actModel: [
-                    {name: 'operation', width: 40, align: 'center'}
+                    {name: 'operation', width: 45, align: 'center'}
                 ],
                 pager: '#pager2',
                 caption: "办证推进填报列表",
@@ -39,8 +39,9 @@
                         var id = ids[i];
                         var rowData = jQuery("#listGrid").jqGrid('getRowData', id);
                         var bidCountOfStage = rowData["bidCountOfStage"];
+                        var opButton = '<input type="button" value="查看" onclick="doView(' + id + ',' + bidCountOfStage + ')" class="button_normal" /> ';
                         <c:if test="${canEdit}">
-                        var opButton = '<input type="button" value="办证推进维护" onclick="doEdit(' + id + ',' + bidCountOfStage + ')" class="button_add_long" /> ';
+                        opButton += '<input type="button" value="办证推进维护" onclick="doEdit(' + id + ',' + bidCountOfStage + ')" class="button_add_long" /> ';
                         </c:if>
                         jQuery("#listGrid").jqGrid('setRowData', ids[i], { operation: opButton});
                     }
@@ -62,6 +63,13 @@
         };
         gridinit($("#listGrid"), conf);
     });
+    function doView(id, bidCountOfStage) {
+        if (bidCountOfStage == 0) {
+            confirm("该项目办证推进标段数为零暂时无法查看，请先在[项目办证标段管理]中添加标段并填报数据才可以查看！");
+        } else {
+            openWindow("办证推进查看", "${ctx}/dataStageReport/view.do?projectId=" + id, true, 1100, 500);
+        }
+    }
     function doEdit(id, bidCountOfStage) {
         if (bidCountOfStage == 0) {
             confirm("该项目办证推进标段数为零，请先在[项目办证标段管理]中添加标段！");
