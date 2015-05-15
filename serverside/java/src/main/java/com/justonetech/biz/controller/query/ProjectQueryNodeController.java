@@ -379,7 +379,6 @@ public class ProjectQueryNodeController extends BaseCRUDActionController<ProjInf
                     } else if (totalLevel == 3) {
                         mergerCellsList.add(new int[]{startColNo, startRowNo, startColNo + totalChildCount - 1, startRowNo});
                         for (ProjNode child : childs) {
-                            System.out.println("child.getName() = " + child.getName());
                             int size = child.getProjNodes().size();
                             if (size > 1) {
                                 mergerCellsList.add(new int[]{startColNo, startRowNo + 1, startColNo + size - 1, startRowNo + 1});
