@@ -69,11 +69,11 @@
     }
 
     function doViewPrjChargedByDept(deptId, deptName) {
-        openWindow("查看" + deptName + "所承担的项目", "${ctx}/projRelateDept/grid2.do?deptId=" + deptId, true, 1061, 531);
+        openWindow("查看" + deptName + "所承担的项目", "${ctx}/projRelateDept/gridForPrjRelateDept.do?deptId=" + deptId, true, 1061, 531);
     }
 
     function doViewDeptPersons(deptId, deptName) {
-        loadMainPage("${ctx}/sysPerson/grid2.do?deptId=" + encodeURI(deptId) + "&deptName=" + encodeURI(deptName) + "&originalUrl=${ctx}/projRelateDept/grid.do&originalLocation=" + encodeURI("项目建设单位列表"), "建设单位 > 人员列表");
+        loadMainPage("${ctx}/projRelatePerson/gridForDeptPersons.do?deptId=" + encodeURI(deptId) + "&deptName=" + encodeURI(deptName) + "&originalUrl=${ctx}/projRelateDept/grid.do&originalLocation=" + encodeURI("项目建设单位列表"), "建设单位 > 人员列表");
     }
 
     <c:if test="${canEdit}">

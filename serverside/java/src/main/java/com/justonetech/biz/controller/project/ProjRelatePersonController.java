@@ -10,7 +10,9 @@ import com.justonetech.core.orm.hibernate.Page;
 import com.justonetech.core.utils.JspHelper;
 import com.justonetech.core.utils.ReflectionUtils;
 import com.justonetech.core.utils.StringHelper;
+import com.justonetech.system.daoservice.SysDeptService;
 import com.justonetech.system.daoservice.SysPersonService;
+import com.justonetech.system.domain.SysPerson;
 import com.justonetech.system.manager.SysUserManager;
 import com.justonetech.system.utils.PrivilegeCode;
 import org.slf4j.Logger;
@@ -30,7 +32,7 @@ import java.util.List;
  * note:项目与人员关联
  * author: Stanley
  * create date: 2015-05-04
- * modify date: 2015-05-08
+ * modify date: 2015-05-20
  */
 @Controller
 public class ProjRelatePersonController extends BaseCRUDActionController<ProjRelatePerson> {
@@ -48,53 +50,62 @@ public class ProjRelatePersonController extends BaseCRUDActionController<ProjRel
     @Autowired
     private SysPersonService sysPersonService;
 
+    @Autowired
+    private SysDeptService sysDeptService;
+
     /**
-     * 项目与人员关联列表显示页面
+     * 项目承建单位下下属人员的列表显示页面
      *
      * @param model .
-     * @return .
      */
     @RequestMapping
-    public String grid(Model model) {
-        //判断是否有编辑权限
-        model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.PROJ_RELATE_DEPT_EDIT));
-        return "view/project/projRelatePerson/grid";
+    public String gridForDeptPersons(Model model, Long deptId, String deptName, String originalUrl, String originalLocation) {
+        model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.SYS_PERSON_EDIT));
+        model.addAttribute("deptId", deptId);
+        model.addAttribute("deptName", deptName);
+        model.addAttribute("originalUrl", originalUrl);
+        model.addAttribute("originalLocation", originalLocation);
+        return "view/project/projRelatePerson/gridForDeptPersons";
     }
 
     /**
-     * 项目建设单位下属人员承担项目列表显示页面
+     * 项目承建单位下属人员承担项目列表显示页面
      *
      * @param model
      * @param personId
      * @return
      */
     @RequestMapping
-    public String grid2(Model model, Long personId) {
+    public String gridForPrjRelatePerson(Model model, Long personId) {
+        model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.PROJ_RELATE_DEPT_EDIT));
         model.addAttribute("personId", personId);
         model.addAttribute("personPrjInfoOptions", getPersonPrjInfoOptions(personId));
-        return grid(model).concat("2");
+        return "view/project/projRelatePerson/gridForPrjRelatePerson";
     }
 
     /**
-     * 获取项目与人员关联列表数据
+     * 根据项目承建单位获取下属人员的列表显示页面
      *
-     * @param response .
-     * @param filters  .
-     * @param columns  .
-     * @param page     .
-     * @param rows     .
+     * @param request
+     * @param response
+     * @param filters
+     * @param columns
+     * @param page
+     * @param rows
+     * @param deptId
      */
     @RequestMapping
-    public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, Long id /*HttpSession session*/) {
+    public void gridDataCustomForDeptPersons(HttpServletRequest request, HttpServletResponse response, String filters, String columns, int page, int rows, Long deptId) {
         try {
             Page pageModel = new Page(page, rows, true);
-            String hql = "from ProjRelatePerson where person.id = " + id.longValue() + " order by id desc";
-            //增加自定义查询条件
+            String hql = "select sp from SysPerson sp left join sp.sysPersonDepts spd left join spd.dept dept " +
+                    " where dept.id = " + deptId.longValue() + " order by dept.treeId asc, spd.orderNo asc, sp.name asc ";
             //执行查询
+            filters = filters.replaceAll("\"field\":\"(?!dept\\.name)", "\"field\":\"sp.");   //统一添加别名
+            filters = filters.replaceAll("\"orderColumn\":\"company", "\"orderColumn\":\"dept");   //表头排序，单位排序有问题
+            filters = filters.replaceAll("\"orderColumn\":\"(?!dept\\.name|\")", "\"orderColumn\":\"sp.");   //表头排序
             QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);
-            String query = queryTranslate.toString();
-//            session.setAttribute(Constants.GRID_SQL_KEY, query);
-            pageModel = projRelatePersonService.findByPage(pageModel, query);
+            pageModel = sysPersonService.findByPage(pageModel, queryTranslate.toString());
             //输出显示
             String json = GridJq.toJSON(columns, pageModel);
             sendJSON(response, json);
@@ -105,7 +116,7 @@ public class ProjRelatePersonController extends BaseCRUDActionController<ProjRel
     }
 
     /**
-     * 获取项目建设单位下属人员承担项目列表数据
+     * 获取项目承建单位下属人员承担项目列表数据
      *
      * @param response .
      * @param filters  .
@@ -114,7 +125,7 @@ public class ProjRelatePersonController extends BaseCRUDActionController<ProjRel
      * @param rows     .
      */
     @RequestMapping
-    public void gridDataCustom2(HttpServletResponse response, String filters, String columns, int page, int rows, Long personId, String year, String piName) {
+    public void gridDataCustomForPrjRelatePerson(HttpServletResponse response, String filters, String columns, int page, int rows, Long personId, String year, String piName) {
         try {
             Page pageModel = new Page(page, rows, true);
             String sql = "select pp2.id, pi.year, pi.name, '' as spname, '' as office_tel, '' as mobile from (select * from proj_relate_person pp where " +
@@ -141,7 +152,7 @@ public class ProjRelatePersonController extends BaseCRUDActionController<ProjRel
     }
 
     /**
-     * 新增录入页面
+     * 新增项目关联人员录入页面
      *
      * @param model .
      * @return .
@@ -149,13 +160,25 @@ public class ProjRelatePersonController extends BaseCRUDActionController<ProjRel
     @RequestMapping
     public String add(Model model) {
         ProjRelatePerson projRelatePerson = new ProjRelatePerson();
-        //如需增加其他默认值请在此添加
         model.addAttribute("bean", projRelatePerson);
         return "view/project/projRelatePerson/input";
     }
 
     /**
-     * 修改显示页面
+     * 给定某一部门新增人员录入页面
+     *
+     * @param model .
+     */
+    @RequestMapping
+    public String addForDeptPersons(Model model, Long deptId, String deptName) {
+        model.addAttribute("deptId", deptId);
+        model.addAttribute("deptName", deptId != null ? sysDeptService.get(deptId).getName() : JspHelper.getString(deptName));
+        model.addAttribute("bean", new SysPerson());
+        return "view/system/sysPerson/input";
+    }
+
+    /**
+     * 修改项目关联人员显示页面
      *
      * @param id    .
      * @param model .
@@ -164,13 +187,27 @@ public class ProjRelatePersonController extends BaseCRUDActionController<ProjRel
     @RequestMapping
     public String modify(Model model, Long id) {
         ProjRelatePerson projRelatePerson = projRelatePersonService.get(id);
-        //处理其他业务逻辑
         model.addAttribute("bean", projRelatePerson);
         return "view/project/projRelatePerson/input";
     }
 
     /**
-     * 查看页面
+     * 修改特定部门下的某一人员页面
+     *
+     * @param id    .
+     * @param model .
+     * @return .
+     */
+    @RequestMapping
+    public String modifyForDeptPersons(Model model, Long id, Long deptId, String deptName) {
+        model.addAttribute("deptId", deptId);
+        model.addAttribute("deptName", deptName);
+        model.addAttribute("bean", sysPersonService.get(id));
+        return "view/system/sysPerson/input";
+    }
+
+    /**
+     * 查看项目关联人员页面
      *
      * @param id    .
      * @param model .
@@ -214,7 +251,7 @@ public class ProjRelatePersonController extends BaseCRUDActionController<ProjRel
     }
 
     /**
-     * 保存建设单位下属人员关联项目操作
+     * 保存项目承建单位下属人员关联项目操作
      *
      * @param response
      * @param personId
@@ -281,7 +318,7 @@ public class ProjRelatePersonController extends BaseCRUDActionController<ProjRel
      * @throws Exception .
      */
     @RequestMapping
-    public void delete2(HttpServletResponse response, Long id) throws Exception {
+    public void deletePrjRelatePerson(HttpServletResponse response, Long id) throws Exception {
         try {
             projRelatePersonService.delete(id);
             sendSuccessJSON(response, "删除成功");

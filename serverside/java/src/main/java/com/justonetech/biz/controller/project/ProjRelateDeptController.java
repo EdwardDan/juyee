@@ -100,10 +100,10 @@ public class ProjRelateDeptController extends BaseCRUDActionController<ProjRelat
      * @return
      */
     @RequestMapping
-    public String grid2(Model model, Long deptId) {
+    public String gridForPrjRelateDept(Model model, Long deptId) {
         model.addAttribute("deptId", deptId);
         model.addAttribute("unitPrjInfoOptions", getUnitPrjInfoOptions(deptId));
-        return grid(model).concat("2");
+        return grid(model).replace("grid", "gridForPrjRelateDept");
     }
 
     /**
@@ -148,7 +148,7 @@ public class ProjRelateDeptController extends BaseCRUDActionController<ProjRelat
      * @param rows     .
      */
     @RequestMapping
-    public void gridDataCustom2(HttpServletResponse response, String filters, String columns, int page, int rows, Long deptId, String year, String piName/*, String spname, String officetel, String mobile*/) {
+    public void gridDataCustomForPrjRelateDept(HttpServletResponse response, String filters, String columns, int page, int rows, Long deptId, String year, String piName/*, String spname, String officetel, String mobile*/) {
         try {
             Page pageModel = new Page(page, rows, true);
             /*String sql = "select pd2.id, pi.year, pi.name, sp.name as spname, sp.office_tel, sp.mobile from (select * from proj_relate_dept pd where pd.dept_id = " + deptId.longValue() + ") pd2 " +
@@ -208,18 +208,16 @@ public class ProjRelateDeptController extends BaseCRUDActionController<ProjRelat
         return "view/project/projRelateDept/input";
     }
 
-    /**
-     * 新增单位承担项目录入页面
-     *
-     * @param model .
-     * @return .
-     */
-    @RequestMapping
-    public String add2(Model model, Long id) {
-        ProjRelateDept projRelateDept = projRelateDeptService.get(id);
-        model.addAttribute("bean", projRelateDept);
-        return "view/project/projRelateDept/input";
-    }
+//    /**
+//     * 新增单位承担项目录入页面
+//     *
+//     */
+//    @RequestMapping
+//    public String add2(Model model, Long id) {
+//        ProjRelateDept projRelateDept = projRelateDeptService.get(id);
+//        model.addAttribute("bean", projRelateDept);
+//        return "view/project/projRelateDept/input";
+//    }
 
     /**
      * 修改显示页面
@@ -395,7 +393,7 @@ public class ProjRelateDeptController extends BaseCRUDActionController<ProjRelat
      * @throws Exception .
      */
     @RequestMapping
-    public void delete2(HttpServletResponse response, Long id) throws Exception {
+    public void deletePrjRelateDept(HttpServletResponse response, Long id) throws Exception {
         try {
             projRelateDeptService.delete(id);
             sendSuccessJSON(response, "删除成功");

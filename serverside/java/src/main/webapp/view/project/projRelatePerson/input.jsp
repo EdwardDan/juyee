@@ -1,12 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/common/taglibs.jsp" %>
 <script type="text/javascript">
-    var formId = "bean";    
+    var formId = "bean";
     $(function () {
         //页面验证初始化
         var validateCondition = [
-                                                                        //{name:"dutyRole", rule:"validate[required,maxSize[20]]"},            
-                                                  ];
+            //{name:"dutyRole", rule:"validate[required,maxSize[20]]"},
+        ];
         validateInit(validateCondition, formId);
     });
 
@@ -31,13 +31,13 @@
 
     <div class="form_div">
         <table cellpadding="0" cellspacing="0" class="form_table">
-                                    <tr class="tr_light">
-              <td class="form_label">承担AB角：</td>
-              <td class="form_content">
-                        <form:input path="dutyRole" cssClass="input_text"/>						
-                          </td>                                
+            <tr class="tr_light">
+                <td class="form_label">承担AB角：</td>
+                <td class="form_content">
+                    <form:input path="dutyRole" cssClass="input_text"/>
+                </td>
             </tr>
-                                     
+
             <tr class="tr_button">
                 <td class="form_label"></td>
                 <td class="form_content">
