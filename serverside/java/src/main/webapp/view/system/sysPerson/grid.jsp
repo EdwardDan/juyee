@@ -2,10 +2,9 @@
 <%@ include file="/common/taglibs.jsp" %>
 <script type="text/javascript">
     $(function () {
-        var urlOpt = "${ctx}/sysPerson/gridDataCustom" + "<c:choose><c:when test="${empty deptId}">.do</c:when><c:otherwise>2.do?deptId=${deptId}</c:otherwise></c:choose>";
         var conf = {
             gridOpts: {
-                url: urlOpt,
+                url: "${ctx}/sysPerson/gridDataCustom.do",
                 colNames: ['ID',
                     '编号',
                     '姓名',
@@ -32,7 +31,7 @@
                     {name: 'operation', width: 55, align: 'center'}
                 ],
                 pager: '#pager2',
-                caption: "<c:if test="${not empty deptName}">${deptName}  </c:if>人员管理列表",
+                caption: "人员管理列表",
                 shrinkToFit: true,
                 gridComplete: function () {  //在此事件中循环为每一行添加修改和删除链接
                     var ids = jQuery("#listGrid").jqGrid('getDataIDs');
@@ -45,10 +44,6 @@
                         </c:if>
                         <c:if test="${canEditPro}">
                         opButton += '<input type="button" value="专业资质" onclick="doJdperson(' + id + ')" class="button_normal_long">';
-                        </c:if>
-                        <c:if test="${not empty deptId}">
-                        var rowData = jQuery("#listGrid").jqGrid('getRowData', id);
-                        opButton += '<input type="button" value="分配项目" onclick="doViewPrjChargedByPerson(' + id + ', \'' + rowData["name"] + '\', \'' + rowData["company.name"] + '\')" class="button_normal_long">';
                         </c:if>
                         jQuery("#listGrid").jqGrid('setRowData', ids[i], { operation: opButton});
                     }
@@ -70,30 +65,19 @@
         };
         gridinit($("#listGrid"), conf);
     });
-
     function doView(id) {
         openWindow("查看人员管理", "${ctx}/sysPerson/view.do?id=" + id, false);
     }
-
-    function doViewPrjChargedByPerson(personId, personName, deptName) {
-        openWindow("查看 " + deptName + " 下 " + personName + " 所承担的项目", "${ctx}/projRelatePerson/grid2.do?personId=" + personId, true, 1061, 531);
-    }
-
     <c:if test="${canEdit}">
     function doAdd() {
-        var addOpt = "<c:choose><c:when test="${empty deptId}">add.do</c:when><c:otherwise>add2.do?deptId=${deptId}&deptName=${deptName}</c:otherwise></c:choose>";
-        openWindow("添加人员管理", "${ctx}/sysPerson/" + addOpt, true);
+        openWindow("添加人员管理", "${ctx}/sysPerson/add.do", true);
     }
-
     function doEdit(id) {
-        var editOpt = "<c:choose><c:when test="${empty deptId}">modify.do?id=" + id + "</c:when><c:otherwise>modify2.do?deptId=${deptId}&deptName=${deptName}&id=" + id + "</c:otherwise></c:choose>";
-        openWindow("修改人员管理", "${ctx}/sysPerson/" + editOpt, true);
+        openWindow("修改人员管理", "${ctx}/sysPerson/modify.do?id=" + id, true);
     }
-
     function doDelete(id) {
         doGridDelete("${ctx}/sysPerson/delete.do?id=" + id);
     }
-
     function doJdperson(id) {
         loadMainPage("${ctx}/jdPersonSubject/grid.do?personid=" + id, "系统管理 >> 人事管理 >> 人员资质");
     }
@@ -102,7 +86,6 @@
     function cardFormat(cellvalue, options, rowObject) {
         return cellvalue;
     }
-
     function sexFormat(cellvalue, options, rowObject) {
         if (cellvalue == "true") {
             return "男";
@@ -111,10 +94,6 @@
         } else {
             return "";
         }
-    }
-
-    function doBackForward(originalUrl, originalLocation) {
-        loadMainPage(originalUrl, originalLocation);
     }
 </script>
 
@@ -129,11 +108,8 @@
         </div>
         <div style="float:right;padding-right: 10px">
             <c:if test="${canEdit}">
-                <input type="button" value="添加" class="button_add" onclick="doAdd()"/>
-                <c:if test="${not empty originalUrl && not empty deptId}">
-                    <input type="button" value="返回" class="button_back"
-                           onclick="doBackForward('${originalUrl}', '${originalLocation}')"/>
-                </c:if>
+                <input type="button" value="添加" class="button_add"
+                       onclick="doAdd()"/>
             </c:if>
         </div>
     </div>

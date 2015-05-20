@@ -9,6 +9,7 @@ import com.justonetech.biz.core.orm.hibernate.QueryTranslateJq;
 import com.justonetech.biz.utils.Constants;
 import com.justonetech.system.daoservice.SysDeptService;
 import com.justonetech.system.domain.SysDept;
+import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
 import com.justonetech.system.tree.ZTreeBranch;
 import com.justonetech.system.tree.ZTreeNode;
@@ -48,6 +49,9 @@ public class SysDeptController extends BaseCRUDActionController {
     @Autowired
     protected SysUserManager sysUserManager;
 
+    @Autowired
+    private SysCodeManager sysCodeManager;
+
     /**
      * 列表显示页面
      *
@@ -71,19 +75,15 @@ public class SysDeptController extends BaseCRUDActionController {
     public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session) {
         try {
             Page pageModel = new Page(page, rows, true);
-            String hql = "from SysDept order by treeId desc";
-            //增加自定义查询条件
-
+            String hql = "from SysDept where category.id = " + sysCodeManager.getCodeDetailByCode(Constants.SYS_DEPT_CATAGORY, Constants.OWNER_UNIT).getId() + " order by treeId desc";
             //执行查询
             QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);
             String query = queryTranslate.toString();
             pageModel = sysDeptService.findByPage(pageModel, query);
             session.setAttribute(Constants.GRID_SQL_KEY, query);
-
             //输出显示
             String json = GridJq.toJSON(columns, pageModel);
             sendJSON(response, json);
-
         } catch (Exception e) {
             log.error("error", e);
             super.processException(response, e);
@@ -229,12 +229,11 @@ public class SysDeptController extends BaseCRUDActionController {
 //                        "updateUser",
                         "isValid"
                 });
-
             } else {
                 target = entity;
             }
+            target.setCategory(sysCodeManager.getCodeDetailByCode(Constants.SYS_DEPT_CATAGORY, Constants.OWNER_UNIT));
             sysDeptService.save(target);
-
         } catch (Exception e) {
             log.error("error", e);
             super.processException(response, e);

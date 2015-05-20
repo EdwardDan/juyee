@@ -73,20 +73,6 @@ public class SysPersonController extends BaseCRUDActionController {
     }
 
     /**
-     * 根据给定单位的列表显示页面
-     *
-     * @param model .
-     */
-    @RequestMapping
-    public String grid2(Model model, Long deptId, String deptName, String originalUrl, String originalLocation) {
-        model.addAttribute("deptId", deptId);
-        model.addAttribute("deptName", deptName);
-        model.addAttribute("originalUrl", originalUrl);
-        model.addAttribute("originalLocation", originalLocation);
-        return grid(model);
-    }
-
-    /**
      * 获取列表数据
      *
      * @param response .
@@ -118,9 +104,9 @@ public class SysPersonController extends BaseCRUDActionController {
                 } else {
                     hql += " where 1 = 2 ";
                 }
-//                hql += " and " + extFilter;
+                hql += " and " + extFilter;
             } else {
-//                hql = hql.concat("where " + extFilter);
+                hql = hql.concat("where " + extFilter);
             }
             hql += " order by dept.treeId asc,spd.orderNo asc,sp.name asc";
 
@@ -144,39 +130,6 @@ public class SysPersonController extends BaseCRUDActionController {
     }
 
     /**
-     * 根据给定单位获取列表数据
-     *
-     * @param request
-     * @param response
-     * @param filters
-     * @param columns
-     * @param page
-     * @param rows
-     * @param deptId
-     */
-    @RequestMapping
-    public void gridDataCustom2(HttpServletRequest request, HttpServletResponse response, String filters, String columns, int page, int rows, Long deptId) {
-        try {
-            Page pageModel = new Page(page, rows, true);
-            String hql = "select sp from SysPerson sp left join sp.sysPersonDepts spd left join spd.dept dept " +
-                    " where dept.id = " + deptId.longValue() + " order by dept.treeId asc, spd.orderNo asc, sp.name asc ";
-            //增加自定义查询条件
-            //执行查询
-            filters = filters.replaceAll("\"field\":\"(?!dept\\.name)", "\"field\":\"sp.");   //统一添加别名
-            filters = filters.replaceAll("\"orderColumn\":\"company", "\"orderColumn\":\"dept");   //表头排序，单位排序有问题
-            filters = filters.replaceAll("\"orderColumn\":\"(?!dept\\.name|\")", "\"orderColumn\":\"sp.");   //表头排序
-            QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);
-            pageModel = sysPersonService.findByPage(pageModel, queryTranslate.toString());
-            //输出显示
-            String json = GridJq.toJSON(columns, pageModel);
-            sendJSON(response, json);
-        } catch (Exception e) {
-            log.error("error", e);
-            super.processException(response, e);
-        }
-    }
-
-    /**
      * 新增录入页面
      *
      * @param model .
@@ -186,20 +139,6 @@ public class SysPersonController extends BaseCRUDActionController {
         SysPerson sysPerson = new SysPerson();
         model.addAttribute("bean", sysPerson);
         return "view/system/sysPerson/input";
-    }
-
-    /**
-     * 给定某一部门新增录入页面
-     *
-     * @param model .
-     */
-    @RequestMapping
-    public String add2(Model model, Long deptId, String deptName) {
-        model.addAttribute("deptId", deptId);
-        if(deptId != null){
-            model.addAttribute("deptName", sysDeptService.get(deptId).getName());
-        }
-        return add(model);
     }
 
     /**
@@ -214,20 +153,6 @@ public class SysPersonController extends BaseCRUDActionController {
         SysPerson sysPerson = sysPersonService.get(id);
         model.addAttribute("bean", sysPerson);
         return "view/system/sysPerson/input";
-    }
-
-    /**
-     * 给定某一部门修改显示页面
-     *
-     * @param id    .
-     * @param model .
-     * @return .
-     */
-    @RequestMapping
-    public String modify2(Model model, Long id, Long deptId, String deptName) {
-        model.addAttribute("deptId", deptId);
-        model.addAttribute("deptName", deptName);
-        return modify(model, id);
     }
 
     /**
@@ -282,7 +207,7 @@ public class SysPersonController extends BaseCRUDActionController {
                 target = entity;
             }
             String sysDeptId = request.getParameter("sysDeptId");
-            target.setCategory(StringHelper.isEmpty(sysDeptId) ? null : sysDeptService.get(Long.valueOf(sysDeptId)).getCategory());
+            target.setCategory(StringHelper.isEmpty(sysDeptId) ? sysCodeManager.getCodeDetailByCode(Constants.SYS_DEPT_CATAGORY, Constants.OWNER_UNIT) : sysDeptService.get(Long.valueOf(sysDeptId)).getCategory());
             sysPersonService.save(target);
             //所属部门
             Set<SysPersonDept> personDepts = target.getSysPersonDepts();
