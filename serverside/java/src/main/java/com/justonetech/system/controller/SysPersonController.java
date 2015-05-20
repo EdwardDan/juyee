@@ -1,13 +1,13 @@
 package com.justonetech.system.controller;
 
+import com.justonetech.biz.core.orm.hibernate.GridJq;
+import com.justonetech.biz.core.orm.hibernate.QueryTranslateJq;
+import com.justonetech.biz.utils.Constants;
 import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.orm.hibernate.Page;
 import com.justonetech.core.utils.JspHelper;
 import com.justonetech.core.utils.ReflectionUtils;
 import com.justonetech.core.utils.StringHelper;
-import com.justonetech.biz.core.orm.hibernate.GridJq;
-import com.justonetech.biz.core.orm.hibernate.QueryTranslateJq;
-import com.justonetech.biz.utils.Constants;
 import com.justonetech.system.daoservice.SysDeptService;
 import com.justonetech.system.daoservice.SysPersonDeptService;
 import com.justonetech.system.daoservice.SysPersonService;
@@ -19,7 +19,6 @@ import com.justonetech.system.manager.SysUserManager;
 import com.justonetech.system.tree.ZTreeBranch;
 import com.justonetech.system.tree.ZTreeNode;
 import com.justonetech.system.utils.PrivilegeCode;
-import com.sun.tools.jxc.ap.Const;
 import net.sf.json.JSONObject;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -70,7 +69,6 @@ public class SysPersonController extends BaseCRUDActionController {
     public String grid(Model model) {
         //判断是否有编辑权限
         model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.SYS_PERSON_EDIT));
-//        model.addAttribute("canEditPro", sysUserManager.hasPrivilege(PrivilegeCode.JD_PERSON_SUBJECT_EDIT));
         return "view/system/sysPerson/grid";
     }
 
@@ -120,9 +118,9 @@ public class SysPersonController extends BaseCRUDActionController {
                 } else {
                     hql += " where 1 = 2 ";
                 }
-                hql += " and " + extFilter;
+//                hql += " and " + extFilter;
             } else {
-                hql = hql.concat("where " + extFilter);
+//                hql = hql.concat("where " + extFilter);
             }
             hql += " order by dept.treeId asc,spd.orderNo asc,sp.name asc";
 
@@ -198,7 +196,9 @@ public class SysPersonController extends BaseCRUDActionController {
     @RequestMapping
     public String add2(Model model, Long deptId, String deptName) {
         model.addAttribute("deptId", deptId);
-        model.addAttribute("deptName", deptName);
+        if(deptId != null){
+            model.addAttribute("deptName", sysDeptService.get(deptId).getName());
+        }
         return add(model);
     }
 
