@@ -4,7 +4,7 @@
     $(function () {
         var conf = {
             gridOpts: {
-                url: "${ctx}/projRelateDept/gridDataCustom2.do?deptId=${deptId}",
+                url: "${ctx}/projRelateDept/gridDataCustomForPrjRelateDept.do?deptId=${deptId}",
                 colNames: ['ID',
                     '年份',
                     '项目名称',
@@ -93,7 +93,7 @@
     <%--}--%>
 
     function doDelete(id) {
-        doGridDelete("${ctx}/projRelateDept/delete2.do?id=" + id);
+        doGridDelete("${ctx}/projRelateDept/deletePrjRelateDept.do?id=" + id);
     }
     </c:if>
 
