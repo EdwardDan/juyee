@@ -424,41 +424,39 @@ public class ProjRelateDeptController extends BaseCRUDActionController<ProjRelat
             //项目性质 ProjProperty： e.g. 重大项目
             List<Object> grpPropPrjs = simpleQueryManager.getListBySql("select pi.property_id, scd.name, count(*) as cnt from proj_info pi left join sys_code_detail scd on pi.property_id = scd.id group by pi.property_id, scd.name ");
             for (Object grpPropPrj : grpPropPrjs) {
-                Object[] prji = (Object[]) grpPropPrj;
+                Object[] propPrj = (Object[]) grpPropPrj;
                 ZTreeNode propNode = new ZTreeNode();
-                propNode.setId(JspHelper.getString(prji[0]));
-                propNode.setName(JspHelper.getString(prji[1]));
-                propNode.setIsLeaf(JspHelper.getString(prji[2]).equals("0"));
+                propNode.setId(JspHelper.getString(propPrj[0]));
+                propNode.setName(JspHelper.getString(propPrj[1]));
+                propNode.setIsLeaf(JspHelper.getString(propPrj[2]).equals("0"));
                 propNode.setType("prjProperty");
                 propNode.setIcon("1");
                 treeBranch.addTreeNode(propNode);
             }
-        } else if (StringUtils.equals(type, "prjProperty") || StringUtils.equals(type, "prjYear")) {
-            // 项目年份： e.g. 2015  或者  项目名称 e.g. xxxprj
-            List<ProjInfo> grpYearPrjs = new ArrayList<ProjInfo>();
-            if (StringUtils.equals(type, "prjProperty")) {
-                grpYearPrjs = projInfoService.findByQuery("from ProjInfo where property.id = " + id + " order by year asc ");
-            } else if (StringUtils.equals(type, "prjYear")) {
-                grpYearPrjs = projInfoService.findByQuery("from ProjInfo where id = " + StringHelper.substringBefore(id, "_") + " order by name asc ");
+        } else if (StringUtils.equals(type, "prjProperty")) {
+            // 项目年份： e.g. 2015
+            List<Object> grpYearPrjs = simpleQueryManager.getListBySql("select pi.year, count(*) as cnt from proj_info pi where pi.property_id = " + JspHelper.getLong(id).longValue() + " group by pi.year order by pi.year desc");
+            for (Object grpYearPrj : grpYearPrjs) {
+                Object[] yearPrj = (Object[]) grpYearPrj;
+                ZTreeNode yearNode = new ZTreeNode();
+                yearNode.setId(JspHelper.getString(id).concat("_").concat(JspHelper.getString(yearPrj[0])));
+                yearNode.setName(JspHelper.getString(yearPrj[0]));
+                yearNode.setIsLeaf(StringHelper.isEmpty(JspHelper.getString(yearPrj[1])));
+                yearNode.setType("prjYear");
+                yearNode.setIcon("2");
+                treeBranch.addTreeNode(yearNode);
             }
-            for (ProjInfo grpYearPrj : grpYearPrjs) {
-                if (StringUtils.equals(type, "prjProperty")) {
-                    ZTreeNode yearNode = new ZTreeNode();
-                    yearNode.setId(JspHelper.getString(grpYearPrj.getId()).concat("_").concat(JspHelper.getString(grpYearPrj.getYear())));
-                    yearNode.setName(JspHelper.getString(grpYearPrj.getYear()));
-                    yearNode.setIsLeaf(grpYearPrjs.isEmpty());
-                    yearNode.setType("prjYear");
-                    yearNode.setIcon("2");
-                    treeBranch.addTreeNode(yearNode);
-                } else if (StringUtils.equals(type, "prjYear")) {
-                    ZTreeNode prjNode = new ZTreeNode();
-                    prjNode.setId(JspHelper.getString(grpYearPrj.getId()));
-                    prjNode.setName(JspHelper.getString(grpYearPrj.getName()));
-                    prjNode.setIsLeaf(true);
-                    prjNode.setType("prjName");
-                    prjNode.setIcon("3");
-                    treeBranch.addTreeNode(prjNode);
-                }
+        } else if (StringUtils.equals(type, "prjYear")) {
+            //项目名称 e.g. xxxprj
+            List<ProjInfo> yearPrjs = projInfoService.findByQuery("from ProjInfo where property.id = " + StringHelper.substringBefore(id, "_") + " and year = " + StringHelper.substringAfter(id, "_") + " order by name asc ");
+            for (ProjInfo yearPrj : yearPrjs) {
+                ZTreeNode prjNode = new ZTreeNode();
+                prjNode.setId(JspHelper.getString(yearPrj.getId()));
+                prjNode.setName(JspHelper.getString(yearPrj.getName()));
+                prjNode.setIsLeaf(true);
+                prjNode.setType("prjName");
+                prjNode.setIcon("3");
+                treeBranch.addTreeNode(prjNode);
             }
         }
         String s = treeBranch.toJsonString(false);
