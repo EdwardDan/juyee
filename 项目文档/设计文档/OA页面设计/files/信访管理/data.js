@@ -1,0 +1,71 @@
+﻿$axure.loadCurrentPage({
+  "url":"信访管理.html",
+  "generationDate":new Date(1434534637251.01),
+  "isCanvasEnabled":false,
+  "variables":["OnLoadVariable"],
+  "page":{
+    "packageId":"3bdbb822f9af4c18ab82f6d04ceb13f1",
+    "type":"Axure:Page",
+    "name":"信访管理",
+    "notes":{
+},
+    "style":{
+      "baseStyle":"627587b6038d43cca051c114ac41ad32",
+      "pageAlignment":"near",
+      "fill":{
+        "fillType":"solid",
+        "color":0xFFFFFFFF},
+      "image":null,
+      "imageHorizontalAlignment":"near",
+      "imageVerticalAlignment":"near",
+      "imageRepeat":"auto",
+      "favicon":null,
+      "sketchFactor":"0",
+      "colorStyle":"appliedColor",
+      "fontName":"应用字体",
+      "borderWidth":"0"},
+    "adaptiveStyles":{
+},
+    "interactionMap":{
+},
+    "diagram":{
+      "objects":[{
+          "id":"6e722934b7e5473e83884034d38d327d",
+          "label":"",
+          "type":"imageBox",
+          "styleType":"imageBox",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":0,
+              "y":80},
+            "size":{
+              "width":1208,
+              "height":201}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"d2b3701a01bc41a886b19d304c8abfd4",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":0,
+                  "y":80},
+                "size":{
+                  "width":1208,
+                  "height":201}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"images/信访管理/u0.png"}}]}},
+  "masters":{
+},
+  "objectPaths":{
+    "6e722934b7e5473e83884034d38d327d":{
+      "scriptId":"u0"},
+    "d2b3701a01bc41a886b19d304c8abfd4":{
+      "scriptId":"u1"}}});

@@ -1,0 +1,108 @@
+﻿$axure.loadCurrentPage({
+  "url":"即时通讯工具.html",
+  "generationDate":new Date(1434534637557.02),
+  "isCanvasEnabled":false,
+  "variables":["OnLoadVariable"],
+  "page":{
+    "packageId":"221e8895cf5440c5bd5c2abbc2385c60",
+    "type":"Axure:Page",
+    "name":"即时通讯工具",
+    "notes":{
+},
+    "style":{
+      "baseStyle":"627587b6038d43cca051c114ac41ad32",
+      "pageAlignment":"near",
+      "fill":{
+        "fillType":"solid",
+        "color":0xFFFFFFFF},
+      "image":null,
+      "imageHorizontalAlignment":"near",
+      "imageVerticalAlignment":"near",
+      "imageRepeat":"auto",
+      "favicon":null,
+      "sketchFactor":"0",
+      "colorStyle":"appliedColor",
+      "fontName":"应用字体",
+      "borderWidth":"0"},
+    "adaptiveStyles":{
+},
+    "interactionMap":{
+},
+    "diagram":{
+      "objects":[{
+          "id":"67928c1e8a9e4026b6ab6a7a4463f9e2",
+          "label":"",
+          "type":"buttonShape",
+          "styleType":"paragraph",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":30,
+              "y":40},
+            "size":{
+              "width":500,
+              "height":420}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"e30bfe1b5df042fca61f2e7f2219d898",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":30,
+                  "y":40},
+                "size":{
+                  "width":500,
+                  "height":420}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"resources/images/transparent.gif"}},
+{
+          "id":"3f3d64eed9024bbbbf6750a994ad4b21",
+          "label":"",
+          "type":"imageBox",
+          "styleType":"imageBox",
+          "visible":true,
+          "style":{
+            "location":{
+              "x":540,
+              "y":24},
+            "size":{
+              "width":307,
+              "height":466}},
+          "adaptiveStyles":{
+},
+          "objects":[{
+              "id":"141109209258464fbf66de50c8330468",
+              "label":"",
+              "isContained":true,
+              "type":"richTextPanel",
+              "styleType":"paragraph",
+              "visible":true,
+              "style":{
+                "location":{
+                  "x":540,
+                  "y":24},
+                "size":{
+                  "width":307,
+                  "height":466}},
+              "adaptiveStyles":{
+}}],
+          "images":{
+            "normal~":"images/即时通讯工具/u2.png"}}]}},
+  "masters":{
+},
+  "objectPaths":{
+    "67928c1e8a9e4026b6ab6a7a4463f9e2":{
+      "scriptId":"u0"},
+    "e30bfe1b5df042fca61f2e7f2219d898":{
+      "scriptId":"u1"},
+    "3f3d64eed9024bbbbf6750a994ad4b21":{
+      "scriptId":"u2"},
+    "141109209258464fbf66de50c8330468":{
+      "scriptId":"u3"}}});
