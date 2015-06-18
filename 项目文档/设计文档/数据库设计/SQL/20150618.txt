@@ -1,0 +1,697 @@
+drop table OA_CAR cascade constraints;
+
+drop table OA_MEETING_INNER cascade constraints;
+
+drop table OA_MEETING_OUTER cascade constraints;
+
+drop table OA_PETITION cascade constraints;
+
+drop table OA_THINGS cascade constraints;
+
+drop table OA_THINGS_APPLY cascade constraints;
+
+drop table OA_THINGS_APPLY_ITEM cascade constraints;
+
+drop table OA_WEEK_ARRANGE cascade constraints;
+
+/*==============================================================*/
+/* Table: OA_CAR                                                */
+/*==============================================================*/
+create table OA_CAR 
+(
+   ID                   number(10)           not null,
+   APPLY_DEPT_ID        number(10),
+   APPLY_USER_ID        number(10),
+   BEGIN_TIME           date,
+   END_TIME             date,
+   PERSON_NUM           number(5),
+   USE_CAUSE            varchar2(2000 char),
+   ADDRESS              varchar2(200 char),
+   KZ_AUDIT_OPINION     varchar2(2000 char),
+   KZ_AUDIT_TIME        date,
+   KZ_AUDIT_USER_ID     number(10),
+   ZR_AUDIT_OPINION     varchar2(2000 char),
+   ZR_AUDIT_TIME        date,
+   ZR_AUDIT_USER_ID     number(10),
+   CAR_ID               number(10),
+   DRIVER_PERSON_ID     number(10),
+   DRIVER_MOBILE        varchar2(50 char),
+   STATUS               number(2),
+   CREATE_TIME          DATE,
+   CREATE_USER          VARCHAR2(100),
+   UPDATE_TIME          DATE,
+   UPDATE_USER          VARCHAR2(100),
+   constraint PK_OA_CAR primary key (ID),
+   constraint FK_OA_CAR_APPLY_DEPT foreign key (APPLY_DEPT_ID)
+         references SYS_DEPT (ID),
+   constraint FK_OA_CAR_APPLY_USER foreign key (APPLY_USER_ID)
+         references SYS_USER (ID),
+   constraint FK_OA_CAR_AUDIT_KZ foreign key (KZ_AUDIT_USER_ID)
+         references SYS_USER (ID),
+   constraint FK_OA_CAR_AUDIT_ZR foreign key (ZR_AUDIT_USER_ID)
+         references SYS_USER (ID),
+   constraint FK_OA_CAR_DRIVER foreign key (DRIVER_PERSON_ID)
+         references SYS_PERSON (ID),
+   constraint FK_OA_CAR_SELECT foreign key (CAR_ID)
+         references SYS_CODE_DETAIL (ID)
+);
+
+comment on table OA_CAR is
+'车辆申请';
+
+comment on column OA_CAR.ID is
+'ID';
+
+comment on column OA_CAR.APPLY_DEPT_ID is
+'申请部门ID';
+
+comment on column OA_CAR.APPLY_USER_ID is
+'申请人用户ID';
+
+comment on column OA_CAR.BEGIN_TIME is
+'使用车辆开始时间';
+
+comment on column OA_CAR.END_TIME is
+'使用车辆结束时间';
+
+comment on column OA_CAR.PERSON_NUM is
+'用车人数';
+
+comment on column OA_CAR.USE_CAUSE is
+'用车事由';
+
+comment on column OA_CAR.ADDRESS is
+'目的地';
+
+comment on column OA_CAR.KZ_AUDIT_OPINION is
+'科长审核意见';
+
+comment on column OA_CAR.KZ_AUDIT_TIME is
+'科长审核时间';
+
+comment on column OA_CAR.KZ_AUDIT_USER_ID is
+'科长审核用户ID';
+
+comment on column OA_CAR.ZR_AUDIT_OPINION is
+'办公室主任审核意见';
+
+comment on column OA_CAR.ZR_AUDIT_TIME is
+'办公室主任审核时间';
+
+comment on column OA_CAR.ZR_AUDIT_USER_ID is
+'办公室主任审核用户ID';
+
+comment on column OA_CAR.CAR_ID is
+'拟派车辆ID';
+
+comment on column OA_CAR.DRIVER_PERSON_ID is
+'拟派司机人员ID';
+
+comment on column OA_CAR.DRIVER_MOBILE is
+'拟派司机电话';
+
+comment on column OA_CAR.STATUS is
+'状态';
+
+comment on column OA_CAR.CREATE_TIME is
+'创建时间';
+
+comment on column OA_CAR.CREATE_USER is
+'创建用户名';
+
+comment on column OA_CAR.UPDATE_TIME is
+'更新时间';
+
+comment on column OA_CAR.UPDATE_USER is
+'更新用户名';
+
+/*==============================================================*/
+/* Table: OA_MEETING_INNER                                      */
+/*==============================================================*/
+create table OA_MEETING_INNER 
+(
+   ID                   number(10)           not null,
+   TYPE_ID              number(10),
+   BEGIN_TIME           date,
+   END_TIME             date,
+   ADDRESS              varchar2(200 char),
+   INNER_PERSONS        varchar2(2000 char),
+   OUTER_PERSONS        varchar2(2000 char),
+   TITLE                varchar2(200 char),
+   CONTENT              clob,
+   DOC_ID               number(10),
+   IS_VALID             number(1)            default 0,
+   CREATE_TIME          DATE,
+   CREATE_USER          VARCHAR2(100),
+   UPDATE_TIME          DATE,
+   UPDATE_USER          VARCHAR2(100),
+   constraint PK_OA_MEETING_INNER primary key (ID),
+   constraint FK_OA_MEETING_INNER_TYPE foreign key (TYPE_ID)
+         references SYS_CODE_DETAIL (ID),
+   constraint FK_OA_MEETING_INNER_DOC foreign key (DOC_ID)
+         references DOC_DOCUMENT (ID)
+);
+
+comment on table OA_MEETING_INNER is
+'内部会议';
+
+comment on column OA_MEETING_INNER.ID is
+'ID';
+
+comment on column OA_MEETING_INNER.TYPE_ID is
+'会议类型ID';
+
+comment on column OA_MEETING_INNER.BEGIN_TIME is
+'会议开始时间';
+
+comment on column OA_MEETING_INNER.END_TIME is
+'会议结束时间';
+
+comment on column OA_MEETING_INNER.ADDRESS is
+'会议地点';
+
+comment on column OA_MEETING_INNER.INNER_PERSONS is
+'内部人员';
+
+comment on column OA_MEETING_INNER.OUTER_PERSONS is
+'外部人员';
+
+comment on column OA_MEETING_INNER.TITLE is
+'会议议题';
+
+comment on column OA_MEETING_INNER.CONTENT is
+'会议内容';
+
+comment on column OA_MEETING_INNER.DOC_ID is
+'附件ID';
+
+comment on column OA_MEETING_INNER.IS_VALID is
+'是否提交';
+
+comment on column OA_MEETING_INNER.CREATE_TIME is
+'创建时间';
+
+comment on column OA_MEETING_INNER.CREATE_USER is
+'创建用户名';
+
+comment on column OA_MEETING_INNER.UPDATE_TIME is
+'更新时间';
+
+comment on column OA_MEETING_INNER.UPDATE_USER is
+'更新用户名';
+
+/*==============================================================*/
+/* Table: OA_MEETING_OUTER                                      */
+/*==============================================================*/
+create table OA_MEETING_OUTER 
+(
+   ID                   number(10)           not null,
+   TYPE_ID              number(10),
+   BEGIN_TIME           date,
+   END_TIME             date,
+   ADDRESS              varchar2(200 char),
+   CHARGE_PERSON        varchar2(200 char),
+   START_DEPT           varchar2(200 char),
+   LEADER               varchar2(200 char),
+   INNER_PERSONS        varchar2(2000 char),
+   TITLE                varchar2(200 char),
+   CONTENT              clob,
+   RELATE_MATTER        varchar2(2000 char),
+   WORK_ADVISE          varchar2(2000 char),
+   DOC_ID               number(10),
+   STATUS               number(2)            default 0,
+   FG_AUDIT_OPINION     varchar2(2000 char),
+   FG_AUDIT_USER_ID     number(10),
+   FG_AUDIT_TIME        date,
+   ZR_AUDIT_OPINION     varchar2(2000 char),
+   ZR_AUDIT_USER_ID     number(10),
+   ZR_AUDIT_TIME        date,
+   CREATE_TIME          DATE,
+   CREATE_USER          VARCHAR2(100),
+   UPDATE_TIME          DATE,
+   UPDATE_USER          VARCHAR2(100),
+   constraint PK_OA_MEETING_OUTER primary key (ID),
+   constraint FK_OA_MEETING_OUTER_TYPE foreign key (TYPE_ID)
+         references SYS_CODE_DETAIL (ID),
+   constraint FK_OA_MEETING_OUTER_FG foreign key (FG_AUDIT_USER_ID)
+         references SYS_USER (ID),
+   constraint FK_OA_MEETING_OUTER_ZR foreign key (ZR_AUDIT_USER_ID)
+         references SYS_USER (ID),
+   constraint FK_OA_MEETING_OUTER_DOC foreign key (DOC_ID)
+         references DOC_DOCUMENT (ID)
+);
+
+comment on table OA_MEETING_OUTER is
+'外部会议';
+
+comment on column OA_MEETING_OUTER.ID is
+'ID';
+
+comment on column OA_MEETING_OUTER.TYPE_ID is
+'会议类型ID';
+
+comment on column OA_MEETING_OUTER.BEGIN_TIME is
+'会议开始时间';
+
+comment on column OA_MEETING_OUTER.END_TIME is
+'会议结束时间';
+
+comment on column OA_MEETING_OUTER.ADDRESS is
+'会议地点';
+
+comment on column OA_MEETING_OUTER.CHARGE_PERSON is
+'主持人';
+
+comment on column OA_MEETING_OUTER.START_DEPT is
+'发起单位';
+
+comment on column OA_MEETING_OUTER.LEADER is
+'会议领导';
+
+comment on column OA_MEETING_OUTER.INNER_PERSONS is
+'与会单位';
+
+comment on column OA_MEETING_OUTER.TITLE is
+'会议名称';
+
+comment on column OA_MEETING_OUTER.CONTENT is
+'会议内容';
+
+comment on column OA_MEETING_OUTER.RELATE_MATTER is
+'与中心相关事宜';
+
+comment on column OA_MEETING_OUTER.WORK_ADVISE is
+'工作建议';
+
+comment on column OA_MEETING_OUTER.DOC_ID is
+'附件ID';
+
+comment on column OA_MEETING_OUTER.STATUS is
+'状态';
+
+comment on column OA_MEETING_OUTER.FG_AUDIT_OPINION is
+'分管领导审核意见';
+
+comment on column OA_MEETING_OUTER.FG_AUDIT_USER_ID is
+'分管领导审核用户ID';
+
+comment on column OA_MEETING_OUTER.FG_AUDIT_TIME is
+'分管领导审核时间';
+
+comment on column OA_MEETING_OUTER.ZR_AUDIT_OPINION is
+'主任审核意见';
+
+comment on column OA_MEETING_OUTER.ZR_AUDIT_USER_ID is
+'主任审核用户ID';
+
+comment on column OA_MEETING_OUTER.ZR_AUDIT_TIME is
+'主任审核时间';
+
+comment on column OA_MEETING_OUTER.CREATE_TIME is
+'创建时间';
+
+comment on column OA_MEETING_OUTER.CREATE_USER is
+'创建用户名';
+
+comment on column OA_MEETING_OUTER.UPDATE_TIME is
+'更新时间';
+
+comment on column OA_MEETING_OUTER.UPDATE_USER is
+'更新用户名';
+
+/*==============================================================*/
+/* Table: OA_PETITION                                           */
+/*==============================================================*/
+create table OA_PETITION 
+(
+   ID                   number(10)           not null,
+   CODE                 varchar2(50 char),
+   STATUS_ID            number(10),
+   STATUS_DESC          varchar2(50 char),
+   SOURCE_ID            number(10),
+   SOURCE_DESC          varchar2(50 char),
+   TYPE_ID              number(10),
+   TYPE_DESC            varchar2(50 char),
+   PERSON               varchar2(500 char),
+   TEL                  varchar2(50 char),
+   RECEIVE_DATE         date,
+   ADDRESS              varchar2(200 char),
+   JBR_USER_ID          number(10),
+   JBR_NAME             varchar2(50 char),
+   END_DATE             date,
+   CONTENT              clob,
+   DEAL_RESULT          clob,
+   DESCRIPTION          varchar2(2000 char),
+   DOC_ID               number(10),
+   CREATE_TIME          DATE,
+   CREATE_USER          VARCHAR2(100),
+   UPDATE_TIME          DATE,
+   UPDATE_USER          VARCHAR2(100),
+   constraint PK_OA_PETITION primary key (ID),
+   constraint FK_OA_PETITION_STATUS foreign key (STATUS_ID)
+         references SYS_CODE_DETAIL (ID),
+   constraint FK_OA_PETITION_SOURCE foreign key (SOURCE_ID)
+         references SYS_CODE_DETAIL (ID),
+   constraint FK_OA_PETITION_TYPE foreign key (TYPE_ID)
+         references SYS_CODE_DETAIL (ID),
+   constraint FK_OA_PETITION_JBR foreign key (JBR_USER_ID)
+         references SYS_USER (ID),
+   constraint FK_OA_PETITION_DOC foreign key (DOC_ID)
+         references DOC_DOCUMENT (ID)
+);
+
+comment on table OA_PETITION is
+'信访管理';
+
+comment on column OA_PETITION.ID is
+'ID';
+
+comment on column OA_PETITION.CODE is
+'受理编号';
+
+comment on column OA_PETITION.STATUS_ID is
+'受理状态ID';
+
+comment on column OA_PETITION.STATUS_DESC is
+'受理状态中文描述';
+
+comment on column OA_PETITION.SOURCE_ID is
+'信访来源ID';
+
+comment on column OA_PETITION.SOURCE_DESC is
+'信访来源中文描述';
+
+comment on column OA_PETITION.TYPE_ID is
+'信访种类ID';
+
+comment on column OA_PETITION.TYPE_DESC is
+'信访种类中文描述';
+
+comment on column OA_PETITION.PERSON is
+'信访人';
+
+comment on column OA_PETITION.TEL is
+'联系电话';
+
+comment on column OA_PETITION.RECEIVE_DATE is
+'收信日期';
+
+comment on column OA_PETITION.ADDRESS is
+'联系地址';
+
+comment on column OA_PETITION.JBR_USER_ID is
+'经办人ID';
+
+comment on column OA_PETITION.JBR_NAME is
+'经办人姓名(冗余)';
+
+comment on column OA_PETITION.END_DATE is
+'结案日期';
+
+comment on column OA_PETITION.CONTENT is
+'信访事由';
+
+comment on column OA_PETITION.DEAL_RESULT is
+'处理结果';
+
+comment on column OA_PETITION.DESCRIPTION is
+'备注';
+
+comment on column OA_PETITION.DOC_ID is
+'附件ID';
+
+comment on column OA_PETITION.CREATE_TIME is
+'创建时间';
+
+comment on column OA_PETITION.CREATE_USER is
+'创建用户名';
+
+comment on column OA_PETITION.UPDATE_TIME is
+'更新时间';
+
+comment on column OA_PETITION.UPDATE_USER is
+'更新用户名';
+
+/*==============================================================*/
+/* Table: OA_THINGS                                             */
+/*==============================================================*/
+create table OA_THINGS 
+(
+   ID                   number(10)           not null,
+   ORDER_NO             number(5),
+   TYPE_ID              number(10),
+   NAME                 varchar2(200 char),
+   MODEL                varchar2(200 char),
+   PRICE                number(10,2),
+   UNIT                 varchar2(50 char),
+   AMOUNT               number(10,2)         default 0,
+   IS_VALID             number(1)            default 1,
+   CREATE_TIME          DATE,
+   CREATE_USER          VARCHAR2(100),
+   UPDATE_TIME          DATE,
+   UPDATE_USER          VARCHAR2(100),
+   constraint PK_OA_THINGS primary key (ID),
+   constraint FK_OA_THINGS_TYPE foreign key (TYPE_ID)
+         references SYS_CODE_DETAIL (ID)
+);
+
+comment on table OA_THINGS is
+'办公用品信息';
+
+comment on column OA_THINGS.ID is
+'ID';
+
+comment on column OA_THINGS.ORDER_NO is
+'序号';
+
+comment on column OA_THINGS.TYPE_ID is
+'类型ID';
+
+comment on column OA_THINGS.NAME is
+'办公用品名称';
+
+comment on column OA_THINGS.MODEL is
+'型号';
+
+comment on column OA_THINGS.PRICE is
+'单价';
+
+comment on column OA_THINGS.UNIT is
+'单位';
+
+comment on column OA_THINGS.AMOUNT is
+'库存';
+
+comment on column OA_THINGS.IS_VALID is
+'是否有效';
+
+comment on column OA_THINGS.CREATE_TIME is
+'创建时间';
+
+comment on column OA_THINGS.CREATE_USER is
+'创建用户名';
+
+comment on column OA_THINGS.UPDATE_TIME is
+'更新时间';
+
+comment on column OA_THINGS.UPDATE_USER is
+'更新用户名';
+
+/*==============================================================*/
+/* Table: OA_THINGS_APPLY                                       */
+/*==============================================================*/
+create table OA_THINGS_APPLY 
+(
+   ID                   number(10)           not null,
+   APPLY_DEPT_ID        number(10),
+   APPLY_USER_ID        number(10),
+   APPLY_CONTENT        varchar2(200 char),
+   KZ_AUDIT_OPINION     varchar2(2000 char),
+   KZ_AUDIT_TIME        date,
+   KZ_AUDIT_USER_ID     number(10),
+   ZR_AUDIT_OPINION     varchar2(2000 char),
+   ZR_AUDIT_TIME        date,
+   ZR_AUDIT_USER_ID     number(10),
+   DEAL_USER_ID         number(10),
+   STATUS               number(2),
+   CREATE_TIME          DATE,
+   CREATE_USER          VARCHAR2(100),
+   UPDATE_TIME          DATE,
+   UPDATE_USER          VARCHAR2(100),
+   constraint PK_OA_THINGS_APPLY primary key (ID),
+   constraint FK_OA_THINGS_APPLY_DEPT foreign key (APPLY_DEPT_ID)
+         references SYS_DEPT (ID),
+   constraint FK_OA_THINGS_APPLY_USER foreign key (APPLY_USER_ID)
+         references SYS_USER (ID),
+   constraint FK_OA_THINGS_APPLY_KZ foreign key (KZ_AUDIT_USER_ID)
+         references SYS_USER (ID),
+   constraint FK_OA_THINGS_APPLY_ZR foreign key (ZR_AUDIT_USER_ID)
+         references SYS_USER (ID),
+   constraint FK_OA_THINGS_APPLY_DEAL foreign key (DEAL_USER_ID)
+         references SYS_USER (ID)
+);
+
+comment on table OA_THINGS_APPLY is
+'办公用品申请';
+
+comment on column OA_THINGS_APPLY.ID is
+'ID';
+
+comment on column OA_THINGS_APPLY.APPLY_DEPT_ID is
+'申请部门ID';
+
+comment on column OA_THINGS_APPLY.APPLY_USER_ID is
+'申请人用户ID';
+
+comment on column OA_THINGS_APPLY.APPLY_CONTENT is
+'申请说明';
+
+comment on column OA_THINGS_APPLY.KZ_AUDIT_OPINION is
+'科长审核意见';
+
+comment on column OA_THINGS_APPLY.KZ_AUDIT_TIME is
+'科长审核时间';
+
+comment on column OA_THINGS_APPLY.KZ_AUDIT_USER_ID is
+'科长审核用户ID';
+
+comment on column OA_THINGS_APPLY.ZR_AUDIT_OPINION is
+'办公室主任审核意见';
+
+comment on column OA_THINGS_APPLY.ZR_AUDIT_TIME is
+'办公室主任审核时间';
+
+comment on column OA_THINGS_APPLY.ZR_AUDIT_USER_ID is
+'办公室主任审核用户ID';
+
+comment on column OA_THINGS_APPLY.DEAL_USER_ID is
+'办公室处理用户ID';
+
+comment on column OA_THINGS_APPLY.STATUS is
+'状态';
+
+comment on column OA_THINGS_APPLY.CREATE_TIME is
+'创建时间';
+
+comment on column OA_THINGS_APPLY.CREATE_USER is
+'创建用户名';
+
+comment on column OA_THINGS_APPLY.UPDATE_TIME is
+'更新时间';
+
+comment on column OA_THINGS_APPLY.UPDATE_USER is
+'更新用户名';
+
+
+/*==============================================================*/
+/* Table: OA_THINGS_APPLY_ITEM                                  */
+/*==============================================================*/
+create table OA_THINGS_APPLY_ITEM 
+(
+   ID                   number(10)           not null,
+   OA_THINGS_APPLY_ID   number(10),
+   OA_THINGS_ID         number(10),
+   NAME                 varchar2(200 char),
+   MODEL                varchar2(200 char),
+   UNIT                 varchar2(50 char),
+   PRICE                number(10,2),
+   AMOUNT               number(10,2),
+   constraint PK_OA_THINGS_APPLY_ITEM primary key (ID),
+   constraint FK_OA_THINGS_APPLY_ITEM foreign key (OA_THINGS_APPLY_ID)
+         references OA_THINGS_APPLY (ID),
+   constraint FK_OA_THINGS_APPLY_ITEM_TH foreign key (OA_THINGS_ID)
+         references OA_THINGS (ID)
+);
+
+comment on table OA_THINGS_APPLY_ITEM is
+'办公用品申请明细';
+
+comment on column OA_THINGS_APPLY_ITEM.ID is
+'ID';
+
+comment on column OA_THINGS_APPLY_ITEM.OA_THINGS_APPLY_ID is
+'申请ID';
+
+comment on column OA_THINGS_APPLY_ITEM.OA_THINGS_ID is
+'办公用品ID';
+
+comment on column OA_THINGS_APPLY_ITEM.NAME is
+'名称(冗余)';
+
+comment on column OA_THINGS_APPLY_ITEM.MODEL is
+'型号(冗余)';
+
+comment on column OA_THINGS_APPLY_ITEM.UNIT is
+'单位(冗余)';
+
+comment on column OA_THINGS_APPLY_ITEM.PRICE is
+'预计单价(冗余)';
+
+comment on column OA_THINGS_APPLY_ITEM.AMOUNT is
+'数量';
+
+
+/*==============================================================*/
+/* Table: OA_WEEK_ARRANGE                                       */
+/*==============================================================*/
+create table OA_WEEK_ARRANGE 
+(
+   ID                   number(10)           not null,
+   USER_ID              number(10),
+   DAY                  date,
+   TIME_PERIOD          number(10),
+   CONTENT              varchar2(200 char),
+   IS_REST              number(1)            default 0,
+   CREATE_TIME          DATE,
+   CREATE_USER          VARCHAR2(100),
+   UPDATE_TIME          DATE,
+   UPDATE_USER          VARCHAR2(100),
+   constraint PK_OA_WEEK_ARRANGE primary key (ID),
+   constraint FK_OA_WEEK_ARRANGE_USER foreign key (USER_ID)
+         references SYS_USER (ID),
+   constraint FK_OA_WEEK_ARRANGE_PER foreign key (TIME_PERIOD)
+         references SYS_CODE_DETAIL (ID)
+);
+
+comment on table OA_WEEK_ARRANGE is
+'领导一周安排';
+
+comment on column OA_WEEK_ARRANGE.ID is
+'ID';
+
+comment on column OA_WEEK_ARRANGE.USER_ID is
+'用户ID';
+
+comment on column OA_WEEK_ARRANGE.DAY is
+'日期';
+
+comment on column OA_WEEK_ARRANGE.TIME_PERIOD is
+'上午下午ID';
+
+comment on column OA_WEEK_ARRANGE.CONTENT is
+'事项';
+
+comment on column OA_WEEK_ARRANGE.IS_REST is
+'是否休息';
+
+comment on column OA_WEEK_ARRANGE.CREATE_TIME is
+'创建时间';
+
+comment on column OA_WEEK_ARRANGE.CREATE_USER is
+'创建用户名';
+
+comment on column OA_WEEK_ARRANGE.UPDATE_TIME is
+'更新时间';
+
+comment on column OA_WEEK_ARRANGE.UPDATE_USER is
+'更新用户名';
+
+
+-- Add/modify columns 
+alter table OA_WEEK_ARRANGE rename column TIME_PERIOD to TIME_PERIOD_ID;
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table OA_WEEK_ARRANGE
+  drop constraint FK_OA_WEEK_ARRANGE_PER;
+alter table OA_WEEK_ARRANGE
+  add constraint FK_OA_WEEK_ARRANGE_PER foreign key (TIME_PERIOD_ID)
+  references SYS_CODE_DETAIL (ID);
