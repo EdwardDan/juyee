@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.justonetech.biz.domain">
+	<class
+		name="OaMeetingOuter"
+		table="OA_MEETING_OUTER"
+	>
+		
+		<meta attribute="sync-DAO">false</meta>
+		<meta attribute="sync-jsp">true</meta>
+		<meta attribute="sync-boolean">get</meta>
+		<meta attribute="treeable">false</meta>
+		<meta attribute="projectable">false</meta>
+        <meta attribute="tableName">外部会议</meta>
+        <meta attribute="tableComment">外部会议</meta>
+	    <meta attribute="sync-templatePatterns">list\w*</meta>
+        <meta attribute="sub-system">oa</meta>
+
+		<id
+			name="id"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="com.justonetech.core.orm.hibernate.LongIdGenerator"/>
+		</id>
+
+		<property
+			name="beginTime"
+			column="BEGIN_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">会议开始时间</meta>
+            <meta attribute="ColumnComment">会议开始时间</meta>
+        </property>
+
+		<property
+			name="endTime"
+			column="END_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">会议结束时间</meta>
+            <meta attribute="ColumnComment">会议结束时间</meta>
+        </property>
+
+		<property
+			name="address"
+			column="ADDRESS"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">会议地点</meta>
+            <meta attribute="ColumnComment">会议地点</meta>
+        </property>
+
+		<property
+			name="chargePerson"
+			column="CHARGE_PERSON"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">主持人</meta>
+            <meta attribute="ColumnComment">主持人</meta>
+        </property>
+
+		<property
+			name="startDept"
+			column="START_DEPT"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">发起单位</meta>
+            <meta attribute="ColumnComment">发起单位</meta>
+        </property>
+
+		<property
+			name="leader"
+			column="LEADER"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">会议领导</meta>
+            <meta attribute="ColumnComment">会议领导</meta>
+        </property>
+
+		<property
+			name="innerPersons"
+			column="INNER_PERSONS"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">与会单位</meta>
+            <meta attribute="ColumnComment">与会单位</meta>
+        </property>
+
+		<property
+			name="title"
+			column="TITLE"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">会议名称</meta>
+            <meta attribute="ColumnComment">会议名称</meta>
+        </property>
+
+		<property
+			name="content"
+			column="CONTENT"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">会议内容</meta>
+            <meta attribute="ColumnComment">会议内容</meta>
+        </property>
+
+		<property
+			name="relateMatter"
+			column="RELATE_MATTER"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">与中心相关事宜</meta>
+            <meta attribute="ColumnComment">与中心相关事宜</meta>
+        </property>
+
+		<property
+			name="workAdvise"
+			column="WORK_ADVISE"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">工作建议</meta>
+            <meta attribute="ColumnComment">工作建议</meta>
+        </property>
+
+		<property
+			name="status"
+			column="STATUS"
+			type="integer"
+			not-null="false"
+			length="2"
+        >
+            <meta attribute="ColumnName">状态</meta>
+            <meta attribute="ColumnComment">状态</meta>
+        </property>
+
+		<property
+			name="fgAuditOpinion"
+			column="FG_AUDIT_OPINION"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">分管领导审核意见</meta>
+            <meta attribute="ColumnComment">分管领导审核意见</meta>
+        </property>
+
+		<property
+			name="fgAuditTime"
+			column="FG_AUDIT_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">分管领导审核时间</meta>
+            <meta attribute="ColumnComment">分管领导审核时间</meta>
+        </property>
+
+		<property
+			name="zrAuditOpinion"
+			column="ZR_AUDIT_OPINION"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">主任审核意见</meta>
+            <meta attribute="ColumnComment">主任审核意见</meta>
+        </property>
+
+		<property
+			name="zrAuditTime"
+			column="ZR_AUDIT_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">主任审核时间</meta>
+            <meta attribute="ColumnComment">主任审核时间</meta>
+        </property>
+
+		<property
+			name="createTime"
+			column="CREATE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">创建时间</meta>
+            <meta attribute="ColumnComment">创建时间</meta>
+        </property>
+
+		<property
+			name="createUser"
+			column="CREATE_USER"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">创建用户名</meta>
+            <meta attribute="ColumnComment">创建用户名</meta>
+        </property>
+
+		<property
+			name="updateTime"
+			column="UPDATE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">更新时间</meta>
+            <meta attribute="ColumnComment">更新时间</meta>
+        </property>
+
+		<property
+			name="updateUser"
+			column="UPDATE_USER"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">更新用户名</meta>
+            <meta attribute="ColumnComment">更新用户名</meta>
+        </property>
+
+		<many-to-one
+			name="zrAuditUser"
+			column="ZR_AUDIT_USER_ID"
+			class="com.justonetech.system.domain.SysUser"
+			not-null="false"
+		>
+		</many-to-one>
+		<many-to-one
+			name="doc"
+			column="DOC_ID"
+			class="DocDocument"
+			not-null="false"
+		>
+		</many-to-one>
+		<many-to-one
+			name="type"
+			column="TYPE_ID"
+			class="com.justonetech.system.domain.SysCodeDetail"
+			not-null="false"
+		>
+		</many-to-one>
+		<many-to-one
+			name="fgAuditUser"
+			column="FG_AUDIT_USER_ID"
+			class="com.justonetech.system.domain.SysUser"
+			not-null="false"
+		>
+		</many-to-one>
+
+	</class>	
+    <query name="oameetingouter_all_data_query">
+        <![CDATA[FROM OaMeetingOuter]]>
+    </query>
+</hibernate-mapping>

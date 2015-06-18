@@ -86,7 +86,7 @@ public class OaPublicInfoManager {
     public Map<String, Object> getTopNews(String infoType) {
         Map<String, Object> news = new HashMap<String, Object>();
 
-        if (StringHelper.isEmpty(infoType)) infoType = Constants.OA_PUBLIC_INFO_TYPE_NEWS;
+        if (StringHelper.isEmpty(infoType)) infoType = Constants.OA_PUBLIC_INFO_TYPE_BULLETIN;
         List<OaPublicInfo> oaPublicInfoList = getPublicList(Constants.OA_PUBLIC_INFO_RANGE_OUT, infoType, 1);
         if (oaPublicInfoList.size() > 0) {
             OaPublicInfo oa = oaPublicInfoList.iterator().next();

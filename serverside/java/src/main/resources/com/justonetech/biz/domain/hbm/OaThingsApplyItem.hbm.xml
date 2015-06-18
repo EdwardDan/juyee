@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.justonetech.biz.domain">
+	<class
+		name="OaThingsApplyItem"
+		table="OA_THINGS_APPLY_ITEM"
+	>
+		
+		<meta attribute="sync-DAO">false</meta>
+		<meta attribute="sync-jsp">true</meta>
+		<meta attribute="sync-boolean">get</meta>
+		<meta attribute="treeable">false</meta>
+		<meta attribute="projectable">false</meta>
+        <meta attribute="tableName">办公用品申请明细</meta>
+        <meta attribute="tableComment">办公用品申请明细</meta>
+	    <meta attribute="sync-templatePatterns">list\w*</meta>
+        <meta attribute="sub-system">oa</meta>
+
+		<id
+			name="id"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="com.justonetech.core.orm.hibernate.LongIdGenerator"/>
+		</id>
+
+		<property
+			name="name"
+			column="NAME"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">名称(冗余)</meta>
+            <meta attribute="ColumnComment">名称(冗余)</meta>
+        </property>
+
+		<property
+			name="model"
+			column="MODEL"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">型号(冗余)</meta>
+            <meta attribute="ColumnComment">型号(冗余)</meta>
+        </property>
+
+		<property
+			name="unit"
+			column="UNIT"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">单位(冗余)</meta>
+            <meta attribute="ColumnComment">单位(冗余)</meta>
+        </property>
+
+		<property
+			name="price"
+			column="PRICE"
+			type="java.lang.Double"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">预计单价(冗余)</meta>
+            <meta attribute="ColumnComment">预计单价(冗余)</meta>
+        </property>
+
+		<property
+			name="amount"
+			column="AMOUNT"
+			type="java.lang.Double"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">数量</meta>
+            <meta attribute="ColumnComment">数量</meta>
+        </property>
+
+		<many-to-one
+			name="oaThings"
+			column="OA_THINGS_ID"
+			class="OaThings"
+			not-null="false"
+		>
+		</many-to-one>
+		<many-to-one
+			name="oaThingsApply"
+			column="OA_THINGS_APPLY_ID"
+			class="OaThingsApply"
+			not-null="false"
+		>
+		</many-to-one>
+
+	</class>	
+    <query name="oathingsapplyitem_all_data_query">
+        <![CDATA[FROM OaThingsApplyItem]]>
+    </query>
+</hibernate-mapping>

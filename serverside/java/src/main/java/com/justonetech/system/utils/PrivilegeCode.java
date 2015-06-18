@@ -7,6 +7,7 @@ import com.justonetech.system.domain.*;
  * 权限编码定义
  * User: Chen Junping
  * Date: 12-3-16
+ * select 'public static final String '||upper(t.code)||' = "'||t.code||'";  //'||t.name,t.* from sys_privilege t where t.tree_id like '00004%' and t.type=89 order by tree_id
  */
 public class PrivilegeCode {
     /**
@@ -33,15 +34,6 @@ public class PrivilegeCode {
     public static final String SYS_PARAMETER_EDIT = SysParameter.class.getSimpleName() + "_edit";//系统参数维护
 
     /**
-     * ***************************************协同办公******************************************************
-     */
-    public static final String OA_PUBLIC_INFO_EDIT = OaPublicInfo.class.getSimpleName() + "_edit";  //公共信息发布_编辑
-    /**
-     * ***************************************短信发送******************************************************
-     */
-    public static final String MSG_MESSAGE_EDIT = MsgMessage.class.getSimpleName() + "_edit";  //短信发送_编辑
-
-    /**
      * ***************************************业务流程******************************************************
      */
     public static final String BPM_PROCESS_DEFINITION_EDIT = BpmProcessDefinition.class.getSimpleName() + "_edit"; //业务流程定义_编辑
@@ -64,8 +56,8 @@ public class PrivilegeCode {
     public static final String PROJ_STAGE_EDIT = ProjStage.class.getSimpleName() + "_edit";//项目办证阶段管理_编辑
     public static final String PROJ_NODE_EDIT = ProjNode.class.getSimpleName() + "_edit";//形象进度节点管理_编辑
     public static final String PROJ_RELATE_DEPT_EDIT = ProjRelateDept.class.getSimpleName() + "_edit";//建设单位管理_编辑
-    public static final String PROJ_BID_STAGE_EDIT = ProjBid.class.getSimpleName()+"Stage_edit";//办证推进标段_编辑
-    public static final String PROJ_BID_NODE_EDIT = ProjBid.class.getSimpleName()+"Node_edit";//形象进度标段_编辑
+    public static final String PROJ_BID_STAGE_EDIT = ProjBid.class.getSimpleName() + "Stage_edit";//办证推进标段_编辑
+    public static final String PROJ_BID_NODE_EDIT = ProjBid.class.getSimpleName() + "Node_edit";//形象进度标段_编辑
 
     /**
      * ***************************************数据上报******************************************************
@@ -79,5 +71,24 @@ public class PrivilegeCode {
     public static final String PROJECT_QUERY_STAGE_SUM = "ProjectQueryStage_sum";//办证推进汇总查询
     public static final String PROJECT_QUERY_NODE_SUM = "ProjectQueryNode_sum";  //形象进度汇总查询
 
+    /**
+     * ***************************************OA******************************************************
+     */
+    public static final String OA_PUBLIC_INFO_EDIT = "OaPublicInfo_edit";  //信息发布_编辑
+    public static final String MSG_MESSAGE_EDIT = MsgMessage.class.getSimpleName() + "_edit";  //短信发送_编辑
+
+    public static final String OA_MEETING_OUTER_EDIT = "OaMeetingOuter_edit";  //外出会议管理_编辑
+    public static final String OA_MEETING_OUTER_AUDIT_FG = "OaMeetingOuter_audit_fg";  //外出会议管理_审核_分管
+    public static final String OA_MEETING_OUTER_AUDIT_ZR = "OaMeetingOuter_audit_zr";  //外出会议管理_审核_主任
+    public static final String OA_MEETING_INNER_EDIT = "OaMeetingInner_edit";  //内部会议管理_编辑
+    public static final String OA_CAR_EDIT = "OaCar_edit";  //车辆申请_编辑
+    public static final String OA_CAR_AUDIT_KZ = "OaCar_audit_kz";  //车辆申请_审核_科长
+    public static final String OA_CAR_AUDIT_ZR = "OaCar_audit_zr";  //车辆申请_审核_主任
+    public static final String OA_THINGS_EDIT = "OaThings_edit";  //办公用品库_编辑
+    public static final String OA_THINGS_APPLY_EDIT = "OaThingsApply_edit";  //办公用品申请_编辑
+    public static final String OA_THINGS_APPLY_AUDIT_KZ = "OaThingsApply_audit_kz";  //办公用品申请_审核_科长
+    public static final String OA_THINGS_APPLY_AUDIT_ZR = "OaThingsApply_audit_zr";  //办公用品申请_审核_主任
+    public static final String OA_WEEKARRANGE_EDIT = "OaWeekArrange_edit";  //领导一周工作安排_编辑
+    public static final String OA_PETITION_EDIT = "OaPetition_edit";  //信访管理_编辑
 }
 

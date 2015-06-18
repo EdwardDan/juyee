@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.justonetech.biz.domain">
+	<class
+		name="OaPetition"
+		table="OA_PETITION"
+	>
+		
+		<meta attribute="sync-DAO">false</meta>
+		<meta attribute="sync-jsp">true</meta>
+		<meta attribute="sync-boolean">get</meta>
+		<meta attribute="treeable">false</meta>
+		<meta attribute="projectable">false</meta>
+        <meta attribute="tableName">信访管理</meta>
+        <meta attribute="tableComment">信访管理</meta>
+	    <meta attribute="sync-templatePatterns">list\w*</meta>
+        <meta attribute="sub-system">oa</meta>
+
+		<id
+			name="id"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="com.justonetech.core.orm.hibernate.LongIdGenerator"/>
+		</id>
+
+		<property
+			name="code"
+			column="CODE"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">受理编号</meta>
+            <meta attribute="ColumnComment">受理编号</meta>
+        </property>
+
+		<property
+			name="statusDesc"
+			column="STATUS_DESC"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">受理状态中文描述</meta>
+            <meta attribute="ColumnComment">受理状态中文描述</meta>
+        </property>
+
+		<property
+			name="sourceDesc"
+			column="SOURCE_DESC"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">信访来源中文描述</meta>
+            <meta attribute="ColumnComment">信访来源中文描述</meta>
+        </property>
+
+		<property
+			name="typeDesc"
+			column="TYPE_DESC"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">信访种类中文描述</meta>
+            <meta attribute="ColumnComment">信访种类中文描述</meta>
+        </property>
+
+		<property
+			name="person"
+			column="PERSON"
+			type="string"
+			not-null="false"
+			length="500"
+        >
+            <meta attribute="ColumnName">信访人</meta>
+            <meta attribute="ColumnComment">信访人</meta>
+        </property>
+
+		<property
+			name="tel"
+			column="TEL"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">联系电话</meta>
+            <meta attribute="ColumnComment">联系电话</meta>
+        </property>
+
+		<property
+			name="receiveDate"
+			column="RECEIVE_DATE"
+			type="date"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">收信日期</meta>
+            <meta attribute="ColumnComment">收信日期</meta>
+        </property>
+
+		<property
+			name="address"
+			column="ADDRESS"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">联系地址</meta>
+            <meta attribute="ColumnComment">联系地址</meta>
+        </property>
+
+		<property
+			name="jbrName"
+			column="JBR_NAME"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">经办人姓名(冗余)</meta>
+            <meta attribute="ColumnComment">经办人姓名(冗余)</meta>
+        </property>
+
+		<property
+			name="endDate"
+			column="END_DATE"
+			type="date"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">结案日期</meta>
+            <meta attribute="ColumnComment">结案日期</meta>
+        </property>
+
+		<property
+			name="content"
+			column="CONTENT"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">信访事由</meta>
+            <meta attribute="ColumnComment">信访事由</meta>
+        </property>
+
+		<property
+			name="dealResult"
+			column="DEAL_RESULT"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">处理结果</meta>
+            <meta attribute="ColumnComment">处理结果</meta>
+        </property>
+
+		<property
+			name="description"
+			column="DESCRIPTION"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">备注</meta>
+            <meta attribute="ColumnComment">备注</meta>
+        </property>
+
+		<property
+			name="createTime"
+			column="CREATE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">创建时间</meta>
+            <meta attribute="ColumnComment">创建时间</meta>
+        </property>
+
+		<property
+			name="createUser"
+			column="CREATE_USER"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">创建用户名</meta>
+            <meta attribute="ColumnComment">创建用户名</meta>
+        </property>
+
+		<property
+			name="updateTime"
+			column="UPDATE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">更新时间</meta>
+            <meta attribute="ColumnComment">更新时间</meta>
+        </property>
+
+		<property
+			name="updateUser"
+			column="UPDATE_USER"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">更新用户名</meta>
+            <meta attribute="ColumnComment">更新用户名</meta>
+        </property>
+
+		<many-to-one
+			name="jbrUser"
+			column="JBR_USER_ID"
+			class="com.justonetech.system.domain.SysUser"
+			not-null="false"
+		>
+		</many-to-one>
+		<many-to-one
+			name="source"
+			column="SOURCE_ID"
+			class="com.justonetech.system.domain.SysCodeDetail"
+			not-null="false"
+		>
+		</many-to-one>
+		<many-to-one
+			name="status"
+			column="STATUS_ID"
+			class="com.justonetech.system.domain.SysCodeDetail"
+			not-null="false"
+		>
+		</many-to-one>
+		<many-to-one
+			name="doc"
+			column="DOC_ID"
+			class="DocDocument"
+			not-null="false"
+		>
+		</many-to-one>
+		<many-to-one
+			name="type"
+			column="TYPE_ID"
+			class="com.justonetech.system.domain.SysCodeDetail"
+			not-null="false"
+		>
+		</many-to-one>
+
+	</class>	
+    <query name="oapetition_all_data_query">
+        <![CDATA[FROM OaPetition]]>
+    </query>
+</hibernate-mapping>

@@ -38,17 +38,6 @@ public class Constants {
     public static final String LOG_TYPE_LOGOUT = "4";  //日志分类-退出
     public static final String LOG_TYPE_WS = "5";   //日志分类-web service
 
-    //OA办公
-    public static final String OA_PUBLIC_INFO_RANGE = "OaPublicInfoRange"; //公共信息发布--范围
-    public static final String OA_PUBLIC_INFO_RANGE_OUT = "out"; //公共信息发布--范围--外网
-    public static final String OA_PUBLIC_INFO_RANGE_IN = "in"; //公共信息发布--范围--外网
-    public static final String OA_PUBLIC_INFO_RANGE_ALL = "all"; //公共信息发布--范围--内外网
-
-    public static final String OA_PUBLIC_INFO_TYPE = "OaPublicInfoType"; //公共信息发布--类型
-    public static final String OA_PUBLIC_INFO_TYPE_BULLETIN = "bulletin"; //公共信息发布--类型--通知公告
-    public static final String OA_PUBLIC_INFO_TYPE_POLICY = "policy"; //公共信息发布--类型--政策法规
-    public static final String OA_PUBLIC_INFO_TYPE_NEWS = "news"; //公共信息发布--类型--建管要闻
-
     //业务流程
     public static final String BPM_PROCESS_DEFINITION_CATEGORY = "BpmProcessDefinitionCategory"; //流程定义分类
     public static final String BPM_PROCESS_DEFINITION_CATEGORY_GD = "gd"; //流程定义分类--工地申报
@@ -113,4 +102,30 @@ public class Constants {
     public static final String DATA_STAGE_RESULT = "DataStageResult"; //办证推进结果
     public static final String DATA_REPORT_STEP = "DataReportStep"; //项目推进填报步骤
     /****************************************** 数据填报 end *******************************************************/
+
+    //OA办公
+    public static final String OA_PUBLIC_INFO_RANGE = "OaPublicInfoRange"; //公共信息发布--范围
+    public static final String OA_PUBLIC_INFO_RANGE_OUT = "out"; //公共信息发布--范围--外网
+    public static final String OA_PUBLIC_INFO_RANGE_IN = "in"; //公共信息发布--范围--外网
+    public static final String OA_PUBLIC_INFO_RANGE_ALL = "all"; //公共信息发布--范围--内外网
+
+    public static final String OA_PUBLIC_INFO_TYPE = "OaPublicInfoType"; //公共信息发布--类型
+    public static final String OA_PUBLIC_INFO_TYPE_BULLETIN = "bulletin"; //公共信息发布--类型--公示公告
+    public static final String OA_PUBLIC_INFO_TYPE_POLICY = "policy"; //公共信息发布--类型--法律法规
+    public static final String OA_PUBLIC_INFO_TYPE_MEETING = "meeting"; //公共信息发布--类型--会议纪要
+    public static final String OA_PUBLIC_INFO_TYPE_NOTICE = "notice"; //公共信息发布--类型--情况通报
+    public static final String OA_PUBLIC_INFO_TYPE_RULE = "rule"; //公共信息发布--类型--规章制度
+    public static final String OA_PUBLIC_INFO_TYPE_WORK = "work"; //公共信息发布--类型--工作动态
+    public static final String OA_PUBLIC_INFO_TYPE_TXL = "txl"; //公共信息发布--类型--通讯录
+
+    public static final String OA_MEETING_TYPE_INNER = "OaMeetingTypeInner"; //内部会议类型
+    public static final String OA_MEETING_TYPE_OUTER = "OaMeetingTypeOuter"; //内部会议类型
+    public static final String OA_CAR_SELECT = "OaCarSelect"; //车辆选择
+    public static final String OA_THINGS_TYPE = "OaThingsType"; //办公用品分类
+    public static final String OA_THINGS_UNIT = "OaThingsUnit"; //办公用品计量单位
+    public static final String OA_WEEK_ARRANGE_PERIOD = "OaWeekArrangePeriod"; //领导一周安排的时间段
+    public static final String OA_PETITION_TYPE = "OaPetitionType"; //信访种类
+    public static final String OA_PETITION_SOURCE = "OaPetitionSource"; //信访来源
+    public static final String OA_PETITION_STATUS = "OaPetitionStatus"; //信访受理状态
+
 }
