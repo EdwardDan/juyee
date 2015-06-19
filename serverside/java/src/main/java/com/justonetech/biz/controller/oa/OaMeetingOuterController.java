@@ -1,9 +1,11 @@
 package com.justonetech.biz.controller.oa;
 
-import java.util.List;
-import java.util.Set;
-import java.util.Map;
-import java.util.HashMap;
+import java.util.*;
+
+import com.justonetech.biz.domain.BpmProcessInstance;
+import com.justonetech.biz.domain.DocDocument;
+import com.justonetech.biz.domain.OaPublicInfo;
+import com.justonetech.biz.utils.enums.OaMeetingStatus;
 import org.apache.commons.lang.StringUtils;
 
 import com.justonetech.core.controller.BaseCRUDActionController;
@@ -57,29 +59,29 @@ import org.slf4j.LoggerFactory;
 @Controller
 public class OaMeetingOuterController extends BaseCRUDActionController<OaMeetingOuter> {
     private Logger logger = LoggerFactory.getLogger(OaMeetingOuterController.class);
-    
+
     @Autowired
     private SysUserManager sysUserManager;
-    
+
     @Autowired
     private SysCodeManager sysCodeManager;
 
     @Autowired
     private ConfigManager configManager;
-    
+
     @Autowired
     private DocumentManager documentManager;
-    
+
     @Autowired
     private SimpleQueryManager simpleQueryManager;
-    
+
     @Autowired
     private DocDocumentService docDocumentService;
 
     @Autowired
     private OaMeetingOuterService oaMeetingOuterService;
 
-   /**
+    /**
      * 列表显示页面
      *
      * @param model .
@@ -87,20 +89,33 @@ public class OaMeetingOuterController extends BaseCRUDActionController<OaMeeting
      */
     @RequestMapping
     public String grid(Model model) {
-      //判断是否有编辑权限
-      model.addAttribute("canEdit",sysUserManager.hasPrivilege(PrivilegeCode.SYS_SAMPLE_EDIT));
-            
-      return "view/oa/oaMeetingOuter/grid";
+
+        setStatus(model);
+        return "view/oa/oaMeetingOuter/grid";
     }
-    
+
+    public void setStatus(Model model) {
+        //判断是否有编辑权限
+        model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.OA_MEETING_OUTER_EDIT));
+        model.addAttribute("canEdit_FG", sysUserManager.hasPrivilege(PrivilegeCode.OA_MEETING_OUTER_AUDIT_FG));
+        model.addAttribute("canEdit_ZR", sysUserManager.hasPrivilege(PrivilegeCode.OA_MEETING_OUTER_AUDIT_ZR));
+
+        model.addAttribute("STATUS_EDIT", OaMeetingStatus.STATUS_EDIT.getCode());
+        model.addAttribute("STATUS_SUBMIT", OaMeetingStatus.STATUS_SUBMIT.getCode());
+        model.addAttribute("STATUS_BRANCH_PASS", OaMeetingStatus.STATUS_BRANCH_PASS.getCode());
+        model.addAttribute("STATUS_BRANCH_BACK", OaMeetingStatus.STATUS_BRANCH_BACK.getCode());
+        model.addAttribute("STATUS_MAIN_PASS", OaMeetingStatus.STATUS_MAIN_PASS.getCode());
+        model.addAttribute("STATUS_MAIN_BACK", OaMeetingStatus.STATUS_MAIN_BACK.getCode());
+    }
+
     /**
      * 获取列表数据
      *
      * @param response .
-     * @param filters .
-     * @param columns .
-     * @param page .
-     * @param rows .
+     * @param filters  .
+     * @param columns  .
+     * @param page     .
+     * @param rows     .
      */
     @RequestMapping
     public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session) {
@@ -113,10 +128,25 @@ public class OaMeetingOuterController extends BaseCRUDActionController<OaMeeting
             QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);
             String query = queryTranslate.toString();
             session.setAttribute(Constants.GRID_SQL_KEY, query);
-            pageModel = oaMeetingOuterService.findByPage(pageModel, query);            
-
+            pageModel = oaMeetingOuterService.findByPage(pageModel, query);
+            List<OaMeetingOuter> rowList = pageModel.getRows();
+            List<Map<String, Object>> retList = new ArrayList<Map<String, Object>>();
+            Map<String, Object> map;
+            for (OaMeetingOuter data : rowList) {
+                map = new HashMap<String, Object>();
+                map.put("id", data.getId());
+                map.put("beginTime", data.getBeginTime());
+                map.put("endTime", data.getEndTime());
+                map.put("title", data.getTitle());
+                map.put("meetTime", data.getMeetTime());
+                map.put("address", data.getAddress());
+                map.put("docButton", documentManager.getDownloadButton(data.getDoc()));
+                map.put("statusName", data.getStatusName());
+                map.put("status", data.getStatus());
+                retList.add(map);
+            }
             //输出显示
-            String json = GridJq.toJSON(columns, pageModel);
+            String json = GridJq.toJSON(retList, pageModel);
             sendJSON(response, json);
 
         } catch (Exception e) {
@@ -124,7 +154,7 @@ public class OaMeetingOuterController extends BaseCRUDActionController<OaMeeting
             super.processException(response, e);
         }
     }
-    
+
     /**
      * 新增录入页面
      *
@@ -134,13 +164,16 @@ public class OaMeetingOuterController extends BaseCRUDActionController<OaMeeting
     @RequestMapping
     public String add(Model model) {
         OaMeetingOuter oaMeetingOuter = new OaMeetingOuter();
-
+        oaMeetingOuter.setStatus(OaMeetingStatus.STATUS_EDIT.getCode());
+        setStatus(model);
         //如需增加其他默认值请在此添加
         model.addAttribute("bean", oaMeetingOuter);
-
+        //上传文档功能
+        model.addAttribute("uploadButtonDocument", documentManager.getUploadButtonForMulti(documentManager.getDefaultXmlConfig(),
+                OaMeetingOuter.class.getSimpleName(), oaMeetingOuter.getDoc(), null, null, "Document"));
         return "view/oa/oaMeetingOuter/input";
     }
-    
+
     /**
      * 修改显示页面
      *
@@ -151,13 +184,15 @@ public class OaMeetingOuterController extends BaseCRUDActionController<OaMeeting
     @RequestMapping
     public String modify(Model model, Long id) {
         OaMeetingOuter oaMeetingOuter = oaMeetingOuterService.get(id);
-
+        setStatus(model);
         //处理其他业务逻辑
         model.addAttribute("bean", oaMeetingOuter);
-        
+        //上传文档功能
+        model.addAttribute("uploadButtonDocument", documentManager.getUploadButtonForMulti(documentManager.getDefaultXmlConfig(),
+                OaMeetingOuter.class.getSimpleName(), oaMeetingOuter.getDoc(), null, null, "Document"));
         return "view/oa/oaMeetingOuter/input";
     }
-    
+
     /**
      * 查看页面
      *
@@ -168,11 +203,12 @@ public class OaMeetingOuterController extends BaseCRUDActionController<OaMeeting
     @RequestMapping
     public String view(Model model, Long id) {
         OaMeetingOuter oaMeetingOuter = oaMeetingOuterService.get(id);
-        
-        model.addAttribute("bean", oaMeetingOuter);        
+        setStatus(model);
+        model.addAttribute("docButton", documentManager.getDownloadButton(oaMeetingOuter.getDoc()));
+        model.addAttribute("bean", oaMeetingOuter);
         return "view/oa/oaMeetingOuter/view";
     }
-    
+
     /**
      * 保存操作
      *
@@ -189,30 +225,32 @@ public class OaMeetingOuterController extends BaseCRUDActionController<OaMeeting
             if (entity.getId() != null) {
                 target = oaMeetingOuterService.get(entity.getId());
                 ReflectionUtils.copyBean(entity, target, new String[]{
-                                                "beginTime",                                      
-                                                                "endTime",                                      
-                                                                "address",                                      
-                                                                "chargePerson",                                      
-                                                                "startDept",                                      
-                                                                "leader",                                      
-                                                                "innerPersons",                                      
-                                                                "title",                                      
-                                                                "content",                                      
-                                                                "relateMatter",                                      
-                                                                "workAdvise",                                      
-                                                                "status",                                      
-                                                                "fgAuditOpinion",                                      
-                                                                "fgAuditTime",                                      
-                                                                "zrAuditOpinion",                                      
-                                                                "zrAuditTime",                                      
-                                                                "createTime",                                      
-                                                                "createUser",                                      
-                                                                "updateTime",                                      
-                                                                "updateUser"                                      
-                                                });
+                        "beginTime",
+                        "endTime",
+                        "address",
+                        "chargePerson",
+                        "startDept",
+                        "leader",
+                        "innerPersons",
+                        "title",
+                        "content",
+                        "relateMatter",
+                        "workAdvise",
+                        "status",
+                        "fgAuditOpinion",
+                        "fgAuditTime",
+                        "zrAuditOpinion",
+                        "zrAuditTime"
+                });
 
             } else {
                 target = entity;
+            }
+            String docIdDocument = request.getParameter("docIdDocument");
+            if (!StringHelper.isEmpty(docIdDocument)) {
+                DocDocument docDocument = docDocumentService.get(Long.parseLong(docIdDocument));
+                target.setDoc(docDocument);
+                documentManager.updateDocumentByBizData(docDocument, null, target.getTitle());
             }
             oaMeetingOuterService.save(target);
 
@@ -223,13 +261,13 @@ public class OaMeetingOuterController extends BaseCRUDActionController<OaMeeting
         }
         sendSuccessJSON(response, "保存成功");
     }
-    
+
     /**
      * 删除操作
      *
      * @param response .
-     * @param id  .
-     * @throws Exception  .
+     * @param id       .
+     * @throws Exception .
      */
     @RequestMapping
     public void delete(HttpServletResponse response, Long id) throws Exception {
