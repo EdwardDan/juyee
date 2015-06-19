@@ -5,26 +5,18 @@
     $(function () {
         //页面验证初始化
         var validateCondition = [
-            //{name:"beginTime", rule:"validate[required,maxSize[7]]"},
-            //{name:"endTime", rule:"validate[required,maxSize[7]]"},
-            //{name:"address", rule:"validate[required,maxSize[200]]"},
-            //{name:"chargePerson", rule:"validate[required,maxSize[200]]"},
-            //{name:"startDept", rule:"validate[required,maxSize[200]]"},
-            //{name:"leader", rule:"validate[required,maxSize[200]]"},
-            //{name:"innerPersons", rule:"validate[required,maxSize[200]]"},
-            //{name:"title", rule:"validate[required,maxSize[200]]"},
-            //{name:"content", rule:"validate[required,maxSize[200]]"},
-            //{name:"relateMatter", rule:"validate[required,maxSize[200]]"},
-            //{name:"workAdvise", rule:"validate[required,maxSize[200]]"},
-            //{name:"status", rule:"validate[required,custom[integer],maxSize[2]"},
-            //{name:"fgAuditOpinion", rule:"validate[required,maxSize[200]]"},
-            //{name:"fgAuditTime", rule:"validate[required,maxSize[7]]"},
-            //{name:"zrAuditOpinion", rule:"validate[required,maxSize[200]]"},
-            //{name:"zrAuditTime", rule:"validate[required,maxSize[7]]"},
-            //{name:"createTime", rule:"validate[required,maxSize[7]]"},
-            //{name:"createUser", rule:"validate[required,maxSize[150]]"},
-            //{name:"updateTime", rule:"validate[required,maxSize[7]]"},
-            //{name:"updateUser", rule:"validate[required,maxSize[150]]"},
+            {name: "beginTime", rule: "validate[required]"},
+            {name: "endTime", rule: "validate[required]"},
+            {name: "address", rule: "validate[required]"},
+            {name: "chargePerson", rule: "validate[required]"},
+            {name: "startDept", rule: "validate[required]"},
+            {name: "leader", rule: "validate[required]"},
+            {name: "innerPersons", rule: "validate[required]"},
+            {name: "title", rule: "validate[required]"},
+            {name: "content", rule: "validate[required]"}
+            //{name:"relateMatter", rule:"validate[required]"},
+            //{name:"workAdvise", rule:"validate[required]"},
+
         ];
         validateInit(validateCondition, formId);
     });
@@ -34,8 +26,24 @@
         if (!validateForm(formId)) {
             return;
         }
+        var beginDate = $("#beginTime").val() + ":00";
+        var endDate = $("#endTime").val() + ":00";
+        var d1 = new Date(beginDate.replace(/\-/g, "\/"));
+        var d2 = new Date(endDate.replace(/\-/g, "\/"));
+
+        if (beginDate != "" && endDate != "" && d1 >= d2) {
+            alert("开始时间不能大于结束时间！");
+            $("#beginTime").focus();
+            $("#beginTime").css("background","red");
+            $("#endTime").css("background","red");
+            return;
+        }
+
+
         $(btn).get(0).disabled = true;
         $("#status").val(status);
+        $("#beginTime").val($("#beginTime").val() + ":00");
+        $("#endTime").val($("#endTime").val() + ":00");
         //提交表单
         saveAjaxData("${ctx}/oaMeetingOuter/save.do", formId);
     }
@@ -54,14 +62,15 @@
                     <td class="form_border" style="width: 150px">会议时间：</td>
                     <td class="form_content" colspan="3">
                         <input type="text" name="beginTime" id="beginTime" class="input_datetime"
-                               value="<fmt:formatDate value="${bean.beginTime}" pattern="yyyy-MM-dd HH:mm:ss"/>"
+                               value="<fmt:formatDate value="${bean.beginTime}" pattern="yyyy-MM-dd HH:mm"/>"
                                readonly="true"/>
-                        <input type="button" class="button_calendar" value=" " onClick="calendar('beginTime','all')">
+                        <input type="button" class="button_calendar" value=" "
+                               onClick="calendar('beginTime','datetime')">
                         ~
                         <input type="text" name="endTime" id="endTime" class="input_datetime"
-                               value="<fmt:formatDate value="${bean.endTime}" pattern="yyyy-MM-dd HH:mm:ss"/>"
+                               value="<fmt:formatDate value="${bean.endTime}" pattern="yyyy-MM-dd HH:mm"/>"
                                readonly="true"/>
-                        <input type="button" class="button_calendar" value=" " onClick="calendar('endTime','all')">
+                        <input type="button" class="button_calendar" value=" " onClick="calendar('endTime','datetime')">
 
                     </td>
                 </tr>
