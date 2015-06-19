@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.Map;
 import java.util.HashMap;
+
+import com.justonetech.biz.domain.DocDocument;
+import com.justonetech.core.utils.JspHelper;
 import org.apache.commons.lang.StringUtils;
 
 import com.justonetech.core.controller.BaseCRUDActionController;
@@ -55,56 +58,60 @@ import org.slf4j.LoggerFactory;
  * modify date:
  */
 @Controller
-public class OaMeetingInnerController extends BaseCRUDActionController<OaMeetingInner> {
+public class OaMeetingInnerController extends BaseCRUDActionController<OaMeetingInner>
+{
     private Logger logger = LoggerFactory.getLogger(OaMeetingInnerController.class);
-    
+
     @Autowired
     private SysUserManager sysUserManager;
-    
+
     @Autowired
     private SysCodeManager sysCodeManager;
 
     @Autowired
     private ConfigManager configManager;
-    
+
     @Autowired
     private DocumentManager documentManager;
-    
+
     @Autowired
     private SimpleQueryManager simpleQueryManager;
-    
+
     @Autowired
     private DocDocumentService docDocumentService;
 
     @Autowired
     private OaMeetingInnerService oaMeetingInnerService;
 
-   /**
+    /**
      * 列表显示页面
      *
      * @param model .
      * @return .
      */
     @RequestMapping
-    public String grid(Model model) {
-      //判断是否有编辑权限
-      model.addAttribute("canEdit",sysUserManager.hasPrivilege(PrivilegeCode.SYS_SAMPLE_EDIT));
-            
-      return "view/oa/oaMeetingInner/grid";
+    public String grid(Model model)
+    {
+        //判断是否有编辑权限
+        model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.OA_MEETING_INNER_EDIT));
+
+        return "view/oa/oaMeetingInner/grid";
     }
-    
+
     /**
      * 获取列表数据
      *
      * @param response .
-     * @param filters .
-     * @param columns .
-     * @param page .
-     * @param rows .
+     * @param filters  .
+     * @param columns  .
+     * @param page     .
+     * @param rows     .
      */
     @RequestMapping
-    public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session) {
-        try {
+    public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session)
+    {
+        try
+        {
             Page pageModel = new Page(page, rows, true);
             String hql = "from OaMeetingInner order by id desc";
             //增加自定义查询条件
@@ -113,18 +120,19 @@ public class OaMeetingInnerController extends BaseCRUDActionController<OaMeeting
             QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);
             String query = queryTranslate.toString();
             session.setAttribute(Constants.GRID_SQL_KEY, query);
-            pageModel = oaMeetingInnerService.findByPage(pageModel, query);            
+            pageModel = oaMeetingInnerService.findByPage(pageModel, query);
 
             //输出显示
             String json = GridJq.toJSON(columns, pageModel);
             sendJSON(response, json);
 
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
             log.error("error", e);
             super.processException(response, e);
         }
     }
-    
+
     /**
      * 新增录入页面
      *
@@ -132,15 +140,19 @@ public class OaMeetingInnerController extends BaseCRUDActionController<OaMeeting
      * @return .
      */
     @RequestMapping
-    public String add(Model model) {
+    public String add(Model model)
+    {
         OaMeetingInner oaMeetingInner = new OaMeetingInner();
 
         //如需增加其他默认值请在此添加
         model.addAttribute("bean", oaMeetingInner);
 
+        model.addAttribute("uploadButton", documentManager.getUploadButton(documentManager.getDefaultXmlConfig(),
+                OaMeetingInner.class.getSimpleName(), oaMeetingInner.getDoc(), null, null));
+
         return "view/oa/oaMeetingInner/input";
     }
-    
+
     /**
      * 修改显示页面
      *
@@ -149,15 +161,19 @@ public class OaMeetingInnerController extends BaseCRUDActionController<OaMeeting
      * @return .
      */
     @RequestMapping
-    public String modify(Model model, Long id) {
+    public String modify(Model model, Long id)
+    {
         OaMeetingInner oaMeetingInner = oaMeetingInnerService.get(id);
 
         //处理其他业务逻辑
         model.addAttribute("bean", oaMeetingInner);
-        
+
+        model.addAttribute("uploadButton", documentManager.getUploadButton(documentManager.getDefaultXmlConfig(),
+                OaMeetingInner.class.getSimpleName(), oaMeetingInner.getDoc(), null, null));
+
         return "view/oa/oaMeetingInner/input";
     }
-    
+
     /**
      * 查看页面
      *
@@ -166,13 +182,15 @@ public class OaMeetingInnerController extends BaseCRUDActionController<OaMeeting
      * @return .
      */
     @RequestMapping
-    public String view(Model model, Long id) {
+    public String view(Model model, Long id)
+    {
         OaMeetingInner oaMeetingInner = oaMeetingInnerService.get(id);
-        
-        model.addAttribute("bean", oaMeetingInner);        
+
+        model.addAttribute("docButton", documentManager.getDownloadButton(oaMeetingInner.getDoc()));
+        model.addAttribute("bean", oaMeetingInner);
         return "view/oa/oaMeetingInner/view";
     }
-    
+
     /**
      * 保存操作
      *
@@ -183,48 +201,54 @@ public class OaMeetingInnerController extends BaseCRUDActionController<OaMeeting
      */
     @SuppressWarnings("unchecked")
     @RequestMapping
-    public void save(HttpServletResponse response, @ModelAttribute("bean") OaMeetingInner entity, HttpServletRequest request) throws Exception {
-        try {
+    public void save(HttpServletResponse response, @ModelAttribute("bean") OaMeetingInner entity, HttpServletRequest request) throws Exception
+    {
+        try
+        {
             OaMeetingInner target;
-            if (entity.getId() != null) {
+            if (entity.getId() != null)
+            {
                 target = oaMeetingInnerService.get(entity.getId());
                 ReflectionUtils.copyBean(entity, target, new String[]{
-                                                "beginTime",                                      
-                                                                "endTime",                                      
-                                                                "address",                                      
-                                                                "innerPersons",                                      
-                                                                "outerPersons",                                      
-                                                                "title",                                      
-                                                                "content",                                      
-                                                                "isValid",                                      
-                                                                "createTime",                                      
-                                                                "createUser",                                      
-                                                                "updateTime",                                      
-                                                                "updateUser"                                      
-                                                });
+                        "beginTime",
+                        "address",
+                        "innerPersons",
+                        "outerPersons",
+                        "title",
+                        "content"
+                });
 
-            } else {
+            } else
+            {
                 target = entity;
             }
-            oaMeetingInnerService.save(target);
+            //保存文件
+            String docId = request.getParameter("docId");
+            if (StringHelper.isNotEmpty(docId)) {
+                DocDocument docDocument = docDocumentService.get(Long.valueOf(docId));
+                target.setDoc(docDocument);
+            }
 
-        } catch (Exception e) {
+            oaMeetingInnerService.save(target);
+        } catch (Exception e)
+        {
             log.error("error", e);
             super.processException(response, e);
             return;
         }
         sendSuccessJSON(response, "保存成功");
     }
-    
+
     /**
      * 删除操作
      *
      * @param response .
-     * @param id  .
-     * @throws Exception  .
+     * @param id       .
+     * @throws Exception .
      */
     @RequestMapping
-    public void delete(HttpServletResponse response, Long id) throws Exception {
+    public void delete(HttpServletResponse response, Long id) throws Exception
+    {
         oaMeetingInnerService.delete(id);
 
         sendSuccessJSON(response, "删除成功");
