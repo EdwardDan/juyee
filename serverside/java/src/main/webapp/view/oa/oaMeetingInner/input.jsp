@@ -5,18 +5,10 @@
     $(function () {
         //页面验证初始化
         var validateCondition = [
-            //{name:"beginTime", rule:"validate[required,maxSize[7]]"},
-            //{name:"endTime", rule:"validate[required,maxSize[7]]"},
-            //{name:"address", rule:"validate[required,maxSize[200]]"},
-            //{name:"innerPersons", rule:"validate[required,maxSize[${prop.length}]]"},
-            //{name:"outerPersons", rule:"validate[required,maxSize[${prop.length}]]"},
-            //{name:"title", rule:"validate[required,maxSize[200]]"},
-            //{name:"content", rule:"validate[required,maxSize[${prop.length}]]"},
-            //{name:"isValid", rule:"validate[required,maxSize[1]]"},
-            //{name:"createTime", rule:"validate[required,maxSize[7]]"},
-            //{name:"createUser", rule:"validate[required,maxSize[100]]"},
-            //{name:"updateTime", rule:"validate[required,maxSize[7]]"},
-            //{name:"updateUser", rule:"validate[required,maxSize[100]]"},
+            {name:"beginTime", rule:"validate[required,maxSize[25]]"},
+            {name:"endTime", rule:"validate[required,maxSize[25]]"},
+            {name:"address", rule:"validate[required,maxSize[200]]"},
+            {name:"title", rule:"validate[required,maxSize[200]]"},
         ];
         validateInit(validateCondition, formId);
     });
@@ -27,11 +19,23 @@
             return;
         }
 
-        //加入其他业务判断
-//        if ($('#name').val() == '') {
-//            showInfoMsg('请输入姓名！',null);
-//            return;
-//        }
+        var beginDate = $("#beginTime").val() + ":00";
+        var endDate = $("#endTime").val() + ":00";
+        var d1 = new Date(beginDate.replace(/\-/g, "\/"));
+        var d2 = new Date(endDate.replace(/\-/g, "\/"));
+
+        if (beginDate != "" && endDate != "" && d1 >= d2) {
+            alert("开始时间不能大于结束时间！");
+            $("#beginTime").focus();
+            $("#beginTime").css("background","red");
+            $("#endTime").css("background","red");
+            return;
+        }
+
+        $(btn).get(0).disabled = true;
+        $("#status").val(status);
+        $("#beginTime").val($("#beginTime").val() + ":00");
+        $("#endTime").val($("#endTime").val() + ":00");
 
         //提交表单
         saveAjaxData("${ctx}/oaMeetingInner/save.do", formId);
@@ -45,13 +49,19 @@
 
     <div class="form_div">
         <table cellpadding="0" cellspacing="0" class="form_table">
-            <tr class="tr_dark">
+            <tr class="tr_light">
                 <td class="form_label">会议时间：</td>
-                <td class="form_content">
+                <td class="form_content" colspan="3">
                     <input type="text" name="beginTime" id="beginTime" class="input_datetime"
                            value="<fmt:formatDate value="${bean.beginTime}" pattern="yyyy-MM-dd HH:mm"/>"
                            readonly="true"/>
-                    <input type="button" class="button_calendar" value=" " onClick="calendar('beginTime','all')">
+                    <input type="button" class="button_calendar" value=" "
+                           onClick="calendar('beginTime','datetime')">
+                    ~<br>
+                    <input type="text" name="endTime" id="endTime" class="input_datetime"
+                           value="<fmt:formatDate value="${bean.endTime}" pattern="yyyy-MM-dd HH:mm"/>"
+                           readonly="true"/>
+                    <input type="button" class="button_calendar" value=" " onClick="calendar('endTime','datetime')">
 
                 </td>
             </tr>

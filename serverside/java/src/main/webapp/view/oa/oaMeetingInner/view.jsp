@@ -5,7 +5,8 @@
         <tr class="tr_light">
             <td class="form_label">会议时间：</td>
             <td class="form_content">&nbsp;
-                <fmt:formatDate value="${bean.beginTime}" pattern="yyyy-MM-dd HH:mm"/>
+                <fmt:formatDate value="${bean.beginTime}" pattern="yyyy-MM-dd HH:mm"/>~
+                <fmt:formatDate value="${bean.endTime}" pattern="yyyy-MM-dd HH:mm"/>
             </td>
         </tr>
         <tr class="tr_light">

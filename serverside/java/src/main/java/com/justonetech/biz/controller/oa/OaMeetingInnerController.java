@@ -1,11 +1,10 @@
 package com.justonetech.biz.controller.oa;
 
-import java.util.List;
-import java.util.Set;
-import java.util.Map;
-import java.util.HashMap;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import com.justonetech.biz.domain.DocDocument;
+import com.justonetech.biz.domain.OaMeetingOuter;
 import com.justonetech.core.utils.JspHelper;
 import org.apache.commons.lang.StringUtils;
 
@@ -121,9 +120,24 @@ public class OaMeetingInnerController extends BaseCRUDActionController<OaMeeting
             String query = queryTranslate.toString();
             session.setAttribute(Constants.GRID_SQL_KEY, query);
             pageModel = oaMeetingInnerService.findByPage(pageModel, query);
+            List<OaMeetingInner> rowList = pageModel.getRows();
+            List<Map<String, Object>> retList = new ArrayList<Map<String, Object>>();
+            Map<String, Object> map;
+            for (OaMeetingInner data : rowList)
+            {
+                map = new HashMap<String, Object>();
+                map.put("id", data.getId());
+                map.put("beginTime", data.getBeginTime());
+                map.put("endTime", data.getEndTime());
+                map.put("title", data.getTitle());
+                map.put("meetTime", data.getMeetTime());
+                map.put("address", data.getAddress());
+                map.put("docDown", documentManager.getDownloadButton(data.getDoc()));
+                retList.add(map);
+            }
 
             //输出显示
-            String json = GridJq.toJSON(columns, pageModel);
+            String json = GridJq.toJSON(retList, pageModel);
             sendJSON(response, json);
 
         } catch (Exception e)
@@ -211,6 +225,7 @@ public class OaMeetingInnerController extends BaseCRUDActionController<OaMeeting
                 target = oaMeetingInnerService.get(entity.getId());
                 ReflectionUtils.copyBean(entity, target, new String[]{
                         "beginTime",
+                        "endTime",
                         "address",
                         "innerPersons",
                         "outerPersons",
@@ -224,7 +239,8 @@ public class OaMeetingInnerController extends BaseCRUDActionController<OaMeeting
             }
             //保存文件
             String docId = request.getParameter("docId");
-            if (StringHelper.isNotEmpty(docId)) {
+            if (StringHelper.isNotEmpty(docId))
+            {
                 DocDocument docDocument = docDocumentService.get(Long.valueOf(docId));
                 target.setDoc(docDocument);
             }

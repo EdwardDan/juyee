@@ -8,6 +8,8 @@
                 colNames: ['ID',
                     '会议议题',
                     '会议时间',
+                    '会议开始时间',
+                    '会议结束时间',
                     '会议地点',
                     '附件',
                     '操作'
@@ -15,18 +17,11 @@
                 colModel: [
                     {name: 'id', width: 10, align: "center", searchtype: "integer", hidden: true},
                     {name: "title", width: "66", align: "center", searchtype: "string", sortable: true},
-
-                    {
-                        name: "beginTime",
-                        width: "66",
-                        align: "center",
-                        searchtype: "datetime",
-                        sortable: true,
-                        formatter: 'date',
-                        formatoptions: {srcformat: 'Y-m-d H:i:s', newformat: 'Y-m-d H:i'}
-                    },
+                    {name: "meetTime", width: "75", align: "center", searchtype: "datetime", sortable: true,},
+                    {name: "beginTime", width: "40", align: "center", searchtype: "date", sortable: true, hidden: true},
+                    {name: "endTime", width: "40", align: "center", searchtype: "date", sortable: true, hidden: true},
                     {name: "address", width: "66", align: "center", searchtype: "string", sortable: true},
-                    {name: "id", width: "66", align: "center", formatter: customeFormat},
+                    {name: "docDown", width: "30", align: "center"},
                 ],
                 actModel: [
                     {name: 'operation', width: 40, align: 'center'}

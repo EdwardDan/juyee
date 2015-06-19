@@ -1,5 +1,7 @@
 package com.justonetech.biz.domain.base;
 
+import com.justonetech.core.entity.Auditable;
+
 import java.io.Serializable;
 
 
@@ -21,7 +23,8 @@ import java.io.Serializable;
  *  table="OA_MEETING_INNER"
  */
 
-public abstract class BaseOaMeetingInner  implements Serializable {
+public abstract class BaseOaMeetingInner  implements Serializable,Auditable
+{
 
 	public static String REF = "OaMeetingInner";
 	public static String PROP_DOC = "doc";
