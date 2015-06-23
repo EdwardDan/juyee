@@ -1,125 +1,208 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/common/taglibs.jsp" %>
 <script type="text/javascript">
-    var formId = "bean";    
+    var formId = "bean";
     $(function () {
         //页面验证初始化
         var validateCondition = [
-                                                                        //{name:"applyContent", rule:"validate[required,maxSize[200]]"},            
-                                                                                                      //{name:"kzAuditOpinion", rule:"validate[required,maxSize[${prop.length}]]"},            
-                                                                                                      //{name:"kzAuditTime", rule:"validate[required,maxSize[7]]"},            
-                                                                                                      //{name:"zrAuditOpinion", rule:"validate[required,maxSize[${prop.length}]]"},            
-                                                                                                      //{name:"zrAuditTime", rule:"validate[required,maxSize[7]]"},            
-                                                                                                      //{name:"status", rule:"validate[required,custom[integer],maxSize[2]"},            
-                                                                                                      //{name:"createTime", rule:"validate[required,maxSize[7]]"},            
-                                                                                                      //{name:"createUser", rule:"validate[required,maxSize[100]]"},            
-                                                                                                      //{name:"updateTime", rule:"validate[required,maxSize[7]]"},            
-                                                                                                      //{name:"updateUser", rule:"validate[required,maxSize[100]]"},            
-                                                  ];
+        ];
         validateInit(validateCondition, formId);
     });
 
     //保存操作
-    function save(btn) {
+    function save(status, btn) {
         if (!validateForm(formId)) {
             return;
         }
-
-        //加入其他业务判断
-//        if ($('#name').val() == '') {
-//            showInfoMsg('请输入姓名！',null);
-//            return;
-//        }
+        //防止新增时直接保存出错
+        if ($("#tableThingDiv").html() == '' && ${fn:length(bean.oaThingsApplyItems)==0}) {
+            showInfoMsg("请添加记录！");
+            return;
+        }
 
         //提交表单
-        saveAjaxData("${ctx}/oaThingsApply/save.do", formId);
+        if (btn.value == "提交") {
+            if (confirm("确定要提交吗？")) {
+                saveAjaxData("${ctx}/oaThingsApply/saveInput.do?status=" + status, formId);
+            }
+        } else {
+            saveAjaxData("${ctx}/oaThingsApply/saveInput.do?status=" + status, formId);
+        }
     }
+
+    function addLine(obj) {
+        if (obj.value == "添加") {
+            $("#tableThingDiv").append($("#hiddenStyle").html());
+        } else {
+            if (confirm("确定要删除吗!")) {
+                var trObj = obj.parentNode.parentNode;
+                trObj.parentElement.removeChild(trObj);
+                sumMoney(); //删除明细时重新计算总价
+            }
+        }
+    }
+    //选择办公用品-单选
+    function selectOaThings(inputId, inputName, callback) {
+        var icon = addIcons("company.gif,dept.gif,person.gif");
+        new PopTree({
+            url:CONTEXT_NAME + '/oaThingsApply/treeDataForSelect.do?icon=' + icon,
+            targetId:inputId,
+            targetValueId:inputName,
+            callback:callback
+        });
+    }
+    function selectLine(obj) {
+        var p = $(obj).parent('td');
+        var inputId = p.children("input[name='thingId']");
+        var inputName = p.children("input[name='name']");
+
+        selectOaThings(inputId, inputName, function () {
+            setThing(obj);
+        });
+    }
+    function setThing(obj) {
+        var parent = $(obj).parents('tr');
+        var inputId = parent.find("input[name='thingId']").val();
+        var json = getAjaxData("${ctx}/oaThingsApply/getThing.do?id=" + inputId);
+        var obj = eval(json);
+        parent.find("input[name='amount']").val("");
+        parent.find("input[name='name']").val(obj["name"]);
+        parent.find("input[name='model']").val(obj["model"]);
+        parent.find("input[name='price']").val(obj["price"]);
+        parent.find("input[name='unit']").val(obj["unit"]);
+    }
+    $(document).ready(function () {
+        sumMoney();
+        //文本框值改变即触发
+        $(".input_text").live("change", function () {
+            sumMoney();
+        });
+    });
+    function sumMoney() {
+        var money = parseFloat(0);
+        $("input[name='amount']").each(function () {
+            if ($(this).val() != '') {
+                var parent = $(this).parents('tr');
+                var price = parent.find("input[name='price']").val();
+                money += parseFloat(this.value * price);
+            }
+        });
+        $("#count").text(money);
+    }
+
 </script>
 <form:form commandName="bean">
     <form:hidden path="id"/>
+    <%--<form:hidden path="status"/>--%>
+    <table cellpadding="0" cellspacing="0" class="form_table" border="0">
 
-    <div class="form_div">
-        <table cellpadding="0" cellspacing="0" class="form_table">
-                                    <tr class="tr_light">
-              <td class="form_label">申请说明：</td>
-              <td class="form_content">
-                        <form:input path="applyContent" cssClass="input_text"/>						
-                          </td>                                
-            </tr>
-                                                <tr class="tr_dark">
-              <td class="form_label">科长审核意见：</td>
-              <td class="form_content">
-                        <form:input path="kzAuditOpinion" cssClass="input_text"/>						
-                          </td>                                
-            </tr>
-                                    <tr class="tr_light">
-              <td class="form_label">科长审核时间：</td>
-              <td class="form_content">
-                                <input type="text" name="kzAuditTime" id="kzAuditTime" class="input_datetime"
-                           value="<fmt:formatDate value="${bean.kzAuditTime}" pattern="yyyy-MM-dd HH:mm:ss"/>" readonly="true"/>
-                    <input type="button" class="button_calendar" value=" " onClick="calendar('kzAuditTime','all')">                                                        
-            
-                          </td>                                
-            </tr>
-                                                <tr class="tr_dark">
-              <td class="form_label">办公室主任审核意见：</td>
-              <td class="form_content">
-                        <form:input path="zrAuditOpinion" cssClass="input_text"/>						
-                          </td>                                
-            </tr>
-                                    <tr class="tr_light">
-              <td class="form_label">办公室主任审核时间：</td>
-              <td class="form_content">
-                                <input type="text" name="zrAuditTime" id="zrAuditTime" class="input_datetime"
-                           value="<fmt:formatDate value="${bean.zrAuditTime}" pattern="yyyy-MM-dd HH:mm:ss"/>" readonly="true"/>
-                    <input type="button" class="button_calendar" value=" " onClick="calendar('zrAuditTime','all')">                                                        
-            
-                          </td>                                
-            </tr>
-                                                <tr class="tr_dark">
-              <td class="form_label">状态：</td>
-              <td class="form_content">
-                        <form:input path="status" cssClass="input_text"/>						
-                          </td>                                
-            </tr>
-                                    <tr class="tr_light">
-              <td class="form_label">创建时间：</td>
-              <td class="form_content">
-                                <input type="text" name="createTime" id="createTime" class="input_datetime"
-                           value="<fmt:formatDate value="${bean.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/>" readonly="true"/>
-                    <input type="button" class="button_calendar" value=" " onClick="calendar('createTime','all')">                                                        
-            
-                          </td>                                
-            </tr>
-                                                <tr class="tr_dark">
-              <td class="form_label">创建用户名：</td>
-              <td class="form_content">
-                        <form:input path="createUser" cssClass="input_text"/>						
-                          </td>                                
-            </tr>
-                                    <tr class="tr_light">
-              <td class="form_label">更新时间：</td>
-              <td class="form_content">
-                                <input type="text" name="updateTime" id="updateTime" class="input_datetime"
-                           value="<fmt:formatDate value="${bean.updateTime}" pattern="yyyy-MM-dd HH:mm:ss"/>" readonly="true"/>
-                    <input type="button" class="button_calendar" value=" " onClick="calendar('updateTime','all')">                                                        
-            
-                          </td>                                
-            </tr>
-                                                <tr class="tr_dark">
-              <td class="form_label">更新用户名：</td>
-              <td class="form_content">
-                        <form:input path="updateUser" cssClass="input_text"/>						
-                          </td>                                
-            </tr>
-                                     
-            <tr class="tr_button">
-                <td class="form_label"></td>
-                <td class="form_content">
-                    <input type="button" value="确定" class="button_confirm" onclick="save(this)">&nbsp;
-                    <input type="button" value="取消" class="button_cancel" onclick="closeWindow()">
-                </td>
-            </tr>
-        </table>
+        <tr class="tr_title">
+            <td colspan="6">办公用品申请</td>
+        </tr>
+        <tr class="tr_dark">
+            <td class="form_border" align="center" colspan="3"> ${bean.applyDept.name}
+                <input type="text" name="deptName" id="deptName" class="input_text" value="${bean.applyDept.name}"
+                       readonly="true">
+                <input type="hidden" name="applyDept" id="applyDept"
+                       value="<c:if test="${bean.applyDept!=null}">${bean.applyDept.id}</c:if>"/>
+                <input type="button" id="deptSelBtn" value=" " class="button_select"
+                       onclick="selectSysDept('applyDept','deptName')"
+                       title="点击选择所属单位（部门）">
+            </td>
+            <td class="form_border" align="center" colspan="3">
+                <input type="text" name="userName" id="userName" value="${bean.applyUser.displayName}"
+                       class="input_text"
+                       readonly="true">
+                <input type="hidden" name="applyUser" id="applyUser" value="${bean.applyUser.id}">
+                <img src="${themePath}/workflow/user.gif" alt="" border="0"
+                     onclick="selectSysUser('applyUser','userName')">
+            </td>
+        </tr>
+        <tr class="tr_header">
+            <td width="8%">申请物品</td>
+            <td width="8%">型号</td>
+            <td width="9%">单位</td>
+            <td width="8%">预计单价</td>
+            <td width="8%">数量</td>
+            <td width="2%" nowrap>
+                &nbsp;<input type="button" value="添加" class="button_select_add" onclick="addLine(this)"/>
+            </td>
+        </tr>
+        <c:if test="${not empty bean.oaThingsApplyItems && bean.oaThingsApplyItems != null}">
+            <c:forEach items="${bean.oaThingsApplyItems}" var="item">
+                <tr class="tr_dark">
+                    <td>
+                        <input type="hidden" name="thingId" value="${item.oaThings.id}">
+                        <input type="text" name="name" class="input_text" style="width:98%;background-color: #deedf7;"
+                               value="${item.name}"
+                               title="${item.name}" ondblclick="selectLine(this)">
+                    </td>
+                    <td>
+                        <input type="text" name="model" class="input_text" style="width: 95%" value="${item.model}"
+                               title="${item.model}">
+                    </td>
+
+                    <td>
+                        <input type="text" name="unit" class="input_text" style="width: 95%" value="${item.unit}"
+                               title="${item.unit}">
+                    </td>
+                    <td>
+                        <input type="text" name="price" class="input_text" style="width: 95%" value="${item.price}"
+                               title="${item.price}">
+                    </td>
+                    <td>
+                        <input type="text" name="amount" class="input_text" style="width: 95%" value="${item.amount}"
+                               title="${item.amount}">
+                    </td>
+                    <td><input type="button" value="删除" class="button_select_remove" onclick="addLine(this)"/>
+                    </td>
+                </tr>
+            </c:forEach>
+        </c:if>
+        <tbody id="tableThingDiv"></tbody>
+            <%--标准行迁入--%>
+        <tr class="tr_dark">
+            <td colspan="4" align="right"><b>预计总价</b></td>
+            <td><span id="count">${count}</span></td>
+            <td>&nbsp;</td>
+        </tr>
+    </table>
+    <table>
+        <tr class="tr_light">
+            <td class="form_label_right" width="20%">申请说明：</td>
+            <td class="form_content">
+                <form:textarea path="applyContent" cssClass="input_textarea_long"/>
+            </td>
+        </tr>
+    </table>
+
+    <div class="tr_button" style="text-align: center">
+        <input type="button" value="提交" class="button_confirm" onclick="save('${STATUS_SUBMIT}',this)">&nbsp;
+        <input type="button" value="暂存" class="button_confirm" onclick="save('${STATUS_EDIT}',this)">&nbsp;
+        <input type="button" value="取消" class="button_cancel" onclick="closeWindow()">
     </div>
 </form:form>
+<table style="display: none;" cellpadding="0" cellspacing="0" class="form_table" border="0">
+    <tbody id="hiddenStyle">
+    <tr class="tr_dark"><%--标准行--%>
+        <td width="4%">
+            <input type="hidden" name="thingId">
+            <input type="text" name="name" class="input_text" style="width:98%;background-color: #deedf7;"
+                   ondblclick="selectLine(this)">
+        </td>
+        <td width="8%">
+            <input type="text" name="model" class="input_text" style="width: 95%">
+        </td>
+        <td width="8%">
+            <input type="text" name="unit" class="input_text" style="width: 95%">
+        </td>
+        <td width="9%">
+            <input type="text" name="price" class="input_text" style="width: 95%">
+        </td>
+        <td width="8%">
+            <input type="text" name="amount" class="input_text" style="width: 95%">
+        </td>
+        <td width="2%"><input type="button" value="删除" class="button_select_remove" onclick="addLine(this)"/></td>
+    </tr>
+    </tbody>
+</table>

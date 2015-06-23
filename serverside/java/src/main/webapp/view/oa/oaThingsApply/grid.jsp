@@ -6,62 +6,65 @@
             gridOpts:{
                 url:"${ctx}/oaThingsApply/gridDataCustom.do",
                 colNames:['ID',
-            	'申请说明',            	          	
-            	'科长审核意见',            	          	
-            	'科长审核时间',            	          	
-            	'办公室主任审核意见',            	          	
-            	'办公室主任审核时间',            	          	
-            	'状态',            	          	
-            	'创建时间',            	          	
-            	'创建用户名',            	          	
-            	'更新时间',            	          	
-            	'更新用户名',            	          	
-                '操作'
+                    '申请部门',
+                    '申请人',
+                    '申请时间',
+                    '状态',
+                    '状态code',
+                    '操作'
                 ],
                 colModel:[
-                				{name:'id', width:10, align:"center", searchtype:"integer",hidden:true},
-{name:"applyContent",width:"80",align:"center",searchtype:"string",sortable:true},
-{name:"kzAuditOpinion",width:"80",align:"center",searchtype:"string",sortable:true},
-{name:"kzAuditTime",width:"80",align:"center",searchtype:"datetime",sortable:true,formatter:'date',formatoptions:{srcformat:'Y-m-d H:i:s',newformat:'Y-m-d H:i:s'}},
-{name:"zrAuditOpinion",width:"80",align:"center",searchtype:"string",sortable:true},
-{name:"zrAuditTime",width:"80",align:"center",searchtype:"datetime",sortable:true,formatter:'date',formatoptions:{srcformat:'Y-m-d H:i:s',newformat:'Y-m-d H:i:s'}},
-{name:"status",width:"80",align:"center",searchtype:"integer",sortable:true,formatter:'integer',formatoptions:{thousandsSeparator:",",defaulValue:0}},
-{name:"createTime",width:"80",align:"center",searchtype:"datetime",sortable:true,formatter:'date',formatoptions:{srcformat:'Y-m-d H:i:s',newformat:'Y-m-d H:i:s'}},
-{name:"createUser",width:"80",align:"center",searchtype:"string",sortable:true},
-{name:"updateTime",width:"80",align:"center",searchtype:"datetime",sortable:true,formatter:'date',formatoptions:{srcformat:'Y-m-d H:i:s',newformat:'Y-m-d H:i:s'}},
-{name:"updateUser",width:"80",align:"center",searchtype:"string",sortable:true}
+                    {name:'id', width:10, align:"center", searchtype:"integer", hidden:true},
+                    {name:"applyDept.name", width:"80", align:"left", searchtype:"string", sortable:true},
+                    {name:"applyUser.displayName", width:"40", align:"center", searchtype:"string", sortable:true},
+                    {name:"createTime", width:"40", align:"center", searchtype:"datetime", sortable:true, formatter:'date', formatoptions:{srcformat:'Y-m-d H:i:s', newformat:'Y-m-d'}},
+                    {name:"statusName", width:"40", align:"center", searchtype:"string", sortable:true},
+                    {name:"status", width:"5", align:"center", searchtype:"integer", hidden:true}
                 ],
                 actModel:[
                     {name:'operation', width:40, align:'center'}
                 ],
-                pager: '#pager2',
+                pager:'#pager2',
                 caption:"办公用品申请列表",
                 shrinkToFit:true,
                 gridComplete:function () {  //在此事件中循环为每一行添加修改和删除链接
                     var ids = jQuery("#listGrid").jqGrid('getDataIDs');
                     for (var i = 0; i < ids.length; i++) {
                         var id = ids[i];
+                        var rowData = jQuery("#listGrid").jqGrid('getRowData', id);
+                        var statusCode = rowData["status"];//获取每一行的状态
                         var opButton = '<input type="button" value="查看" onclick="doView(' + id + ')" class="button_normal"/> ';
-                        <c:if test="${canEdit}">
-                        opButton += '<input type="button" value="编辑" onclick="doEdit(' + id + ')" class="button_normal"/> ';
-                        opButton += '<input type="button" value="删除" onclick="doDelete(' + id + ')" class="button_normal"/>';
-                        </c:if>
+                    <c:if test="${auditKZ}">
+                        if (statusCode == ${STATUS_SUBMIT}) {
+                            opButton += '<input type="button" value="审批" onclick="doAudit(' + id + ')" class="button_normal"/> ';
+                        }
+                    </c:if>
+                    <c:if test="${auditZR}">
+                        if (statusCode == ${STATUS_BRANCH_PASS}) {
+                            opButton += '<input type="button" value="审批" onclick="doAudit(' + id + ')" class="button_normal"/> ';
+                        }
+                    </c:if>
+                    <c:if test="${canEdit}">
+                        if (statusCode == ${STATUS_EDIT} || statusCode == ${STATUS_BRANCH_BACK} || statusCode == ${STATUS_MAIN_BACK}) {
+                        <%--if (createUser == '${currentUser}') {--%>
+                            opButton += '<input type="button" value="编辑" onclick="doEdit(' + id + ')" class="button_normal"/> ';
+                            opButton += '<input type="button" value="删除" onclick="doDelete(' + id + ')" class="button_normal"/>';
+//                            } else {   //不是当前登录用户时，判断其是否有强制删除权限
+                        <%--<c:if test="${canDelete}">--%>
+//                                opButton += '<input type="button" value="删除" onclick="doDelete(' + id + ')" class="button_normal"/>';
+                        <%--</c:if>--%>
+//                            }
+                        }
+                    </c:if>
                         jQuery("#listGrid").jqGrid('setRowData', ids[i], { operation:opButton});
                     }
                 }, rownumbers:true
             },
             userOpts:{
                 defaultQuery:{ "groupOp":"AND", "rules":[
-            	{ "field":"申请说明", "op":"cn", "data":""},            	    
-            	{ "field":"科长审核意见", "op":"cn", "data":""},            	    
-                { "field":"科长审核时间", "op":"bw", "data":""},            	    
-            	{ "field":"办公室主任审核意见", "op":"cn", "data":""},            	    
-                { "field":"办公室主任审核时间", "op":"bw", "data":""},            	    
-            	{ "field":"状态", "op":"cn", "data":""},            	    
-                { "field":"创建时间", "op":"bw", "data":""},            	    
-            	{ "field":"创建用户名", "op":"cn", "data":""},            	    
-                { "field":"更新时间", "op":"bw", "data":""},            	    
-            	{ "field":"更新用户名", "op":"cn", "data":""}            	    
+                    { "field":"申请部门", "op":"cn", "data":""},
+                    { "field":"申请人", "op":"cn", "data":""},
+                    { "field":"申请时间", "op":"bw", "data":""}
                 ]},
                 queryButton:$("#queryButton"),
                 queryDesc:$("#queryConditionDesc")
@@ -79,16 +82,15 @@
     }
     function doEdit(id) {
         openWindow("修改办公用品申请", "${ctx}/oaThingsApply/modify.do?id=" + id, true);
-    }    
+    }
+    function doAudit(id) {
+        openWindow("审核办公用品申请", "${ctx}/oaThingsApply/audit.do?id=" + id, true);
+    }
     function doDelete(id) {
         doGridDelete("${ctx}/oaThingsApply/delete.do?id=" + id);
     }
     </c:if>
-    
-    //custom formatter
-    //function customeFormat(cellvalue, options, rowObject) {
-    //    return cellvalue == "true"?"是":"否";
-    //}
+
 </script>
 
 <div class="title_Search">
@@ -97,13 +99,14 @@
             <input type="button" name="queryButton" id="queryButton" value="查询" class="btn_Search"/>
         </div>
         <div style="float:left;padding-left: 10px" id="conditionsDesc">
-            <input type="text" name="queryConditionDesc" id="queryConditionDesc" value="" class="title_input" readonly="true"/>
+            <input type="text" name="queryConditionDesc" id="queryConditionDesc" value="" class="title_input"
+                   readonly="true"/>
         </div>
         <div style="float:right;padding-right: 10px">
-        <c:if test="${canEdit}">
-            <input type="button" value="添加" class="button_add"
-                   onclick="doAdd()"/>
-        </c:if>
+            <c:if test="${canEdit}">
+                <input type="button" value="添加" class="button_add"
+                       onclick="doAdd()"/>
+            </c:if>
         </div>
     </div>
 </div>

@@ -64,7 +64,7 @@ public enum OaThingsApplyStatus {
     public static String getColorNameByCode(int code) {
         for (OaThingsApplyStatus aType : values()) {
             if (aType.getCode() == code)
-                return "<font color='" + aType.getColor() + "'>" + aType.getName() + "</font>";
+                return "<font color=" + aType.getColor() + ">" + aType.getName() + "</font>";
         }
         return null;
     }
