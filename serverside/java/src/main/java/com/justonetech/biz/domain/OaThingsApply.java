@@ -22,6 +22,10 @@ public class OaThingsApply extends BaseOaThingsApply {
     public String getStatusName() {
         return OaThingsApplyStatus.getColorNameByCode(this.getStatus());
     }
+    //获取填报人姓名
+    public String getApplyUserName() {
+        return this.getApplyUser().getDisplayName();
+    }
 
 /*[CONSTRUCTOR MARKER END]*/
 
