@@ -1,41 +1,27 @@
 package com.justonetech.biz.controller.oa;
 
-import java.util.*;
-
-import com.justonetech.biz.domain.BpmProcessInstance;
-import com.justonetech.biz.domain.DocDocument;
-import com.justonetech.biz.domain.OaPublicInfo;
-import com.justonetech.biz.utils.enums.OaMeetingStatus;
-import org.apache.commons.lang.StringUtils;
-
-import com.justonetech.core.controller.BaseCRUDActionController;
-import com.justonetech.core.orm.hibernate.Page;
-import com.justonetech.core.ui.grid.Grid;
-import com.justonetech.core.utils.ReflectionUtils;
-import com.justonetech.core.utils.StringHelper;
-import com.justonetech.core.security.user.BaseUser;
-import com.justonetech.core.security.util.SpringSecurityUtils;
-import com.justonetech.core.utils.FormatUtils;
 import com.justonetech.biz.core.orm.hibernate.GridJq;
 import com.justonetech.biz.core.orm.hibernate.QueryTranslateJq;
+import com.justonetech.biz.daoservice.DocDocumentService;
 import com.justonetech.biz.daoservice.OaMeetingOuterService;
+import com.justonetech.biz.domain.DocDocument;
 import com.justonetech.biz.domain.OaMeetingOuter;
-
+import com.justonetech.biz.manager.ConfigManager;
 import com.justonetech.biz.manager.DocumentManager;
 import com.justonetech.biz.utils.Constants;
-import com.justonetech.biz.daoservice.DocDocumentService;
-import com.justonetech.biz.manager.ConfigManager;
-import com.justonetech.system.daoservice.SysCodeDetailService;
-import com.justonetech.system.domain.SysCodeDetail;
+import com.justonetech.biz.utils.enums.OaMeetingStatus;
+import com.justonetech.core.controller.BaseCRUDActionController;
+import com.justonetech.core.orm.hibernate.Page;
+import com.justonetech.core.security.user.BaseUser;
+import com.justonetech.core.security.util.SpringSecurityUtils;
+import com.justonetech.core.utils.ReflectionUtils;
+import com.justonetech.core.utils.StringHelper;
+import com.justonetech.system.manager.SimpleQueryManager;
 import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
 import com.justonetech.system.utils.PrivilegeCode;
-import com.justonetech.system.manager.SimpleQueryManager;
-
-import com.justonetech.system.tree.ZTreeBranch;
-import com.justonetech.system.tree.ZTreeNode;
-import com.justonetech.system.manager.SysUserManager;
-import com.justonetech.system.utils.PrivilegeCode;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,9 +31,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -238,9 +226,7 @@ public class OaMeetingOuterController extends BaseCRUDActionController<OaMeeting
                         "workAdvise",
                         "status",
                         "fgAuditOpinion",
-                        "fgAuditTime",
-                        "zrAuditOpinion",
-                        "zrAuditTime"
+                        "zrAuditOpinion"
                 });
 
             } else {
@@ -252,6 +238,22 @@ public class OaMeetingOuterController extends BaseCRUDActionController<OaMeeting
                 target.setDoc(docDocument);
                 documentManager.updateDocumentByBizData(docDocument, null, target.getTitle());
             }
+            Integer status = target.getStatus();
+            if (null != status && OaMeetingStatus.STATUS_BRANCH_PASS.getCode() == status || OaMeetingStatus.STATUS_BRANCH_BACK.getCode() == status) {
+                target.setFgAuditTime(new Timestamp(System.currentTimeMillis()));
+                BaseUser loginUser = SpringSecurityUtils.getCurrentUser();
+                if (loginUser != null) {
+                    target.setFgAuditUser(sysUserManager.getSysUser(loginUser.getLoginName()));
+                }
+            }
+            if (null != status && OaMeetingStatus.STATUS_MAIN_PASS.getCode() == status || OaMeetingStatus.STATUS_MAIN_BACK.getCode() == status) {
+                target.setZrAuditTime(new Timestamp(System.currentTimeMillis()));
+                BaseUser loginUser = SpringSecurityUtils.getCurrentUser();
+                if (loginUser != null) {
+                    target.setZrAuditUser(sysUserManager.getSysUser(loginUser.getLoginName()));
+                }
+            }
+
             oaMeetingOuterService.save(target);
 
         } catch (Exception e) {
