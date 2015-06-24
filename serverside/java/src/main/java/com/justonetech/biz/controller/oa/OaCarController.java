@@ -1,19 +1,28 @@
 package com.justonetech.biz.controller.oa;
 
-import java.util.List;
-import java.util.Set;
-import java.util.Map;
-import java.util.HashMap;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
+import com.justonetech.biz.daoservice.OaTaskService;
+import com.justonetech.biz.domain.OaThingsApply;
+import com.justonetech.biz.manager.MsgMessageManager;
+import com.justonetech.biz.manager.OaTaskManager;
+import com.justonetech.biz.utils.enums.OaCarStatus;
+import com.justonetech.core.utils.*;
+import com.justonetech.system.daoservice.SysDeptService;
+import com.justonetech.system.daoservice.SysPersonService;
+import com.justonetech.system.daoservice.SysUserService;
+import com.justonetech.system.domain.SysDept;
+import com.justonetech.system.domain.SysPerson;
+import com.justonetech.system.domain.SysUser;
 import org.apache.commons.lang.StringUtils;
 
 import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.orm.hibernate.Page;
 import com.justonetech.core.ui.grid.Grid;
-import com.justonetech.core.utils.ReflectionUtils;
-import com.justonetech.core.utils.StringHelper;
 import com.justonetech.core.security.user.BaseUser;
 import com.justonetech.core.security.util.SpringSecurityUtils;
-import com.justonetech.core.utils.FormatUtils;
 import com.justonetech.biz.core.orm.hibernate.GridJq;
 import com.justonetech.biz.core.orm.hibernate.QueryTranslateJq;
 import com.justonetech.biz.daoservice.OaCarService;
@@ -34,6 +43,7 @@ import com.justonetech.system.tree.ZTreeBranch;
 import com.justonetech.system.tree.ZTreeNode;
 import com.justonetech.system.manager.SysUserManager;
 import com.justonetech.system.utils.PrivilegeCode;
+import org.apache.commons.net.ntp.TimeStamp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -57,29 +67,44 @@ import org.slf4j.LoggerFactory;
 @Controller
 public class OaCarController extends BaseCRUDActionController<OaCar> {
     private Logger logger = LoggerFactory.getLogger(OaCarController.class);
-    
+
     @Autowired
     private SysUserManager sysUserManager;
-    
+
     @Autowired
     private SysCodeManager sysCodeManager;
 
     @Autowired
     private ConfigManager configManager;
-    
+
     @Autowired
     private DocumentManager documentManager;
-    
+
     @Autowired
     private SimpleQueryManager simpleQueryManager;
-    
+
     @Autowired
     private DocDocumentService docDocumentService;
 
     @Autowired
     private OaCarService oaCarService;
 
-   /**
+    @Autowired
+    private SysDeptService sysDeptService;
+
+    @Autowired
+    private SysUserService sysUserService;
+
+    @Autowired
+    private MsgMessageManager msgMessageManager;
+
+    @Autowired
+    private SysCodeDetailService sysCodeDetailService;
+
+    @Autowired
+    private OaTaskManager oaTaskManager;
+
+    /**
      * 列表显示页面
      *
      * @param model .
@@ -87,20 +112,23 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
      */
     @RequestMapping
     public String grid(Model model) {
-      //判断是否有编辑权限
-      model.addAttribute("canEdit",sysUserManager.hasPrivilege(PrivilegeCode.SYS_SAMPLE_EDIT));
-            
-      return "view/oa/oaCar/grid";
+        //判断是否有编辑权限
+        model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.OA_CAR_EDIT));
+
+        model.addAttribute("canKzAudit", sysUserManager.hasPrivilege(PrivilegeCode.OA_CAR_AUDIT_KZ));
+        model.addAttribute("canZrAudit", sysUserManager.hasPrivilege(PrivilegeCode.OA_CAR_AUDIT_ZR));
+
+        return "view/oa/oaCar/grid";
     }
-    
+
     /**
      * 获取列表数据
      *
      * @param response .
-     * @param filters .
-     * @param columns .
-     * @param page .
-     * @param rows .
+     * @param filters  .
+     * @param columns  .
+     * @param page     .
+     * @param rows     .
      */
     @RequestMapping
     public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session) {
@@ -113,10 +141,17 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
             QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);
             String query = queryTranslate.toString();
             session.setAttribute(Constants.GRID_SQL_KEY, query);
-            pageModel = oaCarService.findByPage(pageModel, query);            
+            pageModel = oaCarService.findByPage(pageModel, query);
 
+            List<Map> gridValue = GridJq.getGridValue(pageModel.getRows(), columns);
+
+            for (Map map : gridValue) {
+                String beginTime = JspHelper.getString(map.get("beginTime"));
+                String endTime = JspHelper.getString(map.get("endTime"));
+                map.put("endTime", beginTime.substring(11, 16) + "-" + endTime.substring(11, 16));
+            }
             //输出显示
-            String json = GridJq.toJSON(columns, pageModel);
+            String json = GridJq.toJSON(gridValue, pageModel);
             sendJSON(response, json);
 
         } catch (Exception e) {
@@ -124,7 +159,7 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
             super.processException(response, e);
         }
     }
-    
+
     /**
      * 新增录入页面
      *
@@ -135,12 +170,28 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
     public String add(Model model) {
         OaCar oaCar = new OaCar();
 
+        //取得可选择时间
+        Calendar cal = Calendar.getInstance();
+        model.addAttribute("startHour", DateTimeHelper.getHourSelectOptions(JspHelper.getString(cal.get(Calendar.HOUR))));
+        model.addAttribute("startMinute", DateTimeHelper.getMinuteSelectOptions(JspHelper.getString(cal.get(Calendar.MINUTE))));
+        model.addAttribute("endHour", DateTimeHelper.getHourSelectOptions(JspHelper.getString(cal.get(Calendar.HOUR))));
+        model.addAttribute("endMinute", DateTimeHelper.getMinuteSelectOptions(JspHelper.getString(cal.get(Calendar.MINUTE))));
+
+        //当前用户的部门/名字
+        if (sysUserManager.getSysUser() != null && sysUserManager.getSysUser().getPerson() != null) {
+            oaCar.setApplyDept(sysUserManager.getSysUser().getPerson().getDept());
+        }
+        oaCar.setApplyUser(sysUserManager.getSysUser());
+
+        //选择车辆
+        List<SysCodeDetail> carList = sysCodeManager.getCodeListByCode(Constants.OA_CAR_SELECT);
+        model.addAttribute("carList", carList);
         //如需增加其他默认值请在此添加
         model.addAttribute("bean", oaCar);
 
         return "view/oa/oaCar/input";
     }
-    
+
     /**
      * 修改显示页面
      *
@@ -153,11 +204,10 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
         OaCar oaCar = oaCarService.get(id);
 
         //处理其他业务逻辑
-        model.addAttribute("bean", oaCar);
-        
+        modelInfo(model, oaCar);
         return "view/oa/oaCar/input";
     }
-    
+
     /**
      * 查看页面
      *
@@ -168,11 +218,10 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
     @RequestMapping
     public String view(Model model, Long id) {
         OaCar oaCar = oaCarService.get(id);
-        
-        model.addAttribute("bean", oaCar);        
+        modelInfo(model, oaCar);
         return "view/oa/oaCar/view";
     }
-    
+
     /**
      * 保存操作
      *
@@ -189,28 +238,71 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
             if (entity.getId() != null) {
                 target = oaCarService.get(entity.getId());
                 ReflectionUtils.copyBean(entity, target, new String[]{
-                                                "beginTime",                                      
-                                                                "endTime",                                      
-                                                                "personNum",                                      
-                                                                "useCause",                                      
-                                                                "address",                                      
-                                                                "kzAuditOpinion",                                      
-                                                                "kzAuditTime",                                      
-                                                                "zrAuditOpinion",                                      
-                                                                "zrAuditTime",                                      
-                                                                "driverMobile",                                      
-                                                                "status",                                      
-                                                                "createTime",                                      
-                                                                "createUser",                                      
-                                                                "updateTime",                                      
-                                                                "updateUser"                                      
-                                                });
+                        "beginTime",
+                        "endTime",
+                        "personNum",
+                        "useCause",
+                        "address",
+                        "kzAuditOpinion",
+                        "kzAuditTime",
+                        "zrAuditOpinion",
+                        "zrAuditTime",
+                        "driverMobile",
+                        "status"
+                });
 
             } else {
                 target = entity;
             }
-            oaCarService.save(target);
+            //部门/申请人
+            String applyDeptId = request.getParameter("applyDeptId");
+            SysDept sysDept = sysDeptService.get(JspHelper.getLong(applyDeptId));
 
+            String applyUserId = request.getParameter("applyUserId");
+            SysUser sysUser = sysUserService.get(JspHelper.getLong(applyUserId));
+            target.setApplyDept(sysDept);
+            target.setApplyUser(sysUser);
+
+            //拟派车辆
+            String carId = request.getParameter("car");
+            SysCodeDetail carDetail = null;
+            if (carId != null && carId.length() > 0) {
+                carDetail = sysCodeDetailService.get(JspHelper.getLong(carId));
+            }
+            target.setCar(carDetail);
+
+            //保存审核人
+            if (target.getStatus() == OaCarStatus.STATUS_BRANCH_PASS.getCode() || target.getStatus() == OaCarStatus.STATUS_BRANCH_BACK.getCode()) {
+                target.setKzAuditUser(sysUserManager.getSysUser());
+                target.setKzAuditTime(new Timestamp(System.currentTimeMillis()));
+            } else if (target.getStatus() == OaCarStatus.STATUS_MAIN_PASS.getCode() || target.getStatus() == OaCarStatus.STATUS_MAIN_PASS.getCode()) {
+                target.setZrAuditUser(sysUserManager.getSysUser());
+                target.setZrAuditTime(new Timestamp(System.currentTimeMillis()));
+            }
+
+            oaCarService.save(target);
+//            //是否派遣司机
+//            String isAgree = request.getParameter("isAgree");
+//            //短信发送
+//            String mobile = target.getApplyUser().getPerson().getMobile();
+//            if (target.getStatus() == OaCarStatus.STATUS_MAIN_PASS.getCode()) {
+//                if (isAgree != null && isAgree.equals("true")) {
+//                    if (StringHelper.isNotEmpty(mobile)) {
+//                        msgMessageManager.sendSms("车辆申请成功！车牌号：" + target.getCar().getName() + "，司机：" + target.getDriverPerson().getName(), mobile);
+//                    }
+//                } else {
+//                    msgMessageManager.sendSms("车辆申请成功！车牌号：" + target.getCar().getName(), mobile);
+//                }
+//            } else if (target.getStatus() == OaCarStatus.STATUS_MAIN_BACK.getCode() || target.getStatus() == OaCarStatus.STATUS_BRANCH_BACK.getCode()) {
+//                if (StringHelper.isNotEmpty(mobile)) {
+//                    msgMessageManager.sendSms("车辆申请失败！请修改后重新申请。", mobile);
+//                }
+//            }
+
+            //创建提醒消息
+            if (target.getStatus() == OaCarStatus.STATUS_SUBMIT.getCode() || target.getStatus() == OaCarStatus.STATUS_MAIN_BACK.getCode() || target.getStatus() == OaCarStatus.STATUS_BRANCH_BACK.getCode()) {
+                createOaTask(target);
+            }
         } catch (Exception e) {
             log.error("error", e);
             super.processException(response, e);
@@ -218,19 +310,92 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
         }
         sendSuccessJSON(response, "保存成功");
     }
-    
+
     /**
      * 删除操作
      *
      * @param response .
-     * @param id  .
-     * @throws Exception  .
+     * @param id       .
+     * @throws Exception .
      */
     @RequestMapping
     public void delete(HttpServletResponse response, Long id) throws Exception {
         oaCarService.delete(id);
 
         sendSuccessJSON(response, "删除成功");
+    }
+
+    public void modelInfo(Model model, OaCar oaCar) {
+
+        //处理其他业务逻辑
+        List<SysCodeDetail> carList = sysCodeManager.getCodeListByCode(Constants.OA_CAR_SELECT);
+
+        model.addAttribute("carList", carList);
+        model.addAttribute("bean", oaCar);
+        String beginTime = JspHelper.getString(oaCar.getBeginTime());
+        String endTime = JspHelper.getString(oaCar.getEndTime());
+        //取得可选择时间
+        model.addAttribute("startHour", DateTimeHelper.getHourSelectOptions(beginTime.substring(11, 13)));
+        model.addAttribute("startMinute", DateTimeHelper.getMinuteSelectOptions(beginTime.substring(14, 16)));
+        model.addAttribute("endHour", DateTimeHelper.getHourSelectOptions(endTime.substring(11, 13)));
+        model.addAttribute("endMinute", DateTimeHelper.getMinuteSelectOptions(endTime.substring(14, 16)));
+    }
+
+    /**
+     * 创建系统任务
+     *
+     * @param data .
+     * @throws Exception .
+     */
+    public void createOaTask(OaCar data) throws Exception {
+        int Status = data.getStatus();
+        //创建任务
+        String title = oaTaskManager.getTaskTitle(data, OaCar.class.getSimpleName());
+        Set<Long> managers = new HashSet<Long>();
+        //科长和办公室主任在提交后收到待办提醒
+        if (Status == OaCarStatus.STATUS_SUBMIT.getCode()) {
+            //获取科长
+            String privilegeCodeKZ = PrivilegeCode.OA_CAR_AUDIT_KZ;
+            //获取办公室主任
+            String privilegeCodeZR = PrivilegeCode.OA_CAR_AUDIT_ZR;
+            Set<Long> managersKZ = sysUserManager.getUserIdsByPrivilegeCode(privilegeCodeKZ);
+            Set<Long> managersZR = sysUserManager.getUserIdsByPrivilegeCode(privilegeCodeZR);
+
+            managers.addAll(managersKZ);
+            managers.addAll(managersZR);
+            if (managers.size() > 0) {
+                oaTaskManager.createTask(OaCar.class.getSimpleName(), data.getId(), title, managers, false, null, null);
+            }
+        }
+        //退回修改，申请人收到待办提醒
+        if (Status == OaCarStatus.STATUS_BRANCH_BACK.getCode() || Status == OaCarStatus.STATUS_MAIN_BACK.getCode()) {
+            title = oaTaskManager.getTaskTitle(data, OaCar.class.getSimpleName() + "_Back");
+            SysUser applyUser = data.getApplyUser();
+            if (null != applyUser) {
+                managers.add(applyUser.getId());
+            }
+            if (managers.size() > 0) {
+                oaTaskManager.createTask(OaCar.class.getSimpleName(), data.getId(), title, managers, false, null, null);
+            }
+        }
+        //主任审核通过后，发给办公室处理人员和申请人待办事项
+        if (Status == OaCarStatus.STATUS_BRANCH_PASS.getCode() || Status == OaCarStatus.STATUS_MAIN_PASS.getCode()) {
+            title = oaTaskManager.getTaskTitle(data, OaCar.class.getSimpleName() + "_Pass");
+            SysUser applyUser = data.getApplyUser();
+            SysPerson dealPerson = data.getDriverPerson();
+            if (null != applyUser) {
+                managers.add(applyUser.getId());
+            }
+            if (dealPerson.getSysUsers() != null && dealPerson.getSysUsers().size() > 0) {
+                if (null != dealPerson.getSysUsers().iterator().next().getId()) {
+                    managers.add(dealPerson.getSysUsers().iterator().next().getId());
+                }
+            }
+
+            if (managers.size() > 0) {
+                oaTaskManager.createTask(OaCar.class.getSimpleName(), data.getId(), title, managers, false, null, null);
+            }
+        }
     }
 
 }

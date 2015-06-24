@@ -1,7 +1,7 @@
 package com.justonetech.biz.domain;
 
 import com.justonetech.biz.domain.base.BaseOaCar;
-
+import com.justonetech.biz.utils.enums.OaCarStatus;
 
 
 public class OaCar extends BaseOaCar {
@@ -20,6 +20,10 @@ public class OaCar extends BaseOaCar {
 	}
 
 /*[CONSTRUCTOR MARKER END]*/
+
+    public String getStatu(){
+        return getStatus()!=null? OaCarStatus.getColorNameByCode(getStatus()):"";
+    }
 
 
 }
