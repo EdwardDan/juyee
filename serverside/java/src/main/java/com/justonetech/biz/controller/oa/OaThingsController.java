@@ -10,6 +10,7 @@ import com.justonetech.biz.manager.DocumentManager;
 import com.justonetech.biz.utils.Constants;
 import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.orm.hibernate.Page;
+import com.justonetech.core.utils.JspHelper;
 import com.justonetech.core.utils.ReflectionUtils;
 import com.justonetech.system.manager.SimpleQueryManager;
 import com.justonetech.system.manager.SysCodeManager;
@@ -180,24 +181,34 @@ public class OaThingsController extends BaseCRUDActionController<OaThings>
             {
                 target = oaThingsService.get(entity.getId());
                 ReflectionUtils.copyBean(entity, target, new String[]{
-                        "orderNo",
                         "name",
                         "model",
                         "price",
                         "unit",
-                        "amount",
-                        "isValid",
-                        "createTime",
-                        "createUser",
-                        "updateTime",
-                        "updateUser"
+                        "amount"
                 });
+
+                oaThingsService.save(target);
 
             } else
             {
-                target = entity;
+                String[] names = request.getParameterValues("namel");
+                String[] models = request.getParameterValues("modell");
+                String[] units = request.getParameterValues("unitl");
+                String[] prices = request.getParameterValues("pricel");
+                String[] amounts = request.getParameterValues("amountl");
+                for (int i = 0; i < names.length; i++)
+                {
+                    OaThings oaThings = new OaThings();
+                    oaThings.setName(names[i]);
+                    oaThings.setModel(models[i]);
+                    oaThings.setUnit(units[i]);
+                    oaThings.setPrice(JspHelper.getDouble(prices[i]));
+                    oaThings.setAmount(JspHelper.getDouble(amounts[i]));
+                    oaThingsService.save(oaThings);
+                }
             }
-            oaThingsService.save(target);
+
 
         } catch (Exception e)
         {
