@@ -18,14 +18,14 @@
                 ],
                 colModel: [
                     {name: 'id', width: 10, align: "center", searchtype: "integer", hidden: true},
-                    {name: "applyDept.name", width: "53", align: "center", searchtype: "string", sortable: true},
-                    {name: "applyUser.displayName", width: "53", align: "center", searchtype: "string", sortable: true},
-                    {name: "beginTime", width: "53", align: "center", searchtype: "date", sortable: true, formatter: 'date', formatoptions: {srcformat: 'Y-m-d', newformat: 'Y-m-d'}},
-                    {name: "endTime", width: "53", align: "center", searchtype: "string", sortable: true},
-                    {name: "car.name", width: "53", align: "center", searchtype: "string", sortable: true},
-                    {name: "driverPerson.name", width: "53", align: "center", searchtype: "string", sortable: true},
-                    {name: "useCause", width: "53", align: "center", searchtype: "string", sortable: true},
-                    {name: "statu", width: "53", align: "center", searchtype: "string", sortable: true}
+                    {name: "applyDept.name", width: "40", align: "center", searchtype: "string", sortable: true},
+                    {name: "applyUser.displayName", width: "20", align: "center", searchtype: "string", sortable: true},
+                    {name: "beginTime", width: "30", align: "center", searchtype: "date", sortable: true, formatter: 'date', formatoptions: {srcformat: 'Y-m-d', newformat: 'Y-m-d'}},
+                    {name: "endTime", width: "30", align: "center", searchtype: "string", sortable: true},
+                    {name: "car.name", width: "20", align: "center", searchtype: "string", sortable: true},
+                    {name: "driverPerson.name", width: "20", align: "center", searchtype: "string", sortable: true},
+                    {name: "useCause", width: "53", align: "left", searchtype: "string", sortable: true},
+                    {name: "statu", width: "30", align: "center", searchtype: "string", sortable: true}
                 ],
                 actModel: [
                     {name: 'operation', width: 40, align: 'center'}

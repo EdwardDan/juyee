@@ -8,19 +8,8 @@
             {name: "applyDept", rule: "validate[required]"},
             {name: "applyUser", rule: "validate[required]"},
             {name: "useDate", rule: "validate[required]"},
-            {name: "personNum", rule: "validate[required,custom[integer]]"}
-            //{name:"kzAuditOpinion", rule:"validate[required,maxSize[
-            <%--${prop.length}]]"},--%>
-            //{name:"kzAuditTime", rule:"validate[required,maxSize[7]]"},
-            //{name:"zrAuditOpinion", rule:"validate[required,maxSize[
-            <%--${prop.length}]]"},--%>
-            //{name:"zrAuditTime", rule:"validate[required,maxSize[7]]"},
-            //{name:"driverMobile", rule:"validate[required,maxSize[50]]"},
-            //{name:"status", rule:"validate[required,custom[integer],maxSize[2]"},
-            //{name:"createTime", rule:"validate[required,maxSize[7]]"},
-            //{name:"createUser", rule:"validate[required,maxSize[100]]"},
-            //{name:"updateTime", rule:"validate[required,maxSize[7]]"},
-            //{name:"updateUser", rule:"validate[required,maxSize[100]]"},
+            {name: "personNum", rule: "validate[required,custom[integer]]"},
+            {name: "address", rule: "validate[required]"}
         ];
         validateInit(validateCondition, formId);
     });
@@ -58,12 +47,6 @@
 
         $("#beginTime").val($("#useDate").val() + " " + $("#beginHour").val() + ":" + $("#beginMin").val() + ":00.0");
         $("#endTime").val($("#useDate").val() + " " + $("#endHour").val() + ":" + $("#endMin").val() + ":00.0");
-
-        //加入其他业务判断
-//        if ($('#name').val() == '') {
-//            showInfoMsg('请输入姓名！',null);
-//            return;
-//        }
 
         //提交表单
         saveAjaxData("${ctx}/oaCar/save.do", formId);

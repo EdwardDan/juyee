@@ -1,28 +1,20 @@
 package com.justonetech.biz.controller.oa;
 
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
-import com.justonetech.biz.daoservice.OaTaskService;
-import com.justonetech.biz.domain.OaThingsApply;
 import com.justonetech.biz.manager.MsgMessageManager;
 import com.justonetech.biz.manager.OaTaskManager;
 import com.justonetech.biz.utils.enums.OaCarStatus;
 import com.justonetech.core.utils.*;
 import com.justonetech.system.daoservice.SysDeptService;
-import com.justonetech.system.daoservice.SysPersonService;
 import com.justonetech.system.daoservice.SysUserService;
 import com.justonetech.system.domain.SysDept;
 import com.justonetech.system.domain.SysPerson;
 import com.justonetech.system.domain.SysUser;
-import org.apache.commons.lang.StringUtils;
 
 import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.orm.hibernate.Page;
-import com.justonetech.core.ui.grid.Grid;
-import com.justonetech.core.security.user.BaseUser;
-import com.justonetech.core.security.util.SpringSecurityUtils;
 import com.justonetech.biz.core.orm.hibernate.GridJq;
 import com.justonetech.biz.core.orm.hibernate.QueryTranslateJq;
 import com.justonetech.biz.daoservice.OaCarService;
@@ -39,11 +31,6 @@ import com.justonetech.system.manager.SysUserManager;
 import com.justonetech.system.utils.PrivilegeCode;
 import com.justonetech.system.manager.SimpleQueryManager;
 
-import com.justonetech.system.tree.ZTreeBranch;
-import com.justonetech.system.tree.ZTreeNode;
-import com.justonetech.system.manager.SysUserManager;
-import com.justonetech.system.utils.PrivilegeCode;
-import org.apache.commons.net.ntp.TimeStamp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -75,18 +62,6 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
     private SysCodeManager sysCodeManager;
 
     @Autowired
-    private ConfigManager configManager;
-
-    @Autowired
-    private DocumentManager documentManager;
-
-    @Autowired
-    private SimpleQueryManager simpleQueryManager;
-
-    @Autowired
-    private DocDocumentService docDocumentService;
-
-    @Autowired
     private OaCarService oaCarService;
 
     @Autowired
@@ -94,9 +69,6 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
 
     @Autowired
     private SysUserService sysUserService;
-
-    @Autowired
-    private MsgMessageManager msgMessageManager;
 
     @Autowired
     private SysCodeDetailService sysCodeDetailService;
@@ -281,26 +253,10 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
             }
 
             oaCarService.save(target);
-//            //是否派遣司机
-//            String isAgree = request.getParameter("isAgree");
-//            //短信发送
-//            String mobile = target.getApplyUser().getPerson().getMobile();
-//            if (target.getStatus() == OaCarStatus.STATUS_MAIN_PASS.getCode()) {
-//                if (isAgree != null && isAgree.equals("true")) {
-//                    if (StringHelper.isNotEmpty(mobile)) {
-//                        msgMessageManager.sendSms("车辆申请成功！车牌号：" + target.getCar().getName() + "，司机：" + target.getDriverPerson().getName(), mobile);
-//                    }
-//                } else {
-//                    msgMessageManager.sendSms("车辆申请成功！车牌号：" + target.getCar().getName(), mobile);
-//                }
-//            } else if (target.getStatus() == OaCarStatus.STATUS_MAIN_BACK.getCode() || target.getStatus() == OaCarStatus.STATUS_BRANCH_BACK.getCode()) {
-//                if (StringHelper.isNotEmpty(mobile)) {
-//                    msgMessageManager.sendSms("车辆申请失败！请修改后重新申请。", mobile);
-//                }
-//            }
 
             //创建提醒消息
-            if (target.getStatus() == OaCarStatus.STATUS_SUBMIT.getCode() || target.getStatus() == OaCarStatus.STATUS_MAIN_BACK.getCode() || target.getStatus() == OaCarStatus.STATUS_BRANCH_BACK.getCode()) {
+            if (target.getStatus() == OaCarStatus.STATUS_SUBMIT.getCode() || target.getStatus() == OaCarStatus.STATUS_MAIN_BACK.getCode() ||
+                    target.getStatus() == OaCarStatus.STATUS_BRANCH_BACK.getCode() || target.getStatus() == OaCarStatus.STATUS_MAIN_PASS.getCode()) {
                 createOaTask(target);
             }
         } catch (Exception e) {
@@ -325,6 +281,11 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
         sendSuccessJSON(response, "删除成功");
     }
 
+    /**
+     * 整合传递数据
+     * @param model
+     * @param oaCar
+     */
     public void modelInfo(Model model, OaCar oaCar) {
 
         //处理其他业务逻辑
@@ -386,7 +347,7 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
             if (null != applyUser) {
                 managers.add(applyUser.getId());
             }
-            if (dealPerson.getSysUsers() != null && dealPerson.getSysUsers().size() > 0) {
+            if (dealPerson != null && dealPerson.getSysUsers() != null && dealPerson.getSysUsers().size() > 0) {
                 if (null != dealPerson.getSysUsers().iterator().next().getId()) {
                     managers.add(dealPerson.getSysUsers().iterator().next().getId());
                 }
