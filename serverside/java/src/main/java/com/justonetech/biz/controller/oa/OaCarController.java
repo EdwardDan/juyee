@@ -8,6 +8,7 @@ import com.justonetech.biz.manager.OaTaskManager;
 import com.justonetech.biz.utils.enums.OaCarStatus;
 import com.justonetech.core.utils.*;
 import com.justonetech.system.daoservice.SysDeptService;
+import com.justonetech.system.daoservice.SysPersonService;
 import com.justonetech.system.daoservice.SysUserService;
 import com.justonetech.system.domain.SysDept;
 import com.justonetech.system.domain.SysPerson;
@@ -75,6 +76,9 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
 
     @Autowired
     private OaTaskManager oaTaskManager;
+
+    @Autowired
+    private SysPersonService sysPersonService;
 
     /**
      * 列表显示页面
@@ -241,6 +245,16 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
             if (carId != null && carId.length() > 0) {
                 carDetail = sysCodeDetailService.get(JspHelper.getLong(carId));
             }
+
+            //司机
+            String driverPersonId = request.getParameter("driverPersonId");
+            SysPerson sysPerson;
+            if (driverPersonId != null && driverPersonId.length() > 0) {
+                sysPerson = sysPersonService.get(JspHelper.getLong(driverPersonId));
+            } else {
+                sysPerson = new SysPerson();
+            }
+            target.setDriverPerson(sysPerson);
             target.setCar(carDetail);
 
             //保存审核人
@@ -283,6 +297,7 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
 
     /**
      * 整合传递数据
+     *
      * @param model
      * @param oaCar
      */

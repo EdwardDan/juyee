@@ -291,12 +291,12 @@ public class OaThingsApplyController extends BaseCRUDActionController<OaThingsAp
             }
             oaThingsApplyService.save(target);
             createOaTask(target);
-            if(target.getStatus() == OaThingsApplyStatus.STATUS_MAIN_PASS.getCode()){
+            if (target.getStatus() == OaThingsApplyStatus.STATUS_MAIN_PASS.getCode()) {
                 Set<OaThingsApplyItem> oaThingsApplyItems = target.getOaThingsApplyItems();
                 for (OaThingsApplyItem oaThingsApplyItem : oaThingsApplyItems) {
                     OaThings oaThings = oaThingsApplyItem.getOaThings();
-                    oaThings.setAmount(oaThings.getAmount()-oaThingsApplyItem.getAmount());
-                    if(oaThings.getAmount()<0){
+                    oaThings.setAmount(oaThings.getAmount() - oaThingsApplyItem.getAmount());
+                    if (oaThings.getAmount() < 0) {
                         oaThings.setAmount(new Double(0));
                     }
                     oaThingsService.save(oaThings);

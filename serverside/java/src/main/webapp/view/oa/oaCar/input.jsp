@@ -126,7 +126,7 @@
                     <form:input path="address" cssClass="input_text_long"/>
                 </td>
             </tr>
-            <c:if test="${bean.status=='2'|| bean.status=='3'}">
+            <c:if test="${bean.status=='2'|| bean.status=='3'||bean.status=='5'}">
                 <tr class="tr_dark">
                     <td class="form_label_right" width="15%">科长审核意见：</td>
                     <td class="form_content" colspan="3">
@@ -161,10 +161,11 @@
                     </tr>
                     <tr class="tr_light">
                         <td class="form_content" colspan="4">
-                            <input type="checkbox" id="isAgree" name="isAgree" onchange="showDriver()">是否拟派司机
+                            <input type="checkbox" id="isAgree" name="isAgree"
+                                   <c:if test="${not empty bean.driverPerson}">checked </c:if> onchange="showDriver()">是否拟派司机
                         </td>
                     </tr>
-                    <tr id="agreeDriver" class="tr_dark" style="display: none">
+                    <tr id="agreeDriver" class="tr_dark" <c:if test="${empty bean.driverPerson}">style="display: none"</c:if>>
                         <td class="form_label_right" width="15%">司机：</td>
                         <td class="form_content" width="35%">
                             <input type="text" name="driverPersonName" id="driverPersonName" class="input_text"
