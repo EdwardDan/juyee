@@ -32,6 +32,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -77,9 +78,23 @@ public class OaMeetingOuterController extends BaseCRUDActionController<OaMeeting
      */
     @RequestMapping
     public String grid(Model model) {
-
+        OaMeetingStatus statusBean[] = {OaMeetingStatus.STATUS_EDIT, OaMeetingStatus.STATUS_SUBMIT, OaMeetingStatus.STATUS_BRANCH_PASS, OaMeetingStatus.STATUS_BRANCH_BACK
+                , OaMeetingStatus.STATUS_MAIN_PASS, OaMeetingStatus.STATUS_MAIN_BACK};
+        List<Map<String, String>> statusList = setStatusBean(statusBean);
+        model.addAttribute("statusList", statusList);
         setStatus(model);
         return "view/oa/oaMeetingOuter/grid";
+    }
+
+    public List<Map<String, String>> setStatusBean(OaMeetingStatus statusBean[]) {
+        List<Map<String, String>> result = new ArrayList<Map<String, String>>();
+        for (OaMeetingStatus bean : statusBean) {
+            Map<String, String> status = new HashMap<String, String>();
+            status.put("name", bean.getName());
+            status.put("value", String.valueOf(bean.getCode()));
+            result.add(status);
+        }
+        return result;
     }
 
     public void setStatus(Model model) {
@@ -106,12 +121,25 @@ public class OaMeetingOuterController extends BaseCRUDActionController<OaMeeting
      * @param rows     .
      */
     @RequestMapping
-    public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session) {
+    public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session, String queryJson) {
         try {
+            String beginTime = StringHelper.getElementValue(queryJson, "beginTime");
+            String endTime = StringHelper.getElementValue(queryJson, "endTime");
+            String status = StringHelper.getElementValue(queryJson, "status");
             Page pageModel = new Page(page, rows, true);
-            String hql = "from OaMeetingOuter order by id desc";
+            String hql = "from OaMeetingOuter where 1=1 ";
             //增加自定义查询条件
+            if (!StringHelper.isEmpty(beginTime)) {
+                hql += " and to_char(beginTime,'YYYY-MM-DD')>='" + beginTime + "'";
+            }
+            if (!StringHelper.isEmpty(endTime)) {
+                hql += " and to_char(endTime,'YYYY-MM-DD')<='" + endTime + "'";
+            }
 
+            if (!StringHelper.isEmpty(status)) {
+                hql += " and status ='" + status + "'";
+            }
+            hql += " order by id desc";
             //执行查询
             QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);
             String query = queryTranslate.toString();
@@ -260,7 +288,7 @@ public class OaMeetingOuterController extends BaseCRUDActionController<OaMeeting
                 msg = "已退回修改!";
             } else if (OaMeetingStatus.STATUS_BRANCH_PASS.getCode() == target.getStatus() || OaMeetingStatus.STATUS_MAIN_PASS.getCode() == target.getStatus()) {
                 msg = "审核已通过!";
-            } else if(OaMeetingStatus.STATUS_SUBMIT.getCode() == target.getStatus() ){
+            } else if (OaMeetingStatus.STATUS_SUBMIT.getCode() == target.getStatus()) {
                 msg = "已提交!";
             }
         } catch (Exception e) {
