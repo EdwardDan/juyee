@@ -1,51 +1,27 @@
 package com.justonetech.biz.controller.oa;
 
-import java.util.List;
-import java.util.Set;
-import java.util.Map;
-import java.util.HashMap;
-import org.apache.commons.lang.StringUtils;
-
-import com.justonetech.core.controller.BaseCRUDActionController;
-import com.justonetech.core.orm.hibernate.Page;
-import com.justonetech.core.ui.grid.Grid;
-import com.justonetech.core.utils.ReflectionUtils;
-import com.justonetech.core.utils.StringHelper;
-import com.justonetech.core.security.user.BaseUser;
-import com.justonetech.core.security.util.SpringSecurityUtils;
-import com.justonetech.core.utils.FormatUtils;
-import com.justonetech.biz.core.orm.hibernate.GridJq;
-import com.justonetech.biz.core.orm.hibernate.QueryTranslateJq;
 import com.justonetech.biz.daoservice.OaWeekArrangeService;
 import com.justonetech.biz.domain.OaWeekArrange;
-
-import com.justonetech.biz.manager.DocumentManager;
 import com.justonetech.biz.utils.Constants;
-import com.justonetech.biz.daoservice.DocDocumentService;
-import com.justonetech.biz.manager.ConfigManager;
-import com.justonetech.system.daoservice.SysCodeDetailService;
+import com.justonetech.core.controller.BaseCRUDActionController;
+import com.justonetech.core.utils.StringHelper;
 import com.justonetech.system.domain.SysCodeDetail;
+import com.justonetech.system.domain.SysUser;
 import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
 import com.justonetech.system.utils.PrivilegeCode;
-import com.justonetech.system.manager.SimpleQueryManager;
-
-import com.justonetech.system.tree.ZTreeBranch;
-import com.justonetech.system.tree.ZTreeNode;
-import com.justonetech.system.manager.SysUserManager;
-import com.justonetech.system.utils.PrivilegeCode;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 
 /**
@@ -57,151 +33,146 @@ import org.slf4j.LoggerFactory;
 @Controller
 public class OaWeekArrangeController extends BaseCRUDActionController<OaWeekArrange> {
     private Logger logger = LoggerFactory.getLogger(OaWeekArrangeController.class);
-    
+
     @Autowired
     private SysUserManager sysUserManager;
-    
+
     @Autowired
     private SysCodeManager sysCodeManager;
 
     @Autowired
-    private ConfigManager configManager;
-    
-    @Autowired
-    private DocumentManager documentManager;
-    
-    @Autowired
-    private SimpleQueryManager simpleQueryManager;
-    
-    @Autowired
-    private DocDocumentService docDocumentService;
-
-    @Autowired
     private OaWeekArrangeService oaWeekArrangeService;
 
-   /**
-     * 列表显示页面
-     *
-     * @param model .
-     * @return .
-     */
-    @RequestMapping
-    public String grid(Model model) {
-      //判断是否有编辑权限
-      model.addAttribute("canEdit",sysUserManager.hasPrivilege(PrivilegeCode.SYS_SAMPLE_EDIT));
-            
-      return "view/oa/oaWeekArrange/grid";
-    }
-    
     /**
-     * 获取列表数据
+     * 初始化页面
      *
-     * @param response .
-     * @param filters .
-     * @param columns .
-     * @param page .
-     * @param rows .
+     * @param model 。
+     * @return 。
      */
     @RequestMapping
-    public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session) {
-        try {
-            Page pageModel = new Page(page, rows, true);
-            String hql = "from OaWeekArrange order by id desc";
-            //增加自定义查询条件
-
-            //执行查询
-            QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);
-            String query = queryTranslate.toString();
-            session.setAttribute(Constants.GRID_SQL_KEY, query);
-            pageModel = oaWeekArrangeService.findByPage(pageModel, query);            
-
-            //输出显示
-            String json = GridJq.toJSON(columns, pageModel);
-            sendJSON(response, json);
-
-        } catch (Exception e) {
-            log.error("error", e);
-            super.processException(response, e);
+    public String init(Model model) {
+        Calendar c = Calendar.getInstance();
+        int i1 = c.get(Calendar.DAY_OF_WEEK);
+        c.add(Calendar.DATE, 2 - i1); //回溯到周一
+        //日历循环
+        String start;
+        String end;
+        for (int i = 0; i < 7; i++) {
+            String month = (c.get(Calendar.MONTH) + 1) + "";
+            String day = (c.get(Calendar.DATE)) + "";
+            if (month.length() == 1) {
+                month = "0" + month;
+            }
+            if (day.length() == 1) {
+                day = "0" + day;
+            }
+            if (i == 0) {
+                start = c.get(Calendar.YEAR) + "-" + month + "-" + day;
+                model.addAttribute("startDate", start);
+            }
+            if (i == 6) {
+                end = c.get(Calendar.YEAR) + "-" + month + "-" + day;
+                model.addAttribute("endDate", end);
+            }
+            c.add(Calendar.DATE, 1);//日历+1
         }
+        return "view/oa/oaWeekArrange/init";
     }
-    
+
     /**
-     * 新增录入页面
+     * data数据封装
      *
      * @param model .
      * @return .
      */
     @RequestMapping
-    public String add(Model model) {
-        OaWeekArrange oaWeekArrange = new OaWeekArrange();
+    public String data(Model model, HttpServletRequest request) {
+        String startDate = request.getParameter("startDate");
+        String endDate = request.getParameter("endDate");
 
-        //如需增加其他默认值请在此添加
-        model.addAttribute("bean", oaWeekArrange);
+        Date start = Date.valueOf(startDate);
+        Date end = Date.valueOf(endDate);
+        model.addAttribute("start", start);
+        model.addAttribute("end", end);
 
-        return "view/oa/oaWeekArrange/input";
-    }
-    
-    /**
-     * 修改显示页面
-     *
-     * @param id    .
-     * @param model .
-     * @return .
-     */
-    @RequestMapping
-    public String modify(Model model, Long id) {
-        OaWeekArrange oaWeekArrange = oaWeekArrangeService.get(id);
+        Calendar c = new GregorianCalendar();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-        //处理其他业务逻辑
-        model.addAttribute("bean", oaWeekArrange);
-        
-        return "view/oa/oaWeekArrange/input";
+        //星期数组
+        String[] weeks = {"星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期天"};
+        String[] weekDates = new String[7];
+        String[] dates = new String[7];
+        for (int i = 1; i < 8; i++) {
+            c.setTime(start);
+            c.add(c.DATE, i - 1);
+            weekDates[i - 1] = weeks[i - 1] + "<br>(" + sdf.format(c.getTime()) + ")";
+            dates[i - 1] = sdf.format(c.getTime());
+        }
+        model.addAttribute("weekDates", weekDates);
+        model.addAttribute("dates", dates);
+
+        List<SysUser> userList = sysUserManager.getUsersByPrivilegeCode(PrivilegeCode.OA_WEEKARRANGE_EDIT);
+        model.addAttribute("userList", userList);
+        List<SysCodeDetail> periodList = sysCodeManager.getCodeListByCode(Constants.OA_WEEK_ARRANGE_PERIOD);
+        model.addAttribute("periodList", periodList);
+
+        String hql = "from OaWeekArrange where day between ? and ? order by day asc";
+        List<OaWeekArrange> list = oaWeekArrangeService.findByQuery(hql, start, end);
+        Map<String, Object> mapHM = new HashMap<String, Object>();
+        if (null != list && list.size() > 0) {
+            for (OaWeekArrange arrange : list) {
+                mapHM.put("content_" + arrange.getUser().getId() + "_" + arrange.getTimePeriod().getId() + "_" + arrange.getDay(), arrange.getContent());
+            }
+        }
+        model.addAttribute("mapHM", mapHM);
+
+        return "view/oa/oaWeekArrange/data";
     }
-    
-    /**
-     * 查看页面
-     *
-     * @param id    .
-     * @param model .
-     * @return .
-     */
-    @RequestMapping
-    public String view(Model model, Long id) {
-        OaWeekArrange oaWeekArrange = oaWeekArrangeService.get(id);
-        
-        model.addAttribute("bean", oaWeekArrange);        
-        return "view/oa/oaWeekArrange/view";
-    }
-    
+
     /**
      * 保存操作
      *
      * @param response .
-     * @param entity   .
      * @param request  .
      * @throws Exception .
      */
     @SuppressWarnings("unchecked")
     @RequestMapping
-    public void save(HttpServletResponse response, @ModelAttribute("bean") OaWeekArrange entity, HttpServletRequest request) throws Exception {
+    public void save(HttpServletResponse response, HttpServletRequest request) throws Exception {
         try {
-            OaWeekArrange target;
-            if (entity.getId() != null) {
-                target = oaWeekArrangeService.get(entity.getId());
-                ReflectionUtils.copyBean(entity, target, new String[]{
-                                                "day",                                      
-                                                                "content",                                      
-                                                                "isRest",                                      
-                                                                "createTime",                                      
-                                                                "createUser",                                      
-                                                                "updateTime",                                      
-                                                                "updateUser"                                      
-                                                });
-
-            } else {
-                target = entity;
+            Calendar c = new GregorianCalendar();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Date start = Date.valueOf(request.getParameter("start"));
+            String[] dates = new String[7];
+            for (int i = 1; i < 8; i++) {
+                c.setTime(start);
+                c.add(c.DATE, i - 1);
+                dates[i - 1] = sdf.format(c.getTime());
             }
-            oaWeekArrangeService.save(target);
+            List<SysUser> userList = sysUserManager.getUsersByPrivilegeCode(PrivilegeCode.OA_WEEKARRANGE_EDIT);
+            List<SysCodeDetail> periodList = sysCodeManager.getCodeListByCode(Constants.OA_WEEK_ARRANGE_PERIOD);
+            List<OaWeekArrange> list = new ArrayList<OaWeekArrange>();
+            for (SysUser user : userList) {
+                for (SysCodeDetail period : periodList) {
+                    for (String date : dates) {
+                        String value = request.getParameter("content_" + user.getId() + "_" + period.getId() + "_" + date);
+                        if (!StringHelper.isEmpty(value)) {
+                            OaWeekArrange oaWeekArrange = new OaWeekArrange();
+                            String hql = "from OaWeekArrange where day=? and user.id=? and timePeriod.id=?";
+                            List<OaWeekArrange> arrangeList = oaWeekArrangeService.findByQuery(hql, Date.valueOf(date), user.getId(), period.getId());
+                            if (null != arrangeList && arrangeList.size() > 0) {
+                                oaWeekArrange = arrangeList.iterator().next();
+                            }
+                            oaWeekArrange.setUser(user);
+                            oaWeekArrange.setTimePeriod(period);
+                            oaWeekArrange.setDay(Date.valueOf(date));
+                            oaWeekArrange.setContent(value);
+                            list.add(oaWeekArrange);
+                        }
+                    }
+                }
+            }
+            oaWeekArrangeService.batchSave(list, list.size());
 
         } catch (Exception e) {
             log.error("error", e);
@@ -209,20 +180,6 @@ public class OaWeekArrangeController extends BaseCRUDActionController<OaWeekArra
             return;
         }
         sendSuccessJSON(response, "保存成功");
-    }
-    
-    /**
-     * 删除操作
-     *
-     * @param response .
-     * @param id  .
-     * @throws Exception  .
-     */
-    @RequestMapping
-    public void delete(HttpServletResponse response, Long id) throws Exception {
-        oaWeekArrangeService.delete(id);
-
-        sendSuccessJSON(response, "删除成功");
     }
 
 }
