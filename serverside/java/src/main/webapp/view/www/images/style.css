@@ -1,0 +1,65 @@
+﻿*{font-family:"Verdana","宋体",serif;font-size:12px;}
+body {
+    /*font-family: simsun;*/
+    background: #fff;
+    font-size: 12px;
+    color: #515151;
+    margin: 0;
+    padding: 0;
+    background-image: url(bg.jpg);
+}
+
+div, form, img, ul, ol, li, dl, dt, dd {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    list-style: none none;
+}
+
+a:link {
+    color: #333;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #333;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #f60;
+    text-decoration: none;
+}
+
+a:active {
+    color: #333;
+}
+
+.clr {
+    clear: both;
+}
+
+.ContentHome {
+    width: 969px;
+    margin: 0 auto;
+    padding: 7px 0;
+    clear: both;
+    background-color: #fff;
+}
+
+.ContentHome .fousInfo .info_title {
+    width: 100%;
+    height: 100px;
+    font-size: 28px;
+    font-weight: bold;
+    text-align:center;
+}
+
+
+.info_text {
+    font-size: 14px;
+    line-height: 30px;
+    text-align: left;
+    word-spacing: 0.1em;
+    margin: 5px;
+}

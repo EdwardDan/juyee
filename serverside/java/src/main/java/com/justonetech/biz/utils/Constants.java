@@ -111,11 +111,11 @@ public class Constants {
 
     public static final String OA_PUBLIC_INFO_TYPE = "OaPublicInfoType"; //公共信息发布--类型
     public static final String OA_PUBLIC_INFO_TYPE_BULLETIN = "bulletin"; //公共信息发布--类型--公示公告
-    public static final String OA_PUBLIC_INFO_TYPE_POLICY = "policy"; //公共信息发布--类型--法律法规
     public static final String OA_PUBLIC_INFO_TYPE_MEETING = "meeting"; //公共信息发布--类型--会议纪要
     public static final String OA_PUBLIC_INFO_TYPE_NOTICE = "notice"; //公共信息发布--类型--情况通报
     public static final String OA_PUBLIC_INFO_TYPE_RULE = "rule"; //公共信息发布--类型--规章制度
     public static final String OA_PUBLIC_INFO_TYPE_WORK = "work"; //公共信息发布--类型--工作动态
+    public static final String OA_PUBLIC_INFO_TYPE_POLICY = "policy"; //公共信息发布--类型--法律法规
     public static final String OA_PUBLIC_INFO_TYPE_TXL = "txl"; //公共信息发布--类型--通讯录
 
     public static final String OA_MEETING_TYPE_INNER = "OaMeetingTypeInner"; //内部会议类型
