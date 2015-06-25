@@ -39,7 +39,7 @@ import java.util.Map;
 
 
 /**
- * note:外部会议
+ * note:外出会议
  * author: system
  * create date:
  * modify date:
@@ -208,6 +208,7 @@ public class OaMeetingOuterController extends BaseCRUDActionController<OaMeeting
     @SuppressWarnings("unchecked")
     @RequestMapping
     public void save(HttpServletResponse response, @ModelAttribute("bean") OaMeetingOuter entity, HttpServletRequest request) throws Exception {
+        String msg = "保存成功";
         try {
             OaMeetingOuter target;
             if (entity.getId() != null) {
@@ -255,13 +256,21 @@ public class OaMeetingOuterController extends BaseCRUDActionController<OaMeeting
             }
 
             oaMeetingOuterService.save(target);
-
+            if (OaMeetingStatus.STATUS_BRANCH_BACK.getCode() == target.getStatus() || OaMeetingStatus.STATUS_MAIN_BACK.getCode() == target.getStatus()) {
+                msg = "已退回修改!";
+            } else if (OaMeetingStatus.STATUS_BRANCH_PASS.getCode() == target.getStatus() || OaMeetingStatus.STATUS_MAIN_PASS.getCode() == target.getStatus()) {
+                msg = "审核已通过!";
+            } else if(OaMeetingStatus.STATUS_SUBMIT.getCode() == target.getStatus() ){
+                msg = "已提交!";
+            }
         } catch (Exception e) {
             log.error("error", e);
             super.processException(response, e);
             return;
         }
-        sendSuccessJSON(response, "保存成功");
+
+
+        sendSuccessJSON(response, msg);
     }
 
     /**

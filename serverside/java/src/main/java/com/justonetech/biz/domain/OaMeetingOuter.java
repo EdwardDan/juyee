@@ -27,12 +27,18 @@ public class OaMeetingOuter extends BaseOaMeetingOuter {
 /*[CONSTRUCTOR MARKER END]*/
 
     public String getStatusName() {
-        return null!=getStatus()?OaMeetingStatus.getColorNameByCode(getStatus()):"";
+        return null != getStatus() ? OaMeetingStatus.getColorNameByCode(getStatus()) : "";
     }
 
     public String getMeetTime() {
         SimpleDateFormat sp = new SimpleDateFormat("yyyy-MM-dd hh:mm");
-        return sp.format(getBeginTime()) + "~" + sp.format(getEndTime());
+        SimpleDateFormat sp2 = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sp3 = new SimpleDateFormat("hh:mm");
+        String end = sp.format(getEndTime());
+        if (sp2.format(getBeginTime()).equals(sp2.format(getEndTime()))) {
+            end =sp3.format(getEndTime());
+        }
+        return sp.format(getBeginTime()) + " ~ " + end;
     }
 
 }
