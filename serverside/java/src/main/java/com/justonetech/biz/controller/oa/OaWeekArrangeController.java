@@ -87,6 +87,32 @@ public class OaWeekArrangeController extends BaseCRUDActionController<OaWeekArra
      */
     @RequestMapping
     public String data(Model model, HttpServletRequest request) {
+        doData(model, request);
+
+        return "view/oa/oaWeekArrange/data";
+    }
+
+    /**
+     * 编辑页面
+     *
+     * @param model   。
+     * @param request 。
+     * @return 。
+     */
+    @RequestMapping
+    public String modify(Model model, HttpServletRequest request) {
+        doData(model, request);
+
+        return "view/oa/oaWeekArrange/input";
+    }
+
+    /**
+     * 处理数据
+     *
+     * @param model   。
+     * @param request 。
+     */
+    public void doData(Model model, HttpServletRequest request) {
         String startDate = request.getParameter("startDate");
         String endDate = request.getParameter("endDate");
 
@@ -125,8 +151,6 @@ public class OaWeekArrangeController extends BaseCRUDActionController<OaWeekArra
             }
         }
         model.addAttribute("mapHM", mapHM);
-
-        return "view/oa/oaWeekArrange/data";
     }
 
     /**
