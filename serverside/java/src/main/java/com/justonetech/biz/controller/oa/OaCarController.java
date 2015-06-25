@@ -162,6 +162,9 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
         //选择车辆
         List<SysCodeDetail> carList = sysCodeManager.getCodeListByCode(Constants.OA_CAR_SELECT);
         model.addAttribute("carList", carList);
+
+        //车辆使用日期默认当天
+        oaCar.setBeginTime(new Timestamp(System.currentTimeMillis()));
         //如需增加其他默认值请在此添加
         model.addAttribute("bean", oaCar);
 
@@ -194,7 +197,19 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
     @RequestMapping
     public String view(Model model, Long id) {
         OaCar oaCar = oaCarService.get(id);
-        modelInfo(model, oaCar);
+        //处理其他业务逻辑
+        List<SysCodeDetail> carList = sysCodeManager.getCodeListByCode(Constants.OA_CAR_SELECT);
+
+        model.addAttribute("carList", carList);
+        model.addAttribute("bean", oaCar);
+        String beginTime = JspHelper.getString(oaCar.getBeginTime());
+        String endTime = JspHelper.getString(oaCar.getEndTime());
+        //取得可选择时间
+        model.addAttribute("startHour", beginTime.substring(11, 13));
+        model.addAttribute("startMinute", beginTime.substring(14, 16));
+        model.addAttribute("endHour", endTime.substring(11, 13));
+        model.addAttribute("endMinute", endTime.substring(14, 16));
+
         return "view/oa/oaCar/view";
     }
 
@@ -248,11 +263,9 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
 
             //司机
             String driverPersonId = request.getParameter("driverPersonId");
-            SysPerson sysPerson;
+            SysPerson sysPerson = null;
             if (driverPersonId != null && driverPersonId.length() > 0) {
                 sysPerson = sysPersonService.get(JspHelper.getLong(driverPersonId));
-            } else {
-                sysPerson = new SysPerson();
             }
             target.setDriverPerson(sysPerson);
             target.setCar(carDetail);
@@ -364,7 +377,7 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
             }
             //司机发送信息
             if (dealPerson != null && dealPerson.getSysUsers() != null && dealPerson.getSysUsers().size() > 0) {
-               dealPerson.getSysUsers();
+                dealPerson.getSysUsers();
                 for (SysUser sysUser : dealPerson.getSysUsers()) {
                     managers.add(sysUser.getId());
                 }
