@@ -108,7 +108,7 @@
                 <tr class="tr_dark">
                     <td class="form_border">会议名称：</td>
                     <td class="form_content" colspan="3">
-                        <form:input path="title" input_textarea_longcssClass="input_text_long" cssStyle="width: 400px"/>
+                        <form:input path="title" cssClass="input_text_long" cssStyle="width: 400px"/>
                     </td>
                 </tr>
                 <tr class="tr_light">
