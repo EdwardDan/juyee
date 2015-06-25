@@ -362,9 +362,11 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
             if (null != applyUser) {
                 managers.add(applyUser.getId());
             }
+            //司机发送信息
             if (dealPerson != null && dealPerson.getSysUsers() != null && dealPerson.getSysUsers().size() > 0) {
-                if (null != dealPerson.getSysUsers().iterator().next().getId()) {
-                    managers.add(dealPerson.getSysUsers().iterator().next().getId());
+               dealPerson.getSysUsers();
+                for (SysUser sysUser : dealPerson.getSysUsers()) {
+                    managers.add(sysUser.getId());
                 }
             }
 
