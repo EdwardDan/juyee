@@ -127,5 +127,6 @@ public class Constants {
     public static final String OA_PETITION_TYPE = "OaPetitionType"; //信访种类
     public static final String OA_PETITION_SOURCE = "OaPetitionSource"; //信访来源
     public static final String OA_PETITION_STATUS = "OaPetitionStatus"; //信访受理状态
+    public static final String OA_WEEK_ARRANGE_ZXLD = "zxld"; //领导一周安排中心领导
 
 }

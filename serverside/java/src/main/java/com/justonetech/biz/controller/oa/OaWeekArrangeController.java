@@ -2,14 +2,16 @@ package com.justonetech.biz.controller.oa;
 
 import com.justonetech.biz.daoservice.OaWeekArrangeService;
 import com.justonetech.biz.domain.OaWeekArrange;
+import com.justonetech.biz.manager.SysDeptManager;
 import com.justonetech.biz.utils.Constants;
 import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.utils.StringHelper;
+import com.justonetech.system.daoservice.SysDeptService;
 import com.justonetech.system.domain.SysCodeDetail;
+import com.justonetech.system.domain.SysDept;
 import com.justonetech.system.domain.SysUser;
 import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
-import com.justonetech.system.utils.PrivilegeCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +38,12 @@ public class OaWeekArrangeController extends BaseCRUDActionController<OaWeekArra
 
     @Autowired
     private SysUserManager sysUserManager;
+
+    @Autowired
+    private SysDeptService sysDeptService;
+
+    @Autowired
+    private SysDeptManager sysDeptManager;
 
     @Autowired
     private SysCodeManager sysCodeManager;
@@ -136,9 +144,12 @@ public class OaWeekArrangeController extends BaseCRUDActionController<OaWeekArra
         }
         model.addAttribute("weekDates", weekDates);
         model.addAttribute("dates", dates);
-
-        List<SysUser> userList = sysUserManager.getUsersByPrivilegeCode(PrivilegeCode.OA_WEEKARRANGE_EDIT);
-        model.addAttribute("userList", userList);
+        List<SysDept> deptList = sysDeptService.findByQuery("from SysDept where code=?", Constants.OA_WEEK_ARRANGE_ZXLD);
+        if (null != deptList && deptList.size() > 0) {
+            SysDept dept = deptList.iterator().next();
+            List<SysUser> userList = sysUserManager.getDeptUsers(dept);
+            model.addAttribute("userList", userList);
+        }
         List<SysCodeDetail> periodList = sysCodeManager.getCodeListByCode(Constants.OA_WEEK_ARRANGE_PERIOD);
         model.addAttribute("periodList", periodList);
 
@@ -173,25 +184,29 @@ public class OaWeekArrangeController extends BaseCRUDActionController<OaWeekArra
                 c.add(c.DATE, i - 1);
                 dates[i - 1] = sdf.format(c.getTime());
             }
-            List<SysUser> userList = sysUserManager.getUsersByPrivilegeCode(PrivilegeCode.OA_WEEKARRANGE_EDIT);
-            List<SysCodeDetail> periodList = sysCodeManager.getCodeListByCode(Constants.OA_WEEK_ARRANGE_PERIOD);
             List<OaWeekArrange> list = new ArrayList<OaWeekArrange>();
-            for (SysUser user : userList) {
-                for (SysCodeDetail period : periodList) {
-                    for (String date : dates) {
-                        String value = request.getParameter("content_" + user.getId() + "_" + period.getId() + "_" + date);
-                        if (!StringHelper.isEmpty(value)) {
-                            OaWeekArrange oaWeekArrange = new OaWeekArrange();
-                            String hql = "from OaWeekArrange where day=? and user.id=? and timePeriod.id=?";
-                            List<OaWeekArrange> arrangeList = oaWeekArrangeService.findByQuery(hql, Date.valueOf(date), user.getId(), period.getId());
-                            if (null != arrangeList && arrangeList.size() > 0) {
-                                oaWeekArrange = arrangeList.iterator().next();
+            List<SysDept> deptList = sysDeptService.findByQuery("from SysDept where code=?", Constants.OA_WEEK_ARRANGE_ZXLD);
+            if (null != deptList && deptList.size() > 0) {
+                SysDept dept = deptList.iterator().next();
+                List<SysUser> userList = sysUserManager.getDeptUsers(dept);
+                List<SysCodeDetail> periodList = sysCodeManager.getCodeListByCode(Constants.OA_WEEK_ARRANGE_PERIOD);
+                for (SysUser user : userList) {
+                    for (SysCodeDetail period : periodList) {
+                        for (String date : dates) {
+                            String value = request.getParameter("content_" + user.getId() + "_" + period.getId() + "_" + date);
+                            if (!StringHelper.isEmpty(value)) {
+                                OaWeekArrange oaWeekArrange = new OaWeekArrange();
+                                String hql = "from OaWeekArrange where day=? and user.id=? and timePeriod.id=?";
+                                List<OaWeekArrange> arrangeList = oaWeekArrangeService.findByQuery(hql, Date.valueOf(date), user.getId(), period.getId());
+                                if (null != arrangeList && arrangeList.size() > 0) {
+                                    oaWeekArrange = arrangeList.iterator().next();
+                                }
+                                oaWeekArrange.setUser(user);
+                                oaWeekArrange.setTimePeriod(period);
+                                oaWeekArrange.setDay(Date.valueOf(date));
+                                oaWeekArrange.setContent(value);
+                                list.add(oaWeekArrange);
                             }
-                            oaWeekArrange.setUser(user);
-                            oaWeekArrange.setTimePeriod(period);
-                            oaWeekArrange.setDay(Date.valueOf(date));
-                            oaWeekArrange.setContent(value);
-                            list.add(oaWeekArrange);
                         }
                     }
                 }
