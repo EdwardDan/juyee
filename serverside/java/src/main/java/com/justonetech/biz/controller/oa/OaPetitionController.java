@@ -10,6 +10,7 @@ import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.orm.hibernate.Page;
 import com.justonetech.core.utils.JspHelper;
 import com.justonetech.core.utils.ReflectionUtils;
+import com.justonetech.core.utils.StringHelper;
 import com.justonetech.system.daoservice.SysUserService;
 import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
@@ -168,10 +169,17 @@ public class OaPetitionController extends BaseCRUDActionController<OaPetition> {
             target.setStatusDesc(target.getStatus().getName());
             target.setSourceDesc(target.getSource().getName());
             target.setTypeDesc(target.getType().getName());
-            target.setJbrUser(sysUserService.get(JspHelper.getLong(request.getParameter("jbrId"))));
-            target.setDoc(documentManager.getDocDocument(JspHelper.getLong(request.getParameter("docIdDocument"))));
-            if (target.getDoc() != null) {
-                documentManager.updateDocumentByBizData(target.getDoc(), null, JspHelper.getString(target.getDoc().getName()));
+            if (StringHelper.isNotEmpty(request.getParameter("jbrId"))) {
+                target.setJbrUser(sysUserService.get(JspHelper.getLong(request.getParameter("jbrId"))));
+            }
+            if (StringHelper.isNotEmpty(request.getParameter("docIdDocument"))) {
+                logger.debug("request.getParameter(\"docIdDocument\") -----------> " + request.getParameter("docIdDocument"));
+                target.setDoc(documentManager.getDocDocument(JspHelper.getLong(request.getParameter("docIdDocument"))));
+                if (target.getDoc() != null) {
+                    logger.debug("__________");
+                    documentManager.updateDocumentByBizData(target.getDoc(), null, JspHelper.getString(target.getDoc().getName()));
+                    logger.debug("@@@@@@@@@@@@@");
+                }
             }
             oaPetitionService.save(target);
         } catch (Exception e) {

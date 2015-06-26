@@ -8,9 +8,9 @@
             //{name:"statusDesc", rule:"validate[required,maxSize[50]]"},
             //{name:"sourceDesc", rule:"validate[required,maxSize[50]]"},
             //{name:"typeDesc", rule:"validate[required,maxSize[50]]"},
-            //{name:"person", rule:"validate[required,maxSize[500]]"},
-            //{name:"tel", rule:"validate[required,maxSize[50]]"},
-            //{name:"receiveDate", rule:"validate[required,custom[date],maxSize[7]"},
+            {name:"person", rule:"validate[required,maxSize[50]]"},
+            {name:"tel", rule:"validate[required,maxSize[50]]"},
+            {name:"receiveDate", rule:"validate[required,custom[date],maxSize[20]"}
             //{name:"address", rule:"validate[required,maxSize[200]]"},
             //{name:"jbrName", rule:"validate[required,maxSize[50]]"},
             //{name:"endDate", rule:"validate[required,custom[date],maxSize[7]"},
