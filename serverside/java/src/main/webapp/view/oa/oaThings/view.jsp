@@ -11,25 +11,20 @@
         </tr>
         <tr class="tr_dark">
             <td>
-                <input type="text" name="name" class="input_text" style="width:98%" value="${bean.name}"
-                       title="${bean.name}" readonly>
+                ${bean.name}
             </td>
             <td>
-                <input type="text" name="model" class="input_text" style="width: 95%" value="${bean.model}"
-                       title="${bean.model}" readonly>
+                ${bean.model}
             </td>
 
             <td>
-                <input type="text" name="unit" class="input_text" style="width: 95%" value="${bean.unit}"
-                       title="${bean.unit}" readonly>
+                ${bean.price}
             </td>
             <td>
-                <input type="text" name="price" class="input_text" style="width: 95%" value="${bean.price}"
-                       title="${bean.price}" readonly>
+                ${bean.unit}
             </td>
             <td>
-                <input type="text" name="amount" class="input_text" style="width: 95%" value="${bean.amount}"
-                       title="${bean.amount}" readonly>
+                ${bean.amount}
             </td>
         </tr>
     </table>

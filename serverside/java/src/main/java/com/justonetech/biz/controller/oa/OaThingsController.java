@@ -12,6 +12,7 @@ import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.orm.hibernate.Page;
 import com.justonetech.core.utils.JspHelper;
 import com.justonetech.core.utils.ReflectionUtils;
+import com.justonetech.system.domain.SysCode;
 import com.justonetech.system.manager.SimpleQueryManager;
 import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
@@ -123,6 +124,7 @@ public class OaThingsController extends BaseCRUDActionController<OaThings>
         OaThings oaThings = new OaThings();
 
         //如需增加其他默认值请在此添加
+        model.addAttribute("oaThingsUnit", Constants.OA_THINGS_UNIT);
         model.addAttribute("bean", oaThings);
 
         return "view/oa/oaThings/input";
@@ -141,6 +143,7 @@ public class OaThingsController extends BaseCRUDActionController<OaThings>
         OaThings oaThings = oaThingsService.get(id);
 
         //处理其他业务逻辑
+        model.addAttribute("oaThingsUnit", Constants.OA_THINGS_UNIT);
         model.addAttribute("bean", oaThings);
 
         return "view/oa/oaThings/input";
@@ -200,13 +203,18 @@ public class OaThingsController extends BaseCRUDActionController<OaThings>
                 for (int i = 0; i < names.length; i++)
                 {
                     OaThings oaThings = new OaThings();
+                    oaThings.setIsValid(true);
                     oaThings.setName(names[i]);
                     oaThings.setModel(models[i]);
                     oaThings.setUnit(units[i]);
                     oaThings.setPrice(JspHelper.getDouble(prices[i]));
                     oaThings.setAmount(JspHelper.getDouble(amounts[i]));
                     oaThingsService.save(oaThings);
+                    oaThings.setOrderNo(JspHelper.getInteger(oaThings.getId()));
+                    oaThingsService.save(oaThings);
+
                 }
+
             }
 
 

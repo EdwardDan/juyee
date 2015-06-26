@@ -8,21 +8,21 @@
                 colNames: ['ID',
                     '办公用品名称',
                     '型号',
-                    '单价',
                     '单位',
+                    '单价',
                     '库存',
                     '操作'
                 ],
                 colModel: [
                     {name: 'id', width: 10, align: "center", searchtype: "integer", hidden: true},
                     {name: "name", width: "72", align: "left", searchtype: "string", sortable: true},
-                    {name: "model", width: "72", align: "left", searchtype: "string", sortable: true},
-                    {name: "price", width: "72", align: "right", searchtype: "string", sortable: true},
-                    {name: "unit", width: "72", align: "right", searchtype: "string", sortable: true},
-                    {name: "amount", width: "72", align: "right", searchtype: "string", sortable: true},
+                    {name: "model", width: "50", align: "center", searchtype: "string", sortable: true},
+                    {name: "unit", width: "50", align: "center", searchtype: "string", sortable: true},
+                    {name: "price", width: "50", align: "right", searchtype: "string", sortable: true},
+                    {name: "amount", width: "50", align: "right", searchtype: "string", sortable: true},
                 ],
                 actModel: [
-                    {name: 'operation', width: 40, align: 'center'}
+                    {name: 'operation', width: 50, align: 'center'}
                 ],
                 pager: '#pager2',
                 caption: "办公用品信息列表",
@@ -43,12 +43,8 @@
             userOpts: {
                 defaultQuery: {
                     "groupOp": "AND", "rules": [
-                        {"field": "序号", "op": "cn", "data": ""},
                         {"field": "办公用品名称", "op": "cn", "data": ""},
                         {"field": "型号", "op": "cn", "data": ""},
-                        {"field": "单价", "op": "cn", "data": ""},
-                        {"field": "单位", "op": "cn", "data": ""},
-                        {"field": "库存", "op": "cn", "data": ""},
                     ]
                 },
                 queryButton: $("#queryButton"),
@@ -73,10 +69,6 @@
     }
     </c:if>
 
-    //custom formatter
-    //function customeFormat(cellvalue, options, rowObject) {
-    //    return cellvalue == "true"?"是":"否";
-    //}
 </script>
 
 <div class="title_Search">
