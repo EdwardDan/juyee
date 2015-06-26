@@ -2,7 +2,6 @@ package com.justonetech.biz.controller.oa;
 
 import com.justonetech.biz.daoservice.OaWeekArrangeService;
 import com.justonetech.biz.domain.OaWeekArrange;
-import com.justonetech.biz.manager.SysDeptManager;
 import com.justonetech.biz.utils.Constants;
 import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.utils.StringHelper;
@@ -41,9 +40,6 @@ public class OaWeekArrangeController extends BaseCRUDActionController<OaWeekArra
 
     @Autowired
     private SysDeptService sysDeptService;
-
-    @Autowired
-    private SysDeptManager sysDeptManager;
 
     @Autowired
     private SysCodeManager sysCodeManager;
@@ -138,7 +134,7 @@ public class OaWeekArrangeController extends BaseCRUDActionController<OaWeekArra
         String[] dates = new String[7];
         for (int i = 1; i < 8; i++) {
             c.setTime(start);
-            c.add(c.DATE, i - 1);
+            c.add(Calendar.DATE, i - 1);
             weekDates[i - 1] = weeks[i - 1] + "<br>(" + sdf.format(c.getTime()) + ")";
             dates[i - 1] = sdf.format(c.getTime());
         }
@@ -181,7 +177,7 @@ public class OaWeekArrangeController extends BaseCRUDActionController<OaWeekArra
             String[] dates = new String[7];
             for (int i = 1; i < 8; i++) {
                 c.setTime(start);
-                c.add(c.DATE, i - 1);
+                c.add(Calendar.DATE, i - 1);
                 dates[i - 1] = sdf.format(c.getTime());
             }
             List<OaWeekArrange> list = new ArrayList<OaWeekArrange>();
