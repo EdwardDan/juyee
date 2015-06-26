@@ -14,6 +14,7 @@ import com.justonetech.biz.utils.enums.OaThingsApplyStatus;
 import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.orm.hibernate.Page;
 import com.justonetech.core.utils.ReflectionUtils;
+import com.justonetech.core.utils.StringHelper;
 import com.justonetech.system.domain.SysDept;
 import com.justonetech.system.domain.SysUser;
 import com.justonetech.system.manager.SysUserManager;
@@ -89,9 +90,21 @@ public class OaThingsApplyController extends BaseCRUDActionController<OaThingsAp
     public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session) {
         try {
             Page pageModel = new Page(page, rows, true);
-            String hql = "from OaThingsApply order by id desc";
-            //增加自定义查询条件
+            String hql = "from OaThingsApply t where 1=1";
 
+            //增加自定义查询条件
+            SysUser sysUser = sysUserManager.getSysUser();
+            //获取登录人的部门
+            SysDept dept = sysUser.getPerson().getDept();
+            Boolean auditKZ = sysUserManager.hasPrivilege(PrivilegeCode.OA_THINGS_APPLY_AUDIT_KZ);//科长审核
+            Boolean auditZR = sysUserManager.hasPrivilege(PrivilegeCode.OA_THINGS_APPLY_AUDIT_ZR); //主任审核
+            if (!auditZR && auditKZ) {
+                hql += " and t.applyDept.id=" + dept.getId();
+            }
+            if (!auditKZ && !auditZR) {
+                hql += " and t.applyUser.id=" + sysUser.getId();
+            }
+            hql += " order by id desc";
             //执行查询
             QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);
             String query = queryTranslate.toString();
@@ -182,7 +195,9 @@ public class OaThingsApplyController extends BaseCRUDActionController<OaThingsAp
         double count = 0.0;
         if (null != oaThingsApply.getOaThingsApplyItems()) {
             for (OaThingsApplyItem oaThingsApplyItem : oaThingsApply.getOaThingsApplyItems()) {
-                count += oaThingsApplyItem.getAmount() * oaThingsApplyItem.getPrice();
+                if (oaThingsApplyItem.getAmount() != null && oaThingsApplyItem.getPrice() != null) {
+                    count += oaThingsApplyItem.getAmount() * oaThingsApplyItem.getPrice();
+                }
             }
         }
         model.addAttribute("count", count);
@@ -234,7 +249,7 @@ public class OaThingsApplyController extends BaseCRUDActionController<OaThingsAp
                 oaThingsApplyItem.setOaThingsApply(target);
                 oaThingsApplyItem.setPrice(oaThings.getPrice());
                 oaThingsApplyItem.setUnit(oaThings.getUnit());
-                if (null != amount[i]) {
+                if (null != amount[i] && !StringHelper.isEmpty(amount[i])) {
                     oaThingsApplyItem.setAmount(Double.valueOf(amount[i]));
                 }
                 oaThingsApplyItemList.add(oaThingsApplyItem);
@@ -399,7 +414,7 @@ public class OaThingsApplyController extends BaseCRUDActionController<OaThingsAp
         model.addAttribute("STATUS_BRANCH_BACK", OaThingsApplyStatus.STATUS_BRANCH_BACK.getCode()); //科长审核退回
         model.addAttribute("STATUS_MAIN_PASS", OaThingsApplyStatus.STATUS_MAIN_PASS.getCode()); //办公室主任审核通过
         model.addAttribute("STATUS_MAIN_BACK", OaThingsApplyStatus.STATUS_MAIN_BACK.getCode()); //办公室主任审核退回
-
+        model.addAttribute("currentUser", sysUserManager.getSysUser().getDisplayName()); //当前登录用户
     }
 
     /**
