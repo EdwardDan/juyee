@@ -9,7 +9,8 @@
             {name: "applyUser", rule: "validate[required]"},
             {name: "useDate", rule: "validate[required]"},
             {name: "personNum", rule: "validate[required,custom[integer]]"},
-            {name: "address", rule: "validate[required]"}
+            {name: "address", rule: "validate[required]"},
+            {name: "driverMobile", rule: "validate[custom[phone]]"}
         ];
         validateInit(validateCondition, formId);
     });
@@ -19,6 +20,12 @@
         if (!validateForm(formId)) {
             return;
         }
+
+        if (($("#beginHour").val() > $("#endHour").val()) || (($("#beginHour").val() == $("#endHour").val()) && ($("#beginMin").val() >= $("#endMin").val()))) {
+            $.messager.confirm("系统提示", "使用截止时间必须大于开始时间！", null)
+            return;
+        }
+
         //修改状态
         if (t == '1') {
             $("#status").val(1);
@@ -68,73 +75,86 @@
     <form:hidden path="status"/>
 
     <div class="form_div">
-        <table cellpadding="0" cellspacing="0" class="form_table">
-            <tr class="tr_light">
-                <td class="form_label_right" width="15%">申请部门：</td>
-                <td class="form_content">
-                    <input type="text" name="applyDeptName" id="applyDeptName" class="input_datetime"
-                           value="${bean.applyDept.name}"
-                           readonly="true"/>
-                    <input type="hidden" name="applyDeptId" id="applyDeptId" value="${bean.applyDept.id}"/>
-                    <input type="button" value=" " class="button_select"
-                           onclick="selectSysDept('applyDeptId','applyDeptName')" title="点击选择申请部门">
-                </td>
-                <td class="form_label_right" width="15%">申请人：</td>
-                <td class="form_content" width="35%">
-                    <input type="text" name="applyUserName" id="applyUserName" class="input_text"
-                           value="${bean.applyUser.displayName}" readonly="true"/>
-                    <input type="hidden" name="applyUserId" id="applyUserId" value="${bean.applyUser.id}"/>
-                    <input type="button" value=" " class="button_select"
-                           onclick="selectSysUser('applyUserId','applyUserName');" title="点击申请人">
-                </td>
-            </tr>
-            <tr class="tr_dark">
-                <td class="form_label_right" width="15%">使用车辆日期：</td>
-                <td class="form_content" width="35%">
-                    <input type="text" name="useDate" id="useDate" class="input_date"
-                           value="<fmt:formatDate value="${bean.beginTime}" pattern="yyyy-MM-dd"/>"
-                           readonly="true"/>
-                    <input type="button" class="button_calendar" value=" " onClick="calendar('useDate')">
-                </td>
-                <td class="form_label_right" width="15%">用车起止时间：</td>
-                <td class="form_content" width="35%">
-                    <select name="beginHour" id="beginHour" style="width: 40px">${startHour}</select>时
-                    <select name="beginMin" id="beginMin" style="width: 40px">${startMinute}<</select>分~
-                    <select name="endHour" id="endHour" style="width: 40px">${endHour}<</select>时
-                    <select name="endMin" id="endMin" style="width: 40px">${endMinute}<</select>分
-
-                    <input type="hidden" name="beginTime" id="beginTime" class="input_date" value=""/>
-                    <input type="hidden" name="endTime" id="endTime" class="input_date" value=""/>
-
-                </td>
-            </tr>
-            <tr class="tr_light">
-                <td class="form_label_right" width="15%">用车人数：</td>
-                <td class="form_content" colspan="3">
-                    <form:input path="personNum" cssClass="input_text"/>
-                </td>
-            </tr>
-            <tr class="tr_dark">
-                <td class="form_label_right" width="15%">用车事由：</td>
-                <td class="form_content" colspan="3">
-                    <form:textarea path="useCause" cssClass="input_textarea_long"/>
-                </td>
-            </tr>
-            <tr class="tr_light">
-                <td class="form_label_right" width="15%">目的地：</td>
-                <td class="form_content" colspan="3">
-                    <form:input path="address" cssClass="input_text_long"/>
-                </td>
-            </tr>
-            <c:if test="${bean.status=='2'|| bean.status=='3'||bean.status=='5'}">
-                <tr class="tr_dark">
-                    <td class="form_label_right" width="15%">科长审核意见：</td>
-                    <td class="form_content" colspan="3">
-                        <form:textarea path="kzAuditOpinion" cssClass="input_textarea_long"/>
+        <fieldset class="form_fieldset">
+            <legend class="form_legend">
+                车辆申请信息
+            </legend>
+            <table cellpadding="0" cellspacing="0" class="form_table">
+                <tr class="tr_light">
+                    <td class="form_label_right" width="15%">申请部门：</td>
+                    <td class="form_content">
+                        <input type="text" name="applyDeptName" id="applyDeptName" class="input_datetime"
+                               value="${bean.applyDept.name}"
+                               readonly="true"/>
+                        <input type="hidden" name="applyDeptId" id="applyDeptId" value="${bean.applyDept.id}"/>
+                        <input type="button" value=" " class="button_select"
+                               onclick="selectSysDept('applyDeptId','applyDeptName')" title="点击选择申请部门">
+                    </td>
+                    <td class="form_label_right" width="15%">申请人：</td>
+                    <td class="form_content" width="35%">
+                        <input type="text" name="applyUserName" id="applyUserName" class="input_text"
+                               value="${bean.applyUser.displayName}" readonly="true"/>
+                        <input type="hidden" name="applyUserId" id="applyUserId" value="${bean.applyUser.id}"/>
+                        <input type="button" value=" " class="button_select"
+                               onclick="selectSysUser('applyUserId','applyUserName');" title="点击申请人">
                     </td>
                 </tr>
-            </c:if>
-        </table>
+                <tr class="tr_dark">
+                    <td class="form_label_right" width="15%">使用车辆日期：</td>
+                    <td class="form_content" width="35%">
+                        <input type="text" name="useDate" id="useDate" class="input_date"
+                               value="<fmt:formatDate value="${bean.beginTime}" pattern="yyyy-MM-dd"/>"
+                               readonly="true"/>
+                        <input type="button" class="button_calendar" value=" " onClick="calendar('useDate')">
+                    </td>
+                    <td class="form_label_right" width="15%">用车起止时间：</td>
+                    <td class="form_content" width="35%">
+                        <select name="beginHour" id="beginHour" style="width: 40px">${startHour}</select>时
+                        <select name="beginMin" id="beginMin" style="width: 40px">${startMinute}<</select>分~
+                        <select name="endHour" id="endHour" style="width: 40px">${endHour}<</select>时
+                        <select name="endMin" id="endMin" style="width: 40px">${endMinute}<</select>分
+
+                        <input type="hidden" name="beginTime" id="beginTime" class="input_date" value=""/>
+                        <input type="hidden" name="endTime" id="endTime" class="input_date" value=""/>
+
+                    </td>
+                </tr>
+                <tr class="tr_light">
+                    <td class="form_label_right" width="15%">用车人数：</td>
+                    <td class="form_content" colspan="3">
+                        <form:input path="personNum" cssClass="input_text"/>
+                    </td>
+                </tr>
+                <tr class="tr_dark">
+                    <td class="form_label_right" width="15%">用车事由：</td>
+                    <td class="form_content" colspan="3">
+                        <form:textarea path="useCause" cssClass="input_textarea_long"/>
+                    </td>
+                </tr>
+                <tr class="tr_light">
+                    <td class="form_label_right" width="15%">目的地：</td>
+                    <td class="form_content" colspan="3">
+                        <form:input path="address" cssClass="input_text_long"/>
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+        <c:if test="${bean.status=='2'|| bean.status=='3'||bean.status=='5'}">
+            <fieldset class="form_fieldset">
+                <legend class="form_legend">
+                    科长审核
+                </legend>
+                <table cellpadding="0" cellspacing="0" class="form_table">
+                    <tr class="tr_dark">
+                        <td class="form_label_right" width="15%">科长审核意见：</td>
+                        <td class="form_content" colspan="3">
+                            <form:textarea path="kzAuditOpinion" cssClass="input_textarea_long"/>
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+        </c:if>
+
         <c:if test="${bean.status=='3'||bean.status=='5'}">
             <fieldset class="form_fieldset">
                 <legend class="form_legend">
@@ -165,7 +185,8 @@
                                    <c:if test="${not empty bean.driverPerson}">checked </c:if> onchange="showDriver()">是否拟派司机
                         </td>
                     </tr>
-                    <tr id="agreeDriver" class="tr_dark" <c:if test="${empty bean.driverPerson}">style="display: none"</c:if>>
+                    <tr id="agreeDriver" class="tr_dark"
+                        <c:if test="${empty bean.driverPerson}">style="display: none"</c:if>>
                         <td class="form_label_right" width="15%">司机：</td>
                         <td class="form_content" width="35%">
                             <input type="text" name="driverPersonName" id="driverPersonName" class="input_text"

@@ -18,20 +18,20 @@
                 ],
                 colModel: [
                     {name: 'id', width: 10, align: "center", searchtype: "integer", hidden: true},
-                    {name: "title", width: "40", align: "center", searchtype: "string", sortable: true},
-                    {name: "meetTime", width: "60", align: "center", searchtype: "string", sortable: true},
+                    {name: "title", width: "40", align: "left", searchtype: "string", sortable: true},
+                    {name: "meetTime", width: "60", align: "center", searchtype: "string", sortable: false},
                     {name: "beginTime", width: "40", align: "center", searchtype: "date", sortable: true, hidden: true},
                     {name: "endTime", width: "40", align: "center", searchtype: "date", sortable: true, hidden: true},
-                    {name: "address", width: "60", align: "center", searchtype: "string", sortable: true},
-                    {name: "docButton", width: "30", align: "center"},
-                    {name: "statusName", width: "40", align: "center", searchtype: "String", sortable: true},
+                    {name: "address", width: "60", align: "left", searchtype: "string", sortable: true},
+                    {name: "docButton", width: "30", align: "center", sortable: false},
+                    {name: "statusName", width: "40", align: "center", searchtype: "String", sortable: false},
                     {name: "status", width: "30", align: "center", searchtype: "integer", sortable: true, hidden: true}
                 ],
                 actModel: [
                     {name: 'operation', width: 40, align: 'center'}
                 ],
                 pager: '#pager2',
-                caption: "外部会议列表",
+                caption: "外出会议列表",
                 shrinkToFit: true,
                 gridComplete: function () {  //在此事件中循环为每一行添加修改和删除链接
                     var ids = jQuery("#listGrid").jqGrid('getDataIDs');
@@ -41,13 +41,13 @@
                         var status = rowData["status"];
                         var opButton = '<input type="button" value="查看" onclick="doView(' + id + ')" class="button_normal"/> ';
                         if (${canEdit}) {
-                            if (status == '${STATUS_EDIT}' || '' == status||status == '${STATUS_MAIN_BACK}'||status == '${STATUS_BRANCH_BACK}') {
+                            if (status == '${STATUS_EDIT}' || '' == status || status == '${STATUS_MAIN_BACK}' || status == '${STATUS_BRANCH_BACK}') {
                                 opButton += '<input type="button" value="编辑" onclick="doEdit(' + id + ')" class="button_normal"/> ';
                                 opButton += '<input type="button" value="删除" onclick="doDelete(' + id + ')" class="button_normal"/>';
                             }
                         }
                         if (${canEdit_FG||canEdit_ZR}) {
-                            if (status == '${STATUS_SUBMIT}'|| status == '${STATUS_BRANCH_PASS}' && status != "") {
+                            if (status == '${STATUS_SUBMIT}' || status == '${STATUS_BRANCH_PASS}' && status != "") {
                                 opButton += '<input type="button" value="审核" onclick="doEdit(' + id + ')" class="button_normal"/> ';
                             }
                         }
@@ -57,11 +57,12 @@
             },
             userOpts: {
                 defaultQuery: { "groupOp": "AND", "rules": [
-                    { "field": "会议地点", "op": "cn", "data": ""},
                     { "field": "会议名称", "op": "cn", "data": ""},
-                    { "field": "状态", "op": "cn", "data": ""},
-                    { "field": "分管领导审核意见", "op": "cn", "data": ""},
-                    { "field": "主任审核意见", "op": "cn", "data": ""}
+                    { "field": "会议地点", "op": "cn", "data": ""},
+//                    { "field": "状态", "op": "cn", "data": ""},
+//                    { "field": "会议开始时间", "op": "bt", "data": ""},
+//                    { "field": "会议结束时间", "op": "bt", "data": ""},
+                    { "field": "会议地点", "op": "cn", "data": ""}
                 ]},
                 queryButton: $("#queryButton"),
                 queryDesc: $("#queryConditionDesc")
@@ -71,24 +72,33 @@
         gridinit($("#listGrid"), conf);
     });
     function doView(id) {
-        openWindow("查看外部会议", "${ctx}/oaMeetingOuter/view.do?id=" + id, false);
+        openWindow("查看外出会议", "${ctx}/oaMeetingOuter/view.do?id=" + id, false);
     }
-    <c:if test="${canEdit}">
     function doAdd() {
-        openWindow("添加外部会议", "${ctx}/oaMeetingOuter/add.do", true);
+        openWindow("添加外出会议", "${ctx}/oaMeetingOuter/add.do", true);
     }
     function doEdit(id) {
-        openWindow("修改外部会议", "${ctx}/oaMeetingOuter/modify.do?id=" + id, true);
+        openWindow("修改外出会议", "${ctx}/oaMeetingOuter/modify.do?id=" + id, true);
     }
     function doDelete(id) {
         doGridDelete("${ctx}/oaMeetingOuter/delete.do?id=" + id);
     }
-    </c:if>
+    function doThisQuery(btn) {
+        var beginTime = "";
+        if ('' != $("#beginTime").val()) {
+            beginTime = $("#beginTime").val() + ":000"
+        }
+        var endTime = "";
+        if ('' != $("#endTime").val()) {
+            endTime = $("#endTime").val() + ":000";
+        }
+        var v = "<beginTime>" + beginTime + "</beginTime><endTime>" + endTime + "</endTime><status>" + $("#status").val() + "</status>";
+        jQuery("#listGrid").jqGrid('setGridParam',
+                {
+                    postData: {'queryJson': v}
+                }).trigger('reloadGrid');
+    }
 
-    //custom formatter
-    //function customeFormat(cellvalue, options, rowObject) {
-    //    return cellvalue == "true"?"是":"否";
-    //}
 </script>
 
 <div class="title_Search">
@@ -105,6 +115,22 @@
                 <input type="button" value="添加" class="button_add"
                        onclick="doAdd()"/>
             </c:if>
+        </div>
+        <div style="float:left;padding-right: 10px">
+            起始日期：<input type="text" name="beginTime" id="beginTime" value="" class="input_datetime"
+                        style="width: 120px"
+                        onClick="calendar('beginTime','datetime');"/>
+            结束日期：<input type="text" name="endTime" id="endTime" value="" class="input_datetime"
+                        style="width: 120px"
+                        onClick="calendar('endTime','datetime');"/>
+            状态：
+            <select name="status" id="status">
+                <option value="" selected>全部</option>
+                <c:forEach var="fo" items="${statusList}">
+                    <option value="${fo.value}">${fo.name}</option>
+                </c:forEach>
+            </select>
+            <input type="button" value="查询" class="btn_Search" onclick="doThisQuery(this)"/>
         </div>
     </div>
 </div>

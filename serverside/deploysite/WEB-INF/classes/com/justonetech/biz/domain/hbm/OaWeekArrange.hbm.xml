@@ -106,7 +106,7 @@
 
 		<many-to-one
 			name="timePeriod"
-			column="TIME_PERIOD"
+			column="TIME_PERIOD_ID"
 			class="com.justonetech.system.domain.SysCodeDetail"
 			not-null="false"
 		>

@@ -13,11 +13,10 @@
                     '信息来源',
                     <c:if test="${canEdit}">
                     '创建人',
-                    '发布状态',
+                    '是否发布',
                     '发布范围',
                     '是否置顶',
                     '访问次数',
-                    //'是否有效',
                     </c:if>
                     '发布时间',
                     '附件',
@@ -36,7 +35,6 @@
                     {name:"accessRange.name", width:"32", align:"center", searchtype:"string", sortable:true},
                     {name:"isTop", width:"34", align:"center", searchtype:"integer", sortable:true, formatter:booleanFormat},
                     {name:"visitTimes", width:"34", align:"center", searchtype:"string", sortable:true},
-                    //{name:"isValid",width:"57",align:"center",searchtype:"integer",sortable:true,formatter:booleanFormat},
                     </c:if>
                     {name:"reportDate", width:"32", align:"center", searchtype:"date", sortable:true},
                     {name:"document.id", width:"30", align:"center", searchtype:"string", sortable:true}
@@ -69,9 +67,6 @@
                     <c:if test="${canEdit}">
                     { "field":"创建人", "op":"cn", "data":""},
                     { "field":"发布范围", "op":"cn", "data":""},
-//                    { "field":"是否置顶", "op":"cn", "data":""},
-//                    { "field":"访问次数", "op":"cn", "data":""},
-//                    { "field":"是否有效", "op":"cn", "data":""}
                     </c:if>
                     { "field":"发布时间", "op":"bt", "data":""}
 
@@ -96,18 +91,15 @@
     }
     <c:if test="${canEdit}">
     function doAdd() {
-    <%--parent.openWindow("添加公共信息发布", "${ctx}/oaPublicInfo/add.do", true, 900, 550);--%>
         parent.openFullWindow("${ctx}/oaPublicInfo/add.do", 900, 525);
     }
     function doEdit(id) {
-    <%--parent.openWindow("修改公共信息发布", "${ctx}/oaPublicInfo/modify.do?id=" + id, true, 900, 550);--%>
         parent.openFullWindow("${ctx}/oaPublicInfo/modify.do?id=" + id, 900, 525);
     }
     function doDelete(id) {
         doGridDelete("${ctx}/oaPublicInfo/delete.do?id=" + id);
     }
     </c:if>
-
 </script>
 
 <div class="title_Search">

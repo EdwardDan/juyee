@@ -1,100 +1,80 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/common/taglibs.jsp" %>
 <script type="text/javascript">
-    var formId = "bean";    
+    var formId = "bean";
     $(function () {
-        //页面验证初始化
-        var validateCondition = [
-                                                                        //{name:"day", rule:"validate[required,custom[date],maxSize[7]"},            
-                                                                                                      //{name:"content", rule:"validate[required,maxSize[200]]"},            
-                                                                                                      //{name:"isRest", rule:"validate[required,maxSize[1]]"},            
-                                                                                                      //{name:"createTime", rule:"validate[required,maxSize[7]]"},            
-                                                                                                      //{name:"createUser", rule:"validate[required,maxSize[100]]"},            
-                                                                                                      //{name:"updateTime", rule:"validate[required,maxSize[7]]"},            
-                                                                                                      //{name:"updateUser", rule:"validate[required,maxSize[100]]"},            
-                                                  ];
-        validateInit(validateCondition, formId);
     });
-
-    //保存操作
-    function save(btn) {
-        if (!validateForm(formId)) {
-            return;
-        }
-
-        //加入其他业务判断
-//        if ($('#name').val() == '') {
-//            showInfoMsg('请输入姓名！',null);
-//            return;
-//        }
-
-        //提交表单
-        saveAjaxData("${ctx}/oaWeekArrange/save.do", formId);
+    function doInit() {
+        loadMainPage("${ctx}/oaWeekArrange/init.do", null);
+    }
+    function doSave() {
+        saveAjaxData("${ctx}/oaWeekArrange/save.do?start=${start}", formId);
     }
 </script>
-<form:form commandName="bean">
-    <form:hidden path="id"/>
-
+<form name="bean" id="bean">
     <div class="form_div">
-        <table cellpadding="0" cellspacing="0" class="form_table">
-                                    <tr class="tr_light">
-              <td class="form_label">日期：</td>
-              <td class="form_content">
-                                <form:input path="day" cssClass="input_date" readonly="true"/>
-                    <input type="button" class="button_calendar" value=" " onClick="calendar('day');">
-                                                 
-                          </td>                                
+        <table cellpadding="0" cellspacing="1" class="table_thin_line_center" border="1" style="width: 98%;">
+            <tr class="tr_header">
+                <td width="10%" nowrap colspan="2">姓名</td>
+                <c:forEach items="${weekDates}" var="week">
+                    <td width="10%" nowrap>${week}</td>
+                </c:forEach>
             </tr>
-                                                <tr class="tr_dark">
-              <td class="form_label">事项：</td>
-              <td class="form_content">
-                        <form:input path="content" cssClass="input_text"/>						
-                          </td>                                
-            </tr>
-                                    <tr class="tr_light">
-              <td class="form_label">是否休息：</td>
-              <td class="form_content">
-                                    <form:checkbox path="isRest" value="1"/>
-                                      </td>                                
-            </tr>
-                                                <tr class="tr_dark">
-              <td class="form_label">创建时间：</td>
-              <td class="form_content">
-                                <input type="text" name="createTime" id="createTime" class="input_datetime"
-                           value="<fmt:formatDate value="${bean.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/>" readonly="true"/>
-                    <input type="button" class="button_calendar" value=" " onClick="calendar('createTime','all')">                                                        
-            
-                          </td>                                
-            </tr>
-                                    <tr class="tr_light">
-              <td class="form_label">创建用户名：</td>
-              <td class="form_content">
-                        <form:input path="createUser" cssClass="input_text"/>						
-                          </td>                                
-            </tr>
-                                                <tr class="tr_dark">
-              <td class="form_label">更新时间：</td>
-              <td class="form_content">
-                                <input type="text" name="updateTime" id="updateTime" class="input_datetime"
-                           value="<fmt:formatDate value="${bean.updateTime}" pattern="yyyy-MM-dd HH:mm:ss"/>" readonly="true"/>
-                    <input type="button" class="button_calendar" value=" " onClick="calendar('updateTime','all')">                                                        
-            
-                          </td>                                
-            </tr>
-                                    <tr class="tr_light">
-              <td class="form_label">更新用户名：</td>
-              <td class="form_content">
-                        <form:input path="updateUser" cssClass="input_text"/>						
-                          </td>                                
-            </tr>
-                                     
-            <tr class="tr_button">
-                <td class="form_label"></td>
-                <td class="form_content">
-                    <input type="button" value="确定" class="button_confirm" onclick="save(this)">&nbsp;
-                    <input type="button" value="取消" class="button_cancel" onclick="closeWindow()">
-                </td>
+            <c:forEach items="${userList}" var="user" varStatus="status1">
+                <c:forEach items="${periodList}" var="period" varStatus="status2">
+                    <tr class="tr_dark">
+                        <c:if test="${status2.index==0}">
+                            <td rowspan="${fn:length(periodList)}">${user.displayName}</td>
+                        </c:if>
+                        <td>${period.name}</td>
+                        <td>
+                            <c:set var="content_0" value="content_${user.id}_${period.id}_${dates[0]}"/>
+                            <input type="text" class="input_text" name="content_${user.id}_${period.id}_${dates[0]}"
+                                   value="${mapHM[content_0]}">
+                        </td>
+                        <td>
+                            <c:set var="content_1" value="content_${user.id}_${period.id}_${dates[1]}"/>
+                            <input type="text" class="input_text" name="content_${user.id}_${period.id}_${dates[1]}"
+                                   value="${mapHM[content_1]}">
+                        </td>
+                        <td>
+                            <c:set var="content_2" value="content_${user.id}_${period.id}_${dates[2]}"/>
+                            <input type="text" class="input_text" name="content_${user.id}_${period.id}_${dates[2]}"
+                                   value="${mapHM[content_2]}">
+                        </td>
+                        <td>
+                            <c:set var="content_3" value="content_${user.id}_${period.id}_${dates[3]}"/>
+                            <input type="text" class="input_text" name="content_${user.id}_${period.id}_${dates[3]}"
+                                   value="${mapHM[content_3]}">
+                        </td>
+                        <td>
+                            <c:set var="content_4" value="content_${user.id}_${period.id}_${dates[4]}"/>
+                            <input type="text" class="input_text" name="content_${user.id}_${period.id}_${dates[4]}"
+                                   value="${mapHM[content_4]}">
+                        </td>
+                        <td>
+                            <c:set var="content_5" value="content_${user.id}_${period.id}_${dates[5]}"/>
+                            <input type="text" class="input_text" name="content_${user.id}_${period.id}_${dates[5]}"
+                                   value="${mapHM[content_5]}">
+                        </td>
+                        <td>
+                            <c:set var="content_6" value="content_${user.id}_${period.id}_${dates[6]}"/>
+                            <input type="text" class="input_text" name="content_${user.id}_${period.id}_${dates[6]}"
+                                   value="${mapHM[content_6]}">
+                        </td>
+                    </tr>
+                </c:forEach>
+            </c:forEach>
+            <tr class="tr_dark">
+                <td colspan="2">备注：</td>
+                <td colspan="7" style="text-align: left;">（）内为待定事项</td>
             </tr>
         </table>
+        <br>
+
+        <div class="form_div">
+            <input type="button" value="保存" class="button_confirm" onclick="doSave()">
+            <input type="button" value="返回" class="button_back" onclick="doInit()">
+        </div>
     </div>
-</form:form>
+</form>
