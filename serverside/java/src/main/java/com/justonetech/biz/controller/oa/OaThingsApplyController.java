@@ -359,7 +359,8 @@ public class OaThingsApplyController extends BaseCRUDActionController<OaThingsAp
             treeBranch.addTreeNode(treeBranch.getRootNode("根节点"));
         } else if (StringUtils.equals(id, "root")) {
             //单位
-            String hql = "from OaThings where isValid=1 order by orderNo asc";
+            String hql = "from OaThings  order by orderNo asc";
+//            String hql = "from OaThings where isValid=1 order by orderNo asc";
             List<OaThings> nodeList = oaThingsService.findByQuery(hql);
             for (OaThings data : nodeList) {
                 boolean isLeaf = true;
