@@ -80,6 +80,9 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
     @Autowired
     private SysPersonService sysPersonService;
 
+    @Autowired
+    private MsgMessageManager msgMessageManager;
+
     /**
      * 列表显示页面
      *
@@ -285,6 +288,22 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
             if (target.getStatus() == OaCarStatus.STATUS_SUBMIT.getCode() || target.getStatus() == OaCarStatus.STATUS_MAIN_BACK.getCode() ||
                     target.getStatus() == OaCarStatus.STATUS_BRANCH_BACK.getCode() || target.getStatus() == OaCarStatus.STATUS_MAIN_PASS.getCode()) {
                 createOaTask(target);
+
+                //发送信息提醒
+                if (target.getStatus() == OaCarStatus.STATUS_MAIN_BACK.getCode() || target.getStatus() == OaCarStatus.STATUS_BRANCH_BACK.getCode()) {
+                    msgMessageManager.sendSms(sysUser.getDisplayName() + "：你的车辆申请已被退回，请登录系统查看。", sysUser.getPerson().getMobile());
+                }
+
+                if (target.getStatus() == OaCarStatus.STATUS_MAIN_PASS.getCode()) {
+                    String content = sysUser.getDisplayName() + "：你的车辆申请已通过。车牌：" + target.getCar().getName();
+                    //判断司机是否存在
+                    if (target.getDriverPerson() != null) {
+                        content += "司机：" + target.getDriverPerson().getName();
+                        msgMessageManager.sendSms(sysUser.getDisplayName() + "的车辆申请已通过，请" +
+                                target.getDriverPerson().getName() + "在" + target.getBeginTime() + "为其司机。", target.getDriverMobile());
+                    }
+                    msgMessageManager.sendSms(content, sysUser.getPerson().getMobile());
+                }
             }
         } catch (Exception e) {
             log.error("error", e);
