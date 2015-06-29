@@ -47,7 +47,7 @@
         <tr class="tr_light">
             <td class="form_label_right" style="width: 20%">涉及区（县）：</td>
             <td class="form_content" style="width: 30%">
-                ${bean.belongArea.name}
+                ${areas}
             </td>
             <td class="form_label_right" style="width: 20%">开工日期：</td>
             <td class="form_content" style="width: 30%">

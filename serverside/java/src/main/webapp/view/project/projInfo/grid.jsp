@@ -7,7 +7,7 @@
                 url: "${ctx}/projInfo/gridDataCustom.do",
                 colNames: ['ID',
                     '开始年份',
-                    '项目序号',
+//                    '项目序号',
                     '项目名称',
                     '项目性质',
                     '项目阶段',
@@ -19,7 +19,7 @@
                 colModel: [
                     {name: 'id', width: 10, align: "center", searchtype: "integer", hidden: true},
                     {name: "year", width: "30", align: "center", searchtype: "integer", sortable: true},
-                    {name: "no", width: "30", align: "center", searchtype: "string", sortable: true},
+//                    {name: "no", width: "30", align: "center", searchtype: "string", sortable: true},
                     {name: "name", width: "80", align: "left", searchtype: "string", sortable: true},
                     {name: "property.name", width: "25", align: "center", searchtype: "string", sortable: true},
                     {name: "stage.name", width: "25", align: "center", searchtype: "string", sortable: true},
@@ -49,7 +49,7 @@
             userOpts: {
                 defaultQuery: { "groupOp": "AND", "rules": [
                     { "field": "开始年份", "op": "eq", "data": ""},
-                    { "field": "项目序号", "op": "cn", "data": ""},
+//                    { "field": "项目序号", "op": "cn", "data": ""},
                     { "field": "项目名称", "op": "cn", "data": ""},
                     { "field": "项目性质", "op": "cn", "data": ""},
                     { "field": "项目阶段", "op": "cn", "data": ""},

@@ -2,20 +2,21 @@ package com.justonetech.biz.controller.project;
 
 import com.justonetech.biz.core.orm.hibernate.GridJq;
 import com.justonetech.biz.core.orm.hibernate.QueryTranslateJq;
-import com.justonetech.biz.daoservice.DocDocumentService;
-import com.justonetech.biz.daoservice.ProjInfoService;
+import com.justonetech.biz.daoservice.*;
 import com.justonetech.biz.domain.ProjBid;
+import com.justonetech.biz.domain.ProjBidArea;
 import com.justonetech.biz.domain.ProjInfo;
+import com.justonetech.biz.domain.ProjInfoArea;
 import com.justonetech.biz.manager.ConfigManager;
 import com.justonetech.biz.manager.DocumentManager;
 import com.justonetech.biz.utils.Constants;
 import com.justonetech.biz.utils.enums.ProjBidType;
 import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.orm.hibernate.Page;
-import com.justonetech.core.utils.DateTimeHelper;
-import com.justonetech.core.utils.JspHelper;
-import com.justonetech.core.utils.ReflectionUtils;
+import com.justonetech.core.utils.*;
 import com.justonetech.system.daoservice.SysCodeDetailService;
+import com.justonetech.system.domain.SysCode;
+import com.justonetech.system.domain.SysCodeDetail;
 import com.justonetech.system.manager.SimpleQueryManager;
 import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
@@ -31,10 +32,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 
 /**
@@ -63,13 +61,19 @@ public class ProjInfoController extends BaseCRUDActionController<ProjInfo> {
     private SimpleQueryManager simpleQueryManager;
 
     @Autowired
-    private DocDocumentService docDocumentService;
+    private ProjBidAreaService projBidAreaService;
 
     @Autowired
     private SysCodeDetailService sysCodeDetailService;
 
     @Autowired
     private ProjInfoService projInfoService;
+
+    @Autowired
+    private ProjInfoAreaService projInfoAreaService;
+
+    @Autowired
+    private ProjBidService projBidService;
 
     /**
      * 列表显示页面
@@ -150,6 +154,7 @@ public class ProjInfoController extends BaseCRUDActionController<ProjInfo> {
         //处理其他业务逻辑
         model.addAttribute("yearSelectOptions", yearSelectOptions);
         model.addAttribute("bean", projInfo);
+        model.addAttribute("areas", projInfo.getBelongAreaNames());
 
         return "view/project/projInfo/input";
     }
@@ -166,6 +171,7 @@ public class ProjInfoController extends BaseCRUDActionController<ProjInfo> {
         ProjInfo projInfo = projInfoService.get(id);
 
         model.addAttribute("bean", projInfo);
+        model.addAttribute("areas", projInfo.getBelongAreaNames());
         return "view/project/projInfo/view";
     }
 
@@ -177,17 +183,18 @@ public class ProjInfoController extends BaseCRUDActionController<ProjInfo> {
      * @return .
      */
     @RequestMapping
-    public String viewBid(Model model, Long id,String typeCode) {
+    public String viewBid(Model model, Long id, String typeCode) {
         ProjInfo projInfo = projInfoService.get(id);
 
         List<ProjBid> ret = new ArrayList<ProjBid>();
         Set<ProjBid> projBids = projInfo.getProjBids();
         for (ProjBid projBid : projBids) {
-            if(JspHelper.getString(typeCode).equals(JspHelper.getString(projBid.getTypeCode()))){
+            if (JspHelper.getString(typeCode).equals(JspHelper.getString(projBid.getTypeCode()))) {
                 ret.add(projBid);
             }
         }
         model.addAttribute("projBids", ret);
+        model.addAttribute("areas", projInfo.getBelongAreaNames());
 
         return "view/project/projInfo/viewBid";
     }
@@ -232,17 +239,48 @@ public class ProjInfoController extends BaseCRUDActionController<ProjInfo> {
             String projProperty = request.getParameter("ProjProperty");
             String projStage = request.getParameter("ProjStage");
             String projCategory = request.getParameter("ProjCategory");
-            String projBelongArea = request.getParameter("ProjBelongArea");
+            String[] areaIds = request.getParameterValues("ProjBelongArea");
             String intro = request.getParameter("intro");
-
             target.setYear(Integer.valueOf(year));
             target.setProperty(sysCodeDetailService.get(Long.valueOf(projProperty)));
             target.setStage(sysCodeDetailService.get(Long.valueOf(projStage)));
             target.setCategory(sysCodeDetailService.get(Long.valueOf(projCategory)));
-//            target.setBelongArea(sysCodeDetailService.get(Long.valueOf(projBelongArea)));
             target.setIntro(intro);
             projInfoService.save(target);
 
+            //保存区县前删除保存过的信息
+            for (ProjInfoArea projInfoArea : target.getProjInfoAreas()) {
+                projInfoAreaService.delete(projInfoArea);
+            }
+            Set<SysCodeDetail> areas = new HashSet<SysCodeDetail>();
+            if (areaIds != null && areaIds.length > 0) {
+                for (String areaId : areaIds) {
+                    if (!StringHelper.isEmpty(areaId)) {
+                        SysCodeDetail sysCodeDetail = sysCodeDetailService.get(Long.valueOf(areaId));
+                        ProjInfoArea projInfoArea = new ProjInfoArea();
+                        projInfoArea.setBelongArea(sysCodeDetail);
+                        projInfoArea.setProject(target);
+                        projInfoAreaService.save(projInfoArea);
+                        areas.add(sysCodeDetail);
+                    }
+                }
+            }
+
+            //添加和修改项目时判断如果下面没有标段则自动创建一个形象进度标段，并且默认标段的所属区县与项目一致
+            Set<ProjBid> projBids = target.getProjBids();
+            if (null == projBids || projBids.size() == 0) {
+                ProjBid projBid = new ProjBid();
+                projBid.setTypeCode(ProjBidType.TYPE_NODE.getCode());
+                projBid.setProject(target);
+                projBidService.save(projBid);
+
+                for (SysCodeDetail area : areas) {
+                    ProjBidArea projBidArea = new ProjBidArea();
+                    projBidArea.setBelongArea(area);
+                    projBidArea.setBid(projBid);
+                    projBidAreaService.save(projBidArea);
+                }
+            }
         } catch (Exception e) {
             log.error("error", e);
             super.processException(response, e);

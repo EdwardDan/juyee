@@ -40,20 +40,19 @@
             </tr>
             <tr class="tr_dark">
                 <td class="form_label_right"style="width: 20%">建设里程：</td>
-                <td class="form_content" colspan="3">
+                <td class="form_content" >
                     <form:input path="buildMileage" cssClass="input_text"/>
-                </td>
-            </tr>
-            <tr class="tr_light">
-                <td class="form_label_right"style="width: 20%">涉及区（县）：</td>
-                <td class="form_content"  style="width: 30%">
-                    <sys:code code="ProjBelongArea" name="ProjBelongArea" id="ProjBelongArea" type="select"
-                              sysCodeDetailId="${bean.belongArea.id}" style="width:200px"/>
                 </td>
                 <td class="form_label_right"style="width: 20%">开工日期：</td>
                 <td class="form_content"  style="width: 30%">
                     <form:input path="startDate" cssClass="input_date" readonly="true"/>
                     <input type="button" class="button_calendar" value=" " onClick="calendar('startDate');">
+                </td>
+            </tr>
+            <tr class="tr_light">
+                <td class="form_label_right"style="width: 20%">涉及区（县）：</td>
+                <td class="form_content"  style="width: 30%" colspan="3">
+                    <sys:checkbox  name="ProjBelongArea" code="ProjBelongArea" checkedNames="${areas}" inputType="checkbox" isSaveName="false" showType="edit" colNum="9"/>
                 </td>
             </tr>
             <tr class="tr_light">
