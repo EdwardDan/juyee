@@ -33,6 +33,7 @@
                         var id = ids[i];
                         var rowData = jQuery("#listGrid").jqGrid('getRowData', id);
                         var statusCode = rowData["status"];//获取每一行的状态
+                        var createUser = rowData["applyUser.displayName"];//获取每一行的状态
                         var opButton = '<input type="button" value="查看" onclick="doView(' + id + ')" class="button_normal"/> ';
                     <c:if test="${auditKZ}">
                         if (statusCode == ${STATUS_SUBMIT}) {
@@ -46,14 +47,10 @@
                     </c:if>
                     <c:if test="${canEdit}">
                         if (statusCode == ${STATUS_EDIT} || statusCode == ${STATUS_BRANCH_BACK} || statusCode == ${STATUS_MAIN_BACK}) {
-                        <%--if (createUser == '${currentUser}') {--%>
+                            if (createUser == '${currentUser}'){
                             opButton += '<input type="button" value="编辑" onclick="doEdit(' + id + ')" class="button_normal"/> ';
                             opButton += '<input type="button" value="删除" onclick="doDelete(' + id + ')" class="button_normal"/>';
-//                            } else {   //不是当前登录用户时，判断其是否有强制删除权限
-                        <%--<c:if test="${canDelete}">--%>
-//                                opButton += '<input type="button" value="删除" onclick="doDelete(' + id + ')" class="button_normal"/>';
-                        <%--</c:if>--%>
-//                            }
+                            }
                         }
                     </c:if>
                         jQuery("#listGrid").jqGrid('setRowData', ids[i], { operation:opButton});

@@ -95,10 +95,13 @@
     <form:hidden path="id"/>
     <%--<form:hidden path="status"/>--%>
     <table cellpadding="0" cellspacing="0" class="form_table" border="0">
-
         <tr class="tr_title">
-            <td colspan="6">办公用品申请</td>
+            <td >办公用品申请</td>
         </tr>
+        </table>
+    <fieldset class="form_fieldset">
+    <legend class="form_legend">申请信息</legend>
+        <table cellpadding="0" cellspacing="0" class="form_table" border="1">
         <tr class="tr_dark">
             <td class="form_border" align="center" colspan="3"> ${bean.applyDept.name}
                 <input type="text" name="deptName" id="deptName" class="input_text" value="${bean.applyDept.name}"
@@ -119,12 +122,12 @@
             </td>
         </tr>
         <tr class="tr_header">
-            <td width="8%">申请物品</td>
-            <td width="8%">型号</td>
-            <td width="9%">单位</td>
-            <td width="8%">预计单价</td>
-            <td width="8%">数量</td>
-            <td width="2%" nowrap>
+            <td width="35%">申请物品</td>
+            <td width="15%">型号</td>
+            <td width="15%">单位</td>
+            <td width="15%">预计单价</td>
+            <td width="15%">数量</td>
+            <td width="5%" nowrap>
                 &nbsp;<input type="button" value="添加" class="button_select_add" onclick="addLine(this)"/>
             </td>
         </tr>
@@ -163,19 +166,16 @@
             <%--标准行迁入--%>
         <tr class="tr_dark">
             <td colspan="4" align="right"><b>预计总价</b></td>
-            <td><span id="count">${count}</span></td>
-            <td>&nbsp;</td>
+            <td colspan="2" align="left"><span id="count">${count}</span></td>
         </tr>
-    </table>
-    <table>
         <tr class="tr_light">
-            <td class="form_label_right" width="20%">申请说明：</td>
-            <td class="form_content">
+            <td class="form_label_right">申请说明：</td>
+            <td class="form_content" colspan="5">
                 <form:textarea path="applyContent" cssClass="input_textarea_long"/>
             </td>
         </tr>
     </table>
-
+    </fieldset>
     <div class="tr_button" style="text-align: center">
         <input type="button" value="提交" class="button_confirm" onclick="save('${STATUS_SUBMIT}',this)">&nbsp;
         <input type="button" value="暂存" class="button_confirm" onclick="save('${STATUS_EDIT}',this)">&nbsp;
@@ -185,24 +185,24 @@
 <table style="display: none;" cellpadding="0" cellspacing="0" class="form_table" border="0">
     <tbody id="hiddenStyle">
     <tr class="tr_dark"><%--标准行--%>
-        <td width="4%">
+        <td >
             <input type="hidden" name="thingId">
             <input type="text" name="name" class="input_text" style="width:98%;background-color: #deedf7;"
                    ondblclick="selectLine(this)">
         </td>
-        <td width="8%">
+        <td >
             <input type="text" name="model" class="input_text" style="width: 95%">
         </td>
-        <td width="8%">
+        <td >
             <input type="text" name="unit" class="input_text" style="width: 95%">
         </td>
-        <td width="9%">
+        <td>
             <input type="text" name="price" class="input_text" style="width: 95%">
         </td>
-        <td width="8%">
+        <td >
             <input type="text" name="amount" class="input_text" style="width: 95%">
         </td>
-        <td width="2%"><input type="button" value="删除" class="button_select_remove" onclick="addLine(this)"/></td>
+        <td ><input type="button" value="删除" class="button_select_remove" onclick="addLine(this)"/></td>
     </tr>
     </tbody>
 </table>
