@@ -649,6 +649,23 @@
             <properties>
                 <jdbc.driverClassName>oracle.jdbc.driver.OracleDriver</jdbc.driverClassName>
                 <jdbc.url>jdbc:oracle:thin:@192.168.1.86:1522:db11g</jdbc.url>
+                <jdbc.username>jtjs_test</jdbc.username>
+                <jdbc.password>jtjs_test</jdbc.password>
+                <jdbc.hibernate.showsql>false</jdbc.hibernate.showsql>
+                <file.path>/E:/attach/jtjs_test/file/</file.path>
+                <file.upload.filesize>2048000</file.upload.filesize>
+                <!-- 短信开关 -->
+                <sms.wsdl>http://localhost:8000/sms/service/smsWebService</sms.wsdl>
+                <sms.user>admin</sms.user>
+                <sms.pass>juyee</sms.pass>
+                <sms.switch>false</sms.switch>
+            </properties>
+        </profile>
+        <profile>
+            <id>app-release</id>
+            <properties>
+                <jdbc.driverClassName>oracle.jdbc.driver.OracleDriver</jdbc.driverClassName>
+                <jdbc.url>jdbc:oracle:thin:@192.168.1.86:1522:db11g</jdbc.url>
                 <jdbc.username>jtjs</jdbc.username>
                 <jdbc.password>jtjs</jdbc.password>
                 <jdbc.hibernate.showsql>false</jdbc.hibernate.showsql>
