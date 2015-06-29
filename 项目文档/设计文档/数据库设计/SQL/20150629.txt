@@ -1,0 +1,72 @@
+-- Drop primary, unique and foreign key constraints 
+alter table PROJ_INFO
+  drop constraint FK_PROJ_INFO_AREA;
+
+-- Drop columns 
+alter table PROJ_INFO drop column BELONG_AREA_ID;
+
+
+-- Drop primary, unique and foreign key constraints 
+alter table PROJ_BID
+  drop constraint FK_PROJ_BID_AREA;
+
+
+-- Drop columns 
+alter table PROJ_BID drop column BELONG_AREA_ID;
+
+
+/*==============================================================*/
+/* Table: PROJ_INFO_AREA                                        */
+/*==============================================================*/
+create table PROJ_INFO_AREA 
+(
+   ID                   number(10)           not null,
+   PROJECT_ID           number(10),
+   BELONG_AREA_ID       number(10),
+   constraint PK_PROJ_INFO_AREA primary key (ID),
+   constraint FK_PROJ_INFO_AREA_PROJ foreign key (PROJECT_ID)
+         references PROJ_INFO (ID),
+   constraint FK_PROJ_INFO_AREA_AREA foreign key (BELONG_AREA_ID)
+         references SYS_CODE_DETAIL (ID)
+);
+
+comment on table PROJ_INFO_AREA is
+'项目涉及区县';
+
+comment on column PROJ_INFO_AREA.ID is
+'ID';
+
+comment on column PROJ_INFO_AREA.PROJECT_ID is
+'项目ID';
+
+comment on column PROJ_INFO_AREA.BELONG_AREA_ID is
+'涉及区县ID';
+
+
+/*==============================================================*/
+/* Table: PROJ_BID_AREA                                         */
+/*==============================================================*/
+create table PROJ_BID_AREA 
+(
+   ID                   number(10)           not null,
+   BID_ID               number(10),
+   BELONG_AREA_ID       number(10),
+   constraint PK_PROJ_BID_AREA primary key (ID),
+   constraint FK_PROJ_BID_AREA_BID foreign key (BID_ID)
+         references PROJ_BID (ID),
+   constraint FK_PROJ_BID_AREA_AREA foreign key (BELONG_AREA_ID)
+         references SYS_CODE_DETAIL (ID)
+);
+
+comment on table PROJ_BID_AREA is
+'标段涉及区县';
+
+comment on column PROJ_BID_AREA.ID is
+'ID';
+
+comment on column PROJ_BID_AREA.BID_ID is
+'标段ID';
+
+comment on column PROJ_BID_AREA.BELONG_AREA_ID is
+'涉及区县ID';
+
