@@ -36,6 +36,11 @@
         }
     }
 </script>
+<style type="text/css">
+    .addTd{
+        border: 1px solid;
+    }
+</style>
 <form:form commandName="bean">
     <form:hidden path="id"/>
     <table cellpadding="0" cellspacing="0" class="form_table" border="0">
@@ -45,7 +50,7 @@
     </table>
     <fieldset class="form_fieldset">
         <legend class="form_legend">申请信息</legend>
-        <table cellpadding="0" cellspacing="0" class="form_table" border="1">
+        <table cellpadding="0" cellspacing="0" class="form_table" >
             <tr class="tr_dark">
                 <td class="form_border" align="center" colspan="2">申请部门： ${bean.applyDept.name}
                 </td>
@@ -53,20 +58,20 @@
                 </td>
             </tr>
             <tr class="tr_header">
-                <td width="8%">申请物品</td>
-                <td width="8%">型号</td>
-                <td width="9%">单位</td>
-                <td width="8%">预计单价</td>
-                <td width="8%">数量</td>
+                <td  class="addTd" width="8%">申请物品</td>
+                <td class="addTd" width="8%">型号</td>
+                <td class="addTd" width="9%">单位</td>
+                <td class="addTd" width="8%">预计单价</td>
+                <td class="addTd" width="8%">数量</td>
             </tr>
             <c:if test="${not empty bean.oaThingsApplyItems && bean.oaThingsApplyItems != null}">
                 <c:forEach items="${bean.oaThingsApplyItems}" var="item">
                     <tr class="tr_dark">
-                        <td>${item.name}</td>
-                        <td>${item.model}</td>
-                        <td>${item.unit}</td>
-                        <td><span name="price">${item.price}</span></td>
-                        <td><span name="amount">${item.amount}</span></td>
+                        <td class="addTd">${item.name}</td>
+                        <td class="addTd">${item.model}</td>
+                        <td class="addTd">${item.unit}</td>
+                        <td class="addTd"><span name="price">${item.price}</span></td>
+                        <td class="addTd"><span name="amount">${item.amount}</span></td>
                     </tr>
                 </c:forEach>
             </c:if>

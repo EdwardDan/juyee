@@ -91,6 +91,11 @@
     }
 
 </script>
+<style type="text/css">
+    .addTd{
+        border: 1px solid;
+    }
+</style>
 <form:form commandName="bean">
     <form:hidden path="id"/>
     <%--<form:hidden path="status"/>--%>
@@ -101,7 +106,7 @@
         </table>
     <fieldset class="form_fieldset">
     <legend class="form_legend">申请信息</legend>
-        <table cellpadding="0" cellspacing="0" class="form_table" border="1">
+        <table cellpadding="0" cellspacing="0" class="form_table">
         <tr class="tr_dark">
             <td class="form_border" align="center" colspan="3"> ${bean.applyDept.name}
                 <input type="text" name="deptName" id="deptName" class="input_text" value="${bean.applyDept.name}"
@@ -122,42 +127,42 @@
             </td>
         </tr>
         <tr class="tr_header">
-            <td width="35%">申请物品</td>
-            <td width="15%">型号</td>
-            <td width="15%">单位</td>
-            <td width="15%">预计单价</td>
-            <td width="15%">数量</td>
-            <td width="5%" nowrap>
+            <td class="addTd" width="35%">申请物品</td>
+            <td class="addTd" width="15%">型号</td>
+            <td class="addTd" width="15%">单位</td>
+            <td class="addTd" width="15%">预计单价</td>
+            <td class="addTd" width="15%">数量</td>
+            <td class="addTd" width="5%" nowrap>
                 &nbsp;<input type="button" value="添加" class="button_select_add" onclick="addLine(this)"/>
             </td>
         </tr>
         <c:if test="${not empty bean.oaThingsApplyItems && bean.oaThingsApplyItems != null}">
             <c:forEach items="${bean.oaThingsApplyItems}" var="item">
                 <tr class="tr_dark">
-                    <td>
+                    <td class="addTd">
                         <input type="hidden" name="thingId" value="${item.oaThings.id}">
                         <input type="text" name="name" class="input_text" style="width:98%;background-color: #deedf7;"
                                value="${item.name}"
                                title="${item.name}" ondblclick="selectLine(this)">
                     </td>
-                    <td>
+                    <td class="addTd">
                         <input type="text" name="model" class="input_text" style="width: 95%" value="${item.model}"
                                title="${item.model}">
                     </td>
 
-                    <td>
+                    <td class="addTd">
                         <input type="text" name="unit" class="input_text" style="width: 95%" value="${item.unit}"
                                title="${item.unit}">
                     </td>
-                    <td>
+                    <td class="addTd">
                         <input type="text" name="price" class="input_text" style="width: 95%" value="${item.price}"
                                title="${item.price}">
                     </td>
-                    <td>
+                    <td class="addTd">
                         <input type="text" name="amount" class="input_text" style="width: 95%" value="${item.amount}"
                                title="${item.amount}">
                     </td>
-                    <td><input type="button" value="删除" class="button_select_remove" onclick="addLine(this)"/>
+                    <td class="addTd"><input type="button" value="删除" class="button_select_remove" onclick="addLine(this)"/>
                     </td>
                 </tr>
             </c:forEach>
@@ -165,7 +170,7 @@
         <tbody id="tableThingDiv"></tbody>
             <%--标准行迁入--%>
         <tr class="tr_dark">
-            <td colspan="4" align="right"><b>预计总价</b></td>
+            <td colspan="4" align="right"><b>预计总价：</b></td>
             <td colspan="2" align="left"><span id="count">${count}</span></td>
         </tr>
         <tr class="tr_light">
@@ -185,24 +190,24 @@
 <table style="display: none;" cellpadding="0" cellspacing="0" class="form_table" border="0">
     <tbody id="hiddenStyle">
     <tr class="tr_dark"><%--标准行--%>
-        <td >
+        <td class="addTd">
             <input type="hidden" name="thingId">
             <input type="text" name="name" class="input_text" style="width:98%;background-color: #deedf7;"
                    ondblclick="selectLine(this)">
         </td>
-        <td >
+        <td class="addTd" >
             <input type="text" name="model" class="input_text" style="width: 95%">
         </td>
-        <td >
+        <td class="addTd">
             <input type="text" name="unit" class="input_text" style="width: 95%">
         </td>
-        <td>
+        <td class="addTd">
             <input type="text" name="price" class="input_text" style="width: 95%">
         </td>
-        <td >
+        <td  class="addTd">
             <input type="text" name="amount" class="input_text" style="width: 95%">
         </td>
-        <td ><input type="button" value="删除" class="button_select_remove" onclick="addLine(this)"/></td>
+        <td class="addTd"><input type="button" value="删除" class="button_select_remove" onclick="addLine(this)"/></td>
     </tr>
     </tbody>
 </table>
