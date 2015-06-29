@@ -245,13 +245,6 @@
                 not-null="false"
                 >
         </many-to-one>
-        <many-to-one
-                name="belongArea"
-                column="BELONG_AREA_ID"
-                class="com.justonetech.system.domain.SysCodeDetail"
-                not-null="false"
-                >
-        </many-to-one>
 
 		<set name="projBids" inverse="true">
 			<key column="PROJECT_ID"/>

@@ -44,7 +44,6 @@ public abstract class BaseProjInfo  implements Serializable,Auditable {
 	public static String PROP_CREATE_TIME = "createTime";
 	public static String PROP_BUILD_MILEAGE = "buildMileage";
 	public static String PROP_ID = "id";
-	public static String PROP_BELONG_AREA = "belongArea";
 	public static String PROP_INTRO = "intro";
 	public static String PROP_STAGE = "stage";
 	public static String PROP_SG_DEPT_TEL = "sgDeptTel";
@@ -151,7 +150,6 @@ public abstract class BaseProjInfo  implements Serializable,Auditable {
 	private com.justonetech.system.domain.SysCodeDetail property;
 	private com.justonetech.system.domain.SysCodeDetail stage;
 	private com.justonetech.system.domain.SysCodeDetail category;
-	private com.justonetech.system.domain.SysCodeDetail belongArea;
 
 	// collections
 	private java.util.Set<com.justonetech.biz.domain.ProjBid> projBids;
@@ -519,23 +517,6 @@ public abstract class BaseProjInfo  implements Serializable,Auditable {
 	public void setCategory (com.justonetech.system.domain.SysCodeDetail category) {
 		this.category = category;
 	}
-
-
-	/**
-	 * Return the value associated with the column: BELONG_AREA_ID
-	 */
-	public com.justonetech.system.domain.SysCodeDetail getBelongArea () {
-		return belongArea;
-	}
-
-	/**
-	 * Set the value related to the column: BELONG_AREA_ID
-	 * @param belongArea the BELONG_AREA_ID value
-	 */
-	public void setBelongArea (com.justonetech.system.domain.SysCodeDetail belongArea) {
-		this.belongArea = belongArea;
-	}
-
 
 	/**
 	 * Return the value associated with the column: projBids

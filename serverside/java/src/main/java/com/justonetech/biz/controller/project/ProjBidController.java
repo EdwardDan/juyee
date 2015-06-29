@@ -240,7 +240,7 @@ public class ProjBidController extends BaseCRUDActionController<ProjBid> {
             }
             String projBelongArea = request.getParameter("ProjBelongArea");
             String projInfoId = request.getParameter("projInfoId");
-            target.setBelongArea(sysCodeDetailService.get(Long.valueOf(projBelongArea)));
+//            target.setBelongArea(sysCodeDetailService.get(Long.valueOf(projBelongArea)));
             target.setProject(projInfoService.get(Long.valueOf(projInfoId)));
             projBidService.save(target);
 

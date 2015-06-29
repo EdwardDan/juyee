@@ -37,7 +37,6 @@ public abstract class BaseProjBid  implements Serializable,Auditable {
 	public static String PROP_BUILD_MILEAGE = "buildMileage";
 	public static String PROP_ID = "id";
 	public static String PROP_PROJ_LINK = "projLink";
-	public static String PROP_BELONG_AREA = "belongArea";
 	public static String PROP_UPDATE_USER = "updateUser";
 	public static String PROP_TYPE_CODE = "typeCode";
 
@@ -111,7 +110,6 @@ public abstract class BaseProjBid  implements Serializable,Auditable {
 	
 
 	// many to one
-	private com.justonetech.system.domain.SysCodeDetail belongArea;
 	private com.justonetech.biz.domain.ProjInfo project;
 
 	// collections
@@ -309,21 +307,6 @@ public abstract class BaseProjBid  implements Serializable,Auditable {
     public void setTypeCode(String typeCode) {
         this.typeCode = typeCode;
     }
-
-    /**
-	 * Return the value associated with the column: BELONG_AREA_ID
-	 */
-	public com.justonetech.system.domain.SysCodeDetail getBelongArea () {
-		return belongArea;
-	}
-
-	/**
-	 * Set the value related to the column: BELONG_AREA_ID
-	 * @param belongArea the BELONG_AREA_ID value
-	 */
-	public void setBelongArea (com.justonetech.system.domain.SysCodeDetail belongArea) {
-		this.belongArea = belongArea;
-	}
 
 
 	/**

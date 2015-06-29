@@ -239,7 +239,7 @@ public class ProjInfoController extends BaseCRUDActionController<ProjInfo> {
             target.setProperty(sysCodeDetailService.get(Long.valueOf(projProperty)));
             target.setStage(sysCodeDetailService.get(Long.valueOf(projStage)));
             target.setCategory(sysCodeDetailService.get(Long.valueOf(projCategory)));
-            target.setBelongArea(sysCodeDetailService.get(Long.valueOf(projBelongArea)));
+//            target.setBelongArea(sysCodeDetailService.get(Long.valueOf(projBelongArea)));
             target.setIntro(intro);
             projInfoService.save(target);
 
