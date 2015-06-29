@@ -164,7 +164,10 @@
             <key column="BID_ID"/>
             <one-to-many class="DataStageReport"/>
         </set>
-
+        <set name="projBidAreas" inverse="true" order-by="id asc">
+            <key column="BID_ID"/>
+            <one-to-many class="ProjBidArea"/>
+        </set>
 	</class>	
     <query name="projbid_all_data_query">
         <![CDATA[FROM ProjBid]]>

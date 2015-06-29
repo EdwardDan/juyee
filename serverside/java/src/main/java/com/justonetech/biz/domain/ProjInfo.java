@@ -97,4 +97,20 @@ public class ProjInfo extends BaseProjInfo {
         }
         return bids.size();
     }
+
+    /**
+     * 获取所属区县名称
+     * @return .
+     */
+    public String getBelongAreaNames(){
+        String name = "";
+        Set<ProjInfoArea>  projBidAreas = getProjInfoAreas();
+        if(projBidAreas.size()>0){
+            for (ProjInfoArea projInfoArea : projBidAreas) {
+                name += ","+projInfoArea.getBelongArea().getName();
+            }
+            name = name.substring(1);
+        }
+        return name;
+    }
 }

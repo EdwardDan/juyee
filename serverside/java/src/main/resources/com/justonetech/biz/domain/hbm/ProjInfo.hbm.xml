@@ -268,7 +268,10 @@
             <key column="PROJECT_ID"/>
             <one-to-many class="DataStageReport"/>
         </set>
-
+        <set name="projInfoAreas" inverse="true" order-by="id asc">
+            <key column="PROJECT_ID"/>
+            <one-to-many class="ProjInfoArea"/>
+        </set>
 	</class>	
     <query name="projinfo_all_data_query">
         <![CDATA[FROM ProjInfo]]>

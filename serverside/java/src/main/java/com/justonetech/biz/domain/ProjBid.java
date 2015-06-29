@@ -2,6 +2,7 @@ package com.justonetech.biz.domain;
 
 import com.justonetech.biz.domain.base.BaseProjBid;
 
+import java.util.Set;
 
 
 public class ProjBid extends BaseProjBid {
@@ -21,5 +22,19 @@ public class ProjBid extends BaseProjBid {
 
 /*[CONSTRUCTOR MARKER END]*/
 
-
+    /**
+     * 获取所属区县名称
+     * @return .
+     */
+    public String getBelongAreaNames(){
+        String name = "";
+        Set<ProjBidArea> projBidAreas = getProjBidAreas();
+        if(projBidAreas.size()>0){
+            for (ProjBidArea projBidArea : projBidAreas) {
+                name += ","+projBidArea.getBelongArea().getName();
+            }
+            name = name.substring(1);
+        }
+        return name;
+    }
 }
