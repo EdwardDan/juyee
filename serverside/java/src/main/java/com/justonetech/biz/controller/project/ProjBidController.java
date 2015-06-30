@@ -251,6 +251,7 @@ public class ProjBidController extends BaseCRUDActionController<ProjBid> {
             String projInfoId = request.getParameter("projInfoId");
 
             target.setProject(projInfoService.get(Long.valueOf(projInfoId)));
+            projBidService.save(target);
             //保存区县前删除保存过的信息
             for (ProjBidArea projBidArea : target.getProjBidAreas()) {
                 projBidAreaService.delete(projBidArea);
@@ -266,7 +267,7 @@ public class ProjBidController extends BaseCRUDActionController<ProjBid> {
                     }
                 }
             }
-            projBidService.save(target);
+
         } catch (Exception e) {
             log.error("error", e);
             super.processException(response, e);
