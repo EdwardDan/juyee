@@ -77,6 +77,7 @@
                 <td class="form_label_right">选择标段：</td>
                 <td class="form_content">
                     <select name="projBid" id="projBid" class="form_select_long" onchange="loadMonthReport('${currentMonth}')">
+                        <option value=""></option>
                         <c:forEach items="${projBids}"  var="item">
                             <option value="${item.id}">${item.name}</option>
                         </c:forEach>
