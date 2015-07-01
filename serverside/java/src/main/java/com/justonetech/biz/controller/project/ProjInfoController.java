@@ -268,7 +268,19 @@ public class ProjInfoController extends BaseCRUDActionController<ProjInfo> {
 
             //添加和修改项目时判断如果下面没有标段则自动创建一个形象进度标段，并且默认标段的所属区县与项目一致
             Set<ProjBid> projBids = target.getProjBids();
+            Boolean noTypeNode = true;//默认没有形象进度
             if (null == projBids || projBids.size() == 0) {
+                noTypeNode = false;
+            } else {
+                for (ProjBid projBid : projBids) {
+                    String typeNode = projBid.getTypeCode();
+                    if (ProjBidType.TYPE_NODE.getCode().equals(typeNode)) {
+                        noTypeNode = false;
+                        break;
+                    }
+                }
+            }
+            if (noTypeNode) {
                 ProjBid projBid = new ProjBid();
                 projBid.setTypeCode(ProjBidType.TYPE_NODE.getCode());
                 projBid.setName(target.getName());
@@ -283,6 +295,8 @@ public class ProjInfoController extends BaseCRUDActionController<ProjInfo> {
                     projBidAreaService.save(projBidArea);
                 }
             }
+
+
         } catch (Exception e) {
             log.error("error", e);
             super.processException(response, e);
