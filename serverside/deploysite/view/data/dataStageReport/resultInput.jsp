@@ -1,15 +1,15 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/common/taglibs.jsp" %>
 <script type="text/javascript">
-    function reBackData(obj, bidId, stepId, stageId) {
+    function reBackData(obj, bidId, stageId) {
         parent.flag = true;
         if (${result.code=='1'}) {
-            $("#dealDate_" + bidId + "_" + stepId + "_" + stageId).val($("#planDate").val());
+            $("#dealDate_" + bidId + "_" + stageId).val($("#planDate").val());
         } else if (${result.code=='2'}) {
-            $("#dealDate_" + bidId + "_" + stepId + "_" + stageId).val($("#bjDate").val());
+            $("#dealDate_" + bidId + "_" + stageId).val($("#bjDate").val());
         } else if (${result.code=='3'}) {
-            $("#dealDate_" + bidId + "_" + stepId + "_" + stageId).val($("#question").val());
-            document.getElementById("dealDate_" + bidId + "_" + stepId + "_" + stageId).title = document.getElementById("question").value;
+            $("#dealDate_" + bidId + "_" + stageId).val($("#question").val());
+            document.getElementById("dealDate_" + bidId + "_" + stageId).title = document.getElementById("question").value;
         }
     }
 </script>
@@ -55,7 +55,7 @@
         <tr class="tr_dark">
             <td style="text-align: center;">
                 <input type="button" value="确定" class="button_confirm"
-                       onclick="reBackData(this,'${bidId}','${stepId}','${stageId}');closeWindow();">&nbsp;
+                       onclick="reBackData(this,'${bidId}','${stageId}');closeWindow();">&nbsp;
                 <input type="button" value="取消" class="button_cancel" onclick="closeWindow()">
             </td>
         </tr>

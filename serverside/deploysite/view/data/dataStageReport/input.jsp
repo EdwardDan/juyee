@@ -24,17 +24,17 @@
         }
     }
     //选择填报内容
-    function changeResult(objValue, bidId, stepId, stageId) {
+    function changeResult(objValue, bidId, stageId) {
         if (objValue == 1 || objValue == 2 || objValue == 3) {
-            var dealDate = $("#dealDate_" + bidId + "_" + stepId + "_" + stageId).val();
-            openNewWindow("new", "填报页面", "${ctx}/dataStageReport/resultInput.do?resultCode=" + objValue + "&bidId=" + bidId + "&stepId=" + stepId + "&stageId=" + stageId + "&dealDate=" + dealDate, false, 500, 300);
+            var dealDate = $("#dealDate_" + bidId + "_" + stageId).val();
+            openNewWindow("new", "填报页面", "${ctx}/dataStageReport/resultInput.do?resultCode=" + objValue + "&bidId=" + bidId + "&stageId=" + stageId + "&dealDate=" + dealDate, false, 500, 300);
         } else {
-            $("#dealDate_" + bidId + "_" + stepId + "_" + stageId).val("");
+            $("#dealDate_" + bidId + "_" + stageId).val("");
         }
     }
     //切换标段
     function checkBid(obj) {
-        loadAjaxData("checkBid", "${ctx}/dataStageReport/checkBidData.do?bidId=" + obj.value + "&projectId=${bean.project.id}&id=${bean.id}");
+        loadAjaxData("checkBid", "${ctx}/dataStageReport/checkBidData.do?bidId=" + obj.value + "&id=${bean.id}");
     }
 </script>
 <form:form commandName="bean">
@@ -56,15 +56,11 @@
             <tr class="tr_dark">
                 <td class="form_label_right" style="width: 15%;">选择标段：</td>
                 <td class="form_content">
-                    <c:if test="${fn:length(bean.project.projBids)>0}">
-                        <select class="form_select" name="projectBidId" id="projectBidId" onchange="checkBid(this)">
-                            <c:forEach items="${bean.project.projBids}" var="projectBid">
-                                <c:if test="${projectBid.typeCode == bidTypeCode}">
-                                    <option value="${projectBid.id}">${projectBid.name}</option>
-                                </c:if>
-                            </c:forEach>
-                        </select>
-                    </c:if>
+                    <select class="form_select" name="projectBidId" id="projectBidId" onchange="checkBid(this)">
+                        <c:forEach items="${bids}" var="projectBid">
+                            <option value="${projectBid.id}">${projectBid.name}</option>
+                        </c:forEach>
+                    </select>
                 </td>
             </tr>
         </table>
