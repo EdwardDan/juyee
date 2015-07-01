@@ -9,7 +9,7 @@
     });
     //切换标段
     function checkBid(obj) {
-        loadAjaxData("checkBid", "${ctx}/dataStageReport/checkBidDataView.do?bidId=" + obj.value + "&projectId=${bean.project.id}&id=${bean.id}");
+        loadAjaxData("checkBid", "${ctx}/dataStageReport/checkBidDataView.do?bidId=" + obj.value + "&id=${bean.id}");
     }
 </script>
 
