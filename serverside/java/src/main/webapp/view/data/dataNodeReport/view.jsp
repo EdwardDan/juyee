@@ -59,9 +59,10 @@
                     <select name="projBid" id="projBid" class="form_select_long"
                             onchange="loadMonthReport('${currentMonth}')">
                         <option value=""></option>
-                        <c:forEach items="${projBids}" var="item">
+                        <c:if test="${projBids!= null&&fn:length(projBids)>0}"> <c:forEach items="${projBids}" var="item">
                             <option value="${item.id}">${item.name}</option>
                         </c:forEach>
+                        </c:if>
                     </select>
                 </td>
             </tr>
