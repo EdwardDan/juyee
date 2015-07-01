@@ -16,7 +16,7 @@
                     <c:if test="${st/2==0}">class="tr_dark"</c:if> <c:if test="${st/2==1}">class="tr_light"</c:if>>
                 <td class="">${bid.code}</td>
                 <td class="">${bid.name}</td>
-                <td class="">${bid.belongArea.name}</td>
+                <td class="">${areas}</td>
                 <td class="">${bid.buildMileage}</td>
                 <td class="">${bid.projLink}</td>
                 <td class="">${bid.linkTel}</td>

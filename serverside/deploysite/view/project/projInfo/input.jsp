@@ -55,9 +55,10 @@
                             ${yearSelectOptions}
                     </select>
                 </td>
-                <td class="form_label_right">项目序号：</td>
+                <td class="form_label_right">开工日期：</td>
                 <td class="form_content">
-                    <form:input path="no" cssClass="input_text"/>
+                    <form:input path="startDate" cssClass="input_date" readonly="true"/>
+                    <input type="button" class="button_calendar" value=" " onClick="calendar('startDate');">
                 </td>
             </tr>
             <tr class="tr_light">
@@ -86,26 +87,22 @@
             <tr class="tr_light">
                 <td class="form_label_right">项目名称：</td>
                 <td class="form_content" colspan="3">
-                    <form:input path="name" cssClass="input_text_long"/>
+                    <form:input path="name" cssClass="input_text_long" style="width:90%"/>
                 </td>
             </tr>
             <tr class="tr_dark">
                 <td class="form_label_right">起讫地点：</td>
                 <td class="form_content" colspan="3">
-                    <form:input path="location" cssClass="input_text_long"/>
+                    <form:input path="location" cssClass="input_text_long" style="width:90%"/>
                 </td>
             </tr>
             <tr class="tr_light">
                 <td class="form_label_right">涉及区（县）：</td>
-                <td class="form_content">
-                    <sys:code code="ProjBelongArea" name="ProjBelongArea" id="ProjBelongArea" type="select"
-                              sysCodeDetailId="${bean.belongArea.id}" style="width:200px"/>
+                <td class="form_content" colspan="3">
+                    <sys:checkbox name="ProjBelongArea" code="ProjBelongArea" checkedNames="${areas}"
+                                  inputType="checkbox" isSaveName="false" showType="edit" colNum="9"/>
                 </td>
-                <td class="form_label_right">开工日期：</td>
-                <td class="form_content">
-                    <form:input path="startDate" cssClass="input_date" readonly="true"/>
-                    <input type="button" class="button_calendar" value=" " onClick="calendar('startDate');">
-                </td>
+
             </tr>
             <tr class="tr_dark">
                 <td class="form_label_right">工程简介：</td>

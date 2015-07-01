@@ -245,13 +245,6 @@
                 not-null="false"
                 >
         </many-to-one>
-        <many-to-one
-                name="belongArea"
-                column="BELONG_AREA_ID"
-                class="com.justonetech.system.domain.SysCodeDetail"
-                not-null="false"
-                >
-        </many-to-one>
 
 		<set name="projBids" inverse="true">
 			<key column="PROJECT_ID"/>
@@ -275,7 +268,10 @@
             <key column="PROJECT_ID"/>
             <one-to-many class="DataStageReport"/>
         </set>
-
+        <set name="projInfoAreas" inverse="true" order-by="id asc">
+            <key column="PROJECT_ID"/>
+            <one-to-many class="ProjInfoArea"/>
+        </set>
 	</class>	
     <query name="projinfo_all_data_query">
         <![CDATA[FROM ProjInfo]]>

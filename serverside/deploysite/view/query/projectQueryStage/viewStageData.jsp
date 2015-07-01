@@ -44,7 +44,7 @@
                     <td rowspan="${stepCount}">${bid.project.location}</td>
                     <td rowspan="${stepCount}">${bid.name}</td>
                     <td rowspan="${stepCount}">${bid.buildMileage}</td>
-                    <td rowspan="${stepCount}">${bid.belongArea.name}</td>
+                    <td rowspan="${stepCount}">${bid.belongAreaNames}</td>
                     <td rowspan="${stepCount}">${bid.startDate}</td>
                 </c:if>
                 <td rowspan="2">${step.name}</td>
