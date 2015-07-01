@@ -271,6 +271,8 @@ public class ProjInfoController extends BaseCRUDActionController<ProjInfo> {
             if (null == projBids || projBids.size() == 0) {
                 ProjBid projBid = new ProjBid();
                 projBid.setTypeCode(ProjBidType.TYPE_NODE.getCode());
+                projBid.setName(target.getName());
+                projBid.setCode("1");
                 projBid.setProject(target);
                 projBidService.save(projBid);
 
