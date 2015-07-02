@@ -5,9 +5,7 @@
         parent.flag = true;
         if (${result.code=='1'}) {
             $("#dealDate_" + bidId + "_" + stageId).val($("#planDate").val());
-        } else if (${result.code=='2'}) {
-            $("#dealDate_" + bidId + "_" + stageId).val($("#bjDate").val());
-        } else if (${result.code=='3'}) {
+        } else if (${result.code=='4'}) {
             $("#dealDate_" + bidId + "_" + stageId).val($("#question").val());
             document.getElementById("dealDate_" + bidId + "_" + stageId).title = document.getElementById("question").value;
         }
@@ -29,20 +27,7 @@
                 </td>
             </tr>
         </c:if>
-        <c:if test="${result.code=='2'}">
-            <tr class="tr_dark">
-                <td class="form_content">请选择办结完成日期：</td>
-            </tr>
-            <tr class="tr_dark">
-                <td class="form_content">
-                    办结日期：
-                    <input type="text" class="input_date" name="bjDate" id="bjDate" value="${currentDate}"
-                           readonly="true">
-                    <input type="button" class="button_calendar" value="" onClick="calendar('bjDate','')">
-                </td>
-            </tr>
-        </c:if>
-        <c:if test="${result.code=='3'}">
+        <c:if test="${result.code=='4'}">
             <tr class="tr_dark">
                 <td class="form_content">请填写办理受阻问题：</td>
             </tr>

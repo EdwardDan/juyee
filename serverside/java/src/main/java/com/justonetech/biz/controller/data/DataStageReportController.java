@@ -128,9 +128,9 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
      * @return 。
      */
     @RequestMapping
-    public String checkBidData(Model model, Long bidId, Long id) {
+    public String checkBidData(Model model, Long bidId, Long projectId) {
 
-        doCheckBidData(bidId, model, id);
+        doCheckBidData(bidId, model, projectId);
 
         return "view/data/dataStageReport/checkBidData";
     }
@@ -183,9 +183,9 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
      * @return 。
      */
     @RequestMapping
-    public String checkBidDataView(Model model, Long bidId, Long id) {
+    public String checkBidDataView(Model model, Long bidId, Long projectId) {
 
-        doCheckBidData(bidId, model, id);
+        doCheckBidData(bidId, model, projectId);
 
         return "view/data/dataStageReport/checkBidDataView";
     }
@@ -202,15 +202,19 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
     @RequestMapping
     public void save(HttpServletResponse response, @ModelAttribute("bean") DataStageReport entity, HttpServletRequest request, String reportLog) throws Exception {
         try {
-            DataStageReport target = new DataStageReport();
+            DataStageReport target;
             //获取并保存标段
             String projectBidId = request.getParameter("projectBidId");
             ProjBid projBid = projBidService.get(Long.valueOf(projectBidId));
             if (entity.getId() != null) {
                 DataStageReport dataStageReport = dataStageReportService.get(entity.getId());
-                if (null != dataStageReport.getBid() && (dataStageReport.getBid() == projBid)) {
+                if (null != dataStageReport.getBid() && (dataStageReport.getBid().getId().equals(projBid.getId()))) {
                     target = dataStageReport;
+                } else {
+                    target = new DataStageReport();
                 }
+            } else {
+                target = new DataStageReport();
             }
             target.setBid(projBid);
 
@@ -284,6 +288,7 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
      * @param model     。
      */
     private void doEditViewData(Long projectId, Model model) {
+        model.addAttribute("projectId", projectId);
         Calendar c = Calendar.getInstance();
         ProjInfo projInfo = projInfoService.get(projectId);
         List<DataStageReport> reportList = dataStageReportService.findByProperty("project.id", projectId);
@@ -311,8 +316,7 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
      * @param bidId 。
      * @param model 。
      */
-    private void doCheckBidData(Long bidId, Model model, Long id) {
-        DataStageReport dataStageReport = dataStageReportService.get(id);
+    private void doCheckBidData(Long bidId, Model model, Long projectId) {
         model.addAttribute("bidId", bidId);
         //办证阶段(表格维护)
         Calendar c = Calendar.getInstance();
@@ -325,17 +329,17 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
         model.addAttribute("results", results);
 
         //填报数据
+        //填报数据
         Map<String, Object> dataMap = new HashMap<String, Object>();
-        Set<DataStageReportItem> items = dataStageReport.getDataStageReportItems();
-        if (null != items && items.size() > 0) {
-            for (DataStageReportItem item : items) {
-                Map<String, Object> map = new HashMap<String, Object>();
-                map.put("resultId", item.getResult().getId());
-                map.put("resultCode", item.getResult().getCode());
-                map.put("resultName", item.getResult().getName());
-                map.put("dealDate", item.getDealDate());
-                dataMap.put(bidId + "_" + item.getStage().getId(), map);
-            }
+        String hql = "from DataStageReportItem where stageReport.project.id=? and stageReport.bid.id=? order by stageReport.year desc,stageReport.month desc,id desc";
+        List<DataStageReportItem> dataStageReportItems = dataStageReportItemService.findByQuery(hql, projectId, bidId);
+        for (DataStageReportItem item : dataStageReportItems) {
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("resultId", item.getResult().getId());
+            map.put("resultCode", item.getResult().getCode());
+            map.put("resultName", item.getResult().getName());
+            map.put("dealDate", item.getDealDate());
+            dataMap.put(bidId + "_" + item.getStage().getId(), map);
         }
         model.addAttribute("dataMap", dataMap);
     }
