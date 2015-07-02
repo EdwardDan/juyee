@@ -17,7 +17,7 @@
                 last_m = month;
             }
             var bidId = $("#projBid").val();
-            loadAjaxData("monthReportDiv", "${ctx}/dataNodeReport/nodeDataItem.do?id=${id}&month=" + month + "&bidId=" + bidId+"&type=View");
+            loadAjaxData("monthReportDiv", "${ctx}/dataNodeReport/nodeDataItem.do?id=${id}&month=" + month + "&bidId=" + bidId + "&type=View");
         }
     }
     $(function () {
@@ -58,7 +58,8 @@
                 <td class="form_content">
                     <select name="projBid" id="projBid" class="form_select_long"
                             onchange="loadMonthReport('${currentMonth}')">
-                        <c:if test="${projBids!= null&&fn:length(projBids)>0}"><c:forEach items="${projBids}" var="item">
+                        <c:if test="${projBids!= null&&fn:length(projBids)>0}"><c:forEach items="${projBids}"
+                                                                                          var="item">
                             <option value="${item.id}">${item.name}</option>
                         </c:forEach>
                         </c:if>
@@ -72,10 +73,10 @@
                         <tr align="center">
                             <c:forEach var="m" begin="1" end="12" step="1">
                                 <td width="8%" id="td${m}" onclick="loadMonthReport('${m}')"
-                                    <c:choose>
-                                    <c:when test="${currentMonth==m}">class="td_active" </c:when>
-                                    <c:otherwise>class="td_normal" style="cursor: pointer" title="查看当月数据"</c:otherwise>
-                                </c:choose>>${m}月
+                                        <c:choose>
+                                            <c:when test="${currentMonth==m}">class="td_active" </c:when>
+                                            <c:otherwise>class="td_normal" style="cursor: pointer" title="查看当月数据"</c:otherwise>
+                                        </c:choose>>${m}月
                                 </td>
                             </c:forEach>
                         </tr>

@@ -24,17 +24,22 @@
         }
     }
     //选择填报内容
-    function changeResult(objValue, bidId, stageId) {
-        if (objValue == 1 || objValue == 2 || objValue == 3) {
-            var dealDate = $("#dealDate_" + bidId + "_" + stageId).val();
-            openNewWindow("new", "填报页面", "${ctx}/dataStageReport/resultInput.do?resultCode=" + objValue + "&bidId=" + bidId + "&stageId=" + stageId + "&dealDate=" + dealDate, false, 500, 300);
-        } else {
-            $("#dealDate_" + bidId + "_" + stageId).val("");
+    function changeResult(obj, bidId, stageId) {
+        var objValue = obj.value;
+        var selectIndex = obj.selectedIndex;//获得是第几个被选中了
+        var selectText = obj.options[selectIndex].text //获得被选中的项目的文本
+        if ('' != objValue) {
+            if (objValue == 1 || objValue == 4) {
+                var dealDate = $("#dealDate_" + bidId + "_" + stageId).val();
+                openNewWindow("new", "填报页面", "${ctx}/dataStageReport/resultInput.do?resultCode=" + objValue + "&bidId=" + bidId + "&stageId=" + stageId + "&dealDate=" + dealDate, false, 500, 300);
+            } else {
+                $("#dealDate_" + bidId + "_" + stageId).val(selectText);
+            }
         }
     }
     //切换标段
     function checkBid(obj) {
-        loadAjaxData("checkBid", "${ctx}/dataStageReport/checkBidData.do?bidId=" + obj.value + "&id=${bean.id}");
+        loadAjaxData("checkBid", "${ctx}/dataStageReport/checkBidData.do?bidId=" + obj.value+"&projectId=${projectId}" + "&id=${bean.id}");
     }
 </script>
 <form:form commandName="bean">
