@@ -17,7 +17,7 @@
                 last_m = month;
             }
             var bidId = $("#projBid").val();
-            loadAjaxData("monthReportDiv", "${ctx}/dataNodeReport/nodeDataItem.do?id=${id}&month=" + month + "&bidId=" + bidId + "&type=View");
+            loadAjaxData("monthReportDiv", "${ctx}/dataNodeReport/nodeDataItem.do?id=${id}&month=" + month + "&bidId=" + bidId);
         }
     }
     $(function () {
@@ -58,11 +58,10 @@
                 <td class="form_content">
                     <select name="projBid" id="projBid" class="form_select_long"
                             onchange="loadMonthReport('${currentMonth}')">
-                        <c:if test="${projBids!= null&&fn:length(projBids)>0}"><c:forEach items="${projBids}"
-                                                                                          var="item">
+                        <option value=""></option>
+                        <c:forEach items="${projBids}" var="item">
                             <option value="${item.id}">${item.name}</option>
                         </c:forEach>
-                        </c:if>
                     </select>
                 </td>
             </tr>

@@ -24,7 +24,7 @@
         <td rowspan="3" nowrap>建设里程</td>
         <td rowspan="3" nowrap>涉及区县</td>
         <td rowspan="3" nowrap>开工日期</td>
-        <td rowspan="3" nowrap>上报单位类型</td>
+        <c:if test="${stepSize>1}"><td rowspan="3" nowrap>上报单位类型</td></c:if>
         <c:forEach items="${firstNodes}" var="firstNode">
             <td colspan="${firstNode.totalChildCount}" <c:if test="${firstNode.totalLevel<3}">rowspan="${firstNode.totalLevel}" </c:if> nowrap>${firstNode.name}</td>
         </c:forEach>
@@ -39,31 +39,36 @@
             <td width="4%" nowrap>&nbsp;&nbsp;${thirdNode.name}&nbsp;&nbsp;</td>
         </c:forEach>
     </tr>
-    <c:forEach items="${bids}" var="bid" varStatus="bidIndex">
-        <c:set var="stepCount" value="${fn:length(steps)*2}" />
-        <c:forEach items="${steps}" var="step" varStatus="stepIndex">
-            <tr class="tr_light">
-                <c:if test="${stepIndex.index == 0}">
-                    <td rowspan="${stepCount}" width="2%" nowrap>${bidIndex.index+1}</td>
-                    <td rowspan="${stepCount}">${bid.project.name}</td>
-                    <td rowspan="${stepCount}">${bid.project.location}</td>
-                    <td rowspan="${stepCount}">${bid.name}</td>
-                    <td rowspan="${stepCount}">${bid.buildMileage}</td>
-                    <td rowspan="${stepCount}">${bid.belongAreaNames}</td>
-                    <td rowspan="${stepCount}" nowrap>${bid.startDate}</td>
-                </c:if>
-                <td rowspan="2">${step.name}</td>
-                <c:forEach items="${leafNodes}" var="leafNode">
-                    <c:set var="dataKey" value="${bid.id}_${step.id}_${leafNode.id}" />
-                    <td>&nbsp;${dataMap[dataKey].content}</td>
-                </c:forEach>
-            </tr>
-            <tr class="tr_dark">
-                <c:forEach items="${firstNodes}" var="firstNode">
-                    <c:set var="dataKey" value="${bid.id}_${step.id}_${firstNode.childFirstLeafId}" />
-                    <td colspan="${firstNode.totalChildCount}">&nbsp;${dataMap[dataKey].problem}</td>
-                </c:forEach>
-            </tr>
+    <c:forEach items="${projects}" var="projInfo" varStatus="projIndex">
+        <c:forEach items="${projInfo.bids}" var="bid" varStatus="bidIndex">
+            <c:set var="stepCount" value="${fn:length(steps)*2}" />
+            <c:set var="bidCount" value="${fn:length(projInfo.bids)*stepCount}" />
+            <c:forEach items="${steps}" var="step" varStatus="stepIndex">
+                <tr class="tr_light">
+                    <c:if test="${stepIndex.index == 0}">
+                        <c:if test="${bidIndex.index == 0}">
+                            <td rowspan="${bidCount}" width="2%" nowrap>${projIndex.index+1}</td>
+                            <td rowspan="${bidCount}">${bid.project.name}</td>
+                            <td rowspan="${bidCount}">${bid.project.location}</td>
+                        </c:if>
+                        <td rowspan="${stepCount}">${bid.name}</td>
+                        <td rowspan="${stepCount}">${bid.buildMileage}</td>
+                        <td rowspan="${stepCount}">${bid.belongAreaNames}</td>
+                        <td rowspan="${stepCount}" nowrap>${bid.startDate}</td>
+                    </c:if>
+                    <c:if test="${stepSize>1}"><td rowspan="2">${step.name}</td></c:if>
+                    <c:forEach items="${leafNodes}" var="leafNode">
+                        <c:set var="dataKey" value="${bid.id}_${step.id}_${leafNode.id}" />
+                        <td>&nbsp;${dataMap[dataKey].content}</td>
+                    </c:forEach>
+                </tr>
+                <tr class="tr_dark">
+                    <c:forEach items="${firstNodes}" var="firstNode">
+                        <c:set var="dataKey" value="${bid.id}_${step.id}_${firstNode.childFirstLeafId}" />
+                        <td colspan="${firstNode.totalChildCount}">&nbsp;${dataMap[dataKey].problem}</td>
+                    </c:forEach>
+                </tr>
+            </c:forEach>
         </c:forEach>
     </c:forEach>
 </table>

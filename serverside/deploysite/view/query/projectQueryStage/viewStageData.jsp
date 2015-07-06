@@ -24,7 +24,7 @@
         <td rowspan="2" nowrap>建设里程</td>
         <td rowspan="2" nowrap>涉及区县</td>
         <td rowspan="2" nowrap>开工日期</td>
-        <td rowspan="2" nowrap>上报单位类型</td>
+        <c:if test="${stepSize>1}"><td rowspan="2" nowrap>上报单位类型</td></c:if>
         <c:forEach items="${firstStages}" var="firstStage">
             <td colspan="${fn:length(firstStage.projStages)}" <c:if test="${fn:length(firstStage.projStages)<1}">rowspan="2" </c:if> nowrap>${firstStage.name}</td>
         </c:forEach>
@@ -34,31 +34,36 @@
             <td width="4%" nowrap>&nbsp;&nbsp;${secondStage.name}&nbsp;&nbsp;</td>
         </c:forEach>
     </tr>
-    <c:forEach items="${bids}" var="bid" varStatus="bidIndex">
-        <c:set var="stepCount" value="${fn:length(steps)*2}" />
+    <c:forEach items="${projects}" var="projInfo" varStatus="projIndex">
+    <c:forEach items="${projInfo.bids}" var="bid" varStatus="bidIndex">
+        <c:set var="stepCount" value="${fn:length(steps)*1}" />
+        <c:set var="bidCount" value="${fn:length(projInfo.bids)}" />
         <c:forEach items="${steps}" var="step" varStatus="stepIndex">
             <tr class="tr_light">
                 <c:if test="${stepIndex.index == 0}">
-                    <td rowspan="${stepCount}" width="2%">${bidIndex.index+1}</td>
-                    <td rowspan="${stepCount}">${bid.project.name}</td>
-                    <td rowspan="${stepCount}">${bid.project.location}</td>
+                    <c:if test="${bidIndex.index == 0}">
+                        <td rowspan="${bidCount}" width="2%">${projIndex.index+1}</td>
+                        <td rowspan="${bidCount}">${bid.project.name}</td>
+                        <td rowspan="${bidCount}">${bid.project.location}</td>
+                    </c:if>
                     <td rowspan="${stepCount}">${bid.name}</td>
                     <td rowspan="${stepCount}">${bid.buildMileage}</td>
                     <td rowspan="${stepCount}">${bid.belongAreaNames}</td>
                     <td rowspan="${stepCount}">${bid.startDate}</td>
                 </c:if>
-                <td rowspan="2">${step.name}</td>
+                <c:if test="${stepSize>1}"><td>${step.name}</td></c:if>
                 <c:forEach items="${leafStages}" var="leafStage">
                     <c:set var="dataKey" value="${bid.id}_${step.id}_${leafStage.id}" />
-                    <td nowrap class="td_normal" title="${dataMap[dataKey].resultName}"><span <c:if test="${dataMap[dataKey].resultName!=lastMap[dataKey].resultName}">class="td_change"</c:if>>${dataMap[dataKey].resultName}</span></td>
+                    <td nowrap class="td_normal" title="${dataMap[dataKey].resultName}" <c:if test="${not empty dataMap[dataKey].color}">style="background-color: ${dataMap[dataKey].color}"</c:if>>${dataMap[dataKey].resultName}</td>
                 </c:forEach>
             </tr>
-            <tr class="tr_dark">
-                <c:forEach items="${leafStages}" var="leafStage">
-                    <c:set var="dataKey" value="${bid.id}_${step.id}_${leafStage.id}" />
-                    <td nowrap class="td_normal" title="${dataMap[dataKey].dealDate}"><span <c:if test="${dataMap[dataKey].dealDate!=lastMap[dataKey].dealDate}">class="td_change"</c:if>><sys:cutString length="10">${dataMap[dataKey].dealDate}</sys:cutString></span></td>
-                </c:forEach>
-            </tr>
+            <%--<tr class="tr_dark">--%>
+                <%--<c:forEach items="${leafStages}" var="leafStage">--%>
+                    <%--<c:set var="dataKey" value="${bid.id}_${step.id}_${leafStage.id}" />--%>
+                    <%--<td nowrap class="td_normal" title="${dataMap[dataKey].dealDate}"><span <c:if test="${dataMap[dataKey].dealDate!=lastMap[dataKey].dealDate}">class="td_change"</c:if>><sys:cutString length="10">${dataMap[dataKey].dealDate}</sys:cutString></span></td>--%>
+                <%--</c:forEach>--%>
+            <%--</tr>--%>
+        </c:forEach>
         </c:forEach>
     </c:forEach>
 </table>
