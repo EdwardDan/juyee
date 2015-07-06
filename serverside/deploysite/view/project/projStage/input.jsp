@@ -7,13 +7,6 @@
         var validateCondition = [
             {name:"code", rule:"validate[required]"},
             {name:"name", rule:"validate[required]"}
-            //{name:"auditDept", rule:"validate[required,maxSize[200]]"},
-            //{name:"isValid", rule:"validate[required,maxSize[1]]"},
-            //{name:"defaultDays", rule:"validate[required,custom[integer],maxSize[5]"},
-            //{name:"alertDays", rule:"validate[required,custom[integer],maxSize[5]"},
-            <%--//{name:"linkInfo", rule:"validate[required,maxSize[${prop.length}]]"},--%>
-            //{name:"isLeaf", rule:"validate[required,maxSize[1]]"},
-            //{name:"treeId", rule:"validate[required,maxSize[300]]"},
         ];
         validateInit(validateCondition, formId);
     });
@@ -23,19 +16,13 @@
         if (!validateForm(formId)) {
             return;
         }
-
-        //加入其他业务判断
-//        if ($('#name').val() == '') {
-//            showInfoMsg('请输入姓名！',null);
-//            return;
-//        }
-
         //提交表单
         saveAjaxData("${ctx}/projStage/save.do", formId);
     }
 </script>
 <form:form commandName="bean">
     <form:hidden path="id"/>
+    <form:hidden path="year"/>
     <input type="hidden" name="parent" id="parent" value="${bean.parent.id}"/>
 
     <div class="form_div" style="text-align: center">

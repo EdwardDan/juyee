@@ -61,18 +61,18 @@
         if (bidCountOfStage == 0) {
             alert("该项目办证推进标段数为零暂时无法查看，请先在[项目办证标段管理]中添加标段并填报数据才可以查看！");
         } else {
-            openWindow("办证推进查看", "${ctx}/dataStageReport/view.do?projectId=" + id, true);
+            openWindow("办证推进查看", "${ctx}/dataStageReport/view.do?projectId=" + id, true, 1000, 600);
         }
     }
     function doEditBzjd(id, bidCountOfStage) {
         if (bidCountOfStage == 0) {
             alert("该项目办证推进标段数为零，请先在[项目办证标段管理]中添加标段！");
         } else {
-            openWindow("办证推进填报", "${ctx}/dataStageReport/modify.do?projectId=" + id, true);
+            openWindow("办证推进填报", "${ctx}/dataStageReport/modify.do?projectId=" + id, true, 1000, 600);
         }
     }
     function doEditXxjd(projectId) {
-        openWindow("形象进度填报", "${ctx}/dataNodeReport/modify.do?projectId=" + projectId, true);
+        openWindow("形象进度填报", "${ctx}/dataNodeReport/modify.do?projectId=" + projectId, true, 1000, 600);
     }
 </script>
 

@@ -6,11 +6,7 @@
         //页面验证初始化
         var validateCondition = [
             //{name:"code", rule:"validate[required,maxSize[200]]"},
-            {name:"name", rule:"validate[required,maxSize[200]]"},
-            //{name:"isValid", rule:"validate[required,maxSize[1]]"},
-            //{name:"description", rule:"validate[required,maxSize[${prop.length}]]"},
-            //{name:"isLeaf", rule:"validate[required,maxSize[1]]"},
-            //{name:"treeId", rule:"validate[required,maxSize[300]]"},
+            {name:"name", rule:"validate[required,maxSize[200]]"}
         ];
         validateInit(validateCondition, formId);
     });
@@ -26,6 +22,7 @@
 </script>
 <form:form commandName="bean">
     <form:hidden path="id"/>
+    <form:hidden path="year"/>
     <input type="hidden" name="parent" id="parent" value="${bean.parent.id}"/>
 
     <div class="form_div">
