@@ -26,23 +26,18 @@
         <tr class="tr_dark">
             <td class="form_label_right" style="width: 15%;">选择标段：</td>
             <td class="form_content">
-                <c:if test="${fn:length(bean.project.projBids)>0}">
-                    <select class="form_select" name="projectBidId" id="projectBidId" onchange="checkBid(this)">
-                        <c:forEach items="${bean.project.projBids}" var="projectBid">
-                            <c:if test="${projectBid.typeCode == bidTypeCode}">
-                                <option value="${projectBid.id}">${projectBid.name}</option>
-                            </c:if>
-                        </c:forEach>
-                    </select>
-                </c:if>
+                <select class="form_select" name="projectBidId" id="projectBidId" onchange="checkBid(this)">
+                    <c:forEach items="${bids}" var="projectBid">
+                        <option value="${projectBid.id}">${projectBid.name}</option>
+                    </c:forEach>
+                </select>
             </td>
         </tr>
     </table>
     <div class="div_space"></div>
-    <c:if test="${fn:length(bean.project.projBids)>0}">
+    <c:if test="${fn:length(bids)>0}">
         <div class="form_div" id="checkBid"></div>
     </c:if>
-
     <div class="div_space"></div>
     <div class="form_div" style="text-align: center;">
         <input type="button" value="关闭" class="button_cancel" onclick="closeWindow()">

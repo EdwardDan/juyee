@@ -142,11 +142,12 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
      * @return .
      */
     @RequestMapping
-    public String resultInput(Model model, String resultCode, Long bidId, Long stageId, String dealDate) {
+    public String resultInput(Model model, String resultCode, Long bidId, Long stepId, Long stageId, String dealDate) {
         if (!StringHelper.isEmpty(resultCode)) {
             SysCodeDetail codeDetailByCode = sysCodeManager.getCodeDetailByCode(Constants.DATA_STAGE_RESULT, resultCode);
             model.addAttribute("result", codeDetailByCode);
             model.addAttribute("bidId", bidId);
+            model.addAttribute("stepId", stepId);
             model.addAttribute("stageId", stageId);
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             if (!StringHelper.isEmpty(dealDate)) {
@@ -248,30 +249,37 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
             dataStageReportItemService.batchDelete(itemList, itemList.size());
 
             //保存详细表数据
-            Calendar c = Calendar.getInstance();
             String hqlStage = "from ProjStage where isValid=1 order by treeId asc";
+//            Calendar c = Calendar.getInstance();
 //            String hqlStage = "from ProjStage where year=" + c.get(Calendar.YEAR) + " and isValid=1 order by treeId asc";
             List<ProjStage> projStages = projStageService.findByQuery(hqlStage);
+            //审核步骤
+            List<SysCodeDetail> steps = sysCodeManager.getCodeListByCode(Constants.DATA_REPORT_STEP);
             List<DataStageReportItem> listItem = new ArrayList<DataStageReportItem>();
             for (ProjStage stage : projStages) {
-                Long stageId = stage.getId();
-                String resultCode = request.getParameter("resultCode_" + target.getBid().getId() + "_" + stageId);
-                String dealDate = request.getParameter("dealDate_" + target.getBid().getId() + "_" + stageId);
-                if (!StringHelper.isEmpty(resultCode)) {
-                    DataStageReportItem reportItem = new DataStageReportItem();
-                    reportItem.setStageReport(target);
-                    reportItem.setStage(stage);
-                    SysCodeDetail result = sysCodeManager.getCodeDetailByCode(Constants.DATA_STAGE_RESULT, resultCode);
-                    reportItem.setResult(result);
-                    reportItem.setResultDesc(result.getName());
-                    if (!StringHelper.isEmpty(dealDate)) {
-                        reportItem.setDealDate(dealDate);
+                for (SysCodeDetail step : steps) {
+                    if (step.getIsValid()) {
+                        Long stageId = stage.getId();
+                        Long stepId = step.getId();
+                        String resultCode = request.getParameter("resultCode_" + target.getBid().getId() + "_" + stepId + "_" + stageId);
+                        String dealDate = request.getParameter("dealDate_" + target.getBid().getId() + "_" + stepId + "_" + stageId);
+                        if (!StringHelper.isEmpty(resultCode)) {
+                            DataStageReportItem reportItem = new DataStageReportItem();
+                            reportItem.setStageReport(target);
+                            reportItem.setStep(step);
+                            reportItem.setStage(stage);
+                            SysCodeDetail result = sysCodeManager.getCodeDetailByCode(Constants.DATA_STAGE_RESULT, resultCode);
+                            reportItem.setResult(result);
+                            reportItem.setResultDesc(result.getName());
+                            if (!StringHelper.isEmpty(dealDate)) {
+                                reportItem.setDealDate(dealDate);
+                            }
+                            listItem.add(reportItem);
+                        }
                     }
-                    listItem.add(reportItem);
                 }
             }
             dataStageReportItemService.batchSave(listItem, listItem.size());
-
         } catch (Exception e) {
             log.error("error", e);
             super.processException(response, e);
@@ -318,17 +326,17 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
     private void doCheckBidData(Long bidId, Model model, Long projectId) {
         model.addAttribute("bidId", bidId);
         //办证阶段(表格维护)
-        Calendar c = Calendar.getInstance();
         String hqlStage = "from ProjStage where isValid=1 order by treeId asc";
+//        Calendar c = Calendar.getInstance();
 //        String hqlStage = "from ProjStage where year=" + c.get(Calendar.YEAR) + " and isValid=1 order by treeId asc";
         List<ProjStage> projStages = projStageService.findByQuery(hqlStage);
         model.addAttribute("projStages", projStages);
-
+        //审核步骤
+        List<SysCodeDetail> steps = sysCodeManager.getCodeListByCode(Constants.DATA_REPORT_STEP);
+        model.addAttribute("steps", steps);
         //办证推进结果
         List<SysCodeDetail> results = sysCodeManager.getCodeListByCode(Constants.DATA_STAGE_RESULT);
         model.addAttribute("results", results);
-
-        //填报数据
         //填报数据
         Map<String, Object> dataMap = new HashMap<String, Object>();
         String hql = "from DataStageReportItem where stageReport.project.id=? and stageReport.bid.id=? order by stageReport.year desc,stageReport.month desc,id desc";
@@ -339,7 +347,10 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
             map.put("resultCode", item.getResult().getCode());
             map.put("resultName", item.getResult().getName());
             map.put("dealDate", item.getDealDate());
-            dataMap.put(bidId + "_" + item.getStage().getId(), map);
+            SysCodeDetail step = item.getStep();
+            if (null != step) {
+                dataMap.put(bidId + "_" + step.getId() + "_" + item.getStage().getId(), map);
+            }
         }
         model.addAttribute("dataMap", dataMap);
     }

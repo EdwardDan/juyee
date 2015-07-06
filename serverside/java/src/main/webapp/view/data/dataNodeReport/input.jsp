@@ -6,15 +6,9 @@
     var changeFlag = false;
     $(function () {
         //页面验证初始化
-        var validateCondition = [
-            //{name:"year", rule:"validate[required,custom[integer],maxSize[4]"},
-            //{name:"month", rule:"validate[required,custom[integer],maxSize[2]"},
-            //{name:"createTime", rule:"validate[required,maxSize[7]]"},
-            //{name:"createUser", rule:"validate[required,maxSize[100]]"},
-            //{name:"updateTime", rule:"validate[required,maxSize[7]]"},
-            //{name:"updateUser", rule:"validate[required,maxSize[100]]"},
-        ];
+        var validateCondition = [];
         validateInit(validateCondition, formId);
+        loadMonthReport("${currentMonth}");
     });
     //保存操作
     function save(btn) {
@@ -22,12 +16,7 @@
             return;
         }
         //提交表单
-        var bidId = $("#projBid").val();
-        if (bidId == null) {
-            alert("标段不能为空！")
-        } else {
-            saveAjaxData("${ctx}/dataNodeReport/save.do?month=" + last_m, formId);
-        }
+        saveAjaxData("${ctx}/dataNodeReport/save.do?month=" + last_m, formId);
     }
 
     function loadMonthReport(month) {
@@ -46,17 +35,13 @@
             loadAjaxData("monthReportDiv", "${ctx}/dataNodeReport/nodeDataItem.do?id=${id}&month=" + month + "&bidId=" + bidId);
         }
     }
-    $(function () {
-        loadMonthReport("${currentMonth}");
-    });
 </script>
 <style type="text/css">
     .td_normal {
         height: 20px;
         background-color: white;
     }
-
-    .td_active {
+    .td_active{
         height: 20px;
         background-color: #0074cc;
         font-weight: bold;
@@ -84,10 +69,10 @@
                 <td class="form_content">
                     <select name="projBid" id="projBid" class="form_select_long"
                             onchange="loadMonthReport('${currentMonth}')">
-                        <c:if test="${projBids!= null&&fn:length(projBids)>0}"><c:forEach items="${projBids}"
-                                                                                          var="item">
+                        <option value=""></option>
+                        <c:forEach items="${projBids}" var="item">
                             <option value="${item.id}">${item.name}</option>
-                        </c:forEach></c:if>
+                        </c:forEach>
                     </select>
                 </td>
             </tr>
@@ -98,10 +83,11 @@
                         <tr align="center">
                             <c:forEach var="m" begin="1" end="12" step="1">
                                 <td width="8%" id="td${m}" onclick="loadMonthReport('${m}')"
-                                    <c:choose>
-                                    <c:when test="${currentMonth==m}">class="td_active" </c:when>
-                                    <c:otherwise>class="td_normal" style="cursor: pointer" title="查看当月数据"</c:otherwise>
-                                </c:choose>>${m}月
+                                        <c:choose>
+                                            <c:when test="${currentMonth==m}">class="td_active" </c:when>
+                                            <c:otherwise>class="td_normal" style="cursor: pointer"
+                                                title="查看当月数据"</c:otherwise>
+                                        </c:choose>>${m}月
                                 </td>
                             </c:forEach>
                         </tr>

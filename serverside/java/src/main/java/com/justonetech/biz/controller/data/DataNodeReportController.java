@@ -154,34 +154,33 @@ public class DataNodeReportController extends BaseCRUDActionController<DataNodeR
      * @return .
      */
     @RequestMapping
-    public String nodeDataItem(Model model, Long id, int month, String bidId ,String type) {
+    public String nodeDataItem(Model model, Long id, Integer month, Long bidId) {
         //办证阶段
         List<ProjNode> firstNodes = projNodeService.findByQuery("from ProjNode where isValid=1 and parent.id is null order by treeId asc");
         model.addAttribute("firstNodes", firstNodes);
-
-        if (id != null && !id.equals("")) {
+        //审核步骤
+        List<SysCodeDetail> steps = sysCodeManager.getCodeListByCode(Constants.DATA_REPORT_STEP);
+        model.addAttribute("steps", steps);
+        if (null != id) {
             //标段列表
             ProjInfo projInfo = projInfoService.get(id);
-            List<ProjBid> bids = getBids(id);
-            if (bidId == null && bids.size() > 0) {
-                bidId = bids.iterator().next().getId().toString();
-            }
+//            List<ProjBid> bids = getBids(id);
+//            if (null == bidId && bids.size() > 0) {
+//                bidId = bids.iterator().next().getId();
+//            }
             //填报数据
-            Map<Long, Object> dataMap = new HashMap<Long, Object>();
+            Map<String, Object> dataMap = new HashMap<String, Object>();
             List<DataNodeReportItem> dataNodeReportItems = findDataItems(id, projInfo.getYear(), month, bidId);
             for (DataNodeReportItem item : dataNodeReportItems) {
                 Map<String, Object> map = new HashMap<String, Object>();
                 map.put("content", item.getContent());
                 map.put("problem", item.getProblem());
-                dataMap.put(item.getNode().getId(), map);
+                dataMap.put(item.getNode().getId() + "_" + item.getStep().getId(), map);
             }
             model.addAttribute("dataMap", dataMap);
         }
-           String url="view/data/dataNodeReport/nodeDataItem";
-        if(type!=null){
-            url+=type;
-        }
-            return url;
+
+        return "view/data/dataNodeReport/nodeDataItem";
     }
 
     /**
@@ -251,32 +250,38 @@ public class DataNodeReportController extends BaseCRUDActionController<DataNodeR
             dataNodeReportService.save(target);
             //保存之前先删除旧数据
             if (target.getProject() != null && target.getBid() != null) {
-                List<DataNodeReportItem> dataNodeReportItems = findDataItems(target.getProject().getId(), target.getProject().getYear(), Integer.valueOf(month), target.getBid().getId().toString());
+                List<DataNodeReportItem> dataNodeReportItems = findDataItems(target.getProject().getId(), target.getProject().getYear(), Integer.valueOf(month), target.getBid().getId());
                 dataNodeReportItemService.batchDelete(dataNodeReportItems, dataNodeReportItems.size());
             }
 
             //保存填报明细
             List<ProjNode> leafNodes = projNodeService.findByQuery("from ProjNode where isValid=1 and isLeaf=1  order by treeId asc");
             //审核步骤
+            List<SysCodeDetail> steps = sysCodeManager.getCodeListByCode(Constants.DATA_REPORT_STEP);
             List<DataNodeReportItem> dataItems = new ArrayList<DataNodeReportItem>();
             for (ProjNode leafNode : leafNodes) {
                 Long firstNodeId = leafNode.getFirstNodeId();
-                    String contentName = leafNode.getId() + "";
-                    String problemName = firstNodeId + "_problem";
-                    String content = request.getParameter(contentName);
-                    String problem = request.getParameter(problemName);
-                    if (!StringHelper.isEmpty(problem) || !StringHelper.isEmpty(content)) {
-                        DataNodeReportItem dataItem = new DataNodeReportItem();
-                        if (!StringHelper.isEmpty(problem)) {
-                            dataItem.setProblem(problem);
+                for (SysCodeDetail step : steps) {
+                    if (step.getIsValid()) {
+                        String contentName = leafNode.getId() + "_" + step.getId();
+                        String problemName = firstNodeId + "_" + step.getId() + "_problem";
+                        String content = request.getParameter(contentName);
+                        String problem = request.getParameter(problemName);
+                        if (!StringHelper.isEmpty(problem) || !StringHelper.isEmpty(content)) {
+                            DataNodeReportItem dataItem = new DataNodeReportItem();
+                            if (!StringHelper.isEmpty(problem)) {
+                                dataItem.setProblem(problem);
+                            }
+                            if (!StringHelper.isEmpty(content)) {
+                                dataItem.setContent(content);
+                            }
+                            dataItem.setNode(leafNode);
+                            dataItem.setStep(step);
+                            dataItem.setNodeReport(target);
+                            dataItems.add(dataItem);
                         }
-                        if (!StringHelper.isEmpty(content)) {
-                            dataItem.setContent(content);
-                        }
-                        dataItem.setNode(leafNode);
-                        dataItem.setNodeReport(target);
-                        dataItems.add(dataItem);
                     }
+                }
             }
             dataNodeReportItemService.batchSave(dataItems, dataItems.size());
         } catch (Exception e) {
@@ -304,30 +309,28 @@ public class DataNodeReportController extends BaseCRUDActionController<DataNodeR
     /**
      * 获取已填报的信息
      *
-     * @param projectId
-     * @param year
-     * @param month
-     * @param bidId
-     * @return
+     * @param projectId .
+     * @param year      .
+     * @param month     .
+     * @param bidId     .
+     * @return .
      */
-    private List<DataNodeReportItem> findDataItems(Long projectId, Integer year, Integer month, String bidId) {
-        String hql = "from DataNodeReportItem where nodeReport.project.id=? and nodeReport.year=? and nodeReport.month=?  ";
-        if(!StringHelper.isEmpty(bidId)){
-            hql+=" and nodeReport.bid.id="+bidId;
+    private List<DataNodeReportItem> findDataItems(Long projectId, Integer year, Integer month, Long bidId) {
+        String hql = "from DataNodeReportItem where nodeReport.project.id=" + projectId + " and nodeReport.year=" + year + " and nodeReport.month=" + month;
+        if (null != bidId) {
+            hql += " and nodeReport.bid.id=" + bidId;
         }
-        hql+=" order by id asc";
-        List<DataNodeReportItem> dataNodeReportItems = dataNodeReportItemService.findByQuery(hql, projectId, year, month);
-        return dataNodeReportItems;
+        hql += "order by id asc";
+        return dataNodeReportItemService.findByQuery(hql);
     }
 
     /**
      * 获取形象进度标段
      *
-     * @param projectId
-     * @return
+     * @param projectId .
+     * @return .
      */
     private List<ProjBid> getBids(Long projectId) {
-        List<ProjBid> projBids = projBidService.findByQuery(" from ProjBid where project.id=" + projectId + " and  typeCode='" + ProjBidType.TYPE_NODE.getCode() + "'");
-        return projBids;
+        return projBidService.findByQuery(" from ProjBid where project.id=" + projectId + " and  typeCode='" + ProjBidType.TYPE_NODE.getCode() + "'");
     }
 }

@@ -7,7 +7,7 @@
         //页面验证初始化
         var validateCondition = [];
         validateInit(validateCondition, formId);
-        <c:if test="${fn:length(bean.project.projBids)>0}">
+        <c:if test="${fn:length(bids)>0}">
         checkBid(document.getElementById("projectBidId"));
         </c:if>
     });
@@ -17,29 +17,28 @@
             return;
         }
         if (flag) {
-//            alert("页面数据有改动，需要保存历史数据！");
             saveAjaxData("${ctx}/dataStageReport/save.do?reportLog=reportLog", formId);
         } else {
             saveAjaxData("${ctx}/dataStageReport/save.do", formId);
         }
     }
     //选择填报内容
-    function changeResult(obj, bidId, stageId) {
+    function changeResult(obj, bidId, stepId, stageId) {
         var objValue = obj.value;
         var selectIndex = obj.selectedIndex;//获得是第几个被选中了
         var selectText = obj.options[selectIndex].text //获得被选中的项目的文本
         if ('' != objValue) {
             if (objValue == 1 || objValue == 4) {
-                var dealDate = $("#dealDate_" + bidId + "_" + stageId).val();
-                openNewWindow("new", "填报页面", "${ctx}/dataStageReport/resultInput.do?resultCode=" + objValue + "&bidId=" + bidId + "&stageId=" + stageId + "&dealDate=" + dealDate, false, 500, 300);
+                var dealDate = $("#dealDate_" + bidId + "_" + stepId + "_" + stageId).val();
+                openNewWindow("new", "填报页面", "${ctx}/dataStageReport/resultInput.do?resultCode=" + objValue + "&stepId=" + stepId + "&bidId=" + bidId + "&stageId=" + stageId + "&dealDate=" + dealDate, false, 500, 300);
             } else {
-                $("#dealDate_" + bidId + "_" + stageId).val(selectText);
+                $("#dealDate_" + bidId + "_" + stepId + "_" + stageId).val(selectText);
             }
         }
     }
     //切换标段
     function checkBid(obj) {
-        loadAjaxData("checkBid", "${ctx}/dataStageReport/checkBidData.do?bidId=" + obj.value+"&projectId=${projectId}" + "&id=${bean.id}");
+        loadAjaxData("checkBid", "${ctx}/dataStageReport/checkBidData.do?bidId=" + obj.value + "&projectId=${projectId}" + "&id=${bean.id}");
     }
 </script>
 <form:form commandName="bean">
@@ -70,7 +69,7 @@
             </tr>
         </table>
         <div class="div_space"></div>
-        <c:if test="${fn:length(bean.project.projBids)>0}">
+        <c:if test="${fn:length(bids)>0}">
             <div class="form_div" id="checkBid"></div>
         </c:if>
         <div class="div_space"></div>
