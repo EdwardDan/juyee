@@ -28,7 +28,7 @@
         var selectIndex = obj.selectedIndex;//获得是第几个被选中了
         var selectText = obj.options[selectIndex].text //获得被选中的项目的文本
         if ('' != objValue) {
-            if (objValue == 1 || objValue == 4) {
+            if (objValue == '${result1}' || objValue == '${result4}') {
                 var dealDate = $("#dealDate_" + bidId + "_" + stepId + "_" + stageId).val();
                 openNewWindow("new", "填报页面", "${ctx}/dataStageReport/resultInput.do?resultCode=" + objValue + "&stepId=" + stepId + "&bidId=" + bidId + "&stageId=" + stageId + "&dealDate=" + dealDate, false, 500, 300);
             } else {
