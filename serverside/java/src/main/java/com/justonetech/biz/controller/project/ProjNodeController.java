@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.Calendar;
 import java.util.List;
 
 
@@ -170,6 +171,8 @@ public class ProjNodeController extends BaseCRUDActionController<ProjNode> {
     @RequestMapping
     public String add(Model model, String parentId) {
         ProjNode projNode = new ProjNode();
+        Calendar c = Calendar.getInstance();
+        projNode.setYear(c.get(Calendar.YEAR));//默认年份
         projNode.setIsValid(true);//默认有效
         //如需增加其他默认值请在此添加
         if (!StringHelper.isEmpty(parentId) && !"root".equals(parentId)) {
@@ -231,9 +234,8 @@ public class ProjNodeController extends BaseCRUDActionController<ProjNode> {
                         "code",
                         "name",
                         "isValid",
+                        "year",
                         "description"
-//                        ,
-//                        "isLeaf"
                 });
 
             } else {

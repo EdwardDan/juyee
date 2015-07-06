@@ -187,7 +187,8 @@ public class ProjStageController extends BaseCRUDActionController<ProjStage> {
             projStage.setParent(projStageService.get(Long.valueOf(parentId)));
         }
         projStage.setIsValid(true);
-        projStage.setYear(Calendar.getInstance().getTime().getYear());
+        Calendar c = Calendar.getInstance();
+        projStage.setYear(c.get(Calendar.YEAR));//默认年份
         model.addAttribute("bean", projStage);
         return "view/project/projStage/input";
     }
@@ -244,13 +245,8 @@ public class ProjStageController extends BaseCRUDActionController<ProjStage> {
                         "defaultDays",
                         "alertDays",
                         "linkInfo",
-//                        "isLeaf",
-//                        "treeId"
+                        "year"
                 });
-                /*String parentId = request.getParameter("parent");
-                if (!StringHelper.isEmpty(parentId)) {
-                    target.setParent(projStageService.get(Long.valueOf(parentId)));
-                }*/
             } else {
                 target = entity;
             }
