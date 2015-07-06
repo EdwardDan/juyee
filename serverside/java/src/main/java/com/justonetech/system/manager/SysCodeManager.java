@@ -91,8 +91,7 @@ public class SysCodeManager {
      * @return SysCodeDetail列表
      */
     public List<SysCodeDetail> getCodeListByCode(String code) {
-        String hql = "from SysCodeDetail t where t.sysCode.code = '" + code
-                + "' order by t.treeId";
+        String hql = "from SysCodeDetail t where t.sysCode.code = '" + code + "' and isValid=1 order by t.treeId";
         return sysCodeDetailService.findByQuery(hql);
     }
 }
