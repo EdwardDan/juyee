@@ -148,13 +148,11 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
             model.addAttribute("result", codeDetailByCode);
             model.addAttribute("bidId", bidId);
             model.addAttribute("stageId", stageId);
-            if (StringHelper.isEmpty(dealDate)) {
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                model.addAttribute("currentDate", sdf.format(new Date(System.currentTimeMillis())));
-            } else {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            if (!StringHelper.isEmpty(dealDate)) {
                 model.addAttribute("dealDate", dealDate);
-                model.addAttribute("currentDate", dealDate);
             }
+            model.addAttribute("currentDate", sdf.format(new Date(System.currentTimeMillis())));
         }
 
         return "view/data/dataStageReport/resultInput";
