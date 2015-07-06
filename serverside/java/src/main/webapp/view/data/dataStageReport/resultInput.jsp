@@ -3,9 +3,9 @@
 <script type="text/javascript">
     function reBackData(obj, bidId, stepId, stageId) {
         parent.flag = true;
-        if (${result.code=='1'}) {
+        if (${result.code==result1}) {
             $("#dealDate_" + bidId + "_" + stepId + "_" + stageId).val($("#planDate").val());
-        } else if (${result.code=='4'}) {
+        } else if (${result.code==result4}) {
             $("#dealDate_" + bidId + "_" + stepId + "_" + stageId).val($("#question").val());
             document.getElementById("dealDate_" + bidId + "_" + stepId + "_" + stageId).title = document.getElementById("question").value;
         }
@@ -13,7 +13,7 @@
 </script>
 <fieldset class="form_fieldset">
     <table cellpadding="0" cellspacing="0" class="form_table">
-        <c:if test="${result.code=='1'}">
+        <c:if test="${result.code==result1}">
             <tr class="tr_dark">
                 <td class="form_content">请选择计划完成日期：</td>
             </tr>
@@ -27,7 +27,7 @@
                 </td>
             </tr>
         </c:if>
-        <c:if test="${result.code=='4'}">
+        <c:if test="${result.code==result4}">
             <tr class="tr_dark">
                 <td class="form_content">请填写办理受阻问题：</td>
             </tr>

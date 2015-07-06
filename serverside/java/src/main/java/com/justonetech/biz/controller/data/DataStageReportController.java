@@ -116,6 +116,7 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
     public String modify(Model model, Long projectId) {
 
         doEditViewData(projectId, model);
+        pushDataStageResult(model);
 
         return "view/data/dataStageReport/input";
     }
@@ -155,6 +156,7 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
             }
             model.addAttribute("currentDate", sdf.format(new Date(System.currentTimeMillis())));
         }
+        pushDataStageResult(model);
 
         return "view/data/dataStageReport/resultInput";
     }
@@ -353,5 +355,13 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
             }
         }
         model.addAttribute("dataMap", dataMap);
+    }
+
+    public void pushDataStageResult(Model model) {
+        model.addAttribute("result1", Constants.DATA_STAGE_RESULT_1);
+        model.addAttribute("result2", Constants.DATA_STAGE_RESULT_2);
+        model.addAttribute("result3", Constants.DATA_STAGE_RESULT_3);
+        model.addAttribute("result4", Constants.DATA_STAGE_RESULT_4);
+        model.addAttribute("result5", Constants.DATA_STAGE_RESULT_5);
     }
 }
