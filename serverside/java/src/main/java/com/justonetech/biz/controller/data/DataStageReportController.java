@@ -249,7 +249,8 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
 
             //保存详细表数据
             Calendar c = Calendar.getInstance();
-            String hqlStage = "from ProjStage where year=" + c.get(Calendar.YEAR) + " and isValid=1 order by treeId asc";
+            String hqlStage = "from ProjStage where isValid=1 order by treeId asc";
+//            String hqlStage = "from ProjStage where year=" + c.get(Calendar.YEAR) + " and isValid=1 order by treeId asc";
             List<ProjStage> projStages = projStageService.findByQuery(hqlStage);
             List<DataStageReportItem> listItem = new ArrayList<DataStageReportItem>();
             for (ProjStage stage : projStages) {
@@ -318,7 +319,8 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
         model.addAttribute("bidId", bidId);
         //办证阶段(表格维护)
         Calendar c = Calendar.getInstance();
-        String hqlStage = "from ProjStage where year=" + c.get(Calendar.YEAR) + " and isValid=1 order by treeId asc";
+        String hqlStage = "from ProjStage where isValid=1 order by treeId asc";
+//        String hqlStage = "from ProjStage where year=" + c.get(Calendar.YEAR) + " and isValid=1 order by treeId asc";
         List<ProjStage> projStages = projStageService.findByQuery(hqlStage);
         model.addAttribute("projStages", projStages);
 
