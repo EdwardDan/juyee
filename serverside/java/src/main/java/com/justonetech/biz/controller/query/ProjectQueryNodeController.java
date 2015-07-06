@@ -173,6 +173,7 @@ public class ProjectQueryNodeController extends BaseCRUDActionController<ProjInf
         //审核步骤
         List<SysCodeDetail> steps = sysCodeManager.getCodeListByCode(Constants.DATA_REPORT_STEP);
         model.addAttribute("steps", steps);
+        model.addAttribute("stepSize", steps.size());
 
         //标段列表
         String conditionHql = "from ProjBid where typeCode='" + ProjBidType.TYPE_NODE.getCode() + "'";
@@ -194,7 +195,11 @@ public class ProjectQueryNodeController extends BaseCRUDActionController<ProjInf
         }
 //        System.out.println("conditionHql = " + conditionHql);
         List<ProjBid> bids = projBidService.findByQuery(conditionHql + " order by project.id asc,id asc");
-        model.addAttribute("bids", bids);
+//        model.addAttribute("bids", bids);
+
+        //整理项目包含标段
+        List<Map<String, Object>> projects = reOrgBids(bids);
+        model.addAttribute("projects", projects);
 
         //用于数据过滤
         conditionHql = "select id " + conditionHql;
@@ -214,6 +219,30 @@ public class ProjectQueryNodeController extends BaseCRUDActionController<ProjInf
         model.addAttribute("dataMap", dataMap);
 
         return "view/query/projectQueryNode/viewNodeData";
+    }
+
+    //整理项目包含标段
+    private List<Map<String, Object>> reOrgBids(List<ProjBid> bids) {
+        List<Map<String, Object>> projects = new ArrayList<Map<String, Object>>();
+        Set<Long> projIds = new HashSet<Long>();
+        Map<Long, ProjInfo> infoMap = new HashMap<Long, ProjInfo>();
+        Map<Long, List<ProjBid>> bidMap = new HashMap<Long, List<ProjBid>>();
+        for (ProjBid bid : bids) {
+            Long key = bid.getProject().getId();
+            List<ProjBid> projBids = bidMap.get(key);
+            if (projBids == null) projBids = new ArrayList<ProjBid>();
+            projBids.add(bid);
+            bidMap.put(key, projBids);
+            projIds.add(key);
+            infoMap.put(key, bid.getProject());
+        }
+        for (Long projId : projIds) {
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("projInfo", infoMap.get(projId));
+            map.put("bids", bidMap.get(projId));
+            projects.add(map);
+        }
+        return projects;
     }
 
     /**
@@ -285,6 +314,7 @@ public class ProjectQueryNodeController extends BaseCRUDActionController<ProjInf
         //审核步骤
         List<SysCodeDetail> steps = sysCodeManager.getCodeListByCode(Constants.DATA_REPORT_STEP);
         beans.put("steps", steps);
+        beans.put("stepSize", steps.size());
 
         //标段列表
         String conditionHql = "from ProjBid where typeCode='" + ProjBidType.TYPE_NODE.getCode() + "'";
@@ -306,7 +336,11 @@ public class ProjectQueryNodeController extends BaseCRUDActionController<ProjInf
         }
 //        System.out.println("conditionHql = " + conditionHql);
         List<ProjBid> bids = projBidService.findByQuery(conditionHql + " order by project.id asc,id asc");
-        beans.put("bids", bids);
+//        beans.put("bids", bids);
+
+        //整理项目包含标段
+        List<Map<String, Object>> projects = reOrgBids(bids);
+        beans.put("projects", projects);
 
         //用于数据过滤
         conditionHql = "select id " + conditionHql;
@@ -332,10 +366,20 @@ public class ProjectQueryNodeController extends BaseCRUDActionController<ProjInf
         int bidCount = bids.size();
         int stepCount = steps.size();
         //项目标段合并
-        for (int r = 0; r < bidCount; r++) {
-            for (int c = 0; c <= 6; c++) {
-                mergerCellsList.add(new int[]{c, startRowNo + stepCount * 2 * r, c, startRowNo + stepCount * 2 * (r + 1) - 1});
+//        for (int r = 0; r < bidCount; r++) {
+//            for (int c = 0; c <= 6; c++) {
+//                mergerCellsList.add(new int[]{c, startRowNo + stepCount * 2 * r, c, startRowNo + stepCount * 2 * (r + 1) - 1});
+//            }
+//        }
+        int st = startRowNo;
+        for (Map<String, Object> project : projects) {
+            List<ProjBid> projBids = (List<ProjBid>) project.get("bids");
+            int r = projBids.size();
+            for (int c = 0; c <= 2; c++) {
+//                System.out.println("c = " + c+","+st+"|"+c+","+(st+r*2-1));
+                mergerCellsList.add(new int[]{c, st, c, st + r * 2 - 1});
             }
+            st += r * 2;
         }
 //        mergerCellsList.add(new int[]{0,3,0,12});
 //        mergerCellsList.add(new int[]{1,3,1,12});
@@ -343,13 +387,13 @@ public class ProjectQueryNodeController extends BaseCRUDActionController<ProjInf
 //        mergerCellsList.add(new int[]{1,13,1,23});
 
         //单位类型合并
-        startColNo = 7;
-        for (int r = 0; r < bidCount; r++) {
-            for (int c = 1; c <= stepCount; c++) {
-                mergerCellsList.add(new int[]{startColNo, startRowNo, startColNo, startRowNo + 1});
-                startRowNo += 2;
-            }
-        }
+//        startColNo = 7;
+//        for (int r = 0; r < bidCount; r++) {
+//            for (int c = 1; c <= stepCount; c++) {
+//                mergerCellsList.add(new int[]{startColNo, startRowNo, startColNo, startRowNo + 1});
+//                startRowNo += 2;
+//            }
+//        }
 //        mergerCellsList.add(new int[]{7,3,7,4});
 //        mergerCellsList.add(new int[]{7,5,7,6});
 
@@ -406,8 +450,8 @@ public class ProjectQueryNodeController extends BaseCRUDActionController<ProjInf
         startRowNo = 5;
         for (int r = 0; r < bidCount; r++) {
             for (int s = 1; s <= stepCount; s++) {
-                for (ProjNode node:firstNodes) {
-                    mergerCellsList.add(new int[]{startColNo, startRowNo, startColNo+node.getTotalChildCount()-1, startRowNo});
+                for (ProjNode node : firstNodes) {
+                    mergerCellsList.add(new int[]{startColNo, startRowNo, startColNo + node.getTotalChildCount() - 1, startRowNo});
                     startColNo += node.getTotalChildCount();
                 }
                 startColNo = 8;

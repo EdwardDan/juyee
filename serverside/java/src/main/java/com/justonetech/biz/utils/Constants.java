@@ -100,6 +100,12 @@ public class Constants {
      * *************************************** 数据填报 begin*********************************************************
      */
     public static final String DATA_STAGE_RESULT = "DataStageResult"; //办证推进结果
+    public static final String DATA_STAGE_RESULT_1 = "1"; //办证推进结果--计划办理
+    public static final String DATA_STAGE_RESULT_2 = "2"; //办证推进结果--办理中
+    public static final String DATA_STAGE_RESULT_3 = "3"; //办证推进结果--办理完成
+    public static final String DATA_STAGE_RESULT_4 = "4"; //办证推进结果--办理受阻
+    public static final String DATA_STAGE_RESULT_5 = "5"; //办证推进结果--无需办理
+
     public static final String DATA_REPORT_STEP = "DataReportStep"; //项目推进填报步骤
     /****************************************** 数据填报 end *******************************************************/
 

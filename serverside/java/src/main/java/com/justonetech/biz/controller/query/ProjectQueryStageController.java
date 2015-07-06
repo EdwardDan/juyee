@@ -25,7 +25,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.sql.Timestamp;
 import java.util.*;
 
 
@@ -170,6 +169,7 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         //审核步骤
         List<SysCodeDetail> steps = sysCodeManager.getCodeListByCode(Constants.DATA_REPORT_STEP);
         model.addAttribute("steps", steps);
+        model.addAttribute("stepSize", steps.size());
 
         //标段列表
         String conditionHql = "from ProjBid where typeCode='" + ProjBidType.TYPE_STAGE.getCode() + "'";
@@ -191,7 +191,11 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         }
 //        System.out.println("conditionHql = " + conditionHql);
         List<ProjBid> bids = projBidService.findByQuery(conditionHql + " order by project.id asc,id asc");
-        model.addAttribute("bids", bids);
+//        model.addAttribute("bids", bids);
+
+        //整理项目包含标段
+        List<Map<String, Object>> projects = reOrgBids(bids);
+        model.addAttribute("projects", projects);
 
         //用于数据过滤
         conditionHql = "select id " + conditionHql;
@@ -208,48 +212,109 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
             if (!oneBidHS.contains(key)) {
                 oneBidHS.add(key);
                 Map<String, Object> map = new HashMap<String, Object>();
-                map.put("resultCode", item.getResult().getCode());
-                map.put("resultName", item.getResult().getName());
+                SysCodeDetail result = item.getResult();
+                String code = result.getCode();
+                map.put("resultCode", code);
+                map.put("resultName", result.getName());
                 map.put("dealDate", item.getDealDate());
                 map.put("updateTime", item.getUpdateTime());
+
+                //办理状态
+                String[] ret = getColorAndResult(item, result);
+                map.put("color", ret[0]);
+                map.put("resultName", ret[1]);
+
                 dataMap.put(key, map);
             }
         }
         model.addAttribute("dataMap", dataMap);
 
-        //上次填报数据
-        Map<String, Object> lastMap = new HashMap<String, Object>();
-        Set<String> keyHS = new HashSet<String>();
-        String lastHql = "from DataStageReportLog where stageReport.bid.id in(" + conditionHql + ") order by updateTime desc";
-        List<DataStageReportLog> lastLogs = dataStageReportLogService.findByQuery(lastHql);
-        for (DataStageReportLog item : lastLogs) {
-            Long bidId = item.getStageReport().getBid().getId();
-            String key = bidId + "_" + item.getStep().getId() + "_" + item.getStage().getId();
-            if (!keyHS.contains(key)) {
-                Object currentData = dataMap.get(key);
-                if (currentData != null) {
-                    Map<String, Object> currentDataMap = (Map<String, Object>) currentData;
-                    if (item.getUpdateTime().before((Timestamp) currentDataMap.get("updateTime"))) {
-                        keyHS.add(key);
-                        Map<String, Object> map = new HashMap<String, Object>();
-                        map.put("resultCode", item.getResult().getCode());
-                        map.put("resultName", item.getResult().getName());
-                        map.put("dealDate", item.getDealDate());
-                        lastMap.put(key, map);
-                    }
-                } else {
-                    keyHS.add(key);
-                    Map<String, Object> map = new HashMap<String, Object>();
-                    map.put("resultCode", item.getResult().getCode());
-                    map.put("resultName", item.getResult().getName());
-                    map.put("dealDate", item.getDealDate());
-                    lastMap.put(key, map);
-                }
-            }
-        }
-        model.addAttribute("lastMap", lastMap);
+//        //上次填报数据
+//        Map<String, Object> lastMap = new HashMap<String, Object>();
+//        Set<String> keyHS = new HashSet<String>();
+//        String lastHql = "from DataStageReportLog where stageReport.bid.id in(" + conditionHql + ") order by updateTime desc";
+//        List<DataStageReportLog> lastLogs = dataStageReportLogService.findByQuery(lastHql);
+//        for (DataStageReportLog item : lastLogs) {
+//            Long bidId = item.getStageReport().getBid().getId();
+//            String key = bidId + "_" + item.getStep().getId() + "_" + item.getStage().getId();
+//            if (!keyHS.contains(key)) {
+//                Object currentData = dataMap.get(key);
+//                if (currentData != null) {
+//                    Map<String, Object> currentDataMap = (Map<String, Object>) currentData;
+//                    if (item.getUpdateTime().before((Timestamp) currentDataMap.get("updateTime"))) {
+//                        keyHS.add(key);
+//                        Map<String, Object> map = new HashMap<String, Object>();
+//                        map.put("resultCode", item.getResult().getCode());
+//                        map.put("resultName", item.getResult().getName());
+//                        map.put("dealDate", item.getDealDate());
+//                        lastMap.put(key, map);
+//                    }
+//                } else {
+//                    keyHS.add(key);
+//                    Map<String, Object> map = new HashMap<String, Object>();
+//                    map.put("resultCode", item.getResult().getCode());
+//                    map.put("resultName", item.getResult().getName());
+//                    map.put("dealDate", item.getDealDate());
+//                    lastMap.put(key, map);
+//                }
+//            }
+//        }
+//        model.addAttribute("lastMap", lastMap);
 
         return "view/query/projectQueryStage/viewStageData";
+    }
+
+    //整理项目包含标段
+    private List<Map<String, Object>> reOrgBids(List<ProjBid> bids) {
+        List<Map<String, Object>> projects = new ArrayList<Map<String, Object>>();
+        Set<Long> projIds = new HashSet<Long>();
+        Map<Long, ProjInfo> infoMap = new HashMap<Long, ProjInfo>();
+        Map<Long, List<ProjBid>> bidMap = new HashMap<Long, List<ProjBid>>();
+        for (ProjBid bid : bids) {
+            Long key = bid.getProject().getId();
+            List<ProjBid> projBids = bidMap.get(key);
+            if (projBids == null) projBids = new ArrayList<ProjBid>();
+            projBids.add(bid);
+            bidMap.put(key, projBids);
+            projIds.add(key);
+            infoMap.put(key, bid.getProject());
+        }
+        for (Long projId : projIds) {
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("projInfo", infoMap.get(projId));
+            map.put("bids", bidMap.get(projId));
+            projects.add(map);
+        }
+        return projects;
+    }
+
+    /**
+     * 获取状态
+     *
+     * @param item   .
+     * @param result .
+     * @return .
+     */
+    private String[] getColorAndResult(DataStageReportItem item, SysCodeDetail result) {
+        String[] ret = new String[2];
+        //办理状态
+        if (Constants.DATA_STAGE_RESULT_1.equals(result.getCode())) {
+            ret[0] = "yellow";
+            ret[1] = item.getDealDate();
+        } else if (Constants.DATA_STAGE_RESULT_2.equals(result.getCode())) {
+            ret[0] = "";
+            ret[1] = result.getName();
+        } else if (Constants.DATA_STAGE_RESULT_3.equals(result.getCode())) {
+            ret[0] = "green";
+            ret[1] = "√";
+        } else if (Constants.DATA_STAGE_RESULT_4.equals(result.getCode())) {
+            ret[0] = "red";
+            ret[1] = item.getDealDate();
+        } else if (Constants.DATA_STAGE_RESULT_5.equals(result.getCode())) {
+            ret[0] = "";
+            ret[1] = "—";
+        }
+        return ret;
     }
 
     /**
@@ -302,6 +367,7 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         //审核步骤
         List<SysCodeDetail> steps = sysCodeManager.getCodeListByCode(Constants.DATA_REPORT_STEP);
         beans.put("steps", steps);
+        beans.put("stepSize", steps.size());
 
         //标段列表
         String conditionHql = "from ProjBid where typeCode='" + ProjBidType.TYPE_STAGE.getCode() + "'";
@@ -323,7 +389,11 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         }
 //        System.out.println("conditionHql = " + conditionHql);
         List<ProjBid> bids = projBidService.findByQuery(conditionHql + " order by project.id asc,id asc");
-        beans.put("bids", bids);
+//        beans.put("bids", bids);
+
+        //整理项目包含标段
+        List<Map<String, Object>> projects = reOrgBids(bids);
+        beans.put("projects", projects);
 
         //用于数据过滤
         conditionHql = "select id " + conditionHql;
@@ -340,10 +410,17 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
             if (!oneBidHS.contains(key)) {
                 oneBidHS.add(key);
                 Map<String, Object> map = new HashMap<String, Object>();
-                map.put("resultCode", item.getResult().getCode());
-                map.put("resultName", item.getResult().getName());
+                SysCodeDetail result = item.getResult();
+                map.put("resultCode", result.getCode());
+                map.put("resultName", result.getName());
                 map.put("dealDate", item.getDealDate());
                 map.put("updateTime", item.getUpdateTime());
+
+                //办理状态
+                String[] ret = getColorAndResult(item, result);
+                map.put("color", ret[0]);
+                map.put("resultName", ret[1]);
+
                 dataMap.put(key, map);
             }
         }
@@ -380,27 +457,37 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         List<int[]> mergerCellsList = new ArrayList<int[]>();
         int startColNo = 0;
         int startRowNo = 3;
-        int bidCount = bids.size();
-        int stepCount = steps.size();
+//        int bidCount = bids.size();
+//        int stepCount = steps.size();
         //项目标段合并
-        for (int r = 0; r < bidCount; r++) {
-            for (int c = 0; c <= 6; c++) {
-                mergerCellsList.add(new int[]{c, startRowNo + stepCount * 2 * r, c, startRowNo + stepCount * 2 * (r + 1) - 1});
+//        for (int r = 0; r < bidCount; r++) {
+//            for (int c = 0; c <= 6; c++) {
+//                mergerCellsList.add(new int[]{c, startRowNo + stepCount * 2 * r, c, startRowNo + stepCount * 2 * (r + 1) - 1});
+//            }
+//        }
+        int st = startRowNo;
+        for (Map<String, Object> project : projects) {
+            List<ProjBid> projBids = (List<ProjBid>) project.get("bids");
+            int r = projBids.size();
+            for (int c = 0; c <= 2; c++) {
+                mergerCellsList.add(new int[]{c, st, c, st + r - 1});
             }
+            st += r;
         }
+
 //        mergerCellsList.add(new int[]{0,3,0,12});
 //        mergerCellsList.add(new int[]{1,3,1,12});
 //        mergerCellsList.add(new int[]{0,13,0,23});
 //        mergerCellsList.add(new int[]{1,13,1,23});
 
-        //单位类型合并
-        startColNo = 7;
-        for (int r = 0; r < bidCount; r++) {
-            for (int c = 1; c <= stepCount; c++) {
-                mergerCellsList.add(new int[]{startColNo, startRowNo, startColNo, startRowNo + 1});
-                startRowNo += 2;
-            }
-        }
+//        //单位类型合并
+//        startColNo = 7;
+//        for (int r = 0; r < bidCount; r++) {
+//            for (int c = 1; c <= stepCount; c++) {
+//                mergerCellsList.add(new int[]{startColNo, startRowNo, startColNo, startRowNo + 1});
+//                startRowNo += 2;
+//            }
+//        }
 //        mergerCellsList.add(new int[]{7,3,7,4});
 //        mergerCellsList.add(new int[]{7,5,7,6});
 
@@ -412,12 +499,12 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
                 Set<ProjStage> childs = stage.getProjStages();
                 if (childs.size() == 0) {  //竖向合并
                     mergerCellsList.add(new int[]{startColNo, startRowNo, startColNo, startRowNo + 1});
-                    startColNo ++;
+                    startColNo++;
                 } else if (childs.size() > 1) { //横向合并
                     mergerCellsList.add(new int[]{startColNo, startRowNo, startColNo + childs.size() - 1, startRowNo});
                     startColNo += childs.size();
-                }else{
-                    startColNo ++;
+                } else {
+                    startColNo++;
                 }
             }
         }
@@ -430,7 +517,7 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
 //        mergerCellsList.add(new int[]{13,1,14,1});
 
         //大标题合并
-        mergerCellsList.add(new int[]{0,0,leafStages.size()+8-1,0});
+        mergerCellsList.add(new int[]{0, 0, leafStages.size() + 8 - 1, 0});
 
         //for test
 //        for (int[] ints : mergerCellsList) {
