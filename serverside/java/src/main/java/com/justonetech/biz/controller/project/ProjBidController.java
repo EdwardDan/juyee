@@ -151,7 +151,7 @@ public class ProjBidController extends BaseCRUDActionController<ProjBid> {
             if (!StringHelper.isEmpty(typeCode)) {
                 hql += " and typeCode='" + typeCode + "'";
             }
-            hql += " order by id desc";
+            hql += " order by id asc";
 
             //执行查询
             QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);
