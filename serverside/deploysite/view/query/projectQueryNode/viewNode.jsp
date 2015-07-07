@@ -32,10 +32,28 @@
         document.getElementById("btnQueryAll").disabled = flag;
     }
 
+    //选择节点
+    function selectNode(btn){
+        var str = "projectName=" + $("#projectName").val() + "&bidName=" + $("#bidName").val() + "&jsDept=" + $("#jsDept").val() + "&year=" + $("#year").val();
+        openNewWindow('selectNodeDiv','选择节点',"${ctx}/projectQueryNode/selectNode.do?id=${id}&" + str,false,600,450);
+    }
+
     //导出
     function printMonthReport(btn){
-        var str = "projectName=" + $("#projectName").val() + "&bidName=" + $("#bidName").val() + "&jsDept=" + $("#jsDept").val() + "&year=" + $("#year").val();
-        window.open("${ctx}/projectQueryNode/printExcel.do?id=${id}&month=" + last_m+"&" + str);
+        var ids = "";
+        $("input[name=nodeIds]").each(function(){
+            if($(this).attr("checked")=="checked"||$(this).attr("checked")==true){
+                ids += ","+$(this).val();
+            }
+        });
+        if(ids == ""){
+            alert("请选择至少一个节点！");
+        }else{
+            ids = ids.substring(1);
+            var str = "projectName=" + $("#projectName").val() + "&bidName=" + $("#bidName").val() + "&jsDept=" + $("#jsDept").val() + "&year=" + $("#year").val();
+            str += "&nodeIds="+ids;
+            window.open("${ctx}/projectQueryNode/printExcel.do?id=${id}&month=" + last_m+"&" + str);
+        }
     }
 
     //初始化

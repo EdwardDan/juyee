@@ -11,7 +11,7 @@
                     &nbsp;共有${bidSize}个标段
                 </c:otherwise>
             </c:choose>
-            &nbsp;<input type="button" value="导出" class="button_all" onclick="printMonthReport(this)"/>
+            &nbsp;<input type="button" value="导出" class="button_all" onclick="selectNode(this)"/>
             &nbsp; <input type="button" value="关闭" class="button_cancel" onclick="closeWindow()">
         </td>
 </table>
