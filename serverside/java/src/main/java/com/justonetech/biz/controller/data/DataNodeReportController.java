@@ -154,7 +154,7 @@ public class DataNodeReportController extends BaseCRUDActionController<DataNodeR
      * @return .
      */
     @RequestMapping
-    public String nodeDataItem(Model model, Long id, Integer month, Long bidId) {
+    public String nodeDataItem(Model model, Long id, Integer month, String bidId,String type) {
         //办证阶段
         List<ProjNode> firstNodes = projNodeService.findByQuery("from ProjNode where isValid=1 and parent.id is null order by treeId asc");
         model.addAttribute("firstNodes", firstNodes);
@@ -164,10 +164,6 @@ public class DataNodeReportController extends BaseCRUDActionController<DataNodeR
         if (null != id) {
             //标段列表
             ProjInfo projInfo = projInfoService.get(id);
-//            List<ProjBid> bids = getBids(id);
-//            if (null == bidId && bids.size() > 0) {
-//                bidId = bids.iterator().next().getId();
-//            }
             //填报数据
             Map<String, Object> dataMap = new HashMap<String, Object>();
             List<DataNodeReportItem> dataNodeReportItems = findDataItems(id, projInfo.getYear(), month, bidId);
@@ -179,8 +175,11 @@ public class DataNodeReportController extends BaseCRUDActionController<DataNodeR
             }
             model.addAttribute("dataMap", dataMap);
         }
-
-        return "view/data/dataNodeReport/nodeDataItem";
+        String url ="view/data/dataNodeReport/nodeDataItem";
+        if(type!=null){
+            url+=type;
+        }
+        return url;
     }
 
     /**
@@ -250,7 +249,7 @@ public class DataNodeReportController extends BaseCRUDActionController<DataNodeR
             dataNodeReportService.save(target);
             //保存之前先删除旧数据
             if (target.getProject() != null && target.getBid() != null) {
-                List<DataNodeReportItem> dataNodeReportItems = findDataItems(target.getProject().getId(), target.getProject().getYear(), Integer.valueOf(month), target.getBid().getId());
+                List<DataNodeReportItem> dataNodeReportItems = findDataItems(target.getProject().getId(), target.getProject().getYear(), Integer.valueOf(month), target.getBid().getId().toString());
                 dataNodeReportItemService.batchDelete(dataNodeReportItems, dataNodeReportItems.size());
             }
 
@@ -315,12 +314,12 @@ public class DataNodeReportController extends BaseCRUDActionController<DataNodeR
      * @param bidId     .
      * @return .
      */
-    private List<DataNodeReportItem> findDataItems(Long projectId, Integer year, Integer month, Long bidId) {
+    private List<DataNodeReportItem> findDataItems(Long projectId, Integer year, Integer month, String bidId) {
         String hql = "from DataNodeReportItem where nodeReport.project.id=" + projectId + " and nodeReport.year=" + year + " and nodeReport.month=" + month;
         if (null != bidId) {
             hql += " and nodeReport.bid.id=" + bidId;
         }
-        hql += "order by id asc";
+        hql += " order by id asc";
         return dataNodeReportItemService.findByQuery(hql);
     }
 
@@ -331,6 +330,6 @@ public class DataNodeReportController extends BaseCRUDActionController<DataNodeR
      * @return .
      */
     private List<ProjBid> getBids(Long projectId) {
-        return projBidService.findByQuery(" from ProjBid where project.id=" + projectId + " and  typeCode='" + ProjBidType.TYPE_NODE.getCode() + "'");
+        return projBidService.findByQuery(" from ProjBid where project.id=" + projectId + " and  typeCode='" + ProjBidType.TYPE_NODE.getCode() + "' order by no asc");
     }
 }

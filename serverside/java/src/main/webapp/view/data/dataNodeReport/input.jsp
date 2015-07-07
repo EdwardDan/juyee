@@ -16,7 +16,12 @@
             return;
         }
         //提交表单
-        saveAjaxData("${ctx}/dataNodeReport/save.do?month=" + last_m, formId);
+        var bidId = $("#projBid").val();
+        if (bidId == null) {
+            alert("标段不能为空！")
+        } else {
+            saveAjaxData("${ctx}/dataNodeReport/save.do?month=" + last_m, formId);
+        }
     }
 
     function loadMonthReport(month) {
@@ -69,10 +74,11 @@
                 <td class="form_content">
                     <select name="projBid" id="projBid" class="form_select_long"
                             onchange="loadMonthReport('${currentMonth}')">
-                        <option value=""></option>
-                        <c:forEach items="${projBids}" var="item">
+                        <c:if test="${projBids!= null&&fn:length(projBids)>0}">
+                            <c:forEach items="${projBids}" var="item">
                             <option value="${item.id}">${item.name}</option>
-                        </c:forEach>
+                            </c:forEach>
+                        </c:if>
                     </select>
                 </td>
             </tr>
