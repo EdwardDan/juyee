@@ -315,7 +315,7 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
         //标段类别--办证推进
         model.addAttribute("bidTypeCode", ProjBidType.TYPE_STAGE.getCode());
         //标段的获取
-        List<ProjBid> projBids = projBidService.findByQuery(" from ProjBid where project.id=" + projectId + " and typeCode='" + ProjBidType.TYPE_STAGE.getCode() + "'");
+        List<ProjBid> projBids = projBidService.findByQuery(" from ProjBid where project.id=" + projectId + " and typeCode='" + ProjBidType.TYPE_STAGE.getCode() + "' order by no asc");
         model.addAttribute("bids", projBids);
     }
 
