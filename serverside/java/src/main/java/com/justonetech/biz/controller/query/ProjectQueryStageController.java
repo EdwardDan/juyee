@@ -229,38 +229,6 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         }
         model.addAttribute("dataMap", dataMap);
 
-//        //上次填报数据
-//        Map<String, Object> lastMap = new HashMap<String, Object>();
-//        Set<String> keyHS = new HashSet<String>();
-//        String lastHql = "from DataStageReportLog where stageReport.bid.id in(" + conditionHql + ") order by updateTime desc";
-//        List<DataStageReportLog> lastLogs = dataStageReportLogService.findByQuery(lastHql);
-//        for (DataStageReportLog item : lastLogs) {
-//            Long bidId = item.getStageReport().getBid().getId();
-//            String key = bidId + "_" + item.getStep().getId() + "_" + item.getStage().getId();
-//            if (!keyHS.contains(key)) {
-//                Object currentData = dataMap.get(key);
-//                if (currentData != null) {
-//                    Map<String, Object> currentDataMap = (Map<String, Object>) currentData;
-//                    if (item.getUpdateTime().before((Timestamp) currentDataMap.get("updateTime"))) {
-//                        keyHS.add(key);
-//                        Map<String, Object> map = new HashMap<String, Object>();
-//                        map.put("resultCode", item.getResult().getCode());
-//                        map.put("resultName", item.getResult().getName());
-//                        map.put("dealDate", item.getDealDate());
-//                        lastMap.put(key, map);
-//                    }
-//                } else {
-//                    keyHS.add(key);
-//                    Map<String, Object> map = new HashMap<String, Object>();
-//                    map.put("resultCode", item.getResult().getCode());
-//                    map.put("resultName", item.getResult().getName());
-//                    map.put("dealDate", item.getDealDate());
-//                    lastMap.put(key, map);
-//                }
-//            }
-//        }
-//        model.addAttribute("lastMap", lastMap);
-
         return "view/query/projectQueryStage/viewStageData";
     }
 
@@ -318,6 +286,33 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
     }
 
     /**
+     * 选择指定阶段
+     *
+     * @param model   .
+     * @param request .
+     * @throws Exception
+     */
+    @RequestMapping
+    public String selectStage(Model model, HttpServletRequest request) throws Exception {
+        String projectId = request.getParameter("id");
+        String projectName = request.getParameter("projectName");
+        String bidName = request.getParameter("bidName");
+        String jsDept = request.getParameter("jsDept");
+        String year = request.getParameter("year");
+
+        model.addAttribute("projectId", projectId);
+        model.addAttribute("projectName", projectName);
+        model.addAttribute("bidName", bidName);
+        model.addAttribute("jsDept", jsDept);
+        model.addAttribute("year", year);
+
+        List<ProjStage> list = projStageService.findByQuery("from ProjStage where isValid=1 and parent is null order by treeId asc");
+        model.addAttribute("list", list);
+
+        return "view/query/projectQueryStage/selectStage";
+    }
+
+    /**
      * 导出excel
      *
      * @param response .
@@ -334,6 +329,7 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         String bidName = request.getParameter("bidName");
         String jsDept = request.getParameter("jsDept");
         String year = request.getParameter("year");
+        String stageIds = request.getParameter("stageIds");  //过滤节点
         Boolean isSum = StringHelper.isEmpty(projectId);   //是否汇总
         beans.put("year", year);
 
@@ -341,7 +337,12 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         List<ProjStage> firstStages = new ArrayList<ProjStage>();
         List<ProjStage> secondStages = new ArrayList<ProjStage>();
         List<ProjStage> leafStages = new ArrayList<ProjStage>();
-        List<ProjStage> projStages = projStageService.findByQuery("from ProjStage where isValid=1 order by treeId asc");
+        String stageHql = "from ProjStage where isValid=1";
+        if (!StringHelper.isEmpty(stageIds)) {
+            stageHql += " and id in("+stageIds+")";
+        }
+        stageHql += " order by treeId asc";
+        List<ProjStage> projStages = projStageService.findByQuery(stageHql);
         for (ProjStage stage : projStages) {
             if (stage.getParent() == null) {
                 firstStages.add(stage);

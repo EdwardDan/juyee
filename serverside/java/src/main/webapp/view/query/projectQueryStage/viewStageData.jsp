@@ -11,7 +11,7 @@
                     共有${bidSize}个标段
                 </c:otherwise>
             </c:choose>
-            &nbsp;<input type="button" value="导出" class="button_all" onclick="printStageData(this)"/>
+            &nbsp;<input type="button" value="导出" class="button_all" onclick="selectStage(this)"/>
             &nbsp; <input type="button" value="关闭" class="button_cancel" onclick="closeWindow()">
         </td>
 </table>

@@ -20,12 +20,28 @@
         document.getElementById("btnQueryAll").disabled = flag;
     }
 
+    //选择阶段
+    function selectStage(btn){
+        var str = "projectName=" + $("#projectName").val() + "&bidName=" + $("#bidName").val() + "&jsDept=" + $("#jsDept").val() + "&year=" + $("#year").val();
+        openNewWindow('selectStageDiv','选择阶段',"${ctx}/projectQueryStage/selectStage.do?id=${id}&" + str,false,600,450);
+    }
+
     //导出
     function printStageData(btn){
-//        btn.disabled = true;
-        var str = "projectName=" + $("#projectName").val() + "&bidName=" + $("#bidName").val() + "&jsDept=" + $("#jsDept").val() + "&year=" + $("#year").val();
-        <%--loadAjaxDataCallback("stageDataPrintDiv", "${ctx}/projectQueryStage/printExcel.do?id=${id}&" + str, resetButton);--%>
-        window.open( "${ctx}/projectQueryStage/printExcel.do?id=${id}&" + str);
+        var ids = "";
+        $("input[name=stageIds]").each(function(){
+            if($(this).attr("checked")=="checked"||$(this).attr("checked")==true){
+                ids += ","+$(this).val();
+            }
+        });
+        if(ids == ""){
+            alert("请选择至少一个节点！");
+        }else{
+            ids = ids.substring(1);
+            var str = "projectName=" + $("#projectName").val() + "&bidName=" + $("#bidName").val() + "&jsDept=" + $("#jsDept").val() + "&year=" + $("#year").val();
+            str += "&stageIds="+ids;
+            window.open( "${ctx}/projectQueryStage/printExcel.do?id=${id}&" + str);
+        }
     }
 
     //初始化

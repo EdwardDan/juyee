@@ -246,6 +246,35 @@ public class ProjectQueryNodeController extends BaseCRUDActionController<ProjInf
     }
 
     /**
+     * 选择指定节点
+     *
+     * @param model   .
+     * @param request .
+     * @throws Exception
+     */
+    @RequestMapping
+    public String selectNode(Model model, HttpServletRequest request) throws Exception {
+        String projectId = request.getParameter("id");
+        String projectName = request.getParameter("projectName");
+        String bidName = request.getParameter("bidName");
+        String jsDept = request.getParameter("jsDept");
+        String year = request.getParameter("year");
+
+        model.addAttribute("projectId", projectId);
+        model.addAttribute("projectName", projectName);
+        model.addAttribute("bidName", bidName);
+        model.addAttribute("jsDept", jsDept);
+        model.addAttribute("year", year);
+
+        List<ProjNode> list = projNodeService.findByQuery("from ProjNode where isValid=1 and parent is null order by treeId asc");
+        model.addAttribute("list", list);
+
+        return "view/query/projectQueryNode/selectNode";
+    }
+    private Boolean isIdIn(String nodeIds,Long thisId){
+        return (","+nodeIds+",").contains(","+thisId+",");
+    }
+    /**
      * 导出excel
      *
      * @param response .
@@ -263,6 +292,7 @@ public class ProjectQueryNodeController extends BaseCRUDActionController<ProjInf
         String jsDept = request.getParameter("jsDept");
         String year = request.getParameter("year");
         String month = request.getParameter("month");
+        String nodeIds = request.getParameter("nodeIds");  //过滤节点
         Boolean isSum = StringHelper.isEmpty(projectId);   //是否汇总
         beans.put("year", year);
         beans.put("month", month);
@@ -279,29 +309,37 @@ public class ProjectQueryNodeController extends BaseCRUDActionController<ProjInf
             int currentLevel = node.getCurrentLevel();
             int totalLevel = node.getTotalLevel();
             if (currentLevel == 1) {
-                firstNodes.add(node);
-                firstNodesIncludeNull.add(node);
-                Set<ProjNode> childs = node.getProjNodes();
-                if (childs.size() > 1) {
-                    for (int i = 1; i < node.getTotalChildCount(); i++) {
-                        firstNodesIncludeNull.add(new ProjNode());
+                if(isIdIn(nodeIds,node.getFirstNodeId())){
+                    firstNodes.add(node);
+                    firstNodesIncludeNull.add(node);
+                    Set<ProjNode> childs = node.getProjNodes();
+                    if (childs.size() > 1) {
+                        for (int i = 1; i < node.getTotalChildCount(); i++) {
+                            firstNodesIncludeNull.add(new ProjNode());
+                        }
                     }
                 }
             } else if (currentLevel == 2) {
-                if (totalLevel == 3) {
-                    secondNodes.add(node);
-                    for (int i = 1; i <= node.getProjNodes().size(); i++) {
-                        secondNodesIncludeNull.add(node);
+                if(isIdIn(nodeIds,node.getFirstNodeId())){
+                    if (totalLevel == 3) {
+                        secondNodes.add(node);
+                        for (int i = 1; i <= node.getProjNodes().size(); i++) {
+                            secondNodesIncludeNull.add(node);
+                        }
+                    } else {
+                        secondNodesIncludeNull.add(new ProjNode());
+                        thirdNodes.add(node);
                     }
-                } else {
-                    secondNodesIncludeNull.add(new ProjNode());
-                    thirdNodes.add(node);
                 }
             } else {
-                thirdNodes.add(node);
+                if(isIdIn(nodeIds,node.getFirstNodeId())){
+                    thirdNodes.add(node);
+                }
             }
             if (node.getIsLeaf()) {
-                leafNodes.add(node);
+                if(isIdIn(nodeIds,node.getFirstNodeId())){
+                    leafNodes.add(node);
+                }
             }
         }
         beans.put("firstNodes", firstNodes);
