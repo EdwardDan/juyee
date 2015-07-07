@@ -191,7 +191,7 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         }
 //        System.out.println("conditionHql = " + conditionHql);
         List<ProjBid> bids = projBidService.findByQuery(conditionHql + " order by project.no asc,project.id asc,no asc,id asc");
-//        model.addAttribute("bids", bids);
+        model.addAttribute("bidSize", bids.size());
 
         //整理项目包含标段
         List<Map<String, Object>> projects = reOrgBids(bids);

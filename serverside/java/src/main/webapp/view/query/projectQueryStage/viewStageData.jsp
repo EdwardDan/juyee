@@ -8,7 +8,7 @@
                     ${year}年度项目办证推进表
                 </c:when>
                 <c:otherwise>
-                    共有${fn:length(bids)}个标段
+                    共有${bidSize}个标段
                 </c:otherwise>
             </c:choose>
             &nbsp;<input type="button" value="导出" class="button_all" onclick="printStageData(this)"/>

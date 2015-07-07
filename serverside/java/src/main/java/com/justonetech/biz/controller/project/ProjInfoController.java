@@ -2,23 +2,22 @@ package com.justonetech.biz.controller.project;
 
 import com.justonetech.biz.core.orm.hibernate.GridJq;
 import com.justonetech.biz.core.orm.hibernate.QueryTranslateJq;
-import com.justonetech.biz.daoservice.*;
+import com.justonetech.biz.daoservice.ProjInfoAreaService;
+import com.justonetech.biz.daoservice.ProjInfoService;
 import com.justonetech.biz.domain.ProjBid;
-import com.justonetech.biz.domain.ProjBidArea;
 import com.justonetech.biz.domain.ProjInfo;
 import com.justonetech.biz.domain.ProjInfoArea;
-import com.justonetech.biz.manager.ConfigManager;
-import com.justonetech.biz.manager.DocumentManager;
+import com.justonetech.biz.manager.ProjInfoManager;
 import com.justonetech.biz.utils.Constants;
 import com.justonetech.biz.utils.enums.ProjBidType;
 import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.orm.hibernate.Page;
-import com.justonetech.core.utils.*;
+import com.justonetech.core.utils.DateTimeHelper;
+import com.justonetech.core.utils.JspHelper;
+import com.justonetech.core.utils.ReflectionUtils;
+import com.justonetech.core.utils.StringHelper;
 import com.justonetech.system.daoservice.SysCodeDetailService;
-import com.justonetech.system.domain.SysCode;
 import com.justonetech.system.domain.SysCodeDetail;
-import com.justonetech.system.manager.SimpleQueryManager;
-import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
 import com.justonetech.system.utils.PrivilegeCode;
 import org.slf4j.Logger;
@@ -49,21 +48,6 @@ public class ProjInfoController extends BaseCRUDActionController<ProjInfo> {
     private SysUserManager sysUserManager;
 
     @Autowired
-    private SysCodeManager sysCodeManager;
-
-    @Autowired
-    private ConfigManager configManager;
-
-    @Autowired
-    private DocumentManager documentManager;
-
-    @Autowired
-    private SimpleQueryManager simpleQueryManager;
-
-    @Autowired
-    private ProjBidAreaService projBidAreaService;
-
-    @Autowired
     private SysCodeDetailService sysCodeDetailService;
 
     @Autowired
@@ -73,7 +57,7 @@ public class ProjInfoController extends BaseCRUDActionController<ProjInfo> {
     private ProjInfoAreaService projInfoAreaService;
 
     @Autowired
-    private ProjBidService projBidService;
+    private ProjInfoManager projInfoManager;
 
     /**
      * 列表显示页面
@@ -252,7 +236,6 @@ public class ProjInfoController extends BaseCRUDActionController<ProjInfo> {
             for (ProjInfoArea projInfoArea : target.getProjInfoAreas()) {
                 projInfoAreaService.delete(projInfoArea);
             }
-            Set<SysCodeDetail> areas = new HashSet<SysCodeDetail>();
             if (areaIds != null && areaIds.length > 0) {
                 for (String areaId : areaIds) {
                     if (!StringHelper.isEmpty(areaId)) {
@@ -261,40 +244,12 @@ public class ProjInfoController extends BaseCRUDActionController<ProjInfo> {
                         projInfoArea.setBelongArea(sysCodeDetail);
                         projInfoArea.setProject(target);
                         projInfoAreaService.save(projInfoArea);
-                        areas.add(sysCodeDetail);
                     }
                 }
             }
 
             //添加和修改项目时判断如果下面没有标段则自动创建一个形象进度标段，并且默认标段的所属区县与项目一致
-            Set<ProjBid> projBids = target.getProjBids();
-            Boolean noTypeNode = true;//默认没有形象进度
-            if (null == projBids || projBids.size() == 0) {
-                noTypeNode = false;
-            } else {
-                for (ProjBid projBid : projBids) {
-                    String typeNode = projBid.getTypeCode();
-                    if (ProjBidType.TYPE_NODE.getCode().equals(typeNode)) {
-                        noTypeNode = false;
-                        break;
-                    }
-                }
-            }
-            if (noTypeNode) {
-                ProjBid projBid = new ProjBid();
-                projBid.setTypeCode(ProjBidType.TYPE_NODE.getCode());
-                projBid.setName(target.getName());
-                projBid.setCode("1");
-                projBid.setProject(target);
-                projBidService.save(projBid);
-
-                for (SysCodeDetail area : areas) {
-                    ProjBidArea projBidArea = new ProjBidArea();
-                    projBidArea.setBelongArea(area);
-                    projBidArea.setBid(projBid);
-                    projBidAreaService.save(projBidArea);
-                }
-            }
+            projInfoManager.initScheduleBid(target);
 
 
         } catch (Exception e) {

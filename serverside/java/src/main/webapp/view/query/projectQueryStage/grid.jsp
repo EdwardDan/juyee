@@ -12,18 +12,20 @@
                     '项目性质',
                     '项目阶段',
                     '项目类型',
-                    '标段数',
+                    '办证推进标段数',
+                    '形象进度标段数',
                     '操作'
                 ],
                 colModel:[
                     {name:'id', width:10, align:"center", searchtype:"integer",hidden:true},
                     {name:"year",width:"30",align:"center",searchtype:"integer",sortable:true},
-                    {name:"no",width:"30",align:"center",searchtype:"integer",sortable:true},
+                    {name:"no",width:"20",align:"center",searchtype:"integer",sortable:true},
                     {name:"name",width:"70",align:"left",searchtype:"string",sortable:true},
                     {name:"property.name",width:"40",align:"center",searchtype:"string",sortable:true},
                     {name:"stage.name",width:"40",align:"center",searchtype:"string",sortable:true},
                     {name:"category.name",width:"40",align:"center",searchtype:"date",sortable:true},
-                    {name:"bidCountOfStage",width:"25",align:"center",searchtype:"integer",sortable:true},
+                    {name:"bidCountOfStage",width:"20",align:"center",searchtype:"integer",sortable:true},
+                    {name:"bidCountOfNode",width:"20",align:"center",searchtype:"integer",sortable:true}
                 ],
                 actModel:[
                     {name:'operation', width:50, align:'center'}
@@ -38,6 +40,7 @@
                         var rowData = jQuery("#listGrid").jqGrid('getRowData', id);
                         var name = rowData["name"];
                         var opButton = '<input type="button" value="办证推进" onclick="doViewStage(\'' + id + '\', \'' + name + '\')" class="button_normal_long"/> ';
+                        opButton += '<input type="button" value="形象进度" onclick="doViewNode(\'' + id + '\', \'' + name + '\')" class="button_normal_long"/> ';
                         jQuery("#listGrid").jqGrid('setRowData', ids[i], { operation:opButton});
                     }
                 }, rownumbers:true
@@ -61,6 +64,9 @@
     function doViewStage(id, name) {
         openWindow("查看办证推进信息（" + name + "）", "${ctx}/projectQueryStage/viewStage.do?id=" + id, false, 1000, 550);
     }
+    function doViewNode(id, name) {
+        openWindow("查看形象进度信息（" + name + "）", "${ctx}/projectQueryNode/viewNode.do?id=" + id, false, 1000, 550);
+    }
 </script>
 
 <div class="title_Search">
@@ -74,6 +80,7 @@
         <div style="float:right;padding-right: 10px">
             <c:if test="${canViewAll}">
                 <input type="button" value="办证推进汇总" class="button_normal_longer" onclick="doViewStage('','汇总')"/>
+                <input type="button" value="形象进度汇总" class="button_normal_longer" onclick="doViewNode('','汇总')"/>
             </c:if>
         </div>
     </div>
