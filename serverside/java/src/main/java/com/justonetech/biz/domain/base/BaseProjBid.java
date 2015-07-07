@@ -68,6 +68,10 @@ public abstract class BaseProjBid  implements Serializable,Auditable {
     /*标段编号*/
     private java.lang.String code;
 
+    /*标段序号*/
+    /*标段序号*/
+    private java.lang.String no;
+
     /*标段名称*/
     /*标段名称*/
     private java.lang.String name;
@@ -157,6 +161,13 @@ public abstract class BaseProjBid  implements Serializable,Auditable {
         this.code = code;
     }
 
+    public String getNo() {
+        return no;
+    }
+
+    public void setNo(String no) {
+        this.no = no;
+    }
 
     /**
      * Return the value associated with the column: NAME
@@ -417,6 +428,7 @@ public abstract class BaseProjBid  implements Serializable,Auditable {
         org.apache.commons.lang.builder.ToStringBuilder builder = new org.apache.commons.lang.builder.ToStringBuilder(this);
         builder.append(id);
         builder.append(code);
+        builder.append(no);
         builder.append(name);
         builder.append(typeCode);
         builder.append(buildMileage);

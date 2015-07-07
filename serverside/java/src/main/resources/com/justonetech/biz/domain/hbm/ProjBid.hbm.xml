@@ -38,6 +38,17 @@
             <meta attribute="ColumnComment">标段编号</meta>
         </property>
 
+        <property
+                name="no"
+                column="NO"
+                type="java.lang.Integer"
+                not-null="false"
+                length="5"
+                >
+            <meta attribute="ColumnName">标段序号</meta>
+            <meta attribute="ColumnComment">标段序号</meta>
+        </property>
+
 		<property
 			name="name"
 			column="NAME"
