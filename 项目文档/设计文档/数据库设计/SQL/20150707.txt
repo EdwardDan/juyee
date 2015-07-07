@@ -1,0 +1,5 @@
+-- Add/modify columns 
+alter table PROJ_BID add NO NUMBER(5);
+-- Add comments to the columns 
+comment on column PROJ_BID.NO
+  is '±ê¶ÎÐòºÅ';
