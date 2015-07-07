@@ -8,7 +8,7 @@
                     项目形象进度汇总表
                 </c:when>
                 <c:otherwise>
-                    &nbsp;共有${fn:length(bids)}个标段
+                    &nbsp;共有${bidSize}个标段
                 </c:otherwise>
             </c:choose>
             &nbsp;<input type="button" value="导出" class="button_all" onclick="printMonthReport(this)"/>

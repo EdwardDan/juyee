@@ -55,10 +55,9 @@
                             ${yearSelectOptions}
                     </select>
                 </td>
-                <td class="form_label_right">开工日期：</td>
-                <td class="form_content">
-                    <form:input path="startDate" cssClass="input_date" readonly="true"/>
-                    <input type="button" class="button_calendar" value=" " onClick="calendar('startDate');">
+                <td class="form_label_right">项目序号：</td>
+                <td class="form_content" colspan="3">
+                    <form:input path="no" cssClass="input_text"/>
                 </td>
             </tr>
             <tr class="tr_light">
@@ -82,6 +81,13 @@
                 <td class="form_label_right">建设里程：</td>
                 <td class="form_content">
                     <form:input path="buildMileage" cssClass="input_text"/>
+                </td>
+            </tr>
+            <tr class="tr_light">
+                <td class="form_label_right">开工日期：</td>
+                <td class="form_content" colspan="3">
+                    <form:input path="startDate" cssClass="input_date" readonly="true"/>
+                    <input type="button" class="button_calendar" value=" " onClick="calendar('startDate');">
                 </td>
             </tr>
             <tr class="tr_light">

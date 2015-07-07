@@ -6,7 +6,7 @@
             gridOpts: {
                 url: "${ctx}/projBid/gridDataCustom.do?projId=${projId}&typeCode=${typeCode}",
                 colNames: ['ID',
-                    '标段编号',
+                    '标段序号',
                     '标段名称',
                     '建设里程',
                     '项目联系人',
@@ -16,7 +16,7 @@
                 ],
                 colModel: [
                     {name: 'id', width: 10, align: "center", searchtype: "integer", hidden: true},
-                    {name: "code", width: "30", align: "center", searchtype: "string", sortable: true},
+                    {name: "no", width: "30", align: "center", searchtype: "string", sortable: true},
                     {name: "name", width: "70", align: "center", searchtype: "string", sortable: true},
                     {name: "buildMileage", width: "50", align: "center", searchtype: "string", sortable: true},
                     {name: "projLink", width: "50", align: "center", searchtype: "string", sortable: true},
@@ -44,7 +44,7 @@
             },
             userOpts: {
                 defaultQuery: { "groupOp": "AND", "rules": [
-                    { "field": "标段编号", "op": "cn", "data": ""},
+                    { "field": "标段序号", "op": "cn", "data": ""},
                     { "field": "标段名称", "op": "cn", "data": ""},
                     { "field": "建设里程", "op": "cn", "data": ""},
                     { "field": "项目联系人", "op": "cn", "data": ""},
