@@ -236,7 +236,7 @@ public class ProjBidController extends BaseCRUDActionController<ProjBid> {
             if (entity.getId() != null) {
                 target = projBidService.get(entity.getId());
                 ReflectionUtils.copyBean(entity, target, new String[]{
-                        "code",
+                        "no",
                         "name",
                         "buildMileage",
                         "projLink",
@@ -247,6 +247,7 @@ public class ProjBidController extends BaseCRUDActionController<ProjBid> {
             } else {
                 target = entity;
             }
+            System.out.println("target.getNo() = " + target.getNo());
             String[] areaIds = request.getParameterValues("ProjBelongArea");
             String projInfoId = request.getParameter("projInfoId");
 

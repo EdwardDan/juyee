@@ -3,9 +3,9 @@
 <div class="form_div">
     <table cellpadding="0" cellspacing="0" class="form_table">
         <tr class="tr_light">
-            <td class="form_label_right" style="width: 20%">标段编号：</td>
+            <td class="form_label_right" style="width: 20%">标段序号：</td>
             <td class="form_content" style="width: 30%">
-                ${bean.code}
+                ${bean.no}
             </td>
             <td class="form_label_right" style="width: 20%">标段名称：</td>
             <td class="form_content" style="width: 30%">
