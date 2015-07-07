@@ -70,7 +70,7 @@ public abstract class BaseProjBid  implements Serializable,Auditable {
 
     /*标段序号*/
     /*标段序号*/
-    private java.lang.String no;
+    private java.lang.Integer no;
 
     /*标段名称*/
     /*标段名称*/
@@ -161,11 +161,11 @@ public abstract class BaseProjBid  implements Serializable,Auditable {
         this.code = code;
     }
 
-    public String getNo() {
+    public Integer getNo() {
         return no;
     }
 
-    public void setNo(String no) {
+    public void setNo(Integer no) {
         this.no = no;
     }
 
