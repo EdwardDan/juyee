@@ -194,7 +194,7 @@ public class ProjectQueryNodeController extends BaseCRUDActionController<ProjInf
             conditionHql += " and project.id=" + projectId;
         }
 //        System.out.println("conditionHql = " + conditionHql);
-        List<ProjBid> bids = projBidService.findByQuery(conditionHql + " order by project.id asc,id asc");
+        List<ProjBid> bids = projBidService.findByQuery(conditionHql + " order by project.no asc,project.id asc,no asc,id asc");
 //        model.addAttribute("bids", bids);
 
         //整理项目包含标段
@@ -335,7 +335,7 @@ public class ProjectQueryNodeController extends BaseCRUDActionController<ProjInf
             conditionHql += " and project.id=" + projectId;
         }
 //        System.out.println("conditionHql = " + conditionHql);
-        List<ProjBid> bids = projBidService.findByQuery(conditionHql + " order by project.id asc,id asc");
+        List<ProjBid> bids = projBidService.findByQuery(conditionHql + " order by project.no asc,project.id asc,no asc,id asc");
 //        beans.put("bids", bids);
 
         //整理项目包含标段
