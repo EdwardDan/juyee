@@ -15,6 +15,24 @@
         });
     });
 </script>
+<style type="text/css">
+    .input {
+        font-size: 12px;
+        border: 1px solid #b8b6b9;
+        color: #007DBC;
+        background-color: #FFFFFF;
+        width: 98.5%;
+        height: 100%
+    }
+
+    .td {
+        height: 60px;
+    }
+
+    .td2 {
+        height: 120px;
+    }
+    </style>
 <table cellpadding="0" cellspacing="0" border="1" class="table_thin_line" style="width: 100%;">
     <tr class="tr_header">
         <td nowrap colspan="3" style="width: 20%;">形象进度</td>
@@ -34,32 +52,25 @@
                             nowrap>${firstNode.name}
                         </td>
                     </c:if>
-                    <td <c:if test="${secondNode.totalChildCount>0}"> rowspan="${secondNode.totalChildCount}"</c:if>
+                    <td class="td" <c:if test="${secondNode.totalChildCount>0}"> rowspan="${secondNode.totalChildCount}"</c:if>
                             style="text-align: center;" nowrap>${secondNode.name}
                     </td>
                     <c:forEach items="${steps}" var="step">
                         <c:if test="${step.isValid}">
                             <c:set var="dataKey" value="${secondNode.id}_${step.id}"/>
                             <c:if test="${status.index%2==0}">
-                                <td style="width: 30%;">
-                                    <input type="text" name="${secondNode.id}_${step.id}"
-                                           style="width: 98%;" id="${secondNode.id}_${step.id}"
-                                           value="${dataMap[dataKey].content}"
-                                           title="${dataMap[dataKey].content}" class="input_number">
+                                <td style="width: 30%;" class="td">
+                                    <textarea class="input" name="${secondNode.id}_${step.id}"  id="${secondNode.id}_${step.id}" title="${dataMap[dataKey].content}">${dataMap[dataKey].content}</textarea>
                                 </td>
-                                <td rowspan="2" style="width: 30%;">
-                                    <textarea class="input_textarea"
-                                              style="width:98%;height:99%;"
-                                              name="${firstNode.id}_${step.id}_problem"
+                                <td rowspan="2" style="width: 30%;" class="td2">
+                                    <textarea class="input"name="${firstNode.id}_${step.id}_problem"
                                               id="${firstNode.id}_${step.id}_problem"
                                               title="${dataMap[dataKey].problem}">${dataMap[dataKey].problem}</textarea>
                                 </td>
                             </c:if>
                             <c:if test="${status.index%2==1}">
-                                <td style="width: 30%;">
-                                    <input type="text" name="${secondNode.id}_${step.id}"
-                                           id="${secondNode.id}_${step.id}" value="${dataMap[dataKey].content}"
-                                           title="${dataMap[dataKey].content}" class="input_number" style="width: 98%;">
+                                <td style="width: 30%;" class="td">
+                                    <textarea  class="input" name="${secondNode.id}_${step.id}"   id="${secondNode.id}_${step.id}" title="${dataMap[dataKey].content}" >${dataMap[dataKey].content}</textarea>
                                 </td>
                             </c:if>
                         </c:if>
@@ -78,7 +89,7 @@
                             </td>
                         </c:if>
                         <c:if test="${thirdStatus.index ==0}">
-                            <td
+                            <td  class="td"
                                     <c:if test="${secondNode.totalChildCount>0}">rowspan="${secondNode.totalChildCount}"</c:if>
                                     style="text-align: center;" nowrap>${secondNode.name}
                             </td>
@@ -87,28 +98,9 @@
                         <c:forEach items="${steps}" var="step">
                             <c:if test="${step.isValid}">
                                 <c:set var="dataKey" value="${thirdNode.id}_${step.id}"/>
-                                <c:if test="${thirdStatus.index==0&&secondStatus.index ==0}">
-                                    <td>
-                                        <input type="text" style="width: 98%;" name="${thirdNode.id}_${step.id}"
-                                               id="${thirdNode.id}_${step.id}"
-                                               value="${dataMap[dataKey].content}"
-                                               title="${dataMap[dataKey].content}" class="input_number">
+                                    <td class="td" colspan="2">
+                                        <textarea class="input" name="${thirdNode.id}_${step.id}" id="${thirdNode.id}_${step.id}" title="${dataMap[dataKey].content}">${dataMap[dataKey].content}</textarea>
                                     </td>
-                                    <td rowspan="${firstNode.totalChildCount}">
-                                        <textarea class="input_textarea" style="width:98%;height:99%;"
-                                                  name="${firstNode.id}_${step.id}_problem"
-                                                  id="${firstNode.id}_${step.id}_problem"
-                                                  title="${dataMap[dataKey].problem}">${dataMap[dataKey].problem}</textarea>
-                                    </td>
-                                </c:if>
-                                <c:if test="${thirdStatus.index!=0||secondStatus.index !=0}">
-                                    <td>
-                                        <input type="text" style="width: 98%;" name="${thirdNode.id}_${step.id}"
-                                               id="${thirdNode.id}_${step.id}"
-                                               value="${dataMap[dataKey].content}"
-                                               title="${dataMap[dataKey].content}" class="input_number">
-                                    </td>
-                                </c:if>
                             </c:if>
                         </c:forEach>
                     </tr>
