@@ -8,6 +8,7 @@ import com.justonetech.biz.utils.Constants;
 import com.justonetech.biz.utils.enums.ProjBidType;
 import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.orm.hibernate.Page;
+import com.justonetech.core.utils.JspHelper;
 import com.justonetech.core.utils.StringHelper;
 import com.justonetech.system.domain.SysCodeDetail;
 import com.justonetech.system.manager.SysCodeManager;
@@ -203,27 +204,27 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
     @RequestMapping
     public void save(HttpServletResponse response, @ModelAttribute("bean") DataStageReport entity, HttpServletRequest request, String reportLog) throws Exception {
         try {
-            DataStageReport target;
             //获取并保存标段
             String projectBidId = request.getParameter("projectBidId");
             ProjBid projBid = projBidService.get(Long.valueOf(projectBidId));
-            if (entity.getId() != null) {
+            //获取并保存项目
+            String projectId = request.getParameter("projectId");
+            String year = request.getParameter("year");
+            String month = request.getParameter("month");
+            String hql = "from DataStageReport where project.id=? and bid.id=? and year=? and month=?";
+            List<DataStageReport> list = dataStageReportService.findByQuery(hql, JspHelper.getLong(projectId), JspHelper.getLong(projectBidId), JspHelper.getInteger(year), JspHelper.getInteger(month));
+            DataStageReport target = new DataStageReport();
+            if (null != list && list.size() > 0) {
+                target = list.iterator().next();
+            }
+            if (null != entity.getId() && entity.getId().equals(target.getId())) {
                 DataStageReport dataStageReport = dataStageReportService.get(entity.getId());
                 if (null != dataStageReport.getBid() && (dataStageReport.getBid().getId().equals(projBid.getId()))) {
                     target = dataStageReport;
-                } else {
-                    target = new DataStageReport();
                 }
-            } else {
-                target = new DataStageReport();
             }
             target.setBid(projBid);
-
-            //获取并保存项目
-            String projectId = request.getParameter("projectId");
             target.setProject(projInfoService.get(Long.valueOf(projectId)));
-            String year = request.getParameter("year");
-            String month = request.getParameter("month");
             target.setYear(Integer.valueOf(year));
             target.setMonth(Integer.valueOf(month));
             dataStageReportService.save(target);
@@ -240,6 +241,7 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
                         DataStageReportLog stageReportLog = new DataStageReportLog();
                         stageReportLog.setStageReport(item.getStageReport());
                         stageReportLog.setStage(item.getStage());
+                        stageReportLog.setStep(item.getStep());
                         stageReportLog.setResult(item.getResult());
                         stageReportLog.setResultDesc(item.getResultDesc());
                         stageReportLog.setDealDate(item.getDealDate());
@@ -301,7 +303,6 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
         Calendar c = Calendar.getInstance();
         ProjInfo projInfo = projInfoService.get(projectId);
         List<DataStageReport> reportList = dataStageReportService.findByProperty("project.id", projectId);
-
         DataStageReport dataStageReport = new DataStageReport();
         if (null != reportList && reportList.size() > 0) {
             dataStageReport = reportList.iterator().next();
@@ -341,8 +342,8 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
         model.addAttribute("results", results);
         //填报数据
         Map<String, Object> dataMap = new HashMap<String, Object>();
-        String hql = "from DataStageReportItem where stageReport.project.id=? and stageReport.bid.id=? order by stageReport.year desc,stageReport.month desc,id desc";
-        List<DataStageReportItem> dataStageReportItems = dataStageReportItemService.findByQuery(hql, projectId, bidId);
+        String hql = "from DataStageReportItem where stageReport.project.id=? and stageReport.bid.id=? order by stageReport.id desc,stageReport.year desc,stageReport.month desc";
+        List<DataStageReportItem> dataStageReportItems = dataStageReportItemService.findByQuery(hql, JspHelper.getLong(projectId), JspHelper.getLong(bidId));
         for (DataStageReportItem item : dataStageReportItems) {
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("resultId", item.getResult().getId());
