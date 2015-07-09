@@ -22,7 +22,7 @@
                     {name:"name",width:"70",align:"left",searchtype:"string",sortable:true},
                     {name:"property.name",width:"40",align:"center",searchtype:"string",sortable:true},
                     {name:"stage.name",width:"40",align:"center",searchtype:"string",sortable:true},
-                    {name:"category.name",width:"40",align:"center",searchtype:"date",sortable:true},
+                    {name:"category.name",width:"40",align:"center",searchtype:"string",sortable:true},
                     {name:"bidCountOfNode",width:"25",align:"center",searchtype:"string",sortable:true},
                 ],
                 actModel:[

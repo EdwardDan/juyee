@@ -126,6 +126,7 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         model.addAttribute("yearOptions", DateTimeHelper.getYearSelectOptions(String.valueOf(c.get(Calendar.YEAR))));
         model.addAttribute("currentYear", c.get(Calendar.YEAR));
         model.addAttribute("currentMonth", c.get(Calendar.MONTH) + 1);
+        model.addAttribute("PROJ_INFO_CATEGORY", Constants.PROJ_INFO_CATEGORY);
 
         return "view/query/projectQueryStage/viewStage";
     }
@@ -143,6 +144,7 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         String bidName = request.getParameter("bidName");
         String jsDept = request.getParameter("jsDept");
         String year = request.getParameter("year");
+        String categoryId = request.getParameter("categoryId");
         Boolean isSum = StringHelper.isEmpty(projectId);   //是否汇总
         model.addAttribute("isSum", isSum);
         model.addAttribute("year", year);
@@ -185,6 +187,9 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
             }
             if (!StringHelper.isEmpty(year)) {
                 conditionHql += " and project.year='" + year + "'";
+            }
+            if (!StringHelper.isEmpty(categoryId)) {
+                conditionHql += " and project.category.id=" + categoryId;
             }
         } else {
             conditionHql += " and project.id=" + projectId;
@@ -299,12 +304,14 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         String bidName = request.getParameter("bidName");
         String jsDept = request.getParameter("jsDept");
         String year = request.getParameter("year");
+        String categoryId = request.getParameter("categoryId");
 
         model.addAttribute("projectId", projectId);
         model.addAttribute("projectName", projectName);
         model.addAttribute("bidName", bidName);
         model.addAttribute("jsDept", jsDept);
         model.addAttribute("year", year);
+        model.addAttribute("categoryId", categoryId);
 
         List<ProjStage> list = projStageService.findByQuery("from ProjStage where isValid=1 and parent is null order by treeId asc");
         model.addAttribute("list", list);
@@ -329,6 +336,7 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         String bidName = request.getParameter("bidName");
         String jsDept = request.getParameter("jsDept");
         String year = request.getParameter("year");
+        String categoryId = request.getParameter("categoryId");
         String stageIds = request.getParameter("stageIds");  //过滤节点
         Boolean isSum = StringHelper.isEmpty(projectId);   //是否汇总
         beans.put("year", year);
@@ -384,6 +392,9 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
             }
             if (!StringHelper.isEmpty(year)) {
                 conditionHql += " and project.year='" + year + "'";
+            }
+            if (!StringHelper.isEmpty(categoryId)) {
+                conditionHql += " and project.category.id=" + categoryId;
             }
         } else {
             conditionHql += " and project.id=" + projectId;

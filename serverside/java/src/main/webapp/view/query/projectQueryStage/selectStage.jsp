@@ -40,6 +40,7 @@
                 <input type="hidden" name="bidName" id="bidName" value="${bidName}"/>
                 <input type="hidden" name="jsDept" id="jsDept" value="${jsDept}"/>
                 <input type="hidden" name="year" id="year" value="${year}"/>
+                <input type="hidden" name="categoryId" id="categoryId" value="${categoryId}"/>
                 <input type="button" value="确定" class="button_confirm" onclick="printStageData(this)">&nbsp;
                 <input type="button" value="取消" class="button_cancel" onclick="closeWindow()">
             </td>

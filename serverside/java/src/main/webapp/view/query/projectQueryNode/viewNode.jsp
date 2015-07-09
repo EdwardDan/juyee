@@ -20,7 +20,7 @@
             $("#jsDept").val("");
             $("#year").val("${currentYear}");
         }
-        var str = "projectName=" + $("#projectName").val() + "&bidName=" + $("#bidName").val() + "&jsDept=" + $("#jsDept").val() + "&year=" + $("#year").val();
+        var str = "projectName=" + $("#projectName").val() + "&bidName=" + $("#bidName").val() + "&jsDept=" + $("#jsDept").val() + "&year=" + $("#year").val()+"&categoryId="+$("#categoryId").val();
         setButton(true);
         loadAjaxDataCallback("nodeDataDiv", "${ctx}/projectQueryNode/viewNodeData.do?id=${id}&month=" + month+"&" + str, resetButton);
     }
@@ -34,7 +34,7 @@
 
     //选择节点
     function selectNode(btn){
-        var str = "projectName=" + $("#projectName").val() + "&bidName=" + $("#bidName").val() + "&jsDept=" + $("#jsDept").val() + "&year=" + $("#year").val();
+        var str = "projectName=" + $("#projectName").val() + "&bidName=" + $("#bidName").val() + "&jsDept=" + $("#jsDept").val() + "&year=" + $("#year").val()+"&categoryId="+$("#categoryId").val();
         openNewWindow('selectNodeDiv','选择节点',"${ctx}/projectQueryNode/selectNode.do?id=${id}&" + str,false,600,450);
     }
 
@@ -50,7 +50,7 @@
             alert("请选择至少一个节点！");
         }else{
             ids = ids.substring(1);
-            var str = "projectName=" + $("#projectName").val() + "&bidName=" + $("#bidName").val() + "&jsDept=" + $("#jsDept").val() + "&year=" + $("#year").val();
+            var str = "projectName=" + $("#projectName").val() + "&bidName=" + $("#bidName").val() + "&jsDept=" + $("#jsDept").val() + "&year=" + $("#year").val()+"&categoryId="+$("#categoryId").val();
             str += "&nodeIds="+ids;
             window.open("${ctx}/projectQueryNode/printExcel.do?id=${id}&month=" + last_m+"&" + str);
         }
@@ -63,11 +63,15 @@
 </script>
 <style type="text/css">
     .td_normal{
-        height: 20px;
+        height: 30px;
+        min-width: 80px;
+        word-break: break-all;
         background-color: white;
     }
     .td_active{
-        height: 20px;
+        height: 30px;
+        min-width: 80px;
+        word-break: break-all;
         background-color: #0074cc;
         font-weight: bold;
     }
@@ -93,8 +97,12 @@
             <td align="left" nowrap>
                 <input type="text" name="jsDept" id="jsDept" class="input_text"/>
             </td>
-            <td align="right" nowrap>&nbsp;</td>
-            <td align="left" colspan="3" nowrap>
+            <td align="right" width="70" nowrap>项目类型：</td>
+            <td align="left" nowrap>
+                <sys:code code="${PROJ_INFO_CATEGORY}" name="categoryId" id="categoryId" type="select"
+                          sysCodeDetailId="" style="width:155px" isAlowedNull="true"/>
+            </td>
+            <td align="left" nowrap colspan="2">&nbsp;
                 <input type="button" value="查询" id="btnQueryThis" class="button_all" onclick="loadMonthReport('',null)"/>
                 <input type="button" value="显示全部" id="btnQueryAll" class="button_normal_long" onclick="loadMonthReport('${currentMonth}','all')"/>
             </td>

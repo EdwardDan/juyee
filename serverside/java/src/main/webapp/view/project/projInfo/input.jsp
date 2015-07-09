@@ -11,10 +11,6 @@
                     //{name:"buildMileage", rule:"validate[required,maxSize[50]]"},
                     //{name:"location", rule:"validate[required,maxSize[500]]"},
                     //{name:"startDate", rule:"validate[required,custom[date],maxSize[7]"},
-                    //{name:"intro", rule:"validate[required,maxSize[
-                    <%--${prop.length}]--%>
-//        ]
-//        "},
                     //{name:"jsDept", rule:"validate[required,maxSize[300]]"},
                     //{name:"sgDept", rule:"validate[required,maxSize[300]]"},
                     //{name:"sgDeptPerson", rule:"validate[required,maxSize[50]]"},
@@ -32,12 +28,6 @@
         if (!validateForm(formId)) {
             return;
         }
-
-        //加入其他业务判断
-//        if ($('#name').val() == '') {
-//            showInfoMsg('请输入姓名！',null);
-//            return;
-//        }
 
         //提交表单
         saveAjaxData("${ctx}/projInfo/save.do", formId);
