@@ -169,13 +169,9 @@ public class DataStageReportLogController extends BaseCRUDActionController<DataS
             if (entity.getId() != null) {
                 target = dataStageReportLogService.get(entity.getId());
                 ReflectionUtils.copyBean(entity, target, new String[]{
-                                                "resultDesc",                                      
-                                                                "dealDate",                                      
-                                                                "createTime",                                      
-                                                                "createUser",                                      
-                                                                "updateTime",                                      
-                                                                "updateUser"                                      
-                                                });
+                        "resultDesc",
+                        "dealDate"
+                });
 
             } else {
                 target = entity;
