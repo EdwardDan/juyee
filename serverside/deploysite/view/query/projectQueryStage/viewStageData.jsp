@@ -18,15 +18,15 @@
 <table cellpadding="0" cellspacing="0" border="1" class="table_thin_line">
     <tr class="tr_header">
         <td rowspan="2" width="2%" nowrap>序号</td>
-        <td rowspan="2" nowrap>项目名称</td>
+        <td rowspan="2" nowrap>&nbsp;&nbsp;项目名称&nbsp;&nbsp;</td>
         <td rowspan="2" nowrap>起讫地点</td>
-        <td rowspan="2" nowrap>标段名称</td>
+        <td rowspan="2" nowrap>&nbsp;&nbsp;标段名称&nbsp;&nbsp;</td>
         <td rowspan="2" nowrap>建设里程</td>
         <td rowspan="2" nowrap>涉及区县</td>
         <td rowspan="2" nowrap>开工日期</td>
         <c:if test="${stepSize>1}"><td rowspan="2" nowrap>上报单位类型</td></c:if>
         <c:forEach items="${firstStages}" var="firstStage">
-            <td colspan="${fn:length(firstStage.projStages)}" <c:if test="${fn:length(firstStage.projStages)<1}">rowspan="2" </c:if> nowrap>${firstStage.name}</td>
+            <td colspan="${fn:length(firstStage.projStages)}" <c:if test="${fn:length(firstStage.projStages)<1}">rowspan="2" </c:if> style="width: 90px;" nowrap>${firstStage.name}</td>
         </c:forEach>
     </tr>
     <tr class="tr_header">
@@ -54,7 +54,7 @@
                 <c:if test="${stepSize>1}"><td>${step.name}</td></c:if>
                 <c:forEach items="${leafStages}" var="leafStage">
                     <c:set var="dataKey" value="${bid.id}_${step.id}_${leafStage.id}" />
-                    <td nowrap class="td_normal" title="${dataMap[dataKey].resultName}" <c:if test="${not empty dataMap[dataKey].color}">style="background-color: ${dataMap[dataKey].color}"</c:if>>${dataMap[dataKey].resultName}</td>
+                    <td class="td_normal" title="${dataMap[dataKey].resultName}" <c:if test="${not empty dataMap[dataKey].color}">style="background-color: ${dataMap[dataKey].color}"</c:if>>${dataMap[dataKey].resultName}</td>
                 </c:forEach>
             </tr>
             <%--<tr class="tr_dark">--%>

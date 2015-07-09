@@ -8,7 +8,7 @@
             $("#jsDept").val("");
             $("#year").val("${currentYear}");
         }
-        var str = "projectName=" + $("#projectName").val() + "&bidName=" + $("#bidName").val() + "&jsDept=" + $("#jsDept").val() + "&year=" + $("#year").val();
+        var str = "projectName=" + $("#projectName").val() + "&bidName=" + $("#bidName").val() + "&jsDept=" + $("#jsDept").val() + "&year=" + $("#year").val()+"&categoryId="+$("#categoryId").val();
         setButton(true);
         loadAjaxDataCallback("stageDataDiv", "${ctx}/projectQueryStage/viewStageData.do?id=${id}&" + str, resetButton);
     }
@@ -22,7 +22,7 @@
 
     //选择阶段
     function selectStage(btn){
-        var str = "projectName=" + $("#projectName").val() + "&bidName=" + $("#bidName").val() + "&jsDept=" + $("#jsDept").val() + "&year=" + $("#year").val();
+        var str = "projectName=" + $("#projectName").val() + "&bidName=" + $("#bidName").val() + "&jsDept=" + $("#jsDept").val() + "&year=" + $("#year").val()+"&categoryId="+$("#categoryId").val();
         openNewWindow('selectStageDiv','选择阶段',"${ctx}/projectQueryStage/selectStage.do?id=${id}&" + str,false,600,450);
     }
 
@@ -38,7 +38,7 @@
             alert("请选择至少一个节点！");
         }else{
             ids = ids.substring(1);
-            var str = "projectName=" + $("#projectName").val() + "&bidName=" + $("#bidName").val() + "&jsDept=" + $("#jsDept").val() + "&year=" + $("#year").val();
+            var str = "projectName=" + $("#projectName").val() + "&bidName=" + $("#bidName").val() + "&jsDept=" + $("#jsDept").val() + "&year=" + $("#year").val()+"&categoryId="+$("#categoryId").val();
             str += "&stageIds="+ids;
             window.open( "${ctx}/projectQueryStage/printExcel.do?id=${id}&" + str);
         }
@@ -51,11 +51,13 @@
 </script>
 <style type="text/css">
     .td_normal{
-        min-width: 60px;
         height: 30px;
+        min-width: 80px;
+        word-break: break-all;
     }
     .td_change{
         color: red;
+        word-break: break-all;
     }
 </style>
 <div class="form_div">
@@ -79,8 +81,12 @@
             <td align="left" nowrap>
                 <input type="text" name="jsDept" id="jsDept" class="input_text"/>
             </td>
-            <td align="right" nowrap>&nbsp;</td>
-            <td align="left" colspan="3" nowrap>
+            <td align="right" width="70" nowrap>项目类型：</td>
+            <td align="left" nowrap>
+                <sys:code code="${PROJ_INFO_CATEGORY}" name="categoryId" id="categoryId" type="select"
+                          sysCodeDetailId="" style="width:155px" isAlowedNull="true"/>
+            </td>
+            <td align="left" nowrap colspan="2">&nbsp;
                 <input type="button" value="查询" id="btnQueryThis" class="button_all" onclick="loadStageData(null)"/>
                 <input type="button" value="显示全部" id="btnQueryAll" class="button_normal_long" onclick="loadStageData('all')"/>
             </td>

@@ -18,15 +18,15 @@
 <table cellpadding="0" cellspacing="0" border="1" class="table_thin_line">
     <tr class="tr_header">
         <td rowspan="3" width="2%" nowrap>序号</td>
-        <td rowspan="3" nowrap>项目名称</td>
+        <td rowspan="3" nowrap>&nbsp;&nbsp;项目名称&nbsp;&nbsp;</td>
         <td rowspan="3" nowrap>起讫地点</td>
-        <td rowspan="3" nowrap>标段名称</td>
+        <td rowspan="3" nowrap>&nbsp;&nbsp;标段名称&nbsp;&nbsp;</td>
         <td rowspan="3" nowrap>建设里程</td>
         <td rowspan="3" nowrap>涉及区县</td>
         <td rowspan="3" nowrap>开工日期</td>
         <c:if test="${stepSize>1}"><td rowspan="3" nowrap>上报单位类型</td></c:if>
         <c:forEach items="${firstNodes}" var="firstNode">
-            <td colspan="${firstNode.totalChildCount}" <c:if test="${firstNode.totalLevel<3}">rowspan="${firstNode.totalLevel}" </c:if> nowrap>${firstNode.name}</td>
+            <td colspan="${firstNode.totalChildCount}" <c:if test="${firstNode.totalLevel<3}">rowspan="${firstNode.totalLevel}" </c:if> style="width: 90px;" nowrap>${firstNode.name}</td>
         </c:forEach>
     </tr>
     <tr class="tr_header">
@@ -59,13 +59,13 @@
                     <c:if test="${stepSize>1}"><td rowspan="2">${step.name}</td></c:if>
                     <c:forEach items="${leafNodes}" var="leafNode">
                         <c:set var="dataKey" value="${bid.id}_${step.id}_${leafNode.id}" />
-                        <td>&nbsp;${dataMap[dataKey].content}</td>
+                        <td class="td_normal">&nbsp;${dataMap[dataKey].content}</td>
                     </c:forEach>
                 </tr>
                 <tr class="tr_dark">
                     <c:forEach items="${firstNodes}" var="firstNode">
                         <c:set var="dataKey" value="${bid.id}_${step.id}_${firstNode.childFirstLeafId}" />
-                        <td colspan="${firstNode.totalChildCount}">&nbsp;${dataMap[dataKey].problem}</td>
+                        <td class="td_normal" colspan="${firstNode.totalChildCount}">&nbsp;${dataMap[dataKey].problem}</td>
                     </c:forEach>
                 </tr>
             </c:forEach>
