@@ -6,6 +6,8 @@ import java.util.*;
 import com.justonetech.biz.domain.DocDocument;
 import com.justonetech.biz.domain.OaMeetingOuter;
 import com.justonetech.core.utils.JspHelper;
+import com.justonetech.system.daoservice.SysPersonService;
+import com.justonetech.system.domain.SysPerson;
 import org.apache.commons.lang.StringUtils;
 
 import com.justonetech.core.controller.BaseCRUDActionController;
@@ -82,6 +84,9 @@ public class OaMeetingInnerController extends BaseCRUDActionController<OaMeeting
     @Autowired
     private OaMeetingInnerService oaMeetingInnerService;
 
+    @Autowired
+    private SysPersonService sysPersonService;
+
     /**
      * 列表显示页面
      *
@@ -101,19 +106,31 @@ public class OaMeetingInnerController extends BaseCRUDActionController<OaMeeting
      * 获取列表数据
      *
      * @param response .
-     * @param filters  .
-     * @param columns  .
-     * @param page     .
-     * @param rows     .
+     * @param filters .
+     * @param columns .
+     * @param page .
+     * @param rows .
+     * @param session .
+     * @param queryJson .
      */
     @RequestMapping
-    public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session)
+    public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session,String queryJson)
     {
         try
         {
+            String beginTime = StringHelper.getElementValue(queryJson, "beginTime");
+            String endTime = StringHelper.getElementValue(queryJson, "endTime");
+            String status = StringHelper.getElementValue(queryJson, "status");
             Page pageModel = new Page(page, rows, true);
-            String hql = "from OaMeetingInner order by id desc";
+            String hql = "from OaMeetingInner where 1=1 ";
             //增加自定义查询条件
+            if (!StringHelper.isEmpty(beginTime)) {
+                hql += " and to_char(beginTime,'YYYY-MM-DD')>='" + beginTime + "'";
+            }
+            if (!StringHelper.isEmpty(endTime)) {
+                hql += " and to_char(endTime,'YYYY-MM-DD')<='" + endTime + "'";
+            }
+            hql += " order by id desc";
 
             //执行查询
             QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);
@@ -179,6 +196,13 @@ public class OaMeetingInnerController extends BaseCRUDActionController<OaMeeting
     {
         OaMeetingInner oaMeetingInner = oaMeetingInnerService.get(id);
 
+        //内部参会人员
+        String innerPersonIds = oaMeetingInner.getInnerPersons();
+        if (!StringHelper.isEmpty(innerPersonIds)) {
+            List<SysPerson> persons = sysPersonService.findByQuery("from SysPerson where id in("+innerPersonIds+")");
+            model.addAttribute("innerPersons",persons);
+        }
+
         //处理其他业务逻辑
         model.addAttribute("bean", oaMeetingInner);
 
@@ -199,7 +223,13 @@ public class OaMeetingInnerController extends BaseCRUDActionController<OaMeeting
     public String view(Model model, Long id)
     {
         OaMeetingInner oaMeetingInner = oaMeetingInnerService.get(id);
-
+        //内部参会人员
+        String innerPersonIds = oaMeetingInner.getInnerPersons();
+        if (!StringHelper.isEmpty(innerPersonIds)) {
+            List<SysPerson> persons = sysPersonService.findByQuery("from SysPerson where id in("+innerPersonIds+")");
+            model.addAttribute("innerPersons",persons);
+        }
+        model.addAttribute("meetTime", oaMeetingInner.getMeetTime());
         model.addAttribute("docButton", documentManager.getDownloadButton(oaMeetingInner.getDoc()));
         model.addAttribute("bean", oaMeetingInner);
         return "view/oa/oaMeetingInner/view";

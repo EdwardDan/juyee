@@ -26,21 +26,16 @@ public class OaMeetingInner extends BaseOaMeetingInner
 /*[CONSTRUCTOR MARKER END]*/
 
 
-    public String getMeetTime()
-    {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-        String meetTime = "";
-        if (getBeginTime() != null)
-        {
-            meetTime = formatter.format(getBeginTime());
+    public String getMeetTime() {
+        SimpleDateFormat sp = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+        SimpleDateFormat sp2 = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sp3 = new SimpleDateFormat("hh:mm");
+        String end = sp.format(getEndTime());
+        if (sp2.format(getBeginTime()).equals(sp2.format(getEndTime()))) {
+            end =sp3.format(getEndTime());
         }
-        if (getEndTime() != null)
-        {
-            meetTime += "~" + formatter.format(getEndTime());
-        }
-        return meetTime;
-
+        return sp.format(getBeginTime()) + " ~ " + end;
     }
+
 
 }
