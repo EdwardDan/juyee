@@ -22,9 +22,16 @@
         color: #007DBC;
         background-color: #FFFFFF;
         width: 98.5%;
-        height: 100%
+        height: 60px;
     }
-
+    .input2 {
+        font-size: 12px;
+        border: 1px solid #b8b6b9;
+        color: #007DBC;
+        background-color: #FFFFFF;
+        width: 98.5%;
+        height: 120px;
+    }
     .td {
         height: 60px;
     }
@@ -33,7 +40,7 @@
         height: 120px;
     }
     </style>
-<table cellpadding="0" cellspacing="0" border="1" class="table_thin_line" style="width: 100%;">
+<table cellpadding="0" cellspacing="0" border="1" class="form_table" style="width: 100%;">
     <tr class="tr_header">
         <td nowrap colspan="3" style="width: 20%;">形象进度</td>
         <c:forEach items="${steps}" var="step">
@@ -63,7 +70,7 @@
                                     <textarea class="input" name="${secondNode.id}_${step.id}"  id="${secondNode.id}_${step.id}" title="${dataMap[dataKey].content}">${dataMap[dataKey].content}</textarea>
                                 </td>
                                 <td rowspan="2" style="width: 30%;" class="td2">
-                                    <textarea class="input"name="${firstNode.id}_${step.id}_problem"
+                                    <textarea class="input2"name="${firstNode.id}_${step.id}_problem"
                                               id="${firstNode.id}_${step.id}_problem"
                                               title="${dataMap[dataKey].problem}">${dataMap[dataKey].problem}</textarea>
                                 </td>
@@ -89,7 +96,7 @@
                             </td>
                         </c:if>
                         <c:if test="${thirdStatus.index ==0}">
-                            <td  class="td"
+                            <td
                                     <c:if test="${secondNode.totalChildCount>0}">rowspan="${secondNode.totalChildCount}"</c:if>
                                     style="text-align: center;" nowrap>${secondNode.name}
                             </td>
@@ -98,7 +105,7 @@
                         <c:forEach items="${steps}" var="step">
                             <c:if test="${step.isValid}">
                                 <c:set var="dataKey" value="${thirdNode.id}_${step.id}"/>
-                                    <td class="td" colspan="2">
+                                    <td style="text-align: center;" colspan="2">
                                         <textarea class="input" name="${thirdNode.id}_${step.id}" id="${thirdNode.id}_${step.id}" title="${dataMap[dataKey].content}">${dataMap[dataKey].content}</textarea>
                                     </td>
                             </c:if>

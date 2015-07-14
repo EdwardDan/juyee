@@ -85,7 +85,7 @@ public class DataNodeReportController extends BaseCRUDActionController<DataNodeR
     public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session) {
         try {
             Page pageModel = new Page(page, rows, true);
-            String hql = "from ProjInfo order by id desc";
+            String hql = "from ProjInfo order by no asc";
             //增加自定义查询条件
 
             //执行查询

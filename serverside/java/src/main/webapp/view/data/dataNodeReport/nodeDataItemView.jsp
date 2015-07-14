@@ -20,7 +20,7 @@
         text-align: left;
     }
 </style>
-<table cellpadding="0" cellspacing="0" border="1" class="table_thin_line" style="width: 100%;">
+<table cellpadding="0" cellspacing="0" border="1" class="form_table" style="width: 100%;">
     <tr class="tr_header">
         <td nowrap colspan="3" style="width: 20%;">形象进度</td>
         <c:forEach items="${steps}" var="step">
