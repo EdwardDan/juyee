@@ -93,7 +93,7 @@ public class ProjectQueryNodeController extends BaseCRUDActionController<ProjInf
 //            //增加项目过滤
 //            hql += projectRelateManager.getRelateProjectHql("id");
 
-            hql += "order by id desc";
+            hql += "order by no asc,id asc";
 
             //执行查询
             QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);

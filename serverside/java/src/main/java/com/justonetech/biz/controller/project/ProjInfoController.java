@@ -88,7 +88,7 @@ public class ProjInfoController extends BaseCRUDActionController<ProjInfo> {
     public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session) {
         try {
             Page pageModel = new Page(page, rows, true);
-            String hql = "from ProjInfo order by id desc";
+            String hql = "from ProjInfo order by no asc,id asc";
 
             //执行查询
             QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);

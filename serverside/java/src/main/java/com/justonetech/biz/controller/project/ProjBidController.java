@@ -93,7 +93,7 @@ public class ProjBidController extends BaseCRUDActionController<ProjBid> {
             //增加项目过滤
             hql += projectRelateManager.getRelateProjectHql("id");
 
-            hql += "order by id desc";
+            hql += "order by no asc,id asc";
 
             //执行查询
             QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);
@@ -151,7 +151,7 @@ public class ProjBidController extends BaseCRUDActionController<ProjBid> {
             if (!StringHelper.isEmpty(typeCode)) {
                 hql += " and typeCode='" + typeCode + "'";
             }
-            hql += " order by id asc";
+            hql += " order by no asc,id asc";
 
             //执行查询
             QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);

@@ -246,7 +246,7 @@
                 >
         </many-to-one>
 
-		<set name="projBids" inverse="true">
+		<set name="projBids" inverse="true" order-by="no asc">
 			<key column="PROJECT_ID"/>
 			<one-to-many class="ProjBid"/>
 		</set>
