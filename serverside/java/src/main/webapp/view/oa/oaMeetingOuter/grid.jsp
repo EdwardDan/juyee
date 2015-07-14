@@ -85,12 +85,12 @@
     }
     function doThisQuery(btn) {
         var beginTime = "";
-        if ('' != $("#beginTime").val()) {
-            beginTime = $("#beginTime").val() + ":000"
+        if ('' != $("#start").val()) {
+            beginTime = $("#start").val() + ":000"
         }
         var endTime = "";
-        if ('' != $("#endTime").val()) {
-            endTime = $("#endTime").val() + ":000";
+        if ('' != $("#end").val()) {
+            endTime = $("#end").val() + ":000";
         }
         var v = "<beginTime>" + beginTime + "</beginTime><endTime>" + endTime + "</endTime><status>" + $("#status").val() + "</status>";
         jQuery("#listGrid").jqGrid('setGridParam',
@@ -117,12 +117,12 @@
             </c:if>
         </div>
         <div style="float:left;padding-right: 10px">
-            起始日期：<input type="text" name="beginTime" id="beginTime" value="" class="input_datetime"
+            起始日期：<input type="text" name="start" id="start" value="" class="input_datetime"
                         style="width: 120px"
-                        onClick="calendar('beginTime','datetime');"/>
-            结束日期：<input type="text" name="endTime" id="endTime" value="" class="input_datetime"
+                        onClick="calendar('start','start');"/>
+            结束日期：<input type="text" name="end" id="end" value="" class="input_datetime"
                         style="width: 120px"
-                        onClick="calendar('endTime','datetime');"/>
+                        onClick="calendar('end','end');"/>
             状态：
             <select name="status" id="status">
                 <option value="" selected>全部</option>
