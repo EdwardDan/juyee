@@ -85,7 +85,7 @@ public class DataNodeReportController extends BaseCRUDActionController<DataNodeR
     public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session) {
         try {
             Page pageModel = new Page(page, rows, true);
-            String hql = "from ProjInfo order by no asc";
+            String hql = "from ProjInfo order by no asc,id asc";
             //增加自定义查询条件
 
             //执行查询
@@ -330,6 +330,6 @@ public class DataNodeReportController extends BaseCRUDActionController<DataNodeR
      * @return .
      */
     private List<ProjBid> getBids(Long projectId) {
-        return projBidService.findByQuery(" from ProjBid where project.id=" + projectId + " and  typeCode='" + ProjBidType.TYPE_NODE.getCode() + "' order by no asc");
+        return projBidService.findByQuery(" from ProjBid where project.id=" + projectId + " and  typeCode='" + ProjBidType.TYPE_NODE.getCode() + "' order by no asc,id asc");
     }
 }
