@@ -76,7 +76,8 @@
                 },
                 "mobile":{
                     // credit: jquery.h5validate.js / orefalo
-                    "regex":/^((\(\d{2,3}\))|(\d{3}\-))?1\d{10}$/,
+                    //"regex":/^((\(\d{2,3}\))|(\d{3}\-))?1\d{10}$/,
+                    "regex": /^1[3|4|5|8][0-9]\d{8}$/,
                     "alertText":"* 无效的手机号码"
                 },
                 "email": {
