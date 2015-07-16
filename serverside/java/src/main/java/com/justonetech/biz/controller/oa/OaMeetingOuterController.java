@@ -130,10 +130,10 @@ public class OaMeetingOuterController extends BaseCRUDActionController<OaMeeting
             String hql = "from OaMeetingOuter where 1=1 ";
             //增加自定义查询条件
             if (!StringHelper.isEmpty(beginTime)) {
-                hql += " and to_char(beginTime,'YYYY-MM-DD')>='" + beginTime + "'";
+                hql += " and to_char(beginTime,'yyyy-MM-dd')>='" + beginTime + "'";
             }
             if (!StringHelper.isEmpty(endTime)) {
-                hql += " and to_char(endTime,'YYYY-MM-DD')<='" + endTime + "'";
+                hql += " and to_char(endTime,'yyyy-MM-dd')<='" + endTime + "'";
             }
 
             if (!StringHelper.isEmpty(status)) {
