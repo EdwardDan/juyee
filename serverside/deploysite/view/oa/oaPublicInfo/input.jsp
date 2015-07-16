@@ -2,6 +2,7 @@
 <%--pageEncoding="UTF-8" import="net.fckeditor.*" %>--%>
 <%@ taglib uri="http://java.fckeditor.net" prefix="FCK" %>
 <%@ include file="/common/taglibs.jsp" %>
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" /><%--为了使FCKeditor在IE10、IE11上能够兼容--%>
 <title>信息发布</title>
 <%@include file="/common/header.jsp" %>
 <script src="${ctx}/js/fckeditor/fckeditor.js" type="text/javascript"></script>

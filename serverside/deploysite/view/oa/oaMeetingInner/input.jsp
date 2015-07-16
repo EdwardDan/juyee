@@ -9,6 +9,7 @@
             {name:"endTime", rule:"validate[required,maxSize[25]]"},
             {name:"address", rule:"validate[required,maxSize[200]]"},
             {name:"title", rule:"validate[required,maxSize[200]]"},
+            {name:"content", rule:"validate[required,maxSize[200]]"},
         ];
         validateInit(validateCondition, formId);
     });
@@ -49,7 +50,7 @@
 
     <div class="form_div">
         <table cellpadding="0" cellspacing="0" class="form_table">
-            <tr class="tr_light">
+            <tr class="tr_dark">
                 <td class="form_label">会议时间：</td>
                 <td class="form_content" colspan="3">
                     <input type="text" name="beginTime" id="beginTime" class="input_datetime"
@@ -68,37 +69,45 @@
             <tr class="tr_light">
                 <td class="form_label">会议地点：</td>
                 <td class="form_content">
-                    <form:input path="address" cssClass="input_text"/>
+                    <form:input path="address" cssClass="input_text_long"/>
                 </td>
             </tr>
             <tr class="tr_dark">
                 <td class="form_label_right" width="20%">内部人员：</td>
                 <td class="form_content">
-                    <form:input path="innerPersons" cssClass="input_text"/>
+
+                    <select multiple="multiple" id="innerPerson" name="innerPerson"
+                            style="width:250px;height:60px;">
+                        <c:forEach items="${innerPersons}" var="item">
+                            <option value="${item.id}">${item.name}</option>
+                        </c:forEach>
+                    </select>
                     <input type="button" value=" " class="button_select_add"
-                           onclick="multiSelectSysPerson('','innerPersonIds','innerPersons')"
-                           title="请选择人员">
-                    <input typ="button" value="" class="button_select_remove" onclick="removePersons()"/>
-                    <input type="hidden" name="innerPersonIds" id="innerPersonIds" value="">
+                           onclick="multiSelectSysPerson('innerPerson','innerPersons','innerPersonNames')"
+                           title="点击选择内部接收人">
+                    <input type="button" value=" " class="button_select_remove"
+                           onclick="removeMultiSelectOpt('innerPerson','innerPersons','innerPersonNames')"
+                           title="点击移除内部接收人">
+                    <input type="hidden" id="innerPersons" name="innerPersons" value="${bean.innerPersons}">
 
                 </td>
             </tr>
             <tr class="tr_light">
                 <td class="form_label">外部人员：</td>
                 <td class="form_content">
-                    <form:input path="outerPersons" cssClass="input_text"/>
+                    <form:textarea path="outerPersons" style="width:245px;height:60px;"/>
                 </td>
             </tr>
             <tr class="tr_dark">
                 <td class="form_label">会议议题：</td>
                 <td class="form_content">
-                    <form:input path="title" cssClass="input_text"/>
+                    <form:input path="title" cssClass="input_text_long"/>
                 </td>
             </tr>
             <tr class="tr_light">
                 <td class="form_label">会议内容：</td>
                 <td class="form_content">
-                    <form:textarea path="content" cssStyle="width: 150px;height: 100px;"></form:textarea>
+                    <form:textarea path="content" cssClass="input_textarea_long"></form:textarea>
                 </td>
             </tr>
             <tr class="tr_dark">
@@ -109,8 +118,7 @@
             </tr>
 
             <tr class="tr_button">
-                <td class="form_label"></td>
-                <td class="form_content">
+                <td class="form_content" colspan="2" style="text-align: center">
                     <input type="button" value="确定" class="button_confirm" onclick="save(this)">&nbsp;
                     <input type="button" value="取消" class="button_cancel" onclick="closeWindow()">
                 </td>

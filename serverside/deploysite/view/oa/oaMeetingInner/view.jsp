@@ -2,11 +2,10 @@
 <%@ include file="/common/taglibs.jsp" %>
 <div class="form_div">
     <table cellpadding="0" cellspacing="0" class="form_table">
-        <tr class="tr_light">
+        <tr class="tr_dark">
             <td class="form_label">会议时间：</td>
             <td class="form_content">&nbsp;
-                <fmt:formatDate value="${bean.beginTime}" pattern="yyyy-MM-dd HH:mm"/>~
-                <fmt:formatDate value="${bean.endTime}" pattern="yyyy-MM-dd HH:mm"/>
+                ${meetTime}
             </td>
         </tr>
         <tr class="tr_light">
@@ -17,7 +16,10 @@
         <tr class="tr_dark">
             <td class="form_label">内部人员：</td>
             <td class="form_content">&nbsp;
-                ${bean.innerPersons}                    </td>
+                <c:forEach var="item" items="${innerPersons}">
+                    ${item.name},
+                </c:forEach>
+                                </td>
         </tr>
         <tr class="tr_light">
             <td class="form_label">外部人员：</td>
@@ -35,7 +37,7 @@
                 <sys:toHtml>${bean.content}</sys:toHtml>
             </td>
         </tr>
-        <tr class="tr_light">
+        <tr class="tr_dark">
             <td class="form_label">附件：</td>
             <td class="form_content">&nbsp;
                 ${docButton}

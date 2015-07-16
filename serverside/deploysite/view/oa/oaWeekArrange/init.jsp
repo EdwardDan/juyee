@@ -29,13 +29,8 @@
                 中心领导一周工作安排表
             </td>
         </tr>
-        <sys:calendar themePath="${themePath}" requestPage="${requestPage}" startDate="${startDate}"
+        <sys:calendarWeekArrange themePath="${themePath}" requestPage="${requestPage}" startDate="${startDate}"
                       endDate="${endDate}"/>
-        <tr>
-            <td class="tr_button" style="text-align: right;">
-                <input type="button" class="button_all" value="编辑" onclick="doEdit('${startDate}','${endDate}')">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </td>
-        </tr>
     </table>
     <div id="results" style="overflow: auto;"></div>
     <br>
