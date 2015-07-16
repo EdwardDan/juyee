@@ -120,7 +120,6 @@ public class OaMeetingInnerController extends BaseCRUDActionController<OaMeeting
         {
             String beginTime = StringHelper.getElementValue(queryJson, "beginTime");
             String endTime = StringHelper.getElementValue(queryJson, "endTime");
-            String status = StringHelper.getElementValue(queryJson, "status");
             Page pageModel = new Page(page, rows, true);
             String hql = "from OaMeetingInner where 1=1 ";
             //增加自定义查询条件
