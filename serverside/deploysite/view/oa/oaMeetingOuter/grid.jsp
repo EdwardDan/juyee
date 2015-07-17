@@ -86,11 +86,11 @@
     function doThisQuery(btn) {
         var beginTime = "";
         if ('' != $("#start").val()) {
-            beginTime = $("#start").val() + ":000"
+            beginTime = $("#start").val()
         }
         var endTime = "";
         if ('' != $("#end").val()) {
-            endTime = $("#end").val() + ":000";
+            endTime = $("#end").val()
         }
         var v = "<beginTime>" + beginTime + "</beginTime><endTime>" + endTime + "</endTime><status>" + $("#status").val() + "</status>";
         jQuery("#listGrid").jqGrid('setGridParam',

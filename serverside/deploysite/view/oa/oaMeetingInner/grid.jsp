@@ -74,13 +74,13 @@
     function doThisQuery(btn) {
         var beginTime = "";
         if ('' != $("#start").val()) {
-            start = $("#start").val() + ":000"
+            beginTime = $("#start").val();
         }
         var endTime = "";
         if ('' != $("#end").val()) {
-            endTime = $("#end").val() + ":000";
+            endTime = $("#end").val();
         }
-        var v = "<beginTime>" + beginTime + "</beginTime><endTime>" + endTime + "</endTime><status>" + $("#status").val() + "</status>";
+        var v = "<beginTime>" + beginTime + "</beginTime><endTime>" + endTime + "</endTime>";
         jQuery("#listGrid").jqGrid('setGridParam',
                 {
                     postData: {'queryJson': v}
@@ -110,10 +110,10 @@
         <div style="float:left;padding-right: 10px">
             起始日期：<input type="text" name="start" id="start" value="" class="input_datetime"
                         style="width: 120px"
-                        onClick="calendar('start','datetime');"/>
+                        onClick="calendar('start','start');"/>
             结束日期：<input type="text" name="end" id="end" value="" class="input_datetime"
                         style="width: 120px"
-                        onClick="calendar('end','datetime');"/>
+                        onClick="calendar('end','end');"/>
             <input type="button" value="重置" class="button_all" onclick="resetDate()"/>
             <input type="button" value="查询" class="btn_Search" onclick="doThisQuery(this)"/>
         </div>
