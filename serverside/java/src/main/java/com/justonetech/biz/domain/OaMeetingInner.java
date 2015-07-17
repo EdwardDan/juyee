@@ -27,9 +27,9 @@ public class OaMeetingInner extends BaseOaMeetingInner
 
 
     public String getMeetTime() {
-        SimpleDateFormat sp = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+        SimpleDateFormat sp = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         SimpleDateFormat sp2 = new SimpleDateFormat("yyyy-MM-dd");
-        SimpleDateFormat sp3 = new SimpleDateFormat("hh:mm");
+        SimpleDateFormat sp3 = new SimpleDateFormat("HH:mm");
         String end = sp.format(getEndTime());
         if (sp2.format(getBeginTime()).equals(sp2.format(getEndTime()))) {
             end =sp3.format(getEndTime());
