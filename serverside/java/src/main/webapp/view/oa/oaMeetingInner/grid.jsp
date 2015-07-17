@@ -17,11 +17,11 @@
                 colModel: [
                     {name: 'id', width: 10, align: "center", searchtype: "integer", hidden: true},
                     {name: "title", width: "66", align: "left", searchtype: "string", sortable: true},
-                    {name: "meetTime", width: "75", align: "center", searchtype: "datetime", sortable: true,},
+                    {name: "meetTime", width: "75", align: "center", searchtype: "datetime", sortable: true},
                     {name: "beginTime", width: "40", align: "center", searchtype: "date", sortable: true, hidden: true},
                     {name: "endTime", width: "40", align: "center", searchtype: "date", sortable: true, hidden: true},
                     {name: "address", width: "66", align: "left", searchtype: "string", sortable: true},
-                    {name: "docDown", width: "30", align: "center"},
+                    {name: "docDown", width: "30", align: "center"}
                 ],
                 actModel: [
                     {name: 'operation', width: 40, align: 'center'}
