@@ -9,7 +9,7 @@
             {name:"endTime", rule:"validate[required,maxSize[25]]"},
             {name:"address", rule:"validate[required,maxSize[200]]"},
             {name:"title", rule:"validate[required,maxSize[200]]"},
-            {name:"content", rule:"validate[required,maxSize[200]]"},
+            {name:"content", rule:"validate[required,maxSize[200]]"}
         ];
         validateInit(validateCondition, formId);
     });
