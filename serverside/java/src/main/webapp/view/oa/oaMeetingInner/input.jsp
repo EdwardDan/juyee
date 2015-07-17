@@ -34,7 +34,6 @@
         }
 
         $(btn).get(0).disabled = true;
-        $("#status").val(status);
         $("#beginTime").val($("#beginTime").val() + ":00");
         $("#endTime").val($("#endTime").val() + ":00");
 
