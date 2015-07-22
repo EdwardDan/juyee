@@ -92,7 +92,7 @@ public class Constants {
      */
     public static final String PROJ_INFO_PROPERTY = "ProjProperty"; //项目性质
     public static final String PROJ_INFO_STAGE = "ProjStage"; //项目阶段
-    public static final String PROJ_INFO_CATEGORY = "ProjCategory"; //项目阶段
+    public static final String PROJ_INFO_CATEGORY = "ProjCategory"; //项目类别
     public static final String PROJ_INFO_BELONG_AREA = "ProjBelongArea"; //涉及区（县）
     /****************************************** 项目管理 end *******************************************************/
 

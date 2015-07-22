@@ -145,6 +145,8 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         String jsDept = request.getParameter("jsDept");
         String year = request.getParameter("year");
         String categoryId = request.getParameter("categoryId");
+        String beginDate = request.getParameter("beginDate");
+        String endDate = request.getParameter("endDate");
         Boolean isSum = StringHelper.isEmpty(projectId);   //是否汇总
         model.addAttribute("isSum", isSum);
         model.addAttribute("year", year);
@@ -190,6 +192,12 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
             }
             if (!StringHelper.isEmpty(categoryId)) {
                 conditionHql += " and project.category.id=" + categoryId;
+            }
+            if (!StringHelper.isEmpty(beginDate)) {
+                conditionHql += " and to_char(createTime,'yyyy-mm-dd')>='"+beginDate+"'";
+            }
+            if (!StringHelper.isEmpty(endDate)) {
+                conditionHql += " and to_char(createTime,'yyyy-mm-dd')<='"+endDate+"'";
             }
         } else {
             conditionHql += " and project.id=" + projectId;
@@ -305,6 +313,8 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         String jsDept = request.getParameter("jsDept");
         String year = request.getParameter("year");
         String categoryId = request.getParameter("categoryId");
+        String beginDate = request.getParameter("beginDate");
+        String endDate = request.getParameter("endDate");
 
         model.addAttribute("projectId", projectId);
         model.addAttribute("projectName", projectName);
@@ -312,6 +322,10 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         model.addAttribute("jsDept", jsDept);
         model.addAttribute("year", year);
         model.addAttribute("categoryId", categoryId);
+        model.addAttribute("beginDate", beginDate);
+        model.addAttribute("endDate", endDate);
+
+        model.addAttribute("DATA_STAGE_RESULT", Constants.DATA_STAGE_RESULT);
 
         List<ProjStage> list = projStageService.findByQuery("from ProjStage where isValid=1 and parent is null order by treeId asc");
         model.addAttribute("list", list);
@@ -338,6 +352,8 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         String year = request.getParameter("year");
         String categoryId = request.getParameter("categoryId");
         String stageIds = request.getParameter("stageIds");  //过滤节点
+        String beginDate = request.getParameter("beginDate");
+        String endDate = request.getParameter("endDate");
         Boolean isSum = StringHelper.isEmpty(projectId);   //是否汇总
         beans.put("year", year);
 
@@ -395,6 +411,12 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
             }
             if (!StringHelper.isEmpty(categoryId)) {
                 conditionHql += " and project.category.id=" + categoryId;
+            }
+            if (!StringHelper.isEmpty(beginDate)) {
+                conditionHql += " and to_char(createTime,'yyyy-mm-dd')>='"+beginDate+"'";
+            }
+            if (!StringHelper.isEmpty(endDate)) {
+                conditionHql += " and to_char(createTime,'yyyy-mm-dd')<='"+endDate+"'";
             }
         } else {
             conditionHql += " and project.id=" + projectId;
@@ -504,7 +526,7 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
 //        mergerCellsList.add(new int[]{7,5,7,6});
 
         //前期阶段合并
-        startColNo = 8;
+        startColNo = 9;
         for (ProjStage stage : firstStages) {
             if (!StringHelper.isEmpty(stage.getName())) {
                 startRowNo = 1;
@@ -529,7 +551,7 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
 //        mergerCellsList.add(new int[]{13,1,14,1});
 
         //大标题合并
-        mergerCellsList.add(new int[]{0, 0, leafStages.size() + 8 - 1, 0});
+        mergerCellsList.add(new int[]{0, 0, leafStages.size() + 9 - 1, 0});
 
         //for test
 //        for (int[] ints : mergerCellsList) {

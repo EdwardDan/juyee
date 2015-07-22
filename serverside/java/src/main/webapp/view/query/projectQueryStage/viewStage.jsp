@@ -7,8 +7,10 @@
             $("#bidName").val("");
             $("#jsDept").val("");
             $("#year").val("${currentYear}");
+            $("#beginDate").val("");
+            $("#endDate").val("");
         }
-        var str = "projectName=" + $("#projectName").val() + "&bidName=" + $("#bidName").val() + "&jsDept=" + $("#jsDept").val() + "&year=" + $("#year").val()+"&categoryId="+$("#categoryId").val();
+        var str = getCondStr();
         setButton(true);
         loadAjaxDataCallback("stageDataDiv", "${ctx}/projectQueryStage/viewStageData.do?id=${id}&" + str, resetButton);
     }
@@ -22,7 +24,7 @@
 
     //选择阶段
     function selectStage(btn){
-        var str = "projectName=" + $("#projectName").val() + "&bidName=" + $("#bidName").val() + "&jsDept=" + $("#jsDept").val() + "&year=" + $("#year").val()+"&categoryId="+$("#categoryId").val();
+        var str = getCondStr();
         openNewWindow('selectStageDiv','选择阶段',"${ctx}/projectQueryStage/selectStage.do?id=${id}&" + str,false,600,450);
     }
 
@@ -38,10 +40,20 @@
             alert("请选择至少一个节点！");
         }else{
             ids = ids.substring(1);
-            var str = "projectName=" + $("#projectName").val() + "&bidName=" + $("#bidName").val() + "&jsDept=" + $("#jsDept").val() + "&year=" + $("#year").val()+"&categoryId="+$("#categoryId").val();
-            str += "&stageIds="+ids;
+            var str = getCondStr()+"&stageIds="+ids;
             window.open( "${ctx}/projectQueryStage/printExcel.do?id=${id}&" + str);
         }
+    }
+
+    function getCondStr() {
+        var s = "projectName=" + $("#projectName").val();
+        s += "&bidName=" + $("#bidName").val();
+        s += "&jsDept=" + $("#jsDept").val();
+        s += "&year=" + $("#year").val();
+        s += "&categoryId=" + $("#categoryId").val();
+        s += "&beginDate=" + $("#beginDate").val();
+        s += "&endDate=" + $("#endDate").val();
+        return s;
     }
 
     //初始化
@@ -75,6 +87,15 @@
             <td align="left" nowrap>
                 <select name="year" id="year">${yearOptions}</select>
             </td>
+            <td align="right" width="70" nowrap>创建时间：</td>
+            <td align="left" nowrap>
+                从
+                <input type="text" name="beginDate" id="beginDate" class="input_date"/>
+                <input type="button" class="button_calendar" value="" onClick="calendar('beginDate');">
+                到
+                <input type="text" name="endDate" id="endDate" class="input_date"/>
+                <input type="button" class="button_calendar" value="" onClick="calendar('endDate');">
+            </td>
         </tr>
         <tr>
             <td align="right" nowrap>建设单位：</td>
@@ -86,7 +107,7 @@
                 <sys:code code="${PROJ_INFO_CATEGORY}" name="categoryId" id="categoryId" type="select"
                           sysCodeDetailId="" style="width:155px" isAlowedNull="true"/>
             </td>
-            <td align="left" nowrap colspan="2">&nbsp;
+            <td align="left" nowrap colspan="4">&nbsp;
                 <input type="button" value="查询" id="btnQueryThis" class="button_all" onclick="loadStageData(null)"/>
                 <input type="button" value="显示全部" id="btnQueryAll" class="button_normal_long" onclick="loadStageData('all')"/>
             </td>

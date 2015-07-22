@@ -19,9 +19,9 @@
 </style>
 <div class="form_div">
     <form action="" name="form1" id="form1" method="post">
-    <table cellpadding="1" cellspacing="1" width="500" border="0" <c:if test="${not empty id}">style="display: none"</c:if>>
+    <table cellpadding="1" cellspacing="1" width="100%" border="0" <c:if test="${not empty id}">style="display: none"</c:if>>
         <tr class="tr_light">
-            <td align="right" width="70" nowrap>选择节点：</td>
+            <td align="right" width="20%" nowrap>选择节点：</td>
             <td align="left" nowrap style="line-height: 25px">
                 <c:if test="${fn:length(list)>0}">
                     <input type="checkbox" name="checkAll" id="checkAll" value="" onclick="doCheckAll()" checked="true">全部
