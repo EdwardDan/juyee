@@ -116,6 +116,171 @@
         </property>
 
         <property
+                name="jsdwName"
+                column="JSDW_NAME"
+                type="string"
+                not-null="false"
+                length="300"
+                >
+            <meta attribute="ColumnName">建设单位名称</meta>
+            <meta attribute="ColumnComment">建设单位名称</meta>
+        </property>
+
+        <property
+                name="jsdwPerson"
+                column="JSDW_PERSON"
+                type="string"
+                not-null="false"
+                length="50"
+                >
+            <meta attribute="ColumnName">建设单位联系人</meta>
+            <meta attribute="ColumnComment">建设单位联系人</meta>
+        </property>
+
+        <property
+                name="jsdwTel"
+                column="JSDW_TEL"
+                type="string"
+                not-null="false"
+                length="50"
+                >
+            <meta attribute="ColumnName">建设单位联系电话</meta>
+            <meta attribute="ColumnComment">建设单位联系电话</meta>
+        </property>
+
+        <property
+                name="kcdwName"
+                column="KCDW_NAME"
+                type="string"
+                not-null="false"
+                length="300"
+                >
+            <meta attribute="ColumnName">勘察单位名称</meta>
+            <meta attribute="ColumnComment">勘察单位名称</meta>
+        </property>
+
+        <property
+                name="kcdwPerson"
+                column="KCDW_PERSON"
+                type="string"
+                not-null="false"
+                length="50"
+                >
+            <meta attribute="ColumnName">勘察单位联系人</meta>
+            <meta attribute="ColumnComment">勘察单位联系人</meta>
+        </property>
+
+        <property
+                name="kcdwTel"
+                column="KCDW_TEL"
+                type="string"
+                not-null="false"
+                length="50"
+                >
+            <meta attribute="ColumnName">勘察单位联系电话</meta>
+            <meta attribute="ColumnComment">勘察单位联系电话</meta>
+        </property>
+
+        <property
+                name="sjdwName"
+                column="SJDW_NAME"
+                type="string"
+                not-null="false"
+                length="300"
+                >
+            <meta attribute="ColumnName">设计单位名称</meta>
+            <meta attribute="ColumnComment">设计单位名称</meta>
+        </property>
+
+        <property
+                name="sjdwPerson"
+                column="SJDW_PERSON"
+                type="string"
+                not-null="false"
+                length="50"
+                >
+            <meta attribute="ColumnName">设计单位联系人</meta>
+            <meta attribute="ColumnComment">设计单位联系人</meta>
+        </property>
+
+        <property
+                name="sjdwTel"
+                column="SJDW_TEL"
+                type="string"
+                not-null="false"
+                length="50"
+                >
+            <meta attribute="ColumnName">设计单位联系电话</meta>
+            <meta attribute="ColumnComment">设计单位联系电话</meta>
+        </property>
+
+        <property
+                name="sgdwName"
+                column="SGDW_NAME"
+                type="string"
+                not-null="false"
+                length="300"
+                >
+            <meta attribute="ColumnName">施工单位名称</meta>
+            <meta attribute="ColumnComment">施工单位名称</meta>
+        </property>
+
+        <property
+                name="sgdwPerson"
+                column="SGDW_PERSON"
+                type="string"
+                not-null="false"
+                length="50"
+                >
+            <meta attribute="ColumnName">施工单位联系人</meta>
+            <meta attribute="ColumnComment">施工单位联系人</meta>
+        </property>
+
+        <property
+                name="sgdwTel"
+                column="SGDW_TEL"
+                type="string"
+                not-null="false"
+                length="50"
+                >
+            <meta attribute="ColumnName">施工单位联系电话</meta>
+            <meta attribute="ColumnComment">施工单位联系电话</meta>
+        </property>
+
+        <property
+                name="jldwName"
+                column="JLDW_NAME"
+                type="string"
+                not-null="false"
+                length="300"
+                >
+            <meta attribute="ColumnName">监理单位名称</meta>
+            <meta attribute="ColumnComment">监理单位名称</meta>
+        </property>
+
+        <property
+                name="jldwPerson"
+                column="JLDW_PERSON"
+                type="string"
+                not-null="false"
+                length="50"
+                >
+            <meta attribute="ColumnName">监理单位联系人</meta>
+            <meta attribute="ColumnComment">监理单位联系人</meta>
+        </property>
+
+        <property
+                name="jldwTel"
+                column="JLDW_TEL"
+                type="string"
+                not-null="false"
+                length="50"
+                >
+            <meta attribute="ColumnName">监理单位联系电话</meta>
+            <meta attribute="ColumnComment">监理单位联系电话</meta>
+        </property>
+
+        <property
                 name="createTime"
                 column="CREATE_TIME"
                 type="timestamp"

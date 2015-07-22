@@ -26,19 +26,35 @@ import java.io.Serializable;
 public abstract class BaseProjBid  implements Serializable,Auditable {
 
     public static String REF = "ProjBid";
-    public static String PROP_UPDATE_TIME = "updateTime";
+    public static String PROP_JSDW_NAME = "jsdwName";
+    public static String PROP_JSDW_TEL = "jsdwTel";
+    public static String PROP_SJDW_PERSON = "sjdwPerson";
+    public static String PROP_SGDW_NAME = "sgdwName";
     public static String PROP_CODE = "code";
-    public static String PROP_NAME = "name";
+    public static String PROP_JLDW_NAME = "jldwName";
     public static String PROP_CREATE_USER = "createUser";
+    public static String PROP_SJDW_NAME = "sjdwName";
     public static String PROP_START_DATE = "startDate";
+    public static String PROP_JLDW_PERSON = "jldwPerson";
     public static String PROP_TYPE_CODE = "typeCode";
+    public static String PROP_KCDW_TEL = "kcdwTel";
+    public static String PROP_PROJECT = "project";
+    public static String PROP_UPDATE_USER = "updateUser";
+    public static String PROP_KCDW_NAME = "kcdwName";
+    public static String PROP_JSDW_PERSON = "jsdwPerson";
+    public static String PROP_SGDW_PERSON = "sgdwPerson";
+    public static String PROP_UPDATE_TIME = "updateTime";
+    public static String PROP_SGDW_TEL = "sgdwTel";
+    public static String PROP_NO = "no";
+    public static String PROP_NAME = "name";
     public static String PROP_LINK_TEL = "linkTel";
+    public static String PROP_JLDW_TEL = "jldwTel";
+    public static String PROP_KCDW_PERSON = "kcdwPerson";
     public static String PROP_CREATE_TIME = "createTime";
     public static String PROP_BUILD_MILEAGE = "buildMileage";
-    public static String PROP_PROJECT = "project";
     public static String PROP_ID = "id";
     public static String PROP_PROJ_LINK = "projLink";
-    public static String PROP_UPDATE_USER = "updateUser";
+    public static String PROP_SJDW_TEL = "sjdwTel";
 
 
     // constructors
@@ -95,6 +111,66 @@ public abstract class BaseProjBid  implements Serializable,Auditable {
     /*开工日期*/
     /*开工日期*/
     private java.sql.Date startDate;
+
+    /*建设单位名称*/
+    /*建设单位名称*/
+    private java.lang.String jsdwName;
+
+    /*建设单位联系人*/
+    /*建设单位联系人*/
+    private java.lang.String jsdwPerson;
+
+    /*建设单位联系电话*/
+    /*建设单位联系电话*/
+    private java.lang.String jsdwTel;
+
+    /*勘察单位名称*/
+    /*勘察单位名称*/
+    private java.lang.String kcdwName;
+
+    /*勘察单位联系人*/
+    /*勘察单位联系人*/
+    private java.lang.String kcdwPerson;
+
+    /*勘察单位联系电话*/
+    /*勘察单位联系电话*/
+    private java.lang.String kcdwTel;
+
+    /*设计单位名称*/
+    /*设计单位名称*/
+    private java.lang.String sjdwName;
+
+    /*设计单位联系人*/
+    /*设计单位联系人*/
+    private java.lang.String sjdwPerson;
+
+    /*设计单位联系电话*/
+    /*设计单位联系电话*/
+    private java.lang.String sjdwTel;
+
+    /*施工单位名称*/
+    /*施工单位名称*/
+    private java.lang.String sgdwName;
+
+    /*施工单位联系人*/
+    /*施工单位联系人*/
+    private java.lang.String sgdwPerson;
+
+    /*施工单位联系电话*/
+    /*施工单位联系电话*/
+    private java.lang.String sgdwTel;
+
+    /*监理单位名称*/
+    /*监理单位名称*/
+    private java.lang.String jldwName;
+
+    /*监理单位联系人*/
+    /*监理单位联系人*/
+    private java.lang.String jldwPerson;
+
+    /*监理单位联系电话*/
+    /*监理单位联系电话*/
+    private java.lang.String jldwTel;
 
     /*创建时间*/
     /*创建时间*/
@@ -161,13 +237,22 @@ public abstract class BaseProjBid  implements Serializable,Auditable {
         this.code = code;
     }
 
-    public Integer getNo() {
+
+    /**
+     * Return the value associated with the column: NO
+     */
+    public java.lang.Integer getNo () {
         return no;
     }
 
-    public void setNo(Integer no) {
+    /**
+     * Set the value related to the column: NO
+     * @param no the NO value
+     */
+    public void setNo (java.lang.Integer no) {
         this.no = no;
     }
+
 
     /**
      * Return the value associated with the column: NAME
@@ -262,6 +347,246 @@ public abstract class BaseProjBid  implements Serializable,Auditable {
      */
     public void setStartDate (java.sql.Date startDate) {
         this.startDate = startDate;
+    }
+
+
+    /**
+     * Return the value associated with the column: JSDW_NAME
+     */
+    public java.lang.String getJsdwName () {
+        return jsdwName;
+    }
+
+    /**
+     * Set the value related to the column: JSDW_NAME
+     * @param jsdwName the JSDW_NAME value
+     */
+    public void setJsdwName (java.lang.String jsdwName) {
+        this.jsdwName = jsdwName;
+    }
+
+
+    /**
+     * Return the value associated with the column: JSDW_PERSON
+     */
+    public java.lang.String getJsdwPerson () {
+        return jsdwPerson;
+    }
+
+    /**
+     * Set the value related to the column: JSDW_PERSON
+     * @param jsdwPerson the JSDW_PERSON value
+     */
+    public void setJsdwPerson (java.lang.String jsdwPerson) {
+        this.jsdwPerson = jsdwPerson;
+    }
+
+
+    /**
+     * Return the value associated with the column: JSDW_TEL
+     */
+    public java.lang.String getJsdwTel () {
+        return jsdwTel;
+    }
+
+    /**
+     * Set the value related to the column: JSDW_TEL
+     * @param jsdwTel the JSDW_TEL value
+     */
+    public void setJsdwTel (java.lang.String jsdwTel) {
+        this.jsdwTel = jsdwTel;
+    }
+
+
+    /**
+     * Return the value associated with the column: KCDW_NAME
+     */
+    public java.lang.String getKcdwName () {
+        return kcdwName;
+    }
+
+    /**
+     * Set the value related to the column: KCDW_NAME
+     * @param kcdwName the KCDW_NAME value
+     */
+    public void setKcdwName (java.lang.String kcdwName) {
+        this.kcdwName = kcdwName;
+    }
+
+
+    /**
+     * Return the value associated with the column: KCDW_PERSON
+     */
+    public java.lang.String getKcdwPerson () {
+        return kcdwPerson;
+    }
+
+    /**
+     * Set the value related to the column: KCDW_PERSON
+     * @param kcdwPerson the KCDW_PERSON value
+     */
+    public void setKcdwPerson (java.lang.String kcdwPerson) {
+        this.kcdwPerson = kcdwPerson;
+    }
+
+
+    /**
+     * Return the value associated with the column: KCDW_TEL
+     */
+    public java.lang.String getKcdwTel () {
+        return kcdwTel;
+    }
+
+    /**
+     * Set the value related to the column: KCDW_TEL
+     * @param kcdwTel the KCDW_TEL value
+     */
+    public void setKcdwTel (java.lang.String kcdwTel) {
+        this.kcdwTel = kcdwTel;
+    }
+
+
+    /**
+     * Return the value associated with the column: SJDW_NAME
+     */
+    public java.lang.String getSjdwName () {
+        return sjdwName;
+    }
+
+    /**
+     * Set the value related to the column: SJDW_NAME
+     * @param sjdwName the SJDW_NAME value
+     */
+    public void setSjdwName (java.lang.String sjdwName) {
+        this.sjdwName = sjdwName;
+    }
+
+
+    /**
+     * Return the value associated with the column: SJDW_PERSON
+     */
+    public java.lang.String getSjdwPerson () {
+        return sjdwPerson;
+    }
+
+    /**
+     * Set the value related to the column: SJDW_PERSON
+     * @param sjdwPerson the SJDW_PERSON value
+     */
+    public void setSjdwPerson (java.lang.String sjdwPerson) {
+        this.sjdwPerson = sjdwPerson;
+    }
+
+
+    /**
+     * Return the value associated with the column: SJDW_TEL
+     */
+    public java.lang.String getSjdwTel () {
+        return sjdwTel;
+    }
+
+    /**
+     * Set the value related to the column: SJDW_TEL
+     * @param sjdwTel the SJDW_TEL value
+     */
+    public void setSjdwTel (java.lang.String sjdwTel) {
+        this.sjdwTel = sjdwTel;
+    }
+
+
+    /**
+     * Return the value associated with the column: SGDW_NAME
+     */
+    public java.lang.String getSgdwName () {
+        return sgdwName;
+    }
+
+    /**
+     * Set the value related to the column: SGDW_NAME
+     * @param sgdwName the SGDW_NAME value
+     */
+    public void setSgdwName (java.lang.String sgdwName) {
+        this.sgdwName = sgdwName;
+    }
+
+
+    /**
+     * Return the value associated with the column: SGDW_PERSON
+     */
+    public java.lang.String getSgdwPerson () {
+        return sgdwPerson;
+    }
+
+    /**
+     * Set the value related to the column: SGDW_PERSON
+     * @param sgdwPerson the SGDW_PERSON value
+     */
+    public void setSgdwPerson (java.lang.String sgdwPerson) {
+        this.sgdwPerson = sgdwPerson;
+    }
+
+
+    /**
+     * Return the value associated with the column: SGDW_TEL
+     */
+    public java.lang.String getSgdwTel () {
+        return sgdwTel;
+    }
+
+    /**
+     * Set the value related to the column: SGDW_TEL
+     * @param sgdwTel the SGDW_TEL value
+     */
+    public void setSgdwTel (java.lang.String sgdwTel) {
+        this.sgdwTel = sgdwTel;
+    }
+
+
+    /**
+     * Return the value associated with the column: JLDW_NAME
+     */
+    public java.lang.String getJldwName () {
+        return jldwName;
+    }
+
+    /**
+     * Set the value related to the column: JLDW_NAME
+     * @param jldwName the JLDW_NAME value
+     */
+    public void setJldwName (java.lang.String jldwName) {
+        this.jldwName = jldwName;
+    }
+
+
+    /**
+     * Return the value associated with the column: JLDW_PERSON
+     */
+    public java.lang.String getJldwPerson () {
+        return jldwPerson;
+    }
+
+    /**
+     * Set the value related to the column: JLDW_PERSON
+     * @param jldwPerson the JLDW_PERSON value
+     */
+    public void setJldwPerson (java.lang.String jldwPerson) {
+        this.jldwPerson = jldwPerson;
+    }
+
+
+    /**
+     * Return the value associated with the column: JLDW_TEL
+     */
+    public java.lang.String getJldwTel () {
+        return jldwTel;
+    }
+
+    /**
+     * Set the value related to the column: JLDW_TEL
+     * @param jldwTel the JLDW_TEL value
+     */
+    public void setJldwTel (java.lang.String jldwTel) {
+        this.jldwTel = jldwTel;
     }
 
 
@@ -381,9 +706,6 @@ public abstract class BaseProjBid  implements Serializable,Auditable {
      * Return the value associated with the column: projBidAreas
      */
     public java.util.Set<com.justonetech.biz.domain.ProjBidArea> getProjBidAreas () {
-        if(projBidAreas == null){
-            projBidAreas = new java.util.LinkedHashSet<com.justonetech.biz.domain.ProjBidArea>();
-        }
         return projBidAreas;
     }
 
@@ -393,11 +715,6 @@ public abstract class BaseProjBid  implements Serializable,Auditable {
      */
     public void setProjBidAreas (java.util.Set<com.justonetech.biz.domain.ProjBidArea> projBidAreas) {
         this.projBidAreas = projBidAreas;
-    }
-
-    public void addToprojBidAreas (com.justonetech.biz.domain.ProjBidArea projBidArea) {
-        if (null == getProjBidAreas()) setProjBidAreas(new java.util.LinkedHashSet<com.justonetech.biz.domain.ProjBidArea>());
-        getProjBidAreas().add(projBidArea);
     }
 
 
@@ -435,6 +752,21 @@ public abstract class BaseProjBid  implements Serializable,Auditable {
         builder.append(projLink);
         builder.append(linkTel);
         builder.append(startDate);
+        builder.append(jsdwName);
+        builder.append(jsdwPerson);
+        builder.append(jsdwTel);
+        builder.append(kcdwName);
+        builder.append(kcdwPerson);
+        builder.append(kcdwTel);
+        builder.append(sjdwName);
+        builder.append(sjdwPerson);
+        builder.append(sjdwTel);
+        builder.append(sgdwName);
+        builder.append(sgdwPerson);
+        builder.append(sgdwTel);
+        builder.append(jldwName);
+        builder.append(jldwPerson);
+        builder.append(jldwTel);
         builder.append(createTime);
         builder.append(updateTime);
         builder.append(createUser);
