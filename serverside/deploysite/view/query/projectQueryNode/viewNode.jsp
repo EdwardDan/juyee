@@ -20,7 +20,7 @@
             $("#jsDept").val("");
             $("#year").val("${currentYear}");
         }
-        var str = "projectName=" + $("#projectName").val() + "&bidName=" + $("#bidName").val() + "&jsDept=" + $("#jsDept").val() + "&year=" + $("#year").val()+"&categoryId="+$("#categoryId").val();
+        var str = getCondStr();
         setButton(true);
         loadAjaxDataCallback("nodeDataDiv", "${ctx}/projectQueryNode/viewNodeData.do?id=${id}&month=" + month+"&" + str, resetButton);
     }
@@ -34,7 +34,7 @@
 
     //选择节点
     function selectNode(btn){
-        var str = "projectName=" + $("#projectName").val() + "&bidName=" + $("#bidName").val() + "&jsDept=" + $("#jsDept").val() + "&year=" + $("#year").val()+"&categoryId="+$("#categoryId").val();
+        var str = getCondStr();
         openNewWindow('selectNodeDiv','选择节点',"${ctx}/projectQueryNode/selectNode.do?id=${id}&" + str,false,600,450);
     }
 
@@ -50,10 +50,20 @@
             alert("请选择至少一个节点！");
         }else{
             ids = ids.substring(1);
-            var str = "projectName=" + $("#projectName").val() + "&bidName=" + $("#bidName").val() + "&jsDept=" + $("#jsDept").val() + "&year=" + $("#year").val()+"&categoryId="+$("#categoryId").val();
-            str += "&nodeIds="+ids;
+            var str = getCondStr()+"&nodeIds="+ids;
             window.open("${ctx}/projectQueryNode/printExcel.do?id=${id}&month=" + last_m+"&" + str);
         }
+    }
+
+    function getCondStr() {
+        var s = "projectName=" + $("#projectName").val();
+        s += "&bidName=" + $("#bidName").val();
+        s += "&jsDept=" + $("#jsDept").val();
+        s += "&year=" + $("#year").val();
+        s += "&categoryId=" + $("#categoryId").val();
+        s += "&beginDate=" + $("#beginDate").val();
+        s += "&endDate=" + $("#endDate").val();
+        return s;
     }
 
     //初始化
@@ -91,6 +101,15 @@
             <td align="left" nowrap>
                 <select name="year" id="year">${yearOptions}</select>
             </td>
+            <td align="right" width="70" nowrap>创建时间：</td>
+            <td align="left" nowrap>
+                从
+                <input type="text" name="beginDate" id="beginDate" class="input_date"/>
+                <input type="button" class="button_calendar" value="" onClick="calendar('beginDate');">
+                到
+                <input type="text" name="endDate" id="endDate" class="input_date"/>
+                <input type="button" class="button_calendar" value="" onClick="calendar('endDate');">
+            </td>
         </tr>
         <tr <c:if test="${not empty id}">style="display: none"</c:if>>
             <td align="right" nowrap>建设单位：</td>
@@ -109,7 +128,7 @@
         </tr>
         <tr>
             <td align="right" nowrap>上报月份：</td>
-            <td align="left" nowrap colspan="5">
+            <td align="left" nowrap colspan="7">
                 <table cellpadding="0" cellspacing="0" border="1" class="table_thin_line" width="500">
                     <tr align="center">
                         <c:forEach var="m" begin="1" end="12" step="1">
