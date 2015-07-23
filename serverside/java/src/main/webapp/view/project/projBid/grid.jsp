@@ -29,15 +29,18 @@
                 pager: '#pager2',
                 caption: "项目标段列表（${projName}）",
                 shrinkToFit: true,
-                gridComplete: function () {  //在此事件中循环为每一行添加修改和删除链接
+                gridComplete: function () {
                     var ids = jQuery("#listGrid").jqGrid('getDataIDs');
                     for (var i = 0; i < ids.length; i++) {
                         var id = ids[i];
                         var opButton = '<input type="button" value="查看" onclick="doView(' + id + ')" class="button_normal"/> ';
-                    <c:if test="${canEdit}">
+                        <c:if test="${canEdit}">
                         opButton += '<input type="button" value="编辑" onclick="doEdit(' + id + ')" class="button_normal"/> ';
                         opButton += '<input type="button" value="删除" onclick="doDelete(' + id + ')" class="button_normal"/>';
-                    </c:if>
+                        if ("${typeCode}" == "${TYPE_STAGE}") {
+                            opButton += '<input type="button" value="复制" onclick="doCopy(' + id + ')" class="button_normal "/>';
+                        }
+                        </c:if>
                         jQuery("#listGrid").jqGrid('setRowData', ids[i], { operation: opButton});
                     }
                 }, rownumbers: true
@@ -58,19 +61,32 @@
         };
         gridinit($("#listGrid"), conf);
     });
+
     function doView(id) {
         openWindow("查看项目标段管理", "${ctx}/projBid/view.do?id=" + id, false);
     }
+
     <c:if test="${canEdit}">
     function doAdd() {
         openWindow("添加项目标段管理", "${ctx}/projBid/add.do?projId=${projId}&typeCode=${typeCode}", true);
     }
+
     function doEdit(id) {
         openWindow("修改项目标段管理", "${ctx}/projBid/modify.do?id=" + id, true);
     }
+
     function doDelete(id) {
         doGridDelete("${ctx}/projBid/delete.do?id=" + id);
     }
+
+    function doCopy(id) {
+        $.messager.confirm("系统提示", "确定复制该项目标段到形象进度标段管理中对应的项目下吗？", function (r) {
+            if (r) {
+                saveAjaxData("${ctx}/projBid/duplicatePrjBid4Schedule.do?prjBidId=" + id);
+            }
+        });
+    }
+
     </c:if>
     function jumpProjInfoGrid() {
         loadAjaxData("mainContent", "${ctx}/projBid/grid.do?typeCode=${typeCode}");
