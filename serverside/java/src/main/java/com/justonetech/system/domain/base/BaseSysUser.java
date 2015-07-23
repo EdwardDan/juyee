@@ -1,5 +1,6 @@
 package com.justonetech.system.domain.base;
 
+import com.justonetech.biz.domain.OaMailGroupUser;
 import com.justonetech.system.domain.*;
 
 import java.io.Serializable;
@@ -141,6 +142,8 @@ public abstract class BaseSysUser implements Serializable {
     // collections
     private java.util.Set<SysUserRole> sysUserRoles;
     private java.util.Set<SysUserPrivilege> sysUserPrivileges;
+    private java.util.Set<OaMailGroupUser> oaMailGroupUsers;
+
 
 
     /**
@@ -405,6 +408,16 @@ public abstract class BaseSysUser implements Serializable {
         this.sysUserPrivileges = sysUserPrivileges;
     }
 
+    public Set<OaMailGroupUser> getOaMailGroupUsers() {
+        if (oaMailGroupUsers == null) {
+            oaMailGroupUsers = new java.util.LinkedHashSet<com.justonetech.biz.domain.OaMailGroupUser>();
+        }
+        return oaMailGroupUsers;
+    }
+
+    public void setOaMailGroupUsers(Set<OaMailGroupUser> oaMailGroupUsers) {
+        this.oaMailGroupUsers = oaMailGroupUsers;
+    }
     public SysRegPerson getRegPerson() {
         return regPerson;
     }

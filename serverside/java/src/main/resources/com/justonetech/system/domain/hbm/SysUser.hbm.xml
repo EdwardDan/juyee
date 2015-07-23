@@ -212,6 +212,10 @@
 			<key column="USER_ID"/>
 			<one-to-many class="SysUserPrivilege"/>
 		</set>
+        <set name="oaMailGroupUsers" inverse="true">
+            <key column="USER_ID"/>
+            <one-to-many class="com.justonetech.biz.domain.OaMailGroupUser"/>
+        </set>
 
 	</class>	
     <query name="sysuser_all_data_query">
