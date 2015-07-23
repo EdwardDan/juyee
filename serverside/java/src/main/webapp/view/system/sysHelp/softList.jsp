@@ -10,16 +10,16 @@
         </tr>
         <tr class="tr_light">
             <td class="form_border">1</td>
-            <td class="form_border" nowrap>&nbsp;浏览器插件</td>
-            <td class="form_border" align="left">&nbsp;视频监控播放插件（setup_video.exe）</td>
-            <td class="form_border" nowrap>&nbsp;<input type="button" value="下载" class="button_normal" onclick="window.open('${ctx}/tools/setup_video.exe')"></td>
+            <td class="form_border" nowrap>&nbsp;系统帮助</td>
+            <td class="form_border" align="left">&nbsp;用户手册（上海市交通建设工程管理系统使用手册）</td>
+            <td class="form_border" nowrap>&nbsp;<input type="button" value="下载" class="button_normal" onclick="window.open('${ctx}/tools/上海市交通建设工程管理系统使用手册.docx')"></td>
         </tr>
-        <tr class="tr_dark">
-            <td class="form_border">2</td>
-            <td class="form_border" nowrap>&nbsp;常用软件</td>
-            <td class="form_border" align="left">&nbsp;好讯即时通讯软件（IMClient.zip）</td>
-            <td class="form_border" nowrap>&nbsp;<input type="button" value="下载" class="button_normal" onclick="window.open('${ctx}/tools/IMClient.zip')"></td>
-        </tr>
+        <%--<tr class="tr_dark">--%>
+            <%--<td class="form_border">2</td>--%>
+            <%--<td class="form_border" nowrap>&nbsp;常用软件</td>--%>
+            <%--<td class="form_border" align="left">&nbsp;好讯即时通讯软件（IMClient.zip）</td>--%>
+            <%--<td class="form_border" nowrap>&nbsp;<input type="button" value="下载" class="button_normal" onclick="window.open('${ctx}/tools/IMClient.zip')"></td>--%>
+        <%--</tr>--%>
         <%--<tr class="tr_dark">--%>
             <%--<td class="form_border">2</td>--%>
             <%--<td class="form_border" nowrap>&nbsp;硬件驱动</td>--%>
