@@ -1,0 +1,279 @@
+alter table PROJ_BID add JSDW_NAME            varchar(300);
+alter table PROJ_BID add JSDW_PERSON          varchar(50);
+alter table PROJ_BID add JSDW_TEL             varchar(50);
+alter table PROJ_BID add KCDW_NAME            varchar(300);
+alter table PROJ_BID add KCDW_PERSON          varchar(50);
+alter table PROJ_BID add KCDW_TEL             varchar(50);
+alter table PROJ_BID add SJDW_NAME            varchar(300);
+alter table PROJ_BID add SJDW_PERSON          varchar(50);
+alter table PROJ_BID add SJDW_TEL             varchar(50);
+alter table PROJ_BID add SGDW_NAME            varchar(300);
+alter table PROJ_BID add SGDW_PERSON          varchar(50);
+alter table PROJ_BID add SGDW_TEL             varchar(50);
+alter table PROJ_BID add JLDW_NAME            varchar(300);
+alter table PROJ_BID add JLDW_PERSON          varchar(50);
+alter table PROJ_BID add JLDW_TEL             varchar(50);
+
+comment on column PROJ_BID.JSDW_NAME is
+'建设单位名称';
+
+comment on column PROJ_BID.JSDW_PERSON is
+'建设单位联系人';
+
+comment on column PROJ_BID.JSDW_TEL is
+'建设单位联系电话';
+
+comment on column PROJ_BID.KCDW_NAME is
+'勘察单位名称';
+
+comment on column PROJ_BID.KCDW_PERSON is
+'勘察单位联系人';
+
+comment on column PROJ_BID.KCDW_TEL is
+'勘察单位联系电话';
+
+comment on column PROJ_BID.SJDW_NAME is
+'设计单位名称';
+
+comment on column PROJ_BID.SJDW_PERSON is
+'设计单位联系人';
+
+comment on column PROJ_BID.SJDW_TEL is
+'设计单位联系电话';
+
+comment on column PROJ_BID.SGDW_NAME is
+'施工单位名称';
+
+comment on column PROJ_BID.SGDW_PERSON is
+'施工单位联系人';
+
+comment on column PROJ_BID.SGDW_TEL is
+'施工单位联系电话';
+
+comment on column PROJ_BID.JLDW_NAME is
+'监理单位名称';
+
+comment on column PROJ_BID.JLDW_PERSON is
+'监理单位联系人';
+
+comment on column PROJ_BID.JLDW_TEL is
+'监理单位联系电话';
+
+
+
+/*==============================================================*/
+/* Table: OA_MAIL                                               */
+/*==============================================================*/
+create table OA_MAIL 
+(
+   ID                   number(10)           not null,
+   TITLE                varchar2(200 char),
+   CONTENT              clob,
+   SEND_USER            varchar2(50 char),
+   SEND_PERSON          varchar2(50 char),
+   RECEIVE_PERSONS      varchar2(2000 char),
+   CC_PERSONS           varchar2(2000 char),
+   MAIL_FORMAT          varchar2(50 char),
+   IS_NEED_REPLY        number(1),
+   SEND_TIME            date,
+   SIGN                 varchar2(500 char),
+   DOCUMENT_ID          number(10),
+   IS_DELETE            number(1),
+   DELETE_TIME          date,
+   CREATE_TIME          DATE,
+   CREATE_USER          VARCHAR2(100),
+   UPDATE_TIME          DATE,
+   UPDATE_USER          VARCHAR2(100),
+   IS_SEND              number(1),
+   constraint PK_OA_MAIL primary key (ID),
+   constraint FK_OA_MAIL_DOC foreign key (DOCUMENT_ID)
+         references DOC_DOCUMENT (ID)
+);
+
+comment on table OA_MAIL is
+'邮件信息';
+
+comment on column OA_MAIL.ID is
+'ID';
+
+comment on column OA_MAIL.TITLE is
+'主题';
+
+comment on column OA_MAIL.CONTENT is
+'内容';
+
+comment on column OA_MAIL.SEND_USER is
+'发件用户名';
+
+comment on column OA_MAIL.SEND_PERSON is
+'发件人（冗余）';
+
+comment on column OA_MAIL.RECEIVE_PERSONS is
+'收件人（冗余）';
+
+comment on column OA_MAIL.CC_PERSONS is
+'抄送人（冗余）';
+
+comment on column OA_MAIL.MAIL_FORMAT is
+'邮件格式(TEXT/HTML)';
+
+comment on column OA_MAIL.IS_NEED_REPLY is
+'是否要求回复';
+
+comment on column OA_MAIL.SEND_TIME is
+'发送时间';
+
+comment on column OA_MAIL.SIGN is
+'个性签名';
+
+comment on column OA_MAIL.DOCUMENT_ID is
+'附件ID';
+
+comment on column OA_MAIL.IS_DELETE is
+'是否已删除(针对发件人)';
+
+comment on column OA_MAIL.DELETE_TIME is
+'删除时间';
+
+comment on column OA_MAIL.CREATE_TIME is
+'创建时间';
+
+comment on column OA_MAIL.CREATE_USER is
+'创建用户名';
+
+comment on column OA_MAIL.UPDATE_TIME is
+'更新时间';
+
+comment on column OA_MAIL.UPDATE_USER is
+'更新用户名';
+
+comment on column OA_MAIL.IS_SEND is
+'是否已发送';
+
+/*==============================================================*/
+/* Table: OA_MAIL_GROUP                                         */
+/*==============================================================*/
+create table OA_MAIL_GROUP 
+(
+   ID                   number(10)           not null,
+   NAME                 varchar2(50 char),
+   DESCRIPTION          VARCHAR2(500 char),
+   CREATE_TIME          DATE,
+   CREATE_USER          VARCHAR2(100),
+   UPDATE_TIME          DATE,
+   UPDATE_USER          VARCHAR2(100),
+   constraint PK_OA_MAIL_GROUP primary key (ID)
+);
+
+comment on table OA_MAIL_GROUP is
+'邮件分组';
+
+comment on column OA_MAIL_GROUP.ID is
+'ID';
+
+comment on column OA_MAIL_GROUP.NAME is
+'名称';
+
+comment on column OA_MAIL_GROUP.DESCRIPTION is
+'备注';
+
+comment on column OA_MAIL_GROUP.CREATE_TIME is
+'创建时间';
+
+comment on column OA_MAIL_GROUP.CREATE_USER is
+'创建用户名';
+
+comment on column OA_MAIL_GROUP.UPDATE_TIME is
+'更新时间';
+
+comment on column OA_MAIL_GROUP.UPDATE_USER is
+'更新用户名';
+
+/*==============================================================*/
+/* Table: OA_MAIL_GROUP_USER                                    */
+/*==============================================================*/
+create table OA_MAIL_GROUP_USER 
+(
+   ID                   number(10)           not null,
+   GROUP_ID             number(10),
+   USER_ID              number(10),
+   constraint PK_OA_MAIL_GROUP_USER primary key (ID),
+   constraint FK_OA_MAIL_GR_USER foreign key (GROUP_ID)
+         references OA_MAIL_GROUP (ID),
+   constraint FK_OA_MAIL_GROUP_USER foreign key (USER_ID)
+         references SYS_USER (ID)
+);
+
+comment on table OA_MAIL_GROUP_USER is
+'邮件分组用户';
+
+comment on column OA_MAIL_GROUP_USER.ID is
+'ID';
+
+comment on column OA_MAIL_GROUP_USER.GROUP_ID is
+'分组ID';
+
+comment on column OA_MAIL_GROUP_USER.USER_ID is
+'用户ID';
+
+/*==============================================================*/
+/* Table: OA_MAIL_USER                                          */
+/*==============================================================*/
+create table OA_MAIL_USER 
+(
+   ID                   number(10)           not null,
+   MAIL_ID              number(10),
+   TYPE_CODE            varchar2(10 char),
+   USER_NAME            varchar2(50 char),
+   IS_READ              number(1),
+   READ_TIME            date,
+   IS_DELETE            number(1),
+   DELETE_TIME          date,
+   CREATE_TIME          DATE,
+   CREATE_USER          VARCHAR2(100),
+   UPDATE_TIME          DATE,
+   UPDATE_USER          VARCHAR2(100),
+   constraint PK_OA_MAIL_USER primary key (ID),
+   constraint FK_OA_MAIL_USER foreign key (MAIL_ID)
+         references OA_MAIL (ID)
+);
+
+comment on table OA_MAIL_USER is
+'邮件接收人员';
+
+comment on column OA_MAIL_USER.ID is
+'ID';
+
+comment on column OA_MAIL_USER.MAIL_ID is
+'邮件ID';
+
+comment on column OA_MAIL_USER.TYPE_CODE is
+'类型（TO接收/CC抄送）';
+
+comment on column OA_MAIL_USER.USER_NAME is
+'接收用户名';
+
+comment on column OA_MAIL_USER.IS_READ is
+'是否已阅';
+
+comment on column OA_MAIL_USER.READ_TIME is
+'阅读时间';
+
+comment on column OA_MAIL_USER.IS_DELETE is
+'是否已删除(针对收件人)';
+
+comment on column OA_MAIL_USER.DELETE_TIME is
+'删除时间';
+
+comment on column OA_MAIL_USER.CREATE_TIME is
+'创建时间';
+
+comment on column OA_MAIL_USER.CREATE_USER is
+'创建用户名';
+
+comment on column OA_MAIL_USER.UPDATE_TIME is
+'更新时间';
+
+comment on column OA_MAIL_USER.UPDATE_USER is
+'更新用户名';
+
