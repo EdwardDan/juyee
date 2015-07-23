@@ -9,12 +9,12 @@ import com.justonetech.biz.utils.enums.ProjBidType;
 import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.orm.hibernate.Page;
 import com.justonetech.core.utils.DateTimeHelper;
+import com.justonetech.core.utils.StringHelper;
 import com.justonetech.system.domain.SysCodeDetail;
 import com.justonetech.system.manager.ExcelPrintManager;
 import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
 import com.justonetech.system.utils.PrivilegeCode;
-import org.hibernate.annotations.common.util.StringHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -389,6 +389,22 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         beans.put("secondStages", secondStages);
         beans.put("leafStages", leafStages);
 
+        //获取节点对应的选择阶段
+        Map<Long,Long> selectedResultHM = new HashMap<Long, Long>();
+        if (!StringHelper.isEmpty(stageIds)) {
+            String resultIds = request.getParameter("resultIds");
+            System.out.println("resultIds = " + resultIds);
+            String[] sids = StringHelper.stringToStringArray(stageIds, ",");
+            String[] rids = StringHelper.stringToStringArray(resultIds,",");
+            for (int i=0;i<sids.length;i++) {
+               String r = rids[i];
+                if (!StringHelper.isEmpty(r)) {
+                    selectedResultHM.put(Long.valueOf(sids[i]),Long.valueOf(r));
+                }
+            }
+        }
+        System.out.println("selectedResultHM = " + selectedResultHM);
+
         //审核步骤
         List<SysCodeDetail> steps = sysCodeManager.getCodeListByCode(Constants.DATA_REPORT_STEP);
         beans.put("steps", steps);
@@ -423,11 +439,6 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         }
 //        System.out.println("conditionHql = " + conditionHql);
         List<ProjBid> bids = projBidService.findByQuery(conditionHql + " order by project.no asc,project.id asc,no asc,id asc");
-//        beans.put("bids", bids);
-
-        //整理项目包含标段
-        List<Map<String, Object>> projects = reOrgBids(bids);
-        beans.put("projects", projects);
 
         //用于数据过滤
         conditionHql = "select id " + conditionHql;
@@ -438,6 +449,30 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         String hql = "from DataStageReportItem where stageReport.bid.id in(" + conditionHql + ") order by stageReport.year desc,stageReport.month desc,id desc";
 //        System.out.println("hql = " + hql);
         List<DataStageReportItem> dataStageReportItems = dataStageReportItemService.findByQuery(hql);
+
+        //只显示指定阶段的标段
+        List<ProjBid> filterBids = new ArrayList<ProjBid>();
+        if(!selectedResultHM.isEmpty()){
+            Set<ProjBid> existsBidHS = new HashSet<ProjBid>();
+            for (DataStageReportItem dataStageReportItem : dataStageReportItems) {
+                ProjBid bid = dataStageReportItem.getStageReport().getBid();
+                Long stageId = dataStageReportItem.getStage().getId();
+                if(!existsBidHS.contains(bid) && selectedResultHM.containsKey(stageId)){
+                    if(selectedResultHM.get(stageId).equals(dataStageReportItem.getResult().getId())){
+                        existsBidHS.add(bid);
+                    }
+                }
+            }
+            filterBids.addAll(existsBidHS);
+        }else{
+            filterBids.addAll(bids);
+        }
+
+        //整理项目包含标段
+        List<Map<String, Object>> projects = reOrgBids(filterBids);
+        beans.put("projects", projects);
+
+        //查询数据
         for (DataStageReportItem item : dataStageReportItems) {
             Long bidId = item.getStageReport().getBid().getId();
             String key = bidId + "_" + item.getStep().getId() + "_" + item.getStage().getId();

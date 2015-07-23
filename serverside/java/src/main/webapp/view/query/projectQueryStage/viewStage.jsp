@@ -30,17 +30,21 @@
 
     //导出
     function printStageData(btn){
+        var resultIds = "";
         var ids = "";
         $("input[name=stageIds]").each(function(){
             if($(this).attr("checked")=="checked"||$(this).attr("checked")==true){
-                ids += ","+$(this).val();
+                var v = $(this).val();
+                ids += ","+v;
+                resultIds += ","+$("#result_"+v).val();
             }
         });
         if(ids == ""){
             alert("请选择至少一个节点！");
         }else{
             ids = ids.substring(1);
-            var str = getCondStr()+"&stageIds="+ids;
+            resultIds = resultIds.substring(1);
+            var str = getCondStr()+"&stageIds="+ids+"&resultIds="+resultIds;
             window.open( "${ctx}/projectQueryStage/printExcel.do?id=${id}&" + str);
         }
     }
