@@ -9,6 +9,7 @@ import com.justonetech.biz.utils.enums.ProjBidType;
 import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.orm.hibernate.Page;
 import com.justonetech.core.utils.DateTimeHelper;
+import com.justonetech.core.utils.JspHelper;
 import com.justonetech.core.utils.StringHelper;
 import com.justonetech.system.domain.SysCodeDetail;
 import com.justonetech.system.manager.ExcelPrintManager;
@@ -280,10 +281,16 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         String[] ret = new String[2];
         //办理状态
         if (Constants.DATA_STAGE_RESULT_1.equals(result.getCode())) {
-            ret[0] = "yellow";
-            ret[1] = item.getDealDate();
-        } else if (Constants.DATA_STAGE_RESULT_2.equals(result.getCode())) {
+            String dealDate = item.getDealDate();
             ret[0] = "";
+            ret[1] = dealDate;
+            if (!StringHelper.isEmpty(dealDate)) {
+               if(!JspHelper.getDate(dealDate).after(new Date(System.currentTimeMillis()))){
+                   ret[0] = "yellow";
+               }
+            }
+        } else if (Constants.DATA_STAGE_RESULT_2.equals(result.getCode())) {
+            ret[0] = "lightskyblue";
             ret[1] = result.getName();
         } else if (Constants.DATA_STAGE_RESULT_3.equals(result.getCode())) {
             ret[0] = "green";

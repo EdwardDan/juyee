@@ -75,6 +75,18 @@
         color: red;
         word-break: break-all;
     }
+    .td_note{
+        width: 40px;
+        height: 20px;
+        float: left;
+        border: #00458a solid thin;
+    }
+    .td_note_font{
+        height: 20px;
+        float: left;
+        padding-left: 5px;
+        vertical-align: middle;
+    }
 </style>
 <div class="form_div">
     <table cellpadding="1" cellspacing="1" width="500" border="0" <c:if test="${not empty id}">style="display: none"</c:if>>
