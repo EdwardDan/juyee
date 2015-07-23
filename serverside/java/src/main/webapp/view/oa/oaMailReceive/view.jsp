@@ -68,9 +68,7 @@
             <td class="form_label_right" width="15%">内容：</td>
             <td class="form_content">
                 &nbsp;
-                <textarea class="input_textarea_long_long" readonly="true" style="width: 90%">
-                    ${bean.content}
-                </textarea>
+                <textarea class="input_textarea_long_long" readonly="true" style="width: 90%">${bean.content}</textarea>
             </td>
         </tr>
         <tr class="tr_button">

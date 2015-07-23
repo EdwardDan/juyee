@@ -100,7 +100,6 @@ public class OaMailReceiveController extends BaseCRUDActionController<OaMail> {
         try {
             Page pageModel = new Page(page, rows, true);
             BaseUser loginUser = SpringSecurityUtils.getCurrentUser();
-//            String hql = "select OaMail from OaMail  left join OaMail.oaMailUsers u  where OaMail.isSend=1 and u.userName = '" + loginUser.getLoginName() + "' and u.isDelete=0 order by OaMail.id desc";
             String hql = "select m from OaMail m left join m.oaMailUsers u where m.isSend=1 and u.userName = '" + loginUser.getLoginName() + "' and u.isDelete=0 order by m.id desc";
             //增加自定义查询条件
 
