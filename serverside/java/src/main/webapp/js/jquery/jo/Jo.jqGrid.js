@@ -404,23 +404,44 @@ function gridinit(ele, params, context) {
         if (group.rules !== undefined) {
             for (index = 0; index < group.rules.length; index++) {
                 var rule = group.rules[index];
+                var ruleField = rule.field;
                 if (rule.alias) {
+                    var sss = "";
+                    for(var i in searchTypeMap){
+                        sss +=","+i;
+                    }
+                    rule.searchtype = searchTypeMap[ruleField].searchtype;
                     rule.field = rule.alias;
+                    //解决有alias别名时无法查询的bug
+                    if (rule.op == 'bt') {
+                        var dates = rule.data.split(",");
+                        rule.data = dates[0];
+                        rule.op = 'ge';
+                        if (dates.length > 1) {
+                            var rule1 = $.extend({}, rule);
+                            rule1.op = 'le';
+                            rule1.field = ruleField;
+                            rule1.searchtype = rule.searchtype;
+                            rule1.data = dates[1] || '';
+                            group.rules.push(rule1);
+                        }
+                    }
                     continue;
-                } else if (!searchTypeMap[rule.field]) {
+                } else if (!searchTypeMap[ruleField]) {
                     continue;
-                }
-                rule.searchtype = searchTypeMap[rule.field].searchtype;
-                rule.field = searchTypeMap[rule.field].name;//.replace(/_/g, ".");
-                if (rule.op == 'bt') {
-                    var dates = rule.data.split(",");
-                    rule.data = dates[0];
-                    rule.op = 'ge';
-                    if (dates.length > 1) {
-                        var rule1 = $.extend({}, rule);
-                        rule1.op = 'le';
-                        rule1.data = dates[1] || '';
-                        group.rules.push(rule1);
+                }else{
+                    rule.searchtype = searchTypeMap[ruleField].searchtype;
+                    rule.field = searchTypeMap[ruleField].name;//.replace(/_/g, ".");
+                    if (rule.op == 'bt') {
+                        var dates = rule.data.split(",");
+                        rule.data = dates[0];
+                        rule.op = 'ge';
+                        if (dates.length > 1) {
+                            var rule1 = $.extend({}, rule);
+                            rule1.op = 'le';
+                            rule1.data = dates[1] || '';
+                            group.rules.push(rule1);
+                        }
                     }
                 }
             }
