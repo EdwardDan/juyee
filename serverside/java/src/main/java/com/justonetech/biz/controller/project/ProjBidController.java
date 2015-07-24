@@ -87,7 +87,7 @@ public class ProjBidController extends BaseCRUDActionController<ProjBid> {
      * @param rows     .
      */
     @RequestMapping
-    public void projGridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, String typeCode, HttpSession session) {
+    public void projGridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, /*String typeCode,*/ HttpSession session) {
         try {
             Page pageModel = new Page(page, rows, true);
             String hql = "from ProjInfo where 1 = 1 ";
@@ -126,7 +126,6 @@ public class ProjBidController extends BaseCRUDActionController<ProjBid> {
         model.addAttribute("TYPE_STAGE", ProjBidType.TYPE_STAGE.getCode());
         model.addAttribute("projId", projId);
         model.addAttribute("projName", projInfoService.get(projId).getName());
-
         return "view/project/projBid/grid";
     }
 
@@ -246,7 +245,6 @@ public class ProjBidController extends BaseCRUDActionController<ProjBid> {
             } else {
                 target = entity;
             }
-            System.out.println("target.getNo() = " + target.getNo());
             String[] areaIds = request.getParameterValues("ProjBelongArea");
             String projInfoId = request.getParameter("projInfoId");
             target.setProject(projInfoService.get(Long.valueOf(projInfoId)));

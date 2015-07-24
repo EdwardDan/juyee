@@ -10,7 +10,7 @@
         validateInit(validateCondition, formId);
     });
 
-    function save(btn) {
+    function save() {
         if (!validateForm(formId)) {
             return;
         }
@@ -27,7 +27,7 @@
     <form:hidden path="id"/>
     <form:hidden path="typeCode"/>
     <input type="hidden" name="projInfoId" value="${bean.project.id}">
-    <input type="hidden" id="relatedUnitInfos" name="relatedUnitInfos" value="sdfsd"/>
+    <input type="hidden" id="relatedUnitInfos" name="relatedUnitInfos" value=""/>
 
     <div class="form_div">
         <table cellpadding="0" cellspacing="0" class="form_table">
