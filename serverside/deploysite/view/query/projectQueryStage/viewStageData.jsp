@@ -49,7 +49,7 @@
                     <td rowspan="${stepCount}">${bid.name}</td>
                     <td rowspan="${stepCount}">${bid.buildMileage}</td>
                     <td rowspan="${stepCount}">${bid.belongAreaNames}</td>
-                    <td rowspan="${stepCount}" nowrap style="color: ">${bid.startDate}</td>
+                    <td rowspan="${stepCount}" nowrap>${bid.startDate}</td>
                 </c:if>
                 <c:if test="${stepSize>1}"><td>${step.name}</td></c:if>
                 <c:forEach items="${leafStages}" var="leafStage">
