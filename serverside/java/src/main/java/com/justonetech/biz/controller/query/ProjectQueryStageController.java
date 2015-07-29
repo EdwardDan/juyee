@@ -195,10 +195,10 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
                 conditionHql += " and project.category.id=" + categoryId;
             }
             if (!StringHelper.isEmpty(beginDate)) {
-                conditionHql += " and to_char(createTime,'yyyy-mm-dd')>='"+beginDate+"'";
+                conditionHql += " and to_char(project.createTime,'yyyy-mm-dd')>='"+beginDate+"'";
             }
             if (!StringHelper.isEmpty(endDate)) {
-                conditionHql += " and to_char(createTime,'yyyy-mm-dd')<='"+endDate+"'";
+                conditionHql += " and to_char(project.createTime,'yyyy-mm-dd')<='"+endDate+"'";
             }
         } else {
             conditionHql += " and project.id=" + projectId;
@@ -436,10 +436,10 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
                 conditionHql += " and project.category.id=" + categoryId;
             }
             if (!StringHelper.isEmpty(beginDate)) {
-                conditionHql += " and to_char(createTime,'yyyy-mm-dd')>='"+beginDate+"'";
+                conditionHql += " and to_char(project.createTime,'yyyy-mm-dd')>='"+beginDate+"'";
             }
             if (!StringHelper.isEmpty(endDate)) {
-                conditionHql += " and to_char(createTime,'yyyy-mm-dd')<='"+endDate+"'";
+                conditionHql += " and to_char(project.createTime,'yyyy-mm-dd')<='"+endDate+"'";
             }
         } else {
             conditionHql += " and project.id=" + projectId;
