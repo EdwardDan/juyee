@@ -400,17 +400,20 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         Map<Long,Long> selectedResultHM = new HashMap<Long, Long>();
         if (!StringHelper.isEmpty(stageIds)) {
             String resultIds = request.getParameter("resultIds");
-            System.out.println("resultIds = " + resultIds);
-            String[] sids = StringHelper.stringToStringArray(stageIds, ",");
-            String[] rids = StringHelper.stringToStringArray(resultIds,",");
-            for (int i=0;i<sids.length;i++) {
-               String r = rids[i];
-                if (!StringHelper.isEmpty(r)) {
-                    selectedResultHM.put(Long.valueOf(sids[i]),Long.valueOf(r));
+            if (!StringHelper.isEmpty(resultIds)) {
+                String[] sids = StringHelper.stringToStringArray(stageIds, ",");
+                String[] rids = StringHelper.stringToStringArray(resultIds, ",");
+                for (int i=0;i<sids.length;i++) {
+                    String r = rids[i];
+                    if (!StringHelper.isEmpty(r)) {
+                        if(!"0".equals(r)){
+                            selectedResultHM.put(Long.valueOf(sids[i]),Long.valueOf(r));
+                        }
+                    }
                 }
             }
         }
-        System.out.println("selectedResultHM = " + selectedResultHM);
+//        System.out.println("selectedResultHM = " + selectedResultHM);
 
         //审核步骤
         List<SysCodeDetail> steps = sysCodeManager.getCodeListByCode(Constants.DATA_REPORT_STEP);

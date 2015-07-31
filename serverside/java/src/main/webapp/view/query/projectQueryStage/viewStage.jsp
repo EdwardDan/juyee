@@ -32,11 +32,13 @@
     function printStageData(btn){
         var resultIds = "";
         var ids = "";
-        $("input[name=stageIds]").each(function(){
-            if($(this).attr("checked")=="checked"||$(this).attr("checked")==true){
+        $("input[name=stageIds]").each(function () {
+            if ($(this).attr("checked") == "checked" || $(this).attr("checked") == true) {
                 var v = $(this).val();
-                ids += ","+v;
-                resultIds += ","+$("#result_"+v).val();
+                ids += "," + v;
+                var r = $("#result_" + v).val();
+                if (r == null || r == "") r = "0";
+                resultIds += "," + r;
             }
         });
         if(ids == ""){

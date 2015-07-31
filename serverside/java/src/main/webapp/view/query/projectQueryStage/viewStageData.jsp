@@ -15,7 +15,7 @@
             &nbsp; <input type="button" value="关闭" class="button_cancel" onclick="closeWindow()">
         </td>
 </table>
-<table cellpadding="0" cellspacing="0" border="1" class="table_thin_line">
+<table cellpadding="0" cellspacing="0" border="1" class="table_thin_line" id="myTable">
     <tr class="tr_header">
         <td rowspan="2" width="2%" nowrap>序号</td>
         <td rowspan="2" nowrap>&nbsp;&nbsp;项目名称&nbsp;&nbsp;</td>
