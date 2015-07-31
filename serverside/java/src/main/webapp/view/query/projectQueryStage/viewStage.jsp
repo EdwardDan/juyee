@@ -62,6 +62,11 @@
         return s;
     }
 
+    //显示图示
+    function showStatusHint(){
+        openNewWindow("showHint","图示说明","${ctx}/view/query/projectQueryStage/showHint.jsp",false,600,300,null);
+    }
+
     //初始化
     $(function () {
         loadStageData(null);
@@ -128,6 +133,8 @@
             <td align="left" nowrap colspan="4">&nbsp;
                 <input type="button" value="查询" id="btnQueryThis" class="button_all" onclick="loadStageData(null)"/>
                 <input type="button" value="显示全部" id="btnQueryAll" class="button_normal_long" onclick="loadStageData('all')"/>
+                &nbsp;&nbsp;
+                <a href="javascript:void(0)" onclick="showStatusHint()" title="查看图示">【图示说明】</a>
             </td>
         </tr>
     </table>
