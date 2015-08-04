@@ -275,6 +275,7 @@ public class ProjectQueryNodeController extends BaseCRUDActionController<ProjInf
         String categoryId = request.getParameter("categoryId");
         String beginDate = request.getParameter("beginDate");
         String endDate = request.getParameter("endDate");
+        String month = request.getParameter("month");
 
         model.addAttribute("projectId", projectId);
         model.addAttribute("projectName", projectName);
@@ -284,6 +285,7 @@ public class ProjectQueryNodeController extends BaseCRUDActionController<ProjInf
         model.addAttribute("categoryId", categoryId);
         model.addAttribute("beginDate", beginDate);
         model.addAttribute("endDate", endDate);
+        model.addAttribute("month", month);
 
         List<ProjNode> list = projNodeService.findByQuery("from ProjNode where isValid=1 and parent is null order by treeId asc");
         model.addAttribute("list", list);

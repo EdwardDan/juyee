@@ -35,7 +35,7 @@
     //选择节点
     function selectNode(btn){
         var str = getCondStr();
-        openNewWindow('selectNodeDiv','选择节点',"${ctx}/projectQueryNode/selectNode.do?id=${id}&" + str,false,600,450);
+        openNewWindow('selectNodeDiv','选择节点',"${ctx}/projectQueryNode/selectNode.do?id=${id}&month=" + last_m+"&" + str,false,600,450);
     }
 
     //导出

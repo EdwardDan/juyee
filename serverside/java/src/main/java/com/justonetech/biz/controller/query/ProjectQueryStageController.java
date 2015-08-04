@@ -148,9 +148,11 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         String categoryId = request.getParameter("categoryId");
         String beginDate = request.getParameter("beginDate");
         String endDate = request.getParameter("endDate");
+        String month = request.getParameter("month");
         Boolean isSum = StringHelper.isEmpty(projectId);   //是否汇总
         model.addAttribute("isSum", isSum);
         model.addAttribute("year", year);
+        model.addAttribute("month", month);
 
         //办证阶段
         List<ProjStage> firstStages = new ArrayList<ProjStage>();
@@ -217,9 +219,9 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         //填报数据
         Map<String, Object> dataMap = new HashMap<String, Object>();
         Set<String> oneBidHS = new HashSet<String>();  //只取最新上报的数据
-        String hql = "from DataStageReportItem where stageReport.bid.id in(" + conditionHql + ") order by stageReport.year desc,stageReport.month desc,id desc";
+        String hql = "from DataStageReportItem where stageReport.bid.id in(" + conditionHql + ") and stageReport.year=? and stageReport.month=? order by stageReport.year desc,stageReport.month desc,id desc";
 //        System.out.println("hql = " + hql);
-        List<DataStageReportItem> dataStageReportItems = dataStageReportItemService.findByQuery(hql);
+        List<DataStageReportItem> dataStageReportItems = dataStageReportItemService.findByQuery(hql,Integer.parseInt(year),Integer.parseInt(month));
         for (DataStageReportItem item : dataStageReportItems) {
             Long bidId = item.getStageReport().getBid().getId();
             String key = bidId + "_" + item.getStep().getId() + "_" + item.getStage().getId();
@@ -322,6 +324,7 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         String categoryId = request.getParameter("categoryId");
         String beginDate = request.getParameter("beginDate");
         String endDate = request.getParameter("endDate");
+        String month = request.getParameter("month");
 
         model.addAttribute("projectId", projectId);
         model.addAttribute("projectName", projectName);
@@ -331,6 +334,7 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         model.addAttribute("categoryId", categoryId);
         model.addAttribute("beginDate", beginDate);
         model.addAttribute("endDate", endDate);
+        model.addAttribute("month", month);
 
         model.addAttribute("DATA_STAGE_RESULT", Constants.DATA_STAGE_RESULT);
 
@@ -361,6 +365,7 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         String stageIds = request.getParameter("stageIds");  //过滤节点
         String beginDate = request.getParameter("beginDate");
         String endDate = request.getParameter("endDate");
+        String month = request.getParameter("month");
         Boolean isSum = StringHelper.isEmpty(projectId);   //是否汇总
         beans.put("year", year);
 
@@ -456,9 +461,9 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         //填报数据
         Map<String, Object> dataMap = new HashMap<String, Object>();
         Set<String> oneBidHS = new HashSet<String>();  //只取最新上报的数据
-        String hql = "from DataStageReportItem where stageReport.bid.id in(" + conditionHql + ") order by stageReport.year desc,stageReport.month desc,id desc";
+        String hql = "from DataStageReportItem where stageReport.bid.id in(" + conditionHql + ") and stageReport.year=? and stageReport.month=? order by stageReport.year desc,stageReport.month desc,id desc";
 //        System.out.println("hql = " + hql);
-        List<DataStageReportItem> dataStageReportItems = dataStageReportItemService.findByQuery(hql);
+        List<DataStageReportItem> dataStageReportItems = dataStageReportItemService.findByQuery(hql,Integer.parseInt(year),Integer.parseInt(month));
 
         //只显示指定阶段的标段
         List<ProjBid> filterBids = new ArrayList<ProjBid>();
