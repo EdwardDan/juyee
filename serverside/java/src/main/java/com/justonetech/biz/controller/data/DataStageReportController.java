@@ -115,10 +115,16 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
      * @return .
      */
     @RequestMapping
-    public String modify(Model model, Long projectId) {
-
+    public String modify(Model model, Long projectId, Integer month) {
         doEditViewData(projectId, model);
         pushDataStageResult(model);
+
+        Calendar c = Calendar.getInstance();
+        if (null == month) {
+            month = c.get(Calendar.MONTH) + 1;
+        }
+        model.addAttribute("currentMonth", month);
+        model.addAttribute("projectId", projectId);
 
         return "view/data/dataStageReport/input";
     }
@@ -126,16 +132,17 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
     /**
      * 数据处理页面
      *
-     * @param model 。
-     * @param bidId 。
-     * @return 。
+     * @param model .
+     * @return .
      */
     @RequestMapping
-    public String checkBidData(Model model, Long bidId, Long projectId) {
-
-        doCheckBidData(bidId, model, projectId);
-
-        return "view/data/dataStageReport/checkBidData";
+    public String stageDataItem(Model model, Long projectId, Integer month, Long bidId, String type) {
+        doCheckBidData(bidId, model, projectId, month);
+        String url = "view/data/dataStageReport/checkBidData";
+        if (type != null) {
+            url += type;
+        }
+        return url;
     }
 
     /**
@@ -176,21 +183,6 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
         doEditViewData(projectId, model);
 
         return "view/data/dataStageReport/view";
-    }
-
-    /**
-     * 数据处理页面
-     *
-     * @param model 。
-     * @param bidId 。
-     * @return 。
-     */
-    @RequestMapping
-    public String checkBidDataView(Model model, Long bidId, Long projectId) {
-
-        doCheckBidData(bidId, model, projectId);
-
-        return "view/data/dataStageReport/checkBidDataView";
     }
 
     /**
@@ -327,11 +319,11 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
      * @param bidId 。
      * @param model 。
      */
-    private void doCheckBidData(Long bidId, Model model, Long projectId) {
+    private void doCheckBidData(Long bidId, Model model, Long projectId, Integer month) {
         model.addAttribute("bidId", bidId);
         //办证阶段(表格维护)
         String hqlStage = "from ProjStage where isValid=1 order by treeId asc";
-//        Calendar c = Calendar.getInstance();
+        Calendar c = Calendar.getInstance();
 //        String hqlStage = "from ProjStage where year=" + c.get(Calendar.YEAR) + " and isValid=1 order by treeId asc";
         List<ProjStage> projStages = projStageService.findByQuery(hqlStage);
         model.addAttribute("projStages", projStages);
@@ -343,8 +335,11 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
         model.addAttribute("results", results);
         //填报数据
         Map<String, Object> dataMap = new HashMap<String, Object>();
-        String hql = "from DataStageReportItem where stageReport.project.id=? and stageReport.bid.id=? order by stageReport.id desc,stageReport.year desc,stageReport.month desc";
-        List<DataStageReportItem> dataStageReportItems = dataStageReportItemService.findByQuery(hql, JspHelper.getLong(projectId), JspHelper.getLong(bidId));
+        DataStageReport report = getDataStageReport(projectId, c.get(Calendar.YEAR), month, bidId);
+        if (null == report) {
+            month = month - 1;
+        }
+        List<DataStageReportItem> dataStageReportItems = findDataItems(projectId, c.get(Calendar.YEAR), month, bidId);
         for (DataStageReportItem item : dataStageReportItems) {
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("resultId", item.getResult().getId());
@@ -357,6 +352,38 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
             }
         }
         model.addAttribute("dataMap", dataMap);
+    }
+
+    /**
+     * 获取已填报的信息
+     *
+     * @param projectId .
+     * @param year      .
+     * @param month     .
+     * @param bidId     .
+     * @return .
+     */
+    private List<DataStageReportItem> findDataItems(Long projectId, Integer year, Integer month, Long bidId) {
+        String hql = "from DataStageReportItem where stageReport.project.id=? and stageReport.bid.id=? and stageReport.year=? and stageReport.month=? order by stageReport.id desc,stageReport.year desc,stageReport.month desc";
+        return dataStageReportItemService.findByQuery(hql, JspHelper.getLong(projectId), JspHelper.getLong(bidId), year, month);
+    }
+
+    /**
+     * 获取主表数据
+     *
+     * @param projectId 。
+     * @param year      。
+     * @param month     。
+     * @param bidId     。
+     * @return 。
+     */
+    private DataStageReport getDataStageReport(Long projectId, Integer year, Integer month, Long bidId) {
+        String hql = "from DataStageReport where project.id=? and bid.id=? and year=? and month=?";
+        List<DataStageReport> list = dataStageReportService.findByQuery(hql, JspHelper.getLong(projectId), JspHelper.getLong(bidId), year, month);
+        if (null != list && list.size() > 0) {
+            return list.iterator().next();
+        }
+        return null;
     }
 
     public void pushDataStageResult(Model model) {
