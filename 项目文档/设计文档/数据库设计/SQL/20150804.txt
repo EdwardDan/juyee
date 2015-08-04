@@ -1,0 +1,394 @@
+drop table OA_WORK_PLAN cascade constraints;
+
+/*==============================================================*/
+/* Table: OA_WORK_PLAN                                          */
+/*==============================================================*/
+create table OA_WORK_PLAN 
+(
+   ID                   NUMBER(10)           not null,
+   REPORT_DEPT          VARCHAR2(100 CHAR),
+   REPORT_USER          VARCHAR2(50 CHAR),
+   REPORT_PERSON        VARCHAR2(50 CHAR),
+   BEGIN_DATE           NUMBER(4),
+   END_DATE             NUMBER(2),
+   DOCUMENT_ID          NUMBER(10),
+   STATUS               NUMBER(2),
+   KZ_OPINION           VARCHAR2(2000 CHAR),
+   KZ_AUDIT_TIME        date,
+   KZ_AUDIT_USER        VARCHAR2(100),
+   FG_OPINION           VARCHAR2(2000 CHAR),
+   FG_AUDIT_TIME        date,
+   FG_AUDIT_USER        VARCHAR2(100),
+   CREATE_TIME          DATE,
+   CREATE_USER          VARCHAR2(100),
+   UPDATE_TIME          DATE,
+   UPDATE_USER          VARCHAR2(100),
+   constraint PK_OA_WORK_PLAN primary key (ID)
+);
+
+comment on table OA_WORK_PLAN is
+'科室工作周上报';
+
+comment on column OA_WORK_PLAN.ID is
+'标识';
+
+comment on column OA_WORK_PLAN.REPORT_DEPT is
+'上报科室';
+
+comment on column OA_WORK_PLAN.REPORT_USER is
+'上报人用户名';
+
+comment on column OA_WORK_PLAN.REPORT_PERSON is
+'上报人姓名';
+
+comment on column OA_WORK_PLAN.BEGIN_DATE is
+'上报开始时间';
+
+comment on column OA_WORK_PLAN.END_DATE is
+'上报结束时间';
+
+comment on column OA_WORK_PLAN.DOCUMENT_ID is
+'附件ID(预留)';
+
+comment on column OA_WORK_PLAN.STATUS is
+'状态';
+
+comment on column OA_WORK_PLAN.KZ_OPINION is
+'科长审核意见';
+
+comment on column OA_WORK_PLAN.KZ_AUDIT_TIME is
+'科长审核时间';
+
+comment on column OA_WORK_PLAN.KZ_AUDIT_USER is
+'科长审核用户名';
+
+comment on column OA_WORK_PLAN.FG_OPINION is
+'分管领导审核意见';
+
+comment on column OA_WORK_PLAN.FG_AUDIT_TIME is
+'分管领导审核时间';
+
+comment on column OA_WORK_PLAN.FG_AUDIT_USER is
+'分管领导审核用户名';
+
+comment on column OA_WORK_PLAN.CREATE_TIME is
+'创建时间';
+
+comment on column OA_WORK_PLAN.CREATE_USER is
+'创建用户名';
+
+comment on column OA_WORK_PLAN.UPDATE_TIME is
+'更新时间';
+
+comment on column OA_WORK_PLAN.UPDATE_USER is
+'更新用户名';
+
+
+drop table OA_WORK_PLAN_ITEM cascade constraints;
+
+/*==============================================================*/
+/* Table: OA_WORK_PLAN_ITEM                                     */
+/*==============================================================*/
+create table OA_WORK_PLAN_ITEM 
+(
+   ID                   NUMBER(10)           not null,
+   WEEK_PLAN_ID         NUMBER(10),
+   ORDER_NO             NUMBER(4),
+   DUTY_PEROSN          VARCHAR2(50 CHAR),
+   KEY_WORK             VARCHAR2(2000 CHAR),
+   CONTENT              VARCHAR2(2000 CHAR),
+   SCHEDULE             VARCHAR2(2000 CHAR),
+   JBR                  VARCHAR2(50 CHAR),
+   constraint PK_OA_WORK_PLAN_ITEM primary key (ID),
+   constraint FK_OA_WORK_PLAN_ITEM foreign key (WEEK_PLAN_ID)
+         references OA_WORK_PLAN (ID)
+);
+
+comment on table OA_WORK_PLAN_ITEM is
+'科室工作周上报明细';
+
+comment on column OA_WORK_PLAN_ITEM.ID is
+'标识';
+
+comment on column OA_WORK_PLAN_ITEM.WEEK_PLAN_ID is
+'科室工作周上报ID';
+
+comment on column OA_WORK_PLAN_ITEM.ORDER_NO is
+'序号';
+
+comment on column OA_WORK_PLAN_ITEM.DUTY_PEROSN is
+'责任人';
+
+comment on column OA_WORK_PLAN_ITEM.KEY_WORK is
+'重点工作';
+
+comment on column OA_WORK_PLAN_ITEM.CONTENT is
+'工作内容';
+
+comment on column OA_WORK_PLAN_ITEM.SCHEDULE is
+'工作进度';
+
+comment on column OA_WORK_PLAN_ITEM.JBR is
+'经办人';
+
+
+drop table OA_WORK_PLAN_SUM cascade constraints;
+
+/*==============================================================*/
+/* Table: OA_WORK_PLAN_SUM                                      */
+/*==============================================================*/
+create table OA_WORK_PLAN_SUM 
+(
+   ID                   NUMBER(10)           not null,
+   BEGIN_DATE           date,
+   END_DATE             date,
+   DOCUMENT_ID          NUMBER(10),
+   STATUS               NUMBER(2),
+   LEADER_OPINION       VARCHAR2(2000 CHAR),
+   LEADER_AUDIT_TIME    date,
+   LEADER_AUDIT_USER    VARCHAR2(100),
+   CREATE_TIME          DATE,
+   CREATE_USER          VARCHAR2(100),
+   UPDATE_TIME          DATE,
+   UPDATE_USER          VARCHAR2(100),
+   constraint PK_OA_WORK_PLAN_SUM primary key (ID)
+);
+
+comment on table OA_WORK_PLAN_SUM is
+'科室上报汇总';
+
+comment on column OA_WORK_PLAN_SUM.ID is
+'标识';
+
+comment on column OA_WORK_PLAN_SUM.BEGIN_DATE is
+'上报开始时间';
+
+comment on column OA_WORK_PLAN_SUM.END_DATE is
+'上报结束时间';
+
+comment on column OA_WORK_PLAN_SUM.DOCUMENT_ID is
+'附件ID(预留)';
+
+comment on column OA_WORK_PLAN_SUM.STATUS is
+'状态';
+
+comment on column OA_WORK_PLAN_SUM.LEADER_OPINION is
+'领导审核意见';
+
+comment on column OA_WORK_PLAN_SUM.LEADER_AUDIT_TIME is
+'领导审核时间';
+
+comment on column OA_WORK_PLAN_SUM.LEADER_AUDIT_USER is
+'领导审核用户名';
+
+comment on column OA_WORK_PLAN_SUM.CREATE_TIME is
+'创建时间';
+
+comment on column OA_WORK_PLAN_SUM.CREATE_USER is
+'创建用户名';
+
+comment on column OA_WORK_PLAN_SUM.UPDATE_TIME is
+'更新时间';
+
+comment on column OA_WORK_PLAN_SUM.UPDATE_USER is
+'更新用户名';
+
+
+drop table OA_WORK_PLAN_SUM_ITEM cascade constraints;
+
+/*==============================================================*/
+/* Table: OA_WORK_PLAN_SUM_ITEM                                 */
+/*==============================================================*/
+create table OA_WORK_PLAN_SUM_ITEM 
+(
+   ID                   NUMBER(10)           not null,
+   WORK_PLAN_SUM_ID     NUMBER(10),
+   WORK_PLAN_ITEM_ID    NUMBER(10),
+   ORDER_NO             NUMBER(4),
+   DUTY_PEROSN          VARCHAR2(50 CHAR),
+   KEY_WORK             VARCHAR2(2000 CHAR),
+   CONTENT              VARCHAR2(2000 CHAR),
+   SCHEDULE             VARCHAR2(2000 CHAR),
+   JBR                  VARCHAR2(50 CHAR),
+   constraint PK_OA_WORK_PLAN_SUM_ITEM primary key (ID),
+   constraint FK_OA_WORK_PLAN_SUM_ITEM foreign key (WORK_PLAN_SUM_ID)
+         references OA_WORK_PLAN_SUM (ID),
+   constraint FK_FK_OA_WO_PL_SUM_ITEM foreign key (WORK_PLAN_ITEM_ID)
+         references OA_WORK_PLAN_ITEM (ID)
+);
+
+comment on table OA_WORK_PLAN_SUM_ITEM is
+'科室上报汇总明细';
+
+comment on column OA_WORK_PLAN_SUM_ITEM.ID is
+'标识';
+
+comment on column OA_WORK_PLAN_SUM_ITEM.WORK_PLAN_SUM_ID is
+'上报汇总ID';
+
+comment on column OA_WORK_PLAN_SUM_ITEM.WORK_PLAN_ITEM_ID is
+'上报明细ID';
+
+comment on column OA_WORK_PLAN_SUM_ITEM.ORDER_NO is
+'序号';
+
+comment on column OA_WORK_PLAN_SUM_ITEM.DUTY_PEROSN is
+'责任人';
+
+comment on column OA_WORK_PLAN_SUM_ITEM.KEY_WORK is
+'重点工作';
+
+comment on column OA_WORK_PLAN_SUM_ITEM.CONTENT is
+'工作内容';
+
+comment on column OA_WORK_PLAN_SUM_ITEM.SCHEDULE is
+'工作进度';
+
+comment on column OA_WORK_PLAN_SUM_ITEM.JBR is
+'经办人';
+
+
+drop table OA_WORK_WATCH cascade constraints;
+
+/*==============================================================*/
+/* Table: OA_WORK_WATCH                                         */
+/*==============================================================*/
+create table OA_WORK_WATCH 
+(
+   ID                   NUMBER(10)           not null,
+   REPORT_DEPT          VARCHAR2(100 CHAR),
+   REPORT_USER          VARCHAR2(50 CHAR),
+   REPORT_PERSON        VARCHAR2(50 CHAR),
+   BEGIN_DATE           NUMBER(4),
+   END_DATE             NUMBER(2),
+   DOCUMENT_ID          NUMBER(10),
+   STATUS               NUMBER(2),
+   ZR_OPINION           VARCHAR2(2000 CHAR),
+   ZR_AUDIT_TIME        date,
+   ZR_AUDIT_USER        VARCHAR2(100),
+   KZ_OPINION           VARCHAR2(2000 CHAR),
+   KZ_AUDIT_TIME        date,
+   KZ_AUDIT_USER        VARCHAR2(100),
+   BGS_OPINION          VARCHAR2(2000 CHAR),
+   BGS_AUDIT_TIME       date,
+   BGS_AUDIT_USER       VARCHAR2(100),
+   CREATE_TIME          DATE,
+   CREATE_USER          VARCHAR2(100),
+   UPDATE_TIME          DATE,
+   UPDATE_USER          VARCHAR2(100),
+   constraint PK_OA_WORK_WATCH primary key (ID)
+);
+
+comment on table OA_WORK_WATCH is
+'工作督办';
+
+comment on column OA_WORK_WATCH.ID is
+'标识';
+
+comment on column OA_WORK_WATCH.REPORT_DEPT is
+'上报科室';
+
+comment on column OA_WORK_WATCH.REPORT_USER is
+'上报人用户名';
+
+comment on column OA_WORK_WATCH.REPORT_PERSON is
+'科室分管领导';
+
+comment on column OA_WORK_WATCH.BEGIN_DATE is
+'上报开始时间';
+
+comment on column OA_WORK_WATCH.END_DATE is
+'上报结束时间';
+
+comment on column OA_WORK_WATCH.DOCUMENT_ID is
+'附件ID(预留)';
+
+comment on column OA_WORK_WATCH.STATUS is
+'状态';
+
+comment on column OA_WORK_WATCH.ZR_OPINION is
+'主任审核意见';
+
+comment on column OA_WORK_WATCH.ZR_AUDIT_TIME is
+'主任审核时间';
+
+comment on column OA_WORK_WATCH.ZR_AUDIT_USER is
+'主任审核用户名';
+
+comment on column OA_WORK_WATCH.KZ_OPINION is
+'科长审核意见';
+
+comment on column OA_WORK_WATCH.KZ_AUDIT_TIME is
+'科长审核时间';
+
+comment on column OA_WORK_WATCH.KZ_AUDIT_USER is
+'科长审核用户名';
+
+comment on column OA_WORK_WATCH.BGS_OPINION is
+'办公室审核意见';
+
+comment on column OA_WORK_WATCH.BGS_AUDIT_TIME is
+'办公室审核时间';
+
+comment on column OA_WORK_WATCH.BGS_AUDIT_USER is
+'办公室审核用户名';
+
+comment on column OA_WORK_WATCH.CREATE_TIME is
+'创建时间';
+
+comment on column OA_WORK_WATCH.CREATE_USER is
+'创建用户名';
+
+comment on column OA_WORK_WATCH.UPDATE_TIME is
+'更新时间';
+
+comment on column OA_WORK_WATCH.UPDATE_USER is
+'更新用户名';
+
+
+drop table OA_WORK_WATCH_ITEM cascade constraints;
+
+/*==============================================================*/
+/* Table: OA_WORK_WATCH_ITEM                                    */
+/*==============================================================*/
+create table OA_WORK_WATCH_ITEM 
+(
+   ID                   NUMBER(10)           not null,
+   WORK_WATCH_ID        NUMBER(10),
+   ORDER_NO             NUMBER(4),
+   CONTENT              VARCHAR2(2000 CHAR),
+   TIME_NODE            VARCHAR2(2000 CHAR),
+   REPORT_METHOD        VARCHAR2(2000 CHAR),
+   COMPLETE_DESC        VARCHAR2(2000 CHAR),
+   ACTUAL_DESC          VARCHAR2(2000 CHAR),
+   constraint PK_OA_WORK_WATCH_ITEM primary key (ID),
+   constraint FK_OA_WORK_WATCH_ITEM foreign key (WORK_WATCH_ID)
+         references OA_WORK_WATCH (ID)
+);
+
+comment on table OA_WORK_WATCH_ITEM is
+'工作督办明细';
+
+comment on column OA_WORK_WATCH_ITEM.ID is
+'标识';
+
+comment on column OA_WORK_WATCH_ITEM.WORK_WATCH_ID is
+'工作督办ID';
+
+comment on column OA_WORK_WATCH_ITEM.ORDER_NO is
+'序号';
+
+comment on column OA_WORK_WATCH_ITEM.CONTENT is
+'工作内容';
+
+comment on column OA_WORK_WATCH_ITEM.TIME_NODE is
+'时间节点';
+
+comment on column OA_WORK_WATCH_ITEM.REPORT_METHOD is
+'上报形式';
+
+comment on column OA_WORK_WATCH_ITEM.COMPLETE_DESC is
+'完成情况';
+
+comment on column OA_WORK_WATCH_ITEM.ACTUAL_DESC is
+'核实情况';
