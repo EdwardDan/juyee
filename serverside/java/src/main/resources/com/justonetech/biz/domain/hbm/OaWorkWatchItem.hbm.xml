@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.justonetech.biz.domain">
+	<class
+		name="OaWorkWatchItem"
+		table="OA_WORK_WATCH_ITEM"
+	>
+		
+		<meta attribute="sync-DAO">false</meta>
+		<meta attribute="sync-jsp">true</meta>
+		<meta attribute="sync-boolean">get</meta>
+		<meta attribute="treeable">false</meta>
+		<meta attribute="projectable">false</meta>
+        <meta attribute="tableName">工作督办明细</meta>
+        <meta attribute="tableComment">工作督办明细</meta>
+	    <meta attribute="sync-templatePatterns">list\w*</meta>
+        <meta attribute="sub-system">oa</meta>
+
+		<id
+			name="id"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="com.justonetech.core.orm.hibernate.LongIdGenerator"/>
+		</id>
+
+		<property
+			name="orderNo"
+			column="ORDER_NO"
+			type="integer"
+			not-null="false"
+			length="4"
+        >
+            <meta attribute="ColumnName">序号</meta>
+            <meta attribute="ColumnComment">序号</meta>
+        </property>
+
+		<property
+			name="content"
+			column="CONTENT"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">工作内容</meta>
+            <meta attribute="ColumnComment">工作内容</meta>
+        </property>
+
+		<property
+			name="timeNode"
+			column="TIME_NODE"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">时间节点</meta>
+            <meta attribute="ColumnComment">时间节点</meta>
+        </property>
+
+		<property
+			name="reportMethod"
+			column="REPORT_METHOD"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">上报形式</meta>
+            <meta attribute="ColumnComment">上报形式</meta>
+        </property>
+
+		<property
+			name="completeDesc"
+			column="COMPLETE_DESC"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">完成情况</meta>
+            <meta attribute="ColumnComment">完成情况</meta>
+        </property>
+
+		<property
+			name="actualDesc"
+			column="ACTUAL_DESC"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">核实情况</meta>
+            <meta attribute="ColumnComment">核实情况</meta>
+        </property>
+
+		<many-to-one
+			name="workWatch"
+			column="WORK_WATCH_ID"
+			class="OaWorkWatch"
+			not-null="false"
+		>
+		</many-to-one>
+
+	</class>	
+    <query name="oaworkwatchitem_all_data_query">
+        <![CDATA[FROM OaWorkWatchItem]]>
+    </query>
+</hibernate-mapping>

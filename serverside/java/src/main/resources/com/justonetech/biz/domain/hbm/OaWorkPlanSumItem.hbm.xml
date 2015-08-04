@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.justonetech.biz.domain">
+	<class
+		name="OaWorkPlanSumItem"
+		table="OA_WORK_PLAN_SUM_ITEM"
+	>
+		
+		<meta attribute="sync-DAO">false</meta>
+		<meta attribute="sync-jsp">true</meta>
+		<meta attribute="sync-boolean">get</meta>
+		<meta attribute="treeable">false</meta>
+		<meta attribute="projectable">false</meta>
+        <meta attribute="tableName">科室上报汇总明细</meta>
+        <meta attribute="tableComment">科室上报汇总明细</meta>
+	    <meta attribute="sync-templatePatterns">list\w*</meta>
+        <meta attribute="sub-system">oa</meta>
+
+		<id
+			name="id"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="com.justonetech.core.orm.hibernate.LongIdGenerator"/>
+		</id>
+
+		<property
+			name="orderNo"
+			column="ORDER_NO"
+			type="integer"
+			not-null="false"
+			length="4"
+        >
+            <meta attribute="ColumnName">序号</meta>
+            <meta attribute="ColumnComment">序号</meta>
+        </property>
+
+		<property
+			name="dutyPerosn"
+			column="DUTY_PEROSN"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">责任人</meta>
+            <meta attribute="ColumnComment">责任人</meta>
+        </property>
+
+		<property
+			name="keyWork"
+			column="KEY_WORK"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">重点工作</meta>
+            <meta attribute="ColumnComment">重点工作</meta>
+        </property>
+
+		<property
+			name="content"
+			column="CONTENT"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">工作内容</meta>
+            <meta attribute="ColumnComment">工作内容</meta>
+        </property>
+
+		<property
+			name="schedule"
+			column="SCHEDULE"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">工作进度</meta>
+            <meta attribute="ColumnComment">工作进度</meta>
+        </property>
+
+		<property
+			name="jbr"
+			column="JBR"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">经办人</meta>
+            <meta attribute="ColumnComment">经办人</meta>
+        </property>
+
+		<many-to-one
+			name="workPlanItem"
+			column="WORK_PLAN_ITEM_ID"
+			class="OaWorkPlanItem"
+			not-null="false"
+		>
+		</many-to-one>
+		<many-to-one
+			name="workPlanSum"
+			column="WORK_PLAN_SUM_ID"
+			class="OaWorkPlanSum"
+			not-null="false"
+		>
+		</many-to-one>
+
+	</class>	
+    <query name="oaworkplansumitem_all_data_query">
+        <![CDATA[FROM OaWorkPlanSumItem]]>
+    </query>
+</hibernate-mapping>
