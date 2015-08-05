@@ -10,7 +10,7 @@
         </tr>
         <tr class="tr_light">
             <td class="form_border">1</td>
-            <td class="form_border" nowrap>&nbsp;系统帮助</td>
+            <td class="form_border" nowrap>&nbsp;操作指南</td>
             <td class="form_border" align="left">&nbsp;用户手册（上海市交通建设工程管理系统使用手册）</td>
             <td class="form_border" nowrap>&nbsp;<input type="button" value="下载" class="button_normal" onclick="window.open('${ctx}/tools/上海市交通建设工程管理系统使用手册.docx')"></td>
         </tr>

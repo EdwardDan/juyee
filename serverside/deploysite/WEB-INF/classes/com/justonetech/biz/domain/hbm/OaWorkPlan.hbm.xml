@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.justonetech.biz.domain">
+	<class
+		name="OaWorkPlan"
+		table="OA_WORK_PLAN"
+	>
+		
+		<meta attribute="sync-DAO">false</meta>
+		<meta attribute="sync-jsp">true</meta>
+		<meta attribute="sync-boolean">get</meta>
+		<meta attribute="treeable">false</meta>
+		<meta attribute="projectable">false</meta>
+        <meta attribute="tableName">科室工作周上报</meta>
+        <meta attribute="tableComment">科室工作周上报</meta>
+	    <meta attribute="sync-templatePatterns">list\w*</meta>
+        <meta attribute="sub-system">oa</meta>
+
+		<id
+			name="id"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="com.justonetech.core.orm.hibernate.LongIdGenerator"/>
+		</id>
+
+		<property
+			name="reportDept"
+			column="REPORT_DEPT"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">上报科室</meta>
+            <meta attribute="ColumnComment">上报科室</meta>
+        </property>
+
+		<property
+			name="reportUser"
+			column="REPORT_USER"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">上报人用户名</meta>
+            <meta attribute="ColumnComment">上报人用户名</meta>
+        </property>
+
+		<property
+			name="reportPerson"
+			column="REPORT_PERSON"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">上报人姓名</meta>
+            <meta attribute="ColumnComment">上报人姓名</meta>
+        </property>
+
+		<property
+			name="beginDate"
+			column="BEGIN_DATE"
+			type="date"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">上报开始时间</meta>
+            <meta attribute="ColumnComment">上报开始时间</meta>
+        </property>
+
+		<property
+			name="endDate"
+			column="END_DATE"
+			type="date"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">上报结束时间</meta>
+            <meta attribute="ColumnComment">上报结束时间</meta>
+        </property>
+
+		<property
+			name="documentId"
+			column="DOCUMENT_ID"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">附件ID(预留)</meta>
+            <meta attribute="ColumnComment">附件ID(预留)</meta>
+        </property>
+
+		<property
+			name="status"
+			column="STATUS"
+			type="integer"
+			not-null="false"
+			length="2"
+        >
+            <meta attribute="ColumnName">状态</meta>
+            <meta attribute="ColumnComment">状态</meta>
+        </property>
+
+		<property
+			name="kzOpinion"
+			column="KZ_OPINION"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">科长审核意见</meta>
+            <meta attribute="ColumnComment">科长审核意见</meta>
+        </property>
+
+		<property
+			name="kzAuditTime"
+			column="KZ_AUDIT_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">科长审核时间</meta>
+            <meta attribute="ColumnComment">科长审核时间</meta>
+        </property>
+
+		<property
+			name="kzAuditUser"
+			column="KZ_AUDIT_USER"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">科长审核用户名</meta>
+            <meta attribute="ColumnComment">科长审核用户名</meta>
+        </property>
+
+		<property
+			name="fgOpinion"
+			column="FG_OPINION"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">分管领导审核意见</meta>
+            <meta attribute="ColumnComment">分管领导审核意见</meta>
+        </property>
+
+		<property
+			name="fgAuditTime"
+			column="FG_AUDIT_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">分管领导审核时间</meta>
+            <meta attribute="ColumnComment">分管领导审核时间</meta>
+        </property>
+
+		<property
+			name="fgAuditUser"
+			column="FG_AUDIT_USER"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">分管领导审核用户名</meta>
+            <meta attribute="ColumnComment">分管领导审核用户名</meta>
+        </property>
+
+		<property
+			name="createTime"
+			column="CREATE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">创建时间</meta>
+            <meta attribute="ColumnComment">创建时间</meta>
+        </property>
+
+		<property
+			name="createUser"
+			column="CREATE_USER"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">创建用户名</meta>
+            <meta attribute="ColumnComment">创建用户名</meta>
+        </property>
+
+		<property
+			name="updateTime"
+			column="UPDATE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">更新时间</meta>
+            <meta attribute="ColumnComment">更新时间</meta>
+        </property>
+
+		<property
+			name="updateUser"
+			column="UPDATE_USER"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">更新用户名</meta>
+            <meta attribute="ColumnComment">更新用户名</meta>
+        </property>
+
+	
+
+		<set name="oaWorkPlanItems" inverse="true">
+			<key column="WEEK_PLAN_ID"/>
+			<one-to-many class="OaWorkPlanItem"/>
+		</set>
+
+	</class>	
+    <query name="oaworkplan_all_data_query">
+        <![CDATA[FROM OaWorkPlan]]>
+    </query>
+</hibernate-mapping>

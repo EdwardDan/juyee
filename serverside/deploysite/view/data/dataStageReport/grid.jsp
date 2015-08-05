@@ -35,8 +35,8 @@
                         var id = ids[i];
                         var rowData = jQuery("#listGrid").jqGrid('getRowData', id);
                         var bidCountOfStage = rowData["bidCountOfStage"];
-                        var opButton = '<input type="button" value="查看" onclick="doView(' + id + ',' + bidCountOfStage + ')" class="button_normal" /> ';
-                        opButton += '<input type="button" value="办证推进" onclick="doEditBzjd(' + id + ',' + bidCountOfStage + ')" class="button_normal_long" /> ';
+//                        var opButton = '<input type="button" value="查看" onclick="doView(' + id + ',' + bidCountOfStage + ')" class="button_normal" /> ';
+                        var opButton = '<input type="button" value="办证推进" onclick="doEditBzjd(' + id + ',' + bidCountOfStage + ')" class="button_normal_long" /> ';
                         opButton += '<input type="button" value="形象进度" onclick="doEditXxjd(' + id + ')" class="button_normal_long" /> ';
                         jQuery("#listGrid").jqGrid('setRowData', ids[i], { operation: opButton});
                     }

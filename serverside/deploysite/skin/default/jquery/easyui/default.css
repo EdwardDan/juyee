@@ -193,15 +193,21 @@ a.grid_link:hover
 }
 .title_input {
 	font-size: 12px;
-	border: 1px none #8db4d1;
+	/*border: 1px none #8db4d1;*/
 	color: #333;
-	background-color: #FFFFFF;
+	/*background-color: #FFFFFF;*/
 	width: 448px;
 	height: 19px;
-	background-image: url(images/title_search.gif);
-	background-repeat: no-repeat;
+	/*background-image: url(images/title_search.gif);*/
+	/*background-repeat: no-repeat;*/
 	text-indent: 5px;
-	background-position: top;
+	/*background-position: top;*/
+
+    /*********去掉查询条件输入框显示**********/
+    border:0;
+    background-image:url(images/title_search_bg.jpg);
+    background-repeat:repeat-x;
+    background-position: center;
 }
 .title_input_short {
     font-size: 12px;

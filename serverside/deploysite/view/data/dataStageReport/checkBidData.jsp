@@ -12,8 +12,8 @@
     <tr class="tr_header">
         <c:forEach items="${steps}" var="step">
             <c:if test="${step.isValid}">
-                <td style="width: 10%;">推进步骤</td>
-                <td style="width: 90%;">推进结果</td>
+                <td style="width: 12%;">推进步骤</td>
+                <td style="width: 88%;">推进结果</td>
             </c:if>
         </c:forEach>
     </tr>
@@ -30,7 +30,7 @@
                         <c:if test="${step.isValid}">
                             <c:set var="dataKey" value="${bidId}_${step.id}_${stageSecond.id}"/>
                             <td>
-                                <select class="form_select" style="width: 99%;"
+                                <select class="form_select_long" style="width: 99%;"
                                         name="resultCode_${bidId}_${step.id}_${stageSecond.id}"
                                         id="resultCode_${bidId}_${step.id}_${stageSecond.id}"
                                         onchange="changeResult(this.value,'${bidId}','${step.id}','${stageSecond.id}')">
@@ -42,7 +42,8 @@
                                 </select>
                             </td>
                             <td>
-                                <textarea class="input_text" style="width: 99%;cursor: pointer;height: 50px;" readonly="true"
+                                <textarea class="input_text" style="width: 99%;cursor: pointer;height: 50px;"
+                                          readonly="true"
                                           id="dealDate_${bidId}_${step.id}_${stageSecond.id}"
                                           name="dealDate_${bidId}_${step.id}_${stageSecond.id}"
                                           title="${dataMap[dataKey].dealDate}"
@@ -61,7 +62,7 @@
                     <c:if test="${step.isValid}">
                         <c:set var="dataKey" value="${bidId}_${step.id}_${stageFirst.id}"/>
                         <td>
-                            <select class="form_select" style="width: 99%;"
+                            <select class="form_select_long" style="width: 99%;"
                                     name="resultCode_${bidId}_${step.id}_${stageFirst.id}"
                                     id="resultCode_${bidId}_${step.id}_${stageFirst.id}"
                                     onchange="changeResult(this,'${bidId}','${step.id}','${stageFirst.id}')">
@@ -73,7 +74,8 @@
                             </select>
                         </td>
                         <td>
-                            <textarea class="input_text" style="width: 99%;cursor: pointer;height: 50px;" readonly="true"
+                            <textarea class="input_text" style="width: 99%;cursor: pointer;height: 50px;"
+                                      readonly="true"
                                       id="dealDate_${bidId}_${step.id}_${stageFirst.id}"
                                       name="dealDate_${bidId}_${step.id}_${stageFirst.id}"
                                       title="${dataMap[dataKey].dealDate}"

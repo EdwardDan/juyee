@@ -35,7 +35,7 @@
     //选择节点
     function selectNode(btn){
         var str = getCondStr();
-        openNewWindow('selectNodeDiv','选择节点',"${ctx}/projectQueryNode/selectNode.do?id=${id}&" + str,false,600,450);
+        openNewWindow('selectNodeDiv','选择节点',"${ctx}/projectQueryNode/selectNode.do?id=${id}&month=" + last_m+"&" + str,false,600,450);
     }
 
     //导出
@@ -73,14 +73,14 @@
 </script>
 <style type="text/css">
     .td_normal{
-        height: 30px;
-        min-width: 80px;
+        height: 25px;
+        /*min-width: 80px;*/
         word-break: break-all;
         background-color: white;
     }
     .td_active{
-        height: 30px;
-        min-width: 80px;
+        height: 25px;
+        /*min-width: 80px;*/
         word-break: break-all;
         background-color: #0074cc;
         font-weight: bold;

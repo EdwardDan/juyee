@@ -16,12 +16,12 @@ function gridinit(ele, params, context) {
         defaultQuery:{},
         queryButton:null,
         resetButton:(function () {
-            var ele = $("<span style='position: absolute; width: 20px;height: 19px;margin-left:-25px;'></span>")
-                .insertAfter("#queryConditionDesc");
-            if ($.browser.msie && $.browser.version > 7) {
-                ele.css({"background-color":"white", opacity:0});   //>ie7 元素不可见就不能触发click事件
-            }
-            return ele;
+//            var ele = $("<span style='position: absolute; width: 20px;height: 19px;margin-left:-25px;'></span>")
+//                .insertAfter("#queryConditionDesc");
+//            if ($.browser.msie && $.browser.version > 7) {
+//                ele.css({"background-color":"white", opacity:0});   //>ie7 元素不可见就不能触发click事件
+//            }
+//            return ele;
         })(),
         queryDesc:null,
         otherConditionEle:"#otherConditions",

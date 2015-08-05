@@ -48,3 +48,4 @@
 
 <script src="${ctx}/js/document.js" type="text/javascript"></script>
 <script src="${ctx}/js/biz.js" type="text/javascript"></script>
+<script src="${ctx}/js/jquery/fixedTable.js" type="text/javascript"></script>
