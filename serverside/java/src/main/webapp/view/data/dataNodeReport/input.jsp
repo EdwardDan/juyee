@@ -20,8 +20,35 @@
         if (bidId == null) {
             alert("标段不能为空！")
         } else {
-            saveAjaxData("${ctx}/dataNodeReport/save.do?month=" + last_m, formId);
+            doSave(btn, formId);
+            <%--saveAjaxData("${ctx}/dataNodeReport/save.do?month=" + last_m, formId);--%>
         }
+    }
+    function doSave(btn,formId) {
+        var sendData = "";
+        if (formId != null && $('#' + formId).length > 0) {
+            sendData = $("#" + formId).serializeArray();
+        }
+        $(btn).attr("disabled", "disabled");
+        $.ajax({
+            type: "POST",
+            url: "${ctx}/dataNodeReport/save.do?month=" + last_m,
+            data:sendData,
+            dataType: "json",
+            success: function (data) {
+                if (data.success) {
+                    showInfoMsg(data.msg);
+                } else {
+                    showErrorMsg(data.msg);
+                }
+                $(btn).removeAttr("disabled");
+                changeFlag=false;
+            },
+            error: function (xmlR, status, e) {
+                showErrorMsg("[" + e + "]" + xmlR.responseText);
+                $(btn).removeAttr("disabled");
+            }
+        });
     }
 
     function loadMonthReport(month) {
