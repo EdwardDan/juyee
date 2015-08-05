@@ -392,5 +392,6 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
         model.addAttribute("result3", Constants.DATA_STAGE_RESULT_3);
         model.addAttribute("result4", Constants.DATA_STAGE_RESULT_4);
         model.addAttribute("result5", Constants.DATA_STAGE_RESULT_5);
+        model.addAttribute("result6", Constants.DATA_STAGE_RESULT_6);
     }
 }
