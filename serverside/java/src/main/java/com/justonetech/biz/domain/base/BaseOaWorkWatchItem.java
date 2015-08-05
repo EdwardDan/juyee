@@ -1,5 +1,7 @@
 package com.justonetech.biz.domain.base;
 
+import com.justonetech.core.entity.Auditable;
+
 import java.io.Serializable;
 
 
@@ -21,7 +23,7 @@ import java.io.Serializable;
  *  table="OA_WORK_WATCH_ITEM"
  */
 
-public abstract class BaseOaWorkWatchItem  implements Serializable {
+public abstract class BaseOaWorkWatchItem  implements Serializable ,Auditable{
 
 	public static String REF = "OaWorkWatchItem";
 	public static String PROP_TIME_NODE = "timeNode";

@@ -91,6 +91,12 @@ public class PrivilegeCode {
     public static final String OA_THINGS_APPLY_AUDIT_ZR = "OaThingsApply_audit_zr";  //办公用品申请_审核_主任
     public static final String OA_WEEKARRANGE_EDIT = "OaWeekArrange_edit";  //领导一周工作安排_编辑
     public static final String OA_PETITION_EDIT = "OaPetition_edit";  //信访管理_编辑
+
+
+    public static final String OA_WORK_WATCH_EDIT = "OaWorkWatch_edit";  // OA办公-工作督办_编辑
+    public static final String OA_WORK_WATCH_AUDIT_ZR = "OaWorkWatch_audit_zr";  // OA办公-工作督办_审核_主任
+    public static final String OA_WORK_WATCH_AUDIT_KZ = "OaWorkWatch_audit_kz";  // OA办公-工作督办_审核_科长
+    public static final String OA_WORK_WATCH_AUDIT_B = "OaWorkWatch_audit_b";  // OA办公-工作督办_审核_办公室
     public static final String OA_WORK_PLAN_SUM_EDIT = "OaWorkPlanSum_edit";  //上报汇总_编辑
     public static final String OA_WORK_PLAN_SUM_AUDIT_ZR = "OaWorkPlanSum_audit";  //上报汇总_审核_主任
 
