@@ -63,9 +63,9 @@
 		<property
 			name="beginDate"
 			column="BEGIN_DATE"
-			type="integer"
+			type="date"
 			not-null="false"
-			length="4"
+			length="7"
         >
             <meta attribute="ColumnName">上报开始时间</meta>
             <meta attribute="ColumnComment">上报开始时间</meta>
@@ -74,9 +74,9 @@
 		<property
 			name="endDate"
 			column="END_DATE"
-			type="integer"
+			type="date"
 			not-null="false"
-			length="2"
+			length="7"
         >
             <meta attribute="ColumnName">上报结束时间</meta>
             <meta attribute="ColumnComment">上报结束时间</meta>

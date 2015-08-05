@@ -81,11 +81,11 @@ public abstract class BaseOaWorkPlan  implements Serializable {
 	
     /*上报开始时间*/
     /*上报开始时间*/
-	private Integer beginDate;
+	private java.sql.Date beginDate;
 	
     /*上报结束时间*/
     /*上报结束时间*/
-	private Integer endDate;
+	private java.sql.Date endDate;
 	
     /*附件ID(预留)*/
     /*附件ID(预留)*/
@@ -215,7 +215,7 @@ public abstract class BaseOaWorkPlan  implements Serializable {
 	/**
 	 * Return the value associated with the column: BEGIN_DATE
 	 */
-	public Integer getBeginDate () {
+	public java.sql.Date getBeginDate () {
 		return beginDate;
 	}
 
@@ -223,7 +223,7 @@ public abstract class BaseOaWorkPlan  implements Serializable {
 	 * Set the value related to the column: BEGIN_DATE
 	 * @param beginDate the BEGIN_DATE value
 	 */
-	public void setBeginDate (Integer beginDate) {
+	public void setBeginDate (java.sql.Date beginDate) {
 		this.beginDate = beginDate;
 	}
 
@@ -231,7 +231,7 @@ public abstract class BaseOaWorkPlan  implements Serializable {
 	/**
 	 * Return the value associated with the column: END_DATE
 	 */
-	public Integer getEndDate () {
+	public java.sql.Date getEndDate () {
 		return endDate;
 	}
 
@@ -239,7 +239,7 @@ public abstract class BaseOaWorkPlan  implements Serializable {
 	 * Set the value related to the column: END_DATE
 	 * @param endDate the END_DATE value
 	 */
-	public void setEndDate (Integer endDate) {
+	public void setEndDate (java.sql.Date endDate) {
 		this.endDate = endDate;
 	}
 
