@@ -101,7 +101,8 @@ public class Constants {
      */
     public static final String DATA_STAGE_RESULT = "DataStageResult"; //办证推进结果
     public static final String DATA_STAGE_RESULT_1 = "1"; //办证推进结果--计划办理
-    public static final String DATA_STAGE_RESULT_2 = "2"; //办证推进结果--办理中
+    public static final String DATA_STAGE_RESULT_2 = "2"; //办证推进结果--办理中(未上报)
+    public static final String DATA_STAGE_RESULT_6 = "6"; //办证推进结果--办理中（已上报）
     public static final String DATA_STAGE_RESULT_3 = "3"; //办证推进结果--办理完成
     public static final String DATA_STAGE_RESULT_4 = "4"; //办证推进结果--办理受阻
     public static final String DATA_STAGE_RESULT_5 = "5"; //办证推进结果--无需办理
