@@ -70,6 +70,7 @@ public class PrivilegeCode {
      */
     public static final String PROJECT_QUERY_STAGE_SUM = "ProjectQueryStage_sum";//办证推进汇总查询
     public static final String PROJECT_QUERY_NODE_SUM = "ProjectQueryNode_sum";  //形象进度汇总查询
+    public static final String DATA_STAGE_REPORT_SUM = "DataStageReportSum_sum";  //办证推进完成情况汇总
 
     /**
      * ***************************************OA******************************************************
