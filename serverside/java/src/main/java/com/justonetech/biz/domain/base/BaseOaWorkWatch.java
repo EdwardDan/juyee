@@ -85,11 +85,11 @@ public abstract class BaseOaWorkWatch implements Serializable, Auditable {
 
     /*上报开始时间*/
     /*上报开始时间*/
-    private Integer beginDate;
+    private java.sql.Date beginDate;
 
     /*上报结束时间*/
     /*上报结束时间*/
-    private Integer endDate;
+    private java.sql.Date endDate;
 
     /*附件ID(预留)*/
     /*附件ID(预留)*/
@@ -232,7 +232,7 @@ public abstract class BaseOaWorkWatch implements Serializable, Auditable {
     /**
      * Return the value associated with the column: BEGIN_DATE
      */
-    public Integer getBeginDate() {
+    public java.sql.Date getBeginDate() {
         return beginDate;
     }
 
@@ -241,7 +241,7 @@ public abstract class BaseOaWorkWatch implements Serializable, Auditable {
      *
      * @param beginDate the BEGIN_DATE value
      */
-    public void setBeginDate(Integer beginDate) {
+    public void setBeginDate(java.sql.Date beginDate) {
         this.beginDate = beginDate;
     }
 
@@ -249,7 +249,7 @@ public abstract class BaseOaWorkWatch implements Serializable, Auditable {
     /**
      * Return the value associated with the column: END_DATE
      */
-    public Integer getEndDate() {
+    public java.sql.Date getEndDate() {
         return endDate;
     }
 
@@ -258,7 +258,7 @@ public abstract class BaseOaWorkWatch implements Serializable, Auditable {
      *
      * @param endDate the END_DATE value
      */
-    public void setEndDate(Integer endDate) {
+    public void setEndDate(java.sql.Date endDate) {
         this.endDate = endDate;
     }
 

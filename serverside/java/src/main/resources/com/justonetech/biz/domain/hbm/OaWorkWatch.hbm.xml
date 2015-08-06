@@ -63,7 +63,7 @@
 		<property
 			name="beginDate"
 			column="BEGIN_DATE"
-			type="integer"
+			type="date"
 			not-null="false"
 			length="4"
         >
@@ -74,7 +74,7 @@
 		<property
 			name="endDate"
 			column="END_DATE"
-			type="integer"
+			type="date"
 			not-null="false"
 			length="2"
         >

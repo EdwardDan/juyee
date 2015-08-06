@@ -4,26 +4,10 @@
     var formId = "bean";
     $(function () {
         //页面验证初始化
-        var validateCondition = [
-            //{name:"reportDept", rule:"validate[required,maxSize[100]]"},
-            //{name:"reportUser", rule:"validate[required,maxSize[50]]"},
-            //{name:"reportPerson", rule:"validate[required,maxSize[50]]"},
-            //{name:"beginDate", rule:"validate[required,custom[integer],maxSize[4]"},
-            //{name:"endDate", rule:"validate[required,custom[integer],maxSize[2]"},
-            //{name:"documentId", rule:"validate[required,custom[integer],maxSize[10]"},
-            //{name:"status", rule:"validate[required,custom[integer],maxSize[2]"},
-            //{name:"zrOpinion", rule:"validate[required,maxSize[
-            //{name:"zrAuditTime", rule:"validate[required,maxSize[7]]"},
-            //{name:"zrAuditUser", rule:"validate[required,maxSize[100]]"},
-            //{name:"kzOpinion", rule:"validate[required,maxSize[
-            //{name:"kzAuditTime", rule:"validate[required,maxSize[7]]"},
-            //{name:"kzAuditUser", rule:"validate[required,maxSize[100]]"},
-            //{name:"bgsOpinion", rule:"validate[required,maxSize[
-            //{name:"bgsAuditTime", rule:"validate[required,maxSize[7]]"},
-            //{name:"bgsAuditUser", rule:"validate[required,maxSize[100]]"},
-        ];
+        var validateCondition = [];
         validateInit(validateCondition, formId);
     });
+
     function addLine() {
         var stand = $("#standTr").html()
         var len = $("#itemTable").find("tr").length;
@@ -34,28 +18,41 @@
         }
         $("#itemTable").find("tr:last").after(stand);
     }
+
     function deleteLine(obj) {
         $(obj).parent().parent().remove();
     }
 
     //保存操作
-    function save(btn) {
+    function save(status) {
         if (!validateForm(formId)) {
             return;
         }
-
-        //加入其他业务判断
-//        if ($('#name').val() == '') {
-//            showInfoMsg('请输入姓名！',null);
-//            return;
-//        }
-
+        $("#standTr").remove();
+        $("#status").val(status);
+        $("select[name='actualDesc']").each(function () {
+            $(this).get(0).disabled = false;
+        })
         //提交表单
         saveAjaxData("${ctx}/oaWorkWatch/save.do", formId);
     }
+
+    $(function () {
+        if (${bean.status==STATUS_INFO}) {
+            $("input[name='completeDesc']").each(function () {
+                $(this).get(0).readOnly = false;
+            })
+        }
+        if (${bean.status==STATUS_B_CHECK}) {
+            $("select[name='actualDesc']").each(function () {
+                $(this).get(0).disabled = false;
+            })
+        }
+    })
 </script>
 <form:form commandName="bean">
     <form:hidden path="id"/>
+    <input type="hidden" value="${bean.status}" id="status" name="status"/>
 
     <div class="form_div">
         <table cellpadding="0" cellspacing="0" class="form_table">
@@ -73,9 +70,11 @@
             <tr class="tr_dark">
                 <td class="form_label_right">上报开始时间：</td>
                 <td class="form_content" colspan="3">
-                    <form:input path="beginDate" cssClass="input_text"/>
+                    <form:input path="beginDate" cssClass="input_date"/>
+                    <input type="button" class="button_calendar" value=" " onClick="calendar('beginDate','date')">
                     ~
-                    <form:input path="endDate" cssClass="input_text"/>
+                    <form:input path="endDate" cssClass="input_date"/>
+                    <input type="button" class="button_calendar" value=" " onClick="calendar('endDate','date')">
                 </td>
             </tr>
         </table>
@@ -88,7 +87,7 @@
                 <td class="form_border" style="width: 35px">
                     序号
                 </td>
-                <td class="form_border" >
+                <td class="form_border">
                     工作内容
                 </td>
                 <td class="form_border">
@@ -107,6 +106,44 @@
                     审核情况
                 </td>
             </tr>
+            <c:forEach items="${bean.oaWorkWatchItems}" var="item">
+                <tr class="tr_light">
+                    <td class="form_border" style="width: 25px">
+                        <input type='button' value='删除' class='button_select_remove' onclick='deleteLine(this)'>
+                    </td>
+                    <td class="form_border">
+                        <input type="text" class="input_text" name="orderNo" value="${item.orderNo}"
+                               style="width: 35px"/>
+                    </td>
+                    <td class="form_border">
+                        <input type="text" class="input_text" name="content" value="${item.content}"/>
+                    </td>
+                    <td class="form_border">
+                        <input type="text" class="input_text" name="timeNode" value="${item.timeNode}"/>
+                    </td>
+
+                    <td class="form_border">
+                        <input type="text" class="input_text" name="reportMethod" value="${item.reportMethod}"/>
+                    </td>
+
+                    <td class="form_border">
+                        <input type="text" class="input_text" name="completeDesc" readonly='true'
+                               value="${item.completeDesc}"/>
+                    </td>
+
+                    <td class="form_border">
+                        <select name="actualDesc" disabled>
+                            <option value=""></option>
+                            <option value="属实" <c:if test="${item.actualDesc =='属实'}"> selected </c:if> >属实</option>
+                            <option value="不属实"
+                                    <c:if test="${item.actualDesc =='不属实'}">selected </c:if> >不属实
+                            </option>
+                        </select>
+                            <%--<input type="text" class="input_text" name="actualDesc" readonly='true'--%>
+                            <%--value="${item.actualDesc}"/>--%>
+                    </td>
+                </tr>
+            </c:forEach>
         </table>
 
         <table cellpadding="0" cellspacing="0" class="form_table" style="text-align: center">
@@ -115,31 +152,90 @@
                     <input type='button' value='删除' class='button_select_remove' onclick='deleteLine(this)'>
                 </td>
                 <td class="form_border">
-                    <input type="text" name="orderNo" style="width: 35px"/>
+                    <input type="text" name="orderNo" style="width: 35px" class="input_text"/>
                 </td>
                 <td class="form_border">
-                    <input type="text" name="content"/>
+                    <input type="text" name="content" class="input_text"/>
                 </td>
                 <td class="form_border">
-                    <input type="text" name="timeNode"/>
-                </td>
-
-                <td class="form_border">
-                    <input type="text" name="reportMethod"/>
+                    <input type="text" name="timeNode" class="input_text"/>
                 </td>
 
                 <td class="form_border">
-                    <input type="text" name="completeDesc"/>
+                    <input type="text" name="reportMethod" class="input_text"/>
                 </td>
 
                 <td class="form_border">
-                    <input type="text" name="actualDesc"/>
+                    <input type="text" name="completeDesc" readonly='true' class="input_text"/>
+                </td>
+
+                <td class="form_border">
+                    <select name="actualDesc" disabled>
+                        <option value="属实" <c:if test="${item.actualDesc =='属实'}"> selected </c:if> >属实</option>
+                        <option value="不属实"
+                                <c:if test="${item.actualDesc =='不属实'}">selected </c:if> >不属实
+                        </option>
+                    </select>
                 </td>
             </tr>
-
+        </table>
+        <c:if test="${bean.status == STATUS_ZR_SH}">
+            <div style="height: 10px"></div>
+            <fieldset class="form_fieldset">
+                <legend class="form_legend">
+                    主任审核
+                </legend>
+                <table cellpadding="0" cellspacing="0" class="form_table" style="text-align: center">
+                    <tr class="tr_light">
+                        <td class="form_label_right" colspan="1">
+                            审核意见：
+                        </td>
+                        <td class="form_content" colspan="6">
+                            <textarea class="input_textarea_long" name="zrOpinion"/>'${bean.zrOpinion}'</textarea>
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+        </c:if>
+        <c:if test="${bean.status == STATUS_B_CHECK}">
+            <div style="height: 10px"></div>
+            <fieldset class="form_fieldset">
+                <table cellpadding="0" cellspacing="0" class="form_table" style="text-align: center">
+                    <tr class="tr_light">
+                        <td class="form_label_right" colspan="1">
+                            核实意见：
+                        </td>
+                        <td class="form_content" colspan="6">
+                            <textarea class="input_textarea_long" name="bgsOpinion"/>${bean.bgsOpinion}</textarea>
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+        </c:if>
+        <table cellpadding="0" cellspacing="0" class="form_table" style="text-align: center">
             <tr class="tr_button">
                 <td style="text-align: center">
-                    <input type="button" value="确定" class="button_confirm" onclick="save(this)">&nbsp;
+                    <c:if test="${empty bean.status||bean.status == STATUS_EDIT||bean.status == STATUS_BACK||bean.status == STATUS_CHECK_BACK}">
+                        <input type="button" value="提交" class="button_confirm" onclick="save('${STATUS_ZR_SH}')">&nbsp;
+                        <input type="button" value="保存" class="button_confirm" onclick="save('${STATUS_EDIT}')">&nbsp;
+                    </c:if>
+
+                    <c:if test="${bean.status == STATUS_ZR_SH}">
+                        <input type="button" value="审核通过" class="button_normal_long" onclick="save('${STATUS_INFO}')">&nbsp;
+                        <input type="button" value="退回修改" class="button_normal_long" onclick="save('${STATUS_BACK}')">&nbsp;
+                    </c:if>
+
+                    <c:if test="${bean.status == STATUS_INFO}">
+                        <input type="button" value="暂存" class="button_confirm" onclick="save('${STATUS_INFO}')">&nbsp;
+                        <input type="button" value="上报" class="button_confirm" onclick="save('${STATUS_B_CHECK}')">&nbsp;
+                    </c:if>
+
+                    <c:if test="${bean.status == STATUS_B_CHECK}">
+                        <input type="button" value="核实通过" class="button_normal_long"
+                               onclick="save('${STATUS_CHECK_PASS}')">&nbsp;
+                        <input type="button" value="核实不通过" class="button_normal_long"
+                               onclick="save('${STATUS_CHECK_BACK}')">&nbsp;
+                    </c:if>
                     <input type="button" value="取消" class="button_cancel" onclick="closeWindow()">
                 </td>
             </tr>

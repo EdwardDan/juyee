@@ -10,6 +10,7 @@
                     '科室分管领导',
                     '上报开始时间',
                     '上报结束时间',
+                    '状态Id',
                     '状态',
                     '操作'
                 ],
@@ -17,9 +18,10 @@
                     {name: 'id', width: 10, align: "center", searchtype: "integer", hidden: true},
                     {name: "reportDept", width: "40", align: "center", searchtype: "string", sortable: true},
                     {name: "reportPerson", width: "40", align: "center", searchtype: "string", sortable: true},
-                    {name: "beginDate", width: "40", align: "center", searchtype: "integer", sortable: true, formatter: 'integer', formatoptions: {thousandsSeparator: ",", defaulValue: 0}},
-                    {name: "endDate", width: "40", align: "center", searchtype: "integer", sortable: true, formatter: 'integer', formatoptions: {thousandsSeparator: ",", defaulValue: 0}},
-                    {name: "status", width: "40", align: "center", searchtype: "integer", sortable: true, formatter: 'integer', formatoptions: {thousandsSeparator: ",", defaulValue: 0}}
+                    {name: "beginDate", width: "40", align: "center", searchtype: "datetime", sortable: true, formatter: 'date', formatoptions: {srcformat: 'Y-m-d', newformat: 'Y-m-d'}},
+                    {name: "endDate", width: "40", align: "center", searchtype: "datetime", sortable: true, formatter: 'date', formatoptions: {srcformat: 'Y-m-d', newformat: 'Y-m-d'}},
+                    {name: "status", width: "30", align: "center", searchtype: "integer", sortable: true, hidden: true},
+                    {name: "statusName", width: "40", align: "center", searchtype: "string", sortable: false}
                 ],
                 actModel: [
                     {name: 'operation', width: 40, align: 'center'}
@@ -31,10 +33,23 @@
                     var ids = jQuery("#listGrid").jqGrid('getDataIDs');
                     for (var i = 0; i < ids.length; i++) {
                         var id = ids[i];
+                        var rowData = jQuery("#listGrid").jqGrid('getRowData', id);
+                        var status = rowData["status"];
                         var opButton = '<input type="button" value="查看" onclick="doView(' + id + ')" class="button_normal"/> ';
-                        <c:if test="${canEdit}">
-                        opButton += '<input type="button" value="编辑" onclick="doEdit(' + id + ')" class="button_normal"/> ';
-                        opButton += '<input type="button" value="删除" onclick="doDelete(' + id + ')" class="button_normal"/>';
+                        var buttonName = "";
+                        if ('' == status || status == '${STATUS_EDIT}' || status == '${STATUS_BACK}' || status == '${STATUS_CHECK_BACK}') {
+                            buttonName = "编辑";
+                        } else if (status == '${STATUS_ZR_SH}') {
+                            buttonName = "审核";
+                        } else if (status == '${STATUS_INFO}') {
+                            buttonName = "上报";
+                        } else if (status == '${STATUS_B_CHECK}') {
+                            buttonName = "核实";
+                        }
+                        <c:if test="${canEdit||canEdit_ZR||canEdit_KZ||canEdit_B}">
+                        if (buttonName != '') {
+                            opButton += '<input type="button" value="' + buttonName + '" onclick="doEdit(' + id + ')" class="button_normal"/> ';
+                        }
                         </c:if>
                         jQuery("#listGrid").jqGrid('setRowData', ids[i], { operation: opButton});
                     }
@@ -46,8 +61,7 @@
                     { "field": "上报人用户名", "op": "cn", "data": ""},
                     { "field": "科室分管领导", "op": "cn", "data": ""},
                     { "field": "上报开始时间", "op": "cn", "data": ""},
-                    { "field": "上报结束时间", "op": "cn", "data": ""},
-                    { "field": "状态", "op": "cn", "data": ""}
+                    { "field": "上报结束时间", "op": "cn", "data": ""}
                 ]},
                 queryButton: $("#queryButton"),
                 queryDesc: $("#queryConditionDesc")

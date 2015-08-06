@@ -3,8 +3,10 @@ package com.justonetech.biz.controller.oa;
 import com.justonetech.biz.core.orm.hibernate.GridJq;
 import com.justonetech.biz.core.orm.hibernate.QueryTranslateJq;
 import com.justonetech.biz.daoservice.DocDocumentService;
+import com.justonetech.biz.daoservice.OaWorkWatchItemService;
 import com.justonetech.biz.daoservice.OaWorkWatchService;
 import com.justonetech.biz.domain.OaWorkWatch;
+import com.justonetech.biz.domain.OaWorkWatchItem;
 import com.justonetech.biz.manager.ConfigManager;
 import com.justonetech.biz.manager.DocumentManager;
 import com.justonetech.biz.utils.Constants;
@@ -12,6 +14,9 @@ import com.justonetech.biz.utils.enums.OaWorkWatchStatus;
 import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.orm.hibernate.Page;
 import com.justonetech.core.utils.ReflectionUtils;
+import com.justonetech.core.utils.StringHelper;
+import com.justonetech.system.daoservice.SysDeptService;
+import com.justonetech.system.domain.SysDept;
 import com.justonetech.system.domain.SysUser;
 import com.justonetech.system.manager.SimpleQueryManager;
 import com.justonetech.system.manager.SysCodeManager;
@@ -28,6 +33,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.sql.Timestamp;
+import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -47,7 +55,7 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
     private SysCodeManager sysCodeManager;
 
     @Autowired
-    private ConfigManager configManager;
+    private SysDeptService sysDeptService;
 
     @Autowired
     private DocumentManager documentManager;
@@ -56,7 +64,7 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
     private SimpleQueryManager simpleQueryManager;
 
     @Autowired
-    private DocDocumentService docDocumentService;
+    private OaWorkWatchItemService oaWorkWatchItemService;
 
     @Autowired
     private OaWorkWatchService oaWorkWatchService;
@@ -132,7 +140,7 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
     public String add(Model model) {
         OaWorkWatch oaWorkWatch = new OaWorkWatch();
         setStatus(model);
-        SysUser sysUser = sysUserManager.getSysUser();
+
 
         //如需增加其他默认值请在此添加
         model.addAttribute("bean", oaWorkWatch);
@@ -153,7 +161,7 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
         setStatus(model);
         //处理其他业务逻辑
         model.addAttribute("bean", oaWorkWatch);
-
+        List<SysDept> byQuery = sysDeptService.findByQuery("from SysDept where parent.id is not null and parent.code=? order by orderNo asc,id asc", Constants.SYS_DEPT_OWNER);
         return "view/oa/oaWorkWatch/input";
     }
 
@@ -193,24 +201,70 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
                         "reportPerson",
                         "beginDate",
                         "endDate",
-                        "documentId",
-                        "status",
-                        "zrOpinion",
-                        "zrAuditTime",
-                        "zrAuditUser",
-                        "kzOpinion",
-                        "kzAuditTime",
-                        "kzAuditUser",
-                        "bgsOpinion",
-                        "bgsAuditTime",
-                        "bgsAuditUser"
+                        "status"
                 });
 
             } else {
                 target = entity;
             }
+            SysUser sysUser = sysUserManager.getSysUser();
+            String zrOpinion = request.getParameter("zrOpinion");
+            String kzOpinion = request.getParameter("kzOpinion");
+            String bgsOpinion = request.getParameter("bgsOpinion");
+
+            if (!StringHelper.isEmpty(zrOpinion)) {
+                target.setZrOpinion(zrOpinion);
+            }
+            if (!StringHelper.isEmpty(kzOpinion)) {
+                target.setKzOpinion(kzOpinion);
+            }
+            if (!StringHelper.isEmpty(bgsOpinion)) {
+                target.setBgsOpinion(bgsOpinion);
+            }
+            Integer status = target.getStatus();
+            if (null != status) {
+                if (status == OaWorkWatchStatus.STATUS_INFO.getCode()) {
+                    target.setKzAuditTime(new Timestamp(System.currentTimeMillis()));
+                    target.setKzAuditUser(sysUser.getDisplayName());
+                } else if (status == OaWorkWatchStatus.STATUS_ZR_SH.getCode() || OaWorkWatchStatus.STATUS_BACK.getCode() == status) {
+                    target.setZrAuditTime(new Timestamp(System.currentTimeMillis()));
+                    target.setZrAuditUser(sysUser.getDisplayName());
+                } else if (status == OaWorkWatchStatus.STATUS_CHECK_BACK.getCode() || status == OaWorkWatchStatus.STATUS_CHECK_PASS.getCode()) {
+                    target.setBgsAuditTime(new Timestamp(System.currentTimeMillis()));
+                    target.setBgsAuditUser(sysUser.getDisplayName());
+                }
+            }
             oaWorkWatchService.save(target);
 
+            Set<OaWorkWatchItem> oaWorkWatchItems = target.getOaWorkWatchItems();
+            if (null != oaWorkWatchItems) {
+                for (OaWorkWatchItem oaWorkWatchItem : oaWorkWatchItems) {
+                    oaWorkWatchItemService.delete(oaWorkWatchItem);
+                }
+            }
+
+            String[] orderNo = request.getParameterValues("orderNo");
+            String[] content = request.getParameterValues("content");
+            String[] timeNode = request.getParameterValues("timeNode");
+            String[] reportMethod = request.getParameterValues("reportMethod");
+            String[] completeDesc = request.getParameterValues("completeDesc");
+            String[] actualDesc = request.getParameterValues("actualDesc");
+
+            if (null != orderNo) {
+                for (int i = 0; i < orderNo.length; i++) {
+                    OaWorkWatchItem oaWorkWatchItem = new OaWorkWatchItem();
+                    if (null != orderNo[i]) {
+                        oaWorkWatchItem.setOrderNo(Integer.parseInt(orderNo[i]));
+                    }
+                    oaWorkWatchItem.setContent(content[i]);
+                    oaWorkWatchItem.setTimeNode(timeNode[i]);
+                    oaWorkWatchItem.setReportMethod(reportMethod[i]);
+                    oaWorkWatchItem.setCompleteDesc(completeDesc[i]);
+                    oaWorkWatchItem.setActualDesc(actualDesc[i]);
+                    oaWorkWatchItem.setWorkWatch(target);
+                    oaWorkWatchItemService.save(oaWorkWatchItem);
+                }
+            }
         } catch (Exception e) {
             log.error("error", e);
             super.processException(response, e);
