@@ -1,2 +1,6 @@
 ALTER TABLE OA_WORK_PLAN MODIFY  BEGIN_DATE DATE; 
 ALTER TABLE OA_WORK_PLAN MODIFY  END_DATE DATE;
+
+-- Add/modify columns 
+alter table OA_WORK_WATCH modify BEGIN_DATE date;
+alter table OA_WORK_WATCH modify END_DATE date;
