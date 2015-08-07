@@ -48,7 +48,6 @@ public class OaWorkPlanSum extends BaseOaWorkPlanSum
     {
         String sum = "";
         String dept = "";
-        String depta = "";
         Integer i = 0;
         Set<OaWorkPlanSumItem> oaWorkPlanSumItems = getOaWorkPlanSumItems();
         for (OaWorkPlanSumItem oaWorkPlanSumItem : oaWorkPlanSumItems)
