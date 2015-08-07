@@ -40,6 +40,7 @@
                         if ('' == status || status == '${STATUS_EDIT}' || status == '${STATUS_BACK}' || status == '${STATUS_CHECK_BACK}') {
                             if (${canEdit}) {
                                 buttonName = "编辑";
+                                opButton += '<input type="button" value="删除" onclick="doDelete(' + id + ')" class="button_normal"/>';
                             }
                         } else if (status == '${STATUS_ZR_SH}') {
                             if (${canEdit_ZR}) {
