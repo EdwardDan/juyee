@@ -21,7 +21,7 @@
                     {name: "beginDate", width: "40", align: "center", searchtype: "datetime", sortable: true, formatter: 'date', formatoptions: {srcformat: 'Y-m-d', newformat: 'Y-m-d'}},
                     {name: "endDate", width: "40", align: "center", searchtype: "datetime", sortable: true, formatter: 'date', formatoptions: {srcformat: 'Y-m-d', newformat: 'Y-m-d'}},
                     {name: "status", width: "30", align: "center", searchtype: "integer", sortable: true, hidden: true},
-                    {name: "statusName", width: "40", align: "center", searchtype: "string", sortable: false}
+                    {name: "statusName", width: "40", align: "center", searchtype: "String", sortable: false},
                 ],
                 actModel: [
                     {name: 'operation', width: 40, align: 'center'}
@@ -40,7 +40,6 @@
                         if ('' == status || status == '${STATUS_EDIT}' || status == '${STATUS_BACK}' || status == '${STATUS_CHECK_BACK}') {
                             if (${canEdit}) {
                                 buttonName = "编辑";
-                                opButton += '<input type="button" value="删除" onclick="doDelete(' + id + ')" class="button_normal"/>';
                             }
                         } else if (status == '${STATUS_ZR_SH}') {
                             if (${canEdit_ZR}) {
@@ -53,6 +52,11 @@
                         } else if (status == '${STATUS_B_CHECK}') {
                             if (${canEdit_B}) {
                                 buttonName = "核实";
+                            }
+                        }
+                        if ('' == status || status == '${STATUS_EDIT}' ) {
+                            if (${canEdit}) {
+                                opButton += '<input type="button" value="删除" onclick="doDelete(' + id + ')" class="button_normal"/>';
                             }
                         }
                         if (buttonName != '') {
