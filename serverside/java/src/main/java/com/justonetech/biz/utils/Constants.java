@@ -136,4 +136,13 @@ public class Constants {
     public static final String OA_PETITION_STATUS = "OaPetitionStatus"; //信访受理状态
     public static final String OA_WEEK_ARRANGE_ZXLD = "zxld"; //领导一周安排中心领导
 
+    //项目办证阶段管理
+    public static final String PROJ_STAGE_PSOPINIONS = "PSOpinions";//规划选址意见书
+    public static final String PROJ_STAGE_REPLY4WORKERS = "Reply4Workers";//工可批复
+    public static final String PROJ_STAGE_PREDESIGN = "PreDesign";//初步设计
+    public static final String PROJ_STAGE_LANDUSERPLANNING = "LandUsePlanning";//用地规划许可证
+    public static final String PROJ_STAGE_LANDUSERAPPROVAL = "LandUseApproval";//用地批准书
+    public static final String PROJ_STAGE_ENGINEERPLANNINGPERMIT = "EngineerPlanningPermit";//工程规划许可证
+    public static final String PROJ_STAGE_CONSTRUCTIONPERMITS = "ConstructionPermits";//施工许可证
+
 }
