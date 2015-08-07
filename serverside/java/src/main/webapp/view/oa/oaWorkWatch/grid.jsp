@@ -21,7 +21,7 @@
                     {name: "beginDate", width: "40", align: "center", searchtype: "datetime", sortable: true, formatter: 'date', formatoptions: {srcformat: 'Y-m-d', newformat: 'Y-m-d'}},
                     {name: "endDate", width: "40", align: "center", searchtype: "datetime", sortable: true, formatter: 'date', formatoptions: {srcformat: 'Y-m-d', newformat: 'Y-m-d'}},
                     {name: "status", width: "30", align: "center", searchtype: "integer", sortable: true, hidden: true},
-                    {name: "statusName", width: "40", align: "center", searchtype: "String", sortable: false},
+                    {name: "statusName", width: "40", align: "center", searchtype: "String", sortable: false}
                 ],
                 actModel: [
                     {name: 'operation', width: 40, align: 'center'}
