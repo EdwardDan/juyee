@@ -2,12 +2,10 @@ package com.justonetech.biz.controller.oa;
 
 import com.justonetech.biz.core.orm.hibernate.GridJq;
 import com.justonetech.biz.core.orm.hibernate.QueryTranslateJq;
-import com.justonetech.biz.daoservice.DocDocumentService;
 import com.justonetech.biz.daoservice.OaWorkWatchItemService;
 import com.justonetech.biz.daoservice.OaWorkWatchService;
 import com.justonetech.biz.domain.OaWorkWatch;
 import com.justonetech.biz.domain.OaWorkWatchItem;
-import com.justonetech.biz.manager.ConfigManager;
 import com.justonetech.biz.manager.DocumentManager;
 import com.justonetech.biz.utils.Constants;
 import com.justonetech.biz.utils.enums.OaWorkWatchStatus;
@@ -115,6 +113,9 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
     }
 
     public void setStatus(Model model) {
+//        List<SysDept> sysDepts = sysDeptService.findByQuery("from SysDept where parent.id is not null and parent.code=? order by orderNo asc,id asc", Constants.SYS_DEPT_OWNER);
+//        model.addAttribute("sysDepts", sysDepts);
+
         //判断是否有编辑权限
         model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.OA_WORK_WATCH_EDIT));
         model.addAttribute("canEdit_ZR", sysUserManager.hasPrivilege(PrivilegeCode.OA_WORK_WATCH_AUDIT_ZR));
@@ -161,7 +162,7 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
         setStatus(model);
         //处理其他业务逻辑
         model.addAttribute("bean", oaWorkWatch);
-        List<SysDept> byQuery = sysDeptService.findByQuery("from SysDept where parent.id is not null and parent.code=? order by orderNo asc,id asc", Constants.SYS_DEPT_OWNER);
+
         return "view/oa/oaWorkWatch/input";
     }
 
