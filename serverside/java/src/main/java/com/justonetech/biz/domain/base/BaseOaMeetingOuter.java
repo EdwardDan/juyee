@@ -39,16 +39,18 @@ public abstract class BaseOaMeetingOuter  implements Serializable,Auditable {
 	public static String PROP_INNER_PERSONS = "innerPersons";
 	public static String PROP_UPDATE_TIME = "updateTime";
 	public static String PROP_LEADER = "leader";
+	public static String PROP_ATTEND_DEPTS = "attendDepts";
 	public static String PROP_START_DEPT = "startDept";
 	public static String PROP_FG_AUDIT_TIME = "fgAuditTime";
 	public static String PROP_TITLE = "title";
 	public static String PROP_STATUS = "status";
+	public static String PROP_ATTEND_PERSONS = "attendPersons";
 	public static String PROP_BEGIN_TIME = "beginTime";
 	public static String PROP_CHARGE_PERSON = "chargePerson";
 	public static String PROP_ADDRESS = "address";
 	public static String PROP_CREATE_TIME = "createTime";
-	public static String PROP_END_TIME = "endTime";
 	public static String PROP_ID = "id";
+	public static String PROP_END_TIME = "endTime";
 	public static String PROP_ZR_AUDIT_TIME = "zrAuditTime";
 	public static String PROP_RELATE_MATTER = "relateMatter";
 
@@ -79,83 +81,91 @@ public abstract class BaseOaMeetingOuter  implements Serializable,Auditable {
     /*会议开始时间*/
     /*会议开始时间*/
 	private java.sql.Timestamp beginTime;
-
+	
     /*会议结束时间*/
     /*会议结束时间*/
 	private java.sql.Timestamp endTime;
-
+	
     /*会议地点*/
     /*会议地点*/
 	private String address;
-
+	
     /*主持人*/
     /*主持人*/
 	private String chargePerson;
-
+	
     /*发起单位*/
     /*发起单位*/
 	private String startDept;
-
+	
     /*会议领导*/
     /*会议领导*/
 	private String leader;
-
+	
     /*与会单位*/
     /*与会单位*/
 	private String innerPersons;
-
+	
     /*会议名称*/
     /*会议名称*/
 	private String title;
-
+	
     /*会议内容*/
     /*会议内容*/
 	private String content;
-
+	
     /*与中心相关事宜*/
     /*与中心相关事宜*/
 	private String relateMatter;
-
+	
     /*工作建议*/
     /*工作建议*/
 	private String workAdvise;
-
+	
     /*状态*/
     /*状态*/
 	private Integer status;
-
+	
     /*分管领导审核意见*/
     /*分管领导审核意见*/
 	private String fgAuditOpinion;
-
+	
     /*分管领导审核时间*/
     /*分管领导审核时间*/
 	private java.sql.Timestamp fgAuditTime;
-
+	
     /*主任审核意见*/
     /*主任审核意见*/
 	private String zrAuditOpinion;
-
+	
     /*主任审核时间*/
     /*主任审核时间*/
 	private java.sql.Timestamp zrAuditTime;
-
+	
     /*创建时间*/
     /*创建时间*/
 	private java.sql.Timestamp createTime;
-
+	
     /*创建用户名*/
     /*创建用户名*/
 	private String createUser;
-
+	
     /*更新时间*/
     /*更新时间*/
 	private java.sql.Timestamp updateTime;
-
+	
     /*更新用户名*/
     /*更新用户名*/
 	private String updateUser;
-
+	
+    /*与会科室*/
+    /*与会科室*/
+	private String attendDepts;
+	
+    /*与会人员*/
+    /*与会人员*/
+	private String attendPersons;
+	
 
 	// many to one
 	private com.justonetech.system.domain.SysUser zrAuditUser;
@@ -509,6 +519,38 @@ public abstract class BaseOaMeetingOuter  implements Serializable,Auditable {
 
 
 	/**
+	 * Return the value associated with the column: ATTEND_DEPTS
+	 */
+	public String getAttendDepts () {
+		return attendDepts;
+	}
+
+	/**
+	 * Set the value related to the column: ATTEND_DEPTS
+	 * @param attendDepts the ATTEND_DEPTS value
+	 */
+	public void setAttendDepts (String attendDepts) {
+		this.attendDepts = attendDepts;
+	}
+
+
+	/**
+	 * Return the value associated with the column: ATTEND_PERSONS
+	 */
+	public String getAttendPersons () {
+		return attendPersons;
+	}
+
+	/**
+	 * Set the value related to the column: ATTEND_PERSONS
+	 * @param attendPersons the ATTEND_PERSONS value
+	 */
+	public void setAttendPersons (String attendPersons) {
+		this.attendPersons = attendPersons;
+	}
+
+
+	/**
 	 * Return the value associated with the column: ZR_AUDIT_USER_ID
 	 */
 	public com.justonetech.system.domain.SysUser getZrAuditUser () {
@@ -618,6 +660,8 @@ public abstract class BaseOaMeetingOuter  implements Serializable,Auditable {
 		builder.append(createUser);
 		builder.append(updateTime);
 		builder.append(updateUser);
+		builder.append(attendDepts);
+		builder.append(attendPersons);
 		return builder.toString();
 	}
 

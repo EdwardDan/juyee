@@ -14,7 +14,6 @@ import com.justonetech.core.orm.hibernate.Page;
 import com.justonetech.core.utils.ReflectionUtils;
 import com.justonetech.core.utils.StringHelper;
 import com.justonetech.system.daoservice.SysDeptService;
-import com.justonetech.system.domain.SysDept;
 import com.justonetech.system.domain.SysUser;
 import com.justonetech.system.manager.SimpleQueryManager;
 import com.justonetech.system.manager.SysCodeManager;
@@ -32,7 +31,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
-import java.util.List;
 import java.util.Set;
 
 
@@ -66,6 +64,19 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
 
     @Autowired
     private OaWorkWatchService oaWorkWatchService;
+
+    /**
+     * tab显示页面
+     *
+     * @param model .
+     * @return .
+     */
+    @RequestMapping
+    public String init(Model model) {
+        model.addAttribute("canSum", sysUserManager.hasPrivilege(PrivilegeCode.OA_WORK_WATCH_SUM));
+
+        return "view/oa/oaWorkWatch/init";
+    }
 
     /**
      * 列表显示页面

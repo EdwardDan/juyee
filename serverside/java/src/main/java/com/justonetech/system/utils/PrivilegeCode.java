@@ -97,6 +97,7 @@ public class PrivilegeCode {
     public static final String OA_WORK_WATCH_AUDIT_ZR = "OaWorkWatch_audit_zr";  // OA办公-工作督办_审核_主任
     public static final String OA_WORK_WATCH_AUDIT_KZ = "OaWorkWatch_audit_kz";  // OA办公-工作督办_审核_科长
     public static final String OA_WORK_WATCH_AUDIT_B = "OaWorkWatch_audit_bgs";  // OA办公-工作督办_审核_办公室
+    public static final String OA_WORK_WATCH_SUM = "OaWorkWatch_sum";  // OA办公-工作督办_汇总
     public static final String OA_WORK_PLAN_SUM_EDIT = "OaWorkPlanSum_edit";  //上报汇总_编辑
     public static final String OA_WORK_PLAN_SUM_AUDIT_ZR = "OaWorkPlanSum_audit";  //上报汇总_审核_主任
 
