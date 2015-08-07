@@ -63,3 +63,55 @@ comment on column OA_MEETING_OUTER.ATTEND_DEPTS
   is '与会科室';
 comment on column OA_MEETING_OUTER.ATTEND_PERSONS
   is '与会人员';
+
+
+/*==============================================================*/
+/* Table: DATA_STAGE_REPORT_DOC                                 */
+/*==============================================================*/
+create table DATA_STAGE_REPORT_DOC 
+(
+   ID                   number(10)           not null,
+   YEAR                 number(4),
+   MONTH                number(2),
+   PROJECT_ID           number(10),
+   DOC_ID               number(10),
+   CREATE_TIME          DATE,
+   CREATE_USER          VARCHAR2(100),
+   UPDATE_TIME          DATE,
+   UPDATE_USER          VARCHAR2(100),
+   constraint PK_DATA_STAGE_REPORT_DOC primary key (ID),
+   constraint FK_DATA_STAGE_REPORT_DOC foreign key (DOC_ID)
+         references DOC_DOCUMENT (ID),
+   constraint FK_DATA_STA_REP_DOC_PROJ foreign key (PROJECT_ID)
+         references PROJ_INFO (ID)
+);
+
+comment on table DATA_STAGE_REPORT_DOC is
+'办证推进填报文档';
+
+comment on column DATA_STAGE_REPORT_DOC.ID is
+'ID';
+
+comment on column DATA_STAGE_REPORT_DOC.YEAR is
+'年份';
+
+comment on column DATA_STAGE_REPORT_DOC.MONTH is
+'月份';
+
+comment on column DATA_STAGE_REPORT_DOC.PROJECT_ID is
+'项目ID';
+
+comment on column DATA_STAGE_REPORT_DOC.DOC_ID is
+'附件ID';
+
+comment on column DATA_STAGE_REPORT_DOC.CREATE_TIME is
+'创建时间';
+
+comment on column DATA_STAGE_REPORT_DOC.CREATE_USER is
+'创建用户名';
+
+comment on column DATA_STAGE_REPORT_DOC.UPDATE_TIME is
+'更新时间';
+
+comment on column DATA_STAGE_REPORT_DOC.UPDATE_USER is
+'更新用户名';
