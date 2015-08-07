@@ -1,0 +1,65 @@
+/*==============================================================*/
+/* Table: OA_WORK_WATCH_SUM                                     */
+/*==============================================================*/
+create table OA_WORK_WATCH_SUM 
+(
+   ID                   NUMBER(10)           not null,
+   YEAR                 NUMBER(4),
+   MONTH                NUMBER(2),
+   WEEK                 NUMBER(2),
+   BEGIN_DATE           NUMBER(2),
+   END_DATE             NUMBER(2),
+   WORK_WATCH_ID        NUMBER(10),
+   CREATE_TIME          DATE,
+   CREATE_USER          VARCHAR2(100),
+   UPDATE_TIME          DATE,
+   UPDATE_USER          VARCHAR2(100),
+   constraint PK_OA_WORK_WATCH_SUM primary key (ID),
+   constraint FK_OA_WORK_WATCH_SUM foreign key (WORK_WATCH_ID)
+         references OA_WORK_WATCH (ID)
+);
+
+comment on table OA_WORK_WATCH_SUM is
+'工作督办汇总';
+
+comment on column OA_WORK_WATCH_SUM.ID is
+'标识';
+
+comment on column OA_WORK_WATCH_SUM.YEAR is
+'年';
+
+comment on column OA_WORK_WATCH_SUM.MONTH is
+'月';
+
+comment on column OA_WORK_WATCH_SUM.WEEK is
+'周';
+
+comment on column OA_WORK_WATCH_SUM.BEGIN_DATE is
+'开始日';
+
+comment on column OA_WORK_WATCH_SUM.END_DATE is
+'结束日';
+
+comment on column OA_WORK_WATCH_SUM.WORK_WATCH_ID is
+'工作督办ID';
+
+comment on column OA_WORK_WATCH_SUM.CREATE_TIME is
+'创建时间';
+
+comment on column OA_WORK_WATCH_SUM.CREATE_USER is
+'创建用户名';
+
+comment on column OA_WORK_WATCH_SUM.UPDATE_TIME is
+'更新时间';
+
+comment on column OA_WORK_WATCH_SUM.UPDATE_USER is
+'更新用户名';
+
+-- Add/modify columns 
+alter table OA_MEETING_OUTER add ATTEND_DEPTS VARCHAR2(2000 CHAR);
+alter table OA_MEETING_OUTER add ATTEND_PERSONS VARCHAR2(2000 CHAR);
+-- Add comments to the columns 
+comment on column OA_MEETING_OUTER.ATTEND_DEPTS
+  is '与会科室';
+comment on column OA_MEETING_OUTER.ATTEND_PERSONS
+  is '与会人员';
