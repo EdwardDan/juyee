@@ -6,13 +6,13 @@ import com.justonetech.core.utils.JspHelper;
  * 外出会议状态
  */
 public enum OaWorkWatchStatus {
-    STATUS_EDIT(1, "未提交", "red"),
-    STATUS_ZR_SH(2, "主任审核", "blue"),
-    STATUS_BACK(3, "退回修改", "green"),
-    STATUS_INFO(4, "上报工作情况", "purple"),
-    STATUS_B_CHECK(5, "办公室核实", "red"),
+    STATUS_EDIT(1, "未提交", "blue"),
+    STATUS_ZR_SH(2, "主任审核", "green"),
+    STATUS_BACK(3, "退回修改", "red"),
+    STATUS_INFO(4, "上报工作情况", "black"),
+    STATUS_B_CHECK(5, "办公室核实", "blue"),
     STATUS_CHECK_BACK(6, "核实不通过", "red"),
-    STATUS_CHECK_PASS(7, "核实通过", "red");
+    STATUS_CHECK_PASS(7, "核实通过", "green");
 
     private int code;
     private String name;
