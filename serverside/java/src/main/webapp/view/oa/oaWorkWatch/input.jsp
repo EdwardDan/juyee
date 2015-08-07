@@ -191,7 +191,7 @@
                             审核意见：
                         </td>
                         <td class="form_content" colspan="6">
-                            <textarea class="input_textarea_long" name="zrOpinion"/>'${bean.zrOpinion}'</textarea>
+                            <textarea class="input_textarea_long" name="zrOpinion">${bean.zrOpinion}</textarea>
                         </td>
                     </tr>
                 </table>
@@ -206,7 +206,7 @@
                             核实意见：
                         </td>
                         <td class="form_content" colspan="6">
-                            <textarea class="input_textarea_long" name="bgsOpinion"/>${bean.bgsOpinion}</textarea>
+                            <textarea class="input_textarea_long" name="bgsOpinion">${bean.bgsOpinion}</textarea>
                         </td>
                     </tr>
                 </table>
