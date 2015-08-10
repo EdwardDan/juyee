@@ -23,12 +23,12 @@ public class OaWorkPlan extends BaseOaWorkPlan {
 
 /*[CONSTRUCTOR MARKER END]*/
 
-	public String getStatusName()
+	public String getStatusName()//获取状态名及其颜色
 	{
 		return null != getStatus() ? OaWorkPlanStatus.getColorNameByCode(getStatus()) : "";
 	}
 
-	public String getWorkTime()
+	public String getWorkTime()//获取工作时间段开始日期至结束日期
 	{
 		SimpleDateFormat sp = new SimpleDateFormat("yyyy-MM-dd");
 		if (getBeginDate() != null && getEndDate() != null)

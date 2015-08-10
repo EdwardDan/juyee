@@ -8,7 +8,6 @@ import com.justonetech.biz.daoservice.OaWorkPlanService;
 import com.justonetech.biz.daoservice.OaWorkPlanSumItemService;
 import com.justonetech.biz.domain.OaWorkPlan;
 import com.justonetech.biz.domain.OaWorkPlanItem;
-import com.justonetech.biz.domain.OaWorkPlanSumItem;
 import com.justonetech.biz.manager.ConfigManager;
 import com.justonetech.biz.manager.DocumentManager;
 import com.justonetech.biz.utils.Constants;
@@ -94,12 +93,12 @@ public class OaWorkPlanController extends BaseCRUDActionController<OaWorkPlan> {
         model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.OA_WORK_PLAN_EDIT));
         model.addAttribute("canEdit_KZ", sysUserManager.hasPrivilege(PrivilegeCode.OA_WORK_PLAN_AUDIZ_KZ));
         model.addAttribute("canEdit_FG", sysUserManager.hasPrivilege(PrivilegeCode.OA_WORK_PLAN_AUDIT_FG));
-
+        //常量定义
         model.addAttribute("STATUS_EDIT", OaWorkPlanStatus.STATUS_EDIT.getCode());
         model.addAttribute("STATUS_SUBMIT", OaWorkPlanStatus.STATUS_SUBMIT.getCode());
         model.addAttribute("STATUS_BRANCH_PASS", OaWorkPlanStatus.STATUS_BRANCH_PASS.getCode());
         model.addAttribute("STATUS_BRANCH_BACK", OaWorkPlanStatus.STATUS_BRANCH_BACK.getCode());
-        model.addAttribute("STATUS_BRIN_PASS", OaWorkPlanStatus.STATUS_MAIN_PASS.getCode());
+        model.addAttribute("STATUS_MAIN_PASS", OaWorkPlanStatus.STATUS_MAIN_PASS.getCode());
         model.addAttribute("STATUS_MAIN_BACK", OaWorkPlanStatus.STATUS_MAIN_BACK.getCode());
     }
 
@@ -128,16 +127,14 @@ public class OaWorkPlanController extends BaseCRUDActionController<OaWorkPlan> {
             List<OaWorkPlan> rowList = pageModel.getRows();
             List<Map<String, Object>> retList = new ArrayList<Map<String, Object>>();
             Map<String, Object> map;
-            for (OaWorkPlan data : rowList)
-            {
+            for (OaWorkPlan data : rowList) {
                 map = new HashMap<String, Object>();
                 map.put("id", data.getId());
-                map.put("reportDept",data.getReportDept());
-//                map.put("beginTime", data.getBeginDate());
-                map.put("workTime", data.getWorkTime());
-                map.put("status", data.getStatus());
-                map.put("statusName", data.getStatusName());
-                map.put("status", data.getStatus());
+                map.put("reportDept", data.getReportDept());//上报科室
+                map.put("reportPerson", data.getReportPerson());//上报人姓名
+                map.put("workTime", data.getWorkTime());//工作时间
+                map.put("status", data.getStatus());//当前状态
+                map.put("statusName", data.getStatusName());//当前状态名
                 retList.add(map);
             }
 
@@ -165,7 +162,7 @@ public class OaWorkPlanController extends BaseCRUDActionController<OaWorkPlan> {
         oaWorkPlan.setReportUser(sysUser.getLoginName());
         oaWorkPlan.setReportPerson(sysUser.getPerson().getName());
         //获取登录人的部门
-        SysDept dept =sysUser.getPerson().getDept();
+        SysDept dept = sysUser.getPerson().getDept();
         oaWorkPlan.setReportDept(dept.getName());
         //如需增加其他默认值请在此添加
         setStatus(model);
@@ -186,11 +183,11 @@ public class OaWorkPlanController extends BaseCRUDActionController<OaWorkPlan> {
     public String modify(Model model, Long id) {
         OaWorkPlan oaWorkPlan = oaWorkPlanService.get(id);
         setStatus(model);
-        if(oaWorkPlan.getReportUser()!=null) {
+        if (oaWorkPlan.getReportUser() != null) {
             model.addAttribute("applyPersonId", sysUserManager.getSysUser(oaWorkPlan.getReportUser()).getId());
         }
         Set<OaWorkPlanItem> oaWorkPlanItems = oaWorkPlan.getOaWorkPlanItems();
-        List<OaWorkPlanItem> oaWorkPlanItem=new ArrayList<OaWorkPlanItem>();
+        List<OaWorkPlanItem> oaWorkPlanItem = new ArrayList<OaWorkPlanItem>();
         for (OaWorkPlanItem workPlanItem : oaWorkPlanItems) {
             oaWorkPlanItem.add(workPlanItem);
         }
@@ -214,12 +211,12 @@ public class OaWorkPlanController extends BaseCRUDActionController<OaWorkPlan> {
 
 
         Set<OaWorkPlanItem> oaWorkPlanItems = oaWorkPlan.getOaWorkPlanItems();
-        List<OaWorkPlanItem> oaWorkPlanItem=new ArrayList<OaWorkPlanItem>();
+        List<OaWorkPlanItem> oaWorkPlanItem = new ArrayList<OaWorkPlanItem>();
         for (OaWorkPlanItem workPlanItem : oaWorkPlanItems) {
             oaWorkPlanItem.add(workPlanItem);
         }
         //处理其他业务逻辑
-        model.addAttribute("oaWorkPlanItems",oaWorkPlanItems);
+        model.addAttribute("oaWorkPlanItems", oaWorkPlanItems);
 
         model.addAttribute("bean", oaWorkPlan);
         return "view/oa/oaWorkPlan/view";
@@ -241,32 +238,22 @@ public class OaWorkPlanController extends BaseCRUDActionController<OaWorkPlan> {
             OaWorkPlan target;
             if (entity.getId() != null) {
                 target = oaWorkPlanService.get(entity.getId());
-                    ReflectionUtils.copyBean(entity, target, new String[]{
-                            "reportDept",
-//                        "reportUser",
-                            "reportPerson",
-                            "beginDate",
-                            "endDate",
-//                        "documentId",
-                            "status",
+                ReflectionUtils.copyBean(entity, target, new String[]{
+                        "reportDept",
+                        "reportPerson",
+                        "beginDate",
+                        "endDate",
+                        "status",
                         "kzOpinion",
-//                        "kzAuditTime",
-//                        "kzAuditUser",
                         "fgOpinion",
-//                        "fgAuditTime",
-//                        "fgAuditUser",
-//                        "createTime",
-//                        "createUser",
-//                        "updateTime",
-//                        "updateUser"
-                    });
+                });
 
             } else {
                 target = entity;
             }
-            oaWorkPlanService.save(target);
+            oaWorkPlanService.save(target);//保存上报记录
             for (OaWorkPlanItem workPlanItem : target.getOaWorkPlanItems()) {
-                oaWorkPlanItemService.delete(workPlanItem);
+                oaWorkPlanItemService.delete(workPlanItem);//删除关联item表
             }
             String[] orderNo = request.getParameterValues("orderNo");
             String[] dutyPerosn = request.getParameterValues("dutyPerosn");
@@ -274,7 +261,7 @@ public class OaWorkPlanController extends BaseCRUDActionController<OaWorkPlan> {
             String[] content = request.getParameterValues("content");
             String[] schedule = request.getParameterValues("schedule");
             String[] jbr = request.getParameterValues("jbr");
-            if (orderNo!=null) {
+            if (orderNo != null) {
                 for (int i = 0; i < orderNo.length; i++) {
                     OaWorkPlanItem oaWorkPlanItem = new OaWorkPlanItem();
                     oaWorkPlanItem.setWeekPlan(target);
@@ -284,15 +271,15 @@ public class OaWorkPlanController extends BaseCRUDActionController<OaWorkPlan> {
                     oaWorkPlanItem.setContent(content[i]);
                     oaWorkPlanItem.setSchedule(schedule[i]);
                     oaWorkPlanItem.setJbr(jbr[i]);
-                    oaWorkPlanItemService.save(oaWorkPlanItem);
+                    oaWorkPlanItemService.save(oaWorkPlanItem);//插入关联表数据item
                 }
             }
             if (OaWorkPlanStatus.STATUS_BRANCH_BACK.getCode() == target.getStatus() || OaWorkPlanStatus.STATUS_MAIN_BACK.getCode() == target.getStatus()) {
-                msg = "已退回修改!";
+                msg = "已退回修改!";//ststus=4/6
             } else if (OaWorkPlanStatus.STATUS_BRANCH_PASS.getCode() == target.getStatus() || OaWorkPlanStatus.STATUS_MAIN_PASS.getCode() == target.getStatus()) {
-                msg = "审核已通过!";
+                msg = "审核已通过!";//status=3/5
             } else if (OaWorkPlanStatus.STATUS_SUBMIT.getCode() == target.getStatus()) {
-                msg = "已提交!";
+                msg = "已提交!";//status=2
             }
         } catch (Exception e) {
             log.error("error", e);
@@ -312,10 +299,10 @@ public class OaWorkPlanController extends BaseCRUDActionController<OaWorkPlan> {
     @RequestMapping
     public void delete(HttpServletResponse response, Long id) throws Exception {
         OaWorkPlan oaWorkPlan = oaWorkPlanService.get(id);
-        for(OaWorkPlanItem workPlanItem:oaWorkPlan.getOaWorkPlanItems()){
-            for (OaWorkPlanSumItem oaWorkPlanSumItem : workPlanItem.getOaWorkPlanSumItems()) {
-                oaWorkPlanSumItemService.delete(oaWorkPlanSumItem);
-            }
+        for (OaWorkPlanItem workPlanItem : oaWorkPlan.getOaWorkPlanItems()) {//删除关联item表
+//            for (OaWorkPlanSumItem oaWorkPlanSumItem : workPlanItem.getOaWorkPlanSumItems()) {
+//                oaWorkPlanSumItemService.delete(oaWorkPlanSumItem);
+//            }
             oaWorkPlanItemService.delete(workPlanItem);
         }
         oaWorkPlanService.delete(id);

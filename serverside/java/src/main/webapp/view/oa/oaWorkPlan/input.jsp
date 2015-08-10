@@ -71,6 +71,11 @@
         }
     }
 </script>
+<style type="text/css">
+    .addTd{
+        border: 1px solid;
+    }
+</style>
 <form:form commandName="bean">
     <form:hidden path="id"/>
     <form:hidden path="status"/>
@@ -161,13 +166,6 @@
                 </tr>
                 </c:forEach>
                 </c:if>
-
-                    <%--<tr class="tr_light">--%>
-                    <%--<td class="form_label">状态：</td>--%>
-                    <%--<td class="form_content">--%>
-                    <%--<form:input path="status" cssClass="input_text"/>						--%>
-                    <%--</td>                                --%>
-                    <%--</tr>--%>
                 <tbody id="tableWorkPlanItemDiv"></tbody>
                     <%--标准行迁入--%>
             </table>

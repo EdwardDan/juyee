@@ -8,7 +8,7 @@ public enum OaWorkPlanStatus {
     STATUS_BRANCH_PASS(3, "科长审核通过", "purple"),
     STATUS_BRANCH_BACK(4, "科长审核退回", "red"),
     STATUS_MAIN_PASS(5, "分管领导审核通过", "green"),
-    STATUS_MAIN_BACK(6, "办公室主任审核退回", "red");
+    STATUS_MAIN_BACK(6, "分管领导审核退回", "red");
 
     private int code;
     private String name;
@@ -58,7 +58,7 @@ public enum OaWorkPlanStatus {
         return null;
     }
 
-    public static String getColorNameByCode(int code) {
+    public static String getColorNameByCode(int code) {//获取状态名颜色
         for (OaWorkPlanStatus aType : values()) {
             if (aType.getCode() == code)
                 return "<font color=" + aType.getColor() + ">" + aType.getName() + "</font>";
