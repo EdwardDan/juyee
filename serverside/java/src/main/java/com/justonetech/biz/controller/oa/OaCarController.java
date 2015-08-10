@@ -191,6 +191,29 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
     }
 
     /**
+     * 修改显示页面
+     *
+     * @param id    .
+     * @param model .
+     * @return .
+     */
+    @RequestMapping
+    public String audit(Model model, Long id) {
+        OaCar oaCar = oaCarService.get(id);
+
+        //处理其他业务逻辑
+        modelInfo(model, oaCar);
+        //取得可选择时间
+        String beginTime = JspHelper.getString(oaCar.getBeginTime());
+        String endTime = JspHelper.getString(oaCar.getEndTime());
+        model.addAttribute("startHour", beginTime.substring(11, 13));
+        model.addAttribute("startMinute", beginTime.substring(14, 16));
+        model.addAttribute("endHour", endTime.substring(11, 13));
+        model.addAttribute("endMinute", endTime.substring(14, 16));
+        return "view/oa/oaCar/audit";
+    }
+
+    /**
      * 查看页面
      *
      * @param id    .
@@ -237,10 +260,6 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
                         "personNum",
                         "useCause",
                         "address",
-                        "kzAuditOpinion",
-                        "kzAuditTime",
-                        "zrAuditOpinion",
-                        "zrAuditTime",
                         "driverMobile",
                         "status"
                 });
@@ -257,6 +276,55 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
             target.setApplyDept(sysDept);
             target.setApplyUser(sysUser);
 
+            oaCarService.save(target);
+
+            //创建提醒消息
+            if (target.getStatus() == OaCarStatus.STATUS_SUBMIT.getCode()) {
+                createOaTask(target);
+            }
+        } catch (Exception e) {
+            log.error("error", e);
+            super.processException(response, e);
+            return;
+        }
+        if (entity.getStatus() == OaCarStatus.STATUS_SUBMIT.getCode()) {
+            sendSuccessJSON(response, "提交成功");
+        } else {
+            sendSuccessJSON(response, "保存成功");
+        }
+    }
+
+    /**
+     * 保存操作
+     *
+     * @param response .
+     * @param entity   .
+     * @param request  .
+     * @throws Exception .
+     */
+    @SuppressWarnings("unchecked")
+    @RequestMapping
+    public void auditSave(HttpServletResponse response, @ModelAttribute("bean") OaCar entity, HttpServletRequest request) throws Exception {
+        try {
+            OaCar target;
+            if (entity.getId() != null) {
+                target = oaCarService.get(entity.getId());
+                ReflectionUtils.copyBean(entity, target, new String[]{
+                        "driverMobile",
+                        "status"
+                });
+            } else {
+                target = entity;
+            }
+
+            String kzAuditOpinion = request.getParameter("kzAuditOpinion");
+            if (!StringHelper.isEmpty(kzAuditOpinion)) {
+                target.setKzAuditOpinion(kzAuditOpinion);
+            }
+            String zrAuditOpinion = request.getParameter("zrAuditOpinion");
+            if (!StringHelper.isEmpty(zrAuditOpinion)) {
+                target.setZrAuditOpinion(zrAuditOpinion);
+            }
             //拟派车辆
             String carId = request.getParameter("car");
             SysCodeDetail carDetail = null;
@@ -285,24 +353,24 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
             oaCarService.save(target);
 
             //创建提醒消息
-            if (target.getStatus() == OaCarStatus.STATUS_SUBMIT.getCode() || target.getStatus() == OaCarStatus.STATUS_MAIN_BACK.getCode() ||
+            if (target.getStatus() == OaCarStatus.STATUS_MAIN_BACK.getCode() ||
                     target.getStatus() == OaCarStatus.STATUS_BRANCH_BACK.getCode() || target.getStatus() == OaCarStatus.STATUS_MAIN_PASS.getCode()) {
                 createOaTask(target);
 
                 //发送信息提醒
                 if (target.getStatus() == OaCarStatus.STATUS_MAIN_BACK.getCode() || target.getStatus() == OaCarStatus.STATUS_BRANCH_BACK.getCode()) {
-                    msgMessageManager.sendSms(sysUser.getDisplayName() + "：你的车辆申请已被退回，请登录系统查看。", sysUser.getPerson().getMobile());
+                    msgMessageManager.sendSms(target.getApplyUser().getDisplayName() + "：你的车辆申请已被退回，请登录系统查看。", target.getApplyUser().getPerson().getMobile());
                 }
 
                 if (target.getStatus() == OaCarStatus.STATUS_MAIN_PASS.getCode()) {
-                    String content = sysUser.getDisplayName() + "：你的车辆申请已通过。车牌：" + target.getCar().getName();
+                    String content = target.getApplyUser().getDisplayName() + "：你的车辆申请已通过。车牌：" + target.getCar().getName();
                     //判断司机是否存在
                     if (target.getDriverPerson() != null) {
                         content += "司机：" + target.getDriverPerson().getName();
-                        msgMessageManager.sendSms(sysUser.getDisplayName() + "的车辆申请已通过，请" +
+                        msgMessageManager.sendSms(target.getApplyUser().getDisplayName() + "的车辆申请已通过，请" +
                                 target.getDriverPerson().getName() + "在" + target.getBeginTime() + "为其司机。", target.getDriverMobile());
                     }
-                    msgMessageManager.sendSms(content, sysUser.getPerson().getMobile());
+                    msgMessageManager.sendSms(content, target.getApplyUser().getPerson().getMobile());
                 }
             }
         } catch (Exception e) {
@@ -310,7 +378,15 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
             super.processException(response, e);
             return;
         }
-        sendSuccessJSON(response, "保存成功");
+        if (entity.getStatus() == OaCarStatus.STATUS_MAIN_PASS.getCode()) {
+            sendSuccessJSON(response, "办公室主任审核通过");
+        } else if (entity.getStatus() == OaCarStatus.STATUS_BRANCH_PASS.getCode()) {
+            sendSuccessJSON(response, "科长审核通过");
+        } else if (entity.getStatus() == OaCarStatus.STATUS_BRANCH_BACK.getCode()) {
+            sendSuccessJSON(response, "科长审核退回");
+        } else if (entity.getStatus() == OaCarStatus.STATUS_MAIN_BACK.getCode()) {
+            sendSuccessJSON(response, "办公室主任审核退回");
+        }
     }
 
     /**
