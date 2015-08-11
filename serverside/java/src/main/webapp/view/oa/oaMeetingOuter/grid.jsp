@@ -23,9 +23,9 @@
                     {name: "beginTime", width: "40", align: "center", searchtype: "date", sortable: true, hidden: true},
                     {name: "endTime", width: "40", align: "center", searchtype: "date", sortable: true, hidden: true},
                     {name: "address", width: "60", align: "left", searchtype: "string", sortable: true},
-                    {name: "docButton", width: "30", align: "center", sortable: false},
-                    {name: "statusName", width: "40", align: "center", searchtype: "String", sortable: false},
-                    {name: "statusCode", width: "30", align: "center", searchtype: "integer", sortable: true, hidden: false}
+                    {name: "docButton", width: "15", align: "center", sortable: false},
+                    {name: "statusName", width: "25", align: "center", searchtype: "String", sortable: false},
+                    {name: "statusCode", width: "5", align: "center", searchtype: "integer", sortable: true, hidden: true}
                 ],
                 actModel: [
                     {name: 'operation', width: 50, align: 'center'}

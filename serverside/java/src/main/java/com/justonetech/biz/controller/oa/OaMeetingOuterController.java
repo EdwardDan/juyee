@@ -7,11 +7,13 @@ import com.justonetech.biz.daoservice.OaMeetingOuterService;
 import com.justonetech.biz.domain.DocDocument;
 import com.justonetech.biz.domain.OaMeetingOuter;
 import com.justonetech.biz.manager.DocumentManager;
+import com.justonetech.biz.utils.Constants;
 import com.justonetech.biz.utils.enums.OaMeetingStatus;
 import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.orm.hibernate.Page;
 import com.justonetech.core.security.user.BaseUser;
 import com.justonetech.core.security.util.SpringSecurityUtils;
+import com.justonetech.core.utils.JspHelper;
 import com.justonetech.core.utils.ReflectionUtils;
 import com.justonetech.core.utils.StringHelper;
 import com.justonetech.system.manager.SysUserManager;
@@ -28,6 +30,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -113,9 +117,19 @@ public class OaMeetingOuterController extends BaseCRUDActionController<OaMeeting
             //执行查询
             QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);
             pageModel = oaMeetingOuterService.findByPage(pageModel, queryTranslate.toString());
-
+            session.setAttribute(Constants.GRID_SQL_KEY, queryTranslate.toString());
+            List<Map> mapList = GridJq.getGridValue(pageModel.getRows(), columns);
+            for (Map bean : mapList) {
+                Object id = bean.get("id");
+                if (null != id) {
+                    OaMeetingOuter oaMeetingOuter = oaMeetingOuterService.get(JspHelper.getLong(id));
+                    if (null != oaMeetingOuter.getDoc()) {
+                        bean.put("docButton", documentManager.getDownloadButton(oaMeetingOuter.getDoc()));
+                    }
+                }
+            }
             //输出显示
-            String json = GridJq.toJSON(columns, pageModel);
+            String json = GridJq.toJSON(mapList, pageModel);
             sendJSON(response, json);
         } catch (Exception e) {
             log.error("error", e);
