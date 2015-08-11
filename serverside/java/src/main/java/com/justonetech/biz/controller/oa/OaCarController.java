@@ -203,6 +203,8 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
 
         //处理其他业务逻辑
         modelInfo(model, oaCar);
+        model.addAttribute("canKzAudit", sysUserManager.hasPrivilege(PrivilegeCode.OA_CAR_AUDIT_KZ));
+        model.addAttribute("canZrAudit", sysUserManager.hasPrivilege(PrivilegeCode.OA_CAR_AUDIT_ZR));
         //取得可选择时间
         String beginTime = JspHelper.getString(oaCar.getBeginTime());
         String endTime = JspHelper.getString(oaCar.getEndTime());
