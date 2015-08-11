@@ -18,7 +18,7 @@
 
         //修改状态
         if (t == '3') {
-            $("#status").val(3);
+            $("#status").val('3');
 
             $.messager.confirm('系统提示', "确定审核通过吗？通过后将不能修改！", function (r) {
                 if (r) {
@@ -28,7 +28,12 @@
             });
         } else if (t == '4') {
             $("#status").val(4);
-            saveAjaxData("${ctx}/oaCar/auditSave.do", formId);
+            $.messager.confirm('系统提示', "确定退回吗？", function (r) {
+                if (r) {
+                    //提交表单
+                    saveAjaxData("${ctx}/oaCar/auditSave.do", formId);
+                }
+            });
         } else if (t == '5') {
             if (document.getElementById("isAgree").checked) {
                 if ($("#driverPersonName").val() == '') {
@@ -51,9 +56,13 @@
             });
         } else if (t == '6') {
             $("#status").val(6);
-            saveAjaxData("${ctx}/oaCar/auditSave.do", formId);
+            $.messager.confirm('系统提示', "确定退回吗？", function (r) {
+                if (r) {
+                    //提交表单
+                    saveAjaxData("${ctx}/oaCar/auditSave.do", formId);
+                }
+            });
         }
-
     }
 
     function showDriver() {
@@ -143,12 +152,7 @@
                     <tr class="tr_dark">
                         <td class="form_label_right" width="15%">科长审核意见：</td>
                         <td class="form_content" colspan="3">
-                            <c:if test="${bean.status=='3'||bean.status=='5'}">
-                                <sys:toHtml> ${bean.kzAuditOpinion}</sys:toHtml>
-                            </c:if>
-                            <c:if test="${bean.status=='2'}">
-                                <form:textarea path="kzAuditOpinion" cssClass="input_textarea_long"/>
-                            </c:if>
+                            <form:textarea path="kzAuditOpinion" cssClass="input_textarea_long"/>
                         </td>
                     </tr>
                 </table>
