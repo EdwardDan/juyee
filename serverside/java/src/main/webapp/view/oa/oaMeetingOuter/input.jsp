@@ -58,7 +58,7 @@
             </legend>
             <table cellpadding="0" cellspacing="0" class="form_table">
                 <tr class="tr_light">
-                    <td class="form_label_right" style="width: 15%">会议时间：</td>
+                    <td class="form_label_right" style="width: 150px">会议时间：</td>
                     <td class="form_content" colspan="3">
                         <input type="text" name="beginTime" id="beginTime" class="input_datetime"
                                value="<fmt:formatDate value="${bean.beginTime}" pattern="yyyy-MM-dd HH:mm"/>"
@@ -81,13 +81,13 @@
                     </td>
                 </tr>
                 <tr class="tr_dark">
-                    <td class="form_label_right" style="width: 15%">主持人：</td>
-                    <td class="form_content" style="width: 35%">
+                    <td class="form_label_right">主持人：</td>
+                    <td class="form_content">
                         <form:input path="chargePerson" cssClass="input_text"/>
                     </td>
 
-                    <td class="form_label_right" style="width: 15%">发起单位：</td>
-                    <td class="form_content" style="width: 35%">
+                    <td class="form_label_right">发起单位：</td>
+                    <td class="form_content">
                         <form:input path="startDept" cssClass="input_text"/>
                     </td>
                 </tr>
