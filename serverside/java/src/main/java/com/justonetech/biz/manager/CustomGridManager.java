@@ -1,6 +1,9 @@
 package com.justonetech.biz.manager;
 
+import com.justonetech.biz.daoservice.OaPublicInfoService;
+import com.justonetech.biz.domain.OaPublicInfo;
 import com.justonetech.biz.manager.indexGrid.CustomGridData;
+import com.justonetech.biz.utils.Constants;
 import com.justonetech.core.utils.FormatUtils;
 import com.justonetech.system.daoservice.SysCustomGridService;
 import com.justonetech.system.daoservice.SysCustomGridUserService;
@@ -14,8 +17,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Method;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
@@ -42,6 +47,8 @@ public class CustomGridManager {
     @Autowired
     private SimpleQueryManager simpleQueryManager;
 
+    @Autowired
+    private OaPublicInfoService oaPublicInfoService;
 
     private static final String LINK_URL = "<a href='#' class='index' onclick='viewCustomGridDetail(\"{0}\")'>{1}</a>"; //查看链接
 
@@ -60,6 +67,12 @@ public class CustomGridManager {
         data.setModelCode(modelCode);
         data.setModelName(grid.getModelName());
         data.setMoreLink(grid.getMoreLink());
+        try {
+            Method method = this.getClass().getDeclaredMethod("setGridData" + modelCode, CustomGridData.class);
+            method.invoke(this, data);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         return data;
     }
@@ -110,5 +123,105 @@ public class CustomGridManager {
             }
         }
         return "";
+    }
+
+    /**
+     * 会议纪要
+     */
+    private void setGridData1(CustomGridData data) {
+        data.setCols(new String[]{"信息类型", "标题", "信息来源", "发布时间"});
+        data.setAligns(new String[]{"center", "center", "center", "center"});
+        data.setWidths(new int[]{20, 25, 20, 20});
+
+        List<Vector<Object>> ret = new ArrayList<Vector<Object>>();
+        List<OaPublicInfo> list = oaPublicInfoService.findByQuery("from OaPublicInfo where type.code='" + Constants.OA_PUBLIC_INFO_TYPE_MEETING + "' order by id desc");
+        int i = 0;
+        for (OaPublicInfo bizData : list) {
+            i++;
+            if (i > MAX_COUNT) break;
+            Vector<Object> v = new Vector<Object>();
+            v.add(bizData.getType().getName());
+            v.add(bizData.getTitle());
+            v.add(bizData.getCreateDeptName());
+            v.add(bizData.getReportDate());
+            ret.add(v);
+        }
+        addBlankLine(ret, list.size(), data.getCols());
+        data.setList(ret);
+    }
+
+    /**
+     * 情况通报
+     */
+    private void setGridData2(CustomGridData data) {
+        data.setCols(new String[]{"信息类型", "标题", "信息来源", "发布时间"});
+        data.setAligns(new String[]{"center", "center", "center", "center"});
+        data.setWidths(new int[]{20, 25, 20, 20});
+
+        List<Vector<Object>> ret = new ArrayList<Vector<Object>>();
+        List<OaPublicInfo> list = oaPublicInfoService.findByQuery("from OaPublicInfo where type.code='" + Constants.OA_PUBLIC_INFO_TYPE_NOTICE + "' order by id desc");
+        int i = 0;
+        for (OaPublicInfo bizData : list) {
+            i++;
+            if (i > MAX_COUNT) break;
+            Vector<Object> v = new Vector<Object>();
+            v.add(bizData.getType().getName());
+            v.add(bizData.getTitle());
+            v.add(bizData.getCreateDeptName());
+            v.add(bizData.getReportDate());
+            ret.add(v);
+        }
+        addBlankLine(ret, list.size(), data.getCols());
+        data.setList(ret);
+    }
+
+    /**
+     * 规章制度
+     */
+    private void setGridData3(CustomGridData data) {
+        data.setCols(new String[]{"信息类型", "标题", "信息来源", "发布时间"});
+        data.setAligns(new String[]{"center", "center", "center", "center"});
+        data.setWidths(new int[]{20, 25, 20, 20});
+
+        List<Vector<Object>> ret = new ArrayList<Vector<Object>>();
+        List<OaPublicInfo> list = oaPublicInfoService.findByQuery("from OaPublicInfo where type.code='" + Constants.OA_PUBLIC_INFO_TYPE_RULE + "' order by id desc");
+        int i = 0;
+        for (OaPublicInfo bizData : list) {
+            i++;
+            if (i > MAX_COUNT) break;
+            Vector<Object> v = new Vector<Object>();
+            v.add(bizData.getType().getName());
+            v.add(bizData.getTitle());
+            v.add(bizData.getCreateDeptName());
+            v.add(bizData.getReportDate());
+            ret.add(v);
+        }
+        addBlankLine(ret, list.size(), data.getCols());
+        data.setList(ret);
+    }
+
+    /**
+     * 工作动态
+     */
+    private void setGridData4(CustomGridData data) {
+        data.setCols(new String[]{"信息类型", "标题", "信息来源", "发布时间"});
+        data.setAligns(new String[]{"center", "center", "center", "center"});
+        data.setWidths(new int[]{20, 25, 20, 20});
+
+        List<Vector<Object>> ret = new ArrayList<Vector<Object>>();
+        List<OaPublicInfo> list = oaPublicInfoService.findByQuery("from OaPublicInfo where type.code='" + Constants.OA_PUBLIC_INFO_TYPE_WORK + "' order by id desc");
+        int i = 0;
+        for (OaPublicInfo bizData : list) {
+            i++;
+            if (i > MAX_COUNT) break;
+            Vector<Object> v = new Vector<Object>();
+            v.add(bizData.getType().getName());
+            v.add(bizData.getTitle());
+            v.add(bizData.getCreateDeptName());
+            v.add(bizData.getReportDate());
+            ret.add(v);
+        }
+        addBlankLine(ret, list.size(), data.getCols());
+        data.setList(ret);
     }
 }

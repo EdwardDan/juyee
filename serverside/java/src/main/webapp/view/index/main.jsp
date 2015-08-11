@@ -12,10 +12,13 @@
         loadForBulletin();
     }
     function loadForBulletin() {
-        loadAjaxDataCallback("bulletinDivId", "${ctx}/mainPage/mainBulletin.do?typeCode=${code_bulletin}", loadForDaily);
+        loadAjaxDataCallback("bulletinDivId", "${ctx}/mainPage/mainBulletin.do?typeCode=${code_bulletin}", loadForQt);
     }
     function loadForDaily() {
         loadAjaxDataCallback("dailyDivId", "${ctx}/mainPage/mainDaily.do", loadForMsg);
+    }
+    function loadForQt() {
+        loadAjaxDataCallback("qtDivId", "${ctx}/mainPage/mainQt.do", loadForMsg);
     }
     function loadForMsg() {
         loadInfoData();
@@ -162,17 +165,28 @@
                 <!-- bulletin end -->
 
                 <div class="index_space"></div>
-                <!-- daily begin -->
+                <%--<!-- daily begin -->--%>
+                <%--<table width="240" border="0" align="center" cellpadding="0" cellspacing="0">--%>
+                    <%--<tr>--%>
+                        <%--<td align="center" id="dailyDivId">--%>
+                            <%--<!--  daily content begin -->--%>
+
+                            <%--<!--  daily content end -->--%>
+                        <%--</td>--%>
+                    <%--</tr>--%>
+                <%--</table>--%>
+                <%--<!-- daily end -->--%>
+                <!-- qt begin -->
                 <table width="240" border="0" align="center" cellpadding="0" cellspacing="0">
                     <tr>
-                        <td align="center" id="dailyDivId">
+                        <td align="center" id="qtDivId">
                             <!--  daily content begin -->
 
                             <!--  daily content end -->
                         </td>
                     </tr>
                 </table>
-                <!-- daily end -->
+                <!-- qt end -->
             </td>
         </tr>
     </table>

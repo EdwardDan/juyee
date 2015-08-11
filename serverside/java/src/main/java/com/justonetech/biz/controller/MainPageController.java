@@ -363,6 +363,17 @@ public class MainPageController extends BaseCRUDActionController {
     }
 
     /**
+     * 其他
+     * @param model    。
+     * @return   。
+     */
+    @RequestMapping
+    public String mainQt(Model model) {
+
+        return "view/index/mainQt";
+    }
+
+    /**
      * 消息通知
      *
      * @param model .
