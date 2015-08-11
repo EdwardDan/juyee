@@ -14,6 +14,7 @@ import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.orm.hibernate.Page;
 import com.justonetech.core.security.user.BaseUser;
 import com.justonetech.core.security.util.SpringSecurityUtils;
+import com.justonetech.core.utils.JspHelper;
 import com.justonetech.core.utils.ReflectionUtils;
 import com.justonetech.core.utils.StringHelper;
 import com.justonetech.system.manager.SimpleQueryManager;
@@ -253,7 +254,7 @@ public class OaMeetingOuterController extends BaseCRUDActionController<OaMeeting
                         "content",
                         "relateMatter",
                         "workAdvise",
-                        "status",
+//                        "status",
                         "attendDepts",
                         "attendPersons",
                         "fgAuditOpinion",
@@ -264,12 +265,15 @@ public class OaMeetingOuterController extends BaseCRUDActionController<OaMeeting
                 target = entity;
             }
             String docIdDocument = request.getParameter("docIdDocument");
+            Integer status = JspHelper.getInteger(request.getParameter("status"));
+            target.setStatus(status);
             if (!StringHelper.isEmpty(docIdDocument)) {
                 DocDocument docDocument = docDocumentService.get(Long.parseLong(docIdDocument));
                 target.setDoc(docDocument);
                 documentManager.updateDocumentByBizData(docDocument, null, target.getTitle());
             }
-            Integer status = target.getStatus();
+//            Integer status = target.getStatus();
+            oaMeetingOuterService.save(target);
             if (null != status && OaMeetingStatus.STATUS_BRANCH_PASS.getCode() == status || OaMeetingStatus.STATUS_BRANCH_BACK.getCode() == status) {
                 target.setFgAuditTime(new Timestamp(System.currentTimeMillis()));
                 BaseUser loginUser = SpringSecurityUtils.getCurrentUser();

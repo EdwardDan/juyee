@@ -164,6 +164,8 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
 
         //选择车辆
         List<SysCodeDetail> carList = sysCodeManager.getCodeListByCode(Constants.OA_CAR_SELECT);
+
+        modelStatus(model);
         model.addAttribute("carList", carList);
 
         //车辆使用日期默认当天
@@ -187,6 +189,8 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
 
         //处理其他业务逻辑
         modelInfo(model, oaCar);
+
+        modelStatus(model);
         return "view/oa/oaCar/input";
     }
 
@@ -201,10 +205,9 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
     public String audit(Model model, Long id) {
         OaCar oaCar = oaCarService.get(id);
 
+        modelStatus(model);
         //处理其他业务逻辑
         modelInfo(model, oaCar);
-        model.addAttribute("canKzAudit", sysUserManager.hasPrivilege(PrivilegeCode.OA_CAR_AUDIT_KZ));
-        model.addAttribute("canZrAudit", sysUserManager.hasPrivilege(PrivilegeCode.OA_CAR_AUDIT_ZR));
         //取得可选择时间
         String beginTime = JspHelper.getString(oaCar.getBeginTime());
         String endTime = JspHelper.getString(oaCar.getEndTime());
@@ -228,6 +231,7 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
         //处理其他业务逻辑
         List<SysCodeDetail> carList = sysCodeManager.getCodeListByCode(Constants.OA_CAR_SELECT);
 
+        modelStatus(model);
         model.addAttribute("carList", carList);
         model.addAttribute("bean", oaCar);
         String beginTime = JspHelper.getString(oaCar.getBeginTime());
@@ -425,6 +429,24 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
         model.addAttribute("startMinute", DateTimeHelper.getMinuteSelectOptions(beginTime.substring(14, 16)));
         model.addAttribute("endHour", DateTimeHelper.getHourSelectOptions(endTime.substring(11, 13)));
         model.addAttribute("endMinute", DateTimeHelper.getMinuteSelectOptions(endTime.substring(14, 16)));
+    }
+
+    /**
+     * 权限控制
+     *
+     * @param model
+     */
+    public void modelStatus(Model model) {
+
+        model.addAttribute("canKzAudit", sysUserManager.hasPrivilege(PrivilegeCode.OA_CAR_AUDIT_KZ));
+        model.addAttribute("canZrAudit", sysUserManager.hasPrivilege(PrivilegeCode.OA_CAR_AUDIT_ZR));
+
+        model.addAttribute("STATUS_EDIT", OaCarStatus.STATUS_EDIT.getCode());
+        model.addAttribute("STATUS_SUBMIT", OaCarStatus.STATUS_SUBMIT.getCode());
+        model.addAttribute("STATUS_BRANCH_PASS", OaCarStatus.STATUS_BRANCH_PASS.getCode());
+        model.addAttribute("STATUS_BRANCH_BACK", OaCarStatus.STATUS_BRANCH_BACK.getCode());
+        model.addAttribute("STATUS_MAIN_PASS", OaCarStatus.STATUS_MAIN_PASS.getCode());
+        model.addAttribute("STATUS_MAIN_BACK", OaCarStatus.STATUS_MAIN_BACK.getCode());
     }
 
     /**

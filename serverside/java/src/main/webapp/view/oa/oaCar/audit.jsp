@@ -17,8 +17,8 @@
         }
 
         //修改状态
-        if (t == '3') {
-            $("#status").val('3');
+        if (t == '${STATUS_BRANCH_PASS}') {
+            $("#status").val('${STATUS_BRANCH_PASS}');
 
             $.messager.confirm('系统提示', "确定审核通过吗？通过后将不能修改！", function (r) {
                 if (r) {
@@ -26,15 +26,15 @@
                     saveAjaxData("${ctx}/oaCar/auditSave.do", formId);
                 }
             });
-        } else if (t == '4') {
-            $("#status").val(4);
+        } else if (t == '${STATUS_BRANCH_BACK}') {
+            $("#status").val('${STATUS_BRANCH_BACK}');
             $.messager.confirm('系统提示', "确定退回吗？", function (r) {
                 if (r) {
                     //提交表单
                     saveAjaxData("${ctx}/oaCar/auditSave.do", formId);
                 }
             });
-        } else if (t == '5') {
+        } else if (t == '${STATUS_MAIN_PASS}') {
             if (document.getElementById("isAgree").checked) {
                 if ($("#driverPersonName").val() == '') {
                     showInfoMsg("请选择司机！")
@@ -46,7 +46,7 @@
                 showInfoMsg("请选择车辆！")
                 return;
             }
-            $("#status").val(5);
+            $("#status").val('${STATUS_MAIN_PASS}');
 
             $.messager.confirm('系统提示', "确定审核通过吗？通过后将不能修改！", function (r) {
                 if (r) {
@@ -54,8 +54,8 @@
                     saveAjaxData("${ctx}/oaCar/auditSave.do", formId);
                 }
             });
-        } else if (t == '6') {
-            $("#status").val(6);
+        } else if (t == '${STATUS_MAIN_BACK}') {
+            $("#status").val('${STATUS_MAIN_BACK}');
             $.messager.confirm('系统提示', "确定退回吗？", function (r) {
                 if (r) {
                     //提交表单
@@ -135,7 +135,7 @@
                     <tr class="tr_dark">
                         <td class="form_label_right" width="15%">科长审核意见：</td>
                         <td class="form_content" colspan="3">
-                            <c:if test="${bean.status=='3'||bean.status=='5'}">
+                            <c:if test="${bean.status==STATUS_BRANCH_PASS||bean.status==STATUS_MAIN_PASS}">
                                 <sys:toHtml> ${bean.kzAuditOpinion}</sys:toHtml>
                             </c:if>
                         </td>
@@ -212,14 +212,14 @@
         <table cellpadding="0" cellspacing="0" class="form_table">
             <tr class="tr_button">
                 <td style="text-align: center" colspan="4">
-                    <c:if test="${bean.status==3 ||bean.status==5}">
-                        <input type="button" value="审核通过" class="button_normal_long" onclick="save('5',this)">&nbsp;
-                        <input type="button" value="退回修改" class="button_normal_long" onclick="save('6',this)">&nbsp;
+                    <c:if test="${bean.status==STATUS_BRANCH_PASS ||bean.status==STATUS_MAIN_PASS}">
+                        <input type="button" value="审核通过" class="button_normal_long" onclick="save('${STATUS_MAIN_PASS}',this)">&nbsp;
+                        <input type="button" value="退回修改" class="button_normal_long" onclick="save('${STATUS_MAIN_BACK}',this)">&nbsp;
                     </c:if>
 
                     <c:if test="${bean.status==2}">
-                        <input type="button" value="审核通过" class="button_normal_long" onclick="save('3',this)">&nbsp;
-                        <input type="button" value="退回修改" class="button_normal_long" onclick="save('4',this)">&nbsp;
+                        <input type="button" value="审核通过" class="button_normal_long" onclick="save('${STATUS_BRANCH_PASS}',this)">&nbsp;
+                        <input type="button" value="退回修改" class="button_normal_long" onclick="save('${STATUS_BRANCH_BACK}',this)">&nbsp;
                     </c:if>
                     <input type="button" value="取消" class="button_cancel" onclick="closeWindow()">
                 </td>

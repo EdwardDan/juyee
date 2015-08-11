@@ -44,12 +44,12 @@
         $("#beginTime").val($("#beginTime").val() + ":00");
         $("#endTime").val($("#endTime").val() + ":00");
         //提交表单
-        saveAjaxData("${ctx}/oaMeetingOuter/save.do", formId);
+        saveAjaxData("${ctx}/oaMeetingOuter/save.do?status="+status, formId);
     }
 </script>
 <form:form commandName="bean">
     <form:hidden path="id"/>
-    <form:hidden path="status"/>
+    <%--<form:hidden path="status"/>--%>
 
     <div class="form_div">
         <fieldset class="form_fieldset">
