@@ -44,12 +44,14 @@
                         if (rowData['statu'].indexOf("填写") > 0 || rowData['statu'].indexOf("科长审核退回") > 0 || rowData['statu'].indexOf("办公室主任审核退回") > 0) {
                             opButton += '<input type="button" value="编辑" onclick="doEdit(' + id + ')" class="button_normal"/> ';
                             opButton += '<input type="button" value="删除" onclick="doDelete(' + id + ')" class="button_normal"/>';
-                        } else if (rowData['statu'].indexOf("提交") > 0 || rowData['statu'].indexOf("科长审核通过") > 0||rowData['statu'].indexOf("办公室主任审核通过") > 0) {
+                        }
+                        </c:if>
+                        if (rowData['statu'].indexOf("提交") > 0 || rowData['statu'].indexOf("科长审核通过") > 0 || rowData['statu'].indexOf("办公室主任审核通过") > 0) {
                             <c:if test="${canKzAudit || canZrAudit}">
                             opButton += '<input type="button" value="审核" onclick="doAudit(' + id + ')" class="button_normal"/> ';
                             </c:if>
                         }
-                        </c:if>
+
                         jQuery("#listGrid").jqGrid('setRowData', ids[i], { operation: opButton});
                     }
                 }, rownumbers: true
