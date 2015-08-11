@@ -56,9 +56,54 @@
 //            showInfoMsg('请输入姓名！',null);
 //            return;
 //        }
-        $("#status").val(status);
-        //提交表单
-        saveAjaxData("${ctx}/oaWorkPlan/save.do", formId);
+        //修改状态
+        if (status == '${STATUS_SUBMIT}') {
+            $("#status").val(status);
+
+            $.messager.confirm('系统提示', "确定提交吗？提交后将不能修改！", function (r) {
+                if (r) {
+                    //提交表单
+                    saveAjaxData("${ctx}/oaWorkPlan/save.do", formId);
+                }
+            });
+        } else if (status == '${STATUS_BRANCH_PASS}') {
+            $("#status").val(status);
+            $.messager.confirm('系统提示', "确定审核通过吗？通过后将不能修改", function (r) {
+                if (r) {
+                    //提交表单
+                    saveAjaxData("${ctx}/oaWorkPlan/save.do", formId);
+                }
+            });
+        } else if (status == '${STATUS_BRANCH_BACK}') {
+            $("#status").val(status);
+            $.messager.confirm('系统提示', "确定退回吗？", function (r) {
+                if (r) {
+                    //提交表单
+                    saveAjaxData("${ctx}/oaWorkPlan/save.do", formId);
+                }
+            });
+        }else if (status == '${STATUS_MAIN_PASS}') {
+            $("#status").val(status);
+            $.messager.confirm('系统提示', "确定审核通过吗？通过后将不能修改", function (r) {
+                if (r) {
+                    //提交表单
+                    saveAjaxData("${ctx}/oaWorkPlan/save.do", formId);
+                }
+            });
+        }else if (status == '${STATUS_MAIN_BACK}') {
+            $("#status").val(status);
+            $.messager.confirm('系统提示', "确定退回吗？", function (r) {
+                if (r) {
+                    //提交表单
+                    saveAjaxData("${ctx}/oaWorkPlan/save.do", formId);
+                }
+            });
+        }else{
+            $("#status").val(status);
+            //提交表单
+            saveAjaxData("${ctx}/oaWorkPlan/save.do", formId);
+        }
+
     }
     function addLine(obj) {
         if (obj.value == "添加") {
@@ -170,7 +215,7 @@
                     <%--标准行迁入--%>
             </table>
         </fieldset>
-        <c:if test="${bean.status=='2'|| bean.status=='3'||bean.status=='5'}">
+        <c:if test="${bean.status==STATUS_SUBMIT|| bean.status==STATUS_BRANCH_PASS||bean.status==STATUS_MAIN_PASS}">
             <fieldset class="form_fieldset">
                 <legend class="form_legend">
                     科长审核
@@ -185,7 +230,7 @@
                 </table>
             </fieldset>
         </c:if>
-        <c:if test="${bean.status=='3'||bean.status=='5'}">
+        <c:if test="${bean.status==STATUS_BRANCH_PASS||bean.status==STATUS_MAIN_PASS}">
             <fieldset class="form_fieldset">
                 <legend class="form_legend">
                     分管领导审核

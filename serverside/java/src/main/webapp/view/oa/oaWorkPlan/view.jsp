@@ -58,7 +58,7 @@
                 </c:if>
             </table>
         </fieldset>
-        <c:if test="${bean.status=='3'||bean.status=='4'||bean.status=='5'||bean.status=='6'}">
+        <c:if test="${bean.status==STATUS_BRANCH_PASS ||bean.status==STATUS_BRANCH_BACK ||bean.status==STATUS_MAIN_PASS ||bean.status==STATUS_MAIN_BACK }">
             <fieldset class="form_fieldset">
                 <legend class="form_legend">
                     科长审核
@@ -73,7 +73,7 @@
                 </table>
             </fieldset>
         </c:if>
-        <c:if test="${bean.status=='5'||bean.status=='6'}">
+        <c:if test="${bean.status==STATUS_MAIN_PASS ||bean.status==STATUS_MAIN_BACK }">
             <fieldset class="form_fieldset">
                 <legend class="form_legend">
                     分管领导审核

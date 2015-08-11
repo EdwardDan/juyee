@@ -83,7 +83,6 @@ public class OaWorkPlanController extends BaseCRUDActionController<OaWorkPlan> {
     @RequestMapping
     public String grid(Model model) {
         //判断是否有编辑权限
-        model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.OA_WORK_PLAN_EDIT));
         setStatus(model);
         return "view/oa/oaWorkPlan/grid";
     }
@@ -208,8 +207,7 @@ public class OaWorkPlanController extends BaseCRUDActionController<OaWorkPlan> {
     @RequestMapping
     public String view(Model model, Long id) {
         OaWorkPlan oaWorkPlan = oaWorkPlanService.get(id);
-
-
+        setStatus(model);
         Set<OaWorkPlanItem> oaWorkPlanItems = oaWorkPlan.getOaWorkPlanItems();
         List<OaWorkPlanItem> oaWorkPlanItem = new ArrayList<OaWorkPlanItem>();
         for (OaWorkPlanItem workPlanItem : oaWorkPlanItems) {
