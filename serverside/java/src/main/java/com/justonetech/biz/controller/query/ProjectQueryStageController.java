@@ -4,6 +4,7 @@ import com.justonetech.biz.core.orm.hibernate.GridJq;
 import com.justonetech.biz.core.orm.hibernate.QueryTranslateJq;
 import com.justonetech.biz.daoservice.*;
 import com.justonetech.biz.domain.*;
+import com.justonetech.biz.manager.DocumentManager;
 import com.justonetech.biz.utils.Constants;
 import com.justonetech.biz.utils.enums.ProjBidType;
 import com.justonetech.core.controller.BaseCRUDActionController;
@@ -43,6 +44,9 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
     private SysCodeManager sysCodeManager;
 
     @Autowired
+    private DocumentManager documentManager;
+
+    @Autowired
     private ProjInfoService projInfoService;
 
     @Autowired
@@ -52,13 +56,10 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
     private ProjStageService projStageService;
 
     @Autowired
-    private DataStageReportService dataStageReportService;
-
-    @Autowired
     private DataStageReportItemService dataStageReportItemService;
 
     @Autowired
-    private DataStageReportLogService dataStageReportLogService;
+    private DocDocumentService docDocumentService;
 
     @Autowired
     private ExcelPrintManager excelPrintManager;
@@ -73,9 +74,7 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
      */
     @RequestMapping
     public String grid(Model model) {
-        //判断是否有查看汇总权限
         model.addAttribute("canViewAll", sysUserManager.hasPrivilege(PrivilegeCode.PROJECT_QUERY_STAGE_SUM));
-
         return "view/query/projectQueryStage/grid";
     }
 
@@ -89,25 +88,26 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
      * @param rows     .
      */
     @RequestMapping
-    public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session) {
+    public void gridDataCustom(HttpServletResponse response, Model model, String filters, String columns, int page, int rows, HttpSession session) {
         try {
             Page pageModel = new Page(page, rows, true);
             String hql = "from ProjInfo where 1=1";
-//            //增加项目过滤
-//            hql += projectRelateManager.getRelateProjectHql("id");
-
+//          //增加项目过滤
+//          hql += projectRelateManager.getRelateProjectHql("id");
             hql += "order by no asc,id asc";
-
-            //执行查询
             QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);
             String query = queryTranslate.toString();
             session.setAttribute(Constants.GRID_SQL_KEY, query);
             pageModel = projInfoService.findByPage(pageModel, query);
-
-            //输出显示
-            String json = GridJq.toJSON(columns, pageModel);
+            List<Map> beans = GridJq.getGridValue(pageModel.getRows(), columns);
+            for (Map bean : beans) {
+                Object docId = bean.get("doc.id");
+                if (docId != null && StringHelper.isNotEmpty((String) docId)) {
+                    bean.put("doc.id", documentManager.getDownloadButton(JspHelper.getLong(docId)));
+                }
+            }
+            String json = GridJq.toJSON(beans, pageModel);
             sendJSON(response, json);
-
         } catch (Exception e) {
             log.error("error", e);
             super.processException(response, e);
@@ -128,7 +128,6 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         model.addAttribute("currentYear", c.get(Calendar.YEAR));
         model.addAttribute("currentMonth", c.get(Calendar.MONTH) + 1);
         model.addAttribute("PROJ_INFO_CATEGORY", Constants.PROJ_INFO_CATEGORY);
-
         return "view/query/projectQueryStage/viewStage";
     }
 
@@ -197,10 +196,10 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
                 conditionHql += " and project.category.id=" + categoryId;
             }
             if (!StringHelper.isEmpty(beginDate)) {
-                conditionHql += " and to_char(project.createTime,'yyyy-mm-dd')>='"+beginDate+"'";
+                conditionHql += " and to_char(project.createTime,'yyyy-mm-dd')>='" + beginDate + "'";
             }
             if (!StringHelper.isEmpty(endDate)) {
-                conditionHql += " and to_char(project.createTime,'yyyy-mm-dd')<='"+endDate+"'";
+                conditionHql += " and to_char(project.createTime,'yyyy-mm-dd')<='" + endDate + "'";
             }
         } else {
             conditionHql += " and project.id=" + projectId;
@@ -221,7 +220,7 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         Set<String> oneBidHS = new HashSet<String>();  //只取最新上报的数据
         String hql = "from DataStageReportItem where stageReport.bid.id in(" + conditionHql + ") and stageReport.year=? and stageReport.month=? order by stageReport.year desc,stageReport.month desc,id desc";
 //        System.out.println("hql = " + hql);
-        List<DataStageReportItem> dataStageReportItems = dataStageReportItemService.findByQuery(hql,Integer.parseInt(year),Integer.parseInt(month));
+        List<DataStageReportItem> dataStageReportItems = dataStageReportItemService.findByQuery(hql, Integer.parseInt(year), Integer.parseInt(month));
         for (DataStageReportItem item : dataStageReportItems) {
             Long bidId = item.getStageReport().getBid().getId();
             String key = bidId + "_" + item.getStep().getId() + "_" + item.getStage().getId();
@@ -246,6 +245,18 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         model.addAttribute("dataMap", dataMap);
 
         return "view/query/projectQueryStage/viewStageData";
+    }
+
+    /**
+     * 上载存在问题的附件
+     *
+     * @param prjId
+     * @return
+     */
+    @RequestMapping
+    public String uploadProblematicDoc(Model model, Long prjId) {
+        model.addAttribute("msg", documentManager.getUploadButtonForMulti(documentManager.getDefaultXmlConfig(), DataStageReportDoc.class.getSimpleName(), projInfoService.get(prjId).getDoc(), sysUserManager.getSysUser().getId(), null, "Document"));
+        return "common/msg";
     }
 
     //整理项目包含标段
@@ -287,9 +298,9 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
             ret[0] = "";
             ret[1] = dealDate;
             if (!StringHelper.isEmpty(dealDate)) {
-               if(!JspHelper.getDate(dealDate).after(new Date(System.currentTimeMillis()))){
-                   ret[0] = "yellow";
-               }
+                if (!JspHelper.getDate(dealDate).after(new Date(System.currentTimeMillis()))) {
+                    ret[0] = "yellow";
+                }
             }
         } else if (Constants.DATA_STAGE_RESULT_2.equals(result.getCode())) {
             ret[0] = "lightskyblue";
@@ -375,7 +386,7 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         List<ProjStage> leafStages = new ArrayList<ProjStage>();
         String stageHql = "from ProjStage where isValid=1";
         if (!StringHelper.isEmpty(stageIds)) {
-            stageHql += " and id in("+stageIds+")";
+            stageHql += " and id in(" + stageIds + ")";
         }
         stageHql += " order by treeId asc";
         List<ProjStage> projStages = projStageService.findByQuery(stageHql);
@@ -402,17 +413,17 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         beans.put("leafStages", leafStages);
 
         //获取节点对应的选择阶段
-        Map<Long,Long> selectedResultHM = new HashMap<Long, Long>();
+        Map<Long, Long> selectedResultHM = new HashMap<Long, Long>();
         if (!StringHelper.isEmpty(stageIds)) {
             String resultIds = request.getParameter("resultIds");
             if (!StringHelper.isEmpty(resultIds)) {
                 String[] sids = StringHelper.stringToStringArray(stageIds, ",");
                 String[] rids = StringHelper.stringToStringArray(resultIds, ",");
-                for (int i=0;i<sids.length;i++) {
+                for (int i = 0; i < sids.length; i++) {
                     String r = rids[i];
                     if (!StringHelper.isEmpty(r)) {
-                        if(!"0".equals(r)){
-                            selectedResultHM.put(Long.valueOf(sids[i]),Long.valueOf(r));
+                        if (!"0".equals(r)) {
+                            selectedResultHM.put(Long.valueOf(sids[i]), Long.valueOf(r));
                         }
                     }
                 }
@@ -444,10 +455,10 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
                 conditionHql += " and project.category.id=" + categoryId;
             }
             if (!StringHelper.isEmpty(beginDate)) {
-                conditionHql += " and to_char(project.createTime,'yyyy-mm-dd')>='"+beginDate+"'";
+                conditionHql += " and to_char(project.createTime,'yyyy-mm-dd')>='" + beginDate + "'";
             }
             if (!StringHelper.isEmpty(endDate)) {
-                conditionHql += " and to_char(project.createTime,'yyyy-mm-dd')<='"+endDate+"'";
+                conditionHql += " and to_char(project.createTime,'yyyy-mm-dd')<='" + endDate + "'";
             }
         } else {
             conditionHql += " and project.id=" + projectId;
@@ -463,23 +474,23 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         Set<String> oneBidHS = new HashSet<String>();  //只取最新上报的数据
         String hql = "from DataStageReportItem where stageReport.bid.id in(" + conditionHql + ") and stageReport.year=? and stageReport.month=? order by stageReport.year desc,stageReport.month desc,id desc";
 //        System.out.println("hql = " + hql);
-        List<DataStageReportItem> dataStageReportItems = dataStageReportItemService.findByQuery(hql,Integer.parseInt(year),Integer.parseInt(month));
+        List<DataStageReportItem> dataStageReportItems = dataStageReportItemService.findByQuery(hql, Integer.parseInt(year), Integer.parseInt(month));
 
         //只显示指定阶段的标段
         List<ProjBid> filterBids = new ArrayList<ProjBid>();
-        if(!selectedResultHM.isEmpty()){
+        if (!selectedResultHM.isEmpty()) {
             Set<ProjBid> existsBidHS = new HashSet<ProjBid>();
             for (DataStageReportItem dataStageReportItem : dataStageReportItems) {
                 ProjBid bid = dataStageReportItem.getStageReport().getBid();
                 Long stageId = dataStageReportItem.getStage().getId();
-                if(!existsBidHS.contains(bid) && selectedResultHM.containsKey(stageId)){
-                    if(selectedResultHM.get(stageId).equals(dataStageReportItem.getResult().getId())){
+                if (!existsBidHS.contains(bid) && selectedResultHM.containsKey(stageId)) {
+                    if (selectedResultHM.get(stageId).equals(dataStageReportItem.getResult().getId())) {
                         existsBidHS.add(bid);
                     }
                 }
             }
             filterBids.addAll(existsBidHS);
-        }else{
+        } else {
             filterBids.addAll(bids);
         }
 

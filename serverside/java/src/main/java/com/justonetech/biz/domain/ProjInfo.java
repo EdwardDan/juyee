@@ -100,17 +100,32 @@ public class ProjInfo extends BaseProjInfo {
 
     /**
      * 获取所属区县名称
+     *
      * @return .
      */
-    public String getBelongAreaNames(){
+    public String getBelongAreaNames() {
         String name = "";
-        Set<ProjInfoArea>  projBidAreas = getProjInfoAreas();
-        if(projBidAreas.size()>0){
+        Set<ProjInfoArea> projBidAreas = getProjInfoAreas();
+        if (projBidAreas.size() > 0) {
             for (ProjInfoArea projInfoArea : projBidAreas) {
-                name += ","+projInfoArea.getBelongArea().getName();
+                name += "," + projInfoArea.getBelongArea().getName();
             }
             name = name.substring(1);
         }
         return name;
+    }
+
+    /**
+     * 获取项目问题附件
+     * @return
+     */
+    public DocDocument getDoc() {
+        Set<DataStageReportDoc> dataStageReportDocs = getDataStageReportDocs();
+        System.out.println("dataStageReportDocs     ************  " + (dataStageReportDocs == null));
+        if (dataStageReportDocs != null && !dataStageReportDocs.isEmpty()) {
+            return dataStageReportDocs.iterator().next().getDoc();
+        } else {
+            return null;
+        }
     }
 }

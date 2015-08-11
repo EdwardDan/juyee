@@ -3,9 +3,9 @@
 <script type="text/javascript">
     $(function () {
         var conf = {
-            gridOpts:{
-                url:"${ctx}/projectQueryStage/gridDataCustom.do",
-                colNames:['ID',
+            gridOpts: {
+                url: "${ctx}/projectQueryStage/gridDataCustom.do",
+                colNames: ['ID',
                     '年份',
                     '项目序号',
                     '项目名称',
@@ -14,26 +14,28 @@
                     '项目类型',
                     '办证推进标段数',
                     '形象进度标段数',
+                    '问题附件',
                     '操作'
                 ],
-                colModel:[
-                    {name:'id', width:10, align:"center", searchtype:"integer",hidden:true},
-                    {name:"year",width:"30",align:"center",searchtype:"integer",sortable:true},
-                    {name:"no",width:"20",align:"center",searchtype:"integer",sortable:true},
-                    {name:"name",width:"70",align:"left",searchtype:"string",sortable:true},
-                    {name:"property.name",width:"40",align:"center",searchtype:"string",sortable:true},
-                    {name:"stage.name",width:"40",align:"center",searchtype:"string",sortable:true},
-                    {name:"category.name",width:"40",align:"center",searchtype:"string",sortable:true},
-                    {name:"bidCountOfStage",width:"20",align:"center",searchtype:"integer",sortable:true},
-                    {name:"bidCountOfNode",width:"20",align:"center",searchtype:"integer",sortable:true}
+                colModel: [
+                    {name: 'id', width: 10, align: "center", searchtype: "integer", hidden: true},
+                    {name: "year", width: "30", align: "center", searchtype: "integer", sortable: true},
+                    {name: "no", width: "20", align: "center", searchtype: "integer", sortable: true},
+                    {name: "name", width: "70", align: "left", searchtype: "string", sortable: true},
+                    {name: "property.name", width: "40", align: "center", searchtype: "string", sortable: true},
+                    {name: "stage.name", width: "40", align: "center", searchtype: "string", sortable: true},
+                    {name: "category.name", width: "40", align: "center", searchtype: "string", sortable: true},
+                    {name: "bidCountOfStage", width: "30", align: "center", searchtype: "integer", sortable: true},
+                    {name: "bidCountOfNode", width: "30", align: "center", searchtype: "integer", sortable: true},
+                    {name: "doc.id", width: "30", align: "center", searchtype: "string", sortable: true}
                 ],
-                actModel:[
-                    {name:'operation', width:50, align:'center'}
+                actModel: [
+                    {name: 'operation', width: 90, align: 'center'}
                 ],
                 pager: '#pager2',
-                caption:"项目办证推进查询",
-                shrinkToFit:true,
-                gridComplete:function () {  //在此事件中循环为每一行添加修改和删除链接
+                caption: "项目办证推进查询",
+                shrinkToFit: true,
+                gridComplete: function () {  //在此事件中循环为每一行添加修改和删除链接
                     var ids = jQuery("#listGrid").jqGrid('getDataIDs');
                     for (var i = 0; i < ids.length; i++) {
                         var id = ids[i];
@@ -41,31 +43,38 @@
                         var name = rowData["name"];
                         var opButton = '<input type="button" value="办证推进" onclick="doViewStage(\'' + id + '\', \'' + name + '\')" class="button_normal_long"/> ';
                         opButton += '<input type="button" value="形象进度" onclick="doViewNode(\'' + id + '\', \'' + name + '\')" class="button_normal_long"/> ';
-                        jQuery("#listGrid").jqGrid('setRowData', ids[i], { operation:opButton});
+                        opButton += '<input type="button" value="上传附件" class="button_normal_long" onclick="doUploadDocAttachs(' + id + ')"/>';
+                        jQuery("#listGrid").jqGrid('setRowData', ids[i], { operation: opButton});
                     }
-                }, rownumbers:true
+                }, rownumbers: true
             },
-            userOpts:{
-                defaultQuery:{ "groupOp":"AND", "rules":[
-                    { "field":"年份", "op":"eq", "data":""},
-                    { "field":"项目序号", "op":"cn", "data":""},
-                    { "field":"项目名称", "op":"cn", "data":""},
-                    { "field":"项目性质", "op":"cn", "data":""},
-                    { "field":"项目阶段", "op":"cn", "data":""},
-                    { "field":"项目类型", "op":"cn", "data":""}
+            userOpts: {
+                defaultQuery: { "groupOp": "AND", "rules": [
+                    { "field": "年份", "op": "eq", "data": ""},
+                    { "field": "项目序号", "op": "cn", "data": ""},
+                    { "field": "项目名称", "op": "cn", "data": ""},
+                    { "field": "项目性质", "op": "cn", "data": ""},
+                    { "field": "项目阶段", "op": "cn", "data": ""},
+                    { "field": "项目类型", "op": "cn", "data": ""}
                 ]},
-                queryButton:$("#queryButton"),
-                queryDesc:$("#queryConditionDesc")
+                queryButton: $("#queryButton"),
+                queryDesc: $("#queryConditionDesc")
             },
-            isExportExcel:true
+            isExportExcel: true
         };
         gridinit($("#listGrid"), conf);
     });
+
     function doViewStage(id, name) {
         openWindow("查看办证推进信息（" + name + "）", "${ctx}/projectQueryStage/viewStage.do?id=" + id, false, 1000, 550);
     }
+
     function doViewNode(id, name) {
         openWindow("查看形象进度信息（" + name + "）", "${ctx}/projectQueryNode/viewNode.do?id=" + id, false, 1000, 550);
+    }
+
+    function doUploadDocAttachs(prjId) {
+        parent.openWindow("问题附件操作区", "${ctx}/projectQueryStage/uploadProblematicDoc.do?prjId=" + prjId, false, 500, 300);
     }
 </script>
 
@@ -75,7 +84,8 @@
             <input type="button" name="queryButton" id="queryButton" value="查询" class="btn_Search"/>
         </div>
         <div style="float:left;padding-left: 10px" id="conditionsDesc">
-            <input type="text" name="queryConditionDesc" id="queryConditionDesc" value="" class="title_input" readonly="true"/>
+            <input type="text" name="queryConditionDesc" id="queryConditionDesc" value="" class="title_input"
+                   readonly="true"/>
         </div>
         <div style="float:right;padding-right: 10px">
             <c:if test="${canViewAll}">
