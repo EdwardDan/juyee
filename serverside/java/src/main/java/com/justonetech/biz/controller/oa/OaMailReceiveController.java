@@ -140,7 +140,7 @@ public class OaMailReceiveController extends BaseCRUDActionController<OaMail> {
      * @return .
      */
     @RequestMapping
-    public String modify(Model model, Long id, String mailType) {
+    public String modify(Model model, Long id, String mailType, String usedForOaTask) {
         OaMail oaMail = oaMailService.get(id);
         OaMail oaMailNew = new OaMail();
         oaMailNew.setTitle(oaMail.getTitle());
@@ -159,13 +159,11 @@ public class OaMailReceiveController extends BaseCRUDActionController<OaMail> {
             model.addAttribute("id", "");
             model.addAttribute("disabled", "");
         }
-
-        //处理其他业务逻辑
         model.addAttribute("mailType", oaMailManager.getMailType(mailType));
         model.addAttribute("LINE", OaMailManager.LINE);
         model.addAttribute("bean", oaMailNew);
         model.addAttribute("uploadButton", documentManager.getUploadButton(documentManager.getDefaultXmlConfig(), OaMail.class.getSimpleName(), oaMailNew.getDocument(), null, null));
-
+        model.addAttribute("usedForOaTask", usedForOaTask);
         return "view/oa/oaMailReceive/input";
     }
 
@@ -179,7 +177,6 @@ public class OaMailReceiveController extends BaseCRUDActionController<OaMail> {
     @RequestMapping
     public String view(Model model, Long id) {
         OaMail oaMail = oaMailService.get(id);
-
         String toNames = "";
         Set<OaMailUser> oaMailUsers = oaMail.getOaMailUsers();
         if (oaMailUsers.size() > 0) {
@@ -199,13 +196,10 @@ public class OaMailReceiveController extends BaseCRUDActionController<OaMail> {
         model.addAttribute("bean", oaMail);
         //附件
         model.addAttribute("docButton", documentManager.getDownloadButton(oaMail.getDocument()));
-
         model.addAttribute("MAIL_TYPE_FW", OaMailManager.MAIL_TYPE_FW);
         model.addAttribute("MAIL_TYPE_RE", OaMailManager.MAIL_TYPE_RE);
-
         //设置已读标记--用于首页推送提醒
         pushUserManager.setReadFlag(OaMail.class.getSimpleName(), id);
-
         return "view/oa/oaMailReceive/view";
     }
 

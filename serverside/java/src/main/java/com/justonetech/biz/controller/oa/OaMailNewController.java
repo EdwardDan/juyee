@@ -2,21 +2,19 @@ package com.justonetech.biz.controller.oa;
 
 import com.justonetech.biz.daoservice.DocDocumentService;
 import com.justonetech.biz.daoservice.OaMailService;
-import com.justonetech.biz.daoservice.OaMailUserService;
 import com.justonetech.biz.domain.DocDocument;
 import com.justonetech.biz.domain.OaMail;
-import com.justonetech.biz.domain.OaMailUser;
-import com.justonetech.biz.manager.*;
-import com.justonetech.biz.utils.enums.OaMailReceiveType;
+import com.justonetech.biz.manager.DocumentManager;
+import com.justonetech.biz.manager.OaMailManager;
+import com.justonetech.biz.manager.OaTaskManager;
+import com.justonetech.biz.utils.Constants;
 import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.security.user.BaseUser;
 import com.justonetech.core.security.util.SpringSecurityUtils;
+import com.justonetech.core.utils.JspHelper;
 import com.justonetech.core.utils.ReflectionUtils;
 import com.justonetech.core.utils.StringHelper;
-import com.justonetech.system.daoservice.SysUserService;
 import com.justonetech.system.domain.SysUser;
-import com.justonetech.system.manager.SimpleQueryManager;
-import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +27,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * note: 新建邮件信息
@@ -37,9 +37,14 @@ import java.sql.Timestamp;
  */
 @Controller
 public class OaMailNewController extends BaseCRUDActionController<OaMail> {
+
     private Logger logger = LoggerFactory.getLogger(OaMailNewController.class);
+
     @Autowired
     private SysUserManager sysUserManager;
+
+    @Autowired
+    private OaTaskManager oaTaskManager;
 
     @Autowired
     private DocumentManager documentManager;
@@ -95,7 +100,6 @@ public class OaMailNewController extends BaseCRUDActionController<OaMail> {
             } else {
                 target = entity;
             }
-
             //发送的状态下才保存发送表的发送人
             if ("send".equals(msgSend)) {
                 //获取当前用户（发件人）
@@ -131,10 +135,15 @@ public class OaMailNewController extends BaseCRUDActionController<OaMail> {
                 target.setDocument(docDocument);
             }
             oaMailService.save(target);
-
             //获取收件人和抄送人(id)
-            oaMailManager.setOaMailUser(target, receivePersonId, ccPersonId);
-
+            Set<String> recAndCcPersonIds = oaMailManager.setOaMailUser(target, receivePersonId, ccPersonId);
+            if ("send".equals(msgSend)) {
+                Set<Long> convtRecAndCcPerIds = new HashSet<Long>(recAndCcPersonIds.size());
+                for (String recAndCcPersonId : recAndCcPersonIds) {
+                    convtRecAndCcPerIds.add(JspHelper.getLong(recAndCcPersonId));
+                }
+                oaTaskManager.createTask(OaMail.class.getSimpleName(), target.getId(), oaTaskManager.getTaskTitle(target, OaMail.class.getSimpleName()), convtRecAndCcPerIds, false, Constants.OA_PRIORITY_NORMAL, Constants.OA_AUDIT_METHOD_SHARE);
+            }
         } catch (Exception e) {
             log.error("error", e);
             super.processException(response, e);

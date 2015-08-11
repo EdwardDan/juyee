@@ -4,6 +4,10 @@
     //tab序号，注意：由于要回写，这里序号只能写死
     var tabNo = "${tabNo}";
 
+    $(function() {
+        changeDiv($("#defaultGrp")[0], 2);
+    });
+
     //tab按钮切换，显示切换
     function changeDiv(obj, no) {
         $(".button_normal_special").each(function () {
@@ -82,7 +86,7 @@
         <tr class="tr_title">
             <td width="60%" align="left">&nbsp;
                 <input type="button" class="button_normal_special" value="全部" onclick="changeDiv(this,1)">
-                <input type="button" class="button_normal" value="科室" onclick="changeDiv(this,2)">
+                <input type="button" id="defaultGrp" class="button_normal" value="科室" onclick="changeDiv(this,2)">
                 <input type="button" class="button_normal" value="组" onclick="changeDiv(this,3)">
                 <%--<input type="button" class="button_normal_long" value="外部用户" onclick="changeDiv(this,4)">--%>
             </td>

@@ -72,7 +72,7 @@ public class OaMailManager {
      * @param receivePersonId .
      * @param ccPersonId      .
      */
-    public void setOaMailUser(OaMail oaMail, String receivePersonId, String ccPersonId) {
+    public Set<String> setOaMailUser(OaMail oaMail, String receivePersonId, String ccPersonId) {
         Set<String> idSet = new HashSet<String>();
         if (!StringHelper.isEmpty(receivePersonId)) {
             String[] receiveIds = StringHelper.stringToStringArray(receivePersonId, ",");
@@ -99,6 +99,7 @@ public class OaMailManager {
             oaMailUser.setUserName(sysUserService.get(Long.valueOf(s)).getLoginName());
             oaMailUserService.save(oaMailUser);
         }
+        return idSet;
     }
 
     /**
