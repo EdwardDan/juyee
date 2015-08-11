@@ -59,8 +59,7 @@ import org.slf4j.LoggerFactory;
  * modify date:
  */
 @Controller
-public class OaMeetingInnerController extends BaseCRUDActionController<OaMeetingInner>
-{
+public class OaMeetingInnerController extends BaseCRUDActionController<OaMeetingInner> {
     private Logger logger = LoggerFactory.getLogger(OaMeetingInnerController.class);
 
     @Autowired
@@ -94,8 +93,7 @@ public class OaMeetingInnerController extends BaseCRUDActionController<OaMeeting
      * @return .
      */
     @RequestMapping
-    public String grid(Model model)
-    {
+    public String grid(Model model) {
         //判断是否有编辑权限
         model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.OA_MEETING_INNER_EDIT));
 
@@ -105,19 +103,17 @@ public class OaMeetingInnerController extends BaseCRUDActionController<OaMeeting
     /**
      * 获取列表数据
      *
-     * @param response .
-     * @param filters .
-     * @param columns .
-     * @param page .
-     * @param rows .
-     * @param session .
+     * @param response  .
+     * @param filters   .
+     * @param columns   .
+     * @param page      .
+     * @param rows      .
+     * @param session   .
      * @param queryJson .
      */
     @RequestMapping
-    public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session,String queryJson)
-    {
-        try
-        {
+    public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session, String queryJson) {
+        try {
             String beginTime = StringHelper.getElementValue(queryJson, "beginTime");
             String endTime = StringHelper.getElementValue(queryJson, "endTime");
             Page pageModel = new Page(page, rows, true);
@@ -139,8 +135,7 @@ public class OaMeetingInnerController extends BaseCRUDActionController<OaMeeting
             List<OaMeetingInner> rowList = pageModel.getRows();
             List<Map<String, Object>> retList = new ArrayList<Map<String, Object>>();
             Map<String, Object> map;
-            for (OaMeetingInner data : rowList)
-            {
+            for (OaMeetingInner data : rowList) {
                 map = new HashMap<String, Object>();
                 map.put("id", data.getId());
                 map.put("beginTime", data.getBeginTime());
@@ -156,8 +151,7 @@ public class OaMeetingInnerController extends BaseCRUDActionController<OaMeeting
             String json = GridJq.toJSON(retList, pageModel);
             sendJSON(response, json);
 
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             log.error("error", e);
             super.processException(response, e);
         }
@@ -170,8 +164,7 @@ public class OaMeetingInnerController extends BaseCRUDActionController<OaMeeting
      * @return .
      */
     @RequestMapping
-    public String add(Model model)
-    {
+    public String add(Model model) {
         OaMeetingInner oaMeetingInner = new OaMeetingInner();
 
         //如需增加其他默认值请在此添加
@@ -191,15 +184,17 @@ public class OaMeetingInnerController extends BaseCRUDActionController<OaMeeting
      * @return .
      */
     @RequestMapping
-    public String modify(Model model, Long id)
-    {
+    public String modify(Model model, Long id) {
         OaMeetingInner oaMeetingInner = oaMeetingInnerService.get(id);
 
         //内部参会人员
         String innerPersonIds = oaMeetingInner.getInnerPersons();
         if (!StringHelper.isEmpty(innerPersonIds)) {
-            List<SysPerson> persons = sysPersonService.findByQuery("from SysPerson where id in("+innerPersonIds+")");
-            model.addAttribute("innerPersons",persons);
+            List<SysPerson> persons = sysPersonService.findByQuery("from SysPerson where id in(" + innerPersonIds + ")");
+            for (SysPerson person : persons) {
+                person.setName(person.getName() + "(" + person.getDept().getName() + ")");
+            }
+            model.addAttribute("innerPersons", persons);
         }
 
         //处理其他业务逻辑
@@ -219,14 +214,16 @@ public class OaMeetingInnerController extends BaseCRUDActionController<OaMeeting
      * @return .
      */
     @RequestMapping
-    public String view(Model model, Long id)
-    {
+    public String view(Model model, Long id) {
         OaMeetingInner oaMeetingInner = oaMeetingInnerService.get(id);
         //内部参会人员
         String innerPersonIds = oaMeetingInner.getInnerPersons();
         if (!StringHelper.isEmpty(innerPersonIds)) {
-            List<SysPerson> persons = sysPersonService.findByQuery("from SysPerson where id in("+innerPersonIds+")");
-            model.addAttribute("innerPersons",persons);
+            List<SysPerson> persons = sysPersonService.findByQuery("from SysPerson where id in(" + innerPersonIds + ")");
+            for (SysPerson person : persons) {
+                person.setName(person.getName() + "(" + person.getDept().getName() + ")");
+            }
+            model.addAttribute("innerPersons", persons);
         }
         model.addAttribute("meetTime", oaMeetingInner.getMeetTime());
         model.addAttribute("docButton", documentManager.getDownloadButton(oaMeetingInner.getDoc()));
@@ -244,13 +241,10 @@ public class OaMeetingInnerController extends BaseCRUDActionController<OaMeeting
      */
     @SuppressWarnings("unchecked")
     @RequestMapping
-    public void save(HttpServletResponse response, @ModelAttribute("bean") OaMeetingInner entity, HttpServletRequest request) throws Exception
-    {
-        try
-        {
+    public void save(HttpServletResponse response, @ModelAttribute("bean") OaMeetingInner entity, HttpServletRequest request) throws Exception {
+        try {
             OaMeetingInner target;
-            if (entity.getId() != null)
-            {
+            if (entity.getId() != null) {
                 target = oaMeetingInnerService.get(entity.getId());
                 ReflectionUtils.copyBean(entity, target, new String[]{
                         "beginTime",
@@ -262,21 +256,18 @@ public class OaMeetingInnerController extends BaseCRUDActionController<OaMeeting
                         "content"
                 });
 
-            } else
-            {
+            } else {
                 target = entity;
             }
             //保存文件
             String docId = request.getParameter("docId");
-            if (StringHelper.isNotEmpty(docId))
-            {
+            if (StringHelper.isNotEmpty(docId)) {
                 DocDocument docDocument = docDocumentService.get(Long.valueOf(docId));
                 target.setDoc(docDocument);
             }
 
             oaMeetingInnerService.save(target);
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             log.error("error", e);
             super.processException(response, e);
             return;
@@ -292,8 +283,7 @@ public class OaMeetingInnerController extends BaseCRUDActionController<OaMeeting
      * @throws Exception .
      */
     @RequestMapping
-    public void delete(HttpServletResponse response, Long id) throws Exception
-    {
+    public void delete(HttpServletResponse response, Long id) throws Exception {
         oaMeetingInnerService.delete(id);
 
         sendSuccessJSON(response, "删除成功");

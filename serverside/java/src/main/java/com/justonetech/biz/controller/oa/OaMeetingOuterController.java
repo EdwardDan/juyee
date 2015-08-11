@@ -254,6 +254,8 @@ public class OaMeetingOuterController extends BaseCRUDActionController<OaMeeting
                         "relateMatter",
                         "workAdvise",
                         "status",
+                        "attendDepts",
+                        "attendPersons",
                         "fgAuditOpinion",
                         "zrAuditOpinion"
                 });
