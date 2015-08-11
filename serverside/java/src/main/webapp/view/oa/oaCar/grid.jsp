@@ -81,13 +81,14 @@
     function doEdit(id) {
         openWindow("修改车辆申请", "${ctx}/oaCar/modify.do?id=" + id, true, 800, 500);
     }
-    function doAudit(id) {
-        openWindow("审核车辆申请", "${ctx}/oaCar/audit.do?id=" + id, true, 800, 500);
-    }
+
     function doDelete(id) {
         doGridDelete("${ctx}/oaCar/delete.do?id=" + id);
     }
     </c:if>
+    function doAudit(id) {
+        openWindow("审核车辆申请", "${ctx}/oaCar/audit.do?id=" + id, true, 800, 500);
+    }
 
 </script>
 
