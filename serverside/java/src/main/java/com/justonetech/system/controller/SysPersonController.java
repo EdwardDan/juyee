@@ -318,7 +318,7 @@ public class SysPersonController extends BaseCRUDActionController {
                 ZTreeNode treeNode = new ZTreeNode();
                 treeNode.setId(String.valueOf(person.getId()));
                 treeNode.setIsLeaf(true);
-                treeNode.setName(person.getName());
+                treeNode.setName(person.getName()+"("+personDept.getDept().getName()+")");
                 treeNode.setIcon("3");
                 treeNode.setType("person");
                 treeBranch.addTreeNode(treeNode);
