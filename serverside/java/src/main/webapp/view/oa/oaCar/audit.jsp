@@ -17,14 +17,18 @@
         }
 
         //修改状态
-        if (t == '1') {
-            $("#status").val(1);
-        } else if (t == '2') {
-            $("#status").val(2);
-        } else if (t == '3') {
+        if (t == '3') {
             $("#status").val(3);
+
+            $.messager.confirm('系统提示', "确定审核通过吗？通过后将不能修改！", function (r) {
+                if (r) {
+                    //提交表单
+                    saveAjaxData("${ctx}/oaCar/auditSave.do", formId);
+                }
+            });
         } else if (t == '4') {
             $("#status").val(4);
+            saveAjaxData("${ctx}/oaCar/auditSave.do", formId);
         } else if (t == '5') {
             if (document.getElementById("isAgree").checked) {
                 if ($("#driverPersonName").val() == '') {
@@ -38,12 +42,18 @@
                 return;
             }
             $("#status").val(5);
+
+            $.messager.confirm('系统提示', "确定审核通过吗？通过后将不能修改！", function (r) {
+                if (r) {
+                    //提交表单
+                    saveAjaxData("${ctx}/oaCar/auditSave.do", formId);
+                }
+            });
         } else if (t == '6') {
             $("#status").val(6);
+            saveAjaxData("${ctx}/oaCar/auditSave.do", formId);
         }
 
-        //提交表单
-        saveAjaxData("${ctx}/oaCar/auditSave.do", formId);
     }
 
     function showDriver() {
@@ -107,7 +117,24 @@
                 </tr>
             </table>
         </fieldset>
-        <c:if test="${bean.status=='2'|| bean.status=='3'||bean.status=='5'}">
+        <c:if test="${canZrAudit}">
+            <fieldset class="form_fieldset">
+                <legend class="form_legend">
+                    科长审核
+                </legend>
+                <table cellpadding="0" cellspacing="0" class="form_table">
+                    <tr class="tr_dark">
+                        <td class="form_label_right" width="15%">科长审核意见：</td>
+                        <td class="form_content" colspan="3">
+                            <c:if test="${bean.status=='3'||bean.status=='5'}">
+                                <sys:toHtml> ${bean.kzAuditOpinion}</sys:toHtml>
+                            </c:if>
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+        </c:if>
+        <c:if test="${canKzAudit}">
             <fieldset class="form_fieldset">
                 <legend class="form_legend">
                     科长审核
@@ -128,7 +155,7 @@
             </fieldset>
         </c:if>
 
-        <c:if test="${bean.status=='3'||bean.status=='5'}">
+        <c:if test="${canZrAudit}">
             <fieldset class="form_fieldset">
                 <legend class="form_legend">
                     办公室主任审核

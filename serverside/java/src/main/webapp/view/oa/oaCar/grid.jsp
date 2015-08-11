@@ -46,9 +46,16 @@
                             opButton += '<input type="button" value="删除" onclick="doDelete(' + id + ')" class="button_normal"/>';
                         }
                         </c:if>
-                        if (rowData['statu'].indexOf("提交") > 0 || rowData['statu'].indexOf("科长审核通过") > 0 || rowData['statu'].indexOf("办公室主任审核通过") > 0) {
-                            <c:if test="${canKzAudit || canZrAudit}">
-                            opButton += '<input type="button" value="审核" onclick="doAudit(' + id + ')" class="button_normal"/> ';
+                        if (rowData['statu'].indexOf("提交") > 0 || rowData['statu'].indexOf("科长审核通过") > 0) {
+                            <c:if test="${canKzAudit}">
+                            if (!(rowData['statu'].indexOf("科长审核通过") > 0 &&${canKzAudit})) {
+                                opButton += '<input type="button" value="审核" onclick="doAudit(' + id + ')" class="button_normal"/> ';
+                            }
+                            </c:if>
+                            <c:if test="${canZrAudit}">
+                            if (rowData['statu'].indexOf("科长审核通过") > 0) {
+                                opButton += '<input type="button" value="审核" onclick="doAudit(' + id + ')" class="button_normal"/> ';
+                            }
                             </c:if>
                         }
 
