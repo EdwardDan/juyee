@@ -64,7 +64,7 @@ public enum OaMeetingStatus {
     public static String getColorNameByCode(int code) {
         for (OaMeetingStatus aType : values()) {
             if (aType.getCode() == code)
-                return "<font color='" + aType.getColor() + "'>" + aType.getName() + "</font>";
+                return "<font color=" + aType.getColor() + ">" + aType.getName() + "</font>";
         }
         return null;
     }

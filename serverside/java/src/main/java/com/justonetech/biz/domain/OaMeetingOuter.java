@@ -27,7 +27,11 @@ public class OaMeetingOuter extends BaseOaMeetingOuter {
 /*[CONSTRUCTOR MARKER END]*/
 
     public String getStatusName() {
-        return null != getStatus() ? OaMeetingStatus.getColorNameByCode(getStatus()) : "";
+        return OaMeetingStatus.getColorNameByCode(getStatus());
+    }
+
+    public Integer getStatusCode() {
+        return getStatus();
     }
 
     public String getMeetTime() {

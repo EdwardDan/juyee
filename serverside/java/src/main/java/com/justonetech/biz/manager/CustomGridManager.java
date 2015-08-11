@@ -144,9 +144,9 @@ public class CustomGridManager {
      * 会议纪要
      */
     private void setGridData1(CustomGridData data) {
-        data.setCols(new String[]{"信息类型", "标题", "信息来源", "发布时间"});
-        data.setAligns(new String[]{"center", "center", "center", "center"});
-        data.setWidths(new int[]{20, 25, 20, 20});
+        data.setCols(new String[]{ "标题", "发布时间"});
+        data.setAligns(new String[]{"left", "right"});
+        data.setWidths(new int[]{65, 20});
 
         List<Vector<Object>> ret = new ArrayList<Vector<Object>>();
         List<OaPublicInfo> list = oaPublicInfoService.findByQuery("from OaPublicInfo where type.code='" + Constants.OA_PUBLIC_INFO_TYPE_MEETING + "' order by id desc");
@@ -155,9 +155,7 @@ public class CustomGridManager {
             i++;
             if (i > MAX_COUNT) break;
             Vector<Object> v = new Vector<Object>();
-            v.add(bizData.getType().getName());
             v.add(getLinkUrlXxfb(String.valueOf(getPartStr(bizData.getTitle(), 10)), "site/infoView.do?id=" + bizData.getId()));
-            v.add(bizData.getCreateDeptName());
             v.add(bizData.getReportDate());
             ret.add(v);
         }
@@ -169,9 +167,9 @@ public class CustomGridManager {
      * 情况通报
      */
     private void setGridData2(CustomGridData data) {
-        data.setCols(new String[]{"信息类型", "标题", "信息来源", "发布时间"});
-        data.setAligns(new String[]{"center", "center", "center", "center"});
-        data.setWidths(new int[]{20, 25, 20, 20});
+        data.setCols(new String[]{ "标题", "发布时间"});
+        data.setAligns(new String[]{"left", "right"});
+        data.setWidths(new int[]{65, 20});
 
         List<Vector<Object>> ret = new ArrayList<Vector<Object>>();
         List<OaPublicInfo> list = oaPublicInfoService.findByQuery("from OaPublicInfo where type.code='" + Constants.OA_PUBLIC_INFO_TYPE_NOTICE + "' order by id desc");
@@ -180,9 +178,7 @@ public class CustomGridManager {
             i++;
             if (i > MAX_COUNT) break;
             Vector<Object> v = new Vector<Object>();
-            v.add(bizData.getType().getName());
             v.add(getLinkUrlXxfb(String.valueOf(getPartStr(bizData.getTitle(), 10)), "site/infoView.do?id=" + bizData.getId()));
-            v.add(bizData.getCreateDeptName());
             v.add(bizData.getReportDate());
             ret.add(v);
         }
@@ -194,9 +190,9 @@ public class CustomGridManager {
      * 规章制度
      */
     private void setGridData3(CustomGridData data) {
-        data.setCols(new String[]{"信息类型", "标题", "信息来源", "发布时间"});
-        data.setAligns(new String[]{"center", "center", "center", "center"});
-        data.setWidths(new int[]{20, 25, 20, 20});
+        data.setCols(new String[]{ "标题", "发布时间"});
+        data.setAligns(new String[]{"left", "right"});
+        data.setWidths(new int[]{65, 20});
 
         List<Vector<Object>> ret = new ArrayList<Vector<Object>>();
         List<OaPublicInfo> list = oaPublicInfoService.findByQuery("from OaPublicInfo where type.code='" + Constants.OA_PUBLIC_INFO_TYPE_RULE + "' order by id desc");
@@ -205,9 +201,7 @@ public class CustomGridManager {
             i++;
             if (i > MAX_COUNT) break;
             Vector<Object> v = new Vector<Object>();
-            v.add(bizData.getType().getName());
             v.add(getLinkUrlXxfb(String.valueOf(getPartStr(bizData.getTitle(), 10)), "site/infoView.do?id=" + bizData.getId()));
-            v.add(bizData.getCreateDeptName());
             v.add(bizData.getReportDate());
             ret.add(v);
         }
@@ -219,9 +213,9 @@ public class CustomGridManager {
      * 工作动态
      */
     private void setGridData4(CustomGridData data) {
-        data.setCols(new String[]{"信息类型", "标题", "信息来源", "发布时间"});
-        data.setAligns(new String[]{"center", "center", "center", "center"});
-        data.setWidths(new int[]{20, 25, 20, 20});
+        data.setCols(new String[]{ "标题", "发布时间"});
+        data.setAligns(new String[]{"left", "right"});
+        data.setWidths(new int[]{65, 20});
 
         List<Vector<Object>> ret = new ArrayList<Vector<Object>>();
         List<OaPublicInfo> list = oaPublicInfoService.findByQuery("from OaPublicInfo where type.code='" + Constants.OA_PUBLIC_INFO_TYPE_WORK + "' order by id desc");
@@ -230,9 +224,7 @@ public class CustomGridManager {
             i++;
             if (i > MAX_COUNT) break;
             Vector<Object> v = new Vector<Object>();
-            v.add(bizData.getType().getName());
             v.add(getLinkUrlXxfb(String.valueOf(getPartStr(bizData.getTitle(), 10)), "site/infoView.do?id=" + bizData.getId()));
-            v.add(bizData.getCreateDeptName());
             v.add(bizData.getReportDate());
             ret.add(v);
         }

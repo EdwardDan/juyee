@@ -10,19 +10,14 @@
             {name: "address", rule: "validate[required]"},
             {name: "title", rule: "validate[required]"},
             {name: "content", rule: "validate[required]"}
-            //{name:"relateMatter", rule:"validate[required]"},
-            //{name:"workAdvise", rule:"validate[required]"},
 
         ];
         validateInit(validateCondition, formId);
     });
 
     //保存操作
-    function save(btn, status) {
+    function save(status, buttonName) {
         if (!validateForm(formId)) {
-            return;
-        }
-        if (status !=${STATUS_EDIT} && !confirm("确定提交？提交后不能更改！")) {
             return;
         }
         var beginDate = $("#beginTime").val() + ":00";
@@ -38,24 +33,27 @@
             return;
         }
 
-
-        $(btn).get(0).disabled = true;
-        $("#status").val(status);
         $("#beginTime").val($("#beginTime").val() + ":00");
         $("#endTime").val($("#endTime").val() + ":00");
+
         //提交表单
-        saveAjaxData("${ctx}/oaMeetingOuter/save.do?status="+status, formId);
+        if (buttonName != "") {
+            if (confirm("是否确定执行 " + buttonName + " 操作？")) {
+                saveAjaxData("${ctx}/oaMeetingOuter/save.do?status=" + status, formId);
+            }
+        } else {
+            saveAjaxData("${ctx}/oaMeetingOuter/save.do?status=" + status, formId);
+        }
+
     }
 </script>
 <form:form commandName="bean">
     <form:hidden path="id"/>
-    <%--<form:hidden path="status"/>--%>
-
     <div class="form_div">
+        <c:set var="edit"
+               value="${bean.status == STATUS_SUBMIT || bean.status == STATUS_BRANCH_PASS || bean.status == STATUS_MAIN_PASS}"/>
         <fieldset class="form_fieldset">
-            <legend class="form_legend">
-                外出会议
-            </legend>
+            <legend class="form_legend">外出会议</legend>
             <table cellpadding="0" cellspacing="0" class="form_table">
                 <tr class="tr_light">
                     <td class="form_label_right" style="width: 150px">会议时间：</td>
@@ -70,62 +68,61 @@
                                value="<fmt:formatDate value="${bean.endTime}" pattern="yyyy-MM-dd HH:mm"/>"
                                readonly="true"/>
                         <input type="button" class="button_calendar" value=" " onClick="calendar('endTime','datetime')">
-
                     </td>
                 </tr>
                 <tr class="tr_light">
                     <td class="form_label_right">会议地点：</td>
                     <td class="form_content" colspan="3">
-                        <form:input path="address" cssClass="input_text_long"
-                                    cssStyle="width: 400px"/>
+                        <form:input path="address" cssClass="input_text_long" cssStyle="width: 400px"
+                                    readonly="${edit}"/>
                     </td>
                 </tr>
                 <tr class="tr_dark">
                     <td class="form_label_right">主持人：</td>
                     <td class="form_content">
-                        <form:input path="chargePerson" cssClass="input_text"/>
+                        <form:input path="chargePerson" cssClass="input_text" readonly="${edit}"/>
                     </td>
-
                     <td class="form_label_right">发起单位：</td>
                     <td class="form_content">
-                        <form:input path="startDept" cssClass="input_text"/>
+                        <form:input path="startDept" cssClass="input_text" readonly="${edit}"/>
                     </td>
                 </tr>
                 <tr class="tr_dark">
                     <td class="form_label_right">会议领导：</td>
                     <td class="form_content" colspan="3">
-                        <form:textarea path="leader" cssClass="input_textarea" cssStyle="height: 30px;width: 400px"/>
+                        <form:textarea path="leader" cssClass="input_textarea" cssStyle="height: 30px;width: 400px"
+                                       readonly="${edit}"/>
                     </td>
                 </tr>
                 <tr class="tr_light">
                     <td class="form_label_right">与会单位：</td>
                     <td class="form_content" colspan="3">
                         <form:textarea path="innerPersons" cssClass="input_textarea"
-                                       cssStyle="height: 30px;width: 400px"/>
+                                       cssStyle="height: 30px;width: 400px" readonly="${edit}"/>
                     </td>
                 </tr>
                 <tr class="tr_dark">
                     <td class="form_label_right">会议名称：</td>
                     <td class="form_content" colspan="3">
-                        <form:input path="title" cssClass="input_text_long" cssStyle="width: 400px"/>
+                        <form:input path="title" cssClass="input_text_long" cssStyle="width: 400px" readonly="${edit}"/>
                     </td>
                 </tr>
                 <tr class="tr_light">
                     <td class="form_label_right">会议内容：</td>
                     <td class="form_content" colspan="3">
-                        <form:textarea path="content" cssClass="input_textarea_long"/>
+                        <form:textarea path="content" cssClass="input_textarea_long" readonly="${edit}"/>
                     </td>
                 </tr>
                 <tr class="tr_dark">
                     <td class="form_label_right">与中心相关事宜：</td>
                     <td class="form_content" colspan="3">
-                        <form:textarea path="relateMatter" cssClass="input_textarea_long"/>
+                        <form:textarea path="relateMatter" cssClass="input_textarea_long" readonly="${edit}"/>
                     </td>
                 </tr>
                 <tr class="tr_light">
                     <td class="form_label_right">工作建议：</td>
                     <td class="form_content" colspan="3">
-                        <form:textarea path="workAdvise" cssClass="input_textarea_long"/>
+                        <form:textarea path="workAdvise" cssClass="input_textarea_long" readonly="${edit}"/>
                     </td>
                 </tr>
                 <tr class="tr_dark">
@@ -138,102 +135,85 @@
                     <td class="form_label_right">参会科室：</td>
                     <td class="form_content" colspan="3">
                         <form:textarea path="attendDepts" cssClass="input_textarea"
-                                       cssStyle="height: 30px;width: 400px"/>
+                                       cssStyle="height: 30px;width: 400px" readonly="${edit}"/>
                     </td>
                 </tr>
                 <tr class="tr_dark">
                     <td class="form_label_right">参会人员：</td>
                     <td class="form_content" colspan="3">
                         <form:textarea path="attendPersons" cssClass="input_textarea"
-                                       cssStyle="height: 30px;width: 400px"/>
+                                       cssStyle="height: 30px;width: 400px" readonly="${edit}"/>
                     </td>
                 </tr>
             </table>
         </fieldset>
-        <c:choose>
-            <c:when test="${bean.status == STATUS_SUBMIT||bean.status == STATUS_BRANCH_PASS||bean.status == STATUS_MAIN_PASS||bean.status == STATUS_BRANCH_BACK||bean.status == STATUS_MAIN_BACK}">
-                <fieldset class="form_fieldset">
-                    <legend class="form_legend">
-                        分管领导审核
-                    </legend>
-                    <table cellpadding="0" cellspacing="0" class="form_table">
-                        <tr class="tr_light">
-                            <td class="form_label_right" style="width: 150px">分管领导审核意见：</td>
-                            <td class="form_content" colspan="3">
-                                <c:choose>
-                                    <c:when test="${bean.status == STATUS_BRANCH_BACK||bean.status == STATUS_MAIN_BACK}">
-                                        <form:textarea path="fgAuditOpinion" cssClass="input_textarea_long"
-                                                       readonly="true"/>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <form:textarea path="fgAuditOpinion" cssClass="input_textarea_long"/>
-                                    </c:otherwise>
-                                </c:choose>
+        <fieldset class="form_fieldset" style="<c:if
+                test="${bean.status == STATUS_EDIT || bean.status == STATUS_BRANCH_BACK || bean.status == STATUS_MAIN_BACK}">display: none;</c:if>">
+            <legend class="form_legend">分管领导审核</legend>
+            <table cellpadding="0" cellspacing="0" class="form_table">
+                <tr class="tr_light">
+                    <c:choose>
+                        <c:when test="${bean.status == STATUS_SUBMIT && canEdit_FG}">
+                            <td class="form_label_right" style="width: 15%;" nowrap>分管领导审核意见：</td>
+                            <td class="form_content" style="width: 85%;">
+                                <form:textarea path="fgAuditOpinion" cssClass="input_textarea_long"/>
                             </td>
-                        </tr>
-                    </table>
-                </fieldset>
-            </c:when>
-            <c:otherwise>
-                <form:hidden path="fgAuditOpinion"/>
-            </c:otherwise>
-        </c:choose>
-        <c:choose>
-            <c:when test="${bean.status == STATUS_BRANCH_PASS||bean.status == STATUS_MAIN_BACK}">
-                <fieldset class="form_fieldset">
-                    <legend class="form_legend">
-                        主任审核批示
-                    </legend>
-                    <table cellpadding="0" cellspacing="0" class="form_table">
-                        <tr class="tr_light">
-                            <td class="form_label_right" style="width: 150px">主任审核意见：</td>
-                            <td class="form_content" colspan="3">
-                                <c:choose>
-                                    <c:when test="${bean.status == STATUS_MAIN_BACK}">
-                                        <form:textarea path="zrAuditOpinion" cssClass="input_textarea_long"
-                                                       readonly="true"/>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <form:textarea path="zrAuditOpinion" cssClass="input_textarea_long"/>
-                                    </c:otherwise>
-                                </c:choose>
+                        </c:when>
+                        <c:otherwise>
+                            <td class="form_label_right" style="width: 15%;" nowrap>分管领导审核意见：</td>
+                            <td class="form_content">
+                                <form:textarea path="fgAuditOpinion" cssClass="input_textarea_long" readonly="true"/>
                             </td>
-                        </tr>
-                    </table>
-                </fieldset>
-            </c:when>
-            <c:otherwise>
-                <form:hidden path="zrAuditOpinion"/>
-            </c:otherwise>
-        </c:choose>
+                        </c:otherwise>
+                    </c:choose>
+                </tr>
+            </table>
+        </fieldset>
+        <fieldset class="form_fieldset"
+                  style="<c:if test="${!(bean.status == STATUS_BRANCH_PASS)}">display: none;</c:if>">
+            <legend class="form_legend">主任审核</legend>
+            <table cellpadding="0" cellspacing="0" class="form_table">
+                <tr class="tr_light">
+                    <c:choose>
+                        <c:when test="${bean.status == STATUS_BRANCH_PASS && canEdit_ZR}">
+                            <td class="form_label_right" style="width: 15%;" nowrap>主任审核意见：</td>
+                            <td class="form_content">
+                                <form:textarea path="zrAuditOpinion" cssClass="input_textarea_long"/>
+                            </td>
+                        </c:when>
+                        <c:otherwise>
+                            <td class="form_label_right" style="width: 15%;" nowrap>主任审核意见：</td>
+                            <td class="form_content">
+                                <form:textarea path="zrAuditOpinion" cssClass="input_textarea_long" readonly="true"/>
+                            </td>
+                        </c:otherwise>
+                    </c:choose>
+                </tr>
+            </table>
+        </fieldset>
         <table cellpadding="0" cellspacing="0" class="form_table">
             <tr class="tr_button">
                 <td class="form_content" style="text-align: center">
-                    <c:if test="${canEdit||canEdit_FG||canEdit_ZR}">
-                        <c:if test="${empty bean.status|| STATUS_EDIT ==bean.status|| STATUS_BRANCH_BACK ==bean.status|| STATUS_MAIN_BACK ==bean.status}">
+                    <c:choose>
+                        <c:when test="${bean.status == STATUS_SUBMIT}">
+                            <input type="button" value="分管领导通过" class="button_normal_longer"
+                                   onclick="save('${STATUS_BRANCH_PASS}',this.value)">&nbsp;
+                            <input type="button" value="分管领导退回" class="button_normal_longer"
+                                   onclick="save('${STATUS_BRANCH_BACK}',this.value)">&nbsp;
+                        </c:when>
+                        <c:when test="${bean.status == STATUS_BRANCH_PASS}">
+                            <input type="button" value="主要领导通过" class="button_normal_longer"
+                                   onclick="save('${STATUS_MAIN_PASS}',this.value)">&nbsp;
+                            <input type="button" value="主要领导退回" class="button_normal_longer"
+                                   onclick="save('${STATUS_MAIN_BACK}',this.value)">&nbsp;
+                        </c:when>
+                        <c:otherwise>
                             <input type="button" value="提交" class="button_confirm"
-                                   onclick="save(this,'${STATUS_SUBMIT}')">&nbsp;
+                                   onclick="save('${STATUS_SUBMIT}',this.value)">&nbsp;
                             <input type="button" value="保存" class="button_confirm"
-                                   onclick="save(this,'${STATUS_EDIT}')">&nbsp;
-                        </c:if>
-                    </c:if>
-                    <c:if test="${canEdit_FG}">
-                        <c:if test="${STATUS_SUBMIT ==bean.status}">
-                            <input type="button" value="审核通过" class="button_normal_long"
-                                   onclick="save(this,'${STATUS_BRANCH_PASS}')">&nbsp;
-                            <input type="button" value="退回修改" class="button_normal_long"
-                                   onclick="save(this,'${STATUS_BRANCH_BACK}')">&nbsp;
-                        </c:if>
-                    </c:if>
-
-                    <c:if test="${canEdit_ZR}">
-                        <c:if test="${STATUS_BRANCH_PASS ==bean.status}">
-                            <input type="button" value="审核通过" class="button_normal_long"
-                                   onclick="save(this,'${STATUS_MAIN_PASS}')">&nbsp;
-                            <input type="button" value="退回修改" class="button_normal_long"
-                                   onclick="save(this,'${STATUS_MAIN_BACK}')">&nbsp;
-                        </c:if>
-                    </c:if>
+                                   onclick="save('${STATUS_EDIT}','')">&nbsp;
+                        </c:otherwise>
+                    </c:choose>
                     <input type="button" value="取消" class="button_cancel" onclick="closeWindow()">
                 </td>
             </tr>

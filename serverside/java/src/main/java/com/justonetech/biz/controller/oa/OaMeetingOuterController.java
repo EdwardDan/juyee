@@ -6,19 +6,14 @@ import com.justonetech.biz.daoservice.DocDocumentService;
 import com.justonetech.biz.daoservice.OaMeetingOuterService;
 import com.justonetech.biz.domain.DocDocument;
 import com.justonetech.biz.domain.OaMeetingOuter;
-import com.justonetech.biz.manager.ConfigManager;
 import com.justonetech.biz.manager.DocumentManager;
-import com.justonetech.biz.utils.Constants;
 import com.justonetech.biz.utils.enums.OaMeetingStatus;
 import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.orm.hibernate.Page;
 import com.justonetech.core.security.user.BaseUser;
 import com.justonetech.core.security.util.SpringSecurityUtils;
-import com.justonetech.core.utils.JspHelper;
 import com.justonetech.core.utils.ReflectionUtils;
 import com.justonetech.core.utils.StringHelper;
-import com.justonetech.system.manager.SimpleQueryManager;
-import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
 import com.justonetech.system.utils.PrivilegeCode;
 import org.slf4j.Logger;
@@ -33,11 +28,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 
 /**
@@ -54,16 +44,7 @@ public class OaMeetingOuterController extends BaseCRUDActionController<OaMeeting
     private SysUserManager sysUserManager;
 
     @Autowired
-    private SysCodeManager sysCodeManager;
-
-    @Autowired
-    private ConfigManager configManager;
-
-    @Autowired
     private DocumentManager documentManager;
-
-    @Autowired
-    private SimpleQueryManager simpleQueryManager;
 
     @Autowired
     private DocDocumentService docDocumentService;
@@ -79,23 +60,10 @@ public class OaMeetingOuterController extends BaseCRUDActionController<OaMeeting
      */
     @RequestMapping
     public String grid(Model model) {
-        OaMeetingStatus statusBean[] = {OaMeetingStatus.STATUS_EDIT, OaMeetingStatus.STATUS_SUBMIT, OaMeetingStatus.STATUS_BRANCH_PASS, OaMeetingStatus.STATUS_BRANCH_BACK
-                , OaMeetingStatus.STATUS_MAIN_PASS, OaMeetingStatus.STATUS_MAIN_BACK};
-        List<Map<String, String>> statusList = setStatusBean(statusBean);
+        String statusList = OaMeetingStatus.getOptions("");
         model.addAttribute("statusList", statusList);
         setStatus(model);
         return "view/oa/oaMeetingOuter/grid";
-    }
-
-    public List<Map<String, String>> setStatusBean(OaMeetingStatus statusBean[]) {
-        List<Map<String, String>> result = new ArrayList<Map<String, String>>();
-        for (OaMeetingStatus bean : statusBean) {
-            Map<String, String> status = new HashMap<String, String>();
-            status.put("name", bean.getName());
-            status.put("value", String.valueOf(bean.getCode()));
-            result.add(status);
-        }
-        return result;
     }
 
     public void setStatus(Model model) {
@@ -104,6 +72,7 @@ public class OaMeetingOuterController extends BaseCRUDActionController<OaMeeting
         model.addAttribute("canEdit_FG", sysUserManager.hasPrivilege(PrivilegeCode.OA_MEETING_OUTER_AUDIT_FG));
         model.addAttribute("canEdit_ZR", sysUserManager.hasPrivilege(PrivilegeCode.OA_MEETING_OUTER_AUDIT_ZR));
 
+        //填报状态
         model.addAttribute("STATUS_EDIT", OaMeetingStatus.STATUS_EDIT.getCode());
         model.addAttribute("STATUS_SUBMIT", OaMeetingStatus.STATUS_SUBMIT.getCode());
         model.addAttribute("STATUS_BRANCH_PASS", OaMeetingStatus.STATUS_BRANCH_PASS.getCode());
@@ -143,29 +112,11 @@ public class OaMeetingOuterController extends BaseCRUDActionController<OaMeeting
             hql += " order by id desc";
             //执行查询
             QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);
-            String query = queryTranslate.toString();
-            session.setAttribute(Constants.GRID_SQL_KEY, query);
-            pageModel = oaMeetingOuterService.findByPage(pageModel, query);
-            List<OaMeetingOuter> rowList = pageModel.getRows();
-            List<Map<String, Object>> retList = new ArrayList<Map<String, Object>>();
-            Map<String, Object> map;
-            for (OaMeetingOuter data : rowList) {
-                map = new HashMap<String, Object>();
-                map.put("id", data.getId());
-                map.put("beginTime", data.getBeginTime());
-                map.put("endTime", data.getEndTime());
-                map.put("title", data.getTitle());
-                map.put("meetTime", data.getMeetTime());
-                map.put("address", data.getAddress());
-                map.put("docButton", documentManager.getDownloadButton(data.getDoc()));
-                map.put("statusName", data.getStatusName());
-                map.put("status", data.getStatus());
-                retList.add(map);
-            }
-            //输出显示
-            String json = GridJq.toJSON(retList, pageModel);
-            sendJSON(response, json);
+            pageModel = oaMeetingOuterService.findByPage(pageModel, queryTranslate.toString());
 
+            //输出显示
+            String json = GridJq.toJSON(columns, pageModel);
+            sendJSON(response, json);
         } catch (Exception e) {
             log.error("error", e);
             super.processException(response, e);
@@ -186,8 +137,8 @@ public class OaMeetingOuterController extends BaseCRUDActionController<OaMeeting
         //如需增加其他默认值请在此添加
         model.addAttribute("bean", oaMeetingOuter);
         //上传文档功能
-        model.addAttribute("uploadButtonDocument", documentManager.getUploadButtonForMulti(documentManager.getDefaultXmlConfig(),
-                OaMeetingOuter.class.getSimpleName(), oaMeetingOuter.getDoc(), null, null, "Document"));
+        model.addAttribute("uploadButtonDocument", documentManager.getUploadButtonForMulti(documentManager.getDefaultXmlConfig(), OaMeetingOuter.class.getSimpleName(), oaMeetingOuter.getDoc(), null, null, "Document"));
+
         return "view/oa/oaMeetingOuter/input";
     }
 
@@ -205,8 +156,8 @@ public class OaMeetingOuterController extends BaseCRUDActionController<OaMeeting
         //处理其他业务逻辑
         model.addAttribute("bean", oaMeetingOuter);
         //上传文档功能
-        model.addAttribute("uploadButtonDocument", documentManager.getUploadButtonForMulti(documentManager.getDefaultXmlConfig(),
-                OaMeetingOuter.class.getSimpleName(), oaMeetingOuter.getDoc(), null, null, "Document"));
+        model.addAttribute("uploadButtonDocument", documentManager.getUploadButtonForMulti(documentManager.getDefaultXmlConfig(), OaMeetingOuter.class.getSimpleName(), oaMeetingOuter.getDoc(), null, null, "Document"));
+
         return "view/oa/oaMeetingOuter/input";
     }
 
@@ -223,6 +174,7 @@ public class OaMeetingOuterController extends BaseCRUDActionController<OaMeeting
         setStatus(model);
         model.addAttribute("docButton", documentManager.getDownloadButton(oaMeetingOuter.getDoc()));
         model.addAttribute("bean", oaMeetingOuter);
+
         return "view/oa/oaMeetingOuter/view";
     }
 
@@ -236,7 +188,7 @@ public class OaMeetingOuterController extends BaseCRUDActionController<OaMeeting
      */
     @SuppressWarnings("unchecked")
     @RequestMapping
-    public void save(HttpServletResponse response, @ModelAttribute("bean") OaMeetingOuter entity, HttpServletRequest request) throws Exception {
+    public void save(HttpServletResponse response, @ModelAttribute("bean") OaMeetingOuter entity, HttpServletRequest request, Integer status) throws Exception {
         String msg = "保存成功";
         try {
             OaMeetingOuter target;
@@ -254,7 +206,6 @@ public class OaMeetingOuterController extends BaseCRUDActionController<OaMeeting
                         "content",
                         "relateMatter",
                         "workAdvise",
-//                        "status",
                         "attendDepts",
                         "attendPersons",
                         "fgAuditOpinion",
@@ -264,16 +215,15 @@ public class OaMeetingOuterController extends BaseCRUDActionController<OaMeeting
             } else {
                 target = entity;
             }
+            //附件保存
             String docIdDocument = request.getParameter("docIdDocument");
-            Integer status = JspHelper.getInteger(request.getParameter("status"));
-            target.setStatus(status);
             if (!StringHelper.isEmpty(docIdDocument)) {
                 DocDocument docDocument = docDocumentService.get(Long.parseLong(docIdDocument));
                 target.setDoc(docDocument);
                 documentManager.updateDocumentByBizData(docDocument, null, target.getTitle());
             }
-//            Integer status = target.getStatus();
-            oaMeetingOuterService.save(target);
+            target.setStatus(status);
+            //根据状态保存相应的时间
             if (null != status && OaMeetingStatus.STATUS_BRANCH_PASS.getCode() == status || OaMeetingStatus.STATUS_BRANCH_BACK.getCode() == status) {
                 target.setFgAuditTime(new Timestamp(System.currentTimeMillis()));
                 BaseUser loginUser = SpringSecurityUtils.getCurrentUser();
