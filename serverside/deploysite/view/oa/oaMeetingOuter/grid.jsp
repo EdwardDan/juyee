@@ -25,10 +25,10 @@
                     {name: "address", width: "60", align: "left", searchtype: "string", sortable: true},
                     {name: "docButton", width: "30", align: "center", sortable: false},
                     {name: "statusName", width: "40", align: "center", searchtype: "String", sortable: false},
-                    {name: "status", width: "30", align: "center", searchtype: "integer", sortable: true, hidden: true}
+                    {name: "statusCode", width: "30", align: "center", searchtype: "integer", sortable: true, hidden: false}
                 ],
                 actModel: [
-                    {name: 'operation', width: 40, align: 'center'}
+                    {name: 'operation', width: 50, align: 'center'}
                 ],
                 pager: '#pager2',
                 caption: "外出会议列表",
@@ -38,7 +38,7 @@
                     for (var i = 0; i < ids.length; i++) {
                         var id = ids[i];
                         var rowData = jQuery("#listGrid").jqGrid('getRowData', id);
-                        var status = rowData["status"];
+                        var status = rowData["statusCode"];
                         var opButton = '<input type="button" value="查看" onclick="doView(' + id + ')" class="button_normal"/> ';
                         if (${canEdit}) {
                             if (status == '${STATUS_EDIT}' || '' == status || status == '${STATUS_MAIN_BACK}' || status == '${STATUS_BRANCH_BACK}') {
@@ -46,9 +46,14 @@
                                 opButton += '<input type="button" value="删除" onclick="doDelete(' + id + ')" class="button_normal"/>';
                             }
                         }
-                        if (${canEdit_FG||canEdit_ZR}) {
-                            if (status == '${STATUS_SUBMIT}' || status == '${STATUS_BRANCH_PASS}' && status != "") {
-                                opButton += '<input type="button" value="审核" onclick="doEdit(' + id + ')" class="button_normal"/> ';
+                        if (${canEdit_FG}) {
+                            if (status == '${STATUS_SUBMIT}') {
+                                opButton += '<input type="button" value="分管领导审核" onclick="doEdit(' + id + ')" class="button_normal_longer"/> ';
+                            }
+                        }
+                        if (${canEdit_ZR}) {
+                            if (status == '${STATUS_BRANCH_PASS}') {
+                                opButton += '<input type="button" value="主要领导审核" onclick="doEdit(' + id + ')" class="button_normal_longer"/> ';
                             }
                         }
                         jQuery("#listGrid").jqGrid('setRowData', ids[i], { operation: opButton});
@@ -59,9 +64,6 @@
                 defaultQuery: { "groupOp": "AND", "rules": [
                     { "field": "会议名称", "op": "cn", "data": ""},
                     { "field": "会议地点", "op": "cn", "data": ""},
-//                    { "field": "状态", "op": "cn", "data": ""},
-//                    { "field": "会议开始时间", "op": "bt", "data": ""},
-//                    { "field": "会议结束时间", "op": "bt", "data": ""},
                     { "field": "会议地点", "op": "cn", "data": ""}
                 ]},
                 queryButton: $("#queryButton"),
@@ -117,18 +119,14 @@
             </c:if>
         </div>
         <div style="float:left;padding-right: 10px">
-            起始日期：<input type="text" name="start" id="start" value="" class="input_datetime"
-                        style="width: 120px"
+            起始日期：<input type="text" name="start" id="start" value="" class="input_date"
                         onClick="calendar('start','start');"/>
-            结束日期：<input type="text" name="end" id="end" value="" class="input_datetime"
-                        style="width: 120px"
+            结束日期：<input type="text" name="end" id="end" value="" class="input_date"
                         onClick="calendar('end','end');"/>
             状态：
-            <select name="status" id="status">
+            <select name="status" id="status" class="form_select_long" style="width:150px; ">
                 <option value="" selected>全部</option>
-                <c:forEach var="fo" items="${statusList}">
-                    <option value="${fo.value}">${fo.name}</option>
-                </c:forEach>
+                ${statusList}
             </select>
             <input type="button" value="查询" class="btn_Search" onclick="doThisQuery(this)"/>
         </div>

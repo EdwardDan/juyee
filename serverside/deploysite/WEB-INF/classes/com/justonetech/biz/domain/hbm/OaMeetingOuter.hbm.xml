@@ -241,6 +241,26 @@
             <meta attribute="ColumnComment">更新用户名</meta>
         </property>
 
+        <property
+                name="attendDepts"
+                column="ATTEND_DEPTS"
+                type="string"
+                not-null="false"
+                >
+            <meta attribute="ColumnName">与会科室</meta>
+            <meta attribute="ColumnComment">与会科室</meta>
+        </property>
+
+        <property
+                name="attendPersons"
+                column="ATTEND_PERSONS"
+                type="string"
+                not-null="false"
+                >
+            <meta attribute="ColumnName">与会人员</meta>
+            <meta attribute="ColumnComment">与会人员</meta>
+        </property>
+
 		<many-to-one
 			name="zrAuditUser"
 			column="ZR_AUDIT_USER_ID"

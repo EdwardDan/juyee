@@ -1,6 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/common/taglibs.jsp" %>
-<%@ include file="/common/header.jsp" %>
+<c:if test="${empty usedForOaTask}">
+    <%@ include file="/common/header.jsp" %>
+</c:if>
 <script type="text/javascript">
     var formId = "bean";
     $(function () {
@@ -91,8 +93,10 @@
             </tr>
             <tr class="tr_button">
                 <td class="form_border" colspan="2" align="center">
-                    <input type="button" value="发送" class="button_confirm" onclick="save(this)">&nbsp;&nbsp;
-                    <input type="button" value="取消" class="button_cancel" onclick="reBack();">
+                    <c:if test="${empty usedForOaTask}">
+                        <input type="button" value="发送" class="button_confirm" onclick="save(this)">&nbsp;&nbsp;
+                        <input type="button" value="取消" class="button_cancel" onclick="reBack();">
+                    </c:if>
                 </td>
             </tr>
         </table>

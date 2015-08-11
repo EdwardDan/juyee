@@ -50,7 +50,7 @@
     <form:hidden path="id"/>
 
     <div class="form_div">
-        <table cellpadding="0" cellspacing="0" class="form_table">
+        <table cellpadding="0" cellspacing="0" class="form_table" style="position:absolute">
 
             <tr class="tr_light">
                 <td class="form_label_right" width="15%">收件人：</td>

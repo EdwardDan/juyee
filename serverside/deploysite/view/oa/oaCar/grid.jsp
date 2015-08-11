@@ -46,7 +46,7 @@
                             opButton += '<input type="button" value="删除" onclick="doDelete(' + id + ')" class="button_normal"/>';
                         } else if (rowData['statu'].indexOf("提交") > 0 || rowData['statu'].indexOf("科长审核通过") > 0||rowData['statu'].indexOf("办公室主任审核通过") > 0) {
                             <c:if test="${canKzAudit || canZrAudit}">
-                            opButton += '<input type="button" value="审核" onclick="doEdit(' + id + ')" class="button_normal"/> ';
+                            opButton += '<input type="button" value="审核" onclick="doAudit(' + id + ')" class="button_normal"/> ';
                             </c:if>
                         }
                         </c:if>
@@ -71,12 +71,16 @@
     function doView(id) {
         openWindow("查看车辆申请", "${ctx}/oaCar/view.do?id=" + id, false, 800, 500);
     }
+
     <c:if test="${canEdit}">
     function doAdd() {
         openWindow("添加车辆申请", "${ctx}/oaCar/add.do", true, 800, 500);
     }
     function doEdit(id) {
         openWindow("修改车辆申请", "${ctx}/oaCar/modify.do?id=" + id, true, 800, 500);
+    }
+    function doAudit(id) {
+        openWindow("审核车辆申请", "${ctx}/oaCar/audit.do?id=" + id, true, 800, 500);
     }
     function doDelete(id) {
         doGridDelete("${ctx}/oaCar/delete.do?id=" + id);

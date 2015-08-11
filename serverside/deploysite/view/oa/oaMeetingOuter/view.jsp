@@ -11,58 +11,69 @@
                 <tr class="tr_light">
                     <td class="form_label_right" style="width: 150px">会议时间：</td>
                     <td class="form_content" colspan="3">
-                        ${bean.meetTime}
+                            ${bean.meetTime}
                     </td>
                 </tr>
                 <tr class="tr_light">
                     <td class="form_label_right">会议地点：</td>
                     <td class="form_content" colspan="3">
-                        ${bean.address}
+                            ${bean.address}
                     </td>
                 </tr>
                 <tr class="tr_dark">
                     <td class="form_label_right" style="width: 20%">主持人：</td>
-                    <td class="form_content" style="width: 30%">       ${bean.chargePerson}
+                    <td class="form_content" style="width: 30%"> ${bean.chargePerson}
                     </td>
 
-                    <td class="form_label_right" style="width: 20%" >发起单位：</td>
-                    <td class="form_content">     ${bean.startDept}
+                    <td class="form_label_right" style="width: 20%">发起单位：</td>
+                    <td class="form_content"> ${bean.startDept}
                     </td>
                 </tr>
                 <tr class="tr_dark">
                     <td class="form_label_right">会议领导：</td>
-                    <td class="form_content" colspan="3">     ${bean.leader}
+                    <td class="form_content" colspan="3"> ${bean.leader}
                     </td>
                 </tr>
                 <tr class="tr_light">
                     <td class="form_label_right">与会单位：</td>
-                    <td class="form_content" colspan="3">    <sys:toHtml>${bean.innerPersons}</sys:toHtml>
+                    <td class="form_content" colspan="3"><sys:toHtml>${bean.innerPersons}</sys:toHtml>
                     </td>
                 </tr>
                 <tr class="tr_dark">
                     <td class="form_label_right">会议名称：</td>
-                    <td class="form_content" colspan="3">      <sys:toHtml>${bean.title}</sys:toHtml>
+                    <td class="form_content" colspan="3"><sys:toHtml>${bean.title}</sys:toHtml>
                     </td>
                 </tr>
                 <tr class="tr_light">
                     <td class="form_label_right">会议内容：</td>
-                    <td class="form_content" colspan="3">   <sys:toHtml>${bean.content}</sys:toHtml>
+                    <td class="form_content" colspan="3"><sys:toHtml>${bean.content}</sys:toHtml>
                     </td>
                 </tr>
                 <tr class="tr_dark">
                     <td class="form_label_right">与中心相关事宜：</td>
-                    <td class="form_content" colspan="3">    <sys:toHtml>${bean.relateMatter}</sys:toHtml>
+                    <td class="form_content" colspan="3"><sys:toHtml>${bean.relateMatter}</sys:toHtml>
                     </td>
                 </tr>
                 <tr class="tr_light">
                     <td class="form_label_right">工作建议：</td>
-                    <td class="form_content" colspan="3"> <sys:toHtml>${bean.workAdvise}</sys:toHtml>
+                    <td class="form_content" colspan="3"><sys:toHtml>${bean.workAdvise}</sys:toHtml>
                     </td>
                 </tr>
                 <tr class="tr_light">
                     <td class="form_label_right">附件：</td>
                     <td class="form_content" colspan="3">
                             ${docButton}
+                    </td>
+                </tr>
+                <tr class="tr_light">
+                    <td class="form_label_right">参会科室：</td>
+                    <td class="form_content" colspan="3">
+                            ${bean.attendDepts}
+                    </td>
+                <tr class="tr_dark">
+                    <td class="form_label_right">参会人员：</td>
+                    <td class="form_content" colspan="3">
+                            ${bean.attendPersons}
                     </td>
                 </tr>
             </table>
