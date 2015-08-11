@@ -19,7 +19,7 @@
                     {name: "model", width: "50", align: "center", searchtype: "string", sortable: true},
                     {name: "unit", width: "50", align: "center", searchtype: "string", sortable: true},
                     {name: "price", width: "50", align: "right", searchtype: "string", sortable: true},
-                    {name: "amount", width: "50", align: "right", searchtype: "string", sortable: true},
+                    {name: "amount", width: "50", align: "right", searchtype: "string", sortable: true}
                 ],
                 actModel: [
                     {name: 'operation', width: 50, align: 'center'}
@@ -44,7 +44,7 @@
                 defaultQuery: {
                     "groupOp": "AND", "rules": [
                         {"field": "办公用品名称", "op": "cn", "data": ""},
-                        {"field": "型号", "op": "cn", "data": ""},
+                        {"field": "型号", "op": "cn", "data": ""}
                     ]
                 },
                 queryButton: $("#queryButton"),
@@ -55,14 +55,14 @@
         gridinit($("#listGrid"), conf);
     });
     function doView(id) {
-        openWindow("查看办公用品信息", "${ctx}/oaThings/view.do?id=" + id, false,700,200);
+        openWindow("查看办公用品信息", "${ctx}/oaThings/view.do?id=" + id, false, 700, 200);
     }
     <c:if test="${canEdit}">
     function doAdd() {
         openWindow("添加办公用品信息", "${ctx}/oaThings/add.do", true);
     }
     function doEdit(id) {
-        openWindow("修改办公用品信息", "${ctx}/oaThings/modify.do?id=" + id, true,700,200);
+        openWindow("修改办公用品信息", "${ctx}/oaThings/modify.do?id=" + id, true, 700, 200);
     }
     function doDelete(id) {
         doGridDelete("${ctx}/oaThings/delete.do?id=" + id);

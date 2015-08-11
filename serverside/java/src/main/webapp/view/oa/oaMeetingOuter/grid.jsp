@@ -117,11 +117,9 @@
             </c:if>
         </div>
         <div style="float:left;padding-right: 10px">
-            起始日期：<input type="text" name="start" id="start" value="" class="input_datetime"
-                        style="width: 120px"
+            起始日期：<input type="text" name="start" id="start" value="" class="input_date"
                         onClick="calendar('start','start');"/>
-            结束日期：<input type="text" name="end" id="end" value="" class="input_datetime"
-                        style="width: 120px"
+            结束日期：<input type="text" name="end" id="end" value="" class="input_date"
                         onClick="calendar('end','end');"/>
             状态：
             <select name="status" id="status">
