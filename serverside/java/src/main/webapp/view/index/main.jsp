@@ -57,6 +57,10 @@
     function viewCustomGridDetail(url){
         openWindow("查看详细信息","${ctx}/"+url,false,900,500,null);
     }
+
+    function viewCustomGridDetailXxfb(url) {
+        openFullWindow("${ctx}/" + url, 1024, 768, null);
+    }
     </c:if>
 </script>
 

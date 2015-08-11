@@ -5,6 +5,7 @@ import com.justonetech.biz.domain.OaPublicInfo;
 import com.justonetech.biz.manager.indexGrid.CustomGridData;
 import com.justonetech.biz.utils.Constants;
 import com.justonetech.core.utils.FormatUtils;
+import com.justonetech.core.utils.StringHelper;
 import com.justonetech.system.daoservice.SysCustomGridService;
 import com.justonetech.system.daoservice.SysCustomGridUserService;
 import com.justonetech.system.domain.SysCustomGrid;
@@ -51,6 +52,7 @@ public class CustomGridManager {
     private OaPublicInfoService oaPublicInfoService;
 
     private static final String LINK_URL = "<a href='#' class='index' onclick='viewCustomGridDetail(\"{0}\")'>{1}</a>"; //查看链接
+    private static final String LINK_URL_XXFB = "<a href='#' class='index' onclick='viewCustomGridDetailXxfb(\"{0}\")'>{1}</a>"; //查看链接
 
     /**
      * 获取版块数据
@@ -113,6 +115,11 @@ public class CustomGridManager {
         return FormatUtils.format(LINK_URL, url, title);
     }
 
+    //查看链接
+    private String getLinkUrlXxfb(String title, String url) {
+        return FormatUtils.format(LINK_URL_XXFB, url, title);
+    }
+
     //获取月日
     private String getYearMonth(Date date) {
         if (date != null) {
@@ -123,6 +130,14 @@ public class CustomGridManager {
             }
         }
         return "";
+    }
+
+    /**
+     * *******************************************以下为业务数据****************************************************
+     */
+    //获取指定字符的长度
+    private Object getPartStr(Object o, int n) {
+        return o != null ? (o.toString().length() > n ? StringHelper.truncLength(o.toString(), 10) : o) : o;
     }
 
     /**
@@ -141,7 +156,7 @@ public class CustomGridManager {
             if (i > MAX_COUNT) break;
             Vector<Object> v = new Vector<Object>();
             v.add(bizData.getType().getName());
-            v.add(bizData.getTitle());
+            v.add(getLinkUrlXxfb(String.valueOf(getPartStr(bizData.getTitle(), 10)), "site/infoView.do?id=" + bizData.getId()));
             v.add(bizData.getCreateDeptName());
             v.add(bizData.getReportDate());
             ret.add(v);
@@ -166,7 +181,7 @@ public class CustomGridManager {
             if (i > MAX_COUNT) break;
             Vector<Object> v = new Vector<Object>();
             v.add(bizData.getType().getName());
-            v.add(bizData.getTitle());
+            v.add(getLinkUrlXxfb(String.valueOf(getPartStr(bizData.getTitle(), 10)), "site/infoView.do?id=" + bizData.getId()));
             v.add(bizData.getCreateDeptName());
             v.add(bizData.getReportDate());
             ret.add(v);
@@ -191,7 +206,7 @@ public class CustomGridManager {
             if (i > MAX_COUNT) break;
             Vector<Object> v = new Vector<Object>();
             v.add(bizData.getType().getName());
-            v.add(bizData.getTitle());
+            v.add(getLinkUrlXxfb(String.valueOf(getPartStr(bizData.getTitle(), 10)), "site/infoView.do?id=" + bizData.getId()));
             v.add(bizData.getCreateDeptName());
             v.add(bizData.getReportDate());
             ret.add(v);
@@ -216,7 +231,7 @@ public class CustomGridManager {
             if (i > MAX_COUNT) break;
             Vector<Object> v = new Vector<Object>();
             v.add(bizData.getType().getName());
-            v.add(bizData.getTitle());
+            v.add(getLinkUrlXxfb(String.valueOf(getPartStr(bizData.getTitle(), 10)), "site/infoView.do?id=" + bizData.getId()));
             v.add(bizData.getCreateDeptName());
             v.add(bizData.getReportDate());
             ret.add(v);
