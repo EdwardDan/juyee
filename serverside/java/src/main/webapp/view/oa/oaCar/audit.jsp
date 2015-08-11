@@ -217,7 +217,7 @@
                         <input type="button" value="退回修改" class="button_normal_long" onclick="save('${STATUS_MAIN_BACK}',this)">&nbsp;
                     </c:if>
 
-                    <c:if test="${bean.status==2}">
+                    <c:if test="${bean.status==STATUS_SUBMIT}">
                         <input type="button" value="审核通过" class="button_normal_long" onclick="save('${STATUS_BRANCH_PASS}',this)">&nbsp;
                         <input type="button" value="退回修改" class="button_normal_long" onclick="save('${STATUS_BRANCH_BACK}',this)">&nbsp;
                     </c:if>
