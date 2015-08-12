@@ -15,6 +15,7 @@
                     '办证推进标段数',
                     '形象进度标段数',
                     '问题附件',
+                    '问题附件(非输出下载内容)',
                     '操作'
                 ],
                 colModel: [
@@ -27,7 +28,8 @@
                     {name: "category.name", width: "40", align: "center", searchtype: "string", sortable: true},
                     {name: "bidCountOfStage", width: "30", align: "center", searchtype: "integer", sortable: true},
                     {name: "bidCountOfNode", width: "30", align: "center", searchtype: "integer", sortable: true},
-                    {name: "doc.id", width: "30", align: "center", searchtype: "string", sortable: true}
+                    {name: "doc.id", width: "30", align: "center", searchtype: "string", sortable: true},
+                    {name: "docId", width: "30", align: "center", searchtype: "string", sortable: true, hidden: true}
                 ],
                 actModel: [
                     {name: 'operation', width: 90, align: 'center'}
@@ -41,9 +43,11 @@
                         var id = ids[i];
                         var rowData = jQuery("#listGrid").jqGrid('getRowData', id);
                         var name = rowData["name"];
+                        var docId = rowData['docId'] != null ? rowData['docId'] : "";
                         var opButton = '<input type="button" value="办证推进" onclick="doViewStage(\'' + id + '\', \'' + name + '\')" class="button_normal_long"/> ';
                         opButton += '<input type="button" value="形象进度" onclick="doViewNode(\'' + id + '\', \'' + name + '\')" class="button_normal_long"/> ';
-                        opButton += '<input type="button" value="上传附件" class="button_normal_long" onclick="doUploadDocAttachs(' + id + ')"/>';
+                        opButton += '<input type="hidden" name="docIdDocument" value="' + docId + '" id="docIdDocument' + id + '" />' +
+                                '<input type="button" value="上传附件" class="button_normal_long" onclick="doUploadDocAttachs(' + id + ')"/>';
                         jQuery("#listGrid").jqGrid('setRowData', ids[i], { operation: opButton});
                     }
                 }, rownumbers: true
@@ -74,7 +78,71 @@
     }
 
     function doUploadDocAttachs(prjId) {
-        parent.openWindow("问题附件操作区", "${ctx}/projectQueryStage/uploadProblematicDoc.do?prjId=" + prjId, false, 500, 300);
+        var docIdEle = $("#docIdDocument" + prjId + "");
+        var params = "xmlConfig=${xmlconfig}&bizCode=" + $("#bizCodeDocument").val() + "&userId=${userId}&secondDir=";
+        var isNewDoc = false;
+        var docId = docIdEle.val();
+        if (!docIdEle.val()) {
+            isNewDoc = true;
+            var rs = $.ajax({
+                url: CONTEXT_NAME + "/docCommon/getDocument.do?" + params,
+                async: false,
+                success: function (data) {
+                    docId = data;
+                    $(docIdEle).val(data);
+                }
+            });
+        }
+        params += "&docId=" + docId;
+        var url = CONTEXT_NAME + "/docCommon/add.do?" + params;
+        var windowId = "fileUpload";
+        if ($('#' + windowId).length <= 0) {
+            $("body").append("<div id=\"" + windowId + "\"></div>");
+        }
+        var left = ($(window).width() - 750) * 0.5 + 20;
+        var top = ($(window).height() - 500) * 0.5 - 10;
+        $('#' + windowId).window({
+            title: "附件上传",
+            loadingMessage: "正在加载数据......",
+            iconCls: "icon-edit",
+            width: 750,
+            height: 500,
+            left: left,
+            top: top,
+            content: createFrame(url, windowId + "iframe"),
+            modal: true,
+            shadow: true,
+            minimizable: false,
+            maximizable: true,
+            closed: true,
+            resizable: true,
+            onClose: function () {
+                $.ajax({
+                    type: 'post',
+                    url: '${ctx}/projectQueryStage/uploadProblematicDoc.do',
+                    data: 'prjId=' + prjId + '&docId=' + docIdEle.val(),
+                    async: false,
+                    cache: false,
+                    success: function () {
+                        showInfoMsg("操作成功！", "info");
+                        refreshGrid();
+                    },
+                    error: function () {
+                        showErrorMsg("操作失败！");
+                    }
+                });
+                if (isNewDoc && docIdEle.val()) {
+                    $.get(CONTEXT_NAME + "/docCommon/getDelIsNull.do?docId=" + docIdEle.val(), function (msg) {
+                        msg = eval("(" + msg + ")");
+                        if (msg.success) {
+                            docIdEle.val('');
+                        }
+                    });
+//                refreshWindow();
+                }
+            }
+        });
+        $('#' + windowId).window('open');
     }
 </script>
 
@@ -92,6 +160,7 @@
                 <input type="button" value="办证推进汇总" class="button_normal_longer" onclick="doViewStage('','汇总')"/>
                 <input type="button" value="形象进度汇总" class="button_normal_longer" onclick="doViewNode('','汇总')"/>
             </c:if>
+            <input type="hidden" id="bizCodeDocument" value="${bizCodeDocument}"/>
         </div>
     </div>
 </div>

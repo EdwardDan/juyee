@@ -116,7 +116,7 @@ public class ProjInfo extends BaseProjInfo {
     }
 
     /**
-     * 获取项目问题附件
+     * 获取项目问题附件(适用于文档下载格式化)
      * @return
      */
     public DocDocument getDoc() {
@@ -127,5 +127,13 @@ public class ProjInfo extends BaseProjInfo {
         } else {
             return null;
         }
+    }
+
+    /**
+    * 获取项目问题附件Id(适用于文档上载)
+     * @return
+     */
+    public Long getDocId() {
+        return getDoc() != null ? getDoc().getId() : null;
     }
 }

@@ -59,6 +59,9 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
     private DataStageReportItemService dataStageReportItemService;
 
     @Autowired
+    private DataStageReportDocService dataStageReportDocService;
+
+    @Autowired
     private DocDocumentService docDocumentService;
 
     @Autowired
@@ -75,6 +78,12 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
     @RequestMapping
     public String grid(Model model) {
         model.addAttribute("canViewAll", sysUserManager.hasPrivilege(PrivilegeCode.PROJECT_QUERY_STAGE_SUM));
+        model.addAttribute("xmlconfig", documentManager.getDefaultXmlConfig());
+        model.addAttribute("bizCodeDocument", DataStageReportDoc.class.getSimpleName());
+        model.addAttribute("userId", sysUserManager.getSysUser().getId());
+//        model.addAttribute("suffix", "Document");
+//        documentManager.getUploadButtonForMulti(documentManager.getDefaultXmlConfig(), DataStageReportDoc.class.getSimpleName(),
+//                docDocument, sysUserManager.getSysUser().getId(), null, "Document");
         return "view/query/projectQueryStage/grid";
     }
 
@@ -254,9 +263,25 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
      * @return
      */
     @RequestMapping
-    public String uploadProblematicDoc(Model model, Long prjId) {
-        model.addAttribute("msg", documentManager.getUploadButtonForMulti(documentManager.getDefaultXmlConfig(), DataStageReportDoc.class.getSimpleName(), projInfoService.get(prjId).getDoc(), sysUserManager.getSysUser().getId(), null, "Document"));
-        return "common/msg";
+    public void uploadProblematicDoc(Model model, HttpServletResponse response, Long prjId, Long docId) {
+        Calendar calendar = Calendar.getInstance();
+        int currentYear = calendar.get(Calendar.YEAR);
+        int currentMonth = calendar.get(Calendar.MONTH) + 1;
+        DataStageReportDoc dataStageReportDoc;
+        List<DataStageReportDoc> dataStageReportDocs = dataStageReportDocService.findByQuery("from DataStageReportDoc where project_id = ? and doc_id = ? ", prjId, docId);
+        if (!dataStageReportDocs.isEmpty()) {
+            dataStageReportDoc = dataStageReportDocs.iterator().next();
+        } else {
+            dataStageReportDoc = new DataStageReportDoc();
+            DocDocument docDocument = documentManager.getDocDocument(docId);
+            dataStageReportDoc.setProject(projInfoService.get(prjId));
+            dataStageReportDoc.setDoc(docDocument);
+            documentManager.updateDocumentByBizData(docDocument, DataStageReportDoc.class.getSimpleName(), docDocument.getName());
+        }
+        dataStageReportDoc.setYear(currentYear);
+        dataStageReportDoc.setMonth(currentMonth);
+        dataStageReportDocService.save(dataStageReportDoc);
+        sendJSON(response, "操作成功！！！");
     }
 
     //整理项目包含标段

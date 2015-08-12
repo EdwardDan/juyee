@@ -1,5 +1,7 @@
 package com.justonetech.biz.domain.base;
 
+import com.justonetech.core.entity.Auditable;
+
 import java.io.Serializable;
 
 
@@ -21,7 +23,7 @@ import java.io.Serializable;
  *  table="DATA_STAGE_REPORT_DOC"
  */
 
-public abstract class BaseDataStageReportDoc  implements Serializable {
+public abstract class BaseDataStageReportDoc  implements Serializable, Auditable {
 
 	public static String REF = "DataStageReportDoc";
 	public static String PROP_YEAR = "year";
