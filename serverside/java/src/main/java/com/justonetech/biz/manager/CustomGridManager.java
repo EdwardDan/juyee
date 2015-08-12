@@ -54,7 +54,7 @@ public class CustomGridManager {
     private static final String LINK_URL = "<a href='#' class='index' onclick='viewCustomGridDetail(\"{0}\")'>{1}</a>"; //查看链接
     private static final String LINK_URL_XXFB = "<a href='#' class='index' onclick='viewCustomGridDetailXxfb(\"{0}\")'>{1}</a>"; //查看链接
 
-    private static final int NUM = 40;
+    private static final int NUM = 35;
 
     /**
      * 获取版块数据
