@@ -148,7 +148,7 @@ public class CustomGridManager {
     private void setGridData1(CustomGridData data) {
         data.setCols(new String[]{ "标题", "发布时间"});
         data.setAligns(new String[]{"left", "right"});
-        data.setWidths(new int[]{65, 20});
+        data.setWidths(new int[]{80, 15});
 
         List<Vector<Object>> ret = new ArrayList<Vector<Object>>();
         List<OaPublicInfo> list = oaPublicInfoService.findByQuery("from OaPublicInfo where type.code='" + Constants.OA_PUBLIC_INFO_TYPE_MEETING + "' order by id desc");
@@ -171,7 +171,7 @@ public class CustomGridManager {
     private void setGridData2(CustomGridData data) {
         data.setCols(new String[]{ "标题", "发布时间"});
         data.setAligns(new String[]{"left", "right"});
-        data.setWidths(new int[]{65, 20});
+        data.setWidths(new int[]{80, 15});
 
         List<Vector<Object>> ret = new ArrayList<Vector<Object>>();
         List<OaPublicInfo> list = oaPublicInfoService.findByQuery("from OaPublicInfo where type.code='" + Constants.OA_PUBLIC_INFO_TYPE_NOTICE + "' order by id desc");
@@ -194,7 +194,7 @@ public class CustomGridManager {
     private void setGridData3(CustomGridData data) {
         data.setCols(new String[]{ "标题", "发布时间"});
         data.setAligns(new String[]{"left", "right"});
-        data.setWidths(new int[]{65, 20});
+        data.setWidths(new int[]{80, 15});
 
         List<Vector<Object>> ret = new ArrayList<Vector<Object>>();
         List<OaPublicInfo> list = oaPublicInfoService.findByQuery("from OaPublicInfo where type.code='" + Constants.OA_PUBLIC_INFO_TYPE_RULE + "' order by id desc");
@@ -217,7 +217,7 @@ public class CustomGridManager {
     private void setGridData4(CustomGridData data) {
         data.setCols(new String[]{ "标题", "发布时间"});
         data.setAligns(new String[]{"left", "right"});
-        data.setWidths(new int[]{65, 20});
+        data.setWidths(new int[]{80, 15});
 
         List<Vector<Object>> ret = new ArrayList<Vector<Object>>();
         List<OaPublicInfo> list = oaPublicInfoService.findByQuery("from OaPublicInfo where type.code='" + Constants.OA_PUBLIC_INFO_TYPE_WORK + "' order by id desc");
