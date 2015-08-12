@@ -82,13 +82,13 @@
 
 <div class="form_div" align="center">
     <!-- tab按钮，选择按钮 begin -->
-    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="position: absolute;padding-right:20px;">
         <tr class="tr_title">
             <td width="60%" align="left">&nbsp;
-                <input type="button" class="button_normal_special" value="全部" onclick="changeDiv(this,1)">
                 <input type="button" id="defaultGrp" class="button_normal" value="科室" onclick="changeDiv(this,2)">
                 <input type="button" class="button_normal" value="组" onclick="changeDiv(this,3)">
-                <%--<input type="button" class="button_normal_long" value="外部用户" onclick="changeDiv(this,4)">--%>
+                <input type="button" class="button_normal_special" value="全部" onclick="changeDiv(this,1)">
+            <%--<input type="button" class="button_normal_long" value="外部用户" onclick="changeDiv(this,4)">--%>
             </td>
             <td width="40%" align="right">
                 <input type="button" class="button_confirm" value="确定" onclick="doSelectTab(this)">
@@ -96,8 +96,8 @@
             </td>
         </tr>
     </table>
+    <div style="height: 30px;"></div>
     <!-- tab按钮，选择按钮 end -->
-
     <!-- 系统用户 begin -->
     <div id="sel1" class="divTabSel1" title="user">
         <table width="100%" cellpadding="0" cellspacing="0" border="0">

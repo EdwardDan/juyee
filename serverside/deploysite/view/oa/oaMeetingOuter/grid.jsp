@@ -48,12 +48,12 @@
                         }
                         if (${canEdit_FG}) {
                             if (status == '${STATUS_SUBMIT}') {
-                                opButton += '<input type="button" value="分管领导审核" onclick="doEdit(' + id + ')" class="button_normal_longer"/> ';
+                                opButton += '<input type="button" value="分管领导审核" onclick="doAudit(' + id + ')" class="button_normal_longer"/> ';
                             }
                         }
                         if (${canEdit_ZR}) {
                             if (status == '${STATUS_BRANCH_PASS}') {
-                                opButton += '<input type="button" value="主要领导审核" onclick="doEdit(' + id + ')" class="button_normal_longer"/> ';
+                                opButton += '<input type="button" value="主要领导审核" onclick="doAudit(' + id + ')" class="button_normal_longer"/> ';
                             }
                         }
                         jQuery("#listGrid").jqGrid('setRowData', ids[i], { operation: opButton});
@@ -84,6 +84,9 @@
     }
     function doDelete(id) {
         doGridDelete("${ctx}/oaMeetingOuter/delete.do?id=" + id);
+    }
+    function doAudit(id) {
+        openWindow("审核外出会议", "${ctx}/oaMeetingOuter/audit.do?id=" + id, true);
     }
     function doThisQuery(btn) {
         var beginTime = "";

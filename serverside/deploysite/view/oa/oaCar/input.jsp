@@ -26,37 +26,24 @@
             return;
         }
 
-        //修改状态
-        if (t == '1') {
-            $("#status").val(1);
-        } else if (t == '2') {
-            $("#status").val(2);
-        } else if (t == '3') {
-            $("#status").val(3);
-        } else if (t == '4') {
-            $("#status").val(4);
-        } else if (t == '5') {
-            if (document.getElementById("isAgree").checked) {
-                if ($("#driverPersonName").val() == '') {
-                    showInfoMsg("请选择司机！")
-                    return;
-                }
-            }
-
-            if ($("#car").val() == '') {
-                showInfoMsg("请选择车辆！")
-                return;
-            }
-            $("#status").val(5);
-        } else if (t == '6') {
-            $("#status").val(6);
-        }
-
         $("#beginTime").val($("#useDate").val() + " " + $("#beginHour").val() + ":" + $("#beginMin").val() + ":00.0");
         $("#endTime").val($("#useDate").val() + " " + $("#endHour").val() + ":" + $("#endMin").val() + ":00.0");
 
-        //提交表单
-        saveAjaxData("${ctx}/oaCar/save.do", formId);
+        //修改状态
+        if (t == '${STATUS_EDIT}') {
+            $("#status").val('${STATUS_EDIT}');
+            saveAjaxData("${ctx}/oaCar/save.do", formId);
+        } else if (t == '${STATUS_SUBMIT}') {
+            $("#status").val('${STATUS_SUBMIT}');
+            //提交表单
+            $.messager.confirm('系统提示', "确定提交吗？提交后将不能修改！", function (r) {
+                if (r) {
+                    //提交表单
+                    saveAjaxData("${ctx}/oaCar/save.do", formId);
+                }
+            });
+        }
+
     }
 
     function showDriver() {
@@ -139,78 +126,12 @@
                 </tr>
             </table>
         </fieldset>
-        <c:if test="${bean.status=='2'|| bean.status=='3'||bean.status=='5'}">
-            <fieldset class="form_fieldset">
-                <legend class="form_legend">
-                    科长审核
-                </legend>
-                <table cellpadding="0" cellspacing="0" class="form_table">
-                    <tr class="tr_dark">
-                        <td class="form_label_right" width="15%">科长审核意见：</td>
-                        <td class="form_content" colspan="3">
-                            <form:textarea path="kzAuditOpinion" cssClass="input_textarea_long"/>
-                        </td>
-                    </tr>
-                </table>
-            </fieldset>
-        </c:if>
-
-        <c:if test="${bean.status=='3'||bean.status=='5'}">
-            <fieldset class="form_fieldset">
-                <legend class="form_legend">
-                    办公室主任审核
-                </legend>
-                <table cellpadding="0" cellspacing="0" class="form_table">
-                    <tr class="tr_light">
-                        <td class="form_label_right" width="15%">办公室主任审核意见：</td>
-                        <td class="form_content" colspan="3">
-                            <form:textarea path="zrAuditOpinion" cssClass="input_textarea_long"/>
-                        </td>
-                    </tr>
-                    <tr class="tr_dark">
-                        <td class="form_label_right" width="15%">拟派车辆：</td>
-                        <td class="form_content" colspan="3">
-                            <select id="car" name="car" class="input_text">
-                                <option value="" selected></option>
-                                <c:forEach var="carIn" items="${carList}">
-                                    <option value="${carIn.id}" <c:if
-                                            test="${bean.car.id==carIn.id}">selected </c:if>>${carIn.name}</option>
-                                </c:forEach>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr class="tr_light">
-                        <td class="form_content" colspan="4">
-                            <input type="checkbox" id="isAgree" name="isAgree"
-                                   <c:if test="${not empty bean.driverPerson}">checked </c:if> onchange="showDriver()">是否拟派司机
-                        </td>
-                    </tr>
-                    <tr id="agreeDriver" class="tr_dark"
-                        <c:if test="${empty bean.driverPerson}">style="display: none"</c:if>>
-                        <td class="form_label_right" width="15%">司机：</td>
-                        <td class="form_content" width="35%">
-                            <input type="text" name="driverPersonName" id="driverPersonName" class="input_text"
-                                   value="${bean.driverPerson.name}"
-                                   readonly="true"/>
-                            <input type="hidden" name="driverPersonId" id="driverPersonId"
-                                   value="${bean.driverPerson.id}"/>
-                            <input type="button" value=" " class="button_select"
-                                   onclick="selectSysPersonDriver('driverPersonId','driverPersonName')" title="点击选择驾驶员">
-                        </td>
-                        <td class="form_label_right" width="15%">电话：</td>
-                        <td class="form_content" width="35%">
-                            <form:input path="driverMobile" cssClass="input_text"/>
-                        </td>
-                    </tr>
-                </table>
-            </fieldset>
-        </c:if>
         <table cellpadding="0" cellspacing="0" class="form_table">
             <tr class="tr_button">
                 <td style="text-align: center" colspan="4">
-                    <c:if test="${bean.status==1|| empty bean.status || bean.status==4 || bean.status==6}">
-                        <input type="button" value="提交" class="button_confirm" onclick="save('2',this)">&nbsp;
-                        <input type="button" value="暂存" class="button_confirm" onclick="save('1',this)">&nbsp;
+                    <c:if test="${bean.status==STATUS_EDIT|| empty bean.status || bean.status==STATUS_BRANCH_BACK || bean.status==STATUS_MAIN_BACK}">
+                        <input type="button" value="提交" class="button_confirm" onclick="save('${STATUS_SUBMIT}',this)">&nbsp;
+                        <input type="button" value="暂存" class="button_confirm" onclick="save('${STATUS_EDIT}',this)">&nbsp;
                     </c:if>
                     <input type="button" value="取消" class="button_cancel" onclick="closeWindow()">
                 </td>
