@@ -121,7 +121,6 @@ public class ProjInfo extends BaseProjInfo {
      */
     public DocDocument getDoc() {
         Set<DataStageReportDoc> dataStageReportDocs = getDataStageReportDocs();
-        System.out.println("dataStageReportDocs     ************  " + (dataStageReportDocs == null));
         if (dataStageReportDocs != null && !dataStageReportDocs.isEmpty()) {
             return dataStageReportDocs.iterator().next().getDoc();
         } else {
@@ -130,7 +129,7 @@ public class ProjInfo extends BaseProjInfo {
     }
 
     /**
-    * 获取项目问题附件Id(适用于文档上载)
+     * 获取项目问题附件Id(适用于文档下载格式化)
      * @return
      */
     public Long getDocId() {
