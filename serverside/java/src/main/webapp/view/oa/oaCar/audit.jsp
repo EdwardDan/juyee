@@ -126,7 +126,7 @@
                 </tr>
             </table>
         </fieldset>
-        <c:if test="${canZrAudit}">
+        <c:if test="${canKzAudit||canZrAudit}">
             <fieldset class="form_fieldset">
                 <legend class="form_legend">
                     科长审核
@@ -135,24 +135,16 @@
                     <tr class="tr_dark">
                         <td class="form_label_right" width="15%">科长审核意见：</td>
                         <td class="form_content" colspan="3">
-                            <c:if test="${bean.status==STATUS_BRANCH_PASS||bean.status==STATUS_MAIN_PASS}">
-                                <sys:toHtml> ${bean.kzAuditOpinion}</sys:toHtml>
+                            <c:if test="${canZrAudit}">
+                                <c:if test="${bean.status==STATUS_BRANCH_PASS||bean.status==STATUS_MAIN_PASS}">
+                                    <sys:toHtml> ${bean.kzAuditOpinion}</sys:toHtml>
+                                </c:if>
                             </c:if>
-                        </td>
-                    </tr>
-                </table>
-            </fieldset>
-        </c:if>
-        <c:if test="${canKzAudit}">
-            <fieldset class="form_fieldset">
-                <legend class="form_legend">
-                    科长审核
-                </legend>
-                <table cellpadding="0" cellspacing="0" class="form_table">
-                    <tr class="tr_dark">
-                        <td class="form_label_right" width="15%">科长审核意见：</td>
-                        <td class="form_content" colspan="3">
-                            <form:textarea path="kzAuditOpinion" cssClass="input_textarea_long"/>
+                            <c:if test="${canKzAudit}">
+                                <c:if test="${bean.status==STATUS_SUBMIT}">
+                                    <form:textarea path="kzAuditOpinion" cssClass="input_textarea_long"/>
+                                </c:if>
+                            </c:if>
                         </td>
                     </tr>
                 </table>
@@ -213,13 +205,17 @@
             <tr class="tr_button">
                 <td style="text-align: center" colspan="4">
                     <c:if test="${bean.status==STATUS_BRANCH_PASS ||bean.status==STATUS_MAIN_PASS}">
-                        <input type="button" value="审核通过" class="button_normal_long" onclick="save('${STATUS_MAIN_PASS}',this)">&nbsp;
-                        <input type="button" value="退回修改" class="button_normal_long" onclick="save('${STATUS_MAIN_BACK}',this)">&nbsp;
+                        <input type="button" value="审核通过" class="button_normal_long"
+                               onclick="save('${STATUS_MAIN_PASS}',this)">&nbsp;
+                        <input type="button" value="退回修改" class="button_normal_long"
+                               onclick="save('${STATUS_MAIN_BACK}',this)">&nbsp;
                     </c:if>
 
                     <c:if test="${bean.status==STATUS_SUBMIT}">
-                        <input type="button" value="审核通过" class="button_normal_long" onclick="save('${STATUS_BRANCH_PASS}',this)">&nbsp;
-                        <input type="button" value="退回修改" class="button_normal_long" onclick="save('${STATUS_BRANCH_BACK}',this)">&nbsp;
+                        <input type="button" value="审核通过" class="button_normal_long"
+                               onclick="save('${STATUS_BRANCH_PASS}',this)">&nbsp;
+                        <input type="button" value="退回修改" class="button_normal_long"
+                               onclick="save('${STATUS_BRANCH_BACK}',this)">&nbsp;
                     </c:if>
                     <input type="button" value="取消" class="button_cancel" onclick="closeWindow()">
                 </td>

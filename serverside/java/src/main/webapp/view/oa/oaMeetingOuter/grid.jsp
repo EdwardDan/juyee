@@ -127,7 +127,7 @@
             结束日期：<input type="text" name="end" id="end" value="" class="input_date"
                         onClick="calendar('end','end');"/>
             状态：
-            <select name="status" id="status" class="form_select_long" style="width:150px; ">
+            <select name="status" id="status" class="form_select_long" style="width:120px; ">
                 <option value="" selected>全部</option>
                 ${statusList}
             </select>

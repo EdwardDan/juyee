@@ -100,30 +100,20 @@
                 </tr>
             </table>
         </fieldset>
-        <c:if test="${canEdit_FG}">
-            <fieldset class="form_fieldset">
-                <legend class="form_legend">分管领导审核</legend>
-                <table cellpadding="0" cellspacing="0" class="form_table">
-                    <tr class="tr_light">
-                        <c:if test="${bean.status == STATUS_SUBMIT}">
-                            <td class="form_label_right" style="width: 15%;" nowrap>分管领导审核意见：</td>
-                            <td class="form_content" style="width: 85%;">
-                                <form:textarea path="fgAuditOpinion" cssClass="input_textarea_long"/>
-                            </td>
-                        </c:if>
-                    </tr>
-                </table>
-            </fieldset>
-        </c:if>
-        <c:if test="${canEdit_ZR}">
+        <c:if test="${canEdit_ZR||canEdit_FG}">
             <fieldset class="form_fieldset">
                 <legend class="form_legend">分管领导审核</legend>
                 <table cellpadding="0" cellspacing="0" class="form_table">
                     <tr class="tr_light">
                         <td class="form_label_right" style="width: 15%;" nowrap>分管领导审核意见：</td>
                         <td class="form_content">
-                            <form:hidden path="fgAuditOpinion"/>
-                            <sys:toHtml> ${bean.fgAuditOpinion}</sys:toHtml>
+                            <c:if test="${bean.status == STATUS_SUBMIT}">
+                                <form:textarea path="fgAuditOpinion" cssClass="input_textarea_long"/>
+                            </c:if>
+                            <c:if test="${bean.status==STATUS_BRANCH_PASS||bean.status==STATUS_MAIN_PASS}">
+                                <form:hidden path="fgAuditOpinion"/>
+                                <sys:toHtml> ${bean.fgAuditOpinion}</sys:toHtml>
+                            </c:if>
                         </td>
                     </tr>
                 </table>
