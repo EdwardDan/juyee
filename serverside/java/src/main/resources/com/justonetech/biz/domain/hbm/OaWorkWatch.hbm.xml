@@ -246,7 +246,7 @@
 
 	
 
-		<set name="oaWorkWatchItems" inverse="true">
+		<set name="oaWorkWatchItems" inverse="true" order-by="ORDER_NO asc">
 			<key column="WORK_WATCH_ID"/>
 			<one-to-many class="OaWorkWatchItem"/>
 		</set>

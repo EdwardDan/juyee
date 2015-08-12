@@ -55,14 +55,15 @@
                                 buttonName = "核实";
                             }
                         }
-                        if ('' == status || status == '${STATUS_EDIT}' ) {
-                            if (${canEdit}) {
-                                opButton += '<input type="button" value="删除" onclick="doDelete(' + id + ')" class="button_normal"/>';
-                            }
-                        }
                         if (buttonName != '') {
                             opButton += '<input type="button" value="' + buttonName + '" onclick="doEdit(' + id + ')" class="button_normal"/> ';
                         }
+                        if ('' == status || status == '${STATUS_EDIT}' ) {
+                            if (${canEdit}) {
+                                opButton += '<input type="button" value="删除" onclick="doDelete(' + id + ')" class="button_normal"/> ';
+                            }
+                        }
+
                         jQuery("#listGrid").jqGrid('setRowData', ids[i], { operation: opButton});
                     }
                 }, rownumbers: true

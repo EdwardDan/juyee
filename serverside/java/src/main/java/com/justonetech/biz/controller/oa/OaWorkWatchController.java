@@ -124,8 +124,6 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
     }
 
     public void setStatus(Model model) {
-//        List<SysDept> sysDepts = sysDeptService.findByQuery("from SysDept where parent.id is not null and parent.code=? order by orderNo asc,id asc", Constants.SYS_DEPT_OWNER);
-//        model.addAttribute("sysDepts", sysDepts);
 
         //判断是否有编辑权限
         model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.OA_WORK_WATCH_EDIT));
@@ -294,7 +292,12 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
      */
     @RequestMapping
     public void delete(HttpServletResponse response, Long id) throws Exception {
-        oaWorkWatchService.delete(id);
+        OaWorkWatch oaWorkWatch = oaWorkWatchService.get(id);
+        Set<OaWorkWatchItem> oaWorkWatchItems = oaWorkWatch.getOaWorkWatchItems();
+        for (OaWorkWatchItem oaWorkWatchItem : oaWorkWatchItems) {
+            oaWorkWatchItemService.delete(oaWorkWatchItem);
+        }
+        oaWorkWatchService.delete(oaWorkWatch);
 
         sendSuccessJSON(response, "删除成功");
     }

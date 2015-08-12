@@ -12,9 +12,9 @@
         var stand = $("#standTr").html()
         var len = $("#itemTable").find("tr").length;
         if (len % 2 == 0) {
-            stand = "<tr class='tr_dark'>" + stand + "</tr>";
+            stand = "<tr>" + stand + "</tr>";
         } else {
-            stand = "<tr class='tr_light'>" + stand + "</tr>";
+            stand = "<tr>" + stand + "</tr>";
         }
         $("#itemTable").find("tr:last").after(stand);
     }
@@ -57,81 +57,54 @@
     <div class="form_div">
         <table cellpadding="0" cellspacing="0" class="form_table">
             <tr class="tr_light">
-                <td class="form_label_right">上报科室：</td>
+                <td class="form_label_right">督办科室：</td>
                 <td class="form_content">
                     <form:input path="reportDept" cssClass="input_text"/>
+                    <input type="button" value=" " class="button_select"
+                           onclick="selectSysDept('','reportDept');" title="点击选择科室">
                 </td>
                 <td class="form_label_right">科室分管领导：</td>
                 <td class="form_content">
                     <form:input path="reportPerson" cssClass="input_text"/>
-                </td>
-            </tr>
-
-            <tr class="tr_dark">
-                <td class="form_label_right">上报开始时间：</td>
-                <td class="form_content" colspan="3">
-                    <form:input path="beginDate" cssClass="input_date"/>
-                    <input type="button" class="button_calendar" value=" " onClick="calendar('beginDate','date')">
-                    ~
-                    <form:input path="endDate" cssClass="input_date"/>
-                    <input type="button" class="button_calendar" value=" " onClick="calendar('endDate','date')">
+                    <input type="button" value=" " class="button_select"
+                           onclick="selectSysPerson('','reportPerson');" title="点击选择人员">
                 </td>
             </tr>
         </table>
-
-        <table cellpadding="0" cellspacing="0" class="form_table" style="text-align: center" id="itemTable">
-            <tr class="tr_light">
-                <td class="form_border" style="width: 25px">
+        <table cellpadding="0" cellspacing="0" border="1" class="table_thin_line" style="text-align: center;width: 98%;"
+               id="itemTable">
+            <tr class="tr_header">
+                <td style="width:5%;">
                     <input type='button' value='新增' class='button_select_add' onclick='addLine(this)'>
                 </td>
-                <td class="form_border" style="width: 35px">
-                    序号
-                </td>
-                <td class="form_border">
-                    工作内容
-                </td>
-                <td class="form_border">
-                    时间节点
-                </td>
-
-                <td class="form_border">
-                    上报形式
-                </td>
-
-                <td class="form_border">
-                    完成情况
-                </td>
-
-                <td class="form_border">
-                    审核情况
-                </td>
+                <td style="width: 5%;">序号</td>
+                <td style="width: 25%;">工作内容</td>
+                <td style="width: 8%;">时间节点</td>
+                <td style="width: 8%;">上报形式</td>
+                <td style="width: 20%;;">完成情况</td>
+                <td style="width: 10%;">审核情况</td>
             </tr>
             <c:forEach items="${bean.oaWorkWatchItems}" var="item">
                 <tr class="tr_light">
-                    <td class="form_border" style="width: 25px">
+                    <td style="width: 25px">
                         <input type='button' value='删除' class='button_select_remove' onclick='deleteLine(this)'>
                     </td>
-                    <td class="form_border">
-                        <input type="text" class="input_text" name="orderNo" value="${item.orderNo}"
-                               style="width: 35px"/>
+                    <td>
+                        <input type="text" name="orderNo" style="width: 96%;" class="input_text" value="${item.orderNo}"/>
                     </td>
-                    <td class="form_border">
-                        <input type="text" class="input_text" name="content" value="${item.content}"/>
+                    <td>
+                        <textarea name="content" class="input_textarea" style="width: 96%;height: 50px;">${item.content}</textarea>
                     </td>
-                    <td class="form_border">
-                        <input type="text" class="input_text" name="timeNode" value="${item.timeNode}"/>
+                    <td>
+                        <input type="text" name="timeNode" class="input_text" style="width: 96%;" value="${item.timeNode}"/>
                     </td>
-
-                    <td class="form_border">
-                        <input type="text" class="input_text" name="reportMethod" value="${item.reportMethod}"/>
+                    <td>
+                        <input type="text" name="reportMethod" class="input_text" style="width: 96%;" value="${item.reportMethod}"/>
                     </td>
-
-                    <td class="form_border">
-                        <input type="text" class="input_text" name="completeDesc" readonly='true'
-                               value="${item.completeDesc}"/>
+                    <td>
+                        <textarea name="completeDesc" class="input_textarea" style="width: 96%;height: 50px;">${item.completeDesc}</textarea>
                     </td>
-
-                    <td class="form_border">
+                    <td>
                         <select name="actualDesc" disabled>
                             <option value=""></option>
                             <option value="属实" <c:if test="${item.actualDesc =='属实'}"> selected </c:if> >属实</option>
@@ -139,37 +112,29 @@
                                     <c:if test="${item.actualDesc =='不属实'}">selected </c:if> >不属实
                             </option>
                         </select>
-                            <%--<input type="text" class="input_text" name="actualDesc" readonly='true'--%>
-                            <%--value="${item.actualDesc}"/>--%>
                     </td>
                 </tr>
             </c:forEach>
-        </table>
-
-        <table cellpadding="0" cellspacing="0" class="form_table" style="text-align: center">
             <tr id="standTr" style="display: none">
-                <td class="form_border" style="width: 25px">
+                <td style="width: 25px">
                     <input type='button' value='删除' class='button_select_remove' onclick='deleteLine(this)'>
                 </td>
-                <td class="form_border">
-                    <input type="text" name="orderNo" style="width: 35px" class="input_text"/>
+                <td>
+                    <input type="text" name="orderNo" style="width: 96%;" class="input_text"/>
                 </td>
-                <td class="form_border">
-                    <input type="text" name="content" class="input_text"/>
+                <td>
+                    <textarea name="content" class="input_textarea" style="width: 96%;height: 50px;"></textarea>
                 </td>
-                <td class="form_border">
-                    <input type="text" name="timeNode" class="input_text"/>
+                <td>
+                    <input type="text" name="timeNode" class="input_text" style="width: 96%;"/>
                 </td>
-
-                <td class="form_border">
-                    <input type="text" name="reportMethod" class="input_text"/>
+                <td>
+                    <input type="text" name="reportMethod" class="input_text" style="width: 96%;"/>
                 </td>
-
-                <td class="form_border">
-                    <input type="text" name="completeDesc" readonly='true' class="input_text"/>
+                <td>
+                    <textarea name="completeDesc" class="input_textarea" style="width: 96%;height: 50px;"></textarea>
                 </td>
-
-                <td class="form_border">
+                <td>
                     <select name="actualDesc" disabled>
                         <option value="属实" <c:if test="${item.actualDesc =='属实'}"> selected </c:if> >属实</option>
                         <option value="不属实"

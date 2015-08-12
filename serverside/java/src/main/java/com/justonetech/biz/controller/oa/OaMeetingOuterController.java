@@ -97,18 +97,18 @@ public class OaMeetingOuterController extends BaseCRUDActionController<OaMeeting
     @RequestMapping
     public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session, String queryJson) {
         try {
-            String beginTime = StringHelper.getElementValue(queryJson, "beginTime");
-            String endTime = StringHelper.getElementValue(queryJson, "endTime");
+//            String beginTime = StringHelper.getElementValue(queryJson, "beginTime");
+//            String endTime = StringHelper.getElementValue(queryJson, "endTime");
             String status = StringHelper.getElementValue(queryJson, "status");
             Page pageModel = new Page(page, rows, true);
             String hql = "from OaMeetingOuter where 1=1 ";
             //增加自定义查询条件
-            if (!StringHelper.isEmpty(beginTime)) {
-                hql += " and to_char(beginTime,'yyyy-MM-dd')>='" + beginTime + "'";
-            }
-            if (!StringHelper.isEmpty(endTime)) {
-                hql += " and to_char(endTime,'yyyy-MM-dd')<='" + endTime + "'";
-            }
+//            if (!StringHelper.isEmpty(beginTime)) {
+//                hql += " and to_char(beginTime,'yyyy-MM-dd')>='" + beginTime + "'";
+//            }
+//            if (!StringHelper.isEmpty(endTime)) {
+//                hql += " and to_char(endTime,'yyyy-MM-dd')<='" + endTime + "'";
+//            }
 
             if (!StringHelper.isEmpty(status)) {
                 hql += " and status ='" + status + "'";
