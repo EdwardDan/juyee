@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/common/taglibs.jsp" %>
 <style type="text/css">
-    .addTd{
+    .addTd {
         border: 1px solid;
     }
 </style>
@@ -14,20 +14,23 @@
             </legend>
             <table cellpadding="0" cellspacing="0" class="form_table">
                 <tr class="tr_light">
-                    <td class="form_border" align="center" colspan="3">上报科室：${bean.reportDept}
-                    </td>
-                    <td class="form_border" align="center" colspan="3">上报人：${bean.reportPerson}
-                    </td>
+                    <td class="form_label_right">上报科室：</td>
+                    <td class="form_content">${bean.reportDept}</td>
+                    <td class="form_label_right">上报人：</td>
+                    <td class="form_content">${bean.reportPerson}</td>
                 </tr>
                 <tr class="tr_light">
-                    <td class="form_border" align="left" colspan="6">上报时间：${bean.beginDate} ~${bean.endDate}
+                    <td class="form_label_right" style="width: 150px">上报时间：</td>
+                    <td class="form_content" colspan="3">${bean.beginDate} ~${bean.endDate}
                     </td>
                 </tr>
+            </table>
+            <table cellpadding="0" cellspacing="0" class="form_table">
                 <tr class="tr_header">
                     <td class="addTd" width="5%">序号</td>
                     <td class="addTd" width="10%">责任人</td>
-                    <td class="addTd" width="25%">重点工作</td>
-                    <td class="addTd" width="25%">工作内容</td>
+                    <td class="addTd" width="10%">是否重点工作</td>
+                    <td class="addTd" width="40%">工作内容</td>
                     <td class="addTd" width="20%">工作进度</td>
                     <td class="addTd" width="10%">经办人</td>
                     <c:if test="${empty oaWorkPlanItems !=null}">

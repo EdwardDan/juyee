@@ -14,7 +14,7 @@
     });
 
     //保存操作
-    function save(btn,status) {
+    function save(btn, status) {
         if (!validateForm(formId)) {
             return;
         }
@@ -63,7 +63,7 @@
                     saveAjaxData("${ctx}/oaWorkPlan/save.do", formId);
                 }
             });
-        }else if (status == '${STATUS_MAIN_PASS}') {
+        } else if (status == '${STATUS_MAIN_PASS}') {
             $("#status").val(status);
             $.messager.confirm('系统提示', "确定审核通过吗？通过后将不能修改", function (r) {
                 if (r) {
@@ -71,7 +71,7 @@
                     saveAjaxData("${ctx}/oaWorkPlan/save.do", formId);
                 }
             });
-        }else if (status == '${STATUS_MAIN_BACK}') {
+        } else if (status == '${STATUS_MAIN_BACK}') {
             $("#status").val(status);
             $.messager.confirm('系统提示', "确定退回吗？", function (r) {
                 if (r) {
@@ -79,7 +79,7 @@
                     saveAjaxData("${ctx}/oaWorkPlan/save.do", formId);
                 }
             });
-        }else{
+        } else {
             $("#status").val(status);
             //提交表单
             saveAjaxData("${ctx}/oaWorkPlan/save.do", formId);
@@ -98,39 +98,34 @@
     }
 </script>
 <style type="text/css">
-    .addTd{
+    .addTd {
         border: 1px solid;
+        height: 50px;
     }
 </style>
 <form:form commandName="bean">
     <form:hidden path="id"/>
     <form:hidden path="status"/>
-    <form:hidden path="reportDept"/>
-    <form:hidden path="reportPerson"/>
     <div class="form_div">
         <fieldset class="form_fieldset">
             <legend class="form_legend">
                 一周工作安排
             </legend>
             <table cellpadding="0" cellspacing="0" class="form_table">
-                <tr class="tr_light">
-                    <td class="form_border" align="center" colspan="3">上报科室：${bean.reportDept}
-                        <%--<input type="text" name="reportDept" id="reportDept" class="input_text"--%>
-                               <%--value="${bean.reportDept}" readonly="true"/>--%>
-                        <%--<input type="hidden" name="applyDeptId" id="applyDeptId" value=""/>--%>
-                        <%--<input type="button" value=" " class="button_select"--%>
-                               <%--onclick="selectSysDept('applyDeptId','reportDept')" title="点击选择上报科室">--%>
+                <tr class="tr_dark">
+                    <td class="form_label_right">上报科室：</td>
+                    <td class="form_content">
+                        <form:input path="reportDept" cssClass="input_text" readonly="true"/>
                     </td>
-                    <td class="form_border" align="center" colspan="4">上报人：${bean.reportPerson}
-                        <%--<input type="text" name="reportPerson" id="reportPerson" class="input_text"--%>
-                               <%--value="${bean.reportPerson}" readonly="true"/>--%>
-                        <%--<input type="hidden" name="applyPersonId" id="applyPersonId" value="${applyPersonId}"/>--%>
-                        <%--<input type="button" value=" " class="button_select"--%>
-                               <%--onclick="selectSysUser('applyPersonId','reportPerson');" title="点击上报人">--%>
+
+                    <td class="form_label_right">上报人：</td>
+                    <td class="form_content">
+                        <form:input path="reportPerson" cssClass="input_text" readonly="true"/>
                     </td>
                 </tr>
                 <tr class="tr_light">
-                    <td class="form_border" align="left" colspan="7">上报时间：
+                    <td class="form_label_right" style="width: 150px">上报时间：</td>
+                    <td class="form_content" colspan="3">
                         <input type="text" name="beginDate" id="beginDate" class="input_date"
                                value="<fmt:formatDate value="${bean.beginDate}" pattern="yyyy-MM-dd"/>"
                                readonly="true"/>
@@ -143,11 +138,13 @@
                         <input type="button" class="button_calendar" value=" " onClick="calendar('endDate','endDate')">
                     </td>
                 </tr>
+            </table>
+            <table cellpadding="0" cellspacing="0" class="form_table">
                 <tr class="tr_header">
                     <td class="addTd" width="5%">序号</td>
                     <td class="addTd" width="10%">责任人</td>
-                    <td class="addTd" width="25%">重点工作</td>
-                    <td class="addTd" width="25%">工作内容</td>
+                    <td class="addTd" width="10%">是否重点工作</td>
+                    <td class="addTd" width="40%">工作内容</td>
                     <td class="addTd" width="20%">工作进度</td>
                     <td class="addTd" width="10%">经办人</td>
                     <td class="addTd" width="5%" nowrap>
@@ -156,42 +153,43 @@
                 </tr>
 
                 <c:if test="${empty oaWorkPlanItems !=null}">
-                <c:forEach items="${oaWorkPlanItems}" var="item">
-                <tr class="tr_dark">
-                    <td class="addTd">
-                        <input type="text" name="orderNo" class="input_text" style="width: 95%"
-                               value="${item.orderNo}"
-                               title="${item.orderNo}">
-                    </td>
+                    <c:forEach items="${oaWorkPlanItems}" var="item">
+                        <tr class="tr_dark">
+                            <td class="addTd">
+                                <input type="text" name="orderNo" class="input_text"
+                                       style="width: 95%;text-align: center"
+                                       value="${item.orderNo}"
+                                       title="${item.orderNo}">
+                            </td>
 
-                    <td class="addTd">
-                        <input type="text" name="dutyPerosn" class="input_text" style="width: 95%"
-                               value="${item.dutyPerosn}"
-                               title="${item.dutyPerosn}">
-                    </td>
+                            <td class="addTd">
+                                <input type="text" name="dutyPerosn" class="input_text" style="width: 95%"
+                                       value="${item.dutyPerosn}"
+                                       title="${item.dutyPerosn}">
+                            </td>
 
-                    <td class="addTd">
-                        <input type="text" name="keyWork" class="input_text" style="width: 95%" value="${item.keyWork}"
-                               title="${item.keyWork}">
-                    </td>
-                    <td class="addTd">
-                        <input type="textarea" name="content" class="input_textarea" style="width: 95%" value="${item.content}"
-                               title="${item.content}">
-                    </td>
-                    <td class="addTd">
-                        <input type="textarea" name="schedule" class="input_textarea" style="width: 95%"
-                               value="${item.schedule}"
-                               title="${item.schedule}">
-                    </td>
-                    <td class="addTd">
-                        <input type="text" name="jbr" class="input_text" style="width: 95%" value="${item.jbr}"
-                               title="${item.jbr}">
-                    </td>
-                    <td class="addTd"><input type="button" value="删除" class="button_select_remove"
-                                             onclick="addLine(this)"/>
-                    </td>
-                </tr>
-                </c:forEach>
+                            <td class="addTd">
+                                <input type="text" name="keyWork" class="input_text" style="width: 95%"
+                                       value="${item.keyWork}"
+                                       title="${item.keyWork}">
+                            </td>
+                            <td class="addTd">
+                                <textarea name="content" class="input_text"
+                                          style="height:100%;width: 100%">${item.content}</textarea>
+                            </td>
+                            <td class="addTd">
+                                <textarea name="schedule" class="input_text"
+                                          style="height:100%;width: 95%">${item.schedule}</textarea>
+                            </td>
+                            <td class="addTd">
+                                <input type="text" name="jbr" class="input_text" style="width: 95%" value="${item.jbr}"
+                                       title="${item.jbr}">
+                            </td>
+                            <td class="addTd"><input type="button" value="删除" class="button_select_remove"
+                                                     onclick="addLine(this)"/>
+                            </td>
+                        </tr>
+                    </c:forEach>
                 </c:if>
                 <tbody id="tableWorkPlanItemDiv"></tbody>
                     <%--标准行迁入--%>
@@ -266,22 +264,22 @@
     <tbody id="hiddenStyle">
     <tr class="tr_dark"><%--标准行--%>
         <td class="addTd">
-            <input type="text" name="orderNo" class="input_text" style="width: 95%"/>
+            <input type="text" name="orderNo" class="input_text" style="width: 95%;text-align: center"/>
         </td>
         <td class="addTd">
             <input type="text" name="dutyPerosn" class="input_text" style="width: 95%"/>
         </td>
         <td class="addTd">
-            <input type="text"  name="keyWork" class="input_text" style="width: 95%"/>
+            <input type="text" name="keyWork" class="input_text" style="width: 95%"/>
         </td>
         <td class="addTd">
-            <textarea  name="content" class="input_textarea" style="width: 95%"></textarea>
+            <textarea name="content" class="input_text" style="height:100%;width: 100%"></textarea>
         </td>
         <td class="addTd">
-            <textarea name="schedule" class="input_textarea" style="width: 95%"></textarea>
+            <textarea name="schedule" class="input_text" style="height:100%;width: 95%"></textarea>
         </td>
         <td class="addTd">
-            <input type="text" name="jbr" class="input_text" style="width: 95%" />
+            <input type="text" name="jbr" class="input_text" style="width: 95%"/>
         </td>
         <td class="addTd"><input type="button" value="删除" class="button_select_remove"
                                  onclick="addLine(this)"/></td>
