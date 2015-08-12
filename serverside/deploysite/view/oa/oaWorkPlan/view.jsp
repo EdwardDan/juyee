@@ -1,105 +1,99 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/common/taglibs.jsp" %>
-<div class="form_div">
-    <table cellpadding="0" cellspacing="0" class="form_table">
-                        <tr class="tr_light">
-          <td class="form_label">上报科室：</td>
-          <td class="form_content">&nbsp;
-                      ${bean.reportDept}                    </td>
-        </tr>
-                                <tr class="tr_dark">
-          <td class="form_label">上报人用户名：</td>
-          <td class="form_content">&nbsp;
-                      ${bean.reportUser}                    </td>
-        </tr>
-                        <tr class="tr_light">
-          <td class="form_label">上报人姓名：</td>
-          <td class="form_content">&nbsp;
-                      ${bean.reportPerson}                    </td>
-        </tr>
-                                <tr class="tr_dark">
-          <td class="form_label">上报开始时间：</td>
-          <td class="form_content">&nbsp;
-                      ${bean.beginDate}                    </td>
-        </tr>
-                        <tr class="tr_light">
-          <td class="form_label">上报结束时间：</td>
-          <td class="form_content">&nbsp;
-                      ${bean.endDate}                    </td>
-        </tr>
-                                <tr class="tr_dark">
-          <td class="form_label">附件ID(预留)：</td>
-          <td class="form_content">&nbsp;
-                      ${bean.documentId}                    </td>
-        </tr>
-                        <tr class="tr_light">
-          <td class="form_label">状态：</td>
-          <td class="form_content">&nbsp;
-                      ${bean.status}                    </td>
-        </tr>
-                                <tr class="tr_dark">
-          <td class="form_label">科长审核意见：</td>
-          <td class="form_content">&nbsp;
-                      ${bean.kzOpinion}                    </td>
-        </tr>
-                        <tr class="tr_light">
-          <td class="form_label">科长审核时间：</td>
-          <td class="form_content">&nbsp;
-                      <fmt:formatDate value="${bean.kzAuditTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
-            
+<style type="text/css">
+    .addTd{
+        border: 1px solid;
+    }
+</style>
+<form:form commandName="bean">
+    <form:hidden path="id"/>
+    <div class="form_div">
+        <fieldset class="form_fieldset">
+            <legend class="form_legend">
+                一周工作安排
+            </legend>
+            <table cellpadding="0" cellspacing="0" class="form_table">
+                <tr class="tr_light">
+                    <td class="form_border" align="center" colspan="3">上报科室：${bean.reportDept}
                     </td>
-        </tr>
-                                <tr class="tr_dark">
-          <td class="form_label">科长审核用户名：</td>
-          <td class="form_content">&nbsp;
-                      ${bean.kzAuditUser}                    </td>
-        </tr>
-                        <tr class="tr_light">
-          <td class="form_label">分管领导审核意见：</td>
-          <td class="form_content">&nbsp;
-                      ${bean.fgOpinion}                    </td>
-        </tr>
-                                <tr class="tr_dark">
-          <td class="form_label">分管领导审核时间：</td>
-          <td class="form_content">&nbsp;
-                      <fmt:formatDate value="${bean.fgAuditTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
-            
+                    <td class="form_border" align="center" colspan="3">上报人：${bean.reportPerson}
                     </td>
-        </tr>
-                        <tr class="tr_light">
-          <td class="form_label">分管领导审核用户名：</td>
-          <td class="form_content">&nbsp;
-                      ${bean.fgAuditUser}                    </td>
-        </tr>
-                                <tr class="tr_dark">
-          <td class="form_label">创建时间：</td>
-          <td class="form_content">&nbsp;
-                      <fmt:formatDate value="${bean.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
-            
+                </tr>
+                <tr class="tr_light">
+                    <td class="form_border" align="left" colspan="6">上报时间：${bean.beginDate} ~${bean.endDate}
                     </td>
-        </tr>
-                        <tr class="tr_light">
-          <td class="form_label">创建用户名：</td>
-          <td class="form_content">&nbsp;
-                      ${bean.createUser}                    </td>
-        </tr>
-                                <tr class="tr_dark">
-          <td class="form_label">更新时间：</td>
-          <td class="form_content">&nbsp;
-                      <fmt:formatDate value="${bean.updateTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
-            
+                </tr>
+                <tr class="tr_header">
+                    <td class="addTd" width="5%">序号</td>
+                    <td class="addTd" width="10%">责任人</td>
+                    <td class="addTd" width="25%">重点工作</td>
+                    <td class="addTd" width="25%">工作内容</td>
+                    <td class="addTd" width="20%">工作进度</td>
+                    <td class="addTd" width="10%">经办人</td>
+                    <c:if test="${empty oaWorkPlanItems !=null}">
+                    <c:forEach items="${oaWorkPlanItems}" var="item">
+                <tr class="tr_light">
+                    <td class="form_content" style="text-align: center">
+                            ${item.orderNo}
                     </td>
-        </tr>
-                        <tr class="tr_light">
-          <td class="form_label">更新用户名：</td>
-          <td class="form_content">&nbsp;
-                      ${bean.updateUser}                    </td>
-        </tr>
-                <tr class="tr_button">
-            <td class="form_label"></td>
-            <td class="form_content">
+
+                    <td class="form_content">
+                            ${item.dutyPerosn}
+                    </td>
+
+                    <td class="form_content">
+                            ${item.keyWork}
+                    </td>
+                    <td class="form_content">
+                            ${item.content}
+                    </td>
+                    <td class="form_content">
+                            ${item.schedule}
+                    </td>
+                    <td class="form_content">
+                            ${item.jbr}
+                    </td>
+                </tr>
+                </c:forEach>
+                </c:if>
+            </table>
+        </fieldset>
+        <c:if test="${bean.status==STATUS_BRANCH_PASS ||bean.status==STATUS_BRANCH_BACK ||bean.status==STATUS_MAIN_PASS ||bean.status==STATUS_MAIN_BACK }">
+            <fieldset class="form_fieldset">
+                <legend class="form_legend">
+                    科长审核
+                </legend>
+                <table cellpadding="0" cellspacing="0" class="form_table">
+                    <tr class="tr_dark">
+                        <td class="form_label_right" width="150px">审核意见：</td>
+                        <td class="form_content" colspan="3">
+                            <sys:toHtml>${bean.kzOpinion}</sys:toHtml>
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+        </c:if>
+        <c:if test="${bean.status==STATUS_MAIN_PASS ||bean.status==STATUS_MAIN_BACK }">
+            <fieldset class="form_fieldset">
+                <legend class="form_legend">
+                    分管领导审核
+                </legend>
+                <table cellpadding="0" cellspacing="0" class="form_table">
+                    <tr class="tr_dark">
+                        <td class="form_label_right" width="150px">审核意见：</td>
+                        <td class="form_content" colspan="3">
+                            <sys:toHtml>${bean.fgOpinion}</sys:toHtml>
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+        </c:if>
+    </div>
+    <table cellpadding="5" cellspacing="0" class="form_table">
+        <tr class="tr_content">
+            <td>
                 <input type="button" value="关闭" class="button_cancel" onclick="closeWindow()">
             </td>
         </tr>
     </table>
-</div>
+</form:form>
