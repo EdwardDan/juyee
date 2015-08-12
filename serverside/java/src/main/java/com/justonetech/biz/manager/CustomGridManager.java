@@ -54,6 +54,8 @@ public class CustomGridManager {
     private static final String LINK_URL = "<a href='#' class='index' onclick='viewCustomGridDetail(\"{0}\")'>{1}</a>"; //查看链接
     private static final String LINK_URL_XXFB = "<a href='#' class='index' onclick='viewCustomGridDetailXxfb(\"{0}\")'>{1}</a>"; //查看链接
 
+    private static final int NUM = 40;
+
     /**
      * 获取版块数据
      *
@@ -137,7 +139,7 @@ public class CustomGridManager {
      */
     //获取指定字符的长度
     private Object getPartStr(Object o, int n) {
-        return o != null ? (o.toString().length() > n ? StringHelper.truncLength(o.toString(), 10) : o) : o;
+        return o != null ? (o.toString().length() > n ? StringHelper.truncLength(o.toString(), NUM) : o) : o;
     }
 
     /**
