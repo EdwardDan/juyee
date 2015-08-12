@@ -176,6 +176,24 @@ public class OaMeetingOuterController extends BaseCRUDActionController<OaMeeting
     }
 
     /**
+     * 审核显示页面
+     *
+     * @param id    .
+     * @param model .
+     * @return .
+     */
+    @RequestMapping
+    public String audit(Model model, Long id) {
+        OaMeetingOuter oaMeetingOuter = oaMeetingOuterService.get(id);
+        setStatus(model);
+        //处理其他业务逻辑
+        model.addAttribute("bean", oaMeetingOuter);
+        model.addAttribute("docButton", documentManager.getDownloadButton(oaMeetingOuter.getDoc()));
+
+        return "view/oa/oaMeetingOuter/audit";
+    }
+
+    /**
      * 查看页面
      *
      * @param id    .
@@ -222,10 +240,7 @@ public class OaMeetingOuterController extends BaseCRUDActionController<OaMeeting
                         "workAdvise",
                         "attendDepts",
                         "attendPersons",
-                        "fgAuditOpinion",
-                        "zrAuditOpinion"
                 });
-
             } else {
                 target = entity;
             }
@@ -237,15 +252,50 @@ public class OaMeetingOuterController extends BaseCRUDActionController<OaMeeting
                 documentManager.updateDocumentByBizData(docDocument, null, target.getTitle());
             }
             target.setStatus(status);
+            oaMeetingOuterService.save(target);
+            if (OaMeetingStatus.STATUS_SUBMIT.getCode() == target.getStatus()) {
+                msg = "提交!";
+            }
+        } catch (Exception e) {
+            log.error("error", e);
+            super.processException(response, e);
+            return;
+        }
+        sendSuccessJSON(response, msg);
+    }
+
+    /**
+     * 保存操作
+     *
+     * @param response .
+     * @param entity   .
+     * @throws Exception .
+     */
+    @SuppressWarnings("unchecked")
+    @RequestMapping
+    public void auditSave(HttpServletResponse response, @ModelAttribute("bean") OaMeetingOuter entity, Integer status) throws Exception {
+        String msg = "保存成功";
+        try {
+            OaMeetingOuter target;
+            if (entity.getId() != null) {
+                target = oaMeetingOuterService.get(entity.getId());
+                ReflectionUtils.copyBean(entity, target, new String[]{
+                        "fgAuditOpinion",
+                        "zrAuditOpinion"
+                });
+            } else {
+                target = entity;
+            }
+            target.setStatus(status);
             //根据状态保存相应的时间
-            if (null != status && OaMeetingStatus.STATUS_BRANCH_PASS.getCode() == status || OaMeetingStatus.STATUS_BRANCH_BACK.getCode() == status) {
+            if (OaMeetingStatus.STATUS_BRANCH_PASS.getCode() == status || OaMeetingStatus.STATUS_BRANCH_BACK.getCode() == status) {
                 target.setFgAuditTime(new Timestamp(System.currentTimeMillis()));
                 BaseUser loginUser = SpringSecurityUtils.getCurrentUser();
                 if (loginUser != null) {
                     target.setFgAuditUser(sysUserManager.getSysUser(loginUser.getLoginName()));
                 }
             }
-            if (null != status && OaMeetingStatus.STATUS_MAIN_PASS.getCode() == status || OaMeetingStatus.STATUS_MAIN_BACK.getCode() == status) {
+            if (OaMeetingStatus.STATUS_MAIN_PASS.getCode() == status || OaMeetingStatus.STATUS_MAIN_BACK.getCode() == status) {
                 target.setZrAuditTime(new Timestamp(System.currentTimeMillis()));
                 BaseUser loginUser = SpringSecurityUtils.getCurrentUser();
                 if (loginUser != null) {
@@ -258,16 +308,12 @@ public class OaMeetingOuterController extends BaseCRUDActionController<OaMeeting
                 msg = "已退回修改!";
             } else if (OaMeetingStatus.STATUS_BRANCH_PASS.getCode() == target.getStatus() || OaMeetingStatus.STATUS_MAIN_PASS.getCode() == target.getStatus()) {
                 msg = "审核已通过!";
-            } else if (OaMeetingStatus.STATUS_SUBMIT.getCode() == target.getStatus()) {
-                msg = "已提交!";
             }
         } catch (Exception e) {
             log.error("error", e);
             super.processException(response, e);
             return;
         }
-
-
         sendSuccessJSON(response, msg);
     }
 
