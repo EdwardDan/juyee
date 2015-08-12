@@ -7,33 +7,16 @@
                 url: "${ctx}/oaWorkPlan/gridDataCustom.do",
                 colNames: ['ID',
                     '上报科室',
-//                '上报人用户名',
                     '提交人',
-//            	'上报人姓名',
                     '工作时间',
-//            	'上报开始时间',
-//            	'上报结束时间',
-//            	'附件ID(预留)',
                     '状态值',
                     '状态',
-//                    '科长审核意见',
-//                    '科长审核时间',
-//                    '科长审核用户名',
-//                    '分管领导审核意见',
-//                    '分管领导审核时间',
-//                    '分管领导审核用户名',
-//                    '创建时间',
-//                    '创建用户名',
-//                    '更新时间',
-//                    '更新用户名',
                     '操作'
                 ],
                 colModel: [
                     {name: 'id', width: 10, align: "center", searchtype: "integer", hidden: true},
                     {name: "reportDept", width: "47", align: "center", searchtype: "string", sortable: true},
-//                    {name:"reportUser",width:"47",align:"center",searchtype:"string",sortable:true},
                     {name: "reportPerson", width: "47", align: "center", searchtype: "string", sortable: true},
-//                    {name:"beginDate",width:"47",align:"center",searchtype:"integer",sortable:true,formatter:'integer',formatoptions:{thousandsSeparator:",",defaulValue:0}},
                     {
                         name: "workTime",
                         width: "47",
@@ -43,19 +26,8 @@
                         formatter: 'date',
                         formatoptions: {srcformat: 'Y-m-d', newformat: 'Y-m-d'}
                     },
-//                    {name:"documentId",width:"47",align:"center",searchtype:"string",sortable:true},
                     {name: "status", width: "47", align: "center", searchtype: "integer", hidden: true},
                     {name: "statusName", width: "47", align: "center", searchtype: "string", sortable: true},
-//                    {name:"kzOpinion",width:"47",align:"center",searchtype:"string",sortable:true},
-//                    {name:"kzAuditTime",width:"47",align:"center",searchtype:"datetime",sortable:true,formatter:'date',formatoptions:{srcformat:'Y-m-d H:i:s',newformat:'Y-m-d H:i:s'}},
-//                    {name:"kzAuditUser",width:"47",align:"center",searchtype:"string",sortable:true},
-//                    {name:"fgOpinion",width:"47",align:"center",searchtype:"string",sortable:true},
-//                    {name:"fgAuditTime",width:"47",align:"center",searchtype:"datetime",sortable:true,formatter:'date',formatoptions:{srcformat:'Y-m-d H:i:s',newformat:'Y-m-d H:i:s'}},
-//                    {name:"fgAuditUser",width:"47",align:"center",searchtype:"string",sortable:true},
-//                    {name:"createTime",width:"47",align:"center",searchtype:"datetime",sortable:true,formatter:'date',formatoptions:{srcformat:'Y-m-d H:i:s',newformat:'Y-m-d H:i:s'}},
-//                    {name:"createUser",width:"47",align:"center",searchtype:"string",sortable:true},
-//                    {name:"updateTime",width:"47",align:"center",searchtype:"datetime",sortable:true,formatter:'date',formatoptions:{srcformat:'Y-m-d H:i:s',newformat:'Y-m-d H:i:s'}},
-//                    {name:"updateUser",width:"47",align:"center",searchtype:"string",sortable:true}
                 ],
                 actModel: [
                     {name: 'operation', width: 40, align: 'center'}
@@ -71,14 +43,12 @@
                         var status = rowData["status"];
                         var opButton = '<input type="button" value="查看" onclick="doView(' + id + ')" class="button_normal"/> ';
                         if (${canEdit}) {
-//                        opButton += '<input type="button" value="编辑" onclick="doEdit(' + id + ')" class="button_normal"/> ';
-//                        opButton += '<input type="button" value="删除" onclick="doDelete(' + id + ')" class="button_normal"/>';
                             if (status == '${STATUS_EDIT}' || '' == status || status == '${STATUS_MAIN_BACK}' || status == '${STATUS_BRANCH_BACK}') {
                                 opButton += '<input type="button" value="编辑" onclick="doEdit(' + id + ')" class="button_normal"/> ';
                                 opButton += '<input type="button" value="删除" onclick="doDelete(' + id + ')" class="button_normal"/>';
                             }
                         }
-                        if (${canEdit_FG||canEdit_ZR}) {
+                        if (${canEdit_KZ||canEdit_FG}) {
                             if (status == '${STATUS_SUBMIT}' || status == '${STATUS_BRANCH_PASS}' && status != "") {
                                 opButton += '<input type="button" value="审核" onclick="doEdit(' + id + ')" class="button_normal"/> ';
                             }
@@ -103,10 +73,6 @@
 //                        {"field": "分管领导审核意见", "op": "cn", "data": ""},
 //                        {"field": "分管领导审核时间", "op": "bw", "data": ""},
 //                        {"field": "分管领导审核用户名", "op": "cn", "data": ""},
-//                        {"field": "创建时间", "op": "bw", "data": ""},
-//                        {"field": "创建用户名", "op": "cn", "data": ""},
-//                        {"field": "更新时间", "op": "bw", "data": ""},
-//                        {"field": "更新用户名", "op": "cn", "data": ""}
                     ]
                 },
                 queryButton: $("#queryButton"),
@@ -119,7 +85,7 @@
     function doView(id) {
         openWindow("查看科室工作周上报", "${ctx}/oaWorkPlan/view.do?id=" + id, false);
     }
-    <c:if test="${canEdit}">
+    <%--<c:if test="${canEdit}">--%>
     function doAdd() {
         openWindow("添加科室工作周上报", "${ctx}/oaWorkPlan/add.do", true);
     }
@@ -129,12 +95,7 @@
     function doDelete(id) {
         doGridDelete("${ctx}/oaWorkPlan/delete.do?id=" + id);
     }
-    </c:if>
-
-    //custom formatter
-    //function customeFormat(cellvalue, options, rowObject) {
-    //    return cellvalue == "true"?"是":"否";
-    //}
+    <%--</c:if>--%>
 </script>
 
 <div class="title_Search">

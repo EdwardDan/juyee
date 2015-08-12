@@ -6,24 +6,9 @@
         //页面验证初始化
         var validateCondition = [
             {name: "reportDept", rule: "validate[required,maxSize[100]]"},
-//            {name: "reportUser", rule: "validate[required,maxSize[50]]"},
             {name: "reportPerson", rule: "validate[required,maxSize[50]]"},
             {name: "beginDate", rule: "validate[required]"},
             {name: "endDate", rule: "validate[required]"},
-            //{name:"documentId", rule:"validate[required,custom[integer],maxSize[10]"},
-//            {name: "status", rule: "validate[required,custom[integer],maxSize[2]]"},
-            <%--{name:"kzOpinion", rule:"validate[required,maxSize[${prop.length}]]"},--%>
-//            {name:"kzOpinion", rule: "validate[required,maxSize[100]]"},
-            //{name:"kzAuditTime", rule:"validate[required,maxSize[7]]"},
-            //{name:"kzAuditUser", rule:"validate[required,maxSize[100]]"},
-            <%--{name:"fgOpinion", rule:"validate[required,maxSize[${prop.length}]]"},--%>
-//            {name:"fgOpinion", rule: "validate[required,maxSize[100]]"},
-            //{name:"fgAuditTime", rule:"validate[required,maxSize[7]]"},
-            //{name:"fgAuditUser", rule:"validate[required,maxSize[100]]"},
-            //{name:"createTime", rule:"validate[required,maxSize[7]]"},
-            //{name:"createUser", rule:"validate[required,maxSize[100]]"},
-            //{name:"updateTime", rule:"validate[required,maxSize[7]]"},
-            //{name:"updateUser", rule:"validate[required,maxSize[100]]"},
         ];
         validateInit(validateCondition, formId);
     });
@@ -52,10 +37,6 @@
             return;
         }
         //加入其他业务判断
-//        if ($('#name').val() == '') {
-//            showInfoMsg('请输入姓名！',null);
-//            return;
-//        }
         //修改状态
         if (status == '${STATUS_SUBMIT}') {
             $("#status").val(status);
@@ -124,6 +105,8 @@
 <form:form commandName="bean">
     <form:hidden path="id"/>
     <form:hidden path="status"/>
+    <form:hidden path="reportDept"/>
+    <form:hidden path="reportPerson"/>
     <div class="form_div">
         <fieldset class="form_fieldset">
             <legend class="form_legend">
@@ -131,30 +114,30 @@
             </legend>
             <table cellpadding="0" cellspacing="0" class="form_table">
                 <tr class="tr_light">
-                    <td class="form_border" align="center" colspan="3">上报科室：
-                        <input type="text" name="reportDept" id="reportDept" class="input_text"
-                               value="${bean.reportDept}" readonly="true"/>
-                        <input type="hidden" name="applyDeptId" id="applyDeptId" value=""/>
-                        <input type="button" value=" " class="button_select"
-                               onclick="selectSysDept('applyDeptId','reportDept')" title="点击选择上报科室">
+                    <td class="form_border" align="center" colspan="3">上报科室：${bean.reportDept}
+                        <%--<input type="text" name="reportDept" id="reportDept" class="input_text"--%>
+                               <%--value="${bean.reportDept}" readonly="true"/>--%>
+                        <%--<input type="hidden" name="applyDeptId" id="applyDeptId" value=""/>--%>
+                        <%--<input type="button" value=" " class="button_select"--%>
+                               <%--onclick="selectSysDept('applyDeptId','reportDept')" title="点击选择上报科室">--%>
                     </td>
-                    <td class="form_border" align="center" colspan="4">上报人：
-                        <input type="text" name="reportPerson" id="reportPerson" class="input_text"
-                               value="${bean.reportPerson}" readonly="true"/>
-                        <input type="hidden" name="applyPersonId" id="applyPersonId" value="${applyPersonId}"/>
-                        <input type="button" value=" " class="button_select"
-                               onclick="selectSysUser('applyPersonId','reportPerson');" title="点击上报人">
+                    <td class="form_border" align="center" colspan="4">上报人：${bean.reportPerson}
+                        <%--<input type="text" name="reportPerson" id="reportPerson" class="input_text"--%>
+                               <%--value="${bean.reportPerson}" readonly="true"/>--%>
+                        <%--<input type="hidden" name="applyPersonId" id="applyPersonId" value="${applyPersonId}"/>--%>
+                        <%--<input type="button" value=" " class="button_select"--%>
+                               <%--onclick="selectSysUser('applyPersonId','reportPerson');" title="点击上报人">--%>
                     </td>
                 </tr>
                 <tr class="tr_light">
                     <td class="form_border" align="left" colspan="7">上报时间：
-                        <input type="text" name="beginDate" id="beginDate" class="input_datetime"
+                        <input type="text" name="beginDate" id="beginDate" class="input_date"
                                value="<fmt:formatDate value="${bean.beginDate}" pattern="yyyy-MM-dd"/>"
                                readonly="true"/>
                         <input type="button" class="button_calendar" value=" "
                                onClick="calendar('beginDate','beginDate')">
                         ~
-                        <input type="text" name="endDate" id="endDate" class="input_datetime"
+                        <input type="text" name="endDate" id="endDate" class="input_date"
                                value="<fmt:formatDate value="${bean.endDate}" pattern="yyyy-MM-dd"/>"
                                readonly="true"/>
                         <input type="button" class="button_calendar" value=" " onClick="calendar('endDate','endDate')">
@@ -172,7 +155,6 @@
                     </td>
                 </tr>
 
-                    <%--<c:if test="${not empty bean.oaThingsApplyItems && bean.oaThingsApplyItems != null}">--%>
                 <c:if test="${empty oaWorkPlanItems !=null}">
                 <c:forEach items="${oaWorkPlanItems}" var="item">
                 <tr class="tr_dark">
@@ -193,11 +175,11 @@
                                title="${item.keyWork}">
                     </td>
                     <td class="addTd">
-                        <input type="text" name="content" class="input_text" style="width: 95%" value="${item.content}"
+                        <input type="textarea" name="content" class="input_textarea" style="width: 95%" value="${item.content}"
                                title="${item.content}">
                     </td>
                     <td class="addTd">
-                        <input type="text" name="schedule" class="input_text" style="width: 95%"
+                        <input type="textarea" name="schedule" class="input_textarea" style="width: 95%"
                                value="${item.schedule}"
                                title="${item.schedule}">
                     </td>
@@ -290,16 +272,16 @@
             <input type="text" name="dutyPerosn" class="input_text" style="width: 95%"/>
         </td>
         <td class="addTd">
-            <input type="text" name="keyWork" class="input_text" style="width: 95%"/>
+            <input type="text"  name="keyWork" class="input_text" style="width: 95%"/>
         </td>
         <td class="addTd">
-            <input type="text" name="content" class="input_text" style="width: 95%"/>
+            <textarea  name="content" class="input_textarea" style="width: 95%"></textarea>
         </td>
         <td class="addTd">
-            <input type="text" name="schedule" class="input_text" style="width: 95%"/>
+            <textarea name="schedule" class="input_textarea" style="width: 95%"></textarea>
         </td>
         <td class="addTd">
-            <input type="text" name="jbr" class="input_text" style="width: 95%"/>
+            <input type="text" name="jbr" class="input_text" style="width: 95%" />
         </td>
         <td class="addTd"><input type="button" value="删除" class="button_select_remove"
                                  onclick="addLine(this)"/></td>
