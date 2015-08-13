@@ -196,6 +196,31 @@ public class OaWorkPlanController extends BaseCRUDActionController<OaWorkPlan> {
 
         return "view/oa/oaWorkPlan/input";
     }
+    /**
+     * 审核显示页面
+     *
+     * @param id    .
+     * @param model .
+     * @return .
+     */
+    @RequestMapping
+    public String audit(Model model, Long id) {
+        OaWorkPlan oaWorkPlan = oaWorkPlanService.get(id);
+        setStatus(model);
+        if (oaWorkPlan.getReportUser() != null) {
+            model.addAttribute("applyPersonId", sysUserManager.getSysUser(oaWorkPlan.getReportUser()).getId());
+        }
+        Set<OaWorkPlanItem> oaWorkPlanItems = oaWorkPlan.getOaWorkPlanItems();
+        List<OaWorkPlanItem> oaWorkPlanItem = new ArrayList<OaWorkPlanItem>();
+        for (OaWorkPlanItem workPlanItem : oaWorkPlanItems) {
+            oaWorkPlanItem.add(workPlanItem);
+        }
+        //处理其他业务逻辑
+        model.addAttribute("bean", oaWorkPlan);
+        model.addAttribute("oaWorkPlanItems", oaWorkPlanItems);
+
+        return "view/oa/oaWorkPlan/audit";
+    }
 
     /**
      * 查看页面

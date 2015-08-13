@@ -48,9 +48,14 @@
                                 opButton += '<input type="button" value="删除" onclick="doDelete(' + id + ')" class="button_normal"/>';
                             }
                         }
-                        if (${canEdit_KZ||canEdit_FG}) {
-                            if (status == '${STATUS_SUBMIT}' || status == '${STATUS_BRANCH_PASS}' && status != "") {
-                                opButton += '<input type="button" value="审核" onclick="doEdit(' + id + ')" class="button_normal"/> ';
+                        if (${canEdit_KZ}) {
+                            if (status == '${STATUS_SUBMIT}') {
+                                opButton += '<input type="button" value="科长审核" onclick="doAudit(' + id + ')" class="button_normal_longer"/> ';
+                            }
+                        }
+                        if (${canEdit_FG}) {
+                            if (status == '${STATUS_BRANCH_PASS}') {
+                                opButton += '<input type="button" value="分管领导审核" onclick="doAudit(' + id + ')" class="button_normal_longer"/> ';
                             }
                         }
                         jQuery("#listGrid").jqGrid('setRowData', ids[i], {operation: opButton});
@@ -83,14 +88,17 @@
         gridinit($("#listGrid"), conf);
     });
     function doView(id) {
-        openWindow("查看科室工作周上报", "${ctx}/oaWorkPlan/view.do?id=" + id, false);
+        openWindow("查看科室工作周上报", "${ctx}/oaWorkPlan/view.do?id=" + id, false,900,450);
     }
     <%--<c:if test="${canEdit}">--%>
     function doAdd() {
-        openWindow("添加科室工作周上报", "${ctx}/oaWorkPlan/add.do", true);
+        openWindow("添加科室工作周上报", "${ctx}/oaWorkPlan/add.do", true,900,450);
     }
     function doEdit(id) {
-        openWindow("修改科室工作周上报", "${ctx}/oaWorkPlan/modify.do?id=" + id, true);
+        openWindow("修改科室工作周上报", "${ctx}/oaWorkPlan/modify.do?id=" + id, true,900,450);
+    }
+    function doAudit(id) {
+        openWindow("审核科室工作周上报", "${ctx}/oaWorkPlan/audit.do?id=" + id, true,900,450);
     }
     function doDelete(id) {
         doGridDelete("${ctx}/oaWorkPlan/delete.do?id=" + id);
