@@ -6,7 +6,7 @@
         //页面验证初始化
         var validateCondition = [
             {name: "beginTime", rule: "validate[required]"},
-            {name: "endTime", rule: "validate[required]"},
+//            {name: "endTime", rule: "validate[required]"},
             {name: "address", rule: "validate[required]"},
             {name: "title", rule: "validate[required]"},
             {name: "content", rule: "validate[required]"}
@@ -20,21 +20,21 @@
         if (!validateForm(formId)) {
             return;
         }
-        var beginDate = $("#beginTime").val() + ":00";
-        var endDate = $("#endTime").val() + ":00";
-        var d1 = new Date(beginDate.replace(/\-/g, "\/"));
-        var d2 = new Date(endDate.replace(/\-/g, "\/"));
-
-        if (beginDate != "" && endDate != "" && d1 >= d2) {
-            alert("开始时间不能大于结束时间！");
-            $("#beginTime").focus();
-            $("#beginTime").css("background", "red");
-            $("#endTime").css("background", "red");
-            return;
-        }
+//        var beginDate = $("#beginTime").val() + ":00";
+//        var endDate = $("#endTime").val() + ":00";
+//        var d1 = new Date(beginDate.replace(/\-/g, "\/"));
+//        var d2 = new Date(endDate.replace(/\-/g, "\/"));
+//
+//        if (beginDate != "" && endDate != "" && d1 >= d2) {
+//            alert("开始时间不能大于结束时间！");
+//            $("#beginTime").focus();
+//            $("#beginTime").css("background", "red");
+//            $("#endTime").css("background", "red");
+//            return;
+//        }
 
         $("#beginTime").val($("#beginTime").val() + ":00");
-        $("#endTime").val($("#endTime").val() + ":00");
+//        $("#endTime").val($("#endTime").val() + ":00");
         //提交表单
         if (buttonName != "") {
             if (confirm("是否确定执行 " + buttonName + " 操作？")) {
@@ -53,18 +53,18 @@
             <legend class="form_legend">外出会议</legend>
             <table cellpadding="0" cellspacing="0" class="form_table">
                 <tr class="tr_light">
-                    <td class="form_label_right" style="width: 150px">会议时间：</td>
+                    <td class="form_label_right" style="width: 150px">会议开始时间：</td>
                     <td class="form_content" colspan="3">
                         <input type="text" name="beginTime" id="beginTime" class="input_datetime"
                                value="<fmt:formatDate value="${bean.beginTime}" pattern="yyyy-MM-dd HH:mm"/>"
                                readonly="true"/>
                         <input type="button" class="button_calendar" value=" "
                                onClick="calendar('beginTime','datetime')">
-                        ~
-                        <input type="text" name="endTime" id="endTime" class="input_datetime"
-                               value="<fmt:formatDate value="${bean.endTime}" pattern="yyyy-MM-dd HH:mm"/>"
-                               readonly="true"/>
-                        <input type="button" class="button_calendar" value=" " onClick="calendar('endTime','datetime')">
+                            <%--~--%>
+                            <%--<input type="text" name="endTime" id="endTime" class="input_datetime"--%>
+                            <%--value="<fmt:formatDate value="${bean.endTime}" pattern="yyyy-MM-dd HH:mm"/>"--%>
+                            <%--readonly="true"/>--%>
+                            <%--<input type="button" class="button_calendar" value=" " onClick="calendar('endTime','datetime')">--%>
                     </td>
                 </tr>
                 <tr class="tr_light">

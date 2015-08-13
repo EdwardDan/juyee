@@ -126,7 +126,7 @@
                 </tr>
             </table>
         </fieldset>
-        <c:if test="${canZrAudit}">
+        <c:if test="${canKzAudit||canZrAudit}">
             <fieldset class="form_fieldset">
                 <legend class="form_legend">
                     科长审核
@@ -135,91 +135,91 @@
                     <tr class="tr_dark">
                         <td class="form_label_right" width="15%">科长审核意见：</td>
                         <td class="form_content" colspan="3">
-                            <c:if test="${bean.status==STATUS_BRANCH_PASS||bean.status==STATUS_MAIN_PASS}">
-                                <sys:toHtml> ${bean.kzAuditOpinion}</sys:toHtml>
+                            <c:if test="${canZrAudit}">
+                                <c:if test="${bean.status==STATUS_BRANCH_PASS||bean.status==STATUS_MAIN_PASS}">
+                                    <sys:toHtml> ${bean.kzAuditOpinion}</sys:toHtml>
+                                </c:if>
+                            </c:if>
+                            <c:if test="${canKzAudit}">
+                                <c:if test="${bean.status==STATUS_SUBMIT}">
+                                    <form:textarea path="kzAuditOpinion" cssClass="input_textarea_long"/>
+                                </c:if>
                             </c:if>
                         </td>
                     </tr>
                 </table>
             </fieldset>
         </c:if>
-        <c:if test="${canKzAudit}">
-            <fieldset class="form_fieldset">
-                <legend class="form_legend">
-                    科长审核
-                </legend>
-                <table cellpadding="0" cellspacing="0" class="form_table">
-                    <tr class="tr_dark">
-                        <td class="form_label_right" width="15%">科长审核意见：</td>
-                        <td class="form_content" colspan="3">
-                            <form:textarea path="kzAuditOpinion" cssClass="input_textarea_long"/>
-                        </td>
-                    </tr>
-                </table>
-            </fieldset>
-        </c:if>
 
         <c:if test="${canZrAudit}">
-            <fieldset class="form_fieldset">
-                <legend class="form_legend">
-                    办公室主任审核
-                </legend>
-                <table cellpadding="0" cellspacing="0" class="form_table">
-                    <tr class="tr_light">
-                        <td class="form_label_right" width="15%">办公室主任审核意见：</td>
-                        <td class="form_content" colspan="3">
-                            <form:textarea path="zrAuditOpinion" cssClass="input_textarea_long"/>
-                        </td>
-                    </tr>
-                    <tr class="tr_dark">
-                        <td class="form_label_right" width="15%">拟派车辆：</td>
-                        <td class="form_content" colspan="3">
-                            <select id="car" name="car" class="input_text">
-                                <option value="" selected></option>
-                                <c:forEach var="carIn" items="${carList}">
-                                    <option value="${carIn.id}" <c:if
-                                            test="${bean.car.id==carIn.id}">selected </c:if>>${carIn.name}</option>
-                                </c:forEach>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr class="tr_light">
-                        <td class="form_content" colspan="4">
-                            <input type="checkbox" id="isAgree" name="isAgree"
-                                   <c:if test="${not empty bean.driverPerson}">checked </c:if> onchange="showDriver()">是否拟派司机
-                        </td>
-                    </tr>
-                    <tr id="agreeDriver" class="tr_dark"
-                        <c:if test="${empty bean.driverPerson}">style="display: none"</c:if>>
-                        <td class="form_label_right" width="15%">司机：</td>
-                        <td class="form_content" width="35%">
-                            <input type="text" name="driverPersonName" id="driverPersonName" class="input_text"
-                                   value="${bean.driverPerson.name}"
-                                   readonly="true"/>
-                            <input type="hidden" name="driverPersonId" id="driverPersonId"
-                                   value="${bean.driverPerson.id}"/>
-                            <input type="button" value=" " class="button_select"
-                                   onclick="selectSysPersonDriver('driverPersonId','driverPersonName')" title="点击选择驾驶员">
-                        </td>
-                        <td class="form_label_right" width="15%">电话：</td>
-                        <td class="form_content" width="35%">
-                            <form:input path="driverMobile" cssClass="input_text"/>
-                        </td>
-                    </tr>
-                </table>
-            </fieldset>
+            <c:if test="${bean.status==STATUS_BRANCH_PASS}">
+                <fieldset class="form_fieldset">
+                    <legend class="form_legend">
+                        办公室主任审核
+                    </legend>
+                    <table cellpadding="0" cellspacing="0" class="form_table">
+                        <tr class="tr_light">
+                            <td class="form_label_right" width="15%">办公室主任审核意见：</td>
+                            <td class="form_content" colspan="3">
+                                <form:textarea path="zrAuditOpinion" cssClass="input_textarea_long"/>
+                            </td>
+                        </tr>
+                        <tr class="tr_dark">
+                            <td class="form_label_right" width="15%">拟派车辆：</td>
+                            <td class="form_content" colspan="3">
+                                <select id="car" name="car" class="input_text">
+                                    <option value="" selected></option>
+                                    <c:forEach var="carIn" items="${carList}">
+                                        <option value="${carIn.id}" <c:if
+                                                test="${bean.car.id==carIn.id}">selected </c:if>>${carIn.name}</option>
+                                    </c:forEach>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr class="tr_light">
+                            <td class="form_content" colspan="4">
+                                <input type="checkbox" id="isAgree" name="isAgree"
+                                       <c:if test="${not empty bean.driverPerson}">checked </c:if>
+                                       onchange="showDriver()">是否拟派司机
+                            </td>
+                        </tr>
+                        <tr id="agreeDriver" class="tr_dark"
+                            <c:if test="${empty bean.driverPerson}">style="display: none"</c:if>>
+                            <td class="form_label_right" width="15%">司机：</td>
+                            <td class="form_content" width="35%">
+                                <input type="text" name="driverPersonName" id="driverPersonName" class="input_text"
+                                       value="${bean.driverPerson.name}"
+                                       readonly="true"/>
+                                <input type="hidden" name="driverPersonId" id="driverPersonId"
+                                       value="${bean.driverPerson.id}"/>
+                                <input type="button" value=" " class="button_select"
+                                       onclick="selectSysPersonDriver('driverPersonId','driverPersonName')"
+                                       title="点击选择驾驶员">
+                            </td>
+                            <td class="form_label_right" width="15%">电话：</td>
+                            <td class="form_content" width="35%">
+                                <form:input path="driverMobile" cssClass="input_text"/>
+                            </td>
+                        </tr>
+                    </table>
+                </fieldset>
+            </c:if>
         </c:if>
         <table cellpadding="0" cellspacing="0" class="form_table">
             <tr class="tr_button">
                 <td style="text-align: center" colspan="4">
                     <c:if test="${bean.status==STATUS_BRANCH_PASS ||bean.status==STATUS_MAIN_PASS}">
-                        <input type="button" value="审核通过" class="button_normal_long" onclick="save('${STATUS_MAIN_PASS}',this)">&nbsp;
-                        <input type="button" value="退回修改" class="button_normal_long" onclick="save('${STATUS_MAIN_BACK}',this)">&nbsp;
+                        <input type="button" value="审核通过" class="button_normal_long"
+                               onclick="save('${STATUS_MAIN_PASS}',this)">&nbsp;
+                        <input type="button" value="退回修改" class="button_normal_long"
+                               onclick="save('${STATUS_MAIN_BACK}',this)">&nbsp;
                     </c:if>
 
                     <c:if test="${bean.status==STATUS_SUBMIT}">
-                        <input type="button" value="审核通过" class="button_normal_long" onclick="save('${STATUS_BRANCH_PASS}',this)">&nbsp;
-                        <input type="button" value="退回修改" class="button_normal_long" onclick="save('${STATUS_BRANCH_BACK}',this)">&nbsp;
+                        <input type="button" value="审核通过" class="button_normal_long"
+                               onclick="save('${STATUS_BRANCH_PASS}',this)">&nbsp;
+                        <input type="button" value="退回修改" class="button_normal_long"
+                               onclick="save('${STATUS_BRANCH_BACK}',this)">&nbsp;
                     </c:if>
                     <input type="button" value="取消" class="button_cancel" onclick="closeWindow()">
                 </td>

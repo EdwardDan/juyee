@@ -7,9 +7,9 @@
         </legend>
         <table cellpadding="0" cellspacing="0" class="form_table">
             <tr class="tr_light">
-                <td class="form_label_right" style="width: 150px">会议时间：</td>
+                <td class="form_label_right" style="width: 150px">会议开始时间：</td>
                 <td class="form_content" colspan="3">
-                    ${bean.meetTime}
+                    <fmt:formatDate pattern="yyyy-MM-dd hh:mm" value="${bean.beginTime}"/>
                 </td>
             </tr>
             <tr class="tr_light">

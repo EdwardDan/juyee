@@ -20,22 +20,22 @@
             return;
         }
 
-        var beginDate = $("#beginTime").val() + ":00";
-        var endDate = $("#endTime").val() + ":00";
-        var d1 = new Date(beginDate.replace(/\-/g, "\/"));
-        var d2 = new Date(endDate.replace(/\-/g, "\/"));
+//        var beginDate = $("#beginTime").val() + ":00";
+//        var endDate = $("#endTime").val() + ":00";
+//        var d1 = new Date(beginDate.replace(/\-/g, "\/"));
+//        var d2 = new Date(endDate.replace(/\-/g, "\/"));
 
-        if (beginDate != "" && endDate != "" && d1 >= d2) {
-            alert("开始时间不能大于结束时间！");
-            $("#beginTime").focus();
-            $("#beginTime").css("background","red");
-            $("#endTime").css("background","red");
-            return;
-        }
+//        if (beginDate != "" && endDate != "" && d1 >= d2) {
+//            alert("开始时间不能大于结束时间！");
+//            $("#beginTime").focus();
+//            $("#beginTime").css("background","red");
+//            $("#endTime").css("background","red");
+//            return;
+//        }
 
-        $(btn).get(0).disabled = true;
+//        $(btn).get(0).disabled = true;
         $("#beginTime").val($("#beginTime").val() + ":00");
-        $("#endTime").val($("#endTime").val() + ":00");
+//        $("#endTime").val($("#endTime").val() + ":00");
 
         //提交表单
         saveAjaxData("${ctx}/oaMeetingInner/save.do", formId);
@@ -57,11 +57,11 @@
                            readonly="true"/>
                     <input type="button" class="button_calendar" value=" "
                            onClick="calendar('beginTime','datetime')">
-                    ~<br>
-                    <input type="text" name="endTime" id="endTime" class="input_datetime"
-                           value="<fmt:formatDate value="${bean.endTime}" pattern="yyyy-MM-dd HH:mm"/>"
-                           readonly="true"/>
-                    <input type="button" class="button_calendar" value=" " onClick="calendar('endTime','datetime')">
+                    <%--~<br>--%>
+                    <%--<input type="text" name="endTime" id="endTime" class="input_datetime"--%>
+                           <%--value="<fmt:formatDate value="${bean.endTime}" pattern="yyyy-MM-dd HH:mm"/>"--%>
+                           <%--readonly="true"/>--%>
+                    <%--<input type="button" class="button_calendar" value=" " onClick="calendar('endTime','datetime')">--%>
 
                 </td>
             </tr>
