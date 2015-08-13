@@ -91,7 +91,7 @@
                 </tr>
             </table>
             <table cellpadding="0" cellspacing="0" border="1" class="table_thin_line"
-                   style="text-align: center;"
+                   style="text-align: center;width:100%"
                    id="itemTable">
                 <tr class="tr_header">
                     <td style="width:5%">序号</td>
@@ -103,29 +103,29 @@
                     <c:if test="${empty oaWorkPlanItems !=null}">
                     <c:forEach items="${oaWorkPlanItems}" var="item">
                 <tr class="tr_light">
-                    <td class="form_content" style="text-align: center">
+                    <td  style="text-align: center">
                             ${item.orderNo}
                                 <input type="hidden" name="orderNo"  value="${item.orderNo}">
                     </td>
 
-                    <td class="form_content">
+                    <td  style="text-align: center">
                             ${item.dutyPerosn}
                                 <input type="hidden" name="dutyPerosn"  value="${item.dutyPerosn}">
                     </td>
 
-                    <td class="form_content">
+                    <td  style="text-align: center">
                             ${item.keyWork}
                                 <input type="hidden" name="keyWork" value="${item.keyWork}">
                     </td>
-                    <td class="form_content">
-                            ${item.content}
+                    <td >
+                        <sys:toHtml>${item.content}</sys:toHtml>
                                 <input type="hidden" name="content"  value="${item.content}">
                     </td>
-                    <td class="form_content">
-                            ${item.schedule}
+                    <td >
+                        <sys:toHtml>${item.schedule}</sys:toHtml>
                                 <input type="hidden" name="schedule"  value="${item.schedule}">
                     </td>
-                    <td class="form_content">
+                    <td  style="text-align: center">
                             ${item.jbr}
                                 <input type="hidden" name="jbr"  value="${item.jbr}">
                     </td>
@@ -143,7 +143,8 @@
                     <tr class="tr_dark">
                         <td class="form_label_right" width="15%">审核意见：</td>
                         <td class="form_content" colspan="3">
-                            <textarea name="kzOpinion" id="kzOpinion"  class="input_textarea_long">${bean.kzOpinion}</textarea>
+                            <%--<textarea name="kzOpinion" id="kzOpinion"  class="input_textarea_long">${bean.kzOpinion}</textarea>--%>
+                            <form:textarea path="kzOpinion" cssClass="input_textarea_long" cssStyle="width: 95%"/>
                         </td>
                     </tr>
                 </table>
@@ -158,7 +159,7 @@
                     <tr class="tr_dark">
                         <td class="form_label_right" width="15%">审核意见：</td>
                         <td class="form_content" colspan="3">
-                            <form:textarea path="fgOpinion" cssClass="input_textarea_long"/>
+                            <form:textarea path="fgOpinion" cssClass="input_textarea_long" cssStyle="width: 95%"/>
                         </td>
                     </tr>
                 </table>

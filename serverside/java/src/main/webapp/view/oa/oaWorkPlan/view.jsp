@@ -26,7 +26,7 @@
                 </tr>
             </table>
             <table cellpadding="0" cellspacing="0" border="1" class="table_thin_line"
-                   style="text-align: center;"
+                   style="text-align: center;width: 100%"
                    id="itemTable">
                 <tr class="tr_header">
                     <td style="width:5%">序号</td>
@@ -38,24 +38,24 @@
                     <c:if test="${empty oaWorkPlanItems !=null}">
                     <c:forEach items="${oaWorkPlanItems}" var="item">
                 <tr class="tr_light">
-                    <td class="form_content" style="text-align: center">
+                    <td  style="text-align: center">
                             ${item.orderNo}
                     </td>
 
-                    <td class="form_content">
+                    <td  style="text-align: center">
                             ${item.dutyPerosn}
                     </td>
 
-                    <td class="form_content">
+                    <td  style="text-align: center">
                             ${item.keyWork}
                     </td>
-                    <td class="form_content">
-                            ${item.content}
+                    <td >
+                            <sys:toHtml>${item.content}</sys:toHtml>
                     </td>
-                    <td class="form_content">
-                            ${item.schedule}
+                    <td >
+                        <sys:toHtml>${item.schedule}</sys:toHtml>
                     </td>
-                    <td class="form_content">
+                    <td  style="text-align: center">
                             ${item.jbr}
                     </td>
                 </tr>

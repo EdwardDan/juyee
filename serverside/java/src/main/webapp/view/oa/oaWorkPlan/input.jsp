@@ -103,7 +103,7 @@
                 </tr>
             </table>
             <table cellpadding="0" cellspacing="0" border="1" class="table_thin_line"
-                   style="text-align: center;"
+                   style="text-align: center;width:100%"
                    id="itemTable">
                 <tr class="tr_header">
                     <td style="width:5%">序号</td>
@@ -122,19 +122,19 @@
                         <tr class="tr_dark">
                             <td>
                                 <input type="text" name="orderNo" class="input_text"
-                                       style="width: 95%;text-align: center"
+                                       style="width: 92%;text-align: center"
                                        value="${item.orderNo}"
                                        title="${item.orderNo}">
                             </td>
 
                             <td>
-                                <input type="text" name="dutyPerosn" class="input_text" style="width: 95%;"
+                                <input type="text" name="dutyPerosn" class="input_text" style="width: 95%;text-align: center"
                                        value="${item.dutyPerosn}"
                                        title="${item.dutyPerosn}">
                             </td>
 
                             <td>
-                                <input type="text" name="keyWork" class="input_text" style="width: 95%;"
+                                <input type="text" name="keyWork" class="input_text" style="width: 95%;text-align: center"
                                        value="${item.keyWork}"
                                        title="${item.keyWork}">
                             </td>
@@ -147,7 +147,7 @@
                                           style="width: 95%;height: 50px;">${item.schedule}</textarea>
                             </td>
                             <td>
-                                <input type="text" name="jbr" class="input_text" style="width: 95%;" value="${item.jbr}"
+                                <input type="text" name="jbr" class="input_text" style="width: 95%;text-align: center" value="${item.jbr}"
                                        title="${item.jbr}">
                             </td>
                             <td style="width: 25px"><input type="button" value="删除" class="button_select_remove"
@@ -182,10 +182,10 @@
     <tbody id="hiddenStyle">
     <tr class="tr_dark"><%--标准行--%>
         <td>
-            <input type="text" name="orderNo" class="input_text" style="width: 95%;text-align: center"/>
+            <input type="text" name="orderNo" class="input_text" style="width: 92%;text-align: center"/>
         </td>
         <td>
-            <input type="text" name="dutyPerosn" class="input_text" style="width: 95%;"/>
+            <input type="text" name="dutyPerosn" class="input_text" style="width: 95%;text-align: center"/>
         </td>
         <td>
             <input type="text" name="keyWork" class="input_text" style="width: 95%;"/>
