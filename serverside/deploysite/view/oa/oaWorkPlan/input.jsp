@@ -18,8 +18,8 @@
         if (!validateForm(formId)) {
             return;
         }
-        var beginDate = $("#beginDate").val() + ":00";
-        var endDate = $("#endDate").val() + ":00";
+        var beginDate = $("#beginDate").val();
+        var endDate = $("#endDate").val();
         var d1 = new Date(beginDate.replace(/\-/g, "\/"));
         var d2 = new Date(endDate.replace(/\-/g, "\/"));
 
@@ -47,38 +47,6 @@
                     saveAjaxData("${ctx}/oaWorkPlan/save.do", formId);
                 }
             });
-        } else if (status == '${STATUS_BRANCH_PASS}') {
-            $("#status").val(status);
-            $.messager.confirm('系统提示', "确定审核通过吗？通过后将不能修改", function (r) {
-                if (r) {
-                    //提交表单
-                    saveAjaxData("${ctx}/oaWorkPlan/save.do", formId);
-                }
-            });
-        } else if (status == '${STATUS_BRANCH_BACK}') {
-            $("#status").val(status);
-            $.messager.confirm('系统提示', "确定退回吗？", function (r) {
-                if (r) {
-                    //提交表单
-                    saveAjaxData("${ctx}/oaWorkPlan/save.do", formId);
-                }
-            });
-        } else if (status == '${STATUS_MAIN_PASS}') {
-            $("#status").val(status);
-            $.messager.confirm('系统提示', "确定审核通过吗？通过后将不能修改", function (r) {
-                if (r) {
-                    //提交表单
-                    saveAjaxData("${ctx}/oaWorkPlan/save.do", formId);
-                }
-            });
-        } else if (status == '${STATUS_MAIN_BACK}') {
-            $("#status").val(status);
-            $.messager.confirm('系统提示', "确定退回吗？", function (r) {
-                if (r) {
-                    //提交表单
-                    saveAjaxData("${ctx}/oaWorkPlan/save.do", formId);
-                }
-            });
         } else {
             $("#status").val(status);
             //提交表单
@@ -97,12 +65,7 @@
         }
     }
 </script>
-<style type="text/css">
-    .addTd {
-        border: 1px solid;
-        height: 50px;
-    }
-</style>
+
 <form:form commandName="bean">
     <form:hidden path="id"/>
     <form:hidden path="status"/>
@@ -139,54 +102,56 @@
                     </td>
                 </tr>
             </table>
-            <table cellpadding="0" cellspacing="0" class="form_table">
+            <table cellpadding="0" cellspacing="0" border="1" class="table_thin_line"
+                   style="text-align: center;width:100%"
+                   id="itemTable">
                 <tr class="tr_header">
-                    <td class="addTd" width="5%">序号</td>
-                    <td class="addTd" width="10%">责任人</td>
-                    <td class="addTd" width="10%">是否重点工作</td>
-                    <td class="addTd" width="40%">工作内容</td>
-                    <td class="addTd" width="20%">工作进度</td>
-                    <td class="addTd" width="10%">经办人</td>
-                    <td class="addTd" width="5%" nowrap>
-                        &nbsp;<input type="button" value="添加" class="button_select_add" onclick="addLine(this)"/>
+                    <td style="width:5%">序号</td>
+                    <td style="width:8%">责任人</td>
+                    <td style="width:8%">是否重点工作</td>
+                    <td style="width:25%">工作内容</td>
+                    <td style="width:20%">工作进度</td>
+                    <td style="width:8%">经办人</td>
+                    <td style="width:5%;">
+                        <input type='button' value='添加' class='button_select_add' onclick='addLine(this)'>
                     </td>
                 </tr>
 
                 <c:if test="${empty oaWorkPlanItems !=null}">
                     <c:forEach items="${oaWorkPlanItems}" var="item">
                         <tr class="tr_dark">
-                            <td class="addTd">
+                            <td>
                                 <input type="text" name="orderNo" class="input_text"
-                                       style="width: 95%;text-align: center"
+                                       style="width: 92%;text-align: center"
                                        value="${item.orderNo}"
                                        title="${item.orderNo}">
                             </td>
 
-                            <td class="addTd">
-                                <input type="text" name="dutyPerosn" class="input_text" style="width: 95%"
+                            <td>
+                                <input type="text" name="dutyPerosn" class="input_text" style="width: 95%;text-align: center"
                                        value="${item.dutyPerosn}"
                                        title="${item.dutyPerosn}">
                             </td>
 
-                            <td class="addTd">
-                                <input type="text" name="keyWork" class="input_text" style="width: 95%"
+                            <td>
+                                <input type="text" name="keyWork" class="input_text" style="width: 95%;text-align: center"
                                        value="${item.keyWork}"
                                        title="${item.keyWork}">
                             </td>
-                            <td class="addTd">
-                                <textarea name="content" class="input_text"
-                                          style="height:100%;width: 100%">${item.content}</textarea>
+                            <td>
+                                <textarea name="content" class="input_textarea"
+                                          style="width: 95%;height: 50px;">${item.content}</textarea>
                             </td>
-                            <td class="addTd">
-                                <textarea name="schedule" class="input_text"
-                                          style="height:100%;width: 95%">${item.schedule}</textarea>
+                            <td>
+                                <textarea name="schedule" class="input_textarea"
+                                          style="width: 95%;height: 50px;">${item.schedule}</textarea>
                             </td>
-                            <td class="addTd">
-                                <input type="text" name="jbr" class="input_text" style="width: 95%" value="${item.jbr}"
+                            <td>
+                                <input type="text" name="jbr" class="input_text" style="width: 95%;text-align: center" value="${item.jbr}"
                                        title="${item.jbr}">
                             </td>
-                            <td class="addTd"><input type="button" value="删除" class="button_select_remove"
-                                                     onclick="addLine(this)"/>
+                            <td style="width: 25px"><input type="button" value="删除" class="button_select_remove"
+                                                           onclick="addLine(this)"/>
                             </td>
                         </tr>
                     </c:forEach>
@@ -195,36 +160,6 @@
                     <%--标准行迁入--%>
             </table>
         </fieldset>
-        <c:if test="${bean.status==STATUS_SUBMIT|| bean.status==STATUS_BRANCH_PASS||bean.status==STATUS_MAIN_PASS}">
-            <fieldset class="form_fieldset">
-                <legend class="form_legend">
-                    科长审核
-                </legend>
-                <table cellpadding="0" cellspacing="0" class="form_table">
-                    <tr class="tr_dark">
-                        <td class="form_label_right" width="15%">审核意见：</td>
-                        <td class="form_content" colspan="3">
-                            <form:textarea path="kzOpinion" cssClass="input_textarea_long"/>
-                        </td>
-                    </tr>
-                </table>
-            </fieldset>
-        </c:if>
-        <c:if test="${bean.status==STATUS_BRANCH_PASS||bean.status==STATUS_MAIN_PASS}">
-            <fieldset class="form_fieldset">
-                <legend class="form_legend">
-                    分管领导审核
-                </legend>
-                <table cellpadding="0" cellspacing="0" class="form_table">
-                    <tr class="tr_dark">
-                        <td class="form_label_right" width="15%">审核意见：</td>
-                        <td class="form_content" colspan="3">
-                            <form:textarea path="fgOpinion" cssClass="input_textarea_long"/>
-                        </td>
-                    </tr>
-                </table>
-            </fieldset>
-        </c:if>
 
         <table cellpadding="0" cellspacing="0" class="form_table">
             <tr class="tr_button">
@@ -237,52 +172,35 @@
                                    onclick="save(this,'${STATUS_EDIT}')">&nbsp;
                         </c:if>
                     </c:if>
-                    <c:if test="${canEdit_KZ}">
-                        <c:if test="${STATUS_SUBMIT ==bean.status}">
-                            <input type="button" value="审核通过" class="button_normal_long"
-                                   onclick="save(this,'${STATUS_BRANCH_PASS}')">&nbsp;
-                            <input type="button" value="退回修改" class="button_normal_long"
-                                   onclick="save(this,'${STATUS_BRANCH_BACK}')">&nbsp;
-                        </c:if>
-                    </c:if>
-
-                    <c:if test="${canEdit_FG}">
-                        <c:if test="${STATUS_BRANCH_PASS ==bean.status}">
-                            <input type="button" value="审核通过" class="button_normal_long"
-                                   onclick="save(this,'${STATUS_MAIN_PASS}')">&nbsp;
-                            <input type="button" value="退回修改" class="button_normal_long"
-                                   onclick="save(this,'${STATUS_MAIN_BACK}')">&nbsp;
-                        </c:if>
-                    </c:if>
                     <input type="button" value="取消" class="button_cancel" onclick="closeWindow()">
                 </td>
             </tr>
         </table>
     </div>
 </form:form>
-<table style="display: none;" cellpadding="0" cellspacing="0" class="form_table" border="0">
+<table style="display: none;" cellpadding="0" cellspacing="0" class="form_table" border="1">
     <tbody id="hiddenStyle">
     <tr class="tr_dark"><%--标准行--%>
-        <td class="addTd">
-            <input type="text" name="orderNo" class="input_text" style="width: 95%;text-align: center"/>
+        <td>
+            <input type="text" name="orderNo" class="input_text" style="width: 92%;text-align: center"/>
         </td>
-        <td class="addTd">
-            <input type="text" name="dutyPerosn" class="input_text" style="width: 95%"/>
+        <td>
+            <input type="text" name="dutyPerosn" class="input_text" style="width: 95%;text-align: center"/>
         </td>
-        <td class="addTd">
-            <input type="text" name="keyWork" class="input_text" style="width: 95%"/>
+        <td>
+            <input type="text" name="keyWork" class="input_text" style="width: 95%;"/>
         </td>
-        <td class="addTd">
-            <textarea name="content" class="input_text" style="height:100%;width: 100%"></textarea>
+        <td>
+            <textarea name="content" class="input_textarea" style="width: 95%;height: 50px;"></textarea>
         </td>
-        <td class="addTd">
-            <textarea name="schedule" class="input_text" style="height:100%;width: 95%"></textarea>
+        <td>
+            <textarea name="schedule" class="input_textarea" style="width: 95%;height: 50px;"></textarea>
         </td>
-        <td class="addTd">
-            <input type="text" name="jbr" class="input_text" style="width: 95%"/>
+        <td>
+            <input type="text" name="jbr" class="input_text" style="width: 95%;"/>
         </td>
-        <td class="addTd"><input type="button" value="删除" class="button_select_remove"
-                                 onclick="addLine(this)"/></td>
+        <td style="width: 25px"><input type="button" value="删除" class="button_select_remove"
+                                       onclick="addLine(this)"/></td>
     </tr>
     </tbody>
 </table>

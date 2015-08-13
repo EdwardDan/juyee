@@ -25,35 +25,37 @@
                     </td>
                 </tr>
             </table>
-            <table cellpadding="0" cellspacing="0" class="form_table">
+            <table cellpadding="0" cellspacing="0" border="1" class="table_thin_line"
+                   style="text-align: center;width: 100%"
+                   id="itemTable">
                 <tr class="tr_header">
-                    <td class="addTd" width="5%">序号</td>
-                    <td class="addTd" width="10%">责任人</td>
-                    <td class="addTd" width="10%">是否重点工作</td>
-                    <td class="addTd" width="40%">工作内容</td>
-                    <td class="addTd" width="20%">工作进度</td>
-                    <td class="addTd" width="10%">经办人</td>
+                    <td style="width:5%">序号</td>
+                    <td style="width:8%">责任人</td>
+                    <td style="width:8%">是否重点工作</td>
+                    <td style="width:25%">工作内容</td>
+                    <td style="width:20%">工作进度</td>
+                    <td style="width:10%">经办人</td>
                     <c:if test="${empty oaWorkPlanItems !=null}">
                     <c:forEach items="${oaWorkPlanItems}" var="item">
                 <tr class="tr_light">
-                    <td class="form_content" style="text-align: center">
+                    <td  style="text-align: center">
                             ${item.orderNo}
                     </td>
 
-                    <td class="form_content">
+                    <td  style="text-align: center">
                             ${item.dutyPerosn}
                     </td>
 
-                    <td class="form_content">
+                    <td  style="text-align: center">
                             ${item.keyWork}
                     </td>
-                    <td class="form_content">
-                            ${item.content}
+                    <td >
+                            <sys:toHtml>${item.content}</sys:toHtml>
                     </td>
-                    <td class="form_content">
-                            ${item.schedule}
+                    <td >
+                        <sys:toHtml>${item.schedule}</sys:toHtml>
                     </td>
-                    <td class="form_content">
+                    <td  style="text-align: center">
                             ${item.jbr}
                     </td>
                 </tr>

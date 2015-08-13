@@ -11,15 +11,22 @@
         <tr class="tr_light">
             <td class="form_label">会议地点：</td>
             <td class="form_content">
-                ${bean.address}                    </td>
+                ${bean.address} </td>
         </tr>
         <tr class="tr_dark">
             <td class="form_label">内部人员：</td>
             <td class="form_content">
-                <c:forEach var="item" items="${innerPersons}">
-                    ${item.name},
+                <c:forEach var="item" items="${innerPersons}" varStatus="st">
+                    <c:choose>
+                        <c:when test="${st.index!=fn:length(innerPersons)-1}">
+                            ${item.name},
+                        </c:when>
+                        <c:otherwise>
+                            ${item.name}
+                        </c:otherwise>
+                    </c:choose>
                 </c:forEach>
-                                </td>
+            </td>
         </tr>
         <tr class="tr_light">
             <td class="form_label">外部人员：</td>
@@ -30,7 +37,7 @@
         <tr class="tr_dark">
             <td class="form_label">会议议题：</td>
             <td class="form_content">
-                ${bean.title}                    </td>
+                ${bean.title} </td>
         </tr>
         <tr class="tr_light">
             <td class="form_label">会议内容：</td>
