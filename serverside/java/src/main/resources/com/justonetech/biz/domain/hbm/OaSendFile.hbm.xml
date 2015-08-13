@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.justonetech.biz.domain">
+	<class
+		name="OaSendFile"
+		table="OA_SEND_FILE"
+	>
+		
+		<meta attribute="sync-DAO">false</meta>
+		<meta attribute="sync-jsp">true</meta>
+		<meta attribute="sync-boolean">get</meta>
+		<meta attribute="treeable">false</meta>
+		<meta attribute="projectable">false</meta>
+        <meta attribute="tableName">发文记录</meta>
+        <meta attribute="tableComment">发文记录</meta>
+	    <meta attribute="sync-templatePatterns">list\w*</meta>
+        <meta attribute="sub-system">oa</meta>
+
+		<id
+			name="id"
+			type="java.lang.Long"
+			column="ID"
+		>
+            <generator class="com.justonetech.core.orm.hibernate.LongIdGenerator"/>
+		</id>
+
+		<property
+			name="fileTitle"
+			column="FILE_TITLE"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">发文标题</meta>
+            <meta attribute="ColumnComment">发文标题</meta>
+        </property>
+
+		<property
+			name="fileCode"
+			column="FILE_CODE"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">发文字号</meta>
+            <meta attribute="ColumnComment">发文字号</meta>
+        </property>
+
+		<property
+			name="sendDept"
+			column="SEND_DEPT"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">主送机关</meta>
+            <meta attribute="ColumnComment">主送机关</meta>
+        </property>
+
+		<property
+			name="ccDept"
+			column="CC_DEPT"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">抄送机关</meta>
+            <meta attribute="ColumnComment">抄送机关</meta>
+        </property>
+
+		<property
+			name="writtenDept"
+			column="WRITTEN_DEPT"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">成文机关</meta>
+            <meta attribute="ColumnComment">成文机关</meta>
+        </property>
+
+		<property
+			name="writtenDate"
+			column="WRITTEN_DATE"
+			type="date"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">成文日期</meta>
+            <meta attribute="ColumnComment">成文日期</meta>
+        </property>
+
+        <property
+                name="description"
+                column="DESCRIPTION"
+                type="string"
+                not-null="false"
+                length="2000"
+                >
+            <meta attribute="ColumnName">备注</meta>
+            <meta attribute="ColumnComment">备注</meta>
+        </property>
+
+		<property
+			name="createTime"
+			column="CREATE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="16"
+        >
+            <meta attribute="ColumnName">创建时间</meta>
+            <meta attribute="ColumnComment">创建时间</meta>
+        </property>
+
+		<property
+			name="updateTime"
+			column="UPDATE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="16"
+        >
+            <meta attribute="ColumnName">更新时间</meta>
+            <meta attribute="ColumnComment">更新时间</meta>
+        </property>
+
+		<property
+			name="updateUser"
+			column="UPDATE_USER"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">更新人</meta>
+            <meta attribute="ColumnComment">更新人</meta>
+        </property>
+
+		<property
+			name="createUser"
+			column="CREATE_USER"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">创建人</meta>
+            <meta attribute="ColumnComment">创建人</meta>
+        </property>
+
+		<many-to-one
+			name="fileDoc"
+			column="FILE_DOC_ID"
+			class="DocDocument"
+			not-null="false"
+		>
+		</many-to-one>
+
+		<many-to-one
+			name="type"
+			column="TYPE_ID"
+			class="com.justonetech.system.domain.SysCodeDetail"
+			not-null="false"
+		>
+		</many-to-one>
+
+		<many-to-one
+			name="secret"
+			column="SECRET_ID"
+			class="com.justonetech.system.domain.SysCodeDetail"
+			not-null="false"
+		>
+		</many-to-one>
+
+		<many-to-one
+			name="emergency"
+			column="EMERGENCY_ID"
+			class="com.justonetech.system.domain.SysCodeDetail"
+			not-null="false"
+		>
+		</many-to-one>
+
+	</class>	
+    <query name="oasendfile_all_data_query">
+        <![CDATA[FROM OaSendFile]]>
+    </query>
+</hibernate-mapping>

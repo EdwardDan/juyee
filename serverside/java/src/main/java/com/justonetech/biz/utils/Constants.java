@@ -145,4 +145,27 @@ public class Constants {
     public static final String PROJ_STAGE_ENGINEERPLANNINGPERMIT = "EngineerPlanningPermit";//工程规划许可证
     public static final String PROJ_STAGE_CONSTRUCTIONPERMITS = "ConstructionPermits";//施工许可证
 
+    //发文类型
+    public static final String OA_AEND_FILE = "OaSendFile";
+    public static final String OA_AEND_FILE_1 = "1";
+    public static final String OA_AEND_FILE_2 = "2";
+    public static final String OA_AEND_FILE_3 = "3";
+    public static final String OA_AEND_FILE_4 = "4";
+    public static final String OA_AEND_FILE_5 = "5";
+    public static final String OA_AEND_FILE_6 = "6";
+
+    //密级
+    public static final String FILE_SECURITY = "FileSecurity";
+    public static final String FILE_SECURITY_1 = "1";
+    public static final String FILE_SECURITY_2 = "2";
+    public static final String FILE_SECURITY_3 = "3";
+    public static final String FILE_SECURITY_4 = "4";
+
+    //紧急程度
+    public static final String EMERGENCY = "Emergency";
+    public static final String EMERGENCY_1 = "1";
+    public static final String EMERGENCY_2 = "2";
+    public static final String EMERGENCY_3 = "3";
+
+
 }

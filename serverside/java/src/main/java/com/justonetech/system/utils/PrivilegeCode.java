@@ -104,5 +104,7 @@ public class PrivilegeCode {
     public static final String OA_WORK_PLAN_AUDIZ_KZ = "OaWorkPlan_audit_kz";  //科室上报_科长审核
     public static final String OA_WORK_PLAN_AUDIT_FG = "OaWorkPlan_audit_fg";  //科室上报_分管领导审核
 
+    public static final String OA_SEND_FILE_EDIT = OaSendFile.class.getSimpleName() + "_edit";  //发文记录_编辑
+
 }
 
