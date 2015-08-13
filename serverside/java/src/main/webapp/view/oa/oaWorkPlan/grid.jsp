@@ -17,17 +17,9 @@
                     {name: 'id', width: 10, align: "center", searchtype: "integer", hidden: true},
                     {name: "reportDept", width: "47", align: "center", searchtype: "string", sortable: true},
                     {name: "reportPerson", width: "47", align: "center", searchtype: "string", sortable: true},
-                    {
-                        name: "workTime",
-                        width: "47",
-                        align: "center",
-                        searchtype: "date",
-                        sortable: true,
-                        formatter: 'date',
-                        formatoptions: {srcformat: 'Y-m-d', newformat: 'Y-m-d'}
-                    },
+                    {name: "workTime",width: "47",align: "center",searchtype: "string",sortable: true},
                     {name: "status", width: "47", align: "center", searchtype: "integer", hidden: true},
-                    {name: "statusName", width: "47", align: "center", searchtype: "string", sortable: true},
+                    {name: "statusName", width: "47", align: "center", searchtype: "string", sortable: true}
                 ],
                 actModel: [
                     {name: 'operation', width: 40, align: 'center'}
@@ -67,11 +59,11 @@
                     "groupOp": "AND", "rules": [
                         {"field": "上报科室", "op": "cn", "data": ""},
 //                        {"field": "上报人用户名", "op": "cn", "data": ""},
-                        {"field": "上报人姓名", "op": "cn", "data": ""},
-                        {"field": "上报开始时间", "op": "cn", "data": ""},
-                        {"field": "上报结束时间", "op": "cn", "data": ""},
+//                        {"field": "上报人姓名", "op": "cn", "data": ""},
+//                        {"field": "上报开始时间", "op": "cn", "data": ""},
+//                        {"field": "上报结束时间", "op": "cn", "data": ""},
 //                        {"field": "附件ID(预留)", "op": "cn", "data": ""},
-                        {"field": "状态", "op": "cn", "data": ""},
+//                        {"field": "状态", "op": "cn", "data": ""}
 //                        {"field": "科长审核意见", "op": "cn", "data": ""},
 //                        {"field": "科长审核时间", "op": "bw", "data": ""},
 //                        {"field": "科长审核用户名", "op": "cn", "data": ""},
