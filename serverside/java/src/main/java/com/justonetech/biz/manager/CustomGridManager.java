@@ -52,9 +52,9 @@ public class CustomGridManager {
     private OaPublicInfoService oaPublicInfoService;
 
     private static final String LINK_URL = "<a href='#' class='index' onclick='viewCustomGridDetail(\"{0}\")'>{1}</a>"; //查看链接
-    private static final String LINK_URL_XXFB = "<a href='#' class='index' onclick='viewCustomGridDetailXxfb(\"{0}\")'>{1}</a>"; //查看链接
+    private static final String LINK_URL_XXFB = "<a href='#' title='{2}' class='index' onclick='viewCustomGridDetailXxfb(\"{0}\")'>{1}</a>"; //查看链接
 
-    private static final int NUM = 35;
+    private static final int NUM = 30;
 
     /**
      * 获取版块数据
@@ -118,8 +118,8 @@ public class CustomGridManager {
     }
 
     //查看链接
-    private String getLinkUrlXxfb(String title, String url) {
-        return FormatUtils.format(LINK_URL_XXFB, url, title);
+    private String getLinkUrlXxfb(String titleYs, String title, String url) {
+        return FormatUtils.format(LINK_URL_XXFB, url, title, titleYs);
     }
 
     //获取月日
@@ -146,7 +146,7 @@ public class CustomGridManager {
      * 会议纪要
      */
     private void setGridData1(CustomGridData data) {
-        data.setCols(new String[]{ "标题", "发布时间"});
+        data.setCols(new String[]{"标题", "发布时间"});
         data.setAligns(new String[]{"left", "right"});
         data.setWidths(new int[]{80, 15});
 
@@ -157,7 +157,7 @@ public class CustomGridManager {
             i++;
             if (i > MAX_COUNT) break;
             Vector<Object> v = new Vector<Object>();
-            v.add(getLinkUrlXxfb(String.valueOf(getPartStr(bizData.getTitle(), 10)), "site/infoView.do?id=" + bizData.getId()));
+            v.add(getLinkUrlXxfb(bizData.getTitle(), String.valueOf(getPartStr(bizData.getTitle(), 10)), "site/infoView.do?id=" + bizData.getId()));
             v.add(bizData.getReportDate());
             ret.add(v);
         }
@@ -169,7 +169,7 @@ public class CustomGridManager {
      * 情况通报
      */
     private void setGridData2(CustomGridData data) {
-        data.setCols(new String[]{ "标题", "发布时间"});
+        data.setCols(new String[]{"标题", "发布时间"});
         data.setAligns(new String[]{"left", "right"});
         data.setWidths(new int[]{80, 15});
 
@@ -180,7 +180,7 @@ public class CustomGridManager {
             i++;
             if (i > MAX_COUNT) break;
             Vector<Object> v = new Vector<Object>();
-            v.add(getLinkUrlXxfb(String.valueOf(getPartStr(bizData.getTitle(), 10)), "site/infoView.do?id=" + bizData.getId()));
+            v.add(getLinkUrlXxfb(bizData.getTitle(), String.valueOf(getPartStr(bizData.getTitle(), 10)), "site/infoView.do?id=" + bizData.getId()));
             v.add(bizData.getReportDate());
             ret.add(v);
         }
@@ -192,7 +192,7 @@ public class CustomGridManager {
      * 规章制度
      */
     private void setGridData3(CustomGridData data) {
-        data.setCols(new String[]{ "标题", "发布时间"});
+        data.setCols(new String[]{"标题", "发布时间"});
         data.setAligns(new String[]{"left", "right"});
         data.setWidths(new int[]{80, 15});
 
@@ -203,7 +203,7 @@ public class CustomGridManager {
             i++;
             if (i > MAX_COUNT) break;
             Vector<Object> v = new Vector<Object>();
-            v.add(getLinkUrlXxfb(String.valueOf(getPartStr(bizData.getTitle(), 10)), "site/infoView.do?id=" + bizData.getId()));
+            v.add(getLinkUrlXxfb(bizData.getTitle(), String.valueOf(getPartStr(bizData.getTitle(), 10)), "site/infoView.do?id=" + bizData.getId()));
             v.add(bizData.getReportDate());
             ret.add(v);
         }
@@ -215,7 +215,7 @@ public class CustomGridManager {
      * 工作动态
      */
     private void setGridData4(CustomGridData data) {
-        data.setCols(new String[]{ "标题", "发布时间"});
+        data.setCols(new String[]{"标题", "发布时间"});
         data.setAligns(new String[]{"left", "right"});
         data.setWidths(new int[]{80, 15});
 
@@ -226,7 +226,7 @@ public class CustomGridManager {
             i++;
             if (i > MAX_COUNT) break;
             Vector<Object> v = new Vector<Object>();
-            v.add(getLinkUrlXxfb(String.valueOf(getPartStr(bizData.getTitle(), 10)), "site/infoView.do?id=" + bizData.getId()));
+            v.add(getLinkUrlXxfb(bizData.getTitle(), String.valueOf(getPartStr(bizData.getTitle(), 10)), "site/infoView.do?id=" + bizData.getId()));
             v.add(bizData.getReportDate());
             ret.add(v);
         }
