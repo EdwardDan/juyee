@@ -139,7 +139,7 @@ public class OaMeetingInnerController extends BaseCRUDActionController<OaMeeting
                 map = new HashMap<String, Object>();
                 map.put("id", data.getId());
                 map.put("beginTime", data.getBeginTime());
-                map.put("endTime", data.getEndTime());
+//                map.put("endTime", data.getEndTime());
                 map.put("title", data.getTitle());
                 map.put("meetTime", data.getMeetTime());
                 map.put("address", data.getAddress());
@@ -248,7 +248,7 @@ public class OaMeetingInnerController extends BaseCRUDActionController<OaMeeting
                 target = oaMeetingInnerService.get(entity.getId());
                 ReflectionUtils.copyBean(entity, target, new String[]{
                         "beginTime",
-                        "endTime",
+//                        "endTime",
                         "address",
                         "innerPersons",
                         "outerPersons",

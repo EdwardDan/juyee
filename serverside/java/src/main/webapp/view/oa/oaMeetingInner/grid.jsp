@@ -8,20 +8,20 @@
                 colNames: ['ID',
                     '会议议题',
                     '会议时间',
-                    '会议开始时间',
-                    '会议结束时间',
+//                    '会议开始时间',
+//                    '会议结束时间',
                     '会议地点',
                     '附件',
                     '操作'
                 ],
                 colModel: [
                     {name: 'id', width: 10, align: "center", searchtype: "integer", hidden: true},
-                    {name: "title", width: "66", align: "left", searchtype: "string", sortable: true},
-                    {name: "meetTime", width: "75", align: "center", searchtype: "datetime", sortable: true},
-                    {name: "beginTime", width: "40", align: "center", searchtype: "date", sortable: true, hidden: true},
-                    {name: "endTime", width: "40", align: "center", searchtype: "date", sortable: true, hidden: true},
+                    {name: "title", width: "100", align: "left", searchtype: "string", sortable: true},
+//                    {name: "meetTime", width: "50", align: "center", searchtype: "date", sortable: true},
+                    {name: "beginTime", width: "40", align: "center", searchtype: "date", sortable: true, formatter: 'date', formatoptions: {srcformat: 'Y-m-d H:i:s', newformat: 'Y-m-d H:i'}},
+//                    {name: "endTime", width: "40", align: "center", searchtype: "date", sortable: true, hidden: true},
                     {name: "address", width: "66", align: "left", searchtype: "string", sortable: true},
-                    {name: "docDown", width: "30", align: "center"}
+                    {name: "docDown", width: "25", align: "center"}
                 ],
                 actModel: [
                     {name: 'operation', width: 40, align: 'center'}
@@ -46,7 +46,8 @@
                 defaultQuery: {
                     "groupOp": "AND", "rules": [
                         {"field": "会议议题", "op": "cn", "data": ""},
-                        {"field": "会议地点", "op": "cn", "data": ""}
+                        {"field": "会议地点", "op": "cn", "data": ""},
+                        {"field": "会议时间", "op": "bt", "data": ""}
                     ]
                 },
                 queryButton: $("#queryButton"),
@@ -107,16 +108,16 @@
                        onclick="doAdd()"/>
             </c:if>
         </div>
-        <div style="float:left;padding-right: 10px">
-            起始日期：<input type="text" name="start" id="start" value="" class="input_datetime"
-                        style="width: 120px"
-                        onClick="calendar('start','start');"/>
-            结束日期：<input type="text" name="end" id="end" value="" class="input_datetime"
-                        style="width: 120px"
-                        onClick="calendar('end','end');"/>
-            <input type="button" value="重置" class="button_all" onclick="resetDate()"/>
-            <input type="button" value="查询" class="btn_Search" onclick="doThisQuery(this)"/>
-        </div>
+        <%--<div style="float:left;padding-right: 10px">--%>
+            <%--起始日期：<input type="text" name="start" id="start" value="" class="input_datetime"--%>
+                        <%--style="width: 120px"--%>
+                        <%--onClick="calendar('start','start');"/>--%>
+            <%--结束日期：<input type="text" name="end" id="end" value="" class="input_datetime"--%>
+                        <%--style="width: 120px"--%>
+                        <%--onClick="calendar('end','end');"/>--%>
+            <%--<input type="button" value="重置" class="button_all" onclick="resetDate()"/>--%>
+            <%--<input type="button" value="查询" class="btn_Search" onclick="doThisQuery(this)"/>--%>
+        <%--</div>--%>
     </div>
 </div>
 <div class="gridQueryTable">
