@@ -1,0 +1,63 @@
+/*==============================================================*/
+/* Table: OA_SEND_FILE                                     */
+/*==============================================================*/
+create table OA_SEND_FILE 
+(
+   ID                   NUMBER(10)           not null,
+   FILE_CODE            VARCHAR2(100),
+   FILE_TITLE           VARCHAR2(100),
+   SEND_DEPT            VARCHAR2(200),
+   CC_DEPT              VARCHAR2(200),
+	 WRITTEN_DEPT         VARCHAR2(200),
+   WRITTEN_DATE         DATE,
+   DESCRIPTION          VARCHAR2(2000),
+   FILE_DOC_ID          NUMBER(10),
+   TYPE_ID              NUMBER(10),
+   SECRET_ID            NUMBER(10),
+   EMERGENCY_ID          NUMBER(10),
+   CREATE_TIME          DATE,
+   CREATE_USER          VARCHAR2(100),
+   UPDATE_TIME          DATE,
+   UPDATE_USER          VARCHAR2(100),
+   constraint PK_OA_SEND_FILE primary key (ID),
+   constraint FK_OA_SEND_FILE_DOC foreign key (FILE_DOC_ID)
+         references DOC_DOCUMENT (ID),
+	 constraint FK_OA_SEND_FILE_TYPE foreign key (TYPE_ID)
+         references SYS_CODE_DETAIL (ID),
+	 constraint FK_OA_SEND_FILE_SECRET foreign key (SECRET_ID)
+         references SYS_CODE_DETAIL (ID),
+	 constraint FK_OA_SEND_FILE_EMERGENCY foreign key (EMERGENCY_ID)
+         references SYS_CODE_DETAIL (ID)
+);
+
+comment on table OA_SEND_FILE is '发文记录';
+
+comment on column OA_SEND_FILE.ID is '标识';
+
+comment on column OA_SEND_FILE.FILE_CODE is '发文字号';
+
+comment on column OA_SEND_FILE.FILE_TITLE is '发文标题';
+
+comment on column OA_SEND_FILE.SEND_DEPT is '发文机关';
+
+comment on column OA_SEND_FILE.CC_DEPT is '抄送机关';
+
+comment on column OA_SEND_FILE.WRITTEN_DEPT is '成文机关';
+
+comment on column OA_SEND_FILE.WRITTEN_DATE is '成文日期';
+
+comment on column OA_SEND_FILE.FILE_DOC_ID is '附件ID';
+
+comment on column OA_SEND_FILE.TYPE_ID is '发文类型ID';
+
+comment on column OA_SEND_FILE.SECRET_ID is '密级ID';
+
+comment on column OA_SEND_FILE.EMERGENCY_ID is '紧急程度ID';
+
+comment on column OA_SEND_FILE.CREATE_TIME is '创建时间';
+
+comment on column OA_SEND_FILE.CREATE_USER is '创建用户名';
+
+comment on column OA_SEND_FILE.UPDATE_TIME is '更新时间';
+
+comment on column OA_SEND_FILE.UPDATE_USER is '更新用户名';
