@@ -8,6 +8,7 @@ import com.justonetech.biz.domain.ProjInfo;
 import com.justonetech.biz.utils.Constants;
 import com.justonetech.core.utils.DateTimeHelper;
 import com.justonetech.core.utils.JspHelper;
+import com.justonetech.core.utils.MathHelper;
 import com.justonetech.core.utils.StringHelper;
 import com.justonetech.system.domain.SysCodeDetail;
 import com.justonetech.system.manager.SysCodeManager;
@@ -157,7 +158,8 @@ public class DataStageReportSumController {
             if (null == yearXZ || 0 == yearXZ) {
                 map.put("per_" + Constants.PROJ_STAGE_PSOPINIONS + "_" + code, 0);
             } else {
-                map.put("per_" + Constants.PROJ_STAGE_PSOPINIONS + "_" + code, (accXZ / yearXZ) * 100);
+                double perXZ = MathHelper.roundDouble(accXZ * 100 / yearXZ, 0);
+                map.put("per_" + Constants.PROJ_STAGE_PSOPINIONS + "_" + code, perXZ);
             }
             //工可批复
             Integer totalGK = getProjectNum(prjInfoIds, Constants.PROJ_STAGE_REPLY4WORKERS, categoryId, null, null, null);
@@ -175,7 +177,8 @@ public class DataStageReportSumController {
             if (null == yearGK || 0 == yearGK) {
                 map.put("per_" + Constants.PROJ_STAGE_REPLY4WORKERS + "_" + code, 0);
             } else {
-                map.put("per_" + Constants.PROJ_STAGE_REPLY4WORKERS + "_" + code, (accGK / yearGK) * 100);
+                double perGK = MathHelper.roundDouble(accGK * 100 / yearGK, 0);
+                map.put("per_" + Constants.PROJ_STAGE_REPLY4WORKERS + "_" + code, perGK);
             }
             //初步设计
             Integer totalCB = getProjectNum(prjInfoIds, Constants.PROJ_STAGE_PREDESIGN, categoryId, null, null, null);
@@ -193,7 +196,8 @@ public class DataStageReportSumController {
             if (null == yearCB || 0 == yearCB) {
                 map.put("per_" + Constants.PROJ_STAGE_PREDESIGN + "_" + code, 0);
             } else {
-                map.put("per_" + Constants.PROJ_STAGE_PREDESIGN + "_" + code, (accCB / yearCB) * 100);
+                double perCB = MathHelper.roundDouble(accCB * 100 / yearCB, 0);
+                map.put("per_" + Constants.PROJ_STAGE_PREDESIGN + "_" + code, perCB);
             }
             //用地规划许可证
             Integer totalYDGH = getBidNum(bidIds, Constants.PROJ_STAGE_LANDUSERPLANNING, categoryId, null, null, null);
@@ -211,7 +215,8 @@ public class DataStageReportSumController {
             if (null == yearYDGH || 0 == yearYDGH) {
                 map.put("per_" + Constants.PROJ_STAGE_LANDUSERPLANNING + "_" + code, 0);
             } else {
-                map.put("per_" + Constants.PROJ_STAGE_LANDUSERPLANNING + "_" + code, (accYDGH / yearYDGH) * 100);
+                double perYDGH = MathHelper.roundDouble(accYDGH * 100 / yearYDGH, 0);
+                map.put("per_" + Constants.PROJ_STAGE_LANDUSERPLANNING + "_" + code, perYDGH);
             }
             //用地批准书
             Integer totalYDPZ = getBidNum(bidIds, Constants.PROJ_STAGE_LANDUSERAPPROVAL, categoryId, null, null, null);
@@ -226,12 +231,18 @@ public class DataStageReportSumController {
             Integer accYDPZ = getBidNum(bidIds, Constants.PROJ_STAGE_LANDUSERAPPROVAL, categoryId, Integer.valueOf(year), Integer.valueOf(month), "acc");
             accPlanYDPZ += accYDPZ;
             map.put("acc_" + Constants.PROJ_STAGE_LANDUSERAPPROVAL + "_" + code, JspHelper.getInteger(accYDPZ));
+            if (null == yearYDPZ || 0 == yearYDPZ) {
+                map.put("per_" + Constants.PROJ_STAGE_LANDUSERAPPROVAL + "_" + code, 0);
+            } else {
+                double perYDPZ = MathHelper.roundDouble(accYDPZ * 100 / yearYDPZ, 0);
+                map.put("per_" + Constants.PROJ_STAGE_LANDUSERAPPROVAL + "_" + code, perYDPZ);
+            }
             //工程规划许可证
             Integer totalGC = getBidNum(bidIds, Constants.PROJ_STAGE_ENGINEERPLANNINGPERMIT, categoryId, null, null, null);
             totalPlanGC += totalGC;
             map.put("total_" + Constants.PROJ_STAGE_ENGINEERPLANNINGPERMIT + "_" + code, JspHelper.getInteger(totalGC));
             Integer yearGC = getBidNum(bidIds, Constants.PROJ_STAGE_ENGINEERPLANNINGPERMIT, categoryId, Integer.valueOf(year), null, null);
-            totalPlanGC += yearGC;
+            yearPlanGC += yearGC;
             map.put("year_" + Constants.PROJ_STAGE_ENGINEERPLANNINGPERMIT + "_" + code, JspHelper.getInteger(yearGC));
             Integer monthGC = getBidNum(bidIds, Constants.PROJ_STAGE_ENGINEERPLANNINGPERMIT, categoryId, Integer.valueOf(year), Integer.valueOf(month), null);
             monthPlanGC += monthGC;
@@ -239,6 +250,12 @@ public class DataStageReportSumController {
             Integer accGC = getBidNum(bidIds, Constants.PROJ_STAGE_ENGINEERPLANNINGPERMIT, categoryId, Integer.valueOf(year), Integer.valueOf(month), "acc");
             accPlanGC += accGC;
             map.put("acc_" + Constants.PROJ_STAGE_ENGINEERPLANNINGPERMIT + "_" + code, JspHelper.getInteger(accGC));
+            if (null == yearGC || 0 == yearGC) {
+                map.put("per_" + Constants.PROJ_STAGE_ENGINEERPLANNINGPERMIT + "_" + code, 0);
+            } else {
+                double perGC = MathHelper.roundDouble(accGC * 100 / yearGC, 0);
+                map.put("per_" + Constants.PROJ_STAGE_ENGINEERPLANNINGPERMIT + "_" + code, perGC);
+            }
             //施工许可证
             Integer totalSG = getBidNum(bidIds, Constants.PROJ_STAGE_CONSTRUCTIONPERMITS, categoryId, null, null, null);
             totalPlanSG += totalSG;
@@ -252,9 +269,14 @@ public class DataStageReportSumController {
             Integer accSG = getBidNum(bidIds, Constants.PROJ_STAGE_CONSTRUCTIONPERMITS, categoryId, Integer.valueOf(year), Integer.valueOf(month), "acc");
             accPlanSG += accSG;
             map.put("acc_" + Constants.PROJ_STAGE_CONSTRUCTIONPERMITS + "_" + code, JspHelper.getInteger(accSG));
+            if (null == yearSG || 0 == yearSG) {
+                map.put("per_" + Constants.PROJ_STAGE_CONSTRUCTIONPERMITS + "_" + code, 0);
+            } else {
+                double perSG = MathHelper.roundDouble(accSG * 100 / yearSG, 0);
+                map.put("per_" + Constants.PROJ_STAGE_CONSTRUCTIONPERMITS + "_" + code, perSG);
+            }
         }
         model.addAttribute("map", map);
-
         model.addAttribute("totalPlanXZ", totalPlanXZ);
         model.addAttribute("totalPlanGK", totalPlanGK);
         model.addAttribute("totalPlanCB", totalPlanCB);
@@ -290,37 +312,44 @@ public class DataStageReportSumController {
         if (null == yearPlanXZ || 0 == yearPlanXZ) {
             model.addAttribute("perXZ", 0);
         } else {
-            model.addAttribute("perXZ", (accPlanXZ / yearPlanXZ) * 100);
+            double perPlanXZ = MathHelper.roundDouble(accPlanXZ * 100 / yearPlanXZ, 0);
+            model.addAttribute("perXZ", perPlanXZ);
         }
         if (null == yearPlanGK || 0 == yearPlanGK) {
             model.addAttribute("perGK", 0);
         } else {
-            model.addAttribute("perGK", (accPlanGK / yearPlanGK) * 100);
+            double perPlanGK = MathHelper.roundDouble(accPlanGK * 100 / yearPlanGK, 0);
+            model.addAttribute("perGK", perPlanGK);
         }
         if (null == yearPlanCB || 0 == yearPlanCB) {
             model.addAttribute("perCB", 0);
         } else {
-            model.addAttribute("perCB", (accPlanCB / yearPlanCB) * 100);
+            double perPlanCB = MathHelper.roundDouble(accPlanCB * 100 / yearPlanCB, 0);
+            model.addAttribute("perCB", perPlanCB);
         }
         if (null == yearPlanYDGH || 0 == yearPlanYDGH) {
             model.addAttribute("perYDGH", 0);
         } else {
-            model.addAttribute("perYDGH", (accPlanYDGH / yearPlanYDGH) * 100);
+            double perPlanYDGH = MathHelper.roundDouble(accPlanYDGH * 100 / yearPlanYDGH, 0);
+            model.addAttribute("perYDGH", perPlanYDGH);
         }
         if (null == yearPlanYDPZ || 0 == yearPlanYDPZ) {
             model.addAttribute("perYDPZ", 0);
         } else {
-            model.addAttribute("perYDPZ", (accPlanYDPZ / yearPlanYDPZ) * 100);
+            double perPlanYDPZ = MathHelper.roundDouble(accPlanYDPZ * 100 / yearPlanYDPZ, 0);
+            model.addAttribute("perYDPZ", perPlanYDPZ);
         }
         if (null == yearPlanGC || 0 == yearPlanGC) {
             model.addAttribute("perGC", 0);
         } else {
-            model.addAttribute("perGC", (accPlanGC / yearPlanGC) * 100);
+            double perPlanGC = MathHelper.roundDouble(accPlanGC * 100 / yearPlanGC, 0);
+            model.addAttribute("perGC", perPlanGC);
         }
         if (null == yearPlanSG || 0 == yearPlanSG) {
             model.addAttribute("perSG", 0);
         } else {
-            model.addAttribute("perSG", (accPlanSG / yearPlanSG) * 100);
+            double perPlanSG = MathHelper.roundDouble(accPlanSG * 100 / yearPlanSG, 0);
+            model.addAttribute("perSG", perPlanSG);
         }
 
         return "view/query/dataStageReportSum/sumData";
@@ -372,7 +401,16 @@ public class DataStageReportSumController {
         }
         List<DataStageReportItem> itemList = dataStageReportItemService.findByQuery(hql);
 
-        return itemList.size();
+        Map<Long, DataStageReportItem> map = new HashMap<Long, DataStageReportItem>();
+        for (DataStageReportItem reportItem : itemList) {
+            ProjInfo project = reportItem.getStageReport().getProject();
+            map.put(project.getId(), reportItem);
+        }
+        List<DataStageReportItem> itemListNew = new ArrayList<DataStageReportItem>();
+        for (DataStageReportItem reportItem : map.values()) {
+            itemListNew.add(reportItem);
+        }
+        return itemListNew.size();
     }
 
     /**
@@ -421,6 +459,15 @@ public class DataStageReportSumController {
         }
         List<DataStageReportItem> itemList = dataStageReportItemService.findByQuery(hql);
 
-        return itemList.size();
+        Map<Long, DataStageReportItem> map = new HashMap<Long, DataStageReportItem>();
+        for (DataStageReportItem reportItem : itemList) {
+            ProjBid bid = reportItem.getStageReport().getBid();
+            map.put(bid.getId(), reportItem);
+        }
+        List<DataStageReportItem> itemListNew = new ArrayList<DataStageReportItem>();
+        for (DataStageReportItem reportItem : map.values()) {
+            itemListNew.add(reportItem);
+        }
+        return itemListNew.size();
     }
 }
