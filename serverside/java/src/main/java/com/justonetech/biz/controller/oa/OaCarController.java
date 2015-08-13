@@ -416,7 +416,6 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
      * @param oaCar
      */
     public void modelInfo(Model model, OaCar oaCar) {
-
         //处理其他业务逻辑
         List<SysCodeDetail> carList = sysCodeManager.getCodeListByCode(Constants.OA_CAR_SELECT);
 
