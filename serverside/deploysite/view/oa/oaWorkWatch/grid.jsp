@@ -37,33 +37,24 @@
                         var rowData = jQuery("#listGrid").jqGrid('getRowData', id);
                         var status = rowData["status"];
                         var opButton = '<input type="button" value="查看" onclick="doView(' + id + ')" class="button_normal"/> ';
-                        var buttonName = "";
-                        if ('' == status || status == '${STATUS_EDIT}' || status == '${STATUS_BACK}' || status == '${STATUS_CHECK_BACK}') {
+                        if ('' == status || status == '${STATUS_EDIT}' || status == '${STATUS_ZR_BACK}' || status == '${STATUS_B_BACK}') {
                             if (${canEdit}) {
-                                buttonName = "编辑";
-                            }
-                        } else if (status == '${STATUS_ZR_SH}') {
-                            if (${canEdit_ZR}) {
-                                buttonName = "审核";
-                            }
-                        } else if (status == '${STATUS_INFO}') {
-                            if (${canEdit_KZ}) {
-                                buttonName = "上报";
-                            }
-                        } else if (status == '${STATUS_B_CHECK}') {
-                            if (${canEdit_B}) {
-                                buttonName = "核实";
-                            }
-                        }
-                        if (buttonName != '') {
-                            opButton += '<input type="button" value="' + buttonName + '" onclick="doEdit(' + id + ')" class="button_normal"/> ';
-                        }
-                        if ('' == status || status == '${STATUS_EDIT}' ) {
-                            if (${canEdit}) {
+                                opButton += '<input type="button" value="编辑" onclick="doEdit(' + id + ')" class="button_normal"/> ';
                                 opButton += '<input type="button" value="删除" onclick="doDelete(' + id + ')" class="button_normal"/> ';
                             }
+                        } else if (status == '${STATUS_SUBMIT}') {
+                            if (${canEdit_ZR}) {
+                                opButton += '<input type="button" value="审核" onclick="doAudit(' + id + ')" class="button_normal"/> ';
+                            }
+                        } else if (status == '${STATUS_ZR_PASS}') {
+                            if (${canEdit_KZ}) {
+                                opButton += '<input type="button" value="上报" onclick="doEdit(' + id + ')" class="button_normal"/> ';
+                            }
+                        } else if (status == '${STATUS_INFO}') {
+                            if (${canEdit_B}) {
+                                opButton += '<input type="button" value="核实" onclick="doEdit(' + id + ')" class="button_normal"/> ';
+                            }
                         }
-
                         jQuery("#listGrid").jqGrid('setRowData', ids[i], { operation: opButton});
                     }
                 }, rownumbers: true
@@ -72,8 +63,8 @@
                 defaultQuery: { "groupOp": "AND", "rules": [
                     { "field": "上报科室", "op": "cn", "data": ""},
                     { "field": "科室分管领导", "op": "cn", "data": ""},
-                    { "field": "上报开始时间", "op": "cn", "data": ""},
-                    { "field": "上报结束时间", "op": "cn", "data": ""}
+                    { "field": "上报开始时间", "op": "bt", "data": ""},
+                    { "field": "上报结束时间", "op": "bt", "data": ""}
                 ]},
                 queryButton: $("#queryButton"),
                 queryDesc: $("#queryConditionDesc")
@@ -83,21 +74,20 @@
         gridinit($("#listGrid"), conf);
     });
     function doView(id) {
-        openWindow("查看工作督办", "${ctx}/oaWorkWatch/view.do?id=" + id, false, 900, 450);
+        openWindow("查看工作督办", "${ctx}/oaWorkWatch/view.do?id=" + id, false);
     }
     function doAdd() {
-        openWindow("添加工作督办", "${ctx}/oaWorkWatch/add.do", true, 900, 450);
+        openWindow("添加工作督办", "${ctx}/oaWorkWatch/add.do", true);
     }
     function doEdit(id) {
-        openWindow("修改工作督办", "${ctx}/oaWorkWatch/modify.do?id=" + id, true, 900, 450);
+        openWindow("修改工作督办", "${ctx}/oaWorkWatch/modify.do?id=" + id, true);
+    }
+    function doAudit(id) {
+        openWindow("审核工作督办", "${ctx}/oaWorkWatch/audit.do?id=" + id, true);
     }
     function doDelete(id) {
         doGridDelete("${ctx}/oaWorkWatch/delete.do?id=" + id);
     }
-    //custom formatter
-    //function customeFormat(cellvalue, options, rowObject) {
-    //    return cellvalue == "true"?"是":"否";
-    //}
 </script>
 
 <div class="title_Search">
@@ -111,8 +101,7 @@
         </div>
         <div style="float:right;padding-right: 10px">
             <c:if test="${canEdit}">
-                <input type="button" value="添加" class="button_add"
-                       onclick="doAdd()"/>
+                <input type="button" value="添加" class="button_add" onclick="doAdd()"/>
             </c:if>
         </div>
     </div>
