@@ -7,7 +7,7 @@
             <td class="form_content" style="width: 35%;">
                 ${bean.reportDept}
             </td>
-            <td class="form_label_right" style="width: 15%;">科室分管领导：</td>
+            <td class="form_label_right" style="width: 15%;">分管领导：</td>
             <td class="form_content" style="width: 35%;">
                 ${bean.reportPerson}
             </td>
@@ -30,13 +30,9 @@
                 <td>${item.reportMethod}</td>
                 <td style="text-align: left;"><sys:toHtml>${item.completeDesc}</sys:toHtml></td>
                 <td>
-                    <select name="actualDesc" disabled>
-                        <option value=""></option>
-                        <option value="属实" <c:if test="${item.actualDesc =='属实'}"> selected </c:if> >属实</option>
-                        <option value="不属实"
-                                <c:if test="${item.actualDesc =='不属实'}">selected </c:if> >不属实
-                        </option>
-                    </select>
+                    <c:if test="${item.actualDesc ==''}"></c:if>
+                    <c:if test="${item.actualDesc =='1'}">属实</c:if>
+                    <c:if test="${item.actualDesc =='0'}">不属实</c:if>
                 </td>
             </tr>
         </c:forEach>
@@ -49,7 +45,7 @@
             </legend>
             <table cellpadding="0" cellspacing="0" class="form_table" style="text-align: center">
                 <tr class="tr_light">
-                    <td class="form_label_right" style="width: 15%" colspan="1">
+                    <td class="form_label_right" style="width: 15%">
                         审核意见：
                     </td>
                     <td class="form_content">
@@ -62,6 +58,9 @@
     <c:if test="${not empty bean.bgsOpinion}">
         <div style="height: 10px"></div>
         <fieldset class="form_fieldset" style="width: 96%;">
+            <legend class="form_legend">
+                办公室核实
+            </legend>
             <table cellpadding="0" cellspacing="0" class="form_table" style="text-align: center">
                 <tr class="tr_light">
                     <td class="form_label_right" style="width: 15%" colspan="1">

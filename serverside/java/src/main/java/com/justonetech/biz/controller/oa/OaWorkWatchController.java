@@ -6,17 +6,12 @@ import com.justonetech.biz.daoservice.OaWorkWatchItemService;
 import com.justonetech.biz.daoservice.OaWorkWatchService;
 import com.justonetech.biz.domain.OaWorkWatch;
 import com.justonetech.biz.domain.OaWorkWatchItem;
-import com.justonetech.biz.manager.DocumentManager;
 import com.justonetech.biz.utils.Constants;
 import com.justonetech.biz.utils.enums.OaWorkWatchStatus;
 import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.orm.hibernate.Page;
 import com.justonetech.core.utils.ReflectionUtils;
-import com.justonetech.core.utils.StringHelper;
-import com.justonetech.system.daoservice.SysDeptService;
 import com.justonetech.system.domain.SysUser;
-import com.justonetech.system.manager.SimpleQueryManager;
-import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
 import com.justonetech.system.utils.PrivilegeCode;
 import org.slf4j.Logger;
@@ -30,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.Set;
 
@@ -46,18 +42,6 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
 
     @Autowired
     private SysUserManager sysUserManager;
-
-    @Autowired
-    private SysCodeManager sysCodeManager;
-
-    @Autowired
-    private SysDeptService sysDeptService;
-
-    @Autowired
-    private DocumentManager documentManager;
-
-    @Autowired
-    private SimpleQueryManager simpleQueryManager;
 
     @Autowired
     private OaWorkWatchItemService oaWorkWatchItemService;
@@ -88,6 +72,7 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
     public String grid(Model model) {
         //判断是否有编辑权限
         setStatus(model);
+
         return "view/oa/oaWorkWatch/grid";
     }
 
@@ -105,7 +90,6 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
         try {
             Page pageModel = new Page(page, rows, true);
             String hql = "from OaWorkWatch order by id desc";
-            //增加自定义查询条件
 
             //执行查询
             QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);
@@ -123,21 +107,26 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
         }
     }
 
+    /**
+     * 权限和状态
+     *
+     * @param model 。
+     */
     public void setStatus(Model model) {
 
         //判断是否有编辑权限
-        model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.OA_WORK_WATCH_EDIT));
-        model.addAttribute("canEdit_ZR", sysUserManager.hasPrivilege(PrivilegeCode.OA_WORK_WATCH_AUDIT_ZR));
-        model.addAttribute("canEdit_KZ", sysUserManager.hasPrivilege(PrivilegeCode.OA_WORK_WATCH_AUDIT_KZ));
-        model.addAttribute("canEdit_B", sysUserManager.hasPrivilege(PrivilegeCode.OA_WORK_WATCH_AUDIT_B));
+        model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.OA_WORK_WATCH_EDIT));//编辑
+        model.addAttribute("canEdit_ZR", sysUserManager.hasPrivilege(PrivilegeCode.OA_WORK_WATCH_AUDIT_ZR));//填写主任审核
+        model.addAttribute("canEdit_KZ", sysUserManager.hasPrivilege(PrivilegeCode.OA_WORK_WATCH_AUDIT_KZ));//科长上报
+        model.addAttribute("canEdit_B", sysUserManager.hasPrivilege(PrivilegeCode.OA_WORK_WATCH_AUDIT_B));//办公室核实
 
-        model.addAttribute("STATUS_EDIT", OaWorkWatchStatus.STATUS_EDIT.getCode());
-        model.addAttribute("STATUS_ZR_SH", OaWorkWatchStatus.STATUS_ZR_SH.getCode());
-        model.addAttribute("STATUS_BACK", OaWorkWatchStatus.STATUS_BACK.getCode());
-        model.addAttribute("STATUS_INFO", OaWorkWatchStatus.STATUS_INFO.getCode());
-        model.addAttribute("STATUS_B_CHECK", OaWorkWatchStatus.STATUS_B_CHECK.getCode());
-        model.addAttribute("STATUS_CHECK_BACK", OaWorkWatchStatus.STATUS_CHECK_BACK.getCode());
-        model.addAttribute("STATUS_CHECK_PASS", OaWorkWatchStatus.STATUS_CHECK_PASS.getCode());
+        model.addAttribute("STATUS_EDIT", OaWorkWatchStatus.STATUS_EDIT.getCode());//填写
+        model.addAttribute("STATUS_SUBMIT", OaWorkWatchStatus.STATUS_SUBMIT.getCode());//提交
+        model.addAttribute("STATUS_ZR_PASS", OaWorkWatchStatus.STATUS_ZR_PASS.getCode());//主任审核通过
+        model.addAttribute("STATUS_ZR_BACK", OaWorkWatchStatus.STATUS_ZR_BACK.getCode());//主任审核退回
+        model.addAttribute("STATUS_INFO", OaWorkWatchStatus.STATUS_INFO.getCode());//已上报
+        model.addAttribute("STATUS_B_PASS", OaWorkWatchStatus.STATUS_B_PASS.getCode());//办公室核实通过
+        model.addAttribute("STATUS_B_BACK", OaWorkWatchStatus.STATUS_B_BACK.getCode());//办公室核实退回
     }
 
     /**
@@ -149,11 +138,9 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
     @RequestMapping
     public String add(Model model) {
         OaWorkWatch oaWorkWatch = new OaWorkWatch();
-        setStatus(model);
-
-
-        //如需增加其他默认值请在此添加
+        oaWorkWatch.setStatus(OaWorkWatchStatus.STATUS_EDIT.getCode());
         model.addAttribute("bean", oaWorkWatch);
+        setStatus(model);
 
         return "view/oa/oaWorkWatch/input";
     }
@@ -168,11 +155,26 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
     @RequestMapping
     public String modify(Model model, Long id) {
         OaWorkWatch oaWorkWatch = oaWorkWatchService.get(id);
-        setStatus(model);
-        //处理其他业务逻辑
         model.addAttribute("bean", oaWorkWatch);
+        setStatus(model);
 
         return "view/oa/oaWorkWatch/input";
+    }
+
+    /**
+     * 修改显示页面
+     *
+     * @param id    .
+     * @param model .
+     * @return .
+     */
+    @RequestMapping
+    public String audit(Model model, Long id) {
+        OaWorkWatch oaWorkWatch = oaWorkWatchService.get(id);
+        model.addAttribute("bean", oaWorkWatch);
+        setStatus(model);
+
+        return "view/oa/oaWorkWatch/audit";
     }
 
     /**
@@ -187,6 +189,7 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
         OaWorkWatch oaWorkWatch = oaWorkWatchService.get(id);
         setStatus(model);
         model.addAttribute("bean", oaWorkWatch);
+
         return "view/oa/oaWorkWatch/view";
     }
 
@@ -200,66 +203,47 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
      */
     @SuppressWarnings("unchecked")
     @RequestMapping
-    public void save(HttpServletResponse response, @ModelAttribute("bean") OaWorkWatch entity, HttpServletRequest request) throws Exception {
+    public void save(HttpServletResponse response, @ModelAttribute("bean") OaWorkWatch entity, HttpServletRequest request, Integer status) throws Exception {
         try {
             OaWorkWatch target;
             if (entity.getId() != null) {
                 target = oaWorkWatchService.get(entity.getId());
                 ReflectionUtils.copyBean(entity, target, new String[]{
                         "reportDept",
-                        "reportUser",
                         "reportPerson",
-                        "beginDate",
-                        "endDate",
-                        "status"
+                        "bgsOpinion"
                 });
-
             } else {
                 target = entity;
             }
+            target.setStatus(status);
             SysUser sysUser = sysUserManager.getSysUser();
-            String zrOpinion = request.getParameter("zrOpinion");
-            String kzOpinion = request.getParameter("kzOpinion");
-            String bgsOpinion = request.getParameter("bgsOpinion");
-
-            if (!StringHelper.isEmpty(zrOpinion)) {
-                target.setZrOpinion(zrOpinion);
-            }
-            if (!StringHelper.isEmpty(kzOpinion)) {
-                target.setKzOpinion(kzOpinion);
-            }
-            if (!StringHelper.isEmpty(bgsOpinion)) {
-                target.setBgsOpinion(bgsOpinion);
-            }
-            Integer status = target.getStatus();
-            if (null != status) {
-                if (status == OaWorkWatchStatus.STATUS_INFO.getCode()) {
-                    target.setKzAuditTime(new Timestamp(System.currentTimeMillis()));
-                    target.setKzAuditUser(sysUser.getDisplayName());
-                } else if (status == OaWorkWatchStatus.STATUS_ZR_SH.getCode() || OaWorkWatchStatus.STATUS_BACK.getCode() == status) {
-                    target.setZrAuditTime(new Timestamp(System.currentTimeMillis()));
-                    target.setZrAuditUser(sysUser.getDisplayName());
-                } else if (status == OaWorkWatchStatus.STATUS_CHECK_BACK.getCode() || status == OaWorkWatchStatus.STATUS_CHECK_PASS.getCode()) {
-                    target.setBgsAuditTime(new Timestamp(System.currentTimeMillis()));
-                    target.setBgsAuditUser(sysUser.getDisplayName());
+            if (status == OaWorkWatchStatus.STATUS_INFO.getCode()) {
+                target.setBeginDate(new Date(System.currentTimeMillis()));
+                target.setReportPerson(sysUser.getDisplayName());
+            } else if (status == OaWorkWatchStatus.STATUS_B_BACK.getCode() || status == OaWorkWatchStatus.STATUS_B_PASS.getCode()) {
+                target.setBgsAuditTime(new Timestamp(System.currentTimeMillis()));
+                target.setBgsAuditUser(sysUser.getDisplayName());
+                if (status == OaWorkWatchStatus.STATUS_B_PASS.getCode()) {
+                    target.setEndDate(new Date(System.currentTimeMillis()));
                 }
             }
             oaWorkWatchService.save(target);
 
+            //先删除数据，在保存
             Set<OaWorkWatchItem> oaWorkWatchItems = target.getOaWorkWatchItems();
             if (null != oaWorkWatchItems) {
                 for (OaWorkWatchItem oaWorkWatchItem : oaWorkWatchItems) {
                     oaWorkWatchItemService.delete(oaWorkWatchItem);
                 }
             }
-
+            //获取数据
             String[] orderNo = request.getParameterValues("orderNo");
             String[] content = request.getParameterValues("content");
             String[] timeNode = request.getParameterValues("timeNode");
             String[] reportMethod = request.getParameterValues("reportMethod");
             String[] completeDesc = request.getParameterValues("completeDesc");
             String[] actualDesc = request.getParameterValues("actualDesc");
-
             if (null != orderNo) {
                 for (int i = 0; i < orderNo.length; i++) {
                     OaWorkWatchItem oaWorkWatchItem = new OaWorkWatchItem();
@@ -275,6 +259,42 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
                     oaWorkWatchItemService.save(oaWorkWatchItem);
                 }
             }
+        } catch (Exception e) {
+            log.error("error", e);
+            super.processException(response, e);
+            return;
+        }
+        sendSuccessJSON(response, "保存成功");
+    }
+
+    /**
+     * 保存审核
+     *
+     * @param response .
+     * @param entity   .
+     * @throws Exception .
+     */
+    @SuppressWarnings("unchecked")
+    @RequestMapping
+    public void saveAudit(HttpServletResponse response, @ModelAttribute("bean") OaWorkWatch entity, Integer status) throws Exception {
+        try {
+            OaWorkWatch target;
+            if (entity.getId() != null) {
+                target = oaWorkWatchService.get(entity.getId());
+                ReflectionUtils.copyBean(entity, target, new String[]{
+                        "zrOpinion"
+                });
+            } else {
+                target = entity;
+            }
+            target.setStatus(status);
+            SysUser sysUser = sysUserManager.getSysUser();
+
+            if (status == OaWorkWatchStatus.STATUS_ZR_PASS.getCode() || status == OaWorkWatchStatus.STATUS_ZR_BACK.getCode()) {
+                target.setZrAuditTime(new Timestamp(System.currentTimeMillis()));
+                target.setZrAuditUser(sysUser.getDisplayName());
+            }
+            oaWorkWatchService.save(target);
         } catch (Exception e) {
             log.error("error", e);
             super.processException(response, e);
