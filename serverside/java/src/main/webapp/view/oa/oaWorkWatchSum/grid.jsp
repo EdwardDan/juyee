@@ -11,11 +11,7 @@
             	'月',            	          	
             	'周',            	          	
             	'开始日',            	          	
-            	'结束日',            	          	
-            	'创建时间',            	          	
-            	'创建用户名',            	          	
-            	'更新时间',            	          	
-            	'更新用户名',            	          	
+            	'结束日',
                 '操作'
                 ],
                 colModel:[
@@ -24,11 +20,7 @@
 {name:"month",width:"88",align:"center",searchtype:"integer",sortable:true,formatter:'integer',formatoptions:{thousandsSeparator:",",defaulValue:0}},
 {name:"week",width:"88",align:"center",searchtype:"integer",sortable:true,formatter:'integer',formatoptions:{thousandsSeparator:",",defaulValue:0}},
 {name:"beginDate",width:"88",align:"center",searchtype:"integer",sortable:true,formatter:'integer',formatoptions:{thousandsSeparator:",",defaulValue:0}},
-{name:"endDate",width:"88",align:"center",searchtype:"integer",sortable:true,formatter:'integer',formatoptions:{thousandsSeparator:",",defaulValue:0}},
-{name:"createTime",width:"88",align:"center",searchtype:"datetime",sortable:true,formatter:'date',formatoptions:{srcformat:'Y-m-d H:i:s',newformat:'Y-m-d H:i:s'}},
-{name:"createUser",width:"88",align:"center",searchtype:"string",sortable:true},
-{name:"updateTime",width:"88",align:"center",searchtype:"datetime",sortable:true,formatter:'date',formatoptions:{srcformat:'Y-m-d H:i:s',newformat:'Y-m-d H:i:s'}},
-{name:"updateUser",width:"88",align:"center",searchtype:"string",sortable:true}
+{name:"endDate",width:"88",align:"center",searchtype:"integer",sortable:true,formatter:'integer',formatoptions:{thousandsSeparator:",",defaulValue:0}}
                 ],
                 actModel:[
                     {name:'operation', width:40, align:'center'}
@@ -55,11 +47,7 @@
             	{ "field":"月", "op":"cn", "data":""},            	    
             	{ "field":"周", "op":"cn", "data":""},            	    
             	{ "field":"开始日", "op":"cn", "data":""},            	    
-            	{ "field":"结束日", "op":"cn", "data":""},            	    
-                { "field":"创建时间", "op":"bw", "data":""},            	    
-            	{ "field":"创建用户名", "op":"cn", "data":""},            	    
-                { "field":"更新时间", "op":"bw", "data":""},            	    
-            	{ "field":"更新用户名", "op":"cn", "data":""}            	    
+            	{ "field":"结束日", "op":"cn", "data":""}
                 ]},
                 queryButton:$("#queryButton"),
                 queryDesc:$("#queryConditionDesc")
@@ -73,7 +61,7 @@
     }
     <c:if test="${canEdit}">
     function doAdd() {
-        openWindow("添加工作督办汇总", "${ctx}/oaWorkWatchSum/add.do", true);
+        openWindow("添加工作督办汇总", "${ctx}/oaWorkWatchSum/add.do?ids=11,13", false);
     }
     function doEdit(id) {
         openWindow("修改工作督办汇总", "${ctx}/oaWorkWatchSum/modify.do?id=" + id, true);
