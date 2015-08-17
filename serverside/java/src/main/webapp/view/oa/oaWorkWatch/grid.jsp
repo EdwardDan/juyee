@@ -7,6 +7,7 @@
             gridOpts: {
                 url: "${ctx}/oaWorkWatch/gridDataCustom.do",
                 colNames: ['ID',
+                    '选择',
                     '上报科室',
                     '科室分管领导',
                     '上报开始时间',
@@ -17,6 +18,7 @@
                 ],
                 colModel: [
                     {name: 'id', width: 10, align: "center", searchtype: "integer", hidden: true},
+                    {name: 'id', width: 10, align: "center", searchtype: "integer", formatter: customeFormat},
                     {name: "reportDept", width: "40", align: "center", searchtype: "string", sortable: true},
                     {name: "reportPerson", width: "40", align: "center", searchtype: "string", sortable: true},
                     {name: "beginDate", width: "40", align: "center", searchtype: "datetime", sortable: true, formatter: 'date', formatoptions: {srcformat: 'Y-m-d', newformat: 'Y-m-d'}},
@@ -79,6 +81,19 @@
     function doAdd() {
         openWindow("添加工作督办", "${ctx}/oaWorkWatch/add.do", true);
     }
+    function doSum() {
+        var val="";
+        $("input[name='checkboxIds']:checked").each(function () {
+            val+=this.value;
+        });
+        if (val == null) {
+            showInfoMsg("请先选择一条记录!");
+            return null;
+        } else {
+            return openWindow("添加工作督办", "${ctx}/oaWorkWatchSum/add.do?ids="+val, true);
+
+        }
+    }
     function doEdit(id) {
         openWindow("修改工作督办", "${ctx}/oaWorkWatch/modify.do?id=" + id, true);
     }
@@ -87,6 +102,11 @@
     }
     function doDelete(id) {
         doGridDelete("${ctx}/oaWorkWatch/delete.do?id=" + id);
+    }
+    //custom formatter
+    function customeFormat(cellvalue, options, rowObject)
+    {
+        return '<input type="checkbox" name="checkboxIds" value='+cellvalue+'/>';
     }
 </script>
 
@@ -100,6 +120,7 @@
                    readonly="true"/>
         </div>
         <div style="float:right;padding-right: 10px">
+                <input type="button" value="汇总" class="button_all" onclick="doSum()"/>
             <c:if test="${canEdit}">
                 <input type="button" value="添加" class="button_add" onclick="doAdd()"/>
             </c:if>
