@@ -29,6 +29,7 @@ public class PrivilegeCode {
 
     public static final String SYS_PUSH_DEFINE_EDIT = SysPushDefine.class.getSimpleName() + "_edit"; //系统首页推送定义
     public static final String SYS_CUSTOM_GRID_EDIT = SysCustomGrid.class.getSimpleName() + "_edit"; //系统首页板块设置
+    public static final String SYS_OAFGLDSET_EDIT = OaFgldSet.class.getSimpleName() + "_edit";//分管领导审批设置
 
     public static final String SYS_SKIN_EDIT = SysSkin.class.getSimpleName() + "_edit"; //系统皮肤设置
     public static final String SYS_PARAMETER_EDIT = SysParameter.class.getSimpleName() + "_edit";//系统参数维护
