@@ -56,12 +56,29 @@
         return button;
 
     }
+    function doThisQuery(btn) {
+        var beginTime = "";
+        if ('' != $("#year").val()) {
+            beginTime = $("#year").val()
+        }
+        var endTime = "";
+        if ('' != $("#month").val()) {
+            endTime = $("#month").val()
+        }
+        var v = "<beginTime>" + beginTime + "</beginTime><endTime>" + endTime + "</endTime>";
+        jQuery("#listGrid").jqGrid('setGridParam',
+                {
+                    postData: {'queryJson': v}
+                }).trigger('reloadGrid');
+    }
 </script>
 
 <div class="title_Search">
     <div class="gridQueryArea">
         <div style="float:left;padding-left: 5px">
-            <input type="button" name="queryButton" id="queryButton" value="查询" class="btn_Search"/>
+            <input type="text" name="year" id="year" value="" class="input_date"/>年
+            <input type="text" name="month" id="month" value="" class="input_date"/>月
+            <input type="button" value="查询" class="btn_Search" onclick="doThisQuery(this)"/>
         </div>
         <div style="float:left;padding-left: 10px" id="conditionsDesc">
             <input type="text" name="queryConditionDesc" id="queryConditionDesc" value="" class="title_input"

@@ -95,12 +95,23 @@ public class OaWorkWatchSumController extends BaseCRUDActionController<OaWorkWat
      * @param rows     .
      */
     @RequestMapping
-    public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session)
+    public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session,String queryJson)
     {
         try
         {
-            String sql = "SELECT DISTINCT YEAR,MONTH,WEEK,BEGIN_DATE,END_DATE,CREATE_TIME FROM OA_WORK_WATCH_SUM ORDER BY CREATE_TIME DESC";
+            String year = StringHelper.getElementValue(queryJson, "beginTime");
+            String month = StringHelper.getElementValue(queryJson, "endTime");
+            String sql = "SELECT DISTINCT YEAR,MONTH,WEEK,BEGIN_DATE,END_DATE,CREATE_TIME FROM OA_WORK_WATCH_SUM WHERE 1=1 ";
             //增加自定义查询条件
+            if (!StringHelper.isEmpty(year))
+            {
+                sql += " AND YEAR=" + year;
+            }
+            if (!StringHelper.isEmpty(month))
+            {
+                sql += " AND MONTH=" + month;
+            }
+            sql += " ORDER BY CREATE_TIME DESC";
             QueryTranslateJq queryTranslateJq = new QueryTranslateJq(sql, filters);
             String querySql = queryTranslateJq.toString();
             List<Map> mapList = simpleQueryManager.getMapList(querySql);
