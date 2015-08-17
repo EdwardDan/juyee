@@ -1,0 +1,84 @@
+drop table OA_FGLD_SET cascade constraints;
+
+/*==============================================================*/
+/* Table: OA_FGLD_SET                                           */
+/*==============================================================*/
+create table OA_FGLD_SET  (
+   ID                   number(10)                      not null,
+   USER_ID              number(10),
+   DESCRIPTION          varchar2(500 char),
+   PARENT_ID            number(10),
+   TREE_ID              varchar(255),
+   IS_LEAF              number(1),
+   CREATE_TIME          DATE,
+   CREATE_USER          VARCHAR2(100),
+   UPDATE_TIME          DATE,
+   UPDATE_USER          VARCHAR2(100),
+   constraint PK_OA_FGLD_SET primary key (ID),
+   constraint FK_OA_FGLD_SET_USER foreign key (USER_ID)
+         references SYS_USER (ID),
+   constraint FK_OA_FGLD_SET_PARENT foreign key (PARENT_ID)
+         references OA_FGLD_SET (ID)
+);
+
+comment on table OA_FGLD_SET is
+'分管领导审批设置';
+
+comment on column OA_FGLD_SET.ID is
+'ID';
+
+comment on column OA_FGLD_SET.USER_ID is
+'用户ID';
+
+comment on column OA_FGLD_SET.DESCRIPTION is
+'备注';
+
+comment on column OA_FGLD_SET.PARENT_ID is
+'父节点';
+
+comment on column OA_FGLD_SET.TREE_ID is
+'树形层次';
+
+comment on column OA_FGLD_SET.IS_LEAF is
+'是否叶节点';
+
+comment on column OA_FGLD_SET.CREATE_TIME is
+'创建时间';
+
+comment on column OA_FGLD_SET.CREATE_USER is
+'创建用户名';
+
+comment on column OA_FGLD_SET.UPDATE_TIME is
+'更新时间';
+
+comment on column OA_FGLD_SET.UPDATE_USER is
+'更新用户名';
+
+
+drop table OA_FGLD_SET_ITEM cascade constraints;
+
+/*==============================================================*/
+/* Table: OA_FGLD_SET_ITEM                                      */
+/*==============================================================*/
+create table OA_FGLD_SET_ITEM  (
+   ID                   number(10)                      not null,
+   FGLD_SET_ID          number(10),
+   DEPT_ID              number(10),
+   constraint PK_OA_FGLD_SET_ITEM primary key (ID),
+   constraint FK_OA_FGLD_SET_ITEM foreign key (FGLD_SET_ID)
+         references OA_FGLD_SET (ID),
+   constraint FK_OA_FGLD_SET_ITEM_DEPT foreign key (DEPT_ID)
+         references SYS_DEPT (ID)
+);
+
+comment on table OA_FGLD_SET_ITEM is
+'分管领导审批设置明细';
+
+comment on column OA_FGLD_SET_ITEM.ID is
+'ID';
+
+comment on column OA_FGLD_SET_ITEM.FGLD_SET_ID is
+'分管领导审批设置ID';
+
+comment on column OA_FGLD_SET_ITEM.DEPT_ID is
+'部门ID';
