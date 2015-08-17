@@ -5,6 +5,7 @@ import com.justonetech.biz.core.orm.hibernate.QueryTranslateJq;
 import com.justonetech.biz.daoservice.DocDocumentService;
 import com.justonetech.biz.daoservice.OaWorkWatchService;
 import com.justonetech.biz.daoservice.OaWorkWatchSumService;
+import com.justonetech.biz.domain.OaMeetingInner;
 import com.justonetech.biz.domain.OaWorkWatch;
 import com.justonetech.biz.domain.OaWorkWatchSum;
 import com.justonetech.biz.manager.ConfigManager;
@@ -29,8 +30,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.Calendar;
+import java.sql.Timestamp;
+import java.util.*;
 
 
 /**
@@ -68,8 +69,7 @@ public class OaWorkWatchSumController extends BaseCRUDActionController<OaWorkWat
     @Autowired
     private OaWorkWatchService oaWorkWatchService;
 
-    @Autowired
-    private OaWorkWatchSum oaWorkWatchSum;
+    private OaWorkWatchSum oaWorkWatchSum = new OaWorkWatchSum();
 
 
     /**
@@ -101,19 +101,28 @@ public class OaWorkWatchSumController extends BaseCRUDActionController<OaWorkWat
     {
         try
         {
-            Page pageModel = new Page(page, rows, true);
-            String hql = "from OaWorkWatchSum order by id desc";
+            String sql = "SELECT DISTINCT YEAR,MONTH,WEEK,BEGIN_DATE,END_DATE,CREATE_TIME FROM OA_WORK_WATCH_SUM";
             //增加自定义查询条件
-
-            //执行查询
-            QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);
-            String query = queryTranslate.toString();
-            session.setAttribute(Constants.GRID_SQL_KEY, query);
-            pageModel = oaWorkWatchSumService.findByPage(pageModel, query);
-
+            QueryTranslateJq queryTranslateJq = new QueryTranslateJq(sql, filters);
+            String querySql = queryTranslateJq.toString();
+            List<Map> mapList = simpleQueryManager.getMapList(querySql);
+            Page pageModel = new Page(page, rows, mapList);
+            List<Map> rowList = pageModel.getRows();
+            List<Map<String, Object>> retList = new ArrayList<Map<String, Object>>();
+            //处理数据放到页面
+            Map<String, Object> map;
+            for (Map data : rowList) {
+                map = new HashMap<String, Object>();
+//                map.put("id", data.get("CREATE_TIME"));
+                map.put("yearMonth", data.get("YEAR")+"年"+data.get("MONTH")+"月");
+                map.put("hzTime",data.get("CREATE_TIME"));
+                map.put("queryItems", data.get("YEAR")+","+data.get("MONTH")+","+data.get("WEEK")+","+data.get("BEGIN_DATE")+","+data.get("END_DATE"));
+                retList.add(map);
+            }
             //输出显示
-            String json = GridJq.toJSON(columns, pageModel);
+            String json = GridJq.toJSON(retList, pageModel);
             sendJSON(response, json);
+
 
         } catch (Exception e)
         {
@@ -126,19 +135,35 @@ public class OaWorkWatchSumController extends BaseCRUDActionController<OaWorkWat
     /**
      * 修改显示页面
      *
-     * @param id    .
      * @param model .
      * @return .
      */
     @RequestMapping
-    public String modify(Model model, Long id)
+    public String view(Model model, String queryItems)
     {
-        OaWorkWatchSum oaWorkWatchSum = oaWorkWatchSumService.get(id);
+        String[] queryItem = queryItems.split("\\,");
+        Integer year = JspHelper.getInteger(queryItem[0]);
+        Integer month = JspHelper.getInteger(queryItem[1]);
+        Integer week = JspHelper.getInteger(queryItem[2]);
+        Integer beginDate = JspHelper.getInteger(queryItem[3]);
+        Integer endDate = JspHelper.getInteger(queryItem[4]);
+//        Integer createTime = JspHelper.getInteger(queryItem[5]);
+        String hql = "from oaWorkWatchSumService where year="+year+"month="+month+"week="+week+"beginDate="+beginDate+"endDate="+endDate;
+//        simpleQueryManager.get
+        List<OaWorkWatchSum> byQuery = oaWorkWatchSumService.findByQuery(hql);
+        ArrayList<OaWorkWatch> oaWorkWatches = new ArrayList<OaWorkWatch>();
+
+        for (OaWorkWatchSum workWatchSum : byQuery)
+        {
+            OaWorkWatch oaWorkWatch = workWatchSum.getWorkWatch();
+            oaWorkWatches.add(oaWorkWatch);
+        }
 
         //处理其他业务逻辑
-        model.addAttribute("bean", oaWorkWatchSum);
+        model.addAttribute("reportTime", year + "年" + month + "月份第" + week + "周（" + beginDate + "~" + endDate + "日）工作督办一览表");
+        model.addAttribute("oaWorkWatches", oaWorkWatches);
 
-        return "view/oa/oaWorkWatchSum/input";
+        return "view/oa/oaWorkWatchSum/view";
     }
 
     /**
@@ -151,7 +176,7 @@ public class OaWorkWatchSumController extends BaseCRUDActionController<OaWorkWat
     @RequestMapping
     public String add(Model model, String ids)
     {
-        System.out.println("ids = " + ids);
+//        System.out.println("ids = " + ids);
         String[] oaWorkWatchIds = ids.split("\\,");
 
         ArrayList<OaWorkWatch> oaWorkWatches = new ArrayList<OaWorkWatch>();
@@ -160,6 +185,7 @@ public class OaWorkWatchSumController extends BaseCRUDActionController<OaWorkWat
             OaWorkWatch oaWorkWatch = oaWorkWatchService.get(JspHelper.getLong(oaWorkWatchId));
             oaWorkWatches.add(oaWorkWatch);
         }
+        model.addAttribute("ids", ids);
         model.addAttribute("oaWorkWatches", oaWorkWatches);
 
         //获取年和月的下拉框（为空为当前年月）
@@ -227,37 +253,34 @@ public class OaWorkWatchSumController extends BaseCRUDActionController<OaWorkWat
      * 保存操作
      *
      * @param response .
-     * @param entity   .
      * @param request  .
      * @throws Exception .
      */
     @SuppressWarnings("unchecked")
     @RequestMapping
-    public void save(HttpServletResponse response, @ModelAttribute("bean") OaWorkWatchSum entity, HttpServletRequest request) throws Exception
+    public void save(HttpServletResponse response, HttpServletRequest request) throws Exception
     {
         try
         {
-            OaWorkWatchSum target;
-            if (entity.getId() != null)
-            {
-                target = oaWorkWatchSumService.get(entity.getId());
-                ReflectionUtils.copyBean(entity, target, new String[]{
-                        "year",
-                        "month",
-                        "week",
-                        "beginDate",
-                        "endDate",
-                        "createTime",
-                        "createUser",
-                        "updateTime",
-                        "updateUser"
-                });
+            String ids = request.getParameter("ids");
+            String year = request.getParameter("year");
+            String month = request.getParameter("month");
+            String week = request.getParameter("week");
+            String beginDay = request.getParameter("beginDay");
+            String endDay = request.getParameter("endDay");
 
-            } else
+            String[] oaWorkWatchIds = ids.split("\\,");
+            for (String oaWorkWatchId : oaWorkWatchIds)
             {
-                target = entity;
+                OaWorkWatchSum oaWorkWatchSum = new OaWorkWatchSum();
+                oaWorkWatchSum.setYear(JspHelper.getInteger(year));
+                oaWorkWatchSum.setMonth(JspHelper.getInteger(month));
+                oaWorkWatchSum.setWeek(JspHelper.getInteger(week));
+                oaWorkWatchSum.setBeginDate(JspHelper.getInteger(beginDay));
+                oaWorkWatchSum.setEndDate(JspHelper.getInteger(endDay));
+                oaWorkWatchSum.setWorkWatch(oaWorkWatchService.get(JspHelper.getLong(oaWorkWatchId)));
+                oaWorkWatchSumService.save(oaWorkWatchSum);
             }
-            oaWorkWatchSumService.save(target);
 
         } catch (Exception e)
         {
