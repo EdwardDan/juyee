@@ -1,5 +1,7 @@
 package com.justonetech.biz.domain.base;
 
+import com.justonetech.core.entity.Auditable;
+
 import java.io.Serializable;
 
 
@@ -21,7 +23,8 @@ import java.io.Serializable;
  *  table="OA_WORK_WATCH_SUM"
  */
 
-public abstract class BaseOaWorkWatchSum  implements Serializable {
+public abstract class BaseOaWorkWatchSum  implements Serializable,Auditable
+{
 
 	public static String REF = "OaWorkWatchSum";
 	public static String PROP_YEAR = "year";

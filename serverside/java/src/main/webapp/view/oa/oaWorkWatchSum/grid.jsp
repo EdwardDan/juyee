@@ -2,79 +2,60 @@
 <%@ include file="/common/taglibs.jsp" %>
 <%@include file="/common/header.jsp" %>
 <script type="text/javascript">
-    $(function () {
+    $(function ()
+    {
         var conf = {
-            gridOpts:{
-                url:"${ctx}/oaWorkWatchSum/gridDataCustom.do",
-                colNames:['ID',
-            	'年',            	          	
-            	'月',            	          	
-            	'周',            	          	
-            	'开始日',            	          	
-            	'结束日',
-                '操作'
+            gridOpts: {
+                url: "${ctx}/oaWorkWatchSum/gridDataCustom.do",
+                colNames: [
+                    '汇总年月',
+                    '汇总时间',
+                    '操作'
                 ],
-                colModel:[
-                				{name:'id', width:10, align:"center", searchtype:"integer",hidden:true},
-{name:"year",width:"88",align:"center",searchtype:"integer",sortable:true,formatter:'integer',formatoptions:{thousandsSeparator:",",defaulValue:0}},
-{name:"month",width:"88",align:"center",searchtype:"integer",sortable:true,formatter:'integer',formatoptions:{thousandsSeparator:",",defaulValue:0}},
-{name:"week",width:"88",align:"center",searchtype:"integer",sortable:true,formatter:'integer',formatoptions:{thousandsSeparator:",",defaulValue:0}},
-{name:"beginDate",width:"88",align:"center",searchtype:"integer",sortable:true,formatter:'integer',formatoptions:{thousandsSeparator:",",defaulValue:0}},
-{name:"endDate",width:"88",align:"center",searchtype:"integer",sortable:true,formatter:'integer',formatoptions:{thousandsSeparator:",",defaulValue:0}}
-                ],
-                actModel:[
-                    {name:'operation', width:40, align:'center'}
+                colModel: [
+                    {name: "yearMonth", width: "88", align: "center", searchtype: "string", sortable: true},
+                    {name: "hzTime", width: "88", align: "center", searchtype: "string", sortable: true},
+                    {name: "queryItems", width: "30", align: "center", searchtype: "string", formatter: customeFormat}
                 ],
                 pager: '#pager2',
-                caption:"工作督办汇总列表",
-                shrinkToFit:true,
-                gridComplete:function () {  //在此事件中循环为每一行添加修改和删除链接
-                    var ids = jQuery("#listGrid").jqGrid('getDataIDs');
-                    for (var i = 0; i < ids.length; i++) {
-                        var id = ids[i];
-                        var opButton = '<input type="button" value="查看" onclick="doView(' + id + ')" class="button_normal"/> ';
-                        <c:if test="${canEdit}">
-                        opButton += '<input type="button" value="编辑" onclick="doEdit(' + id + ')" class="button_normal"/> ';
-                        opButton += '<input type="button" value="删除" onclick="doDelete(' + id + ')" class="button_normal"/>';
-                        </c:if>
-                        jQuery("#listGrid").jqGrid('setRowData', ids[i], { operation:opButton});
-                    }
-                }, rownumbers:true
+                caption: "工作督办汇总列表",
+                shrinkToFit: true,
+                rownumbers: true
             },
-            userOpts:{
-                defaultQuery:{ "groupOp":"AND", "rules":[
-            	{ "field":"年", "op":"cn", "data":""},            	    
-            	{ "field":"月", "op":"cn", "data":""},            	    
-            	{ "field":"周", "op":"cn", "data":""},            	    
-            	{ "field":"开始日", "op":"cn", "data":""},            	    
-            	{ "field":"结束日", "op":"cn", "data":""}
-                ]},
-                queryButton:$("#queryButton"),
-                queryDesc:$("#queryConditionDesc")
+            userOpts: {
+                defaultQuery: {
+                    "groupOp": "AND", "rules": [
+                        {"field": "汇总年月", "op": "cn", "data": ""}
+                    ]
+                },
+                queryButton: $("#queryButton"),
+                queryDesc: $("#queryConditionDesc")
             },
-            isExportExcel:true
+            isExportExcel: true
         };
         gridinit($("#listGrid"), conf);
     });
-    function doView(id) {
-        openWindow("查看工作督办汇总", "${ctx}/oaWorkWatchSum/view.do?id=" + id, false);
+    function doView(queryItems)
+    {
+        openWindow("查看工作督办汇总", "${ctx}/oaWorkWatchSum/view.do?queryItems=" + queryItems, false);
     }
     <c:if test="${canEdit}">
-    function doAdd() {
-        openWindow("添加工作督办汇总", "${ctx}/oaWorkWatchSum/add.do?ids=11,13", false);
-    }
-    function doEdit(id) {
-        openWindow("修改工作督办汇总", "${ctx}/oaWorkWatchSum/modify.do?id=" + id, true);
-    }    
-    function doDelete(id) {
-        doGridDelete("${ctx}/oaWorkWatchSum/delete.do?id=" + id);
+    function doDelete(items)
+    {
+        doGridDelete("${ctx}/oaWorkWatchSum/delete.do?ids=" + items);
     }
     </c:if>
-    
+
     //custom formatter
-    //function customeFormat(cellvalue, options, rowObject) {
-    //    return cellvalue == "true"?"是":"否";
-    //}
+    function customeFormat(cellvalue, options, rowObject)
+    {
+        var button = '<input type="button" value="查看" onclick="doView(\'' + cellvalue + '\')" class="button_normal"/>';
+        <c:if test="${canEdit}">
+        button += ' <input type="button" value="删除" onclick="doDelete(\'' + cellvalue + '\')" class="button_normal"/>';
+        </c:if>
+        return button;
+
+    }
 </script>
 
 <div class="title_Search">
@@ -83,13 +64,11 @@
             <input type="button" name="queryButton" id="queryButton" value="查询" class="btn_Search"/>
         </div>
         <div style="float:left;padding-left: 10px" id="conditionsDesc">
-            <input type="text" name="queryConditionDesc" id="queryConditionDesc" value="" class="title_input" readonly="true"/>
+            <input type="text" name="queryConditionDesc" id="queryConditionDesc" value="" class="title_input"
+                   readonly="true"/>
         </div>
         <div style="float:right;padding-right: 10px">
-        <c:if test="${canEdit}">
-            <input type="button" value="添加" class="button_add"
-                   onclick="doAdd()"/>
-        </c:if>
+
         </div>
     </div>
 </div>

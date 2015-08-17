@@ -1,9 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/common/taglibs.jsp" %>
 <div class="form_div">
-    <table cellspacing="3" cellpadding="3" class="form_border">
+    <table cellspacing="3" cellpadding="3" class="form_table">
         <tr class="tr_title">
-
+            <td style="text-align: center">
+                <strong>
+                    ${reportTime}
+                </strong>
+            </td>
         </tr>
     </table>
     <table cellpadding="0" cellspacing="0" class="table_thin_line_center" border="1">
