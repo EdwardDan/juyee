@@ -62,9 +62,6 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
     private DataStageReportDocService dataStageReportDocService;
 
     @Autowired
-    private DocDocumentService docDocumentService;
-
-    @Autowired
     private ExcelPrintManager excelPrintManager;
 
     private static final String xlsTemplateName = "DataStageReport.xls";
@@ -79,11 +76,8 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
     public String grid(Model model) {
         model.addAttribute("canViewAll", sysUserManager.hasPrivilege(PrivilegeCode.PROJECT_QUERY_STAGE_SUM));
         model.addAttribute("xmlconfig", documentManager.getDefaultXmlConfig());
-        model.addAttribute("bizCodeDocument", DataStageReportDoc.class.getSimpleName());
+        model.addAttribute("bizCode", DataStageReportDoc.class.getSimpleName());
         model.addAttribute("userId", sysUserManager.getSysUser().getId());
-//        model.addAttribute("suffix", "Document");
-//        documentManager.getUploadButtonForMulti(documentManager.getDefaultXmlConfig(), DataStageReportDoc.class.getSimpleName(),
-//                docDocument, sysUserManager.getSysUser().getId(), null, "Document");
         return "view/query/projectQueryStage/grid";
     }
 
@@ -259,11 +253,12 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
     /**
      * 上载存在问题的附件
      *
+     * @param response
      * @param prjId
-     * @return
+     * @param docId
      */
     @RequestMapping
-    public void uploadProblematicDoc(Model model, HttpServletResponse response, Long prjId, Long docId) {
+    public void uploadProblematicDoc(HttpServletResponse response, Long prjId, Long docId) {
         Calendar calendar = Calendar.getInstance();
         int currentYear = calendar.get(Calendar.YEAR);
         int currentMonth = calendar.get(Calendar.MONTH) + 1;
@@ -281,7 +276,7 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         dataStageReportDoc.setYear(currentYear);
         dataStageReportDoc.setMonth(currentMonth);
         dataStageReportDocService.save(dataStageReportDoc);
-        sendJSON(response, "操作成功！！！");
+        sendJSON(response, "操作成功！");
     }
 
     //整理项目包含标段

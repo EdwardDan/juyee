@@ -47,7 +47,7 @@
                         var opButton = '<input type="button" value="办证推进" onclick="doViewStage(\'' + id + '\', \'' + name + '\')" class="button_normal_long"/> ';
                         opButton += '<input type="button" value="形象进度" onclick="doViewNode(\'' + id + '\', \'' + name + '\')" class="button_normal_long"/> ';
                         opButton += '<input type="hidden" name="docIdDocument" value="' + docId + '" id="docIdDocument' + id + '" />' +
-                                '<input type="button" value="上传附件" class="button_normal_long" onclick="doUploadDocAttachs(' + id + ')"/>';
+                                    '<input type="button" value="上传附件" class="button_normal_long" onclick="doUploadDocAttachs(' + id + ')"/>';
                         jQuery("#listGrid").jqGrid('setRowData', ids[i], { operation: opButton});
                     }
                 }, rownumbers: true
@@ -79,21 +79,19 @@
 
     function doUploadDocAttachs(prjId) {
         var docIdEle = $("#docIdDocument" + prjId + "");
-        var params = "xmlConfig=${xmlconfig}&bizCode=" + $("#bizCodeDocument").val() + "&userId=${userId}&secondDir=";
+        var params = "xmlConfig=${xmlconfig}&bizCode=" + $("#bizCode").val() + "&userId=${userId}&secondDir=";
         var isNewDoc = false;
-        var docId = docIdEle.val();
         if (!docIdEle.val()) {
             isNewDoc = true;
             var rs = $.ajax({
                 url: CONTEXT_NAME + "/docCommon/getDocument.do?" + params,
                 async: false,
                 success: function (data) {
-                    docId = data;
                     $(docIdEle).val(data);
                 }
             });
         }
-        params += "&docId=" + docId;
+        params += "&docId=" + docIdEle.val();
         var url = CONTEXT_NAME + "/docCommon/add.do?" + params;
         var windowId = "fileUpload";
         if ($('#' + windowId).length <= 0) {
@@ -160,7 +158,7 @@
                 <input type="button" value="办证推进汇总" class="button_normal_longer" onclick="doViewStage('','汇总')"/>
                 <input type="button" value="形象进度汇总" class="button_normal_longer" onclick="doViewNode('','汇总')"/>
             </c:if>
-            <input type="hidden" id="bizCodeDocument" value="${bizCodeDocument}"/>
+            <input type="hidden" id="bizCode" value="${bizCode}"/>
         </div>
     </div>
 </div>
