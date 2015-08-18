@@ -1,5 +1,7 @@
 package com.justonetech.biz.domain.base;
 
+import com.justonetech.core.entity.Auditable;
+
 import java.io.Serializable;
 
 
@@ -21,24 +23,24 @@ import java.io.Serializable;
  *  table="OA_RECEIVE_NODE"
  */
 
-public abstract class BaseOaReceiveNode  implements Serializable {
+public abstract class BaseOaReceiveNode  implements Serializable ,Auditable {
 
 	public static String REF = "OaReceiveNode";
-	public static String PROP_OPERATION = "operation";
-	public static String PROP_DEAL_DEPT = "dealDept";
-	public static String PROP_DEAL_RESULT = "dealResult";
-	public static String PROP_UPDATE_TIME = "updateTime";
-	public static String PROP_RECEIVE_TIME = "receiveTime";
-	public static String PROP_COMPLETE_TIME = "completeTime";
-	public static String PROP_OPEN_TIME = "openTime";
-	public static String PROP_OA_RECEIVE = "oaReceive";
-	public static String PROP_DEAL_USER = "dealUser";
-	public static String PROP_CREATE_USER = "createUser";
-	public static String PROP_STEP_ID = "stepId";
-	public static String PROP_CREATE_TIME = "createTime";
-	public static String PROP_ID = "id";
-	public static String PROP_IS_DEAL = "isDeal";
-	public static String PROP_UPDATE_USER = "updateUser";
+    public static String PROP_ID = "id";
+    public static String PROP_OPERATION = "operation";
+    public static String PROP_DEAL_DEPT = "dealDept";
+    public static String PROP_DEAL_RESULT = "dealResult";
+    public static String PROP_RECEIVE_TIME = "receiveTime";
+    public static String PROP_COMPLETE_TIME = "completeTime";
+    public static String PROP_OPEN_TIME = "openTime";
+    public static String PROP_OA_RECEIVE = "oaReceive";
+    public static String PROP_DEAL_USER = "dealUser";
+    public static String PROP_STEP_ID = "stepId";
+    public static String PROP_IS_DEAL = "isDeal";
+    public static String PROP_CREATE_USER = "createUser";
+    public static String PROP_CREATE_TIME = "createTime";
+    public static String PROP_UPDATE_USER = "updateUser";
+    public static String PROP_UPDATE_TIME = "updateTime";
 
 
 	// constructors

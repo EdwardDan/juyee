@@ -1,5 +1,7 @@
 package com.justonetech.biz.domain.base;
 
+import com.justonetech.core.entity.Auditable;
+
 import java.io.Serializable;
 
 
@@ -21,18 +23,18 @@ import java.io.Serializable;
  *  table="OA_RECEIVE_OPERATION"
  */
 
-public abstract class BaseOaReceiveOperation  implements Serializable {
+public abstract class BaseOaReceiveOperation  implements Serializable,Auditable {
 
 	public static String REF = "OaReceiveOperation";
-	public static String PROP_NAME = "name";
-	public static String PROP_STEP = "step";
-	public static String PROP_CREATE_USER = "createUser";
-	public static String PROP_IS_VALID = "isValid";
-	public static String PROP_CREATE_TIME = "createTime";
-	public static String PROP_UPDATE_TIME = "updateTime";
-	public static String PROP_ID = "id";
-	public static String PROP_CODE = "code";
-	public static String PROP_UPDATE_USER = "updateUser";
+    public static String PROP_ID = "id";
+    public static String PROP_CODE = "code";
+    public static String PROP_NAME = "name";
+    public static String PROP_STEP = "step";
+    public static String PROP_IS_VALID = "isValid";
+    public static String PROP_CREATE_USER = "createUser";
+    public static String PROP_CREATE_TIME = "createTime";
+    public static String PROP_UPDATE_TIME = "updateTime";
+    public static String PROP_UPDATE_USER = "updateUser";
 
 
 	// constructors

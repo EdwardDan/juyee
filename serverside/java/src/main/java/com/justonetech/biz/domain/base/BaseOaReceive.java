@@ -1,5 +1,7 @@
 package com.justonetech.biz.domain.base;
 
+import com.justonetech.core.entity.Auditable;
+
 import java.io.Serializable;
 
 
@@ -21,33 +23,33 @@ import java.io.Serializable;
  *  table="OA_RECEIVE"
  */
 
-public abstract class BaseOaReceive  implements Serializable {
+public abstract class BaseOaReceive  implements Serializable,Auditable {
 
 	public static String REF = "OaReceive";
-	public static String PROP_STEP = "step";
-	public static String PROP_DOC = "doc";
-	public static String PROP_SECERT = "secert";
-	public static String PROP_SOURCE_DEPT = "sourceDept";
-	public static String PROP_DEAL_DEPTS = "dealDepts";
-	public static String PROP_TYPE = "type";
-	public static String PROP_UPDATE_TIME = "updateTime";
-	public static String PROP_FILE_CODE = "fileCode";
-	public static String PROP_START_DEPT_ID = "startDeptId";
-	public static String PROP_URGENT = "urgent";
-	public static String PROP_CODE = "code";
-	public static String PROP_TITLE = "title";
-	public static String PROP_LIMIT_DATE = "limitDate";
-	public static String PROP_CREATE_USER = "createUser";
-	public static String PROP_FS = "fs";
-	public static String PROP_DEPT_NAME = "deptName";
-	public static String PROP_WRITTEN_DATE = "writtenDate";
-	public static String PROP_FILE_TYPE = "fileType";
-	public static String PROP_CREATE_TIME = "createTime";
-	public static String PROP_RECEIVE_DATE = "receiveDate";
-	public static String PROP_DEAL_PERSONS = "dealPersons";
-	public static String PROP_ID = "id";
-	public static String PROP_UPDATE_USER = "updateUser";
-	public static String PROP_YS = "ys";
+    public static String PROP_ID = "id";
+    public static String PROP_STEP = "step";
+    public static String PROP_SECERT = "secert";
+    public static String PROP_SOURCE_DEPT = "sourceDept";
+    public static String PROP_DEAL_DEPTS = "dealDepts";
+    public static String PROP_TYPE = "type";
+    public static String PROP_FILE_CODE = "fileCode";
+    public static String PROP_START_DEPT_ID = "startDeptId";
+    public static String PROP_URGENT = "urgent";
+    public static String PROP_CODE = "code";
+    public static String PROP_TITLE = "title";
+    public static String PROP_LIMIT_DATE = "limitDate";
+    public static String PROP_DEPT_NAME = "deptName";
+    public static String PROP_WRITTEN_DATE = "writtenDate";
+    public static String PROP_FILE_TYPE = "fileType";
+    public static String PROP_RECEIVE_DATE = "receiveDate";
+    public static String PROP_DEAL_PERSONS = "dealPersons";
+    public static String PROP_FS = "fs";
+    public static String PROP_YS = "ys";
+    public static String PROP_DOC = "doc";
+    public static String PROP_CREATE_USER = "createUser";
+    public static String PROP_CREATE_TIME = "createTime";
+    public static String PROP_UPDATE_TIME = "updateTime";
+    public static String PROP_UPDATE_USER = "updateUser";
 
 
 	// constructors
