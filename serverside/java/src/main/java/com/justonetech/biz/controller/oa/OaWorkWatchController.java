@@ -69,10 +69,10 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
      * @return .
      */
     @RequestMapping
-    public String grid(Model model) {
+    public String grid(Model model,String tab) {
         //判断是否有编辑权限
         setStatus(model);
-
+        model.addAttribute("tab", tab);
         return "view/oa/oaWorkWatch/grid";
     }
 

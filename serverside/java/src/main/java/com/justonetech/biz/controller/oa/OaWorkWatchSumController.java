@@ -2,14 +2,11 @@ package com.justonetech.biz.controller.oa;
 
 import com.justonetech.biz.core.orm.hibernate.GridJq;
 import com.justonetech.biz.core.orm.hibernate.QueryTranslateJq;
-import com.justonetech.biz.daoservice.DocDocumentService;
 import com.justonetech.biz.daoservice.OaWorkWatchService;
 import com.justonetech.biz.daoservice.OaWorkWatchSumService;
 import com.justonetech.biz.domain.OaWorkWatch;
 import com.justonetech.biz.domain.OaWorkWatchItem;
 import com.justonetech.biz.domain.OaWorkWatchSum;
-import com.justonetech.biz.manager.ConfigManager;
-import com.justonetech.biz.manager.DocumentManager;
 import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.orm.hibernate.Page;
 import com.justonetech.core.utils.DateTimeHelper;
@@ -17,7 +14,6 @@ import com.justonetech.core.utils.FormatUtils;
 import com.justonetech.core.utils.JspHelper;
 import com.justonetech.core.utils.StringHelper;
 import com.justonetech.system.manager.SimpleQueryManager;
-import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
 import com.justonetech.system.utils.PrivilegeCode;
 import org.slf4j.Logger;
@@ -48,27 +44,13 @@ public class OaWorkWatchSumController extends BaseCRUDActionController<OaWorkWat
     private SysUserManager sysUserManager;
 
     @Autowired
-    private SysCodeManager sysCodeManager;
-
-    @Autowired
-    private ConfigManager configManager;
-
-    @Autowired
-    private DocumentManager documentManager;
-
-    @Autowired
     private SimpleQueryManager simpleQueryManager;
-
-    @Autowired
-    private DocDocumentService docDocumentService;
 
     @Autowired
     private OaWorkWatchSumService oaWorkWatchSumService;
 
     @Autowired
     private OaWorkWatchService oaWorkWatchService;
-
-    private OaWorkWatchSum oaWorkWatchSum = new OaWorkWatchSum();
 
 
     /**
@@ -78,9 +60,10 @@ public class OaWorkWatchSumController extends BaseCRUDActionController<OaWorkWat
      * @return .
      */
     @RequestMapping
-    public String grid(Model model)
+    public String grid(Model model,String tab)
     {
         //判断是否有编辑权限
+        model.addAttribute("tab", tab);
         model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.OA_WORK_WATCH_SUM));
 
         return "view/oa/oaWorkWatchSum/grid";
@@ -399,7 +382,6 @@ public class OaWorkWatchSumController extends BaseCRUDActionController<OaWorkWat
     @RequestMapping
     public void delete(HttpServletResponse response, String ids) throws Exception
     {
-        ids = ids.substring(1);
         String[] queryItem = ids.split(",");
         Integer year = JspHelper.getInteger(queryItem[0]);
         Integer month = JspHelper.getInteger(queryItem[1]);
@@ -412,7 +394,6 @@ public class OaWorkWatchSumController extends BaseCRUDActionController<OaWorkWat
         {
             oaWorkWatchSumService.delete(workWatchSum.getId());
         }
-
         sendSuccessJSON(response, "删除成功");
     }
 
