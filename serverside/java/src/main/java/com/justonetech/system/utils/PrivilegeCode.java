@@ -106,6 +106,8 @@ public class PrivilegeCode {
     public static final String OA_WORK_PLAN_AUDIT_FG = "OaWorkPlan_audit_fg";  //科室上报_分管领导审核
 
     public static final String OA_SEND_FILE_EDIT = OaSendFile.class.getSimpleName() + "_edit";  //发文记录_编辑
+    public static final String OA_RECEIVE_STEP_EDIT = OaReceiveStep.class.getSimpleName() + "_edit";  //收文流程配置_编辑
+    public static final String OA_RECEIVE_EDIT = OaReceive.class.getSimpleName() + "_edit";  //收文登记单_编辑
 
 }
 
