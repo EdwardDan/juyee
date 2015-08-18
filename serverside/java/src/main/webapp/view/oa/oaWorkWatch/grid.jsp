@@ -84,7 +84,7 @@
     function doSum() {
         var val="";
         $("input[name='checkboxIds']:checked").each(function () {
-            val+=this.value;
+            val+=","+this.value;
         });
         if (val == null) {
             showInfoMsg("请先选择一条记录!");
@@ -106,7 +106,7 @@
     //custom formatter
     function customeFormat(cellvalue, options, rowObject)
     {
-        return '<input type="checkbox" name="checkboxIds" value='+cellvalue+'/>';
+        return '<input type="checkbox" name="checkboxIds" value="'+cellvalue+'"/>';
     }
 </script>
 

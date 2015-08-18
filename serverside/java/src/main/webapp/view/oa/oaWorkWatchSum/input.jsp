@@ -42,7 +42,7 @@
                 </td>
             </tr>
         </table>
-        <table cellpadding="0" cellspacing="0" class="table_thin_line_center" border="1">
+        <table cellpadding="0" cellspacing="0" class="table_thin_line_center" border="1"  id="tableId">
             <tr class="tr_header">
                 <td><strong>科室</strong></td>
                 <td><strong>序号</strong></td>
@@ -52,15 +52,16 @@
                 <td><strong>上报形式</strong></td>
                 <td><strong>完成情况</strong></td>
             </tr>
-            <c:forEach items="${oaWorkWatches}" var="oaWorkWatch" varStatus="st">
-                <c:forEach items="${oaWorkWatch.oaWorkWatchItems}" var="oaWorkWatchItem" varStatus="stItem">
+            <c:forEach items="${deptMap}" var="bean" varStatus="st">
+                <c:forEach items="${bean.value}" var="oaWorkWatchItem" varStatus="stItem">
+                    <%--<c:forEach items="${oaWorkWatch.oaWorkWatchItems}" var="oaWorkWatchItem" varStatus="stItem">--%>
                     <tr
                             <c:if test="${stItem.index%2==0}">class="tr_dark"</c:if>
                             <c:if test="${stItem.index%2==1}">class="tr_light"</c:if>
                             >
                         <c:if test="${stItem.index==0}">
-                            <td rowspan="${fn:length(oaWorkWatch.oaWorkWatchItems)}">
-                                <strong>${oaWorkWatch.reportDept}</strong>
+                            <td rowspan="${fn:length(bean.value)}">
+                                <strong>${bean.key}</strong>
                             </td>
                         </c:if>
                         <td>
@@ -70,8 +71,8 @@
                                 ${oaWorkWatchItem.content}
                         </td>
                         <c:if test="${stItem.index==0}">
-                            <td rowspan="${fn:length(oaWorkWatch.oaWorkWatchItems)}">
-                                    ${oaWorkWatch.reportPerson}
+                            <td rowspan="${fn:length(bean.value)}">
+                                <sys:toHtml>${stringHashMap[bean.key]}</sys:toHtml>
                             </td>
                         </c:if>
                         <td>
@@ -85,6 +86,7 @@
                         </td>
                     </tr>
                 </c:forEach>
+                <%--</c:forEach>--%>
             </c:forEach>
         </table>
         <table cellpadding="3" cellspacing="3" class="form_table">

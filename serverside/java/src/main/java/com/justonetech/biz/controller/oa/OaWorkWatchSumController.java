@@ -6,6 +6,7 @@ import com.justonetech.biz.daoservice.DocDocumentService;
 import com.justonetech.biz.daoservice.OaWorkWatchService;
 import com.justonetech.biz.daoservice.OaWorkWatchSumService;
 import com.justonetech.biz.domain.OaWorkWatch;
+import com.justonetech.biz.domain.OaWorkWatchItem;
 import com.justonetech.biz.domain.OaWorkWatchSum;
 import com.justonetech.biz.manager.ConfigManager;
 import com.justonetech.biz.manager.DocumentManager;
@@ -95,7 +96,7 @@ public class OaWorkWatchSumController extends BaseCRUDActionController<OaWorkWat
      * @param rows     .
      */
     @RequestMapping
-    public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session,String queryJson)
+    public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session, String queryJson)
     {
         try
         {
@@ -120,11 +121,12 @@ public class OaWorkWatchSumController extends BaseCRUDActionController<OaWorkWat
             List<Map<String, Object>> retList = new ArrayList<Map<String, Object>>();
             //处理数据放到页面
             Map<String, Object> map;
-            for (Map data : rowList) {
+            for (Map data : rowList)
+            {
                 map = new HashMap<String, Object>();
-                map.put("yearMonth", data.get("YEAR")+"年"+data.get("MONTH")+"月");
-                map.put("hzTime",data.get("CREATE_TIME"));
-                map.put("queryItems", data.get("YEAR")+","+data.get("MONTH")+","+data.get("WEEK")+","+data.get("BEGIN_DATE")+","+data.get("END_DATE"));
+                map.put("yearMonth", data.get("YEAR") + "年" + data.get("MONTH") + "月");
+                map.put("hzTime", data.get("CREATE_TIME"));
+                map.put("queryItems", data.get("YEAR") + "," + data.get("MONTH") + "," + data.get("WEEK") + "," + data.get("BEGIN_DATE") + "," + data.get("END_DATE"));
                 retList.add(map);
             }
             //输出显示
@@ -149,25 +151,72 @@ public class OaWorkWatchSumController extends BaseCRUDActionController<OaWorkWat
     @RequestMapping
     public String view(Model model, String queryItems)
     {
-        String[] queryItem = queryItems.split("\\,");
+        String[] queryItem = queryItems.split(",");
         Integer year = JspHelper.getInteger(queryItem[0]);
         Integer month = JspHelper.getInteger(queryItem[1]);
         Integer week = JspHelper.getInteger(queryItem[2]);
         Integer beginDate = JspHelper.getInteger(queryItem[3]);
         Integer endDate = JspHelper.getInteger(queryItem[4]);
-        String hql = "from OaWorkWatchSum where year="+year+" and month="+month+" and week="+week+" and beginDate="+beginDate+" and endDate="+endDate;
+        String hql = "from OaWorkWatchSum where year=" + year + " and month=" + month + " and week=" + week + " and beginDate=" + beginDate + " and endDate=" + endDate;
         List<OaWorkWatchSum> byQuery = oaWorkWatchSumService.findByQuery(hql);
-        ArrayList<OaWorkWatch> oaWorkWatches = new ArrayList<OaWorkWatch>();
 
+        String ids = "";
         for (OaWorkWatchSum workWatchSum : byQuery)
         {
             OaWorkWatch oaWorkWatch = workWatchSum.getWorkWatch();
-            oaWorkWatches.add(oaWorkWatch);
+            ids += "," + oaWorkWatch.getId();
+        }
+        ids = ids.substring(1);
+        String[] oaWorkWatchIds = ids.split(",");
+        List<String> list = new LinkedList<String>();
+        for (int i = 0; i < oaWorkWatchIds.length; i++)
+        {
+            if (!list.contains(oaWorkWatchService.get(JspHelper.getLong(oaWorkWatchIds[i])).getReportDept()))
+            {
+                list.add(oaWorkWatchService.get(JspHelper.getLong(oaWorkWatchIds[i])).getReportDept());
+            }
+        }
+        Map<String, List<OaWorkWatchItem>> deptMap = new HashMap<String, List<OaWorkWatchItem>>();
+        for (String dept : list)
+        {
+            deptMap.put(dept, null);
+        }
+        for (String oaWorkWatchId : oaWorkWatchIds)
+        {
+            OaWorkWatch workWatch = oaWorkWatchService.get(JspHelper.getLong(oaWorkWatchId));
+
+            //用map封装数据
+            List<OaWorkWatchItem> workWatchItems = deptMap.get(workWatch.getReportDept());
+            if (null == workWatchItems)
+            {
+                workWatchItems = new ArrayList<OaWorkWatchItem>();
+            }
+            Set<OaWorkWatchItem> oaWorkWatchItems = workWatch.getOaWorkWatchItems();
+
+            for (OaWorkWatchItem oaWorkWatchItem : oaWorkWatchItems)
+            {
+                workWatchItems.add(oaWorkWatchItem);
+            }
+
+            deptMap.put(workWatch.getReportDept(), workWatchItems);
         }
 
+        HashMap<String, String> stringHashMap = new HashMap<String, String>();
+        for (String s : deptMap.keySet()) {
+            String person = "";
+            for (OaWorkWatchItem oaWorkWatchItem : deptMap.get(s)) {
+                if (!person.contains(oaWorkWatchItem.getWorkWatch().getReportPerson())) {
+                    person += oaWorkWatchItem.getWorkWatch().getReportPerson()+"\n";
+                }
+            }
+            stringHashMap.put(s, person);
+        }
+
+        model.addAttribute("stringHashMap", stringHashMap);
+
+        model.addAttribute("deptMap", deptMap);
         //处理其他业务逻辑
         model.addAttribute("reportTime", year + "年" + month + "月份第" + week + "周（" + beginDate + "~" + endDate + "日）工作督办一览表");
-        model.addAttribute("oaWorkWatches", oaWorkWatches);
 
         return "view/oa/oaWorkWatchSum/view";
     }
@@ -182,7 +231,51 @@ public class OaWorkWatchSumController extends BaseCRUDActionController<OaWorkWat
     @RequestMapping
     public String add(Model model, String ids)
     {
-        String[] oaWorkWatchIds = ids.split("\\/");
+        ids = ids.substring(1);
+        String[] oaWorkWatchIds = ids.split(",");
+        List<String> list = new LinkedList<String>();
+        for (int i = 0; i < oaWorkWatchIds.length; i++)
+        {
+            if (!list.contains(oaWorkWatchService.get(JspHelper.getLong(oaWorkWatchIds[i])).getReportDept()))
+            {
+                list.add(oaWorkWatchService.get(JspHelper.getLong(oaWorkWatchIds[i])).getReportDept());
+            }
+        }
+        Map<String, List<OaWorkWatchItem>> deptMap = new HashMap<String, List<OaWorkWatchItem>>();
+        for (String dept : list)
+        {
+            deptMap.put(dept, null);
+        }
+        for (String oaWorkWatchId : oaWorkWatchIds)
+        {
+            OaWorkWatch workWatch = oaWorkWatchService.get(JspHelper.getLong(oaWorkWatchId));
+            List<OaWorkWatchItem> workWatchItems = deptMap.get(workWatch.getReportDept());
+            if (null == workWatchItems)
+            {
+                workWatchItems = new ArrayList<OaWorkWatchItem>();
+            }
+            Set<OaWorkWatchItem> oaWorkWatchItems = workWatch.getOaWorkWatchItems();
+            for (OaWorkWatchItem oaWorkWatchItem : oaWorkWatchItems)
+            {
+                workWatchItems.add(oaWorkWatchItem);
+            }
+            deptMap.put(workWatch.getReportDept(), workWatchItems);
+        }
+        //获取封装分管领导
+        HashMap<String, String> stringHashMap = new HashMap<String, String>();
+        for (String s : deptMap.keySet()) {
+            String person = "";
+            for (OaWorkWatchItem oaWorkWatchItem : deptMap.get(s)) {
+                if (!person.contains(oaWorkWatchItem.getWorkWatch().getReportPerson())) {
+                    person += oaWorkWatchItem.getWorkWatch().getReportPerson()+"\n";
+                }
+            }
+            stringHashMap.put(s, person);
+        }
+
+        model.addAttribute("stringHashMap", stringHashMap);
+        System.out.println("deptMap = " + deptMap);
+        model.addAttribute("deptMap", deptMap);
 
         ArrayList<OaWorkWatch> oaWorkWatches = new ArrayList<OaWorkWatch>();
         for (String oaWorkWatchId : oaWorkWatchIds)
@@ -274,7 +367,7 @@ public class OaWorkWatchSumController extends BaseCRUDActionController<OaWorkWat
             String beginDay = request.getParameter("beginDay");
             String endDay = request.getParameter("endDay");
 
-            String[] oaWorkWatchIds = ids.split("\\/");
+            String[] oaWorkWatchIds = ids.split(",");
             for (String oaWorkWatchId : oaWorkWatchIds)
             {
                 OaWorkWatchSum oaWorkWatchSum = new OaWorkWatchSum();
@@ -300,19 +393,20 @@ public class OaWorkWatchSumController extends BaseCRUDActionController<OaWorkWat
      * 删除操作
      *
      * @param response .
-     * @param ids       .
+     * @param ids      .
      * @throws Exception .
      */
     @RequestMapping
     public void delete(HttpServletResponse response, String ids) throws Exception
     {
-        String[] queryItem = ids.split("\\,");
+        ids = ids.substring(1);
+        String[] queryItem = ids.split(",");
         Integer year = JspHelper.getInteger(queryItem[0]);
         Integer month = JspHelper.getInteger(queryItem[1]);
         Integer week = JspHelper.getInteger(queryItem[2]);
         Integer beginDate = JspHelper.getInteger(queryItem[3]);
         Integer endDate = JspHelper.getInteger(queryItem[4]);
-        String hql = "from OaWorkWatchSum where year="+year+" and month="+month+" and week="+week+" and beginDate="+beginDate+" and endDate="+endDate;
+        String hql = "from OaWorkWatchSum where year=" + year + " and month=" + month + " and week=" + week + " and beginDate=" + beginDate + " and endDate=" + endDate;
         List<OaWorkWatchSum> byQuery = oaWorkWatchSumService.findByQuery(hql);
         for (OaWorkWatchSum workWatchSum : byQuery)
         {
