@@ -48,8 +48,7 @@
 
 <form:form commandName="bean">
     <form:hidden path="id"/>
-
-    <div class="form_div">
+    <%--<div class="form_div">--%>
         <table cellpadding="0" cellspacing="0" class="form_table" style="position:absolute">
 
             <tr class="tr_light">
@@ -97,5 +96,5 @@
                 </td>
             </tr>
         </table>
-    </div>
+    <%--</div>--%>
 </form:form>

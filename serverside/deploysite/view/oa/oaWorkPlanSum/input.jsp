@@ -1,130 +1,172 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/common/taglibs.jsp" %>
 <script type="text/javascript">
-    var formId = "bean";    
-    $(function () {
+    var formId = "bean";
+    $(function ()
+    {
         //页面验证初始化
         var validateCondition = [
-                                                                        //{name:"beginDate", rule:"validate[required,custom[date],maxSize[7]"},            
-                                                                                                      //{name:"endDate", rule:"validate[required,custom[date],maxSize[7]"},            
-                                                                                                      //{name:"documentId", rule:"validate[required,custom[integer],maxSize[10]"},            
-                                                                                                      //{name:"status", rule:"validate[required,custom[integer],maxSize[2]"},            
-                                                                                                      //{name:"leaderOpinion", rule:"validate[required,maxSize[${prop.length}]]"},            
-                                                                                                      //{name:"leaderAuditTime", rule:"validate[required,maxSize[7]]"},            
-                                                                                                      //{name:"leaderAuditUser", rule:"validate[required,maxSize[100]]"},            
-                                                                                                      //{name:"createTime", rule:"validate[required,maxSize[7]]"},            
-                                                                                                      //{name:"createUser", rule:"validate[required,maxSize[100]]"},            
-                                                                                                      //{name:"updateTime", rule:"validate[required,maxSize[7]]"},            
-                                                                                                      //{name:"updateUser", rule:"validate[required,maxSize[100]]"},            
-                                                  ];
+            //{name:"beginDate", rule:"validate[required,custom[date],maxSize[7]"},
+            //{name:"endDate", rule:"validate[required,custom[date],maxSize[7]"},
+            //{name:"documentId", rule:"validate[required,custom[integer],maxSize[10]"},
+            //{name:"status", rule:"validate[required,custom[integer],maxSize[2]"},
+        ];
         validateInit(validateCondition, formId);
     });
 
     //保存操作
-    function save(btn) {
-        if (!validateForm(formId)) {
+    function save(btn, status)
+    {
+        if (!validateForm(formId))
+        {
             return;
         }
-
-        //加入其他业务判断
-//        if ($('#name').val() == '') {
-//            showInfoMsg('请输入姓名！',null);
-//            return;
-//        }
+        if (status !=${STATUS_EDIT} && !confirm("确定提交？提交后不能更改！"))
+        {
+            return;
+        }
+        $("#status").val(status);
 
         //提交表单
         saveAjaxData("${ctx}/oaWorkPlanSum/save.do", formId);
     }
 </script>
+<style>
+    .input_text{
+        font-size: 12px;
+        border: 1px solid #b8b6b9;
+        color: #007DBC;
+        background-color: #FFFFFF;
+        width: 100px;
+        height: 20px;
+    }
+    .input_number_short{
+        font-size: 12px;
+        border: 1px solid #b8b6b9;
+        color: #007DBC;
+        background-color: #FFFFFF;
+        width: 60px;
+        height: 20px;
+    }
+
+</style>
 <form:form commandName="bean">
     <form:hidden path="id"/>
+    <form:hidden path="status"/>
+    <form:hidden path="beginDate"/>
+    <form:hidden path="endDate"/>
 
     <div class="form_div">
         <table cellpadding="0" cellspacing="0" class="form_table">
-                                    <tr class="tr_light">
-              <td class="form_label">上报开始时间：</td>
-              <td class="form_content">
-                                <form:input path="beginDate" cssClass="input_date" readonly="true"/>
-                    <input type="button" class="button_calendar" value=" " onClick="calendar('beginDate');">
-                                                 
-                          </td>                                
+            <tr class="tr_title">
+                <td>
+                    一周工作安排（${bean.beginDate}~${bean.endDate}）
+                </td>
             </tr>
-                                                <tr class="tr_dark">
-              <td class="form_label">上报结束时间：</td>
-              <td class="form_content">
-                                <form:input path="endDate" cssClass="input_date" readonly="true"/>
-                    <input type="button" class="button_calendar" value=" " onClick="calendar('endDate');">
-                                                 
-                          </td>                                
-            </tr>
-                                    <tr class="tr_light">
-              <td class="form_label">附件ID(预留)：</td>
-              <td class="form_content">
-                        <form:input path="documentId" cssClass="input_text"/>						
-                          </td>                                
-            </tr>
-                                                <tr class="tr_dark">
-              <td class="form_label">状态：</td>
-              <td class="form_content">
-                        <form:input path="status" cssClass="input_text"/>						
-                          </td>                                
-            </tr>
-                                    <tr class="tr_light">
-              <td class="form_label">领导审核意见：</td>
-              <td class="form_content">
-                        <form:input path="leaderOpinion" cssClass="input_text"/>						
-                          </td>                                
-            </tr>
-                                                <tr class="tr_dark">
-              <td class="form_label">领导审核时间：</td>
-              <td class="form_content">
-                                <input type="text" name="leaderAuditTime" id="leaderAuditTime" class="input_datetime"
-                           value="<fmt:formatDate value="${bean.leaderAuditTime}" pattern="yyyy-MM-dd HH:mm:ss"/>" readonly="true"/>
-                    <input type="button" class="button_calendar" value=" " onClick="calendar('leaderAuditTime','all')">                                                        
-            
-                          </td>                                
-            </tr>
-                                    <tr class="tr_light">
-              <td class="form_label">领导审核用户名：</td>
-              <td class="form_content">
-                        <form:input path="leaderAuditUser" cssClass="input_text"/>						
-                          </td>                                
-            </tr>
-                                                <tr class="tr_dark">
-              <td class="form_label">创建时间：</td>
-              <td class="form_content">
-                                <input type="text" name="createTime" id="createTime" class="input_datetime"
-                           value="<fmt:formatDate value="${bean.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/>" readonly="true"/>
-                    <input type="button" class="button_calendar" value=" " onClick="calendar('createTime','all')">                                                        
-            
-                          </td>                                
-            </tr>
-                                    <tr class="tr_light">
-              <td class="form_label">创建用户名：</td>
-              <td class="form_content">
-                        <form:input path="createUser" cssClass="input_text"/>						
-                          </td>                                
-            </tr>
-                                                <tr class="tr_dark">
-              <td class="form_label">更新时间：</td>
-              <td class="form_content">
-                                <input type="text" name="updateTime" id="updateTime" class="input_datetime"
-                           value="<fmt:formatDate value="${bean.updateTime}" pattern="yyyy-MM-dd HH:mm:ss"/>" readonly="true"/>
-                    <input type="button" class="button_calendar" value=" " onClick="calendar('updateTime','all')">                                                        
-            
-                          </td>                                
-            </tr>
-                                    <tr class="tr_light">
-              <td class="form_label">更新用户名：</td>
-              <td class="form_content">
-                        <form:input path="updateUser" cssClass="input_text"/>						
-                          </td>                                
-            </tr>
-                                     
-            <tr class="tr_button">
-                <td class="form_label"></td>
+        </table>
+        <fieldset class="from_fieldset">
+            <table cellpadding="0" cellspacing="0" class="form_table">
+                <tr class="tr_header">
+                    <td class="form_border" width="8%">序号</td>
+                    <td class="form_border" width="10%">责任人</td>
+                    <td class="form_border" width="10%">重点工作</td>
+                    <td class="form_border" width="10%">工作内容</td>
+                    <td class="form_border" width="10%">科室</td>
+                    <td class="form_border" width="10%">工作进度</td>
+                    <td class="form_border" width="10%">经办人</td>
+                </tr>
+                <c:forEach items="${oaWorkPlanItems}" var="item" varStatus="st">
+                <c:if test="${st.index%2==0}">
+                <tr class="tr_dark"></c:if>
+                    <c:if test="${st.index%2!=0}">
+                <tr class="tr_light"></c:if>
+                    <td class="form_content">
+                        <input type="text" class="input_number_short" name="orderNo" value="${item.orderNo}">
+                        <c:choose>
+                            <c:when test="${empty bean.id}">
+                                <input type="hidden" class="input_text" name="itemId" value="${item.id}">
+                            </c:when>
+                            <c:otherwise>
+                                <input type="hidden" class="input_text" name="itemId" value="${item.workPlanItem.id}">
+                            </c:otherwise>
+                        </c:choose>
+                    </td>
+                    <td class="form_content">
+                        <input type="text" class="input_text" name="dutyPerosn" value="${item.dutyPerosn}">
+                    </td>
+                    <td class="form_content">
+                        <input type="text" class="input_text" name="keyWork" value="${item.keyWork}">
+                    </td>
+                    <td class="form_content">
+                        <input type="text" class="input_text" name="content" value="${item.content}">
+                    </td>
                 <td class="form_content">
-                    <input type="button" value="确定" class="button_confirm" onclick="save(this)">&nbsp;
+                    <c:choose>
+                        <c:when test="${empty bean.id}">
+                            <input type="text" class="input_text" name="reportDept" value="${item.weekPlan.reportDept}">
+                        </c:when>
+                        <c:otherwise>
+                            <input type="text" class="input_text" name="reportDept" value="${item.workPlanItem.weekPlan.reportDept}"
+                        </c:otherwise>
+                    </c:choose>
+                    </td>
+                    <td class="form_content">
+                        <input type="text" class="input_text" name="schedule" value="${item.schedule}">
+                    </td>
+                    <td class="form_content">
+                        <input type="text" class="input_text" name="jbr" value="${item.jbr}">
+                    </td>
+                </tr>
+                    </c:forEach>
+            </table>
+        </fieldset>
+        <c:choose>
+            <c:when test="${bean.status == STATUS_SUBMIT||bean.status == STATUS_MAIN_PASS||bean.status == STATUS_MAIN_BACK}">
+                <fieldset class="form_fieldset">
+                    <legend class="form_legend">
+                        主任审核
+                    </legend>
+                    <table cellpadding="0" cellspacing="0" class="form_table">
+                        <tr class="tr_light">
+                            <td class="form_label_right" style="width: 150px">主任审核意见：</td>
+                            <td class="form_content" colspan="3">
+                                <c:choose>
+                                    <c:when test="${bean.status == STATUS_MAIN_BACK}">
+                                        <form:textarea path="leaderOpinion" cssClass="input_textarea_long"
+                                                       readonly="true"/>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <form:textarea path="leaderOpinion" cssClass="input_textarea_long"/>
+                                    </c:otherwise>
+                                </c:choose>
+                            </td>
+                        </tr>
+                    </table>
+                </fieldset>
+            </c:when>
+            <c:otherwise>
+                <form:hidden path="leaderOpinion"/>
+            </c:otherwise>
+        </c:choose>
+        <table cellpadding="0" cellspacing="0" class="form_table">
+            <tr class="tr_button">
+                <td class="form_content" style="text-align: center">
+                    <c:if test="${canEdit||canEdit_ZR}">
+                        <c:if test="${empty bean.status|| STATUS_EDIT ==bean.status|| STATUS_MAIN_BACK ==bean.status}">
+                            <input type="button" value="提交" class="button_confirm"
+                                   onclick="save(this,'${STATUS_SUBMIT}')">&nbsp;
+                            <input type="button" value="保存" class="button_confirm"
+                                   onclick="save(this,'${STATUS_EDIT}')">&nbsp;
+                        </c:if>
+                    </c:if>
+                    <c:if test="${canEdit_ZR}">
+                        <c:if test="${STATUS_SUBMIT ==bean.status}">
+                            <input type="button" value="审核通过" class="button_normal_long"
+                                   onclick="save(this,'${STATUS_MAIN_PASS}')">&nbsp;
+                            <input type="button" value="退回修改" class="button_normal_long"
+                                   onclick="save(this,'${STATUS_MAIN_BACK}')">&nbsp;
+                        </c:if>
+                    </c:if>
                     <input type="button" value="取消" class="button_cancel" onclick="closeWindow()">
                 </td>
             </tr>
