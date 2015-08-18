@@ -8,14 +8,14 @@
         loadForTask();
     });
     function loadForTask() {
-        taskIframeId.location.href = "${ctx}/view/index/mainTaskIframe.jsp";
+        <%--taskIframeId.location.href = "${ctx}/view/index/mainTaskIframe.jsp";--%>
         loadForBulletin();
     }
     function loadForBulletin() {
-        loadAjaxDataCallback("bulletinDivId", "${ctx}/mainPage/mainBulletin.do?typeCode=${code_bulletin}", loadForQt);
+        loadAjaxDataCallback("bulletinDivId", "${ctx}/mainPage/mainBulletin.do?typeCode=${code_bulletin}", loadForDaily);
     }
     function loadForDaily() {
-        loadAjaxDataCallback("dailyDivId", "${ctx}/mainPage/mainDaily.do", loadForMsg);
+        loadAjaxDataCallback("dailyDivId", "${ctx}/mainPage/mainDaily.do", loadForQt);
     }
     function loadForQt() {
         loadAjaxDataCallback("qtDivId", "${ctx}/mainPage/mainQt.do", loadForMsg);
@@ -71,18 +71,19 @@
                 <!-- main_center begin -->
 
                 <!-- task begin -->
-                <div class="index_space" style="height: 16px" onmouseover="showEditButton('taskImgId')"
-                     onmouseout="hideEditButton('taskImgId')">
-                    <input type="button" class="button_edit" value=" "
-                           style="float: right;margin-right: 18px;display: none;cursor: pointer" id="taskImgId"
-                           onclick="editPushUser()">
-                </div>
+                <div class="index_space"></div>
                 <table width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
                     <tr>
-                        <td height="144" onmouseover="showEditButton('taskImgId')"
-                            onmouseout="hideEditButton('taskImgId')">
-                            <iframe name="taskIframeId" id="taskIframeId" width="100%" height="100%" frameborder="0"
-                                    src="${ctx}/welcome.jsp"></iframe>
+                        <td style="height: 150px;">
+                            <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td align="center" id="bulletinDivId">
+                                        <!--  bulletin content begin -->
+
+                                        <!--  bulletin content end -->
+                                    </td>
+                                </tr>
+                            </table>
                         </td>
                     </tr>
                 </table>
@@ -150,36 +151,18 @@
                 <!-- msg end -->
 
                 <div class="index_space"></div>
-                <!-- bulletin begin -->
+                <!-- daily begin -->
                 <table width="240" border="0" align="center" cellpadding="0" cellspacing="0">
                     <tr>
-                        <td><img src="${themePath}/index_new/ggl1.jpg" width="240" height="37"/></td>
-                    </tr>
-                    <tr>
-                        <td align="center" id="bulletinDivId">
-                            <!--  bulletin content begin -->
+                        <td align="center" id="dailyDivId">
+                            <!--  daily content begin -->
 
-                            <!--  bulletin content end -->
+                            <!--  daily content end -->
                         </td>
                     </tr>
-                    <tr>
-                        <td><img src="${themePath}/index_new/ggl3.jpg" width="240" height="9"/></td>
-                    </tr>
                 </table>
-                <!-- bulletin end -->
-
+                <!-- daily end -->
                 <div class="index_space"></div>
-                <%--<!-- daily begin -->--%>
-                <%--<table width="240" border="0" align="center" cellpadding="0" cellspacing="0">--%>
-                    <%--<tr>--%>
-                        <%--<td align="center" id="dailyDivId">--%>
-                            <%--<!--  daily content begin -->--%>
-
-                            <%--<!--  daily content end -->--%>
-                        <%--</td>--%>
-                    <%--</tr>--%>
-                <%--</table>--%>
-                <%--<!-- daily end -->--%>
                 <!-- qt begin -->
                 <table width="240" border="0" align="center" cellpadding="0" cellspacing="0">
                     <tr>
