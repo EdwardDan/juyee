@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.justonetech.biz.domain">
+	<class
+		name="OaReceive"
+		table="OA_RECEIVE"
+	>
+		
+		<meta attribute="sync-DAO">false</meta>
+		<meta attribute="sync-jsp">true</meta>
+		<meta attribute="sync-boolean">get</meta>
+		<meta attribute="treeable">false</meta>
+		<meta attribute="projectable">false</meta>
+        <meta attribute="tableName">收文管理</meta>
+        <meta attribute="tableComment">收文管理</meta>
+	    <meta attribute="sync-templatePatterns">list\w*</meta>
+        <meta attribute="sub-system">oa</meta>
+
+		<id
+			name="id"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="com.justonetech.core.orm.hibernate.LongIdGenerator"/>
+		</id>
+
+		<property
+			name="code"
+			column="CODE"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">收文编号</meta>
+            <meta attribute="ColumnComment">收文编号</meta>
+        </property>
+
+		<property
+			name="fileCode"
+			column="FILE_CODE"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">来文文号</meta>
+            <meta attribute="ColumnComment">来文文号</meta>
+        </property>
+
+		<property
+			name="title"
+			column="TITLE"
+			type="string"
+			not-null="false"
+			length="250"
+        >
+            <meta attribute="ColumnName">标题</meta>
+            <meta attribute="ColumnComment">标题</meta>
+        </property>
+
+		<property
+			name="sourceDept"
+			column="SOURCE_DEPT"
+			type="string"
+			not-null="false"
+			length="250"
+        >
+            <meta attribute="ColumnName">来文单位</meta>
+            <meta attribute="ColumnComment">来文单位</meta>
+        </property>
+
+		<property
+			name="receiveDate"
+			column="RECEIVE_DATE"
+			type="date"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">登记日期</meta>
+            <meta attribute="ColumnComment">登记日期</meta>
+        </property>
+
+		<property
+			name="deptName"
+			column="DEPT_NAME"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">提供部门</meta>
+            <meta attribute="ColumnComment">提供部门</meta>
+        </property>
+
+		<property
+			name="writtenDate"
+			column="WRITTEN_DATE"
+			type="date"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">成文日期</meta>
+            <meta attribute="ColumnComment">成文日期</meta>
+        </property>
+
+		<property
+			name="limitDate"
+			column="LIMIT_DATE"
+			type="date"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">办理时限</meta>
+            <meta attribute="ColumnComment">办理时限</meta>
+        </property>
+
+		<property
+			name="fs"
+			column="FS"
+			type="integer"
+			not-null="false"
+			length="6"
+        >
+            <meta attribute="ColumnName">份数</meta>
+            <meta attribute="ColumnComment">份数</meta>
+        </property>
+
+		<property
+			name="ys"
+			column="YS"
+			type="integer"
+			not-null="false"
+			length="6"
+        >
+            <meta attribute="ColumnName">页数</meta>
+            <meta attribute="ColumnComment">页数</meta>
+        </property>
+
+		<property
+			name="startDeptId"
+			column="START_DEPT_ID"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">牵头部门ID</meta>
+            <meta attribute="ColumnComment">牵头部门ID</meta>
+        </property>
+
+		<property
+			name="dealPersons"
+			column="DEAL_PERSONS"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">处理人IDs</meta>
+            <meta attribute="ColumnComment">处理人IDs</meta>
+        </property>
+
+		<property
+			name="dealDepts"
+			column="DEAL_DEPTS"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">处理部门IDs</meta>
+            <meta attribute="ColumnComment">处理部门IDs</meta>
+        </property>
+
+		<property
+			name="createTime"
+			column="CREATE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">创建时间</meta>
+            <meta attribute="ColumnComment">创建时间</meta>
+        </property>
+
+		<property
+			name="createUser"
+			column="CREATE_USER"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">创建用户名</meta>
+            <meta attribute="ColumnComment">创建用户名</meta>
+        </property>
+
+		<property
+			name="updateTime"
+			column="UPDATE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">更新时间</meta>
+            <meta attribute="ColumnComment">更新时间</meta>
+        </property>
+
+		<property
+			name="updateUser"
+			column="UPDATE_USER"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">更新用户名</meta>
+            <meta attribute="ColumnComment">更新用户名</meta>
+        </property>
+
+		<many-to-one
+			name="doc"
+			column="DOC_ID"
+			class="DocDocument"
+			not-null="false"
+		>
+		</many-to-one>
+		<many-to-one
+			name="fileType"
+			column="FILE_TYPE_ID"
+			class="com.justonetech.system.domain.SysCodeDetail"
+			not-null="false"
+		>
+		</many-to-one>
+		<many-to-one
+			name="urgent"
+			column="URGENT_ID"
+			class="com.justonetech.system.domain.SysCodeDetail"
+			not-null="false"
+		>
+		</many-to-one>
+		<many-to-one
+			name="type"
+			column="TYPE_ID"
+			class="com.justonetech.system.domain.SysCodeDetail"
+			not-null="false"
+		>
+		</many-to-one>
+		<many-to-one
+			name="step"
+			column="STEP_ID"
+			class="OaReceiveStep"
+			not-null="false"
+		>
+		</many-to-one>
+		<many-to-one
+			name="secert"
+			column="SECERT_ID"
+			class="com.justonetech.system.domain.SysCodeDetail"
+			not-null="false"
+		>
+		</many-to-one>
+	
+
+		<set name="oaReceiveNodes" inverse="true">
+			<key column="OA_RECEIVE_ID"/>
+			<one-to-many class="OaReceiveNode"/>
+		</set>
+
+	</class>	
+    <query name="oareceive_all_data_query">
+        <![CDATA[FROM OaReceive]]>
+    </query>
+</hibernate-mapping>
