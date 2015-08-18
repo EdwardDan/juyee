@@ -1,0 +1,301 @@
+drop table OA_RECEIVE_STEP cascade constraints;
+
+/*==============================================================*/
+/* Table: OA_RECEIVE_STEP                                       */
+/*==============================================================*/
+create table OA_RECEIVE_STEP 
+(
+   ID                   number(10)           not null,
+   ORDER_NO             number(10),
+   CODE                 varchar2(100 char),
+   NAME                 varchar2(100 char),
+   IS_JOIN              number(1),
+   CREATE_TIME          DATE,
+   CREATE_USER          VARCHAR2(100),
+   UPDATE_TIME          DATE,
+   UPDATE_USER          VARCHAR2(100),
+   constraint PK_OA_RECEIVE_STEP primary key (ID)
+);
+
+comment on table OA_RECEIVE_STEP is
+'收文管理流转步骤';
+
+comment on column OA_RECEIVE_STEP.ID is
+'ID';
+
+comment on column OA_RECEIVE_STEP.ORDER_NO is
+'步骤序号';
+
+comment on column OA_RECEIVE_STEP.CODE is
+'流转步骤种类';
+
+comment on column OA_RECEIVE_STEP.NAME is
+'流转步骤名称';
+
+comment on column OA_RECEIVE_STEP.IS_JOIN is
+'是否会签';
+
+comment on column OA_RECEIVE_STEP.CREATE_TIME is
+'创建时间';
+
+comment on column OA_RECEIVE_STEP.CREATE_USER is
+'创建用户名';
+
+comment on column OA_RECEIVE_STEP.UPDATE_TIME is
+'更新时间';
+
+comment on column OA_RECEIVE_STEP.UPDATE_USER is
+'更新用户名';
+
+
+drop table OA_RECEIVE cascade constraints;
+
+/*==============================================================*/
+/* Table: OA_RECEIVE                                            */
+/*==============================================================*/
+create table OA_RECEIVE 
+(
+   ID                   number(10)           not null,
+   TYPE_ID              number(10),
+   CODE                 varchar2(100 char),
+   FILE_CODE            varchar2(100 char),
+   TITLE                varchar2(250 char),
+   SOURCE_DEPT          varchar2(250 char),
+   RECEIVE_DATE         date,
+   DEPT_NAME            varchar2(100 char),
+   URGENT_ID            number(10),
+   WRITTEN_DATE         date,
+   FILE_TYPE_ID         number(10),
+   LIMIT_DATE           date,
+   FS                   number(6),
+   YS                   number(6),
+   SECERT_ID            number(10),
+   START_DEPT_ID        number(10),
+   DOC_ID               number(10),
+   DEAL_PERSONS         varchar2(200 char),
+   DEAL_DEPTS           varchar2(200 char),
+   STEP_ID              number(10),
+   CREATE_TIME          DATE,
+   CREATE_USER          VARCHAR2(100),
+   UPDATE_TIME          DATE,
+   UPDATE_USER          VARCHAR2(100),
+   constraint PK_OA_RECEIVE primary key (ID),
+   constraint FK_OA_RECEIVE_DOC foreign key (DOC_ID)
+         references DOC_DOCUMENT (ID),
+   constraint FK_OA_RECEIVE_TYPE foreign key (TYPE_ID)
+         references SYS_CODE_DETAIL (ID),
+   constraint FK_OA_RECEIVE_URGENT foreign key (URGENT_ID)
+         references SYS_CODE_DETAIL (ID),
+   constraint FK_OA_RECEIVE_FILETYPE foreign key (FILE_TYPE_ID)
+         references SYS_CODE_DETAIL (ID),
+   constraint FK_OA_RECEIVE_CUR_STEP foreign key (STEP_ID)
+         references OA_RECEIVE_STEP (ID),
+   constraint FK_OA_RECEIVE_SECERT foreign key (SECERT_ID)
+         references SYS_CODE_DETAIL (ID)
+);
+
+comment on table OA_RECEIVE is
+'收文管理';
+
+comment on column OA_RECEIVE.ID is
+'ID';
+
+comment on column OA_RECEIVE.TYPE_ID is
+'文件类型ID';
+
+comment on column OA_RECEIVE.CODE is
+'收文编号';
+
+comment on column OA_RECEIVE.FILE_CODE is
+'来文文号';
+
+comment on column OA_RECEIVE.TITLE is
+'标题';
+
+comment on column OA_RECEIVE.SOURCE_DEPT is
+'来文单位';
+
+comment on column OA_RECEIVE.RECEIVE_DATE is
+'登记日期';
+
+comment on column OA_RECEIVE.DEPT_NAME is
+'提供部门';
+
+comment on column OA_RECEIVE.URGENT_ID is
+'紧急程度ID';
+
+comment on column OA_RECEIVE.WRITTEN_DATE is
+'成文日期';
+
+comment on column OA_RECEIVE.FILE_TYPE_ID is
+'公文种类ID';
+
+comment on column OA_RECEIVE.LIMIT_DATE is
+'办理时限';
+
+comment on column OA_RECEIVE.FS is
+'份数';
+
+comment on column OA_RECEIVE.YS is
+'页数';
+
+comment on column OA_RECEIVE.SECERT_ID is
+'密级';
+
+comment on column OA_RECEIVE.START_DEPT_ID is
+'牵头部门ID';
+
+comment on column OA_RECEIVE.DOC_ID is
+'附件ID';
+
+comment on column OA_RECEIVE.DEAL_PERSONS is
+'处理人IDs';
+
+comment on column OA_RECEIVE.DEAL_DEPTS is
+'处理部门IDs';
+
+comment on column OA_RECEIVE.STEP_ID is
+'当前步骤ID';
+
+comment on column OA_RECEIVE.CREATE_TIME is
+'创建时间';
+
+comment on column OA_RECEIVE.CREATE_USER is
+'创建用户名';
+
+comment on column OA_RECEIVE.UPDATE_TIME is
+'更新时间';
+
+comment on column OA_RECEIVE.UPDATE_USER is
+'更新用户名';
+
+
+drop table OA_RECEIVE_OPERATION cascade constraints;
+
+/*==============================================================*/
+/* Table: OA_RECEIVE_OPERATION                                  */
+/*==============================================================*/
+create table OA_RECEIVE_OPERATION 
+(
+   ID                   number(10)           not null,
+   CODE                 varchar2(100 char),
+   NAME                 varchar2(100 char),
+   STEP_ID              number(10),
+   IS_VALID             number(1),
+   CREATE_TIME          DATE,
+   CREATE_USER          VARCHAR2(100),
+   UPDATE_TIME          DATE,
+   UPDATE_USER          VARCHAR2(100),
+   constraint PK_OA_RECEIVE_OPERATION primary key (ID),
+   constraint FK_OA_RECEIVE_OPERATION foreign key (STEP_ID)
+         references OA_RECEIVE_STEP (ID)
+);
+
+comment on table OA_RECEIVE_OPERATION is
+'收文管理流转操作';
+
+comment on column OA_RECEIVE_OPERATION.ID is
+'ID';
+
+comment on column OA_RECEIVE_OPERATION.CODE is
+'操作编码';
+
+comment on column OA_RECEIVE_OPERATION.NAME is
+'操作名称';
+
+comment on column OA_RECEIVE_OPERATION.STEP_ID is
+'流转步骤ID';
+
+comment on column OA_RECEIVE_OPERATION.IS_VALID is
+'是否有效';
+
+comment on column OA_RECEIVE_OPERATION.CREATE_TIME is
+'创建时间';
+
+comment on column OA_RECEIVE_OPERATION.CREATE_USER is
+'创建用户名';
+
+comment on column OA_RECEIVE_OPERATION.UPDATE_TIME is
+'更新时间';
+
+comment on column OA_RECEIVE_OPERATION.UPDATE_USER is
+'更新用户名';
+
+drop table OA_RECEIVE_NODE cascade constraints;
+
+/*==============================================================*/
+/* Table: OA_RECEIVE_NODE                                       */
+/*==============================================================*/
+create table OA_RECEIVE_NODE 
+(
+   ID                   number(10)           not null,
+   OA_RECEIVE_ID        number(10),
+   STEP_ID              number(10),
+   OPERATION_ID         number(10),
+   IS_DEAL              number(1),
+   DEAL_USER            varchar2(100),
+   DEAL_DEPT_ID         number(10),
+   DEAL_RESULT          varchar2(200 char),
+   RECEIVE_TIME         date,
+   OPEN_TIME            date,
+   COMPLETE_TIME        date,
+   CREATE_TIME          DATE,
+   CREATE_USER          VARCHAR2(100),
+   UPDATE_TIME          DATE,
+   UPDATE_USER          VARCHAR2(100),
+   constraint PK_OA_RECEIVE_NODE primary key (ID),
+   constraint FK_OA_RECEIVE_NODE_OP foreign key (OPERATION_ID)
+         references OA_RECEIVE_OPERATION (ID),
+   constraint FK_OA_RECEIVE_NODE foreign key (OA_RECEIVE_ID)
+         references OA_RECEIVE (ID),
+   constraint FK_OA_RECEIVE_NODE_DEPT foreign key (DEAL_DEPT_ID)
+         references SYS_DEPT (ID)
+);
+
+comment on table OA_RECEIVE_NODE is
+'收文管理流转节点';
+
+comment on column OA_RECEIVE_NODE.ID is
+'ID';
+
+comment on column OA_RECEIVE_NODE.OA_RECEIVE_ID is
+'收文ID';
+
+comment on column OA_RECEIVE_NODE.STEP_ID is
+'流转步骤ID';
+
+comment on column OA_RECEIVE_NODE.OPERATION_ID is
+'流转操作ID';
+
+comment on column OA_RECEIVE_NODE.IS_DEAL is
+'是否处理';
+
+comment on column OA_RECEIVE_NODE.DEAL_USER is
+'处理人';
+
+comment on column OA_RECEIVE_NODE.DEAL_DEPT_ID is
+'处理部门ID';
+
+comment on column OA_RECEIVE_NODE.DEAL_RESULT is
+'处理结果';
+
+comment on column OA_RECEIVE_NODE.RECEIVE_TIME is
+'收到时间';
+
+comment on column OA_RECEIVE_NODE.OPEN_TIME is
+'打开时间';
+
+comment on column OA_RECEIVE_NODE.COMPLETE_TIME is
+'处理完成时间';
+
+comment on column OA_RECEIVE_NODE.CREATE_TIME is
+'创建时间';
+
+comment on column OA_RECEIVE_NODE.CREATE_USER is
+'创建用户名';
+
+comment on column OA_RECEIVE_NODE.UPDATE_TIME is
+'更新时间';
+
+comment on column OA_RECEIVE_NODE.UPDATE_USER is
+'更新用户名';
