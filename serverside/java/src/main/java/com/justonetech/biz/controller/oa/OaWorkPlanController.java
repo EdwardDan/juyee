@@ -114,9 +114,12 @@ public class OaWorkPlanController extends BaseCRUDActionController<OaWorkPlan> {
     public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session) {
         try {
             Page pageModel = new Page(page, rows, true);
-            String hql = "from OaWorkPlan order by id desc";
-            //增加自定义查询条件
-
+            String hql = "from OaWorkPlan where 1=1";
+            //增加自定义查询条件-判断只有编辑权限和科长权限的只能获取本科室数据
+            if(sysUserManager.hasPrivilege(PrivilegeCode.OA_WORK_PLAN_EDIT)||sysUserManager.hasPrivilege(PrivilegeCode.OA_WORK_PLAN_AUDIZ_KZ)){
+                hql += "and reportDept = '" +sysUserManager.getSysUser().getPerson().getDeptName()+"'";
+            }
+            hql += "order by id desc";
             //执行查询
             QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);
             String query = queryTranslate.toString();
