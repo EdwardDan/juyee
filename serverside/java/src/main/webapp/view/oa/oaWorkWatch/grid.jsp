@@ -90,7 +90,7 @@
             showInfoMsg("请先选择一条记录!");
             return null;
         } else {
-            return openWindow("添加工作督办", "${ctx}/oaWorkWatchSum/add.do?ids="+val, true);
+            return openWindow("工作督办汇总", "${ctx}/oaWorkWatchSum/add.do?ids="+val, true);
 
         }
     }
