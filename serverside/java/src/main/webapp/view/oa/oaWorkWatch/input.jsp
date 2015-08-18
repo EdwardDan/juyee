@@ -4,7 +4,10 @@
     var formId = "bean";
     $(function () {
         //页面验证初始化
-        var validateCondition = [];
+        var validateCondition = [
+            {name: "reportDept", rule: "validate[required,maxSize[100]]"},
+            {name: "reportPerson", rule: "validate[required,maxSize[50]]"}
+        ];
         validateInit(validateCondition, formId);
         if (${bean.status==STATUS_ZR_PASS}) {
             $("textarea[name='completeDesc']").each(function () {
@@ -35,6 +38,7 @@
 
     //保存操作
     function save(status, buttonName) {
+        var isSave = true;
         if (!validateForm(formId)) {
             return;
         }
@@ -43,13 +47,23 @@
         $("select[name='actualDesc']").each(function () {
             $(this).get(0).disabled = false;
         });
-        //提交表单
-        if (buttonName != "") {
-            if (confirm("是否确定执行 " + buttonName + " 操作？")) {
+        $("input[name='orderNo']").each(function () {
+            var orderNo = $(this).val();
+            if (null == orderNo || '' == orderNo) {
+                showInfoMsg("序号不能为空");
+                isSave = false;
+                return false;
+            }
+        });
+        if (isSave) {
+            //提交表单
+            if (buttonName != "") {
+                if (confirm("是否确定执行 " + buttonName + " 操作？")) {
+                    saveAjaxData("${ctx}/oaWorkWatch/save.do?status=" + status, formId);
+                }
+            } else {
                 saveAjaxData("${ctx}/oaWorkWatch/save.do?status=" + status, formId);
             }
-        } else {
-            saveAjaxData("${ctx}/oaWorkWatch/save.do?status=" + status, formId);
         }
     }
 </script>
