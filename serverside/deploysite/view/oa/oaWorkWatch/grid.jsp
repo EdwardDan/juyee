@@ -6,8 +6,9 @@
         var conf = {
             gridOpts: {
                 url: "${ctx}/oaWorkWatch/gridDataCustom.do",
+                multiselect: true,
+                multiselectWidth: 30,
                 colNames: ['ID',
-                    '选择',
                     '上报科室',
                     '科室分管领导',
                     '上报开始时间',
@@ -18,7 +19,6 @@
                 ],
                 colModel: [
                     {name: 'id', width: 10, align: "center", searchtype: "integer", hidden: true},
-                    {name: 'id', width: 10, align: "center", searchtype: "integer", formatter: customeFormat},
                     {name: "reportDept", width: "40", align: "center", searchtype: "string", sortable: true},
                     {name: "reportPerson", width: "40", align: "center", searchtype: "string", sortable: true},
                     {name: "beginDate", width: "40", align: "center", searchtype: "datetime", sortable: true, formatter: 'date', formatoptions: {srcformat: 'Y-m-d', newformat: 'Y-m-d'}},
@@ -75,38 +75,32 @@
         };
         gridinit($("#listGrid"), conf);
     });
-    var TAB_NO = "${tab}";
+    var TAB_NO="${tab}";
     function doView(id) {
-        parent.openWindow("查看工作督办", "${ctx}/oaWorkWatch/view.do?id=" + id, false, 700, 450, TAB_NO);
+        parent.openWindow("查看工作督办", "${ctx}/oaWorkWatch/view.do?id=" + id, false,700,450,TAB_NO);
     }
     function doAdd() {
-        parent.openWindow("添加工作督办", "${ctx}/oaWorkWatch/add.do", true, 700, 450, TAB_NO);
+        parent.openWindow("添加工作督办", "${ctx}/oaWorkWatch/add.do", true,700,450,TAB_NO);
     }
-    function doSum() {
-        var val = "";
-        $("input[name='checkboxIds']:checked").each(function () {
-            val += "," + this.value;
-        });
-        if (val == "") {
-            showInfoMsg("请先选择一条记录!");
-            return null;
-        } else {
-            return parent.openWindow("工作督办汇总", "${ctx}/oaWorkWatchSum/add.do?ids=" + val, true, 700, 450, TAB_NO);
-
+    function doSum(btn)
+    {
+        var ids = $("#listGrid").jqGrid("getGridParam", "selarrrow");
+        if (ids == null || ids == "") {
+            showInfoMsg("请选择需要汇总的记录！");
+            return;
         }
+        btn.disable = true;
+        return parent.openWindow("工作督办汇总", "${ctx}/oaWorkWatchSum/add.do?ids="+ids, true,700,450,TAB_NO);
+
     }
     function doEdit(id) {
-        parent.openWindow("修改工作督办", "${ctx}/oaWorkWatch/modify.do?id=" + id, true, 700, 450, TAB_NO);
+        parent.openWindow("修改工作督办", "${ctx}/oaWorkWatch/modify.do?id=" + id, true,700,450,TAB_NO);
     }
     function doAudit(id) {
-        parent.openWindow("审核工作督办", "${ctx}/oaWorkWatch/audit.do?id=" + id, true, 700, 450, TAB_NO);
+        parent.openWindow("审核工作督办", "${ctx}/oaWorkWatch/audit.do?id=" + id, true,700,450,TAB_NO);
     }
     function doDelete(id) {
         doGridDelete("${ctx}/oaWorkWatch/delete.do?id=" + id);
-    }
-    //custom formatter
-    function customeFormat(cellvalue, options, rowObject) {
-        return '<input type="checkbox" name="checkboxIds" value="' + cellvalue + '"/>';
     }
 </script>
 
@@ -120,7 +114,7 @@
                    readonly="true"/>
         </div>
         <div style="float:right;padding-right: 10px">
-            <input type="button" value="汇总" class="button_all" onclick="doSum()"/>
+                <input type="button" value="汇总" class="button_all" onclick="doSum(this)"/>
             <c:if test="${canEdit}">
                 <input type="button" value="添加" class="button_add" onclick="doAdd()"/>
             </c:if>
