@@ -49,7 +49,7 @@
                     <td  style="text-align: center">
                             ${item.keyWork}
                     </td>
-                    <td >
+                    <td style="text-align: left;">
                             <sys:toHtml>${item.content}</sys:toHtml>
                     </td>
                     <td >
