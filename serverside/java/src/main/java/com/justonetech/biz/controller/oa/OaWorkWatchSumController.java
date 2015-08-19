@@ -214,7 +214,6 @@ public class OaWorkWatchSumController extends BaseCRUDActionController<OaWorkWat
     @RequestMapping
     public String add(Model model, String ids)
     {
-        ids = ids.substring(1);
         String[] oaWorkWatchIds = ids.split(",");
         List<String> list = new LinkedList<String>();
         for (int i = 0; i < oaWorkWatchIds.length; i++)
@@ -257,7 +256,6 @@ public class OaWorkWatchSumController extends BaseCRUDActionController<OaWorkWat
         }
 
         model.addAttribute("stringHashMap", stringHashMap);
-        System.out.println("deptMap = " + deptMap);
         model.addAttribute("deptMap", deptMap);
 
         ArrayList<OaWorkWatch> oaWorkWatches = new ArrayList<OaWorkWatch>();
