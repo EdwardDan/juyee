@@ -31,7 +31,11 @@
         </tr>
         <sys:calendarWeekArrange themePath="${themePath}" requestPage="${requestPage}" startDate="${startDate}"
                       endDate="${endDate}"/>
+        <tr>
+            <td>
+                <div id="results" style="overflow: auto;height: 90%;width: 98%;"></div>
+                <div style="height: 40px;">&nbsp;</div>
+            </td>
+        </tr>
     </table>
-    <div id="results" style="overflow: auto;"></div>
-    <br>
 </div>

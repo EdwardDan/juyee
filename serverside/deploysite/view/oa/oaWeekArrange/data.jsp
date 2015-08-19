@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/common/taglibs.jsp" %>
 <div class="form_div">
-    <table cellpadding="0" cellspacing="1" class="table_thin_line_center" border="1" style="width: 98%;">
+    <table cellpadding="0" cellspacing="1" class="table_thin_line_center" border="1">
         <tr class="tr_header">
             <td width="10%" nowrap colspan="2">姓名</td>
             <c:forEach items="${weekDates}" var="week">
