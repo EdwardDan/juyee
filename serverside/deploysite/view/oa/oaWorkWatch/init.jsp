@@ -12,9 +12,9 @@
                 $('#tabs').tabs("resize");
             }, 500);
         });
-        addTab("工作督办列表", "${ctx}/oaWorkWatch/grid.do", "tab1");
+        addTab("工作督办列表", "${ctx}/oaWorkWatch/grid.do?tab=tab1", "tab1");
         <c:if test="${canSum==true}">
-        addTab("工作督办汇总列表", "${ctx}/oaWorkWatchSum/grid.do", "tab2");
+        addTab("工作督办汇总列表", "${ctx}/oaWorkWatchSum/grid.do?tab=tab2", "tab2");
         </c:if>
     });
 

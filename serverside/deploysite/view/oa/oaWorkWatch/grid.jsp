@@ -75,39 +75,38 @@
         };
         gridinit($("#listGrid"), conf);
     });
-    var TAB_NO="${tab}";
+    var TAB_NO = "${tab}";
     function doView(id) {
-        parent.openWindow("查看工作督办", "${ctx}/oaWorkWatch/view.do?id=" + id, false,700,450,TAB_NO);
+        parent.openWindow("查看工作督办", "${ctx}/oaWorkWatch/view.do?id=" + id, false, 700, 450, TAB_NO);
     }
     function doAdd() {
-        parent.openWindow("添加工作督办", "${ctx}/oaWorkWatch/add.do", true,700,450,TAB_NO);
+        parent.openWindow("添加工作督办", "${ctx}/oaWorkWatch/add.do", true, 700, 450, TAB_NO);
     }
     function doSum() {
-        var val="";
+        var val = "";
         $("input[name='checkboxIds']:checked").each(function () {
-            val+=","+this.value;
+            val += "," + this.value;
         });
         if (val == "") {
             showInfoMsg("请先选择一条记录!");
             return null;
         } else {
-            return parent.openWindow("工作督办汇总", "${ctx}/oaWorkWatchSum/add.do?ids="+val, true,700,450,TAB_NO);
+            return parent.openWindow("工作督办汇总", "${ctx}/oaWorkWatchSum/add.do?ids=" + val, true, 700, 450, TAB_NO);
 
         }
     }
     function doEdit(id) {
-        parent.openWindow("修改工作督办", "${ctx}/oaWorkWatch/modify.do?id=" + id, true,700,450,TAB_NO);
+        parent.openWindow("修改工作督办", "${ctx}/oaWorkWatch/modify.do?id=" + id, true, 700, 450, TAB_NO);
     }
     function doAudit(id) {
-        parent.openWindow("审核工作督办", "${ctx}/oaWorkWatch/audit.do?id=" + id, true,700,450,TAB_NO);
+        parent.openWindow("审核工作督办", "${ctx}/oaWorkWatch/audit.do?id=" + id, true, 700, 450, TAB_NO);
     }
     function doDelete(id) {
         doGridDelete("${ctx}/oaWorkWatch/delete.do?id=" + id);
     }
     //custom formatter
-    function customeFormat(cellvalue, options, rowObject)
-    {
-        return '<input type="checkbox" name="checkboxIds" value="'+cellvalue+'"/>';
+    function customeFormat(cellvalue, options, rowObject) {
+        return '<input type="checkbox" name="checkboxIds" value="' + cellvalue + '"/>';
     }
 </script>
 
@@ -121,7 +120,7 @@
                    readonly="true"/>
         </div>
         <div style="float:right;padding-right: 10px">
-                <input type="button" value="汇总" class="button_all" onclick="doSum()"/>
+            <input type="button" value="汇总" class="button_all" onclick="doSum()"/>
             <c:if test="${canEdit}">
                 <input type="button" value="添加" class="button_add" onclick="doAdd()"/>
             </c:if>
