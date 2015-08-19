@@ -75,30 +75,31 @@
         };
         gridinit($("#listGrid"), conf);
     });
+    var TAB_NO="${tab}";
     function doView(id) {
-        openWindow("查看工作督办", "${ctx}/oaWorkWatch/view.do?id=" + id, false);
+        parent.openWindow("查看工作督办", "${ctx}/oaWorkWatch/view.do?id=" + id, false,700,450,TAB_NO);
     }
     function doAdd() {
-        openWindow("添加工作督办", "${ctx}/oaWorkWatch/add.do", true);
+        parent.openWindow("添加工作督办", "${ctx}/oaWorkWatch/add.do", true,700,450,TAB_NO);
     }
     function doSum() {
         var val="";
         $("input[name='checkboxIds']:checked").each(function () {
             val+=","+this.value;
         });
-        if (val == null) {
+        if (val == "") {
             showInfoMsg("请先选择一条记录!");
             return null;
         } else {
-            return openWindow("工作督办汇总", "${ctx}/oaWorkWatchSum/add.do?ids="+val, true);
+            return parent.openWindow("工作督办汇总", "${ctx}/oaWorkWatchSum/add.do?ids="+val, true,700,450,TAB_NO);
 
         }
     }
     function doEdit(id) {
-        openWindow("修改工作督办", "${ctx}/oaWorkWatch/modify.do?id=" + id, true);
+        parent.openWindow("修改工作督办", "${ctx}/oaWorkWatch/modify.do?id=" + id, true,700,450,TAB_NO);
     }
     function doAudit(id) {
-        openWindow("审核工作督办", "${ctx}/oaWorkWatch/audit.do?id=" + id, true);
+        parent.openWindow("审核工作督办", "${ctx}/oaWorkWatch/audit.do?id=" + id, true,700,450,TAB_NO);
     }
     function doDelete(id) {
         doGridDelete("${ctx}/oaWorkWatch/delete.do?id=" + id);

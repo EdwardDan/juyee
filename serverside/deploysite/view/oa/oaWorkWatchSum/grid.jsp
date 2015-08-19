@@ -35,9 +35,10 @@
         };
         gridinit($("#listGrid"), conf);
     });
+    var TAB_NO="${tab}";
     function doView(queryItems)
     {
-        openWindow("查看工作督办汇总", "${ctx}/oaWorkWatchSum/view.do?queryItems=" + queryItems, false);
+        parent.openWindow("查看工作督办汇总", "${ctx}/oaWorkWatchSum/view.do?queryItems=" + queryItems, false,700,450,TAB_NO);
     }
     <c:if test="${canEdit}">
     function doDelete(items)
