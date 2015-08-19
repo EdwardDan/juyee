@@ -93,10 +93,10 @@
         </table>
         <table cellpadding="0" cellspacing="0" border="1" class="table_thin_line" style="text-align: center;width: 98%;"
                id="itemTable">
-            <c:set var="canEdit" value="${bean.status == STATUS_ZR_PASS}"/>
+            <c:set var="canEditPass" value="${bean.status == STATUS_ZR_PASS}"/>
             <c:set var="canHS" value="${bean.status == STATUS_INFO}"/>
             <tr class="tr_header">
-                <c:if test="${!canEdit && !canHS}">
+                <c:if test="${!canEditPass && !canHS}">
                     <td style="width:5%;">
                         <input type='button' value='新增' class='button_select_add' onclick='addLine()'>
                     </td>
@@ -110,26 +110,26 @@
             </tr>
             <c:forEach items="${bean.oaWorkWatchItems}" var="item">
                 <tr class="tr_light">
-                    <c:if test="${!canEdit && !canHS}">
+                    <c:if test="${!canEditPass && !canHS}">
                         <td>
                             <input type='button' value='删除' class='button_select_remove' onclick='deleteLine(this)'>
                         </td>
                     </c:if>
                     <td>
-                        <input type="text" name="orderNo" style="width: 96%;" class="input_text"
-                               value="${item.orderNo}" readonly="${canEdit || canHS}"/>
+                        <input type="text" name="orderNo" style="width: 90%;" class="input_text"
+                               value="${item.orderNo}" <c:if test="${canEditPass || canHS}">readonly</c:if>/>
                     </td>
                     <td>
-                        <textarea name="content" class="input_textarea" readonly="${canEdit || canHS}"
+                        <textarea name="content" class="input_textarea" <c:if test="${canEditPass || canHS}">readonly</c:if>
                                   style="width: 96%;height: 50px;">${item.content}</textarea>
                     </td>
                     <td>
-                        <input type="text" name="timeNode" class="input_text" style="width: 96%;"
-                               value="${item.timeNode}" readonly="${canEdit || canHS}"/>
+                        <input type="text" name="timeNode" class="input_text" style="width: 90%;"
+                               value="${item.timeNode}" <c:if test="${canEditPass || canHS}">readonly</c:if>/>
                     </td>
                     <td>
-                        <input type="text" name="reportMethod" class="input_text" style="width: 96%;"
-                               value="${item.reportMethod}" readonly="${canEdit || canHS}"/>
+                        <input type="text" name="reportMethod" class="input_text" style="width: 90%;"
+                               value="${item.reportMethod}" <c:if test="${canEditPass || canHS}">readonly</c:if>/>
                     </td>
                     <td>
                         <textarea name="completeDesc" class="input_textarea" readonly="true"
@@ -151,16 +151,16 @@
                     <input type='button' value='删除' class='button_select_remove' onclick='deleteLine(this)'>
                 </td>
                 <td>
-                    <input type="text" name="orderNo" style="width: 96%;" class="input_text"/>
+                    <input type="text" name="orderNo" style="width: 90%;" class="input_text"/>
                 </td>
                 <td>
                     <textarea name="content" class="input_textarea" style="width: 96%;height: 50px;"></textarea>
                 </td>
                 <td>
-                    <input type="text" name="timeNode" class="input_text" style="width: 96%;"/>
+                    <input type="text" name="timeNode" class="input_text" style="width: 90%;"/>
                 </td>
                 <td>
-                    <input type="text" name="reportMethod" class="input_text" style="width: 96%;"/>
+                    <input type="text" name="reportMethod" class="input_text" style="width: 90%;"/>
                 </td>
                 <td>
                     <textarea name="completeDesc" class="input_textarea" style="width: 96%;height: 50px;"

@@ -69,7 +69,7 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
      * @return .
      */
     @RequestMapping
-    public String grid(Model model,String tab) {
+    public String grid(Model model, String tab) {
         //判断是否有编辑权限
         setStatus(model);
         model.addAttribute("tab", tab);
@@ -205,6 +205,8 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
     @RequestMapping
     public void save(HttpServletResponse response, @ModelAttribute("bean") OaWorkWatch entity, HttpServletRequest request, Integer status) throws Exception {
         try {
+            SysUser sysUser = sysUserManager.getSysUser();
+
             OaWorkWatch target;
             if (entity.getId() != null) {
                 target = oaWorkWatchService.get(entity.getId());
@@ -215,12 +217,11 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
                 });
             } else {
                 target = entity;
+                target.setReportUser(sysUser.getDisplayName());
             }
             target.setStatus(status);
-            SysUser sysUser = sysUserManager.getSysUser();
             if (status == OaWorkWatchStatus.STATUS_INFO.getCode()) {
                 target.setBeginDate(new Date(System.currentTimeMillis()));
-                target.setReportPerson(sysUser.getDisplayName());
             } else if (status == OaWorkWatchStatus.STATUS_B_BACK.getCode() || status == OaWorkWatchStatus.STATUS_B_PASS.getCode()) {
                 target.setBgsAuditTime(new Timestamp(System.currentTimeMillis()));
                 target.setBgsAuditUser(sysUser.getDisplayName());
