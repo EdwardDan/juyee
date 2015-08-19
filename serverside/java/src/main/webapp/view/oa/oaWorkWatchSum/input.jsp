@@ -68,7 +68,7 @@
                             <c:set var="index" value="${index + 1 }"></c:set>
                             <c:out value="${index}"/>
                         </td>
-                        <td>
+                        <td style="text-align: left;">
                                 <sys:toHtml>${oaWorkWatchItem.content}</sys:toHtml>
                         </td>
                         <c:if test="${stItem.index==0}">
