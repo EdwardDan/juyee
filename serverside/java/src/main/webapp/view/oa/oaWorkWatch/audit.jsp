@@ -61,10 +61,12 @@
                     <td>${item.timeNode}</td>
                     <td>${item.reportMethod}</td>
                     <td style="text-align: left;"><sys:toHtml>${item.completeDesc}</sys:toHtml></td>
-                    <td>
-                        <c:if test="${item.actualDesc ==''}"></c:if>
-                        <c:if test="${item.actualDesc =='1'}">属实</c:if>
-                        <c:if test="${item.actualDesc =='0'}">不属实</c:if>
+                    <td style="<c:if test="${item.actualDesc =='1'}">background-color: green;</c:if>
+                    <c:if test="${item.actualDesc =='2'}">background-color: orange;</c:if>
+                    <c:if test="${item.actualDesc =='3'}">background-color:#808080;</c:if>">
+                        <c:if test="${item.actualDesc =='1'}">完成</c:if>
+                        <c:if test="${item.actualDesc =='2'}">延期</c:if>
+                        <c:if test="${item.actualDesc =='3'}">调整</c:if>
                     </td>
                 </tr>
             </c:forEach>
