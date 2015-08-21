@@ -9,9 +9,9 @@
                     '开始年份',
                     '项目序号',
                     '项目名称',
-                    '项目性质',
-                    '项目阶段',
-                    '项目类型',
+                    '管理属性',
+                    '项目状态',
+                    '业态类别',
                     '办证推进标段数',
                     '形象进度标段数',
                     '操作'
@@ -51,9 +51,9 @@
                     { "field": "开始年份", "op": "eq", "data": ""},
                     { "field": "项目序号", "op": "cn", "data": ""},
                     { "field": "项目名称", "op": "cn", "data": ""},
-                    { "field": "项目性质", "op": "cn", "data": ""},
-                    { "field": "项目阶段", "op": "cn", "data": ""},
-                    { "field": "项目类型", "op": "cn", "data": ""}
+                    { "field": "管理属性", "op": "cn", "data": ""},
+                    { "field": "项目状态", "op": "cn", "data": ""},
+                    { "field": "业态类别", "op": "cn", "data": ""}
                 ]},
                 queryButton: $("#queryButton"),
                 queryDesc: $("#queryConditionDesc")
@@ -67,10 +67,10 @@
     }
     <c:if test="${canEdit}">
     function doAdd() {
-        openWindow("添加项目基本信息", "${ctx}/projInfo/add.do", true);
+        openWindow("添加项目基本信息", "${ctx}/projInfo/add.do", true, 800, 500);
     }
     function doEdit(id) {
-        openWindow("修改项目基本信息", "${ctx}/projInfo/modify.do?id=" + id, true);
+        openWindow("修改项目基本信息", "${ctx}/projInfo/modify.do?id=" + id, true, 800, 500);
     }
     function doDelete(id) {
         doGridDelete("${ctx}/projInfo/delete.do?id=" + id);
