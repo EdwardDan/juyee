@@ -102,15 +102,15 @@
     <table cellpadding="0" cellspacing="0" class="form_table">
         <tr class="tr_light">
             <td class="form_label_right" style="width: 10%">建设单位：</td>
-            <td class="form_content">
+            <td class="form_content" style="width: 23%">
                 ${bean.jsDept}
             </td>
             <td class="form_label_right">联系人：</td>
-            <td class="form_content">
+            <td class="form_content" style="width: 23%">
                 ${bean.jsDeptPerson}
             </td>
             <td class="form_label_right">联系电话：</td>
-            <td class="form_content">
+            <td class="form_content" style="width: 23%">
                 ${bean.jsDeptTel}
             </td>
         </tr>
