@@ -13,9 +13,9 @@
             }, 500);
         });
         addTab("项目基本情况", "${ctx}/projInfo/view.do?id=${projectId}", "tab1");
-        addTab("工程投资情况", "${ctx}/projExtendCost/view.do?projectId=${projectId}", "tab2");
-        addTab("前期计划安排", "${ctx}/projExtendPre/view.do?projectId=${projectId}", "tab3");
-        addTab("工程建设完成情况", "${ctx}/projExtendSchedule/view.do?projectId=${projectId}", "tab4");
+        addTab("工程投资情况", "${ctx}/projExtendCost/modify.do?projectId=${projectId}", "tab2");
+        addTab("前期计划安排", "${ctx}/projExtendPre/modify.do?projectId=${projectId}", "tab3");
+        addTab("工程建设完成情况", "${ctx}/projExtendSchedule/modify.do?projectId=${projectId}", "tab4");
     });
 
     //tab按钮跳转

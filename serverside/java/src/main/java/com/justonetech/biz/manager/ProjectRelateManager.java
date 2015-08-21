@@ -1,8 +1,10 @@
 package com.justonetech.biz.manager;
 
+import com.justonetech.biz.daoservice.ProjExtendService;
 import com.justonetech.biz.daoservice.ProjInfoService;
 import com.justonetech.biz.daoservice.ProjRelateDeptService;
 import com.justonetech.biz.daoservice.ProjRelatePersonService;
+import com.justonetech.biz.domain.ProjExtend;
 import com.justonetech.biz.domain.ProjInfo;
 import com.justonetech.biz.domain.ProjRelateDept;
 import com.justonetech.biz.domain.ProjRelatePerson;
@@ -35,6 +37,9 @@ public class ProjectRelateManager {
 
     @Autowired
     private ProjRelatePersonService projRelatePersonService;
+
+    @Autowired
+    private ProjExtendService projExtendService;
 
     /**
      * 获取当前用户所拥有的项目列表
@@ -106,5 +111,19 @@ public class ProjectRelateManager {
             }
         }
         return hql;
+    }
+
+    /**
+     * 获取项目扩展信息
+     *
+     * @param projectId .
+     * @return .
+     */
+    public ProjExtend getProjExtend(Long projectId) {
+        List<ProjExtend> list = projExtendService.findByQuery("from ProjExtend where project.id=?", projectId);
+        if (list.size() > 0) {
+            return list.iterator().next();
+        }
+        return null;
     }
 }
