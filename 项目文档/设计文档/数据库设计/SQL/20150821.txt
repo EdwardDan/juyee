@@ -1,0 +1,247 @@
+alter table PROJ_INFO add JS_DEPT_PERSON       VARCHAR(50);
+alter table PROJ_INFO add JS_DEPT_TEL          VARCHAR(50);
+alter table PROJ_INFO add FUNCTION             VARCHAR(2000 char);
+alter table PROJ_INFO add ENGINEER_RANGE       VARCHAR(2000 char);
+alter table PROJ_INFO add MAIN_CONTENT         VARCHAR(2000 char);
+alter table PROJ_INFO add MANAGER_ATTR_ID      number(10);
+alter table PROJ_INFO add IS_MAJOR             number(1)            default 1;
+alter table PROJ_INFO add AREA_CODE            VARCHAR(50);
+alter table PROJ_INFO add PACKAGE_ATTR         varchar(500);
+alter table PROJ_INFO add PROJECT_SOURCE_ID    number(10);
+
+alter table PROJ_INFO add constraint FK_PROJ_INFO_ATTR foreign key (MANAGER_ATTR_ID) references SYS_CODE_DETAIL (ID);
+alter table PROJ_INFO add constraint FK_PROJ_INFO_SOURCE foreign key (PROJECT_SOURCE_ID) references SYS_CODE_DETAIL (ID);
+
+
+comment on column PROJ_INFO.JS_DEPT_PERSON is
+'建设单位联系人';
+
+comment on column PROJ_INFO.JS_DEPT_TEL is
+'建设单位联系电话';
+
+comment on column PROJ_INFO.FUNCTION is
+'功能作用';
+
+comment on column PROJ_INFO.ENGINEER_RANGE is
+'工程范围';
+
+comment on column PROJ_INFO.MAIN_CONTENT is
+'主要内容';
+
+comment on column PROJ_INFO.MANAGER_ATTR_ID is
+'管理属性ID';
+
+comment on column PROJ_INFO.IS_MAJOR is
+'是否重大';
+
+comment on column PROJ_INFO.AREA_CODE is
+'所属区县';
+
+comment on column PROJ_INFO.PACKAGE_ATTR is
+'打包属性';
+
+comment on column PROJ_INFO.PROJECT_SOURCE_ID is
+'项目来源ID';
+
+
+/*==============================================================*/
+/* Table: PROJ_EXTEND                                           */
+/*==============================================================*/
+create table PROJ_EXTEND 
+(
+   ID                   number(10)           not null,
+   PROJECT_ID           number(10),
+   GCTX_GKPF_TOTAL      number(15,4),
+   GCTX_CSPF_TOTAL      number(15,4),
+   GCTX_SOURCE_FUND     VARCHAR(500 char),
+   PLAN_XMJYS_ID        number(10),
+   PLAN_XMJYS_TIME      date,
+   PLAN_GK_ID           number(10),
+   PLAN_GK_TIME         date,
+   PLAN_CBSJ_ID         number(10),
+   PLAN_CBSJ_TIME       date,
+   GCJS_IS_BIGIN        number(1)            default 0,
+   GCJS_BEGIN_TIME      date,
+   GCJS_IS_END          number(1)            default 0,
+   GCJS_END_TIME        date,
+   CREATE_TIME          DATE,
+   CREATE_USER          VARCHAR2(100),
+   UPDATE_TIME          DATE,
+   UPDATE_USER          VARCHAR2(100),
+   constraint PK_PROJ_EXTEND primary key (ID),
+   constraint FK_PROJ_EXTEND_XMJYS foreign key (PLAN_XMJYS_ID)
+         references SYS_CODE_DETAIL (ID),
+   constraint FK_PROJ_EXTEND foreign key (PROJECT_ID)
+         references PROJ_INFO (ID),
+   constraint FK_PROJ_EXTEND_GK foreign key (PLAN_GK_ID)
+         references SYS_CODE_DETAIL (ID),
+   constraint FK_PROJ_EXTEND_CBSJ foreign key (PLAN_CBSJ_ID)
+         references SYS_CODE_DETAIL (ID)
+);
+
+comment on table PROJ_EXTEND is
+'项目扩展信息';
+
+comment on column PROJ_EXTEND.ID is
+'ID';
+
+comment on column PROJ_EXTEND.PROJECT_ID is
+'项目ID';
+
+comment on column PROJ_EXTEND.GCTX_GKPF_TOTAL is
+'工可批复总投资（亿元）';
+
+comment on column PROJ_EXTEND.GCTX_CSPF_TOTAL is
+'初设批复总投资（亿元）';
+
+comment on column PROJ_EXTEND.GCTX_SOURCE_FUND is
+'资金来源';
+
+comment on column PROJ_EXTEND.PLAN_XMJYS_ID is
+'项目建议书完成情况ID';
+
+comment on column PROJ_EXTEND.PLAN_XMJYS_TIME is
+'项目建议书完成时间';
+
+comment on column PROJ_EXTEND.PLAN_GK_ID is
+'工可完成情况ID';
+
+comment on column PROJ_EXTEND.PLAN_GK_TIME is
+'工可完成时间';
+
+comment on column PROJ_EXTEND.PLAN_CBSJ_ID is
+'初步设计完成情况ID';
+
+comment on column PROJ_EXTEND.PLAN_CBSJ_TIME is
+'初步设计完成时间';
+
+comment on column PROJ_EXTEND.GCJS_IS_BIGIN is
+'是否开工';
+
+comment on column PROJ_EXTEND.GCJS_BEGIN_TIME is
+'开工时间';
+
+comment on column PROJ_EXTEND.GCJS_IS_END is
+'是否完工';
+
+comment on column PROJ_EXTEND.GCJS_END_TIME is
+'完工时间';
+
+comment on column PROJ_EXTEND.CREATE_TIME is
+'创建时间';
+
+comment on column PROJ_EXTEND.CREATE_USER is
+'创建用户名';
+
+comment on column PROJ_EXTEND.UPDATE_TIME is
+'更新时间';
+
+comment on column PROJ_EXTEND.UPDATE_USER is
+'更新用户名';
+
+drop table PROJ_EXTEND_COST cascade constraints;
+
+/*==============================================================*/
+/* Table: PROJ_EXTEND_COST                                      */
+/*==============================================================*/
+create table PROJ_EXTEND_COST 
+(
+   ID                   number(10)           not null,
+   TYPE                 varchar(50),
+   PROJ_EXTEND_ID       number(10),
+   YEAR                 number(4),
+   MONTH                number(2),
+   HALF                 VARCHAR(50),
+   TITLE                varchar(100),
+   ACC_COMPLETE         number(15,4),
+   CZZJ_YBF             number(15,4),
+   CZZJ_YWC             number(15,4),
+   constraint PK_PROJ_EXTEND_COST primary key (ID),
+   constraint FK_PROJ_EXTEND_COST foreign key (PROJ_EXTEND_ID)
+         references PROJ_EXTEND (ID)
+);
+
+comment on table PROJ_EXTEND_COST is
+'项目投资情况';
+
+comment on column PROJ_EXTEND_COST.ID is
+'ID';
+
+comment on column PROJ_EXTEND_COST.TYPE is
+'类型';
+
+comment on column PROJ_EXTEND_COST.PROJ_EXTEND_ID is
+'项目扩展信息ID';
+
+comment on column PROJ_EXTEND_COST.YEAR is
+'年';
+
+comment on column PROJ_EXTEND_COST.MONTH is
+'月';
+
+comment on column PROJ_EXTEND_COST.HALF is
+'半年';
+
+comment on column PROJ_EXTEND_COST.TITLE is
+'时间（冗余字段）';
+
+comment on column PROJ_EXTEND_COST.ACC_COMPLETE is
+'累计完成投资（亿元）';
+
+comment on column PROJ_EXTEND_COST.CZZJ_YBF is
+'财政资金已拨付额（亿元）';
+
+comment on column PROJ_EXTEND_COST.CZZJ_YWC is
+'财政资金已完成额（亿元）';
+
+
+drop table PROJ_EXTEND_SCHEDULE cascade constraints;
+
+/*==============================================================*/
+/* Table: PROJ_EXTEND_SCHEDULE                                  */
+/*==============================================================*/
+create table PROJ_EXTEND_SCHEDULE 
+(
+   ID                   number(10)           not null,
+   PROJ_EXTEND_ID       number(10),
+   YEAR                 number(4),
+   MONTH                number(2),
+   TITLE                varchar(100),
+   PROJ_PROGRESS        varchar(2000 char),
+   QUESTION             varchar(2000 char),
+   IMPROVE_OPINION      varchar(2000 char),
+   DESCRIPTION          varchar(2000 char),
+   constraint PK_PROJ_EXTEND_SCHEDULE primary key (ID),
+   constraint FK_PROJ_EXTEND_SCHEDULE foreign key (PROJ_EXTEND_ID)
+         references PROJ_EXTEND (ID)
+);
+
+comment on table PROJ_EXTEND_SCHEDULE is
+'项目建设情况';
+
+comment on column PROJ_EXTEND_SCHEDULE.ID is
+'ID';
+
+comment on column PROJ_EXTEND_SCHEDULE.PROJ_EXTEND_ID is
+'项目扩展信息ID';
+
+comment on column PROJ_EXTEND_SCHEDULE.YEAR is
+'年';
+
+comment on column PROJ_EXTEND_SCHEDULE.MONTH is
+'月';
+
+comment on column PROJ_EXTEND_SCHEDULE.TITLE is
+'时间（冗余字段）';
+
+comment on column PROJ_EXTEND_SCHEDULE.PROJ_PROGRESS is
+'项目进展情况';
+
+comment on column PROJ_EXTEND_SCHEDULE.QUESTION is
+'存在问题';
+
+comment on column PROJ_EXTEND_SCHEDULE.IMPROVE_OPINION is
+'改进意见';
+
+comment on column PROJ_EXTEND_SCHEDULE.DESCRIPTION is
+'备注';
