@@ -29,9 +29,6 @@
     <form:hidden path="id"/>
     <div class="form_div">
         <table cellpadding="0" cellspacing="0" class="form_table">
-            <tr class="tr_title">
-                <td colspan="5">上海市政局</td>
-            </tr>
             <tr class="tr_light">
                 <td class="form_content" style="width: 10%;"></td>
                 <td class="form_content" style="width: 33%;">
