@@ -18,6 +18,7 @@ import com.justonetech.core.utils.ReflectionUtils;
 import com.justonetech.core.utils.StringHelper;
 import com.justonetech.system.daoservice.SysCodeDetailService;
 import com.justonetech.system.domain.SysCodeDetail;
+import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
 import com.justonetech.system.utils.PrivilegeCode;
 import org.slf4j.Logger;
@@ -58,6 +59,9 @@ public class ProjInfoController extends BaseCRUDActionController<ProjInfo> {
 
     @Autowired
     private ProjInfoManager projInfoManager;
+
+    @Autowired
+    private SysCodeManager sysCodeManager;
 
     /**
      * 列表显示页面
@@ -118,6 +122,7 @@ public class ProjInfoController extends BaseCRUDActionController<ProjInfo> {
         //如需增加其他默认值请在此添加
         Calendar c = Calendar.getInstance();
         String yearSelectOptions = DateTimeHelper.getYearSelectOptions(c.get(Calendar.YEAR) + "");
+        modelStatus(model);
         model.addAttribute("yearSelectOptions", yearSelectOptions);
         model.addAttribute("bean", projInfo);
 
@@ -136,6 +141,7 @@ public class ProjInfoController extends BaseCRUDActionController<ProjInfo> {
         ProjInfo projInfo = projInfoService.get(id);
         String yearSelectOptions = DateTimeHelper.getYearSelectOptions(projInfo.getYear() + "");
         //处理其他业务逻辑
+        modelStatus(model);
         model.addAttribute("yearSelectOptions", yearSelectOptions);
         model.addAttribute("bean", projInfo);
         model.addAttribute("areas", projInfo.getBelongAreaNames());
@@ -154,6 +160,7 @@ public class ProjInfoController extends BaseCRUDActionController<ProjInfo> {
     public String view(Model model, Long id, String isTab) {
         ProjInfo projInfo = projInfoService.get(id);
 
+        model.addAttribute(model);
         model.addAttribute("bean", projInfo);
         model.addAttribute("areas", projInfo.getBelongAreaNames());
         model.addAttribute("isTab", isTab);
@@ -209,12 +216,18 @@ public class ProjInfoController extends BaseCRUDActionController<ProjInfo> {
                         "startDate",
 //                        "intro",
                         "jsDept",
+                        "jsDeptPerson",
+                        "jsDeptTel",
                         "sgDept",
                         "sgDeptPerson",
                         "sgDeptTel",
                         "jlDept",
                         "jlDeptPerson",
-                        "jlDeptTel"
+                        "jlDeptTel",
+                        "isMajor",
+                        "function",
+                        "engineerRange",
+                        "mainContent",
                 });
 
             } else {
@@ -232,11 +245,26 @@ public class ProjInfoController extends BaseCRUDActionController<ProjInfo> {
             target.setStage(sysCodeDetailService.get(Long.valueOf(projStage)));
             target.setCategory(sysCodeDetailService.get(Long.valueOf(projCategory)));
             target.setIntro(intro);
+
+            String projSources = request.getParameter("ProjSources");
+            target.setProjectSource(sysCodeDetailService.get(Long.valueOf(projSources)));
+            String area = request.getParameter("areaId");
+            if (area == null || area.equals("0")) {
+                target.setAreaCode("");
+            } else {
+                target.setAreaCode(sysCodeDetailService.get(JspHelper.getLong(area)).getCode());
+            }
+
+            String[] projPackageAttrs = request.getParameterValues("ProjPackageAttr");
+            target.setPackageAttr(StringHelper.join(projPackageAttrs, ","));
+
             projInfoService.save(target);
 
             //保存区县前删除保存过的信息
-            for (ProjInfoArea projInfoArea : target.getProjInfoAreas()) {
-                projInfoAreaService.delete(projInfoArea);
+            if (target.getProjInfoAreas() != null) {
+                for (ProjInfoArea projInfoArea : target.getProjInfoAreas()) {
+                    projInfoAreaService.delete(projInfoArea);
+                }
             }
             if (areaIds != null && areaIds.length > 0) {
                 for (String areaId : areaIds) {
@@ -274,6 +302,18 @@ public class ProjInfoController extends BaseCRUDActionController<ProjInfo> {
         projInfoService.delete(id);
 
         sendSuccessJSON(response, "删除成功");
+    }
+
+    //传递系统字典定义的类型
+    private void modelStatus(Model model) {
+        List<SysCodeDetail> areaList = sysCodeManager.getCodeListByCode(Constants.PROJ_INFO_BELONG_AREA);
+        List<SysCodeDetail> propertyList = sysCodeManager.getCodeListByCode(Constants.PROJ_INFO_PROPERTY);
+        model.addAttribute("PROJ_INFO_SOURCE", Constants.PROJ_INFO_SOURCE); //项目来源
+        model.addAttribute("propertyList", propertyList); //管理属性
+        model.addAttribute("PROJ_INFO_STAGE", Constants.PROJ_INFO_STAGE); //项目状态
+        model.addAttribute("PROJ_INFO_CATEGORY", Constants.PROJ_INFO_CATEGORY); //业务类别
+        model.addAttribute("areaList", areaList); //所属区域
+        model.addAttribute("PROJ_INFO_DBSX", Constants.PROJ_INFO_DBSX); //打包属性
     }
 
 }
