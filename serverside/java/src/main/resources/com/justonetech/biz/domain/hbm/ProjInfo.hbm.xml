@@ -224,6 +224,91 @@
             <meta attribute="ColumnComment">更新人(记录帐号）</meta>
         </property>
 
+        <property
+                name="jsDeptPerson"
+                column="JS_DEPT_PERSON"
+                type="string"
+                not-null="false"
+                length="50"
+                >
+            <meta attribute="ColumnName">建设单位联系人</meta>
+            <meta attribute="ColumnComment">建设单位联系人</meta>
+        </property>
+
+        <property
+                name="jsDeptTel"
+                column="JS_DEPT_TEL"
+                type="string"
+                not-null="false"
+                length="50"
+                >
+            <meta attribute="ColumnName">建设单位联系电话</meta>
+            <meta attribute="ColumnComment">建设单位联系电话</meta>
+        </property>
+
+        <property
+                name="function"
+                column="FUNCTION"
+                type="string"
+                not-null="false"
+                >
+            <meta attribute="ColumnName">功能作用</meta>
+            <meta attribute="ColumnComment">功能作用</meta>
+        </property>
+
+        <property
+                name="engineerRange"
+                column="ENGINEER_RANGE"
+                type="string"
+                not-null="false"
+                >
+            <meta attribute="ColumnName">工程范围</meta>
+            <meta attribute="ColumnComment">工程范围</meta>
+        </property>
+
+        <property
+                name="mainContent"
+                column="MAIN_CONTENT"
+                type="string"
+                not-null="false"
+                >
+            <meta attribute="ColumnName">主要内容</meta>
+            <meta attribute="ColumnComment">主要内容</meta>
+        </property>
+
+        <property
+                name="isMajor"
+                column="IS_MAJOR"
+                type="java.lang.Boolean"
+                not-null="false"
+                length="1"
+                >
+            <meta attribute="ColumnName">是否重大</meta>
+            <meta attribute="ColumnComment">是否重大</meta>
+        </property>
+
+        <property
+                name="areaCode"
+                column="AREA_CODE"
+                type="string"
+                not-null="false"
+                length="50"
+                >
+            <meta attribute="ColumnName">所属区县</meta>
+            <meta attribute="ColumnComment">所属区县</meta>
+        </property>
+
+        <property
+                name="packageAttr"
+                column="PACKAGE_ATTR"
+                type="string"
+                not-null="false"
+                length="500"
+                >
+            <meta attribute="ColumnName">打包属性</meta>
+            <meta attribute="ColumnComment">打包属性</meta>
+        </property>
+
         <many-to-one
                 name="property"
                 column="PROPERTY_ID"
@@ -241,6 +326,20 @@
         <many-to-one
                 name="category"
                 column="CATEGORY_ID"
+                class="com.justonetech.system.domain.SysCodeDetail"
+                not-null="false"
+                >
+        </many-to-one>
+        <many-to-one
+                name="managerAttr"
+                column="MANAGER_ATTR_ID"
+                class="com.justonetech.system.domain.SysCodeDetail"
+                not-null="false"
+                >
+        </many-to-one>
+        <many-to-one
+                name="projectSource"
+                column="PROJECT_SOURCE_ID"
                 class="com.justonetech.system.domain.SysCodeDetail"
                 not-null="false"
                 >
