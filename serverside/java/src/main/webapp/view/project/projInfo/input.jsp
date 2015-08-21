@@ -21,7 +21,7 @@
                 ]
                 ;
         validateInit(validateCondition, formId);
-        changeMajor();
+        changeArea();
     });
 
     //保存操作
@@ -35,12 +35,12 @@
     }
 
     //控制重大与否
-    function changeMajor() {
+    function changeArea() {
         if (jQuery("#ProjProperty option:selected").text() == '市属') {
             $("#areaId").val("0");
-            $("#areaId").attr("disabled", "true");
+            $("#areaId").attr("disabled", true);
         } else {
-            $("#areaId").attr("disabled", "");
+            $("#areaId").attr("disabled", false);
         }
     }
 </script>
@@ -76,7 +76,7 @@
             <tr class="tr_dark">
                 <td class="form_label_right">管理属性：</td>
                 <td class="form_content">
-                    <select name="ProjProperty" id="ProjProperty" onchange="changeMajor()">
+                    <select name="ProjProperty" id="ProjProperty" onchange="changeArea()">
                         <c:forEach var="propertyL" items="${propertyList}">
                             <option value="${propertyL.id}"
                                     <c:if test="${bean.property.id==propertyL.id}">selected </c:if>>${propertyL.name}</option>
