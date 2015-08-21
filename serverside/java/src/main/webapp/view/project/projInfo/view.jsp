@@ -1,5 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/common/taglibs.jsp" %>
+<c:if test="${isTab}">
+    <%@ include file="/common/header.jsp" %>
+</c:if>
 <div class="form_div">
     <table cellpadding="0" cellspacing="0" class="form_table">
         <tr class="tr_dark">
@@ -98,7 +101,7 @@
         </tr>
         <tr class="tr_button">
             <td class="form_content" colspan="6" style="text-align: center">
-                <input type="button" value="取消" class="button_cancel" onclick="closeWindow()">
+                <input type="button" value="取消" class="button_cancel" onclick="<c:if test="${isTab}">parent.closeWindow();</c:if><c:if test="${!isTab}">closeWindow();</c:if>">
             </td>
         </tr>
     </table>

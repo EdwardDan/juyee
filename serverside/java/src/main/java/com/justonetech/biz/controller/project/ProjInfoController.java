@@ -151,11 +151,13 @@ public class ProjInfoController extends BaseCRUDActionController<ProjInfo> {
      * @return .
      */
     @RequestMapping
-    public String view(Model model, Long id) {
+    public String view(Model model, Long id, String isTab) {
         ProjInfo projInfo = projInfoService.get(id);
 
         model.addAttribute("bean", projInfo);
         model.addAttribute("areas", projInfo.getBelongAreaNames());
+        model.addAttribute("isTab", isTab);
+
         return "view/project/projInfo/view";
     }
 
