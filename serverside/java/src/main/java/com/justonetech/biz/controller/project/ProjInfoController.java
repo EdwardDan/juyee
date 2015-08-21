@@ -160,7 +160,7 @@ public class ProjInfoController extends BaseCRUDActionController<ProjInfo> {
     public String view(Model model, Long id, String isTab) {
         ProjInfo projInfo = projInfoService.get(id);
 
-        model.addAttribute(model);
+        modelStatus(model);
         model.addAttribute("bean", projInfo);
         model.addAttribute("areas", projInfo.getBelongAreaNames());
         model.addAttribute("isTab", isTab);

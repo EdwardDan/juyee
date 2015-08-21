@@ -63,7 +63,7 @@
         gridinit($("#listGrid"), conf);
     });
     function doView(id) {
-        openWindow("查看项目基本信息", "${ctx}/projInfo/view.do?id=" + id, false);
+        openWindow("查看项目基本信息", "${ctx}/projInfo/view.do?id=" + id, false, 800, 500);
     }
     <c:if test="${canEdit}">
     function doAdd() {

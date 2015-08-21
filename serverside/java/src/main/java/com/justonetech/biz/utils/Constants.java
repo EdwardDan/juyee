@@ -90,10 +90,13 @@ public class Constants {
     /**
      * *************************************** 项目管理begin*********************************************************
      */
-    public static final String PROJ_INFO_PROPERTY = "ProjProperty"; //项目性质
-    public static final String PROJ_INFO_STAGE = "ProjStage"; //项目阶段
-    public static final String PROJ_INFO_CATEGORY = "ProjCategory"; //项目类别
+    public static final String PROJ_INFO_PROPERTY = "ProjProperty"; //管理属性
+    public static final String PROJ_INFO_STAGE = "ProjStage"; //项目状态
+    public static final String PROJ_INFO_CATEGORY = "ProjCategory"; //业务类别
+    public static final String PROJ_INFO_SOURCE = "ProjSources"; //项目来源
     public static final String PROJ_INFO_BELONG_AREA = "ProjBelongArea"; //涉及区（县）
+    public static final String PROJ_INFO_DBSX = "dbsx"; //打包属性
+
     /****************************************** 项目管理 end *******************************************************/
 
     /**
