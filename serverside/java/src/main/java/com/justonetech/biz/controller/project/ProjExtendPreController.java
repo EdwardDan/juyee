@@ -4,9 +4,12 @@ import com.justonetech.biz.core.orm.hibernate.GridJq;
 import com.justonetech.biz.core.orm.hibernate.QueryTranslateJq;
 import com.justonetech.biz.daoservice.DocDocumentService;
 import com.justonetech.biz.daoservice.ProjExtendScheduleService;
+import com.justonetech.biz.daoservice.ProjExtendService;
+import com.justonetech.biz.domain.ProjExtend;
 import com.justonetech.biz.domain.ProjExtendSchedule;
 import com.justonetech.biz.manager.ConfigManager;
 import com.justonetech.biz.manager.DocumentManager;
+import com.justonetech.biz.manager.ProjectRelateManager;
 import com.justonetech.biz.utils.Constants;
 import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.orm.hibernate.Page;
@@ -58,6 +61,12 @@ public class ProjExtendPreController extends BaseCRUDActionController<ProjExtend
 
     @Autowired
     private ProjExtendScheduleService projExtendScheduleService;
+
+    @Autowired
+    private ProjExtendService projExtendService;
+
+    @Autowired
+    private ProjectRelateManager projectRelateManager;
 
    /**
      * 列表显示页面
@@ -124,32 +133,43 @@ public class ProjExtendPreController extends BaseCRUDActionController<ProjExtend
     /**
      * 修改显示页面
      *
-     * @param id    .
      * @param model .
      * @return .
      */
     @RequestMapping
-    public String modify(Model model, Long id) {
-        ProjExtendSchedule projExtendSchedule = projExtendScheduleService.get(id);
+    public String modify(Model model, Long projectId) {
 
-        //处理其他业务逻辑
-        model.addAttribute("bean", projExtendSchedule);
-        
+//        String hql = "from ProjExtend where project.id="+projectId;
+//        List<ProjExtend> projExtendList = projExtendService.findByQuery(hql);
+        ProjExtend projExtend = projectRelateManager.getProjExtend(projectId);
+
+        if(projExtend==null){
+            projExtend=new ProjExtend();
+        }
+
+//        //处理其他业务逻辑
+        model.addAttribute("bean", projExtend);
+
         return "view/project/projExtendPre/input";
     }
     
     /**
      * 查看页面
      *
-     * @param id    .
+     * @param projectId    .
      * @param model .
      * @return .
      */
     @RequestMapping
-    public String view(Model model, Long id) {
-        ProjExtendSchedule projExtendSchedule = projExtendScheduleService.get(id);
-        
-        model.addAttribute("bean", projExtendSchedule);        
+    public String view(Model model, Long projectId) {
+        ProjExtend projExtend = projectRelateManager.getProjExtend(projectId);
+
+        if(projExtend==null){
+            projExtend=new ProjExtend();
+        }
+
+//        //处理其他业务逻辑
+        model.addAttribute("bean", projExtend);
         return "view/project/projExtendPre/view";
     }
     
@@ -163,25 +183,25 @@ public class ProjExtendPreController extends BaseCRUDActionController<ProjExtend
      */
     @SuppressWarnings("unchecked")
     @RequestMapping
-    public void save(HttpServletResponse response, @ModelAttribute("bean") ProjExtendSchedule entity, HttpServletRequest request) throws Exception {
+    public void save(HttpServletResponse response, @ModelAttribute("bean") ProjExtend entity, HttpServletRequest request) throws Exception {
         try {
-            ProjExtendSchedule target;
+            ProjExtend target ;
             if (entity.getId() != null) {
-                target = projExtendScheduleService.get(entity.getId());
+                target = projectRelateManager.getProjExtend(entity.getId());
                 ReflectionUtils.copyBean(entity, target, new String[]{
-                                                "year",                                      
-                                                                "month",                                      
-                                                                "title",                                      
-                                                                "projProgress",                                      
-                                                                "question",                                      
-                                                                "improveOpinion",                                      
-                                                                "description"                                      
+//                                                "project",
+                                                "planXmjysTime",
+//                                                "planGk",
+                                                "planGkTime",
+//                                                "planCbsj",
+                                                "planCbsjTime",
                                                 });
 
             } else {
                 target = entity;
             }
-            projExtendScheduleService.save(target);
+            
+            projExtendService.save(target);
 
         } catch (Exception e) {
             log.error("error", e);
