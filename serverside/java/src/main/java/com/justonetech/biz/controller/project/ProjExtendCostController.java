@@ -1,39 +1,22 @@
 package com.justonetech.biz.controller.project;
 
-import java.util.List;
-import java.util.Set;
-import java.util.Map;
-import java.util.HashMap;
-import org.apache.commons.lang.StringUtils;
-
-import com.justonetech.core.controller.BaseCRUDActionController;
-import com.justonetech.core.orm.hibernate.Page;
-import com.justonetech.core.ui.grid.Grid;
-import com.justonetech.core.utils.ReflectionUtils;
-import com.justonetech.core.utils.StringHelper;
-import com.justonetech.core.security.user.BaseUser;
-import com.justonetech.core.security.util.SpringSecurityUtils;
-import com.justonetech.core.utils.FormatUtils;
 import com.justonetech.biz.core.orm.hibernate.GridJq;
 import com.justonetech.biz.core.orm.hibernate.QueryTranslateJq;
 import com.justonetech.biz.daoservice.ProjExtendCostService;
+import com.justonetech.biz.daoservice.ProjExtendService;
+import com.justonetech.biz.daoservice.ProjInfoService;
+import com.justonetech.biz.domain.ProjExtend;
 import com.justonetech.biz.domain.ProjExtendCost;
-
-import com.justonetech.biz.manager.DocumentManager;
+import com.justonetech.biz.manager.ProjectRelateManager;
 import com.justonetech.biz.utils.Constants;
-import com.justonetech.biz.daoservice.DocDocumentService;
-import com.justonetech.biz.manager.ConfigManager;
-import com.justonetech.system.daoservice.SysCodeDetailService;
-import com.justonetech.system.domain.SysCodeDetail;
-import com.justonetech.system.manager.SysCodeManager;
+import com.justonetech.biz.utils.enums.ProjExtendCostType;
+import com.justonetech.core.controller.BaseCRUDActionController;
+import com.justonetech.core.orm.hibernate.Page;
+import com.justonetech.core.utils.ReflectionUtils;
 import com.justonetech.system.manager.SysUserManager;
 import com.justonetech.system.utils.PrivilegeCode;
-import com.justonetech.system.manager.SimpleQueryManager;
-
-import com.justonetech.system.tree.ZTreeBranch;
-import com.justonetech.system.tree.ZTreeNode;
-import com.justonetech.system.manager.SysUserManager;
-import com.justonetech.system.utils.PrivilegeCode;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,9 +26,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -57,29 +40,23 @@ import org.slf4j.LoggerFactory;
 @Controller
 public class ProjExtendCostController extends BaseCRUDActionController<ProjExtendCost> {
     private Logger logger = LoggerFactory.getLogger(ProjExtendCostController.class);
-    
-    @Autowired
-    private SysUserManager sysUserManager;
-    
-    @Autowired
-    private SysCodeManager sysCodeManager;
 
     @Autowired
-    private ConfigManager configManager;
-    
-    @Autowired
-    private DocumentManager documentManager;
-    
-    @Autowired
-    private SimpleQueryManager simpleQueryManager;
-    
-    @Autowired
-    private DocDocumentService docDocumentService;
+    private SysUserManager sysUserManager;
 
     @Autowired
     private ProjExtendCostService projExtendCostService;
 
-   /**
+    @Autowired
+    private ProjExtendService projExtendService;
+
+    @Autowired
+    private ProjectRelateManager projectRelateManager;
+
+    @Autowired
+    private ProjInfoService projInfoService;
+
+    /**
      * 列表显示页面
      *
      * @param model .
@@ -87,20 +64,20 @@ public class ProjExtendCostController extends BaseCRUDActionController<ProjExten
      */
     @RequestMapping
     public String grid(Model model) {
-      //判断是否有编辑权限
-      model.addAttribute("canEdit",sysUserManager.hasPrivilege(PrivilegeCode.SYS_SAMPLE_EDIT));
-            
-      return "view/project/projExtendCost/grid";
+        //判断是否有编辑权限
+        model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.SYS_SAMPLE_EDIT));
+
+        return "view/project/projExtendCost/grid";
     }
-    
+
     /**
      * 获取列表数据
      *
      * @param response .
-     * @param filters .
-     * @param columns .
-     * @param page .
-     * @param rows .
+     * @param filters  .
+     * @param columns  .
+     * @param page     .
+     * @param rows     .
      */
     @RequestMapping
     public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session) {
@@ -113,7 +90,7 @@ public class ProjExtendCostController extends BaseCRUDActionController<ProjExten
             QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);
             String query = queryTranslate.toString();
             session.setAttribute(Constants.GRID_SQL_KEY, query);
-            pageModel = projExtendCostService.findByPage(pageModel, query);            
+            pageModel = projExtendCostService.findByPage(pageModel, query);
 
             //输出显示
             String json = GridJq.toJSON(columns, pageModel);
@@ -124,7 +101,7 @@ public class ProjExtendCostController extends BaseCRUDActionController<ProjExten
             super.processException(response, e);
         }
     }
-    
+
     /**
      * 新增录入页面
      *
@@ -140,39 +117,70 @@ public class ProjExtendCostController extends BaseCRUDActionController<ProjExten
 
         return "view/project/projExtendCost/input";
     }
-    
+
     /**
      * 修改显示页面
      *
-     * @param id    .
-     * @param model .
+     * @param projectId .
+     * @param model     .
      * @return .
      */
     @RequestMapping
-    public String modify(Model model, Long id) {
-        ProjExtendCost projExtendCost = projExtendCostService.get(id);
+    public String modify(Model model, Long projectId) {
+        ProjExtend projExtend = projectRelateManager.getProjExtend(projectId);
+        if (null == projExtend) {
+            projExtend = new ProjExtend();
+            projExtend.setProject(projInfoService.get(projectId));
+        } else{
+            //投资的数据
+            List<ProjExtendCost> listType1 = getCostByType(ProjExtendCostType.EXTEND_TYPE_1.getCode(), projExtend.getId());
+            List<ProjExtendCost> listType2 = getCostByType(ProjExtendCostType.EXTEND_TYPE_2.getCode(), projExtend.getId());
+            List<ProjExtendCost> listType3 = getCostByType(ProjExtendCostType.EXTEND_TYPE_3.getCode(), projExtend.getId());
+            List<ProjExtendCost> listType4 = getCostByType(ProjExtendCostType.EXTEND_TYPE_4.getCode(), projExtend.getId());
+            model.addAttribute("listType1", listType1);
+            model.addAttribute("listType2", listType2);
+            model.addAttribute("listType3", listType3);
+            model.addAttribute("listType4", listType4);
+        }
+        model.addAttribute("bean", projExtend);
+        Calendar c = Calendar.getInstance();
+        model.addAttribute("curYear", c.get(Calendar.YEAR));
+        model.addAttribute("curMonth", c.get(Calendar.MONTH) + 1);
+        pushType(model);
 
-        //处理其他业务逻辑
-        model.addAttribute("bean", projExtendCost);
-        
         return "view/project/projExtendCost/input";
     }
-    
+
     /**
      * 查看页面
      *
-     * @param id    .
-     * @param model .
+     * @param projectId .
+     * @param model     .
      * @return .
      */
     @RequestMapping
-    public String view(Model model, Long id) {
-        ProjExtendCost projExtendCost = projExtendCostService.get(id);
-        
-        model.addAttribute("bean", projExtendCost);        
+    public String view(Model model, Long projectId) {
+        ProjExtend projExtend = projectRelateManager.getProjExtend(projectId);
+
+        if (null == projExtend) {
+            projExtend = new ProjExtend();
+            projExtend.setProject(projInfoService.get(projectId));
+        } else{
+            //投资的数据
+            List<ProjExtendCost> listType1 = getCostByType(ProjExtendCostType.EXTEND_TYPE_1.getCode(), projExtend.getId());
+            List<ProjExtendCost> listType2 = getCostByType(ProjExtendCostType.EXTEND_TYPE_2.getCode(), projExtend.getId());
+            List<ProjExtendCost> listType3 = getCostByType(ProjExtendCostType.EXTEND_TYPE_3.getCode(), projExtend.getId());
+            List<ProjExtendCost> listType4 = getCostByType(ProjExtendCostType.EXTEND_TYPE_4.getCode(), projExtend.getId());
+            model.addAttribute("listType1", listType1);
+            model.addAttribute("listType2", listType2);
+            model.addAttribute("listType3", listType3);
+            model.addAttribute("listType4", listType4);
+        }
+        model.addAttribute("bean", projExtend);
+
         return "view/project/projExtendCost/view";
     }
-    
+
     /**
      * 保存操作
      *
@@ -183,27 +191,96 @@ public class ProjExtendCostController extends BaseCRUDActionController<ProjExten
      */
     @SuppressWarnings("unchecked")
     @RequestMapping
-    public void save(HttpServletResponse response, @ModelAttribute("bean") ProjExtendCost entity, HttpServletRequest request) throws Exception {
+    public void save(HttpServletResponse response, @ModelAttribute("bean") ProjExtend entity, HttpServletRequest request) throws Exception {
         try {
-            ProjExtendCost target;
+            ProjExtend target;
             if (entity.getId() != null) {
-                target = projExtendCostService.get(entity.getId());
+                target = projExtendService.get(entity.getId());
                 ReflectionUtils.copyBean(entity, target, new String[]{
-                                                "type",                                      
-                                                                "year",                                      
-                                                                "month",                                      
-                                                                "half",                                      
-                                                                "title",                                      
-                                                                "accComplete",                                      
-                                                                "czzjYbf",                                      
-                                                                "czzjYwc"                                      
-                                                });
-
+                        "project",
+                        "gctxGkpfTotal",
+                        "gctxCspfTotal",
+                        "gctxSourceFund"
+                });
             } else {
                 target = entity;
             }
-            projExtendCostService.save(target);
-
+            projExtendService.save(target);
+            //先删除，在保存
+            Set<ProjExtendCost> projExtendCosts = target.getProjExtendCosts();
+            for (ProjExtendCost cost : projExtendCosts) {
+                projExtendCostService.delete(cost);
+            }
+            //历年累计完成投资
+            String[] accIndexs = request.getParameterValues("index" + ProjExtendCostType.EXTEND_TYPE_1.getCode());
+            if (null != accIndexs && accIndexs.length > 0) {
+                for (String accIndex : accIndexs) {
+                    String accTime = request.getParameter("time" + ProjExtendCostType.EXTEND_TYPE_1.getCode() + accIndex);
+                    String accYear = request.getParameter("year" + ProjExtendCostType.EXTEND_TYPE_1.getCode() + accIndex);
+                    String accCost = request.getParameter("cost" + ProjExtendCostType.EXTEND_TYPE_1.getCode() + accIndex);
+                    ProjExtendCost projExtendCost = new ProjExtendCost();
+                    projExtendCost.setProjExtend(target);
+                    projExtendCost.setType(ProjExtendCostType.EXTEND_TYPE_1.getCode());
+                    projExtendCost.setTitle(accTime);
+                    projExtendCost.setYear(Integer.valueOf(accYear));
+                    projExtendCost.setAccComplete(Double.valueOf(accCost));
+                    projExtendCostService.save(projExtendCost);
+                }
+            }
+            //年度计划投资
+            String[] yearPlanIndexs = request.getParameterValues("index" + ProjExtendCostType.EXTEND_TYPE_2.getCode());
+            if (null != yearPlanIndexs && yearPlanIndexs.length > 0) {
+                for (String yearPlanIndex : yearPlanIndexs) {
+                    String yearPlanTime = request.getParameter("time" + ProjExtendCostType.EXTEND_TYPE_2.getCode() + yearPlanIndex);
+                    String yearPlanYear = request.getParameter("year" + ProjExtendCostType.EXTEND_TYPE_2.getCode() + yearPlanIndex);
+                    String yearPlanCost = request.getParameter("cost" + ProjExtendCostType.EXTEND_TYPE_2.getCode() + yearPlanIndex);
+                    ProjExtendCost projExtendCost = new ProjExtendCost();
+                    projExtendCost.setProjExtend(target);
+                    projExtendCost.setType(ProjExtendCostType.EXTEND_TYPE_2.getCode());
+                    projExtendCost.setTitle(yearPlanTime);
+                    projExtendCost.setYear(Integer.valueOf(yearPlanYear));
+                    projExtendCost.setAccComplete(Double.valueOf(yearPlanCost));
+                    projExtendCostService.save(projExtendCost);
+                }
+            }
+            //当年累计完成投资
+            String[] yearAccIndexs = request.getParameterValues("index" + ProjExtendCostType.EXTEND_TYPE_3.getCode());
+            if (null != yearAccIndexs && yearAccIndexs.length > 0) {
+                for (String yearAccIndex : yearAccIndexs) {
+                    String yearAccTime = request.getParameter("time" + ProjExtendCostType.EXTEND_TYPE_3.getCode() + yearAccIndex);
+                    String yearAccYear = request.getParameter("year" + ProjExtendCostType.EXTEND_TYPE_3.getCode() + yearAccIndex);
+                    String yearAccHalf = request.getParameter("half" + ProjExtendCostType.EXTEND_TYPE_3.getCode() + yearAccIndex);
+                    String yearAccCost = request.getParameter("cost" + ProjExtendCostType.EXTEND_TYPE_3.getCode() + yearAccIndex);
+                    ProjExtendCost projExtendCost = new ProjExtendCost();
+                    projExtendCost.setProjExtend(target);
+                    projExtendCost.setType(ProjExtendCostType.EXTEND_TYPE_3.getCode());
+                    projExtendCost.setTitle(yearAccTime);
+                    projExtendCost.setYear(Integer.valueOf(yearAccYear));
+                    projExtendCost.setHalf(yearAccHalf);
+                    projExtendCost.setAccComplete(Double.valueOf(yearAccCost));
+                    projExtendCostService.save(projExtendCost);
+                }
+            }
+            //财政资金
+            String[] czIndexs = request.getParameterValues("index" + ProjExtendCostType.EXTEND_TYPE_4.getCode());
+            if (null != czIndexs && czIndexs.length > 0) {
+                for (String czIndex : czIndexs) {
+                    String czTime = request.getParameter("time" + ProjExtendCostType.EXTEND_TYPE_4.getCode() + czIndex);
+                    String czYear = request.getParameter("year" + ProjExtendCostType.EXTEND_TYPE_4.getCode() + czIndex);
+                    String czMonth = request.getParameter("month" + ProjExtendCostType.EXTEND_TYPE_4.getCode() + czIndex);
+                    String czCostYbf = request.getParameter("czCostYbf" + ProjExtendCostType.EXTEND_TYPE_4.getCode() + czIndex);
+                    String czCostYwc = request.getParameter("czCostYwc" + ProjExtendCostType.EXTEND_TYPE_4.getCode() + czIndex);
+                    ProjExtendCost projExtendCost = new ProjExtendCost();
+                    projExtendCost.setProjExtend(target);
+                    projExtendCost.setType(ProjExtendCostType.EXTEND_TYPE_4.getCode());
+                    projExtendCost.setTitle(czTime);
+                    projExtendCost.setYear(Integer.valueOf(czYear));
+                    projExtendCost.setMonth(Integer.valueOf(czMonth));
+                    projExtendCost.setCzzjYbf(Double.valueOf(czCostYbf));
+                    projExtendCost.setCzzjYwc(Double.valueOf(czCostYwc));
+                    projExtendCostService.save(projExtendCost);
+                }
+            }
         } catch (Exception e) {
             log.error("error", e);
             super.processException(response, e);
@@ -211,19 +288,29 @@ public class ProjExtendCostController extends BaseCRUDActionController<ProjExten
         }
         sendSuccessJSON(response, "保存成功");
     }
-    
-    /**
-     * 删除操作
-     *
-     * @param response .
-     * @param id  .
-     * @throws Exception  .
-     */
-    @RequestMapping
-    public void delete(HttpServletResponse response, Long id) throws Exception {
-        projExtendCostService.delete(id);
 
-        sendSuccessJSON(response, "删除成功");
+    /**
+     * 投资类型
+     *
+     * @param model ，
+     */
+    private void pushType(Model model) {
+        model.addAttribute("TYPE1", ProjExtendCostType.EXTEND_TYPE_1.getCode());
+        model.addAttribute("TYPE2", ProjExtendCostType.EXTEND_TYPE_2.getCode());
+        model.addAttribute("TYPE3", ProjExtendCostType.EXTEND_TYPE_3.getCode());
+        model.addAttribute("TYPE4", ProjExtendCostType.EXTEND_TYPE_4.getCode());
+    }
+
+    /**
+     * 根据类型和项目扩展表获取数据
+     *
+     * @param type     。
+     * @param extendId 。
+     * @return 。
+     */
+    public List<ProjExtendCost> getCostByType(String type, Long extendId) {
+        String hql = "from ProjExtendCost where projExtend.id=? and type=? order by year asc,month asc,half desc";
+        return projExtendCostService.findByQuery(hql, extendId, type);
     }
 
 }

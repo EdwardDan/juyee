@@ -162,7 +162,7 @@
         </tr>
         <tr class="tr_button">
             <td class="form_content" colspan="6" style="text-align: center">
-                <input type="button" value="关闭" class="button_cancel" onclick="closeWindow()">
+                <input type="button" value="关闭" class="button_cancel" onclick="<c:if test="${!isTab}">closeWindow()</c:if><c:if test="${isTab}">parent.closeWindow()</c:if>">
             </td>
         </tr>
     </table>

@@ -2,14 +2,17 @@ package com.justonetech.biz.controller.project;
 
 import com.justonetech.biz.core.orm.hibernate.GridJq;
 import com.justonetech.biz.core.orm.hibernate.QueryTranslateJq;
+import com.justonetech.biz.daoservice.ProjExtendCostService;
+import com.justonetech.biz.daoservice.ProjExtendScheduleService;
 import com.justonetech.biz.daoservice.ProjExtendService;
 import com.justonetech.biz.daoservice.ProjInfoService;
 import com.justonetech.biz.domain.ProjExtend;
-import com.justonetech.biz.manager.ConfigManager;
+import com.justonetech.biz.domain.ProjExtendCost;
+import com.justonetech.biz.domain.ProjExtendSchedule;
+import com.justonetech.biz.manager.ProjectRelateManager;
 import com.justonetech.biz.utils.Constants;
 import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.orm.hibernate.Page;
-import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
 import com.justonetech.system.utils.PrivilegeCode;
 import org.slf4j.Logger;
@@ -21,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.Set;
 
 
 /**
@@ -37,16 +41,19 @@ public class ProjExtendController extends BaseCRUDActionController<ProjExtend> {
     private SysUserManager sysUserManager;
 
     @Autowired
-    private SysCodeManager sysCodeManager;
-
-    @Autowired
-    private ConfigManager configManager;
-
-    @Autowired
     private ProjExtendService projExtendService;
 
     @Autowired
+    private ProjExtendCostService projExtendCostService;
+
+    @Autowired
+    private ProjExtendScheduleService projExtendScheduleService;
+
+    @Autowired
     private ProjInfoService projInfoService;
+
+    @Autowired
+    private ProjectRelateManager projectRelateManager;
 
     /**
      * 列表显示页面
@@ -103,7 +110,7 @@ public class ProjExtendController extends BaseCRUDActionController<ProjExtend> {
      */
     @RequestMapping
     public String modify(Model model, Long projectId) {
-        model.addAttribute("projectId",projectId);
+        model.addAttribute("projectId", projectId);
 
         return "view/project/projExtend/modify";
     }
@@ -117,8 +124,33 @@ public class ProjExtendController extends BaseCRUDActionController<ProjExtend> {
      */
     @RequestMapping
     public String view(Model model, Long projectId) {
-        model.addAttribute("projectId",projectId);
+        model.addAttribute("projectId", projectId);
 
         return "view/project/projExtend/view";
+    }
+
+    /**
+     * 删除操作
+     *
+     * @param response  .
+     * @param projectId .
+     * @throws Exception .
+     */
+    @RequestMapping
+    public void delete(HttpServletResponse response, Long projectId) throws Exception {
+        ProjExtend projExtend = projectRelateManager.getProjExtend(projectId);
+        if (null != projExtend) {
+            Set<ProjExtendCost> projExtendCosts = projExtend.getProjExtendCosts();
+            for (ProjExtendCost projExtendCost : projExtendCosts) {
+                projExtendCostService.delete(projExtendCost);
+            }
+            Set<ProjExtendSchedule> projExtendSchedules = projExtend.getProjExtendSchedules();
+            for (ProjExtendSchedule projExtendSchedule : projExtendSchedules) {
+                projExtendScheduleService.delete(projExtendSchedule);
+            }
+            projExtendService.delete(projExtend);
+
+            sendSuccessJSON(response, "删除成功");
+        }
     }
 }

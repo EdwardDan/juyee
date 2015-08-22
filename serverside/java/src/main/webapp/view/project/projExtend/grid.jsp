@@ -59,11 +59,11 @@
         gridinit($("#listGrid"), conf);
     });
     function doView(id) {
-        parent.openWindow("查看项目推进信息", "${ctx}/projExtend/view.do?projectId=" + id, false,1000,550);
+        parent.openWindow("查看项目推进信息", "${ctx}/projExtend/view.do?projectId=" + id, false,800,550);
     }
     <c:if test="${canEdit}">
     function doEdit(id) {
-        parent.openWindow("修改项目推进信息", "${ctx}/projExtend/modify.do?projectId=" + id, true,1000,550);
+        parent.openWindow("修改项目推进信息", "${ctx}/projExtend/modify.do?projectId=" + id, true,800,550);
     }
     function doDelete(id) {
         doGridDelete("${ctx}/projExtend/delete.do?projectId=" + id);
