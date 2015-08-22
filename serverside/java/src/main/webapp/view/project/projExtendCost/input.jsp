@@ -78,12 +78,12 @@
                     hiddenYear = (${curYear}+indexNo - 1);
                 } else if (3 == num) {
                     if (indexNo % 2 == 0) {
-                        colValue = "${curYear}年全年";
-                        hiddenYear =${curYear};
+                        colValue = (${curYear}+parseInt((indexNo - 1) / 2)) + "年全年";
+                        hiddenYear = (${curYear}+parseInt((indexNo - 1) / 2));
                         hiddenHalf = "qn";
                     } else {
-                        colValue = "${curYear}年上半年";
-                        hiddenYear =${curYear};
+                        colValue = (${curYear}+parseInt((indexNo - 1) / 2)) + "年上半年";
+                        hiddenYear = (${curYear}+parseInt((indexNo - 1) / 2));
                         hiddenHalf = "sbn";
                     }
                     colName = "${TYPE3}";
@@ -164,7 +164,7 @@
                 <td style="width: 30%;">累计完成投资（亿元）</td>
                 <td style="width: 5%;">
                     <input type='button' value='新增' class='button_select_add'
-                           onclick='addLine(this,1,"type1")'>
+                           onclick='addLine(this,1,"${TYPE1}")'>
                 </td>
             </tr>
             <c:forEach items="${listType1}" var="type1" varStatus="status1">
@@ -181,11 +181,11 @@
                     </td>
                     <td style="width: 5%;" align="center">
                         &nbsp;<input type='button' value='删除' class='button_select_remove'
-                                     onclick='addLine(this,1,"type1")'>
+                                     onclick='addLine(this,1,"${TYPE1}")'>
                     </td>
                 </tr>
             </c:forEach>
-            <tr id="type1" style="display: none;height: 30px;">
+            <tr id="${TYPE1}" style="display: none;height: 30px;">
                 <td style="width: 15%;text-align: center;" align="center"></td>
                 <td style="width: 30%;" align="center"></td>
                 <td style="width: 5%;" align="center">
@@ -206,7 +206,7 @@
                 <td style="width: 30%;">年度计划投资（亿元）</td>
                 <td style="width: 5%;">
                     <input type='button' value='新增' class='button_select_add'
-                           onclick='addLine(this,2,"type2")'>
+                           onclick='addLine(this,2,"${TYPE2}")'>
                 </td>
             </tr>
             <c:forEach items="${listType2}" var="type2" varStatus="status2">
@@ -223,16 +223,16 @@
                     </td>
                     <td style="width: 5%;" align="center">
                         &nbsp;<input type='button' value='删除' class='button_select_remove'
-                                     onclick='addLine(this,2,"type2")'>
+                                     onclick='addLine(this,2,"${TYPE2}")'>
                     </td>
                 </tr>
             </c:forEach>
-            <tr id="type2" style="display: none;height: 30px;">
+            <tr id="${TYPE2}" style="display: none;height: 30px;">
                 <td style="width: 15%;text-align: center;" align="center"></td>
                 <td style="width: 30%;" align="center"></td>
                 <td style="width: 5%;" align="center">
                     &nbsp;<input type='button' value='删除' class='button_select_remove'
-                                 onclick='addLine(this,2,"type2")'>
+                                 onclick='addLine(this,2,"${TYPE2}")'>
                 </td>
             </tr>
         </table>
@@ -248,7 +248,7 @@
                 <td style="width: 30%;">累计完成投资（亿元）</td>
                 <td style="width: 5%;">
                     <input type='button' value='新增' class='button_select_add'
-                           onclick='addLine(this,3,"type3")'>
+                           onclick='addLine(this,3,"${TYPE3}")'>
                 </td>
             </tr>
             <c:forEach items="${listType3}" var="type3" varStatus="status3">
@@ -266,16 +266,16 @@
                     </td>
                     <td style="width: 5%;" align="center">
                         &nbsp;<input type='button' value='删除' class='button_select_remove'
-                                     onclick='addLine(this,3,"type3")'>
+                                     onclick='addLine(this,3,"${TYPE3}")'>
                     </td>
                 </tr>
             </c:forEach>
-            <tr id="type3" style="display: none;height: 30px;">
+            <tr id="${TYPE3}" style="display: none;height: 30px;">
                 <td style="width: 15%;text-align: center;" align="center"></td>
                 <td style="width: 30%;" align="center"></td>
                 <td style="width: 5%;" align="center">
                     &nbsp;<input type='button' value='删除' class='button_select_remove'
-                                 onclick='addLine(this,3,"type3")'>
+                                 onclick='addLine(this,3,"${TYPE3}")'>
                 </td>
             </tr>
         </table>
@@ -292,7 +292,7 @@
                 <td style="width: 30%;">财政资金已完成额（亿元））</td>
                 <td style="width: 5%;">
                     <input type='button' value='新增' class='button_select_add'
-                           onclick='addLine(this,4,"type4")'>
+                           onclick='addLine(this,4,"${TYPE4}")'>
                 </td>
             </tr>
             <c:forEach items="${listType4}" var="type4" varStatus="status4">
@@ -314,17 +314,17 @@
                     </td>
                     <td style="width: 5%;" align="center">
                         &nbsp;<input type='button' value='删除' class='button_select_remove'
-                                     onclick='addLine(this,4,"type4")'>
+                                     onclick='addLine(this,4,"${TYPE4}")'>
                     </td>
                 </tr>
             </c:forEach>
-            <tr id="type4" style="display: none;height: 30px;">
+            <tr id="${TYPE4}" style="display: none;height: 30px;">
                 <td style="width: 15%;text-align: center;" align="center"></td>
                 <td style="width: 75%;" align="center"></td>
                 <td style="width: 75%;" align="center"></td>
                 <td style="width: 5%;" align="center">
                     &nbsp;<input type='button' value='删除' class='button_select_remove'
-                                 onclick='addLine(this,4,"type4")'>
+                                 onclick='addLine(this,4,"${TYPE4}")'>
                 </td>
             </tr>
         </table>

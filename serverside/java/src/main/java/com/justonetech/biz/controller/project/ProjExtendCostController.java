@@ -131,7 +131,7 @@ public class ProjExtendCostController extends BaseCRUDActionController<ProjExten
         if (null == projExtend) {
             projExtend = new ProjExtend();
             projExtend.setProject(projInfoService.get(projectId));
-        } else{
+        } else {
             //投资的数据
             List<ProjExtendCost> listType1 = getCostByType(ProjExtendCostType.EXTEND_TYPE_1.getCode(), projExtend.getId());
             List<ProjExtendCost> listType2 = getCostByType(ProjExtendCostType.EXTEND_TYPE_2.getCode(), projExtend.getId());
@@ -165,7 +165,7 @@ public class ProjExtendCostController extends BaseCRUDActionController<ProjExten
         if (null == projExtend) {
             projExtend = new ProjExtend();
             projExtend.setProject(projInfoService.get(projectId));
-        } else{
+        } else {
             //投资的数据
             List<ProjExtendCost> listType1 = getCostByType(ProjExtendCostType.EXTEND_TYPE_1.getCode(), projExtend.getId());
             List<ProjExtendCost> listType2 = getCostByType(ProjExtendCostType.EXTEND_TYPE_2.getCode(), projExtend.getId());
