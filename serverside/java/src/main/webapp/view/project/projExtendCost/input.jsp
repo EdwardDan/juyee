@@ -104,7 +104,6 @@
                 html3 += "<input type='hidden' name='month" + colName + indexNo + "' value='" + hiddenMonth + "'>";
                 var html4 = "<input type='text' class='input_text' name='czCostYwc" + colName + indexNo + "' value=''>";
 
-
                 if (i == 0) {
                     objCell.innerHTML = html1;
                 } else {
