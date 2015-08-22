@@ -7,8 +7,8 @@
             <tr class="tr_light">
                 <td class="form_label_right" width="20%">是否开工：</td>
                 <td class="form_content" width="30%">
-                        <c:if test="${bean.gcjsIsBigin}"> 已开工 </c:if>
-                        <c:if test="${!bean.gcjsIsBigin}">未开工 </c:if>
+                        <c:if test="${(not empty bean.gcjsIsBigin)&&bean.gcjsIsBigin}"> 已开工 </c:if>
+                        <c:if test="${(not empty bean.gcjsIsBigin)&&!bean.gcjsIsBigin}">未开工 </c:if>
                 </td>
                 <td class="form_label_right" width="20%">开工时间：</td>
                 <td class="form_content" width="30%">${bean.gcjsBeginTime}</td>
@@ -17,8 +17,8 @@
             <tr class="tr_light">
                 <td class="form_label_right">是否完工：</td>
                 <td class="form_content">
-                        <c:if test="${bean.gcjsIsEnd}"> 已开工 </c:if>
-                        <c:if test="${!bean.gcjsIsEnd}">未开工</c:if>
+                        <c:if test="${(not empty bean.gcjsIsEnd)&&bean.gcjsIsEnd}"> 已开工 </c:if>
+                        <c:if test="${(not empty bean.gcjsIsEnd)&&!bean.gcjsIsEnd}">未开工</c:if>
                 </td>
                 <td class="form_label_right">完工时间：</td>
                 <td class="form_content">${bean.gcjsEndTime}

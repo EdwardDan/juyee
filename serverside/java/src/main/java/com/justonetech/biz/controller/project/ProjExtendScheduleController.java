@@ -151,23 +151,26 @@ public class ProjExtendScheduleController extends BaseCRUDActionController<ProjE
         //处理其他业务逻辑
         model.addAttribute("bean", projExtend);
         projExtendService.save(projExtend);
-        String isTab = request.getParameter("isTab");
-        model.addAttribute("isTab", isTab);
         return "view/project/projExtendSchedule/input";
     }
 
     /**
      * 查看页面
      *
-     * @param id    .
      * @param model .
      * @return .
      */
     @RequestMapping
-    public String view(Model model, Long id) {
-        ProjExtendSchedule projExtendSchedule = projExtendScheduleService.get(id);
-
-        model.addAttribute("bean", projExtendSchedule);
+    public String view(Model model, HttpServletRequest request) {
+        String projectId = request.getParameter("projectId");
+        ProjExtend projExtend = projectRelateManager.getProjExtend(Long.valueOf(projectId));
+        if (null == projExtend) {
+            projExtend = new ProjExtend();
+            projExtend.setProject(projInfoService.get(Long.valueOf(projectId)));
+        }
+        //处理其他业务逻辑
+        model.addAttribute("bean", projExtend);
+        projExtendService.save(projExtend);
         return "view/project/projExtendSchedule/view";
     }
 
