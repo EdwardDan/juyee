@@ -211,7 +211,7 @@
 		</many-to-one>
 	
 
-		<set name="projExtendSchedules" inverse="true">
+		<set name="projExtendSchedules" inverse="true" order-by="TITLE">
 			<key column="PROJ_EXTEND_ID"/>
 			<one-to-many class="ProjExtendSchedule"/>
 		</set>

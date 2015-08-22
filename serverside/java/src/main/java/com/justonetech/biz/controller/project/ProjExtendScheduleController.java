@@ -2,19 +2,21 @@ package com.justonetech.biz.controller.project;
 
 import com.justonetech.biz.core.orm.hibernate.GridJq;
 import com.justonetech.biz.core.orm.hibernate.QueryTranslateJq;
-import com.justonetech.biz.daoservice.DocDocumentService;
 import com.justonetech.biz.daoservice.ProjExtendScheduleService;
+import com.justonetech.biz.daoservice.ProjExtendService;
+import com.justonetech.biz.daoservice.ProjInfoService;
+import com.justonetech.biz.domain.ProjExtend;
 import com.justonetech.biz.domain.ProjExtendSchedule;
 import com.justonetech.biz.manager.ConfigManager;
-import com.justonetech.biz.manager.DocumentManager;
+import com.justonetech.biz.manager.ProjectRelateManager;
 import com.justonetech.biz.utils.Constants;
 import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.orm.hibernate.Page;
 import com.justonetech.core.utils.ReflectionUtils;
-import com.justonetech.system.manager.SimpleQueryManager;
 import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
 import com.justonetech.system.utils.PrivilegeCode;
+import org.hibernate.annotations.common.util.StringHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -37,29 +43,29 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class ProjExtendScheduleController extends BaseCRUDActionController<ProjExtendSchedule> {
     private Logger logger = LoggerFactory.getLogger(ProjExtendScheduleController.class);
-    
+
     @Autowired
     private SysUserManager sysUserManager;
-    
+
     @Autowired
     private SysCodeManager sysCodeManager;
 
     @Autowired
     private ConfigManager configManager;
-    
+
     @Autowired
-    private DocumentManager documentManager;
-    
+    private ProjectRelateManager projectRelateManager;
+
     @Autowired
-    private SimpleQueryManager simpleQueryManager;
-    
+    private ProjInfoService projInfoService;
+
     @Autowired
-    private DocDocumentService docDocumentService;
+    private ProjExtendService projExtendService;
 
     @Autowired
     private ProjExtendScheduleService projExtendScheduleService;
 
-   /**
+    /**
      * 列表显示页面
      *
      * @param model .
@@ -67,20 +73,20 @@ public class ProjExtendScheduleController extends BaseCRUDActionController<ProjE
      */
     @RequestMapping
     public String grid(Model model) {
-      //判断是否有编辑权限
-      model.addAttribute("canEdit",sysUserManager.hasPrivilege(PrivilegeCode.SYS_SAMPLE_EDIT));
-            
-      return "view/project/projExtendSchedule/grid";
+        //判断是否有编辑权限
+        model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.SYS_SAMPLE_EDIT));
+
+        return "view/project/projExtendSchedule/grid";
     }
-    
+
     /**
      * 获取列表数据
      *
      * @param response .
-     * @param filters .
-     * @param columns .
-     * @param page .
-     * @param rows .
+     * @param filters  .
+     * @param columns  .
+     * @param page     .
+     * @param rows     .
      */
     @RequestMapping
     public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session) {
@@ -93,7 +99,7 @@ public class ProjExtendScheduleController extends BaseCRUDActionController<ProjE
             QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);
             String query = queryTranslate.toString();
             session.setAttribute(Constants.GRID_SQL_KEY, query);
-            pageModel = projExtendScheduleService.findByPage(pageModel, query);            
+            pageModel = projExtendScheduleService.findByPage(pageModel, query);
 
             //输出显示
             String json = GridJq.toJSON(columns, pageModel);
@@ -104,7 +110,7 @@ public class ProjExtendScheduleController extends BaseCRUDActionController<ProjE
             super.processException(response, e);
         }
     }
-    
+
     /**
      * 新增录入页面
      *
@@ -120,24 +126,36 @@ public class ProjExtendScheduleController extends BaseCRUDActionController<ProjE
 
         return "view/project/projExtendSchedule/input";
     }
-    
+
     /**
      * 修改显示页面
      *
-     * @param id    .
      * @param model .
      * @return .
      */
     @RequestMapping
-    public String modify(Model model, Long id) {
-        ProjExtendSchedule projExtendSchedule = projExtendScheduleService.get(id);
-
+    public String modify(Model model, HttpServletRequest request) {
+        String projectId = request.getParameter("projectId");
+        ProjExtend projExtend = projectRelateManager.getProjExtend(Long.valueOf(projectId));
+        Date date = new Date(System.currentTimeMillis());
+        if (null == projExtend) {
+            projExtend = new ProjExtend();
+            projExtend.setProject(projInfoService.get(Long.valueOf(projectId)));
+        }
+        if (null == projExtend.getGcjsEndTime()) {
+            projExtend.setGcjsEndTime(date);
+        }
+        if (null == projExtend.getGcjsBeginTime()) {
+            projExtend.setGcjsBeginTime(date);
+        }
         //处理其他业务逻辑
-        model.addAttribute("bean", projExtendSchedule);
-        
+        model.addAttribute("bean", projExtend);
+        projExtendService.save(projExtend);
+        String isTab = request.getParameter("isTab");
+        model.addAttribute("isTab", isTab);
         return "view/project/projExtendSchedule/input";
     }
-    
+
     /**
      * 查看页面
      *
@@ -148,11 +166,11 @@ public class ProjExtendScheduleController extends BaseCRUDActionController<ProjE
     @RequestMapping
     public String view(Model model, Long id) {
         ProjExtendSchedule projExtendSchedule = projExtendScheduleService.get(id);
-        
-        model.addAttribute("bean", projExtendSchedule);        
+
+        model.addAttribute("bean", projExtendSchedule);
         return "view/project/projExtendSchedule/view";
     }
-    
+
     /**
      * 保存操作
      *
@@ -163,25 +181,45 @@ public class ProjExtendScheduleController extends BaseCRUDActionController<ProjE
      */
     @SuppressWarnings("unchecked")
     @RequestMapping
-    public void save(HttpServletResponse response, @ModelAttribute("bean") ProjExtendSchedule entity, HttpServletRequest request) throws Exception {
+    public void save(HttpServletResponse response, @ModelAttribute("bean") ProjExtend entity, HttpServletRequest request) throws Exception {
         try {
-            ProjExtendSchedule target;
+            ProjExtend target;
             if (entity.getId() != null) {
-                target = projExtendScheduleService.get(entity.getId());
+                target = projExtendService.get(entity.getId());
                 ReflectionUtils.copyBean(entity, target, new String[]{
-                                                "year",                                      
-                                                                "month",                                      
-                                                                "title",                                      
-                                                                "projProgress",                                      
-                                                                "question",                                      
-                                                                "improveOpinion",                                      
-                                                                "description"                                      
-                                                });
-
+                        "gcjsIsBigin",
+                        "gcjsBeginTime",
+                        "gcjsIsEnd",
+                        "gcjsEndTime"
+                });
             } else {
                 target = entity;
             }
-            projExtendScheduleService.save(target);
+            projExtendService.save(target);
+            Set<ProjExtendSchedule> projExtendSchedules = target.getProjExtendSchedules();
+            List<ProjExtendSchedule> schedules = new ArrayList<ProjExtendSchedule>(projExtendSchedules);
+            projExtendScheduleService.batchDelete(schedules, schedules.size());
+            String[] year = request.getParameterValues("yearSch");
+            String[] month = request.getParameterValues("monthSch");
+            String[] titles = request.getParameterValues("titleSch");
+            String[] projProgresses = request.getParameterValues("projProgress");
+            String[] questions = request.getParameterValues("question");
+            String[] improveOpinions = request.getParameterValues("improveOpinion");
+            String[] descriptions = request.getParameterValues("description");
+            if (null != titles && titles.length != 0) {
+                for (int i = 0; !StringHelper.isEmpty(titles[i]) && i < titles.length; i++) {
+                    ProjExtendSchedule schedule = new ProjExtendSchedule();
+                    schedule.setYear(Integer.valueOf(year[i]));
+                    schedule.setMonth(Integer.valueOf(month[i]));
+                    schedule.setTitle(titles[i]);
+                    schedule.setProjProgress(projProgresses[i]);
+                    schedule.setQuestion(questions[i]);
+                    schedule.setImproveOpinion(improveOpinions[i]);
+                    schedule.setDescription(descriptions[i]);
+                    schedule.setProjExtend(target);
+                    projExtendScheduleService.save(schedule);
+                }
+            }
 
         } catch (Exception e) {
             log.error("error", e);
@@ -190,13 +228,13 @@ public class ProjExtendScheduleController extends BaseCRUDActionController<ProjE
         }
         sendSuccessJSON(response, "保存成功");
     }
-    
+
     /**
      * 删除操作
      *
      * @param response .
-     * @param id  .
-     * @throws Exception  .
+     * @param id       .
+     * @throws Exception .
      */
     @RequestMapping
     public void delete(HttpServletResponse response, Long id) throws Exception {
