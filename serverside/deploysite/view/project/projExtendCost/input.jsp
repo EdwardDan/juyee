@@ -42,10 +42,7 @@
             }
         });
     }
-
     function addLine(obj, num, hiddenType) {
-        loadAjaxData(null, "${ctx}/projExtendCost/loadAjaxData.do?type=" + hiddenType);
-
         var objTable = obj.parentNode.parentNode.parentNode.parentNode;
 
         if (obj.value == '新增') {
@@ -80,7 +77,6 @@
                     colName = "${TYPE2}";
                     hiddenYear = (${curYear}+indexNo - 1);
                 } else if (3 == num) {
-                    alert(parseInt((indexNo - 1) / 2))
                     if (indexNo % 2 == 0) {
                         colValue = (${curYear}+parseInt((indexNo - 1) / 2)) + "年全年";
                         hiddenYear = (${curYear}+parseInt((indexNo - 1) / 2));
@@ -107,7 +103,6 @@
                 html3 += "<input type='hidden' name='year" + colName + indexNo + "' value='" + hiddenYear + "'>";
                 html3 += "<input type='hidden' name='month" + colName + indexNo + "' value='" + hiddenMonth + "'>";
                 var html4 = "<input type='text' class='input_text' name='czCostYwc" + colName + indexNo + "' value=''>";
-
 
                 if (i == 0) {
                     objCell.innerHTML = html1;
