@@ -106,7 +106,7 @@
             </tr></table>
 
             <c:forEach items="${bean.projExtendSchedules}" var="item">
-                <table cellpadding="0" cellspacing="0" border="1" class="table_thin_line"
+                <table cellpadding="0" cellspacing="0" border="1" class="table_rough_line"
                        style="text-align: center;width: 98%;">
                 <tr class="tr_light">
                     <td width="15%" rowspan="4">
@@ -151,7 +151,7 @@
 
         <div id="tablesDiv"></div>
         <div id="hiddenStyle" style="display: none">
-            <table cellpadding="0" cellspacing="0" border="1" class="table_thin_line"
+            <table cellpadding="0" cellspacing="0" border="1" class="table_rough_line"
                    style="text-align: center;width: 98%;">
                 <tr class="tr_light">
                     <td width="15%" rowspan="4">

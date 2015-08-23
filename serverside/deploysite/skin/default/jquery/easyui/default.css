@@ -781,6 +781,10 @@ form{
     border: 1px #cccccc;
     border-collapse:collapse;
 }
+.table_rough_line {
+    border: 1px #cccccc;
+    /*border-collapse:collapse;*/
+}
 .table_thin_line_center {
     width:100%;
     text-align:center;
