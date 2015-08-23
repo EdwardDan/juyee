@@ -69,9 +69,9 @@
 //                objCell.style.display = ssa.cells[i].style.display;
                 //处理title的值
                 if (1 == num) {
-                    colValue = (${curYear}+indexNo - 1) + "年";
+                    colValue = (${curYear}+indexNo - 2) + "年";
                     colName = "${TYPE1}";
-                    hiddenYear = (${curYear}+indexNo - 1);
+                    hiddenYear = (${curYear}+indexNo - 2);
                 } else if (2 == num) {
                     colValue = (${curYear}+indexNo - 1) + "年";
                     colName = "${TYPE2}";
