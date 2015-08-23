@@ -212,13 +212,27 @@ public class ProjExtendScheduleController extends BaseCRUDActionController<ProjE
             if (null != titles && titles.length != 0) {
                 for (int i = 0; !StringHelper.isEmpty(titles[i]) && i < titles.length; i++) {
                     ProjExtendSchedule schedule = new ProjExtendSchedule();
-                    schedule.setYear(Integer.valueOf(year[i]));
-                    schedule.setMonth(Integer.valueOf(month[i]));
-                    schedule.setTitle(titles[i]);
-                    schedule.setProjProgress(projProgresses[i]);
-                    schedule.setQuestion(questions[i]);
-                    schedule.setImproveOpinion(improveOpinions[i]);
-                    schedule.setDescription(descriptions[i]);
+                    if (!StringHelper.isEmpty(year[i])) {
+                        schedule.setYear(Integer.valueOf(year[i]));
+                    }
+                    if (!StringHelper.isEmpty(month[i])) {
+                        schedule.setMonth(Integer.valueOf(month[i]));
+                    }
+                    if (!StringHelper.isEmpty(titles[i])) {
+                        schedule.setTitle(titles[i]);
+                    }
+                    if (!StringHelper.isEmpty(projProgresses[i])) {
+                        schedule.setProjProgress(projProgresses[i]);
+                    }
+                    if (!StringHelper.isEmpty(questions[i])) {
+                        schedule.setQuestion(questions[i]);
+                    }
+                    if (!StringHelper.isEmpty(improveOpinions[i])) {
+                        schedule.setImproveOpinion(improveOpinions[i]);
+                    }
+                    if (!StringHelper.isEmpty(descriptions[i])) {
+                        schedule.setDescription(descriptions[i]);
+                    }
                     schedule.setProjExtend(target);
                     projExtendScheduleService.save(schedule);
                 }

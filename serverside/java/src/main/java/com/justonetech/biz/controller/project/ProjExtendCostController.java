@@ -13,6 +13,7 @@ import com.justonetech.biz.utils.enums.ProjExtendCostType;
 import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.orm.hibernate.Page;
 import com.justonetech.core.utils.ReflectionUtils;
+import com.justonetech.core.utils.StringHelper;
 import com.justonetech.system.manager.SysUserManager;
 import com.justonetech.system.utils.PrivilegeCode;
 import org.slf4j.Logger;
@@ -221,9 +222,15 @@ public class ProjExtendCostController extends BaseCRUDActionController<ProjExten
                     ProjExtendCost projExtendCost = new ProjExtendCost();
                     projExtendCost.setProjExtend(target);
                     projExtendCost.setType(ProjExtendCostType.EXTEND_TYPE_1.getCode());
-                    projExtendCost.setTitle(accTime);
-                    projExtendCost.setYear(Integer.valueOf(accYear));
-                    projExtendCost.setAccComplete(Double.valueOf(accCost));
+                    if (!StringHelper.isEmpty(accTime)) {
+                        projExtendCost.setTitle(accTime);
+                    }
+                    if (!StringHelper.isEmpty(accYear)) {
+                        projExtendCost.setYear(Integer.valueOf(accYear));
+                    }
+                    if (!StringHelper.isEmpty(accCost)) {
+                        projExtendCost.setAccComplete(Double.valueOf(accCost));
+                    }
                     projExtendCostService.save(projExtendCost);
                 }
             }
@@ -237,9 +244,15 @@ public class ProjExtendCostController extends BaseCRUDActionController<ProjExten
                     ProjExtendCost projExtendCost = new ProjExtendCost();
                     projExtendCost.setProjExtend(target);
                     projExtendCost.setType(ProjExtendCostType.EXTEND_TYPE_2.getCode());
-                    projExtendCost.setTitle(yearPlanTime);
-                    projExtendCost.setYear(Integer.valueOf(yearPlanYear));
-                    projExtendCost.setAccComplete(Double.valueOf(yearPlanCost));
+                    if (!StringHelper.isEmpty(yearPlanTime)) {
+                        projExtendCost.setTitle(yearPlanTime);
+                    }
+                    if (!StringHelper.isEmpty(yearPlanYear)) {
+                        projExtendCost.setYear(Integer.valueOf(yearPlanYear));
+                    }
+                    if (!StringHelper.isEmpty(yearPlanCost)) {
+                        projExtendCost.setAccComplete(Double.valueOf(yearPlanCost));
+                    }
                     projExtendCostService.save(projExtendCost);
                 }
             }
@@ -254,10 +267,18 @@ public class ProjExtendCostController extends BaseCRUDActionController<ProjExten
                     ProjExtendCost projExtendCost = new ProjExtendCost();
                     projExtendCost.setProjExtend(target);
                     projExtendCost.setType(ProjExtendCostType.EXTEND_TYPE_3.getCode());
-                    projExtendCost.setTitle(yearAccTime);
-                    projExtendCost.setYear(Integer.valueOf(yearAccYear));
-                    projExtendCost.setHalf(yearAccHalf);
-                    projExtendCost.setAccComplete(Double.valueOf(yearAccCost));
+                    if (!StringHelper.isEmpty(yearAccTime)) {
+                        projExtendCost.setTitle(yearAccTime);
+                    }
+                    if (!StringHelper.isEmpty(yearAccYear)) {
+                        projExtendCost.setYear(Integer.valueOf(yearAccYear));
+                    }
+                    if (!StringHelper.isEmpty(yearAccHalf)) {
+                        projExtendCost.setHalf(yearAccHalf);
+                    }
+                    if (!StringHelper.isEmpty(yearAccCost)) {
+                        projExtendCost.setAccComplete(Double.valueOf(yearAccCost));
+                    }
                     projExtendCostService.save(projExtendCost);
                 }
             }
@@ -273,11 +294,21 @@ public class ProjExtendCostController extends BaseCRUDActionController<ProjExten
                     ProjExtendCost projExtendCost = new ProjExtendCost();
                     projExtendCost.setProjExtend(target);
                     projExtendCost.setType(ProjExtendCostType.EXTEND_TYPE_4.getCode());
-                    projExtendCost.setTitle(czTime);
-                    projExtendCost.setYear(Integer.valueOf(czYear));
-                    projExtendCost.setMonth(Integer.valueOf(czMonth));
-                    projExtendCost.setCzzjYbf(Double.valueOf(czCostYbf));
-                    projExtendCost.setCzzjYwc(Double.valueOf(czCostYwc));
+                    if (!StringHelper.isEmpty(czTime)) {
+                        projExtendCost.setTitle(czTime);
+                    }
+                    if (!StringHelper.isEmpty(czYear)) {
+                        projExtendCost.setYear(Integer.valueOf(czYear));
+                    }
+                    if (!StringHelper.isEmpty(czMonth)) {
+                        projExtendCost.setMonth(Integer.valueOf(czMonth));
+                    }
+                    if (!StringHelper.isEmpty(czCostYbf)) {
+                        projExtendCost.setCzzjYbf(Double.valueOf(czCostYbf));
+                    }
+                    if (!StringHelper.isEmpty(czCostYwc)) {
+                        projExtendCost.setCzzjYwc(Double.valueOf(czCostYwc));
+                    }
                     projExtendCostService.save(projExtendCost);
                 }
             }
