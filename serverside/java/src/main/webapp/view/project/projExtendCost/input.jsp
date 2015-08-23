@@ -5,7 +5,11 @@
     var formId = "bean";
     $(function () {
         //页面验证初始化
-        var validateCondition = [];
+        var validateCondition = [
+            {name: "gctxGkpfTotal", rule: "validate[required,custom[number]"},
+            {name: "gctxCspfTotal", rule: "validate[required,custom[number]"} ,
+            {name: "gctxSourceFund", rule: "validate[required"}
+        ];
         validateInit(validateCondition, formId);
     });
 
@@ -98,11 +102,11 @@
                 html1 += "<input type='hidden' name='year" + colName + indexNo + "' value='" + hiddenYear + "'>";
                 html1 += "<input type='hidden' name='half" + colName + indexNo + "' value='" + hiddenHalf + "'>";
                 html1 += "<input type='hidden' name='index" + colName + "' value='" + indexNo + "'>";
-                var html2 = "<input type='text' class='input_text' name='cost" + colName + indexNo + "' value=''>";
-                var html3 = "<input type='text' class='input_text' name='czCostYbf" + colName + indexNo + "' value=''>";
+                var html2 = "<input type='text' class='input_text' name='cost" + colName + indexNo + "' value='' onchange='" + checkNumner(this) + "'>";
+                var html3 = "<input type='text' class='input_text' name='czCostYbf" + colName + indexNo + "' value='' onchange='" + checkNumner(this) + "'>";
                 html3 += "<input type='hidden' name='year" + colName + indexNo + "' value='" + hiddenYear + "'>";
                 html3 += "<input type='hidden' name='month" + colName + indexNo + "' value='" + hiddenMonth + "'>";
-                var html4 = "<input type='text' class='input_text' name='czCostYwc" + colName + indexNo + "' value=''>";
+                var html4 = "<input type='text' class='input_text' name='czCostYwc" + colName + indexNo + "' value='' onchange='" + checkNumner(this) + "'>";
 
                 if (i == 0) {
                     objCell.innerHTML = html1;
@@ -126,6 +130,13 @@
                 var trObj = obj.parentNode.parentNode;
                 trObj.parentElement.deleteRow(trObj.rowIndex);
             }
+        }
+    }
+    function checkNumner(element) {
+        if (/^\d+\.\d+$/.test(element.value) || !isNaN(element.value)) {
+        } else {
+            showInfoMsg('只能输入整数和小数！', null);
+            element.value = 0;
         }
     }
 </script>
@@ -176,7 +187,7 @@
                     </td>
                     <td style="width: 30%;" align="center">
                         <input type="text" class="input_text" name="cost${TYPE1}${status1.index+1}"
-                               value="${type1.accComplete}">
+                               value="${type1.accComplete}" onchange="checkNumner(this)">
                     </td>
                     <td style="width: 5%;" align="center">
                         &nbsp;<input type='button' value='删除' class='button_select_remove'
@@ -218,7 +229,7 @@
                     </td>
                     <td style="width: 30%;" align="center">
                         <input type="text" class="input_text" name="cost${TYPE2}${status2.index+1}"
-                               value="${type2.accComplete}">
+                               value="${type2.accComplete}" onchange="checkNumner(this)">
                     </td>
                     <td style="width: 5%;" align="center">
                         &nbsp;<input type='button' value='删除' class='button_select_remove'
@@ -261,7 +272,7 @@
                     </td>
                     <td style="width: 30%;" align="center">
                         <input type="text" class="input_text" name="cost${TYPE3}${status3.index+1}"
-                               value="${type3.accComplete}">
+                               value="${type3.accComplete}" onchange="checkNumner(this)">
                     </td>
                     <td style="width: 5%;" align="center">
                         &nbsp;<input type='button' value='删除' class='button_select_remove'
@@ -305,11 +316,11 @@
                     </td>
                     <td style="width: 30%;" align="center">
                         <input type="text" class="input_text" name="czCostYbf${TYPE4}${status4.index+1}"
-                               value="${type4.czzjYbf}">
+                               value="${type4.czzjYbf}" onchange="checkNumner(this)">
                     </td>
                     <td style="width: 30%;" align="center">
                         <input type="text" class="input_text" name="czCostYwc${TYPE4}${status4.index+1}"
-                               value="${type4.czzjYwc}">
+                               value="${type4.czzjYwc}" onchange="checkNumner(this)">
                     </td>
                     <td style="width: 5%;" align="center">
                         &nbsp;<input type='button' value='删除' class='button_select_remove'
