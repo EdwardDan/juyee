@@ -14,7 +14,7 @@
     });
 
     //保存操作
-    function save(btn) {
+    function save(btn, msg) {
         if (!validateForm(formId)) {
             return;
         }
@@ -148,7 +148,7 @@
                 if (confirm("确定要删除吗!")) {
                     trObj.parentElement.removeChild(trObj);
                 }
-//                save(document.getElementById("save"), "delete");
+//                save(document.getElementById("save"), 'delete');
             } else {
                 showErrorMsg("历史数据不能删！");
             }
@@ -157,7 +157,7 @@
                 if (confirm("确定要删除吗!")) {
                     trObj.parentElement.removeChild(trObj);
                 }
-//                save(document.getElementById("save"));
+//                save(document.getElementById("save"), 'delete');
             } else {
                 showErrorMsg("历史数据不能删！");
             }

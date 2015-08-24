@@ -98,9 +98,9 @@
                 </td>
                 <td class="form_label_right" width="20%">开工时间：</td>
                 <td class="form_content" width="30%">
-                    <input type="text" name="gcjsBeginTime" class="input_date"
+                    <input type="text" name="gcjsBeginTime" class="input_date"     id="gcjsBeginTime"
                            value="${bean.gcjsBeginTime}" readonly="true"/>
-                    <input type="button" class="button_calendar" value=" " onClick="calendar('gcjsBeginTime','all')">
+                    <input type="button" class="button_calendar" value=" " onClick="calendar('gcjsBeginTime')">
                 </td>
             </tr>
 
@@ -109,16 +109,16 @@
                 <td class="form_content">
                     <select name="gcjsIsEnd">
                         <option value="1"
-                        <c:if test="${bean.gcjsIsEnd =='1'}"> selected </c:if>>已开工</option>
+                        <c:if test="${bean.gcjsIsEnd =='1'}"> selected </c:if>>已完工</option>
                         <option value="0"
-                        <c:if test="${bean.gcjsIsEnd =='0'}">selected </c:if>>未开工</option>
+                        <c:if test="${bean.gcjsIsEnd =='0'}">selected </c:if>>未完工</option>
                     </select>
                 </td>
                 <td class="form_label_right">完工时间：</td>
                 <td class="form_content">
-                    <input type="text" name="gcjsEndTime" class="input_date"
+                    <input type="text" name="gcjsEndTime" class="input_date"   id="gcjsEndTime"
                            value="${bean.gcjsEndTime}" readonly="true"/>
-                    <input type="button" class="button_calendar" value=" " onClick="calendar('gcjsEndTime','all')">
+                    <input type="button" class="button_calendar" value=" " onClick="calendar('gcjsEndTime')">
                 </td>
             </tr>
         </table>

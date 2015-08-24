@@ -69,6 +69,10 @@
         gridinit($("#listGrid"), conf);
     });
 
+    function doViewProject(id, name) {
+        openWindow("查看项目推进信息（" + name + "）", "${ctx}/projectQueryProject/viewProject.do?id=" + id, false, 1000, 550);
+    }
+
     function doViewStage(id, name) {
         openWindow("查看办证推进信息（" + name + "）", "${ctx}/projectQueryStage/viewStage.do?id=" + id, false, 1000, 550);
     }
@@ -155,6 +159,7 @@
         </div>
         <div style="float:right;padding-right: 10px">
             <c:if test="${canViewAll}">
+                <input type="button" value="项目推进汇总" class="button_normal_longer" onclick="doViewProject('','汇总')"/>
                 <input type="button" value="办证推进汇总" class="button_normal_longer" onclick="doViewStage('','汇总')"/>
                 <input type="button" value="形象进度汇总" class="button_normal_longer" onclick="doViewNode('','汇总')"/>
             </c:if>

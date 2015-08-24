@@ -21,7 +21,7 @@
                 <sys:code code="${PROJ_INFO_STAGE}" name="ProjStage" id="ProjStage" type="select" disabled="true"
                           sysCodeDetailId="${bean.stage.id}" style="width:200px"/>
             </td>
-            <td class="form_label_right">业务类别：</td>
+            <td class="form_label_right">业态类别：</td>
             <td class="form_content">
                 <sys:code code="${PROJ_INFO_CATEGORY}" name="ProjCategory" id="ProjCategory" type="select"
                           disabled="true"
