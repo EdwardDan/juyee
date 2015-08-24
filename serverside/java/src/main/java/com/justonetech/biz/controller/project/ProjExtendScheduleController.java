@@ -156,6 +156,9 @@ public class ProjExtendScheduleController extends BaseCRUDActionController<ProjE
             ProjExtendSchedule  schedule =scheduleList.iterator().next();
             model.addAttribute("BigYear",schedule.getYear());
             model.addAttribute("BigMonth",schedule.getMonth());
+        }else{
+            model.addAttribute("BigYear","0");
+            model.addAttribute("BigMonth","0");
         }
         return "view/project/projExtendSchedule/input";
     }

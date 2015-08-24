@@ -7,11 +7,11 @@
     var currYear=today.getFullYear();
     var currMonth=today.getMonth()+1;
     var year=today.getFullYear();
-    if (${not empty BigYear}) {
+    if (${BigYear!='0'}) {
         year=${BigYear};
     }
     var month=today.getMonth()+1;
-    if (${not empty BigMonth}) {
+    if (${BigMonth!='0'}) {
         month=${BigMonth};
     }
 
