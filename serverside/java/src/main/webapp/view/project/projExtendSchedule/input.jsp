@@ -7,13 +7,8 @@
     var currYear=today.getFullYear();
     var currMonth=today.getMonth()+1;
     var year=today.getFullYear();
-    if (${BigYear!='0'}) {
-        year=${BigYear};
-    }
     var month=today.getMonth()+1;
-    if (${BigMonth!='0'}) {
-        month=${BigMonth};
-    }
+    var i=0;       //用于和历史数据中的最大年月一起判断 是否已添加
 
     $(function () {
         //页面验证初始化
@@ -35,6 +30,12 @@
             alert("已经添加过"+currYear+"年"+currMonth+"月的数据！");
             return;
         }
+        //如果将当前年月的数据删掉 ，就不再根据历史数据最大年月进行判断
+        if(i==0&&currYear==${BigYear}&&currMonth==${BigMonth}){
+            alert("已经添加过"+currYear+"年"+currMonth+"月的数据！");
+            return;
+        }
+
         var target=$("#hiddenStyle");
         target.find("input[name='yearSch']").val(year);
         target.find("input[name='monthSch']").val(month);
@@ -62,6 +63,7 @@
                 trObj.parentElement.removeChild(trObj);
                     year=currYear;
                     month=currMonth;
+                i=i+1;       //如果将当前年月的数据删掉 ，就不再根据历史数据最大年月进行判断
             }
         }else{
             alert("历史数据不能删！");
