@@ -12,10 +12,12 @@ import com.justonetech.biz.utils.Constants;
 import com.justonetech.biz.utils.enums.ProjExtendCostType;
 import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.orm.hibernate.Page;
+import com.justonetech.core.utils.JspHelper;
 import com.justonetech.core.utils.ReflectionUtils;
 import com.justonetech.core.utils.StringHelper;
 import com.justonetech.system.manager.SysUserManager;
 import com.justonetech.system.utils.PrivilegeCode;
+import net.sf.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +29,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 
 /**
@@ -180,6 +180,43 @@ public class ProjExtendCostController extends BaseCRUDActionController<ProjExten
         model.addAttribute("bean", projExtend);
 
         return "view/project/projExtendCost/view";
+    }
+
+    /**
+     * 判断数据是否存在
+     *
+     * @param model 。
+     * @param type  。
+     * @param year  。
+     * @param month 。
+     * @param half  。
+     * @return 。
+     */
+    @RequestMapping
+    public String checkData(Model model, String type, String year, String month, String half, Long extendId) {
+        String msg;
+        //根据年月查询是否已经存在
+        String hql = "from ProjExtendCost where 1=1 and projExtend.id=" + extendId + " and year=" + JspHelper.getInteger(year) + " and type='" + type + "'";
+        if (!StringHelper.isEmpty(half)) {
+            hql += " and half='" + half + "'";
+        }
+        if (!StringHelper.isEmpty(month)) {
+            hql += " and month=" + JspHelper.getInteger(month);
+        }
+        List<ProjExtendCost> list = projExtendCostService.findByQuery(hql);
+        Map<String, Object> map = new HashMap<String, Object>();
+        if (null != list && list.size() > 0) {
+            map.put("title", list.iterator().next().getTitle());
+            map.put("size", list.size());
+            map.put("success", true);
+        } else {
+            map.put("size", 0);
+            map.put("success", false);
+        }
+        msg = JSONObject.fromObject(map).toString();
+        model.addAttribute("msg", msg);
+
+        return "common/msg";
     }
 
     /**

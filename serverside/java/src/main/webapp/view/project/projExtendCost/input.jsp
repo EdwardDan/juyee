@@ -61,70 +61,79 @@
             var hiddenMonth = "";
             var hiddenHalf = "";
             var colNum = 3;
-            if (4 == num) {
+            var msg = "";
+            //处理title的值
+            if (1 == num) {
+                colValue = (${curYear}+rowIndex - 2) + "年";
+                colName = "${TYPE1}";
+                hiddenYear = ${curYear}-1;
+                msg = "累计完成投资（亿元）已填报，允许修改！";
+            } else if (2 == num) {
+                colValue = (${curYear}+rowIndex - 1) + "年";
+                colName = "${TYPE2}";
+                hiddenYear = ${curYear};
+                msg = "年度计划投资（亿元）已填报，允许修改！";
+            } else if (3 == num) {
+                if (rowIndex % 2 == 0) {
+                    colValue = (${curYear}+parseInt((rowIndex - 1) / 2)) + "年全年";
+                    hiddenYear = ${curYear};
+                    hiddenHalf = "qn";
+                } else {
+                    colValue = (${curYear}+parseInt((rowIndex - 1) / 2)) + "年上半年";
+                    hiddenYear = ${curYear};
+                    hiddenHalf = "sbn";
+                }
+                colName = "${TYPE3}";
+                msg = "累计完成投资（亿元）已填报，允许修改！";
+            } else if (4 == num) {
+                colValue = "${curYear}年" + (${curMonth}+rowIndex - 1) + "月";
+                colName = "${TYPE4}";
+                hiddenYear =${curYear};
+                hiddenMonth = ${curMonth};
                 colNum = 4;
+                msg = "财政资金（亿元）已填报，允许修改！";
             }
-            //列的个数
-            for (var i = 0; i < colNum; i++) {
-                var indexNo = document.getElementById("table" + num).rows.length - 2;
-                objCell = objRow.insertCell(i);
-                objCell.noWrap = "true";
-                objCell.align = "center";
-//                objCell.style.display = ssa.cells[i].style.display;
-                //处理title的值
-                if (1 == num) {
-                    colValue = (${curYear}+indexNo - 2) + "年";
-                    colName = "${TYPE1}";
-                    hiddenYear = (${curYear}+indexNo - 2);
-                } else if (2 == num) {
-                    colValue = (${curYear}+indexNo - 1) + "年";
-                    colName = "${TYPE2}";
-                    hiddenYear = (${curYear}+indexNo - 1);
-                } else if (3 == num) {
-                    if (indexNo % 2 == 0) {
-                        colValue = (${curYear}+parseInt((indexNo - 1) / 2)) + "年全年";
-                        hiddenYear = (${curYear}+parseInt((indexNo - 1) / 2));
-                        hiddenHalf = "qn";
-                    } else {
-                        colValue = (${curYear}+parseInt((indexNo - 1) / 2)) + "年上半年";
-                        hiddenYear = (${curYear}+parseInt((indexNo - 1) / 2));
-                        hiddenHalf = "sbn";
-                    }
-                    colName = "${TYPE3}";
-                } else if (4 == num) {
-                    colValue = "${curYear}年" + (${curMonth}+indexNo - 1) + "月";
-                    colName = "${TYPE4}";
-                    hiddenYear =${curYear};
-                    hiddenMonth = (${curMonth}+indexNo - 1);
-                }
-                //列的处理
-                var html1 = "<input type='text' class='input_text' style='text-align: center;' readonly name='time" + colName + indexNo + "' value='" + colValue + "'>";
-                html1 += "<input type='hidden' name='year" + colName + indexNo + "' value='" + hiddenYear + "'>";
-                html1 += "<input type='hidden' name='half" + colName + indexNo + "' value='" + hiddenHalf + "'>";
-                html1 += "<input type='hidden' name='index" + colName + "' value='" + indexNo + "'>";
-                var html2 = "<input type='text' class='input_text' name='cost" + colName + indexNo + "' value=''>";
-                var html3 = "<input type='text' class='input_text' name='czCostYbf" + colName + indexNo + "' value=''>";
-                html3 += "<input type='hidden' name='year" + colName + indexNo + "' value='" + hiddenYear + "'>";
-                html3 += "<input type='hidden' name='month" + colName + indexNo + "' value='" + hiddenMonth + "'>";
-                var html4 = "<input type='text' class='input_text' name='czCostYwc" + colName + indexNo + "' value=''>";
+            loadAjaxDataCallback(null, "${ctx}/projExtendCost/checkData.do?extendId=${bean.id}&num=" + num + "&type=" + hiddenType + "&year=" + hiddenYear + "&half=" + hiddenHalf + "&month=" + hiddenMonth, function callbackEvent(ret) {
+                var obj = eval("(" + ret + ")");
+                if (obj.success) {
+                    showInfoMsg(obj.title + msg);
+                } else {
+                    //列的处理
+                    var html1 = "<input type='text' class='input_text' style='text-align: center;' readonly name='time" + colName + rowIndex + "' value='" + colValue + "'>";
+                    html1 += "<input type='hidden' name='year" + colName + rowIndex + "' value='" + hiddenYear + "'>";
+                    html1 += "<input type='hidden' name='half" + colName + rowIndex + "' value='" + hiddenHalf + "'>";
+                    html1 += "<input type='hidden' name='index" + colName + "' value='" + rowIndex + "'>";
+                    var html2 = "<input type='text' class='input_text' name='cost" + colName + rowIndex + "' value=''>";
+                    var html3 = "<input type='text' class='input_text' name='czCostYbf" + colName + rowIndex + "' value=''>";
+                    html3 += "<input type='hidden' name='year" + colName + rowIndex + "' value='" + hiddenYear + "'>";
+                    html3 += "<input type='hidden' name='month" + colName + rowIndex + "' value='" + hiddenMonth + "'>";
+                    var html4 = "<input type='text' class='input_text' name='czCostYwc" + colName + rowIndex + "' value=''>";
+                    //列的个数
+                    for (var i = 0; i < colNum; i++) {
+                        var indexNo = document.getElementById("table" + num).rows.length - 2;
+                        objCell = objRow.insertCell(i);
+                        objCell.noWrap = "true";
+                        objCell.align = "center";
 
-                if (i == 0) {
-                    objCell.innerHTML = html1;
-                } else {
-                    objCell.innerHTML = ssa.cells[i].innerHTML;
-                }
-                if (4 == num) {
-                    if (i == 1) {
-                        objCell.innerHTML = html3;
-                    } else if (i == 2) {
-                        objCell.innerHTML = html4;
+                        if (i == 0) {
+                            objCell.innerHTML = html1;
+                        } else {
+                            objCell.innerHTML = ssa.cells[i].innerHTML;
+                        }
+                        if (4 == num) {
+                            if (i == 1) {
+                                objCell.innerHTML = html3;
+                            } else if (i == 2) {
+                                objCell.innerHTML = html4;
+                            }
+                        } else {
+                            if (i == 1) {
+                                objCell.innerHTML = html2;
+                            }
+                        }
                     }
-                } else {
-                    if (i == 1) {
-                        objCell.innerHTML = html2;
-                    }
                 }
-            }
+            });
         } else {
             if (confirm("确定要删除吗!")) {
                 var trObj = obj.parentNode.parentNode;
@@ -187,7 +196,7 @@
                     </td>
                     <td style="width: 30%;" align="center">
                         <input type="text" class="input_text" name="cost${TYPE1}${status1.index+1}"
-                               value="${type1.accComplete}" onchange="checkNumner(this)">
+                               value="${type1.accComplete}">
                     </td>
                     <td style="width: 5%;" align="center">
                         &nbsp;<input type='button' value='删除' class='button_select_remove'
@@ -200,7 +209,7 @@
                 <td style="width: 30%;" align="center"></td>
                 <td style="width: 5%;" align="center">
                     &nbsp;<input type='button' value='删除' class='button_select_remove'
-                                 onclick='addLine(this,1,"type1")'>
+                                 onclick='addLine(this,1,"${TYPE1}")'>
                 </td>
             </tr>
         </table>
@@ -229,7 +238,7 @@
                     </td>
                     <td style="width: 30%;" align="center">
                         <input type="text" class="input_text" name="cost${TYPE2}${status2.index+1}"
-                               value="${type2.accComplete}" onchange="checkNumner(this)">
+                               value="${type2.accComplete}">
                     </td>
                     <td style="width: 5%;" align="center">
                         &nbsp;<input type='button' value='删除' class='button_select_remove'
@@ -272,7 +281,7 @@
                     </td>
                     <td style="width: 30%;" align="center">
                         <input type="text" class="input_text" name="cost${TYPE3}${status3.index+1}"
-                               value="${type3.accComplete}" onchange="checkNumner(this)">
+                               value="${type3.accComplete}">
                     </td>
                     <td style="width: 5%;" align="center">
                         &nbsp;<input type='button' value='删除' class='button_select_remove'
@@ -316,11 +325,11 @@
                     </td>
                     <td style="width: 30%;" align="center">
                         <input type="text" class="input_text" name="czCostYbf${TYPE4}${status4.index+1}"
-                               value="${type4.czzjYbf}" onchange="checkNumner(this)">
+                               value="${type4.czzjYbf}">
                     </td>
                     <td style="width: 30%;" align="center">
                         <input type="text" class="input_text" name="czCostYwc${TYPE4}${status4.index+1}"
-                               value="${type4.czzjYwc}" onchange="checkNumner(this)">
+                               value="${type4.czzjYwc}">
                     </td>
                     <td style="width: 5%;" align="center">
                         &nbsp;<input type='button' value='删除' class='button_select_remove'
