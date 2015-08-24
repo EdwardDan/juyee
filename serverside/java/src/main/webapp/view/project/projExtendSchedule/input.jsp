@@ -133,7 +133,7 @@
             </tr></table>
 
             <c:forEach items="${bean.projExtendSchedules}" var="item">
-                <table cellpadding="0" cellspacing="0" border="1" class="table_rough_line"
+                <table cellpadding="0" cellspacing="0" border="1" class="table_thin_line"
                        style="text-align: center;width: 98%;">
                 <tr class="tr_light">
                     <td width="15%" rowspan="4">
@@ -144,7 +144,7 @@
                     </td>
                     <td width="20%">项目进展情况</td>
                     <td width="60%">
-                        <textarea  name="projProgress" class="input">${item.projProgress} </textarea>
+                        <textarea  name="projProgress" class="input">${item.projProgress}</textarea>
                     </td>
                     <td width="5%" rowspan="4">
                         <input type="button" value="删除" class="button_select_remove"
@@ -153,17 +153,17 @@
                 </tr>
                 <tr class="tr_light">
                     <td> 存在问题</td>
-                    <td>   <textarea  name="question" class="input">${item.question} </textarea>
+                    <td>   <textarea  name="question" class="input">${item.question}</textarea>
                     </td>
                 </tr>
                 <tr class="tr_light">
                     <td>改进意见</td>
-                    <td>  <textarea  name="improveOpinion" class="input">${item.improveOpinion} </textarea>
+                    <td>  <textarea  name="improveOpinion" class="input">${item.improveOpinion}</textarea>
                     </td>
                 </tr>
                 <tr class="tr_light">
                     <td> 备注</td>
-                    <td>  <textarea  name="description" class="input">${item.description} </textarea>
+                    <td>  <textarea  name="description" class="input">${item.description}</textarea>
                     </td>
                 </tr>
                 </table>
@@ -171,7 +171,7 @@
 
         <div id="tablesDiv"></div>
         <div id="hiddenStyle" style="display: none">
-            <table cellpadding="0" cellspacing="0" border="1" class="table_rough_line"
+            <table cellpadding="0" cellspacing="0" border="1" class="table_thin_line"
                    style="text-align: center;width: 98%;">
                 <tr class="tr_light">
                     <td width="15%" rowspan="4">
@@ -192,20 +192,20 @@
                 <tr class="tr_light">
                     <td> 存在问题</td>
                     <td>
-                        <textarea  name="question" class="input"> </textarea>
+                        <textarea  name="question" class="input"></textarea>
                     </td>
                 </tr>
                 <tr class="tr_light">
                     <td>改进意见</td>
                     <td>
-                        <textarea  name="improveOpinion" class="input"> </textarea>
+                        <textarea  name="improveOpinion" class="input"></textarea>
 
                     </td>
                 </tr>
                 <tr class="tr_light">
                     <td> 备注</td>
                     <td>
-                        <textarea  name="description" class="input"> </textarea>
+                        <textarea  name="description" class="input"></textarea>
 
                     </td>
                 </tr>
