@@ -14,7 +14,7 @@
     });
 
     //保存操作
-    function save(btn) {
+    function save(btn, msg) {
         if (!validateForm(formId)) {
             return;
         }
@@ -134,10 +134,32 @@
                     }
                 }
             });
-        } else {
-            if (confirm("确定要删除吗!")) {
-                var trObj = obj.parentNode.parentNode;
-                trObj.parentElement.deleteRow(trObj.rowIndex);
+        }
+    }
+    function deleteLine(obj, year, month, half, num) {
+        var currYear =${curYear};
+        var currMonth =${curMonth};
+        if (1 == num) {
+            currYear = ${curYear}-1;
+        }
+        var trObj = obj.parentNode.parentNode;
+        if (1 == num || 2 == num || 3 == num) {
+            if (year == currYear) {
+                if (confirm("确定要删除吗!")) {
+                    trObj.parentElement.removeChild(trObj);
+                }
+//                save(document.getElementById("save"), 'delete');
+            } else {
+                showErrorMsg("历史数据不能删！");
+            }
+        } else if (4 == num) {
+            if (year == currYear && month == currMonth) {
+                if (confirm("确定要删除吗!")) {
+                    trObj.parentElement.removeChild(trObj);
+                }
+//                save(document.getElementById("save"), 'delete');
+            } else {
+                showErrorMsg("历史数据不能删！");
             }
         }
     }
@@ -200,7 +222,7 @@
                     </td>
                     <td style="width: 5%;" align="center">
                         &nbsp;<input type='button' value='删除' class='button_select_remove'
-                                     onclick='addLine(this,1,"${TYPE1}")'>
+                                     onclick='deleteLine(this,"${type1.year}","","",1)'>
                     </td>
                 </tr>
             </c:forEach>
@@ -209,7 +231,7 @@
                 <td style="width: 30%;" align="center"></td>
                 <td style="width: 5%;" align="center">
                     &nbsp;<input type='button' value='删除' class='button_select_remove'
-                                 onclick='addLine(this,1,"${TYPE1}")'>
+                                 onclick='deleteLine(this,"${curYear-1}","","",1)'>
                 </td>
             </tr>
         </table>
@@ -242,7 +264,7 @@
                     </td>
                     <td style="width: 5%;" align="center">
                         &nbsp;<input type='button' value='删除' class='button_select_remove'
-                                     onclick='addLine(this,2,"${TYPE2}")'>
+                                     onclick='deleteLine(this,"${type2.year}","","",2)'>
                     </td>
                 </tr>
             </c:forEach>
@@ -251,7 +273,7 @@
                 <td style="width: 30%;" align="center"></td>
                 <td style="width: 5%;" align="center">
                     &nbsp;<input type='button' value='删除' class='button_select_remove'
-                                 onclick='addLine(this,2,"${TYPE2}")'>
+                                 onclick='deleteLine(this,"${curYear}","","",2)'>
                 </td>
             </tr>
         </table>
@@ -285,7 +307,7 @@
                     </td>
                     <td style="width: 5%;" align="center">
                         &nbsp;<input type='button' value='删除' class='button_select_remove'
-                                     onclick='addLine(this,3,"${TYPE3}")'>
+                                     onclick='deleteLine(this,"${type3.year}","","${type3.half}",3)'>
                     </td>
                 </tr>
             </c:forEach>
@@ -294,7 +316,7 @@
                 <td style="width: 30%;" align="center"></td>
                 <td style="width: 5%;" align="center">
                     &nbsp;<input type='button' value='删除' class='button_select_remove'
-                                 onclick='addLine(this,3,"${TYPE3}")'>
+                                 onclick='deleteLine(this,"${curYear}","","",3)'>
                 </td>
             </tr>
         </table>
@@ -333,7 +355,7 @@
                     </td>
                     <td style="width: 5%;" align="center">
                         &nbsp;<input type='button' value='删除' class='button_select_remove'
-                                     onclick='addLine(this,4,"${TYPE4}")'>
+                                     onclick='deleteLine(this,"${type4.year}","${type4.month}","",4)'>
                     </td>
                 </tr>
             </c:forEach>
@@ -343,7 +365,7 @@
                 <td style="width: 75%;" align="center"></td>
                 <td style="width: 5%;" align="center">
                     &nbsp;<input type='button' value='删除' class='button_select_remove'
-                                 onclick='addLine(this,4,"${TYPE4}")'>
+                                 onclick='deleteLine(this,"${curYear}","${curMonth}","",4)'>
                 </td>
             </tr>
         </table>

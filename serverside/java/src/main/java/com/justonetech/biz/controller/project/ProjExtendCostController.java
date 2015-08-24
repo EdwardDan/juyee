@@ -229,7 +229,7 @@ public class ProjExtendCostController extends BaseCRUDActionController<ProjExten
      */
     @SuppressWarnings("unchecked")
     @RequestMapping
-    public void save(HttpServletResponse response, @ModelAttribute("bean") ProjExtend entity, HttpServletRequest request) throws Exception {
+    public void save(HttpServletResponse response, @ModelAttribute("bean") ProjExtend entity, HttpServletRequest request, String msg) throws Exception {
         try {
             ProjExtend target;
             if (entity.getId() != null) {
