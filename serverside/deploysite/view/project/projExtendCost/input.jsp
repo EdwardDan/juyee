@@ -102,11 +102,11 @@
                 html1 += "<input type='hidden' name='year" + colName + indexNo + "' value='" + hiddenYear + "'>";
                 html1 += "<input type='hidden' name='half" + colName + indexNo + "' value='" + hiddenHalf + "'>";
                 html1 += "<input type='hidden' name='index" + colName + "' value='" + indexNo + "'>";
-                var html2 = "<input type='text' class='input_text' name='cost" + colName + indexNo + "' value='' onchange='" + checkNumner(this) + "'>";
-                var html3 = "<input type='text' class='input_text' name='czCostYbf" + colName + indexNo + "' value='' onchange='" + checkNumner(this) + "'>";
+                var html2 = "<input type='text' class='input_text' name='cost" + colName + indexNo + "' value=''>";
+                var html3 = "<input type='text' class='input_text' name='czCostYbf" + colName + indexNo + "' value=''>";
                 html3 += "<input type='hidden' name='year" + colName + indexNo + "' value='" + hiddenYear + "'>";
                 html3 += "<input type='hidden' name='month" + colName + indexNo + "' value='" + hiddenMonth + "'>";
-                var html4 = "<input type='text' class='input_text' name='czCostYwc" + colName + indexNo + "' value='' onchange='" + checkNumner(this) + "'>";
+                var html4 = "<input type='text' class='input_text' name='czCostYwc" + colName + indexNo + "' value=''>";
 
                 if (i == 0) {
                     objCell.innerHTML = html1;
