@@ -162,7 +162,13 @@ public class ProjInfoController extends BaseCRUDActionController<ProjInfo> {
 
         modelStatus(model);
         model.addAttribute("bean", projInfo);
-        model.addAttribute("areas", projInfo.getBelongAreaNames());
+        String[] splitArea = projInfo.getBelongAreaNames().split(",");
+        ArrayList<String> areaList = new ArrayList<String>();
+        for (String s : splitArea) {
+            areaList.add(s);
+        }
+        model.addAttribute("areas",areaList);
+//        model.addAttribute("areas", projInfo.getBelongAreaNames());
         model.addAttribute("isTab", isTab);
 
         return "view/project/projInfo/view";
