@@ -6,12 +6,12 @@
 <div class="form_div">
     <table cellpadding="0" cellspacing="0" class="form_table">
         <tr class="tr_dark">
-            <td class="form_label_right" style="width: 10%">年份：</td>
-            <td class="form_content">
+            <td class="form_label_right" style="width: 15%">年份：</td>
+            <td class="form_content" style="width: 35%">
                 ${bean.year}
             </td>
-            <td class="form_label_right">项目序号：</td>
-            <td class="form_content" colspan="3">
+            <td class="form_label_right" style="width: 15%">项目序号：</td>
+            <td class="form_content" style="width: 35%">
                 ${bean.no}
             </td>
         </tr>
@@ -86,8 +86,9 @@
         <tr class="tr_light">
             <td class="form_label_right">涉及区（县）：</td>
             <td class="form_content" colspan="3">
-                <sys:checkbox name="ProjBelongArea" code="ProjBelongArea" checkedNames="${areas}"
-                              inputType="checkbox" isSaveName="false" showType="view" colNum="9"/>
+                <c:forEach var="area" items="${areas}"><input type="checkbox" name="ProjBelongArea" value="${area}" checked disabled/>${area}</c:forEach>
+                <%--<sys:checkbox name="ProjBelongArea" code="ProjBelongArea" checkedNames="${areas}"--%>
+                              <%--inputType="checkbox" isSaveName="false" showType="view" colNum="9"/>--%>
             </td>
 
         </tr>
@@ -101,16 +102,16 @@
     </table>
     <table cellpadding="0" cellspacing="0" class="form_table">
         <tr class="tr_light">
-            <td class="form_label_right" style="width: 10%">建设单位：</td>
-            <td class="form_content" style="width: 23%">
+            <td class="form_label_right" style="width: 15%">建设单位：</td>
+            <td class="form_content" style="width: 25%">
                 ${bean.jsDept}
             </td>
-            <td class="form_label_right">联系人：</td>
-            <td class="form_content" style="width: 23%">
+            <td class="form_label_right" style="width: 10%">联系人：</td>
+            <td class="form_content" style="width: 20%">
                 ${bean.jsDeptPerson}
             </td>
-            <td class="form_label_right">联系电话：</td>
-            <td class="form_content" style="width: 23%">
+            <td class="form_label_right" style="width: 10%">联系电话：</td>
+            <td class="form_content" style="width: 20%">
                 ${bean.jsDeptTel}
             </td>
         </tr>
@@ -162,7 +163,9 @@
         </tr>
         <tr class="tr_button">
             <td class="form_content" colspan="6" style="text-align: center">
-                <input type="button" value="关闭" class="button_cancel" onclick="<c:if test="${!isTab}">closeWindow()</c:if><c:if test="${isTab}">parent.closeWindow()</c:if>">
+                <input type="button" value="关闭" class="button_cancel" onclick="
+                <c:if test="${!isTab}">closeWindow()</c:if>
+                <c:if test="${isTab}">parent.closeWindow()</c:if>">
             </td>
         </tr>
     </table>
