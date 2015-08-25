@@ -1,0 +1,104 @@
+drop table OA_MEETING cascade constraints;
+
+/*==============================================================*/
+/* Table: OA_MEETING                                            */
+/*==============================================================*/
+create table OA_MEETING 
+(
+   ID                   NUMBER(10)           not null,
+   APPLY_DEPT           VARCHAR2(100 CHAR),
+   APPLY_PERSON         VARCHAR2(50 CHAR),
+   ROOM_ID              NUMBER(10),
+   ROOM_DESC            VARCHAR2(500 CHAR),
+   USE_DATE             DATE,
+   USE_TIME             VARCHAR2(20 CHAR),
+   PERSON_NUM           NUMBER(4),
+   OUTER_PERSONS        VARCHAR2(200 CHAR),
+   TITLE                VARCHAR2(200 CHAR),
+   CONTENT              VARCHAR2(2000 CHAR),
+   INNER_PERSONS        varchar2(2000 char),
+   DOC_ID               number(10),
+   DESCRIPTION          VARCHAR2(500 CHAR),
+   STATUS               NUMBER(2)            default 0,
+   AUDIT_OPINION        VARCHAR2(1000 CHAR),
+   AUDIT_TIME           DATE,
+   AUDIT_USER           VARCHAR2(100),
+   CREATE_TIME          DATE,
+   CREATE_USER          VARCHAR2(100),
+   UPDATE_TIME          DATE,
+   UPDATE_USER          VARCHAR2(100),
+   constraint PK_OA_MEETING primary key (ID),
+   constraint FK_OA_MEETING_DOC foreign key (DOC_ID)
+         references DOC_DOCUMENT (ID),
+   constraint FK_OA_MEETING_ROOM foreign key (ROOM_ID)
+         references SYS_CODE_DETAIL (ID)
+);
+
+comment on table OA_MEETING is
+'会议管理';
+
+comment on column OA_MEETING.ID is
+'ID';
+
+comment on column OA_MEETING.APPLY_DEPT is
+'申请部门名称';
+
+comment on column OA_MEETING.APPLY_PERSON is
+'申请人';
+
+comment on column OA_MEETING.ROOM_ID is
+'申请会议室ID';
+
+comment on column OA_MEETING.ROOM_DESC is
+'申请会议室中文描述';
+
+comment on column OA_MEETING.USE_DATE is
+'会议召开时间';
+
+comment on column OA_MEETING.USE_TIME is
+'会议召开时间上下午';
+
+comment on column OA_MEETING.PERSON_NUM is
+'预计参与人数';
+
+comment on column OA_MEETING.OUTER_PERSONS is
+'外部人员';
+
+comment on column OA_MEETING.TITLE is
+'会议主题';
+
+comment on column OA_MEETING.CONTENT is
+'会议内容';
+
+comment on column OA_MEETING.INNER_PERSONS is
+'内部人员';
+
+comment on column OA_MEETING.DOC_ID is
+'附件ID';
+
+comment on column OA_MEETING.DESCRIPTION is
+'备注';
+
+comment on column OA_MEETING.STATUS is
+'状态';
+
+comment on column OA_MEETING.AUDIT_OPINION is
+'审核意见';
+
+comment on column OA_MEETING.AUDIT_TIME is
+'审核时间';
+
+comment on column OA_MEETING.AUDIT_USER is
+'审核用户名';
+
+comment on column OA_MEETING.CREATE_TIME is
+'创建时间';
+
+comment on column OA_MEETING.CREATE_USER is
+'创建用户名';
+
+comment on column OA_MEETING.UPDATE_TIME is
+'更新时间';
+
+comment on column OA_MEETING.UPDATE_USER is
+'更新用户名';
