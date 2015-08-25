@@ -100,7 +100,7 @@
                         <option value="0">上海市</option>
                         <c:forEach var="area" items="${areaList}">
                             <option value="${area.id}"
-                                    <c:if test="${bean.areaCode==area.code}">selected </c:if>>${area.name}</option>
+                                    <c:if test="${bean.areaCode==area.name}">selected </c:if>>${area.name}</option>
                         </c:forEach>
                     </select>
                 </td>
