@@ -4,7 +4,7 @@
     $(function () {
         $("#myTable").chromatable({
             width: "100%", // specify 100%, auto, or a fixed pixel amount
-            height: "350px",
+            height: "600px",
             scrolling: "yes" // must have the jquery-1.3.2.min.js script installed to use
         });
     });
@@ -13,8 +13,8 @@
     <tr class="tr_light">
         <td align="left" nowrap>&nbsp;
             ${year}年度项目推进汇总
-            <%--&nbsp;<input type="button" value="导出" class="button_all" onclick="printStageData(this)"/>--%>
-            &nbsp; <input type="button" value="关闭" class="button_cancel" onclick="closeWindow()">
+            &nbsp;<input type="button" value="导出" class="button_all" onclick="printProjectData(this)"/>
+            <%--&nbsp; <input type="button" value="关闭" class="button_cancel" onclick="closeWindow()">--%>
         </td>
 </table>
 <table cellpadding="0" cellspacing="0" border="1" class="table_thin_line" id="myTable">
@@ -53,16 +53,16 @@
     <tbody>
     <c:forEach items="${projects}" var="projInfo" varStatus="projIndex">
         <tr class="tr_light">
-            <c:set var="gkpf" value="${projInfo.id}gk"/>
-            <c:set var="cspf" value="${projInfo.id}ch"/>
+            <c:set var="gctxGkpfTotal" value="${projInfo.id}gkpf"/>
+            <c:set var="gctxCspfTotal" value="${projInfo.id}cspf"/>
             <c:set var="type1" value="${projInfo.id}${key1}"/>
             <c:set var="type2" value="${projInfo.id}${key2}"/>
             <c:set var="type3_1" value="${projInfo.id}${key3_1}"/>
             <c:set var="type3_2" value="${projInfo.id}${key3_2}"/>
-            <c:set var="xmjys" value="${projInfo.id}xm"/>
-            <c:set var="gk1" value="${projInfo.id}gk"/>
-            <c:set var="cbsj" value="${projInfo.id}cb"/>
-            <c:set var="cost" value="${projInfo.id}zjly"/>
+            <c:set var="gctxSourceFund" value="${projInfo.id}zjly"/>
+            <c:set var="xmjysTime" value="${projInfo.id}xm"/>
+            <c:set var="gkTime" value="${projInfo.id}gk"/>
+            <c:set var="cbsjTime" value="${projInfo.id}cb"/>
             <c:set var="beginTime" value="${projInfo.id}begin"/>
             <c:set var="endTime" value="${projInfo.id}end"/>
             <c:set var="areaCode" value="${projInfo.id}area"/>
@@ -77,16 +77,16 @@
             <td><sys:toHtml>${projInfo.function}</sys:toHtml></td>
             <td><sys:toHtml>${projInfo.engineerRange}</sys:toHtml></td>
             <td>${projInfo.mainContent}</td>
-            <td>${dataMap[gkpf]}</td>
-            <td>${dataMap[cspf]}</td>
+            <td>${dataMap[gctxGkpfTotal]}</td>
+            <td>${dataMap[gctxCspfTotal]}</td>
             <td>${dataMap[type1]}</td>
             <td>${dataMap[type2]}</td>
             <td>${dataMap[type3_1]}</td>
             <td>${dataMap[type3_2]}</td>
-            <td>${dataMap[cost]}</td>
-            <td>${dataMap[xmjys]}</td>
-            <td>${dataMap[gk1]}</td>
-            <td>${dataMap[cbsj]}</td>
+            <td>${dataMap[gctxSourceFund]}</td>
+            <td>${dataMap[xmjysTime]}</td>
+            <td>${dataMap[gkTime]}</td>
+            <td>${dataMap[cbsjTime]}</td>
             <td>${dataMap[beginTime]}</td>
             <td>${dataMap[endTime]}</td>
             <td>${dataMap[areaCode]}</td>

@@ -22,16 +22,10 @@
         document.getElementById("btnQueryAll").disabled = flag;
     }
 
-    //选择阶段
-    function selectStage(btn) {
-        var str = getCondStr();
-        openNewWindow('selectStageDiv', '选择阶段', "${ctx}/projectQueryStage/selectStage.do?id=${id}&month=" + last_m + "&" + str, false, 600, 450);
-    }
-
     //导出
-    function printStageData(btn) {
+    function printProjectData(btn) {
         var str = getCondStr();
-        window.open("${ctx}/projectQueryStage/printExcel.do?" + str);
+        window.open("${ctx}/projectQueryProject/printExcel.do?" + str);
     }
 
     function getCondStr() {
@@ -100,7 +94,7 @@
                 <sys:code code="${PROJ_INFO_PROPERTY}" name="propertyId" id="propertyId" type="select"
                           sysCodeDetailId="" style="width:155px" isAlowedNull="true"/>
                 <select name="isMajor" id="isMajor" style="width: 100px">
-                    <option value="">==请选择==</option>
+                    <option value="">请选择</option>
                     <option value="1">重大</option>
                     <option value="0">非重大</option>
                 </select>
@@ -118,8 +112,12 @@
             </td>
             <td align="right" width="70" nowrap>区县：</td>
             <td align="left" nowrap>
-                <sys:code code="${PROJ_INFO_BELONG_AREA}" name="areaId" id="areaId" type="select"
-                          sysCodeDetailId="" style="width:155px" isAlowedNull="true"/>
+                <select name="areaId" id="areaId">
+                    <option value="0">上海市</option>
+                    <c:forEach var="area" items="${areaList}">
+                        <option value="${area.id}">${area.name}</option>
+                    </c:forEach>
+                </select>
             </td>
             <td align="left" nowrap colspan="4">&nbsp;
                 <input type="button" value="查询" id="btnQueryThis" class="button_all" onclick="loadProjectData(null)"/>
@@ -131,7 +129,7 @@
     </table>
     <table cellpadding="0" cellspacing="0" class="form_table">
         <tr class="tr_light">
-            <td id="projectDataDiv">
+            <td id="projectDataDiv" style="overflow: auto;">
                 &nbsp;
             </td>
         </tr>

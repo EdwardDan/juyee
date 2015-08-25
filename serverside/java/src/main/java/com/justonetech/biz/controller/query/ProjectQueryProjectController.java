@@ -1,13 +1,18 @@
 package com.justonetech.biz.controller.query;
 
-import com.justonetech.biz.daoservice.*;
-import com.justonetech.biz.domain.*;
-import com.justonetech.biz.manager.DocumentManager;
+import com.justonetech.biz.daoservice.ProjExtendCostService;
+import com.justonetech.biz.daoservice.ProjExtendScheduleService;
+import com.justonetech.biz.daoservice.ProjInfoService;
+import com.justonetech.biz.domain.ProjExtend;
+import com.justonetech.biz.domain.ProjExtendCost;
+import com.justonetech.biz.domain.ProjExtendSchedule;
+import com.justonetech.biz.domain.ProjInfo;
 import com.justonetech.biz.utils.Constants;
 import com.justonetech.biz.utils.enums.ProjExtendCostType;
 import com.justonetech.core.utils.DateTimeHelper;
 import com.justonetech.core.utils.JspHelper;
 import com.justonetech.core.utils.StringHelper;
+import com.justonetech.system.domain.SysCodeDetail;
 import com.justonetech.system.manager.ExcelPrintManager;
 import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
@@ -38,9 +43,6 @@ public class ProjectQueryProjectController {
     private SysCodeManager sysCodeManager;
 
     @Autowired
-    private DocumentManager documentManager;
-
-    @Autowired
     private ProjInfoService projInfoService;
 
     @Autowired
@@ -48,18 +50,6 @@ public class ProjectQueryProjectController {
 
     @Autowired
     private ProjExtendScheduleService projExtendScheduleService;
-
-    @Autowired
-    private ProjBidService projBidService;
-
-    @Autowired
-    private ProjStageService projStageService;
-
-    @Autowired
-    private DataStageReportItemService dataStageReportItemService;
-
-    @Autowired
-    private DataStageReportDocService dataStageReportDocService;
 
     @Autowired
     private ExcelPrintManager excelPrintManager;
@@ -79,7 +69,8 @@ public class ProjectQueryProjectController {
         model.addAttribute("yearOptions", DateTimeHelper.getYearSelectOptions(String.valueOf(c.get(Calendar.YEAR))));
         model.addAttribute("currentYear", c.get(Calendar.YEAR));
         model.addAttribute("PROJ_INFO_CATEGORY", Constants.PROJ_INFO_CATEGORY);
-        model.addAttribute("PROJ_INFO_BELONG_AREA", Constants.PROJ_INFO_BELONG_AREA);
+        List<SysCodeDetail> areaList = sysCodeManager.getCodeListByCode(Constants.PROJ_INFO_BELONG_AREA);
+        model.addAttribute("areaList", areaList);
         model.addAttribute("PROJ_INFO_PROPERTY", Constants.PROJ_INFO_PROPERTY);
 
         return "view/query/projectQueryProject/viewProject";
@@ -122,8 +113,8 @@ public class ProjectQueryProjectController {
         if (!StringHelper.isEmpty(categoryId)) {
             conditionHql += " and category.id=" + categoryId;
         }
-        if (!StringHelper.isEmpty(areaId)) {
-            conditionHql += " and areaCode='" + sysCodeManager.getCodeListById(Long.valueOf(areaId)).getCode() + "'";
+        if (!StringHelper.isEmpty(areaId) && !"0".equals(areaId)) {
+            conditionHql += " and areaCode='" + sysCodeManager.getCodeListById(Long.valueOf(areaId)).getName() + "'";
         }
         List<ProjInfo> projInfos = projInfoService.findByQuery(conditionHql + " order by no asc,id asc");
         model.addAttribute("projects", projInfos);
@@ -136,25 +127,22 @@ public class ProjectQueryProjectController {
 //        System.out.println("hqlCost = " + hqlCost);
         List<ProjExtendCost> costList = projExtendCostService.findByQuery(hqlCost);
 
-        Calendar c = Calendar.getInstance();
         String key1 = (JspHelper.getInteger(year) - 1) + "_" + ProjExtendCostType.EXTEND_TYPE_1.getCode();
         String key2 = year + "_" + ProjExtendCostType.EXTEND_TYPE_2.getCode();
         String key3_1 = year + "sbn" + "_" + ProjExtendCostType.EXTEND_TYPE_3.getCode();
         String key3_2 = year + "qn" + "_" + ProjExtendCostType.EXTEND_TYPE_3.getCode();
-        String key4 = year + "_" + (c.get(Calendar.MONTH) + 1) + "_" + ProjExtendCostType.EXTEND_TYPE_4.getCode();
         model.addAttribute("key1", key1);
         model.addAttribute("key2", key2);
         model.addAttribute("key3_1", key3_1);
         model.addAttribute("key3_2", key3_2);
-        model.addAttribute("key4", key4);
         //填报数据
         Map<String, Object> dataMap = new HashMap<String, Object>();
         if (null != costList && costList.size() > 0) {
             for (ProjExtendCost cost : costList) {
                 ProjExtend projExtend = cost.getProjExtend();
                 Long projectId = projExtend.getProject().getId();
-                dataMap.put(projectId + "cs", projExtend.getGctxCspfTotal());
-                dataMap.put(projectId + "gk", projExtend.getGctxGkpfTotal());
+                dataMap.put(projectId + "cspf", projExtend.getGctxCspfTotal());
+                dataMap.put(projectId + "gkpf", projExtend.getGctxGkpfTotal());
                 dataMap.put(projectId + "zjly", projExtend.getGctxSourceFund());
                 List<ProjExtendCost> type1 = getCostByType(ProjExtendCostType.EXTEND_TYPE_1.getCode(), projExtend.getId());
                 if (null != type1 && type1.size() > 0) {
@@ -186,8 +174,8 @@ public class ProjectQueryProjectController {
                 dataMap.put(projectId + "cb", projExtend.getPlanCbsjTime());
                 dataMap.put(projectId + "gk", projExtend.getPlanGkTime());
                 dataMap.put(projectId + "xm", projExtend.getPlanXmjysTime());
-                dataMap.put(projectId + "beginTime", projExtend.getGcjsBeginTime());
-                dataMap.put(projectId + "endTime", projExtend.getGcjsEndTime());
+                dataMap.put(projectId + "begin", projExtend.getGcjsBeginTime());
+                dataMap.put(projectId + "end", projExtend.getGcjsEndTime());
                 dataMap.put(projectId + "area", projExtend.getProject().getAreaCode());
                 List<ProjExtendSchedule> scheduleList = projExtendScheduleService.findByQuery("from ProjExtendSchedule where projExtend.id=" + projExtend.getId() + "  order by year ,month desc");
                 if (null != scheduleList && scheduleList.size() > 0) {
@@ -243,18 +231,79 @@ public class ProjectQueryProjectController {
         if (!StringHelper.isEmpty(categoryId)) {
             conditionHql += " and category.id=" + categoryId;
         }
-        if (!StringHelper.isEmpty(areaId)) {
-            System.out.println("sysCodeManager.getCodeListById(Long.valueOf(areaId)).getCode()\\ = " + sysCodeManager.getCodeListById(Long.valueOf(areaId)).getCode());
-            conditionHql += " and areaCode='" + sysCodeManager.getCodeListById(Long.valueOf(areaId)).getCode() + "'";
+        if (!StringHelper.isEmpty(areaId) && !"0".equals(areaId)) {
+            conditionHql += " and areaCode='" + sysCodeManager.getCodeListById(Long.valueOf(areaId)).getName() + "'";
         }
-        System.out.println("conditionHql = " + conditionHql);
         List<ProjInfo> projInfos = projInfoService.findByQuery(conditionHql + " order by no asc,id asc");
+        beans.put("projects", projInfos);
 
         //用于数据过滤
         conditionHql = "select id " + conditionHql;
-        Map<String, Object> mergeMap = new HashMap<String, Object>();
+        //工程投资情况
+        String hqlCost = "from ProjExtendCost where projExtend.project.id in (" + conditionHql + ")";
+        List<ProjExtendCost> costList = projExtendCostService.findByQuery(hqlCost);
 
-        excelPrintManager.printExcel(response, request, DataStageReport.class.getSimpleName(), xlsTemplateName, beans, fileName, mergeMap);
+        String key1 = (JspHelper.getInteger(year) - 1) + "_" + ProjExtendCostType.EXTEND_TYPE_1.getCode();
+        String key2 = year + "_" + ProjExtendCostType.EXTEND_TYPE_2.getCode();
+        String key3_1 = year + "sbn" + "_" + ProjExtendCostType.EXTEND_TYPE_3.getCode();
+        String key3_2 = year + "qn" + "_" + ProjExtendCostType.EXTEND_TYPE_3.getCode();
+        beans.put("key1", key1);
+        beans.put("key2", key2);
+        beans.put("key3_1", key3_1);
+        beans.put("key3_2", key3_2);
+        //填报数据
+        Map<String, Object> dataMap = new HashMap<String, Object>();
+        if (null != costList && costList.size() > 0) {
+            for (ProjExtendCost cost : costList) {
+                ProjExtend projExtend = cost.getProjExtend();
+                Long projectId = projExtend.getProject().getId();
+                dataMap.put(projectId + "cspf", projExtend.getGctxCspfTotal());
+                dataMap.put(projectId + "gkpf", projExtend.getGctxGkpfTotal());
+                dataMap.put(projectId + "zjly", projExtend.getGctxSourceFund());
+                List<ProjExtendCost> type1 = getCostByType(ProjExtendCostType.EXTEND_TYPE_1.getCode(), projExtend.getId());
+                if (null != type1 && type1.size() > 0) {
+                    dataMap.put(projectId + key1, type1.iterator().next().getAccComplete());
+                } else {
+                    dataMap.put(projectId + key1, "");
+                }
+
+                List<ProjExtendCost> type2 = getCostByType(ProjExtendCostType.EXTEND_TYPE_2.getCode(), projExtend.getId());
+                if (null != type2 && type2.size() > 0) {
+                    dataMap.put(projectId + key2, type2.iterator().next().getAccComplete());
+                } else {
+                    dataMap.put(projectId + key2, "");
+                }
+
+                List<ProjExtendCost> type3_1 = getCostByType(ProjExtendCostType.EXTEND_TYPE_3.getCode(), projExtend.getId());
+                if (null != type3_1 && type3_1.size() > 0) {
+                    dataMap.put(projectId + key3_1, type3_1.iterator().next().getAccComplete());
+                } else {
+                    dataMap.put(projectId + key3_1, "");
+                }
+
+                List<ProjExtendCost> type3_2 = getCostByType(ProjExtendCostType.EXTEND_TYPE_3.getCode(), projExtend.getId());
+                if (null != type3_2 && type3_2.size() > 0) {
+                    dataMap.put(projectId + key3_2, type3_2.iterator().next().getAccComplete());
+                } else {
+                    dataMap.put(projectId + key3_2, "");
+                }
+                dataMap.put(projectId + "cb", projExtend.getPlanCbsjTime());
+                dataMap.put(projectId + "gk", projExtend.getPlanGkTime());
+                dataMap.put(projectId + "xm", projExtend.getPlanXmjysTime());
+                dataMap.put(projectId + "begin", projExtend.getGcjsBeginTime());
+                dataMap.put(projectId + "end", projExtend.getGcjsEndTime());
+                dataMap.put(projectId + "area", projExtend.getProject().getAreaCode());
+                List<ProjExtendSchedule> scheduleList = projExtendScheduleService.findByQuery("from ProjExtendSchedule where projExtend.id=" + projExtend.getId() + "  order by year ,month desc");
+                if (null != scheduleList && scheduleList.size() > 0) {
+                    dataMap.put(projectId + "progress", scheduleList.iterator().next().getProjProgress());
+                    dataMap.put(projectId + "question", scheduleList.iterator().next().getQuestion());
+                    dataMap.put(projectId + "opinion", scheduleList.iterator().next().getImproveOpinion());
+                }
+            }
+        }
+        beans.put("dataMap", dataMap);
+
+        excelPrintManager.printExcel(response, request, ProjExtendCost.class.getSimpleName(), xlsTemplateName, beans, fileName);
     }
 
     /**

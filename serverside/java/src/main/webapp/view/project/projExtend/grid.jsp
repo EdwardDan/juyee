@@ -40,9 +40,13 @@
                         opButton += '<input type="button" value="填报" onclick="doEdit(' + id + ')" class="button_normal"/> ';
                         opButton += '<input type="button" value="删除" onclick="doDelete(' + id + ')" class="button_normal"/>';
                         </c:if>
-                        if (stageName == '在建' || stageName == '未开工') {
+                        if (stageName == '未开工') {
                             //判断项目阶段的高亮显示（删除列时注意修改）
                             $("#" + id).find("td:eq(6)").css("background-color", "red");
+                        } else if (stageName == '在建') {
+                            $("#" + id).find("td:eq(6)").css("background-color", "blue");
+                        } else if (stageName == '已完工') {
+                            $("#" + id).find("td:eq(6)").css("background-color", "green");
                         }
                         jQuery("#listGrid").jqGrid('setRowData', ids[i], { operation: opButton});
                     }
