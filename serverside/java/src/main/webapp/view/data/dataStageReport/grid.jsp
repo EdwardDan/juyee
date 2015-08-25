@@ -35,9 +35,14 @@
                         var id = ids[i];
                         var rowData = jQuery("#listGrid").jqGrid('getRowData', id);
                         var bidCountOfStage = rowData["bidCountOfStage"];
+                        var stageName = rowData["stage.name"];
 //                        var opButton = '<input type="button" value="查看" onclick="doView(' + id + ',' + bidCountOfStage + ')" class="button_normal" /> ';
                         var opButton = '<input type="button" value="办证推进" onclick="doEditBzjd(' + id + ',' + bidCountOfStage + ')" class="button_normal_long" /> ';
                         opButton += '<input type="button" value="形象进度" onclick="doEditXxjd(' + id + ')" class="button_normal_long" /> ';
+                        if (stageName == '在建' || stageName == '未开工') {
+                            //判断项目阶段的高亮显示（删除列时注意修改）
+                            $("#" + id).find("td:eq(5)").css("background-color", "red");
+                        }
                         jQuery("#listGrid").jqGrid('setRowData', ids[i], { operation: opButton});
                     }
                 }, rownumbers: true
