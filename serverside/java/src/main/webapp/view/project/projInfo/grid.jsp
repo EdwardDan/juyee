@@ -6,7 +6,7 @@
             gridOpts: {
                 url: "${ctx}/projInfo/gridDataCustom.do",
                 colNames: ['ID',
-                    '开始年份',
+                    '填报年份',
                     '项目序号',
                     '项目名称',
                     '管理属性',
@@ -48,7 +48,7 @@
             },
             userOpts: {
                 defaultQuery: { "groupOp": "AND", "rules": [
-                    { "field": "开始年份", "op": "eq", "data": ""},
+                    { "field": "填报年份", "op": "eq", "data": ""},
                     { "field": "项目序号", "op": "cn", "data": ""},
                     { "field": "项目名称", "op": "cn", "data": ""},
                     { "field": "管理属性", "op": "cn", "data": ""},
