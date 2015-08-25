@@ -64,7 +64,21 @@
             }
         }
     }
+    //放置特殊标记
+    function clickPut(obj) {
+        if (obj.value == '' || obj.value == null) {
+            obj.value ='★';
+        } else {
+            obj.value = "";
+        }
+    }
 </script>
+
+<style>
+    .redclor{
+        color: red;
+    }
+</style>
 
 <form:form commandName="bean">
     <form:hidden path="id"/>
@@ -128,13 +142,13 @@
                             </td>
 
                             <td>
-                                <input type="text" name="dutyPerosn" class="input_text" style="width: 95%;text-align: center"
+                                <input type="text" name="dutyPerosn" class="input_text " style="width: 95%;text-align: center"
                                        value="${item.dutyPerosn}"
                                        title="${item.dutyPerosn}">
                             </td>
 
                             <td>
-                                <input type="text" name="keyWork" class="input_text" style="width: 95%;text-align: center"
+                                <input type="text" name="keyWork" class="input_text redclor"  readonly="true"  style="width: 95%;text-align: center" ondblclick="clickPut(this)"
                                        value="${item.keyWork}"
                                        title="${item.keyWork}">
                             </td>
@@ -188,7 +202,7 @@
             <input type="text" name="dutyPerosn" class="input_text" style="width: 95%;text-align: center"/>
         </td>
         <td>
-            <input type="text" name="keyWork" class="input_text" style="width: 95%;"/>
+            <input type="text" name="keyWork" class="input_text redclor" readonly="true" style="width: 95%;text-align: center" ondblclick="clickPut(this)"/>
         </td>
         <td>
             <textarea name="content" class="input_textarea" style="width: 95%;height: 50px;"></textarea>
@@ -200,7 +214,7 @@
             <input type="text" name="jbr" class="input_text" style="width: 95%;"/>
         </td>
         <td style="width: 25px"><input type="button" value="删除" class="button_select_remove"
-                                       onclick="addLine(this)"/></td>
+                                       ondblclick="addLine(this)"/></td>
     </tr>
     </tbody>
 </table>
