@@ -258,7 +258,7 @@ public class ProjInfoController extends BaseCRUDActionController<ProjInfo> {
             if (area == null || area.equals("0")) {
                 target.setAreaCode("");
             } else {
-                target.setAreaCode(sysCodeDetailService.get(JspHelper.getLong(area)).getCode());
+                target.setAreaCode(sysCodeDetailService.get(JspHelper.getLong(area)).getName());
             }
 
             String[] projPackageAttrs = request.getParameterValues("ProjPackageAttr");
