@@ -4,11 +4,13 @@
     function loadProjectData(flag) {
         if (flag == "all") {
             $("#projectName").val("");
-            $("#bidName").val("");
             $("#jsDept").val("");
             $("#year").val("${currentYear}");
-            $("#beginDate").val("");
-            $("#endDate").val("");
+            $("#propertyId").val("");
+            $("#isMajor").val("");
+            $("#categoryId").val("");
+            $("#areaId").val("");
+            $("#stageId").val("");
         }
         var str = getCondStr();
         setButton(true);
@@ -36,6 +38,7 @@
         s += "&isMajor=" + $("#isMajor").val();
         s += "&categoryId=" + $("#categoryId").val();
         s += "&areaId=" + $("#areaId").val();
+        s += "&stageId=" + $("#stageId").val();
         return s;
     }
 
@@ -87,13 +90,15 @@
             </td>
             <td align="right" width="70" nowrap>年份：</td>
             <td align="left" nowrap>
-                <select name="year" id="year">${yearOptions}</select>
+                <select name="year" id="year"class="form_select" style="width: 100px;">${yearOptions}</select>
             </td>
             <td align="right" width="70" nowrap>管理属性：</td>
             <td align="left" nowrap>
                 <sys:code code="${PROJ_INFO_PROPERTY}" name="propertyId" id="propertyId" type="select"
-                          sysCodeDetailId="" style="width:155px" isAlowedNull="true"/>
-                <select name="isMajor" id="isMajor" style="width: 100px">
+                          sysCodeDetailId="" style="width:90px;" isAlowedNull="true"/>
+                &nbsp;&nbsp;
+                是否重大：
+                <select name="isMajor" id="isMajor" class="form_select" style="width: 90px;">
                     <option value="">请选择</option>
                     <option value="1">重大</option>
                     <option value="0">非重大</option>
@@ -108,14 +113,22 @@
             <td align="right" width="70" nowrap>项目类型：</td>
             <td align="left" nowrap>
                 <sys:code code="${PROJ_INFO_CATEGORY}" name="categoryId" id="categoryId" type="select"
-                          sysCodeDetailId="" style="width:155px" isAlowedNull="true"/>
+                          sysCodeDetailId="" style="width:100px" isAlowedNull="true"/>
             </td>
             <td align="right" width="70" nowrap>区县：</td>
             <td align="left" nowrap>
-                <select name="areaId" id="areaId">
+                <select name="areaId" id="areaId" class="form_select" style="width: 90px;">
                     <option value="0">上海市</option>
                     <c:forEach var="area" items="${areaList}">
                         <option value="${area.id}">${area.name}</option>
+                    </c:forEach>
+                </select>
+                &nbsp;&nbsp;
+                项目状态：
+                <select name="stageId" id="stageId" class="form_select" style="width: 90px;">
+                    <option value="">请选择</option>
+                    <c:forEach var="stage" items="${stageList}">
+                        <option value="${area.id}">${stage.name}</option>
                     </c:forEach>
                 </select>
             </td>
@@ -129,9 +142,12 @@
     </table>
     <table cellpadding="0" cellspacing="0" class="form_table">
         <tr class="tr_light">
-            <td id="projectDataDiv" style="overflow: auto;">
+            <td id="projectDataDiv">
                 &nbsp;
             </td>
+        </tr>
+        <tr>
+            <td style="height: 30px;"></td>
         </tr>
     </table>
 </div>

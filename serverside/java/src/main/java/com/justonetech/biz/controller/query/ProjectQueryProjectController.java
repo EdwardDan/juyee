@@ -72,6 +72,8 @@ public class ProjectQueryProjectController {
         List<SysCodeDetail> areaList = sysCodeManager.getCodeListByCode(Constants.PROJ_INFO_BELONG_AREA);
         model.addAttribute("areaList", areaList);
         model.addAttribute("PROJ_INFO_PROPERTY", Constants.PROJ_INFO_PROPERTY);
+        List<SysCodeDetail> stageList = sysCodeManager.getCodeListByCode(Constants.PROJ_INFO_STAGE);
+        model.addAttribute("stageList", stageList); //项目状态
 
         return "view/query/projectQueryProject/viewProject";
     }
@@ -91,6 +93,7 @@ public class ProjectQueryProjectController {
         String isMajor = request.getParameter("isMajor");
         String categoryId = request.getParameter("categoryId");
         String areaId = request.getParameter("areaId");
+        String stageId = request.getParameter("stageId");
         model.addAttribute("year", year);
 
         //标段列表
@@ -115,6 +118,9 @@ public class ProjectQueryProjectController {
         }
         if (!StringHelper.isEmpty(areaId) && !"0".equals(areaId)) {
             conditionHql += " and areaCode='" + sysCodeManager.getCodeListById(Long.valueOf(areaId)).getName() + "'";
+        }
+        if (!StringHelper.isEmpty(stageId)) {
+            conditionHql += " and stage.id=" + stageId;
         }
         List<ProjInfo> projInfos = projInfoService.findByQuery(conditionHql + " order by no asc,id asc");
         model.addAttribute("projects", projInfos);

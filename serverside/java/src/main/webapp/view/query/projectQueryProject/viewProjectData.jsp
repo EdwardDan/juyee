@@ -16,6 +16,7 @@
             &nbsp;<input type="button" value="导出" class="button_all" onclick="printProjectData(this)"/>
             <%--&nbsp; <input type="button" value="关闭" class="button_cancel" onclick="closeWindow()">--%>
         </td>
+    </tr>
 </table>
 <table cellpadding="0" cellspacing="0" border="1" class="table_thin_line" id="myTable">
     <thead>
@@ -93,43 +94,7 @@
             <td>${dataMap[projProgress]}</td>
             <td>${dataMap[questions]}</td>
             <td>${dataMap[improveOpinion]}</td>
-
         </tr>
     </c:forEach>
-    <%--<c:forEach items="${projects}" var="projInfo" varStatus="projIndex">--%>
-        <%--<c:forEach items="${projInfo.bids}" var="bid" varStatus="bidIndex">--%>
-            <%--<c:set var="stepCount" value="${fn:length(steps)*1}"/>--%>
-            <%--<c:set var="bidCount" value="${fn:length(projInfo.bids)}"/>--%>
-            <%--<c:forEach items="${steps}" var="step" varStatus="stepIndex">--%>
-                <%--<tr class="tr_light">--%>
-                    <%--<c:if test="${stepIndex.index == 0}">--%>
-                        <%--<c:if test="${bidIndex.index == 0}">--%>
-                            <%--<td rowspan="${bidCount}" width="2%">${projIndex.index+1}</td>--%>
-                            <%--<td rowspan="${bidCount}">${bid.project.name}</td>--%>
-                            <%--<td rowspan="${bidCount}">${bid.project.location}</td>--%>
-                        <%--</c:if>--%>
-                        <%--<td rowspan="${stepCount}">${bid.name}</td>--%>
-                        <%--<td rowspan="${stepCount}">${bid.buildMileage}</td>--%>
-                        <%--<td rowspan="${stepCount}">${bid.belongAreaNames}</td>--%>
-                        <%--<td rowspan="${stepCount}" nowrap>${bid.startDate}</td>--%>
-                    <%--</c:if>--%>
-                    <%--<c:if test="${stepSize>1}">--%>
-                        <%--<td>${step.name}</td>--%>
-                    <%--</c:if>--%>
-                    <%--<c:forEach items="${leafStages}" var="leafStage">--%>
-                        <%--<c:set var="dataKey" value="${bid.id}_${step.id}_${leafStage.id}"/>--%>
-                        <%--<td class="td_normal" title="${dataMap[dataKey].resultName}"--%>
-                            <%--<c:if test="${not empty dataMap[dataKey].color}">style="background-color: ${dataMap[dataKey].color}"</c:if>>${dataMap[dataKey].resultName}</td>--%>
-                    <%--</c:forEach>--%>
-                <%--</tr>--%>
-                <%--&lt;%&ndash;<tr class="tr_dark">&ndash;%&gt;--%>
-                <%--&lt;%&ndash;<c:forEach items="${leafStages}" var="leafStage">&ndash;%&gt;--%>
-                <%--&lt;%&ndash;<c:set var="dataKey" value="${bid.id}_${step.id}_${leafStage.id}" />&ndash;%&gt;--%>
-                <%--&lt;%&ndash;<td nowrap class="td_normal" title="${dataMap[dataKey].dealDate}"><span <c:if test="${dataMap[dataKey].dealDate!=lastMap[dataKey].dealDate}">class="td_change"</c:if>><sys:cutString length="10">${dataMap[dataKey].dealDate}</sys:cutString></span></td>&ndash;%&gt;--%>
-                <%--&lt;%&ndash;</c:forEach>&ndash;%&gt;--%>
-                <%--&lt;%&ndash;</tr>&ndash;%&gt;--%>
-            <%--</c:forEach>--%>
-        <%--</c:forEach>--%>
-    <%--</c:forEach>--%>
     </tbody>
 </table>

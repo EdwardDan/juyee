@@ -27,6 +27,18 @@
 			<generator class="com.justonetech.core.orm.hibernate.LongIdGenerator"/>
 		</id>
 
+
+        <property
+                name="bjbh"
+                column="BJBH"
+                type="string"
+                not-null="false"
+                length="50"
+                >
+            <meta attribute="ColumnName">报建编号</meta>
+            <meta attribute="ColumnComment">报建编号</meta>
+        </property>
+
 		<property
 			name="name"
 			column="NAME"

@@ -59,6 +59,7 @@ public abstract class BaseProjInfo  implements Serializable,Auditable {
 	public static String PROP_ID = "id";
 	public static String PROP_INTRO = "intro";
 	public static String PROP_STAGE = "stage";
+	public static String PROP_BJBH = "bjbh";
 
 
 	// constructors
@@ -84,6 +85,11 @@ public abstract class BaseProjInfo  implements Serializable,Auditable {
 	private Long id;
 
 	// fields
+    /*报建编号*/
+    /*报建编号*/
+	private String bjbh;
+
+    // fields
     /*项目名称*/
     /*项目名称*/
 	private String name;
@@ -231,10 +237,15 @@ public abstract class BaseProjInfo  implements Serializable,Auditable {
 		this.hashCode = Integer.MIN_VALUE;
 	}
 
+    public String getBjbh() {
+        return bjbh;
+    }
 
+    public void setBjbh(String bjbh) {
+        this.bjbh = bjbh;
+    }
 
-
-	/**
+    /**
 	 * Return the value associated with the column: NAME
 	 */
 	public String getName () {
@@ -875,6 +886,7 @@ public abstract class BaseProjInfo  implements Serializable,Auditable {
 	public String toString () {
 		org.apache.commons.lang.builder.ToStringBuilder builder = new org.apache.commons.lang.builder.ToStringBuilder(this);
 		builder.append(id);
+		builder.append(bjbh);
 		builder.append(name);
 		builder.append(year);
 		builder.append(no);
