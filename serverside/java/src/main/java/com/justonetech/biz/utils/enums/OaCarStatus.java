@@ -11,7 +11,8 @@ public enum OaCarStatus {
     STATUS_BRANCH_PASS(3, "科长审核通过", "purple"),
     STATUS_BRANCH_BACK(4, "科长审核退回", "red"),
     STATUS_MAIN_PASS(5, "办公室主任审核通过", "green"),
-    STATUS_MAIN_BACK(6, "办公室主任审核退回", "red");
+    STATUS_MAIN_BACK(6, "办公室主任审核退回", "red"),
+    STATUS_CAR_SCHEDULE(7, "车辆管理员已调度", "green");
 
     private int code;
     private String name;

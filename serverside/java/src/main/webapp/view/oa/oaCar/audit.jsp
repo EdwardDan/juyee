@@ -35,17 +35,6 @@
                 }
             });
         } else if (t == '${STATUS_MAIN_PASS}') {
-            if (document.getElementById("isAgree").checked) {
-                if ($("#driverPersonName").val() == '') {
-                    showInfoMsg("请选择司机！")
-                    return;
-                }
-            }
-
-            if ($("#car").val() == '') {
-                showInfoMsg("请选择车辆！")
-                return;
-            }
             $("#status").val('${STATUS_MAIN_PASS}');
 
             $.messager.confirm('系统提示', "确定审核通过吗？通过后将不能修改！", function (r) {
@@ -57,6 +46,25 @@
         } else if (t == '${STATUS_MAIN_BACK}') {
             $("#status").val('${STATUS_MAIN_BACK}');
             $.messager.confirm('系统提示', "确定退回吗？", function (r) {
+                if (r) {
+                    //提交表单
+                    saveAjaxData("${ctx}/oaCar/auditSave.do", formId);
+                }
+            });
+        } else if (t == '${STATUS_CAR_SCHEDULE}') {
+            if (document.getElementById("isAgree").checked) {
+                if ($("#driverPersonName").val() == '') {
+                    showInfoMsg("请选择司机！")
+                    return;
+                }
+            }
+
+            if ($("#car").val() == '') {
+                showInfoMsg("请选择车辆！")
+                return;
+            }
+            $("#status").val('${STATUS_CAR_SCHEDULE}');
+            $.messager.confirm('系统提示', "调度车辆吗？确定后将不能修改！", function (r) {
                 if (r) {
                     //提交表单
                     saveAjaxData("${ctx}/oaCar/auditSave.do", formId);
@@ -126,7 +134,7 @@
                 </tr>
             </table>
         </fieldset>
-        <c:if test="${canKzAudit||canZrAudit}">
+        <c:if test="${canKzAudit||canZrAudit||canClddAudit}">
             <fieldset class="form_fieldset">
                 <legend class="form_legend">
                     科长审核
@@ -151,8 +159,8 @@
             </fieldset>
         </c:if>
 
-        <c:if test="${canZrAudit}">
-            <c:if test="${bean.status==STATUS_BRANCH_PASS}">
+        <c:if test="${canZrAudit||canClddAudit}">
+            <c:if test="${bean.status==STATUS_BRANCH_PASS||bean.status==STATUS_MAIN_PASS}">
                 <fieldset class="form_fieldset">
                     <legend class="form_legend">
                         办公室主任审核
@@ -161,9 +169,25 @@
                         <tr class="tr_light">
                             <td class="form_label_right" width="15%">办公室主任审核意见：</td>
                             <td class="form_content" colspan="3">
-                                <form:textarea path="zrAuditOpinion" cssClass="input_textarea_long"/>
+                                <c:if test="${bean.status==STATUS_BRANCH_PASS}">
+                                    <form:textarea path="zrAuditOpinion" cssClass="input_textarea_long"/>
+                                </c:if>
+                                <c:if test="${bean.status==STATUS_MAIN_PASS}">
+                                    ${bean.zrAuditOpinion}
+                                </c:if>
                             </td>
                         </tr>
+                    </table>
+                </fieldset>
+            </c:if>
+        </c:if>
+        <c:if test="${canClddAudit}">
+            <c:if test="${bean.status==STATUS_MAIN_PASS}">
+                <fieldset class="form_fieldset">
+                    <legend class="form_legend">
+                        车辆调度
+                    </legend>
+                    <table cellpadding="0" cellspacing="0" class="form_table">
                         <tr class="tr_dark">
                             <td class="form_label_right" width="15%">拟派车辆：</td>
                             <td class="form_content" colspan="3">
@@ -208,7 +232,7 @@
         <table cellpadding="0" cellspacing="0" class="form_table">
             <tr class="tr_button">
                 <td style="text-align: center" colspan="4">
-                    <c:if test="${bean.status==STATUS_BRANCH_PASS ||bean.status==STATUS_MAIN_PASS}">
+                    <c:if test="${bean.status==STATUS_BRANCH_PASS}">
                         <input type="button" value="审核通过" class="button_normal_long"
                                onclick="save('${STATUS_MAIN_PASS}',this)">&nbsp;
                         <input type="button" value="退回修改" class="button_normal_long"
@@ -220,6 +244,10 @@
                                onclick="save('${STATUS_BRANCH_PASS}',this)">&nbsp;
                         <input type="button" value="退回修改" class="button_normal_long"
                                onclick="save('${STATUS_BRANCH_BACK}',this)">&nbsp;
+                    </c:if>
+                    <c:if test="${bean.status==STATUS_MAIN_PASS}">
+                        <input type="button" value="确定" class="button_normal"
+                               onclick="save('${STATUS_CAR_SCHEDULE}',this)">&nbsp;
                     </c:if>
                     <input type="button" value="取消" class="button_cancel" onclick="closeWindow()">
                 </td>

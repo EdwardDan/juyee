@@ -86,6 +86,7 @@ public class PrivilegeCode {
     public static final String OA_CAR_EDIT = "OaCar_edit";  //车辆申请_编辑
     public static final String OA_CAR_AUDIT_KZ = "OaCar_audit_kz";  //车辆申请_审核_科长
     public static final String OA_CAR_AUDIT_ZR = "OaCar_audit_zr";  //车辆申请_审核_主任
+    public static final String OA_CAR_AUDIT_CLDD = "OaCarSchedule_audit";  //车辆申请_车辆调度
     public static final String OA_THINGS_EDIT = "OaThings_edit";  //办公用品库_编辑
     public static final String OA_THINGS_APPLY_EDIT = "OaThingsApply_edit";  //办公用品申请_编辑
     public static final String OA_THINGS_APPLY_AUDIT_KZ = "OaThingsApply_audit_kz";  //办公用品申请_审核_科长

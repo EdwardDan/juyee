@@ -58,7 +58,7 @@
             <tr class="tr_dark">
                 <td class="form_label_right" width="15%">科长审核意见：</td>
                 <td class="form_content" height="50px">
-                   <sys:toHtml> ${bean.kzAuditOpinion}</sys:toHtml>
+                    <sys:toHtml> ${bean.kzAuditOpinion}</sys:toHtml>
                 </td>
             </tr>
         </table>
@@ -75,6 +75,13 @@
                     <sys:toHtml>${bean.zrAuditOpinion}</sys:toHtml>
                 </td>
             </tr>
+        </table>
+    </fieldset>
+    <fieldset class="form_fieldset">
+        <legend class="form_legend">
+            车辆调度
+        </legend>
+        <table cellpadding="0" cellspacing="0" class="form_table">
             <tr class="tr_dark">
                 <td class="form_label_right" width="15%">拟派车辆：</td>
                 <td class="form_content" colspan="3">

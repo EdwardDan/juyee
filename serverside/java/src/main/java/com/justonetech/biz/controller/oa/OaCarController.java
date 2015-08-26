@@ -93,9 +93,9 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
     public String grid(Model model) {
         //判断是否有编辑权限
         model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.OA_CAR_EDIT));
-
         model.addAttribute("canKzAudit", sysUserManager.hasPrivilege(PrivilegeCode.OA_CAR_AUDIT_KZ));
         model.addAttribute("canZrAudit", sysUserManager.hasPrivilege(PrivilegeCode.OA_CAR_AUDIT_ZR));
+        model.addAttribute("canClddAudit", sysUserManager.hasPrivilege(PrivilegeCode.OA_CAR_AUDIT_CLDD));
 
         return "view/oa/oaCar/grid";
     }
@@ -368,7 +368,7 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
                     msgMessageManager.sendSms(target.getApplyUser().getDisplayName() + "：你的车辆申请已被退回，请登录系统查看。", target.getApplyUser().getPerson().getMobile());
                 }
 
-                if (target.getStatus() == OaCarStatus.STATUS_MAIN_PASS.getCode()) {
+                if (target.getStatus() == OaCarStatus.STATUS_CAR_SCHEDULE.getCode()) {
                     String content = target.getApplyUser().getDisplayName() + "：你的车辆申请已通过。车牌：" + target.getCar().getName();
                     //判断司机是否存在
                     if (target.getDriverPerson() != null) {
@@ -392,6 +392,8 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
             sendSuccessJSON(response, "科长审核退回");
         } else if (entity.getStatus() == OaCarStatus.STATUS_MAIN_BACK.getCode()) {
             sendSuccessJSON(response, "办公室主任审核退回");
+        }   else if (entity.getStatus() == OaCarStatus.STATUS_CAR_SCHEDULE.getCode()) {
+            sendSuccessJSON(response, "车辆调度成功");
         }
     }
 
@@ -439,6 +441,7 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
 
         model.addAttribute("canKzAudit", sysUserManager.hasPrivilege(PrivilegeCode.OA_CAR_AUDIT_KZ));
         model.addAttribute("canZrAudit", sysUserManager.hasPrivilege(PrivilegeCode.OA_CAR_AUDIT_ZR));
+        model.addAttribute("canClddAudit", sysUserManager.hasPrivilege(PrivilegeCode.OA_CAR_AUDIT_CLDD));
 
         model.addAttribute("STATUS_EDIT", OaCarStatus.STATUS_EDIT.getCode());
         model.addAttribute("STATUS_SUBMIT", OaCarStatus.STATUS_SUBMIT.getCode());
@@ -446,6 +449,7 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
         model.addAttribute("STATUS_BRANCH_BACK", OaCarStatus.STATUS_BRANCH_BACK.getCode());
         model.addAttribute("STATUS_MAIN_PASS", OaCarStatus.STATUS_MAIN_PASS.getCode());
         model.addAttribute("STATUS_MAIN_BACK", OaCarStatus.STATUS_MAIN_BACK.getCode());
+        model.addAttribute("STATUS_CAR_SCHEDULE", OaCarStatus.STATUS_CAR_SCHEDULE.getCode());
     }
 
     /**
