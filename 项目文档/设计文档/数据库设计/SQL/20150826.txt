@@ -1,0 +1,3 @@
+alter table PROJ_INFO add PROJ_NUM  VARCHAR(50);
+
+alter table PROJ_INFO add BJBH  VARCHAR(50);
