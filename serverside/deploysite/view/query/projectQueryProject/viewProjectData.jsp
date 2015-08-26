@@ -4,7 +4,7 @@
     $(function () {
         $("#myTable").chromatable({
             width: "100%", // specify 100%, auto, or a fixed pixel amount
-            height: "350px",
+            height: "600px",
             scrolling: "yes" // must have the jquery-1.3.2.min.js script installed to use
         });
     });
@@ -13,9 +13,10 @@
     <tr class="tr_light">
         <td align="left" nowrap>&nbsp;
             ${year}年度项目推进汇总
-            <%--&nbsp;<input type="button" value="导出" class="button_all" onclick="printStageData(this)"/>--%>
-            &nbsp; <input type="button" value="关闭" class="button_cancel" onclick="closeWindow()">
+            &nbsp;<input type="button" value="导出" class="button_all" onclick="printProjectData(this)"/>
+            <%--&nbsp; <input type="button" value="关闭" class="button_cancel" onclick="closeWindow()">--%>
         </td>
+    </tr>
 </table>
 <table cellpadding="0" cellspacing="0" border="1" class="table_thin_line" id="myTable">
     <thead>
@@ -53,16 +54,16 @@
     <tbody>
     <c:forEach items="${projects}" var="projInfo" varStatus="projIndex">
         <tr class="tr_light">
-            <c:set var="gkpf" value="${projInfo.id}gk"/>
-            <c:set var="cspf" value="${projInfo.id}ch"/>
+            <c:set var="gctxGkpfTotal" value="${projInfo.id}gkpf"/>
+            <c:set var="gctxCspfTotal" value="${projInfo.id}cspf"/>
             <c:set var="type1" value="${projInfo.id}${key1}"/>
             <c:set var="type2" value="${projInfo.id}${key2}"/>
             <c:set var="type3_1" value="${projInfo.id}${key3_1}"/>
             <c:set var="type3_2" value="${projInfo.id}${key3_2}"/>
-            <c:set var="xmjys" value="${projInfo.id}xm"/>
-            <c:set var="gk1" value="${projInfo.id}gk"/>
-            <c:set var="cbsj" value="${projInfo.id}cb"/>
-            <c:set var="cost" value="${projInfo.id}zjly"/>
+            <c:set var="gctxSourceFund" value="${projInfo.id}zjly"/>
+            <c:set var="xmjysTime" value="${projInfo.id}xm"/>
+            <c:set var="gkTime" value="${projInfo.id}gk"/>
+            <c:set var="cbsjTime" value="${projInfo.id}cb"/>
             <c:set var="beginTime" value="${projInfo.id}begin"/>
             <c:set var="endTime" value="${projInfo.id}end"/>
             <c:set var="areaCode" value="${projInfo.id}area"/>
@@ -77,59 +78,23 @@
             <td><sys:toHtml>${projInfo.function}</sys:toHtml></td>
             <td><sys:toHtml>${projInfo.engineerRange}</sys:toHtml></td>
             <td>${projInfo.mainContent}</td>
-            <td>${dataMap[gkpf]}</td>
-            <td>${dataMap[cspf]}</td>
+            <td>${dataMap[gctxGkpfTotal]}</td>
+            <td>${dataMap[gctxCspfTotal]}</td>
             <td>${dataMap[type1]}</td>
             <td>${dataMap[type2]}</td>
             <td>${dataMap[type3_1]}</td>
             <td>${dataMap[type3_2]}</td>
-            <td>${dataMap[cost]}</td>
-            <td>${dataMap[xmjys]}</td>
-            <td>${dataMap[gk1]}</td>
-            <td>${dataMap[cbsj]}</td>
+            <td>${dataMap[gctxSourceFund]}</td>
+            <td>${dataMap[xmjysTime]}</td>
+            <td>${dataMap[gkTime]}</td>
+            <td>${dataMap[cbsjTime]}</td>
             <td>${dataMap[beginTime]}</td>
             <td>${dataMap[endTime]}</td>
             <td>${dataMap[areaCode]}</td>
             <td>${dataMap[projProgress]}</td>
             <td>${dataMap[questions]}</td>
             <td>${dataMap[improveOpinion]}</td>
-
         </tr>
     </c:forEach>
-    <%--<c:forEach items="${projects}" var="projInfo" varStatus="projIndex">--%>
-        <%--<c:forEach items="${projInfo.bids}" var="bid" varStatus="bidIndex">--%>
-            <%--<c:set var="stepCount" value="${fn:length(steps)*1}"/>--%>
-            <%--<c:set var="bidCount" value="${fn:length(projInfo.bids)}"/>--%>
-            <%--<c:forEach items="${steps}" var="step" varStatus="stepIndex">--%>
-                <%--<tr class="tr_light">--%>
-                    <%--<c:if test="${stepIndex.index == 0}">--%>
-                        <%--<c:if test="${bidIndex.index == 0}">--%>
-                            <%--<td rowspan="${bidCount}" width="2%">${projIndex.index+1}</td>--%>
-                            <%--<td rowspan="${bidCount}">${bid.project.name}</td>--%>
-                            <%--<td rowspan="${bidCount}">${bid.project.location}</td>--%>
-                        <%--</c:if>--%>
-                        <%--<td rowspan="${stepCount}">${bid.name}</td>--%>
-                        <%--<td rowspan="${stepCount}">${bid.buildMileage}</td>--%>
-                        <%--<td rowspan="${stepCount}">${bid.belongAreaNames}</td>--%>
-                        <%--<td rowspan="${stepCount}" nowrap>${bid.startDate}</td>--%>
-                    <%--</c:if>--%>
-                    <%--<c:if test="${stepSize>1}">--%>
-                        <%--<td>${step.name}</td>--%>
-                    <%--</c:if>--%>
-                    <%--<c:forEach items="${leafStages}" var="leafStage">--%>
-                        <%--<c:set var="dataKey" value="${bid.id}_${step.id}_${leafStage.id}"/>--%>
-                        <%--<td class="td_normal" title="${dataMap[dataKey].resultName}"--%>
-                            <%--<c:if test="${not empty dataMap[dataKey].color}">style="background-color: ${dataMap[dataKey].color}"</c:if>>${dataMap[dataKey].resultName}</td>--%>
-                    <%--</c:forEach>--%>
-                <%--</tr>--%>
-                <%--&lt;%&ndash;<tr class="tr_dark">&ndash;%&gt;--%>
-                <%--&lt;%&ndash;<c:forEach items="${leafStages}" var="leafStage">&ndash;%&gt;--%>
-                <%--&lt;%&ndash;<c:set var="dataKey" value="${bid.id}_${step.id}_${leafStage.id}" />&ndash;%&gt;--%>
-                <%--&lt;%&ndash;<td nowrap class="td_normal" title="${dataMap[dataKey].dealDate}"><span <c:if test="${dataMap[dataKey].dealDate!=lastMap[dataKey].dealDate}">class="td_change"</c:if>><sys:cutString length="10">${dataMap[dataKey].dealDate}</sys:cutString></span></td>&ndash;%&gt;--%>
-                <%--&lt;%&ndash;</c:forEach>&ndash;%&gt;--%>
-                <%--&lt;%&ndash;</tr>&ndash;%&gt;--%>
-            <%--</c:forEach>--%>
-        <%--</c:forEach>--%>
-    <%--</c:forEach>--%>
     </tbody>
 </table>

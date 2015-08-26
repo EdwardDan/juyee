@@ -6,7 +6,7 @@
             gridOpts: {
                 url: "${ctx}/projExtend/gridDataCustom.do",
                 colNames: ['ID',
-                    '开始年份',
+                    '填报年份',
                     '项目序号',
                     '项目名称',
                     '项目性质',
@@ -33,18 +33,28 @@
                     var ids = jQuery("#listGrid").jqGrid('getDataIDs');
                     for (var i = 0; i < ids.length; i++) {
                         var id = ids[i];
+                        var rowData = jQuery("#listGrid").jqGrid('getRowData', id);
+                        var stageName = rowData["stage.name"];
                         var opButton = '<input type="button" value="查看" onclick="doView(' + id + ')" class="button_normal"/> ';
                         <c:if test="${canEdit}">
                         opButton += '<input type="button" value="填报" onclick="doEdit(' + id + ')" class="button_normal"/> ';
                         opButton += '<input type="button" value="删除" onclick="doDelete(' + id + ')" class="button_normal"/>';
                         </c:if>
+                        if (stageName == '未开工') {
+                            //判断项目阶段的高亮显示（删除列时注意修改）
+                            $("#" + id).find("td:eq(6)").css("background-color", "red");
+                        } else if (stageName == '在建') {
+                            $("#" + id).find("td:eq(6)").css("background-color", "blue");
+                        } else if (stageName == '已完工') {
+                            $("#" + id).find("td:eq(6)").css("background-color", "green");
+                        }
                         jQuery("#listGrid").jqGrid('setRowData', ids[i], { operation: opButton});
                     }
                 }, rownumbers: true
             },
             userOpts: {
                 defaultQuery: { "groupOp": "AND", "rules": [
-                    { "field": "开始年份", "op": "eq", "data": ""},
+                    { "field": "填报年份", "op": "eq", "data": ""},
                     { "field": "项目序号", "op": "cn", "data": ""},
                     { "field": "项目名称", "op": "cn", "data": ""},
                     { "field": "项目性质", "op": "cn", "data": ""},
@@ -59,11 +69,11 @@
         gridinit($("#listGrid"), conf);
     });
     function doView(id) {
-        parent.openWindow("查看项目推进信息", "${ctx}/projExtend/view.do?projectId=" + id, false,800,550);
+        parent.openWindow("查看项目推进信息", "${ctx}/projExtend/view.do?projectId=" + id, false, 800, 550);
     }
     <c:if test="${canEdit}">
     function doEdit(id) {
-        parent.openWindow("修改项目推进信息", "${ctx}/projExtend/modify.do?projectId=" + id, true,800,550);
+        parent.openWindow("修改项目推进信息", "${ctx}/projExtend/modify.do?projectId=" + id, true, 800, 550);
     }
     function doDelete(id) {
         doGridDelete("${ctx}/projExtend/delete.do?projectId=" + id);

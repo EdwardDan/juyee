@@ -5,13 +5,23 @@
 </c:if>
 <div class="form_div">
     <table cellpadding="0" cellspacing="0" class="form_table">
+        <tr class="tr_light">
+            <td class="form_label_right" style="width: 15%">报建编号：</td>
+            <td class="form_content" style="width: 30%">
+                ${bean.bjbh}
+            </td>
+            <td class="form_label_right" style="width: 10%">项目编号：</td>
+            <td class="form_content" style="width: 45%">
+                ${bean.projNum}
+            </td>
+        </tr>
         <tr class="tr_dark">
-            <td class="form_label_right" style="width: 15%">年份：</td>
-            <td class="form_content" style="width: 35%">
+            <td class="form_label_right">年份：</td>
+            <td class="form_content">
                 ${bean.year}
             </td>
-            <td class="form_label_right" style="width: 15%">项目序号：</td>
-            <td class="form_content" style="width: 35%">
+            <td class="form_label_right">项目序号：</td>
+            <td class="form_content">
                 ${bean.no}
             </td>
         </tr>
@@ -19,25 +29,25 @@
             <td class="form_label_right">项目状态：</td>
             <td class="form_content">
                 <sys:code code="${PROJ_INFO_STAGE}" name="ProjStage" id="ProjStage" type="select" disabled="true"
-                          sysCodeDetailId="${bean.stage.id}" style="width:200px"/>
+                          sysCodeDetailId="${bean.stage.id}" style="width:150px"/>
             </td>
             <td class="form_label_right">业态类别：</td>
             <td class="form_content">
                 <sys:code code="${PROJ_INFO_CATEGORY}" name="ProjCategory" id="ProjCategory" type="select"
                           disabled="true"
-                          sysCodeDetailId="${bean.category.id}" style="width:200px"/>
+                          sysCodeDetailId="${bean.category.id}" style="width:150px"/>
             </td>
         </tr>
         <tr class="tr_dark">
             <td class="form_label_right">管理属性：</td>
             <td class="form_content">
-                <select name="ProjProperty" id="ProjProperty" disabled>
+                <select name="ProjProperty" id="ProjProperty" disabled style="width: 70px">
                     <c:forEach var="propertyL" items="${propertyList}">
                         <option value="${propertyL.id}"
                                 <c:if test="${bean.property.id==propertyL.id}">selected </c:if>>${propertyL.name}</option>
                     </c:forEach>
                 </select>
-                <select name="isMajor" id="isMajor" disabled style="width: 70px">
+                <select name="isMajor" id="isMajor" disabled style="width: 75px">
                     <option value="1">重大</option>
                     <option value="0" <c:if test="${!bean.isMajor}">selected</c:if>>非重大</option>
                 </select>
@@ -45,17 +55,17 @@
             <td class="form_label_right">项目来源：</td>
             <td class="form_content">
                 <sys:code code="${PROJ_INFO_SOURCE}" name="ProjSources" id="ProjSources" type="select" disabled="true"
-                          sysCodeDetailId="${bean.projectSource.id}" style="width:200px"/>
+                          sysCodeDetailId="${bean.projectSource.id}" style="width:150px"/>
             </td>
         </tr>
         <tr class="tr_light">
             <td class="form_label_right">所属区县：</td>
             <td class="form_content">
-                <select name="areaId" id="areaId" disabled>
+                <select name="areaId" id="areaId" disabled style="width: 75px;">
                     <option value="0">上海市</option>
                     <c:forEach var="area" items="${areaList}">
                         <option value="${area.id}"
-                                <c:if test="${bean.areaCode==area.code}">selected </c:if>>${area.name}</option>
+                                <c:if test="${bean.areaCode==area.name}">selected </c:if>>${area.name}</option>
                     </c:forEach>
                 </select>
             </td>

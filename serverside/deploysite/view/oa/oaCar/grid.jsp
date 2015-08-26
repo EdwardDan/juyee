@@ -48,7 +48,7 @@
                         </c:if>
                         if (rowData['statu'].indexOf("提交") > 0 || rowData['statu'].indexOf("科长审核通过") > 0) {
                             <c:if test="${canKzAudit}">
-                            if (!(rowData['statu'].indexOf("科长审核通过") > 0 &&${canKzAudit})) {
+                            if ((rowData['statu'].indexOf("提交") > 0)) {
                                 opButton += '<input type="button" value="审核" onclick="doAudit(' + id + ')" class="button_normal"/> ';
                             }
                             </c:if>
@@ -56,6 +56,13 @@
                             if (rowData['statu'].indexOf("科长审核通过") > 0) {
                                 opButton += '<input type="button" value="审核" onclick="doAudit(' + id + ')" class="button_normal"/> ';
                             }
+                            </c:if>
+                        }                                                     z
+                        if (rowData['statu'].indexOf("办公室主任审核通过") > 0) {
+                            <c:if test="${canClddAudit}">
+                            <%--if (!(rowData['canClddAudit'].indexOf("科长审核通过") > 0 &&${canKzAudit})) {--%>
+                                opButton += '<input type="button" value="车辆调度" onclick="doAudit(' + id + ')" class="button_normal_long"/> ';
+//                            }
                             </c:if>
                         }
 

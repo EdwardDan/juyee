@@ -63,18 +63,6 @@
                     <form:textarea path="linkInfo" cssClass="input_textarea_long"/>
                 </td>
             </tr>
-            <tr class="tr_dark" style="display: none">
-                <td class="form_label">是否叶节点：</td>
-                <td class="form_content">
-                    <form:checkbox path="isLeaf" value="1"/>
-                </td>
-            </tr>
-            <tr class="tr_light" style="display: none">
-                <td class="form_label">树形层次：</td>
-                <td class="form_content">
-                    <form:input path="treeId" cssClass="input_text"/>
-                </td>
-            </tr>
             <tr class="tr_button">
                 <td class="form_content" colspan="4" style="text-align: center">
                     <input type="button" value="确定" class="button_confirm" onclick="save(this)">&nbsp;

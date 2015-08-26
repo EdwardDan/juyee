@@ -4,7 +4,7 @@
     $(function () {
         $("#myTable").chromatable({
             width: "100%", // specify 100%, auto, or a fixed pixel amount
-            height: "350px",
+            height: "600px",
             scrolling: "yes" // must have the jquery-1.3.2.min.js script installed to use
         });
     });

@@ -6,7 +6,7 @@
             gridOpts: {
                 url: "${ctx}/dataStageReport/gridDataCustom.do",
                 colNames: ['ID',
-                    '开始年份',
+                    '填报年份',
                     '项目名称',
                     '项目性质',
                     '项目阶段',
@@ -35,16 +35,25 @@
                         var id = ids[i];
                         var rowData = jQuery("#listGrid").jqGrid('getRowData', id);
                         var bidCountOfStage = rowData["bidCountOfStage"];
+                        var stageName = rowData["stage.name"];
 //                        var opButton = '<input type="button" value="查看" onclick="doView(' + id + ',' + bidCountOfStage + ')" class="button_normal" /> ';
                         var opButton = '<input type="button" value="办证推进" onclick="doEditBzjd(' + id + ',' + bidCountOfStage + ')" class="button_normal_long" /> ';
                         opButton += '<input type="button" value="形象进度" onclick="doEditXxjd(' + id + ')" class="button_normal_long" /> ';
+                        if (stageName == '未开工') {
+                            //判断项目阶段的高亮显示（删除列时注意修改）
+                            $("#" + id).find("td:eq(5)").css("background-color", "red");
+                        } else if (stageName == '在建') {
+                            $("#" + id).find("td:eq(5)").css("background-color", "blue");
+                        } else if (stageName == '已完工') {
+                            $("#" + id).find("td:eq(5)").css("background-color", "green");
+                        }
                         jQuery("#listGrid").jqGrid('setRowData', ids[i], { operation: opButton});
                     }
                 }, rownumbers: true
             },
             userOpts: {
                 defaultQuery: { "groupOp": "AND", "rules": [
-                    { "field": "开始年份", "op": "eq", "data": ""},
+                    { "field": "填报年份", "op": "eq", "data": ""},
                     { "field": "项目名称", "op": "cn", "data": ""},
                     { "field": "项目性质", "op": "cn", "data": ""},
                     { "field": "项目阶段", "op": "cn", "data": ""},
