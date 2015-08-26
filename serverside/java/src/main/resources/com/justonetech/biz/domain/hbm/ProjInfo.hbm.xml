@@ -61,6 +61,17 @@
         </property>
 
 		<property
+			name="projNum"
+			column="PROJ_NUM"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">项目号</meta>
+            <meta attribute="ColumnComment">项目号</meta>
+        </property>
+
+		<property
 			name="buildMileage"
 			column="BUILD_MILEAGE"
 			type="string"

@@ -107,7 +107,13 @@ public class DataStageReportSumController {
             bidIds = bidIds.substring(1);
         }
         List<SysCodeDetail> categorys = sysCodeManager.getCodeListByCode(Constants.PROJ_INFO_CATEGORY);
-        model.addAttribute("categorys", categorys);
+        List<SysCodeDetail> list = new ArrayList<SysCodeDetail>();
+        for (SysCodeDetail category : categorys) {
+            if (category.getCode().equals("3") || category.getCode().equals("4") || category.getCode().equals("6")) {
+                list.add(category);
+            }
+        }
+        model.addAttribute("categorys", list);
         //定义汇总用的数量属性
         Integer totalPlanXZ = 0;
         Integer totalPlanGK = 0;
@@ -139,7 +145,7 @@ public class DataStageReportSumController {
         Integer accPlanSG = 0;
         //封装数据
         Map<String, Object> map = new HashMap<String, Object>();
-        for (SysCodeDetail category : categorys) {
+        for (SysCodeDetail category : list) {
             String code = category.getCode();
             Long categoryId = category.getId();
             //选址意见书

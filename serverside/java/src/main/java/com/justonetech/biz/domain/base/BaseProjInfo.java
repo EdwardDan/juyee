@@ -47,6 +47,7 @@ public abstract class BaseProjInfo  implements Serializable,Auditable {
 	public static String PROP_LOCATION = "location";
 	public static String PROP_UPDATE_TIME = "updateTime";
 	public static String PROP_NO = "no";
+	public static String PROP_PROJ_NUM = "projNum";
 	public static String PROP_PACKAGE_ATTR = "packageAttr";
 	public static String PROP_NAME = "name";
 	public static String PROP_CATEGORY = "category";
@@ -186,6 +187,10 @@ public abstract class BaseProjInfo  implements Serializable,Auditable {
     /*打包属性*/
     /*打包属性*/
 	private String packageAttr;
+
+	/*项目号*/
+    /*项目号*/
+	private String projNum;
 	
 
 	// many to one
@@ -644,8 +649,15 @@ public abstract class BaseProjInfo  implements Serializable,Auditable {
 		this.packageAttr = packageAttr;
 	}
 
+    public String getProjNum() {
+        return projNum;
+    }
 
-	/**
+    public void setProjNum(String projNum) {
+        this.projNum = projNum;
+    }
+
+    /**
 	 * Return the value associated with the column: PROPERTY_ID
 	 */
 	public com.justonetech.system.domain.SysCodeDetail getProperty () {
@@ -889,6 +901,7 @@ public abstract class BaseProjInfo  implements Serializable,Auditable {
 		builder.append(isMajor);
 		builder.append(areaCode);
 		builder.append(packageAttr);
+		builder.append(projNum);
 		return builder.toString();
 	}
 
