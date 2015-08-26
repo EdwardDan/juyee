@@ -138,6 +138,7 @@ public class Constants {
     public static final String OA_PETITION_SOURCE = "OaPetitionSource"; //信访来源
     public static final String OA_PETITION_STATUS = "OaPetitionStatus"; //信访受理状态
     public static final String OA_WEEK_ARRANGE_ZXLD = "zxld"; //领导一周安排中心领导
+    public static final String OA_MEETING_ROOM = "OaMeetingRoom"; //会议室
 
     //项目办证阶段管理
     public static final String PROJ_STAGE_PSOPINIONS = "PSOpinions";//规划选址意见书

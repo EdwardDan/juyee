@@ -83,6 +83,11 @@ public class PrivilegeCode {
     public static final String OA_MEETING_OUTER_AUDIT_FG = "OaMeetingOuter_audit_fg";  //外出会议管理_审核_分管
     public static final String OA_MEETING_OUTER_AUDIT_ZR = "OaMeetingOuter_audit_zr";  //外出会议管理_审核_主任
     public static final String OA_MEETING_INNER_EDIT = "OaMeetingInner_edit";  //内部会议管理_编辑
+
+    public static final String OA_MEETING_EDIT = OaMeeting.class.getSimpleName() + "_edit";     //内部会议管理(新)_编辑
+    public static final String OA_MEETING_AUDIT = OaMeeting.class.getSimpleName() + "_audit";   //内部会议管理(新)_审核
+    public static final String OA_MEETING_DELETE = OaMeeting.class.getSimpleName() + "_delete"; //内部会议管理(新)_强制删除
+
     public static final String OA_CAR_EDIT = "OaCar_edit";  //车辆申请_编辑
     public static final String OA_CAR_AUDIT_KZ = "OaCar_audit_kz";  //车辆申请_审核_科长
     public static final String OA_CAR_AUDIT_ZR = "OaCar_audit_zr";  //车辆申请_审核_主任
