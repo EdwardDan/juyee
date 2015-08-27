@@ -24,7 +24,7 @@
                     {name: "category.name", width: "25", align: "center", searchtype: "string", sortable: true}
                 ],
                 actModel: [
-                    {name: 'operation', width: 60, align: 'center'}
+                    {name: 'operation', width: 45, align: 'center'}
                 ],
                 pager: '#pager2',
                 caption: "项目扩展信息列表",
