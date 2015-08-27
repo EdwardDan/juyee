@@ -13,6 +13,8 @@ public class Constants {
     public static final String SYS_NOPICTURE_PIC = "no_picture.gif"; //无图片
     public static final String SYS_USER_ADMIN = "admin";  //系统管理员用户名
     public static final String SYS_DEPT_OWNER = "OWNER";  //业主单位代码
+    public static final String SYS_DEPT_LEADER_NAME = "科长";  //各科室科长
+    public static final String SYS_TOP_LEADER_NAME = "主任";  //建管署主任
 
     public static final String GRID_SQL_KEY = "gsk";  //excel导出时将sql放入session所用的key
 
