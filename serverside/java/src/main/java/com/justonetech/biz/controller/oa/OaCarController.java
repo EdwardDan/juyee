@@ -92,11 +92,7 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
     @RequestMapping
     public String grid(Model model) {
         //判断是否有编辑权限
-        model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.OA_CAR_EDIT));
-        model.addAttribute("canKzAudit", sysUserManager.hasPrivilege(PrivilegeCode.OA_CAR_AUDIT_KZ));
-        model.addAttribute("canZrAudit", sysUserManager.hasPrivilege(PrivilegeCode.OA_CAR_AUDIT_ZR));
-        model.addAttribute("canClddAudit", sysUserManager.hasPrivilege(PrivilegeCode.OA_CAR_AUDIT_CLDD));
-
+        modelStatus(model);
         return "view/oa/oaCar/grid";
     }
 
@@ -113,11 +109,11 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
     public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session) {
         try {
             Page pageModel = new Page(page, rows, true);
-            String hql = "from OaCar order by id desc";
+            String hql = "from OaCar where applyDept.id={0} order by id desc";
             //增加自定义查询条件
-
+            String formatHql = FormatUtils.format(hql, sysUserManager.getSysUser().getPerson().getDept().getId());
             //执行查询
-            QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);
+            QueryTranslateJq queryTranslate = new QueryTranslateJq(formatHql, filters);
             String query = queryTranslate.toString();
             session.setAttribute(Constants.GRID_SQL_KEY, query);
             pageModel = oaCarService.findByPage(pageModel, query);
@@ -267,7 +263,6 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
                         "useCause",
                         "address",
                         "driverMobile",
-                        "status"
                 });
 
             } else {
@@ -279,6 +274,8 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
 
             String applyUserId = request.getParameter("applyUserId");
             SysUser sysUser = sysUserService.get(JspHelper.getLong(applyUserId));
+            entity.setStatus(JspHelper.getInteger(request.getParameter("statusCode")));
+            target.setStatus(JspHelper.getInteger(request.getParameter("statusCode")));
             target.setApplyDept(sysDept);
             target.setApplyUser(sysUser);
 
@@ -317,12 +314,12 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
                 target = oaCarService.get(entity.getId());
                 ReflectionUtils.copyBean(entity, target, new String[]{
                         "driverMobile",
-                        "status"
                 });
             } else {
                 target = entity;
             }
-
+            entity.setStatus(JspHelper.getInteger(request.getParameter("statusCode")));
+            target.setStatus(JspHelper.getInteger(request.getParameter("statusCode")));
             String kzAuditOpinion = request.getParameter("kzAuditOpinion");
             if (!StringHelper.isEmpty(kzAuditOpinion)) {
                 target.setKzAuditOpinion(kzAuditOpinion);
@@ -392,7 +389,7 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
             sendSuccessJSON(response, "科长审核退回");
         } else if (entity.getStatus() == OaCarStatus.STATUS_MAIN_BACK.getCode()) {
             sendSuccessJSON(response, "办公室主任审核退回");
-        }   else if (entity.getStatus() == OaCarStatus.STATUS_CAR_SCHEDULE.getCode()) {
+        } else if (entity.getStatus() == OaCarStatus.STATUS_CAR_SCHEDULE.getCode()) {
             sendSuccessJSON(response, "车辆调度成功");
         }
     }
@@ -438,7 +435,7 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
      * @param model
      */
     public void modelStatus(Model model) {
-
+        model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.OA_CAR_EDIT));
         model.addAttribute("canKzAudit", sysUserManager.hasPrivilege(PrivilegeCode.OA_CAR_AUDIT_KZ));
         model.addAttribute("canZrAudit", sysUserManager.hasPrivilege(PrivilegeCode.OA_CAR_AUDIT_ZR));
         model.addAttribute("canClddAudit", sysUserManager.hasPrivilege(PrivilegeCode.OA_CAR_AUDIT_CLDD));

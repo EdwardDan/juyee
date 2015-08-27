@@ -21,7 +21,7 @@ public class OaCar extends BaseOaCar {
 
 /*[CONSTRUCTOR MARKER END]*/
 
-    public String getStatu() {
+    public String getStatusName() {
         return getStatus() != null ? OaCarStatus.getColorNameByCode(getStatus()) : "";
     }
 

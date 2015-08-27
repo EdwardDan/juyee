@@ -31,10 +31,10 @@
 
         //修改状态
         if (t == '${STATUS_EDIT}') {
-            $("#status").val('${STATUS_EDIT}');
+            $("#statusCode").val('${STATUS_EDIT}');
             saveAjaxData("${ctx}/oaCar/save.do", formId);
         } else if (t == '${STATUS_SUBMIT}') {
-            $("#status").val('${STATUS_SUBMIT}');
+            $("#statusCode").val('${STATUS_SUBMIT}');
             //提交表单
             $.messager.confirm('系统提示', "确定提交吗？提交后将不能修改！", function (r) {
                 if (r) {
@@ -59,7 +59,7 @@
 </script>
 <form:form commandName="bean">
     <form:hidden path="id"/>
-    <form:hidden path="status"/>
+    <input id="statusCode" type="hidden" name="statusCode" value="${bean.status}"/>
 
     <div class="form_div">
         <fieldset class="form_fieldset">
