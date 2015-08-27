@@ -6,12 +6,12 @@
 <div class="form_div">
     <table cellpadding="0" cellspacing="0" class="form_table">
         <tr class="tr_light">
-            <td class="form_label_right" style="width: 15%">报建编号：</td>
-            <td class="form_content" style="width: 30%">
-                ${bean.bjbh}
-            </td>
+            <%--<td class="form_label_right" style="width: 15%">报建编号：</td>--%>
+            <%--<td class="form_content" style="width: 30%">--%>
+                <%--${bean.bjbh}--%>
+            <%--</td>--%>
             <td class="form_label_right" style="width: 10%">项目编号：</td>
-            <td class="form_content" style="width: 45%">
+            <td class="form_content" style="width: 90%" colspan="3">
                 ${bean.projNum}
             </td>
         </tr>

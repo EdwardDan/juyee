@@ -50,12 +50,12 @@
     <div class="form_div">
         <table cellpadding="0" cellspacing="0" class="form_table">
             <tr class="tr_light">
-                <td class="form_label_right" style="width: 10%">报建编号：</td>
-                <td class="form_content">
-                    <form:input path="bjbh" cssClass="input_text"/>
-                </td>
+                <%--<td class="form_label_right" style="width: 10%">报建编号：</td>--%>
+                <%--<td class="form_content">--%>
+                    <%--<form:input path="bjbh" cssClass="input_text"/>--%>
+                <%--</td>--%>
                 <td class="form_label_right" style="width: 10%">项目编号：</td>
-                <td class="form_content">
+                <td class="form_content" colspan="3">
                     <form:input path="projNum" cssClass="input_text"/>
                 </td>
             </tr>
