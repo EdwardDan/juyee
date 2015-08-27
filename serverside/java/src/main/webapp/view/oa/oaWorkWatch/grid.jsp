@@ -54,7 +54,7 @@
                                 opButton += '<input type="button" value="审核" onclick="doAudit(' + id + ')" class="button_normal"/> ';
                             }
                         } else if (status == '${STATUS_ZR_PASS}') {
-                            if (${canEdit_KZ} && "${loginUsrDeptUsrNames}".indexOf(rowData["createUser"])) {
+                            if (${canEdit_KZ} && "${loginUsrDeptUsrNames}".indexOf(rowData["createUser"]) > -1) {
                                 opButton += '<input type="button" value="上报" onclick="doEdit(' + id + ')" class="button_normal"/> ';
                             }
                         } else if (status == '${STATUS_INFO}') {
