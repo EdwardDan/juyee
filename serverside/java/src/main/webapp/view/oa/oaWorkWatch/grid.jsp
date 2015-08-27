@@ -38,7 +38,10 @@
                         var id = ids[i];
                         var rowData = jQuery("#listGrid").jqGrid('getRowData', id);
                         var status = rowData["status"];
-                        var opButton = '<input type="button" value="查看" onclick="doView(' + id + ')" class="button_normal"/> ';
+                        var opButton = '';
+                        if (rowData["reportDept"] == "${loginUsrDeptName}") {
+                            opButton += '<input type="button" value="查看" onclick="doView(' + id + ')" class="button_normal"/> ';
+                        }
                         if ('' == status || status == '${STATUS_EDIT}' || status == '${STATUS_ZR_BACK}' || status == '${STATUS_B_BACK}') {
                             if (${canEdit}) {
                                 opButton += '<input type="button" value="编辑" onclick="doEdit(' + id + ')" class="button_normal"/> ';

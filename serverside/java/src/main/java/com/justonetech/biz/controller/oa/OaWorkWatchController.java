@@ -10,7 +10,9 @@ import com.justonetech.biz.utils.Constants;
 import com.justonetech.biz.utils.enums.OaWorkWatchStatus;
 import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.orm.hibernate.Page;
+import com.justonetech.core.utils.JspHelper;
 import com.justonetech.core.utils.ReflectionUtils;
+import com.justonetech.system.domain.SysDept;
 import com.justonetech.system.domain.SysUser;
 import com.justonetech.system.manager.SysUserManager;
 import com.justonetech.system.utils.PrivilegeCode;
@@ -64,7 +66,8 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
 
     /**
      * 列表显示页面
-     * @param tab .
+     *
+     * @param tab   .
      * @param model .
      * @return .
      */
@@ -113,13 +116,10 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
      * @param model 。
      */
     public void setStatus(Model model) {
-
-        //判断是否有编辑权限
         model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.OA_WORK_WATCH_EDIT));//编辑
         model.addAttribute("canEdit_ZR", sysUserManager.hasPrivilege(PrivilegeCode.OA_WORK_WATCH_AUDIT_ZR));//填写主任审核
         model.addAttribute("canEdit_KZ", sysUserManager.hasPrivilege(PrivilegeCode.OA_WORK_WATCH_AUDIT_KZ));//科长上报
         model.addAttribute("canEdit_B", sysUserManager.hasPrivilege(PrivilegeCode.OA_WORK_WATCH_AUDIT_B));//办公室核实
-
         model.addAttribute("STATUS_EDIT", OaWorkWatchStatus.STATUS_EDIT.getCode());//填写
         model.addAttribute("STATUS_SUBMIT", OaWorkWatchStatus.STATUS_SUBMIT.getCode());//提交
         model.addAttribute("STATUS_ZR_PASS", OaWorkWatchStatus.STATUS_ZR_PASS.getCode());//主任审核通过
@@ -127,6 +127,8 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
         model.addAttribute("STATUS_INFO", OaWorkWatchStatus.STATUS_INFO.getCode());//已上报
         model.addAttribute("STATUS_B_PASS", OaWorkWatchStatus.STATUS_B_PASS.getCode());//办公室核实通过
         model.addAttribute("STATUS_B_BACK", OaWorkWatchStatus.STATUS_B_BACK.getCode());//办公室核实退回
+        SysDept loginUsrDept = sysUserManager.getSysUser().getPerson().getDept();
+        model.addAttribute("loginUsrDeptName", loginUsrDept != null ? JspHelper.getString(loginUsrDept.getName()) : "");
     }
 
     /**
