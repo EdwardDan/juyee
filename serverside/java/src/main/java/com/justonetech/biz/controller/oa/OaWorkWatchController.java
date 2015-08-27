@@ -6,6 +6,7 @@ import com.justonetech.biz.daoservice.OaWorkWatchItemService;
 import com.justonetech.biz.daoservice.OaWorkWatchService;
 import com.justonetech.biz.domain.OaWorkWatch;
 import com.justonetech.biz.domain.OaWorkWatchItem;
+import com.justonetech.biz.manager.OaFgldManager;
 import com.justonetech.biz.utils.Constants;
 import com.justonetech.biz.utils.enums.OaWorkWatchStatus;
 import com.justonetech.core.controller.BaseCRUDActionController;
@@ -29,6 +30,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 
@@ -46,6 +49,9 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
     private SysUserManager sysUserManager;
 
     @Autowired
+    private OaFgldManager oaFgldManager;
+
+    @Autowired
     private OaWorkWatchItemService oaWorkWatchItemService;
 
     @Autowired
@@ -60,7 +66,6 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
     @RequestMapping
     public String init(Model model) {
         model.addAttribute("canSum", sysUserManager.hasPrivilege(PrivilegeCode.OA_WORK_WATCH_SUM));
-
         return "view/oa/oaWorkWatch/init";
     }
 
@@ -73,8 +78,7 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
      */
     @RequestMapping
     public String grid(Model model, String tab) {
-        //判断是否有编辑权限
-        setStatus(model);
+        setAccessCtrl(model);
         model.addAttribute("tab", tab);
         return "view/oa/oaWorkWatch/grid";
     }
@@ -91,19 +95,17 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
     @RequestMapping
     public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session) {
         try {
+            SysDept loginUsrDept = sysUserManager.getSysUser().getPerson().getDept();
+            String loginUsrDeptName = loginUsrDept != null ? JspHelper.getString(loginUsrDept.getName()) : "";
             Page pageModel = new Page(page, rows, true);
-            String hql = "from OaWorkWatch order by id desc";
-
-            //执行查询
+            String hql = "from OaWorkWatch where reportDept = '" + loginUsrDeptName + "' order by id desc";
             QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);
             String query = queryTranslate.toString();
+            logger.debug("hql ---------------->  " + query);
             session.setAttribute(Constants.GRID_SQL_KEY, query);
             pageModel = oaWorkWatchService.findByPage(pageModel, query);
-
-            //输出显示
             String json = GridJq.toJSON(columns, pageModel);
             sendJSON(response, json);
-
         } catch (Exception e) {
             log.error("error", e);
             super.processException(response, e);
@@ -115,7 +117,7 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
      *
      * @param model 。
      */
-    public void setStatus(Model model) {
+    public void setAccessCtrl(Model model) {
         model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.OA_WORK_WATCH_EDIT));//编辑
         model.addAttribute("canEdit_ZR", sysUserManager.hasPrivilege(PrivilegeCode.OA_WORK_WATCH_AUDIT_ZR));//填写主任审核
         model.addAttribute("canEdit_KZ", sysUserManager.hasPrivilege(PrivilegeCode.OA_WORK_WATCH_AUDIT_KZ));//科长上报
@@ -128,7 +130,12 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
         model.addAttribute("STATUS_B_PASS", OaWorkWatchStatus.STATUS_B_PASS.getCode());//办公室核实通过
         model.addAttribute("STATUS_B_BACK", OaWorkWatchStatus.STATUS_B_BACK.getCode());//办公室核实退回
         SysDept loginUsrDept = sysUserManager.getSysUser().getPerson().getDept();
-        model.addAttribute("loginUsrDeptName", loginUsrDept != null ? JspHelper.getString(loginUsrDept.getName()) : "");
+        List<SysUser> loginUsrDeptUsrs = loginUsrDept != null ? sysUserManager.getDeptUsers(loginUsrDept) : new ArrayList<SysUser>();
+        StringBuilder loginUsrDeptUsrNames = new StringBuilder();
+        for (SysUser loginUsrDeptUsr : loginUsrDeptUsrs) {
+            loginUsrDeptUsrNames.append(JspHelper.getString(loginUsrDeptUsr.getLoginName()).concat(loginUsrDeptUsrs.indexOf(loginUsrDeptUsr) != loginUsrDeptUsrs.size() - 1 ? "," : ""));
+        }
+        model.addAttribute("loginUsrDeptUsrNames", loginUsrDeptUsrNames.toString());
     }
 
     /**
@@ -142,8 +149,7 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
         OaWorkWatch oaWorkWatch = new OaWorkWatch();
         oaWorkWatch.setStatus(OaWorkWatchStatus.STATUS_EDIT.getCode());
         model.addAttribute("bean", oaWorkWatch);
-        setStatus(model);
-
+        setAccessCtrl(model);
         return "view/oa/oaWorkWatch/input";
     }
 
@@ -158,7 +164,7 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
     public String modify(Model model, Long id) {
         OaWorkWatch oaWorkWatch = oaWorkWatchService.get(id);
         model.addAttribute("bean", oaWorkWatch);
-        setStatus(model);
+        setAccessCtrl(model);
 
         return "view/oa/oaWorkWatch/input";
     }
@@ -174,7 +180,7 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
     public String audit(Model model, Long id) {
         OaWorkWatch oaWorkWatch = oaWorkWatchService.get(id);
         model.addAttribute("bean", oaWorkWatch);
-        setStatus(model);
+        setAccessCtrl(model);
 
         return "view/oa/oaWorkWatch/audit";
     }
@@ -189,7 +195,7 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
     @RequestMapping
     public String view(Model model, Long id) {
         OaWorkWatch oaWorkWatch = oaWorkWatchService.get(id);
-        setStatus(model);
+        setAccessCtrl(model);
         model.addAttribute("bean", oaWorkWatch);
 
         return "view/oa/oaWorkWatch/view";
@@ -219,8 +225,8 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
                 });
             } else {
                 target = entity;
-                target.setReportUser(sysUser.getDisplayName());
             }
+            target.setReportUser(sysUser.getDisplayName());
             target.setStatus(status);
             if (status == OaWorkWatchStatus.STATUS_INFO.getCode()) {
                 target.setBeginDate(new Date(System.currentTimeMillis()));
