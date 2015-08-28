@@ -141,7 +141,10 @@ public class OaFgldManager {
         String deptNames = "";
         String personNames = "";
         String hql = "from OaFgldSet where user.loginName=?";
-        OaFgldSet data = oaFgldSetService.findUnique(hql, sysUser.getLoginName());
+        OaFgldSet data = oaFgldSetService.findUnique(hql + " and isLeaf=1", sysUser.getLoginName());
+        if (null == data) {
+            data = oaFgldSetService.findUnique(hql + " and isLeaf=0", sysUser.getLoginName());
+        }
         if(data != null){
             Set<OaFgldSet> childsets = data.getChildsets();
             if(childsets.size()>0){
