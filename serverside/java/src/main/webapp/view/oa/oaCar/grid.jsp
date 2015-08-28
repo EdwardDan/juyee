@@ -42,24 +42,24 @@
                         var rowData = jQuery("#listGrid").jqGrid('getRowData', id);
                         var opButton = '<input type="button" value="查看" onclick="doView(' + id + ')" class="button_normal"/> ';
                         <c:if test="${canEdit}">
-                        if (rowData['status']=='${STATUS_EDIT}' || rowData['status']=='${STATUS_BRANCH_BACK}' || rowData['status']=='${STATUS_MAIN_BACK}') {
+                        if (rowData['status'] == '${STATUS_EDIT}' || rowData['status'] == '${STATUS_BRANCH_BACK}' || rowData['status'] == '${STATUS_MAIN_BACK}') {
                             opButton += '<input type="button" value="编辑" onclick="doEdit(' + id + ')" class="button_normal"/> ';
                             opButton += '<input type="button" value="删除" onclick="doDelete(' + id + ')" class="button_normal"/>';
                         }
                         </c:if>
-                        if (rowData['status']=='${STATUS_SUBMIT}' || rowData['status']=='${STATUS_BRANCH_PASS}') {
+                        if (rowData['status'] == '${STATUS_SUBMIT}' || rowData['status'] == '${STATUS_BRANCH_PASS}') {
                             <c:if test="${canKzAudit}">
-                            if ((rowData['status']=='${STATUS_SUBMIT}')) {
+                            if ((rowData['status'] == '${STATUS_SUBMIT}')) {
                                 opButton += '<input type="button" value="审核" onclick="doAudit(' + id + ')" class="button_normal"/> ';
                             }
                             </c:if>
                             <c:if test="${canZrAudit}">
-                            if (rowData['status']=='${STATUS_BRANCH_PASS}') {
+                            if (rowData['status'] == '${STATUS_BRANCH_PASS}') {
                                 opButton += '<input type="button" value="审核" onclick="doAudit(' + id + ')" class="button_normal"/> ';
                             }
                             </c:if>
                         }
-                        if (rowData['status']=='${STATUS_MAIN_PASS}') {
+                        if (rowData['status'] == '${STATUS_MAIN_PASS}') {
                             <c:if test="${canClddAudit}">
                             <%--if (!(rowData['canClddAudit']=='${STATUS_BRANCH_PASS}' &&${canKzAudit})) {--%>
                             opButton += '<input type="button" value="车辆调度" onclick="doAudit(' + id + ')" class="button_normal_long"/> ';
@@ -104,6 +104,14 @@
     function doAudit(id) {
         openWindow("审核车辆申请", "${ctx}/oaCar/audit.do?id=" + id, true, 800, 500);
     }
+    //按是否标注过滤数据
+    function loadThisGrid() {
+        var v = $("#isViewAll").attr("checked") == "checked";
+        jQuery("#listGrid").jqGrid('setGridParam',
+                {
+                    postData: {'isViewAll': v}
+                }).trigger('reloadGrid');
+    }
 
 </script>
 
@@ -112,11 +120,18 @@
         <div style="float:left;padding-left: 5px">
             <input type="button" name="queryButton" id="queryButton" value="查询" class="btn_Search"/>
         </div>
-        <div style="float:left;padding-left: 10px" id="conditionsDesc">
-            <input type="text" name="queryConditionDesc" id="queryConditionDesc" value="" class="title_input"
-                   readonly="true"/>
-        </div>
+        <%--<div style="float:right;padding-left: 10px" id="conditionsDesc">--%>
+        <%--<input type="text" name="queryConditionDesc" id="queryConditionDesc" value="" class="title_input"--%>
+        <%--readonly="true"/>--%>
+        <%----%>
+        <%--</div>--%>
         <div style="float:right;padding-right: 10px">
+            <%--用于查看分管领导下属所管理部门的全部信息--%>
+            <c:if test="${canViewAll}">
+                <input type="checkbox" id="isViewAll" name="isViewAll" class="checkbox"
+                       onchange="loadThisGrid()">查看全部 &nbsp;&nbsp;&nbsp;
+            </c:if>
+
             <c:if test="${canEdit}">
                 <input type="button" value="添加" class="button_add"
                        onclick="doAdd()"/>

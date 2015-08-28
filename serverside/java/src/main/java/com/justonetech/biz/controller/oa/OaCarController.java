@@ -3,8 +3,7 @@ package com.justonetech.biz.controller.oa;
 import java.sql.Timestamp;
 import java.util.*;
 
-import com.justonetech.biz.manager.MsgMessageManager;
-import com.justonetech.biz.manager.OaTaskManager;
+import com.justonetech.biz.manager.*;
 import com.justonetech.biz.utils.enums.OaCarStatus;
 import com.justonetech.core.utils.*;
 import com.justonetech.system.daoservice.SysDeptService;
@@ -21,10 +20,8 @@ import com.justonetech.biz.core.orm.hibernate.QueryTranslateJq;
 import com.justonetech.biz.daoservice.OaCarService;
 import com.justonetech.biz.domain.OaCar;
 
-import com.justonetech.biz.manager.DocumentManager;
 import com.justonetech.biz.utils.Constants;
 import com.justonetech.biz.daoservice.DocDocumentService;
-import com.justonetech.biz.manager.ConfigManager;
 import com.justonetech.system.daoservice.SysCodeDetailService;
 import com.justonetech.system.domain.SysCodeDetail;
 import com.justonetech.system.manager.SysCodeManager;
@@ -83,6 +80,9 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
     @Autowired
     private MsgMessageManager msgMessageManager;
 
+    @Autowired
+    private OaFgldManager oaFgldManager;
+
     /**
      * 列表显示页面
      *
@@ -106,14 +106,24 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
      * @param rows     .
      */
     @RequestMapping
-    public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session) {
+    public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session, boolean isViewAll) {
         try {
             Page pageModel = new Page(page, rows, true);
-            String hql = "from OaCar where applyDept.id={0} order by id desc";
+            String hql = "from OaCar where 1=1";
             //增加自定义查询条件
-            String formatHql = FormatUtils.format(hql, sysUserManager.getSysUser().getPerson().getDept().getId());
+            String[] managerPersonAndDepts = oaFgldManager.getManagerPersonAndDepts(sysUserManager.getSysUser());
+            String deptNames = managerPersonAndDepts[0];
+            //用于主任查看所用部门的信息
+            if (isViewAll) {
+                deptNames = oaFgldManager.getManagerAllDepts(sysUserManager.getSysUser());
+            }
+
+            if (sysUserManager.getSysUser().getPerson().getDept() != null) {
+                deptNames += "," + sysUserManager.getSysUser().getPerson().getDept().getName();
+            }
+            hql += " and applyDept.name in('" + StringHelper.findAndReplace(deptNames, ",", "','") + "') order by id desc";
             //执行查询
-            QueryTranslateJq queryTranslate = new QueryTranslateJq(formatHql, filters);
+            QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);
             String query = queryTranslate.toString();
             session.setAttribute(Constants.GRID_SQL_KEY, query);
             pageModel = oaCarService.findByPage(pageModel, query);
@@ -128,7 +138,6 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
             //输出显示
             String json = GridJq.toJSON(gridValue, pageModel);
             sendJSON(response, json);
-
         } catch (Exception e) {
             log.error("error", e);
             super.processException(response, e);
@@ -439,6 +448,7 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
         model.addAttribute("canKzAudit", sysUserManager.hasPrivilege(PrivilegeCode.OA_CAR_AUDIT_KZ));
         model.addAttribute("canZrAudit", sysUserManager.hasPrivilege(PrivilegeCode.OA_CAR_AUDIT_ZR));
         model.addAttribute("canClddAudit", sysUserManager.hasPrivilege(PrivilegeCode.OA_CAR_AUDIT_CLDD));
+        model.addAttribute("canViewAll", sysUserManager.hasPrivilege(PrivilegeCode.OA_CAR_VIEW_ALL));
 
         model.addAttribute("STATUS_EDIT", OaCarStatus.STATUS_EDIT.getCode());
         model.addAttribute("STATUS_SUBMIT", OaCarStatus.STATUS_SUBMIT.getCode());

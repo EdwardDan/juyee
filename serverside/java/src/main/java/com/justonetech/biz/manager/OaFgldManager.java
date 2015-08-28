@@ -96,17 +96,17 @@ public class OaFgldManager {
      * @param loginName .
      * @return .
      */
-    public String getDeptLeader(String loginName){
+    public String getDeptLeader(String loginName) {
         SysUser sysUser = sysUserManager.getSysUser(loginName);  //通过loginName获取sysUser
         SysDept sysDept = sysUser.getPerson().getDept(); //获取部门
-        String hql ="from SysPersonDept t where t.dept.id='{0}'and t.position='{1}'";
+        String hql = "from SysPersonDept t where t.dept.id='{0}'and t.position='{1}'";
         List<SysPersonDept> sysPersonDeptList = sysPersonDeptService.findByQuery(FormatUtils.format(hql, JspHelper.getString(sysDept.getId()), Constants.SYS_DEPT_LEADER_NAME));
-        if(sysPersonDeptList.size()>0){
-            SysPersonDept sysPersonDept =sysPersonDeptList.iterator().next();
+        if (sysPersonDeptList.size() > 0) {
+            SysPersonDept sysPersonDept = sysPersonDeptList.iterator().next();
             SysPerson person = sysPersonDept.getPerson();
             Set<SysUser> sysUsers = person.getSysUsers();
-            if(sysUsers.size()>0){
-                SysUser data =sysUsers.iterator().next();
+            if (sysUsers.size() > 0) {
+                SysUser data = sysUsers.iterator().next();
                 return data.getLoginName();
             }
         }
@@ -118,13 +118,13 @@ public class OaFgldManager {
      *
      * @return .
      */
-    public String getTopLeader(){
-        String hql="from SysPersonDept where position='{0}'";
+    public String getTopLeader() {
+        String hql = "from SysPersonDept where position='{0}'";
         List<SysPersonDept> list = sysPersonDeptService.findByQuery(FormatUtils.format(hql, Constants.SYS_TOP_LEADER_NAME));
-        if(list.size()>0){
+        if (list.size() > 0) {
             SysPersonDept sysPersonDept = list.iterator().next();
             Set<SysUser> sysUsers = sysPersonDept.getPerson().getSysUsers();
-            if(sysUsers.size()>0){
+            if (sysUsers.size() > 0) {
                 SysUser sysUser = sysUsers.iterator().next();
                 return sysUser.getLoginName();
             }
@@ -134,10 +134,11 @@ public class OaFgldManager {
 
     /**
      * 获取所管辖的部门或人员
+     *
      * @param sysUser .
      * @return .
      */
-    public String[] getManagerPersonAndDepts(SysUser sysUser){
+    public String[] getManagerPersonAndDepts(SysUser sysUser) {
         String deptNames = "";
         String personNames = "";
         String hql = "from OaFgldSet where user.loginName=?";
@@ -145,23 +146,51 @@ public class OaFgldManager {
         if (null == data) {
             data = oaFgldSetService.findUnique(hql + " and isLeaf=0", sysUser.getLoginName());
         }
-        if(data != null){
+        if (data != null) {
             Set<OaFgldSet> childsets = data.getChildsets();
-            if(childsets.size()>0){
+            if (childsets.size() > 0) {
                 for (OaFgldSet childset : childsets) {
-                    personNames += ","+childset.getUser().getPerson().getName();
+                    personNames += "," + childset.getUser().getPerson().getName();
                 }
                 personNames = personNames.substring(1);
-            }else{
+            } else {
                 Set<OaFgldSetItem> oaFgldSetItems = data.getOaFgldSetItems();
-                if(oaFgldSetItems.size()>0){
+                if (oaFgldSetItems.size() > 0) {
                     for (OaFgldSetItem oaFgldSetItem : oaFgldSetItems) {
-                        deptNames += ","+oaFgldSetItem.getDept().getName();
+                        deptNames += "," + oaFgldSetItem.getDept().getName();
                     }
                     deptNames = deptNames.substring(1);
                 }
             }
         }
-        return new String[]{deptNames,personNames};
+        return new String[]{deptNames, personNames};
+    }
+
+    /**
+     * 获取所管辖的人员下的所有部门
+     *
+     * @param sysUser .
+     * @return .
+     */
+    public String getManagerAllDepts(SysUser sysUser) {
+        String deptNames = "";
+        String hql = "from OaFgldSet where user.loginName=?";
+        OaFgldSet data = oaFgldSetService.findUnique(hql + " and isLeaf=0", sysUser.getLoginName());
+        if (data != null) {
+            Set<OaFgldSet> childsets = data.getChildsets();
+            if (childsets.size() > 0) {
+                for (OaFgldSet childset : childsets) {
+                    Set<OaFgldSetItem> oaFgldSetItems = childset.getOaFgldSetItems();
+                    if (oaFgldSetItems != null && oaFgldSetItems.size() > 0) {
+                        for (OaFgldSetItem oaFgldSetItem : oaFgldSetItems) {
+                            if (!deptNames.contains(oaFgldSetItem.getDept().getName()))
+                                deptNames += "," + oaFgldSetItem.getDept().getName();
+                        }
+                        deptNames = deptNames.substring(1);
+                    }
+                }
+            }
+        }
+        return deptNames;
     }
 }
