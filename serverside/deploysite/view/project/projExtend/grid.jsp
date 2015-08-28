@@ -24,7 +24,7 @@
                     {name: "category.name", width: "25", align: "center", searchtype: "string", sortable: true}
                 ],
                 actModel: [
-                    {name: 'operation', width: 60, align: 'center'}
+                    {name: 'operation', width: 45, align: 'center'}
                 ],
                 pager: '#pager2',
                 caption: "项目扩展信息列表",
@@ -42,11 +42,11 @@
                         </c:if>
                         if (stageName == '未开工') {
                             //判断项目阶段的高亮显示（删除列时注意修改）
-                            $("#" + id).find("td:eq(6)").css("background-color", "red");
+                            $("#" + id).find("td:eq(6)").css("background-color", " #f08080");
                         } else if (stageName == '在建') {
-                            $("#" + id).find("td:eq(6)").css("background-color", "blue");
+                            $("#" + id).find("td:eq(6)").css("background-color", "#add8e6");
                         } else if (stageName == '已完工') {
-                            $("#" + id).find("td:eq(6)").css("background-color", "green");
+                            $("#" + id).find("td:eq(6)").css("background-color", "#90ee90");
                         }
                         jQuery("#listGrid").jqGrid('setRowData', ids[i], { operation: opButton});
                     }

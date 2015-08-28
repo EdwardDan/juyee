@@ -7,21 +7,23 @@
                 url: "${ctx}/dataStageReport/gridDataCustom.do",
                 colNames: ['ID',
                     '填报年份',
+                    '项目序号',
                     '项目名称',
                     '项目性质',
                     '项目阶段',
                     '项目类型',
-                    '标段数1',
+                    '办证推进标段数',
                     '操作'
                 ],
                 colModel: [
                     {name: 'id', width: 10, align: "center", searchtype: "integer", hidden: true},
                     {name: "year", width: "30", align: "center", searchtype: "integer", sortable: true},
-                    {name: "name", width: "70", align: "left", searchtype: "string", sortable: true},
-                    {name: "property.name", width: "40", align: "center", searchtype: "string", sortable: true},
-                    {name: "stage.name", width: "40", align: "center", searchtype: "string", sortable: true},
-                    {name: "category.name", width: "40", align: "center", searchtype: "string", sortable: true},
-                    {name: "bidCountOfStage", width: "5", align: "center", searchtype: "integer", hidden: true}
+                    {name: "no", width: "30", align: "center", searchtype: "string", sortable: true},
+                    {name: "name", width: "80", align: "left", searchtype: "string", sortable: true},
+                    {name: "property.name", width: "25", align: "center", searchtype: "string", sortable: true},
+                    {name: "stage.name", width: "25", align: "center", searchtype: "string", sortable: true},
+                    {name: "category.name", width: "25", align: "center", searchtype: "string", sortable: true},
+                    {name: "bidCountOfStage", width: "10", align: "center", searchtype: "integer", hidden: true}
                 ],
                 actModel: [
                     {name: 'operation', width: 45, align: 'center'}
@@ -41,11 +43,11 @@
                         opButton += '<input type="button" value="形象进度" onclick="doEditXxjd(' + id + ')" class="button_normal_long" /> ';
                         if (stageName == '未开工') {
                             //判断项目阶段的高亮显示（删除列时注意修改）
-                            $("#" + id).find("td:eq(5)").css("background-color", "red");
+                            $("#" + id).find("td:eq(6)").css("background-color", " #f08080");
                         } else if (stageName == '在建') {
-                            $("#" + id).find("td:eq(5)").css("background-color", "blue");
+                            $("#" + id).find("td:eq(6)").css("background-color", "#add8e6");
                         } else if (stageName == '已完工') {
-                            $("#" + id).find("td:eq(5)").css("background-color", "green");
+                            $("#" + id).find("td:eq(6)").css("background-color", "#90ee90");
                         }
                         jQuery("#listGrid").jqGrid('setRowData', ids[i], { operation: opButton});
                     }
