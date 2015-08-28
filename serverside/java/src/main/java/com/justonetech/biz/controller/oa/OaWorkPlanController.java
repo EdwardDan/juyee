@@ -10,12 +10,14 @@ import com.justonetech.biz.domain.OaWorkPlan;
 import com.justonetech.biz.domain.OaWorkPlanItem;
 import com.justonetech.biz.manager.ConfigManager;
 import com.justonetech.biz.manager.DocumentManager;
+import com.justonetech.biz.manager.OaFgldManager;
 import com.justonetech.biz.utils.Constants;
 import com.justonetech.biz.utils.enums.OaWorkPlanStatus;
 import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.orm.hibernate.Page;
 import com.justonetech.core.utils.JspHelper;
 import com.justonetech.core.utils.ReflectionUtils;
+import com.justonetech.core.utils.StringHelper;
 import com.justonetech.system.domain.SysDept;
 import com.justonetech.system.domain.SysUser;
 import com.justonetech.system.manager.SimpleQueryManager;
@@ -73,6 +75,9 @@ public class OaWorkPlanController extends BaseCRUDActionController<OaWorkPlan> {
     @Autowired
     private OaWorkPlanSumItemService oaWorkPlanSumItemService;
 
+    @Autowired
+    private OaFgldManager oaFgldManager;
+
 
     /**
      * 列表显示页面
@@ -92,6 +97,7 @@ public class OaWorkPlanController extends BaseCRUDActionController<OaWorkPlan> {
         model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.OA_WORK_PLAN_EDIT));
         model.addAttribute("canEdit_KZ", sysUserManager.hasPrivilege(PrivilegeCode.OA_WORK_PLAN_AUDIZ_KZ));
         model.addAttribute("canEdit_FG", sysUserManager.hasPrivilege(PrivilegeCode.OA_WORK_PLAN_AUDIT_FG));
+        model.addAttribute("canView_ALL", sysUserManager.hasPrivilege(PrivilegeCode.OA_WORK_PLAN_VIEW_ALL));
         //常量定义
         model.addAttribute("STATUS_EDIT", OaWorkPlanStatus.STATUS_EDIT.getCode());
         model.addAttribute("STATUS_SUBMIT", OaWorkPlanStatus.STATUS_SUBMIT.getCode());
@@ -116,8 +122,15 @@ public class OaWorkPlanController extends BaseCRUDActionController<OaWorkPlan> {
             Page pageModel = new Page(page, rows, true);
             String hql = "from OaWorkPlan where 1=1";
             //增加自定义查询条件-判断只有编辑权限和科长权限的只能获取本科室数据
-            if(sysUserManager.hasPrivilege(PrivilegeCode.OA_WORK_PLAN_EDIT)||sysUserManager.hasPrivilege(PrivilegeCode.OA_WORK_PLAN_AUDIZ_KZ)){
-                hql += "and reportDept = '" +sysUserManager.getSysUser().getPerson().getDeptName()+"'";
+            if(!sysUserManager.hasPrivilege(PrivilegeCode.OA_WORK_PLAN_VIEW_ALL)){
+                if(!sysUserManager.hasPrivilege(PrivilegeCode.OA_WORK_PLAN_AUDIT_FG)){
+                    hql += "and reportDept = '" +sysUserManager.getSysUser().getPerson().getDeptName()+"'";
+                }
+                else{
+                    String []managerPersonAndDepts =oaFgldManager.getManagerPersonAndDepts(sysUserManager.getSysUser());
+                    String deptNames = managerPersonAndDepts[0];
+                    hql += " and reportDept in('" + StringHelper.findAndReplace(deptNames, ",", "','") + "')";
+                }
             }
             hql += "order by id desc";
             //执行查询

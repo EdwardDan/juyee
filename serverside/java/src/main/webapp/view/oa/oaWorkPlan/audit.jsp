@@ -113,7 +113,7 @@
                                 <input type="hidden" name="dutyPerosn"  value="${item.dutyPerosn}">
                     </td>
 
-                    <td  style="text-align: center">
+                    <td  style="text-align: center;color: red;">
                             ${item.keyWork}
                                 <input type="hidden" name="keyWork" value="${item.keyWork}">
                     </td>
