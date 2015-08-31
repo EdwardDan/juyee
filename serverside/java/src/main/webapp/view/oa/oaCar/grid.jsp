@@ -4,7 +4,7 @@
     $(function () {
         var conf = {
             gridOpts: {
-                url: "${ctx}/oaCar/gridDataCustom.do",
+                url: "${ctx}/oaCar/gridDataCustom.do?isCarAudit="+'${canClddAudit}',
                 colNames: ['ID',
                     '申请部门',
                     '申请人',

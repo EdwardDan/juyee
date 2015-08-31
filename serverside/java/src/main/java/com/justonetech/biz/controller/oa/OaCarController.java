@@ -21,13 +21,11 @@ import com.justonetech.biz.daoservice.OaCarService;
 import com.justonetech.biz.domain.OaCar;
 
 import com.justonetech.biz.utils.Constants;
-import com.justonetech.biz.daoservice.DocDocumentService;
 import com.justonetech.system.daoservice.SysCodeDetailService;
 import com.justonetech.system.domain.SysCodeDetail;
 import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
 import com.justonetech.system.utils.PrivilegeCode;
-import com.justonetech.system.manager.SimpleQueryManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -106,7 +104,7 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
      * @param rows     .
      */
     @RequestMapping
-    public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session, boolean isViewAll) {
+    public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session, boolean isViewAll, boolean isCarAudit) {
         try {
             Page pageModel = new Page(page, rows, true);
             String hql = "from OaCar where 1=1";
@@ -121,7 +119,14 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
             if (sysUserManager.getSysUser().getPerson().getDept() != null) {
                 deptNames += "," + sysUserManager.getSysUser().getPerson().getDept().getName();
             }
-            hql += " and applyDept.name in('" + StringHelper.findAndReplace(deptNames, ",", "','") + "') order by id desc";
+            //有车辆调度权限，只能查询已调度和审核已通过的信息
+            if (isCarAudit) {
+                hql += " and status in(" + OaCarStatus.STATUS_MAIN_PASS.getCode()+","+OaCarStatus.STATUS_CAR_SCHEDULE.getCode()+")";
+            } else {
+                hql += " and applyDept.name in('" + StringHelper.findAndReplace(deptNames, ",", "','") + "')";
+            }
+            hql += " order by id desc";
+
             //执行查询
             QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);
             String query = queryTranslate.toString();
