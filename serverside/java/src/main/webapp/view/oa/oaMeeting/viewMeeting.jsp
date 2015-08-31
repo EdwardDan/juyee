@@ -19,7 +19,7 @@
 </script>
 <div class="form_div">
     <table cellpadding="0" cellspacing="0" class="form_table">
-        <sys:calendar themePath="${themePath}" requestPage="${requestPage}" startDate="" endDate=""/>
+        <sys:calendar themePath="${themePath}" requestPage="${requestPage}" startDate="${startDate}" endDate="${endDate}"/>
     </table>
     <div id="results" style="overflow: auto;"></div>
     <br>

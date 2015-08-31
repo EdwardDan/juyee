@@ -52,15 +52,11 @@
                                 opButton += '<input type="button" value="审核" onclick="doAudit(' + id + ')" class="button_normal"/> ';
                             }
                         } else if (status == '${STATUS_ZR_PASS}') {
-                            if (${canEdit_KZ} &&
-                            ${IS_LOGIN_USR_DEPT_LEADER} &&
-                            "${loginUsrDeptUsrNames}".indexOf(rowData["createUser"]) > 0
-                        )
-                            {
+                            if (${canEdit_KZ} && ${IS_LOGIN_USR_DEPT_LEADER} && "${loginUsrDeptUsrNames}".indexOf(rowData["createUser"]) > 0 ) {
                                 opButton += '<input type="button" value="上报" onclick="doEdit(' + id + ')" class="button_normal"/> ';
                             }
                         } else if (status == '${STATUS_INFO}') {
-                            if (${canEdit_B}) {
+                            if (${canEdit_B} && ${canEdit_KZ} && ${IS_LOGIN_USR_DEPT_LEADER}) {
                                 opButton += '<input type="button" value="核实" onclick="doEdit(' + id + ')" class="button_normal"/> ';
                             }
                         }

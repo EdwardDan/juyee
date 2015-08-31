@@ -242,6 +242,31 @@ public class OaMeetingController extends BaseCRUDActionController<OaMeeting> {
         colorDeclare.put("审批完成", "#00B0F0");
         colorDeclare.put("申请中", "#FFFF00");
         model.addAttribute("colorDeclare", colorDeclare);
+        Calendar c = Calendar.getInstance();
+        int i1 = c.get(Calendar.DAY_OF_WEEK);
+        c.add(Calendar.DATE, 2 - i1); //回溯到周一
+        //日历循环
+        String start;
+        String end;
+        for (int i = 0; i < 7; i++) {
+            String month = (c.get(Calendar.MONTH) + 1) + "";
+            String day = (c.get(Calendar.DATE)) + "";
+            if (month.length() == 1) {
+                month = "0" + month;
+            }
+            if (day.length() == 1) {
+                day = "0" + day;
+            }
+            if (i == 0) {
+                start = c.get(Calendar.YEAR) + "-" + month + "-" + day;
+                model.addAttribute("startDate", start);
+            }
+            if (i == 6) {
+                end = c.get(Calendar.YEAR) + "-" + month + "-" + day;
+                model.addAttribute("endDate", end);
+            }
+            c.add(Calendar.DATE, 1);//日历+1
+        }
         return "view/oa/oaMeeting/viewMeeting";
     }
 
