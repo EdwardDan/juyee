@@ -121,12 +121,11 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
             }
             //有车辆调度权限，只能查询已调度和审核已通过的信息
             if (isCarAudit) {
-                hql += " and status in(" + OaCarStatus.STATUS_MAIN_PASS.getCode()+","+OaCarStatus.STATUS_CAR_SCHEDULE.getCode()+")";
+                hql += " and status in(" + OaCarStatus.STATUS_MAIN_PASS.getCode() + "," + OaCarStatus.STATUS_CAR_SCHEDULE.getCode() + ")";
             } else {
                 hql += " and applyDept.name in('" + StringHelper.findAndReplace(deptNames, ",", "','") + "')";
             }
             hql += " order by id desc";
-
             //执行查询
             QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);
             String query = queryTranslate.toString();
