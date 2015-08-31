@@ -122,11 +122,11 @@ public class OaWorkPlanController extends BaseCRUDActionController<OaWorkPlan> {
             Page pageModel = new Page(page, rows, true);
             String hql = "from OaWorkPlan where 1=1";
             //增加自定义查询条件-判断只有编辑权限和科长权限的只能获取本科室数据
-            if(!sysUserManager.hasPrivilege(PrivilegeCode.OA_WORK_PLAN_VIEW_ALL)){
-                if(!sysUserManager.hasPrivilege(PrivilegeCode.OA_WORK_PLAN_AUDIT_FG)){
+            if(!sysUserManager.hasPrivilege(PrivilegeCode.OA_WORK_PLAN_VIEW_ALL)){//判断是否有查看全部权限
+                if(!sysUserManager.hasPrivilege(PrivilegeCode.OA_WORK_PLAN_AUDIT_FG)){//判断是否有分管领导审核权限
                     hql += "and reportDept = '" +sysUserManager.getSysUser().getPerson().getDeptName()+"'";
                 }
-                else{
+                else{//获取所分管的所有部门上报信息
                     String []managerPersonAndDepts =oaFgldManager.getManagerPersonAndDepts(sysUserManager.getSysUser());
                     String deptNames = managerPersonAndDepts[0];
                     hql += " and reportDept in('" + StringHelper.findAndReplace(deptNames, ",", "','") + "')";
