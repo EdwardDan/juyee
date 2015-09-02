@@ -4,7 +4,7 @@
     $(function () {
         var conf = {
             gridOpts: {
-                url: "${ctx}/oaCar/gridDataCustom.do",
+                url: "${ctx}/oaCar/gridDataCustom.do?isCarAudit="+'${canClddAudit}',
                 colNames: ['ID',
                     '申请部门',
                     '申请人',
@@ -13,6 +13,7 @@
                     '拟派车牌',
                     '拟派驾驶员',
                     '用车事由',
+                    '状态Code',
                     '状态',
                     '操作'
                 ],
@@ -25,7 +26,8 @@
                     {name: "car.name", width: "20", align: "center", searchtype: "string", sortable: true},
                     {name: "driverPerson.name", width: "20", align: "center", searchtype: "string", sortable: true},
                     {name: "useCause", width: "53", align: "left", searchtype: "string", sortable: true},
-                    {name: "statu", width: "30", align: "center", searchtype: "string", sortable: true}
+                    {name: "status", width: "53", align: "left", searchtype: "string", hidden: true},
+                    {name: "statusName", width: "30", align: "center", searchtype: "string", sortable: true}
                 ],
                 actModel: [
                     {name: 'operation', width: 40, align: 'center'}
@@ -39,28 +41,27 @@
                         var id = ids[i];
                         var rowData = jQuery("#listGrid").jqGrid('getRowData', id);
                         var opButton = '<input type="button" value="查看" onclick="doView(' + id + ')" class="button_normal"/> ';
-
                         <c:if test="${canEdit}">
-                        if (rowData['statu'].indexOf("填写") > 0 || rowData['statu'].indexOf("科长审核退回") > 0 || rowData['statu'].indexOf("办公室主任审核退回") > 0) {
+                        if (rowData['status'] == '${STATUS_EDIT}' || rowData['status'] == '${STATUS_BRANCH_BACK}' || rowData['status'] == '${STATUS_MAIN_BACK}') {
                             opButton += '<input type="button" value="编辑" onclick="doEdit(' + id + ')" class="button_normal"/> ';
                             opButton += '<input type="button" value="删除" onclick="doDelete(' + id + ')" class="button_normal"/>';
                         }
                         </c:if>
-                        if (rowData['statu'].indexOf("提交") > 0 || rowData['statu'].indexOf("科长审核通过") > 0) {
+                        if (rowData['status'] == '${STATUS_SUBMIT}' || rowData['status'] == '${STATUS_BRANCH_PASS}') {
                             <c:if test="${canKzAudit}">
-                            if ((rowData['statu'].indexOf("提交") > 0)) {
+                            if ((rowData['status'] == '${STATUS_SUBMIT}')) {
                                 opButton += '<input type="button" value="审核" onclick="doAudit(' + id + ')" class="button_normal"/> ';
                             }
                             </c:if>
                             <c:if test="${canZrAudit}">
-                            if (rowData['statu'].indexOf("科长审核通过") > 0) {
+                            if (rowData['status'] == '${STATUS_BRANCH_PASS}') {
                                 opButton += '<input type="button" value="审核" onclick="doAudit(' + id + ')" class="button_normal"/> ';
                             }
                             </c:if>
                         }
-                        if (rowData['statu'].indexOf("办公室主任审核通过") > 0) {
+                        if (rowData['status'] == '${STATUS_MAIN_PASS}') {
                             <c:if test="${canClddAudit}">
-                            <%--if (!(rowData['canClddAudit'].indexOf("科长审核通过") > 0 &&${canKzAudit})) {--%>
+                            <%--if (!(rowData['canClddAudit']=='${STATUS_BRANCH_PASS}' &&${canKzAudit})) {--%>
                             opButton += '<input type="button" value="车辆调度" onclick="doAudit(' + id + ')" class="button_normal_long"/> ';
 //                            }
                             </c:if>
@@ -103,6 +104,14 @@
     function doAudit(id) {
         openWindow("审核车辆申请", "${ctx}/oaCar/audit.do?id=" + id, true, 800, 500);
     }
+    //按是否标注过滤数据
+    function loadThisGrid() {
+        var v = $("#isViewAll").attr("checked") == "checked";
+        jQuery("#listGrid").jqGrid('setGridParam',
+                {
+                    postData: {'isViewAll': v}
+                }).trigger('reloadGrid');
+    }
 
 </script>
 
@@ -111,11 +120,18 @@
         <div style="float:left;padding-left: 5px">
             <input type="button" name="queryButton" id="queryButton" value="查询" class="btn_Search"/>
         </div>
-        <div style="float:left;padding-left: 10px" id="conditionsDesc">
-            <input type="text" name="queryConditionDesc" id="queryConditionDesc" value="" class="title_input"
-                   readonly="true"/>
-        </div>
+        <%--<div style="float:right;padding-left: 10px" id="conditionsDesc">--%>
+        <%--<input type="text" name="queryConditionDesc" id="queryConditionDesc" value="" class="title_input"--%>
+        <%--readonly="true"/>--%>
+        <%----%>
+        <%--</div>--%>
         <div style="float:right;padding-right: 10px">
+            <%--用于查看分管领导下属所管理部门的全部信息--%>
+            <c:if test="${canViewAll}">
+                <input type="checkbox" id="isViewAll" name="isViewAll" class="checkbox"
+                       onchange="loadThisGrid()">查看全部 &nbsp;&nbsp;&nbsp;
+            </c:if>
+
             <c:if test="${canEdit}">
                 <input type="button" value="添加" class="button_add"
                        onclick="doAdd()"/>

@@ -31,15 +31,8 @@
         if (!validateForm(formId)) {
             return;
         }
-
-        //加入其他业务判断
-//        if ($('#name').val() == '') {
-//            showInfoMsg('请输入姓名！',null);
-//            return;
-//        }
-
         //提交表单
-        saveAjaxData("${ctx}/oaReceive/save.do?operationId="+operationId, formId);
+        saveAjaxData("${ctx}/oaReceive/savePre.do?operationId="+operationId, formId);
     }
 </script>
 <style type="text/css">
@@ -61,6 +54,8 @@
 </style>
 <form:form commandName="bean">
     <form:hidden path="id"/>
+    <form:hidden path="year"/>
+    <form:hidden path="orderNo"/>
     <input type="hidden" name="node" id="node" value="${node.id}">
     <input type="hidden" name="step" id="step" value="${bean.step.id}">
     <div class="form_div">
@@ -69,50 +64,79 @@
                 <td class="head_title form_border" colspan="6">上海市路政局收文登记单</td>
             </tr>
             <tr class="tr_light">
-                <td class="form_content" colspan="5">&nbsp;&nbsp;文件类型：${bean.type.name}</td>
-                <td class="form_label" align="right"><%--收文编号：--%>沪路政收（${bean.year}）${bean.orderNo}号&nbsp;&nbsp;</td>
+                <td class="form_content" colspan="5">&nbsp;&nbsp;文件类型： <sys:code code="${type}" type="select" name="type" id="type" sysCodeDetailId="${bean.type.id}"/></td>
+                <td class="form_label" align="right"><%--收文编号：--%>沪路政收（${bean.year}）${bean.orderNo}号&nbsp;&nbsp;<input type="hidden" name="code" class="input_text" value="沪路政收（${bean.year}）${bean.orderNo}号"/></td>
 
             </tr>
             <tr class="tr_dark">
                 <td class="td_border" align="right">来文文号：</td>
-                <td class="td_border" align="left" colspan="3">&nbsp;${bean.fileCode}</td>
+                <td class="td_border" align="left" colspan="3">
+                    <input name="fileCode" id="fileCode" value="${bean.fileCode}" class="input_text_long" style="width: 80%">
+                </td>
                 <td class="td_border" align="right">办理时限：</td>
-                <td class="td_border" align="left">&nbsp;<fmt:formatDate value="${bean.limitDate}" pattern="yyyy-MM-dd"/> </td>
+                <td class="td_border" align="left">
+                    <form:input path="limitDate" cssClass="input_datetime" readonly="true"/>
+                    <input type="button" class="button_calendar" value=" " onClick="calendar('limitDate','all');">
+                </td>
             </tr>
             <tr class="tr_light">
                 <td class="td_border" align="right">标题：</td>
-                <td class="td_border" align="left" colspan="5">&nbsp;${bean.title} </td>
+                <td class="td_border" align="left" colspan="5">
+                    <input name="title" id="title" value="${bean.title}" class="input_text_long" style="width: 80%">
+                </td>
             </tr>
             <tr class="tr_dark">
                 <td class="td_border" align="right">来文单位：</td>
-                <td class="td_border" align="left" colspan="3">&nbsp;${bean.sourceDept}</td>
+                <td class="td_border" align="left" colspan="3">
+                    <input name="sourceDept" id="sourceDept" value="${bean.sourceDept}" class="input_text_long" style="width: 80%">
+                </td>
                 <td class="td_border" align="right">份数：</td>
-                <td class="td_border" align="left">&nbsp;${bean.fs} </td>
+                <td class="td_border" align="left">
+                    <form:input path="fs" cssClass="input_text"/>
+                </td>
             </tr>
 
             <tr class="tr_light">
                 <td class="td_border" align="right"  width="10%">登记日期：</td>
-                <td class="td_border" align="left" width="23%">&nbsp;<fmt:formatDate value="${bean.receiveDate}" pattern="yyyy-MM-dd"/> </td>
+                <td class="td_border" align="left" width="23%">
+                    <form:input path="receiveDate" cssClass="input_datetime" readonly="true"/>
+                    <input type="button" class="button_calendar" value=" " onClick="calendar('receiveDate','all');">
+                </td>
                 <td class="td_border" align="right" width="10%">成文日期：</td>
-                <td class="td_border" align="left" width="23%">&nbsp;<fmt:formatDate value="${bean.writtenDate}" pattern="yyyy-MM-dd"/> </td>
+                <td class="td_border" align="left" width="23%">
+                    <form:input path="writtenDate" cssClass="input_datetime" readonly="true"/>
+                    <input type="button" class="button_calendar" value=" " onClick="calendar('writtenDate','all');">
+                </td>
                 <td class="td_border" align="right" width="10%">页数：</td>
-                <td class="td_border" align="left" width="24%">&nbsp;${bean.ys} </td>
+                <td class="td_border" align="left" width="24%">
+                    <form:input path="ys" cssClass="input_text"/>
+                </td>
             </tr>
             <tr class="tr_dark">
                 <td class="td_border" align="right">提供部门：</td>
-                <td class="td_border" align="left" colspan="3">&nbsp;${bean.deptName}</td>
+                <td class="td_border" align="left" colspan="3">
+                    <input name="deptName" id="deptName" value="${bean.deptName}" class="input_text_long" style="width: 80%">
+                </td>
                 <td class="td_border" align="right">密级：</td>
-                <td class="td_border" align="left">&nbsp;${bean.secret.name}</td>
+                <td class="td_border" align="left">
+                    <sys:code code="${secret}" type="select" name="secret" id="secret" sysCodeDetailId="${bean.secret.id}"/>
+                </td>
             </tr>
 
 
             <tr class="tr_light">
                 <td class="td_border" align="right">紧急程度：</td>
-                <td class="td_border" align="left">&nbsp;${bean.urgent.name}</td>
+                <td class="td_border" align="left">
+                    <sys:code code="${urgent}" type="select" name="urgent" id="urgent" sysCodeDetailId="${bean.urgent.id}"/>
+                </td>
                 <td class="td_border" align="right">公文种类：</td>
-                <td class="td_border" align="left">&nbsp;${bean.fileType.name}</td>
+                <td class="td_border" align="left">
+                    <sys:code code="${fileType}" type="select" name="fileType" id="fileType" sysCodeDetailId="${bean.fileType.id}"/>
+                </td>
                 <td class="td_border" align="right">牵头部门：</td>
-                <td class="td_border" align="left">&nbsp;${bean.startDept}</td>
+                <td class="td_border" align="left">
+                    <form:input path="startDept" cssClass="input_text_long"/>
+                </td>
             </tr>
            <tr  class="tr_light">
                <td class="td_border" align="right">附件：</td>
@@ -121,51 +145,8 @@
                </c:forEach>${uploadButton}
                </td>
            </tr>
-            <tr class="tr_dark">
-                <td class="td_border" align="center" colspan="6"> &nbsp;  &nbsp; &nbsp;处理人：
-                    <select name="ccUsers" id="ccUsers" size="3" multiple style="width:200px"
-                            class="input_light">
-                        <c:forEach var="sysUser" items="${sysUserHM}">
-                            <option value="${sysUser.key}">${sysUser.value}</option>
-                        </c:forEach>
-                    </select>
-                    <img src="${themePath}/workflow/user.gif" alt="请选择处理人" border="0"
-                         style="cursor:pointer"
-                         onclick="multiSelectSysUser('ccUsers','dealPersons','dealPersonsNames')">
-                    <img src="${themePath}/workflow/file_delete.gif" width="16"
-                         height="16" border="0" alt="移除选中人员" align="absbottom"
-                         onClick="removeMultiSelectOpt('ccUsers','dealPersons','dealPersonsNames')">
-                    <input type="hidden" name="dealPersons" id="dealPersons"
-                           value="${bean.dealPersons}">
-                    <input type="hidden" name="dealPersonsNames" id="dealPersonsNames">
-
-                &nbsp;  &nbsp;&nbsp;&nbsp;
-                处理部门：
-                    <select name="ccDepts" id="ccDepts" size="3" multiple style="width:200px"
-                            class="input_light">
-                        <c:forEach var="sysDept" items="${sysDeptHM}">
-                            <option value="${sysDept.key}">${sysDept.value}</option>
-                        </c:forEach>
-                    </select>
-                    <img src="${themePath}/workflow/dept.gif" alt="请选择处理部门" border="0"
-                         style="cursor:pointer"
-                         onclick="multiSelectSysDeptOwner('ccDepts','dealDepts','dealDeptsNames')">
-                    <img src="${themePath}/workflow/file_delete.gif" width="16"
-                         height="16" border="0" alt="移除选中部门" align="absbottom"
-                         onClick="removeMultiSelectOpt('ccDepts','dealDepts','dealDeptsNames')">
-                    <input type="hidden" name="dealDepts" id="dealDepts"
-                           value="${bean.dealDepts}">
-                    <input type="hidden" name="dealDeptsNames" id="dealDeptsNames">
-                </td>
-            </tr>
-            <tr class="tr_light">
-                <td class="td_border" align="right">批办：</td>
-                <td class="td_border" align="left" colspan="5">
-                    <form:textarea path="dealContent" cssClass="input_textarea_long"/>
-                </td>
-            </tr>
             <tr class="tr_button">
-                <td  align="center" colspan="6">
+                <td class="form_border" align="center" colspan="6">
                     <c:forEach items="${operations}" var="operation" >
                         <input type="button" value="${operation.name}" class="button_normal_longer"
                                onclick="save('${operation.id}',this.value)">&nbsp;

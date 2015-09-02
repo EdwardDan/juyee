@@ -1,15 +1,15 @@
-]<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/common/taglibs.jsp" %>
 <script type="text/javascript">
     var formId = "bean";
     $(function () {
         //页面验证初始化
         var validateCondition = [
-            {name:"loginName", rule:"validate[required,maxSize[30]]"},
-            {name:"person", rule:"validate[required]"},
-            {name:"displayName", rule:"validate[required,maxSize[50]]"},
-            {name:"password", rule:"validate[maxSize[10]]"},
-            {name:"confirmPassword", rule:"validate[maxSize[10]]"}
+            {name: "loginName", rule: "validate[required,maxSize[30]]"},
+            {name: "person", rule: "validate[required]"},
+            {name: "displayName", rule: "validate[required,maxSize[50]]"},
+            {name: "password", rule: "validate[maxSize[10]]"},
+            {name: "confirmPassword", rule: "validate[maxSize[10]]"}
         ];
         validateInit(validateCondition, formId);
     });
@@ -34,9 +34,9 @@
     }
 
     //显示姓名
-    function doDisplayName(){
+    function doDisplayName() {
         var v = $("#personName").val();
-        if(v != ""){
+        if (v != "") {
             $("#displayName").val(v);
         }
     }

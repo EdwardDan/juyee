@@ -98,17 +98,27 @@
             return x.getFullYear().toString().slice(-v.length);
         });
     }
+
     //查询每月周数
     function weeksInMonth(m, y) {
-        y = y || new Date().getFullYear();
-        var d = new Date(y, m, 0);
-        return Math.floor((d.getDate() - 1) / 7) + 1;
+        //problematic under the circumstances that the first day of a month starts on Saturday or February doesn't start on Sunday or the current year is the leap year
+//        y = y || new Date().getFullYear();
+//        var d = new Date(y, m, 0);
+//        return Math.floor((d.getDate() - 1) / 7) + 1;
+
+        //workable
+        var date = new Date(y, m);
+        var month = date.getMonth(), year = date.getFullYear() , firstWeekday = new Date(year, month, 1).getDay() , lastDateOfMonth = new Date(year, month + 1, 0).getDate(), offsetDate = date.getDate() + firstWeekday - 1
+                , index = 1, weeksInMonth = index + Math.ceil((lastDateOfMonth + firstWeekday - 7) / 7);
+//                , week = index + Math.floor(offsetDate / 7)
+        return weeksInMonth;
     }
+
     //显示周下拉框
     function updateWeek() {
         var year = document.getElementById("year").value;
         var month = document.getElementById("month").value;
-        var date = new Date(year, month, 1);
+//        var date = new Date(year, month, 1);
 //        var weeks = date.getWeeksOfMonth(); //IE9下不支持
         var weeks = weeksInMonth(month, year);
         document.getElementById("week").options.length = 0;

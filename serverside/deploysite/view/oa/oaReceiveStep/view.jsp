@@ -14,6 +14,10 @@
                 <td class="form_label_right" width="20%">是否会签：</td>
                 <td class="form_content" width="30%"><c:if test="${bean.isJoin}">是</c:if><c:if test="${!bean.isJoin}">否</c:if></td>
             </tr>
+            <tr class="tr_light">
+                <td class="form_label_right" width="20%">是否显示：</td>
+                <td class="form_content" colspan="3"><c:if test="${bean.isShow}">是</c:if><c:if test="${!bean.isShow}">否</c:if></td>
+            </tr>
             <tr class="tr_dark">
                 <td class="form_border" align="center" style="font-weight: bold;font-size: 17px" colspan="4">流转操作</td>
             </tr>

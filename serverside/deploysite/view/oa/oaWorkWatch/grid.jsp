@@ -10,6 +10,7 @@
                 multiselectWidth: 30,
                 colNames: ['ID',
                     '上报科室',
+                    '上报人员',
                     '科室分管领导',
                     '上报开始时间',
                     '上报结束时间',
@@ -20,6 +21,7 @@
                 colModel: [
                     {name: 'id', width: 10, align: "center", searchtype: "integer", hidden: true},
                     {name: "reportDept", width: "40", align: "center", searchtype: "string", sortable: true},
+                    {name: "createUser", width: "10", align: "center", searchtype: "string", sortable: true, hidden: true},
                     {name: "reportPerson", width: "40", align: "center", searchtype: "string", sortable: true},
                     {name: "beginDate", width: "40", align: "center", searchtype: "datetime", sortable: true, formatter: 'date', formatoptions: {srcformat: 'Y-m-d', newformat: 'Y-m-d'}},
                     {name: "endDate", width: "40", align: "center", searchtype: "datetime", sortable: true, formatter: 'date', formatoptions: {srcformat: 'Y-m-d', newformat: 'Y-m-d'}},
@@ -32,13 +34,14 @@
                 pager: '#pager2',
                 caption: "工作督办列表",
                 shrinkToFit: true,
-                gridComplete: function () {  //在此事件中循环为每一行添加修改和删除链接
+                gridComplete: function () {
                     var ids = jQuery("#listGrid").jqGrid('getDataIDs');
                     for (var i = 0; i < ids.length; i++) {
                         var id = ids[i];
                         var rowData = jQuery("#listGrid").jqGrid('getRowData', id);
                         var status = rowData["status"];
                         var opButton = '<input type="button" value="查看" onclick="doView(' + id + ')" class="button_normal"/> ';
+                        <%--if (rowData["reportDept"] == "${loginUsrDeptName}")--%>
                         if ('' == status || status == '${STATUS_EDIT}' || status == '${STATUS_ZR_BACK}' || status == '${STATUS_B_BACK}') {
                             if (${canEdit}) {
                                 opButton += '<input type="button" value="编辑" onclick="doEdit(' + id + ')" class="button_normal"/> ';
@@ -49,11 +52,11 @@
                                 opButton += '<input type="button" value="审核" onclick="doAudit(' + id + ')" class="button_normal"/> ';
                             }
                         } else if (status == '${STATUS_ZR_PASS}') {
-                            if (${canEdit_KZ}) {
+                            if (${canEdit_KZ} && ${IS_LOGIN_USR_DEPT_LEADER} && "${loginUsrDeptUsrNames}".indexOf(rowData["createUser"]) > 0 ) {
                                 opButton += '<input type="button" value="上报" onclick="doEdit(' + id + ')" class="button_normal"/> ';
                             }
                         } else if (status == '${STATUS_INFO}') {
-                            if (${canEdit_B}) {
+                            if (${canEdit_B} && ${canEdit_KZ} && ${IS_LOGIN_USR_DEPT_LEADER}) {
                                 opButton += '<input type="button" value="核实" onclick="doEdit(' + id + ')" class="button_normal"/> ';
                             }
                         }
@@ -75,30 +78,36 @@
         };
         gridinit($("#listGrid"), conf);
     });
-    var TAB_NO="${tab}";
+
+    var TAB_NO = "${tab}";
+
     function doView(id) {
-        parent.openWindow("查看工作督办", "${ctx}/oaWorkWatch/view.do?id=" + id, false,700,450,TAB_NO);
+        parent.openWindow("查看工作督办", "${ctx}/oaWorkWatch/view.do?id=" + id, false, 700, 450, TAB_NO);
     }
+
     function doAdd() {
-        parent.openWindow("添加工作督办", "${ctx}/oaWorkWatch/add.do", true,700,450,TAB_NO);
+        parent.openWindow("添加工作督办", "${ctx}/oaWorkWatch/add.do", true, 700, 450, TAB_NO);
     }
-    function doSum(btn)
-    {
+
+    function doSum(btn) {
         var ids = $("#listGrid").jqGrid("getGridParam", "selarrrow");
         if (ids == null || ids == "") {
             showInfoMsg("请选择需要汇总的记录！");
             return;
         }
         btn.disable = true;
-        return parent.openWindow("工作督办汇总", "${ctx}/oaWorkWatchSum/add.do?ids="+ids, true,700,450,TAB_NO);
+        return parent.openWindow("工作督办汇总", "${ctx}/oaWorkWatchSum/add.do?ids=" + ids, true, 700, 450, TAB_NO);
 
     }
+
     function doEdit(id) {
-        parent.openWindow("修改工作督办", "${ctx}/oaWorkWatch/modify.do?id=" + id, true,700,450,TAB_NO);
+        parent.openWindow("修改工作督办", "${ctx}/oaWorkWatch/modify.do?id=" + id, true, 700, 450, TAB_NO);
     }
+
     function doAudit(id) {
-        parent.openWindow("审核工作督办", "${ctx}/oaWorkWatch/audit.do?id=" + id, true,700,450,TAB_NO);
+        parent.openWindow("审核工作督办", "${ctx}/oaWorkWatch/audit.do?id=" + id, true, 700, 450, TAB_NO);
     }
+
     function doDelete(id) {
         doGridDelete("${ctx}/oaWorkWatch/delete.do?id=" + id);
     }
@@ -114,7 +123,7 @@
                    readonly="true"/>
         </div>
         <div style="float:right;padding-right: 10px">
-                <input type="button" value="汇总" class="button_all" onclick="doSum(this)"/>
+            <input type="button" value="汇总" class="button_all" onclick="doSum(this)"/>
             <c:if test="${canEdit}">
                 <input type="button" value="添加" class="button_add" onclick="doAdd()"/>
             </c:if>

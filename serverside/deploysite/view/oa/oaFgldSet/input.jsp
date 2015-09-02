@@ -36,30 +36,30 @@
     <div class="form_div">
         <table cellpadding="0" cellspacing="0" class="form_table">
             <tr class="tr_light">
-               <td class="form_label_right">人员：</td>
-               <td class="form_content">
-                   <input type="text" name="fgldPerson" id="fgldPerson" class="input_text"
-                          value="${bean.user.person.name}" readonly="true"/>
-                   <input type="hidden" name="person" id="person" value=""/>
-                   <input type="button" class="button_select"
-                          onclick="selectSysPerson('person','fgldPerson');"
-                          title="点击选择申请人员">
-               </td>
+                <td class="form_label_right">人员：</td>
+                <td class="form_content">
+                    <input type="text" name="fgldPerson" id="fgldPerson" class="input_text"
+                           value="${bean.user.person.name}" readonly="true"/>
+                    <input type="hidden" name="person" id="person" value=""/>
+                    <input type="button" class="button_select"
+                           onclick="selectSysPerson('person','fgldPerson');"
+                           title="点击选择申请人员">
+                </td>
             </tr>
             <tr class="tr_dark">
-                 <td class="form_label_right">分管部门：</td>
-                 <td class="form_content">
+                <td class="form_label_right">分管部门：</td>
+                <td class="form_content">
                     <select multiple="multiple" id="sysDeptSel" name="sysDeptSel" class="input_textarea">
-                         <c:forEach items="${bean.oaFgldSetItems}" var="item">
-                              <option value="${item.dept.id}">${item.dept.name}</option>
-                         </c:forEach>
+                        <c:forEach items="${bean.oaFgldSetItems}" var="item">
+                            <option value="${item.dept.id}">${item.dept.name}</option>
+                        </c:forEach>
                     </select>
                     <input type="button" value=" " class="button_select_add"
                            onclick="multiSelectSysDept('sysDeptSel','sysDeptId','')" title="点击选择单位">
                     <input type="button" value=" " class="button_select_remove"
                            onclick="removeMultiSelectOpt('sysDeptSel','sysDeptId','')" tittle="点击移除所选单位">
                     <input type="hidden" id="sysDeptId" name="sysDeptId" value="">
-                 </td>
+                </td>
             </tr>
             <tr class="tr_light">
                 <td class="form_label_right">备注：</td>

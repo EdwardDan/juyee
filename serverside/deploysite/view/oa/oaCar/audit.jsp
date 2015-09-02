@@ -18,7 +18,7 @@
 
         //修改状态
         if (t == '${STATUS_BRANCH_PASS}') {
-            $("#status").val('${STATUS_BRANCH_PASS}');
+            $("#statusCode").val('${STATUS_BRANCH_PASS}');
 
             $.messager.confirm('系统提示', "确定审核通过吗？通过后将不能修改！", function (r) {
                 if (r) {
@@ -27,7 +27,7 @@
                 }
             });
         } else if (t == '${STATUS_BRANCH_BACK}') {
-            $("#status").val('${STATUS_BRANCH_BACK}');
+            $("#statusCode").val('${STATUS_BRANCH_BACK}');
             $.messager.confirm('系统提示', "确定退回吗？", function (r) {
                 if (r) {
                     //提交表单
@@ -35,7 +35,7 @@
                 }
             });
         } else if (t == '${STATUS_MAIN_PASS}') {
-            $("#status").val('${STATUS_MAIN_PASS}');
+            $("#statusCode").val('${STATUS_MAIN_PASS}');
 
             $.messager.confirm('系统提示', "确定审核通过吗？通过后将不能修改！", function (r) {
                 if (r) {
@@ -44,7 +44,7 @@
                 }
             });
         } else if (t == '${STATUS_MAIN_BACK}') {
-            $("#status").val('${STATUS_MAIN_BACK}');
+            $("#statusCode").val('${STATUS_MAIN_BACK}');
             $.messager.confirm('系统提示', "确定退回吗？", function (r) {
                 if (r) {
                     //提交表单
@@ -63,7 +63,7 @@
                 showInfoMsg("请选择车辆！")
                 return;
             }
-            $("#status").val('${STATUS_CAR_SCHEDULE}');
+            $("#statusCode").val('${STATUS_CAR_SCHEDULE}');
             $.messager.confirm('系统提示', "调度车辆吗？确定后将不能修改！", function (r) {
                 if (r) {
                     //提交表单
@@ -86,7 +86,7 @@
 </script>
 <form:form commandName="bean">
     <form:hidden path="id"/>
-    <form:hidden path="status"/>
+    <input id="statusCode" type="hidden" name="statusCode" value="${bean.status}"/>
 
     <div class="form_div">
         <fieldset class="form_fieldset">

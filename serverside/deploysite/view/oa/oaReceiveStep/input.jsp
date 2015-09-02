@@ -76,6 +76,12 @@
                 <form:checkbox path="isJoin" value="1"/>
             </td>
         </tr>
+            <tr class="tr_light">
+            <td class="form_label_right">是否显示：</td>
+            <td class="form_content" colspan="3">
+                <form:checkbox path="isShow" value="1"/>
+            </td>
+        </tr>
             <tr class="tr_dark">
                 <td class="form_border" align="center" style="font-weight: bold;font-size: 17px" colspan="4">流转操作</td>
             </tr>
@@ -86,8 +92,9 @@
                     <td style="width:5%;">
                         <input type='button' value='新增' class='button_select_add' onclick='addLine()'>
                     </td>
-                <td style="width: 25%;">操作编码</td>
-                <td style="width: 20%;;">操作名称</td>
+                <td style="width: 20%;">操作序号</td>
+                <td style="width: 20%;">操作编码</td>
+                <td style="width: 25%;;">操作名称</td>
                 <td style="width: 10%;">是否有效</td>
             </tr>
             <c:forEach items="${bean.oaReceiveOperations}" var="item">
@@ -95,6 +102,9 @@
                         <td>
                             <input type='button' value='删除' class='button_select_remove' onclick='deleteLine(this)'>
                         </td>
+                    <td>
+                        <input type="text" name="operationOrderNo" class="input_text" style="width: 96%;" value="${item.orderNo}"/>
+                    </td>
                     <td>
                         <input type="text" name="operationCode" class="input_text" style="width: 96%;" value="${item.code}"/>
                     </td>
@@ -112,6 +122,9 @@
             <tr id="standTr" style="display: none;">
                 <td style="width: 25px">
                     <input type='button' value='删除' class='button_select_remove' onclick='deleteLine(this)'>
+                </td>
+                <td>
+                    <input type="text" name="operationOrderNo" style="width: 96%;" class="input_text"/>
                 </td>
                 <td>
                     <input type="text" name="operationCode" style="width: 96%;" class="input_text"/>

@@ -10,6 +10,7 @@
                     '流转步骤种类',
                     '流转步骤名称',
                     '是否会签',
+                    '是否显示',
                     '创建时间',
                     '创建用户名',
                     '更新时间',
@@ -22,6 +23,7 @@
                     {name:"code", width:"100", align:"center", searchtype:"string", sortable:true},
                     {name:"name", width:"100", align:"center", searchtype:"string", sortable:true},
                     {name:"isJoin", width:"50", align:"center", searchtype:"integer", sortable:true, formatter:booleanFormat},
+                    {name:"isShow", width:"50", align:"center", searchtype:"integer", sortable:true, formatter:booleanFormat},
                     {name:"createTime", width:"100", align:"center", searchtype:"datetime", sortable:true, formatter:'date', formatoptions:{srcformat:'Y-m-d H:i:s', newformat:'Y-m-d H:i:s'}},
                     {name:"createUser", width:"50", align:"center", searchtype:"string", sortable:true},
                     {name:"updateTime", width:"100", align:"center", searchtype:"datetime", sortable:true, formatter:'date', formatoptions:{srcformat:'Y-m-d H:i:s', newformat:'Y-m-d H:i:s'}},
@@ -38,10 +40,10 @@
                     for (var i = 0; i < ids.length; i++) {
                         var id = ids[i];
                         var opButton = '<input type="button" value="查看" onclick="doView(' + id + ')" class="button_normal"/> ';
-                        <c:if test = "${canEdit}" >
-                                opButton +='<input type="button" value="编辑" onclick="doEdit(' + id + ')" class="button_normal"/> ';
-                        opButton += '<input type="button" value="删除" onclick="doDelete(' + id + ')" class="button_normal"/>';
-                        </c:if>
+                        if (${canEdit}) {
+                            opButton += '<input type="button" value="编辑" onclick="doEdit(' + id + ')" class="button_normal"/> ';
+                            opButton += '<input type="button" value="删除" onclick="doDelete(' + id + ')" class="button_normal"/>';
+                        }
                         jQuery("#listGrid").jqGrid('setRowData', ids[i], { operation:opButton});
                     }
                 }, rownumbers:true
@@ -67,17 +69,15 @@
     function doView(id) {
         openWindow("查看收文管理流转步骤", "${ctx}/oaReceiveStep/view.do?id=" + id, false);
     }
-    <c:if test = "${canEdit}" >
-            function doAdd() {
-                openWindow("添加收文管理流转步骤", "${ctx}/oaReceiveStep/add.do", true);
-            }
-        function doEdit(id) {
-            openWindow("修改收文管理流转步骤", "${ctx}/oaReceiveStep/modify.do?id=" + id, true);
-        }
+    function doAdd() {
+        openWindow("添加收文管理流转步骤", "${ctx}/oaReceiveStep/add.do", true);
+    }
+    function doEdit(id) {
+        openWindow("修改收文管理流转步骤", "${ctx}/oaReceiveStep/modify.do?id=" + id, true);
+    }
     function doDelete(id) {
         doGridDelete("${ctx}/oaReceiveStep/delete.do?id=" + id);
     }
-    </c:if>
 
     //custom formatter
     //function customeFormat(cellvalue, options, rowObject) {

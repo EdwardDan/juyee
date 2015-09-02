@@ -102,9 +102,14 @@
     }
     //查询每月周数
     function weeksInMonth(m, y) {
-        y = y || new Date().getFullYear();
-        var d = new Date(y, m, 0);
-        return Math.floor((d.getDate() - 1) / 7) + 1;
+//        y = y || new Date().getFullYear();
+//        var d = new Date(y, m, 0);
+//        return Math.floor((d.getDate() - 1) / 7) + 1;
+        //workable
+        var date = new Date(y, m);
+        var month = date.getMonth(), year = date.getFullYear() , firstWeekday = new Date(year, month, 1).getDay() , lastDateOfMonth = new Date(year, month + 1, 0).getDate(), offsetDate = date.getDate() + firstWeekday - 1
+                , index = 1, weeksInMonth = index + Math.ceil((lastDateOfMonth + firstWeekday - 7) / 7);
+        return weeksInMonth;
     }
     //显示周下拉框
     function updateWeek() {
