@@ -27,6 +27,7 @@ public abstract class BaseOaReceiveOperation  implements Serializable,Auditable 
 
 	public static String REF = "OaReceiveOperation";
     public static String PROP_ID = "id";
+    public static String PROP_ORDER_NO = "orderNo";
     public static String PROP_CODE = "code";
     public static String PROP_NAME = "name";
     public static String PROP_STEP = "step";
@@ -58,6 +59,11 @@ public abstract class BaseOaReceiveOperation  implements Serializable,Auditable 
 
 	// primary key
 	private Long id;
+
+    // fields
+    /*操作序号*/
+    /*操作序号*/
+    private Long orderNo;
 
 	// fields
     /*操作编码*/
@@ -117,7 +123,20 @@ public abstract class BaseOaReceiveOperation  implements Serializable,Auditable 
 		this.hashCode = Integer.MIN_VALUE;
 	}
 
+    /**
+     * Return the value associated with the column: ORDER_NO
+     */
+    public Long getOrderNo () {
+        return orderNo;
+    }
 
+    /**
+     * Set the value related to the column: ORDER_NO
+     * @param orderNo the ORDER_NO value
+     */
+    public void setOrderNo (Long orderNo) {
+        this.orderNo = orderNo;
+    }
 
 
 	/**
@@ -298,7 +317,8 @@ public abstract class BaseOaReceiveOperation  implements Serializable,Auditable 
 	public String toString () {
 		org.apache.commons.lang.builder.ToStringBuilder builder = new org.apache.commons.lang.builder.ToStringBuilder(this);
 		builder.append(id);
-		builder.append(code);
+        builder.append(orderNo);
+        builder.append(code);
 		builder.append(name);
 		builder.append(isValid);
 		builder.append(createTime);

@@ -31,6 +31,7 @@ public abstract class BaseOaReceiveStep  implements Serializable,Auditable {
     public static String PROP_NAME = "name";
     public static String PROP_CODE = "code";
     public static String PROP_IS_JOIN = "isJoin";
+    public static String PROP_IS_SHOW = "isShow";
     public static String PROP_CREATE_USER = "createUser";
     public static String PROP_CREATE_TIME = "createTime";
     public static String PROP_UPDATE_TIME = "updateTime";
@@ -75,6 +76,10 @@ public abstract class BaseOaReceiveStep  implements Serializable,Auditable {
     /*是否会签*/
     /*是否会签*/
 	private Boolean isJoin;
+
+	 /*是否显示*/
+    /*是否显示*/
+	private Boolean isShow;
 	
     /*创建时间*/
     /*创建时间*/
@@ -183,6 +188,20 @@ public abstract class BaseOaReceiveStep  implements Serializable,Auditable {
 	 */
 	public void setIsJoin (Boolean isJoin) {
 		this.isJoin = isJoin;
+	}
+/**
+	 * Return the value associated with the column: IS_SHOW
+	 */
+	public Boolean getIsShow () {
+		return isShow;
+	}
+
+	/**
+	 * Set the value related to the column: IS_SHOW
+	 * @param isShow the IS_SHOW value
+	 */
+	public void setIsShow (Boolean isShow) {
+		this.isShow = isShow;
 	}
 
 
@@ -328,6 +347,7 @@ public abstract class BaseOaReceiveStep  implements Serializable,Auditable {
 		builder.append(code);
 		builder.append(name);
 		builder.append(isJoin);
+		builder.append(isShow);
 		builder.append(createTime);
 		builder.append(createUser);
 		builder.append(updateTime);

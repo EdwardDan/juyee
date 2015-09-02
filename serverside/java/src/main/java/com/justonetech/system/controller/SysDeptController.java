@@ -406,4 +406,37 @@ public class SysDeptController extends BaseCRUDActionController {
         model.addAttribute("msg", JSONArray.fromObject(ret).toString());
         return "common/msg";
     }
+
+    /**
+     * 获取树数据，业主单位的部门
+     *
+     * @param model 。
+     */
+    @RequestMapping
+    public String treeDataForOwnerSelect(String id, String icon, Model model) {
+        ZTreeBranch treeBranch = new ZTreeBranch();
+        treeBranch.setIcons(icon.split(","));
+        if (StringUtils.isEmpty(id)) {
+            treeBranch.addTreeNode(treeBranch.getRootNode("根节点"));
+        } else if (StringUtils.equals(id, "root")) {
+            List<SysDept> nodeList =sysDeptService.findByQuery("from SysDept where parent.code=? and isValid=1 order by orderNo asc", Constants.SYS_DEPT_OWNER);
+            for (SysDept data : nodeList) {
+                boolean isLeaf = data.getChildren().size() == 0;
+                ZTreeNode treeNode = new ZTreeNode();
+                treeNode.setId(String.valueOf(data.getId()));
+                treeNode.setIsLeaf(isLeaf);
+                treeNode.setName(data.getName());
+                if (BooleanUtils.isTrue(data.getIsTag())) {
+                    treeNode.setIcon("1");
+                    treeNode.setType("unit");
+                } else {
+                    treeNode.setIcon("2");
+                    treeNode.setType("dept");
+                }
+                treeBranch.addTreeNode(treeNode);
+            }
+        }
+        model.addAttribute("msg", treeBranch.toJsonString(true));
+        return "common/msg";
+    }
 }

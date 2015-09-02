@@ -28,6 +28,19 @@ function selectSysDept(inputId, inputName, callback) {
         callback: callback
     });
 }
+//业主各科室部门-多选
+function multiSelectSysDeptOwner(selectObj, inputId, inputName, callback) {
+    var icon = addIcons("company.gif,dept.gif");
+    new PopTree({
+        url: CONTEXT_NAME + '/sysDept/treeDataForOwnerSelect.do?icon=' + icon,
+        selectObj: selectObj,
+        targetId: inputId,
+        check: true,
+        targetValueId: inputName,
+        setMultiValues: setMultiValues,
+        callback: callback
+    });
+}
 //单位部门-多选
 function multiSelectSysDept(selectObj, inputId, inputName, callback) {
     var icon = addIcons("company.gif,dept.gif");

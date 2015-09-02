@@ -27,6 +27,17 @@
 			<generator class="com.justonetech.core.orm.hibernate.LongIdGenerator"/>
 		</id>
 
+        <property
+                name="orderNo"
+                column="ORDER_NO"
+                type="java.lang.Long"
+                not-null="false"
+                length="10"
+                >
+            <meta attribute="ColumnName">操作序号</meta>
+            <meta attribute="ColumnComment">操作序号</meta>
+        </property>
+
 		<property
 			name="code"
 			column="CODE"

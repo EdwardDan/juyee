@@ -70,6 +70,16 @@
             <meta attribute="ColumnName">是否会签</meta>
             <meta attribute="ColumnComment">是否会签</meta>
         </property>
+        <property
+			name="isShow"
+			column="IS_SHOW"
+			type="java.lang.Boolean"
+			not-null="false"
+			length="1"
+        >
+            <meta attribute="ColumnName">是否显示</meta>
+            <meta attribute="ColumnComment">是否显示</meta>
+        </property>
 
 		<property
 			name="createTime"
@@ -117,7 +127,7 @@
 
 	
 
-		<set name="oaReceiveOperations" inverse="true">
+		<set name="oaReceiveOperations" inverse="true" order-by="ORDER_NO ASC">
 			<key column="STEP_ID"/>
 			<one-to-many class="OaReceiveOperation"/>
 		</set>

@@ -119,10 +119,8 @@ public class OaReceiveStepController extends BaseCRUDActionController<OaReceiveS
     @RequestMapping
     public String modify(Model model, Long id) {
         OaReceiveStep oaReceiveStep = oaReceiveStepService.get(id);
-
         //处理其他业务逻辑
         model.addAttribute("bean", oaReceiveStep);
-
         return "view/oa/oaReceiveStep/input";
     }
 
@@ -136,7 +134,6 @@ public class OaReceiveStepController extends BaseCRUDActionController<OaReceiveS
     @RequestMapping
     public String view(Model model, Long id) {
         OaReceiveStep oaReceiveStep = oaReceiveStepService.get(id);
-
         model.addAttribute("bean", oaReceiveStep);
         return "view/oa/oaReceiveStep/view";
     }
@@ -160,7 +157,8 @@ public class OaReceiveStepController extends BaseCRUDActionController<OaReceiveS
                         "orderNo",
                         "code",
                         "name",
-                        "isJoin"
+                        "isJoin",
+                        "isShow"
                 });
 
             } else {
@@ -177,6 +175,7 @@ public class OaReceiveStepController extends BaseCRUDActionController<OaReceiveS
             String[] codes = request.getParameterValues("operationCode");
             String[] names = request.getParameterValues("operationName");
             String[] isValid = request.getParameterValues("operationIsValid");
+            String[] orderNo = request.getParameterValues("operationOrderNo");
             if (null != codes) {
                 for (int i = 0; i < codes.length; i++) {
                     OaReceiveOperation operation = new OaReceiveOperation();
@@ -184,6 +183,7 @@ public class OaReceiveStepController extends BaseCRUDActionController<OaReceiveS
                     operation.setName(names[i]);
                     operation.setIsValid(Boolean.valueOf(isValid[i]));
                     operation.setStep(target);
+                    operation.setOrderNo(Long.valueOf(orderNo[i]));
                     oaReceiveOperationService.save(operation);
                 }
             }

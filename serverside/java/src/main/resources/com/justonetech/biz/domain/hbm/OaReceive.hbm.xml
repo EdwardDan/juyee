@@ -38,6 +38,28 @@
             <meta attribute="ColumnComment">收文编号</meta>
         </property>
 
+        <property
+                name="year"
+                column="YEAR"
+                type="integer"
+                not-null="false"
+                length="4"
+                >
+            <meta attribute="ColumnName">年份</meta>
+            <meta attribute="ColumnComment">年份</meta>
+        </property>
+
+        <property
+                name="orderNo"
+                column="ORDER_NO"
+                type="integer"
+                not-null="false"
+                length="4"
+                >
+            <meta attribute="ColumnName">序号</meta>
+            <meta attribute="ColumnComment">序号</meta>
+        </property>
+
 		<property
 			name="fileCode"
 			column="FILE_CODE"
@@ -74,7 +96,7 @@
 		<property
 			name="receiveDate"
 			column="RECEIVE_DATE"
-			type="date"
+			type="timestamp"
 			not-null="false"
 			length="7"
         >
@@ -96,7 +118,7 @@
 		<property
 			name="writtenDate"
 			column="WRITTEN_DATE"
-			type="date"
+			type="timestamp"
 			not-null="false"
 			length="7"
         >
@@ -107,7 +129,7 @@
 		<property
 			name="limitDate"
 			column="LIMIT_DATE"
-			type="date"
+			type="timestamp"
 			not-null="false"
 			length="7"
         >
@@ -138,14 +160,14 @@
         </property>
 
 		<property
-			name="startDeptId"
-			column="START_DEPT_ID"
-			type="java.lang.Long"
+			name="startDept"
+			column="START_DEPT"
+			type="string"
 			not-null="false"
-			length="10"
+			length="200"
         >
-            <meta attribute="ColumnName">牵头部门ID</meta>
-            <meta attribute="ColumnComment">牵头部门ID</meta>
+            <meta attribute="ColumnName">牵头部门</meta>
+            <meta attribute="ColumnComment">牵头部门</meta>
         </property>
 
 		<property
@@ -168,6 +190,26 @@
         >
             <meta attribute="ColumnName">处理部门IDs</meta>
             <meta attribute="ColumnComment">处理部门IDs</meta>
+        </property>
+        <property
+                name="bljgPersons"
+                column="BLJG_PERSONS"
+                type="string"
+                not-null="false"
+                length="200"
+                >
+            <meta attribute="ColumnName">办理结果审核人IDs</meta>
+            <meta attribute="ColumnComment">办理结果审核人IDs</meta>
+        </property>
+	<property
+			name="dealContent"
+			column="DEAL_CONTENT"
+			type="string"
+			not-null="false"
+			length="500"
+        >
+            <meta attribute="ColumnName">批办</meta>
+            <meta attribute="ColumnComment">批办</meta>
         </property>
 
 		<property
@@ -250,8 +292,8 @@
 		>
 		</many-to-one>
 		<many-to-one
-			name="secert"
-			column="SECERT_ID"
+			name="secret"
+			column="SECRET_ID"
 			class="com.justonetech.system.domain.SysCodeDetail"
 			not-null="false"
 		>

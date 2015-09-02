@@ -37,63 +37,68 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class OaReceiveNodeController extends BaseCRUDActionController<OaReceiveNode> {
     private Logger logger = LoggerFactory.getLogger(OaReceiveNodeController.class);
-    
+
     @Autowired
     private SysUserManager sysUserManager;
-    
+
     @Autowired
     private SysCodeManager sysCodeManager;
 
     @Autowired
     private ConfigManager configManager;
-    
+
     @Autowired
     private DocumentManager documentManager;
-    
+
     @Autowired
     private SimpleQueryManager simpleQueryManager;
-    
+
     @Autowired
     private DocDocumentService docDocumentService;
 
     @Autowired
     private OaReceiveNodeService oaReceiveNodeService;
 
-   /**
+    /**
      * 列表显示页面
      *
      * @param model .
      * @return .
      */
     @RequestMapping
-    public String grid(Model model) {
-      //判断是否有编辑权限
-      model.addAttribute("canEdit",sysUserManager.hasPrivilege(PrivilegeCode.SYS_SAMPLE_EDIT));
-            
-      return "view/oa/oaReceiveNode/grid";
+    public String grid(Model model, HttpServletRequest request) {
+        String oaReceiveId = request.getParameter("oaReceiveId");
+        //判断是否有编辑权限
+        model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.SYS_SAMPLE_EDIT));
+        model.addAttribute("oaReceiveId", oaReceiveId);
+        return "view/oa/oaReceiveNode/grid";
     }
-    
+
     /**
      * 获取列表数据
      *
      * @param response .
-     * @param filters .
-     * @param columns .
-     * @param page .
-     * @param rows .
+     * @param filters  .
+     * @param columns  .
+     * @param page     .
+     * @param rows     .
      */
     @RequestMapping
-    public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session) {
+    public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session, HttpServletRequest request) {
         try {
+            String oaReceiveId = request.getParameter("oaReceiveId");
+
             Page pageModel = new Page(page, rows, true);
-            String hql = "from OaReceiveNode order by id desc";
+            String hql = "from OaReceiveNode where 1=1 ";
+            hql += "  and oaReceive.id=" + oaReceiveId;
+            hql += " order by completeTime,id desc";
             //增加自定义查询条件
 
             //执行查询
             QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);
             String query = queryTranslate.toString();
             session.setAttribute(Constants.GRID_SQL_KEY, query);
-            pageModel = oaReceiveNodeService.findByPage(pageModel, query);            
+            pageModel = oaReceiveNodeService.findByPage(pageModel, query);
 
             //输出显示
             String json = GridJq.toJSON(columns, pageModel);
@@ -104,7 +109,7 @@ public class OaReceiveNodeController extends BaseCRUDActionController<OaReceiveN
             super.processException(response, e);
         }
     }
-    
+
     /**
      * 新增录入页面
      *
@@ -120,7 +125,7 @@ public class OaReceiveNodeController extends BaseCRUDActionController<OaReceiveN
 
         return "view/oa/oaReceiveNode/input";
     }
-    
+
     /**
      * 修改显示页面
      *
@@ -134,10 +139,10 @@ public class OaReceiveNodeController extends BaseCRUDActionController<OaReceiveN
 
         //处理其他业务逻辑
         model.addAttribute("bean", oaReceiveNode);
-        
+
         return "view/oa/oaReceiveNode/input";
     }
-    
+
     /**
      * 查看页面
      *
@@ -148,11 +153,11 @@ public class OaReceiveNodeController extends BaseCRUDActionController<OaReceiveN
     @RequestMapping
     public String view(Model model, Long id) {
         OaReceiveNode oaReceiveNode = oaReceiveNodeService.get(id);
-        
-        model.addAttribute("bean", oaReceiveNode);        
+
+        model.addAttribute("bean", oaReceiveNode);
         return "view/oa/oaReceiveNode/view";
     }
-    
+
     /**
      * 保存操作
      *
@@ -169,18 +174,18 @@ public class OaReceiveNodeController extends BaseCRUDActionController<OaReceiveN
             if (entity.getId() != null) {
                 target = oaReceiveNodeService.get(entity.getId());
                 ReflectionUtils.copyBean(entity, target, new String[]{
-                                                "stepId",                                      
-                                                                "isDeal",                                      
-                                                                "dealUser",                                      
-                                                                "dealResult",                                      
-                                                                "receiveTime",                                      
-                                                                "openTime",                                      
-                                                                "completeTime",                                      
-                                                                "createTime",                                      
-                                                                "createUser",                                      
-                                                                "updateTime",                                      
-                                                                "updateUser"                                      
-                                                });
+                        "stepId",
+                        "isDeal",
+                        "dealUser",
+                        "dealResult",
+                        "receiveTime",
+                        "openTime",
+                        "completeTime",
+                        "createTime",
+                        "createUser",
+                        "updateTime",
+                        "updateUser"
+                });
 
             } else {
                 target = entity;
@@ -194,13 +199,13 @@ public class OaReceiveNodeController extends BaseCRUDActionController<OaReceiveN
         }
         sendSuccessJSON(response, "保存成功");
     }
-    
+
     /**
      * 删除操作
      *
      * @param response .
-     * @param id  .
-     * @throws Exception  .
+     * @param id       .
+     * @throws Exception .
      */
     @RequestMapping
     public void delete(HttpServletResponse response, Long id) throws Exception {

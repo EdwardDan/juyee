@@ -28,12 +28,13 @@ public abstract class BaseOaReceive  implements Serializable,Auditable {
 	public static String REF = "OaReceive";
     public static String PROP_ID = "id";
     public static String PROP_STEP = "step";
-    public static String PROP_SECERT = "secert";
+    public static String PROP_SECRET = "secret";
     public static String PROP_SOURCE_DEPT = "sourceDept";
     public static String PROP_DEAL_DEPTS = "dealDepts";
+    public static String PROP_DEAL_CONTENT = "dealContent";
     public static String PROP_TYPE = "type";
     public static String PROP_FILE_CODE = "fileCode";
-    public static String PROP_START_DEPT_ID = "startDeptId";
+    public static String PROP_START_DEPT= "startDept";
     public static String PROP_URGENT = "urgent";
     public static String PROP_CODE = "code";
     public static String PROP_TITLE = "title";
@@ -43,6 +44,7 @@ public abstract class BaseOaReceive  implements Serializable,Auditable {
     public static String PROP_FILE_TYPE = "fileType";
     public static String PROP_RECEIVE_DATE = "receiveDate";
     public static String PROP_DEAL_PERSONS = "dealPersons";
+    public static String PROP_BLJG_PERSONS = "bljgPersons";
     public static String PROP_FS = "fs";
     public static String PROP_YS = "ys";
     public static String PROP_DOC = "doc";
@@ -78,6 +80,16 @@ public abstract class BaseOaReceive  implements Serializable,Auditable {
     /*收文编号*/
     /*收文编号*/
 	private String code;
+
+    // fields
+    /*年份*/
+    /*年份*/
+    private Integer year;
+
+    // fields
+    /*序号*/
+    /*序号*/
+    private Integer orderNo;
 	
     /*来文文号*/
     /*来文文号*/
@@ -93,7 +105,7 @@ public abstract class BaseOaReceive  implements Serializable,Auditable {
 	
     /*登记日期*/
     /*登记日期*/
-	private java.sql.Date receiveDate;
+	private java.sql.Timestamp receiveDate;
 	
     /*提供部门*/
     /*提供部门*/
@@ -101,11 +113,11 @@ public abstract class BaseOaReceive  implements Serializable,Auditable {
 	
     /*成文日期*/
     /*成文日期*/
-	private java.sql.Date writtenDate;
+	private java.sql.Timestamp writtenDate;
 	
     /*办理时限*/
     /*办理时限*/
-	private java.sql.Date limitDate;
+	private java.sql.Timestamp limitDate;
 	
     /*份数*/
     /*份数*/
@@ -117,16 +129,24 @@ public abstract class BaseOaReceive  implements Serializable,Auditable {
 	
     /*牵头部门ID*/
     /*牵头部门ID*/
-	private Long startDeptId;
+	private String startDept;
 	
     /*处理人IDs*/
     /*处理人IDs*/
 	private String dealPersons;
-	
+
     /*处理部门IDs*/
     /*处理部门IDs*/
 	private String dealDepts;
-	
+
+    /*办理结果审核人IDs*/
+    /*办理结果审核人IDs*/
+    private String bljgPersons;
+
+    /*批办*/
+    /*批办*/
+	private String dealContent;
+
     /*创建时间*/
     /*创建时间*/
 	private java.sql.Timestamp createTime;
@@ -150,7 +170,7 @@ public abstract class BaseOaReceive  implements Serializable,Auditable {
 	private com.justonetech.system.domain.SysCodeDetail urgent;
 	private com.justonetech.system.domain.SysCodeDetail type;
 	private com.justonetech.biz.domain.OaReceiveStep step;
-	private com.justonetech.system.domain.SysCodeDetail secert;
+	private com.justonetech.system.domain.SysCodeDetail secret;
 
 	// collections
 	private java.util.Set<com.justonetech.biz.domain.OaReceiveNode> oaReceiveNodes;
@@ -195,6 +215,34 @@ public abstract class BaseOaReceive  implements Serializable,Auditable {
 		this.code = code;
 	}
 
+    /**
+     * Return the value associated with the column: YEAR
+     */
+    public Integer getYear () {
+        return year;
+    }
+
+    /**
+     * Set the value related to the column: YEAR
+     * @param year the YEAR value
+     */
+    public void setYear (Integer year) {
+        this.year = year;
+    }
+    /**
+     * Return the value associated with the column: ORDER_NO
+     */
+    public Integer getOrderNo () {
+        return orderNo;
+    }
+
+    /**
+     * Set the value related to the column: ORDER_NO
+     * @param orderNo the ORDER_NO value
+     */
+    public void setOrderNo (Integer orderNo) {
+        this.orderNo = orderNo;
+    }
 
 	/**
 	 * Return the value associated with the column: FILE_CODE
@@ -247,7 +295,7 @@ public abstract class BaseOaReceive  implements Serializable,Auditable {
 	/**
 	 * Return the value associated with the column: RECEIVE_DATE
 	 */
-	public java.sql.Date getReceiveDate () {
+	public java.sql.Timestamp getReceiveDate () {
 		return receiveDate;
 	}
 
@@ -255,7 +303,7 @@ public abstract class BaseOaReceive  implements Serializable,Auditable {
 	 * Set the value related to the column: RECEIVE_DATE
 	 * @param receiveDate the RECEIVE_DATE value
 	 */
-	public void setReceiveDate (java.sql.Date receiveDate) {
+	public void setReceiveDate (java.sql.Timestamp receiveDate) {
 		this.receiveDate = receiveDate;
 	}
 
@@ -279,7 +327,7 @@ public abstract class BaseOaReceive  implements Serializable,Auditable {
 	/**
 	 * Return the value associated with the column: WRITTEN_DATE
 	 */
-	public java.sql.Date getWrittenDate () {
+	public java.sql.Timestamp getWrittenDate () {
 		return writtenDate;
 	}
 
@@ -287,7 +335,7 @@ public abstract class BaseOaReceive  implements Serializable,Auditable {
 	 * Set the value related to the column: WRITTEN_DATE
 	 * @param writtenDate the WRITTEN_DATE value
 	 */
-	public void setWrittenDate (java.sql.Date writtenDate) {
+	public void setWrittenDate (java.sql.Timestamp writtenDate) {
 		this.writtenDate = writtenDate;
 	}
 
@@ -295,7 +343,7 @@ public abstract class BaseOaReceive  implements Serializable,Auditable {
 	/**
 	 * Return the value associated with the column: LIMIT_DATE
 	 */
-	public java.sql.Date getLimitDate () {
+	public java.sql.Timestamp getLimitDate () {
 		return limitDate;
 	}
 
@@ -303,7 +351,7 @@ public abstract class BaseOaReceive  implements Serializable,Auditable {
 	 * Set the value related to the column: LIMIT_DATE
 	 * @param limitDate the LIMIT_DATE value
 	 */
-	public void setLimitDate (java.sql.Date limitDate) {
+	public void setLimitDate (java.sql.Timestamp limitDate) {
 		this.limitDate = limitDate;
 	}
 
@@ -343,16 +391,16 @@ public abstract class BaseOaReceive  implements Serializable,Auditable {
 	/**
 	 * Return the value associated with the column: START_DEPT_ID
 	 */
-	public Long getStartDeptId () {
-		return startDeptId;
+	public String getStartDept () {
+		return startDept;
 	}
 
 	/**
-	 * Set the value related to the column: START_DEPT_ID
-	 * @param startDeptId the START_DEPT_ID value
+	 * Set the value related to the column: START_DEPT
+	 * @param startDept the START_DEPT value
 	 */
-	public void setStartDeptId (Long startDeptId) {
-		this.startDeptId = startDeptId;
+	public void setStartDept (String startDept) {
+		this.startDept = startDept;
 	}
 
 
@@ -385,6 +433,35 @@ public abstract class BaseOaReceive  implements Serializable,Auditable {
 	 */
 	public void setDealDepts (String dealDepts) {
 		this.dealDepts = dealDepts;
+	}
+/**
+	 * Return the value associated with the column: BLJG_PERSONS
+	 */
+	public String getBljgPersons () {
+		return bljgPersons;
+	}
+
+	/**
+	 * Set the value related to the column: BLJG_PERSONS
+	 * @param bljgPersons the BLJG_PERSONS value
+	 */
+	public void setBljgPersons (String bljgPersons) {
+		this.bljgPersons = bljgPersons;
+	}
+
+/**
+	 * Return the value associated with the column: DEAL_CONTENT
+	 */
+	public String getDealContent() {
+		return dealContent;
+	}
+
+	/**
+	 * Set the value related to the column: DEAL_CONTENT
+	 * @param dealContent the DEAL_CONTENT value
+	 */
+	public void setDealContent (String dealContent) {
+		this.dealContent = dealContent;
 	}
 
 
@@ -533,18 +610,18 @@ public abstract class BaseOaReceive  implements Serializable,Auditable {
 
 
 	/**
-	 * Return the value associated with the column: SECERT_ID
+	 * Return the value associated with the column: SECRET_ID
 	 */
-	public com.justonetech.system.domain.SysCodeDetail getSecert () {
-		return secert;
+	public com.justonetech.system.domain.SysCodeDetail getSecret () {
+		return secret;
 	}
 
 	/**
-	 * Set the value related to the column: SECERT_ID
-	 * @param secert the SECERT_ID value
+	 * Set the value related to the column: SECRET_ID
+	 * @param secret the SECRET_ID value
 	 */
-	public void setSecert (com.justonetech.system.domain.SysCodeDetail secert) {
-		this.secert = secert;
+	public void setSecret (com.justonetech.system.domain.SysCodeDetail secret) {
+		this.secret = secret;
 	}
 
 
@@ -608,10 +685,11 @@ public abstract class BaseOaReceive  implements Serializable,Auditable {
 		builder.append(limitDate);
 		builder.append(fs);
 		builder.append(ys);
-		builder.append(startDeptId);
+		builder.append(startDept);
 		builder.append(dealPersons);
 		builder.append(dealDepts);
-		builder.append(createTime);
+        builder.append(bljgPersons);
+        builder.append(createTime);
 		builder.append(createUser);
 		builder.append(updateTime);
 		builder.append(updateUser);
