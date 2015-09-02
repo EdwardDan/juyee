@@ -173,5 +173,10 @@ public class Constants {
     public static final String EMERGENCY_2 = "2";
     public static final String EMERGENCY_3 = "3";
 
+    //收文--文件类型
+    public static final String OA_RECEIVE_TYPE = "OaReceiveType";
+    //收文--公文种类
+    public static final String OA_RECEIVE_FILE_TYPE = "OaReceiveFileType";
+
 
 }

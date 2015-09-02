@@ -818,3 +818,11 @@ form{
 .net_form_title2 {
     font-weight: bold;font-size: larger;
 }
+
+.head_title{
+    font-size: 16px;
+    font-family: "微软雅黑",serif;
+    /*font-weight: bold;*/
+    text-align: center;
+    line-height: 25px;
+}
