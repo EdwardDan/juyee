@@ -181,7 +181,7 @@ public class OaReceiveManager {
             Set<Long> managersZR = sysUserManager.getUserIdsByPrivilegeCode(privilegeCodeZR);
             managers.addAll(managersZR);
             if (managers.size() > 0) {
-                oaTaskManager.createTask(OaReceive.class.getSimpleName(), data.getId(), title, managers, false, null, null);
+                oaTaskManager.createTask(OaReceive.class.getSimpleName()+"_nb", data.getId(), title, managers, false, null, null);
             }
         }
         //领导在办公室拟办后收到待办提醒

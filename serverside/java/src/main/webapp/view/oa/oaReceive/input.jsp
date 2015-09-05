@@ -5,23 +5,7 @@
     $(function () {
         //页面验证初始化
         var validateCondition = [
-            //{name:"code", rule:"validate[required,maxSize[100]]"},
-            //{name:"fileCode", rule:"validate[required,maxSize[100]]"},
-            //{name:"title", rule:"validate[required,maxSize[250]]"},
-            //{name:"sourceDept", rule:"validate[required,maxSize[250]]"},
-            //{name:"receiveDate", rule:"validate[required,custom[date],maxSize[7]"},
-            //{name:"deptName", rule:"validate[required,maxSize[100]]"},
-            //{name:"writtenDate", rule:"validate[required,custom[date],maxSize[7]"},
-            //{name:"limitDate", rule:"validate[required,custom[date],maxSize[7]"},
-            //{name:"fs", rule:"validate[required,custom[integer],maxSize[6]"},
-            //{name:"ys", rule:"validate[required,custom[integer],maxSize[6]"},
-            //{name:"startDeptId", rule:"validate[required,custom[integer],maxSize[10]"},
-            //{name:"dealPersons", rule:"validate[required,maxSize[200]]"},
-            //{name:"dealDepts", rule:"validate[required,maxSize[200]]"},
-            //{name:"createTime", rule:"validate[required,maxSize[7]]"},
-            //{name:"createUser", rule:"validate[required,maxSize[100]]"},
-            //{name:"updateTime", rule:"validate[required,maxSize[7]]"},
-            //{name:"updateUser", rule:"validate[required,maxSize[100]]"},
+            {name:"dealContent", rule:"validate[required,maxSize[200]]"}
         ];
         validateInit(validateCondition, formId);
     });
@@ -32,14 +16,14 @@
             return;
         }
 
-        //加入其他业务判断
-//        if ($('#name').val() == '') {
-//            showInfoMsg('请输入姓名！',null);
-//            return;
-//        }
-
         //提交表单
         saveAjaxData("${ctx}/oaReceive/save.do?operationId="+operationId, formId);
+    }
+    //选择处理人和处理部门时 自动将选择项 显示在下面的拟办栏中
+    function addNb(){
+      var dealPersons = $("#dealPersonsNames").val();
+        var dealDepts = $("#dealDeptsNames").val();
+        $("#dealContent").val("请 "+dealPersons+","+dealDepts+"阅。");
     }
 </script>
 <style type="text/css">
@@ -63,6 +47,7 @@
     <form:hidden path="id"/>
     <input type="hidden" name="node" id="node" value="${node.id}">
     <input type="hidden" name="step" id="step" value="${bean.step.id}">
+    <input type="hidden" name="openTime" id="openTime" value="${openTime}">
     <div class="form_div">
         <table cellpadding="0" cellspacing="0" class="form_table" style="border-collapse: collapse">
             <tr >
@@ -118,7 +103,7 @@
                <td class="td_border" align="right">附件：</td>
                <td class="td_border" align="left" colspan="5">
                &nbsp;<c:forEach items="${docAttachs}" var="docName">&nbsp;${docName.fileName}&nbsp;
-               </c:forEach>${uploadButton}
+               </c:forEach>${documentFile}
                </td>
            </tr>
             <tr class="tr_dark">
@@ -131,7 +116,7 @@
                     </select>
                     <img src="${themePath}/workflow/user.gif" alt="请选择处理人" border="0"
                          style="cursor:pointer"
-                         onclick="multiSelectSysUser('ccUsers','dealPersons','dealPersonsNames')">
+                         onclick="multiSelectSysUser('ccUsers','dealPersons','dealPersonsNames',addNb)">
                     <img src="${themePath}/workflow/file_delete.gif" width="16"
                          height="16" border="0" alt="移除选中人员" align="absbottom"
                          onClick="removeMultiSelectOpt('ccUsers','dealPersons','dealPersonsNames')">
@@ -149,7 +134,7 @@
                     </select>
                     <img src="${themePath}/workflow/dept.gif" alt="请选择处理部门" border="0"
                          style="cursor:pointer"
-                         onclick="multiSelectSysDeptOwner('ccDepts','dealDepts','dealDeptsNames')">
+                         onclick="multiSelectSysDeptOwner('ccDepts','dealDepts','dealDeptsNames',addNb)">
                     <img src="${themePath}/workflow/file_delete.gif" width="16"
                          height="16" border="0" alt="移除选中部门" align="absbottom"
                          onClick="removeMultiSelectOpt('ccDepts','dealDepts','dealDeptsNames')">

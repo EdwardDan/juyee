@@ -74,7 +74,7 @@
                 <td class="td_border" align="right">附件：</td>
                 <td class="td_border" align="left" colspan="5">
                     &nbsp;<c:forEach items="${docAttachs}" var="docName">&nbsp;${docName.fileName}&nbsp;
-                </c:forEach>${uploadButton}
+                </c:forEach>${documentFile}
                 </td>
             </tr>
             <tr class="tr_light" style="height: 80px">

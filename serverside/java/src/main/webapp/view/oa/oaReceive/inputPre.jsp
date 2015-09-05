@@ -5,23 +5,15 @@
     $(function () {
         //页面验证初始化
         var validateCondition = [
-            //{name:"code", rule:"validate[required,maxSize[100]]"},
-            //{name:"fileCode", rule:"validate[required,maxSize[100]]"},
-            //{name:"title", rule:"validate[required,maxSize[250]]"},
-            //{name:"sourceDept", rule:"validate[required,maxSize[250]]"},
-            //{name:"receiveDate", rule:"validate[required,custom[date],maxSize[7]"},
-            //{name:"deptName", rule:"validate[required,maxSize[100]]"},
-            //{name:"writtenDate", rule:"validate[required,custom[date],maxSize[7]"},
-            //{name:"limitDate", rule:"validate[required,custom[date],maxSize[7]"},
-            //{name:"fs", rule:"validate[required,custom[integer],maxSize[6]"},
-            //{name:"ys", rule:"validate[required,custom[integer],maxSize[6]"},
-            //{name:"startDeptId", rule:"validate[required,custom[integer],maxSize[10]"},
-            //{name:"dealPersons", rule:"validate[required,maxSize[200]]"},
-            //{name:"dealDepts", rule:"validate[required,maxSize[200]]"},
-            //{name:"createTime", rule:"validate[required,maxSize[7]]"},
-            //{name:"createUser", rule:"validate[required,maxSize[100]]"},
-            //{name:"updateTime", rule:"validate[required,maxSize[7]]"},
-            //{name:"updateUser", rule:"validate[required,maxSize[100]]"},
+            {name:"fileCode", rule:"validate[required,maxSize[100]]"},
+            {name:"title", rule:"validate[required,maxSize[250]]"},
+            {name:"sourceDept", rule:"validate[maxSize[250]]"},
+            {name:"receiveDate", rule:"validate[maxSize[20]"},
+            {name:"deptName", rule:"validate[maxSize[100]]"},
+            {name:"writtenDate", rule:"validate[maxSize[20]"},
+            {name:"limitDate", rule:"validate[maxSize[20]"},
+            {name:"fs", rule:"validate[custom[integer],maxSize[6]"},
+            {name:"ys", rule:"validate[custom[integer],maxSize[6]"}
         ];
         validateInit(validateCondition, formId);
     });
@@ -58,6 +50,7 @@
     <form:hidden path="orderNo"/>
     <input type="hidden" name="node" id="node" value="${node.id}">
     <input type="hidden" name="step" id="step" value="${bean.step.id}">
+    <input type="hidden" name="openTime" id="openTime" value="${openTime}">
     <div class="form_div">
         <table cellpadding="0" cellspacing="0" class="form_table" style="border-collapse: collapse">
             <tr >

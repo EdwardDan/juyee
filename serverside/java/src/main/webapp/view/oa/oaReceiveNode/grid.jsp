@@ -13,7 +13,7 @@
                     '收到时间',
                     '打开时间',
                     '处理完成时间',
-                    '操作'
+//                    '操作'
                 ],
                 colModel:[
                     {name:'id', width:10, align:"center", searchtype:"integer", hidden:true},
@@ -26,7 +26,7 @@
                     {name:"completeTime", width:"20", align:"center", searchtype:"datetime", sortable:true, formatter:'date', formatoptions:{srcformat:'Y-m-d H:i:s', newformat:'Y-m-d H:i'}}
                 ],
                 actModel:[
-                    {name:'operation', width:15, align:'center'}
+//                    {name:'operation', width:15, align:'center'}
                 ],
                 pager:'#pager2',
                 caption:"收文管理流转节点列表",

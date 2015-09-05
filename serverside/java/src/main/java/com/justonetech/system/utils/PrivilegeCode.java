@@ -116,6 +116,7 @@ public class PrivilegeCode {
     public static final String OA_SEND_FILE_EDIT = OaSendFile.class.getSimpleName() + "_edit";  //发文记录_编辑
     public static final String OA_RECEIVE_STEP_EDIT = OaReceiveStep.class.getSimpleName() + "_edit";  //收文流程配置_编辑
     public static final String OA_RECEIVE_EDIT = OaReceive.class.getSimpleName() + "_edit";  //收文登记单_编辑
+    public static final String OA_RECEIVE_AUDIT = OaReceive.class.getSimpleName() + "_audit";  //收文登记单_审核
 
     //项目推进编辑
     public static final String PROJ_EXTEND_EDIT = ProjExtend.class.getSimpleName() + "_edit";  //项目推进编辑

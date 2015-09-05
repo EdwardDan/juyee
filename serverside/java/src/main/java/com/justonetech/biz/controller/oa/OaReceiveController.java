@@ -157,7 +157,7 @@ public class OaReceiveController extends BaseCRUDActionController<OaReceive> {
                     String dealDeptIds = "," + dealDepts + ",";
                     if (null != sysUser.getPerson() && null != sysUser.getPerson().getDept()) {
                         SysDept dept = sysUser.getPerson().getDept();
-                        if (dealDeptIds.contains("," + dept.getId() + ",")) {
+                        if (sysUserManager.hasPrivilege(PrivilegeCode.OA_RECEIVE_AUDIT)&&dealDeptIds.contains("," + dept.getId() + ",")) { //属于审核部门且有审核权限的才能审核 其他人员只能查看
                             if (null != oaReceive.getStep() && OaReceiveStatus.OA_RECEIVE_BMLDYJ.getCode().equals(oaReceive.getStep().getCode())) {
                                 bean.put("isValid", "true");
                             }
@@ -200,6 +200,7 @@ public class OaReceiveController extends BaseCRUDActionController<OaReceive> {
         }
 
         Map<String, Object> docMap = oaReceiveManager.setDocAndAttach(oaReceive);
+        model.addAttribute("documentFile", documentManager.getDownloadButton(oaReceive.getDoc()));
         model.addAttribute("uploadButton", docMap.get("uploadButton"));//设置附件
         model.addAttribute("docAttachs", docMap.get("docAttachs")); //设置附件名称
     }
@@ -221,6 +222,7 @@ public class OaReceiveController extends BaseCRUDActionController<OaReceive> {
         //设置初始步骤 为收文登记
         OaReceiveStep step = oaReceiveStepService.findUniqueByProperty("code", OaReceiveStatus.OA_RECEIVE_SWDJ.getCode());
         oaReceive.setStep(step);
+        oaReceive.setNodeReceiveTime(new Timestamp(System.currentTimeMillis())); //当状态改变时 为各审核人收到时间
         //如需增加其他默认值请在此添加
         setSysCode(model, oaReceive);
         model.addAttribute("openTime", new Timestamp(System.currentTimeMillis()));
@@ -242,7 +244,7 @@ public class OaReceiveController extends BaseCRUDActionController<OaReceive> {
         OaReceive oaReceive = oaReceiveService.get(id);
         setSysCode(model, oaReceive);
         model.addAttribute("bean", oaReceive);
-
+        model.addAttribute("openTime", new Timestamp(System.currentTimeMillis()));
         return "view/oa/oaReceive/inputPre";
     }
 
@@ -264,6 +266,7 @@ public class OaReceiveController extends BaseCRUDActionController<OaReceive> {
         //处理其他业务逻辑
         setSysCode(model, oaReceive);
         model.addAttribute("bean", oaReceive);
+        model.addAttribute("openTime", new Timestamp(System.currentTimeMillis()));
         return "view/oa/oaReceive/input";
     }
 
@@ -290,6 +293,7 @@ public class OaReceiveController extends BaseCRUDActionController<OaReceive> {
         }
         model.addAttribute("stepNodes", stepNodes);
         model.addAttribute("type", type);
+        model.addAttribute("openTime", new Timestamp(System.currentTimeMillis()));
 
         model.addAttribute("SWDJ", OaReceiveStatus.OA_RECEIVE_SWDJ.getCode());//收文登记
         model.addAttribute("BGSNB", OaReceiveStatus.OA_RECEIVE_BGSNB.getCode());//办公室拟办
@@ -319,6 +323,7 @@ public class OaReceiveController extends BaseCRUDActionController<OaReceive> {
             node = nodes.iterator().next();
         } else {
             node = new OaReceiveNode();
+            node.setReceiveTime(oaReceive.getNodeReceiveTime());
             node.setOpenTime(new Timestamp(System.currentTimeMillis()));  //设置打开时间
             node.setOaReceive(oaReceive);
             node.setStepId(oaReceive.getStep().getId());
@@ -391,7 +396,7 @@ public class OaReceiveController extends BaseCRUDActionController<OaReceive> {
             node.setDealUser(sysUserManager.getSysUser().getDisplayName());
             if (!StringHelper.isEmpty(openTime)) {
                 node.setOpenTime(Timestamp.valueOf(openTime));
-                node.setReceiveTime(Timestamp.valueOf(openTime));
+                node.setReceiveTime(target.getNodeReceiveTime());
             }
             node.setCompleteTime(new Timestamp(System.currentTimeMillis()));
             //设置操作
@@ -407,6 +412,7 @@ public class OaReceiveController extends BaseCRUDActionController<OaReceive> {
             List<OaReceiveStep> steps = oaReceiveStepService.findByProperty("code", OaReceiveStatus.OA_RECEIVE_BGSNB.getCode()); //设置审核步骤
             if (null != steps && steps.size() > 0) {
                 target.setStep(steps.iterator().next());
+                target.setNodeReceiveTime(new Timestamp(System.currentTimeMillis()));
             }
             oaReceiveService.save(target);
             oaReceiveManager.createOaTask(target);
@@ -453,7 +459,6 @@ public class OaReceiveController extends BaseCRUDActionController<OaReceive> {
             node.setDealUser(sysUserManager.getSysUser().getDisplayName());
             if (!StringHelper.isEmpty(openTime)) {
                 node.setOpenTime(Timestamp.valueOf(openTime));
-                node.setReceiveTime(Timestamp.valueOf(openTime));
             }
             node.setCompleteTime(new Timestamp(System.currentTimeMillis()));
             //设置操作
@@ -463,12 +468,14 @@ public class OaReceiveController extends BaseCRUDActionController<OaReceive> {
             node.setStepId(target.getStep().getId());
             node.setIsDeal(true);
             node.setOaReceive(target);
+            node.setReceiveTime(target.getNodeReceiveTime());
             oaReceiveService.save(target);
             oaReceiveNodeService.save(node);
 
             List<OaReceiveStep> steps = oaReceiveStepService.findByProperty("code", OaReceiveStatus.OA_RECEIVE_LDPS.getCode()); //设置审核步骤
             if (null != steps && steps.size() > 0) {
                 target.setStep(steps.iterator().next());
+                target.setNodeReceiveTime(new Timestamp(System.currentTimeMillis()));
             }
             oaReceiveService.save(target);
             oaReceiveManager.createOaTask(target);
@@ -498,6 +505,7 @@ public class OaReceiveController extends BaseCRUDActionController<OaReceive> {
                 target = oaReceiveNodeService.get(entity.getId());
                 ReflectionUtils.copyBean(entity, target, new String[]{
                         "isDeal",
+                        "openTime",
                         "dealResult"
                 });
 
@@ -516,6 +524,7 @@ public class OaReceiveController extends BaseCRUDActionController<OaReceive> {
                     target.setDealDept(sysUser.getPerson().getDept());
                 }
             }
+            target.setReceiveTime(target.getOaReceive().getNodeReceiveTime());
             oaReceiveNodeService.save(target);
             //修改oaReceive中当前步骤
             OaReceive oaReceive = target.getOaReceive();
@@ -551,6 +560,9 @@ public class OaReceiveController extends BaseCRUDActionController<OaReceive> {
                         oaReceiveManager.createOaTask(oaReceive); //创建系统任务
                     }
                 }
+                if(oaReceive.getStep().equals(next)){
+                    oaReceive.setNodeReceiveTime(new Timestamp(System.currentTimeMillis()));
+                }
             }
             //部门领导意见
             if (OaReceiveStatus.OA_RECEIVE_BMLDYJ.getCode().equals(step.getCode())) {
@@ -572,6 +584,9 @@ public class OaReceiveController extends BaseCRUDActionController<OaReceive> {
                         oaReceiveManager.createOaTask(oaReceive);  //创建系统任务
                     }
                 }
+                if(oaReceive.getStep().equals(next)){
+                    oaReceive.setNodeReceiveTime(new Timestamp(System.currentTimeMillis()));
+                }
             }
 
             //办理结果
@@ -588,6 +603,9 @@ public class OaReceiveController extends BaseCRUDActionController<OaReceive> {
                         oaReceive.setStep(next);
                         oaReceiveManager.createOaTask(oaReceive);//创建系统任务
                     }
+                }
+                if(oaReceive.getStep().equals(next)){
+                    oaReceive.setNodeReceiveTime(new Timestamp(System.currentTimeMillis()));
                 }
             }
 

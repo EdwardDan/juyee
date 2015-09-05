@@ -39,6 +39,7 @@ public abstract class BaseOaReceive  implements Serializable,Auditable {
     public static String PROP_CODE = "code";
     public static String PROP_TITLE = "title";
     public static String PROP_LIMIT_DATE = "limitDate";
+    public static String PROP_NODE_RECEIVE_TIME = "nodeReceiveTime";
     public static String PROP_DEPT_NAME = "deptName";
     public static String PROP_WRITTEN_DATE = "writtenDate";
     public static String PROP_FILE_TYPE = "fileType";
@@ -118,7 +119,11 @@ public abstract class BaseOaReceive  implements Serializable,Auditable {
     /*办理时限*/
     /*办理时限*/
 	private java.sql.Timestamp limitDate;
-	
+
+	/*记录各审核步骤收到时间*/
+    /*记录各审核步骤收到时间*/
+	private java.sql.Timestamp nodeReceiveTime;
+
     /*份数*/
     /*份数*/
 	private Integer fs;
@@ -353,6 +358,21 @@ public abstract class BaseOaReceive  implements Serializable,Auditable {
 	 */
 	public void setLimitDate (java.sql.Timestamp limitDate) {
 		this.limitDate = limitDate;
+	}
+
+	/**
+	 * Return the value associated with the column: NODE_RECEIVE_TIME
+	 */
+	public java.sql.Timestamp getNodeReceiveTime () {
+		return nodeReceiveTime;
+	}
+
+	/**
+	 * Set the value related to the column: NODE_RECEIVE_TIME
+	 * @param nodeReceiveTime the NODE_RECEIVE_TIME value
+	 */
+	public void setNodeReceiveTime (java.sql.Timestamp nodeReceiveTime) {
+		this.nodeReceiveTime = nodeReceiveTime;
 	}
 
 
@@ -683,6 +703,7 @@ public abstract class BaseOaReceive  implements Serializable,Auditable {
 		builder.append(deptName);
 		builder.append(writtenDate);
 		builder.append(limitDate);
+		builder.append(nodeReceiveTime);
 		builder.append(fs);
 		builder.append(ys);
 		builder.append(startDept);
