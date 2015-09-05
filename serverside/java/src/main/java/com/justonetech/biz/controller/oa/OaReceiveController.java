@@ -18,8 +18,6 @@ import com.justonetech.system.daoservice.SysDeptService;
 import com.justonetech.system.daoservice.SysUserService;
 import com.justonetech.system.domain.SysDept;
 import com.justonetech.system.domain.SysUser;
-import com.justonetech.system.manager.SysCodeManager;
-import com.justonetech.system.manager.SysRoleManager;
 import com.justonetech.system.manager.SysUserManager;
 import com.justonetech.system.utils.PrivilegeCode;
 import org.slf4j.Logger;
@@ -51,9 +49,6 @@ public class OaReceiveController extends BaseCRUDActionController<OaReceive> {
     private SysUserManager sysUserManager;
 
     @Autowired
-    private SysCodeManager sysCodeManager;
-
-    @Autowired
     private OaReceiveOperationService oaReceiveOperationService;
 
     @Autowired
@@ -79,9 +74,6 @@ public class OaReceiveController extends BaseCRUDActionController<OaReceive> {
 
     @Autowired
     private OaReceiveManager oaReceiveManager;
-
-    @Autowired
-    private SysRoleManager sysRoleManager;
 
     /**
      * 列表显示页面
@@ -190,7 +182,10 @@ public class OaReceiveController extends BaseCRUDActionController<OaReceive> {
     }
 
     /**
+     * 设置共用属性
+     *
      * @param model
+     * @param oaReceive
      */
     private void setSysCode(Model model, OaReceive oaReceive) {
         model.addAttribute("type", Constants.OA_RECEIVE_TYPE);
@@ -417,17 +412,17 @@ public class OaReceiveController extends BaseCRUDActionController<OaReceive> {
                 }
             }
             model.addAttribute("users", users);
-            if(null!=users&&users.size()>0){
-               String  userId ="";
+            if (null != users && users.size() > 0) {
+                String userId = "";
                 for (SysUser user : users) {
-                    userId+=","+user.getId();
+                    userId += "," + user.getId();
                 }
                 model.addAttribute("userId", userId.substring(1));
             }
         }
 
         SysUser loginUser = sysUserManager.getSysUser();
-        String hql1 = " from OaReceiveNode where oaReceive.step.code='" + OaReceiveStatus.OA_RECEIVE_CB.getCode() + "'  and oaReceive.id=" + oaReceive.getId() + "  and dealUser='"+loginUser.getDisplayName()+"'  order by id desc ";
+        String hql1 = " from OaReceiveNode where oaReceive.step.code='" + OaReceiveStatus.OA_RECEIVE_CB.getCode() + "'  and oaReceive.id=" + oaReceive.getId() + "  and dealUser='" + loginUser.getDisplayName() + "'  order by id desc ";
         List<OaReceiveNode> nodes1 = oaReceiveNodeService.findByQuery(hql1);
         if (null != nodes1 && nodes1.size() > 0) {
             node = nodes1.iterator().next();
@@ -516,7 +511,7 @@ public class OaReceiveController extends BaseCRUDActionController<OaReceive> {
                 target.setNodeReceiveTime(new Timestamp(System.currentTimeMillis()));
             }
             oaReceiveService.save(target);
-            oaReceiveManager.createOaTask(target,null);
+            oaReceiveManager.createOaTask(target, null);
 
 
         } catch (Exception e) {
@@ -579,7 +574,7 @@ public class OaReceiveController extends BaseCRUDActionController<OaReceive> {
                 target.setNodeReceiveTime(new Timestamp(System.currentTimeMillis()));
             }
             oaReceiveService.save(target);
-            oaReceiveManager.createOaTask(target,null);
+            oaReceiveManager.createOaTask(target, null);
 
         } catch (Exception e) {
             log.error("error", e);
@@ -658,7 +653,7 @@ public class OaReceiveController extends BaseCRUDActionController<OaReceive> {
                         break;
                     } else {
                         oaReceive.setStep(next);
-                        oaReceiveManager.createOaTask(oaReceive,null); //创建系统任务
+                        oaReceiveManager.createOaTask(oaReceive, null); //创建系统任务
                     }
                 }
                 if (oaReceive.getStep().equals(next)) {
@@ -682,7 +677,7 @@ public class OaReceiveController extends BaseCRUDActionController<OaReceive> {
                         break;
                     } else {
                         oaReceive.setStep(next);
-                        oaReceiveManager.createOaTask(oaReceive,null);  //创建系统任务
+                        oaReceiveManager.createOaTask(oaReceive, null);  //创建系统任务
                     }
                 }
                 if (oaReceive.getStep().equals(next)) {
@@ -702,7 +697,7 @@ public class OaReceiveController extends BaseCRUDActionController<OaReceive> {
                         break;
                     } else {
                         oaReceive.setStep(next);
-                        oaReceiveManager.createOaTask(oaReceive,null);//创建系统任务
+                        oaReceiveManager.createOaTask(oaReceive, null);//创建系统任务
                     }
                 }
                 if (oaReceive.getStep().equals(next)) {
@@ -748,11 +743,11 @@ public class OaReceiveController extends BaseCRUDActionController<OaReceive> {
             if (!StringHelper.isEmpty(operationId)) {
                 target.setOperation(oaReceiveOperationService.get(Long.valueOf(operationId)));
             }
-            String userId =request.getParameter("userId");
+            String userId = request.getParameter("userId");
             target.setCompleteTime(new Timestamp(System.currentTimeMillis()));//设置处理完成时间
             target.setReceiveTime(target.getOaReceive().getNodeReceiveTime());
             oaReceiveNodeService.save(target);
-            oaReceiveManager.createOaTask(target.getOaReceive(),userId);//创建系统任务
+            oaReceiveManager.createOaTask(target.getOaReceive(), userId);//创建系统任务
 
         } catch (Exception e) {
             log.error("error", e);
