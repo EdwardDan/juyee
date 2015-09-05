@@ -117,6 +117,7 @@ public class PrivilegeCode {
     public static final String OA_RECEIVE_STEP_EDIT = OaReceiveStep.class.getSimpleName() + "_edit";  //收文流程配置_编辑
     public static final String OA_RECEIVE_EDIT = OaReceive.class.getSimpleName() + "_edit";  //收文登记单_编辑
     public static final String OA_RECEIVE_AUDIT = OaReceive.class.getSimpleName() + "_audit";  //收文登记单_审核
+    public static final String OA_RECEIVE_NB_ZR = OaReceive.class.getSimpleName() + "_nb_zr";  //收文登记单_办公室主任拟办
 
     //项目推进编辑
     public static final String PROJ_EXTEND_EDIT = ProjExtend.class.getSimpleName() + "_edit";  //项目推进编辑

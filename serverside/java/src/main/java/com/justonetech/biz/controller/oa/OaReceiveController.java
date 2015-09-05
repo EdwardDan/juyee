@@ -10,6 +10,7 @@ import com.justonetech.biz.utils.Constants;
 import com.justonetech.biz.utils.enums.OaReceiveStatus;
 import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.orm.hibernate.Page;
+import com.justonetech.core.utils.DateTimeHelper;
 import com.justonetech.core.utils.JspHelper;
 import com.justonetech.core.utils.ReflectionUtils;
 import com.justonetech.core.utils.StringHelper;
@@ -91,9 +92,8 @@ public class OaReceiveController extends BaseCRUDActionController<OaReceive> {
     @RequestMapping
     public String grid(Model model) {
         SysUser sysUser = sysUserManager.getSysUser();
-        Boolean isZR = sysRoleManager.hasRole(sysUser, "办公室主任");
         //判断是否有编辑权限
-        model.addAttribute("isZR", isZR);
+        model.addAttribute("isZR", sysUserManager.hasPrivilege(PrivilegeCode.OA_RECEIVE_NB_ZR)); //办公室主任拟办
         model.addAttribute("SWDJ", OaReceiveStatus.OA_RECEIVE_SWDJ.getCode());//收文登记
         model.addAttribute("BGSNB", OaReceiveStatus.OA_RECEIVE_BGSNB.getCode());//办公室拟办
         model.addAttribute("LDPS", OaReceiveStatus.OA_RECEIVE_LDPS.getCode());//领导批示
@@ -157,7 +157,7 @@ public class OaReceiveController extends BaseCRUDActionController<OaReceive> {
                     String dealDeptIds = "," + dealDepts + ",";
                     if (null != sysUser.getPerson() && null != sysUser.getPerson().getDept()) {
                         SysDept dept = sysUser.getPerson().getDept();
-                        if (sysUserManager.hasPrivilege(PrivilegeCode.OA_RECEIVE_AUDIT)&&dealDeptIds.contains("," + dept.getId() + ",")) { //属于审核部门且有审核权限的才能审核 其他人员只能查看
+                        if (sysUserManager.hasPrivilege(PrivilegeCode.OA_RECEIVE_AUDIT) && dealDeptIds.contains("," + dept.getId() + ",")) { //属于审核部门且有审核权限的才能审核 其他人员只能查看
                             if (null != oaReceive.getStep() && OaReceiveStatus.OA_RECEIVE_BMLDYJ.getCode().equals(oaReceive.getStep().getCode())) {
                                 bean.put("isValid", "true");
                             }
@@ -173,6 +173,10 @@ public class OaReceiveController extends BaseCRUDActionController<OaReceive> {
                             bean.put("isValid", "true");
                         }
                     }
+                }
+                int days = DateTimeHelper.getDays(new Timestamp(System.currentTimeMillis()), oaReceive.getNodeReceiveTime());
+                if (days > 2) {
+                    bean.put("isPress", "true");
                 }
             }
             //输出显示
@@ -346,6 +350,103 @@ public class OaReceiveController extends BaseCRUDActionController<OaReceive> {
     }
 
     /**
+     * 催办页面
+     *
+     * @param id    .
+     * @param model .
+     * @return .
+     */
+    @RequestMapping
+    public String press(Model model, Long id) {
+        OaReceiveStep step = oaReceiveStepService.findUniqueByProperty("code", OaReceiveStatus.OA_RECEIVE_CB.getCode());
+        OaReceiveNode node;
+        OaReceive oaReceive = oaReceiveService.get(id);
+        //            String dealDepts = oaReceive.getDealDepts();
+        String hql = " from OaReceiveNode where oaReceive.step.code='" + oaReceive.getStep().getCode() + "'  and oaReceive.id=" + oaReceive.getId() + "  order by id desc ";
+        List<OaReceiveNode> nodes = oaReceiveNodeService.findByQuery(hql);
+        List<String> nodeUser = new ArrayList<String>();
+        for (OaReceiveNode oaReceiveNode : nodes) {
+            nodeUser.add(oaReceiveNode.getDealUser());
+        }
+
+        if (!oaReceive.getStep().getCode().equals(OaReceiveStatus.OA_RECEIVE_SWWC.getCode())) {
+            List<SysUser> users = new ArrayList<SysUser>();
+            //办公室拟办
+            int days = DateTimeHelper.getDays(new Timestamp(System.currentTimeMillis()), oaReceive.getNodeReceiveTime());
+            if (OaReceiveStatus.OA_RECEIVE_BGSNB.getCode().equals(oaReceive.getStep().getCode()) && days > 2) {
+                users = sysUserManager.getUsersByPrivilegeCode(PrivilegeCode.OA_RECEIVE_NB_ZR);//需要催办的用户
+            }
+
+            //领导批示--处理人
+            String dealPersons = oaReceive.getDealPersons();
+            if (!StringHelper.isEmpty(dealPersons)) {
+                String[] persons = dealPersons.split(",");
+                List<String> dealUser = new ArrayList<String>();
+                Map<String, SysUser> dealUserMap = new HashMap<String, SysUser>();
+                for (String personId : persons) {
+                    SysUser sysUser = sysUserService.get(Long.valueOf(personId));
+                    dealUser.add(sysUser.getDisplayName());
+                    dealUserMap.put(sysUser.getDisplayName(), sysUser);
+                }
+                //领导批示
+                if (OaReceiveStatus.OA_RECEIVE_LDPS.getCode().equals(oaReceive.getStep().getCode()) && days > 2) {
+                    dealUser.removeAll(nodeUser);
+                    for (String user : dealUser) {
+                        users.add(dealUserMap.get(user));// 需要催办的用户
+                    }
+                }
+            }
+
+            //办理结果--处理人
+            String bljgPersons = oaReceive.getBljgPersons();
+            if (!StringHelper.isEmpty(bljgPersons)) {
+                String[] bljgUsers = bljgPersons.split(",");
+                List<String> bljgUser = new ArrayList<String>();
+                Map<String, SysUser> bljgUserMap = new HashMap<String, SysUser>();
+                for (String personId : bljgUsers) {
+                    SysUser sysUser = sysUserService.get(Long.valueOf(personId));
+                    bljgUser.add(sysUser.getDisplayName());
+                    bljgUserMap.put(sysUser.getDisplayName(), sysUser);
+                }
+                //处理结果
+                if (OaReceiveStatus.OA_RECEIVE_BLJG.getCode().equals(oaReceive.getStep().getCode()) && days > 2) {
+                    bljgUser.removeAll(nodeUser);
+                    for (String user : bljgUser) {
+                        users.add(bljgUserMap.get(user));// 需要催办的用户
+                    }
+                }
+            }
+            model.addAttribute("users", users);
+            if(null!=users&&users.size()>0){
+               String  userId ="";
+                for (SysUser user : users) {
+                    userId+=","+user.getId();
+                }
+                model.addAttribute("userId", userId.substring(1));
+            }
+        }
+
+        SysUser loginUser = sysUserManager.getSysUser();
+        String hql1 = " from OaReceiveNode where oaReceive.step.code='" + OaReceiveStatus.OA_RECEIVE_CB.getCode() + "'  and oaReceive.id=" + oaReceive.getId() + "  and dealUser='"+loginUser.getDisplayName()+"'  order by id desc ";
+        List<OaReceiveNode> nodes1 = oaReceiveNodeService.findByQuery(hql1);
+        if (null != nodes1 && nodes1.size() > 0) {
+            node = nodes1.iterator().next();
+        } else {
+            node = new OaReceiveNode();
+            node.setReceiveTime(oaReceive.getNodeReceiveTime());
+            node.setOpenTime(new Timestamp(System.currentTimeMillis()));  //设置打开时间
+            node.setOaReceive(oaReceive);
+            node.setStepId(step.getId());
+            node.setDealUser(loginUser.getDisplayName());//设置处理人
+        }
+        Set<OaReceiveOperation> operations = step.getOaReceiveOperations();
+        model.addAttribute("operations", operations);
+        //处理其他业务逻辑
+        model.addAttribute("bean2", node);
+        return "view/oa/oaReceive/press";
+    }
+
+    /**
      * 保存登记操作
      *
      * @param response .
@@ -415,7 +516,7 @@ public class OaReceiveController extends BaseCRUDActionController<OaReceive> {
                 target.setNodeReceiveTime(new Timestamp(System.currentTimeMillis()));
             }
             oaReceiveService.save(target);
-            oaReceiveManager.createOaTask(target);
+            oaReceiveManager.createOaTask(target,null);
 
 
         } catch (Exception e) {
@@ -478,7 +579,7 @@ public class OaReceiveController extends BaseCRUDActionController<OaReceive> {
                 target.setNodeReceiveTime(new Timestamp(System.currentTimeMillis()));
             }
             oaReceiveService.save(target);
-            oaReceiveManager.createOaTask(target);
+            oaReceiveManager.createOaTask(target,null);
 
         } catch (Exception e) {
             log.error("error", e);
@@ -489,7 +590,7 @@ public class OaReceiveController extends BaseCRUDActionController<OaReceive> {
     }
 
     /**
-     * 保存操作
+     * 审核保存操作
      *
      * @param response .
      * @param entity   .
@@ -557,10 +658,10 @@ public class OaReceiveController extends BaseCRUDActionController<OaReceive> {
                         break;
                     } else {
                         oaReceive.setStep(next);
-                        oaReceiveManager.createOaTask(oaReceive); //创建系统任务
+                        oaReceiveManager.createOaTask(oaReceive,null); //创建系统任务
                     }
                 }
-                if(oaReceive.getStep().equals(next)){
+                if (oaReceive.getStep().equals(next)) {
                     oaReceive.setNodeReceiveTime(new Timestamp(System.currentTimeMillis()));
                 }
             }
@@ -581,10 +682,10 @@ public class OaReceiveController extends BaseCRUDActionController<OaReceive> {
                         break;
                     } else {
                         oaReceive.setStep(next);
-                        oaReceiveManager.createOaTask(oaReceive);  //创建系统任务
+                        oaReceiveManager.createOaTask(oaReceive,null);  //创建系统任务
                     }
                 }
-                if(oaReceive.getStep().equals(next)){
+                if (oaReceive.getStep().equals(next)) {
                     oaReceive.setNodeReceiveTime(new Timestamp(System.currentTimeMillis()));
                 }
             }
@@ -601,15 +702,57 @@ public class OaReceiveController extends BaseCRUDActionController<OaReceive> {
                         break;
                     } else {
                         oaReceive.setStep(next);
-                        oaReceiveManager.createOaTask(oaReceive);//创建系统任务
+                        oaReceiveManager.createOaTask(oaReceive,null);//创建系统任务
                     }
                 }
-                if(oaReceive.getStep().equals(next)){
+                if (oaReceive.getStep().equals(next)) {
                     oaReceive.setNodeReceiveTime(new Timestamp(System.currentTimeMillis()));
                 }
             }
 
             oaReceiveService.save(oaReceive);
+
+        } catch (Exception e) {
+            log.error("error", e);
+            super.processException(response, e);
+            return;
+        }
+        sendSuccessJSON(response, "保存成功");
+    }
+
+    /**
+     * 催办保存操作
+     *
+     * @param response .
+     * @param entity   .
+     * @param request  .
+     * @throws Exception .
+     */
+    @SuppressWarnings("unchecked")
+    @RequestMapping
+    public void pressSave(HttpServletResponse response, @ModelAttribute("bean2") OaReceiveNode entity, HttpServletRequest request) throws Exception {
+        try {
+            OaReceiveNode target;
+            if (entity.getId() != null) {
+                target = oaReceiveNodeService.get(entity.getId());
+                ReflectionUtils.copyBean(entity, target, new String[]{
+                        "isDeal",
+                        "openTime",
+                        "dealResult"
+                });
+
+            } else {
+                target = entity;
+            }
+            String operationId = request.getParameter("operationId");
+            if (!StringHelper.isEmpty(operationId)) {
+                target.setOperation(oaReceiveOperationService.get(Long.valueOf(operationId)));
+            }
+            String userId =request.getParameter("userId");
+            target.setCompleteTime(new Timestamp(System.currentTimeMillis()));//设置处理完成时间
+            target.setReceiveTime(target.getOaReceive().getNodeReceiveTime());
+            oaReceiveNodeService.save(target);
+            oaReceiveManager.createOaTask(target.getOaReceive(),userId);//创建系统任务
 
         } catch (Exception e) {
             log.error("error", e);

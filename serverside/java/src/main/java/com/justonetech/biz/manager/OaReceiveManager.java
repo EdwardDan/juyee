@@ -168,11 +168,22 @@ public class OaReceiveManager {
      * @param data .
      * @throws Exception .
      */
-    public void createOaTask(OaReceive data) throws Exception {
+    public void createOaTask(OaReceive data,String userCbIds) throws Exception {
         String code = data.getStep().getCode();
         //创建任务
         String title ="";
         Set<Long> managers = new HashSet<Long>();
+        if(!StringHelper.isEmpty(userCbIds)){
+            title = oaTaskManager.getTaskTitle(data, OaReceive.class.getSimpleName()+"_cb");
+            //获取办公室主任
+            String[] user = userCbIds.split(",");
+            for (String id : user) {
+                managers.add(Long.valueOf(id));
+            }
+            if (managers.size() > 0) {
+                oaTaskManager.createTask(OaReceive.class.getSimpleName()+"_cb", data.getId(), title, managers, false, null, null);
+            }
+        }
         //办公室主任在提交后收到待办提醒
         if (OaReceiveStatus.OA_RECEIVE_BGSNB.getCode().equals(code)) {
             title = oaTaskManager.getTaskTitle(data, OaReceive.class.getSimpleName()+"_nb");
