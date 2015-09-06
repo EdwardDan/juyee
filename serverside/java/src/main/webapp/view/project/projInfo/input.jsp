@@ -8,7 +8,7 @@
                     //{name:"name", rule:"validate[required,maxSize[500]]"},
                     {name: "year", rule: "validate[required,custom[integer],maxSize[4]"},
                     {name: "no", rule: "validate[required,custom[integer],maxSize[5]"},
-                    {name:"startDate", rule:"validate[required]"},
+//                    {name:"startDate", rule:"validate[required]"},
                     {name:"name", rule:"validate[required]"}
                     //{name:"startDate", rule:"validate[required,custom[date],maxSize[7]"},
                     //{name:"jsDept", rule:"validate[required,maxSize[300]]"},

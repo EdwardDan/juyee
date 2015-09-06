@@ -6,9 +6,9 @@
     $(function () {
         //页面验证初始化
         var validateCondition = [
-            {name: "gctxGkpfTotal", rule: "validate[required,custom[number]"},
-            {name: "gctxCspfTotal", rule: "validate[required,custom[number]"} ,
-            {name: "gctxSourceFund", rule: "validate[required"}
+//            {name: "gctxGkpfTotal", rule: "validate[required,custom[number]"},
+//            {name: "gctxCspfTotal", rule: "validate[required,custom[number]"} ,
+//            {name: "gctxSourceFund", rule: "validate[required"}
         ];
         validateInit(validateCondition, formId);
     });
