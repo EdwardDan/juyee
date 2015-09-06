@@ -8,6 +8,7 @@
                 colNames: ['ID',
                     '年份',
                     '项目序号',
+                    '项目编号',
                     '项目名称',
                     '项目性质',
                     '项目阶段',
@@ -21,7 +22,8 @@
                 colModel: [
                     {name: 'id', width: 10, align: "center", searchtype: "integer", hidden: true},
                     {name: "year", width: "30", align: "center", searchtype: "integer", sortable: true},
-                    {name: "no", width: "20", align: "center", searchtype: "integer", sortable: true},
+                    {name: "no", width: "20", align: "center", searchtype: "integer", sortable: true, hidden: true},
+                    {name: "projNum", width: "20", align: "center", searchtype: "integer", sortable: true},
                     {name: "name", width: "70", align: "left", searchtype: "string", sortable: true},
                     {name: "property.name", width: "40", align: "center", searchtype: "string", sortable: true},
                     {name: "stage.name", width: "40", align: "center", searchtype: "string", sortable: true},
@@ -47,7 +49,7 @@
                         var opButton = '<input type="button" value="办证推进" onclick="doViewStage(\'' + id + '\', \'' + name + '\')" class="button_normal_long"/> ';
                         opButton += '<input type="button" value="形象进度" onclick="doViewNode(\'' + id + '\', \'' + name + '\')" class="button_normal_long"/> ';
                         opButton += '<input type="hidden" name="docIdDocument" value="' + docId + '" id="docIdDocument' + id + '" />' +
-                                    '<input type="button" value="上传附件" class="button_normal_long" onclick="doUploadDocAttachs(' + id + ')"/>';
+                                '<input type="button" value="上传附件" class="button_normal_long" onclick="doUploadDocAttachs(' + id + ')"/>';
                         jQuery("#listGrid").jqGrid('setRowData', ids[i], { operation: opButton});
                     }
                 }, rownumbers: true
@@ -55,7 +57,8 @@
             userOpts: {
                 defaultQuery: { "groupOp": "AND", "rules": [
                     { "field": "年份", "op": "eq", "data": ""},
-                    { "field": "项目序号", "op": "cn", "data": ""},
+//                    { "field": "项目序号", "op": "cn", "data": ""},
+                    { "field": "项目编号", "op": "cn", "data": ""},
                     { "field": "项目名称", "op": "cn", "data": ""},
                     { "field": "项目性质", "op": "cn", "data": ""},
                     { "field": "项目阶段", "op": "cn", "data": ""},

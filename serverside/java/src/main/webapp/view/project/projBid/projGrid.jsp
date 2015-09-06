@@ -9,6 +9,7 @@
                 colNames: ['ID',
                     '填报年份',
                     '项目序号',
+                    '项目编号',
                     '项目名称',
                     '项目性质',
                     '项目阶段',
@@ -19,16 +20,19 @@
                 colModel: [
                     {name: 'id', width: 10, align: "center", searchtype: "integer", hidden: true},
                     {name: "year", width: "30", align: "center", searchtype: "integer", sortable: true},
-                    {name: "no", width: "30", align: "center", searchtype: "string", sortable: true},
+                    {name: "no", width: "30", align: "center", searchtype: "string", sortable: true, hidden: true},
+                    {name: "projNum", width: "30", align: "center", searchtype: "string", sortable: true},
                     {name: "name", width: "80", align: "left", searchtype: "string", sortable: true},
                     {name: "property.name", width: "30", align: "center", searchtype: "string", sortable: true},
                     {name: "stage.name", width: "30", align: "center", searchtype: "string", sortable: true},
                     {name: "category.name", width: "30", align: "center", searchtype: "string", sortable: true}
                     <c:if test="${TYPE_STAGE==typeCode}">
-                    ,{name: "bidCountOfStage", width: "30", align: "center", searchtype: "integer", sortable: true}
+                    ,
+                    {name: "bidCountOfStage", width: "30", align: "center", searchtype: "integer", sortable: true}
                     </c:if>
                     <c:if test="${TYPE_NODE==typeCode}">
-                    ,{name: "bidCountOfNode", width: "30", align: "center", searchtype: "integer", sortable: true}
+                    ,
+                    {name: "bidCountOfNode", width: "30", align: "center", searchtype: "integer", sortable: true}
                     </c:if>
                 ],
                 actModel: [
@@ -49,7 +53,8 @@
             userOpts: {
                 defaultQuery: { "groupOp": "AND", "rules": [
                     { "field": "填报年份", "op": "eq", "data": ""},
-                    { "field": "项目序号", "op": "cn", "data": ""},
+//                    { "field": "项目序号", "op": "cn", "data": ""},
+                    { "field": "项目编号", "op": "cn", "data": ""},
                     { "field": "项目名称", "op": "cn", "data": ""},
                     { "field": "项目性质", "op": "cn", "data": ""},
                     { "field": "项目阶段", "op": "cn", "data": ""},
@@ -63,7 +68,7 @@
         gridinit($("#listGrid"), conf);
     });
     function doToBid(projId) {
-        loadAjaxData("mainContent", "${ctx}/projBid/bidGrid.do?projId=" + projId+"&typeCode=${typeCode}");
+        loadAjaxData("mainContent", "${ctx}/projBid/bidGrid.do?projId=" + projId + "&typeCode=${typeCode}");
     }
 </script>
 
