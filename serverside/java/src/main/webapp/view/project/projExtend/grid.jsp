@@ -44,11 +44,11 @@
                         </c:if>
                         if (stageName == '未开工') {
                             //判断项目阶段的高亮显示（删除列时注意修改）
-                            $("#" + id).find("td:eq(6)").css("background-color", " #f08080");
+                            $("#" + id).find("td:eq(7)").css("background-color", " #f08080");
                         } else if (stageName == '在建') {
-                            $("#" + id).find("td:eq(6)").css("background-color", "#add8e6");
+                            $("#" + id).find("td:eq(7)").css("background-color", "#add8e6");
                         } else if (stageName == '已完工') {
-                            $("#" + id).find("td:eq(6)").css("background-color", "#90ee90");
+                            $("#" + id).find("td:eq(7)").css("background-color", "#90ee90");
                         }
                         jQuery("#listGrid").jqGrid('setRowData', ids[i], { operation: opButton});
                     }
