@@ -212,6 +212,17 @@
             <meta attribute="ColumnComment">批办</meta>
         </property>
 
+        <property
+                name="nodeReceiveTime"
+                column="NODE_RECEIVE_TIME"
+                type="timestamp"
+                not-null="false"
+                length="7"
+                >
+            <meta attribute="ColumnName">登记日期</meta>
+            <meta attribute="ColumnComment">登记日期</meta>
+        </property>
+
 		<property
 			name="createTime"
 			column="CREATE_TIME"

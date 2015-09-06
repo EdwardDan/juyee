@@ -15,6 +15,7 @@
                     '当前步骤',
                     '当前步骤code',
                     '是否可编辑',
+                    '是否催办',
                     '附件',
                     '操作'
                 ],
@@ -27,8 +28,9 @@
                     {name:"receiveDate", width:"30", align:"center", searchtype:"datetime", sortable:true, formatter:'date', formatoptions:{srcformat:'Y-m-d H:i:s', newformat:'Y-m-d'}},
                     {name:"limitDate", width:"30", align:"center", searchtype:"datetime", sortable:true, formatter:'date', formatoptions:{srcformat:'Y-m-d H:i:s', newformat:'Y-m-d'}},
                     {name:"step.name", width:"30", align:"center", searchtype:"string", sortable:true},
-                    {name:"step.code", width:"30", align:"center", searchtype:"integer", hidden:true},
-                    {name:"isValid", width:"30", align:"center", searchtype:"integer", hidden:true},
+                    {name:"step.code", width:"30", align:"center", searchtype:"string", hidden:true},
+                     {name:"isValid", width:"30", align:"center", searchtype:"string", hidden:true},
+                     {name:"isPress", width:"30", align:"center", searchtype:"string", hidden:true},
                     {name:"documentFile", width:"30", align:"center", searchtype:"string"}
                 ],
                 actModel:[
@@ -44,6 +46,7 @@
                         var rowData = jQuery("#listGrid").jqGrid('getRowData', id);
                         var step = rowData["step.code"];
                         var isValid = rowData["isValid"];
+                        var isPress = rowData["isPress"];
                         var opButton = '<input type="button" value="查看" onclick="doView(' + id + ')" class="button_normal"/> ';
                         opButton += '<input type="button" value="日志" onclick="doViewNode(' + id + ')" class="button_normal"/> ';
                         if (${canEdit}){
@@ -59,6 +62,10 @@
                                     opButton += '<input type="button" value="删除" onclick="doDelete(' + id + ')" class="button_normal"/>';
                                 }
                             }
+                            if (isPress=='true') {
+                                opButton += '<input type="button" value="催办" onclick="doPress(' + id + ')" class="button_normal"/> ';
+                            }
+
                         }
                         jQuery("#listGrid").jqGrid('setRowData', ids[i], { operation:opButton});
                     }
@@ -97,6 +104,9 @@
     }
     function doAuditMain(id) {
         openWindow("审核收文管理", "${ctx}/oaReceive/auditMain.do?id=" + id + "&type=auditMain", true, 850, 500);
+    }
+    function doPress(id) {
+        openWindow("收文管理催办", "${ctx}/oaReceive/press.do?id=" + id, true, 650, 400);
     }
     function doDelete(id) {
         doGridDelete("${ctx}/oaReceive/delete.do?id=" + id);
