@@ -4,10 +4,11 @@
     $(function () {
         var conf = {
             gridOpts: {
-                url: "${ctx}/projExtend/gridDataCustom.do",
+                url: "${ctx}/projExtend/gridDataCustom.do?flag=${flag}",
                 colNames: ['ID',
                     '填报年份',
                     '项目序号',
+                    '项目编号',
                     '项目名称',
                     '项目性质',
                     '项目阶段',
@@ -17,7 +18,8 @@
                 colModel: [
                     {name: 'id', width: 10, align: "center", searchtype: "integer", hidden: true},
                     {name: "year", width: "30", align: "center", searchtype: "integer", sortable: true},
-                    {name: "no", width: "30", align: "center", searchtype: "string", sortable: true},
+                    {name: "no", width: "30", align: "center", searchtype: "string", sortable: true, hidden: true},
+                    {name: "projNum", width: "30", align: "center", searchtype: "string", sortable: true},
                     {name: "name", width: "80", align: "left", searchtype: "string", sortable: true},
                     {name: "property.name", width: "25", align: "center", searchtype: "string", sortable: true},
                     {name: "stage.name", width: "25", align: "center", searchtype: "string", sortable: true},
@@ -42,11 +44,11 @@
                         </c:if>
                         if (stageName == '未开工') {
                             //判断项目阶段的高亮显示（删除列时注意修改）
-                            $("#" + id).find("td:eq(6)").css("background-color", " #f08080");
+                            $("#" + id).find("td:eq(7)").css("background-color", " #f08080");
                         } else if (stageName == '在建') {
-                            $("#" + id).find("td:eq(6)").css("background-color", "#add8e6");
+                            $("#" + id).find("td:eq(7)").css("background-color", "#add8e6");
                         } else if (stageName == '已完工') {
-                            $("#" + id).find("td:eq(6)").css("background-color", "#90ee90");
+                            $("#" + id).find("td:eq(7)").css("background-color", "#90ee90");
                         }
                         jQuery("#listGrid").jqGrid('setRowData', ids[i], { operation: opButton});
                     }
@@ -55,7 +57,8 @@
             userOpts: {
                 defaultQuery: { "groupOp": "AND", "rules": [
                     { "field": "填报年份", "op": "eq", "data": ""},
-                    { "field": "项目序号", "op": "cn", "data": ""},
+//                    { "field": "项目序号", "op": "cn", "data": ""},
+                    { "field": "项目编号", "op": "cn", "data": ""},
                     { "field": "项目名称", "op": "cn", "data": ""},
                     { "field": "项目性质", "op": "cn", "data": ""},
                     { "field": "项目阶段", "op": "cn", "data": ""},

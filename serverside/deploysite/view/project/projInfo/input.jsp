@@ -80,7 +80,7 @@
                 <td class="form_label_right">业态类别：</td>
                 <td class="form_content">
                     <sys:code code="${PROJ_INFO_CATEGORY}" name="ProjCategory" id="ProjCategory" type="select"
-                              sysCodeDetailId="${bean.category.id}" style="width:150px"/>
+                              sysCodeDetailId="${bean.category.id}" style="width:150px" isAlowedNull="true"/>
                 </td>
             </tr>
             <tr class="tr_dark">

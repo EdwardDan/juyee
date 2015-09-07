@@ -8,6 +8,7 @@
                 colNames: ['ID',
                     '填报年份',
                     '项目序号',
+                    '项目编号',
                     '项目名称',
                     '管理属性',
                     '项目状态',
@@ -19,7 +20,8 @@
                 colModel: [
                     {name: 'id', width: 10, align: "center", searchtype: "integer", hidden: true},
                     {name: "year", width: "30", align: "center", searchtype: "integer", sortable: true},
-                    {name: "no", width: "30", align: "center", searchtype: "string", sortable: true},
+                    {name: "no", width: "30", align: "center", searchtype: "string", sortable: true, hidden: true},
+                    {name: "projNum", width: "30", align: "center", searchtype: "string", sortable: true},
                     {name: "name", width: "80", align: "left", searchtype: "string", sortable: true},
                     {name: "property.name", width: "25", align: "center", searchtype: "string", sortable: true},
                     {name: "stage.name", width: "25", align: "center", searchtype: "string", sortable: true},
@@ -49,7 +51,8 @@
             userOpts: {
                 defaultQuery: { "groupOp": "AND", "rules": [
                     { "field": "填报年份", "op": "eq", "data": ""},
-                    { "field": "项目序号", "op": "cn", "data": ""},
+//                    { "field": "项目序号", "op": "cn", "data": ""},
+                    { "field": "项目编号", "op": "cn", "data": ""},
                     { "field": "项目名称", "op": "cn", "data": ""},
                     { "field": "管理属性", "op": "cn", "data": ""},
                     { "field": "项目状态", "op": "cn", "data": ""},
