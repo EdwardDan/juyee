@@ -120,6 +120,7 @@ public class PrivilegeCode {
     public static final String OA_RECEIVE_NB_ZR = OaReceive.class.getSimpleName() + "_nb_zr";  //收文登记单_办公室主任拟办
 
     //项目推进编辑
-    public static final String PROJ_EXTEND_EDIT = ProjExtend.class.getSimpleName() + "_edit";  //项目推进编辑
+    public static final String PROJ_EXTEND_EDIT1 = "ProjExtend1_edit";  //项目推进编辑
+    public static final String PROJ_EXTEND_EDIT2 = "ProjExtend2_edit";  //项目推进编辑
 }
 

@@ -4,7 +4,7 @@
     $(function () {
         var conf = {
             gridOpts: {
-                url: "${ctx}/projExtend/gridDataCustom.do",
+                url: "${ctx}/projExtend/gridDataCustom.do?flag=${flag}",
                 colNames: ['ID',
                     '填报年份',
                     '项目序号',

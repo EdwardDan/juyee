@@ -62,8 +62,9 @@ public class ProjExtendController extends BaseCRUDActionController<ProjExtend> {
      * @return .
      */
     @RequestMapping
-    public String grid(Model model) {
+    public String grid(Model model, String flag) {
         //判断是否有编辑权限
+        model.addAttribute("flag", flag);
         model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.PROJ_INFO_EDIT));
 
         return "view/project/projExtend/grid";
@@ -79,10 +80,16 @@ public class ProjExtendController extends BaseCRUDActionController<ProjExtend> {
      * @param rows     .
      */
     @RequestMapping
-    public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session) {
+    public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session, String flag) {
         try {
             Page pageModel = new Page(page, rows, true);
-            String hql = "from ProjInfo order by no asc,id asc";
+            String hql = "from ProjInfo where 1=1";
+            if ("qqdj".equals(flag)) {
+                hql += " and category is null and packageAttr like '区区对接'";
+            } else {
+                hql += " and category is not null and packageAttr is null";
+            }
+            hql += " order by no asc,id asc";
 
             //执行查询
             QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);
