@@ -3,15 +3,15 @@
 <div class="form_div">
     <table cellpadding="0" cellspacing="0" class="form_table">
         <tr class="tr_light">
-            <td class="form_content" style="width: 10%;"></td>
-            <td class="form_content" style="width: 33%;">
+            <td class="form_border" style="width: 10%;"></td>
+            <td class="form_content" style="width: 20%;">
                 文种：${bean.type.name}
             </td>
-            <td class="form_content" style="width: 33%;">
+            <td class="form_border" style="width: 20%;">
                 密级：${bean.secret.name}
             </td>
-            <td class="form_content" style="width: 33%;">
-                （${bean.fileCode} ）号
+            <td class="form_content" style="width: 50%;text-align: center;">
+                ${bean.fileCode}
             </td>
             <td class="form_content" style="width: 10%;"></td>
         </tr>

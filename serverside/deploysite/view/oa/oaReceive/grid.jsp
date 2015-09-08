@@ -21,7 +21,7 @@
                 ],
                 colModel:[
                     {name:'id', width:10, align:"center", searchtype:"integer", hidden:true},
-                    {name:"code", width:"47", align:"left", searchtype:"string", sortable:true},
+                    {name:"code", width:"47", align:"center", searchtype:"string", sortable:true},
                     {name:"fileCode", width:"47", align:"left", searchtype:"string", sortable:true},
                     {name:"title", width:"47", align:"left", searchtype:"string", sortable:true},
                     {name:"sourceDept", width:"47", align:"left", searchtype:"string", sortable:true},
