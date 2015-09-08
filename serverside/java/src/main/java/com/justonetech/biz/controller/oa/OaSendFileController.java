@@ -9,6 +9,7 @@ import com.justonetech.biz.manager.DocumentManager;
 import com.justonetech.biz.utils.Constants;
 import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.orm.hibernate.Page;
+import com.justonetech.core.utils.DateTimeHelper;
 import com.justonetech.core.utils.JspHelper;
 import com.justonetech.core.utils.ReflectionUtils;
 import com.justonetech.system.daoservice.SysCodeDetailService;
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -119,6 +121,12 @@ public class OaSendFileController extends BaseCRUDActionController<OaSendFile> {
     @RequestMapping
     public String add(Model model) {
         OaSendFile oaSendFile = new OaSendFile();
+        //自动生成编号
+        Calendar c = Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+        oaSendFile.setYear(year);
+        oaSendFile.setOrderNo(setAutoCode(year));
+        model.addAttribute("yearOption", DateTimeHelper.getYearSelectOptions(String.valueOf(year)));
 
         //如需增加其他默认值请在此添加
         model.addAttribute("uploadButton", documentManager.getUploadButton(documentManager.getDefaultXmlConfig(), OaSendFile.class.getSimpleName(), oaSendFile.getFileDoc(), null, null));
@@ -151,6 +159,8 @@ public class OaSendFileController extends BaseCRUDActionController<OaSendFile> {
         model.addAttribute("type", Constants.OA_AEND_FILE);
         model.addAttribute("secret", Constants.FILE_SECURITY);
         model.addAttribute("emergency", Constants.EMERGENCY);
+
+        model.addAttribute("yearOption", DateTimeHelper.getYearSelectOptions(String.valueOf(oaSendFile.getYear())));
 
         return "view/oa/oaSendFile/input";
     }
@@ -187,7 +197,8 @@ public class OaSendFileController extends BaseCRUDActionController<OaSendFile> {
             if (entity.getId() != null) {
                 target = oaSendFileService.get(entity.getId());
                 ReflectionUtils.copyBean(entity, target, new String[]{
-                        "fileCode",
+//                        "fileCode",
+                        "year",
                         "fileTitle",
                         "sendDept",
                         "ccDept",
@@ -198,6 +209,18 @@ public class OaSendFileController extends BaseCRUDActionController<OaSendFile> {
             } else {
                 target = entity;
             }
+            //文件编号
+            String codeType = request.getParameter("codeType");
+            if (!StringHelper.isEmpty(codeType)) {
+                codeType = "沪交建管办";
+            } else {
+                codeType = "沪交建管";
+            }
+            String year = request.getParameter("year");
+            String orderNo = request.getParameter("orderNo");
+            String fillCode = codeType + "（" + year + "）" + orderNo + "号";
+            target.setFileCode(fillCode);
+
             String typeId = request.getParameter("type");
             SysCodeDetail type = sysCodeDetailService.get(Long.valueOf(typeId));
             target.setType(type);
@@ -243,6 +266,24 @@ public class OaSendFileController extends BaseCRUDActionController<OaSendFile> {
         documentManager.removeAllDoc(docId, null);
 
         sendSuccessJSON(response, "删除成功");
+    }
+
+    /**
+     * 获取最大编号
+     *
+     * @param year 。
+     * @return 。
+     */
+    public Integer setAutoCode(Integer year) {
+        Integer orderNo = 1;
+        List<OaSendFile> receiveList = oaSendFileService.findByQuery(" from OaSendFile where year=" + year + " order by orderNo desc");
+        if (null != receiveList && receiveList.size() > 0) {
+            OaSendFile receive = receiveList.iterator().next();
+            if (null != receive.getOrderNo()) {
+                orderNo = receive.getOrderNo() + 1;
+            }
+        }
+        return orderNo;
     }
 
 }

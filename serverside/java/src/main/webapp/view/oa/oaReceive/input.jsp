@@ -50,13 +50,9 @@
     <input type="hidden" name="openTime" id="openTime" value="${openTime}">
     <div class="form_div">
         <table cellpadding="0" cellspacing="0" class="form_table" style="border-collapse: collapse">
-            <tr >
-                <td class="head_title form_border" colspan="6">上海市路政局收文登记单</td>
-            </tr>
             <tr class="tr_light">
                 <td class="form_content" colspan="5">&nbsp;&nbsp;文件类型：${bean.type.name}</td>
-                <td class="form_label" align="right"><%--收文编号：--%>沪路政收（${bean.year}）${bean.orderNo}号&nbsp;&nbsp;</td>
-
+                <td class="form_label" align="right">${bean.code}&nbsp;&nbsp;</td>
             </tr>
             <tr class="tr_dark">
                 <td class="td_border" align="right">来文文号：</td>
@@ -76,12 +72,12 @@
             </tr>
 
             <tr class="tr_light">
-                <td class="td_border" align="right"  width="10%">登记日期：</td>
-                <td class="td_border" align="left" width="23%">&nbsp;<fmt:formatDate value="${bean.receiveDate}" pattern="yyyy-MM-dd"/> </td>
-                <td class="td_border" align="right" width="10%">成文日期：</td>
-                <td class="td_border" align="left" width="23%">&nbsp;<fmt:formatDate value="${bean.writtenDate}" pattern="yyyy-MM-dd"/> </td>
-                <td class="td_border" align="right" width="10%">页数：</td>
-                <td class="td_border" align="left" width="24%">&nbsp;${bean.ys} </td>
+                <td class="td_border" align="right" style="width: 10%;">登记日期：</td>
+                <td class="td_border" align="left" style="width: 23%;">&nbsp;<fmt:formatDate value="${bean.receiveDate}" pattern="yyyy-MM-dd"/> </td>
+                <td class="td_border" align="right" style="width: 10%;">成文日期：</td>
+                <td class="td_border" align="left" style="width: 23%;">&nbsp;<fmt:formatDate value="${bean.writtenDate}" pattern="yyyy-MM-dd"/> </td>
+                <td class="td_border" align="right" style="width: 10%;">页数：</td>
+                <td class="td_border" align="left" style="width: 24%;">&nbsp;${bean.ys} </td>
             </tr>
             <tr class="tr_dark">
                 <td class="td_border" align="right">提供部门：</td>

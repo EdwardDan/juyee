@@ -30,15 +30,23 @@
     <div class="form_div">
         <table cellpadding="0" cellspacing="0" class="form_table">
             <tr class="tr_light">
-                <td class="form_content" style="width: 10%;"></td>
-                <td class="form_content" style="width: 33%;">
-                    文种：<sys:code code="${type}" type="select" name="type" id="type" sysCodeDetailId="${bean.type.id}"/>
+                <td class="form_border" style="width: 10%;"></td>
+                <td class="form_border" style="width: 20%;">
+                    文种：<sys:code code="${type}" type="select" name="type" id="type" sysCodeDetailId="${bean.type.id}"
+                                 style="width:80px;"/>
                 </td>
-                <td class="form_content" style="width: 33%;">
-                    密级：<sys:code code="${secret}" type="select" name="secret" id="secret" sysCodeDetailId="${bean.secret.id}"/>
+                <td class="form_border" style="width: 20%;">
+                    密级：<sys:code code="${secret}" type="select" name="secret" id="secret"
+                                 sysCodeDetailId="${bean.secret.id}" style="width:80px;"/>
                 </td>
-                <td class="form_content" style="width: 33%;">
-                    （<form:input path="fileCode" cssClass="input_number"/> ）号
+                <td class="form_content" style="width: 50%;text-align: center;">
+                    <select name="codeType" id="codeType" class="form_select" style="width: 90px;">
+                        <option value="">沪交建管</option>
+                        <option value="ban">沪交建管办</option>
+                    </select>
+                    （<select name="year" class="form_select" style="width: 60px;">${yearOption}</select>）
+                    <form:input path="orderNo" cssClass="input_text" cssStyle="width: 30px;text-align: center;"/>号
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 </td>
                 <td class="form_content" style="width: 10%;"></td>
             </tr>
@@ -78,7 +86,8 @@
                             </td>
                             <td class="form_label_right" style="width: 15%;">紧急程度：</td>
                             <td class="form_content" style="width: 35%;">
-                                <sys:code code="${emergency}" type="select" name="emergency" id="emergency" sysCodeDetailId="${bean.emergency.id}"/>
+                                <sys:code code="${emergency}" type="select" name="emergency" id="emergency"
+                                          sysCodeDetailId="${bean.emergency.id}"/>
                             </td>
                         </tr>
                         <tr class="tr_dark">

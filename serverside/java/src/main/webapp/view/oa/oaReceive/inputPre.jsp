@@ -46,20 +46,22 @@
 </style>
 <form:form commandName="bean">
     <form:hidden path="id"/>
-    <form:hidden path="year"/>
-    <form:hidden path="orderNo"/>
     <input type="hidden" name="node" id="node" value="${node.id}">
     <input type="hidden" name="step" id="step" value="${bean.step.id}">
     <input type="hidden" name="openTime" id="openTime" value="${openTime}">
     <div class="form_div">
         <table cellpadding="0" cellspacing="0" class="form_table" style="border-collapse: collapse">
-            <tr >
-                <td class="head_title form_border" colspan="6">上海市路政局收文登记单</td>
-            </tr>
             <tr class="tr_light">
-                <td class="form_content" colspan="5">&nbsp;&nbsp;文件类型： <sys:code code="${type}" type="select" name="type" id="type" sysCodeDetailId="${bean.type.id}"/></td>
-                <td class="form_label" align="right"><%--收文编号：--%>沪路政收（${bean.year}）${bean.orderNo}号&nbsp;&nbsp;<input type="hidden" name="code" class="input_text" value="沪路政收（${bean.year}）${bean.orderNo}号"/></td>
-
+                <td class="form_content" colspan="4">&nbsp;&nbsp;文件类型： <sys:code code="${type}" type="select" name="type" id="type" sysCodeDetailId="${bean.type.id}"/></td>
+                <td class="form_label" align="right" colspan="2">
+                    沪建管（<select name="year" class="form_select" style="width: 60px;">${yearOption}</select>）
+                    <select name="codeType" id="codeType" class="form_select" style="width: 50px;">
+                        <option value="sw">收委</option>
+                        <option value="sh">收横</option>
+                        <option value="ss">收受</option>
+                    </select>
+                    <form:input path="orderNo" cssClass="input_text" cssStyle="width: 30px;text-align: center;"/>号&nbsp;&nbsp;
+                </td>
             </tr>
             <tr class="tr_dark">
                 <td class="td_border" align="right">来文文号：</td>
@@ -90,18 +92,18 @@
             </tr>
 
             <tr class="tr_light">
-                <td class="td_border" align="right"  width="10%">登记日期：</td>
-                <td class="td_border" align="left" width="23%">
+                <td class="td_border" align="right" style="width: 10%;">登记日期：</td>
+                <td class="td_border" align="left" style="width: 23%;">
                     <form:input path="receiveDate" cssClass="input_datetime" readonly="true"/>
                     <input type="button" class="button_calendar" value=" " onClick="calendar('receiveDate','all');">
                 </td>
-                <td class="td_border" align="right" width="10%">成文日期：</td>
-                <td class="td_border" align="left" width="23%">
+                <td class="td_border" align="right" style="width: 10%;">成文日期：</td>
+                <td class="td_border" align="left" style="width: 23%;">
                     <form:input path="writtenDate" cssClass="input_datetime" readonly="true"/>
                     <input type="button" class="button_calendar" value=" " onClick="calendar('writtenDate','all');">
                 </td>
-                <td class="td_border" align="right" width="10%">页数：</td>
-                <td class="td_border" align="left" width="24%">
+                <td class="td_border" align="right" style="width: 10%;">页数：</td>
+                <td class="td_border" align="left" style="width: 24%;">
                     <form:input path="ys" cssClass="input_text"/>
                 </td>
             </tr>

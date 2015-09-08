@@ -38,7 +38,30 @@
             <meta attribute="ColumnComment">发文标题</meta>
         </property>
 
-		<property
+        <property
+                name="year"
+                column="YEAR"
+                type="integer"
+                not-null="false"
+                length="4"
+                >
+            <meta attribute="ColumnName">年份</meta>
+            <meta attribute="ColumnComment">年份</meta>
+        </property>
+
+        <property
+                name="orderNo"
+                column="ORDER_NO"
+                type="integer"
+                not-null="false"
+                length="4"
+                >
+            <meta attribute="ColumnName">序号</meta>
+            <meta attribute="ColumnComment">序号</meta>
+        </property>
+
+
+        <property
 			name="fileCode"
 			column="FILE_CODE"
 			type="string"

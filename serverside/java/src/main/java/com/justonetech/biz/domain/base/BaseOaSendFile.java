@@ -75,6 +75,16 @@ public abstract class BaseOaSendFile implements Serializable,Auditable {
     /*发文标题*/
 	private String fileTitle;
 
+    // fields
+    /*年份*/
+    /*年份*/
+    private Integer year;
+
+    // fields
+    /*序号*/
+    /*序号*/
+    private Integer orderNo;
+
     /*发文字号*/
     /*发文字号*/
 	private String fileCode;
@@ -156,7 +166,23 @@ public abstract class BaseOaSendFile implements Serializable,Auditable {
 		this.fileTitle = fileTitle;
 	}
 
-	/**
+    public Integer getYear() {
+        return year;
+    }
+
+    public void setYear(Integer year) {
+        this.year = year;
+    }
+
+    public Integer getOrderNo() {
+        return orderNo;
+    }
+
+    public void setOrderNo(Integer orderNo) {
+        this.orderNo = orderNo;
+    }
+
+    /**
 	 * Return the value associated with the column: FILE_CODE
 	 */
 	public String getFileCode () {
@@ -348,6 +374,8 @@ public abstract class BaseOaSendFile implements Serializable,Auditable {
 		org.apache.commons.lang.builder.ToStringBuilder builder = new org.apache.commons.lang.builder.ToStringBuilder(this);
 		builder.append(id);
 		builder.append(fileTitle);
+		builder.append(year);
+		builder.append(orderNo);
 		builder.append(fileCode);
 		builder.append(sendDept);
 		builder.append(ccDept);

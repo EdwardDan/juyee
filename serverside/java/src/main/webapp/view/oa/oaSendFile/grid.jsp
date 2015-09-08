@@ -16,7 +16,7 @@
                 ],
                 colModel: [
                     {name: 'id', width: 10, align: "center", searchtype: "integer", hidden: true},
-                    {name: "fileCode", width: "20", align: "center", searchtype: "string", sortable: true},
+                    {name: "fileCode", width: "35", align: "center", searchtype: "string", sortable: true},
                     {name: "fileTitle", width: "90", align: "left", searchtype: "string", sortable: true},
                     {name: "sendDept", width: "60", align: "left", searchtype: "string", sortable: true},
                     {name: "writtenDate", width: "25", align: "center", searchtype: "date", sortable: true},

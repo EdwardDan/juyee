@@ -109,7 +109,7 @@ public class OaReceiveController extends BaseCRUDActionController<OaReceive> {
     public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session) {
         try {
             Page pageModel = new Page(page, rows, true);
-            String hql = "from OaReceive order by id desc";
+            String hql = "from OaReceive order by orderNo desc";
             //增加自定义查询条件
 
             //执行查询
@@ -218,6 +218,7 @@ public class OaReceiveController extends BaseCRUDActionController<OaReceive> {
         int year = c.get(Calendar.YEAR);
         oaReceive.setYear(year);
         oaReceive.setOrderNo(oaReceiveManager.setAutoCode(year));
+        model.addAttribute("yearOption", DateTimeHelper.getYearSelectOptions(String.valueOf(year)));
         //设置初始步骤 为收文登记
         OaReceiveStep step = oaReceiveStepService.findUniqueByProperty("code", OaReceiveStatus.OA_RECEIVE_SWDJ.getCode());
         oaReceive.setStep(step);
@@ -457,7 +458,8 @@ public class OaReceiveController extends BaseCRUDActionController<OaReceive> {
             if (entity.getId() != null) {
                 target = oaReceiveService.get(entity.getId());
                 ReflectionUtils.copyBean(entity, target, new String[]{
-                        "code",
+//                        "code",
+                        "year",
                         "fileCode",
                         "title",
                         "sourceDept",
@@ -483,6 +485,18 @@ public class OaReceiveController extends BaseCRUDActionController<OaReceive> {
                 DocDocument docDocument = docDocumentService.get(Long.valueOf(docId));
                 target.setDoc(docDocument);
             }
+            String year = request.getParameter("year");
+            String codeType = request.getParameter("codeType");
+            String orderNo = request.getParameter("orderNo");
+            if ("sw".equals(codeType)) {
+                codeType = "收委";
+            } else if ("sh".equals(codeType)) {
+                codeType = "收横";
+            } else if ("ss".equals(codeType)) {
+                codeType = "收受";
+            }
+            String code = "沪建管（" + year + "）" + codeType + orderNo + "号";
+            target.setCode(code);
 
             //新建一条数据时，保存一个日志信息
             String openTime = request.getParameter("openTime");

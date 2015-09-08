@@ -23,12 +23,9 @@
 </style>
     <div class="form_div">
         <table cellpadding="0" cellspacing="0" class="form_table" style="border-collapse: collapse;">
-            <tr >
-                <td class="head_title form_border" style="font-weight: bold;" colspan="6">上海市路政局收文登记单</td>
-            </tr>
             <tr class="tr_light">
                 <td class="form_content" colspan="5">&nbsp;&nbsp;文件类型：&nbsp;${bean.type.name}</td>
-                <td class="form_label" align="right">沪路政收（${bean.year}）${bean.orderNo}号&nbsp;&nbsp;<input type="hidden" name="code" class="input_text" value="沪路政收（${bean.year}）${bean.orderNo}号"/></td>
+                <td class="form_label" align="right">${bean.code}</td>
             </tr>
             <tr class="tr_dark">
                 <td class="td_border" align="right">来文文号：</td>
@@ -96,8 +93,8 @@
              </c:forEach>
             <tr class="tr_button">
                 <td class="form_border" align="center" colspan="6">
-                    &nbsp;是否打印日志:&nbsp;<input type="checkbox" value="1" name="isPrintNode" id="isPrintNode">
-                    <input type="button" value="打印" class="button_confirm" onclick="">
+                    <%--&nbsp;是否打印日志:&nbsp;<input type="checkbox" value="1" name="isPrintNode" id="isPrintNode">--%>
+                    <%--<input type="button" value="打印" class="button_confirm" onclick="">--%>
                     <input type="button" value="关闭" class="button_cancel" onclick="closeWindow()">&nbsp;&nbsp;
                 </td>
             </tr>
