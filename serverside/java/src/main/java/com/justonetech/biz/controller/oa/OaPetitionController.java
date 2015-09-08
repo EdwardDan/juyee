@@ -173,12 +173,9 @@ public class OaPetitionController extends BaseCRUDActionController<OaPetition> {
                 target.setJbrUser(sysUserService.get(JspHelper.getLong(request.getParameter("jbrId"))));
             }
             if (StringHelper.isNotEmpty(request.getParameter("docIdDocument"))) {
-                logger.debug("request.getParameter(\"docIdDocument\") -----------> " + request.getParameter("docIdDocument"));
                 target.setDoc(documentManager.getDocDocument(JspHelper.getLong(request.getParameter("docIdDocument"))));
                 if (target.getDoc() != null) {
-                    logger.debug("__________");
                     documentManager.updateDocumentByBizData(target.getDoc(), null, JspHelper.getString(target.getDoc().getName()));
-                    logger.debug("@@@@@@@@@@@@@");
                 }
             }
             oaPetitionService.save(target);
