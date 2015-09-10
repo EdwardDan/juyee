@@ -78,6 +78,7 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
     @RequestMapping
     public String grid(Model model, String tab) {
         filterPrivileges(model);
+        model.addAttribute("canSum", sysUserManager.hasPrivilege(PrivilegeCode.OA_WORK_WATCH_SUM));
         model.addAttribute("tab", tab);
         return "view/oa/oaWorkWatch/grid";
     }
@@ -129,8 +130,15 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
     public String add(Model model) {
         OaWorkWatch oaWorkWatch = new OaWorkWatch();
         oaWorkWatch.setStatus(OaWorkWatchStatus.STATUS_EDIT.getCode());
+        SysUser sysUser = sysUserManager.getSysUser();
+        oaWorkWatch.setReportUser(sysUser.getLoginName());
+        oaWorkWatch.setReportPerson(sysUser.getPerson().getName());
+        //获取登录人的部门
+        SysDept dept = sysUser.getPerson().getDept();
+        oaWorkWatch.setReportDept(dept.getName());
         model.addAttribute("bean", oaWorkWatch);
         filterPrivileges(model);
+
         return "view/oa/oaWorkWatch/input";
     }
 

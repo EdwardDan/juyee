@@ -8,7 +8,7 @@
             {name: "reportDept", rule: "validate[required,maxSize[100]]"},
             {name: "reportPerson", rule: "validate[required,maxSize[50]]"},
             {name: "beginDate", rule: "validate[required]"},
-            {name: "endDate", rule: "validate[required]"},
+            {name: "endDate", rule: "validate[required]"}
         ];
         validateInit(validateCondition, formId);
     });
