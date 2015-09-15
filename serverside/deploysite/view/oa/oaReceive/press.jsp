@@ -45,7 +45,7 @@
     <div class="form_div">
         <table cellpadding="0" cellspacing="0" class="form_table" style="border-collapse: collapse">
             <tr>
-                <td class="head_title form_border" colspan="4">上海市路政局收文登记单催办</td>
+                <td class="head_title form_border" colspan="4">上海市交通建设管理中心</td>
             </tr>
             <tr class="tr_dark ">
                 <td class="td_border" align="right" width="25%">收到时间：</td>
