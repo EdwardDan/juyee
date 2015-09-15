@@ -1,0 +1,3 @@
+alter table OA_SEND_FILE add ORDER_NO  NUMBER(10);
+
+alter table OA_SEND_FILE add YEAR NUMBER(10);
