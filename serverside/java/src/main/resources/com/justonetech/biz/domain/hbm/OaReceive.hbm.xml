@@ -309,6 +309,13 @@
 			not-null="false"
 		>
 		</many-to-one>
+        <many-to-one
+			name="lwdw"
+			column="LWDW_ID"
+			class="com.justonetech.system.domain.SysCodeDetail"
+			not-null="false"
+		>
+		</many-to-one>
 	
 
 		<set name="oaReceiveNodes" inverse="true">

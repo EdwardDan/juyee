@@ -16,10 +16,13 @@ import com.justonetech.core.utils.ReflectionUtils;
 import com.justonetech.core.utils.StringHelper;
 import com.justonetech.system.daoservice.SysDeptService;
 import com.justonetech.system.daoservice.SysUserService;
+import com.justonetech.system.domain.SysCodeDetail;
 import com.justonetech.system.domain.SysDept;
 import com.justonetech.system.domain.SysUser;
+import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
 import com.justonetech.system.utils.PrivilegeCode;
+import net.sf.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,6 +77,10 @@ public class OaReceiveController extends BaseCRUDActionController<OaReceive> {
 
     @Autowired
     private OaReceiveManager oaReceiveManager;
+
+    @Autowired
+    private SysCodeManager sysCodeManager;
+
 
     /**
      * 列表显示页面
@@ -184,14 +191,15 @@ public class OaReceiveController extends BaseCRUDActionController<OaReceive> {
     /**
      * 设置共用属性
      *
-     * @param model
-     * @param oaReceive
+     * @param model     。
+     * @param oaReceive 。
      */
     private void setSysCode(Model model, OaReceive oaReceive) {
         model.addAttribute("type", Constants.OA_RECEIVE_TYPE);
         model.addAttribute("fileType", Constants.OA_RECEIVE_FILE_TYPE);
         model.addAttribute("secret", Constants.FILE_SECURITY);
         model.addAttribute("urgent", Constants.EMERGENCY);
+        model.addAttribute("lwdw", Constants.OA_RECEIVE_LWDW);
         if (null != oaReceive.getStep()) {
             OaReceiveStep step = oaReceive.getStep();
             Set<OaReceiveOperation> operations = step.getOaReceiveOperations();
@@ -497,6 +505,11 @@ public class OaReceiveController extends BaseCRUDActionController<OaReceive> {
             }
             String code = "沪建管（" + year + "）" + codeType + orderNo + "号";
             target.setCode(code);
+            //保存来文单位
+            String lwdwId = request.getParameter("lwdw");
+            SysCodeDetail lwdw = sysCodeManager.getCodeListById(Long.valueOf(lwdwId));
+            target.setLwdw(lwdw);
+            target.setSourceDept(lwdw.getName());
 
             //新建一条数据时，保存一个日志信息
             String openTime = request.getParameter("openTime");
@@ -786,5 +799,27 @@ public class OaReceiveController extends BaseCRUDActionController<OaReceive> {
         oaReceiveNodeService.batchDelete(oaReceiveNodeList, oaReceiveNodeList.size());
         oaReceiveService.delete(id);
         sendSuccessJSON(response, "删除成功");
+    }
+
+    /**
+     * 获取来文文号
+     *
+     * @param model  。
+     * @param lwdwId 。
+     * @return 。
+     */
+    @RequestMapping
+    public String getLwwh(Model model, Long lwdwId) {
+        String msg;
+        SysCodeDetail lwdw = sysCodeManager.getCodeListById(lwdwId);
+        Map<String, Object> map = new HashMap<String, Object>();
+        if (null != lwdw) {
+            map.put("success", true);
+            map.put("lwwh", lwdw.getTag());
+        }
+        msg = JSONObject.fromObject(map).toString();
+        model.addAttribute("msg", msg);
+
+        return "common/msg";
     }
 }

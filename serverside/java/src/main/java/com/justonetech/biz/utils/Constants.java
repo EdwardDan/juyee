@@ -180,6 +180,8 @@ public class Constants {
     public static final String OA_RECEIVE_TYPE = "OaReceiveType";
     //收文--公文种类
     public static final String OA_RECEIVE_FILE_TYPE = "OaReceiveFileType";
+     //收文--来文单位
+    public static final String OA_RECEIVE_LWDW = "lwdw";
 
 
 }

@@ -1,6 +1,7 @@
 package com.justonetech.biz.domain.base;
 
 import com.justonetech.core.entity.Auditable;
+import com.justonetech.system.domain.SysCodeDetail;
 
 import java.io.Serializable;
 
@@ -176,6 +177,7 @@ public abstract class BaseOaReceive  implements Serializable,Auditable {
 	private com.justonetech.system.domain.SysCodeDetail type;
 	private com.justonetech.biz.domain.OaReceiveStep step;
 	private com.justonetech.system.domain.SysCodeDetail secret;
+	private com.justonetech.system.domain.SysCodeDetail lwdw;
 
 	// collections
 	private java.util.Set<com.justonetech.biz.domain.OaReceiveNode> oaReceiveNodes;
@@ -644,8 +646,15 @@ public abstract class BaseOaReceive  implements Serializable,Auditable {
 		this.secret = secret;
 	}
 
+    public SysCodeDetail getLwdw() {
+        return lwdw;
+    }
 
-	/**
+    public void setLwdw(SysCodeDetail lwdw) {
+        this.lwdw = lwdw;
+    }
+
+    /**
 	 * Return the value associated with the column: oaReceiveNodes
 	 */
 	public java.util.Set<com.justonetech.biz.domain.OaReceiveNode> getOaReceiveNodes () {
