@@ -129,7 +129,7 @@ public class OaWeekArrangeController extends BaseCRUDActionController<OaWeekArra
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
         //星期数组
-        String[] weeks = {"星期日", "星期二", "星期三", "星期四", "星期五", "星期六", "星期一"};
+        String[] weeks = {"星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"};
         String[] weekDates = new String[7];
         String[] dates = new String[7];
         for (int i = 1; i < 8; i++) {
