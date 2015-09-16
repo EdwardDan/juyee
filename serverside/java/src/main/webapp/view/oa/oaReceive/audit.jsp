@@ -72,7 +72,7 @@
     <div class="form_div">
         <table cellpadding="0" cellspacing="0" class="form_table" style="border-collapse: collapse">
             <tr>
-                <td class="head_title form_border" colspan="4">上海市交通建设管理中心</td>
+                <td class="head_title form_border" colspan="4">上海市交通建设工程管理中心文件处理单</td>
             </tr>
             <tr class="tr_dark ">
                 <td class="td_border" align="right" width="25%">收到时间：</td>
@@ -87,7 +87,7 @@
             <tr class="tr_light">
                 <td class="td_border" align="right"> &nbsp;处理意见：</td>
                 <td class="td_border" align="left" colspan="3">
-                    <form:textarea path="dealResult"cssClass="input_textarea_long"></form:textarea>
+                    <form:textarea path="dealResult" cssClass="input_textarea_long"/>
                 </td>
             </tr>
 

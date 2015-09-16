@@ -63,7 +63,7 @@
     <div class="form_div">
         <table cellpadding="0" cellspacing="0" class="form_table" style="border-collapse: collapse">
             <tr>
-                <td class="head_title form_border" colspan="6">上海市交通建设管理中心</td>
+                <td class="head_title form_border" colspan="6">上海市交通建设工程管理中心文件处理单</td>
             </tr>
             <tr class="tr_light">
                 <td class="form_content" colspan="4">&nbsp;&nbsp;文件类型： <sys:code code="${type}" type="select"
