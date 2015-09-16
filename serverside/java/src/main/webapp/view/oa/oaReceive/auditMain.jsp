@@ -43,7 +43,7 @@
             </tr>
             <tr class="tr_light">
                 <td class="form_content" colspan="5">&nbsp;&nbsp;文件类型：&nbsp;${bean.type.name}</td>
-                <td class="form_label" align="right">沪路政收（${bean.year}）${bean.orderNo}号&nbsp;&nbsp;<input type="hidden" name="code" class="input_text" value="沪路政收（${bean.year}）${bean.orderNo}号"/></td>
+                <td class="form_label" align="right">${bean.code}&nbsp;&nbsp;</td>
             </tr>
             <tr class="tr_dark">
                 <td class="td_border" align="right">来文文号：</td>
