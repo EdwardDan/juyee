@@ -53,7 +53,7 @@
             <legend class="form_legend">外出会议</legend>
             <table cellpadding="0" cellspacing="0" class="form_table">
                 <tr class="tr_light">
-                    <td class="form_label_right" style="width: 150px">会议开始时间：</td>
+                    <td class="form_label_right" nowrap>会议开始时间：</td>
                     <td class="form_content" colspan="3">
                         <input type="text" name="beginTime" id="beginTime" class="input_datetime"
                                value="<fmt:formatDate value="${bean.beginTime}" pattern="yyyy-MM-dd HH:mm"/>"
@@ -74,12 +74,12 @@
                     </td>
                 </tr>
                 <tr class="tr_dark">
-                    <td class="form_label_right">主持人：</td>
-                    <td class="form_content">
+                    <td class="form_label_right" style="width: 20%;">主持人：</td>
+                    <td class="form_content" style="width: 25%;">
                         <form:input path="chargePerson" cssClass="input_text"/>
                     </td>
-                    <td class="form_label_right">发起单位：</td>
-                    <td class="form_content">
+                    <td class="form_label_right" style="width: 20%;" nowrap>发起单位：</td>
+                    <td class="form_content" style="width: 25%;">
                         <form:input path="startDept" cssClass="input_text"/>
                     </td>
                 </tr>
@@ -109,7 +109,7 @@
                     </td>
                 </tr>
                 <tr class="tr_dark">
-                    <td class="form_label_right">与中心相关事宜：</td>
+                    <td class="form_label_right" nowrap>与中心相关事宜：</td>
                     <td class="form_content" colspan="3">
                         <form:textarea path="relateMatter" cssClass="input_textarea_long"/>
                     </td>

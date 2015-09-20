@@ -7,6 +7,7 @@ import com.justonetech.biz.daoservice.OaMeetingOuterService;
 import com.justonetech.biz.domain.DocDocument;
 import com.justonetech.biz.domain.OaMeetingOuter;
 import com.justonetech.biz.manager.DocumentManager;
+import com.justonetech.biz.manager.OaTaskManager;
 import com.justonetech.biz.utils.Constants;
 import com.justonetech.biz.utils.enums.OaMeetingStatus;
 import com.justonetech.core.controller.BaseCRUDActionController;
@@ -55,6 +56,9 @@ public class OaMeetingOuterController extends BaseCRUDActionController<OaMeeting
 
     @Autowired
     private OaMeetingOuterService oaMeetingOuterService;
+
+    @Autowired
+    private OaTaskManager oaTaskManager;
 
     /**
      * 列表显示页面
@@ -253,6 +257,8 @@ public class OaMeetingOuterController extends BaseCRUDActionController<OaMeeting
             }
             target.setStatus(status);
             oaMeetingOuterService.save(target);
+            String taskTitle = oaTaskManager.getTaskTitle(target, OaMeetingOuter.class.getCanonicalName());
+            oaTaskManager.createTask(OaMeetingOuter.class.getSimpleName(), target.getId(), taskTitle, null);
             if (OaMeetingStatus.STATUS_SUBMIT.getCode() == target.getStatus()) {
                 msg = "提交!";
             }

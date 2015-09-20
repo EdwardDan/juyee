@@ -11,27 +11,41 @@
             {name: "personNum", rule: "validate[custom[integer],maxSize[4]"},
             {name: "outerPersons", rule: "validate[maxSize[200]]"},
             {name: "title", rule: "validate[required,maxSize[200]]"},
-            {name: "status", rule: "validate[required,custom[integer],maxSize[2]"},
+            {name: "status", rule: "validate[required,custom[integer],maxSize[2]"}
         ];
         validateInit(validateCondition, formId);
+        <c:if test="${empty bean.id}">
+        checkDate();
+        </c:if>
     });
 
     //保存操作
-    function save() {
+    function save(status, buttonName) {
         if (!validateForm(formId)) {
             return;
         }
+
         //提交表单
-        if (confirm("是否确定执行申请操作？")) {
-            saveAjaxData("${ctx}/oaMeeting/save.do?status=${STATUS_SUBMIT}", formId);
+        if (buttonName != "") {
+            if (confirm("是否确定执行 " + buttonName + " 操作？")) {
+                saveAjaxData("${ctx}/oaMeeting/save.do?status=" + status, formId);
+            }
+        } else {
+            saveAjaxData("${ctx}/oaMeeting/save.do?status=" + status, formId);
         }
     }
-    //暂存存操作
-    function tempSave() {
-        if (!validateForm(formId)) {
+    //先检查日期是否已经申请
+    function checkDate() {
+        var useDate = $("#useDate").val();
+        var useTime = encodeURI($("#useTime").val());
+        loadAjaxDataCallback(null, "${ctx}/oaMeeting/checkDate.do?useDate=" + useDate + "&useTime=" + useTime, backCheckDate);
+    }
+    function backCheckDate(ret) {
+        var obj = eval("(" + ret + ")");
+        if (obj.success == true) {
+            showInfoMsg("当前日期已经申请，请重新选择！");
             return;
         }
-        saveAjaxData("${ctx}/oaMeeting/save.do?status=${STATUS_EDIT}", formId);
     }
 </script>
 <form:form commandName="bean">
@@ -49,9 +63,9 @@
             <tr class="tr_dark">
                 <td class="form_label">会议召开时间：</td>
                 <td class="form_content">
-                    <form:input path="useDate" cssClass="input_date" readonly="true"/>
+                    <form:input path="useDate" cssClass="input_date" readonly="true" onchange="checkDate();"/>
                     <input type="button" class="button_calendar" value=" " onClick="calendar('useDate');">&nbsp;&nbsp;
-                    <form:select path="useTime" cssClass="select_normal">
+                    <form:select path="useTime" cssClass="select_normal" onchange="checkDate()">
                         <form:option value="上午"/>
                         <form:option value="下午"/>
                     </form:select>
@@ -126,8 +140,9 @@
             <tr class="tr_button">
                 <td class="form_label"></td>
                 <td class="form_content">
-                    <input type="button" value="提交" class="button_confirm" onclick="save()">&nbsp;
-                    <input type="button" value="暂存" class="button_confirm" onclick="tempSave()">&nbsp;
+                    <input type="button" value="提交" class="button_confirm"
+                           onclick="save('${STATUS_SUBMIT}',this.value)">&nbsp;
+                    <input type="button" value="暂存" class="button_confirm" onclick="save('${STATUS_EDIT}','')">&nbsp;
                     <input type="button" value="取消" class="button_cancel" onclick="closeWindow()">
                 </td>
             </tr>

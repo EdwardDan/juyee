@@ -7,6 +7,7 @@ import com.justonetech.biz.daoservice.OaWorkWatchService;
 import com.justonetech.biz.domain.OaWorkWatch;
 import com.justonetech.biz.domain.OaWorkWatchItem;
 import com.justonetech.biz.manager.OaFgldManager;
+import com.justonetech.biz.manager.OaTaskManager;
 import com.justonetech.biz.utils.Constants;
 import com.justonetech.biz.utils.enums.OaWorkWatchStatus;
 import com.justonetech.core.controller.BaseCRUDActionController;
@@ -37,8 +38,7 @@ import java.util.Set;
 
 
 /**
- * @description:工作督办
- * @revisor: Stanley
+ * 工作督办
  */
 @Controller
 public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch> {
@@ -55,6 +55,9 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
 
     @Autowired
     private OaWorkWatchItemService oaWorkWatchItemService;
+
+    @Autowired
+    private OaTaskManager oaTaskManager;
 
     /**
      * tab显示页
@@ -247,6 +250,7 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
                     oaWorkWatchItemService.delete(oaWorkWatchItem);
                 }
             }
+            //保存详细信息
             String[] orderNo = request.getParameterValues("orderNo");
             String[] content = request.getParameterValues("content");
             String[] timeNode = request.getParameterValues("timeNode");
@@ -267,6 +271,10 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
                     oaWorkWatchItem.setWorkWatch(target);
                     oaWorkWatchItemService.save(oaWorkWatchItem);
                 }
+            }
+
+            if (status.equals(OaWorkWatchStatus.STATUS_SUBMIT.getCode())) {
+                createOaTask(target);
             }
         } catch (Exception e) {
             log.error("error", e);
@@ -338,5 +346,49 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
         }
         //科室下所有科员
         model.addAttribute("loginUsrDeptUsrNames", loginUsrDeptUsrNames.toString());
+    }
+
+    /**
+     * 创建系统任务
+     *
+     * @param data .
+     * @throws Exception .
+     */
+    public void createOaTask(OaWorkWatch data) throws Exception {
+        int status = data.getStatus();
+        //创建任务
+        if (status == OaWorkWatchStatus.STATUS_SUBMIT.getCode()) {
+            String privilegeCode = PrivilegeCode.OA_WORK_WATCH_AUDIT_ZR;
+            Set<Long> managers = sysUserManager.getUserIdsByPrivilegeCode(privilegeCode);
+            String zrsh = OaWorkWatch.class.getSimpleName() + "_zrsh";//主任审核
+            String taskTitle = oaTaskManager.getTaskTitle(data, zrsh);
+            if (managers.size() > 0) {
+                oaTaskManager.createTask(zrsh, data.getId(), taskTitle, managers, false, null, null);
+            }
+        } else if (status == OaWorkWatchStatus.STATUS_ZR_PASS.getCode()) {
+            String privilegeCode = PrivilegeCode.OA_WORK_WATCH_AUDIT_KZ;
+            Set<Long> managers = sysUserManager.getUserIdsByPrivilegeCode(privilegeCode);
+            String kzsb = OaWorkWatch.class.getSimpleName() + "_kzsb";//科长审核
+            String taskTitle = oaTaskManager.getTaskTitle(data, kzsb);
+            if (managers.size() > 0) {
+                oaTaskManager.createTask(kzsb, data.getId(), taskTitle, managers, false, null, null);
+            }
+        } else if (status == OaWorkWatchStatus.STATUS_INFO.getCode()) {
+            String privilegeCode = PrivilegeCode.OA_WORK_WATCH_AUDIT_B;
+            Set<Long> managers = sysUserManager.getUserIdsByPrivilegeCode(privilegeCode);
+            String bgshs = OaWorkWatch.class.getSimpleName() + "_bgshs";//办公室审核
+            String taskTitle = oaTaskManager.getTaskTitle(data, bgshs);
+            if (managers.size() > 0) {
+                oaTaskManager.createTask(bgshs, data.getId(), taskTitle, managers, false, null, null);
+            }
+        } else if (status == OaWorkWatchStatus.STATUS_ZR_BACK.getCode() || status == OaWorkWatchStatus.STATUS_B_BACK.getCode()) {
+            String privilegeCode = PrivilegeCode.OA_WORK_WATCH_EDIT;
+            Set<Long> managers = sysUserManager.getUserIdsByPrivilegeCode(privilegeCode);
+            String edit = OaWorkWatch.class.getSimpleName() + "_edit";//退回
+            String taskTitle = oaTaskManager.getTaskTitle(data, edit);
+            if (managers.size() > 0) {
+                oaTaskManager.createTask(edit, data.getId(), taskTitle, managers, false, null, null);
+            }
+        }
     }
 }

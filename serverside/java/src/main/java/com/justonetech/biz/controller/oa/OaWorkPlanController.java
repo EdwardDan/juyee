@@ -6,12 +6,12 @@ import com.justonetech.biz.daoservice.DocDocumentService;
 import com.justonetech.biz.daoservice.OaWorkPlanItemService;
 import com.justonetech.biz.daoservice.OaWorkPlanService;
 import com.justonetech.biz.daoservice.OaWorkPlanSumItemService;
+import com.justonetech.biz.domain.OaMeeting;
 import com.justonetech.biz.domain.OaWorkPlan;
 import com.justonetech.biz.domain.OaWorkPlanItem;
-import com.justonetech.biz.manager.ConfigManager;
-import com.justonetech.biz.manager.DocumentManager;
-import com.justonetech.biz.manager.OaFgldManager;
+import com.justonetech.biz.manager.*;
 import com.justonetech.biz.utils.Constants;
+import com.justonetech.biz.utils.enums.OaInnerMeetingStatus;
 import com.justonetech.biz.utils.enums.OaWorkPlanStatus;
 import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.orm.hibernate.Page;
@@ -35,6 +35,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.sql.Timestamp;
 import java.util.*;
 
 
@@ -77,6 +78,12 @@ public class OaWorkPlanController extends BaseCRUDActionController<OaWorkPlan> {
 
     @Autowired
     private OaFgldManager oaFgldManager;
+
+    @Autowired
+    private OaTaskManager oaTaskManager;
+
+    @Autowired
+    private MsgMessageManager msgMessageManager;
 
 
     /**
@@ -122,17 +129,16 @@ public class OaWorkPlanController extends BaseCRUDActionController<OaWorkPlan> {
             Page pageModel = new Page(page, rows, true);
             String hql = "from OaWorkPlan where 1=1";
             //增加自定义查询条件-判断只有编辑权限和科长权限的只能获取本科室数据
-            if(!sysUserManager.hasPrivilege(PrivilegeCode.OA_WORK_PLAN_VIEW_ALL)){//判断是否有查看全部权限
-                if(!sysUserManager.hasPrivilege(PrivilegeCode.OA_WORK_PLAN_AUDIT_FG)){//判断是否有分管领导审核权限
-                    hql += "and reportDept = '" +sysUserManager.getSysUser().getPerson().getDeptName()+"'";
-                }
-                else{//获取所分管的所有部门上报信息
-                    String []managerPersonAndDepts =oaFgldManager.getManagerPersonAndDepts(sysUserManager.getSysUser());
+            if (!sysUserManager.hasPrivilege(PrivilegeCode.OA_WORK_PLAN_VIEW_ALL)) {//判断是否有查看全部权限
+                if (!sysUserManager.hasPrivilege(PrivilegeCode.OA_WORK_PLAN_AUDIT_FG)) {//判断是否有分管领导审核权限
+                    hql += " and reportDept = '" + sysUserManager.getSysUser().getPerson().getDeptName() + "'";
+                } else {//获取所分管的所有部门上报信息
+                    String[] managerPersonAndDepts = oaFgldManager.getManagerPersonAndDepts(sysUserManager.getSysUser());
                     String deptNames = managerPersonAndDepts[0];
                     hql += " and reportDept in('" + StringHelper.findAndReplace(deptNames, ",", "','") + "')";
                 }
             }
-            hql += "order by id desc";
+            hql += " order by id desc";
             //执行查询
             QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);
             String query = queryTranslate.toString();
@@ -141,9 +147,8 @@ public class OaWorkPlanController extends BaseCRUDActionController<OaWorkPlan> {
 
             List<OaWorkPlan> rowList = pageModel.getRows();
             List<Map<String, Object>> retList = new ArrayList<Map<String, Object>>();
-            Map<String, Object> map;
             for (OaWorkPlan data : rowList) {
-                map = new HashMap<String, Object>();
+                Map<String, Object> map = new HashMap<String, Object>();
                 map.put("id", data.getId());
                 map.put("reportDept", data.getReportDept());//上报科室
                 map.put("reportPerson", data.getReportPerson());//上报人姓名
@@ -154,7 +159,7 @@ public class OaWorkPlanController extends BaseCRUDActionController<OaWorkPlan> {
             }
 
             //输出显示
-            String json = GridJq.toJSON(columns, pageModel);
+            String json = GridJq.toJSON(retList, pageModel);
             sendJSON(response, json);
 
         } catch (Exception e) {
@@ -202,16 +207,13 @@ public class OaWorkPlanController extends BaseCRUDActionController<OaWorkPlan> {
             model.addAttribute("applyPersonId", sysUserManager.getSysUser(oaWorkPlan.getReportUser()).getId());
         }
         Set<OaWorkPlanItem> oaWorkPlanItems = oaWorkPlan.getOaWorkPlanItems();
-        List<OaWorkPlanItem> oaWorkPlanItem = new ArrayList<OaWorkPlanItem>();
-        for (OaWorkPlanItem workPlanItem : oaWorkPlanItems) {
-            oaWorkPlanItem.add(workPlanItem);
-        }
         //处理其他业务逻辑
         model.addAttribute("bean", oaWorkPlan);
         model.addAttribute("oaWorkPlanItems", oaWorkPlanItems);
 
         return "view/oa/oaWorkPlan/input";
     }
+
     /**
      * 审核显示页面
      *
@@ -227,10 +229,6 @@ public class OaWorkPlanController extends BaseCRUDActionController<OaWorkPlan> {
             model.addAttribute("applyPersonId", sysUserManager.getSysUser(oaWorkPlan.getReportUser()).getId());
         }
         Set<OaWorkPlanItem> oaWorkPlanItems = oaWorkPlan.getOaWorkPlanItems();
-        List<OaWorkPlanItem> oaWorkPlanItem = new ArrayList<OaWorkPlanItem>();
-        for (OaWorkPlanItem workPlanItem : oaWorkPlanItems) {
-            oaWorkPlanItem.add(workPlanItem);
-        }
         //处理其他业务逻辑
         model.addAttribute("bean", oaWorkPlan);
         model.addAttribute("oaWorkPlanItems", oaWorkPlanItems);
@@ -250,10 +248,6 @@ public class OaWorkPlanController extends BaseCRUDActionController<OaWorkPlan> {
         OaWorkPlan oaWorkPlan = oaWorkPlanService.get(id);
         setStatus(model);
         Set<OaWorkPlanItem> oaWorkPlanItems = oaWorkPlan.getOaWorkPlanItems();
-        List<OaWorkPlanItem> oaWorkPlanItem = new ArrayList<OaWorkPlanItem>();
-        for (OaWorkPlanItem workPlanItem : oaWorkPlanItems) {
-            oaWorkPlanItem.add(workPlanItem);
-        }
         //处理其他业务逻辑
         model.addAttribute("oaWorkPlanItems", oaWorkPlanItems);
 
@@ -279,6 +273,7 @@ public class OaWorkPlanController extends BaseCRUDActionController<OaWorkPlan> {
                 target = oaWorkPlanService.get(entity.getId());
                 ReflectionUtils.copyBean(entity, target, new String[]{
                         "reportDept",
+                        "reportUser",
                         "reportPerson",
                         "beginDate",
                         "endDate",
@@ -294,6 +289,7 @@ public class OaWorkPlanController extends BaseCRUDActionController<OaWorkPlan> {
             for (OaWorkPlanItem workPlanItem : target.getOaWorkPlanItems()) {
                 oaWorkPlanItemService.delete(workPlanItem);//删除关联item表
             }
+            //保存详细信息
             String[] orderNo = request.getParameterValues("orderNo");
             String[] dutyPerosn = request.getParameterValues("dutyPerosn");
             String[] keyWork = request.getParameterValues("keyWork");
@@ -313,12 +309,25 @@ public class OaWorkPlanController extends BaseCRUDActionController<OaWorkPlan> {
                     oaWorkPlanItemService.save(oaWorkPlanItem);//插入关联表数据item
                 }
             }
-            if (OaWorkPlanStatus.STATUS_BRANCH_BACK.getCode() == target.getStatus() || OaWorkPlanStatus.STATUS_MAIN_BACK.getCode() == target.getStatus()) {
+            Integer status = target.getStatus();
+            SysUser sysUser = sysUserManager.getSysUser();
+            if (status.equals(OaWorkPlanStatus.STATUS_BRANCH_BACK.getCode()) || status.equals(OaWorkPlanStatus.STATUS_BRANCH_PASS.getCode())) {
+                target.setKzAuditTime(new Timestamp(System.currentTimeMillis()));
+                target.setKzAuditUser(sysUser.getDisplayName());
+            }
+            if (status.equals(OaWorkPlanStatus.STATUS_MAIN_BACK.getCode()) || status.equals(OaWorkPlanStatus.STATUS_MAIN_PASS.getCode())) {
+                target.setFgAuditTime(new Timestamp(System.currentTimeMillis()));
+                target.setFgAuditUser(sysUser.getDisplayName());
+            }
+            if (OaWorkPlanStatus.STATUS_BRANCH_BACK.getCode() == status || OaWorkPlanStatus.STATUS_MAIN_BACK.getCode() == status) {
                 msg = "已退回修改!";//ststus=4/6
-            } else if (OaWorkPlanStatus.STATUS_BRANCH_PASS.getCode() == target.getStatus() || OaWorkPlanStatus.STATUS_MAIN_PASS.getCode() == target.getStatus()) {
+            } else if (OaWorkPlanStatus.STATUS_BRANCH_PASS.getCode() == status || OaWorkPlanStatus.STATUS_MAIN_PASS.getCode() == status) {
                 msg = "审核已通过!";//status=3/5
-            } else if (OaWorkPlanStatus.STATUS_SUBMIT.getCode() == target.getStatus()) {
+            } else if (OaWorkPlanStatus.STATUS_SUBMIT.getCode() == status) {
                 msg = "已提交!";//status=2
+            }
+            if (!status.equals(OaWorkPlanStatus.STATUS_EDIT.getCode())) {
+                createOaTask(target);
             }
         } catch (Exception e) {
             log.error("error", e);
@@ -339,14 +348,42 @@ public class OaWorkPlanController extends BaseCRUDActionController<OaWorkPlan> {
     public void delete(HttpServletResponse response, Long id) throws Exception {
         OaWorkPlan oaWorkPlan = oaWorkPlanService.get(id);
         for (OaWorkPlanItem workPlanItem : oaWorkPlan.getOaWorkPlanItems()) {//删除关联item表
-//            for (OaWorkPlanSumItem oaWorkPlanSumItem : workPlanItem.getOaWorkPlanSumItems()) {
-//                oaWorkPlanSumItemService.delete(oaWorkPlanSumItem);
-//            }
             oaWorkPlanItemService.delete(workPlanItem);
         }
         oaWorkPlanService.delete(id);
         sendSuccessJSON(response, "删除成功");
     }
 
-
+    /**
+     * 创建系统任务
+     *
+     * @param data .
+     * @throws Exception .
+     */
+    public void createOaTask(OaWorkPlan data) throws Exception {
+        int status = data.getStatus();
+        //创建任务
+        if (status == OaWorkPlanStatus.STATUS_SUBMIT.getCode()) {
+            String privilegeCode = PrivilegeCode.OA_WORK_PLAN_AUDIZ_KZ;
+            Set<Long> managers = sysUserManager.getUserIdsByPrivilegeCode(privilegeCode);
+            String taskTitle = oaTaskManager.getTaskTitle(data, OaWorkPlan.class.getSimpleName() + "_BRANCH_PASS");
+            if (managers.size() > 0) {
+                oaTaskManager.createTask(OaWorkPlan.class.getSimpleName() + "_BRANCH_PASS", data.getId(), taskTitle, managers, false, null, null);
+            }
+        } else if (status == OaWorkPlanStatus.STATUS_BRANCH_PASS.getCode()) {
+            String privilegeCode = PrivilegeCode.OA_WORK_PLAN_AUDIT_FG;
+            Set<Long> managers = sysUserManager.getUserIdsByPrivilegeCode(privilegeCode);
+            String taskTitle = oaTaskManager.getTaskTitle(data, OaWorkPlan.class.getSimpleName() + "_MAIN_PASS");
+            if (managers.size() > 0) {
+                oaTaskManager.createTask(OaWorkPlan.class.getSimpleName() + "_MAIN_PASS", data.getId(), taskTitle, managers, false, null, null);
+            }
+        } else if (status == OaWorkPlanStatus.STATUS_BRANCH_BACK.getCode() || status == OaWorkPlanStatus.STATUS_MAIN_BACK.getCode()) {
+            String privilegeCode = PrivilegeCode.OA_WORK_PLAN_EDIT;
+            Set<Long> managers = sysUserManager.getUserIdsByPrivilegeCode(privilegeCode);
+            String taskTitle = oaTaskManager.getTaskTitle(data, OaWorkPlan.class.getSimpleName());
+            if (managers.size() > 0) {
+                oaTaskManager.createTask(OaWorkPlan.class.getSimpleName(), data.getId(), taskTitle, managers, false, null, null);
+            }
+        }
+    }
 }

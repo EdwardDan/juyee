@@ -143,10 +143,10 @@ public class OaTaskManager {
                     }
 
                     String content = " 提交人：系统";
-                    if ( sysUser != null) {
+                    if (sysUser != null) {
                         content = " 提交人：" + sysUser.getDisplayName();
                     }
-                    msgMessageManager.sendSmsByUser(title+content, sysUser, ids);
+                    msgMessageManager.sendSmsByUser(title + content, sysUser, ids);
                 }
             }
         }
@@ -265,11 +265,14 @@ public class OaTaskManager {
      * @return .
      */
     public OaTask getTask(OaTaskType sysTaskType, Long referId) {
-        if(sysTaskType != null){
+        if (sysTaskType != null) {
             Set<OaTask> sysTasks = sysTaskType.getOaTasks();
-            for (OaTask sysTask : sysTasks) {
-                if (sysTask.getReferId().equals(referId)) {
-                    return sysTask;
+            if (null != sysTasks && sysTasks.size() > 0) {
+                for (OaTask sysTask : sysTasks) {
+                    Long referIdOld = sysTask.getReferId();
+                    if (null != referIdOld && referIdOld.equals(referId)) {
+                        return sysTask;
+                    }
                 }
             }
         }

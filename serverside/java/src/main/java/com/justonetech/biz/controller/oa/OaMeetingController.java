@@ -22,6 +22,7 @@ import com.justonetech.system.domain.SysUser;
 import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
 import com.justonetech.system.utils.PrivilegeCode;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,9 +39,7 @@ import java.util.*;
 
 
 /**
- * @description:内部会议管理
- * @author: subo
- * @revisor: Stanley
+ * 内部会议管理
  */
 @Controller
 public class OaMeetingController extends BaseCRUDActionController<OaMeeting> {
@@ -69,7 +68,7 @@ public class OaMeetingController extends BaseCRUDActionController<OaMeeting> {
     /**
      * 会议室查看与会议室管理列表tab页
      *
-     * @return
+     * @return .
      */
     @RequestMapping
     public String init() {
@@ -406,7 +405,6 @@ public class OaMeetingController extends BaseCRUDActionController<OaMeeting> {
                         "title",
                         "content",
                         "description",
-                        "status",
                 });
             } else {
                 target = entity;
@@ -418,19 +416,18 @@ public class OaMeetingController extends BaseCRUDActionController<OaMeeting> {
                 target.setDoc(docDocument);
                 documentManager.updateDocumentByBizData(docDocument, OaMeeting.class.getSimpleName(), docDocument.getName());
             }
-            if (isRoomOnDateAvailable(target)) {
-                oaMeetingService.save(target);
-                sendSuccessJSON(response, "保存成功");
-            } else {
-                sendSuccessJSON(response, "日期不可用，保存失败");
-            }
-            if (target.getStatus() != OaInnerMeetingStatus.STATUS_EDIT.getCode()) {//创建待办事项
+            String status = request.getParameter("status");
+            target.setStatus(Integer.valueOf(status));
+            oaMeetingService.save(target);
+            //创建待办事项
+            if (target.getStatus() != OaInnerMeetingStatus.STATUS_EDIT.getCode()) {
                 createOaTask(target);
             }
         } catch (Exception e) {
             log.error("error", e);
             super.processException(response, e);
         }
+        sendSuccessJSON(response, "保存成功");
     }
 
     /**
@@ -496,39 +493,10 @@ public class OaMeetingController extends BaseCRUDActionController<OaMeeting> {
     }
 
     /**
-     * 判断日期是否可用
-     *
-     * @param oaMeeting .
-     * @return .
-     */
-    public boolean isRoomOnDateAvailable(OaMeeting oaMeeting) {
-        String hql = "";
-        List<OaMeeting> oaMeetings = null;
-        if (oaMeeting.getId() != null) {
-            hql = "from OaMeeting where status != ? and id != ?";
-            oaMeetings = oaMeetingService.find(hql, OaInnerMeetingStatus.STATUS_EDIT.getCode(), oaMeeting.getId());
-        } else {
-            hql = "from OaMeeting where status != ?";
-            oaMeetings = oaMeetingService.find(hql, OaInnerMeetingStatus.STATUS_EDIT.getCode());
-        }
-        boolean flag = true;
-        for (OaMeeting o : oaMeetings) {
-            String roomName = o.getRoom().getName();
-            Date date = o.getUseDate();
-            String time = o.getUseTime();
-            if (oaMeeting.getRoom().getName().equals(roomName) && oaMeeting.getUseDate().equals(date) && oaMeeting.getUseTime().equals(time)) {
-                flag = false;
-                break;
-            }
-        }
-        return flag;
-    }
-
-    /**
      * 获取内部参会人员
      *
-     * @param innerPersonIds
-     * @return
+     * @param innerPersonIds .
+     * @return .
      */
     private List<SysPerson> getInnerPersons(String innerPersonIds) {
         if (StringHelper.isNotEmpty(innerPersonIds)) {
@@ -539,5 +507,34 @@ public class OaMeetingController extends BaseCRUDActionController<OaMeeting> {
             return persons;
         }
         return null;
+    }
+
+    /**
+     * 检查日期是否已经存在
+     *
+     * @param useDate 。
+     * @param useTime 。
+     * @param model   。
+     * @return 。
+     */
+    @RequestMapping
+    private String checkDate(String useDate, String useTime, Model model) {
+        String msg;
+        String hql = "from OaMeeting where 1=1 ";
+        if (StringHelper.isNotEmpty(useDate)) {
+            hql = hql.concat(" and useDate = to_date(\'" + useDate + "\', \'" + "yyyy-MM-dd" + "\') ");
+        }
+        if (StringHelper.isNotEmpty(useTime)) {
+            hql = hql.concat(" and useTime = \'" + useTime + "\' ");
+        }
+        List<OaMeeting> list = oaMeetingService.findByQuery(hql);
+        Map<String, Object> map = new HashMap<String, Object>();
+        if (null != list && list.size() > 0) {
+            map.put("success", true);
+        }
+        msg = JSONObject.fromObject(map).toString();
+        model.addAttribute("msg", msg);
+
+        return "common/msg";
     }
 }

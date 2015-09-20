@@ -137,6 +137,7 @@
                     </td>
                     <td>
                         <select name="actualDesc" disabled>
+                            <option value="">==请选择==</option>
                             <option value="1" <c:if test="${item.actualDesc =='1' || item.actualDesc ==''}"> selected </c:if> >完成</option>
                             <option value="2" <c:if test="${item.actualDesc =='2'}">selected </c:if> >延期</option>
                             <option value="3" <c:if test="${item.actualDesc =='3'}">selected </c:if> >调整</option>
@@ -167,10 +168,9 @@
                 <td>
                     <select name="actualDesc" disabled>
                         <option value="">==请选择==</option>
-                        <option value="1" <c:if test="${item.actualDesc =='1'}"> selected </c:if> >属实</option>
-                        <option value="0"
-                                <c:if test="${item.actualDesc =='0'}">selected </c:if> >不属实
-                        </option>
+                        <option value="1" <c:if test="${item.actualDesc =='1'}"> selected </c:if> >完成</option>
+                        <option value="2" <c:if test="${item.actualDesc =='2'}">selected </c:if> >延期</option>
+                        <option value="3" <c:if test="${item.actualDesc =='3'}">selected </c:if> >调整</option>
                     </select>
                 </td>
             </tr>
