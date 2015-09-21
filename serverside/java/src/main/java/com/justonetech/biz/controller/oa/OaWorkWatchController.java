@@ -38,7 +38,8 @@ import java.util.Set;
 
 
 /**
- * 工作督办
+ * @description 工作督办
+ * @revisor Stanley
  */
 @Controller
 public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch> {
@@ -100,16 +101,23 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
         try {
             SysDept loginUsrDept = sysUserManager.getSysUser().getPerson().getDept();
             String loginUsrDeptName = loginUsrDept != null ? JspHelper.getString(loginUsrDept.getName()) : "";
-            String fglgOwningDepts = oaFgldManager.getManagerPersonAndDepts(sysUserManager.getSysUser())[0];
+//            String fglgOwningDepts = oaFgldManager.getManagerPersonAndDepts(sysUserManager.getSysUser())[0];
+            boolean isLoginUsrFgld = oaFgldManager.getAuditUserName(null, sysUserManager.getSysUser().getLoginName()) != null;
+//            boolean isLoginUsrTopLeader = StringHelper.equals(sysUserManager.getSysUser().getLoginName(), oaFgldManager.getTopLeaderByRole(sysUserManager.getSysUser().getId()));//getTopLeader()
+            boolean isLoginUsrTopLeader = oaFgldManager.getTopLeaderByRole(sysUserManager.getSysUser().getId()).contains(sysUserManager.getSysUser().getLoginName());//getTopLeader()
             Page pageModel = new Page(page, rows, true);
             String hql = "from OaWorkWatch where 1 = 1 ";
-            if (StringHelper.isNotEmpty(fglgOwningDepts)) {
+            //分管领导  主任 可以查看所有的数据，其他角色按照所属科室过滤记录
+            if (!isLoginUsrFgld && !isLoginUsrTopLeader) {
+                hql = hql.concat(" and reportDept = '" + loginUsrDeptName + "' ");
+            }
+            /*if (StringHelper.isNotEmpty(fglgOwningDepts)) {
                 //分管领导权限
                 hql = hql.concat("and reportPerson like '%" + JspHelper.getString(sysUserManager.getSysUser().getPerson().getName()) + "%' and instr(\'" + fglgOwningDepts + "\', reportDept) > 0 ");
-            } else {
-                //科室权限
-                hql = hql.concat("and reportDept = '" + loginUsrDeptName + "' ");
-            }
+            } else {*/
+            //科室权限
+//                hql = hql.concat("and reportDept = '" + loginUsrDeptName + "' ");
+//            }
             hql = hql.concat(" order by createTime desc");
             QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);
             String query = queryTranslate.toString();
@@ -135,7 +143,7 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
         oaWorkWatch.setStatus(OaWorkWatchStatus.STATUS_EDIT.getCode());
         SysUser sysUser = sysUserManager.getSysUser();
         oaWorkWatch.setReportUser(sysUser.getLoginName());
-        oaWorkWatch.setReportPerson(sysUser.getPerson().getName());
+        oaWorkWatch.setReportPerson(sysUser.getPerson().getName());//
         //获取登录人的部门
         SysDept dept = sysUser.getPerson().getDept();
         oaWorkWatch.setReportDept(dept.getName());
@@ -337,7 +345,7 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
         model.addAttribute("STATUS_B_PASS", OaWorkWatchStatus.STATUS_B_PASS.getCode());//办公室核实通过
         model.addAttribute("STATUS_B_BACK", OaWorkWatchStatus.STATUS_B_BACK.getCode());//办公室核实退回
         //科长身份验证
-        model.addAttribute("IS_LOGIN_USR_DEPT_LEADER", StringHelper.equals(sysUserManager.getSysUser().getLoginName(), oaFgldManager.getDeptLeader(sysUserManager.getSysUser().getLoginName())));
+        model.addAttribute("IS_LOGIN_USR_DEPT_LEADER", StringHelper.equals(sysUserManager.getSysUser().getLoginName(), oaFgldManager.getDeptLeaderByRole(sysUserManager.getSysUser().getLoginName())));//oaFgldManager.getDeptLeader
         SysDept loginUsrDept = sysUserManager.getSysUser().getPerson().getDept();
         List<SysUser> loginUsrDeptUsrs = loginUsrDept != null ? sysUserManager.getDeptUsers(loginUsrDept) : new ArrayList<SysUser>();
         StringBuilder loginUsrDeptUsrNames = new StringBuilder();

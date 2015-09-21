@@ -7,12 +7,10 @@ import com.justonetech.biz.domain.OaFgldSetItem;
 import com.justonetech.biz.utils.Constants;
 import com.justonetech.core.utils.FormatUtils;
 import com.justonetech.core.utils.JspHelper;
+import com.justonetech.core.utils.StringHelper;
 import com.justonetech.system.daoservice.SysPersonDeptService;
-import com.justonetech.system.daoservice.SysUserService;
-import com.justonetech.system.domain.SysDept;
-import com.justonetech.system.domain.SysPerson;
-import com.justonetech.system.domain.SysPersonDept;
-import com.justonetech.system.domain.SysUser;
+import com.justonetech.system.daoservice.SysUserRoleService;
+import com.justonetech.system.domain.*;
 import com.justonetech.system.manager.SysUserManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +19,8 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * 分管领导业务类
+ * @description 分管领导业务类
+ * @revisor Stanley
  */
 @Service
 public class OaFgldManager {
@@ -35,7 +34,7 @@ public class OaFgldManager {
     private SysPersonDeptService sysPersonDeptService;
 
     @Autowired
-    private SysUserService sysUserService;
+    private SysUserRoleService sysUserRoleService;
 
     @Autowired
     private SysUserManager sysUserManager;
@@ -114,6 +113,25 @@ public class OaFgldManager {
     }
 
     /**
+     * 通过当前用户的角色判断其是否扮演科长
+     *
+     * @param loginName
+     * @return
+     */
+    public String getDeptLeaderByRole(String loginName) {
+        String loginUsrName = getDeptLeader(loginName);
+        //考虑职务为空，但却被授予科长角色的人员。
+        if (StringHelper.isEmpty(loginUsrName)) {
+            List<SysUserRole> sysUserRoles = sysUserRoleService.findByQuery("select sur from SysUserRole sur left join sur.role sysrole where sur.user.id = " + sysUserManager.getSysUser(loginName).getId() + " and (sysrole.code like '%kz%' or sysrole.roleName like '%" + Constants.SYS_DEPT_LEADER_NAME + "%') ");
+            if (sysUserRoles.isEmpty()) {
+                return null;
+            }
+            return sysUserRoles.iterator().next().getUser().getLoginName();
+        }
+        return loginUsrName;
+    }
+
+    /**
      * 获取主任
      *
      * @return .
@@ -122,14 +140,43 @@ public class OaFgldManager {
         String hql = "from SysPersonDept where position='{0}'";
         List<SysPersonDept> list = sysPersonDeptService.findByQuery(FormatUtils.format(hql, Constants.SYS_TOP_LEADER_NAME));
         if (list.size() > 0) {
+            if (list.size() > 1) {
+                StringBuilder topLeaders = new StringBuilder();
+                for (SysPersonDept sysPersonDept : list) {
+                    Set<SysUser> sysUsrs = sysPersonDept.getPerson().getSysUsers();
+                    if (sysUsrs.size() > 0) {
+                        topLeaders.append(JspHelper.getString(sysUsrs.iterator().next().getLoginName()).concat(list.indexOf(sysPersonDept) != list.size() - 1 ? "," : ""));
+                    }
+                }
+                return topLeaders.toString();
+            }
             SysPersonDept sysPersonDept = list.iterator().next();
             Set<SysUser> sysUsers = sysPersonDept.getPerson().getSysUsers();
             if (sysUsers.size() > 0) {
                 SysUser sysUser = sysUsers.iterator().next();
-                return sysUser.getLoginName();
+                return JspHelper.getString(sysUser.getLoginName());
             }
         }
-        return null;
+        return "";
+    }
+
+    /**
+     * 通过当前用户的角色判断其是否扮演主任
+     *
+     * @param loginUsrId
+     * @return
+     */
+    public String getTopLeaderByRole(Long loginUsrId) {
+        String loginTopLeaderName = getTopLeader();
+        //考虑职务为空，但却被授予主任角色的人员。
+        if (StringHelper.isEmpty(loginTopLeaderName)) {
+            List<SysUserRole> sysUserRoles = sysUserRoleService.findByQuery("select sur from SysUserRole sur left join sur.role sysrole where sur.user.id = " + loginUsrId + " and (sysrole.code like '%zr%' or sysrole.roleName like '%" + Constants.SYS_TOP_LEADER_NAME + "%') ");
+            if (sysUserRoles.isEmpty()) {
+                return "";
+            }
+            return JspHelper.getString(sysUserRoles.iterator().next().getUser().getLoginName());
+        }
+        return loginTopLeaderName;
     }
 
     /**
