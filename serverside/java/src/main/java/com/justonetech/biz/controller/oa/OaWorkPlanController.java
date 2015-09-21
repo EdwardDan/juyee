@@ -127,15 +127,16 @@ public class OaWorkPlanController extends BaseCRUDActionController<OaWorkPlan> {
     public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session) {
         try {
             Page pageModel = new Page(page, rows, true);
+            String deptNames ="";
             String hql = "from OaWorkPlan where 1=1";
             //增加自定义查询条件-判断只有编辑权限和科长权限的只能获取本科室数据
             if (!sysUserManager.hasPrivilege(PrivilegeCode.OA_WORK_PLAN_VIEW_ALL)) {//判断是否有查看全部权限
-                if (!sysUserManager.hasPrivilege(PrivilegeCode.OA_WORK_PLAN_AUDIT_FG)) {//判断是否有分管领导审核权限
+                if (sysUserManager.hasPrivilege(PrivilegeCode.OA_WORK_PLAN_EDIT) || sysUserManager.hasPrivilege(PrivilegeCode.OA_WORK_PLAN_AUDIZ_KZ)) {
                     hql += " and reportDept = '" + sysUserManager.getSysUser().getPerson().getDeptName() + "'";
-                } else {//获取所分管的所有部门上报信息
+                }
+                else{
                     String[] managerPersonAndDepts = oaFgldManager.getManagerPersonAndDepts(sysUserManager.getSysUser());
-                    String deptNames = managerPersonAndDepts[0];
-                    hql += " and reportDept in('" + StringHelper.findAndReplace(deptNames, ",", "','") + "')";
+                    deptNames = managerPersonAndDepts[0];
                 }
             }
             hql += " order by id desc";
@@ -155,6 +156,7 @@ public class OaWorkPlanController extends BaseCRUDActionController<OaWorkPlan> {
                 map.put("workTime", data.getWorkTime());//工作时间
                 map.put("status", data.getStatus());//当前状态
                 map.put("statusName", data.getStatusName());//当前状态名
+                map.put("deptNames", deptNames);//分管部门名称
                 retList.add(map);
             }
 
