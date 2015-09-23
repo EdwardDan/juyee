@@ -117,22 +117,22 @@
     </div>
 </div>
 <div class="gridQueryTable">
-    <table id="otherConditions" class="ui-widget ui-widget-content" style="border: 0 none; display: none; width: 100%">
-        <tr>
-            <td class="first"></td>
-            <td class="columns" style="width: 15%;" nowrap>会议召开时间: &nbsp;</td>
-            <td class="operators" style="display: none">=</td>
-            <td class="data">
-                <input type="text" name="useDateFrom" class="input_text" onclick="WdatePicker()" style="width: 30%;height: 100%" readonly/> --
-                <input type="text" name="useDateTo" class="input_text" onclick="WdatePicker()" style="width: 30%;height: 100%" readonly/>&nbsp;&nbsp;
-                <select id="useTime" name="useTime" class="input-elm" style="float:right;margin-right:4%">
-                    <option value=""></option>
-                    <option value="上午">上午</option>
-                    <option value="下午">下午</option>
-                </select>
-            </td>
-        </tr>
-    </table>
+    <%--<table id="otherConditions" class="ui-widget ui-widget-content" style="border: 0 none; display: none; width: 100%">--%>
+        <%--<tr>--%>
+            <%--<td class="first"></td>--%>
+            <%--<td class="columns" style="width: 15%;" nowrap>会议召开时间: &nbsp;</td>--%>
+            <%--<td class="operators" style="display: none">=</td>--%>
+            <%--<td class="data">--%>
+                <%--<input type="text" name="useDateFrom" class="input_text" onclick="WdatePicker()" style="width: 30%;height: 100%" readonly/> ----%>
+                <%--<input type="text" name="useDateTo" class="input_text" onclick="WdatePicker()" style="width: 30%;height: 100%" readonly/>&nbsp;&nbsp;--%>
+                <%--<select id="useTime1" name="useTime1" class="input-elm" style="float:right;margin-right:4%">--%>
+                    <%--<option value=""></option>--%>
+                    <%--<option value="上午">上午</option>--%>
+                    <%--<option value="下午">下午</option>--%>
+                <%--</select>--%>
+            <%--</td>--%>
+        <%--</tr>--%>
+    <%--</table>--%>
     <table id="listGrid"></table>
     <div id="pager2"></div>
 </div>

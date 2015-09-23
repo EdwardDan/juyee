@@ -38,24 +38,24 @@
                     <c:if test="${empty oaWorkPlanItems !=null}">
                     <c:forEach items="${oaWorkPlanItems}" var="item">
                 <tr class="tr_light">
-                    <td  style="text-align: center">
+                    <td style="text-align: center">
                             ${item.orderNo}
                     </td>
 
-                    <td  style="text-align: center">
+                    <td style="text-align: center">
                             ${item.dutyPerosn}
                     </td>
 
-                    <td  style="text-align: center;color: red;">
-                            ${item.keyWork}
+                    <td style="text-align: center;">
+                        <span style="color: red;">${item.keyWork} </span>
                     </td>
                     <td style="text-align: left;">
-                            <sys:toHtml>${item.content}</sys:toHtml>
+                        <sys:toHtml>${item.content}</sys:toHtml>
                     </td>
-                    <td >
+                    <td style="text-align: left;">
                         <sys:toHtml>${item.schedule}</sys:toHtml>
                     </td>
-                    <td  style="text-align: center">
+                    <td style="text-align: center">
                             ${item.jbr}
                     </td>
                 </tr>

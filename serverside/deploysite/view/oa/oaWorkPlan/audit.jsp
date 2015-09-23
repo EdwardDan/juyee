@@ -61,13 +61,14 @@
     }
     $(function () {
         if (${bean.status==STATUS_BRANCH_PASS}) {
-                $("#kzOpinion").attr("readOnly",true);
-            }
+            $("#kzOpinion").attr("readOnly", true);
+        }
     })
 </script>
 <form:form commandName="bean">
     <form:hidden path="id"/>
     <form:hidden path="status"/>
+    <form:hidden path="reportUser"/>
     <form:hidden path="reportDept"/>
     <form:hidden path="reportPerson"/>
     <form:hidden path="beginDate"/>
@@ -103,31 +104,31 @@
                     <c:if test="${empty oaWorkPlanItems !=null}">
                     <c:forEach items="${oaWorkPlanItems}" var="item">
                 <tr class="tr_light">
-                    <td  style="text-align: center">
+                    <td style="text-align: center">
                             ${item.orderNo}
-                                <input type="hidden" name="orderNo"  value="${item.orderNo}">
+                        <input type="hidden" name="orderNo" value="${item.orderNo}">
                     </td>
 
-                    <td  style="text-align: center">
+                    <td style="text-align: center">
                             ${item.dutyPerosn}
-                                <input type="hidden" name="dutyPerosn"  value="${item.dutyPerosn}">
+                        <input type="hidden" name="dutyPerosn" value="${item.dutyPerosn}">
                     </td>
 
-                    <td  style="text-align: center;color: red;">
-                            ${item.keyWork}
-                                <input type="hidden" name="keyWork" value="${item.keyWork}">
+                    <td style="text-align: center;">
+                        <span style="color: red;">${item.keyWork} </span>
+                        <input type="hidden" name="keyWork" value="${item.keyWork}">
                     </td>
-                    <td >
+                    <td style="text-align: left;">
                         <sys:toHtml>${item.content}</sys:toHtml>
-                                <input type="hidden" name="content"  value="${item.content}">
+                        <input type="hidden" name="content" value="${item.content}">
                     </td>
-                    <td >
+                    <td style="text-align: left;">
                         <sys:toHtml>${item.schedule}</sys:toHtml>
-                                <input type="hidden" name="schedule"  value="${item.schedule}">
+                        <input type="hidden" name="schedule" value="${item.schedule}">
                     </td>
-                    <td  style="text-align: center">
+                    <td style="text-align: center">
                             ${item.jbr}
-                                <input type="hidden" name="jbr"  value="${item.jbr}">
+                        <input type="hidden" name="jbr" value="${item.jbr}">
                     </td>
                 </tr>
                 </c:forEach>
@@ -143,7 +144,7 @@
                     <tr class="tr_dark">
                         <td class="form_label_right" width="15%">审核意见：</td>
                         <td class="form_content" colspan="3">
-                            <%--<textarea name="kzOpinion" id="kzOpinion"  class="input_textarea_long">${bean.kzOpinion}</textarea>--%>
+                                <%--<textarea name="kzOpinion" id="kzOpinion"  class="input_textarea_long">${bean.kzOpinion}</textarea>--%>
                             <form:textarea path="kzOpinion" cssClass="input_textarea_long" cssStyle="width: 95%"/>
                         </td>
                     </tr>
@@ -165,7 +166,6 @@
                 </table>
             </fieldset>
         </c:if>
-
         <table cellpadding="0" cellspacing="0" class="form_table">
             <tr class="tr_button">
                 <td class="form_content" style="text-align: center">

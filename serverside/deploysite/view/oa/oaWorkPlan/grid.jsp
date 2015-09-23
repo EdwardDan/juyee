@@ -11,15 +11,17 @@
                     '工作时间',
                     '状态值',
                     '状态',
+                    '分管部门名称',
                     '操作'
                 ],
                 colModel: [
                     {name: 'id', width: 10, align: "center", searchtype: "integer", hidden: true},
                     {name: "reportDept", width: "47", align: "center", searchtype: "string", sortable: true},
                     {name: "reportPerson", width: "47", align: "center", searchtype: "string", sortable: true},
-                    {name: "workTime",width: "47",align: "center",searchtype: "string",sortable: true},
+                    {name: "workTime", width: "47", align: "center", searchtype: "string", sortable: true},
                     {name: "status", width: "47", align: "center", searchtype: "integer", hidden: true},
-                    {name: "statusName", width: "47", align: "center", searchtype: "string", sortable: true}
+                    {name: "statusName", width: "47", align: "center", searchtype: "string", sortable: true},
+                    {name: "deptNames", width: "47", align: "center", searchtype: "string", hidden: true}
                 ],
                 actModel: [
                     {name: 'operation', width: 40, align: 'center'}
@@ -33,6 +35,8 @@
                         var id = ids[i];
                         var rowData = jQuery("#listGrid").jqGrid('getRowData', id);
                         var status = rowData["status"];
+                        var reportDept = rowData["reportDept"];//上报部门
+                        var deptNames = rowData["deptNames"];//分管部门
                         var opButton = '<input type="button" value="查看" onclick="doView(' + id + ')" class="button_normal"/> ';
                         if (${canEdit}) {
                             if (status == '${STATUS_EDIT}' || '' == status || status == '${STATUS_MAIN_BACK}' || status == '${STATUS_BRANCH_BACK}') {
@@ -46,7 +50,7 @@
                             }
                         }
                         if (${canEdit_FG}) {
-                            if (status == '${STATUS_BRANCH_PASS}') {
+                            if (status == '${STATUS_BRANCH_PASS}' && (deptNames.indexOf(reportDept) > -1)) {
                                 opButton += '<input type="button" value="分管领导审核" onclick="doAudit(' + id + ')" class="button_normal_longer"/> ';
                             }
                         }
@@ -64,12 +68,6 @@
 //                        {"field": "上报结束时间", "op": "cn", "data": ""},
 //                        {"field": "附件ID(预留)", "op": "cn", "data": ""},
 //                        {"field": "状态", "op": "cn", "data": ""}
-//                        {"field": "科长审核意见", "op": "cn", "data": ""},
-//                        {"field": "科长审核时间", "op": "bw", "data": ""},
-//                        {"field": "科长审核用户名", "op": "cn", "data": ""},
-//                        {"field": "分管领导审核意见", "op": "cn", "data": ""},
-//                        {"field": "分管领导审核时间", "op": "bw", "data": ""},
-//                        {"field": "分管领导审核用户名", "op": "cn", "data": ""},
                     ]
                 },
                 queryButton: $("#queryButton"),
@@ -80,17 +78,17 @@
         gridinit($("#listGrid"), conf);
     });
     function doView(id) {
-        openWindow("查看科室工作周上报", "${ctx}/oaWorkPlan/view.do?id=" + id, false,900,450);
+        openWindow("查看科室工作周上报", "${ctx}/oaWorkPlan/view.do?id=" + id, false, 900, 450);
     }
     <%--<c:if test="${canEdit}">--%>
     function doAdd() {
-        openWindow("添加科室工作周上报", "${ctx}/oaWorkPlan/add.do", true,900,450);
+        openWindow("添加科室工作周上报", "${ctx}/oaWorkPlan/add.do", true, 900, 450);
     }
     function doEdit(id) {
-        openWindow("修改科室工作周上报", "${ctx}/oaWorkPlan/modify.do?id=" + id, true,900,450);
+        openWindow("修改科室工作周上报", "${ctx}/oaWorkPlan/modify.do?id=" + id, true, 900, 450);
     }
     function doAudit(id) {
-        openWindow("审核科室工作周上报", "${ctx}/oaWorkPlan/audit.do?id=" + id, true,900,450);
+        openWindow("审核科室工作周上报", "${ctx}/oaWorkPlan/audit.do?id=" + id, true, 900, 450);
     }
     function doDelete(id) {
         doGridDelete("${ctx}/oaWorkPlan/delete.do?id=" + id);

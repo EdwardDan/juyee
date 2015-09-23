@@ -67,7 +67,7 @@
     //放置特殊标记
     function clickPut(obj) {
         if (obj.value == '' || obj.value == null) {
-            obj.value ='★';
+            obj.value = '★';
         } else {
             obj.value = "";
         }
@@ -75,7 +75,7 @@
 </script>
 
 <style>
-    .redclor{
+    .redclor {
         color: red;
     }
 </style>
@@ -83,6 +83,7 @@
 <form:form commandName="bean">
     <form:hidden path="id"/>
     <form:hidden path="status"/>
+    <form:hidden path="reportUser"/>
     <div class="form_div">
         <fieldset class="form_fieldset">
             <legend class="form_legend">
@@ -142,13 +143,15 @@
                             </td>
 
                             <td>
-                                <input type="text" name="dutyPerosn" class="input_text " style="width: 95%;text-align: center"
+                                <input type="text" name="dutyPerosn" class="input_text "
+                                       style="width: 95%;text-align: center"
                                        value="${item.dutyPerosn}"
                                        title="${item.dutyPerosn}">
                             </td>
 
                             <td>
-                                <input type="text" name="keyWork" class="input_text redclor"  readonly="true"  style="width: 95%;text-align: center" ondblclick="clickPut(this)"
+                                <input type="text" name="keyWork" class="input_text redclor" readonly="true"
+                                       style="width: 95%;text-align: center" ondblclick="clickPut(this)"
                                        value="${item.keyWork}"
                                        title="${item.keyWork}">
                             </td>
@@ -161,7 +164,8 @@
                                           style="width: 95%;height: 50px;">${item.schedule}</textarea>
                             </td>
                             <td>
-                                <input type="text" name="jbr" class="input_text" style="width: 95%;text-align: center" value="${item.jbr}"
+                                <input type="text" name="jbr" class="input_text" style="width: 95%;text-align: center"
+                                       value="${item.jbr}"
                                        title="${item.jbr}">
                             </td>
                             <td style="width: 25px"><input type="button" value="删除" class="button_select_remove"
@@ -202,7 +206,8 @@
             <input type="text" name="dutyPerosn" class="input_text" style="width: 95%;text-align: center"/>
         </td>
         <td>
-            <input type="text" name="keyWork" class="input_text redclor" readonly="true" style="width: 95%;text-align: center" ondblclick="clickPut(this)"/>
+            <input type="text" name="keyWork" class="input_text redclor" readonly="true"
+                   style="width: 95%;text-align: center" ondblclick="clickPut(this)"/>
         </td>
         <td>
             <textarea name="content" class="input_textarea" style="width: 95%;height: 50px;"></textarea>

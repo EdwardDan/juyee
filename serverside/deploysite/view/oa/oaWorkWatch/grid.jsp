@@ -41,7 +41,7 @@
                         var rowData = jQuery("#listGrid").jqGrid('getRowData', id);
                         var status = rowData["status"];
                         var opButton = '<input type="button" value="查看" onclick="doView(' + id + ')" class="button_normal"/> ';
-                        <%--if (rowData["reportDept"] == "${loginUsrDeptName}")--%>
+                        <%-- if (rowData["reportDept"] == "${loginUsrDeptName}") --%>
                         if ('' == status || status == '${STATUS_EDIT}' || status == '${STATUS_ZR_BACK}' || status == '${STATUS_B_BACK}') {
                             if (${canEdit}) {
                                 opButton += '<input type="button" value="编辑" onclick="doEdit(' + id + ')" class="button_normal"/> ';
@@ -52,17 +52,11 @@
                                 opButton += '<input type="button" value="审核" onclick="doAudit(' + id + ')" class="button_normal"/> ';
                             }
                         } else if (status == '${STATUS_ZR_PASS}') {
-                            if (${canEdit_KZ} &&
-                            ${IS_LOGIN_USR_DEPT_LEADER} &&
-                            "${loginUsrDeptUsrNames}".indexOf(rowData["createUser"]) > 0
-                        )
-                            {
+                            if (${canEdit_KZ} && ${IS_LOGIN_USR_DEPT_LEADER} && "${loginUsrDeptUsrNames}".indexOf(rowData["createUser"]) > 0) {
                                 opButton += '<input type="button" value="上报" onclick="doEdit(' + id + ')" class="button_normal"/> ';
                             }
                         } else if (status == '${STATUS_INFO}') {
-                            if (${canEdit_B} &&
-                            ${canEdit_KZ} && ${IS_LOGIN_USR_DEPT_LEADER})
-                            {
+                            if (${canEdit_B} && ${canEdit_KZ} && ${IS_LOGIN_USR_DEPT_LEADER}) {
                                 opButton += '<input type="button" value="核实" onclick="doEdit(' + id + ')" class="button_normal"/> ';
                             }
                         }
