@@ -35,6 +35,16 @@
 </script>
 <div class="form_div">
     <table cellpadding="0" cellspacing="0" class="form_table">
+        <tr class="tr_button">
+            <td class="form_border" colspan="2" align="right">
+                <input type="button" id="delete" value="删除" class="button_cancel" onclick="doDelete('${bean.id}')"/>&nbsp;
+                <input type="button" id="reBack" value="回复" class="button_back"
+                       onclick="doReply('${bean.id}','${MAIL_TYPE_RE}')"/>&nbsp;
+                <input type="button" id="forward" value="转发" class="button_confirm"
+                       onclick="doForward('${bean.id}','${MAIL_TYPE_FW}')"/>&nbsp;
+                <input type="button" value="返回列表" class="button_normal_long" onclick="reBack()">
+            </td>
+        </tr>
         <tr class="tr_dark">
             <td class="form_label_right" colspan="2">
                 时间：&nbsp;<fmt:formatDate value="${bean.sendTime}" pattern="yyyy-MM-dd HH:mm:ss"/>&nbsp;&nbsp;
@@ -69,16 +79,6 @@
             <td class="form_content">
                 &nbsp;
                 <textarea class="input_textarea_long_long" readonly="true" style="width: 90%">${bean.content}</textarea>
-            </td>
-        </tr>
-        <tr class="tr_button">
-            <td class="form_border" colspan="2" align="center">
-                <input type="button" id="delete" value="删除" class="button_cancel" onclick="doDelete('${bean.id}')"/>&nbsp;
-                <input type="button" id="reBack" value="回复" class="button_back"
-                       onclick="doReply('${bean.id}','${MAIL_TYPE_RE}')"/>&nbsp;
-                    <input type="button" id="forward" value="转发" class="button_confirm"
-                           onclick="doForward('${bean.id}','${MAIL_TYPE_FW}')"/>&nbsp;
-                <input type="button" value="返回列表" class="button_normal_long" onclick="reBack()">
             </td>
         </tr>
     </table>
