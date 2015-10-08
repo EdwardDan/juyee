@@ -74,6 +74,12 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
      */
     @RequestMapping
     public String grid(Model model) {
+        List<SysCodeDetail> propertyList = sysCodeManager.getCodeListByCode(Constants.PROJ_INFO_PROPERTY);
+        List<SysCodeDetail> projinfostageList = sysCodeManager.getCodeListByCode(Constants.PROJ_INFO_STAGE);
+        List<SysCodeDetail> projinfocategoryList = sysCodeManager.getCodeListByCode(Constants.PROJ_INFO_CATEGORY);
+        model.addAttribute("propertyList", propertyList); //管理属性
+        model.addAttribute("projinfostageList",projinfostageList); //项目状态
+        model.addAttribute("projinfocategoryList",projinfocategoryList); //业务类别
         model.addAttribute("canViewAll", sysUserManager.hasPrivilege(PrivilegeCode.PROJECT_QUERY_STAGE_SUM));
         model.addAttribute("xmlconfig", documentManager.getDefaultXmlConfig());
         model.addAttribute("bizCode", DataStageReportDoc.class.getSimpleName());
@@ -91,12 +97,28 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
      * @param rows     .
      */
     @RequestMapping
-    public void gridDataCustom(HttpServletResponse response, Model model, String filters, String columns, int page, int rows, HttpSession session) {
+    public void gridDataCustom(HttpServletResponse response, Model model, String filters, String columns, int page, int rows, HttpSession session, HttpServletRequest request) {
         try {
+            String projproperty = request.getParameter("projproperty");//项目性质
+            String ismajor = request.getParameter("ismajor");//是否重大
+            String projstage = request.getParameter("projstage");//项目状态
+            String projcategory = request.getParameter("projcategory");//业务类别
             Page pageModel = new Page(page, rows, true);
-            String hql = "from ProjInfo where 1=1";
+            String hql = "from ProjInfo where 1 = 1 ";
 //          //增加项目过滤
 //          hql += projectRelateManager.getRelateProjectHql("id");
+            if (!StringHelper.isEmpty(projproperty)) {
+                hql += " and property.name = '" + projproperty +"' ";
+            }
+            if (!StringHelper.isEmpty(ismajor)) {
+                hql += " and isMajor = '" + ismajor +"' ";
+            }
+            if (!StringHelper.isEmpty(projstage)) {
+                hql += " and stage.name = '" + projstage +"' ";
+            }
+            if (!StringHelper.isEmpty(projcategory)) {
+                hql += " and category.name = '" + projcategory +"' ";
+            }
             hql += "order by no asc,id asc";
             QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);
             String query = queryTranslate.toString();

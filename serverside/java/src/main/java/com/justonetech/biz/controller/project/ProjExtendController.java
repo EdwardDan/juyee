@@ -13,6 +13,9 @@ import com.justonetech.biz.manager.ProjectRelateManager;
 import com.justonetech.biz.utils.Constants;
 import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.orm.hibernate.Page;
+import com.justonetech.core.utils.StringHelper;
+import com.justonetech.system.domain.SysCodeDetail;
+import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
 import com.justonetech.system.utils.PrivilegeCode;
 import org.slf4j.Logger;
@@ -22,8 +25,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Set;
 
 
@@ -39,6 +44,9 @@ public class ProjExtendController extends BaseCRUDActionController<ProjExtend> {
 
     @Autowired
     private SysUserManager sysUserManager;
+
+    @Autowired
+    private SysCodeManager sysCodeManager;
 
     @Autowired
     private ProjExtendService projExtendService;
@@ -63,6 +71,12 @@ public class ProjExtendController extends BaseCRUDActionController<ProjExtend> {
      */
     @RequestMapping
     public String grid(Model model, String flag) {
+        List<SysCodeDetail> propertyList = sysCodeManager.getCodeListByCode(Constants.PROJ_INFO_PROPERTY);
+        List<SysCodeDetail> projinfostageList = sysCodeManager.getCodeListByCode(Constants.PROJ_INFO_STAGE);
+        List<SysCodeDetail> projinfocategoryList = sysCodeManager.getCodeListByCode(Constants.PROJ_INFO_CATEGORY);
+        model.addAttribute("propertyList", propertyList); //管理属性
+        model.addAttribute("projinfostageList",projinfostageList); //项目状态
+        model.addAttribute("projinfocategoryList",projinfocategoryList); //业务类别
         //判断是否有编辑权限
         model.addAttribute("flag", flag);
         model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.PROJ_INFO_EDIT));
@@ -80,14 +94,30 @@ public class ProjExtendController extends BaseCRUDActionController<ProjExtend> {
      * @param rows     .
      */
     @RequestMapping
-    public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session, String flag) {
+    public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session, String flag, HttpServletRequest request) {
         try {
+            String projproperty = request.getParameter("projproperty");//项目性质
+            String ismajor = request.getParameter("ismajor");//是否重大
+            String projstage = request.getParameter("projstage");//项目状态
+            String projcategory = request.getParameter("projcategory");//业务类别
             Page pageModel = new Page(page, rows, true);
             String hql = "from ProjInfo where 1=1";
             if ("qqdj".equals(flag)) {
                 hql += " and category is null and packageAttr like '区区对接'";
             } else {
                 hql += " and category is not null and packageAttr is null";
+            }
+            if (!StringHelper.isEmpty(projproperty)) {
+                hql += " and property.name = '" + projproperty +"' ";
+            }
+            if (!StringHelper.isEmpty(ismajor)) {
+                hql += " and isMajor = '" + ismajor +"' ";
+            }
+            if (!StringHelper.isEmpty(projstage)) {
+                hql += " and stage.name = '" + projstage +"' ";
+            }
+            if (!StringHelper.isEmpty(projcategory)) {
+                hql += " and category.name = '" + projcategory +"' ";
             }
             hql += " order by no asc,id asc";
 

@@ -16,6 +16,7 @@ import com.justonetech.core.utils.ReflectionUtils;
 import com.justonetech.core.utils.StringHelper;
 import com.justonetech.system.daoservice.SysCodeDetailService;
 import com.justonetech.system.domain.SysCodeDetail;
+import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
 import com.justonetech.system.utils.PrivilegeCode;
 import org.slf4j.Logger;
@@ -48,6 +49,9 @@ public class ProjBidController extends BaseCRUDActionController<ProjBid> {
     private SysUserManager sysUserManager;
 
     @Autowired
+    private SysCodeManager sysCodeManager;
+
+    @Autowired
     private ProjectRelateManager projectRelateManager;
 
     @Autowired
@@ -70,6 +74,12 @@ public class ProjBidController extends BaseCRUDActionController<ProjBid> {
      */
     @RequestMapping
     public String grid(Model model, String typeCode) {
+        List<SysCodeDetail> propertyList = sysCodeManager.getCodeListByCode(Constants.PROJ_INFO_PROPERTY);
+        List<SysCodeDetail> projinfostageList = sysCodeManager.getCodeListByCode(Constants.PROJ_INFO_STAGE);
+        List<SysCodeDetail> projinfocategoryList = sysCodeManager.getCodeListByCode(Constants.PROJ_INFO_CATEGORY);
+        model.addAttribute("propertyList", propertyList); //管理属性
+        model.addAttribute("projinfostageList",projinfostageList); //项目状态
+        model.addAttribute("projinfocategoryList",projinfocategoryList); //业务类别
         model.addAttribute("typeCode", typeCode);
         model.addAttribute("typeName", ProjBidType.getNameByCode(typeCode));
         model.addAttribute("TYPE_STAGE", ProjBidType.TYPE_STAGE.getCode());
@@ -87,11 +97,27 @@ public class ProjBidController extends BaseCRUDActionController<ProjBid> {
      * @param rows     .
      */
     @RequestMapping
-    public void projGridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, /*String typeCode,*/ HttpSession session) {
+    public void projGridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, /*String typeCode,*/ HttpSession session, HttpServletRequest request) {
         try {
+            String projproperty = request.getParameter("projproperty");//项目性质
+            String ismajor = request.getParameter("ismajor");//是否重大
+            String projstage = request.getParameter("projstage");//项目状态
+            String projcategory = request.getParameter("projcategory");//业务类别
             Page pageModel = new Page(page, rows, true);
             String hql = "from ProjInfo where 1 = 1 ";
             //增加项目过滤
+            if (!StringHelper.isEmpty(projproperty)) {
+                hql += " and property.name = '" + projproperty +"' ";
+            }
+            if (!StringHelper.isEmpty(ismajor)) {
+                hql += " and isMajor = '" + ismajor +"' ";
+            }
+            if (!StringHelper.isEmpty(projstage)) {
+                hql += " and stage.name = '" + projstage +"' ";
+            }
+            if (!StringHelper.isEmpty(projcategory)) {
+                hql += " and category.name = '" + projcategory +"' ";
+            }
             hql += projectRelateManager.getRelateProjectHql("id");
             hql += "order by no asc,id asc";
             QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);
