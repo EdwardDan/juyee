@@ -16,6 +16,7 @@ import com.justonetech.core.utils.ReflectionUtils;
 import com.justonetech.core.utils.StringHelper;
 import com.justonetech.system.daoservice.SysCodeDetailService;
 import com.justonetech.system.domain.SysCodeDetail;
+import com.justonetech.system.domain.SysUser;
 import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
 import com.justonetech.system.utils.PrivilegeCode;
@@ -99,6 +100,18 @@ public class ProjBidController extends BaseCRUDActionController<ProjBid> {
     @RequestMapping
     public void projGridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, /*String typeCode,*/ HttpSession session, HttpServletRequest request) {
         try {
+            //按区县过滤
+            SysUser sysUser = sysUserManager.getSysUser();
+            String name = "";
+            if (null != sysUser) {
+                name = sysUser.getPerson().getName();
+            }
+            List<SysCodeDetail> areaList = sysCodeManager.getCodeListByCode(Constants.PROJ_INFO_BELONG_AREA);
+            String areaNames = "";
+            for (SysCodeDetail detail : areaList) {
+                areaNames += detail.getName();
+            }
+            //按项目屬性状态类别查询数据
             String projproperty = request.getParameter("projproperty");//项目性质
             String ismajor = request.getParameter("ismajor");//是否重大
             String projstage = request.getParameter("projstage");//项目状态
@@ -107,16 +120,19 @@ public class ProjBidController extends BaseCRUDActionController<ProjBid> {
             String hql = "from ProjInfo where 1 = 1 ";
             //增加项目过滤
             if (!StringHelper.isEmpty(projproperty)) {
-                hql += " and property.name = '" + projproperty +"' ";
+                hql += " and property.name = '" + projproperty + "' ";
             }
             if (!StringHelper.isEmpty(ismajor)) {
-                hql += " and isMajor = '" + ismajor +"' ";
+                hql += " and isMajor = '" + ismajor + "' ";
             }
             if (!StringHelper.isEmpty(projstage)) {
-                hql += " and stage.name = '" + projstage +"' ";
+                hql += " and stage.name = '" + projstage + "' ";
             }
             if (!StringHelper.isEmpty(projcategory)) {
-                hql += " and category.name = '" + projcategory +"' ";
+                hql += " and category.name = '" + projcategory + "' ";
+            }
+            if (!StringHelper.isEmpty(name) && areaNames.contains(name)) {
+                hql += " and areaCode is not null and areaCode like '%" + name + "%'";
             }
             hql += projectRelateManager.getRelateProjectHql("id");
             hql += "order by no asc,id asc";

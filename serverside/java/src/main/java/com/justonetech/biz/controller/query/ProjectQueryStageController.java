@@ -13,6 +13,7 @@ import com.justonetech.core.utils.DateTimeHelper;
 import com.justonetech.core.utils.JspHelper;
 import com.justonetech.core.utils.StringHelper;
 import com.justonetech.system.domain.SysCodeDetail;
+import com.justonetech.system.domain.SysUser;
 import com.justonetech.system.manager.ExcelPrintManager;
 import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
@@ -99,27 +100,41 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
     @RequestMapping
     public void gridDataCustom(HttpServletResponse response, Model model, String filters, String columns, int page, int rows, HttpSession session, HttpServletRequest request) {
         try {
+            //按区县过滤
+            SysUser sysUser = sysUserManager.getSysUser();
+            String name = "";
+            if (null != sysUser) {
+                name = sysUser.getPerson().getName();
+            }
+            List<SysCodeDetail> areaList = sysCodeManager.getCodeListByCode(Constants.PROJ_INFO_BELONG_AREA);
+            String areaNames = "";
+            for (SysCodeDetail detail : areaList) {
+                areaNames += detail.getName();
+            }
+            //按项目屬性状态类别查询数据
             String projproperty = request.getParameter("projproperty");//项目性质
             String ismajor = request.getParameter("ismajor");//是否重大
             String projstage = request.getParameter("projstage");//项目状态
             String projcategory = request.getParameter("projcategory");//业务类别
             Page pageModel = new Page(page, rows, true);
             String hql = "from ProjInfo where 1 = 1 ";
-//          //增加项目过滤
-//          hql += projectRelateManager.getRelateProjectHql("id");
+            //增加项目过滤
             if (!StringHelper.isEmpty(projproperty)) {
-                hql += " and property.name = '" + projproperty +"' ";
+                hql += " and property.name = '" + projproperty + "' ";
             }
             if (!StringHelper.isEmpty(ismajor)) {
-                hql += " and isMajor = '" + ismajor +"' ";
+                hql += " and isMajor = '" + ismajor + "' ";
             }
             if (!StringHelper.isEmpty(projstage)) {
-                hql += " and stage.name = '" + projstage +"' ";
+                hql += " and stage.name = '" + projstage + "' ";
             }
             if (!StringHelper.isEmpty(projcategory)) {
-                hql += " and category.name = '" + projcategory +"' ";
+                hql += " and category.name = '" + projcategory + "' ";
             }
-            hql += "order by no asc,id asc";
+            if (!StringHelper.isEmpty(name) && areaNames.contains(name)) {
+                hql += " and areaCode is not null and areaCode like '%" + name + "%'";
+            }
+            hql += " order by no asc,id asc";
             QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);
             String query = queryTranslate.toString();
             session.setAttribute(Constants.GRID_SQL_KEY, query);
