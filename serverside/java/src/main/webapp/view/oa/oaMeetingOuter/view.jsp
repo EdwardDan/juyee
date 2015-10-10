@@ -75,56 +75,60 @@
             </tr>
         </table>
     </fieldset>
-    <fieldset class="form_fieldset">
-        <legend class="form_legend">
-            分管领导审核
-        </legend>
-        <table cellpadding="0" cellspacing="0" class="form_table">
-            <tr class="tr_light">
-                <td class="form_label_right" style="width: 150px">分管领导审核意见：</td>
-                <td class="form_content" colspan="3">
-                    <sys:toHtml>${bean.fgAuditOpinion}</sys:toHtml>
-                </td>
-            </tr>
-            <tr class="tr_light">
-                <td class="form_label_right" style="width: 150px">审核人：</td>
-                <td class="form_content" colspan="3">
-                    ${bean.fgAuditUser.displayName}
-                </td>
-            </tr>
-            <tr class="tr_light">
-                <td class="form_label_right" style="width: 150px">审核时间：</td>
-                <td class="form_content" colspan="3">
-                    <fmt:formatDate pattern="yyyy-MM-dd hh:mm" value="${bean.fgAuditTime}"/>
-                </td>
-            </tr>
-        </table>
-    </fieldset>
-    <fieldset class="form_fieldset">
-        <legend class="form_legend">
-            主任审核批示
-        </legend>
-        <table cellpadding="0" cellspacing="0" class="form_table">
-            <tr class="tr_light">
-                <td class="form_label_right" style="width: 150px">主任审核意见：</td>
-                <td class="form_content" colspan="3">
-                    <sys:toHtml>${bean.zrAuditOpinion}</sys:toHtml>
-                </td>
-            </tr>
-            <tr class="tr_light">
-                <td class="form_label_right" style="width: 150px">审核人：</td>
-                <td class="form_content" colspan="3">
-                    <sys:toHtml>${bean.zrAuditUser.displayName}</sys:toHtml>
-                </td>
-            </tr>
-            <tr class="tr_light">
-                <td class="form_label_right" style="width: 150px">审核时间：</td>
-                <td class="form_content" colspan="3">
-                    <fmt:formatDate pattern="yyyy-MM-dd hh:mm" value="${bean.zrAuditTime}"/>
-                </td>
-            </tr>
-        </table>
-    </fieldset>
+    <c:if test="${bean.status>STATUS_SUBMIT}">
+        <fieldset class="form_fieldset">
+            <legend class="form_legend">
+                分管领导审核
+            </legend>
+            <table cellpadding="0" cellspacing="0" class="form_table">
+                <tr class="tr_light">
+                    <td class="form_label_right" style="width: 150px">分管领导审核意见：</td>
+                    <td class="form_content" colspan="3">
+                        <sys:toHtml>${bean.fgAuditOpinion}</sys:toHtml>
+                    </td>
+                </tr>
+                <tr class="tr_light">
+                    <td class="form_label_right" style="width: 150px">审核人：</td>
+                    <td class="form_content" colspan="3">
+                            ${bean.fgAuditUser.displayName}
+                    </td>
+                </tr>
+                <tr class="tr_light">
+                    <td class="form_label_right" style="width: 150px">审核时间：</td>
+                    <td class="form_content" colspan="3">
+                        <fmt:formatDate pattern="yyyy-MM-dd hh:mm" value="${bean.fgAuditTime}"/>
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+    </c:if>
+    <c:if test="${bean.status>STATUS_BRANCH_PASS}">
+        <fieldset class="form_fieldset">
+            <legend class="form_legend">
+                主任审核批示
+            </legend>
+            <table cellpadding="0" cellspacing="0" class="form_table">
+                <tr class="tr_light">
+                    <td class="form_label_right" style="width: 150px">主任审核意见：</td>
+                    <td class="form_content" colspan="3">
+                        <sys:toHtml>${bean.zrAuditOpinion}</sys:toHtml>
+                    </td>
+                </tr>
+                <tr class="tr_light">
+                    <td class="form_label_right" style="width: 150px">审核人：</td>
+                    <td class="form_content" colspan="3">
+                        <sys:toHtml>${bean.zrAuditUser.displayName}</sys:toHtml>
+                    </td>
+                </tr>
+                <tr class="tr_light">
+                    <td class="form_label_right" style="width: 150px">审核时间：</td>
+                    <td class="form_content" colspan="3">
+                        <fmt:formatDate pattern="yyyy-MM-dd hh:mm" value="${bean.zrAuditTime}"/>
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+    </c:if>
     <table cellpadding="0" cellspacing="0" class="form_table">
         <tr class="tr_button">
             <td class="form_content" style="text-align: center">
