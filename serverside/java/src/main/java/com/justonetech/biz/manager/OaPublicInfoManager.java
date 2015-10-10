@@ -64,11 +64,12 @@ public class OaPublicInfoManager {
      */
     public List<OaPublicInfo> getPublicList(String infoRange, String infoType, int showCount, int isShowTop, Boolean isNeedPic) {
         String hql = "from OaPublicInfo where (accessRange.code='{0}' or accessRange.code='{1}') and type.code='{2}' and isValid={3} and isPublic={4}";
-        if (isShowTop == IS_SHOW_TOP_TRUE || isShowTop == IS_SHOW_TOP_FALSE) {
-            hql += " and isTop={5}";
-        }
+//        if (isShowTop == IS_SHOW_TOP_TRUE || isShowTop == IS_SHOW_TOP_FALSE) {
+//            hql += " and isTop={5}";
+//        }
         hql += " order by isTop desc,reportDate desc,id desc";
-        hql = FormatUtils.format(hql, infoRange, Constants.OA_PUBLIC_INFO_RANGE_ALL, infoType, Constants.FLAG_TRUE, Constants.FLAG_TRUE, String.valueOf(isShowTop));
+        hql = FormatUtils.format(hql, infoRange, Constants.OA_PUBLIC_INFO_RANGE_ALL, infoType, Constants.FLAG_TRUE, Constants.FLAG_TRUE);
+//        hql = FormatUtils.format(hql, infoRange, Constants.OA_PUBLIC_INFO_RANGE_ALL, infoType, Constants.FLAG_TRUE, Constants.FLAG_TRUE, String.valueOf(isShowTop));
         List<OaPublicInfo> list = oaPublicInfoService.findByQuery(hql);
         if (list.size() > showCount && showCount > 0) {
             return list.subList(0, showCount);

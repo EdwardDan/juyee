@@ -1,5 +1,6 @@
 package com.justonetech.biz.controller;
 
+import com.justonetech.biz.domain.OaPublicInfo;
 import com.justonetech.biz.manager.*;
 import com.justonetech.biz.utils.Constants;
 import com.justonetech.biz.utils.enums.Platform;
@@ -22,7 +23,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.Timestamp;
+import java.sql.*;
+import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -196,7 +198,18 @@ public class MainPageController extends BaseCRUDActionController {
      */
     @RequestMapping
     public String mainBulletin(Model model) {
-        model.addAttribute("infoList", oaPublicInfoManager.getPublicList(Constants.OA_PUBLIC_INFO_RANGE_IN, Constants.OA_PUBLIC_INFO_TYPE_BULLETIN, 5));
+        List<OaPublicInfo> publicList = oaPublicInfoManager.getPublicList(Constants.OA_PUBLIC_INFO_RANGE_IN, Constants.OA_PUBLIC_INFO_TYPE_BULLETIN, 6);
+        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+        for (OaPublicInfo info : publicList) {
+            Map<String, Object> map = new HashMap<String, Object>();
+            Date reportDate = info.getReportDate();
+            Date endDate = new Date(System.currentTimeMillis());
+            int days = DateTimeHelper.getDays(endDate, reportDate);
+            map.put("info", info);
+            map.put("day", days <= 3 ? true : false);
+            list.add(map);
+        }
+        model.addAttribute("infoList", list);
         model.addAttribute("typeCodeBulletin", Constants.OA_PUBLIC_INFO_TYPE_BULLETIN);
 
         return "view/index/mainBulletin";
