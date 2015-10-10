@@ -116,6 +116,7 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
                 deptNames = oaFgldManager.getManagerAllDepts(sysUserManager.getSysUser());
             }
 
+            //取本分管领导部门
             if (sysUserManager.getSysUser().getPerson().getDept() != null) {
                 deptNames += "," + sysUserManager.getSysUser().getPerson().getDept().getName();
             }

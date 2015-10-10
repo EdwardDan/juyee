@@ -3,10 +3,14 @@ package com.justonetech.biz.controller.oa;
 import com.justonetech.biz.core.orm.hibernate.GridJq;
 import com.justonetech.biz.core.orm.hibernate.QueryTranslateJq;
 import com.justonetech.biz.daoservice.DocDocumentService;
+import com.justonetech.biz.daoservice.OaFgldSetService;
 import com.justonetech.biz.daoservice.OaMeetingOuterService;
 import com.justonetech.biz.domain.DocDocument;
+import com.justonetech.biz.domain.OaFgldSet;
+import com.justonetech.biz.domain.OaFgldSetItem;
 import com.justonetech.biz.domain.OaMeetingOuter;
 import com.justonetech.biz.manager.DocumentManager;
+import com.justonetech.biz.manager.OaFgldManager;
 import com.justonetech.biz.manager.OaTaskManager;
 import com.justonetech.biz.utils.Constants;
 import com.justonetech.biz.utils.enums.OaMeetingStatus;
@@ -17,6 +21,7 @@ import com.justonetech.core.security.util.SpringSecurityUtils;
 import com.justonetech.core.utils.JspHelper;
 import com.justonetech.core.utils.ReflectionUtils;
 import com.justonetech.core.utils.StringHelper;
+import com.justonetech.system.domain.SysUser;
 import com.justonetech.system.manager.SysUserManager;
 import com.justonetech.system.utils.PrivilegeCode;
 import org.slf4j.Logger;
@@ -33,6 +38,7 @@ import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 
 /**
@@ -59,6 +65,12 @@ public class OaMeetingOuterController extends BaseCRUDActionController<OaMeeting
 
     @Autowired
     private OaTaskManager oaTaskManager;
+
+    @Autowired
+    private OaFgldManager oaFgldManager;
+
+    @Autowired
+    private OaFgldSetService oaFgldSetService;
 
     /**
      * 列表显示页面
@@ -101,8 +113,6 @@ public class OaMeetingOuterController extends BaseCRUDActionController<OaMeeting
     @RequestMapping
     public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session, String queryJson) {
         try {
-//            String beginTime = StringHelper.getElementValue(queryJson, "beginTime");
-//            String endTime = StringHelper.getElementValue(queryJson, "endTime");
             String status = StringHelper.getElementValue(queryJson, "status");
             Page pageModel = new Page(page, rows, true);
             String hql = "from OaMeetingOuter where 1=1 ";
@@ -114,8 +124,25 @@ public class OaMeetingOuterController extends BaseCRUDActionController<OaMeeting
 //                hql += " and to_char(endTime,'yyyy-MM-dd')<='" + endTime + "'";
 //            }
 
+            //增加自定义查询条件
+            String[] managerPersonAndDepts = oaFgldManager.getManagerPersonAndDepts(sysUserManager.getSysUser());
+            String deptNames = managerPersonAndDepts[0];
+
+            String fgldByLongNames = getFgldPersonNames(sysUserManager.getSysUser());
+
+            //取本分管领导部门
+            if (sysUserManager.getSysUser().getPerson().getDept() != null) {
+                deptNames += "," + sysUserManager.getSysUser().getPerson().getDept().getName();
+            }
+
+            if (sysUserManager.hasPrivilege(PrivilegeCode.OA_MEETING_OUTER_AUDIT_ZR)) {
+                hql += " and status >=" + OaMeetingStatus.STATUS_BRANCH_PASS.getCode();
+            } else if (sysUserManager.hasPrivilege(PrivilegeCode.OA_MEETING_OUTER_AUDIT_FG)) {
+                hql += " and createUser in('" + StringHelper.findAndReplace(fgldByLongNames, ",", "','") + "')";
+            }
+
             if (!StringHelper.isEmpty(status)) {
-                hql += " and status ='" + status + "'";
+                hql += " and status =" + status;
             }
             hql += " order by id desc";
             //执行查询
@@ -335,6 +362,42 @@ public class OaMeetingOuterController extends BaseCRUDActionController<OaMeeting
         oaMeetingOuterService.delete(id);
 
         sendSuccessJSON(response, "删除成功");
+    }
+
+    /**
+     * 分管领导所管辖的人员登录名
+     *
+     * @param sysUser .
+     * @return .
+     */
+    public String getFgldPersonNames(SysUser sysUser) {
+        String personNames = "";
+        String hql = "from OaFgldSet where user.loginName=?";
+        OaFgldSet data = oaFgldSetService.findUnique(hql + " and isLeaf=1", sysUser.getLoginName());
+        if (null == data) {
+            data = oaFgldSetService.findUnique(hql + " and isLeaf=0", sysUser.getLoginName());
+        }
+        if (data != null) {
+            Set<OaFgldSet> childsets = data.getChildsets();
+            if (childsets.size() > 0) {
+                for (OaFgldSet childset : childsets) {
+                    personNames += "," + childset.getUser().getLoginName();
+                }
+                personNames = personNames.substring(1);
+            } else {
+                Set<OaFgldSetItem> oaFgldSetItems = data.getOaFgldSetItems();
+                if (oaFgldSetItems.size() > 0) {
+                    for (OaFgldSetItem oaFgldSetItem : oaFgldSetItems) {
+                        List<SysUser> deptUsers = sysUserManager.getDeptUsers(oaFgldSetItem.getDept());
+                        for (SysUser deptUser : deptUsers) {
+                            personNames += "," + deptUser.getLoginName();
+                        }
+                    }
+                    personNames = personNames.substring(1);
+                }
+            }
+        }
+        return personNames;
     }
 
 }
