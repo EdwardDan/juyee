@@ -7,7 +7,7 @@
         //页面验证初始化
         var validateCondition = [
             {name: "title", rule: "validate[required,maxSize[200]]"},
-            {name: "content", rule: "validate[required]"},
+//            {name: "content", rule: "validate[required]"},
             {name: "receivePersons", rule: "validate[required]"}
         ];
         validateInit(validateCondition, formId);
