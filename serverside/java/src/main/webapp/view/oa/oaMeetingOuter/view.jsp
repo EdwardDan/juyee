@@ -102,7 +102,7 @@
             </table>
         </fieldset>
     </c:if>
-    <c:if test="${bean.status>STATUS_BRANCH_PASS}">
+    <c:if test="${bean.status>=STATUS_MAIN_PASS}">
         <fieldset class="form_fieldset">
             <legend class="form_legend">
                 主任审核批示
