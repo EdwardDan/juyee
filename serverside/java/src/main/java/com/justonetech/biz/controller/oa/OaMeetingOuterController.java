@@ -116,29 +116,20 @@ public class OaMeetingOuterController extends BaseCRUDActionController<OaMeeting
             String status = StringHelper.getElementValue(queryJson, "status");
             Page pageModel = new Page(page, rows, true);
             String hql = "from OaMeetingOuter where 1=1 ";
-            //增加自定义查询条件
-//            if (!StringHelper.isEmpty(beginTime)) {
-//                hql += " and to_char(beginTime,'yyyy-MM-dd')>='" + beginTime + "'";
-//            }
-//            if (!StringHelper.isEmpty(endTime)) {
-//                hql += " and to_char(endTime,'yyyy-MM-dd')<='" + endTime + "'";
-//            }
-
-            //增加自定义查询条件
-            String[] managerPersonAndDepts = oaFgldManager.getManagerPersonAndDepts(sysUserManager.getSysUser());
-            String deptNames = managerPersonAndDepts[0];
-
-            String fgldByLongNames = getFgldPersonNames(sysUserManager.getSysUser());
-
-            //取本分管领导部门
-            if (sysUserManager.getSysUser().getPerson().getDept() != null) {
-                deptNames += "," + sysUserManager.getSysUser().getPerson().getDept().getName();
-            }
 
             if (sysUserManager.hasPrivilege(PrivilegeCode.OA_MEETING_OUTER_AUDIT_ZR)) {
-                hql += " and status >=" + OaMeetingStatus.STATUS_BRANCH_PASS.getCode();
+                hql += " and status in(" + OaMeetingStatus.STATUS_BRANCH_PASS.getCode() + "," + OaMeetingStatus.STATUS_MAIN_PASS.getCode() + "," + OaMeetingStatus.STATUS_MAIN_BACK.getCode() + ")";
             } else if (sysUserManager.hasPrivilege(PrivilegeCode.OA_MEETING_OUTER_AUDIT_FG)) {
-                hql += " and createUser in('" + StringHelper.findAndReplace(fgldByLongNames, ",", "','") + "')";
+                String fgldByLoginNames = getFgldPersonNames(sysUserManager.getSysUser());
+                hql += " and createUser in('" + StringHelper.findAndReplace(fgldByLoginNames, ",", "','") + "')";
+            } else if (sysUserManager.hasPrivilege(PrivilegeCode.OA_MEETING_OUTER_EDIT)) {
+                //取当前用户部门下的人员
+                List<SysUser> deptUsers = sysUserManager.getDeptUsers(sysUserManager.getSysUser().getPerson().getDept());
+                String sysUserDeptNames = "";
+                for (SysUser deptUser : deptUsers) {
+                    sysUserDeptNames += "," + deptUser.getLoginName();
+                }
+                hql += " and createUser in('" + StringHelper.findAndReplace(sysUserDeptNames, ",", "','") + "')";
             }
 
             if (!StringHelper.isEmpty(status)) {
