@@ -20,6 +20,7 @@ import com.justonetech.core.utils.ReflectionUtils;
 import com.justonetech.core.utils.StringHelper;
 import com.justonetech.system.domain.SysDept;
 import com.justonetech.system.domain.SysUser;
+import com.justonetech.system.manager.ExcelPrintManager;
 import com.justonetech.system.manager.SimpleQueryManager;
 import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
@@ -68,6 +69,9 @@ public class OaWorkPlanController extends BaseCRUDActionController<OaWorkPlan> {
     private DocDocumentService docDocumentService;
 
     @Autowired
+    private ExcelPrintManager excelPrintManager;
+
+    @Autowired
     private OaWorkPlanService oaWorkPlanService;
 
     @Autowired
@@ -84,7 +88,6 @@ public class OaWorkPlanController extends BaseCRUDActionController<OaWorkPlan> {
 
     @Autowired
     private MsgMessageManager msgMessageManager;
-
 
     /**
      * 列表显示页面
@@ -338,8 +341,26 @@ public class OaWorkPlanController extends BaseCRUDActionController<OaWorkPlan> {
         }
         sendSuccessJSON(response, msg);
     }
-
     /**
+     * 导出excel
+     *
+     * @param response .
+     * @throws Exception .
+     */
+    @RequestMapping
+    public void printExcel(HttpServletResponse response,Long id, HttpServletRequest request) throws Exception {
+        //把打印的数据压入map中
+        String xlsTemplateName = "OaWorkPlanItem.xls";
+        String fileName = "科室一周工作安排.xls";
+        Map<String, Object> beans = new HashMap<String, Object>();
+        OaWorkPlan oaWorkPlan =  oaWorkPlanService.get(id);
+        Set<OaWorkPlanItem> oaWorkPlanItemList =oaWorkPlan .getOaWorkPlanItems();
+        beans.put("items", oaWorkPlanItemList);
+        beans.put("reportDept",oaWorkPlan.getReportDept());//科室
+        beans.put("workTime", oaWorkPlan.getWorkTime());//工作时间
+        excelPrintManager.printExcel(response, request, OaWorkPlanItem.class.getSimpleName(), xlsTemplateName, beans, fileName, new HashMap());
+    }
+     /**
      * 删除操作
      *
      * @param response .

@@ -5,6 +5,12 @@
         border: 1px solid;
     }
 </style>
+<script type="text/javascript">
+    //导出
+    function printItems(btn){
+        window.open( "${ctx}/oaWorkPlan/printExcel.do?id=${bean.id}");
+    }
+</script>
 <form:form commandName="bean">
     <form:hidden path="id"/>
     <div class="form_div">
@@ -96,7 +102,7 @@
     </div>
     <table cellpadding="5" cellspacing="0" class="form_table">
         <tr class="tr_content">
-            <td>
+            <td> <input type="button" value="导出" class="button_all" onclick="printItems(this)"/>&nbsp;
                 <input type="button" value="关闭" class="button_cancel" onclick="closeWindow()">
             </td>
         </tr>
