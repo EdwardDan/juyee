@@ -358,7 +358,15 @@ public class OaWorkPlanController extends BaseCRUDActionController<OaWorkPlan> {
         beans.put("items", oaWorkPlanItemList);
         beans.put("reportDept",oaWorkPlan.getReportDept());//科室
         beans.put("workTime", oaWorkPlan.getWorkTime());//工作时间
-        excelPrintManager.printExcel(response, request, OaWorkPlanItem.class.getSimpleName(), xlsTemplateName, beans, fileName, new HashMap());
+        //一周工作行合并
+        Map<String, Object> mergeMap = new HashMap<String, Object>();
+        List<int[]> mergerCellsList = new ArrayList<int[]>();
+        int startColNo = 0;
+        int startRowNo = 2;
+        int AddRow = oaWorkPlanItemList.size();//工作行
+        mergerCellsList.add(new int[]{startColNo, startRowNo, startColNo, startRowNo +AddRow-1});
+        mergeMap.put("mergerCellsList", mergerCellsList);
+        excelPrintManager.printExcel(response, request, OaWorkPlanItem.class.getSimpleName(), xlsTemplateName, beans, fileName, mergeMap);
     }
      /**
      * 删除操作
