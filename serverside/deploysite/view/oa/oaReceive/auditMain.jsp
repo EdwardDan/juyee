@@ -116,8 +116,8 @@
             </c:forEach>
             <tr class="tr_button">
                 <td class="form_border" align="center" colspan="6">
-                    <c:if test="${type=='view'}"> &nbsp;是否打印日志:&nbsp;<input type="checkbox" value="1" name="isPrintNode" id="isPrintNode">
-                        <input type="button" value="打印" class="button_confirm" onclick=""></c:if>
+                    <%--<c:if test="${type=='view'}"> &nbsp;是否打印日志:&nbsp;<input type="checkbox" value="1" name="isPrintNode" id="isPrintNode">--%>
+                        <%--<input type="button" value="打印" class="button_confirm" onclick=""></c:if>--%>
                     <input type="button" value="关闭" class="button_cancel" onclick="closeWindow()">
                 </td>
             </tr>

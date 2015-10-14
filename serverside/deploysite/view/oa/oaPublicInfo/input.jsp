@@ -13,17 +13,7 @@
         var validateCondition = [
             {name:"type", rule:"validate[required]"},
             {name:"title", rule:"validate[required,maxSize[100]]"},
-            //{name:"iconImage", rule:"validate[required,maxSize[200]]"},
-            //{name:"userId", rule:"validate[required,custom[integer],max[10]"},
             {name:"createDeptName", rule:"validate[required,maxSize[50]]"}
-            //{name:"createDate", rule:"validate[required,custom[date],max[10]"},
-            //{name:"isPublic", rule:"validate[required,maxSize[1]]"},
-            //{name:"reportDate", rule:"validate[required,custom[date],max[10]"},
-            //{name:"visitTimes", rule:"validate[required,custom[integer],max[10]"},
-            //{name:"accessRange", rule:"validate[required,custom[integer],max[10]"},
-            //{name:"documentId", rule:"validate[required,custom[integer],max[10]"},
-            //{name:"isValid", rule:"validate[required,maxSize[1]]"},
-            //{name:"isTop", rule:"validate[required,maxSize[1]]"},
         ];
         validateInit(validateCondition, formId);
     });
@@ -49,11 +39,11 @@
 
     function checkOpinion(obj) {
         var b = document.getElementById("accessRange");
-        var a = document.getElementById("isTop");
+//        var a = document.getElementById("isTop");
         if (!obj.checked) {
             b.value = null;
-            //            b.sysCodeDetailId = null;
-            a.checked = false;
+//            b.sysCodeDetailId = null;
+//            a.checked = false;
         }
     }
 
@@ -159,12 +149,12 @@
                     <%--<form:checkbox path="isValid" value="1"/>--%>
                 <%--</td>--%>
             <%--</tr>--%>
-            <tr class="tr_dark">
-                <td class="form_label_right">是否置顶：</td>
-                <td class="form_content">
-                    <form:checkbox path="isTop" id="isTop" value="1" onclick="checkTop(this)"/>
-                </td>
-            </tr>
+            <%--<tr class="tr_dark">--%>
+                <%--<td class="form_label_right">是否置顶：</td>--%>
+                <%--<td class="form_content">--%>
+                    <%--<form:checkbox path="isTop" id="isTop" value="1" onclick="checkTop(this)"/>--%>
+                <%--</td>--%>
+            <%--</tr>--%>
 
             <tr class="tr_light">
                 <td class="form_label_right">附件：</td>

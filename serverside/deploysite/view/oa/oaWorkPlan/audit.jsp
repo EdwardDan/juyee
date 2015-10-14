@@ -135,7 +135,7 @@
                 </c:if>
             </table>
         </fieldset>
-        <c:if test="${bean.status==STATUS_SUBMIT|| bean.status==STATUS_BRANCH_PASS||bean.status==STATUS_MAIN_PASS}">
+        <c:if test="${bean.status==STATUS_SUBMIT}">
             <fieldset class="form_fieldset">
                 <legend class="form_legend">
                     科长审核
@@ -151,7 +151,20 @@
                 </table>
             </fieldset>
         </c:if>
-        <c:if test="${bean.status==STATUS_BRANCH_PASS||bean.status==STATUS_MAIN_PASS}">
+        <c:if test="${bean.status==STATUS_BRANCH_PASS}">
+            <fieldset class="form_fieldset">
+                <legend class="form_legend">
+                    科长审核
+                </legend>
+                <table cellpadding="0" cellspacing="0" class="form_table">
+                    <tr class="tr_dark">
+                        <td class="form_label_right" width="150px">审核意见：</td>
+                        <td class="form_content" colspan="3">
+                            <sys:toHtml>${bean.kzOpinion}</sys:toHtml>
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
             <fieldset class="form_fieldset">
                 <legend class="form_legend">
                     分管领导审核

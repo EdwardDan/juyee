@@ -7,37 +7,6 @@
         openFullWindow("${ctx}/site/infoView.do?id=" + id, 1024, 768);
     }
 </script>
-<%--<table width="240" border="0" cellpadding="0" cellspacing="0" class="ggl">--%>
-    <%--<tr>--%>
-        <%--<td height="150">--%>
-            <%--<table width="220" border="0" cellpadding="0" cellspacing="0">--%>
-                <%--<c:choose>--%>
-                    <%--<c:when test="${fn:length(infoList)>0}">--%>
-                        <%--<c:forEach items="${infoList}" var="item">--%>
-                            <%--<tr>--%>
-                                <%--<td class="ggltext" align="left">&nbsp;--%>
-                                    <%--<a href="javascript:void(0)" onclick="viewInfo(${item.id})" title="${item.title}">--%>
-                                        <%--<span class="cutString"><sys:cutString length="17">${item.title}</sys:cutString></span>--%>
-                                    <%--</a>--%>
-                                <%--</td>--%>
-                            <%--</tr>--%>
-                        <%--</c:forEach>--%>
-                        <%--<tr>--%>
-                            <%--<td class="ggltext" align="right">--%>
-                                    <%--<img src="${themePath}/index_new/more.png" width="36" height="14" title="查看更多" style="cursor: pointer" onclick="loadMainPage('${ctx}/oaPublicInfo/grid.do?typeCode=${typeCodeBulletin}','系统公告');" align="absmiddle"/>--%>
-                            <%--</td>--%>
-                        <%--</tr>--%>
-                    <%--</c:when>--%>
-                    <%--<c:otherwise>--%>
-                        <%--<tr>--%>
-                            <%--<td align="center">暂无记录</td>--%>
-                        <%--</tr>--%>
-                    <%--</c:otherwise>--%>
-                <%--</c:choose>--%>
-            <%--</table>--%>
-        <%--</td>--%>
-    <%--</tr>--%>
-<%--</table>--%>
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
     <tr>
         <td class="tableleft">&nbsp;</td>
@@ -56,9 +25,13 @@
                         <c:forEach items="${infoList}" var="item">
                             <tr>
                                 <td class="tablelight" style="text-align: left;">&nbsp;
-                                    <a href="javascript:void(0)" onclick="viewInfo('${item.id}')" title="${item.title}">
-                                        ${item.title}
+                                    <a href="javascript:void(0)" onclick="viewInfo('${item.info.id}')"
+                                       title="${item.info.title}">
+                                            ${item.info.title}
                                     </a>
+                                    <c:if test="${item.day}">
+                                        <img width="24" height="11" src="${themePath}/images/news.gif" alt="">
+                                    </c:if>
                                 </td>
                             </tr>
                         </c:forEach>
