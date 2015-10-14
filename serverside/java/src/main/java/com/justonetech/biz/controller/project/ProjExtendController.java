@@ -80,7 +80,7 @@ public class ProjExtendController extends BaseCRUDActionController<ProjExtend> {
         model.addAttribute("projinfocategoryList",projinfocategoryList); //业务类别
         //判断是否有编辑权限
         model.addAttribute("flag", flag);
-        model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.PROJ_INFO_EDIT));
+        model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.PROJ_EXTEND_EDIT));
 
         return "view/project/projExtend/grid";
     }
@@ -97,17 +97,6 @@ public class ProjExtendController extends BaseCRUDActionController<ProjExtend> {
     @RequestMapping
     public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session, String flag, HttpServletRequest request) {
         try {
-            //按区县过滤
-            SysUser sysUser = sysUserManager.getSysUser();
-            String name = "";
-            if (null != sysUser) {
-                name = sysUser.getPerson().getName();
-            }
-            List<SysCodeDetail> areaList = sysCodeManager.getCodeListByCode(Constants.PROJ_INFO_BELONG_AREA);
-            String areaNames = "";
-            for (SysCodeDetail detail : areaList) {
-                areaNames += detail.getName();
-            }
             //按项目屬性状态类别查询数据
             String projproperty = request.getParameter("projproperty");//项目性质
             String ismajor = request.getParameter("ismajor");//是否重大
@@ -117,6 +106,8 @@ public class ProjExtendController extends BaseCRUDActionController<ProjExtend> {
             String hql = "from ProjInfo where 1 = 1 ";
             if (!StringHelper.isEmpty(flag) && "qqdj".equals(flag)) {
                 hql += " and packageAttr like '%区区对接%' ";
+            } else {
+                hql += projectRelateManager.getRelateProjectHql("id");
             }
             //增加项目过滤
             if (!StringHelper.isEmpty(projproperty)) {
@@ -130,9 +121,6 @@ public class ProjExtendController extends BaseCRUDActionController<ProjExtend> {
             }
             if (!StringHelper.isEmpty(projcategory)) {
                 hql += " and category.name = '" + projcategory + "' ";
-            }
-            if (!StringHelper.isEmpty(name) && areaNames.contains(name)) {
-                hql += " and areaCode is not null and areaCode like '%" + name + "%'";
             }
             hql += " order by no asc,id asc";
 

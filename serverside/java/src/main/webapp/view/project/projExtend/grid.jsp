@@ -40,7 +40,6 @@
                         var opButton = '<input type="button" value="查看" onclick="doView(' + id + ')" class="button_normal"/> ';
                         <c:if test="${canEdit}">
                         opButton += '<input type="button" value="填报" onclick="doEdit(' + id + ')" class="button_normal"/> ';
-                        opButton += '<input type="button" value="删除" onclick="doDelete(' + id + ')" class="button_normal"/>';
                         </c:if>
                         if (stageName == '未开工') {
                             //判断项目阶段的高亮显示（删除列时注意修改）

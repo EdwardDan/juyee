@@ -4,6 +4,7 @@ import com.justonetech.biz.core.orm.hibernate.GridJq;
 import com.justonetech.biz.core.orm.hibernate.QueryTranslateJq;
 import com.justonetech.biz.daoservice.*;
 import com.justonetech.biz.domain.*;
+import com.justonetech.biz.manager.ProjectRelateManager;
 import com.justonetech.biz.utils.Constants;
 import com.justonetech.biz.utils.enums.ProjBidType;
 import com.justonetech.core.controller.BaseCRUDActionController;
@@ -58,6 +59,9 @@ public class DataNodeReportController extends BaseCRUDActionController<DataNodeR
     @Autowired
     private ProjInfoService projInfoService;
 
+    @Autowired
+    private ProjectRelateManager projectRelateManager;
+
     /**
      * 列表显示页面
      *
@@ -85,9 +89,10 @@ public class DataNodeReportController extends BaseCRUDActionController<DataNodeR
     public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session) {
         try {
             Page pageModel = new Page(page, rows, true);
-            String hql = "from ProjInfo order by no asc,id asc";
+            String hql = "from ProjInfo where 1=1 ";
             //增加自定义查询条件
-
+            hql += projectRelateManager.getRelateProjectHql("id");
+            hql += " order by no asc,id asc";
             //执行查询
             QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);
             String query = queryTranslate.toString();

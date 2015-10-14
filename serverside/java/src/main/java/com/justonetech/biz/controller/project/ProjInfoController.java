@@ -8,6 +8,7 @@ import com.justonetech.biz.domain.ProjBid;
 import com.justonetech.biz.domain.ProjInfo;
 import com.justonetech.biz.domain.ProjInfoArea;
 import com.justonetech.biz.manager.ProjInfoManager;
+import com.justonetech.biz.manager.ProjectRelateManager;
 import com.justonetech.biz.utils.Constants;
 import com.justonetech.biz.utils.enums.ProjBidType;
 import com.justonetech.core.controller.BaseCRUDActionController;
@@ -18,8 +19,6 @@ import com.justonetech.core.utils.ReflectionUtils;
 import com.justonetech.core.utils.StringHelper;
 import com.justonetech.system.daoservice.SysCodeDetailService;
 import com.justonetech.system.domain.SysCodeDetail;
-import com.justonetech.system.domain.SysPerson;
-import com.justonetech.system.domain.SysUser;
 import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
 import com.justonetech.system.utils.PrivilegeCode;
@@ -34,7 +33,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -65,6 +67,9 @@ public class ProjInfoController extends BaseCRUDActionController<ProjInfo> {
     @Autowired
     private SysCodeManager sysCodeManager;
 
+    @Autowired
+    private ProjectRelateManager projectRelateManager;
+
     /**
      * 列表显示页面
      *
@@ -81,8 +86,8 @@ public class ProjInfoController extends BaseCRUDActionController<ProjInfo> {
         model.addAttribute("TYPE_STAGE", ProjBidType.TYPE_STAGE.getCode());
         model.addAttribute("TYPE_NODE", ProjBidType.TYPE_NODE.getCode());
         model.addAttribute("propertyList", propertyList); //管理属性
-        model.addAttribute("projinfostageList",projinfostageList); //项目状态
-        model.addAttribute("projinfocategoryList",projinfocategoryList); //业务类别
+        model.addAttribute("projinfostageList", projinfostageList); //项目状态
+        model.addAttribute("projinfocategoryList", projinfocategoryList); //业务类别
         return "view/project/projInfo/grid";
     }
 
@@ -98,17 +103,6 @@ public class ProjInfoController extends BaseCRUDActionController<ProjInfo> {
     @RequestMapping
     public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session, HttpServletRequest request) {
         try {
-            //按区县过滤
-            SysUser sysUser = sysUserManager.getSysUser();
-            String name = "";
-            if (null != sysUser) {
-                name = sysUser.getPerson().getName();
-            }
-            List<SysCodeDetail> areaList = sysCodeManager.getCodeListByCode(Constants.PROJ_INFO_BELONG_AREA);
-            String areaNames = "";
-            for (SysCodeDetail detail : areaList) {
-                areaNames += detail.getName();
-            }
             //按项目屬性状态类别查询数据
             String projproperty = request.getParameter("projproperty");//管理属性
             String ismajor = request.getParameter("ismajor");//是否重大
@@ -116,7 +110,7 @@ public class ProjInfoController extends BaseCRUDActionController<ProjInfo> {
             String projcategory = request.getParameter("projcategory");//业务类别
 
             Page pageModel = new Page(page, rows, true);
-            String hql = "from ProjInfo where 1=1";
+            String hql = "from ProjInfo where 1=1 ";
             if (!StringHelper.isEmpty(projproperty)) {
                 hql += " and property.name = '" + projproperty + "' ";
             }
@@ -129,9 +123,8 @@ public class ProjInfoController extends BaseCRUDActionController<ProjInfo> {
             if (!StringHelper.isEmpty(projcategory)) {
                 hql += " and category.name = '" + projcategory + "' ";
             }
-            if (!StringHelper.isEmpty(name) && areaNames.contains(name)) {
-                hql += " and areaCode is not null and areaCode like '%" + name + "%'";
-            }
+//            hql += projectRelateManager.getRelateProjectHql("id");
+//            System.out.println("hql////////////////////////////////// = " + hql);
             hql += " order by no asc,id asc";
             //执行查询
             QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);
@@ -206,7 +199,7 @@ public class ProjInfoController extends BaseCRUDActionController<ProjInfo> {
         for (String s : splitArea) {
             areaList.add(s);
         }
-        model.addAttribute("areas",areaList);
+        model.addAttribute("areas", areaList);
 //        model.addAttribute("areas", projInfo.getBelongAreaNames());
         model.addAttribute("isTab", isTab);
 
@@ -288,9 +281,15 @@ public class ProjInfoController extends BaseCRUDActionController<ProjInfo> {
             String[] areaIds = request.getParameterValues("ProjBelongArea");
             String intro = request.getParameter("intro");
             target.setYear(Integer.valueOf(year));
-            target.setProperty(sysCodeDetailService.get(Long.valueOf(projProperty)));
-            target.setStage(sysCodeDetailService.get(Long.valueOf(projStage)));
-            target.setCategory(sysCodeDetailService.get(Long.valueOf(projCategory)));
+            if (!StringHelper.isEmpty(projProperty)){
+                target.setProperty(sysCodeDetailService.get(Long.valueOf(projProperty)));
+            }
+            if (!StringHelper.isEmpty(projStage)){
+                target.setStage(sysCodeDetailService.get(Long.valueOf(projStage)));
+            }
+            if (!StringHelper.isEmpty(projCategory)){
+                target.setCategory(sysCodeDetailService.get(Long.valueOf(projCategory)));
+            }
             target.setIntro(intro);
 
             String projSources = request.getParameter("ProjSources");

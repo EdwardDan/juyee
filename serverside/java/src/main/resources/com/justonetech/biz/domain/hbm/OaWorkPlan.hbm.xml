@@ -214,7 +214,7 @@
 
 	
 
-		<set name="oaWorkPlanItems" inverse="true">
+		<set name="oaWorkPlanItems" inverse="true" order-by="ORDER_NO">
 			<key column="WEEK_PLAN_ID"/>
 			<one-to-many class="OaWorkPlanItem"/>
 		</set>

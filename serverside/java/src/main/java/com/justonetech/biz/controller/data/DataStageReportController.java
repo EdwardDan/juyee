@@ -4,6 +4,7 @@ import com.justonetech.biz.core.orm.hibernate.GridJq;
 import com.justonetech.biz.core.orm.hibernate.QueryTranslateJq;
 import com.justonetech.biz.daoservice.*;
 import com.justonetech.biz.domain.*;
+import com.justonetech.biz.manager.ProjectRelateManager;
 import com.justonetech.biz.utils.Constants;
 import com.justonetech.biz.utils.enums.ProjBidType;
 import com.justonetech.core.controller.BaseCRUDActionController;
@@ -63,6 +64,9 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
     @Autowired
     private DataStageReportLogService dataStageReportLogService;
 
+    @Autowired
+    private ProjectRelateManager projectRelateManager;
+
     /**
      * 列表显示页面
      *
@@ -96,17 +100,6 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
     @RequestMapping
     public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session, HttpServletRequest request) {
         try {
-            //按区县过滤
-            SysUser sysUser = sysUserManager.getSysUser();
-            String name = "";
-            if (null != sysUser) {
-                name = sysUser.getPerson().getName();
-            }
-            List<SysCodeDetail> areaList = sysCodeManager.getCodeListByCode(Constants.PROJ_INFO_BELONG_AREA);
-            String areaNames = "";
-            for (SysCodeDetail detail : areaList) {
-                areaNames += detail.getName();
-            }
             //按项目屬性状态类别查询数据
             String projproperty = request.getParameter("projproperty");//项目性质
             String ismajor = request.getParameter("ismajor");//是否重大
@@ -127,9 +120,7 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
             if (!StringHelper.isEmpty(projcategory)) {
                 hql += " and category.name = '" + projcategory + "' ";
             }
-            if (!StringHelper.isEmpty(name) && areaNames.contains(name)) {
-                hql += " and areaCode is not null and areaCode like '%" + name + "%'";
-            }
+            hql += projectRelateManager.getRelateProjectHql("id");
             hql += " order by no asc,id asc";
             //执行查询
             QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);

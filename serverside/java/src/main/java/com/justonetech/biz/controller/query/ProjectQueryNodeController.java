@@ -4,6 +4,7 @@ import com.justonetech.biz.core.orm.hibernate.GridJq;
 import com.justonetech.biz.core.orm.hibernate.QueryTranslateJq;
 import com.justonetech.biz.daoservice.*;
 import com.justonetech.biz.domain.*;
+import com.justonetech.biz.manager.ProjectRelateManager;
 import com.justonetech.biz.utils.Constants;
 import com.justonetech.biz.utils.enums.ProjBidType;
 import com.justonetech.core.controller.BaseCRUDActionController;
@@ -52,13 +53,13 @@ public class ProjectQueryNodeController extends BaseCRUDActionController<ProjInf
     private ProjNodeService projNodeService;
 
     @Autowired
-    private DataNodeReportService dataNodeReportService;
-
-    @Autowired
     private DataNodeReportItemService dataNodeReportItemService;
 
     @Autowired
     private ExcelPrintManager excelPrintManager;
+
+    @Autowired
+    private ProjectRelateManager projectRelateManager;
 
     private static final String xlsTemplateName = "DataNodeReport.xls";
 
@@ -90,8 +91,8 @@ public class ProjectQueryNodeController extends BaseCRUDActionController<ProjInf
         try {
             Page pageModel = new Page(page, rows, true);
             String hql = "from ProjInfo where 1=1";
-//            //增加项目过滤
-//            hql += projectRelateManager.getRelateProjectHql("id");
+            //增加项目过滤
+            hql += projectRelateManager.getRelateProjectHql("id");
 
             hql += "order by no asc,id asc";
 

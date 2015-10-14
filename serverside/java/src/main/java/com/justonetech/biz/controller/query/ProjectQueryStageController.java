@@ -5,6 +5,7 @@ import com.justonetech.biz.core.orm.hibernate.QueryTranslateJq;
 import com.justonetech.biz.daoservice.*;
 import com.justonetech.biz.domain.*;
 import com.justonetech.biz.manager.DocumentManager;
+import com.justonetech.biz.manager.ProjectRelateManager;
 import com.justonetech.biz.utils.Constants;
 import com.justonetech.biz.utils.enums.ProjBidType;
 import com.justonetech.core.controller.BaseCRUDActionController;
@@ -65,6 +66,9 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
     @Autowired
     private ExcelPrintManager excelPrintManager;
 
+    @Autowired
+    private ProjectRelateManager projectRelateManager;
+
     private static final String xlsTemplateName = "DataStageReport.xls";
 
     /**
@@ -100,17 +104,6 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
     @RequestMapping
     public void gridDataCustom(HttpServletResponse response, Model model, String filters, String columns, int page, int rows, HttpSession session, HttpServletRequest request) {
         try {
-            //按区县过滤
-            SysUser sysUser = sysUserManager.getSysUser();
-            String name = "";
-            if (null != sysUser) {
-                name = sysUser.getPerson().getName();
-            }
-            List<SysCodeDetail> areaList = sysCodeManager.getCodeListByCode(Constants.PROJ_INFO_BELONG_AREA);
-            String areaNames = "";
-            for (SysCodeDetail detail : areaList) {
-                areaNames += detail.getName();
-            }
             //按项目屬性状态类别查询数据
             String projproperty = request.getParameter("projproperty");//项目性质
             String ismajor = request.getParameter("ismajor");//是否重大
@@ -131,9 +124,7 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
             if (!StringHelper.isEmpty(projcategory)) {
                 hql += " and category.name = '" + projcategory + "' ";
             }
-            if (!StringHelper.isEmpty(name) && areaNames.contains(name)) {
-                hql += " and areaCode is not null and areaCode like '%" + name + "%'";
-            }
+            hql += projectRelateManager.getRelateProjectHql("id");
             hql += " order by no asc,id asc";
             QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);
             String query = queryTranslate.toString();
