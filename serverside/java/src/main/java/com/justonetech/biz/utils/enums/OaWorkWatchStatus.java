@@ -3,7 +3,7 @@ package com.justonetech.biz.utils.enums;
 import com.justonetech.core.utils.JspHelper;
 
 /**
- * 外出会议状态
+ * @description 工作督办状态
  */
 public enum OaWorkWatchStatus {
     STATUS_EDIT(0, "填写", "red"),

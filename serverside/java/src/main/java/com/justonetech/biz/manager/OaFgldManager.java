@@ -7,7 +7,6 @@ import com.justonetech.biz.domain.OaFgldSetItem;
 import com.justonetech.biz.utils.Constants;
 import com.justonetech.core.utils.FormatUtils;
 import com.justonetech.core.utils.JspHelper;
-import com.justonetech.core.utils.StringHelper;
 import com.justonetech.system.daoservice.SysPersonDeptService;
 import com.justonetech.system.daoservice.SysUserRoleService;
 import com.justonetech.system.domain.*;
@@ -119,16 +118,17 @@ public class OaFgldManager {
      * @return
      */
     public String getDeptLeaderByRole(String loginName) {
-        String loginUsrName = getDeptLeader(loginName);
-        //考虑职务为空，但却被授予科长角色的人员。
-        if (StringHelper.isEmpty(loginUsrName)) {
-            List<SysUserRole> sysUserRoles = sysUserRoleService.findByQuery("select sur from SysUserRole sur left join sur.role sysrole where sur.user.id = " + sysUserManager.getSysUser(loginName).getId() + " and (sysrole.code like '%kz%' or sysrole.roleName like '%" + Constants.SYS_DEPT_LEADER_NAME + "%') ");
-            if (sysUserRoles.isEmpty()) {
-                return null;
-            }
-            return sysUserRoles.iterator().next().getUser().getLoginName();
+//        String loginUsrName = getDeptLeader(loginName);
+//        //考虑职务为空，但却被授予科长角色的人员。
+//        if (StringHelper.isEmpty(loginUsrName)) {
+        //改为以科长角色为身份确认的筛选条件
+        List<SysUserRole> sysUserRoles = sysUserRoleService.findByQuery("select sur from SysUserRole sur left join sur.role sysrole where sur.user.id = " + sysUserManager.getSysUser(loginName).getId() + " and (sysrole.code like '%kz%' or sysrole.roleName like '%" + Constants.SYS_DEPT_LEADER_NAME + "%') ");
+        if (sysUserRoles.isEmpty()) {
+            return null;
         }
-        return loginUsrName;
+        return sysUserRoles.iterator().next().getUser().getLoginName();
+//        }
+//        return loginUsrName;
     }
 
     /**
@@ -167,16 +167,32 @@ public class OaFgldManager {
      * @return
      */
     public String getTopLeaderByRole(Long loginUsrId) {
-        String loginTopLeaderName = getTopLeader();
-        //考虑职务为空，但却被授予主任角色的人员。
-        if (StringHelper.isEmpty(loginTopLeaderName)) {
-            List<SysUserRole> sysUserRoles = sysUserRoleService.findByQuery("select sur from SysUserRole sur left join sur.role sysrole where sur.user.id = " + loginUsrId + " and (sysrole.code like '%zr%' or sysrole.roleName like '%" + Constants.SYS_TOP_LEADER_NAME + "%') ");
-            if (sysUserRoles.isEmpty()) {
-                return "";
-            }
-            return JspHelper.getString(sysUserRoles.iterator().next().getUser().getLoginName());
+//        String loginTopLeaderName = getTopLeader();
+//        //考虑职务为空，但却被授予主任角色的人员。
+//        if (StringHelper.isEmpty(loginTopLeaderName)) {
+        //改为以主任角色为身份确认的筛选条件
+        List<SysUserRole> sysUserRoles = sysUserRoleService.findByQuery("select sur from SysUserRole sur left join sur.role sysrole where sur.user.id = " + loginUsrId + " and (sysrole.code = 'zr' or sysrole.roleName = '" + Constants.SYS_TOP_LEADER_NAME + "') ");
+        if (sysUserRoles.isEmpty()) {
+            return "";
         }
-        return loginTopLeaderName;
+        return JspHelper.getString(sysUserRoles.iterator().next().getUser().getLoginName());
+//        }
+//        return loginTopLeaderName;
+    }
+
+    /**
+     * 通过当前用户的角色判断其是否扮演办公室主任
+     *
+     * @param loginUsrId
+     * @return
+     */
+    public String getOfficeLeaderByRole(Long loginUsrId) {
+        //以办公室主任角色为身份确认的筛选条件
+        List<SysUserRole> sysUserRoles = sysUserRoleService.findByQuery("select sur from SysUserRole sur left join sur.role sysrole where sur.user.id = " + loginUsrId + " and (sysrole.code = 'bgszr' or sysrole.roleName = '" + Constants.SYS_OFFICE_LEADER_NAME + "') ");
+        if (sysUserRoles.isEmpty()) {
+            return "";
+        }
+        return JspHelper.getString(sysUserRoles.iterator().next().getUser().getLoginName());
     }
 
     /**

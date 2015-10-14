@@ -6,6 +6,7 @@ import com.justonetech.biz.daoservice.OaWorkWatchItemService;
 import com.justonetech.biz.daoservice.OaWorkWatchService;
 import com.justonetech.biz.domain.OaWorkWatch;
 import com.justonetech.biz.domain.OaWorkWatchItem;
+import com.justonetech.biz.manager.DocumentManager;
 import com.justonetech.biz.manager.OaFgldManager;
 import com.justonetech.biz.manager.OaTaskManager;
 import com.justonetech.biz.utils.Constants;
@@ -32,8 +33,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.sql.Date;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 
@@ -47,6 +46,9 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
 
     @Autowired
     private SysUserManager sysUserManager;
+
+    @Autowired
+    private DocumentManager documentManager;
 
     @Autowired
     private OaFgldManager oaFgldManager;
@@ -102,15 +104,23 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
             SysDept loginUsrDept = sysUserManager.getSysUser().getPerson().getDept();
             String loginUsrDeptName = loginUsrDept != null ? JspHelper.getString(loginUsrDept.getName()) : "";
 //            String fglgOwningDepts = oaFgldManager.getManagerPersonAndDepts(sysUserManager.getSysUser())[0];
-            boolean isLoginUsrFgld = oaFgldManager.getAuditUserName(null, sysUserManager.getSysUser().getLoginName()) != null;
-//            boolean isLoginUsrTopLeader = StringHelper.equals(sysUserManager.getSysUser().getLoginName(), oaFgldManager.getTopLeaderByRole(sysUserManager.getSysUser().getId()));//getTopLeader()
+            //判断主任
             boolean isLoginUsrTopLeader = oaFgldManager.getTopLeaderByRole(sysUserManager.getSysUser().getId()).contains(sysUserManager.getSysUser().getLoginName());//getTopLeader()
+//            boolean isLoginUsrTopLeader = StringHelper.equals(sysUserManager.getSysUser().getLoginName(), oaFgldManager.getTopLeaderByRole(sysUserManager.getSysUser().getId()));//getTopLeader()
+            //判断分管领导
+            boolean isLoginUsrFgld = oaFgldManager.getAuditUserName(null, sysUserManager.getSysUser().getLoginName()) != null;
+            //判断办公室主任
+            boolean isLoginUsrOfficeLeader = oaFgldManager.getOfficeLeaderByRole(sysUserManager.getSysUser().getId()).contains(sysUserManager.getSysUser().getLoginName());
+            System.out.println("isLoginUsrTopLeader    isLoginUsrFgld       isLoginUsrOfficeLeader      @@@@@@@@@@  " + isLoginUsrTopLeader + "\t" + isLoginUsrFgld + "\t" + isLoginUsrOfficeLeader);
             Page pageModel = new Page(page, rows, true);
             String hql = "from OaWorkWatch where 1 = 1 ";
-            //分管领导  主任 可以查看所有的数据，其他角色按照所属科室过滤记录
-            if (!isLoginUsrFgld && !isLoginUsrTopLeader) {
+            //分管领导(fgld)  主任(topLeader)  办公室主任(deptLeader) 可以查看所有的数据，其他角色按照所属科室过滤记录
+            if (!(isLoginUsrTopLeader || isLoginUsrFgld || isLoginUsrOfficeLeader)) {
                 hql = hql.concat(" and reportDept = '" + loginUsrDeptName + "' ");
             }
+            /*if (!isLoginUsrFgld && !isLoginUsrTopLeader) {
+                hql = hql.concat(" and reportDept = '" + loginUsrDeptName + "' ");
+            }*/
             /*if (StringHelper.isNotEmpty(fglgOwningDepts)) {
                 //分管领导权限
                 hql = hql.concat("and reportPerson like '%" + JspHelper.getString(sysUserManager.getSysUser().getPerson().getName()) + "%' and instr(\'" + fglgOwningDepts + "\', reportDept) > 0 ");
@@ -143,7 +153,7 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
         oaWorkWatch.setStatus(OaWorkWatchStatus.STATUS_EDIT.getCode());
         SysUser sysUser = sysUserManager.getSysUser();
         oaWorkWatch.setReportUser(sysUser.getLoginName());
-        oaWorkWatch.setReportPerson(sysUser.getPerson().getName());//
+//        oaWorkWatch.setReportPerson(sysUser.getPerson().getName());
         //获取登录人的部门
         SysDept dept = sysUser.getPerson().getDept();
         oaWorkWatch.setReportDept(dept.getName());
@@ -164,6 +174,7 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
     public String modify(Model model, Long id) {
         OaWorkWatch oaWorkWatch = oaWorkWatchService.get(id);
         model.addAttribute("bean", oaWorkWatch);
+        model.addAttribute("uploadButton", documentManager.getUploadButtonForMulti(documentManager.getDefaultXmlConfig(), OaWorkWatch.class.getSimpleName(), documentManager.getDocDocument(oaWorkWatch.getDocumentId()), sysUserManager.getSysUser().getId(), null, null));
         filterPrivileges(model);
         return "view/oa/oaWorkWatch/input";
     }
@@ -179,6 +190,7 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
     public String audit(Model model, Long id) {
         OaWorkWatch oaWorkWatch = oaWorkWatchService.get(id);
         model.addAttribute("bean", oaWorkWatch);
+        model.addAttribute("uploadButton", documentManager.getUploadButtonForMulti(documentManager.getDefaultXmlConfig(), OaWorkWatch.class.getSimpleName(), documentManager.getDocDocument(oaWorkWatch.getDocumentId()), sysUserManager.getSysUser().getId(), null, null));
         filterPrivileges(model);
         return "view/oa/oaWorkWatch/audit";
     }
@@ -195,6 +207,7 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
         OaWorkWatch oaWorkWatch = oaWorkWatchService.get(id);
         filterPrivileges(model);
         model.addAttribute("bean", oaWorkWatch);
+        model.addAttribute("downloadButton", documentManager.getDownloadButton(oaWorkWatch.getDocumentId()));
         return "view/oa/oaWorkWatch/view";
     }
 
@@ -228,13 +241,13 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
     @RequestMapping
     public void save(HttpServletResponse response, @ModelAttribute("bean") OaWorkWatch entity, HttpServletRequest request, Integer status) throws Exception {
         try {
-            SysUser sysUser = sysUserManager.getSysUser();
             OaWorkWatch target;
+            SysUser sysUser = sysUserManager.getSysUser();
             if (entity.getId() != null) {
                 target = oaWorkWatchService.get(entity.getId());
                 ReflectionUtils.copyBean(entity, target, new String[]{
                         "reportDept",
-                        "reportPerson",
+//                        "reportPerson",
                         "bgsOpinion"
                 });
                 target.setReportUser(sysUser.getDisplayName());
@@ -250,6 +263,10 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
                 if (status == OaWorkWatchStatus.STATUS_B_PASS.getCode()) {
                     target.setEndDate(new Date(System.currentTimeMillis()));
                 }
+            }
+            String docId = request.getParameter("docId");
+            if (StringHelper.isNotEmpty(docId)) {
+                target.setDocumentId(JspHelper.getLong(docId));
             }
             oaWorkWatchService.save(target);
             Set<OaWorkWatchItem> oaWorkWatchItems = target.getOaWorkWatchItems();
@@ -301,7 +318,7 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
      */
     @SuppressWarnings("unchecked")
     @RequestMapping
-    public void saveAudit(HttpServletResponse response, @ModelAttribute("bean") OaWorkWatch entity, Integer status) throws Exception {
+    public void saveAudit(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("bean") OaWorkWatch entity, Integer status) throws Exception {
         try {
             OaWorkWatch target;
             if (entity.getId() != null) {
@@ -317,6 +334,10 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
             if (status == OaWorkWatchStatus.STATUS_ZR_PASS.getCode() || status == OaWorkWatchStatus.STATUS_ZR_BACK.getCode()) {
                 target.setZrAuditTime(new Timestamp(System.currentTimeMillis()));
                 target.setZrAuditUser(sysUser.getDisplayName());
+            }
+            String docId = request.getParameter("docId");
+            if (StringHelper.isNotEmpty(docId)) {
+                target.setDocumentId(JspHelper.getLong(docId));
             }
             oaWorkWatchService.save(target);
         } catch (Exception e) {
@@ -336,7 +357,7 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
         model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.OA_WORK_WATCH_EDIT));//编辑
         model.addAttribute("canEdit_ZR", sysUserManager.hasPrivilege(PrivilegeCode.OA_WORK_WATCH_AUDIT_ZR));//主任审核
         model.addAttribute("canEdit_KZ", sysUserManager.hasPrivilege(PrivilegeCode.OA_WORK_WATCH_AUDIT_KZ));//科长上报
-        model.addAttribute("canEdit_B", sysUserManager.hasPrivilege(PrivilegeCode.OA_WORK_WATCH_AUDIT_B));//办公室核实
+        model.addAttribute("canEdit_B", sysUserManager.hasPrivilege(PrivilegeCode.OA_WORK_WATCH_AUDIT_B));//办公室核实  即 办公室主任核实
         model.addAttribute("STATUS_EDIT", OaWorkWatchStatus.STATUS_EDIT.getCode());//填写
         model.addAttribute("STATUS_SUBMIT", OaWorkWatchStatus.STATUS_SUBMIT.getCode());//提交
         model.addAttribute("STATUS_ZR_PASS", OaWorkWatchStatus.STATUS_ZR_PASS.getCode());//主任审核通过
@@ -346,14 +367,15 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
         model.addAttribute("STATUS_B_BACK", OaWorkWatchStatus.STATUS_B_BACK.getCode());//办公室核实退回
         //科长身份验证
         model.addAttribute("IS_LOGIN_USR_DEPT_LEADER", StringHelper.equals(sysUserManager.getSysUser().getLoginName(), oaFgldManager.getDeptLeaderByRole(sysUserManager.getSysUser().getLoginName())));//oaFgldManager.getDeptLeader
-        SysDept loginUsrDept = sysUserManager.getSysUser().getPerson().getDept();
-        List<SysUser> loginUsrDeptUsrs = loginUsrDept != null ? sysUserManager.getDeptUsers(loginUsrDept) : new ArrayList<SysUser>();
-        StringBuilder loginUsrDeptUsrNames = new StringBuilder();
-        for (SysUser loginUsrDeptUsr : loginUsrDeptUsrs) {
-            loginUsrDeptUsrNames.append(JspHelper.getString(loginUsrDeptUsr.getLoginName()).concat(loginUsrDeptUsrs.indexOf(loginUsrDeptUsr) != loginUsrDeptUsrs.size() - 1 ? "," : ""));
-        }
-        //科室下所有科员
-        model.addAttribute("loginUsrDeptUsrNames", loginUsrDeptUsrNames.toString());
+        //不过滤非本科室科员上报数据（即允许跨科室科员代报数据）
+//        SysDept loginUsrDept = sysUserManager.getSysUser().getPerson().getDept();
+//        List<SysUser> loginUsrDeptUsrs = loginUsrDept != null ? sysUserManager.getDeptUsers(loginUsrDept) : new ArrayList<SysUser>();
+//        StringBuilder loginUsrDeptUsrNames = new StringBuilder();
+//        for (SysUser loginUsrDeptUsr : loginUsrDeptUsrs) {
+//            loginUsrDeptUsrNames.append(JspHelper.getString(loginUsrDeptUsr.getLoginName()).concat(loginUsrDeptUsrs.indexOf(loginUsrDeptUsr) != loginUsrDeptUsrs.size() - 1 ? "," : ""));
+//        }
+//        //科室下所有科员
+//        model.addAttribute("loginUsrDeptUsrNames", loginUsrDeptUsrNames.toString());
     }
 
     /**

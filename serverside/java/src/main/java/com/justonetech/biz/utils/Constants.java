@@ -15,6 +15,7 @@ public class Constants {
     public static final String SYS_DEPT_OWNER = "OWNER";  //业主单位代码
     public static final String SYS_DEPT_LEADER_NAME = "科长";  //各科室科长
     public static final String SYS_TOP_LEADER_NAME = "主任";  //建管署主任
+    public static final String SYS_OFFICE_LEADER_NAME = "办公室主任";  //建管署办公室主任
 
     public static final String GRID_SQL_KEY = "gsk";  //excel导出时将sql放入session所用的key
 
