@@ -101,37 +101,38 @@
                     <td style="width:25%">工作内容</td>
                     <td style="width:20%">工作进度</td>
                     <td style="width:10%">经办人</td>
-                    <c:if test="${empty oaWorkPlanItems !=null}">
-                    <c:forEach items="${oaWorkPlanItems}" var="item">
-                <tr class="tr_light">
-                    <td style="text-align: center">
-                            ${item.orderNo}
-                        <input type="hidden" name="orderNo" value="${item.orderNo}">
-                    </td>
-
-                    <td style="text-align: center">
-                            ${item.dutyPerosn}
-                        <input type="hidden" name="dutyPerosn" value="${item.dutyPerosn}">
-                    </td>
-
-                    <td style="text-align: center;">
-                        <span style="color: red;">${item.keyWork} </span>
-                        <input type="hidden" name="keyWork" value="${item.keyWork}">
-                    </td>
-                    <td style="text-align: left;">
-                        <sys:toHtml>${item.content}</sys:toHtml>
-                        <input type="hidden" name="content" value="${item.content}">
-                    </td>
-                    <td style="text-align: left;">
-                        <sys:toHtml>${item.schedule}</sys:toHtml>
-                        <input type="hidden" name="schedule" value="${item.schedule}">
-                    </td>
-                    <td style="text-align: center">
-                            ${item.jbr}
-                        <input type="hidden" name="jbr" value="${item.jbr}">
-                    </td>
                 </tr>
-                </c:forEach>
+                <c:if test="${empty oaWorkPlanItems !=null}">
+                    <c:forEach items="${oaWorkPlanItems}" var="item">
+                        <tr class="tr_light">
+                            <td style="text-align: center">
+                                    ${item.orderNo}
+                                <input type="hidden" name="orderNo" value="${item.orderNo}">
+                            </td>
+
+                            <td style="text-align: center">
+                                    ${item.dutyPerosn}
+                                <input type="hidden" name="dutyPerosn" value="${item.dutyPerosn}">
+                            </td>
+
+                            <td style="text-align: center;">
+                                <span style="color: red;">${item.keyWork} </span>
+                                <input type="hidden" name="keyWork" value="${item.keyWork}">
+                            </td>
+                            <td style="text-align: left;">
+                                <sys:toHtml>${item.content}</sys:toHtml>
+                                <input type="hidden" name="content" value="${item.content}">
+                            </td>
+                            <td style="text-align: left;">
+                                <sys:toHtml>${item.schedule}</sys:toHtml>
+                                <input type="hidden" name="schedule" value="${item.schedule}">
+                            </td>
+                            <td style="text-align: center">
+                                    ${item.jbr}
+                                <input type="hidden" name="jbr" value="${item.jbr}">
+                            </td>
+                        </tr>
+                    </c:forEach>
                 </c:if>
             </table>
         </fieldset>
