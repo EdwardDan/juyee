@@ -2,7 +2,7 @@
 <%@ include file="/common/taglibs.jsp" %>
 <link href="${themePath}/style_index.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript">
-    <c:if test="${!isRegPerson}">
+    <c:if test="${flag}">
     //页面初始化加载各模块数据
     $(function () {
         loadForTask();
@@ -65,6 +65,9 @@
 </script>
 
 <div style="width:100%;height:auto;padding-top:0;overflow-y:auto;min-height:450px;" id="mainId">
+    <c:if test="${!flag}">
+        <span style="font-size: xx-large">欢迎使用本系统!</span>
+    </c:if>
     <table border="0" cellpadding="0" cellspacing="0" width="100%" align="center">
         <tr>
             <td valign="top">
@@ -130,24 +133,26 @@
 
                 <!-- main_center end -->
             </td>
-            <td width="255" valign="top" bgcolor="#eef7fd">
+            <td width="255" valign="top">
                 <div style="height: 5px"></div>
                 <!-- msg begin -->
-                <table width="240" border="0" align="center" cellpadding="0" cellspacing="0">
-                    <tr>
-                        <td><img src="${themePath}/index_new/dbsx.jpg" width="240" height="37"/></td>
-                    </tr>
-                    <tr>
-                        <td align="center" id="msgDivId" height="120" class="ggl">
-                            <!--  msg content begin -->
+                <c:if test="${flag}">
+                    <table width="240" border="0" align="center" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td><img src="${themePath}/index_new/dbsx.jpg" width="240" height="37"/></td>
+                        </tr>
+                        <tr>
+                            <td align="center" id="msgDivId" height="120" class="ggl">
+                                <!--  msg content begin -->
 
-                            <!--  msg content end -->
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><img src="${themePath}/index_new/ggl3.jpg" width="240" height="9"/></td>
-                    </tr>
-                </table>
+                                <!--  msg content end -->
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><img src="${themePath}/index_new/ggl3.jpg" width="240" height="9"/></td>
+                        </tr>
+                    </table>
+                </c:if>
                 <!-- msg end -->
 
                 <div class="index_space"></div>

@@ -1,6 +1,7 @@
 package com.justonetech.biz.controller;
 
 import com.justonetech.biz.domain.OaPublicInfo;
+import com.justonetech.biz.domain.ProjRelatePerson;
 import com.justonetech.biz.manager.*;
 import com.justonetech.biz.utils.Constants;
 import com.justonetech.biz.utils.enums.Platform;
@@ -8,6 +9,7 @@ import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.utils.CryptUtil;
 import com.justonetech.core.utils.DateTimeHelper;
 import com.justonetech.system.domain.SysMenu;
+import com.justonetech.system.domain.SysPerson;
 import com.justonetech.system.domain.SysUser;
 import com.justonetech.system.manager.SimpleQueryManager;
 import com.justonetech.system.manager.SysMenuManager;
@@ -151,8 +153,20 @@ public class MainPageController extends BaseCRUDActionController {
      */
     @RequestMapping
     public String main(Model model) {
+        SysUser sysUser = sysUserManager.getSysUser();
+        boolean flag = true;
         //是否外网用户
-        model.addAttribute("isRegPerson", sysUserManager.getSysUser().getRegPerson() != null);
+        if (null != sysUser.getRegPerson()) {
+            flag = false;
+        }
+        //是否是建设单位用户
+        if (null != sysUser.getPerson()) {
+            Set<ProjRelatePerson> projRelatePersons = sysUser.getPerson().getProjRelatePersons();
+            if (projRelatePersons.size() > 0) {
+                flag = false;
+            }
+        }
+        model.addAttribute("flag", flag);
 
         //公共信息
         model.addAttribute("code_policy", Constants.OA_PUBLIC_INFO_TYPE_POLICY);    //政策法规

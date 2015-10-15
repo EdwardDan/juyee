@@ -170,10 +170,11 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
         model.addAttribute("endMinute", DateTimeHelper.getMinuteSelectOptions(JspHelper.getString(cal.get(Calendar.MINUTE))));
 
         //当前用户的部门/名字
-        if (sysUserManager.getSysUser() != null && sysUserManager.getSysUser().getPerson() != null) {
-            oaCar.setApplyDept(sysUserManager.getSysUser().getPerson().getDept());
+        SysUser sysUser = sysUserManager.getSysUser();
+        if (null != sysUser.getPerson()) {
+            oaCar.setApplyDept(sysUser.getPerson().getDept());
         }
-        oaCar.setApplyUser(sysUserManager.getSysUser());
+        oaCar.setApplyUser(sysUser);
 
         //选择车辆
         List<SysCodeDetail> carList = sysCodeManager.getCodeListByCode(Constants.OA_CAR_SELECT);
@@ -362,27 +363,26 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
             target.setCar(carDetail);
 
             //保存审核人
-            if (target.getStatus() == OaCarStatus.STATUS_BRANCH_PASS.getCode() || target.getStatus() == OaCarStatus.STATUS_BRANCH_BACK.getCode()) {
+            Integer status = target.getStatus();
+            if (status == OaCarStatus.STATUS_BRANCH_PASS.getCode() || status == OaCarStatus.STATUS_BRANCH_BACK.getCode()) {
                 target.setKzAuditUser(sysUserManager.getSysUser());
                 target.setKzAuditTime(new Timestamp(System.currentTimeMillis()));
-            } else if (target.getStatus() == OaCarStatus.STATUS_MAIN_PASS.getCode() || target.getStatus() == OaCarStatus.STATUS_MAIN_PASS.getCode()) {
+            } else if (status == OaCarStatus.STATUS_MAIN_PASS.getCode() || status == OaCarStatus.STATUS_MAIN_PASS.getCode()) {
                 target.setZrAuditUser(sysUserManager.getSysUser());
                 target.setZrAuditTime(new Timestamp(System.currentTimeMillis()));
             }
 
             oaCarService.save(target);
-
             //创建提醒消息
-            if (target.getStatus() == OaCarStatus.STATUS_MAIN_BACK.getCode() ||
-                    target.getStatus() == OaCarStatus.STATUS_BRANCH_BACK.getCode() || target.getStatus() == OaCarStatus.STATUS_MAIN_PASS.getCode()) {
+            if (status == OaCarStatus.STATUS_MAIN_BACK.getCode() || status == OaCarStatus.STATUS_BRANCH_BACK.getCode() || status == OaCarStatus.STATUS_MAIN_PASS.getCode() || status == OaCarStatus.STATUS_BRANCH_PASS.getCode()) {
                 createOaTask(target);
 
                 //发送信息提醒
-                if (target.getStatus() == OaCarStatus.STATUS_MAIN_BACK.getCode() || target.getStatus() == OaCarStatus.STATUS_BRANCH_BACK.getCode()) {
+                if (status == OaCarStatus.STATUS_MAIN_BACK.getCode() || status == OaCarStatus.STATUS_BRANCH_BACK.getCode()) {
                     msgMessageManager.sendSms(target.getApplyUser().getDisplayName() + "：你的车辆申请已被退回，请登录系统查看。", target.getApplyUser().getPerson().getMobile());
                 }
 
-                if (target.getStatus() == OaCarStatus.STATUS_CAR_SCHEDULE.getCode()) {
+                if (status == OaCarStatus.STATUS_CAR_SCHEDULE.getCode()) {
                     String content = target.getApplyUser().getDisplayName() + "：你的车辆申请已通过。车牌：" + target.getCar().getName();
                     //判断司机是否存在
                     if (target.getDriverPerson() != null) {
@@ -428,8 +428,8 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
     /**
      * 整合传递数据
      *
-     * @param model
-     * @param oaCar
+     * @param model .
+     * @param oaCar .
      */
     public void modelInfo(Model model, OaCar oaCar) {
         //处理其他业务逻辑
@@ -449,7 +449,7 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
     /**
      * 权限控制
      *
-     * @param model
+     * @param model  .
      */
     public void modelStatus(Model model) {
         model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.OA_CAR_EDIT));
@@ -474,54 +474,62 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
      * @throws Exception .
      */
     public void createOaTask(OaCar data) throws Exception {
-        int Status = data.getStatus();
+        int status = data.getStatus();
+        String simpleName = OaCar.class.getSimpleName();
         //创建任务
-        String title = oaTaskManager.getTaskTitle(data, OaCar.class.getSimpleName());
+        String title = oaTaskManager.getTaskTitle(data, simpleName);
         Set<Long> managers = new HashSet<Long>();
-        //科长和办公室主任在提交后收到待办提醒
-        if (Status == OaCarStatus.STATUS_SUBMIT.getCode()) {
-            //获取科长
-            String privilegeCodeKZ = PrivilegeCode.OA_CAR_AUDIT_KZ;
-            //获取办公室主任
-            String privilegeCodeZR = PrivilegeCode.OA_CAR_AUDIT_ZR;
-            Set<Long> managersKZ = sysUserManager.getUserIdsByPrivilegeCode(privilegeCodeKZ);
-            Set<Long> managersZR = sysUserManager.getUserIdsByPrivilegeCode(privilegeCodeZR);
-
-            managers.addAll(managersKZ);
+        if (status == OaCarStatus.STATUS_SUBMIT.getCode()) {//当前用户在提交后科长收到待办提醒
+            SysUser kz = sysUserManager.getDeptLeaderByRole(sysUserManager.getSysUser().getLoginName());
+            //获取有科长审核权限的用户
+            Set<Long> managersKZ = sysUserManager.getUserIdsByPrivilegeCode(PrivilegeCode.OA_CAR_AUDIT_KZ);
+            if (null != kz && managersKZ.contains(kz.getId())) {
+                managers.add(kz.getId());
+            }
+            if (managers.size() > 0) {
+                oaTaskManager.createTask(simpleName, data.getId(), title, managers, false, null, null);
+            }
+        } else if (status == OaCarStatus.STATUS_BRANCH_PASS.getCode()) {//科长在提交后办公室主任收到待办提醒
+            title = oaTaskManager.getTaskTitle(data, simpleName + "_KZ_Pass");
+            //获取有办公室主任权限的用户
+            Set<Long> managersZR = sysUserManager.getUserIdsByPrivilegeCode(PrivilegeCode.OA_CAR_AUDIT_ZR);
             managers.addAll(managersZR);
             if (managers.size() > 0) {
-                oaTaskManager.createTask(OaCar.class.getSimpleName(), data.getId(), title, managers, false, null, null);
+                oaTaskManager.createTask(simpleName + "_KZ_Pass", data.getId(), title, managers, false, null, null);
             }
-        }
-        //退回修改，申请人收到待办提醒
-        if (Status == OaCarStatus.STATUS_BRANCH_BACK.getCode() || Status == OaCarStatus.STATUS_MAIN_BACK.getCode()) {
-            title = oaTaskManager.getTaskTitle(data, OaCar.class.getSimpleName() + "_Back");
+        } else if (status == OaCarStatus.STATUS_BRANCH_BACK.getCode() || status == OaCarStatus.STATUS_MAIN_BACK.getCode()) { //退回修改时由申请人收到待办提醒
+            String msg;
+            if (status == OaCarStatus.STATUS_BRANCH_BACK.getCode()) {
+                msg = "_KZ_Back";
+            } else {
+                msg = "_BGS_Back";
+            }
+            title = oaTaskManager.getTaskTitle(data, simpleName + msg);
             SysUser applyUser = data.getApplyUser();
             if (null != applyUser) {
                 managers.add(applyUser.getId());
             }
             if (managers.size() > 0) {
-                oaTaskManager.createTask(OaCar.class.getSimpleName(), data.getId(), title, managers, false, null, null);
+                oaTaskManager.createTask(simpleName + msg, data.getId(), title, managers, false, null, null);
             }
-        }
-        //主任审核通过后，发给办公室处理人员和申请人待办事项
-        if (Status == OaCarStatus.STATUS_BRANCH_PASS.getCode() || Status == OaCarStatus.STATUS_MAIN_PASS.getCode()) {
-            title = oaTaskManager.getTaskTitle(data, OaCar.class.getSimpleName() + "_Pass");
+        } else if (status == OaCarStatus.STATUS_MAIN_PASS.getCode()) {//办公室主任审核通过给申请人和调度人员发待办任务
+            title = oaTaskManager.getTaskTitle(data, simpleName + "_BGS_Pass");
             SysUser applyUser = data.getApplyUser();
-            SysPerson dealPerson = data.getDriverPerson();
             if (null != applyUser) {
                 managers.add(applyUser.getId());
             }
             //司机发送信息
-            if (dealPerson != null && dealPerson.getSysUsers() != null && dealPerson.getSysUsers().size() > 0) {
+            SysPerson dealPerson = data.getDriverPerson();
+            if (null != dealPerson && null != dealPerson.getSysUsers() && dealPerson.getSysUsers().size() > 0) {
                 dealPerson.getSysUsers();
                 for (SysUser sysUser : dealPerson.getSysUsers()) {
                     managers.add(sysUser.getId());
                 }
             }
-
+            Set<Long> managersDD = sysUserManager.getUserIdsByPrivilegeCode(PrivilegeCode.OA_CAR_AUDIT_CLDD);
+            managers.addAll(managersDD);
             if (managers.size() > 0) {
-                oaTaskManager.createTask(OaCar.class.getSimpleName(), data.getId(), title, managers, false, null, null);
+                oaTaskManager.createTask(simpleName + "_BGS_Pass", data.getId(), title, managers, false, null, null);
             }
         }
     }

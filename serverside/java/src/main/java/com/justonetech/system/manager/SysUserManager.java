@@ -418,4 +418,45 @@ public class SysUserManager {
         }
         return ret;
     }
+
+    /**
+     * 根据当前登录用户名获取科长
+     *
+     * @param loginName . 。
+     * @return 。.
+     */
+    public SysUser getDeptLeaderByRole(String loginName) {
+        SysUser sysUser = getSysUser(loginName);
+        String deptName = sysUser.getPerson().getDeptName();
+
+        String hql = "select sur from SysUserRole sur left join sur.role sysrole where sysrole.code like '%kz%' or sysrole.roleName like '%" + Constants.SYS_DEPT_LEADER_NAME + "%' ";
+        List<SysUserRole> sysUserRoles = sysUserRoleService.findByQuery(hql);
+        SysUser returnUser = null;
+        if (null != sysUserRoles && sysUserRoles.size() > 0) {
+            for (SysUserRole userRole : sysUserRoles) {
+                SysDept dept = userRole.getUser().getPerson().getDept();
+                if (dept.getName().equals(deptName)) {
+                    returnUser = userRole.getUser();
+                }
+            }
+        }
+        return returnUser;
+    }
+
+    /**
+     * 通过当前用户的角色判断其是否扮演办公室主任
+     *
+     * @return .
+     */
+    public  Set<Long> getOfficeLeaderByRole() {
+        Set<Long> managers = new HashSet<Long>();
+        String hql = "select sur from SysUserRole sur left join sur.role sysrole where sysrole.code = 'bgszr' or sysrole.roleName = '" + Constants.SYS_OFFICE_LEADER_NAME + "' ";
+        List<SysUserRole> sysUserRoles = sysUserRoleService.findByQuery(hql);
+        if (null!=sysUserRoles&&sysUserRoles.size()>0) {
+            for (SysUserRole userRole : sysUserRoles) {
+                managers.add(userRole.getId());
+            }
+        }
+        return managers;
+    }
 }

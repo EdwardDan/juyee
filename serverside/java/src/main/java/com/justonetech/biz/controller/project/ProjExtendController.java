@@ -9,6 +9,7 @@ import com.justonetech.biz.daoservice.ProjInfoService;
 import com.justonetech.biz.domain.ProjExtend;
 import com.justonetech.biz.domain.ProjExtendCost;
 import com.justonetech.biz.domain.ProjExtendSchedule;
+import com.justonetech.biz.domain.ProjRelatePerson;
 import com.justonetech.biz.manager.ProjectRelateManager;
 import com.justonetech.biz.utils.Constants;
 import com.justonetech.core.controller.BaseCRUDActionController;
@@ -97,6 +98,15 @@ public class ProjExtendController extends BaseCRUDActionController<ProjExtend> {
     @RequestMapping
     public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session, String flag, HttpServletRequest request) {
         try {
+            boolean isJsdw = true;
+            SysUser sysUser = sysUserManager.getSysUser();
+            //是否是建设单位用户
+            if (null != sysUser.getPerson()) {
+                Set<ProjRelatePerson> projRelatePersons = sysUser.getPerson().getProjRelatePersons();
+                if (projRelatePersons.size() > 0) {
+                    isJsdw = false;
+                }
+            }
             //按项目屬性状态类别查询数据
             String projproperty = request.getParameter("projproperty");//项目性质
             String ismajor = request.getParameter("ismajor");//是否重大
@@ -107,6 +117,9 @@ public class ProjExtendController extends BaseCRUDActionController<ProjExtend> {
             if (!StringHelper.isEmpty(flag) && "qqdj".equals(flag)) {
                 hql += " and packageAttr like '%区区对接%' ";
             } else {
+                hql += " and packageAttr is null ";
+            }
+            if (!isJsdw) {
                 hql += projectRelateManager.getRelateProjectHql("id");
             }
             //增加项目过滤
@@ -123,7 +136,6 @@ public class ProjExtendController extends BaseCRUDActionController<ProjExtend> {
                 hql += " and category.name = '" + projcategory + "' ";
             }
             hql += " order by no asc,id asc";
-
             //执行查询
             QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);
             String query = queryTranslate.toString();
