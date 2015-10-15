@@ -73,22 +73,24 @@
     <div class="form_div">
         <table cellpadding="0" cellspacing="0" class="form_table">
             <tr class="tr_light">
-                <td class="form_label_right">上报科室：</td>
-                <td class="form_content">
+                <td class="form_label" style="width: 15%">责任科室：</td>
+                <td class="form_content" style="width: 35%">
                     <form:input path="reportDept" cssClass="input_text" readonly="true"/>
                     <c:if test="${bean.status == STATUS_EDIT}">
                         <input type="button" value=" " class="button_select"
                                onclick="selectSysDept('','reportDept');" title="点击选择科室">
                     </c:if>
                 </td>
-                <td class="form_label_right">分管领导：</td>
-                <td class="form_content">
-                    <form:input path="reportPerson" cssClass="input_text" readonly="true"/>
-                    <c:if test="${bean.status == STATUS_EDIT}">
-                        <input type="button" value=" " class="button_select"
-                               onclick="selectSysPerson('','reportPerson');" title="点击选择人员">
-                    </c:if>
-                </td>
+                <td class="form_label" style="width: 15%">附件：</td>
+                <td class="form_content" style="width: 35%">${uploadButton}</td>
+                <%--<td class="form_label_right">分管领导：</td>--%>
+                <%--<td class="form_content">--%>
+                    <%--<form:input path="reportPerson" cssClass="input_text" readonly="true"/>--%>
+                    <%--<c:if test="${bean.status == STATUS_EDIT}">--%>
+                        <%--<input type="button" value=" " class="button_select"--%>
+                               <%--onclick="selectSysPerson('','reportPerson');" title="点击选择人员">--%>
+                    <%--</c:if>--%>
+                <%--</td>--%>
             </tr>
         </table>
         <table cellpadding="0" cellspacing="0" border="1" class="table_thin_line" style="text-align: center;width: 98%;"
@@ -139,8 +141,7 @@
                         <select name="actualDesc" disabled>
                             <option value="">==请选择==</option>
                             <option value="1" <c:if test="${item.actualDesc =='1' || item.actualDesc ==''}"> selected </c:if> >完成</option>
-                            <option value="2" <c:if test="${item.actualDesc =='2'}">selected </c:if> >延期</option>
-                            <option value="3" <c:if test="${item.actualDesc =='3'}">selected </c:if> >调整</option>
+                            <option value="0" <c:if test="${item.actualDesc =='0'}">selected </c:if> >未完成</option>
                         </select>
                     </td>
                 </tr>
@@ -169,8 +170,7 @@
                     <select name="actualDesc" disabled>
                         <option value="">==请选择==</option>
                         <option value="1" <c:if test="${item.actualDesc =='1'}"> selected </c:if> >完成</option>
-                        <option value="2" <c:if test="${item.actualDesc =='2'}">selected </c:if> >延期</option>
-                        <option value="3" <c:if test="${item.actualDesc =='3'}">selected </c:if> >调整</option>
+                        <option value="0" <c:if test="${item.actualDesc =='0'}">selected </c:if> >未完成</option>
                     </select>
                 </td>
             </tr>
@@ -195,7 +195,7 @@
             <div style="height: 10px"></div>
             <fieldset class="form_fieldset" style="width: 96%;">
                 <legend class="form_legend">
-                    办公室核实
+                    杨主任核实
                 </legend>
                 <table cellpadding="0" cellspacing="0" class="form_table" style="text-align: center">
                     <tr class="tr_light">

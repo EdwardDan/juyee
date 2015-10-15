@@ -9,9 +9,9 @@
                 multiselect: true,
                 multiselectWidth: 30,
                 colNames: ['ID',
-                    '上报科室',
+                    '责任科室',
                     '上报人员',
-                    '科室分管领导',
+//                    '科室分管领导',
                     '上报开始时间',
                     '上报结束时间',
                     '状态Id',
@@ -22,7 +22,7 @@
                     {name: 'id', width: 10, align: "center", searchtype: "integer", hidden: true},
                     {name: "reportDept", width: "40", align: "center", searchtype: "string", sortable: true},
                     {name: "createUser", width: "10", align: "center", searchtype: "string", sortable: true, hidden: true},
-                    {name: "reportPerson", width: "40", align: "center", searchtype: "string", sortable: true},
+//                    {name: "reportPerson", width: "40", align: "center", searchtype: "string", sortable: true},
                     {name: "beginDate", width: "40", align: "center", searchtype: "datetime", sortable: true, formatter: 'date', formatoptions: {srcformat: 'Y-m-d', newformat: 'Y-m-d'}},
                     {name: "endDate", width: "40", align: "center", searchtype: "datetime", sortable: true, formatter: 'date', formatoptions: {srcformat: 'Y-m-d', newformat: 'Y-m-d'}},
                     {name: "status", width: "30", align: "center", searchtype: "integer", sortable: true, hidden: true},
@@ -41,7 +41,7 @@
                         var rowData = jQuery("#listGrid").jqGrid('getRowData', id);
                         var status = rowData["status"];
                         var opButton = '<input type="button" value="查看" onclick="doView(' + id + ')" class="button_normal"/> ';
-                        <%-- if (rowData["reportDept"] == "${loginUsrDeptName}") --%>
+                        <%--if (rowData["reportDept"] == "${loginUsrDeptName}")--%>
                         if ('' == status || status == '${STATUS_EDIT}' || status == '${STATUS_ZR_BACK}' || status == '${STATUS_B_BACK}') {
                             if (${canEdit}) {
                                 opButton += '<input type="button" value="编辑" onclick="doEdit(' + id + ')" class="button_normal"/> ';
@@ -52,11 +52,11 @@
                                 opButton += '<input type="button" value="审核" onclick="doAudit(' + id + ')" class="button_normal"/> ';
                             }
                         } else if (status == '${STATUS_ZR_PASS}') {
-                            if (${canEdit_KZ} && ${IS_LOGIN_USR_DEPT_LEADER} && "${loginUsrDeptUsrNames}".indexOf(rowData["createUser"]) > 0) {
+                            if (${canEdit_KZ} && ${IS_LOGIN_USR_DEPT_LEADER}) {
                                 opButton += '<input type="button" value="上报" onclick="doEdit(' + id + ')" class="button_normal"/> ';
                             }
                         } else if (status == '${STATUS_INFO}') {
-                            if (${canEdit_B} && ${canEdit_KZ} && ${IS_LOGIN_USR_DEPT_LEADER}) {
+                            if (${canEdit_B}) {
                                 opButton += '<input type="button" value="核实" onclick="doEdit(' + id + ')" class="button_normal"/> ';
                             }
                         }
@@ -66,8 +66,8 @@
             },
             userOpts: {
                 defaultQuery: { "groupOp": "AND", "rules": [
-                    { "field": "上报科室", "op": "cn", "data": ""},
-                    { "field": "科室分管领导", "op": "cn", "data": ""},
+                    { "field": "责任科室", "op": "cn", "data": ""},
+//                    { "field": "科室分管领导", "op": "cn", "data": ""},
                     { "field": "上报开始时间", "op": "bt", "data": ""},
                     { "field": "上报结束时间", "op": "bt", "data": ""}
                 ]},

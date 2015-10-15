@@ -34,14 +34,16 @@
     <div class="form_div">
         <table cellpadding="0" cellspacing="0" class="form_table">
             <tr class="tr_light">
-                <td class="form_label_right" style="width: 15%;">上报科室：</td>
+                <td class="form_label_right" style="width: 15%;">责任科室：</td>
                 <td class="form_content" style="width: 35%;">
                         ${bean.reportDept}
                 </td>
-                <td class="form_label_right" style="width: 15%;">分管领导：</td>
-                <td class="form_content" style="width: 35%;">
-                        ${bean.reportPerson}
-                </td>
+                <td class="form_label" style="width: 15%">附件：</td>
+                <td class="form_content" style="width: 35%">${uploadButton}</td>
+                <%--<td class="form_label_right" style="width: 15%;">分管领导：</td>--%>
+                <%--<td class="form_content" style="width: 35%;">--%>
+                        <%--${bean.reportPerson}--%>
+                <%--</td>--%>
             </tr>
         </table>
         <table cellpadding="0" cellspacing="0" border="1" class="table_thin_line"
@@ -61,12 +63,9 @@
                     <td>${item.timeNode}</td>
                     <td>${item.reportMethod}</td>
                     <td style="text-align: left;"><sys:toHtml>${item.completeDesc}</sys:toHtml></td>
-                    <td style="<c:if test="${item.actualDesc =='1'}">background-color: green;</c:if>
-                    <c:if test="${item.actualDesc =='2'}">background-color: orange;</c:if>
-                    <c:if test="${item.actualDesc =='3'}">background-color:#808080;</c:if>">
+                    <td style="<c:if test="${item.actualDesc =='1'}">background-color: green;</c:if><c:if test="${item.actualDesc =='0'}">background-color: red;</c:if>">
                         <c:if test="${item.actualDesc =='1'}">完成</c:if>
-                        <c:if test="${item.actualDesc =='2'}">延期</c:if>
-                        <c:if test="${item.actualDesc =='3'}">调整</c:if>
+                        <c:if test="${item.actualDesc =='0'}">未完成</c:if>
                     </td>
                 </tr>
             </c:forEach>
