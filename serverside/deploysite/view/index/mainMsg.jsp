@@ -1,5 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/common/taglibs.jsp" %>
+<script type="text/javascript">
+    var taskCount = ${taskCount};
+    var b = 0;
+    $(function () {
+        if (taskCount > 0) {
+            showTaskPop(taskCount);
+        }
+    });
+</script>
 
 <table width="240" border="0" cellpadding="0" cellspacing="0" class="ggl">
     <tr>

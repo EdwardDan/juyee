@@ -7,8 +7,8 @@
 </style>
 <script type="text/javascript">
     //导出
-    function printItems(btn){
-        window.open( "${ctx}/oaWorkPlan/printExcel.do?id=${bean.id}");
+    function printItems(btn) {
+        window.open("${ctx}/oaWorkPlan/printExcel.do?id=${bean.id}");
     }
 </script>
 <form:form commandName="bean">
@@ -41,31 +41,32 @@
                     <td style="width:25%">工作内容</td>
                     <td style="width:20%">工作进度</td>
                     <td style="width:10%">经办人</td>
-                    <c:if test="${empty oaWorkPlanItems !=null}">
-                    <c:forEach items="${oaWorkPlanItems}" var="item">
-                <tr class="tr_light">
-                    <td style="text-align: center">
-                            ${item.orderNo}
-                    </td>
-
-                    <td style="text-align: center">
-                            ${item.dutyPerosn}
-                    </td>
-
-                    <td style="text-align: center;">
-                        <span style="color: red;">${item.keyWork} </span>
-                    </td>
-                    <td style="text-align: left;">
-                        <sys:toHtml>${item.content}</sys:toHtml>
-                    </td>
-                    <td style="text-align: left;">
-                        <sys:toHtml>${item.schedule}</sys:toHtml>
-                    </td>
-                    <td style="text-align: center">
-                            ${item.jbr}
-                    </td>
                 </tr>
-                </c:forEach>
+                <c:if test="${empty oaWorkPlanItems !=null}">
+                    <c:forEach items="${oaWorkPlanItems}" var="item">
+                        <tr class="tr_light">
+                            <td style="text-align: center">
+                                    ${item.orderNo}
+                            </td>
+
+                            <td style="text-align: center">
+                                    ${item.dutyPerosn}
+                            </td>
+
+                            <td style="text-align: center;">
+                                <span style="color: red;">${item.keyWork} </span>
+                            </td>
+                            <td style="text-align: left;">
+                                <sys:toHtml>${item.content}</sys:toHtml>
+                            </td>
+                            <td style="text-align: left;">
+                                <sys:toHtml>${item.schedule}</sys:toHtml>
+                            </td>
+                            <td style="text-align: center">
+                                    ${item.jbr}
+                            </td>
+                        </tr>
+                    </c:forEach>
                 </c:if>
             </table>
         </fieldset>
@@ -102,7 +103,7 @@
     </div>
     <table cellpadding="5" cellspacing="0" class="form_table">
         <tr class="tr_content">
-            <td> <input type="button" value="导出" class="button_all" onclick="printItems(this)"/>&nbsp;
+            <td><input type="button" value="导出" class="button_all" onclick="printItems(this)"/>&nbsp;
                 <input type="button" value="关闭" class="button_cancel" onclick="closeWindow()">
             </td>
         </tr>
