@@ -10,6 +10,7 @@ import com.justonetech.biz.domain.OaThingsApply;
 import com.justonetech.biz.domain.OaThingsApplyItem;
 import com.justonetech.biz.manager.OaTaskManager;
 import com.justonetech.biz.utils.Constants;
+import com.justonetech.biz.utils.enums.OaCarStatus;
 import com.justonetech.biz.utils.enums.OaThingsApplyStatus;
 import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.orm.hibernate.Page;
@@ -426,48 +427,52 @@ public class OaThingsApplyController extends BaseCRUDActionController<OaThingsAp
      */
     public void createOaTask(OaThingsApply data) throws Exception {
         int Status = data.getStatus();
+        String simpleName = OaThingsApply.class.getSimpleName();
         //创建任务
-        String title = oaTaskManager.getTaskTitle(data, OaThingsApply.class.getSimpleName());
+        String title = oaTaskManager.getTaskTitle(data, simpleName);
         Set<Long> managers = new HashSet<Long>();
         //科长和办公室主任在提交后收到待办提醒
-        if (Status == OaThingsApplyStatus.STATUS_SUBMIT.getCode()) {
+        if (Status == OaThingsApplyStatus.STATUS_SUBMIT.getCode()) { //当前用户在提交后科长收到待办提醒
             //获取科长
-            String privilegeCodeKZ = PrivilegeCode.OA_THINGS_APPLY_AUDIT_KZ;
-            //获取办公室主任
-            String privilegeCodeZR = PrivilegeCode.OA_THINGS_APPLY_AUDIT_ZR;
-            Set<Long> managersKZ = sysUserManager.getUserIdsByPrivilegeCode(privilegeCodeKZ);
-            Set<Long> managersZR = sysUserManager.getUserIdsByPrivilegeCode(privilegeCodeZR);
-
-            managers.addAll(managersKZ);
+            SysUser kz = sysUserManager.getDeptLeaderByRole(sysUserManager.getSysUser().getLoginName());
+            Set<Long> managersKZ = sysUserManager.getUserIdsByPrivilegeCode(PrivilegeCode.OA_THINGS_APPLY_AUDIT_KZ);
+            if (null != kz && managersKZ.contains(kz.getId())) {
+                managers.add(kz.getId());
+            }
+            if (managers.size() > 0) {
+                oaTaskManager.createTask(simpleName, data.getId(), title, managers, false, null, null);
+            }
+        } else if (Status == OaThingsApplyStatus.STATUS_BRANCH_PASS.getCode()) { //科长在提交后办公室主任收到待办提醒
+            title = oaTaskManager.getTaskTitle(data, simpleName + "_KZ_Pass");
+            //获取有办公室主任权限的用户
+            Set<Long> managersZR = sysUserManager.getUserIdsByPrivilegeCode(PrivilegeCode.OA_THINGS_APPLY_AUDIT_ZR);
             managers.addAll(managersZR);
             if (managers.size() > 0) {
-                oaTaskManager.createTask(OaThingsApply.class.getSimpleName(), data.getId(), title, managers, false, null, null);
+                oaTaskManager.createTask(simpleName + "_KZ_Pass", data.getId(), title, managers, false, null, null);
             }
-        }
-        //退回修改，申请人收到待办提醒
-        if (Status == OaThingsApplyStatus.STATUS_BRANCH_BACK.getCode() || Status == OaThingsApplyStatus.STATUS_MAIN_BACK.getCode()) {
-            title = oaTaskManager.getTaskTitle(data, OaThingsApply.class.getSimpleName() + "_Back");
+        } else if (Status == OaThingsApplyStatus.STATUS_BRANCH_BACK.getCode() || Status == OaThingsApplyStatus.STATUS_MAIN_BACK.getCode()) {
+            String msg;
+            if (Status == OaThingsApplyStatus.STATUS_BRANCH_BACK.getCode()) {
+                msg = "_KZ_Back";
+            } else {
+                msg = "_BGS_Back";
+            }
+            title = oaTaskManager.getTaskTitle(data, simpleName + msg);
             SysUser applyUser = data.getApplyUser();
             if (null != applyUser) {
                 managers.add(applyUser.getId());
             }
             if (managers.size() > 0) {
-                oaTaskManager.createTask(OaThingsApply.class.getSimpleName(), data.getId(), title, managers, false, null, null);
+                oaTaskManager.createTask(simpleName + msg, data.getId(), title, managers, false, null, null);
             }
-        }
-        //主任审核通过后，发给办公室处理人员和申请人待办事项
-        if (Status == OaThingsApplyStatus.STATUS_BRANCH_PASS.getCode() || Status == OaThingsApplyStatus.STATUS_MAIN_PASS.getCode()) {
-            title = oaTaskManager.getTaskTitle(data, OaThingsApply.class.getSimpleName() + "_Pass");
+        } else if (Status == OaThingsApplyStatus.STATUS_MAIN_PASS.getCode()) {  //办公室在审核后申请人收到待办提醒
+            title = oaTaskManager.getTaskTitle(data, simpleName + "_BGS_Pass");
             SysUser applyUser = data.getApplyUser();
-            SysUser dealUser = data.getDealUser();
             if (null != applyUser) {
                 managers.add(applyUser.getId());
             }
-            if (null != dealUser) {
-                managers.add(dealUser.getId());
-            }
             if (managers.size() > 0) {
-                oaTaskManager.createTask(OaThingsApply.class.getSimpleName(), data.getId(), title, managers, false, null, null);
+                oaTaskManager.createTask(simpleName + "_BGS_Pass", data.getId(), title, managers, false, null, null);
             }
         }
     }

@@ -415,7 +415,7 @@ public class MainPageController extends BaseCRUDActionController {
         int msgCount = msgMessageManager.getMyMsgs(true).size();
         model.addAttribute("count1", taskCount);
         model.addAttribute("count2", msgCount);
-        model.addAttribute("taskCount", taskCount + msgCount);
+        model.addAttribute("taskCount", taskCount);
 
         return "view/index/mainMsg";
     }

@@ -298,7 +298,7 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
                 }
             }
 
-            if (status.equals(OaWorkWatchStatus.STATUS_SUBMIT.getCode())) {
+            if (status.equals(OaWorkWatchStatus.STATUS_SUBMIT.getCode()) || status.equals(OaWorkWatchStatus.STATUS_INFO.getCode())) {
                 createOaTask(target);
             }
         } catch (Exception e) {
@@ -340,6 +340,7 @@ public class OaWorkWatchController extends BaseCRUDActionController<OaWorkWatch>
                 target.setDocumentId(JspHelper.getLong(docId));
             }
             oaWorkWatchService.save(target);
+            createOaTask(target);
         } catch (Exception e) {
             log.error("error", e);
             super.processException(response, e);

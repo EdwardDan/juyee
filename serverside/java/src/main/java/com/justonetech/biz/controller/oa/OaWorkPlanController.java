@@ -2,27 +2,21 @@ package com.justonetech.biz.controller.oa;
 
 import com.justonetech.biz.core.orm.hibernate.GridJq;
 import com.justonetech.biz.core.orm.hibernate.QueryTranslateJq;
-import com.justonetech.biz.daoservice.DocDocumentService;
 import com.justonetech.biz.daoservice.OaWorkPlanItemService;
 import com.justonetech.biz.daoservice.OaWorkPlanService;
-import com.justonetech.biz.daoservice.OaWorkPlanSumItemService;
-import com.justonetech.biz.domain.OaMeeting;
 import com.justonetech.biz.domain.OaWorkPlan;
 import com.justonetech.biz.domain.OaWorkPlanItem;
-import com.justonetech.biz.manager.*;
+import com.justonetech.biz.manager.OaFgldManager;
+import com.justonetech.biz.manager.OaTaskManager;
 import com.justonetech.biz.utils.Constants;
-import com.justonetech.biz.utils.enums.OaInnerMeetingStatus;
 import com.justonetech.biz.utils.enums.OaWorkPlanStatus;
 import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.orm.hibernate.Page;
 import com.justonetech.core.utils.JspHelper;
 import com.justonetech.core.utils.ReflectionUtils;
-import com.justonetech.core.utils.StringHelper;
 import com.justonetech.system.domain.SysDept;
 import com.justonetech.system.domain.SysUser;
 import com.justonetech.system.manager.ExcelPrintManager;
-import com.justonetech.system.manager.SimpleQueryManager;
-import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
 import com.justonetech.system.utils.PrivilegeCode;
 import org.slf4j.Logger;
@@ -54,21 +48,6 @@ public class OaWorkPlanController extends BaseCRUDActionController<OaWorkPlan> {
     private SysUserManager sysUserManager;
 
     @Autowired
-    private SysCodeManager sysCodeManager;
-
-    @Autowired
-    private ConfigManager configManager;
-
-    @Autowired
-    private DocumentManager documentManager;
-
-    @Autowired
-    private SimpleQueryManager simpleQueryManager;
-
-    @Autowired
-    private DocDocumentService docDocumentService;
-
-    @Autowired
     private ExcelPrintManager excelPrintManager;
 
     @Autowired
@@ -78,16 +57,10 @@ public class OaWorkPlanController extends BaseCRUDActionController<OaWorkPlan> {
     private OaWorkPlanItemService oaWorkPlanItemService;
 
     @Autowired
-    private OaWorkPlanSumItemService oaWorkPlanSumItemService;
-
-    @Autowired
     private OaFgldManager oaFgldManager;
 
     @Autowired
     private OaTaskManager oaTaskManager;
-
-    @Autowired
-    private MsgMessageManager msgMessageManager;
 
     /**
      * 列表显示页面
@@ -130,14 +103,13 @@ public class OaWorkPlanController extends BaseCRUDActionController<OaWorkPlan> {
     public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session) {
         try {
             Page pageModel = new Page(page, rows, true);
-            String deptNames ="";
+            String deptNames = "";
             String hql = "from OaWorkPlan where 1=1";
             //增加自定义查询条件-判断只有编辑权限和科长权限的只能获取本科室数据
             if (!sysUserManager.hasPrivilege(PrivilegeCode.OA_WORK_PLAN_VIEW_ALL)) {//判断是否有查看全部权限
                 if (sysUserManager.hasPrivilege(PrivilegeCode.OA_WORK_PLAN_EDIT) || sysUserManager.hasPrivilege(PrivilegeCode.OA_WORK_PLAN_AUDIZ_KZ)) {
                     hql += " and reportDept = '" + sysUserManager.getSysUser().getPerson().getDeptName() + "'";
-                }
-                else{
+                } else {
                     String[] managerPersonAndDepts = oaFgldManager.getManagerPersonAndDepts(sysUserManager.getSysUser());
                     deptNames = managerPersonAndDepts[0];
                 }
@@ -341,6 +313,7 @@ public class OaWorkPlanController extends BaseCRUDActionController<OaWorkPlan> {
         }
         sendSuccessJSON(response, msg);
     }
+
     /**
      * 导出excel
      *
@@ -348,15 +321,15 @@ public class OaWorkPlanController extends BaseCRUDActionController<OaWorkPlan> {
      * @throws Exception .
      */
     @RequestMapping
-    public void printExcel(HttpServletResponse response,Long id, HttpServletRequest request) throws Exception {
+    public void printExcel(HttpServletResponse response, Long id, HttpServletRequest request) throws Exception {
         //把打印的数据压入map中
         String xlsTemplateName = "OaWorkPlanItem.xls";
         String fileName = "科室一周工作安排.xls";
         Map<String, Object> beans = new HashMap<String, Object>();
-        OaWorkPlan oaWorkPlan =  oaWorkPlanService.get(id);
-        Set<OaWorkPlanItem> oaWorkPlanItemList =oaWorkPlan .getOaWorkPlanItems();
+        OaWorkPlan oaWorkPlan = oaWorkPlanService.get(id);
+        Set<OaWorkPlanItem> oaWorkPlanItemList = oaWorkPlan.getOaWorkPlanItems();
         beans.put("items", oaWorkPlanItemList);
-        beans.put("reportDept",oaWorkPlan.getReportDept());//科室
+        beans.put("reportDept", oaWorkPlan.getReportDept());//科室
         beans.put("workTime", oaWorkPlan.getWorkTime());//工作时间
         //一周工作行合并
         Map<String, Object> mergeMap = new HashMap<String, Object>();
@@ -364,11 +337,12 @@ public class OaWorkPlanController extends BaseCRUDActionController<OaWorkPlan> {
         int startColNo = 0;
         int startRowNo = 2;
         int AddRow = oaWorkPlanItemList.size();//工作行
-        mergerCellsList.add(new int[]{startColNo, startRowNo, startColNo, startRowNo +AddRow-1});
+        mergerCellsList.add(new int[]{startColNo, startRowNo, startColNo, startRowNo + AddRow - 1});
         mergeMap.put("mergerCellsList", mergerCellsList);
         excelPrintManager.printExcel(response, request, OaWorkPlanItem.class.getSimpleName(), xlsTemplateName, beans, fileName, mergeMap);
     }
-     /**
+
+    /**
      * 删除操作
      *
      * @param response .
@@ -394,23 +368,30 @@ public class OaWorkPlanController extends BaseCRUDActionController<OaWorkPlan> {
     public void createOaTask(OaWorkPlan data) throws Exception {
         int status = data.getStatus();
         //创建任务
+        Set<Long> managers = new HashSet<Long>();
         if (status == OaWorkPlanStatus.STATUS_SUBMIT.getCode()) {
+            SysUser kz = sysUserManager.getDeptLeaderByRole(sysUserManager.getSysUser().getLoginName());
             String privilegeCode = PrivilegeCode.OA_WORK_PLAN_AUDIZ_KZ;
-            Set<Long> managers = sysUserManager.getUserIdsByPrivilegeCode(privilegeCode);
+            Set<Long> managersKZ = sysUserManager.getUserIdsByPrivilegeCode(privilegeCode);
+            if (null != kz && managersKZ.contains(kz.getId())) {
+                managers.add(kz.getId());
+            }
             String taskTitle = oaTaskManager.getTaskTitle(data, OaWorkPlan.class.getSimpleName() + "_BRANCH_PASS");
             if (managers.size() > 0) {
                 oaTaskManager.createTask(OaWorkPlan.class.getSimpleName() + "_BRANCH_PASS", data.getId(), taskTitle, managers, false, null, null);
             }
         } else if (status == OaWorkPlanStatus.STATUS_BRANCH_PASS.getCode()) {
             String privilegeCode = PrivilegeCode.OA_WORK_PLAN_AUDIT_FG;
-            Set<Long> managers = sysUserManager.getUserIdsByPrivilegeCode(privilegeCode);
+            Set<Long> managersFG = sysUserManager.getUserIdsByPrivilegeCode(privilegeCode);
+            managers.addAll(managersFG);
             String taskTitle = oaTaskManager.getTaskTitle(data, OaWorkPlan.class.getSimpleName() + "_MAIN_PASS");
             if (managers.size() > 0) {
                 oaTaskManager.createTask(OaWorkPlan.class.getSimpleName() + "_MAIN_PASS", data.getId(), taskTitle, managers, false, null, null);
             }
         } else if (status == OaWorkPlanStatus.STATUS_BRANCH_BACK.getCode() || status == OaWorkPlanStatus.STATUS_MAIN_BACK.getCode()) {
-            String privilegeCode = PrivilegeCode.OA_WORK_PLAN_EDIT;
-            Set<Long> managers = sysUserManager.getUserIdsByPrivilegeCode(privilegeCode);
+            String reportUser = data.getReportUser();
+            SysUser sysUser = sysUserManager.getSysUser(reportUser);
+            managers.add(sysUser.getId());
             String taskTitle = oaTaskManager.getTaskTitle(data, OaWorkPlan.class.getSimpleName());
             if (managers.size() > 0) {
                 oaTaskManager.createTask(OaWorkPlan.class.getSimpleName(), data.getId(), taskTitle, managers, false, null, null);
