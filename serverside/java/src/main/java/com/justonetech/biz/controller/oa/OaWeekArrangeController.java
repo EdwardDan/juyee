@@ -11,6 +11,7 @@ import com.justonetech.system.domain.SysDept;
 import com.justonetech.system.domain.SysUser;
 import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
+import com.justonetech.system.utils.PrivilegeCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,6 +81,7 @@ public class OaWeekArrangeController extends BaseCRUDActionController<OaWeekArra
             }
             c.add(Calendar.DATE, 1);//日历+1
         }
+        model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.OA_WEEKARRANGE_EDIT));
         return "view/oa/oaWeekArrange/init";
     }
 

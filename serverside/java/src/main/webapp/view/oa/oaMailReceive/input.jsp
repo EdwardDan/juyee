@@ -52,7 +52,7 @@
                 <td class="form_label_right" width="15%">收件人：</td>
                 <td class="form_content">
                     &nbsp;<input type="text" id="receivePersons" name="receivePersons" value="${name}"
-                                 class="input_text_long" style="width: 80%"/>
+                                 class="input_text_long" style="width: 50%"/>
                     &nbsp;<input type="hidden" id="receivePersonId" name="receivePersonId" value="${id}"
                                  class="input_text"/>
                     &nbsp;<input type="button" value="通讯录" class="button_normal_long" ${disabled}
@@ -63,7 +63,7 @@
                 <td class="form_label_right" width="15%">抄送人：</td>
                 <td class="form_content">
                     &nbsp;<input type="text" id="ccPersons" name="ccPersons" value="" class="input_text_long"
-                                 style="width: 80%"/>
+                                 style="width: 50%"/>
                     &nbsp;<input type="hidden" id="ccPersonId" name="ccPersonId" value="" class="input_text"/>
                     &nbsp;<input type="button" value="通讯录" class="button_normal_long" ${disabled}
                                  onclick="parent.openWindow('选择用户','${ctx}/oaMailGroupUser/select.do?objId=ccPersonId&objName=ccPersons&tabNo=tab1',false,700,450,null)">

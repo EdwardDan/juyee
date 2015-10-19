@@ -55,7 +55,7 @@
                 <td class="form_label_right" width="15%">收件人：</td>
                 <td class="form_content">
                     &nbsp;<input type="text" id="receivePersons" name="receivePersons" value="" readonly="true"
-                                 class="input_text_long" style="width: 80%"/>
+                                 class="input_text_long" style="width: 50%"/>
                     &nbsp;<input type="hidden" id="receivePersonId" name="receivePersonId" value="" class="input_text"/>
                     &nbsp;<input type="button" value="通讯录" class="button_normal_long"
                                  onclick="parent.openWindow('选择用户','${ctx}/oaMailGroupUser/select.do?objId=receivePersonId&objName=receivePersons&tabNo=tab5',false,700,450,null)"/>
@@ -65,7 +65,7 @@
                 <td class="form_label_right" width="15%">抄送人：</td>
                 <td class="form_content">
                     &nbsp;<input type="text" id="ccPersons" name="ccPersons" value="" readonly="true"
-                                 class="input_text_long" style="width: 80%"/>
+                                 class="input_text_long" style="width: 50%"/>
                     &nbsp;<input type="hidden" id="ccPersonId" name="ccPersonId" value="" class="input_text"/>
                     &nbsp;<input type="button" value="通讯录" class="button_normal_long"
                                  onclick="parent.openWindow('选择用户','${ctx}/oaMailGroupUser/select.do?objId=ccPersonId&objName=ccPersons&tabNo=tab5',false,700,450,null)">
