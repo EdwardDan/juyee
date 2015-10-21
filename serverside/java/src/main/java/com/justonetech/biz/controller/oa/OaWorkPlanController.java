@@ -254,9 +254,9 @@ public class OaWorkPlanController extends BaseCRUDActionController<OaWorkPlan> {
                         "reportPerson",
                         "beginDate",
                         "endDate",
-                        "status",
-                        "kzOpinion",
-                        "fgOpinion",
+                        "status"
+//                        "kzOpinion",
+//                        "fgOpinion",
                 });
 
             } else {
@@ -273,6 +273,8 @@ public class OaWorkPlanController extends BaseCRUDActionController<OaWorkPlan> {
             String[] content = request.getParameterValues("content");
             String[] schedule = request.getParameterValues("schedule");
             String[] jbr = request.getParameterValues("jbr");
+            String kzOpinion = request.getParameter("kzOpinion");
+            String fgOpinion = request.getParameter("fgOpinion");
             if (orderNo != null) {
                 for (int i = 0; i < orderNo.length; i++) {
                     OaWorkPlanItem oaWorkPlanItem = new OaWorkPlanItem();
@@ -289,13 +291,16 @@ public class OaWorkPlanController extends BaseCRUDActionController<OaWorkPlan> {
             Integer status = target.getStatus();
             SysUser sysUser = sysUserManager.getSysUser();
             if (status.equals(OaWorkPlanStatus.STATUS_BRANCH_BACK.getCode()) || status.equals(OaWorkPlanStatus.STATUS_BRANCH_PASS.getCode())) {
+                target.setKzOpinion(kzOpinion);//保存科长审核意见
                 target.setKzAuditTime(new Timestamp(System.currentTimeMillis()));
                 target.setKzAuditUser(sysUser.getDisplayName());
             }
             if (status.equals(OaWorkPlanStatus.STATUS_MAIN_BACK.getCode()) || status.equals(OaWorkPlanStatus.STATUS_MAIN_PASS.getCode())) {
+                target.setFgOpinion(fgOpinion);//保存分管领导审核意见
                 target.setFgAuditTime(new Timestamp(System.currentTimeMillis()));
                 target.setFgAuditUser(sysUser.getDisplayName());
             }
+            oaWorkPlanService.save(target);//保存上报记录
             if (OaWorkPlanStatus.STATUS_BRANCH_BACK.getCode() == status || OaWorkPlanStatus.STATUS_MAIN_BACK.getCode() == status) {
                 msg = "已退回修改!";//ststus=4/6
             } else if (OaWorkPlanStatus.STATUS_BRANCH_PASS.getCode() == status || OaWorkPlanStatus.STATUS_MAIN_PASS.getCode() == status) {
