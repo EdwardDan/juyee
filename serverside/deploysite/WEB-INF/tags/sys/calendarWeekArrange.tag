@@ -85,7 +85,9 @@
         <input type="radio" name="radiobutton" value="1" onClick="change()" ${check1}>按周查询
         <input type="radio" name="radiobutton" value="0" onClick="change()" ${check0}>按时间段查询
         <input type="button" name="btn_query" value="查询" class="btn_Search" onclick="queryDate(true)">&nbsp;
-        <input type="button" class="button_all" value="编辑" onclick="doEdit('${startDate}','${endDate}')">
+        <c:if test="${canEdit}">
+            <input type="button" class="button_all" value="编辑" onclick="doEdit('${startDate}','${endDate}')">
+        </c:if>
     </td>
 </tr>
 <script type="text/javascript">
