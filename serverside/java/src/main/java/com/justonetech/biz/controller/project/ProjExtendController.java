@@ -16,6 +16,7 @@ import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.orm.hibernate.Page;
 import com.justonetech.core.utils.StringHelper;
 import com.justonetech.system.domain.SysCodeDetail;
+import com.justonetech.system.domain.SysDept;
 import com.justonetech.system.domain.SysUser;
 import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
@@ -102,9 +103,14 @@ public class ProjExtendController extends BaseCRUDActionController<ProjExtend> {
             SysUser sysUser = sysUserManager.getSysUser();
             //是否是建设单位用户
             if (null != sysUser.getPerson()) {
-                Set<ProjRelatePerson> projRelatePersons = sysUser.getPerson().getProjRelatePersons();
-                if (projRelatePersons.size() > 0) {
-                    isJsdw = false;
+                SysDept dept = sysUser.getPerson().getDept();
+                if (null != dept) {
+                    SysDept company = getParentCompany(dept);
+                    if (null != company) {
+                        if (!company.getName().equals("上海市交通建设工程管理中心") && !company.getName().equals("巨一科技发展有限公司")) {
+                            isJsdw = false;
+                        }
+                    }
                 }
             }
             //按项目屬性状态类别查询数据
@@ -136,6 +142,7 @@ public class ProjExtendController extends BaseCRUDActionController<ProjExtend> {
                 hql += " and category.name = '" + projcategory + "' ";
             }
             hql += " order by no asc,id asc";
+//            System.out.println("hql///////////////////////////////// = " + hql);
             //执行查询
             QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);
             String query = queryTranslate.toString();
@@ -152,6 +159,16 @@ public class ProjExtendController extends BaseCRUDActionController<ProjExtend> {
         }
     }
 
+    private SysDept getParentCompany(SysDept dept) {
+        if (dept.getIsTag() != null && dept.getIsTag()) {
+            return dept;
+        }
+        if (dept.getParent() != null) {
+            return getParentCompany(dept.getParent());
+        } else {
+            return dept;
+        }
+    }
 
     /**
      * 修改入口

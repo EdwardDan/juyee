@@ -16,6 +16,7 @@ import com.justonetech.core.utils.ReflectionUtils;
 import com.justonetech.core.utils.StringHelper;
 import com.justonetech.system.daoservice.SysCodeDetailService;
 import com.justonetech.system.domain.SysCodeDetail;
+import com.justonetech.system.domain.SysDept;
 import com.justonetech.system.domain.SysUser;
 import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
@@ -100,16 +101,19 @@ public class ProjBidController extends BaseCRUDActionController<ProjBid> {
     @RequestMapping
     public void projGridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, /*String typeCode,*/ HttpSession session, HttpServletRequest request) {
         try {
-            //按区县过滤
+            boolean isJsdw = true;
             SysUser sysUser = sysUserManager.getSysUser();
-            String name = "";
-            if (null != sysUser) {
-                name = sysUser.getPerson().getName();
-            }
-            List<SysCodeDetail> areaList = sysCodeManager.getCodeListByCode(Constants.PROJ_INFO_BELONG_AREA);
-            String areaNames = "";
-            for (SysCodeDetail detail : areaList) {
-                areaNames += detail.getName();
+            //是否是建设单位用户
+            if (null != sysUser.getPerson()) {
+                SysDept dept = sysUser.getPerson().getDept();
+                if (null != dept) {
+                    SysDept company = getParentCompany(dept);
+                    if (null != company) {
+                        if (!company.getName().equals("上海市交通建设工程管理中心") && !company.getName().equals("巨一科技发展有限公司")) {
+                            isJsdw = false;
+                        }
+                    }
+                }
             }
             //按项目屬性状态类别查询数据
             String projproperty = request.getParameter("projproperty");//项目性质
@@ -131,11 +135,11 @@ public class ProjBidController extends BaseCRUDActionController<ProjBid> {
             if (!StringHelper.isEmpty(projcategory)) {
                 hql += " and category.name = '" + projcategory + "' ";
             }
-            if (!StringHelper.isEmpty(name) && areaNames.contains(name)) {
-                hql += " and areaCode is not null and areaCode like '%" + name + "%'";
+            if (!isJsdw){
+                hql += projectRelateManager.getRelateProjectHql("id");
             }
-            hql += projectRelateManager.getRelateProjectHql("id");
             hql += "order by no asc,id asc";
+//            System.out.println("hql////////////////////////////// = " + hql);
             QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);
             String query = queryTranslate.toString();
             session.setAttribute(Constants.GRID_SQL_KEY, query);
@@ -149,6 +153,16 @@ public class ProjBidController extends BaseCRUDActionController<ProjBid> {
         }
     }
 
+    private SysDept getParentCompany(SysDept dept) {
+        if (dept.getIsTag() != null && dept.getIsTag()) {
+            return dept;
+        }
+        if (dept.getParent() != null) {
+            return getParentCompany(dept.getParent());
+        } else {
+            return dept;
+        }
+    }
 
     /**
      * projBid 列表显示页面

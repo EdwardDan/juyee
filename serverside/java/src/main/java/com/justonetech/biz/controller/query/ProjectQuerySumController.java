@@ -141,25 +141,28 @@ public class ProjectQuerySumController {
                     gctx += gctxCspfTotal;
                 }
             }
-            if (category.getId().equals(csdl.getId())) {  //城市道路
-                if (property.getId().equals(ss.getId())) {
-                    if (isMajor) {
-                        ywg_szdlSsZdNum++;
+            if (null != category) {
+                if (category.getId().equals(csdl.getId())) {  //城市道路
+                    if (property.getId().equals(ss.getId())) {
+                        if (isMajor) {
+                            ywg_szdlSsZdNum++;
+                        } else {
+                            ywg_szdlSsFzdNum++;
+                        }
                     } else {
-                        ywg_szdlSsFzdNum++;
+                        ywg_szdlQsNum++;
+                        ywg_szdlCost += gctx;
                     }
-                } else {
-                    ywg_szdlQsNum++;
-                    ywg_szdlCost += gctx;
+                } else if (category.getId().equals(gjjcss.getId())) {  //公交基础设施
+                    if (property.getId().equals(ss.getId())) {
+                        ywg_gjjcssSsNum++;
+                    } else {
+                        ywg_gjjcssQsdNum++;
+                    }
+                    ywg_gjjcssCost += gctx;
                 }
-            } else if (category.getId().equals(gjjcss.getId())) {  //公交基础设施
-                if (property.getId().equals(ss.getId())) {
-                    ywg_gjjcssSsNum++;
-                } else {
-                    ywg_gjjcssQsdNum++;
-                }
-                ywg_gjjcssCost += gctx;
-            } else if (property.getId().equals(gd.getId())) {  //轨道
+            }
+            if (property.getId().equals(gd.getId())) {  //轨道
                 if (property.getId().equals(ss.getId())) {
                     if (isMajor) {
                         ywg_gdSsZdNum++;
@@ -312,25 +315,28 @@ public class ProjectQuerySumController {
                     gctx += gctxCspfTotal;
                 }
             }
-            if (category.getId().equals(csdl.getId())) {  //城市道路
-                if (property.getId().equals(ss.getId())) {
-                    if (isMajor) {
-                        zj_szdlSsZdNum++;
+            if (null != category) {
+                if (category.getId().equals(csdl.getId())) {  //城市道路
+                    if (property.getId().equals(ss.getId())) {
+                        if (isMajor) {
+                            zj_szdlSsZdNum++;
+                        } else {
+                            zj_szdlSsFzdNum++;
+                        }
                     } else {
-                        zj_szdlSsFzdNum++;
+                        zj_szdlQsNum++;
+                        zj_szdlCost += gctx;
                     }
-                } else {
-                    zj_szdlQsNum++;
-                    zj_szdlCost += gctx;
+                } else if (category.getId().equals(gjjcss.getId())) {  //公交基础设施
+                    if (property.getId().equals(ss.getId())) {
+                        zj_gjjcssSsNum++;
+                    } else {
+                        zj_gjjcssQsdNum++;
+                    }
+                    zj_gjjcssCost += gctx;
                 }
-            } else if (category.getId().equals(gjjcss.getId())) {  //公交基础设施
-                if (property.getId().equals(ss.getId())) {
-                    zj_gjjcssSsNum++;
-                } else {
-                    zj_gjjcssQsdNum++;
-                }
-                zj_gjjcssCost += gctx;
-            } else if (property.getId().equals(gd.getId())) {  //轨道
+            }
+            if (property.getId().equals(gd.getId())) {  //轨道
                 if (property.getId().equals(ss.getId())) {
                     if (isMajor) {
                         zj_gdSsZdNum++;
@@ -653,25 +659,28 @@ public class ProjectQuerySumController {
                 SysCodeDetail planCbsj = extend.getPlanCbsj();//初步设计
                 if (null != planXmjys && planXmjys.getId().equals(wwc.getId())) {  //项目建议书未批
                     xmjyswp_xmNum++;
-                    if (category.getId().equals(csdl.getId())) {  //城市道路
-                        if (property.getId().equals(ss.getId())) {
-                            if (isMajor) {
-                                xmjyswp_szdlSsZdNum++;
+                    if (null != category) {
+                        if (category.getId().equals(csdl.getId())) {  //城市道路
+                            if (property.getId().equals(ss.getId())) {
+                                if (isMajor) {
+                                    xmjyswp_szdlSsZdNum++;
+                                } else {
+                                    xmjyswp_szdlSsFzdNum++;
+                                }
                             } else {
-                                xmjyswp_szdlSsFzdNum++;
+                                xmjyswp_szdlQsNum++;
+                                xmjyswp_szdlCost += gctx;
                             }
-                        } else {
-                            xmjyswp_szdlQsNum++;
-                            xmjyswp_szdlCost += gctx;
+                        } else if (category.getId().equals(gjjcss.getId())) {  //公交基础设施
+                            if (property.getId().equals(ss.getId())) {
+                                xmjyswp_gjjcssSsNum++;
+                            } else {
+                                xmjyswp_gjjcssQsdNum++;
+                            }
+                            xmjyswp_gjjcssCost += gctx;
                         }
-                    } else if (category.getId().equals(gjjcss.getId())) {  //公交基础设施
-                        if (property.getId().equals(ss.getId())) {
-                            xmjyswp_gjjcssSsNum++;
-                        } else {
-                            xmjyswp_gjjcssQsdNum++;
-                        }
-                        xmjyswp_gjjcssCost += gctx;
-                    } else if (property.getId().equals(gd.getId())) {  //轨道
+                    }
+                    if (property.getId().equals(gd.getId())) {  //轨道
                         if (property.getId().equals(ss.getId())) {
                             if (isMajor) {
                                 xmjyswp_gdSsZdNum++;
@@ -724,25 +733,28 @@ public class ProjectQuerySumController {
                 }
                 if (null != planGk && planGk.getId().equals(wwc.getId())) { //工可未批复
                     gkwpf_xmNum++;
-                    if (category.getId().equals(csdl.getId())) {  //城市道路
-                        if (property.getId().equals(ss.getId())) {
-                            if (isMajor) {
-                                gkwpf_szdlSsZdNum++;
+                    if (null != category) {
+                        if (category.getId().equals(csdl.getId())) {  //城市道路
+                            if (property.getId().equals(ss.getId())) {
+                                if (isMajor) {
+                                    gkwpf_szdlSsZdNum++;
+                                } else {
+                                    gkwpf_szdlSsFzdNum++;
+                                }
                             } else {
-                                gkwpf_szdlSsFzdNum++;
+                                gkwpf_szdlQsNum++;
+                                gkwpf_szdlCost += gctx;
                             }
-                        } else {
-                            gkwpf_szdlQsNum++;
-                            gkwpf_szdlCost += gctx;
+                        } else if (category.getId().equals(gjjcss.getId())) {  //公交基础设施
+                            if (property.getId().equals(ss.getId())) {
+                                gkwpf_gjjcssSsNum++;
+                            } else {
+                                gkwpf_gjjcssQsdNum++;
+                            }
+                            gkwpf_gjjcssCost += gctx;
                         }
-                    } else if (category.getId().equals(gjjcss.getId())) {  //公交基础设施
-                        if (property.getId().equals(ss.getId())) {
-                            gkwpf_gjjcssSsNum++;
-                        } else {
-                            gkwpf_gjjcssQsdNum++;
-                        }
-                        gkwpf_gjjcssCost += gctx;
-                    } else if (property.getId().equals(gd.getId())) {  //轨道
+                    }
+                    if (property.getId().equals(gd.getId())) {  //轨道
                         if (property.getId().equals(ss.getId())) {
                             if (isMajor) {
                                 gkwpf_gdSsZdNum++;
@@ -795,25 +807,28 @@ public class ProjectQuerySumController {
                 }
                 if ((null != planGk && planGk.getId().equals(ywc.getId())) && (null != planCbsj && planCbsj.getId().equals(wwc.getId()))) {//工可己批初设未批复
                     gkypcswp_xmNum++;
-                    if (category.getId().equals(csdl.getId())) {  //城市道路
-                        if (property.getId().equals(ss.getId())) {
-                            if (isMajor) {
-                                gkypcswp_szdlSsZdNum++;
+                    if (null != category) {
+                        if (category.getId().equals(csdl.getId())) {  //城市道路
+                            if (property.getId().equals(ss.getId())) {
+                                if (isMajor) {
+                                    gkypcswp_szdlSsZdNum++;
+                                } else {
+                                    gkypcswp_szdlSsFzdNum++;
+                                }
                             } else {
-                                gkypcswp_szdlSsFzdNum++;
+                                gkypcswp_szdlQsNum++;
+                                gkypcswp_szdlCost += gctx;
                             }
-                        } else {
-                            gkypcswp_szdlQsNum++;
-                            gkypcswp_szdlCost += gctx;
+                        } else if (category.getId().equals(gjjcss.getId())) {  //公交基础设施
+                            if (property.getId().equals(ss.getId())) {
+                                gkypcswp_gjjcssSsNum++;
+                            } else {
+                                gkypcswp_gjjcssQsdNum++;
+                            }
+                            gkypcswp_gjjcssCost += gctx;
                         }
-                    } else if (category.getId().equals(gjjcss.getId())) {  //公交基础设施
-                        if (property.getId().equals(ss.getId())) {
-                            gkypcswp_gjjcssSsNum++;
-                        } else {
-                            gkypcswp_gjjcssQsdNum++;
-                        }
-                        gkypcswp_gjjcssCost += gctx;
-                    } else if (property.getId().equals(gd.getId())) {  //轨道
+                    }
+                    if (property.getId().equals(gd.getId())) {  //轨道
                         if (property.getId().equals(ss.getId())) {
                             if (isMajor) {
                                 gkypcswp_gdSsZdNum++;
@@ -866,25 +881,28 @@ public class ProjectQuerySumController {
                 }
                 if ((null != planCbsj && planCbsj.getId().equals(ywc.getId()) && (project.getStage().getId().equals(status1.getId())))) {//初设已批未开工
                     csypwkg_xmNum++;
-                    if (category.getId().equals(csdl.getId())) {  //城市道路
-                        if (property.getId().equals(ss.getId())) {
-                            if (isMajor) {
-                                csypwkg_szdlSsZdNum++;
+                    if (null != category) {
+                        if (category.getId().equals(csdl.getId())) {  //城市道路
+                            if (property.getId().equals(ss.getId())) {
+                                if (isMajor) {
+                                    csypwkg_szdlSsZdNum++;
+                                } else {
+                                    csypwkg_szdlSsFzdNum++;
+                                }
                             } else {
-                                csypwkg_szdlSsFzdNum++;
+                                csypwkg_szdlQsNum++;
+                                csypwkg_szdlCost += gctx;
                             }
-                        } else {
-                            csypwkg_szdlQsNum++;
-                            csypwkg_szdlCost += gctx;
+                        } else if (category.getId().equals(gjjcss.getId())) {  //公交基础设施
+                            if (property.getId().equals(ss.getId())) {
+                                csypwkg_gjjcssSsNum++;
+                            } else {
+                                csypwkg_gjjcssQsdNum++;
+                            }
+                            csypwkg_gjjcssCost += gctx;
                         }
-                    } else if (category.getId().equals(gjjcss.getId())) {  //公交基础设施
-                        if (property.getId().equals(ss.getId())) {
-                            csypwkg_gjjcssSsNum++;
-                        } else {
-                            csypwkg_gjjcssQsdNum++;
-                        }
-                        csypwkg_gjjcssCost += gctx;
-                    } else if (property.getId().equals(gd.getId())) {  //轨道
+                    }
+                    if (property.getId().equals(gd.getId())) {  //轨道
                         if (property.getId().equals(ss.getId())) {
                             if (isMajor) {
                                 csypwkg_gdSsZdNum++;

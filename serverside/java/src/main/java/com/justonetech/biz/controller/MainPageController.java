@@ -8,6 +8,7 @@ import com.justonetech.biz.utils.enums.Platform;
 import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.utils.CryptUtil;
 import com.justonetech.core.utils.DateTimeHelper;
+import com.justonetech.system.domain.SysDept;
 import com.justonetech.system.domain.SysMenu;
 import com.justonetech.system.domain.SysPerson;
 import com.justonetech.system.domain.SysUser;
@@ -161,9 +162,14 @@ public class MainPageController extends BaseCRUDActionController {
         }
         //是否是建设单位用户
         if (null != sysUser.getPerson()) {
-            Set<ProjRelatePerson> projRelatePersons = sysUser.getPerson().getProjRelatePersons();
-            if (projRelatePersons.size() > 0) {
-                flag = false;
+            SysDept dept = sysUser.getPerson().getDept();
+            if (null != dept) {
+                SysDept company = getParentCompany(dept);
+                if (null != company) {
+                    if (!company.getName().equals("上海市交通建设工程管理中心") && !company.getName().equals("巨一科技发展有限公司")) {
+                        flag = false;
+                    }
+                }
             }
         }
         model.addAttribute("flag", flag);
@@ -173,6 +179,17 @@ public class MainPageController extends BaseCRUDActionController {
         model.addAttribute("code_bulletin", Constants.OA_PUBLIC_INFO_TYPE_BULLETIN); //公告
 
         return "view/index/main";
+    }
+
+    private SysDept getParentCompany(SysDept dept) {
+        if (dept.getIsTag() != null && dept.getIsTag()) {
+            return dept;
+        }
+        if (dept.getParent() != null) {
+            return getParentCompany(dept.getParent());
+        } else {
+            return dept;
+        }
     }
 
     /**

@@ -14,6 +14,7 @@ import com.justonetech.core.utils.DateTimeHelper;
 import com.justonetech.core.utils.JspHelper;
 import com.justonetech.core.utils.StringHelper;
 import com.justonetech.system.domain.SysCodeDetail;
+import com.justonetech.system.domain.SysDept;
 import com.justonetech.system.domain.SysUser;
 import com.justonetech.system.manager.ExcelPrintManager;
 import com.justonetech.system.manager.SysCodeManager;
@@ -104,6 +105,20 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
     @RequestMapping
     public void gridDataCustom(HttpServletResponse response, Model model, String filters, String columns, int page, int rows, HttpSession session, HttpServletRequest request) {
         try {
+            boolean isJsdw = true;
+            SysUser sysUser = sysUserManager.getSysUser();
+            //是否是建设单位用户
+            if (null != sysUser.getPerson()) {
+                SysDept dept = sysUser.getPerson().getDept();
+                if (null != dept) {
+                    SysDept company = getParentCompany(dept);
+                    if (null != company) {
+                        if (!company.getName().equals("上海市交通建设工程管理中心") && !company.getName().equals("巨一科技发展有限公司")) {
+                            isJsdw = false;
+                        }
+                    }
+                }
+            }
             //按项目屬性状态类别查询数据
             String projproperty = request.getParameter("projproperty");//项目性质
             String ismajor = request.getParameter("ismajor");//是否重大
@@ -124,7 +139,9 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
             if (!StringHelper.isEmpty(projcategory)) {
                 hql += " and category.name = '" + projcategory + "' ";
             }
-            hql += projectRelateManager.getRelateProjectHql("id");
+            if (!isJsdw){
+                hql += projectRelateManager.getRelateProjectHql("id");
+            }
             hql += " order by no asc,id asc";
             QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);
             String query = queryTranslate.toString();
@@ -142,6 +159,17 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         } catch (Exception e) {
             log.error("error", e);
             super.processException(response, e);
+        }
+    }
+
+    private SysDept getParentCompany(SysDept dept) {
+        if (dept.getIsTag() != null && dept.getIsTag()) {
+            return dept;
+        }
+        if (dept.getParent() != null) {
+            return getParentCompany(dept.getParent());
+        } else {
+            return dept;
         }
     }
 
