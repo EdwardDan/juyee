@@ -107,7 +107,7 @@ public class ProjExtendController extends BaseCRUDActionController<ProjExtend> {
                 if (null != dept) {
                     SysDept company = getParentCompany(dept);
                     if (null != company) {
-                        if (!company.getName().equals("上海市交通建设工程管理中心") && !company.getName().equals("巨一科技发展有限公司")) {
+                        if (!company.getName().equals("上海市交通建设工程管理中心") && !company.getName().equals("巨一科技发展有限公司") && !company.getName().equals("上海市交通委员会")) {
                             isJsdw = false;
                         }
                     }

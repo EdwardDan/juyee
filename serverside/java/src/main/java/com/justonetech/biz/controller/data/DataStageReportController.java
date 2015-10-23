@@ -109,7 +109,7 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
                 if (null != dept) {
                     SysDept company = getParentCompany(dept);
                     if (null != company) {
-                        if (!company.getName().equals("上海市交通建设工程管理中心") && !company.getName().equals("巨一科技发展有限公司")) {
+                        if (!company.getName().equals("上海市交通建设工程管理中心") && !company.getName().equals("巨一科技发展有限公司") && !company.getName().equals("上海市交通委员会")) {
                             isJsdw = false;
                         }
                     }
@@ -139,7 +139,7 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
                 hql += projectRelateManager.getRelateProjectHql("id");
             }
             hql += " order by no asc,id asc";
-            System.out.println("hql////////////////////////// = " + hql);
+//            System.out.println("hql////////////////////////// = " + hql);
             //执行查询
             QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);
             String query = queryTranslate.toString();
