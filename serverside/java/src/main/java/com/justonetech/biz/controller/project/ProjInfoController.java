@@ -287,8 +287,10 @@ public class ProjInfoController extends BaseCRUDActionController<ProjInfo> {
             if (!StringHelper.isEmpty(projStage)){
                 target.setStage(sysCodeDetailService.get(Long.valueOf(projStage)));
             }
-            if (!StringHelper.isEmpty(projCategory)){
+            if (!StringHelper.isEmpty(projCategory)) {
                 target.setCategory(sysCodeDetailService.get(Long.valueOf(projCategory)));
+            } else {
+                target.setCategory(null);
             }
             target.setIntro(intro);
 
