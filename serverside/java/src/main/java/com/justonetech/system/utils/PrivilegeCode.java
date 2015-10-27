@@ -123,5 +123,6 @@ public class PrivilegeCode {
     //项目推进编辑
     public static final String PROJ_EXTEND_EDIT1 = "ProjExtend1_edit";  //项目推进编辑
     public static final String PROJ_EXTEND_EDIT2 = "ProjExtend2_edit";  //项目推进编辑
+    public static final String PROJ_EXTEND_EDIT3 = "ProjExtend3_edit";  //项目推进编辑
 }
 

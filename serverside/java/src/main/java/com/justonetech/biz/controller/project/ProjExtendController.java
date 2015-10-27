@@ -2,19 +2,18 @@ package com.justonetech.biz.controller.project;
 
 import com.justonetech.biz.core.orm.hibernate.GridJq;
 import com.justonetech.biz.core.orm.hibernate.QueryTranslateJq;
-import com.justonetech.biz.daoservice.ProjExtendCostService;
-import com.justonetech.biz.daoservice.ProjExtendScheduleService;
-import com.justonetech.biz.daoservice.ProjExtendService;
-import com.justonetech.biz.daoservice.ProjInfoService;
+import com.justonetech.biz.daoservice.*;
 import com.justonetech.biz.domain.ProjExtend;
 import com.justonetech.biz.domain.ProjExtendCost;
 import com.justonetech.biz.domain.ProjExtendSchedule;
-import com.justonetech.biz.domain.ProjRelatePerson;
+import com.justonetech.biz.domain.ProjInfo;
 import com.justonetech.biz.manager.ProjectRelateManager;
 import com.justonetech.biz.utils.Constants;
 import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.orm.hibernate.Page;
+import com.justonetech.core.utils.ReflectionUtils;
 import com.justonetech.core.utils.StringHelper;
+import com.justonetech.system.daoservice.SysCodeDetailService;
 import com.justonetech.system.domain.SysCodeDetail;
 import com.justonetech.system.domain.SysDept;
 import com.justonetech.system.domain.SysUser;
@@ -26,6 +25,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -73,16 +73,25 @@ public class ProjExtendController extends BaseCRUDActionController<ProjExtend> {
      * @return .
      */
     @RequestMapping
-    public String grid(Model model, String flag) {
+    public String grid(Model model, String flag,String msg) {
         List<SysCodeDetail> propertyList = sysCodeManager.getCodeListByCode(Constants.PROJ_INFO_PROPERTY);
         List<SysCodeDetail> projinfostageList = sysCodeManager.getCodeListByCode(Constants.PROJ_INFO_STAGE);
         List<SysCodeDetail> projinfocategoryList = sysCodeManager.getCodeListByCode(Constants.PROJ_INFO_CATEGORY);
         model.addAttribute("propertyList", propertyList); //管理属性
-        model.addAttribute("projinfostageList",projinfostageList); //项目状态
-        model.addAttribute("projinfocategoryList",projinfocategoryList); //业务类别
+        model.addAttribute("projinfostageList", projinfostageList); //项目状态
+        model.addAttribute("projinfocategoryList", projinfocategoryList); //业务类别
         //判断是否有编辑权限
         model.addAttribute("flag", flag);
-        model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.PROJ_EXTEND_EDIT));
+        model.addAttribute("msg", msg);
+        if (StringHelper.isEmpty(flag)) {
+            model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.PROJ_EXTEND_EDIT1));
+        } else {
+            if ("1012".equals(msg)) {
+                model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.PROJ_EXTEND_EDIT2));
+            } else if ("1517".equals(msg)) {
+                model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.PROJ_EXTEND_EDIT3));
+            }
+        }
 
         return "view/project/projExtend/grid";
     }
@@ -97,7 +106,7 @@ public class ProjExtendController extends BaseCRUDActionController<ProjExtend> {
      * @param rows     .
      */
     @RequestMapping
-    public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session, String flag, HttpServletRequest request) {
+    public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session, String flag,String msg, HttpServletRequest request) {
         try {
             boolean isJsdw = true;
             SysUser sysUser = sysUserManager.getSysUser();
@@ -122,6 +131,9 @@ public class ProjExtendController extends BaseCRUDActionController<ProjExtend> {
             String hql = "from ProjInfo where 1 = 1 ";
             if (!StringHelper.isEmpty(flag) && "qqdj".equals(flag)) {
                 hql += " and packageAttr like '%区区对接%' ";
+                if (!StringHelper.isEmpty(msg)) {
+                    hql += " and projNum like '" + msg + "%'";
+                }
             } else {
                 hql += " and packageAttr is null ";
             }
@@ -185,6 +197,24 @@ public class ProjExtendController extends BaseCRUDActionController<ProjExtend> {
     }
 
     /**
+     * 修改项目基本信息
+     *
+     * @param projectId .
+     * @param model     .
+     * @return .
+     */
+    @RequestMapping
+    public String input(Model model, Long projectId) {
+        model.addAttribute("projectId", projectId);
+        ProjInfo projInfo = projInfoService.get(projectId);
+        model.addAttribute("bean", projInfo);
+        model.addAttribute("areas", projInfo.getBelongAreaNames());
+        modelStatus(model);
+
+        return "view/project/projExtend/input";
+    }
+
+    /**
      * 查看入口
      *
      * @param projectId .
@@ -196,6 +226,52 @@ public class ProjExtendController extends BaseCRUDActionController<ProjExtend> {
         model.addAttribute("projectId", projectId);
 
         return "view/project/projExtend/view";
+    }
+
+    /**
+     * 保存操作
+     *
+     * @param response .
+     * @param entity   .
+     * @param request  .
+     * @throws Exception .
+     */
+    @SuppressWarnings("unchecked")
+    @RequestMapping
+    public void saveProjInfo(HttpServletResponse response, @ModelAttribute("bean") ProjInfo entity, HttpServletRequest request) throws Exception {
+        try {
+            ProjInfo target;
+            if (entity.getId() != null) {
+                target = projInfoService.get(entity.getId());
+                ReflectionUtils.copyBean(entity, target, new String[]{
+                        "jsDept",
+                        "jsDeptPerson",
+                        "jsDeptTel",
+                        "sgDept",
+                        "sgDeptPerson",
+                        "sgDeptTel",
+                        "jlDept",
+                        "jlDeptPerson",
+                        "jlDeptTel",
+                        "isMajor",
+                        "function",
+                        "engineerRange",
+                        "mainContent",
+                });
+            } else {
+                target = entity;
+            }
+            String intro = request.getParameter("intro");
+            target.setIntro(intro);
+
+            projInfoService.save(target);
+
+        } catch (Exception e) {
+            log.error("error", e);
+            super.processException(response, e);
+            return;
+        }
+        sendSuccessJSON(response, "保存成功");
     }
 
     /**
@@ -221,5 +297,17 @@ public class ProjExtendController extends BaseCRUDActionController<ProjExtend> {
 
             sendSuccessJSON(response, "删除成功");
         }
+    }
+
+    //传递系统字典定义的类型
+    private void modelStatus(Model model) {
+        model.addAttribute("PROJ_INFO_STAGE", Constants.PROJ_INFO_STAGE); //项目状态
+        model.addAttribute("PROJ_INFO_CATEGORY", Constants.PROJ_INFO_CATEGORY); //业务类别
+        List<SysCodeDetail> propertyList = sysCodeManager.getCodeListByCode(Constants.PROJ_INFO_PROPERTY);
+        model.addAttribute("propertyList", propertyList); //管理属性
+        model.addAttribute("PROJ_INFO_SOURCE", Constants.PROJ_INFO_SOURCE); //项目来源
+        List<SysCodeDetail> areaList = sysCodeManager.getCodeListByCode(Constants.PROJ_INFO_BELONG_AREA);
+        model.addAttribute("areaList", areaList); //所属区域
+        model.addAttribute("PROJ_INFO_DBSX", Constants.PROJ_INFO_DBSX); //打包属性
     }
 }

@@ -12,7 +12,7 @@
                 $('#tabs').tabs("resize");
             }, 500);
         });
-        addTab("项目基本情况", "${ctx}/projInfo/view.do?id=${projectId}&isTab=true", "tab1");
+        addTab("项目基本情况", "${ctx}/projExtend/input.do?projectId=${projectId}&isTab=true", "tab1");
         addTab("工程投资情况", "${ctx}/projExtendCost/modify.do?projectId=${projectId}", "tab2");
         addTab("前期计划安排", "${ctx}/projExtendPre/modify.do?projectId=${projectId}", "tab3");
         addTab("工程建设完成情况", "${ctx}/projExtendSchedule/modify.do?projectId=${projectId}", "tab4");
