@@ -4,7 +4,7 @@
     $(function () {
         var conf = {
             gridOpts: {
-                url: "${ctx}/projExtend/gridDataCustom.do?flag=${flag}",
+                url: "${ctx}/projExtend/gridDataCustom.do?flag=${flag}&msg=${msg}",
                 colNames: ['ID',
                     '填报年份',
                     '项目序号',
@@ -72,7 +72,7 @@
     }
     <c:if test="${canEdit}">
     function doEdit(id) {
-        parent.openWindow("修改项目推进信息", "${ctx}/projExtend/modify.do?projectId=" + id, true, 800, 550);
+        parent.openWindow("填报项目推进信息", "${ctx}/projExtend/modify.do?projectId=" + id, true, 800, 550);
     }
     function doDelete(id) {
         doGridDelete("${ctx}/projExtend/delete.do?projectId=" + id);
