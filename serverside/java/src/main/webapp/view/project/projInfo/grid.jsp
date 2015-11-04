@@ -19,18 +19,18 @@
                 ],
                 colModel: [
                     {name: 'id', width: 10, align: "center", searchtype: "integer", hidden: true},
-                    {name: "year", width: "30", align: "center", searchtype: "integer", sortable: true},
+                    {name: "year", width: "30", align: "center", searchtype: "integer", sortable: true, hidden: true},
                     {name: "no", width: "30", align: "center", searchtype: "string", sortable: true, hidden: true},
-                    {name: "projNum", width: "30", align: "center", searchtype: "string", sortable: true},
+                    {name: "projNum", width: "30", align: "center", searchtype: "string", sortable: true, hidden: true},
                     {name: "name", width: "80", align: "left", searchtype: "string", sortable: true},
-                    {name: "property.name", width: "25", align: "center", searchtype: "string", sortable: true},
-                    {name: "stage.name", width: "25", align: "center", searchtype: "string", sortable: true},
-                    {name: "category.name", width: "25", align: "center", searchtype: "string", sortable: true},
-                    {name: "bidCountOfStage", width: "35", align: "center", searchtype: "integer", sortable: true, formatter: viewBidInfoFormat1},
-                    {name: "bidCountOfNode", width: "35", align: "center", searchtype: "integer", sortable: true, formatter: viewBidInfoFormat2}
+                    {name: "property.name", width: "20", align: "center", searchtype: "string", sortable: true},
+                    {name: "stage.name", width: "20", align: "center", searchtype: "string", sortable: true},
+                    {name: "category.name", width: "20", align: "center", searchtype: "string", sortable: true},
+                    {name: "bidCountOfStage", width: "30", align: "center", searchtype: "integer", sortable: true, formatter: viewBidInfoFormat1},
+                    {name: "bidCountOfNode", width: "30", align: "center", searchtype: "integer", sortable: true, formatter: viewBidInfoFormat2}
                 ],
                 actModel: [
-                    {name: 'operation', width: 60, align: 'center'}
+                    {name: 'operation', width: 40, align: 'center'}
                 ],
                 pager: '#pager2',
                 caption: "项目基本信息管理列表",

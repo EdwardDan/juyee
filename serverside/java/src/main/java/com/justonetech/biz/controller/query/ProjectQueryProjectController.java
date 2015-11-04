@@ -91,6 +91,7 @@ public class ProjectQueryProjectController {
         String year = request.getParameter("year");
         String propertyId = request.getParameter("propertyId");
         String isMajor = request.getParameter("isMajor");
+        String qqdj = request.getParameter("qqdj");
         String categoryId = request.getParameter("categoryId");
         String areaId = request.getParameter("areaId");
         String stageId = request.getParameter("stageId");
@@ -112,6 +113,9 @@ public class ProjectQueryProjectController {
         }
         if (!StringHelper.isEmpty(isMajor)) {
             conditionHql += " and isMajor=" + isMajor;
+        }
+        if (!StringHelper.isEmpty(qqdj)) {
+            conditionHql += " and projNum like '" + qqdj + "%'";
         }
         if (!StringHelper.isEmpty(categoryId)) {
             conditionHql += " and category.id=" + categoryId;
@@ -213,6 +217,7 @@ public class ProjectQueryProjectController {
         String year = request.getParameter("year");
         String propertyId = request.getParameter("propertyId");
         String isMajor = request.getParameter("isMajor");
+        String qqdj = request.getParameter("qqdj");
         String categoryId = request.getParameter("categoryId");
         String areaId = request.getParameter("areaId");
         beans.put("year", year);
@@ -233,6 +238,9 @@ public class ProjectQueryProjectController {
         }
         if (!StringHelper.isEmpty(isMajor)) {
             conditionHql += " and isMajor=" + isMajor;
+        }
+        if (!StringHelper.isEmpty(qqdj)) {
+            conditionHql += " and projNum like '" + qqdj + "%'";
         }
         if (!StringHelper.isEmpty(categoryId)) {
             conditionHql += " and category.id=" + categoryId;

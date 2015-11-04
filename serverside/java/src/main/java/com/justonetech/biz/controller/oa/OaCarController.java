@@ -184,6 +184,7 @@ public class OaCarController extends BaseCRUDActionController<OaCar> {
 
         //车辆使用日期默认当天
         oaCar.setBeginTime(new Timestamp(System.currentTimeMillis()));
+        oaCar.setAddress("上海市(    )区(    )路(    )号");
         //如需增加其他默认值请在此添加
         model.addAttribute("bean", oaCar);
 

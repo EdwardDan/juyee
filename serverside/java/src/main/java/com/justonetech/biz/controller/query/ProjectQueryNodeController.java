@@ -145,6 +145,7 @@ public class ProjectQueryNodeController extends BaseCRUDActionController<ProjInf
         String year = request.getParameter("year");
         String month = request.getParameter("month");
         String categoryId = request.getParameter("categoryId");
+        String qqdj = request.getParameter("qqdj");
         String beginDate = request.getParameter("beginDate");
         String endDate = request.getParameter("endDate");
         Boolean isSum = StringHelper.isEmpty(projectId);   //是否汇总
@@ -197,6 +198,9 @@ public class ProjectQueryNodeController extends BaseCRUDActionController<ProjInf
             }
             if (!StringHelper.isEmpty(categoryId)) {
                 conditionHql += " and project.category.id=" + categoryId;
+            }
+            if (!com.justonetech.core.utils.StringHelper.isEmpty(qqdj)) {
+                conditionHql += " and project.projNum like '" + qqdj + "%'";
             }
             if (!StringHelper.isEmpty(beginDate)) {
                 conditionHql += " and to_char(project.createTime,'yyyy-mm-dd')>='"+beginDate+"'";
@@ -274,6 +278,7 @@ public class ProjectQueryNodeController extends BaseCRUDActionController<ProjInf
         String jsDept = request.getParameter("jsDept");
         String year = request.getParameter("year");
         String categoryId = request.getParameter("categoryId");
+        String qqdj = request.getParameter("qqdj");
         String beginDate = request.getParameter("beginDate");
         String endDate = request.getParameter("endDate");
         String month = request.getParameter("month");
@@ -284,6 +289,7 @@ public class ProjectQueryNodeController extends BaseCRUDActionController<ProjInf
         model.addAttribute("jsDept", jsDept);
         model.addAttribute("year", year);
         model.addAttribute("categoryId", categoryId);
+        model.addAttribute("qqdj", qqdj);
         model.addAttribute("beginDate", beginDate);
         model.addAttribute("endDate", endDate);
         model.addAttribute("month", month);
@@ -315,6 +321,7 @@ public class ProjectQueryNodeController extends BaseCRUDActionController<ProjInf
         String year = request.getParameter("year");
         String month = request.getParameter("month");
         String categoryId = request.getParameter("categoryId");
+        String qqdj = request.getParameter("qqdj");
         String nodeIds = request.getParameter("nodeIds");  //过滤节点
         String beginDate = request.getParameter("beginDate");
         String endDate = request.getParameter("endDate");
@@ -396,6 +403,9 @@ public class ProjectQueryNodeController extends BaseCRUDActionController<ProjInf
             }
             if (!StringHelper.isEmpty(categoryId)) {
                 conditionHql += " and project.category.id=" + categoryId;
+            }
+            if (!com.justonetech.core.utils.StringHelper.isEmpty(qqdj)) {
+                conditionHql += " and project.projNum like '" + qqdj + "%'";
             }
             if (!StringHelper.isEmpty(beginDate)) {
                 conditionHql += " and to_char(project.createTime,'yyyy-mm-dd')>='"+beginDate+"'";

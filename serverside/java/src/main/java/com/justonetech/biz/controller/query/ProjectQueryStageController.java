@@ -204,6 +204,7 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         String jsDept = request.getParameter("jsDept");
         String year = request.getParameter("year");
         String categoryId = request.getParameter("categoryId");
+        String qqdj = request.getParameter("qqdj");
         String beginDate = request.getParameter("beginDate");
         String endDate = request.getParameter("endDate");
         String month = request.getParameter("month");
@@ -253,6 +254,9 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
             }
             if (!StringHelper.isEmpty(categoryId)) {
                 conditionHql += " and project.category.id=" + categoryId;
+            }
+            if (!StringHelper.isEmpty(qqdj)) {
+                conditionHql += " and project.projNum like '" + qqdj + "%'";
             }
             if (!StringHelper.isEmpty(beginDate)) {
                 conditionHql += " and to_char(project.createTime,'yyyy-mm-dd')>='" + beginDate + "'";
@@ -409,6 +413,7 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         String jsDept = request.getParameter("jsDept");
         String year = request.getParameter("year");
         String categoryId = request.getParameter("categoryId");
+        String qqdj = request.getParameter("qqdj");
         String beginDate = request.getParameter("beginDate");
         String endDate = request.getParameter("endDate");
         String month = request.getParameter("month");
@@ -419,6 +424,7 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         model.addAttribute("jsDept", jsDept);
         model.addAttribute("year", year);
         model.addAttribute("categoryId", categoryId);
+        model.addAttribute("qqdj", qqdj);
         model.addAttribute("beginDate", beginDate);
         model.addAttribute("endDate", endDate);
         model.addAttribute("month", month);
@@ -449,6 +455,7 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         String jsDept = request.getParameter("jsDept");
         String year = request.getParameter("year");
         String categoryId = request.getParameter("categoryId");
+        String qqdj = request.getParameter("qqdj");
         String stageIds = request.getParameter("stageIds");  //过滤节点
         String beginDate = request.getParameter("beginDate");
         String endDate = request.getParameter("endDate");
@@ -529,6 +536,9 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
             }
             if (!StringHelper.isEmpty(categoryId)) {
                 conditionHql += " and project.category.id=" + categoryId;
+            }
+            if (!StringHelper.isEmpty(qqdj)) {
+                conditionHql += " and project.projNum like '" + qqdj + "%'";
             }
             if (!StringHelper.isEmpty(beginDate)) {
                 conditionHql += " and to_char(project.createTime,'yyyy-mm-dd')>='" + beginDate + "'";

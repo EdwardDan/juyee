@@ -8,6 +8,7 @@
             $("#year").val("${currentYear}");
             $("#propertyId").val("");
             $("#isMajor").val("");
+            $("#qqdj").val("");
             $("#categoryId").val("");
             $("#areaId").val("");
             $("#stageId").val("");
@@ -36,6 +37,7 @@
         s += "&year=" + $("#year").val();
         s += "&propertyId=" + $("#propertyId").val();
         s += "&isMajor=" + $("#isMajor").val();
+        s += "&qqdj=" + $("#qqdj").val();
         s += "&categoryId=" + $("#categoryId").val();
         s += "&areaId=" + $("#areaId").val();
         s += "&stageId=" + $("#stageId").val();
@@ -103,6 +105,12 @@
                     <option value="1">重大</option>
                     <option value="0">非重大</option>
                 </select>
+                区区对接：
+                <select name="qqdj" id="qqdj" class="form_select" style="width: 90px;">
+                    <option value="">请选择</option>
+                    <option value="1012">2010-2012区区对接</option>
+                    <option value="1517">2015-2017区区对接</option>
+                </select>
             </td>
         </tr>
         <tr>
@@ -130,9 +138,7 @@
                     <c:forEach var="stage" items="${stageList}">
                         <option value="${area.id}">${stage.name}</option>
                     </c:forEach>
-                </select>
-            </td>
-            <td align="left" nowrap colspan="4">&nbsp;
+                </select>&nbsp;&nbsp;&nbsp;&nbsp;
                 <input type="button" value="查询" id="btnQueryThis" class="button_all" onclick="loadProjectData(null)"/>
                 <input type="button" value="显示全部" id="btnQueryAll" class="button_normal_long"
                        onclick="loadProjectData('all')"/>

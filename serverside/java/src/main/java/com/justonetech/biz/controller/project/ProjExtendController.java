@@ -3,14 +3,14 @@ package com.justonetech.biz.controller.project;
 import com.justonetech.biz.core.orm.hibernate.GridJq;
 import com.justonetech.biz.core.orm.hibernate.QueryTranslateJq;
 import com.justonetech.biz.daoservice.*;
-import com.justonetech.biz.domain.ProjExtend;
-import com.justonetech.biz.domain.ProjExtendCost;
-import com.justonetech.biz.domain.ProjExtendSchedule;
-import com.justonetech.biz.domain.ProjInfo;
+import com.justonetech.biz.domain.*;
 import com.justonetech.biz.manager.ProjectRelateManager;
 import com.justonetech.biz.utils.Constants;
+import com.justonetech.biz.utils.enums.ProjExtendCostType;
 import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.orm.hibernate.Page;
+import com.justonetech.core.utils.JspHelper;
+import com.justonetech.core.utils.MathHelper;
 import com.justonetech.core.utils.ReflectionUtils;
 import com.justonetech.core.utils.StringHelper;
 import com.justonetech.system.daoservice.SysCodeDetailService;
@@ -31,8 +31,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 
 /**
@@ -85,11 +84,14 @@ public class ProjExtendController extends BaseCRUDActionController<ProjExtend> {
         model.addAttribute("msg", msg);
         if (StringHelper.isEmpty(flag)) {
             model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.PROJ_EXTEND_EDIT1));
+            model.addAttribute("titleName","十二五项目清单");
         } else {
             if ("1012".equals(msg)) {
                 model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.PROJ_EXTEND_EDIT2));
+                model.addAttribute("titleName","2010-2012区区对接项目清单");
             } else if ("1517".equals(msg)) {
                 model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.PROJ_EXTEND_EDIT3));
+                model.addAttribute("titleName","2015-2017区区对接、断头路项目清单");
             }
         }
 
@@ -161,8 +163,50 @@ public class ProjExtendController extends BaseCRUDActionController<ProjExtend> {
             session.setAttribute(Constants.GRID_SQL_KEY, query);
             pageModel = projInfoService.findByPage(pageModel, query);
 
+            List<Map> list = GridJq.getGridValue(pageModel.getRows(), columns);
+            Calendar c = Calendar.getInstance();
+            int year = c.get(Calendar.YEAR);
+            for (Map bean : list) {
+                Object id = bean.get("id");
+                if (null != id) {
+                    List<ProjExtend> extendList = projExtendService.findByProperty("project.id", JspHelper.getLong(id));
+                    ProjExtend projExtend = null;
+                    if (null != extendList && extendList.size() > 0) {
+                        projExtend = extendList.iterator().next();
+                    }
+                    if (null != projExtend) {
+                        bean.put("gctxGkpfTotal", projExtend.getGctxGkpfTotal()); //工可总投资（亿元）
+                        List<ProjExtendCost> costList = projExtendCostService.findByProperty("projExtend.id", projExtend.getId());
+                        Double accCost = 0.0;
+                        Double yearAccCost = 0.0;
+                        Double yearPlanCost = 0.0;
+                        if (null != costList && costList.size() > 0) {
+                            for (ProjExtendCost cost : costList) {
+                                String type = cost.getType();
+                                Integer costYear = cost.getYear();
+                                if (costYear == (year - 1) && type.equals(ProjExtendCostType.EXTEND_TYPE_1.getCode())) {
+                                    accCost += cost.getAccComplete();
+                                }
+                                if (costYear == year && null != cost.getHalf() && cost.getHalf().equals("sbn") && type.equals(ProjExtendCostType.EXTEND_TYPE_3.getCode())) {
+                                    accCost += cost.getAccComplete();
+                                    yearAccCost += cost.getAccComplete();
+                                }
+                                if (costYear == year && type.equals(ProjExtendCostType.EXTEND_TYPE_2.getCode())) {
+                                    yearPlanCost += cost.getAccComplete();
+                                }
+                            }
+                        }
+                        bean.put("accCost", MathHelper.roundDouble(accCost, 4));
+                        if (0 == yearPlanCost) {
+                            bean.put("costRate", "");
+                        } else {
+                            bean.put("costRate", MathHelper.roundDouble(yearAccCost / yearPlanCost, 2) * 100);
+                        }
+                    }
+                }
+            }
             //输出显示
-            String json = GridJq.toJSON(columns, pageModel);
+            String json = GridJq.toJSON(list, pageModel);
             sendJSON(response, json);
 
         } catch (Exception e) {
