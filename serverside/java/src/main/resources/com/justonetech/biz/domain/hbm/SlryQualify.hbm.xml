@@ -103,6 +103,17 @@
             <meta attribute="ColumnComment">状态</meta>
         </property>
 
+        <property
+                name="csOpinion"
+                column="CS_OPINION"
+                type="string"
+                not-null="false"
+                length="2000"
+                >
+            <meta attribute="ColumnName">初审意见</meta>
+            <meta attribute="ColumnComment">初审意见</meta>
+        </property>
+
 		<property
 			name="createTime"
 			column="CREATE_TIME"
@@ -199,6 +210,13 @@
 		<many-to-one
 			name="docPhoto"
 			column="DOC_PHOTO_ID"
+			class="DocDocument"
+			not-null="false"
+		>
+		</many-to-one>
+        <many-to-one
+			name="docContract"
+			column="DOC_CONTRACT_ID"
 			class="DocDocument"
 			not-null="false"
 		>

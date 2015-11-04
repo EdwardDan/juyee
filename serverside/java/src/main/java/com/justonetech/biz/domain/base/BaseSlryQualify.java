@@ -1,5 +1,7 @@
 package com.justonetech.biz.domain.base;
 
+import com.justonetech.biz.domain.DocDocument;
+
 import java.io.Serializable;
 
 
@@ -44,6 +46,7 @@ public abstract class BaseSlryQualify  implements Serializable {
 	public static String PROP_SEX = "sex";
 	public static String PROP_UPDATE_USER = "updateUser";
 	public static String PROP_STATUS = "status";
+	public static String PROP_CS_OPINION = "csOpinion";
 
 
 	// constructors
@@ -96,7 +99,9 @@ public abstract class BaseSlryQualify  implements Serializable {
 	/*状态*/
     /*状态*/
 	private Integer status;
-	
+
+	private String csOpinion;
+
     /*创建时间*/
     /*创建时间*/
 	private java.sql.Timestamp createTime;
@@ -123,6 +128,7 @@ public abstract class BaseSlryQualify  implements Serializable {
 	private com.justonetech.system.domain.SysCodeDetail educationType;
 	private com.justonetech.biz.domain.DocDocument docEducation;
 	private com.justonetech.biz.domain.DocDocument docPhoto;
+	private com.justonetech.biz.domain.DocDocument docContract;
 
 
 
@@ -250,6 +256,14 @@ public abstract class BaseSlryQualify  implements Serializable {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public String getCsOpinion() {
+        return csOpinion;
+    }
+
+    public void setCsOpinion(String csOpinion) {
+        this.csOpinion = csOpinion;
     }
 
     /**
@@ -443,9 +457,15 @@ public abstract class BaseSlryQualify  implements Serializable {
 		this.docPhoto = docPhoto;
 	}
 
+    public DocDocument getDocContract() {
+        return docContract;
+    }
 
+    public void setDocContract(DocDocument docContract) {
+        this.docContract = docContract;
+    }
 
-	public boolean equals (Object obj) {
+    public boolean equals (Object obj) {
 		if (null == obj) return false;
 		if (!(obj instanceof com.justonetech.biz.domain.SlryQualify)) return false;
 		else {
@@ -477,6 +497,7 @@ public abstract class BaseSlryQualify  implements Serializable {
 		builder.append(birthDate);
 		builder.append(idCard);
 		builder.append(status);
+		builder.append(csOpinion);
 		builder.append(createTime);
 		builder.append(createUser);
 		builder.append(updateTime);
