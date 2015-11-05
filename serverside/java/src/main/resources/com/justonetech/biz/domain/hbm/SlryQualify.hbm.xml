@@ -51,9 +51,9 @@
         <property
                 name="name"
                 column="NAME"
-                type="integer"
+                type="string"
                 not-null="false"
-                length="2"
+                length="200"
                 >
             <meta attribute="ColumnName">姓名</meta>
             <meta attribute="ColumnComment">姓名</meta>
