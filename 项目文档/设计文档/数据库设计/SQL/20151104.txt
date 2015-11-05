@@ -1,15 +1,17 @@
 drop table SLRY_QUALIFY cascade constraints;
 
+
+
 /*==============================================================*/
 /* Table: SLRY_QUALIFY                                          */
 /*==============================================================*/
 create table SLRY_QUALIFY 
 (
    ID                   number(10)           not null,
-   UNIT_NAME            number(10),
+   UNIT_NAME            varchar2(100),
    UNIT_TYPE_ID         number(10),
-   DESCRIPTION          varchar(2000 char),
-   NAME                 number(2),
+   DESCRIPTION          varchar2(2000),
+   NAME                 varchar2(200),
    SEX                  number(1),
    BIRTH_DATE           date,
    ID_CARD              varchar(50),
@@ -20,13 +22,16 @@ create table SLRY_QUALIFY
    DOC_PHOTO_ID         number(10),
    DOC_CARD_ID          number(10),
    DOC_EDUCATION_ID     number(10),
+   CARD_TYPE_ID         number(10),
+   GRADUATION_TIME      date,
+   GRADUATION_SCHOOL    varchar2(200),
+   MAJOR                varchar2(200),
+   WORK_RESUME          varchar2(200),
+   PRODUCTION           varchar2(2000),
    CREATE_TIME          DATE,
    CREATE_USER          VARCHAR2(100),
    UPDATE_TIME          DATE,
    UPDATE_USER          VARCHAR2(100),
-   STATUS               number(1),
-   DOC_CONTRACT_ID      number(10),
-   CS_OPINION           varchar(2000 char),
    constraint PK_SLRY_QUALIFY primary key (ID),
    constraint FK_SLRY_SYS_CODE2 foreign key (EDUCATION_TYPE_ID)
          references SYS_CODE_DETAIL (ID),
@@ -44,8 +49,8 @@ create table SLRY_QUALIFY
          references DOC_DOCUMENT (ID),
    constraint FK_SLRY_DOC3 foreign key (DOC_EDUCATION_ID)
          references DOC_DOCUMENT (ID),
-   constraint FK_SLRY_DOC4 foreign key (DOC_CONTRACT_ID)
-         references DOC_DOCUMENT (ID)
+   constraint FK_SLRY_SYS_CODE6 foreign key (CARD_TYPE_ID)
+         references SYS_CODE_DETAIL (ID)
 );
 
 comment on table SLRY_QUALIFY is
@@ -96,6 +101,24 @@ comment on column SLRY_QUALIFY.DOC_CARD_ID is
 comment on column SLRY_QUALIFY.DOC_EDUCATION_ID is
 '学历或职称照片';
 
+comment on column SLRY_QUALIFY.CARD_TYPE_ID is
+'证件类型';
+
+comment on column SLRY_QUALIFY.GRADUATION_TIME is
+'毕业时间';
+
+comment on column SLRY_QUALIFY.GRADUATION_SCHOOL is
+'毕业院校';
+
+comment on column SLRY_QUALIFY.MAJOR is
+'所学专业';
+
+comment on column SLRY_QUALIFY.WORK_RESUME is
+'工作简历';
+
+comment on column SLRY_QUALIFY.PRODUCTION is
+'生产业绩';
+
 comment on column SLRY_QUALIFY.CREATE_TIME is
 '创建时间';
 
@@ -107,12 +130,3 @@ comment on column SLRY_QUALIFY.UPDATE_TIME is
 
 comment on column SLRY_QUALIFY.UPDATE_USER is
 '更新用户名';
-
-comment on column SLRY_QUALIFY.STATUS is
-'状态';
-
-comment on column SLRY_QUALIFY.DOC_CONTRACT_ID is
-'合同文件';
-
-comment on column SLRY_QUALIFY.CS_OPINION is
-'初审意见';
