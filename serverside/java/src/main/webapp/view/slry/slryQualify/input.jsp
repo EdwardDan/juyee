@@ -5,12 +5,17 @@
     $(function () {
         //页面验证初始化
         var validateCondition = [
-                                                                        //{name:"unitName", rule:"validate[required,custom[integer],maxSize[10]"},            
+                                                                        //{name:"unitName", rule:"validate[required,maxSize[100]]"},            
                                                                                                       //{name:"description", rule:"validate[required,maxSize[${prop.length}]]"},            
                                                                                                       //{name:"name", rule:"validate[required,custom[integer],maxSize[2]"},            
                                                                                                       //{name:"sex", rule:"validate[required,maxSize[1]]"},            
                                                                                                       //{name:"birthDate", rule:"validate[required,custom[date],maxSize[7]"},            
                                                                                                       //{name:"idCard", rule:"validate[required,maxSize[50]]"},            
+                                                                                                      //{name:"graduationTime", rule:"validate[required,maxSize[7]]"},            
+                                                                                                      //{name:"graduationSchool", rule:"validate[required,maxSize[200]]"},            
+                                                                                                      //{name:"major", rule:"validate[required,maxSize[200]]"},            
+                                                                                                      //{name:"workResume", rule:"validate[required,maxSize[200]]"},            
+                                                                                                      //{name:"production", rule:"validate[required,maxSize[${prop.length}]]"},            
                                                                                                       //{name:"createTime", rule:"validate[required,maxSize[7]]"},            
                                                                                                       //{name:"createUser", rule:"validate[required,maxSize[100]]"},            
                                                                                                       //{name:"updateTime", rule:"validate[required,maxSize[7]]"},            
@@ -79,6 +84,39 @@
                           </td>                                
             </tr>
                                     <tr class="tr_light">
+              <td class="form_label">毕业时间：</td>
+              <td class="form_content">
+                                <input type="text" name="graduationTime" id="graduationTime" class="input_datetime"
+                           value="<fmt:formatDate value="${bean.graduationTime}" pattern="yyyy-MM-dd HH:mm:ss"/>" readonly="true"/>
+                    <input type="button" class="button_calendar" value=" " onClick="calendar('graduationTime','all')">                                                        
+            
+                          </td>                                
+            </tr>
+                                                <tr class="tr_dark">
+              <td class="form_label">毕业院校：</td>
+              <td class="form_content">
+                        <form:input path="graduationSchool" cssClass="input_text"/>						
+                          </td>                                
+            </tr>
+                                    <tr class="tr_light">
+              <td class="form_label">所学专业：</td>
+              <td class="form_content">
+                        <form:input path="major" cssClass="input_text"/>						
+                          </td>                                
+            </tr>
+                                                <tr class="tr_dark">
+              <td class="form_label">工作简历：</td>
+              <td class="form_content">
+                        <form:input path="workResume" cssClass="input_text"/>						
+                          </td>                                
+            </tr>
+                                    <tr class="tr_light">
+              <td class="form_label">生产业绩：</td>
+              <td class="form_content">
+                        <form:input path="production" cssClass="input_text"/>						
+                          </td>                                
+            </tr>
+                                                <tr class="tr_dark">
               <td class="form_label">创建时间：</td>
               <td class="form_content">
                                 <input type="text" name="createTime" id="createTime" class="input_datetime"
@@ -87,13 +125,13 @@
             
                           </td>                                
             </tr>
-                                                <tr class="tr_dark">
+                                    <tr class="tr_light">
               <td class="form_label">创建用户名：</td>
               <td class="form_content">
                         <form:input path="createUser" cssClass="input_text"/>						
                           </td>                                
             </tr>
-                                    <tr class="tr_light">
+                                                <tr class="tr_dark">
               <td class="form_label">更新时间：</td>
               <td class="form_content">
                                 <input type="text" name="updateTime" id="updateTime" class="input_datetime"
@@ -102,7 +140,7 @@
             
                           </td>                                
             </tr>
-                                                <tr class="tr_dark">
+                                    <tr class="tr_light">
               <td class="form_label">更新用户名：</td>
               <td class="form_content">
                         <form:input path="updateUser" cssClass="input_text"/>						

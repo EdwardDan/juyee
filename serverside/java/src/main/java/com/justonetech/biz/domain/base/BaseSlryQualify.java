@@ -1,7 +1,5 @@
 package com.justonetech.biz.domain.base;
 
-import com.justonetech.biz.domain.DocDocument;
-
 import java.io.Serializable;
 
 
@@ -28,25 +26,29 @@ public abstract class BaseSlryQualify  implements Serializable {
 	public static String REF = "SlryQualify";
 	public static String PROP_UNIT_NAME = "unitName";
 	public static String PROP_DESCRIPTION = "description";
+	public static String PROP_MAJOR = "major";
+	public static String PROP_GRADUATION_TIME = "graduationTime";
 	public static String PROP_UPDATE_TIME = "updateTime";
 	public static String PROP_DOC_EDUCATION = "docEducation";
 	public static String PROP_ID_CARD = "idCard";
 	public static String PROP_BIRTH_DATE = "birthDate";
+	public static String PROP_GRADUATION_SCHOOL = "graduationSchool";
 	public static String PROP_UNIT_TYPE = "unitType";
 	public static String PROP_DOC_PHOTO = "docPhoto";
 	public static String PROP_DOC_CARD = "docCard";
 	public static String PROP_NAME = "name";
-	public static String PROP_CREATE_USER = "createUser";
 	public static String PROP_APPLY_CER_TYPE = "applyCerType";
+	public static String PROP_CREATE_USER = "createUser";
+	public static String PROP_WORK_RESUME = "workResume";
 	public static String PROP_EDUCATION_TYPE = "educationType";
+	public static String PROP_PRODUCTION = "production";
 	public static String PROP_CREATE_TIME = "createTime";
 	public static String PROP_ID = "id";
+	public static String PROP_CARD_TYPE = "cardType";
 	public static String PROP_APPLY_TYPE = "applyType";
 	public static String PROP_TECH_TYPE = "techType";
-	public static String PROP_SEX = "sex";
 	public static String PROP_UPDATE_USER = "updateUser";
-	public static String PROP_STATUS = "status";
-	public static String PROP_CS_OPINION = "csOpinion";
+	public static String PROP_SEX = "sex";
 
 
 	// constructors
@@ -74,7 +76,7 @@ public abstract class BaseSlryQualify  implements Serializable {
 	// fields
     /*企业名称*/
     /*企业名称*/
-	private Long unitName;
+	private String unitName;
 	
     /*备注*/
     /*备注*/
@@ -95,13 +97,27 @@ public abstract class BaseSlryQualify  implements Serializable {
     /*证件号码*/
     /*证件号码*/
 	private String idCard;
-
-	/*状态*/
-    /*状态*/
-	private Integer status;
-
-	private String csOpinion;
-
+	
+    /*毕业时间*/
+    /*毕业时间*/
+	private java.sql.Timestamp graduationTime;
+	
+    /*毕业院校*/
+    /*毕业院校*/
+	private String graduationSchool;
+	
+    /*所学专业*/
+    /*所学专业*/
+	private String major;
+	
+    /*工作简历*/
+    /*工作简历*/
+	private String workResume;
+	
+    /*生产业绩*/
+    /*生产业绩*/
+	private String production;
+	
     /*创建时间*/
     /*创建时间*/
 	private java.sql.Timestamp createTime;
@@ -125,10 +141,10 @@ public abstract class BaseSlryQualify  implements Serializable {
 	private com.justonetech.system.domain.SysCodeDetail unitType;
 	private com.justonetech.biz.domain.DocDocument docCard;
 	private com.justonetech.system.domain.SysCodeDetail applyType;
+	private com.justonetech.system.domain.SysCodeDetail cardType;
 	private com.justonetech.system.domain.SysCodeDetail educationType;
 	private com.justonetech.biz.domain.DocDocument docEducation;
 	private com.justonetech.biz.domain.DocDocument docPhoto;
-	private com.justonetech.biz.domain.DocDocument docContract;
 
 
 
@@ -158,7 +174,7 @@ public abstract class BaseSlryQualify  implements Serializable {
 	/**
 	 * Return the value associated with the column: UNIT_NAME
 	 */
-	public Long getUnitName () {
+	public String getUnitName () {
 		return unitName;
 	}
 
@@ -166,7 +182,7 @@ public abstract class BaseSlryQualify  implements Serializable {
 	 * Set the value related to the column: UNIT_NAME
 	 * @param unitName the UNIT_NAME value
 	 */
-	public void setUnitName (Long unitName) {
+	public void setUnitName (String unitName) {
 		this.unitName = unitName;
 	}
 
@@ -250,23 +266,88 @@ public abstract class BaseSlryQualify  implements Serializable {
 		this.idCard = idCard;
 	}
 
-    public Integer getStatus() {
-        return status;
-    }
 
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
+	/**
+	 * Return the value associated with the column: GRADUATION_TIME
+	 */
+	public java.sql.Timestamp getGraduationTime () {
+		return graduationTime;
+	}
 
-    public String getCsOpinion() {
-        return csOpinion;
-    }
+	/**
+	 * Set the value related to the column: GRADUATION_TIME
+	 * @param graduationTime the GRADUATION_TIME value
+	 */
+	public void setGraduationTime (java.sql.Timestamp graduationTime) {
+		this.graduationTime = graduationTime;
+	}
 
-    public void setCsOpinion(String csOpinion) {
-        this.csOpinion = csOpinion;
-    }
 
-    /**
+	/**
+	 * Return the value associated with the column: GRADUATION_SCHOOL
+	 */
+	public String getGraduationSchool () {
+		return graduationSchool;
+	}
+
+	/**
+	 * Set the value related to the column: GRADUATION_SCHOOL
+	 * @param graduationSchool the GRADUATION_SCHOOL value
+	 */
+	public void setGraduationSchool (String graduationSchool) {
+		this.graduationSchool = graduationSchool;
+	}
+
+
+	/**
+	 * Return the value associated with the column: MAJOR
+	 */
+	public String getMajor () {
+		return major;
+	}
+
+	/**
+	 * Set the value related to the column: MAJOR
+	 * @param major the MAJOR value
+	 */
+	public void setMajor (String major) {
+		this.major = major;
+	}
+
+
+	/**
+	 * Return the value associated with the column: WORK_RESUME
+	 */
+	public String getWorkResume () {
+		return workResume;
+	}
+
+	/**
+	 * Set the value related to the column: WORK_RESUME
+	 * @param workResume the WORK_RESUME value
+	 */
+	public void setWorkResume (String workResume) {
+		this.workResume = workResume;
+	}
+
+
+	/**
+	 * Return the value associated with the column: PRODUCTION
+	 */
+	public String getProduction () {
+		return production;
+	}
+
+	/**
+	 * Set the value related to the column: PRODUCTION
+	 * @param production the PRODUCTION value
+	 */
+	public void setProduction (String production) {
+		this.production = production;
+	}
+
+
+	/**
 	 * Return the value associated with the column: CREATE_TIME
 	 */
 	public java.sql.Timestamp getCreateTime () {
@@ -411,6 +492,22 @@ public abstract class BaseSlryQualify  implements Serializable {
 
 
 	/**
+	 * Return the value associated with the column: CARD_TYPE_ID
+	 */
+	public com.justonetech.system.domain.SysCodeDetail getCardType () {
+		return cardType;
+	}
+
+	/**
+	 * Set the value related to the column: CARD_TYPE_ID
+	 * @param cardType the CARD_TYPE_ID value
+	 */
+	public void setCardType (com.justonetech.system.domain.SysCodeDetail cardType) {
+		this.cardType = cardType;
+	}
+
+
+	/**
 	 * Return the value associated with the column: EDUCATION_TYPE_ID
 	 */
 	public com.justonetech.system.domain.SysCodeDetail getEducationType () {
@@ -457,15 +554,9 @@ public abstract class BaseSlryQualify  implements Serializable {
 		this.docPhoto = docPhoto;
 	}
 
-    public DocDocument getDocContract() {
-        return docContract;
-    }
 
-    public void setDocContract(DocDocument docContract) {
-        this.docContract = docContract;
-    }
 
-    public boolean equals (Object obj) {
+	public boolean equals (Object obj) {
 		if (null == obj) return false;
 		if (!(obj instanceof com.justonetech.biz.domain.SlryQualify)) return false;
 		else {
@@ -496,8 +587,11 @@ public abstract class BaseSlryQualify  implements Serializable {
 		builder.append(sex);
 		builder.append(birthDate);
 		builder.append(idCard);
-		builder.append(status);
-		builder.append(csOpinion);
+		builder.append(graduationTime);
+		builder.append(graduationSchool);
+		builder.append(major);
+		builder.append(workResume);
+		builder.append(production);
 		builder.append(createTime);
 		builder.append(createUser);
 		builder.append(updateTime);

@@ -36,25 +36,52 @@
                       ${bean.idCard}                    </td>
         </tr>
                         <tr class="tr_light">
+          <td class="form_label">毕业时间：</td>
+          <td class="form_content">&nbsp;
+                      <fmt:formatDate value="${bean.graduationTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
+            
+                    </td>
+        </tr>
+                                <tr class="tr_dark">
+          <td class="form_label">毕业院校：</td>
+          <td class="form_content">&nbsp;
+                      ${bean.graduationSchool}                    </td>
+        </tr>
+                        <tr class="tr_light">
+          <td class="form_label">所学专业：</td>
+          <td class="form_content">&nbsp;
+                      ${bean.major}                    </td>
+        </tr>
+                                <tr class="tr_dark">
+          <td class="form_label">工作简历：</td>
+          <td class="form_content">&nbsp;
+                      ${bean.workResume}                    </td>
+        </tr>
+                        <tr class="tr_light">
+          <td class="form_label">生产业绩：</td>
+          <td class="form_content">&nbsp;
+                      ${bean.production}                    </td>
+        </tr>
+                                <tr class="tr_dark">
           <td class="form_label">创建时间：</td>
           <td class="form_content">&nbsp;
                       <fmt:formatDate value="${bean.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
             
                     </td>
         </tr>
-                                <tr class="tr_dark">
+                        <tr class="tr_light">
           <td class="form_label">创建用户名：</td>
           <td class="form_content">&nbsp;
                       ${bean.createUser}                    </td>
         </tr>
-                        <tr class="tr_light">
+                                <tr class="tr_dark">
           <td class="form_label">更新时间：</td>
           <td class="form_content">&nbsp;
                       <fmt:formatDate value="${bean.updateTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
             
                     </td>
         </tr>
-                                <tr class="tr_dark">
+                        <tr class="tr_light">
           <td class="form_label">更新用户名：</td>
           <td class="form_content">&nbsp;
                       ${bean.updateUser}                    </td>
