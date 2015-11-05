@@ -236,26 +236,33 @@ public class OaThingsApplyController extends BaseCRUDActionController<OaThingsAp
             target.setZrAuditUser(null);
             target.setZrAuditTime(null);
             oaThingsApplyService.save(target);
+            //保存前先删除关联子表数据便于更新
             List<OaThingsApplyItem> oaThingsApplyItemList = new ArrayList<OaThingsApplyItem>(target.getOaThingsApplyItems());
             oaThingsApplyItemService.batchDelete(oaThingsApplyItemList, oaThingsApplyItemList.size());
             oaThingsApplyItemList = new ArrayList<OaThingsApplyItem>();
-            String[] thingIds = request.getParameterValues("thingId");
-            String[] amount = request.getParameterValues("amount");
-            for (int i = 0; i < thingIds.length; i++) {
-                OaThings oaThings = oaThingsService.get(Long.valueOf(thingIds[i]));
-                OaThingsApplyItem oaThingsApplyItem = new OaThingsApplyItem();
-                oaThingsApplyItem.setModel(oaThings.getModel());
-                oaThingsApplyItem.setName(oaThings.getName());
-                oaThingsApplyItem.setOaThings(oaThings);
-                oaThingsApplyItem.setOaThingsApply(target);
-                oaThingsApplyItem.setPrice(oaThings.getPrice());
-                oaThingsApplyItem.setUnit(oaThings.getUnit());
-                if (null != amount[i] && !StringHelper.isEmpty(amount[i])) {
-                    oaThingsApplyItem.setAmount(Double.valueOf(amount[i]));
+
+            String[] name = request.getParameterValues("name");//申请物品
+            String[] model = request.getParameterValues("model");//型号
+            String[] unit = request.getParameterValues("unit");//单位
+            String[] price = request.getParameterValues("price");//预计单价
+            String[] amount = request.getParameterValues("amount");//数量
+            if (null != name && name.length>0) {
+                for (int i = 0; i < name.length; i++) {
+                    OaThingsApplyItem oaThingsApplyItem = new OaThingsApplyItem();
+                    oaThingsApplyItem.setName(name[i]);//申请物品
+                    oaThingsApplyItem.setModel(model[i]);//型号
+                    oaThingsApplyItem.setUnit(unit[i]);//单位
+                    if (null != price[i] && !StringHelper.isEmpty(price[i])) {//预计单价
+                        oaThingsApplyItem.setPrice(Double.valueOf(price[i]));
+                    }
+                    oaThingsApplyItem.setOaThingsApply(target);//申请id
+                    if (null != amount[i] && !StringHelper.isEmpty(amount[i])) {//数量
+                        oaThingsApplyItem.setAmount(Double.valueOf(amount[i]));
+                    }
+                    oaThingsApplyItemList.add(oaThingsApplyItem);
                 }
-                oaThingsApplyItemList.add(oaThingsApplyItem);
+            oaThingsApplyItemService.batchSave(oaThingsApplyItemList, oaThingsApplyItemList.size());//保存申请记录物品
             }
-            oaThingsApplyItemService.batchSave(oaThingsApplyItemList, oaThingsApplyItemList.size());
             if (target.getStatus() == OaThingsApplyStatus.STATUS_SUBMIT.getCode()) {
                 createOaTask(target);
             }
@@ -307,17 +314,17 @@ public class OaThingsApplyController extends BaseCRUDActionController<OaThingsAp
             }
             oaThingsApplyService.save(target);
             createOaTask(target);
-            if (target.getStatus() == OaThingsApplyStatus.STATUS_MAIN_PASS.getCode()) {
-                Set<OaThingsApplyItem> oaThingsApplyItems = target.getOaThingsApplyItems();
-                for (OaThingsApplyItem oaThingsApplyItem : oaThingsApplyItems) {
-                    OaThings oaThings = oaThingsApplyItem.getOaThings();
-                    oaThings.setAmount(oaThings.getAmount() - oaThingsApplyItem.getAmount());
-                    if (oaThings.getAmount() < 0) {
-                        oaThings.setAmount(new Double(0));
-                    }
-                    oaThingsService.save(oaThings);
-                }
-            }
+//            if (target.getStatus() == OaThingsApplyStatus.STATUS_MAIN_PASS.getCode()) {
+//                Set<OaThingsApplyItem> oaThingsApplyItems = target.getOaThingsApplyItems();
+//                for (OaThingsApplyItem oaThingsApplyItem : oaThingsApplyItems) {
+//                    OaThings oaThings = oaThingsApplyItem.getOaThings();
+//                    oaThings.setAmount(oaThings.getAmount() - oaThingsApplyItem.getAmount());
+//                    if (oaThings.getAmount() < 0) {
+//                        oaThings.setAmount(new Double(0));
+//                    }
+//                    oaThingsService.save(oaThings);
+//                }
+//            }
         } catch (Exception e) {
             log.error("error", e);
             super.processException(response, e);
