@@ -43,6 +43,7 @@
                 column="DESCRIPTION"
                 type="string"
                 not-null="false"
+                length="2000"
                 >
             <meta attribute="ColumnName">备注</meta>
             <meta attribute="ColumnComment">备注</meta>
@@ -141,6 +142,7 @@
                 column="PRODUCTION"
                 type="string"
                 not-null="false"
+                length="2000"
                 >
             <meta attribute="ColumnName">生产业绩</meta>
             <meta attribute="ColumnComment">生产业绩</meta>
