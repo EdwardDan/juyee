@@ -84,7 +84,7 @@ public abstract class BaseSlryQualify  implements Serializable {
 	
     /*姓名*/
     /*姓名*/
-	private Integer name;
+	private String  name;
 	
     /*性别*/
     /*性别*/
@@ -117,6 +117,10 @@ public abstract class BaseSlryQualify  implements Serializable {
     /*生产业绩*/
     /*生产业绩*/
 	private String production;
+
+    /*状态*/
+    /*状态*/
+    private Integer status;
 	
     /*创建时间*/
     /*创建时间*/
@@ -202,24 +206,15 @@ public abstract class BaseSlryQualify  implements Serializable {
 		this.description = description;
 	}
 
+    public String getName() {
+        return name;
+    }
 
-	/**
-	 * Return the value associated with the column: NAME
-	 */
-	public Integer getName () {
-		return name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	/**
-	 * Set the value related to the column: NAME
-	 * @param name the NAME value
-	 */
-	public void setName (Integer name) {
-		this.name = name;
-	}
-
-
-	/**
+    /**
 	 * Return the value associated with the column: SEX
 	 */
 	public Boolean getSex () {
@@ -346,8 +341,15 @@ public abstract class BaseSlryQualify  implements Serializable {
 		this.production = production;
 	}
 
+    public Integer getStatus() {
+        return status;
+    }
 
-	/**
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    /**
 	 * Return the value associated with the column: CREATE_TIME
 	 */
 	public java.sql.Timestamp getCreateTime () {
@@ -592,6 +594,7 @@ public abstract class BaseSlryQualify  implements Serializable {
 		builder.append(major);
 		builder.append(workResume);
 		builder.append(production);
+		builder.append(status);
 		builder.append(createTime);
 		builder.append(createUser);
 		builder.append(updateTime);

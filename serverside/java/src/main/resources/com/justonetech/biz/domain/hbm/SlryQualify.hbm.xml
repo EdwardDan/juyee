@@ -147,6 +147,17 @@
         </property>
 
         <property
+                name="status"
+                column="STATUS"
+                type="integer"
+                not-null="false"
+                length="2"
+                >
+            <meta attribute="ColumnName">状态</meta>
+            <meta attribute="ColumnComment">状态</meta>
+        </property>
+
+        <property
                 name="createTime"
                 column="CREATE_TIME"
                 type="timestamp"
