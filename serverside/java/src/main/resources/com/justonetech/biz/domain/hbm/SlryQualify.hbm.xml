@@ -43,7 +43,6 @@
                 column="DESCRIPTION"
                 type="string"
                 not-null="false"
-                length="2000"
                 >
             <meta attribute="ColumnName">备注</meta>
             <meta attribute="ColumnComment">备注</meta>
@@ -100,8 +99,8 @@
                 not-null="false"
                 length="7"
                 >
-        <meta attribute="ColumnName">毕业时间</meta>
-        <meta attribute="ColumnComment">毕业时间</meta>
+            <meta attribute="ColumnName">毕业时间</meta>
+            <meta attribute="ColumnComment">毕业时间</meta>
         </property>
 
         <property
@@ -142,21 +141,9 @@
                 column="PRODUCTION"
                 type="string"
                 not-null="false"
-                length="2000"
                 >
             <meta attribute="ColumnName">生产业绩</meta>
             <meta attribute="ColumnComment">生产业绩</meta>
-        </property>
-
-        <property
-                name="status"
-                column="STATUS"
-                type="integer"
-                not-null="false"
-                length="2"
-                >
-            <meta attribute="ColumnName">状态</meta>
-            <meta attribute="ColumnComment">状态</meta>
         </property>
 
         <property
@@ -203,6 +190,29 @@
             <meta attribute="ColumnComment">更新用户名</meta>
         </property>
 
+        <property
+                name="status"
+                column="STATUS"
+                type="integer"
+                not-null="false"
+                length="2"
+                >
+            <meta attribute="ColumnName">状态</meta>
+            <meta attribute="ColumnComment">状态</meta>
+        </property>
+
+
+        <property
+                name="csOpinion"
+                column="CS_OPINION"
+                type="string"
+                not-null="false"
+                length="1000"
+                >
+            <meta attribute="ColumnName">初审意见</meta>
+            <meta attribute="ColumnComment">初审意见</meta>
+        </property>
+
         <many-to-one
                 name="applyCerType"
                 column="APPLY_CER_TYPE_ID"
@@ -225,6 +235,20 @@
                 >
         </many-to-one>
         <many-to-one
+                name="cardType"
+                column="CARD_TYPE_ID"
+                class="com.justonetech.system.domain.SysCodeDetail"
+                not-null="false"
+                >
+        </many-to-one>
+        <many-to-one
+                name="educationType"
+                column="EDUCATION_TYPE_ID"
+                class="com.justonetech.system.domain.SysCodeDetail"
+                not-null="false"
+                >
+        </many-to-one>
+        <many-to-one
                 name="docCard"
                 column="DOC_CARD_ID"
                 class="DocDocument"
@@ -239,19 +263,13 @@
                 >
         </many-to-one>
         <many-to-one
-                name="cardType"
-                column="CARD_TYPE_ID"
-                class="com.justonetech.system.domain.SysCodeDetail"
+                name="docContract"
+                column="DOC_CONTRACT_ID"
+                class="DocDocument"
                 not-null="false"
                 >
         </many-to-one>
-        <many-to-one
-                name="educationType"
-                column="EDUCATION_TYPE_ID"
-                class="com.justonetech.system.domain.SysCodeDetail"
-                not-null="false"
-                >
-        </many-to-one>
+
         <many-to-one
                 name="docEducation"
                 column="DOC_EDUCATION_ID"
