@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.justonetech.biz.domain">
+	<class
+		name="SgPermit"
+		table="SG_PERMIT"
+	>
+		
+		<meta attribute="sync-DAO">false</meta>
+		<meta attribute="sync-jsp">true</meta>
+		<meta attribute="sync-boolean">get</meta>
+		<meta attribute="treeable">false</meta>
+		<meta attribute="projectable">false</meta>
+        <meta attribute="tableName">施工许可证</meta>
+        <meta attribute="tableComment">施工许可证</meta>
+	    <meta attribute="sync-templatePatterns">list\w*</meta>
+        <meta attribute="sub-system">sg</meta>
+
+		<id
+			name="id"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="com.justonetech.core.orm.hibernate.LongIdGenerator"/>
+		</id>
+
+		<property
+			name="year"
+			column="YEAR"
+			type="integer"
+			not-null="false"
+			length="4"
+        >
+            <meta attribute="ColumnName">年</meta>
+            <meta attribute="ColumnComment">年</meta>
+        </property>
+
+		<property
+			name="bjbh"
+			column="BJBH"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">报建编号</meta>
+            <meta attribute="ColumnComment">报建编号</meta>
+        </property>
+
+		<property
+			name="projectName"
+			column="PROJECT_NAME"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">项目名称</meta>
+            <meta attribute="ColumnComment">项目名称</meta>
+        </property>
+
+		<property
+			name="buildName"
+			column="BUILD_NAME"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">建设单位</meta>
+            <meta attribute="ColumnComment">建设单位</meta>
+        </property>
+
+		<property
+			name="hjgYear"
+			column="HJG_YEAR"
+			type="integer"
+			not-null="false"
+			length="4"
+        >
+            <meta attribute="ColumnName">沪交管收字_年</meta>
+            <meta attribute="ColumnComment">沪交管收字_年</meta>
+        </property>
+
+		<property
+			name="hjgNum"
+			column="HJG_NUM"
+			type="integer"
+			not-null="false"
+			length="4"
+        >
+            <meta attribute="ColumnName">沪交管收字_号</meta>
+            <meta attribute="ColumnComment">沪交管收字_号</meta>
+        </property>
+
+		<property
+			name="applyPerson"
+			column="APPLY_PERSON"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">申请人</meta>
+            <meta attribute="ColumnComment">申请人</meta>
+        </property>
+
+		<property
+			name="applyMatter"
+			column="APPLY_MATTER"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">申请事项</meta>
+            <meta attribute="ColumnComment">申请事项</meta>
+        </property>
+
+		<property
+			name="applyNum"
+			column="APPLY_NUM"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">申请号</meta>
+            <meta attribute="ColumnComment">申请号</meta>
+        </property>
+
+		<property
+			name="materialPerson"
+			column="MATERIAL_PERSON"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">材料提交人</meta>
+            <meta attribute="ColumnComment">材料提交人</meta>
+        </property>
+
+		<property
+			name="materialPersonPhone"
+			column="MATERIAL_PERSON_PHONE"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">材料提交人联系电话</meta>
+            <meta attribute="ColumnComment">材料提交人联系电话</meta>
+        </property>
+
+		<property
+			name="materialPersonAddress"
+			column="MATERIAL_PERSON_ADDRESS"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">材料提交人联系地址</meta>
+            <meta attribute="ColumnComment">材料提交人联系地址</meta>
+        </property>
+
+		<property
+			name="receivePerson"
+			column="RECEIVE_PERSON"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">收件人</meta>
+            <meta attribute="ColumnComment">收件人</meta>
+        </property>
+
+		<property
+			name="receivePersonPhone"
+			column="RECEIVE_PERSON_PHONE"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">收件人联系电话</meta>
+            <meta attribute="ColumnComment">收件人联系电话</meta>
+        </property>
+
+		<property
+			name="status"
+			column="STATUS"
+			type="integer"
+			not-null="false"
+			length="2"
+        >
+            <meta attribute="ColumnName">状态</meta>
+            <meta attribute="ColumnComment">状态</meta>
+        </property>
+
+		<property
+			name="csOpinion"
+			column="CS_OPINION"
+			type="string"
+			not-null="false"
+			length="1000"
+        >
+            <meta attribute="ColumnName">初审意见</meta>
+            <meta attribute="ColumnComment">初审意见</meta>
+        </property>
+
+		<property
+			name="fhOpinion"
+			column="FH_OPINION"
+			type="string"
+			not-null="false"
+			length="1000"
+        >
+            <meta attribute="ColumnName">复核意见</meta>
+            <meta attribute="ColumnComment">复核意见</meta>
+        </property>
+
+		<property
+			name="shOpinion"
+			column="SH_OPINION"
+			type="string"
+			not-null="false"
+			length="1000"
+        >
+            <meta attribute="ColumnName">审核意见</meta>
+            <meta attribute="ColumnComment">审核意见</meta>
+        </property>
+
+		<property
+			name="fgldOpinion"
+			column="FGLD_OPINION"
+			type="string"
+			not-null="false"
+			length="1000"
+        >
+            <meta attribute="ColumnName">分管领导审核意见</meta>
+            <meta attribute="ColumnComment">分管领导审核意见</meta>
+        </property>
+
+		<property
+			name="zxldOpinion"
+			column="ZXLD_OPINION"
+			type="string"
+			not-null="false"
+			length="1000"
+        >
+            <meta attribute="ColumnName">中心领导审核意见</meta>
+            <meta attribute="ColumnComment">中心领导审核意见</meta>
+        </property>
+
+		<property
+			name="createTime"
+			column="CREATE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">创建时间</meta>
+            <meta attribute="ColumnComment">创建时间</meta>
+        </property>
+
+		<property
+			name="createUser"
+			column="CREATE_USER"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">创建用户名</meta>
+            <meta attribute="ColumnComment">创建用户名</meta>
+        </property>
+
+		<property
+			name="updateTime"
+			column="UPDATE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">更新时间</meta>
+            <meta attribute="ColumnComment">更新时间</meta>
+        </property>
+
+		<property
+			name="updateUser"
+			column="UPDATE_USER"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">更新用户名</meta>
+            <meta attribute="ColumnComment">更新用户名</meta>
+        </property>
+
+		<many-to-one
+			name="projectType"
+			column="PROJECT_TYPE_ID"
+			class="com.justonetech.system.domain.SysCodeDetail"
+			not-null="false"
+		>
+		</many-to-one>
+	
+
+		<set name="sgPermitOperations" inverse="true">
+			<key column="SG_PERMIT_ID"/>
+			<one-to-many class="SgPermitOperation"/>
+		</set>
+
+		<set name="sgAuditOpinions" inverse="true">
+			<key column="SG_PERMIT_ID"/>
+			<one-to-many class="SgAuditOpinion"/>
+		</set>
+
+		<set name="sgMaterials" inverse="true">
+			<key column="SG_PERMIT_ID"/>
+			<one-to-many class="SgMaterial"/>
+		</set>
+
+	</class>	
+    <query name="sgpermit_all_data_query">
+        <![CDATA[FROM SgPermit]]>
+    </query>
+</hibernate-mapping>

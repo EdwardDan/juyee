@@ -183,6 +183,10 @@ public class Constants {
     public static final String OA_RECEIVE_FILE_TYPE = "OaReceiveFileType";
      //收文--来文单位
     public static final String OA_RECEIVE_LWDW = "lwdw";
-
+    //项目类型
+    public static final String PROJECT_TYPE = "ProjectType";
+    public static final String PROJECT_TYPE_GKSH = "gksh";
+    public static final String PROJECT_TYPE_GL = "gl";
+    public static final String PROJECT_TYPE_HD = "hd";
 
 }
