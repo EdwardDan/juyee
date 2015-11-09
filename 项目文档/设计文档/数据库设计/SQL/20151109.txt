@@ -1,0 +1,300 @@
+drop table SG_PERMIT cascade constraints;
+
+/*==============================================================*/
+/* Table: SG_PERMIT                                             */
+/*==============================================================*/
+create table SG_PERMIT 
+(
+   ID                   number(10)           not null,
+   PROJECT_TYPE_ID      number(10),
+   YEAR                 number(4),
+   BJBH                 varchar2(50),
+   PROJECT_NAME         varchar2(200),
+   BUILD_NAME           varchar2(200),
+   HJG_YEAR               number(4),
+   HJG_NUM                number(4),
+   APPLY_PERSON         varchar2(50),
+   APPLY_MATTER         varchar2(200),
+   APPLY_NUM            varchar2(50),
+   MATERIAL_PERSON      varchar2(200),
+   MATERIAL_PERSON_PHONE varchar2(50),
+   MATERIAL_PERSON_ADDRESS varchar2(200),
+   RECEIVE_PERSON       varchar2(200),
+   RECEIVE_PERSON_PHONE varchar2(50),
+   STATUS               number(2),
+   CS_OPINION           varchar2(1000),
+   FH_OPINION           varchar2(1000),
+   SH_OPINION           varchar2(1000),
+   FGLD_OPINION         varchar2(1000),
+   ZXLD_OPINION         varchar2(1000),
+   CREATE_TIME          DATE,
+   CREATE_USER          VARCHAR2(100),
+   UPDATE_TIME          DATE,
+   UPDATE_USER          VARCHAR2(100),
+   constraint PK_SG_PERMIT primary key (ID),
+   constraint FK_SG_PERMI_REFERENCE_SYS_CODE foreign key (PROJECT_TYPE_ID)
+         references SYS_CODE_DETAIL (ID)
+);
+
+comment on table SG_PERMIT is
+'施工许可证';
+
+comment on column SG_PERMIT.ID is
+'ID';
+
+comment on column SG_PERMIT.PROJECT_TYPE_ID is
+'项目类型';
+
+comment on column SG_PERMIT.YEAR is
+'年';
+
+comment on column SG_PERMIT.BJBH is
+'报建编号';
+
+comment on column SG_PERMIT.PROJECT_NAME is
+'项目名称';
+
+comment on column SG_PERMIT.BUILD_NAME is
+'建设单位';
+
+comment on column SG_PERMIT.H_YEAR is
+'沪交管收字_年';
+
+comment on column SG_PERMIT.H_NUM is
+'沪交管收字_号';
+
+comment on column SG_PERMIT.APPLY_PERSON is
+'申请人';
+
+comment on column SG_PERMIT.APPLY_MATTER is
+'申请事项';
+
+comment on column SG_PERMIT.APPLY_NUM is
+'申请号';
+
+comment on column SG_PERMIT.MATERIAL_PERSON is
+'材料提交人';
+
+comment on column SG_PERMIT.MATERIAL_PERSON_PHONE is
+'材料提交人联系电话';
+
+comment on column SG_PERMIT.MATERIAL_PERSON_ADDRESS is
+'材料提交人联系地址';
+
+comment on column SG_PERMIT.RECEIVE_PERSON is
+'收件人';
+
+comment on column SG_PERMIT.RECEIVE_PERSON_PHONE is
+'收件人联系电话';
+
+comment on column SG_PERMIT.STATUS is
+'状态';
+
+comment on column SG_PERMIT.CS_OPINION is
+'初审意见';
+
+comment on column SG_PERMIT.FH_OPINION is
+'复核意见';
+
+comment on column SG_PERMIT.SH_OPINION is
+'审核意见';
+
+comment on column SG_PERMIT.FGLD_OPINION is
+'分管领导审核意见';
+
+comment on column SG_PERMIT.ZXLD_OPINION is
+'中心领导审核意见';
+
+comment on column SG_PERMIT.CREATE_TIME is
+'创建时间';
+
+comment on column SG_PERMIT.CREATE_USER is
+'创建用户名';
+
+comment on column SG_PERMIT.UPDATE_TIME is
+'更新时间';
+
+comment on column SG_PERMIT.UPDATE_USER is
+'更新用户名';
+
+
+
+
+
+drop table SG_MATERIAL cascade constraints;
+
+/*==============================================================*/
+/* Table: SG_MATERIAL                                           */
+/*==============================================================*/
+create table SG_MATERIAL 
+(
+   ID                   number(10)           not null,
+   SG_PERMIT_ID         number(10),
+   NO                   number(10),
+   IS_FULL              number(1),
+   NUM                  number(10),
+   DOC_ID               number(10),
+   CREATE_TIME          DATE,
+   CREATE_USER          VARCHAR2(100),
+   UPDATE_TIME          DATE,
+   UPDATE_USER          VARCHAR2(100),
+   constraint PK_SG_MATERIAL primary key (ID),
+   constraint FK_SG_MATER1 foreign key (SG_PERMIT_ID)
+         references SG_PERMIT (ID),
+   constraint FK_SG_MATER_REFERENCE_DOC1 foreign key (DOC_ID)
+         references DOC_DOCUMENT (ID)
+);
+
+comment on table SG_MATERIAL is
+'施工材料';
+
+comment on column SG_MATERIAL.ID is
+'ID';
+
+comment on column SG_MATERIAL.SG_PERMIT_ID is
+'施工许可';
+
+comment on column SG_MATERIAL.NO is
+'序号';
+
+comment on column SG_MATERIAL.IS_FULL is
+'材料齐全情况';
+
+comment on column SG_MATERIAL.NUM is
+'份数';
+
+comment on column SG_MATERIAL.DOC_ID is
+'附件';
+
+comment on column SG_MATERIAL.CREATE_TIME is
+'创建时间';
+
+comment on column SG_MATERIAL.CREATE_USER is
+'创建用户名';
+
+comment on column SG_MATERIAL.UPDATE_TIME is
+'更新时间';
+
+comment on column SG_MATERIAL.UPDATE_USER is
+'更新用户名';
+
+
+
+drop table SG_AUDIT_OPINION cascade constraints;
+
+/*==============================================================*/
+/* Table: SG_AUDIT_OPINION                                      */
+/*==============================================================*/
+create table SG_AUDIT_OPINION 
+(
+   ID                   number(10)           not null,
+   SG_PERMIT_ID         number(10),
+   NO                   number(10),
+   IS_CS_OPINION        number(1),
+   IS_FH_OPINION        number(1),
+   IS_SH_OPINION        number(1),
+   STATUS               number(2),
+   CREATE_TIME          DATE,
+   CREATE_USER          VARCHAR2(100),
+   UPDATE_TIME          DATE,
+   UPDATE_USER          VARCHAR2(100),
+   constraint PK_SG_AUDIT_OPINION primary key (ID),
+   constraint FK_SG_AUDIT_REFERENCE_SG2 foreign key (SG_PERMIT_ID)
+         references SG_PERMIT (ID)
+);
+
+comment on table SG_AUDIT_OPINION is
+'施工审核意见';
+
+comment on column SG_AUDIT_OPINION.ID is
+'ID';
+
+comment on column SG_AUDIT_OPINION.SG_PERMIT_ID is
+'施工许可';
+
+comment on column SG_AUDIT_OPINION.NO is
+'序号';
+
+comment on column SG_AUDIT_OPINION.IS_CS_OPINION is
+'初审意见';
+
+comment on column SG_AUDIT_OPINION.IS_FH_OPINION is
+'复核意见';
+
+comment on column SG_AUDIT_OPINION.IS_SH_OPINION is
+'审核意见';
+
+comment on column SG_AUDIT_OPINION.STATUS is
+'状态';
+
+comment on column SG_AUDIT_OPINION.CREATE_TIME is
+'创建时间';
+
+comment on column SG_AUDIT_OPINION.CREATE_USER is
+'创建用户名';
+
+comment on column SG_AUDIT_OPINION.UPDATE_TIME is
+'更新时间';
+
+comment on column SG_AUDIT_OPINION.UPDATE_USER is
+'更新用户名';
+
+
+
+drop table SG_PERMIT_OPERATION cascade constraints;
+
+/*==============================================================*/
+/* Table: SG_PERMIT_OPERATION                                   */
+/*==============================================================*/
+create table SG_PERMIT_OPERATION 
+(
+   ID                   number(10)           not null,
+   SG_PERMIT_ID         number(10),
+   OPTION_CODE          varchar2(100),
+   OPTION_NAME          varchar2(100),
+   OPTION_USER          VARCHAR2(100),
+   STATUS               number(2),
+   CREATE_TIME          DATE,
+   CREATE_USER          VARCHAR2(100),
+   UPDATE_TIME          DATE,
+   UPDATE_USER          VARCHAR2(100),
+   constraint PK_SG_PERMIT_OPERATION primary key (ID),
+   constraint FK_SG_PERMI_REFERENCE_SG_PERMI foreign key (SG_PERMIT_ID)
+         references SG_PERMIT (ID)
+);
+
+comment on table SG_PERMIT_OPERATION is
+'施工许可流转操作';
+
+comment on column SG_PERMIT_OPERATION.ID is
+'ID';
+
+comment on column SG_PERMIT_OPERATION.SG_PERMIT_ID is
+'施工许可';
+
+comment on column SG_PERMIT_OPERATION.OPTION_CODE is
+'操作编码';
+
+comment on column SG_PERMIT_OPERATION.OPTION_NAME is
+'操作名称';
+
+comment on column SG_PERMIT_OPERATION.OPTION_USER is
+'审核操作人';
+
+comment on column SG_PERMIT_OPERATION.STATUS is
+'状态';
+
+comment on column SG_PERMIT_OPERATION.CREATE_TIME is
+'创建时间';
+
+comment on column SG_PERMIT_OPERATION.CREATE_USER is
+'创建用户名';
+
+comment on column SG_PERMIT_OPERATION.UPDATE_TIME is
+'更新时间';
+
+comment on column SG_PERMIT_OPERATION.UPDATE_USER is
+'更新用户名';
+
+
+
