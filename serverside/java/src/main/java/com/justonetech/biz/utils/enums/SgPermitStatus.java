@@ -8,8 +8,8 @@ import com.justonetech.core.utils.JspHelper;
  * Date: 15-11-9
  */
 public enum SgPermitStatus {
-    STATUS_EDIT(1, "填写", "red", "tx"),
-    STATUS_SUBMIT(2, "提交", "blue", "submit"),
+    STATUS_EDIT(1, "未提交", "red", "tx"),
+    STATUS_SUBMIT(2, "已提交", "blue", "submit"),
     STATUS_CS_PASS(3, "初审通过", "green", "cs_pass"),
     STATUS_CS_BACK(4, "初审退回", "red", "cs_back"),
     STATUS_FH_PASS(5, "复核通过", "green", "fh_pass"),

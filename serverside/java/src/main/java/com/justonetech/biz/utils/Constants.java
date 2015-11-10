@@ -1,5 +1,6 @@
 package com.justonetech.biz.utils;
 
+import com.justonetech.biz.domain.SlryQualify;
 import com.justonetech.system.domain.SysPrivilege;
 
 /**
@@ -188,5 +189,9 @@ public class Constants {
     public static final String PROJECT_TYPE_GKSH = "gksh";
     public static final String PROJECT_TYPE_GL = "gl";
     public static final String PROJECT_TYPE_HD = "hd";
+
+    //三类人员
+    public static final String SLRY_QUALIFY_EDIT = SlryQualify.class.getSimpleName() + "_edit";     //三类人员_编辑
+    public static final String SLRY_QUALIFY_AUDIT = SlryQualify.class.getSimpleName() + "_audit";     //三类人员_编辑
 
 }
