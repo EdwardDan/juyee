@@ -1,0 +1,64 @@
+drop table SG_MATERIAL_INFO cascade constraints;
+
+/*==============================================================*/
+/* Table: SG_MATERIAL_INFO                                      */
+/*==============================================================*/
+create table SG_MATERIAL_INFO 
+(
+   ID                   number(10)           not null,
+   PROJECT_TYPE_ID      number(10),
+   PARENT_ID            number(10),
+   NO                   number(4),
+   TYPE                 VARCHAR2(100),
+   MATERIAL_NAME        varchar2(1000),
+   AUDIT_REQ            varchar2(100),
+   TREE_ID              VARCHAR2(200),
+   CREATE_TIME          DATE,
+   CREATE_USER          VARCHAR2(100),
+   UPDATE_TIME          DATE,
+   UPDATE_USER          VARCHAR2(100),
+   constraint PK_SG_MATERIAL_INFO primary key (ID),
+   constraint FK_SG_MATER_REFERENCE_SYS_CODE foreign key (PROJECT_TYPE_ID)
+         references SYS_CODE_DETAIL (ID),
+   constraint FK_SG_MATER_REFERENCE_SG_MATER foreign key (PARENT_ID)
+         references SG_MATERIAL_INFO (ID)
+);
+
+comment on table SG_MATERIAL_INFO is
+'施工材料信息';
+
+comment on column SG_MATERIAL_INFO.ID is
+'ID';
+
+comment on column SG_MATERIAL_INFO.PROJECT_TYPE_ID is
+'项目类型';
+
+comment on column SG_MATERIAL_INFO.PARENT_ID is
+'父亲节点';
+
+comment on column SG_MATERIAL_INFO.NO is
+'序号';
+
+comment on column SG_MATERIAL_INFO.TYPE is
+'类型';
+
+comment on column SG_MATERIAL_INFO.MATERIAL_NAME is
+'材料名称';
+
+comment on column SG_MATERIAL_INFO.AUDIT_REQ is
+'审核要求';
+
+comment on column SG_MATERIAL_INFO.TREE_ID is
+'树节点';
+
+comment on column SG_MATERIAL_INFO.CREATE_TIME is
+'创建时间';
+
+comment on column SG_MATERIAL_INFO.CREATE_USER is
+'创建用户名';
+
+comment on column SG_MATERIAL_INFO.UPDATE_TIME is
+'更新时间';
+
+comment on column SG_MATERIAL_INFO.UPDATE_USER is
+'更新用户名';
