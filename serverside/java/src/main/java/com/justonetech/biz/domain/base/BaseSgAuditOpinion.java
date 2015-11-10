@@ -1,5 +1,7 @@
 package com.justonetech.biz.domain.base;
 
+import com.justonetech.core.entity.Auditable;
+
 import java.io.Serializable;
 
 
@@ -21,7 +23,7 @@ import java.io.Serializable;
  *  table="SG_AUDIT_OPINION"
  */
 
-public abstract class BaseSgAuditOpinion  implements Serializable {
+public abstract class BaseSgAuditOpinion  implements Serializable, Auditable {
 
 	public static String REF = "SgAuditOpinion";
 	public static String PROP_IS_FH_OPINION = "isFhOpinion";

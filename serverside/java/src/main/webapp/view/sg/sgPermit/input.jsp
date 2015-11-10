@@ -30,25 +30,25 @@
     });
 
     //保存操作
-    function save(btn) {
+    function save(buttonName, status) {
         if (!validateForm(formId)) {
             return;
         }
-
-        //加入其他业务判断
-//        if ($('#name').val() == '') {
-//            showInfoMsg('请输入姓名！',null);
-//            return;
-//        }
-
-        //提交表单
-        saveAjaxData("${ctx}/sgPermit/save.do", formId);
+        if ("" != buttonName) {
+            $("#status").val(status);
+            if (confirm("是否确定执行 " + buttonName + " 操作？")) {
+                saveAjaxData("${ctx}/sgPermit/save.do", formId);
+            }
+        } else {
+            saveAjaxData("${ctx}/sgPermit/save.do", formId);
+        }
     }
 </script>
 <form:form commandName="bean">
     <form:hidden path="id"/>
     <form:hidden path="year"/>
     <form:hidden path="status"/>
+    <input type="hidden" name="projectType" value="${bean.projectType.id}">
 
     <div class="form_div">
         <table cellpadding="0" cellspacing="0" class="form_table">
@@ -73,8 +73,8 @@
             <tr class="tr_light">
                 <td class="form_content" colspan="2">
                     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
-                    沪交管收字（<form:input path="hjgYear" cssClass="input_number"/> ）
-                    第<form:input path="hjgNum" cssClass="input_number"/>号
+                    沪交管收字（<form:input path="hjgYear" cssClass="input_number" cssStyle="text-align: center;"/> ）
+                    第<form:input path="hjgNum" cssClass="input_number" cssStyle="text-align: center;"/>号
                 </td>
             </tr>
             <tr class="tr_dark">
@@ -100,27 +100,29 @@
                     <table cellpadding="0" cellspacing="0" class="table_thin_line" border="1" style="width: 100%;">
                         <tr class="tr_header">
                             <td style="width: 5%;">序号</td>
-                            <td style="width: 45%;">申请材料名称</td>
-                            <td style="width: 25%;">材料齐全情况</td>
+                            <td style="width: 50%;">申请材料名称</td>
+                            <td style="width: 20%;">材料齐全情况</td>
                             <td style="width: 8%;">份数</td>
                             <td style="width: 15%;">附件</td>
                         </tr>
                         <c:forEach items="${list}" var="map">
+                            <c:set value="upLoad${map.no}" var="upLoadNo"/>
                             <tr class="tr_dark">
                                 <td>${map.no}
                                     <input type="hidden" name="no" value="${map.no}">
                                 </td>
                                 <td style="text-align: left;">&nbsp;${map.materialName}</td>
                                 <td>
-                                    有<input type="radio" name="isFull" value="1"
-                                            <c:if test="${map.isFull==1}">checked="checked"</c:if>>
-                                    无<input type="radio" name="isFull" value="0"
-                                            <c:if test="${map.isFull==0}">checked="checked"</c:if>>
+                                    有<input type="radio" name="isFull${map.no}" value="1"
+                                            <c:if test="${map.isFull=='true'}">checked="checked"</c:if>>
+                                    无<input type="radio" name="isFull${map.no}" value="0"
+                                            <c:if test="${map.isFull=='false'}">checked="checked"</c:if>>
                                 </td>
                                 <td>
-                                    <input type="text" name="num" class="input_number" value="${map.num}">
+                                    <input type="text" name="num${map.no}" class="input_number" value="${map.num}"
+                                           style="text-align: center;">
                                 </td>
-                                <td>${map.upLoad}</td>
+                                <td>${map[upLoadNo]}</td>
                             </tr>
                         </c:forEach>
                     </table>
@@ -157,40 +159,11 @@
                     <form:input path="receivePersonPhone" cssClass="input_text" cssStyle="width: 90%;"/>
                 </td>
             </tr>
-            <tr class="tr_dark">
-                <td class="form_label_right">初审意见：</td>
-                <td class="form_content">
-                    <form:textarea path="csOpinion" cssClass="input_textarea" cssStyle="width: 90%;"/>
-                </td>
-            </tr>
-            <tr class="tr_light">
-                <td class="form_label_right">复核意见：</td>
-                <td class="form_content">
-                    <form:textarea path="fhOpinion" cssClass="input_textarea" cssStyle="width: 90%;"/>
-                </td>
-            </tr>
-            <tr class="tr_dark">
-                <td class="form_label_right">审核意见：</td>
-                <td class="form_content">
-                    <form:textarea path="shOpinion" cssClass="input_textarea" cssStyle="width: 90%;"/>
-                </td>
-            </tr>
-            <tr class="tr_light">
-                <td class="form_label_right">分管领导审核意见：</td>
-                <td class="form_content">
-                    <form:textarea path="fgldOpinion" cssClass="input_textarea" cssStyle="width: 90%;"/>
-                </td>
-            </tr>
-            <tr class="tr_dark">
-                <td class="form_label_right">中心领导审核意见：</td>
-                <td class="form_content">
-                    <form:textarea path="zxldOpinion" cssClass="input_textarea" cssStyle="width: 90%;"/>
-                </td>
-            </tr>
-            <tr class="tr_button">
-                <td class="form_label_right"></td>
-                <td class="form_content">
-                    <input type="button" value="确定" class="button_confirm" onclick="save(this)">&nbsp;
+            <tr class="tr_button" style="text-align: center;">
+                <td class="form_content" colspan="2" style="text-align: center;">
+                    <input type="button" value="提交" class="button_confirm"
+                           onclick="save(this.value,'${STATUS_SUBMIT}')">&nbsp;
+                    <input type="button" value="保存" class="button_confirm" onclick="save('','${STATUS_EDIT}')">&nbsp;
                     <input type="button" value="取消" class="button_cancel" onclick="closeWindow()">
                 </td>
             </tr>

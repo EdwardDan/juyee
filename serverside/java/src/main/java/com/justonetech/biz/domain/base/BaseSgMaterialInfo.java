@@ -1,52 +1,56 @@
 package com.justonetech.biz.domain.base;
 
 import com.justonetech.core.entity.Auditable;
+import com.justonetech.core.entity.Treeable;
 
 import java.io.Serializable;
 
 
 /**
- * This is an object that contains data related to the SG_MATERIAL table.
+ * This is an object that contains data related to the SG_MATERIAL_INFO table.
  * Do not modify this class because it will be overwritten if the configuration file
  * related to this class is modified.
- * TableComment : 施工材料
- * SyncTemplatepatterns : list\w*
+ * TableComment : 施工材料信息
+ * SyncTemplatepatterns : tree\w*
  * SyncDao : false
- * TableName : 施工材料
+ * TableName : 施工材料信息
  * SyncBoolean : get
  * SyncJsp : true
- * Treeable : false
+ * Treeable : true
  * SubSystem : sg
  * Projectable : false
  *
  * @hibernate.class
- *  table="SG_MATERIAL"
+ *  table="SG_MATERIAL_INFO"
  */
 
-public abstract class BaseSgMaterial  implements  Serializable, Auditable {
+public abstract class BaseSgMaterialInfo  implements Serializable, Treeable, Auditable {
 
-	public static String REF = "SgMaterial";
-	public static String PROP_DOC = "doc";
+	public static String REF = "SgMaterialInfo";
+	public static String PROP_PARENT = "parent";
+	public static String PROP_PROJECT_TYPE = "projectType";
 	public static String PROP_CREATE_USER = "createUser";
-	public static String PROP_SG_PERMIT = "sgPermit";
-	public static String PROP_NUM = "num";
+	public static String PROP_IS_LEAF = "isLeaf";
+	public static String PROP_AUDIT_REQ = "auditReq";
+	public static String PROP_TYPE = "type";
 	public static String PROP_CREATE_TIME = "createTime";
 	public static String PROP_UPDATE_TIME = "updateTime";
-	public static String PROP_IS_FULL = "isFull";
 	public static String PROP_ID = "id";
 	public static String PROP_NO = "no";
+	public static String PROP_TREE_ID = "treeId";
+	public static String PROP_MATERIAL_NAME = "materialName";
 	public static String PROP_UPDATE_USER = "updateUser";
 
 
 	// constructors
-	public BaseSgMaterial () {
+	public BaseSgMaterialInfo () {
 		initialize();
 	}
 
 	/**
 	 * Constructor for primary key
 	 */
-	public BaseSgMaterial (Long id) {
+	public BaseSgMaterialInfo (Long id) {
 		this.setId(id);
 		initialize();
 	}
@@ -63,15 +67,27 @@ public abstract class BaseSgMaterial  implements  Serializable, Auditable {
 	// fields
     /*序号*/
     /*序号*/
-	private Long no;
+	private Integer no;
 	
-    /*材料齐全情况*/
-    /*材料齐全情况*/
-	private Boolean isFull;
+    /*类型*/
+    /*类型*/
+	private String type;
 	
-    /*份数*/
-    /*份数*/
-	private Long num;
+    /*材料名称*/
+    /*材料名称*/
+	private String materialName;
+	
+    /*审核要求*/
+    /*审核要求*/
+	private String auditReq;
+	
+    /*叶子节点*/
+    /*叶子节点*/
+	private Boolean isLeaf;
+	
+    /*树节点*/
+    /*树节点*/
+	private String treeId;
 	
     /*创建时间*/
     /*创建时间*/
@@ -91,8 +107,8 @@ public abstract class BaseSgMaterial  implements  Serializable, Auditable {
 	
 
 	// many to one
-	private com.justonetech.biz.domain.DocDocument doc;
-	private com.justonetech.biz.domain.SgPermit sgPermit;
+	private com.justonetech.system.domain.SysCodeDetail projectType;
+	private com.justonetech.biz.domain.SgMaterialInfo parent;
 
 
 
@@ -122,7 +138,7 @@ public abstract class BaseSgMaterial  implements  Serializable, Auditable {
 	/**
 	 * Return the value associated with the column: NO
 	 */
-	public Long getNo () {
+	public Integer getNo () {
 		return no;
 	}
 
@@ -130,40 +146,88 @@ public abstract class BaseSgMaterial  implements  Serializable, Auditable {
 	 * Set the value related to the column: NO
 	 * @param no the NO value
 	 */
-	public void setNo (Long no) {
+	public void setNo (Integer no) {
 		this.no = no;
 	}
 
 
 	/**
-	 * Return the value associated with the column: IS_FULL
+	 * Return the value associated with the column: TYPE
 	 */
-	public Boolean getIsFull () {
-		return isFull;
+	public String getType () {
+		return type;
 	}
 
 	/**
-	 * Set the value related to the column: IS_FULL
-	 * @param isFull the IS_FULL value
+	 * Set the value related to the column: TYPE
+	 * @param type the TYPE value
 	 */
-	public void setIsFull (Boolean isFull) {
-		this.isFull = isFull;
+	public void setType (String type) {
+		this.type = type;
 	}
 
 
 	/**
-	 * Return the value associated with the column: NUM
+	 * Return the value associated with the column: MATERIAL_NAME
 	 */
-	public Long getNum () {
-		return num;
+	public String getMaterialName () {
+		return materialName;
 	}
 
 	/**
-	 * Set the value related to the column: NUM
-	 * @param num the NUM value
+	 * Set the value related to the column: MATERIAL_NAME
+	 * @param materialName the MATERIAL_NAME value
 	 */
-	public void setNum (Long num) {
-		this.num = num;
+	public void setMaterialName (String materialName) {
+		this.materialName = materialName;
+	}
+
+
+	/**
+	 * Return the value associated with the column: AUDIT_REQ
+	 */
+	public String getAuditReq () {
+		return auditReq;
+	}
+
+	/**
+	 * Set the value related to the column: AUDIT_REQ
+	 * @param auditReq the AUDIT_REQ value
+	 */
+	public void setAuditReq (String auditReq) {
+		this.auditReq = auditReq;
+	}
+
+
+	/**
+	 * Return the value associated with the column: IS_LEAF
+	 */
+	public Boolean getIsLeaf () {
+		return isLeaf;
+	}
+
+	/**
+	 * Set the value related to the column: IS_LEAF
+	 * @param isLeaf the IS_LEAF value
+	 */
+	public void setIsLeaf (Boolean isLeaf) {
+		this.isLeaf = isLeaf;
+	}
+
+
+	/**
+	 * Return the value associated with the column: TREE_ID
+	 */
+	public String getTreeId () {
+		return treeId;
+	}
+
+	/**
+	 * Set the value related to the column: TREE_ID
+	 * @param treeId the TREE_ID value
+	 */
+	public void setTreeId (String treeId) {
+		this.treeId = treeId;
 	}
 
 
@@ -232,45 +296,45 @@ public abstract class BaseSgMaterial  implements  Serializable, Auditable {
 
 
 	/**
-	 * Return the value associated with the column: DOC_ID
+	 * Return the value associated with the column: PROJECT_TYPE_ID
 	 */
-	public com.justonetech.biz.domain.DocDocument getDoc () {
-		return doc;
+	public com.justonetech.system.domain.SysCodeDetail getProjectType () {
+		return projectType;
 	}
 
 	/**
-	 * Set the value related to the column: DOC_ID
-	 * @param doc the DOC_ID value
+	 * Set the value related to the column: PROJECT_TYPE_ID
+	 * @param projectType the PROJECT_TYPE_ID value
 	 */
-	public void setDoc (com.justonetech.biz.domain.DocDocument doc) {
-		this.doc = doc;
+	public void setProjectType (com.justonetech.system.domain.SysCodeDetail projectType) {
+		this.projectType = projectType;
 	}
 
 
 	/**
-	 * Return the value associated with the column: SG_PERMIT_ID
+	 * Return the value associated with the column: PARENT_ID
 	 */
-	public com.justonetech.biz.domain.SgPermit getSgPermit () {
-		return sgPermit;
+	public com.justonetech.biz.domain.SgMaterialInfo getParent () {
+		return parent;
 	}
 
 	/**
-	 * Set the value related to the column: SG_PERMIT_ID
-	 * @param sgPermit the SG_PERMIT_ID value
+	 * Set the value related to the column: PARENT_ID
+	 * @param parent the PARENT_ID value
 	 */
-	public void setSgPermit (com.justonetech.biz.domain.SgPermit sgPermit) {
-		this.sgPermit = sgPermit;
+	public void setParent (com.justonetech.biz.domain.SgMaterialInfo parent) {
+		this.parent = parent;
 	}
 
 
 
 	public boolean equals (Object obj) {
 		if (null == obj) return false;
-		if (!(obj instanceof com.justonetech.biz.domain.SgMaterial)) return false;
+		if (!(obj instanceof com.justonetech.biz.domain.SgMaterialInfo)) return false;
 		else {
-			com.justonetech.biz.domain.SgMaterial sgMaterial = (com.justonetech.biz.domain.SgMaterial) obj;
-			if (null == this.getId() || null == sgMaterial.getId()) return false;
-			else return (this.getId().equals(sgMaterial.getId()));
+			com.justonetech.biz.domain.SgMaterialInfo sgMaterialInfo = (com.justonetech.biz.domain.SgMaterialInfo) obj;
+			if (null == this.getId() || null == sgMaterialInfo.getId()) return false;
+			else return (this.getId().equals(sgMaterialInfo.getId()));
 		}
 	}
 
@@ -290,8 +354,11 @@ public abstract class BaseSgMaterial  implements  Serializable, Auditable {
 		org.apache.commons.lang.builder.ToStringBuilder builder = new org.apache.commons.lang.builder.ToStringBuilder(this);
 		builder.append(id);
 		builder.append(no);
-		builder.append(isFull);
-		builder.append(num);
+		builder.append(type);
+		builder.append(materialName);
+		builder.append(auditReq);
+		builder.append(isLeaf);
+		builder.append(treeId);
 		builder.append(createTime);
 		builder.append(createUser);
 		builder.append(updateTime);

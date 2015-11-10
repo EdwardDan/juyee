@@ -6,53 +6,32 @@
             gridOpts: {
                 url: "${ctx}/sgPermit/gridDataCustom.do",
                 colNames: ['ID',
-                    '年',
                     '报建编号',
                     '项目名称',
+                    '字号',
+                    '项目类型',
                     '建设单位',
-                    '沪交管收字_年',
-                    '沪交管收字_号',
                     '申请人',
-                    '申请事项',
                     '申请号',
-                    '材料提交人',
-                    '材料提交人联系电话',
-                    '材料提交人联系地址',
-                    '收件人',
-                    '收件人联系电话',
+                    '状态code',
                     '状态',
-                    '初审意见',
-                    '复核意见',
-                    '审核意见',
-                    '分管领导审核意见',
-                    '中心领导审核意见',
                     '操作'
                 ],
                 colModel: [
                     {name: 'id', width: 10, align: "center", searchtype: "integer", hidden: true},
-                    {name: "year", width: "33", align: "center", searchtype: "integer", sortable: true, formatter: 'integer', formatoptions: {thousandsSeparator: ",", defaulValue: 0}},
                     {name: "bjbh", width: "33", align: "center", searchtype: "string", sortable: true},
-                    {name: "projectName", width: "33", align: "center", searchtype: "string", sortable: true},
+                    {name: "projectName", width: "33", align: "left", searchtype: "string", sortable: true},
+                    {name: "zh", width: "33", align: "center", searchtype: "string", sortable: true},
+                    {name: "projectType.name", width: "33", align: "center", searchtype: "string", sortable: true},
                     {name: "buildName", width: "33", align: "center", searchtype: "string", sortable: true},
-                    {name: "hYear", width: "33", align: "center", searchtype: "integer", sortable: true, formatter: 'integer', formatoptions: {thousandsSeparator: ",", defaulValue: 0}},
-                    {name: "hNum", width: "33", align: "center", searchtype: "integer", sortable: true, formatter: 'integer', formatoptions: {thousandsSeparator: ",", defaulValue: 0}},
                     {name: "applyPerson", width: "33", align: "center", searchtype: "string", sortable: true},
-                    {name: "applyMatter", width: "33", align: "center", searchtype: "string", sortable: true},
                     {name: "applyNum", width: "33", align: "center", searchtype: "string", sortable: true},
-                    {name: "materialPerson", width: "33", align: "center", searchtype: "string", sortable: true},
-                    {name: "materialPersonPhone", width: "33", align: "center", searchtype: "string", sortable: true},
-                    {name: "materialPersonAddress", width: "33", align: "center", searchtype: "string", sortable: true},
-                    {name: "receivePerson", width: "33", align: "center", searchtype: "string", sortable: true},
-                    {name: "receivePersonPhone", width: "33", align: "center", searchtype: "string", sortable: true},
-                    {name: "status", width: "33", align: "center", searchtype: "integer", sortable: true, formatter: 'integer', formatoptions: {thousandsSeparator: ",", defaulValue: 0}},
-                    {name: "csOpinion", width: "33", align: "center", searchtype: "string", sortable: true},
-                    {name: "fhOpinion", width: "33", align: "center", searchtype: "string", sortable: true},
-                    {name: "shOpinion", width: "33", align: "center", searchtype: "string", sortable: true},
-                    {name: "fgldOpinion", width: "33", align: "center", searchtype: "string", sortable: true},
-                    {name: "zxldOpinion", width: "33", align: "center", searchtype: "string", sortable: true}
+                    {name: "status", width: "5", align: "center", searchtype: "integer", sortable: true, hidden: true},
+                    {name: "statusName", width: "33", align: "center", searchtype: "string", sortable: true}
+
                 ],
                 actModel: [
-                    {name: 'operation', width: 40, align: 'center'}
+                    {name: 'operation', width: 30, align: 'center'}
                 ],
                 pager: '#pager2',
                 caption: "施工许可证列表",
@@ -61,37 +40,47 @@
                     var ids = jQuery("#listGrid").jqGrid('getDataIDs');
                     for (var i = 0; i < ids.length; i++) {
                         var id = ids[i];
+                        var rowData = jQuery("#listGrid").jqGrid('getRowData', id);
+                        var status = rowData["status"];
                         var opButton = '<input type="button" value="查看" onclick="doView(' + id + ')" class="button_normal"/> ';
-                        <c:if test="${canEdit}">
-                        opButton += '<input type="button" value="编辑" onclick="doEdit(' + id + ')" class="button_normal"/> ';
-                        opButton += '<input type="button" value="删除" onclick="doDelete(' + id + ')" class="button_normal"/>';
-                        </c:if>
+                        if ('' == status || status == '${STATUS_EDIT}' || status == '${STATUS_CS_BACK}' || status == '${STATUS_FH_BACK}' || status == '${STATUS_SH_BACK}' || status == '${STATUS_FGLD_BACK}' || status == '${STATUS_ZXLD_BACK}') {
+                            if (${canEdit}) {
+                                opButton += '<input type="button" value="编辑" onclick="doEdit(' + id + ')" class="button_normal"/> ';
+                                opButton += '<input type="button" value="删除" onclick="doDelete(' + id + ')" class="button_normal"/> ';
+                            }
+                        } else if (status == '${STATUS_SUBMIT}') {
+                            if (${canCsAudit}) {
+                                opButton += '<input type="button" value="初审" onclick="doAudit(' + id + ')" class="button_normal"/> ';
+                            }
+                        } else if (status == '${STATUS_CS_PASS}') {
+                            if (${canFhAudit}) {
+                                opButton += '<input type="button" value="复审" onclick="doAudit(' + id + ')" class="button_normal"/> ';
+                            }
+                        } else if (status == '${STATUS_FH_PASS}') {
+                            if (${canAudit}) {
+                                opButton += '<input type="button" value="审核" onclick="doAudit(' + id + ')" class="button_normal"/> ';
+                            }
+                        } else if (status == '${STATUS_SH_PASS}') {
+                            if (${canFgldAudit}) {
+                                opButton += '<input type="button" value="分管领导审核" onclick="doAudit(' + id + ')" class="button_normal_long"/> ';
+                            }
+                        } else if (status == '${STATUS_FGLD_PASS}') {
+                            if (${canZxldAudit}) {
+                                opButton += '<input type="button" value="中心领导审核" onclick="doAudit(' + id + ')" class="button_normal_long"/> ';
+                            }
+                        }
                         jQuery("#listGrid").jqGrid('setRowData', ids[i], { operation: opButton});
                     }
                 }, rownumbers: true
             },
             userOpts: {
                 defaultQuery: { "groupOp": "AND", "rules": [
-                    { "field": "年", "op": "cn", "data": ""},
                     { "field": "报建编号", "op": "cn", "data": ""},
                     { "field": "项目名称", "op": "cn", "data": ""},
+                    { "field": "项目类型", "op": "cn", "data": ""},
                     { "field": "建设单位", "op": "cn", "data": ""},
-                    { "field": "沪交管收字_年", "op": "cn", "data": ""},
-                    { "field": "沪交管收字_号", "op": "cn", "data": ""},
                     { "field": "申请人", "op": "cn", "data": ""},
-                    { "field": "申请事项", "op": "cn", "data": ""},
-                    { "field": "申请号", "op": "cn", "data": ""},
-                    { "field": "材料提交人", "op": "cn", "data": ""},
-                    { "field": "材料提交人联系电话", "op": "cn", "data": ""},
-                    { "field": "材料提交人联系地址", "op": "cn", "data": ""},
-                    { "field": "收件人", "op": "cn", "data": ""},
-                    { "field": "收件人联系电话", "op": "cn", "data": ""},
-                    { "field": "状态", "op": "cn", "data": ""},
-                    { "field": "初审意见", "op": "cn", "data": ""},
-                    { "field": "复核意见", "op": "cn", "data": ""},
-                    { "field": "审核意见", "op": "cn", "data": ""},
-                    { "field": "分管领导审核意见", "op": "cn", "data": ""},
-                    { "field": "中心领导审核意见", "op": "cn", "data": ""}
+                    { "field": "申请号", "op": "cn", "data": ""}
                 ]},
                 queryButton: $("#queryButton"),
                 queryDesc: $("#queryConditionDesc")
@@ -108,6 +97,9 @@
     }
     function doEdit(id) {
         openWindow("修改施工许可证", "${ctx}/sgPermit/modify.do?id=" + id, true);
+    }
+    function doAudit(id) {
+        openWindow("审核施工许可证", "${ctx}/sgPermit/audit.do?id=" + id, true);
     }
     function doDelete(id) {
         doGridDelete("${ctx}/sgPermit/delete.do?id=" + id);

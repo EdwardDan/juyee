@@ -305,12 +305,12 @@
 			<one-to-many class="SgPermitOperation"/>
 		</set>
 
-		<set name="sgAuditOpinions" inverse="true">
+		<set name="sgAuditOpinions" inverse="true" order-by="NO">
 			<key column="SG_PERMIT_ID"/>
 			<one-to-many class="SgAuditOpinion"/>
 		</set>
 
-		<set name="sgMaterials" inverse="true">
+		<set name="sgMaterials" inverse="true" order-by="NO">
 			<key column="SG_PERMIT_ID"/>
 			<one-to-many class="SgMaterial"/>
 		</set>

@@ -1,5 +1,7 @@
 package com.justonetech.biz.domain.base;
 
+import com.justonetech.core.entity.Auditable;
+
 import java.io.Serializable;
 
 
@@ -21,7 +23,7 @@ import java.io.Serializable;
  *  table="SG_PERMIT_OPERATION"
  */
 
-public abstract class BaseSgPermitOperation  implements Serializable {
+public abstract class BaseSgPermitOperation  implements  Serializable, Auditable {
 
 	public static String REF = "SgPermitOperation";
 	public static String PROP_STATUS = "status";

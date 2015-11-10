@@ -1,5 +1,7 @@
 package com.justonetech.biz.domain.base;
 
+import com.justonetech.core.entity.Auditable;
+
 import java.io.Serializable;
 
 
@@ -21,7 +23,7 @@ import java.io.Serializable;
  *  table="SG_PERMIT"
  */
 
-public abstract class BaseSgPermit  implements Serializable {
+public abstract class BaseSgPermit  implements  Serializable, Auditable {
 
 	public static String REF = "SgPermit";
 	public static String PROP_RECEIVE_PERSON_PHONE = "receivePersonPhone";

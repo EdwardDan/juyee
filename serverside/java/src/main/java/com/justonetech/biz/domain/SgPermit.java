@@ -1,7 +1,7 @@
 package com.justonetech.biz.domain;
 
 import com.justonetech.biz.domain.base.BaseSgPermit;
-
+import com.justonetech.biz.utils.enums.SgPermitStatus;
 
 
 public class SgPermit extends BaseSgPermit {
@@ -22,4 +22,11 @@ public class SgPermit extends BaseSgPermit {
 /*[CONSTRUCTOR MARKER END]*/
 
 
+    public String getZh() {
+        return "沪交管收字" + this.getHjgYear() + "第" + this.getHjgNum() + "号";
+    }
+
+    public String getStatusName() {
+        return SgPermitStatus.getColorNameByCode(this.getStatus());
+    }
 }
