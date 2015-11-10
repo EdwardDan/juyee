@@ -135,12 +135,8 @@ public class PrivilegeCode {
     public static final String SG_PERMIT_ZXLD_AUDIT = SgPermit.class.getSimpleName() + "_zxld_audit";
 
     //三类人员
-    public static final String SEX = "sex";
-    public static final String EDUCATION ="education";
-    public static final String TECHTYPE ="techType";
-    public static final String APPLYTYPE ="applyType";
-    public static final String APPLYCERTYPE ="applyCerType";
-    public static final String UNITTYPE="unitType";
-    public static final String CARDTYPE="cardType";
+    public static final String SLRY_QUALIFY_EDIT = SlryQualify.class.getSimpleName() + "_edit";     //三类人员_编辑
+    public static final String SLRY_QUALIFY_AUDIT = SlryQualify.class.getSimpleName() + "_audit";     //三类人员_编辑
+
 }
 
