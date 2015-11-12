@@ -11,8 +11,8 @@ create table SG_PERMIT
    BJBH                 varchar2(50),
    PROJECT_NAME         varchar2(200),
    BUILD_NAME           varchar2(200),
-   HJG_YEAR               number(4),
-   HJG_NUM                number(4),
+   HJG_YEAR             number(4),
+   HJG_NUM              number(4),
    APPLY_PERSON         varchar2(50),
    APPLY_MATTER         varchar2(200),
    APPLY_NUM            varchar2(50),
@@ -23,10 +23,20 @@ create table SG_PERMIT
    RECEIVE_PERSON_PHONE varchar2(50),
    STATUS               number(2),
    CS_OPINION           varchar2(1000),
+   CS_USER              VARCHAR2(100),
+   CS_DATE              date,
    FH_OPINION           varchar2(1000),
+   FH_USER              VARCHAR2(100),
+   FH_DATE              date,
    SH_OPINION           varchar2(1000),
+   SH_USER              VARCHAR2(100),
+   SH_DATE              date,
    FGLD_OPINION         varchar2(1000),
+   FGLD_USER            VARCHAR2(100),
+   FGLD_DATE            date,
    ZXLD_OPINION         varchar2(1000),
+   ZXLD_USER            VARCHAR2(100),
+   ZXLD_DATE            date,
    CREATE_TIME          DATE,
    CREATE_USER          VARCHAR2(100),
    UPDATE_TIME          DATE,
@@ -46,7 +56,7 @@ comment on column SG_PERMIT.PROJECT_TYPE_ID is
 '项目类型';
 
 comment on column SG_PERMIT.YEAR is
-'年';
+'年份';
 
 comment on column SG_PERMIT.BJBH is
 '报建编号';
@@ -57,10 +67,10 @@ comment on column SG_PERMIT.PROJECT_NAME is
 comment on column SG_PERMIT.BUILD_NAME is
 '建设单位';
 
-comment on column SG_PERMIT.H_YEAR is
+comment on column SG_PERMIT.HJG_YEAR is
 '沪交管收字_年';
 
-comment on column SG_PERMIT.H_NUM is
+comment on column SG_PERMIT.HJG_NUM is
 '沪交管收字_号';
 
 comment on column SG_PERMIT.APPLY_PERSON is
@@ -93,17 +103,47 @@ comment on column SG_PERMIT.STATUS is
 comment on column SG_PERMIT.CS_OPINION is
 '初审意见';
 
+comment on column SG_PERMIT.CS_USER is
+'初审用户';
+
+comment on column SG_PERMIT.CS_DATE is
+'初审日期';
+
 comment on column SG_PERMIT.FH_OPINION is
 '复核意见';
+
+comment on column SG_PERMIT.FH_USER is
+'复核用户';
+
+comment on column SG_PERMIT.FH_DATE is
+'复核日期';
 
 comment on column SG_PERMIT.SH_OPINION is
 '审核意见';
 
+comment on column SG_PERMIT.SH_USER is
+'审核用户';
+
+comment on column SG_PERMIT.SH_DATE is
+'审核日期';
+
 comment on column SG_PERMIT.FGLD_OPINION is
 '分管领导审核意见';
 
+comment on column SG_PERMIT.FGLD_USER is
+'分管领导审核用户';
+
+comment on column SG_PERMIT.FGLD_DATE is
+'分管领导审核日期';
+
 comment on column SG_PERMIT.ZXLD_OPINION is
 '中心领导审核意见';
+
+comment on column SG_PERMIT.ZXLD_USER is
+'中心领导审核用户';
+
+comment on column SG_PERMIT.ZXLD_DATE is
+'中心领导审核日期';
 
 comment on column SG_PERMIT.CREATE_TIME is
 '创建时间';
@@ -116,6 +156,7 @@ comment on column SG_PERMIT.UPDATE_TIME is
 
 comment on column SG_PERMIT.UPDATE_USER is
 '更新用户名';
+
 
 
 
