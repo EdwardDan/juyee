@@ -1,0 +1,782 @@
+-- Create table 
+declare 
+      num   number; 
+begin 
+      select count(1) into num from all_tables where TABLE_NAME = 'SHARE_UNIT_QUALIFY'; 
+      if   num=1   then 
+          execute immediate 'drop table SHARE_UNIT_QUALIFY'; 
+      end   if; 
+end; 
+/
+create table SHARE_UNIT_QUALIFY
+(
+  ID                    NUMBER(10) not null,
+  UNIT_ID               NUMBER(10),
+  QUALIFY_TYPE          VARCHAR2(20 CHAR),
+  QUALIFY_TYPE_DESC     VARCHAR2(100 CHAR),
+  QUALIFY_LEVEL         NUMBER(10),
+  QUALIFY_LEVEL_DESC    VARCHAR2(60 CHAR),
+  IS_MAIN_QUALIFY       NUMBER(1),
+  LIMIT                 VARCHAR2(200 CHAR),
+  QUALIFY_BIG_TYPE      NUMBER(10),
+  QUALIFY_BIG_TYPE_DESC VARCHAR2(40 CHAR),
+  HOLD_WORK_SCOPE       VARCHAR2(1000 CHAR),
+  QUALIFY_CODE          VARCHAR2(60 CHAR),
+  ACCEPT_DATETIME       DATE,
+  VALID_DATETIME        DATE,
+  TEMP_DATETIME         DATE,
+  UNIT_BELONG_ID        NUMBER(10),
+  UNIT_BELONG_DESC      VARCHAR2(60 CHAR),
+  LINK_MAN              VARCHAR2(20 CHAR),
+  LINK_PHONE            VARCHAR2(20 CHAR),
+  LINK_MOBILE           VARCHAR2(20 CHAR),
+  UPDATE_TIME           DATE
+)
+tablespace USERS
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 20
+    next 1
+    minextents 1
+    maxextents unlimited
+  );
+-- Add comments to the table 
+comment on table SHARE_UNIT_QUALIFY
+  is '企业资质信息';
+-- Add comments to the columns 
+comment on column SHARE_UNIT_QUALIFY.ID
+  is '标识';
+comment on column SHARE_UNIT_QUALIFY.UNIT_ID
+  is '企业标识';
+comment on column SHARE_UNIT_QUALIFY.QUALIFY_TYPE
+  is '企业类别';
+comment on column SHARE_UNIT_QUALIFY.QUALIFY_TYPE_DESC
+  is '企业类别描述';
+comment on column SHARE_UNIT_QUALIFY.QUALIFY_LEVEL
+  is '资质等级';
+comment on column SHARE_UNIT_QUALIFY.QUALIFY_LEVEL_DESC
+  is '资质等级描述';
+comment on column SHARE_UNIT_QUALIFY.IS_MAIN_QUALIFY
+  is '是否主项资质（1是，0否）';
+comment on column SHARE_UNIT_QUALIFY.LIMIT
+  is '限定';
+comment on column SHARE_UNIT_QUALIFY.QUALIFY_BIG_TYPE
+  is '资质大类';
+comment on column SHARE_UNIT_QUALIFY.QUALIFY_BIG_TYPE_DESC
+  is '资质大类描述';
+comment on column SHARE_UNIT_QUALIFY.HOLD_WORK_SCOPE
+  is '可承担工程范围';
+comment on column SHARE_UNIT_QUALIFY.QUALIFY_CODE
+  is '资质证书编号';
+comment on column SHARE_UNIT_QUALIFY.ACCEPT_DATETIME
+  is '批准时间';
+comment on column SHARE_UNIT_QUALIFY.VALID_DATETIME
+  is '资质有效期';
+comment on column SHARE_UNIT_QUALIFY.TEMP_DATETIME
+  is '暂定日期';
+comment on column SHARE_UNIT_QUALIFY.UNIT_BELONG_ID
+  is '企业隶属关系';
+comment on column SHARE_UNIT_QUALIFY.UNIT_BELONG_DESC
+  is '企业隶属关系描述';
+comment on column SHARE_UNIT_QUALIFY.LINK_MAN
+  is '联系人姓名';
+comment on column SHARE_UNIT_QUALIFY.LINK_PHONE
+  is '联系人电话';
+comment on column SHARE_UNIT_QUALIFY.LINK_MOBILE
+  is '联系人手机';
+comment on column SHARE_UNIT_QUALIFY.UPDATE_TIME
+  is '修改时间';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table SHARE_UNIT_QUALIFY
+  add constraint PK_SHARE_UNIT_QUALIFY primary key (ID)
+  using index 
+  tablespace USERS
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 896K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+
+  
+  
+  
+  
+  -- Create table
+declare 
+      num   number; 
+begin 
+      select count(1) into num from all_tables where TABLE_NAME = 'SHARE_UNIT_INFO'; 
+      if   num=1   then 
+          execute immediate 'drop table SHARE_UNIT_INFO'; 
+      end   if; 
+end; 
+/
+create table SHARE_UNIT_INFO
+(
+  ID                  NUMBER(10) not null,
+  UNIT_NAME           VARCHAR2(200 CHAR),
+  UNIT_CODE           VARCHAR2(50 CHAR),
+  ORG_CODE            VARCHAR2(50 CHAR),
+  REG_CITY_CODE       VARCHAR2(10 CHAR),
+  REG_CITY_NAME       VARCHAR2(50 CHAR),
+  BELOG_PROVINCE_CODE NUMBER(10),
+  BELOG_PROVINCE      VARCHAR2(50 CHAR),
+  REG_ADDRESS         VARCHAR2(200 CHAR),
+  UNIT_ECO_TYPE       NUMBER(10),
+  UNIT_ECO_NAME       VARCHAR2(100 CHAR),
+  UPDATE_TIME         DATE
+)
+tablespace USERS
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 3
+    next 1
+    minextents 1
+    maxextents unlimited
+  );
+-- Add comments to the table 
+comment on table SHARE_UNIT_INFO
+  is '企业基本信息';
+-- Add comments to the columns 
+comment on column SHARE_UNIT_INFO.ID
+  is 'id';
+comment on column SHARE_UNIT_INFO.UNIT_NAME
+  is '单位名称';
+comment on column SHARE_UNIT_INFO.UNIT_CODE
+  is '单位代码';
+comment on column SHARE_UNIT_INFO.ORG_CODE
+  is '机构代码证';
+comment on column SHARE_UNIT_INFO.REG_CITY_CODE
+  is '注册所在地代码';
+comment on column SHARE_UNIT_INFO.REG_CITY_NAME
+  is '注册所在地';
+comment on column SHARE_UNIT_INFO.BELOG_PROVINCE_CODE
+  is '隶属省市标识';
+comment on column SHARE_UNIT_INFO.BELOG_PROVINCE
+  is '隶属省市名称';
+comment on column SHARE_UNIT_INFO.REG_ADDRESS
+  is '注册地址';
+comment on column SHARE_UNIT_INFO.UNIT_ECO_TYPE
+  is '经济类型';
+comment on column SHARE_UNIT_INFO.UNIT_ECO_NAME
+  is '经济类型名称';
+comment on column SHARE_UNIT_INFO.UPDATE_TIME
+  is '修改时间';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table SHARE_UNIT_INFO
+  add constraint PK_SHARE_UNIT_INFO primary key (ID)
+  using index 
+  tablespace USERS
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 320K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+
+  
+  
+  
+  
+  
+  -- Create table
+declare 
+      num   number; 
+begin 
+      select count(1) into num from all_tables where TABLE_NAME = 'SHARE_PERSON_QUALIFY'; 
+      if   num=1   then 
+          execute immediate 'drop table SHARE_PERSON_QUALIFY'; 
+      end   if; 
+end;
+/ 
+create table SHARE_PERSON_QUALIFY
+(
+  ID                       NUMBER(10) not null,
+  PERSON_ID                NUMBER(10),
+  PERSON_NAME              VARCHAR2(40 CHAR),
+  PERSON_CARD_TYPE         NUMBER(10),
+  PERSON_CARD_TYPE_DESC    VARCHAR2(40 CHAR),
+  CARD_NO                  VARCHAR2(20 CHAR),
+  CARD_NO_15               VARCHAR2(20 CHAR),
+  PERSON_SEX               VARCHAR2(4 CHAR),
+  PERSON_BIRTH_DATE        DATE,
+  QUALIFY_TYPE             NUMBER(10),
+  QUALIFY_TYPE_DESC        VARCHAR2(50 CHAR),
+  QUALIFY_LEVEL            VARCHAR2(10 CHAR),
+  QUALIFY_LEVEL_DESC       VARCHAR2(50 CHAR),
+  REG_UNIT_NAME            VARCHAR2(200 CHAR),
+  REG_UNIT_CODE            VARCHAR2(50 CHAR),
+  REG_UNIT_ID              NUMBER(10),
+  REG_QUALIFY_CODE         VARCHAR2(50 CHAR),
+  REG_CODE                 VARCHAR2(50 CHAR),
+  SEAL_CODE                VARCHAR2(50 CHAR),
+  VALID_DATE               DATE,
+  REG_DATETIME             DATE,
+  QUALIFY_STATUS           NUMBER(10),
+  QUALIFY_STATUS_DESC      VARCHAR2(20 CHAR),
+  QUALIFY_BELONG           NUMBER(10),
+  QUALIFY_BELONG_DESC      VARCHAR2(50 CHAR),
+  JL_SPECIALITY_TYPE1      NUMBER(10),
+  JL_SPECIALITY_TYPE_DESC1 VARCHAR2(50 CHAR),
+  JL_SPECIALITY_TYPE2      NUMBER(10),
+  JL_SPECIALITY_TYPE_DESC2 VARCHAR2(50 CHAR),
+  JZ_SPECIALITY_TYPE       VARCHAR2(50 CHAR),
+  JZ_SPECIALITY_TYPE_DESC  VARCHAR2(200 CHAR),
+  UPDATE_TIME              DATE
+)
+tablespace USERS
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 36
+    next 1
+    minextents 1
+    maxextents unlimited
+  );
+-- Add comments to the table 
+comment on table SHARE_PERSON_QUALIFY
+  is '注册人员资质证书';
+-- Add comments to the columns 
+comment on column SHARE_PERSON_QUALIFY.ID
+  is 'id';
+comment on column SHARE_PERSON_QUALIFY.PERSON_ID
+  is '人员标识';
+comment on column SHARE_PERSON_QUALIFY.PERSON_NAME
+  is '姓名';
+comment on column SHARE_PERSON_QUALIFY.PERSON_CARD_TYPE
+  is '证件类型';
+comment on column SHARE_PERSON_QUALIFY.PERSON_CARD_TYPE_DESC
+  is '证件类型描述';
+comment on column SHARE_PERSON_QUALIFY.CARD_NO
+  is '证件号';
+comment on column SHARE_PERSON_QUALIFY.CARD_NO_15
+  is '15位身份证号';
+comment on column SHARE_PERSON_QUALIFY.PERSON_SEX
+  is '性别';
+comment on column SHARE_PERSON_QUALIFY.PERSON_BIRTH_DATE
+  is '出生日期';
+comment on column SHARE_PERSON_QUALIFY.QUALIFY_TYPE
+  is '注册证书类型';
+comment on column SHARE_PERSON_QUALIFY.QUALIFY_TYPE_DESC
+  is '注册证书类型(中文)';
+comment on column SHARE_PERSON_QUALIFY.QUALIFY_LEVEL
+  is '注册证书等级';
+comment on column SHARE_PERSON_QUALIFY.QUALIFY_LEVEL_DESC
+  is '注册证书等级(中文)';
+comment on column SHARE_PERSON_QUALIFY.REG_UNIT_NAME
+  is '注册证书单位名称';
+comment on column SHARE_PERSON_QUALIFY.REG_UNIT_CODE
+  is '注册单位代码';
+comment on column SHARE_PERSON_QUALIFY.REG_UNIT_ID
+  is '注册单位ID';
+comment on column SHARE_PERSON_QUALIFY.REG_QUALIFY_CODE
+  is '注册证书编号';
+comment on column SHARE_PERSON_QUALIFY.REG_CODE
+  is '注册号';
+comment on column SHARE_PERSON_QUALIFY.SEAL_CODE
+  is '印章号';
+comment on column SHARE_PERSON_QUALIFY.VALID_DATE
+  is '有效期';
+comment on column SHARE_PERSON_QUALIFY.REG_DATETIME
+  is '注册时间';
+comment on column SHARE_PERSON_QUALIFY.QUALIFY_STATUS
+  is '证书状态';
+comment on column SHARE_PERSON_QUALIFY.QUALIFY_STATUS_DESC
+  is '证书状态（中文）';
+comment on column SHARE_PERSON_QUALIFY.QUALIFY_BELONG
+  is '证书管理属地';
+comment on column SHARE_PERSON_QUALIFY.QUALIFY_BELONG_DESC
+  is '证书管理属地(中文)';
+comment on column SHARE_PERSON_QUALIFY.JL_SPECIALITY_TYPE1
+  is '注册监理工程师证书专业1';
+comment on column SHARE_PERSON_QUALIFY.JL_SPECIALITY_TYPE_DESC1
+  is '注册监理工程师证书专业1(中文)';
+comment on column SHARE_PERSON_QUALIFY.JL_SPECIALITY_TYPE2
+  is '注册监理工程师证书专业2';
+comment on column SHARE_PERSON_QUALIFY.JL_SPECIALITY_TYPE_DESC2
+  is '注册监理工程师证书专业2(中文)';
+comment on column SHARE_PERSON_QUALIFY.JZ_SPECIALITY_TYPE
+  is '建造师、临时建造师专业';
+comment on column SHARE_PERSON_QUALIFY.JZ_SPECIALITY_TYPE_DESC
+  is '建造师、临时建造师专业(中文)';
+comment on column SHARE_PERSON_QUALIFY.UPDATE_TIME
+  is '中间数据库数据更新时间';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table SHARE_PERSON_QUALIFY
+  add constraint PK_SHARE_PERSON_QUALIFY primary key (ID)
+  using index 
+  tablespace USERS
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 3M
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+
+  
+  
+  
+  
+  
+  
+  -- Create table
+declare 
+      num   number; 
+begin 
+      select count(1) into num from all_tables where TABLE_NAME = 'SHARE_PRO_TOBUILD'; 
+      if   num=1   then 
+          execute immediate 'drop table SHARE_PRO_TOBUILD'; 
+      end   if; 
+end;
+/ 
+create table SHARE_PRO_TOBUILD
+(
+  BJBH                   VARCHAR2(50 CHAR) not null,
+  BJ_DATE                DATE,
+  BUILD_UNIT_NAME        VARCHAR2(200 CHAR),
+  BUILD_UNIT_PROPERTY    VARCHAR2(200 CHAR),
+  BUILD_UNIT_PROPERTY_ID NUMBER(10),
+  BUILD_UNIT_ADDRESS     VARCHAR2(200 CHAR),
+  BUILD_UNIT_TEL         VARCHAR2(20 CHAR),
+  BUILD_UNIT_LEGAL       VARCHAR2(40 CHAR),
+  BUILD_UNIT_LINKMAN     VARCHAR2(40 CHAR),
+  BUILD_UNIT_ZIPCODE     VARCHAR2(10 CHAR),
+  BUILD_UNIT_REG_MONEY   NUMBER(15,4),
+  PROJECT_NAME           VARCHAR2(300 CHAR),
+  BUILD_ADDRESS          VARCHAR2(200 CHAR),
+  LX_FILE                VARCHAR2(200 CHAR),
+  LX_FILE_CODE           VARCHAR2(200 CHAR),
+  LX_LEVEL               VARCHAR2(20 CHAR),
+  LX_LEVEL_ID            NUMBER(10),
+  LX_CLASS               VARCHAR2(20 CHAR),
+  LX_CLASS_ID            NUMBER(10),
+  APPROVAL_UNIT          VARCHAR2(40 CHAR),
+  APPROVAL_DATE          DATE,
+  TOTAL_INVESTMENT       NUMBER(15,4),
+  DEV_INVESTMENT         NUMBER(15,4),
+  BUILD_PROPERTY         VARCHAR2(200 CHAR),
+  BUILD_PROPERTY_ID      NUMBER(10),
+  BUILD_SCALE            VARCHAR2(200 CHAR),
+  TOTAL_AREA             NUMBER(15,4),
+  BUILD_START_DATE       DATE,
+  PROJECT_PROPERTY       VARCHAR2(200 CHAR),
+  PROJECT_PROPERTY_ID    NUMBER(10),
+  PREPARE_THING          VARCHAR2(200 CHAR),
+  EXPLAIN_THING          VARCHAR2(600 CHAR),
+  FUND_SOURCE_1          NUMBER(15,4),
+  FUND_SOURCE_2          NUMBER(15,4),
+  FUND_SOURCE_3          NUMBER(15,4),
+  FUND_SOURCE_4          NUMBER(15,4),
+  FUND_SOURCE_5          NUMBER(15,4),
+  FUND_SOURCE_6          NUMBER(15,4),
+  FUND_SOURCE_7          NUMBER(15,4),
+  FUND_SOURCE_8          NUMBER(15,4),
+  FUND_SOURCE_9          NUMBER(15,4),
+  STRUCTURE_FORM         VARCHAR2(40 CHAR),
+  STRUCTURE_FORM_ID      NUMBER(10),
+  PROJECT_TYPE           VARCHAR2(100 CHAR),
+  PROJECT_TYPE_ID        NUMBER(10),
+  BMDM                   VARCHAR2(10 CHAR),
+  BMMC                   VARCHAR2(200 CHAR),
+  IS_STATE_HOLDING       VARCHAR2(10 CHAR),
+  BUILD_UNIT_ORG_CODE    VARCHAR2(100 CHAR),
+  BJ_PROJECT_PROPERTY    VARCHAR2(40 CHAR),
+  BJ_PROJECT_PROPERTY_ID NUMBER(10),
+  FGW_EXCHANGE_CODE      VARCHAR2(20 CHAR),
+  BELONG_AREA            VARCHAR2(100 CHAR),
+  BJ_MEMO                VARCHAR2(600 CHAR),
+  FBZG                   VARCHAR2(20 CHAR),
+  JBR                    VARCHAR2(40 CHAR),
+  JSB_CODE               VARCHAR2(50 CHAR),
+  GIS_X                  NUMBER(15,7),
+  GIS_Y                  NUMBER(15,7),
+  GIS_LINE               CLOB,
+  SHARE_DATETIME         DATE,
+  SHARE_STATUS           VARCHAR2(20 CHAR),
+  CARD_ID                VARCHAR2(20 CHAR),
+  PRO_SPECIAL_FLAG_KC    NUMBER(10),
+  PRO_SPECIAL_FLAG_SJ    NUMBER(10),
+  PRO_SPECIAL_FLAG_SG    NUMBER(10),
+  PRO_SPECIAL_FLAG_JL    NUMBER(10),
+  PRO_SPECIAL_FLAG_DEV   NUMBER(10)
+)
+tablespace USERS
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 56
+    next 1
+    minextents 1
+    maxextents unlimited
+  );
+-- Add comments to the table 
+comment on table SHARE_PRO_TOBUILD
+  is '项目报建信息';
+-- Add comments to the columns 
+comment on column SHARE_PRO_TOBUILD.BJBH
+  is '报建编号';
+comment on column SHARE_PRO_TOBUILD.BJ_DATE
+  is '报建日期';
+comment on column SHARE_PRO_TOBUILD.BUILD_UNIT_NAME
+  is '建设单位';
+comment on column SHARE_PRO_TOBUILD.BUILD_UNIT_PROPERTY
+  is '建设单位性质';
+comment on column SHARE_PRO_TOBUILD.BUILD_UNIT_PROPERTY_ID
+  is '建设单位性质标识';
+comment on column SHARE_PRO_TOBUILD.BUILD_UNIT_ADDRESS
+  is '建设单位地址';
+comment on column SHARE_PRO_TOBUILD.BUILD_UNIT_TEL
+  is '建设单位电话';
+comment on column SHARE_PRO_TOBUILD.BUILD_UNIT_LEGAL
+  is '建设单位法人';
+comment on column SHARE_PRO_TOBUILD.BUILD_UNIT_LINKMAN
+  is '建设单位联系人';
+comment on column SHARE_PRO_TOBUILD.BUILD_UNIT_ZIPCODE
+  is '建设单位邮编';
+comment on column SHARE_PRO_TOBUILD.BUILD_UNIT_REG_MONEY
+  is '建设单位注册资金';
+comment on column SHARE_PRO_TOBUILD.PROJECT_NAME
+  is '项目名称';
+comment on column SHARE_PRO_TOBUILD.BUILD_ADDRESS
+  is '建设地点';
+comment on column SHARE_PRO_TOBUILD.LX_FILE
+  is '立项文件';
+comment on column SHARE_PRO_TOBUILD.LX_FILE_CODE
+  is '立项文号';
+comment on column SHARE_PRO_TOBUILD.LX_LEVEL
+  is '立项级别';
+comment on column SHARE_PRO_TOBUILD.LX_LEVEL_ID
+  is '立项级别标识';
+comment on column SHARE_PRO_TOBUILD.LX_CLASS
+  is '立项分类';
+comment on column SHARE_PRO_TOBUILD.LX_CLASS_ID
+  is '立项分类标识';
+comment on column SHARE_PRO_TOBUILD.APPROVAL_UNIT
+  is '批准机关';
+comment on column SHARE_PRO_TOBUILD.APPROVAL_DATE
+  is '批准日期';
+comment on column SHARE_PRO_TOBUILD.TOTAL_INVESTMENT
+  is '总投资';
+comment on column SHARE_PRO_TOBUILD.DEV_INVESTMENT
+  is '设备投资';
+comment on column SHARE_PRO_TOBUILD.BUILD_PROPERTY
+  is '建设性质';
+comment on column SHARE_PRO_TOBUILD.BUILD_PROPERTY_ID
+  is '建设性质标识';
+comment on column SHARE_PRO_TOBUILD.BUILD_SCALE
+  is '建设规模';
+comment on column SHARE_PRO_TOBUILD.TOTAL_AREA
+  is '总面积';
+comment on column SHARE_PRO_TOBUILD.BUILD_START_DATE
+  is '开工日期';
+comment on column SHARE_PRO_TOBUILD.PROJECT_PROPERTY
+  is '项目性质';
+comment on column SHARE_PRO_TOBUILD.PROJECT_PROPERTY_ID
+  is '项目性质标识';
+comment on column SHARE_PRO_TOBUILD.PREPARE_THING
+  is '筹建情况';
+comment on column SHARE_PRO_TOBUILD.EXPLAIN_THING
+  is '说明情况';
+comment on column SHARE_PRO_TOBUILD.FUND_SOURCE_1
+  is '资金来源--国家投资';
+comment on column SHARE_PRO_TOBUILD.FUND_SOURCE_2
+  is '资金来源--国家融资';
+comment on column SHARE_PRO_TOBUILD.FUND_SOURCE_3
+  is '资金来源--国际组织外国政府资金';
+comment on column SHARE_PRO_TOBUILD.FUND_SOURCE_4
+  is '资金来源--集体经济投资';
+comment on column SHARE_PRO_TOBUILD.FUND_SOURCE_5
+  is '资金来源--外商投资';
+comment on column SHARE_PRO_TOBUILD.FUND_SOURCE_6
+  is '资金来源--私民营投资';
+comment on column SHARE_PRO_TOBUILD.FUND_SOURCE_7
+  is '资金来源--自有资金';
+comment on column SHARE_PRO_TOBUILD.FUND_SOURCE_8
+  is '资金来源--其他';
+comment on column SHARE_PRO_TOBUILD.FUND_SOURCE_9
+  is '资金来源--港、澳、台投资';
+comment on column SHARE_PRO_TOBUILD.STRUCTURE_FORM
+  is '结构形式';
+comment on column SHARE_PRO_TOBUILD.STRUCTURE_FORM_ID
+  is '结构形式标识';
+comment on column SHARE_PRO_TOBUILD.PROJECT_TYPE
+  is '项目分类';
+comment on column SHARE_PRO_TOBUILD.PROJECT_TYPE_ID
+  is '项目分类标识';
+comment on column SHARE_PRO_TOBUILD.BMDM
+  is '部门代码';
+comment on column SHARE_PRO_TOBUILD.BMMC
+  is '部门名称';
+comment on column SHARE_PRO_TOBUILD.IS_STATE_HOLDING
+  is '是否国有资本控股';
+comment on column SHARE_PRO_TOBUILD.BUILD_UNIT_ORG_CODE
+  is '建设单位机构代码';
+comment on column SHARE_PRO_TOBUILD.BJ_PROJECT_PROPERTY
+  is '报建项目性质';
+comment on column SHARE_PRO_TOBUILD.BJ_PROJECT_PROPERTY_ID
+  is '报建项目性质标识';
+comment on column SHARE_PRO_TOBUILD.FGW_EXCHANGE_CODE
+  is '发改委交互码';
+comment on column SHARE_PRO_TOBUILD.BELONG_AREA
+  is '所属区县';
+comment on column SHARE_PRO_TOBUILD.BJ_MEMO
+  is '报建备注';
+comment on column SHARE_PRO_TOBUILD.FBZG
+  is '发包资格';
+comment on column SHARE_PRO_TOBUILD.JBR
+  is '经办人';
+comment on column SHARE_PRO_TOBUILD.JSB_CODE
+  is '建设部编号';
+comment on column SHARE_PRO_TOBUILD.GIS_X
+  is 'gis x坐标';
+comment on column SHARE_PRO_TOBUILD.GIS_Y
+  is 'gis y坐标';
+comment on column SHARE_PRO_TOBUILD.GIS_LINE
+  is 'Gis 线段';
+comment on column SHARE_PRO_TOBUILD.SHARE_DATETIME
+  is '共享时间';
+comment on column SHARE_PRO_TOBUILD.SHARE_STATUS
+  is '状态';
+comment on column SHARE_PRO_TOBUILD.CARD_ID
+  is '卡号';
+comment on column SHARE_PRO_TOBUILD.PRO_SPECIAL_FLAG_KC
+  is '勘察环节无需办理或特别通过';
+comment on column SHARE_PRO_TOBUILD.PRO_SPECIAL_FLAG_SJ
+  is '设计环节无需办理或特别通过';
+comment on column SHARE_PRO_TOBUILD.PRO_SPECIAL_FLAG_SG
+  is '施工环节无需办理或特别通过';
+comment on column SHARE_PRO_TOBUILD.PRO_SPECIAL_FLAG_JL
+  is '施工监理环节无需办理或特别通过';
+comment on column SHARE_PRO_TOBUILD.PRO_SPECIAL_FLAG_DEV
+  is '设备监理环节无需办理或特别通过';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table SHARE_PRO_TOBUILD
+  add constraint PK_SHARE_PRO_TOBUILD primary key (BJBH)
+  using index 
+  tablespace USERS
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 3M
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+
+  
+  
+  
+  -- Create table
+declare 
+      num   number; 
+begin 
+      select count(1) into num from all_tables where TABLE_NAME = 'SHARE_PRO_CONTRACT'; 
+      if   num=1   then 
+          execute immediate 'drop table SHARE_PRO_CONTRACT'; 
+      end   if; 
+end;
+/ 
+create table SHARE_PRO_CONTRACT
+(
+  NET_CODE                VARCHAR2(50 CHAR) not null,
+  BJBH                    VARCHAR2(50 CHAR),
+  ZB_CONT_CODE            VARCHAR2(10 CHAR),
+  FB_CONT_CODE            VARCHAR2(10 CHAR),
+  LW_CONT_CODE            VARCHAR2(10 CHAR),
+  CB_TYPE                 VARCHAR2(10 CHAR),
+  CB_TYPE_NAME            VARCHAR2(50 CHAR),
+  PRO_NAME                VARCHAR2(200 CHAR),
+  FBDW                    VARCHAR2(100 CHAR),
+  ZB_UNIT                 VARCHAR2(100 CHAR),
+  ZB_UNIT_CODE            VARCHAR2(10 CHAR),
+  CB_UNIT                 VARCHAR2(100 CHAR),
+  CB_UNIT_CODE            VARCHAR2(50 CHAR),
+  CB_UNIT_ID              NUMBER(10),
+  PRO_HEADER              VARCHAR2(40 CHAR),
+  PRO_HEADER_PHONE        VARCHAR2(40 CHAR),
+  PRO_HEADER_CARD         VARCHAR2(40 CHAR),
+  PRO_HEADER_CERT         NUMBER(10),
+  PRO_HEADER_CERT_DESC    VARCHAR2(50 CHAR),
+  YTH_KC_UNIT             VARCHAR2(100 CHAR),
+  YTH_KC_UNIT_CODE        VARCHAR2(50 CHAR),
+  YTH_KC_UNIT_ID          NUMBER(10),
+  YTH_KC_HEADER           VARCHAR2(50 CHAR),
+  YTH_KC_HEADER_PHONE     VARCHAR2(50 CHAR),
+  YTH_KC_HEADER_CARD      VARCHAR2(50 CHAR),
+  YTH_KC_HEADER_CERT      VARCHAR2(10 CHAR),
+  YTH_KC_HEADER_CERT_DESC VARCHAR2(50 CHAR),
+  YTH_SG_UNIT             VARCHAR2(100 CHAR),
+  YTH_SG_UNIT_CODE        VARCHAR2(50 CHAR),
+  YTH_SG_UNIT_ID          NUMBER(10),
+  YTH_SG_HEADER           VARCHAR2(50 CHAR),
+  YTH_SG_HEADER_PHONE     VARCHAR2(50 CHAR),
+  YTH_SG_HEADER_CARD      VARCHAR2(50 CHAR),
+  YTH_SG_HEADER_CERT      VARCHAR2(10 CHAR),
+  YTH_SG_HEADER_CERT_DESC VARCHAR2(50 CHAR),
+  LHT_CB_UNIT             VARCHAR2(200 CHAR),
+  LHT_CB_UNIT_CODE        VARCHAR2(100 CHAR),
+  YTH_KC_FEE              NUMBER(15,4),
+  YTH_SJ_FEE              NUMBER(15,4),
+  CONT_MONEY              NUMBER(15,4),
+  ACCEPT_TIME             DATE,
+  IS_CANCEL               VARCHAR2(1 CHAR),
+  CANCEL_TIME             DATE,
+  CONT_TYPE_DESC          VARCHAR2(50 CHAR),
+  SLR                     VARCHAR2(50 CHAR),
+  SLR_UNIT_CODE           VARCHAR2(50 CHAR),
+  SLR_UNIT_NAME           VARCHAR2(50 CHAR),
+  UPDATETIME              DATE
+)
+tablespace USERS
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 72
+    next 1
+    minextents 1
+    maxextents unlimited
+  );
+-- Add comments to the table 
+comment on table SHARE_PRO_CONTRACT
+ is '合同备案信息';
+-- Add comments to the columns 
+comment on column SHARE_PRO_CONTRACT.NET_CODE
+  is '网上受理编号';
+comment on column SHARE_PRO_CONTRACT.BJBH
+  is '报建编号';
+comment on column SHARE_PRO_CONTRACT.ZB_CONT_CODE
+  is '总包合同编号';
+comment on column SHARE_PRO_CONTRACT.FB_CONT_CODE
+  is '分包合同编号';
+comment on column SHARE_PRO_CONTRACT.LW_CONT_CODE
+  is '劳务分包合同编号';
+comment on column SHARE_PRO_CONTRACT.CB_TYPE
+  is '承包方式';
+comment on column SHARE_PRO_CONTRACT.CB_TYPE_NAME
+  is '承包方式(中文)';
+comment on column SHARE_PRO_CONTRACT.PRO_NAME
+  is '项目名称';
+comment on column SHARE_PRO_CONTRACT.FBDW
+  is '发包方';
+comment on column SHARE_PRO_CONTRACT.ZB_UNIT
+  is '总包单位';
+comment on column SHARE_PRO_CONTRACT.ZB_UNIT_CODE
+  is '总包单位代码';
+comment on column SHARE_PRO_CONTRACT.CB_UNIT
+  is '承包单位';
+comment on column SHARE_PRO_CONTRACT.CB_UNIT_CODE
+  is '承包单位代码';
+comment on column SHARE_PRO_CONTRACT.CB_UNIT_ID
+  is '承包单位_ID';
+comment on column SHARE_PRO_CONTRACT.PRO_HEADER
+  is '项目负责人姓名';
+comment on column SHARE_PRO_CONTRACT.PRO_HEADER_PHONE
+  is '项目负责人电话';
+comment on column SHARE_PRO_CONTRACT.PRO_HEADER_CARD
+  is '项目负责人证件号';
+comment on column SHARE_PRO_CONTRACT.PRO_HEADER_CERT
+  is '项目负责人证件类型';
+comment on column SHARE_PRO_CONTRACT.PRO_HEADER_CERT_DESC
+  is '项目负责人证件类型（中文）';
+comment on column SHARE_PRO_CONTRACT.YTH_KC_UNIT
+  is '一体化勘察单位';
+comment on column SHARE_PRO_CONTRACT.YTH_KC_UNIT_CODE
+  is '一体化勘察单位代码';
+comment on column SHARE_PRO_CONTRACT.YTH_KC_UNIT_ID
+  is '一体化勘察单位ID';
+comment on column SHARE_PRO_CONTRACT.YTH_KC_HEADER
+  is '一体化勘察单位负责人';
+comment on column SHARE_PRO_CONTRACT.YTH_KC_HEADER_PHONE
+  is '一体化勘察单位负责人电话';
+comment on column SHARE_PRO_CONTRACT.YTH_KC_HEADER_CARD
+  is '一体化勘察单位负责人证件号';
+comment on column SHARE_PRO_CONTRACT.YTH_KC_HEADER_CERT
+  is '一体化勘察单位负责人证件类型';
+comment on column SHARE_PRO_CONTRACT.YTH_KC_HEADER_CERT_DESC
+  is '一体化勘察单位负责人证件类型（中文）';
+comment on column SHARE_PRO_CONTRACT.YTH_SG_UNIT
+  is '一体化施工单位';
+comment on column SHARE_PRO_CONTRACT.YTH_SG_UNIT_CODE
+  is '一体化施工单位代码';
+comment on column SHARE_PRO_CONTRACT.YTH_SG_UNIT_ID
+  is '一体化施工单位ID';
+comment on column SHARE_PRO_CONTRACT.YTH_SG_HEADER
+  is '一体化施工单位负责人';
+comment on column SHARE_PRO_CONTRACT.YTH_SG_HEADER_PHONE
+  is '一体化施工单位负责人电话';
+comment on column SHARE_PRO_CONTRACT.YTH_SG_HEADER_CARD
+  is '一体化施工单位负责人证件号';
+comment on column SHARE_PRO_CONTRACT.YTH_SG_HEADER_CERT
+  is '一体化施工单位负责人证件类型';
+comment on column SHARE_PRO_CONTRACT.YTH_SG_HEADER_CERT_DESC
+  is '一体化施工单位负责人证件类型（中文）';
+comment on column SHARE_PRO_CONTRACT.LHT_CB_UNIT
+  is '联合体承包单位';
+comment on column SHARE_PRO_CONTRACT.LHT_CB_UNIT_CODE
+  is '联合体承包单位代码';
+comment on column SHARE_PRO_CONTRACT.YTH_KC_FEE
+  is '一体化勘察费';
+comment on column SHARE_PRO_CONTRACT.YTH_SJ_FEE
+  is '一体化设计费';
+comment on column SHARE_PRO_CONTRACT.CONT_MONEY
+  is '合同金额';
+comment on column SHARE_PRO_CONTRACT.ACCEPT_TIME
+  is '受理时间';
+comment on column SHARE_PRO_CONTRACT.IS_CANCEL
+  is '是否核销';
+comment on column SHARE_PRO_CONTRACT.CANCEL_TIME
+  is '核销完成时间';
+comment on column SHARE_PRO_CONTRACT.CONT_TYPE_DESC
+  is '合同类别描述';
+comment on column SHARE_PRO_CONTRACT.SLR
+  is '受理人';
+comment on column SHARE_PRO_CONTRACT.SLR_UNIT_CODE
+  is '受理人单位代码';
+comment on column SHARE_PRO_CONTRACT.SLR_UNIT_NAME
+  is '受理人单位代码名称';
+comment on column SHARE_PRO_CONTRACT.UPDATETIME
+  is '更新时间';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table SHARE_PRO_CONTRACT
+  add constraint PK_SHARE_PRO_CONTRACT primary key (NET_CODE)
+  using index 
+  tablespace USERS
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 6M
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+
+
