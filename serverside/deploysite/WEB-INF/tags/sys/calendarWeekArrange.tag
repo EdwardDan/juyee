@@ -147,7 +147,7 @@
         var week = document.getElementById("week").value;
         var date = new Date(year, month, 1);
         var weekFirstDate = (week - 1) * 7 - date.getDay() + 1;
-//        weekFirstDate = weekFirstDate + 1;  //第一天由周日改为周一
+        weekFirstDate = weekFirstDate + 1;  //第一天由周日改为周一
         startDate = date2str(new Date(year, month, weekFirstDate));
         endDate = date2str(new Date(year, month, weekFirstDate + 6));
         if (document.getElementsByName("radiobutton")[1].checked && goButton) {

@@ -61,6 +61,7 @@
         s += "&jsDept=" + $("#jsDept").val();
         s += "&year=" + $("#year").val();
         s += "&categoryId=" + $("#categoryId").val();
+        s += "&qqdj=" + $("#qqdj").val();
         s += "&beginDate=" + $("#beginDate").val();
         s += "&endDate=" + $("#endDate").val();
         return s;
@@ -121,7 +122,13 @@
                 <sys:code code="${PROJ_INFO_CATEGORY}" name="categoryId" id="categoryId" type="select"
                           sysCodeDetailId="" style="width:155px" isAlowedNull="true"/>
             </td>
-            <td align="left" nowrap colspan="2">&nbsp;
+            <td align="left" nowrap colspan="4">&nbsp;
+                区区对接：
+                <select name="qqdj" id="qqdj" class="form_select" style="width: 90px;">
+                    <option value="">请选择</option>
+                    <option value="1012">2010-2012区区对接</option>
+                    <option value="1517">2015-2017区区对接</option>
+                </select>&nbsp;&nbsp;&nbsp;&nbsp;
                 <input type="button" value="查询" id="btnQueryThis" class="button_all" onclick="loadMonthReport('',null)"/>
                 <input type="button" value="显示全部" id="btnQueryAll" class="button_normal_long" onclick="loadMonthReport('${currentMonth}','all')"/>
             </td>

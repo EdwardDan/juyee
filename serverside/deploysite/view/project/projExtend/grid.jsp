@@ -10,26 +10,42 @@
                     '项目序号',
                     '项目编号',
                     '项目名称',
+                    <c:if test="${flag!='qqdj'}">
                     '项目性质',
+                    </c:if>
+                    <c:if test="${flag=='qqdj'}">
+                    '所属区县',
+                    </c:if>
                     '项目阶段',
-                    '项目类型',
+                    '业态类别',
+                    "工可总投资（亿元）",
+                    "年度累计完成额",
+                    "本年计划完成率（%）",
                     '操作'
                 ],
                 colModel: [
                     {name: 'id', width: 10, align: "center", searchtype: "integer", hidden: true},
-                    {name: "year", width: "30", align: "center", searchtype: "integer", sortable: true},
-                    {name: "no", width: "30", align: "center", searchtype: "string", sortable: true, hidden: true},
-                    {name: "projNum", width: "30", align: "center", searchtype: "string", sortable: true},
+                    {name: "year", width: "10", align: "center", searchtype: "integer", sortable: true, hidden: true},
+                    {name: "no", width: "20", align: "center", searchtype: "string", sortable: true},
+                    {name: "projNum", width: "25", align: "center", searchtype: "string", sortable: true, hidden: true},
                     {name: "name", width: "80", align: "left", searchtype: "string", sortable: true},
-                    {name: "property.name", width: "25", align: "center", searchtype: "string", sortable: true},
-                    {name: "stage.name", width: "25", align: "center", searchtype: "string", sortable: true},
-                    {name: "category.name", width: "25", align: "center", searchtype: "string", sortable: true}
+                    <c:if test="${flag!='qqdj'}">
+                    {name: "property.name", width: "20", align: "center", searchtype: "string", sortable: true},
+                    </c:if>
+                    <c:if test="${flag=='qqdj'}">
+                    {name: "areaCode", width: "20", align: "center", searchtype: "string", sortable: true},
+                    </c:if>
+                    {name: "stage.name", width: "20", align: "center", searchtype: "string", sortable: true},
+                    {name: "category.name", width: "20", align: "center", searchtype: "string", sortable: true},
+                    {name: "gctxGkpfTotal", width: "35", align: "right", searchtype: "string", sortable: false},
+                    {name: "accCost", width: "30", align: "right", searchtype: "string", sortable: false},
+                    {name: "costRate", width: "35", align: "center", searchtype: "string", sortable: false}
                 ],
                 actModel: [
-                    {name: 'operation', width: 45, align: 'center'}
+                    {name: 'operation', width: 30, align: 'center'}
                 ],
                 pager: '#pager2',
-                caption: "项目扩展信息列表",
+                caption: "${titleName}",
                 shrinkToFit: true,
                 gridComplete: function () {  //在此事件中循环为每一行添加修改和删除链接
                     var ids = jQuery("#listGrid").jqGrid('getDataIDs');

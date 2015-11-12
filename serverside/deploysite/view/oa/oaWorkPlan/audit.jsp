@@ -8,7 +8,7 @@
             {name: "reportDept", rule: "validate[required,maxSize[100]]"},
             {name: "reportPerson", rule: "validate[required,maxSize[50]]"},
             {name: "beginDate", rule: "validate[required]"},
-            {name: "endDate", rule: "validate[required]"},
+            {name: "endDate", rule: "validate[required]"}
         ];
         validateInit(validateCondition, formId);
     });
@@ -22,6 +22,11 @@
         //修改状态
         if (status == '${STATUS_BRANCH_PASS}') {
             $("#status").val(status);
+            var kzOpinion = $("#kzOpinion").val();
+            if ('' == kzOpinion || null == kzOpinion) {
+                showInfoMsg("审核信息必须输入！");
+                return
+            }
             $.messager.confirm('系统提示', "确定审核通过吗？通过后将不能修改", function (r) {
                 if (r) {
                     //提交表单
@@ -38,6 +43,11 @@
             });
         } else if (status == '${STATUS_MAIN_PASS}') {
             $("#status").val(status);
+            var fgOpinion = $("#fgOpinion").val();
+            if ('' == fgOpinion || null == fgOpinion) {
+                showInfoMsg("审核信息必须输入！");
+                return;
+            }
             $.messager.confirm('系统提示', "确定审核通过吗？通过后将不能修改", function (r) {
                 if (r) {
                     //提交表单

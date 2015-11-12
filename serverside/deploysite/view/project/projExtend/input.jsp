@@ -79,7 +79,7 @@
                         </c:forEach>
                     </select>
                 </td>
-                <td class="form_label_right">打包属性：</td>
+                <td class="form_label_right">项目属性：</td>
                 <td class="form_content">
                     <sys:checkbox name="ProjPackageAttr" code="${PROJ_INFO_DBSX}" checkedNames="${bean.packageAttr}"
                                   inputType="checkbox" isSaveName="true" showType="view" colNum="4"/>

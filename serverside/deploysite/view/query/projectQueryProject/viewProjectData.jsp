@@ -70,7 +70,7 @@
             <c:set var="projProgress" value="${projInfo.id}progress"/>
             <c:set var="questions" value="${projInfo.id}question"/>
             <c:set var="improveOpinion" value="${projInfo.id}opinion"/>
-            <td>${projInfo.no}</td>
+            <td>${projIndex.index+1}</td>
             <td>${projInfo.jsDept}</td>
             <td>${projInfo.name}</td>
             <td>${projInfo.jsDeptPerson}</td>
