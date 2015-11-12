@@ -1,0 +1,781 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.justonetech.biz.domain">
+	<class
+		name="ShareProTobuild"
+		table="SHARE_PRO_TOBUILD"
+	>
+		
+		<meta attribute="sync-DAO">false</meta>
+		<meta attribute="sync-jsp">true</meta>
+		<meta attribute="sync-boolean">get</meta>
+		<meta attribute="treeable">false</meta>
+		<meta attribute="projectable">false</meta>
+        <meta attribute="tableName">项目报建信息</meta>
+        <meta attribute="tableComment">项目报建信息</meta>
+	    <meta attribute="sync-templatePatterns">list\w*</meta>
+        <meta attribute="sub-system">share</meta>
+
+		<!--<id-->
+			<!--name="id"-->
+			<!--type="string"-->
+			<!--column="ID"-->
+		<!-->-->
+			<!--<generator class="com.justonetech.core.orm.hibernate.LongIdGenerator"/>-->
+		<!--</id>-->
+
+        <id
+			name="bjbh"
+			column="BJBH"
+			type="string"
+			length="50"
+        >
+            <meta attribute="ColumnName">报建编号</meta>
+            <meta attribute="ColumnComment">报建编号</meta>
+        </id>
+
+		<property
+			name="bjDate"
+			column="BJ_DATE"
+			type="date"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">报建日期</meta>
+            <meta attribute="ColumnComment">报建日期</meta>
+        </property>
+
+		<property
+			name="buildUnitName"
+			column="BUILD_UNIT_NAME"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">建设单位</meta>
+            <meta attribute="ColumnComment">建设单位</meta>
+        </property>
+
+		<property
+			name="buildUnitProperty"
+			column="BUILD_UNIT_PROPERTY"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">建设单位性质</meta>
+            <meta attribute="ColumnComment">建设单位性质</meta>
+        </property>
+
+		<property
+			name="buildUnitPropertyId"
+			column="BUILD_UNIT_PROPERTY_ID"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">建设单位性质标识</meta>
+            <meta attribute="ColumnComment">建设单位性质标识</meta>
+        </property>
+
+		<property
+			name="buildUnitAddress"
+			column="BUILD_UNIT_ADDRESS"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">建设单位地址</meta>
+            <meta attribute="ColumnComment">建设单位地址</meta>
+        </property>
+
+		<property
+			name="buildUnitTel"
+			column="BUILD_UNIT_TEL"
+			type="string"
+			not-null="false"
+			length="20"
+        >
+            <meta attribute="ColumnName">建设单位电话</meta>
+            <meta attribute="ColumnComment">建设单位电话</meta>
+        </property>
+
+		<property
+			name="buildUnitLegal"
+			column="BUILD_UNIT_LEGAL"
+			type="string"
+			not-null="false"
+			length="40"
+        >
+            <meta attribute="ColumnName">建设单位法人</meta>
+            <meta attribute="ColumnComment">建设单位法人</meta>
+        </property>
+
+		<property
+			name="buildUnitLinkman"
+			column="BUILD_UNIT_LINKMAN"
+			type="string"
+			not-null="false"
+			length="40"
+        >
+            <meta attribute="ColumnName">建设单位联系人</meta>
+            <meta attribute="ColumnComment">建设单位联系人</meta>
+        </property>
+
+		<property
+			name="buildUnitZipcode"
+			column="BUILD_UNIT_ZIPCODE"
+			type="string"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">建设单位邮编</meta>
+            <meta attribute="ColumnComment">建设单位邮编</meta>
+        </property>
+
+		<property
+			name="buildUnitRegMoney"
+			column="BUILD_UNIT_REG_MONEY"
+			type="java.lang.Double"
+			not-null="false"
+			length="15"
+        >
+            <meta attribute="ColumnName">建设单位注册资金</meta>
+            <meta attribute="ColumnComment">建设单位注册资金</meta>
+        </property>
+
+		<property
+			name="projectName"
+			column="PROJECT_NAME"
+			type="string"
+			not-null="false"
+			length="300"
+        >
+            <meta attribute="ColumnName">项目名称</meta>
+            <meta attribute="ColumnComment">项目名称</meta>
+        </property>
+
+		<property
+			name="buildAddress"
+			column="BUILD_ADDRESS"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">建设地点</meta>
+            <meta attribute="ColumnComment">建设地点</meta>
+        </property>
+
+		<property
+			name="lxFile"
+			column="LX_FILE"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">立项文件</meta>
+            <meta attribute="ColumnComment">立项文件</meta>
+        </property>
+
+		<property
+			name="lxFileCode"
+			column="LX_FILE_CODE"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">立项文号</meta>
+            <meta attribute="ColumnComment">立项文号</meta>
+        </property>
+
+		<property
+			name="lxLevel"
+			column="LX_LEVEL"
+			type="string"
+			not-null="false"
+			length="20"
+        >
+            <meta attribute="ColumnName">立项级别</meta>
+            <meta attribute="ColumnComment">立项级别</meta>
+        </property>
+
+		<property
+			name="lxLevelId"
+			column="LX_LEVEL_ID"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">立项级别标识</meta>
+            <meta attribute="ColumnComment">立项级别标识</meta>
+        </property>
+
+		<property
+			name="lxClass"
+			column="LX_CLASS"
+			type="string"
+			not-null="false"
+			length="20"
+        >
+            <meta attribute="ColumnName">立项分类</meta>
+            <meta attribute="ColumnComment">立项分类</meta>
+        </property>
+
+		<property
+			name="lxClassId"
+			column="LX_CLASS_ID"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">立项分类标识</meta>
+            <meta attribute="ColumnComment">立项分类标识</meta>
+        </property>
+
+		<property
+			name="approvalUnit"
+			column="APPROVAL_UNIT"
+			type="string"
+			not-null="false"
+			length="40"
+        >
+            <meta attribute="ColumnName">批准机关</meta>
+            <meta attribute="ColumnComment">批准机关</meta>
+        </property>
+
+		<property
+			name="approvalDate"
+			column="APPROVAL_DATE"
+			type="date"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">批准日期</meta>
+            <meta attribute="ColumnComment">批准日期</meta>
+        </property>
+
+		<property
+			name="totalInvestment"
+			column="TOTAL_INVESTMENT"
+			type="java.lang.Double"
+			not-null="false"
+			length="15"
+        >
+            <meta attribute="ColumnName">总投资</meta>
+            <meta attribute="ColumnComment">总投资</meta>
+        </property>
+
+		<property
+			name="devInvestment"
+			column="DEV_INVESTMENT"
+			type="java.lang.Double"
+			not-null="false"
+			length="15"
+        >
+            <meta attribute="ColumnName">设备投资</meta>
+            <meta attribute="ColumnComment">设备投资</meta>
+        </property>
+
+		<property
+			name="buildProperty"
+			column="BUILD_PROPERTY"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">建设性质</meta>
+            <meta attribute="ColumnComment">建设性质</meta>
+        </property>
+
+		<property
+			name="buildPropertyId"
+			column="BUILD_PROPERTY_ID"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">建设性质标识</meta>
+            <meta attribute="ColumnComment">建设性质标识</meta>
+        </property>
+
+		<property
+			name="buildScale"
+			column="BUILD_SCALE"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">建设规模</meta>
+            <meta attribute="ColumnComment">建设规模</meta>
+        </property>
+
+		<property
+			name="totalArea"
+			column="TOTAL_AREA"
+			type="java.lang.Double"
+			not-null="false"
+			length="15"
+        >
+            <meta attribute="ColumnName">总面积</meta>
+            <meta attribute="ColumnComment">总面积</meta>
+        </property>
+
+		<property
+			name="buildStartDate"
+			column="BUILD_START_DATE"
+			type="date"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">开工日期</meta>
+            <meta attribute="ColumnComment">开工日期</meta>
+        </property>
+
+		<property
+			name="projectProperty"
+			column="PROJECT_PROPERTY"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">项目性质</meta>
+            <meta attribute="ColumnComment">项目性质</meta>
+        </property>
+
+		<property
+			name="projectPropertyId"
+			column="PROJECT_PROPERTY_ID"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">项目性质标识</meta>
+            <meta attribute="ColumnComment">项目性质标识</meta>
+        </property>
+
+		<property
+			name="prepareThing"
+			column="PREPARE_THING"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">筹建情况</meta>
+            <meta attribute="ColumnComment">筹建情况</meta>
+        </property>
+
+		<property
+			name="explainThing"
+			column="EXPLAIN_THING"
+			type="string"
+			not-null="false"
+			length="600"
+        >
+            <meta attribute="ColumnName">说明情况</meta>
+            <meta attribute="ColumnComment">说明情况</meta>
+        </property>
+
+		<property
+			name="fundSource1"
+			column="FUND_SOURCE_1"
+			type="java.lang.Double"
+			not-null="false"
+			length="15"
+        >
+            <meta attribute="ColumnName">资金来源--国家投资</meta>
+            <meta attribute="ColumnComment">资金来源--国家投资</meta>
+        </property>
+
+		<property
+			name="fundSource2"
+			column="FUND_SOURCE_2"
+			type="java.lang.Double"
+			not-null="false"
+			length="15"
+        >
+            <meta attribute="ColumnName">资金来源--国家融资</meta>
+            <meta attribute="ColumnComment">资金来源--国家融资</meta>
+        </property>
+
+		<property
+			name="fundSource3"
+			column="FUND_SOURCE_3"
+			type="java.lang.Double"
+			not-null="false"
+			length="15"
+        >
+            <meta attribute="ColumnName">资金来源--国际组织外国政府资金</meta>
+            <meta attribute="ColumnComment">资金来源--国际组织外国政府资金</meta>
+        </property>
+
+		<property
+			name="fundSource4"
+			column="FUND_SOURCE_4"
+			type="java.lang.Double"
+			not-null="false"
+			length="15"
+        >
+            <meta attribute="ColumnName">资金来源--集体经济投资</meta>
+            <meta attribute="ColumnComment">资金来源--集体经济投资</meta>
+        </property>
+
+		<property
+			name="fundSource5"
+			column="FUND_SOURCE_5"
+			type="java.lang.Double"
+			not-null="false"
+			length="15"
+        >
+            <meta attribute="ColumnName">资金来源--外商投资</meta>
+            <meta attribute="ColumnComment">资金来源--外商投资</meta>
+        </property>
+
+		<property
+			name="fundSource6"
+			column="FUND_SOURCE_6"
+			type="java.lang.Double"
+			not-null="false"
+			length="15"
+        >
+            <meta attribute="ColumnName">资金来源--私民营投资</meta>
+            <meta attribute="ColumnComment">资金来源--私民营投资</meta>
+        </property>
+
+		<property
+			name="fundSource7"
+			column="FUND_SOURCE_7"
+			type="java.lang.Double"
+			not-null="false"
+			length="15"
+        >
+            <meta attribute="ColumnName">资金来源--自有资金</meta>
+            <meta attribute="ColumnComment">资金来源--自有资金</meta>
+        </property>
+
+		<property
+			name="fundSource8"
+			column="FUND_SOURCE_8"
+			type="java.lang.Double"
+			not-null="false"
+			length="15"
+        >
+            <meta attribute="ColumnName">资金来源--其他</meta>
+            <meta attribute="ColumnComment">资金来源--其他</meta>
+        </property>
+
+		<property
+			name="fundSource9"
+			column="FUND_SOURCE_9"
+			type="java.lang.Double"
+			not-null="false"
+			length="15"
+        >
+            <meta attribute="ColumnName">资金来源--港、澳、台投资</meta>
+            <meta attribute="ColumnComment">资金来源--港、澳、台投资</meta>
+        </property>
+
+		<property
+			name="structureForm"
+			column="STRUCTURE_FORM"
+			type="string"
+			not-null="false"
+			length="40"
+        >
+            <meta attribute="ColumnName">结构形式</meta>
+            <meta attribute="ColumnComment">结构形式</meta>
+        </property>
+
+		<property
+			name="structureFormId"
+			column="STRUCTURE_FORM_ID"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">结构形式标识</meta>
+            <meta attribute="ColumnComment">结构形式标识</meta>
+        </property>
+
+		<property
+			name="projectType"
+			column="PROJECT_TYPE"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">项目分类</meta>
+            <meta attribute="ColumnComment">项目分类</meta>
+        </property>
+
+		<property
+			name="projectTypeId"
+			column="PROJECT_TYPE_ID"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">项目分类标识</meta>
+            <meta attribute="ColumnComment">项目分类标识</meta>
+        </property>
+
+		<property
+			name="bmdm"
+			column="BMDM"
+			type="string"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">部门代码</meta>
+            <meta attribute="ColumnComment">部门代码</meta>
+        </property>
+
+		<property
+			name="bmmc"
+			column="BMMC"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">部门名称</meta>
+            <meta attribute="ColumnComment">部门名称</meta>
+        </property>
+
+		<property
+			name="isStateHolding"
+			column="IS_STATE_HOLDING"
+			type="string"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">是否国有资本控股</meta>
+            <meta attribute="ColumnComment">是否国有资本控股</meta>
+        </property>
+
+		<property
+			name="buildUnitOrgCode"
+			column="BUILD_UNIT_ORG_CODE"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">建设单位机构代码</meta>
+            <meta attribute="ColumnComment">建设单位机构代码</meta>
+        </property>
+
+		<property
+			name="bjProjectProperty"
+			column="BJ_PROJECT_PROPERTY"
+			type="string"
+			not-null="false"
+			length="40"
+        >
+            <meta attribute="ColumnName">报建项目性质</meta>
+            <meta attribute="ColumnComment">报建项目性质</meta>
+        </property>
+
+		<property
+			name="bjProjectPropertyId"
+			column="BJ_PROJECT_PROPERTY_ID"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">报建项目性质标识</meta>
+            <meta attribute="ColumnComment">报建项目性质标识</meta>
+        </property>
+
+		<property
+			name="fgwExchangeCode"
+			column="FGW_EXCHANGE_CODE"
+			type="string"
+			not-null="false"
+			length="20"
+        >
+            <meta attribute="ColumnName">发改委交互码</meta>
+            <meta attribute="ColumnComment">发改委交互码</meta>
+        </property>
+
+		<property
+			name="belongArea"
+			column="BELONG_AREA"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">所属区县</meta>
+            <meta attribute="ColumnComment">所属区县</meta>
+        </property>
+
+		<property
+			name="bjMemo"
+			column="BJ_MEMO"
+			type="string"
+			not-null="false"
+			length="600"
+        >
+            <meta attribute="ColumnName">报建备注</meta>
+            <meta attribute="ColumnComment">报建备注</meta>
+        </property>
+
+		<property
+			name="fbzg"
+			column="FBZG"
+			type="string"
+			not-null="false"
+			length="20"
+        >
+            <meta attribute="ColumnName">发包资格</meta>
+            <meta attribute="ColumnComment">发包资格</meta>
+        </property>
+
+		<property
+			name="jbr"
+			column="JBR"
+			type="string"
+			not-null="false"
+			length="40"
+        >
+            <meta attribute="ColumnName">经办人</meta>
+            <meta attribute="ColumnComment">经办人</meta>
+        </property>
+
+		<property
+			name="jsbCode"
+			column="JSB_CODE"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">建设部编号</meta>
+            <meta attribute="ColumnComment">建设部编号</meta>
+        </property>
+
+		<property
+			name="gisX"
+			column="GIS_X"
+			type="java.lang.Double"
+			not-null="false"
+			length="15"
+        >
+            <meta attribute="ColumnName">gis x坐标</meta>
+            <meta attribute="ColumnComment">gis x坐标</meta>
+        </property>
+
+		<property
+			name="gisY"
+			column="GIS_Y"
+			type="java.lang.Double"
+			not-null="false"
+			length="15"
+        >
+            <meta attribute="ColumnName">gis y坐标</meta>
+            <meta attribute="ColumnComment">gis y坐标</meta>
+        </property>
+
+		<property
+			name="gisLine"
+			column="GIS_LINE"
+			type="string"
+			not-null="false"
+        >
+            <meta attribute="ColumnName">Gis 线段</meta>
+            <meta attribute="ColumnComment">Gis 线段</meta>
+        </property>
+
+		<property
+			name="shareDatetime"
+			column="SHARE_DATETIME"
+			type="timestamp"
+			not-null="false"
+			length="16"
+        >
+            <meta attribute="ColumnName">共享时间</meta>
+            <meta attribute="ColumnComment">共享时间</meta>
+        </property>
+
+		<property
+			name="shareStatus"
+			column="SHARE_STATUS"
+			type="string"
+			not-null="false"
+			length="20"
+        >
+            <meta attribute="ColumnName">状态</meta>
+            <meta attribute="ColumnComment">状态</meta>
+        </property>
+
+		<property
+			name="cardId"
+			column="CARD_ID"
+			type="string"
+			not-null="false"
+			length="20"
+        >
+            <meta attribute="ColumnName">卡号</meta>
+            <meta attribute="ColumnComment">卡号</meta>
+        </property>
+
+		<property
+			name="proSpecialFlagKc"
+			column="PRO_SPECIAL_FLAG_KC"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">勘察环节无需办理或特别通过</meta>
+            <meta attribute="ColumnComment">勘察环节无需办理或特别通过</meta>
+        </property>
+
+		<property
+			name="proSpecialFlagSj"
+			column="PRO_SPECIAL_FLAG_SJ"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">设计环节无需办理或特别通过</meta>
+            <meta attribute="ColumnComment">设计环节无需办理或特别通过</meta>
+        </property>
+
+		<property
+			name="proSpecialFlagSg"
+			column="PRO_SPECIAL_FLAG_SG"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">施工环节无需办理或特别通过</meta>
+            <meta attribute="ColumnComment">施工环节无需办理或特别通过</meta>
+        </property>
+
+		<property
+			name="proSpecialFlagJl"
+			column="PRO_SPECIAL_FLAG_JL"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">施工监理环节无需办理或特别通过</meta>
+            <meta attribute="ColumnComment">施工监理环节无需办理或特别通过</meta>
+        </property>
+
+		<property
+			name="proSpecialFlagDev"
+			column="PRO_SPECIAL_FLAG_DEV"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">设备监理环节无需办理或特别通过</meta>
+            <meta attribute="ColumnComment">设备监理环节无需办理或特别通过</meta>
+        </property>
+
+
+	</class>	
+    <query name="shareprotobuild_all_data_query">
+        <![CDATA[FROM ShareProTobuild]]>
+    </query>
+</hibernate-mapping>

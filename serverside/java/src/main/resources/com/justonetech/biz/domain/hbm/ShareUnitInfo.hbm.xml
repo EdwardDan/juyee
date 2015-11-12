@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.justonetech.biz.domain">
+	<class
+		name="ShareUnitInfo"
+		table="SHARE_UNIT_INFO"
+	>
+		
+		<meta attribute="sync-DAO">false</meta>
+		<meta attribute="sync-jsp">true</meta>
+		<meta attribute="sync-boolean">get</meta>
+		<meta attribute="treeable">false</meta>
+		<meta attribute="projectable">false</meta>
+        <meta attribute="tableName">企业基本信息</meta>
+        <meta attribute="tableComment">企业基本信息</meta>
+	    <meta attribute="sync-templatePatterns">list\w*</meta>
+        <meta attribute="sub-system">share</meta>
+
+		<id
+			name="id"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="com.justonetech.core.orm.hibernate.LongIdGenerator"/>
+		</id>
+
+		<property
+			name="unitName"
+			column="UNIT_NAME"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">单位名称</meta>
+            <meta attribute="ColumnComment">单位名称</meta>
+        </property>
+
+		<property
+			name="unitCode"
+			column="UNIT_CODE"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">单位代码</meta>
+            <meta attribute="ColumnComment">单位代码</meta>
+        </property>
+
+		<property
+			name="orgCode"
+			column="ORG_CODE"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">机构代码证</meta>
+            <meta attribute="ColumnComment">机构代码证</meta>
+        </property>
+
+		<property
+			name="regCityCode"
+			column="REG_CITY_CODE"
+			type="string"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">注册所在地代码</meta>
+            <meta attribute="ColumnComment">注册所在地代码</meta>
+        </property>
+
+		<property
+			name="regCityName"
+			column="REG_CITY_NAME"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">注册所在地</meta>
+            <meta attribute="ColumnComment">注册所在地</meta>
+        </property>
+
+		<property
+			name="belogProvinceCode"
+			column="BELOG_PROVINCE_CODE"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">隶属省市标识</meta>
+            <meta attribute="ColumnComment">隶属省市标识</meta>
+        </property>
+
+		<property
+			name="belogProvince"
+			column="BELOG_PROVINCE"
+			type="string"
+			not-null="false"
+			length="50"
+        >
+            <meta attribute="ColumnName">隶属省市名称</meta>
+            <meta attribute="ColumnComment">隶属省市名称</meta>
+        </property>
+
+		<property
+			name="regAddress"
+			column="REG_ADDRESS"
+			type="string"
+			not-null="false"
+			length="200"
+        >
+            <meta attribute="ColumnName">注册地址</meta>
+            <meta attribute="ColumnComment">注册地址</meta>
+        </property>
+
+		<property
+			name="unitEcoType"
+			column="UNIT_ECO_TYPE"
+			type="java.lang.Long"
+			not-null="false"
+			length="10"
+        >
+            <meta attribute="ColumnName">经济类型</meta>
+            <meta attribute="ColumnComment">经济类型</meta>
+        </property>
+
+		<property
+			name="unitEcoName"
+			column="UNIT_ECO_NAME"
+			type="string"
+			not-null="false"
+			length="100"
+        >
+            <meta attribute="ColumnName">经济类型名称</meta>
+            <meta attribute="ColumnComment">经济类型名称</meta>
+        </property>
+
+		<property
+			name="updateTime"
+			column="UPDATE_TIME"
+			type="timestamp"
+			not-null="false"
+			length="7"
+        >
+            <meta attribute="ColumnName">修改时间</meta>
+            <meta attribute="ColumnComment">修改时间</meta>
+        </property>
+
+
+	</class>	
+    <query name="shareunitinfo_all_data_query">
+        <![CDATA[FROM ShareUnitInfo]]>
+    </query>
+</hibernate-mapping>
