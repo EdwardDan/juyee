@@ -86,7 +86,8 @@
         <input type="radio" name="radiobutton" value="0" onClick="change()" ${check0}>按时间段查询
         <input type="button" name="btn_query" value="查询" class="btn_Search" onclick="queryDate(true)">&nbsp;
         <c:if test="${canEdit}">
-            <input type="button" class="button_all" value="编辑" onclick="doEdit('${startDate}','${endDate}')">
+            <input type="button" class="button_all" value="编辑"
+                   onclick="doEdit(document.getElementById('startDate').value,document.getElementById('endDate').value)">
         </c:if>
     </td>
 </tr>
@@ -109,7 +110,7 @@
 //        return Math.floor((d.getDate() - 1) / 7) + 1;
         //workable
         var date = new Date(y, m);
-        var month = date.getMonth(), year = date.getFullYear() , firstWeekday = new Date(year, month, 1).getDay() , lastDateOfMonth = new Date(year, month + 1, 0).getDate(), offsetDate = date.getDate() + firstWeekday - 1
+        var month = date.getMonth(), year = date.getFullYear(), firstWeekday = new Date(year, month, 1).getDay(), lastDateOfMonth = new Date(year, month + 1, 0).getDate(), offsetDate = date.getDate() + firstWeekday - 1
                 , index = 1, weeksInMonth = index + Math.ceil((lastDateOfMonth + firstWeekday - 7) / 7);
         return weeksInMonth;
     }
