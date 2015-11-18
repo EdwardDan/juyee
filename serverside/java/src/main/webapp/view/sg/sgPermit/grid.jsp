@@ -19,16 +19,15 @@
                 ],
                 colModel: [
                     {name: 'id', width: 10, align: "center", searchtype: "integer", hidden: true},
-                    {name: "bjbh", width: "33", align: "center", searchtype: "string", sortable: true},
-                    {name: "projectName", width: "33", align: "left", searchtype: "string", sortable: true},
-                    {name: "zh", width: "33", align: "center", searchtype: "string", sortable: true},
-                    {name: "projectType.name", width: "33", align: "center", searchtype: "string", sortable: true},
-                    {name: "buildName", width: "33", align: "center", searchtype: "string", sortable: true},
-                    {name: "applyPerson", width: "33", align: "center", searchtype: "string", sortable: true},
-                    {name: "applyNum", width: "33", align: "center", searchtype: "string", sortable: true},
+                    {name: "bjbh", width: "20", align: "center", searchtype: "string", sortable: true},
+                    {name: "projectName", width: "35", align: "left", searchtype: "string", sortable: true},
+                    {name: "zh", width: "25", align: "center", searchtype: "string", sortable: true},
+                    {name: "projectType.name", width: "15", align: "center", searchtype: "string", sortable: true},
+                    {name: "buildName", width: "35", align: "left", searchtype: "string", sortable: true},
+                    {name: "applyPerson", width: "15", align: "center", searchtype: "string", sortable: true},
+                    {name: "applyNum", width: "15", align: "center", searchtype: "string", sortable: true},
                     {name: "status", width: "5", align: "center", searchtype: "integer", sortable: true, hidden: true},
-                    {name: "statusName", width: "33", align: "center", searchtype: "string", sortable: true}
-
+                    {name: "statusName", width: "20", align: "center", searchtype: "string", sortable: true}
                 ],
                 actModel: [
                     {name: 'operation', width: 30, align: 'center'}
@@ -62,13 +61,14 @@
                             }
                         } else if (status == '${STATUS_SH_PASS}') {
                             if (${canFgldAudit}) {
-                                opButton += '<input type="button" value="分管领导审核" onclick="doAudit(' + id + ')" class="button_normal_long"/> ';
+                                opButton += '<input type="button" value="审核" onclick="doAudit(' + id + ')" class="button_normal"/> ';
                             }
                         } else if (status == '${STATUS_FGLD_PASS}') {
                             if (${canZxldAudit}) {
-                                opButton += '<input type="button" value="中心领导审核" onclick="doAudit(' + id + ')" class="button_normal_long"/> ';
+                                opButton += '<input type="button" value="审核" onclick="doAudit(' + id + ')" class="button_normal"/> ';
                             }
                         }
+                        opButton += '<input type="button" value="操作步骤" onclick="doOperation(' + id + ')" class="button_normal_long"/> ';
                         jQuery("#listGrid").jqGrid('setRowData', ids[i], { operation: opButton});
                     }
                 }, rownumbers: true
@@ -100,6 +100,9 @@
     }
     function doAudit(id) {
         openWindow("审核施工许可证", "${ctx}/sgPermit/audit.do?id=" + id, true);
+    }
+    function doOperation(id) {
+        loadMainPage("${ctx}/sgPermitOperation/grid.do?sgPermitId=" + id, "审查备案 > 施工许可管理 > 日志");
     }
     function doDelete(id) {
         doGridDelete("${ctx}/sgPermit/delete.do?id=" + id);

@@ -151,14 +151,14 @@ public class ProjExtendScheduleController extends BaseCRUDActionController<ProjE
         //处理其他业务逻辑
         model.addAttribute("bean", projExtend);
         projExtendService.save(projExtend);
-        List<ProjExtendSchedule> scheduleList = projExtendScheduleService.findByQuery("from ProjExtendSchedule where projExtend.id="+projExtend.getId()+"  order by year ,month desc");
-        if(null!=scheduleList&&scheduleList.size()>0){
-            ProjExtendSchedule  schedule =scheduleList.iterator().next();
-            model.addAttribute("BigYear",schedule.getYear());
-            model.addAttribute("BigMonth",schedule.getMonth());
-        }else{
-            model.addAttribute("BigYear","0");
-            model.addAttribute("BigMonth","0");
+        List<ProjExtendSchedule> scheduleList = projExtendScheduleService.findByQuery("from ProjExtendSchedule where projExtend.id=" + projExtend.getId() + "  order by year ,month desc");
+        if (null != scheduleList && scheduleList.size() > 0) {
+            ProjExtendSchedule schedule = scheduleList.iterator().next();
+            model.addAttribute("BigYear", schedule.getYear());
+            model.addAttribute("BigMonth", schedule.getMonth());
+        } else {
+            model.addAttribute("BigYear", "0");
+            model.addAttribute("BigMonth", "0");
         }
         return "view/project/projExtendSchedule/input";
     }

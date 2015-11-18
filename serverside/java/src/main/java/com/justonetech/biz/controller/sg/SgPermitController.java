@@ -4,7 +4,6 @@ import com.justonetech.biz.core.orm.hibernate.GridJq;
 import com.justonetech.biz.core.orm.hibernate.QueryTranslateJq;
 import com.justonetech.biz.daoservice.*;
 import com.justonetech.biz.domain.*;
-import com.justonetech.biz.manager.ConfigManager;
 import com.justonetech.biz.manager.DocumentManager;
 import com.justonetech.biz.utils.Constants;
 import com.justonetech.biz.utils.enums.SgPermitStatus;
@@ -14,7 +13,7 @@ import com.justonetech.core.utils.JspHelper;
 import com.justonetech.core.utils.ReflectionUtils;
 import com.justonetech.core.utils.StringHelper;
 import com.justonetech.system.domain.SysCodeDetail;
-import com.justonetech.system.manager.SimpleQueryManager;
+import com.justonetech.system.domain.SysUser;
 import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
 import com.justonetech.system.utils.PrivilegeCode;
@@ -29,12 +28,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.sql.Date;
 import java.util.*;
 
 
 /**
  * note:施工许可证
- * author: system
+ * author: gq
  * create date:
  * modify date:
  */
@@ -49,16 +49,7 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
     private SysCodeManager sysCodeManager;
 
     @Autowired
-    private ConfigManager configManager;
-
-    @Autowired
     private DocumentManager documentManager;
-
-    @Autowired
-    private SimpleQueryManager simpleQueryManager;
-
-    @Autowired
-    private DocDocumentService docDocumentService;
 
     @Autowired
     private SgPermitService sgPermitService;
@@ -72,10 +63,8 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
     @Autowired
     private SgPermitOperationService sgPermitOperationService;
 
-    public static String hdMaterialNames[] = {"航道建设项目项目开工备案表", "主体工程施工图设计审批文件", "项目已列入年度投资计划或建设资金落实的证明", "主体工程各合同段施工单位和监理单位资质证书", "主体工程各合同段施工单位和监理单位合同", "施工、监理单位中标通知书", "主体工程安全质量报监证明材料", "建设项目用地规划许可证", "动迁基本完成情况证明", "其他证明资料"};
-    public static String glMaterialNames[] = {"公路建设项目项目施工许可表", "国土资源部门关于征地的批复或者控制性用地的批复", "施工图设计文件批复", "建设资金证明", "施工、监理招标中标通知书", "建设工程施工、监理承发包合同、廉政协议和安全文明施工合同", "交通建设工程安全质量报监受理证明", "提供项目场地内完成动迁的证明材料", "其他证明材料"};
-    public static String gkMaterialNames[] = {"港口设施建设项目项目施工许可表", "申请人情况及相关证明材料（如营业执照等）", "港口设施建设项目的规划审核意见", "施工、监理的中标通知书", "建设工程各合同段的施工单位和监理单位合同副本、廉洁协议", "施工图审查意见", "建设工程安全质量报监办结单", "建设资金", "提供施工场地已经具备施工条件证明材料", "其他证明资料"};
-
+    @Autowired
+    private SgMaterialInfoService sgMaterialInfoService;
 
     /**
      * 列表显示页面
@@ -151,7 +140,8 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
         sgPermit.setYear(calendar.get(Calendar.YEAR));
         sgPermit.setStatus(SgPermitStatus.STATUS_EDIT.getCode());
         model.addAttribute("bean", sgPermit);
-        getMaterials(sgPermit, model, "edit");//处理申请材料数据
+        List<Map<String, Object>> applyList = getMaterials(sgPermit, "edit", "apply");//处理申请材料数据
+        model.addAttribute("applyList", applyList);
         doPrivilegeCodeAndStatus(model);//编码和状态
 
         return "view/sg/sgPermit/input";
@@ -168,7 +158,8 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
     public String modify(Model model, Long id) {
         SgPermit sgPermit = sgPermitService.get(id);
         model.addAttribute("bean", sgPermit);
-        getMaterials(sgPermit, model, "edit");//处理申请材料数据
+        List<Map<String, Object>> applyList = getMaterials(sgPermit, "edit", "apply");//处理申请材料数据
+        model.addAttribute("applyList", applyList);
         doPrivilegeCodeAndStatus(model);//编码和状态
 
         return "view/sg/sgPermit/input";
@@ -185,7 +176,10 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
     public String audit(Model model, Long id) {
         SgPermit sgPermit = sgPermitService.get(id);
         model.addAttribute("bean", sgPermit);
-        getMaterials(sgPermit, model, "view");//处理申请材料数据
+        List<Map<String, Object>> applyList = getMaterials(sgPermit, "view", "apply");//处理申请材料数据
+        model.addAttribute("applyList", applyList);
+        List<Map<String, Object>> submitList = getMaterials(sgPermit, "edit", "submit");//处理申请材料数据
+        model.addAttribute("submitList", submitList);
         doPrivilegeCodeAndStatus(model);//编码和状态
 
         return "view/sg/sgPermit/audit";
@@ -201,10 +195,33 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
     @RequestMapping
     public String view(Model model, Long id) {
         SgPermit sgPermit = sgPermitService.get(id);
-
         model.addAttribute("bean", sgPermit);
+        List<Map<String, Object>> applyList = getMaterials(sgPermit, "view", "apply");//处理申请材料数据
+        model.addAttribute("applyList", applyList);
+        List<Map<String, Object>> submitList = getMaterials(sgPermit, "view", "submit");//处理申请材料数据
+        model.addAttribute("submitList", submitList);
+        doPrivilegeCodeAndStatus(model);
 
         return "view/sg/sgPermit/view";
+    }
+
+    /**
+     * 打印页面
+     *
+     * @param id    .
+     * @param model .
+     * @return .
+     */
+    @RequestMapping
+    public String printView(Model model, Long id) {
+        SgPermit sgPermit = sgPermitService.get(id);
+        model.addAttribute("bean", sgPermit);
+        List<Map<String, Object>> applyList = getMaterials(sgPermit, "view", "apply");//处理申请材料数据
+        model.addAttribute("applyList", applyList);
+        List<Map<String, Object>> submitList = getMaterials(sgPermit, "view", "submit");//处理申请材料数据
+        model.addAttribute("submitList", submitList);
+
+        return "view/sg/sgPermit/printView";
     }
 
     /**
@@ -245,26 +262,26 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
             }
             sgPermitService.save(target);
             //保存信息之前先删除材料申请信息
+            List<SgMaterial> list1 = new ArrayList<SgMaterial>();
             Set<SgMaterial> sgMaterials = target.getSgMaterials();
             for (SgMaterial material : sgMaterials) {
-                sgMaterialService.delete(material);
+                list1.add(material);
             }
+            sgMaterialService.batchDelete(list1, list1.size());
             //保存材料信息
+            List<SgMaterial> saveList = new ArrayList<SgMaterial>();
             String[] nos = request.getParameterValues("no");//序号
             if (null != nos && nos.length > 0) {
                 for (String no : nos) {
-                    System.out.println("no = " + no);
                     SgMaterial sgMaterial = new SgMaterial();
                     sgMaterial.setSgPermit(target);
                     sgMaterial.setNo(Long.valueOf(no));
                     //材料是否齐全
                     String isFull = request.getParameter("isFull" + no);
-                    if (!StringHelper.isEmpty(isFull)) {
-                        if ("1".equals(isFull)) {
-                            sgMaterial.setIsFull(true);
-                        } else {
-                            sgMaterial.setIsFull(false);
-                        }
+                    if (!StringHelper.isEmpty(isFull) && Constants.FLAG_TRUE.equals(isFull)) {
+                        sgMaterial.setIsFull(true);
+                    } else {
+                        sgMaterial.setIsFull(false);
                     }
                     //份数
                     String num = request.getParameter("num" + no);
@@ -279,10 +296,21 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
                         DocDocument docDocument = documentManager.getDocDocument(Long.valueOf(docId));
                         sgMaterial.setDoc(docDocument);
                     }
-                    sgMaterialService.save(sgMaterial);
+                    saveList.add(sgMaterial);
                 }
             }
-
+            sgMaterialService.batchSave(saveList, saveList.size());
+            //保存操作信息
+            Integer status = target.getStatus();
+            if (status == SgPermitStatus.STATUS_SUBMIT.getCode()) {
+                SgPermitOperation operation = new SgPermitOperation();
+                operation.setSgPermit(target);
+                operation.setOptionCode(SgPermitStatus.STATUS_SUBMIT.getStepCode());
+                operation.setOptionName(SgPermitStatus.STATUS_SUBMIT.getName());
+                operation.setOptionUser(sysUserManager.getSysUser().getDisplayName());
+                operation.setStatus(status);
+                sgPermitOperationService.save(operation);
+            }
 
         } catch (Exception e) {
             log.error("error", e);
@@ -308,6 +336,7 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
             if (entity.getId() != null) {
                 target = sgPermitService.get(entity.getId());
                 ReflectionUtils.copyBean(entity, target, new String[]{
+                        "status",
                         "csOpinion",
                         "fhOpinion",
                         "shOpinion",
@@ -317,8 +346,78 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
             } else {
                 target = entity;
             }
-            sgPermitService.save(target);
 
+            sgPermitService.save(target);
+            Integer status = target.getStatus();
+            SysUser sysUser = sysUserManager.getSysUser();
+            Date date = new Date(System.currentTimeMillis());
+            if (status == SgPermitStatus.STATUS_CS_PASS.getCode()) { //初审
+                target.setCsUser(sysUser.getDisplayName());
+                target.setCsDate(date);
+            } else if (status == SgPermitStatus.STATUS_FH_PASS.getCode()) { //复审
+                target.setFhUser(sysUser.getDisplayName());
+                target.setFhDate(date);
+            } else if (status == SgPermitStatus.STATUS_SH_PASS.getCode()) { //审核
+                target.setShUser(sysUser.getDisplayName());
+                target.setShDate(date);
+            } else if (status == SgPermitStatus.STATUS_FGLD_PASS.getCode()) { //分管领导审核
+                target.setFgldUser(sysUser.getDisplayName());
+                target.setFgldDate(date);
+            } else if (status == SgPermitStatus.STATUS_ZXLD_PASS.getCode()) { //中心领导审核
+                target.setZxldUser(sysUser.getDisplayName());
+                target.setZxldDate(date);
+            }
+            sgPermitService.save(target);
+            //保存审核信息
+            List<SgAuditOpinion> saveList = new ArrayList<SgAuditOpinion>();
+            List<SgAuditOpinion> list = sgAuditOpinionService.findByProperty("sgPermit.id", target.getId());
+            if (null != list && list.size() > 0) {
+                for (SgAuditOpinion opinion : list) {
+                    if (status == SgPermitStatus.STATUS_FH_PASS.getCode()) {
+                        String fhOpnion = request.getParameter("fhOpnion" + opinion.getNo());
+                        if (!StringHelper.isEmpty(fhOpnion) && Constants.FLAG_TRUE.equals(fhOpnion)) {
+                            opinion.setIsFhOpinion(true);
+                        } else {
+                            opinion.setIsFhOpinion(false);
+                        }
+                    }
+                    if (status == SgPermitStatus.STATUS_SH_PASS.getCode()) {
+                        String shOpnion = request.getParameter("shOpnion" + opinion.getNo());
+                        if (!StringHelper.isEmpty(shOpnion) && Constants.FLAG_TRUE.equals(shOpnion)) {
+                            opinion.setIsShOpinion(true);
+                        } else {
+                            opinion.setIsShOpinion(false);
+                        }
+                    }
+                    saveList.add(opinion);
+                }
+            } else {
+                String[] nos = request.getParameterValues("no");
+                if (null != nos && nos.length > 0) {
+                    for (String no : nos) {
+                        SgAuditOpinion opinion = new SgAuditOpinion();
+                        opinion.setSgPermit(target);
+                        opinion.setNo(Long.valueOf(no));
+                        opinion.setStatus(status);
+                        String csOpnion = request.getParameter("csOpnion" + no);
+                        if (!StringHelper.isEmpty(csOpnion) && Constants.FLAG_TRUE.equals(csOpnion)) {
+                            opinion.setIsCsOpinion(true);
+                        } else {
+                            opinion.setIsCsOpinion(false);
+                        }
+                        saveList.add(opinion);
+                    }
+                }
+            }
+            sgAuditOpinionService.batchSave(saveList, saveList.size());
+            //保存操作信息
+            SgPermitOperation operation = new SgPermitOperation();
+            operation.setSgPermit(target);
+            operation.setOptionCode(SgPermitStatus.getTypeCode(status));
+            operation.setOptionName(SgPermitStatus.getNameByCode(status));
+            operation.setOptionUser(sysUser.getDisplayName());
+            operation.setStatus(status);
+            sgPermitOperationService.save(operation);
 
         } catch (Exception e) {
             log.error("error", e);
@@ -339,24 +438,30 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
     public void delete(HttpServletResponse response, Long id) throws Exception {
         SgPermit sgPermit = sgPermitService.get(id);
         //删除审核意见
+        List<SgAuditOpinion> list1 = new ArrayList<SgAuditOpinion>();
         Set<SgAuditOpinion> sgAuditOpinions = sgPermit.getSgAuditOpinions();
         for (SgAuditOpinion opinion : sgAuditOpinions) {
-            sgAuditOpinionService.delete(opinion);
+            list1.add(opinion);
         }
+        sgAuditOpinionService.batchDelete(list1, list1.size());
         //删除材料申请
+        List<SgMaterial> list2 = new ArrayList<SgMaterial>();
         Set<SgMaterial> sgMaterials = sgPermit.getSgMaterials();
         for (SgMaterial material : sgMaterials) {
             DocDocument doc = material.getDoc();
             if (null != doc) {
                 documentManager.removeAllDoc(doc.getId(), null);
             }
-            sgMaterialService.delete(material);
+            list2.add(material);
         }
+        sgMaterialService.batchDelete(list2, list2.size());
         //删除操作记录
+        List<SgPermitOperation> list3 = new ArrayList<SgPermitOperation>();
         Set<SgPermitOperation> sgPermitOperations = sgPermit.getSgPermitOperations();
         for (SgPermitOperation operation : sgPermitOperations) {
-            sgPermitOperationService.delete(operation);
+            list3.add(operation);
         }
+        sgPermitOperationService.batchDelete(list3, list3.size());
         sgPermitService.delete(sgPermit);
 
         sendSuccessJSON(response, "删除成功");
@@ -393,47 +498,85 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
      * 获取申请材料数据
      *
      * @param sgPermit 。
-     * @param model    。
      */
-    private void getMaterials(SgPermit sgPermit, Model model, String flag) {
+    private List<Map<String, Object>> getMaterials(SgPermit sgPermit, String flag, String type) {
+        String hql = "from SgMaterialInfo where parent is not null and projectType.id=" + sgPermit.getProjectType().getId() + " and type='" + type + "' order by treeId asc";
+        List<SgMaterialInfo> infoList = sgMaterialInfoService.findByQuery(hql);
+        String materialInfo = "";
+        String[] materialInfos = {};
+        for (SgMaterialInfo info : infoList) {
+            materialInfo += "," + info.getMaterialName();
+        }
+        if (!StringHelper.isEmpty(materialInfo)) {
+            materialInfo = materialInfo.substring(1);
+            materialInfos = materialInfo.split(",");
+        }
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-        String names[] = {};
-        int num = 11;
-        String code = sgPermit.getProjectType().getCode();
-        if (code.equals(Constants.PROJECT_TYPE_GKSH)) {
-            names = gkMaterialNames;
-        } else if (code.endsWith(Constants.PROJECT_TYPE_GL)) {
-            names = glMaterialNames;
-            num = 10;
-        } else if (code.equals(Constants.PROJECT_TYPE_HD)) {
-            names = hdMaterialNames;
-        }
-        Set<SgMaterial> sgMaterials = sgPermit.getSgMaterials();
-        if (null != sgMaterials && sgMaterials.size() > 0) {
-            for (SgMaterial material : sgMaterials) {
-                Map<String, Object> map = new HashMap<String, Object>();
-                map.put("no", material.getNo());
-                map.put("materialName", names[JspHelper.getInteger(material.getNo()) - 1]);
-                map.put("isFull", material.getIsFull());
-                map.put("num", material.getNum());
-                if ("view".equals(flag)) {
-                    map.put("upLoad" + material.getNo(), documentManager.getDownloadButton(material.getDoc()));
-                } else {
-                    map.put("upLoad" + material.getNo(), documentManager.getUploadButtonForMulti(documentManager.getDefaultXmlConfig(), SgMaterial.class.getSimpleName(), material.getDoc(), null, null, String.valueOf(material.getNo())));
+        int num = infoList.size();
+        if ("apply".equals(type)) {
+            Set<SgMaterial> sgMaterials = sgPermit.getSgMaterials();
+            if (null != sgMaterials && sgMaterials.size() > 0) {
+                for (SgMaterial material : sgMaterials) {
+                    Map<String, Object> map = new HashMap<String, Object>();
+                    map.put("no", material.getNo());
+                    map.put("materialName", materialInfos[JspHelper.getInteger(material.getNo()) - 1]);
+                    map.put("isFull", material.getIsFull());
+                    map.put("num", material.getNum());
+                    if ("view".equals(flag)) {
+                        map.put("upLoad" + material.getNo(), documentManager.getDownloadButton(material.getDoc()));
+                    } else {
+                        map.put("upLoad" + material.getNo(), documentManager.getUploadButtonForMulti(documentManager.getDefaultXmlConfig(), SgMaterial.class.getSimpleName(), material.getDoc(), null, null, String.valueOf(material.getNo())));
+                    }
+                    list.add(map);
                 }
-                list.add(map);
+            } else {
+                for (int i = 1; i <= num; i++) {
+                    Map<String, Object> map = new HashMap<String, Object>();
+                    map.put("no", i);
+                    map.put("materialName", materialInfos[i - 1]);
+                    map.put("isFull", "");
+                    map.put("num", "");
+                    map.put("upLoad" + i, documentManager.getUploadButtonForMulti(documentManager.getDefaultXmlConfig(), SgMaterial.class.getSimpleName(), null, null, null, String.valueOf(i)));
+                    list.add(map);
+                }
             }
-        } else {
-            for (int i = 1; i < num; i++) {
-                Map<String, Object> map = new HashMap<String, Object>();
-                map.put("no", i);
-                map.put("materialName", names[i - 1]);
-                map.put("isFull", "");
-                map.put("num", "");
-                map.put("upLoad" + i, documentManager.getUploadButtonForMulti(documentManager.getDefaultXmlConfig(), SgMaterial.class.getSimpleName(), null, null, null, String.valueOf(i)));
-                list.add(map);
+        } else if ("submit".equals(type)) {
+            String auditReq = "";
+            String[] auditReqs = {};
+            for (SgMaterialInfo info : infoList) {
+                auditReq += "," + info.getAuditReq();
+            }
+            if (!StringHelper.isEmpty(auditReq)) {
+                auditReq = auditReq.substring(1);
+                auditReqs = auditReq.split(",");
+            }
+            Set<SgAuditOpinion> sgAuditOpinions = sgPermit.getSgAuditOpinions();
+            if (null != sgAuditOpinions && sgAuditOpinions.size() > 0) {
+                for (SgAuditOpinion opinion : sgAuditOpinions) {
+                    Map<String, Object> map = new HashMap<String, Object>();
+                    map.put("no", opinion.getNo());
+                    map.put("materialName", materialInfos[JspHelper.getInteger(opinion.getNo()) - 1]);
+                    String req = auditReqs[JspHelper.getInteger(opinion.getNo()) - 1];
+                    map.put("auditReq", (!"null".equals(req) && !StringHelper.isEmpty(req)) ? req : "");
+                    map.put("csOpinion", opinion.getIsCsOpinion());
+                    map.put("fhOpinion", opinion.getIsFhOpinion());
+                    map.put("shOpinion", opinion.getIsShOpinion());
+                    list.add(map);
+                }
+            } else {
+                for (int i = 1; i <= num; i++) {
+                    Map<String, Object> map = new HashMap<String, Object>();
+                    map.put("no", i);
+                    map.put("materialName", materialInfos[i - 1]);
+                    String req = auditReqs[i - 1];
+                    map.put("auditReq", (!"null".equals(req) && !StringHelper.isEmpty(req)) ? req : "");
+                    map.put("csOpinion", true);
+                    map.put("fhOpinion", true);
+                    map.put("shOpinion", true);
+                    list.add(map);
+                }
             }
         }
-        model.addAttribute("list", list);
+        return list;
     }
 }

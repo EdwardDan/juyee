@@ -105,7 +105,7 @@
                             <td style="width: 8%;">份数</td>
                             <td style="width: 15%;">附件</td>
                         </tr>
-                        <c:forEach items="${list}" var="map">
+                        <c:forEach items="${applyList}" var="map">
                             <c:set value="upLoad${map.no}" var="upLoadNo"/>
                             <tr class="tr_dark">
                                 <td>${map.no}

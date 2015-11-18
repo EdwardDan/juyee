@@ -192,59 +192,169 @@
             <meta attribute="ColumnComment">状态</meta>
         </property>
 
-		<property
-			name="csOpinion"
-			column="CS_OPINION"
-			type="string"
-			not-null="false"
-			length="1000"
-        >
+        <property
+                name="csOpinion"
+                column="CS_OPINION"
+                type="string"
+                not-null="false"
+                length="1000"
+                >
             <meta attribute="ColumnName">初审意见</meta>
             <meta attribute="ColumnComment">初审意见</meta>
         </property>
 
-		<property
-			name="fhOpinion"
-			column="FH_OPINION"
-			type="string"
-			not-null="false"
-			length="1000"
-        >
+        <property
+                name="csUser"
+                column="CS_USER"
+                type="string"
+                not-null="false"
+                length="100"
+                >
+            <meta attribute="ColumnName">初审用户</meta>
+            <meta attribute="ColumnComment">初审用户</meta>
+        </property>
+
+        <property
+                name="csDate"
+                column="CS_DATE"
+                type="date"
+                not-null="false"
+                length="7"
+                >
+            <meta attribute="ColumnName">初审日期</meta>
+            <meta attribute="ColumnComment">初审日期</meta>
+        </property>
+
+        <property
+                name="fhOpinion"
+                column="FH_OPINION"
+                type="string"
+                not-null="false"
+                length="1000"
+                >
             <meta attribute="ColumnName">复核意见</meta>
             <meta attribute="ColumnComment">复核意见</meta>
         </property>
 
-		<property
-			name="shOpinion"
-			column="SH_OPINION"
-			type="string"
-			not-null="false"
-			length="1000"
-        >
+        <property
+                name="fhUser"
+                column="FH_USER"
+                type="string"
+                not-null="false"
+                length="100"
+                >
+            <meta attribute="ColumnName">复核用户</meta>
+            <meta attribute="ColumnComment">复核用户</meta>
+        </property>
+
+        <property
+                name="fhDate"
+                column="FH_DATE"
+                type="date"
+                not-null="false"
+                length="7"
+                >
+            <meta attribute="ColumnName">复核日期</meta>
+            <meta attribute="ColumnComment">复核日期</meta>
+        </property>
+
+        <property
+                name="shOpinion"
+                column="SH_OPINION"
+                type="string"
+                not-null="false"
+                length="1000"
+                >
             <meta attribute="ColumnName">审核意见</meta>
             <meta attribute="ColumnComment">审核意见</meta>
         </property>
 
-		<property
-			name="fgldOpinion"
-			column="FGLD_OPINION"
-			type="string"
-			not-null="false"
-			length="1000"
-        >
+        <property
+                name="shUser"
+                column="SH_USER"
+                type="string"
+                not-null="false"
+                length="100"
+                >
+            <meta attribute="ColumnName">审核用户</meta>
+            <meta attribute="ColumnComment">审核用户</meta>
+        </property>
+
+        <property
+                name="shDate"
+                column="SH_DATE"
+                type="date"
+                not-null="false"
+                length="7"
+                >
+            <meta attribute="ColumnName">审核日期</meta>
+            <meta attribute="ColumnComment">审核日期</meta>
+        </property>
+
+        <property
+                name="fgldOpinion"
+                column="FGLD_OPINION"
+                type="string"
+                not-null="false"
+                length="1000"
+                >
             <meta attribute="ColumnName">分管领导审核意见</meta>
             <meta attribute="ColumnComment">分管领导审核意见</meta>
         </property>
 
-		<property
-			name="zxldOpinion"
-			column="ZXLD_OPINION"
-			type="string"
-			not-null="false"
-			length="1000"
-        >
+        <property
+                name="fgldUser"
+                column="FGLD_USER"
+                type="string"
+                not-null="false"
+                length="100"
+                >
+            <meta attribute="ColumnName">分管领导审核用户</meta>
+            <meta attribute="ColumnComment">分管领导审核用户</meta>
+        </property>
+
+        <property
+                name="fgldDate"
+                column="FGLD_DATE"
+                type="date"
+                not-null="false"
+                length="7"
+                >
+            <meta attribute="ColumnName">分管领导审核日期</meta>
+            <meta attribute="ColumnComment">分管领导审核日期</meta>
+        </property>
+
+        <property
+                name="zxldOpinion"
+                column="ZXLD_OPINION"
+                type="string"
+                not-null="false"
+                length="1000"
+                >
             <meta attribute="ColumnName">中心领导审核意见</meta>
             <meta attribute="ColumnComment">中心领导审核意见</meta>
+        </property>
+
+        <property
+                name="zxldUser"
+                column="ZXLD_USER"
+                type="string"
+                not-null="false"
+                length="100"
+                >
+            <meta attribute="ColumnName">中心领导审核用户</meta>
+            <meta attribute="ColumnComment">中心领导审核用户</meta>
+        </property>
+
+        <property
+                name="zxldDate"
+                column="ZXLD_DATE"
+                type="date"
+                not-null="false"
+                length="7"
+                >
+            <meta attribute="ColumnName">中心领导审核日期</meta>
+            <meta attribute="ColumnComment">中心领导审核日期</meta>
         </property>
 
 		<property

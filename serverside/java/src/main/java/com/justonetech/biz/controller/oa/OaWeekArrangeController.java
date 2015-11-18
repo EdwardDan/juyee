@@ -55,31 +55,42 @@ public class OaWeekArrangeController extends BaseCRUDActionController<OaWeekArra
      * @return 。
      */
     @RequestMapping
-    public String init(Model model) {
-        Calendar c = Calendar.getInstance();
-        int i1 = c.get(Calendar.DAY_OF_WEEK);
-        c.add(Calendar.DATE, 2 - i1); //回溯到周一
-        //日历循环
+    public String init(Model model, HttpServletRequest request) {
+        String startDate = request.getParameter("startDate");
+        String endDate = request.getParameter("endDate");
+        System.out.println("startDate///////////////////////////////// = " + startDate);
+        System.out.println("endDate = " + endDate);
         String start;
         String end;
-        for (int i = 0; i < 7; i++) {
-            String month = (c.get(Calendar.MONTH) + 1) + "";
-            String day = (c.get(Calendar.DATE)) + "";
-            if (month.length() == 1) {
-                month = "0" + month;
+        if (!StringHelper.isEmpty(startDate) && !StringHelper.isEmpty(endDate)) {
+            start = startDate;
+            end = endDate;
+            model.addAttribute("startDate", Date.valueOf(start));
+            model.addAttribute("endDate", Date.valueOf(end));
+        } else {
+            Calendar c = Calendar.getInstance();
+            int i1 = c.get(Calendar.DAY_OF_WEEK);
+            c.add(Calendar.DATE, 2 - i1); //回溯到周一
+            //日历循环
+            for (int i = 0; i < 7; i++) {
+                String month = (c.get(Calendar.MONTH) + 1) + "";
+                String day = (c.get(Calendar.DATE)) + "";
+                if (month.length() == 1) {
+                    month = "0" + month;
+                }
+                if (day.length() == 1) {
+                    day = "0" + day;
+                }
+                if (i == 0) {
+                    start = c.get(Calendar.YEAR) + "-" + month + "-" + day;
+                    model.addAttribute("startDate", start);
+                }
+                if (i == 6) {
+                    end = c.get(Calendar.YEAR) + "-" + month + "-" + day;
+                    model.addAttribute("endDate", end);
+                }
+                c.add(Calendar.DATE, 1);//日历+1
             }
-            if (day.length() == 1) {
-                day = "0" + day;
-            }
-            if (i == 0) {
-                start = c.get(Calendar.YEAR) + "-" + month + "-" + day;
-                model.addAttribute("startDate", start);
-            }
-            if (i == 6) {
-                end = c.get(Calendar.YEAR) + "-" + month + "-" + day;
-                model.addAttribute("endDate", end);
-            }
-            c.add(Calendar.DATE, 1);//日历+1
         }
         model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.OA_WEEKARRANGE_EDIT));
         return "view/oa/oaWeekArrange/init";

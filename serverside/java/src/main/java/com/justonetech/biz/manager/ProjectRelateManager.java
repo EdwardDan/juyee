@@ -77,14 +77,16 @@ public class ProjectRelateManager {
         String hql = "";
         SysUser sysUser = sysUserManager.getSysUser();
         SysPerson person = sysUser.getPerson();
-        Set<ProjRelatePerson> relatePersons = person.getProjRelatePersons();
-        if (relatePersons.size() > 0) {
-            hql = "and " + prefix + " in (select project.id from ProjRelatePerson where person.id=" + person.getId() + ")";
+        if (null != person) {
+            Set<ProjRelatePerson> relatePersons = person.getProjRelatePersons();
+            if (relatePersons.size() > 0) {
+                hql = "and " + prefix + " in (select project.id from ProjRelatePerson where person.id=" + person.getId() + ")";
 
-        } else {
-            SysDept dept = person.getDept();
-            if (dept != null) {
-                hql = "and " + prefix + " in (select project.id from ProjRelateDept where dept.id=" + dept.getId() + ")";
+            } else {
+                SysDept dept = person.getDept();
+                if (dept != null) {
+                    hql = "and " + prefix + " in (select project.id from ProjRelateDept where dept.id=" + dept.getId() + ")";
+                }
             }
         }
         return hql;

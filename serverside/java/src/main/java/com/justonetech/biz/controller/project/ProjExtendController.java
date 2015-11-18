@@ -2,8 +2,14 @@ package com.justonetech.biz.controller.project;
 
 import com.justonetech.biz.core.orm.hibernate.GridJq;
 import com.justonetech.biz.core.orm.hibernate.QueryTranslateJq;
-import com.justonetech.biz.daoservice.*;
-import com.justonetech.biz.domain.*;
+import com.justonetech.biz.daoservice.ProjExtendCostService;
+import com.justonetech.biz.daoservice.ProjExtendScheduleService;
+import com.justonetech.biz.daoservice.ProjExtendService;
+import com.justonetech.biz.daoservice.ProjInfoService;
+import com.justonetech.biz.domain.ProjExtend;
+import com.justonetech.biz.domain.ProjExtendCost;
+import com.justonetech.biz.domain.ProjExtendSchedule;
+import com.justonetech.biz.domain.ProjInfo;
 import com.justonetech.biz.manager.ProjectRelateManager;
 import com.justonetech.biz.utils.Constants;
 import com.justonetech.biz.utils.enums.ProjExtendCostType;
@@ -13,9 +19,9 @@ import com.justonetech.core.utils.JspHelper;
 import com.justonetech.core.utils.MathHelper;
 import com.justonetech.core.utils.ReflectionUtils;
 import com.justonetech.core.utils.StringHelper;
-import com.justonetech.system.daoservice.SysCodeDetailService;
 import com.justonetech.system.domain.SysCodeDetail;
 import com.justonetech.system.domain.SysDept;
+import com.justonetech.system.domain.SysPerson;
 import com.justonetech.system.domain.SysUser;
 import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
@@ -31,7 +37,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.*;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 
 /**
@@ -72,7 +81,7 @@ public class ProjExtendController extends BaseCRUDActionController<ProjExtend> {
      * @return .
      */
     @RequestMapping
-    public String grid(Model model, String flag,String msg) {
+    public String grid(Model model, String flag, String msg) {
         List<SysCodeDetail> propertyList = sysCodeManager.getCodeListByCode(Constants.PROJ_INFO_PROPERTY);
         List<SysCodeDetail> projinfostageList = sysCodeManager.getCodeListByCode(Constants.PROJ_INFO_STAGE);
         List<SysCodeDetail> projinfocategoryList = sysCodeManager.getCodeListByCode(Constants.PROJ_INFO_CATEGORY);
@@ -84,14 +93,14 @@ public class ProjExtendController extends BaseCRUDActionController<ProjExtend> {
         model.addAttribute("msg", msg);
         if (StringHelper.isEmpty(flag)) {
             model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.PROJ_EXTEND_EDIT1));
-            model.addAttribute("titleName","十二五项目清单");
+            model.addAttribute("titleName", "十二五项目清单");
         } else {
             if ("1012".equals(msg)) {
                 model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.PROJ_EXTEND_EDIT2));
-                model.addAttribute("titleName","2010-2012区区对接项目清单");
+                model.addAttribute("titleName", "2010-2012区区对接项目清单");
             } else if ("1517".equals(msg)) {
                 model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.PROJ_EXTEND_EDIT3));
-                model.addAttribute("titleName","2015-2017区区对接、断头路项目清单");
+                model.addAttribute("titleName", "2015-2017区区对接、断头路项目清单");
             }
         }
 
@@ -108,18 +117,22 @@ public class ProjExtendController extends BaseCRUDActionController<ProjExtend> {
      * @param rows     .
      */
     @RequestMapping
-    public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session, String flag,String msg, HttpServletRequest request) {
+    public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session, String flag, String msg, HttpServletRequest request) {
         try {
             boolean isJsdw = true;
             SysUser sysUser = sysUserManager.getSysUser();
             //是否是建设单位用户
-            if (null != sysUser.getPerson()) {
-                SysDept dept = sysUser.getPerson().getDept();
-                if (null != dept) {
-                    SysDept company = getParentCompany(dept);
-                    if (null != company) {
-                        if (!company.getName().equals("上海市交通建设工程管理中心") && !company.getName().equals("巨一科技发展有限公司") && !company.getName().equals("上海市交通委员会")) {
-                            isJsdw = false;
+            if (null != sysUser) {
+                SysPerson person = sysUser.getPerson();
+                if (null != person) {
+                    SysDept dept = person.getDept();
+                    if (null != dept) {
+                        SysDept company = getParentCompany(dept);
+                        if (null != company) {
+                            String code = company.getCode();
+                            if (!StringHelper.isEmpty(code) && !code.equals("OWNER") && !code.equals("JYKJ") && !code.equals("3")) {
+                                isJsdw = false;
+                            }
                         }
                     }
                 }
@@ -129,7 +142,7 @@ public class ProjExtendController extends BaseCRUDActionController<ProjExtend> {
             String ismajor = request.getParameter("ismajor");//是否重大
             String projstage = request.getParameter("projstage");//项目状态
             String projcategory = request.getParameter("projcategory");//业务类别
-            Page pageModel = new Page(page, rows, true);
+            Page<ProjInfo> pageModel = new Page<ProjInfo>(page, rows, true);
             String hql = "from ProjInfo where 1 = 1 ";
             if (!StringHelper.isEmpty(flag) && "qqdj".equals(flag)) {
                 hql += " and packageAttr like '%区区对接%' ";
@@ -175,29 +188,38 @@ public class ProjExtendController extends BaseCRUDActionController<ProjExtend> {
                         projExtend = extendList.iterator().next();
                     }
                     if (null != projExtend) {
-                        bean.put("gctxGkpfTotal", projExtend.getGctxGkpfTotal()); //工可总投资（亿元）
+                        bean.put("gctxGkpfTotal", null != projExtend.getGctxGkpfTotal() ? projExtend.getGctxGkpfTotal() : ""); //工可总投资（亿元）
                         List<ProjExtendCost> costList = projExtendCostService.findByProperty("projExtend.id", projExtend.getId());
-                        Double accCost = 0.0;
-                        Double yearAccCost = 0.0;
-                        Double yearPlanCost = 0.0;
+                        double accCost = 0.0;
+                        double yearAccCost = 0.0;
+                        double yearPlanCost = 0.0;
                         if (null != costList && costList.size() > 0) {
                             for (ProjExtendCost cost : costList) {
                                 String type = cost.getType();
                                 Integer costYear = cost.getYear();
-                                if (costYear == (year - 1) && type.equals(ProjExtendCostType.EXTEND_TYPE_1.getCode())) {
-                                    accCost += cost.getAccComplete();
+                                String half = cost.getHalf();
+                                Double accComplete = cost.getAccComplete();
+                                if (null == accComplete) {
+                                    accComplete = 0.0;
                                 }
-                                if (costYear == year && null != cost.getHalf() && cost.getHalf().equals("sbn") && type.equals(ProjExtendCostType.EXTEND_TYPE_3.getCode())) {
-                                    accCost += cost.getAccComplete();
-                                    yearAccCost += cost.getAccComplete();
+                                if (null != costYear && costYear == (year - 1) && !StringHelper.isEmpty(type) && type.equals(ProjExtendCostType.EXTEND_TYPE_1.getCode())) {
+                                    accCost += accComplete;
                                 }
-                                if (costYear == year && type.equals(ProjExtendCostType.EXTEND_TYPE_2.getCode())) {
-                                    yearPlanCost += cost.getAccComplete();
+                                if (null != costYear && costYear == year && !StringHelper.isEmpty(half) && half.equals("sbn") && !StringHelper.isEmpty(type) && type.equals(ProjExtendCostType.EXTEND_TYPE_3.getCode())) {
+                                    accCost += accComplete;
+                                    yearAccCost += accComplete;
+                                }
+                                if (null != costYear && costYear == year && !StringHelper.isEmpty(type) && type.equals(ProjExtendCostType.EXTEND_TYPE_2.getCode())) {
+                                    yearPlanCost += accComplete;
                                 }
                             }
                         }
-                        bean.put("accCost", MathHelper.roundDouble(accCost, 4));
-                        if (0 == yearPlanCost) {
+                        if (0.0 == accCost) {
+                            bean.put("accCost", "");
+                        } else {
+                            bean.put("accCost", MathHelper.roundDouble(accCost, 4));
+                        }
+                        if (0.0 == yearPlanCost) {
                             bean.put("costRate", "");
                         } else {
                             bean.put("costRate", MathHelper.roundDouble(yearAccCost / yearPlanCost, 2) * 100);

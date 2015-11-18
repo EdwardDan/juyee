@@ -13,6 +13,7 @@ import com.justonetech.core.utils.JspHelper;
 import com.justonetech.core.utils.StringHelper;
 import com.justonetech.system.domain.SysCodeDetail;
 import com.justonetech.system.domain.SysDept;
+import com.justonetech.system.domain.SysPerson;
 import com.justonetech.system.domain.SysUser;
 import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
@@ -104,13 +105,18 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
             boolean isJsdw = true;
             SysUser sysUser = sysUserManager.getSysUser();
             //是否是建设单位用户
-            if (null != sysUser.getPerson()) {
-                SysDept dept = sysUser.getPerson().getDept();
-                if (null != dept) {
-                    SysDept company = getParentCompany(dept);
-                    if (null != company) {
-                        if (!company.getName().equals("上海市交通建设工程管理中心") && !company.getName().equals("巨一科技发展有限公司") && !company.getName().equals("上海市交通委员会")) {
-                            isJsdw = false;
+            if (null != sysUser) {
+                System.out.println("sysUser.getDisplayName() = " + sysUser.getDisplayName());
+                SysPerson person = sysUser.getPerson();
+                if (null != person) {
+                    SysDept dept = person.getDept();
+                    if (null != dept) {
+                        SysDept company = getParentCompany(dept);
+                        if (null != company) {
+                            String code = company.getCode();
+                            if (!StringHelper.isEmpty(code) && !code.equals("OWNER") && !code.equals("JYKJ") && !code.equals("3")) {
+                                isJsdw = false;
+                            }
                         }
                     }
                 }

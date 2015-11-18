@@ -156,18 +156,21 @@ public class MainPageController extends BaseCRUDActionController {
     public String main(Model model) {
         SysUser sysUser = sysUserManager.getSysUser();
         boolean flag = true;
-        //是否外网用户
-        if (null != sysUser.getRegPerson()) {
-            flag = false;
-        }
-        //是否是建设单位用户
-        if (null != sysUser.getPerson()) {
-            SysDept dept = sysUser.getPerson().getDept();
-            if (null != dept) {
-                SysDept company = getParentCompany(dept);
-                if (null != company) {
-                    if (!company.getName().equals("上海市交通建设工程管理中心") && !company.getName().equals("巨一科技发展有限公司") && !company.getName().equals("上海市交通委员会")) {
-                        flag = false;
+        if (null != sysUser) {
+            //是否外网用户
+            if (null != sysUser.getRegPerson()) {
+                flag = false;
+            }
+            //是否是建设单位用户
+            if (null != sysUser.getPerson()) {
+                SysDept dept = sysUser.getPerson().getDept();
+                if (null != dept) {
+                    SysDept company = getParentCompany(dept);
+                    if (null != company) {
+                        String code = company.getCode();
+                        if (!StringHelper.isEmpty(code) && !code.equals("OWNER") && !code.equals("JYKJ") && !code.equals("3")) {
+                            flag = false;
+                        }
                     }
                 }
             }
@@ -408,8 +411,9 @@ public class MainPageController extends BaseCRUDActionController {
 
     /**
      * 其他
-     * @param model    。
-     * @return   。
+     *
+     * @param model 。
+     * @return 。
      */
     @RequestMapping
     public String mainQt(Model model) {

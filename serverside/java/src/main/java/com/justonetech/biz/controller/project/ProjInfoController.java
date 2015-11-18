@@ -281,10 +281,10 @@ public class ProjInfoController extends BaseCRUDActionController<ProjInfo> {
             String[] areaIds = request.getParameterValues("ProjBelongArea");
             String intro = request.getParameter("intro");
             target.setYear(Integer.valueOf(year));
-            if (!StringHelper.isEmpty(projProperty)){
+            if (!StringHelper.isEmpty(projProperty)) {
                 target.setProperty(sysCodeDetailService.get(Long.valueOf(projProperty)));
             }
-            if (!StringHelper.isEmpty(projStage)){
+            if (!StringHelper.isEmpty(projStage)) {
                 target.setStage(sysCodeDetailService.get(Long.valueOf(projStage)));
             }
             if (!StringHelper.isEmpty(projCategory)) {

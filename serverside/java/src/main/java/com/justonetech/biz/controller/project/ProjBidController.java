@@ -17,6 +17,7 @@ import com.justonetech.core.utils.StringHelper;
 import com.justonetech.system.daoservice.SysCodeDetailService;
 import com.justonetech.system.domain.SysCodeDetail;
 import com.justonetech.system.domain.SysDept;
+import com.justonetech.system.domain.SysPerson;
 import com.justonetech.system.domain.SysUser;
 import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
@@ -80,8 +81,8 @@ public class ProjBidController extends BaseCRUDActionController<ProjBid> {
         List<SysCodeDetail> projinfostageList = sysCodeManager.getCodeListByCode(Constants.PROJ_INFO_STAGE);
         List<SysCodeDetail> projinfocategoryList = sysCodeManager.getCodeListByCode(Constants.PROJ_INFO_CATEGORY);
         model.addAttribute("propertyList", propertyList); //管理属性
-        model.addAttribute("projinfostageList",projinfostageList); //项目状态
-        model.addAttribute("projinfocategoryList",projinfocategoryList); //业务类别
+        model.addAttribute("projinfostageList", projinfostageList); //项目状态
+        model.addAttribute("projinfocategoryList", projinfocategoryList); //业务类别
         model.addAttribute("typeCode", typeCode);
         model.addAttribute("typeName", ProjBidType.getNameByCode(typeCode));
         model.addAttribute("TYPE_STAGE", ProjBidType.TYPE_STAGE.getCode());
@@ -104,13 +105,18 @@ public class ProjBidController extends BaseCRUDActionController<ProjBid> {
             boolean isJsdw = true;
             SysUser sysUser = sysUserManager.getSysUser();
             //是否是建设单位用户
-            if (null != sysUser.getPerson()) {
-                SysDept dept = sysUser.getPerson().getDept();
-                if (null != dept) {
-                    SysDept company = getParentCompany(dept);
-                    if (null != company) {
-                        if (!company.getName().equals("上海市交通建设工程管理中心") && !company.getName().equals("巨一科技发展有限公司") && !company.getName().equals("上海市交通委员会")) {
-                            isJsdw = false;
+            if (null != sysUser) {
+                System.out.println("sysUser.getDisplayName() = " + sysUser.getDisplayName());
+                SysPerson person = sysUser.getPerson();
+                if (null != person) {
+                    SysDept dept = person.getDept();
+                    if (null != dept) {
+                        SysDept company = getParentCompany(dept);
+                        if (null != company) {
+                            String code = company.getCode();
+                            if (!StringHelper.isEmpty(code) && !code.equals("OWNER") && !code.equals("JYKJ") && !code.equals("3")) {
+                                isJsdw = false;
+                            }
                         }
                     }
                 }
@@ -135,7 +141,7 @@ public class ProjBidController extends BaseCRUDActionController<ProjBid> {
             if (!StringHelper.isEmpty(projcategory)) {
                 hql += " and category.name = '" + projcategory + "' ";
             }
-            if (!isJsdw){
+            if (!isJsdw) {
                 hql += projectRelateManager.getRelateProjectHql("id");
             }
             hql += "order by no asc,id asc";
@@ -306,7 +312,7 @@ public class ProjBidController extends BaseCRUDActionController<ProjBid> {
             target.setProject(projInfoService.get(Long.valueOf(projInfoId)));
             //保存参建单位各信息（按顺序为： 建设单位  勘察单位  设计单位  施工单位  监理单位）
             //参建单位名称、联系人、联系电话信息 | 参建单位类型  | 参建单位字段属性
-            String[][] relatedUnitInfos = new String[][] {StringHelper.stringToStringArray(request.getParameter("relatedUnitInfos"), ","), {"Jsdw", "Kcdw", "Sjdw", "Sgdw", "Jldw"}, {"Name", "Person", "Tel"}};
+            String[][] relatedUnitInfos = new String[][]{StringHelper.stringToStringArray(request.getParameter("relatedUnitInfos"), ","), {"Jsdw", "Kcdw", "Sjdw", "Sgdw", "Jldw"}, {"Name", "Person", "Tel"}};
             String grpUnitType = "";
             for (int i = 0; i < relatedUnitInfos[0].length; i++) {
                 if (i % 3 == 0) {
