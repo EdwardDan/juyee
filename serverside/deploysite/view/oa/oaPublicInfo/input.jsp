@@ -92,10 +92,17 @@
             <tr class="tr_light">
                 <td class="form_label_right">信息类型：</td>
                 <td class="form_content">
-                    <sys:code code="${infoType}" name="type" type="select" defaultName=""
-                              sysCodeDetailId="${bean.type.id}" disabled="" id="type"
-                              isAlowedNull="true"
-                              onChange=""/>
+                    <select name="type" id="type" class="form_select_long" style="width: 100px;">
+                        <option value="">请选择</option>
+                        <c:forEach items="${typeList}" var="item">
+                            <option value="${item.id}"
+                                    <c:if test="${item.id==bean.type.id}">selected</c:if>>${item.name}</option>
+                        </c:forEach>
+                    </select>
+                    <%--<sys:code code="${infoType}" name="type" type="select" defaultName=""--%>
+                              <%--sysCodeDetailId="${bean.type.id}" disabled="" id="type"--%>
+                              <%--isAlowedNull="true"--%>
+                              <%--onChange=""/>--%>
                 </td>
             </tr>
 

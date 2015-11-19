@@ -4,14 +4,16 @@
     $(function () {
         var conf = {
             gridOpts:{
-                url:"${ctx}/oaPublicInfo/gridDataCustom.do?range=${range}&typeCode=${typeCode}",
+                url:"${ctx}/oaPublicInfo/gridDataCustom.do?range=${range}&typeCode=${typeCode}&isZc=${isZc}",
                 colNames:['ID',
-                    <c:if test="${empty typeCode}">
+                    <c:if test="${empty typeCode&&empty isZc}">
                     '信息类型',
                     </c:if>
                     '标题',
+                    <c:if test="${empty isZc}">
                     '信息来源',
-                    <c:if test="${canEdit}">
+                    </c:if>
+                    <c:if test="${canEdit&&empty isZc}">
                     '创建人',
                     '是否发布',
                     '发布范围',
@@ -23,13 +25,15 @@
                     '操作'
                 ],
                 colModel:[
-                    {name:'id', width:1, align:"center", searchtype:"integer", hidden:true},
-                    <c:if test="${empty typeCode}">
-                    {name:"type.name", width:"40", align:"center", searchtype:"string", sortable:true},
+                    {name: 'id', width: 1, align: "center", searchtype: "integer", hidden: true},
+                    <c:if test="${empty typeCode&&empty isZc}">
+                    {name: "type.name", width: "40", align: "center", searchtype: "string", sortable: true},
                     </c:if>
-                    {name:"title", width:"100", align:"left", searchtype:"string", sortable:true},
-                    {name:"createDeptName", width:"45", align:"center", searchtype:"string", sortable:true},
-                    <c:if test="${canEdit}">
+                    {name: "title", width: "100", align: "left", searchtype: "string", sortable: true},
+                    <c:if test="${empty isZc}">
+                    {name: "createDeptName", width: "45", align: "center", searchtype: "string", sortable: true},
+                    </c:if>
+                    <c:if test="${canEdit&&empty isZc}">
                     {name:"user.displayName", width:"28", align:"center", searchtype:"string", sortable:true},
                     {name:"isPublic", width:"35", align:"center", searchtype:"integer", sortable:true, formatter:booleanFormat},
                     {name:"accessRange.name", width:"32", align:"center", searchtype:"string", sortable:true},
@@ -41,10 +45,15 @@
 
                 ],
                 actModel:[
-                    {name:'operation', width:68, align:'center', sortable:false}
+                    {name:'operation', width:30, align:'center', sortable:false}
                 ],
-                pager:'#pager2',
-                caption:"<c:choose><c:when test="${not empty typeName}">${typeName}列表</c:when><c:otherwise>公共信息发布列表</c:otherwise></c:choose>",
+                pager: '#pager2',
+                <c:if test="${empty isZc}">
+                caption: "<c:choose><c:when test="${not empty typeName}">${typeName}列表</c:when><c:otherwise>公共信息发布列表</c:otherwise></c:choose>",
+                </c:if>
+                <c:if test="${not empty isZc}">
+                caption: "政策规章列表",
+                </c:if>
                 shrinkToFit:true,
                 gridComplete:function () {  //在此事件中循环为每一行添加修改和删除链接
                     var ids = jQuery("#listGrid").jqGrid('getDataIDs');
@@ -91,10 +100,10 @@
     }
     <c:if test="${canEdit}">
     function doAdd() {
-        parent.openFullWindow("${ctx}/oaPublicInfo/add.do", 900, 525);
+        parent.openFullWindow("${ctx}/oaPublicInfo/add.do?isZc=${isZc}", 900, 525);
     }
     function doEdit(id) {
-        parent.openFullWindow("${ctx}/oaPublicInfo/modify.do?id=" + id, 900, 525);
+        parent.openFullWindow("${ctx}/oaPublicInfo/modify.do?id=" + id + "&isZc=${isZc}", 900, 525);
     }
     function doDelete(id) {
         doGridDelete("${ctx}/oaPublicInfo/delete.do?id=" + id);
