@@ -116,6 +116,8 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
                             String code = company.getCode();
                             if (!StringHelper.isEmpty(code) && !code.equals("OWNER") && !code.equals("JYKJ") && !code.equals("3")) {
                                 isJsdw = false;
+                            } else {
+                                isJsdw = false;
                             }
                         }
                     }

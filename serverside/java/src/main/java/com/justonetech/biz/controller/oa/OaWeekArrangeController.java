@@ -58,8 +58,6 @@ public class OaWeekArrangeController extends BaseCRUDActionController<OaWeekArra
     public String init(Model model, HttpServletRequest request) {
         String startDate = request.getParameter("startDate");
         String endDate = request.getParameter("endDate");
-        System.out.println("startDate///////////////////////////////// = " + startDate);
-        System.out.println("endDate = " + endDate);
         String start;
         String end;
         if (!StringHelper.isEmpty(startDate) && !StringHelper.isEmpty(endDate)) {

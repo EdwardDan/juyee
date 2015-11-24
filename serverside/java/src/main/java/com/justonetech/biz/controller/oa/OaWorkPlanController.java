@@ -2,8 +2,10 @@ package com.justonetech.biz.controller.oa;
 
 import com.justonetech.biz.core.orm.hibernate.GridJq;
 import com.justonetech.biz.core.orm.hibernate.QueryTranslateJq;
+import com.justonetech.biz.daoservice.OaFgldSetItemService;
 import com.justonetech.biz.daoservice.OaWorkPlanItemService;
 import com.justonetech.biz.daoservice.OaWorkPlanService;
+import com.justonetech.biz.domain.OaFgldSetItem;
 import com.justonetech.biz.domain.OaWorkPlan;
 import com.justonetech.biz.domain.OaWorkPlanItem;
 import com.justonetech.biz.manager.OaFgldManager;
@@ -15,6 +17,7 @@ import com.justonetech.core.orm.hibernate.Page;
 import com.justonetech.core.utils.JspHelper;
 import com.justonetech.core.utils.ReflectionUtils;
 import com.justonetech.system.domain.SysDept;
+import com.justonetech.system.domain.SysPerson;
 import com.justonetech.system.domain.SysUser;
 import com.justonetech.system.manager.ExcelPrintManager;
 import com.justonetech.system.manager.SysUserManager;
@@ -61,6 +64,9 @@ public class OaWorkPlanController extends BaseCRUDActionController<OaWorkPlan> {
 
     @Autowired
     private OaTaskManager oaTaskManager;
+
+    @Autowired
+    private OaFgldSetItemService oaFgldSetItemService;
 
     /**
      * 列表显示页面
@@ -374,8 +380,9 @@ public class OaWorkPlanController extends BaseCRUDActionController<OaWorkPlan> {
         int status = data.getStatus();
         //创建任务
         Set<Long> managers = new HashSet<Long>();
+        SysUser currentUser = sysUserManager.getSysUser();
         if (status == OaWorkPlanStatus.STATUS_SUBMIT.getCode()) {
-            SysUser kz = sysUserManager.getDeptLeaderByRole(sysUserManager.getSysUser().getLoginName());
+            SysUser kz = sysUserManager.getDeptLeaderByRole(currentUser.getLoginName());
             String privilegeCode = PrivilegeCode.OA_WORK_PLAN_AUDIZ_KZ;
             Set<Long> managersKZ = sysUserManager.getUserIdsByPrivilegeCode(privilegeCode);
             if (null != kz && managersKZ.contains(kz.getId())) {
@@ -386,9 +393,19 @@ public class OaWorkPlanController extends BaseCRUDActionController<OaWorkPlan> {
                 oaTaskManager.createTask(OaWorkPlan.class.getSimpleName() + "_BRANCH_PASS", data.getId(), taskTitle, managers, false, null, null);
             }
         } else if (status == OaWorkPlanStatus.STATUS_BRANCH_PASS.getCode()) {
-            String privilegeCode = PrivilegeCode.OA_WORK_PLAN_AUDIT_FG;
-            Set<Long> managersFG = sysUserManager.getUserIdsByPrivilegeCode(privilegeCode);
-            managers.addAll(managersFG);
+//            String privilegeCode = PrivilegeCode.OA_WORK_PLAN_AUDIT_FG;
+//            Set<Long> managersFG = sysUserManager.getUserIdsByPrivilegeCode(privilegeCode);
+//            managers.addAll(managersFG);
+            SysPerson person = currentUser.getPerson();
+            if (null != person) {
+                SysDept dept = person.getDept();
+                List<OaFgldSetItem> setItems = oaFgldSetItemService.findByProperty("dept.id", dept.getId());
+                for (OaFgldSetItem item : setItems) {
+                    SysUser user = item.getFgldSet().getUser();
+                    if (null != user)
+                        managers.add(user.getId());
+                }
+            }
             String taskTitle = oaTaskManager.getTaskTitle(data, OaWorkPlan.class.getSimpleName() + "_MAIN_PASS");
             if (managers.size() > 0) {
                 oaTaskManager.createTask(OaWorkPlan.class.getSimpleName() + "_MAIN_PASS", data.getId(), taskTitle, managers, false, null, null);

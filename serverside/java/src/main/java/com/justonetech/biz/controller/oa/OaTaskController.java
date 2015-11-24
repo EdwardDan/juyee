@@ -19,6 +19,7 @@ import com.justonetech.biz.utils.Constants;
 import com.justonetech.system.manager.SimpleQueryManager;
 import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
+import com.justonetech.system.utils.PrivilegeCode;
 import org.hibernate.util.StringHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -112,8 +113,8 @@ public class OaTaskController extends BaseCRUDActionController<OaTask> {
             Long userId = loginUser != null ? sysUserManager.getSysUser(loginUser.getLoginName()).getId() : 0l;
 
             //查看所有任务
-//            Boolean viewAll = sysUserManager.hasPrivilege(PrivilegeCode.SYS_TASK_VIEW_ALL);
-            Boolean viewAll = false;
+            Boolean viewAll = sysUserManager.hasPrivilege(PrivilegeCode.SYS_TASK_VIEW_ALL);
+//            Boolean viewAll = false;
 
             Page pageModel = new Page(page, rows, true);
             String hql = "from OaTaskDeal where status<>'{0}'";

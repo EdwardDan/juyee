@@ -3,6 +3,7 @@ package com.justonetech.biz.controller.oa;
 import com.justonetech.biz.core.orm.hibernate.GridJq;
 import com.justonetech.biz.core.orm.hibernate.QueryTranslateJq;
 import com.justonetech.biz.daoservice.DocDocumentService;
+import com.justonetech.biz.daoservice.OaFgldSetItemService;
 import com.justonetech.biz.daoservice.OaFgldSetService;
 import com.justonetech.biz.daoservice.OaMeetingOuterService;
 import com.justonetech.biz.domain.DocDocument;
@@ -21,6 +22,8 @@ import com.justonetech.core.security.util.SpringSecurityUtils;
 import com.justonetech.core.utils.JspHelper;
 import com.justonetech.core.utils.ReflectionUtils;
 import com.justonetech.core.utils.StringHelper;
+import com.justonetech.system.domain.SysDept;
+import com.justonetech.system.domain.SysPerson;
 import com.justonetech.system.domain.SysUser;
 import com.justonetech.system.manager.SysUserManager;
 import com.justonetech.system.utils.PrivilegeCode;
@@ -36,6 +39,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -71,6 +75,9 @@ public class OaMeetingOuterController extends BaseCRUDActionController<OaMeeting
 
     @Autowired
     private OaFgldSetService oaFgldSetService;
+
+    @Autowired
+    private OaFgldSetItemService oaFgldSetItemService;
 
     /**
      * 列表显示页面
@@ -275,10 +282,9 @@ public class OaMeetingOuterController extends BaseCRUDActionController<OaMeeting
             }
             target.setStatus(status);
             oaMeetingOuterService.save(target);
-            String taskTitle = oaTaskManager.getTaskTitle(target, OaMeetingOuter.class.getCanonicalName());
-            oaTaskManager.createTask(OaMeetingOuter.class.getSimpleName(), target.getId(), taskTitle, null);
             if (OaMeetingStatus.STATUS_SUBMIT.getCode() == target.getStatus()) {
                 msg = "提交!";
+                createOaTask(target);
             }
         } catch (Exception e) {
             log.error("error", e);
@@ -333,6 +339,7 @@ public class OaMeetingOuterController extends BaseCRUDActionController<OaMeeting
             } else if (OaMeetingStatus.STATUS_BRANCH_PASS.getCode() == target.getStatus() || OaMeetingStatus.STATUS_MAIN_PASS.getCode() == target.getStatus()) {
                 msg = "审核已通过!";
             }
+            createOaTask(target);
         } catch (Exception e) {
             log.error("error", e);
             super.processException(response, e);
@@ -391,4 +398,51 @@ public class OaMeetingOuterController extends BaseCRUDActionController<OaMeeting
         return personNames;
     }
 
+    /**
+     * 创建系统任务
+     *
+     * @param data .
+     * @throws Exception .
+     */
+    public void createOaTask(OaMeetingOuter data) throws Exception {
+        int status = data.getStatus();
+        //创建任务
+        Set<Long> managers = new HashSet<Long>();
+        SysUser currentUser = sysUserManager.getSysUser();
+        SysPerson person = currentUser.getPerson();
+        if (status == OaMeetingStatus.STATUS_SUBMIT.getCode()) {
+            if (null != person) {
+                SysDept dept = person.getDept();
+                List<OaFgldSetItem> setItems = oaFgldSetItemService.findByProperty("dept.id", dept.getId());
+                for (OaFgldSetItem item : setItems) {
+                    SysUser user = item.getFgldSet().getUser();
+                    if (null != user)
+                        managers.add(user.getId());
+                }
+            }
+            String taskTitle = oaTaskManager.getTaskTitle(data, OaMeetingOuter.class.getSimpleName() + "_BRANCH_PASS");
+            if (managers.size() > 0) {
+                oaTaskManager.createTask(OaMeetingOuter.class.getSimpleName() + "_BRANCH_PASS", data.getId(), taskTitle, managers, false, null, null);
+            }
+        } else if (status == OaMeetingStatus.STATUS_BRANCH_PASS.getCode()) {
+            if (null != person) {
+                List<OaFgldSet> setItems = oaFgldSetService.findByQuery("from OaFgldSet where parent is null");
+                for (OaFgldSet setItem : setItems) {
+                    managers.add(setItem.getUser().getId());
+                }
+            }
+            String taskTitle = oaTaskManager.getTaskTitle(data, OaMeetingOuter.class.getSimpleName() + "_MAIN_PASS");
+            if (managers.size() > 0) {
+                oaTaskManager.createTask(OaMeetingOuter.class.getSimpleName() + "_MAIN_PASS", data.getId(), taskTitle, managers, false, null, null);
+            }
+        } else if (status == OaMeetingStatus.STATUS_BRANCH_BACK.getCode() || status == OaMeetingStatus.STATUS_MAIN_BACK.getCode()) {
+            String createUser = data.getCreateUser();
+            SysUser sysUser = sysUserManager.getSysUser(createUser);
+            managers.add(sysUser.getId());
+            String taskTitle = oaTaskManager.getTaskTitle(data, OaMeetingOuter.class.getSimpleName());
+            if (managers.size() > 0) {
+                oaTaskManager.createTask(OaMeetingOuter.class.getSimpleName() + "_BACK", data.getId(), taskTitle, managers, false, null, null);
+            }
+        }
+    }
 }

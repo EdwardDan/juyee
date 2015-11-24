@@ -297,8 +297,8 @@ public class OaTaskManager {
      * @return .
      */
     public List<OaTaskDeal> getTaskDealList(Long userId) {
-        String hql = "from OaTaskDeal t where t.user.id={0} and status<>'{1}' order by t.task.id desc";
-        return oaTaskDealService.findByQuery(FormatUtils.format(hql, String.valueOf(userId), Constants.OA_TASK_DELETE));
+        String hql = "from OaTaskDeal t where t.user.id={0} and status='{1}' order by t.task.id desc";
+        return oaTaskDealService.findByQuery(FormatUtils.format(hql, String.valueOf(userId), Constants.OA_TASK_NOTREAD));
     }
 
     /**

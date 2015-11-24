@@ -1,12 +1,5 @@
 package com.justonetech.biz.controller.oa;
 
-import com.justonetech.core.controller.BaseCRUDActionController;
-import com.justonetech.core.orm.hibernate.Page;
-import com.justonetech.core.security.user.BaseUser;
-import com.justonetech.core.security.util.SpringSecurityUtils;
-import com.justonetech.core.utils.JspHelper;
-import com.justonetech.core.utils.ReflectionUtils;
-import com.justonetech.core.utils.StringHelper;
 import com.justonetech.biz.core.orm.hibernate.GridJq;
 import com.justonetech.biz.core.orm.hibernate.QueryTranslateJq;
 import com.justonetech.biz.daoservice.DocDocumentService;
@@ -16,6 +9,13 @@ import com.justonetech.biz.domain.OaPublicInfo;
 import com.justonetech.biz.manager.DocumentManager;
 import com.justonetech.biz.manager.OaPublicInfoManager;
 import com.justonetech.biz.utils.Constants;
+import com.justonetech.core.controller.BaseCRUDActionController;
+import com.justonetech.core.orm.hibernate.Page;
+import com.justonetech.core.security.user.BaseUser;
+import com.justonetech.core.security.util.SpringSecurityUtils;
+import com.justonetech.core.utils.JspHelper;
+import com.justonetech.core.utils.ReflectionUtils;
+import com.justonetech.core.utils.StringHelper;
 import com.justonetech.system.domain.SysCodeDetail;
 import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -69,10 +70,12 @@ public class OaPublicInfoController extends BaseCRUDActionController<OaPublicInf
      * @param model    .
      * @param typeCode 信息类型编码 -- 用于首页或网站调用
      * @param range    发布范围 -- 用于首页或网站调用
+     * @param isZc    发布范围 -- 用于项目管理的政策栏
      * @return .
      */
     @RequestMapping
-    public String grid(Model model, String typeCode, String range) {
+    public String grid(Model model, String typeCode, String range, String isZc) {
+        model.addAttribute("isZc", isZc);
         //判断是否有编辑权限
         model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.OA_PUBLIC_INFO_EDIT));
         model.addAttribute("typeCode", JspHelper.getString(typeCode));
@@ -100,12 +103,18 @@ public class OaPublicInfoController extends BaseCRUDActionController<OaPublicInf
      * @param session  .
      */
     @RequestMapping
-    public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, String typeCode, String range, HttpSession session) {
+    public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, String typeCode, String range,String isZc, HttpSession session) {
         try {
             Boolean canEdit = sysUserManager.hasPrivilege(PrivilegeCode.OA_PUBLIC_INFO_EDIT);
 
             Page<OaPublicInfo> pageModel = new Page<OaPublicInfo>(page, rows, true);
             String hql = "from OaPublicInfo where 1=1";
+            //是否是政策规章
+            if (!StringHelper.isEmpty(isZc)) {
+                hql += " and type.code='" + isZc + "'";
+            } else {
+                hql += " and type.code!='" + Constants.OA_PUBLIC_INFO_TYPE_ZCGZ + "'";
+            }
 
             //信息类型过滤
             if (!StringHelper.isEmpty(typeCode)) {
@@ -158,7 +167,7 @@ public class OaPublicInfoController extends BaseCRUDActionController<OaPublicInf
      * @return .
      */
     @RequestMapping
-    public String add(Model model) {
+    public String add(Model model,String isZc) {
         OaPublicInfo oaPublicInfo = new OaPublicInfo();
 
         //如需增加其他默认值请在此添加
@@ -174,8 +183,16 @@ public class OaPublicInfoController extends BaseCRUDActionController<OaPublicInf
         //信息类型
         model.addAttribute("range", Constants.OA_PUBLIC_INFO_RANGE);
         //发布范围
-        model.addAttribute("infoType", Constants.OA_PUBLIC_INFO_TYPE);
-
+        SysCodeDetail ZCFZ = sysCodeManager.getCodeDetailByCode(Constants.OA_PUBLIC_INFO_TYPE, Constants.OA_PUBLIC_INFO_TYPE_ZCGZ);
+        if (!StringHelper.isEmpty(isZc)) {
+            List<SysCodeDetail> typeList = new ArrayList<SysCodeDetail>();
+            typeList.add(ZCFZ);
+            model.addAttribute("typeList", typeList);
+        } else {
+            List<SysCodeDetail> typeList1 = sysCodeManager.getCodeListByCode(Constants.OA_PUBLIC_INFO_TYPE);
+            typeList1.remove(ZCFZ);
+            model.addAttribute("typeList", typeList1);
+        }
         model.addAttribute("bean", oaPublicInfo);
 
         return "view/oa/oaPublicInfo/input";
@@ -189,7 +206,7 @@ public class OaPublicInfoController extends BaseCRUDActionController<OaPublicInf
      * @return .
      */
     @RequestMapping
-    public String modify(Model model, Long id) {
+    public String modify(Model model, Long id,String isZc) {
         OaPublicInfo oaPublicInfo = oaPublicInfoService.get(id);
 
         //处理其他业务逻辑
@@ -205,7 +222,16 @@ public class OaPublicInfoController extends BaseCRUDActionController<OaPublicInf
         //信息类型
         model.addAttribute("range", Constants.OA_PUBLIC_INFO_RANGE);
         //发布范围
-        model.addAttribute("infoType", Constants.OA_PUBLIC_INFO_TYPE);
+        SysCodeDetail ZCFZ = sysCodeManager.getCodeDetailByCode(Constants.OA_PUBLIC_INFO_TYPE, Constants.OA_PUBLIC_INFO_TYPE_ZCGZ);
+        if (!StringHelper.isEmpty(isZc)) {
+            List<SysCodeDetail> typeList = new ArrayList<SysCodeDetail>();
+            typeList.add(ZCFZ);
+            model.addAttribute("typeList", typeList);
+        } else {
+            List<SysCodeDetail> typeList1 = sysCodeManager.getCodeListByCode(Constants.OA_PUBLIC_INFO_TYPE);
+            typeList1.remove(ZCFZ);
+            model.addAttribute("typeList", typeList1);
+        }
 
         model.addAttribute("bean", oaPublicInfo);
 

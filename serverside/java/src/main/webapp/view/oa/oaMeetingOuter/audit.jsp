@@ -118,27 +118,29 @@
                     </tr>
                 </table>
             </fieldset>
-            <fieldset class="form_fieldset">
-                <legend class="form_legend">主任审核</legend>
-                <table cellpadding="0" cellspacing="0" class="form_table">
-                    <tr class="tr_light">
-                        <c:choose>
-                            <c:when test="${bean.status == STATUS_BRANCH_PASS}">
-                                <td class="form_label_right" style="width: 15%;" nowrap>主任审核意见：</td>
-                                <td class="form_content">
-                                    <form:textarea path="zrAuditOpinion" cssClass="input_textarea_long"/>
-                                </td>
-                            </c:when>
-                            <c:otherwise>
-                                <td class="form_label_right" style="width: 15%;" nowrap>主任审核意见：</td>
-                                <td class="form_content">
-                                    <sys:toHtml> ${bean.zrAuditOpinion}</sys:toHtml>
-                                </td>
-                            </c:otherwise>
-                        </c:choose>
-                    </tr>
-                </table>
-            </fieldset>
+            <c:if test="${not empty bean.zrAuditOpinion}">
+                <fieldset class="form_fieldset">
+                    <legend class="form_legend">主任审核</legend>
+                    <table cellpadding="0" cellspacing="0" class="form_table">
+                        <tr class="tr_light">
+                            <c:choose>
+                                <c:when test="${bean.status == STATUS_BRANCH_PASS}">
+                                    <td class="form_label_right" style="width: 15%;" nowrap>主任审核意见：</td>
+                                    <td class="form_content">
+                                        <form:textarea path="zrAuditOpinion" cssClass="input_textarea_long"/>
+                                    </td>
+                                </c:when>
+                                <c:otherwise>
+                                    <td class="form_label_right" style="width: 15%;" nowrap>主任审核意见：</td>
+                                    <td class="form_content">
+                                        <sys:toHtml> ${bean.zrAuditOpinion}</sys:toHtml>
+                                    </td>
+                                </c:otherwise>
+                            </c:choose>
+                        </tr>
+                    </table>
+                </fieldset>
+            </c:if>
         </c:if>
         <table cellpadding="0" cellspacing="0" class="form_table">
             <tr class="tr_button">

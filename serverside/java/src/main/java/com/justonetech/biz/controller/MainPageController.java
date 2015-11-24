@@ -170,6 +170,8 @@ public class MainPageController extends BaseCRUDActionController {
                         String code = company.getCode();
                         if (!StringHelper.isEmpty(code) && !code.equals("OWNER") && !code.equals("JYKJ") && !code.equals("3")) {
                             flag = false;
+                        }else{
+                            flag = false;
                         }
                     }
                 }
