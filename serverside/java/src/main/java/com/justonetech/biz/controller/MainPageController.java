@@ -1,7 +1,6 @@
 package com.justonetech.biz.controller;
 
 import com.justonetech.biz.domain.OaPublicInfo;
-import com.justonetech.biz.domain.ProjRelatePerson;
 import com.justonetech.biz.manager.*;
 import com.justonetech.biz.utils.Constants;
 import com.justonetech.biz.utils.enums.Platform;
@@ -10,7 +9,6 @@ import com.justonetech.core.utils.CryptUtil;
 import com.justonetech.core.utils.DateTimeHelper;
 import com.justonetech.system.domain.SysDept;
 import com.justonetech.system.domain.SysMenu;
-import com.justonetech.system.domain.SysPerson;
 import com.justonetech.system.domain.SysUser;
 import com.justonetech.system.manager.SimpleQueryManager;
 import com.justonetech.system.manager.SysMenuManager;
@@ -26,8 +24,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.*;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -168,9 +166,7 @@ public class MainPageController extends BaseCRUDActionController {
                     SysDept company = getParentCompany(dept);
                     if (null != company) {
                         String code = company.getCode();
-                        if (!StringHelper.isEmpty(code) && !code.equals("OWNER") && !code.equals("JYKJ") && !code.equals("3")) {
-                            flag = false;
-                        }else{
+                        if (StringHelper.isEmpty(code) || (!StringHelper.isEmpty(code) && !code.equals("OWNER") && !code.equals("JYKJ") && !code.equals("3"))) {
                             flag = false;
                         }
                     }

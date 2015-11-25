@@ -130,9 +130,7 @@ public class ProjExtendController extends BaseCRUDActionController<ProjExtend> {
                         SysDept company = getParentCompany(dept);
                         if (null != company) {
                             String code = company.getCode();
-                            if (!StringHelper.isEmpty(code) && !code.equals("OWNER") && !code.equals("JYKJ") && !code.equals("3")) {
-                                isJsdw = false;
-                            }else{
+                            if (StringHelper.isEmpty(code) || (!StringHelper.isEmpty(code) && !code.equals("OWNER") && !code.equals("JYKJ") && !code.equals("3"))) {
                                 isJsdw = false;
                             }
                         }
