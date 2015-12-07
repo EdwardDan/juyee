@@ -30,7 +30,7 @@
                     {name: "statusName", width: "20", align: "center", searchtype: "string", sortable: true}
                 ],
                 actModel: [
-                    {name: 'operation', width: 30, align: 'center'}
+                    {name: 'operation', width: 35, align: 'center'}
                 ],
                 pager: '#pager2',
                 caption: "施工许可证列表",
@@ -43,7 +43,7 @@
                         var status = rowData["status"];
                         var opButton = '<input type="button" value="查看" onclick="doView(' + id + ')" class="button_normal"/> ';
                         if ('' == status || status == '${STATUS_EDIT}' || status == '${STATUS_CS_BACK}' || status == '${STATUS_FH_BACK}' || status == '${STATUS_SH_BACK}' || status == '${STATUS_FGLD_BACK}' || status == '${STATUS_ZXLD_BACK}') {
-                            if (${canEdit}) {
+                            if (${canEdit||isReg}) {
                                 opButton += '<input type="button" value="编辑" onclick="doEdit(' + id + ')" class="button_normal"/> ';
                                 opButton += '<input type="button" value="删除" onclick="doDelete(' + id + ')" class="button_normal"/> ';
                             }
@@ -67,21 +67,27 @@
                             if (${canZxldAudit}) {
                                 opButton += '<input type="button" value="审核" onclick="doAudit(' + id + ')" class="button_normal"/> ';
                             }
+                        } else if (status == '${STATUS_ZXLD_PASS}') {
+                            if (${canWldAudit}) {
+                                opButton += '<input type="button" value="审核" onclick="doAudit(' + id + ')" class="button_normal"/> ';
+                            }
                         }
                         opButton += '<input type="button" value="操作步骤" onclick="doOperation(' + id + ')" class="button_normal_long"/> ';
-                        jQuery("#listGrid").jqGrid('setRowData', ids[i], { operation: opButton});
+                        jQuery("#listGrid").jqGrid('setRowData', ids[i], {operation: opButton});
                     }
                 }, rownumbers: true
             },
             userOpts: {
-                defaultQuery: { "groupOp": "AND", "rules": [
-                    { "field": "报建编号", "op": "cn", "data": ""},
-                    { "field": "项目名称", "op": "cn", "data": ""},
-                    { "field": "项目类型", "op": "cn", "data": ""},
-                    { "field": "建设单位", "op": "cn", "data": ""},
-                    { "field": "申请人", "op": "cn", "data": ""},
-                    { "field": "申请号", "op": "cn", "data": ""}
-                ]},
+                defaultQuery: {
+                    "groupOp": "AND", "rules": [
+                        {"field": "报建编号", "op": "cn", "data": ""},
+                        {"field": "项目名称", "op": "cn", "data": ""},
+                        {"field": "项目类型", "op": "cn", "data": ""},
+                        {"field": "建设单位", "op": "cn", "data": ""},
+                        {"field": "申请人", "op": "cn", "data": ""},
+                        {"field": "申请号", "op": "cn", "data": ""}
+                    ]
+                },
                 queryButton: $("#queryButton"),
                 queryDesc: $("#queryConditionDesc")
             },
@@ -90,16 +96,16 @@
         gridinit($("#listGrid"), conf);
     });
     function doView(id) {
-        openWindow("查看施工许可证", "${ctx}/sgPermit/view.do?id=" + id, false);
+        openWindow("查看施工许可证", "${ctx}/sgPermit/frame.do?act=view&id=" + id, false, 850, 500);
     }
     function doAdd() {
         openWindow("选择项目类型", "${ctx}/sgPermit/selectProjectType.do", true, 400, 200);
     }
     function doEdit(id) {
-        openWindow("修改施工许可证", "${ctx}/sgPermit/modify.do?id=" + id, true);
+        openWindow("修改施工许可证", "${ctx}/sgPermit/frame.do?act=edit&id=" + id, true, 850, 500);
     }
     function doAudit(id) {
-        openWindow("审核施工许可证", "${ctx}/sgPermit/audit.do?id=" + id, true);
+        openWindow("审核施工许可证", "${ctx}/sgPermit/frame.do?act=audit&id=" + id, true, 850, 500);
     }
     function doOperation(id) {
         loadMainPage("${ctx}/sgPermitOperation/grid.do?sgPermitId=" + id, "审查备案 > 施工许可管理 > 日志");
@@ -119,7 +125,7 @@
                    readonly="true"/>
         </div>
         <div style="float:right;padding-right: 10px">
-            <c:if test="${canEdit}">
+            <c:if test="${canEdit||isReg}">
                 <input type="button" value="添加" class="button_add" onclick="doAdd()"/>
             </c:if>
         </div>

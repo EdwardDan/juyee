@@ -1,19 +1,18 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/common/taglibs.jsp" %>
-<%@include file="/common/header.jsp" %>
 <script type="text/javascript">
     $(function () {
         var conf = {
             gridOpts:{
                 url:"${ctx}/sysRegPerson/gridDataCustom.do?regType=${regType}",
                 colNames:['ID',
-                    <c:if test="${isGd}">'工地编号', </c:if>
-                    <c:if test="${isJs}"> '报建编号', </c:if>
-                    <c:if test="${isJs}">'项目卡号', </c:if>
-                    <c:if test="${isGd||isJs}">'工程名称', </c:if>
-                    <c:if test="${isSg||isJl}">'企业编码', </c:if>
-                    <c:if test="${isSg||isJl}">'企业标识码', </c:if>
-                    <c:if test="${isSg||isJl}"> '企业名称', </c:if>
+                    <%--<c:if test="${isGd}">'工地编号', </c:if>--%>
+                    <%--<c:if test="${isJs}"> '报建编号', </c:if>--%>
+                    <%--<c:if test="${isJs}">'项目卡号', </c:if>--%>
+                    <%--<c:if test="${isGd||isJs}">'工程名称', </c:if>--%>
+                    <%--<c:if test="${isSg||isJl}">'企业编码', </c:if>--%>
+                    <%--<c:if test="${isSg||isJl}">'企业标识码', </c:if>--%>
+                    <%--<c:if test="${isSg||isJl}"> '企业名称', </c:if>--%>
                     '联系人',
                     '手机号码',
                     '注册来源',
@@ -24,20 +23,20 @@
                 ],
                 colModel:[
                     {name:'id', width:10, align:"center", searchtype:"integer", hidden:true},
-                        <c:if test="${isGd}">{name:"gdCode", width:"30", align:"center", searchtype:"string", sortable:true},
-                    </c:if>
-                    <c:if test="${isJs}"> {name:"bjbh", width:"30", align:"center", searchtype:"string", sortable:true},
-                    </c:if>
-                    <c:if test="${isJs}"> {name:"projectCard", width:"30", align:"center", searchtype:"string", sortable:true},
-                    </c:if>
-                        <c:if test="${isGd||isJs}">{name:"projectName", width:"70", align:"left", searchtype:"string", sortable:true},
-                    </c:if>
-                    <c:if test="${isSg||isJl}"> {name:"unitCode", width:"40", align:"center", searchtype:"string", sortable:true},
-                    </c:if>
-                    <c:if test="${isSg||isJl}"> {name:"unitIdentifyCode", width:"40", align:"center", searchtype:"string", sortable:true},
-                    </c:if>
-                        <c:if test="${isSg||isJl}">{name:"unitName", width:"60", align:"left", searchtype:"string", sortable:true},
-                    </c:if>
+                        <%--<c:if test="${isGd}">{name:"gdCode", width:"30", align:"center", searchtype:"string", sortable:true},--%>
+                    <%--</c:if>--%>
+                    <%--<c:if test="${isJs}"> {name:"bjbh", width:"30", align:"center", searchtype:"string", sortable:true},--%>
+                    <%--</c:if>--%>
+                    <%--<c:if test="${isJs}"> {name:"projectCard", width:"30", align:"center", searchtype:"string", sortable:true},--%>
+                    <%--</c:if>--%>
+                        <%--<c:if test="${isGd||isJs}">{name:"projectName", width:"70", align:"left", searchtype:"string", sortable:true},--%>
+                    <%--</c:if>--%>
+                    <%--<c:if test="${isSg||isJl}"> {name:"unitCode", width:"40", align:"center", searchtype:"string", sortable:true},--%>
+                    <%--</c:if>--%>
+                    <%--<c:if test="${isSg||isJl}"> {name:"unitIdentifyCode", width:"40", align:"center", searchtype:"string", sortable:true},--%>
+                    <%--</c:if>--%>
+                        <%--<c:if test="${isSg||isJl}">{name:"unitName", width:"60", align:"left", searchtype:"string", sortable:true},--%>
+                    <%--</c:if>--%>
                     {name:"personName", width:"30", align:"center", searchtype:"string", sortable:true},
                     {name:"mobile", width:"30", align:"center", searchtype:"string", sortable:true},
                     {name:"regResource", width:"30", align:"center", searchtype:"integer", sortable:true, formatter:sourceFormat},
@@ -100,7 +99,7 @@
     }
     <c:if test="${canEdit}">
     function doAdd() {
-        openWindow("添加注册人员", "${ctx}/sysRegPerson/add.do?regType=${regType}", true, 630, 450);
+        openWindow("添加注册人员", "${ctx}/sysRegPerson/add.do", true, 630, 450);
     }
     function doEdit(id) {
         openWindow("受理注册人员", "${ctx}/sysRegPerson/modify.do?id=" + id, true, 630, 450);
@@ -140,10 +139,9 @@
                    readonly="true"/>
         </div>
         <div style="float:right;padding-right: 10px">
-            <%--<c:if test="${canEdit}">--%>
-            <input type="button" value="添加" class="button_add"
-                   onclick="doAdd()"/>
-            <%--</c:if>--%>
+            <c:if test="${canEdit}">
+            <input type="button" value="添加" class="button_add" onclick="doAdd()"/>
+            </c:if>
         </div>
     </div>
 </div>

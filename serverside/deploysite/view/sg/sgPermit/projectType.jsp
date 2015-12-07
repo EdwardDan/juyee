@@ -8,7 +8,7 @@
     function selectProjectType(btn) {
         var projectType = $("#projectType").val();
         if (null != projectType || '' != projectType) {
-            openWindow("添加施工许可证", "${ctx}/sgPermit/add.do?projectTypeId=" + projectType, true);
+            openWindow("添加施工许可证", "${ctx}/sgPermit/frame.do?id=&act=add&projectTypeId=" + projectType, true, 850, 500);
         }
     }
 </script>

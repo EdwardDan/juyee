@@ -35,7 +35,7 @@ function uploadDoc(xmlconfig, bizCodeEle, docIdEle, userId, secondDir) {
     }
     params += "&docId=" + docId;
     var url = CONTEXT_NAME + "/docCommon/add.do?" + params;
-    openIframeWindow(null, "附件上传", url, isNewDoc, docIdEle, bizCodeEle);
+    openIframeWindow(null, "附件上传", url, isNewDoc, docIdEle, bizCodeEle, 600, 300);
 }
 
 function openIframeWindow(windowId, title, url, isNewDoc, docIdEle, bizCodeEle, width, height) {
