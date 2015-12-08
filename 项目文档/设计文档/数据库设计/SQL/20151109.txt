@@ -11,6 +11,19 @@ create table SG_PERMIT
    BJBH                 varchar2(50),
    PROJECT_NAME         varchar2(200),
    BUILD_NAME           varchar2(200),
+   BUILD_UNIT_TYPE      VARCHAR2(200),
+   BUILD_UNIT_ADDRESS   VARCHAR2(200),
+   BUILD_SITE           VARCHAR2(200),
+   BUILD_PROJ_SIZE      VARCHAR2(500),
+   CONTRACT_PRICE       number(6),
+   CONTRACT_PERIOD      VARCHAR2(200),
+   FR                   VARCHAR2(50),
+   BUILD_UNIT_PHONE     VARCHAR2(50),
+   BUILD_UNIT_PERSON    VARCHAR2(50),
+   BUILD_UNIT_MOBILE    VARCHAR2(50),
+   BUILD_FILE_CODE      VARCHAR2(100),
+   BUILD_XKZ_CODE       VARCHAR2(100),
+   START_WORK_CON       VARCHAR2(500),
    HJG_YEAR             number(4),
    HJG_NUM              number(4),
    APPLY_PERSON         varchar2(50),
@@ -37,6 +50,9 @@ create table SG_PERMIT
    ZXLD_OPINION         varchar2(1000),
    ZXLD_USER            VARCHAR2(100),
    ZXLD_DATE            date,
+   WLD_OPINION          varchar2(1000),
+   WLD_USER             VARCHAR2(100),
+   WLD_DATE             date,
    CREATE_TIME          DATE,
    CREATE_USER          VARCHAR2(100),
    UPDATE_TIME          DATE,
@@ -66,6 +82,45 @@ comment on column SG_PERMIT.PROJECT_NAME is
 
 comment on column SG_PERMIT.BUILD_NAME is
 '建设单位';
+
+comment on column SG_PERMIT.BUILD_UNIT_TYPE is
+'建设单位性质';
+
+comment on column SG_PERMIT.BUILD_UNIT_ADDRESS is
+'建设单位地址';
+
+comment on column SG_PERMIT.BUILD_SITE is
+'建设地点';
+
+comment on column SG_PERMIT.BUILD_PROJ_SIZE is
+'建设工程规模';
+
+comment on column SG_PERMIT.CONTRACT_PRICE is
+'合同价格';
+
+comment on column SG_PERMIT.CONTRACT_PERIOD is
+'合同工期';
+
+comment on column SG_PERMIT.FR is
+'法定代表人';
+
+comment on column SG_PERMIT.BUILD_UNIT_PHONE is
+'建设单位联系电话';
+
+comment on column SG_PERMIT.BUILD_UNIT_PERSON is
+'建设单位联系人';
+
+comment on column SG_PERMIT.BUILD_UNIT_MOBILE is
+'手机号';
+
+comment on column SG_PERMIT.BUILD_FILE_CODE is
+'建设用地批准文件编号';
+
+comment on column SG_PERMIT.BUILD_XKZ_CODE is
+'建设工程规划许可证编号';
+
+comment on column SG_PERMIT.START_WORK_CON is
+'现场开工情况';
 
 comment on column SG_PERMIT.HJG_YEAR is
 '沪交管收字_年';
@@ -145,6 +200,15 @@ comment on column SG_PERMIT.ZXLD_USER is
 comment on column SG_PERMIT.ZXLD_DATE is
 '中心领导审核日期';
 
+comment on column SG_PERMIT.WLD_OPINION is
+'委领导审核意见';
+
+comment on column SG_PERMIT.WLD_USER is
+'委领导审核用户';
+
+comment on column SG_PERMIT.WLD_DATE is
+'委领导审核日期';
+
 comment on column SG_PERMIT.CREATE_TIME is
 '创建时间';
 
@@ -156,6 +220,140 @@ comment on column SG_PERMIT.UPDATE_TIME is
 
 comment on column SG_PERMIT.UPDATE_USER is
 '更新用户名';
+
+
+--drop table SG_CONTRACT_PROJ_PERSON cascade constraints;
+
+/*==============================================================*/
+/* Table: SG_CONTRACT_PROJ_PERSON                               */
+/*==============================================================*/
+create table SG_CONTRACT_PROJ_PERSON 
+(
+   ID                   number(10)           not null,
+   SG_PERMIT_ID         number(10),
+   NUM                  number(4),
+   CONTRACT_CODE        varchar2(200),
+   UNIT_TYPE_ID         number(10),
+   UNIT_NAME            varchar2(200),
+   UNIT_MAIN_PERSON     varchar2(200),
+   UNIT_ID_CARD         varchar2(200),
+   UNIT_PHONE           varchar2(20),
+   CREATE_TIME          DATE,
+   CREATE_USER          VARCHAR2(100),
+   UPDATE_TIME          DATE,
+   UPDATE_USER          VARCHAR2(100),
+   constraint PK_SG_CONTRACT_PROJ_PERSON primary key (ID),
+   constraint FK_SG_CONTR_PERMIT foreign key (SG_PERMIT_ID)
+         references SG_PERMIT (ID),
+   constraint FK_SG_CONTR_SYS_CODE foreign key (UNIT_TYPE_ID)
+         references SYS_CODE_DETAIL (ID)
+);
+
+comment on table SG_CONTRACT_PROJ_PERSON is
+'合同项目负责人信息';
+
+comment on column SG_CONTRACT_PROJ_PERSON.ID is
+'ID';
+
+comment on column SG_CONTRACT_PROJ_PERSON.SG_PERMIT_ID is
+'施工许可ID';
+
+comment on column SG_CONTRACT_PROJ_PERSON.NUM is
+'序号';
+
+comment on column SG_CONTRACT_PROJ_PERSON.CONTRACT_CODE is
+'合同信息报送编号';
+
+comment on column SG_CONTRACT_PROJ_PERSON.UNIT_TYPE_ID is
+'单位类型';
+
+comment on column SG_CONTRACT_PROJ_PERSON.UNIT_NAME is
+'单位名称';
+
+comment on column SG_CONTRACT_PROJ_PERSON.UNIT_MAIN_PERSON is
+'单位负责人';
+
+comment on column SG_CONTRACT_PROJ_PERSON.UNIT_ID_CARD is
+'身份证号';
+
+comment on column SG_CONTRACT_PROJ_PERSON.UNIT_PHONE is
+'电话';
+
+comment on column SG_CONTRACT_PROJ_PERSON.CREATE_TIME is
+'创建时间';
+
+comment on column SG_CONTRACT_PROJ_PERSON.CREATE_USER is
+'创建用户名';
+
+comment on column SG_CONTRACT_PROJ_PERSON.UPDATE_TIME is
+'更新时间';
+
+comment on column SG_CONTRACT_PROJ_PERSON.UPDATE_USER is
+'更新用户名';
+
+
+
+drop table SG_UNIT_PROJ cascade constraints;
+
+/*==============================================================*/
+/* Table: SG_UNIT_PROJ                                          */
+/*==============================================================*/
+create table SG_UNIT_PROJ 
+(
+   ID                   number(10)           not null,
+   SG_PERMIT_ID         number(10),
+   UNIT_PROJ_TYPE_ID    number(10),
+   NUM                  number(4),
+   UNIT_PROJ_CODE       varchar2(200),
+   UNIT_PROJ_NAME       varchar2(200),
+   UNIT_PHONE           varchar2(20),
+   CREATE_TIME          DATE,
+   CREATE_USER          VARCHAR2(100),
+   UPDATE_TIME          DATE,
+   UPDATE_USER          VARCHAR2(100),
+   constraint PK_SG_UNIT_PROJ primary key (ID),
+   constraint FK_SG_CONTR_SYS_CODE1 foreign key (UNIT_PROJ_TYPE_ID)
+         references SYS_CODE_DETAIL (ID),
+   constraint FK_SG_CONTR_PERMINT foreign key (SG_PERMIT_ID)
+         references SG_PERMIT (ID)
+);
+
+comment on table SG_UNIT_PROJ is
+'单位工程列表';
+
+comment on column SG_UNIT_PROJ.ID is
+'ID';
+
+comment on column SG_UNIT_PROJ.SG_PERMIT_ID is
+'施工许可ID';
+
+comment on column SG_UNIT_PROJ.UNIT_PROJ_TYPE_ID is
+'单位工程类型';
+
+comment on column SG_UNIT_PROJ.NUM is
+'序号';
+
+comment on column SG_UNIT_PROJ.UNIT_PROJ_CODE is
+'单位工程编号';
+
+comment on column SG_UNIT_PROJ.UNIT_PROJ_NAME is
+'单位工程名称';
+
+comment on column SG_UNIT_PROJ.UNIT_PHONE is
+'电话';
+
+comment on column SG_UNIT_PROJ.CREATE_TIME is
+'创建时间';
+
+comment on column SG_UNIT_PROJ.CREATE_USER is
+'创建用户名';
+
+comment on column SG_UNIT_PROJ.UPDATE_TIME is
+'更新时间';
+
+comment on column SG_UNIT_PROJ.UPDATE_USER is
+'更新用户名';
+
 
 
 
