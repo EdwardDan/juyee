@@ -18,7 +18,7 @@
                     <td style="text-align: center;">${item.unitProjCode}</td>
                     <td style="text-align: center;">${item.unitProjName}</td>
                     <td style="text-align: center;">${item.unitProjType.name}</td>
-                    <td style="text-align: center;">${item.projectIndex}</td>
+                    <td style="text-align: left;">${item.projectIndex}</td>
                 </tr>
             </c:forEach>
         </c:if>
