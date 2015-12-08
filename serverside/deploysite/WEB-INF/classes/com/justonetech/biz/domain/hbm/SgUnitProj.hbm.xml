@@ -61,14 +61,14 @@
         </property>
 
 		<property
-			name="unitPhone"
-			column="UNIT_PHONE"
+			name="projectIndex"
+			column="PROJECT_INDEX"
 			type="string"
 			not-null="false"
-			length="20"
+			length="1000"
         >
-            <meta attribute="ColumnName">电话</meta>
-            <meta attribute="ColumnComment">电话</meta>
+            <meta attribute="ColumnName">工程指标</meta>
+            <meta attribute="ColumnComment">工程指标</meta>
         </property>
 
 		<property

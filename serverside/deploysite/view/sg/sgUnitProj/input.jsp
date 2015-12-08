@@ -9,7 +9,7 @@
             //{name:"num", rule:"validate[required,custom[integer],maxSize[4]"},
             //{name:"unitProjCode", rule:"validate[required,maxSize[200]]"},
             //{name:"unitProjName", rule:"validate[required,maxSize[200]]"},
-            //{name:"unitPhone", rule:"validate[required,maxSize[20]]"}
+            //{name:"projectIndex", rule:"validate[required,maxSize[20]]"}
         ];
         validateInit(validateCondition, formId);
     });
@@ -63,10 +63,10 @@
         <table cellpadding="0" cellspacing="0" class="table_thin_line_center" border="1" id="table1">
             <tr class="tr_header">
                 <td style="width: 5%;text-align: center;">序号</td>
-                <td style="width: 20%;text-align: center;">单位工程编号</td>
-                <td style="width: 20%;text-align: center;">单位工程名称</td>
-                <td style="width: 20%;text-align: center;">单位工程类型</td>
-                <td style="width: 20%;text-align: center;">电话号码</td>
+                <td style="width: 8%;text-align: center;">单位工程编号</td>
+                <td style="width: 10%;text-align: center;">单位工程名称</td>
+                <td style="width: 10%;text-align: center;">单位工程类型</td>
+                <td style="width: 40%;text-align: center;">工程指标</td>
                 <td style="width: 5%;text-align: center;">
                     <input type='button' value='添加' class='button_select_add'
                            onclick='addLine(this)'>
@@ -86,11 +86,11 @@
                             <input type="text" class="input_text" name="unitProjName" value="${item.unitProjName}" style="width: 95%;">
                         </td>
                         <td style="text-align: center;">
-                            <sys:code code="${SGDWGCLX}" type="select" name="unitProjType"
+                            <sys:code code="${SGDWGCLX}" type="select" name="unitProjType" style="width:95%;"
                                       sysCodeDetailId="${item.unitProjType.id}"/>
                         </td>
                         <td style="text-align: center;">
-                            <input type="text" class="input_text" name="unitPhone" value="${item.unitPhone}" style="width: 95%;">
+                            <input type="text" class="input_text" name="projectIndex" value="${item.projectIndex}" style="width: 95%;">
                         </td>
                         <td style="text-align: center;">
                             <input type='button' value='删除' class='button_select_remove' onclick='addLine(this)'>
@@ -110,7 +110,7 @@
                     <sys:code code="${SGDWGCLX}" type="select" name="unitProjType" sysCodeDetailId=""/>
                 </td>
                 <td style="text-align: center;">
-                    <input type="text" name="unitPhone" class="input_text" style="width: 95%;" value="">
+                    <input type="text" name="projectIndex" class="input_text" style="width: 95%;" value="">
                 </td>
                 <td style="text-align: center;">
                     <input type='button' value='删除' class='button_select_remove'
