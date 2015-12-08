@@ -15,11 +15,13 @@ public enum SgPermitStatus {
     STATUS_FH_PASS(5, "复核通过", "green", "fh_pass"),
     STATUS_FH_BACK(6, "复核退回", "red", "fh_back"),
     STATUS_SH_PASS(7, "审核通过", "green", "sh_pass"),
-    STATUS_SH_BACK(8, "审核退回", "green", "sh_back"),
+    STATUS_SH_BACK(8, "审核退回", "red", "sh_back"),
     STATUS_FGLD_PASS(9, "分管领导审核通过", "green", "fgldsh_pass"),
     STATUS_FGLD_BACK(10, "分管领导审核退回", "red", "fgldsh_back"),
     STATUS_ZXLD_PASS(11, "中心领导审核通过", "green", "fgldsh_pass"),
-    STATUS_ZXLD_BACK(12, "中心领导审核退回", "green", "zxldsh_back");
+    STATUS_ZXLD_BACK(12, "中心领导审核退回", "red", "zxldsh_back"),
+    STATUS_WLD_PASS(13, "委领导审核审核通过", "green", "wldsh_pass"),
+    STATUS_WLD_BACK(14, "委领导审核审核退回", "red", "wldsh_back");
 
     private int code;
     private String name;

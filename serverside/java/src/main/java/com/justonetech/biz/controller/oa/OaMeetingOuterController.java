@@ -439,7 +439,7 @@ public class OaMeetingOuterController extends BaseCRUDActionController<OaMeeting
             String createUser = data.getCreateUser();
             SysUser sysUser = sysUserManager.getSysUser(createUser);
             managers.add(sysUser.getId());
-            String taskTitle = oaTaskManager.getTaskTitle(data, OaMeetingOuter.class.getSimpleName());
+            String taskTitle = oaTaskManager.getTaskTitle(data, OaMeetingOuter.class.getSimpleName() + "_BACK");
             if (managers.size() > 0) {
                 oaTaskManager.createTask(OaMeetingOuter.class.getSimpleName() + "_BACK", data.getId(), taskTitle, managers, false, null, null);
             }

@@ -22,9 +22,17 @@ public class SgPermit extends BaseSgPermit {
 /*[CONSTRUCTOR MARKER END]*/
 
 
-    public String getZh() {
-        return "沪交管收字" + this.getHjgYear() + "第" + this.getHjgNum() + "号";
-    }
+	public String getZh() {
+		String year = "";
+		String num = "";
+		if (null != this.getHjgYear()) {
+			year = this.getHjgYear() + "";
+		}
+		if (null != this.getHjgNum()) {
+			num = this.getHjgNum() + "";
+		}
+		return "沪交管收字" + year + "第" + num + "号";
+	}
 
     public String getStatusName() {
         return SgPermitStatus.getColorNameByCode(this.getStatus());

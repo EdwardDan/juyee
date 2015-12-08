@@ -12,7 +12,8 @@ import org.springframework.stereotype.Service;
  * 注：此文件内容不需要修改
  */
 @Service
-public class OaSendFileService extends EntityService<OaSendFile,Long> {
+public class OaSendFileService extends EntityService<OaSendFile, Long> {
+
     @Autowired
     public void setSessionFactory(SessionFactory sessionFactory) {
         initDao(sessionFactory, OaSendFile.class);

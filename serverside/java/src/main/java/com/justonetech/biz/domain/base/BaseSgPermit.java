@@ -26,42 +26,59 @@ import java.sql.Date;
 public abstract class BaseSgPermit implements Serializable, Auditable {
 
     public static String REF = "SgPermit";
-    public static String PROP_RECEIVE_PERSON_PHONE = "receivePersonPhone";
+    public static String PROP_BUILD_UNIT_PERSON = "buildUnitPerson";
+    public static String PROP_BUILD_UNIT_ADDRESS = "buildUnitAddress";
     public static String PROP_CS_OPINION = "csOpinion";
     public static String PROP_HJG_NUM = "hjgNum";
-    public static String PROP_FH_DATE = "fhDate";
-    public static String PROP_SH_DATE = "shDate";
     public static String PROP_FGLD_OPINION = "fgldOpinion";
     public static String PROP_PROJECT_TYPE = "projectType";
+    public static String PROP_SH_OPINION = "shOpinion";
+    public static String PROP_CS_USER = "csUser";
+    public static String PROP_START_WORK_CON = "startWorkCon";
+    public static String PROP_APPLY_NUM = "applyNum";
+    public static String PROP_PROJECT_NAME = "projectName";
+    public static String PROP_FGLD_DATE = "fgldDate";
+    public static String PROP_CONTRACT_PRICE = "contractPrice";
+    public static String PROP_BUILD_SITE = "buildSite";
+    public static String PROP_MATERIAL_PERSON_ADDRESS = "materialPersonAddress";
+    public static String PROP_BUILD_NAME = "buildName";
+    public static String PROP_RECEIVE_PERSON = "receivePerson";
+    public static String PROP_APPLY_MATTER = "applyMatter";
+    public static String PROP_APPLY_PERSON = "applyPerson";
+    public static String PROP_ZXLD_DATE = "zxldDate";
+    public static String PROP_ID = "id";
+    public static String PROP_FGLD_USER = "fgldUser";
+    public static String PROP_WLD_USER = "wldUser";
+    public static String PROP_BUILD_XKZ_CODE = "buildXkzCode";
+    public static String PROP_CONTRACT_PERIOD = "contractPeriod";
+    public static String PROP_BUILD_PROJ_SIZE = "buildProjSize";
+    public static String PROP_RECEIVE_PERSON_PHONE = "receivePersonPhone";
+    public static String PROP_BUILD_UNIT_MOBILE = "buildUnitMobile";
+    public static String PROP_FH_DATE = "fhDate";
+    public static String PROP_SH_DATE = "shDate";
     public static String PROP_MATERIAL_PERSON = "materialPerson";
     public static String PROP_YEAR = "year";
     public static String PROP_CREATE_USER = "createUser";
     public static String PROP_BJBH = "bjbh";
-    public static String PROP_SH_OPINION = "shOpinion";
-    public static String PROP_CS_USER = "csUser";
+    public static String PROP_BUILD_FILE_CODE = "buildFileCode";
+    public static String PROP_WLD_DATE = "wldDate";
     public static String PROP_SH_USER = "shUser";
     public static String PROP_UPDATE_USER = "updateUser";
-    public static String PROP_APPLY_NUM = "applyNum";
     public static String PROP_FH_OPINION = "fhOpinion";
     public static String PROP_ZXLD_OPINION = "zxldOpinion";
     public static String PROP_CS_DATE = "csDate";
-    public static String PROP_PROJECT_NAME = "projectName";
-    public static String PROP_FGLD_DATE = "fgldDate";
-    public static String PROP_MATERIAL_PERSON_ADDRESS = "materialPersonAddress";
     public static String PROP_UPDATE_TIME = "updateTime";
-    public static String PROP_BUILD_NAME = "buildName";
-    public static String PROP_RECEIVE_PERSON = "receivePerson";
+    public static String PROP_BUILD_UNIT_TYPE = "buildUnitType";
     public static String PROP_ZXLD_USER = "zxldUser";
-    public static String PROP_APPLY_MATTER = "applyMatter";
+    public static String PROP_WLD_OPINION = "wldOpinion";
+    public static String PROP_BUILD_UNIT_PHONE = "buildUnitPhone";
     public static String PROP_STATUS = "status";
-    public static String PROP_APPLY_PERSON = "applyPerson";
+    public static String PROP_FR = "fr";
     public static String PROP_HJG_YEAR = "hjgYear";
     public static String PROP_FH_USER = "fhUser";
-    public static String PROP_ZXLD_DATE = "zxldDate";
     public static String PROP_CREATE_TIME = "createTime";
-    public static String PROP_ID = "id";
-    public static String PROP_FGLD_USER = "fgldUser";
     public static String PROP_MATERIAL_PERSON_PHONE = "materialPersonPhone";
+
 
 
     // constructors
@@ -102,6 +119,58 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
     /*建设单位*/
     /*建设单位*/
     private String buildName;
+
+    /*建设单位性质*/
+    /*建设单位性质*/
+    private java.lang.String buildUnitType;
+
+    /*建设单位地址*/
+    /*建设单位地址*/
+    private java.lang.String buildUnitAddress;
+
+    /*建设地点*/
+    /*建设地点*/
+    private java.lang.String buildSite;
+
+    /*建设工程规模*/
+    /*建设工程规模*/
+    private java.lang.String buildProjSize;
+
+    /*合同价格*/
+    /*合同价格*/
+    private java.lang.Integer contractPrice;
+
+    /*合同工期*/
+    /*合同工期*/
+    private java.lang.String contractPeriod;
+
+    /*法定代表人*/
+    /*法定代表人*/
+    private java.lang.String fr;
+
+    /*建设单位联系电话*/
+    /*建设单位联系电话*/
+    private java.lang.String buildUnitPhone;
+
+    /*建设单位联系人*/
+    /*建设单位联系人*/
+    private java.lang.String buildUnitPerson;
+
+    /*手机号*/
+    /*手机号*/
+    private java.lang.String buildUnitMobile;
+
+    /*建设用地批准文件编号*/
+    /*建设用地批准文件编号*/
+    private java.lang.String buildFileCode;
+
+    /*建设工程规划许可证编号*/
+    /*建设工程规划许可证编号*/
+    private java.lang.String buildXkzCode;
+
+    /*现场开工情况*/
+    /*现场开工情况*/
+    private java.lang.String startWorkCon;
 
     /*沪交管收字_年*/
     /*沪交管收字_年*/
@@ -207,6 +276,18 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
     /*中心领导审核日期*/
     private java.sql.Date zxldDate;
 
+    /*委领导审核意见*/
+    /*委领导审核意见*/
+    private java.lang.String wldOpinion;
+
+    /*委领导审核用户*/
+    /*委领导审核用户*/
+    private java.lang.String wldUser;
+
+    /*委领导审核日期*/
+    /*委领导审核日期*/
+    private java.sql.Date wldDate;
+
     /*创建时间*/
     /*创建时间*/
     private java.sql.Timestamp createTime;
@@ -231,6 +312,8 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
     private java.util.Set<com.justonetech.biz.domain.SgPermitOperation> sgPermitOperations;
     private java.util.Set<com.justonetech.biz.domain.SgAuditOpinion> sgAuditOpinions;
     private java.util.Set<com.justonetech.biz.domain.SgMaterial> sgMaterials;
+    private java.util.Set<com.justonetech.biz.domain.SgContractProjPerson> sgContractProjPersons;
+    private java.util.Set<com.justonetech.biz.domain.SgUnitProj> sgUnitProjs;
 
 
     /**
@@ -321,6 +404,214 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
     public void setBuildName(String buildName) {
         this.buildName = buildName;
     }
+
+    /**
+     * Return the value associated with the column: BUILD_UNIT_TYPE
+     */
+    public java.lang.String getBuildUnitType () {
+        return buildUnitType;
+    }
+
+    /**
+     * Set the value related to the column: BUILD_UNIT_TYPE
+     * @param buildUnitType the BUILD_UNIT_TYPE value
+     */
+    public void setBuildUnitType (java.lang.String buildUnitType) {
+        this.buildUnitType = buildUnitType;
+    }
+
+
+    /**
+     * Return the value associated with the column: BUILD_UNIT_ADDRESS
+     */
+    public java.lang.String getBuildUnitAddress () {
+        return buildUnitAddress;
+    }
+
+    /**
+     * Set the value related to the column: BUILD_UNIT_ADDRESS
+     * @param buildUnitAddress the BUILD_UNIT_ADDRESS value
+     */
+    public void setBuildUnitAddress (java.lang.String buildUnitAddress) {
+        this.buildUnitAddress = buildUnitAddress;
+    }
+
+
+    /**
+     * Return the value associated with the column: BUILD_SITE
+     */
+    public java.lang.String getBuildSite () {
+        return buildSite;
+    }
+
+    /**
+     * Set the value related to the column: BUILD_SITE
+     * @param buildSite the BUILD_SITE value
+     */
+    public void setBuildSite (java.lang.String buildSite) {
+        this.buildSite = buildSite;
+    }
+
+
+    /**
+     * Return the value associated with the column: BUILD_PROJ_SIZE
+     */
+    public java.lang.String getBuildProjSize () {
+        return buildProjSize;
+    }
+
+    /**
+     * Set the value related to the column: BUILD_PROJ_SIZE
+     * @param buildProjSize the BUILD_PROJ_SIZE value
+     */
+    public void setBuildProjSize (java.lang.String buildProjSize) {
+        this.buildProjSize = buildProjSize;
+    }
+
+
+    /**
+     * Return the value associated with the column: CONTRACT_PRICE
+     */
+    public java.lang.Integer getContractPrice () {
+        return contractPrice;
+    }
+
+    /**
+     * Set the value related to the column: CONTRACT_PRICE
+     * @param contractPrice the CONTRACT_PRICE value
+     */
+    public void setContractPrice (java.lang.Integer contractPrice) {
+        this.contractPrice = contractPrice;
+    }
+
+
+    /**
+     * Return the value associated with the column: CONTRACT_PERIOD
+     */
+    public java.lang.String getContractPeriod () {
+        return contractPeriod;
+    }
+
+    /**
+     * Set the value related to the column: CONTRACT_PERIOD
+     * @param contractPeriod the CONTRACT_PERIOD value
+     */
+    public void setContractPeriod (java.lang.String contractPeriod) {
+        this.contractPeriod = contractPeriod;
+    }
+
+
+    /**
+     * Return the value associated with the column: FR
+     */
+    public java.lang.String getFr () {
+        return fr;
+    }
+
+    /**
+     * Set the value related to the column: FR
+     * @param fr the FR value
+     */
+    public void setFr (java.lang.String fr) {
+        this.fr = fr;
+    }
+
+
+    /**
+     * Return the value associated with the column: BUILD_UNIT_PHONE
+     */
+    public java.lang.String getBuildUnitPhone () {
+        return buildUnitPhone;
+    }
+
+    /**
+     * Set the value related to the column: BUILD_UNIT_PHONE
+     * @param buildUnitPhone the BUILD_UNIT_PHONE value
+     */
+    public void setBuildUnitPhone (java.lang.String buildUnitPhone) {
+        this.buildUnitPhone = buildUnitPhone;
+    }
+
+
+    /**
+     * Return the value associated with the column: BUILD_UNIT_PERSON
+     */
+    public java.lang.String getBuildUnitPerson () {
+        return buildUnitPerson;
+    }
+
+    /**
+     * Set the value related to the column: BUILD_UNIT_PERSON
+     * @param buildUnitPerson the BUILD_UNIT_PERSON value
+     */
+    public void setBuildUnitPerson (java.lang.String buildUnitPerson) {
+        this.buildUnitPerson = buildUnitPerson;
+    }
+
+
+    /**
+     * Return the value associated with the column: BUILD_UNIT_MOBILE
+     */
+    public java.lang.String getBuildUnitMobile () {
+        return buildUnitMobile;
+    }
+
+    /**
+     * Set the value related to the column: BUILD_UNIT_MOBILE
+     * @param buildUnitMobile the BUILD_UNIT_MOBILE value
+     */
+    public void setBuildUnitMobile (java.lang.String buildUnitMobile) {
+        this.buildUnitMobile = buildUnitMobile;
+    }
+
+
+    /**
+     * Return the value associated with the column: BUILD_FILE_CODE
+     */
+    public java.lang.String getBuildFileCode () {
+        return buildFileCode;
+    }
+
+    /**
+     * Set the value related to the column: BUILD_FILE_CODE
+     * @param buildFileCode the BUILD_FILE_CODE value
+     */
+    public void setBuildFileCode (java.lang.String buildFileCode) {
+        this.buildFileCode = buildFileCode;
+    }
+
+
+    /**
+     * Return the value associated with the column: BUILD_XKZ_CODE
+     */
+    public java.lang.String getBuildXkzCode () {
+        return buildXkzCode;
+    }
+
+    /**
+     * Set the value related to the column: BUILD_XKZ_CODE
+     * @param buildXkzCode the BUILD_XKZ_CODE value
+     */
+    public void setBuildXkzCode (java.lang.String buildXkzCode) {
+        this.buildXkzCode = buildXkzCode;
+    }
+
+
+    /**
+     * Return the value associated with the column: START_WORK_CON
+     */
+    public java.lang.String getStartWorkCon () {
+        return startWorkCon;
+    }
+
+    /**
+     * Set the value related to the column: START_WORK_CON
+     * @param startWorkCon the START_WORK_CON value
+     */
+    public void setStartWorkCon (java.lang.String startWorkCon) {
+        this.startWorkCon = startWorkCon;
+    }
+
 
     public Integer getHjgNum() {
         return hjgNum;
@@ -610,6 +901,30 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
         this.zxldDate = zxldDate;
     }
 
+    public String getWldOpinion() {
+        return wldOpinion;
+    }
+
+    public void setWldOpinion(String wldOpinion) {
+        this.wldOpinion = wldOpinion;
+    }
+
+    public String getWldUser() {
+        return wldUser;
+    }
+
+    public void setWldUser(String wldUser) {
+        this.wldUser = wldUser;
+    }
+
+    public Date getWldDate() {
+        return wldDate;
+    }
+
+    public void setWldDate(Date wldDate) {
+        this.wldDate = wldDate;
+    }
+
     /**
      * Return the value associated with the column: CREATE_TIME
      */
@@ -772,6 +1087,53 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
         getSgMaterials().add(sgMaterial);
     }
 
+    /**
+     * Return the value associated with the column: sgContractProjPersons
+     */
+    public java.util.Set<com.justonetech.biz.domain.SgContractProjPerson> getSgContractProjPersons () {
+        if(sgContractProjPersons == null){
+            sgContractProjPersons = new java.util.LinkedHashSet<com.justonetech.biz.domain.SgContractProjPerson>();
+        }
+        return sgContractProjPersons;
+    }
+
+    /**
+     * Set the value related to the column: sgContractProjPersons
+     * @param sgContractProjPersons the sgContractProjPersons value
+     */
+    public void setSgContractProjPersons (java.util.Set<com.justonetech.biz.domain.SgContractProjPerson> sgContractProjPersons) {
+        this.sgContractProjPersons = sgContractProjPersons;
+    }
+
+    public void addTosgContractProjPersons (com.justonetech.biz.domain.SgContractProjPerson sgContractProjPerson) {
+        if (null == getSgContractProjPersons()) setSgContractProjPersons(new java.util.LinkedHashSet<com.justonetech.biz.domain.SgContractProjPerson>());
+        getSgContractProjPersons().add(sgContractProjPerson);
+    }
+
+
+    /**
+     * Return the value associated with the column: sgUnitProjs
+     */
+    public java.util.Set<com.justonetech.biz.domain.SgUnitProj> getSgUnitProjs () {
+        if(sgUnitProjs == null){
+            sgUnitProjs = new java.util.LinkedHashSet<com.justonetech.biz.domain.SgUnitProj>();
+        }
+        return sgUnitProjs;
+    }
+
+    /**
+     * Set the value related to the column: sgUnitProjs
+     * @param sgUnitProjs the sgUnitProjs value
+     */
+    public void setSgUnitProjs (java.util.Set<com.justonetech.biz.domain.SgUnitProj> sgUnitProjs) {
+        this.sgUnitProjs = sgUnitProjs;
+    }
+
+    public void addTosgUnitProjs (com.justonetech.biz.domain.SgUnitProj sgUnitProj) {
+        if (null == getSgUnitProjs()) setSgUnitProjs(new java.util.LinkedHashSet<com.justonetech.biz.domain.SgUnitProj>());
+        getSgUnitProjs().add(sgUnitProj);
+    }
+
 
     public boolean equals(Object obj) {
         if (null == obj) return false;
@@ -802,6 +1164,19 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
         builder.append(bjbh);
         builder.append(projectName);
         builder.append(buildName);
+        builder.append(buildUnitType);
+        builder.append(buildUnitAddress);
+        builder.append(buildSite);
+        builder.append(buildProjSize);
+        builder.append(contractPrice);
+        builder.append(contractPeriod);
+        builder.append(fr);
+        builder.append(buildUnitPhone);
+        builder.append(buildUnitPerson);
+        builder.append(buildUnitMobile);
+        builder.append(buildFileCode);
+        builder.append(buildXkzCode);
+        builder.append(startWorkCon);
         builder.append(hjgYear);
         builder.append(hjgNum);
         builder.append(applyPerson);
@@ -814,10 +1189,23 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
         builder.append(receivePersonPhone);
         builder.append(status);
         builder.append(csOpinion);
+        builder.append(csUser);
+        builder.append(csDate);
         builder.append(fhOpinion);
+        builder.append(fhUser);
+        builder.append(fhDate);
         builder.append(shOpinion);
+        builder.append(shUser);
+        builder.append(shDate);
         builder.append(fgldOpinion);
+        builder.append(fgldUser);
+        builder.append(fgldDate);
         builder.append(zxldOpinion);
+        builder.append(zxldUser);
+        builder.append(zxldDate);
+        builder.append(wldOpinion);
+        builder.append(wldUser);
+        builder.append(wldDate);
         builder.append(createTime);
         builder.append(createUser);
         builder.append(updateTime);

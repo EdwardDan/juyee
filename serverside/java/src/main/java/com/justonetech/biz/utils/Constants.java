@@ -1,6 +1,5 @@
 package com.justonetech.biz.utils;
 
-import com.justonetech.biz.domain.SlryQualify;
 import com.justonetech.system.domain.SysPrivilege;
 
 /**
@@ -193,11 +192,15 @@ public class Constants {
 
     //三类人员
     public static final String SEX = "sex";
-    public static final String EDUCATION ="education";
-    public static final String TECHTYPE ="techType";
-    public static final String APPLYTYPE ="applyType";
-    public static final String APPLYCERTYPE ="applyCerType";
-    public static final String UNITTYPE="unitType";
-    public static final String CARDTYPE="cardType";
+    public static final String EDUCATION = "education";
+    public static final String TECHTYPE = "techType";
+    public static final String APPLYTYPE = "applyType";
+    public static final String APPLYCERTYPE = "applyCerType";
+    public static final String UNITTYPE = "unitType";
+    public static final String CARDTYPE = "cardType";
+
+    //施工许可
+    public static final String SGDWGCLX = "SGDWGCLX";
+    public static final String SGDWLX = "SGDWLX";
 
 }

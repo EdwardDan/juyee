@@ -16,6 +16,7 @@ public class PrivilegeCode {
     public static final String SYS_SAMPLE_EDIT = Sample.class.getSimpleName() + "_edit";     //样例_编辑
     public static final String SYS_DEPT_EDIT = SysDept.class.getSimpleName() + "_edit";     //单位部门_编辑
     public static final String SYS_PERSON_EDIT = SysPerson.class.getSimpleName() + "_edit"; //人员_编辑
+    public static final String SYS_REGPERSON_EDIT = SysRegPerson.class.getSimpleName() + "_edit"; //注册账号管理_编辑
     public static final String SYS_USER_EDIT = SysUser.class.getSimpleName() + "_edit";      //用户_编辑
     public static final String SYS_ROLE_EDIT = SysRole.class.getSimpleName() + "_edit";      //角色_编辑
     public static final String SYS_PRIVILEGE_EDIT = SysPrivilege.class.getSimpleName() + "_edit";  //权限_编辑
@@ -133,6 +134,7 @@ public class PrivilegeCode {
     public static final String SG_PERMIT_AUDIT = SgPermit.class.getSimpleName() + "_audit";
     public static final String SG_PERMIT_FGLD_AUDIT = SgPermit.class.getSimpleName() + "_fgld_audit";
     public static final String SG_PERMIT_ZXLD_AUDIT = SgPermit.class.getSimpleName() + "_zxld_audit";
+    public static final String SG_PERMIT_WLD_AUDIT = SgPermit.class.getSimpleName() + "_wld_audit";
 
     //三类人员
     public static final String SLRY_QUALIFY_EDIT = SlryQualify.class.getSimpleName() + "_edit";     //三类人员_编辑

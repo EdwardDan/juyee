@@ -8,7 +8,7 @@
 		name="SgPermit"
 		table="SG_PERMIT"
 	>
-		
+
 		<meta attribute="sync-DAO">false</meta>
 		<meta attribute="sync-jsp">true</meta>
 		<meta attribute="sync-boolean">get</meta>
@@ -69,6 +69,149 @@
         >
             <meta attribute="ColumnName">建设单位</meta>
             <meta attribute="ColumnComment">建设单位</meta>
+        </property>
+
+        <property
+                name="buildUnitType"
+                column="BUILD_UNIT_TYPE"
+                type="string"
+                not-null="false"
+                length="200"
+                >
+            <meta attribute="ColumnName">建设单位性质</meta>
+            <meta attribute="ColumnComment">建设单位性质</meta>
+        </property>
+
+        <property
+                name="buildUnitAddress"
+                column="BUILD_UNIT_ADDRESS"
+                type="string"
+                not-null="false"
+                length="200"
+                >
+            <meta attribute="ColumnName">建设单位地址</meta>
+            <meta attribute="ColumnComment">建设单位地址</meta>
+        </property>
+
+        <property
+                name="buildSite"
+                column="BUILD_SITE"
+                type="string"
+                not-null="false"
+                length="200"
+                >
+            <meta attribute="ColumnName">建设地点</meta>
+            <meta attribute="ColumnComment">建设地点</meta>
+        </property>
+
+        <property
+                name="buildProjSize"
+                column="BUILD_PROJ_SIZE"
+                type="string"
+                not-null="false"
+                length="500"
+                >
+            <meta attribute="ColumnName">建设工程规模</meta>
+            <meta attribute="ColumnComment">建设工程规模</meta>
+        </property>
+
+        <property
+                name="contractPrice"
+                column="CONTRACT_PRICE"
+                type="integer"
+                not-null="false"
+                length="6"
+                >
+            <meta attribute="ColumnName">合同价格</meta>
+            <meta attribute="ColumnComment">合同价格</meta>
+        </property>
+
+        <property
+                name="contractPeriod"
+                column="CONTRACT_PERIOD"
+                type="string"
+                not-null="false"
+                length="200"
+                >
+            <meta attribute="ColumnName">合同工期</meta>
+            <meta attribute="ColumnComment">合同工期</meta>
+        </property>
+
+        <property
+                name="fr"
+                column="FR"
+                type="string"
+                not-null="false"
+                length="50"
+                >
+            <meta attribute="ColumnName">法定代表人</meta>
+            <meta attribute="ColumnComment">法定代表人</meta>
+        </property>
+
+        <property
+                name="buildUnitPhone"
+                column="BUILD_UNIT_PHONE"
+                type="string"
+                not-null="false"
+                length="50"
+                >
+            <meta attribute="ColumnName">建设单位联系电话</meta>
+            <meta attribute="ColumnComment">建设单位联系电话</meta>
+        </property>
+
+        <property
+                name="buildUnitPerson"
+                column="BUILD_UNIT_PERSON"
+                type="string"
+                not-null="false"
+                length="50"
+                >
+            <meta attribute="ColumnName">建设单位联系人</meta>
+            <meta attribute="ColumnComment">建设单位联系人</meta>
+        </property>
+
+        <property
+                name="buildUnitMobile"
+                column="BUILD_UNIT_MOBILE"
+                type="string"
+                not-null="false"
+                length="50"
+                >
+            <meta attribute="ColumnName">手机号</meta>
+            <meta attribute="ColumnComment">手机号</meta>
+        </property>
+
+        <property
+                name="buildFileCode"
+                column="BUILD_FILE_CODE"
+                type="string"
+                not-null="false"
+                length="100"
+                >
+            <meta attribute="ColumnName">建设用地批准文件编号</meta>
+            <meta attribute="ColumnComment">建设用地批准文件编号</meta>
+        </property>
+
+        <property
+                name="buildXkzCode"
+                column="BUILD_XKZ_CODE"
+                type="string"
+                not-null="false"
+                length="100"
+                >
+            <meta attribute="ColumnName">建设工程规划许可证编号</meta>
+            <meta attribute="ColumnComment">建设工程规划许可证编号</meta>
+        </property>
+
+        <property
+                name="startWorkCon"
+                column="START_WORK_CON"
+                type="string"
+                not-null="false"
+                length="500"
+                >
+            <meta attribute="ColumnName">现场开工情况</meta>
+            <meta attribute="ColumnComment">现场开工情况</meta>
         </property>
 
 		<property
@@ -357,6 +500,39 @@
             <meta attribute="ColumnComment">中心领导审核日期</meta>
         </property>
 
+        <property
+                name="wldOpinion"
+                column="WLD_OPINION"
+                type="string"
+                not-null="false"
+                length="1000"
+                >
+            <meta attribute="ColumnName">委领导审核意见</meta>
+            <meta attribute="ColumnComment">委领导审核意见</meta>
+        </property>
+
+        <property
+                name="wldUser"
+                column="WLD_USER"
+                type="string"
+                not-null="false"
+                length="100"
+                >
+            <meta attribute="ColumnName">委领导审核用户</meta>
+            <meta attribute="ColumnComment">委领导审核用户</meta>
+        </property>
+
+        <property
+                name="wldDate"
+                column="WLD_DATE"
+                type="date"
+                not-null="false"
+                length="7"
+                >
+            <meta attribute="ColumnName">委领导审核日期</meta>
+            <meta attribute="ColumnComment">委领导审核日期</meta>
+        </property>
+
 		<property
 			name="createTime"
 			column="CREATE_TIME"
@@ -408,9 +584,18 @@
 			not-null="false"
 		>
 		</many-to-one>
-	
 
-		<set name="sgPermitOperations" inverse="true">
+        <set name="sgContractProjPersons" inverse="true" order-by="NUM">
+            <key column="SG_PERMIT_ID"/>
+            <one-to-many class="SgContractProjPerson"/>
+        </set>
+
+        <set name="sgUnitProjs" inverse="true" order-by="NUM">
+            <key column="SG_PERMIT_ID"/>
+            <one-to-many class="SgUnitProj"/>
+        </set>
+
+        <set name="sgPermitOperations" inverse="true">
 			<key column="SG_PERMIT_ID"/>
 			<one-to-many class="SgPermitOperation"/>
 		</set>
@@ -425,7 +610,7 @@
 			<one-to-many class="SgMaterial"/>
 		</set>
 
-	</class>	
+	</class>
     <query name="sgpermit_all_data_query">
         <![CDATA[FROM SgPermit]]>
     </query>
