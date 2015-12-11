@@ -6,27 +6,33 @@
     $(function () {
         //页面验证初始化
         var validateCondition = [
-            //{name:"csOpinion", rule:"validate[required,maxSize[1000]]"},            
-            //{name:"fhOpinion", rule:"validate[required,maxSize[1000]]"},            
-            //{name:"shOpinion", rule:"validate[required,maxSize[1000]]"},            
-            //{name:"fgldOpinion", rule:"validate[required,maxSize[1000]]"},            
-            //{name:"zxldOpinion", rule:"validate[required,maxSize[1000]]"},                    
+            //{name:"csOpinion", rule:"validate[required,maxSize[1000]]"},
+            //{name:"fhOpinion", rule:"validate[required,maxSize[1000]]"},
+            //{name:"shOpinion", rule:"validate[required,maxSize[1000]]"},
+            //{name:"fgldOpinion", rule:"validate[required,maxSize[1000]]"},
+            //{name:"zxldOpinion", rule:"validate[required,maxSize[1000]]"},
         ];
         validateInit(validateCondition, formId);
     });
-
     //保存操作
     function save(buttonName, status) {
         if (!validateForm(formId)) {
             return;
         }
         $("#status").val(status);
+        if (status == '${STATUS_CS_BACK}' || status == '${STATUS_FH_BACK}' || status == '${STATUS_SH_BACK}' || status == '${STATUS_FGLD_BACK}' || status == '${STATUS_ZXLD_BACK}' || status == '${STATUS_WLD_BACK}') {
+            parent.openNewWindow("selectMaterial", "退回选择页面", "${ctx}/sgPermit/selectMaterial.do", true, 400, 200);
+        } else {
+            savaAudit();
+        }
+    }
+    function savaAudit(buttonName){
         if (confirm("是否确定执行 " + buttonName + " 操作？")) {
             saveAjaxData("${ctx}/sgPermit/saveAudit.do", formId);
         }
     }
 </script>
-<form:form commandName="bean">
+<form:form commandName="bean" name="bean">
     <form:hidden path="id"/>
     <form:hidden path="year"/>
     <form:hidden path="status"/>
@@ -36,6 +42,7 @@
     <form:hidden path="fgldOpinion"/>
     <form:hidden path="zxldOpinion"/>
     <form:hidden path="wldOpinion"/>
+    <form:hidden path="backNum"/>
 
     <div class="form_div">
         <table cellpadding="0" cellspacing="0" class="form_table">
@@ -119,8 +126,10 @@
                         <tr class="tr_header">
                             <td style="width: 5%;">序号</td>
                             <td style="width: 50%;">申请材料名称</td>
-                            <td style="width: 20%;">材料齐全情况</td>
-                            <td style="width: 8%;">份数</td>
+                                <%--<td style="width: 20%;">材料齐全情况</td>--%>
+                                <%--<td style="width: 8%;">份数</td>--%>
+                            <td style="width: 8%;">应交份数</td>
+                            <td style="width: 8%;">实交份数</td>
                             <td style="width: 15%;">附件</td>
                         </tr>
                         <c:forEach items="${applyList}" var="map">
@@ -128,13 +137,15 @@
                             <tr class="tr_dark">
                                 <td style="text-align: center;">${map.no}</td>
                                 <td style="text-align: left;">${map.materialName}</td>
-                                <td style="text-align: center;">
-                                    有<input type="radio" name="isFull${map.no}" value="1" disabled="true"
-                                            <c:if test="${map.isFull=='true'}">checked="checked"</c:if>>
-                                    无<input type="radio" name="isFull${map.no}" value="0" disabled="true"
-                                            <c:if test="${map.isFull=='false'}">checked="checked"</c:if>>
-                                </td>
-                                <td style="text-align: center;">${map.num}</td>
+                                    <%--<td style="text-align: center;">--%>
+                                    <%--有<input type="radio" name="isFull${map.no}" value="1" disabled="true"--%>
+                                    <%--<c:if test="${map.isFull=='true'}">checked="checked"</c:if>>--%>
+                                    <%--无<input type="radio" name="isFull${map.no}" value="0" disabled="true"--%>
+                                    <%--<c:if test="${map.isFull=='false'}">checked="checked"</c:if>>--%>
+                                    <%--</td>--%>
+                                    <%--<td style="text-align: center;">${map.num}</td>--%>
+                                <td style="text-align: center;">${map.yjNum}</td>
+                                <td style="text-align: center;">${map.sjNum}</td>
                                 <td style="text-align: center;">${map[upLoadNo]}</td>
                             </tr>
                         </c:forEach>
@@ -182,11 +193,12 @@
                                         <c:when test="${(bean.status==STATUS_SUBMIT)&&canCsAudit}">
                                             <select name="csOpnion${map.no}" id="csOpnion${map.no}"
                                                     class="form_select_long" style="width: 70px;">
-                                                <option value="1" <c:if test="${map.csOpinion=='true'}">selected</c:if>>
+                                                <option value="1"
+                                                        <c:if test="${map.isCsOpinion=='true'}">selected</c:if>>
                                                     符合
                                                 </option>
                                                 <option value="0"
-                                                        <c:if test="${map.csOpinion=='false'||map.csOpinion==''}">selected</c:if>>
+                                                        <c:if test="${map.isCsOpinion=='false'||map.isCsOpinion==''}">selected</c:if>>
                                                     不符合
                                                 </option>
                                             </select>
@@ -194,11 +206,12 @@
                                         <c:otherwise>
                                             <select name="csOpnion${map.no}" id="csOpnion${map.no}"
                                                     class="form_select_long" style="width: 70px;" disabled>
-                                                <option value="1" <c:if test="${map.csOpinion=='true'}">selected</c:if>>
+                                                <option value="1"
+                                                        <c:if test="${map.isCsOpinion=='true'}">selected</c:if>>
                                                     符合
                                                 </option>
                                                 <option value="0"
-                                                        <c:if test="${map.csOpinion=='false'||map.csOpinion==''}">selected</c:if>>
+                                                        <c:if test="${map.isCsOpinion=='false'||map.isCsOpinion==''}">selected</c:if>>
                                                     不符合
                                                 </option>
                                             </select>
@@ -210,11 +223,12 @@
                                         <c:when test="${(bean.status==STATUS_CS_PASS)&&canFhAudit}">
                                             <select name="fhOpnion${map.no}" id="fhOpnion${map.no}"
                                                     class="form_select_long" style="width: 70px;">
-                                                <option value="1" <c:if test="${map.fhOpinion=='true'}">selected</c:if>>
+                                                <option value="1"
+                                                        <c:if test="${map.isFhOpinion=='true'}">selected</c:if>>
                                                     符合
                                                 </option>
                                                 <option value="0"
-                                                        <c:if test="${map.fhOpinion=='false'||map.fhOpinion==''||map.fhOpinion=='null'}">selected</c:if>>
+                                                        <c:if test="${map.isFhOpinion=='false'||map.isFhOpinion==''||map.isFhOpinion=='null'}">selected</c:if>>
                                                     不符合
                                                 </option>
                                             </select>
@@ -222,11 +236,12 @@
                                         <c:otherwise>
                                             <select name="fhOpnion${map.no}" id="fhOpnion${map.no}"
                                                     class="form_select_long" style="width: 70px;" disabled>
-                                                <option value="1" <c:if test="${map.fhOpinion=='true'}">selected</c:if>>
+                                                <option value="1"
+                                                        <c:if test="${map.isFhOpinion=='true'}">selected</c:if>>
                                                     符合
                                                 </option>
                                                 <option value="0"
-                                                        <c:if test="${map.fhOpinion=='false'||map.fhOpinion==''||map.fhOpinion=='null'}">selected</c:if>>
+                                                        <c:if test="${map.isFhOpinion=='false'||map.isFhOpinion==''||map.isFhOpinion=='null'}">selected</c:if>>
                                                     不符合
                                                 </option>
                                             </select>
@@ -239,11 +254,12 @@
                                             <select name="shOpnion${map.no}" id="shOpnion${map.no}"
                                                     class="form_select_long"
                                                     style="width: 70px;">
-                                                <option value="1" <c:if test="${map.shOpinion=='true'}">selected</c:if>>
+                                                <option value="1"
+                                                        <c:if test="${map.isShOpinion=='true'}">selected</c:if>>
                                                     符合
                                                 </option>
                                                 <option value="0"
-                                                        <c:if test="${map.shOpinion=='false'||map.shOpinion==''||map.shOpinion=='null'}">selected</c:if>>
+                                                        <c:if test="${map.isShOpinion=='false'||map.isShOpinion==''||map.isShOpinion=='null'}">selected</c:if>>
                                                     不符合
                                                 </option>
                                             </select>
@@ -252,11 +268,12 @@
                                             <select name="shOpnion${map.no}" id="shOpnion${map.no}"
                                                     class="form_select_long"
                                                     style="width: 70px;" disabled>
-                                                <option value="1" <c:if test="${map.shOpinion=='true'}">selected</c:if>>
+                                                <option value="1"
+                                                        <c:if test="${map.isShOpinion=='true'}">selected</c:if>>
                                                     符合
                                                 </option>
                                                 <option value="0"
-                                                        <c:if test="${map.shOpinion=='false'||map.shOpinion==''||map.shOpinion=='null'}">selected</c:if>>
+                                                        <c:if test="${map.isShOpinion=='false'||map.isShOpinion==''||map.isShOpinion=='null'}">selected</c:if>>
                                                     不符合
                                                 </option>
                                             </select>
@@ -451,7 +468,7 @@
                         <input type="button" value="审核退回" class="button_normal_long"
                                onclick="save(this.value,'${STATUS_WLD_BACK}')">&nbsp;
                     </c:if>
-                    <input type="button" value="取消" class="button_cancel" onclick="closeWindow()">
+                    <input type="button" value="取消" class="button_cancel" onclick="parent.closeWindow()">
                 </td>
             </tr>
         </table>

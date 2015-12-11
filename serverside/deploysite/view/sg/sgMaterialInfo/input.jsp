@@ -27,6 +27,7 @@
             $("#tr1").hide();
             $("#auditReq").val("");
         } else {
+            $("#tr_num").hide();
             $("#tr1").show();
         }
     }
@@ -54,13 +55,19 @@
                     <form:input path="no" cssClass="input_number" cssStyle="width: 100px;"/>
                 </td>
             </tr>
-            <tr class="tr_light">
+            <tr class="tr_dark">
                 <td class="form_label">材料名称：</td>
                 <td class="form_content">
                     <form:textarea path="materialName" cssClass="input_textarea" cssStyle="width: 90%;"/>
                 </td>
             </tr>
-            <tr class="tr_dark" id="tr1">
+            <tr class="tr_light" id="tr_num">
+                <td class="form_label">应交份数：</td>
+                <td class="form_content">
+                    <form:input path="yjNum" cssClass="input_number" cssStyle="width: 100px;"/>
+                </td>
+            </tr>
+            <tr class="tr_light" id="tr1">
                 <td class="form_label">审核要求：</td>
                 <td class="form_content">
                     <form:textarea path="auditReq" cssClass="input_textarea" cssStyle="width: 90%;"/>

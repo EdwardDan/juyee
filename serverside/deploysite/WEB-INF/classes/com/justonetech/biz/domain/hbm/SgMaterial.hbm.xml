@@ -104,6 +104,28 @@
             <meta attribute="ColumnComment">更新用户名</meta>
         </property>
 
+		<property
+				name="yjNum"
+				column="YJ_NUM"
+				type="java.lang.Long"
+				not-null="false"
+				length="10"
+				>
+			<meta attribute="ColumnName">应交份数</meta>
+			<meta attribute="ColumnComment">应交份数</meta>
+		</property>
+
+		<property
+				name="sjNum"
+				column="SJ_NUM"
+				type="java.lang.Long"
+				not-null="false"
+				length="10"
+				>
+			<meta attribute="ColumnName">实交份数</meta>
+			<meta attribute="ColumnComment">实交份数</meta>
+		</property>
+
 		<many-to-one
 			name="doc"
 			column="DOC_ID"
