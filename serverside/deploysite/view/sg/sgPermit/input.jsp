@@ -222,8 +222,8 @@
                                     <%--style="text-align: center;">--%>
                                     <%--</td>--%>
                                 <td style="text-align: center;">
-                                        ${map.yjNum}
-                                    <input type="hidden" name="yjNum${map.no}" value="${map.yjNum}">
+                                    <c:if test="${map.yjNum != 0}">${map.yjNum}</c:if>
+                                    <input type="hidden" name="yjNum${map.no}" value="<c:if test="${map.yjNum != 0}">${map.yjNum}</c:if>">
                                 </td>
                                 <td style="text-align: center;">
                                     <input type="text" name="sjNum${map.no}" class="input_number" value="${map.sjNum}"
