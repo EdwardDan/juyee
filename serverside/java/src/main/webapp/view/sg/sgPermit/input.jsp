@@ -6,26 +6,26 @@
     $(function () {
         //页面验证初始化
         var validateCondition = [
-            //{name:"year", rule:"validate[required,custom[integer],maxSize[4]"},            
-            //{name:"bjbh", rule:"validate[required,maxSize[50]]"},            
-            //{name:"projectName", rule:"validate[required,maxSize[200]]"},            
-            //{name:"buildName", rule:"validate[required,maxSize[200]]"},            
-            //{name:"hYear", rule:"validate[required,custom[integer],maxSize[4]"},            
-            //{name:"hNum", rule:"validate[required,custom[integer],maxSize[4]"},            
-            //{name:"applyPerson", rule:"validate[required,maxSize[50]]"},            
-            //{name:"applyMatter", rule:"validate[required,maxSize[200]]"},            
-            //{name:"applyNum", rule:"validate[required,maxSize[50]]"},            
-            //{name:"materialPerson", rule:"validate[required,maxSize[200]]"},            
-            //{name:"materialPersonPhone", rule:"validate[required,maxSize[50]]"},            
-            //{name:"materialPersonAddress", rule:"validate[required,maxSize[200]]"},            
-            //{name:"receivePerson", rule:"validate[required,maxSize[200]]"},            
-            //{name:"receivePersonPhone", rule:"validate[required,maxSize[50]]"},            
-            //{name:"status", rule:"validate[required,custom[integer],maxSize[2]"},            
-            //{name:"csOpinion", rule:"validate[required,maxSize[1000]]"},            
-            //{name:"fhOpinion", rule:"validate[required,maxSize[1000]]"},            
-            //{name:"shOpinion", rule:"validate[required,maxSize[1000]]"},            
-            //{name:"fgldOpinion", rule:"validate[required,maxSize[1000]]"},            
-            //{name:"zxldOpinion", rule:"validate[required,maxSize[1000]]"},                    
+            //{name:"year", rule:"validate[required,custom[integer],maxSize[4]"},
+            //{name:"bjbh", rule:"validate[required,maxSize[50]]"},
+            //{name:"projectName", rule:"validate[required,maxSize[200]]"},
+            //{name:"buildName", rule:"validate[required,maxSize[200]]"},
+            //{name:"hYear", rule:"validate[required,custom[integer],maxSize[4]"},
+            //{name:"hNum", rule:"validate[required,custom[integer],maxSize[4]"},
+            //{name:"applyPerson", rule:"validate[required,maxSize[50]]"},
+            //{name:"applyMatter", rule:"validate[required,maxSize[200]]"},
+            //{name:"applyNum", rule:"validate[required,maxSize[50]]"},
+            //{name:"materialPerson", rule:"validate[required,maxSize[200]]"},
+            //{name:"materialPersonPhone", rule:"validate[required,maxSize[50]]"},
+            //{name:"materialPersonAddress", rule:"validate[required,maxSize[200]]"},
+            //{name:"receivePerson", rule:"validate[required,maxSize[200]]"},
+            //{name:"receivePersonPhone", rule:"validate[required,maxSize[50]]"},
+            //{name:"status", rule:"validate[required,custom[integer],maxSize[2]"},
+            //{name:"csOpinion", rule:"validate[required,maxSize[1000]]"},
+            //{name:"fhOpinion", rule:"validate[required,maxSize[1000]]"},
+            //{name:"shOpinion", rule:"validate[required,maxSize[1000]]"},
+            //{name:"fgldOpinion", rule:"validate[required,maxSize[1000]]"},
+            //{name:"zxldOpinion", rule:"validate[required,maxSize[1000]]"},
         ];
         validateInit(validateCondition, formId);
     });
@@ -198,8 +198,10 @@
                         <tr class="tr_header">
                             <td style="width: 5%;">序号</td>
                             <td style="width: 50%;">申请材料名称</td>
-                            <td style="width: 20%;">材料齐全情况</td>
-                            <td style="width: 8%;">份数</td>
+                                <%--<td style="width: 20%;">材料齐全情况</td>--%>
+                                <%--<td style="width: 8%;">份数</td>--%>
+                            <td style="width: 8%;">应交份数</td>
+                            <td style="width: 8%;">实交份数</td>
                             <td style="width: 15%;">附件</td>
                         </tr>
                         <c:forEach items="${applyList}" var="map">
@@ -209,14 +211,22 @@
                                     <input type="hidden" name="no" value="${map.no}">
                                 </td>
                                 <td style="text-align: left;">&nbsp;${map.materialName}</td>
+                                    <%--<td style="text-align: center;">--%>
+                                    <%--有<input type="radio" name="isFull${map.no}" value="1"--%>
+                                    <%--<c:if test="${map.isFull=='true'}">checked="checked"</c:if>>--%>
+                                    <%--无<input type="radio" name="isFull${map.no}" value="0"--%>
+                                    <%--<c:if test="${map.isFull=='false'}">checked="checked"</c:if>>--%>
+                                    <%--</td>--%>
+                                    <%--<td style="text-align: center;">--%>
+                                    <%--<input type="text" name="num${map.no}" class="input_number" value="${map.num}"--%>
+                                    <%--style="text-align: center;">--%>
+                                    <%--</td>--%>
                                 <td style="text-align: center;">
-                                    有<input type="radio" name="isFull${map.no}" value="1"
-                                            <c:if test="${map.isFull=='true'}">checked="checked"</c:if>>
-                                    无<input type="radio" name="isFull${map.no}" value="0"
-                                            <c:if test="${map.isFull=='false'}">checked="checked"</c:if>>
+                                    <c:if test="${map.yjNum != 0}">${map.yjNum}</c:if>
+                                    <input type="hidden" name="yjNum${map.no}" value="<c:if test="${map.yjNum != 0}">${map.yjNum}</c:if>">
                                 </td>
                                 <td style="text-align: center;">
-                                    <input type="text" name="num${map.no}" class="input_number" value="${map.num}"
+                                    <input type="text" name="sjNum${map.no}" class="input_number" value="${map.sjNum}"
                                            style="text-align: center;">
                                 </td>
                                 <td style="text-align: center;">${map[upLoadNo]}</td>

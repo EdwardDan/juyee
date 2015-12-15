@@ -22,7 +22,7 @@
                         } else if (treeNode.type == 'info') {
                             menu.push(["添加材料", ["添加材料", CONTEXT_NAME + "/sgMaterialInfo/add.do?parentId={id}"]]);
                         } else if (treeNode.type == 'data') {
-                            menu.push(["修改材料", ["修改材料", CONTEXT_NAME + "/sgMaterialInfo/add.do?id={id}"]]);
+                            menu.push(["修改材料", ["修改材料", CONTEXT_NAME + "/sgMaterialInfo/modify.do?id={id}"]]);
                         }
                         if (treeNode.id != 'root') {
                             menu.push([]);

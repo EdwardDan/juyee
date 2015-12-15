@@ -304,6 +304,14 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
     /*更新用户名*/
     private String updateUser;
 
+    /*提交日期*/
+    /*提交日期*/
+    private java.sql.Date submitDate;
+
+    /*退回编号*/
+    /*退回编号*/
+    private Integer backNum;
+
 
     // many to one
     private com.justonetech.system.domain.SysCodeDetail projectType;
@@ -992,6 +1000,21 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
         this.updateUser = updateUser;
     }
 
+    public Date getSubmitDate() {
+        return submitDate;
+    }
+
+    public void setSubmitDate(Date submitDate) {
+        this.submitDate = submitDate;
+    }
+
+    public Integer getBackNum() {
+        return backNum;
+    }
+
+    public void setBackNum(Integer backNum) {
+        this.backNum = backNum;
+    }
 
     /**
      * Return the value associated with the column: PROJECT_TYPE_ID
@@ -1210,6 +1233,8 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
         builder.append(createUser);
         builder.append(updateTime);
         builder.append(updateUser);
+        builder.append(submitDate);
+        builder.append(backNum);
         return builder.toString();
     }
 

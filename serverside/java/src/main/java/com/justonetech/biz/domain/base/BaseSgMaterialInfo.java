@@ -68,43 +68,47 @@ public abstract class BaseSgMaterialInfo  implements Serializable, Treeable, Aud
     /*序号*/
     /*序号*/
 	private Integer no;
-	
+
     /*类型*/
     /*类型*/
 	private String type;
-	
+
     /*材料名称*/
     /*材料名称*/
 	private String materialName;
-	
+
     /*审核要求*/
     /*审核要求*/
 	private String auditReq;
-	
+
+	/*应交份数*/
+    /*应交份数*/
+	private Long yjNum;
+
     /*叶子节点*/
     /*叶子节点*/
 	private Boolean isLeaf;
-	
+
     /*树节点*/
     /*树节点*/
 	private String treeId;
-	
+
     /*创建时间*/
     /*创建时间*/
 	private java.sql.Timestamp createTime;
-	
+
     /*创建用户名*/
     /*创建用户名*/
 	private String createUser;
-	
+
     /*更新时间*/
     /*更新时间*/
 	private java.sql.Timestamp updateTime;
-	
+
     /*更新用户名*/
     /*更新用户名*/
 	private String updateUser;
-	
+
 
 	// many to one
 	private com.justonetech.system.domain.SysCodeDetail projectType;
@@ -198,6 +202,13 @@ public abstract class BaseSgMaterialInfo  implements Serializable, Treeable, Aud
 		this.auditReq = auditReq;
 	}
 
+	public Long getYjNum() {
+		return yjNum;
+	}
+
+	public void setYjNum(Long yjNum) {
+		this.yjNum = yjNum;
+	}
 
 	/**
 	 * Return the value associated with the column: IS_LEAF
@@ -357,6 +368,7 @@ public abstract class BaseSgMaterialInfo  implements Serializable, Treeable, Aud
 		builder.append(type);
 		builder.append(materialName);
 		builder.append(auditReq);
+		builder.append(yjNum);
 		builder.append(isLeaf);
 		builder.append(treeId);
 		builder.append(createTime);

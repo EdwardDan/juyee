@@ -577,6 +577,28 @@
             <meta attribute="ColumnComment">更新用户名</meta>
         </property>
 
+        <property
+                name="submitDate"
+                column="SUBMIT_DATE"
+                type="date"
+                not-null="false"
+                length="7"
+                >
+            <meta attribute="ColumnName">提交日期</meta>
+            <meta attribute="ColumnComment">提交日期</meta>
+        </property>
+
+        <property
+                name="backNum"
+                column="BACK_NUM"
+                type="integer"
+                not-null="false"
+                length="4"
+                >
+            <meta attribute="ColumnName">退回编号</meta>
+            <meta attribute="ColumnComment">退回编号</meta>
+        </property>
+
 		<many-to-one
 			name="projectType"
 			column="PROJECT_TYPE_ID"

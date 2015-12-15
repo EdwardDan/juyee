@@ -5,7 +5,9 @@ import com.justonetech.biz.core.orm.hibernate.QueryTranslateJq;
 import com.justonetech.biz.daoservice.*;
 import com.justonetech.biz.domain.*;
 import com.justonetech.biz.manager.DocumentManager;
+import com.justonetech.biz.manager.OaTaskManager;
 import com.justonetech.biz.utils.Constants;
+import com.justonetech.biz.utils.enums.SgPermitNotAcceptMat;
 import com.justonetech.biz.utils.enums.SgPermitStatus;
 import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.orm.hibernate.Page;
@@ -72,6 +74,9 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
 
     @Autowired
     private SgUnitProjService sgUnitProjService;
+
+    @Autowired
+    private OaTaskManager oaTaskManager;
 
     /**
      * 列表显示页面
@@ -279,6 +284,65 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
     }
 
     /**
+     * 打印页面
+     *
+     * @param id    .
+     * @param model .
+     * @return .
+     */
+    @RequestMapping
+    public String printView1(Model model, Long id) {
+        SgPermit sgPermit = sgPermitService.get(id);
+        model.addAttribute("bean", sgPermit);
+        List<Map<String, Object>> applyList = getMaterials(sgPermit, "view", "apply");//处理申请材料数据
+        model.addAttribute("applyList", applyList);
+        List<Map<String, Object>> submitList = getMaterials(sgPermit, "view", "submit");//处理申请材料数据
+        model.addAttribute("submitList", submitList);
+
+        return "view/sg/sgPermit/printView1";
+    }
+
+    /**
+     * 打印页面
+     *
+     * @param id    .
+     * @param model .
+     * @return .
+     */
+    @RequestMapping
+    public String printView2(Model model, Long id) {
+        SgPermit sgPermit = sgPermitService.get(id);
+        model.addAttribute("bean", sgPermit);
+        List<Map<String, Object>> applyList = getMaterials(sgPermit, "view", "apply");//处理申请材料数据
+        model.addAttribute("applyList", applyList);
+        List<Map<String, Object>> submitList = getMaterials(sgPermit, "view", "submit");//处理申请材料数据
+        model.addAttribute("submitList", submitList);
+
+        return "view/sg/sgPermit/printView2";
+    }
+
+    /**
+     * 打印页面
+     *
+     * @param id    .
+     * @param model .
+     * @return .
+     */
+    @RequestMapping
+    public String printView3(Model model, Long id) {
+        SgPermit sgPermit = sgPermitService.get(id);
+        model.addAttribute("bean", sgPermit);
+        List<Map<String, Object>> applyList = getMaterials(sgPermit, "view", "apply");//处理申请材料数据
+        model.addAttribute("applyList", applyList);
+        List<Map<String, Object>> submitList = getMaterials(sgPermit, "view", "submit");//处理申请材料数据
+        model.addAttribute("submitList", submitList);
+        doPrivilegeCodeAndStatus(model);
+
+        return "view/sg/sgPermit/printView3";
+    }
+
+
+    /**
      * 保存操作
      *
      * @param response .
@@ -288,8 +352,7 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
      */
     @SuppressWarnings("unchecked")
     @RequestMapping
-    public void save(HttpServletResponse response, @ModelAttribute("bean") SgPermit entity, HttpServletRequest request, Model model, String act) throws Exception {
-        String id = "";
+    public void save(HttpServletResponse response, @ModelAttribute("bean") SgPermit entity, HttpServletRequest request) throws Exception {
         try {
             SgPermit target;
             if (entity.getId() != null) {
@@ -327,8 +390,11 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
             } else {
                 target = entity;
             }
+            Integer status = target.getStatus();
+            if (status == SgPermitStatus.STATUS_SUBMIT.getCode()) {
+                target.setSubmitDate(new Date(System.currentTimeMillis()));
+            }
             sgPermitService.save(target);
-            id = String.valueOf(target.getId());
             //保存信息之前先删除材料申请信息
             List<SgMaterial> list1 = new ArrayList<SgMaterial>();
             Set<SgMaterial> sgMaterials = target.getSgMaterials();
@@ -344,19 +410,33 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
                     SgMaterial sgMaterial = new SgMaterial();
                     sgMaterial.setSgPermit(target);
                     sgMaterial.setNo(Long.valueOf(no));
-                    //材料是否齐全
-                    String isFull = request.getParameter("isFull" + no);
-                    if (!StringHelper.isEmpty(isFull) && Constants.FLAG_TRUE.equals(isFull)) {
-                        sgMaterial.setIsFull(true);
-                    } else if (!StringHelper.isEmpty(isFull) && Constants.FLAG_FALSE.equals(isFull)) {
-                        sgMaterial.setIsFull(false);
+//                    //材料是否齐全
+//                    String isFull = request.getParameter("isFull" + no);
+//                    if (!StringHelper.isEmpty(isFull) && Constants.FLAG_TRUE.equals(isFull)) {
+//                        sgMaterial.setIsFull(true);
+//                    } else if (!StringHelper.isEmpty(isFull) && Constants.FLAG_FALSE.equals(isFull)) {
+//                        sgMaterial.setIsFull(false);
+//                    }
+//                    //份数
+//                    String num = request.getParameter("num" + no);
+//                    if (!StringHelper.isEmpty(num)) {
+//                        sgMaterial.setNum(Long.valueOf(num));
+//                    } else {
+//                        sgMaterial.setNum(null);
+//                    }
+                    //份数
+                    String yjNum = request.getParameter("yjNum" + no);
+                    if (!StringHelper.isEmpty(yjNum)) {
+                        sgMaterial.setYjNum(Long.valueOf(yjNum));
+                    } else {
+                        sgMaterial.setYjNum(null);
                     }
                     //份数
-                    String num = request.getParameter("num" + no);
-                    if (!StringHelper.isEmpty(num)) {
-                        sgMaterial.setNum(Long.valueOf(num));
+                    String sjNum = request.getParameter("sjNum" + no);
+                    if (!StringHelper.isEmpty(sjNum)) {
+                        sgMaterial.setSjNum(Long.valueOf(sjNum));
                     } else {
-                        sgMaterial.setNum(null);
+                        sgMaterial.setSjNum(null);
                     }
                     //附件
                     String docId = request.getParameter("docId" + no);//附件
@@ -369,7 +449,7 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
             }
             sgMaterialService.batchSave(saveList, saveList.size());
             //保存操作信息
-            Integer status = target.getStatus();
+
             if (status == SgPermitStatus.STATUS_SUBMIT.getCode()) {
                 SgPermitOperation operation = new SgPermitOperation();
                 operation.setSgPermit(target);
@@ -378,6 +458,7 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
                 operation.setOptionUser(sysUserManager.getSysUser().getDisplayName());
                 operation.setStatus(status);
                 sgPermitOperationService.save(operation);
+                createOaTask(target);
             }
 
         } catch (Exception e) {
@@ -410,7 +491,8 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
                         "shOpinion",
                         "fgldOpinion",
                         "zxldOpinion",
-                        "wldOpinion"
+                        "wldOpinion",
+                        "backNum"
                 });
             } else {
                 target = entity;
@@ -490,6 +572,8 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
             operation.setOptionUser(sysUser.getDisplayName());
             operation.setStatus(status);
             sgPermitOperationService.save(operation);
+
+            createOaTask(target);
 
         } catch (Exception e) {
             log.error("error", e);
@@ -581,6 +665,15 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
         model.addAttribute("STATUS_ZXLD_BACK", SgPermitStatus.STATUS_ZXLD_BACK.getCode());//中心领导审核退回
         model.addAttribute("STATUS_WLD_PASS", SgPermitStatus.STATUS_WLD_PASS.getCode());//委领导审核通过
         model.addAttribute("STATUS_WLD_BACK", SgPermitStatus.STATUS_WLD_BACK.getCode());//委领导审核退回
+
+        //退回材料枚举类
+        SgPermitNotAcceptMat[] mats = SgPermitNotAcceptMat.values();
+        List<SgPermitNotAcceptMat> matList = new ArrayList<SgPermitNotAcceptMat>();
+        for (SgPermitNotAcceptMat mat : mats) {
+            matList.add(mat);
+        }
+        model.addAttribute("matList", matList);
+
     }
 
     /**
@@ -592,13 +685,18 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
         String hql = "from SgMaterialInfo where parent is not null and projectType.id=" + sgPermit.getProjectType().getId() + " and type='" + type + "' order by treeId asc";
         List<SgMaterialInfo> infoList = sgMaterialInfoService.findByQuery(hql);
         String materialInfo = "";
+        String yjNum = "";
         String[] materialInfos = {};
+        String[] yjNums = {};
         for (SgMaterialInfo info : infoList) {
             materialInfo += "," + info.getMaterialName();
+            yjNum += "," + JspHelper.getString(info.getYjNum()) + " ";
         }
         if (!StringHelper.isEmpty(materialInfo)) {
             materialInfo = materialInfo.substring(1);
             materialInfos = materialInfo.split(",");
+            yjNum = yjNum.substring(1);
+            yjNums = yjNum.split(",");
         }
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         int num = infoList.size();
@@ -611,6 +709,8 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
                     map.put("materialName", materialInfos[JspHelper.getInteger(material.getNo()) - 1]);
                     map.put("isFull", material.getIsFull());
                     map.put("num", material.getNum());
+                    map.put("yjNum", yjNums[JspHelper.getInteger(material.getNo()) - 1]);
+                    map.put("sjNum", material.getSjNum());
                     if ("view".equals(flag)) {
                         map.put("upLoad" + material.getNo(), documentManager.getDownloadButton(material.getDoc()));
                     } else {
@@ -625,6 +725,8 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
                     map.put("materialName", materialInfos[i - 1]);
                     map.put("isFull", "");
                     map.put("num", "");
+                    map.put("yjNum", JspHelper.getLong(yjNums[i - 1].trim()));
+                    map.put("sjNum", "");
                     map.put("upLoad" + i, documentManager.getUploadButtonForMulti(documentManager.getDefaultXmlConfig(), SgMaterial.class.getSimpleName(), null, null, null, String.valueOf(i)));
                     list.add(map);
                 }
@@ -647,9 +749,9 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
                     map.put("materialName", materialInfos[JspHelper.getInteger(opinion.getNo()) - 1]);
                     String req = auditReqs[JspHelper.getInteger(opinion.getNo()) - 1];
                     map.put("auditReq", (!"null".equals(req) && !StringHelper.isEmpty(req)) ? req : "");
-                    map.put("csOpinion", opinion.getIsCsOpinion());
-                    map.put("fhOpinion", opinion.getIsFhOpinion());
-                    map.put("shOpinion", opinion.getIsShOpinion());
+                    map.put("isCsOpinion", opinion.getIsCsOpinion());
+                    map.put("isFhOpinion", opinion.getIsFhOpinion());
+                    map.put("isShOpinion", opinion.getIsShOpinion());
                     list.add(map);
                 }
             } else {
@@ -659,9 +761,9 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
                     map.put("materialName", materialInfos[i - 1]);
                     String req = auditReqs[i - 1];
                     map.put("auditReq", (!"null".equals(req) && !StringHelper.isEmpty(req)) ? req : "");
-                    map.put("csOpinion", true);
-                    map.put("fhOpinion", true);
-                    map.put("shOpinion", true);
+                    map.put("isCsOpinion", true);
+                    map.put("isFhOpinion", true);
+                    map.put("isShOpinion", true);
                     list.add(map);
                 }
             }
@@ -686,5 +788,90 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
         }
 
         return "common/msg";
+    }
+
+    /**
+     * 选择退回原因
+     *
+     * @param model 。
+     * @return 。
+     */
+    @RequestMapping
+    public String selectMaterial(Model model) {
+        String options = SgPermitNotAcceptMat.getOptions("");
+        model.addAttribute("options", options);
+
+        return "view/sg/sgPermit/selectMaterial";
+    }
+
+    /**
+     * 创建系统任务
+     *
+     * @param data .
+     * @throws Exception .
+     */
+    public void createOaTask(SgPermit data) throws Exception {
+        int status = data.getStatus();
+        String simpleName = SgPermit.class.getSimpleName();
+        //创建任务
+        String title = "";
+        Set<Long> managers = new HashSet<Long>();
+        if (status == SgPermitStatus.STATUS_SUBMIT.getCode()) {
+            title = oaTaskManager.getTaskTitle(data, simpleName + "_ch_pass");
+            //获取有初审核权限的用户
+            Set<Long> audit = sysUserManager.getUserIdsByPrivilegeCode(PrivilegeCode.SG_PERMIT_CS_AUDIT);
+            managers.addAll(audit);
+            if (managers.size() > 0) {
+                oaTaskManager.createTask(simpleName + "_ch_pass", data.getId(), title, managers, false, null, null);
+            }
+        } else if (status == SgPermitStatus.STATUS_CS_PASS.getCode()) {
+            title = oaTaskManager.getTaskTitle(data, simpleName + "_fh_pass");
+            //获取有复审权限的用户
+            Set<Long> audit = sysUserManager.getUserIdsByPrivilegeCode(PrivilegeCode.SG_PERMIT_FH_AUDIT);
+            managers.addAll(audit);
+            if (managers.size() > 0) {
+                oaTaskManager.createTask(simpleName + "_fh_pass", data.getId(), title, managers, false, null, null);
+            }
+        } else if (status == SgPermitStatus.STATUS_FH_PASS.getCode()) {
+            title = oaTaskManager.getTaskTitle(data, simpleName + "_sh_pass");
+            //获取有审核权限的用户
+            Set<Long> audit = sysUserManager.getUserIdsByPrivilegeCode(PrivilegeCode.SG_PERMIT_AUDIT);
+            managers.addAll(audit);
+            if (managers.size() > 0) {
+                oaTaskManager.createTask(simpleName + "_sh_pass", data.getId(), title, managers, false, null, null);
+            }
+        } else if (status == SgPermitStatus.STATUS_SH_PASS.getCode()) {
+            title = oaTaskManager.getTaskTitle(data, simpleName + "_fgldsh_pass");
+            //获取有审核权限的用户
+            Set<Long> audit = sysUserManager.getUserIdsByPrivilegeCode(PrivilegeCode.SG_PERMIT_FGLD_AUDIT);
+            managers.addAll(audit);
+            if (managers.size() > 0) {
+                oaTaskManager.createTask(simpleName + "_fgldsh_pass", data.getId(), title, managers, false, null, null);
+            }
+        } else if (status == SgPermitStatus.STATUS_FGLD_PASS.getCode()) {
+            title = oaTaskManager.getTaskTitle(data, simpleName + "_fgldsh_pass");
+            //获取有审核权限的用户
+            Set<Long> audit = sysUserManager.getUserIdsByPrivilegeCode(PrivilegeCode.SG_PERMIT_ZXLD_AUDIT);
+            managers.addAll(audit);
+            if (managers.size() > 0) {
+                oaTaskManager.createTask(simpleName + "_fgldsh_pass", data.getId(), title, managers, false, null, null);
+            }
+        } else if (status == SgPermitStatus.STATUS_ZXLD_PASS.getCode()) {
+            title = oaTaskManager.getTaskTitle(data, simpleName + "_wldsh_pass");
+            //获取有审核权限的用户
+            Set<Long> audit = sysUserManager.getUserIdsByPrivilegeCode(PrivilegeCode.SG_PERMIT_WLD_AUDIT);
+            managers.addAll(audit);
+            if (managers.size() > 0) {
+                oaTaskManager.createTask(simpleName + "_wldsh_pass", data.getId(), title, managers, false, null, null);
+            }
+        } else if (status == SgPermitStatus.STATUS_EDIT.getCode() || status == SgPermitStatus.STATUS_CS_BACK.getCode() || status == SgPermitStatus.STATUS_FH_BACK.getCode() || status == SgPermitStatus.STATUS_SH_BACK.getCode() || status == SgPermitStatus.STATUS_FGLD_BACK.getCode() || status == SgPermitStatus.STATUS_ZXLD_BACK.getCode() || status == SgPermitStatus.STATUS_WLD_BACK.getCode()) {
+            title = oaTaskManager.getTaskTitle(data, simpleName + "_back");
+            //获取有编辑权限的用户
+            Set<Long> edit = sysUserManager.getUserIdsByPrivilegeCode(PrivilegeCode.SG_PERMIT_EDIT);
+            managers.addAll(edit);
+            if (managers.size() > 0) {
+                oaTaskManager.createTask(simpleName + "_back", data.getId(), title, managers, false, null, null);
+            }
+        }
     }
 }

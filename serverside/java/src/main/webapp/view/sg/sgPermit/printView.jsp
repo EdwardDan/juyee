@@ -733,8 +733,10 @@ mso-char-indent-count:2.0;mso-line-height-alt:12.0pt'><span style='font-size:
 <p class=MsoNormal><span lang=EN-US><o:p>&nbsp;</o:p></span></p>
 
 </div>
+<div class="div_space"></div>
 <div align="center">
     <input type="button" value="打印" class="noprint" onclick="window.print();">
+    <input type="button" value="关闭" class="noprint" onclick="parent.close()">
 </div>
 
 </body>

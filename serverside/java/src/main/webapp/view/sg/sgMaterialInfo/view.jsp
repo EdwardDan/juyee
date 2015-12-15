@@ -2,64 +2,39 @@
 <%@ include file="/common/taglibs.jsp" %>
 <div class="form_div">
     <table cellpadding="0" cellspacing="0" class="form_table">
-                        <tr class="tr_light">
-          <td class="form_label">序号：</td>
-          <td class="form_content">&nbsp;
-                      ${bean.no}                    </td>
-        </tr>
-                                <tr class="tr_dark">
-          <td class="form_label">类型：</td>
-          <td class="form_content">&nbsp;
-                      ${bean.type}                    </td>
-        </tr>
-                        <tr class="tr_light">
-          <td class="form_label">材料名称：</td>
-          <td class="form_content">&nbsp;
-                      ${bean.materialName}                    </td>
-        </tr>
-                                <tr class="tr_dark">
-          <td class="form_label">审核要求：</td>
-          <td class="form_content">&nbsp;
-                      ${bean.auditReq}                    </td>
-        </tr>
-                        <tr class="tr_light">
-          <td class="form_label">叶子节点：</td>
-          <td class="form_content">&nbsp;
-                                  <c:choose><c:when test="${bean.isLeaf}">是</c:when><c:otherwise>否</c:otherwise></c:choose>
-                                </td>
-        </tr>
-                                <tr class="tr_dark">
-          <td class="form_label">树节点：</td>
-          <td class="form_content">&nbsp;
-                      ${bean.treeId}                    </td>
-        </tr>
-                        <tr class="tr_light">
-          <td class="form_label">创建时间：</td>
-          <td class="form_content">&nbsp;
-                      <fmt:formatDate value="${bean.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
-            
-                    </td>
-        </tr>
-                                <tr class="tr_dark">
-          <td class="form_label">创建用户名：</td>
-          <td class="form_content">&nbsp;
-                      ${bean.createUser}                    </td>
-        </tr>
-                        <tr class="tr_light">
-          <td class="form_label">更新时间：</td>
-          <td class="form_content">&nbsp;
-                      <fmt:formatDate value="${bean.updateTime}" pattern="yyyy-MM-dd HH:mm:ss"/>
-            
-                    </td>
-        </tr>
-                                <tr class="tr_dark">
-          <td class="form_label">更新用户名：</td>
-          <td class="form_content">&nbsp;
-                      ${bean.updateUser}                    </td>
-        </tr>
-                <tr class="tr_button">
-            <td class="form_label"></td>
+        <tr class="tr_dark">
+            <td class="form_label">材料类型：</td>
             <td class="form_content">
+                <c:if test="${bean.type == 'apply'}">申请材料</c:if>
+                <c:if test="${bean.type == 'submit'}">提交材料</c:if>
+            </td>
+        </tr>
+        <tr class="tr_light">
+            <td class="form_label">序号：</td>
+            <td class="form_content">${bean.no}</td>
+        </tr>
+        <tr class="tr_dark">
+            <td class="form_label">材料名称：</td>
+            <td class="form_content">
+                <sys:toHtml>${bean.materialName}</sys:toHtml>
+            </td>
+        </tr>
+        <c:if test="${bean.type == 'apply'}">
+            <tr class="tr_light" id="tr_num">
+                <td class="form_label">应交份数：</td>
+                <td class="form_content">${bean.yjNum}</td>
+            </tr>
+        </c:if>
+        <c:if test="${bean.type == 'submit'}">
+            <tr class="tr_light" id="tr1">
+                <td class="form_label">审核要求：</td>
+                <td class="form_content">
+                    <sys:toHtml>${bean.auditReq}</sys:toHtml>
+                </td>
+            </tr>
+        </c:if>
+        <tr class="tr_button">
+            <td class="form_content" colspan="2" style="text-align: center;">
                 <input type="button" value="关闭" class="button_cancel" onclick="closeWindow()">
             </td>
         </tr>

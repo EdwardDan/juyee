@@ -72,6 +72,17 @@
         </property>
 
         <property
+                name="yjNum"
+                column="YJ_NUM"
+                type="java.lang.Long"
+                not-null="false"
+                length="10"
+                >
+            <meta attribute="ColumnName">应交份数</meta>
+            <meta attribute="ColumnComment">应交份数</meta>
+        </property>
+
+        <property
                 name="isLeaf"
                 column="IS_LEAF"
                 type="java.lang.Boolean"

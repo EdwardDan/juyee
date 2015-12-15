@@ -88,6 +88,14 @@ public abstract class BaseSgMaterial  implements  Serializable, Auditable {
     /*更新用户名*/
     /*更新用户名*/
 	private String updateUser;
+
+	/*应交份数*/
+	/*应交份数*/
+	private Long yjNum;
+
+	/*实交份数*/
+    /*实交份数*/
+	private Long sjNum;
 	
 
 	// many to one
@@ -231,6 +239,22 @@ public abstract class BaseSgMaterial  implements  Serializable, Auditable {
 	}
 
 
+	public Long getYjNum() {
+		return yjNum;
+	}
+
+	public void setYjNum(Long yjNum) {
+		this.yjNum = yjNum;
+	}
+
+	public Long getSjNum() {
+		return sjNum;
+	}
+
+	public void setSjNum(Long sjNum) {
+		this.sjNum = sjNum;
+	}
+
 	/**
 	 * Return the value associated with the column: DOC_ID
 	 */
@@ -296,6 +320,8 @@ public abstract class BaseSgMaterial  implements  Serializable, Auditable {
 		builder.append(createUser);
 		builder.append(updateTime);
 		builder.append(updateUser);
+		builder.append(sjNum);
+		builder.append(yjNum);
 		return builder.toString();
 	}
 
