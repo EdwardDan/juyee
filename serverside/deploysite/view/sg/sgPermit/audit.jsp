@@ -90,14 +90,14 @@
                 <td class="form_label_right">手机号：</td>
                 <td class="form_content">${bean.buildUnitMobile}</td>
             </tr>
-            <tr class="tr_light">
-                <td class="form_label_right">建设用地批准文件编号：</td>
-                <td class="form_content" colspan="3">${bean.buildFileCode}</td>
-            </tr>
-            <tr class="tr_dark">
-                <td class="form_label_right">建设工程规划许可证编号：</td>
-                <td class="form_content" colspan="3">${bean.buildXkzCode}</td>
-            </tr>
+            <%--<tr class="tr_light">--%>
+                <%--<td class="form_label_right">建设用地批准文件编号：</td>--%>
+                <%--<td class="form_content" colspan="3">${bean.buildFileCode}</td>--%>
+            <%--</tr>--%>
+            <%--<tr class="tr_dark">--%>
+                <%--<td class="form_label_right">建设工程规划许可证编号：</td>--%>
+                <%--<td class="form_content" colspan="3">${bean.buildXkzCode}</td>--%>
+            <%--</tr>--%>
             <tr class="tr_light">
                 <td class="form_label_right">现场开工情况：</td>
                 <td class="form_content" colspan="3">${bean.startWorkCon}</td>
