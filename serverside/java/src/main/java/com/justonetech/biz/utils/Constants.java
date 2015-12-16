@@ -202,5 +202,19 @@ public class Constants {
     //施工许可
     public static final String SGDWGCLX = "SGDWGCLX";
     public static final String SGDWLX = "SGDWLX";
+    public static final String JSGCLB = "JSGCLB";//建设工程类别
+    public static final String JSGCLB_TJ = "tj";//建设工程类别_土建
+    public static final String JSGCLB_FJ = "fj";//建设工程类别_房建
+    public static final String JSGCLB_JD = "jd";//建设工程类别_机电
+    public static final String JSGCLB_SB = "sb";//建设工程类别_设备
+    public static final String JSGCLB_LH = "lh";//建设工程类别_绿化
+    public static final String JSGCLB_JPS = "jps";//建设工程类别_给排水
+    public static final String JSGCLB_JTGC = "jtgc";//建设工程类别_交通工程
+    public static final String JSGCLB_GPD = "gpd";//建设工程类别_供配电
+    public static final String JSGCSX = "JSGCSX";//建设工程属性
+    public static final String JSGCSX_XJ = "xj";//建设工程属性_新建
+    public static final String JSGCSX_GJ = "gj";//建设工程属性_改建
+    public static final String JSGCSX_KJ = "kj";//建设工程属性_扩建
+    public static final String JSGCSX_DX = "dx";//建设工程属性_大修
 
 }
