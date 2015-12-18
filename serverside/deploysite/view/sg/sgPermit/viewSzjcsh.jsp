@@ -350,7 +350,7 @@
             </tr>
             <tr class="tr_light">
                 <td class="form_label_right">委领导审核意见：</td>
-                <td class="form_content" colspan="3">>
+                <td class="form_content" colspan="3">
                     <sys:toHtml>${bean.wldOpinion}</sys:toHtml>
                 </td>
             </tr>

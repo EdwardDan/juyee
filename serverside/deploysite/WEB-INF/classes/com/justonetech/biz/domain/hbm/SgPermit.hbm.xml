@@ -118,9 +118,9 @@
         <property
                 name="contractPrice"
                 column="CONTRACT_PRICE"
-                type="integer"
+                type="java.lang.Double"
                 not-null="false"
-                length="6"
+                length="10"
                 >
             <meta attribute="ColumnName">合同价格</meta>
             <meta attribute="ColumnComment">合同价格</meta>
@@ -598,6 +598,77 @@
             <meta attribute="ColumnName">退回编号</meta>
             <meta attribute="ColumnComment">退回编号</meta>
         </property>
+
+        <property
+                name="acceptCode"
+                column="ACCEPT_CODE"
+                type="string"
+                not-null="false"
+                length="50"
+                >
+            <meta attribute="ColumnName">受理编号</meta>
+            <meta attribute="ColumnComment">受理编号</meta>
+        </property>
+
+        <property
+                name="contractBeginDate"
+                column="CONTRACT_BEGIN_DATE"
+                type="date"
+                not-null="false"
+                length="7"
+                >
+            <meta attribute="ColumnName">合同开工日期</meta>
+            <meta attribute="ColumnComment">合同开工日期</meta>
+        </property>
+
+        <property
+                name="contractEndDate"
+                column="CONTRACT_END_DATE"
+                type="date"
+                not-null="false"
+                length="7"
+                >
+            <meta attribute="ColumnName">合同竣工日期</meta>
+            <meta attribute="ColumnComment">合同竣工日期</meta>
+        </property>
+
+        <property
+                name="zbPrice"
+                column="ZB_PRICE"
+                type="java.lang.Double"
+                not-null="false"
+                length="10"
+                >
+            <meta attribute="ColumnName">中标价（万元）</meta>
+            <meta attribute="ColumnComment">中标价（万元）</meta>
+        </property>
+
+        <property
+                name="buildLbIds"
+                column="BUILD_LB_IDS"
+                type="string"
+                not-null="false"
+                length="200"
+                >
+            <meta attribute="ColumnName">建设工程类别ids</meta>
+            <meta attribute="ColumnComment">建设工程类别ids</meta>
+        </property>
+
+        <many-to-one
+                name="buildLb"
+                column="BUILD_LB_ID"
+                class="com.justonetech.system.domain.SysCodeDetail"
+                not-null="false"
+                >
+        </many-to-one>
+
+        <many-to-one
+                name="buildSx"
+                column="BUILD_SX_ID"
+                class="com.justonetech.system.domain.SysCodeDetail"
+                not-null="false"
+                >
+        </many-to-one>
 
 		<many-to-one
 			name="projectType"

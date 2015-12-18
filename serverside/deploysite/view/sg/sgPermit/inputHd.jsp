@@ -31,10 +31,12 @@
     });
 
     //保存操作
-    function save(buttonName, status, tab) {
+    function save(btn, buttonName, status, tab) {
         if (!validateForm(formId)) {
             return;
         }
+        //提交表单
+        disableBtn(btn);
         butType = tab;
         if ("" != buttonName) {
             $("#status").val(status);
@@ -121,7 +123,8 @@
                 <td class="form_label_right">建设工程类别：</td>
                 <td class="form_content" colspan="3">
                     <c:forEach items="${lbs}" var="item">
-                        <input type="checkbox" name="buildLb" value="${item.id}">${item.name}&nbsp;
+                        <input type="checkbox" name="buildLbId" value="${item.id}"
+                               <c:if test="${fn:contains(bean.buildLbIds, item.id)}">checked</c:if>>${item.name}&nbsp;
                     </c:forEach>
                 </td>
             </tr>
@@ -129,7 +132,8 @@
                 <td class="form_label_right">建设工程属性：</td>
                 <td class="form_content" colspan="3">
                     <c:forEach items="${sxs}" var="item">
-                        <input type="checkbox" name="buildSx" value="${item.id}">${item.name}&nbsp;
+                        <input type="radio" name="buildSx" value="${item.id}"
+                               <c:if test="${bean.buildSx.id == item.id}">checked</c:if>>${item.name}&nbsp;
                     </c:forEach>
                 </td>
             </tr>
@@ -188,18 +192,18 @@
                     <form:input path="buildUnitMobile" cssClass="input_text" cssStyle="width: 90%;"/>
                 </td>
             </tr>
-            <%--<tr class="tr_light">--%>
+                <%--<tr class="tr_light">--%>
                 <%--<td class="form_label_right">建设用地批准文件编号：</td>--%>
                 <%--<td class="form_content" colspan="3">--%>
-                    <%--<form:input path="buildFileCode" cssClass="input_text" cssStyle="width: 96%;"/>--%>
+                <%--<form:input path="buildFileCode" cssClass="input_text" cssStyle="width: 96%;"/>--%>
                 <%--</td>--%>
-            <%--</tr>--%>
-            <%--<tr class="tr_dark">--%>
+                <%--</tr>--%>
+                <%--<tr class="tr_dark">--%>
                 <%--<td class="form_label_right">建设工程规划许可证编号：</td>--%>
                 <%--<td class="form_content" colspan="3">--%>
-                    <%--<form:input path="buildXkzCode" cssClass="input_text" cssStyle="width: 96%;"/>--%>
+                <%--<form:input path="buildXkzCode" cssClass="input_text" cssStyle="width: 96%;"/>--%>
                 <%--</td>--%>
-            <%--</tr>--%>
+                <%--</tr>--%>
             <tr class="tr_light">
                 <td class="form_label_right">现场开工情况：</td>
                 <td class="form_content" colspan="3">
@@ -262,7 +266,8 @@
                                     <%--</td>--%>
                                 <td style="text-align: center;">
                                     <c:if test="${map.yjNum != 0}">${map.yjNum}</c:if>
-                                    <input type="hidden" name="yjNum${map.no}" value="<c:if test="${map.yjNum != 0}">${map.yjNum}</c:if>">
+                                    <input type="hidden" name="yjNum${map.no}"
+                                           value="<c:if test="${map.yjNum != 0}">${map.yjNum}</c:if>">
                                 </td>
                                 <td style="text-align: center;">
                                     <input type="text" name="sjNum${map.no}" class="input_number" value="${map.sjNum}"
@@ -308,8 +313,9 @@
             <tr class="tr_button" style="text-align: center;">
                 <td class="form_content" colspan="4" style="text-align: center;">
                     <input type="button" value="提交" class="button_confirm"
-                           onclick="save(this.value,'${STATUS_SUBMIT}','${tab}')">&nbsp;
-                    <input type="button" value="保存" class="button_confirm" onclick="save('','${STATUS_EDIT}','${tab}')">&nbsp;
+                           onclick="save(this,this.value,'${STATUS_SUBMIT}','${tab}')">&nbsp;
+                    <input type="button" value="保存" class="button_confirm"
+                           onclick="save(this,'','${STATUS_EDIT}','${tab}')">&nbsp;
                     <input type="button" value="取消" class="button_cancel" onclick="parent.closeWindow()">
                 </td>
             </tr>
