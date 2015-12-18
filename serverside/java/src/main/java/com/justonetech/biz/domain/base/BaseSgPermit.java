@@ -1,6 +1,7 @@
 package com.justonetech.biz.domain.base;
 
 import com.justonetech.core.entity.Auditable;
+import com.justonetech.system.domain.SysCodeDetail;
 
 import java.io.Serializable;
 import java.sql.Date;
@@ -138,7 +139,7 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
 
     /*合同价格*/
     /*合同价格*/
-    private java.lang.Integer contractPrice;
+    private java.lang.Double contractPrice;
 
     /*合同工期*/
     /*合同工期*/
@@ -312,9 +313,30 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
     /*退回编号*/
     private Integer backNum;
 
+    /*受理编号*/
+    /*受理编号*/
+    private String acceptCode;
+
+    /*合同开工日期*/
+    /*合同开工日期*/
+    private Date contractBeginDate;
+
+    /*合同竣工日期*/
+    /*合同竣工日期*/
+    private Date contractEndDate;
+
+    /*中标价（万元）*/
+    /*中标价（万元）*/
+    private java.lang.Double zbPrice;
+
+    /*建设工程类别ids*/
+    /*建设工程类别ids*/
+    private String buildLbIds;
 
     // many to one
     private com.justonetech.system.domain.SysCodeDetail projectType;
+    private com.justonetech.system.domain.SysCodeDetail buildLb;
+    private com.justonetech.system.domain.SysCodeDetail buildSx;
 
     // collections
     private java.util.Set<com.justonetech.biz.domain.SgPermitOperation> sgPermitOperations;
@@ -480,7 +502,7 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
     /**
      * Return the value associated with the column: CONTRACT_PRICE
      */
-    public java.lang.Integer getContractPrice () {
+    public java.lang.Double getContractPrice () {
         return contractPrice;
     }
 
@@ -488,7 +510,7 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
      * Set the value related to the column: CONTRACT_PRICE
      * @param contractPrice the CONTRACT_PRICE value
      */
-    public void setContractPrice (java.lang.Integer contractPrice) {
+    public void setContractPrice (java.lang.Double contractPrice) {
         this.contractPrice = contractPrice;
     }
 
@@ -1016,6 +1038,62 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
         this.backNum = backNum;
     }
 
+    public String getAcceptCode() {
+        return acceptCode;
+    }
+
+    public void setAcceptCode(String acceptCode) {
+        this.acceptCode = acceptCode;
+    }
+
+    public Date getContractBeginDate() {
+        return contractBeginDate;
+    }
+
+    public void setContractBeginDate(Date contractBeginDate) {
+        this.contractBeginDate = contractBeginDate;
+    }
+
+    public Date getContractEndDate() {
+        return contractEndDate;
+    }
+
+    public void setContractEndDate(Date contractEndDate) {
+        this.contractEndDate = contractEndDate;
+    }
+
+    public Double getZbPrice() {
+        return zbPrice;
+    }
+
+    public void setZbPrice(Double zbPrice) {
+        this.zbPrice = zbPrice;
+    }
+
+    public String getBuildLbIds() {
+        return buildLbIds;
+    }
+
+    public void setBuildLbIds(String buildLbIds) {
+        this.buildLbIds = buildLbIds;
+    }
+
+    public SysCodeDetail getBuildLb() {
+        return buildLb;
+    }
+
+    public void setBuildLb(SysCodeDetail buildLb) {
+        this.buildLb = buildLb;
+    }
+
+    public SysCodeDetail getBuildSx() {
+        return buildSx;
+    }
+
+    public void setBuildSx(SysCodeDetail buildSx) {
+        this.buildSx = buildSx;
+    }
+
     /**
      * Return the value associated with the column: PROJECT_TYPE_ID
      */
@@ -1235,6 +1313,11 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
         builder.append(updateUser);
         builder.append(submitDate);
         builder.append(backNum);
+        builder.append(acceptCode);
+        builder.append(contractBeginDate);
+        builder.append(contractEndDate);
+        builder.append(zbPrice);
+        builder.append(buildLbIds);
         return builder.toString();
     }
 

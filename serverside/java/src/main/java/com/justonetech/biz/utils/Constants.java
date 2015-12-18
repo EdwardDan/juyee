@@ -189,6 +189,7 @@ public class Constants {
     public static final String PROJECT_TYPE_GKSH = "gksh";
     public static final String PROJECT_TYPE_GL = "gl";
     public static final String PROJECT_TYPE_HD = "hd";
+    public static final String PROJECT_TYPE_SZJCSH = "szjcsh";
 
     //三类人员
     public static final String SEX = "sex";
@@ -200,8 +201,9 @@ public class Constants {
     public static final String CARDTYPE = "cardType";
 
     //施工许可
-    public static final String SGDWGCLX = "SGDWGCLX";
-    public static final String SGDWLX = "SGDWLX";
+    public static final String SGDWGCLX = "SGDWGCLX";//施工单位类型
+    public static final String SGDWLX = "SGDWLX";//施工单位工程类型
+
     public static final String JSGCLB = "JSGCLB";//建设工程类别
     public static final String JSGCLB_TJ = "tj";//建设工程类别_土建
     public static final String JSGCLB_FJ = "fj";//建设工程类别_房建

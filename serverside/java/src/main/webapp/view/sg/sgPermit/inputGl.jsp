@@ -121,7 +121,7 @@
                 <td class="form_label_right">建设工程类别：</td>
                 <td class="form_content" colspan="3">
                     <c:forEach items="${lbs}" var="item">
-                        <input type="checkbox" name="buildLb" value="${item.id}">${item.name}&nbsp;
+                        <input type="checkbox" name="buildLbId" value="${item.id}">${item.name}&nbsp;
                     </c:forEach>
                 </td>
             </tr>
@@ -129,7 +129,7 @@
                 <td class="form_label_right">建设工程属性：</td>
                 <td class="form_content" colspan="3">
                     <c:forEach items="${sxs}" var="item">
-                        <input type="checkbox" name="buildSx" value="${item.id}">${item.name}&nbsp;
+                        <input type="radio" name="buildSx" value="${item.id}">${item.name}&nbsp;
                     </c:forEach>
                 </td>
             </tr>
@@ -188,18 +188,18 @@
                     <form:input path="buildUnitMobile" cssClass="input_text" cssStyle="width: 90%;"/>
                 </td>
             </tr>
-            <%--<tr class="tr_light">--%>
+                <%--<tr class="tr_light">--%>
                 <%--<td class="form_label_right">建设用地批准文件编号：</td>--%>
                 <%--<td class="form_content" colspan="3">--%>
-                    <%--<form:input path="buildFileCode" cssClass="input_text" cssStyle="width: 96%;"/>--%>
+                <%--<form:input path="buildFileCode" cssClass="input_text" cssStyle="width: 96%;"/>--%>
                 <%--</td>--%>
-            <%--</tr>--%>
-            <%--<tr class="tr_dark">--%>
+                <%--</tr>--%>
+                <%--<tr class="tr_dark">--%>
                 <%--<td class="form_label_right">建设工程规划许可证编号：</td>--%>
                 <%--<td class="form_content" colspan="3">--%>
-                    <%--<form:input path="buildXkzCode" cssClass="input_text" cssStyle="width: 96%;"/>--%>
+                <%--<form:input path="buildXkzCode" cssClass="input_text" cssStyle="width: 96%;"/>--%>
                 <%--</td>--%>
-            <%--</tr>--%>
+                <%--</tr>--%>
             <tr class="tr_light">
                 <td class="form_label_right">现场开工情况：</td>
                 <td class="form_content" colspan="3">

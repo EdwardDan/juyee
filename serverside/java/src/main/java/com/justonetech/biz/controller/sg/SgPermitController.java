@@ -170,29 +170,29 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
         return "view/sg/sgPermit/frame";
     }
 
-    /**
-     * 新增录入页面
-     *
-     * @param model .
-     * @return .
-     */
-    @RequestMapping
-    public String add(Model model, String projectTypeId) {
-        SgPermit sgPermit = new SgPermit();
-        if (!StringHelper.isEmpty(projectTypeId)) {
-            SysCodeDetail projectType = sysCodeManager.getCodeListById(Long.valueOf(projectTypeId));
-            sgPermit.setProjectType(projectType);
-        }
-        Calendar calendar = Calendar.getInstance();
-        sgPermit.setYear(calendar.get(Calendar.YEAR));
-        sgPermit.setStatus(SgPermitStatus.STATUS_EDIT.getCode());
-        model.addAttribute("bean", sgPermit);
-        List<Map<String, Object>> applyList = getMaterials(sgPermit, "edit", "apply");//处理申请材料数据
-        model.addAttribute("applyList", applyList);
-        doPrivilegeCodeAndStatus(model);//编码和状态
-
-        return "view/sg/sgPermit/input";
-    }
+//    /**
+//     * 新增录入页面
+//     *
+//     * @param model .
+//     * @return .
+//     */
+//    @RequestMapping
+//    public String add(Model model, String projectTypeId) {
+//        SgPermit sgPermit = new SgPermit();
+//        if (!StringHelper.isEmpty(projectTypeId)) {
+//            SysCodeDetail projectType = sysCodeManager.getCodeListById(Long.valueOf(projectTypeId));
+//            sgPermit.setProjectType(projectType);
+//        }
+//        Calendar calendar = Calendar.getInstance();
+//        sgPermit.setYear(calendar.get(Calendar.YEAR));
+//        sgPermit.setStatus(SgPermitStatus.STATUS_EDIT.getCode());
+//        model.addAttribute("bean", sgPermit);
+//        List<Map<String, Object>> applyList = getMaterials(sgPermit, "edit", "apply");//处理申请材料数据
+//        model.addAttribute("applyList", applyList);
+//        doPrivilegeCodeAndStatus(model);//编码和状态
+//
+//        return "view/sg/sgPermit/input";
+//    }
 
     /**
      * 修改显示页面
@@ -205,8 +205,9 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
     public String modify(Model model, String id, String projectTypeId, String tab) {
         model.addAttribute("tab", tab);
         SgPermit sgPermit = new SgPermit();
+        SysCodeDetail projectType = null;
         if (!StringHelper.isEmpty(projectTypeId)) {
-            SysCodeDetail projectType = sysCodeManager.getCodeListById(Long.valueOf(projectTypeId));
+            projectType = sysCodeManager.getCodeListById(Long.valueOf(projectTypeId));
             sgPermit.setProjectType(projectType);
         }
         if (!StringHelper.isEmpty(id)) {
@@ -221,7 +222,7 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
         model.addAttribute("applyList", applyList);
         doPrivilegeCodeAndStatus(model);//编码和状态
 
-        return "view/sg/sgPermit/input";
+        return backPageInput(projectType);
     }
 
     /**
@@ -241,7 +242,7 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
         model.addAttribute("submitList", submitList);
         doPrivilegeCodeAndStatus(model);//编码和状态
 
-        return "view/sg/sgPermit/audit";
+        return backPageAudit(sgPermit.getProjectType());
     }
 
     /**
@@ -261,7 +262,7 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
         model.addAttribute("submitList", submitList);
         doPrivilegeCodeAndStatus(model);
 
-        return "view/sg/sgPermit/view";
+        return backPageView(sgPermit.getProjectType());
     }
 
     /**
@@ -385,7 +386,10 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
                         "materialPersonAddress",
                         "receivePerson",
                         "receivePersonPhone",
-                        "status"
+                        "status",
+                        "zbPrice",
+                        "contractBeginDate",
+                        "contractEndDate"
                 });
             } else {
                 target = entity;
@@ -393,6 +397,22 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
             Integer status = target.getStatus();
             if (status == SgPermitStatus.STATUS_SUBMIT.getCode()) {
                 target.setSubmitDate(new Date(System.currentTimeMillis()));
+            }
+            String buildLbIds = "";
+            String[] buildLbs = request.getParameterValues("buildLbId");
+            if (null != buildLbs && buildLbs.length > 0) {
+                for (String lb : buildLbs) {
+                    buildLbIds += "," + lb;
+                }
+            }
+            if (!StringHelper.isEmpty(buildLbIds)) {
+                buildLbIds = buildLbIds.substring(1);
+                target.setBuildLbIds(buildLbIds);
+            }
+            String buildSx = request.getParameter("buildSx");
+            if (!StringHelper.isEmpty(buildSx)) {
+                SysCodeDetail sx = sysCodeManager.getCodeListById(Long.valueOf(buildSx));
+                target.setBuildSx(sx);
             }
             sgPermitService.save(target);
             //保存信息之前先删除材料申请信息
@@ -527,19 +547,20 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
             List<SgAuditOpinion> list = sgAuditOpinionService.findByProperty("sgPermit.id", target.getId());
             if (null != list && list.size() > 0) {
                 for (SgAuditOpinion opinion : list) {
+                    Long no = opinion.getNo()-1;
                     if (status == SgPermitStatus.STATUS_FH_PASS.getCode()) {
-                        String fhOpnion = request.getParameter("fhOpnion" + opinion.getNo());
-                        if (!StringHelper.isEmpty(fhOpnion) && Constants.FLAG_TRUE.equals(fhOpnion)) {
+                        String fhOpinion = request.getParameter("isFhOpinion" + no);
+                        if (!StringHelper.isEmpty(fhOpinion) && Constants.FLAG_TRUE.equals(fhOpinion)) {
                             opinion.setIsFhOpinion(true);
-                        } else if (!StringHelper.isEmpty(fhOpnion) && Constants.FLAG_FALSE.equals(fhOpnion)) {
+                        } else if (!StringHelper.isEmpty(fhOpinion) && Constants.FLAG_FALSE.equals(fhOpinion)) {
                             opinion.setIsFhOpinion(false);
                         }
                     }
                     if (status == SgPermitStatus.STATUS_SH_PASS.getCode()) {
-                        String shOpnion = request.getParameter("shOpnion" + opinion.getNo());
-                        if (!StringHelper.isEmpty(shOpnion) && Constants.FLAG_TRUE.equals(shOpnion)) {
+                        String shOpinion = request.getParameter("isShOpinion" + no);
+                        if (!StringHelper.isEmpty(shOpinion) && Constants.FLAG_TRUE.equals(shOpinion)) {
                             opinion.setIsShOpinion(true);
-                        } else if (!StringHelper.isEmpty(shOpnion) && Constants.FLAG_FALSE.equals(shOpnion)) {
+                        } else if (!StringHelper.isEmpty(shOpinion) && Constants.FLAG_FALSE.equals(shOpinion)) {
                             opinion.setIsShOpinion(false);
                         }
                     }
@@ -553,10 +574,10 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
                         opinion.setSgPermit(target);
                         opinion.setNo(Long.valueOf(no));
                         opinion.setStatus(status);
-                        String csOpnion = request.getParameter("csOpnion" + no);
-                        if (!StringHelper.isEmpty(csOpnion) && Constants.FLAG_TRUE.equals(csOpnion)) {
+                        String csOpinion = request.getParameter("isCsOpinion" + no);
+                        if (!StringHelper.isEmpty(csOpinion) && Constants.FLAG_TRUE.equals(csOpinion)) {
                             opinion.setIsCsOpinion(true);
-                        } else if (!StringHelper.isEmpty(csOpnion) && Constants.FLAG_FALSE.equals(csOpnion)) {
+                        } else if (!StringHelper.isEmpty(csOpinion) && Constants.FLAG_FALSE.equals(csOpinion)) {
                             opinion.setIsCsOpinion(false);
                         }
                         saveList.add(opinion);
@@ -674,6 +695,11 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
         }
         model.addAttribute("matList", matList);
 
+        List<SysCodeDetail> lbs = sysCodeManager.getCodeListByCode(Constants.JSGCLB);
+        List<SysCodeDetail> sxs = sysCodeManager.getCodeListByCode(Constants.JSGCSX);
+        model.addAttribute("lbs", lbs);
+        model.addAttribute("sxs", sxs);
+
     }
 
     /**
@@ -707,9 +733,9 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
                     Map<String, Object> map = new HashMap<String, Object>();
                     map.put("no", material.getNo());
                     map.put("materialName", materialInfos[JspHelper.getInteger(material.getNo()) - 1]);
-                    map.put("isFull", material.getIsFull());
-                    map.put("num", material.getNum());
-                    map.put("yjNum", yjNums[JspHelper.getInteger(material.getNo()) - 1]);
+//                    map.put("isFull", material.getIsFull());
+//                    map.put("num", material.getNum());
+                    map.put("yjNum", JspHelper.getLong(yjNums[JspHelper.getInteger(material.getNo()) - 1].trim()));
                     map.put("sjNum", material.getSjNum());
                     if ("view".equals(flag)) {
                         map.put("upLoad" + material.getNo(), documentManager.getDownloadButton(material.getDoc()));
@@ -723,8 +749,8 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
                     Map<String, Object> map = new HashMap<String, Object>();
                     map.put("no", i);
                     map.put("materialName", materialInfos[i - 1]);
-                    map.put("isFull", "");
-                    map.put("num", "");
+//                    map.put("isFull", "");
+//                    map.put("num", "");
                     map.put("yjNum", JspHelper.getLong(yjNums[i - 1].trim()));
                     map.put("sjNum", "");
                     map.put("upLoad" + i, documentManager.getUploadButtonForMulti(documentManager.getDefaultXmlConfig(), SgMaterial.class.getSimpleName(), null, null, null, String.valueOf(i)));
@@ -873,5 +899,84 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
                 oaTaskManager.createTask(simpleName + "_back", data.getId(), title, managers, false, null, null);
             }
         }
+    }
+
+    /**
+     * 返回input页面
+     *
+     * @param projectType 。
+     * @return 。
+     */
+    private String backPageInput(SysCodeDetail projectType) {
+        String page = "view/sg/sgPermit/input";
+        SysCodeDetail gksh = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_GKSH);//港口设施
+        SysCodeDetail hd = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_HD);//航道
+        SysCodeDetail gl = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_GL);//公路
+        SysCodeDetail szjcsh = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_SZJCSH);//市政基础设施
+        if (projectType == gksh) {
+            page = "view/sg/sgPermit/inputGksh";
+        } else if (projectType == hd) {
+            page = "view/sg/sgPermit/inputHd";
+        } else if (projectType == gl) {
+            page = "view/sg/sgPermit/inputGl";
+        } else if (projectType == szjcsh) {
+            page = "view/sg/sgPermit/inputSzjcsh";
+        }
+
+        return page;
+    }
+
+    /**
+     * 返回audit页面
+     *
+     * @param projectType 。
+     * @return 。
+     */
+    private String backPageAudit(SysCodeDetail projectType) {
+        String page = "view/sg/sgPermit/audit";
+        SysCodeDetail gksh = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_GKSH);//港口设施
+        SysCodeDetail hd = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_HD);//航道
+        SysCodeDetail gl = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_GL);//公路
+        SysCodeDetail szjcsh = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_SZJCSH);//市政基础设施
+        if (null != projectType) {
+            if (projectType == gksh) {
+                page = "view/sg/sgPermit/auditGksh";
+            } else if (projectType == hd) {
+                page = "view/sg/sgPermit/auditHd";
+            } else if (projectType == gl) {
+                page = "view/sg/sgPermit/auditGl";
+            } else if (projectType == szjcsh) {
+                page = "view/sg/sgPermit/auditSzjcsh";
+            }
+        }
+
+        return page;
+    }
+
+    /**
+     * 返回view页面
+     *
+     * @param projectType 。
+     * @return 。
+     */
+    private String backPageView(SysCodeDetail projectType) {
+        String page = "view/sg/sgPermit/view";
+        SysCodeDetail gksh = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_GKSH);//港口设施
+        SysCodeDetail hd = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_HD);//航道
+        SysCodeDetail gl = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_GL);//公路
+        SysCodeDetail szjcsh = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_SZJCSH);//市政基础设施
+        if (null != projectType) {
+            if (projectType == gksh) {
+                page = "view/sg/sgPermit/viewGksh";
+            } else if (projectType == hd) {
+                page = "view/sg/sgPermit/viewHd";
+            } else if (projectType == gl) {
+                page = "view/sg/sgPermit/viewGl";
+            } else if (projectType == szjcsh) {
+                page = "view/sg/sgPermit/viewSzjcsh";
+            }
+        }
+
+        return page;
     }
 }
