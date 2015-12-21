@@ -74,7 +74,7 @@
         <property
                 name="yjNum"
                 column="YJ_NUM"
-                type="java.lang.Integer"
+                type="integer"
                 not-null="false"
                 length="4"
                 >
