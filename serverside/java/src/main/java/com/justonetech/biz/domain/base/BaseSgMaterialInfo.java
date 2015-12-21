@@ -83,7 +83,7 @@ public abstract class BaseSgMaterialInfo  implements Serializable, Treeable, Aud
 
 	/*应交份数*/
     /*应交份数*/
-	private Long yjNum;
+	private Integer yjNum;
 
     /*叶子节点*/
     /*叶子节点*/
@@ -202,11 +202,11 @@ public abstract class BaseSgMaterialInfo  implements Serializable, Treeable, Aud
 		this.auditReq = auditReq;
 	}
 
-	public Long getYjNum() {
+	public Integer getYjNum() {
 		return yjNum;
 	}
 
-	public void setYjNum(Long yjNum) {
+	public void setYjNum(Integer yjNum) {
 		this.yjNum = yjNum;
 	}
 
