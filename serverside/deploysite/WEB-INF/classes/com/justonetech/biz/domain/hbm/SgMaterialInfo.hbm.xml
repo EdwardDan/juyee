@@ -74,9 +74,9 @@
         <property
                 name="yjNum"
                 column="YJ_NUM"
-                type="java.lang.Long"
+                type="java.lang.Integer"
                 not-null="false"
-                length="10"
+                length="4"
                 >
             <meta attribute="ColumnName">应交份数</meta>
             <meta attribute="ColumnComment">应交份数</meta>
