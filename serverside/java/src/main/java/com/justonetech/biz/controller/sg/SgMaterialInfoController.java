@@ -236,7 +236,7 @@ public class SgMaterialInfoController extends BaseCRUDActionController<SgMateria
                         "type",
                         "materialName",
                         "auditReq",
-                        "parent",
+//                        "parent",
                         "projectType",
                         "yjNum"
                 });
