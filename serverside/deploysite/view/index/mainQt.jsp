@@ -23,7 +23,11 @@
     <tr>
         <td align="left" class="righttbhead">
             <a href="javascript:void(0)">表格下载</a>
-            <%--<a href="javascript:void(0)" onclick="loadMainPage('${ctx}/oaPublicInfo/grid.do','表格下载');">表格下载</a>--%>
+        </td>
+    </tr>
+    <tr>
+        <td align="left" class="righttbhead">
+            <a href="http://192.168.3.3/spacparty/home.aspx" target="_blank">党务公开</a>
         </td>
     </tr>
 </table>
