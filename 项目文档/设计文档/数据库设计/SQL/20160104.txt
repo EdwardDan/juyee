@@ -1,0 +1,62 @@
+drop table PROJ_EXTEND_QUESTION cascade constraints;
+
+/*==============================================================*/
+/* Table: PROJ_EXTEND_QUESTION                                  */
+/*==============================================================*/
+create table PROJ_EXTEND_QUESTION 
+(
+   ID                   number(10)           not null,
+   PROJ_EXTEND_ID       number(10),
+   YEAR                 number(4),
+   MONTH                number(2),
+   QUESTION             varchar2(2000),
+   DEPT_IDS             varchar2(500),
+   DEPT_NAME            varchar2(500),
+   QD_TYPE              varchar2(50),
+   CREATE_TIME          DATE,
+   CREATE_USER          VARCHAR2(100),
+   UPDATE_TIME          DATE,
+   UPDATE_USER          VARCHAR2(100),
+   constraint PK_PROJ_EXTEND_QUESTION primary key (ID),
+   constraint FK_PROJ_EXT_QUESTION foreign key (PROJ_EXTEND_ID)
+         references PROJ_EXTEND (ID)
+);
+
+comment on table PROJ_EXTEND_QUESTION is
+'项目问题清单';
+
+comment on column PROJ_EXTEND_QUESTION.ID is
+'ID';
+
+comment on column PROJ_EXTEND_QUESTION.PROJ_EXTEND_ID is
+'项目扩展信息ID';
+
+comment on column PROJ_EXTEND_QUESTION.YEAR is
+'年';
+
+comment on column PROJ_EXTEND_QUESTION.MONTH is
+'月';
+
+comment on column PROJ_EXTEND_QUESTION.QUESTION is
+'存在问题';
+
+comment on column PROJ_EXTEND_QUESTION.DEPT_IDS is
+'责任部门IDS';
+
+comment on column PROJ_EXTEND_QUESTION.DEPT_NAME is
+'责任部门名称（冗余）';
+
+comment on column PROJ_EXTEND_QUESTION.QD_TYPE is
+'清单类型';
+
+comment on column PROJ_EXTEND_QUESTION.CREATE_TIME is
+'创建时间';
+
+comment on column PROJ_EXTEND_QUESTION.CREATE_USER is
+'创建用户名';
+
+comment on column PROJ_EXTEND_QUESTION.UPDATE_TIME is
+'更新时间';
+
+comment on column PROJ_EXTEND_QUESTION.UPDATE_USER is
+'更新用户名';
