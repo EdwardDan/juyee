@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+		"-//Hibernate/Hibernate Mapping DTD//EN"
+		"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.justonetech.biz.domain">
+	<class
+			name="ProjExtendQuestion"
+			table="PROJ_EXTEND_QUESTION"
+			>
+
+		<meta attribute="sync-DAO">false</meta>
+		<meta attribute="sync-jsp">true</meta>
+		<meta attribute="sync-boolean">get</meta>
+		<meta attribute="treeable">false</meta>
+		<meta attribute="projectable">false</meta>
+		<meta attribute="tableName">项目问题清单</meta>
+		<meta attribute="tableComment">项目问题清单</meta>
+		<meta attribute="sync-templatePatterns">list\w*</meta>
+		<meta attribute="sub-system">project</meta>
+
+		<id
+				name="id"
+				type="java.lang.Long"
+				column="ID"
+				>
+			<generator class="com.justonetech.core.orm.hibernate.LongIdGenerator"/>
+		</id>
+
+		<property
+				name="year"
+				column="YEAR"
+				type="integer"
+				not-null="false"
+				length="4"
+				>
+			<meta attribute="ColumnName">年</meta>
+			<meta attribute="ColumnComment">年</meta>
+		</property>
+
+		<property
+				name="month"
+				column="MONTH"
+				type="integer"
+				not-null="false"
+				length="2"
+				>
+			<meta attribute="ColumnName">月</meta>
+			<meta attribute="ColumnComment">月</meta>
+		</property>
+
+		<property
+				name="question"
+				column="QUESTION"
+				type="string"
+				not-null="false"
+				>
+			<meta attribute="ColumnName">存在问题</meta>
+			<meta attribute="ColumnComment">存在问题</meta>
+		</property>
+
+		<property
+				name="deptIds"
+				column="DEPT_IDS"
+				type="string"
+				not-null="false"
+				length="500"
+				>
+			<meta attribute="ColumnName">责任部门IDS</meta>
+			<meta attribute="ColumnComment">责任部门IDS</meta>
+		</property>
+
+		<property
+				name="deptName"
+				column="DEPT_NAME"
+				type="string"
+				not-null="false"
+				length="500"
+				>
+			<meta attribute="ColumnName">责任部门名称（冗余）</meta>
+			<meta attribute="ColumnComment">责任部门名称（冗余）</meta>
+		</property>
+
+		<property
+				name="qdType"
+				column="QD_TYPE"
+				type="string"
+				not-null="false"
+				length="50"
+				>
+			<meta attribute="ColumnName">清单类型</meta>
+			<meta attribute="ColumnComment">清单类型</meta>
+		</property>
+
+		<property
+				name="createTime"
+				column="CREATE_TIME"
+				type="timestamp"
+				not-null="false"
+				length="7"
+				>
+			<meta attribute="ColumnName">创建时间</meta>
+			<meta attribute="ColumnComment">创建时间</meta>
+		</property>
+
+		<property
+				name="createUser"
+				column="CREATE_USER"
+				type="string"
+				not-null="false"
+				length="100"
+				>
+			<meta attribute="ColumnName">创建用户名</meta>
+			<meta attribute="ColumnComment">创建用户名</meta>
+		</property>
+
+		<property
+				name="updateTime"
+				column="UPDATE_TIME"
+				type="timestamp"
+				not-null="false"
+				length="7"
+				>
+			<meta attribute="ColumnName">更新时间</meta>
+			<meta attribute="ColumnComment">更新时间</meta>
+		</property>
+
+		<property
+				name="updateUser"
+				column="UPDATE_USER"
+				type="string"
+				not-null="false"
+				length="100"
+				>
+			<meta attribute="ColumnName">更新用户名</meta>
+			<meta attribute="ColumnComment">更新用户名</meta>
+		</property>
+
+		<many-to-one
+				name="projExtend"
+				column="PROJ_EXTEND_ID"
+				class="ProjExtend"
+				not-null="false"
+				>
+		</many-to-one>
+
+	</class>
+	<query name="projextendquestion_all_data_query">
+		<![CDATA[FROM ProjExtendQuestion]]>
+	</query>
+</hibernate-mapping>

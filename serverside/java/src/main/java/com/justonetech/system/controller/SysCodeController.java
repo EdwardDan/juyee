@@ -145,7 +145,8 @@ public class SysCodeController extends BaseCRUDActionController<SysCode> {
                 treeBranch.addTreeNode(treeNode);
             }
         }
-        model.addAttribute("msg", treeBranch.toJsonString(true));
+        String s = treeBranch.toJsonString(false);
+        model.addAttribute("msg", s);
         return "common/msg";
     }
 

@@ -264,7 +264,7 @@ public class SgMaterialInfoController extends BaseCRUDActionController<SgMateria
      */
     @RequestMapping
     public void delete(HttpServletResponse response, Long id) throws Exception {
-        sgMaterialInfoService.get(id);
+        sgMaterialInfoService.delete(id);
 
         sendSuccessJSON(response, "删除成功");
     }

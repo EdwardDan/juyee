@@ -1,8 +1,10 @@
 package com.justonetech.biz.domain.base;
 
+import com.justonetech.biz.domain.ProjExtendQuestion;
 import com.justonetech.core.entity.Auditable;
 
 import java.io.Serializable;
+import java.util.Set;
 
 
 /**
@@ -73,59 +75,59 @@ public abstract class BaseProjExtend  implements Serializable,Auditable {
     /*工可批复总投资（亿元）*/
     /*工可批复总投资（亿元）*/
 	private Double gctxGkpfTotal;
-	
+
     /*初设批复总投资（亿元）*/
     /*初设批复总投资（亿元）*/
 	private Double gctxCspfTotal;
-	
+
     /*资金来源*/
     /*资金来源*/
 	private String gctxSourceFund;
-	
+
     /*项目建议书完成时间*/
     /*项目建议书完成时间*/
 	private java.sql.Date planXmjysTime;
-	
+
     /*工可完成时间*/
     /*工可完成时间*/
 	private java.sql.Date planGkTime;
-	
+
     /*初步设计完成时间*/
     /*初步设计完成时间*/
 	private java.sql.Date planCbsjTime;
-	
+
     /*是否开工*/
     /*是否开工*/
 	private Boolean gcjsIsBigin;
-	
+
     /*开工时间*/
     /*开工时间*/
 	private java.sql.Date gcjsBeginTime;
-	
+
     /*是否完工*/
     /*是否完工*/
 	private Boolean gcjsIsEnd;
-	
+
     /*完工时间*/
     /*完工时间*/
 	private java.sql.Date gcjsEndTime;
-	
+
     /*创建时间*/
     /*创建时间*/
 	private java.sql.Timestamp createTime;
-	
+
     /*创建用户名*/
     /*创建用户名*/
 	private String createUser;
-	
+
     /*更新时间*/
     /*更新时间*/
 	private java.sql.Timestamp updateTime;
-	
+
     /*更新用户名*/
     /*更新用户名*/
 	private String updateUser;
-	
+
 
 	// many to one
 	private com.justonetech.system.domain.SysCodeDetail planGk;
@@ -136,6 +138,7 @@ public abstract class BaseProjExtend  implements Serializable,Auditable {
 	// collections
 	private java.util.Set<com.justonetech.biz.domain.ProjExtendSchedule> projExtendSchedules;
 	private java.util.Set<com.justonetech.biz.domain.ProjExtendCost> projExtendCosts;
+	private java.util.Set<com.justonetech.biz.domain.ProjExtendQuestion> projExtendQuestions;
 
 
 
@@ -474,6 +477,24 @@ public abstract class BaseProjExtend  implements Serializable,Auditable {
 	}
 
 
+	public Set<ProjExtendQuestion> getProjExtendQuestions() {
+		if(projExtendQuestions == null){
+			projExtendQuestions = new java.util.LinkedHashSet<ProjExtendQuestion>();
+		}
+		return projExtendQuestions;
+	}
+
+	public void setProjExtendQuestions(Set<ProjExtendQuestion> projExtendQuestions) {
+		this.projExtendQuestions = projExtendQuestions;
+	}
+
+	public void addToprojExtendQuestions(com.justonetech.biz.domain.ProjExtendQuestion projExtendQuestion) {
+		if (null == getProjExtendQuestions()) setProjExtendQuestions(new java.util.LinkedHashSet<com.justonetech.biz.domain.ProjExtendQuestion>());
+		getProjExtendQuestions().add(projExtendQuestion);
+	}
+
+
+
 	/**
 	 * Return the value associated with the column: projExtendCosts
 	 */
@@ -496,6 +517,7 @@ public abstract class BaseProjExtend  implements Serializable,Auditable {
 		if (null == getProjExtendCosts()) setProjExtendCosts(new java.util.LinkedHashSet<com.justonetech.biz.domain.ProjExtendCost>());
 		getProjExtendCosts().add(projExtendCost);
 	}
+
 
 
 

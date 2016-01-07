@@ -219,4 +219,6 @@ public class Constants {
     public static final String JSGCSX_KJ = "kj";//建设工程属性_扩建
     public static final String JSGCSX_DX = "dx";//建设工程属性_大修
 
+    public static final String DUTY_DEPT = "dutyDept";//责任部门
+
 }
