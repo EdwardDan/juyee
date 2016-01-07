@@ -56,7 +56,6 @@
                     }
                 } else {
                     if (i == 0) {
-                        alert(ssa.cells[0].innerHTML + html1)
                         objCell.innerHTML = ssa.cells[i].innerHTML + html1; //设置第2列
                     } else {
                         objCell.innerHTML = ssa.cells[i].innerHTML;
