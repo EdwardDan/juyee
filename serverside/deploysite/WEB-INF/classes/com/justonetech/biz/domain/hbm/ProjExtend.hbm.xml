@@ -8,7 +8,7 @@
 		name="ProjExtend"
 		table="PROJ_EXTEND"
 	>
-		
+
 		<meta attribute="sync-DAO">false</meta>
 		<meta attribute="sync-jsp">true</meta>
 		<meta attribute="sync-boolean">get</meta>
@@ -209,7 +209,7 @@
 			not-null="false"
 		>
 		</many-to-one>
-	
+
 
 		<set name="projExtendSchedules" inverse="true" order-by="TITLE">
 			<key column="PROJ_EXTEND_ID"/>
@@ -221,7 +221,12 @@
 			<one-to-many class="ProjExtendCost"/>
 		</set>
 
-	</class>	
+		<set name="projExtendQuestions" inverse="true" order-by="year desc,month desc">
+			<key column="PROJ_EXTEND_ID"/>
+			<one-to-many class="ProjExtendQuestion"/>
+		</set>
+
+	</class>
     <query name="projextend_all_data_query">
         <![CDATA[FROM ProjExtend]]>
     </query>

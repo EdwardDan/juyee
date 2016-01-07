@@ -26,7 +26,7 @@
                         }
                         if (treeNode.id != 'root') {
                             menu.push([]);
-                            menu.push(["删除", CONTEXT_NAME + "/sysDept/delete.do?id={id}", true]);
+                            menu.push(["删除", CONTEXT_NAME + "/sgMaterialInfo/delete.do?id={id}", true]);
                             menu.push([]);
                             menu.push(["上移", "moveUp"]);
                             menu.push(["下移", "moveDown"]);
