@@ -470,7 +470,7 @@
                 </tr>
 
                 <tr class="tr_dark">
-                    <td class="form_label_right">中心领导审核意见：</td>
+                    <td class="form_label_right">委领导审核意见：</td>
                     <td class="form_content" colspan="3">
                         <form:textarea path="wldOpinion" cssClass="input_textarea" cssStyle="width: 90%;"/>
                     </td>

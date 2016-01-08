@@ -53,8 +53,8 @@
             }
         };
         addTab("${projName}项目", "", "tab1", opts);
-        addTab("参见单位和合同项目负责人信息", "", "tab2", opts);
-        addTab("单位工列表程", "", "tab3", opts);
+        addTab("参建单位和合同项目负责人信息", "", "tab2", opts);
+        addTab("单位工程列表", "", "tab3", opts);
     });
 </script>
 
