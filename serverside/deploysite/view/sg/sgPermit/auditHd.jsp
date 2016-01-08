@@ -89,9 +89,9 @@
                 <td class="form_content" colspan="3">${bean.buildProjSize}</td>
             </tr>
             <tr class="tr_dark">
-                <td class="form_label_right">合同价格：</td>
+                <td class="form_label_right">合同价格（万元）：</td>
                 <td class="form_content">${bean.contractPrice}</td>
-                <td class="form_label_right">合同工期：</td>
+                <td class="form_label_right">合同工期（日历天）：</td>
                 <td class="form_content">${bean.contractPeriod}</td>
             </tr>
             <tr class="tr_light">
