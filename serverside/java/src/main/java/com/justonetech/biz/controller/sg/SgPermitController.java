@@ -708,7 +708,7 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
      * @param sgPermit 。
      */
     private List<Map<String, Object>> getMaterials(SgPermit sgPermit, String flag, String type) {
-        String hql = "from SgMaterialInfo where parent is not null and projectType.id=" + sgPermit.getProjectType().getId() + " and type='" + type + "' order by treeId asc";
+        String hql = "from SgMaterialInfo where parent is not null and projectType.id=" + sgPermit.getProjectType().getId() + " and type='" + type + "' order by no asc";
         List<SgMaterialInfo> infoList = sgMaterialInfoService.findByQuery(hql);
         String materialInfo = "";
         String yjNum = "";

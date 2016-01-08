@@ -144,11 +144,11 @@
                 </td>
             </tr>
             <tr class="tr_dark">
-                <td class="form_label_right">合同价格：</td>
+                <td class="form_label_right">合同价格（万元）：</td>
                 <td class="form_content">
                     <form:input path="contractPrice" cssClass="input_text" cssStyle="width: 90%;"/>
                 </td>
-                <td class="form_label_right">合同工期：</td>
+                <td class="form_label_right">合同工期（日历天）：</td>
                 <td class="form_content">
                     <form:input path="contractPeriod" cssClass="input_text" cssStyle="width: 90%;"/>
                 </td>
