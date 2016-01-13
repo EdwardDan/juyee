@@ -19,7 +19,6 @@
         if (!validateForm(formId)) {
             return;
         }
-        disableBtn(btn);
         $("#status").val(status);
         if (status == '${STATUS_CS_BACK}' || status == '${STATUS_FH_BACK}' || status == '${STATUS_SH_BACK}' || status == '${STATUS_FGLD_BACK}' || status == '${STATUS_ZXLD_BACK}' || status == '${STATUS_WLD_BACK}') {
             parent.openNewWindow("selectMaterial", "退回选择页面", "${ctx}/sgPermit/selectMaterial.do", true, 400, 200);
@@ -29,8 +28,11 @@
     }
     function savaAudit(buttonName) {
         if (confirm("是否确定执行 " + buttonName + " 操作？")) {
-            saveAjaxData("${ctx}/sgPermit/saveAudit.do", formId);
+            saveAjaxData("${ctx}/sgPermit/saveAudit.do", formId, doCloseWin);
         }
+    }
+    function doCloseWin() {
+        parent.closeWindow();
     }
 </script>
 <form:form commandName="bean" name="bean">

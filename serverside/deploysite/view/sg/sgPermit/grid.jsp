@@ -42,7 +42,7 @@
                         var rowData = jQuery("#listGrid").jqGrid('getRowData', id);
                         var status = rowData["status"];
                         var opButton = '<input type="button" value="查看" onclick="doView(' + id + ')" class="button_normal"/> ';
-                        if ('' == status || status == '${STATUS_EDIT}' || status == '${STATUS_CS_BACK}' || status == '${STATUS_FH_BACK}' || status == '${STATUS_SH_BACK}' || status == '${STATUS_FGLD_BACK}' || status == '${STATUS_ZXLD_BACK}') {
+                        if ('' == status || status == '${STATUS_EDIT}' || status == '${STATUS_CS_BACK}' || status == '${STATUS_FH_BACK}' || status == '${STATUS_SH_BACK}' || status == '${STATUS_FGLD_BACK}' || status == '${STATUS_ZXLD_BACK}'|| status == '${STATUS_WLD_BACK}') {
                             if (${canEdit||isReg}) {
                                 opButton += '<input type="button" value="编辑" onclick="doEdit(' + id + ')" class="button_normal"/> ';
                                 opButton += '<input type="button" value="删除" onclick="doDelete(' + id + ')" class="button_normal"/> ';
