@@ -342,6 +342,26 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
         return "view/sg/sgPermit/printView3";
     }
 
+    /**
+     * 打印页面
+     *
+     * @param id    .
+     * @param model .
+     * @return .
+     */
+    @RequestMapping
+    public String printView4(Model model, Long id) {
+        SgPermit sgPermit = sgPermitService.get(id);
+        model.addAttribute("bean", sgPermit);
+        List<Map<String, Object>> applyList = getMaterials(sgPermit, "view", "apply");//处理申请材料数据
+        model.addAttribute("applyList", applyList);
+        List<Map<String, Object>> submitList = getMaterials(sgPermit, "view", "submit");//处理申请材料数据
+        model.addAttribute("submitList", submitList);
+        doPrivilegeCodeAndStatus(model);
+
+        return "view/sg/sgPermit/printView4";
+    }
+
 
     /**
      * 保存操作
