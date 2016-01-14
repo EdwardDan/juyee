@@ -14,6 +14,9 @@
     function printView3() {
         window.open("${ctx}/sgPermit/printView3.do?id=${bean.id}", "不予受理决定书", "status=no,toolbar=no,menubar=no,scrollbars=yes,resizable=yes,width=800,hight=600;");
     }
+    function printView4() {
+        window.open("${ctx}/sgPermit/printView4.do?id=${bean.id}", "补正材料通知书", "status=no,toolbar=no,menubar=no,scrollbars=yes,resizable=yes,width=800,hight=600;");
+    }
 </script>
 <div class="form_div">
     <table cellpadding="0" cellspacing="0" class="form_table">
@@ -215,7 +218,7 @@
         <c:if test="${(bean.status==STATUS_CS_PASS)}">
             <tr class="tr_dark">
                 <td class="form_label_right">初审意见：</td>
-                <td class="form_content" colspan="3">>
+                <td class="form_content" colspan="3">
                     <sys:toHtml>${bean.csOpinion}</sys:toHtml>
                 </td>
             </tr>
@@ -224,13 +227,13 @@
         <c:if test="${(bean.status==STATUS_FH_PASS)}">
             <tr class="tr_dark">
                 <td class="form_label_right">初审意见：</td>
-                <td class="form_content" colspan="3">>
+                <td class="form_content" colspan="3">
                     <sys:toHtml>${bean.csOpinion}</sys:toHtml>
                 </td>
             </tr>
             <tr class="tr_light">
                 <td class="form_label_right">复核意见：</td>
-                <td class="form_content" colspan="3">>
+                <td class="form_content" colspan="3">
                     <sys:toHtml>${bean.fhOpinion}</sys:toHtml>
                 </td>
             </tr>
@@ -239,19 +242,19 @@
         <c:if test="${(bean.status==STATUS_SH_PASS)}">
             <tr class="tr_dark">
                 <td class="form_label_right">初审意见：</td>
-                <td class="form_content" colspan="3">>
+                <td class="form_content" colspan="3">
                     <sys:toHtml>${bean.csOpinion}</sys:toHtml>
                 </td>
             </tr>
             <tr class="tr_light">
                 <td class="form_label_right">复核意见：</td>
-                <td class="form_content" colspan="3">>
+                <td class="form_content" colspan="3">
                     <sys:toHtml>${bean.fhOpinion}</sys:toHtml>
                 </td>
             </tr>
             <tr class="tr_dark">
                 <td class="form_label_right">审核意见：</td>
-                <td class="form_content" colspan="3">>
+                <td class="form_content" colspan="3">
                     <sys:toHtml>${bean.shOpinion}</sys:toHtml>
                 </td>
             </tr>
@@ -260,25 +263,25 @@
         <c:if test="${(bean.status==STATUS_FGLD_PASS)}">
             <tr class="tr_dark">
                 <td class="form_label_right">初审意见：</td>
-                <td class="form_content" colspan="3">>
+                <td class="form_content" colspan="3">
                     <sys:toHtml>${bean.csOpinion}</sys:toHtml>
                 </td>
             </tr>
             <tr class="tr_light">
                 <td class="form_label_right">复核意见：</td>
-                <td class="form_content" colspan="3">>
+                <td class="form_content" colspan="3">
                     <sys:toHtml>${bean.fhOpinion}</sys:toHtml>
                 </td>
             </tr>
             <tr class="tr_dark">
                 <td class="form_label_right">审核意见：</td>
-                <td class="form_content" colspan="3">>
+                <td class="form_content" colspan="3">
                     <sys:toHtml>${bean.shOpinion}</sys:toHtml>
                 </td>
             </tr>
             <tr class="tr_light">
                 <td class="form_label_right">分管领导审核意见：</td>
-                <td class="form_content" colspan="3">>
+                <td class="form_content" colspan="3">
                     <sys:toHtml>${bean.fgldOpinion}</sys:toHtml>
                 </td>
             </tr>
@@ -287,25 +290,25 @@
         <c:if test="${(bean.status==STATUS_ZXLD_PASS)}">
             <tr class="tr_dark">
                 <td class="form_label_right">初审意见：</td>
-                <td class="form_content" colspan="3">>
+                <td class="form_content" colspan="3">
                     <sys:toHtml>${bean.csOpinion}</sys:toHtml>
                 </td>
             </tr>
             <tr class="tr_light">
                 <td class="form_label_right">复核意见：</td>
-                <td class="form_content" colspan="3">>
+                <td class="form_content" colspan="3">
                     <sys:toHtml>${bean.fhOpinion}</sys:toHtml>
                 </td>
             </tr>
             <tr class="tr_dark">
                 <td class="form_label_right">审核意见：</td>
-                <td class="form_content" colspan="3">>
+                <td class="form_content" colspan="3">
                     <sys:toHtml>${bean.shOpinion}</sys:toHtml>
                 </td>
             </tr>
             <tr class="tr_light">
                 <td class="form_label_right">分管领导审核意见：</td>
-                <td class="form_content" colspan="3">>
+                <td class="form_content" colspan="3">
                     <sys:toHtml>${bean.fgldOpinion}</sys:toHtml>
                 </td>
             </tr>
@@ -320,37 +323,37 @@
         <c:if test="${(bean.status==STATUS_WLD_PASS)}">
             <tr class="tr_dark">
                 <td class="form_label_right">初审意见：</td>
-                <td class="form_content" colspan="3">>
+                <td class="form_content" colspan="3">
                     <sys:toHtml>${bean.csOpinion}</sys:toHtml>
                 </td>
             </tr>
             <tr class="tr_light">
                 <td class="form_label_right">复核意见：</td>
-                <td class="form_content" colspan="3">>
+                <td class="form_content" colspan="3">
                     <sys:toHtml>${bean.fhOpinion}</sys:toHtml>
                 </td>
             </tr>
             <tr class="tr_dark">
                 <td class="form_label_right">审核意见：</td>
-                <td class="form_content" colspan="3">>
+                <td class="form_content" colspan="3">
                     <sys:toHtml>${bean.shOpinion}</sys:toHtml>
                 </td>
             </tr>
             <tr class="tr_light">
                 <td class="form_label_right">分管领导审核意见：</td>
-                <td class="form_content" colspan="3">>
+                <td class="form_content" colspan="3">
                     <sys:toHtml>${bean.fgldOpinion}</sys:toHtml>
                 </td>
             </tr>
             <tr class="tr_dark">
                 <td class="form_label_right">中心领导审核意见：</td>
-                <td class="form_content" colspan="3">>
+                <td class="form_content" colspan="3">
                     <sys:toHtml>${bean.zxldOpinion}</sys:toHtml>
                 </td>
             </tr>
             <tr class="tr_light">
                 <td class="form_label_right">委领导审核意见：</td>
-                <td class="form_content" colspan="3">>
+                <td class="form_content" colspan="3">
                     <sys:toHtml>${bean.wldOpinion}</sys:toHtml>
                 </td>
             </tr>
@@ -362,6 +365,7 @@
                 <input type="button" value="打印收件凭证" class="button_normal_longer" onclick="printView1()">
                 <input type="button" value="打印受理" class="button_normal_long" onclick="printView2()">
                 <input type="button" value="打印决定书" class="button_normal_long" onclick="printView3()">
+                <input type="button" value="打印补正材料" class="button_normal_longer" onclick="printView4()">
                 <input type="button" value="关闭" class="button_cancel" onclick="parent.closeWindow()">
             </td>
         </tr>
