@@ -190,7 +190,7 @@ normal'><span style='font-size:14.0pt;font-family:宋体;mso-ascii-font-family:
   <p class=MsoNormal style='line-height:150%'><span lang=EN-US style='font-size:
 12.0pt;line-height:150%'></span><span style='font-size:12.0pt;line-height:
 150%;font-family:宋体;mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:
-"Times New Roman"'><sys:toHtml>${bean.csOpinion}</sys:toHtml></span><span lang=EN-US style='font-size:12.0pt;line-height:
+"Times New Roman"'><sys:toHtml>${bean.bzBackMaterial}</sys:toHtml></span><span lang=EN-US style='font-size:12.0pt;line-height:
 150%'><o:p></o:p></span></p>
 
   <p class=MsoNormal><span lang=EN-US style='font-size:12.0pt'><o:p>&nbsp;</o:p></span></p>

@@ -653,6 +653,16 @@
             <meta attribute="ColumnName">建设工程类别ids</meta>
             <meta attribute="ColumnComment">建设工程类别ids</meta>
         </property>
+        <property
+                name="bzBackMaterial"
+                column="BZ_BACK_MATERIAL"
+                type="string"
+                not-null="false"
+                length="2000"
+                >
+            <meta attribute="ColumnName">补正退回材料</meta>
+            <meta attribute="ColumnComment">补正退回材料</meta>
+        </property>
 
         <many-to-one
                 name="buildLb"
