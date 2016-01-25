@@ -1,0 +1,178 @@
+ALTER TABLE "JTJS"."SG_PERMIT"
+ADD ( "BIZ_CODE" VARCHAR2(50) NULL  ) 
+ADD ( "ACCEPT_PERSON" VARCHAR2(50) NULL  ) 
+ADD ( "ACCEPT_DATE" date NULL  ) 
+ADD ( "ACCEPT_OPINION" VARCHAR2(2000) NULL  ) 
+ADD ( "PROJECT_PLAN_COST" NUMBER(10,5) NULL  ) 
+ADD ( "SG_UNIT_NAME" VARCHAR2(200) NULL  ) 
+ADD ( "JL_UNIT_NAME" VARCHAR2(200) NULL  ) 
+ADD ( "SJ_UNIT_NAME" VARCHAR2(200) NULL  ) ;
+
+COMMENT ON COLUMN "JTJS"."SG_PERMIT"."BIZ_CODE" IS '业务编号';
+
+COMMENT ON COLUMN "JTJS"."SG_PERMIT"."ACCEPT_PERSON" IS '受理人';
+
+COMMENT ON COLUMN "JTJS"."SG_PERMIT"."ACCETP_DATE" IS '受理日期';
+
+COMMENT ON COLUMN "JTJS"."SG_PERMIT"."ACCEPT_OPINION" IS '受理意见';
+
+COMMENT ON COLUMN "JTJS"."SG_PERMIT"."PROJECT_PLAN_COST" IS '项目投资估算';
+
+COMMENT ON COLUMN "JTJS"."SG_PERMIT"."SG_UNIT_NAME" IS '施工单位';
+
+COMMENT ON COLUMN "JTJS"."SG_PERMIT"."JL_UNIT_NAME" IS '监理单位';
+
+COMMENT ON COLUMN "JTJS"."SG_PERMIT"."SJ_UNIT_NAME" IS '设计单位';
+
+ALTER TABLE "JTJS"."SG_PERMIT"
+ADD ( "PROPERTY_ID" NUMBER(10) NULL  ) ;
+
+COMMENT ON COLUMN "JTJS"."SG_PERMIT"."PROPERTY_ID" IS '项目性质';
+
+ALTER TABLE "JTJS"."SG_PERMIT" ADD CONSTRAINT "FK_SG_PERMI_SYS_CODE_PROPERTY" FOREIGN KEY ("PROPERTY_ID") REFERENCES "JTJS"."SYS_CODE_DETAIL" ("ID");
+
+
+
+
+drop table SG_PERMIT_HD_EXTEND;
+
+/*==============================================================*/
+/* Table: SG_PERMIT_HD_EXTEND                                   */
+/*==============================================================*/
+create table SG_PERMIT_HD_EXTEND 
+(
+   ID                   number(10)           not null,
+   SG_PERMIT_ID         number(10),
+   MAIN_SJ_UNIT         varchar2(200),
+   MAIN_SJ_ZBFS         varchar2(200),
+   MAIN_SJ_ZBJ          number(10,5),
+   MAIN_SJ_ZZDJ         varchar2(200),
+   MAIN_SJ_XMFZR        varchar2(50),
+   MAIN_SJ_ZSBH         varchar2(50),
+   MAIN_JL_UNIT         varchar2(200),
+   MAIN_JL_ZBFS         varchar2(200),
+   MAIN_JL_ZBJ          number(10,5),
+   MAIN_JL_ZZDJ         varchar2(200),
+   MAIN_JL_XMFZR        varchar2(50),
+   MAIN_JL_ZSBH         varchar2(50),
+   MAIN_SG_UNIT         varchar2(200),
+   MAIN_SG_ZBFS         varchar2(200),
+   MAIN_SG_ZBJ          number(10,5),
+   MAIN_SG_ZZDJ         varchar2(200),
+   MAIN_SG_XMFZR        varchar2(50),
+   MAIN_SG_ZSBH         varchar2(50),
+   GKPZ_CODE            varchar2(50),
+   HZ_DATE              date,
+   PLAN_COST            number(10,5),
+   CBSH_CODE            varchar2(50),
+   PF_DATE              date,
+   PF_GQ                number(4),
+   TOTAL_GS             number(10,5),
+   PZJG_CODE            varchar2(50),
+   COST_FROM            varchar2(200),
+   MAIN_SJ_ZSBH2        varchar2(50),
+   MAIN_JL_ZSBH2        varchar2(50),
+   MAIN_SG_ZSBH2        varchar2(50),
+   constraint PK_SG_PERMIT_HD_EXTEND primary key (ID),
+   constraint FK_SG_PERMIT_HD foreign key (SG_PERMIT_ID)
+         references SG_PERMIT (ID)
+);
+
+comment on table SG_PERMIT_HD_EXTEND is
+'施工许可_航道扩展信息';
+
+comment on column SG_PERMIT_HD_EXTEND.ID is
+'ID';
+
+comment on column SG_PERMIT_HD_EXTEND.SG_PERMIT_ID is
+'施工许可ID';
+
+comment on column SG_PERMIT_HD_EXTEND.MAIN_SJ_UNIT is
+'主要设计单位';
+
+comment on column SG_PERMIT_HD_EXTEND.MAIN_SJ_ZBFS is
+'主要设计招标方式';
+
+comment on column SG_PERMIT_HD_EXTEND.MAIN_SJ_ZBJ is
+'主要设计中标价';
+
+comment on column SG_PERMIT_HD_EXTEND.MAIN_SJ_ZZDJ is
+'主要设计资质等级';
+
+comment on column SG_PERMIT_HD_EXTEND.MAIN_SJ_XMFZR is
+'主要设计项目负责人';
+
+comment on column SG_PERMIT_HD_EXTEND.MAIN_SJ_ZSBH is
+'主要设计证书编号';
+
+comment on column SG_PERMIT_HD_EXTEND.MAIN_JL_UNIT is
+'主要监理单位';
+
+comment on column SG_PERMIT_HD_EXTEND.MAIN_JL_ZBFS is
+'主要监理招标方式';
+
+comment on column SG_PERMIT_HD_EXTEND.MAIN_JL_ZBJ is
+'主要监理中标价';
+
+comment on column SG_PERMIT_HD_EXTEND.MAIN_JL_ZZDJ is
+'主要监理资质等级';
+
+comment on column SG_PERMIT_HD_EXTEND.MAIN_JL_XMFZR is
+'主要监理项目负责人';
+
+comment on column SG_PERMIT_HD_EXTEND.MAIN_JL_ZSBH is
+'主要监理证书编号';
+
+comment on column SG_PERMIT_HD_EXTEND.MAIN_SG_UNIT is
+'主要施工单位';
+
+comment on column SG_PERMIT_HD_EXTEND.MAIN_SG_ZBFS is
+'主要施工招标方式';
+
+comment on column SG_PERMIT_HD_EXTEND.MAIN_SG_ZBJ is
+'主要施工中标价';
+
+comment on column SG_PERMIT_HD_EXTEND.MAIN_SG_ZZDJ is
+'主要施工资质等级';
+
+comment on column SG_PERMIT_HD_EXTEND.MAIN_SG_XMFZR is
+'主要施工项目负责人';
+
+comment on column SG_PERMIT_HD_EXTEND.MAIN_SG_ZSBH is
+'主要施工证书编号';
+
+comment on column SG_PERMIT_HD_EXTEND.GKPZ_CODE is
+'工可批准或核准机关和文号';
+
+comment on column SG_PERMIT_HD_EXTEND.HZ_DATE is
+'批复或核准日期';
+
+comment on column SG_PERMIT_HD_EXTEND.PLAN_COST is
+'投资估算';
+
+comment on column SG_PERMIT_HD_EXTEND.CBSH_CODE is
+'初步设计批准机关和文号';
+
+comment on column SG_PERMIT_HD_EXTEND.PF_DATE is
+'批复日期';
+
+comment on column SG_PERMIT_HD_EXTEND.PF_GQ is
+'批复工期';
+
+comment on column SG_PERMIT_HD_EXTEND.TOTAL_GS is
+'总概算';
+
+comment on column SG_PERMIT_HD_EXTEND.PZJG_CODE is
+'批准机关和文号';
+
+comment on column SG_PERMIT_HD_EXTEND.COST_FROM is
+'投资来源';
+
+comment on column SG_PERMIT_HD_EXTEND.MAIN_SJ_ZSBH2 is
+'主要设计证书编号2';
+
+comment on column SG_PERMIT_HD_EXTEND.MAIN_JL_ZSBH2 is
+'主要监理证书编号2';
+
+comment on column SG_PERMIT_HD_EXTEND.MAIN_SG_ZSBH2 is
+'主要施工证书编号2';
