@@ -22,12 +22,17 @@
         });
         var baseUrl = {
             <c:choose>
-            <c:when test="${act == 'add' || act == 'edit' || act == 'audit'}">
+            <c:when test="${act == 'add' || act == 'edit'  || act == 'accept' || act == 'audit'}">
             <c:choose>
             <c:when test="${act == 'add' || act == 'edit'}">
             tab1: "${ctx}/sgPermit/modify.do",
             tab2: "${ctx}/sgContractProjPerson/modify.do",
             tab3: "${ctx}/sgUnitProj/modify.do",
+            </c:when>
+            <c:when test="${act == 'accept'}">
+            tab1: "${ctx}/sgPermit/accept.do",
+            tab2: "${ctx}/sgContractProjPerson/view.do",
+            tab3: "${ctx}/sgUnitProj/view.do",
             </c:when>
             <c:otherwise>
             tab1: "${ctx}/sgPermit/audit.do",

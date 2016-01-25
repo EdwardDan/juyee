@@ -1,10 +1,14 @@
 package com.justonetech.biz.domain.base;
 
+import com.justonetech.biz.domain.SgPermitHdExtend;
 import com.justonetech.core.entity.Auditable;
 import com.justonetech.system.domain.SysCodeDetail;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.sql.Timestamp;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 
 /**
@@ -103,6 +107,9 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
 
     // primary key
     private Long id;
+
+    //业务编号
+    private String bizCode;
 
     // fields
     /*年*/
@@ -227,7 +234,7 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
 
     /*初审日期*/
     /*初审日期*/
-    private java.sql.Date csDate;
+    private java.sql.Timestamp csDate;
 
     /*复核意见*/
     /*复核意见*/
@@ -239,7 +246,7 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
 
     /*复核日期*/
     /*复核日期*/
-    private java.sql.Date fhDate;
+    private java.sql.Timestamp fhDate;
 
     /*审核意见*/
     /*审核意见*/
@@ -251,7 +258,7 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
 
     /*审核日期*/
     /*审核日期*/
-    private java.sql.Date shDate;
+    private java.sql.Timestamp shDate;
 
     /*分管领导审核意见*/
     /*分管领导审核意见*/
@@ -263,7 +270,7 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
 
     /*分管领导审核日期*/
     /*分管领导审核日期*/
-    private java.sql.Date fgldDate;
+    private java.sql.Timestamp fgldDate;
 
     /*中心领导审核意见*/
     /*中心领导审核意见*/
@@ -275,7 +282,7 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
 
     /*中心领导审核日期*/
     /*中心领导审核日期*/
-    private java.sql.Date zxldDate;
+    private java.sql.Timestamp zxldDate;
 
     /*委领导审核意见*/
     /*委领导审核意见*/
@@ -287,7 +294,7 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
 
     /*委领导审核日期*/
     /*委领导审核日期*/
-    private java.sql.Date wldDate;
+    private java.sql.Timestamp wldDate;
 
     /*创建时间*/
     /*创建时间*/
@@ -307,7 +314,7 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
 
     /*提交日期*/
     /*提交日期*/
-    private java.sql.Date submitDate;
+    private java.sql.Timestamp submitDate;
 
     /*退回编号*/
     /*退回编号*/
@@ -316,6 +323,15 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
     /*受理编号*/
     /*受理编号*/
     private String acceptCode;
+
+    //受理人
+    private String acceptPerson;
+
+    //受理日期
+    private Timestamp acceptDate;
+
+    //受理意见
+    private String acceptOpinion;
 
     /*合同开工日期*/
     /*合同开工日期*/
@@ -333,8 +349,23 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
     /*建设工程类别ids*/
     private String buildLbIds;
 
+    /*补正退回材料*/
+    /*补正退回材料*/
+    private String bzBackMaterial;
+
+    //项目投资估算（万元）
+    private java.lang.Double projectPlanCost;
+
+    //施工单位
+    private String sgUnitName;
+    //监理单位
+    private String jlUnitName;
+    //设计单位
+    private String sjUnitName;
+
     // many to one
     private com.justonetech.system.domain.SysCodeDetail projectType;
+    private com.justonetech.system.domain.SysCodeDetail propertyType;
     private com.justonetech.system.domain.SysCodeDetail buildLb;
     private com.justonetech.system.domain.SysCodeDetail buildSx;
 
@@ -344,6 +375,7 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
     private java.util.Set<com.justonetech.biz.domain.SgMaterial> sgMaterials;
     private java.util.Set<com.justonetech.biz.domain.SgContractProjPerson> sgContractProjPersons;
     private java.util.Set<com.justonetech.biz.domain.SgUnitProj> sgUnitProjs;
+    private java.util.Set<com.justonetech.biz.domain.SgPermitHdExtend> sgPermitHdExtends;
 
 
     /**
@@ -827,11 +859,11 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
         this.csUser = csUser;
     }
 
-    public Date getCsDate() {
+    public Timestamp getCsDate() {
         return csDate;
     }
 
-    public void setCsDate(Date csDate) {
+    public void setCsDate(Timestamp csDate) {
         this.csDate = csDate;
     }
 
@@ -851,11 +883,11 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
         this.fhUser = fhUser;
     }
 
-    public Date getFhDate() {
+    public Timestamp getFhDate() {
         return fhDate;
     }
 
-    public void setFhDate(Date fhDate) {
+    public void setFhDate(Timestamp fhDate) {
         this.fhDate = fhDate;
     }
 
@@ -875,11 +907,11 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
         this.shUser = shUser;
     }
 
-    public Date getShDate() {
+    public Timestamp getShDate() {
         return shDate;
     }
 
-    public void setShDate(Date shDate) {
+    public void setShDate(Timestamp shDate) {
         this.shDate = shDate;
     }
 
@@ -899,11 +931,11 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
         this.fgldUser = fgldUser;
     }
 
-    public Date getFgldDate() {
+    public Timestamp getFgldDate() {
         return fgldDate;
     }
 
-    public void setFgldDate(Date fgldDate) {
+    public void setFgldDate(Timestamp fgldDate) {
         this.fgldDate = fgldDate;
     }
 
@@ -923,11 +955,11 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
         this.zxldUser = zxldUser;
     }
 
-    public Date getZxldDate() {
+    public Timestamp getZxldDate() {
         return zxldDate;
     }
 
-    public void setZxldDate(Date zxldDate) {
+    public void setZxldDate(Timestamp zxldDate) {
         this.zxldDate = zxldDate;
     }
 
@@ -947,11 +979,11 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
         this.wldUser = wldUser;
     }
 
-    public Date getWldDate() {
+    public Timestamp getWldDate() {
         return wldDate;
     }
 
-    public void setWldDate(Date wldDate) {
+    public void setWldDate(Timestamp wldDate) {
         this.wldDate = wldDate;
     }
 
@@ -1022,11 +1054,11 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
         this.updateUser = updateUser;
     }
 
-    public Date getSubmitDate() {
+    public Timestamp getSubmitDate() {
         return submitDate;
     }
 
-    public void setSubmitDate(Date submitDate) {
+    public void setSubmitDate(Timestamp submitDate) {
         this.submitDate = submitDate;
     }
 
@@ -1078,6 +1110,78 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
         this.buildLbIds = buildLbIds;
     }
 
+    public String getBzBackMaterial() {
+        return bzBackMaterial;
+    }
+
+    public void setBzBackMaterial(String bzBackMaterial) {
+        this.bzBackMaterial = bzBackMaterial;
+    }
+
+    public String getBizCode() {
+        return bizCode;
+    }
+
+    public void setBizCode(String bizCode) {
+        this.bizCode = bizCode;
+    }
+
+    public String getAcceptPerson() {
+        return acceptPerson;
+    }
+
+    public void setAcceptPerson(String acceptPerson) {
+        this.acceptPerson = acceptPerson;
+    }
+
+    public Timestamp getAcceptDate() {
+        return acceptDate;
+    }
+
+    public void setAcceptDate(Timestamp acceptDate) {
+        this.acceptDate = acceptDate;
+    }
+
+    public String getAcceptOpinion() {
+        return acceptOpinion;
+    }
+
+    public void setAcceptOpinion(String acceptOpinion) {
+        this.acceptOpinion = acceptOpinion;
+    }
+
+    public Double getProjectPlanCost() {
+        return projectPlanCost;
+    }
+
+    public void setProjectPlanCost(Double projectPlanCost) {
+        this.projectPlanCost = projectPlanCost;
+    }
+
+    public String getSgUnitName() {
+        return sgUnitName;
+    }
+
+    public void setSgUnitName(String sgUnitName) {
+        this.sgUnitName = sgUnitName;
+    }
+
+    public String getJlUnitName() {
+        return jlUnitName;
+    }
+
+    public void setJlUnitName(String jlUnitName) {
+        this.jlUnitName = jlUnitName;
+    }
+
+    public String getSjUnitName() {
+        return sjUnitName;
+    }
+
+    public void setSjUnitName(String sjUnitName) {
+        this.sjUnitName = sjUnitName;
+    }
+
     public SysCodeDetail getBuildLb() {
         return buildLb;
     }
@@ -1110,6 +1214,13 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
         this.projectType = projectType;
     }
 
+    public SysCodeDetail getPropertyType() {
+        return propertyType;
+    }
+
+    public void setPropertyType(SysCodeDetail propertyType) {
+        this.propertyType = propertyType;
+    }
 
     /**
      * Return the value associated with the column: sgPermitOperations
@@ -1235,6 +1346,16 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
         getSgUnitProjs().add(sgUnitProj);
     }
 
+    public Set<SgPermitHdExtend> getSgPermitHdExtends() {
+        if (null==sgPermitHdExtends){
+            sgPermitHdExtends=new LinkedHashSet<SgPermitHdExtend>();
+        }
+        return sgPermitHdExtends;
+    }
+
+    public void setSgPermitHdExtends(Set<SgPermitHdExtend> sgPermitHdExtends) {
+        this.sgPermitHdExtends = sgPermitHdExtends;
+    }
 
     public boolean equals(Object obj) {
         if (null == obj) return false;
@@ -1318,6 +1439,14 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
         builder.append(contractEndDate);
         builder.append(zbPrice);
         builder.append(buildLbIds);
+        builder.append(bizCode);
+        builder.append(acceptDate);
+        builder.append(acceptOpinion);
+        builder.append(acceptPerson);
+        builder.append(sgUnitName);
+        builder.append(jlUnitName);
+        builder.append(sjUnitName);
+        builder.append(projectPlanCost);
         return builder.toString();
     }
 

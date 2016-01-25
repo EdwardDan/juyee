@@ -130,6 +130,7 @@ public class PrivilegeCode {
     //施工许可管理
     public static final String SG_PERMIT_EDIT = SgPermit.class.getSimpleName() + "_edit";
     public static final String SG_PERMIT_CS_AUDIT = SgPermit.class.getSimpleName() + "_cs_audit";
+    public static final String SG_PERMIT_SL_AUDIT = SgPermit.class.getSimpleName() + "_sl_audit";
     public static final String SG_PERMIT_FH_AUDIT = SgPermit.class.getSimpleName() + "_fh_audit";
     public static final String SG_PERMIT_AUDIT = SgPermit.class.getSimpleName() + "_audit";
     public static final String SG_PERMIT_FGLD_AUDIT = SgPermit.class.getSimpleName() + "_fgld_audit";

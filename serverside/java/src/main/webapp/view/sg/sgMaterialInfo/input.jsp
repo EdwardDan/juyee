@@ -7,11 +7,7 @@
         var validateCondition = [];
         validateInit(validateCondition, formId);
         var type = $("#type").val();
-        if (type == 'apply') {
-            $("#tr1").hide();
-        } else {
-            $("#tr1").show();
-        }
+        checkType(type);
     });
 
     //保存操作
@@ -22,13 +18,15 @@
         //提交表单
         saveAjaxData("${ctx}/sgMaterialInfo/save.do", formId);
     }
-    function checkType(obj) {
-        if (obj.value == 'apply') {
+    function checkType(objValue) {
+        if (objValue == 'apply') {
             $("#tr1").hide();
+            $("#tr2").hide();
             $("#auditReq").val("");
         } else {
             $("#tr_num").hide();
             $("#tr1").show();
+            $("#tr2").show();
         }
     }
 </script>
@@ -43,7 +41,7 @@
                 <td class="form_label">材料类型：</td>
                 <td class="form_content">
                     <select name="type" id="type" class="form_select_long" style="width: 100px;"
-                            onchange="checkType(this)">
+                            onchange="checkType(this.value)">
                         <option value="apply">申请材料</option>
                         <option value="submit">提交材料</option>
                     </select>
@@ -68,11 +66,18 @@
                 </td>
             </tr>
             <tr class="tr_light" id="tr1">
-                <td class="form_label">审核要求：</td>
+            <td class="form_label">审核要求：</td>
+            <td class="form_content">
+                <form:textarea path="auditReq" cssClass="input_textarea" cssStyle="width: 90%;"/>
+            </td>
+        </tr>
+            <tr class="tr_dark" id="tr2">
+                <td class="form_label">绿色审核要求：</td>
                 <td class="form_content">
-                    <form:textarea path="auditReq" cssClass="input_textarea" cssStyle="width: 90%;"/>
+                    <form:textarea path="auditReqGreen" cssClass="input_textarea" cssStyle="width: 90%;"/>
                 </td>
             </tr>
+
             <tr class="tr_button">
                 <td class="form_content" colspan="2" style="text-align: center;">
                     <input type="button" value="确定" class="button_confirm" onclick="save(this)">&nbsp;

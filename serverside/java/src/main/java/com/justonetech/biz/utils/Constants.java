@@ -221,4 +221,12 @@ public class Constants {
 
     public static final String DUTY_DEPT = "dutyDept";//责任部门
 
+    //项目性质
+    public static final String PROJECT_PROPERTY = "xmxz-sg";
+    public static final String PROJECT_PROPERTY_1 = "aqscwxy";//安全生产危险源工程
+    public static final String PROJECT_PROPERTY_2 = "wwgc";//维稳工程
+    public static final String PROJECT_PROPERTY_3 = "msgc";//民生工程
+    public static final String PROJECT_PROPERTY_4 = "ndzdgc";//年度市重大工程
+    public static final String PROJECT_PROPERTY_5 = "ybxm";//一般项目
+
 }

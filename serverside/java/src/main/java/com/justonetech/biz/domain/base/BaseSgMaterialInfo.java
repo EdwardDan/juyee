@@ -81,6 +81,9 @@ public abstract class BaseSgMaterialInfo  implements Serializable, Treeable, Aud
     /*审核要求*/
 	private String auditReq;
 
+	//绿色审核要求
+	private String auditReqGreen;
+
 	/*应交份数*/
     /*应交份数*/
 	private Integer yjNum;
@@ -200,6 +203,14 @@ public abstract class BaseSgMaterialInfo  implements Serializable, Treeable, Aud
 	 */
 	public void setAuditReq (String auditReq) {
 		this.auditReq = auditReq;
+	}
+
+	public String getAuditReqGreen() {
+		return auditReqGreen;
+	}
+
+	public void setAuditReqGreen(String auditReqGreen) {
+		this.auditReqGreen = auditReqGreen;
 	}
 
 	public Integer getYjNum() {
@@ -368,6 +379,7 @@ public abstract class BaseSgMaterialInfo  implements Serializable, Treeable, Aud
 		builder.append(type);
 		builder.append(materialName);
 		builder.append(auditReq);
+		builder.append(auditReqGreen);
 		builder.append(yjNum);
 		builder.append(isLeaf);
 		builder.append(treeId);

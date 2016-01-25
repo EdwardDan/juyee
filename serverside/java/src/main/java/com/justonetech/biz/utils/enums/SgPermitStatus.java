@@ -10,18 +10,20 @@ import com.justonetech.core.utils.JspHelper;
 public enum SgPermitStatus {
     STATUS_EDIT(1, "未提交", "red", "tx"),
     STATUS_SUBMIT(2, "已提交", "blue", "submit"),
-    STATUS_CS_PASS(3, "初审通过", "green", "cs_pass"),
-    STATUS_CS_BACK(4, "初审退回", "red", "cs_back"),
-    STATUS_FH_PASS(5, "复核通过", "green", "fh_pass"),
-    STATUS_FH_BACK(6, "复核退回", "red", "fh_back"),
-    STATUS_SH_PASS(7, "审核通过", "green", "sh_pass"),
-    STATUS_SH_BACK(8, "审核退回", "red", "sh_back"),
-    STATUS_FGLD_PASS(9, "分管领导审核通过", "green", "fgldsh_pass"),
-    STATUS_FGLD_BACK(10, "分管领导审核退回", "red", "fgldsh_back"),
-    STATUS_ZXLD_PASS(11, "中心领导审核通过", "green", "fgldsh_pass"),
-    STATUS_ZXLD_BACK(12, "中心领导审核退回", "red", "zxldsh_back"),
-    STATUS_WLD_PASS(13, "委领导审核审核通过", "green", "wldsh_pass"),
-    STATUS_WLD_BACK(14, "委领导审核审核退回", "red", "wldsh_back");
+    STATUS_SLZX_PASS(3, "受理通过", "green", "slzx_pass"),
+    STATUS_SLZX_BACK(4, "受理退回", "red", "slzx_back"),
+    STATUS_CS_PASS(5, "初审通过", "green", "cs_pass"),
+    STATUS_CS_BACK(6, "初审退回", "red", "cs_back"),
+    STATUS_FH_PASS(7, "复核通过", "green", "fh_pass"),
+    STATUS_FH_BACK(8, "复核退回", "red", "fh_back"),
+    STATUS_SH_PASS(9, "审核通过", "green", "sh_pass"),
+    STATUS_SH_BACK(10, "审核退回", "red", "sh_back"),
+    STATUS_FGLD_PASS(11, "分管领导审核通过", "green", "fgldsh_pass"),
+    STATUS_FGLD_BACK(12, "分管领导审核退回", "red", "fgldsh_back"),
+    STATUS_ZXLD_PASS(13, "中心领导审核通过", "green", "fgldsh_pass"),
+    STATUS_ZXLD_BACK(14, "中心领导审核退回", "red", "zxldsh_back"),
+    STATUS_WLD_PASS(15, "委领导审核审核通过", "green", "wldsh_pass"),
+    STATUS_WLD_BACK(16, "委领导审核审核退回", "red", "wldsh_back");
 
     private int code;
     private String name;

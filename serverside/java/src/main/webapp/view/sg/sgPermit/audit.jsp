@@ -21,7 +21,11 @@
         }
         $("#status").val(status);
         if (status == '${STATUS_CS_BACK}' || status == '${STATUS_FH_BACK}' || status == '${STATUS_SH_BACK}' || status == '${STATUS_FGLD_BACK}' || status == '${STATUS_ZXLD_BACK}' || status == '${STATUS_WLD_BACK}') {
-            parent.openNewWindow("selectMaterial", "退回选择页面", "${ctx}/sgPermit/selectMaterial.do", true, 400, 200);
+            if (buttonName != "补正退回") {
+                parent.openNewWindow("selectMaterial", "退回选择页面", "${ctx}/sgPermit/selectMaterial.do", true, 400, 200);
+            } else {
+                parent.openNewWindow("bzBackMaterialDiv", "补正退回资料", "${ctx}/sgPermit/bzBackMaterial.do", true, 400, 200);
+            }
         } else {
             savaAudit(buttonName);
         }
@@ -35,11 +39,12 @@
         parent.closeWindow();
     }
 </script>
-<form:form commandName="bean" name="bean">
+<form:form commandName="bean">
     <form:hidden path="id"/>
     <form:hidden path="year"/>
     <form:hidden path="status"/>
     <form:hidden path="backNum"/>
+    <form:hidden path="bzBackMaterial"/>
 
     <div class="form_div">
         <table cellpadding="0" cellspacing="0" class="form_table">
@@ -485,36 +490,48 @@
                                onclick="save(this,this.value,'${STATUS_CS_PASS}')">&nbsp;
                         <input type="button" value="审核退回" class="button_normal_long"
                                onclick="save(this,this.value,'${STATUS_CS_BACK}')">&nbsp;
+                        <input type="button" value="补正退回" class="button_normal_long"
+                               onclick="save(this,this.value,'${STATUS_CS_BACK}')">
                     </c:if>
                     <c:if test="${bean.status==STATUS_CS_PASS}">
                         <input type="button" value="审核通过" class="button_normal_long"
                                onclick="save(this,this.value,'${STATUS_FH_PASS}')">&nbsp;
                         <input type="button" value="审核退回" class="button_normal_long"
                                onclick="save(this,this.value,'${STATUS_FH_BACK}')">&nbsp;
+                        <input type="button" value="补正退回" class="button_normal_long"
+                               onclick="save(this,this.value,'${STATUS_FH_BACK}')">
                     </c:if>
                     <c:if test="${bean.status==STATUS_FH_PASS}">
                         <input type="button" value="审核通过" class="button_normal_long"
                                onclick="save(this,this.value,'${STATUS_SH_PASS}')">&nbsp;
                         <input type="button" value="审核退回" class="button_normal_long"
                                onclick="save(this,this.value,'${STATUS_SH_BACK}')">&nbsp;
+                        <input type="button" value="补正退回" class="button_normal_long"
+                               onclick="save(this,this.value,'${STATUS_SH_BACK}')">
                     </c:if>
                     <c:if test="${bean.status==STATUS_SH_PASS}">
                         <input type="button" value="审核通过" class="button_normal_long"
                                onclick="save(this,this.value,'${STATUS_FGLD_PASS}')">&nbsp;
                         <input type="button" value="审核退回" class="button_normal_long"
                                onclick="save(this,this.value,'${STATUS_FGLD_BACK}')">&nbsp;
+                        <input type="button" value="补正退回" class="button_normal_long"
+                               onclick="save(this,this.value,'${STATUS_FGLD_BACK}')">
                     </c:if>
                     <c:if test="${bean.status==STATUS_FGLD_PASS}">
                         <input type="button" value="审核通过" class="button_normal_long"
                                onclick="save(this,this.value,'${STATUS_ZXLD_PASS}')">&nbsp;
                         <input type="button" value="审核退回" class="button_normal_long"
                                onclick="save(this,this.value,'${STATUS_ZXLD_BACK}')">&nbsp;
+                        <input type="button" value="补正退回" class="button_normal_long"
+                               onclick="save(this,this.value,'${STATUS_ZXLD_BACK}')">
                     </c:if>
                     <c:if test="${bean.status==STATUS_ZXLD_PASS}">
                         <input type="button" value="审核通过" class="button_normal_long"
                                onclick="save(this,this.value,'${STATUS_WLD_PASS}')">&nbsp;
                         <input type="button" value="审核退回" class="button_normal_long"
                                onclick="save(this,this.value,'${STATUS_WLD_BACK}')">&nbsp;
+                        <input type="button" value="补正退回" class="button_normal_long"
+                               onclick="save(this,this.value,'${STATUS_WLD_BACK}')">
                     </c:if>
                     <input type="button" value="取消" class="button_cancel" onclick="parent.closeWindow()">
                 </td>

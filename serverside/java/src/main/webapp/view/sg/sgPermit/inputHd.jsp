@@ -5,43 +5,20 @@
     var formId = "bean";
     $(function () {
         //页面验证初始化
-        var validateCondition = [
-            //{name:"year", rule:"validate[required,custom[integer],maxSize[4]"},
-            //{name:"bjbh", rule:"validate[required,maxSize[50]]"},
-            //{name:"projectName", rule:"validate[required,maxSize[200]]"},
-            //{name:"buildName", rule:"validate[required,maxSize[200]]"},
-            //{name:"hYear", rule:"validate[required,custom[integer],maxSize[4]"},
-            //{name:"hNum", rule:"validate[required,custom[integer],maxSize[4]"},
-            //{name:"applyPerson", rule:"validate[required,maxSize[50]]"},
-            //{name:"applyMatter", rule:"validate[required,maxSize[200]]"},
-            //{name:"applyNum", rule:"validate[required,maxSize[50]]"},
-            //{name:"materialPerson", rule:"validate[required,maxSize[200]]"},
-            //{name:"materialPersonPhone", rule:"validate[required,maxSize[50]]"},
-            //{name:"materialPersonAddress", rule:"validate[required,maxSize[200]]"},
-            //{name:"receivePerson", rule:"validate[required,maxSize[200]]"},
-            //{name:"receivePersonPhone", rule:"validate[required,maxSize[50]]"},
-            //{name:"status", rule:"validate[required,custom[integer],maxSize[2]"},
-            //{name:"csOpinion", rule:"validate[required,maxSize[1000]]"},
-            //{name:"fhOpinion", rule:"validate[required,maxSize[1000]]"},
-            //{name:"shOpinion", rule:"validate[required,maxSize[1000]]"},
-            //{name:"fgldOpinion", rule:"validate[required,maxSize[1000]]"},
-            //{name:"zxldOpinion", rule:"validate[required,maxSize[1000]]"},
-        ];
+        var validateCondition = [];
         validateInit(validateCondition, formId);
     });
 
     //保存操作
-    function save(btn, buttonName, status, tab) {
+    function save(buttonName, status, tab) {
         if (!validateForm(formId)) {
             return;
         }
-        //提交表单
-        disableBtn(btn);
         butType = tab;
+        $("#status").val(status);
         if ("" != buttonName) {
-            $("#status").val(status);
             if (confirm("是否确定执行 " + buttonName + " 操作？")) {
-                saveAjaxData("${ctx}/sgPermit/save.do", formId);
+                saveAjaxData("${ctx}/sgPermit/save.do", formId, doCloseWin);
             }
         } else {
             saveAjaxData("${ctx}/sgPermit/save.do", formId, refreshTabParam);
@@ -70,7 +47,9 @@
             }
         }
     }
-
+    function doCloseWin() {
+        parent.closeWindow();
+    }
 </script>
 <form:form commandName="bean">
     <form:hidden path="id"/>
@@ -79,246 +58,364 @@
     <input type="hidden" name="projectType" id="projectType" value="${bean.projectType.id}">
 
     <div class="form_div">
-        <table cellpadding="0" cellspacing="0" class="form_table">
-            <tr class="tr_dark">
-                <td class="form_label_right" nowrap>报建编号：</td>
-                <td class="form_content">
-                    <form:input path="bjbh" cssClass="input_text_long"/>
-                </td>
-                <td class="form_label_right" nowrap>受理编号：</td>
-                <td class="form_content">
-                    <form:input path="acceptCode" cssClass="input_text_long"/>
-                </td>
-            </tr>
-            <tr class="tr_light">
-                <td class="form_label_right">项目名称：</td>
-                <td class="form_content" colspan="3">
-                    <form:input path="projectName" cssClass="input_text" cssStyle="width: 96%;"/>
-                </td>
-            </tr>
-            <tr class="tr_dark">
-                <td class="form_label_right">建设单位：</td>
-                <td class="form_content" colspan="3">
-                    <form:input path="buildName" cssClass="input_text" cssStyle="width: 96%;"/>
-                </td>
-            </tr>
+        <fieldset class="form_fieldset" style="width: 96%;">
+            <legend>申请信息</legend>
+            <table cellpadding="0" cellspacing="0" class="form_table">
+                <tr class="tr_light">
+                    <td class="form_label_right" nowrap>项目性质：</td>
+                    <td class="form_content" colspan="3">
+                        <sys:code code="${xmxz}" type="select" name="propertyType" id="propertyType"/>
+                    </td>
+                </tr>
+                <tr class="tr_dark">
+                    <td class="form_label_right" nowrap>报建编号：</td>
+                    <td class="form_content">
+                        <form:input path="bjbh" cssClass="input_text_long"/>
+                    </td>
+                    <td class="form_label_right" nowrap>业务编号：</td>
+                    <td class="form_content">
+                        <form:input path="bizCode" cssClass="input_text_long" readonly="true"/>
+                    </td>
+                </tr>
+                <tr class="tr_light">
+                    <td class="form_label_right">项目名称：</td>
+                    <td class="form_content" colspan="3">
+                        <form:input path="projectName" cssClass="input_text" cssStyle="width: 96%;"/>
+                    </td>
+                </tr>
+                <tr class="tr_dark">
+                    <td class="form_label_right">建设单位：</td>
+                    <td class="form_content" colspan="3">
+                        <form:input path="buildName" cssClass="input_text" cssStyle="width: 96%;"/>
+                    </td>
+                </tr>
 
-            <tr class="tr_light">
-                <td class="form_label_right" style="width: 20%;">建设单位性质：</td>
-                <td class="form_content" style="width: 30%;">
-                    <form:input path="buildUnitType" cssClass="input_text" cssStyle="width: 90%;"/>
-                </td>
-                <td class="form_label_right" style="width: 15%;">建设单位地址：</td>
-                <td class="form_content" style="width: 35%;">
-                    <form:input path="buildUnitAddress" cssClass="input_text" cssStyle="width: 90%;"/>
-                </td>
-            </tr>
-            <tr class="tr_dark">
-                <td class="form_label_right">建设地点：</td>
-                <td class="form_content" colspan="3">
-                    <form:input path="buildSite" cssClass="input_text" cssStyle="width: 96%;"/>
-                </td>
-            </tr>
-            <tr class="tr_light">
-                <td class="form_label_right">建设工程类别：</td>
-                <td class="form_content" colspan="3">
-                    <c:forEach items="${lbs}" var="item">
-                        <input type="checkbox" name="buildLbId" value="${item.id}"
-                               <c:if test="${fn:contains(bean.buildLbIds, item.id)}">checked</c:if>>${item.name}&nbsp;
-                    </c:forEach>
-                </td>
-            </tr>
-            <tr class="tr_dark">
-                <td class="form_label_right">建设工程属性：</td>
-                <td class="form_content" colspan="3">
-                    <c:forEach items="${sxs}" var="item">
-                        <input type="radio" name="buildSx" value="${item.id}"
-                               <c:if test="${bean.buildSx.id == item.id}">checked</c:if>>${item.name}&nbsp;
-                    </c:forEach>
-                </td>
-            </tr>
-            <tr class="tr_light">
-                <td class="form_label_right">建设工程规模：</td>
-                <td class="form_content" colspan="3">
-                    <form:input path="buildProjSize" cssClass="input_text" cssStyle="width: 96%;"/>
-                </td>
-            </tr>
-            <tr class="tr_dark">
-                <td class="form_label_right">合同价格（万元）：</td>
-                <td class="form_content">
-                    <form:input path="contractPrice" cssClass="input_text" cssStyle="width: 90%;"/>
-                </td>
-                <td class="form_label_right">合同工期（日历天）：</td>
-                <td class="form_content">
-                    <form:input path="contractPeriod" cssClass="input_text" cssStyle="width: 90%;"/>
-                </td>
-            </tr>
-            <tr class="tr_light">
-                <td class="form_label_right">中标价格（万元）：</td>
-                <td class="form_content">
-                    <form:input path="zbPrice" cssClass="input_text_long" cssStyle="width: 90%;"/>
-                </td>
-                <td colspan="2"></td>
-            </tr>
-            <tr class="tr_dark">
-                <td class="form_label_right">开工日期：</td>
-                <td class="form_content">
-                    <form:input path="contractBeginDate" cssClass="input_date" readonly="true"/>
-                    <input type="button" class="button_calendar" value=" " onClick="calendar('contractBeginDate');">
-                </td>
-                <td class="form_label_right">完工日期：</td>
-                <td class="form_content">
-                    <form:input path="contractEndDate" cssClass="input_date" readonly="true"/>
-                    <input type="button" class="button_calendar" value=" " onClick="calendar('contractEndDate');">
-                </td>
-            </tr>
-            <tr class="tr_light">
-                <td class="form_label_right">法定代表人：</td>
-                <td class="form_content">
-                    <form:input path="fr" cssClass="input_text" cssStyle="width: 90%;"/>
-                </td>
-                <td class="form_label_right">建设单位联系电话：</td>
-                <td class="form_content">
-                    <form:input path="buildUnitPhone" cssClass="input_text" cssStyle="width: 90%;"/>
-                </td>
-            </tr>
-            <tr class="tr_dark">
-                <td class="form_label_right">建设单位联系人：</td>
-                <td class="form_content">
-                    <form:input path="buildUnitPerson" cssClass="input_text" cssStyle="width: 90%;"/>
-                </td>
-                <td class="form_label_right">手机号：</td>
-                <td class="form_content">
-                    <form:input path="buildUnitMobile" cssClass="input_text" cssStyle="width: 90%;"/>
-                </td>
-            </tr>
-                <%--<tr class="tr_light">--%>
-                <%--<td class="form_label_right">建设用地批准文件编号：</td>--%>
-                <%--<td class="form_content" colspan="3">--%>
-                <%--<form:input path="buildFileCode" cssClass="input_text" cssStyle="width: 96%;"/>--%>
-                <%--</td>--%>
-                <%--</tr>--%>
-                <%--<tr class="tr_dark">--%>
-                <%--<td class="form_label_right">建设工程规划许可证编号：</td>--%>
-                <%--<td class="form_content" colspan="3">--%>
-                <%--<form:input path="buildXkzCode" cssClass="input_text" cssStyle="width: 96%;"/>--%>
-                <%--</td>--%>
-                <%--</tr>--%>
-            <tr class="tr_light">
-                <td class="form_label_right">现场开工情况：</td>
-                <td class="form_content" colspan="3">
-                    <form:input path="startWorkCon" cssClass="input_text" cssStyle="width: 96%;"/>
-                </td>
-            </tr>
-            <tr class="tr_light">
-                <td class="form_label_right">沪交管收字</td>
-                <td class="form_content" colspan="3">
-                    （<form:input path="hjgYear" cssClass="input_number" cssStyle="text-align: center;"/> ）
-                    第<form:input path="hjgNum" cssClass="input_number" cssStyle="text-align: center;"/>号
-                </td>
-            </tr>
-            <tr class="tr_dark">
-                <td class="form_label_right">申请人：</td>
-                <td class="form_content" colspan="3">
-                    <form:input path="applyPerson" cssClass="input_text" cssStyle="width: 96%;"/>
-                </td>
-            </tr>
-            <tr class="tr_light">
-                <td class="form_label_right">申请事项：</td>
-                <td class="form_content" colspan="3">
-                    <form:input path="applyMatter" cssClass="input_text" cssStyle="width: 96%;"/>
-                </td>
-            </tr>
-            <tr class="tr_dark">
-                <td class="form_label_right">申请号：</td>
-                <td class="form_content" colspan="3">
-                    <form:input path="applyNum" cssClass="input_text" cssStyle="width: 96%;"/>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="4">
-                    <table cellpadding="0" cellspacing="0" class="table_thin_line" border="1" style="width: 100%;">
-                        <tr class="tr_header">
-                            <td style="width: 5%;">序号</td>
-                            <td style="width: 50%;">申请材料名称</td>
-                                <%--<td style="width: 20%;">材料齐全情况</td>--%>
-                                <%--<td style="width: 8%;">份数</td>--%>
-                            <td style="width: 8%;">应交份数</td>
-                            <td style="width: 8%;">实交份数</td>
-                            <td style="width: 15%;">附件</td>
-                        </tr>
-                        <c:forEach items="${applyList}" var="map">
-                            <c:set value="upLoad${map.no}" var="upLoadNo"/>
-                            <tr class="tr_dark">
-                                <td style="text-align: center;">${map.no}
-                                    <input type="hidden" name="no" value="${map.no}">
-                                </td>
-                                <td style="text-align: left;">&nbsp;${map.materialName}</td>
-                                    <%--<td style="text-align: center;">--%>
-                                    <%--有<input type="radio" name="isFull${map.no}" value="1"--%>
-                                    <%--<c:if test="${map.isFull=='true'}">checked="checked"</c:if>>--%>
-                                    <%--无<input type="radio" name="isFull${map.no}" value="0"--%>
-                                    <%--<c:if test="${map.isFull=='false'}">checked="checked"</c:if>>--%>
-                                    <%--</td>--%>
-                                    <%--<td style="text-align: center;">--%>
-                                    <%--<input type="text" name="num${map.no}" class="input_number" value="${map.num}"--%>
-                                    <%--style="text-align: center;">--%>
-                                    <%--</td>--%>
-                                <td style="text-align: center;">
-                                    <c:if test="${map.yjNum != 0}">${map.yjNum}</c:if>
-                                    <input type="hidden" name="yjNum${map.no}"
-                                           value="<c:if test="${map.yjNum != 0}">${map.yjNum}</c:if>">
-                                </td>
-                                <td style="text-align: center;">
-                                    <input type="text" name="sjNum${map.no}" class="input_number" value="${map.sjNum}"
-                                           style="text-align: center;">
-                                </td>
-                                <td style="text-align: center;">${map[upLoadNo]}</td>
-                            </tr>
+                <tr class="tr_light">
+                    <td class="form_label_right" style="width: 20%;">建设单位性质：</td>
+                    <td class="form_content" style="width: 30%;">
+                        <form:input path="buildUnitType" cssClass="input_text" cssStyle="width: 90%;"/>
+                    </td>
+                    <td class="form_label_right" style="width: 20%;">建设单位地址：</td>
+                    <td class="form_content" style="width: 30%;">
+                        <form:input path="buildUnitAddress" cssClass="input_text" cssStyle="width: 90%;"/>
+                    </td>
+                </tr>
+                <tr class="tr_dark">
+                    <td class="form_label_right">建设地点：</td>
+                    <td class="form_content" colspan="3">
+                        <form:input path="buildSite" cssClass="input_text" cssStyle="width: 96%;"/>
+                    </td>
+                </tr>
+                <tr class="tr_light">
+                    <td class="form_label_right">建设工程类别：</td>
+                    <td class="form_content" colspan="3">
+                        <c:forEach items="${lbs}" var="item">
+                            <input type="checkbox" name="buildLbId" value="${item.id}"
+                                   <c:if test="${fn:contains(bean.buildLbIds, item.id)}">checked</c:if>>${item.name}&nbsp;
                         </c:forEach>
-                    </table>
-                </td>
-            </tr>
-
-            <tr class="tr_dark">
-                <td class="form_label_right">材料提交人：</td>
-                <td class="form_content" colspan="3">
-                    <form:input path="materialPerson" cssClass="input_text" cssStyle="width: 96%;"/>
-                </td>
-            </tr>
-            <tr class="tr_light">
-                <td class="form_label_right">材料提交人联系电话：</td>
-                <td class="form_content" colspan="3">
-                    <form:input path="materialPersonPhone" cssClass="input_text" cssStyle="width: 96%;"/>
-                </td>
-            </tr>
-            <tr class="tr_dark">
-                <td class="form_label_right">材料提交人联系地址：</td>
-                <td class="form_content" colspan="3">
-                    <form:input path="materialPersonAddress" cssClass="input_text" cssStyle="width: 96%;"/>
-                </td>
-            </tr>
-            <tr class="tr_light">
-                <td class="form_label_right">收件人：</td>
-                <td class="form_content" colspan="3">
-                    <form:input path="receivePerson" cssClass="input_text" cssStyle="width: 96%;"/>
-                </td>
-            </tr>
-            <tr class="tr_dark">
-                <td class="form_label_right">收件人联系电话：</td>
-                <td class="form_content" colspan="3">
-                    <form:input path="receivePersonPhone" cssClass="input_text" cssStyle="width: 96%;"/>
-                </td>
-            </tr>
-            <tr class="tr_button" style="text-align: center;">
-                <td class="form_content" colspan="4" style="text-align: center;">
-                    <input type="button" value="提交" class="button_confirm"
-                           onclick="save(this,this.value,'${STATUS_SUBMIT}','${tab}')">&nbsp;
-                    <input type="button" value="保存" class="button_confirm"
-                           onclick="save(this,'','${STATUS_EDIT}','${tab}')">&nbsp;
-                    <input type="button" value="取消" class="button_cancel" onclick="parent.closeWindow()">
-                </td>
-            </tr>
-        </table>
+                    </td>
+                </tr>
+                <tr class="tr_dark">
+                    <td class="form_label_right">建设工程属性：</td>
+                    <td class="form_content" colspan="3">
+                        <c:forEach items="${sxs}" var="item">
+                            <input type="radio" name="buildSx" value="${item.id}"
+                                   <c:if test="${bean.buildSx.id == item.id}">checked</c:if>>${item.name}&nbsp;
+                        </c:forEach>
+                    </td>
+                </tr>
+                <tr class="tr_light">
+                    <td class="form_label_right">建设工程规模：</td>
+                    <td class="form_content" colspan="3">
+                        <form:input path="buildProjSize" cssClass="input_text" cssStyle="width: 96%;"/>
+                    </td>
+                </tr>
+                <tr class="tr_dark">
+                    <td class="form_label_right">合同价格（万元）：</td>
+                    <td class="form_content">
+                        <form:input path="contractPrice" cssClass="input_text" cssStyle="width: 90%;"/>
+                    </td>
+                    <td class="form_label_right" nowrap>合同工期（日历天）：</td>
+                    <td class="form_content">
+                        <form:input path="contractPeriod" cssClass="input_text" cssStyle="width: 90%;"/>
+                    </td>
+                </tr>
+                <tr class="tr_light">
+                    <td class="form_label_right" nowrap>中标价格（万元）：</td>
+                    <td class="form_content">
+                        <form:input path="zbPrice" cssClass="input_text_long" cssStyle="width: 90%;"/>
+                    </td>
+                    <td class="form_label_right" nowrap>项目投资估算（万元）：</td>
+                    <td class="form_content">
+                        <form:input path="projectPlanCost" cssClass="input_text_long" cssStyle="width: 90%;"/>
+                    </td>
+                </tr>
+                <tr class="tr_dark">
+                    <td class="form_label_right">开工日期：</td>
+                    <td class="form_content">
+                        <form:input path="contractBeginDate" cssClass="input_date" readonly="true"/>
+                        <input type="button" class="button_calendar" value=" " onClick="calendar('contractBeginDate');">
+                    </td>
+                    <td class="form_label_right">完工日期：</td>
+                    <td class="form_content">
+                        <form:input path="contractEndDate" cssClass="input_date" readonly="true"/>
+                        <input type="button" class="button_calendar" value=" " onClick="calendar('contractEndDate');">
+                    </td>
+                </tr>
+                <tr class="tr_light">
+                    <td class="form_label_right">法定代表人：</td>
+                    <td class="form_content">
+                        <form:input path="fr" cssClass="input_text" cssStyle="width: 90%;"/>
+                    </td>
+                    <td class="form_label_right" nowrap>建设单位联系电话：</td>
+                    <td class="form_content">
+                        <form:input path="buildUnitPhone" cssClass="input_text" cssStyle="width: 90%;"/>
+                    </td>
+                </tr>
+                <tr class="tr_dark">
+                    <td class="form_label_right" nowrap>建设单位联系人：</td>
+                    <td class="form_content">
+                        <form:input path="buildUnitPerson" cssClass="input_text" cssStyle="width: 90%;"/>
+                    </td>
+                    <td class="form_label_right">手机号：</td>
+                    <td class="form_content">
+                        <form:input path="buildUnitMobile" cssClass="input_text" cssStyle="width: 90%;"/>
+                    </td>
+                </tr>
+                <tr class="tr_light">
+                    <td class="form_label_right">现场开工情况：</td>
+                    <td class="form_content" colspan="3">
+                        <form:input path="startWorkCon" cssClass="input_text" cssStyle="width: 96%;"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <table cellpadding="0" cellspacing="0" class="form_table">
+                            <tr class="tr_header">
+                                <td colspan="5">主要设计单位</td>
+                            </tr>
+                            <tr class="tr_light">
+                                <td class="form_label_right" style="width: 12%;">主要设计单位：</td>
+                                <td class="form_content" style="width: 88%;" colspan="4">
+                                    <form:input path="sjUnitName" cssClass="input_text" cssStyle="width: 96%;"/>
+                                </td>
+                            </tr>
+                            <tr class="tr_light">
+                                <td rowspan="3" class="form_label_right" style="width: 12%;"
+                                    style="text-align: center;">主要设计单位
+                                </td>
+                                <td class="form_label_right" style="width: 15%;">招标方式：</td>
+                                <td class="form_content" style="width: 30%;">
+                                    <input type="text" name="mainSjZbfs" class="input_text" value="${hdExtend.mainSjZbfs}">
+                                </td>
+                                <td class="form_label_right" style="width: 10%;">中标价：</td>
+                                <td class="form_content" style="width: 35%;">
+                                    <input type="text" name="mainSjZbj" class="input_text" value="${hdExtend.mainSjZbj}">
+                                </td>
+                            </tr>
+                            <tr class="tr_light">
+                                <td class="form_label_right">资质等级：</td>
+                                <td class="form_content">
+                                    <input type="text" name="mainSjZzdj" class="input_text" value="${hdExtend.mainSjZzdj}">
+                                </td>
+                                <td class="form_label_right">证书编号：</td>
+                                <td class="form_content">
+                                    <input type="text" name="mainSjZsbh" class="input_text" value="${hdExtend.mainSjZsbh}">
+                                </td>
+                            </tr>
+                            <tr class="tr_light">
+                                <td class="form_label_right">项目负责人：</td>
+                                <td class="form_content">
+                                    <input type="text" name="mainSjXmfzr" class="input_text" value="${hdExtend.mainSjXmfzr}">
+                                </td>
+                                <td class="form_label_right">证书编号：</td>
+                                <td class="form_content">
+                                    <input type="text" name="mainSjZsbh2" class="input_text" value="${hdExtend.mainSjZsbh2}">
+                                </td>
+                            </tr>
+                            <tr class="tr_header">
+                                <td colspan="5">主要监理单位</td>
+                            </tr>
+                            <tr class="tr_light">
+                                <td class="form_label_right">主要监理单位：</td>
+                                <td class="form_content" colspan="4">
+                                    <form:input path="jlUnitName" cssClass="input_text" cssStyle="width: 96%;"/>
+                                </td>
+                            </tr>
+                            <tr class="tr_dark">
+                                <td rowspan="3" class="form_label_right" style="text-align: center;">主要监理单位</td>
+                                <td class="form_label_right">招标方式：</td>
+                                <td class="form_content">
+                                    <input type="text" name="mainJlZbfs" class="input_text"
+                                           value="${hdExtend.mainJlZbfs}">
+                                </td>
+                                <td class="form_label_right">中标价：</td>
+                                <td class="form_content">
+                                    <input type="text" name="mainJlZbj" class="input_text"
+                                           value="${hdExtend.mainJlZbj}">
+                                </td>
+                            </tr>
+                            <tr class="tr_dark">
+                                <td class="form_label_right">资质等级：</td>
+                                <td class="form_content">
+                                    <input type="text" name="mainJlZzdj" class="input_text"
+                                           value="${hdExtend.mainJlZzdj}">
+                                </td>
+                                <td class="form_label_right">证书编号：</td>
+                                <td class="form_content">
+                                    <input type="text" name="mainJlZsbh" class="input_text" value="${hdExtend.mainJlZsbh}">
+                                </td>
+                            </tr>
+                            <tr class="tr_dark">
+                                <td class="form_label_right">项目负责人：</td>
+                                <td class="form_content">
+                                    <input type="text" name="mainJlXmfzr" class="input_text" value="${hdExtend.mainJlXmfzr}">
+                                </td>
+                                <td class="form_label_right">证书编号：</td>
+                                <td class="form_content">
+                                    <input type="text" name="mainJlZsbh2" class="input_text" value="${hdExtend.mainJlZsbh2}">
+                                </td>
+                            </tr>
+                            <tr class="tr_header">
+                                <td colspan="5">主要施工单位</td>
+                            </tr>
+                            <tr class="tr_light">
+                                <td class="form_label_right" style="width: 10%;">主要施工单位：</td>
+                                <td class="form_content" style="width: 85%;" colspan="4">
+                                    <form:input path="sgUnitName" cssClass="input_text" cssStyle="width: 96%;"/>
+                                </td>
+                            </tr>
+                            <tr class="tr_light">
+                                <td rowspan="3" class="form_label_right" style="text-align: center;">主要施工单位</td>
+                                <td class="form_label_right">招标方式：</td>
+                                <td class="form_content">
+                                    <input type="text" name="mainSgZbfs" class="input_text" value="${hdExtend.mainSgZbfs}">
+                                </td>
+                                <td class="form_label_right">中标价：</td>
+                                <td class="form_content">
+                                    <input type="text" name="mainSgZbj" class="input_text" value="${hdExtend.mainSgZbj}">
+                                </td>
+                            </tr>
+                            <tr class="tr_light">
+                                <td class="form_label_right">资质等级：</td>
+                                <td class="form_content">
+                                    <input type="text" name="mainSgZzdj" class="input_text" value="${hdExtend.mainSgZzdj}">
+                                </td>
+                                <td class="form_label_right">证书编号：</td>
+                                <td class="form_content">
+                                    <input type="text" name="mainSgZsbh" class="input_text" value="${hdExtend.mainSgZsbh}">
+                                </td>
+                            </tr>
+                            <tr class="tr_light">
+                                <td class="form_label_right">项目负责人：</td>
+                                <td class="form_content">
+                                    <input type="text" name="mainSgXmfzr" class="input_text" value="${hdExtend.mainSgXmfzr}">
+                                </td>
+                                <td class="form_label_right">证书编号：</td>
+                                <td class="form_content">
+                                    <input type="text" name="mainSgZsbh2" class="input_text" value="${hdExtend.mainSgZsbh2}"></td>
+                            </tr>
+                            <tr class="tr_header">
+                                <td colspan="5">建设依据</td>
+                            </tr>
+                            <tr class="tr_dark">
+                                <td rowspan="5" class="form_label_right" style="text-align: center;">建设依据</td>
+                                <td class="form_label_right">工可批准或核准机关和文号：</td>
+                                <td colspan="3" class="form_content">
+                                    <input type="text" name="gkpzCode" class="input_text" value="${hdExtend.gkpzCode}">
+                                </td>
+                            </tr>
+                            <tr class="tr_dark">
+                                <td class="form_label_right">批复或核准日期：</td>
+                                <td class="form_content">
+                                    <input type="text" name="hzDate" id="hzDate" class="input_date" value="${hdExtend.hzDate}">
+                                    <input type="button" class="button_calendar" value=" " onClick="calendar('hzDate');">
+                                </td>
+                                <td class="form_label_right">投资估算：</td>
+                                <td class="form_content">
+                                    <input type="text" name="planCost" class="input_text" value="${hdExtend.planCost}">
+                                </td>
+                            </tr>
+                            <tr class="tr_dark">
+                                <td class="form_label_right">初步设计批准机关和文号：</td>
+                                <td colspan="3" class="form_content">
+                                    <input type="text" name="cbshCode" class="input_text" value="${hdExtend.cbshCode}">
+                                </td>
+                            </tr>
+                            <tr class="tr_dark">
+                                <td class="form_label_right">批复日期：</td>
+                                <td class="form_content">
+                                    <input type="text" name="pfDate" id="pfDate" class="input_date" value="${hdExtend.pfDate}">
+                                    <input type="button" class="button_calendar" value=" " onClick="calendar('pfDate');">
+                                </td>
+                                <td class="form_label_right">批复工程：</td>
+                                <td class="form_content">
+                                    <input type="text" name="pfGq" class="input_text" value="${hdExtend.pfGq}">
+                                </td>
+                            </tr>
+                            <tr class="tr_dark">
+                                <td class="form_label_right">总概算：</td>
+                                <td colspan="3" class="form_content">
+                                    <input type="text" name="totalGs" class="input_text" value="${hdExtend.totalGs}">
+                                </td>
+                            </tr>
+                            <tr class="tr_light">
+                                <td class="form_label_right" style="text-align: center;">主体工程<br>施工图审批</td>
+                                <td class="form_label_right">批准机关和文号：</td>
+                                <td colspan="3" class="form_content">
+                                    <input type="text" name="pzjgCode" class="input_text" value="${hdExtend.pzjgCode}">
+                                </td>
+                            </tr>
+                            <tr class="tr_dark">
+                                <td class="form_label_right" style="text-align: center;">投资来源</td>
+                                <td colspan="4" class="form_content">
+                                    <input type="text" name="costFrom" class="input_text" value="${hdExtend.costFrom}">
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <table cellpadding="0" cellspacing="0" class="table_thin_line" border="1" style="width: 100%;">
+                            <tr class="tr_header">
+                                <td style="width: 5%;">序号</td>
+                                <td style="width: 50%;">申请材料名称</td>
+                                <td style="width: 8%;">应交份数</td>
+                                <td style="width: 8%;">实交份数</td>
+                                <td style="width: 15%;">附件</td>
+                            </tr>
+                            <c:forEach items="${applyList}" var="map">
+                                <c:set value="upLoad${map.no}" var="upLoadNo"/>
+                                <tr class="tr_dark">
+                                    <td style="text-align: center;">${map.no}
+                                        <input type="hidden" name="no" value="${map.no}">
+                                    </td>
+                                    <td style="text-align: left;">&nbsp;${map.materialName}</td>
+                                    <td style="text-align: center;">
+                                        <c:if test="${map.yjNum != 0}">${map.yjNum}</c:if>
+                                        <input type="hidden" name="yjNum${map.no}"
+                                               value="<c:if test="${map.yjNum != 0}">${map.yjNum}</c:if>">
+                                    </td>
+                                    <td style="text-align: center;">
+                                        <input type="text" name="sjNum${map.no}" class="input_number"
+                                               value="${map.sjNum}"
+                                               style="text-align: center;">
+                                    </td>
+                                    <td style="text-align: center;">${map[upLoadNo]}</td>
+                                </tr>
+                            </c:forEach>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+        <div style="text-align: center;" class="tr_button">
+            <input type="button" value="提交" class="button_confirm"
+                   onclick="save(this.value,'${STATUS_SUBMIT}','${tab}')">&nbsp;
+            <input type="button" value="保存" class="button_confirm" onclick="save('','${STATUS_EDIT}','${tab}')">&nbsp;
+            <input type="button" value="取消" class="button_cancel" onclick="parent.closeWindow()">
+        </div>
+        <div class="div_space"></div>
     </div>
 </form:form>
