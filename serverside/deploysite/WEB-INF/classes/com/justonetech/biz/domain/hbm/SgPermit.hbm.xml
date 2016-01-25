@@ -27,6 +27,17 @@
 			<generator class="com.justonetech.core.orm.hibernate.LongIdGenerator"/>
 		</id>
 
+        <property
+                name="bizCode"
+                column="BIZ_CODE"
+                type="string"
+                not-null="false"
+                length="50"
+                >
+            <meta attribute="ColumnName">业务编号</meta>
+            <meta attribute="ColumnComment">业务编号</meta>
+        </property>
+
 		<property
 			name="year"
 			column="YEAR"
@@ -360,7 +371,7 @@
         <property
                 name="csDate"
                 column="CS_DATE"
-                type="date"
+                type="timestamp"
                 not-null="false"
                 length="7"
                 >
@@ -393,7 +404,7 @@
         <property
                 name="fhDate"
                 column="FH_DATE"
-                type="date"
+                type="timestamp"
                 not-null="false"
                 length="7"
                 >
@@ -426,7 +437,7 @@
         <property
                 name="shDate"
                 column="SH_DATE"
-                type="date"
+                type="timestamp"
                 not-null="false"
                 length="7"
                 >
@@ -459,7 +470,7 @@
         <property
                 name="fgldDate"
                 column="FGLD_DATE"
-                type="date"
+                type="timestamp"
                 not-null="false"
                 length="7"
                 >
@@ -492,7 +503,7 @@
         <property
                 name="zxldDate"
                 column="ZXLD_DATE"
-                type="date"
+                type="timestamp"
                 not-null="false"
                 length="7"
                 >
@@ -525,7 +536,7 @@
         <property
                 name="wldDate"
                 column="WLD_DATE"
-                type="date"
+                type="timestamp"
                 not-null="false"
                 length="7"
                 >
@@ -580,7 +591,7 @@
         <property
                 name="submitDate"
                 column="SUBMIT_DATE"
-                type="date"
+                type="timestamp"
                 not-null="false"
                 length="7"
                 >
@@ -608,6 +619,39 @@
                 >
             <meta attribute="ColumnName">受理编号</meta>
             <meta attribute="ColumnComment">受理编号</meta>
+        </property>
+
+        <property
+                name="acceptPerson"
+                column="ACCEPT_PERSON"
+                type="string"
+                not-null="false"
+                length="50"
+                >
+            <meta attribute="ColumnName">受理人</meta>
+            <meta attribute="ColumnComment">受理人</meta>
+        </property>
+
+        <property
+                name="acceptDate"
+                column="ACCEPT_DATE"
+                type="timestamp"
+                not-null="false"
+                length="7"
+                >
+            <meta attribute="ColumnName">受理日期</meta>
+            <meta attribute="ColumnComment">受理日期</meta>
+        </property>
+
+        <property
+                name="acceptOpinion"
+                column="ACCEPT_OPINION"
+                type="string"
+                not-null="false"
+                length="50"
+                >
+            <meta attribute="ColumnName">受理意见</meta>
+            <meta attribute="ColumnComment">受理意见</meta>
         </property>
 
         <property
@@ -653,6 +697,7 @@
             <meta attribute="ColumnName">建设工程类别ids</meta>
             <meta attribute="ColumnComment">建设工程类别ids</meta>
         </property>
+
         <property
                 name="bzBackMaterial"
                 column="BZ_BACK_MATERIAL"
@@ -662,6 +707,50 @@
                 >
             <meta attribute="ColumnName">补正退回材料</meta>
             <meta attribute="ColumnComment">补正退回材料</meta>
+        </property>
+
+        <property
+                name="projectPlanCost"
+                column="PROJECT_PLAN_COST"
+                type="java.lang.Double"
+                not-null="false"
+                length="10"
+                >
+            <meta attribute="ColumnName">项目投资估算（万元）</meta>
+            <meta attribute="ColumnComment">项目投资估算（万元）</meta>
+        </property>
+
+        <property
+                name="sgUnitName"
+                column="SG_UNIT_NAME"
+                type="string"
+                not-null="false"
+                length="200"
+                >
+            <meta attribute="ColumnName">施工单位</meta>
+            <meta attribute="ColumnComment">施工单位</meta>
+        </property>
+
+        <property
+                name="jlUnitName"
+                column="JL_UNIT_NAME"
+                type="string"
+                not-null="false"
+                length="200"
+                >
+            <meta attribute="ColumnName">监理单位</meta>
+            <meta attribute="ColumnComment">监理单位</meta>
+        </property>
+
+        <property
+                name="sjUnitName"
+                column="SJ_UNIT_NAME"
+                type="string"
+                not-null="false"
+                length="200"
+                >
+            <meta attribute="ColumnName">设计单位</meta>
+            <meta attribute="ColumnComment">设计单位</meta>
         </property>
 
         <many-to-one
@@ -683,6 +772,14 @@
 		<many-to-one
 			name="projectType"
 			column="PROJECT_TYPE_ID"
+			class="com.justonetech.system.domain.SysCodeDetail"
+			not-null="false"
+		>
+		</many-to-one>
+
+        <many-to-one
+			name="propertyType"
+			column="PROPERTY_TYPE_ID"
 			class="com.justonetech.system.domain.SysCodeDetail"
 			not-null="false"
 		>
@@ -711,7 +808,12 @@
 		<set name="sgMaterials" inverse="true" order-by="NO">
 			<key column="SG_PERMIT_ID"/>
 			<one-to-many class="SgMaterial"/>
-		</set>
+        </set>
+
+        <set name="sgPermitHdExtends" inverse="true">
+            <key column="SG_PERMIT_ID"/>
+            <one-to-many class="SgPermitHdExtend"/>
+        </set>
 
 	</class>
     <query name="sgpermit_all_data_query">
