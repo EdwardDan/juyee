@@ -27,13 +27,15 @@
                     {name: "bizCode", width: "20", align: "center", searchtype: "string", sortable: true},
                     {name: "bjbh", width: "20", align: "center", searchtype: "string", sortable: true},
                     {name: "projectName", width: "35", align: "left", searchtype: "string", sortable: true},
-//                    {name: "zh", width: "25", align: "center", searchtype: "string", sortable: true},
                     {name: "projectType.name", width: "15", align: "center", searchtype: "string", sortable: true},
                     {name: "buildName", width: "35", align: "left", searchtype: "string", sortable: true},
-//                    {name: "applyPerson", width: "15", align: "center", searchtype: "string", sortable: true},
-//                    {name: "applyNum", width: "15", align: "center", searchtype: "string", sortable: true},
                     {name: "status", width: "5", align: "center", searchtype: "integer", sortable: true, hidden: true},
+                    <c:if test="${isReg}">
+                    {name: "statusNameBJ", width: "20", align: "center", searchtype: "string", sortable: true}
+                    </c:if>
+                    <c:if test="${!isReg}">
                     {name: "statusName", width: "20", align: "center", searchtype: "string", sortable: true}
+                    </c:if>
                 ],
                 actModel: [
                     {name: 'operation', width: 30, align: 'center'}

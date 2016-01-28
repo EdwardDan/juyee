@@ -39,7 +39,7 @@
                                 <td class="form_border">${item.bjbh}</td>
                                 <td class="form_border">${item.projectName}</td>
                                 <td class="form_border">${item.buildName}</td>
-                                <td class="form_border">${item.statusName}</td>
+                                <td class="form_border">${item.statusNameBJ}</td>
                                 <td class="form_border">
                                     <input type="button" value="查看" onclick="doView('${item.id}')"
                                            class="button_normal"/>

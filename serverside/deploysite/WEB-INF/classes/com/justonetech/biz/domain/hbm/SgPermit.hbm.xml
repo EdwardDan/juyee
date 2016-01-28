@@ -815,6 +815,11 @@
             <one-to-many class="SgPermitHdExtend"/>
         </set>
 
+        <set name="sgPermitHistoryOpinions" inverse="true">
+            <key column="SG_PERMIT_ID"/>
+            <one-to-many class="SgPermitHistoryOpinion"/>
+        </set>
+
 	</class>
     <query name="sgpermit_all_data_query">
         <![CDATA[FROM SgPermit]]>
