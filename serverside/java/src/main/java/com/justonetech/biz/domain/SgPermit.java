@@ -37,4 +37,19 @@ public class SgPermit extends BaseSgPermit {
     public String getStatusName() {
         return SgPermitStatus.getColorNameByCode(this.getStatus());
     }
+
+	public String getStatusNameBJ() {
+		String statusName = "办理中";
+		if (this.getStatus() > SgPermitStatus.STATUS_EDIT.getCode()) {
+			if (this.getStatus() == SgPermitStatus.STATUS_SLZX_BACK.getCode()) {
+				statusName = "审核不通过";
+			} else if (this.getStatus() == SgPermitStatus.STATUS_WLD_PASS.getCode()) {
+				statusName = "审核通过";
+			}
+		} else {
+			statusName = SgPermitStatus.STATUS_EDIT.getName();
+		}
+
+		return statusName;
+	}
 }

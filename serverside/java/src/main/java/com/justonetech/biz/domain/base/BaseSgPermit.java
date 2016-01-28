@@ -1,6 +1,7 @@
 package com.justonetech.biz.domain.base;
 
 import com.justonetech.biz.domain.SgPermitHdExtend;
+import com.justonetech.biz.domain.SgPermitHistoryOpinion;
 import com.justonetech.core.entity.Auditable;
 import com.justonetech.system.domain.SysCodeDetail;
 
@@ -376,6 +377,7 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
     private java.util.Set<com.justonetech.biz.domain.SgContractProjPerson> sgContractProjPersons;
     private java.util.Set<com.justonetech.biz.domain.SgUnitProj> sgUnitProjs;
     private java.util.Set<com.justonetech.biz.domain.SgPermitHdExtend> sgPermitHdExtends;
+    private java.util.Set<com.justonetech.biz.domain.SgPermitHistoryOpinion> sgPermitHistoryOpinions;
 
 
     /**
@@ -1355,6 +1357,17 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
 
     public void setSgPermitHdExtends(Set<SgPermitHdExtend> sgPermitHdExtends) {
         this.sgPermitHdExtends = sgPermitHdExtends;
+    }
+
+    public Set<SgPermitHistoryOpinion> getSgPermitHistoryOpinions() {
+        if (null==sgPermitHistoryOpinions){
+            sgPermitHistoryOpinions=new LinkedHashSet<SgPermitHistoryOpinion>();
+        }
+        return sgPermitHistoryOpinions;
+    }
+
+    public void setSgPermitHistoryOpinions(Set<SgPermitHistoryOpinion> sgPermitHistoryOpinions) {
+        this.sgPermitHistoryOpinions = sgPermitHistoryOpinions;
     }
 
     public boolean equals(Object obj) {

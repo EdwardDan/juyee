@@ -16,7 +16,6 @@ import com.justonetech.core.utils.JspHelper;
 import com.justonetech.core.utils.ReflectionUtils;
 import com.justonetech.core.utils.StringHelper;
 import com.justonetech.system.domain.SysCodeDetail;
-import com.justonetech.system.domain.SysRegPerson;
 import com.justonetech.system.domain.SysUser;
 import com.justonetech.system.manager.ExcelPrintManager;
 import com.justonetech.system.manager.SysCodeManager;
@@ -85,6 +84,9 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
     @Autowired
     private SgPermitHdExtendService sgPermitHdExtendService;
 
+    @Autowired
+    private SgPermitHistoryOpinionService sgPermitHistoryOpinionService;
+
     private static final String xlsTemplateName1 = "SgPermit.xls";
     private static final String xlsTemplateName2 = "SgPermit_green.xls";
     private static final String xlsTemplateName3 = "SgPermit_kgba.xls";
@@ -97,9 +99,7 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
      */
     @RequestMapping
     public String grid(Model model) {
-        SysUser sysUser = sysUserManager.getSysUser();
-        SysRegPerson regPerson = sysUser.getRegPerson();
-        model.addAttribute("isReg", null != regPerson);
+
         sgPermitManager.doPrivilegeCodeAndStatus(model);//编码和状态
 
         return "view/sg/sgPermit/grid";
@@ -294,6 +294,8 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
             isGreen = false;
         }
         model.addAttribute("isGreen", isGreen);
+        Set<SgPermitHistoryOpinion> historyOpinions = sgPermit.getSgPermitHistoryOpinions();
+        model.addAttribute("historyOpinions",historyOpinions);
 
         return backPageAudit(sgPermit.getProjectType());
     }
@@ -335,6 +337,8 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
             isGreen = false;
         }
         model.addAttribute("isGreen", isGreen);
+        Set<SgPermitHistoryOpinion> historyOpinions = sgPermit.getSgPermitHistoryOpinions();
+        model.addAttribute("historyOpinions",historyOpinions);
 
         return backPageView(sgPermit.getProjectType());
     }
@@ -578,7 +582,7 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
                 operation.setOptionUser(sysUser.getDisplayName());
                 operation.setStatus(status);
                 sgPermitOperationService.save(operation);
-                createOaTask(target);
+//                createOaTask(target);
             }
 
         } catch (Exception e) {
@@ -622,25 +626,43 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
             Integer status = target.getStatus();
             SysUser sysUser = sysUserManager.getSysUser();
             Timestamp date = new Timestamp(System.currentTimeMillis());
+            //保存历史审核信息
+            SgPermitHistoryOpinion historyOpinion = new SgPermitHistoryOpinion();
+            historyOpinion.setSgPermit(target);
+            historyOpinion.setProjectType(target.getProjectType());
             if (status == SgPermitStatus.STATUS_CS_PASS.getCode() || status == SgPermitStatus.STATUS_CS_BACK.getCode()) { //初审
                 target.setCsUser(sysUser.getDisplayName());
                 target.setCsDate(date);
+                historyOpinion.setOpinion(target.getCsOpinion());
+                historyOpinion.setAuditDate(target.getCsDate());
             } else if (status == SgPermitStatus.STATUS_FH_PASS.getCode() || status == SgPermitStatus.STATUS_FH_BACK.getCode()) { //复审
                 target.setFhUser(sysUser.getDisplayName());
                 target.setFhDate(date);
+                historyOpinion.setOpinion(target.getFhOpinion());
+                historyOpinion.setAuditDate(target.getFhDate());
             } else if (status == SgPermitStatus.STATUS_SH_PASS.getCode() || status == SgPermitStatus.STATUS_SH_BACK.getCode()) { //审核
                 target.setShUser(sysUser.getDisplayName());
                 target.setShDate(date);
+                historyOpinion.setOpinion(target.getShOpinion());
+                historyOpinion.setAuditDate(target.getShDate());
             } else if (status == SgPermitStatus.STATUS_FGLD_PASS.getCode() || status == SgPermitStatus.STATUS_FGLD_BACK.getCode()) { //分管领导审核
                 target.setFgldUser(sysUser.getDisplayName());
                 target.setFgldDate(date);
+                historyOpinion.setOpinion(target.getFgldOpinion());
+                historyOpinion.setAuditDate(target.getFgldDate());
             } else if (status == SgPermitStatus.STATUS_ZXLD_PASS.getCode() || status == SgPermitStatus.STATUS_ZXLD_BACK.getCode()) { //中心领导审核
                 target.setZxldUser(sysUser.getDisplayName());
                 target.setZxldDate(date);
+                historyOpinion.setOpinion(target.getZxldOpinion());
+                historyOpinion.setAuditDate(target.getZxldDate());
             } else if (status == SgPermitStatus.STATUS_WLD_PASS.getCode() || status == SgPermitStatus.STATUS_WLD_BACK.getCode()) { //委领导审核
                 target.setWldUser(sysUser.getDisplayName());
                 target.setWldDate(date);
+                historyOpinion.setOpinion(target.getWldOpinion());
+                historyOpinion.setAuditDate(target.getWldDate());
             }
+            historyOpinion.setStatus(status);
+            sgPermitHistoryOpinionService.save(historyOpinion);
             sgPermitService.save(target);
             //保存审核信息
             List<SgAuditOpinion> saveList = new ArrayList<SgAuditOpinion>();
@@ -694,7 +716,7 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
             operation.setStatus(status);
             sgPermitOperationService.save(operation);
 
-            createOaTask(target);
+//            createOaTask(target);
 
         } catch (Exception e) {
             log.error("error", e);
@@ -753,8 +775,14 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
             list5.add(proj);
         }
         sgUnitProjService.batchDelete(list5, list5.size());
+        //删除航道扩展信息
+        List<SgPermitHdExtend> list6 = new ArrayList<SgPermitHdExtend>();
+        Set<SgPermitHdExtend> sgPermitHdExtends = sgPermit.getSgPermitHdExtends();
+        for (SgPermitHdExtend sgPermitHdExtend : sgPermitHdExtends) {
+            list6.add(sgPermitHdExtend);
+        }
+        sgPermitHdExtendService.batchDelete(list6,list6.size());
         sgPermitService.delete(sgPermit);
-
         sendSuccessJSON(response, "删除成功");
     }
 
@@ -992,7 +1020,7 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
     public void printExcel1(HttpServletResponse response, HttpServletRequest request) throws Exception {
         //把打印的数据压入map中
         Map<String, Object> beans = new HashMap<String, Object>();
-        String fileName = "公路施工许可证";
+        String fileName = "公路施工许可证.xls";
         String id = request.getParameter("id");
         SgPermit sgPermit = sgPermitService.get(Long.valueOf(id));
         beans.put("bean", sgPermit);
@@ -1025,7 +1053,7 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
     public void printExcel2(HttpServletResponse response, HttpServletRequest request) throws Exception {
         //把打印的数据压入map中
         Map<String, Object> beans = new HashMap<String, Object>();
-        String fileName = "公路施工许可证(绿色通道)";
+        String fileName = "公路施工许可证(绿色通道).xls";
         String id = request.getParameter("id");
         SgPermit sgPermit = sgPermitService.get(Long.valueOf(id));
         beans.put("bean", sgPermit);
@@ -1058,7 +1086,7 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
     public void printExcel3(HttpServletResponse response, HttpServletRequest request) throws Exception {
         //把打印的数据压入map中
         Map<String, Object> beans = new HashMap<String, Object>();
-        String fileName = "航道工程建设项目开工备案表";
+        String fileName = "航道工程建设项目开工备案表.xls";
         String id = request.getParameter("id");
         SgPermit sgPermit = sgPermitService.get(Long.valueOf(id));
         beans.put("bean", sgPermit);

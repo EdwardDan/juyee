@@ -172,4 +172,15 @@ public class PlatformController extends BaseCRUDActionController {
 //
 //        return "view/platform/mainZgdj";
 //    }
+
+    /**
+     * 附件下载
+     *
+     * @return 。
+     */
+    @RequestMapping
+    public String attachDownload() {
+
+        return "view/platform/mainDownload";
+    }
 }

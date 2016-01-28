@@ -9,6 +9,8 @@ import com.justonetech.biz.utils.enums.SgPermitStatus;
 import com.justonetech.core.utils.JspHelper;
 import com.justonetech.core.utils.StringHelper;
 import com.justonetech.system.domain.SysCodeDetail;
+import com.justonetech.system.domain.SysRegPerson;
+import com.justonetech.system.domain.SysUser;
 import com.justonetech.system.manager.SimpleQueryManager;
 import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
@@ -74,6 +76,10 @@ public class SgPermitManager {
      * @param model 。
      */
     public void doPrivilegeCodeAndStatus(Model model) {
+        SysUser sysUser = sysUserManager.getSysUser();
+        SysRegPerson regPerson = sysUser.getRegPerson();
+        model.addAttribute("isReg", null != regPerson);
+
         model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.SG_PERMIT_EDIT));//编辑
         model.addAttribute("canCsAudit", sysUserManager.hasPrivilege(PrivilegeCode.SG_PERMIT_CS_AUDIT));//初审
         model.addAttribute("canSlAudit", sysUserManager.hasPrivilege(PrivilegeCode.SG_PERMIT_SL_AUDIT));//初审
