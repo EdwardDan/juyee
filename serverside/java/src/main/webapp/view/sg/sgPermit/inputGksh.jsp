@@ -64,7 +64,7 @@
                 <tr class="tr_light">
                     <td class="form_label_right" nowrap>项目性质：</td>
                     <td class="form_content" colspan="3">
-                        <sys:code code="${xmxz}" type="select" name="propertyType" id="propertyType"/>
+                        <sys:code code="${xmxz}" type="select" name="propertyType" id="propertyType" sysCodeDetailId="${bean.propertyType.id}"/>
                     </td>
                 </tr>
                 <tr class="tr_dark">

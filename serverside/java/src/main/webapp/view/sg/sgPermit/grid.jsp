@@ -84,7 +84,9 @@
                                 opButton += '<input type="button" value="审核" onclick="doAudit(' + id + ')" class="button_normal"/> ';
                             }
                         }
+                        <c:if test="${isReg}">
                         opButton += '<input type="button" value="操作步骤" onclick="doOperation(' + id + ')" class="button_normal_long"/> ';
+                        </c:if>
                         jQuery("#listGrid").jqGrid('setRowData', ids[i], {operation: opButton});
                     }
                 }, rownumbers: true
