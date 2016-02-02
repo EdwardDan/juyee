@@ -7,6 +7,9 @@
         var validateCondition = [];
         validateInit(validateCondition, formId);
         var type = $("#type").val();
+        if ('${bean.type}' != '') {
+            type = '${bean.type}';
+        }
         checkType(type);
     });
 
@@ -23,10 +26,12 @@
             $("#tr1").hide();
             $("#tr2").hide();
             $("#auditReq").val("");
+            $("#auditReqGreen").val("");
         } else {
             $("#tr_num").hide();
             $("#tr1").show();
             $("#tr2").show();
+            $("#yjNum").val("");
         }
     }
 </script>
@@ -42,8 +47,8 @@
                 <td class="form_content">
                     <select name="type" id="type" class="form_select_long" style="width: 100px;"
                             onchange="checkType(this.value)">
-                        <option value="apply">申请材料</option>
-                        <option value="submit">提交材料</option>
+                        <option value="apply" <c:if test="${bean.type == 'apply'}">selected</c:if>>申请材料</option>
+                        <option value="submit" <c:if test="${bean.type == 'submit'}">selected</c:if>>提交材料</option>
                     </select>
                 </td>
             </tr>

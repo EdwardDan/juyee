@@ -22,7 +22,7 @@
                     {name: "auditReq", width: "80", align: "left", searchtype: "string", sortable: true}
                 ],
                 actModel: [
-                    {name: 'operation', width: 20, align: 'center'}
+                    {name: 'operation', width: 25, align: 'center'}
                 ],
                 pager: '#pager2',
                 caption: "施工材料信息列表",
@@ -32,10 +32,9 @@
                     for (var i = 0; i < ids.length; i++) {
                         var id = ids[i];
                         var opButton = '<input type="button" value="查看" onclick="doView(' + id + ')" class="button_normal"/> ';
-                        <%--<c:if test="${canEdit}">--%>
-                        <%--opButton += '<input type="button" value="编辑" onclick="doEdit(' + id + ')" class="button_normal"/> ';--%>
-                        <%--opButton += '<input type="button" value="删除" onclick="doDelete(' + id + ')" class="button_normal"/>';--%>
-                        <%--</c:if>--%>
+                        <c:if test="${canEdit}">
+                        opButton += '<input type="button" value="编辑" onclick="doEdit(' + id + ')" class="button_normal"/> ';
+                        </c:if>
                         jQuery("#listGrid").jqGrid('setRowData', ids[i], { operation: opButton});
                     }
                 }, rownumbers: true

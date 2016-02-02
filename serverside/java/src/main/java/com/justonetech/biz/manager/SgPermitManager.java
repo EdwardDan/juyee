@@ -2,6 +2,7 @@ package com.justonetech.biz.manager;
 
 import com.justonetech.biz.daoservice.SgMaterialInfoService;
 import com.justonetech.biz.daoservice.SgPermitHdExtendService;
+import com.justonetech.biz.daoservice.SgPermitHistoryOpinionService;
 import com.justonetech.biz.domain.*;
 import com.justonetech.biz.utils.Constants;
 import com.justonetech.biz.utils.enums.SgPermitNotAcceptMat;
@@ -47,6 +48,9 @@ public class SgPermitManager {
 
     @Autowired
     private SgPermitHdExtendService sgPermitHdExtendService;
+
+    @Autowired
+    private SgPermitHistoryOpinionService sgPermitHistoryOpinionService;
 
     /**
      * 自动生成业务编码
@@ -223,7 +227,7 @@ public class SgPermitManager {
         return list;
     }
 
-    public void saveHdExtend( HttpServletRequest request,SgPermit sgPermit){
+    public void saveHdExtend(HttpServletRequest request, SgPermit sgPermit) {
         String mainSjZbfs = request.getParameter("mainSjZbfs");
         String mainSjZbj = request.getParameter("mainSjZbj");
         String mainSjZzdj = request.getParameter("mainSjZzdj");
@@ -284,5 +288,120 @@ public class SgPermitManager {
         hdExtend.setPzjgCode(JspHelper.getString(pzjgCode));
         hdExtend.setCostFrom(JspHelper.getString(costFrom));
         sgPermitHdExtendService.save(hdExtend);
+    }
+
+    /**
+     * 获取历史信息
+     * @param sgPermit ，
+     */
+    public List<SgPermitHistoryOpinion> getHistorys(SgPermit sgPermit) {
+        List<SgPermitHistoryOpinion> list = new ArrayList<SgPermitHistoryOpinion>();
+        List<SgPermitHistoryOpinion> csList = new ArrayList<SgPermitHistoryOpinion>();
+        List<SgPermitHistoryOpinion> fhList = new ArrayList<SgPermitHistoryOpinion>();
+        List<SgPermitHistoryOpinion> shListPass = new ArrayList<SgPermitHistoryOpinion>();
+        List<SgPermitHistoryOpinion> shListBack = new ArrayList<SgPermitHistoryOpinion>();
+        List<SgPermitHistoryOpinion> fgldListPass = new ArrayList<SgPermitHistoryOpinion>();
+        List<SgPermitHistoryOpinion> fgldListBack = new ArrayList<SgPermitHistoryOpinion>();
+        List<SgPermitHistoryOpinion> zxldListPass = new ArrayList<SgPermitHistoryOpinion>();
+        List<SgPermitHistoryOpinion> zxldListBack = new ArrayList<SgPermitHistoryOpinion>();
+        List<SgPermitHistoryOpinion> wldList = new ArrayList<SgPermitHistoryOpinion>();
+        Set<SgPermitHistoryOpinion> historyOpinions = sgPermit.getSgPermitHistoryOpinions();
+        if (historyOpinions.size() > 0) {
+            for (SgPermitHistoryOpinion opinion : historyOpinions) {
+                Integer status = opinion.getStatus();
+                if (status.equals(SgPermitStatus.STATUS_CS_PASS.getCode())) {
+                    csList.add(opinion);
+                } else if (status.equals(SgPermitStatus.STATUS_FH_PASS.getCode())) {
+                    fhList.add(opinion);
+                } else if (status.equals(SgPermitStatus.STATUS_SH_PASS.getCode())) {
+                    shListPass.add(opinion);
+                } else if (status.equals(SgPermitStatus.STATUS_SH_BACK.getCode())) {
+                    shListBack.add(opinion);
+                } else if (status.equals(SgPermitStatus.STATUS_FGLD_PASS.getCode())) {
+                    fgldListPass.add(opinion);
+                } else if (status.equals(SgPermitStatus.STATUS_FGLD_BACK.getCode())) {
+                    fgldListBack.add(opinion);
+                } else if (status.equals(SgPermitStatus.STATUS_ZXLD_PASS.getCode())) {
+                    zxldListPass.add(opinion);
+                } else if (status.equals(SgPermitStatus.STATUS_ZXLD_BACK.getCode())) {
+                    zxldListBack.add(opinion);
+                } else if (status.equals(SgPermitStatus.STATUS_WLD_PASS.getCode())) {
+                    wldList.add(opinion);
+                }
+            }
+            if (csList.size() > 0) {
+                csList.remove(csList.iterator().next());
+                if (csList.size() > 0) {
+                    for (SgPermitHistoryOpinion opinion : csList) {
+                        list.add(opinion);
+                    }
+                }
+            }
+            if (fhList.size() > 0) {
+                fhList.remove(fhList.iterator().next());
+                if (fhList.size() > 0) {
+                    for (SgPermitHistoryOpinion opinion : fhList) {
+                        list.add(opinion);
+                    }
+                }
+            }
+            if (shListPass.size() > 0) {
+                shListPass.remove(shListPass.iterator().next());
+                if (shListPass.size() > 0) {
+                    for (SgPermitHistoryOpinion opinion : shListPass) {
+                        list.add(opinion);
+                    }
+                }
+            }
+            if (shListBack.size() > 0) {
+                shListBack.remove(shListBack.iterator().next());
+                if (shListBack.size() > 0) {
+                    for (SgPermitHistoryOpinion opinion : shListBack) {
+                        list.add(opinion);
+                    }
+                }
+            }
+            if (fgldListPass.size() > 0) {
+                fgldListPass.remove(fgldListPass.iterator().next());
+                if (fgldListPass.size() > 0) {
+                    for (SgPermitHistoryOpinion opinion : fgldListPass) {
+                        list.add(opinion);
+                    }
+                }
+            }
+            if (fgldListBack.size() > 0) {
+                fgldListBack.remove(fgldListBack.iterator().next());
+                if (fgldListBack.size() > 0) {
+                    for (SgPermitHistoryOpinion opinion : fgldListBack) {
+                        list.add(opinion);
+                    }
+                }
+            }
+            if (zxldListPass.size() > 0) {
+                zxldListPass.remove(zxldListPass.iterator().next());
+                if (zxldListPass.size() > 0) {
+                    for (SgPermitHistoryOpinion opinion : zxldListPass) {
+                        list.add(opinion);
+                    }
+                }
+            }
+            if (zxldListBack.size() > 0) {
+                zxldListBack.remove(zxldListBack.iterator().next());
+                if (zxldListBack.size() > 0) {
+                    for (SgPermitHistoryOpinion opinion : zxldListBack) {
+                        list.add(opinion);
+                    }
+                }
+            }
+            if (wldList.size() > 0) {
+                wldList.remove(wldList.iterator().next());
+                if (wldList.size() > 0) {
+                    for (SgPermitHistoryOpinion opinion : wldList) {
+                        list.add(opinion);
+                    }
+                }
+            }
+        }
+        return list;
     }
 }

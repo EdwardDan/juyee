@@ -32,6 +32,12 @@
                     <sys:toHtml>${bean.auditReq}</sys:toHtml>
                 </td>
             </tr>
+            <tr class="tr_dark" id="tr2">
+                <td class="form_label">绿色审核要求：</td>
+                <td class="form_content">
+                    <sys:toHtml>${bean.auditReqGreen}</sys:toHtml>
+                </td>
+            </tr>
         </c:if>
         <tr class="tr_button">
             <td class="form_content" colspan="2" style="text-align: center;">
