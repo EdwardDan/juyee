@@ -517,7 +517,7 @@
                                 </td>
                             </tr>
                             <tr class="tr_light">
-                                <td class="form_label_right" style="width: 15%;">初审时间：</td>
+                                <td class="form_label_right" style="width: 20%;">初审时间：</td>
                                 <td class="form_content">
                                     <fmt:formatDate value="${item.auditDate}" pattern="yyyy-MM-dd HH:mm"/>
                                 </td>
@@ -542,7 +542,7 @@
                                 </td>
                             </tr>
                             <tr class="tr_light">
-                                <td class="form_label_right" style="width: 15%;">初审时间：</td>
+                                <td class="form_label_right" style="width: 20%;">初审时间：</td>
                                 <td class="form_content">
                                     <fmt:formatDate value="${item.auditDate}" pattern="yyyy-MM-dd HH:mm"/>
                                 </td>
@@ -560,7 +560,7 @@
                                 </td>
                             </tr>
                             <tr class="tr_light">
-                                <td class="form_label_right" style="width: 15%;">复核时间：</td>
+                                <td class="form_label_right" style="width: 20%;">复核时间：</td>
                                 <td class="form_content">
                                     <fmt:formatDate value="${item.auditDate}" pattern="yyyy-MM-dd HH:mm"/>
                                 </td>
@@ -569,8 +569,8 @@
                     </c:forEach>
 
                     <tr class="tr_dark">
-                        <td class="form_label_right">复核意见：</td>
-                        <td class="form_content">
+                        <td class="form_label_right" style="width: 20%;">复核意见：</td>
+                        <td class="form_content" style="width: 80%;">
                             <form:textarea path="fhOpinion" cssClass="input_textarea" cssStyle="width: 95%;"/>
                         </td>
                     </tr>
@@ -586,7 +586,7 @@
                                 </td>
                             </tr>
                             <tr class="tr_light">
-                                <td class="form_label_right" style="width: 15%;">初审时间：</td>
+                                <td class="form_label_right" style="width: 20%;">初审时间：</td>
                                 <td class="form_content">
                                     <fmt:formatDate value="${item.auditDate}" pattern="yyyy-MM-dd HH:mm"/>
                                 </td>
@@ -604,7 +604,7 @@
                                 </td>
                             </tr>
                             <tr class="tr_light">
-                                <td class="form_label_right" style="width: 15%;">复核时间：</td>
+                                <td class="form_label_right" style="width: 20%;">复核时间：</td>
                                 <td class="form_content">
                                     <fmt:formatDate value="${item.auditDate}" pattern="yyyy-MM-dd HH:mm"/>
                                 </td>
@@ -622,7 +622,7 @@
                                 </td>
                             </tr>
                             <tr class="tr_light">
-                                <td class="form_label_right" style="width: 15%;">审核时间：</td>
+                                <td class="form_label_right" style="width: 20%;">审核时间：</td>
                                 <td class="form_content">
                                     <fmt:formatDate value="${item.auditDate}" pattern="yyyy-MM-dd HH:mm"/>
                                 </td>
@@ -630,8 +630,8 @@
                         </c:if>
                     </c:forEach>
                     <tr class="tr_light">
-                        <td class="form_label_right">审核意见：</td>
-                        <td class="form_content">
+                        <td class="form_label_right" style="width: 20%;">审核意见：</td>
+                        <td class="form_content" style="width: 80%;">
                             <form:textarea path="shOpinion" cssClass="input_textarea" cssStyle="width: 95%;"/>
                         </td>
                     </tr>
@@ -647,7 +647,7 @@
                                 </td>
                             </tr>
                             <tr class="tr_light">
-                                <td class="form_label_right" style="width: 15%;">初审时间：</td>
+                                <td class="form_label_right" style="width: 20%;">初审时间：</td>
                                 <td class="form_content">
                                     <fmt:formatDate value="${item.auditDate}" pattern="yyyy-MM-dd HH:mm"/>
                                 </td>
@@ -665,7 +665,7 @@
                                 </td>
                             </tr>
                             <tr class="tr_light">
-                                <td class="form_label_right" style="width: 15%;">复核时间：</td>
+                                <td class="form_label_right" style="width: 20%;">复核时间：</td>
                                 <td class="form_content">
                                     <fmt:formatDate value="${item.auditDate}" pattern="yyyy-MM-dd HH:mm"/>
                                 </td>
@@ -683,7 +683,7 @@
                                 </td>
                             </tr>
                             <tr class="tr_light">
-                                <td class="form_label_right" style="width: 15%;">审核时间：</td>
+                                <td class="form_label_right" style="width: 20%;">审核时间：</td>
                                 <td class="form_content">
                                     <fmt:formatDate value="${item.auditDate}" pattern="yyyy-MM-dd HH:mm"/>
                                 </td>
@@ -701,7 +701,7 @@
                                 </td>
                             </tr>
                             <tr class="tr_light">
-                                <td class="form_label_right" style="width: 15%;">分管领导审核时间：</td>
+                                <td class="form_label_right" style="width: 20%;">分管领导审核时间：</td>
                                 <td class="form_content">
                                     <fmt:formatDate value="${item.auditDate}" pattern="yyyy-MM-dd HH:mm"/>
                                 </td>
@@ -709,8 +709,8 @@
                         </c:if>
                     </c:forEach>
                     <tr class="tr_light">
-                        <td class="form_label_right">分管领导审核意见：</td>
-                        <td class="form_content">
+                        <td class="form_label_right" style="width: 20%;">分管领导审核意见：</td>
+                        <td class="form_content" style="width: 80%;">
                             <form:textarea path="fgldOpinion" cssClass="input_textarea" cssStyle="width: 95%;"/>
                         </td>
                     </tr>
@@ -726,7 +726,7 @@
                                 </td>
                             </tr>
                             <tr class="tr_light">
-                                <td class="form_label_right" style="width: 15%;">初审时间：</td>
+                                <td class="form_label_right" style="width: 20%;">初审时间：</td>
                                 <td class="form_content">
                                     <fmt:formatDate value="${item.auditDate}" pattern="yyyy-MM-dd HH:mm"/>
                                 </td>
@@ -744,7 +744,7 @@
                                 </td>
                             </tr>
                             <tr class="tr_light">
-                                <td class="form_label_right" style="width: 15%;">复核时间：</td>
+                                <td class="form_label_right" style="width: 20%;">复核时间：</td>
                                 <td class="form_content">
                                     <fmt:formatDate value="${item.auditDate}" pattern="yyyy-MM-dd HH:mm"/>
                                 </td>
@@ -762,7 +762,7 @@
                                 </td>
                             </tr>
                             <tr class="tr_light">
-                                <td class="form_label_right" style="width: 15%;">审核时间：</td>
+                                <td class="form_label_right" style="width: 20%;">审核时间：</td>
                                 <td class="form_content">
                                     <fmt:formatDate value="${item.auditDate}" pattern="yyyy-MM-dd HH:mm"/>
                                 </td>
@@ -780,7 +780,7 @@
                                 </td>
                             </tr>
                             <tr class="tr_light">
-                                <td class="form_label_right" style="width: 15%;">分管领导审核时间：</td>
+                                <td class="form_label_right" style="width: 20%;">分管领导审核时间：</td>
                                 <td class="form_content">
                                     <fmt:formatDate value="${item.auditDate}" pattern="yyyy-MM-dd HH:mm"/>
                                 </td>
@@ -798,7 +798,7 @@
                                 </td>
                             </tr>
                             <tr class="tr_light">
-                                <td class="form_label_right" style="width: 15%;">中心领导审核时间：</td>
+                                <td class="form_label_right" style="width: 20%;">中心领导审核时间：</td>
                                 <td class="form_content">
                                     <fmt:formatDate value="${item.auditDate}" pattern="yyyy-MM-dd HH:mm"/>
                                 </td>
@@ -806,8 +806,8 @@
                         </c:if>
                     </c:forEach>
                     <tr class="tr_dark">
-                        <td class="form_label_right">中心领导审核意见：</td>
-                        <td class="form_content">
+                        <td class="form_label_right" style="width: 20%;">中心领导审核意见：</td>
+                        <td class="form_content" style="width: 80%;">
                             <form:textarea path="zxldOpinion" cssClass="input_textarea" cssStyle="width: 95%;"/>
                         </td>
                     </tr>
@@ -823,7 +823,7 @@
                                 </td>
                             </tr>
                             <tr class="tr_light">
-                                <td class="form_label_right" style="width: 15%;">初审时间：</td>
+                                <td class="form_label_right" style="width: 20%;">初审时间：</td>
                                 <td class="form_content">
                                     <fmt:formatDate value="${item.auditDate}" pattern="yyyy-MM-dd HH:mm"/>
                                 </td>
@@ -841,7 +841,7 @@
                                 </td>
                             </tr>
                             <tr class="tr_light">
-                                <td class="form_label_right" style="width: 15%;">复核时间：</td>
+                                <td class="form_label_right" style="width: 20%;">复核时间：</td>
                                 <td class="form_content">
                                     <fmt:formatDate value="${item.auditDate}" pattern="yyyy-MM-dd HH:mm"/>
                                 </td>
@@ -859,7 +859,7 @@
                                 </td>
                             </tr>
                             <tr class="tr_light">
-                                <td class="form_label_right" style="width: 15%;">审核时间：</td>
+                                <td class="form_label_right" style="width: 20%;">审核时间：</td>
                                 <td class="form_content">
                                     <fmt:formatDate value="${item.auditDate}" pattern="yyyy-MM-dd HH:mm"/>
                                 </td>
@@ -877,7 +877,7 @@
                                 </td>
                             </tr>
                             <tr class="tr_light">
-                                <td class="form_label_right" style="width: 15%;">分管领导审核时间：</td>
+                                <td class="form_label_right" style="width: 20%;">分管领导审核时间：</td>
                                 <td class="form_content">
                                     <fmt:formatDate value="${item.auditDate}" pattern="yyyy-MM-dd HH:mm"/>
                                 </td>
@@ -895,7 +895,7 @@
                                 </td>
                             </tr>
                             <tr class="tr_light">
-                                <td class="form_label_right" style="width: 15%;">中心领导审核时间：</td>
+                                <td class="form_label_right" style="width: 20%;">中心领导审核时间：</td>
                                 <td class="form_content">
                                     <fmt:formatDate value="${item.auditDate}" pattern="yyyy-MM-dd HH:mm"/>
                                 </td>
@@ -913,7 +913,7 @@
                                 </td>
                             </tr>
                             <tr class="tr_light">
-                                <td class="form_label_right" style="width: 15%;">委领导审核时间：</td>
+                                <td class="form_label_right" style="width: 20%;">委领导审核时间：</td>
                                 <td class="form_content">
                                     <fmt:formatDate value="${item.auditDate}" pattern="yyyy-MM-dd HH:mm"/>
                                 </td>
@@ -921,8 +921,8 @@
                         </c:if>
                     </c:forEach>
                     <tr class="tr_dark">
-                        <td class="form_label_right">委领导审核意见：</td>
-                        <td class="form_content">
+                        <td class="form_label_right" style="width: 20%;">委领导审核意见：</td>
+                        <td class="form_content" style="width: 80%;">
                             <form:textarea path="wldOpinion" cssClass="input_textarea" cssStyle="width: 95%;"/>
                         </td>
                     </tr>

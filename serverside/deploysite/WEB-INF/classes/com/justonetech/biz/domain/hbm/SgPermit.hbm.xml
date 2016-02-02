@@ -815,7 +815,7 @@
             <one-to-many class="SgPermitHdExtend"/>
         </set>
 
-        <set name="sgPermitHistoryOpinions" inverse="true">
+        <set name="sgPermitHistoryOpinions" inverse="true" order-by="SG_PERMIT_ID desc">
             <key column="SG_PERMIT_ID"/>
             <one-to-many class="SgPermitHistoryOpinion"/>
         </set>

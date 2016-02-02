@@ -288,18 +288,6 @@
                                     </td>
                                 </tr>
                             </c:if>
-                            <tr class="tr_dark">
-                                <td class="form_label_right" style="width: 20%;">初审意见：</td>
-                                <td class="form_content" style="width: 80%;">
-                                    <sys:toHtml>${bean.csOpinion}</sys:toHtml>
-                                </td>
-                            </tr>
-                            <tr class="tr_light">
-                                <td class="form_label_right" style="width: 15%;">初审时间：</td>
-                                <td class="form_content">
-                                    <fmt:formatDate value="${bean.csDate}" pattern="yyyy-MM-dd HH:mm"/>
-                                </td>
-                            </tr>
                         </c:forEach>
                     </c:if>
 
@@ -320,18 +308,6 @@
                                 </tr>
                             </c:if>
                         </c:forEach>
-                        <tr class="tr_dark">
-                            <td class="form_label_right" style="width: 20%;">初审意见：</td>
-                            <td class="form_content" style="width: 80%;">
-                                <sys:toHtml>${bean.csOpinion}</sys:toHtml>
-                            </td>
-                        </tr>
-                        <tr class="tr_light">
-                            <td class="form_label_right" style="width: 15%;">初审时间：</td>
-                            <td class="form_content">
-                                <fmt:formatDate value="${bean.csDate}" pattern="yyyy-MM-dd HH:mm"/>
-                            </td>
-                        </tr>
                         <c:forEach items="${historyOpinions}" var="item">
                             <c:if test="${item.status==STATUS_FH_PASS && item.projectType.id==bean.projectType.id}">
                                 <tr class="tr_dark">
@@ -348,18 +324,6 @@
                                 </tr>
                             </c:if>
                         </c:forEach>
-                        <tr class="tr_dark">
-                            <td class="form_label_right" style="width: 20%;">复核意见：</td>
-                            <td class="form_content" style="width: 80%;">
-                                <sys:toHtml>${bean.fhOpinion}</sys:toHtml>
-                            </td>
-                        </tr>
-                        <tr class="tr_light">
-                            <td class="form_label_right" style="width: 15%;">复核时间：</td>
-                            <td class="form_content">
-                                <fmt:formatDate value="${bean.fhDate}" pattern="yyyy-MM-dd HH:mm"/>
-                            </td>
-                        </tr>
                     </c:if>
 
                     <c:if test="${(bean.status==STATUS_SH_PASS)}">
@@ -379,18 +343,6 @@
                                 </tr>
                             </c:if>
                         </c:forEach>
-                        <tr class="tr_dark">
-                            <td class="form_label_right" style="width: 20%;">初审意见：</td>
-                            <td class="form_content" style="width: 80%;">
-                                <sys:toHtml>${bean.csOpinion}</sys:toHtml>
-                            </td>
-                        </tr>
-                        <tr class="tr_light">
-                            <td class="form_label_right" style="width: 15%;">初审时间：</td>
-                            <td class="form_content">
-                                <fmt:formatDate value="${bean.csDate}" pattern="yyyy-MM-dd HH:mm"/>
-                            </td>
-                        </tr>
                         <c:forEach items="${historyOpinions}" var="item">
                             <c:if test="${item.status==STATUS_FH_PASS && item.projectType.id==bean.projectType.id}">
                                 <tr class="tr_dark">
@@ -407,18 +359,6 @@
                                 </tr>
                             </c:if>
                         </c:forEach>
-                        <tr class="tr_dark">
-                            <td class="form_label_right" style="width: 20%;">复核意见：</td>
-                            <td class="form_content" style="width: 80%;">
-                                <sys:toHtml>${bean.fhOpinion}</sys:toHtml>
-                            </td>
-                        </tr>
-                        <tr class="tr_light">
-                            <td class="form_label_right" style="width: 15%;">复核时间：</td>
-                            <td class="form_content">
-                                <fmt:formatDate value="${bean.fhDate}" pattern="yyyy-MM-dd HH:mm"/>
-                            </td>
-                        </tr>
                         <c:forEach items="${historyOpinions}" var="item">
                             <c:if test="${(item.status==STATUS_SH_PASS||item.status==STATUS_SH_BACK) && item.projectType.id==bean.projectType.id}">
                                 <tr class="tr_dark">
@@ -435,18 +375,6 @@
                                 </tr>
                             </c:if>
                         </c:forEach>
-                        <tr class="tr_dark">
-                            <td class="form_label_right" style="width: 20%;">审核意见：</td>
-                            <td class="form_content" style="width: 80%;">
-                                <sys:toHtml>${bean.shOpinion}</sys:toHtml>
-                            </td>
-                        </tr>
-                        <tr class="tr_light">
-                            <td class="form_label_right" style="width: 15%;">审核时间：</td>
-                            <td class="form_content">
-                                <fmt:formatDate value="${bean.shDate}" pattern="yyyy-MM-dd HH:mm"/>
-                            </td>
-                        </tr>
                     </c:if>
 
                     <c:if test="${(bean.status==STATUS_FGLD_PASS)}">
@@ -466,18 +394,6 @@
                                 </tr>
                             </c:if>
                         </c:forEach>
-                        <tr class="tr_dark">
-                            <td class="form_label_right" style="width: 20%;">初审意见：</td>
-                            <td class="form_content" style="width: 80%;">
-                                <sys:toHtml>${bean.csOpinion}</sys:toHtml>
-                            </td>
-                        </tr>
-                        <tr class="tr_light">
-                            <td class="form_label_right" style="width: 15%;">初审时间：</td>
-                            <td class="form_content">
-                                <fmt:formatDate value="${bean.csDate}" pattern="yyyy-MM-dd HH:mm"/>
-                            </td>
-                        </tr>
                         <c:forEach items="${historyOpinions}" var="item">
                             <c:if test="${item.status==STATUS_FH_PASS && item.projectType.id==bean.projectType.id}">
                                 <tr class="tr_dark">
@@ -494,18 +410,6 @@
                                 </tr>
                             </c:if>
                         </c:forEach>
-                        <tr class="tr_dark">
-                            <td class="form_label_right" style="width: 20%;">复核意见：</td>
-                            <td class="form_content" style="width: 80%;">
-                                <sys:toHtml>${bean.fhOpinion}</sys:toHtml>
-                            </td>
-                        </tr>
-                        <tr class="tr_light">
-                            <td class="form_label_right" style="width: 15%;">复核时间：</td>
-                            <td class="form_content">
-                                <fmt:formatDate value="${bean.fhDate}" pattern="yyyy-MM-dd HH:mm"/>
-                            </td>
-                        </tr>
                         <c:forEach items="${historyOpinions}" var="item">
                             <c:if test="${(item.status==STATUS_SH_PASS||item.status==STATUS_SH_BACK) && item.projectType.id==bean.projectType.id}">
                                 <tr class="tr_dark">
@@ -522,18 +426,6 @@
                                 </tr>
                             </c:if>
                         </c:forEach>
-                        <tr class="tr_dark">
-                            <td class="form_label_right" style="width: 20%;">审核意见：</td>
-                            <td class="form_content" style="width: 80%;">
-                                <sys:toHtml>${bean.shOpinion}</sys:toHtml>
-                            </td>
-                        </tr>
-                        <tr class="tr_light">
-                            <td class="form_label_right" style="width: 15%;">审核时间：</td>
-                            <td class="form_content">
-                                <fmt:formatDate value="${bean.shDate}" pattern="yyyy-MM-dd HH:mm"/>
-                            </td>
-                        </tr>
                         <c:forEach items="${historyOpinions}" var="item">
                             <c:if test="${(item.status==STATUS_FGLD_PASS||item.status==STATUS_FGLD_BACK) && item.projectType.id==bean.projectType.id}">
                                 <tr class="tr_dark">
@@ -550,18 +442,6 @@
                                 </tr>
                             </c:if>
                         </c:forEach>
-                        <tr class="tr_dark">
-                            <td class="form_label_right" style="width: 20%;">分管领导审核意见：</td>
-                            <td class="form_content" style="width: 80%;">
-                                <sys:toHtml>${bean.fgldOpinion}</sys:toHtml>
-                            </td>
-                        </tr>
-                        <tr class="tr_light">
-                            <td class="form_label_right" style="width: 15%;">分管领导审核时间：</td>
-                            <td class="form_content">
-                                <fmt:formatDate value="${bean.fgldDate}" pattern="yyyy-MM-dd HH:mm"/>
-                            </td>
-                        </tr>
                     </c:if>
 
                     <c:if test="${(bean.status==STATUS_ZXLD_PASS)}">
@@ -581,18 +461,6 @@
                                 </tr>
                             </c:if>
                         </c:forEach>
-                        <tr class="tr_dark">
-                            <td class="form_label_right" style="width: 20%;">初审意见：</td>
-                            <td class="form_content" style="width: 80%;">
-                                <sys:toHtml>${bean.csOpinion}</sys:toHtml>
-                            </td>
-                        </tr>
-                        <tr class="tr_light">
-                            <td class="form_label_right" style="width: 15%;">初审时间：</td>
-                            <td class="form_content">
-                                <fmt:formatDate value="${bean.csDate}" pattern="yyyy-MM-dd HH:mm"/>
-                            </td>
-                        </tr>
                         <c:forEach items="${historyOpinions}" var="item">
                             <c:if test="${item.status==STATUS_FH_PASS && item.projectType.id==bean.projectType.id}">
                                 <tr class="tr_dark">
@@ -609,19 +477,6 @@
                                 </tr>
                             </c:if>
                         </c:forEach>
-                        <tr class="tr_dark">
-                            <td class="form_label_right" style="width: 20%;">复核意见：</td>
-                            <td class="form_content" style="width: 80%;">
-                                <sys:toHtml>${bean.fhOpinion}</sys:toHtml>
-                            </td>
-                        </tr>
-                        <tr class="tr_light">
-                            <td class="form_label_right" style="width: 15%;">复核时间：</td>
-                            <td class="form_content">
-                                <fmt:formatDate value="${bean.fhDate}" pattern="yyyy-MM-dd HH:mm"/>
-                            </td>
-                        </tr>
-
                         <c:forEach items="${historyOpinions}" var="item">
                             <c:if test="${(item.status==STATUS_SH_PASS||item.status==STATUS_SH_BACK) && item.projectType.id==bean.projectType.id}">
                                 <tr class="tr_dark">
@@ -638,18 +493,6 @@
                                 </tr>
                             </c:if>
                         </c:forEach>
-                        <tr class="tr_dark">
-                            <td class="form_label_right" style="width: 20%;">审核意见：</td>
-                            <td class="form_content" style="width: 80%;">
-                                <sys:toHtml>${bean.shOpinion}</sys:toHtml>
-                            </td>
-                        </tr>
-                        <tr class="tr_light">
-                            <td class="form_label_right" style="width: 15%;">审核时间：</td>
-                            <td class="form_content">
-                                <fmt:formatDate value="${bean.shDate}" pattern="yyyy-MM-dd HH:mm"/>
-                            </td>
-                        </tr>
                         <c:forEach items="${historyOpinions}" var="item">
                             <c:if test="${(item.status==STATUS_FGLD_PASS||item.status==STATUS_FGLD_BACK) && item.projectType.id==bean.projectType.id}">
                                 <tr class="tr_dark">
@@ -666,19 +509,6 @@
                                 </tr>
                             </c:if>
                         </c:forEach>
-                        <tr class="tr_dark">
-                            <td class="form_label_right" style="width: 20%;">分管领导审核意见：</td>
-                            <td class="form_content" style="width: 80%;">
-                                <sys:toHtml>${bean.fgldOpinion}</sys:toHtml>
-                            </td>
-                        </tr>
-                        <tr class="tr_light">
-                            <td class="form_label_right" style="width: 15%;">分管领导审核时间：</td>
-                            <td class="form_content">
-                                <fmt:formatDate value="${bean.fgldDate}" pattern="yyyy-MM-dd HH:mm"/>
-                            </td>
-                        </tr>
-
                         <c:forEach items="${historyOpinions}" var="item">
                             <c:if test="${(item.status==STATUS_ZXLD_PASS||item.status==STATUS_ZXLD_BACK) && item.projectType.id==bean.projectType.id}">
                                 <tr class="tr_dark">
@@ -695,18 +525,6 @@
                                 </tr>
                             </c:if>
                         </c:forEach>
-                        <tr class="tr_dark">
-                            <td class="form_label_right" style="width: 20%;">中心领导审核意见：</td>
-                            <td class="form_content" style="width: 80%;">
-                                <sys:toHtml>${bean.zxldOpinion}</sys:toHtml>
-                            </td>
-                        </tr>
-                        <tr class="tr_light">
-                            <td class="form_label_right" style="width: 15%;">中心领导审核时间：</td>
-                            <td class="form_content">
-                                <fmt:formatDate value="${bean.zxldDate}" pattern="yyyy-MM-dd HH:mm"/>
-                            </td>
-                        </tr>
                     </c:if>
 
                     <c:if test="${(bean.status==STATUS_WLD_PASS)}">
@@ -726,18 +544,6 @@
                                 </tr>
                             </c:if>
                         </c:forEach>
-                        <tr class="tr_dark">
-                            <td class="form_label_right" style="width: 20%;">初审意见：</td>
-                            <td class="form_content" style="width: 80%;">
-                                <sys:toHtml>${bean.csOpinion}</sys:toHtml>
-                            </td>
-                        </tr>
-                        <tr class="tr_light">
-                            <td class="form_label_right" style="width: 15%;">初审时间：</td>
-                            <td class="form_content">
-                                <fmt:formatDate value="${bean.csDate}" pattern="yyyy-MM-dd HH:mm"/>
-                            </td>
-                        </tr>
                         <c:forEach items="${historyOpinions}" var="item">
                             <c:if test="${item.status==STATUS_FH_PASS && item.projectType.id==bean.projectType.id}">
                                 <tr class="tr_dark">
@@ -754,19 +560,6 @@
                                 </tr>
                             </c:if>
                         </c:forEach>
-                        <tr class="tr_dark">
-                            <td class="form_label_right" style="width: 20%;">复核意见：</td>
-                            <td class="form_content" style="width: 80%;">
-                                <sys:toHtml>${bean.fhOpinion}</sys:toHtml>
-                            </td>
-                        </tr>
-                        <tr class="tr_light">
-                            <td class="form_label_right" style="width: 15%;">复核时间：</td>
-                            <td class="form_content">
-                                <fmt:formatDate value="${bean.fhDate}" pattern="yyyy-MM-dd HH:mm"/>
-                            </td>
-                        </tr>
-
                         <c:forEach items="${historyOpinions}" var="item">
                             <c:if test="${(item.status==STATUS_SH_PASS||item.status==STATUS_SH_BACK) && item.projectType.id==bean.projectType.id}">
                                 <tr class="tr_dark">
@@ -783,18 +576,6 @@
                                 </tr>
                             </c:if>
                         </c:forEach>
-                        <tr class="tr_dark">
-                            <td class="form_label_right" style="width: 20%;">审核意见：</td>
-                            <td class="form_content" style="width: 80%;">
-                                <sys:toHtml>${bean.shOpinion}</sys:toHtml>
-                            </td>
-                        </tr>
-                        <tr class="tr_light">
-                            <td class="form_label_right" style="width: 15%;">审核时间：</td>
-                            <td class="form_content">
-                                <fmt:formatDate value="${bean.shDate}" pattern="yyyy-MM-dd HH:mm"/>
-                            </td>
-                        </tr>
                         <c:forEach items="${historyOpinions}" var="item">
                             <c:if test="${(item.status==STATUS_FGLD_PASS||item.status==STATUS_FGLD_BACK) && item.projectType.id==bean.projectType.id}">
                                 <tr class="tr_dark">
@@ -811,19 +592,6 @@
                                 </tr>
                             </c:if>
                         </c:forEach>
-                        <tr class="tr_dark">
-                            <td class="form_label_right" style="width: 20%;">分管领导审核意见：</td>
-                            <td class="form_content" style="width: 80%;">
-                                <sys:toHtml>${bean.fgldOpinion}</sys:toHtml>
-                            </td>
-                        </tr>
-                        <tr class="tr_light">
-                            <td class="form_label_right" style="width: 15%;">分管领导审核时间：</td>
-                            <td class="form_content">
-                                <fmt:formatDate value="${bean.fgldDate}" pattern="yyyy-MM-dd HH:mm"/>
-                            </td>
-                        </tr>
-
                         <c:forEach items="${historyOpinions}" var="item">
                             <c:if test="${(item.status==STATUS_ZXLD_PASS||item.status==STATUS_ZXLD_BACK) && item.projectType.id==bean.projectType.id}">
                                 <tr class="tr_dark">
@@ -840,19 +608,6 @@
                                 </tr>
                             </c:if>
                         </c:forEach>
-                        <tr class="tr_dark">
-                            <td class="form_label_right" style="width: 20%;">中心领导审核意见：</td>
-                            <td class="form_content" style="width: 80%;">
-                                <sys:toHtml>${bean.zxldOpinion}</sys:toHtml>
-                            </td>
-                        </tr>
-                        <tr class="tr_light">
-                            <td class="form_label_right" style="width: 15%;">中心领导审核时间：</td>
-                            <td class="form_content">
-                                <fmt:formatDate value="${bean.zxldDate}" pattern="yyyy-MM-dd HH:mm"/>
-                            </td>
-                        </tr>
-
                         <c:forEach items="${historyOpinions}" var="item">
                             <c:if test="${item.status==STATUS_WLD_PASS && item.projectType.id==bean.projectType.id}">
                                 <tr class="tr_dark">
@@ -869,18 +624,6 @@
                                 </tr>
                             </c:if>
                         </c:forEach>
-                        <tr class="tr_dark">
-                            <td class="form_label_right" style="width: 20%;">委领导审核意见：</td>
-                            <td class="form_content" style="width: 80%;">
-                                <sys:toHtml>${bean.wldOpinion}</sys:toHtml>
-                            </td>
-                        </tr>
-                        <tr class="tr_light">
-                            <td class="form_label_right" style="width: 15%;">委领导审核时间：</td>
-                            <td class="form_content">
-                                <fmt:formatDate value="${bean.wldDate}" pattern="yyyy-MM-dd HH:mm"/>
-                            </td>
-                        </tr>
                     </c:if>
                 </table>
             </fieldset>
