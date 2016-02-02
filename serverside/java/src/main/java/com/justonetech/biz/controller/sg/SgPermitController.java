@@ -379,6 +379,7 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
         model.addAttribute("applyList", applyList);
         List<Map<String, Object>> submitList = sgPermitManager.getMaterials(sgPermit, "view", "submit");//处理申请材料数据
         model.addAttribute("submitList", submitList);
+        model.addAttribute("title", sgPermit.getProjectType().getName());
 
         return "view/sg/sgPermit/printView1";
     }

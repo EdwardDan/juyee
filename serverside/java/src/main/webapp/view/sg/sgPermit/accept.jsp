@@ -95,12 +95,12 @@
           <td class="form_content">${bean.projectPlanCost}<form:hidden path="projectPlanCost"/></td>
         </tr>
         <tr class="tr_dark">
-          <td class="form_label_right">开工日期：</td>
+          <td class="form_label_right">合同开工日期：</td>
           <td class="form_content">
             <fmt:formatDate value="${bean.contractBeginDate}" pattern="yyyy-MM-dd"/>
             <form:hidden path="contractBeginDate"/>
           </td>
-          <td class="form_label_right">完工日期：</td>
+          <td class="form_label_right">合同竣工日期：</td>
           <td class="form_content">
             <fmt:formatDate value="${bean.contractEndDate}" pattern="yyyy-MM-dd"/>
             <form:hidden path="contractEndDate"/>
@@ -243,7 +243,7 @@
           </td>
         </tr>
         <tr class="tr_light">
-          <td class="form_label_right">受理意见：</td>
+          <td class="form_label_right">收件意见：</td>
           <td class="form_content">
             <form:textarea path="acceptOpinion" cssClass="input_textarea" cssStyle="width: 96%;"/>
           </td>
@@ -251,9 +251,9 @@
       </table>
     </fieldset>
     <div style="text-align: center;" class="tr_button">
-      <input type="button" value="受理通过" class="button_normal_long"
+      <input type="button" value="收件通过" class="button_normal_long"
              onclick="save(this.value,'${STATUS_SLZX_PASS}')">&nbsp;
-      <input type="button" value="受理退回" class="button_normal_long"
+      <input type="button" value="收件退回" class="button_normal_long"
              onclick="save(this.value,'${STATUS_SLZX_BACK}')">&nbsp;
       <input type="button" value="取消" class="button_cancel" onclick="parent.closeWindow()">
     </div>
