@@ -57,7 +57,7 @@
                             }
                         } else if (status == '${STATUS_SUBMIT}') {
                             if (${canSlAudit}) {
-                                opButton += '<input type="button" value="受理" onclick="doAccept(' + id + ')" class="button_normal"/> ';
+                                opButton += '<input type="button" value="收件" onclick="doAccept(' + id + ')" class="button_normal"/> ';
                             }
                         } else if (status == '${STATUS_SLZX_PASS}') {
                             if (${canCsAudit}) {
@@ -84,7 +84,7 @@
                                 opButton += '<input type="button" value="审核" onclick="doAudit(' + id + ')" class="button_normal"/> ';
                             }
                         }
-                        <c:if test="${isReg}">
+                        <c:if test="${!isReg}">
                         opButton += '<input type="button" value="操作步骤" onclick="doOperation(' + id + ')" class="button_normal_long"/> ';
                         </c:if>
                         jQuery("#listGrid").jqGrid('setRowData', ids[i], {operation: opButton});

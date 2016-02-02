@@ -151,12 +151,12 @@
                     </td>
                 </tr>
                 <tr class="tr_dark">
-                    <td class="form_label_right">开工日期：</td>
+                    <td class="form_label_right">合同开工日期：</td>
                     <td class="form_content">
                         <form:input path="contractBeginDate" cssClass="input_date" readonly="true"/>
                         <input type="button" class="button_calendar" value=" " onClick="calendar('contractBeginDate');">
                     </td>
-                    <td class="form_label_right">完工日期：</td>
+                    <td class="form_label_right">合同竣工日期：</td>
                     <td class="form_content">
                         <form:input path="contractEndDate" cssClass="input_date" readonly="true"/>
                         <input type="button" class="button_calendar" value=" " onClick="calendar('contractEndDate');">
