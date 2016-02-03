@@ -585,7 +585,7 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
                 operation.setOptionUser(sysUser.getDisplayName());
                 operation.setStatus(status);
                 sgPermitOperationService.save(operation);
-//                createOaTask(target);
+                createOaTask(target);
             }
 
         } catch (Exception e) {
@@ -728,7 +728,7 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
             operation.setStatus(status);
             sgPermitOperationService.save(operation);
 
-//            createOaTask(target);
+            createOaTask(target);
 
         } catch (Exception e) {
             log.error("error", e);
