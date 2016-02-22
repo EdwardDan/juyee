@@ -512,6 +512,72 @@
         </property>
 
         <property
+                name="jscOpinion"
+                column="JSC_OPINION"
+                type="string"
+                not-null="false"
+                length="1000"
+                >
+            <meta attribute="ColumnName">建设处审核意见</meta>
+            <meta attribute="ColumnComment">建设处审核意见</meta>
+        </property>
+
+        <property
+                name="jscUser"
+                column="JSC_USER"
+                type="string"
+                not-null="false"
+                length="100"
+                >
+            <meta attribute="ColumnName">建设处审核用户</meta>
+            <meta attribute="ColumnComment">建设处审核用户</meta>
+        </property>
+
+        <property
+                name="jscDate"
+                column="JSC_DATE"
+                type="timestamp"
+                not-null="false"
+                length="7"
+                >
+            <meta attribute="ColumnName">建设处审核日期</meta>
+            <meta attribute="ColumnComment">建设处审核日期</meta>
+        </property>
+
+        <property
+                name="spcOpinion"
+                column="SPC_OPINION"
+                type="string"
+                not-null="false"
+                length="1000"
+                >
+            <meta attribute="ColumnName">审批处审核意见</meta>
+            <meta attribute="ColumnComment">审批处审核意见</meta>
+        </property>
+
+        <property
+                name="spcUser"
+                column="SPC_USER"
+                type="string"
+                not-null="false"
+                length="100"
+                >
+            <meta attribute="ColumnName">审批处审核用户</meta>
+            <meta attribute="ColumnComment">审批处审核用户</meta>
+        </property>
+
+        <property
+                name="spcDate"
+                column="SPC_DATE"
+                type="timestamp"
+                not-null="false"
+                length="7"
+                >
+            <meta attribute="ColumnName">审批处审核日期</meta>
+            <meta attribute="ColumnComment">审批处审核日期</meta>
+        </property>
+
+        <property
                 name="wldOpinion"
                 column="WLD_OPINION"
                 type="string"
