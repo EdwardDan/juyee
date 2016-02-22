@@ -135,6 +135,8 @@ public class PrivilegeCode {
     public static final String SG_PERMIT_AUDIT = SgPermit.class.getSimpleName() + "_audit";
     public static final String SG_PERMIT_FGLD_AUDIT = SgPermit.class.getSimpleName() + "_fgld_audit";
     public static final String SG_PERMIT_ZXLD_AUDIT = SgPermit.class.getSimpleName() + "_zxld_audit";
+    public static final String SG_PERMIT_JSC_AUDIT = SgPermit.class.getSimpleName() + "_jsc_audit";
+    public static final String SG_PERMIT_SPC_AUDIT = SgPermit.class.getSimpleName() + "_spc_audit";
     public static final String SG_PERMIT_WLD_AUDIT = SgPermit.class.getSimpleName() + "_wld_audit";
 
     //三类人员

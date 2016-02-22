@@ -50,7 +50,7 @@
                         var rowData = jQuery("#listGrid").jqGrid('getRowData', id);
                         var status = rowData["status"];
                         var opButton = '<input type="button" value="查看" onclick="doView(' + id + ')" class="button_normal"/> ';
-                        if ('' == status || status == '${STATUS_EDIT}' || status == '${STATUS_SLZX_BACK}' || status == '${STATUS_CS_BACK}' || status == '${STATUS_FH_BACK}' || status == '${STATUS_SH_BACK}' || status == '${STATUS_FGLD_BACK}' || status == '${STATUS_ZXLD_BACK}' || status == '${STATUS_WLD_BACK}') {
+                        if ('' == status || status == '${STATUS_EDIT}' || status == '${STATUS_SLZX_BACK}' || status == '${STATUS_CS_BACK}' || status == '${STATUS_FH_BACK}' || status == '${STATUS_SH_BACK}' || status == '${STATUS_FGLD_BACK}' || status == '${STATUS_ZXLD_BACK}') {
                             if (${canEdit||isReg}) {
                                 opButton += '<input type="button" value="编辑" onclick="doEdit(' + id + ')" class="button_normal"/> ';
                                 opButton += '<input type="button" value="删除" onclick="doDelete(' + id + ')" class="button_normal"/> ';
@@ -80,6 +80,14 @@
                                 opButton += '<input type="button" value="审核" onclick="doAudit(' + id + ')" class="button_normal"/> ';
                             }
                         } else if (status == '${STATUS_ZXLD_PASS}') {
+                            if (${canJscAudit}) {
+                                opButton += '<input type="button" value="审核" onclick="doAudit(' + id + ')" class="button_normal"/> ';
+                            }
+                        } else if (status == '${STATUS_JSC_XK}' || status == '${STATUS_JSC_BXK}') {
+                            if (${canSpcAudit}) {
+                                opButton += '<input type="button" value="审核" onclick="doAudit(' + id + ')" class="button_normal"/> ';
+                            }
+                        } else if (status == '${STATUS_SPC_XK}' || status == '${STATUS_SPC_BXK}') {
                             if (${canWldAudit}) {
                                 opButton += '<input type="button" value="审核" onclick="doAudit(' + id + ')" class="button_normal"/> ';
                             }

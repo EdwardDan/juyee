@@ -285,6 +285,30 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
     /*中心领导审核日期*/
     private java.sql.Timestamp zxldDate;
 
+    /*建设处审核意见*/
+    /*建设处审核意见*/
+    private java.lang.String jscOpinion;
+
+    /*建设处审核用户*/
+    /*建设处审核用户*/
+    private java.lang.String jscUser;
+
+    /*建设处审核日期*/
+    /*建设处审核日期*/
+    private java.sql.Timestamp jscDate;
+
+    /*审批处审核意见*/
+    /*审批处审核意见*/
+    private java.lang.String spcOpinion;
+
+    /*审批处审核用户*/
+    /*审批处审核用户*/
+    private java.lang.String spcUser;
+
+    /*审批处审核日期*/
+    /*审批处审核日期*/
+    private java.sql.Timestamp spcDate;
+
     /*委领导审核意见*/
     /*委领导审核意见*/
     private java.lang.String wldOpinion;
@@ -963,6 +987,54 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
 
     public void setZxldDate(Timestamp zxldDate) {
         this.zxldDate = zxldDate;
+    }
+
+    public String getJscOpinion() {
+        return jscOpinion;
+    }
+
+    public void setJscOpinion(String jscOpinion) {
+        this.jscOpinion = jscOpinion;
+    }
+
+    public String getJscUser() {
+        return jscUser;
+    }
+
+    public void setJscUser(String jscUser) {
+        this.jscUser = jscUser;
+    }
+
+    public Timestamp getJscDate() {
+        return jscDate;
+    }
+
+    public void setJscDate(Timestamp jscDate) {
+        this.jscDate = jscDate;
+    }
+
+    public String getSpcOpinion() {
+        return spcOpinion;
+    }
+
+    public void setSpcOpinion(String spcOpinion) {
+        this.spcOpinion = spcOpinion;
+    }
+
+    public String getSpcUser() {
+        return spcUser;
+    }
+
+    public void setSpcUser(String spcUser) {
+        this.spcUser = spcUser;
+    }
+
+    public Timestamp getSpcDate() {
+        return spcDate;
+    }
+
+    public void setSpcDate(Timestamp spcDate) {
+        this.spcDate = spcDate;
     }
 
     public String getWldOpinion() {

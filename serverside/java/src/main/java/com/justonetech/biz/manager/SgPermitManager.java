@@ -91,6 +91,8 @@ public class SgPermitManager {
         model.addAttribute("canAudit", sysUserManager.hasPrivilege(PrivilegeCode.SG_PERMIT_AUDIT));//审核
         model.addAttribute("canFgldAudit", sysUserManager.hasPrivilege(PrivilegeCode.SG_PERMIT_FGLD_AUDIT));//分管领导审核
         model.addAttribute("canZxldAudit", sysUserManager.hasPrivilege(PrivilegeCode.SG_PERMIT_ZXLD_AUDIT));//中心领导审核
+        model.addAttribute("canJscAudit", sysUserManager.hasPrivilege(PrivilegeCode.SG_PERMIT_JSC_AUDIT));//建设处
+        model.addAttribute("canSpcAudit", sysUserManager.hasPrivilege(PrivilegeCode.SG_PERMIT_SPC_AUDIT));//审批处
         model.addAttribute("canWldAudit", sysUserManager.hasPrivilege(PrivilegeCode.SG_PERMIT_WLD_AUDIT));//委领导审核
 
         model.addAttribute("STATUS_EDIT", SgPermitStatus.STATUS_EDIT.getCode());//未提交
@@ -107,6 +109,12 @@ public class SgPermitManager {
         model.addAttribute("STATUS_FGLD_BACK", SgPermitStatus.STATUS_FGLD_BACK.getCode());//建管中心分管领导审核退回
         model.addAttribute("STATUS_ZXLD_PASS", SgPermitStatus.STATUS_ZXLD_PASS.getCode());//建管中心领导审核通过
         model.addAttribute("STATUS_ZXLD_BACK", SgPermitStatus.STATUS_ZXLD_BACK.getCode());//建管中心领导审核退回
+        model.addAttribute("STATUS_JSC_XK", SgPermitStatus.STATUS_JSC_XK.getCode());//建管中心领导审核退回
+        model.addAttribute("STATUS_JSC_BXK", SgPermitStatus.STATUS_JSC_BXK.getCode());//建管中心领导审核退回
+        model.addAttribute("STATUS_JSC_BACK", SgPermitStatus.STATUS_JSC_BACK.getCode());//建管中心领导审核退回
+        model.addAttribute("STATUS_SPC_XK", SgPermitStatus.STATUS_SPC_XK.getCode());//建管中心领导审核退回
+        model.addAttribute("STATUS_SPC_BXK", SgPermitStatus.STATUS_SPC_BXK.getCode());//建管中心领导审核退回
+        model.addAttribute("STATUS_SPC_BACK", SgPermitStatus.STATUS_SPC_BACK.getCode());//建管中心领导审核退回
         model.addAttribute("STATUS_WLD_PASS", SgPermitStatus.STATUS_WLD_PASS.getCode());//委领导审核通过
         model.addAttribute("STATUS_WLD_BACK", SgPermitStatus.STATUS_WLD_BACK.getCode());//委领导审核退回
 

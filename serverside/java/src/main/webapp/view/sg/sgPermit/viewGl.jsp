@@ -224,7 +224,7 @@
         </fieldset>
     </c:if>
     <div class="div_space"></div>
-    <c:if test="${bean.status==STATUS_CS_PASS||bean.status==STATUS_FH_PASS||bean.status==STATUS_SH_PASS||bean.status==STATUS_FGLD_PASS||bean.status==STATUS_ZXLD_PASS||bean.status==STATUS_WLD_PASS}">
+    <c:if test="${bean.status==STATUS_CS_PASS||bean.status==STATUS_FH_PASS||bean.status==STATUS_SH_PASS||bean.status==STATUS_FGLD_PASS||bean.status==STATUS_ZXLD_PASS||bean.status==STATUS_WLD_PASS||bean.status==STATUS_WLD_BACK}">
         <fieldset class="form_fieldset" style="width: 96%;">
             <legend>审核信息</legend>
             <table cellpadding="0" cellspacing="0" class="form_table">
@@ -526,7 +526,7 @@
                     </c:forEach>
                 </c:if>
 
-                <c:if test="${(bean.status==STATUS_WLD_PASS)}">
+                <c:if test="${(bean.status==STATUS_JSC_XK||bean.status==STATUS_JSC_BXK)}">
                     <c:forEach items="${historyOpinions}" var="item">
                         <c:if test="${item.status==STATUS_CS_PASS && item.projectType.id==bean.projectType.id}">
                             <tr class="tr_dark">
@@ -608,7 +608,273 @@
                         </c:if>
                     </c:forEach>
                     <c:forEach items="${historyOpinions}" var="item">
-                        <c:if test="${item.status==STATUS_WLD_PASS && item.projectType.id==bean.projectType.id}">
+                        <c:if test="${(item.status==STATUS_JSC_XK||item.status==STATUS_JSC_BXK) && item.projectType.id==bean.projectType.id}">
+                            <tr class="tr_dark">
+                                <td class="form_label_right" style="width: 20%;">建设处审核意见：</td>
+                                <td class="form_content" style="width: 80%;">
+                                        <span style="color: red;">
+                                           <c:if test="${item.status==STATUS_JSC_XK}">许可</c:if>
+                                           <c:if test="${item.status==STATUS_JSC_BXK}">不许可</c:if>
+                                        </span><br>
+                                    <sys:toHtml>${item.opinion}</sys:toHtml>
+                                </td>
+                            </tr>
+                            <tr class="tr_light">
+                                <td class="form_label_right" style="width: 15%;">建设处审核时间：</td>
+                                <td class="form_content">
+                                    <fmt:formatDate value="${item.auditDate}" pattern="yyyy-MM-dd HH:mm"/>
+                                </td>
+                            </tr>
+                        </c:if>
+                    </c:forEach>
+                </c:if>
+
+                <c:if test="${(bean.status==STATUS_SPC_XK||bean.status==STATUS_SPC_BXK)}">
+                    <c:forEach items="${historyOpinions}" var="item">
+                        <c:if test="${item.status==STATUS_CS_PASS && item.projectType.id==bean.projectType.id}">
+                            <tr class="tr_dark">
+                                <td class="form_label_right" style="width: 20%;">初审意见：</td>
+                                <td class="form_content" style="width: 80%;">
+                                    <sys:toHtml>${item.opinion}</sys:toHtml>
+                                </td>
+                            </tr>
+                            <tr class="tr_light">
+                                <td class="form_label_right" style="width: 15%;">初审时间：</td>
+                                <td class="form_content">
+                                    <fmt:formatDate value="${item.auditDate}" pattern="yyyy-MM-dd HH:mm"/>
+                                </td>
+                            </tr>
+                        </c:if>
+                    </c:forEach>
+                    <c:forEach items="${historyOpinions}" var="item">
+                        <c:if test="${item.status==STATUS_FH_PASS && item.projectType.id==bean.projectType.id}">
+                            <tr class="tr_dark">
+                                <td class="form_label_right" style="width: 20%;">复核意见：</td>
+                                <td class="form_content" style="width: 80%;">
+                                    <sys:toHtml>${item.opinion}</sys:toHtml>
+                                </td>
+                            </tr>
+                            <tr class="tr_light">
+                                <td class="form_label_right" style="width: 15%;">复核时间：</td>
+                                <td class="form_content">
+                                    <fmt:formatDate value="${item.auditDate}" pattern="yyyy-MM-dd HH:mm"/>
+                                </td>
+                            </tr>
+                        </c:if>
+                    </c:forEach>
+                    <c:forEach items="${historyOpinions}" var="item">
+                        <c:if test="${(item.status==STATUS_SH_PASS||item.status==STATUS_SH_BACK) && item.projectType.id==bean.projectType.id}">
+                            <tr class="tr_dark">
+                                <td class="form_label_right" style="width: 20%;">审核意见：</td>
+                                <td class="form_content" style="width: 80%;">
+                                    <sys:toHtml>${item.opinion}</sys:toHtml>
+                                </td>
+                            </tr>
+                            <tr class="tr_light">
+                                <td class="form_label_right" style="width: 15%;">审核时间：</td>
+                                <td class="form_content">
+                                    <fmt:formatDate value="${item.auditDate}" pattern="yyyy-MM-dd HH:mm"/>
+                                </td>
+                            </tr>
+                        </c:if>
+                    </c:forEach>
+                    <c:forEach items="${historyOpinions}" var="item">
+                        <c:if test="${(item.status==STATUS_FGLD_PASS||item.status==STATUS_FGLD_BACK) && item.projectType.id==bean.projectType.id}">
+                            <tr class="tr_dark">
+                                <td class="form_label_right" style="width: 20%;">分管领导审核意见：</td>
+                                <td class="form_content" style="width: 80%;">
+                                    <sys:toHtml>${item.opinion}</sys:toHtml>
+                                </td>
+                            </tr>
+                            <tr class="tr_light">
+                                <td class="form_label_right" style="width: 15%;">分管领导审核时间：</td>
+                                <td class="form_content">
+                                    <fmt:formatDate value="${item.auditDate}" pattern="yyyy-MM-dd HH:mm"/>
+                                </td>
+                            </tr>
+                        </c:if>
+                    </c:forEach>
+                    <c:forEach items="${historyOpinions}" var="item">
+                        <c:if test="${(item.status==STATUS_ZXLD_PASS||item.status==STATUS_ZXLD_BACK) && item.projectType.id==bean.projectType.id}">
+                            <tr class="tr_dark">
+                                <td class="form_label_right" style="width: 20%;">中心领导审核意见：</td>
+                                <td class="form_content" style="width: 80%;">
+                                    <sys:toHtml>${item.opinion}</sys:toHtml>
+                                </td>
+                            </tr>
+                            <tr class="tr_light">
+                                <td class="form_label_right" style="width: 15%;">中心领导审核时间：</td>
+                                <td class="form_content">
+                                    <fmt:formatDate value="${item.auditDate}" pattern="yyyy-MM-dd HH:mm"/>
+                                </td>
+                            </tr>
+                        </c:if>
+                    </c:forEach>
+                    <c:forEach items="${historyOpinions}" var="item">
+                        <c:if test="${(item.status==STATUS_JSC_XK||item.status==STATUS_JSC_BXK) && item.projectType.id==bean.projectType.id}">
+                            <tr class="tr_dark">
+                                <td class="form_label_right" style="width: 20%;">建设处审核意见：</td>
+                                <td class="form_content" style="width: 80%;">
+                                        <span style="color: red;">
+                                           <c:if test="${item.status==STATUS_JSC_XK}">许可</c:if>
+                                           <c:if test="${item.status==STATUS_JSC_BXK}">不许可</c:if>
+                                        </span><br>
+                                    <sys:toHtml>${item.opinion}</sys:toHtml>
+                                </td>
+                            </tr>
+                            <tr class="tr_light">
+                                <td class="form_label_right" style="width: 15%;">建设处审核时间：</td>
+                                <td class="form_content">
+                                    <fmt:formatDate value="${item.auditDate}" pattern="yyyy-MM-dd HH:mm"/>
+                                </td>
+                            </tr>
+                        </c:if>
+                    </c:forEach>
+                    <c:forEach items="${historyOpinions}" var="item">
+                        <c:if test="${(item.status==STATUS_SPC_XK||item.status==STATUS_SPC_BXK) && item.projectType.id==bean.projectType.id}">
+                            <tr class="tr_dark">
+                                <td class="form_label_right" style="width: 20%;">审批处审核意见：</td>
+                                <td class="form_content" style="width: 80%;">
+                                        <span style="color: red;">
+                                           <c:if test="${item.status==STATUS_SPC_XK}">许可</c:if>
+                                           <c:if test="${item.status==STATUS_SPC_BXK}">不许可</c:if>
+                                        </span><br>
+                                    <sys:toHtml>${item.opinion}</sys:toHtml>
+                                </td>
+                            </tr>
+                            <tr class="tr_light">
+                                <td class="form_label_right" style="width: 15%;">审批处审核时间：</td>
+                                <td class="form_content">
+                                    <fmt:formatDate value="${item.auditDate}" pattern="yyyy-MM-dd HH:mm"/>
+                                </td>
+                            </tr>
+                        </c:if>
+                    </c:forEach>
+                </c:if>
+
+                <c:if test="${(bean.status==STATUS_WLD_PASS||bean.status==STATUS_WLD_BACK)}">
+                    <c:forEach items="${historyOpinions}" var="item">
+                        <c:if test="${item.status==STATUS_CS_PASS && item.projectType.id==bean.projectType.id}">
+                            <tr class="tr_dark">
+                                <td class="form_label_right" style="width: 20%;">初审意见：</td>
+                                <td class="form_content" style="width: 80%;">
+                                    <sys:toHtml>${item.opinion}</sys:toHtml>
+                                </td>
+                            </tr>
+                            <tr class="tr_light">
+                                <td class="form_label_right" style="width: 15%;">初审时间：</td>
+                                <td class="form_content">
+                                    <fmt:formatDate value="${item.auditDate}" pattern="yyyy-MM-dd HH:mm"/>
+                                </td>
+                            </tr>
+                        </c:if>
+                    </c:forEach>
+                    <c:forEach items="${historyOpinions}" var="item">
+                        <c:if test="${item.status==STATUS_FH_PASS && item.projectType.id==bean.projectType.id}">
+                            <tr class="tr_dark">
+                                <td class="form_label_right" style="width: 20%;">复核意见：</td>
+                                <td class="form_content" style="width: 80%;">
+                                    <sys:toHtml>${item.opinion}</sys:toHtml>
+                                </td>
+                            </tr>
+                            <tr class="tr_light">
+                                <td class="form_label_right" style="width: 15%;">复核时间：</td>
+                                <td class="form_content">
+                                    <fmt:formatDate value="${item.auditDate}" pattern="yyyy-MM-dd HH:mm"/>
+                                </td>
+                            </tr>
+                        </c:if>
+                    </c:forEach>
+                    <c:forEach items="${historyOpinions}" var="item">
+                        <c:if test="${(item.status==STATUS_SH_PASS||item.status==STATUS_SH_BACK) && item.projectType.id==bean.projectType.id}">
+                            <tr class="tr_dark">
+                                <td class="form_label_right" style="width: 20%;">审核意见：</td>
+                                <td class="form_content" style="width: 80%;">
+                                    <sys:toHtml>${item.opinion}</sys:toHtml>
+                                </td>
+                            </tr>
+                            <tr class="tr_light">
+                                <td class="form_label_right" style="width: 15%;">审核时间：</td>
+                                <td class="form_content">
+                                    <fmt:formatDate value="${item.auditDate}" pattern="yyyy-MM-dd HH:mm"/>
+                                </td>
+                            </tr>
+                        </c:if>
+                    </c:forEach>
+                    <c:forEach items="${historyOpinions}" var="item">
+                        <c:if test="${(item.status==STATUS_FGLD_PASS||item.status==STATUS_FGLD_BACK) && item.projectType.id==bean.projectType.id}">
+                            <tr class="tr_dark">
+                                <td class="form_label_right" style="width: 20%;">分管领导审核意见：</td>
+                                <td class="form_content" style="width: 80%;">
+                                    <sys:toHtml>${item.opinion}</sys:toHtml>
+                                </td>
+                            </tr>
+                            <tr class="tr_light">
+                                <td class="form_label_right" style="width: 15%;">分管领导审核时间：</td>
+                                <td class="form_content">
+                                    <fmt:formatDate value="${item.auditDate}" pattern="yyyy-MM-dd HH:mm"/>
+                                </td>
+                            </tr>
+                        </c:if>
+                    </c:forEach>
+                    <c:forEach items="${historyOpinions}" var="item">
+                        <c:if test="${(item.status==STATUS_ZXLD_PASS||item.status==STATUS_ZXLD_BACK) && item.projectType.id==bean.projectType.id}">
+                            <tr class="tr_dark">
+                                <td class="form_label_right" style="width: 20%;">中心领导审核意见：</td>
+                                <td class="form_content" style="width: 80%;">
+                                    <sys:toHtml>${item.opinion}</sys:toHtml>
+                                </td>
+                            </tr>
+                            <tr class="tr_light">
+                                <td class="form_label_right" style="width: 15%;">中心领导审核时间：</td>
+                                <td class="form_content">
+                                    <fmt:formatDate value="${item.auditDate}" pattern="yyyy-MM-dd HH:mm"/>
+                                </td>
+                            </tr>
+                        </c:if>
+                    </c:forEach>
+                    <c:forEach items="${historyOpinions}" var="item">
+                        <c:if test="${(item.status==STATUS_JSC_XK||item.status==STATUS_JSC_BXK) && item.projectType.id==bean.projectType.id}">
+                            <tr class="tr_dark">
+                                <td class="form_label_right" style="width: 20%;">建设处审核意见：</td>
+                                <td class="form_content" style="width: 80%;">
+                                         <span style="color: red;">
+                                           <c:if test="${item.status==STATUS_JSC_XK}">许可</c:if>
+                                           <c:if test="${item.status==STATUS_JSC_BXK}">不许可</c:if>
+                                        </span><br>
+                                    <sys:toHtml>${item.opinion}</sys:toHtml>
+                                </td>
+                            </tr>
+                            <tr class="tr_light">
+                                <td class="form_label_right" style="width: 15%;">建设处审核时间：</td>
+                                <td class="form_content">
+                                    <fmt:formatDate value="${item.auditDate}" pattern="yyyy-MM-dd HH:mm"/>
+                                </td>
+                            </tr>
+                        </c:if>
+                    </c:forEach>
+                    <c:forEach items="${historyOpinions}" var="item">
+                        <c:if test="${(item.status==STATUS_SPC_XK||item.status==STATUS_SPC_BXK) && item.projectType.id==bean.projectType.id}">
+                            <tr class="tr_dark">
+                                <td class="form_label_right" style="width: 20%;">审批处审核意见：</td>
+                                <td class="form_content" style="width: 80%;">
+                                        <span style="color: red;">
+                                           <c:if test="${item.status==STATUS_SPC_XK}">许可</c:if>
+                                           <c:if test="${item.status==STATUS_SPC_BXK}">不许可</c:if>
+                                        </span><br>
+                                    <sys:toHtml>${item.opinion}</sys:toHtml>
+                                </td>
+                            </tr>
+                            <tr class="tr_light">
+                                <td class="form_label_right" style="width: 15%;">审批处审核时间：</td>
+                                <td class="form_content">
+                                    <fmt:formatDate value="${item.auditDate}" pattern="yyyy-MM-dd HH:mm"/>
+                                </td>
+                            </tr>
+                        </c:if>
+                    </c:forEach>
+                    <c:forEach items="${historyOpinions}" var="item">
+                        <c:if test="${(item.status==STATUS_WLD_PASS||item.status==STATUS_WLD_BACK) && item.projectType.id==bean.projectType.id}">
                             <tr class="tr_dark">
                                 <td class="form_label_right" style="width: 20%;">委领导审核意见：</td>
                                 <td class="form_content" style="width: 80%;">
@@ -646,6 +912,9 @@
                 <c:if test="${isGreen}">
                     <input type="button" value="施工许可（绿色）" class="button_normal_longer" onclick="printExcel2()">
                 </c:if>
+            </c:if>
+            <c:if test="${bean.status==STATUS_WLD_BACK}">
+                <input type="button" value="不予许可通知书" class="button_normal_longer" onclick="printView5()">
             </c:if>
         </c:if>
         <input type="button" value="关闭" class="button_cancel" onclick="parent.closeWindow()">
