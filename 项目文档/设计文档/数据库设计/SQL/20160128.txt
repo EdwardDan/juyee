@@ -1,0 +1,43 @@
+--drop table SG_PERMIT_HISTORY_OPINION ;
+
+/*==============================================================*/
+/* Table: SG_PERMIT_HISTORY_OPINION                             */
+/*==============================================================*/
+create table SG_PERMIT_HISTORY_OPINION 
+(
+   ID                   number(10)           not null,
+   SG_PERMIT_ID         number(10),
+   OPINION              varchar2(2000),
+   STATUS               number(2),
+   PROJECT_TYPE_ID      number(10),
+   constraint PK_SG_PERMIT_HISTORY_OPINION primary key (ID),
+   constraint FK_SG_PERMIT_HISTORY foreign key (SG_PERMIT_ID)
+         references SG_PERMIT (ID),
+   constraint FK_SG_PERMIT_SYS_CODE_HISTORY foreign key (PROJECT_TYPE_ID)
+         references SYS_CODE_DETAIL (ID)
+);
+
+comment on table SG_PERMIT_HISTORY_OPINION is
+'施工许可证历史审核意见';
+
+comment on column SG_PERMIT_HISTORY_OPINION.ID is
+'ID';
+
+comment on column SG_PERMIT_HISTORY_OPINION.SG_PERMIT_ID is
+'施工许可ID';
+
+comment on column SG_PERMIT_HISTORY_OPINION.OPINION is
+'审核意见';
+
+comment on column SG_PERMIT_HISTORY_OPINION.STATUS is
+'状态';
+
+comment on column SG_PERMIT_HISTORY_OPINION.PROJECT_TYPE_ID is
+'项目类型';
+
+ALTER TABLE "JTJS"."SG_PERMIT_HISTORY_OPINION"
+ADD ( "AUDIT_DATE" DATE NULL  ) ;
+
+COMMENT ON COLUMN "JTJS"."SG_PERMIT_HISTORY_OPINION"."AUDIT_DATE" IS '审核日期';
+
+
