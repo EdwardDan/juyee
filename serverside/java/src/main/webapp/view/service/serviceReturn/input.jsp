@@ -34,6 +34,9 @@
         //提交表单
         saveAjaxData("${ctx}/serviceReturn/save.do", formId);
     }
+    function removeLine(obj){
+        $(obj).parent().parent().remove();
+    }
 
     function addLine() {
         var len = findMaxNo("autoNum");//获取总条数+1
@@ -70,10 +73,6 @@
         );
         return no;
     }
-
-
-
-
 
 </script>
 <form:form commandName="bean">
@@ -117,47 +116,46 @@
             <tr>
                 <td colspan="4">
                     <table cellpadding="0" cellspacing="0" class="table_thin_line" name="testInfo" id="testInfo" border="1" style="width: 100%">
-                        <tr class="tr_header">
-                            <td  ><input type='button' value='新增' class='button_select_add'
-                                                                  onclick='addLine()'></td>
-                            <td>送达文书</td>
-                            <td>送达人</td>
-                            <td>收到日期</td>
-                            <td>收件人签名</td>
-                            <td>备注</td>
+                        <tr class="tr_header" >
+                            <td style="width: 5%" nowrap="nowrap" ><input type='button'  class='button_select_add'
+                                                                  onclick='addLine()' ></td>
+                            <td style="width: 15%" nowrap="nowrap">送达文书</td>
+                            <td style="width: 15%" nowrap="nowrap">送达人</td>
+                            <td style="width: 15%" nowrap="nowrap">收到日期</td>
+                            <td style="width: 15%" nowrap="nowrap">收件人签名</td>
+                            <td style="width: 15%" nowrap="nowrap">备注</td>
                         </tr>
-                        <c:forEach items="${serviceReturnItems}" var="serviceReturnItem">
-                            <tr class="tr_dark">
-                                <td  style="text-align: center;width: 3%">
+                        <c:forEach items="${serviceReturnItems}" var="serviceReturnItem" varStatus="status">
+                            <tr class="tr_light">
+                                <td  style="text-align: center;width: 5%; ">
                                     <input type="text" name="num"
-                                           style="border: none;background: transparent;width: 20px; text-align: center"
+                                           style="border: none;background: transparent;width: 16px; text-align: center"
                                            value="${serviceReturnItem.num}"/>
                                 </td>
                                 <td  style="text-align: center;width: 15%">
                                     <sys:code code="${SERVICE_BOOK_TYPE}" name="serviceBook" type="select" defaultName=""
-                                              style="width: 80px"
+                                              style="width: 95%"
                                               sysCodeDetailId="${serviceReturnItem.serviceBookType.id}" disabled=""
-                                              id="autoServiceBook${status.index+1}"
-                                              isAlowedNull="true" onChange=""/>
+                                    isAlowedNull="true" onChange=""/>
                                 </td>
                                 <td  style="text-align: center;width: 15%">
-                                    <input type="text" name="servicePersonSub"
-                                           style="border: none;background: transparent;width: 50px; text-align: center"
+                                    <input type="text" name="servicePersonSub" class="input_text"
+                                           style="width: 95%; text-align: center"
                                            value="${serviceReturnItem.servicePerson}"/>
                                 </td>
                                 <td  style="text-align: center;width: 15%">
-                                    <input type="text" name="receiveDate"
-                                           style="border: none;background: transparent;width: 80px; text-align: center"
-                                           value="${serviceReturnItem.receiveDate}"/>
+                                    <input type="text" name="receiveDate" id="autoReceiveDate${status.index+1}"
+                                           style="width: 95%; text-align: center" class="input_text"
+                                           value="${serviceReturnItem.receiveDate}" onclick="calendar('autoReceiveDate${status.index+1}','date')"/>
                                 </td>
                                 <td  style="text-align: center;width: 15%">
-                                    <input type="text" name="receiveSign"
-                                           style="border: none;background: transparent;width: 50px; text-align: center"
+                                    <input type="text" name="receiveSign" class="input_text"
+                                           style="width: 95%; text-align: center"
                                            value="${serviceReturnItem.receiveSign}"/>
                                 </td>
                                 <td  style="text-align: center;width: 15%">
-                                    <input type="text" name="memo"
-                                           style="border: none;background: transparent;width: 50px; text-align: center"
+                                    <input type="text" name="memo" class="input_text"
+                                           style="width: 95%; text-align: center"
                                            value="${serviceReturnItem.memo}"/>
                                 </td>
                             </tr>
@@ -166,31 +164,31 @@
                 </td>
             </tr>
                 <%--标准行--%>
-            <tr style="display: none" id="standTr" class="tr_dark"><%--标准行--%>
-                <td  nowrap style="width: 3%">
+            <tr style="display: none" id="standTr" ><%--标准行--%>
+                <td  nowrap style="width: 5%">
                     <input type='button' value='删除' class='button_select_remove' onclick='removeLine(this)'/>
                     <input type="hidden" name="standTr_num" id="autoNum"/>
                 </td>
                 <td  style="width: 15%">
-                    <sys:code code="${SERVICE_BOOK_TYPE}" name="standTr_serviceBook" type="select" style="width: 80px"
+                    <sys:code code="${SERVICE_BOOK_TYPE}" name="standTr_serviceBook" type="select" style="width: 95%"
                               disabled="" id="autoServiceBook"
                               isAlowedNull="true" onChange=""/>
                 </td>
                 <td  style="width: 15%">
-                    <input type="text" name="standTr_servicePersonSub" style="width: 80px" id="autoServicePerson"/>
+                    <input type="text" class="input_text" name="standTr_servicePersonSub"  id="autoServicePerson" style="width: 95%"/>
                 </td>
                 <td  style="width: 15%">
-                    <input type="text" name="standTr_receiveDate" id="autoReceiveDate" value="" class="input_text"
-                           style="width: 80px"
+                    <input type="text"  name="standTr_receiveDate" id="autoReceiveDate" value="" class="input_text"
+                           style="width: 95%"
                            onclick="calendar('autoReceiveDate','date')"/>
                 </td>
                 <td  style="width: 15%">
-                    <input type="text" name="standTr_receiveSign" id="autoReceiveSign" value="" class="input_text"
-                           style="width: 80px"/>
+                    <input type="text"  name="standTr_receiveSign" id="autoReceiveSign" value="" class="input_text"
+                           style="width: 95%"/>
                 </td>
                 <td  style="width: 15%">
-                    <input type="text" name="standTr_memo" id="autoMemo" value="" class="input_text"
-                           style="width: 80px"/>
+                    <input type="text"  name="standTr_memo" id="autoMemo" value="" class="input_text"
+                           style="width: 95%"/>
                 </td>
             </tr>
                                      

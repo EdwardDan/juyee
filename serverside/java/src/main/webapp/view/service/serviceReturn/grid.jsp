@@ -14,12 +14,12 @@
                 '操作'
                 ],
                 colModel:[
-                				{name:'id', width:10, align:"center", searchtype:"integer",hidden:true},
-{name:"code",width:"40",align:"center",searchtype:"string",sortable:true},
-{name:"servicePerson",width:"30",align:"center",searchtype:"string",sortable:true},
-{name:"thingsName",width:"50",align:"center",searchtype:"string",sortable:true},
-{name:"serviceUnit",width:"50",align:"center",searchtype:"string",sortable:true},
-{name:"serviceAddress",width:"60",align:"center",searchtype:"string",sortable:true}
+                	{name:'id', width:10, align:"center", searchtype:"integer",hidden:true},
+                    {name:"code",width:"40",align:"center",searchtype:"string",sortable:true},
+                    {name:"servicePerson",width:"30",align:"center",searchtype:"string",sortable:true},
+                    {name: "thingsName", width: "50", align: "left", searchtype: "string", sortable: true},
+                    {name: "serviceUnit", width: "50", align: "left", searchtype: "string", sortable: true},
+                    {name: "serviceAddress", width: "60", align: "left", searchtype: "string", sortable: true}
                 ],
                 actModel:[
                     {name:'operation', width:40, align:'center'}
@@ -46,8 +46,7 @@
             	{ "field":"受送达人", "op":"cn", "data":""},            	    
             	{ "field":"事项名称", "op":"cn", "data":""},            	    
             	{ "field":"送达单位", "op":"cn", "data":""},            	    
-            	{ "field":"送达地点", "op":"cn", "data":""},            	    
-            	{ "field":"备注", "op":"cn", "data":""}
+            	{ "field":"送达地点", "op":"cn", "data":""},
                 ]},
                 queryButton:$("#queryButton"),
                 queryDesc:$("#queryConditionDesc")
@@ -70,11 +69,6 @@
         doGridDelete("${ctx}/serviceReturn/delete.do?id=" + id);
     }
     </c:if>
-    
-    //custom formatter
-    //function customeFormat(cellvalue, options, rowObject) {
-    //    return cellvalue == "true"?"是":"否";
-    //}
 </script>
 
 <div class="title_Search">

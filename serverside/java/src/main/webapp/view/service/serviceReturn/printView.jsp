@@ -548,16 +548,12 @@
 <body lang=ZH-CN style='tab-interval:21.0pt;text-justify-trim:punctuation'>
 
 <div class=WordSection1 style='layout-grid:15.6pt'>
-
-    <p class=MsoNormal style='line-height:20.0pt;mso-line-height-rule:exactly'><span
-            style='font-size:12.0pt;font-family:宋体'>格式文本三十六<span lang=EN-US><o:p></o:p></span></span></p>
-
     <p class=MsoNormal style='line-height:20.0pt;mso-line-height-rule:exactly'><span
             lang=EN-US style='font-size:12.0pt;font-family:宋体'><o:p>&nbsp;</o:p></span></p>
 
     <p class=MsoNormal align=center style='text-align:center;line-height:20.0pt;
 mso-line-height-rule:exactly'><b style='mso-bidi-font-weight:normal'><span
-            style='font-size:12.0pt;font-family:宋体'>上海市交通港航送达回证<span lang=EN-US><o:p></o:p></span></span></b></p>
+            style='font-size:20.0pt;font-family:宋体'>上海市交通港航送达回证<span lang=EN-US><o:p></o:p></span></span></b></p>
 
     <p class=MsoNormal align=right style='text-align:right;word-break:break-all'><span
             style='font-size:12.0pt;font-family:宋体'>编号：<u><span lang=EN-US><span
@@ -643,7 +639,7 @@ mso-line-height-rule:exactly'><b style='mso-bidi-font-weight:normal'><span
                 <p class=MsoNormal align=center style='text-align:center'><span
                         style='font-size:12.0pt;font-family:宋体'>送达人<span lang=EN-US><o:p></o:p></span></span></p>
             </td>
-            <td width=110 colspan=2 style='width:82.2pt;border-top:none;border-left:none;
+            <td colspan=2 style='width:96.0pt;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
   mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:34.0pt'>
@@ -663,36 +659,37 @@ mso-line-height-rule:exactly'><b style='mso-bidi-font-weight:normal'><span
         </tr>
         <c:forEach items="${serviceReturnItems}" var="serviceReturnItem">
             <tr style='mso-yfti-irow:4;page-break-inside:avoid;height:34.0pt'>
-                <td width=211 colspan=3 valign=top style='width:158.4pt;border:solid windowtext 1.0pt;
-  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
-  padding:0cm 5.4pt 0cm 5.4pt;height:34.0pt'>
+                <td width=211 colspan=3 style='width:158.4pt;border:solid windowtext 1.0pt;
+                border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+                padding:0cm 5.4pt 0cm 5.4pt;height:34.0pt'>
                     <p class=MsoNormal><span lang=EN-US
                                              style='font-size:12.0pt;font-family:宋体'><o:p>${serviceReturnItem.serviceBook}</o:p></span>
                     </p>
                 </td>
-                <td width=110 colspan=2 valign=top style='width:82.55pt;border-top:none;
-  border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+                <td width=110 colspan=2 style='width:82.55pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
   mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:34.0pt'>
                     <p class=MsoNormal><span lang=EN-US
                                              style='font-size:12.0pt;font-family:宋体'><o:p>${serviceReturnItem.servicePerson}</o:p></span>
                     </p>
                 </td>
-                <td width=110 colspan=2 valign=top style='width:82.2pt;border-top:none;
-  border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+                <td  colspan=2 style='width:96.0pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
-  mso-border-alt:solid windowtext .5pt;padding:0cm 0cm 0cm 0cm;height:34.0pt'>
-                    <p class=MsoNormal align=right style='text-align:right;line-height:18.0pt;
-  mso-line-height-rule:exactly'><span style='font-size:12.0pt;font-family:宋体'><fmt:formatDate value="${serviceReturnItem.receiveDate}" pattern="yyyy"/>年<span
-                            lang=EN-US><span style='mso-spacerun:yes'>&nbsp;<fmt:formatDate value="${serviceReturnItem.receiveDate}" pattern="MM"/></span></span>月<span
-                            lang=EN-US><o:p></o:p></span></span></p>
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:34.0pt'>
+                    <%--<p class=MsoNormal align=right style='text-align:right;line-height:18.0pt;--%>
+  <%--mso-line-height-rule:exactly'><span style='font-size:12.0pt;font-family:宋体'><fmt:formatDate value="${serviceReturnItem.receiveDate}" pattern="yyyy"/>年<span--%>
+                            <%--lang=EN-US><span style='mso-spacerun:yes'>&nbsp;<fmt:formatDate value="${serviceReturnItem.receiveDate}" pattern="MM"/></span></span>月<span--%>
+                            <%--lang=EN-US><o:p></o:p></span></span></p>--%>
+                    <p style="font-size:10.0pt;font-family:宋体 "><fmt:formatDate value="${serviceReturnItem.receiveDate}" pattern="yyyy"/>年<fmt:formatDate value="${serviceReturnItem.receiveDate}" pattern="MM"/>月<fmt:formatDate value="${serviceReturnItem.receiveDate}" pattern="dd"/>日<fmt:formatDate value="${serviceReturnItem.receiveDate}" pattern="hh"/>时</p>
 
-                    <p class=MsoNormal align=right style='text-align:right;line-height:18.0pt;
-  mso-line-height-rule:exactly'><span style='font-size:12.0pt;font-family:宋体'><fmt:formatDate value="${serviceReturnItem.receiveDate}" pattern="dd"/>日<span
-                            lang=EN-US><span style='mso-spacerun:yes'>&nbsp;<fmt:formatDate value="${serviceReturnItem.receiveDate}" pattern="hh"/></span></span>时<span
-                            lang=EN-US><o:p></o:p></span></span></p>
+                    <%--<p class=MsoNormal align=right style='text-align:right;line-height:18.0pt;--%>
+  <%--mso-line-height-rule:exactly'><span style='font-size:12.0pt;font-family:宋体'><fmt:formatDate value="${serviceReturnItem.receiveDate}" pattern="dd"/>日<span--%>
+                            <%--lang=EN-US><span style='mso-spacerun:yes'>&nbsp;<fmt:formatDate value="${serviceReturnItem.receiveDate}" pattern="hh"/></span></span>时<span--%>
+                            <%--lang=EN-US><o:p></o:p></span></span></p>--%>
                 </td>
-                <td width=137 valign=top style='width:102.95pt;border-top:none;border-left:
+                <td  width=137  style='width:102.95pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
   mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:34.0pt'>
@@ -703,24 +700,6 @@ mso-line-height-rule:exactly'><b style='mso-bidi-font-weight:normal'><span
             </tr>
         </c:forEach>
 
-        <tr style='mso-yfti-irow:12;mso-yfti-lastrow:yes;page-break-inside:avoid;
-  height:85.55pt'>
-            <td width=60 style='width:44.85pt;border:solid windowtext 1.0pt;border-top:
-  none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
-  padding:0cm 5.4pt 0cm 5.4pt;height:85.55pt'>
-                <p class=MsoNormal align=center style='text-align:center'><span
-                        style='font-size:12.0pt;font-family:宋体'>备<span lang=EN-US><o:p></o:p></span></span></p>
-
-                <p class=MsoNormal align=center style='text-align:center'><span
-                        style='font-size:12.0pt;font-family:宋体'>注<span lang=EN-US><o:p></o:p></span></span></p>
-            </td>
-            <td width=508 colspan=7 valign=top style='width:381.25pt;border-top:none;
-  border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
-  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
-  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:85.55pt'>
-                <p class=MsoNormal><span lang=EN-US style='font-size:12.0pt;font-family:宋体'><o:p>&nbsp;</o:p></span></p>
-            </td>
-        </tr>
         <![if !supportMisalignedColumns]>
         <tr height=0>
             <td width=60 style='border:none'></td>

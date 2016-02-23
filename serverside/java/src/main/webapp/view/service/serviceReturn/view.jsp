@@ -73,7 +73,7 @@
 
         <tr class="tr_button">
             <td class="form_content" colspan="4" style="text-align: center">
-                <input type="button" value="送书回证" class="button_normal_long" onclick="printReturnBook(this)">&nbsp;
+                <input type="button" value="送达回证" class="button_normal_long" onclick="printReturnBook(this)">&nbsp;
                 <input type="button" value="取消" class="button_cancel" onclick="closeWindow()">
             </td>
         </tr>
