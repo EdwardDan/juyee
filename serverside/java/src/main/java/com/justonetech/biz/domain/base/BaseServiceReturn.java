@@ -1,5 +1,7 @@
 package com.justonetech.biz.domain.base;
 
+import com.justonetech.core.entity.Auditable;
+
 import java.io.Serializable;
 
 
@@ -21,7 +23,7 @@ import java.io.Serializable;
  *  table="SERVICE_RETURN"
  */
 
-public abstract class BaseServiceReturn  implements Serializable {
+public abstract class BaseServiceReturn  implements Serializable,Auditable {
 
 	public static String REF = "ServiceReturn";
 	public static String PROP_SERVICE_PERSON = "servicePerson";

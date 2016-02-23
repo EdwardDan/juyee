@@ -96,6 +96,14 @@
         </property>
 
         <many-to-one
+                name="serviceBookType"
+                column="BOOK_TYPE_ID"
+                class="com.justonetech.system.domain.SysCodeDetail"
+                not-null="false"
+                >
+        </many-to-one>
+
+        <many-to-one
                 name="return"
                 column="RETURN_ID"
                 class="ServiceReturn"

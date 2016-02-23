@@ -13,6 +13,7 @@ public class PrivilegeCode {
     /**
      * ***************************************系统管理******************************************************
      */
+
     public static final String SYS_SAMPLE_EDIT = Sample.class.getSimpleName() + "_edit";     //样例_编辑
     public static final String SYS_DEPT_EDIT = SysDept.class.getSimpleName() + "_edit";     //单位部门_编辑
     public static final String SYS_PERSON_EDIT = SysPerson.class.getSimpleName() + "_edit"; //人员_编辑
@@ -142,6 +143,11 @@ public class PrivilegeCode {
     //三类人员
     public static final String SLRY_QUALIFY_EDIT = SlryQualify.class.getSimpleName() + "_edit";     //三类人员_编辑
     public static final String SLRY_QUALIFY_AUDIT = SlryQualify.class.getSimpleName() + "_audit";     //三类人员_编辑
+
+    //施工许可材料
+    public static final String SG_MATERIALINFO_EDIT = SgMaterialInfo.class.getSimpleName() + "_edit";     //施工材料_编辑
+    //审查备案
+    public static final String SERVICE_RETURN_EDIT = ServiceReturn.class.getSimpleName() + "_edit";     //送达回书_编辑
 
 }
 

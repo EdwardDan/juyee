@@ -199,7 +199,7 @@ public class Constants {
     public static final String APPLYCERTYPE = "applyCerType";
     public static final String UNITTYPE = "unitType";
     public static final String CARDTYPE = "cardType";
-
+    //项目类型
     //施工许可
     public static final String SGDWGCLX = "SGDWGCLX";//施工单位类型
     public static final String SGDWLX = "SGDWLX";//施工单位工程类型
@@ -228,5 +228,9 @@ public class Constants {
     public static final String PROJECT_PROPERTY_3 = "msgc";//民生工程
     public static final String PROJECT_PROPERTY_4 = "ndzdgc";//年度市重大工程
     public static final String PROJECT_PROPERTY_5 = "ybxm";//一般项目
+
+
+    //送达回证
+    public static final String SERVICE_BOOK_TYPE= "sdws";//一般项目
 
 }

@@ -1,5 +1,7 @@
 package com.justonetech.biz.domain.base;
 
+import com.justonetech.system.domain.SysCodeDetail;
+
 import java.io.Serializable;
 
 
@@ -30,6 +32,7 @@ public abstract class BaseServiceReturnItem  implements Serializable {
 	public static String PROP_SERVICE_BOOK = "serviceBook";
 	public static String PROP_MEMO = "memo";
 	public static String PROP_RECEIVE_DATE = "receiveDate";
+	public static String PROP_BOOK_TYPE = "serviceBookType";
 	public static String PROP_RETURN = "return";
 	public static String PROP_ID = "id";
 
@@ -86,6 +89,16 @@ public abstract class BaseServiceReturnItem  implements Serializable {
 	private com.justonetech.biz.domain.ServiceReturn m_return;
 
 
+	// many to one
+	private com.justonetech.system.domain.SysCodeDetail serviceBookType;
+
+	public SysCodeDetail getServiceBookType() {
+		return serviceBookType;
+	}
+
+	public void setServiceBookType(SysCodeDetail serviceBookType) {
+		this.serviceBookType = serviceBookType;
+	}
 
 	/**
 	 * Return the unique identifier of this class

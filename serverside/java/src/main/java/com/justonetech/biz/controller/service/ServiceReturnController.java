@@ -1,9 +1,13 @@
 package com.justonetech.biz.controller.service;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.Map;
 import java.util.HashMap;
+
+import com.justonetech.biz.daoservice.ServiceReturnItemService;
+import com.justonetech.biz.domain.ServiceReturnItem;
 import org.apache.commons.lang.StringUtils;
 
 import com.justonetech.core.controller.BaseCRUDActionController;
@@ -74,7 +78,7 @@ public class ServiceReturnController extends BaseCRUDActionController<ServiceRet
     private SimpleQueryManager simpleQueryManager;
     
     @Autowired
-    private DocDocumentService docDocumentService;
+    private ServiceReturnItemService serviceReturnItemService;
 
     @Autowired
     private ServiceReturnService serviceReturnService;
@@ -88,7 +92,7 @@ public class ServiceReturnController extends BaseCRUDActionController<ServiceRet
     @RequestMapping
     public String grid(Model model) {
       //判断是否有编辑权限
-      model.addAttribute("canEdit",sysUserManager.hasPrivilege(PrivilegeCode.SYS_SAMPLE_EDIT));
+      model.addAttribute("canEdit",sysUserManager.hasPrivilege("ServiceReturn"));
             
       return "view/service/serviceReturn/grid";
     }
@@ -137,6 +141,7 @@ public class ServiceReturnController extends BaseCRUDActionController<ServiceRet
 
         //如需增加其他默认值请在此添加
         model.addAttribute("bean", serviceReturn);
+        model.addAttribute("SERVICE_BOOK_TYPE", Constants.SERVICE_BOOK_TYPE);
 
         return "view/service/serviceReturn/input";
     }
@@ -151,10 +156,11 @@ public class ServiceReturnController extends BaseCRUDActionController<ServiceRet
     @RequestMapping
     public String modify(Model model, Long id) {
         ServiceReturn serviceReturn = serviceReturnService.get(id);
-
+        Set<ServiceReturnItem> serviceReturnItems = serviceReturn.getServiceReturnItems();
         //处理其他业务逻辑
         model.addAttribute("bean", serviceReturn);
-        
+        model.addAttribute("serviceReturnItems", serviceReturnItems);
+        model.addAttribute("SERVICE_BOOK_TYPE", Constants.SERVICE_BOOK_TYPE);
         return "view/service/serviceReturn/input";
     }
     
@@ -168,7 +174,6 @@ public class ServiceReturnController extends BaseCRUDActionController<ServiceRet
     @RequestMapping
     public String view(Model model, Long id) {
         ServiceReturn serviceReturn = serviceReturnService.get(id);
-        
         model.addAttribute("bean", serviceReturn);        
         return "view/service/serviceReturn/view";
     }
@@ -194,17 +199,52 @@ public class ServiceReturnController extends BaseCRUDActionController<ServiceRet
                                                                 "thingsName",                                      
                                                                 "serviceUnit",                                      
                                                                 "serviceAddress",                                      
-                                                                "moemo",                                      
-                                                                "createTime",                                      
-                                                                "createUser",                                      
-                                                                "updateTime",                                      
-                                                                "updateUser"                                      
+                                                                "moemo"
                                                 });
 
             } else {
                 target = entity;
             }
             serviceReturnService.save(target);
+            //保存子表前先把子表相关数据删除
+            Set<ServiceReturnItem> serviceReturnItems = target.getServiceReturnItems();
+            for (ServiceReturnItem serviceReturnItem : serviceReturnItems) {
+                serviceReturnItemService.delete(serviceReturnItem);
+            }
+
+            //保存子表数据
+            String[] nums = request.getParameterValues("num");
+            String[] serviceBooks = request.getParameterValues("serviceBook");
+            String[] servicePersons = request.getParameterValues("servicePersonSub");
+            String[] receiveDates = request.getParameterValues("receiveDate");
+            String[] receiveSigns = request.getParameterValues("receiveSign");
+            String[] memos = request.getParameterValues("memo");
+            if(null!=nums){
+                for (String num : nums) {
+                    ServiceReturnItem serviceReturnItem=new ServiceReturnItem();
+                    int numSub=Integer.valueOf(num);
+                    serviceReturnItem.setNum(numSub);
+                    if(null!=serviceBooks[numSub-1]){
+                        SysCodeDetail sysCodeDetail = sysCodeManager.getCodeListById(Long.valueOf(serviceBooks[numSub - 1]));
+                        serviceReturnItem.setServiceBook(sysCodeDetail.getName());
+                        serviceReturnItem.setServiceBookType(sysCodeDetail);
+                    }
+                    if(null!=servicePersons[numSub-1]){
+                        serviceReturnItem.setServicePerson(servicePersons[numSub - 1]);
+                    }
+                    if(null!=receiveDates[numSub-1]){
+                        serviceReturnItem.setReceiveDate(Date.valueOf(receiveDates[numSub - 1]));
+                    }
+                    if(null!=receiveSigns[numSub-1]){
+                        serviceReturnItem.setReceiveSign(receiveSigns[numSub - 1]);
+                    }
+                    if(null!=memos[numSub-1]){
+                        serviceReturnItem.setMemo(memos[numSub-1]);
+                    }
+                    serviceReturnItem.setReturn(target);
+                    serviceReturnItemService.save(serviceReturnItem);
+                }
+            }
 
         } catch (Exception e) {
             log.error("error", e);
@@ -223,8 +263,12 @@ public class ServiceReturnController extends BaseCRUDActionController<ServiceRet
      */
     @RequestMapping
     public void delete(HttpServletResponse response, Long id) throws Exception {
+        ServiceReturn serviceReturn = serviceReturnService.get(id);
+        Set<ServiceReturnItem> serviceReturnItems = serviceReturn.getServiceReturnItems();
+        for (ServiceReturnItem serviceReturnItem : serviceReturnItems) {
+            serviceReturnItemService.delete(serviceReturnItem);
+        }
         serviceReturnService.delete(id);
-
         sendSuccessJSON(response, "删除成功");
     }
 

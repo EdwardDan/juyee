@@ -10,12 +10,7 @@
             	'受送达人',            	          	
             	'事项名称',            	          	
             	'送达单位',            	          	
-            	'送达地点',            	          	
-            	'备注',            	          	
-            	'创建时间',            	          	
-            	'创建用户名',            	          	
-            	'更新时间',            	          	
-            	'更新用户名',            	          	
+            	'送达地点',
                 '操作'
                 ],
                 colModel:[
@@ -24,12 +19,7 @@
 {name:"servicePerson",width:"80",align:"center",searchtype:"string",sortable:true},
 {name:"thingsName",width:"80",align:"center",searchtype:"string",sortable:true},
 {name:"serviceUnit",width:"80",align:"center",searchtype:"string",sortable:true},
-{name:"serviceAddress",width:"80",align:"center",searchtype:"string",sortable:true},
-{name:"moemo",width:"80",align:"center",searchtype:"string",sortable:true},
-{name:"createTime",width:"80",align:"center",searchtype:"datetime",sortable:true,formatter:'date',formatoptions:{srcformat:'Y-m-d H:i:s',newformat:'Y-m-d H:i:s'}},
-{name:"createUser",width:"80",align:"center",searchtype:"string",sortable:true},
-{name:"updateTime",width:"80",align:"center",searchtype:"datetime",sortable:true,formatter:'date',formatoptions:{srcformat:'Y-m-d H:i:s',newformat:'Y-m-d H:i:s'}},
-{name:"updateUser",width:"80",align:"center",searchtype:"string",sortable:true}
+{name:"serviceAddress",width:"80",align:"center",searchtype:"string",sortable:true}
                 ],
                 actModel:[
                     {name:'operation', width:40, align:'center'}
@@ -101,8 +91,8 @@
         </div>
         <div style="float:right;padding-right: 10px">
         <c:if test="${canEdit}">
-            <input type="button" value="添加" class="button_add"
-                   onclick="doAdd()"/>
+            <input type="button" value="添加" class="button_add" onclick="doAdd()"/>
+            <input type="button" value="导出" class="button_normal" onclick="doExcel()"/>
         </c:if>
         </div>
     </div>
