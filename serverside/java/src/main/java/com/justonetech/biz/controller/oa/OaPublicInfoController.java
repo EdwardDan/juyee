@@ -112,9 +112,9 @@ public class OaPublicInfoController extends BaseCRUDActionController<OaPublicInf
             //是否是政策规章
             if (!StringHelper.isEmpty(isZc)) {
                 hql += " and type.code='" + isZc + "'";
-            } else {
+            } /*else {
                 hql += " and type.code!='" + Constants.OA_PUBLIC_INFO_TYPE_ZCGZ + "'";
-            }
+            }*/
 
             //信息类型过滤
             if (!StringHelper.isEmpty(typeCode)) {
