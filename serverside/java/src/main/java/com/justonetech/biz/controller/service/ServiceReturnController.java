@@ -128,7 +128,27 @@ public class ServiceReturnController extends BaseCRUDActionController<ServiceRet
             super.processException(response, e);
         }
     }
-    
+
+    /**
+     * 打印页面
+     *
+     * @param id    .
+     * @param model .
+     * @return .
+     */
+    @RequestMapping
+    public String printView(Model model, Long id) {
+        ServiceReturn serviceReturn = serviceReturnService.get(id);
+        model.addAttribute("bean", serviceReturn);
+        Set<ServiceReturnItem> serviceReturnItems = serviceReturn.getServiceReturnItems();
+        model.addAttribute("serviceReturnItems", serviceReturnItems);
+        return "view/service/serviceReturn/printView";
+    }
+
+
+
+
+
     /**
      * 新增录入页面
      *
@@ -174,7 +194,9 @@ public class ServiceReturnController extends BaseCRUDActionController<ServiceRet
     @RequestMapping
     public String view(Model model, Long id) {
         ServiceReturn serviceReturn = serviceReturnService.get(id);
+        Set<ServiceReturnItem> serviceReturnItems = serviceReturn.getServiceReturnItems();
         model.addAttribute("bean", serviceReturn);        
+        model.addAttribute("serviceReturnItems", serviceReturnItems);
         return "view/service/serviceReturn/view";
     }
     

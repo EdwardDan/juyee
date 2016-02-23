@@ -15,11 +15,11 @@
                 ],
                 colModel:[
                 				{name:'id', width:10, align:"center", searchtype:"integer",hidden:true},
-{name:"code",width:"80",align:"center",searchtype:"string",sortable:true},
-{name:"servicePerson",width:"80",align:"center",searchtype:"string",sortable:true},
-{name:"thingsName",width:"80",align:"center",searchtype:"string",sortable:true},
-{name:"serviceUnit",width:"80",align:"center",searchtype:"string",sortable:true},
-{name:"serviceAddress",width:"80",align:"center",searchtype:"string",sortable:true}
+{name:"code",width:"40",align:"center",searchtype:"string",sortable:true},
+{name:"servicePerson",width:"30",align:"center",searchtype:"string",sortable:true},
+{name:"thingsName",width:"50",align:"center",searchtype:"string",sortable:true},
+{name:"serviceUnit",width:"50",align:"center",searchtype:"string",sortable:true},
+{name:"serviceAddress",width:"60",align:"center",searchtype:"string",sortable:true}
                 ],
                 actModel:[
                     {name:'operation', width:40, align:'center'}
@@ -47,11 +47,7 @@
             	{ "field":"事项名称", "op":"cn", "data":""},            	    
             	{ "field":"送达单位", "op":"cn", "data":""},            	    
             	{ "field":"送达地点", "op":"cn", "data":""},            	    
-            	{ "field":"备注", "op":"cn", "data":""},            	    
-                { "field":"创建时间", "op":"bw", "data":""},            	    
-            	{ "field":"创建用户名", "op":"cn", "data":""},            	    
-                { "field":"更新时间", "op":"bw", "data":""},            	    
-            	{ "field":"更新用户名", "op":"cn", "data":""}            	    
+            	{ "field":"备注", "op":"cn", "data":""}
                 ]},
                 queryButton:$("#queryButton"),
                 queryDesc:$("#queryConditionDesc")
@@ -92,7 +88,7 @@
         <div style="float:right;padding-right: 10px">
         <c:if test="${canEdit}">
             <input type="button" value="添加" class="button_add" onclick="doAdd()"/>
-            <input type="button" value="导出" class="button_normal" onclick="doExcel()"/>
+            <%--<input type="button" value="导出" class="button_normal" onclick="doExcel()"/>--%>
         </c:if>
         </div>
     </div>

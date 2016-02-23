@@ -82,43 +82,43 @@
     <div class="form_div">
         <table cellpadding="0" cellspacing="0" class="form_table">
             <tr class="tr_light">
-              <td class="form_label" style="width: 20%">编号：</td>
+              <td class="form_label_right" style="width: 20%">编号：</td>
               <td class="form_content" style="width: 30%">
                   <form:input path="code" cssClass="input_text"/>
               </td>
 
-              <td class="form_label" style="width: 20%">受送达人：</td>
+              <td class="form_label_right" style="width: 20%">受送达人：</td>
               <td class="form_content" style="width: 30%">
                   <form:input path="servicePerson" cssClass="input_text"/>
               </td>
             </tr>
 
             <tr class="tr_dark">
-              <td class="form_label">事项名称：</td>
+              <td class="form_label_right">事项名称：</td>
               <td class="form_content">
                   <form:input path="thingsName" cssClass="input_text"/>
               </td>
-              <td class="form_label">送达单位：</td>
+              <td class="form_label_right">送达单位：</td>
               <td class="form_content">
                   <form:input path="serviceUnit" cssClass="input_text"/>
               </td>
             </tr>
 
             <tr class="tr_light">
-              <td class="form_label">送达地点：</td>
+              <td class="form_label_right">送达地点：</td>
               <td class="form_content">
                   <form:input path="serviceAddress" cssClass="input_text"/>
               </td>
 
-            <td class="form_label"></td>
+            <td class="form_label_right"></td>
               <td class="form_content">
                           </td>                                
             </tr>
             <tr>
                 <td colspan="4">
-                    <table cellpadding="0" cellspacing="0" class="form_table" name="testInfo" id="testInfo">
+                    <table cellpadding="0" cellspacing="0" class="table_thin_line" name="testInfo" id="testInfo" border="1" style="width: 100%">
                         <tr class="tr_header">
-                            <td class="form_border" nowrap><input type='button' value='新增' class='button_select_add'
+                            <td  ><input type='button' value='新增' class='button_select_add'
                                                                   onclick='addLine()'></td>
                             <td>送达文书</td>
                             <td>送达人</td>
@@ -127,35 +127,35 @@
                             <td>备注</td>
                         </tr>
                         <c:forEach items="${serviceReturnItems}" var="serviceReturnItem">
-                            <tr>
-                                <td class="form_border" style="text-align: center;width: 3%">
+                            <tr class="tr_dark">
+                                <td  style="text-align: center;width: 3%">
                                     <input type="text" name="num"
                                            style="border: none;background: transparent;width: 20px; text-align: center"
                                            value="${serviceReturnItem.num}"/>
                                 </td>
-                                <td class="form_border" style="text-align: center;width: 15%">
+                                <td  style="text-align: center;width: 15%">
                                     <sys:code code="${SERVICE_BOOK_TYPE}" name="serviceBook" type="select" defaultName=""
                                               style="width: 80px"
                                               sysCodeDetailId="${serviceReturnItem.serviceBookType.id}" disabled=""
                                               id="autoServiceBook${status.index+1}"
                                               isAlowedNull="true" onChange=""/>
                                 </td>
-                                <td class="form_border" style="text-align: center;width: 15%">
+                                <td  style="text-align: center;width: 15%">
                                     <input type="text" name="servicePersonSub"
                                            style="border: none;background: transparent;width: 50px; text-align: center"
                                            value="${serviceReturnItem.servicePerson}"/>
                                 </td>
-                                <td class="form_border" style="text-align: center;width: 15%">
+                                <td  style="text-align: center;width: 15%">
                                     <input type="text" name="receiveDate"
                                            style="border: none;background: transparent;width: 80px; text-align: center"
                                            value="${serviceReturnItem.receiveDate}"/>
                                 </td>
-                                <td class="form_border" style="text-align: center;width: 15%">
+                                <td  style="text-align: center;width: 15%">
                                     <input type="text" name="receiveSign"
                                            style="border: none;background: transparent;width: 50px; text-align: center"
                                            value="${serviceReturnItem.receiveSign}"/>
                                 </td>
-                                <td class="form_border" style="text-align: center;width: 15%">
+                                <td  style="text-align: center;width: 15%">
                                     <input type="text" name="memo"
                                            style="border: none;background: transparent;width: 50px; text-align: center"
                                            value="${serviceReturnItem.memo}"/>
@@ -166,29 +166,29 @@
                 </td>
             </tr>
                 <%--标准行--%>
-            <tr style="display: none" id="standTr"><%--标准行--%>
-                <td class="form_border" nowrap style="width: 3%">
+            <tr style="display: none" id="standTr" class="tr_dark"><%--标准行--%>
+                <td  nowrap style="width: 3%">
                     <input type='button' value='删除' class='button_select_remove' onclick='removeLine(this)'/>
                     <input type="hidden" name="standTr_num" id="autoNum"/>
                 </td>
-                <td class="form_border" style="width: 15%">
+                <td  style="width: 15%">
                     <sys:code code="${SERVICE_BOOK_TYPE}" name="standTr_serviceBook" type="select" style="width: 80px"
                               disabled="" id="autoServiceBook"
                               isAlowedNull="true" onChange=""/>
                 </td>
-                <td class=" form_border" style="width: 15%">
+                <td  style="width: 15%">
                     <input type="text" name="standTr_servicePersonSub" style="width: 80px" id="autoServicePerson"/>
                 </td>
-                <td class=" form_border" style="width: 15%">
+                <td  style="width: 15%">
                     <input type="text" name="standTr_receiveDate" id="autoReceiveDate" value="" class="input_text"
                            style="width: 80px"
                            onclick="calendar('autoReceiveDate','date')"/>
                 </td>
-                <td class=" form_border" style="width: 15%">
+                <td  style="width: 15%">
                     <input type="text" name="standTr_receiveSign" id="autoReceiveSign" value="" class="input_text"
                            style="width: 80px"/>
                 </td>
-                <td class=" form_border" style="width: 15%">
+                <td  style="width: 15%">
                     <input type="text" name="standTr_memo" id="autoMemo" value="" class="input_text"
                            style="width: 80px"/>
                 </td>
