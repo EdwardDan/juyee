@@ -144,7 +144,7 @@
                     </li>
                 </ul>
                 <ul>
-                    <li class="a1">
+                    <li class="a2">
                         <a href="javascript:void(0)" onclick="loadPlatPage('fjxz')">附件下载</a>
                     </li>
                 </ul>

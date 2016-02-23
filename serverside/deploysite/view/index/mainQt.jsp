@@ -22,7 +22,7 @@
     </tr>
     <tr>
         <td align="left" class="righttbhead">
-            <a href="javascript:void(0)">表格下载</a>
+            <a href="javascript:void(0)" onclick="loadMainPage('${ctx}/oaPublicInfo/grid.do?typeCode=bgxz','表格下载');">表格下载</a>
         </td>
     </tr>
     <tr>
