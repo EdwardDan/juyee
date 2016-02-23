@@ -268,8 +268,10 @@ public class ServiceReturnController extends BaseCRUDActionController<ServiceRet
     public void delete(HttpServletResponse response, Long id) throws Exception {
         ServiceReturn serviceReturn = serviceReturnService.get(id);
         Set<ServiceReturnItem> serviceReturnItems = serviceReturn.getServiceReturnItems();
-        for (ServiceReturnItem serviceReturnItem : serviceReturnItems) {
-            serviceReturnItemService.delete(serviceReturnItem);
+        if(null!=serviceReturnItems){
+            for (ServiceReturnItem serviceReturnItem : serviceReturnItems) {
+                serviceReturnItemService.delete(serviceReturnItem);
+            }
         }
         serviceReturnService.delete(id);
         sendSuccessJSON(response, "删除成功");
