@@ -639,7 +639,7 @@ mso-line-height-rule:exactly'><b style='mso-bidi-font-weight:normal'><span
                 <p class=MsoNormal align=center style='text-align:center'><span
                         style='font-size:12.0pt;font-family:宋体'>送达人<span lang=EN-US><o:p></o:p></span></span></p>
             </td>
-            <td colspan=2 style='width:96.0pt;border-top:none;border-left:none;
+            <td width="130px" colspan=2 style='width:170px;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
   mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:34.0pt'>
@@ -674,20 +674,13 @@ mso-line-height-rule:exactly'><b style='mso-bidi-font-weight:normal'><span
                                              style='font-size:12.0pt;font-family:宋体'><o:p>${serviceReturnItem.servicePerson}</o:p></span>
                     </p>
                 </td>
-                <td  colspan=2 style='width:96.0pt;border-top:none;border-left:none;
+                <td  width="130px" colspan=2 style='width:170px;border-top:none;border-left:none;
   border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
   mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
-  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:34.0pt'>
-                    <%--<p class=MsoNormal align=right style='text-align:right;line-height:18.0pt;--%>
-  <%--mso-line-height-rule:exactly'><span style='font-size:12.0pt;font-family:宋体'><fmt:formatDate value="${serviceReturnItem.receiveDate}" pattern="yyyy"/>年<span--%>
-                            <%--lang=EN-US><span style='mso-spacerun:yes'>&nbsp;<fmt:formatDate value="${serviceReturnItem.receiveDate}" pattern="MM"/></span></span>月<span--%>
-                            <%--lang=EN-US><o:p></o:p></span></span></p>--%>
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt;height:34.0pt;text-align:center' >
+
                     <p style="font-size:10.0pt;font-family:宋体 "><fmt:formatDate value="${serviceReturnItem.receiveDate}" pattern="yyyy"/>年<fmt:formatDate value="${serviceReturnItem.receiveDate}" pattern="MM"/>月<fmt:formatDate value="${serviceReturnItem.receiveDate}" pattern="dd"/>日<fmt:formatDate value="${serviceReturnItem.receiveDate}" pattern="hh"/>时</p>
 
-                    <%--<p class=MsoNormal align=right style='text-align:right;line-height:18.0pt;--%>
-  <%--mso-line-height-rule:exactly'><span style='font-size:12.0pt;font-family:宋体'><fmt:formatDate value="${serviceReturnItem.receiveDate}" pattern="dd"/>日<span--%>
-                            <%--lang=EN-US><span style='mso-spacerun:yes'>&nbsp;<fmt:formatDate value="${serviceReturnItem.receiveDate}" pattern="hh"/></span></span>时<span--%>
-                            <%--lang=EN-US><o:p></o:p></span></span></p>--%>
                 </td>
                 <td  width=137  style='width:102.95pt;border-top:none;border-left:
   none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
