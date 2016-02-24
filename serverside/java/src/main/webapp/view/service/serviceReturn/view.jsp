@@ -44,12 +44,12 @@
             <td colspan="4">
                 <table cellpadding="0" cellspacing="0" class="table_thin_line" border="1" style="width: 100%">
                     <tr class="tr_header">
-                        <td> 序号</td>
-                        <td>送达文书</td>
-                        <td>送达人</td>
-                        <td>收到日期</td>
-                        <td>收件人签名</td>
-                        <td>备注</td>
+                        <td style="width: 5% "> 序号</td>
+                        <td style="width: 15% ">送达文书</td>
+                        <td style="width: 15% ">送达人</td>
+                        <td style="width: 15% ">收到日期</td>
+                        <td style="width: 15% ">收件人签名</td>
+                        <td style="width: 20% ">备注</td>
                     </tr>
                     <c:forEach items="${serviceReturnItems}" var="serviceReturnItem">
                         <tr class="tr_dark">
@@ -63,7 +63,7 @@
                             </td>
                             <td  style="text-align: center;width: 15%">${serviceReturnItem.receiveSign}
                             </td>
-                            <td  style="text-align: center;width: 15%">${serviceReturnItem.memo}
+                            <td  style="text-align: center;width: 20%">${serviceReturnItem.memo}
                             </td>
                         </tr>
                     </c:forEach>

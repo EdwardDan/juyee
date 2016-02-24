@@ -123,12 +123,12 @@
                             <td style="width: 15%" nowrap="nowrap">送达人</td>
                             <td style="width: 15%" nowrap="nowrap">收到日期</td>
                             <td style="width: 15%" nowrap="nowrap">收件人签名</td>
-                            <td style="width: 15%" nowrap="nowrap">备注</td>
+                            <td style="width: 20%" nowrap="nowrap">备注</td>
                         </tr>
                         <c:forEach items="${serviceReturnItems}" var="serviceReturnItem" varStatus="status">
                             <tr class="tr_light">
                                 <td  style="text-align: center;width: 5%; ">
-                                    <input type="text" name="num"
+                                    <input type="text" name="num" id="autoNum${status.index+1}"
                                            style="border: none;background: transparent;width: 16px; text-align: center"
                                            value="${serviceReturnItem.num}"/>
                                 </td>
@@ -153,9 +153,9 @@
                                            style="width: 95%; text-align: center"
                                            value="${serviceReturnItem.receiveSign}"/>
                                 </td>
-                                <td  style="text-align: center;width: 15%">
+                                <td  style="text-align: center;width: 20%">
                                     <input type="text" name="memo" class="input_text"
-                                           style="width: 95%; text-align: center"
+                                           style="width: 97%; text-align: center"
                                            value="${serviceReturnItem.memo}"/>
                                 </td>
                             </tr>
@@ -186,9 +186,9 @@
                     <input type="text"  name="standTr_receiveSign" id="autoReceiveSign" value="" class="input_text"
                            style="width: 95%"/>
                 </td>
-                <td  style="width: 15%">
+                <td  style="width: 20%">
                     <input type="text"  name="standTr_memo" id="autoMemo" value="" class="input_text"
-                           style="width: 95%"/>
+                           style="width: 97%"/>
                 </td>
             </tr>
                                      
