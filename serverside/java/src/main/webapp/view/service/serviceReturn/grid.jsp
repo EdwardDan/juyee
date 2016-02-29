@@ -6,10 +6,10 @@
             gridOpts:{
                 url:"${ctx}/serviceReturn/gridDataCustom.do",
                 colNames:['ID',
-            	'编号',            	          	
-            	'受送达人',            	          	
-            	'事项名称',            	          	
-            	'送达单位',            	          	
+            	'编号',
+            	'受送达人',
+            	'事项名称',
+            	'送达单位',
             	'送达地点',
                 '操作'
                 ],
@@ -42,11 +42,11 @@
             },
             userOpts:{
                 defaultQuery:{ "groupOp":"AND", "rules":[
-            	{ "field":"编号", "op":"cn", "data":""},            	    
-            	{ "field":"受送达人", "op":"cn", "data":""},            	    
-            	{ "field":"事项名称", "op":"cn", "data":""},            	    
-            	{ "field":"送达单位", "op":"cn", "data":""},            	    
-            	{ "field":"送达地点", "op":"cn", "data":""},
+            	{ "field":"编号", "op":"cn", "data":""},
+            	{ "field":"受送达人", "op":"cn", "data":""},
+            	{ "field":"事项名称", "op":"cn", "data":""},
+            	{ "field":"送达单位", "op":"cn", "data":""},
+            	{ "field":"送达地点", "op":"cn", "data":""}
                 ]},
                 queryButton:$("#queryButton"),
                 queryDesc:$("#queryConditionDesc")
@@ -64,7 +64,7 @@
     }
     function doEdit(id) {
         openWindow("修改送达回证", "${ctx}/serviceReturn/modify.do?id=" + id, true);
-    }    
+    }
     function doDelete(id) {
         doGridDelete("${ctx}/serviceReturn/delete.do?id=" + id);
     }

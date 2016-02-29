@@ -1,37 +1,31 @@
 package com.justonetech.biz.controller.service;
 
-import java.sql.Date;
-import java.util.List;
-import java.util.Set;
-import java.util.Map;
-import java.util.HashMap;
-
+import com.justonetech.biz.core.orm.hibernate.GridJq;
+import com.justonetech.biz.core.orm.hibernate.QueryTranslateJq;
 import com.justonetech.biz.daoservice.ServiceReturnItemService;
+import com.justonetech.biz.daoservice.ServiceReturnService;
+import com.justonetech.biz.domain.ServiceReturn;
 import com.justonetech.biz.domain.ServiceReturnItem;
+import com.justonetech.biz.utils.Constants;
 import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.orm.hibernate.Page;
 import com.justonetech.core.utils.ReflectionUtils;
-import com.justonetech.biz.core.orm.hibernate.GridJq;
-import com.justonetech.biz.core.orm.hibernate.QueryTranslateJq;
-import com.justonetech.biz.daoservice.ServiceReturnService;
-import com.justonetech.biz.domain.ServiceReturn;
-import com.justonetech.biz.manager.DocumentManager;
-import com.justonetech.biz.utils.Constants;
-import com.justonetech.biz.manager.ConfigManager;
 import com.justonetech.system.domain.SysCodeDetail;
 import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
-import com.justonetech.system.manager.SimpleQueryManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.sql.Date;
+import java.util.Set;
 
 
 /**
@@ -43,29 +37,20 @@ import org.slf4j.LoggerFactory;
 @Controller
 public class ServiceReturnController extends BaseCRUDActionController<ServiceReturn> {
     private Logger logger = LoggerFactory.getLogger(ServiceReturnController.class);
-    
+
     @Autowired
     private SysUserManager sysUserManager;
-    
+
     @Autowired
     private SysCodeManager sysCodeManager;
 
-    @Autowired
-    private ConfigManager configManager;
-    
-    @Autowired
-    private DocumentManager documentManager;
-    
-    @Autowired
-    private SimpleQueryManager simpleQueryManager;
-    
     @Autowired
     private ServiceReturnItemService serviceReturnItemService;
 
     @Autowired
     private ServiceReturnService serviceReturnService;
 
-   /**
+    /**
      * 列表显示页面
      *
      * @param model .
@@ -73,19 +58,19 @@ public class ServiceReturnController extends BaseCRUDActionController<ServiceRet
      */
     @RequestMapping
     public String grid(Model model) {
-      //判断是否有编辑权限
-      model.addAttribute("canEdit",sysUserManager.hasPrivilege("ServiceReturn"));
-      return "view/service/serviceReturn/grid";
+        //判断是否有编辑权限
+        model.addAttribute("canEdit", true);
+        return "view/service/serviceReturn/grid";
     }
-    
+
     /**
      * 获取列表数据
      *
      * @param response .
-     * @param filters .
-     * @param columns .
-     * @param page .
-     * @param rows .
+     * @param filters  .
+     * @param columns  .
+     * @param page     .
+     * @param rows     .
      */
     @RequestMapping
     public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session) {
@@ -98,7 +83,7 @@ public class ServiceReturnController extends BaseCRUDActionController<ServiceRet
             QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);
             String query = queryTranslate.toString();
             session.setAttribute(Constants.GRID_SQL_KEY, query);
-            pageModel = serviceReturnService.findByPage(pageModel, query);            
+            pageModel = serviceReturnService.findByPage(pageModel, query);
 
             //输出显示
             String json = GridJq.toJSON(columns, pageModel);
@@ -127,9 +112,6 @@ public class ServiceReturnController extends BaseCRUDActionController<ServiceRet
     }
 
 
-
-
-
     /**
      * 新增录入页面
      *
@@ -146,7 +128,7 @@ public class ServiceReturnController extends BaseCRUDActionController<ServiceRet
 
         return "view/service/serviceReturn/input";
     }
-    
+
     /**
      * 修改显示页面
      *
@@ -164,7 +146,7 @@ public class ServiceReturnController extends BaseCRUDActionController<ServiceRet
         model.addAttribute("SERVICE_BOOK_TYPE", Constants.SERVICE_BOOK_TYPE);
         return "view/service/serviceReturn/input";
     }
-    
+
     /**
      * 查看页面
      *
@@ -180,7 +162,7 @@ public class ServiceReturnController extends BaseCRUDActionController<ServiceRet
         model.addAttribute("serviceReturnItems", serviceReturnItems);
         return "view/service/serviceReturn/view";
     }
-    
+
     /**
      * 保存操作
      *
@@ -197,13 +179,13 @@ public class ServiceReturnController extends BaseCRUDActionController<ServiceRet
             if (entity.getId() != null) {
                 target = serviceReturnService.get(entity.getId());
                 ReflectionUtils.copyBean(entity, target, new String[]{
-                                                "code",                                      
-                                                                "servicePerson",                                      
-                                                                "thingsName",                                      
-                                                                "serviceUnit",                                      
-                                                                "serviceAddress",                                      
-                                                                "moemo"
-                                                });
+                        "code",
+                        "servicePerson",
+                        "thingsName",
+                        "serviceUnit",
+                        "serviceAddress",
+                        "moemo"
+                });
 
             } else {
                 target = entity;
@@ -222,29 +204,29 @@ public class ServiceReturnController extends BaseCRUDActionController<ServiceRet
             String[] receiveDates = request.getParameterValues("receiveDate");
             String[] receiveSigns = request.getParameterValues("receiveSign");
             String[] memos = request.getParameterValues("memo");
-            if(null!=nums){
+            if (null != nums) {
                 for (String num : nums) {
-                    ServiceReturnItem serviceReturnItem=new ServiceReturnItem();
-                    int numSub=Integer.valueOf(num);
+                    ServiceReturnItem serviceReturnItem = new ServiceReturnItem();
+                    int numSub = Integer.valueOf(num);
                     serviceReturnItem.setNum(numSub);
-                    if(null!=serviceBooks[numSub-1]){
+                    if (null != serviceBooks[numSub - 1]) {
                         SysCodeDetail sysCodeDetail = sysCodeManager.getCodeListById(Long.valueOf(serviceBooks[numSub - 1]));
                         serviceReturnItem.setServiceBook(sysCodeDetail.getName());
                         serviceReturnItem.setServiceBookType(sysCodeDetail);
                     }
-                    if(null!=servicePersons[numSub-1]){
+                    if (null != servicePersons[numSub - 1]) {
                         serviceReturnItem.setServicePerson(servicePersons[numSub - 1]);
                     }
-                    if(null!=receiveDates[numSub-1]){
+                    if (null != receiveDates[numSub - 1]) {
                         serviceReturnItem.setReceiveDate(Date.valueOf(receiveDates[numSub - 1]));
                     }
-                    if(null!=receiveSigns[numSub-1]){
+                    if (null != receiveSigns[numSub - 1]) {
                         serviceReturnItem.setReceiveSign(receiveSigns[numSub - 1]);
                     }
-                    if(null!=memos[numSub-1]){
-                        serviceReturnItem.setMemo(memos[numSub-1]);
+                    if (null != memos[numSub - 1]) {
+                        serviceReturnItem.setMemo(memos[numSub - 1]);
                     }
-                    serviceReturnItem.setReturn(target);
+                    serviceReturnItem.setServiceReturn(target);
                     serviceReturnItemService.save(serviceReturnItem);
                 }
             }
@@ -256,19 +238,19 @@ public class ServiceReturnController extends BaseCRUDActionController<ServiceRet
         }
         sendSuccessJSON(response, "保存成功");
     }
-    
+
     /**
      * 删除操作
      *
      * @param response .
-     * @param id  .
-     * @throws Exception  .
+     * @param id       .
+     * @throws Exception .
      */
     @RequestMapping
     public void delete(HttpServletResponse response, Long id) throws Exception {
         ServiceReturn serviceReturn = serviceReturnService.get(id);
         Set<ServiceReturnItem> serviceReturnItems = serviceReturn.getServiceReturnItems();
-        if(null!=serviceReturnItems){
+        if (null != serviceReturnItems && serviceReturnItems.size() > 0) {
             for (ServiceReturnItem serviceReturnItem : serviceReturnItems) {
                 serviceReturnItemService.delete(serviceReturnItem);
             }

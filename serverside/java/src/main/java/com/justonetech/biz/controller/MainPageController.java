@@ -7,10 +7,12 @@ import com.justonetech.biz.utils.enums.Platform;
 import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.utils.CryptUtil;
 import com.justonetech.core.utils.DateTimeHelper;
+import com.justonetech.system.domain.SysCodeDetail;
 import com.justonetech.system.domain.SysDept;
 import com.justonetech.system.domain.SysMenu;
 import com.justonetech.system.domain.SysUser;
 import com.justonetech.system.manager.SimpleQueryManager;
+import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysMenuManager;
 import com.justonetech.system.manager.SysUserManager;
 import org.hibernate.util.StringHelper;
@@ -62,6 +64,9 @@ public class MainPageController extends BaseCRUDActionController {
 
     @Autowired
     private MsgMessageManager msgMessageManager;
+
+    @Autowired
+    private SysCodeManager sysCodeManager;
 
     @Autowired
     private SimpleQueryManager simpleQueryManager;
@@ -243,6 +248,8 @@ public class MainPageController extends BaseCRUDActionController {
         }
         model.addAttribute("infoList", list);
         model.addAttribute("typeCodeBulletin", Constants.OA_PUBLIC_INFO_TYPE_BULLETIN);
+        SysCodeDetail detail = sysCodeManager.getCodeDetailByCode(Constants.OA_PUBLIC_INFO_TYPE, Constants.OA_PUBLIC_INFO_TYPE_BULLETIN);
+        model.addAttribute("typeName", detail.getName());
 
         return "view/index/mainBulletin";
     }

@@ -10,7 +10,7 @@
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
     <tr>
         <td class="tableleft">&nbsp;</td>
-        <td class="tablecenter">公示公告</td>
+        <td class="tablecenter">${typeName}</td>
         <td class="tablecenter" align="right">
             <img src="${themePath}/index_new/more.png" width="36" height="14" title="查看更多" style="cursor: pointer" onclick="loadMainPage('${ctx}/oaPublicInfo/grid.do?typeCode=${typeCodeBulletin}','系统公告');" align="absmiddle"/>
         </td>

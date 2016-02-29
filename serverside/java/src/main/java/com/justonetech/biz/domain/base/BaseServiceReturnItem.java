@@ -63,30 +63,30 @@ public abstract class BaseServiceReturnItem  implements Serializable {
     /*序号*/
     /*序号*/
 	private java.lang.Integer num;
-	
+
     /*送达文书*/
     /*送达文书*/
 	private java.lang.String serviceBook;
-	
+
     /*送达人*/
     /*送达人*/
 	private java.lang.String servicePerson;
-	
+
     /*收到日期*/
     /*收到日期*/
 	private java.sql.Date receiveDate;
-	
+
     /*收到人签名*/
     /*收到人签名*/
 	private java.lang.String receiveSign;
-	
+
     /*备注*/
     /*备注*/
 	private java.lang.String memo;
-	
+
 
 	// many to one
-	private com.justonetech.biz.domain.ServiceReturn m_return;
+	private com.justonetech.biz.domain.ServiceReturn serviceReturn;
 
 
 	// many to one
@@ -222,16 +222,16 @@ public abstract class BaseServiceReturnItem  implements Serializable {
 	/**
 	 * Return the value associated with the column: RETURN_ID
 	 */
-	public com.justonetech.biz.domain.ServiceReturn getReturn () {
-		return m_return;
+	public com.justonetech.biz.domain.ServiceReturn getServiceReturn () {
+		return serviceReturn;
 	}
 
 	/**
 	 * Set the value related to the column: RETURN_ID
-	 * @param m_return the RETURN_ID value
+	 * @param serviceReturn the RETURN_ID value
 	 */
-	public void setReturn (com.justonetech.biz.domain.ServiceReturn m_return) {
-		this.m_return = m_return;
+	public void setServiceReturn (com.justonetech.biz.domain.ServiceReturn serviceReturn) {
+		this.serviceReturn = serviceReturn;
 	}
 
 

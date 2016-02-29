@@ -104,7 +104,7 @@
         </many-to-one>
 
         <many-to-one
-                name="return"
+                name="serviceReturn"
                 column="RETURN_ID"
                 class="ServiceReturn"
                 not-null="false"
