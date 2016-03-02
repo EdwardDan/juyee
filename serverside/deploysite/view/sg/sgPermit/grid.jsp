@@ -50,12 +50,12 @@
                         var rowData = jQuery("#listGrid").jqGrid('getRowData', id);
                         var status = rowData["status"];
                         var opButton = '<input type="button" value="查看" onclick="doView(' + id + ')" class="button_normal"/> ';
-                        if ('' == status || status == '${STATUS_EDIT}' || status == '${STATUS_SLZX_BACK}' || status == '${STATUS_CS_BACK}' || status == '${STATUS_FH_BACK}' || status == '${STATUS_SH_BACK}' || status == '${STATUS_FGLD_BACK}' || status == '${STATUS_ZXLD_BACK}') {
+                        if ('' == status || status == '${STATUS_EDIT}' || status == '${STATUS_SLZX_BACK}') {
                             if (${canEdit||isReg}) {
                                 opButton += '<input type="button" value="编辑" onclick="doEdit(' + id + ')" class="button_normal"/> ';
                                 opButton += '<input type="button" value="删除" onclick="doDelete(' + id + ')" class="button_normal"/> ';
                             }
-                        } else if (status == '${STATUS_SUBMIT}') {
+                        } else if (status == '${STATUS_SUBMIT}'||status == '${STATUS_SH_BACK}') {
                             if (${canSlAudit}) {
                                 opButton += '<input type="button" value="收件" onclick="doAccept(' + id + ')" class="button_normal"/> ';
                             }
@@ -71,7 +71,7 @@
                             if (${canAudit}) {
                                 opButton += '<input type="button" value="审核" onclick="doAudit(' + id + ')" class="button_normal"/> ';
                             }
-                        } else if (status == '${STATUS_SH_PASS}') {
+                        } else if (status == '${STATUS_SH_PASS}'||status == '${STATUS_FGLD_BACK}'||status == '${STATUS_ZXLD_BACK}') {
                             if (${canFgldAudit}) {
                                 opButton += '<input type="button" value="审核" onclick="doAudit(' + id + ')" class="button_normal"/> ';
                             }

@@ -1,0 +1,913 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.justonetech.biz.domain">
+	<class
+		name="AreaSgPermit"
+		table="AREA_SG_PERMIT"
+	>
+
+		<meta attribute="sync-DAO">false</meta>
+		<meta attribute="sync-jsp">true</meta>
+		<meta attribute="sync-boolean">get</meta>
+		<meta attribute="treeable">false</meta>
+		<meta attribute="projectable">false</meta>
+		<meta attribute="tableName">区县施工许可证</meta>
+		<meta attribute="tableComment">区县施工许可证</meta>
+		<meta attribute="sync-templatePatterns">list\w*</meta>
+		<meta attribute="sub-system">area</meta>
+
+		<id
+			name="id"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="com.justonetech.core.orm.hibernate.LongIdGenerator"/>
+		</id>
+
+		<property
+				name="bizCode"
+				column="BIZ_CODE"
+				type="string"
+				not-null="false"
+				length="50"
+				>
+			<meta attribute="ColumnName">业务编号</meta>
+			<meta attribute="ColumnComment">业务编号</meta>
+		</property>
+
+		<property
+				name="year"
+				column="YEAR"
+				type="integer"
+				not-null="false"
+				length="4"
+				>
+			<meta attribute="ColumnName">年</meta>
+			<meta attribute="ColumnComment">年</meta>
+		</property>
+
+		<property
+				name="areaCode"
+				column="AREA_CODE"
+				type="string"
+				not-null="false"
+				length="50"
+				>
+			<meta attribute="ColumnName">区县编码</meta>
+			<meta attribute="ColumnComment">区县编码</meta>
+		</property>
+
+		<property
+				name="areaName"
+				column="AREA_NAME"
+				type="string"
+				not-null="false"
+				length="50"
+				>
+			<meta attribute="ColumnName">区县名称</meta>
+			<meta attribute="ColumnComment">区县名称</meta>
+		</property>
+
+		<property
+				name="bjbh"
+				column="BJBH"
+				type="string"
+				not-null="false"
+				length="50"
+				>
+			<meta attribute="ColumnName">报建编号</meta>
+			<meta attribute="ColumnComment">报建编号</meta>
+		</property>
+
+		<property
+				name="projectName"
+				column="PROJECT_NAME"
+				type="string"
+				not-null="false"
+				length="200"
+				>
+			<meta attribute="ColumnName">项目名称</meta>
+			<meta attribute="ColumnComment">项目名称</meta>
+		</property>
+
+		<property
+				name="buildName"
+				column="BUILD_NAME"
+				type="string"
+				not-null="false"
+				length="200"
+				>
+			<meta attribute="ColumnName">建设单位</meta>
+			<meta attribute="ColumnComment">建设单位</meta>
+		</property>
+
+		<property
+				name="buildUnitType"
+				column="BUILD_UNIT_TYPE"
+				type="string"
+				not-null="false"
+				length="200"
+				>
+			<meta attribute="ColumnName">建设单位性质</meta>
+			<meta attribute="ColumnComment">建设单位性质</meta>
+		</property>
+
+		<property
+				name="buildUnitAddress"
+				column="BUILD_UNIT_ADDRESS"
+				type="string"
+				not-null="false"
+				length="200"
+				>
+			<meta attribute="ColumnName">建设单位地址</meta>
+			<meta attribute="ColumnComment">建设单位地址</meta>
+		</property>
+
+		<property
+				name="buildSite"
+				column="BUILD_SITE"
+				type="string"
+				not-null="false"
+				length="200"
+				>
+			<meta attribute="ColumnName">建设地点</meta>
+			<meta attribute="ColumnComment">建设地点</meta>
+		</property>
+
+		<property
+				name="buildProjSize"
+				column="BUILD_PROJ_SIZE"
+				type="string"
+				not-null="false"
+				length="500"
+				>
+			<meta attribute="ColumnName">建设工程规模</meta>
+			<meta attribute="ColumnComment">建设工程规模</meta>
+		</property>
+
+		<property
+				name="contractPrice"
+				column="CONTRACT_PRICE"
+				type="java.lang.Double"
+				not-null="false"
+				length="10"
+				>
+			<meta attribute="ColumnName">合同价格</meta>
+			<meta attribute="ColumnComment">合同价格</meta>
+		</property>
+
+		<property
+				name="contractPeriod"
+				column="CONTRACT_PERIOD"
+				type="string"
+				not-null="false"
+				length="200"
+				>
+			<meta attribute="ColumnName">合同工期</meta>
+			<meta attribute="ColumnComment">合同工期</meta>
+		</property>
+
+		<property
+				name="fr"
+				column="FR"
+				type="string"
+				not-null="false"
+				length="50"
+				>
+			<meta attribute="ColumnName">法定代表人</meta>
+			<meta attribute="ColumnComment">法定代表人</meta>
+		</property>
+
+		<property
+				name="buildUnitPhone"
+				column="BUILD_UNIT_PHONE"
+				type="string"
+				not-null="false"
+				length="50"
+				>
+			<meta attribute="ColumnName">建设单位联系电话</meta>
+			<meta attribute="ColumnComment">建设单位联系电话</meta>
+		</property>
+
+		<property
+				name="buildUnitPerson"
+				column="BUILD_UNIT_PERSON"
+				type="string"
+				not-null="false"
+				length="50"
+				>
+			<meta attribute="ColumnName">建设单位联系人</meta>
+			<meta attribute="ColumnComment">建设单位联系人</meta>
+		</property>
+
+		<property
+				name="buildUnitMobile"
+				column="BUILD_UNIT_MOBILE"
+				type="string"
+				not-null="false"
+				length="50"
+				>
+			<meta attribute="ColumnName">手机号</meta>
+			<meta attribute="ColumnComment">手机号</meta>
+		</property>
+
+		<property
+				name="buildFileCode"
+				column="BUILD_FILE_CODE"
+				type="string"
+				not-null="false"
+				length="100"
+				>
+			<meta attribute="ColumnName">建设用地批准文件编号</meta>
+			<meta attribute="ColumnComment">建设用地批准文件编号</meta>
+		</property>
+
+		<property
+				name="buildXkzCode"
+				column="BUILD_XKZ_CODE"
+				type="string"
+				not-null="false"
+				length="100"
+				>
+			<meta attribute="ColumnName">建设工程规划许可证编号</meta>
+			<meta attribute="ColumnComment">建设工程规划许可证编号</meta>
+		</property>
+
+		<property
+				name="startWorkCon"
+				column="START_WORK_CON"
+				type="string"
+				not-null="false"
+				length="500"
+				>
+			<meta attribute="ColumnName">现场开工情况</meta>
+			<meta attribute="ColumnComment">现场开工情况</meta>
+		</property>
+
+		<property
+				name="hjgYear"
+				column="HJG_YEAR"
+				type="integer"
+				not-null="false"
+				length="4"
+				>
+			<meta attribute="ColumnName">沪交管收字_年</meta>
+			<meta attribute="ColumnComment">沪交管收字_年</meta>
+		</property>
+
+		<property
+				name="hjgNum"
+				column="HJG_NUM"
+				type="integer"
+				not-null="false"
+				length="4"
+				>
+			<meta attribute="ColumnName">沪交管收字_号</meta>
+			<meta attribute="ColumnComment">沪交管收字_号</meta>
+		</property>
+
+		<property
+				name="applyPerson"
+				column="APPLY_PERSON"
+				type="string"
+				not-null="false"
+				length="50"
+				>
+			<meta attribute="ColumnName">申请人</meta>
+			<meta attribute="ColumnComment">申请人</meta>
+		</property>
+
+		<property
+				name="applyMatter"
+				column="APPLY_MATTER"
+				type="string"
+				not-null="false"
+				length="200"
+				>
+			<meta attribute="ColumnName">申请事项</meta>
+			<meta attribute="ColumnComment">申请事项</meta>
+		</property>
+
+		<property
+				name="applyNum"
+				column="APPLY_NUM"
+				type="string"
+				not-null="false"
+				length="50"
+				>
+			<meta attribute="ColumnName">申请号</meta>
+			<meta attribute="ColumnComment">申请号</meta>
+		</property>
+
+		<property
+				name="materialPerson"
+				column="MATERIAL_PERSON"
+				type="string"
+				not-null="false"
+				length="200"
+				>
+			<meta attribute="ColumnName">材料提交人</meta>
+			<meta attribute="ColumnComment">材料提交人</meta>
+		</property>
+
+		<property
+				name="materialPersonPhone"
+				column="MATERIAL_PERSON_PHONE"
+				type="string"
+				not-null="false"
+				length="50"
+				>
+			<meta attribute="ColumnName">材料提交人联系电话</meta>
+			<meta attribute="ColumnComment">材料提交人联系电话</meta>
+		</property>
+
+		<property
+				name="materialPersonAddress"
+				column="MATERIAL_PERSON_ADDRESS"
+				type="string"
+				not-null="false"
+				length="200"
+				>
+			<meta attribute="ColumnName">材料提交人联系地址</meta>
+			<meta attribute="ColumnComment">材料提交人联系地址</meta>
+		</property>
+
+		<property
+				name="receivePerson"
+				column="RECEIVE_PERSON"
+				type="string"
+				not-null="false"
+				length="200"
+				>
+			<meta attribute="ColumnName">收件人</meta>
+			<meta attribute="ColumnComment">收件人</meta>
+		</property>
+
+		<property
+				name="receivePersonPhone"
+				column="RECEIVE_PERSON_PHONE"
+				type="string"
+				not-null="false"
+				length="50"
+				>
+			<meta attribute="ColumnName">收件人联系电话</meta>
+			<meta attribute="ColumnComment">收件人联系电话</meta>
+		</property>
+
+		<property
+				name="status"
+				column="STATUS"
+				type="integer"
+				not-null="false"
+				length="2"
+				>
+			<meta attribute="ColumnName">状态</meta>
+			<meta attribute="ColumnComment">状态</meta>
+		</property>
+
+		<property
+				name="csOpinion"
+				column="CS_OPINION"
+				type="string"
+				not-null="false"
+				length="1000"
+				>
+			<meta attribute="ColumnName">初审意见</meta>
+			<meta attribute="ColumnComment">初审意见</meta>
+		</property>
+
+		<property
+				name="csUser"
+				column="CS_USER"
+				type="string"
+				not-null="false"
+				length="100"
+				>
+			<meta attribute="ColumnName">初审用户</meta>
+			<meta attribute="ColumnComment">初审用户</meta>
+		</property>
+
+		<property
+				name="csDate"
+				column="CS_DATE"
+				type="timestamp"
+				not-null="false"
+				length="7"
+				>
+			<meta attribute="ColumnName">初审日期</meta>
+			<meta attribute="ColumnComment">初审日期</meta>
+		</property>
+
+		<property
+				name="fhOpinion"
+				column="FH_OPINION"
+				type="string"
+				not-null="false"
+				length="1000"
+				>
+			<meta attribute="ColumnName">复核意见</meta>
+			<meta attribute="ColumnComment">复核意见</meta>
+		</property>
+
+		<property
+				name="fhUser"
+				column="FH_USER"
+				type="string"
+				not-null="false"
+				length="100"
+				>
+			<meta attribute="ColumnName">复核用户</meta>
+			<meta attribute="ColumnComment">复核用户</meta>
+		</property>
+
+		<property
+				name="fhDate"
+				column="FH_DATE"
+				type="timestamp"
+				not-null="false"
+				length="7"
+				>
+			<meta attribute="ColumnName">复核日期</meta>
+			<meta attribute="ColumnComment">复核日期</meta>
+		</property>
+
+		<property
+				name="shOpinion"
+				column="SH_OPINION"
+				type="string"
+				not-null="false"
+				length="1000"
+				>
+			<meta attribute="ColumnName">审核意见</meta>
+			<meta attribute="ColumnComment">审核意见</meta>
+		</property>
+
+		<property
+				name="shUser"
+				column="SH_USER"
+				type="string"
+				not-null="false"
+				length="100"
+				>
+			<meta attribute="ColumnName">审核用户</meta>
+			<meta attribute="ColumnComment">审核用户</meta>
+		</property>
+
+		<property
+				name="shDate"
+				column="SH_DATE"
+				type="timestamp"
+				not-null="false"
+				length="7"
+				>
+			<meta attribute="ColumnName">审核日期</meta>
+			<meta attribute="ColumnComment">审核日期</meta>
+		</property>
+
+		<property
+				name="fgldOpinion"
+				column="FGLD_OPINION"
+				type="string"
+				not-null="false"
+				length="1000"
+				>
+			<meta attribute="ColumnName">分管领导审核意见</meta>
+			<meta attribute="ColumnComment">分管领导审核意见</meta>
+		</property>
+
+		<property
+				name="fgldUser"
+				column="FGLD_USER"
+				type="string"
+				not-null="false"
+				length="100"
+				>
+			<meta attribute="ColumnName">分管领导审核用户</meta>
+			<meta attribute="ColumnComment">分管领导审核用户</meta>
+		</property>
+
+		<property
+				name="fgldDate"
+				column="FGLD_DATE"
+				type="timestamp"
+				not-null="false"
+				length="7"
+				>
+			<meta attribute="ColumnName">分管领导审核日期</meta>
+			<meta attribute="ColumnComment">分管领导审核日期</meta>
+		</property>
+
+		<property
+				name="zxldOpinion"
+				column="ZXLD_OPINION"
+				type="string"
+				not-null="false"
+				length="1000"
+				>
+			<meta attribute="ColumnName">中心领导审核意见</meta>
+			<meta attribute="ColumnComment">中心领导审核意见</meta>
+		</property>
+
+		<property
+				name="zxldUser"
+				column="ZXLD_USER"
+				type="string"
+				not-null="false"
+				length="100"
+				>
+			<meta attribute="ColumnName">中心领导审核用户</meta>
+			<meta attribute="ColumnComment">中心领导审核用户</meta>
+		</property>
+
+		<property
+				name="zxldDate"
+				column="ZXLD_DATE"
+				type="timestamp"
+				not-null="false"
+				length="7"
+				>
+			<meta attribute="ColumnName">中心领导审核日期</meta>
+			<meta attribute="ColumnComment">中心领导审核日期</meta>
+		</property>
+
+		<property
+				name="jscOpinion"
+				column="JSC_OPINION"
+				type="string"
+				not-null="false"
+				length="1000"
+				>
+			<meta attribute="ColumnName">建设处审核意见</meta>
+			<meta attribute="ColumnComment">建设处审核意见</meta>
+		</property>
+
+		<property
+				name="jscUser"
+				column="JSC_USER"
+				type="string"
+				not-null="false"
+				length="100"
+				>
+			<meta attribute="ColumnName">建设处审核用户</meta>
+			<meta attribute="ColumnComment">建设处审核用户</meta>
+		</property>
+
+		<property
+				name="jscDate"
+				column="JSC_DATE"
+				type="timestamp"
+				not-null="false"
+				length="7"
+				>
+			<meta attribute="ColumnName">建设处审核日期</meta>
+			<meta attribute="ColumnComment">建设处审核日期</meta>
+		</property>
+
+		<property
+				name="spcOpinion"
+				column="SPC_OPINION"
+				type="string"
+				not-null="false"
+				length="1000"
+				>
+			<meta attribute="ColumnName">审批处审核意见</meta>
+			<meta attribute="ColumnComment">审批处审核意见</meta>
+		</property>
+
+		<property
+				name="spcUser"
+				column="SPC_USER"
+				type="string"
+				not-null="false"
+				length="100"
+				>
+			<meta attribute="ColumnName">审批处审核用户</meta>
+			<meta attribute="ColumnComment">审批处审核用户</meta>
+		</property>
+
+		<property
+				name="spcDate"
+				column="SPC_DATE"
+				type="timestamp"
+				not-null="false"
+				length="7"
+				>
+			<meta attribute="ColumnName">审批处审核日期</meta>
+			<meta attribute="ColumnComment">审批处审核日期</meta>
+		</property>
+
+		<property
+				name="wldOpinion"
+				column="WLD_OPINION"
+				type="string"
+				not-null="false"
+				length="1000"
+				>
+			<meta attribute="ColumnName">委领导审核意见</meta>
+			<meta attribute="ColumnComment">委领导审核意见</meta>
+		</property>
+
+		<property
+				name="wldUser"
+				column="WLD_USER"
+				type="string"
+				not-null="false"
+				length="100"
+				>
+			<meta attribute="ColumnName">委领导审核用户</meta>
+			<meta attribute="ColumnComment">委领导审核用户</meta>
+		</property>
+
+		<property
+				name="wldDate"
+				column="WLD_DATE"
+				type="timestamp"
+				not-null="false"
+				length="7"
+				>
+			<meta attribute="ColumnName">委领导审核日期</meta>
+			<meta attribute="ColumnComment">委领导审核日期</meta>
+		</property>
+
+		<property
+				name="createTime"
+				column="CREATE_TIME"
+				type="timestamp"
+				not-null="false"
+				length="7"
+				>
+			<meta attribute="ColumnName">创建时间</meta>
+			<meta attribute="ColumnComment">创建时间</meta>
+		</property>
+
+		<property
+				name="createUser"
+				column="CREATE_USER"
+				type="string"
+				not-null="false"
+				length="100"
+				>
+			<meta attribute="ColumnName">创建用户名</meta>
+			<meta attribute="ColumnComment">创建用户名</meta>
+		</property>
+
+		<property
+				name="updateTime"
+				column="UPDATE_TIME"
+				type="timestamp"
+				not-null="false"
+				length="7"
+				>
+			<meta attribute="ColumnName">更新时间</meta>
+			<meta attribute="ColumnComment">更新时间</meta>
+		</property>
+
+		<property
+				name="updateUser"
+				column="UPDATE_USER"
+				type="string"
+				not-null="false"
+				length="100"
+				>
+			<meta attribute="ColumnName">更新用户名</meta>
+			<meta attribute="ColumnComment">更新用户名</meta>
+		</property>
+
+		<property
+				name="submitDate"
+				column="SUBMIT_DATE"
+				type="timestamp"
+				not-null="false"
+				length="7"
+				>
+			<meta attribute="ColumnName">提交日期</meta>
+			<meta attribute="ColumnComment">提交日期</meta>
+		</property>
+
+		<property
+				name="backNum"
+				column="BACK_NUM"
+				type="integer"
+				not-null="false"
+				length="4"
+				>
+			<meta attribute="ColumnName">退回编号</meta>
+			<meta attribute="ColumnComment">退回编号</meta>
+		</property>
+
+		<property
+				name="acceptCode"
+				column="ACCEPT_CODE"
+				type="string"
+				not-null="false"
+				length="50"
+				>
+			<meta attribute="ColumnName">受理编号</meta>
+			<meta attribute="ColumnComment">受理编号</meta>
+		</property>
+
+		<property
+				name="acceptPerson"
+				column="ACCEPT_PERSON"
+				type="string"
+				not-null="false"
+				length="50"
+				>
+			<meta attribute="ColumnName">受理人</meta>
+			<meta attribute="ColumnComment">受理人</meta>
+		</property>
+
+		<property
+				name="acceptDate"
+				column="ACCEPT_DATE"
+				type="timestamp"
+				not-null="false"
+				length="7"
+				>
+			<meta attribute="ColumnName">受理日期</meta>
+			<meta attribute="ColumnComment">受理日期</meta>
+		</property>
+
+		<property
+				name="acceptOpinion"
+				column="ACCEPT_OPINION"
+				type="string"
+				not-null="false"
+				length="50"
+				>
+			<meta attribute="ColumnName">受理意见</meta>
+			<meta attribute="ColumnComment">受理意见</meta>
+		</property>
+
+		<property
+				name="contractBeginDate"
+				column="CONTRACT_BEGIN_DATE"
+				type="date"
+				not-null="false"
+				length="7"
+				>
+			<meta attribute="ColumnName">合同开工日期</meta>
+			<meta attribute="ColumnComment">合同开工日期</meta>
+		</property>
+
+		<property
+				name="contractEndDate"
+				column="CONTRACT_END_DATE"
+				type="date"
+				not-null="false"
+				length="7"
+				>
+			<meta attribute="ColumnName">合同竣工日期</meta>
+			<meta attribute="ColumnComment">合同竣工日期</meta>
+		</property>
+
+		<property
+				name="zbPrice"
+				column="ZB_PRICE"
+				type="java.lang.Double"
+				not-null="false"
+				length="10"
+				>
+			<meta attribute="ColumnName">中标价（万元）</meta>
+			<meta attribute="ColumnComment">中标价（万元）</meta>
+		</property>
+
+		<property
+				name="buildLbIds"
+				column="BUILD_LB_IDS"
+				type="string"
+				not-null="false"
+				length="200"
+				>
+			<meta attribute="ColumnName">建设工程类别ids</meta>
+			<meta attribute="ColumnComment">建设工程类别ids</meta>
+		</property>
+
+		<property
+				name="bzBackMaterial"
+				column="BZ_BACK_MATERIAL"
+				type="string"
+				not-null="false"
+				length="2000"
+				>
+			<meta attribute="ColumnName">补正退回材料</meta>
+			<meta attribute="ColumnComment">补正退回材料</meta>
+		</property>
+
+		<property
+				name="projectPlanCost"
+				column="PROJECT_PLAN_COST"
+				type="java.lang.Double"
+				not-null="false"
+				length="10"
+				>
+			<meta attribute="ColumnName">项目投资估算（万元）</meta>
+			<meta attribute="ColumnComment">项目投资估算（万元）</meta>
+		</property>
+
+		<property
+				name="sgUnitName"
+				column="SG_UNIT_NAME"
+				type="string"
+				not-null="false"
+				length="200"
+				>
+			<meta attribute="ColumnName">施工单位</meta>
+			<meta attribute="ColumnComment">施工单位</meta>
+		</property>
+
+		<property
+				name="jlUnitName"
+				column="JL_UNIT_NAME"
+				type="string"
+				not-null="false"
+				length="200"
+				>
+			<meta attribute="ColumnName">监理单位</meta>
+			<meta attribute="ColumnComment">监理单位</meta>
+		</property>
+
+		<property
+				name="sjUnitName"
+				column="SJ_UNIT_NAME"
+				type="string"
+				not-null="false"
+				length="200"
+				>
+			<meta attribute="ColumnName">设计单位</meta>
+			<meta attribute="ColumnComment">设计单位</meta>
+		</property>
+
+		<many-to-one
+			name="buildSx"
+			column="BUILD_SX_ID"
+			class="com.justonetech.system.domain.SysCodeDetail"
+			not-null="false"
+		>
+		</many-to-one>
+		<many-to-one
+			name="buildLb"
+			column="BUILD_LB_ID"
+			class="com.justonetech.system.domain.SysCodeDetail"
+			not-null="false"
+		>
+		</many-to-one>
+		<many-to-one
+			name="propertyType"
+			column="PROPERTY_TYPE_ID"
+			class="com.justonetech.system.domain.SysCodeDetail"
+			not-null="false"
+		>
+		</many-to-one>
+		<many-to-one
+			name="projectType"
+			column="PROJECT_TYPE_ID"
+			class="com.justonetech.system.domain.SysCodeDetail"
+			not-null="false"
+		>
+		</many-to-one>
+
+
+		<set name="areaHistoryOpinions" inverse="true" order-by="SG_PERMIT_ID desc">
+			<key column="SG_PERMIT_ID"/>
+			<one-to-many class="AreaHistoryOpinion"/>
+		</set>
+
+		<set name="areaSgMaterials" inverse="true" order-by="NO">
+			<key column="SG_PERMIT_ID"/>
+			<one-to-many class="AreaSgMaterial"/>
+		</set>
+
+		<set name="areaPermitOperations" inverse="true">
+			<key column="SG_PERMIT_ID"/>
+			<one-to-many class="AreaPermitOperation"/>
+		</set>
+
+		<set name="areaProjPersons" inverse="true" order-by="NUM">
+			<key column="SG_PERMIT_ID"/>
+			<one-to-many class="AreaProjPerson"/>
+		</set>
+
+		<set name="areaPermitHdExtends" inverse="true">
+			<key column="SG_PERMIT_ID"/>
+			<one-to-many class="AreaPermitHdExtend"/>
+		</set>
+
+		<set name="areaSgUnitProjs" inverse="true" order-by="NUM">
+			<key column="SG_PERMIT_ID"/>
+			<one-to-many class="AreaSgUnitProj"/>
+		</set>
+
+		<set name="areaAuditOpinions" inverse="true" order-by="NO">
+			<key column="SG_PERMIT_ID"/>
+			<one-to-many class="AreaAuditOpinion"/>
+		</set>
+
+	</class>
+    <query name="areasgpermit_all_data_query">
+        <![CDATA[FROM AreaSgPermit]]>
+    </query>
+</hibernate-mapping>

@@ -89,11 +89,11 @@
                 <td class="form_content">${bean.projectPlanCost}</td>
             </tr>
             <tr class="tr_dark">
-                <td class="form_label_right">合同开工日期：</td>
+                <td class="form_label_right">计划开工：</td>
                 <td class="form_content">
                     <fmt:formatDate value="${bean.contractBeginDate}" pattern="yyyy-MM-dd"/>
                 </td>
-                <td class="form_label_right">合同竣工日期：</td>
+                <td class="form_label_right">计划竣工：</td>
                 <td class="form_content">
                     <fmt:formatDate value="${bean.contractEndDate}" pattern="yyyy-MM-dd"/>
                 </td>
@@ -353,7 +353,7 @@
         </fieldset>
     </c:if>
     <div class="div_space"></div>
-    <c:if test="${bean.status==STATUS_CS_PASS||bean.status==STATUS_FH_PASS||bean.status==STATUS_SH_PASS||bean.status==STATUS_FGLD_PASS||bean.status==STATUS_ZXLD_PASS||bean.status==STATUS_WLD_PASS||bean.status==STATUS_WLD_BACK}">
+    <c:if test="${bean.status==STATUS_CS_PASS||bean.status==STATUS_FH_PASS||bean.status==STATUS_SH_PASS||bean.status==STATUS_SH_BACK||bean.status==STATUS_FGLD_PASS||bean.status==STATUS_FGLD_BACK||bean.status==STATUS_ZXLD_PASS||bean.status==STATUS_ZXLD_BACK||bean.status==STATUS_WLD_PASS||bean.status==STATUS_WLD_BACK}">
         <fieldset class="form_fieldset" style="width: 96%;">
             <legend>审核信息</legend>
             <table cellpadding="0" cellspacing="0" class="form_table">
@@ -454,7 +454,7 @@
                     </c:forEach>
                 </c:if>
 
-                <c:if test="${(bean.status==STATUS_SH_PASS)}">
+                <c:if test="${(bean.status==STATUS_SH_PASS)||(bean.status==STATUS_SH_BACK)}">
                     <c:forEach items="${historyOpinions}" var="item">
                         <c:if test="${item.status==STATUS_CS_PASS && item.projectType.id==bean.projectType.id}">
                             <tr class="tr_dark">
@@ -505,7 +505,7 @@
                     </c:forEach>
                 </c:if>
 
-                <c:if test="${(bean.status==STATUS_FGLD_PASS)}">
+                <c:if test="${(bean.status==STATUS_FGLD_PASS)||(bean.status==STATUS_FGLD_BACK)}">
                     <c:forEach items="${historyOpinions}" var="item">
                         <c:if test="${item.status==STATUS_CS_PASS && item.projectType.id==bean.projectType.id}">
                             <tr class="tr_dark">
@@ -572,7 +572,7 @@
                     </c:forEach>
                 </c:if>
 
-                <c:if test="${(bean.status==STATUS_ZXLD_PASS)}">
+                <c:if test="${(bean.status==STATUS_ZXLD_PASS)||(bean.status==STATUS_ZXLD_BACK)}">
                     <c:forEach items="${historyOpinions}" var="item">
                         <c:if test="${item.status==STATUS_CS_PASS && item.projectType.id==bean.projectType.id}">
                             <tr class="tr_dark">

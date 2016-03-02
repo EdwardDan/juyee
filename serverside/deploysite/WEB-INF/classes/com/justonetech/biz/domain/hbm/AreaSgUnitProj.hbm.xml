@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.justonetech.biz.domain">
+	<class
+		name="AreaSgUnitProj"
+		table="AREA_SG_UNIT_PROJ"
+	>
+
+		<meta attribute="sync-DAO">false</meta>
+		<meta attribute="sync-jsp">true</meta>
+		<meta attribute="sync-boolean">get</meta>
+		<meta attribute="treeable">false</meta>
+		<meta attribute="projectable">false</meta>
+		<meta attribute="tableName">区县单位工程列表</meta>
+		<meta attribute="tableComment">区县单位工程列表</meta>
+		<meta attribute="sync-templatePatterns">list\w*</meta>
+		<meta attribute="sub-system">area</meta>
+
+		<id
+			name="id"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="com.justonetech.core.orm.hibernate.LongIdGenerator"/>
+		</id>
+
+		<property
+				name="num"
+				column="NUM"
+				type="integer"
+				not-null="false"
+				length="4"
+				>
+			<meta attribute="ColumnName">序号</meta>
+			<meta attribute="ColumnComment">序号</meta>
+		</property>
+
+		<property
+				name="unitProjCode"
+				column="UNIT_PROJ_CODE"
+				type="string"
+				not-null="false"
+				length="200"
+				>
+			<meta attribute="ColumnName">单位工程编号</meta>
+			<meta attribute="ColumnComment">单位工程编号</meta>
+		</property>
+
+		<property
+				name="unitProjName"
+				column="UNIT_PROJ_NAME"
+				type="string"
+				not-null="false"
+				length="200"
+				>
+			<meta attribute="ColumnName">单位工程名称</meta>
+			<meta attribute="ColumnComment">单位工程名称</meta>
+		</property>
+
+		<property
+				name="projectIndex"
+				column="PROJECT_INDEX"
+				type="string"
+				not-null="false"
+				length="1000"
+				>
+			<meta attribute="ColumnName">工程指标</meta>
+			<meta attribute="ColumnComment">工程指标</meta>
+		</property>
+
+		<property
+				name="createTime"
+				column="CREATE_TIME"
+				type="timestamp"
+				not-null="false"
+				length="7"
+				>
+			<meta attribute="ColumnName">创建时间</meta>
+			<meta attribute="ColumnComment">创建时间</meta>
+		</property>
+
+		<property
+				name="createUser"
+				column="CREATE_USER"
+				type="string"
+				not-null="false"
+				length="100"
+				>
+			<meta attribute="ColumnName">创建用户名</meta>
+			<meta attribute="ColumnComment">创建用户名</meta>
+		</property>
+
+		<property
+				name="updateTime"
+				column="UPDATE_TIME"
+				type="timestamp"
+				not-null="false"
+				length="7"
+				>
+			<meta attribute="ColumnName">更新时间</meta>
+			<meta attribute="ColumnComment">更新时间</meta>
+		</property>
+
+		<property
+				name="updateUser"
+				column="UPDATE_USER"
+				type="string"
+				not-null="false"
+				length="100"
+				>
+			<meta attribute="ColumnName">更新用户名</meta>
+			<meta attribute="ColumnComment">更新用户名</meta>
+		</property>
+
+		<many-to-one
+			name="sgPermit"
+			column="SG_PERMIT_ID"
+			class="AreaSgPermit"
+			not-null="false"
+		>
+		</many-to-one>
+		<many-to-one
+			name="unitProjType"
+			column="UNIT_PROJ_TYPE_ID"
+			class="com.justonetech.system.domain.SysCodeDetail"
+			not-null="false"
+		>
+		</many-to-one>
+
+	</class>
+    <query name="areasgunitproj_all_data_query">
+        <![CDATA[FROM AreaSgUnitProj]]>
+    </query>
+</hibernate-mapping>

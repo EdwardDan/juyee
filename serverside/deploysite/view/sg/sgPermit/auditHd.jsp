@@ -16,18 +16,18 @@
 
         $("#status").val(status);
         if (status == '${STATUS_SH_BACK}') {
-            status = '${STATUS_SUBMIT}';
-            $("#status").val(status);
+            <%--status = '${STATUS_SUBMIT}';--%>
+            <%--$("#status").val(status);--%>
             if (buttonName != "补正退回") {
                 parent.openNewWindow("selectMaterial", "退回选择页面", "${ctx}/sgPermit/selectMaterial.do", true, 400, 200);
             } else {
                 parent.openNewWindow("bzBackMaterialDiv", "补正退回资料", "${ctx}/sgPermit/bzBackMaterial.do", true, 400, 200);
             }
         } else {
-            if (status == '${STATUS_FGLD_BACK}' || status == '${STATUS_ZXLD_BACK}') {
-                status = '${STATUS_FH_PASS}';
-            }
-            $("#status").val(status);
+            <%--if (status == '${STATUS_FGLD_BACK}' || status == '${STATUS_ZXLD_BACK}') {--%>
+                <%--status = '${STATUS_FH_PASS}';--%>
+            <%--}--%>
+//            $("#status").val(status);
             savaAudit(buttonName);
         }
     }
@@ -115,11 +115,11 @@
                     <td class="form_content">${bean.projectPlanCost}</td>
                 </tr>
                 <tr class="tr_dark">
-                    <td class="form_label_right">合同开工日期：</td>
+                    <td class="form_label_right">计划开工：</td>
                     <td class="form_content">
                         <fmt:formatDate value="${bean.contractBeginDate}" pattern="yyyy-MM-dd"/>
                     </td>
-                    <td class="form_label_right">合同竣工日期：</td>
+                    <td class="form_label_right">计划竣工：</td>
                     <td class="form_content">
                         <fmt:formatDate value="${bean.contractEndDate}" pattern="yyyy-MM-dd"/>
                     </td>

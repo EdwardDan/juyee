@@ -106,12 +106,12 @@
                     <td class="form_content">${bean.projectPlanCost}<form:hidden path="projectPlanCost"/></td>
                 </tr>
                 <tr class="tr_dark">
-                    <td class="form_label_right">合同开工日期：</td>
+                    <td class="form_label_right">计划开工：</td>
                     <td class="form_content">
                         <fmt:formatDate value="${bean.contractBeginDate}" pattern="yyyy-MM-dd"/>
                         <form:hidden path="contractBeginDate"/>
                     </td>
-                    <td class="form_label_right">合同竣工日期：</td>
+                    <td class="form_label_right">计划竣工：</td>
                     <td class="form_content">
                         <fmt:formatDate value="${bean.contractEndDate}" pattern="yyyy-MM-dd"/>
                         <form:hidden path="contractEndDate"/>

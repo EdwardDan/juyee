@@ -96,8 +96,11 @@
                 case "sgxk":
                     loadUrl(0, '${ctx}/sgPermit/grid.do');
                     break;
+                case "qxsgxk":
+                    loadUrl(1, '${ctx}/areaSgPermit/grid.do');
+                    break;
                 case "fjxz":
-                    loadUrl(1, '${ctx}/platform/attachDownload.do');
+                    loadUrl(2, '${ctx}/platform/attachDownload.do');
                     break;
                 default:
                     loadHomePage();
@@ -145,6 +148,11 @@
                 </ul>
                 <ul>
                     <li class="a2">
+                        <a href="javascript:void(0)" onclick="loadPlatPage('qxsgxk')">区县施工许可</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="a3">
                         <a href="javascript:void(0)" onclick="loadPlatPage('fjxz')">附件下载</a>
                     </li>
                 </ul>
