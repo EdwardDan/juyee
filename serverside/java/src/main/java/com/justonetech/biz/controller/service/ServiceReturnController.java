@@ -10,6 +10,7 @@ import com.justonetech.biz.utils.Constants;
 import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.orm.hibernate.Page;
 import com.justonetech.core.utils.ReflectionUtils;
+import com.justonetech.core.utils.StringHelper;
 import com.justonetech.system.domain.SysCodeDetail;
 import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
@@ -209,21 +210,21 @@ public class ServiceReturnController extends BaseCRUDActionController<ServiceRet
                     ServiceReturnItem serviceReturnItem = new ServiceReturnItem();
                     int numSub = Integer.valueOf(num);
                     serviceReturnItem.setNum(numSub);
-                    if (null != serviceBooks[numSub - 1]) {
+                    if (StringHelper.isNotEmpty(serviceBooks[numSub - 1])) {
                         SysCodeDetail sysCodeDetail = sysCodeManager.getCodeListById(Long.valueOf(serviceBooks[numSub - 1]));
                         serviceReturnItem.setServiceBook(sysCodeDetail.getName());
                         serviceReturnItem.setServiceBookType(sysCodeDetail);
                     }
-                    if (null != servicePersons[numSub - 1]) {
+                    if (StringHelper.isNotEmpty(servicePersons[numSub - 1])) {
                         serviceReturnItem.setServicePerson(servicePersons[numSub - 1]);
                     }
-                    if (null != receiveDates[numSub - 1]) {
+                    if (StringHelper.isNotEmpty(receiveDates[numSub - 1])) {
                         serviceReturnItem.setReceiveDate(Date.valueOf(receiveDates[numSub - 1]));
                     }
-                    if (null != receiveSigns[numSub - 1]) {
+                    if (StringHelper.isNotEmpty( receiveSigns[numSub - 1])){
                         serviceReturnItem.setReceiveSign(receiveSigns[numSub - 1]);
                     }
-                    if (null != memos[numSub - 1]) {
+                    if (StringHelper.isNotEmpty( memos[numSub - 1])) {
                         serviceReturnItem.setMemo(memos[numSub - 1]);
                     }
                     serviceReturnItem.setServiceReturn(target);
