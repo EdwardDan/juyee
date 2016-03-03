@@ -1,6 +1,8 @@
 package com.justonetech.biz.controller.platform;
 
+import com.justonetech.biz.daoservice.AreaSgPermitService;
 import com.justonetech.biz.daoservice.SgPermitService;
+import com.justonetech.biz.domain.AreaSgPermit;
 import com.justonetech.biz.domain.SgPermit;
 import com.justonetech.biz.utils.Constants;
 import com.justonetech.core.controller.BaseCRUDActionController;
@@ -24,6 +26,9 @@ public class PlatformController extends BaseCRUDActionController {
 
     @Autowired
     private SgPermitService sgPermitService;
+
+    @Autowired
+    private AreaSgPermitService areaSgPermitService;
 
     /**
      * 监管平台首页
@@ -74,6 +79,30 @@ public class PlatformController extends BaseCRUDActionController {
         model.addAttribute("list", list);
 
         return "view/platform/mainSgxk";
+    }
+
+    /**
+     * 主页面--施工许可
+     *
+     * @param model .
+     * @return .
+     */
+    @RequestMapping
+    public String mainQxsgxk(Model model) {
+        //注册用户只能看到自己的记录
+        SysUser sysUser = sysUserManager.getSysUser();
+        String hql = "from AreaSgPermit where 1=1";
+        if (null != sysUser.getRegPerson()) {
+            hql += " and createUser='" + sysUser.getLoginName() + "'";
+        }
+        hql += " order by id desc";
+        List<AreaSgPermit> list = areaSgPermitService.findByQuery(hql);
+        if (list.size() > 5) {
+            list = list.subList(0, 5);
+        }
+        model.addAttribute("list", list);
+
+        return "view/platform/mainQxsgxk";
     }
 
 

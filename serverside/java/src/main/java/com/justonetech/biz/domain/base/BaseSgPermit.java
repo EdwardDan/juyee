@@ -117,6 +117,14 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
     /*年*/
     private Integer year;
 
+    /*区县编码*/
+    /*区县编码*/
+    private java.lang.String areaCode;
+
+    /*区县名称*/
+    /*区县名称*/
+    private java.lang.String areaName;
+
     /*报建编号*/
     /*报建编号*/
     private String bjbh;
@@ -442,6 +450,21 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
         this.year = year;
     }
 
+    public String getAreaCode() {
+        return areaCode;
+    }
+
+    public void setAreaCode(String areaCode) {
+        this.areaCode = areaCode;
+    }
+
+    public String getAreaName() {
+        return areaName;
+    }
+
+    public void setAreaName(String areaName) {
+        this.areaName = areaName;
+    }
 
     /**
      * Return the value associated with the column: BJBH
@@ -1468,6 +1491,8 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
         org.apache.commons.lang.builder.ToStringBuilder builder = new org.apache.commons.lang.builder.ToStringBuilder(this);
         builder.append(id);
         builder.append(year);
+        builder.append(areaCode);
+        builder.append(areaName);
         builder.append(bjbh);
         builder.append(projectName);
         builder.append(buildName);

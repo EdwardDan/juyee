@@ -11,6 +11,7 @@ import com.justonetech.core.utils.StringHelper;
 import com.justonetech.system.daoservice.SysDeptService;
 import com.justonetech.system.daoservice.SysPersonDeptService;
 import com.justonetech.system.daoservice.SysPersonService;
+import com.justonetech.system.domain.SysCodeDetail;
 import com.justonetech.system.domain.SysDept;
 import com.justonetech.system.domain.SysPerson;
 import com.justonetech.system.domain.SysPersonDept;
@@ -138,6 +139,8 @@ public class SysPersonController extends BaseCRUDActionController {
     public String add(Model model) {
         SysPerson sysPerson = new SysPerson();
         model.addAttribute("bean", sysPerson);
+        List<SysCodeDetail> areaList = sysCodeManager.getCodeListByCode(Constants.PROJ_INFO_BELONG_AREA);
+        model.addAttribute("areaList", areaList);
         return "view/system/sysPerson/input";
     }
 
@@ -152,6 +155,8 @@ public class SysPersonController extends BaseCRUDActionController {
     public String modify(Model model, Long id) {
         SysPerson sysPerson = sysPersonService.get(id);
         model.addAttribute("bean", sysPerson);
+        List<SysCodeDetail> areaList = sysCodeManager.getCodeListByCode(Constants.PROJ_INFO_BELONG_AREA);
+        model.addAttribute("areaList", areaList);
         return "view/system/sysPerson/input";
     }
 
@@ -205,6 +210,15 @@ public class SysPersonController extends BaseCRUDActionController {
                 });
             } else {
                 target = entity;
+            }
+            String areaCode = request.getParameter("areaCode");
+            if (areaCode.equals("sh")) {
+                target.setAreaCode(areaCode);
+                target.setAreaName("上海市");
+            } else {
+                SysCodeDetail area = sysCodeManager.getCodeDetailByCode(Constants.PROJ_INFO_BELONG_AREA, areaCode);
+                target.setAreaCode(areaCode);
+                target.setAreaName(area.getName());
             }
             String sysDeptId = request.getParameter("sysDeptId");
             target.setCategory(StringHelper.isEmpty(sysDeptId) ? sysCodeManager.getCodeDetailByCode(Constants.SYS_DEPT_CATAGORY, Constants.OWNER_UNIT) : sysDeptService.get(Long.valueOf(sysDeptId)).getCategory());

@@ -140,6 +140,13 @@ public class PrivilegeCode {
     public static final String SG_PERMIT_SPC_AUDIT = SgPermit.class.getSimpleName() + "_spc_audit";
     public static final String SG_PERMIT_WLD_AUDIT = SgPermit.class.getSimpleName() + "_wld_audit";
 
+    //区县施工许可管理
+    public static final String AREA_PERMIT_EDIT = AreaSgPermit.class.getSimpleName() + "_edit";
+    public static final String AREA_PERMIT_CS_AUDIT = AreaSgPermit.class.getSimpleName() + "_cs_audit";
+    public static final String AREA_PERMIT_SL_AUDIT = AreaSgPermit.class.getSimpleName() + "_sl_audit";
+    public static final String AREA_PERMIT_FH_AUDIT = AreaSgPermit.class.getSimpleName() + "_fh_audit";
+    public static final String AREA_PERMIT_AUDIT = AreaSgPermit.class.getSimpleName() + "_audit";
+
     //三类人员
     public static final String SLRY_QUALIFY_EDIT = SlryQualify.class.getSimpleName() + "_edit";     //三类人员_编辑
     public static final String SLRY_QUALIFY_AUDIT = SlryQualify.class.getSimpleName() + "_audit";     //三类人员_编辑

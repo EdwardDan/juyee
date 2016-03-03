@@ -523,6 +523,8 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
             } else {
                 target = entity;
             }
+            target.setAreaCode("sh");
+            target.setAreaName("上海市");
             SysUser sysUser = sysUserManager.getSysUser();
             Integer status = target.getStatus();
             if (status == SgPermitStatus.STATUS_SUBMIT.getCode()) {

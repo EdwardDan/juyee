@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="com.justonetech.biz.domain">
+	<class
+		name="AreaPermitHdExtend"
+		table="AREA_PERMIT_HD_EXTEND"
+	>
+
+		<meta attribute="sync-DAO">false</meta>
+		<meta attribute="sync-jsp">true</meta>
+		<meta attribute="sync-boolean">get</meta>
+		<meta attribute="treeable">false</meta>
+		<meta attribute="projectable">false</meta>
+		<meta attribute="tableName">区县施工许可_航道扩展信息</meta>
+		<meta attribute="tableComment">区县施工许可_航道扩展信息</meta>
+		<meta attribute="sync-templatePatterns">list\w*</meta>
+		<meta attribute="sub-system">area</meta>
+
+		<id
+			name="id"
+			type="java.lang.Long"
+			column="ID"
+		>
+			<generator class="com.justonetech.core.orm.hibernate.LongIdGenerator"/>
+		</id>
+
+		<property
+				name="mainSjUnit"
+				column="MAIN_SJ_UNIT"
+				type="string"
+				not-null="false"
+				length="200"
+				>
+			<meta attribute="ColumnName">主要设计单位</meta>
+			<meta attribute="ColumnComment">主要设计单位</meta>
+		</property>
+
+		<property
+				name="mainSjZbfs"
+				column="MAIN_SJ_ZBFS"
+				type="string"
+				not-null="false"
+				length="200"
+				>
+			<meta attribute="ColumnName">主要设计招标方式</meta>
+			<meta attribute="ColumnComment">主要设计招标方式</meta>
+		</property>
+
+		<property
+				name="mainSjZbj"
+				column="MAIN_SJ_ZBJ"
+				type="java.lang.Double"
+				not-null="false"
+				length="10"
+				>
+			<meta attribute="ColumnName">主要设计中标价</meta>
+			<meta attribute="ColumnComment">主要设计中标价</meta>
+		</property>
+
+		<property
+				name="mainSjZzdj"
+				column="MAIN_SJ_ZZDJ"
+				type="string"
+				not-null="false"
+				length="200"
+				>
+			<meta attribute="ColumnName">主要设计资质等级</meta>
+			<meta attribute="ColumnComment">主要设计资质等级</meta>
+		</property>
+
+		<property
+				name="mainSjXmfzr"
+				column="MAIN_SJ_XMFZR"
+				type="string"
+				not-null="false"
+				length="50"
+				>
+			<meta attribute="ColumnName">主要设计项目负责人</meta>
+			<meta attribute="ColumnComment">主要设计项目负责人</meta>
+		</property>
+
+		<property
+				name="mainSjZsbh"
+				column="MAIN_SJ_ZSBH"
+				type="string"
+				not-null="false"
+				length="50"
+				>
+			<meta attribute="ColumnName">主要设计证书编号</meta>
+			<meta attribute="ColumnComment">主要设计证书编号</meta>
+		</property>
+
+		<property
+				name="mainSjZsbh2"
+				column="MAIN_SJ_ZSBH2"
+				type="string"
+				not-null="false"
+				length="50"
+				>
+			<meta attribute="ColumnName">主要设计证书编号2</meta>
+			<meta attribute="ColumnComment">主要设计证书编号2</meta>
+		</property>
+
+		<property
+				name="mainJlUnit"
+				column="MAIN_JL_UNIT"
+				type="string"
+				not-null="false"
+				length="200"
+				>
+			<meta attribute="ColumnName">主要监理单位</meta>
+			<meta attribute="ColumnComment">主要监理单位</meta>
+		</property>
+
+		<property
+				name="mainJlZbfs"
+				column="MAIN_JL_ZBFS"
+				type="string"
+				not-null="false"
+				length="200"
+				>
+			<meta attribute="ColumnName">主要监理招标方式</meta>
+			<meta attribute="ColumnComment">主要监理招标方式</meta>
+		</property>
+
+		<property
+				name="mainJlZbj"
+				column="MAIN_JL_ZBJ"
+				type="java.lang.Double"
+				not-null="false"
+				length="10"
+				>
+			<meta attribute="ColumnName">主要监理中标价</meta>
+			<meta attribute="ColumnComment">主要监理中标价</meta>
+		</property>
+
+		<property
+				name="mainJlZzdj"
+				column="MAIN_JL_ZZDJ"
+				type="string"
+				not-null="false"
+				length="200"
+				>
+			<meta attribute="ColumnName">主要监理资质等级</meta>
+			<meta attribute="ColumnComment">主要监理资质等级</meta>
+		</property>
+
+		<property
+				name="mainJlXmfzr"
+				column="MAIN_JL_XMFZR"
+				type="string"
+				not-null="false"
+				length="50"
+				>
+			<meta attribute="ColumnName">主要监理项目负责人</meta>
+			<meta attribute="ColumnComment">主要监理项目负责人</meta>
+		</property>
+
+		<property
+				name="mainJlZsbh"
+				column="MAIN_JL_ZSBH"
+				type="string"
+				not-null="false"
+				length="50"
+				>
+			<meta attribute="ColumnName">主要监理证书编号</meta>
+			<meta attribute="ColumnComment">主要监理证书编号</meta>
+		</property>
+
+		<property
+				name="mainJlZsbh2"
+				column="MAIN_JL_ZSBH2"
+				type="string"
+				not-null="false"
+				length="50"
+				>
+			<meta attribute="ColumnName">主要监理证书编号2</meta>
+			<meta attribute="ColumnComment">主要监理证书编号2</meta>
+		</property>
+
+		<property
+				name="mainSgUnit"
+				column="MAIN_SG_UNIT"
+				type="string"
+				not-null="false"
+				length="200"
+				>
+			<meta attribute="ColumnName">主要施工单位</meta>
+			<meta attribute="ColumnComment">主要施工单位</meta>
+		</property>
+
+		<property
+				name="mainSgZbfs"
+				column="MAIN_SG_ZBFS"
+				type="string"
+				not-null="false"
+				length="200"
+				>
+			<meta attribute="ColumnName">主要施工招标方式</meta>
+			<meta attribute="ColumnComment">主要施工招标方式</meta>
+		</property>
+
+		<property
+				name="mainSgZbj"
+				column="MAIN_SG_ZBJ"
+				type="java.lang.Double"
+				not-null="false"
+				length="10"
+				>
+			<meta attribute="ColumnName">主要施工中标价</meta>
+			<meta attribute="ColumnComment">主要施工中标价</meta>
+		</property>
+
+		<property
+				name="mainSgZzdj"
+				column="MAIN_SG_ZZDJ"
+				type="string"
+				not-null="false"
+				length="200"
+				>
+			<meta attribute="ColumnName">主要施工资质等级</meta>
+			<meta attribute="ColumnComment">主要施工资质等级</meta>
+		</property>
+
+		<property
+				name="mainSgXmfzr"
+				column="MAIN_SG_XMFZR"
+				type="string"
+				not-null="false"
+				length="50"
+				>
+			<meta attribute="ColumnName">主要施工项目负责人</meta>
+			<meta attribute="ColumnComment">主要施工项目负责人</meta>
+		</property>
+
+		<property
+				name="mainSgZsbh"
+				column="MAIN_SG_ZSBH"
+				type="string"
+				not-null="false"
+				length="50"
+				>
+			<meta attribute="ColumnName">主要施工证书编号</meta>
+			<meta attribute="ColumnComment">主要施工证书编号</meta>
+		</property>
+
+		<property
+				name="mainSgZsbh2"
+				column="MAIN_SG_ZSBH2"
+				type="string"
+				not-null="false"
+				length="50"
+				>
+			<meta attribute="ColumnName">主要施工证书编号2</meta>
+			<meta attribute="ColumnComment">主要施工证书编号2</meta>
+		</property>
+
+		<property
+				name="gkpzCode"
+				column="GKPZ_CODE"
+				type="string"
+				not-null="false"
+				length="50"
+				>
+			<meta attribute="ColumnName">工可批准或核准机关和文号</meta>
+			<meta attribute="ColumnComment">工可批准或核准机关和文号</meta>
+		</property>
+
+		<property
+				name="hzDate"
+				column="HZ_DATE"
+				type="date"
+				not-null="false"
+				length="7"
+				>
+			<meta attribute="ColumnName">批复或核准日期</meta>
+			<meta attribute="ColumnComment">批复或核准日期</meta>
+		</property>
+
+		<property
+				name="planCost"
+				column="PLAN_COST"
+				type="java.lang.Double"
+				not-null="false"
+				length="10"
+				>
+			<meta attribute="ColumnName">投资估算</meta>
+			<meta attribute="ColumnComment">投资估算</meta>
+		</property>
+
+		<property
+				name="cbshCode"
+				column="CBSH_CODE"
+				type="string"
+				not-null="false"
+				length="50"
+				>
+			<meta attribute="ColumnName">初步设计批准机关和文号</meta>
+			<meta attribute="ColumnComment">初步设计批准机关和文号</meta>
+		</property>
+
+		<property
+				name="pfDate"
+				column="PF_DATE"
+				type="date"
+				not-null="false"
+				length="7"
+				>
+			<meta attribute="ColumnName">批复日期</meta>
+			<meta attribute="ColumnComment">批复日期</meta>
+		</property>
+
+		<property
+				name="pfGq"
+				column="PF_GQ"
+				type="integer"
+				not-null="false"
+				length="4"
+				>
+			<meta attribute="ColumnName">批复工期</meta>
+			<meta attribute="ColumnComment">批复工期</meta>
+		</property>
+
+		<property
+				name="totalGs"
+				column="TOTAL_GS"
+				type="java.lang.Double"
+				not-null="false"
+				length="10"
+				>
+			<meta attribute="ColumnName">总概算</meta>
+			<meta attribute="ColumnComment">总概算</meta>
+		</property>
+
+		<property
+				name="pzjgCode"
+				column="PZJG_CODE"
+				type="string"
+				not-null="false"
+				length="50"
+				>
+			<meta attribute="ColumnName">批准机关和文号</meta>
+			<meta attribute="ColumnComment">批准机关和文号</meta>
+		</property>
+
+		<property
+				name="costFrom"
+				column="COST_FROM"
+				type="string"
+				not-null="false"
+				length="200"
+				>
+			<meta attribute="ColumnName">投资来源</meta>
+			<meta attribute="ColumnComment">投资来源</meta>
+		</property>
+
+
+		<many-to-one
+			name="sgPermit"
+			column="SG_PERMIT_ID"
+			class="AreaSgPermit"
+			not-null="false"
+		>
+		</many-to-one>
+
+	</class>
+    <query name="areapermithdextend_all_data_query">
+        <![CDATA[FROM AreaPermitHdExtend]]>
+    </query>
+</hibernate-mapping>

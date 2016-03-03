@@ -83,107 +83,115 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 	// primary key
 	private Long id;
 
+	/*区县编码*/
+    /*区县编码*/
+	private java.lang.String areaCode;
+
+	/*区县名称*/
+    /*区县名称*/
+	private java.lang.String areaName;
+
 	// fields
     /*编号*/
     /*编号*/
 	private String code;
-	
+
     /*姓名*/
     /*姓名*/
 	private String name;
-	
+
     /*身份证号*/
     /*身份证号*/
 	private String card;
-	
+
     /*年龄*/
     /*年龄*/
 	private Integer age;
-	
+
     /*性别*/
     /*性别*/
 	private Boolean sex;
-	
+
     /*出生年月*/
     /*出生年月*/
 	private java.sql.Date bornDate;
-	
+
     /*籍贯*/
     /*籍贯*/
 	private String bornPlace;
-	
+
     /*移动电话*/
     /*移动电话*/
 	private String mobile;
-	
+
     /*固定电话*/
     /*固定电话*/
 	private String officeTel;
-	
+
     /*传真*/
     /*传真*/
 	private String faxTel;
-	
+
     /*邮件*/
     /*邮件*/
 	private String email;
-	
+
     /*邮政编码*/
     /*邮政编码*/
 	private String zipcode;
-	
+
     /*工作年限*/
     /*工作年限*/
 	private Integer workYear;
-	
+
     /*MSN_CODE*/
     /*MSN_CODE*/
 	private String msnCode;
-	
+
     /*QQ_CODE*/
     /*QQ_CODE*/
 	private String qqCode;
-	
+
     /*备注*/
     /*备注*/
 	private String memo;
-	
+
     /*创建时间*/
     /*创建时间*/
 	private java.sql.Timestamp createTime;
-	
+
     /*更新时间*/
     /*更新时间*/
 	private java.sql.Timestamp updateTime;
-	
+
     /*更新人*/
     /*更新人*/
 	private String updateUser;
-	
+
     /*创建人*/
     /*创建人*/
 	private String createUser;
-	
+
     /*是否显示在去向列表*/
     /*是否显示在去向列表*/
 	private Boolean isShowPersonOut;
-	
+
     /*学历中文描述*/
     /*学历中文描述*/
 	private String educationDesc;
-	
+
     /*政治面貌中文描述*/
     /*政治面貌中文描述*/
 	private String politicalDesc;
-	
+
     /*技术职称或等级*/
     /*技术职称或等级*/
 	private String technicalLevel;
-	
+
     /*是否编内*/
     /*是否编内*/
 	private Boolean isWorking;
-	
+
 
 	// many to one
 	private com.justonetech.system.domain.SysCodeDetail education;
@@ -218,8 +226,29 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 		this.hashCode = Integer.MIN_VALUE;
 	}
 
+	public static String getREF() {
+		return REF;
+	}
 
+	public static void setREF(String REF) {
+		BaseSysPerson.REF = REF;
+	}
 
+	public String getAreaCode() {
+		return areaCode;
+	}
+
+	public void setAreaCode(String areaCode) {
+		this.areaCode = areaCode;
+	}
+
+	public String getAreaName() {
+		return areaName;
+	}
+
+	public void setAreaName(String areaName) {
+		this.areaName = areaName;
+	}
 
 	/**
 	 * Return the value associated with the column: CODE
@@ -755,6 +784,8 @@ public abstract class BaseSysPerson  implements Serializable,Auditable {
 	public String toString () {
 		org.apache.commons.lang.builder.ToStringBuilder builder = new org.apache.commons.lang.builder.ToStringBuilder(this);
 		builder.append(id);
+		builder.append(areaName);
+		builder.append(areaCode);
 		builder.append(code);
 		builder.append(name);
 		builder.append(card);
