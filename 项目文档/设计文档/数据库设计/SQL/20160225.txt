@@ -1,0 +1,685 @@
+create table AREA_SG_PERMIT
+(
+  ID                      NUMBER(10) not null,
+  PROJECT_TYPE_ID         NUMBER(10),
+  YEAR                    NUMBER(4),
+  AREA_NAME               VARCHAR2(50),
+  AREA_CODE               VARCHAR2(50),
+  BJBH                    VARCHAR2(50),
+  PROJECT_NAME            VARCHAR2(200),
+  BUILD_NAME              VARCHAR2(200),
+  HJG_YEAR                NUMBER(4),
+  HJG_NUM                 NUMBER(4),
+  APPLY_PERSON            VARCHAR2(50),
+  APPLY_MATTER            VARCHAR2(200),
+  APPLY_NUM               VARCHAR2(50),
+  MATERIAL_PERSON         VARCHAR2(200),
+  MATERIAL_PERSON_PHONE   VARCHAR2(50),
+  MATERIAL_PERSON_ADDRESS VARCHAR2(200),
+  RECEIVE_PERSON          VARCHAR2(200),
+  RECEIVE_PERSON_PHONE    VARCHAR2(50),
+  STATUS                  NUMBER(2),
+  CS_OPINION              VARCHAR2(1000),
+  CS_USER                 VARCHAR2(100),
+  CS_DATE                 DATE,
+  FH_OPINION              VARCHAR2(1000),
+  FH_USER                 VARCHAR2(100),
+  FH_DATE                 DATE,
+  SH_OPINION              VARCHAR2(1000),
+  SH_USER                 VARCHAR2(100),
+  SH_DATE                 DATE,
+  FGLD_OPINION            VARCHAR2(1000),
+  FGLD_USER               VARCHAR2(100),
+  FGLD_DATE               DATE,
+  ZXLD_OPINION            VARCHAR2(1000),
+  ZXLD_USER               VARCHAR2(100),
+  ZXLD_DATE               DATE,
+  CREATE_TIME             DATE,
+  CREATE_USER             VARCHAR2(100),
+  UPDATE_TIME             DATE,
+  UPDATE_USER             VARCHAR2(100),
+  BUILD_UNIT_TYPE         VARCHAR2(200),
+  BUILD_UNIT_ADDRESS      VARCHAR2(200),
+  BUILD_SITE              VARCHAR2(200),
+  BUILD_PROJ_SIZE         VARCHAR2(500),
+  CONTRACT_PRICE          NUMBER(10,5),
+  CONTRACT_PERIOD         VARCHAR2(200),
+  FR                      VARCHAR2(50),
+  BUILD_UNIT_PHONE        VARCHAR2(50),
+  BUILD_UNIT_PERSON       VARCHAR2(50),
+  BUILD_UNIT_MOBILE       VARCHAR2(50),
+  BUILD_FILE_CODE         VARCHAR2(100),
+  BUILD_XKZ_CODE          VARCHAR2(100),
+  START_WORK_CON          VARCHAR2(500),
+  WLD_OPINION             VARCHAR2(1000),
+  WLD_USER                VARCHAR2(100),
+  WLD_DATE                DATE,
+  SUBMIT_DATE             DATE,
+  BACK_NUM                NUMBER(4),
+  CONTRACT_BEGIN_DATE     DATE,
+  CONTRACT_END_DATE       DATE,
+  ACCEPT_CODE             VARCHAR2(50),
+  BUILD_LB_ID             NUMBER(10),
+  BUILD_SX_ID             NUMBER(10),
+  ZB_PRICE                NUMBER(10,5),
+  BUILD_LB_IDS            VARCHAR2(200),
+  BIZ_CODE                VARCHAR2(50),
+  ACCEPT_PERSON           VARCHAR2(50),
+  ACCEPT_DATE             DATE,
+  ACCEPT_OPINION          VARCHAR2(2000),
+  PROJECT_PLAN_COST       NUMBER(10,5),
+  SG_UNIT_NAME            VARCHAR2(200),
+  JL_UNIT_NAME            VARCHAR2(200),
+  SJ_UNIT_NAME            VARCHAR2(200),
+  BZ_BACK_MATERIAL        VARCHAR2(2000),
+  PROPERTY_TYPE_ID        NUMBER(10),
+  JSC_OPINION             VARCHAR2(1000),
+  JSC_USER                VARCHAR2(100),
+  JSC_DATE                DATE,
+  SPC_OPINION             VARCHAR2(1000),
+  SPC_USER                VARCHAR2(100),
+  SPC_DATE                DATE,
+  constraint PK_AREA_SG_PERMI primary key (ID),
+  constraint FK_AREA_PERMI_LB foreign key (BUILD_LB_ID)
+  references SYS_CODE_DETAIL (ID),
+  constraint FK_AREA_PERMI_SX foreign key (BUILD_SX_ID)
+  references SYS_CODE_DETAIL (ID),
+  constraint FK_AREA_PERMI_TYPE foreign key (PROJECT_TYPE_ID)
+  references SYS_CODE_DETAIL (ID),
+  constraint FK_AREA_PERMI_PROPERTY foreign key (PROPERTY_TYPE_ID)
+  references SYS_CODE_DETAIL (ID)
+);
+comment on table AREA_SG_PERMIT
+  is '施工许可证';
+comment on column AREA_SG_PERMIT.ID
+  is 'ID';
+comment on column AREA_SG_PERMIT.PROJECT_TYPE_ID
+  is '项目类型';
+comment on column AREA_SG_PERMIT.YEAR
+  is '年份';
+COMMENT ON COLUMN AREA_SG_PERMIT.AREA_NAME IS '区县名称';
+
+COMMENT ON COLUMN AREA_SG_PERMIT.AREA_CODE IS '区县编码';
+comment on column AREA_SG_PERMIT.BJBH
+  is '报建编号';
+comment on column AREA_SG_PERMIT.PROJECT_NAME
+  is '项目名称';
+comment on column AREA_SG_PERMIT.BUILD_NAME
+  is '建设单位';
+comment on column AREA_SG_PERMIT.HJG_YEAR
+  is '沪交管收字_年';
+comment on column AREA_SG_PERMIT.HJG_NUM
+  is '沪交管收字_号';
+comment on column AREA_SG_PERMIT.APPLY_PERSON
+  is '申请人';
+comment on column AREA_SG_PERMIT.APPLY_MATTER
+  is '申请事项';
+comment on column AREA_SG_PERMIT.APPLY_NUM
+  is '申请号';
+comment on column AREA_SG_PERMIT.MATERIAL_PERSON
+  is '材料提交人';
+comment on column AREA_SG_PERMIT.MATERIAL_PERSON_PHONE
+  is '材料提交人联系电话';
+comment on column AREA_SG_PERMIT.MATERIAL_PERSON_ADDRESS
+  is '材料提交人联系地址';
+comment on column AREA_SG_PERMIT.RECEIVE_PERSON
+  is '收件人';
+comment on column AREA_SG_PERMIT.RECEIVE_PERSON_PHONE
+  is '收件人联系电话';
+comment on column AREA_SG_PERMIT.STATUS
+  is '状态';
+comment on column AREA_SG_PERMIT.CS_OPINION
+  is '初审意见';
+comment on column AREA_SG_PERMIT.CS_USER
+  is '初审用户';
+comment on column AREA_SG_PERMIT.CS_DATE
+  is '初审日期';
+comment on column AREA_SG_PERMIT.FH_OPINION
+  is '复核意见';
+comment on column AREA_SG_PERMIT.FH_USER
+  is '复核用户';
+comment on column AREA_SG_PERMIT.FH_DATE
+  is '复核日期';
+comment on column AREA_SG_PERMIT.SH_OPINION
+  is '审核意见';
+comment on column AREA_SG_PERMIT.SH_USER
+  is '审核用户';
+comment on column AREA_SG_PERMIT.SH_DATE
+  is '审核日期';
+comment on column AREA_SG_PERMIT.FGLD_OPINION
+  is '分管领导审核意见';
+comment on column AREA_SG_PERMIT.FGLD_USER
+  is '分管领导审核用户';
+comment on column AREA_SG_PERMIT.FGLD_DATE
+  is '分管领导审核日期';
+comment on column AREA_SG_PERMIT.ZXLD_OPINION
+  is '中心领导审核意见';
+comment on column AREA_SG_PERMIT.ZXLD_USER
+  is '中心领导审核用户';
+comment on column AREA_SG_PERMIT.ZXLD_DATE
+  is '中心领导审核日期';
+comment on column AREA_SG_PERMIT.CREATE_TIME
+  is '创建时间';
+comment on column AREA_SG_PERMIT.CREATE_USER
+  is '创建用户名';
+comment on column AREA_SG_PERMIT.UPDATE_TIME
+  is '更新时间';
+comment on column AREA_SG_PERMIT.UPDATE_USER
+  is '更新用户名';
+comment on column AREA_SG_PERMIT.BUILD_UNIT_TYPE
+  is '建设单位性质';
+comment on column AREA_SG_PERMIT.BUILD_UNIT_ADDRESS
+  is '建设单位地址';
+comment on column AREA_SG_PERMIT.BUILD_SITE
+  is '建设地点';
+comment on column AREA_SG_PERMIT.BUILD_PROJ_SIZE
+  is '建设工程规模';
+comment on column AREA_SG_PERMIT.CONTRACT_PRICE
+  is '合同价格';
+comment on column AREA_SG_PERMIT.CONTRACT_PERIOD
+  is '合同工期';
+comment on column AREA_SG_PERMIT.FR
+  is '法定代表人';
+comment on column AREA_SG_PERMIT.BUILD_UNIT_PHONE
+  is '建设单位联系电话';
+comment on column AREA_SG_PERMIT.BUILD_UNIT_PERSON
+  is '建设单位联系人';
+comment on column AREA_SG_PERMIT.BUILD_UNIT_MOBILE
+  is '手机号';
+comment on column AREA_SG_PERMIT.BUILD_FILE_CODE
+  is '建设用地批准文件编号';
+comment on column AREA_SG_PERMIT.BUILD_XKZ_CODE
+  is '建设工程规划许可证编号';
+comment on column AREA_SG_PERMIT.START_WORK_CON
+  is '现场开工情况';
+comment on column AREA_SG_PERMIT.WLD_OPINION
+  is '委领导审核意见';
+comment on column AREA_SG_PERMIT.WLD_USER
+  is '委领导审核用户';
+comment on column AREA_SG_PERMIT.WLD_DATE
+  is '委领导审核日期';
+comment on column AREA_SG_PERMIT.SUBMIT_DATE
+  is '提交日期';
+comment on column AREA_SG_PERMIT.BACK_NUM
+  is '退回编号';
+comment on column AREA_SG_PERMIT.CONTRACT_BEGIN_DATE
+  is '合同开工日期';
+comment on column AREA_SG_PERMIT.CONTRACT_END_DATE
+  is '合同竣工日期';
+comment on column AREA_SG_PERMIT.ACCEPT_CODE
+  is '受理编号';
+comment on column AREA_SG_PERMIT.BUILD_LB_ID
+  is '建设工程类别';
+comment on column AREA_SG_PERMIT.BUILD_SX_ID
+  is '建设工程属性';
+comment on column AREA_SG_PERMIT.ZB_PRICE
+  is '中标价（万元）';
+comment on column AREA_SG_PERMIT.BUILD_LB_IDS
+  is '建设工程类别ids';
+comment on column AREA_SG_PERMIT.BIZ_CODE
+  is '业务编号';
+comment on column AREA_SG_PERMIT.ACCEPT_PERSON
+  is '受理人';
+comment on column AREA_SG_PERMIT.PROPERTY_TYPE_ID
+  is '项目性质';
+comment on column AREA_SG_PERMIT.JSC_OPINION
+  is '建设部审核意见';
+comment on column AREA_SG_PERMIT.JSC_USER
+  is '建设部审核用户';
+comment on column AREA_SG_PERMIT.JSC_DATE
+  is '建设部审核日期';
+comment on column AREA_SG_PERMIT.SPC_OPINION
+  is '审批处审核意见';
+comment on column AREA_SG_PERMIT.SPC_USER
+  is '审批处审核用户';
+comment on column AREA_SG_PERMIT.SPC_DATE
+  is '审批处审核日期';
+
+
+
+
+
+create table AREA_AUDIT_OPINION
+(
+  ID            NUMBER(10) not null,
+  SG_PERMIT_ID  NUMBER(10),
+  NO            NUMBER(10),
+  IS_CS_OPINION NUMBER(1),
+  IS_FH_OPINION NUMBER(1),
+  IS_SH_OPINION NUMBER(1),
+  STATUS        NUMBER(2),
+  CREATE_TIME   DATE,
+  CREATE_USER   VARCHAR2(100),
+  UPDATE_TIME   DATE,
+  UPDATE_USER   VARCHAR2(100),
+  constraint PK_AREA_AUDIT_OPINION primary key (ID),
+  constraint FK_AREA_AUDIT_SG2 foreign key (SG_PERMIT_ID)
+  references AREA_SG_PERMIT (ID)
+);
+comment on table AREA_AUDIT_OPINION
+  is '施工审核意见';
+comment on column AREA_AUDIT_OPINION.ID
+  is 'ID';
+comment on column AREA_AUDIT_OPINION.SG_PERMIT_ID
+  is '施工许可';
+comment on column AREA_AUDIT_OPINION.NO
+  is '序号';
+comment on column AREA_AUDIT_OPINION.IS_CS_OPINION
+  is '初审意见';
+comment on column AREA_AUDIT_OPINION.IS_FH_OPINION
+  is '复核意见';
+comment on column AREA_AUDIT_OPINION.IS_SH_OPINION
+  is '审核意见';
+comment on column AREA_AUDIT_OPINION.STATUS
+  is '状态';
+comment on column AREA_AUDIT_OPINION.CREATE_TIME
+  is '创建时间';
+comment on column AREA_AUDIT_OPINION.CREATE_USER
+  is '创建用户名';
+comment on column AREA_AUDIT_OPINION.UPDATE_TIME
+  is '更新时间';
+comment on column AREA_AUDIT_OPINION.UPDATE_USER
+  is '更新用户名';
+
+
+
+
+
+create table AREA_PROJ_PERSON
+(
+  ID               NUMBER(10) not null,
+  SG_PERMIT_ID     NUMBER(10),
+  NUM              NUMBER(4),
+  CONTRACT_CODE    VARCHAR2(200),
+  UNIT_TYPE_ID     NUMBER(10),
+  UNIT_NAME        VARCHAR2(200),
+  UNIT_MAIN_PERSON VARCHAR2(200),
+  UNIT_ID_CARD     VARCHAR2(200),
+  UNIT_PHONE       VARCHAR2(20),
+  CREATE_TIME      DATE,
+  CREATE_USER      VARCHAR2(100),
+  UPDATE_TIME      DATE,
+  UPDATE_USER      VARCHAR2(100),
+  constraint PK_AREA_PROJ_PERSON primary key (ID),
+  constraint FK_AREA_CON_PERMIT foreign key (SG_PERMIT_ID)
+  references AREA_SG_PERMIT (ID),
+  constraint FK_AREA_CON_SYS_CODE foreign key (UNIT_TYPE_ID)
+  references SYS_CODE_DETAIL (ID)
+);
+comment on table AREA_PROJ_PERSON
+  is '合同项目负责人信息';
+comment on column AREA_PROJ_PERSON.ID
+  is 'ID';
+comment on column AREA_PROJ_PERSON.SG_PERMIT_ID
+  is '施工许可ID';
+comment on column AREA_PROJ_PERSON.NUM
+  is '序号';
+comment on column AREA_PROJ_PERSON.CONTRACT_CODE
+  is '合同信息报送编号';
+comment on column AREA_PROJ_PERSON.UNIT_TYPE_ID
+  is '单位类型';
+comment on column AREA_PROJ_PERSON.UNIT_NAME
+  is '单位名称';
+comment on column AREA_PROJ_PERSON.UNIT_MAIN_PERSON
+  is '单位负责人';
+comment on column AREA_PROJ_PERSON.UNIT_ID_CARD
+  is '身份证号';
+comment on column AREA_PROJ_PERSON.UNIT_PHONE
+  is '电话';
+comment on column AREA_PROJ_PERSON.CREATE_TIME
+  is '创建时间';
+comment on column AREA_PROJ_PERSON.CREATE_USER
+  is '创建用户名';
+comment on column AREA_PROJ_PERSON.UPDATE_TIME
+  is '更新时间';
+comment on column AREA_PROJ_PERSON.UPDATE_USER
+  is '更新用户名';
+  
+  
+  
+  
+
+create table AREA_SG_MATERIAL
+(
+  ID           NUMBER(10) not null,
+  SG_PERMIT_ID NUMBER(10),
+  NO           NUMBER(10),
+  IS_FULL      NUMBER(1),
+  NUM          NUMBER(10),
+  DOC_ID       NUMBER(10),
+  CREATE_TIME  DATE,
+  CREATE_USER  VARCHAR2(100),
+  UPDATE_TIME  DATE,
+  UPDATE_USER  VARCHAR2(100),
+  YJ_NUM       NUMBER(10),
+  SJ_NUM       NUMBER(10),
+  constraint PK_AREA_SG_MATERIAL primary key (ID),
+  constraint FK_AREA_SG_MATERIAL1 foreign key (SG_PERMIT_ID)
+  references AREA_SG_PERMIT (ID),
+  constraint FK_AREA_SG_MATERAL_DOC1 foreign key (DOC_ID)
+  references DOC_DOCUMENT (ID)
+);
+comment on table AREA_SG_MATERIAL
+  is '施工材料';
+comment on column AREA_SG_MATERIAL.ID
+  is 'ID';
+comment on column AREA_SG_MATERIAL.SG_PERMIT_ID
+  is '施工许可';
+comment on column AREA_SG_MATERIAL.NO
+  is '序号';
+comment on column AREA_SG_MATERIAL.IS_FULL
+  is '材料齐全情况';
+comment on column AREA_SG_MATERIAL.NUM
+  is '份数';
+comment on column AREA_SG_MATERIAL.DOC_ID
+  is '附件';
+comment on column AREA_SG_MATERIAL.CREATE_TIME
+  is '创建时间';
+comment on column AREA_SG_MATERIAL.CREATE_USER
+  is '创建用户名';
+comment on column AREA_SG_MATERIAL.UPDATE_TIME
+  is '更新时间';
+comment on column AREA_SG_MATERIAL.UPDATE_USER
+  is '更新用户名';
+comment on column AREA_SG_MATERIAL.YJ_NUM
+  is '应交份数';
+comment on column AREA_SG_MATERIAL.SJ_NUM
+  is '实交份数';
+  
+  
+  
+  
+
+
+create table AREA_MATERIAL_INFO
+(
+  ID              NUMBER(10) not null,
+  PROJECT_TYPE_ID NUMBER(10),
+  PARENT_ID       NUMBER(10),
+  NO              NUMBER(4),
+  TYPE            VARCHAR2(100),
+  MATERIAL_NAME   VARCHAR2(1000),
+  AUDIT_REQ       VARCHAR2(1000),
+  IS_LEAF         NUMBER(1),
+  TREE_ID         VARCHAR2(255),
+  CREATE_TIME     DATE,
+  CREATE_USER     VARCHAR2(100),
+  UPDATE_TIME     DATE,
+  UPDATE_USER     VARCHAR2(100),
+  YJ_NUM          NUMBER(4),
+  AUDIT_REQ_GREEN VARCHAR2(1000),
+  constraint PK_AREA_MATERIAL_INFO primary key (ID),
+  constraint FK_AREA_MATERAL_INFO1 foreign key (PARENT_ID)
+  references AREA_MATERIAL_INFO (ID),
+  constraint FK_AREA_MATERAL_CODE foreign key (PROJECT_TYPE_ID)
+  references SYS_CODE_DETAIL (ID)
+);
+comment on table AREA_MATERIAL_INFO
+  is '施工材料信息';
+comment on column AREA_MATERIAL_INFO.ID
+  is 'ID';
+comment on column AREA_MATERIAL_INFO.PROJECT_TYPE_ID
+  is '项目类型';
+comment on column AREA_MATERIAL_INFO.PARENT_ID
+  is '父亲节点';
+comment on column AREA_MATERIAL_INFO.NO
+  is '序号';
+comment on column AREA_MATERIAL_INFO.TYPE
+  is '类型';
+comment on column AREA_MATERIAL_INFO.MATERIAL_NAME
+  is '材料名称';
+comment on column AREA_MATERIAL_INFO.AUDIT_REQ
+  is '审核要求';
+comment on column AREA_MATERIAL_INFO.IS_LEAF
+  is '叶子节点';
+comment on column AREA_MATERIAL_INFO.TREE_ID
+  is '树形层次';
+comment on column AREA_MATERIAL_INFO.CREATE_TIME
+  is '创建时间';
+comment on column AREA_MATERIAL_INFO.CREATE_USER
+  is '创建用户名';
+comment on column AREA_MATERIAL_INFO.UPDATE_TIME
+  is '更新时间';
+comment on column AREA_MATERIAL_INFO.UPDATE_USER
+  is '更新用户名';
+comment on column AREA_MATERIAL_INFO.YJ_NUM
+  is '应交份数';
+comment on column AREA_MATERIAL_INFO.AUDIT_REQ_GREEN
+  is '绿色审核要求';
+  
+  
+  
+  
+create table AREA_PERMIT_HD_EXTEND
+(
+  ID            NUMBER(10) not null,
+  SG_PERMIT_ID  NUMBER(10),
+  MAIN_SJ_UNIT  VARCHAR2(200),
+  MAIN_SJ_ZBFS  VARCHAR2(200),
+  MAIN_SJ_ZBJ   NUMBER(10,5),
+  MAIN_SJ_ZZDJ  VARCHAR2(200),
+  MAIN_SJ_XMFZR VARCHAR2(50),
+  MAIN_SJ_ZSBH  VARCHAR2(50),
+  MAIN_JL_UNIT  VARCHAR2(200),
+  MAIN_JL_ZBFS  VARCHAR2(200),
+  MAIN_JL_ZBJ   NUMBER(10,5),
+  MAIN_JL_ZZDJ  VARCHAR2(200),
+  MAIN_JL_XMFZR VARCHAR2(50),
+  MAIN_JL_ZSBH  VARCHAR2(50),
+  MAIN_SG_UNIT  VARCHAR2(200),
+  MAIN_SG_ZBFS  VARCHAR2(200),
+  MAIN_SG_ZBJ   NUMBER(10,5),
+  MAIN_SG_ZZDJ  VARCHAR2(200),
+  MAIN_SG_XMFZR VARCHAR2(50),
+  MAIN_SG_ZSBH  VARCHAR2(50),
+  GKPZ_CODE     VARCHAR2(50),
+  HZ_DATE       DATE,
+  PLAN_COST     NUMBER(10,5),
+  CBSH_CODE     VARCHAR2(50),
+  PF_DATE       DATE,
+  PF_GQ         NUMBER(4),
+  TOTAL_GS      NUMBER(10,5),
+  PZJG_CODE     VARCHAR2(50),
+  COST_FROM     VARCHAR2(200),
+  MAIN_SJ_ZSBH2 VARCHAR2(50),
+  MAIN_JL_ZSBH2 VARCHAR2(50),
+  MAIN_SG_ZSBH2 VARCHAR2(50),
+  constraint PK_AREA_PERMIT_HD_EXTEND primary key (ID),
+  constraint FK_AREA_PERMIT_HD foreign key (SG_PERMIT_ID)
+  references AREA_SG_PERMIT (ID)
+);
+comment on table AREA_PERMIT_HD_EXTEND
+  is '施工许可_航道扩展信息';
+comment on column AREA_PERMIT_HD_EXTEND.ID
+  is 'ID';
+comment on column AREA_PERMIT_HD_EXTEND.SG_PERMIT_ID
+  is '施工许可ID';
+comment on column AREA_PERMIT_HD_EXTEND.MAIN_SJ_UNIT
+  is '主要设计单位';
+comment on column AREA_PERMIT_HD_EXTEND.MAIN_SJ_ZBFS
+  is '主要设计招标方式';
+comment on column AREA_PERMIT_HD_EXTEND.MAIN_SJ_ZBJ
+  is '主要设计中标价';
+comment on column AREA_PERMIT_HD_EXTEND.MAIN_SJ_ZZDJ
+  is '主要设计资质等级';
+comment on column AREA_PERMIT_HD_EXTEND.MAIN_SJ_XMFZR
+  is '主要设计项目负责人';
+comment on column AREA_PERMIT_HD_EXTEND.MAIN_SJ_ZSBH
+  is '主要设计证书编号';
+comment on column AREA_PERMIT_HD_EXTEND.MAIN_JL_UNIT
+  is '主要监理单位';
+comment on column AREA_PERMIT_HD_EXTEND.MAIN_JL_ZBFS
+  is '主要监理招标方式';
+comment on column AREA_PERMIT_HD_EXTEND.MAIN_JL_ZBJ
+  is '主要监理中标价';
+comment on column AREA_PERMIT_HD_EXTEND.MAIN_JL_ZZDJ
+  is '主要监理资质等级';
+comment on column AREA_PERMIT_HD_EXTEND.MAIN_JL_XMFZR
+  is '主要监理项目负责人';
+comment on column AREA_PERMIT_HD_EXTEND.MAIN_JL_ZSBH
+  is '主要监理证书编号';
+comment on column AREA_PERMIT_HD_EXTEND.MAIN_SG_UNIT
+  is '主要施工单位';
+comment on column AREA_PERMIT_HD_EXTEND.MAIN_SG_ZBFS
+  is '主要施工招标方式';
+comment on column AREA_PERMIT_HD_EXTEND.MAIN_SG_ZBJ
+  is '主要施工中标价';
+comment on column AREA_PERMIT_HD_EXTEND.MAIN_SG_ZZDJ
+  is '主要施工资质等级';
+comment on column AREA_PERMIT_HD_EXTEND.MAIN_SG_XMFZR
+  is '主要施工项目负责人';
+comment on column AREA_PERMIT_HD_EXTEND.MAIN_SG_ZSBH
+  is '主要施工证书编号';
+comment on column AREA_PERMIT_HD_EXTEND.GKPZ_CODE
+  is '工可批准或核准机关和文号';
+comment on column AREA_PERMIT_HD_EXTEND.HZ_DATE
+  is '批复或核准日期';
+comment on column AREA_PERMIT_HD_EXTEND.PLAN_COST
+  is '投资估算';
+comment on column AREA_PERMIT_HD_EXTEND.CBSH_CODE
+  is '初步设计批准机关和文号';
+comment on column AREA_PERMIT_HD_EXTEND.PF_DATE
+  is '批复日期';
+comment on column AREA_PERMIT_HD_EXTEND.PF_GQ
+  is '批复工期';
+comment on column AREA_PERMIT_HD_EXTEND.TOTAL_GS
+  is '总概算';
+comment on column AREA_PERMIT_HD_EXTEND.PZJG_CODE
+  is '批准机关和文号';
+comment on column AREA_PERMIT_HD_EXTEND.COST_FROM
+  is '投资来源';
+comment on column AREA_PERMIT_HD_EXTEND.MAIN_SJ_ZSBH2
+  is '主要设计证书编号2';
+comment on column AREA_PERMIT_HD_EXTEND.MAIN_JL_ZSBH2
+  is '主要监理证书编号2';
+comment on column AREA_PERMIT_HD_EXTEND.MAIN_SG_ZSBH2
+  is '主要施工证书编号2';
+  
+  
+  
+    
+  
+  
+  
+create table AREA_HISTORY_OPINION
+(
+  ID              NUMBER(10) not null,
+  SG_PERMIT_ID    NUMBER(10),
+  OPINION         VARCHAR2(2000),
+  STATUS          NUMBER(2),
+  PROJECT_TYPE_ID NUMBER(10),
+  AUDIT_DATE      DATE,
+  constraint PK_AREA_HISTORY_OPINION primary key (ID),
+  constraint FK_AREA_PERMIT_HISTORY1 foreign key (SG_PERMIT_ID)
+  references AREA_SG_PERMIT (ID),
+  constraint FK_AREA_PERMIT_HISTORY2 foreign key (PROJECT_TYPE_ID)
+  references SYS_CODE_DETAIL (ID)
+);
+comment on table AREA_HISTORY_OPINION
+  is '施工许可证历史审核意见';
+comment on column AREA_HISTORY_OPINION.ID
+  is 'ID';
+comment on column AREA_HISTORY_OPINION.SG_PERMIT_ID
+  is '施工许可ID';
+comment on column AREA_HISTORY_OPINION.OPINION
+  is '审核意见';
+comment on column AREA_HISTORY_OPINION.STATUS
+  is '状态';
+comment on column AREA_HISTORY_OPINION.PROJECT_TYPE_ID
+  is '项目类型';
+comment on column AREA_HISTORY_OPINION.AUDIT_DATE
+  is '审核日期';
+  
+  
+
+  
+
+
+
+
+create table AREA_PERMIT_OPERATION
+(
+  ID           NUMBER(10) not null,
+  SG_PERMIT_ID NUMBER(10),
+  OPTION_CODE  VARCHAR2(100),
+  OPTION_NAME  VARCHAR2(100),
+  OPTION_USER  VARCHAR2(100),
+  STATUS       NUMBER(2),
+  CREATE_TIME  DATE,
+  CREATE_USER  VARCHAR2(100),
+  UPDATE_TIME  DATE,
+  UPDATE_USER  VARCHAR2(100),
+  constraint PK_AREA_PERMIT_OPERATION primary key (ID),
+  constraint FK_AREA_PERMIT_AREA1 foreign key (SG_PERMIT_ID)
+  references AREA_SG_PERMIT (ID)
+);
+comment on table AREA_PERMIT_OPERATION
+  is '施工许可流转操作';
+comment on column AREA_PERMIT_OPERATION.ID
+  is 'ID';
+comment on column AREA_PERMIT_OPERATION.SG_PERMIT_ID
+  is '施工许可';
+comment on column AREA_PERMIT_OPERATION.OPTION_CODE
+  is '操作编码';
+comment on column AREA_PERMIT_OPERATION.OPTION_NAME
+  is '操作名称';
+comment on column AREA_PERMIT_OPERATION.OPTION_USER
+  is '审核操作人';
+comment on column AREA_PERMIT_OPERATION.STATUS
+  is '状态';
+comment on column AREA_PERMIT_OPERATION.CREATE_TIME
+  is '创建时间';
+comment on column AREA_PERMIT_OPERATION.CREATE_USER
+  is '创建用户名';
+comment on column AREA_PERMIT_OPERATION.UPDATE_TIME
+  is '更新时间';
+comment on column AREA_PERMIT_OPERATION.UPDATE_USER
+  is '更新用户名';
+  
+  
+
+
+create table AREA_SG_UNIT_PROJ
+(
+  ID                NUMBER(10) not null,
+  SG_PERMIT_ID      NUMBER(10),
+  UNIT_PROJ_TYPE_ID NUMBER(10),
+  NUM               NUMBER(4),
+  UNIT_PROJ_CODE    VARCHAR2(200),
+  UNIT_PROJ_NAME    VARCHAR2(200),
+  CREATE_TIME       DATE,
+  CREATE_USER       VARCHAR2(100),
+  UPDATE_TIME       DATE,
+  UPDATE_USER       VARCHAR2(100),
+  PROJECT_INDEX     VARCHAR2(1000),
+  constraint PK_AREA_SG_UNIT_PROJ primary key (ID),
+  constraint FK_AREA_CONTR_PERMINT1 foreign key (SG_PERMIT_ID)
+  references AREA_SG_PERMIT (ID),
+  constraint FK_AREA_CONTR_SYS_CODE1 foreign key (UNIT_PROJ_TYPE_ID)
+  references SYS_CODE_DETAIL (ID)
+
+);
+comment on table AREA_SG_UNIT_PROJ
+  is '单位工程列表';
+comment on column AREA_SG_UNIT_PROJ.ID
+  is 'ID';
+comment on column AREA_SG_UNIT_PROJ.SG_PERMIT_ID
+  is '施工许可ID';
+comment on column AREA_SG_UNIT_PROJ.UNIT_PROJ_TYPE_ID
+  is '单位工程类型';
+comment on column AREA_SG_UNIT_PROJ.NUM
+  is '序号';
+comment on column AREA_SG_UNIT_PROJ.UNIT_PROJ_CODE
+  is '单位工程编号';
+comment on column AREA_SG_UNIT_PROJ.UNIT_PROJ_NAME
+  is '单位工程名称';
+comment on column AREA_SG_UNIT_PROJ.CREATE_TIME
+  is '创建时间';
+comment on column AREA_SG_UNIT_PROJ.CREATE_USER
+  is '创建用户名';
+comment on column AREA_SG_UNIT_PROJ.UPDATE_TIME
+  is '更新时间';
+comment on column AREA_SG_UNIT_PROJ.UPDATE_USER
+  is '更新用户名';
+comment on column AREA_SG_UNIT_PROJ.PROJECT_INDEX
+  is '工程指标';
