@@ -26,6 +26,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 
@@ -205,6 +207,7 @@ public class ServiceReturnController extends BaseCRUDActionController<ServiceRet
             String[] receiveDates = request.getParameterValues("receiveDate");
             String[] receiveSigns = request.getParameterValues("receiveSign");
             String[] memos = request.getParameterValues("memo");
+            List<ServiceReturnItem> serviceReturnItemList=new ArrayList<ServiceReturnItem>();
             if (null != nums) {
                 for (String num : nums) {
                     ServiceReturnItem serviceReturnItem = new ServiceReturnItem();
@@ -228,10 +231,10 @@ public class ServiceReturnController extends BaseCRUDActionController<ServiceRet
                         serviceReturnItem.setMemo(memos[numSub - 1]);
                     }
                     serviceReturnItem.setServiceReturn(target);
-                    serviceReturnItemService.save(serviceReturnItem);
+                    serviceReturnItemList.add(serviceReturnItem);
                 }
+                serviceReturnItemService.batchSave(serviceReturnItemList,serviceReturnItemList.size());
             }
-
         } catch (Exception e) {
             log.error("error", e);
             super.processException(response, e);
