@@ -63,8 +63,14 @@
             <table cellpadding="0" cellspacing="0" class="form_table">
                 <tr class="tr_light">
                     <td class="form_label_right" nowrap>项目性质：</td>
-                    <td class="form_content" colspan="3">
+                    <td class="form_content">
                         <sys:code code="${xmxz}" type="select" name="propertyType" id="propertyType" sysCodeDetailId="${bean.propertyType.id}"/>
+                    </td>
+                    <td class="form_label_right" nowrap>所属区县：</td>
+                    <td class="form_content">
+                        <select name="areaCode" class="form_select">
+                            <option value="sh">上海市</option>
+                        </select>
                     </td>
                 </tr>
                 <tr class="tr_dark">

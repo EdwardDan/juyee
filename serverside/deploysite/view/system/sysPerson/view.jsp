@@ -3,6 +3,12 @@
 <div class="no_scrollbar">
     <div class="form_div">
         <table cellpadding="0" cellspacing="0" class="form_table">
+            <tr class="tr_light">
+                <td class="form_label">所属区县:</td>
+                <td class="form_content">
+                    ${bean.areaName}
+                </td>
+            </tr>
             <tr class="tr_dark">
                 <td class="form_label">编号:</td>
                 <td class="form_content">

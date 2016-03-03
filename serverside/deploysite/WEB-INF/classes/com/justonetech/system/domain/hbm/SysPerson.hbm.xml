@@ -28,6 +28,28 @@
         </id>
 
         <property
+                name="areaCode"
+                column="AREA_CODE"
+                type="string"
+                not-null="false"
+                length="50"
+                >
+            <meta attribute="ColumnName">区县编码</meta>
+            <meta attribute="ColumnComment">区县编码</meta>
+        </property>
+
+        <property
+                name="areaName"
+                column="AREA_NAME"
+                type="string"
+                not-null="false"
+                length="50"
+                >
+            <meta attribute="ColumnName">区县名称</meta>
+            <meta attribute="ColumnComment">区县名称</meta>
+        </property>
+
+        <property
                 name="code"
                 column="CODE"
                 type="string"

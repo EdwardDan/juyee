@@ -60,6 +60,17 @@
 
     <div class="form_div">
         <table cellpadding="0" cellspacing="0" class="form_table">
+            <tr class="tr_light">
+                <td class="form_label">所属区县:</td>
+                <td class="form_content">
+                    <select name="areaCode" class="form_select">
+                        <option value="sh">上海市</option>
+                        <c:forEach items="${areaList}" var="item">
+                            <option value="${item.code}">${item.name}</option>
+                        </c:forEach>
+                    </select>
+                </td>
+            </tr>
             <tr class="tr_dark">
                 <td class="form_label">编号:</td>
                 <td class="form_content">
