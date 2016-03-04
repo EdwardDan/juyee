@@ -75,11 +75,11 @@
                             if (${canFgldAudit}) {
                                 opButton += '<input type="button" value="审核" onclick="doAudit(' + id + ')" class="button_normal"/> ';
                             }
-                        } else if (status == '${STATUS_FGLD_PASS}') {
+                        } else if (status == '${STATUS_FGLD_PASS}'||status=='${STATUS_JSC_BACK}') {
                             if (${canZxldAudit}) {
                                 opButton += '<input type="button" value="审核" onclick="doAudit(' + id + ')" class="button_normal"/> ';
                             }
-                        } else if (status == '${STATUS_ZXLD_PASS}') {
+                        } else if (status == '${STATUS_ZXLD_PASS}'||status=='${STATUS_SPC_BACK}') {
                             if (${canJscAudit}) {
                                 opButton += '<input type="button" value="审核" onclick="doAudit(' + id + ')" class="button_normal"/> ';
                             }
