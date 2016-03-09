@@ -369,6 +369,39 @@
         </property>
 
         <property
+                name="jgzxYsOpinion"
+                column="JGZX_YS_OPINION"
+                type="string"
+                not-null="false"
+                length="1000"
+                >
+            <meta attribute="ColumnName">建管中心预审意见</meta>
+            <meta attribute="ColumnComment">建管中心预审意见</meta>
+        </property>
+
+        <property
+                name="jgzxYsUser"
+                column="JGZX_YS_USER"
+                type="string"
+                not-null="false"
+                length="100"
+                >
+            <meta attribute="ColumnName">建管中心预审用户</meta>
+            <meta attribute="ColumnComment">建管中心预审用户</meta>
+        </property>
+
+        <property
+                name="jgzxYsDate"
+                column="JGZX_YS_DATE"
+                type="timestamp"
+                not-null="false"
+                length="7"
+                >
+            <meta attribute="ColumnName">建管中心预审日期</meta>
+            <meta attribute="ColumnComment">建管中心预审日期</meta>
+        </property>
+
+        <property
                 name="csOpinion"
                 column="CS_OPINION"
                 type="string"

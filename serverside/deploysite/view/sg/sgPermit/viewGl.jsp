@@ -162,6 +162,24 @@
             </tr>
         </table>
     </fieldset>
+    <div class="div_space"></div>
+    <fieldset class="form_fieldset" style="width: 96%;">
+        <legend>建管中心预审</legend>
+        <table cellpadding="0" cellspacing="0" class="form_table">
+            <tr class="tr_light">
+                <td class="form_label_right" nowrap style="width: 20%;">预审信息：</td>
+                <td class="form_content" style="width: 80%;">
+                    <sys:toHtml>${bean.jgzxYsOpinion}</sys:toHtml>
+                </td>
+            </tr>
+            <tr class="tr_light">
+                <td class="form_label_right" nowrap style="width: 20%;">预审时间：</td>
+                <td class="form_content" style="width: 80%;">
+                    <fmt:formatDate value="${bean.jgzxYsDate}" pattern="yyyy-MM-dd HH:mm"/>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
     <c:if test="${!isReg}">
         <div class="div_space"></div>
         <c:if test="${bean.status != STATUS_EDIT||bean.status != STATUS_SUBMIT||bean.status != STATUS_SLZX_BACK}">

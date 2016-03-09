@@ -16,7 +16,7 @@
         }
         $("#status").val(status);
         if (confirm("是否确定执行 " + buttonName + " 操作？")) {
-            saveAjaxData("${ctx}/sgPermit/save.do", formId, doCloseWin);
+            saveAjaxData("${ctx}/sgPermit/saveJgzxYs.do", formId, doCloseWin);
         }
     }
     function doCloseWin() {
@@ -395,97 +395,16 @@
                 <tr class="tr_light">
                     <td class="form_label_right" nowrap style="width: 20%;">预审信息：</td>
                     <td class="form_content" style="width: 80%;">
-                        <sys:toHtml>${bean.jgzxYsOpinion}</sys:toHtml>
-                        <form:hidden path="jgzxYsOpinion"/>
-                    </td>
-                </tr>
-                <tr class="tr_light">
-                    <td class="form_label_right" nowrap style="width: 20%;">预审时间：</td>
-                    <td class="form_content" style="width: 80%;">
-                        <fmt:formatDate value="${bean.jgzxYsDate}" pattern="yyyy-MM-dd HH:mm"/>
-                        <form:hidden path="jgzxYsDate"/>
-                    </td>
-                </tr>
-            </table>
-        </fieldset>
-        <div class="div_space"></div>
-        <fieldset class="form_fieldset" style="width: 96%;">
-            <legend>受理初审</legend>
-            <table cellpadding="0" cellspacing="0" class="form_table">
-                <tr class="tr_light">
-                    <td class="form_label_right" nowrap style="width: 20%;">受理编号：</td>
-                    <td class="form_content" style="width: 80%;">
-                        <form:input path="acceptCode" cssClass="input_text_long"/>
-                    </td>
-                </tr>
-                <tr class="tr_dark">
-                    <td class="form_label_right">沪交管收字</td>
-                    <td class="form_content">
-                        （<form:input path="hjgYear" cssClass="input_number" cssStyle="text-align: center;" onchange="checkInteger(this)"/> ）
-                        第<form:input path="hjgNum" cssClass="input_number" cssStyle="text-align: center;" onchange="checkInteger(this)"/>号
-                    </td>
-                </tr>
-                <tr class="tr_light">
-                    <td class="form_label_right">申请人：</td>
-                    <td class="form_content">
-                        <form:input path="applyPerson" cssClass="input_text" cssStyle="width: 96%;"/>
-                    </td>
-                </tr>
-                <tr class="tr_dark">
-                    <td class="form_label_right">申请事项：</td>
-                    <td class="form_content">
-                        <form:input path="applyMatter" cssClass="input_text" cssStyle="width: 96%;"/>
-                    </td>
-                </tr>
-                <tr class="tr_light">
-                    <td class="form_label_right">申请号：</td>
-                    <td class="form_content">
-                        <form:input path="applyNum" cssClass="input_text" cssStyle="width: 96%;"/>
-                    </td>
-                </tr>
-                <tr class="tr_dark">
-                    <td class="form_label_right">材料提交人：</td>
-                    <td class="form_content">
-                        <form:input path="materialPerson" cssClass="input_text" cssStyle="width: 96%;"/>
-                    </td>
-                </tr>
-                <tr class="tr_light">
-                    <td class="form_label_right">材料提交人联系电话：</td>
-                    <td class="form_content">
-                        <form:input path="materialPersonPhone" cssClass="input_text" cssStyle="width: 96%;"/>
-                    </td>
-                </tr>
-                <tr class="tr_dark">
-                    <td class="form_label_right">材料提交人联系地址：</td>
-                    <td class="form_content">
-                        <form:input path="materialPersonAddress" cssClass="input_text" cssStyle="width: 96%;"/>
-                    </td>
-                </tr>
-                <tr class="tr_light">
-                    <td class="form_label_right">收件人：</td>
-                    <td class="form_content">
-                        <form:input path="receivePerson" cssClass="input_text" cssStyle="width: 96%;"/>
-                    </td>
-                </tr>
-                <tr class="tr_dark">
-                    <td class="form_label_right">收件人联系电话：</td>
-                    <td class="form_content">
-                        <form:input path="receivePersonPhone" cssClass="input_text" cssStyle="width: 96%;"/>
-                    </td>
-                </tr>
-                <tr class="tr_light">
-                    <td class="form_label_right">收件意见：</td>
-                    <td class="form_content">
-                        <form:textarea path="acceptOpinion" cssClass="input_textarea" cssStyle="width: 96%;"/>
+                        <form:textarea path="jgzxYsOpinion" cssClass="input_textarea_long" cssStyle="width: 96%;"/>
                     </td>
                 </tr>
             </table>
         </fieldset>
         <div style="text-align: center;" class="tr_button">
-            <input type="button" value="收件通过" class="button_normal_long"
-                   onclick="save(this.value,'${STATUS_SLZX_PASS}')">&nbsp;
-            <input type="button" value="收件退回" class="button_normal_long"
-                   onclick="save(this.value,'${STATUS_SLZX_BACK}')">&nbsp;
+            <input type="button" value="预审通过" class="button_normal_long"
+                   onclick="save(this.value,'${STATUS_JGZX_YS_PASS}')">&nbsp;
+            <input type="button" value="预审退回" class="button_normal_long"
+                   onclick="save(this.value,'${STATUS_JGZX_YS_BACK}')">&nbsp;
             <input type="button" value="取消" class="button_cancel" onclick="parent.closeWindow()">
         </div>
         <div class="div_space"></div>
