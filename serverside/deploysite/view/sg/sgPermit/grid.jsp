@@ -50,7 +50,12 @@
                         var rowData = jQuery("#listGrid").jqGrid('getRowData', id);
                         var status = rowData["status"];
                         var opButton = '<input type="button" value="查看" onclick="doView(' + id + ')" class="button_normal"/> ';
-                        if ('' == status || status == '${STATUS_EDIT}' || status == '${STATUS_SLZX_BACK}' || status == '${STATUS_JGZX_YS_BACK}') {
+                        if (${isReg}) {
+                            if (status != '${STATUS_WLD_PASS}') {
+                                opButton += '<input type="button" value="撤回" onclick="doCh(' + id + ')" class="button_normal"/> ';
+                            }
+                        }
+                        if (('' == status || status == '${STATUS_EDIT}' || status == '${STATUS_SLZX_BACK}' || status == '${STATUS_JGZX_YS_BACK}') && (status != '${STATUS_CH}')) {
                             if (${canEdit||isReg}) {
                                 opButton += '<input type="button" value="编辑" onclick="doEdit(' + id + ')" class="button_normal"/> ';
                                 opButton += '<input type="button" value="删除" onclick="doDelete(' + id + ')" class="button_normal"/> ';
@@ -145,6 +150,18 @@
     }
     function doDelete(id) {
         doGridDelete("${ctx}/sgPermit/delete.do?id=" + id);
+    }
+    function doCh(id) {
+        doGridCh("${ctx}/sgPermit/doCh.do?id=" + id);
+    }
+    //删除列表记录
+    function doGridCh(url, msg, opts) {
+        if (msg == null) msg = "您确定要撤回此记录吗?";
+        $.messager.confirm('系统提示', msg, function (r) {
+            if (r) {
+                saveAjaxData(url, null, null, opts);
+            }
+        });
     }
 </script>
 
