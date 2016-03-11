@@ -40,15 +40,28 @@ public class SgPermit extends BaseSgPermit {
 
 	public String getStatusNameBJ() {
 		String statusName = "办理中";
-		if (this.getStatus() > SgPermitStatus.STATUS_EDIT.getCode()) {
-			if (this.getStatus() == SgPermitStatus.STATUS_SLZX_BACK.getCode()) {
-				statusName = "审核不通过";
-			} else if (this.getStatus() == SgPermitStatus.STATUS_WLD_PASS.getCode()) {
-				statusName = "审核通过";
-			}
-		} else {
+		if (this.getStatus() == SgPermitStatus.STATUS_JGZX_YS_PASS.getCode()) {
+			statusName = "预审通过";
+		} else if (this.getStatus() == SgPermitStatus.STATUS_SLZX_PASS.getCode()) {
+			statusName = "收件通过";
+		} else if (this.getStatus() == SgPermitStatus.STATUS_SH_PASS.getCode()) {
+			statusName = "受理通过";
+		} else if (this.getStatus() == SgPermitStatus.STATUS_WLD_PASS.getCode()) {
+			statusName = "审批通过";
+		} else if (this.getStatus() == SgPermitStatus.STATUS_JGZX_YS_BACK.getCode() || this.getStatus() == SgPermitStatus.STATUS_SLZX_BACK.getCode()) {
+			statusName = "审核不通过";
+		} else if (this.getStatus() == SgPermitStatus.STATUS_EDIT.getCode()) {
 			statusName = SgPermitStatus.STATUS_EDIT.getName();
 		}
+//		if (this.getStatus() > SgPermitStatus.STATUS_EDIT.getCode()) {
+//			if (this.getStatus() == SgPermitStatus.STATUS_SLZX_BACK.getCode()) {
+//				statusName = "审核不通过";
+//			} else if (this.getStatus() == SgPermitStatus.STATUS_WLD_PASS.getCode()) {
+//				statusName = "审批通过";
+//			}
+//		} else {
+//			statusName = SgPermitStatus.STATUS_EDIT.getName();
+//		}
 
 		return statusName;
 	}

@@ -58,15 +58,15 @@
                             }
                         } else if (status == '${STATUS_SLZX_PASS}') {
                             if (${canCsAudit}) {
-                                opButton += '<input type="button" value="初审" onclick="doAudit(' + id + ')" class="button_normal"/> ';
+                                opButton += '<input type="button" value="受理" onclick="doAudit(' + id + ')" class="button_normal"/> ';
                             }
                         } else if (status == '${STATUS_CS_PASS}') {
                             if (${canFhAudit}) {
-                                opButton += '<input type="button" value="复审" onclick="doAudit(' + id + ')" class="button_normal"/> ';
+                                opButton += '<input type="button" value="审核" onclick="doAudit(' + id + ')" class="button_normal"/> ';
                             }
                         } else if (status == '${STATUS_FH_PASS}') {
                             if (${canAudit}) {
-                                opButton += '<input type="button" value="审核" onclick="doAudit(' + id + ')" class="button_normal"/> ';
+                                opButton += '<input type="button" value="审批" onclick="doAudit(' + id + ')" class="button_normal"/> ';
                             }
                         }
                         <c:if test="${!isReg}">

@@ -4,8 +4,8 @@ import com.justonetech.biz.daoservice.AreaMaterialInfoService;
 import com.justonetech.biz.daoservice.AreaPermitHdExtendService;
 import com.justonetech.biz.domain.*;
 import com.justonetech.biz.utils.Constants;
+import com.justonetech.biz.utils.enums.AreaSgPermitStatus;
 import com.justonetech.biz.utils.enums.SgPermitNotAcceptMat;
-import com.justonetech.biz.utils.enums.SgPermitStatus;
 import com.justonetech.core.utils.JspHelper;
 import com.justonetech.core.utils.StringHelper;
 import com.justonetech.system.domain.SysCodeDetail;
@@ -80,7 +80,8 @@ public class AreaSgPermitManager {
         SysRegPerson regPerson = sysUser.getRegPerson();
         model.addAttribute("isReg", null != regPerson);
 
-        model.addAttribute("areaList", Constants.PROJ_INFO_BELONG_AREA);
+        List<SysCodeDetail> areaList = sysCodeManager.getCodeListByCode(Constants.PROJ_INFO_BELONG_AREA);
+        model.addAttribute("areaList", areaList);
 
         model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.AREA_PERMIT_EDIT));//编辑
         model.addAttribute("canCsAudit", sysUserManager.hasPrivilege(PrivilegeCode.AREA_PERMIT_CS_AUDIT));//初审
@@ -88,16 +89,16 @@ public class AreaSgPermitManager {
         model.addAttribute("canFhAudit", sysUserManager.hasPrivilege(PrivilegeCode.AREA_PERMIT_FH_AUDIT));//复核
         model.addAttribute("canAudit", sysUserManager.hasPrivilege(PrivilegeCode.AREA_PERMIT_AUDIT));//审核
 
-        model.addAttribute("STATUS_EDIT", SgPermitStatus.STATUS_EDIT.getCode());//未提交
-        model.addAttribute("STATUS_SUBMIT", SgPermitStatus.STATUS_SUBMIT.getCode());//已提交
-        model.addAttribute("STATUS_SLZX_PASS", SgPermitStatus.STATUS_SLZX_PASS.getCode());//受理中心初审通过
-        model.addAttribute("STATUS_SLZX_BACK", SgPermitStatus.STATUS_SLZX_BACK.getCode());//受理中心初审退回
-        model.addAttribute("STATUS_CS_PASS", SgPermitStatus.STATUS_CS_PASS.getCode());//建管中心初审通过
-        model.addAttribute("STATUS_CS_BACK", SgPermitStatus.STATUS_CS_BACK.getCode());//建管中心初审退回
-        model.addAttribute("STATUS_FH_PASS", SgPermitStatus.STATUS_FH_PASS.getCode());//建管中心复核通过
-        model.addAttribute("STATUS_FH_BACK", SgPermitStatus.STATUS_FH_BACK.getCode());//建管中心复核退回
-        model.addAttribute("STATUS_SH_PASS", SgPermitStatus.STATUS_SH_PASS.getCode());//建管中心审核通过
-        model.addAttribute("STATUS_SH_BACK", SgPermitStatus.STATUS_SH_BACK.getCode());//建管中心审核退回
+        model.addAttribute("STATUS_EDIT", AreaSgPermitStatus.STATUS_EDIT.getCode());//未提交
+        model.addAttribute("STATUS_SUBMIT", AreaSgPermitStatus.STATUS_SUBMIT.getCode());//已提交
+        model.addAttribute("STATUS_SLZX_PASS", AreaSgPermitStatus.STATUS_SLZX_PASS.getCode());//受理中心初审通过
+        model.addAttribute("STATUS_SLZX_BACK", AreaSgPermitStatus.STATUS_SLZX_BACK.getCode());//受理中心初审退回
+        model.addAttribute("STATUS_CS_PASS", AreaSgPermitStatus.STATUS_CS_PASS.getCode());//建管中心初审通过
+        model.addAttribute("STATUS_CS_BACK", AreaSgPermitStatus.STATUS_CS_BACK.getCode());//建管中心初审退回
+        model.addAttribute("STATUS_FH_PASS", AreaSgPermitStatus.STATUS_FH_PASS.getCode());//建管中心复核通过
+        model.addAttribute("STATUS_FH_BACK", AreaSgPermitStatus.STATUS_FH_BACK.getCode());//建管中心复核退回
+        model.addAttribute("STATUS_SH_PASS", AreaSgPermitStatus.STATUS_SH_PASS.getCode());//建管中心审核通过
+        model.addAttribute("STATUS_SH_BACK", AreaSgPermitStatus.STATUS_SH_BACK.getCode());//建管中心审核退回
 
         //退回材料枚举类
         SgPermitNotAcceptMat[] mats = SgPermitNotAcceptMat.values();

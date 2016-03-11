@@ -85,6 +85,7 @@ public class SgPermitManager {
         model.addAttribute("isReg", null != regPerson);
 
         model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.SG_PERMIT_EDIT));//编辑
+        model.addAttribute("canJgzxAudit", sysUserManager.hasPrivilege(PrivilegeCode.SG_PERMIT_JGZX_AUDIT));//初审
         model.addAttribute("canCsAudit", sysUserManager.hasPrivilege(PrivilegeCode.SG_PERMIT_CS_AUDIT));//初审
         model.addAttribute("canSlAudit", sysUserManager.hasPrivilege(PrivilegeCode.SG_PERMIT_SL_AUDIT));//初审
         model.addAttribute("canFhAudit", sysUserManager.hasPrivilege(PrivilegeCode.SG_PERMIT_FH_AUDIT));//复核
@@ -95,8 +96,11 @@ public class SgPermitManager {
         model.addAttribute("canSpcAudit", sysUserManager.hasPrivilege(PrivilegeCode.SG_PERMIT_SPC_AUDIT));//审批处
         model.addAttribute("canWldAudit", sysUserManager.hasPrivilege(PrivilegeCode.SG_PERMIT_WLD_AUDIT));//委领导审核
 
+        model.addAttribute("STATUS_CH", SgPermitStatus.STATUS_CH.getCode());//未提交
         model.addAttribute("STATUS_EDIT", SgPermitStatus.STATUS_EDIT.getCode());//未提交
         model.addAttribute("STATUS_SUBMIT", SgPermitStatus.STATUS_SUBMIT.getCode());//已提交
+        model.addAttribute("STATUS_JGZX_YS_PASS", SgPermitStatus.STATUS_JGZX_YS_PASS.getCode());//已提交
+        model.addAttribute("STATUS_JGZX_YS_BACK", SgPermitStatus.STATUS_JGZX_YS_BACK.getCode());//已提交
         model.addAttribute("STATUS_SLZX_PASS", SgPermitStatus.STATUS_SLZX_PASS.getCode());//受理中心初审通过
         model.addAttribute("STATUS_SLZX_BACK", SgPermitStatus.STATUS_SLZX_BACK.getCode());//受理中心初审退回
         model.addAttribute("STATUS_CS_PASS", SgPermitStatus.STATUS_CS_PASS.getCode());//建管中心初审通过

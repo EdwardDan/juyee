@@ -235,6 +235,18 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
 
     /*初审意见*/
     /*初审意见*/
+    private java.lang.String jgzxYsOpinion;
+
+    /*初审用户*/
+    /*初审用户*/
+    private java.lang.String jgzxYsUser;
+
+    /*初审日期*/
+    /*初审日期*/
+    private java.sql.Timestamp jgzxYsDate;
+
+     /*初审意见*/
+    /*初审意见*/
     private java.lang.String csOpinion;
 
     /*初审用户*/
@@ -892,6 +904,30 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
         this.status = status;
     }
 
+    public String getJgzxYsOpinion() {
+        return jgzxYsOpinion;
+    }
+
+    public void setJgzxYsOpinion(String jgzxYsOpinion) {
+        this.jgzxYsOpinion = jgzxYsOpinion;
+    }
+
+    public String getJgzxYsUser() {
+        return jgzxYsUser;
+    }
+
+    public void setJgzxYsUser(String jgzxYsUser) {
+        this.jgzxYsUser = jgzxYsUser;
+    }
+
+    public Timestamp getJgzxYsDate() {
+        return jgzxYsDate;
+    }
+
+    public void setJgzxYsDate(Timestamp jgzxYsDate) {
+        this.jgzxYsDate = jgzxYsDate;
+    }
+
     public String getCsOpinion() {
         return csOpinion;
     }
@@ -1520,6 +1556,9 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
         builder.append(receivePerson);
         builder.append(receivePersonPhone);
         builder.append(status);
+        builder.append(jgzxYsOpinion);
+        builder.append(jgzxYsUser);
+        builder.append(jgzxYsDate);
         builder.append(csOpinion);
         builder.append(csUser);
         builder.append(csDate);

@@ -44,7 +44,7 @@
                     <td class="form_label_right" nowrap>项目性质：</td>
                     <td class="form_content">${bean.propertyType.name}</td>
                     <td class="form_label_right" nowrap>填报区县：</td>
-                    <td class="form_content">${bean.areaName}</td>
+                    <td class="form_content">${bean.areaName}<form:hidden path="areaCode"/></td>
                 </tr>
                 <tr class="tr_dark">
                     <td class="form_label_right" nowrap>报建编号：</td>

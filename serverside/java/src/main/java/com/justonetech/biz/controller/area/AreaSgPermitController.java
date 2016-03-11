@@ -9,8 +9,8 @@ import com.justonetech.biz.manager.ConfigManager;
 import com.justonetech.biz.manager.DocumentManager;
 import com.justonetech.biz.manager.OaTaskManager;
 import com.justonetech.biz.utils.Constants;
+import com.justonetech.biz.utils.enums.AreaSgPermitStatus;
 import com.justonetech.biz.utils.enums.SgPermitNotAcceptMat;
-import com.justonetech.biz.utils.enums.SgPermitStatus;
 import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.orm.hibernate.Page;
 import com.justonetech.core.utils.JspHelper;
@@ -211,7 +211,7 @@ public class AreaSgPermitController extends BaseCRUDActionController<AreaSgPermi
         } else {
             Calendar calendar = Calendar.getInstance();
             sgPermit.setYear(calendar.get(Calendar.YEAR));
-            sgPermit.setStatus(SgPermitStatus.STATUS_EDIT.getCode());
+            sgPermit.setStatus(AreaSgPermitStatus.STATUS_EDIT.getCode());
         }
         if (!StringHelper.isEmpty(projectTypeId)) {
             projectType = sysCodeManager.getCodeListById(Long.valueOf(projectTypeId));
@@ -522,17 +522,20 @@ public class AreaSgPermitController extends BaseCRUDActionController<AreaSgPermi
                 target = entity;
             }
             //保存填报区县
-            String areaId = request.getParameter("areaId");
-            SysCodeDetail detail = sysCodeManager.getCodeListById(Long.valueOf(areaId));
-            target.setAreaCode(detail.getCode());
-            target.setAreaName(detail.getName());
+            String areaCode = request.getParameter("areaCode");
+            if (!StringHelper.isEmpty(areaCode)) {
+                SysCodeDetail detail = sysCodeManager.getCodeDetailByCode(Constants.PROJ_INFO_BELONG_AREA, areaCode);
+                target.setAreaCode(detail.getCode());
+                target.setAreaName(detail.getName());
+            }
+
             SysUser sysUser = sysUserManager.getSysUser();
             Integer status = target.getStatus();
-            if (status == SgPermitStatus.STATUS_SUBMIT.getCode()) {
+            if (status == AreaSgPermitStatus.STATUS_SUBMIT.getCode()) {
                 target.setSubmitDate(new Timestamp(System.currentTimeMillis()));
                 target.setBizCode(areaSgPermitManager.getBizCode(target.getProjectType().getCode(), "XX"));
             }
-            if (status == SgPermitStatus.STATUS_SLZX_PASS.getCode() || status == SgPermitStatus.STATUS_SLZX_BACK.getCode()) {
+            if (status == AreaSgPermitStatus.STATUS_SLZX_PASS.getCode() || status == AreaSgPermitStatus.STATUS_SLZX_BACK.getCode()) {
                 target.setAcceptDate(new Timestamp(System.currentTimeMillis()));
                 target.setAcceptPerson(sysUser.getDisplayName());
             }
@@ -600,12 +603,12 @@ public class AreaSgPermitController extends BaseCRUDActionController<AreaSgPermi
             areaSgMaterialService.batchSave(saveList, saveList.size());
             //保存操作信息
 
-            if (status != SgPermitStatus.STATUS_EDIT.getCode()) {
+            if (status != AreaSgPermitStatus.STATUS_EDIT.getCode()) {
 
                 AreaPermitOperation operation = new AreaPermitOperation();
                 operation.setSgPermit(target);
-                operation.setOptionCode(SgPermitStatus.getTypeCode(status));
-                operation.setOptionName(SgPermitStatus.getNameByCode(status));
+                operation.setOptionCode(AreaSgPermitStatus.getTypeCode(status));
+                operation.setOptionName(AreaSgPermitStatus.getNameByCode(status));
                 operation.setOptionUser(sysUser.getDisplayName());
                 operation.setStatus(status);
                 areaPermitOperationService.save(operation);
@@ -657,13 +660,13 @@ public class AreaSgPermitController extends BaseCRUDActionController<AreaSgPermi
             SysUser sysUser = sysUserManager.getSysUser();
             Timestamp date = new Timestamp(System.currentTimeMillis());
             //保存历史审核信息
-            if (status == SgPermitStatus.STATUS_CS_PASS.getCode() || status == SgPermitStatus.STATUS_CS_BACK.getCode()) { //初审
+            if (status == AreaSgPermitStatus.STATUS_CS_PASS.getCode() || status == AreaSgPermitStatus.STATUS_CS_BACK.getCode()) { //初审
                 target.setCsUser(sysUser.getDisplayName());
                 target.setCsDate(date);
-            } else if (status == SgPermitStatus.STATUS_FH_PASS.getCode() || status == SgPermitStatus.STATUS_FH_BACK.getCode()) { //复审
+            } else if (status == AreaSgPermitStatus.STATUS_FH_PASS.getCode() || status == AreaSgPermitStatus.STATUS_FH_BACK.getCode()) { //复审
                 target.setFhUser(sysUser.getDisplayName());
                 target.setFhDate(date);
-            } else if (status == SgPermitStatus.STATUS_SH_PASS.getCode() || status == SgPermitStatus.STATUS_SH_BACK.getCode()) { //审核
+            } else if (status == AreaSgPermitStatus.STATUS_SH_PASS.getCode() || status == AreaSgPermitStatus.STATUS_SH_BACK.getCode()) { //审核
                 target.setShUser(sysUser.getDisplayName());
                 target.setShDate(date);
             }
@@ -672,13 +675,13 @@ public class AreaSgPermitController extends BaseCRUDActionController<AreaSgPermi
             AreaHistoryOpinion historyOpinion = new AreaHistoryOpinion();
             historyOpinion.setSgPermit(target);
             historyOpinion.setProjectType(target.getProjectType());
-            if (status == SgPermitStatus.STATUS_CS_PASS.getCode() || status == SgPermitStatus.STATUS_CS_BACK.getCode()) { //初审
+            if (status == AreaSgPermitStatus.STATUS_CS_PASS.getCode() || status == AreaSgPermitStatus.STATUS_CS_BACK.getCode()) { //初审
                 historyOpinion.setOpinion(target.getCsOpinion());
                 historyOpinion.setAuditDate(target.getCsDate());
-            } else if (status == SgPermitStatus.STATUS_FH_PASS.getCode() || status == SgPermitStatus.STATUS_FH_BACK.getCode()) { //复审
+            } else if (status == AreaSgPermitStatus.STATUS_FH_PASS.getCode() || status == AreaSgPermitStatus.STATUS_FH_BACK.getCode()) { //复审
                 historyOpinion.setOpinion(target.getFhOpinion());
                 historyOpinion.setAuditDate(target.getFhDate());
-            } else if (status == SgPermitStatus.STATUS_SH_PASS.getCode() || status == SgPermitStatus.STATUS_SH_BACK.getCode()) { //审核
+            } else if (status == AreaSgPermitStatus.STATUS_SH_PASS.getCode() || status == AreaSgPermitStatus.STATUS_SH_BACK.getCode()) { //审核
                 historyOpinion.setOpinion(target.getShOpinion());
                 historyOpinion.setAuditDate(target.getShDate());
             }
@@ -691,7 +694,7 @@ public class AreaSgPermitController extends BaseCRUDActionController<AreaSgPermi
             if (null != list && list.size() > 0) {
                 for (AreaAuditOpinion opinion : list) {
                     Long no = opinion.getNo();
-                    if (status == SgPermitStatus.STATUS_FH_PASS.getCode()) {
+                    if (status == AreaSgPermitStatus.STATUS_FH_PASS.getCode()) {
                         String fhOpinion = request.getParameter("isFhOpinion" + no);
                         if (!StringHelper.isEmpty(fhOpinion) && Constants.FLAG_TRUE.equals(fhOpinion)) {
                             opinion.setIsFhOpinion(true);
@@ -699,7 +702,7 @@ public class AreaSgPermitController extends BaseCRUDActionController<AreaSgPermi
                             opinion.setIsFhOpinion(false);
                         }
                     }
-                    if (status == SgPermitStatus.STATUS_SH_PASS.getCode()) {
+                    if (status == AreaSgPermitStatus.STATUS_SH_PASS.getCode()) {
                         String shOpinion = request.getParameter("isShOpinion" + no);
                         if (!StringHelper.isEmpty(shOpinion) && Constants.FLAG_TRUE.equals(shOpinion)) {
                             opinion.setIsShOpinion(true);
@@ -731,8 +734,8 @@ public class AreaSgPermitController extends BaseCRUDActionController<AreaSgPermi
             //保存操作信息
             AreaPermitOperation operation = new AreaPermitOperation();
             operation.setSgPermit(target);
-            operation.setOptionCode(SgPermitStatus.getTypeCode(status));
-            operation.setOptionName(SgPermitStatus.getNameByCode(status));
+            operation.setOptionCode(AreaSgPermitStatus.getTypeCode(status));
+            operation.setOptionName(AreaSgPermitStatus.getNameByCode(status));
             operation.setOptionUser(sysUser.getDisplayName());
             operation.setStatus(status);
             areaPermitOperationService.save(operation);
@@ -871,7 +874,7 @@ public class AreaSgPermitController extends BaseCRUDActionController<AreaSgPermi
         //创建任务
         String title;
         Set<Long> managers = new HashSet<Long>();
-        if (status == SgPermitStatus.STATUS_SUBMIT.getCode()) {
+        if (status == AreaSgPermitStatus.STATUS_SUBMIT.getCode()) {
             title = oaTaskManager.getTaskTitle(data, simpleName + "_sl_pass");
             //获取有初审核权限的用户
             Set<Long> audit = sysUserManager.getUserIdsByPrivilegeCode(PrivilegeCode.AREA_PERMIT_SL_AUDIT);
@@ -879,7 +882,7 @@ public class AreaSgPermitController extends BaseCRUDActionController<AreaSgPermi
             if (managers.size() > 0) {
                 oaTaskManager.createTask(simpleName + "_sl_pass", data.getId(), title, managers, false, null, null);
             }
-        } else if (status == SgPermitStatus.STATUS_SLZX_PASS.getCode()) {
+        } else if (status == AreaSgPermitStatus.STATUS_SLZX_PASS.getCode()) {
             title = oaTaskManager.getTaskTitle(data, simpleName + "_ch_pass");
             //获取有初审核权限的用户
             Set<Long> audit = sysUserManager.getUserIdsByPrivilegeCode(PrivilegeCode.AREA_PERMIT_CS_AUDIT);
@@ -887,7 +890,7 @@ public class AreaSgPermitController extends BaseCRUDActionController<AreaSgPermi
             if (managers.size() > 0) {
                 oaTaskManager.createTask(simpleName + "_ch_pass", data.getId(), title, managers, false, null, null);
             }
-        } else if (status == SgPermitStatus.STATUS_CS_PASS.getCode()) {
+        } else if (status == AreaSgPermitStatus.STATUS_CS_PASS.getCode()) {
             title = oaTaskManager.getTaskTitle(data, simpleName + "_fh_pass");
             //获取有复审权限的用户
             Set<Long> audit = sysUserManager.getUserIdsByPrivilegeCode(PrivilegeCode.AREA_PERMIT_FH_AUDIT);
@@ -895,7 +898,7 @@ public class AreaSgPermitController extends BaseCRUDActionController<AreaSgPermi
             if (managers.size() > 0) {
                 oaTaskManager.createTask(simpleName + "_fh_pass", data.getId(), title, managers, false, null, null);
             }
-        } else if (status == SgPermitStatus.STATUS_FH_PASS.getCode()) {
+        } else if (status == AreaSgPermitStatus.STATUS_FH_PASS.getCode()) {
             title = oaTaskManager.getTaskTitle(data, simpleName + "_sh_pass");
             //获取有审核权限的用户
             Set<Long> audit = sysUserManager.getUserIdsByPrivilegeCode(PrivilegeCode.AREA_PERMIT_AUDIT);

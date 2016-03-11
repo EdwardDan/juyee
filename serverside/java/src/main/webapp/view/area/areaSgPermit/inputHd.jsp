@@ -68,7 +68,11 @@
                     </td>
                     <td class="form_label_right" nowrap>填报区县：</td>
                     <td class="form_content">
-                        <sys:code code="${areaList}" type="select" name="areaId" id="areaId"/>
+                        <select name="areaCode" id="areaCode">
+                            <c:forEach items="${areaList}" var="item">
+                                <option value="${item.code}">${item.name}</option>
+                            </c:forEach>
+                        </select>
                     </td>
                 </tr>
                 <tr class="tr_dark">

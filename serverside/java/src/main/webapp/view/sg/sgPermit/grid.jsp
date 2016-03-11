@@ -50,12 +50,21 @@
                         var rowData = jQuery("#listGrid").jqGrid('getRowData', id);
                         var status = rowData["status"];
                         var opButton = '<input type="button" value="查看" onclick="doView(' + id + ')" class="button_normal"/> ';
-                        if ('' == status || status == '${STATUS_EDIT}' || status == '${STATUS_SLZX_BACK}') {
+                        if (${isReg}) {
+                            if (status != '${STATUS_WLD_PASS}') {
+                                opButton += '<input type="button" value="撤回" onclick="doCh(' + id + ')" class="button_normal"/> ';
+                            }
+                        }
+                        if (('' == status || status == '${STATUS_EDIT}' || status == '${STATUS_SLZX_BACK}' || status == '${STATUS_JGZX_YS_BACK}') && (status != '${STATUS_CH}')) {
                             if (${canEdit||isReg}) {
                                 opButton += '<input type="button" value="编辑" onclick="doEdit(' + id + ')" class="button_normal"/> ';
                                 opButton += '<input type="button" value="删除" onclick="doDelete(' + id + ')" class="button_normal"/> ';
                             }
-                        } else if (status == '${STATUS_SUBMIT}'||status == '${STATUS_SH_BACK}') {
+                        } else if (status == '${STATUS_SUBMIT}') {
+                            if (${canJgzxAudit}) {
+                                opButton += '<input type="button" value="预审" onclick="doJgzxYs(' + id + ')" class="button_normal"/> ';
+                            }
+                        } else if (status == '${STATUS_JGZX_YS_PASS}' || status == '${STATUS_SH_BACK}') {
                             if (${canSlAudit}) {
                                 opButton += '<input type="button" value="收件" onclick="doAccept(' + id + ')" class="button_normal"/> ';
                             }
@@ -71,15 +80,15 @@
                             if (${canAudit}) {
                                 opButton += '<input type="button" value="审核" onclick="doAudit(' + id + ')" class="button_normal"/> ';
                             }
-                        } else if (status == '${STATUS_SH_PASS}'||status == '${STATUS_FGLD_BACK}'||status == '${STATUS_ZXLD_BACK}') {
+                        } else if (status == '${STATUS_SH_PASS}' || status == '${STATUS_FGLD_BACK}' || status == '${STATUS_ZXLD_BACK}') {
                             if (${canFgldAudit}) {
                                 opButton += '<input type="button" value="审核" onclick="doAudit(' + id + ')" class="button_normal"/> ';
                             }
-                        } else if (status == '${STATUS_FGLD_PASS}') {
+                        } else if (status == '${STATUS_FGLD_PASS}' || status == '${STATUS_JSC_BACK}') {
                             if (${canZxldAudit}) {
                                 opButton += '<input type="button" value="审核" onclick="doAudit(' + id + ')" class="button_normal"/> ';
                             }
-                        } else if (status == '${STATUS_ZXLD_PASS}') {
+                        } else if (status == '${STATUS_ZXLD_PASS}' || status == '${STATUS_SPC_BACK}') {
                             if (${canJscAudit}) {
                                 opButton += '<input type="button" value="审核" onclick="doAudit(' + id + ')" class="button_normal"/> ';
                             }
@@ -127,6 +136,9 @@
     function doEdit(id) {
         openWindow("修改施工许可证", "${ctx}/sgPermit/frame.do?act=edit&id=" + id, true, 850, 500);
     }
+    function doJgzxYs(id) {
+        openWindow("预审施工许可证", "${ctx}/sgPermit/frame.do?act=jgzxYs&id=" + id, true, 850, 500);
+    }
     function doAccept(id) {
         openWindow("受理施工许可证", "${ctx}/sgPermit/frame.do?act=accept&id=" + id, true, 850, 500);
     }
@@ -138,6 +150,18 @@
     }
     function doDelete(id) {
         doGridDelete("${ctx}/sgPermit/delete.do?id=" + id);
+    }
+    function doCh(id) {
+        doGridCh("${ctx}/sgPermit/doCh.do?id=" + id);
+    }
+    //删除列表记录
+    function doGridCh(url, msg, opts) {
+        if (msg == null) msg = "您确定要撤回此记录吗?";
+        $.messager.confirm('系统提示', msg, function (r) {
+            if (r) {
+                saveAjaxData(url, null, null, opts);
+            }
+        });
     }
 </script>
 

@@ -240,6 +240,31 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
      * @return .
      */
     @RequestMapping
+    public String jgzxYs(Model model, String id) {
+        SgPermit sgPermit = sgPermitService.get(Long.valueOf(id));
+        model.addAttribute("bean", sgPermit);
+        List<Map<String, Object>> applyList = sgPermitManager.getMaterials(sgPermit, "view", "apply");//处理申请材料数据
+        model.addAttribute("applyList", applyList);
+        sgPermitManager.doPrivilegeCodeAndStatus(model);//编码和状态
+        if (sgPermit.getProjectType().getCode().equals(Constants.PROJECT_TYPE_HD)) {
+            Set<SgPermitHdExtend> extendSet = sgPermit.getSgPermitHdExtends();
+            if (null != extendSet && extendSet.size() > 0) {
+                SgPermitHdExtend hdExtend = extendSet.iterator().next();
+                model.addAttribute("hdExtend", hdExtend);
+            }
+        }
+
+        return backPageJgzxYs(sgPermit.getProjectType());
+    }
+
+    /**
+     * 受理显示页面
+     *
+     * @param id    .
+     * @param model .
+     * @return .
+     */
+    @RequestMapping
     public String accept(Model model, String id) {
         SgPermit sgPermit = sgPermitService.get(Long.valueOf(id));
         model.addAttribute("bean", sgPermit);
@@ -518,7 +543,9 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
                         "acceptCode",
                         "acceptOpinion",
                         "bizCode",
-                        "propertyType"
+                        "propertyType",
+                        "jgzxYsOpinion",
+                        "jgzxYsDate"
                 });
             } else {
                 target = entity;
@@ -616,6 +643,67 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
             return;
         }
         sendSuccessJSON(response, "保存成功");
+    }
+
+    /**
+     * 保存操作
+     *
+     * @param response .
+     * @param entity   .
+     * @throws Exception .
+     */
+    @SuppressWarnings("unchecked")
+    @RequestMapping
+    public void saveJgzxYs(HttpServletResponse response, @ModelAttribute("bean") SgPermit entity) throws Exception {
+        try {
+            SgPermit target;
+            if (entity.getId() != null) {
+                target = sgPermitService.get(entity.getId());
+                ReflectionUtils.copyBean(entity, target, new String[]{
+                        "status",
+                        "jgzxYsOpinion"
+                });
+            } else {
+                target = entity;
+            }
+            sgPermitService.save(target);
+            Integer status = target.getStatus();
+            SysUser sysUser = sysUserManager.getSysUser();
+            Timestamp date = new Timestamp(System.currentTimeMillis());
+            //保存历史审核信息
+            if (status == SgPermitStatus.STATUS_JGZX_YS_PASS.getCode() || status == SgPermitStatus.STATUS_JGZX_YS_BACK.getCode()) {
+                target.setJgzxYsUser(sysUser.getDisplayName());
+                target.setJgzxYsDate(date);
+            }
+            sgPermitService.save(target);
+            //保存历史审核信息
+            SgPermitHistoryOpinion historyOpinion = new SgPermitHistoryOpinion();
+            historyOpinion.setSgPermit(target);
+            historyOpinion.setProjectType(target.getProjectType());
+            if (status == SgPermitStatus.STATUS_JGZX_YS_PASS.getCode() || status == SgPermitStatus.STATUS_JGZX_YS_BACK.getCode()) {
+                historyOpinion.setOpinion(target.getCsOpinion());
+                historyOpinion.setAuditDate(target.getCsDate());
+            }
+            historyOpinion.setStatus(status);
+            sgPermitHistoryOpinionService.save(historyOpinion);
+
+            //保存操作信息
+            SgPermitOperation operation = new SgPermitOperation();
+            operation.setSgPermit(target);
+            operation.setOptionCode(SgPermitStatus.getTypeCode(status));
+            operation.setOptionName(SgPermitStatus.getNameByCode(status));
+            operation.setOptionUser(sysUser.getDisplayName());
+            operation.setStatus(status);
+            sgPermitOperationService.save(operation);
+
+//            createOaTask(target);
+
+        } catch (Exception e) {
+            log.error("error", e);
+            super.processException(response, e);
+            return;
+        }
+        sendSuccessJSON(response, "审核成功");
     }
 
     /**
@@ -841,6 +929,21 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
         sendSuccessJSON(response, "删除成功");
     }
 
+    /**
+     * 删除操作
+     *
+     * @param response .
+     * @param id       .
+     * @throws Exception .
+     */
+    @RequestMapping
+    public void doCh(HttpServletResponse response, Long id) throws Exception {
+        SgPermit sgPermit = sgPermitService.get(id);
+        sgPermit.setStatus(SgPermitStatus.STATUS_CH.getCode());
+        sgPermitService.save(sgPermit);
+        sendSuccessJSON(response, "撤回成功");
+    }
+
 
     /**
      * 获取最后保存的记录
@@ -985,6 +1088,30 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
             page = "view/sg/sgPermit/inputGl";
         } else if (projectType == szjcsh) {
             page = "view/sg/sgPermit/inputSzjcsh";
+        }
+        return page;
+    }
+
+    /**
+     * 返回accept页面
+     *
+     * @param projectType 。
+     * @return 。
+     */
+    private String backPageJgzxYs(SysCodeDetail projectType) {
+        String page = "view/sg/sgPermit/jgzxYs";
+        SysCodeDetail gksh = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_GKSH);//港口设施
+        SysCodeDetail hd = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_HD);//航道
+        SysCodeDetail gl = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_GL);//公路
+        SysCodeDetail szjcsh = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_SZJCSH);//市政基础设施
+        if (projectType == gksh) {
+            page = "view/sg/sgPermit/jgzxYsGksh";
+        } else if (projectType == hd) {
+            page = "view/sg/sgPermit/jgzxYsHd";
+        } else if (projectType == gl) {
+            page = "view/sg/sgPermit/jgzxYsGl";
+        } else if (projectType == szjcsh) {
+            page = "view/sg/sgPermit/jgzxYsSzjcsh";
         }
         return page;
     }
