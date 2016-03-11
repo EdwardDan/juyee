@@ -1,7 +1,7 @@
 package com.justonetech.biz.domain;
 
 import com.justonetech.biz.domain.base.BaseAreaSgPermit;
-import com.justonetech.biz.utils.enums.SgPermitStatus;
+import com.justonetech.biz.utils.enums.AreaSgPermitStatus;
 
 
 public class AreaSgPermit extends BaseAreaSgPermit {
@@ -34,19 +34,17 @@ public class AreaSgPermit extends BaseAreaSgPermit {
 	}
 
 	public String getStatusName() {
-		return SgPermitStatus.getColorNameByCode(this.getStatus());
+		return AreaSgPermitStatus.getColorNameByCode(this.getStatus());
 	}
 
 	public String getStatusNameBJ() {
 		String statusName = "办理中";
-		if (this.getStatus() > SgPermitStatus.STATUS_EDIT.getCode()) {
-			if (this.getStatus() == SgPermitStatus.STATUS_SLZX_BACK.getCode()) {
-				statusName = "审核不通过";
-			} else if (this.getStatus() == SgPermitStatus.STATUS_WLD_PASS.getCode()) {
+		if (this.getStatus() > AreaSgPermitStatus.STATUS_EDIT.getCode()) {
+			if (this.getStatus() == AreaSgPermitStatus.STATUS_SH_PASS.getCode()) {
 				statusName = "审核通过";
 			}
 		} else {
-			statusName = SgPermitStatus.STATUS_EDIT.getName();
+			statusName = AreaSgPermitStatus.STATUS_EDIT.getName();
 		}
 
 		return statusName;
