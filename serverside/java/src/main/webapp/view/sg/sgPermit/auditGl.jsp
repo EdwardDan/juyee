@@ -735,6 +735,10 @@
                             <tr class="tr_dark">
                                 <td class="form_label_right" style="width: 20%;">建设处审核意见：</td>
                                 <td class="form_content" style="width: 80%;">
+                                    <span style="color: red;">
+                                           <c:if test="${item.status==STATUS_JSC_XK}">许可</c:if>
+                                           <c:if test="${item.status==STATUS_JSC_BXK}">不许可</c:if>
+                                        </span><br>
                                     <sys:toHtml>${item.opinion}</sys:toHtml>
                                 </td>
                             </tr>
@@ -868,6 +872,10 @@
                             <tr class="tr_dark">
                                 <td class="form_label_right" style="width: 20%;">审批处审核意见：</td>
                                 <td class="form_content" style="width: 80%;">
+                                    <span style="color: red;">
+                                           <c:if test="${item.status==STATUS_SPC_XK}">许可</c:if>
+                                           <c:if test="${item.status==STATUS_SPC_BXK}">不许可</c:if>
+                                        </span><br>
                                     <sys:toHtml>${item.opinion}</sys:toHtml>
                                 </td>
                             </tr>
@@ -886,6 +894,10 @@
                             <tr class="tr_dark">
                                 <td class="form_label_right" style="width: 20%;">建设处审核意见：</td>
                                 <td class="form_content" style="width: 80%;">
+                                    <span style="color: red;">
+                                           <c:if test="${item.status==STATUS_JSC_XK}">许可</c:if>
+                                           <c:if test="${item.status==STATUS_JSC_BXK}">不许可</c:if>
+                                        </span><br>
                                     <sys:toHtml>${item.opinion}</sys:toHtml>
                                 </td>
                             </tr>
@@ -1001,6 +1013,10 @@
                             <tr class="tr_dark">
                                 <td class="form_label_right" style="width: 20%;">建设处审核意见：</td>
                                 <td class="form_content" style="width: 80%;">
+                                    <span style="color: red;">
+                                           <c:if test="${item.status==STATUS_JSC_XK}">许可</c:if>
+                                           <c:if test="${item.status==STATUS_JSC_BXK}">不许可</c:if>
+                                        </span><br>
                                     <sys:toHtml>${item.opinion}</sys:toHtml>
                                 </td>
                             </tr>
@@ -1019,6 +1035,10 @@
                             <tr class="tr_dark">
                                 <td class="form_label_right" style="width: 20%;">审批处审核意见：</td>
                                 <td class="form_content" style="width: 80%;">
+                                    <span style="color: red;">
+                                           <c:if test="${item.status==STATUS_SPC_XK}">许可</c:if>
+                                           <c:if test="${item.status==STATUS_SPC_BXK}">不许可</c:if>
+                                        </span><br>
                                     <sys:toHtml>${item.opinion}</sys:toHtml>
                                 </td>
                             </tr>
@@ -1134,6 +1154,10 @@
                             <tr class="tr_dark">
                                 <td class="form_label_right" style="width: 20%;">建设处审核意见：</td>
                                 <td class="form_content" style="width: 80%;">
+                                    <span style="color: red;">
+                                           <c:if test="${item.status==STATUS_JSC_XK}">许可</c:if>
+                                           <c:if test="${item.status==STATUS_JSC_BXK}">不许可</c:if>
+                                        </span><br>
                                     <sys:toHtml>${item.opinion}</sys:toHtml>
                                 </td>
                             </tr>
@@ -1152,6 +1176,10 @@
                             <tr class="tr_dark">
                                 <td class="form_label_right" style="width: 20%;">审批处审核意见：</td>
                                 <td class="form_content" style="width: 80%;">
+                                    <span style="color: red;">
+                                           <c:if test="${item.status==STATUS_SPC_XK}">许可</c:if>
+                                           <c:if test="${item.status==STATUS_SPC_BXK}">不许可</c:if>
+                                        </span><br>
                                     <sys:toHtml>${item.opinion}</sys:toHtml>
                                 </td>
                             </tr>
