@@ -143,7 +143,7 @@
             <div class="kuang">
                 <ul>
                     <li class="a1">
-                        <a href="javascript:void(0)" onclick="loadPlatPage('sgxk')">施工许可</a>
+                        <a href="javascript:void(0)" onclick="loadPlatPage('sgxk')">市施工许可</a>
                     </li>
                 </ul>
                 <ul>

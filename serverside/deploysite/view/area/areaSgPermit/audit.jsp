@@ -216,9 +216,9 @@
                             <td style="width: 5%;">序号</td>
                             <td style="width: 25%;">提交材料名称</td>
                             <td style="width: 40%;">审核要求</td>
-                            <td style="width: 8%;">初审意见</td>
-                            <td style="width: 8%;">复核意见</td>
-                            <td style="width: 8%;">审核意见</td>
+                            <td style="width: 8%;">受理意见</td>
+                            <td style="width: 8%;">审批意见</td>
+                            <td style="width: 8%;">审批意见</td>
                         </tr>
                         <c:forEach items="${submitList}" var="map">
                             <input type="hidden" name="no" value="${map.no}"/>
@@ -326,7 +326,7 @@
 
             <c:if test="${(bean.status==STATUS_SUBMIT)&&canCsAudit}">
                 <tr class="tr_dark">
-                    <td class="form_label_right">初审意见：</td>
+                    <td class="form_label_right">受理意见：</td>
                     <td class="form_content" colspan="3">
                         <form:textarea path="csOpinion" cssClass="input_textarea" cssStyle="width: 90%;"/>
                     </td>
@@ -335,14 +335,14 @@
 
             <c:if test="${(bean.status==STATUS_CS_PASS)&&canFhAudit}">
                 <tr class="tr_dark">
-                    <td class="form_label_right">初审意见：</td>
+                    <td class="form_label_right">受理意见：</td>
                     <td class="form_content" colspan="3">
                         <sys:toHtml>${bean.csOpinion}</sys:toHtml>
                         <form:hidden path="csOpinion"/>
                     </td>
                 </tr>
                 <tr class="tr_light">
-                    <td class="form_label_right">复核意见：</td>
+                    <td class="form_label_right">审批意见：</td>
                     <td class="form_content" colspan="3">
                         <form:textarea path="fhOpinion" cssClass="input_textarea" cssStyle="width: 90%;"/>
                     </td>
@@ -351,21 +351,21 @@
 
             <c:if test="${(bean.status==STATUS_FH_PASS)&&canAudit}">
                 <tr class="tr_dark">
-                    <td class="form_label_right">初审意见：</td>
+                    <td class="form_label_right">受理意见：</td>
                     <td class="form_content" colspan="3">
                         <sys:toHtml>${bean.csOpinion}</sys:toHtml>
                         <form:hidden path="csOpinion"/>
                     </td>
                 </tr>
                 <tr class="tr_light">
-                    <td class="form_label_right">复核意见：</td>
+                    <td class="form_label_right">审批意见：</td>
                     <td class="form_content" colspan="3">
                         <sys:toHtml>${bean.fhOpinion}</sys:toHtml>
                         <form:hidden path="fhOpinion"/>
                     </td>
                 </tr>
                 <tr class="tr_dark">
-                    <td class="form_label_right">审核意见：</td>
+                    <td class="form_label_right">审批意见：</td>
                     <td class="form_content" colspan="3">
                         <form:textarea path="shOpinion" cssClass="input_textarea" cssStyle="width: 90%;"/>
                     </td>
@@ -374,28 +374,28 @@
 
             <c:if test="${(bean.status==STATUS_SH_PASS)&&canFgldAudit}">
                 <tr class="tr_dark">
-                    <td class="form_label_right">初审意见：</td>
+                    <td class="form_label_right">受理意见：</td>
                     <td class="form_content" colspan="3">
                         <sys:toHtml>${bean.csOpinion}</sys:toHtml>
                         <form:hidden path="csOpinion"/>
                     </td>
                 </tr>
                 <tr class="tr_light">
-                    <td class="form_label_right">复核意见：</td>
+                    <td class="form_label_right">审批意见：</td>
                     <td class="form_content" colspan="3">
                         <sys:toHtml>${bean.fhOpinion}</sys:toHtml>
                         <form:hidden path="fhOpinion"/>
                     </td>
                 </tr>
                 <tr class="tr_dark">
-                    <td class="form_label_right">审核意见：</td>
+                    <td class="form_label_right">审批意见：</td>
                     <td class="form_content" colspan="3">
                         <sys:toHtml>${bean.shOpinion}</sys:toHtml>
                         <form:hidden path="shOpinion"/>
                     </td>
                 </tr>
                 <tr class="tr_light">
-                    <td class="form_label_right">分管领导审核意见：</td>
+                    <td class="form_label_right">分管领导审批意见：</td>
                     <td class="form_content" colspan="3">
                         <form:textarea path="fgldOpinion" cssClass="input_textarea" cssStyle="width: 90%;"/>
                     </td>
@@ -404,35 +404,35 @@
 
             <c:if test="${(bean.status==STATUS_FGLD_PASS)&&canZxldAudit}">
                 <tr class="tr_dark">
-                    <td class="form_label_right">初审意见：</td>
+                    <td class="form_label_right">受理意见：</td>
                     <td class="form_content" colspan="3">
                         <sys:toHtml>${bean.csOpinion}</sys:toHtml>
                         <form:hidden path="csOpinion"/>
                     </td>
                 </tr>
                 <tr class="tr_light">
-                    <td class="form_label_right">复核意见：</td>
+                    <td class="form_label_right">审批意见：</td>
                     <td class="form_content" colspan="3">
                         <sys:toHtml>${bean.fhOpinion}</sys:toHtml>
                         <form:hidden path="fhOpinion"/>
                     </td>
                 </tr>
                 <tr class="tr_dark">
-                    <td class="form_label_right">审核意见：</td>
+                    <td class="form_label_right">审批意见：</td>
                     <td class="form_content" colspan="3">
                         <sys:toHtml>${bean.shOpinion}</sys:toHtml>
                         <form:hidden path="shOpinion"/>
                     </td>
                 </tr>
                 <tr class="tr_light">
-                    <td class="form_label_right">分管领导审核意见：</td>
+                    <td class="form_label_right">分管领导审批意见：</td>
                     <td class="form_content" colspan="3">
                         <sys:toHtml>${bean.fgldOpinion}</sys:toHtml>
                         <form:hidden path="fgldOpinion"/>
                     </td>
                 </tr>
                 <tr class="tr_dark">
-                    <td class="form_label_right">中心领导审核意见：</td>
+                    <td class="form_label_right">中心领导审批意见：</td>
                     <td class="form_content" colspan="3">
                         <form:textarea path="zxldOpinion" cssClass="input_textarea" cssStyle="width: 90%;"/>
                     </td>
@@ -441,35 +441,35 @@
 
             <c:if test="${(bean.status==STATUS_ZXLD_PASS)&&canWldAudit}">
                 <tr class="tr_dark">
-                    <td class="form_label_right">初审意见：</td>
+                    <td class="form_label_right">受理意见：</td>
                     <td class="form_content" colspan="3">
                         <sys:toHtml>${bean.csOpinion}</sys:toHtml>
                         <form:hidden path="csOpinion"/>
                     </td>
                 </tr>
                 <tr class="tr_light">
-                    <td class="form_label_right">复核意见：</td>
+                    <td class="form_label_right">审批意见：</td>
                     <td class="form_content" colspan="3">
                         <sys:toHtml>${bean.fhOpinion}</sys:toHtml>
                         <form:hidden path="fhOpinion"/>
                     </td>
                 </tr>
                 <tr class="tr_dark">
-                    <td class="form_label_right">审核意见：</td>
+                    <td class="form_label_right">审批意见：</td>
                     <td class="form_content" colspan="3">
                         <sys:toHtml>${bean.shOpinion}</sys:toHtml>
                         <form:hidden path="shOpinion"/>
                     </td>
                 </tr>
                 <tr class="tr_light">
-                    <td class="form_label_right">分管领导审核意见：</td>
+                    <td class="form_label_right">分管领导审批意见：</td>
                     <td class="form_content" colspan="3">
                         <sys:toHtml>${bean.fgldOpinion}</sys:toHtml>
                         <form:hidden path="fgldOpinion"/>
                     </td>
                 </tr>
                 <tr class="tr_dark">
-                    <td class="form_label_right">中心领导审核意见：</td>
+                    <td class="form_label_right">中心领导审批意见：</td>
                     <td class="form_content" colspan="3">
                         <sys:toHtml>${bean.zxldOpinion}</sys:toHtml>
                         <form:hidden path="zxldOpinion"/>
@@ -477,7 +477,7 @@
                 </tr>
 
                 <tr class="tr_dark">
-                    <td class="form_label_right">委领导审核意见：</td>
+                    <td class="form_label_right">委领导审批意见：</td>
                     <td class="form_content" colspan="3">
                         <form:textarea path="wldOpinion" cssClass="input_textarea" cssStyle="width: 90%;"/>
                     </td>
