@@ -18,6 +18,7 @@ import com.justonetech.core.utils.ReflectionUtils;
 import com.justonetech.core.utils.StringHelper;
 import com.justonetech.system.domain.SysCodeDetail;
 import com.justonetech.system.domain.SysUser;
+import com.justonetech.system.manager.ExcelPrintManager;
 import com.justonetech.system.manager.SimpleQueryManager;
 import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
@@ -94,6 +95,13 @@ public class AreaSgPermitController extends BaseCRUDActionController<AreaSgPermi
 
     @Autowired
     private OaTaskManager oaTaskManager;
+
+    @Autowired
+    private ExcelPrintManager excelPrintManager;
+
+    private static final String xlsTemplateName1 = "SgPermit.xls";
+    private static final String xlsTemplateName2 = "SgPermit_green.xls";
+    private static final String xlsTemplateName3 = "SgPermit_kgba.xls";
 
 
     /**
@@ -1010,4 +1018,92 @@ public class AreaSgPermitController extends BaseCRUDActionController<AreaSgPermi
         return page;
     }
 
+    /**
+     * 导出excel
+     *
+     * @param response .
+     * @throws Exception .
+     */
+    @RequestMapping
+    public void printExcel1(HttpServletResponse response, HttpServletRequest request) throws Exception {
+        //把打印的数据压入map中
+        Map<String, Object> beans = new HashMap<String, Object>();
+        String fileName = "公路施工许可证.xls";
+        String id = request.getParameter("id");
+        AreaSgPermit sgPermit = areaSgPermitService.get(Long.valueOf(id));
+        beans.put("bean", sgPermit);
+        String title = "";
+        String titleFl = "";
+        String code = sgPermit.getProjectType().getCode();
+        if (code.equals(Constants.PROJECT_TYPE_GKSH)) {
+            title = "上海市(港口)工程施工许可证";
+            titleFl = "根据《中华人民共和国港口法》等相关法律规定，经审查，本工程符合施工条件，准予施工。";
+        } else if (code.equals(Constants.PROJECT_TYPE_GL)) {
+            title = "上海市(公路)工程施工许可证";
+            titleFl = "根据《中华人民共和国公路法》等相关法律规定，经审查，本工程符合施工条件，准予施工。";
+        } else if (code.equals(Constants.PROJECT_TYPE_SZJCSH)) {
+            title = "上海市(市政基础设施)工程施工许可证";
+            titleFl = "根据《中华人民共和国交通建设法》等相关法律规定，经审查，本工程符合施工条件，准予施工。";
+        }
+        beans.put("title", title);
+        beans.put("titleFl", titleFl);
+
+        excelPrintManager.printExcel(response, request, SgPermit.class.getSimpleName(), xlsTemplateName1, beans, fileName);
+    }
+
+    /**
+     * 导出excel
+     *
+     * @param response .
+     * @throws Exception .
+     */
+    @RequestMapping
+    public void printExcel2(HttpServletResponse response, HttpServletRequest request) throws Exception {
+        //把打印的数据压入map中
+        Map<String, Object> beans = new HashMap<String, Object>();
+        String fileName = "公路施工许可证(绿色通道).xls";
+        String id = request.getParameter("id");
+        AreaSgPermit sgPermit = areaSgPermitService.get(Long.valueOf(id));
+        beans.put("bean", sgPermit);
+        String title = "";
+        String titleFl = "";
+        String code = sgPermit.getProjectType().getCode();
+        if (code.equals(Constants.PROJECT_TYPE_GKSH)) {
+            title = "上海市(港口)工程施工许可证";
+            titleFl = "根据《中华人民共和国港口法》等相关法律规定，经审查，本工程符合施工条件，准予施工。";
+        } else if (code.equals(Constants.PROJECT_TYPE_GL)) {
+            title = "上海市(公路)工程施工许可证";
+            titleFl = "根据《中华人民共和国公路法》等相关法律规定，经审查，本工程符合施工条件，准予施工。";
+        } else if (code.equals(Constants.PROJECT_TYPE_SZJCSH)) {
+            title = "上海市(市政基础设施)工程施工许可证";
+            titleFl = "根据《中华人民共和国交通建设法》等相关法律规定，经审查，本工程符合施工条件，准予施工。";
+        }
+        beans.put("title", title);
+        beans.put("titleFl", titleFl);
+
+        excelPrintManager.printExcel(response, request, SgPermit.class.getSimpleName(), xlsTemplateName2, beans, fileName);
+    }
+
+    /**
+     * 导出excel
+     *
+     * @param response .
+     * @throws Exception .
+     */
+    @RequestMapping
+    public void printExcel3(HttpServletResponse response, HttpServletRequest request) throws Exception {
+        //把打印的数据压入map中
+        Map<String, Object> beans = new HashMap<String, Object>();
+        String fileName = "航道工程建设项目开工备案表.xls";
+        String id = request.getParameter("id");
+        AreaSgPermit sgPermit = areaSgPermitService.get(Long.valueOf(id));
+        beans.put("bean", sgPermit);
+        Set<AreaPermitHdExtend> hdExtendSet = sgPermit.getAreaPermitHdExtends();
+        if (hdExtendSet.size() > 0) {
+            AreaPermitHdExtend hdExtend = hdExtendSet.iterator().next();
+            beans.put("hdExtend", hdExtend);
+        }
+
+        excelPrintManager.printExcel(response, request, SgPermit.class.getSimpleName(), xlsTemplateName3, beans, fileName);
+    }
 }
