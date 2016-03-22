@@ -243,7 +243,7 @@
                                     <td style="width: 40%;">绿色审核要求</td>
                                 </c:if>
                                 <td style="width: 8%;">受理意见</td>
-                                <td style="width: 8%;">审批意见</td>
+                                <td style="width: 8%;">审核意见</td>
                                 <td style="width: 8%;">审批意见</td>
                             </tr>
                             <c:forEach items="${submitList}" var="map">
@@ -283,7 +283,7 @@
                                 </td>
                             </tr>
                             <tr class="tr_light">
-                                <td class="form_label_right" style="width: 15%;">初审时间：</td>
+                                <td class="form_label_right" style="width: 15%;">受理时间：</td>
                                 <td class="form_content">
                                     <fmt:formatDate value="${item.auditDate}" pattern="yyyy-MM-dd HH:mm"/>
                                 </td>
@@ -302,7 +302,7 @@
                                 </td>
                             </tr>
                             <tr class="tr_light">
-                                <td class="form_label_right" style="width: 15%;">初审时间：</td>
+                                <td class="form_label_right" style="width: 15%;">受理时间：</td>
                                 <td class="form_content">
                                     <fmt:formatDate value="${item.auditDate}" pattern="yyyy-MM-dd HH:mm"/>
                                 </td>
@@ -312,13 +312,13 @@
                     <c:forEach items="${historyOpinions}" var="item">
                         <c:if test="${item.status==STATUS_FH_PASS && item.projectType.id==bean.projectType.id}">
                             <tr class="tr_dark">
-                                <td class="form_label_right" style="width: 20%;">审批意见：</td>
+                                <td class="form_label_right" style="width: 20%;">审核意见：</td>
                                 <td class="form_content" style="width: 80%;">
                                     <sys:toHtml>${item.opinion}</sys:toHtml>
                                 </td>
                             </tr>
                             <tr class="tr_light">
-                                <td class="form_label_right" style="width: 15%;">复核时间：</td>
+                                <td class="form_label_right" style="width: 15%;">审核时间：</td>
                                 <td class="form_content">
                                     <fmt:formatDate value="${item.auditDate}" pattern="yyyy-MM-dd HH:mm"/>
                                 </td>
@@ -337,7 +337,7 @@
                                 </td>
                             </tr>
                             <tr class="tr_light">
-                                <td class="form_label_right" style="width: 15%;">初审时间：</td>
+                                <td class="form_label_right" style="width: 15%;">受理时间：</td>
                                 <td class="form_content">
                                     <fmt:formatDate value="${item.auditDate}" pattern="yyyy-MM-dd HH:mm"/>
                                 </td>
@@ -347,13 +347,13 @@
                     <c:forEach items="${historyOpinions}" var="item">
                         <c:if test="${item.status==STATUS_FH_PASS && item.projectType.id==bean.projectType.id}">
                             <tr class="tr_dark">
-                                <td class="form_label_right" style="width: 20%;">审批意见：</td>
+                                <td class="form_label_right" style="width: 20%;">审核意见：</td>
                                 <td class="form_content" style="width: 80%;">
                                     <sys:toHtml>${item.opinion}</sys:toHtml>
                                 </td>
                             </tr>
                             <tr class="tr_light">
-                                <td class="form_label_right" style="width: 15%;">复核时间：</td>
+                                <td class="form_label_right" style="width: 15%;">审核时间：</td>
                                 <td class="form_content">
                                     <fmt:formatDate value="${item.auditDate}" pattern="yyyy-MM-dd HH:mm"/>
                                 </td>
@@ -369,7 +369,7 @@
                                 </td>
                             </tr>
                             <tr class="tr_light">
-                                <td class="form_label_right" style="width: 15%;">审核时间：</td>
+                                <td class="form_label_right" style="width: 15%;">审批时间：</td>
                                 <td class="form_content">
                                     <fmt:formatDate value="${item.auditDate}" pattern="yyyy-MM-dd HH:mm"/>
                                 </td>
