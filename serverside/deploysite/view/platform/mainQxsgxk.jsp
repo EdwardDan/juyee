@@ -2,7 +2,7 @@
 <%@ include file="/common/taglibs.jsp" %>
 <script type="text/javascript">
   function doView(id) {
-    openWindow("查看施工许可", "${ctx}/sgPermit/frame.do?id=" + id, false, 800, 500);
+    openWindow("查看区县施工许可", "${ctx}/sgPermit/frame.do?id=" + id, false, 800, 500);
   }
 </script>
 
@@ -10,7 +10,7 @@
   <tr>
     <td colspan="2" valign="top">
       <div class="title">
-        <div class="txt_left"><img src="${ctx}/view/platform/images/main_icon_2.png"/>&nbsp;施工许可</div>
+        <div class="txt_left"><img src="${ctx}/view/platform/images/main_icon_2.png"/>&nbsp;区县施工许可</div>
         <div class="right"></div>
       </div>
     </td>
