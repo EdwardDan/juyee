@@ -16,6 +16,7 @@ import com.justonetech.core.utils.JspHelper;
 import com.justonetech.core.utils.ReflectionUtils;
 import com.justonetech.core.utils.StringHelper;
 import com.justonetech.system.domain.SysCodeDetail;
+import com.justonetech.system.domain.SysPerson;
 import com.justonetech.system.domain.SysUser;
 import com.justonetech.system.manager.ExcelPrintManager;
 import com.justonetech.system.manager.SysCodeManager;
@@ -120,9 +121,17 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
         try {
             Page pageModel = new Page(page, rows, true);
             SysUser sysUser = sysUserManager.getSysUser();
+            String area = "";
+            SysPerson person = sysUser.getPerson();
+            if (null != person) {
+                area = person.getAreaCode();
+            }
             String hql = "from SgPermit where 1=1";
             if (null != sysUser.getRegPerson()) {
                 hql += " and createUser='" + sysUser.getLoginName() + "'";
+            }
+            if (!StringHelper.isEmpty(area)) {
+                hql += " and areaCode='" + area + "'";
             }
             hql += " order by id desc";
             QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);
@@ -758,10 +767,10 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
             } else if (status == SgPermitStatus.STATUS_ZXLD_PASS.getCode() || status == SgPermitStatus.STATUS_ZXLD_BACK.getCode()) { //中心领导审核
                 target.setZxldUser(sysUser.getDisplayName());
                 target.setZxldDate(date);
-            } else if (status == SgPermitStatus.STATUS_JSC_XK.getCode() || status == SgPermitStatus.STATUS_JSC_BXK.getCode()|| status == SgPermitStatus.STATUS_JSC_BACK.getCode()) { //中心领导审核
+            } else if (status == SgPermitStatus.STATUS_JSC_XK.getCode() || status == SgPermitStatus.STATUS_JSC_BXK.getCode() || status == SgPermitStatus.STATUS_JSC_BACK.getCode()) { //中心领导审核
                 target.setJscUser(sysUser.getDisplayName());
                 target.setJscDate(date);
-            } else if (status == SgPermitStatus.STATUS_SPC_XK.getCode() || status == SgPermitStatus.STATUS_SPC_BXK.getCode()|| status == SgPermitStatus.STATUS_SPC_BACK.getCode()) { //中心领导审核
+            } else if (status == SgPermitStatus.STATUS_SPC_XK.getCode() || status == SgPermitStatus.STATUS_SPC_BXK.getCode() || status == SgPermitStatus.STATUS_SPC_BACK.getCode()) { //中心领导审核
                 target.setSpcUser(sysUser.getDisplayName());
                 target.setSpcDate(date);
             } else if (status == SgPermitStatus.STATUS_WLD_PASS.getCode() || status == SgPermitStatus.STATUS_WLD_BACK.getCode()) { //委领导审核
@@ -788,10 +797,10 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
             } else if (status == SgPermitStatus.STATUS_ZXLD_PASS.getCode() || status == SgPermitStatus.STATUS_ZXLD_BACK.getCode()) { //中心领导审核
                 historyOpinion.setOpinion(target.getZxldOpinion());
                 historyOpinion.setAuditDate(target.getZxldDate());
-            }else if (status == SgPermitStatus.STATUS_JSC_XK.getCode() || status == SgPermitStatus.STATUS_JSC_BXK.getCode()|| status == SgPermitStatus.STATUS_JSC_BACK.getCode()) { //中心领导审核
+            } else if (status == SgPermitStatus.STATUS_JSC_XK.getCode() || status == SgPermitStatus.STATUS_JSC_BXK.getCode() || status == SgPermitStatus.STATUS_JSC_BACK.getCode()) { //中心领导审核
                 historyOpinion.setOpinion(target.getJscOpinion());
                 historyOpinion.setAuditDate(target.getJscDate());
-            } else if (status == SgPermitStatus.STATUS_SPC_XK.getCode() || status == SgPermitStatus.STATUS_SPC_BXK.getCode()|| status == SgPermitStatus.STATUS_SPC_BACK.getCode()) { //中心领导审核
+            } else if (status == SgPermitStatus.STATUS_SPC_XK.getCode() || status == SgPermitStatus.STATUS_SPC_BXK.getCode() || status == SgPermitStatus.STATUS_SPC_BACK.getCode()) { //中心领导审核
                 historyOpinion.setOpinion(target.getSpcOpinion());
                 historyOpinion.setAuditDate(target.getSpcDate());
             } else if (status == SgPermitStatus.STATUS_WLD_PASS.getCode() || status == SgPermitStatus.STATUS_WLD_BACK.getCode()) { //委领导审核
@@ -924,7 +933,7 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
         for (SgPermitHistoryOpinion opinion : historyOpinions) {
             list7.add(opinion);
         }
-        sgPermitHistoryOpinionService.batchDelete(list7,list7.size());
+        sgPermitHistoryOpinionService.batchDelete(list7, list7.size());
         sgPermitService.delete(sgPermit);
         sendSuccessJSON(response, "删除成功");
     }

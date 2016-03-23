@@ -9,16 +9,14 @@ import com.justonetech.core.utils.JspHelper;
 public enum AreaSgPermitStatus {
     STATUS_EDIT(1, "未提交", "red", "tx"),
     STATUS_SUBMIT(2, "已提交", "blue", "submit"),
-    STATUS_JGZX_YS_PASS(3, "预审通过", "blue", "ys_pass"),
-    STATUS_JGZX_YS_BACK(4, "预审退回", "blue", "ys_back"),
-    STATUS_SLZX_PASS(5, "收件通过", "green", "sj_pass"),
-    STATUS_SLZX_BACK(6, "收件退回", "red", "sj_back"),
-    STATUS_CS_PASS(7, "受理通过", "green", "sl_pass"),
-    STATUS_CS_BACK(8, "受理退回", "red", "sl_back"),
-    STATUS_FH_PASS(9, "审核通过", "green", "sh_pass"),
-    STATUS_FH_BACK(10, "审核退回", "red", "sh_back"),
-    STATUS_SH_PASS(11, "审批通过", "green", "sp_pass"),
-    STATUS_SH_BACK(12, "审批退回", "red", "sp_back");
+    STATUS_SLZX_PASS(3, "收件通过", "green", "sj_pass"),
+    STATUS_SLZX_BACK(4, "收件退回", "red", "sj_back"),
+    STATUS_CS_PASS(5, "受理通过", "green", "sl_pass"),
+    STATUS_CS_BACK(6, "受理退回", "red", "sl_back"),
+    STATUS_FH_PASS(7, "审核通过", "green", "sh_pass"),
+    STATUS_FH_BACK(8, "审核退回", "red", "sh_back"),
+    STATUS_SH_PASS(9, "审批通过", "green", "sp_pass"),
+    STATUS_SH_BACK(10, "审批退回", "red", "sp_back");
 
     private int code;
     private String name;

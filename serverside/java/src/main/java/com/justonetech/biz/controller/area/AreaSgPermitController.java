@@ -17,6 +17,7 @@ import com.justonetech.core.utils.JspHelper;
 import com.justonetech.core.utils.ReflectionUtils;
 import com.justonetech.core.utils.StringHelper;
 import com.justonetech.system.domain.SysCodeDetail;
+import com.justonetech.system.domain.SysPerson;
 import com.justonetech.system.domain.SysUser;
 import com.justonetech.system.manager.ExcelPrintManager;
 import com.justonetech.system.manager.SimpleQueryManager;
@@ -132,9 +133,17 @@ public class AreaSgPermitController extends BaseCRUDActionController<AreaSgPermi
         try {
             Page pageModel = new Page(page, rows, true);
             SysUser sysUser = sysUserManager.getSysUser();
+            String area = "";
+            SysPerson person = sysUser.getPerson();
+            if (null != person) {
+                area = person.getAreaCode();
+            }
             String hql = "from AreaSgPermit where 1=1";
             if (null != sysUser.getRegPerson()) {
                 hql += " and createUser='" + sysUser.getLoginName() + "'";
+            }
+            if (!StringHelper.isEmpty(area)) {
+                hql += " and areaCode='" + area + "'";
             }
             hql += " order by id desc";
             QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);
@@ -651,11 +660,6 @@ public class AreaSgPermitController extends BaseCRUDActionController<AreaSgPermi
                         "csOpinion",
                         "fhOpinion",
                         "shOpinion",
-//                        "fgldOpinion",
-//                        "zxldOpinion",
-//                        "jscOpinion",
-//                        "spcOpinion",
-//                        "wldOpinion",
                         "backNum",
                         "bzBackMaterial"
                 });

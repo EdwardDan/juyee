@@ -6,7 +6,7 @@
         var val = options.val();
         $(document.getElementById("tab1").contentWindow.document).find("#backNum").val(val);
         if ($(document.getElementById("tab1").contentWindow.document).find("#backNum").val()) {
-            document.getElementById("tab1").contentWindow.savaAudit("审核退回");
+            document.getElementById("tab1").contentWindow.savaAudit("审批退回");
         }
     }
 </script>
