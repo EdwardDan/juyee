@@ -5,7 +5,7 @@
     var val = $("#backMaterial").val();
     $(document.getElementById("tab1").contentWindow.document).find("#bzBackMaterial").val(val);
     if ($(document.getElementById("tab1").contentWindow.document).find("#bzBackMaterial").val()) {
-      document.getElementById("tab1").contentWindow.savaAudit("审核退回");
+      document.getElementById("tab1").contentWindow.savaAudit("审批退回");
     }
   }
 </script>

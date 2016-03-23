@@ -511,7 +511,17 @@
     </c:if>
     <div style="text-align: center;" class="tr_button">
         <c:if test="${!isReg}">
-            <input type="button" value="开工备案" class="button_normal_long" onclick="printExcel3()">
+            <c:if test="${not empty bean.acceptDate||not empty bean.csDate||not empty bean.fhDate||not empty bean.shDate}">
+                <input type="button" value="收件凭证" class="button_normal_long" onclick="printView1()">
+            </c:if>
+            <c:if test="${not empty bean.shDate}">
+                <input type="button" value="受理通知书" class="button_normal_long" onclick="printView2()">
+                <input type="button" value="不予受理决定书" class="button_normal_longer" onclick="printView3()">
+                <input type="button" value="补正材料" class="button_normal_long" onclick="printView4()">
+            </c:if>
+            <c:if test="${bean.status == STATUS_SH_PASS}">
+                <input type="button" value="开工备案" class="button_normal_long" onclick="printExcel3()">
+            </c:if>
         </c:if>
         <input type="button" value="关闭" class="button_cancel" onclick="parent.closeWindow()">
     </div>

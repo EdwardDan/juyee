@@ -383,11 +383,21 @@
     </c:if>
     <div style="text-align: center;" class="tr_button">
         <c:if test="${!isReg}">
-            <c:if test="${!isGreen}">
-                <input type="button" value="施工许可" class="button_normal_long" onclick="printExcel1()">
+            <c:if test="${not empty bean.acceptDate||not empty bean.csDate||not empty bean.fhDate||not empty bean.shDate}">
+                <input type="button" value="收件凭证" class="button_normal_long" onclick="printView1()">
             </c:if>
-            <c:if test="${isGreen}">
-                <input type="button" value="施工许可（绿色）" class="button_normal_longer" onclick="printExcel2()">
+            <c:if test="${not empty bean.shDate}">
+                <input type="button" value="受理通知书" class="button_normal_long" onclick="printView2()">
+                <input type="button" value="不予受理决定书" class="button_normal_longer" onclick="printView3()">
+                <input type="button" value="补正材料" class="button_normal_long" onclick="printView4()">
+            </c:if>
+            <c:if test="${bean.status == STATUS_SH_PASS}">
+                <c:if test="${!isGreen}">
+                    <input type="button" value="施工许可" class="button_normal_long" onclick="printExcel1()">
+                </c:if>
+                <c:if test="${isGreen}">
+                    <input type="button" value="施工许可（绿色）" class="button_normal_longer" onclick="printExcel2()">
+                </c:if>
             </c:if>
         </c:if>
         <input type="button" value="关闭" class="button_cancel" onclick="parent.closeWindow()">
