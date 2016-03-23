@@ -1,5 +1,7 @@
 package com.justonetech.biz.domain.base;
 
+import com.justonetech.core.entity.Auditable;
+
 import java.io.Serializable;
 
 
@@ -21,7 +23,7 @@ import java.io.Serializable;
  *  table="AREA_SG_PERMIT"
  */
 
-public abstract class BaseAreaSgPermit  implements Serializable {
+public abstract class BaseAreaSgPermit  implements Serializable, Auditable {
 
 	public static String REF = "AreaSgPermit";
 	public static String PROP_SPC_OPINION = "spcOpinion";
@@ -131,299 +133,299 @@ public abstract class BaseAreaSgPermit  implements Serializable {
     /*业务编号*/
     /*业务编号*/
 	private java.lang.String bizCode;
-	
+
     /*年*/
     /*年*/
 	private java.lang.Integer year;
-	
+
     /*区县编码*/
     /*区县编码*/
 	private java.lang.String areaCode;
-	
+
     /*区县名称*/
     /*区县名称*/
 	private java.lang.String areaName;
-	
+
     /*报建编号*/
     /*报建编号*/
 	private java.lang.String bjbh;
-	
+
     /*项目名称*/
     /*项目名称*/
 	private java.lang.String projectName;
-	
+
     /*建设单位*/
     /*建设单位*/
 	private java.lang.String buildName;
-	
+
     /*建设单位性质*/
     /*建设单位性质*/
 	private java.lang.String buildUnitType;
-	
+
     /*建设单位地址*/
     /*建设单位地址*/
 	private java.lang.String buildUnitAddress;
-	
+
     /*建设地点*/
     /*建设地点*/
 	private java.lang.String buildSite;
-	
+
     /*建设工程规模*/
     /*建设工程规模*/
 	private java.lang.String buildProjSize;
-	
+
     /*合同价格*/
     /*合同价格*/
 	private java.lang.Double contractPrice;
-	
+
     /*合同工期*/
     /*合同工期*/
 	private java.lang.String contractPeriod;
-	
+
     /*法定代表人*/
     /*法定代表人*/
 	private java.lang.String fr;
-	
+
     /*建设单位联系电话*/
     /*建设单位联系电话*/
 	private java.lang.String buildUnitPhone;
-	
+
     /*建设单位联系人*/
     /*建设单位联系人*/
 	private java.lang.String buildUnitPerson;
-	
+
     /*手机号*/
     /*手机号*/
 	private java.lang.String buildUnitMobile;
-	
+
     /*建设用地批准文件编号*/
     /*建设用地批准文件编号*/
 	private java.lang.String buildFileCode;
-	
+
     /*建设工程规划许可证编号*/
     /*建设工程规划许可证编号*/
 	private java.lang.String buildXkzCode;
-	
+
     /*现场开工情况*/
     /*现场开工情况*/
 	private java.lang.String startWorkCon;
-	
+
     /*沪交管收字_年*/
     /*沪交管收字_年*/
 	private java.lang.Integer hjgYear;
-	
+
     /*沪交管收字_号*/
     /*沪交管收字_号*/
 	private java.lang.Integer hjgNum;
-	
+
     /*申请人*/
     /*申请人*/
 	private java.lang.String applyPerson;
-	
+
     /*申请事项*/
     /*申请事项*/
 	private java.lang.String applyMatter;
-	
+
     /*申请号*/
     /*申请号*/
 	private java.lang.String applyNum;
-	
+
     /*材料提交人*/
     /*材料提交人*/
 	private java.lang.String materialPerson;
-	
+
     /*材料提交人联系电话*/
     /*材料提交人联系电话*/
 	private java.lang.String materialPersonPhone;
-	
+
     /*材料提交人联系地址*/
     /*材料提交人联系地址*/
 	private java.lang.String materialPersonAddress;
-	
+
     /*收件人*/
     /*收件人*/
 	private java.lang.String receivePerson;
-	
+
     /*收件人联系电话*/
     /*收件人联系电话*/
 	private java.lang.String receivePersonPhone;
-	
+
     /*状态*/
     /*状态*/
 	private java.lang.Integer status;
-	
+
     /*初审意见*/
     /*初审意见*/
 	private java.lang.String csOpinion;
-	
+
     /*初审用户*/
     /*初审用户*/
 	private java.lang.String csUser;
-	
+
     /*初审日期*/
     /*初审日期*/
 	private java.sql.Timestamp csDate;
-	
+
     /*复核意见*/
     /*复核意见*/
 	private java.lang.String fhOpinion;
-	
+
     /*复核用户*/
     /*复核用户*/
 	private java.lang.String fhUser;
-	
+
     /*复核日期*/
     /*复核日期*/
 	private java.sql.Timestamp fhDate;
-	
+
     /*审核意见*/
     /*审核意见*/
 	private java.lang.String shOpinion;
-	
+
     /*审核用户*/
     /*审核用户*/
 	private java.lang.String shUser;
-	
+
     /*审核日期*/
     /*审核日期*/
 	private java.sql.Timestamp shDate;
-	
+
     /*分管领导审核意见*/
     /*分管领导审核意见*/
 	private java.lang.String fgldOpinion;
-	
+
     /*分管领导审核用户*/
     /*分管领导审核用户*/
 	private java.lang.String fgldUser;
-	
+
     /*分管领导审核日期*/
     /*分管领导审核日期*/
 	private java.sql.Timestamp fgldDate;
-	
+
     /*中心领导审核意见*/
     /*中心领导审核意见*/
 	private java.lang.String zxldOpinion;
-	
+
     /*中心领导审核用户*/
     /*中心领导审核用户*/
 	private java.lang.String zxldUser;
-	
+
     /*中心领导审核日期*/
     /*中心领导审核日期*/
 	private java.sql.Timestamp zxldDate;
-	
+
     /*建设处审核意见*/
     /*建设处审核意见*/
 	private java.lang.String jscOpinion;
-	
+
     /*建设处审核用户*/
     /*建设处审核用户*/
 	private java.lang.String jscUser;
-	
+
     /*建设处审核日期*/
     /*建设处审核日期*/
 	private java.sql.Timestamp jscDate;
-	
+
     /*审批处审核意见*/
     /*审批处审核意见*/
 	private java.lang.String spcOpinion;
-	
+
     /*审批处审核用户*/
     /*审批处审核用户*/
 	private java.lang.String spcUser;
-	
+
     /*审批处审核日期*/
     /*审批处审核日期*/
 	private java.sql.Timestamp spcDate;
-	
+
     /*委领导审核意见*/
     /*委领导审核意见*/
 	private java.lang.String wldOpinion;
-	
+
     /*委领导审核用户*/
     /*委领导审核用户*/
 	private java.lang.String wldUser;
-	
+
     /*委领导审核日期*/
     /*委领导审核日期*/
 	private java.sql.Timestamp wldDate;
-	
+
     /*创建时间*/
     /*创建时间*/
 	private java.sql.Timestamp createTime;
-	
+
     /*创建用户名*/
     /*创建用户名*/
 	private java.lang.String createUser;
-	
+
     /*更新时间*/
     /*更新时间*/
 	private java.sql.Timestamp updateTime;
-	
+
     /*更新用户名*/
     /*更新用户名*/
 	private java.lang.String updateUser;
-	
+
     /*提交日期*/
     /*提交日期*/
 	private java.sql.Timestamp submitDate;
-	
+
     /*退回编号*/
     /*退回编号*/
 	private java.lang.Integer backNum;
-	
+
     /*受理编号*/
     /*受理编号*/
 	private java.lang.String acceptCode;
-	
+
     /*受理人*/
     /*受理人*/
 	private java.lang.String acceptPerson;
-	
+
     /*受理日期*/
     /*受理日期*/
 	private java.sql.Timestamp acceptDate;
-	
+
     /*受理意见*/
     /*受理意见*/
 	private java.lang.String acceptOpinion;
-	
+
     /*合同开工日期*/
     /*合同开工日期*/
 	private java.sql.Date contractBeginDate;
-	
+
     /*合同竣工日期*/
     /*合同竣工日期*/
 	private java.sql.Date contractEndDate;
-	
+
     /*中标价（万元）*/
     /*中标价（万元）*/
 	private java.lang.Double zbPrice;
-	
+
     /*建设工程类别ids*/
     /*建设工程类别ids*/
 	private java.lang.String buildLbIds;
-	
+
     /*补正退回材料*/
     /*补正退回材料*/
 	private java.lang.String bzBackMaterial;
-	
+
     /*项目投资估算（万元）*/
     /*项目投资估算（万元）*/
 	private java.lang.Double projectPlanCost;
-	
+
     /*施工单位*/
     /*施工单位*/
 	private java.lang.String sgUnitName;
-	
+
     /*监理单位*/
     /*监理单位*/
 	private java.lang.String jlUnitName;
-	
+
     /*设计单位*/
     /*设计单位*/
 	private java.lang.String sjUnitName;
-	
+
 
 	// many to one
 	private com.justonetech.system.domain.SysCodeDetail buildSx;
