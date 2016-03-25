@@ -91,6 +91,8 @@ public class AreaSgPermitManager {
 
         model.addAttribute("STATUS_EDIT", AreaSgPermitStatus.STATUS_EDIT.getCode());//未提交
         model.addAttribute("STATUS_SUBMIT", AreaSgPermitStatus.STATUS_SUBMIT.getCode());//已提交
+        model.addAttribute("STATUS_SLZX_PASS", AreaSgPermitStatus.STATUS_SLZX_PASS.getCode());//已提交
+        model.addAttribute("STATUS_SLZX_BACK", AreaSgPermitStatus.STATUS_SLZX_BACK.getCode());//已提交
         model.addAttribute("STATUS_CS_PASS", AreaSgPermitStatus.STATUS_CS_PASS.getCode());//建管中心初审通过
         model.addAttribute("STATUS_CS_BACK", AreaSgPermitStatus.STATUS_CS_BACK.getCode());//建管中心初审退回
         model.addAttribute("STATUS_FH_PASS", AreaSgPermitStatus.STATUS_FH_PASS.getCode());//建管中心复核通过

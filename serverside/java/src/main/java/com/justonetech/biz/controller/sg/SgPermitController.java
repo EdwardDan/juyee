@@ -130,7 +130,7 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
             if (null != sysUser.getRegPerson()) {
                 hql += " and createUser='" + sysUser.getLoginName() + "'";
             }
-            if (!StringHelper.isEmpty(area)) {
+            if (!"sh".equals(area) && !StringHelper.isEmpty(area)) {//上海市可以看到所有，区县只能看到对应区县
                 hql += " and areaCode='" + area + "'";
             }
             hql += " order by id desc";
