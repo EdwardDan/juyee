@@ -55,7 +55,7 @@
                                 opButton += '<input type="button" value="撤回" onclick="doCh(' + id + ')" class="button_normal"/> ';
                             }
                         }
-                        if (('' == status || status == '${STATUS_EDIT}' || status == '${STATUS_SLZX_BACK}' || status == '${STATUS_JGZX_YS_BACK}') && (status != '${STATUS_CH}')) {
+                        if (('' == status || status == '${STATUS_EDIT}' || status == '${STATUS_SLZX_BACK}' || status == '${STATUS_JGZX_YS_BACK}') && (status == '${STATUS_CH}')) {
                             if (${canEdit||isReg}) {
                                 opButton += '<input type="button" value="编辑" onclick="doEdit(' + id + ')" class="button_normal"/> ';
                                 opButton += '<input type="button" value="删除" onclick="doDelete(' + id + ')" class="button_normal"/> ';
