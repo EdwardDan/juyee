@@ -70,7 +70,7 @@
                     <td class="form_content">
                         <select name="areaCode" id="areaCode">
                             <c:forEach items="${areaList}" var="item">
-                                <option value="${item.code}">${item.name}</option>
+                                <option value="${item.code}" <c:if test="${bean.areaCode==item.code}">selected</c:if>>${item.name}</option>
                             </c:forEach>
                         </select>
                     </td>
