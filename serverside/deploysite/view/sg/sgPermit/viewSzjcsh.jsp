@@ -163,27 +163,28 @@
         </table>
     </fieldset>
     <div class="div_space"></div>
-    <fieldset class="form_fieldset" style="width: 96%;">
-        <legend>建管中心预审</legend>
-        <table cellpadding="0" cellspacing="0" class="form_table">
-            <tr class="tr_light">
-                <td class="form_label_right" nowrap style="width: 20%;">预审信息：</td>
-                <td class="form_content" style="width: 80%;">
-                    <sys:toHtml>${bean.jgzxYsOpinion}</sys:toHtml>
-                </td>
-            </tr>
-            <tr class="tr_light">
-                <td class="form_label_right" nowrap style="width: 20%;">预审时间：</td>
-                <td class="form_content" style="width: 80%;">
-                    <fmt:formatDate value="${bean.jgzxYsDate}" pattern="yyyy-MM-dd HH:mm"/>
-                </td>
-            </tr>
-        </table>
-    </fieldset>
+    <c:if test="${not empty bean.jgzxYsDate}">
+        <fieldset class="form_fieldset" style="width: 96%;">
+            <legend>建管中心预审</legend>
+            <table cellpadding="0" cellspacing="0" class="form_table">
+                <tr class="tr_light">
+                    <td class="form_label_right" nowrap style="width: 20%;">预审信息：</td>
+                    <td class="form_content" style="width: 80%;">
+                        <sys:toHtml>${bean.jgzxYsOpinion}</sys:toHtml>
+                    </td>
+                </tr>
+                <tr class="tr_light">
+                    <td class="form_label_right" nowrap style="width: 20%;">预审时间：</td>
+                    <td class="form_content" style="width: 80%;">
+                        <fmt:formatDate value="${bean.jgzxYsDate}" pattern="yyyy-MM-dd HH:mm"/>
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+    </c:if>
     <c:if test="${!isReg}">
         <div class="div_space"></div>
-        <c:if test="${bean.status != STATUS_EDIT||bean.status != STATUS_SUBMIT||bean.status != STATUS_SLZX_BACK}">
-        <%--<c:if test="${bean.status == STATUS_SLZX_PASS||bean.status==STATUS_CS_PASS||bean.status==STATUS_FH_PASS||bean.status==STATUS_SH_PASS||bean.status==STATUS_FGLD_PASS||bean.status==STATUS_ZXLD_PASS||bean.status==STATUS_WLD_PASS||bean.status==STATUS_WLD_BACK}">--%>
+        <c:if test="${not empty bean.acceptDate}">
             <fieldset class="form_fieldset" style="width: 96%;">
                 <legend>受理初审</legend>
                 <table cellpadding="0" cellspacing="0" class="form_table">
@@ -245,8 +246,7 @@
             </fieldset>
         </c:if>
         <div class="div_space"></div>
-        <c:if test="${bean.status != STATUS_EDIT||bean.status != STATUS_SUBMIT||bean.status != STATUS_SLZX_BACK}">
-        <%--<c:if test="${bean.status==STATUS_CS_PASS||bean.status==STATUS_FH_PASS||bean.status==STATUS_SH_PASS||bean.status==STATUS_SH_BACK||bean.status==STATUS_FGLD_PASS||bean.status==STATUS_FGLD_BACK||bean.status==STATUS_ZXLD_PASS||bean.status==STATUS_ZXLD_BACK||bean.status==STATUS_WLD_PASS||bean.status==STATUS_WLD_BACK}">--%>
+        <c:if test="${not empty bean.csDate||not empty bean.fhDate||not empty bean.shDate}">
             <fieldset class="form_fieldset" style="width: 96%;">
                 <legend>审核信息</legend>
                 <table cellpadding="0" cellspacing="0" class="form_table">
