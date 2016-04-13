@@ -86,6 +86,19 @@
     function doDelete(id) {
         doGridDelete("${ctx}/oaPetition/delete.do?id=" + id);
     }
+
+    function doImport() {
+        <%--parent.openWindow("信访管理Excel数据导入", "${ctx}/common/excelLoader.jsp?title=" + encodeURI("信访管理Excel数据导入") + "&excelLoadHandler=${ctx}/oaPetition/importExl2Entity.do&excelTemplateUrl=", true, 550, 450);--%>
+        openFullWindow("${ctx}/common/excelSelector.jsp?title=" + encodeURI("信访管理Excel数据导入") + "&excelOverviewHandler=${ctx}/oaPetition/excelOverview.do&excelLoadHandler=${ctx}/oaPetition/excelLoad.do&excelTemplateUrl=", 750, 450, "jxlWin");
+        <%--openWindow("信访管理Excel数据导入", "${ctx}/common/excelSelector.jsp?title=" + encodeURI("信访管理Excel数据导入") + "&excelOverviewHandler=${ctx}/oaPetition/excelOverview.do&excelLoadHandler=${ctx}/oaPetition/excelLoad.do&excelTemplateUrl=", true, 550, 450);--%>
+        <%--parent.openWindow("信访管理Excel数据导入", "${ctx}/common/excelSelector.jsp?title=" + encodeURI("信访管理Excel数据导入") + "&excelOverviewHandler=${ctx}/oaPetition/excelOverview.do&excelLoadHandler=${ctx}/oaPetition/excelLoad.do&excelTemplateUrl=", true, 550, 450);--%>
+        <%--window.location = "${ctx}/oaPetition/importExl2Entity.do";--%>
+    }
+
+    function refreshListGrid() {
+        refreshGrid("listGrid");
+        <%--refreshIframGrid("${iframid}", null);--%>
+    }
     </c:if>
 </script>
 
@@ -102,6 +115,8 @@
             <c:if test="${canEdit}">
                 <input type="button" value="添加" class="button_add"
                        onclick="doAdd()"/>
+                <input type="button" value="导入" class="button_normal"
+                       onclick="doImport()"/>
             </c:if>
         </div>
     </div>
