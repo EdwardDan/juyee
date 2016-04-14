@@ -200,14 +200,12 @@ public class OaWeekArrangeController extends BaseCRUDActionController<OaWeekArra
                 for (SysUser user : userList) {
                     for (SysCodeDetail period : periodList) {
                         for (String date : dates) {
+                            String hql = "from OaWeekArrange where day=? and user.id=? and timePeriod.id=?";
+                            List<OaWeekArrange> arrangeList = oaWeekArrangeService.findByQuery(hql, Date.valueOf(date), user.getId(), period.getId());
+                            oaWeekArrangeService.batchDelete(arrangeList,arrangeList.size());
                             String value = request.getParameter("content_" + user.getId() + "_" + period.getId() + "_" + date);
                             if (!StringHelper.isEmpty(value)) {
                                 OaWeekArrange oaWeekArrange = new OaWeekArrange();
-                                String hql = "from OaWeekArrange where day=? and user.id=? and timePeriod.id=?";
-                                List<OaWeekArrange> arrangeList = oaWeekArrangeService.findByQuery(hql, Date.valueOf(date), user.getId(), period.getId());
-                                if (null != arrangeList && arrangeList.size() > 0) {
-                                    oaWeekArrange = arrangeList.iterator().next();
-                                }
                                 oaWeekArrange.setUser(user);
                                 oaWeekArrange.setTimePeriod(period);
                                 oaWeekArrange.setDay(Date.valueOf(date));
