@@ -75,19 +75,17 @@
         gridinit($("#listGrid"), conf);
     });
     function doView(id) {
-        openWindow("查看项目基本信息", "${ctx}/projInfo/view.do?id=" + id, false, 800, 500);
+        openWindow("查看项目基本信息", "${ctx}/projInfo/view.do?id=" + id, false, 900, 500);
     }
-    <c:if test="${canEdit}">
     function doAdd() {
-        openWindow("添加项目基本信息", "${ctx}/projInfo/add.do", true, 800, 500);
+        openWindow("添加项目基本信息", "${ctx}/projInfo/add.do", true, 900, 500);
     }
     function doEdit(id) {
-        openWindow("修改项目基本信息", "${ctx}/projInfo/modify.do?id=" + id, true, 800, 500);
+        openWindow("修改项目基本信息", "${ctx}/projInfo/modify.do?id=" + id, true, 900, 500);
     }
     function doDelete(id) {
         doGridDelete("${ctx}/projInfo/delete.do?id=" + id);
     }
-    </c:if>
 
     function viewBidInfoFormat1(cellvalue, options, rowObject) {
         var title = "查看办证推进标段（" + rowObject["name"] + "）";

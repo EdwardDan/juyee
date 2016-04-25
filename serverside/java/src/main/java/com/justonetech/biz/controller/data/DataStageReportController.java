@@ -4,6 +4,7 @@ import com.justonetech.biz.core.orm.hibernate.GridJq;
 import com.justonetech.biz.core.orm.hibernate.QueryTranslateJq;
 import com.justonetech.biz.daoservice.*;
 import com.justonetech.biz.domain.*;
+import com.justonetech.biz.manager.ProjectInfoContentManager;
 import com.justonetech.biz.manager.ProjectRelateManager;
 import com.justonetech.biz.utils.Constants;
 import com.justonetech.biz.utils.enums.ProjBidType;
@@ -68,6 +69,10 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
 
     @Autowired
     private ProjectRelateManager projectRelateManager;
+
+    @Autowired
+    private ProjectInfoContentManager projectInfoContentManager;
+
 
     /**
      * 列表显示页面
@@ -190,6 +195,9 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
         }
         model.addAttribute("currentMonth", month);
         model.addAttribute("projectId", projectId);
+
+        ProjInfo projInfo = projInfoService.get(projectId);
+        projectInfoContentManager.setReportContent(model, projInfo.getProjContent());
 
         return "view/data/dataStageReport/input";
     }

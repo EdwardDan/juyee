@@ -93,7 +93,7 @@
             <tr class="tr_light">
                 <td class="form_label_right">建设单位：</td>
                 <td class="form_content">
-                        ${projInfo.jsDept}
+                        ${content.jsgs}
                 </td>
             </tr>
             <tr class="tr_light">

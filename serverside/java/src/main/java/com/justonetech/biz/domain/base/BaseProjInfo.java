@@ -1,8 +1,10 @@
 package com.justonetech.biz.domain.base;
 
 import com.justonetech.core.entity.Auditable;
+import com.justonetech.system.domain.SysCodeDetail;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 
 /**
@@ -93,103 +95,71 @@ public abstract class BaseProjInfo  implements Serializable,Auditable {
     /*项目名称*/
     /*项目名称*/
 	private String name;
-	
+
     /*年份*/
     /*年份*/
 	private Integer year;
-	
+
     /*项目序号*/
     /*项目序号*/
 	private Integer no;
-	
+
     /*建设里程*/
     /*建设里程*/
 	private String buildMileage;
-	
+
     /*起讫地点*/
     /*起讫地点*/
 	private String location;
-	
+
     /*开工日期*/
     /*开工日期*/
 	private java.sql.Date startDate;
-	
+
+	/*完工日期*/
+    /*完工日期*/
+	private java.sql.Date endDate;
+
     /*工程简介*/
     /*工程简介*/
 	private String intro;
-	
-    /*建设单位*/
-    /*建设单位*/
-	private String jsDept;
-	
-    /*施工单位*/
-    /*施工单位*/
-	private String sgDept;
-	
-    /*施工单位联系人*/
-    /*施工单位联系人*/
-	private String sgDeptPerson;
-	
-    /*施工单位联系电话*/
-    /*施工单位联系电话*/
-	private String sgDeptTel;
-	
-    /*监理单位*/
-    /*监理单位*/
-	private String jlDept;
-	
-    /*监理单位联系人*/
-    /*监理单位联系人*/
-	private String jlDeptPerson;
-	
-    /*监理单位联系电话*/
-    /*监理单位联系电话*/
-	private String jlDeptTel;
-	
+
     /*创建时间*/
     /*创建时间*/
 	private java.sql.Timestamp createTime;
-	
+
     /*更新时间*/
     /*更新时间*/
 	private java.sql.Timestamp updateTime;
-	
+
     /*创建人*/
     /*创建人(记录帐号）*/
 	private String createUser;
-	
+
     /*更新人*/
     /*更新人(记录帐号）*/
 	private String updateUser;
-	
-    /*建设单位联系人*/
-    /*建设单位联系人*/
-	private String jsDeptPerson;
-	
-    /*建设单位联系电话*/
-    /*建设单位联系电话*/
-	private String jsDeptTel;
-	
+
     /*功能作用*/
     /*功能作用*/
 	private String function;
-	
+
     /*工程范围*/
     /*工程范围*/
 	private String engineerRange;
-	
+
     /*主要内容*/
     /*主要内容*/
 	private String mainContent;
-	
+
     /*是否重大*/
     /*是否重大*/
 	private Boolean isMajor;
-	
+
     /*所属区县*/
     /*所属区县*/
 	private String areaCode;
-	
+
     /*打包属性*/
     /*打包属性*/
 	private String packageAttr;
@@ -197,7 +167,35 @@ public abstract class BaseProjInfo  implements Serializable,Auditable {
 	/*项目号*/
     /*项目号*/
 	private String projNum;
-	
+
+	private Double ghhx;//规划红线（宽度m）
+
+	/*开工节点*/
+    /*开工节点*/
+	private java.sql.Date kgjd;
+
+	/*完工节点*/
+    /*完工节点*/
+	private java.sql.Date wgjd;
+
+	/*计划开工日期*/
+    /*计划开工日期*/
+	private java.sql.Date planStartDate;
+
+	/*计划完工日期*/
+    /*计划完工日期*/
+	private java.sql.Date planEndDate;
+
+	private Double planTotalInvest;//计划总投资
+	private Double gkpfTotalInvest;//工可批复总投资
+	private Double gkpfPreInvest;//工可批复前期费用
+	private Double gkpfJaInvest;//工可批复建安费用
+	private Double csTotalInvest;//初设批复总投资
+	private Double csPreInvest;//初设批复前期费用
+	private Double csJaInvest;//初设批复建安费用
+
+	private String projContent;//项目相关信息
+
 
 	// many to one
 	private com.justonetech.system.domain.SysCodeDetail property;
@@ -205,6 +203,9 @@ public abstract class BaseProjInfo  implements Serializable,Auditable {
 	private com.justonetech.system.domain.SysCodeDetail category;
 	private com.justonetech.system.domain.SysCodeDetail managerAttr;
 	private com.justonetech.system.domain.SysCodeDetail projectSource;
+	private com.justonetech.system.domain.SysCodeDetail roadGrade;
+	private com.justonetech.system.domain.SysCodeDetail roadTecGrade;
+	private com.justonetech.system.domain.SysCodeDetail projProperty;
 
 	// collections
 	private java.util.Set<com.justonetech.biz.domain.ProjBid> projBids;
@@ -356,119 +357,6 @@ public abstract class BaseProjInfo  implements Serializable,Auditable {
 		this.intro = intro;
 	}
 
-
-	/**
-	 * Return the value associated with the column: JS_DEPT
-	 */
-	public String getJsDept () {
-		return jsDept;
-	}
-
-	/**
-	 * Set the value related to the column: JS_DEPT
-	 * @param jsDept the JS_DEPT value
-	 */
-	public void setJsDept (String jsDept) {
-		this.jsDept = jsDept;
-	}
-
-
-	/**
-	 * Return the value associated with the column: SG_DEPT
-	 */
-	public String getSgDept () {
-		return sgDept;
-	}
-
-	/**
-	 * Set the value related to the column: SG_DEPT
-	 * @param sgDept the SG_DEPT value
-	 */
-	public void setSgDept (String sgDept) {
-		this.sgDept = sgDept;
-	}
-
-
-	/**
-	 * Return the value associated with the column: SG_DEPT_PERSON
-	 */
-	public String getSgDeptPerson () {
-		return sgDeptPerson;
-	}
-
-	/**
-	 * Set the value related to the column: SG_DEPT_PERSON
-	 * @param sgDeptPerson the SG_DEPT_PERSON value
-	 */
-	public void setSgDeptPerson (String sgDeptPerson) {
-		this.sgDeptPerson = sgDeptPerson;
-	}
-
-
-	/**
-	 * Return the value associated with the column: SG_DEPT_TEL
-	 */
-	public String getSgDeptTel () {
-		return sgDeptTel;
-	}
-
-	/**
-	 * Set the value related to the column: SG_DEPT_TEL
-	 * @param sgDeptTel the SG_DEPT_TEL value
-	 */
-	public void setSgDeptTel (String sgDeptTel) {
-		this.sgDeptTel = sgDeptTel;
-	}
-
-
-	/**
-	 * Return the value associated with the column: JL_DEPT
-	 */
-	public String getJlDept () {
-		return jlDept;
-	}
-
-	/**
-	 * Set the value related to the column: JL_DEPT
-	 * @param jlDept the JL_DEPT value
-	 */
-	public void setJlDept (String jlDept) {
-		this.jlDept = jlDept;
-	}
-
-
-	/**
-	 * Return the value associated with the column: JL_DEPT_PERSON
-	 */
-	public String getJlDeptPerson () {
-		return jlDeptPerson;
-	}
-
-	/**
-	 * Set the value related to the column: JL_DEPT_PERSON
-	 * @param jlDeptPerson the JL_DEPT_PERSON value
-	 */
-	public void setJlDeptPerson (String jlDeptPerson) {
-		this.jlDeptPerson = jlDeptPerson;
-	}
-
-
-	/**
-	 * Return the value associated with the column: JL_DEPT_TEL
-	 */
-	public String getJlDeptTel () {
-		return jlDeptTel;
-	}
-
-	/**
-	 * Set the value related to the column: JL_DEPT_TEL
-	 * @param jlDeptTel the JL_DEPT_TEL value
-	 */
-	public void setJlDeptTel (String jlDeptTel) {
-		this.jlDeptTel = jlDeptTel;
-	}
-
-
 	/**
 	 * Return the value associated with the column: CREATE_TIME
 	 */
@@ -531,39 +419,6 @@ public abstract class BaseProjInfo  implements Serializable,Auditable {
 	public void setUpdateUser (String updateUser) {
 		this.updateUser = updateUser;
 	}
-
-
-	/**
-	 * Return the value associated with the column: JS_DEPT_PERSON
-	 */
-	public String getJsDeptPerson () {
-		return jsDeptPerson;
-	}
-
-	/**
-	 * Set the value related to the column: JS_DEPT_PERSON
-	 * @param jsDeptPerson the JS_DEPT_PERSON value
-	 */
-	public void setJsDeptPerson (String jsDeptPerson) {
-		this.jsDeptPerson = jsDeptPerson;
-	}
-
-
-	/**
-	 * Return the value associated with the column: JS_DEPT_TEL
-	 */
-	public String getJsDeptTel () {
-		return jsDeptTel;
-	}
-
-	/**
-	 * Set the value related to the column: JS_DEPT_TEL
-	 * @param jsDeptTel the JS_DEPT_TEL value
-	 */
-	public void setJsDeptTel (String jsDeptTel) {
-		this.jsDeptTel = jsDeptTel;
-	}
-
 
 	/**
 	 * Return the value associated with the column: FUNCTION
@@ -668,7 +523,143 @@ public abstract class BaseProjInfo  implements Serializable,Auditable {
         this.projNum = projNum;
     }
 
-    /**
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+
+	public Double getGhhx() {
+		return ghhx;
+	}
+
+	public void setGhhx(Double ghhx) {
+		this.ghhx = ghhx;
+	}
+
+	public Date getKgjd() {
+		return kgjd;
+	}
+
+	public void setKgjd(Date kgjd) {
+		this.kgjd = kgjd;
+	}
+
+	public Date getWgjd() {
+		return wgjd;
+	}
+
+	public void setWgjd(Date wgjd) {
+		this.wgjd = wgjd;
+	}
+
+	public Date getPlanStartDate() {
+		return planStartDate;
+	}
+
+	public void setPlanStartDate(Date planStartDate) {
+		this.planStartDate = planStartDate;
+	}
+
+	public Date getPlanEndDate() {
+		return planEndDate;
+	}
+
+	public void setPlanEndDate(Date planEndDate) {
+		this.planEndDate = planEndDate;
+	}
+
+	public Double getPlanTotalInvest() {
+		return planTotalInvest;
+	}
+
+	public void setPlanTotalInvest(Double planTotalInvest) {
+		this.planTotalInvest = planTotalInvest;
+	}
+
+	public Double getGkpfTotalInvest() {
+		return gkpfTotalInvest;
+	}
+
+	public void setGkpfTotalInvest(Double gkpfTotalInvest) {
+		this.gkpfTotalInvest = gkpfTotalInvest;
+	}
+
+	public Double getGkpfPreInvest() {
+		return gkpfPreInvest;
+	}
+
+	public void setGkpfPreInvest(Double gkpfPreInvest) {
+		this.gkpfPreInvest = gkpfPreInvest;
+	}
+
+	public Double getGkpfJaInvest() {
+		return gkpfJaInvest;
+	}
+
+	public void setGkpfJaInvest(Double gkpfJaInvest) {
+		this.gkpfJaInvest = gkpfJaInvest;
+	}
+
+	public Double getCsTotalInvest() {
+		return csTotalInvest;
+	}
+
+	public void setCsTotalInvest(Double csTotalInvest) {
+		this.csTotalInvest = csTotalInvest;
+	}
+
+	public Double getCsPreInvest() {
+		return csPreInvest;
+	}
+
+	public void setCsPreInvest(Double csPreInvest) {
+		this.csPreInvest = csPreInvest;
+	}
+
+	public Double getCsJaInvest() {
+		return csJaInvest;
+	}
+
+	public void setCsJaInvest(Double csJaInvest) {
+		this.csJaInvest = csJaInvest;
+	}
+
+	public String getProjContent() {
+		return projContent;
+	}
+
+	public void setProjContent(String projContent) {
+		this.projContent = projContent;
+	}
+
+	public SysCodeDetail getRoadGrade() {
+		return roadGrade;
+	}
+
+	public void setRoadGrade(SysCodeDetail roadGrade) {
+		this.roadGrade = roadGrade;
+	}
+
+	public SysCodeDetail getRoadTecGrade() {
+		return roadTecGrade;
+	}
+
+	public void setRoadTecGrade(SysCodeDetail roadTecGrade) {
+		this.roadTecGrade = roadTecGrade;
+	}
+
+	public SysCodeDetail getProjProperty() {
+		return projProperty;
+	}
+
+	public void setProjProperty(SysCodeDetail projProperty) {
+		this.projProperty = projProperty;
+	}
+
+	/**
 	 * Return the value associated with the column: PROPERTY_ID
 	 */
 	public com.justonetech.system.domain.SysCodeDetail getProperty () {
@@ -894,19 +885,10 @@ public abstract class BaseProjInfo  implements Serializable,Auditable {
 		builder.append(location);
 		builder.append(startDate);
 		builder.append(intro);
-		builder.append(jsDept);
-		builder.append(sgDept);
-		builder.append(sgDeptPerson);
-		builder.append(sgDeptTel);
-		builder.append(jlDept);
-		builder.append(jlDeptPerson);
-		builder.append(jlDeptTel);
 		builder.append(createTime);
 		builder.append(updateTime);
 		builder.append(createUser);
 		builder.append(updateUser);
-		builder.append(jsDeptPerson);
-		builder.append(jsDeptTel);
 		builder.append(function);
 		builder.append(engineerRange);
 		builder.append(mainContent);

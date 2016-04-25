@@ -4,6 +4,7 @@ import com.justonetech.biz.core.orm.hibernate.GridJq;
 import com.justonetech.biz.core.orm.hibernate.QueryTranslateJq;
 import com.justonetech.biz.daoservice.*;
 import com.justonetech.biz.domain.*;
+import com.justonetech.biz.manager.ProjectInfoContentManager;
 import com.justonetech.biz.manager.ProjectRelateManager;
 import com.justonetech.biz.utils.Constants;
 import com.justonetech.biz.utils.enums.ProjBidType;
@@ -61,6 +62,9 @@ public class DataNodeReportController extends BaseCRUDActionController<DataNodeR
 
     @Autowired
     private ProjectRelateManager projectRelateManager;
+
+    @Autowired
+    private ProjectInfoContentManager projectInfoContentManager;
 
     /**
      * 列表显示页面
@@ -149,6 +153,9 @@ public class DataNodeReportController extends BaseCRUDActionController<DataNodeR
         model.addAttribute("projBids", projBids);
         model.addAttribute("bean", dataNodeReport);
         model.addAttribute("id", projInfo.getId());
+
+        projectInfoContentManager.setReportContent(model, projInfo.getProjContent());
+
         return "view/data/dataNodeReport/input";
     }
 

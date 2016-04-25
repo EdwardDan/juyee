@@ -110,7 +110,7 @@
             </tr>
             <tr class="tr_light">
                 <td class="form_label_right" style="width: 15%;">建设单位：</td>
-                <td class="form_content">${bean.project.jsDept}</td>
+                <td class="form_content">${content.jsgs}</td>
             </tr>
             <tr class="tr_dark">
                 <td class="form_label_right" style="width: 15%;">选择标段：</td>

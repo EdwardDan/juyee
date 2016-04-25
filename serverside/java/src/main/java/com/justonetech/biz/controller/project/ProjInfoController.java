@@ -2,12 +2,14 @@ package com.justonetech.biz.controller.project;
 
 import com.justonetech.biz.core.orm.hibernate.GridJq;
 import com.justonetech.biz.core.orm.hibernate.QueryTranslateJq;
+import com.justonetech.biz.daoservice.ProjBidService;
 import com.justonetech.biz.daoservice.ProjInfoAreaService;
 import com.justonetech.biz.daoservice.ProjInfoService;
 import com.justonetech.biz.domain.ProjBid;
 import com.justonetech.biz.domain.ProjInfo;
 import com.justonetech.biz.domain.ProjInfoArea;
 import com.justonetech.biz.manager.ProjInfoManager;
+import com.justonetech.biz.manager.ProjectInfoContentManager;
 import com.justonetech.biz.manager.ProjectRelateManager;
 import com.justonetech.biz.utils.Constants;
 import com.justonetech.biz.utils.enums.ProjBidType;
@@ -69,6 +71,12 @@ public class ProjInfoController extends BaseCRUDActionController<ProjInfo> {
 
     @Autowired
     private ProjectRelateManager projectRelateManager;
+
+    @Autowired
+    private ProjectInfoContentManager projectInfoContentManager;
+
+    @Autowired
+    private ProjBidService projBidService;
 
     /**
      * 列表显示页面
@@ -158,6 +166,8 @@ public class ProjInfoController extends BaseCRUDActionController<ProjInfo> {
         model.addAttribute("yearSelectOptions", yearSelectOptions);
         model.addAttribute("bean", projInfo);
 
+        projectInfoContentManager.setReportContent(model, projInfo.getProjContent());
+
         return "view/project/projInfo/input";
     }
 
@@ -177,6 +187,8 @@ public class ProjInfoController extends BaseCRUDActionController<ProjInfo> {
         model.addAttribute("yearSelectOptions", yearSelectOptions);
         model.addAttribute("bean", projInfo);
         model.addAttribute("areas", projInfo.getBelongAreaNames());
+
+        projectInfoContentManager.setReportContent(model, projInfo.getProjContent());
 
         return "view/project/projInfo/input";
     }
@@ -202,6 +214,8 @@ public class ProjInfoController extends BaseCRUDActionController<ProjInfo> {
         model.addAttribute("areas", areaList);
 //        model.addAttribute("areas", projInfo.getBelongAreaNames());
         model.addAttribute("isTab", isTab);
+
+        projectInfoContentManager.setReportContent(model, projInfo.getProjContent());
 
         return "view/project/projInfo/view";
     }
@@ -249,40 +263,54 @@ public class ProjInfoController extends BaseCRUDActionController<ProjInfo> {
                         "bjbh",
                         "projNum",
                         "name",
-//                        "year",
                         "no",
                         "buildMileage",
                         "location",
                         "startDate",
-//                        "intro",
-                        "jsDept",
-                        "jsDeptPerson",
-                        "jsDeptTel",
-                        "sgDept",
-                        "sgDeptPerson",
-                        "sgDeptTel",
-                        "jlDept",
-                        "jlDeptPerson",
-                        "jlDeptTel",
+                        "endDate",
+                        "planStartDate",
+                        "planEndDate",
+                        "kgjd",
+                        "wgjd",
+                        "intro",
                         "isMajor",
-                        "function",
-                        "engineerRange",
-                        "mainContent",
+                        "planTotalInvest",
+                        "gkpfTotalInvest",
+                        "gkpfPreInvest",
+                        "gkpfJaInvest",
+                        "csTotalInvest",
+                        "csPreInvest",
+                        "csJaInvest",
+                        "ghhx",
+//                        "function",
+//                        "engineerRange",
+//                        "mainContent",
                 });
 
             } else {
                 target = entity;
             }
-
-            String year = request.getParameter("year");
-            String projProperty = request.getParameter("ProjProperty");
-            String projStage = request.getParameter("ProjStage");
-            String projCategory = request.getParameter("ProjCategory");
-            String[] areaIds = request.getParameterValues("ProjBelongArea");
+//            String year = request.getParameter("year");
+//            target.setYear(Integer.valueOf(year));
+            String managerProperty = request.getParameter("managerProperty");//管理属性
+            String projStage = request.getParameter("ProjStage");//项目状态
+            String projCategory = request.getParameter("ProjCategory");//业态类别
+            String projProperty = request.getParameter("projProperty");//项目属性
+            String roadGrade = request.getParameter("roadGrade");//道路等级
+            String roadTecGrade = request.getParameter("roadTecGrade");//道路技术等级
+            String[] areaIds = request.getParameterValues("ProjBelongArea");//涉及区（县）
             String intro = request.getParameter("intro");
-            target.setYear(Integer.valueOf(year));
+            if (!StringHelper.isEmpty(managerProperty)) {
+                target.setProperty(sysCodeDetailService.get(Long.valueOf(managerProperty)));
+            }
             if (!StringHelper.isEmpty(projProperty)) {
-                target.setProperty(sysCodeDetailService.get(Long.valueOf(projProperty)));
+                target.setProjProperty(sysCodeDetailService.get(Long.valueOf(projProperty)));
+            }
+            if (!StringHelper.isEmpty(roadGrade)) {
+                target.setRoadGrade(sysCodeDetailService.get(Long.valueOf(roadGrade)));
+            }
+            if (!StringHelper.isEmpty(roadTecGrade)) {
+                target.setRoadTecGrade(sysCodeDetailService.get(Long.valueOf(roadTecGrade)));
             }
             if (!StringHelper.isEmpty(projStage)) {
                 target.setStage(sysCodeDetailService.get(Long.valueOf(projStage)));
@@ -303,8 +331,11 @@ public class ProjInfoController extends BaseCRUDActionController<ProjInfo> {
                 target.setAreaCode(sysCodeDetailService.get(JspHelper.getLong(area)).getName());
             }
 
-            String[] projPackageAttrs = request.getParameterValues("ProjPackageAttr");
-            target.setPackageAttr(StringHelper.join(projPackageAttrs, ","));
+//            String[] projPackageAttrs = request.getParameterValues("ProjPackageAttr");
+//            target.setPackageAttr(StringHelper.join(projPackageAttrs, ","));
+            //保存项目相关信息
+            String requestContent = projectInfoContentManager.getRequestContent(target, request);
+            target.setProjContent(requestContent);
 
             projInfoService.save(target);
 
@@ -347,7 +378,20 @@ public class ProjInfoController extends BaseCRUDActionController<ProjInfo> {
      */
     @RequestMapping
     public void delete(HttpServletResponse response, Long id) throws Exception {
-        projInfoService.delete(id);
+        ProjInfo projInfo = projInfoService.get(id);
+        Set<ProjInfoArea> projInfoAreas = projInfo.getProjInfoAreas();
+        if (null != projInfoAreas && projInfoAreas.size() > 0) {
+            for (ProjInfoArea projInfoArea : projInfoAreas) {
+                projInfoAreaService.delete(projInfoArea);
+            }
+        }
+        Set<ProjBid> projBids = projInfo.getProjBids();
+        if (null != projBids && projBids.size() > 0) {
+            for (ProjBid projBid : projBids) {
+                projBidService.delete(projBid);
+            }
+        }
+        projInfoService.delete(projInfo);
 
         sendSuccessJSON(response, "删除成功");
     }
@@ -356,12 +400,16 @@ public class ProjInfoController extends BaseCRUDActionController<ProjInfo> {
     private void modelStatus(Model model) {
         List<SysCodeDetail> areaList = sysCodeManager.getCodeListByCode(Constants.PROJ_INFO_BELONG_AREA);
         List<SysCodeDetail> propertyList = sysCodeManager.getCodeListByCode(Constants.PROJ_INFO_PROPERTY);
-        model.addAttribute("PROJ_INFO_SOURCE", Constants.PROJ_INFO_SOURCE); //项目来源
         model.addAttribute("propertyList", propertyList); //管理属性
+        model.addAttribute("areaList", areaList); //所属区域
+        model.addAttribute("PROJ_INFO_SOURCE", Constants.PROJ_INFO_SOURCE); //项目来源
         model.addAttribute("PROJ_INFO_STAGE", Constants.PROJ_INFO_STAGE); //项目状态
         model.addAttribute("PROJ_INFO_CATEGORY", Constants.PROJ_INFO_CATEGORY); //业务类别
-        model.addAttribute("areaList", areaList); //所属区域
         model.addAttribute("PROJ_INFO_DBSX", Constants.PROJ_INFO_DBSX); //打包属性
+
+        model.addAttribute("PORJECT_ROAD_GRADE", Constants.PORJECT_ROAD_GRADE);
+        model.addAttribute("PORJECT_ROAD_TEC_GRADE", Constants.PORJECT_ROAD_TEC_GRADE);
+        model.addAttribute("PORJECT_PROJ_PROPERTY", Constants.PORJECT_PROJ_PROPERTY);
     }
 
 }

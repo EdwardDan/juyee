@@ -81,7 +81,7 @@ public class ProjExtendController extends BaseCRUDActionController<ProjExtend> {
      * @return .
      */
     @RequestMapping
-    public String grid(Model model, String flag, String msg) {
+    public String grid(Model model, String flag, String msg, String xmsx) {
         List<SysCodeDetail> propertyList = sysCodeManager.getCodeListByCode(Constants.PROJ_INFO_PROPERTY);
         List<SysCodeDetail> projinfostageList = sysCodeManager.getCodeListByCode(Constants.PROJ_INFO_STAGE);
         List<SysCodeDetail> projinfocategoryList = sysCodeManager.getCodeListByCode(Constants.PROJ_INFO_CATEGORY);
@@ -90,6 +90,7 @@ public class ProjExtendController extends BaseCRUDActionController<ProjExtend> {
         model.addAttribute("projinfocategoryList", projinfocategoryList); //业务类别
         //判断是否有编辑权限
         model.addAttribute("flag", flag);
+        model.addAttribute("xmsx", xmsx);
         model.addAttribute("msg", msg);
         if (StringHelper.isEmpty(flag)) {
             model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.PROJ_EXTEND_EDIT1));
@@ -117,7 +118,7 @@ public class ProjExtendController extends BaseCRUDActionController<ProjExtend> {
      * @param rows     .
      */
     @RequestMapping
-    public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session, String flag, String msg, HttpServletRequest request) {
+    public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session, String flag, String msg, String xmsx, HttpServletRequest request) {
         try {
             boolean isJsdw = true;
             SysUser sysUser = sysUserManager.getSysUser();
@@ -168,6 +169,10 @@ public class ProjExtendController extends BaseCRUDActionController<ProjExtend> {
             if (!StringHelper.isEmpty(projcategory)) {
                 hql += " and category.name = '" + projcategory + "' ";
             }
+//            if (!StringHelper.isEmpty(xmsx)) {
+//                SysCodeDetail projProperty = sysCodeManager.getCodeDetailByCode(Constants.PORJECT_PROJ_PROPERTY, xmsx);
+//                hql += " and projProperty.id=" + projProperty.getId();
+//            }
             hql += " order by no asc,id asc";
 //            System.out.println("hql///////////////////////////////// = " + hql);
             //执行查询
@@ -375,5 +380,9 @@ public class ProjExtendController extends BaseCRUDActionController<ProjExtend> {
         List<SysCodeDetail> areaList = sysCodeManager.getCodeListByCode(Constants.PROJ_INFO_BELONG_AREA);
         model.addAttribute("areaList", areaList); //所属区域
         model.addAttribute("PROJ_INFO_DBSX", Constants.PROJ_INFO_DBSX); //打包属性
+
+        model.addAttribute("PORJECT_ROAD_GRADE", Constants.PORJECT_ROAD_GRADE);
+        model.addAttribute("PORJECT_ROAD_TEC_GRADE", Constants.PORJECT_ROAD_TEC_GRADE);
+        model.addAttribute("PORJECT_PROJ_PROPERTY", Constants.PORJECT_PROJ_PROPERTY);
     }
 }

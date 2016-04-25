@@ -231,6 +231,30 @@ public class Constants {
 
 
     //送达回证
-    public static final String SERVICE_BOOK_TYPE= "sdws";//一般项目
+    public static final String SERVICE_BOOK_TYPE = "sdws";//一般项目
+
+    //项目信息（道路等级）
+    public static final String PORJECT_ROAD_GRADE = "roadGrade";
+    public static final String PORJECT_ROAD_GRADE_1 = "gd";
+    public static final String PORJECT_ROAD_GRADE_2 = "sd";
+    public static final String PORJECT_ROAD_GRADE_3 = "xiand";
+    public static final String PORJECT_ROAD_GRADE_4 = "xiangd";
+
+    //项目信息（道路技术等级）
+    public static final String PORJECT_ROAD_TEC_GRADE = "roadTecGrade";
+    public static final String PORJECT_ROAD_TEC_GRADE_1 = "gs";
+    public static final String PORJECT_ROAD_TEC_GRADE_2 = "ks";
+    public static final String PORJECT_ROAD_TEC_GRADE_3 = "yj";
+    public static final String PORJECT_ROAD_TEC_GRADE_4 = "ej";
+    public static final String PORJECT_ROAD_TEC_GRADE_5 = "sanj";
+    public static final String PORJECT_ROAD_TEC_GRADE_6 = "sij";
+
+      //项目信息（项目属性）
+    public static final String PORJECT_PROJ_PROPERTY = "projProperty";
+    public static final String PORJECT_PROJ_PROPERTY_1 = "sewxm";
+    public static final String PORJECT_PROJ_PROPERTY_2 = "qqdj1";
+    public static final String PORJECT_PROJ_PROPERTY_3 = "qqdj2";
+    public static final String PORJECT_PROJ_PROPERTY_4 = "xzxm";
+    public static final String PORJECT_PROJ_PROPERTY_5 = "cbxm";
 
 }

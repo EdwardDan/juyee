@@ -8,7 +8,7 @@
 		name="ProjInfo"
 		table="PROJ_INFO"
 	>
-		
+
 		<meta attribute="sync-DAO">false</meta>
 		<meta attribute="sync-jsp">true</meta>
 		<meta attribute="sync-boolean">get</meta>
@@ -27,6 +27,16 @@
 			<generator class="com.justonetech.core.orm.hibernate.LongIdGenerator"/>
 		</id>
 
+        <property
+                name="year"
+                column="YEAR"
+                type="integer"
+                not-null="false"
+                length="4"
+                >
+            <meta attribute="ColumnName">年份</meta>
+            <meta attribute="ColumnComment">年份</meta>
+        </property>
 
         <property
                 name="bjbh"
@@ -37,6 +47,72 @@
                 >
             <meta attribute="ColumnName">报建编号</meta>
             <meta attribute="ColumnComment">报建编号</meta>
+        </property>
+
+        <property
+                name="projNum"
+                column="PROJ_NUM"
+                type="string"
+                not-null="false"
+                length="50"
+                >
+            <meta attribute="ColumnName">项目编号</meta>
+            <meta attribute="ColumnComment">项目编号</meta>
+        </property>
+
+        <property
+                name="no"
+                column="NO"
+                type="integer"
+                not-null="false"
+                length="5"
+                >
+            <meta attribute="ColumnName">项目序号</meta>
+            <meta attribute="ColumnComment">项目序号</meta>
+        </property>
+
+        <property
+                name="isMajor"
+                column="IS_MAJOR"
+                type="java.lang.Boolean"
+                not-null="false"
+                length="1"
+                >
+            <meta attribute="ColumnName">是否重大</meta>
+            <meta attribute="ColumnComment">是否重大</meta>
+        </property>
+
+        <property
+                name="areaCode"
+                column="AREA_CODE"
+                type="string"
+                not-null="false"
+                length="50"
+                >
+            <meta attribute="ColumnName">所属区县</meta>
+            <meta attribute="ColumnComment">所属区县</meta>
+        </property>
+
+        <property
+                name="startDate"
+                column="START_DATE"
+                type="date"
+                not-null="false"
+                length="7"
+                >
+            <meta attribute="ColumnName">开工日期</meta>
+            <meta attribute="ColumnComment">开工日期</meta>
+        </property>
+
+        <property
+                name="endDate"
+                column="END_DATE"
+                type="date"
+                not-null="false"
+                length="7"
+                >
+            <meta attribute="ColumnName">完工日期</meta>
+            <meta attribute="ColumnComment">完工日期</meta>
         </property>
 
 		<property
@@ -50,38 +126,171 @@
             <meta attribute="ColumnComment">项目名称</meta>
         </property>
 
-		<property
-			name="year"
-			column="YEAR"
-			type="integer"
-			not-null="false"
-			length="4"
-        >
-            <meta attribute="ColumnName">年份</meta>
-            <meta attribute="ColumnComment">年份</meta>
+        <property
+                name="location"
+                column="LOCATION"
+                type="string"
+                not-null="false"
+                length="500"
+                >
+            <meta attribute="ColumnName">起讫地点</meta>
+            <meta attribute="ColumnComment">起讫地点</meta>
         </property>
 
-		<property
-			name="no"
-			column="NO"
-			type="integer"
-			not-null="false"
-			length="5"
-        >
-            <meta attribute="ColumnName">项目序号</meta>
-            <meta attribute="ColumnComment">项目序号</meta>
+        <property
+                name="ghhx"
+                column="GHHX"
+                type="java.lang.Double"
+                not-null="false"
+                length="15"
+                >
+            <meta attribute="ColumnName">规划红线（宽度m）</meta>
+            <meta attribute="ColumnComment">规划红线（宽度m）</meta>
         </property>
 
-		<property
-			name="projNum"
-			column="PROJ_NUM"
-			type="string"
-			not-null="false"
-			length="50"
-        >
-            <meta attribute="ColumnName">项目号</meta>
-            <meta attribute="ColumnComment">项目号</meta>
+        <property
+                name="kgjd"
+                column="KGJD"
+                type="date"
+                not-null="false"
+                length="7"
+                >
+            <meta attribute="ColumnName">开工节点</meta>
+            <meta attribute="ColumnComment">开工节点</meta>
         </property>
+
+        <property
+                name="wgjd"
+                column="WGJD"
+                type="date"
+                not-null="false"
+                length="7"
+                >
+            <meta attribute="ColumnName">完工节点</meta>
+            <meta attribute="ColumnComment">完工节点</meta>
+        </property>
+
+        <property
+                name="planStartDate"
+                column="PLAN_START_DATE"
+                type="date"
+                not-null="false"
+                length="7"
+                >
+            <meta attribute="ColumnName">计划开工日期</meta>
+            <meta attribute="ColumnComment">计划开工日期</meta>
+        </property>
+
+        <property
+                name="planEndDate"
+                column="PLAN_END_DATE"
+                type="date"
+                not-null="false"
+                length="7"
+                >
+            <meta attribute="ColumnName">计划完工日期</meta>
+            <meta attribute="ColumnComment">计划完工日期</meta>
+        </property>
+
+        <property
+                name="intro"
+                column="INTRO"
+                type="string"
+                not-null="false"
+                >
+            <meta attribute="ColumnName">工程简介</meta>
+            <meta attribute="ColumnComment">工程简介</meta>
+        </property>
+
+        <property
+                name="planTotalInvest"
+                column="PLAN_TOTAL_INVEST"
+                type="java.lang.Double"
+                not-null="false"
+                length="15"
+                >
+            <meta attribute="ColumnName">计划总投资</meta>
+            <meta attribute="ColumnComment">计划总投资</meta>
+        </property>
+
+        <property
+                name="gkpfTotalInvest"
+                column="GKPF_TOTAL_INVEST"
+                type="java.lang.Double"
+                not-null="false"
+                length="15"
+                >
+            <meta attribute="ColumnName">工可批复总投资</meta>
+            <meta attribute="ColumnComment">工可批复总投资</meta>
+        </property>
+
+        <property
+                name="gkpfPreInvest"
+                column="GKPF_PRE_INVEST"
+                type="java.lang.Double"
+                not-null="false"
+                length="15"
+                >
+            <meta attribute="ColumnName">工可批复前期费用</meta>
+            <meta attribute="ColumnComment">工可批复前期费用</meta>
+        </property>
+
+        <property
+                name="gkpfJaInvest"
+                column="GKPF_JA_INVEST"
+                type="java.lang.Double"
+                not-null="false"
+                length="15"
+                >
+            <meta attribute="ColumnName">工可批复建安费用</meta>
+            <meta attribute="ColumnComment">工可批复建安费用</meta>
+        </property>
+
+
+        <property
+                name="csTotalInvest"
+                column="CS_TOTAL_INVEST"
+                type="java.lang.Double"
+                not-null="false"
+                length="15"
+                >
+            <meta attribute="ColumnName">初设批复总投资</meta>
+            <meta attribute="ColumnComment">初设批复总投资</meta>
+        </property>
+
+        <property
+                name="csPreInvest"
+                column="CS_PRE_INVEST"
+                type="java.lang.Double"
+                not-null="false"
+                length="15"
+                >
+            <meta attribute="ColumnName">初设批复前期费用</meta>
+            <meta attribute="ColumnComment">初设批复前期费用</meta>
+        </property>
+
+        <property
+                name="csJaInvest"
+                column="CS_JA_INVEST"
+                type="java.lang.Double"
+                not-null="false"
+                length="15"
+                >
+            <meta attribute="ColumnName">初设批复建安费用</meta>
+            <meta attribute="ColumnComment">初设批复建安费用</meta>
+        </property>
+
+        <property
+                name="projContent"
+                column="PROJ_CONTENT"
+                type="string"
+                not-null="false"
+                length="4000"
+                >
+            <meta attribute="ColumnName">项目相关信息</meta>
+            <meta attribute="ColumnComment">项目相关信息</meta>
+        </property>
+
 
 		<property
 			name="buildMileage"
@@ -92,115 +301,6 @@
         >
             <meta attribute="ColumnName">建设里程</meta>
             <meta attribute="ColumnComment">建设里程</meta>
-        </property>
-
-		<property
-			name="location"
-			column="LOCATION"
-			type="string"
-			not-null="false"
-			length="500"
-        >
-            <meta attribute="ColumnName">起讫地点</meta>
-            <meta attribute="ColumnComment">起讫地点</meta>
-        </property>
-
-		<property
-			name="startDate"
-			column="START_DATE"
-			type="date"
-			not-null="false"
-			length="7"
-        >
-            <meta attribute="ColumnName">开工日期</meta>
-            <meta attribute="ColumnComment">开工日期</meta>
-        </property>
-
-		<property
-			name="intro"
-			column="INTRO"
-			type="string"
-			not-null="false"
-        >
-            <meta attribute="ColumnName">工程简介</meta>
-            <meta attribute="ColumnComment">工程简介</meta>
-        </property>
-
-		<property
-			name="jsDept"
-			column="JS_DEPT"
-			type="string"
-			not-null="false"
-			length="300"
-        >
-            <meta attribute="ColumnName">建设单位</meta>
-            <meta attribute="ColumnComment">建设单位</meta>
-        </property>
-
-		<property
-			name="sgDept"
-			column="SG_DEPT"
-			type="string"
-			not-null="false"
-			length="300"
-        >
-            <meta attribute="ColumnName">施工单位</meta>
-            <meta attribute="ColumnComment">施工单位</meta>
-        </property>
-
-		<property
-			name="sgDeptPerson"
-			column="SG_DEPT_PERSON"
-			type="string"
-			not-null="false"
-			length="50"
-        >
-            <meta attribute="ColumnName">施工单位联系人</meta>
-            <meta attribute="ColumnComment">施工单位联系人</meta>
-        </property>
-
-		<property
-			name="sgDeptTel"
-			column="SG_DEPT_TEL"
-			type="string"
-			not-null="false"
-			length="50"
-        >
-            <meta attribute="ColumnName">施工单位联系电话</meta>
-            <meta attribute="ColumnComment">施工单位联系电话</meta>
-        </property>
-
-		<property
-			name="jlDept"
-			column="JL_DEPT"
-			type="string"
-			not-null="false"
-			length="300"
-        >
-            <meta attribute="ColumnName">监理单位</meta>
-            <meta attribute="ColumnComment">监理单位</meta>
-        </property>
-
-		<property
-			name="jlDeptPerson"
-			column="JL_DEPT_PERSON"
-			type="string"
-			not-null="false"
-			length="50"
-        >
-            <meta attribute="ColumnName">监理单位联系人</meta>
-            <meta attribute="ColumnComment">监理单位联系人</meta>
-        </property>
-
-		<property
-			name="jlDeptTel"
-			column="JL_DEPT_TEL"
-			type="string"
-			not-null="false"
-			length="50"
-        >
-            <meta attribute="ColumnName">监理单位联系电话</meta>
-            <meta attribute="ColumnComment">监理单位联系电话</meta>
         </property>
 
         <property
@@ -248,28 +348,6 @@
         </property>
 
         <property
-                name="jsDeptPerson"
-                column="JS_DEPT_PERSON"
-                type="string"
-                not-null="false"
-                length="50"
-                >
-            <meta attribute="ColumnName">建设单位联系人</meta>
-            <meta attribute="ColumnComment">建设单位联系人</meta>
-        </property>
-
-        <property
-                name="jsDeptTel"
-                column="JS_DEPT_TEL"
-                type="string"
-                not-null="false"
-                length="50"
-                >
-            <meta attribute="ColumnName">建设单位联系电话</meta>
-            <meta attribute="ColumnComment">建设单位联系电话</meta>
-        </property>
-
-        <property
                 name="function"
                 column="FUNCTION"
                 type="string"
@@ -299,27 +377,6 @@
             <meta attribute="ColumnComment">主要内容</meta>
         </property>
 
-        <property
-                name="isMajor"
-                column="IS_MAJOR"
-                type="java.lang.Boolean"
-                not-null="false"
-                length="1"
-                >
-            <meta attribute="ColumnName">是否重大</meta>
-            <meta attribute="ColumnComment">是否重大</meta>
-        </property>
-
-        <property
-                name="areaCode"
-                column="AREA_CODE"
-                type="string"
-                not-null="false"
-                length="50"
-                >
-            <meta attribute="ColumnName">所属区县</meta>
-            <meta attribute="ColumnComment">所属区县</meta>
-        </property>
 
         <property
                 name="packageAttr"
@@ -367,6 +424,27 @@
                 not-null="false"
                 >
         </many-to-one>
+        <many-to-one
+                name="roadGrade"
+                column="ROAD_GRADE_ID"
+                class="com.justonetech.system.domain.SysCodeDetail"
+                not-null="false"
+                >
+        </many-to-one>
+        <many-to-one
+                name="roadTecGrade"
+                column="ROAD_TEC_GRADE_ID"
+                class="com.justonetech.system.domain.SysCodeDetail"
+                not-null="false"
+                >
+        </many-to-one>
+        <many-to-one
+                name="projProperty"
+                column="PROJ_PROPERTY_ID"
+                class="com.justonetech.system.domain.SysCodeDetail"
+                not-null="false"
+                >
+        </many-to-one>
 
 		<set name="projBids" inverse="true" order-by="no asc">
 			<key column="PROJECT_ID"/>
@@ -398,7 +476,7 @@
             <key column="PROJECT_ID"/>
             <one-to-many class="ProjInfoArea"/>
         </set>
-	</class>	
+	</class>
     <query name="projinfo_all_data_query">
         <![CDATA[FROM ProjInfo]]>
     </query>
