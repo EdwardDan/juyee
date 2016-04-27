@@ -1,8 +1,11 @@
 package com.justonetech.biz.domain.base;
 
+import com.justonetech.biz.domain.DocDocument;
+import com.justonetech.biz.utils.enums.DataStageReportItemType;
 import com.justonetech.core.entity.Auditable;
 
 import java.io.Serializable;
+import java.util.Date;
 
 
 /**
@@ -32,11 +35,16 @@ public abstract class BaseDataStageReportItem  implements Serializable, Auditabl
 	public static String PROP_CREATE_USER = "createUser";
 	public static String PROP_RESULT_DESC = "resultDesc";
 	public static String PROP_DEAL_DATE = "dealDate";
+	public static String PROP_PLAN_SB_DATE = "planSbDate，";
+	public static String PROP_PLAN_PF_DATE = "planPfDate，";
 	public static String PROP_CREATE_TIME = "createTime";
 	public static String PROP_UPDATE_TIME = "updateTime";
 	public static String PROP_ID = "id";
+	public static String PROP_TYPE = "type";
 	public static String PROP_STAGE = "stage";
 	public static String PROP_UPDATE_USER = "updateUser";
+	public static String PROP_DOC = "doc";
+
 
 
 	// constructors
@@ -65,33 +73,46 @@ public abstract class BaseDataStageReportItem  implements Serializable, Auditabl
     /*推进结果中文描述*/
     /*推进结果中文描述*/
 	private String resultDesc;
-	
-    /*计划日期/办结日期/问题*/
-    /*计划日期/办结日期/问题*/
+
+    /*问题*/
+    /*问题*/
 	private String dealDate;
-	
+
+     /*计划上报日期*/
+    /*计划上报日期*/
+    private Date planSbDate;
+
+    /*计划复批日期*/
+    /*计划复批日期*/
+    private Date planPfDate;
+
+    /*计划或实际类型*/
+    /*计划或实际类型*/
+    private String type;
+
     /*创建时间*/
     /*创建时间*/
 	private java.sql.Timestamp createTime;
-	
+
     /*创建用户名*/
     /*创建用户名*/
 	private String createUser;
-	
+
     /*更新时间*/
     /*更新时间*/
 	private java.sql.Timestamp updateTime;
-	
+
     /*更新用户名*/
     /*更新用户名*/
 	private String updateUser;
-	
+
 
 	// many to one
 	private com.justonetech.system.domain.SysCodeDetail result;
 	private com.justonetech.biz.domain.DataStageReport stageReport;
 	private com.justonetech.system.domain.SysCodeDetail step;
 	private com.justonetech.biz.domain.ProjStage stage;
+	private com.justonetech.biz.domain.DocDocument doc;
 
 
 
@@ -116,9 +137,39 @@ public abstract class BaseDataStageReportItem  implements Serializable, Auditabl
 	}
 
 
+    public Date getPlanSbDate() {
+        return planSbDate;
+    }
 
+    public void setPlanSbDate(Date planSbDate) {
+        this.planSbDate = planSbDate;
+    }
 
-	/**
+    public Date getPlanPfDate() {
+        return planPfDate;
+    }
+
+    public void setPlanPfDate(Date planPfDate) {
+        this.planPfDate = planPfDate;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public DocDocument getDoc() {
+        return doc;
+    }
+
+    public void setDoc(DocDocument doc) {
+        this.doc = doc;
+    }
+
+    /**
 	 * Return the value associated with the column: RESULT_DESC
 	 */
 	public String getResultDesc () {

@@ -16,9 +16,9 @@
             return;
         }
         if (flag) {
-            doSave(btn, "${ctx}/dataStageReport/save.do?reportLog=reportLog&month=" + last_m);
+            doSave(btn, "${ctx}/dataStageReport/save.do?reportLog=reportLog&month=" + last_m + "&year=" + $("#tbYear").val());
         } else {
-            doSave(btn, "${ctx}/dataStageReport/save.do?month=" + last_m);
+            doSave(btn, "${ctx}/dataStageReport/save.do?month=" + last_m + "&year=" + $("#tbYear").val());
         }
     }
     function doSave(btn, url) {
@@ -54,20 +54,46 @@
     }
 
     //选择填报内容
-    function changeResult(obj, bidId, stepId, stageId) {
+    function changeResultJH(obj, bidId, stepId, stageId) {
         var objValue = obj.value;
         var selectIndex = obj.selectedIndex;//获得是第几个被选中了
         var selectText = obj.options[selectIndex].text //获得被选中的项目的文本
         if ('' != objValue) {
-            if (objValue == '${result1}' || objValue == '${result4}') {
-                var dealDate = $("#dealDate_" + bidId + "_" + stepId + "_" + stageId).val();
-                openNewWindow("new", "填报页面", "${ctx}/dataStageReport/resultInput.do?resultCode=" + objValue + "&stepId=" + stepId + "&bidId=" + bidId + "&stageId=" + stageId + "&dealDate=" + dealDate, false, 500, 300);
+            if (objValue == '${result1}') {
+                $("#dealDateJH_" + bidId + "_" + stepId + "_" + stageId).hide();
+                $("#xblJH_" + bidId + "_" + stepId + "_" + stageId).show();
+            } else if (objValue == '${result4}') {
+                $("#dealDateJH_" + bidId + "_" + stepId + "_" + stageId).show();
+                $("#xblJH_" + bidId + "_" + stepId + "_" + stageId).hide();
+                var dealDateJH = $("#dealDateJH_" + bidId + "_" + stepId + "_" + stageId).val();
+                openNewWindow("new", "填报页面", "${ctx}/dataStageReport/resultInput.do?resultCodeJH=" + objValue + "&stepId=" + stepId + "&bidId=" + bidId + "&stageId=" + stageId + "&dealDateJH=" + dealDateJH, false, 500, 300);
             } else {
-                $("#dealDate_" + bidId + "_" + stepId + "_" + stageId).val(selectText);
+                $("#dealDateJH_" + bidId + "_" + stepId + "_" + stageId).show();
+                $("#xblJH_" + bidId + "_" + stepId + "_" + stageId).hide();
+                $("#dealDateJH_" + bidId + "_" + stepId + "_" + stageId).val(selectText);
             }
         }
     }
-
+    function changeResultSJ(obj, bidId, stepId, stageId) {
+        var objValue = obj.value;
+        var selectIndex = obj.selectedIndex;//获得是第几个被选中了
+        var selectText = obj.options[selectIndex].text //获得被选中的项目的文本
+        if ('' != objValue) {
+            if (objValue == '${result1}') {
+                $("#dealDateSJ_" + bidId + "_" + stepId + "_" + stageId).hide();
+                $("#xblSJ_" + bidId + "_" + stepId + "_" + stageId).show();
+            } else if (objValue == '${result4}') {
+                $("#dealDateSJ_" + bidId + "_" + stepId + "_" + stageId).show();
+                $("#xblSJ_" + bidId + "_" + stepId + "_" + stageId).hide();
+                var dealDateSJ = $("#dealDateSJ_" + bidId + "_" + stepId + "_" + stageId).val();
+                openNewWindow("new", "填报页面", "${ctx}/dataStageReport/resultInput.do?resultCodeSJ=" + objValue + "&stepId=" + stepId + "&bidId=" + bidId + "&stageId=" + stageId + "&dealDateSJ=" + dealDateSJ, false, 500, 300);
+            } else {
+                $("#dealDateSJ_" + bidId + "_" + stepId + "_" + stageId).show();
+                $("#xblSJ_" + bidId + "_" + stepId + "_" + stageId).hide();
+                $("#dealDateSJ_" + bidId + "_" + stepId + "_" + stageId).val(selectText);
+            }
+        }
+    }
     function loadMonthReport(month) {
         if (flag) {
             //如果changeFlag的值为true则提示
@@ -99,7 +125,7 @@
 </style>
 <form:form commandName="bean" name="bean" id="bean" method="post">
     <form:hidden path="id"/>
-    <form:hidden path="year"/>
+    <%--<form:hidden path="year"/>--%>
     <input type="hidden" name="projectId" value="${bean.project.id}">
 
     <div class="form_div">
@@ -124,18 +150,34 @@
                 </td>
             </tr>
             <tr>
-                <td class="form_label_right" style="width: 15%;">&nbsp;上报月份：</td>
+                <td class="form_label_right" style="width: 15%;">&nbsp;填报月份：</td>
                 <td class="form_content">
                     <table cellpadding="0" cellspacing="0" border="1" class="table_thin_line" width="500">
                         <tr align="center">
-                            <c:forEach var="m" begin="1" end="12" step="1">
-                                <td width="8%" id="td${m}" onclick="loadMonthReport('${m}')" style="cursor: pointer;"
-                                        <c:choose>
-                                            <c:when test="${currentMonth==m}">class="td_active"</c:when>
-                                            <c:otherwise>class="td_normal" title="查看当月数据"</c:otherwise>
-                                        </c:choose>>${m}月
-                                </td>
-                            </c:forEach>
+                                <%--<c:forEach var="m" begin="1" end="12" step="1">--%>
+                                <%--<td width="8%" id="td${m}" onclick="loadMonthReport('${m}')" style="cursor: pointer;"--%>
+                                <%--<c:choose>--%>
+                                <%--<c:when test="${currentMonth==m}">class="td_active"</c:when>--%>
+                                <%--<c:otherwise>class="td_normal" title="查看当月数据"</c:otherwise>--%>
+                                <%--</c:choose>>${m}月--%>
+                                <%--</td>--%>
+                                <%--</c:forEach>--%>
+                            <select id="tbYear">
+                                <c:forEach var="y" begin="2016" end="${currentYear}" step="1">
+                                    <option
+                                            <c:if test="${currentYear==y}">selected="selected"</c:if>
+                                            value="${y}">${y}年
+                                    </option>
+                                </c:forEach>
+                            </select>
+                            <select onchange="loadMonthReport(document.getElementById('tbMonth').value)" id="tbMonth">
+                                <c:forEach var="m" begin="1" end="${currentMonth}" step="1">
+                                    <option
+                                            <c:if test="${currentMonth==m}">selected="selected"</c:if>
+                                            value="${m}">${m}月
+                                    </option>
+                                </c:forEach>
+                            </select>
                         </tr>
                     </table>
                 </td>
@@ -147,6 +189,7 @@
         </c:if>
         <div class="div_space"></div>
         <div class="form_div" style="text-align: center;">
+            <input type="button" value="提交" class="button_doc_upload" onclick="save()">&nbsp;
             <input type="button" value="保存" class="button_confirm" onclick="save(this)">&nbsp;
             <input type="button" value="取消" class="button_cancel" onclick="closeWindow()">
         </div>

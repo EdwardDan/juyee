@@ -4,6 +4,7 @@ import com.justonetech.biz.core.orm.hibernate.GridJq;
 import com.justonetech.biz.core.orm.hibernate.QueryTranslateJq;
 import com.justonetech.biz.daoservice.*;
 import com.justonetech.biz.domain.*;
+import com.justonetech.biz.manager.DocumentManager;
 import com.justonetech.biz.manager.ProjectInfoContentManager;
 import com.justonetech.biz.manager.ProjectRelateManager;
 import com.justonetech.biz.utils.Constants;
@@ -19,6 +20,7 @@ import com.justonetech.system.domain.SysUser;
 import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
 import com.justonetech.system.utils.PrivilegeCode;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +50,9 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
 
     @Autowired
     private DataStageReportService dataStageReportService;
+
+    @Autowired
+    private DocumentManager documentManager;
 
     @Autowired
     private ProjInfoService projInfoService;
@@ -87,8 +92,8 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
         List<SysCodeDetail> projinfostageList = sysCodeManager.getCodeListByCode(Constants.PROJ_INFO_STAGE);
         List<SysCodeDetail> projinfocategoryList = sysCodeManager.getCodeListByCode(Constants.PROJ_INFO_CATEGORY);
         model.addAttribute("propertyList", propertyList); //管理属性
-        model.addAttribute("projinfostageList",projinfostageList); //项目状态
-        model.addAttribute("projinfocategoryList",projinfocategoryList); //业务类别
+        model.addAttribute("projinfostageList", projinfostageList); //项目状态
+        model.addAttribute("projinfocategoryList", projinfocategoryList); //业务类别
         model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.DATA_STAGE_REPORT_EDIT));
         model.addAttribute("type_stage", ProjBidType.TYPE_STAGE.getCode());
 
@@ -146,7 +151,7 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
             if (!StringHelper.isEmpty(projcategory)) {
                 hql += " and category.name = '" + projcategory + "' ";
             }
-            if (!isJsdw){
+            if (!isJsdw) {
                 hql += projectRelateManager.getRelateProjectHql("id");
             }
             hql += " order by no asc,id asc";
@@ -193,6 +198,9 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
         if (null == month) {
             month = c.get(Calendar.MONTH) + 1;
         }
+        Integer year = null;
+        year = c.get(Calendar.YEAR);
+        model.addAttribute("currentYear", year);
         model.addAttribute("currentMonth", month);
         model.addAttribute("projectId", projectId);
 
@@ -209,7 +217,7 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
      * @return .
      */
     @RequestMapping
-    public String stageDataItem(Model model, Long projectId, Integer month, Long bidId, String type) {
+    public String stageDataItem(Model model, Long projectId, Integer month, Long bidId, String type) {//bidId桥段，projectId工程，month月份
         doCheckBidData(bidId, model, projectId, month);
         String url = "view/data/dataStageReport/checkBidData";
         if (type != null) {
@@ -225,16 +233,30 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
      * @return .
      */
     @RequestMapping
-    public String resultInput(Model model, String resultCode, Long bidId, Long stepId, Long stageId, String dealDate) {
-        if (!StringHelper.isEmpty(resultCode)) {
-            SysCodeDetail codeDetailByCode = sysCodeManager.getCodeDetailByCode(Constants.DATA_STAGE_RESULT, resultCode);
+    public String resultInput(Model model, String resultCodeJH, String resultCodeSJ, Long bidId, Long stepId, Long stageId, String dealDateJH, String dealDateSJ) {
+        if (!StringHelper.isEmpty(resultCodeJH)) {
+            SysCodeDetail codeDetailByCode = sysCodeManager.getCodeDetailByCode(Constants.DATA_STAGE_RESULT, resultCodeJH);
             model.addAttribute("result", codeDetailByCode);
             model.addAttribute("bidId", bidId);
             model.addAttribute("stepId", stepId);
             model.addAttribute("stageId", stageId);
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            if (!StringHelper.isEmpty(dealDate)) {
-                model.addAttribute("dealDate", dealDate);
+            model.addAttribute("resultCodeJH", resultCodeJH);
+            if (!StringHelper.isEmpty(dealDateJH)) {
+                model.addAttribute("dealDateJH", dealDateJH);
+            }
+            model.addAttribute("currentDate", sdf.format(new Date(System.currentTimeMillis())));
+        }
+        if (!StringHelper.isEmpty(resultCodeSJ)) {
+            SysCodeDetail codeDetailByCode = sysCodeManager.getCodeDetailByCode(Constants.DATA_STAGE_RESULT, resultCodeSJ);
+            model.addAttribute("result", codeDetailByCode);
+            model.addAttribute("bidId", bidId);
+            model.addAttribute("stepId", stepId);
+            model.addAttribute("stageId", stageId);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            model.addAttribute("resultCodeSJ", resultCodeSJ);
+            if (!StringHelper.isEmpty(dealDateSJ)) {
+                model.addAttribute("dealDateSJ", dealDateSJ);
             }
             model.addAttribute("currentDate", sdf.format(new Date(System.currentTimeMillis())));
         }
@@ -331,18 +353,59 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
                     if (step.getIsValid()) {
                         Long stageId = stage.getId();
                         Long stepId = step.getId();
-                        String resultCode = request.getParameter("resultCode_" + target.getBid().getId() + "_" + stepId + "_" + stageId);
-                        String dealDate = request.getParameter("dealDate_" + target.getBid().getId() + "_" + stepId + "_" + stageId);
-                        if (!StringHelper.isEmpty(resultCode)) {
+                        String resultCodeJH = request.getParameter("resultCodeJH_" + target.getBid().getId() + "_" + stepId + "_" + stageId);
+                        String dealDateJH = request.getParameter("dealDateJH_" + target.getBid().getId() + "_" + stepId + "_" + stageId);
+                        String resultCodeSJ = request.getParameter("resultCodeSJ_" + target.getBid().getId() + "_" + stepId + "_" + stageId);
+                        String dealDateSJ = request.getParameter("dealDateSJ_" + target.getBid().getId() + "_" + stepId + "_" + stageId);
+                        String planSbDateJH = request.getParameter("planSbDateJH_" + target.getBid().getId() + "_" + stepId + "_" + stageId);
+                        String planPfDateJH = request.getParameter("planPfDateJH_" + target.getBid().getId() + "_" + stepId + "_" + stageId);
+                        String planSbDateSJ = request.getParameter("planSbDateSJ_" + target.getBid().getId() + "_" + stepId + "_" + stageId);
+                        String planPfDateSJ = request.getParameter("planPfDateSJ_" + target.getBid().getId() + "_" + stepId + "_" + stageId);
+                        String docId = request.getParameter("docId"+target.getBid().getId() + "_" + stepId  + "_" + stageId);
+                        java.text.SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+                        if (!StringHelper.isEmpty(resultCodeJH)) {//保存计划
                             DataStageReportItem reportItem = new DataStageReportItem();
+                            reportItem.setType("jh");
                             reportItem.setStageReport(target);
                             reportItem.setStep(step);
                             reportItem.setStage(stage);
-                            SysCodeDetail result = sysCodeManager.getCodeDetailByCode(Constants.DATA_STAGE_RESULT, resultCode);
+                            if (StringHelper.isNotEmpty(planSbDateJH)) {
+                                reportItem.setPlanSbDate(formatter.parse(planSbDateJH));
+                            }
+                            if (StringHelper.isNotEmpty(planPfDateJH)) {
+                                reportItem.setPlanPfDate(formatter.parse(planPfDateJH));
+                            }
+                            SysCodeDetail result = sysCodeManager.getCodeDetailByCode(Constants.DATA_STAGE_RESULT, resultCodeJH);
                             reportItem.setResult(result);
                             reportItem.setResultDesc(result.getName());
-                            if (!StringHelper.isEmpty(dealDate)) {
-                                reportItem.setDealDate(dealDate);
+                            if (!StringHelper.isEmpty(dealDateJH)) {
+                                reportItem.setDealDate(dealDateJH);
+                            }
+                            listItem.add(reportItem);
+                        }
+                        if (!StringHelper.isEmpty(resultCodeSJ)) {//保存实际
+                            DataStageReportItem reportItem = new DataStageReportItem();
+                            reportItem.setType("sj");
+                            reportItem.setStageReport(target);
+                            reportItem.setStep(step);
+                            reportItem.setStage(stage);
+                            if (StringHelper.isNotEmpty(planSbDateSJ)) {
+                                reportItem.setPlanSbDate(formatter.parse(planSbDateSJ));
+                            }
+                            if (StringHelper.isNotEmpty(planPfDateSJ)) {
+                                reportItem.setPlanPfDate(formatter.parse(planPfDateSJ));
+                            }
+                            SysCodeDetail result = sysCodeManager.getCodeDetailByCode(Constants.DATA_STAGE_RESULT, resultCodeSJ);
+                            reportItem.setResult(result);
+                            reportItem.setResultDesc(result.getName());
+                            if (!StringHelper.isEmpty(dealDateSJ)) {
+                                reportItem.setDealDate(dealDateSJ);
+                            }
+                            if (StringHelper.isNotEmpty(docId) && StringUtils.isNumeric(docId)) {
+                                DocDocument Doc = documentManager.getDocDocument(JspHelper.getLong(docId));
+                                reportItem.setDoc(Doc);
+                                documentManager.updateDocumentByBizData(Doc, DataStageReportItem.class.getSimpleName(), Doc.getName());
                             }
                             listItem.add(reportItem);
                         }
@@ -406,6 +469,8 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
         //办证推进结果
         List<SysCodeDetail> results = sysCodeManager.getCodeListByCode(Constants.DATA_STAGE_RESULT);
         model.addAttribute("results", results);
+//        String button = documentManager.getUploadButtonForMulti(documentManager.getDefaultXmlConfig(), DataStageReportItem.class.getSimpleName(), item.getDoc(), sysUserManager.getSysUser().getId(), "DataStageReportItem", item.getId().toString());
+//        model.addAttribute("uploadButton",button);
         //填报数据
         Map<String, Object> dataMap = new HashMap<String, Object>();
         DataStageReport report = getDataStageReport(projectId, c.get(Calendar.YEAR), month, bidId);
@@ -415,16 +480,55 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
         List<DataStageReportItem> dataStageReportItems = findDataItems(projectId, c.get(Calendar.YEAR), month, bidId);
         for (DataStageReportItem item : dataStageReportItems) {
             Map<String, Object> map = new HashMap<String, Object>();
-            map.put("resultId", item.getResult().getId());
-            map.put("resultCode", item.getResult().getCode());
-            map.put("resultName", item.getResult().getName());
-            map.put("dealDate", item.getDealDate());
+            if (item.getType().equals("jh")) {
+                map.put("resultIdJH", item.getResult().getId());
+                map.put("resultCodeJH", item.getResult().getCode());
+                map.put("resultNameJH", item.getResult().getName());
+                map.put("planSbDateJH", item.getPlanSbDate());
+                map.put("planPfDateJH", item.getPlanPfDate());
+                map.put("dealDateJH", item.getDealDate());
+            } else if (item.getType().equals("sj")) {
+                map.put("resultIdSJ", item.getResult().getId());
+                map.put("resultCodeSJ", item.getResult().getCode());
+                map.put("resultNameSJ", item.getResult().getName());
+                map.put("planSbDateSJ", item.getPlanSbDate());
+                map.put("planPfDateSJ", item.getPlanPfDate());
+                map.put("dealDateSJ", item.getDealDate());
+                map.put("docId",item.getDoc());
+            }
             SysCodeDetail step = item.getStep();
             if (null != step) {
-                dataMap.put(bidId + "_" + step.getId() + "_" + item.getStage().getId(), map);
+                if (item.getType().equals("jh")) {
+                    dataMap.put(bidId + "_" + step.getId() + "_" + item.getStage().getId() + "_jh", map);
+                } else if (item.getType().equals("sj")) {
+                    dataMap.put(bidId + "_" + step.getId() + "_" + item.getStage().getId() + "_sj", map);
+                }
             }
         }
         model.addAttribute("dataMap", dataMap);
+        //附件上传按钮
+        Map<String,String> upButton = new HashMap<String,String>();
+        for (ProjStage stage : projStages) {
+            for (SysCodeDetail step : steps) {
+                if (step.getIsValid()) {
+                    Long stageId = stage.getId();
+                    Long stepId = step.getId();
+                    DocDocument document = null;
+                    String dataKey = bidId + "_" + stepId + "_" + stageId + "_sj";
+                    for(String dataKeyDataMap:dataMap.keySet()){
+                        if (dataKey.equals(dataKeyDataMap)){
+                            Map<String, Object> map = (Map)dataMap.get(dataKey);
+                            if (map.get("docId")!=null) {
+                                document = (DocDocument)map.get("docId");
+                            }
+                        }
+                    }
+                    String button = documentManager.getUploadButtonForMulti(documentManager.getDefaultXmlConfig(), DataStageReportItem.class.getSimpleName(), document, sysUserManager.getSysUser().getId(), "DataStageReportItem", bidId + "_" + stepId + "_" + stageId);
+                    upButton.put(bidId + "_" + stepId + "_" + stageId, button);
+                }
+            }
+        }
+        model.addAttribute("upButton",upButton);
     }
 
     /**
