@@ -172,11 +172,11 @@
             <tr class="tr_dark">
                 <td class="form_label_right" style="width: 10%;">建安费用：</td>
                 <td class="form_content" style="width: 25%;">
-                    <form:input path="gkpfJaInvest" cssClass="input_number"/>
+                    ${bean.gkpfJaInvest}
                 </td>
                 <td class="form_label_right" style="width: 10%;">建安费用：</td>
                 <td class="form_content" style="width: 25%;">
-                    <form:input path="csJaInvest" cssClass="input_number"/>
+                    ${bean.csJaInvest}
                 </td>
             </tr>
         </table>

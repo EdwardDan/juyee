@@ -91,7 +91,7 @@
         gridinit($("#listGrid"), conf);
     });
     function doView(id) {
-        openWindow("查看项目推进信息", "${ctx}/projExtend/view.do?projectId=" + id, false, 800, 550);
+        openWindow("查看项目基本信息", "${ctx}/projInfo/view.do?id=" + id, false, 800, 550);
     }
     function doEdit(id) {
         openWindow("填报项目推进信息", "${ctx}/projExtend/input.do?projectId=" + id, true, 800, 550);
