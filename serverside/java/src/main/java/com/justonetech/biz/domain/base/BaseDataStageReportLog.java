@@ -1,8 +1,10 @@
 package com.justonetech.biz.domain.base;
 
+import com.justonetech.biz.domain.DocDocument;
 import com.justonetech.core.entity.Auditable;
 
 import java.io.Serializable;
+import java.util.Date;
 
 
 /**
@@ -37,6 +39,10 @@ public abstract class BaseDataStageReportLog  implements Serializable, Auditable
 	public static String PROP_ID = "id";
 	public static String PROP_STAGE = "stage";
 	public static String PROP_UPDATE_USER = "updateUser";
+	public static String PROP_PLAN_SB_DATE = "planSbDate";
+	public static String PROP_PLAN_PF_DATE = "planPfDate";
+	public static String PROP_TYPE = "type";
+	public static String PROP_DOC = "doc";
 
 
 	// constructors
@@ -69,11 +75,23 @@ public abstract class BaseDataStageReportLog  implements Serializable, Auditable
     /*计划日期/办结日期/问题*/
     /*计划日期/办结日期/问题*/
 	private String dealDate;
-	
-    /*创建时间*/
+
+	/*计划上报日期*/
+    /*计划上报日期*/
+	private Date planSbDate;
+
+	/*计划复批日期*/
+    /*计划复批日期*/
+	private Date planPfDate;
+
+	/*计划或实际类型*/
+    /*计划或实际类型*/
+	private String type;
+
+	/*创建时间*/
     /*创建时间*/
 	private java.sql.Timestamp createTime;
-	
+
     /*创建用户名*/
     /*创建用户名*/
 	private String createUser;
@@ -92,8 +110,39 @@ public abstract class BaseDataStageReportLog  implements Serializable, Auditable
 	private com.justonetech.biz.domain.DataStageReport stageReport;
 	private com.justonetech.system.domain.SysCodeDetail step;
 	private com.justonetech.biz.domain.ProjStage stage;
+	private com.justonetech.biz.domain.DocDocument doc;
 
+	public DocDocument getDoc() {
+		return doc;
+	}
 
+	public void setDoc(DocDocument doc) {
+		this.doc = doc;
+	}
+
+	public Date getPlanSbDate() {
+		return planSbDate;
+	}
+
+	public void setPlanSbDate(Date planSbDate) {
+		this.planSbDate = planSbDate;
+	}
+
+	public Date getPlanPfDate() {
+		return planPfDate;
+	}
+
+	public void setPlanPfDate(Date planPfDate) {
+		this.planPfDate = planPfDate;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
 
 	/**
 	 * Return the unique identifier of this class

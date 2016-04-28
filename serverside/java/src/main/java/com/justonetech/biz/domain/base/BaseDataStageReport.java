@@ -38,7 +38,7 @@ public abstract class BaseDataStageReport  implements Serializable, Auditable {
 	public static String PROP_PROJECT = "project";
 	public static String PROP_MONTH = "month";
 	public static String PROP_UPDATE_USER = "updateUser";
-
+	public static String PROP_IS_SUBMIT = "isSubmit";
 
 	// constructors
 	public BaseDataStageReport () {
@@ -70,7 +70,11 @@ public abstract class BaseDataStageReport  implements Serializable, Auditable {
     /*月份*/
     /*月份*/
 	private Integer month;
-	
+
+	/*是否提交*/
+    /*是否提交*/
+	private Integer isSubmit;
+
     /*创建时间*/
     /*创建时间*/
 	private java.sql.Timestamp createTime;
@@ -86,7 +90,7 @@ public abstract class BaseDataStageReport  implements Serializable, Auditable {
     /*更新用户名*/
     /*更新用户名*/
 	private String updateUser;
-	
+
 
 	// many to one
 	private com.justonetech.biz.domain.ProjBid bid;
@@ -153,6 +157,13 @@ public abstract class BaseDataStageReport  implements Serializable, Auditable {
 		this.month = month;
 	}
 
+	public Integer getIsSubmit() {
+		return isSubmit;
+	}
+
+	public void setIsSubmit(Integer isSubmit) {
+		this.isSubmit = isSubmit;
+	}
 
 	/**
 	 * Return the value associated with the column: CREATE_TIME

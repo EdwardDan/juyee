@@ -10,15 +10,28 @@
         validateInit(validateCondition, formId);
         loadMonthReport("${currentMonth}");
     });
-    //保存操作
-    function save(btn) {
+    //提交操作
+    function sub(btn){
+        var number = 1;
         if (!validateForm(formId)) {
             return;
         }
         if (flag) {
-            doSave(btn, "${ctx}/dataStageReport/save.do?reportLog=reportLog&month=" + last_m + "&year=" + $("#tbYear").val());
+            doSave(btn, "${ctx}/dataStageReport/save.do?reportLog=reportLog&month=" + last_m + "&year=" + $("#tbYear").val() + "&isSubmit=" + number);
         } else {
-            doSave(btn, "${ctx}/dataStageReport/save.do?month=" + last_m + "&year=" + $("#tbYear").val());
+            doSave(btn, "${ctx}/dataStageReport/save.do?month=" + last_m + "&year=" + $("#tbYear").val() + "&isSubmit=" + number);
+        }
+    }
+    //保存操作
+    function save(btn) {
+        var number = 0;
+        if (!validateForm(formId)) {
+            return;
+        }
+        if (flag) {
+            doSave(btn, "${ctx}/dataStageReport/save.do?reportLog=reportLog&month=" + last_m + "&year=" + $("#tbYear").val() + "&isSubmit=" + number);
+        } else {
+            doSave(btn, "${ctx}/dataStageReport/save.do?month=" + last_m + "&year=" + $("#tbYear").val() + "&isSubmit=" + number);
         }
     }
     function doSave(btn, url) {
@@ -189,7 +202,7 @@
         </c:if>
         <div class="div_space"></div>
         <div class="form_div" style="text-align: center;">
-            <input type="button" value="提交" class="button_doc_upload" onclick="save()">&nbsp;
+            <input type="button" value="提交" class="button_confirm" onclick="sub(this)">&nbsp;
             <input type="button" value="保存" class="button_confirm" onclick="save(this)">&nbsp;
             <input type="button" value="取消" class="button_cancel" onclick="closeWindow()">
         </div>

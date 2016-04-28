@@ -34,8 +34,8 @@ public abstract class BaseDataStageReportItem  implements Serializable, Auditabl
 	public static String PROP_CREATE_USER = "createUser";
 	public static String PROP_RESULT_DESC = "resultDesc";
 	public static String PROP_DEAL_DATE = "dealDate";
-	public static String PROP_PLAN_SB_DATE = "planSbDate，";
-	public static String PROP_PLAN_PF_DATE = "planPfDate，";
+	public static String PROP_PLAN_SB_DATE = "planSbDate";
+	public static String PROP_PLAN_PF_DATE = "planPfDate";
 	public static String PROP_CREATE_TIME = "createTime";
 	public static String PROP_UPDATE_TIME = "updateTime";
 	public static String PROP_ID = "id";

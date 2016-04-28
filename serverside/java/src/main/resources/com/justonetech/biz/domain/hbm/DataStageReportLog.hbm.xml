@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC
-	"-//Hibernate/Hibernate Mapping DTD//EN"
-	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
 
 <hibernate-mapping package="com.justonetech.biz.domain">
-	<class
-		name="DataStageReportLog"
-		table="DATA_STAGE_REPORT_LOG"
-	>
-		
-		<meta attribute="sync-DAO">false</meta>
-		<meta attribute="sync-jsp">true</meta>
-		<meta attribute="sync-boolean">get</meta>
-		<meta attribute="treeable">false</meta>
-		<meta attribute="projectable">false</meta>
+    <class
+            name="DataStageReportLog"
+            table="DATA_STAGE_REPORT_LOG"
+            >
+
+        <meta attribute="sync-DAO">false</meta>
+        <meta attribute="sync-jsp">true</meta>
+        <meta attribute="sync-boolean">get</meta>
+        <meta attribute="treeable">false</meta>
+        <meta attribute="projectable">false</meta>
         <meta attribute="tableName">办证推进填报历史</meta>
         <meta attribute="tableComment">办证推进填报历史</meta>
-	    <meta attribute="sync-templatePatterns">list\w*</meta>
+        <meta attribute="sync-templatePatterns">list\w*</meta>
         <meta attribute="sub-system">data</meta>
 
 
@@ -48,6 +48,39 @@
                 >
             <meta attribute="ColumnName">计划日期/办结日期/问题</meta>
             <meta attribute="ColumnComment">计划日期/办结日期/问题</meta>
+        </property>
+
+        <property
+                name="planSbDate"
+                column="PLAN_SB_DATE"
+                type="date"
+                not-null="false"
+                length="7"
+                >
+            <meta attribute="ColumnName">计划上报日期</meta>
+            <meta attribute="ColumnComment">计划上报日期</meta>
+        </property>
+
+        <property
+                name="planPfDate"
+                column="PLAN_PF_DATE"
+                type="date"
+                not-null="false"
+                length="7"
+                >
+            <meta attribute="ColumnName">计划批复日期</meta>
+            <meta attribute="ColumnComment">计划批复日期</meta>
+        </property>
+
+        <property
+                name="type"
+                column="TYPE"
+                type="string"
+                not-null="false"
+                length="50"
+                >
+            <meta attribute="ColumnName">计划或实际类型</meta>
+            <meta attribute="ColumnComment">计划或实际类型</meta>
         </property>
 
         <property
@@ -122,9 +155,15 @@
                 not-null="false"
                 >
         </many-to-one>
+        <many-to-one
+                name="doc"
+                column="DOC_ID"
+                class="DocDocument"
+                not-null="false"
+                >
+        </many-to-one>
 
-
-	</class>	
+    </class>
     <query name="datastagereportlog_all_data_query">
         <![CDATA[FROM DataStageReportLog]]>
     </query>

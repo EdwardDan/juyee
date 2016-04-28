@@ -21,6 +21,7 @@ import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
 import com.justonetech.system.utils.PrivilegeCode;
 import org.apache.commons.lang.StringUtils;
+import org.jsoup.select.Evaluator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -203,7 +204,6 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
         model.addAttribute("currentYear", year);
         model.addAttribute("currentMonth", month);
         model.addAttribute("projectId", projectId);
-
         ProjInfo projInfo = projInfoService.get(projectId);
         projectInfoContentManager.setReportContent(model, projInfo.getProjContent());
 
@@ -292,6 +292,8 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
     @RequestMapping
     public void save(HttpServletResponse response, @ModelAttribute("bean") DataStageReport entity, HttpServletRequest request, String reportLog) throws Exception {
         try {
+            //获取是否提交标识
+            String isSubmit = request.getParameter("isSubmit");
             //获取并保存标段
             String projectBidId = request.getParameter("projectBidId");
             ProjBid projBid = projBidService.get(Long.valueOf(projectBidId));
@@ -311,6 +313,23 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
                     target = dataStageReport;
                 }
             }
+            boolean judge = false;//判断是否第一次提交
+            try{
+                target.getIsSubmit().toString().equals("1");
+            }catch (Exception e){
+                judge = true;
+            }
+            //设置是保存状态还是提交状态
+            try{
+                if(isSubmit.equals("1")||target.getIsSubmit().toString().equals("1")){
+                    target.setIsSubmit(1);
+                }else{
+                    target.setIsSubmit(0);
+                }
+            }catch (Exception e){
+                target.setIsSubmit(0);
+            }
+
             target.setBid(projBid);
             target.setProject(projInfoService.get(Long.valueOf(projectId)));
             target.setYear(Integer.valueOf(year));
@@ -333,6 +352,10 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
                         stageReportLog.setResult(item.getResult());
                         stageReportLog.setResultDesc(item.getResultDesc());
                         stageReportLog.setDealDate(item.getDealDate());
+                        stageReportLog.setPlanSbDate(item.getPlanSbDate());
+                        stageReportLog.setPlanPfDate(item.getPlanPfDate());
+                        stageReportLog.setType(item.getType());
+                        stageReportLog.setDoc(item.getDoc());
                         logList.add(stageReportLog);
                     }
                     dataStageReportLogService.batchSave(logList, logList.size());
@@ -348,6 +371,15 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
             //审核步骤
             List<SysCodeDetail> steps = sysCodeManager.getCodeListByCode(Constants.DATA_REPORT_STEP);
             List<DataStageReportItem> listItem = new ArrayList<DataStageReportItem>();
+            //如果是已提交状态计划从数据库得到
+            if (target.getIsSubmit().toString().equals("1")&&judge==false){
+                for (DataStageReportItem dataStageReportItem:items){
+                    if (dataStageReportItem.getType().equals("jh")){
+                        dataStageReportItem.setId(null);
+                        listItem.add(dataStageReportItem);
+                    }
+                }
+            }
             for (ProjStage stage : projStages) {
                 for (SysCodeDetail step : steps) {
                     if (step.getIsValid()) {
@@ -364,7 +396,7 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
                         String docId = request.getParameter("docId"+target.getBid().getId() + "_" + stepId  + "_" + stageId);
                         java.text.SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
-                        if (!StringHelper.isEmpty(resultCodeJH)) {//保存计划
+                        if ((!StringHelper.isEmpty(resultCodeJH)&&target.getIsSubmit().toString().equals("0"))||judge == true) {//保存计划列表（非提交状态）
                             DataStageReportItem reportItem = new DataStageReportItem();
                             reportItem.setType("jh");
                             reportItem.setStageReport(target);
@@ -384,7 +416,7 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
                             }
                             listItem.add(reportItem);
                         }
-                        if (!StringHelper.isEmpty(resultCodeSJ)) {//保存实际
+                        if (!StringHelper.isEmpty(resultCodeSJ)) {//保存实际列表
                             DataStageReportItem reportItem = new DataStageReportItem();
                             reportItem.setType("sj");
                             reportItem.setStageReport(target);
@@ -474,6 +506,13 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
         //填报数据
         Map<String, Object> dataMap = new HashMap<String, Object>();
         DataStageReport report = getDataStageReport(projectId, c.get(Calendar.YEAR), month, bidId);
+        String isSubmit = "0";
+        try{
+            isSubmit = report.getIsSubmit().toString();
+        }catch (Exception e){
+            isSubmit = "0";
+        }
+        model.addAttribute("isSubmit",isSubmit);
         if (null == report) {
             month = month - 1;
         }
