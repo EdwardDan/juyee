@@ -202,7 +202,7 @@
         </c:if>
         <div class="div_space"></div>
         <div class="form_div" style="text-align: center;">
-            <input type="button" value="提交" class="button_confirm" onclick="sub(this)">&nbsp;
+            <input type="button" value="提交" class="button_confirm" onclick="sub(this);closeWindow()">&nbsp;
             <input type="button" value="保存" class="button_confirm" onclick="save(this)">&nbsp;
             <input type="button" value="取消" class="button_cancel" onclick="closeWindow()">
         </div>
