@@ -1,7 +1,6 @@
 package com.justonetech.biz.domain.base;
 
 import com.justonetech.biz.domain.DocDocument;
-import com.justonetech.biz.utils.enums.DataStageReportItemType;
 import com.justonetech.core.entity.Auditable;
 
 import java.io.Serializable;
