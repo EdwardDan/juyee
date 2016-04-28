@@ -11,7 +11,7 @@ public enum SgPermitStatus {
     STATUS_CH(0, "撤回", "red", "ch"),
     STATUS_EDIT(1, "未提交", "red", "tx"),
     STATUS_SUBMIT(2, "已提交", "blue", "submit"),
-    STATUS_JGZX_YS_PASS(3, "预审通过", "blue", "jgzx_ys_pass"),
+    STATUS_JGZX_YS_PASS(3, "预审通过(请到行政服务中心受理)", "blue", "jgzx_ys_pass"),
     STATUS_JGZX_YS_BACK(4, "预审退回", "blue", "jgzx_ys_back"),
     STATUS_SLZX_PASS(5, "收件通过", "green", "slzx_pass"),
     STATUS_SLZX_BACK(6, "收件退回", "red", "slzx_back"),
