@@ -313,12 +313,15 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
                     target = dataStageReport;
                 }
             }
-            boolean judge = false;//判断是否第一次提交
+            boolean judge = true;//判断是否提交过
             try{
-                target.getIsSubmit().toString().equals("1");
+                if(target.getIsSubmit().toString().equals("0")){
+                    judge = false;
+                }
             }catch (Exception e){
-                judge = true;
+                judge = false;
             }
+
             //设置是保存状态还是提交状态
             try{
                 if(isSubmit.equals("1")||target.getIsSubmit().toString().equals("1")){
@@ -372,7 +375,7 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
             List<SysCodeDetail> steps = sysCodeManager.getCodeListByCode(Constants.DATA_REPORT_STEP);
             List<DataStageReportItem> listItem = new ArrayList<DataStageReportItem>();
             //如果是已提交状态计划从数据库得到
-            if (target.getIsSubmit().toString().equals("1")&&judge==false){
+            if (target.getIsSubmit().toString().equals("1")&&judge==true){
                 for (DataStageReportItem dataStageReportItem:items){
                     if (dataStageReportItem.getType().equals("jh")){
                         dataStageReportItem.setId(null);
@@ -396,7 +399,7 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
                         String docId = request.getParameter("docId"+target.getBid().getId() + "_" + stepId  + "_" + stageId);
                         java.text.SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
-                        if ((!StringHelper.isEmpty(resultCodeJH)&&target.getIsSubmit().toString().equals("0"))||judge == true) {//保存计划列表（非提交状态）
+                        if ((!StringHelper.isEmpty(resultCodeJH)&&target.getIsSubmit().toString().equals("0"))||!StringHelper.isEmpty(resultCodeJH)&&judge == false) {//保存计划列表（非提交状态）
                             DataStageReportItem reportItem = new DataStageReportItem();
                             reportItem.setType("jh");
                             reportItem.setStageReport(target);
@@ -410,7 +413,9 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
                             }
                             SysCodeDetail result = sysCodeManager.getCodeDetailByCode(Constants.DATA_STAGE_RESULT, resultCodeJH);
                             reportItem.setResult(result);
-                            reportItem.setResultDesc(result.getName());
+                            if (result!=null){
+                                reportItem.setResultDesc(result.getName());
+                            }
                             if (!StringHelper.isEmpty(dealDateJH)) {
                                 reportItem.setDealDate(dealDateJH);
                             }
