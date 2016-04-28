@@ -352,4 +352,119 @@ public class SysRegPersonController extends BaseCRUDActionController<SysRegPerso
         }
     }
 
+    @RequestMapping
+    public String indexInput(Model model, String flag) {
+        model.addAttribute("flag", flag);
+        SysRegPerson sysRegPerson = new SysRegPerson();
+        sysRegPerson.setAcceptOpinion(1);
+        sysRegPerson.setRegResource(PersonRegSource.RESOURCE_WEBSITE.getCode());
+        model.addAttribute("bean", sysRegPerson);
+
+        return "view/system/sysRegPerson/indexInput";
+    }
+
+    /**
+     * 验证是否已有注册
+     *
+     * @throws Exception .
+     */
+    @RequestMapping
+    public String getRegIndex(Model model, String unitCode, String loginName) throws Exception {
+        String regInfo = isRegIndex(unitCode, loginName);
+        if (!StringHelper.isEmpty(regInfo) && regInfo.equals("用户已经注册!!")) {
+            model.addAttribute("msg", "{success:'false',msg:'" + regInfo + "'}");
+        } else {
+            model.addAttribute("msg", "{success:'true',msg:'" + regInfo + "'}");
+        }
+        return "common/msg";
+    }
+
+    //是否已注册
+    public String isRegIndex(String unitCode, String loginName) {
+        String msg = "用户已经注册!!";
+        List<SysRegPerson> sysRegPersons = sysRegPersonService.findByProperty("unitCode", unitCode);
+        if (null != sysRegPersons && sysRegPersons.size() > 0) {
+            return msg;
+        }
+        String[] loginNames = loginName.split("_");
+        SysUser sysUser = sysUserService.findUniqueByProperty("loginName", loginName);
+        if (sysUser == null) {
+            return "";
+        } else {
+            if (loginNames[0].equals(unitCode)) {
+                return msg;
+            } else {
+                return "";
+            }
+        }
+    }
+
+    /**
+     * 保存操作
+     *
+     * @param response .
+     * @param entity   .
+     * @param request  .
+     * @throws Exception .
+     */
+    @SuppressWarnings("unchecked")
+    @RequestMapping
+    public void saveIndex(HttpServletResponse response, @ModelAttribute("bean") SysRegPerson entity, HttpServletRequest request) throws Exception {
+        String msg = "户注册成功!";
+        try {
+            SysRegPerson target;
+            if (entity.getId() != null) {
+                target = sysRegPersonService.get(entity.getId());
+                ReflectionUtils.copyBean(entity, target, new String[]{
+                        "personName",
+                        "mobile",
+                        "gdCode",
+                        "bjbh",
+                        "unitCode",
+                        "unitIdentifyCode",
+                        "regResource",
+                        "acceptOpinion",
+                });
+            } else {
+                target = entity;
+            }
+            target.setAcceptOpinion(1);
+            sysRegPersonService.save(target);
+            String loginName = request.getParameter("loginName");
+            target.setRegResource(Integer.parseInt(request.getParameter("regResource")));
+            target.setAcceptDatetime(DateTimeHelper.getTimestamp());
+            SysUser user = null;
+            SysUser sysUser = sysUserService.findUniqueByProperty("loginName", loginName);
+            if (null != sysUser) {
+                user = sysUser;
+            } else {
+                user = new SysUser();
+            }
+            user.setLoginName(getCodeByRegType(target));
+            user.setDisplayName(target.getPersonName());
+            user.setStatus(String.valueOf(PersonRegSource.RESOURCE_WEBSITE.getCode()));
+            user.setCreateTime(DateTimeHelper.getTimestamp());
+            SysUser loginUser = sysUserManager.getAdminUser();
+            user.setCreateUser(loginUser.getLoginName());
+            int pas = (int) (Math.random() * 999999);
+            if (pas < 100000) {
+                pas += 100000;
+            }
+            user.setPassword(CryptUtil.encrypt(String.valueOf(pas)));
+            user.setMd5Pass(Md5Utils.md5(String.valueOf(pas)));
+            user.setPasswordUpdateTime(new Timestamp(System.currentTimeMillis()));
+            user.setRegPerson(target);
+            sysUserService.save(user);
+
+            sysRegPersonService.save(target);
+
+            msg += "请记住用户名：" + user.getLoginName();
+        } catch (Exception e) {
+            log.error("error", e);
+            super.processException(response, e);
+            return;
+        }
+        sendSuccessJSON(response, msg);
+    }
+
 }

@@ -97,7 +97,7 @@
                      title="点击更换图片" style="vertical-align: middle;cursor:pointer">
             </div>
             <div style="height:45px">
-                <span style="width:70px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <span style="width:70px"><a href="${ctx}/sysRegPerson/indexInput.do?flag=fromIndex" target="_blank">用户注册</a></span>
                 <input type="submit" name="btnSub" class="login_ok" value=" ">&nbsp;
                 <input type="reset" name="btnReset" class="login_cancel" value=" ">
             </div>
