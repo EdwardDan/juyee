@@ -10,6 +10,7 @@ import com.justonetech.biz.domain.ProjExtend;
 import com.justonetech.biz.domain.ProjExtendCost;
 import com.justonetech.biz.domain.ProjExtendSchedule;
 import com.justonetech.biz.domain.ProjInfo;
+import com.justonetech.biz.manager.ProjectInfoContentManager;
 import com.justonetech.biz.manager.ProjectRelateManager;
 import com.justonetech.biz.utils.Constants;
 import com.justonetech.biz.utils.enums.ProjExtendCostType;
@@ -73,6 +74,9 @@ public class ProjExtendController extends BaseCRUDActionController<ProjExtend> {
 
     @Autowired
     private ProjectRelateManager projectRelateManager;
+
+    @Autowired
+    private ProjectInfoContentManager projectInfoContentManager;
 
     /**
      * 列表显示页面
@@ -282,6 +286,8 @@ public class ProjExtendController extends BaseCRUDActionController<ProjExtend> {
         model.addAttribute("areas", projInfo.getBelongAreaNames());
         modelStatus(model);
 
+        projectInfoContentManager.setReportContent(model, projInfo.getProjContent());
+
         return "view/project/projExtend/input";
     }
 
@@ -315,25 +321,24 @@ public class ProjExtendController extends BaseCRUDActionController<ProjExtend> {
             if (entity.getId() != null) {
                 target = projInfoService.get(entity.getId());
                 ReflectionUtils.copyBean(entity, target, new String[]{
-                        "jsDept",
-                        "jsDeptPerson",
-                        "jsDeptTel",
-                        "sgDept",
-                        "sgDeptPerson",
-                        "sgDeptTel",
-                        "jlDept",
-                        "jlDeptPerson",
-                        "jlDeptTel",
+                        "kgjd",
+                        "wgjd",
+                        "intro",
                         "isMajor",
-                        "function",
-                        "engineerRange",
-                        "mainContent",
+                        "planTotalInvest",
+                        "gkpfTotalInvest",
+                        "gkpfPreInvest",
+                        "gkpfJaInvest",
+                        "csTotalInvest",
+                        "csPreInvest",
+                        "csJaInvest"
                 });
             } else {
                 target = entity;
             }
-            String intro = request.getParameter("intro");
-            target.setIntro(intro);
+            //保存项目相关信息
+            String requestContent = projectInfoContentManager.getRequestContent(target, request);
+            target.setProjContent(requestContent);
 
             projInfoService.save(target);
 

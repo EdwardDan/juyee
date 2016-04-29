@@ -135,7 +135,7 @@
             <legend>项目扩展信息</legend>
             <table cellpadding="0" cellspacing="0" class="form_table">
                 <tr class="tr_dark">
-                    <td class="form_border" rowspan="2" style="width:5%;">计划任务书</td>
+                    <td class="form_border" rowspan="2" style="width:8%;" nowrap>计划任务书</td>
                     <td class="form_label_right" style="width: 15%;">开工节点：</td>
                     <td class="form_content" style="width: 25%;" nowrap>
                         <form:input path="kgjd" cssClass="input_date" readonly="true"/>
@@ -172,12 +172,12 @@
                     <td class="form_content" style="width: 15%;" rowspan="3">
                         <form:input path="planTotalInvest" cssClass="input_number"/>
                     </td>
-                    <td class="form_border" rowspan="3" style="width:5%;">工可批复总投资</td>
+                    <td class="form_border" rowspan="3" style="width:8%;" nowrap>工可批复<br>总投资</td>
                     <td class="form_label_right" style="width: 10%;">总投资：</td>
                     <td class="form_content" style="width: 25%;">
                         <form:input path="gkpfTotalInvest" cssClass="input_number"/>
                     </td>
-                    <td class="form_border" rowspan="3" style="width:5%;">初设批复总投资</td>
+                    <td class="form_border" rowspan="3" style="width:8%;" nowrap>初设批复<br>总投资</td>
                     <td class="form_label_right" style="width: 10%;">总投资：</td>
                     <td class="form_content" style="width: 25%;">
                         <form:input path="csTotalInvest" cssClass="input_number"/>

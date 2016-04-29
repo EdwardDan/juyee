@@ -260,7 +260,7 @@ public class ProjInfoController extends BaseCRUDActionController<ProjInfo> {
             if (entity.getId() != null) {
                 target = projInfoService.get(entity.getId());
                 ReflectionUtils.copyBean(entity, target, new String[]{
-                        "bjbh",
+//                        "bjbh",
                         "projNum",
                         "name",
                         "no",

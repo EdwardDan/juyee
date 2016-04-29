@@ -6,28 +6,24 @@
             gridOpts: {
                 url: "${ctx}/projInfo/gridDataCustom.do",
                 colNames: ['ID',
-                    '填报年份',
                     '项目序号',
                     '项目编号',
                     '项目名称',
-                    '管理属性',
-                    '项目状态',
+                    '所属区县',
+                    '项目阶段',
                     '业态类别',
-                    '办证推进标段数',
-                    '形象进度标段数',
+                    '工可批复总投资（亿元）',
                     '操作'
                 ],
                 colModel: [
                     {name: 'id', width: 10, align: "center", searchtype: "integer", hidden: true},
-                    {name: "year", width: "30", align: "center", searchtype: "integer", sortable: true, hidden: true},
                     {name: "no", width: "30", align: "center", searchtype: "string", sortable: true, hidden: true},
                     {name: "projNum", width: "30", align: "center", searchtype: "string", sortable: true, hidden: true},
                     {name: "name", width: "80", align: "left", searchtype: "string", sortable: true},
-                    {name: "property.name", width: "20", align: "center", searchtype: "string", sortable: true},
+                    {name: "areaCode", width: "20", align: "center", searchtype: "string", sortable: true},
                     {name: "stage.name", width: "20", align: "center", searchtype: "string", sortable: true},
                     {name: "category.name", width: "20", align: "center", searchtype: "string", sortable: true},
-                    {name: "bidCountOfStage", width: "30", align: "center", searchtype: "integer", sortable: true, formatter: viewBidInfoFormat1},
-                    {name: "bidCountOfNode", width: "30", align: "center", searchtype: "integer", sortable: true, formatter: viewBidInfoFormat2}
+                    {name: "gkpfTotalInvest", width: "30", align: "center", searchtype: "string", sortable: true}
                 ],
                 actModel: [
                     {name: 'operation', width: 40, align: 'center'}
@@ -48,11 +44,11 @@
                         </c:if>
                         if (stageName == '未开工') {
                             //判断项目阶段的高亮显示（删除列时注意修改）
-                            $("#" + id).find("td:eq(7)").css("background-color", " #f08080");
+                            $("#" + id).find("td:eq(6)").css("background-color", " #f08080");
                         } else if (stageName == '在建') {
-                            $("#" + id).find("td:eq(7)").css("background-color", "#add8e6");
+                            $("#" + id).find("td:eq(6)").css("background-color", "#add8e6");
                         } else if (stageName == '已完工') {
-                            $("#" + id).find("td:eq(7)").css("background-color", "#90ee90");
+                            $("#" + id).find("td:eq(6)").css("background-color", "#90ee90");
                         }
                         jQuery("#listGrid").jqGrid('setRowData', ids[i], {operation: opButton});
                     }
@@ -61,8 +57,6 @@
             userOpts: {
                 defaultQuery: {
                     "groupOp": "AND", "rules": [
-                        {"field": "填报年份", "op": "eq", "data": ""},
-//                    { "field": "项目序号", "op": "cn", "data": ""},
                         {"field": "项目编号", "op": "cn", "data": ""},
                         {"field": "项目名称", "op": "cn", "data": ""}
                     ]

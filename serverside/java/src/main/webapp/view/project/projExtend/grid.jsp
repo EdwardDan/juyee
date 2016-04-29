@@ -6,41 +6,25 @@
             gridOpts: {
                 url: "${ctx}/projExtend/gridDataCustom.do?flag=${flag}&msg=${msg}&xmsx=${xmsx}",
                 colNames: ['ID',
-                    '填报年份',
                     '项目序号',
                     '项目编号',
                     '项目名称',
-                    <c:if test="${flag!='qqdj'}">
-                    '项目性质',
-                    </c:if>
-                    <c:if test="${flag=='qqdj'}">
                     '所属区县',
-                    </c:if>
                     '项目阶段',
                     '业态类别',
-                    "工可总投资（亿元）",
-                    "年度累计完成额",
-                    "本年计划完成率（%）",
+                    '工可批复总投资（亿元）',
                     '标段数',
                     '操作'
                 ],
                 colModel: [
                     {name: 'id', width: 10, align: "center", searchtype: "integer", hidden: true},
-                    {name: "year", width: "10", align: "center", searchtype: "integer", sortable: true, hidden: true},
-                    {name: "no", width: "20", align: "center", searchtype: "string", sortable: true},
-                    {name: "projNum", width: "25", align: "center", searchtype: "string", sortable: true, hidden: true},
+                    {name: "no", width: "30", align: "center", searchtype: "string", sortable: true, hidden: true},
+                    {name: "projNum", width: "30", align: "center", searchtype: "string", sortable: true, hidden: true},
                     {name: "name", width: "80", align: "left", searchtype: "string", sortable: true},
-                    <c:if test="${flag!='qqdj'}">
-                    {name: "property.name", width: "20", align: "center", searchtype: "string", sortable: true},
-                    </c:if>
-                    <c:if test="${flag=='qqdj'}">
                     {name: "areaCode", width: "20", align: "center", searchtype: "string", sortable: true},
-                    </c:if>
                     {name: "stage.name", width: "20", align: "center", searchtype: "string", sortable: true},
                     {name: "category.name", width: "20", align: "center", searchtype: "string", sortable: true},
-                    {name: "gctxGkpfTotal", width: "35", align: "right", searchtype: "string", sortable: false},
-                    {name: "accCost", width: "30", align: "right", searchtype: "string", sortable: false},
-                    {name: "costRate", width: "35", align: "center", searchtype: "string", sortable: false},
+                    {name: "gkpfTotalInvest", width: "30", align: "center", searchtype: "string", sortable: true},
                     {name: "bidCountOfStage", width: "10", align: "center", searchtype: "integer", hidden: true}
                 ],
                 actModel: [
@@ -64,11 +48,11 @@
                         </c:if>
                         if (stageName == '未开工') {
                             //判断项目阶段的高亮显示（删除列时注意修改）
-                            $("#" + id).find("td:eq(7)").css("background-color", " #f08080");
+                            $("#" + id).find("td:eq(6)").css("background-color", " #f08080");
                         } else if (stageName == '在建') {
-                            $("#" + id).find("td:eq(7)").css("background-color", "#add8e6");
+                            $("#" + id).find("td:eq(6)").css("background-color", "#add8e6");
                         } else if (stageName == '已完工') {
-                            $("#" + id).find("td:eq(7)").css("background-color", "#90ee90");
+                            $("#" + id).find("td:eq(6)").css("background-color", "#90ee90");
                         }
                         jQuery("#listGrid").jqGrid('setRowData', ids[i], {operation: opButton});
                     }
@@ -77,8 +61,6 @@
             userOpts: {
                 defaultQuery: {
                     "groupOp": "AND", "rules": [
-                        {"field": "填报年份", "op": "eq", "data": ""},
-//                    { "field": "项目序号", "op": "cn", "data": ""},
                         {"field": "项目编号", "op": "cn", "data": ""},
                         {"field": "项目名称", "op": "cn", "data": ""}
                     ]
