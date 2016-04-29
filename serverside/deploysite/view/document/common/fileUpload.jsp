@@ -59,6 +59,7 @@
                     <input type="hidden" name="docId" id="docId" value="${docId}"/>
                     <input type="hidden" name="secondDir" id="secondDir" value="${secondDir}"/>
                 </div>
+                <div>请保证上传文件清晰，文字正面朝上</div>
             </c:if>
             <div class="span5">
                 <!-- The global progress bar -->

@@ -45,9 +45,42 @@
 			not-null="false"
 			length="500"
         >
-            <meta attribute="ColumnName">计划日期/办结日期/问题</meta>
-            <meta attribute="ColumnComment">计划日期/办结日期/问题</meta>
+            <meta attribute="ColumnName">问题</meta>
+            <meta attribute="ColumnComment">问题</meta>
         </property>
+
+		<property
+				name="planSbDate"
+				column="PLAN_SB_DATE"
+				type="date"
+				not-null="false"
+				length="7"
+				>
+			<meta attribute="ColumnName">计划上报日期</meta>
+			<meta attribute="ColumnComment">计划上报日期</meta>
+		</property>
+
+		<property
+				name="planPfDate"
+				column="PLAN_PF_DATE"
+				type="date"
+				not-null="false"
+				length="7"
+				>
+			<meta attribute="ColumnName">计划批复日期</meta>
+			<meta attribute="ColumnComment">计划批复日期</meta>
+		</property>
+
+		<property
+				name="type"
+				column="TYPE"
+				type="string"
+				not-null="false"
+				length="50"
+				>
+			<meta attribute="ColumnName">计划或实际类型</meta>
+			<meta attribute="ColumnComment">计划或实际类型</meta>
+		</property>
 
 		<property
 			name="createTime"
@@ -120,6 +153,13 @@
 			class="ProjStage"
 			not-null="false"
 		>
+		</many-to-one>
+		<many-to-one
+				name="doc"
+				column="DOC_ID"
+				class="DocDocument"
+				not-null="false"
+				>
 		</many-to-one>
 
 	</class>	

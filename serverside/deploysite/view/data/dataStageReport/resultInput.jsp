@@ -3,37 +3,51 @@
 <script type="text/javascript">
     function reBackData(obj, bidId, stepId, stageId) {
         parent.flag = true;
-        if (${result.code==result1}) {
-            $("#dealDate_" + bidId + "_" + stepId + "_" + stageId).val($("#planDate").val());
-        } else if (${result.code==result4}) {
-            $("#dealDate_" + bidId + "_" + stepId + "_" + stageId).val($("#question").val());
-            document.getElementById("dealDate_" + bidId + "_" + stepId + "_" + stageId).title = document.getElementById("question").value;
+        if (${resultCodeJH!=null}) {
+            if (${result.code==result1}) {
+                $("#dealDateJH_" + bidId + "_" + stepId + "_" + stageId).val($("#planDate").val());
+            } else if (${result.code==result4}) {
+                $("#dealDateJH_" + bidId + "_" + stepId + "_" + stageId).val($("#question").val());
+                document.getElementById("dealDateJH_" + bidId + "_" + stepId + "_" + stageId).title = document.getElementById("question").value;
+            }
+        } else if (${resultCodeSJ!=null}) {
+            if (${result.code==result1}) {
+                $("#dealDateSJ_" + bidId + "_" + stepId + "_" + stageId).val($("#planDate").val());
+            } else if (${result.code==result4}) {
+                $("#dealDateSJ_" + bidId + "_" + stepId + "_" + stageId).val($("#question").val());
+                document.getElementById("dealDateSJ_" + bidId + "_" + stepId + "_" + stageId).title = document.getElementById("question").value;
+            }
         }
     }
 </script>
 <fieldset class="form_fieldset">
     <table cellpadding="0" cellspacing="0" class="form_table">
-        <c:if test="${result.code==result1}">
-            <tr class="tr_dark">
-                <td class="form_content">请选择计划完成日期：</td>
-            </tr>
-            <br>
-            <tr class="tr_dark">
-                <td class="form_content">
-                    计划日期：
-                    <input type="text" class="input_date" name="planDate" id="planDate" value="${currentDate}"
-                           readonly="true">
-                    <input type="button" class="button_calendar" value="" onClick="calendar('planDate','')">
-                </td>
-            </tr>
-        </c:if>
+        <%--<c:if test="${result.code==result1}">--%>
+            <%--<tr class="tr_dark">--%>
+                <%--<td class="form_content">请选择计划完成日期：</td>--%>
+            <%--</tr>--%>
+            <%--<br>--%>
+            <%--<tr class="tr_dark">--%>
+                <%--<td class="form_content">--%>
+                    <%--计划日期：--%>
+                    <%--<input type="text" class="input_date" name="planDate" id="planDate" value="${currentDate}"--%>
+                           <%--readonly="true">--%>
+                    <%--<input type="button" class="button_calendar" value="" onClick="calendar('planDate','')">--%>
+                <%--</td>--%>
+            <%--</tr>--%>
+        <%--</c:if>--%>
         <c:if test="${result.code==result4}">
             <tr class="tr_dark">
                 <td class="form_content">请填写办理受阻问题：</td>
             </tr>
             <tr class="tr_dark">
                 <td style="text-align: center;">
-                    <textarea class="input_textarea" name="question" id="question">${dealDate}</textarea>
+                    <c:if test="${resultCodeJH!=null}">
+                        <textarea class="input_textarea" name="question" id="question">${dealDateJH}</textarea>
+                    </c:if>
+                    <c:if test="${resultCodeSJ!=null}">
+                        <textarea class="input_textarea" name="question" id="question">${dealDateSJ}</textarea>
+                    </c:if>
                 </td>
             </tr>
         </c:if>
