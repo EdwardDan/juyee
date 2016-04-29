@@ -36,7 +36,8 @@
                                 <select class="form_select_long" style="width: 99%;"
                                         name="resultCodeJH_${bidId}_${step.id}_${stageFirst.id}"
                                         id="resultCodeJH_${bidId}_${step.id}_${stageFirst.id}"
-                                        onchange="changeResultJH(this,'${bidId}','${step.id}','${stageFirst.id}')">
+                                        onchange="changeResultJH(this,'${bidId}','${step.id}','${stageFirst.id}')" <c:if
+                                        test="${isSubmit == 1}"> disabled="disabled"</c:if>>
                                     <option value="">请选择</option>
                                     <c:forEach items="${results}" var="result">
                                         <option value="${result.code}"
@@ -51,24 +52,26 @@
                                       id="dealDateJH_${bidId}_${step.id}_${stageFirst.id}"
                                       name="dealDateJH_${bidId}_${step.id}_${stageFirst.id}"
                                       title="${dataMap[dataKey].dealDateJH}"
-                                      onclick="changeResultJH(document.getElementById('resultCodeJH_${bidId}_${step.id}_${stageFirst.id}'),'${bidId}','${step.id}','${stageFirst.id}')">${dataMap[dataKey].dealDateJH}</textarea>
+                                      <c:if test="${isSubmit != 1}">onclick="changeResultJH(document.getElementById('resultCodeJH_${bidId}_${step.id}_${stageFirst.id}'),'${bidId}','${step.id}','${stageFirst.id}')"</c:if>>${dataMap[dataKey].dealDateJH}</textarea>
                                     <%--需办理的日期选择--%>
                                 <div id="xblJH_${bidId}_${step.id}_${stageFirst.id}"
                                      name="xblJH_${bidId}_${step.id}_${stageFirst.id}"
                                      <c:if test="${dataMap[dataKey].resultCodeJH != '1'}">hidden="hidden"</c:if>
                                         >
                                     计划上报：<input type="text" id="planSbDateJH_${bidId}_${step.id}_${stageFirst.id}"
-                                                name="planSbDateJH_${bidId}_${step.id}_${stageFirst.id}"
-                                                class="input_date" value="${dataMap[dataKey].planSbDateJH}">
+                                                name="planSbDateJH_${bidId}_${step.id}_${stageFirst.id}" class="input_date"
+                                                value="${dataMap[dataKey].planSbDateJH}" readonly="readonly">
                                     <input type="button"
                                            class="button_calendar"
+                                    <c:if test="${isSubmit == 1}"> disabled="disabled"</c:if>
                                            value=""
                                            onClick="calendar('planSbDateJH_${bidId}_${step.id}_${stageFirst.id}','')"><br/>
                                     计划批复：<input type="text" id="planPfDateJH_${bidId}_${step.id}_${stageFirst.id}"
-                                                name="planPfDateJH_${bidId}_${step.id}_${stageFirst.id}"
-                                                class="input_date" value="${dataMap[dataKey].planPfDateJH}">
+                                                name="planPfDateJH_${bidId}_${step.id}_${stageFirst.id}" class="input_date"
+                                                value="${dataMap[dataKey].planPfDateJH}" readonly="readonly">
                                     <input type="button"
                                            class="button_calendar"
+                                    <c:if test="${isSubmit == 1}"> disabled="disabled"</c:if>
                                            value=""
                                            onClick="calendar('planPfDateJH_${bidId}_${step.id}_${stageFirst.id}','')">
                                 </div>
@@ -95,22 +98,21 @@
                                       name="dealDateSJ_${bidId}_${step.id}_${stageFirst.id}"
                                       title="${dataMap[dataKey].dealDateSJ}"
                                       onclick="changeResultSJ(document.getElementById('resultCodeSJ_${bidId}_${step.id}_${stageFirst.id}'),'${bidId}','${step.id}','${stageFirst.id}')">${dataMap[dataKey].dealDateSJ}</textarea>
-
                                     <%--需办理的日期选择--%>
                                 <div id="xblSJ_${bidId}_${step.id}_${stageFirst.id}"
                                      name="xblSJ_${bidId}_${step.id}_${stageFirst.id}"
                                      <c:if test="${dataMap[dataKey].resultCodeSJ != '1'}">hidden="hidden"</c:if>
                                         >
                                     计划上报：<input type="text" id="planSbDateSJ_${bidId}_${step.id}_${stageFirst.id}"
-                                                name="planSbDateSJ_${bidId}_${step.id}_${stageFirst.id}"
-                                                class="input_date" value="${dataMap[dataKey].planSbDateSJ}">
+                                                name="planSbDateSJ_${bidId}_${step.id}_${stageFirst.id}" class="input_date"
+                                                value="${dataMap[dataKey].planSbDateSJ}" readonly="readonly">
                                     <input type="button"
                                            class="button_calendar"
                                            value=""
                                            onClick="calendar('planSbDateSJ_${bidId}_${step.id}_${stageFirst.id}','')"><br/>
                                     计划批复：<input type="text" id="planPfDateSJ_${bidId}_${step.id}_${stageFirst.id}"
-                                                name="planPfDateSJ_${bidId}_${step.id}_${stageFirst.id}"
-                                                class="input_date" value="${dataMap[dataKey].planPfDateSJ}">
+                                                name="planPfDateSJ_${bidId}_${step.id}_${stageFirst.id}" class="input_date"
+                                                value="${dataMap[dataKey].planPfDateSJ}" readonly="readonly">
                                     <input type="button"
                                            class="button_calendar"
                                            value=""

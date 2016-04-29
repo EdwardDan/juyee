@@ -293,7 +293,7 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
     public void save(HttpServletResponse response, @ModelAttribute("bean") DataStageReport entity, HttpServletRequest request, String reportLog) throws Exception {
         try {
             //获取是否提交标识
-            String isSubmit = request.getParameter("isSubmit");
+            String isSubmit = request.getParameter("isSubmit");//isSubmit为0时为保存为1时为提交
             //获取并保存标段
             String projectBidId = request.getParameter("projectBidId");
             ProjBid projBid = projBidService.get(Long.valueOf(projectBidId));
