@@ -192,7 +192,10 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         model.addAttribute("yearOptions", DateTimeHelper.getYearSelectOptions(String.valueOf(c.get(Calendar.YEAR))));
         model.addAttribute("currentYear", c.get(Calendar.YEAR));
         model.addAttribute("currentMonth", c.get(Calendar.MONTH) + 1);
-        model.addAttribute("PROJ_INFO_CATEGORY", Constants.PROJ_INFO_CATEGORY);
+        model.addAttribute("PROJ_INFO_CATEGORY", Constants.PROJ_INFO_CATEGORY);//项目类型
+        model.addAttribute("PROJ_INFO_PROPERTY",Constants.PROJ_INFO_PROPERTY);//管理属性
+        model.addAttribute("PROJ_INFO_BELONG_AREA",Constants.PROJ_INFO_BELONG_AREA);//区县
+        model.addAttribute("PROJ_INFO_STAGE",Constants.PROJ_INFO_STAGE);//项目状态
         return "view/query/projectQueryStage/viewStage";
     }
 
@@ -205,16 +208,22 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
     @RequestMapping
     public String viewStageData(Model model, HttpServletRequest request) {
         String projectId = request.getParameter("id");
-        String projectName = request.getParameter("projectName");
-        String bidName = request.getParameter("bidName");
-        String jsDept = request.getParameter("jsDept");
-        String year = request.getParameter("year");
-        String categoryId = request.getParameter("categoryId");
-        String qqdj = request.getParameter("qqdj");
-        String beginDate = request.getParameter("beginDate");
-        String endDate = request.getParameter("endDate");
-        String month = request.getParameter("month");
+        String projectName = request.getParameter("projectName");//项目名称
+//        String bidName = request.getParameter("bidName");
+        String jsDept = request.getParameter("jsDept");//建设单位
+        String year = request.getParameter("year");//年份
+        String month = request.getParameter("month");//月份
+        String categoryId = request.getParameter("categoryId");//项目类型
+        String propertyId=request.getParameter("propertyId");//管理属性
+        String belongAreaId = request.getParameter("belongAreaId");//区县
+        String isMajor = request.getParameter("isMajor");//是否重大
+        String infoStageId = request.getParameter("infoStageId");//项目状态
+        String qqdj = request.getParameter("qqdj");//区区对接
+//        String beginDate = request.getParameter("beginDate");
+//        String endDate = request.getParameter("endDate");
         Boolean isSum = StringHelper.isEmpty(projectId);   //是否汇总
+
+
         model.addAttribute("isSum", isSum);
         model.addAttribute("year", year);
         model.addAttribute("month", month);
@@ -246,30 +255,43 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         //标段列表
         String conditionHql = "from ProjBid where typeCode='" + ProjBidType.TYPE_STAGE.getCode() + "'";
         if (isSum) {
-            if (!StringHelper.isEmpty(projectName)) {
+            if (!StringHelper.isEmpty(projectName)) {//OK
                 conditionHql += " and project.name like '%" + projectName + "%'";
             }
-            if (!StringHelper.isEmpty(bidName)) {
-                conditionHql += " and name like '%" + bidName + "%'";
-            }
-            if (!StringHelper.isEmpty(jsDept)) {
-                conditionHql += " and project.jsDept like '%" + jsDept + "%'";
-            }
-            if (!StringHelper.isEmpty(year)) {
-                conditionHql += " and project.year='" + year + "'";
-            }
-            if (!StringHelper.isEmpty(categoryId)) {
+//            if (!StringHelper.isEmpty(jsDept)) {//noOK
+//                conditionHql += " and project.jsDept like '%" + jsDept + "%'";
+//            }
+//            if (!StringHelper.isEmpty(year)) {//noOK
+//                conditionHql += " and project.year = '%" + year + "%'";
+//            }
+            if (!StringHelper.isEmpty(categoryId)) {//OK
                 conditionHql += " and project.category.id=" + categoryId;
             }
-            if (!StringHelper.isEmpty(qqdj)) {
+//            if (!StringHelper.isEmpty(propertyId)) {//noOK
+//                conditionHql += " and project.property.id = '%" + propertyId + "%'";
+//            }
+//            if (!StringHelper.isEmpty(belongAreaId)) {//noOK
+//                conditionHql += " and project.areaCode = '%" + belongAreaId + "%'";
+//            }
+//            if (!StringHelper.isEmpty(isMajor)) {//noOK
+//                conditionHql += " and project.isMajor = '%" + isMajor + "%'";
+//            }
+//            if (!StringHelper.isEmpty(infoStageId)) {//noOK
+//                conditionHql += " and project.stage.id = '%" + infoStageId + "%'";
+//            }
+            if (!StringHelper.isEmpty(qqdj)) {//OK
                 conditionHql += " and project.projNum like '" + qqdj + "%'";
             }
-            if (!StringHelper.isEmpty(beginDate)) {
-                conditionHql += " and to_char(project.createTime,'yyyy-mm-dd')>='" + beginDate + "'";
-            }
-            if (!StringHelper.isEmpty(endDate)) {
-                conditionHql += " and to_char(project.createTime,'yyyy-mm-dd')<='" + endDate + "'";
-            }
+
+//            if (!StringHelper.isEmpty(bidName)) {
+//                conditionHql += " and name like '%" + bidName + "%'";
+//            }
+//            if (!StringHelper.isEmpty(beginDate)) {
+//                conditionHql += " and to_char(project.createTime,'yyyy-mm-dd')>='" + beginDate + "'";
+//            }
+//            if (!StringHelper.isEmpty(endDate)) {
+//                conditionHql += " and to_char(project.createTime,'yyyy-mm-dd')<='" + endDate + "'";
+//            }
         } else {
             conditionHql += " and project.id=" + projectId;
         }
@@ -302,6 +324,8 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
                 map.put("resultName", result.getName());
                 map.put("dealDate", item.getDealDate());
                 map.put("updateTime", item.getUpdateTime());
+                map.put("planSbDate",item.getPlanSbDate());
+                map.put("planPfDate",item.getPlanPfDate());
 
                 //办理状态
                 String[] ret = getColorAndResult(item, result);
@@ -457,14 +481,14 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
 
         String projectId = request.getParameter("id");
         String projectName = request.getParameter("projectName");
-        String bidName = request.getParameter("bidName");
+//        String bidName = request.getParameter("bidName");
         String jsDept = request.getParameter("jsDept");
         String year = request.getParameter("year");
         String categoryId = request.getParameter("categoryId");
         String qqdj = request.getParameter("qqdj");
         String stageIds = request.getParameter("stageIds");  //过滤节点
-        String beginDate = request.getParameter("beginDate");
-        String endDate = request.getParameter("endDate");
+//        String beginDate = request.getParameter("beginDate");
+//        String endDate = request.getParameter("endDate");
         String month = request.getParameter("month");
         Boolean isSum = StringHelper.isEmpty(projectId);   //是否汇总
         beans.put("year", year);
@@ -531,9 +555,9 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
             if (!StringHelper.isEmpty(projectName)) {
                 conditionHql += " and project.name like '%" + projectName + "%'";
             }
-            if (!StringHelper.isEmpty(bidName)) {
-                conditionHql += " and name like '%" + bidName + "%'";
-            }
+//            if (!StringHelper.isEmpty(bidName)) {
+//                conditionHql += " and name like '%" + bidName + "%'";
+//            }
             if (!StringHelper.isEmpty(jsDept)) {
                 conditionHql += " and project.jsDept like '%" + jsDept + "%'";
             }
@@ -546,12 +570,12 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
             if (!StringHelper.isEmpty(qqdj)) {
                 conditionHql += " and project.projNum like '" + qqdj + "%'";
             }
-            if (!StringHelper.isEmpty(beginDate)) {
-                conditionHql += " and to_char(project.createTime,'yyyy-mm-dd')>='" + beginDate + "'";
-            }
-            if (!StringHelper.isEmpty(endDate)) {
-                conditionHql += " and to_char(project.createTime,'yyyy-mm-dd')<='" + endDate + "'";
-            }
+//            if (!StringHelper.isEmpty(beginDate)) {
+//                conditionHql += " and to_char(project.createTime,'yyyy-mm-dd')>='" + beginDate + "'";
+//            }
+//            if (!StringHelper.isEmpty(endDate)) {
+//                conditionHql += " and to_char(project.createTime,'yyyy-mm-dd')<='" + endDate + "'";
+//            }
         } else {
             conditionHql += " and project.id=" + projectId;
         }
