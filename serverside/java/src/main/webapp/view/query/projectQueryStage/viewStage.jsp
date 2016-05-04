@@ -18,8 +18,13 @@
             $("#projectName").val("");
             $("#year").val("${currentYear}");
             $("#month").val("${currentMonth}");
-            $("#jsDept").val("");
-
+            $("#projectName").val("");
+            $("#categoryId").val("");
+            $("#propertyId").val("");
+            $("#belongAreaId").val("");
+            $("#isMajor").val("");
+            $("#infoStageId").val("");
+            $("#qqdj").val("");
         }
         var str = getCondStr();
         setButton(true);
@@ -73,6 +78,7 @@
         s += "&infoStageId=" + $("#infoStageId").val();
         s += "&propertyId=" + $("#propertyId").val();
         s += "&belongAreaId=" + $("#belongAreaId").val();
+        s += "&month2=" + $("#month2").val();
 
 //        s += "&beginDate=" + $("#beginDate").val();
 //        s += "&endDate=" + $("#endDate").val();
@@ -134,7 +140,7 @@
             <td align="right" width="70" nowrap>日期：</td>
             <td align="left" nowrap>
                 <select id="year">
-                    <c:forEach var="y" begin="2016" end="${currentYear}" step="1">
+                    <c:forEach var="y" begin="2015" end="${currentYear}" step="1">
                         <option
                                 <c:if test="${currentYear==y}">selected="selected"</c:if>
                                 value="${y}">${y}年
@@ -164,11 +170,13 @@
                 </select>
             </td>
             <td align="left" nowrap colspan="4">&nbsp;区区对接：
-                <select name="qqdj" id="qqdj" class="form_select" style="width: 120px;">
-                    <option value="">请选择</option>
-                    <option value="1012">2010-2012区区对接</option>
-                    <option value="1517">2015-2017区区对接</option>
-                </select>&nbsp;&nbsp;&nbsp;&nbsp;
+                <sys:code code="${PROJ_QQDJ}" name="qqdj" id="qqdj" type="select"
+                          sysCodeDetailId="" style="width:120px" isAlowedNull="true"/>
+                <%--<select name="" id="qqdj" class="form_select" style="width: 120px;">--%>
+                <%--<option value="">请选择</option>--%>
+                <%--<option value="1012">2010-2012区区对接</option>--%>
+                <%--<option value="1517">2015-2017区区对接</option>--%>
+                <%--</select>&nbsp;&nbsp;&nbsp;&nbsp;--%>
             </td>
             <%--<td align="right" width="70" nowrap>标段名称：</td>--%>
             <%--<td align="left" nowrap>--%>
@@ -241,6 +249,20 @@
             <%--</table>--%>
             <%--</td>--%>
         </tr>
+    </table>
+    <table cellpadding="1" cellspacing="1" width="500" border="0"
+           <c:if test="${!not empty id}">style="display: none"</c:if>>
+        <td align="right" width="70" nowrap>查看月份：</td>
+        <td align="left" nowrap>
+            <select id="month2" onchange="loadStageData('',null)">
+                <c:forEach var="m" begin="1" end="${currentMonth}" step="1">
+                    <option
+                            <c:if test="${currentMonth==m}">selected="selected"</c:if>
+                            value="${m}">${currentYear}年${m}月
+                    </option>
+                </c:forEach>
+            </select>
+        </td>
     </table>
     <table cellpadding="0" cellspacing="0" class="form_table">
         <tr class="tr_light">

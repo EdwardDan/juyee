@@ -85,8 +85,8 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         List<SysCodeDetail> projinfostageList = sysCodeManager.getCodeListByCode(Constants.PROJ_INFO_STAGE);
         List<SysCodeDetail> projinfocategoryList = sysCodeManager.getCodeListByCode(Constants.PROJ_INFO_CATEGORY);
         model.addAttribute("propertyList", propertyList); //管理属性
-        model.addAttribute("projinfostageList",projinfostageList); //项目状态
-        model.addAttribute("projinfocategoryList",projinfocategoryList); //业务类别
+        model.addAttribute("projinfostageList", projinfostageList); //项目状态
+        model.addAttribute("projinfocategoryList", projinfocategoryList); //业务类别
         model.addAttribute("canViewAll", sysUserManager.hasPrivilege(PrivilegeCode.PROJECT_QUERY_STAGE_SUM));
         model.addAttribute("xmlconfig", documentManager.getDefaultXmlConfig());
         model.addAttribute("bizCode", DataStageReportDoc.class.getSimpleName());
@@ -145,7 +145,7 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
             if (!StringHelper.isEmpty(projcategory)) {
                 hql += " and category.name = '" + projcategory + "' ";
             }
-            if (!isJsdw){
+            if (!isJsdw) {
                 hql += projectRelateManager.getRelateProjectHql("id");
             }
             hql += " order by no asc,id asc";
@@ -193,9 +193,10 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         model.addAttribute("currentYear", c.get(Calendar.YEAR));
         model.addAttribute("currentMonth", c.get(Calendar.MONTH) + 1);
         model.addAttribute("PROJ_INFO_CATEGORY", Constants.PROJ_INFO_CATEGORY);//项目类型
-        model.addAttribute("PROJ_INFO_PROPERTY",Constants.PROJ_INFO_PROPERTY);//管理属性
-        model.addAttribute("PROJ_INFO_BELONG_AREA",Constants.PROJ_INFO_BELONG_AREA);//区县
-        model.addAttribute("PROJ_INFO_STAGE",Constants.PROJ_INFO_STAGE);//项目状态
+        model.addAttribute("PROJ_INFO_PROPERTY", Constants.PROJ_INFO_PROPERTY);//管理属性
+        model.addAttribute("PROJ_INFO_BELONG_AREA", Constants.PROJ_INFO_BELONG_AREA);//区县
+        model.addAttribute("PROJ_INFO_STAGE", Constants.PROJ_INFO_STAGE);//项目状态
+        model.addAttribute("PROJ_QQDJ", Constants.PROJ_QQDJ);//区区对接
         return "view/query/projectQueryStage/viewStage";
     }
 
@@ -212,10 +213,21 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
 //        String bidName = request.getParameter("bidName");
         String jsDept = request.getParameter("jsDept");//建设单位
         String year = request.getParameter("year");//年份
-        String month = request.getParameter("month");//月份
+        String month;
+        if (StringHelper.isEmpty(projectId)) {
+            month = request.getParameter("month");//汇总月份
+        } else {
+            month = request.getParameter("month2");//单个项目月份
+        }
+
+
         String categoryId = request.getParameter("categoryId");//项目类型
-        String propertyId=request.getParameter("propertyId");//管理属性
+        String propertyId = request.getParameter("propertyId");//管理属性
         String belongAreaId = request.getParameter("belongAreaId");//区县
+        SysCodeDetail belongArea = null;
+        if (StringHelper.isNotEmpty(belongAreaId)) {
+            belongArea = sysCodeManager.getCodeListById(Long.parseLong(belongAreaId));
+        }
         String isMajor = request.getParameter("isMajor");//是否重大
         String infoStageId = request.getParameter("infoStageId");//项目状态
         String qqdj = request.getParameter("qqdj");//区区对接
@@ -256,31 +268,31 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         String conditionHql = "from ProjBid where typeCode='" + ProjBidType.TYPE_STAGE.getCode() + "'";
         if (isSum) {
             if (!StringHelper.isEmpty(projectName)) {//OK
-                conditionHql += " and project.name like '%" + projectName + "%'";
+                conditionHql += " and project.name like '%" + projectName + "%'";//项目名称
             }
-//            if (!StringHelper.isEmpty(jsDept)) {//noOK
-//                conditionHql += " and project.jsDept like '%" + jsDept + "%'";
-//            }
-//            if (!StringHelper.isEmpty(year)) {//noOK
-//                conditionHql += " and project.year = '%" + year + "%'";
-//            }
+            if (!StringHelper.isEmpty(jsDept)) {//OK
+                conditionHql += " and jsdwName like '%" + jsDept + "%'";//建设单位
+            }
+            if (!StringHelper.isEmpty(year)) {//OK
+                conditionHql += " and project.year = " + year;//年份
+            }
             if (!StringHelper.isEmpty(categoryId)) {//OK
-                conditionHql += " and project.category.id=" + categoryId;
+                conditionHql += " and project.category.id=" + categoryId;//项目类型
             }
-//            if (!StringHelper.isEmpty(propertyId)) {//noOK
-//                conditionHql += " and project.property.id = '%" + propertyId + "%'";
-//            }
-//            if (!StringHelper.isEmpty(belongAreaId)) {//noOK
-//                conditionHql += " and project.areaCode = '%" + belongAreaId + "%'";
-//            }
-//            if (!StringHelper.isEmpty(isMajor)) {//noOK
-//                conditionHql += " and project.isMajor = '%" + isMajor + "%'";
-//            }
-//            if (!StringHelper.isEmpty(infoStageId)) {//noOK
-//                conditionHql += " and project.stage.id = '%" + infoStageId + "%'";
-//            }
+            if (!StringHelper.isEmpty(propertyId)) {//OK
+                conditionHql += " and project.property.id =" + propertyId;//管理属性
+            }
+            if (belongArea != null) {//OK
+                conditionHql += " and project.areaCode like '%" + belongArea.getName() + "%'";//区县
+            }
+            if (!StringHelper.isEmpty(isMajor)) {//OK
+                conditionHql += " and project.isMajor = " + isMajor;//是否重要
+            }
+            if (!StringHelper.isEmpty(infoStageId)) {//OK
+                conditionHql += " and project.stage.id = " + infoStageId;
+            }
             if (!StringHelper.isEmpty(qqdj)) {//OK
-                conditionHql += " and project.projNum like '" + qqdj + "%'";
+                conditionHql += " and project.projNum like '%" + qqdj + "%'";
             }
 
 //            if (!StringHelper.isEmpty(bidName)) {
@@ -315,25 +327,39 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         for (DataStageReportItem item : dataStageReportItems) {
             Long bidId = item.getStageReport().getBid().getId();
             String key = bidId + "_" + item.getStep().getId() + "_" + item.getStage().getId();
-            if (!oneBidHS.contains(key)) {
-                oneBidHS.add(key);
-                Map<String, Object> map = new HashMap<String, Object>();
-                SysCodeDetail result = item.getResult();
-                String code = result.getCode();
-                map.put("resultCode", code);
-                map.put("resultName", result.getName());
-                map.put("dealDate", item.getDealDate());
-                map.put("updateTime", item.getUpdateTime());
-                map.put("planSbDate",item.getPlanSbDate());
-                map.put("planPfDate",item.getPlanPfDate());
-
-                //办理状态
-                String[] ret = getColorAndResult(item, result);
-                map.put("color", ret[0]);
-                map.put("resultName", ret[1]);
-
+//            if (!oneBidHS.contains(key)) {
+//                oneBidHS.add(key);
+            Map<String, Object> map = new HashMap<String, Object>();
+            SysCodeDetail result = item.getResult();
+            String code = result.getCode();
+            if (item.getType().toString().equals("jh")) {
+                map.put("resultCodeJH", code);
+                map.put("resultNameJH", result.getName());
+                map.put("dealDateJH", item.getDealDate());
+                map.put("updateTimeJH", item.getUpdateTime());
+                map.put("planSbDateJH", item.getPlanSbDate());
+                map.put("planPfDateJH", item.getPlanPfDate());
+                key += "_jh";
+                dataMap.put(key, map);
+            } else if (item.getType().toString().equals("sj")) {
+                map.put("resultCodeSJ", code);
+                map.put("resultNameSJ", result.getName());
+                map.put("dealDateSJ", item.getDealDate());
+                map.put("updateTimeSJ", item.getUpdateTime());
+                map.put("planSbDateSJ", item.getPlanSbDate());
+                map.put("planPfDateSJ", item.getPlanPfDate());
+                key += "_sj";
                 dataMap.put(key, map);
             }
+
+
+            //办理状态
+//                String[] ret = getColorAndResult(item, result);
+//                map.put("color", ret[0]);
+//                map.put("resultName", ret[1]);
+
+
+//            }
         }
         model.addAttribute("dataMap", dataMap);
 
@@ -447,7 +473,14 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         String beginDate = request.getParameter("beginDate");
         String endDate = request.getParameter("endDate");
         String month = request.getParameter("month");
-
+        String propertyId = request.getParameter("propertyId");//管理属性
+        String belongAreaId = request.getParameter("belongAreaId");//区县
+        SysCodeDetail belongArea = null;
+        if (StringHelper.isNotEmpty(belongAreaId)) {
+            belongArea = sysCodeManager.getCodeListById(Long.parseLong(belongAreaId));
+        }
+        String isMajor = request.getParameter("isMajor");//是否重大
+        String infoStageId = request.getParameter("infoStageId");//项目状态
         model.addAttribute("projectId", projectId);
         model.addAttribute("projectName", projectName);
         model.addAttribute("bidName", bidName);
@@ -455,9 +488,13 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         model.addAttribute("year", year);
         model.addAttribute("categoryId", categoryId);
         model.addAttribute("qqdj", qqdj);
-        model.addAttribute("beginDate", beginDate);
-        model.addAttribute("endDate", endDate);
+//        model.addAttribute("beginDate", beginDate);
+//        model.addAttribute("endDate", endDate);
         model.addAttribute("month", month);
+        model.addAttribute("propertyId", propertyId);
+        model.addAttribute("belongArea", belongArea);
+        model.addAttribute("isMajor", isMajor);
+        model.addAttribute("infoStageId", infoStageId);
 
         model.addAttribute("DATA_STAGE_RESULT", Constants.DATA_STAGE_RESULT);
 
@@ -478,18 +515,33 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         //把打印的数据压入map中
         Map<String, Object> beans = new HashMap<String, Object>();
         String fileName = "年度项目办证推进表.xls";
-
         String projectId = request.getParameter("id");
-        String projectName = request.getParameter("projectName");
+        String projectName = request.getParameter("projectName");//项目名称
 //        String bidName = request.getParameter("bidName");
-        String jsDept = request.getParameter("jsDept");
-        String year = request.getParameter("year");
-        String categoryId = request.getParameter("categoryId");
-        String qqdj = request.getParameter("qqdj");
+        String jsDept = request.getParameter("jsDept");//建设单位
+        String year = request.getParameter("year");//年份
+        String month;
+        if (StringHelper.isEmpty(projectId)) {
+            month = request.getParameter("month");//汇总月份
+        } else {
+            month = request.getParameter("month2");//单个项目月份
+        }
+
+
+        String categoryId = request.getParameter("categoryId");//项目类型
+        String propertyId = request.getParameter("propertyId");//管理属性
+        String belongAreaId = request.getParameter("belongAreaId");//区县
+        SysCodeDetail belongArea = null;
+        if (StringHelper.isNotEmpty(belongAreaId)) {
+            belongArea = sysCodeManager.getCodeListById(Long.parseLong(belongAreaId));
+        }
+        String isMajor = request.getParameter("isMajor");//是否重大
+        String infoStageId = request.getParameter("infoStageId");//项目状态
+        String qqdj = request.getParameter("qqdj");//区区对接
+//        String bidName = request.getParameter("bidName");
         String stageIds = request.getParameter("stageIds");  //过滤节点
 //        String beginDate = request.getParameter("beginDate");
 //        String endDate = request.getParameter("endDate");
-        String month = request.getParameter("month");
         Boolean isSum = StringHelper.isEmpty(projectId);   //是否汇总
         beans.put("year", year);
 
@@ -552,23 +604,32 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         //标段列表
         String conditionHql = "from ProjBid where typeCode='" + ProjBidType.TYPE_STAGE.getCode() + "'";
         if (isSum) {
-            if (!StringHelper.isEmpty(projectName)) {
-                conditionHql += " and project.name like '%" + projectName + "%'";
+            if (!StringHelper.isEmpty(projectName)) {//OK
+                conditionHql += " and project.name like '%" + projectName + "%'";//项目名称
             }
-//            if (!StringHelper.isEmpty(bidName)) {
-//                conditionHql += " and name like '%" + bidName + "%'";
-//            }
-            if (!StringHelper.isEmpty(jsDept)) {
-                conditionHql += " and project.jsDept like '%" + jsDept + "%'";
+            if (!StringHelper.isEmpty(jsDept)) {//OK
+                conditionHql += " and jsdwName like '%" + jsDept + "%'";//建设单位
             }
-            if (!StringHelper.isEmpty(year)) {
-                conditionHql += " and project.year='" + year + "'";
+            if (!StringHelper.isEmpty(year)) {//OK
+                conditionHql += " and project.year = " + year;//年份
             }
-            if (!StringHelper.isEmpty(categoryId)) {
-                conditionHql += " and project.category.id=" + categoryId;
+            if (!StringHelper.isEmpty(categoryId)) {//OK
+                conditionHql += " and project.category.id=" + categoryId;//项目类型
             }
-            if (!StringHelper.isEmpty(qqdj)) {
-                conditionHql += " and project.projNum like '" + qqdj + "%'";
+            if (!StringHelper.isEmpty(propertyId)) {//OK
+                conditionHql += " and project.property.id =" + propertyId;//管理属性
+            }
+            if (belongArea != null) {//OK
+                conditionHql += " and project.areaCode like '%" + belongArea.getName() + "%'";//区县
+            }
+            if (!StringHelper.isEmpty(isMajor)) {//OK
+                conditionHql += " and project.isMajor = " + isMajor;//是否重要
+            }
+            if (!StringHelper.isEmpty(infoStageId)) {//OK
+                conditionHql += " and project.stage.id = " + infoStageId;
+            }
+            if (!StringHelper.isEmpty(qqdj)) {//OK
+                conditionHql += " and project.projNum like '%" + qqdj + "%'";
             }
 //            if (!StringHelper.isEmpty(beginDate)) {
 //                conditionHql += " and to_char(project.createTime,'yyyy-mm-dd')>='" + beginDate + "'";
@@ -622,17 +683,32 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
                 oneBidHS.add(key);
                 Map<String, Object> map = new HashMap<String, Object>();
                 SysCodeDetail result = item.getResult();
-                map.put("resultCode", result.getCode());
-                map.put("resultName", result.getName());
-                map.put("dealDate", item.getDealDate());
-                map.put("updateTime", item.getUpdateTime());
+                if (item.getType().toString().equals("jh")) {
+                    map.put("resultCodeJH", result.getCode());
+                    map.put("resultNameJH", result.getName());
+                    map.put("dealDateJH", item.getDealDate());
+                    map.put("updateTimeJH", item.getUpdateTime());
+                    map.put("planSbDateJH", item.getPlanSbDate());
+                    map.put("planPfDateJH", item.getPlanPfDate());
+                    key += "_jh";
+                    dataMap.put(key, map);
+                } else if (item.getType().toString().equals("sj")) {
+                    map.put("resultCodeSJ", result.getCode());
+                    map.put("resultNameSJ", result.getName());
+                    map.put("dealDateSJ", item.getDealDate());
+                    map.put("updateTimeSJ", item.getUpdateTime());
+                    map.put("planSbDateSJ", item.getPlanSbDate());
+                    map.put("planPfDateSJ", item.getPlanPfDate());
+                    key += "_sj";
+                    dataMap.put(key, map);
+                }
 
                 //办理状态
-                String[] ret = getColorAndResult(item, result);
-                map.put("color", ret[0]);
-                map.put("resultName", ret[1]);
+//                String[] ret = getColorAndResult(item, result);
+//                map.put("color", ret[0]);
+//                map.put("resultName", ret[1]);
 
-                dataMap.put(key, map);
+//                dataMap.put(key, map);
             }
         }
 

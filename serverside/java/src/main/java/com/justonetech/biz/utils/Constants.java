@@ -102,6 +102,7 @@ public class Constants {
     public static final String PROJ_INFO_DBSX_1 = "qqdj"; //区区对接
     public static final String PROJ_INFO_DBSX_2 = "djptptdl"; //配套道路
     public static final String PROJ_INFO_DBSX_3 = "djptptgj"; //配套公交
+    public static final String PROJ_QQDJ = "qqdj3"; //配套公交
 
     /****************************************** 项目管理 end *******************************************************/
 
