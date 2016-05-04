@@ -11,6 +11,8 @@ import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.orm.hibernate.Page;
 import com.justonetech.core.utils.DateTimeHelper;
 import com.justonetech.core.utils.FormatUtils;
+import com.justonetech.core.utils.JspHelper;
+import com.justonetech.system.daoservice.SysCodeDetailService;
 import com.justonetech.system.domain.SysCodeDetail;
 import com.justonetech.system.manager.ExcelPrintManager;
 import com.justonetech.system.manager.SysCodeManager;
@@ -60,6 +62,9 @@ public class ProjectQueryNodeController extends BaseCRUDActionController<ProjInf
 
     @Autowired
     private ProjectRelateManager projectRelateManager;
+
+    @Autowired
+    private SysCodeDetailService sysCodeDetailService;
 
     private static final String xlsTemplateName = "DataNodeReport.xls";
 
@@ -123,9 +128,14 @@ public class ProjectQueryNodeController extends BaseCRUDActionController<ProjInf
         model.addAttribute("id", id);
         Calendar c = Calendar.getInstance();
         model.addAttribute("yearOptions", DateTimeHelper.getYearSelectOptions(String.valueOf(c.get(Calendar.YEAR))));
+        model.addAttribute("monthOptions", DateTimeHelper.getMonthSelectOptions(String.valueOf(c.get(Calendar.MONTH) + 1)));
         model.addAttribute("currentYear", c.get(Calendar.YEAR));
         model.addAttribute("currentMonth", c.get(Calendar.MONTH) + 1);
         model.addAttribute("PROJ_INFO_CATEGORY", Constants.PROJ_INFO_CATEGORY);
+        model.addAttribute("PORJECT_PROJ_PROPERTY", Constants.PORJECT_PROJ_PROPERTY);
+        model.addAttribute("PROJ_INFO_BELONG_AREA", Constants.PROJ_INFO_BELONG_AREA);
+        model.addAttribute("PROJ_INFO_STAGE", Constants.PROJ_INFO_STAGE);
+        model.addAttribute("PROJ_INFO_PROPERTY", Constants.PROJ_INFO_PROPERTY);
 
         return "view/query/projectQueryNode/viewNode";
     }
@@ -140,14 +150,15 @@ public class ProjectQueryNodeController extends BaseCRUDActionController<ProjInf
     public String viewNodeData(Model model, HttpServletRequest request) {
         String projectId = request.getParameter("id");
         String projectName = request.getParameter("projectName");
-        String bidName = request.getParameter("bidName");
+        String propertyId = request.getParameter("propertyId");
         String jsDept = request.getParameter("jsDept");
+        String isMajor = request.getParameter("isMajor");
+        String qqdj = request.getParameter("qqdj");
         String year = request.getParameter("year");
         String month = request.getParameter("month");
         String categoryId = request.getParameter("categoryId");
-        String qqdj = request.getParameter("qqdj");
-        String beginDate = request.getParameter("beginDate");
-        String endDate = request.getParameter("endDate");
+        String belongAreaId = request.getParameter("belongAreaId");
+        String infoStageId = request.getParameter("infoStageId");
         Boolean isSum = StringHelper.isEmpty(projectId);   //是否汇总
         model.addAttribute("isSum", isSum);
 
@@ -155,6 +166,7 @@ public class ProjectQueryNodeController extends BaseCRUDActionController<ProjInf
         List<ProjNode> firstNodes = new ArrayList<ProjNode>();
         List<ProjNode> secondNodes = new ArrayList<ProjNode>();
         List<ProjNode> thirdNodes = new ArrayList<ProjNode>();
+        List<ProjNode> fourNodes = new ArrayList<ProjNode>();
         List<ProjNode> leafNodes = new ArrayList<ProjNode>();
         List<ProjNode> projNodes = projNodeService.findByQuery("from ProjNode where isValid=1 order by treeId asc");
         for (ProjNode node : projNodes) {
@@ -162,10 +174,12 @@ public class ProjectQueryNodeController extends BaseCRUDActionController<ProjInf
             int totalLevel = node.getTotalLevel();
             if (currentLevel == 1) {
                 firstNodes.add(node);
-            } else if (currentLevel == 2 && totalLevel == 3) {
+            } else if (currentLevel == 2) {
                 secondNodes.add(node);
-            } else {
+            } else if (currentLevel == 3) {
                 thirdNodes.add(node);
+            } else if (currentLevel == 4) {
+                fourNodes.add(node);
             }
             if (node.getIsLeaf()) {
                 leafNodes.add(node);
@@ -174,6 +188,7 @@ public class ProjectQueryNodeController extends BaseCRUDActionController<ProjInf
         model.addAttribute("firstNodes", firstNodes);
         model.addAttribute("secondNodes", secondNodes);
         model.addAttribute("thirdNodes", thirdNodes);
+        model.addAttribute("fourNodes", fourNodes);
         model.addAttribute("leafNodes", leafNodes);
 
         //审核步骤
@@ -187,11 +202,21 @@ public class ProjectQueryNodeController extends BaseCRUDActionController<ProjInf
             if (!StringHelper.isEmpty(projectName)) {
                 conditionHql += " and project.name like '%" + projectName + "%'";
             }
-            if (!StringHelper.isEmpty(bidName)) {
-                conditionHql += " and name like '%" + bidName + "%'";
+            if (!StringHelper.isEmpty(isMajor)) {
+                conditionHql += " and project.isMajor=" + isMajor;
+            }
+            if (!StringHelper.isEmpty(propertyId)) {
+                conditionHql += " and project.property.id=" + propertyId;
+            }
+            if (!StringHelper.isEmpty(infoStageId)) {
+                conditionHql += " and project.stage.id=" + infoStageId;
+            }
+            if (!StringHelper.isEmpty(belongAreaId)) {
+                SysCodeDetail areaDetail = sysCodeDetailService.get(JspHelper.getLong(belongAreaId));
+                conditionHql += " and project.areaCode='" + areaDetail.getName() + "'";
             }
             if (!StringHelper.isEmpty(jsDept)) {
-                conditionHql += " and project.jsDept like '%" + jsDept + "%'";
+                conditionHql += " and project.jsdwName like '%" + jsDept + "%'";
             }
             if (!StringHelper.isEmpty(year)) {
                 conditionHql += " and project.year='" + year + "'";
@@ -202,16 +227,10 @@ public class ProjectQueryNodeController extends BaseCRUDActionController<ProjInf
             if (!com.justonetech.core.utils.StringHelper.isEmpty(qqdj)) {
                 conditionHql += " and project.projNum like '" + qqdj + "%'";
             }
-            if (!StringHelper.isEmpty(beginDate)) {
-                conditionHql += " and to_char(project.createTime,'yyyy-mm-dd')>='"+beginDate+"'";
-            }
-            if (!StringHelper.isEmpty(endDate)) {
-                conditionHql += " and to_char(project.createTime,'yyyy-mm-dd')<='"+endDate+"'";
-            }
         } else {
             conditionHql += " and project.id=" + projectId;
         }
-//        System.out.println("conditionHql = " + conditionHql);
+        System.out.println("conditionHql = " + conditionHql);
         List<ProjBid> bids = projBidService.findByQuery(conditionHql + " order by project.no asc,project.id asc,no asc,id asc");
         model.addAttribute("bidSize", bids.size());
 
@@ -225,7 +244,7 @@ public class ProjectQueryNodeController extends BaseCRUDActionController<ProjInf
         //填报数据
         Map<String, Object> dataMap = new HashMap<String, Object>();
         String hql = "from DataNodeReportItem where nodeReport.bid.id in({0}) and nodeReport.year={1} and nodeReport.month={2} order by id asc";
-        hql = FormatUtils.format(hql, conditionHql, year, month);
+        hql = FormatUtils.format(hql, conditionHql, JspHelper.getInteger(year) + "", JspHelper.getInteger(month) + "");
         List<DataNodeReportItem> dataNodeReportItems = dataNodeReportItemService.findByQuery(hql);
         for (DataNodeReportItem item : dataNodeReportItems) {
             Long bidId = item.getNodeReport().getBid().getId();
@@ -299,9 +318,11 @@ public class ProjectQueryNodeController extends BaseCRUDActionController<ProjInf
 
         return "view/query/projectQueryNode/selectNode";
     }
-    private Boolean isIdIn(String nodeIds,Long thisId){
-        return (","+nodeIds+",").contains(","+thisId+",");
+
+    private Boolean isIdIn(String nodeIds, Long thisId) {
+        return ("," + nodeIds + ",").contains("," + thisId + ",");
     }
+
     /**
      * 导出excel
      *
@@ -316,15 +337,15 @@ public class ProjectQueryNodeController extends BaseCRUDActionController<ProjInf
 
         String projectId = request.getParameter("id");
         String projectName = request.getParameter("projectName");
-        String bidName = request.getParameter("bidName");
+        String propertyId = request.getParameter("propertyId");
         String jsDept = request.getParameter("jsDept");
+        String isMajor = request.getParameter("isMajor");
+        String qqdj = request.getParameter("qqdj");
         String year = request.getParameter("year");
         String month = request.getParameter("month");
         String categoryId = request.getParameter("categoryId");
-        String qqdj = request.getParameter("qqdj");
-        String nodeIds = request.getParameter("nodeIds");  //过滤节点
-        String beginDate = request.getParameter("beginDate");
-        String endDate = request.getParameter("endDate");
+        String belongAreaId = request.getParameter("belongAreaId");
+        String infoStageId = request.getParameter("infoStageId");
         Boolean isSum = StringHelper.isEmpty(projectId);   //是否汇总
         beans.put("year", year);
         beans.put("month", month);
@@ -335,50 +356,74 @@ public class ProjectQueryNodeController extends BaseCRUDActionController<ProjInf
         List<ProjNode> secondNodes = new ArrayList<ProjNode>();
         List<ProjNode> secondNodesIncludeNull = new ArrayList<ProjNode>();
         List<ProjNode> thirdNodes = new ArrayList<ProjNode>();
+        List<ProjNode> thirdNodesIncludeNull = new ArrayList<ProjNode>();
+        List<ProjNode> fourNodes = new ArrayList<ProjNode>();
         List<ProjNode> leafNodes = new ArrayList<ProjNode>();
-        List<ProjNode> projNodes = projNodeService.findByQuery("from ProjNode where isValid=1 order by treeId asc");
-        for (ProjNode node : projNodes) {
-            int currentLevel = node.getCurrentLevel();
-            int totalLevel = node.getTotalLevel();
-            if (currentLevel == 1) {
-                if(isIdIn(nodeIds,node.getFirstNodeId())){
-                    firstNodes.add(node);
-                    firstNodesIncludeNull.add(node);
-                    Set<ProjNode> childs = node.getProjNodes();
-                    if (childs.size() > 1) {
-                        for (int i = 1; i < node.getTotalChildCount(); i++) {
-                            firstNodesIncludeNull.add(new ProjNode());
-                        }
-                    }
-                }
-            } else if (currentLevel == 2) {
-                if(isIdIn(nodeIds,node.getFirstNodeId())){
-                    if (totalLevel == 3) {
-                        secondNodes.add(node);
-                        for (int i = 1; i <= node.getProjNodes().size(); i++) {
-                            secondNodesIncludeNull.add(node);
-                        }
-                    } else {
-                        secondNodesIncludeNull.add(new ProjNode());
-                        thirdNodes.add(node);
-                    }
-                }
-            } else {
-                if(isIdIn(nodeIds,node.getFirstNodeId())){
-                    thirdNodes.add(node);
+        List<ProjNode> projNodes = projNodeService.findByQuery("from ProjNode where isValid=1 and parent.id is null order by treeId asc");
+        for (ProjNode projNode : projNodes) {
+            firstNodes.add(projNode);
+            if (projNode.getIsLeaf()) {
+                leafNodes.add(projNode);
+            }
+
+            firstNodesIncludeNull.add(projNode);
+            if (projNode.getProjNodes().size() > 1) {
+                for (int i = 1; i < projNode.getTotalChildCount(); i++) {
+                    firstNodesIncludeNull.add(new ProjNode());
                 }
             }
-            if (node.getIsLeaf()) {
-                if(isIdIn(nodeIds,node.getFirstNodeId())){
-                    leafNodes.add(node);
+
+            if (projNode.getProjNodes().size() > 0) {
+                for (ProjNode node : projNode.getProjNodes()) {
+                    secondNodes.add(node);
+                    if (node.getIsLeaf()) {
+                        leafNodes.add(node);
+
+                        thirdNodesIncludeNull.add(new ProjNode());
+                    }
+
+                    secondNodesIncludeNull.add(node);
+                    if (node.getProjNodes().size() > 1) {
+                        for (int i = 1; i < node.getTotalChildCount(); i++) {
+                            secondNodesIncludeNull.add(new ProjNode());
+                        }
+                    }
+
+                    if (node.getProjNodes().size() > 0)
+                        for (ProjNode projNode1 : node.getProjNodes()) {
+                            if (projNode1.getIsLeaf()) {
+                                leafNodes.add(projNode1);
+                            }
+                            thirdNodes.add(projNode1);
+
+                            thirdNodesIncludeNull.add(projNode1);
+                            if (projNode1.getProjNodes().size() > 1) {
+                                for (int i = 1; i < projNode1.getTotalChildCount(); i++) {
+                                    thirdNodesIncludeNull.add(new ProjNode());
+                                }
+                            }
+
+                            if (projNode1.getProjNodes().size() > 0) {
+                                for (ProjNode projNode2 : projNode1.getProjNodes()) {
+                                    if (projNode2.getIsLeaf()) {
+                                        leafNodes.add(projNode2);
+                                    }
+
+                                    fourNodes.add(projNode2);
+                                }
+                            }
+                        }
                 }
             }
         }
+
         beans.put("firstNodes", firstNodes);
         beans.put("firstNodesIncludeNull", firstNodesIncludeNull);
         beans.put("secondNodes", secondNodes);
         beans.put("secondNodesIncludeNull", secondNodesIncludeNull);
         beans.put("thirdNodes", thirdNodes);
+        beans.put("thirdNodesIncludeNull", thirdNodesIncludeNull);
+        beans.put("fourNodes", fourNodes);
         beans.put("leafNodes", leafNodes);
 
         //审核步骤
@@ -392,11 +437,21 @@ public class ProjectQueryNodeController extends BaseCRUDActionController<ProjInf
             if (!StringHelper.isEmpty(projectName)) {
                 conditionHql += " and project.name like '%" + projectName + "%'";
             }
-            if (!StringHelper.isEmpty(bidName)) {
-                conditionHql += " and name like '%" + bidName + "%'";
+            if (!StringHelper.isEmpty(isMajor)) {
+                conditionHql += " and project.isMajor=" + isMajor;
+            }
+            if (!StringHelper.isEmpty(propertyId)) {
+                conditionHql += " and project.property.id=" + propertyId;
+            }
+            if (!StringHelper.isEmpty(infoStageId)) {
+                conditionHql += " and project.stage.id=" + infoStageId;
+            }
+            if (!StringHelper.isEmpty(belongAreaId)) {
+                SysCodeDetail areaDetail = sysCodeDetailService.get(JspHelper.getLong(belongAreaId));
+                conditionHql += " and project.areaCode='" + areaDetail.getName() + "'";
             }
             if (!StringHelper.isEmpty(jsDept)) {
-                conditionHql += " and project.jsDept like '%" + jsDept + "%'";
+                conditionHql += " and project.jsdwName like '%" + jsDept + "%'";
             }
             if (!StringHelper.isEmpty(year)) {
                 conditionHql += " and project.year='" + year + "'";
@@ -407,18 +462,11 @@ public class ProjectQueryNodeController extends BaseCRUDActionController<ProjInf
             if (!com.justonetech.core.utils.StringHelper.isEmpty(qqdj)) {
                 conditionHql += " and project.projNum like '" + qqdj + "%'";
             }
-            if (!StringHelper.isEmpty(beginDate)) {
-                conditionHql += " and to_char(project.createTime,'yyyy-mm-dd')>='"+beginDate+"'";
-            }
-            if (!StringHelper.isEmpty(endDate)) {
-                conditionHql += " and to_char(project.createTime,'yyyy-mm-dd')<='"+endDate+"'";
-            }
         } else {
             conditionHql += " and project.id=" + projectId;
         }
-//        System.out.println("conditionHql = " + conditionHql);
+
         List<ProjBid> bids = projBidService.findByQuery(conditionHql + " order by project.no asc,project.id asc,no asc,id asc");
-//        beans.put("bids", bids);
 
         //整理项目包含标段
         List<Map<String, Object>> projects = reOrgBids(bids);
@@ -439,12 +487,13 @@ public class ProjectQueryNodeController extends BaseCRUDActionController<ProjInf
             map.put("problem", item.getProblem());
             dataMap.put(bidId + "_" + item.getStep().getId() + "_" + item.getNode().getId(), map);
         }
+
         beans.put("dataMap", dataMap);
 
         Map<String, Object> mergeMap = new HashMap<String, Object>();
         List<int[]> mergerCellsList = new ArrayList<int[]>();
         int startColNo = 0;
-        int startRowNo = 4;
+        int startRowNo = 5;
         int bidCount = bids.size();
         int stepCount = steps.size();
         //项目标段合并
@@ -453,16 +502,19 @@ public class ProjectQueryNodeController extends BaseCRUDActionController<ProjInf
 //                mergerCellsList.add(new int[]{c, startRowNo + stepCount * 2 * r, c, startRowNo + stepCount * 2 * (r + 1) - 1});
 //            }
 //        }
-        int st = startRowNo;
-        for (Map<String, Object> project : projects) {
-            List<ProjBid> projBids = (List<ProjBid>) project.get("bids");
-            int r = projBids.size();
-            for (int c = 0; c <= 2; c++) {
-//                System.out.println("c = " + c+","+st+"|"+c+","+(st+r*2-1));
-                mergerCellsList.add(new int[]{c, st, c, st + r * 2 - 1});
-            }
-            st += r * 2;
-        }
+
+//        int st = startRowNo;
+//        for (Map<String, Object> project : projects) {
+//            List<ProjBid> projBids = (List<ProjBid>) project.get("bids");
+//            int r = projBids.size();
+//            for (int c = 0; c <= 2; c++) {
+////                System.out.println("c = " + c+","+st+"|"+c+","+(st+r*2-1));
+//                mergerCellsList.add(new int[]{c, st, c, st + r * 2 - 1});
+//            }
+//            st += r * 2;
+//        }
+
+
 //        mergerCellsList.add(new int[]{0,3,0,12});
 //        mergerCellsList.add(new int[]{1,3,1,12});
 //        mergerCellsList.add(new int[]{0,13,0,23});
@@ -480,7 +532,7 @@ public class ProjectQueryNodeController extends BaseCRUDActionController<ProjInf
 //        mergerCellsList.add(new int[]{7,5,7,6});
 
         //前期阶段合并
-        startColNo = 9;
+        startColNo = 11;
         for (ProjNode node : firstNodes) {
             if (!StringHelper.isEmpty(node.getName())) {
                 startRowNo = 1;
@@ -488,29 +540,33 @@ public class ProjectQueryNodeController extends BaseCRUDActionController<ProjInf
                 int totalChildCount = node.getTotalChildCount();
                 Set<ProjNode> childs = node.getProjNodes();
                 if (childs.size() == 0) {  //竖向合并
-                    mergerCellsList.add(new int[]{startColNo, startRowNo, startColNo, startRowNo + 2});
+                    mergerCellsList.add(new int[]{startColNo, startRowNo, startColNo, startRowNo + 3});
                     startColNo++;
-                } else if (childs.size() == 1) { //横向或竖向合并
-                    if (totalLevel == 2) {
-                        mergerCellsList.add(new int[]{startColNo, startRowNo, startColNo, startRowNo + 1});
-                    } else if (totalLevel == 3) {
-                        mergerCellsList.add(new int[]{startColNo, startRowNo, startColNo + totalChildCount - 1, startRowNo});
-                        mergerCellsList.add(new int[]{startColNo, startRowNo + 1, startColNo + totalChildCount - 1, startRowNo + 1});
-                    }
-                    startColNo += totalChildCount;
-                } else if (childs.size() > 1) { //横向或竖向合并
-                    if (totalChildCount == 2) {
-                        mergerCellsList.add(new int[]{startColNo, startRowNo, startColNo + totalChildCount - 1, startRowNo + 1});
-                        startColNo += totalChildCount;
-                    } else if (totalLevel == 3) {
-                        mergerCellsList.add(new int[]{startColNo, startRowNo, startColNo + totalChildCount - 1, startRowNo});
-                        for (ProjNode child : childs) {
-                            int size = child.getProjNodes().size();
-                            if (size > 1) {
-                                mergerCellsList.add(new int[]{startColNo, startRowNo + 1, startColNo + size - 1, startRowNo + 1});
+                } else {
+                    //第一行合并，合并列，行不合并
+                    mergerCellsList.add(new int[]{startColNo, startRowNo, startColNo + totalChildCount - 1, startRowNo});
+                    for (ProjNode child : childs) {
+                        //第二行合并
+                        if (child.getProjNodes().size() > 0) {
+                            mergerCellsList.add(new int[]{startColNo, startRowNo + 1, startColNo + child.getTotalChildCount() - 1, startRowNo + 1});
+                            for (ProjNode projNode : child.getProjNodes()) {
+                                //第三行合并
+                                if (projNode.getProjNodes().size() > 0) {
+                                    //第三行合并，当不为也子节点时，行不合并，列合并
+                                    mergerCellsList.add(new int[]{startColNo, startRowNo + 2, startColNo + projNode.getTotalChildCount() - 1, startRowNo + 2});
+                                    startColNo += projNode.getTotalChildCount();
+                                } else {
+                                    //第三行合并，当为也子节点时，行合并，列不合并
+                                    mergerCellsList.add(new int[]{startColNo, startRowNo + 2, startColNo, startRowNo + 3});
+                                    startColNo++;
+                                }
                             }
-                            startColNo += size;
+                        } else {
+                            //第二行合并，合并行，列不合并
+                            mergerCellsList.add(new int[]{startColNo, startRowNo + 1, startColNo, startRowNo + 3});
+                            startColNo++;
                         }
+
                     }
                 }
             }
@@ -527,19 +583,24 @@ public class ProjectQueryNodeController extends BaseCRUDActionController<ProjInf
 //        mergerCellsList.add(new int[]{18,2,19,2});//totallevel=3,leafs=2
 //        mergerCellsList.add(new int[]{20,2,23,2});//totallevel=3,leafs=2
 
+
         //形象进度合并
-        startColNo = 9;
-        startRowNo = 5;
-        for (int r = 0; r < bidCount; r++) {
-            for (int s = 1; s <= stepCount; s++) {
-                for (ProjNode node : firstNodes) {
-                    mergerCellsList.add(new int[]{startColNo, startRowNo, startColNo + node.getTotalChildCount() - 1, startRowNo});
-                    startColNo += node.getTotalChildCount();
-                }
-                startColNo = 9;
-                startRowNo += 2;
-            }
-        }
+//        startColNo = 9;
+//        startRowNo = 6;
+//        for (
+//                int r = 0;
+//                r < bidCount; r++)
+//
+//        {
+//            for (int s = 1; s <= stepCount; s++) {
+//                for (ProjNode node : firstNodes) {
+//                    mergerCellsList.add(new int[]{startColNo, startRowNo, startColNo + node.getTotalChildCount() - 1, startRowNo});
+//                    startColNo += node.getTotalChildCount();
+//                }
+//                startColNo = 9;
+//                startRowNo += 2;
+//            }
+//        }
 //        col+8
 //        row+4
 //        mergerCellsList.add(new int[]{8,5,9,5});

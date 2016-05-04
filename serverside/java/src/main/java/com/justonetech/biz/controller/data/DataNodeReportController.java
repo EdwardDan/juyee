@@ -10,6 +10,9 @@ import com.justonetech.biz.utils.Constants;
 import com.justonetech.biz.utils.enums.ProjBidType;
 import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.orm.hibernate.Page;
+import com.justonetech.core.utils.DateTimeHelper;
+import com.justonetech.core.utils.FormatUtils;
+import com.justonetech.core.utils.JspHelper;
 import com.justonetech.core.utils.StringHelper;
 import com.justonetech.system.domain.SysCodeDetail;
 import com.justonetech.system.manager.SysCodeManager;
@@ -147,7 +150,12 @@ public class DataNodeReportController extends BaseCRUDActionController<DataNodeR
         if (dataNodeReportList.size() > 0) {
             dataNodeReport = dataNodeReportList.iterator().next();
         }
+
+        String yearSelectOptions = getYearSelectOptions(c.get(Calendar.YEAR) + "");
+        String monthSelectOptions = getMonthSelectOptions(c.get(Calendar.MONTH) + 1 + "");
         //处理其他业务逻辑
+        model.addAttribute("yearSelectOptions", yearSelectOptions);
+        model.addAttribute("monthSelectOptions", monthSelectOptions);
         model.addAttribute("currentMonth", c.get(Calendar.MONTH) + 1);
         model.addAttribute("projInfo", projInfo);
         model.addAttribute("projBids", projBids);
@@ -160,13 +168,70 @@ public class DataNodeReportController extends BaseCRUDActionController<DataNodeR
     }
 
     /**
+     * 选择年
+     *
+     * @param year
+     * @return
+     */
+    private String getYearSelectOptions(String year) {
+        String options = "";
+
+        int[] yearArray = new int[10];
+        for (int i = 0; i < yearArray.length; ++i) {
+            yearArray[i] = (JspHelper.getInteger(year) + i);
+            String theyear = String.valueOf(yearArray[i]);
+            if (!StringHelper.isEmpty(year)) {
+                if (theyear.equals(year)) {
+                    options = options + FormatUtils.format("<option value=\'{0}\' {2}>{1}</option>\n", theyear, theyear, "selected");
+                } else {
+                    options = options + FormatUtils.format("<option value=\'{0}\' >{1}</option>\n", theyear, theyear);
+                }
+            } else {
+                options = options + FormatUtils.format("<option value=\'{0}\' >{1}</option>\n", theyear, theyear);
+            }
+        }
+
+        return options;
+    }
+
+    /**
+     * 选择月
+     *
+     * @param month
+     * @return
+     */
+    public String getMonthSelectOptions(String month) {
+        if (!StringHelper.isEmpty(month) && !month.startsWith("0") && Integer.parseInt(month) < 10) {
+            month = "0" + Integer.parseInt(month);
+        }
+
+        String options = "";
+
+        for (int i = 1; i <= JspHelper.getInteger(month); ++i) {
+            String themonth = i < 10 ? "0" + i : "" + i;
+            if (!StringHelper.isEmpty(month)) {
+                if (themonth.equals(month)) {
+                    options = options + FormatUtils.format("<option value=\'{0}\' {2}>{1}</option>\n", themonth, themonth, "selected");
+                } else {
+                    options = options + FormatUtils.format("<option value=\'{0}\' >{1}</option>\n", themonth, themonth);
+                }
+            } else {
+                options = options + FormatUtils.format("<option value=\'{0}\' >{1}</option>\n", themonth, themonth);
+            }
+        }
+
+        return options;
+    }
+
+
+    /**
      * 形象进度填报详情
      *
      * @param model .
      * @return .
      */
     @RequestMapping
-    public String nodeDataItem(Model model, Long id, Integer month, String bidId,String type) {
+    public String nodeDataItem(Model model, Long id, Integer month, Integer year, String bidId, String type) {
         //办证阶段
         List<ProjNode> firstNodes = projNodeService.findByQuery("from ProjNode where isValid=1 and parent.id is null order by treeId asc");
         model.addAttribute("firstNodes", firstNodes);
@@ -178,7 +243,7 @@ public class DataNodeReportController extends BaseCRUDActionController<DataNodeR
             ProjInfo projInfo = projInfoService.get(id);
             //填报数据
             Map<String, Object> dataMap = new HashMap<String, Object>();
-            List<DataNodeReportItem> dataNodeReportItems = findDataItems(id, projInfo.getYear(), month, bidId);
+            List<DataNodeReportItem> dataNodeReportItems = findDataItems(id, year, month, bidId);
             for (DataNodeReportItem item : dataNodeReportItems) {
                 Map<String, Object> map = new HashMap<String, Object>();
                 map.put("content", item.getContent());
@@ -187,9 +252,9 @@ public class DataNodeReportController extends BaseCRUDActionController<DataNodeR
             }
             model.addAttribute("dataMap", dataMap);
         }
-        String url ="view/data/dataNodeReport/nodeDataItem";
-        if(type!=null){
-            url+=type;
+        String url = "view/data/dataNodeReport/nodeDataItem";
+        if (type != null) {
+            url += type;
         }
         return url;
     }
@@ -233,6 +298,7 @@ public class DataNodeReportController extends BaseCRUDActionController<DataNodeR
     public void save(HttpServletResponse response, @ModelAttribute("bean") DataNodeReport entity, HttpServletRequest request) throws Exception {
         try {
             String month = request.getParameter("month");
+            String year = request.getParameter("year");
             DataNodeReport target;
             if (entity.getId() != null) {
                 DataNodeReport dataNodeReport = dataNodeReportService.get(entity.getId());
@@ -252,8 +318,8 @@ public class DataNodeReportController extends BaseCRUDActionController<DataNodeR
             if (projectId != null && !projectId.equals("")) {
                 ProjInfo projInfo = projInfoService.get(Long.valueOf(projectId));
                 target.setProject(projInfo);
-                target.setYear(projInfo.getYear());
             }
+            target.setYear(JspHelper.getInteger(year));
             if (projBidId != null && !projBidId.equals("")) {
                 ProjBid projBid = projBidService.get(Long.valueOf(projBidId));
                 target.setBid(projBid);

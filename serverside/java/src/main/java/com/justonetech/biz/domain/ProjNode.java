@@ -80,6 +80,11 @@ public class ProjNode extends BaseProjNode {
         if (childs.size() > 0) {
             for (ProjNode child : childs) {
                 if (child.getProjNodes().size() > 0) {
+                    for (ProjNode projNode : child.getProjNodes()) {
+                        if (projNode.getProjNodes().size() > 0) {
+                            return 4;
+                        }
+                    }
                     return 3;
                 }
             }
@@ -107,7 +112,17 @@ public class ProjNode extends BaseProjNode {
         Set<ProjNode> childs = getProjNodes();
         if (childs.size() > 0) {
             for (ProjNode child : childs) {
-                count += child.getProjNodes().size();
+                if (child.getProjNodes().size() > 0) {
+                    for (ProjNode projNode : child.getProjNodes()) {
+                        if (projNode.getProjNodes().size() > 0) {
+                            count += projNode.getProjNodes().size();
+                        } else {
+                            count++;
+                        }
+                    }
+                } else {
+                    count++;
+                }
             }
         }
         if (count == 0) {
