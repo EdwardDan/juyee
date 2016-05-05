@@ -91,7 +91,7 @@
                     <c:if test="${stepIndex.index == 0}">
                         <c:if test="${bidIndex.index == 0}">
                             <td rowspan="${bidCount}" width="2%" nowrap>${projIndex.index+1}</td>
-                            <td rowspan="${bidCount}" width="5%">${bid.project.bjbh}</td>
+                            <td rowspan="${bidCount}" width="5%">${bid.projNum}</td>
                             <td rowspan="${bidCount}" width="5%">${bid.project.name}</td>
                             <%--<td rowspan="${bidCount}" width="5%">${bid.project.location}</td>--%>
                         </c:if>
