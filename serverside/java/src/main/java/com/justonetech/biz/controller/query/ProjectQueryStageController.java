@@ -696,21 +696,26 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
                 Map<String, Object> map = new HashMap<String, Object>();
                 SysCodeDetail result = item.getResult();
                 if (item.getType().toString().equals("jh")) {
-                    map.put("resultCodeJH", result.getCode());
-                    map.put("resultNameJH", result.getName());
-                    map.put("dealDateJH", item.getDealDate());
-                    map.put("updateTimeJH", item.getUpdateTime());
-                    map.put("planSbDateJH", item.getPlanSbDate());
-                    map.put("planPfDateJH", item.getPlanPfDate());
+                    if(result.getName().equals("需办理")){
+                        map.put("JHSB", item.getPlanSbDate().toString());
+                        map.put("JHPF", item.getPlanPfDate().toString());
+                    }else{
+                        map.put("JHSB", item.getDealDate());
+                        map.put("JHPF", item.getDealDate());
+                    }
                     key += "_jh";
                     dataMap.put(key, map);
                 } else if (item.getType().toString().equals("sj")) {
-                    map.put("resultCodeSJ", result.getCode());
-                    map.put("resultNameSJ", result.getName());
-                    map.put("dealDateSJ", item.getDealDate());
-                    map.put("updateTimeSJ", item.getUpdateTime());
-                    map.put("planSbDateSJ", item.getPlanSbDate());
-                    map.put("planPfDateSJ", item.getPlanPfDate());
+                    if(result.getName().equals("需办理")){
+                        map.put("SJSB", item.getPlanSbDate().toString());
+                        map.put("SJPF", item.getPlanPfDate().toString());
+                    }else if(result.getName().equals("无需办理")){
+                        map.put("SJSB", item.getDealDate());
+                        map.put("SJPF", item.getDealDate());
+                    }else{
+                        map.put("SJSB", "办理受阻");
+                        map.put("SJPF", "办理受阻");
+                    }
                     key += "_sj";
                     dataMap.put(key, map);
                 }

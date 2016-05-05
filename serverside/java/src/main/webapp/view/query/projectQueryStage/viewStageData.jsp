@@ -70,8 +70,9 @@
                         <td rowspan="${stepCount}">${bid.project.category.name}</td>
                         <td rowspan="${stepCount}">${bid.jsdwName}</td>
                         <td rowspan="${stepCount}">
-                            <c:if test="${bid.project.isMajor==true}">重大</c:if>
-                            <c:if test="${bid.project.isMajor==false}">非重大</c:if>
+                            <%--<c:if test="${bid.project.isMajor==true}">重大</c:if>--%>
+                            <%--<c:if test="${bid.project.isMajor==false}">非重大</c:if>--%>
+                            ${bid.project.roadTecGrade.name}
                         </td>
 
                         <%--<td rowspan="${stepCount}">${bid.buildMileage}</td>--%>
