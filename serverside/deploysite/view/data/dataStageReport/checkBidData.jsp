@@ -41,6 +41,7 @@
                                     <option value="">请选择</option>
                                     <c:forEach items="${results}" var="result">
                                         <option value="${result.code}"
+                                                <c:if test="${result.code==4}">hidden="hidden"</c:if>
                                                 <c:if test="${dataMap[dataKey].resultCodeJH == result.code}">selected</c:if>>${result.name}</option>
                                     </c:forEach>
                                 </select>
@@ -149,6 +150,7 @@
                                 <option value="">请选择</option>
                                 <c:forEach items="${results}" var="result">
                                     <option value="${result.code}"
+                                            <c:if test="${result.code==4}">hidden="hidden"</c:if>
                                             <c:if test="${dataMap[dataKey].resultCodeJH == result.code}">selected</c:if>>${result.name}</option>
                                 </c:forEach>
                             </select>

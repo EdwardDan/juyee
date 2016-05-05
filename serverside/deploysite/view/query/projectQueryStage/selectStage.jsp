@@ -37,9 +37,9 @@
                             <td height="25">
                                 <input type="checkbox" name="stageIds" value="${item.id}" checked="true">${item.name}&nbsp;
                             </td>
-                            <td>
-                                <sys:code code="${DATA_STAGE_RESULT}" name="result_${item.id}" type="select" defaultName="" sysCodeDetailId="" disabled="" id="result_${item.id}" isAlowedNull="true"/>
-                            </td>
+                            <%--<td>--%>
+                                <%--<sys:code code="${DATA_STAGE_RESULT}" name="result_${item.id}" type="select" defaultName="" sysCodeDetailId="" disabled="" id="result_${item.id}" isAlowedNull="true"/>--%>
+                            <%--</td>--%>
                         </tr>
                     </c:forEach>
                 </table>
@@ -49,14 +49,19 @@
             <td class="form_border" colspan="2" align="center">
                 <input type="hidden" name="projectId" id="projectId" value="${projectId}"/>
                 <input type="hidden" name="projectName" id="projectName" value="${projectName}"/>
-                <input type="hidden" name="bidName" id="bidName" value="${bidName}"/>
+                <%--<input type="hidden" name="bidName" id="bidName" value="${bidName}"/>--%>
                 <input type="hidden" name="jsDept" id="jsDept" value="${jsDept}"/>
                 <input type="hidden" name="year" id="year" value="${year}"/>
+                <input type="hidden" name="month" id="month" value="${month}"/>
                 <input type="hidden" name="categoryId" id="categoryId" value="${categoryId}"/>
                 <input type="hidden" name="qqdj" id="qqdj" value="${qqdj}"/>
-                <input type="hidden" name="beginDate" id="beginDate" value="${beginDate}"/>
-                <input type="hidden" name="endDate" id="endDate" value="${endDate}"/>
-                <input type="hidden" name="month" id="month" value="${month}"/>
+                <input type="hidden" name="propertyId" id="propertyId" value="${propertyId}"/>
+                <input type="hidden" name="belongArea" id="belongArea" value="${belongArea}"/>
+                <input type="hidden" name="isMajor" id="isMajor" value="${isMajor}"/>
+                <input type="hidden" name="infoStageId" id="infoStageId" value="${infoStageId}"/>
+                <%--<input type="hidden" name="beginDate" id="beginDate" value="${beginDate}"/>--%>
+                <%--<input type="hidden" name="endDate" id="endDate" value="${endDate}"/>--%>
+
                 <input type="button" value="确定" class="button_confirm" onclick="printStageData(this)">&nbsp;
                 <input type="button" value="取消" class="button_cancel" onclick="closeWindow()">
             </td>
