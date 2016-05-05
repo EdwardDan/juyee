@@ -244,7 +244,7 @@ public class ProjectQueryNodeController extends BaseCRUDActionController<ProjInf
         //填报数据
         Map<String, Object> dataMap = new HashMap<String, Object>();
         String hql = "from DataNodeReportItem where nodeReport.bid.id in({0}) and nodeReport.year={1} and nodeReport.month={2} order by id asc";
-        hql = FormatUtils.format(hql, conditionHql, JspHelper.getInteger(year) + "", JspHelper.getInteger(month) + "");
+            hql = FormatUtils.format(hql, conditionHql, JspHelper.getInteger(year) + "", JspHelper  .getInteger(month) + "");
         List<DataNodeReportItem> dataNodeReportItems = dataNodeReportItemService.findByQuery(hql);
         for (DataNodeReportItem item : dataNodeReportItems) {
             Long bidId = item.getNodeReport().getBid().getId();
