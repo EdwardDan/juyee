@@ -67,7 +67,7 @@
             resultIds = resultIds.substring(1);
             var str = getCondStr() + "&stageIds=" + ids + "&resultIds=" + resultIds;
             <%--window.open("${ctx}/projectQueryStage/printExcel.do?id=${id}&month=" + last_m + "&" + str);--%>
-            window.open("${ctx}/projectQueryStage/printExcel.do?id=${id}&month=" + last_m + "&" + str);
+            window.open("${ctx}/projectQueryStage/printExcel.do?id=${id}" + "&" + str);
         }
     }
 
@@ -103,7 +103,7 @@
 </script>
 <style type="text/css">
     .td_normal {
-        height: 25px;
+        height: 30px;
         /*min-width: 80px;*/
         word-break: break-all;
     }

@@ -87,7 +87,7 @@
                         <%--<td class="td_normal" title="${dataMap[dataKey].resultName}"--%>
                         <%--<c:if test="${not empty dataMap[dataKey].color}">style="background-color: ${dataMap[dataKey].color}"</c:if>>${dataMap[dataKey].resultName}</td>--%>
                         <td class="td_normal">
-                            <table border="1" cellspacing="0" cellpadding="0" style="width: 100%">
+                            <table border=1 cellspacing="0" cellpadding="0" style="width: 100%" >
                                 <tr class="tr_light">
                                     <td class="td_normal">计划上报</td>
                                     <td class="td_normal">计划批复</td>

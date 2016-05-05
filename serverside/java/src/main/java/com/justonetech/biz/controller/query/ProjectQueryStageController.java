@@ -531,14 +531,7 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
 //        String bidName = request.getParameter("bidName");
         String jsDept = request.getParameter("jsDept");//建设单位
         String year = request.getParameter("year");//年份
-        String month;
-        if (StringHelper.isEmpty(projectId)) {
-            month = request.getParameter("month");//汇总月份
-        } else {
-            month = request.getParameter("month2");//单个项目月份
-        }
-
-
+        String month = request.getParameter("month");//月份
         String categoryId = request.getParameter("categoryId");//项目类型
         String propertyId = request.getParameter("propertyId");//管理属性
         String belongAreaId = request.getParameter("belongAreaId");//区县
@@ -621,9 +614,9 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
             if (!StringHelper.isEmpty(jsDept)) {//OK
                 conditionHql += " and jsdwName like '%" + jsDept + "%'";//建设单位
             }
-            if (!StringHelper.isEmpty(year)) {//OK
-                conditionHql += " and project.year = " + year;//年份
-            }
+//            if (!StringHelper.isEmpty(year)) {//OK
+//                conditionHql += " and project.year = " + year;//年份
+//            }
             if (!StringHelper.isEmpty(categoryId)) {//OK
                 conditionHql += " and project.category.id=" + categoryId;//项目类型
             }
@@ -774,9 +767,16 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
             List<ProjBid> projBids = (List<ProjBid>) project.get("bids");
             int r = projBids.size();
             for (int c = 0; c <= 2; c++) {
-                mergerCellsList.add(new int[]{c, st, c, st + r - 1});
+                mergerCellsList.add(new int[]{c, st, c, (st + r*4 - 1)});
             }
-            st += r;
+            for(int c = 3;c < 9; c++){
+                int b = st;
+                for (int i=0;i < r;i++){
+                    mergerCellsList.add(new int[]{c, st, c, (st + 3)});
+                    b += 4;
+                }
+            }
+            st += r*4;
         }
 
 //        mergerCellsList.add(new int[]{0,3,0,12});
@@ -796,7 +796,7 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
 //        mergerCellsList.add(new int[]{7,5,7,6});
 
         //前期阶段合并
-        startColNo = 8;
+        startColNo = 9;
         for (ProjStage stage : firstStages) {
             if (!StringHelper.isEmpty(stage.getName())) {
                 startRowNo = 1;
@@ -812,6 +812,16 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
                 }
             }
         }
+
+        //0-9行内容上下合并四行
+//        startColNo = 3;
+//        for(int i=3;i<9;i++){
+//            startRowNo = 3;
+//            mergerCellsList.add(new int[]{startColNo, startRowNo, startColNo, startRowNo + 3});
+//            startColNo++;
+//        }
+
+
 //        col+8
 //        row+1
 //        mergerCellsList.add(new int[]{8,1,8,2});
@@ -821,7 +831,7 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
 //        mergerCellsList.add(new int[]{13,1,14,1});
 
         //大标题合并
-        mergerCellsList.add(new int[]{0, 0, leafStages.size()*2 + 8 - 1, 0});
+        mergerCellsList.add(new int[]{0, 0, leafStages.size()*2 + 9 - 1, 0});
 
         //for test
 //        for (int[] ints : mergerCellsList) {
