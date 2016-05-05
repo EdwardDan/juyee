@@ -25,7 +25,7 @@
         </td>
 </table>
 <table cellpadding="0" cellspacing="0" border="1" width="100%" class="table_thin_line" id="myTable">
-    <thead>
+    <%--<thead>--%>
     <tr class="tr_header">
         <td rowspan="4" width="2%" nowrap>序号</td>
         <td rowspan="4" width="5%" nowrap>&nbsp;&nbsp;项目编号&nbsp;&nbsp;</td>
