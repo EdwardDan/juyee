@@ -98,7 +98,9 @@
 
     //初始化
     $(function () {
-        <%--loadStageData("${currentMonth}", '');--%>
+        if(${id!=null}){
+            loadStageData("${currentMonth}", '');
+        }
     });
 </script>
 <style type="text/css">
