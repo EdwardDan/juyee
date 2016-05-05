@@ -190,13 +190,13 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         model.addAttribute("id", id);
         Calendar c = Calendar.getInstance();
         model.addAttribute("yearOptions", DateTimeHelper.getYearSelectOptions(String.valueOf(c.get(Calendar.YEAR))));
+        model.addAttribute("monthOptions", DateTimeHelper.getMonthSelectOptions(String.valueOf(c.get(Calendar.MONTH) + 1)));
         model.addAttribute("currentYear", c.get(Calendar.YEAR));
         model.addAttribute("currentMonth", c.get(Calendar.MONTH) + 1);
         model.addAttribute("PROJ_INFO_CATEGORY", Constants.PROJ_INFO_CATEGORY);//项目类型
         model.addAttribute("PROJ_INFO_PROPERTY", Constants.PROJ_INFO_PROPERTY);//管理属性
         model.addAttribute("PROJ_INFO_BELONG_AREA", Constants.PROJ_INFO_BELONG_AREA);//区县
         model.addAttribute("PROJ_INFO_STAGE", Constants.PROJ_INFO_STAGE);//项目状态
-        model.addAttribute("PROJ_QQDJ", Constants.PROJ_QQDJ);//区区对接
         return "view/query/projectQueryStage/viewStage";
     }
 
@@ -212,14 +212,25 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         String projectName = request.getParameter("projectName");//项目名称
 //        String bidName = request.getParameter("bidName");
         String jsDept = request.getParameter("jsDept");//建设单位
-        String year = request.getParameter("year");//年份
-        String month;
+        Calendar c = Calendar.getInstance();
+        String year;//年份
+        if (StringHelper.isEmpty(projectId)) {
+            year = request.getParameter("year");//汇总年份
+        } else {
+            year = request.getParameter("year2");//单个项目年份
+        }
+        if(StringHelper.isEmpty(year)){
+            year = c.get(Calendar.YEAR)+"";
+        }
+        String month;//月份
         if (StringHelper.isEmpty(projectId)) {
             month = request.getParameter("month");//汇总月份
         } else {
             month = request.getParameter("month2");//单个项目月份
         }
-
+        if (StringHelper.isEmpty(month)){
+            month=c.get(Calendar.MONTH)+1+"";
+        }
 
         String categoryId = request.getParameter("categoryId");//项目类型
         String propertyId = request.getParameter("propertyId");//管理属性
@@ -273,9 +284,9 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
             if (!StringHelper.isEmpty(jsDept)) {//OK
                 conditionHql += " and jsdwName like '%" + jsDept + "%'";//建设单位
             }
-            if (!StringHelper.isEmpty(year)) {//OK
-                conditionHql += " and project.year = " + year;//年份
-            }
+//            if (!StringHelper.isEmpty(year)) {//OK
+//                conditionHql += " and project.year = " + year;//年份
+//            }
             if (!StringHelper.isEmpty(categoryId)) {//OK
                 conditionHql += " and project.category.id=" + categoryId;//项目类型
             }
@@ -673,14 +684,15 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
 
         //整理项目包含标段
         List<Map<String, Object>> projects = reOrgBids(filterBids);
+
         beans.put("projects", projects);
 
         //查询数据
         for (DataStageReportItem item : dataStageReportItems) {
             Long bidId = item.getStageReport().getBid().getId();
             String key = bidId + "_" + item.getStep().getId() + "_" + item.getStage().getId();
-            if (!oneBidHS.contains(key)) {
-                oneBidHS.add(key);
+//            if (!oneBidHS.contains(key)) {
+//                oneBidHS.add(key);
                 Map<String, Object> map = new HashMap<String, Object>();
                 SysCodeDetail result = item.getResult();
                 if (item.getType().toString().equals("jh")) {
@@ -710,7 +722,7 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
 
 //                dataMap.put(key, map);
             }
-        }
+//        }
 
         beans.put("dataMap", dataMap);
 
@@ -779,14 +791,14 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
 //        mergerCellsList.add(new int[]{7,5,7,6});
 
         //前期阶段合并
-        startColNo = 9;
+        startColNo = 8;
         for (ProjStage stage : firstStages) {
             if (!StringHelper.isEmpty(stage.getName())) {
                 startRowNo = 1;
                 Set<ProjStage> childs = stage.getProjStages();
                 if (childs.size() == 0) {  //竖向合并
-                    mergerCellsList.add(new int[]{startColNo, startRowNo, startColNo, startRowNo + 1});
-                    startColNo++;
+                    mergerCellsList.add(new int[]{startColNo, startRowNo, startColNo + 1, startRowNo + 1});
+                    startColNo+=2;
                 } else if (childs.size() > 1) { //横向合并
                     mergerCellsList.add(new int[]{startColNo, startRowNo, startColNo + childs.size() - 1, startRowNo});
                     startColNo += childs.size();
@@ -804,7 +816,7 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
 //        mergerCellsList.add(new int[]{13,1,14,1});
 
         //大标题合并
-        mergerCellsList.add(new int[]{0, 0, leafStages.size() + 9 - 1, 0});
+        mergerCellsList.add(new int[]{0, 0, leafStages.size()*2 + 8 - 1, 0});
 
         //for test
 //        for (int[] ints : mergerCellsList) {

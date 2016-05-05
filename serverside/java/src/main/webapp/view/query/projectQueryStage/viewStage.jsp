@@ -25,10 +25,12 @@
             $("#isMajor").val("");
             $("#infoStageId").val("");
             $("#qqdj").val("");
+            $("#jsDept").val("");
         }
         var str = getCondStr();
         setButton(true);
-        loadAjaxDataCallback("stageDataDiv", "${ctx}/projectQueryStage/viewStageData.do?id=${id}&month=" + month + "&" + str, resetButton);
+        <%--loadAjaxDataCallback("stageDataDiv", "${ctx}/projectQueryStage/viewStageData.do?id=${id}&month=" + month + "&" + str, resetButton);--%>
+        loadAjaxDataCallback("stageDataDiv", "${ctx}/projectQueryStage/viewStageData.do?id=${id}" + "&" + str, resetButton);
     }
     function resetButton() {
         setButton(false);
@@ -41,6 +43,7 @@
     //选择阶段
     function selectStage(btn) {
         var str = getCondStr();
+        <%--openNewWindow('selectStageDiv', '选择阶段', "${ctx}/projectQueryStage/selectStage.do?id=${id}&month=" + last_m + "&" + str, false, 600, 450);--%>
         openNewWindow('selectStageDiv', '选择阶段', "${ctx}/projectQueryStage/selectStage.do?id=${id}&month=" + last_m + "&" + str, false, 600, 450);
     }
 
@@ -63,6 +66,7 @@
             ids = ids.substring(1);
             resultIds = resultIds.substring(1);
             var str = getCondStr() + "&stageIds=" + ids + "&resultIds=" + resultIds;
+            <%--window.open("${ctx}/projectQueryStage/printExcel.do?id=${id}&month=" + last_m + "&" + str);--%>
             window.open("${ctx}/projectQueryStage/printExcel.do?id=${id}&month=" + last_m + "&" + str);
         }
     }
@@ -72,6 +76,7 @@
 //        s += "&bidName=" + $("#bidName").val();
         s += "&jsDept=" + $("#jsDept").val();
         s += "&year=" + $("#year").val();
+        s += "&year2=" + $("#year2").val();
         s += "&categoryId=" + $("#categoryId").val();
         s += "&qqdj=" + $("#qqdj").val();
         s += "&isMajor=" + $("#isMajor").val();
@@ -79,6 +84,7 @@
         s += "&propertyId=" + $("#propertyId").val();
         s += "&belongAreaId=" + $("#belongAreaId").val();
         s += "&month2=" + $("#month2").val();
+        s += "&month=" + $("#month").val();
 
 //        s += "&beginDate=" + $("#beginDate").val();
 //        s += "&endDate=" + $("#endDate").val();
@@ -140,17 +146,21 @@
             <td align="right" width="70" nowrap>日期：</td>
             <td align="left" nowrap>
                 <select id="year">
-                    <c:forEach var="y" begin="2015" end="${currentYear}" step="1">
+                    <option value="">请选择</option>
+                    <%--${yearOptions};--%>
+                    <c:forEach var="y" begin="2005" end="2020" step="1">
                         <option
-                                <c:if test="${currentYear==y}">selected="selected"</c:if>
+                            <c:if test="${currentYear==y}">selected="selected"</c:if>
                                 value="${y}">${y}年
                         </option>
                     </c:forEach>
                 </select>
                 <select id="month">
-                    <c:forEach var="m" begin="1" end="${currentMonth}" step="1">
+                    <option value="">请选择</option>
+                    <%--${monthOptions};--%>
+                    <c:forEach var="m" begin="1" end="12" step="1">
                         <option
-                                <c:if test="${currentMonth==m}">selected="selected"</c:if>
+                            <c:if test="${currentMonth==m}">selected="selected"</c:if>
                                 value="${m}">${m}月
                         </option>
                     </c:forEach>
@@ -170,13 +180,11 @@
                 </select>
             </td>
             <td align="left" nowrap colspan="4">&nbsp;区区对接：
-                <sys:code code="${PROJ_QQDJ}" name="qqdj" id="qqdj" type="select"
-                          sysCodeDetailId="" style="width:120px" isAlowedNull="true"/>
-                <%--<select name="" id="qqdj" class="form_select" style="width: 120px;">--%>
-                <%--<option value="">请选择</option>--%>
-                <%--<option value="1012">2010-2012区区对接</option>--%>
-                <%--<option value="1517">2015-2017区区对接</option>--%>
-                <%--</select>&nbsp;&nbsp;&nbsp;&nbsp;--%>
+                <select name="" id="qqdj" class="form_select" style="width: 120px;">
+                    <option value="">请选择</option>
+                    <option value="1012">2010-2012区区对接</option>
+                    <option value="1517">2015-2017区区对接</option>
+                </select>&nbsp;&nbsp;&nbsp;&nbsp;
             </td>
             <%--<td align="right" width="70" nowrap>标段名称：</td>--%>
             <%--<td align="left" nowrap>--%>
@@ -254,11 +262,20 @@
            <c:if test="${!not empty id}">style="display: none"</c:if>>
         <td align="right" width="70" nowrap>查看月份：</td>
         <td align="left" nowrap>
+            <select id="year2" onchange="loadStageData('',null)">
+                <option value="">请选择</option>
+                <c:forEach var="y" begin="2005" end="2020" step="1">
+                    <option
+                        <c:if test="${currentYear==y}">selected="selected"</c:if>
+                            value="${y}">${y}年
+                    </option>
+                </c:forEach>
+            </select>
             <select id="month2" onchange="loadStageData('',null)">
                 <c:forEach var="m" begin="1" end="${currentMonth}" step="1">
                     <option
                             <c:if test="${currentMonth==m}">selected="selected"</c:if>
-                            value="${m}">${currentYear}年${m}月
+                            value="${m}">${m}月
                     </option>
                 </c:forEach>
             </select>
