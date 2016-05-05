@@ -128,13 +128,15 @@
                         <option value="0">非重大</option>
                     </select>
                 </td>
-                <td align="right" width="70" nowrap>区区对接：</td>
+                <td align="right" width="70" nowrap>项目属性：</td>
                 <td align="left" nowrap>
-                    <select name="qqdj" id="qqdj" class="form_select" style="width: 120px;">
-                        <option value="">请选择</option>
-                        <option value="1012">2010-2012区区对接</option>
-                        <option value="1517">2015-2017区区对接</option>
-                    </select>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <%--<select name="qqdj" id="qqdj" class="form_select" style="width: 120px;">--%>
+                        <%--<option value="">请选择</option>--%>
+                        <%--<option value="1012">2010-2012区区对接</option>--%>
+                        <%--<option value="1517">2015-2017区区对接</option>--%>
+                        <%--</select>&nbsp;&nbsp;&nbsp;&nbsp;--%>
+                    <sys:code code="${PORJECT_PROJ_PROPERTY}" name="qqdj" id="qqdj" type="select"
+                              sysCodeDetailId="" style="width:100" isAlowedNull="true"/>
                 </td>
             </tr>
             <tr>
