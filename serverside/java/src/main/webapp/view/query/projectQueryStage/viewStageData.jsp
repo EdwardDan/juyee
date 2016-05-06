@@ -32,11 +32,11 @@
         <%--<th rowspan="2" nowrap>起讫地点</th>--%>
         <th rowspan="2" nowrap>&nbsp;&nbsp;&nbsp;&nbsp;标段名称&nbsp;&nbsp;&nbsp;&nbsp;</th>
         <%--<th rowspan="2" nowrap>建设里程</th>--%>
-        <th rowspan="2" nowrap>&nbsp;&nbsp;所属区县&nbsp;&nbsp;</th>
-        <th rowspan="2" nowrap>&nbsp;&nbsp;项目阶段&nbsp;&nbsp;</th>
-        <th rowspan="2" nowrap>&nbsp;&nbsp;业态类别&nbsp;&nbsp;</th>
-        <th rowspan="2" nowrap>&nbsp;&nbsp;建设单位&nbsp;&nbsp;</th>
-        <th rowspan="2" nowrap>&nbsp;&nbsp;道路等级&nbsp;&nbsp;</th>
+        <th rowspan="2" nowrap>&nbsp;&nbsp;&nbsp;&nbsp;所属区县&nbsp;&nbsp;&nbsp;&nbsp;</th>
+        <th rowspan="2" nowrap>&nbsp;&nbsp;&nbsp;&nbsp;项目阶段&nbsp;&nbsp;&nbsp;&nbsp;</th>
+        <th rowspan="2" nowrap>&nbsp;&nbsp;&nbsp;&nbsp;业态类别&nbsp;&nbsp;&nbsp;&nbsp;</th>
+        <th rowspan="2" nowrap>&nbsp;&nbsp;&nbsp;&nbsp;建设单位&nbsp;&nbsp;&nbsp;&nbsp;</th>
+        <th rowspan="2" nowrap>&nbsp;&nbsp;&nbsp;&nbsp;道路等级&nbsp;&nbsp;&nbsp;&nbsp;</th>
         <%--<th rowspan="2" nowrap>&nbsp;&nbsp;开工日期&nbsp;&nbsp;</th>--%>
         <%--<c:if test="${stepSize>1}"><th rowspan="2" nowrap>上报单位类型</th></c:if>--%>
         <%--<c:set var="fs" value="${(fn:length(firstStage.projStages))}"/>--%>
