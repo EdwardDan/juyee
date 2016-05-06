@@ -13,10 +13,7 @@ import com.justonetech.core.controller.BaseCRUDActionController;
 import com.justonetech.core.orm.hibernate.Page;
 import com.justonetech.core.utils.JspHelper;
 import com.justonetech.core.utils.StringHelper;
-import com.justonetech.system.domain.SysCodeDetail;
-import com.justonetech.system.domain.SysDept;
-import com.justonetech.system.domain.SysPerson;
-import com.justonetech.system.domain.SysUser;
+import com.justonetech.system.domain.*;
 import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
 import com.justonetech.system.utils.PrivilegeCode;
@@ -505,7 +502,14 @@ public class DataStageReportController extends BaseCRUDActionController<DataStag
         model.addAttribute("steps", steps);
         //办证推进结果
         List<SysCodeDetail> results = sysCodeManager.getCodeListByCode(Constants.DATA_STAGE_RESULT);
+        List<SysCodeDetail> resultsJH = new ArrayList<SysCodeDetail>();
+        for(SysCodeDetail result:results){
+            if(Integer.parseInt(result.getCode())!=4){
+                resultsJH.add(result);
+            }
+        }
         model.addAttribute("results", results);
+        model.addAttribute("resultsJH",resultsJH);
 //        String button = documentManager.getUploadButtonForMulti(documentManager.getDefaultXmlConfig(), DataStageReportItem.class.getSimpleName(), item.getDoc(), sysUserManager.getSysUser().getId(), "DataStageReportItem", item.getId().toString());
 //        model.addAttribute("uploadButton",button);
         //填报数据

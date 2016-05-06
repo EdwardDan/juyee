@@ -28,9 +28,9 @@
     <thead>
     <tr class="tr_header">
         <th rowspan="2" width="2%" nowrap>&nbsp;&nbsp;项目编号&nbsp;&nbsp;</th>
-        <th rowspan="2" nowrap>&nbsp;&nbsp;项目名称&nbsp;&nbsp;</th>
+        <th rowspan="2" nowrap>&nbsp;&nbsp;&nbsp;&nbsp;项目名称&nbsp;&nbsp;&nbsp;&nbsp;</th>
         <%--<th rowspan="2" nowrap>起讫地点</th>--%>
-        <th rowspan="2" nowrap>&nbsp;&nbsp;标段名称&nbsp;&nbsp;</th>
+        <th rowspan="2" nowrap>&nbsp;&nbsp;&nbsp;&nbsp;标段名称&nbsp;&nbsp;&nbsp;&nbsp;</th>
         <%--<th rowspan="2" nowrap>建设里程</th>--%>
         <th rowspan="2" nowrap>&nbsp;&nbsp;所属区县&nbsp;&nbsp;</th>
         <th rowspan="2" nowrap>&nbsp;&nbsp;项目阶段&nbsp;&nbsp;</th>
@@ -39,7 +39,7 @@
         <th rowspan="2" nowrap>&nbsp;&nbsp;道路等级&nbsp;&nbsp;</th>
         <%--<th rowspan="2" nowrap>&nbsp;&nbsp;开工日期&nbsp;&nbsp;</th>--%>
         <%--<c:if test="${stepSize>1}"><th rowspan="2" nowrap>上报单位类型</th></c:if>--%>
-        <c:set var="fs" value="${(fn:length(firstStage.projStages))*2}"/>
+        <%--<c:set var="fs" value="${(fn:length(firstStage.projStages))}"/>--%>
         <c:forEach items="${firstStages}" var="firstStage">
             <th colspan="2"
                 <c:if test="${fn:length(firstStage.projStages)<1}">rowspan="2" </c:if> style="width: 200px" nowrap>
@@ -98,18 +98,18 @@
                         <%--<td class="td_normal" title="${dataMap[dataKey].resultName}"--%>
                         <%--<c:if test="${not empty dataMap[dataKey].color}">style="background-color: ${dataMap[dataKey].color}"</c:if>>${dataMap[dataKey].resultName}</td>--%>
                         <td class="td_normal">
-                            <c:if test="${dataMap[dataKeyJH].resultNameJH=='需办理'}">
+                            <c:if test="${dataMap[dataKeyJH].resultCodeJH=='1'}">
                                 ${dataMap[dataKeyJH].planSbDateJH}
                             </c:if>
-                            <c:if test="${dataMap[dataKeyJH].resultNameJH=='无需办理'}">
+                            <c:if test="${dataMap[dataKeyJH].resultCodeJH=='5'}">
                                 ${dataMap[dataKeyJH].dealDateJH}
                             </c:if>
                         </td>
                         <td class="td_normal">
-                            <c:if test="${dataMap[dataKeyJH].resultNameJH=='需办理'}">
+                            <c:if test="${dataMap[dataKeyJH].resultCodeJH=='1'}">
                                 ${dataMap[dataKeyJH].planPfDateJH}
                             </c:if>
-                            <c:if test="${dataMap[dataKeyJH].resultNameJH=='无需办理'}">
+                            <c:if test="${dataMap[dataKeyJH].resultCodeJH=='5'}">
                                 ${dataMap[dataKeyJH].dealDateJH}
                             </c:if>
                         </td>
@@ -132,19 +132,25 @@
                         <%--<td class="td_normal" title="${dataMap[dataKey].resultName}"--%>
                         <%--<c:if test="${not empty dataMap[dataKey].color}">style="background-color: ${dataMap[dataKey].color}"</c:if>>${dataMap[dataKey].resultName}</td>--%>
                         <td class="td_normal">
-                            <c:if test="${dataMap[dataKeySJ].resultNameSJ=='需办理'}">
+                            <c:if test="${dataMap[dataKeySJ].resultCodeSJ=='1'}">
                                 ${dataMap[dataKeySJ].planSbDateSJ}
                             </c:if>
-                            <c:if test="${dataMap[dataKeySJ].resultNameSJ=='无需办理'||dataMap[dataKeySJ].resultNameSJ=='办理受阻'}">
+                            <c:if test="${dataMap[dataKeySJ].resultCodeSJ=='5'}">
                                 ${dataMap[dataKeySJ].dealDateSJ}
+                            </c:if>
+                            <c:if test="${dataMap[dataKeySJ].resultCodeSJ=='4'}">
+                                办理受阻
                             </c:if>
                         </td>
                         <td class="td_normal">
-                            <c:if test="${dataMap[dataKeySJ].resultNameSJ=='需办理'}">
+                            <c:if test="${dataMap[dataKeySJ].resultCodeSJ=='1'}">
                                 ${dataMap[dataKeySJ].planPfDateSJ}
                             </c:if>
-                            <c:if test="${dataMap[dataKeySJ].resultNameSJ=='无需办理'||dataMap[dataKeySJ].resultNameSJ=='办理受阻'}">
+                            <c:if test="${dataMap[dataKeySJ].resultCodeSJ=='5'}">
                                 ${dataMap[dataKeySJ].dealDateSJ}
+                            </c:if>
+                            <c:if test="${dataMap[dataKeySJ].resultCodeSJ=='4'}">
+                                办理受阻
                             </c:if>
                         </td>
                     </c:forEach>
