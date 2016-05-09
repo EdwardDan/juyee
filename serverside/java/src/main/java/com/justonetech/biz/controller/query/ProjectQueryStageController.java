@@ -775,17 +775,20 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
 //                mergerCellsList.add(new int[]{c, startRowNo + stepCount * 2 * r, c, startRowNo + stepCount * 2 * (r + 1) - 1});
 //            }
 //        }
+
         int st = startRowNo;
         for (Map<String, Object> project : projects) {
             List<ProjBid> projBids = (List<ProjBid>) project.get("bids");
             int r = projBids.size();
+            //合并前三列
             for (int c = 0; c <= 2; c++) {
                 mergerCellsList.add(new int[]{c, st, c, (st + r*4 - 1)});
             }
+            //合并后4-9列
             for(int c = 3;c < 9; c++){
                 int b = st;
                 for (int i=0;i < r;i++){
-                    mergerCellsList.add(new int[]{c, st, c, (st + 3)});
+                    mergerCellsList.add(new int[]{c, b, c, (b + 3)});
                     b += 4;
                 }
             }
