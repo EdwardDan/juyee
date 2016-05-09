@@ -9,12 +9,44 @@
 <%--});--%>
 <%--});--%>
 <%--</script>--%>
+<script type="text/javascript">
+    function prevPage() {
+        var begin = ${begin};
+        var end = ${end};
+        if((begin-10)>=0){
+            begin-=10;
+            end-=10;
+            loadStageData('',null,begin,end);
+        }
+    }
+    function nextPage() {
+        var begin = ${begin};
+        var end = ${end};
+        var projectsSize = ${projectsSize};
+        if((end+10)<=projectsSize){
+            begin+=10;
+            end+=10;
+            loadStageData('',null,begin,end);
+        }else if(begin+10<projectsSize&&end+10>projectsSize){
+            begin+=10;
+            end=projectsSize;
+            loadStageData('',null,begin,end);
+        }
+    }
+
+</script>
 <table cellpadding="0" cellspacing="0" class="form_table">
+    <input type="text" id="begin" name="begin" value="${begin}" hidden="hidden">
+    <input type="text" id="end" name="end" value="${end}" hidden="hidden">
     <tr class="tr_light">
         <td align="left" nowrap>&nbsp;
             <c:choose>
                 <c:when test="${isSum}">
                     ${year}年度项目办证推进表
+                    <input type="button" name="prevPage" id="prevPage" onclick="prevPage()" value="上一页">
+                    <c:set var="b" scope="session" value="${begin+1}"/>
+                    从第${b}条数据开始，共${projectsSize}条数据
+                    <input type="button" name="nextPage" id="nextPage" onclick="nextPage()" value="下一页">
                 </c:when>
                 <c:otherwise>
                     共有${bidSize}个标段
@@ -43,7 +75,8 @@
         <c:forEach items="${firstStages}" var="firstStage">
             <th colspan="2"
                 <c:if test="${fn:length(firstStage.projStages)<1}">rowspan="2" </c:if> style="width: 200px" nowrap>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${firstStage.name}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </th>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${firstStage.name}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </th>
         </c:forEach>
     </tr>
     <%--<tr class="tr_header">--%>
@@ -53,7 +86,7 @@
     <%--</tr>--%>
     </thead>
     <tbody>
-    <c:forEach items="${projects}" var="projInfo" varStatus="projIndex">
+    <c:forEach items="${projects}" var="projInfo" varStatus="projIndex" begin="${begin}" end="${end}">
         <c:forEach items="${projInfo.bids}" var="bid" varStatus="bidIndex">
             <c:set var="stepCount" value="${fn:length(steps)*4}"/>
             <c:set var="bidCount" value="${fn:length(projInfo.bids)*4}"/>

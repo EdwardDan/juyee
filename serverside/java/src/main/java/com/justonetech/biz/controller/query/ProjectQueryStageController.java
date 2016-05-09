@@ -187,6 +187,10 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
      */
     @RequestMapping
     public String viewStage(Model model, Long id) {
+        int begin = 0;
+        int end = 9;
+        model.addAttribute("begin",begin);
+        model.addAttribute("end",end);
         model.addAttribute("id", id);
         Calendar c = Calendar.getInstance();
         model.addAttribute("yearOptions", DateTimeHelper.getYearSelectOptions(String.valueOf(c.get(Calendar.YEAR))));
@@ -208,6 +212,8 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
      */
     @RequestMapping
     public String viewStageData(Model model, HttpServletRequest request) {
+        String begin = request.getParameter("begin");
+        String end = request.getParameter("end");
         String projectId = request.getParameter("id");
         String projectName = request.getParameter("projectName");//项目名称
 //        String bidName = request.getParameter("bidName");
@@ -250,6 +256,8 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         model.addAttribute("isSum", isSum);
         model.addAttribute("year", year);
         model.addAttribute("month", month);
+        model.addAttribute("begin",begin);
+        model.addAttribute("end",end);
 
         //办证阶段
         List<ProjStage> firstStages = new ArrayList<ProjStage>();
@@ -324,7 +332,9 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
 
         //整理项目包含标段
         List<Map<String, Object>> projects = reOrgBids(bids);
+
         model.addAttribute("projects", projects);
+        model.addAttribute("projectsSize",projects.size());
 
         //用于数据过滤
         conditionHql = "select id " + conditionHql;

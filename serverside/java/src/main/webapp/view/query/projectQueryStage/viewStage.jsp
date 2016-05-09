@@ -2,7 +2,7 @@
 <%@ include file="/common/taglibs.jsp" %>
 <script type="text/javascript">
     var last_m = "";
-    function loadStageData(month, flag) {
+    function loadStageData(month, flag,begin,end) {
         if (month != null && month != "") {
             if (last_m != month) {
                 if (last_m != "") {
@@ -30,7 +30,7 @@
         var str = getCondStr();
         setButton(true);
         <%--loadAjaxDataCallback("stageDataDiv", "${ctx}/projectQueryStage/viewStageData.do?id=${id}&month=" + month + "&" + str, resetButton);--%>
-        loadAjaxDataCallback("stageDataDiv", "${ctx}/projectQueryStage/viewStageData.do?id=${id}" + "&" + str, resetButton);
+        loadAjaxDataCallback("stageDataDiv", "${ctx}/projectQueryStage/viewStageData.do?&begin="+begin+"&end="+end+"&id=${id}" + "&" + str, resetButton);
     }
     function resetButton() {
         setButton(false);
@@ -99,7 +99,9 @@
     //初始化
     $(function () {
         if(${id!=null}){
-            loadStageData("${currentMonth}", '');
+            loadStageData("${currentMonth}", '',0,99);//单个项目默认显示100条数据
+        }else{
+            loadStageData("${currentMonth}", '',${begin},${end});//汇总默认显示10条数据
         }
     });
 </script>
@@ -227,9 +229,9 @@
                           sysCodeDetailId="" style="width:120px" isAlowedNull="true"/>
             </td>
             <td align="left" nowrap>
-                <input type="button" value="查询" id="btnQueryThis" class="button_all" onclick="loadStageData('',null)"/>
+                <input type="button" value="查询" id="btnQueryThis" class="button_all" onclick="loadStageData('',null,${begin},${end})"/>
                 <input type="button" value="显示全部" id="btnQueryAll" class="button_normal_long"
-                       onclick="loadStageData('${currentMonth}','all')"/>
+                       onclick="loadStageData('${currentMonth}','all',${begin},${end})"/>
             </td>
             <%--<td align="left" nowrap colspan="4">&nbsp;--%>
             <%--区区对接：--%>
@@ -264,7 +266,7 @@
            <c:if test="${!not empty id}">style="display: none"</c:if>>
         <td align="right" width="70" nowrap>查看月份：</td>
         <td align="left" nowrap>
-            <select id="year2" onchange="loadStageData('',null)">
+            <select id="year2" onchange="loadStageData('',null,0,99)">
                 <option value="">请选择</option>
                 <c:forEach var="y" begin="2005" end="2020" step="1">
                     <option
@@ -273,7 +275,7 @@
                     </option>
                 </c:forEach>
             </select>
-            <select id="month2" onchange="loadStageData('',null)">
+            <select id="month2" onchange="loadStageData('',null,0,99)">
                 <c:forEach var="m" begin="1" end="${currentMonth}" step="1">
                     <option
                             <c:if test="${currentMonth==m}">selected="selected"</c:if>
