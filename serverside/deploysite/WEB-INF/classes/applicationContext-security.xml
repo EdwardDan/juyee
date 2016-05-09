@@ -26,6 +26,10 @@
         <intercept-url pattern="/DocDocument*/**" access="ROLE_USER"/>
 
         <!--头文件及引入文件不验证权限-->
+        <intercept-url pattern="/sysRegPerson/indexInput.do" filters="none"/>
+        <intercept-url pattern="/sysRegPerson/getRegIndex.do" filters="none"/>
+        <intercept-url pattern="/sysRegPerson/isRegIndex.do" filters="none"/>
+        <intercept-url pattern="/sysRegPerson/saveIndex.do" filters="none"/>
         <intercept-url pattern="/**/header.jsp*" filters="none"/>
         <intercept-url pattern="/imageCode.jsp*" filters="none"/>
         <intercept-url pattern="/skin/**" filters="none"/>
@@ -62,7 +66,7 @@
               <password-encoder ref="passwordEncoder"/>
        </authentication-provider>
     -->
-    
+
     <!--
      <b:bean id="authenticationManager"
              class="org.springframework.security.authentication.ProviderManager">

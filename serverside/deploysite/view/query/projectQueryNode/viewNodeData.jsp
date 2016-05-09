@@ -1,13 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/common/taglibs.jsp" %>
 <script type="text/javascript">
-    $(function () {
-        $("#myTable").chromatable({
-            width: "100%", // specify 100%, auto, or a fixed pixel amount
-            height: "600px",
-            scrolling: "yes" // must have the jquery-1.3.2.min.js script installed to use
-        });
-    });
+//    $(function () {
+//        $("#myTable").chromatable({
+//            width: "100%", // specify 100%, auto, or a fixed pixel amount
+//            height: "600px",
+//            scrolling: "yes" // must have the jquery-1.3.2.min.js script installed to use
+//        });
+//    });
 </script>
 <table cellpadding="0" cellspacing="0" class="form_table">
     <tr class="tr_light">
@@ -91,7 +91,7 @@
                     <c:if test="${stepIndex.index == 0}">
                         <c:if test="${bidIndex.index == 0}">
                             <td rowspan="${bidCount}" width="2%" nowrap>${projIndex.index+1}</td>
-                            <td rowspan="${bidCount}" width="5%">${bid.projNum}</td>
+                            <td rowspan="${bidCount}" width="5%">${bid.project.projNum}</td>
                             <td rowspan="${bidCount}" width="5%">${bid.project.name}</td>
                             <%--<td rowspan="${bidCount}" width="5%">${bid.project.location}</td>--%>
                         </c:if>
@@ -102,9 +102,9 @@
                         <td rowspan="${stepCount}" width="5%" nowrap>${bid.jsdwName}</td>
                         <td rowspan="${stepCount}" width="5%" nowrap>${bid.project.roadTecGrade.name}</td>
                     </c:if>
-                    <%--<c:if test="${stepSize>1}">--%>
+                        <%--<c:if test="${stepSize>1}">--%>
                         <%--<td rowspan="2">${step.name}</td>--%>
-                    <%--</c:if>--%>
+                        <%--</c:if>--%>
                     <c:forEach items="${leafNodes}" var="leafNode">
                         <c:set var="dataKey" value="${bid.id}_${step.id}_${leafNode.id}"/>
                         <td width="4%" class="td_normal">&nbsp;${dataMap[dataKey].content}</td>
@@ -121,4 +121,5 @@
         </c:forEach>
     </c:forEach>
     </tbody>
+
 </table>
