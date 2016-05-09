@@ -256,8 +256,7 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         model.addAttribute("isSum", isSum);
         model.addAttribute("year", year);
         model.addAttribute("month", month);
-        model.addAttribute("begin",begin);
-        model.addAttribute("end",end);
+
 
         //办证阶段
         List<ProjStage> firstStages = new ArrayList<ProjStage>();
@@ -334,8 +333,12 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         List<Map<String, Object>> projects = reOrgBids(bids);
 
         model.addAttribute("projects", projects);
+        if(projects.size()<=Integer.parseInt(end)){
+            end = (projects.size()-1)+"";
+        }
         model.addAttribute("projectsSize",projects.size());
-
+        model.addAttribute("begin",begin);
+        model.addAttribute("end",end);
         //用于数据过滤
         conditionHql = "select id " + conditionHql;
 

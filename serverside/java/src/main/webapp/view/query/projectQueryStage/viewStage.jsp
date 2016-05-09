@@ -149,7 +149,7 @@
             </td>
             <td align="right" width="70" nowrap>日期：</td>
             <td align="left" nowrap>
-                <select id="year">
+                <select id="year" onchange="loadStageData('',null,${begin},${end})">
                     <option value="">请选择</option>
                     <%--${yearOptions};--%>
                     <c:forEach var="y" begin="2005" end="2020" step="1">
@@ -159,7 +159,7 @@
                         </option>
                     </c:forEach>
                 </select>
-                <select id="month">
+                <select id="month" onchange="loadStageData('',null,${begin},${end})">
                     <option value="">请选择</option>
                     <%--${monthOptions};--%>
                     <c:forEach var="m" begin="1" end="12" step="1">
