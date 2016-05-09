@@ -15,7 +15,7 @@
         var end = ${end};
         if((begin-10)>=0){
             begin-=10;
-            end-=10;
+            end=begin+9;
             loadStageData('',null,begin,end);
         }
     }
@@ -25,11 +25,11 @@
         var projectsSize = ${projectsSize};
         if((end+10)<=projectsSize){
             begin+=10;
-            end+=10;
+            end=begin+9;
             loadStageData('',null,begin,end);
         }else if(begin+10<projectsSize&&end+10>projectsSize){
             begin+=10;
-            end=projectsSize;
+            end=projectsSize-1;
             loadStageData('',null,begin,end);
         }
     }
@@ -45,7 +45,8 @@
                     ${year}年度项目办证推进表
                     <input type="button" name="prevPage" id="prevPage" onclick="prevPage()" value="上一页">
                     <c:set var="b" scope="session" value="${begin+1}"/>
-                    从第${b}条数据开始，共${projectsSize}条数据
+                    <c:set var="e" scope="session" value="${end+1}"/>
+                    第${b}至${e}条数据，共${projectsSize}条数据
                     <input type="button" name="nextPage" id="nextPage" onclick="nextPage()" value="下一页">
                 </c:when>
                 <c:otherwise>
