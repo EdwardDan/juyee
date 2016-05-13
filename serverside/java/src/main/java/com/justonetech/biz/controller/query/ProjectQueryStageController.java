@@ -31,6 +31,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.*;
 
 
@@ -215,9 +217,15 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
         String begin = request.getParameter("begin");
         String end = request.getParameter("end");
         String projectId = request.getParameter("id");
-        String projectName = request.getParameter("projectName");//项目名称
+        String projectName = null;//项目名称
+        String jsDept = null;//建设单位
+        try {
+            projectName = URLDecoder.decode(request.getParameter("projectName"), "UTF-8");
+            jsDept = URLDecoder.decode(request.getParameter("jsDept"),"UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
 //        String bidName = request.getParameter("bidName");
-        String jsDept = request.getParameter("jsDept");//建设单位
         Calendar c = Calendar.getInstance();
         String year;//年份
         if (StringHelper.isEmpty(projectId)) {
