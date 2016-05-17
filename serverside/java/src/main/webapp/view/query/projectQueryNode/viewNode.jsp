@@ -64,11 +64,11 @@
     }
 
     function getCondStr() {
-        var s = "projectName=" + $("#projectName").val();
+        var s = "projectName=" + encodeURI($("#projectName").val());
         s += "&propertyId=" + $("#propertyId").val();
         s += "&isMajor=" + $("#isMajor").val();
         s += "&qqdj=" + $("#qqdj").val();
-        s += "&jsDept=" + $("#jsDept").val();
+        s += "&jsDept=" + encodeURI($("#jsDept").val());
         s += "&qqdj=" + $("#qqdj").val();
         s += "&categoryId=" + $("#categoryId").val();
         s += "&belongAreaId=" + $("#belongAreaId").val();

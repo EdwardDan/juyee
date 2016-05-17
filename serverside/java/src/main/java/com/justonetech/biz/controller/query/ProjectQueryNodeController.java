@@ -29,6 +29,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.*;
 
 
@@ -149,14 +151,22 @@ public class ProjectQueryNodeController extends BaseCRUDActionController<ProjInf
     @RequestMapping
     public String viewNodeData(Model model, HttpServletRequest request) {
         String projectId = request.getParameter("id");
-        String projectName = request.getParameter("projectName");
+        String projectName = "";
+        String jsDept = "";
+        try {
+            projectName = URLDecoder.decode(request.getParameter("projectName"), "UTF-8");
+            jsDept = URLDecoder.decode(request.getParameter("jsDept"), "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
         String propertyId = request.getParameter("propertyId");
-        String jsDept = request.getParameter("jsDept");
+
         String isMajor = request.getParameter("isMajor");
         String qqdj = request.getParameter("qqdj");
         String year = request.getParameter("year");
         String month = request.getParameter("month");
-        String categoryId = request.getParameter("categoryId");
+        String categoryId = request.getParameter("categoryId");     
         String belongAreaId = request.getParameter("belongAreaId");
         String infoStageId = request.getParameter("infoStageId");
         Boolean isSum = StringHelper.isEmpty(projectId);   //是否汇总
@@ -292,9 +302,16 @@ public class ProjectQueryNodeController extends BaseCRUDActionController<ProjInf
     @RequestMapping
     public String selectNode(Model model, HttpServletRequest request) throws Exception {
         String projectId = request.getParameter("id");
-        String projectName = request.getParameter("projectName");
+
+        String projectName = "";
+        String jsDept = "";
+        try {
+            projectName = URLDecoder.decode(request.getParameter("projectName"), "UTF-8");
+            jsDept = URLDecoder.decode(request.getParameter("jsDept"), "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         String bidName = request.getParameter("bidName");
-        String jsDept = request.getParameter("jsDept");
         String year = request.getParameter("year");
         String categoryId = request.getParameter("categoryId");
         String qqdj = request.getParameter("qqdj");
@@ -336,9 +353,17 @@ public class ProjectQueryNodeController extends BaseCRUDActionController<ProjInf
         String fileName = "项目形象进度汇总表.xls";
 
         String projectId = request.getParameter("id");
-        String projectName = request.getParameter("projectName");
+
+
+        String projectName = "";
+        String jsDept = "";
+        try {
+            projectName = URLDecoder.decode(request.getParameter("projectName"), "UTF-8");
+            jsDept = URLDecoder.decode(request.getParameter("jsDept"), "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         String propertyId = request.getParameter("propertyId");
-        String jsDept = request.getParameter("jsDept");
         String isMajor = request.getParameter("isMajor");
         String qqdj = request.getParameter("qqdj");
         String year = request.getParameter("year");
