@@ -60,7 +60,7 @@
                 </td>
                 <td class="form_label_right">项目属性：</td>
                 <td class="form_content">
-                    ${bean.projProperty.id}
+                    ${bean.projProperty.name}
                 </td>
             </tr>
             <tr class="tr_dark">

@@ -17,5 +17,23 @@
                                                         onclick="window.open('${ctx}/tools/施工许可申请表.docx')">
             </td>
         </tr>
+        <tr class="tr_dark">
+            <td class="form_border">2</td>
+            <td class="form_border" nowrap>&nbsp;施工许可</td>
+            <td class="form_border" align="left">&nbsp;区县施工许可证办理操作流程</td>
+            <td class="form_border" nowrap>&nbsp;
+                <input type="button" value="下载" class="button_normal"
+                       onclick="window.open('${ctx}/tools/区县施工许可证办理操作流程.doc')">
+            </td>
+        </tr>
+        <tr class="tr_light">
+            <td class="form_border">3</td>
+            <td class="form_border" nowrap>&nbsp;施工许可</td>
+            <td class="form_border" align="left">&nbsp;施工许可证办理操作流程</td>
+            <td class="form_border" nowrap>&nbsp;
+                <input type="button" value="下载" class="button_normal"
+                       onclick="window.open('${ctx}/tools/施工许可证办理操作流程.doc')">
+            </td>
+        </tr>
     </table>
 </div>

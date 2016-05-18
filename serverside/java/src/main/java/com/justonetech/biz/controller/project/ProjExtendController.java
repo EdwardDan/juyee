@@ -150,7 +150,7 @@ public class ProjExtendController extends BaseCRUDActionController<ProjExtend> {
             Page<ProjInfo> pageModel = new Page<ProjInfo>(page, rows, true);
             String hql = "from ProjInfo where 1 = 1 ";
             if (!StringHelper.isEmpty(flag) && "qqdj".equals(flag)) {
-                hql += " and packageAttr like '%区区对接%' ";
+//                hql += " and packageAttr like '%区区对接%' ";
                 if (!StringHelper.isEmpty(msg)) {
                     hql += " and projNum like '" + msg + "%'";
                 }
@@ -173,10 +173,10 @@ public class ProjExtendController extends BaseCRUDActionController<ProjExtend> {
             if (!StringHelper.isEmpty(projcategory)) {
                 hql += " and category.name = '" + projcategory + "' ";
             }
-//            if (!StringHelper.isEmpty(xmsx)) {
-//                SysCodeDetail projProperty = sysCodeManager.getCodeDetailByCode(Constants.PORJECT_PROJ_PROPERTY, xmsx);
-//                hql += " and projProperty.id=" + projProperty.getId();
-//            }
+            if (!StringHelper.isEmpty(xmsx)) {
+                SysCodeDetail projProperty = sysCodeManager.getCodeDetailByCode(Constants.PORJECT_PROJ_PROPERTY, xmsx);
+                hql += " and projProperty.id=" + projProperty.getId();
+            }
             hql += " order by no asc,id asc";
 //            System.out.println("hql///////////////////////////////// = " + hql);
             //执行查询
