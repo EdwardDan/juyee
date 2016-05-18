@@ -64,11 +64,11 @@
                 </td>
             </tr>
             <tr class="tr_dark">
-                <td class="form_label_right">开工日期：</td>
+                <td class="form_label_right">实际开工：</td>
                 <td class="form_content">
                     <fmt:formatDate value="${bean.startDate}" pattern="yyyy-MM-dd"/>
                 </td>
-                <td class="form_label_right">完工日期：</td>
+                <td class="form_label_right">实际完成：</td>
                 <td class="form_content">
                     <fmt:formatDate value="${bean.endDate}" pattern="yyyy-MM-dd"/>
                 </td>
@@ -115,22 +115,22 @@
         <legend>项目扩展信息</legend>
         <table cellpadding="0" cellspacing="0" class="form_table">
             <tr class="tr_dark">
-                <td class="form_border" rowspan="2" style="width:8%;" nowrap>计划任务书</td>
-                <td class="form_label_right" style="width: 15%;">开工节点：</td>
+                <%--<td class="form_border" rowspan="2" style="width:8%;" nowrap>计划任务书</td>--%>
+                <td class="form_label_right" style="width: 23%;" colspan="2">目标开工节点：</td>
                 <td class="form_content" style="width: 25%;" nowrap>
                     <fmt:formatDate value="${bean.kgjd}" pattern="yyyy-MM-dd"/>
                 </td>
-                <td class="form_label_right" style="width: 15%;">完工节点：</td>
+                <td class="form_label_right" style="width: 15%;">目标完工节点：</td>
                 <td class="form_content" style="width: 30%;" nowrap>
                     <fmt:formatDate value="${bean.wgjd}" pattern="yyyy-MM-dd"/>
                 </td>
             </tr>
             <tr class="tr_dark">
-                <td class="form_label_right" style="width: 15%;">计划开工时间：</td>
+                <td class="form_label_right" style="width: 23%;" colspan="2">目标计划开工时间：</td>
                 <td class="form_content" style="width: 25%;" nowrap>
                     <fmt:formatDate value="${bean.planStartDate}" pattern="yyyy-MM-dd"/>
                 </td>
-                <td class="form_label_right" style="width: 15%;">计划完工时间：</td>
+                <td class="form_label_right" style="width: 15%;">目标计划完工时间：</td>
                 <td class="form_content" style="width: 30%;" nowrap>
                     <fmt:formatDate value="${bean.planEndDate}" pattern="yyyy-MM-dd"/>
                 </td>

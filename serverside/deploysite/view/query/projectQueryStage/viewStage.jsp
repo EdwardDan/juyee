@@ -72,9 +72,9 @@
     }
 
     function getCondStr() {
-        var s = "projectName=" + $("#projectName").val();
+        var s = "projectName=" + encodeURI($("#projectName").val());
 //        s += "&bidName=" + $("#bidName").val();
-        s += "&jsDept=" + $("#jsDept").val();
+        s += "&jsDept=" + encodeURI($("#jsDept").val());
         s += "&year=" + $("#year").val();
         s += "&year2=" + $("#year2").val();
         s += "&categoryId=" + $("#categoryId").val();

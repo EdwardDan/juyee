@@ -46,7 +46,7 @@
                     <input type="button" name="prevPage" id="prevPage" onclick="prevPage()" value="上一页">
                     <c:set var="b" scope="session" value="${begin+1}"/>
                     <c:set var="e" scope="session" value="${end+1}"/>
-                    第${b}至${e}条数据，共${projectsSize}条数据
+                    第${b}至${e}个项目，共${projectsSize}个项目
                     <input type="button" name="nextPage" id="nextPage" onclick="nextPage()" value="下一页">
                 </c:when>
                 <c:otherwise>
@@ -99,7 +99,7 @@
                             <td rowspan="${bidCount}">${bid.project.name}</td>
                             <%--<td rowspan="${bidCount}">${bid.project.location}</td>--%>
                         </c:if>
-                        <td rowspan="${stepCount}">${stepCount}---${bid.name}</td>
+                        <td rowspan="${stepCount}">${bid.name}</td>
                         <td rowspan="${stepCount}">${bid.belongAreaNames}</td>
                         <td rowspan="${stepCount}">${bid.project.stage.name}</td>
                         <td rowspan="${stepCount}">${bid.project.category.name}</td>
