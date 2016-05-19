@@ -16,6 +16,9 @@
         <!--短信开关-->
         <property name="sendSms" value="${smsSwitch}"/>
 
+        <!--快信通短信开关-->
+        <property name="kxtSendSms" value="${kxtSmsSwitch}"/>
+
         <!--系统缺省样式路径-->
         <property name="defaultSkinPath" value="default"/>
     </bean>
