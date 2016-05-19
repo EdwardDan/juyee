@@ -10,6 +10,7 @@ public class ConfigManager {
     private String siteName;     //网站标题
     private String filePath;     //附件存储路径
     private Boolean sendSms;     //短信开关
+    private Boolean kxtSendSms;     //短信开关
     private String defaultSkinPath;  //系统缺省皮肤
 
     public String getJdDeptName() {
@@ -42,6 +43,14 @@ public class ConfigManager {
 
     public void setSendSms(Boolean sendSms) {
         this.sendSms = sendSms;
+    }
+
+    public Boolean getKxtSendSms() {
+        return kxtSendSms;
+    }
+
+    public void setKxtSendSms(Boolean kxtSendSms) {
+        this.kxtSendSms = kxtSendSms;
     }
 
     public String getDefaultSkinPath() {

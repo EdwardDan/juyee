@@ -13,6 +13,7 @@ import com.justonetech.system.domain.SysRegPerson;
 import com.justonetech.system.domain.SysUser;
 import com.justonetech.system.manager.SysPersonManager;
 import com.justonetech.system.manager.SysUserManager;
+import kxt.SendKxt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,6 +91,10 @@ public class MsgMessageManager {
      * @return .
      */
     public int sendSmsByMsgSendDetail(MsgSendDetail msgSendDetail) {
+        if(configManager.getKxtSendSms()){
+            SendKxt.SendKxtSMS(msgSendDetail);
+        }
+
         if (configManager.getSendSms()) {  //开关打开后才能发送短信，否则只有系统消息
             String content = JspHelper.getString(msgSendDetail.getSmsMessage().getContent());
             if (!StringHelper.isEmpty(content)) {
