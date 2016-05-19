@@ -1,0 +1,17 @@
+{
+uid="admin";
+pwd="20160505";
+type="mo";
+jsonData=[
+{
+"mobile":"15618410955",
+"content":"hello",
+"smgRecvDate":"2016-05-12 12:00:00"
+}
+,{
+"mobile":"15618410955",
+"content":"hello_back",
+"smgRecvDate":"2016-05-12 12:00:00"
+}
+]
+}
