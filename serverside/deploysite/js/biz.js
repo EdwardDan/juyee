@@ -45,9 +45,17 @@ function viewTask(id, url, isWorkflow, isView, isNeedCheck) {
 function openTaskCallback(id, url, isWorkflow, isView) {
     //只有流程需要单独弹出页面，其余使用div，查看页面也使用div
     if ("true" == isWorkflow && !isView) {
-        parent.openFullWindow(url, 900, 550);
+        if("sgPermit".indexOf(url)){
+            parent.openNewWindow("newWinId","查看施工许可证", url, false, 900, 550);
+        }else{
+            parent.openFullWindow(url, 900, 550);
+        }
     } else {
-        parent.openWindow("查看任务", url, true, 900, 550);
+        if(url.indexOf("sgPermit/frame")){
+            parent.openNewWindow("newWinId","查看施工许可证", url, false, 900, 550);
+        }else{
+            parent.openWindow("查看任务", url, true, 900, 550);
+        }
     }
 
     //设置为已读状态

@@ -9,15 +9,15 @@
     var id = "${id}";
     $(function () {
         $.parser.parse();
-        $('#tabs').tabs({
-            width: $("#tabs").parent().width(),
-            height: $("#tabs").parent().height(),
+        $('#tabsChild').tabs({
+            width: $("#tabsChild").parent().width(),
+            height: $("#tabsChild").parent().height(),
             fit: true,
             border: false
         });
         $(window).resize(function () {
             setTimeout(function () {
-                $('#tabs').tabs("resize");
+                $('#tabsChild').tabs("resize");
             }, 500);
         });
         var baseUrl = {
@@ -62,10 +62,34 @@
                 }
             }
         };
-        addTab("${projName}项目", "", "tab1", opts);
-        addTab("参建单位和合同项目负责人信息", "", "tab2", opts);
-        addTab("单位工程列表", "", "tab3", opts);
+        addTabChild("${projName}项目", "", "tab1", opts);
+        addTabChild("参建单位和合同项目负责人信息", "", "tab2", opts);
+        addTabChild("单位工程列表", "", "tab3", opts);
     });
+
+    function addTabChild(subtitle, url, id, opts) {
+        var isFirstLoad = true;
+        if (!$('#tabsChild').tabs('exists', subtitle)) {
+            $('#tabsChild').tabs('add', $.extend({
+                title:subtitle,
+                content:createFrame('', id),
+                closable:false,
+                closed:true,
+//			icon:icon
+                onOpen:function () {
+                    if (isFirstLoad) {
+                        isFirstLoad = false;
+                    } else {
+                        $("#" + id).attr("src", url);
+                    }
+                }
+            }, opts));
+        } else {
+            $('#tabsChild').tabs('select', subtitle);
+            $('#mm-tabupdate').click();
+        }
+//	tabClose();
+    }
 </script>
 
-<div id="tabs" class="easyui-tabs1" style="width:100%;height:100%;"></div>
+<div id="tabsChild" class="easyui-tabs1"></div>
