@@ -3,4 +3,7 @@
 
 <display>
 	
+	<category name="系统管理">
+		<portlet id="dictionary"></portlet>
+	</category>
 </display>
