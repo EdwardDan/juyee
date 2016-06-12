@@ -3,6 +3,62 @@
 <service-builder package-path="com.justonetech.sys">
 	<author>fanqi</author>
 	<namespace>sys</namespace>
+	
+	<!-- 系统字典 -->
+	<entity name="Dictionary" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="dictionaryId" type="long" primary="true" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+
+		<!-- Other fields -->
+
+		<column name="code" type="String" /><!--编码 -->
+		<column name="name" type="String" /><!--名称 -->
+		<column name="isLeaf" type="boolean" /><!--叶节点 -->
+		<column name="sortNo" type="String" /><!--排序号 -->
+		<column name="desc" type="String" /><!--备注 -->
+		<column name="tag" type="int" /><!--特殊标记 -->
+		<column name="isValid" type="boolean" /><!--是否有效 -->
+		<column name="parentId" type="long" /><!-- 父亲ID -->
+
+		<!-- Order -->
+
+		<order>
+			<order-column name="sortNo" order-by="asc"/>
+			<order-column name="dictionaryId" order-by="asc"/>
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="Code" return-type="Dictionary">
+			<finder-column name="code" />
+			<finder-column name="groupId" />
+		</finder>
+		<finder name="ParentId" return-type="Collection">
+			<finder-column name="parentId" />
+			<finder-column name="groupId" />
+		</finder>
+		<finder name="ParentIdAndIsValid" return-type="Collection">
+			<finder-column name="parentId" />
+			<finder-column name="isValid" />
+			<finder-column name="groupId" />
+		</finder>
+	</entity>
+	
 
 	
 </service-builder>
