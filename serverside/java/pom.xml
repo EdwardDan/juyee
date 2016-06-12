@@ -483,6 +483,27 @@
             <version>0.4.6</version>
         </dependency>
         <!-- 缩略图 end -->
+        <!-- 短信客户端 -->
+        <dependency>
+            <groupId>com.justonetech.sms</groupId>
+            <artifactId>sms-client</artifactId>
+            <version>1.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.6.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.2</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+        </dependency>
 
         <!--&lt;!&ndash; 网站接口 begin &ndash;&gt;-->
         <!--<dependency>-->
@@ -659,6 +680,12 @@
                 <sms.user>admin</sms.user>
                 <sms.pass>juyee</sms.pass>
                 <sms.switch>false</sms.switch>
+
+                <kxtSms.url>http://121.40.152.72:8180/webservice/http/service</kxtSms.url>
+                <kxtSms.cid>8000517</kxtSms.cid>
+                <kxtSms.uid>admin</kxtSms.uid>
+                <kxtSms.pwd>20160519</kxtSms.pwd>
+                <kxtSms.switch>true</kxtSms.switch>
             </properties>
         </profile>
         <profile>
