@@ -129,6 +129,10 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
     /*报建编号*/
     private String bjbh;
 
+    /*标段号*/
+    /*标段号*/
+    private String bdh;
+
     /*项目名称*/
     /*项目名称*/
     private String projectName;
@@ -494,6 +498,13 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
         this.bjbh = bjbh;
     }
 
+    public String getBdh() {
+        return bdh;
+    }
+
+    public void setBdh(String bdh) {
+        this.bdh = bdh;
+    }
 
     /**
      * Return the value associated with the column: PROJECT_NAME
@@ -1530,6 +1541,7 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
         builder.append(areaCode);
         builder.append(areaName);
         builder.append(bjbh);
+        builder.append(bdh);
         builder.append(projectName);
         builder.append(buildName);
         builder.append(buildUnitType);

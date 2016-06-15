@@ -5,6 +5,7 @@ import com.justonetech.biz.core.orm.hibernate.QueryTranslateJq;
 import com.justonetech.biz.daoservice.*;
 import com.justonetech.biz.domain.*;
 import com.justonetech.biz.manager.DocumentManager;
+import com.justonetech.biz.manager.MsgMessageManager;
 import com.justonetech.biz.manager.OaTaskManager;
 import com.justonetech.biz.manager.SgPermitManager;
 import com.justonetech.biz.utils.Constants;
@@ -87,6 +88,9 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
 
     @Autowired
     private SgPermitHistoryOpinionService sgPermitHistoryOpinionService;
+
+    @Autowired
+    private MsgMessageManager msgMessageManager;
 
     private static final String xlsTemplateName1 = "SgPermit.xls";
     private static final String xlsTemplateName2 = "SgPermit_green.xls";
@@ -1010,69 +1014,369 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
         //创建任务
         String title;
         Set<Long> managers = new HashSet<Long>();
-        if (status == SgPermitStatus.STATUS_SUBMIT.getCode()) {
-            title = oaTaskManager.getTaskTitle(data, simpleName + "_sl_pass");
-            //获取有初审核权限的用户
-            Set<Long> audit = sysUserManager.getUserIdsByPrivilegeCode(PrivilegeCode.SG_PERMIT_SL_AUDIT);
-            managers.addAll(audit);
-            if (managers.size() > 0) {
-                oaTaskManager.createTask(simpleName + "_sl_pass", data.getId(), title, managers, false, null, null);
+        SysUser sysUser = sysUserManager.getSysUser();
+        boolean isSubmit = status == SgPermitStatus.STATUS_SUBMIT.getCode();
+        boolean isYstg = status == SgPermitStatus.STATUS_JGZX_YS_PASS.getCode();
+        boolean isNotYstg = status == SgPermitStatus.STATUS_JGZX_YS_BACK.getCode();
+        boolean isZxsj = status == SgPermitStatus.STATUS_SLZX_PASS.getCode();
+        boolean isCsPass = status == SgPermitStatus.STATUS_CS_PASS.getCode();
+        boolean isFhPass = status == SgPermitStatus.STATUS_FH_PASS.getCode();
+        boolean isShPass = status == SgPermitStatus.STATUS_SH_PASS.getCode();
+        boolean isNotShPass = status == SgPermitStatus.STATUS_SH_BACK.getCode();
+        boolean isFgldPass = status == SgPermitStatus.STATUS_FGLD_PASS.getCode();
+        boolean isNotFgldPass = status == SgPermitStatus.STATUS_FGLD_BACK.getCode();
+        boolean isZxldPass = status == SgPermitStatus.STATUS_ZXLD_PASS.getCode();
+        boolean isNotZxldPass = status == SgPermitStatus.STATUS_ZXLD_BACK.getCode();
+        boolean isJscPass = status == SgPermitStatus.STATUS_JSC_XK.getCode();
+        boolean isNotJscPass = status == SgPermitStatus.STATUS_JSC_BXK.getCode();
+        boolean isJscBack = status == SgPermitStatus.STATUS_JSC_BACK.getCode();
+        boolean isSpcPass = status == SgPermitStatus.STATUS_SPC_XK.getCode();
+        boolean isNotSpcPass = status == SgPermitStatus.STATUS_SPC_BXK.getCode();
+        boolean isSpcBack = status == SgPermitStatus.STATUS_SPC_BACK.getCode();
+        boolean isWldPass = status == SgPermitStatus.STATUS_WLD_PASS.getCode();
+        boolean isWldBack = status == SgPermitStatus.STATUS_WLD_BACK.getCode();
+//        if (isSubmit) {
+//            title = oaTaskManager.getTaskTitle(data, simpleName + "_sl_pass");
+//            //获取有初审核权限的用户
+//            Set<Long> audit = sysUserManager.getUserIdsByPrivilegeCode(PrivilegeCode.SG_PERMIT_SL_AUDIT);
+//            managers.addAll(audit);
+//            if (managers.size() > 0) {
+//                oaTaskManager.createTask(simpleName + "_sl_pass", data.getId(), title, managers, false, null, null);
+//            }
+//        } else if (isZxsj) {
+//            title = oaTaskManager.getTaskTitle(data, simpleName + "_ch_pass");
+//            //获取有初审核权限的用户
+//            Set<Long> audit = sysUserManager.getUserIdsByPrivilegeCode(PrivilegeCode.SG_PERMIT_CS_AUDIT);
+//            managers.addAll(audit);
+//            if (managers.size() > 0) {
+//                oaTaskManager.createTask(simpleName + "_ch_pass", data.getId(), title, managers, false, null, null);
+//            }
+//        } else if (status == SgPermitStatus.STATUS_CS_PASS.getCode()) {
+//            title = oaTaskManager.getTaskTitle(data, simpleName + "_fh_pass");
+//            //获取有复审权限的用户
+//            Set<Long> audit = sysUserManager.getUserIdsByPrivilegeCode(PrivilegeCode.SG_PERMIT_FH_AUDIT);
+//            managers.addAll(audit);
+//            if (managers.size() > 0) {
+//                oaTaskManager.createTask(simpleName + "_fh_pass", data.getId(), title, managers, false, null, null);
+//            }
+//        } else if (status == SgPermitStatus.STATUS_FH_PASS.getCode()) {
+//            title = oaTaskManager.getTaskTitle(data, simpleName + "_sh_pass");
+//            //获取有审核权限的用户
+//            Set<Long> audit = sysUserManager.getUserIdsByPrivilegeCode(PrivilegeCode.SG_PERMIT_AUDIT);
+//            managers.addAll(audit);
+//            if (managers.size() > 0) {
+//                oaTaskManager.createTask(simpleName + "_sh_pass", data.getId(), title, managers, false, null, null);
+//            }
+//        } else if (status == SgPermitStatus.STATUS_SH_PASS.getCode()) {
+//            title = oaTaskManager.getTaskTitle(data, simpleName + "_fgldsh_pass");
+//            //获取有审核权限的用户
+//            Set<Long> audit = sysUserManager.getUserIdsByPrivilegeCode(PrivilegeCode.SG_PERMIT_FGLD_AUDIT);
+//            managers.addAll(audit);
+//            if (managers.size() > 0) {
+//                oaTaskManager.createTask(simpleName + "_fgldsh_pass", data.getId(), title, managers, false, null, null);
+//            }
+//        } else if (status == SgPermitStatus.STATUS_FGLD_PASS.getCode()) {
+//            title = oaTaskManager.getTaskTitle(data, simpleName + "_fgldsh_pass");
+//            //获取有审核权限的用户
+//            Set<Long> audit = sysUserManager.getUserIdsByPrivilegeCode(PrivilegeCode.SG_PERMIT_ZXLD_AUDIT);
+//            managers.addAll(audit);
+//            if (managers.size() > 0) {
+//                oaTaskManager.createTask(simpleName + "_fgldsh_pass", data.getId(), title, managers, false, null, null);
+//            }
+//        } else if (status == SgPermitStatus.STATUS_ZXLD_PASS.getCode()) {
+//            title = oaTaskManager.getTaskTitle(data, simpleName + "_wldsh_pass");
+//            //获取有审核权限的用户
+//            Set<Long> audit = sysUserManager.getUserIdsByPrivilegeCode(PrivilegeCode.SG_PERMIT_WLD_AUDIT);
+//            managers.addAll(audit);
+//            if (managers.size() > 0) {
+//                oaTaskManager.createTask(simpleName + "_wldsh_pass", data.getId(), title, managers, false, null, null);
+//            }
+//        } else if (status == SgPermitStatus.STATUS_EDIT.getCode() || status == SgPermitStatus.STATUS_CS_BACK.getCode() || status == SgPermitStatus.STATUS_FH_BACK.getCode() || status == SgPermitStatus.STATUS_SH_BACK.getCode() || status == SgPermitStatus.STATUS_FGLD_BACK.getCode() || status == SgPermitStatus.STATUS_ZXLD_BACK.getCode() || status == SgPermitStatus.STATUS_WLD_BACK.getCode()) {
+//            title = oaTaskManager.getTaskTitle(data, simpleName + "_back");
+//            //获取有编辑权限的用户
+//            Set<Long> edit = sysUserManager.getUserIdsByPrivilegeCode(PrivilegeCode.SG_PERMIT_EDIT);
+//            managers.addAll(edit);
+//            if (managers.size() > 0) {
+//                oaTaskManager.createTask(simpleName + "_back", data.getId(), title, managers, false, null, null);
+//            }
+//        }
+        //发送短信
+        String code = data.getProjectType().getCode();
+        boolean isNotSzjc = code.equals(Constants.PROJECT_TYPE_GKSH) || code.equals(Constants.PROJECT_TYPE_HD) || code.equals(Constants.PROJECT_TYPE_GL);
+        boolean isSzjc = code.equals(Constants.PROJECT_TYPE_SZJCSH_SD) || code.equals(Constants.PROJECT_TYPE_SZJCSH_GD) || code.equals(Constants.PROJECT_TYPE_SZJCSH_GJCZ) || code.equals(Constants.PROJECT_TYPE_SZJCSH_CSDL);
+        String smsContent = "报建编号:" + data.getBjbh() + ",标段号:" + data.getBdh() + "，项目名称为" + data.getProjectName() + "的项目施工许可";
+        String sendContent = "";
+        SysUser receiveUser;
+        String[] ids = new String[1];
+        if (isSubmit || isZxsj) {//建设单位提交
+            if (isSubmit) {
+                sendContent = smsContent + "申请已提交，请进行预审。";
+            } else if (isZxsj) {
+                sendContent = smsContent + "收件已完成，请进行初审。";
             }
-        } else if (status == SgPermitStatus.STATUS_SLZX_PASS.getCode()) {
-            title = oaTaskManager.getTaskTitle(data, simpleName + "_ch_pass");
-            //获取有初审核权限的用户
-            Set<Long> audit = sysUserManager.getUserIdsByPrivilegeCode(PrivilegeCode.SG_PERMIT_CS_AUDIT);
-            managers.addAll(audit);
-            if (managers.size() > 0) {
-                oaTaskManager.createTask(simpleName + "_ch_pass", data.getId(), title, managers, false, null, null);
+            if (isNotSzjc) {//航道、公路和港口设施发给石鹏
+                receiveUser = sysUserManager.getSysUserByDisplayName("石鹏");
+                if (null != receiveUser) {
+                    ids[0] = String.valueOf(receiveUser.getId());
+                    msgMessageManager.sendSmsByUser(sendContent, sysUser, ids);
+                    managers.add(receiveUser.getId());
+                }
             }
-        } else if (status == SgPermitStatus.STATUS_CS_PASS.getCode()) {
-            title = oaTaskManager.getTaskTitle(data, simpleName + "_fh_pass");
-            //获取有复审权限的用户
-            Set<Long> audit = sysUserManager.getUserIdsByPrivilegeCode(PrivilegeCode.SG_PERMIT_FH_AUDIT);
-            managers.addAll(audit);
-            if (managers.size() > 0) {
-                oaTaskManager.createTask(simpleName + "_fh_pass", data.getId(), title, managers, false, null, null);
+            if (isSzjc) {//市政基础设施发给李偲
+                receiveUser = sysUserManager.getSysUserByDisplayName("李偲");
+                if (null != receiveUser) {
+                    ids[0] = String.valueOf(receiveUser.getId());
+                    msgMessageManager.sendSmsByUser(sendContent, sysUser, ids);
+                    managers.add(receiveUser.getId());
+                }
+                oaTaskManager.createTask(simpleName + "_submit", data.getId(), sendContent, managers, false, null, null);
             }
-        } else if (status == SgPermitStatus.STATUS_FH_PASS.getCode()) {
-            title = oaTaskManager.getTaskTitle(data, simpleName + "_sh_pass");
-            //获取有审核权限的用户
-            Set<Long> audit = sysUserManager.getUserIdsByPrivilegeCode(PrivilegeCode.SG_PERMIT_AUDIT);
-            managers.addAll(audit);
-            if (managers.size() > 0) {
-                oaTaskManager.createTask(simpleName + "_sh_pass", data.getId(), title, managers, false, null, null);
+        } else if (isYstg) {//预审通过后，发送给建设单位
+            receiveUser = sysUserManager.getSysUserByDisplayName(data.getBuildUnitPerson());
+            if (null != receiveUser) {
+                ids[0] = String.valueOf(receiveUser.getId());
+                sendContent = smsContent + "已通过预审，请将纸质材料送至行政服务中心。";
+                msgMessageManager.sendSmsByUser(sendContent, sysUser, ids);
+                managers.add(receiveUser.getId());
             }
-        } else if (status == SgPermitStatus.STATUS_SH_PASS.getCode()) {
-            title = oaTaskManager.getTaskTitle(data, simpleName + "_fgldsh_pass");
-            //获取有审核权限的用户
-            Set<Long> audit = sysUserManager.getUserIdsByPrivilegeCode(PrivilegeCode.SG_PERMIT_FGLD_AUDIT);
-            managers.addAll(audit);
-            if (managers.size() > 0) {
-                oaTaskManager.createTask(simpleName + "_fgldsh_pass", data.getId(), title, managers, false, null, null);
+            receiveUser = sysUserManager.getSysUserByDisplayName("龚煜");
+            if (null != receiveUser) {
+                ids[0] = String.valueOf(receiveUser.getId());
+                sendContent = smsContent + "已通过预审，请准备收件。";
+                msgMessageManager.sendSmsByUser(sendContent, sysUser, ids);
+                managers.add(receiveUser.getId());
             }
-        } else if (status == SgPermitStatus.STATUS_FGLD_PASS.getCode()) {
-            title = oaTaskManager.getTaskTitle(data, simpleName + "_fgldsh_pass");
-            //获取有审核权限的用户
-            Set<Long> audit = sysUserManager.getUserIdsByPrivilegeCode(PrivilegeCode.SG_PERMIT_ZXLD_AUDIT);
-            managers.addAll(audit);
-            if (managers.size() > 0) {
-                oaTaskManager.createTask(simpleName + "_fgldsh_pass", data.getId(), title, managers, false, null, null);
+            oaTaskManager.createTask(simpleName + "_ys_pass", data.getId(), sendContent, managers, false, null, null);
+        } else if (isNotYstg) {//预审不通过发给建设单位
+            receiveUser = sysUserManager.getSysUserByDisplayName(data.getBuildUnitPerson());
+            if (null != receiveUser) {
+                ids[0] = String.valueOf(receiveUser.getId());
+                sendContent = smsContent + "未通过预审，请在系统中修改后提交。";
+                msgMessageManager.sendSmsByUser(sendContent, sysUser, ids);
+                managers.add(receiveUser.getId());
             }
-        } else if (status == SgPermitStatus.STATUS_ZXLD_PASS.getCode()) {
-            title = oaTaskManager.getTaskTitle(data, simpleName + "_wldsh_pass");
-            //获取有审核权限的用户
-            Set<Long> audit = sysUserManager.getUserIdsByPrivilegeCode(PrivilegeCode.SG_PERMIT_WLD_AUDIT);
-            managers.addAll(audit);
-            if (managers.size() > 0) {
-                oaTaskManager.createTask(simpleName + "_wldsh_pass", data.getId(), title, managers, false, null, null);
+            oaTaskManager.createTask(simpleName + "_ys_back", data.getId(), sendContent, managers, false, null, null);
+        } else if (isCsPass) {
+            sendContent = smsContent + "初审已完成，请进行复核。";
+            if (isNotSzjc) {
+                receiveUser = sysUserManager.getSysUserByDisplayName("张慧慧");
+                if (null != receiveUser) {
+                    ids[0] = String.valueOf(receiveUser.getId());
+                    msgMessageManager.sendSmsByUser(sendContent, sysUser, ids);
+                    managers.add(receiveUser.getId());
+                }
             }
-        } else if (status == SgPermitStatus.STATUS_EDIT.getCode() || status == SgPermitStatus.STATUS_CS_BACK.getCode() || status == SgPermitStatus.STATUS_FH_BACK.getCode() || status == SgPermitStatus.STATUS_SH_BACK.getCode() || status == SgPermitStatus.STATUS_FGLD_BACK.getCode() || status == SgPermitStatus.STATUS_ZXLD_BACK.getCode() || status == SgPermitStatus.STATUS_WLD_BACK.getCode()) {
-            title = oaTaskManager.getTaskTitle(data, simpleName + "_back");
-            //获取有编辑权限的用户
-            Set<Long> edit = sysUserManager.getUserIdsByPrivilegeCode(PrivilegeCode.SG_PERMIT_EDIT);
-            managers.addAll(edit);
-            if (managers.size() > 0) {
-                oaTaskManager.createTask(simpleName + "_back", data.getId(), title, managers, false, null, null);
+            if (isSzjc) {
+                receiveUser = sysUserManager.getSysUserByDisplayName("杨斌");
+                if (null != receiveUser) {
+                    ids[0] = String.valueOf(receiveUser.getId());
+                    msgMessageManager.sendSmsByUser(sendContent, sysUser, ids);
+                    managers.add(receiveUser.getId());
+                }
+            }
+            oaTaskManager.createTask(simpleName + "_ch_pass", data.getId(), sendContent, managers, false, null, null);
+        } else if (isFhPass || isNotFgldPass) {
+            if (isFhPass) {
+                sendContent = smsContent + "复核已完成，请进行审核。";
+            } else if (isNotFgldPass) {
+                sendContent = smsContent + "未通过审定，请重新进行审核。";
+            }
+            if (isNotSzjc) {
+                receiveUser = sysUserManager.getSysUserByDisplayName("施伟");
+                if (null != receiveUser) {
+                    ids[0] = String.valueOf(receiveUser.getId());
+                    msgMessageManager.sendSmsByUser(sendContent, sysUser, ids);
+                    managers.add(receiveUser.getId());
+                }
+            }
+            if (isSzjc) {
+                receiveUser = sysUserManager.getSysUserByDisplayName("顾顺兴");
+                if (null != receiveUser) {
+                    ids[0] = String.valueOf(receiveUser.getId());
+                    msgMessageManager.sendSmsByUser(sendContent, sysUser, ids);
+                    managers.add(receiveUser.getId());
+                }
+            }
+            if (isFhPass) {
+                oaTaskManager.createTask(simpleName + "_fh_pass", data.getId(), sendContent, managers, false, null, null);
+            } else if (isNotFgldPass) {
+                oaTaskManager.createTask(simpleName + "_fgldsh_back", data.getId(), sendContent, managers, false, null, null);
+            }
+
+        } else if (isShPass) {
+            sendContent = smsContent + "审核已完成，请进行审定。";
+            receiveUser = sysUserManager.getSysUserByDisplayName("林海榕");
+            if (null != receiveUser) {
+                ids[0] = String.valueOf(receiveUser.getId());
+                msgMessageManager.sendSmsByUser(sendContent, sysUser, ids);
+                managers.add(receiveUser.getId());
+            }
+            oaTaskManager.createTask(simpleName + "_sh_pass", data.getId(), sendContent, managers, false, null, null);
+        } else if (isNotShPass) {
+            sendContent = smsContent + "未通过审核，请在系统中修改后提交。";
+            receiveUser = sysUserManager.getSysUserByDisplayName(data.getBuildUnitPerson());
+            if (null != receiveUser) {
+                ids[0] = String.valueOf(receiveUser.getId());
+                msgMessageManager.sendSmsByUser(sendContent, sysUser, ids);
+                managers.add(receiveUser.getId());
+            }
+            oaTaskManager.createTask(simpleName + "_sh_back", data.getId(), sendContent, managers, false, null, null);
+        } else if (isFgldPass) {
+            sendContent = smsContent + "审定已完成，请进行审查。";
+            receiveUser = sysUserManager.getSysUserByDisplayName("杨志杰");
+            if (null != receiveUser) {
+                ids[0] = String.valueOf(receiveUser.getId());
+                msgMessageManager.sendSmsByUser(sendContent, sysUser, ids);
+                managers.add(receiveUser.getId());
+            }
+            oaTaskManager.createTask(simpleName + "_fgldsh_pass", data.getId(), sendContent, managers, false, null, null);
+        } else if (isZxldPass) {
+            sendContent = smsContent + "中心审查已完成，请委建设处进行审查。";
+            if (code.equals(Constants.PROJECT_TYPE_GL) || code.equals(Constants.PROJECT_TYPE_SZJCSH_CSDL)) {//公路和市政基础设施-城市道路发给胡燎原
+                receiveUser = sysUserManager.getSysUserByDisplayName("胡燎原");
+                if (null != receiveUser) {
+                    ids[0] = String.valueOf(receiveUser.getId());
+                    msgMessageManager.sendSmsByUser(sendContent, sysUser, ids);
+                    managers.add(receiveUser.getId());
+                }
+            }
+            if (code.equals(Constants.PROJECT_TYPE_HD) || code.equals(Constants.PROJECT_TYPE_GKSH)) {//港口和航道发给俞晓
+                receiveUser = sysUserManager.getSysUserByDisplayName("俞晓");
+                if (null != receiveUser) {
+                    ids[0] = String.valueOf(receiveUser.getId());
+                    msgMessageManager.sendSmsByUser(sendContent, sysUser, ids);
+                    managers.add(receiveUser.getId());
+                }
+            }
+            if (code.equals(Constants.PROJECT_TYPE_SZJCSH_SD)) {//市政基础设施-隧道发给陈骞
+                receiveUser = sysUserManager.getSysUserByDisplayName("陈骞");
+                if (null != receiveUser) {
+                    ids[0] = String.valueOf(receiveUser.getId());
+                    msgMessageManager.sendSmsByUser(sendContent, sysUser, ids);
+                    managers.add(receiveUser.getId());
+                }
+            }
+            if (code.equals(Constants.PROJECT_TYPE_SZJCSH_GD)) {//市政基础设施-隧道发给陈骞
+                receiveUser = sysUserManager.getSysUserByDisplayName("宋光华");
+                if (null != receiveUser) {
+                    ids[0] = String.valueOf(receiveUser.getId());
+                    msgMessageManager.sendSmsByUser(sendContent, sysUser, ids);
+                    managers.add(receiveUser.getId());
+                }
+            }
+            if (code.equals(Constants.PROJECT_TYPE_SZJCSH_GJCZ)) {//市政基础设施-公交场站
+                receiveUser = sysUserManager.getSysUserByDisplayName("徐倩华");
+                if (null != receiveUser) {
+                    ids[0] = String.valueOf(receiveUser.getId());
+                    msgMessageManager.sendSmsByUser(sendContent, sysUser, ids);
+                    managers.add(receiveUser.getId());
+                }
+            }
+            oaTaskManager.createTask(simpleName + "_zxldsh_pass", data.getId(), sendContent, managers, false, null, null);
+        } else if (isNotZxldPass) {//审核不通过，发给林海榕。
+            sendContent = smsContent + "未通过审查，请重新进行审定。";
+            receiveUser = sysUserManager.getSysUserByDisplayName("林海榕");
+            if (null != receiveUser) {
+                ids[0] = String.valueOf(receiveUser.getId());
+                msgMessageManager.sendSmsByUser(sendContent, sysUser, ids);
+                managers.add(receiveUser.getId());
+            }
+            oaTaskManager.createTask(simpleName + "_zxldsh_back", data.getId(), sendContent, managers, false, null, null);
+        } else if (isJscPass || isNotJscPass) {//委建设处许可和不许可，发给狄永媚。
+            sendContent = smsContent + "委建设处审查已完成，请委审批处进行审查。";
+            receiveUser = sysUserManager.getSysUserByDisplayName("狄永媚");
+            if (null != receiveUser) {
+                ids[0] = String.valueOf(receiveUser.getId());
+                msgMessageManager.sendSmsByUser(sendContent, sysUser, ids);
+                managers.add(receiveUser.getId());
+            }
+            oaTaskManager.createTask(simpleName + "_wjsc", data.getId(), sendContent, managers, false, null, null);
+        } else if (isJscBack) {//退回，发给杨志杰。
+            sendContent = smsContent + "委建设处未通过审查，请中心领导进行审查。";
+            receiveUser = sysUserManager.getSysUserByDisplayName("杨志杰");
+            if (null != receiveUser) {
+                ids[0] = String.valueOf(receiveUser.getId());
+                msgMessageManager.sendSmsByUser(sendContent, sysUser, ids);
+                managers.add(receiveUser.getId());
+            }
+            oaTaskManager.createTask(simpleName + "_wjsc_back", data.getId(), sendContent, managers, false, null, null);
+        } else if (isSpcPass || isNotSpcPass) {//委审批处许可和不许可，发给刘军。
+            sendContent = smsContent + "委审批处审查已完成，请委领导进行审查。";
+            receiveUser = sysUserManager.getSysUserByDisplayName("刘军");
+            if (null != receiveUser) {
+                ids[0] = String.valueOf(receiveUser.getId());
+                msgMessageManager.sendSmsByUser(sendContent, sysUser, ids);
+                managers.add(receiveUser.getId());
+            }
+            oaTaskManager.createTask(simpleName + "_wspc", data.getId(), sendContent, managers, false, null, null);
+        } else if (isSpcBack) {//退回
+            sendContent = smsContent + "委审批处未通过审查，请委建设处进行审查。";
+            if (code.equals(Constants.PROJECT_TYPE_GL) || code.equals(Constants.PROJECT_TYPE_SZJCSH_CSDL)) {//公路和市政基础设施-城市道路发给胡燎原
+                receiveUser = sysUserManager.getSysUserByDisplayName("胡燎原");
+                if (null != receiveUser) {
+                    ids[0] = String.valueOf(receiveUser.getId());
+                    msgMessageManager.sendSmsByUser(sendContent, sysUser, ids);
+                    managers.add(receiveUser.getId());
+                }
+            }
+            if (code.equals(Constants.PROJECT_TYPE_HD) || code.equals(Constants.PROJECT_TYPE_GKSH)) {//港口和航道发给俞晓
+                receiveUser = sysUserManager.getSysUserByDisplayName("俞晓");
+                if (null != receiveUser) {
+                    ids[0] = String.valueOf(receiveUser.getId());
+                    msgMessageManager.sendSmsByUser(sendContent, sysUser, ids);
+                    managers.add(receiveUser.getId());
+                }
+            }
+            if (code.equals(Constants.PROJECT_TYPE_SZJCSH_SD)) {//市政基础设施-隧道发给陈骞
+                receiveUser = sysUserManager.getSysUserByDisplayName("陈骞");
+                if (null != receiveUser) {
+                    ids[0] = String.valueOf(receiveUser.getId());
+                    msgMessageManager.sendSmsByUser(sendContent, sysUser, ids);
+                    managers.add(receiveUser.getId());
+                }
+            }
+            if (code.equals(Constants.PROJECT_TYPE_SZJCSH_GD)) {//市政基础设施-隧道发给陈骞
+                receiveUser = sysUserManager.getSysUserByDisplayName("宋光华");
+                if (null != receiveUser) {
+                    ids[0] = String.valueOf(receiveUser.getId());
+                    msgMessageManager.sendSmsByUser(sendContent, sysUser, ids);
+                    managers.add(receiveUser.getId());
+                }
+            }
+            if (code.equals(Constants.PROJECT_TYPE_SZJCSH_GJCZ)) {//市政基础设施-公交场站
+                receiveUser = sysUserManager.getSysUserByDisplayName("徐倩华");
+                if (null != receiveUser) {
+                    ids[0] = String.valueOf(receiveUser.getId());
+                    msgMessageManager.sendSmsByUser(sendContent, sysUser, ids);
+                    managers.add(receiveUser.getId());
+                }
+            }
+            oaTaskManager.createTask(simpleName + "_wspc_back", data.getId(), sendContent, managers, false, null, null);
+        } else if (isWldPass) {//委领导许可，发给建设单位。委领导许可，发给行政服务中心龚煜。
+            receiveUser = sysUserManager.getSysUserByDisplayName("龚煜");
+            if (null != receiveUser) {
+                ids[0] = String.valueOf(receiveUser.getId());
+                sendContent = smsContent + "审查已完成，请准备好施工许可证。";
+                msgMessageManager.sendSmsByUser(sendContent, sysUser, ids);
+                managers.add(receiveUser.getId());
+                oaTaskManager.createTask(simpleName + "_wldsh_pass", data.getId(), sendContent, managers, false, null, null);
+            }
+            receiveUser = sysUserManager.getSysUserByDisplayName(data.getBuildUnitPerson());
+            if (null != receiveUser) {
+                ids[0] = String.valueOf(receiveUser.getId());
+                sendContent = smsContent + "审查已完成，请至交通委行政服务中心领证。";
+                msgMessageManager.sendSmsByUser(sendContent, sysUser, ids);
+                managers.add(receiveUser.getId());
+                oaTaskManager.createTask(simpleName + "_wldsh_pass", data.getId(), sendContent, managers, false, null, null);
+            }
+        } else if (isWldBack) {//委领导不予许可。
+            sendContent = smsContent + "不予行政许可。";
+            receiveUser = sysUserManager.getSysUserByDisplayName(data.getBuildUnitPerson());
+            if (null != receiveUser) {
+                ids[0] = String.valueOf(receiveUser.getId());
+                msgMessageManager.sendSmsByUser(sendContent, sysUser, ids);
+                managers.add(receiveUser.getId());
+                oaTaskManager.createTask(simpleName + "_wldsh_back", data.getId(), sendContent, managers, false, null, null);
             }
         }
     }
@@ -1088,14 +1392,17 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
         SysCodeDetail gksh = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_GKSH);//港口设施
         SysCodeDetail hd = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_HD);//航道
         SysCodeDetail gl = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_GL);//公路
-        SysCodeDetail szjcsh = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_SZJCSH);//市政基础设施
+        SysCodeDetail szjcsh_sd = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_SZJCSH_SD);//市政基础设施
+        SysCodeDetail szjcsh_gd = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_SZJCSH_GD);//市政基础设施
+        SysCodeDetail szjcsh_gjcz = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_SZJCSH_GJCZ);//市政基础设施
+        SysCodeDetail szjcsh_csdl = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_SZJCSH_CSDL);//市政基础设施
         if (projectType == gksh) {
             page = "view/sg/sgPermit/inputGksh";
         } else if (projectType == hd) {
             page = "view/sg/sgPermit/inputHd";
         } else if (projectType == gl) {
             page = "view/sg/sgPermit/inputGl";
-        } else if (projectType == szjcsh) {
+        } else if (projectType == szjcsh_sd || projectType == szjcsh_gd || projectType == szjcsh_gjcz || projectType == szjcsh_csdl) {
             page = "view/sg/sgPermit/inputSzjcsh";
         }
         return page;
@@ -1112,14 +1419,17 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
         SysCodeDetail gksh = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_GKSH);//港口设施
         SysCodeDetail hd = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_HD);//航道
         SysCodeDetail gl = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_GL);//公路
-        SysCodeDetail szjcsh = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_SZJCSH);//市政基础设施
+        SysCodeDetail szjcsh_sd = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_SZJCSH_SD);//市政基础设施
+        SysCodeDetail szjcsh_gd = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_SZJCSH_GD);//市政基础设施
+        SysCodeDetail szjcsh_gjcz = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_SZJCSH_GJCZ);//市政基础设施
+        SysCodeDetail szjcsh_csdl = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_SZJCSH_CSDL);//市政基础设施
         if (projectType == gksh) {
             page = "view/sg/sgPermit/jgzxYsGksh";
         } else if (projectType == hd) {
             page = "view/sg/sgPermit/jgzxYsHd";
         } else if (projectType == gl) {
             page = "view/sg/sgPermit/jgzxYsGl";
-        } else if (projectType == szjcsh) {
+        } else if (projectType == szjcsh_sd || projectType == szjcsh_gd || projectType == szjcsh_gjcz || projectType == szjcsh_csdl) {
             page = "view/sg/sgPermit/jgzxYsSzjcsh";
         }
         return page;
@@ -1136,14 +1446,17 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
         SysCodeDetail gksh = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_GKSH);//港口设施
         SysCodeDetail hd = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_HD);//航道
         SysCodeDetail gl = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_GL);//公路
-        SysCodeDetail szjcsh = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_SZJCSH);//市政基础设施
+        SysCodeDetail szjcsh_sd = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_SZJCSH_SD);//市政基础设施
+        SysCodeDetail szjcsh_gd = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_SZJCSH_GD);//市政基础设施
+        SysCodeDetail szjcsh_gjcz = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_SZJCSH_GJCZ);//市政基础设施
+        SysCodeDetail szjcsh_csdl = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_SZJCSH_CSDL);//市政基础设施
         if (projectType == gksh) {
             page = "view/sg/sgPermit/acceptGksh";
         } else if (projectType == hd) {
             page = "view/sg/sgPermit/acceptHd";
         } else if (projectType == gl) {
             page = "view/sg/sgPermit/acceptGl";
-        } else if (projectType == szjcsh) {
+        } else if (projectType == szjcsh_sd || projectType == szjcsh_gd || projectType == szjcsh_gjcz || projectType == szjcsh_csdl) {
             page = "view/sg/sgPermit/acceptSzjcsh";
         }
         return page;
@@ -1160,7 +1473,10 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
         SysCodeDetail gksh = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_GKSH);//港口设施
         SysCodeDetail hd = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_HD);//航道
         SysCodeDetail gl = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_GL);//公路
-        SysCodeDetail szjcsh = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_SZJCSH);//市政基础设施
+        SysCodeDetail szjcsh_sd = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_SZJCSH_SD);//市政基础设施
+        SysCodeDetail szjcsh_gd = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_SZJCSH_GD);//市政基础设施
+        SysCodeDetail szjcsh_gjcz = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_SZJCSH_GJCZ);//市政基础设施
+        SysCodeDetail szjcsh_csdl = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_SZJCSH_CSDL);//市政基础设施
         if (null != projectType) {
             if (projectType == gksh) {
                 page = "view/sg/sgPermit/auditGksh";
@@ -1168,7 +1484,7 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
                 page = "view/sg/sgPermit/auditHd";
             } else if (projectType == gl) {
                 page = "view/sg/sgPermit/auditGl";
-            } else if (projectType == szjcsh) {
+            } else if (projectType == szjcsh_sd || projectType == szjcsh_gd || projectType == szjcsh_gjcz || projectType == szjcsh_csdl) {
                 page = "view/sg/sgPermit/auditSzjcsh";
             }
         }
@@ -1186,7 +1502,10 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
         SysCodeDetail gksh = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_GKSH);//港口设施
         SysCodeDetail hd = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_HD);//航道
         SysCodeDetail gl = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_GL);//公路
-        SysCodeDetail szjcsh = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_SZJCSH);//市政基础设施
+        SysCodeDetail szjcsh_sd = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_SZJCSH_SD);//市政基础设施
+        SysCodeDetail szjcsh_gd = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_SZJCSH_GD);//市政基础设施
+        SysCodeDetail szjcsh_gjcz = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_SZJCSH_GJCZ);//市政基础设施
+        SysCodeDetail szjcsh_csdl = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_SZJCSH_CSDL);//市政基础设施
         if (null != projectType) {
             if (projectType == gksh) {
                 page = "view/sg/sgPermit/viewGksh";
@@ -1194,7 +1513,7 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
                 page = "view/sg/sgPermit/viewHd";
             } else if (projectType == gl) {
                 page = "view/sg/sgPermit/viewGl";
-            } else if (projectType == szjcsh) {
+            } else if (projectType == szjcsh_sd || projectType == szjcsh_gd || projectType == szjcsh_gjcz || projectType == szjcsh_csdl) {
                 page = "view/sg/sgPermit/viewSzjcsh";
             }
         }
@@ -1224,7 +1543,7 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
         } else if (code.equals(Constants.PROJECT_TYPE_GL)) {
             title = "上海市(公路)工程施工许可证";
             titleFl = "根据《中华人民共和国公路法》等相关法律规定，经审查，本工程符合施工条件，准予施工。";
-        } else if (code.equals(Constants.PROJECT_TYPE_SZJCSH)) {
+        } else if (code.equals(Constants.PROJECT_TYPE_SZJCSH_SD) || code.equals(Constants.PROJECT_TYPE_SZJCSH_GD) || code.equals(Constants.PROJECT_TYPE_SZJCSH_CSDL) || code.equals(Constants.PROJECT_TYPE_SZJCSH_GJCZ)) {
             title = "上海市(市政基础设施)工程施工许可证";
             titleFl = "根据《中华人民共和国交通建设法》等相关法律规定，经审查，本工程符合施工条件，准予施工。";
         }
@@ -1257,7 +1576,7 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
         } else if (code.equals(Constants.PROJECT_TYPE_GL)) {
             title = "上海市(公路)工程施工许可证";
             titleFl = "根据《中华人民共和国公路法》等相关法律规定，经审查，本工程符合施工条件，准予施工。";
-        } else if (code.equals(Constants.PROJECT_TYPE_SZJCSH)) {
+        } else if (code.equals(Constants.PROJECT_TYPE_SZJCSH_SD) || code.equals(Constants.PROJECT_TYPE_SZJCSH_GD) || code.equals(Constants.PROJECT_TYPE_SZJCSH_CSDL) || code.equals(Constants.PROJECT_TYPE_SZJCSH_GJCZ)) {
             title = "上海市(市政基础设施)工程施工许可证";
             titleFl = "根据《中华人民共和国交通建设法》等相关法律规定，经审查，本工程符合施工条件，准予施工。";
         }

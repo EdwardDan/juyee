@@ -190,6 +190,10 @@ public class Constants {
     public static final String PROJECT_TYPE_GL = "gl";
     public static final String PROJECT_TYPE_HD = "hd";
     public static final String PROJECT_TYPE_SZJCSH = "szjcsh";
+    public static final String PROJECT_TYPE_SZJCSH_SD = "szjcsh_sd";
+    public static final String PROJECT_TYPE_SZJCSH_GD = "szjcsh_gd";
+    public static final String PROJECT_TYPE_SZJCSH_GJCZ = "szjcsh_gjcz";
+    public static final String PROJECT_TYPE_SZJCSH_CSDL = "szjcsh_csdl";
 
     //三类人员
     public static final String SEX = "sex";

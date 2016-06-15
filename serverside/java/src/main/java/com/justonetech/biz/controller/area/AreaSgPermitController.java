@@ -629,7 +629,7 @@ public class AreaSgPermitController extends BaseCRUDActionController<AreaSgPermi
                 operation.setOptionUser(sysUser.getDisplayName());
                 operation.setStatus(status);
                 areaPermitOperationService.save(operation);
-                createOaTask(target);
+//                createOaTask(target);
             }
 
         } catch (Exception e) {
@@ -752,7 +752,7 @@ public class AreaSgPermitController extends BaseCRUDActionController<AreaSgPermi
             operation.setStatus(status);
             areaPermitOperationService.save(operation);
 
-            createOaTask(target);
+//            createOaTask(target);
 
         } catch (Exception e) {
             log.error("error", e);
@@ -933,14 +933,17 @@ public class AreaSgPermitController extends BaseCRUDActionController<AreaSgPermi
         SysCodeDetail gksh = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_GKSH);//港口设施
         SysCodeDetail hd = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_HD);//航道
         SysCodeDetail gl = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_GL);//公路
-        SysCodeDetail szjcsh = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_SZJCSH);//市政基础设施
+        SysCodeDetail szjcsh_sd = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_SZJCSH_SD);//市政基础设施
+        SysCodeDetail szjcsh_gd = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_SZJCSH_GD);//市政基础设施
+        SysCodeDetail szjcsh_gjcz = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_SZJCSH_GJCZ);//市政基础设施
+        SysCodeDetail szjcsh_csdl = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_SZJCSH_CSDL);//市政基础设施
         if (projectType == gksh) {
             page = "view/area/areaSgPermit/inputGksh";
         } else if (projectType == hd) {
             page = "view/area/areaSgPermit/inputHd";
         } else if (projectType == gl) {
             page = "view/area/areaSgPermit/inputGl";
-        } else if (projectType == szjcsh) {
+        } else if (projectType == szjcsh_sd || projectType == szjcsh_gd || projectType == szjcsh_gjcz || projectType == szjcsh_csdl) {
             page = "view/area/areaSgPermit/inputSzjcsh";
         }
         return page;
@@ -957,14 +960,17 @@ public class AreaSgPermitController extends BaseCRUDActionController<AreaSgPermi
         SysCodeDetail gksh = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_GKSH);//港口设施
         SysCodeDetail hd = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_HD);//航道
         SysCodeDetail gl = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_GL);//公路
-        SysCodeDetail szjcsh = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_SZJCSH);//市政基础设施
+        SysCodeDetail szjcsh_sd = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_SZJCSH_SD);//市政基础设施
+        SysCodeDetail szjcsh_gd = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_SZJCSH_GD);//市政基础设施
+        SysCodeDetail szjcsh_gjcz = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_SZJCSH_GJCZ);//市政基础设施
+        SysCodeDetail szjcsh_csdl = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_SZJCSH_CSDL);//市政基础设施
         if (projectType == gksh) {
             page = "view/area/areaSgPermit/acceptGksh";
         } else if (projectType == hd) {
             page = "view/area/areaSgPermit/acceptHd";
         } else if (projectType == gl) {
             page = "view/area/areaSgPermit/acceptGl";
-        } else if (projectType == szjcsh) {
+        } else if (projectType == szjcsh_sd || projectType == szjcsh_gd || projectType == szjcsh_gjcz || projectType == szjcsh_csdl) {
             page = "view/area/areaSgPermit/acceptSzjcsh";
         }
         return page;
@@ -981,7 +987,10 @@ public class AreaSgPermitController extends BaseCRUDActionController<AreaSgPermi
         SysCodeDetail gksh = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_GKSH);//港口设施
         SysCodeDetail hd = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_HD);//航道
         SysCodeDetail gl = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_GL);//公路
-        SysCodeDetail szjcsh = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_SZJCSH);//市政基础设施
+        SysCodeDetail szjcsh_sd = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_SZJCSH_SD);//市政基础设施
+        SysCodeDetail szjcsh_gd = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_SZJCSH_GD);//市政基础设施
+        SysCodeDetail szjcsh_gjcz = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_SZJCSH_GJCZ);//市政基础设施
+        SysCodeDetail szjcsh_csdl = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_SZJCSH_CSDL);//市政基础设施
         if (null != projectType) {
             if (projectType == gksh) {
                 page = "view/area/areaSgPermit/auditGksh";
@@ -989,7 +998,7 @@ public class AreaSgPermitController extends BaseCRUDActionController<AreaSgPermi
                 page = "view/area/areaSgPermit/auditHd";
             } else if (projectType == gl) {
                 page = "view/area/areaSgPermit/auditGl";
-            } else if (projectType == szjcsh) {
+            } else if (projectType == szjcsh_sd || projectType == szjcsh_gd || projectType == szjcsh_gjcz || projectType == szjcsh_csdl) {
                 page = "view/area/areaSgPermit/auditSzjcsh";
             }
         }
@@ -1007,7 +1016,10 @@ public class AreaSgPermitController extends BaseCRUDActionController<AreaSgPermi
         SysCodeDetail gksh = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_GKSH);//港口设施
         SysCodeDetail hd = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_HD);//航道
         SysCodeDetail gl = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_GL);//公路
-        SysCodeDetail szjcsh = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_SZJCSH);//市政基础设施
+        SysCodeDetail szjcsh_sd = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_SZJCSH_SD);//市政基础设施
+        SysCodeDetail szjcsh_gd = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_SZJCSH_GD);//市政基础设施
+        SysCodeDetail szjcsh_gjcz = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_SZJCSH_GJCZ);//市政基础设施
+        SysCodeDetail szjcsh_csdl = sysCodeManager.getCodeDetailByCode(Constants.PROJECT_TYPE, Constants.PROJECT_TYPE_SZJCSH_CSDL);//市政基础设施
         if (null != projectType) {
             if (projectType == gksh) {
                 page = "view/area/areaSgPermit/viewGksh";
@@ -1015,7 +1027,7 @@ public class AreaSgPermitController extends BaseCRUDActionController<AreaSgPermi
                 page = "view/area/areaSgPermit/viewHd";
             } else if (projectType == gl) {
                 page = "view/area/areaSgPermit/viewGl";
-            } else if (projectType == szjcsh) {
+            } else if (projectType == szjcsh_sd || projectType == szjcsh_gd || projectType == szjcsh_gjcz || projectType == szjcsh_csdl) {
                 page = "view/area/areaSgPermit/viewSzjcsh";
             }
         }
@@ -1045,7 +1057,7 @@ public class AreaSgPermitController extends BaseCRUDActionController<AreaSgPermi
         } else if (code.equals(Constants.PROJECT_TYPE_GL)) {
             title = "上海市(公路)工程施工许可证";
             titleFl = "根据《中华人民共和国公路法》等相关法律规定，经审查，本工程符合施工条件，准予施工。";
-        } else if (code.equals(Constants.PROJECT_TYPE_SZJCSH)) {
+        } else if (code.equals(Constants.PROJECT_TYPE_SZJCSH_SD) || code.equals(Constants.PROJECT_TYPE_SZJCSH_GD) || code.equals(Constants.PROJECT_TYPE_SZJCSH_CSDL) || code.equals(Constants.PROJECT_TYPE_SZJCSH_GJCZ)) {
             title = "上海市(市政基础设施)工程施工许可证";
             titleFl = "根据《中华人民共和国交通建设法》等相关法律规定，经审查，本工程符合施工条件，准予施工。";
         }
@@ -1078,7 +1090,7 @@ public class AreaSgPermitController extends BaseCRUDActionController<AreaSgPermi
         } else if (code.equals(Constants.PROJECT_TYPE_GL)) {
             title = "上海市(公路)工程施工许可证";
             titleFl = "根据《中华人民共和国公路法》等相关法律规定，经审查，本工程符合施工条件，准予施工。";
-        } else if (code.equals(Constants.PROJECT_TYPE_SZJCSH)) {
+        } else if (code.equals(Constants.PROJECT_TYPE_SZJCSH_SD) || code.equals(Constants.PROJECT_TYPE_SZJCSH_GD) || code.equals(Constants.PROJECT_TYPE_SZJCSH_CSDL) || code.equals(Constants.PROJECT_TYPE_SZJCSH_GJCZ)) {
             title = "上海市(市政基础设施)工程施工许可证";
             titleFl = "根据《中华人民共和国交通建设法》等相关法律规定，经审查，本工程符合施工条件，准予施工。";
         }
