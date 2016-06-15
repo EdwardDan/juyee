@@ -83,6 +83,17 @@
 		</property>
 
 		<property
+				name="bdh"
+				column="BDH"
+				type="string"
+				not-null="false"
+				length="50"
+				>
+			<meta attribute="ColumnName">标段号</meta>
+			<meta attribute="ColumnComment">标段号</meta>
+		</property>
+
+		<property
 				name="projectName"
 				column="PROJECT_NAME"
 				type="string"

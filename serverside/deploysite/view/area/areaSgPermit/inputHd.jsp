@@ -75,13 +75,19 @@
                         </select>
                     </td>
                 </tr>
-                <tr class="tr_dark">
+                <tr class="tr_light">
                     <td class="form_label_right" nowrap>报建编号：</td>
                     <td class="form_content">
                         <form:input path="bjbh" cssClass="input_text_long"/>
                     </td>
-                    <td class="form_label_right" nowrap>业务编号：</td>
+                    <td class="form_label_right" nowrap>标段号：</td>
                     <td class="form_content">
+                        <form:input path="bdh" cssClass="input_text_long"/>
+                    </td>
+                </tr>
+                <tr class="tr_dark">
+                    <td class="form_label_right" nowrap>业务编号：</td>
+                    <td class="form_content" colspan="3">
                         <form:input path="bizCode" cssClass="input_text_long" readonly="true"/>
                     </td>
                 </tr>

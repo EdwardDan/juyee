@@ -25,17 +25,21 @@
     <fieldset class="form_fieldset" style="width: 96%;">
         <legend>申请信息</legend>
         <table cellpadding="0" cellspacing="0" class="form_table">
-            <tr class="tr_light">
+            <tr class="tr_dark">
                 <td class="form_label_right" nowrap>项目性质：</td>
                 <td class="form_content">${bean.propertyType.name}</td>
-                <td class="form_label_right" nowrap>填报区县：</td>
+                <td class="form_label_right" nowrap>所属区县：</td>
                 <td class="form_content">${bean.areaName}</td>
             </tr>
-            <tr class="tr_dark">
+            <tr class="tr_light">
                 <td class="form_label_right" nowrap>报建编号：</td>
                 <td class="form_content">${bean.bjbh}</td>
+                <td class="form_label_right" nowrap>标段号：</td>
+                <td class="form_content">${bean.bdh}</td>
+            </tr>
+            <tr class="tr_dark">
                 <td class="form_label_right" nowrap>业务编号：</td>
-                <td class="form_content">${bean.bizCode}</td>
+                <td class="form_content" colspan="3">${bean.bizCode}</td>
             </tr>
             <tr class="tr_light">
                 <td class="form_label_right">项目名称：</td>
