@@ -33,6 +33,7 @@
 			keyProperty="dictionaryId">
 			<liferay-ui:search-container-column-text name="代码集" property="name" />
 			<liferay-ui:search-container-column-text name="编码" property="code" />
+			<liferay-ui:search-container-column-text name="备注" property="desc" />
 			<liferay-ui:search-container-column-text name="action">
 				<portlet:actionURL var="del" name="delete">
 					<portlet:param name="dictionaryId" value="${dic.dictionaryId}" />

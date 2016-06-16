@@ -23,8 +23,12 @@
 %>
 <aui:form action="${input}" method="post">
 	<aui:input name="dictionaryId" type="hidden" value="<%=dictionaryId%>" />
-	<aui:input type="text" label="编码：" name="code" value="${code}"></aui:input>
-	<aui:input type="text" label="名称:" name="name" value="${name}"></aui:input>
+	<aui:input type="text" label="编码：" name="code" value="${code}">
+		<aui:validator name="required" errorMessage="这里不可空白!"></aui:validator>
+	</aui:input>
+	<aui:input type="text" label="名称:" name="name" value="${name}">
+		<aui:validator name="required" errorMessage="这里不可空白!"></aui:validator>
+	</aui:input>
 	<aui:input type="content" label="备注:" name="desc" value="${desc}"></aui:input>
 	<aui:button type="submit"></aui:button>
 	<aui:button type="reset" value="重置"></aui:button>

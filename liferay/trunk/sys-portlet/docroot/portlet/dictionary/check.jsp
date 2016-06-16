@@ -5,9 +5,11 @@
 
 <%
 	Long dictionaryId = (Long) request.getAttribute("dictionaryId");
+    Integer totalSize=(Integer)request.getAttribute("totalSize");
+	System.out.println("===============totalJsp============"+totalSize);
 %>
 <portlet:renderURL var="def" />
-<portlet:actionURL var="add" name="add">
+<portlet:actionURL var="add" name="pass">
 	<portlet:param name="mvcPath" value="/portlet/dictionary/add.jsp" />
 	<portlet:param name="dictionaryId" value="${dictionaryId}" />
 </portlet:actionURL>
@@ -30,7 +32,7 @@
 			<td><form class="form-search">
 					<input type="text" placeholder="请输入关键字..."
 						class="input-medium search-query"
-						name="<portlet:namespace/>keyword" value="${keyword}" />
+						name="<portlet:namespace/>keywords" value="${keywords}" />
 					<button type="submit" class="btn">
 						<i class="icon-search"></i>查询
 					</button>
@@ -40,8 +42,8 @@
 		</tr>
 	</table>
 </form>
-<liferay-ui:search-container delta="10" emptyResultsMessage="没有找到数据!">
-	<liferay-ui:search-container-results results="${dics}" />
+<liferay-ui:search-container delta="15" emptyResultsMessage="没有找到数据!">
+	<liferay-ui:search-container-results results="${dics}" total="<%=totalSize%>"/>
 	<liferay-ui:search-container-row className="Dictionary" modelVar="dic"
 		keyProperty="dictionaryId">
 		<liferay-ui:search-container-column-text name="编码" property="code" />
@@ -52,12 +54,12 @@
 		<liferay-ui:search-container-column-text name="备注" property="desc" />
 		<liferay-ui:search-container-column-text name="action">
 			<portlet:actionURL var="del" name="del">
-				<portlet:param name="dictionaryId" value="dic.dictionaryId" />
-				<portlet:param name="mvcPath" value="/portlet/dictionary/check.jsp" />
+				<portlet:param name="dictionaryId" value="${dic.dictionaryId}" />
+				<%-- <portlet:param name="mvcPath" value="/portlet/dictionary/check.jsp" /> --%>
 			</portlet:actionURL>
 			<portlet:actionURL var="modify" name="modify">
 				<portlet:param name="mvcPath" value="/portlet/dictionary/add.jsp" />
-				<portlet:param name="dictionaryId" value="dic.dictionaryId" />
+				<portlet:param name="dictionaryId" value="${dic.dictionaryId}" />
 			</portlet:actionURL>
 			<liferay-ui:icon-menu>
 				<liferay-ui:icon-delete image="delete" url="${del}" />
