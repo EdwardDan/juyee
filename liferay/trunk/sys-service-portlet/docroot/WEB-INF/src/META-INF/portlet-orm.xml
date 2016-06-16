@@ -31,6 +31,8 @@
 			</basic>
 			<basic name="tag" />
 			<basic name="isValid" />
+			<basic name="treePath" />
+			<basic name="sortPath" />
 			<basic name="parentId" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />

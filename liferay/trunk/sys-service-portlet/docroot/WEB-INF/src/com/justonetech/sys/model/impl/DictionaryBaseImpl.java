@@ -47,4 +47,13 @@ public abstract class DictionaryBaseImpl extends DictionaryModelImpl
 			DictionaryLocalServiceUtil.updateDictionary(this);
 		}
 	}
+
+	@Override
+	public void updateTreePath(String treePath) throws SystemException {
+		Dictionary dictionary = this;
+
+		dictionary.setTreePath(treePath);
+
+		DictionaryLocalServiceUtil.updateDictionary(dictionary);
+	}
 }

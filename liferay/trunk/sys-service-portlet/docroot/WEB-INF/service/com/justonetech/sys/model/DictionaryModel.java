@@ -245,15 +245,14 @@ public interface DictionaryModel extends BaseModel<Dictionary>, GroupedModel {
 	 *
 	 * @return the sort no of this dictionary
 	 */
-	@AutoEscape
-	public String getSortNo();
+	public int getSortNo();
 
 	/**
 	 * Sets the sort no of this dictionary.
 	 *
 	 * @param sortNo the sort no of this dictionary
 	 */
-	public void setSortNo(String sortNo);
+	public void setSortNo(int sortNo);
 
 	/**
 	 * Returns the desc of this dictionary.
@@ -275,14 +274,15 @@ public interface DictionaryModel extends BaseModel<Dictionary>, GroupedModel {
 	 *
 	 * @return the tag of this dictionary
 	 */
-	public int getTag();
+	@AutoEscape
+	public String getTag();
 
 	/**
 	 * Sets the tag of this dictionary.
 	 *
 	 * @param tag the tag of this dictionary
 	 */
-	public void setTag(int tag);
+	public void setTag(String tag);
 
 	/**
 	 * Returns the is valid of this dictionary.
@@ -304,6 +304,36 @@ public interface DictionaryModel extends BaseModel<Dictionary>, GroupedModel {
 	 * @param isValid the is valid of this dictionary
 	 */
 	public void setIsValid(boolean isValid);
+
+	/**
+	 * Returns the tree path of this dictionary.
+	 *
+	 * @return the tree path of this dictionary
+	 */
+	@AutoEscape
+	public String getTreePath();
+
+	/**
+	 * Sets the tree path of this dictionary.
+	 *
+	 * @param treePath the tree path of this dictionary
+	 */
+	public void setTreePath(String treePath);
+
+	/**
+	 * Returns the sort path of this dictionary.
+	 *
+	 * @return the sort path of this dictionary
+	 */
+	@AutoEscape
+	public String getSortPath();
+
+	/**
+	 * Sets the sort path of this dictionary.
+	 *
+	 * @param sortPath the sort path of this dictionary
+	 */
+	public void setSortPath(String sortPath);
 
 	/**
 	 * Returns the parent ID of this dictionary.

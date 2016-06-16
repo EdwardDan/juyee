@@ -29,17 +29,18 @@
 		<column name="code" type="String" /><!--编码 -->
 		<column name="name" type="String" /><!--名称 -->
 		<column name="isLeaf" type="boolean" /><!--叶节点 -->
-		<column name="sortNo" type="String" /><!--排序号 -->
+		<column name="sortNo" type="int" /><!--排序号 -->
 		<column name="desc" type="String" /><!--备注 -->
-		<column name="tag" type="int" /><!--特殊标记 -->
+		<column name="tag" type="String" /><!--特殊标记 -->
 		<column name="isValid" type="boolean" /><!--是否有效 -->
+		<column name="treePath" type="String" /><!--树结构地址 -->
+		<column name="sortPath" type="String" /><!--树结构排序号 -->
 		<column name="parentId" type="long" /><!-- 父亲ID -->
 
 		<!-- Order -->
 
 		<order>
-			<order-column name="sortNo" order-by="asc"/>
-			<order-column name="dictionaryId" order-by="asc"/>
+			<order-column name="sortPath" order-by="asc"/>
 		</order>
 
 		<!-- Finder methods -->

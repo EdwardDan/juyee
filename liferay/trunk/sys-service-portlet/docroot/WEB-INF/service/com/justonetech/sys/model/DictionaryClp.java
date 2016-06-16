@@ -89,6 +89,8 @@ public class DictionaryClp extends BaseModelImpl<Dictionary>
 		attributes.put("desc", getDesc());
 		attributes.put("tag", getTag());
 		attributes.put("isValid", getIsValid());
+		attributes.put("treePath", getTreePath());
+		attributes.put("sortPath", getSortPath());
 		attributes.put("parentId", getParentId());
 
 		return attributes;
@@ -156,7 +158,7 @@ public class DictionaryClp extends BaseModelImpl<Dictionary>
 			setIsLeaf(isLeaf);
 		}
 
-		String sortNo = (String)attributes.get("sortNo");
+		Integer sortNo = (Integer)attributes.get("sortNo");
 
 		if (sortNo != null) {
 			setSortNo(sortNo);
@@ -168,7 +170,7 @@ public class DictionaryClp extends BaseModelImpl<Dictionary>
 			setDesc(desc);
 		}
 
-		Integer tag = (Integer)attributes.get("tag");
+		String tag = (String)attributes.get("tag");
 
 		if (tag != null) {
 			setTag(tag);
@@ -178,6 +180,18 @@ public class DictionaryClp extends BaseModelImpl<Dictionary>
 
 		if (isValid != null) {
 			setIsValid(isValid);
+		}
+
+		String treePath = (String)attributes.get("treePath");
+
+		if (treePath != null) {
+			setTreePath(treePath);
+		}
+
+		String sortPath = (String)attributes.get("sortPath");
+
+		if (sortPath != null) {
+			setSortPath(sortPath);
 		}
 
 		Long parentId = (Long)attributes.get("parentId");
@@ -433,19 +447,19 @@ public class DictionaryClp extends BaseModelImpl<Dictionary>
 	}
 
 	@Override
-	public String getSortNo() {
+	public int getSortNo() {
 		return _sortNo;
 	}
 
 	@Override
-	public void setSortNo(String sortNo) {
+	public void setSortNo(int sortNo) {
 		_sortNo = sortNo;
 
 		if (_dictionaryRemoteModel != null) {
 			try {
 				Class<?> clazz = _dictionaryRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setSortNo", String.class);
+				Method method = clazz.getMethod("setSortNo", int.class);
 
 				method.invoke(_dictionaryRemoteModel, sortNo);
 			}
@@ -479,19 +493,19 @@ public class DictionaryClp extends BaseModelImpl<Dictionary>
 	}
 
 	@Override
-	public int getTag() {
+	public String getTag() {
 		return _tag;
 	}
 
 	@Override
-	public void setTag(int tag) {
+	public void setTag(String tag) {
 		_tag = tag;
 
 		if (_dictionaryRemoteModel != null) {
 			try {
 				Class<?> clazz = _dictionaryRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setTag", int.class);
+				Method method = clazz.getMethod("setTag", String.class);
 
 				method.invoke(_dictionaryRemoteModel, tag);
 			}
@@ -530,6 +544,52 @@ public class DictionaryClp extends BaseModelImpl<Dictionary>
 	}
 
 	@Override
+	public String getTreePath() {
+		return _treePath;
+	}
+
+	@Override
+	public void setTreePath(String treePath) {
+		_treePath = treePath;
+
+		if (_dictionaryRemoteModel != null) {
+			try {
+				Class<?> clazz = _dictionaryRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setTreePath", String.class);
+
+				method.invoke(_dictionaryRemoteModel, treePath);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getSortPath() {
+		return _sortPath;
+	}
+
+	@Override
+	public void setSortPath(String sortPath) {
+		_sortPath = sortPath;
+
+		if (_dictionaryRemoteModel != null) {
+			try {
+				Class<?> clazz = _dictionaryRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setSortPath", String.class);
+
+				method.invoke(_dictionaryRemoteModel, sortPath);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
 	public long getParentId() {
 		return _parentId;
 	}
@@ -549,6 +609,38 @@ public class DictionaryClp extends BaseModelImpl<Dictionary>
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
 			}
+		}
+	}
+
+	@Override
+	public java.lang.String buildTreePath() {
+		try {
+			String methodName = "buildTreePath";
+
+			Class<?>[] parameterTypes = new Class<?>[] {  };
+
+			Object[] parameterValues = new Object[] {  };
+
+			java.lang.String returnObj = (java.lang.String)invokeOnRemoteModel(methodName,
+					parameterTypes, parameterValues);
+
+			return returnObj;
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
+	@Override
+	public void updateTreePath(String treePath) {
+		try {
+			_treePath = treePath;
+
+			invokeOnRemoteModel("updateTreePath",
+				new Class<?>[] { String.class }, new Object[] { treePath });
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
 		}
 	}
 
@@ -635,6 +727,8 @@ public class DictionaryClp extends BaseModelImpl<Dictionary>
 		clone.setDesc(getDesc());
 		clone.setTag(getTag());
 		clone.setIsValid(getIsValid());
+		clone.setTreePath(getTreePath());
+		clone.setSortPath(getSortPath());
 		clone.setParentId(getParentId());
 
 		return clone;
@@ -644,21 +738,7 @@ public class DictionaryClp extends BaseModelImpl<Dictionary>
 	public int compareTo(Dictionary dictionary) {
 		int value = 0;
 
-		value = getSortNo().compareTo(dictionary.getSortNo());
-
-		if (value != 0) {
-			return value;
-		}
-
-		if (getDictionaryId() < dictionary.getDictionaryId()) {
-			value = -1;
-		}
-		else if (getDictionaryId() > dictionary.getDictionaryId()) {
-			value = 1;
-		}
-		else {
-			value = 0;
-		}
+		value = getSortPath().compareTo(dictionary.getSortPath());
 
 		if (value != 0) {
 			return value;
@@ -700,7 +780,7 @@ public class DictionaryClp extends BaseModelImpl<Dictionary>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(31);
+		StringBundler sb = new StringBundler(35);
 
 		sb.append("{dictionaryId=");
 		sb.append(getDictionaryId());
@@ -730,6 +810,10 @@ public class DictionaryClp extends BaseModelImpl<Dictionary>
 		sb.append(getTag());
 		sb.append(", isValid=");
 		sb.append(getIsValid());
+		sb.append(", treePath=");
+		sb.append(getTreePath());
+		sb.append(", sortPath=");
+		sb.append(getSortPath());
 		sb.append(", parentId=");
 		sb.append(getParentId());
 		sb.append("}");
@@ -739,7 +823,7 @@ public class DictionaryClp extends BaseModelImpl<Dictionary>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(49);
+		StringBundler sb = new StringBundler(55);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.sys.model.Dictionary");
@@ -802,6 +886,14 @@ public class DictionaryClp extends BaseModelImpl<Dictionary>
 		sb.append(getIsValid());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>treePath</column-name><column-value><![CDATA[");
+		sb.append(getTreePath());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>sortPath</column-name><column-value><![CDATA[");
+		sb.append(getSortPath());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>parentId</column-name><column-value><![CDATA[");
 		sb.append(getParentId());
 		sb.append("]]></column-value></column>");
@@ -822,10 +914,12 @@ public class DictionaryClp extends BaseModelImpl<Dictionary>
 	private String _code;
 	private String _name;
 	private boolean _isLeaf;
-	private String _sortNo;
+	private int _sortNo;
 	private String _desc;
-	private int _tag;
+	private String _tag;
 	private boolean _isValid;
+	private String _treePath;
+	private String _sortPath;
 	private long _parentId;
 	private BaseModel<?> _dictionaryRemoteModel;
 	private Class<?> _clpSerializerClass = com.justonetech.sys.service.ClpSerializer.class;

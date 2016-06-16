@@ -76,16 +76,18 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 			{ "code_", Types.VARCHAR },
 			{ "name", Types.VARCHAR },
 			{ "isLeaf", Types.BOOLEAN },
-			{ "sortNo", Types.VARCHAR },
+			{ "sortNo", Types.INTEGER },
 			{ "desc_", Types.VARCHAR },
-			{ "tag", Types.INTEGER },
+			{ "tag", Types.VARCHAR },
 			{ "isValid", Types.BOOLEAN },
+			{ "treePath", Types.VARCHAR },
+			{ "sortPath", Types.VARCHAR },
 			{ "parentId", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table sys_Dictionary (dictionaryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,code_ VARCHAR(75) null,name VARCHAR(75) null,isLeaf BOOLEAN,sortNo VARCHAR(75) null,desc_ VARCHAR(75) null,tag INTEGER,isValid BOOLEAN,parentId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table sys_Dictionary (dictionaryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,code_ VARCHAR(75) null,name VARCHAR(75) null,isLeaf BOOLEAN,sortNo INTEGER,desc_ VARCHAR(75) null,tag VARCHAR(75) null,isValid BOOLEAN,treePath VARCHAR(75) null,sortPath VARCHAR(75) null,parentId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table sys_Dictionary";
-	public static final String ORDER_BY_JPQL = " ORDER BY dictionary.sortNo ASC, dictionary.dictionaryId ASC";
-	public static final String ORDER_BY_SQL = " ORDER BY sys_Dictionary.sortNo ASC, sys_Dictionary.dictionaryId ASC";
+	public static final String ORDER_BY_JPQL = " ORDER BY dictionary.sortPath ASC";
+	public static final String ORDER_BY_SQL = " ORDER BY sys_Dictionary.sortPath ASC";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
@@ -102,8 +104,7 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 	public static long GROUPID_COLUMN_BITMASK = 2L;
 	public static long ISVALID_COLUMN_BITMASK = 4L;
 	public static long PARENTID_COLUMN_BITMASK = 8L;
-	public static long SORTNO_COLUMN_BITMASK = 16L;
-	public static long DICTIONARYID_COLUMN_BITMASK = 32L;
+	public static long SORTPATH_COLUMN_BITMASK = 16L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -132,6 +133,8 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 		model.setDesc(soapModel.getDesc());
 		model.setTag(soapModel.getTag());
 		model.setIsValid(soapModel.getIsValid());
+		model.setTreePath(soapModel.getTreePath());
+		model.setSortPath(soapModel.getSortPath());
 		model.setParentId(soapModel.getParentId());
 
 		return model;
@@ -211,6 +214,8 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 		attributes.put("desc", getDesc());
 		attributes.put("tag", getTag());
 		attributes.put("isValid", getIsValid());
+		attributes.put("treePath", getTreePath());
+		attributes.put("sortPath", getSortPath());
 		attributes.put("parentId", getParentId());
 
 		return attributes;
@@ -278,7 +283,7 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 			setIsLeaf(isLeaf);
 		}
 
-		String sortNo = (String)attributes.get("sortNo");
+		Integer sortNo = (Integer)attributes.get("sortNo");
 
 		if (sortNo != null) {
 			setSortNo(sortNo);
@@ -290,7 +295,7 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 			setDesc(desc);
 		}
 
-		Integer tag = (Integer)attributes.get("tag");
+		String tag = (String)attributes.get("tag");
 
 		if (tag != null) {
 			setTag(tag);
@@ -300,6 +305,18 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 
 		if (isValid != null) {
 			setIsValid(isValid);
+		}
+
+		String treePath = (String)attributes.get("treePath");
+
+		if (treePath != null) {
+			setTreePath(treePath);
+		}
+
+		String sortPath = (String)attributes.get("sortPath");
+
+		if (sortPath != null) {
+			setSortPath(sortPath);
 		}
 
 		Long parentId = (Long)attributes.get("parentId");
@@ -317,8 +334,6 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 
 	@Override
 	public void setDictionaryId(long dictionaryId) {
-		_columnBitmask = -1L;
-
 		_dictionaryId = dictionaryId;
 	}
 
@@ -475,19 +490,12 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 
 	@JSON
 	@Override
-	public String getSortNo() {
-		if (_sortNo == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _sortNo;
-		}
+	public int getSortNo() {
+		return _sortNo;
 	}
 
 	@Override
-	public void setSortNo(String sortNo) {
-		_columnBitmask = -1L;
-
+	public void setSortNo(int sortNo) {
 		_sortNo = sortNo;
 	}
 
@@ -509,12 +517,17 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 
 	@JSON
 	@Override
-	public int getTag() {
-		return _tag;
+	public String getTag() {
+		if (_tag == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _tag;
+		}
 	}
 
 	@Override
-	public void setTag(int tag) {
+	public void setTag(String tag) {
 		_tag = tag;
 	}
 
@@ -544,6 +557,40 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 
 	public boolean getOriginalIsValid() {
 		return _originalIsValid;
+	}
+
+	@JSON
+	@Override
+	public String getTreePath() {
+		if (_treePath == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _treePath;
+		}
+	}
+
+	@Override
+	public void setTreePath(String treePath) {
+		_treePath = treePath;
+	}
+
+	@JSON
+	@Override
+	public String getSortPath() {
+		if (_sortPath == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _sortPath;
+		}
+	}
+
+	@Override
+	public void setSortPath(String sortPath) {
+		_columnBitmask = -1L;
+
+		_sortPath = sortPath;
 	}
 
 	@JSON
@@ -614,6 +661,8 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 		dictionaryImpl.setDesc(getDesc());
 		dictionaryImpl.setTag(getTag());
 		dictionaryImpl.setIsValid(getIsValid());
+		dictionaryImpl.setTreePath(getTreePath());
+		dictionaryImpl.setSortPath(getSortPath());
 		dictionaryImpl.setParentId(getParentId());
 
 		dictionaryImpl.resetOriginalValues();
@@ -625,21 +674,7 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 	public int compareTo(Dictionary dictionary) {
 		int value = 0;
 
-		value = getSortNo().compareTo(dictionary.getSortNo());
-
-		if (value != 0) {
-			return value;
-		}
-
-		if (getDictionaryId() < dictionary.getDictionaryId()) {
-			value = -1;
-		}
-		else if (getDictionaryId() > dictionary.getDictionaryId()) {
-			value = 1;
-		}
-		else {
-			value = 0;
-		}
+		value = getSortPath().compareTo(dictionary.getSortPath());
 
 		if (value != 0) {
 			return value;
@@ -754,12 +789,6 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 
 		dictionaryCacheModel.sortNo = getSortNo();
 
-		String sortNo = dictionaryCacheModel.sortNo;
-
-		if ((sortNo != null) && (sortNo.length() == 0)) {
-			dictionaryCacheModel.sortNo = null;
-		}
-
 		dictionaryCacheModel.desc = getDesc();
 
 		String desc = dictionaryCacheModel.desc;
@@ -770,7 +799,29 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 
 		dictionaryCacheModel.tag = getTag();
 
+		String tag = dictionaryCacheModel.tag;
+
+		if ((tag != null) && (tag.length() == 0)) {
+			dictionaryCacheModel.tag = null;
+		}
+
 		dictionaryCacheModel.isValid = getIsValid();
+
+		dictionaryCacheModel.treePath = getTreePath();
+
+		String treePath = dictionaryCacheModel.treePath;
+
+		if ((treePath != null) && (treePath.length() == 0)) {
+			dictionaryCacheModel.treePath = null;
+		}
+
+		dictionaryCacheModel.sortPath = getSortPath();
+
+		String sortPath = dictionaryCacheModel.sortPath;
+
+		if ((sortPath != null) && (sortPath.length() == 0)) {
+			dictionaryCacheModel.sortPath = null;
+		}
 
 		dictionaryCacheModel.parentId = getParentId();
 
@@ -779,7 +830,7 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(31);
+		StringBundler sb = new StringBundler(35);
 
 		sb.append("{dictionaryId=");
 		sb.append(getDictionaryId());
@@ -809,6 +860,10 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 		sb.append(getTag());
 		sb.append(", isValid=");
 		sb.append(getIsValid());
+		sb.append(", treePath=");
+		sb.append(getTreePath());
+		sb.append(", sortPath=");
+		sb.append(getSortPath());
 		sb.append(", parentId=");
 		sb.append(getParentId());
 		sb.append("}");
@@ -818,7 +873,7 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(49);
+		StringBundler sb = new StringBundler(55);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.sys.model.Dictionary");
@@ -881,6 +936,14 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 		sb.append(getIsValid());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>treePath</column-name><column-value><![CDATA[");
+		sb.append(getTreePath());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>sortPath</column-name><column-value><![CDATA[");
+		sb.append(getSortPath());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>parentId</column-name><column-value><![CDATA[");
 		sb.append(getParentId());
 		sb.append("]]></column-value></column>");
@@ -908,12 +971,14 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 	private String _originalCode;
 	private String _name;
 	private boolean _isLeaf;
-	private String _sortNo;
+	private int _sortNo;
 	private String _desc;
-	private int _tag;
+	private String _tag;
 	private boolean _isValid;
 	private boolean _originalIsValid;
 	private boolean _setOriginalIsValid;
+	private String _treePath;
+	private String _sortPath;
 	private long _parentId;
 	private long _originalParentId;
 	private boolean _setOriginalParentId;

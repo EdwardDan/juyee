@@ -12,10 +12,12 @@
 		<field name="code" type="String" />
 		<field name="name" type="String" />
 		<field name="isLeaf" type="boolean" />
-		<field name="sortNo" type="String" />
+		<field name="sortNo" type="int" />
 		<field name="desc" type="String" />
-		<field name="tag" type="int" />
+		<field name="tag" type="String" />
 		<field name="isValid" type="boolean" />
+		<field name="treePath" type="String" />
+		<field name="sortPath" type="String" />
 		<field name="parentId" type="long" />
 	</model>
 </model-hints>

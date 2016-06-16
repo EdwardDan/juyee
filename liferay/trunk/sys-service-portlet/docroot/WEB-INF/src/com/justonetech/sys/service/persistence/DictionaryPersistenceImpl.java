@@ -370,7 +370,7 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 			new String[] { Long.class.getName(), Long.class.getName() },
 			DictionaryModelImpl.PARENTID_COLUMN_BITMASK |
 			DictionaryModelImpl.GROUPID_COLUMN_BITMASK |
-			DictionaryModelImpl.SORTNO_COLUMN_BITMASK);
+			DictionaryModelImpl.SORTPATH_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_PARENTID = new FinderPath(DictionaryModelImpl.ENTITY_CACHE_ENABLED,
 			DictionaryModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByParentId",
@@ -907,7 +907,7 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 			DictionaryModelImpl.PARENTID_COLUMN_BITMASK |
 			DictionaryModelImpl.ISVALID_COLUMN_BITMASK |
 			DictionaryModelImpl.GROUPID_COLUMN_BITMASK |
-			DictionaryModelImpl.SORTNO_COLUMN_BITMASK);
+			DictionaryModelImpl.SORTPATH_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_PARENTIDANDISVALID = new FinderPath(DictionaryModelImpl.ENTITY_CACHE_ENABLED,
 			DictionaryModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
@@ -1824,6 +1824,8 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 		dictionaryImpl.setDesc(dictionary.getDesc());
 		dictionaryImpl.setTag(dictionary.getTag());
 		dictionaryImpl.setIsValid(dictionary.isIsValid());
+		dictionaryImpl.setTreePath(dictionary.getTreePath());
+		dictionaryImpl.setSortPath(dictionary.getSortPath());
 		dictionaryImpl.setParentId(dictionary.getParentId());
 
 		return dictionaryImpl;

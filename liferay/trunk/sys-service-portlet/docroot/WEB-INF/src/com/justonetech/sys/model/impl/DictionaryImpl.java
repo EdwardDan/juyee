@@ -14,6 +14,9 @@
 
 package com.justonetech.sys.model.impl;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+
 /**
  * The extended model implementation for the Dictionary service. Represents a row in the &quot;sys_Dictionary&quot; database table, with each column mapped to a property of this class.
  *
@@ -30,5 +33,16 @@ public class DictionaryImpl extends DictionaryBaseImpl {
 	 * Never reference this class directly. All methods that expect a dictionary model instance should use the {@link com.justonetech.sys.model.Dictionary} interface instead.
 	 */
 	public DictionaryImpl() {
+	}
+	
+	@Override
+	public String buildTreePath() throws PortalException, SystemException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public void updateTreePath(String treePath) throws SystemException {
+		// TODO Auto-generated method stub
+		super.updateTreePath(treePath);
 	}
 }

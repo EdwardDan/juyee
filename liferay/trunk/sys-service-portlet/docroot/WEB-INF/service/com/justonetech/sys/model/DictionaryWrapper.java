@@ -63,6 +63,8 @@ public class DictionaryWrapper implements Dictionary, ModelWrapper<Dictionary> {
 		attributes.put("desc", getDesc());
 		attributes.put("tag", getTag());
 		attributes.put("isValid", getIsValid());
+		attributes.put("treePath", getTreePath());
+		attributes.put("sortPath", getSortPath());
 		attributes.put("parentId", getParentId());
 
 		return attributes;
@@ -130,7 +132,7 @@ public class DictionaryWrapper implements Dictionary, ModelWrapper<Dictionary> {
 			setIsLeaf(isLeaf);
 		}
 
-		String sortNo = (String)attributes.get("sortNo");
+		Integer sortNo = (Integer)attributes.get("sortNo");
 
 		if (sortNo != null) {
 			setSortNo(sortNo);
@@ -142,7 +144,7 @@ public class DictionaryWrapper implements Dictionary, ModelWrapper<Dictionary> {
 			setDesc(desc);
 		}
 
-		Integer tag = (Integer)attributes.get("tag");
+		String tag = (String)attributes.get("tag");
 
 		if (tag != null) {
 			setTag(tag);
@@ -152,6 +154,18 @@ public class DictionaryWrapper implements Dictionary, ModelWrapper<Dictionary> {
 
 		if (isValid != null) {
 			setIsValid(isValid);
+		}
+
+		String treePath = (String)attributes.get("treePath");
+
+		if (treePath != null) {
+			setTreePath(treePath);
+		}
+
+		String sortPath = (String)attributes.get("sortPath");
+
+		if (sortPath != null) {
+			setSortPath(sortPath);
 		}
 
 		Long parentId = (Long)attributes.get("parentId");
@@ -419,7 +433,7 @@ public class DictionaryWrapper implements Dictionary, ModelWrapper<Dictionary> {
 	* @return the sort no of this dictionary
 	*/
 	@Override
-	public java.lang.String getSortNo() {
+	public int getSortNo() {
 		return _dictionary.getSortNo();
 	}
 
@@ -429,7 +443,7 @@ public class DictionaryWrapper implements Dictionary, ModelWrapper<Dictionary> {
 	* @param sortNo the sort no of this dictionary
 	*/
 	@Override
-	public void setSortNo(java.lang.String sortNo) {
+	public void setSortNo(int sortNo) {
 		_dictionary.setSortNo(sortNo);
 	}
 
@@ -459,7 +473,7 @@ public class DictionaryWrapper implements Dictionary, ModelWrapper<Dictionary> {
 	* @return the tag of this dictionary
 	*/
 	@Override
-	public int getTag() {
+	public java.lang.String getTag() {
 		return _dictionary.getTag();
 	}
 
@@ -469,7 +483,7 @@ public class DictionaryWrapper implements Dictionary, ModelWrapper<Dictionary> {
 	* @param tag the tag of this dictionary
 	*/
 	@Override
-	public void setTag(int tag) {
+	public void setTag(java.lang.String tag) {
 		_dictionary.setTag(tag);
 	}
 
@@ -501,6 +515,46 @@ public class DictionaryWrapper implements Dictionary, ModelWrapper<Dictionary> {
 	@Override
 	public void setIsValid(boolean isValid) {
 		_dictionary.setIsValid(isValid);
+	}
+
+	/**
+	* Returns the tree path of this dictionary.
+	*
+	* @return the tree path of this dictionary
+	*/
+	@Override
+	public java.lang.String getTreePath() {
+		return _dictionary.getTreePath();
+	}
+
+	/**
+	* Sets the tree path of this dictionary.
+	*
+	* @param treePath the tree path of this dictionary
+	*/
+	@Override
+	public void setTreePath(java.lang.String treePath) {
+		_dictionary.setTreePath(treePath);
+	}
+
+	/**
+	* Returns the sort path of this dictionary.
+	*
+	* @return the sort path of this dictionary
+	*/
+	@Override
+	public java.lang.String getSortPath() {
+		return _dictionary.getSortPath();
+	}
+
+	/**
+	* Sets the sort path of this dictionary.
+	*
+	* @param sortPath the sort path of this dictionary
+	*/
+	@Override
+	public void setSortPath(java.lang.String sortPath) {
+		_dictionary.setSortPath(sortPath);
 	}
 
 	/**
@@ -625,6 +679,19 @@ public class DictionaryWrapper implements Dictionary, ModelWrapper<Dictionary> {
 	public void persist()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_dictionary.persist();
+	}
+
+	@Override
+	public void updateTreePath(java.lang.String treePath)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_dictionary.updateTreePath(treePath);
+	}
+
+	@Override
+	public java.lang.String buildTreePath()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _dictionary.buildTreePath();
 	}
 
 	@Override

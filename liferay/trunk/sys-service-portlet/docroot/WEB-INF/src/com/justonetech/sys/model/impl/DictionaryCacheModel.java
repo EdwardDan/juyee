@@ -38,7 +38,7 @@ public class DictionaryCacheModel implements CacheModel<Dictionary>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(31);
+		StringBundler sb = new StringBundler(35);
 
 		sb.append("{dictionaryId=");
 		sb.append(dictionaryId);
@@ -68,6 +68,10 @@ public class DictionaryCacheModel implements CacheModel<Dictionary>,
 		sb.append(tag);
 		sb.append(", isValid=");
 		sb.append(isValid);
+		sb.append(", treePath=");
+		sb.append(treePath);
+		sb.append(", sortPath=");
+		sb.append(sortPath);
 		sb.append(", parentId=");
 		sb.append(parentId);
 		sb.append("}");
@@ -120,13 +124,7 @@ public class DictionaryCacheModel implements CacheModel<Dictionary>,
 		}
 
 		dictionaryImpl.setIsLeaf(isLeaf);
-
-		if (sortNo == null) {
-			dictionaryImpl.setSortNo(StringPool.BLANK);
-		}
-		else {
-			dictionaryImpl.setSortNo(sortNo);
-		}
+		dictionaryImpl.setSortNo(sortNo);
 
 		if (desc == null) {
 			dictionaryImpl.setDesc(StringPool.BLANK);
@@ -135,8 +133,29 @@ public class DictionaryCacheModel implements CacheModel<Dictionary>,
 			dictionaryImpl.setDesc(desc);
 		}
 
-		dictionaryImpl.setTag(tag);
+		if (tag == null) {
+			dictionaryImpl.setTag(StringPool.BLANK);
+		}
+		else {
+			dictionaryImpl.setTag(tag);
+		}
+
 		dictionaryImpl.setIsValid(isValid);
+
+		if (treePath == null) {
+			dictionaryImpl.setTreePath(StringPool.BLANK);
+		}
+		else {
+			dictionaryImpl.setTreePath(treePath);
+		}
+
+		if (sortPath == null) {
+			dictionaryImpl.setSortPath(StringPool.BLANK);
+		}
+		else {
+			dictionaryImpl.setSortPath(sortPath);
+		}
+
 		dictionaryImpl.setParentId(parentId);
 
 		dictionaryImpl.resetOriginalValues();
@@ -156,10 +175,12 @@ public class DictionaryCacheModel implements CacheModel<Dictionary>,
 		code = objectInput.readUTF();
 		name = objectInput.readUTF();
 		isLeaf = objectInput.readBoolean();
-		sortNo = objectInput.readUTF();
+		sortNo = objectInput.readInt();
 		desc = objectInput.readUTF();
-		tag = objectInput.readInt();
+		tag = objectInput.readUTF();
 		isValid = objectInput.readBoolean();
+		treePath = objectInput.readUTF();
+		sortPath = objectInput.readUTF();
 		parentId = objectInput.readLong();
 	}
 
@@ -196,13 +217,7 @@ public class DictionaryCacheModel implements CacheModel<Dictionary>,
 		}
 
 		objectOutput.writeBoolean(isLeaf);
-
-		if (sortNo == null) {
-			objectOutput.writeUTF(StringPool.BLANK);
-		}
-		else {
-			objectOutput.writeUTF(sortNo);
-		}
+		objectOutput.writeInt(sortNo);
 
 		if (desc == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
@@ -211,8 +226,29 @@ public class DictionaryCacheModel implements CacheModel<Dictionary>,
 			objectOutput.writeUTF(desc);
 		}
 
-		objectOutput.writeInt(tag);
+		if (tag == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(tag);
+		}
+
 		objectOutput.writeBoolean(isValid);
+
+		if (treePath == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(treePath);
+		}
+
+		if (sortPath == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(sortPath);
+		}
+
 		objectOutput.writeLong(parentId);
 	}
 
@@ -226,9 +262,11 @@ public class DictionaryCacheModel implements CacheModel<Dictionary>,
 	public String code;
 	public String name;
 	public boolean isLeaf;
-	public String sortNo;
+	public int sortNo;
 	public String desc;
-	public int tag;
+	public String tag;
 	public boolean isValid;
+	public String treePath;
+	public String sortPath;
 	public long parentId;
 }

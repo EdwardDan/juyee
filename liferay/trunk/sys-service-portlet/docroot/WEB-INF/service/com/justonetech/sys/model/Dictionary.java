@@ -15,6 +15,7 @@
 package com.justonetech.sys.model;
 
 import com.liferay.portal.model.PersistedModel;
+import com.liferay.portal.model.TreeModel;
 
 /**
  * The extended model interface for the Dictionary service. Represents a row in the &quot;sys_Dictionary&quot; database table, with each column mapped to a property of this class.
@@ -25,10 +26,18 @@ import com.liferay.portal.model.PersistedModel;
  * @see com.justonetech.sys.model.impl.DictionaryModelImpl
  * @generated
  */
-public interface Dictionary extends DictionaryModel, PersistedModel {
+public interface Dictionary extends DictionaryModel, PersistedModel, TreeModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
 	 * Never modify this interface directly. Add methods to {@link com.justonetech.sys.model.impl.DictionaryImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	@Override
+	public java.lang.String buildTreePath()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	@Override
+	public void updateTreePath(java.lang.String treePath)
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

@@ -45,6 +45,8 @@ public class DictionarySoap implements Serializable {
 		soapModel.setDesc(model.getDesc());
 		soapModel.setTag(model.getTag());
 		soapModel.setIsValid(model.getIsValid());
+		soapModel.setTreePath(model.getTreePath());
+		soapModel.setSortPath(model.getSortPath());
 		soapModel.setParentId(model.getParentId());
 
 		return soapModel;
@@ -182,11 +184,11 @@ public class DictionarySoap implements Serializable {
 		_isLeaf = isLeaf;
 	}
 
-	public String getSortNo() {
+	public int getSortNo() {
 		return _sortNo;
 	}
 
-	public void setSortNo(String sortNo) {
+	public void setSortNo(int sortNo) {
 		_sortNo = sortNo;
 	}
 
@@ -198,11 +200,11 @@ public class DictionarySoap implements Serializable {
 		_desc = desc;
 	}
 
-	public int getTag() {
+	public String getTag() {
 		return _tag;
 	}
 
-	public void setTag(int tag) {
+	public void setTag(String tag) {
 		_tag = tag;
 	}
 
@@ -216,6 +218,22 @@ public class DictionarySoap implements Serializable {
 
 	public void setIsValid(boolean isValid) {
 		_isValid = isValid;
+	}
+
+	public String getTreePath() {
+		return _treePath;
+	}
+
+	public void setTreePath(String treePath) {
+		_treePath = treePath;
+	}
+
+	public String getSortPath() {
+		return _sortPath;
+	}
+
+	public void setSortPath(String sortPath) {
+		_sortPath = sortPath;
 	}
 
 	public long getParentId() {
@@ -236,9 +254,11 @@ public class DictionarySoap implements Serializable {
 	private String _code;
 	private String _name;
 	private boolean _isLeaf;
-	private String _sortNo;
+	private int _sortNo;
 	private String _desc;
-	private int _tag;
+	private String _tag;
 	private boolean _isValid;
+	private String _treePath;
+	private String _sortPath;
 	private long _parentId;
 }

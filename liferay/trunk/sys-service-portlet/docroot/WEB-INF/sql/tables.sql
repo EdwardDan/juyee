@@ -9,9 +9,11 @@ create table sys_Dictionary (
 	code_ VARCHAR(75) null,
 	name VARCHAR(75) null,
 	isLeaf BOOLEAN,
-	sortNo VARCHAR(75) null,
+	sortNo INTEGER,
 	desc_ VARCHAR(75) null,
-	tag INTEGER,
+	tag VARCHAR(75) null,
 	isValid BOOLEAN,
+	treePath VARCHAR(75) null,
+	sortPath VARCHAR(75) null,
 	parentId LONG
 );
