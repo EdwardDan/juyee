@@ -26,7 +26,7 @@
 			</tr>
 		</table>
 	</form>
-	<liferay-ui:search-container delta="10" emptyResultsMessage="没有找到数据!">
+	<liferay-ui:search-container delta="5" emptyResultsMessage="没有找到数据!">
 		<liferay-ui:search-container-results results="${dics}"
 			total="${totalSize}" />
 		<liferay-ui:search-container-row className="Dictionary" modelVar="dic"

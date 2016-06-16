@@ -6,12 +6,15 @@
 <%
 	Long dictionaryId = (Long) request.getAttribute("dictionaryId");
     Integer totalSize=(Integer)request.getAttribute("totalSize");
-	System.out.println("===============totalJsp============"+totalSize);
 %>
 <portlet:renderURL var="def" />
 <portlet:actionURL var="add" name="pass">
 	<portlet:param name="mvcPath" value="/portlet/dictionary/add.jsp" />
 	<portlet:param name="dictionaryId" value="${dictionaryId}" />
+</portlet:actionURL>
+<portlet:actionURL var="find" name="find">
+<portlet:param name="mvcPath" value="/portlet/dictionary/check.jsp"/>
+<portlet:param name="dictionaryId" value="${dictionaryId}"/>
 </portlet:actionURL>
 
 <liferay-ui:header title="查看代码集" backURL="${def}" />
@@ -26,13 +29,13 @@
 <portlet:actionURL var="check" name="check">
 	<portlet:param name="mvcPath" value="/portlet/dictionary/check.jsp" />
 </portlet:actionURL>
-<form action="${check}" method="post">
+<form action="${find}" method="post">
 	<table align="center" width="100%">
 		<tr>
 			<td><form class="form-search">
 					<input type="text" placeholder="请输入关键字..."
 						class="input-medium search-query"
-						name="<portlet:namespace/>keywords" value="${keywords}" />
+						name="<portlet:namespace/>keywords" value="${keywords}"/>
 					<button type="submit" class="btn">
 						<i class="icon-search"></i>查询
 					</button>
@@ -55,7 +58,6 @@
 		<liferay-ui:search-container-column-text name="action">
 			<portlet:actionURL var="del" name="del">
 				<portlet:param name="dictionaryId" value="${dic.dictionaryId}" />
-				<%-- <portlet:param name="mvcPath" value="/portlet/dictionary/check.jsp" /> --%>
 			</portlet:actionURL>
 			<portlet:actionURL var="modify" name="modify">
 				<portlet:param name="mvcPath" value="/portlet/dictionary/add.jsp" />

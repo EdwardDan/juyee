@@ -1,9 +1,10 @@
+<%@page import="com.liferay.portal.kernel.util.Validator"%>
 <%@include file="/common/init.jsp"%>
 <%@ page contentType="text/html;charset=utf-8"%>
 
 <%
 	Long dictionaryId = (Long) request.getAttribute("dictionaryId");
-	Long parentID = (Long)request.getAttribute("parentId");
+	Long parentID = (Long) request.getAttribute("parentId");
 %>
 <portlet:actionURL var="add" name="add">
 	<portlet:param name="redirect" value="${def}" />
@@ -20,13 +21,29 @@
 	<aui:input type="text" label="名称:" name="name" value="${name}">
 		<aui:validator name="required" errorMessage="这里不可空白!"></aui:validator>
 	</aui:input>
-	<aui:input type="number" label="特殊标记:" name="tag" value="${name}"></aui:input>
-	<%
-		Boolean isValid=(Boolean)request.getAttribute("isValid");
-	%>
+	<aui:input type="text" label="特殊标记:" name="tag" value="${tag}"></aui:input>
 	<aui:select name="isValid" label="是否有效:">
-		<aui:option value="1" selected="${iaValid==true}">是</aui:option>
-		<aui:option value="2" selected="${iaValid==false}">否</aui:option>
+		<%
+			Boolean isValid = (Boolean) request.getAttribute("isValid");
+					if (Validator.isNotNull(isValid)) {
+						if (isValid == false) {
+		%>
+		<aui:option value="1">是</aui:option>
+		<aui:option value="2" selected="true">否</aui:option>
+		<%
+			} else {
+		%>
+		<aui:option value="1" selected="true">是</aui:option>
+		<aui:option value="2">否</aui:option>
+		<%
+			}
+					} else {
+		%>
+		<aui:option value="1">是</aui:option>
+		<aui:option value="2">否</aui:option>
+		<%
+			}
+		%>
 	</aui:select>
 	<aui:input type="content" label="备注:" name="desc" value="${desc}"></aui:input>
 	<aui:button type="submit"></aui:button>

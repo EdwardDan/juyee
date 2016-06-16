@@ -34,14 +34,14 @@ public class DictionaryPortlet extends MVCPortlet {
 			RenderResponse renderResponse) throws IOException, PortletException {
 		String keyword = ParamUtil.getString(renderRequest, "keyword");
 		renderRequest.setAttribute("keyword", keyword);
-		int pageSize = ParamUtil.getInteger(renderRequest, "delta", 10);
+		int pageSize = ParamUtil.getInteger(renderRequest, "delta", 5);
 		int pageNumber = ParamUtil.getInteger(renderRequest, "cur", 1);
 		int start = (pageNumber - 1) * pageSize;
 		int end = pageNumber * pageSize;
 		List<Dictionary> dics = null;
 		int totalSize = 0;
 		try {
-			totalSize = DictionaryPortlet.findCodes("").size();
+			totalSize = DictionaryPortlet.findCodes(keyword).size();
 		} catch (SystemException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -81,10 +81,12 @@ public class DictionaryPortlet extends MVCPortlet {
 			dic = DictionaryLocalServiceUtil
 					.createDictionary(CounterLocalServiceUtil.increment());
 		}
+		String treePath = "/" + dictionaryId + "/";
 		dic.setCode(code);
 		dic.setName(name);
 		dic.setDesc(desc);
 		dic.setParentId(0);
+		dic.setTreePath(treePath);
 		DictionaryLocalServiceUtil.updateDictionary(dic);
 	}
 
@@ -132,9 +134,7 @@ public class DictionaryPortlet extends MVCPortlet {
 	public void add(ActionRequest request, ActionResponse response)
 			throws SystemException, PortalException {
 		long dictionaryId = ParamUtil.getLong(request, "dictionaryId");
-		System.out.println("============================dicId" + dictionaryId);
 		long parentID = ParamUtil.getLong(request, "parentID");
-		System.out.println("===========parentID" + parentID);
 		Dictionary dic = null;
 		String code = ParamUtil.getString(request, "code");
 		String name = ParamUtil.getString(request, "name");
@@ -192,7 +192,6 @@ public class DictionaryPortlet extends MVCPortlet {
 		int start = (pageNumber - 1) * pageSize;
 		int end = pageNumber * pageSize;
 		int totalSize = DictionaryPortlet.findCode("", dictionaryId).size();
-		System.out.println("==========totalSize============" + totalSize);
 		request.setAttribute("totalSize", totalSize);
 		List<Dictionary> dics = null;
 		if (Validator.isNotNull(keywords)) {
@@ -202,6 +201,23 @@ public class DictionaryPortlet extends MVCPortlet {
 			dics = DictionaryPortlet.findCode("", start, end, dictionaryId);
 		}
 		request.setAttribute("dics", dics);
+	}
+
+	// 查询代码项
+	public void find(ActionRequest request, ActionResponse response)
+			throws SystemException {
+		long dictionaryId = ParamUtil.getLong(request, "dictionaryId");
+		int pageSize = ParamUtil.getInteger(request, "delta", 15);
+		int pageNumber = ParamUtil.getInteger(request, "cur", 1);
+		int start = (pageNumber - 1) * pageSize;
+		int end = pageNumber * pageSize;
+		String keywords = ParamUtil.getString(request, "keywords");
+		int totalSize=DictionaryPortlet.findCode(keywords,
+				dictionaryId).size();
+		List<Dictionary> dics=DictionaryPortlet.findCode(keywords, start, end, dictionaryId);
+		request.setAttribute("dics", dics);
+		request.setAttribute("totalSize", totalSize);
+		request.setAttribute("keywords", keywords);
 	}
 
 	// 删除代码项
@@ -234,9 +250,9 @@ public class DictionaryPortlet extends MVCPortlet {
 		String desc = DictionaryLocalServiceUtil.getDictionary(dictionaryId)
 				.getDesc();
 		request.setAttribute("code", code);
+		request.setAttribute("isValid", isValid);
 		request.setAttribute("name", name);
 		request.setAttribute("tag", tag);
-		request.setAttribute("isValid", isValid);
 		request.setAttribute("desc", desc);
 	}
 
