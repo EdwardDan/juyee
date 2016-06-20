@@ -22,7 +22,7 @@
 		<property name="tag" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="isValid" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="treePath" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="sortPath" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="sortPath" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="parentId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
 </hibernate-mapping>

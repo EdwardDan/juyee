@@ -162,7 +162,7 @@ public class DictionaryWrapper implements Dictionary, ModelWrapper<Dictionary> {
 			setTreePath(treePath);
 		}
 
-		String sortPath = (String)attributes.get("sortPath");
+		Integer sortPath = (Integer)attributes.get("sortPath");
 
 		if (sortPath != null) {
 			setSortPath(sortPath);
@@ -543,7 +543,7 @@ public class DictionaryWrapper implements Dictionary, ModelWrapper<Dictionary> {
 	* @return the sort path of this dictionary
 	*/
 	@Override
-	public java.lang.String getSortPath() {
+	public int getSortPath() {
 		return _dictionary.getSortPath();
 	}
 
@@ -553,7 +553,7 @@ public class DictionaryWrapper implements Dictionary, ModelWrapper<Dictionary> {
 	* @param sortPath the sort path of this dictionary
 	*/
 	@Override
-	public void setSortPath(java.lang.String sortPath) {
+	public void setSortPath(int sortPath) {
 		_dictionary.setSortPath(sortPath);
 	}
 

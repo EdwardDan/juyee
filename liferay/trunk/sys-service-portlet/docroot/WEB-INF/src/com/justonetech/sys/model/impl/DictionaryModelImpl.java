@@ -81,10 +81,10 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 			{ "tag", Types.VARCHAR },
 			{ "isValid", Types.BOOLEAN },
 			{ "treePath", Types.VARCHAR },
-			{ "sortPath", Types.VARCHAR },
+			{ "sortPath", Types.INTEGER },
 			{ "parentId", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table sys_Dictionary (dictionaryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,code_ VARCHAR(75) null,name VARCHAR(75) null,isLeaf BOOLEAN,sortNo INTEGER,desc_ VARCHAR(75) null,tag VARCHAR(75) null,isValid BOOLEAN,treePath VARCHAR(75) null,sortPath VARCHAR(75) null,parentId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table sys_Dictionary (dictionaryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,code_ VARCHAR(75) null,name VARCHAR(75) null,isLeaf BOOLEAN,sortNo INTEGER,desc_ VARCHAR(75) null,tag VARCHAR(75) null,isValid BOOLEAN,treePath VARCHAR(75) null,sortPath INTEGER,parentId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table sys_Dictionary";
 	public static final String ORDER_BY_JPQL = " ORDER BY dictionary.sortPath ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY sys_Dictionary.sortPath ASC";
@@ -313,7 +313,7 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 			setTreePath(treePath);
 		}
 
-		String sortPath = (String)attributes.get("sortPath");
+		Integer sortPath = (Integer)attributes.get("sortPath");
 
 		if (sortPath != null) {
 			setSortPath(sortPath);
@@ -577,17 +577,12 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 
 	@JSON
 	@Override
-	public String getSortPath() {
-		if (_sortPath == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _sortPath;
-		}
+	public int getSortPath() {
+		return _sortPath;
 	}
 
 	@Override
-	public void setSortPath(String sortPath) {
+	public void setSortPath(int sortPath) {
 		_columnBitmask = -1L;
 
 		_sortPath = sortPath;
@@ -674,7 +669,15 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 	public int compareTo(Dictionary dictionary) {
 		int value = 0;
 
-		value = getSortPath().compareTo(dictionary.getSortPath());
+		if (getSortPath() < dictionary.getSortPath()) {
+			value = -1;
+		}
+		else if (getSortPath() > dictionary.getSortPath()) {
+			value = 1;
+		}
+		else {
+			value = 0;
+		}
 
 		if (value != 0) {
 			return value;
@@ -816,12 +819,6 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 		}
 
 		dictionaryCacheModel.sortPath = getSortPath();
-
-		String sortPath = dictionaryCacheModel.sortPath;
-
-		if ((sortPath != null) && (sortPath.length() == 0)) {
-			dictionaryCacheModel.sortPath = null;
-		}
 
 		dictionaryCacheModel.parentId = getParentId();
 
@@ -978,7 +975,7 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 	private boolean _originalIsValid;
 	private boolean _setOriginalIsValid;
 	private String _treePath;
-	private String _sortPath;
+	private int _sortPath;
 	private long _parentId;
 	private long _originalParentId;
 	private boolean _setOriginalParentId;

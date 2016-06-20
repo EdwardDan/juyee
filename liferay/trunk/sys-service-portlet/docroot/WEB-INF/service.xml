@@ -34,7 +34,7 @@
 		<column name="tag" type="String" /><!--特殊标记 -->
 		<column name="isValid" type="boolean" /><!--是否有效 -->
 		<column name="treePath" type="String" /><!--树结构地址 -->
-		<column name="sortPath" type="String" /><!--树结构排序号 -->
+		<column name="sortPath" type="int" /><!--树结构排序号 -->
 		<column name="parentId" type="long" /><!-- 父亲ID -->
 
 		<!-- Order -->

@@ -17,7 +17,7 @@
 		<field name="tag" type="String" />
 		<field name="isValid" type="boolean" />
 		<field name="treePath" type="String" />
-		<field name="sortPath" type="String" />
+		<field name="sortPath" type="int" />
 		<field name="parentId" type="long" />
 	</model>
 </model-hints>

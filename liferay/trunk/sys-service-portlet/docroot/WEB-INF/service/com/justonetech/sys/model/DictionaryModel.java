@@ -325,15 +325,14 @@ public interface DictionaryModel extends BaseModel<Dictionary>, GroupedModel {
 	 *
 	 * @return the sort path of this dictionary
 	 */
-	@AutoEscape
-	public String getSortPath();
+	public int getSortPath();
 
 	/**
 	 * Sets the sort path of this dictionary.
 	 *
 	 * @param sortPath the sort path of this dictionary
 	 */
-	public void setSortPath(String sortPath);
+	public void setSortPath(int sortPath);
 
 	/**
 	 * Returns the parent ID of this dictionary.
