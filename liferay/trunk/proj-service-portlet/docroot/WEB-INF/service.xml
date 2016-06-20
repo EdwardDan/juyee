@@ -1,8 +1,112 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
-<service-builder package-path="com.liferay.sample">
+<service-builder package-path="com.justonetech.proj">
 	<author>fanqi</author>
-	<namespace>SAMPLE</namespace>
+	<namespace>proj</namespace>
 
-	
+	<!-- 项目基本信息 -->
+	<entity name="Project" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="projectId" type="long" primary="true" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+
+		<!-- Other fields -->
+
+		<column name="bjbh" type="String" /><!--报建编号 -->
+		<column name="projNum" type="String" /><!--项目编号 -->
+		<column name="sortNo" type="String" /><!--项目排序号 -->
+		<column name="isMajor" type="boolean" /><!--是否重大 -->
+		<column name="areaCode" type="String" /><!--所属区县 -->
+		<column name="startDate" type="Date" /><!--实际开工日期 -->
+		<column name="endDate" type="Date" /><!--实际完成日期 -->
+		<column name="projName" type="String" /><!--项目名称 -->
+		<column name="location" type="String" /><!--起讫地点 -->
+		<column name="ghhx" type="double" /><!--规划红线（宽度m） -->
+		<column name="startNode" type="Date" /><!--目标开工节点 -->
+		<column name="endNode" type="Date" /><!--目标完工节点 -->
+		<column name="planStartDate" type="Date" /><!--目标计划开工时间 -->
+		<column name="planEndDate" type="Date" /><!--目标计划完工时间 -->
+		<column name="introduction" type="String" /><!--工程范围和主要内容 -->
+		<column name="planTotle" type="double" /><!--计划总投资 -->
+		<column name="gkpfTotle" type="double" /><!--工可批复总投资 -->
+		<column name="gkpfPre" type="double" /><!--工可批复前期费用 -->
+		<column name="gkpfJafy" type="double" /><!--工可批复建安费用 -->
+		<column name="csTotle" type="double" /><!--初设批复总投资 -->
+		<column name="csPre" type="double" /><!--初设批复前期费用 -->
+		<column name="csJafy" type="double" /><!--初设批复建安费用 -->
+
+		<!-- Order -->
+
+		<order>
+			<order-column name="sortNo" order-by="asc" />
+			<order-column name="projectId" order-by="asc" />
+		</order>
+
+		<!-- Finder methods -->
+
+	</entity>
+
+	<!-- 项目基本信息_扩展信息_各建设单位联系信息 -->
+	<entity name="Company" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="companyId" type="long" primary="true" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />	
+
+
+		<!-- Other fields -->
+
+		<column name="type" type="String" /><!--单位类别 -->
+		<column name="unitName" type="String" /><!--单位名称 -->
+		<column name="indepLegal" type="String" /><!--独立法人 -->
+		<column name="indepLegalTel" type="String" /><!--独立法人电话 -->
+		<column name="indepLegalFax" type="String" /><!--独立法人传真 -->
+		<column name="indepLegalPhone" type="String" /><!--独立法人手机 -->
+		<column name="projLegal" type="String" /><!--项目法人 -->
+		<column name="projLegalTel" type="String" /><!--项目法人电话 -->
+		<column name="projLegalFax" type="String" /><!--项目法人传真 -->
+		<column name="projLegalPhone" type="String" /><!--项目法人手机 -->
+		<column name="linkman" type="String" /><!--联系人 -->
+		<column name="linkmanTel" type="String" /><!--联系人电话 -->
+		<column name="linkmanFax" type="String" /><!--联系人传真 -->
+		<column name="linkmanPhone" type="String" /><!--联系人手机 -->
+
+
+		<!-- Order -->
+
+		<order>
+			<order-column name="companyId" order-by="asc" />
+		</order>
+
+		<!-- Finder methods -->
+
+	</entity>
+
+
 </service-builder>
