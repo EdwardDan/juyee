@@ -5,18 +5,18 @@
 
 <%
 	Long dictionaryId = (Long) request.getAttribute("dictionaryId");
+	System.out.println("dicIdcheck================="+dictionaryId);
     Integer totalSize=(Integer)request.getAttribute("totalSize");
 %>
 <portlet:renderURL var="def" />
-<portlet:actionURL var="add" name="pass">
+<portlet:renderURL var="add">
 	<portlet:param name="mvcPath" value="/portlet/dictionary/add.jsp" />
 	<portlet:param name="dictionaryId" value="${dictionaryId}" />
-</portlet:actionURL>
+</portlet:renderURL>
 <portlet:actionURL var="find" name="find">
 <portlet:param name="mvcPath" value="/portlet/dictionary/check.jsp"/>
 <portlet:param name="dictionaryId" value="${dictionaryId}"/>
 </portlet:actionURL>
-
 <liferay-ui:header title="查看代码集" backURL="${def}" />
 <aui:form action="${input}" method="post">
 	<aui:input type="text" label="编码：" name="code" value="${code}"></aui:input>

@@ -75,18 +75,18 @@ public class DictionaryPortlet extends MVCPortlet {
 		String name = ParamUtil.getString(request, "name");
 		String desc = ParamUtil.getString(request, "desc");
 		Dictionary dic = null;
+
 		if (Validator.isNotNull(dictionaryId)) {
 			dic = DictionaryLocalServiceUtil.getDictionary(dictionaryId);
 		} else {
 			dic = DictionaryLocalServiceUtil
 					.createDictionary(CounterLocalServiceUtil.increment());
 		}
-		String treePath = "/" + dictionaryId + "/";
 		dic.setCode(code);
 		dic.setName(name);
 		dic.setDesc(desc);
 		dic.setParentId(0);
-		dic.setTreePath(treePath);
+		dic.setTreePath("/"+dic.getDictionaryId()+"/");
 		DictionaryLocalServiceUtil.updateDictionary(dic);
 	}
 
@@ -152,6 +152,7 @@ public class DictionaryPortlet extends MVCPortlet {
 			dic.setIsValid(isValid);
 			dic.setDesc(desc);
 			dic.setParentId(parentID);
+			dic.setTreePath("/"+dic.getParentId()+"/"+dic.getDictionaryId()+"/");
 		} else {
 			dic = DictionaryLocalServiceUtil
 					.createDictionary(CounterLocalServiceUtil.increment());
@@ -162,14 +163,9 @@ public class DictionaryPortlet extends MVCPortlet {
 			dic.setIsValid(isValid);
 			dic.setDesc(desc);
 			dic.setParentId(parentId);
+			dic.setTreePath("/"+dic.getParentId()+"/"+dic.getDictionaryId()+"/");
 		}
 		DictionaryLocalServiceUtil.updateDictionary(dic);
-	}
-
-	// 传值用
-	public void pass(ActionRequest request, ActionResponse response) {
-		long dictionaryId = ParamUtil.getLong(request, "dictionaryId");
-		request.setAttribute("dictionaryId", dictionaryId);
 	}
 
 	// 查看代码项
@@ -212,9 +208,10 @@ public class DictionaryPortlet extends MVCPortlet {
 		int start = (pageNumber - 1) * pageSize;
 		int end = pageNumber * pageSize;
 		String keywords = ParamUtil.getString(request, "keywords");
-		int totalSize=DictionaryPortlet.findCode(keywords,
-				dictionaryId).size();
-		List<Dictionary> dics=DictionaryPortlet.findCode(keywords, start, end, dictionaryId);
+		int totalSize = DictionaryPortlet.findCode(keywords, dictionaryId)
+				.size();
+		List<Dictionary> dics = DictionaryPortlet.findCode(keywords, start,
+				end, dictionaryId);
 		request.setAttribute("dics", dics);
 		request.setAttribute("totalSize", totalSize);
 		request.setAttribute("keywords", keywords);
@@ -256,6 +253,7 @@ public class DictionaryPortlet extends MVCPortlet {
 		request.setAttribute("desc", desc);
 	}
 
+	
 	public static List<Dictionary> findCodes(String keyword, int start, int end)
 			throws SystemException {
 		DynamicQuery query = DynamicQueryFactoryUtil

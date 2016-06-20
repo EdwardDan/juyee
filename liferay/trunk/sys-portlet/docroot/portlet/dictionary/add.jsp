@@ -1,9 +1,11 @@
+<%@page import="com.liferay.portal.kernel.util.ParamUtil"%>
 <%@page import="com.liferay.portal.kernel.util.Validator"%>
 <%@include file="/common/init.jsp"%>
 <%@ page contentType="text/html;charset=utf-8"%>
 
 <%
-	Long dictionaryId = (Long) request.getAttribute("dictionaryId");
+	long dictionaryId = ParamUtil.getLong(request, "dictionaryId");
+	System.out.println("dicIdadd======================"+dictionaryId);
 	Long parentID = (Long) request.getAttribute("parentId");
 %>
 <portlet:actionURL var="add" name="add">
@@ -14,7 +16,8 @@
 
 <aui:form action="${add}" method="post">
 	<aui:input name="parentID" type="hidden" value="<%=parentID%>" />
-	<aui:input name="dictionaryId" type="hidden" value="${dictionaryId}" />
+	<aui:input name="dictionaryId" type="hidden" value="<%=dictionaryId%>" />
+	
 	<aui:input type="text" label="编码：" name="code" value="${code}">
 		<aui:validator name="required" errorMessage="这里不可空白!"></aui:validator>
 	</aui:input>

@@ -65,4 +65,3 @@
 		</liferay-ui:search-iterator>
 	</liferay-ui:search-container>
 </aui:form>
-
