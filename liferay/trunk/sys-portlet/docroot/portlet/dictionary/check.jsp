@@ -5,7 +5,6 @@
 
 <%
 	Long dictionaryId = (Long) request.getAttribute("dictionaryId");
-	System.out.println("dicIdcheck================="+dictionaryId);
     Integer totalSize=(Integer)request.getAttribute("totalSize");
 %>
 <portlet:renderURL var="def" />

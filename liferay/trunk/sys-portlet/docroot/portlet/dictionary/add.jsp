@@ -5,7 +5,6 @@
 
 <%
 	long dictionaryId = ParamUtil.getLong(request, "dictionaryId");
-	System.out.println("dicIdadd======================"+dictionaryId);
 	Long parentID = (Long) request.getAttribute("parentId");
 %>
 <portlet:actionURL var="add" name="add">

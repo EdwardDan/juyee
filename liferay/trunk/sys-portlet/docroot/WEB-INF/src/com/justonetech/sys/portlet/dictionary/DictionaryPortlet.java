@@ -1,7 +1,8 @@
 package com.justonetech.sys.portlet.dictionary;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.ArrayList;
+import java.util.*;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -12,6 +13,7 @@ import javax.portlet.RenderResponse;
 import com.justonetech.sys.model.Dictionary;
 import com.justonetech.sys.service.DictionaryLocalServiceUtil;
 import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.dao.orm.Criterion;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.Junction;
@@ -22,6 +24,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.bridges.mvc.MVCPortlet;
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
 
 /**
  * Portlet implementation class DictionaryPortlet
@@ -43,21 +46,18 @@ public class DictionaryPortlet extends MVCPortlet {
 		try {
 			totalSize = DictionaryPortlet.findCodes(keyword).size();
 		} catch (SystemException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		if (Validator.isNotNull(keyword)) {
 			try {
 				dics = DictionaryPortlet.findCodes(keyword, start, end);
 			} catch (SystemException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		} else {
 			try {
 				dics = DictionaryPortlet.findCodes("", start, end);
 			} catch (SystemException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -76,17 +76,31 @@ public class DictionaryPortlet extends MVCPortlet {
 		String desc = ParamUtil.getString(request, "desc");
 		Dictionary dic = null;
 
+		int sortNo = 0;
+		List<Integer> list = new ArrayList<Integer>();
+
 		if (Validator.isNotNull(dictionaryId)) {
 			dic = DictionaryLocalServiceUtil.getDictionary(dictionaryId);
+			sortNo = dic.getSortPath();
 		} else {
 			dic = DictionaryLocalServiceUtil
 					.createDictionary(CounterLocalServiceUtil.increment());
 		}
+
 		dic.setCode(code);
 		dic.setName(name);
 		dic.setDesc(desc);
 		dic.setParentId(0);
-		dic.setTreePath("/"+dic.getDictionaryId()+"/");
+		dic.setSortNo(sortNo);
+		dic.setTreePath("/" + dic.getDictionaryId());
+		DictionaryLocalServiceUtil.updateDictionary(dic);
+
+		List<Dictionary> ds = DictionaryPortlet.findPath();
+		for (Dictionary d : ds) {
+			list.add(d.getSortNo());
+		}
+		sortNo = java.util.Collections.max(list) + 1;
+		dic.setSortNo(sortNo);
 		DictionaryLocalServiceUtil.updateDictionary(dic);
 	}
 
@@ -144,28 +158,47 @@ public class DictionaryPortlet extends MVCPortlet {
 		if (ParamUtil.getInteger(request, "isValid") == 2) {
 			isValid = false;
 		}
+		int sortNo = 0;
+
 		if (Validator.isNotNull(parentID)) {
 			dic = DictionaryLocalServiceUtil.getDictionary(dictionaryId);
+			dic.setParentId(parentID);
+			dic.setTreePath("/" + dic.getParentId() + "/"
+					+ dic.getDictionaryId());
+			dic.setSortNo(dic.getSortNo());
 			dic.setCode(code);
 			dic.setName(name);
 			dic.setTag(tag);
 			dic.setIsValid(isValid);
 			dic.setDesc(desc);
-			dic.setParentId(parentID);
-			dic.setTreePath("/"+dic.getParentId()+"/"+dic.getDictionaryId()+"/");
+			DictionaryLocalServiceUtil.updateDictionary(dic);
 		} else {
 			dic = DictionaryLocalServiceUtil
 					.createDictionary(CounterLocalServiceUtil.increment());
 			long parentId = dictionaryId;
+
+			dic.setParentId(parentId);
+			dic.setTreePath("/" + dic.getParentId() + "/"
+					+ dic.getDictionaryId());
+			dic.setSortNo(sortNo);
+
 			dic.setCode(code);
 			dic.setName(name);
 			dic.setTag(tag);
 			dic.setIsValid(isValid);
 			dic.setDesc(desc);
-			dic.setParentId(parentId);
-			dic.setTreePath("/"+dic.getParentId()+"/"+dic.getDictionaryId()+"/");
+			DictionaryLocalServiceUtil.updateDictionary(dic);
+			List<Dictionary> ds = DictionaryPortlet
+					.findPath1(dic.getParentId());
+			List<Integer> list = new ArrayList<Integer>();
+			for (Dictionary d : ds) {
+				list.add(d.getSortNo());
+			}
+			sortNo = java.util.Collections.max(list) + 1;
+			System.out.println("====================="+sortNo);
+			dic.setSortNo(sortNo);
+			DictionaryLocalServiceUtil.updateDictionary(dic);
 		}
-		DictionaryLocalServiceUtil.updateDictionary(dic);
 	}
 
 	// 查看代码项
@@ -253,7 +286,6 @@ public class DictionaryPortlet extends MVCPortlet {
 		request.setAttribute("desc", desc);
 	}
 
-	
 	public static List<Dictionary> findCodes(String keyword, int start, int end)
 			throws SystemException {
 		DynamicQuery query = DynamicQueryFactoryUtil
@@ -312,6 +344,23 @@ public class DictionaryPortlet extends MVCPortlet {
 		junction.add(PropertyFactoryUtil.forName("code").like(
 				"%" + keyword + "%"));
 		query.add(junction);
+		return (List<Dictionary>) DictionaryLocalServiceUtil
+				.dynamicQuery(query);
+	}
+
+	public static List<Dictionary> findPath() throws SystemException {
+		DynamicQuery query = DynamicQueryFactoryUtil
+				.forClass(com.justonetech.sys.model.Dictionary.class);
+		query.add(PropertyFactoryUtil.forName("parentId").eq(0L));
+		return (List<Dictionary>) DictionaryLocalServiceUtil
+				.dynamicQuery(query);
+	}
+
+	public static List<Dictionary> findPath1(long id) throws SystemException {
+		DynamicQuery query = DynamicQueryFactoryUtil
+				.forClass(com.justonetech.sys.model.Dictionary.class);
+		query.add(PropertyFactoryUtil.forName("parentId").ne(0L));
+		query.add(PropertyFactoryUtil.forName("parentId").eq(id));
 		return (List<Dictionary>) DictionaryLocalServiceUtil
 				.dynamicQuery(query);
 	}
