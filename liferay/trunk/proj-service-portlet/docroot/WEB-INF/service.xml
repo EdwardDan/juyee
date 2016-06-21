@@ -39,6 +39,7 @@
 		<column name="endDate" type="Date" /><!--实际完成日期 -->
 		<column name="projName" type="String" /><!--项目名称 -->
 		<column name="location" type="String" /><!--起讫地点 -->
+		<column name="involveCounty" type="String" /><!--涉及区（县） -->
 		<column name="ghhx" type="double" /><!--规划红线（宽度m） -->
 		<column name="roadLevel" type="long" /><!--道路等级 -->
 		<column name="roadTechLevel" type="long" /><!--道路技术等级 -->
@@ -119,6 +120,7 @@
 		<column name="bidName" type="String" /><!--标段名称 -->
 		<column name="bidCategoryCode" type="String" /><!--标段类别编码(形象进度/办证推进) -->
 		<column name="buildMileage" type="String" /><!--建设里程 -->
+		<column name="involveCounty" type="String" /><!--涉及区（县） -->
 		<column name="projLinkman" type="String" /><!--项目联系人 -->
 		<column name="linkTel" type="String" /><!--联系电话 -->
 		<column name="startDate" type="Date" /><!--开工日期 -->
