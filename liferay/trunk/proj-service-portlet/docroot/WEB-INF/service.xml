@@ -23,12 +23,11 @@
 		<column name="createDate" type="Date" />
 		<column name="modifiedDate" type="Date" />
 
-
 		<!-- Other fields -->
 
 		<column name="bjbh" type="String" /><!--报建编号 -->
 		<column name="projNum" type="String" /><!--项目编号 -->
-		<column name="sortNo" type="String" /><!--项目排序号 -->
+		<column name="sortNo" type="int" /><!--项目排序号 -->
 		<column name="isMajor" type="boolean" /><!--是否重大 -->
 		<column name="areaCode" type="String" /><!--所属区县 -->
 		<column name="startDate" type="Date" /><!--实际开工日期 -->
@@ -77,8 +76,7 @@
 		<column name="userId" type="long" />
 		<column name="userName" type="String" />
 		<column name="createDate" type="Date" />
-		<column name="modifiedDate" type="Date" />	
-
+		<column name="modifiedDate" type="Date" />
 
 		<!-- Other fields -->
 
@@ -96,7 +94,7 @@
 		<column name="linkmanTel" type="String" /><!--联系人电话 -->
 		<column name="linkmanFax" type="String" /><!--联系人传真 -->
 		<column name="linkmanPhone" type="String" /><!--联系人手机 -->
-
+		<column name="projectId" type="long" /><!--项目ID -->
 
 		<!-- Order -->
 
@@ -108,5 +106,61 @@
 
 	</entity>
 
+	<!-- 标段信息 -->
+	<entity name="Bidding" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="biddingId" type="long" primary="true" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+
+		<!-- Other fields -->
+
+		<column name="bidCode" type="String" /><!--标段编号 -->
+		<column name="sortNo" type="int" /><!--标段序号 -->
+		<column name="bidName" type="String" /><!--标段名称 -->
+		<column name="bidCategoryCode" type="String" /><!--标段类别编码(形象进度/办证推进) -->
+		<column name="buildMileage" type="String" /><!--建设里程 -->
+		<column name="projLinkman" type="String" /><!--项目联系人 -->
+		<column name="linkTel" type="String" /><!--联系电话 -->
+		<column name="startDate" type="Date" /><!--开工日期 -->
+		<column name="buildUnitName" type="String" /><!--建设单位名称 -->
+		<column name="buildUnitLinkman" type="String" /><!--建设单位联系人 -->
+		<column name="buildUnitTel" type="String" /><!--建设单位联系电话 -->
+		<column name="prospectUnitName" type="String" /><!--勘察单位名称 -->
+		<column name="prospectUnitLinkman" type="String" /><!--勘察单位联系人 -->
+		<column name="prospectUnitTel" type="String" /><!--勘察单位联系电话 -->
+		<column name="designUnitName" type="String" /><!--设计单位名称 -->
+		<column name="designUnitLinkman" type="String" /><!--设计单位联系人 -->
+		<column name="designUnitTel" type="String" /><!--设计单位联系电话 -->
+		<column name="constructUnitName" type="String" /><!--施工单位名称 -->
+		<column name="constructUnitLinkman" type="String" /><!--施工单位联系人 -->
+		<column name="constructUnitTel" type="String" /><!--施工单位联系电话 -->
+		<column name="supervisionUnitName" type="String" /><!--监理单位名称 -->
+		<column name="supervisionUnitLinkman" type="String" /><!--监理单位联系人 -->
+		<column name="supervisionUnitTel" type="String" /><!--监理单位联系电话 -->
+		<column name="projectId" type="long" /><!--项目ID -->
+
+		<!-- Order -->
+
+		<order>
+			<order-column name="biddingId" order-by="asc" />
+		</order>
+
+		<!-- Finder methods -->
+
+	</entity>
 
 </service-builder>
