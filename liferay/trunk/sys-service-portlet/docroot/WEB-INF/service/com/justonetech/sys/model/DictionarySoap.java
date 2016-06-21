@@ -228,11 +228,11 @@ public class DictionarySoap implements Serializable {
 		_treePath = treePath;
 	}
 
-	public int getSortPath() {
+	public String getSortPath() {
 		return _sortPath;
 	}
 
-	public void setSortPath(int sortPath) {
+	public void setSortPath(String sortPath) {
 		_sortPath = sortPath;
 	}
 
@@ -259,6 +259,6 @@ public class DictionarySoap implements Serializable {
 	private String _tag;
 	private boolean _isValid;
 	private String _treePath;
-	private int _sortPath;
+	private String _sortPath;
 	private long _parentId;
 }

@@ -14,6 +14,6 @@ create table sys_Dictionary (
 	tag VARCHAR(75) null,
 	isValid BOOLEAN,
 	treePath VARCHAR(75) null,
-	sortPath INTEGER,
+	sortPath VARCHAR(75) null,
 	parentId LONG
 );

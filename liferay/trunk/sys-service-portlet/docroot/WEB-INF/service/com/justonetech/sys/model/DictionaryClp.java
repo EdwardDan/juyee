@@ -188,7 +188,7 @@ public class DictionaryClp extends BaseModelImpl<Dictionary>
 			setTreePath(treePath);
 		}
 
-		Integer sortPath = (Integer)attributes.get("sortPath");
+		String sortPath = (String)attributes.get("sortPath");
 
 		if (sortPath != null) {
 			setSortPath(sortPath);
@@ -567,19 +567,19 @@ public class DictionaryClp extends BaseModelImpl<Dictionary>
 	}
 
 	@Override
-	public int getSortPath() {
+	public String getSortPath() {
 		return _sortPath;
 	}
 
 	@Override
-	public void setSortPath(int sortPath) {
+	public void setSortPath(String sortPath) {
 		_sortPath = sortPath;
 
 		if (_dictionaryRemoteModel != null) {
 			try {
 				Class<?> clazz = _dictionaryRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setSortPath", int.class);
+				Method method = clazz.getMethod("setSortPath", String.class);
 
 				method.invoke(_dictionaryRemoteModel, sortPath);
 			}
@@ -738,15 +738,7 @@ public class DictionaryClp extends BaseModelImpl<Dictionary>
 	public int compareTo(Dictionary dictionary) {
 		int value = 0;
 
-		if (getSortPath() < dictionary.getSortPath()) {
-			value = -1;
-		}
-		else if (getSortPath() > dictionary.getSortPath()) {
-			value = 1;
-		}
-		else {
-			value = 0;
-		}
+		value = getSortPath().compareTo(dictionary.getSortPath());
 
 		if (value != 0) {
 			return value;
@@ -927,7 +919,7 @@ public class DictionaryClp extends BaseModelImpl<Dictionary>
 	private String _tag;
 	private boolean _isValid;
 	private String _treePath;
-	private int _sortPath;
+	private String _sortPath;
 	private long _parentId;
 	private BaseModel<?> _dictionaryRemoteModel;
 	private Class<?> _clpSerializerClass = com.justonetech.sys.service.ClpSerializer.class;
