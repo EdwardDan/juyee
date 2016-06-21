@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd">
+	<persistence-unit-metadata>
+		<xml-mapping-metadata-complete/>
+		<persistence-unit-defaults>
+			<access>PROPERTY</access>
+		</persistence-unit-defaults>
+	</persistence-unit-metadata>
+	<mapped-superclass class="com.justonetech.proj.model.impl.BiddingModelImpl">
+		<attributes>
+			<id name="biddingId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="bidCode" />
+			<basic name="sortNo" />
+			<basic name="bidName" />
+			<basic name="bidCategoryCode" />
+			<basic name="buildMileage" />
+			<basic name="involveCounty" />
+			<basic name="projLinkman" />
+			<basic name="linkTel" />
+			<basic name="startDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="projectId" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.justonetech.proj.model.impl.CompanyModelImpl">
+		<attributes>
+			<id name="companyId" />
+			<basic name="type">
+				<column name="TYPE_" />
+			</basic>
+			<basic name="unitName" />
+			<basic name="indepLegal" />
+			<basic name="indepLegalTel" />
+			<basic name="indepLegalFax" />
+			<basic name="indepLegalPhone" />
+			<basic name="projLegal" />
+			<basic name="projLegalTel" />
+			<basic name="projLegalFax" />
+			<basic name="projLegalPhone" />
+			<basic name="linkman" />
+			<basic name="linkmanTel" />
+			<basic name="linkmanFax" />
+			<basic name="linkmanPhone" />
+			<basic name="projectId" />
+			<basic name="biddingId" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.justonetech.proj.model.impl.ProjectModelImpl">
+		<attributes>
+			<id name="projectId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="bjbh" />
+			<basic name="projNum" />
+			<basic name="sortNo" />
+			<basic name="projStatus" />
+			<basic name="industryCategory" />
+			<basic name="manageAttr" />
+			<basic name="isMajor" />
+			<basic name="projSource" />
+			<basic name="belongCounty" />
+			<basic name="projAttr" />
+			<basic name="startDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="endDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="projName" />
+			<basic name="location" />
+			<basic name="involveCounty" />
+			<basic name="ghhx" />
+			<basic name="roadLevel" />
+			<basic name="roadTechLevel" />
+			<basic name="startNode">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="endNode">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="planStartDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="planEndDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="introduction" />
+			<basic name="planTotle" />
+			<basic name="gkpfTotle" />
+			<basic name="gkpfPre" />
+			<basic name="gkpfJafy" />
+			<basic name="csTotle" />
+			<basic name="csPre" />
+			<basic name="csJafy" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<entity class="com.justonetech.proj.model.impl.BiddingImpl" name="Bidding">
+		<table name="proj_Bidding" />
+		<attributes />
+	</entity>
+	<entity class="com.justonetech.proj.model.impl.CompanyImpl" name="Company">
+		<table name="proj_Company" />
+		<attributes />
+	</entity>
+	<entity class="com.justonetech.proj.model.impl.ProjectImpl" name="Project">
+		<table name="proj_Project" />
+		<attributes />
+	</entity>
+</entity-mappings>

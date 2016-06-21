@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<bean id="com.justonetech.proj.service.BiddingLocalService" class="com.justonetech.proj.service.impl.BiddingLocalServiceImpl" />
+	<bean id="com.justonetech.proj.service.BiddingService" class="com.justonetech.proj.service.impl.BiddingServiceImpl" />
+	<bean id="com.justonetech.proj.service.persistence.BiddingPersistence" class="com.justonetech.proj.service.persistence.BiddingPersistenceImpl" parent="basePersistence" />
+	<bean id="com.justonetech.proj.service.CompanyLocalService" class="com.justonetech.proj.service.impl.CompanyLocalServiceImpl" />
+	<bean id="com.justonetech.proj.service.CompanyService" class="com.justonetech.proj.service.impl.CompanyServiceImpl" />
+	<bean id="com.justonetech.proj.service.persistence.CompanyPersistence" class="com.justonetech.proj.service.persistence.CompanyPersistenceImpl" parent="basePersistence" />
+	<bean id="com.justonetech.proj.service.ProjectLocalService" class="com.justonetech.proj.service.impl.ProjectLocalServiceImpl" />
+	<bean id="com.justonetech.proj.service.ProjectService" class="com.justonetech.proj.service.impl.ProjectServiceImpl" />
+	<bean id="com.justonetech.proj.service.persistence.ProjectPersistence" class="com.justonetech.proj.service.persistence.ProjectPersistenceImpl" parent="basePersistence" />
+</beans>

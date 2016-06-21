@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.justonetech.proj.model.Bidding">
+		<field name="biddingId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="bidCode" type="String" />
+		<field name="sortNo" type="int" />
+		<field name="bidName" type="String" />
+		<field name="bidCategoryCode" type="String" />
+		<field name="buildMileage" type="String" />
+		<field name="involveCounty" type="String" />
+		<field name="projLinkman" type="String" />
+		<field name="linkTel" type="String" />
+		<field name="startDate" type="Date" />
+		<field name="projectId" type="long" />
+	</model>
+	<model name="com.justonetech.proj.model.Company">
+		<field name="companyId" type="long" />
+		<field name="type" type="String" />
+		<field name="unitName" type="String" />
+		<field name="indepLegal" type="String" />
+		<field name="indepLegalTel" type="String" />
+		<field name="indepLegalFax" type="String" />
+		<field name="indepLegalPhone" type="String" />
+		<field name="projLegal" type="String" />
+		<field name="projLegalTel" type="String" />
+		<field name="projLegalFax" type="String" />
+		<field name="projLegalPhone" type="String" />
+		<field name="linkman" type="String" />
+		<field name="linkmanTel" type="String" />
+		<field name="linkmanFax" type="String" />
+		<field name="linkmanPhone" type="String" />
+		<field name="projectId" type="long" />
+		<field name="biddingId" type="long" />
+	</model>
+	<model name="com.justonetech.proj.model.Project">
+		<field name="projectId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="bjbh" type="String" />
+		<field name="projNum" type="String" />
+		<field name="sortNo" type="int" />
+		<field name="projStatus" type="long" />
+		<field name="industryCategory" type="long" />
+		<field name="manageAttr" type="long" />
+		<field name="isMajor" type="boolean" />
+		<field name="projSource" type="long" />
+		<field name="belongCounty" type="long" />
+		<field name="projAttr" type="long" />
+		<field name="startDate" type="Date" />
+		<field name="endDate" type="Date" />
+		<field name="projName" type="String" />
+		<field name="location" type="String" />
+		<field name="involveCounty" type="String" />
+		<field name="ghhx" type="double" />
+		<field name="roadLevel" type="long" />
+		<field name="roadTechLevel" type="long" />
+		<field name="startNode" type="Date" />
+		<field name="endNode" type="Date" />
+		<field name="planStartDate" type="Date" />
+		<field name="planEndDate" type="Date" />
+		<field name="introduction" type="String" />
+		<field name="planTotle" type="double" />
+		<field name="gkpfTotle" type="double" />
+		<field name="gkpfPre" type="double" />
+		<field name="gkpfJafy" type="double" />
+		<field name="csTotle" type="double" />
+		<field name="csPre" type="double" />
+		<field name="csJafy" type="double" />
+	</model>
+</model-hints>

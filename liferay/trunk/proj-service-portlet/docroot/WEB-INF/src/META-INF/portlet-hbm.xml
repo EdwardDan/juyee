@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="com.justonetech.proj.model.Bidding" />
+	<import class="com.justonetech.proj.model.Company" />
+	<import class="com.justonetech.proj.model.Project" />
+	<class name="com.justonetech.proj.model.impl.BiddingImpl" table="proj_Bidding">
+		<cache usage="read-write" />
+		<id name="biddingId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="bidCode" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="sortNo" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="bidName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="bidCategoryCode" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="buildMileage" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="involveCounty" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="projLinkman" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="linkTel" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="startDate" type="org.hibernate.type.TimestampType" />
+		<property name="projectId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="com.justonetech.proj.model.impl.CompanyImpl" table="proj_Company">
+		<cache usage="read-write" />
+		<id name="companyId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="type" type="com.liferay.portal.dao.orm.hibernate.StringType" column="type_" />
+		<property name="unitName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="indepLegal" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="indepLegalTel" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="indepLegalFax" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="indepLegalPhone" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="projLegal" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="projLegalTel" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="projLegalFax" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="projLegalPhone" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="linkman" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="linkmanTel" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="linkmanFax" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="linkmanPhone" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="projectId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="biddingId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="com.justonetech.proj.model.impl.ProjectImpl" table="proj_Project">
+		<cache usage="read-write" />
+		<id name="projectId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="bjbh" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="projNum" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="sortNo" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="projStatus" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="industryCategory" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="manageAttr" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="isMajor" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="projSource" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="belongCounty" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="projAttr" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="startDate" type="org.hibernate.type.TimestampType" />
+		<property name="endDate" type="org.hibernate.type.TimestampType" />
+		<property name="projName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="location" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="involveCounty" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="ghhx" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="roadLevel" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="roadTechLevel" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="startNode" type="org.hibernate.type.TimestampType" />
+		<property name="endNode" type="org.hibernate.type.TimestampType" />
+		<property name="planStartDate" type="org.hibernate.type.TimestampType" />
+		<property name="planEndDate" type="org.hibernate.type.TimestampType" />
+		<property name="introduction" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="planTotle" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="gkpfTotle" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="gkpfPre" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="gkpfJafy" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="csTotle" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="csPre" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="csJafy" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+	</class>
+</hibernate-mapping>
