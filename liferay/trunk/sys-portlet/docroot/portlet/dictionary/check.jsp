@@ -12,10 +12,10 @@
 	<portlet:param name="mvcPath" value="/portlet/dictionary/add.jsp" />
 	<portlet:param name="dictionaryId" value="${dictionaryId}" />
 </portlet:renderURL>
-<portlet:actionURL var="find" name="find">
+<%-- <portlet:actionURL var="find" name="find">
 <portlet:param name="mvcPath" value="/portlet/dictionary/check.jsp"/>
 <portlet:param name="dictionaryId" value="${dictionaryId}"/>
-</portlet:actionURL>
+</portlet:actionURL> --%>
 <liferay-ui:header title="查看代码集" backURL="${def}" />
 <aui:form action="${input}" method="post">
 	<aui:input type="text" label="编码：" name="code" value="${code}"></aui:input>
@@ -31,14 +31,14 @@
 <form action="${find}" method="post">
 	<table align="center" width="100%">
 		<tr>
-			<td><form class="form-search">
+<%-- 			<td><form class="form-search">
 					<input type="text" placeholder="请输入关键字..."
 						class="input-medium search-query"
 						name="<portlet:namespace/>keywords" value="${keywords}"/>
 					<button type="submit" class="btn">
 						<i class="icon-search"></i>查询
 					</button>
-				</form></td>
+				</form></td> --%>
 			<td align="right"><a href="${add}" class="btn"><i
 					class="icon-plus"></i>添加代码项</a></td>
 		</tr>
