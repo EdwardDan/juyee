@@ -64,7 +64,7 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 	public static final String TABLE_NAME = "proj_Company";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "companyId", Types.BIGINT },
-			{ "type_", Types.VARCHAR },
+			{ "type_", Types.BIGINT },
 			{ "unitName", Types.VARCHAR },
 			{ "indepLegal", Types.VARCHAR },
 			{ "indepLegalTel", Types.VARCHAR },
@@ -81,7 +81,7 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 			{ "projectId", Types.BIGINT },
 			{ "biddingId", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table proj_Company (companyId LONG not null primary key,type_ VARCHAR(75) null,unitName VARCHAR(75) null,indepLegal VARCHAR(75) null,indepLegalTel VARCHAR(75) null,indepLegalFax VARCHAR(75) null,indepLegalPhone VARCHAR(75) null,projLegal VARCHAR(75) null,projLegalTel VARCHAR(75) null,projLegalFax VARCHAR(75) null,projLegalPhone VARCHAR(75) null,linkman VARCHAR(75) null,linkmanTel VARCHAR(75) null,linkmanFax VARCHAR(75) null,linkmanPhone VARCHAR(75) null,projectId LONG,biddingId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table proj_Company (companyId LONG not null primary key,type_ LONG,unitName VARCHAR(75) null,indepLegal VARCHAR(75) null,indepLegalTel VARCHAR(75) null,indepLegalFax VARCHAR(75) null,indepLegalPhone VARCHAR(75) null,projLegal VARCHAR(75) null,projLegalTel VARCHAR(75) null,projLegalFax VARCHAR(75) null,projLegalPhone VARCHAR(75) null,linkman VARCHAR(75) null,linkmanTel VARCHAR(75) null,linkmanFax VARCHAR(75) null,linkmanPhone VARCHAR(75) null,projectId LONG,biddingId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table proj_Company";
 	public static final String ORDER_BY_JPQL = " ORDER BY company.companyId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY proj_Company.companyId ASC";
@@ -219,7 +219,7 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 			setCompanyId(companyId);
 		}
 
-		String type = (String)attributes.get("type");
+		Long type = (Long)attributes.get("type");
 
 		if (type != null) {
 			setType(type);
@@ -329,17 +329,12 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 
 	@JSON
 	@Override
-	public String getType() {
-		if (_type == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _type;
-		}
+	public long getType() {
+		return _type;
 	}
 
 	@Override
-	public void setType(String type) {
+	public void setType(long type) {
 		_type = type;
 	}
 
@@ -683,12 +678,6 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 
 		companyCacheModel.type = getType();
 
-		String type = companyCacheModel.type;
-
-		if ((type != null) && (type.length() == 0)) {
-			companyCacheModel.type = null;
-		}
-
 		companyCacheModel.unitName = getUnitName();
 
 		String unitName = companyCacheModel.unitName;
@@ -930,7 +919,7 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 			Company.class
 		};
 	private long _companyId;
-	private String _type;
+	private long _type;
 	private String _unitName;
 	private String _indepLegal;
 	private String _indepLegalTel;

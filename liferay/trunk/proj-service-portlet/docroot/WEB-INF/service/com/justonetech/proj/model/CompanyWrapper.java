@@ -77,7 +77,7 @@ public class CompanyWrapper implements Company, ModelWrapper<Company> {
 			setCompanyId(companyId);
 		}
 
-		String type = (String)attributes.get("type");
+		Long type = (Long)attributes.get("type");
 
 		if (type != null) {
 			setType(type);
@@ -220,7 +220,7 @@ public class CompanyWrapper implements Company, ModelWrapper<Company> {
 	* @return the type of this company
 	*/
 	@Override
-	public java.lang.String getType() {
+	public long getType() {
 		return _company.getType();
 	}
 
@@ -230,7 +230,7 @@ public class CompanyWrapper implements Company, ModelWrapper<Company> {
 	* @param type the type of this company
 	*/
 	@Override
-	public void setType(java.lang.String type) {
+	public void setType(long type) {
 		_company.setType(type);
 	}
 

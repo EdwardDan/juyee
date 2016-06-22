@@ -20,7 +20,7 @@
 	</model>
 	<model name="com.justonetech.proj.model.Company">
 		<field name="companyId" type="long" />
-		<field name="type" type="String" />
+		<field name="type" type="long" />
 		<field name="unitName" type="String" />
 		<field name="indepLegal" type="String" />
 		<field name="indepLegalTel" type="String" />

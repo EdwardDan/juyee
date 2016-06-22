@@ -76,15 +76,14 @@ public interface CompanyModel extends BaseModel<Company> {
 	 *
 	 * @return the type of this company
 	 */
-	@AutoEscape
-	public String getType();
+	public long getType();
 
 	/**
 	 * Sets the type of this company.
 	 *
 	 * @param type the type of this company
 	 */
-	public void setType(String type);
+	public void setType(long type);
 
 	/**
 	 * Returns the unit name of this company.

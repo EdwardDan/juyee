@@ -30,7 +30,7 @@
 		<id name="companyId" type="long">
 			<generator class="assigned" />
 		</id>
-		<property name="type" type="com.liferay.portal.dao.orm.hibernate.StringType" column="type_" />
+		<property name="type" type="com.liferay.portal.dao.orm.hibernate.LongType" column="type_" />
 		<property name="unitName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="indepLegal" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="indepLegalTel" type="com.liferay.portal.dao.orm.hibernate.StringType" />

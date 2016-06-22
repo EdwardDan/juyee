@@ -107,11 +107,11 @@ public class CompanySoap implements Serializable {
 		_companyId = companyId;
 	}
 
-	public String getType() {
+	public long getType() {
 		return _type;
 	}
 
-	public void setType(String type) {
+	public void setType(long type) {
 		_type = type;
 	}
 
@@ -236,7 +236,7 @@ public class CompanySoap implements Serializable {
 	}
 
 	private long _companyId;
-	private String _type;
+	private long _type;
 	private String _unitName;
 	private String _indepLegal;
 	private String _indepLegalTel;

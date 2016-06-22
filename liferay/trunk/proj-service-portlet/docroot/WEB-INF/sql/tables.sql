@@ -18,7 +18,7 @@ create table proj_Bidding (
 
 create table proj_Company (
 	companyId LONG not null primary key,
-	type_ VARCHAR(75) null,
+	type_ LONG,
 	unitName VARCHAR(75) null,
 	indepLegal VARCHAR(75) null,
 	indepLegalTel VARCHAR(75) null,

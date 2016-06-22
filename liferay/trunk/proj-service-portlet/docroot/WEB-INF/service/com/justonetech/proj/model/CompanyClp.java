@@ -101,7 +101,7 @@ public class CompanyClp extends BaseModelImpl<Company> implements Company {
 			setCompanyId(companyId);
 		}
 
-		String type = (String)attributes.get("type");
+		Long type = (Long)attributes.get("type");
 
 		if (type != null) {
 			setType(type);
@@ -222,19 +222,19 @@ public class CompanyClp extends BaseModelImpl<Company> implements Company {
 	}
 
 	@Override
-	public String getType() {
+	public long getType() {
 		return _type;
 	}
 
 	@Override
-	public void setType(String type) {
+	public void setType(long type) {
 		_type = type;
 
 		if (_companyRemoteModel != null) {
 			try {
 				Class<?> clazz = _companyRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setType", String.class);
+				Method method = clazz.getMethod("setType", long.class);
 
 				method.invoke(_companyRemoteModel, type);
 			}
@@ -859,7 +859,7 @@ public class CompanyClp extends BaseModelImpl<Company> implements Company {
 	}
 
 	private long _companyId;
-	private String _type;
+	private long _type;
 	private String _unitName;
 	private String _indepLegal;
 	private String _indepLegalTel;

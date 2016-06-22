@@ -81,13 +81,7 @@ public class CompanyCacheModel implements CacheModel<Company>, Externalizable {
 		CompanyImpl companyImpl = new CompanyImpl();
 
 		companyImpl.setCompanyId(companyId);
-
-		if (type == null) {
-			companyImpl.setType(StringPool.BLANK);
-		}
-		else {
-			companyImpl.setType(type);
-		}
+		companyImpl.setType(type);
 
 		if (unitName == null) {
 			companyImpl.setUnitName(StringPool.BLANK);
@@ -191,7 +185,7 @@ public class CompanyCacheModel implements CacheModel<Company>, Externalizable {
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		companyId = objectInput.readLong();
-		type = objectInput.readUTF();
+		type = objectInput.readLong();
 		unitName = objectInput.readUTF();
 		indepLegal = objectInput.readUTF();
 		indepLegalTel = objectInput.readUTF();
@@ -213,13 +207,7 @@ public class CompanyCacheModel implements CacheModel<Company>, Externalizable {
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(companyId);
-
-		if (type == null) {
-			objectOutput.writeUTF(StringPool.BLANK);
-		}
-		else {
-			objectOutput.writeUTF(type);
-		}
+		objectOutput.writeLong(type);
 
 		if (unitName == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
@@ -317,7 +305,7 @@ public class CompanyCacheModel implements CacheModel<Company>, Externalizable {
 	}
 
 	public long companyId;
-	public String type;
+	public long type;
 	public String unitName;
 	public String indepLegal;
 	public String indepLegalTel;
