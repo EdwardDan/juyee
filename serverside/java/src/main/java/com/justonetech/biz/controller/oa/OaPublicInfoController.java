@@ -65,61 +65,6 @@ public class OaPublicInfoController extends BaseCRUDActionController<OaPublicInf
     @Autowired
     private SysCodeManager sysCodeManager;
 
-    @RequestMapping
-    public String data(){
-        return "view/oa/oaPublicInfo/data";
-    }
-
-    @RequestMapping
-    public String doData(Model model,HttpServletResponse response, String filters, String columns, int page, int rows, String typeCode, String range,HttpSession session) {
-        try {
-            Boolean canEdit = sysUserManager.hasPrivilege(PrivilegeCode.OA_PUBLIC_INFO_EDIT);
-
-            Page<OaPublicInfo> pageModel = new Page<OaPublicInfo>(page, rows, true);
-            String hql = "from OaPublicInfo where 1=1";
-
-            //信息类型过滤
-            if (!StringHelper.isEmpty(typeCode)) {
-                hql += " and type.code='" + typeCode + "'";
-            }
-            //发布范围过滤
-            if (!StringHelper.isEmpty(range)) {
-                hql += " and (accessRange.code='" + Constants.OA_PUBLIC_INFO_RANGE_ALL + "' or accessRange.code='" + range + "')";
-            }
-            //如有编辑权限则可看到全部记录
-            if (canEdit) {
-                hql += " order by id desc";
-            } else {
-                //没有编辑权限那么只能看到已发布的有效记录
-                hql += " and isValid=" + Constants.FLAG_TRUE + " and isPublic=" + Constants.FLAG_TRUE;
-                hql += " order by isTop desc,reportDate desc";
-            }
-
-            //执行查询
-            QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);
-            String query = queryTranslate.toString();
-            session.setAttribute(Constants.GRID_SQL_KEY, query);
-            pageModel = oaPublicInfoService.findByPage(pageModel, query);
-
-            List<Map> list = GridJq.getGridValue(pageModel.getRows(), columns);
-            for (Map bean : list) {
-                Object docId = bean.get("document.id");
-                if (docId != null && StringHelper.isNotEmpty((String) docId)) {
-                    bean.put("document.id", documentManager.getDownloadButton(docDocumentService.get(JspHelper.getLong(docId))));
-                }
-            }
-            //输出显示
-            String json = GridJq.toJSON(list, pageModel);
-            System.out.println("json = " + json);
-//            sendJSON(response, json);
-            model.addAttribute("msg", JSONObject.fromObject(json).toString());
-        } catch (Exception e) {
-            log.error("error", e);
-            super.processException(response, e);
-        }
-        return "common/msg";
-    }
-
     /**
      * 列表显示页面
      *
