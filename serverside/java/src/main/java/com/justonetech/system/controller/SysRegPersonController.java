@@ -2,6 +2,9 @@ package com.justonetech.system.controller;
 
 import com.justonetech.biz.core.orm.hibernate.GridJq;
 import com.justonetech.biz.core.orm.hibernate.QueryTranslateJq;
+import com.justonetech.biz.manager.ConfigManager;
+import com.justonetech.biz.manager.MsgMessageManager;
+import com.justonetech.biz.manager.OaTaskManager;
 import com.justonetech.biz.utils.Constants;
 import com.justonetech.biz.utils.enums.PersonRegSource;
 import com.justonetech.core.controller.BaseCRUDActionController;
@@ -23,6 +26,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import sun.security.krb5.Config;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -51,6 +55,15 @@ public class SysRegPersonController extends BaseCRUDActionController<SysRegPerso
 
     @Autowired
     private SysUserService sysUserService;
+
+    @Autowired
+    private OaTaskManager oaTaskManager;
+
+    @Autowired
+    private MsgMessageManager msgMessageManager;
+
+    @Autowired
+    private ConfigManager configManager;
 
     /**
      * 列表显示页面
@@ -257,11 +270,11 @@ public class SysRegPersonController extends BaseCRUDActionController<SysRegPerso
                 user.setRegPerson(target);
                 sysUserService.save(user);
 
-//                    String message = "您所注册的用户已通过审核,您的用户名为:" + user.getLoginName() + ",密码为:" + pas + ",请牢记!联系电话：021-57780775";
-//                    if (oaTaskManager.getTask(oaTaskManager.getTaskType(SysRegPerson.class.getSimpleName()), target.getId()) != null) {
-//                        oaTaskManager.removeTask(SysRegPerson.class.getSimpleName(), target.getId());
-//                    }
-//                    msgMessageManager.sendSmsByRegPerson(message + " " + configManager.getSiteName(), sysUserManager.getSysUser(loginUser.getLoginName()), target);
+                String message = "您所注册的用户已通过审核,您的用户名为:" + user.getLoginName() + ",密码为:" + pas + ",请牢记!";
+                if (oaTaskManager.getTask(oaTaskManager.getTaskType(SysRegPerson.class.getSimpleName()), target.getId()) != null) {
+                    oaTaskManager.removeTask(SysRegPerson.class.getSimpleName(), target.getId());
+                }
+                msgMessageManager.sendSmsByRegPerson(message + " " + configManager.getSiteName(), sysUserManager.getSysUser(loginUser.getLoginName()), target);
             }
             sysRegPersonService.save(target);
 
@@ -410,7 +423,7 @@ public class SysRegPersonController extends BaseCRUDActionController<SysRegPerso
     @SuppressWarnings("unchecked")
     @RequestMapping
     public void saveIndex(HttpServletResponse response, @ModelAttribute("bean") SysRegPerson entity, HttpServletRequest request) throws Exception {
-        String msg = "户注册成功!";
+        String msg = "用户注册成功!";
         try {
             SysRegPerson target;
             if (entity.getId() != null) {
@@ -458,7 +471,12 @@ public class SysRegPersonController extends BaseCRUDActionController<SysRegPerso
 
             sysRegPersonService.save(target);
 
-            msg += "请记住用户名：" + user.getLoginName();
+            msg = "您所注册的用户已通过审核,您的用户名为:" + user.getLoginName() + ",密码为:" + pas + ",请牢记!";
+            if (oaTaskManager.getTask(oaTaskManager.getTaskType(SysRegPerson.class.getSimpleName()), target.getId()) != null) {
+                oaTaskManager.removeTask(SysRegPerson.class.getSimpleName(), target.getId());
+            }
+            msgMessageManager.sendSmsByRegPerson(msg + " " + configManager.getSiteName(), sysUserManager.getSysUser(loginUser.getLoginName()), target);
+
         } catch (Exception e) {
             log.error("error", e);
             super.processException(response, e);

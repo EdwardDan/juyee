@@ -33,8 +33,8 @@
 </script>
 <form:form commandName="bean">
     <form:hidden path="id"/>
-    <form:hidden path="acceptOpinion"/>
     <form:hidden path="regResource"/>
+    <input type="hidden" name="acceptOpinion" id="acceptOpinion" value="1">
     <input type="hidden" name="loginName" id="loginName" value="${sysUsers}">
 
     <div class="form_div">

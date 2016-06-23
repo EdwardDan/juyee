@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/common/taglibs.jsp" %>
+<%@ include file="/common/header.jsp" %>
 <script type="text/javascript">
     $(function () {
         var conf = {
@@ -86,6 +87,22 @@
             isExportExcel:true
         };
         gridinit($("#listGrid"), conf);
+
+        $(".button").on("click", function () {
+            $.ajax({
+                type: "get",
+                url: "${ctx}/oaPublicInfo/gridDataCustom.do?range=${range}&typeCode=${typeCode}&isZc=${isZc}",
+                dataType: "jsonp",
+                jsonp: "callback",
+                jsonpCallback: "success_jsonpCallback",
+                success: function (json) {
+                    $(".user").html(json);
+                },
+                error: function () {
+                    alert("请求出错！");
+                }
+            });
+        });
     });
 
     function doView(id) {
@@ -129,6 +146,8 @@
     </div>
 </div>
 <div class="gridQueryTable">
+    <button class="button">点击获取数据</button>
+    <div class="user"></div>
     <table id="listGrid"></table>
     <div id="pager2"></div>
 </div>
