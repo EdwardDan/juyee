@@ -1,10 +1,5 @@
-<%@page import="javax.portlet.PortletURL"%>
-<%@page import="com.liferay.portal.model.Portlet"%>
-<%@include file="/common/init.jsp"%>
-<%@ page import="com.justonetech.sys.model.Dictionary"%>
-<%@ page import="java.util.List"%>
-<%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui"%>
 <%@ page contentType="text/html;charset=utf-8"%>
+<%@include file="/common/init.jsp"%>
 <portlet:renderURL var="input">
 	<portlet:param name="mvcPath" value="/portlet/dictionary/input.jsp" />
 </portlet:renderURL>

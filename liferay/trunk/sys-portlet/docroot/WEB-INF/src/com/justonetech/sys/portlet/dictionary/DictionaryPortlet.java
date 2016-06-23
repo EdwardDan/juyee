@@ -11,12 +11,9 @@ import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
-import org.apache.tools.ant.util.DateUtils;
-
 import com.justonetech.sys.model.Dictionary;
 import com.justonetech.sys.service.DictionaryLocalServiceUtil;
 import com.liferay.counter.service.CounterLocalServiceUtil;
-import com.liferay.portal.kernel.dao.orm.Criterion;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.Junction;
@@ -28,8 +25,6 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
-import com.sun.org.apache.bcel.internal.generic.FDIV;
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
 
 /**
  * Portlet implementation class DictionaryPortlet
@@ -50,22 +45,15 @@ public class DictionaryPortlet extends MVCPortlet {
 		int totalSize = 0;
 		try {
 			totalSize = DictionaryPortlet.findCodes(keyword).size();
-		} catch (SystemException e1) {
-			e1.printStackTrace();
-		}
-		if (Validator.isNotNull(keyword)) {
-			try {
+			if (Validator.isNotNull(keyword)) {
 				dics = DictionaryPortlet.findCodes(keyword, start, end);
-			} catch (SystemException e) {
-				e.printStackTrace();
-			}
-		} else {
-			try {
+			} else {
 				dics = DictionaryPortlet.findCodes("", start, end);
-			} catch (SystemException e) {
-				e.printStackTrace();
 			}
+		} catch (SystemException e) {
+			e.printStackTrace();
 		}
+
 		renderRequest.setAttribute("dics", dics);
 		renderRequest.setAttribute("totalSize", totalSize);
 		super.doView(renderRequest, renderResponse);
@@ -83,21 +71,39 @@ public class DictionaryPortlet extends MVCPortlet {
 		long companyId = PortalUtil.getCompanyId(request);
 		long userId = PortalUtil.getUserId(request);
 		String userName = PortalUtil.getUserName(userId, "default");
-		Dictionary dic = null;
+		// 获取当前日期
 		Date day = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date createDate = sdf.parse(sdf.format(day));
-		int sortNo = 0;
+
 		List<Integer> list = new ArrayList<Integer>();
 		Date modifiedDate = null;
+		Dictionary dic = null;
+		int sortNo = 0;
 		if (Validator.isNotNull(dictionaryId)) {
+			int sort = ParamUtil.getInteger(request, "sortNo");
 			dic = DictionaryLocalServiceUtil.getDictionary(dictionaryId);
 			modifiedDate = sdf.parse(sdf.format(day));
 			dic.setCode(code);
 			dic.setName(name);
 			dic.setDesc(desc);
 			dic.setModifiedDate(modifiedDate);
-			dic.setTreePath("/" + dic.getDictionaryId());
+			dic.setSortNo(sort);
+			String str = "00000" + sort;
+			String sortPath = "/"
+					+ str.substring(str.length() - 5, str.length()) + "/";
+			dic.setSortPath(sortPath);
+			dic.setTreePath("/" + dic.getDictionaryId() + "/");
+			List<Dictionary> dics = DictionaryPortlet
+					.findByParentId(dictionaryId);
+			for (Dictionary di : dics) {
+				String sortStr = di.getSortPath();
+				String sortPath1 = sortPath
+						+ sortStr.substring(sortStr.length() - 6,
+								sortStr.length());
+				di.setSortPath(sortPath1);
+				DictionaryLocalServiceUtil.updateDictionary(di);
+			}
 			DictionaryLocalServiceUtil.updateDictionary(dic);
 		} else {
 			dic = DictionaryLocalServiceUtil
@@ -113,7 +119,7 @@ public class DictionaryPortlet extends MVCPortlet {
 			dic.setUserName(userName);
 			dic.setCreateDate(createDate);
 			dic.setModifiedDate(modifiedDate);
-			dic.setTreePath("/" + dic.getDictionaryId());
+			dic.setTreePath("/" + dic.getDictionaryId() + "/");
 			DictionaryLocalServiceUtil.updateDictionary(dic);
 
 			List<Dictionary> ds = DictionaryPortlet.findPath();
@@ -125,12 +131,10 @@ public class DictionaryPortlet extends MVCPortlet {
 				isLeaf = false;
 			}
 			sortNo = java.util.Collections.max(list) + 1;
-			String sortPath = null;
-			if (sortNo / 10 >= 1) {
-				sortPath = "/000" + sortNo;
-			} else {
-				sortPath = "/0000" + sortNo;
-			}
+			String sortStr = "00000" + sortNo;
+			String sortPath = "/"
+					+ sortStr.substring(sortStr.length() - 5, sortStr.length())
+					+ "/";
 			dic.setSortNo(sortNo);
 			dic.setSortPath(sortPath);
 			dic.setIsLeaf(isLeaf);
@@ -163,9 +167,11 @@ public class DictionaryPortlet extends MVCPortlet {
 		String code = dic.getCode();
 		String name = dic.getName();
 		String desc = dic.getDesc();
+		int sortNo = dic.getSortNo();
 		request.setAttribute("name", name);
 		request.setAttribute("code", code);
 		request.setAttribute("desc", desc);
+		request.setAttribute("sortNo", sortNo);
 
 	}
 
@@ -207,12 +213,17 @@ public class DictionaryPortlet extends MVCPortlet {
 
 		if (Validator.isNotNull(parentID)) {
 			dic = DictionaryLocalServiceUtil.getDictionary(dictionaryId);
+			int sort = ParamUtil.getInteger(request, "sortNo");
+			String sortStr = "00000" + sort;
+			String sortPath = dic.getSortPath().substring(0, 6) + "/"
+					+ sortStr.substring(sortStr.length() - 5, sortStr.length())
+					+ "/";
 			Date day = new Date();
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			Date modifiedDate = sdf.parse(sdf.format(day));
 			dic.setParentId(parentID);
 			dic.setTreePath("/" + dic.getParentId() + "/"
-					+ dic.getDictionaryId());
+					+ dic.getDictionaryId() + "/");
 			dic.setSortNo(dic.getSortNo());
 			dic.setCode(code);
 			dic.setName(name);
@@ -220,6 +231,8 @@ public class DictionaryPortlet extends MVCPortlet {
 			dic.setIsValid(isValid);
 			dic.setDesc(desc);
 			dic.setModifiedDate(modifiedDate);
+			dic.setSortNo(sort);
+			dic.setSortPath(sortPath);
 			DictionaryLocalServiceUtil.updateDictionary(dic);
 		} else {
 			dic = DictionaryLocalServiceUtil
@@ -230,7 +243,7 @@ public class DictionaryPortlet extends MVCPortlet {
 			Date createDate = sdf.parse(sdf.format(day));
 			dic.setParentId(parentId);
 			dic.setTreePath("/" + dic.getParentId() + "/"
-					+ dic.getDictionaryId());
+					+ dic.getDictionaryId() + "/");
 			dic.setSortNo(sortNo);
 
 			dic.setCode(code);
@@ -257,12 +270,10 @@ public class DictionaryPortlet extends MVCPortlet {
 			}
 
 			sortNo = java.util.Collections.max(list) + 1;
-			String sortPath = null;
-			if (sortNo / 10 >= 1) {
-				sortPath = parentSortPath + "/000" + sortNo;
-			} else {
-				sortPath = parentSortPath + "/0000" + sortNo;
-			}
+			String sortStr = "00000" + sortNo;
+			String sortPath = parentSortPath
+					+ sortStr.substring(sortStr.length() - 5, sortStr.length())
+					+ "/";
 			dic.setSortNo(sortNo);
 			dic.setSortPath(sortPath);
 			DictionaryLocalServiceUtil.updateDictionary(dic);
@@ -300,24 +311,6 @@ public class DictionaryPortlet extends MVCPortlet {
 		request.setAttribute("dics", dics);
 	}
 
-	// 查询代码项
-	// public void find(ActionRequest request, ActionResponse response)
-	// throws SystemException {
-	// long dictionaryId = ParamUtil.getLong(request, "dictionaryId");
-	// int pageSize = ParamUtil.getInteger(request, "delta", 15);
-	// int pageNumber = ParamUtil.getInteger(request, "cur", 1);
-	// int start = (pageNumber - 1) * pageSize;
-	// int end = pageNumber * pageSize;
-	// String keywords = ParamUtil.getString(request, "keywords");
-	// int totalSize = DictionaryPortlet.findCode(keywords, dictionaryId)
-	// .size();
-	// List<Dictionary> dics = DictionaryPortlet.findCode(keywords, start,
-	// end, dictionaryId);
-	// request.setAttribute("dics", dics);
-	// request.setAttribute("totalSize", totalSize);
-	// request.setAttribute("keywords", keywords);
-	// }
-
 	// 删除代码项
 	public void del(ActionRequest request, ActionResponse response)
 			throws PortalException, SystemException {
@@ -329,7 +322,7 @@ public class DictionaryPortlet extends MVCPortlet {
 		}
 	}
 
-	// 修改代码项
+	// 编辑代码项
 	public void modify(ActionRequest request, ActionResponse response)
 			throws PortalException, SystemException {
 		long dictionaryId = ParamUtil.getLong(request, "dictionaryId");
@@ -341,6 +334,8 @@ public class DictionaryPortlet extends MVCPortlet {
 				.getCode();
 		String name = DictionaryLocalServiceUtil.getDictionary(dictionaryId)
 				.getName();
+		int sortNo = DictionaryLocalServiceUtil.getDictionary(dictionaryId)
+				.getSortNo();
 		String tag = DictionaryLocalServiceUtil.getDictionary(dictionaryId)
 				.getTag();
 		boolean isValid = DictionaryLocalServiceUtil
@@ -352,6 +347,7 @@ public class DictionaryPortlet extends MVCPortlet {
 		request.setAttribute("name", name);
 		request.setAttribute("tag", tag);
 		request.setAttribute("desc", desc);
+		request.setAttribute("sortNo", sortNo);
 	}
 
 	public static List<Dictionary> findCodes(String keyword, int start, int end)

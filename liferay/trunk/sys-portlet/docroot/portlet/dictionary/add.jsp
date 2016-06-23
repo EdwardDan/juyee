@@ -16,13 +16,20 @@
 <aui:form action="${add}" method="post">
 	<aui:input name="parentID" type="hidden" value="<%=parentID%>" />
 	<aui:input name="dictionaryId" type="hidden" value="<%=dictionaryId%>" />
-	
+
 	<aui:input type="text" label="编码：" name="code" value="${code}">
 		<aui:validator name="required" errorMessage="这里不可空白!"></aui:validator>
 	</aui:input>
 	<aui:input type="text" label="名称:" name="name" value="${name}">
 		<aui:validator name="required" errorMessage="这里不可空白!"></aui:validator>
 	</aui:input>
+	<%
+		if (Validator.isNotNull(parentID)) {
+	%>
+	<aui:input type="number" max="90000" label="排序号:" name="sortNo" value="${sortNo}"></aui:input>
+	<%
+		}
+	%>
 	<aui:input type="text" label="特殊标记:" name="tag" value="${tag}"></aui:input>
 	<aui:select name="isValid" label="是否有效:">
 		<%
@@ -47,7 +54,7 @@
 			}
 		%>
 	</aui:select>
-	<aui:input type="content" label="备注:" name="desc" value="${desc}"></aui:input>
+	<aui:input type="text" label="备注:" name="desc" value="${desc}"></aui:input>
 	<aui:button type="submit"></aui:button>
 	<aui:button type="reset" value="重置"></aui:button>
 </aui:form>
