@@ -26,7 +26,7 @@ function viewProjectInfo(title, bjbh, gdCode, jdTaskCode, isParentWindow, isOpen
  * @param isNeedCheck -- 是否需要判断表单存在
  */
 function viewTask(id, url, isWorkflow, isView, isNeedCheck) {
-    url = CONTEXT_NAME + "/" + url + "&from=task";
+    url = CONTEXT_NAME + "/" + url + "&from=task&oaTaskDealId=" + id;
     if (isNeedCheck) {
         var ret = $.ajax({
             url: url,
@@ -46,13 +46,13 @@ function openTaskCallback(id, url, isWorkflow, isView) {
     //只有流程需要单独弹出页面，其余使用div，查看页面也使用div
     if ("true" == isWorkflow && !isView) {
         if("sgPermit".indexOf(url)){
-            parent.openNewWindow("newWinId","查看施工许可证", url, false, 900, 550);
-        }else{
+            parent.openNewWindow("newWinId", "查看施工许可证", url, false, 900, 550);
+        } else {
             parent.openFullWindow(url, 900, 550);
         }
     } else {
-        if(url.indexOf("sgPermit/frame")){
-            parent.openNewWindow("newWinId","查看施工许可证", url, false, 900, 550);
+        if (url.indexOf("sgPermit/frame")) {
+            parent.openNewWindow("newWinId", "查看施工许可证", url, false, 900, 550);
         }else{
             parent.openWindow("查看任务", url, true, 900, 550);
         }
