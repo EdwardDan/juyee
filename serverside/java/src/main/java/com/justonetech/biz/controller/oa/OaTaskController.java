@@ -117,12 +117,12 @@ public class OaTaskController extends BaseCRUDActionController<OaTask> {
 //            Boolean viewAll = false;
 
             Page pageModel = new Page(page, rows, true);
-            String hql = "from OaTaskDeal where status<>'{0}'";
+            String hql = "from OaTaskDeal where status<>'{0}' and status<>'{1}'";
             if (!viewAll) {
-                hql += " and user.id={1}";
+                hql += " and user.id={2}";
             }
             hql += " order by id desc";
-            hql = FormatUtils.format(hql, Constants.OA_TASK_DELETE, String.valueOf(userId));
+            hql = FormatUtils.format(hql, Constants.OA_TASK_DELETE, Constants.OA_TASK_ACCEPT, String.valueOf(userId));
 
             //执行查询
             QueryTranslateJq queryTranslate = new QueryTranslateJq(hql, filters);

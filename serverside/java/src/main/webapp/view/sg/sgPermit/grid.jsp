@@ -81,11 +81,11 @@
                                 opButton += '<input type="button" value="审核" onclick="doAudit(' + id + ')" class="button_normal"/> ';
                             }
                         } else if (status == '${STATUS_SH_PASS}' || status == '${STATUS_FGLD_BACK}' || status == '${STATUS_ZXLD_BACK}') {
-                            if (${canFgldAudit}) {
+                            if (${canFgldAudit}||${canAudit}) {
                                 opButton += '<input type="button" value="审核" onclick="doAudit(' + id + ')" class="button_normal"/> ';
                             }
                         } else if (status == '${STATUS_FGLD_PASS}' || status == '${STATUS_JSC_BACK}') {
-                            if (${canZxldAudit}) {
+                            if (${canZxldAudit}||${canFgldAudit}) {
                                 opButton += '<input type="button" value="审核" onclick="doAudit(' + id + ')" class="button_normal"/> ';
                             }
                         } else if (status == '${STATUS_ZXLD_PASS}' || status == '${STATUS_SPC_BACK}') {

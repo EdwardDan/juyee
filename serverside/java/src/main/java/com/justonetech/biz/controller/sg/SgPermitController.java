@@ -92,6 +92,9 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
     @Autowired
     private MsgMessageManager msgMessageManager;
 
+    @Autowired
+    private OaTaskDealService oaTaskDealService;
+
     private static final String xlsTemplateName1 = "SgPermit.xls";
     private static final String xlsTemplateName2 = "SgPermit_green.xls";
     private static final String xlsTemplateName3 = "SgPermit_kgba.xls";
@@ -187,7 +190,7 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
      * @return .
      */
     @RequestMapping
-    public String frame(Model model, String id, String act, String projectTypeId) {
+    public String frame(Model model, String id, String act, String projectTypeId, Long oaTaskDealId) {
         model.addAttribute("id", JspHelper.getString(id));
         model.addAttribute("act", JspHelper.getString(act));
         if (!StringHelper.isEmpty(projectTypeId)) {
@@ -199,6 +202,11 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
             SgPermit sgPermit = sgPermitService.get(Long.valueOf(id));
             model.addAttribute("projectTypeId", sgPermit.getProjectType().getId());
             model.addAttribute("projName", sgPermit.getProjectType().getName());
+        }
+        if (null != oaTaskDealId) {
+            OaTaskDeal oaTaskDeal = oaTaskDealService.get(oaTaskDealId);
+            oaTaskDeal.setStatus(Constants.OA_TASK_ACCEPT);
+            oaTaskDealService.save(oaTaskDeal);
         }
 
         return "view/sg/sgPermit/frame";
@@ -709,7 +717,7 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
             operation.setStatus(status);
             sgPermitOperationService.save(operation);
 
-//            createOaTask(target);
+            createOaTask(target);
 
         } catch (Exception e) {
             log.error("error", e);
@@ -1035,71 +1043,6 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
         boolean isSpcBack = status == SgPermitStatus.STATUS_SPC_BACK.getCode();
         boolean isWldPass = status == SgPermitStatus.STATUS_WLD_PASS.getCode();
         boolean isWldBack = status == SgPermitStatus.STATUS_WLD_BACK.getCode();
-//        if (isSubmit) {
-//            title = oaTaskManager.getTaskTitle(data, simpleName + "_sl_pass");
-//            //获取有初审核权限的用户
-//            Set<Long> audit = sysUserManager.getUserIdsByPrivilegeCode(PrivilegeCode.SG_PERMIT_SL_AUDIT);
-//            managers.addAll(audit);
-//            if (managers.size() > 0) {
-//                oaTaskManager.createTask(simpleName + "_sl_pass", data.getId(), title, managers, false, null, null);
-//            }
-//        } else if (isZxsj) {
-//            title = oaTaskManager.getTaskTitle(data, simpleName + "_ch_pass");
-//            //获取有初审核权限的用户
-//            Set<Long> audit = sysUserManager.getUserIdsByPrivilegeCode(PrivilegeCode.SG_PERMIT_CS_AUDIT);
-//            managers.addAll(audit);
-//            if (managers.size() > 0) {
-//                oaTaskManager.createTask(simpleName + "_ch_pass", data.getId(), title, managers, false, null, null);
-//            }
-//        } else if (status == SgPermitStatus.STATUS_CS_PASS.getCode()) {
-//            title = oaTaskManager.getTaskTitle(data, simpleName + "_fh_pass");
-//            //获取有复审权限的用户
-//            Set<Long> audit = sysUserManager.getUserIdsByPrivilegeCode(PrivilegeCode.SG_PERMIT_FH_AUDIT);
-//            managers.addAll(audit);
-//            if (managers.size() > 0) {
-//                oaTaskManager.createTask(simpleName + "_fh_pass", data.getId(), title, managers, false, null, null);
-//            }
-//        } else if (status == SgPermitStatus.STATUS_FH_PASS.getCode()) {
-//            title = oaTaskManager.getTaskTitle(data, simpleName + "_sh_pass");
-//            //获取有审核权限的用户
-//            Set<Long> audit = sysUserManager.getUserIdsByPrivilegeCode(PrivilegeCode.SG_PERMIT_AUDIT);
-//            managers.addAll(audit);
-//            if (managers.size() > 0) {
-//                oaTaskManager.createTask(simpleName + "_sh_pass", data.getId(), title, managers, false, null, null);
-//            }
-//        } else if (status == SgPermitStatus.STATUS_SH_PASS.getCode()) {
-//            title = oaTaskManager.getTaskTitle(data, simpleName + "_fgldsh_pass");
-//            //获取有审核权限的用户
-//            Set<Long> audit = sysUserManager.getUserIdsByPrivilegeCode(PrivilegeCode.SG_PERMIT_FGLD_AUDIT);
-//            managers.addAll(audit);
-//            if (managers.size() > 0) {
-//                oaTaskManager.createTask(simpleName + "_fgldsh_pass", data.getId(), title, managers, false, null, null);
-//            }
-//        } else if (status == SgPermitStatus.STATUS_FGLD_PASS.getCode()) {
-//            title = oaTaskManager.getTaskTitle(data, simpleName + "_fgldsh_pass");
-//            //获取有审核权限的用户
-//            Set<Long> audit = sysUserManager.getUserIdsByPrivilegeCode(PrivilegeCode.SG_PERMIT_ZXLD_AUDIT);
-//            managers.addAll(audit);
-//            if (managers.size() > 0) {
-//                oaTaskManager.createTask(simpleName + "_fgldsh_pass", data.getId(), title, managers, false, null, null);
-//            }
-//        } else if (status == SgPermitStatus.STATUS_ZXLD_PASS.getCode()) {
-//            title = oaTaskManager.getTaskTitle(data, simpleName + "_wldsh_pass");
-//            //获取有审核权限的用户
-//            Set<Long> audit = sysUserManager.getUserIdsByPrivilegeCode(PrivilegeCode.SG_PERMIT_WLD_AUDIT);
-//            managers.addAll(audit);
-//            if (managers.size() > 0) {
-//                oaTaskManager.createTask(simpleName + "_wldsh_pass", data.getId(), title, managers, false, null, null);
-//            }
-//        } else if (status == SgPermitStatus.STATUS_EDIT.getCode() || status == SgPermitStatus.STATUS_CS_BACK.getCode() || status == SgPermitStatus.STATUS_FH_BACK.getCode() || status == SgPermitStatus.STATUS_SH_BACK.getCode() || status == SgPermitStatus.STATUS_FGLD_BACK.getCode() || status == SgPermitStatus.STATUS_ZXLD_BACK.getCode() || status == SgPermitStatus.STATUS_WLD_BACK.getCode()) {
-//            title = oaTaskManager.getTaskTitle(data, simpleName + "_back");
-//            //获取有编辑权限的用户
-//            Set<Long> edit = sysUserManager.getUserIdsByPrivilegeCode(PrivilegeCode.SG_PERMIT_EDIT);
-//            managers.addAll(edit);
-//            if (managers.size() > 0) {
-//                oaTaskManager.createTask(simpleName + "_back", data.getId(), title, managers, false, null, null);
-//            }
-//        }
         //发送短信
         String code = data.getProjectType().getCode();
         boolean isNotSzjc = code.equals(Constants.PROJECT_TYPE_GKSH) || code.equals(Constants.PROJECT_TYPE_HD) || code.equals(Constants.PROJECT_TYPE_GL);
@@ -1129,7 +1072,11 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
                     msgMessageManager.sendSmsByUser(sendContent, sysUser, ids);
                     managers.add(receiveUser.getId());
                 }
+            }
+            if (isSubmit) {
                 oaTaskManager.createTask(simpleName + "_submit", data.getId(), sendContent, managers, false, null, null);
+            } else if (isZxsj) {
+                oaTaskManager.createTask(simpleName + "_sjtg", data.getId(), sendContent, managers, false, null, null);
             }
         } else if (isYstg) {//预审通过后，发送给建设单位
             receiveUser = sysUserManager.getSysUserByDisplayName(data.getBuildUnitPerson());
