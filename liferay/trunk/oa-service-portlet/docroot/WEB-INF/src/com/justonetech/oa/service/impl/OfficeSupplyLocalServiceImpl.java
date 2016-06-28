@@ -45,11 +45,11 @@ public class OfficeSupplyLocalServiceImpl
 	public List<OfficeSupply> getOfficeSuppliesByName(String name, int start,
 			int end) throws SystemException {
 
-		return officeSupplyPersistence.findByName(name, start, end);
+		return officeSupplyPersistence.findByName("%" + name + "%", start, end);
 	}
 
 	public int getOfficeSuppliesCountByName(String name) throws SystemException {
 
-		return officeSupplyPersistence.countByName(name);
+		return officeSupplyPersistence.countByName("%" + name + "%");
 	}
 }
