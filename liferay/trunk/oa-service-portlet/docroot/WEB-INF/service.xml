@@ -3,6 +3,34 @@
 <service-builder package-path="com.justonetech.oa">
 	<author>justonetech</author>
 	<namespace>oa</namespace>
+	<entity name="OfficeSupply" local-service="true" remote-service="false">
+		<!-- PK fields -->
+		<column name="officeSupplyId" type="long" primary="true" />
 
-	
+		<!-- Group instance -->
+		
+		<!-- Audit fields -->
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createTime" type="Date" />
+		<column name="modifiedTime" type="Date" />
+
+		<!-- Other fields -->
+		<column name="name" type="String" />
+		<column name="model" type="String" />
+		<column name="unit" type="String" />
+		<column name="unitPrice" type="double" />
+		<column name="quantity" type="int" />
+
+		<!-- Order -->
+		<order>
+			<order-column name="modifiedTime" order-by="desc"></order-column>
+		</order>
+
+		<!-- Finder methods -->
+		<finder name="Name" return-type="Collection">
+			<finder-column name="name" comparator="LIKE"></finder-column>
+		</finder>
+	</entity>
+
 </service-builder>
