@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.justonetech.oa.model.OfficeSupply">
+		<field name="officeSupplyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createTime" type="Date" />
+		<field name="modifiedTime" type="Date" />
+		<field name="name" type="String" />
+		<field name="model" type="String" />
+		<field name="unit" type="String" />
+		<field name="unitPrice" type="double" />
+		<field name="quantity" type="int" />
+	</model>
+</model-hints>
