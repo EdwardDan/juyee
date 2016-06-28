@@ -1,5 +1,4 @@
-<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
-
-<portlet:defineObjects />
-
-This is the <b>办公用品库</b> portlet in View mode.
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ include file="/common/init.jsp"%>
+<c:set var="contentPath"
+	value="${request.contextPath}/portlet/office-supply" />
