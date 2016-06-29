@@ -1,21 +1,18 @@
 <%@include file="/common/init.jsp"%>
+<%@include file="/common/init-ext.jsp"%>
 <%@ page contentType="text/html;charset=utf-8"%>
-<%@ taglib uri="http://alloy.liferay.com/tld/aui" prefix="aui"%>
-
-
 <%
 	Long dictionaryId = (Long) request.getAttribute("dictionaryId");
-    Integer totalSize=(Integer)request.getAttribute("totalSize");
+	Integer totalSize = (Integer) request.getAttribute("totalSize");
+	List<Dictionary> dictionaries = (List<Dictionary>)request.getAttribute("dictionaries");
 %>
 <portlet:renderURL var="def" />
-<portlet:renderURL var="add">
-	<portlet:param name="mvcPath" value="/portlet/dictionary/add.jsp" />
+<portlet:renderURL var="inputCode">
+	<portlet:param name="mvcPath"
+		value="/portlet/dictionary/input-code.jsp" />
 	<portlet:param name="dictionaryId" value="${dictionaryId}" />
 </portlet:renderURL>
-<%-- <portlet:actionURL var="find" name="find">
-<portlet:param name="mvcPath" value="/portlet/dictionary/check.jsp"/>
-<portlet:param name="dictionaryId" value="${dictionaryId}"/>
-</portlet:actionURL> --%>
+
 <liferay-ui:header title="查看代码集" backURL="${def}" />
 <aui:form action="${input}" method="post">
 	<aui:input type="text" label="编码：" name="code" value="${code}"></aui:input>
@@ -25,27 +22,16 @@
 
 
 <h4>代码明细列表</h4>
-<portlet:actionURL var="check" name="check">
-	<portlet:param name="mvcPath" value="/portlet/dictionary/check.jsp" />
-</portlet:actionURL>
 <form action="${find}" method="post">
 	<table align="center" width="100%">
 		<tr>
-<%-- 			<td><form class="form-search">
-					<input type="text" placeholder="请输入关键字..."
-						class="input-medium search-query"
-						name="<portlet:namespace/>keywords" value="${keywords}"/>
-					<button type="submit" class="btn">
-						<i class="icon-search"></i>查询
-					</button>
-				</form></td> --%>
-			<td align="right"><a href="${add}" class="btn"><i
+			<td align="right"><a href="${inputCode}" class="btn"><i
 					class="icon-plus"></i>添加代码项</a></td>
 		</tr>
 	</table>
 </form>
-<liferay-ui:search-container delta="15" emptyResultsMessage="没有找到数据!">
-	<liferay-ui:search-container-results results="${dics}" total="<%=totalSize%>"/>
+<liferay-ui:search-container emptyResultsMessage="没有找到数据!">
+	<liferay-ui:search-container-results results="${dictionaries}" />
 	<liferay-ui:search-container-row className="Dictionary" modelVar="dic"
 		keyProperty="dictionaryId">
 		<liferay-ui:search-container-column-text name="编码" property="code" />
@@ -55,16 +41,16 @@
 			property="isValid" />
 		<liferay-ui:search-container-column-text name="备注" property="desc" />
 		<liferay-ui:search-container-column-text name="action">
-			<portlet:actionURL var="del" name="del">
+			<portlet:actionURL var="del" name="deleteCode"> 
 				<portlet:param name="dictionaryId" value="${dic.dictionaryId}" />
 			</portlet:actionURL>
-			<portlet:actionURL var="modify" name="modify">
-				<portlet:param name="mvcPath" value="/portlet/dictionary/add.jsp" />
+			<portlet:actionURL var="edit" name="editCode"> 
+				<portlet:param name="mvcPath" value="/portlet/dictionary/input-code.jsp" />
 				<portlet:param name="dictionaryId" value="${dic.dictionaryId}" />
 			</portlet:actionURL>
 			<liferay-ui:icon-menu>
 				<liferay-ui:icon-delete image="delete" url="${del}" />
-				<liferay-ui:icon image="edit" url="${modify}" />
+				<liferay-ui:icon image="edit" url="${edit}" />
 			</liferay-ui:icon-menu>
 		</liferay-ui:search-container-column-text>
 	</liferay-ui:search-container-row>

@@ -1,10 +1,8 @@
-<%@page import="com.liferay.portal.kernel.util.Validator"%>
-<%@page import="com.liferay.portal.kernel.util.ParamUtil"%>
 <%@include file="/common/init.jsp"%>
+<%@include file="/common/init-ext.jsp"%>
 <%@ page contentType="text/html;charset=utf-8"%>
-<%@ taglib uri="http://alloy.liferay.com/tld/aui" prefix="aui"%>
 
-<portlet:actionURL var="input" name="input">
+<portlet:actionURL var="input" name="inputCodeSet"> 
 	<portlet:param name="redirect" value="${def}" />
 </portlet:actionURL>
 <portlet:renderURL var="def" />

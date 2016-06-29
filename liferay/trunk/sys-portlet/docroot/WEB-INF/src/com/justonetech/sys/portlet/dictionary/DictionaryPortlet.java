@@ -17,6 +17,7 @@ import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.Junction;
+import com.liferay.portal.kernel.dao.orm.OrderFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -35,32 +36,36 @@ public class DictionaryPortlet extends MVCPortlet {
 	@Override
 	public void doView(RenderRequest renderRequest,
 			RenderResponse renderResponse) throws IOException, PortletException {
-		String keyword = ParamUtil.getString(renderRequest, "keyword");
-		renderRequest.setAttribute("keyword", keyword);
+		String keywords = ParamUtil.getString(renderRequest, "keywords");
 		int pageSize = ParamUtil.getInteger(renderRequest, "delta", 5);
 		int pageNumber = ParamUtil.getInteger(renderRequest, "cur", 1);
 		int start = (pageNumber - 1) * pageSize;
 		int end = pageNumber * pageSize;
-		List<Dictionary> dics = null;
+		List<Dictionary> dictionaries = null;
 		int totalSize = 0;
 		try {
-			totalSize = DictionaryPortlet.findCodes(keyword).size();
-			if (Validator.isNotNull(keyword)) {
-				dics = DictionaryPortlet.findCodes(keyword, start, end);
+			totalSize = DictionaryPortlet.getCodesCount(keywords);
+			if (Validator.isNotNull(keywords)) {
+				dictionaries = DictionaryPortlet.getCodesByKeywords(keywords,
+						start, end);
+				// dictionaries =
+				// DictionaryLocalServiceUtil.getCodesByKeyword(keyword, start,
+				// end);
 			} else {
-				dics = DictionaryPortlet.findCodes("", start, end);
+				dictionaries = DictionaryPortlet.getCodesByKeywords("", start,
+						end);
 			}
 		} catch (SystemException e) {
 			e.printStackTrace();
 		}
 
-		renderRequest.setAttribute("dics", dics);
+		renderRequest.setAttribute("dictionaries", dictionaries);
 		renderRequest.setAttribute("totalSize", totalSize);
 		super.doView(renderRequest, renderResponse);
 	}
 
 	// 添加代码集
-	public void input(ActionRequest request, ActionResponse response)
+	public void inputCodeSet(ActionRequest request, ActionResponse response)
 			throws SystemException, PortalException, ParseException {
 		long dictionaryId = ParamUtil.getLong(request, "dictionaryId");
 		String code = ParamUtil.getString(request, "code");
@@ -143,7 +148,7 @@ public class DictionaryPortlet extends MVCPortlet {
 	}
 
 	// 删除代码集
-	public void delete(ActionRequest request, ActionResponse response)
+	public void deleteCodeSet(ActionRequest request, ActionResponse response)
 			throws SystemException, PortalException {
 		long dictionaryId = ParamUtil.getInteger(request, "dictionaryId");
 		if (Validator.isNotNull(dictionaryId)) {
@@ -159,7 +164,7 @@ public class DictionaryPortlet extends MVCPortlet {
 	}
 
 	// 修改代码集
-	public void edit(ActionRequest request, ActionResponse response)
+	public void editCodeSet(ActionRequest request, ActionResponse response)
 			throws PortalException, SystemException {
 		long dictionaryId = ParamUtil.getLong(request, "dictionaryId");
 		request.setAttribute("dictionaryId", dictionaryId);
@@ -176,7 +181,7 @@ public class DictionaryPortlet extends MVCPortlet {
 	}
 
 	// 查看代码集
-	public void grid(ActionRequest request, ActionResponse response)
+	public void viewCodeSet(ActionRequest request, ActionResponse response)
 			throws PortalException, SystemException {
 		long dictionaryId = ParamUtil.getLong(request, "dictionaryId");
 		request.setAttribute("dictionaryId", dictionaryId);
@@ -187,10 +192,14 @@ public class DictionaryPortlet extends MVCPortlet {
 		request.setAttribute("name", name);
 		request.setAttribute("code", code);
 		request.setAttribute("desc", desc);
+
+		List<Dictionary> dictionaries = DictionaryPortlet
+				.getCode(dictionaryId);
+		request.setAttribute("dictionaries", dictionaries);
 	}
 
 	// 添加代码项
-	public void add(ActionRequest request, ActionResponse response)
+	public void inputCode(ActionRequest request, ActionResponse response)
 			throws SystemException, PortalException, ParseException {
 		long dictionaryId = ParamUtil.getLong(request, "dictionaryId");
 		String parentSortPath = DictionaryLocalServiceUtil.getDictionary(
@@ -257,8 +266,7 @@ public class DictionaryPortlet extends MVCPortlet {
 			dic.setUserName(userName);
 			dic.setCreateDate(createDate);
 			DictionaryLocalServiceUtil.updateDictionary(dic);
-			List<Dictionary> ds = DictionaryPortlet
-					.findPath1(dic.getParentId());
+			List<Dictionary> ds = DictionaryPortlet.findPath(dic.getParentId());
 			List<Integer> list = new ArrayList<Integer>();
 			for (Dictionary d : ds) {
 				list.add(d.getSortNo());
@@ -280,39 +288,8 @@ public class DictionaryPortlet extends MVCPortlet {
 		}
 	}
 
-	// 查看代码项
-	public void check(ActionRequest request, ActionResponse response)
-			throws SystemException, PortalException {
-		long dictionaryId = ParamUtil.getLong(request, "dictionaryId");
-		request.setAttribute("dictionaryId", dictionaryId);
-		Dictionary dic = DictionaryLocalServiceUtil.getDictionary(dictionaryId);
-		String code = dic.getCode();
-		String name = dic.getName();
-		String desc = dic.getDesc();
-		request.setAttribute("code", code);
-		request.setAttribute("name", name);
-		request.setAttribute("desc", desc);
-
-		String keywords = ParamUtil.getString(request, "keywords");
-		request.setAttribute("keywords", keywords);
-		int pageSize = ParamUtil.getInteger(request, "delta", 15);
-		int pageNumber = ParamUtil.getInteger(request, "cur", 1);
-		int start = (pageNumber - 1) * pageSize;
-		int end = pageNumber * pageSize;
-		int totalSize = DictionaryPortlet.findCode("", dictionaryId).size();
-		request.setAttribute("totalSize", totalSize);
-		List<Dictionary> dics = null;
-		if (Validator.isNotNull(keywords)) {
-			dics = DictionaryPortlet.findCode(keywords, start, end,
-					dictionaryId);
-		} else {
-			dics = DictionaryPortlet.findCode("", start, end, dictionaryId);
-		}
-		request.setAttribute("dics", dics);
-	}
-
 	// 删除代码项
-	public void del(ActionRequest request, ActionResponse response)
+	public void deleteCode(ActionRequest request, ActionResponse response)
 			throws PortalException, SystemException {
 		long dictionaryId = ParamUtil.getLong(request, "dictionaryId");
 		if (Validator.isNotNull(dictionaryId)) {
@@ -323,7 +300,7 @@ public class DictionaryPortlet extends MVCPortlet {
 	}
 
 	// 编辑代码项
-	public void modify(ActionRequest request, ActionResponse response)
+	public void editCode(ActionRequest request, ActionResponse response)
 			throws PortalException, SystemException {
 		long dictionaryId = ParamUtil.getLong(request, "dictionaryId");
 		request.setAttribute("dictionaryId", dictionaryId);
@@ -350,8 +327,8 @@ public class DictionaryPortlet extends MVCPortlet {
 		request.setAttribute("sortNo", sortNo);
 	}
 
-	public static List<Dictionary> findCodes(String keyword, int start, int end)
-			throws SystemException {
+	public static List<Dictionary> getCodesByKeywords(String keyword,
+			int start, int end) throws SystemException {
 		DynamicQuery query = DynamicQueryFactoryUtil
 				.forClass(com.justonetech.sys.model.Dictionary.class);
 		query.add(PropertyFactoryUtil.forName("parentId").eq(0L));
@@ -365,8 +342,7 @@ public class DictionaryPortlet extends MVCPortlet {
 				query, start, end);
 	}
 
-	public static List<Dictionary> findCodes(String keyword)
-			throws SystemException {
+	public static int getCodesCount(String keyword) throws SystemException {
 		DynamicQuery query = DynamicQueryFactoryUtil
 				.forClass(com.justonetech.sys.model.Dictionary.class);
 		query.add(PropertyFactoryUtil.forName("parentId").eq(0L));
@@ -376,38 +352,13 @@ public class DictionaryPortlet extends MVCPortlet {
 		junction.add(PropertyFactoryUtil.forName("code").like(
 				"%" + keyword + "%"));
 		query.add(junction);
-		return (List<Dictionary>) DictionaryLocalServiceUtil
-				.dynamicQuery(query);
+		return DictionaryLocalServiceUtil.dynamicQuery(query).size();
 	}
 
-	public static List<Dictionary> findCode(String keyword, int start, int end,
-			long id) throws SystemException {
+	public static List<Dictionary> getCode(long id) throws SystemException {
 		DynamicQuery query = DynamicQueryFactoryUtil
 				.forClass(com.justonetech.sys.model.Dictionary.class);
 		query.add(PropertyFactoryUtil.forName("parentId").eq(id));
-		Junction junction = RestrictionsFactoryUtil.disjunction();
-		junction.add(PropertyFactoryUtil.forName("name").like(
-				"%" + keyword + "%"));
-		junction.add(PropertyFactoryUtil.forName("code").like(
-				"%" + keyword + "%"));
-		// junction.add(PropertyFactoryUtil.forName("tag").like(
-		// Integer.parseInt("%" + keyword + "%")));
-		query.add(junction);
-		return (List<Dictionary>) DictionaryLocalServiceUtil.dynamicQuery(
-				query, start, end);
-	}
-
-	public static List<Dictionary> findCode(String keyword, long id)
-			throws SystemException {
-		DynamicQuery query = DynamicQueryFactoryUtil
-				.forClass(com.justonetech.sys.model.Dictionary.class);
-		query.add(PropertyFactoryUtil.forName("parentId").eq(id));
-		Junction junction = RestrictionsFactoryUtil.disjunction();
-		junction.add(PropertyFactoryUtil.forName("name").like(
-				"%" + keyword + "%"));
-		junction.add(PropertyFactoryUtil.forName("code").like(
-				"%" + keyword + "%"));
-		query.add(junction);
 		return (List<Dictionary>) DictionaryLocalServiceUtil
 				.dynamicQuery(query);
 	}
@@ -420,7 +371,7 @@ public class DictionaryPortlet extends MVCPortlet {
 				.dynamicQuery(query);
 	}
 
-	public static List<Dictionary> findPath1(long id) throws SystemException {
+	public static List<Dictionary> findPath(long id) throws SystemException {
 		DynamicQuery query = DynamicQueryFactoryUtil
 				.forClass(com.justonetech.sys.model.Dictionary.class);
 		query.add(PropertyFactoryUtil.forName("parentId").ne(0L));
@@ -431,8 +382,7 @@ public class DictionaryPortlet extends MVCPortlet {
 
 	public static List<Dictionary> findByParentId(long parentId)
 			throws SystemException {
-		DynamicQuery query = DynamicQueryFactoryUtil
-				.forClass(com.justonetech.sys.model.Dictionary.class);
+		DynamicQuery query = DynamicQueryFactoryUtil.forClass(Dictionary.class);
 		query.add(PropertyFactoryUtil.forName("parentId").eq(parentId));
 		return (List<Dictionary>) DictionaryLocalServiceUtil
 				.dynamicQuery(query);

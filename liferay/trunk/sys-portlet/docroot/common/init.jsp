@@ -1,4 +1,3 @@
-<%@ page contentType="text/html;charset=utf-8"%>
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet"%>
 <%@ taglib uri="http://liferay.com/tld/portlet" prefix="liferay-portlet"%>
 <portlet:defineObjects />
@@ -10,5 +9,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@page import="javax.portlet.PortletURL"%>
 <%@page import="com.liferay.portal.model.Portlet"%>
-<%@ page import="com.justonetech.sys.model.Dictionary"%>
 <%@ page import="java.util.*"%>
+<%@page import="com.liferay.portal.kernel.util.ParamUtil"%>
+<%@page import="com.liferay.portal.kernel.util.Validator"%>
+<%@ taglib uri="http://alloy.liferay.com/tld/aui" prefix="aui"%>

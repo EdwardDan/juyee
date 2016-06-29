@@ -1,19 +1,17 @@
-<%@page import="com.liferay.portal.kernel.util.ParamUtil"%>
-<%@page import="com.liferay.portal.kernel.util.Validator"%>
 <%@include file="/common/init.jsp"%>
+<%@include file="/common/init-ext.jsp"%>
 <%@ page contentType="text/html;charset=utf-8"%>
-
 <%
 	long dictionaryId = ParamUtil.getLong(request, "dictionaryId");
 	Long parentID = (Long) request.getAttribute("parentId");
 %>
-<portlet:actionURL var="add" name="add">
+<portlet:actionURL var="inputCode" name="inputCode">
 	<portlet:param name="redirect" value="${def}" />
 </portlet:actionURL>
 <portlet:renderURL var="def" />
 <liferay-ui:header title="添加代码项" backURL="${def}" />
 
-<aui:form action="${add}" method="post">
+<aui:form action="${inputCode}" method="post">
 	<aui:input name="parentID" type="hidden" value="<%=parentID%>" />
 	<aui:input name="dictionaryId" type="hidden" value="<%=dictionaryId%>" />
 
