@@ -43,7 +43,7 @@
 		</portlet-class>
 		<init-param>
 			<name>view-template</name>
-			<value>/html/leader-weekly-work/view.jsp</value>
+			<value>/portlet/leader-weekly-work/view.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
