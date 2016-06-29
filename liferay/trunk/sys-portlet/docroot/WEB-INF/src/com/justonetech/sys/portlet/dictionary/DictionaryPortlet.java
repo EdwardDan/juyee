@@ -100,7 +100,7 @@ public class DictionaryPortlet extends MVCPortlet {
 			dic.setSortPath(sortPath);
 			dic.setTreePath("/" + dic.getDictionaryId() + "/");
 			List<Dictionary> dics = DictionaryPortlet
-					.findByParentId(dictionaryId);
+					.getCodesByParentId(dictionaryId);
 			for (Dictionary di : dics) {
 				String sortStr = di.getSortPath();
 				String sortPath1 = sortPath
@@ -113,7 +113,6 @@ public class DictionaryPortlet extends MVCPortlet {
 		} else {
 			dic = DictionaryLocalServiceUtil
 					.createDictionary(CounterLocalServiceUtil.increment());
-
 			dic.setCode(code);
 			dic.setName(name);
 			dic.setDesc(desc);
@@ -127,7 +126,7 @@ public class DictionaryPortlet extends MVCPortlet {
 			dic.setTreePath("/" + dic.getDictionaryId() + "/");
 			DictionaryLocalServiceUtil.updateDictionary(dic);
 
-			List<Dictionary> ds = DictionaryPortlet.findPath();
+			List<Dictionary> ds = DictionaryPortlet.getPath();
 			for (Dictionary d : ds) {
 				list.add(d.getSortNo());
 			}
@@ -153,7 +152,7 @@ public class DictionaryPortlet extends MVCPortlet {
 		long dictionaryId = ParamUtil.getInteger(request, "dictionaryId");
 		if (Validator.isNotNull(dictionaryId)) {
 			List<Dictionary> dics = DictionaryPortlet
-					.findByParentId(dictionaryId);
+					.getCodesByParentId(dictionaryId);
 			for (Dictionary dic : dics) {
 				DictionaryLocalServiceUtil.deleteDictionary(dic);
 			}
@@ -266,7 +265,7 @@ public class DictionaryPortlet extends MVCPortlet {
 			dic.setUserName(userName);
 			dic.setCreateDate(createDate);
 			DictionaryLocalServiceUtil.updateDictionary(dic);
-			List<Dictionary> ds = DictionaryPortlet.findPath(dic.getParentId());
+			List<Dictionary> ds = DictionaryPortlet.getPath(dic.getParentId());
 			List<Integer> list = new ArrayList<Integer>();
 			for (Dictionary d : ds) {
 				list.add(d.getSortNo());
@@ -363,7 +362,7 @@ public class DictionaryPortlet extends MVCPortlet {
 				.dynamicQuery(query);
 	}
 
-	public static List<Dictionary> findPath() throws SystemException {
+	public static List<Dictionary> getPath() throws SystemException {
 		DynamicQuery query = DynamicQueryFactoryUtil
 				.forClass(com.justonetech.sys.model.Dictionary.class);
 		query.add(PropertyFactoryUtil.forName("parentId").eq(0L));
@@ -371,7 +370,7 @@ public class DictionaryPortlet extends MVCPortlet {
 				.dynamicQuery(query);
 	}
 
-	public static List<Dictionary> findPath(long id) throws SystemException {
+	public static List<Dictionary> getPath(long id) throws SystemException {
 		DynamicQuery query = DynamicQueryFactoryUtil
 				.forClass(com.justonetech.sys.model.Dictionary.class);
 		query.add(PropertyFactoryUtil.forName("parentId").ne(0L));
@@ -380,7 +379,7 @@ public class DictionaryPortlet extends MVCPortlet {
 				.dynamicQuery(query);
 	}
 
-	public static List<Dictionary> findByParentId(long parentId)
+	public static List<Dictionary> getCodesByParentId(long parentId)
 			throws SystemException {
 		DynamicQuery query = DynamicQueryFactoryUtil.forClass(Dictionary.class);
 		query.add(PropertyFactoryUtil.forName("parentId").eq(parentId));
