@@ -58,7 +58,8 @@ public interface LeaderWorkPersistence extends BasePersistence<LeaderWork> {
 	* @param leaderWorkPK the primary key for the new leader work
 	* @return the new leader work
 	*/
-	public com.justonetech.oa.model.LeaderWork create(LeaderWorkPK leaderWorkPK);
+	public com.justonetech.oa.model.LeaderWork create(
+		com.justonetech.oa.service.persistence.LeaderWorkPK leaderWorkPK);
 
 	/**
 	* Removes the leader work with the primary key from the database. Also notifies the appropriate model listeners.
@@ -68,7 +69,8 @@ public interface LeaderWorkPersistence extends BasePersistence<LeaderWork> {
 	* @throws com.justonetech.oa.NoSuchLeaderWorkException if a leader work with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.justonetech.oa.model.LeaderWork remove(LeaderWorkPK leaderWorkPK)
+	public com.justonetech.oa.model.LeaderWork remove(
+		com.justonetech.oa.service.persistence.LeaderWorkPK leaderWorkPK)
 		throws com.justonetech.oa.NoSuchLeaderWorkException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -85,7 +87,7 @@ public interface LeaderWorkPersistence extends BasePersistence<LeaderWork> {
 	* @throws SystemException if a system exception occurred
 	*/
 	public com.justonetech.oa.model.LeaderWork findByPrimaryKey(
-		LeaderWorkPK leaderWorkPK)
+		com.justonetech.oa.service.persistence.LeaderWorkPK leaderWorkPK)
 		throws com.justonetech.oa.NoSuchLeaderWorkException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -97,7 +99,7 @@ public interface LeaderWorkPersistence extends BasePersistence<LeaderWork> {
 	* @throws SystemException if a system exception occurred
 	*/
 	public com.justonetech.oa.model.LeaderWork fetchByPrimaryKey(
-		LeaderWorkPK leaderWorkPK)
+		com.justonetech.oa.service.persistence.LeaderWorkPK leaderWorkPK)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**

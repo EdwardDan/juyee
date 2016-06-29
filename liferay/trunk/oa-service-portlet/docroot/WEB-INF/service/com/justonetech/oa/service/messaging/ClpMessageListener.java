@@ -15,6 +15,8 @@
 package com.justonetech.oa.service.messaging;
 
 import com.justonetech.oa.service.ClpSerializer;
+import com.justonetech.oa.service.DeptWorkItemLocalServiceUtil;
+import com.justonetech.oa.service.DeptWorkLocalServiceUtil;
 import com.justonetech.oa.service.LeaderWorkLocalServiceUtil;
 import com.justonetech.oa.service.OfficeSupplyLocalServiceUtil;
 
@@ -36,6 +38,10 @@ public class ClpMessageListener extends BaseMessageListener {
 
 		if (command.equals("undeploy") &&
 				servletContextName.equals(getServletContextName())) {
+			DeptWorkLocalServiceUtil.clearService();
+
+			DeptWorkItemLocalServiceUtil.clearService();
+
 			LeaderWorkLocalServiceUtil.clearService();
 
 			OfficeSupplyLocalServiceUtil.clearService();

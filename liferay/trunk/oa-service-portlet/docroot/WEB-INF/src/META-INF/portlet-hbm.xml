@@ -2,8 +2,38 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="com.justonetech.oa.model.DeptWork" />
+	<import class="com.justonetech.oa.model.DeptWorkItem" />
 	<import class="com.justonetech.oa.model.LeaderWork" />
 	<import class="com.justonetech.oa.model.OfficeSupply" />
+	<class name="com.justonetech.oa.model.impl.DeptWorkImpl" table="oa_DeptWork">
+		<cache usage="read-write" />
+		<id name="deptWorkId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createTime" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedTime" type="org.hibernate.type.TimestampType" />
+		<property name="deptId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="deptName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="startDate" type="org.hibernate.type.TimestampType" />
+		<property name="endDate" type="org.hibernate.type.TimestampType" />
+		<property name="status" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.justonetech.oa.model.impl.DeptWorkItemImpl" table="oa_DeptWorkItem">
+		<cache usage="read-write" />
+		<id name="deptWorkItemId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="deptWorkId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="sortNo" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="dutyPerosn" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="mainWork" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="schedule" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="content" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="agentPerson" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
 	<class name="com.justonetech.oa.model.impl.LeaderWorkImpl" table="oa_LeaderWork">
 		<cache usage="read-write" />
 		<composite-id name="primaryKey" class="com.justonetech.oa.service.persistence.LeaderWorkPK">

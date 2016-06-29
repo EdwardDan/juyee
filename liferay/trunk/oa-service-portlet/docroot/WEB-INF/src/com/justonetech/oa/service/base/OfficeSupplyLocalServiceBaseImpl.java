@@ -16,6 +16,8 @@ package com.justonetech.oa.service.base;
 
 import com.justonetech.oa.model.OfficeSupply;
 import com.justonetech.oa.service.OfficeSupplyLocalService;
+import com.justonetech.oa.service.persistence.DeptWorkItemPersistence;
+import com.justonetech.oa.service.persistence.DeptWorkPersistence;
 import com.justonetech.oa.service.persistence.LeaderWorkPersistence;
 import com.justonetech.oa.service.persistence.OfficeSupplyPersistence;
 
@@ -282,6 +284,81 @@ public abstract class OfficeSupplyLocalServiceBaseImpl
 	}
 
 	/**
+	 * Returns the dept work local service.
+	 *
+	 * @return the dept work local service
+	 */
+	public com.justonetech.oa.service.DeptWorkLocalService getDeptWorkLocalService() {
+		return deptWorkLocalService;
+	}
+
+	/**
+	 * Sets the dept work local service.
+	 *
+	 * @param deptWorkLocalService the dept work local service
+	 */
+	public void setDeptWorkLocalService(
+		com.justonetech.oa.service.DeptWorkLocalService deptWorkLocalService) {
+		this.deptWorkLocalService = deptWorkLocalService;
+	}
+
+	/**
+	 * Returns the dept work persistence.
+	 *
+	 * @return the dept work persistence
+	 */
+	public DeptWorkPersistence getDeptWorkPersistence() {
+		return deptWorkPersistence;
+	}
+
+	/**
+	 * Sets the dept work persistence.
+	 *
+	 * @param deptWorkPersistence the dept work persistence
+	 */
+	public void setDeptWorkPersistence(DeptWorkPersistence deptWorkPersistence) {
+		this.deptWorkPersistence = deptWorkPersistence;
+	}
+
+	/**
+	 * Returns the dept work item local service.
+	 *
+	 * @return the dept work item local service
+	 */
+	public com.justonetech.oa.service.DeptWorkItemLocalService getDeptWorkItemLocalService() {
+		return deptWorkItemLocalService;
+	}
+
+	/**
+	 * Sets the dept work item local service.
+	 *
+	 * @param deptWorkItemLocalService the dept work item local service
+	 */
+	public void setDeptWorkItemLocalService(
+		com.justonetech.oa.service.DeptWorkItemLocalService deptWorkItemLocalService) {
+		this.deptWorkItemLocalService = deptWorkItemLocalService;
+	}
+
+	/**
+	 * Returns the dept work item persistence.
+	 *
+	 * @return the dept work item persistence
+	 */
+	public DeptWorkItemPersistence getDeptWorkItemPersistence() {
+		return deptWorkItemPersistence;
+	}
+
+	/**
+	 * Sets the dept work item persistence.
+	 *
+	 * @param deptWorkItemPersistence the dept work item persistence
+	 */
+	public void setDeptWorkItemPersistence(
+		DeptWorkItemPersistence deptWorkItemPersistence) {
+		this.deptWorkItemPersistence = deptWorkItemPersistence;
+	}
+
+	/**
 	 * Returns the leader work local service.
 	 *
 	 * @return the leader work local service
@@ -533,6 +610,14 @@ public abstract class OfficeSupplyLocalServiceBaseImpl
 		}
 	}
 
+	@BeanReference(type = com.justonetech.oa.service.DeptWorkLocalService.class)
+	protected com.justonetech.oa.service.DeptWorkLocalService deptWorkLocalService;
+	@BeanReference(type = DeptWorkPersistence.class)
+	protected DeptWorkPersistence deptWorkPersistence;
+	@BeanReference(type = com.justonetech.oa.service.DeptWorkItemLocalService.class)
+	protected com.justonetech.oa.service.DeptWorkItemLocalService deptWorkItemLocalService;
+	@BeanReference(type = DeptWorkItemPersistence.class)
+	protected DeptWorkItemPersistence deptWorkItemPersistence;
 	@BeanReference(type = com.justonetech.oa.service.LeaderWorkLocalService.class)
 	protected com.justonetech.oa.service.LeaderWorkLocalService leaderWorkLocalService;
 	@BeanReference(type = LeaderWorkPersistence.class)

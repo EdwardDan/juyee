@@ -1,6 +1,28 @@
 <?xml version="1.0"?>
 
 <model-hints>
+	<model name="com.justonetech.oa.model.DeptWork">
+		<field name="deptWorkId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createTime" type="Date" />
+		<field name="modifiedTime" type="Date" />
+		<field name="deptId" type="long" />
+		<field name="deptName" type="String" />
+		<field name="startDate" type="Date" />
+		<field name="endDate" type="Date" />
+		<field name="status" type="String" />
+	</model>
+	<model name="com.justonetech.oa.model.DeptWorkItem">
+		<field name="deptWorkItemId" type="long" />
+		<field name="deptWorkId" type="long" />
+		<field name="sortNo" type="int" />
+		<field name="dutyPerosn" type="String" />
+		<field name="mainWork" type="boolean" />
+		<field name="schedule" type="String" />
+		<field name="content" type="String" />
+		<field name="agentPerson" type="String" />
+	</model>
 	<model name="com.justonetech.oa.model.LeaderWork">
 		<field name="userId" type="long" />
 		<field name="workDate" type="long" />

@@ -36,7 +36,7 @@
 
 	<!-- 领导一周工作安排 -->
 	<entity name="LeaderWork" local-service="true" remote-service="false">
-	
+
 		<!-- PK fields -->
 		<column name="userId" type="long" primary="true" />
 		<column name="workDate" type="long" primary="true" />
@@ -52,6 +52,62 @@
 		<!-- Other fields -->
 
 		<column name="content" type="String" />
+
+	</entity>
+
+	<!-- 科室一周工作 -->
+	<entity name="DeptWork" local-service="true" remote-service="false">
+
+		<!-- PK fields -->
+
+		<column name="deptWorkId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createTime" type="Date" />
+		<column name="modifiedTime" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="deptId" type="long" /><!--部门Id -->
+		<column name="deptName" type="String" /><!--部门名称 -->
+		<column name="startDate" type="Date" /><!--上报开始时间 -->
+		<column name="endDate" type="Date" /><!--上报结束时间 -->
+		<column name="status" type="String" /><!--状态 -->
+
+		<!-- Order -->
+		<order>
+			<order-column name="modifiedTime" order-by="desc"></order-column>
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="DeptName" return-type="Collection">
+			<finder-column name="deptName" comparator="LIKE" />
+		</finder>
+		<finder name="UserName" return-type="Collection">
+			<finder-column name="userName" comparator="LIKE" />
+		</finder>
+	</entity>
+
+	<!-- 工作内容详细 -->
+	<entity name="DeptWorkItem" local-service="true" remote-service="false">
+
+		<!-- PK fields -->
+
+		<column name="deptWorkItemId" type="long" primary="true" />
+
+		<!-- Other fields -->
+
+		<column name="deptWorkId" type="long" /><!--一周安排ID -->
+		<column name="sortNo" type="int" /><!--序号 -->
+		<column name="dutyPerosn" type="String" /><!--责任人 -->
+		<column name="mainWork" type="boolean" /><!--重点工作 -->
+		<column name="schedule" type="String" /><!--重工作进度工作 -->
+		<column name="content" type="String" /><!--工作内容 -->
+		<column name="agentPerson" type="String" /><!--经办人 -->
 
 	</entity>
 

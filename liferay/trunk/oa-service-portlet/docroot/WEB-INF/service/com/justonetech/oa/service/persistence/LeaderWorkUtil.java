@@ -137,7 +137,7 @@ public class LeaderWorkUtil {
 	* @return the new leader work
 	*/
 	public static com.justonetech.oa.model.LeaderWork create(
-		LeaderWorkPK leaderWorkPK) {
+		com.justonetech.oa.service.persistence.LeaderWorkPK leaderWorkPK) {
 		return getPersistence().create(leaderWorkPK);
 	}
 
@@ -150,7 +150,7 @@ public class LeaderWorkUtil {
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.justonetech.oa.model.LeaderWork remove(
-		LeaderWorkPK leaderWorkPK)
+		com.justonetech.oa.service.persistence.LeaderWorkPK leaderWorkPK)
 		throws com.justonetech.oa.NoSuchLeaderWorkException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().remove(leaderWorkPK);
@@ -171,7 +171,7 @@ public class LeaderWorkUtil {
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.justonetech.oa.model.LeaderWork findByPrimaryKey(
-		LeaderWorkPK leaderWorkPK)
+		com.justonetech.oa.service.persistence.LeaderWorkPK leaderWorkPK)
 		throws com.justonetech.oa.NoSuchLeaderWorkException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByPrimaryKey(leaderWorkPK);
@@ -185,7 +185,7 @@ public class LeaderWorkUtil {
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.justonetech.oa.model.LeaderWork fetchByPrimaryKey(
-		LeaderWorkPK leaderWorkPK)
+		com.justonetech.oa.service.persistence.LeaderWorkPK leaderWorkPK)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByPrimaryKey(leaderWorkPK);
 	}
