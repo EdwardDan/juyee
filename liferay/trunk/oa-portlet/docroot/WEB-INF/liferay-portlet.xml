@@ -23,6 +23,15 @@
 			leader-weekly-work-portlet
 		</css-class-wrapper>
 	</portlet>
+	<portlet>
+		<portlet-name>dept-weekly-work</portlet-name>
+		<icon>/icons/icon.png</icon>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>dept-weekly-work-portlet</css-class-wrapper>
+	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>
