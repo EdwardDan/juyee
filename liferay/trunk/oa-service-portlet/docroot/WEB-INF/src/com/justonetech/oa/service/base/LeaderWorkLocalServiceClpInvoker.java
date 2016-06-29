@@ -14,7 +14,7 @@
 
 package com.justonetech.oa.service.base;
 
-import com.justonetech.oa.service.OfficeSupplyLocalServiceUtil;
+import com.justonetech.oa.service.LeaderWorkLocalServiceUtil;
 
 import java.util.Arrays;
 
@@ -22,26 +22,30 @@ import java.util.Arrays;
  * @author justonetech
  * @generated
  */
-public class OfficeSupplyLocalServiceClpInvoker {
-	public OfficeSupplyLocalServiceClpInvoker() {
-		_methodName0 = "addOfficeSupply";
+public class LeaderWorkLocalServiceClpInvoker {
+	public LeaderWorkLocalServiceClpInvoker() {
+		_methodName0 = "addLeaderWork";
 
 		_methodParameterTypes0 = new String[] {
-				"com.justonetech.oa.model.OfficeSupply"
+				"com.justonetech.oa.model.LeaderWork"
 			};
 
-		_methodName1 = "createOfficeSupply";
+		_methodName1 = "createLeaderWork";
 
-		_methodParameterTypes1 = new String[] { "long" };
+		_methodParameterTypes1 = new String[] {
+				"com.justonetech.oa.service.persistence.LeaderWorkPK"
+			};
 
-		_methodName2 = "deleteOfficeSupply";
+		_methodName2 = "deleteLeaderWork";
 
-		_methodParameterTypes2 = new String[] { "long" };
+		_methodParameterTypes2 = new String[] {
+				"com.justonetech.oa.service.persistence.LeaderWorkPK"
+			};
 
-		_methodName3 = "deleteOfficeSupply";
+		_methodName3 = "deleteLeaderWork";
 
 		_methodParameterTypes3 = new String[] {
-				"com.justonetech.oa.model.OfficeSupply"
+				"com.justonetech.oa.model.LeaderWork"
 			};
 
 		_methodName4 = "dynamicQuery";
@@ -80,30 +84,34 @@ public class OfficeSupplyLocalServiceClpInvoker {
 				"com.liferay.portal.kernel.dao.orm.Projection"
 			};
 
-		_methodName10 = "fetchOfficeSupply";
+		_methodName10 = "fetchLeaderWork";
 
-		_methodParameterTypes10 = new String[] { "long" };
+		_methodParameterTypes10 = new String[] {
+				"com.justonetech.oa.service.persistence.LeaderWorkPK"
+			};
 
-		_methodName11 = "getOfficeSupply";
+		_methodName11 = "getLeaderWork";
 
-		_methodParameterTypes11 = new String[] { "long" };
+		_methodParameterTypes11 = new String[] {
+				"com.justonetech.oa.service.persistence.LeaderWorkPK"
+			};
 
 		_methodName12 = "getPersistedModel";
 
 		_methodParameterTypes12 = new String[] { "java.io.Serializable" };
 
-		_methodName13 = "getOfficeSupplies";
+		_methodName13 = "getLeaderWorks";
 
 		_methodParameterTypes13 = new String[] { "int", "int" };
 
-		_methodName14 = "getOfficeSuppliesCount";
+		_methodName14 = "getLeaderWorksCount";
 
 		_methodParameterTypes14 = new String[] {  };
 
-		_methodName15 = "updateOfficeSupply";
+		_methodName15 = "updateLeaderWork";
 
 		_methodParameterTypes15 = new String[] {
-				"com.justonetech.oa.model.OfficeSupply"
+				"com.justonetech.oa.model.LeaderWork"
 			};
 
 		_methodName36 = "getBeanIdentifier";
@@ -113,58 +121,50 @@ public class OfficeSupplyLocalServiceClpInvoker {
 		_methodName37 = "setBeanIdentifier";
 
 		_methodParameterTypes37 = new String[] { "java.lang.String" };
-
-		_methodName42 = "getOfficeSuppliesByName";
-
-		_methodParameterTypes42 = new String[] { "java.lang.String", "int", "int" };
-
-		_methodName43 = "getOfficeSuppliesCountByName";
-
-		_methodParameterTypes43 = new String[] { "java.lang.String" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
 		Object[] arguments) throws Throwable {
 		if (_methodName0.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes0, parameterTypes)) {
-			return OfficeSupplyLocalServiceUtil.addOfficeSupply((com.justonetech.oa.model.OfficeSupply)arguments[0]);
+			return LeaderWorkLocalServiceUtil.addLeaderWork((com.justonetech.oa.model.LeaderWork)arguments[0]);
 		}
 
 		if (_methodName1.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes1, parameterTypes)) {
-			return OfficeSupplyLocalServiceUtil.createOfficeSupply(((Long)arguments[0]).longValue());
+			return LeaderWorkLocalServiceUtil.createLeaderWork((com.justonetech.oa.service.persistence.LeaderWorkPK)arguments[0]);
 		}
 
 		if (_methodName2.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes2, parameterTypes)) {
-			return OfficeSupplyLocalServiceUtil.deleteOfficeSupply(((Long)arguments[0]).longValue());
+			return LeaderWorkLocalServiceUtil.deleteLeaderWork((com.justonetech.oa.service.persistence.LeaderWorkPK)arguments[0]);
 		}
 
 		if (_methodName3.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes3, parameterTypes)) {
-			return OfficeSupplyLocalServiceUtil.deleteOfficeSupply((com.justonetech.oa.model.OfficeSupply)arguments[0]);
+			return LeaderWorkLocalServiceUtil.deleteLeaderWork((com.justonetech.oa.model.LeaderWork)arguments[0]);
 		}
 
 		if (_methodName4.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes4, parameterTypes)) {
-			return OfficeSupplyLocalServiceUtil.dynamicQuery();
+			return LeaderWorkLocalServiceUtil.dynamicQuery();
 		}
 
 		if (_methodName5.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes5, parameterTypes)) {
-			return OfficeSupplyLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0]);
+			return LeaderWorkLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0]);
 		}
 
 		if (_methodName6.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes6, parameterTypes)) {
-			return OfficeSupplyLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
+			return LeaderWorkLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue());
 		}
 
 		if (_methodName7.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes7, parameterTypes)) {
-			return OfficeSupplyLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
+			return LeaderWorkLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue(),
 				(com.liferay.portal.kernel.util.OrderByComparator)arguments[3]);
@@ -172,68 +172,56 @@ public class OfficeSupplyLocalServiceClpInvoker {
 
 		if (_methodName8.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes8, parameterTypes)) {
-			return OfficeSupplyLocalServiceUtil.dynamicQueryCount((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0]);
+			return LeaderWorkLocalServiceUtil.dynamicQueryCount((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0]);
 		}
 
 		if (_methodName9.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes9, parameterTypes)) {
-			return OfficeSupplyLocalServiceUtil.dynamicQueryCount((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
+			return LeaderWorkLocalServiceUtil.dynamicQueryCount((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
 				(com.liferay.portal.kernel.dao.orm.Projection)arguments[1]);
 		}
 
 		if (_methodName10.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes10, parameterTypes)) {
-			return OfficeSupplyLocalServiceUtil.fetchOfficeSupply(((Long)arguments[0]).longValue());
+			return LeaderWorkLocalServiceUtil.fetchLeaderWork((com.justonetech.oa.service.persistence.LeaderWorkPK)arguments[0]);
 		}
 
 		if (_methodName11.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes11, parameterTypes)) {
-			return OfficeSupplyLocalServiceUtil.getOfficeSupply(((Long)arguments[0]).longValue());
+			return LeaderWorkLocalServiceUtil.getLeaderWork((com.justonetech.oa.service.persistence.LeaderWorkPK)arguments[0]);
 		}
 
 		if (_methodName12.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes12, parameterTypes)) {
-			return OfficeSupplyLocalServiceUtil.getPersistedModel((java.io.Serializable)arguments[0]);
+			return LeaderWorkLocalServiceUtil.getPersistedModel((java.io.Serializable)arguments[0]);
 		}
 
 		if (_methodName13.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes13, parameterTypes)) {
-			return OfficeSupplyLocalServiceUtil.getOfficeSupplies(((Integer)arguments[0]).intValue(),
+			return LeaderWorkLocalServiceUtil.getLeaderWorks(((Integer)arguments[0]).intValue(),
 				((Integer)arguments[1]).intValue());
 		}
 
 		if (_methodName14.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes14, parameterTypes)) {
-			return OfficeSupplyLocalServiceUtil.getOfficeSuppliesCount();
+			return LeaderWorkLocalServiceUtil.getLeaderWorksCount();
 		}
 
 		if (_methodName15.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes15, parameterTypes)) {
-			return OfficeSupplyLocalServiceUtil.updateOfficeSupply((com.justonetech.oa.model.OfficeSupply)arguments[0]);
+			return LeaderWorkLocalServiceUtil.updateLeaderWork((com.justonetech.oa.model.LeaderWork)arguments[0]);
 		}
 
 		if (_methodName36.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes36, parameterTypes)) {
-			return OfficeSupplyLocalServiceUtil.getBeanIdentifier();
+			return LeaderWorkLocalServiceUtil.getBeanIdentifier();
 		}
 
 		if (_methodName37.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes37, parameterTypes)) {
-			OfficeSupplyLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
+			LeaderWorkLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
-		}
-
-		if (_methodName42.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes42, parameterTypes)) {
-			return OfficeSupplyLocalServiceUtil.getOfficeSuppliesByName((java.lang.String)arguments[0],
-				((Integer)arguments[1]).intValue(),
-				((Integer)arguments[2]).intValue());
-		}
-
-		if (_methodName43.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes43, parameterTypes)) {
-			return OfficeSupplyLocalServiceUtil.getOfficeSuppliesCountByName((java.lang.String)arguments[0]);
 		}
 
 		throw new UnsupportedOperationException();
@@ -275,8 +263,4 @@ public class OfficeSupplyLocalServiceClpInvoker {
 	private String[] _methodParameterTypes36;
 	private String _methodName37;
 	private String[] _methodParameterTypes37;
-	private String _methodName42;
-	private String[] _methodParameterTypes42;
-	private String _methodName43;
-	private String[] _methodParameterTypes43;
 }

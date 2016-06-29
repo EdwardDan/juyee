@@ -2,7 +2,20 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="com.justonetech.oa.model.LeaderWork" />
 	<import class="com.justonetech.oa.model.OfficeSupply" />
+	<class name="com.justonetech.oa.model.impl.LeaderWorkImpl" table="oa_LeaderWork">
+		<cache usage="read-write" />
+		<composite-id name="primaryKey" class="com.justonetech.oa.service.persistence.LeaderWorkPK">
+			<key-property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+			<key-property name="workDate" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+			<key-property name="amOrPm" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		</composite-id>
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createTime" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedTime" type="org.hibernate.type.TimestampType" />
+		<property name="content" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
 	<class name="com.justonetech.oa.model.impl.OfficeSupplyImpl" table="oa_OfficeSupply">
 		<cache usage="read-write" />
 		<id name="officeSupplyId" type="long">

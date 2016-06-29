@@ -14,6 +14,7 @@
 
 package com.justonetech.oa.service;
 
+import com.justonetech.oa.model.LeaderWorkClp;
 import com.justonetech.oa.model.OfficeSupplyClp;
 
 import com.liferay.portal.kernel.exception.PortalException;
@@ -102,6 +103,10 @@ public class ClpSerializer {
 
 		String oldModelClassName = oldModelClass.getName();
 
+		if (oldModelClassName.equals(LeaderWorkClp.class.getName())) {
+			return translateInputLeaderWork(oldModel);
+		}
+
 		if (oldModelClassName.equals(OfficeSupplyClp.class.getName())) {
 			return translateInputOfficeSupply(oldModel);
 		}
@@ -119,6 +124,16 @@ public class ClpSerializer {
 		}
 
 		return newList;
+	}
+
+	public static Object translateInputLeaderWork(BaseModel<?> oldModel) {
+		LeaderWorkClp oldClpModel = (LeaderWorkClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getLeaderWorkRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
 	}
 
 	public static Object translateInputOfficeSupply(BaseModel<?> oldModel) {
@@ -147,6 +162,43 @@ public class ClpSerializer {
 		Class<?> oldModelClass = oldModel.getClass();
 
 		String oldModelClassName = oldModelClass.getName();
+
+		if (oldModelClassName.equals(
+					"com.justonetech.oa.model.impl.LeaderWorkImpl")) {
+			return translateOutputLeaderWork(oldModel);
+		}
+		else if (oldModelClassName.endsWith("Clp")) {
+			try {
+				ClassLoader classLoader = ClpSerializer.class.getClassLoader();
+
+				Method getClpSerializerClassMethod = oldModelClass.getMethod(
+						"getClpSerializerClass");
+
+				Class<?> oldClpSerializerClass = (Class<?>)getClpSerializerClassMethod.invoke(oldModel);
+
+				Class<?> newClpSerializerClass = classLoader.loadClass(oldClpSerializerClass.getName());
+
+				Method translateOutputMethod = newClpSerializerClass.getMethod("translateOutput",
+						BaseModel.class);
+
+				Class<?> oldModelModelClass = oldModel.getModelClass();
+
+				Method getRemoteModelMethod = oldModelClass.getMethod("get" +
+						oldModelModelClass.getSimpleName() + "RemoteModel");
+
+				Object oldRemoteModel = getRemoteModelMethod.invoke(oldModel);
+
+				BaseModel<?> newModel = (BaseModel<?>)translateOutputMethod.invoke(null,
+						oldRemoteModel);
+
+				return newModel;
+			}
+			catch (Throwable t) {
+				if (_log.isInfoEnabled()) {
+					_log.info("Unable to translate " + oldModelClassName, t);
+				}
+			}
+		}
 
 		if (oldModelClassName.equals(
 					"com.justonetech.oa.model.impl.OfficeSupplyImpl")) {
@@ -265,11 +317,25 @@ public class ClpSerializer {
 			return new SystemException();
 		}
 
+		if (className.equals("com.justonetech.oa.NoSuchLeaderWorkException")) {
+			return new com.justonetech.oa.NoSuchLeaderWorkException();
+		}
+
 		if (className.equals("com.justonetech.oa.NoSuchOfficeSupplyException")) {
 			return new com.justonetech.oa.NoSuchOfficeSupplyException();
 		}
 
 		return throwable;
+	}
+
+	public static Object translateOutputLeaderWork(BaseModel<?> oldModel) {
+		LeaderWorkClp newModel = new LeaderWorkClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setLeaderWorkRemoteModel(oldModel);
+
+		return newModel;
 	}
 
 	public static Object translateOutputOfficeSupply(BaseModel<?> oldModel) {

@@ -3,13 +3,13 @@
 <service-builder package-path="com.justonetech.oa">
 	<author>justonetech</author>
 	<namespace>oa</namespace>
-	
+
 	<entity name="OfficeSupply" local-service="true" remote-service="false">
 		<!-- PK fields -->
 		<column name="officeSupplyId" type="long" primary="true" />
 
 		<!-- Group instance -->
-		
+
 		<!-- Audit fields -->
 		<column name="userId" type="long" />
 		<column name="userName" type="String" />
@@ -32,6 +32,27 @@
 		<finder name="Name" return-type="Collection">
 			<finder-column name="name" comparator="LIKE"></finder-column>
 		</finder>
+	</entity>
+
+	<!-- 领导一周工作安排 -->
+	<entity name="LeaderWork" local-service="true" remote-service="false">
+	
+		<!-- PK fields -->
+		<column name="userId" type="long" primary="true" />
+		<column name="workDate" type="long" primary="true" />
+		<column name="amOrPm" type="long" primary="true" />
+
+
+		<!-- Audit fields -->
+
+		<column name="userName" type="String" />
+		<column name="createTime" type="Date" />
+		<column name="modifiedTime" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="content" type="String" />
+
 	</entity>
 
 </service-builder>

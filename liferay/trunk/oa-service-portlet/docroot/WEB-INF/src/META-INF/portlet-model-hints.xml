@@ -1,6 +1,15 @@
 <?xml version="1.0"?>
 
 <model-hints>
+	<model name="com.justonetech.oa.model.LeaderWork">
+		<field name="userId" type="long" />
+		<field name="workDate" type="long" />
+		<field name="amOrPm" type="long" />
+		<field name="userName" type="String" />
+		<field name="createTime" type="Date" />
+		<field name="modifiedTime" type="Date" />
+		<field name="content" type="String" />
+	</model>
 	<model name="com.justonetech.oa.model.OfficeSupply">
 		<field name="officeSupplyId" type="long" />
 		<field name="userId" type="long" />

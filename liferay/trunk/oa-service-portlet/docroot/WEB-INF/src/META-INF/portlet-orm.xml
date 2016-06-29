@@ -7,6 +7,26 @@
 			<access>PROPERTY</access>
 		</persistence-unit-defaults>
 	</persistence-unit-metadata>
+	<mapped-superclass class="com.justonetech.oa.model.impl.LeaderWorkModelImpl">
+		<id-class class="com.justonetech.oa.service.persistence.LeaderWorkPK" />
+		<attributes>
+			<id name="userId" />
+			<id name="workDate" />
+			<id name="amOrPm" />
+			<basic name="userName" />
+			<basic name="createTime">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedTime">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="content" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="com.justonetech.oa.model.impl.OfficeSupplyModelImpl">
 		<attributes>
 			<id name="officeSupplyId" />
@@ -29,6 +49,10 @@
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
+	<entity class="com.justonetech.oa.model.impl.LeaderWorkImpl" name="LeaderWork">
+		<table name="oa_LeaderWork" />
+		<attributes />
+	</entity>
 	<entity class="com.justonetech.oa.model.impl.OfficeSupplyImpl" name="OfficeSupply">
 		<table name="oa_OfficeSupply" />
 		<attributes />

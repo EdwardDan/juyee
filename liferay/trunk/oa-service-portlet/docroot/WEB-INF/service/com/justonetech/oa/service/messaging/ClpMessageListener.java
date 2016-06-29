@@ -15,6 +15,7 @@
 package com.justonetech.oa.service.messaging;
 
 import com.justonetech.oa.service.ClpSerializer;
+import com.justonetech.oa.service.LeaderWorkLocalServiceUtil;
 import com.justonetech.oa.service.OfficeSupplyLocalServiceUtil;
 
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
@@ -35,6 +36,8 @@ public class ClpMessageListener extends BaseMessageListener {
 
 		if (command.equals("undeploy") &&
 				servletContextName.equals(getServletContextName())) {
+			LeaderWorkLocalServiceUtil.clearService();
+
 			OfficeSupplyLocalServiceUtil.clearService();
 		}
 	}
