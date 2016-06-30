@@ -286,6 +286,61 @@ public class DictionaryLocalServiceWrapper implements DictionaryLocalService,
 			arguments);
 	}
 
+	@Override
+	public com.justonetech.sys.model.Dictionary findByGroupIdAndCode(
+		long groupId, java.lang.String code)
+		throws com.justonetech.sys.NoSuchDictionaryException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _dictionaryLocalService.findByGroupIdAndCode(groupId, code);
+	}
+
+	@Override
+	public java.util.List<com.justonetech.sys.model.Dictionary> findByGroupIdAndParentId(
+		long groupId, long parentId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _dictionaryLocalService.findByGroupIdAndParentId(groupId,
+			parentId, start, end);
+	}
+
+	@Override
+	public int countByGroupIdAndParentId(long groupId, long parentId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _dictionaryLocalService.countByGroupIdAndParentId(groupId,
+			parentId);
+	}
+
+	@Override
+	public java.util.List<com.justonetech.sys.model.Dictionary> findByParentIdAndIsValid(
+		long parentId, boolean isValid, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _dictionaryLocalService.findByParentIdAndIsValid(parentId,
+			isValid, start, end);
+	}
+
+	@Override
+	public int countByParentIdAndIsValid(long parentId, boolean isValid)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _dictionaryLocalService.countByParentIdAndIsValid(parentId,
+			isValid);
+	}
+
+	@Override
+	public java.util.List<com.justonetech.sys.model.Dictionary> findByG_P_N_C(
+		long groupId, long parentId, java.lang.String name,
+		java.lang.String code, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _dictionaryLocalService.findByG_P_N_C(groupId, parentId, name,
+			code, start, end);
+	}
+
+	@Override
+	public int countByG_P_N_C(long groupId, long parentId,
+		java.lang.String name, java.lang.String code)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _dictionaryLocalService.countByG_P_N_C(groupId, parentId, name,
+			code);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

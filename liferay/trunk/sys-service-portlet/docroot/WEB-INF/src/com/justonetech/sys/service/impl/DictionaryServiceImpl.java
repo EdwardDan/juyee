@@ -41,45 +41,5 @@ public class DictionaryServiceImpl extends DictionaryServiceBaseImpl {
      * {@link com.justonetech.sys.service.DictionaryServiceUtil} to access the
      * dictionary remote service.
      */
-    public Dictionary findByGroupIdAndCode(long groupId, String code)
-        throws SystemException, NoSuchDictionaryException {
 
-        return dictionaryPersistence.findByGroupIdAndCode(groupId, code);
-    }
-
-    public List<Dictionary> findByGroupIdAndParentId(long groupId, long parentId, int start, int end)
-        throws SystemException {
-
-        return dictionaryPersistence.findByGroupIdAndParentId(groupId, parentId, start, end);
-    }
-
-    public int countByGroupIdAndParentId(long groupId, long parentId)
-        throws SystemException {
-
-        return dictionaryPersistence.countByGroupIdAndParentId(groupId, parentId);
-    }
-
-    public List<Dictionary> findByParentIdAndIsValid(long parentId, boolean isValid, int start, int end)
-        throws SystemException {
-
-        return dictionaryPersistence.findByParentIdAndIsValid(parentId, isValid, start, end);
-    }
-
-    public int countByParentIdAndIsValid(long parentId, boolean isValid)
-        throws SystemException {
-
-        return dictionaryPersistence.countByParentIdAndIsValid(parentId, isValid);
-    }
-
-    public List<Dictionary> findByG_P_N_C(long groupId, long parentId, String name, String code, int start, int end)
-        throws SystemException {
-
-        return dictionaryPersistence.findByG_P_N_C(groupId, parentId, name, code, start, end);
-    }
-
-    public int countByG_P_N_C(long groupId, long parentId, String name, String code)
-        throws SystemException {
-
-        return dictionaryPersistence.countByG_P_N_C(groupId, parentId, name, code);
-    }
 }

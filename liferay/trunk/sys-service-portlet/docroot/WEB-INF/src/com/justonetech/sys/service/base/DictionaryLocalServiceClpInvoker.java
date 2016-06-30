@@ -113,6 +113,39 @@ public class DictionaryLocalServiceClpInvoker {
 		_methodName35 = "setBeanIdentifier";
 
 		_methodParameterTypes35 = new String[] { "java.lang.String" };
+
+		_methodName40 = "findByGroupIdAndCode";
+
+		_methodParameterTypes40 = new String[] { "long", "java.lang.String" };
+
+		_methodName41 = "findByGroupIdAndParentId";
+
+		_methodParameterTypes41 = new String[] { "long", "long", "int", "int" };
+
+		_methodName42 = "countByGroupIdAndParentId";
+
+		_methodParameterTypes42 = new String[] { "long", "long" };
+
+		_methodName43 = "findByParentIdAndIsValid";
+
+		_methodParameterTypes43 = new String[] { "long", "boolean", "int", "int" };
+
+		_methodName44 = "countByParentIdAndIsValid";
+
+		_methodParameterTypes44 = new String[] { "long", "boolean" };
+
+		_methodName45 = "findByG_P_N_C";
+
+		_methodParameterTypes45 = new String[] {
+				"long", "long", "java.lang.String", "java.lang.String", "int",
+				"int"
+			};
+
+		_methodName46 = "countByG_P_N_C";
+
+		_methodParameterTypes46 = new String[] {
+				"long", "long", "java.lang.String", "java.lang.String"
+			};
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -216,6 +249,56 @@ public class DictionaryLocalServiceClpInvoker {
 			return null;
 		}
 
+		if (_methodName40.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes40, parameterTypes)) {
+			return DictionaryLocalServiceUtil.findByGroupIdAndCode(((Long)arguments[0]).longValue(),
+				(java.lang.String)arguments[1]);
+		}
+
+		if (_methodName41.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes41, parameterTypes)) {
+			return DictionaryLocalServiceUtil.findByGroupIdAndParentId(((Long)arguments[0]).longValue(),
+				((Long)arguments[1]).longValue(),
+				((Integer)arguments[2]).intValue(),
+				((Integer)arguments[3]).intValue());
+		}
+
+		if (_methodName42.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes42, parameterTypes)) {
+			return DictionaryLocalServiceUtil.countByGroupIdAndParentId(((Long)arguments[0]).longValue(),
+				((Long)arguments[1]).longValue());
+		}
+
+		if (_methodName43.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes43, parameterTypes)) {
+			return DictionaryLocalServiceUtil.findByParentIdAndIsValid(((Long)arguments[0]).longValue(),
+				((Boolean)arguments[1]).booleanValue(),
+				((Integer)arguments[2]).intValue(),
+				((Integer)arguments[3]).intValue());
+		}
+
+		if (_methodName44.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes44, parameterTypes)) {
+			return DictionaryLocalServiceUtil.countByParentIdAndIsValid(((Long)arguments[0]).longValue(),
+				((Boolean)arguments[1]).booleanValue());
+		}
+
+		if (_methodName45.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes45, parameterTypes)) {
+			return DictionaryLocalServiceUtil.findByG_P_N_C(((Long)arguments[0]).longValue(),
+				((Long)arguments[1]).longValue(),
+				(java.lang.String)arguments[2], (java.lang.String)arguments[3],
+				((Integer)arguments[4]).intValue(),
+				((Integer)arguments[5]).intValue());
+		}
+
+		if (_methodName46.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes46, parameterTypes)) {
+			return DictionaryLocalServiceUtil.countByG_P_N_C(((Long)arguments[0]).longValue(),
+				((Long)arguments[1]).longValue(),
+				(java.lang.String)arguments[2], (java.lang.String)arguments[3]);
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -255,4 +338,18 @@ public class DictionaryLocalServiceClpInvoker {
 	private String[] _methodParameterTypes34;
 	private String _methodName35;
 	private String[] _methodParameterTypes35;
+	private String _methodName40;
+	private String[] _methodParameterTypes40;
+	private String _methodName41;
+	private String[] _methodParameterTypes41;
+	private String _methodName42;
+	private String[] _methodParameterTypes42;
+	private String _methodName43;
+	private String[] _methodParameterTypes43;
+	private String _methodName44;
+	private String[] _methodParameterTypes44;
+	private String _methodName45;
+	private String[] _methodParameterTypes45;
+	private String _methodName46;
+	private String[] _methodParameterTypes46;
 }

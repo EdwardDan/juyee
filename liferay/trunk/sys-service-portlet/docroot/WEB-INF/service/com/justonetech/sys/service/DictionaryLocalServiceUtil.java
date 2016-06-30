@@ -275,6 +275,51 @@ public class DictionaryLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static com.justonetech.sys.model.Dictionary findByGroupIdAndCode(
+		long groupId, java.lang.String code)
+		throws com.justonetech.sys.NoSuchDictionaryException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().findByGroupIdAndCode(groupId, code);
+	}
+
+	public static java.util.List<com.justonetech.sys.model.Dictionary> findByGroupIdAndParentId(
+		long groupId, long parentId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .findByGroupIdAndParentId(groupId, parentId, start, end);
+	}
+
+	public static int countByGroupIdAndParentId(long groupId, long parentId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().countByGroupIdAndParentId(groupId, parentId);
+	}
+
+	public static java.util.List<com.justonetech.sys.model.Dictionary> findByParentIdAndIsValid(
+		long parentId, boolean isValid, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .findByParentIdAndIsValid(parentId, isValid, start, end);
+	}
+
+	public static int countByParentIdAndIsValid(long parentId, boolean isValid)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().countByParentIdAndIsValid(parentId, isValid);
+	}
+
+	public static java.util.List<com.justonetech.sys.model.Dictionary> findByG_P_N_C(
+		long groupId, long parentId, java.lang.String name,
+		java.lang.String code, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .findByG_P_N_C(groupId, parentId, name, code, start, end);
+	}
+
+	public static int countByG_P_N_C(long groupId, long parentId,
+		java.lang.String name, java.lang.String code)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().countByG_P_N_C(groupId, parentId, name, code);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

@@ -114,6 +114,39 @@ public class DictionaryLocalServiceClp implements DictionaryLocalService {
 		_methodName17 = "setBeanIdentifier";
 
 		_methodParameterTypes17 = new String[] { "java.lang.String" };
+
+		_methodName19 = "findByGroupIdAndCode";
+
+		_methodParameterTypes19 = new String[] { "long", "java.lang.String" };
+
+		_methodName20 = "findByGroupIdAndParentId";
+
+		_methodParameterTypes20 = new String[] { "long", "long", "int", "int" };
+
+		_methodName21 = "countByGroupIdAndParentId";
+
+		_methodParameterTypes21 = new String[] { "long", "long" };
+
+		_methodName22 = "findByParentIdAndIsValid";
+
+		_methodParameterTypes22 = new String[] { "long", "boolean", "int", "int" };
+
+		_methodName23 = "countByParentIdAndIsValid";
+
+		_methodParameterTypes23 = new String[] { "long", "boolean" };
+
+		_methodName24 = "findByG_P_N_C";
+
+		_methodParameterTypes24 = new String[] {
+				"long", "long", "java.lang.String", "java.lang.String", "int",
+				"int"
+			};
+
+		_methodName25 = "countByG_P_N_C";
+
+		_methodParameterTypes25 = new String[] {
+				"long", "long", "java.lang.String", "java.lang.String"
+			};
 	}
 
 	@Override
@@ -665,6 +698,238 @@ public class DictionaryLocalServiceClp implements DictionaryLocalService {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
+	public com.justonetech.sys.model.Dictionary findByGroupIdAndCode(
+		long groupId, java.lang.String code)
+		throws com.justonetech.sys.NoSuchDictionaryException,
+			com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName19,
+					_methodParameterTypes19,
+					new Object[] { groupId, ClpSerializer.translateInput(code) });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.justonetech.sys.NoSuchDictionaryException) {
+				throw (com.justonetech.sys.NoSuchDictionaryException)t;
+			}
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.justonetech.sys.model.Dictionary)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public java.util.List<com.justonetech.sys.model.Dictionary> findByGroupIdAndParentId(
+		long groupId, long parentId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName20,
+					_methodParameterTypes20,
+					new Object[] { groupId, parentId, start, end });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<com.justonetech.sys.model.Dictionary>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public int countByGroupIdAndParentId(long groupId, long parentId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName21,
+					_methodParameterTypes21, new Object[] { groupId, parentId });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return ((Integer)returnObj).intValue();
+	}
+
+	@Override
+	public java.util.List<com.justonetech.sys.model.Dictionary> findByParentIdAndIsValid(
+		long parentId, boolean isValid, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName22,
+					_methodParameterTypes22,
+					new Object[] { parentId, isValid, start, end });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<com.justonetech.sys.model.Dictionary>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public int countByParentIdAndIsValid(long parentId, boolean isValid)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName23,
+					_methodParameterTypes23, new Object[] { parentId, isValid });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return ((Integer)returnObj).intValue();
+	}
+
+	@Override
+	public java.util.List<com.justonetech.sys.model.Dictionary> findByG_P_N_C(
+		long groupId, long parentId, java.lang.String name,
+		java.lang.String code, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName24,
+					_methodParameterTypes24,
+					new Object[] {
+						groupId,
+						
+					parentId,
+						
+					ClpSerializer.translateInput(name),
+						
+					ClpSerializer.translateInput(code),
+						
+					start,
+						
+					end
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<com.justonetech.sys.model.Dictionary>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public int countByG_P_N_C(long groupId, long parentId,
+		java.lang.String name, java.lang.String code)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName25,
+					_methodParameterTypes25,
+					new Object[] {
+						groupId,
+						
+					parentId,
+						
+					ClpSerializer.translateInput(name),
+						
+					ClpSerializer.translateInput(code)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return ((Integer)returnObj).intValue();
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -702,4 +967,18 @@ public class DictionaryLocalServiceClp implements DictionaryLocalService {
 	private String[] _methodParameterTypes16;
 	private String _methodName17;
 	private String[] _methodParameterTypes17;
+	private String _methodName19;
+	private String[] _methodParameterTypes19;
+	private String _methodName20;
+	private String[] _methodParameterTypes20;
+	private String _methodName21;
+	private String[] _methodParameterTypes21;
+	private String _methodName22;
+	private String[] _methodParameterTypes22;
+	private String _methodName23;
+	private String[] _methodParameterTypes23;
+	private String _methodName24;
+	private String[] _methodParameterTypes24;
+	private String _methodName25;
+	private String[] _methodParameterTypes25;
 }
