@@ -301,6 +301,11 @@ public class OfficeSupplyLocalServiceWrapper implements OfficeSupplyLocalService
 		return _officeSupplyLocalService.getOfficeSuppliesCountByName(name);
 	}
 
+	@Override
+	public void deleteOfficeSupplies(java.lang.String[] officeSupplyIds) {
+		_officeSupplyLocalService.deleteOfficeSupplies(officeSupplyIds);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

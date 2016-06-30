@@ -18,6 +18,7 @@ import com.justonetech.oa.model.DeptWorkClp;
 import com.justonetech.oa.model.DeptWorkItemClp;
 import com.justonetech.oa.model.LeaderWorkClp;
 import com.justonetech.oa.model.OfficeSupplyClp;
+import com.justonetech.oa.model.VehicleRequisitionClp;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -121,6 +122,10 @@ public class ClpSerializer {
 			return translateInputOfficeSupply(oldModel);
 		}
 
+		if (oldModelClassName.equals(VehicleRequisitionClp.class.getName())) {
+			return translateInputVehicleRequisition(oldModel);
+		}
+
 		return oldModel;
 	}
 
@@ -170,6 +175,16 @@ public class ClpSerializer {
 		OfficeSupplyClp oldClpModel = (OfficeSupplyClp)oldModel;
 
 		BaseModel<?> newModel = oldClpModel.getOfficeSupplyRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
+	public static Object translateInputVehicleRequisition(BaseModel<?> oldModel) {
+		VehicleRequisitionClp oldClpModel = (VehicleRequisitionClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getVehicleRequisitionRemoteModel();
 
 		newModel.setModelAttributes(oldClpModel.getModelAttributes());
 
@@ -341,6 +356,43 @@ public class ClpSerializer {
 			}
 		}
 
+		if (oldModelClassName.equals(
+					"com.justonetech.oa.model.impl.VehicleRequisitionImpl")) {
+			return translateOutputVehicleRequisition(oldModel);
+		}
+		else if (oldModelClassName.endsWith("Clp")) {
+			try {
+				ClassLoader classLoader = ClpSerializer.class.getClassLoader();
+
+				Method getClpSerializerClassMethod = oldModelClass.getMethod(
+						"getClpSerializerClass");
+
+				Class<?> oldClpSerializerClass = (Class<?>)getClpSerializerClassMethod.invoke(oldModel);
+
+				Class<?> newClpSerializerClass = classLoader.loadClass(oldClpSerializerClass.getName());
+
+				Method translateOutputMethod = newClpSerializerClass.getMethod("translateOutput",
+						BaseModel.class);
+
+				Class<?> oldModelModelClass = oldModel.getModelClass();
+
+				Method getRemoteModelMethod = oldModelClass.getMethod("get" +
+						oldModelModelClass.getSimpleName() + "RemoteModel");
+
+				Object oldRemoteModel = getRemoteModelMethod.invoke(oldModel);
+
+				BaseModel<?> newModel = (BaseModel<?>)translateOutputMethod.invoke(null,
+						oldRemoteModel);
+
+				return newModel;
+			}
+			catch (Throwable t) {
+				if (_log.isInfoEnabled()) {
+					_log.info("Unable to translate " + oldModelClassName, t);
+				}
+			}
+		}
+
 		return oldModel;
 	}
 
@@ -437,6 +489,11 @@ public class ClpSerializer {
 			return new com.justonetech.oa.NoSuchOfficeSupplyException();
 		}
 
+		if (className.equals(
+					"com.justonetech.oa.NoSuchVehicleRequisitionException")) {
+			return new com.justonetech.oa.NoSuchVehicleRequisitionException();
+		}
+
 		return throwable;
 	}
 
@@ -476,6 +533,17 @@ public class ClpSerializer {
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
 		newModel.setOfficeSupplyRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputVehicleRequisition(
+		BaseModel<?> oldModel) {
+		VehicleRequisitionClp newModel = new VehicleRequisitionClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setVehicleRequisitionRemoteModel(oldModel);
 
 		return newModel;
 	}

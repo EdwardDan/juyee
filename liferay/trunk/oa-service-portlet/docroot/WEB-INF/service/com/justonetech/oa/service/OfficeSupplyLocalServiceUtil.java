@@ -286,6 +286,10 @@ public class OfficeSupplyLocalServiceUtil {
 		return getService().getOfficeSuppliesCountByName(name);
 	}
 
+	public static void deleteOfficeSupplies(java.lang.String[] officeSupplyIds) {
+		getService().deleteOfficeSupplies(officeSupplyIds);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

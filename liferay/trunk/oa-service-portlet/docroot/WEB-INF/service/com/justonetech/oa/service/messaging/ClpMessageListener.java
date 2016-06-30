@@ -19,6 +19,7 @@ import com.justonetech.oa.service.DeptWorkItemLocalServiceUtil;
 import com.justonetech.oa.service.DeptWorkLocalServiceUtil;
 import com.justonetech.oa.service.LeaderWorkLocalServiceUtil;
 import com.justonetech.oa.service.OfficeSupplyLocalServiceUtil;
+import com.justonetech.oa.service.VehicleRequisitionLocalServiceUtil;
 
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
@@ -45,6 +46,8 @@ public class ClpMessageListener extends BaseMessageListener {
 			LeaderWorkLocalServiceUtil.clearService();
 
 			OfficeSupplyLocalServiceUtil.clearService();
+
+			VehicleRequisitionLocalServiceUtil.clearService();
 		}
 	}
 }

@@ -20,7 +20,9 @@
 		<field name="dutyPerosn" type="String" />
 		<field name="mainWork" type="boolean" />
 		<field name="schedule" type="String" />
-		<field name="content" type="String" />
+		<field name="content" type="String">
+			<hint name="max-length">1000</hint>
+		</field>
 		<field name="agentPerson" type="String" />
 	</model>
 	<model name="com.justonetech.oa.model.LeaderWork">
@@ -30,7 +32,9 @@
 		<field name="userName" type="String" />
 		<field name="createTime" type="Date" />
 		<field name="modifiedTime" type="Date" />
-		<field name="content" type="String" />
+		<field name="content" type="String">
+			<hint name="max-length">1000</hint>
+		</field>
 	</model>
 	<model name="com.justonetech.oa.model.OfficeSupply">
 		<field name="officeSupplyId" type="long" />
@@ -43,5 +47,25 @@
 		<field name="unit" type="String" />
 		<field name="unitPrice" type="double" />
 		<field name="quantity" type="int" />
+	</model>
+	<model name="com.justonetech.oa.model.VehicleRequisition">
+		<field name="vehicleRequisitionId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createTime" type="Date" />
+		<field name="modifiedTime" type="Date" />
+		<field name="applicantDeptId" type="long" />
+		<field name="applicantDeptName" type="String" />
+		<field name="applicantId" type="long" />
+		<field name="applicantName" type="String" />
+		<field name="startTime" type="Date" />
+		<field name="endTime" type="Date" />
+		<field name="passengerNum" type="int" />
+		<field name="reason" type="String">
+			<hint name="max-length">1000</hint>
+		</field>
+		<field name="destination" type="String">
+			<hint name="max-length">200</hint>
+		</field>
 	</model>
 </model-hints>

@@ -20,29 +20,30 @@ import com.liferay.portal.service.InvokableLocalService;
  * @author justonetech
  * @generated
  */
-public class OfficeSupplyLocalServiceClp implements OfficeSupplyLocalService {
-	public OfficeSupplyLocalServiceClp(
+public class VehicleRequisitionLocalServiceClp
+	implements VehicleRequisitionLocalService {
+	public VehicleRequisitionLocalServiceClp(
 		InvokableLocalService invokableLocalService) {
 		_invokableLocalService = invokableLocalService;
 
-		_methodName0 = "addOfficeSupply";
+		_methodName0 = "addVehicleRequisition";
 
 		_methodParameterTypes0 = new String[] {
-				"com.justonetech.oa.model.OfficeSupply"
+				"com.justonetech.oa.model.VehicleRequisition"
 			};
 
-		_methodName1 = "createOfficeSupply";
+		_methodName1 = "createVehicleRequisition";
 
 		_methodParameterTypes1 = new String[] { "long" };
 
-		_methodName2 = "deleteOfficeSupply";
+		_methodName2 = "deleteVehicleRequisition";
 
 		_methodParameterTypes2 = new String[] { "long" };
 
-		_methodName3 = "deleteOfficeSupply";
+		_methodName3 = "deleteVehicleRequisition";
 
 		_methodParameterTypes3 = new String[] {
-				"com.justonetech.oa.model.OfficeSupply"
+				"com.justonetech.oa.model.VehicleRequisition"
 			};
 
 		_methodName4 = "dynamicQuery";
@@ -81,11 +82,11 @@ public class OfficeSupplyLocalServiceClp implements OfficeSupplyLocalService {
 				"com.liferay.portal.kernel.dao.orm.Projection"
 			};
 
-		_methodName10 = "fetchOfficeSupply";
+		_methodName10 = "fetchVehicleRequisition";
 
 		_methodParameterTypes10 = new String[] { "long" };
 
-		_methodName11 = "getOfficeSupply";
+		_methodName11 = "getVehicleRequisition";
 
 		_methodParameterTypes11 = new String[] { "long" };
 
@@ -93,18 +94,18 @@ public class OfficeSupplyLocalServiceClp implements OfficeSupplyLocalService {
 
 		_methodParameterTypes12 = new String[] { "java.io.Serializable" };
 
-		_methodName13 = "getOfficeSupplies";
+		_methodName13 = "getVehicleRequisitions";
 
 		_methodParameterTypes13 = new String[] { "int", "int" };
 
-		_methodName14 = "getOfficeSuppliesCount";
+		_methodName14 = "getVehicleRequisitionsCount";
 
 		_methodParameterTypes14 = new String[] {  };
 
-		_methodName15 = "updateOfficeSupply";
+		_methodName15 = "updateVehicleRequisition";
 
 		_methodParameterTypes15 = new String[] {
-				"com.justonetech.oa.model.OfficeSupply"
+				"com.justonetech.oa.model.VehicleRequisition"
 			};
 
 		_methodName16 = "getBeanIdentifier";
@@ -115,29 +116,31 @@ public class OfficeSupplyLocalServiceClp implements OfficeSupplyLocalService {
 
 		_methodParameterTypes17 = new String[] { "java.lang.String" };
 
-		_methodName19 = "getOfficeSuppliesByName";
+		_methodName19 = "getVehicleRequisitionsByApplicantName";
 
 		_methodParameterTypes19 = new String[] { "java.lang.String", "int", "int" };
 
-		_methodName20 = "getOfficeSuppliesCountByName";
+		_methodName20 = "getVehicleRequisitionsCountByApplicantName";
 
 		_methodParameterTypes20 = new String[] { "java.lang.String" };
 
-		_methodName21 = "deleteOfficeSupplies";
+		_methodName21 = "deleteVehicleRequisitions";
 
 		_methodParameterTypes21 = new String[] { "java.lang.String[][]" };
 	}
 
 	@Override
-	public com.justonetech.oa.model.OfficeSupply addOfficeSupply(
-		com.justonetech.oa.model.OfficeSupply officeSupply)
+	public com.justonetech.oa.model.VehicleRequisition addVehicleRequisition(
+		com.justonetech.oa.model.VehicleRequisition vehicleRequisition)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName0,
 					_methodParameterTypes0,
-					new Object[] { ClpSerializer.translateInput(officeSupply) });
+					new Object[] {
+						ClpSerializer.translateInput(vehicleRequisition)
+					});
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -155,17 +158,18 @@ public class OfficeSupplyLocalServiceClp implements OfficeSupplyLocalService {
 			}
 		}
 
-		return (com.justonetech.oa.model.OfficeSupply)ClpSerializer.translateOutput(returnObj);
+		return (com.justonetech.oa.model.VehicleRequisition)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
-	public com.justonetech.oa.model.OfficeSupply createOfficeSupply(
-		long officeSupplyId) {
+	public com.justonetech.oa.model.VehicleRequisition createVehicleRequisition(
+		long vehicleRequisitionId) {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName1,
-					_methodParameterTypes1, new Object[] { officeSupplyId });
+					_methodParameterTypes1,
+					new Object[] { vehicleRequisitionId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -179,19 +183,20 @@ public class OfficeSupplyLocalServiceClp implements OfficeSupplyLocalService {
 			}
 		}
 
-		return (com.justonetech.oa.model.OfficeSupply)ClpSerializer.translateOutput(returnObj);
+		return (com.justonetech.oa.model.VehicleRequisition)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
-	public com.justonetech.oa.model.OfficeSupply deleteOfficeSupply(
-		long officeSupplyId)
+	public com.justonetech.oa.model.VehicleRequisition deleteVehicleRequisition(
+		long vehicleRequisitionId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName2,
-					_methodParameterTypes2, new Object[] { officeSupplyId });
+					_methodParameterTypes2,
+					new Object[] { vehicleRequisitionId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -213,19 +218,21 @@ public class OfficeSupplyLocalServiceClp implements OfficeSupplyLocalService {
 			}
 		}
 
-		return (com.justonetech.oa.model.OfficeSupply)ClpSerializer.translateOutput(returnObj);
+		return (com.justonetech.oa.model.VehicleRequisition)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
-	public com.justonetech.oa.model.OfficeSupply deleteOfficeSupply(
-		com.justonetech.oa.model.OfficeSupply officeSupply)
+	public com.justonetech.oa.model.VehicleRequisition deleteVehicleRequisition(
+		com.justonetech.oa.model.VehicleRequisition vehicleRequisition)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName3,
 					_methodParameterTypes3,
-					new Object[] { ClpSerializer.translateInput(officeSupply) });
+					new Object[] {
+						ClpSerializer.translateInput(vehicleRequisition)
+					});
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -243,7 +250,7 @@ public class OfficeSupplyLocalServiceClp implements OfficeSupplyLocalService {
 			}
 		}
 
-		return (com.justonetech.oa.model.OfficeSupply)ClpSerializer.translateOutput(returnObj);
+		return (com.justonetech.oa.model.VehicleRequisition)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
@@ -444,14 +451,15 @@ public class OfficeSupplyLocalServiceClp implements OfficeSupplyLocalService {
 	}
 
 	@Override
-	public com.justonetech.oa.model.OfficeSupply fetchOfficeSupply(
-		long officeSupplyId)
+	public com.justonetech.oa.model.VehicleRequisition fetchVehicleRequisition(
+		long vehicleRequisitionId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName10,
-					_methodParameterTypes10, new Object[] { officeSupplyId });
+					_methodParameterTypes10,
+					new Object[] { vehicleRequisitionId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -469,19 +477,20 @@ public class OfficeSupplyLocalServiceClp implements OfficeSupplyLocalService {
 			}
 		}
 
-		return (com.justonetech.oa.model.OfficeSupply)ClpSerializer.translateOutput(returnObj);
+		return (com.justonetech.oa.model.VehicleRequisition)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
-	public com.justonetech.oa.model.OfficeSupply getOfficeSupply(
-		long officeSupplyId)
+	public com.justonetech.oa.model.VehicleRequisition getVehicleRequisition(
+		long vehicleRequisitionId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName11,
-					_methodParameterTypes11, new Object[] { officeSupplyId });
+					_methodParameterTypes11,
+					new Object[] { vehicleRequisitionId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -503,7 +512,7 @@ public class OfficeSupplyLocalServiceClp implements OfficeSupplyLocalService {
 			}
 		}
 
-		return (com.justonetech.oa.model.OfficeSupply)ClpSerializer.translateOutput(returnObj);
+		return (com.justonetech.oa.model.VehicleRequisition)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
@@ -542,7 +551,7 @@ public class OfficeSupplyLocalServiceClp implements OfficeSupplyLocalService {
 	}
 
 	@Override
-	public java.util.List<com.justonetech.oa.model.OfficeSupply> getOfficeSupplies(
+	public java.util.List<com.justonetech.oa.model.VehicleRequisition> getVehicleRequisitions(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
@@ -567,11 +576,11 @@ public class OfficeSupplyLocalServiceClp implements OfficeSupplyLocalService {
 			}
 		}
 
-		return (java.util.List<com.justonetech.oa.model.OfficeSupply>)ClpSerializer.translateOutput(returnObj);
+		return (java.util.List<com.justonetech.oa.model.VehicleRequisition>)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
-	public int getOfficeSuppliesCount()
+	public int getVehicleRequisitionsCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
@@ -599,15 +608,17 @@ public class OfficeSupplyLocalServiceClp implements OfficeSupplyLocalService {
 	}
 
 	@Override
-	public com.justonetech.oa.model.OfficeSupply updateOfficeSupply(
-		com.justonetech.oa.model.OfficeSupply officeSupply)
+	public com.justonetech.oa.model.VehicleRequisition updateVehicleRequisition(
+		com.justonetech.oa.model.VehicleRequisition vehicleRequisition)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName15,
 					_methodParameterTypes15,
-					new Object[] { ClpSerializer.translateInput(officeSupply) });
+					new Object[] {
+						ClpSerializer.translateInput(vehicleRequisition)
+					});
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -625,7 +636,7 @@ public class OfficeSupplyLocalServiceClp implements OfficeSupplyLocalService {
 			}
 		}
 
-		return (com.justonetech.oa.model.OfficeSupply)ClpSerializer.translateOutput(returnObj);
+		return (com.justonetech.oa.model.VehicleRequisition)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
@@ -679,15 +690,21 @@ public class OfficeSupplyLocalServiceClp implements OfficeSupplyLocalService {
 	}
 
 	@Override
-	public java.util.List<com.justonetech.oa.model.OfficeSupply> getOfficeSuppliesByName(
-		java.lang.String name, int start, int end)
+	public java.util.List<com.justonetech.oa.model.VehicleRequisition> getVehicleRequisitionsByApplicantName(
+		java.lang.String applicantName, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName19,
 					_methodParameterTypes19,
-					new Object[] { ClpSerializer.translateInput(name), start, end });
+					new Object[] {
+						ClpSerializer.translateInput(applicantName),
+						
+					start,
+						
+					end
+					});
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -705,18 +722,19 @@ public class OfficeSupplyLocalServiceClp implements OfficeSupplyLocalService {
 			}
 		}
 
-		return (java.util.List<com.justonetech.oa.model.OfficeSupply>)ClpSerializer.translateOutput(returnObj);
+		return (java.util.List<com.justonetech.oa.model.VehicleRequisition>)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
-	public int getOfficeSuppliesCountByName(java.lang.String name)
+	public int getVehicleRequisitionsCountByApplicantName(
+		java.lang.String applicantName)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName20,
 					_methodParameterTypes20,
-					new Object[] { ClpSerializer.translateInput(name) });
+					new Object[] { ClpSerializer.translateInput(applicantName) });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -738,11 +756,13 @@ public class OfficeSupplyLocalServiceClp implements OfficeSupplyLocalService {
 	}
 
 	@Override
-	public void deleteOfficeSupplies(java.lang.String[] officeSupplyIds) {
+	public void deleteVehicleRequisitions(
+		java.lang.String[] vehicleRequisitionIds) {
 		try {
 			_invokableLocalService.invokeMethod(_methodName21,
 				_methodParameterTypes21,
-				new Object[] { ClpSerializer.translateInput(officeSupplyIds) });
+				new Object[] { ClpSerializer.translateInput(
+						vehicleRequisitionIds) });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);

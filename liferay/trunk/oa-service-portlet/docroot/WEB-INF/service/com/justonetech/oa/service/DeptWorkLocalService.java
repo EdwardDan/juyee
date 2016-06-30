@@ -267,4 +267,6 @@ public interface DeptWorkLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getDeptWorksCountByDeptName(java.lang.String deptName)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public void deleteDeptWorks(java.lang.String[] deptWorkIds);
 }

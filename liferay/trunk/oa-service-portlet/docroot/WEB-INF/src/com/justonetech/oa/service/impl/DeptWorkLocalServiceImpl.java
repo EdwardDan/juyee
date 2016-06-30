@@ -17,7 +17,9 @@ package com.justonetech.oa.service.impl;
 import java.util.List;
 
 import com.justonetech.oa.model.DeptWork;
+import com.justonetech.oa.service.DeptWorkLocalServiceUtil;
 import com.justonetech.oa.service.base.DeptWorkLocalServiceBaseImpl;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 
 /**
@@ -61,5 +63,20 @@ public class DeptWorkLocalServiceImpl extends DeptWorkLocalServiceBaseImpl {
 	public int getDeptWorksCountByDeptName(String deptName)
 			throws SystemException {
 		return deptWorkPersistence.countByUserName("%" + deptName + "%");
+	}
+
+	public void deleteDeptWorks(String[] deptWorkIds) {
+		for (String deptWorkId : deptWorkIds) {
+			try {
+				DeptWorkLocalServiceUtil.deleteDeptWork(Long
+						.parseLong(deptWorkId));
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+			} catch (PortalException e) {
+				e.printStackTrace();
+			} catch (SystemException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }

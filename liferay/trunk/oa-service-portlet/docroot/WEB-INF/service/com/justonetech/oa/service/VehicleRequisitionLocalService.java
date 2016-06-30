@@ -25,72 +25,72 @@ import com.liferay.portal.service.InvokableLocalService;
 import com.liferay.portal.service.PersistedModelLocalService;
 
 /**
- * Provides the local service interface for OfficeSupply. Methods of this
+ * Provides the local service interface for VehicleRequisition. Methods of this
  * service will not have security checks based on the propagated JAAS
  * credentials because this service can only be accessed from within the same
  * VM.
  *
  * @author justonetech
- * @see OfficeSupplyLocalServiceUtil
- * @see com.justonetech.oa.service.base.OfficeSupplyLocalServiceBaseImpl
- * @see com.justonetech.oa.service.impl.OfficeSupplyLocalServiceImpl
+ * @see VehicleRequisitionLocalServiceUtil
+ * @see com.justonetech.oa.service.base.VehicleRequisitionLocalServiceBaseImpl
+ * @see com.justonetech.oa.service.impl.VehicleRequisitionLocalServiceImpl
  * @generated
  */
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface OfficeSupplyLocalService extends BaseLocalService,
+public interface VehicleRequisitionLocalService extends BaseLocalService,
 	InvokableLocalService, PersistedModelLocalService {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link OfficeSupplyLocalServiceUtil} to access the office supply local service. Add custom service methods to {@link com.justonetech.oa.service.impl.OfficeSupplyLocalServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link VehicleRequisitionLocalServiceUtil} to access the vehicle requisition local service. Add custom service methods to {@link com.justonetech.oa.service.impl.VehicleRequisitionLocalServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 
 	/**
-	* Adds the office supply to the database. Also notifies the appropriate model listeners.
+	* Adds the vehicle requisition to the database. Also notifies the appropriate model listeners.
 	*
-	* @param officeSupply the office supply
-	* @return the office supply that was added
+	* @param vehicleRequisition the vehicle requisition
+	* @return the vehicle requisition that was added
 	* @throws SystemException if a system exception occurred
 	*/
 	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.REINDEX)
-	public com.justonetech.oa.model.OfficeSupply addOfficeSupply(
-		com.justonetech.oa.model.OfficeSupply officeSupply)
+	public com.justonetech.oa.model.VehicleRequisition addVehicleRequisition(
+		com.justonetech.oa.model.VehicleRequisition vehicleRequisition)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Creates a new office supply with the primary key. Does not add the office supply to the database.
+	* Creates a new vehicle requisition with the primary key. Does not add the vehicle requisition to the database.
 	*
-	* @param officeSupplyId the primary key for the new office supply
-	* @return the new office supply
+	* @param vehicleRequisitionId the primary key for the new vehicle requisition
+	* @return the new vehicle requisition
 	*/
-	public com.justonetech.oa.model.OfficeSupply createOfficeSupply(
-		long officeSupplyId);
+	public com.justonetech.oa.model.VehicleRequisition createVehicleRequisition(
+		long vehicleRequisitionId);
 
 	/**
-	* Deletes the office supply with the primary key from the database. Also notifies the appropriate model listeners.
+	* Deletes the vehicle requisition with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param officeSupplyId the primary key of the office supply
-	* @return the office supply that was removed
-	* @throws PortalException if a office supply with the primary key could not be found
+	* @param vehicleRequisitionId the primary key of the vehicle requisition
+	* @return the vehicle requisition that was removed
+	* @throws PortalException if a vehicle requisition with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
-	public com.justonetech.oa.model.OfficeSupply deleteOfficeSupply(
-		long officeSupplyId)
+	public com.justonetech.oa.model.VehicleRequisition deleteVehicleRequisition(
+		long vehicleRequisitionId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Deletes the office supply from the database. Also notifies the appropriate model listeners.
+	* Deletes the vehicle requisition from the database. Also notifies the appropriate model listeners.
 	*
-	* @param officeSupply the office supply
-	* @return the office supply that was removed
+	* @param vehicleRequisition the vehicle requisition
+	* @return the vehicle requisition that was removed
 	* @throws SystemException if a system exception occurred
 	*/
 	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
-	public com.justonetech.oa.model.OfficeSupply deleteOfficeSupply(
-		com.justonetech.oa.model.OfficeSupply officeSupply)
+	public com.justonetech.oa.model.VehicleRequisition deleteVehicleRequisition(
+		com.justonetech.oa.model.VehicleRequisition vehicleRequisition)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery();
@@ -111,7 +111,7 @@ public interface OfficeSupplyLocalService extends BaseLocalService,
 	* Performs a dynamic query on the database and returns a range of the matching rows.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.justonetech.oa.model.impl.OfficeSupplyModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.justonetech.oa.model.impl.VehicleRequisitionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param dynamicQuery the dynamic query
@@ -129,7 +129,7 @@ public interface OfficeSupplyLocalService extends BaseLocalService,
 	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.justonetech.oa.model.impl.OfficeSupplyModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.justonetech.oa.model.impl.VehicleRequisitionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param dynamicQuery the dynamic query
@@ -171,21 +171,21 @@ public interface OfficeSupplyLocalService extends BaseLocalService,
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.justonetech.oa.model.OfficeSupply fetchOfficeSupply(
-		long officeSupplyId)
+	public com.justonetech.oa.model.VehicleRequisition fetchVehicleRequisition(
+		long vehicleRequisitionId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns the office supply with the primary key.
+	* Returns the vehicle requisition with the primary key.
 	*
-	* @param officeSupplyId the primary key of the office supply
-	* @return the office supply
-	* @throws PortalException if a office supply with the primary key could not be found
+	* @param vehicleRequisitionId the primary key of the vehicle requisition
+	* @return the vehicle requisition
+	* @throws PortalException if a vehicle requisition with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.justonetech.oa.model.OfficeSupply getOfficeSupply(
-		long officeSupplyId)
+	public com.justonetech.oa.model.VehicleRequisition getVehicleRequisition(
+		long vehicleRequisitionId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -197,42 +197,42 @@ public interface OfficeSupplyLocalService extends BaseLocalService,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns a range of all the office supplies.
+	* Returns a range of all the vehicle requisitions.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.justonetech.oa.model.impl.OfficeSupplyModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.justonetech.oa.model.impl.VehicleRequisitionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param start the lower bound of the range of office supplies
-	* @param end the upper bound of the range of office supplies (not inclusive)
-	* @return the range of office supplies
+	* @param start the lower bound of the range of vehicle requisitions
+	* @param end the upper bound of the range of vehicle requisitions (not inclusive)
+	* @return the range of vehicle requisitions
 	* @throws SystemException if a system exception occurred
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.justonetech.oa.model.OfficeSupply> getOfficeSupplies(
+	public java.util.List<com.justonetech.oa.model.VehicleRequisition> getVehicleRequisitions(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns the number of office supplies.
+	* Returns the number of vehicle requisitions.
 	*
-	* @return the number of office supplies
+	* @return the number of vehicle requisitions
 	* @throws SystemException if a system exception occurred
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getOfficeSuppliesCount()
+	public int getVehicleRequisitionsCount()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Updates the office supply in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
+	* Updates the vehicle requisition in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	*
-	* @param officeSupply the office supply
-	* @return the office supply that was updated
+	* @param vehicleRequisition the vehicle requisition
+	* @return the vehicle requisition that was updated
 	* @throws SystemException if a system exception occurred
 	*/
 	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.REINDEX)
-	public com.justonetech.oa.model.OfficeSupply updateOfficeSupply(
-		com.justonetech.oa.model.OfficeSupply officeSupply)
+	public com.justonetech.oa.model.VehicleRequisition updateVehicleRequisition(
+		com.justonetech.oa.model.VehicleRequisition vehicleRequisition)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
@@ -255,13 +255,15 @@ public interface OfficeSupplyLocalService extends BaseLocalService,
 		throws java.lang.Throwable;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.justonetech.oa.model.OfficeSupply> getOfficeSuppliesByName(
-		java.lang.String name, int start, int end)
+	public java.util.List<com.justonetech.oa.model.VehicleRequisition> getVehicleRequisitionsByApplicantName(
+		java.lang.String applicantName, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getOfficeSuppliesCountByName(java.lang.String name)
+	public int getVehicleRequisitionsCountByApplicantName(
+		java.lang.String applicantName)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public void deleteOfficeSupplies(java.lang.String[] officeSupplyIds);
+	public void deleteVehicleRequisitions(
+		java.lang.String[] vehicleRequisitionIds);
 }

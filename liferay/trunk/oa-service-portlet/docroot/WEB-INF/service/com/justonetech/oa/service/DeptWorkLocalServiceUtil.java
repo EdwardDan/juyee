@@ -296,6 +296,10 @@ public class DeptWorkLocalServiceUtil {
 		return getService().getDeptWorksCountByDeptName(deptName);
 	}
 
+	public static void deleteDeptWorks(java.lang.String[] deptWorkIds) {
+		getService().deleteDeptWorks(deptWorkIds);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

@@ -14,7 +14,7 @@
 
 package com.justonetech.oa.service.base;
 
-import com.justonetech.oa.service.LeaderWorkLocalServiceUtil;
+import com.justonetech.oa.service.VehicleRequisitionLocalServiceUtil;
 
 import java.util.Arrays;
 
@@ -22,30 +22,26 @@ import java.util.Arrays;
  * @author justonetech
  * @generated
  */
-public class LeaderWorkLocalServiceClpInvoker {
-	public LeaderWorkLocalServiceClpInvoker() {
-		_methodName0 = "addLeaderWork";
+public class VehicleRequisitionLocalServiceClpInvoker {
+	public VehicleRequisitionLocalServiceClpInvoker() {
+		_methodName0 = "addVehicleRequisition";
 
 		_methodParameterTypes0 = new String[] {
-				"com.justonetech.oa.model.LeaderWork"
+				"com.justonetech.oa.model.VehicleRequisition"
 			};
 
-		_methodName1 = "createLeaderWork";
+		_methodName1 = "createVehicleRequisition";
 
-		_methodParameterTypes1 = new String[] {
-				"com.justonetech.oa.service.persistence.LeaderWorkPK"
-			};
+		_methodParameterTypes1 = new String[] { "long" };
 
-		_methodName2 = "deleteLeaderWork";
+		_methodName2 = "deleteVehicleRequisition";
 
-		_methodParameterTypes2 = new String[] {
-				"com.justonetech.oa.service.persistence.LeaderWorkPK"
-			};
+		_methodParameterTypes2 = new String[] { "long" };
 
-		_methodName3 = "deleteLeaderWork";
+		_methodName3 = "deleteVehicleRequisition";
 
 		_methodParameterTypes3 = new String[] {
-				"com.justonetech.oa.model.LeaderWork"
+				"com.justonetech.oa.model.VehicleRequisition"
 			};
 
 		_methodName4 = "dynamicQuery";
@@ -84,34 +80,30 @@ public class LeaderWorkLocalServiceClpInvoker {
 				"com.liferay.portal.kernel.dao.orm.Projection"
 			};
 
-		_methodName10 = "fetchLeaderWork";
+		_methodName10 = "fetchVehicleRequisition";
 
-		_methodParameterTypes10 = new String[] {
-				"com.justonetech.oa.service.persistence.LeaderWorkPK"
-			};
+		_methodParameterTypes10 = new String[] { "long" };
 
-		_methodName11 = "getLeaderWork";
+		_methodName11 = "getVehicleRequisition";
 
-		_methodParameterTypes11 = new String[] {
-				"com.justonetech.oa.service.persistence.LeaderWorkPK"
-			};
+		_methodParameterTypes11 = new String[] { "long" };
 
 		_methodName12 = "getPersistedModel";
 
 		_methodParameterTypes12 = new String[] { "java.io.Serializable" };
 
-		_methodName13 = "getLeaderWorks";
+		_methodName13 = "getVehicleRequisitions";
 
 		_methodParameterTypes13 = new String[] { "int", "int" };
 
-		_methodName14 = "getLeaderWorksCount";
+		_methodName14 = "getVehicleRequisitionsCount";
 
 		_methodParameterTypes14 = new String[] {  };
 
-		_methodName15 = "updateLeaderWork";
+		_methodName15 = "updateVehicleRequisition";
 
 		_methodParameterTypes15 = new String[] {
-				"com.justonetech.oa.model.LeaderWork"
+				"com.justonetech.oa.model.VehicleRequisition"
 			};
 
 		_methodName48 = "getBeanIdentifier";
@@ -121,50 +113,62 @@ public class LeaderWorkLocalServiceClpInvoker {
 		_methodName49 = "setBeanIdentifier";
 
 		_methodParameterTypes49 = new String[] { "java.lang.String" };
+
+		_methodName54 = "getVehicleRequisitionsByApplicantName";
+
+		_methodParameterTypes54 = new String[] { "java.lang.String", "int", "int" };
+
+		_methodName55 = "getVehicleRequisitionsCountByApplicantName";
+
+		_methodParameterTypes55 = new String[] { "java.lang.String" };
+
+		_methodName56 = "deleteVehicleRequisitions";
+
+		_methodParameterTypes56 = new String[] { "java.lang.String[][]" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
 		Object[] arguments) throws Throwable {
 		if (_methodName0.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes0, parameterTypes)) {
-			return LeaderWorkLocalServiceUtil.addLeaderWork((com.justonetech.oa.model.LeaderWork)arguments[0]);
+			return VehicleRequisitionLocalServiceUtil.addVehicleRequisition((com.justonetech.oa.model.VehicleRequisition)arguments[0]);
 		}
 
 		if (_methodName1.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes1, parameterTypes)) {
-			return LeaderWorkLocalServiceUtil.createLeaderWork((com.justonetech.oa.service.persistence.LeaderWorkPK)arguments[0]);
+			return VehicleRequisitionLocalServiceUtil.createVehicleRequisition(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName2.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes2, parameterTypes)) {
-			return LeaderWorkLocalServiceUtil.deleteLeaderWork((com.justonetech.oa.service.persistence.LeaderWorkPK)arguments[0]);
+			return VehicleRequisitionLocalServiceUtil.deleteVehicleRequisition(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName3.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes3, parameterTypes)) {
-			return LeaderWorkLocalServiceUtil.deleteLeaderWork((com.justonetech.oa.model.LeaderWork)arguments[0]);
+			return VehicleRequisitionLocalServiceUtil.deleteVehicleRequisition((com.justonetech.oa.model.VehicleRequisition)arguments[0]);
 		}
 
 		if (_methodName4.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes4, parameterTypes)) {
-			return LeaderWorkLocalServiceUtil.dynamicQuery();
+			return VehicleRequisitionLocalServiceUtil.dynamicQuery();
 		}
 
 		if (_methodName5.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes5, parameterTypes)) {
-			return LeaderWorkLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0]);
+			return VehicleRequisitionLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0]);
 		}
 
 		if (_methodName6.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes6, parameterTypes)) {
-			return LeaderWorkLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
+			return VehicleRequisitionLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue());
 		}
 
 		if (_methodName7.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes7, parameterTypes)) {
-			return LeaderWorkLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
+			return VehicleRequisitionLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue(),
 				(com.liferay.portal.kernel.util.OrderByComparator)arguments[3]);
@@ -172,54 +176,73 @@ public class LeaderWorkLocalServiceClpInvoker {
 
 		if (_methodName8.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes8, parameterTypes)) {
-			return LeaderWorkLocalServiceUtil.dynamicQueryCount((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0]);
+			return VehicleRequisitionLocalServiceUtil.dynamicQueryCount((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0]);
 		}
 
 		if (_methodName9.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes9, parameterTypes)) {
-			return LeaderWorkLocalServiceUtil.dynamicQueryCount((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
+			return VehicleRequisitionLocalServiceUtil.dynamicQueryCount((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
 				(com.liferay.portal.kernel.dao.orm.Projection)arguments[1]);
 		}
 
 		if (_methodName10.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes10, parameterTypes)) {
-			return LeaderWorkLocalServiceUtil.fetchLeaderWork((com.justonetech.oa.service.persistence.LeaderWorkPK)arguments[0]);
+			return VehicleRequisitionLocalServiceUtil.fetchVehicleRequisition(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName11.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes11, parameterTypes)) {
-			return LeaderWorkLocalServiceUtil.getLeaderWork((com.justonetech.oa.service.persistence.LeaderWorkPK)arguments[0]);
+			return VehicleRequisitionLocalServiceUtil.getVehicleRequisition(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName12.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes12, parameterTypes)) {
-			return LeaderWorkLocalServiceUtil.getPersistedModel((java.io.Serializable)arguments[0]);
+			return VehicleRequisitionLocalServiceUtil.getPersistedModel((java.io.Serializable)arguments[0]);
 		}
 
 		if (_methodName13.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes13, parameterTypes)) {
-			return LeaderWorkLocalServiceUtil.getLeaderWorks(((Integer)arguments[0]).intValue(),
+			return VehicleRequisitionLocalServiceUtil.getVehicleRequisitions(((Integer)arguments[0]).intValue(),
 				((Integer)arguments[1]).intValue());
 		}
 
 		if (_methodName14.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes14, parameterTypes)) {
-			return LeaderWorkLocalServiceUtil.getLeaderWorksCount();
+			return VehicleRequisitionLocalServiceUtil.getVehicleRequisitionsCount();
 		}
 
 		if (_methodName15.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes15, parameterTypes)) {
-			return LeaderWorkLocalServiceUtil.updateLeaderWork((com.justonetech.oa.model.LeaderWork)arguments[0]);
+			return VehicleRequisitionLocalServiceUtil.updateVehicleRequisition((com.justonetech.oa.model.VehicleRequisition)arguments[0]);
 		}
 
 		if (_methodName48.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes48, parameterTypes)) {
-			return LeaderWorkLocalServiceUtil.getBeanIdentifier();
+			return VehicleRequisitionLocalServiceUtil.getBeanIdentifier();
 		}
 
 		if (_methodName49.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes49, parameterTypes)) {
-			LeaderWorkLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
+			VehicleRequisitionLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
+
+			return null;
+		}
+
+		if (_methodName54.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes54, parameterTypes)) {
+			return VehicleRequisitionLocalServiceUtil.getVehicleRequisitionsByApplicantName((java.lang.String)arguments[0],
+				((Integer)arguments[1]).intValue(),
+				((Integer)arguments[2]).intValue());
+		}
+
+		if (_methodName55.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes55, parameterTypes)) {
+			return VehicleRequisitionLocalServiceUtil.getVehicleRequisitionsCountByApplicantName((java.lang.String)arguments[0]);
+		}
+
+		if (_methodName56.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes56, parameterTypes)) {
+			VehicleRequisitionLocalServiceUtil.deleteVehicleRequisitions((java.lang.String[])arguments[0]);
 
 			return null;
 		}
@@ -263,4 +286,10 @@ public class LeaderWorkLocalServiceClpInvoker {
 	private String[] _methodParameterTypes48;
 	private String _methodName49;
 	private String[] _methodParameterTypes49;
+	private String _methodName54;
+	private String[] _methodParameterTypes54;
+	private String _methodName55;
+	private String[] _methodParameterTypes55;
+	private String _methodName56;
+	private String[] _methodParameterTypes56;
 }

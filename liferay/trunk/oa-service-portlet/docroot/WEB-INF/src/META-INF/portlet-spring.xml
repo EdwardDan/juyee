@@ -9,4 +9,6 @@
 	<bean id="com.justonetech.oa.service.persistence.LeaderWorkPersistence" class="com.justonetech.oa.service.persistence.LeaderWorkPersistenceImpl" parent="basePersistence" />
 	<bean id="com.justonetech.oa.service.OfficeSupplyLocalService" class="com.justonetech.oa.service.impl.OfficeSupplyLocalServiceImpl" />
 	<bean id="com.justonetech.oa.service.persistence.OfficeSupplyPersistence" class="com.justonetech.oa.service.persistence.OfficeSupplyPersistenceImpl" parent="basePersistence" />
+	<bean id="com.justonetech.oa.service.VehicleRequisitionLocalService" class="com.justonetech.oa.service.impl.VehicleRequisitionLocalServiceImpl" />
+	<bean id="com.justonetech.oa.service.persistence.VehicleRequisitionPersistence" class="com.justonetech.oa.service.persistence.VehicleRequisitionPersistenceImpl" parent="basePersistence" />
 </beans>

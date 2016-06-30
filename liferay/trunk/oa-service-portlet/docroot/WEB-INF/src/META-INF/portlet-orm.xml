@@ -90,6 +90,36 @@
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="com.justonetech.oa.model.impl.VehicleRequisitionModelImpl">
+		<attributes>
+			<id name="vehicleRequisitionId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createTime">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedTime">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="applicantDeptId" />
+			<basic name="applicantDeptName" />
+			<basic name="applicantId" />
+			<basic name="applicantName" />
+			<basic name="startTime">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="endTime">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="passengerNum" />
+			<basic name="reason" />
+			<basic name="destination" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
 	<entity class="com.justonetech.oa.model.impl.DeptWorkImpl" name="DeptWork">
 		<table name="oa_DeptWork" />
 		<attributes />
@@ -104,6 +134,10 @@
 	</entity>
 	<entity class="com.justonetech.oa.model.impl.OfficeSupplyImpl" name="OfficeSupply">
 		<table name="oa_OfficeSupply" />
+		<attributes />
+	</entity>
+	<entity class="com.justonetech.oa.model.impl.VehicleRequisitionImpl" name="VehicleRequisition">
+		<table name="oa_VehicleRequisition" />
 		<attributes />
 	</entity>
 </entity-mappings>

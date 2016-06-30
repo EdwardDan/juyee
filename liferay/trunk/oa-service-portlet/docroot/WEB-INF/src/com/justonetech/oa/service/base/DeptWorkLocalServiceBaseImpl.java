@@ -20,6 +20,7 @@ import com.justonetech.oa.service.persistence.DeptWorkItemPersistence;
 import com.justonetech.oa.service.persistence.DeptWorkPersistence;
 import com.justonetech.oa.service.persistence.LeaderWorkPersistence;
 import com.justonetech.oa.service.persistence.OfficeSupplyPersistence;
+import com.justonetech.oa.service.persistence.VehicleRequisitionPersistence;
 
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.bean.IdentifiableBean;
@@ -429,6 +430,44 @@ public abstract class DeptWorkLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	/**
+	 * Returns the vehicle requisition local service.
+	 *
+	 * @return the vehicle requisition local service
+	 */
+	public com.justonetech.oa.service.VehicleRequisitionLocalService getVehicleRequisitionLocalService() {
+		return vehicleRequisitionLocalService;
+	}
+
+	/**
+	 * Sets the vehicle requisition local service.
+	 *
+	 * @param vehicleRequisitionLocalService the vehicle requisition local service
+	 */
+	public void setVehicleRequisitionLocalService(
+		com.justonetech.oa.service.VehicleRequisitionLocalService vehicleRequisitionLocalService) {
+		this.vehicleRequisitionLocalService = vehicleRequisitionLocalService;
+	}
+
+	/**
+	 * Returns the vehicle requisition persistence.
+	 *
+	 * @return the vehicle requisition persistence
+	 */
+	public VehicleRequisitionPersistence getVehicleRequisitionPersistence() {
+		return vehicleRequisitionPersistence;
+	}
+
+	/**
+	 * Sets the vehicle requisition persistence.
+	 *
+	 * @param vehicleRequisitionPersistence the vehicle requisition persistence
+	 */
+	public void setVehicleRequisitionPersistence(
+		VehicleRequisitionPersistence vehicleRequisitionPersistence) {
+		this.vehicleRequisitionPersistence = vehicleRequisitionPersistence;
+	}
+
+	/**
 	 * Returns the counter local service.
 	 *
 	 * @return the counter local service
@@ -620,6 +659,10 @@ public abstract class DeptWorkLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected com.justonetech.oa.service.OfficeSupplyLocalService officeSupplyLocalService;
 	@BeanReference(type = OfficeSupplyPersistence.class)
 	protected OfficeSupplyPersistence officeSupplyPersistence;
+	@BeanReference(type = com.justonetech.oa.service.VehicleRequisitionLocalService.class)
+	protected com.justonetech.oa.service.VehicleRequisitionLocalService vehicleRequisitionLocalService;
+	@BeanReference(type = VehicleRequisitionPersistence.class)
+	protected VehicleRequisitionPersistence vehicleRequisitionPersistence;
 	@BeanReference(type = com.liferay.counter.service.CounterLocalService.class)
 	protected com.liferay.counter.service.CounterLocalService counterLocalService;
 	@BeanReference(type = com.liferay.portal.service.ResourceLocalService.class)

@@ -66,7 +66,7 @@ public class LeaderWorkModelImpl extends BaseModelImpl<LeaderWork>
 			{ "modifiedTime", Types.TIMESTAMP },
 			{ "content", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table oa_LeaderWork (userId LONG not null,workDate LONG not null,amOrPm LONG not null,userName VARCHAR(75) null,createTime DATE null,modifiedTime DATE null,content VARCHAR(75) null,primary key (userId, workDate, amOrPm))";
+	public static final String TABLE_SQL_CREATE = "create table oa_LeaderWork (userId LONG not null,workDate LONG not null,amOrPm LONG not null,userName VARCHAR(75) null,createTime DATE null,modifiedTime DATE null,content VARCHAR(1000) null,primary key (userId, workDate, amOrPm))";
 	public static final String TABLE_SQL_DROP = "drop table oa_LeaderWork";
 	public static final String ORDER_BY_JPQL = " ORDER BY leaderWork.id.userId ASC, leaderWork.id.workDate ASC, leaderWork.id.amOrPm ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY oa_LeaderWork.userId ASC, oa_LeaderWork.workDate ASC, oa_LeaderWork.amOrPm ASC";

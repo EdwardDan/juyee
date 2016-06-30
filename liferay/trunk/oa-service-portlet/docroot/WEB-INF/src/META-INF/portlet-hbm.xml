@@ -6,6 +6,7 @@
 	<import class="com.justonetech.oa.model.DeptWorkItem" />
 	<import class="com.justonetech.oa.model.LeaderWork" />
 	<import class="com.justonetech.oa.model.OfficeSupply" />
+	<import class="com.justonetech.oa.model.VehicleRequisition" />
 	<class name="com.justonetech.oa.model.impl.DeptWorkImpl" table="oa_DeptWork">
 		<cache usage="read-write" />
 		<id name="deptWorkId" type="long">
@@ -60,5 +61,24 @@
 		<property name="unit" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="unitPrice" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
 		<property name="quantity" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+	</class>
+	<class name="com.justonetech.oa.model.impl.VehicleRequisitionImpl" table="oa_VehicleRequisition">
+		<cache usage="read-write" />
+		<id name="vehicleRequisitionId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createTime" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedTime" type="org.hibernate.type.TimestampType" />
+		<property name="applicantDeptId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="applicantDeptName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="applicantId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="applicantName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="startTime" type="org.hibernate.type.TimestampType" />
+		<property name="endTime" type="org.hibernate.type.TimestampType" />
+		<property name="passengerNum" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="reason" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="destination" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 </hibernate-mapping>

@@ -111,4 +111,43 @@
 
 	</entity>
 
+	<!-- 车辆申请 -->
+	<entity name="VehicleRequisition" local-service="true"
+		remote-service="false">
+
+		<!-- PK fields -->
+
+		<column name="vehicleRequisitionId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createTime" type="Date" />
+		<column name="modifiedTime" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="applicantDeptId" type="long" />
+		<column name="applicantDeptName" type="String" />
+		<column name="applicantId" type="long" />
+		<column name="applicantName" type="String" />
+		<column name="startTime" type="Date" />
+		<column name="endTime" type="Date" />
+		<column name="passengerNum" type="int" />
+		<column name="reason" type="String" />
+		<column name="destination" type="String" />
+
+		<!-- Order -->
+		<order>
+			<order-column name="modifiedTime" order-by="desc"></order-column>
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="ApplicantName" return-type="Collection">
+			<finder-column name="applicantName" comparator="LIKE" />
+		</finder>
+	</entity>
+
 </service-builder>

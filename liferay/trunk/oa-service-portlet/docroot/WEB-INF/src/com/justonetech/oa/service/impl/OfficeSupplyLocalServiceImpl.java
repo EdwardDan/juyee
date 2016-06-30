@@ -19,6 +19,7 @@ import java.util.List;
 import com.justonetech.oa.model.OfficeSupply;
 import com.justonetech.oa.service.OfficeSupplyLocalServiceUtil;
 import com.justonetech.oa.service.base.OfficeSupplyLocalServiceBaseImpl;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 
 /**
@@ -51,5 +52,20 @@ public class OfficeSupplyLocalServiceImpl
 	public int getOfficeSuppliesCountByName(String name) throws SystemException {
 
 		return officeSupplyPersistence.countByName("%" + name + "%");
+	}
+
+	public void deleteOfficeSupplies(String[] officeSupplyIds) {
+		for (String officeSupplyId : officeSupplyIds) {
+			try {
+				OfficeSupplyLocalServiceUtil.deleteOfficeSupply(Long
+						.parseLong(officeSupplyId));
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+			} catch (PortalException e) {
+				e.printStackTrace();
+			} catch (SystemException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }

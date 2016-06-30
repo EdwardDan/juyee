@@ -308,6 +308,11 @@ public class DeptWorkLocalServiceWrapper implements DeptWorkLocalService,
 		return _deptWorkLocalService.getDeptWorksCountByDeptName(deptName);
 	}
 
+	@Override
+	public void deleteDeptWorks(java.lang.String[] deptWorkIds) {
+		_deptWorkLocalService.deleteDeptWorks(deptWorkIds);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

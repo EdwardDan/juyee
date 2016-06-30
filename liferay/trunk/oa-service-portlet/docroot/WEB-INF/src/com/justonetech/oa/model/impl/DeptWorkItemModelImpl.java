@@ -67,7 +67,7 @@ public class DeptWorkItemModelImpl extends BaseModelImpl<DeptWorkItem>
 			{ "content", Types.VARCHAR },
 			{ "agentPerson", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table oa_DeptWorkItem (deptWorkItemId LONG not null primary key,deptWorkId LONG,sortNo INTEGER,dutyPerosn VARCHAR(75) null,mainWork BOOLEAN,schedule VARCHAR(75) null,content VARCHAR(75) null,agentPerson VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table oa_DeptWorkItem (deptWorkItemId LONG not null primary key,deptWorkId LONG,sortNo INTEGER,dutyPerosn VARCHAR(75) null,mainWork BOOLEAN,schedule VARCHAR(75) null,content VARCHAR(1000) null,agentPerson VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table oa_DeptWorkItem";
 	public static final String ORDER_BY_JPQL = " ORDER BY deptWorkItem.deptWorkItemId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY oa_DeptWorkItem.deptWorkItemId ASC";
