@@ -114,19 +114,19 @@ public class DeptWorkLocalServiceClp implements DeptWorkLocalService {
 
 		_methodParameterTypes17 = new String[] { "java.lang.String" };
 
-		_methodName19 = "getDeptWorksByUserName";
+		_methodName19 = "findByUserName";
 
 		_methodParameterTypes19 = new String[] { "java.lang.String", "int", "int" };
 
-		_methodName20 = "getDeptWorksCountByUserName";
+		_methodName20 = "countByUserName";
 
 		_methodParameterTypes20 = new String[] { "java.lang.String" };
 
-		_methodName21 = "getDeptWorksByDeptName";
+		_methodName21 = "findByDeptName";
 
 		_methodParameterTypes21 = new String[] { "java.lang.String", "int", "int" };
 
-		_methodName22 = "getDeptWorksCountByDeptName";
+		_methodName22 = "countByDeptName";
 
 		_methodParameterTypes22 = new String[] { "java.lang.String" };
 
@@ -682,7 +682,7 @@ public class DeptWorkLocalServiceClp implements DeptWorkLocalService {
 	}
 
 	@Override
-	public java.util.List<com.justonetech.oa.model.DeptWork> getDeptWorksByUserName(
+	public java.util.List<com.justonetech.oa.model.DeptWork> findByUserName(
 		java.lang.String userName, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
@@ -718,7 +718,7 @@ public class DeptWorkLocalServiceClp implements DeptWorkLocalService {
 	}
 
 	@Override
-	public int getDeptWorksCountByUserName(java.lang.String userName)
+	public int countByUserName(java.lang.String userName)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
@@ -747,7 +747,7 @@ public class DeptWorkLocalServiceClp implements DeptWorkLocalService {
 	}
 
 	@Override
-	public java.util.List<com.justonetech.oa.model.DeptWork> getDeptWorksByDeptName(
+	public java.util.List<com.justonetech.oa.model.DeptWork> findByDeptName(
 		java.lang.String deptName, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
@@ -783,7 +783,7 @@ public class DeptWorkLocalServiceClp implements DeptWorkLocalService {
 	}
 
 	@Override
-	public int getDeptWorksCountByDeptName(java.lang.String deptName)
+	public int countByDeptName(java.lang.String deptName)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 

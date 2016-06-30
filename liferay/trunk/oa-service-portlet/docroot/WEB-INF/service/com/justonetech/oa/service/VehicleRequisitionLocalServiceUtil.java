@@ -275,19 +275,15 @@ public class VehicleRequisitionLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
-	public static java.util.List<com.justonetech.oa.model.VehicleRequisition> getVehicleRequisitionsByApplicantName(
+	public static java.util.List<com.justonetech.oa.model.VehicleRequisition> findByApplicantName(
 		java.lang.String applicantName, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .getVehicleRequisitionsByApplicantName(applicantName, start,
-			end);
+		return getService().findByApplicantName(applicantName, start, end);
 	}
 
-	public static int getVehicleRequisitionsCountByApplicantName(
-		java.lang.String applicantName)
+	public static int countByName(java.lang.String applicantName)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .getVehicleRequisitionsCountByApplicantName(applicantName);
+		return getService().countByName(applicantName);
 	}
 
 	public static void deleteVehicleRequisitions(

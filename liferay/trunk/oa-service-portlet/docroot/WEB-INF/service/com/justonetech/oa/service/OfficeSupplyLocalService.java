@@ -254,13 +254,11 @@ public interface OfficeSupplyLocalService extends BaseLocalService,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.justonetech.oa.model.OfficeSupply> getOfficeSuppliesByName(
+	public java.util.List<com.justonetech.oa.model.OfficeSupply> findByName(
 		java.lang.String name, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getOfficeSuppliesCountByName(java.lang.String name)
+	public int countByName(java.lang.String name)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void deleteOfficeSupplies(java.lang.String[] officeSupplyIds);

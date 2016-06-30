@@ -283,29 +283,29 @@ public class DeptWorkLocalServiceWrapper implements DeptWorkLocalService,
 	}
 
 	@Override
-	public java.util.List<com.justonetech.oa.model.DeptWork> getDeptWorksByUserName(
+	public java.util.List<com.justonetech.oa.model.DeptWork> findByUserName(
 		java.lang.String userName, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _deptWorkLocalService.getDeptWorksByUserName(userName, start, end);
+		return _deptWorkLocalService.findByUserName(userName, start, end);
 	}
 
 	@Override
-	public int getDeptWorksCountByUserName(java.lang.String userName)
+	public int countByUserName(java.lang.String userName)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _deptWorkLocalService.getDeptWorksCountByUserName(userName);
+		return _deptWorkLocalService.countByUserName(userName);
 	}
 
 	@Override
-	public java.util.List<com.justonetech.oa.model.DeptWork> getDeptWorksByDeptName(
+	public java.util.List<com.justonetech.oa.model.DeptWork> findByDeptName(
 		java.lang.String deptName, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _deptWorkLocalService.getDeptWorksByDeptName(deptName, start, end);
+		return _deptWorkLocalService.findByDeptName(deptName, start, end);
 	}
 
 	@Override
-	public int getDeptWorksCountByDeptName(java.lang.String deptName)
+	public int countByDeptName(java.lang.String deptName)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _deptWorkLocalService.getDeptWorksCountByDeptName(deptName);
+		return _deptWorkLocalService.countByDeptName(deptName);
 	}
 
 	@Override

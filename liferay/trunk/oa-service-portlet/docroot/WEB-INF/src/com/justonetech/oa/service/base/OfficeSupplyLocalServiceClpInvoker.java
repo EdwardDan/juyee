@@ -114,11 +114,11 @@ public class OfficeSupplyLocalServiceClpInvoker {
 
 		_methodParameterTypes49 = new String[] { "java.lang.String" };
 
-		_methodName54 = "getOfficeSuppliesByName";
+		_methodName54 = "findByName";
 
 		_methodParameterTypes54 = new String[] { "java.lang.String", "int", "int" };
 
-		_methodName55 = "getOfficeSuppliesCountByName";
+		_methodName55 = "countByName";
 
 		_methodParameterTypes55 = new String[] { "java.lang.String" };
 
@@ -230,14 +230,14 @@ public class OfficeSupplyLocalServiceClpInvoker {
 
 		if (_methodName54.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes54, parameterTypes)) {
-			return OfficeSupplyLocalServiceUtil.getOfficeSuppliesByName((java.lang.String)arguments[0],
+			return OfficeSupplyLocalServiceUtil.findByName((java.lang.String)arguments[0],
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue());
 		}
 
 		if (_methodName55.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes55, parameterTypes)) {
-			return OfficeSupplyLocalServiceUtil.getOfficeSuppliesCountByName((java.lang.String)arguments[0]);
+			return OfficeSupplyLocalServiceUtil.countByName((java.lang.String)arguments[0]);
 		}
 
 		if (_methodName56.equals(name) &&

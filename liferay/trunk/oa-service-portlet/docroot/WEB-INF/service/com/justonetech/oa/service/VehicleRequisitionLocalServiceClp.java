@@ -116,11 +116,11 @@ public class VehicleRequisitionLocalServiceClp
 
 		_methodParameterTypes17 = new String[] { "java.lang.String" };
 
-		_methodName19 = "getVehicleRequisitionsByApplicantName";
+		_methodName19 = "findByApplicantName";
 
 		_methodParameterTypes19 = new String[] { "java.lang.String", "int", "int" };
 
-		_methodName20 = "getVehicleRequisitionsCountByApplicantName";
+		_methodName20 = "countByName";
 
 		_methodParameterTypes20 = new String[] { "java.lang.String" };
 
@@ -690,7 +690,7 @@ public class VehicleRequisitionLocalServiceClp
 	}
 
 	@Override
-	public java.util.List<com.justonetech.oa.model.VehicleRequisition> getVehicleRequisitionsByApplicantName(
+	public java.util.List<com.justonetech.oa.model.VehicleRequisition> findByApplicantName(
 		java.lang.String applicantName, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
@@ -726,8 +726,7 @@ public class VehicleRequisitionLocalServiceClp
 	}
 
 	@Override
-	public int getVehicleRequisitionsCountByApplicantName(
-		java.lang.String applicantName)
+	public int countByName(java.lang.String applicantName)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 

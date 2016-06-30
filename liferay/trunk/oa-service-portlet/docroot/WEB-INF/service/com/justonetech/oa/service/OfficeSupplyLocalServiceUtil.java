@@ -275,15 +275,15 @@ public class OfficeSupplyLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
-	public static java.util.List<com.justonetech.oa.model.OfficeSupply> getOfficeSuppliesByName(
+	public static java.util.List<com.justonetech.oa.model.OfficeSupply> findByName(
 		java.lang.String name, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getOfficeSuppliesByName(name, start, end);
+		return getService().findByName(name, start, end);
 	}
 
-	public static int getOfficeSuppliesCountByName(java.lang.String name)
+	public static int countByName(java.lang.String name)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getOfficeSuppliesCountByName(name);
+		return getService().countByName(name);
 	}
 
 	public static void deleteOfficeSupplies(java.lang.String[] officeSupplyIds) {

@@ -290,18 +290,17 @@ public class VehicleRequisitionLocalServiceWrapper
 	}
 
 	@Override
-	public java.util.List<com.justonetech.oa.model.VehicleRequisition> getVehicleRequisitionsByApplicantName(
+	public java.util.List<com.justonetech.oa.model.VehicleRequisition> findByApplicantName(
 		java.lang.String applicantName, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _vehicleRequisitionLocalService.getVehicleRequisitionsByApplicantName(applicantName,
+		return _vehicleRequisitionLocalService.findByApplicantName(applicantName,
 			start, end);
 	}
 
 	@Override
-	public int getVehicleRequisitionsCountByApplicantName(
-		java.lang.String applicantName)
+	public int countByName(java.lang.String applicantName)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _vehicleRequisitionLocalService.getVehicleRequisitionsCountByApplicantName(applicantName);
+		return _vehicleRequisitionLocalService.countByName(applicantName);
 	}
 
 	@Override

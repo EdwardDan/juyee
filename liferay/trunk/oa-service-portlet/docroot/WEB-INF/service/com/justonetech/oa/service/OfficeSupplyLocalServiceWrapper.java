@@ -288,17 +288,16 @@ public class OfficeSupplyLocalServiceWrapper implements OfficeSupplyLocalService
 	}
 
 	@Override
-	public java.util.List<com.justonetech.oa.model.OfficeSupply> getOfficeSuppliesByName(
+	public java.util.List<com.justonetech.oa.model.OfficeSupply> findByName(
 		java.lang.String name, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _officeSupplyLocalService.getOfficeSuppliesByName(name, start,
-			end);
+		return _officeSupplyLocalService.findByName(name, start, end);
 	}
 
 	@Override
-	public int getOfficeSuppliesCountByName(java.lang.String name)
+	public int countByName(java.lang.String name)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _officeSupplyLocalService.getOfficeSuppliesCountByName(name);
+		return _officeSupplyLocalService.countByName(name);
 	}
 
 	@Override

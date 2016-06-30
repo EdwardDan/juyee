@@ -23,52 +23,47 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 
 /**
- * The implementation of the vehicle requisition local service.
- *
- * <p>
- * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.justonetech.oa.service.VehicleRequisitionLocalService} interface.
- *
- * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
- * </p>
+ * The implementation of the vehicle requisition local service. <p> All custom
+ * service methods should be put in this class. Whenever methods are added,
+ * rerun ServiceBuilder to copy their definitions into the
+ * {@link com.justonetech.oa.service.VehicleRequisitionLocalService} interface.
+ * <p> This is a local service. Methods of this service will not have security
+ * checks based on the propagated JAAS credentials because this service can only
+ * be accessed from within the same VM. </p>
  *
  * @author justonetech
  * @see com.justonetech.oa.service.base.VehicleRequisitionLocalServiceBaseImpl
  * @see com.justonetech.oa.service.VehicleRequisitionLocalServiceUtil
  */
-public class VehicleRequisitionLocalServiceImpl
-	extends VehicleRequisitionLocalServiceBaseImpl {
-	/*
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this interface directly. Always use {@link com.justonetech.oa.service.VehicleRequisitionLocalServiceUtil} to access the vehicle requisition local service.
-	 */
-	
-	public List<VehicleRequisition> getVehicleRequisitionsByApplicantName(
-			String applicantName, int start, int end) throws SystemException {
-		return vehicleRequisitionPersistence.findByApplicantName("%"
-				+ applicantName + "%", start, end);
-	}
+public class VehicleRequisitionLocalServiceImpl extends VehicleRequisitionLocalServiceBaseImpl {
 
-	public int getVehicleRequisitionsCountByApplicantName(String applicantName)
-			throws SystemException {
+    /*
+     * NOTE FOR DEVELOPERS: Never reference this interface directly. Always use
+     * {@link com.justonetech.oa.service.VehicleRequisitionLocalServiceUtil} to
+     * access the vehicle requisition local service.
+     */
 
-		return officeSupplyPersistence.countByName("%" + applicantName + "%");
-	}
+    public List<VehicleRequisition> findByApplicantName(String applicantName, int start, int end)
+        throws SystemException {
 
-	public void deleteVehicleRequisitions(String[] vehicleRequisitionIds) {
-		for (String vehicleRequisitionId : vehicleRequisitionIds) {
-			try {
-				VehicleRequisitionLocalServiceUtil
-						.deleteVehicleRequisition(Long
-								.parseLong(vehicleRequisitionId));
-			} catch (NumberFormatException e) {
-				e.printStackTrace();
-			} catch (PortalException e) {
-				e.printStackTrace();
-			} catch (SystemException e) {
-				e.printStackTrace();
-			}
-		}
-	}
+        return vehicleRequisitionPersistence.findByApplicantName("%" + applicantName + "%", start, end);
+    }
+
+    public int countByName(String applicantName)
+        throws SystemException {
+
+        return officeSupplyPersistence.countByName("%" + applicantName + "%");
+    }
+
+    public void deleteVehicleRequisitions(String[] vehicleRequisitionIds) {
+
+        for (String vehicleRequisitionId : vehicleRequisitionIds) {
+            try {
+                VehicleRequisitionLocalServiceUtil.deleteVehicleRequisition(Long.parseLong(vehicleRequisitionId));
+            }
+            catch (NumberFormatException | PortalException | SystemException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

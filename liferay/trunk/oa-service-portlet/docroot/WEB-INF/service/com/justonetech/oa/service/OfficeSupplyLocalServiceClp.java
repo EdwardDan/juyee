@@ -115,11 +115,11 @@ public class OfficeSupplyLocalServiceClp implements OfficeSupplyLocalService {
 
 		_methodParameterTypes17 = new String[] { "java.lang.String" };
 
-		_methodName19 = "getOfficeSuppliesByName";
+		_methodName19 = "findByName";
 
 		_methodParameterTypes19 = new String[] { "java.lang.String", "int", "int" };
 
-		_methodName20 = "getOfficeSuppliesCountByName";
+		_methodName20 = "countByName";
 
 		_methodParameterTypes20 = new String[] { "java.lang.String" };
 
@@ -679,7 +679,7 @@ public class OfficeSupplyLocalServiceClp implements OfficeSupplyLocalService {
 	}
 
 	@Override
-	public java.util.List<com.justonetech.oa.model.OfficeSupply> getOfficeSuppliesByName(
+	public java.util.List<com.justonetech.oa.model.OfficeSupply> findByName(
 		java.lang.String name, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
@@ -709,7 +709,7 @@ public class OfficeSupplyLocalServiceClp implements OfficeSupplyLocalService {
 	}
 
 	@Override
-	public int getOfficeSuppliesCountByName(java.lang.String name)
+	public int countByName(java.lang.String name)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 

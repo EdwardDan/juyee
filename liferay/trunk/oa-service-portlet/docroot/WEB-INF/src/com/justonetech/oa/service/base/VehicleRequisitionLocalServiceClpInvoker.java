@@ -114,11 +114,11 @@ public class VehicleRequisitionLocalServiceClpInvoker {
 
 		_methodParameterTypes49 = new String[] { "java.lang.String" };
 
-		_methodName54 = "getVehicleRequisitionsByApplicantName";
+		_methodName54 = "findByApplicantName";
 
 		_methodParameterTypes54 = new String[] { "java.lang.String", "int", "int" };
 
-		_methodName55 = "getVehicleRequisitionsCountByApplicantName";
+		_methodName55 = "countByName";
 
 		_methodParameterTypes55 = new String[] { "java.lang.String" };
 
@@ -230,14 +230,14 @@ public class VehicleRequisitionLocalServiceClpInvoker {
 
 		if (_methodName54.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes54, parameterTypes)) {
-			return VehicleRequisitionLocalServiceUtil.getVehicleRequisitionsByApplicantName((java.lang.String)arguments[0],
+			return VehicleRequisitionLocalServiceUtil.findByApplicantName((java.lang.String)arguments[0],
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue());
 		}
 
 		if (_methodName55.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes55, parameterTypes)) {
-			return VehicleRequisitionLocalServiceUtil.getVehicleRequisitionsCountByApplicantName((java.lang.String)arguments[0]);
+			return VehicleRequisitionLocalServiceUtil.countByName((java.lang.String)arguments[0]);
 		}
 
 		if (_methodName56.equals(name) &&

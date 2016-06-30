@@ -23,49 +23,45 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 
 /**
- * The implementation of the office supply local service.
- *
- * <p>
- * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.justonetech.oa.service.OfficeSupplyLocalService} interface.
- *
- * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
- * </p>
+ * The implementation of the office supply local service. <p> All custom service
+ * methods should be put in this class. Whenever methods are added, rerun
+ * ServiceBuilder to copy their definitions into the
+ * {@link com.justonetech.oa.service.OfficeSupplyLocalService} interface. <p>
+ * This is a local service. Methods of this service will not have security
+ * checks based on the propagated JAAS credentials because this service can only
+ * be accessed from within the same VM. </p>
  *
  * @author justonetech
  * @see com.justonetech.oa.service.base.OfficeSupplyLocalServiceBaseImpl
  * @see com.justonetech.oa.service.OfficeSupplyLocalServiceUtil
  */
-public class OfficeSupplyLocalServiceImpl
-	extends OfficeSupplyLocalServiceBaseImpl {
-	/*
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this interface directly. Always use {@link com.justonetech.oa.service.OfficeSupplyLocalServiceUtil} to access the office supply local service.
-	 */
-	public List<OfficeSupply> getOfficeSuppliesByName(String name, int start,
-			int end) throws SystemException {
+public class OfficeSupplyLocalServiceImpl extends OfficeSupplyLocalServiceBaseImpl {
 
-		return officeSupplyPersistence.findByName("%" + name + "%", start, end);
-	}
+    /*
+     * NOTE FOR DEVELOPERS: Never reference this interface directly. Always use
+     * {@link com.justonetech.oa.service.OfficeSupplyLocalServiceUtil} to access
+     * the office supply local service.
+     */
+    public List<OfficeSupply> findByName(String name, int start, int end)
+        throws SystemException {
+        return officeSupplyPersistence.findByName("%" + name + "%", start, end);
+    }
 
-	public int getOfficeSuppliesCountByName(String name) throws SystemException {
+    public int countByName(String name)
+        throws SystemException {
 
-		return officeSupplyPersistence.countByName("%" + name + "%");
-	}
+        return officeSupplyPersistence.countByName("%" + name + "%");
+    }
 
-	public void deleteOfficeSupplies(String[] officeSupplyIds) {
-		for (String officeSupplyId : officeSupplyIds) {
-			try {
-				OfficeSupplyLocalServiceUtil.deleteOfficeSupply(Long
-						.parseLong(officeSupplyId));
-			} catch (NumberFormatException e) {
-				e.printStackTrace();
-			} catch (PortalException e) {
-				e.printStackTrace();
-			} catch (SystemException e) {
-				e.printStackTrace();
-			}
-		}
-	}
+    public void deleteOfficeSupplies(String[] officeSupplyIds) {
+
+        for (String officeSupplyId : officeSupplyIds) {
+            try {
+                OfficeSupplyLocalServiceUtil.deleteOfficeSupply(Long.parseLong(officeSupplyId));
+            }
+            catch (NumberFormatException | PortalException | SystemException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

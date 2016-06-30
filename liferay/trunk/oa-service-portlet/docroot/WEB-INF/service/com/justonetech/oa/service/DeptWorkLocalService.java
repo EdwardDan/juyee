@@ -250,22 +250,18 @@ public interface DeptWorkLocalService extends BaseLocalService,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.justonetech.oa.model.DeptWork> getDeptWorksByUserName(
+	public java.util.List<com.justonetech.oa.model.DeptWork> findByUserName(
 		java.lang.String userName, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getDeptWorksCountByUserName(java.lang.String userName)
+	public int countByUserName(java.lang.String userName)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.justonetech.oa.model.DeptWork> getDeptWorksByDeptName(
+	public java.util.List<com.justonetech.oa.model.DeptWork> findByDeptName(
 		java.lang.String deptName, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getDeptWorksCountByDeptName(java.lang.String deptName)
+	public int countByDeptName(java.lang.String deptName)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void deleteDeptWorks(java.lang.String[] deptWorkIds);

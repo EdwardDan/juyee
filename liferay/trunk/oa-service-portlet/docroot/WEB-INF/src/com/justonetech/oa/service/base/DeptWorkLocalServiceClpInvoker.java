@@ -114,19 +114,19 @@ public class DeptWorkLocalServiceClpInvoker {
 
 		_methodParameterTypes49 = new String[] { "java.lang.String" };
 
-		_methodName54 = "getDeptWorksByUserName";
+		_methodName54 = "findByUserName";
 
 		_methodParameterTypes54 = new String[] { "java.lang.String", "int", "int" };
 
-		_methodName55 = "getDeptWorksCountByUserName";
+		_methodName55 = "countByUserName";
 
 		_methodParameterTypes55 = new String[] { "java.lang.String" };
 
-		_methodName56 = "getDeptWorksByDeptName";
+		_methodName56 = "findByDeptName";
 
 		_methodParameterTypes56 = new String[] { "java.lang.String", "int", "int" };
 
-		_methodName57 = "getDeptWorksCountByDeptName";
+		_methodName57 = "countByDeptName";
 
 		_methodParameterTypes57 = new String[] { "java.lang.String" };
 
@@ -238,26 +238,26 @@ public class DeptWorkLocalServiceClpInvoker {
 
 		if (_methodName54.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes54, parameterTypes)) {
-			return DeptWorkLocalServiceUtil.getDeptWorksByUserName((java.lang.String)arguments[0],
+			return DeptWorkLocalServiceUtil.findByUserName((java.lang.String)arguments[0],
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue());
 		}
 
 		if (_methodName55.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes55, parameterTypes)) {
-			return DeptWorkLocalServiceUtil.getDeptWorksCountByUserName((java.lang.String)arguments[0]);
+			return DeptWorkLocalServiceUtil.countByUserName((java.lang.String)arguments[0]);
 		}
 
 		if (_methodName56.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes56, parameterTypes)) {
-			return DeptWorkLocalServiceUtil.getDeptWorksByDeptName((java.lang.String)arguments[0],
+			return DeptWorkLocalServiceUtil.findByDeptName((java.lang.String)arguments[0],
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue());
 		}
 
 		if (_methodName57.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes57, parameterTypes)) {
-			return DeptWorkLocalServiceUtil.getDeptWorksCountByDeptName((java.lang.String)arguments[0]);
+			return DeptWorkLocalServiceUtil.countByDeptName((java.lang.String)arguments[0]);
 		}
 
 		if (_methodName58.equals(name) &&

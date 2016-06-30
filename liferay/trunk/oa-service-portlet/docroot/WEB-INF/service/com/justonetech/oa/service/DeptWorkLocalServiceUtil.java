@@ -274,26 +274,26 @@ public class DeptWorkLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
-	public static java.util.List<com.justonetech.oa.model.DeptWork> getDeptWorksByUserName(
+	public static java.util.List<com.justonetech.oa.model.DeptWork> findByUserName(
 		java.lang.String userName, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getDeptWorksByUserName(userName, start, end);
+		return getService().findByUserName(userName, start, end);
 	}
 
-	public static int getDeptWorksCountByUserName(java.lang.String userName)
+	public static int countByUserName(java.lang.String userName)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getDeptWorksCountByUserName(userName);
+		return getService().countByUserName(userName);
 	}
 
-	public static java.util.List<com.justonetech.oa.model.DeptWork> getDeptWorksByDeptName(
+	public static java.util.List<com.justonetech.oa.model.DeptWork> findByDeptName(
 		java.lang.String deptName, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getDeptWorksByDeptName(deptName, start, end);
+		return getService().findByDeptName(deptName, start, end);
 	}
 
-	public static int getDeptWorksCountByDeptName(java.lang.String deptName)
+	public static int countByDeptName(java.lang.String deptName)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getDeptWorksCountByDeptName(deptName);
+		return getService().countByDeptName(deptName);
 	}
 
 	public static void deleteDeptWorks(java.lang.String[] deptWorkIds) {

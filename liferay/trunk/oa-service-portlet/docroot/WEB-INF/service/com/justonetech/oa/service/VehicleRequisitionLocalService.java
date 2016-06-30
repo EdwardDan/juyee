@@ -254,14 +254,11 @@ public interface VehicleRequisitionLocalService extends BaseLocalService,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.justonetech.oa.model.VehicleRequisition> getVehicleRequisitionsByApplicantName(
+	public java.util.List<com.justonetech.oa.model.VehicleRequisition> findByApplicantName(
 		java.lang.String applicantName, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getVehicleRequisitionsCountByApplicantName(
-		java.lang.String applicantName)
+	public int countByName(java.lang.String applicantName)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void deleteVehicleRequisitions(
