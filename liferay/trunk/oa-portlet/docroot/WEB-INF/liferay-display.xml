@@ -8,5 +8,6 @@
 		<portlet id="leader-weekly-work"></portlet>
 		<portlet id="dept-weekly-work"></portlet>
 		<portlet id="send-dispatch"></portlet>
+		<portlet id="vehicle-requisition"></portlet>
 	</category>
 </display>
