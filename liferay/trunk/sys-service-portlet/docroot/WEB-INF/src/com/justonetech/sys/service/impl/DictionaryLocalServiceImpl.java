@@ -19,6 +19,10 @@ import java.util.List;
 import com.justonetech.sys.NoSuchDictionaryException;
 import com.justonetech.sys.model.Dictionary;
 import com.justonetech.sys.service.base.DictionaryLocalServiceBaseImpl;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.Junction;
+import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 
 /**
@@ -71,15 +75,27 @@ public class DictionaryLocalServiceImpl extends DictionaryLocalServiceBaseImpl {
         return dictionaryPersistence.countByParentIdAndIsValid(parentId, isValid);
     }
 
-    public List<Dictionary> findByG_P_N_C(long groupId, long parentId, String name, String code, int start, int end)
+    public List<Dictionary> findByG_P_K(long groupId, long parentId, String keywords, int start, int end)
         throws SystemException {
 
-        return dictionaryPersistence.findByG_P_N_C(groupId, parentId, name, code, start, end);
+        return this.dynamicQuery(createDynamicQueryByG_P_K(groupId, parentId, keywords), start, end);
     }
 
-    public int countByG_P_N_C(long groupId, long parentId, String name, String code)
+    public int countByG_P_K(long groupId, long parentId, String keywords)
         throws SystemException {
 
-        return dictionaryPersistence.countByG_P_N_C(groupId, parentId, name, code);
+        return (int) this.dynamicQueryCount(createDynamicQueryByG_P_K(groupId, parentId, keywords));
+    }
+
+    public DynamicQuery createDynamicQueryByG_P_K(long groupId, long parentId, String keywords) {
+
+        DynamicQuery dynamicQuery = this.dynamicQuery();
+        dynamicQuery.add(PropertyFactoryUtil.forName("groupId").eq(groupId));
+        dynamicQuery.add(PropertyFactoryUtil.forName("parentId").eq(parentId));
+        Junction junction = RestrictionsFactoryUtil.disjunction();
+        junction.add(PropertyFactoryUtil.forName("name").like("%" + keywords + "%"));
+        junction.add(PropertyFactoryUtil.forName("code").like("%" + keywords + "%"));
+        dynamicQuery.add(junction);
+        return dynamicQuery;
     }
 }

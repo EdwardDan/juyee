@@ -135,17 +135,22 @@ public class DictionaryLocalServiceClp implements DictionaryLocalService {
 
 		_methodParameterTypes23 = new String[] { "long", "boolean" };
 
-		_methodName24 = "findByG_P_N_C";
+		_methodName24 = "findByG_P_K";
 
 		_methodParameterTypes24 = new String[] {
-				"long", "long", "java.lang.String", "java.lang.String", "int",
-				"int"
+				"long", "long", "java.lang.String", "int", "int"
 			};
 
-		_methodName25 = "countByG_P_N_C";
+		_methodName25 = "countByG_P_K";
 
 		_methodParameterTypes25 = new String[] {
-				"long", "long", "java.lang.String", "java.lang.String"
+				"long", "long", "java.lang.String"
+			};
+
+		_methodName26 = "createDynamicQueryByG_P_K";
+
+		_methodParameterTypes26 = new String[] {
+				"long", "long", "java.lang.String"
 			};
 	}
 
@@ -850,10 +855,9 @@ public class DictionaryLocalServiceClp implements DictionaryLocalService {
 	}
 
 	@Override
-	public java.util.List<com.justonetech.sys.model.Dictionary> findByG_P_N_C(
-		long groupId, long parentId, java.lang.String name,
-		java.lang.String code, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException {
+	public java.util.List<com.justonetech.sys.model.Dictionary> findByG_P_K(
+		long groupId, long parentId, java.lang.String keywords, int start,
+		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
@@ -864,9 +868,7 @@ public class DictionaryLocalServiceClp implements DictionaryLocalService {
 						
 					parentId,
 						
-					ClpSerializer.translateInput(name),
-						
-					ClpSerializer.translateInput(code),
+					ClpSerializer.translateInput(keywords),
 						
 					start,
 						
@@ -893,8 +895,8 @@ public class DictionaryLocalServiceClp implements DictionaryLocalService {
 	}
 
 	@Override
-	public int countByG_P_N_C(long groupId, long parentId,
-		java.lang.String name, java.lang.String code)
+	public int countByG_P_K(long groupId, long parentId,
+		java.lang.String keywords)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
@@ -906,9 +908,7 @@ public class DictionaryLocalServiceClp implements DictionaryLocalService {
 						
 					parentId,
 						
-					ClpSerializer.translateInput(name),
-						
-					ClpSerializer.translateInput(code)
+					ClpSerializer.translateInput(keywords)
 					});
 		}
 		catch (Throwable t) {
@@ -928,6 +928,37 @@ public class DictionaryLocalServiceClp implements DictionaryLocalService {
 		}
 
 		return ((Integer)returnObj).intValue();
+	}
+
+	@Override
+	public com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQueryByG_P_K(
+		long groupId, long parentId, java.lang.String keywords) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName26,
+					_methodParameterTypes26,
+					new Object[] {
+						groupId,
+						
+					parentId,
+						
+					ClpSerializer.translateInput(keywords)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.liferay.portal.kernel.dao.orm.DynamicQuery)ClpSerializer.translateOutput(returnObj);
 	}
 
 	private InvokableLocalService _invokableLocalService;
@@ -981,4 +1012,6 @@ public class DictionaryLocalServiceClp implements DictionaryLocalService {
 	private String[] _methodParameterTypes24;
 	private String _methodName25;
 	private String[] _methodParameterTypes25;
+	private String _methodName26;
+	private String[] _methodParameterTypes26;
 }

@@ -134,17 +134,22 @@ public class DictionaryLocalServiceClpInvoker {
 
 		_methodParameterTypes44 = new String[] { "long", "boolean" };
 
-		_methodName45 = "findByG_P_N_C";
+		_methodName45 = "findByG_P_K";
 
 		_methodParameterTypes45 = new String[] {
-				"long", "long", "java.lang.String", "java.lang.String", "int",
-				"int"
+				"long", "long", "java.lang.String", "int", "int"
 			};
 
-		_methodName46 = "countByG_P_N_C";
+		_methodName46 = "countByG_P_K";
 
 		_methodParameterTypes46 = new String[] {
-				"long", "long", "java.lang.String", "java.lang.String"
+				"long", "long", "java.lang.String"
+			};
+
+		_methodName47 = "createDynamicQueryByG_P_K";
+
+		_methodParameterTypes47 = new String[] {
+				"long", "long", "java.lang.String"
 			};
 	}
 
@@ -285,18 +290,23 @@ public class DictionaryLocalServiceClpInvoker {
 
 		if (_methodName45.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes45, parameterTypes)) {
-			return DictionaryLocalServiceUtil.findByG_P_N_C(((Long)arguments[0]).longValue(),
+			return DictionaryLocalServiceUtil.findByG_P_K(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue(),
-				(java.lang.String)arguments[2], (java.lang.String)arguments[3],
-				((Integer)arguments[4]).intValue(),
-				((Integer)arguments[5]).intValue());
+				(java.lang.String)arguments[2],
+				((Integer)arguments[3]).intValue(),
+				((Integer)arguments[4]).intValue());
 		}
 
 		if (_methodName46.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes46, parameterTypes)) {
-			return DictionaryLocalServiceUtil.countByG_P_N_C(((Long)arguments[0]).longValue(),
-				((Long)arguments[1]).longValue(),
-				(java.lang.String)arguments[2], (java.lang.String)arguments[3]);
+			return DictionaryLocalServiceUtil.countByG_P_K(((Long)arguments[0]).longValue(),
+				((Long)arguments[1]).longValue(), (java.lang.String)arguments[2]);
+		}
+
+		if (_methodName47.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes47, parameterTypes)) {
+			return DictionaryLocalServiceUtil.createDynamicQueryByG_P_K(((Long)arguments[0]).longValue(),
+				((Long)arguments[1]).longValue(), (java.lang.String)arguments[2]);
 		}
 
 		throw new UnsupportedOperationException();
@@ -352,4 +362,6 @@ public class DictionaryLocalServiceClpInvoker {
 	private String[] _methodParameterTypes45;
 	private String _methodName46;
 	private String[] _methodParameterTypes46;
+	private String _methodName47;
+	private String[] _methodParameterTypes47;
 }

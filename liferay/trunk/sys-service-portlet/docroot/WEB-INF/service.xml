@@ -48,13 +48,6 @@
 			<finder-column name="code" />
 		</finder>
 
-		<finder name="G_P_N_C" return-type="Collection">
-			<finder-column name="groupId" />
-			<finder-column name="parentId" />
-			<finder-column name="name" />
-			<finder-column name="code" />
-		</finder>
-
 		<finder name="GroupIdAndParentId" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="parentId" />

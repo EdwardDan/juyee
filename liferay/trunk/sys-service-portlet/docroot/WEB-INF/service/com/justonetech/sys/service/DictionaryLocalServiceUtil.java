@@ -306,18 +306,22 @@ public class DictionaryLocalServiceUtil {
 		return getService().countByParentIdAndIsValid(parentId, isValid);
 	}
 
-	public static java.util.List<com.justonetech.sys.model.Dictionary> findByG_P_N_C(
-		long groupId, long parentId, java.lang.String name,
-		java.lang.String code, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .findByG_P_N_C(groupId, parentId, name, code, start, end);
+	public static java.util.List<com.justonetech.sys.model.Dictionary> findByG_P_K(
+		long groupId, long parentId, java.lang.String keywords, int start,
+		int end) throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().findByG_P_K(groupId, parentId, keywords, start, end);
 	}
 
-	public static int countByG_P_N_C(long groupId, long parentId,
-		java.lang.String name, java.lang.String code)
+	public static int countByG_P_K(long groupId, long parentId,
+		java.lang.String keywords)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().countByG_P_N_C(groupId, parentId, name, code);
+		return getService().countByG_P_K(groupId, parentId, keywords);
+	}
+
+	public static com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQueryByG_P_K(
+		long groupId, long parentId, java.lang.String keywords) {
+		return getService()
+				   .createDynamicQueryByG_P_K(groupId, parentId, keywords);
 	}
 
 	public static void clearService() {

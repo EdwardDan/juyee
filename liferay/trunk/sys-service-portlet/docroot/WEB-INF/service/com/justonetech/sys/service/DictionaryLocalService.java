@@ -272,12 +272,14 @@ public interface DictionaryLocalService extends BaseLocalService,
 	public int countByParentIdAndIsValid(long parentId, boolean isValid)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public java.util.List<com.justonetech.sys.model.Dictionary> findByG_P_N_C(
-		long groupId, long parentId, java.lang.String name,
-		java.lang.String code, int start, int end)
+	public java.util.List<com.justonetech.sys.model.Dictionary> findByG_P_K(
+		long groupId, long parentId, java.lang.String keywords, int start,
+		int end) throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int countByG_P_K(long groupId, long parentId,
+		java.lang.String keywords)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public int countByG_P_N_C(long groupId, long parentId,
-		java.lang.String name, java.lang.String code)
-		throws com.liferay.portal.kernel.exception.SystemException;
+	public com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQueryByG_P_K(
+		long groupId, long parentId, java.lang.String keywords);
 }

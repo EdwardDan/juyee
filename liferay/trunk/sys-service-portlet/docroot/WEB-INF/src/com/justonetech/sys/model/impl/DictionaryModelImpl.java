@@ -102,9 +102,8 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 	public static long CODE_COLUMN_BITMASK = 1L;
 	public static long GROUPID_COLUMN_BITMASK = 2L;
 	public static long ISVALID_COLUMN_BITMASK = 4L;
-	public static long NAME_COLUMN_BITMASK = 8L;
-	public static long PARENTID_COLUMN_BITMASK = 16L;
-	public static long SORTPATH_COLUMN_BITMASK = 32L;
+	public static long PARENTID_COLUMN_BITMASK = 8L;
+	public static long SORTPATH_COLUMN_BITMASK = 16L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -450,17 +449,7 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 
 	@Override
 	public void setName(String name) {
-		_columnBitmask |= NAME_COLUMN_BITMASK;
-
-		if (_originalName == null) {
-			_originalName = _name;
-		}
-
 		_name = name;
-	}
-
-	public String getOriginalName() {
-		return GetterUtil.getString(_originalName);
 	}
 
 	@JSON
@@ -710,8 +699,6 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 
 		dictionaryModelImpl._originalCode = dictionaryModelImpl._code;
 
-		dictionaryModelImpl._originalName = dictionaryModelImpl._name;
-
 		dictionaryModelImpl._originalIsValid = dictionaryModelImpl._isValid;
 
 		dictionaryModelImpl._setOriginalIsValid = false;
@@ -953,7 +940,6 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 	private String _code;
 	private String _originalCode;
 	private String _name;
-	private String _originalName;
 	private boolean _isLeaf;
 	private int _sortNo;
 	private String _desc;
