@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -47,20 +48,14 @@ public class OfficeSupplyPortlet extends MVCPortlet {
         int end = pageSize * pageNumber;
 
         List<OfficeSupply> officeSupplies = Collections.emptyList();
-        try {
-            officeSupplies = OfficeSupplyLocalServiceUtil.getOfficeSuppliesByName(keywords, start, end);
-        }
-        catch (SystemException e) {
-            log.error("getOfficeSuppliesByName(" + keywords + ", " + start + ", " + end + ")");
-            e.printStackTrace();
-        }
         int officeSuppliesCount = 0;
         try {
+            officeSupplies = OfficeSupplyLocalServiceUtil.getOfficeSuppliesByName(keywords, start, end);
             officeSuppliesCount = OfficeSupplyLocalServiceUtil.getOfficeSuppliesCountByName(keywords);
         }
         catch (SystemException e) {
-            log.error("getOfficeSuppliesCountByName(" + keywords + ")");
-            e.printStackTrace();
+            log.error("getOfficeSuppliesByName("+keywords+", "+start+", "+end+")出错："+e.getMessage());
+            
         }
         renderRequest.setAttribute("officeSupplies", officeSupplies);
         renderRequest.setAttribute("officeSuppliesCount", officeSuppliesCount);
@@ -76,10 +71,9 @@ public class OfficeSupplyPortlet extends MVCPortlet {
         if (officeSupplyId != 0) {
             try {
                 officeSupply = OfficeSupplyLocalServiceUtil.getOfficeSupply(officeSupplyId);
-                log.error("getOfficeSuppliesCountByName(" + officeSupplyId + ")");
             }
             catch (PortalException | SystemException e) {
-                e.printStackTrace();
+                log.error("getOfficeSupply("+officeSupplyId+")出错："+e.getMessage());
             }
         }
         actionRequest.setAttribute("officeSupply", officeSupply);
@@ -101,7 +95,7 @@ public class OfficeSupplyPortlet extends MVCPortlet {
                 officeSupplyId = CounterLocalServiceUtil.increment();
             }
             catch (SystemException e) {
-                e.printStackTrace();
+                log.error("officeSupplyId = CounterLocalServiceUtil.increment();出错："+e.getMessage());
             }
             officeSupply = OfficeSupplyLocalServiceUtil.createOfficeSupply(officeSupplyId);
 
@@ -112,7 +106,7 @@ public class OfficeSupplyPortlet extends MVCPortlet {
                 officeSupply = OfficeSupplyLocalServiceUtil.getOfficeSupply(officeSupplyId);
             }
             catch (PortalException | SystemException e) {
-                e.printStackTrace();
+                log.error("getOfficeSupply("+officeSupplyId+")出错："+e.getMessage());
             }
         }
 
@@ -121,7 +115,6 @@ public class OfficeSupplyPortlet extends MVCPortlet {
             user = PortalUtil.getUser(actionRequest);
         }
         catch (PortalException | SystemException e) {
-
         }
         if (Validator.isNotNull(user)) {
             officeSupply.setUserId(user.getUserId());
@@ -139,8 +132,7 @@ public class OfficeSupplyPortlet extends MVCPortlet {
             OfficeSupplyLocalServiceUtil.updateOfficeSupply(officeSupply);
         }
         catch (SystemException e) {
-            log.error("updateOfficeSupply error:" + officeSupply.toString());
-            e.printStackTrace();
+            log.error("updateOfficeSupply error:" + officeSupply.toString()+e.getMessage());
         }
     }
 
@@ -154,8 +146,7 @@ public class OfficeSupplyPortlet extends MVCPortlet {
                 OfficeSupplyLocalServiceUtil.deleteOfficeSupply(Long.parseLong(officeSupplyId));
             }
             catch (NumberFormatException | PortalException | SystemException e) {
-                log.error("deleteOfficeSupply(" + officeSupplyId + ")");
-                e.printStackTrace();
+                log.error("deleteOfficeSupply(" + officeSupplyId + ")出错"+e.getMessage());
             }
         }
     }
