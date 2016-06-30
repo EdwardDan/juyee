@@ -283,16 +283,16 @@ public class DispatchLocalServiceWrapper implements DispatchLocalService,
 	}
 
 	@Override
-	public java.util.List<com.justonetech.oa.model.Dispatch> getDispatchsByTitle(
+	public java.util.List<com.justonetech.oa.model.Dispatch> findByTitle(
 		java.lang.String title, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _dispatchLocalService.getDispatchsByTitle(title, start, end);
+		return _dispatchLocalService.findByTitle(title, start, end);
 	}
 
 	@Override
-	public int getDispatchsCountByTitle(java.lang.String title)
+	public int countByTitle(java.lang.String title)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _dispatchLocalService.getDispatchsCountByTitle(title);
+		return _dispatchLocalService.countByTitle(title);
 	}
 
 	@Override

@@ -274,15 +274,15 @@ public class DispatchLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
-	public static java.util.List<com.justonetech.oa.model.Dispatch> getDispatchsByTitle(
+	public static java.util.List<com.justonetech.oa.model.Dispatch> findByTitle(
 		java.lang.String title, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getDispatchsByTitle(title, start, end);
+		return getService().findByTitle(title, start, end);
 	}
 
-	public static int getDispatchsCountByTitle(java.lang.String title)
+	public static int countByTitle(java.lang.String title)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getDispatchsCountByTitle(title);
+		return getService().countByTitle(title);
 	}
 
 	public static void deleteDispatchs(java.lang.String[] dispatchIds) {

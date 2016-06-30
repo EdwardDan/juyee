@@ -114,11 +114,11 @@ public class DispatchLocalServiceClpInvoker {
 
 		_methodParameterTypes53 = new String[] { "java.lang.String" };
 
-		_methodName58 = "getDispatchsByTitle";
+		_methodName58 = "findByTitle";
 
 		_methodParameterTypes58 = new String[] { "java.lang.String", "int", "int" };
 
-		_methodName59 = "getDispatchsCountByTitle";
+		_methodName59 = "countByTitle";
 
 		_methodParameterTypes59 = new String[] { "java.lang.String" };
 
@@ -230,14 +230,14 @@ public class DispatchLocalServiceClpInvoker {
 
 		if (_methodName58.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes58, parameterTypes)) {
-			return DispatchLocalServiceUtil.getDispatchsByTitle((java.lang.String)arguments[0],
+			return DispatchLocalServiceUtil.findByTitle((java.lang.String)arguments[0],
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue());
 		}
 
 		if (_methodName59.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes59, parameterTypes)) {
-			return DispatchLocalServiceUtil.getDispatchsCountByTitle((java.lang.String)arguments[0]);
+			return DispatchLocalServiceUtil.countByTitle((java.lang.String)arguments[0]);
 		}
 
 		if (_methodName60.equals(name) &&

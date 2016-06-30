@@ -250,13 +250,11 @@ public interface DispatchLocalService extends BaseLocalService,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.justonetech.oa.model.Dispatch> getDispatchsByTitle(
+	public java.util.List<com.justonetech.oa.model.Dispatch> findByTitle(
 		java.lang.String title, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getDispatchsCountByTitle(java.lang.String title)
+	public int countByTitle(java.lang.String title)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void deleteDispatchs(java.lang.String[] dispatchIds);

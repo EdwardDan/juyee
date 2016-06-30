@@ -43,12 +43,12 @@ public class DispatchLocalServiceImpl extends DispatchLocalServiceBaseImpl {
 	 * Never reference this interface directly. Always use {@link com.justonetech.oa.service.DispatchLocalServiceUtil} to access the dispatch local service.
 	 */
 
-	public List<Dispatch> getDispatchsByTitle(String title, int start, int end)
+	public List<Dispatch> findByTitle(String title, int start, int end)
 			throws SystemException {
 		return dispatchPersistence.findByTitle("%" + title + "%", start, end);
 	}
 
-	public int getDispatchsCountByTitle(String title) throws SystemException {
+	public int countByTitle(String title) throws SystemException {
 
 		return dispatchPersistence.countByTitle("%" + title + "%");
 	}

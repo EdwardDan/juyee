@@ -114,11 +114,11 @@ public class DispatchLocalServiceClp implements DispatchLocalService {
 
 		_methodParameterTypes17 = new String[] { "java.lang.String" };
 
-		_methodName19 = "getDispatchsByTitle";
+		_methodName19 = "findByTitle";
 
 		_methodParameterTypes19 = new String[] { "java.lang.String", "int", "int" };
 
-		_methodName20 = "getDispatchsCountByTitle";
+		_methodName20 = "countByTitle";
 
 		_methodParameterTypes20 = new String[] { "java.lang.String" };
 
@@ -674,7 +674,7 @@ public class DispatchLocalServiceClp implements DispatchLocalService {
 	}
 
 	@Override
-	public java.util.List<com.justonetech.oa.model.Dispatch> getDispatchsByTitle(
+	public java.util.List<com.justonetech.oa.model.Dispatch> findByTitle(
 		java.lang.String title, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
@@ -704,7 +704,7 @@ public class DispatchLocalServiceClp implements DispatchLocalService {
 	}
 
 	@Override
-	public int getDispatchsCountByTitle(java.lang.String title)
+	public int countByTitle(java.lang.String title)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
