@@ -14,12 +14,7 @@
 
 package com.justonetech.sys.service.impl;
 
-import java.util.List;
-
-import com.justonetech.sys.NoSuchDictionaryException;
-import com.justonetech.sys.model.Dictionary;
 import com.justonetech.sys.service.base.DictionaryServiceBaseImpl;
-import com.liferay.portal.kernel.exception.SystemException;
 
 /**
  * The implementation of the dictionary remote service. <p> All custom service
