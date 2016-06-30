@@ -1,16 +1,21 @@
 <?xml version="1.0"?>
 
-<portlet-app xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd" version="2.0">
-	
+<portlet-app xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd"
+	version="2.0">
+
 	<portlet>
 		<portlet-name>office-supply</portlet-name>
 		<display-name>办公用品库</display-name>
-		<portlet-class>
-			com.justonetech.oa.portlet.OfficeSupplyPortlet
-		</portlet-class>
+		<portlet-class>com.justonetech.oa.portlet.OfficeSupplyPortlet</portlet-class>
 		<init-param>
 			<name>view-template</name>
 			<value>/portlet/office-supply/view.jsp</value>
+		</init-param>
+		<init-param>
+			<name>copy-request-parameters</name>
+			<value>true</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -38,9 +43,7 @@
 	<portlet>
 		<portlet-name>leader-weekly-work</portlet-name>
 		<display-name>领导每周工作</display-name>
-		<portlet-class>
-			com.justonetech.oa.portlet.LeaderWeeklyWorkPortlet
-		</portlet-class>
+		<portlet-class>com.justonetech.oa.portlet.LeaderWeeklyWorkPortlet</portlet-class>
 		<init-param>
 			<name>view-template</name>
 			<value>/portlet/leader-weekly-work/view.jsp</value>
@@ -71,9 +74,7 @@
 	<portlet>
 		<portlet-name>dept-weekly-work</portlet-name>
 		<display-name>科室一周工作</display-name>
-		<portlet-class>
-			com.justonetech.oa.portlet.DeptWeeklyWorkPortlet
-		</portlet-class>
+		<portlet-class>com.justonetech.oa.portlet.DeptWeeklyWorkPortlet</portlet-class>
 		<init-param>
 			<name>view-template</name>
 			<value>/portlet/dept-weekly-work/view.jsp</value>
