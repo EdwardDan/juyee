@@ -48,14 +48,19 @@ public class OfficeSupplyPortlet extends MVCPortlet {
         int end = pageSize * pageNumber;
 
         List<OfficeSupply> officeSupplies = Collections.emptyList();
-        int officeSuppliesCount = 0;
         try {
             officeSupplies = OfficeSupplyLocalServiceUtil.getOfficeSuppliesByName(keywords, start, end);
+        }
+        catch (SystemException e) {
+            log.error("getOfficeSuppliesByName(" + keywords + ", " + start + ", " + end + ")出错：" + e.getMessage());
+        }
+        int officeSuppliesCount = 0;
+        try {
             officeSuppliesCount = OfficeSupplyLocalServiceUtil.getOfficeSuppliesCountByName(keywords);
         }
         catch (SystemException e) {
-            log.error("getOfficeSuppliesByName("+keywords+", "+start+", "+end+")出错："+e.getMessage());
-            
+            log.error("getOfficeSuppliesCountByName(" + keywords + ")出错：" + e.getMessage());
+
         }
         renderRequest.setAttribute("officeSupplies", officeSupplies);
         renderRequest.setAttribute("officeSuppliesCount", officeSuppliesCount);
@@ -73,14 +78,14 @@ public class OfficeSupplyPortlet extends MVCPortlet {
                 officeSupply = OfficeSupplyLocalServiceUtil.getOfficeSupply(officeSupplyId);
             }
             catch (PortalException | SystemException e) {
-                log.error("getOfficeSupply("+officeSupplyId+")出错："+e.getMessage());
+                log.error("getOfficeSupply(" + officeSupplyId + ")出错：" + e.getMessage());
             }
         }
         actionRequest.setAttribute("officeSupply", officeSupply);
     }
 
     public void saveOfficeSupply(ActionRequest actionRequest, ActionResponse actionResponse)
-        throws IOException, PortletException {
+        throws IOException, PortletException, SystemException, PortalException {
 
         long officeSupplyId = ParamUtil.getLong(actionRequest, "officeSupplyId");
         String name = ParamUtil.getString(actionRequest, "name");
@@ -91,31 +96,16 @@ public class OfficeSupplyPortlet extends MVCPortlet {
         OfficeSupply officeSupply = null;
         Date now = new Date();
         if (officeSupplyId == 0) {
-            try {
-                officeSupplyId = CounterLocalServiceUtil.increment();
-            }
-            catch (SystemException e) {
-                log.error("officeSupplyId = CounterLocalServiceUtil.increment();出错："+e.getMessage());
-            }
+            officeSupplyId = CounterLocalServiceUtil.increment();
             officeSupply = OfficeSupplyLocalServiceUtil.createOfficeSupply(officeSupplyId);
 
             officeSupply.setCreateTime(now);
         }
         else {
-            try {
-                officeSupply = OfficeSupplyLocalServiceUtil.getOfficeSupply(officeSupplyId);
-            }
-            catch (PortalException | SystemException e) {
-                log.error("getOfficeSupply("+officeSupplyId+")出错："+e.getMessage());
-            }
+            officeSupply = OfficeSupplyLocalServiceUtil.getOfficeSupply(officeSupplyId);
         }
 
-        User user = null;
-        try {
-            user = PortalUtil.getUser(actionRequest);
-        }
-        catch (PortalException | SystemException e) {
-        }
+        User user = PortalUtil.getUser(actionRequest);
         if (Validator.isNotNull(user)) {
             officeSupply.setUserId(user.getUserId());
             officeSupply.setUserName(user.getFullName());
@@ -127,27 +117,16 @@ public class OfficeSupplyPortlet extends MVCPortlet {
         officeSupply.setUnitPrice(unitPrice);
         officeSupply.setQuantity(quantity);
         officeSupply.setModifiedTime(now);
-
-        try {
-            OfficeSupplyLocalServiceUtil.updateOfficeSupply(officeSupply);
-        }
-        catch (SystemException e) {
-            log.error("updateOfficeSupply error:" + officeSupply.toString()+e.getMessage());
-        }
+        OfficeSupplyLocalServiceUtil.updateOfficeSupply(officeSupply);
     }
 
     public void deleteOfficeSupplies(ActionRequest actionRequest, ActionResponse actionResponse)
-        throws IOException, PortletException {
+        throws IOException, PortletException, NumberFormatException, PortalException, SystemException {
 
         String deleteOfficeSupplyIds = ParamUtil.getString(actionRequest, "officeSupplyIds");
         String[] officeSupplyIds = deleteOfficeSupplyIds.split(",");
         for (String officeSupplyId : officeSupplyIds) {
-            try {
-                OfficeSupplyLocalServiceUtil.deleteOfficeSupply(Long.parseLong(officeSupplyId));
-            }
-            catch (NumberFormatException | PortalException | SystemException e) {
-                log.error("deleteOfficeSupply(" + officeSupplyId + ")出错"+e.getMessage());
-            }
+            OfficeSupplyLocalServiceUtil.deleteOfficeSupply(Long.parseLong(officeSupplyId));
         }
     }
 
