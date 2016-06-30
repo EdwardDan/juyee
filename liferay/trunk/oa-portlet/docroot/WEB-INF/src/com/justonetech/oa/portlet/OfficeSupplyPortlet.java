@@ -49,14 +49,14 @@ public class OfficeSupplyPortlet extends MVCPortlet {
 
         List<OfficeSupply> officeSupplies = Collections.emptyList();
         try {
-            officeSupplies = OfficeSupplyLocalServiceUtil.getOfficeSuppliesByName(keywords, start, end);
+            officeSupplies = OfficeSupplyLocalServiceUtil.findByName(keywords, start, end);
         }
         catch (SystemException e) {
             log.error("getOfficeSuppliesByName(" + keywords + ", " + start + ", " + end + ")出错：" + e.getMessage());
         }
         int officeSuppliesCount = 0;
         try {
-            officeSuppliesCount = OfficeSupplyLocalServiceUtil.getOfficeSuppliesCountByName(keywords);
+            officeSuppliesCount = OfficeSupplyLocalServiceUtil.countByName(keywords);
         }
         catch (SystemException e) {
             log.error("getOfficeSuppliesCountByName(" + keywords + ")出错：" + e.getMessage());
