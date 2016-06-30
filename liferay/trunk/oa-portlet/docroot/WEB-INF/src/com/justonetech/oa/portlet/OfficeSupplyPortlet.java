@@ -69,17 +69,12 @@ public class OfficeSupplyPortlet extends MVCPortlet {
     }
 
     public void editOfficeSupply(ActionRequest actionRequest, ActionResponse actionResponse)
-        throws IOException, PortletException {
+        throws IOException, PortletException, PortalException, SystemException {
 
         long officeSupplyId = ParamUtil.getLong(actionRequest, "officeSupplyId");
         OfficeSupply officeSupply = null;
         if (officeSupplyId != 0) {
-            try {
-                officeSupply = OfficeSupplyLocalServiceUtil.getOfficeSupply(officeSupplyId);
-            }
-            catch (PortalException | SystemException e) {
-                log.error("getOfficeSupply(" + officeSupplyId + ")出错：" + e.getMessage());
-            }
+            officeSupply = OfficeSupplyLocalServiceUtil.getOfficeSupply(officeSupplyId);
         }
         actionRequest.setAttribute("officeSupply", officeSupply);
     }
