@@ -5,6 +5,8 @@
 	<bean id="com.justonetech.oa.service.persistence.DeptWorkPersistence" class="com.justonetech.oa.service.persistence.DeptWorkPersistenceImpl" parent="basePersistence" />
 	<bean id="com.justonetech.oa.service.DeptWorkItemLocalService" class="com.justonetech.oa.service.impl.DeptWorkItemLocalServiceImpl" />
 	<bean id="com.justonetech.oa.service.persistence.DeptWorkItemPersistence" class="com.justonetech.oa.service.persistence.DeptWorkItemPersistenceImpl" parent="basePersistence" />
+	<bean id="com.justonetech.oa.service.DispatchLocalService" class="com.justonetech.oa.service.impl.DispatchLocalServiceImpl" />
+	<bean id="com.justonetech.oa.service.persistence.DispatchPersistence" class="com.justonetech.oa.service.persistence.DispatchPersistenceImpl" parent="basePersistence" />
 	<bean id="com.justonetech.oa.service.LeaderWorkLocalService" class="com.justonetech.oa.service.impl.LeaderWorkLocalServiceImpl" />
 	<bean id="com.justonetech.oa.service.persistence.LeaderWorkPersistence" class="com.justonetech.oa.service.persistence.LeaderWorkPersistenceImpl" parent="basePersistence" />
 	<bean id="com.justonetech.oa.service.OfficeSupplyLocalService" class="com.justonetech.oa.service.impl.OfficeSupplyLocalServiceImpl" />

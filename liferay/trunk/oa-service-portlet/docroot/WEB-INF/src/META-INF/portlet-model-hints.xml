@@ -25,6 +25,24 @@
 		</field>
 		<field name="agentPerson" type="String" />
 	</model>
+	<model name="com.justonetech.oa.model.Dispatch">
+		<field name="dispatchId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createTime" type="Date" />
+		<field name="modifiedTime" type="Date" />
+		<field name="rocordType" type="long" />
+		<field name="securityLevel" type="long" />
+		<field name="organaAbbreviation" type="long" />
+		<field name="year" type="int" />
+		<field name="serialNo" type="int" />
+		<field name="title" type="String" />
+		<field name="sendOrgan" type="String" />
+		<field name="ccOrgan" type="String" />
+		<field name="writtenOrgan" type="String" />
+		<field name="writtenDate" type="Date" />
+		<field name="urgencyDegree" type="long" />
+	</model>
 	<model name="com.justonetech.oa.model.LeaderWork">
 		<field name="userId" type="long" />
 		<field name="workDate" type="long" />

@@ -18,6 +18,7 @@ import com.justonetech.oa.model.LeaderWork;
 import com.justonetech.oa.service.LeaderWorkLocalService;
 import com.justonetech.oa.service.persistence.DeptWorkItemPersistence;
 import com.justonetech.oa.service.persistence.DeptWorkPersistence;
+import com.justonetech.oa.service.persistence.DispatchPersistence;
 import com.justonetech.oa.service.persistence.LeaderWorkPK;
 import com.justonetech.oa.service.persistence.LeaderWorkPersistence;
 import com.justonetech.oa.service.persistence.OfficeSupplyPersistence;
@@ -361,6 +362,43 @@ public abstract class LeaderWorkLocalServiceBaseImpl
 	}
 
 	/**
+	 * Returns the dispatch local service.
+	 *
+	 * @return the dispatch local service
+	 */
+	public com.justonetech.oa.service.DispatchLocalService getDispatchLocalService() {
+		return dispatchLocalService;
+	}
+
+	/**
+	 * Sets the dispatch local service.
+	 *
+	 * @param dispatchLocalService the dispatch local service
+	 */
+	public void setDispatchLocalService(
+		com.justonetech.oa.service.DispatchLocalService dispatchLocalService) {
+		this.dispatchLocalService = dispatchLocalService;
+	}
+
+	/**
+	 * Returns the dispatch persistence.
+	 *
+	 * @return the dispatch persistence
+	 */
+	public DispatchPersistence getDispatchPersistence() {
+		return dispatchPersistence;
+	}
+
+	/**
+	 * Sets the dispatch persistence.
+	 *
+	 * @param dispatchPersistence the dispatch persistence
+	 */
+	public void setDispatchPersistence(DispatchPersistence dispatchPersistence) {
+		this.dispatchPersistence = dispatchPersistence;
+	}
+
+	/**
 	 * Returns the leader work local service.
 	 *
 	 * @return the leader work local service
@@ -658,6 +696,10 @@ public abstract class LeaderWorkLocalServiceBaseImpl
 	protected com.justonetech.oa.service.DeptWorkItemLocalService deptWorkItemLocalService;
 	@BeanReference(type = DeptWorkItemPersistence.class)
 	protected DeptWorkItemPersistence deptWorkItemPersistence;
+	@BeanReference(type = com.justonetech.oa.service.DispatchLocalService.class)
+	protected com.justonetech.oa.service.DispatchLocalService dispatchLocalService;
+	@BeanReference(type = DispatchPersistence.class)
+	protected DispatchPersistence dispatchPersistence;
 	@BeanReference(type = com.justonetech.oa.service.LeaderWorkLocalService.class)
 	protected com.justonetech.oa.service.LeaderWorkLocalService leaderWorkLocalService;
 	@BeanReference(type = LeaderWorkPersistence.class)

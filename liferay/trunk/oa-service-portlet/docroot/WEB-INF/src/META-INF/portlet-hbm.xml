@@ -4,6 +4,7 @@
 <hibernate-mapping default-lazy="false" auto-import="false">
 	<import class="com.justonetech.oa.model.DeptWork" />
 	<import class="com.justonetech.oa.model.DeptWorkItem" />
+	<import class="com.justonetech.oa.model.Dispatch" />
 	<import class="com.justonetech.oa.model.LeaderWork" />
 	<import class="com.justonetech.oa.model.OfficeSupply" />
 	<import class="com.justonetech.oa.model.VehicleRequisition" />
@@ -34,6 +35,27 @@
 		<property name="schedule" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="content" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="agentPerson" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.justonetech.oa.model.impl.DispatchImpl" table="oa_Dispatch">
+		<cache usage="read-write" />
+		<id name="dispatchId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createTime" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedTime" type="org.hibernate.type.TimestampType" />
+		<property name="rocordType" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="securityLevel" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="organaAbbreviation" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="year" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="serialNo" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="title" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="sendOrgan" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="ccOrgan" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="writtenOrgan" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="writtenDate" type="org.hibernate.type.TimestampType" />
+		<property name="urgencyDegree" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
 	<class name="com.justonetech.oa.model.impl.LeaderWorkImpl" table="oa_LeaderWork">
 		<cache usage="read-write" />

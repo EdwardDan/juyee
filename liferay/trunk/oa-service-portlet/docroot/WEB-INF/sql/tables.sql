@@ -22,6 +22,25 @@ create table oa_DeptWorkItem (
 	agentPerson VARCHAR(75) null
 );
 
+create table oa_Dispatch (
+	dispatchId LONG not null primary key,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createTime DATE null,
+	modifiedTime DATE null,
+	rocordType LONG,
+	securityLevel LONG,
+	organaAbbreviation LONG,
+	year INTEGER,
+	serialNo INTEGER,
+	title VARCHAR(75) null,
+	sendOrgan VARCHAR(75) null,
+	ccOrgan VARCHAR(75) null,
+	writtenOrgan VARCHAR(75) null,
+	writtenDate DATE null,
+	urgencyDegree LONG
+);
+
 create table oa_LeaderWork (
 	userId LONG not null,
 	workDate LONG not null,

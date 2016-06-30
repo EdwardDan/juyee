@@ -48,6 +48,36 @@
 			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="com.justonetech.oa.model.impl.DispatchModelImpl">
+		<attributes>
+			<id name="dispatchId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createTime">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedTime">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="rocordType" />
+			<basic name="securityLevel" />
+			<basic name="organaAbbreviation" />
+			<basic name="year" />
+			<basic name="serialNo" />
+			<basic name="title" />
+			<basic name="sendOrgan" />
+			<basic name="ccOrgan" />
+			<basic name="writtenOrgan" />
+			<basic name="writtenDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="urgencyDegree" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="com.justonetech.oa.model.impl.LeaderWorkModelImpl">
 		<id-class class="com.justonetech.oa.service.persistence.LeaderWorkPK" />
 		<attributes>
@@ -126,6 +156,10 @@
 	</entity>
 	<entity class="com.justonetech.oa.model.impl.DeptWorkItemImpl" name="DeptWorkItem">
 		<table name="oa_DeptWorkItem" />
+		<attributes />
+	</entity>
+	<entity class="com.justonetech.oa.model.impl.DispatchImpl" name="Dispatch">
+		<table name="oa_Dispatch" />
 		<attributes />
 	</entity>
 	<entity class="com.justonetech.oa.model.impl.LeaderWorkImpl" name="LeaderWork">

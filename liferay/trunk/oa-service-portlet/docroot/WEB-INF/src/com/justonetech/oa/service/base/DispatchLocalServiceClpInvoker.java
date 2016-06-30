@@ -14,7 +14,7 @@
 
 package com.justonetech.oa.service.base;
 
-import com.justonetech.oa.service.OfficeSupplyLocalServiceUtil;
+import com.justonetech.oa.service.DispatchLocalServiceUtil;
 
 import java.util.Arrays;
 
@@ -22,26 +22,26 @@ import java.util.Arrays;
  * @author justonetech
  * @generated
  */
-public class OfficeSupplyLocalServiceClpInvoker {
-	public OfficeSupplyLocalServiceClpInvoker() {
-		_methodName0 = "addOfficeSupply";
+public class DispatchLocalServiceClpInvoker {
+	public DispatchLocalServiceClpInvoker() {
+		_methodName0 = "addDispatch";
 
 		_methodParameterTypes0 = new String[] {
-				"com.justonetech.oa.model.OfficeSupply"
+				"com.justonetech.oa.model.Dispatch"
 			};
 
-		_methodName1 = "createOfficeSupply";
+		_methodName1 = "createDispatch";
 
 		_methodParameterTypes1 = new String[] { "long" };
 
-		_methodName2 = "deleteOfficeSupply";
+		_methodName2 = "deleteDispatch";
 
 		_methodParameterTypes2 = new String[] { "long" };
 
-		_methodName3 = "deleteOfficeSupply";
+		_methodName3 = "deleteDispatch";
 
 		_methodParameterTypes3 = new String[] {
-				"com.justonetech.oa.model.OfficeSupply"
+				"com.justonetech.oa.model.Dispatch"
 			};
 
 		_methodName4 = "dynamicQuery";
@@ -80,11 +80,11 @@ public class OfficeSupplyLocalServiceClpInvoker {
 				"com.liferay.portal.kernel.dao.orm.Projection"
 			};
 
-		_methodName10 = "fetchOfficeSupply";
+		_methodName10 = "fetchDispatch";
 
 		_methodParameterTypes10 = new String[] { "long" };
 
-		_methodName11 = "getOfficeSupply";
+		_methodName11 = "getDispatch";
 
 		_methodParameterTypes11 = new String[] { "long" };
 
@@ -92,18 +92,18 @@ public class OfficeSupplyLocalServiceClpInvoker {
 
 		_methodParameterTypes12 = new String[] { "java.io.Serializable" };
 
-		_methodName13 = "getOfficeSupplies";
+		_methodName13 = "getDispatchs";
 
 		_methodParameterTypes13 = new String[] { "int", "int" };
 
-		_methodName14 = "getOfficeSuppliesCount";
+		_methodName14 = "getDispatchsCount";
 
 		_methodParameterTypes14 = new String[] {  };
 
-		_methodName15 = "updateOfficeSupply";
+		_methodName15 = "updateDispatch";
 
 		_methodParameterTypes15 = new String[] {
-				"com.justonetech.oa.model.OfficeSupply"
+				"com.justonetech.oa.model.Dispatch"
 			};
 
 		_methodName52 = "getBeanIdentifier";
@@ -114,15 +114,15 @@ public class OfficeSupplyLocalServiceClpInvoker {
 
 		_methodParameterTypes53 = new String[] { "java.lang.String" };
 
-		_methodName58 = "findByName";
+		_methodName58 = "getDispatchsByTitle";
 
 		_methodParameterTypes58 = new String[] { "java.lang.String", "int", "int" };
 
-		_methodName59 = "countByName";
+		_methodName59 = "getDispatchsCountByTitle";
 
 		_methodParameterTypes59 = new String[] { "java.lang.String" };
 
-		_methodName60 = "deleteOfficeSupplies";
+		_methodName60 = "deleteDispatchs";
 
 		_methodParameterTypes60 = new String[] { "java.lang.String[][]" };
 	}
@@ -131,44 +131,44 @@ public class OfficeSupplyLocalServiceClpInvoker {
 		Object[] arguments) throws Throwable {
 		if (_methodName0.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes0, parameterTypes)) {
-			return OfficeSupplyLocalServiceUtil.addOfficeSupply((com.justonetech.oa.model.OfficeSupply)arguments[0]);
+			return DispatchLocalServiceUtil.addDispatch((com.justonetech.oa.model.Dispatch)arguments[0]);
 		}
 
 		if (_methodName1.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes1, parameterTypes)) {
-			return OfficeSupplyLocalServiceUtil.createOfficeSupply(((Long)arguments[0]).longValue());
+			return DispatchLocalServiceUtil.createDispatch(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName2.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes2, parameterTypes)) {
-			return OfficeSupplyLocalServiceUtil.deleteOfficeSupply(((Long)arguments[0]).longValue());
+			return DispatchLocalServiceUtil.deleteDispatch(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName3.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes3, parameterTypes)) {
-			return OfficeSupplyLocalServiceUtil.deleteOfficeSupply((com.justonetech.oa.model.OfficeSupply)arguments[0]);
+			return DispatchLocalServiceUtil.deleteDispatch((com.justonetech.oa.model.Dispatch)arguments[0]);
 		}
 
 		if (_methodName4.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes4, parameterTypes)) {
-			return OfficeSupplyLocalServiceUtil.dynamicQuery();
+			return DispatchLocalServiceUtil.dynamicQuery();
 		}
 
 		if (_methodName5.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes5, parameterTypes)) {
-			return OfficeSupplyLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0]);
+			return DispatchLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0]);
 		}
 
 		if (_methodName6.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes6, parameterTypes)) {
-			return OfficeSupplyLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
+			return DispatchLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue());
 		}
 
 		if (_methodName7.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes7, parameterTypes)) {
-			return OfficeSupplyLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
+			return DispatchLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue(),
 				(com.liferay.portal.kernel.util.OrderByComparator)arguments[3]);
@@ -176,73 +176,73 @@ public class OfficeSupplyLocalServiceClpInvoker {
 
 		if (_methodName8.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes8, parameterTypes)) {
-			return OfficeSupplyLocalServiceUtil.dynamicQueryCount((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0]);
+			return DispatchLocalServiceUtil.dynamicQueryCount((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0]);
 		}
 
 		if (_methodName9.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes9, parameterTypes)) {
-			return OfficeSupplyLocalServiceUtil.dynamicQueryCount((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
+			return DispatchLocalServiceUtil.dynamicQueryCount((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
 				(com.liferay.portal.kernel.dao.orm.Projection)arguments[1]);
 		}
 
 		if (_methodName10.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes10, parameterTypes)) {
-			return OfficeSupplyLocalServiceUtil.fetchOfficeSupply(((Long)arguments[0]).longValue());
+			return DispatchLocalServiceUtil.fetchDispatch(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName11.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes11, parameterTypes)) {
-			return OfficeSupplyLocalServiceUtil.getOfficeSupply(((Long)arguments[0]).longValue());
+			return DispatchLocalServiceUtil.getDispatch(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName12.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes12, parameterTypes)) {
-			return OfficeSupplyLocalServiceUtil.getPersistedModel((java.io.Serializable)arguments[0]);
+			return DispatchLocalServiceUtil.getPersistedModel((java.io.Serializable)arguments[0]);
 		}
 
 		if (_methodName13.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes13, parameterTypes)) {
-			return OfficeSupplyLocalServiceUtil.getOfficeSupplies(((Integer)arguments[0]).intValue(),
+			return DispatchLocalServiceUtil.getDispatchs(((Integer)arguments[0]).intValue(),
 				((Integer)arguments[1]).intValue());
 		}
 
 		if (_methodName14.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes14, parameterTypes)) {
-			return OfficeSupplyLocalServiceUtil.getOfficeSuppliesCount();
+			return DispatchLocalServiceUtil.getDispatchsCount();
 		}
 
 		if (_methodName15.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes15, parameterTypes)) {
-			return OfficeSupplyLocalServiceUtil.updateOfficeSupply((com.justonetech.oa.model.OfficeSupply)arguments[0]);
+			return DispatchLocalServiceUtil.updateDispatch((com.justonetech.oa.model.Dispatch)arguments[0]);
 		}
 
 		if (_methodName52.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes52, parameterTypes)) {
-			return OfficeSupplyLocalServiceUtil.getBeanIdentifier();
+			return DispatchLocalServiceUtil.getBeanIdentifier();
 		}
 
 		if (_methodName53.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes53, parameterTypes)) {
-			OfficeSupplyLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
+			DispatchLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
 		if (_methodName58.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes58, parameterTypes)) {
-			return OfficeSupplyLocalServiceUtil.findByName((java.lang.String)arguments[0],
+			return DispatchLocalServiceUtil.getDispatchsByTitle((java.lang.String)arguments[0],
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue());
 		}
 
 		if (_methodName59.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes59, parameterTypes)) {
-			return OfficeSupplyLocalServiceUtil.countByName((java.lang.String)arguments[0]);
+			return DispatchLocalServiceUtil.getDispatchsCountByTitle((java.lang.String)arguments[0]);
 		}
 
 		if (_methodName60.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes60, parameterTypes)) {
-			OfficeSupplyLocalServiceUtil.deleteOfficeSupplies((java.lang.String[])arguments[0]);
+			DispatchLocalServiceUtil.deleteDispatchs((java.lang.String[])arguments[0]);
 
 			return null;
 		}

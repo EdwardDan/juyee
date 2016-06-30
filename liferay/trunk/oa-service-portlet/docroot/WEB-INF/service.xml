@@ -150,4 +150,44 @@
 		</finder>
 	</entity>
 
+	<!-- 发文记录 -->
+	<entity name="Dispatch" local-service="true" remote-service="false">
+
+		<!-- PK fields -->
+
+		<column name="dispatchId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createTime" type="Date" />
+		<column name="modifiedTime" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="rocordType" type="long" />
+		<column name="securityLevel" type="long" />
+		<column name="organaAbbreviation" type="long" />
+		<column name="year" type="int" />
+		<column name="serialNo" type="int" />
+		<column name="title" type="String" />
+		<column name="sendOrgan" type="String" />
+		<column name="ccOrgan" type="String" />
+		<column name="writtenOrgan" type="String" />
+		<column name="writtenDate" type="Date" />
+		<column name="urgencyDegree" type="long" />
+
+		<!-- Order -->
+		<order>
+			<order-column name="modifiedTime" order-by="desc"></order-column>
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="Title" return-type="Collection">
+			<finder-column name="title" comparator="LIKE" />
+		</finder>
+	</entity>
+
 </service-builder>
