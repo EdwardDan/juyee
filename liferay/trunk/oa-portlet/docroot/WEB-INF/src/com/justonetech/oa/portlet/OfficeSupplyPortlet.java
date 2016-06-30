@@ -120,9 +120,7 @@ public class OfficeSupplyPortlet extends MVCPortlet {
 
         String deleteOfficeSupplyIds = ParamUtil.getString(actionRequest, "officeSupplyIds");
         String[] officeSupplyIds = deleteOfficeSupplyIds.split(",");
-        for (String officeSupplyId : officeSupplyIds) {
-            OfficeSupplyLocalServiceUtil.deleteOfficeSupply(Long.parseLong(officeSupplyId));
-        }
+        OfficeSupplyLocalServiceUtil.deleteOfficeSupplies(officeSupplyIds);
     }
 
 }
