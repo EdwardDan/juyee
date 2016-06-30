@@ -26,7 +26,7 @@ import com.liferay.portal.service.InvokableLocalService;
  * based on the propagated JAAS credentials because this service can only be
  * accessed from within the same VM.
  *
- * @author fanqi
+ * @author justonetech
  * @see DictionaryLocalService
  * @see com.justonetech.sys.service.base.DictionaryLocalServiceBaseImpl
  * @see com.justonetech.sys.service.impl.DictionaryLocalServiceImpl

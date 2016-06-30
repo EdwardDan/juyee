@@ -4,7 +4,6 @@
 	<model name="com.justonetech.sys.model.Dictionary">
 		<field name="dictionaryId" type="long" />
 		<field name="groupId" type="long" />
-		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />

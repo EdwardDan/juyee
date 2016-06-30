@@ -20,7 +20,7 @@ import com.liferay.portal.model.TreeModel;
 /**
  * The extended model interface for the Dictionary service. Represents a row in the &quot;sys_Dictionary&quot; database table, with each column mapped to a property of this class.
  *
- * @author fanqi
+ * @author justonetech
  * @see DictionaryModel
  * @see com.justonetech.sys.model.impl.DictionaryImpl
  * @see com.justonetech.sys.model.impl.DictionaryModelImpl

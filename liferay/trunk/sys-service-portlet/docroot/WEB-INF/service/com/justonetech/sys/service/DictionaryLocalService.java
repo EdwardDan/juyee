@@ -30,7 +30,7 @@ import com.liferay.portal.service.PersistedModelLocalService;
  * credentials because this service can only be accessed from within the same
  * VM.
  *
- * @author fanqi
+ * @author justonetech
  * @see DictionaryLocalServiceUtil
  * @see com.justonetech.sys.service.base.DictionaryLocalServiceBaseImpl
  * @see com.justonetech.sys.service.impl.DictionaryLocalServiceImpl

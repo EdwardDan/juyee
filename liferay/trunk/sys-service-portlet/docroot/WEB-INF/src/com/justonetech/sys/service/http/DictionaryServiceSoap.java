@@ -14,6 +14,13 @@
 
 package com.justonetech.sys.service.http;
 
+import com.justonetech.sys.service.DictionaryServiceUtil;
+
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import java.rmi.RemoteException;
+
 /**
  * Provides the SOAP utility for the
  * {@link com.justonetech.sys.service.DictionaryServiceUtil} service utility. The
@@ -48,11 +55,89 @@ package com.justonetech.sys.service.http;
  * The SOAP utility is only generated for remote services.
  * </p>
  *
- * @author fanqi
+ * @author justonetech
  * @see DictionaryServiceHttp
  * @see com.justonetech.sys.model.DictionarySoap
  * @see com.justonetech.sys.service.DictionaryServiceUtil
  * @generated
  */
 public class DictionaryServiceSoap {
+	public static com.justonetech.sys.model.DictionarySoap findByGroupIdAndCode(
+		long groupId, java.lang.String code) throws RemoteException {
+		try {
+			com.justonetech.sys.model.Dictionary returnValue = DictionaryServiceUtil.findByGroupIdAndCode(groupId,
+					code);
+
+			return com.justonetech.sys.model.DictionarySoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.justonetech.sys.model.DictionarySoap[] findByGroupIdAndParentId(
+		long groupId, long parentId, int start, int end)
+		throws RemoteException {
+		try {
+			java.util.List<com.justonetech.sys.model.Dictionary> returnValue = DictionaryServiceUtil.findByGroupIdAndParentId(groupId,
+					parentId, start, end);
+
+			return com.justonetech.sys.model.DictionarySoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int countByGroupIdAndParentId(long groupId, long parentId)
+		throws RemoteException {
+		try {
+			int returnValue = DictionaryServiceUtil.countByGroupIdAndParentId(groupId,
+					parentId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.justonetech.sys.model.DictionarySoap[] findByParentIdAndIsValid(
+		long parentId, boolean isValid, int start, int end)
+		throws RemoteException {
+		try {
+			java.util.List<com.justonetech.sys.model.Dictionary> returnValue = DictionaryServiceUtil.findByParentIdAndIsValid(parentId,
+					isValid, start, end);
+
+			return com.justonetech.sys.model.DictionarySoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int countByParentIdAndIsValid(long parentId, boolean isValid)
+		throws RemoteException {
+		try {
+			int returnValue = DictionaryServiceUtil.countByParentIdAndIsValid(parentId,
+					isValid);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(DictionaryServiceSoap.class);
 }

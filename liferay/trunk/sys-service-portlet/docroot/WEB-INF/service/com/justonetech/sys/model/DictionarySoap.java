@@ -23,7 +23,7 @@ import java.util.List;
 /**
  * This class is used by SOAP remote services, specifically {@link com.justonetech.sys.service.http.DictionaryServiceSoap}.
  *
- * @author fanqi
+ * @author justonetech
  * @see com.justonetech.sys.service.http.DictionaryServiceSoap
  * @generated
  */
@@ -33,7 +33,6 @@ public class DictionarySoap implements Serializable {
 
 		soapModel.setDictionaryId(model.getDictionaryId());
 		soapModel.setGroupId(model.getGroupId());
-		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
@@ -114,14 +113,6 @@ public class DictionarySoap implements Serializable {
 
 	public void setGroupId(long groupId) {
 		_groupId = groupId;
-	}
-
-	public long getCompanyId() {
-		return _companyId;
-	}
-
-	public void setCompanyId(long companyId) {
-		_companyId = companyId;
 	}
 
 	public long getUserId() {
@@ -246,7 +237,6 @@ public class DictionarySoap implements Serializable {
 
 	private long _dictionaryId;
 	private long _groupId;
-	private long _companyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;

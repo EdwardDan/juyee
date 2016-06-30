@@ -26,7 +26,7 @@ import java.util.Map;
  * This class is a wrapper for {@link Dictionary}.
  * </p>
  *
- * @author fanqi
+ * @author justonetech
  * @see Dictionary
  * @generated
  */
@@ -51,7 +51,6 @@ public class DictionaryWrapper implements Dictionary, ModelWrapper<Dictionary> {
 
 		attributes.put("dictionaryId", getDictionaryId());
 		attributes.put("groupId", getGroupId());
-		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
@@ -82,12 +81,6 @@ public class DictionaryWrapper implements Dictionary, ModelWrapper<Dictionary> {
 
 		if (groupId != null) {
 			setGroupId(groupId);
-		}
-
-		Long companyId = (Long)attributes.get("companyId");
-
-		if (companyId != null) {
-			setCompanyId(companyId);
 		}
 
 		Long userId = (Long)attributes.get("userId");
@@ -233,26 +226,6 @@ public class DictionaryWrapper implements Dictionary, ModelWrapper<Dictionary> {
 	@Override
 	public void setGroupId(long groupId) {
 		_dictionary.setGroupId(groupId);
-	}
-
-	/**
-	* Returns the company ID of this dictionary.
-	*
-	* @return the company ID of this dictionary
-	*/
-	@Override
-	public long getCompanyId() {
-		return _dictionary.getCompanyId();
-	}
-
-	/**
-	* Sets the company ID of this dictionary.
-	*
-	* @param companyId the company ID of this dictionary
-	*/
-	@Override
-	public void setCompanyId(long companyId) {
-		_dictionary.setCompanyId(companyId);
 	}
 
 	/**

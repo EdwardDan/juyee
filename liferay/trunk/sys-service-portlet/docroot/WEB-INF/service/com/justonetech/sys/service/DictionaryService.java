@@ -28,7 +28,7 @@ import com.liferay.portal.service.InvokableService;
  * service are expected to have security checks based on the propagated JAAS
  * credentials because this service can be accessed remotely.
  *
- * @author fanqi
+ * @author justonetech
  * @see DictionaryServiceUtil
  * @see com.justonetech.sys.service.base.DictionaryServiceBaseImpl
  * @see com.justonetech.sys.service.impl.DictionaryServiceImpl
@@ -63,4 +63,23 @@ public interface DictionaryService extends BaseService, InvokableService {
 	public java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
+
+	public com.justonetech.sys.model.Dictionary findByGroupIdAndCode(
+		long groupId, java.lang.String code)
+		throws com.justonetech.sys.NoSuchDictionaryException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.justonetech.sys.model.Dictionary> findByGroupIdAndParentId(
+		long groupId, long parentId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int countByGroupIdAndParentId(long groupId, long parentId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.justonetech.sys.model.Dictionary> findByParentIdAndIsValid(
+		long parentId, boolean isValid, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int countByParentIdAndIsValid(long parentId, boolean isValid)
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

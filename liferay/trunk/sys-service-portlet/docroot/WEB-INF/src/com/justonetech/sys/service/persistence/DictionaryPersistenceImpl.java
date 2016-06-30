@@ -59,7 +59,7 @@ import java.util.Set;
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
- * @author fanqi
+ * @author justonetech
  * @see DictionaryPersistence
  * @see DictionaryUtil
  * @generated
@@ -85,41 +85,41 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(DictionaryModelImpl.ENTITY_CACHE_ENABLED,
 			DictionaryModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
-	public static final FinderPath FINDER_PATH_FETCH_BY_CODE = new FinderPath(DictionaryModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_FETCH_BY_GROUPIDANDCODE = new FinderPath(DictionaryModelImpl.ENTITY_CACHE_ENABLED,
 			DictionaryModelImpl.FINDER_CACHE_ENABLED, DictionaryImpl.class,
-			FINDER_CLASS_NAME_ENTITY, "fetchByCode",
-			new String[] { String.class.getName(), Long.class.getName() },
-			DictionaryModelImpl.CODE_COLUMN_BITMASK |
-			DictionaryModelImpl.GROUPID_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_CODE = new FinderPath(DictionaryModelImpl.ENTITY_CACHE_ENABLED,
+			FINDER_CLASS_NAME_ENTITY, "fetchByGroupIdAndCode",
+			new String[] { Long.class.getName(), String.class.getName() },
+			DictionaryModelImpl.GROUPID_COLUMN_BITMASK |
+			DictionaryModelImpl.CODE_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_GROUPIDANDCODE = new FinderPath(DictionaryModelImpl.ENTITY_CACHE_ENABLED,
 			DictionaryModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCode",
-			new String[] { String.class.getName(), Long.class.getName() });
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByGroupIdAndCode",
+			new String[] { Long.class.getName(), String.class.getName() });
 
 	/**
-	 * Returns the dictionary where code = &#63; and groupId = &#63; or throws a {@link com.justonetech.sys.NoSuchDictionaryException} if it could not be found.
+	 * Returns the dictionary where groupId = &#63; and code = &#63; or throws a {@link com.justonetech.sys.NoSuchDictionaryException} if it could not be found.
 	 *
-	 * @param code the code
 	 * @param groupId the group ID
+	 * @param code the code
 	 * @return the matching dictionary
 	 * @throws com.justonetech.sys.NoSuchDictionaryException if a matching dictionary could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public Dictionary findByCode(String code, long groupId)
+	public Dictionary findByGroupIdAndCode(long groupId, String code)
 		throws NoSuchDictionaryException, SystemException {
-		Dictionary dictionary = fetchByCode(code, groupId);
+		Dictionary dictionary = fetchByGroupIdAndCode(groupId, code);
 
 		if (dictionary == null) {
 			StringBundler msg = new StringBundler(6);
 
 			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("code=");
-			msg.append(code);
-
-			msg.append(", groupId=");
+			msg.append("groupId=");
 			msg.append(groupId);
+
+			msg.append(", code=");
+			msg.append(code);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -134,45 +134,45 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 	}
 
 	/**
-	 * Returns the dictionary where code = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the dictionary where groupId = &#63; and code = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param code the code
 	 * @param groupId the group ID
+	 * @param code the code
 	 * @return the matching dictionary, or <code>null</code> if a matching dictionary could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public Dictionary fetchByCode(String code, long groupId)
+	public Dictionary fetchByGroupIdAndCode(long groupId, String code)
 		throws SystemException {
-		return fetchByCode(code, groupId, true);
+		return fetchByGroupIdAndCode(groupId, code, true);
 	}
 
 	/**
-	 * Returns the dictionary where code = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the dictionary where groupId = &#63; and code = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param code the code
 	 * @param groupId the group ID
+	 * @param code the code
 	 * @param retrieveFromCache whether to use the finder cache
 	 * @return the matching dictionary, or <code>null</code> if a matching dictionary could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public Dictionary fetchByCode(String code, long groupId,
+	public Dictionary fetchByGroupIdAndCode(long groupId, String code,
 		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { code, groupId };
+		Object[] finderArgs = new Object[] { groupId, code };
 
 		Object result = null;
 
 		if (retrieveFromCache) {
-			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_CODE,
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_GROUPIDANDCODE,
 					finderArgs, this);
 		}
 
 		if (result instanceof Dictionary) {
 			Dictionary dictionary = (Dictionary)result;
 
-			if (!Validator.equals(code, dictionary.getCode()) ||
-					(groupId != dictionary.getGroupId())) {
+			if ((groupId != dictionary.getGroupId()) ||
+					!Validator.equals(code, dictionary.getCode())) {
 				result = null;
 			}
 		}
@@ -182,21 +182,21 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 
 			query.append(_SQL_SELECT_DICTIONARY_WHERE);
 
+			query.append(_FINDER_COLUMN_GROUPIDANDCODE_GROUPID_2);
+
 			boolean bindCode = false;
 
 			if (code == null) {
-				query.append(_FINDER_COLUMN_CODE_CODE_1);
+				query.append(_FINDER_COLUMN_GROUPIDANDCODE_CODE_1);
 			}
 			else if (code.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_CODE_CODE_3);
+				query.append(_FINDER_COLUMN_GROUPIDANDCODE_CODE_3);
 			}
 			else {
 				bindCode = true;
 
-				query.append(_FINDER_COLUMN_CODE_CODE_2);
+				query.append(_FINDER_COLUMN_GROUPIDANDCODE_CODE_2);
 			}
-
-			query.append(_FINDER_COLUMN_CODE_GROUPID_2);
 
 			String sql = query.toString();
 
@@ -209,22 +209,22 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
+				qPos.add(groupId);
+
 				if (bindCode) {
 					qPos.add(code);
 				}
 
-				qPos.add(groupId);
-
 				List<Dictionary> list = q.list();
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CODE,
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_GROUPIDANDCODE,
 						finderArgs, list);
 				}
 				else {
 					if ((list.size() > 1) && _log.isWarnEnabled()) {
 						_log.warn(
-							"DictionaryPersistenceImpl.fetchByCode(String, long, boolean) with parameters (" +
+							"DictionaryPersistenceImpl.fetchByGroupIdAndCode(long, String, boolean) with parameters (" +
 							StringUtil.merge(finderArgs) +
 							") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
 					}
@@ -235,16 +235,16 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 
 					cacheResult(dictionary);
 
-					if ((dictionary.getCode() == null) ||
-							!dictionary.getCode().equals(code) ||
-							(dictionary.getGroupId() != groupId)) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CODE,
+					if ((dictionary.getGroupId() != groupId) ||
+							(dictionary.getCode() == null) ||
+							!dictionary.getCode().equals(code)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_GROUPIDANDCODE,
 							finderArgs, dictionary);
 					}
 				}
 			}
 			catch (Exception e) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CODE,
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_GROUPIDANDCODE,
 					finderArgs);
 
 				throw processException(e);
@@ -263,34 +263,35 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 	}
 
 	/**
-	 * Removes the dictionary where code = &#63; and groupId = &#63; from the database.
+	 * Removes the dictionary where groupId = &#63; and code = &#63; from the database.
 	 *
-	 * @param code the code
 	 * @param groupId the group ID
+	 * @param code the code
 	 * @return the dictionary that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public Dictionary removeByCode(String code, long groupId)
+	public Dictionary removeByGroupIdAndCode(long groupId, String code)
 		throws NoSuchDictionaryException, SystemException {
-		Dictionary dictionary = findByCode(code, groupId);
+		Dictionary dictionary = findByGroupIdAndCode(groupId, code);
 
 		return remove(dictionary);
 	}
 
 	/**
-	 * Returns the number of dictionaries where code = &#63; and groupId = &#63;.
+	 * Returns the number of dictionaries where groupId = &#63; and code = &#63;.
 	 *
-	 * @param code the code
 	 * @param groupId the group ID
+	 * @param code the code
 	 * @return the number of matching dictionaries
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public int countByCode(String code, long groupId) throws SystemException {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_CODE;
+	public int countByGroupIdAndCode(long groupId, String code)
+		throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_GROUPIDANDCODE;
 
-		Object[] finderArgs = new Object[] { code, groupId };
+		Object[] finderArgs = new Object[] { groupId, code };
 
 		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
 				this);
@@ -300,21 +301,21 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 
 			query.append(_SQL_COUNT_DICTIONARY_WHERE);
 
+			query.append(_FINDER_COLUMN_GROUPIDANDCODE_GROUPID_2);
+
 			boolean bindCode = false;
 
 			if (code == null) {
-				query.append(_FINDER_COLUMN_CODE_CODE_1);
+				query.append(_FINDER_COLUMN_GROUPIDANDCODE_CODE_1);
 			}
 			else if (code.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_CODE_CODE_3);
+				query.append(_FINDER_COLUMN_GROUPIDANDCODE_CODE_3);
 			}
 			else {
 				bindCode = true;
 
-				query.append(_FINDER_COLUMN_CODE_CODE_2);
+				query.append(_FINDER_COLUMN_GROUPIDANDCODE_CODE_2);
 			}
-
-			query.append(_FINDER_COLUMN_CODE_GROUPID_2);
 
 			String sql = query.toString();
 
@@ -327,11 +328,11 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
+				qPos.add(groupId);
+
 				if (bindCode) {
 					qPos.add(code);
 				}
-
-				qPos.add(groupId);
 
 				count = (Long)q.uniqueResult();
 
@@ -350,76 +351,91 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_CODE_CODE_1 = "dictionary.code IS NULL AND ";
-	private static final String _FINDER_COLUMN_CODE_CODE_2 = "dictionary.code = ? AND ";
-	private static final String _FINDER_COLUMN_CODE_CODE_3 = "(dictionary.code IS NULL OR dictionary.code = '') AND ";
-	private static final String _FINDER_COLUMN_CODE_GROUPID_2 = "dictionary.groupId = ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_PARENTID = new FinderPath(DictionaryModelImpl.ENTITY_CACHE_ENABLED,
+	private static final String _FINDER_COLUMN_GROUPIDANDCODE_GROUPID_2 = "dictionary.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_GROUPIDANDCODE_CODE_1 = "dictionary.code IS NULL";
+	private static final String _FINDER_COLUMN_GROUPIDANDCODE_CODE_2 = "dictionary.code = ?";
+	private static final String _FINDER_COLUMN_GROUPIDANDCODE_CODE_3 = "(dictionary.code IS NULL OR dictionary.code = '')";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_G_P_N_C = new FinderPath(DictionaryModelImpl.ENTITY_CACHE_ENABLED,
 			DictionaryModelImpl.FINDER_CACHE_ENABLED, DictionaryImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByParentId",
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByG_P_N_C",
 			new String[] {
 				Long.class.getName(), Long.class.getName(),
+				String.class.getName(), String.class.getName(),
 				
 			Integer.class.getName(), Integer.class.getName(),
 				OrderByComparator.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_PARENTID =
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_P_N_C =
 		new FinderPath(DictionaryModelImpl.ENTITY_CACHE_ENABLED,
 			DictionaryModelImpl.FINDER_CACHE_ENABLED, DictionaryImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByParentId",
-			new String[] { Long.class.getName(), Long.class.getName() },
-			DictionaryModelImpl.PARENTID_COLUMN_BITMASK |
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByG_P_N_C",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				String.class.getName(), String.class.getName()
+			},
 			DictionaryModelImpl.GROUPID_COLUMN_BITMASK |
+			DictionaryModelImpl.PARENTID_COLUMN_BITMASK |
+			DictionaryModelImpl.NAME_COLUMN_BITMASK |
+			DictionaryModelImpl.CODE_COLUMN_BITMASK |
 			DictionaryModelImpl.SORTPATH_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_PARENTID = new FinderPath(DictionaryModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_P_N_C = new FinderPath(DictionaryModelImpl.ENTITY_CACHE_ENABLED,
 			DictionaryModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByParentId",
-			new String[] { Long.class.getName(), Long.class.getName() });
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByG_P_N_C",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				String.class.getName(), String.class.getName()
+			});
 
 	/**
-	 * Returns all the dictionaries where parentId = &#63; and groupId = &#63;.
+	 * Returns all the dictionaries where groupId = &#63; and parentId = &#63; and name = &#63; and code = &#63;.
 	 *
-	 * @param parentId the parent ID
 	 * @param groupId the group ID
+	 * @param parentId the parent ID
+	 * @param name the name
+	 * @param code the code
 	 * @return the matching dictionaries
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<Dictionary> findByParentId(long parentId, long groupId)
-		throws SystemException {
-		return findByParentId(parentId, groupId, QueryUtil.ALL_POS,
+	public List<Dictionary> findByG_P_N_C(long groupId, long parentId,
+		String name, String code) throws SystemException {
+		return findByG_P_N_C(groupId, parentId, name, code, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the dictionaries where parentId = &#63; and groupId = &#63;.
+	 * Returns a range of all the dictionaries where groupId = &#63; and parentId = &#63; and name = &#63; and code = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.justonetech.sys.model.impl.DictionaryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param parentId the parent ID
 	 * @param groupId the group ID
+	 * @param parentId the parent ID
+	 * @param name the name
+	 * @param code the code
 	 * @param start the lower bound of the range of dictionaries
 	 * @param end the upper bound of the range of dictionaries (not inclusive)
 	 * @return the range of matching dictionaries
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<Dictionary> findByParentId(long parentId, long groupId,
-		int start, int end) throws SystemException {
-		return findByParentId(parentId, groupId, start, end, null);
+	public List<Dictionary> findByG_P_N_C(long groupId, long parentId,
+		String name, String code, int start, int end) throws SystemException {
+		return findByG_P_N_C(groupId, parentId, name, code, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the dictionaries where parentId = &#63; and groupId = &#63;.
+	 * Returns an ordered range of all the dictionaries where groupId = &#63; and parentId = &#63; and name = &#63; and code = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.justonetech.sys.model.impl.DictionaryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param parentId the parent ID
 	 * @param groupId the group ID
+	 * @param parentId the parent ID
+	 * @param name the name
+	 * @param code the code
 	 * @param start the lower bound of the range of dictionaries
 	 * @param end the upper bound of the range of dictionaries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -427,9 +443,9 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<Dictionary> findByParentId(long parentId, long groupId,
-		int start, int end, OrderByComparator orderByComparator)
-		throws SystemException {
+	public List<Dictionary> findByG_P_N_C(long groupId, long parentId,
+		String name, String code, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
@@ -437,13 +453,13 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 				(orderByComparator == null)) {
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_PARENTID;
-			finderArgs = new Object[] { parentId, groupId };
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_P_N_C;
+			finderArgs = new Object[] { groupId, parentId, name, code };
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_PARENTID;
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_G_P_N_C;
 			finderArgs = new Object[] {
-					parentId, groupId,
+					groupId, parentId, name, code,
 					
 					start, end, orderByComparator
 				};
@@ -454,8 +470,10 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 
 		if ((list != null) && !list.isEmpty()) {
 			for (Dictionary dictionary : list) {
-				if ((parentId != dictionary.getParentId()) ||
-						(groupId != dictionary.getGroupId())) {
+				if ((groupId != dictionary.getGroupId()) ||
+						(parentId != dictionary.getParentId()) ||
+						!Validator.equals(name, dictionary.getName()) ||
+						!Validator.equals(code, dictionary.getCode())) {
 					list = null;
 
 					break;
@@ -467,18 +485,46 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(4 +
+				query = new StringBundler(6 +
 						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
-				query = new StringBundler(4);
+				query = new StringBundler(6);
 			}
 
 			query.append(_SQL_SELECT_DICTIONARY_WHERE);
 
-			query.append(_FINDER_COLUMN_PARENTID_PARENTID_2);
+			query.append(_FINDER_COLUMN_G_P_N_C_GROUPID_2);
 
-			query.append(_FINDER_COLUMN_PARENTID_GROUPID_2);
+			query.append(_FINDER_COLUMN_G_P_N_C_PARENTID_2);
+
+			boolean bindName = false;
+
+			if (name == null) {
+				query.append(_FINDER_COLUMN_G_P_N_C_NAME_1);
+			}
+			else if (name.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_G_P_N_C_NAME_3);
+			}
+			else {
+				bindName = true;
+
+				query.append(_FINDER_COLUMN_G_P_N_C_NAME_2);
+			}
+
+			boolean bindCode = false;
+
+			if (code == null) {
+				query.append(_FINDER_COLUMN_G_P_N_C_CODE_1);
+			}
+			else if (code.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_G_P_N_C_CODE_3);
+			}
+			else {
+				bindCode = true;
+
+				query.append(_FINDER_COLUMN_G_P_N_C_CODE_2);
+			}
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -500,9 +546,17 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
+				qPos.add(groupId);
+
 				qPos.add(parentId);
 
-				qPos.add(groupId);
+				if (bindName) {
+					qPos.add(name);
+				}
+
+				if (bindCode) {
+					qPos.add(code);
+				}
 
 				if (!pagination) {
 					list = (List<Dictionary>)QueryUtil.list(q, getDialect(),
@@ -535,35 +589,43 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 	}
 
 	/**
-	 * Returns the first dictionary in the ordered set where parentId = &#63; and groupId = &#63;.
+	 * Returns the first dictionary in the ordered set where groupId = &#63; and parentId = &#63; and name = &#63; and code = &#63;.
 	 *
-	 * @param parentId the parent ID
 	 * @param groupId the group ID
+	 * @param parentId the parent ID
+	 * @param name the name
+	 * @param code the code
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching dictionary
 	 * @throws com.justonetech.sys.NoSuchDictionaryException if a matching dictionary could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public Dictionary findByParentId_First(long parentId, long groupId,
-		OrderByComparator orderByComparator)
+	public Dictionary findByG_P_N_C_First(long groupId, long parentId,
+		String name, String code, OrderByComparator orderByComparator)
 		throws NoSuchDictionaryException, SystemException {
-		Dictionary dictionary = fetchByParentId_First(parentId, groupId,
-				orderByComparator);
+		Dictionary dictionary = fetchByG_P_N_C_First(groupId, parentId, name,
+				code, orderByComparator);
 
 		if (dictionary != null) {
 			return dictionary;
 		}
 
-		StringBundler msg = new StringBundler(6);
+		StringBundler msg = new StringBundler(10);
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("parentId=");
+		msg.append("groupId=");
+		msg.append(groupId);
+
+		msg.append(", parentId=");
 		msg.append(parentId);
 
-		msg.append(", groupId=");
-		msg.append(groupId);
+		msg.append(", name=");
+		msg.append(name);
+
+		msg.append(", code=");
+		msg.append(code);
 
 		msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -571,19 +633,22 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 	}
 
 	/**
-	 * Returns the first dictionary in the ordered set where parentId = &#63; and groupId = &#63;.
+	 * Returns the first dictionary in the ordered set where groupId = &#63; and parentId = &#63; and name = &#63; and code = &#63;.
 	 *
-	 * @param parentId the parent ID
 	 * @param groupId the group ID
+	 * @param parentId the parent ID
+	 * @param name the name
+	 * @param code the code
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching dictionary, or <code>null</code> if a matching dictionary could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public Dictionary fetchByParentId_First(long parentId, long groupId,
-		OrderByComparator orderByComparator) throws SystemException {
-		List<Dictionary> list = findByParentId(parentId, groupId, 0, 1,
-				orderByComparator);
+	public Dictionary fetchByG_P_N_C_First(long groupId, long parentId,
+		String name, String code, OrderByComparator orderByComparator)
+		throws SystemException {
+		List<Dictionary> list = findByG_P_N_C(groupId, parentId, name, code, 0,
+				1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -593,35 +658,43 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 	}
 
 	/**
-	 * Returns the last dictionary in the ordered set where parentId = &#63; and groupId = &#63;.
+	 * Returns the last dictionary in the ordered set where groupId = &#63; and parentId = &#63; and name = &#63; and code = &#63;.
 	 *
-	 * @param parentId the parent ID
 	 * @param groupId the group ID
+	 * @param parentId the parent ID
+	 * @param name the name
+	 * @param code the code
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching dictionary
 	 * @throws com.justonetech.sys.NoSuchDictionaryException if a matching dictionary could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public Dictionary findByParentId_Last(long parentId, long groupId,
-		OrderByComparator orderByComparator)
+	public Dictionary findByG_P_N_C_Last(long groupId, long parentId,
+		String name, String code, OrderByComparator orderByComparator)
 		throws NoSuchDictionaryException, SystemException {
-		Dictionary dictionary = fetchByParentId_Last(parentId, groupId,
-				orderByComparator);
+		Dictionary dictionary = fetchByG_P_N_C_Last(groupId, parentId, name,
+				code, orderByComparator);
 
 		if (dictionary != null) {
 			return dictionary;
 		}
 
-		StringBundler msg = new StringBundler(6);
+		StringBundler msg = new StringBundler(10);
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("parentId=");
+		msg.append("groupId=");
+		msg.append(groupId);
+
+		msg.append(", parentId=");
 		msg.append(parentId);
 
-		msg.append(", groupId=");
-		msg.append(groupId);
+		msg.append(", name=");
+		msg.append(name);
+
+		msg.append(", code=");
+		msg.append(code);
 
 		msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -629,25 +702,28 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 	}
 
 	/**
-	 * Returns the last dictionary in the ordered set where parentId = &#63; and groupId = &#63;.
+	 * Returns the last dictionary in the ordered set where groupId = &#63; and parentId = &#63; and name = &#63; and code = &#63;.
 	 *
-	 * @param parentId the parent ID
 	 * @param groupId the group ID
+	 * @param parentId the parent ID
+	 * @param name the name
+	 * @param code the code
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching dictionary, or <code>null</code> if a matching dictionary could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public Dictionary fetchByParentId_Last(long parentId, long groupId,
-		OrderByComparator orderByComparator) throws SystemException {
-		int count = countByParentId(parentId, groupId);
+	public Dictionary fetchByG_P_N_C_Last(long groupId, long parentId,
+		String name, String code, OrderByComparator orderByComparator)
+		throws SystemException {
+		int count = countByG_P_N_C(groupId, parentId, name, code);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<Dictionary> list = findByParentId(parentId, groupId, count - 1,
-				count, orderByComparator);
+		List<Dictionary> list = findByG_P_N_C(groupId, parentId, name, code,
+				count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -657,19 +733,22 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 	}
 
 	/**
-	 * Returns the dictionaries before and after the current dictionary in the ordered set where parentId = &#63; and groupId = &#63;.
+	 * Returns the dictionaries before and after the current dictionary in the ordered set where groupId = &#63; and parentId = &#63; and name = &#63; and code = &#63;.
 	 *
 	 * @param dictionaryId the primary key of the current dictionary
-	 * @param parentId the parent ID
 	 * @param groupId the group ID
+	 * @param parentId the parent ID
+	 * @param name the name
+	 * @param code the code
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next dictionary
 	 * @throws com.justonetech.sys.NoSuchDictionaryException if a dictionary with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public Dictionary[] findByParentId_PrevAndNext(long dictionaryId,
-		long parentId, long groupId, OrderByComparator orderByComparator)
+	public Dictionary[] findByG_P_N_C_PrevAndNext(long dictionaryId,
+		long groupId, long parentId, String name, String code,
+		OrderByComparator orderByComparator)
 		throws NoSuchDictionaryException, SystemException {
 		Dictionary dictionary = findByPrimaryKey(dictionaryId);
 
@@ -680,13 +759,13 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 
 			Dictionary[] array = new DictionaryImpl[3];
 
-			array[0] = getByParentId_PrevAndNext(session, dictionary, parentId,
-					groupId, orderByComparator, true);
+			array[0] = getByG_P_N_C_PrevAndNext(session, dictionary, groupId,
+					parentId, name, code, orderByComparator, true);
 
 			array[1] = dictionary;
 
-			array[2] = getByParentId_PrevAndNext(session, dictionary, parentId,
-					groupId, orderByComparator, false);
+			array[2] = getByG_P_N_C_PrevAndNext(session, dictionary, groupId,
+					parentId, name, code, orderByComparator, false);
 
 			return array;
 		}
@@ -698,9 +777,9 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 		}
 	}
 
-	protected Dictionary getByParentId_PrevAndNext(Session session,
-		Dictionary dictionary, long parentId, long groupId,
-		OrderByComparator orderByComparator, boolean previous) {
+	protected Dictionary getByG_P_N_C_PrevAndNext(Session session,
+		Dictionary dictionary, long groupId, long parentId, String name,
+		String code, OrderByComparator orderByComparator, boolean previous) {
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
@@ -713,9 +792,37 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 
 		query.append(_SQL_SELECT_DICTIONARY_WHERE);
 
-		query.append(_FINDER_COLUMN_PARENTID_PARENTID_2);
+		query.append(_FINDER_COLUMN_G_P_N_C_GROUPID_2);
 
-		query.append(_FINDER_COLUMN_PARENTID_GROUPID_2);
+		query.append(_FINDER_COLUMN_G_P_N_C_PARENTID_2);
+
+		boolean bindName = false;
+
+		if (name == null) {
+			query.append(_FINDER_COLUMN_G_P_N_C_NAME_1);
+		}
+		else if (name.equals(StringPool.BLANK)) {
+			query.append(_FINDER_COLUMN_G_P_N_C_NAME_3);
+		}
+		else {
+			bindName = true;
+
+			query.append(_FINDER_COLUMN_G_P_N_C_NAME_2);
+		}
+
+		boolean bindCode = false;
+
+		if (code == null) {
+			query.append(_FINDER_COLUMN_G_P_N_C_CODE_1);
+		}
+		else if (code.equals(StringPool.BLANK)) {
+			query.append(_FINDER_COLUMN_G_P_N_C_CODE_3);
+		}
+		else {
+			bindCode = true;
+
+			query.append(_FINDER_COLUMN_G_P_N_C_CODE_2);
+		}
 
 		if (orderByComparator != null) {
 			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
@@ -785,9 +892,17 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
+		qPos.add(groupId);
+
 		qPos.add(parentId);
 
-		qPos.add(groupId);
+		if (bindName) {
+			qPos.add(name);
+		}
+
+		if (bindCode) {
+			qPos.add(code);
+		}
 
 		if (orderByComparator != null) {
 			Object[] values = orderByComparator.getOrderByConditionValues(dictionary);
@@ -808,47 +923,79 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 	}
 
 	/**
-	 * Removes all the dictionaries where parentId = &#63; and groupId = &#63; from the database.
+	 * Removes all the dictionaries where groupId = &#63; and parentId = &#63; and name = &#63; and code = &#63; from the database.
 	 *
-	 * @param parentId the parent ID
 	 * @param groupId the group ID
+	 * @param parentId the parent ID
+	 * @param name the name
+	 * @param code the code
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public void removeByParentId(long parentId, long groupId)
-		throws SystemException {
-		for (Dictionary dictionary : findByParentId(parentId, groupId,
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+	public void removeByG_P_N_C(long groupId, long parentId, String name,
+		String code) throws SystemException {
+		for (Dictionary dictionary : findByG_P_N_C(groupId, parentId, name,
+				code, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(dictionary);
 		}
 	}
 
 	/**
-	 * Returns the number of dictionaries where parentId = &#63; and groupId = &#63;.
+	 * Returns the number of dictionaries where groupId = &#63; and parentId = &#63; and name = &#63; and code = &#63;.
 	 *
-	 * @param parentId the parent ID
 	 * @param groupId the group ID
+	 * @param parentId the parent ID
+	 * @param name the name
+	 * @param code the code
 	 * @return the number of matching dictionaries
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public int countByParentId(long parentId, long groupId)
-		throws SystemException {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_PARENTID;
+	public int countByG_P_N_C(long groupId, long parentId, String name,
+		String code) throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_P_N_C;
 
-		Object[] finderArgs = new Object[] { parentId, groupId };
+		Object[] finderArgs = new Object[] { groupId, parentId, name, code };
 
 		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
 				this);
 
 		if (count == null) {
-			StringBundler query = new StringBundler(3);
+			StringBundler query = new StringBundler(5);
 
 			query.append(_SQL_COUNT_DICTIONARY_WHERE);
 
-			query.append(_FINDER_COLUMN_PARENTID_PARENTID_2);
+			query.append(_FINDER_COLUMN_G_P_N_C_GROUPID_2);
 
-			query.append(_FINDER_COLUMN_PARENTID_GROUPID_2);
+			query.append(_FINDER_COLUMN_G_P_N_C_PARENTID_2);
+
+			boolean bindName = false;
+
+			if (name == null) {
+				query.append(_FINDER_COLUMN_G_P_N_C_NAME_1);
+			}
+			else if (name.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_G_P_N_C_NAME_3);
+			}
+			else {
+				bindName = true;
+
+				query.append(_FINDER_COLUMN_G_P_N_C_NAME_2);
+			}
+
+			boolean bindCode = false;
+
+			if (code == null) {
+				query.append(_FINDER_COLUMN_G_P_N_C_CODE_1);
+			}
+			else if (code.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_G_P_N_C_CODE_3);
+			}
+			else {
+				bindCode = true;
+
+				query.append(_FINDER_COLUMN_G_P_N_C_CODE_2);
+			}
 
 			String sql = query.toString();
 
@@ -861,9 +1008,17 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
+				qPos.add(groupId);
+
 				qPos.add(parentId);
 
-				qPos.add(groupId);
+				if (bindName) {
+					qPos.add(name);
+				}
+
+				if (bindCode) {
+					qPos.add(code);
+				}
 
 				count = (Long)q.uniqueResult();
 
@@ -882,90 +1037,83 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_PARENTID_PARENTID_2 = "dictionary.parentId = ? AND ";
-	private static final String _FINDER_COLUMN_PARENTID_GROUPID_2 = "dictionary.groupId = ?";
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_PARENTIDANDISVALID =
+	private static final String _FINDER_COLUMN_G_P_N_C_GROUPID_2 = "dictionary.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_P_N_C_PARENTID_2 = "dictionary.parentId = ? AND ";
+	private static final String _FINDER_COLUMN_G_P_N_C_NAME_1 = "dictionary.name IS NULL AND ";
+	private static final String _FINDER_COLUMN_G_P_N_C_NAME_2 = "dictionary.name = ? AND ";
+	private static final String _FINDER_COLUMN_G_P_N_C_NAME_3 = "(dictionary.name IS NULL OR dictionary.name = '') AND ";
+	private static final String _FINDER_COLUMN_G_P_N_C_CODE_1 = "dictionary.code IS NULL";
+	private static final String _FINDER_COLUMN_G_P_N_C_CODE_2 = "dictionary.code = ?";
+	private static final String _FINDER_COLUMN_G_P_N_C_CODE_3 = "(dictionary.code IS NULL OR dictionary.code = '')";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_GROUPIDANDPARENTID =
 		new FinderPath(DictionaryModelImpl.ENTITY_CACHE_ENABLED,
 			DictionaryModelImpl.FINDER_CACHE_ENABLED, DictionaryImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByParentIdAndIsValid",
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByGroupIdAndParentId",
 			new String[] {
-				Long.class.getName(), Boolean.class.getName(),
-				Long.class.getName(),
+				Long.class.getName(), Long.class.getName(),
 				
 			Integer.class.getName(), Integer.class.getName(),
 				OrderByComparator.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_PARENTIDANDISVALID =
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPIDANDPARENTID =
 		new FinderPath(DictionaryModelImpl.ENTITY_CACHE_ENABLED,
 			DictionaryModelImpl.FINDER_CACHE_ENABLED, DictionaryImpl.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"findByParentIdAndIsValid",
-			new String[] {
-				Long.class.getName(), Boolean.class.getName(),
-				Long.class.getName()
-			},
-			DictionaryModelImpl.PARENTID_COLUMN_BITMASK |
-			DictionaryModelImpl.ISVALID_COLUMN_BITMASK |
+			"findByGroupIdAndParentId",
+			new String[] { Long.class.getName(), Long.class.getName() },
 			DictionaryModelImpl.GROUPID_COLUMN_BITMASK |
+			DictionaryModelImpl.PARENTID_COLUMN_BITMASK |
 			DictionaryModelImpl.SORTPATH_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_PARENTIDANDISVALID = new FinderPath(DictionaryModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_GROUPIDANDPARENTID = new FinderPath(DictionaryModelImpl.ENTITY_CACHE_ENABLED,
 			DictionaryModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"countByParentIdAndIsValid",
-			new String[] {
-				Long.class.getName(), Boolean.class.getName(),
-				Long.class.getName()
-			});
+			"countByGroupIdAndParentId",
+			new String[] { Long.class.getName(), Long.class.getName() });
 
 	/**
-	 * Returns all the dictionaries where parentId = &#63; and isValid = &#63; and groupId = &#63;.
+	 * Returns all the dictionaries where groupId = &#63; and parentId = &#63;.
 	 *
-	 * @param parentId the parent ID
-	 * @param isValid the is valid
 	 * @param groupId the group ID
+	 * @param parentId the parent ID
 	 * @return the matching dictionaries
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<Dictionary> findByParentIdAndIsValid(long parentId,
-		boolean isValid, long groupId) throws SystemException {
-		return findByParentIdAndIsValid(parentId, isValid, groupId,
-			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	public List<Dictionary> findByGroupIdAndParentId(long groupId, long parentId)
+		throws SystemException {
+		return findByGroupIdAndParentId(groupId, parentId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the dictionaries where parentId = &#63; and isValid = &#63; and groupId = &#63;.
+	 * Returns a range of all the dictionaries where groupId = &#63; and parentId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.justonetech.sys.model.impl.DictionaryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param parentId the parent ID
-	 * @param isValid the is valid
 	 * @param groupId the group ID
+	 * @param parentId the parent ID
 	 * @param start the lower bound of the range of dictionaries
 	 * @param end the upper bound of the range of dictionaries (not inclusive)
 	 * @return the range of matching dictionaries
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<Dictionary> findByParentIdAndIsValid(long parentId,
-		boolean isValid, long groupId, int start, int end)
-		throws SystemException {
-		return findByParentIdAndIsValid(parentId, isValid, groupId, start, end,
-			null);
+	public List<Dictionary> findByGroupIdAndParentId(long groupId,
+		long parentId, int start, int end) throws SystemException {
+		return findByGroupIdAndParentId(groupId, parentId, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the dictionaries where parentId = &#63; and isValid = &#63; and groupId = &#63;.
+	 * Returns an ordered range of all the dictionaries where groupId = &#63; and parentId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.justonetech.sys.model.impl.DictionaryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param parentId the parent ID
-	 * @param isValid the is valid
 	 * @param groupId the group ID
+	 * @param parentId the parent ID
 	 * @param start the lower bound of the range of dictionaries
 	 * @param end the upper bound of the range of dictionaries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -973,9 +1121,9 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<Dictionary> findByParentIdAndIsValid(long parentId,
-		boolean isValid, long groupId, int start, int end,
-		OrderByComparator orderByComparator) throws SystemException {
+	public List<Dictionary> findByGroupIdAndParentId(long groupId,
+		long parentId, int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
@@ -983,13 +1131,13 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 				(orderByComparator == null)) {
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_PARENTIDANDISVALID;
-			finderArgs = new Object[] { parentId, isValid, groupId };
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPIDANDPARENTID;
+			finderArgs = new Object[] { groupId, parentId };
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_PARENTIDANDISVALID;
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_GROUPIDANDPARENTID;
 			finderArgs = new Object[] {
-					parentId, isValid, groupId,
+					groupId, parentId,
 					
 					start, end, orderByComparator
 				};
@@ -1000,9 +1148,8 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 
 		if ((list != null) && !list.isEmpty()) {
 			for (Dictionary dictionary : list) {
-				if ((parentId != dictionary.getParentId()) ||
-						(isValid != dictionary.getIsValid()) ||
-						(groupId != dictionary.getGroupId())) {
+				if ((groupId != dictionary.getGroupId()) ||
+						(parentId != dictionary.getParentId())) {
 					list = null;
 
 					break;
@@ -1014,20 +1161,18 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(5 +
+				query = new StringBundler(4 +
 						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
-				query = new StringBundler(5);
+				query = new StringBundler(4);
 			}
 
 			query.append(_SQL_SELECT_DICTIONARY_WHERE);
 
-			query.append(_FINDER_COLUMN_PARENTIDANDISVALID_PARENTID_2);
+			query.append(_FINDER_COLUMN_GROUPIDANDPARENTID_GROUPID_2);
 
-			query.append(_FINDER_COLUMN_PARENTIDANDISVALID_ISVALID_2);
-
-			query.append(_FINDER_COLUMN_PARENTIDANDISVALID_GROUPID_2);
+			query.append(_FINDER_COLUMN_GROUPIDANDPARENTID_PARENTID_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -1049,11 +1194,9 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(parentId);
-
-				qPos.add(isValid);
-
 				qPos.add(groupId);
+
+				qPos.add(parentId);
 
 				if (!pagination) {
 					list = (List<Dictionary>)QueryUtil.list(q, getDialect(),
@@ -1086,11 +1229,546 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 	}
 
 	/**
-	 * Returns the first dictionary in the ordered set where parentId = &#63; and isValid = &#63; and groupId = &#63;.
+	 * Returns the first dictionary in the ordered set where groupId = &#63; and parentId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param parentId the parent ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching dictionary
+	 * @throws com.justonetech.sys.NoSuchDictionaryException if a matching dictionary could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Dictionary findByGroupIdAndParentId_First(long groupId,
+		long parentId, OrderByComparator orderByComparator)
+		throws NoSuchDictionaryException, SystemException {
+		Dictionary dictionary = fetchByGroupIdAndParentId_First(groupId,
+				parentId, orderByComparator);
+
+		if (dictionary != null) {
+			return dictionary;
+		}
+
+		StringBundler msg = new StringBundler(6);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("groupId=");
+		msg.append(groupId);
+
+		msg.append(", parentId=");
+		msg.append(parentId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchDictionaryException(msg.toString());
+	}
+
+	/**
+	 * Returns the first dictionary in the ordered set where groupId = &#63; and parentId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param parentId the parent ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching dictionary, or <code>null</code> if a matching dictionary could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Dictionary fetchByGroupIdAndParentId_First(long groupId,
+		long parentId, OrderByComparator orderByComparator)
+		throws SystemException {
+		List<Dictionary> list = findByGroupIdAndParentId(groupId, parentId, 0,
+				1, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last dictionary in the ordered set where groupId = &#63; and parentId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param parentId the parent ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching dictionary
+	 * @throws com.justonetech.sys.NoSuchDictionaryException if a matching dictionary could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Dictionary findByGroupIdAndParentId_Last(long groupId,
+		long parentId, OrderByComparator orderByComparator)
+		throws NoSuchDictionaryException, SystemException {
+		Dictionary dictionary = fetchByGroupIdAndParentId_Last(groupId,
+				parentId, orderByComparator);
+
+		if (dictionary != null) {
+			return dictionary;
+		}
+
+		StringBundler msg = new StringBundler(6);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("groupId=");
+		msg.append(groupId);
+
+		msg.append(", parentId=");
+		msg.append(parentId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchDictionaryException(msg.toString());
+	}
+
+	/**
+	 * Returns the last dictionary in the ordered set where groupId = &#63; and parentId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param parentId the parent ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching dictionary, or <code>null</code> if a matching dictionary could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Dictionary fetchByGroupIdAndParentId_Last(long groupId,
+		long parentId, OrderByComparator orderByComparator)
+		throws SystemException {
+		int count = countByGroupIdAndParentId(groupId, parentId);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<Dictionary> list = findByGroupIdAndParentId(groupId, parentId,
+				count - 1, count, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the dictionaries before and after the current dictionary in the ordered set where groupId = &#63; and parentId = &#63;.
+	 *
+	 * @param dictionaryId the primary key of the current dictionary
+	 * @param groupId the group ID
+	 * @param parentId the parent ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next dictionary
+	 * @throws com.justonetech.sys.NoSuchDictionaryException if a dictionary with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Dictionary[] findByGroupIdAndParentId_PrevAndNext(
+		long dictionaryId, long groupId, long parentId,
+		OrderByComparator orderByComparator)
+		throws NoSuchDictionaryException, SystemException {
+		Dictionary dictionary = findByPrimaryKey(dictionaryId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			Dictionary[] array = new DictionaryImpl[3];
+
+			array[0] = getByGroupIdAndParentId_PrevAndNext(session, dictionary,
+					groupId, parentId, orderByComparator, true);
+
+			array[1] = dictionary;
+
+			array[2] = getByGroupIdAndParentId_PrevAndNext(session, dictionary,
+					groupId, parentId, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected Dictionary getByGroupIdAndParentId_PrevAndNext(Session session,
+		Dictionary dictionary, long groupId, long parentId,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_DICTIONARY_WHERE);
+
+		query.append(_FINDER_COLUMN_GROUPIDANDPARENTID_GROUPID_2);
+
+		query.append(_FINDER_COLUMN_GROUPIDANDPARENTID_PARENTID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(DictionaryModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(groupId);
+
+		qPos.add(parentId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(dictionary);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<Dictionary> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the dictionaries where groupId = &#63; and parentId = &#63; from the database.
+	 *
+	 * @param groupId the group ID
+	 * @param parentId the parent ID
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public void removeByGroupIdAndParentId(long groupId, long parentId)
+		throws SystemException {
+		for (Dictionary dictionary : findByGroupIdAndParentId(groupId,
+				parentId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+			remove(dictionary);
+		}
+	}
+
+	/**
+	 * Returns the number of dictionaries where groupId = &#63; and parentId = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param parentId the parent ID
+	 * @return the number of matching dictionaries
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int countByGroupIdAndParentId(long groupId, long parentId)
+		throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_GROUPIDANDPARENTID;
+
+		Object[] finderArgs = new Object[] { groupId, parentId };
+
+		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
+				this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_DICTIONARY_WHERE);
+
+			query.append(_FINDER_COLUMN_GROUPIDANDPARENTID_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_GROUPIDANDPARENTID_PARENTID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				qPos.add(parentId);
+
+				count = (Long)q.uniqueResult();
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_GROUPIDANDPARENTID_GROUPID_2 = "dictionary.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_GROUPIDANDPARENTID_PARENTID_2 = "dictionary.parentId = ?";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_PARENTIDANDISVALID =
+		new FinderPath(DictionaryModelImpl.ENTITY_CACHE_ENABLED,
+			DictionaryModelImpl.FINDER_CACHE_ENABLED, DictionaryImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByParentIdAndIsValid",
+			new String[] {
+				Long.class.getName(), Boolean.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_PARENTIDANDISVALID =
+		new FinderPath(DictionaryModelImpl.ENTITY_CACHE_ENABLED,
+			DictionaryModelImpl.FINDER_CACHE_ENABLED, DictionaryImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"findByParentIdAndIsValid",
+			new String[] { Long.class.getName(), Boolean.class.getName() },
+			DictionaryModelImpl.PARENTID_COLUMN_BITMASK |
+			DictionaryModelImpl.ISVALID_COLUMN_BITMASK |
+			DictionaryModelImpl.SORTPATH_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_PARENTIDANDISVALID = new FinderPath(DictionaryModelImpl.ENTITY_CACHE_ENABLED,
+			DictionaryModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByParentIdAndIsValid",
+			new String[] { Long.class.getName(), Boolean.class.getName() });
+
+	/**
+	 * Returns all the dictionaries where parentId = &#63; and isValid = &#63;.
 	 *
 	 * @param parentId the parent ID
 	 * @param isValid the is valid
-	 * @param groupId the group ID
+	 * @return the matching dictionaries
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Dictionary> findByParentIdAndIsValid(long parentId,
+		boolean isValid) throws SystemException {
+		return findByParentIdAndIsValid(parentId, isValid, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the dictionaries where parentId = &#63; and isValid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.justonetech.sys.model.impl.DictionaryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param parentId the parent ID
+	 * @param isValid the is valid
+	 * @param start the lower bound of the range of dictionaries
+	 * @param end the upper bound of the range of dictionaries (not inclusive)
+	 * @return the range of matching dictionaries
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Dictionary> findByParentIdAndIsValid(long parentId,
+		boolean isValid, int start, int end) throws SystemException {
+		return findByParentIdAndIsValid(parentId, isValid, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the dictionaries where parentId = &#63; and isValid = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.justonetech.sys.model.impl.DictionaryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param parentId the parent ID
+	 * @param isValid the is valid
+	 * @param start the lower bound of the range of dictionaries
+	 * @param end the upper bound of the range of dictionaries (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching dictionaries
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Dictionary> findByParentIdAndIsValid(long parentId,
+		boolean isValid, int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_PARENTIDANDISVALID;
+			finderArgs = new Object[] { parentId, isValid };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_PARENTIDANDISVALID;
+			finderArgs = new Object[] {
+					parentId, isValid,
+					
+					start, end, orderByComparator
+				};
+		}
+
+		List<Dictionary> list = (List<Dictionary>)FinderCacheUtil.getResult(finderPath,
+				finderArgs, this);
+
+		if ((list != null) && !list.isEmpty()) {
+			for (Dictionary dictionary : list) {
+				if ((parentId != dictionary.getParentId()) ||
+						(isValid != dictionary.getIsValid())) {
+					list = null;
+
+					break;
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(4 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(4);
+			}
+
+			query.append(_SQL_SELECT_DICTIONARY_WHERE);
+
+			query.append(_FINDER_COLUMN_PARENTIDANDISVALID_PARENTID_2);
+
+			query.append(_FINDER_COLUMN_PARENTIDANDISVALID_ISVALID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(DictionaryModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(parentId);
+
+				qPos.add(isValid);
+
+				if (!pagination) {
+					list = (List<Dictionary>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
+					Collections.sort(list);
+
+					list = new UnmodifiableList<Dictionary>(list);
+				}
+				else {
+					list = (List<Dictionary>)QueryUtil.list(q, getDialect(),
+							start, end);
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first dictionary in the ordered set where parentId = &#63; and isValid = &#63;.
+	 *
+	 * @param parentId the parent ID
+	 * @param isValid the is valid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching dictionary
 	 * @throws com.justonetech.sys.NoSuchDictionaryException if a matching dictionary could not be found
@@ -1098,16 +1776,16 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 	 */
 	@Override
 	public Dictionary findByParentIdAndIsValid_First(long parentId,
-		boolean isValid, long groupId, OrderByComparator orderByComparator)
+		boolean isValid, OrderByComparator orderByComparator)
 		throws NoSuchDictionaryException, SystemException {
 		Dictionary dictionary = fetchByParentIdAndIsValid_First(parentId,
-				isValid, groupId, orderByComparator);
+				isValid, orderByComparator);
 
 		if (dictionary != null) {
 			return dictionary;
 		}
 
-		StringBundler msg = new StringBundler(8);
+		StringBundler msg = new StringBundler(6);
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
@@ -1117,30 +1795,26 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 		msg.append(", isValid=");
 		msg.append(isValid);
 
-		msg.append(", groupId=");
-		msg.append(groupId);
-
 		msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 		throw new NoSuchDictionaryException(msg.toString());
 	}
 
 	/**
-	 * Returns the first dictionary in the ordered set where parentId = &#63; and isValid = &#63; and groupId = &#63;.
+	 * Returns the first dictionary in the ordered set where parentId = &#63; and isValid = &#63;.
 	 *
 	 * @param parentId the parent ID
 	 * @param isValid the is valid
-	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching dictionary, or <code>null</code> if a matching dictionary could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public Dictionary fetchByParentIdAndIsValid_First(long parentId,
-		boolean isValid, long groupId, OrderByComparator orderByComparator)
+		boolean isValid, OrderByComparator orderByComparator)
 		throws SystemException {
-		List<Dictionary> list = findByParentIdAndIsValid(parentId, isValid,
-				groupId, 0, 1, orderByComparator);
+		List<Dictionary> list = findByParentIdAndIsValid(parentId, isValid, 0,
+				1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -1150,11 +1824,10 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 	}
 
 	/**
-	 * Returns the last dictionary in the ordered set where parentId = &#63; and isValid = &#63; and groupId = &#63;.
+	 * Returns the last dictionary in the ordered set where parentId = &#63; and isValid = &#63;.
 	 *
 	 * @param parentId the parent ID
 	 * @param isValid the is valid
-	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching dictionary
 	 * @throws com.justonetech.sys.NoSuchDictionaryException if a matching dictionary could not be found
@@ -1162,16 +1835,16 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 	 */
 	@Override
 	public Dictionary findByParentIdAndIsValid_Last(long parentId,
-		boolean isValid, long groupId, OrderByComparator orderByComparator)
+		boolean isValid, OrderByComparator orderByComparator)
 		throws NoSuchDictionaryException, SystemException {
 		Dictionary dictionary = fetchByParentIdAndIsValid_Last(parentId,
-				isValid, groupId, orderByComparator);
+				isValid, orderByComparator);
 
 		if (dictionary != null) {
 			return dictionary;
 		}
 
-		StringBundler msg = new StringBundler(8);
+		StringBundler msg = new StringBundler(6);
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
@@ -1181,36 +1854,32 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 		msg.append(", isValid=");
 		msg.append(isValid);
 
-		msg.append(", groupId=");
-		msg.append(groupId);
-
 		msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 		throw new NoSuchDictionaryException(msg.toString());
 	}
 
 	/**
-	 * Returns the last dictionary in the ordered set where parentId = &#63; and isValid = &#63; and groupId = &#63;.
+	 * Returns the last dictionary in the ordered set where parentId = &#63; and isValid = &#63;.
 	 *
 	 * @param parentId the parent ID
 	 * @param isValid the is valid
-	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching dictionary, or <code>null</code> if a matching dictionary could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public Dictionary fetchByParentIdAndIsValid_Last(long parentId,
-		boolean isValid, long groupId, OrderByComparator orderByComparator)
+		boolean isValid, OrderByComparator orderByComparator)
 		throws SystemException {
-		int count = countByParentIdAndIsValid(parentId, isValid, groupId);
+		int count = countByParentIdAndIsValid(parentId, isValid);
 
 		if (count == 0) {
 			return null;
 		}
 
 		List<Dictionary> list = findByParentIdAndIsValid(parentId, isValid,
-				groupId, count - 1, count, orderByComparator);
+				count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -1220,12 +1889,11 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 	}
 
 	/**
-	 * Returns the dictionaries before and after the current dictionary in the ordered set where parentId = &#63; and isValid = &#63; and groupId = &#63;.
+	 * Returns the dictionaries before and after the current dictionary in the ordered set where parentId = &#63; and isValid = &#63;.
 	 *
 	 * @param dictionaryId the primary key of the current dictionary
 	 * @param parentId the parent ID
 	 * @param isValid the is valid
-	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next dictionary
 	 * @throws com.justonetech.sys.NoSuchDictionaryException if a dictionary with the primary key could not be found
@@ -1233,7 +1901,7 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 	 */
 	@Override
 	public Dictionary[] findByParentIdAndIsValid_PrevAndNext(
-		long dictionaryId, long parentId, boolean isValid, long groupId,
+		long dictionaryId, long parentId, boolean isValid,
 		OrderByComparator orderByComparator)
 		throws NoSuchDictionaryException, SystemException {
 		Dictionary dictionary = findByPrimaryKey(dictionaryId);
@@ -1246,12 +1914,12 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 			Dictionary[] array = new DictionaryImpl[3];
 
 			array[0] = getByParentIdAndIsValid_PrevAndNext(session, dictionary,
-					parentId, isValid, groupId, orderByComparator, true);
+					parentId, isValid, orderByComparator, true);
 
 			array[1] = dictionary;
 
 			array[2] = getByParentIdAndIsValid_PrevAndNext(session, dictionary,
-					parentId, isValid, groupId, orderByComparator, false);
+					parentId, isValid, orderByComparator, false);
 
 			return array;
 		}
@@ -1264,7 +1932,7 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 	}
 
 	protected Dictionary getByParentIdAndIsValid_PrevAndNext(Session session,
-		Dictionary dictionary, long parentId, boolean isValid, long groupId,
+		Dictionary dictionary, long parentId, boolean isValid,
 		OrderByComparator orderByComparator, boolean previous) {
 		StringBundler query = null;
 
@@ -1281,8 +1949,6 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 		query.append(_FINDER_COLUMN_PARENTIDANDISVALID_PARENTID_2);
 
 		query.append(_FINDER_COLUMN_PARENTIDANDISVALID_ISVALID_2);
-
-		query.append(_FINDER_COLUMN_PARENTIDANDISVALID_GROUPID_2);
 
 		if (orderByComparator != null) {
 			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
@@ -1356,8 +2022,6 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 
 		qPos.add(isValid);
 
-		qPos.add(groupId);
-
 		if (orderByComparator != null) {
 			Object[] values = orderByComparator.getOrderByConditionValues(dictionary);
 
@@ -1377,51 +2041,47 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 	}
 
 	/**
-	 * Removes all the dictionaries where parentId = &#63; and isValid = &#63; and groupId = &#63; from the database.
+	 * Removes all the dictionaries where parentId = &#63; and isValid = &#63; from the database.
 	 *
 	 * @param parentId the parent ID
 	 * @param isValid the is valid
-	 * @param groupId the group ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public void removeByParentIdAndIsValid(long parentId, boolean isValid,
-		long groupId) throws SystemException {
+	public void removeByParentIdAndIsValid(long parentId, boolean isValid)
+		throws SystemException {
 		for (Dictionary dictionary : findByParentIdAndIsValid(parentId,
-				isValid, groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+				isValid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(dictionary);
 		}
 	}
 
 	/**
-	 * Returns the number of dictionaries where parentId = &#63; and isValid = &#63; and groupId = &#63;.
+	 * Returns the number of dictionaries where parentId = &#63; and isValid = &#63;.
 	 *
 	 * @param parentId the parent ID
 	 * @param isValid the is valid
-	 * @param groupId the group ID
 	 * @return the number of matching dictionaries
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public int countByParentIdAndIsValid(long parentId, boolean isValid,
-		long groupId) throws SystemException {
+	public int countByParentIdAndIsValid(long parentId, boolean isValid)
+		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_PARENTIDANDISVALID;
 
-		Object[] finderArgs = new Object[] { parentId, isValid, groupId };
+		Object[] finderArgs = new Object[] { parentId, isValid };
 
 		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
 				this);
 
 		if (count == null) {
-			StringBundler query = new StringBundler(4);
+			StringBundler query = new StringBundler(3);
 
 			query.append(_SQL_COUNT_DICTIONARY_WHERE);
 
 			query.append(_FINDER_COLUMN_PARENTIDANDISVALID_PARENTID_2);
 
 			query.append(_FINDER_COLUMN_PARENTIDANDISVALID_ISVALID_2);
-
-			query.append(_FINDER_COLUMN_PARENTIDANDISVALID_GROUPID_2);
 
 			String sql = query.toString();
 
@@ -1437,8 +2097,6 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 				qPos.add(parentId);
 
 				qPos.add(isValid);
-
-				qPos.add(groupId);
 
 				count = (Long)q.uniqueResult();
 
@@ -1458,8 +2116,7 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 	}
 
 	private static final String _FINDER_COLUMN_PARENTIDANDISVALID_PARENTID_2 = "dictionary.parentId = ? AND ";
-	private static final String _FINDER_COLUMN_PARENTIDANDISVALID_ISVALID_2 = "dictionary.isValid = ? AND ";
-	private static final String _FINDER_COLUMN_PARENTIDANDISVALID_GROUPID_2 = "dictionary.groupId = ?";
+	private static final String _FINDER_COLUMN_PARENTIDANDISVALID_ISVALID_2 = "dictionary.isValid = ?";
 
 	public DictionaryPersistenceImpl() {
 		setModelClass(Dictionary.class);
@@ -1475,8 +2132,8 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 		EntityCacheUtil.putResult(DictionaryModelImpl.ENTITY_CACHE_ENABLED,
 			DictionaryImpl.class, dictionary.getPrimaryKey(), dictionary);
 
-		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CODE,
-			new Object[] { dictionary.getCode(), dictionary.getGroupId() },
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_GROUPIDANDCODE,
+			new Object[] { dictionary.getGroupId(), dictionary.getCode() },
 			dictionary);
 
 		dictionary.resetOriginalValues();
@@ -1555,27 +2212,27 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 	protected void cacheUniqueFindersCache(Dictionary dictionary) {
 		if (dictionary.isNew()) {
 			Object[] args = new Object[] {
-					dictionary.getCode(), dictionary.getGroupId()
+					dictionary.getGroupId(), dictionary.getCode()
 				};
 
-			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_CODE, args,
-				Long.valueOf(1));
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CODE, args,
-				dictionary);
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_GROUPIDANDCODE,
+				args, Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_GROUPIDANDCODE,
+				args, dictionary);
 		}
 		else {
 			DictionaryModelImpl dictionaryModelImpl = (DictionaryModelImpl)dictionary;
 
 			if ((dictionaryModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_CODE.getColumnBitmask()) != 0) {
+					FINDER_PATH_FETCH_BY_GROUPIDANDCODE.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
-						dictionary.getCode(), dictionary.getGroupId()
+						dictionary.getGroupId(), dictionary.getCode()
 					};
 
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_CODE, args,
-					Long.valueOf(1));
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CODE, args,
-					dictionary);
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_GROUPIDANDCODE,
+					args, Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_GROUPIDANDCODE,
+					args, dictionary);
 			}
 		}
 	}
@@ -1584,21 +2241,23 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 		DictionaryModelImpl dictionaryModelImpl = (DictionaryModelImpl)dictionary;
 
 		Object[] args = new Object[] {
-				dictionary.getCode(), dictionary.getGroupId()
+				dictionary.getGroupId(), dictionary.getCode()
 			};
 
-		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_CODE, args);
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CODE, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_GROUPIDANDCODE, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_GROUPIDANDCODE, args);
 
 		if ((dictionaryModelImpl.getColumnBitmask() &
-				FINDER_PATH_FETCH_BY_CODE.getColumnBitmask()) != 0) {
+				FINDER_PATH_FETCH_BY_GROUPIDANDCODE.getColumnBitmask()) != 0) {
 			args = new Object[] {
-					dictionaryModelImpl.getOriginalCode(),
-					dictionaryModelImpl.getOriginalGroupId()
+					dictionaryModelImpl.getOriginalGroupId(),
+					dictionaryModelImpl.getOriginalCode()
 				};
 
-			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_CODE, args);
-			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CODE, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_GROUPIDANDCODE,
+				args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_GROUPIDANDCODE,
+				args);
 		}
 	}
 
@@ -1745,23 +2404,50 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 
 		else {
 			if ((dictionaryModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_PARENTID.getColumnBitmask()) != 0) {
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_P_N_C.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
+						dictionaryModelImpl.getOriginalGroupId(),
 						dictionaryModelImpl.getOriginalParentId(),
-						dictionaryModelImpl.getOriginalGroupId()
+						dictionaryModelImpl.getOriginalName(),
+						dictionaryModelImpl.getOriginalCode()
 					};
 
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_PARENTID, args);
-				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_PARENTID,
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_P_N_C, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_P_N_C,
 					args);
 
 				args = new Object[] {
+						dictionaryModelImpl.getGroupId(),
 						dictionaryModelImpl.getParentId(),
-						dictionaryModelImpl.getGroupId()
+						dictionaryModelImpl.getName(),
+						dictionaryModelImpl.getCode()
 					};
 
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_PARENTID, args);
-				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_PARENTID,
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_P_N_C, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_P_N_C,
+					args);
+			}
+
+			if ((dictionaryModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPIDANDPARENTID.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						dictionaryModelImpl.getOriginalGroupId(),
+						dictionaryModelImpl.getOriginalParentId()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_GROUPIDANDPARENTID,
+					args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPIDANDPARENTID,
+					args);
+
+				args = new Object[] {
+						dictionaryModelImpl.getGroupId(),
+						dictionaryModelImpl.getParentId()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_GROUPIDANDPARENTID,
+					args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPIDANDPARENTID,
 					args);
 			}
 
@@ -1769,8 +2455,7 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_PARENTIDANDISVALID.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
 						dictionaryModelImpl.getOriginalParentId(),
-						dictionaryModelImpl.getOriginalIsValid(),
-						dictionaryModelImpl.getOriginalGroupId()
+						dictionaryModelImpl.getOriginalIsValid()
 					};
 
 				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_PARENTIDANDISVALID,
@@ -1780,8 +2465,7 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 
 				args = new Object[] {
 						dictionaryModelImpl.getParentId(),
-						dictionaryModelImpl.getIsValid(),
-						dictionaryModelImpl.getGroupId()
+						dictionaryModelImpl.getIsValid()
 					};
 
 				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_PARENTIDANDISVALID,
@@ -1812,7 +2496,6 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 
 		dictionaryImpl.setDictionaryId(dictionary.getDictionaryId());
 		dictionaryImpl.setGroupId(dictionary.getGroupId());
-		dictionaryImpl.setCompanyId(dictionary.getCompanyId());
 		dictionaryImpl.setUserId(dictionary.getUserId());
 		dictionaryImpl.setUserName(dictionary.getUserName());
 		dictionaryImpl.setCreateDate(dictionary.getCreateDate());

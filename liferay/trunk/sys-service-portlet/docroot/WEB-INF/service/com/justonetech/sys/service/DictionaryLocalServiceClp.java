@@ -17,7 +17,7 @@ package com.justonetech.sys.service;
 import com.liferay.portal.service.InvokableLocalService;
 
 /**
- * @author fanqi
+ * @author justonetech
  * @generated
  */
 public class DictionaryLocalServiceClp implements DictionaryLocalService {

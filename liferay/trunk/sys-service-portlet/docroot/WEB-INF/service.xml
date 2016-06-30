@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
 <service-builder package-path="com.justonetech.sys">
-	<author>fanqi</author>
+	<author>justonetech</author>
 	<namespace>sys</namespace>
-	
+
 	<!-- 系统字典 -->
 	<entity name="Dictionary" local-service="true" remote-service="true">
 
@@ -16,8 +16,6 @@
 		<column name="groupId" type="long" />
 
 		<!-- Audit fields -->
-
-		<column name="companyId" type="long" />
 		<column name="userId" type="long" />
 		<column name="userName" type="String" />
 		<column name="createDate" type="Date" />
@@ -40,26 +38,35 @@
 		<!-- Order -->
 
 		<order>
-			<order-column name="sortPath" order-by="asc"/>
+			<order-column name="sortPath" order-by="asc" />
 		</order>
 
 		<!-- Finder methods -->
 
-		<finder name="Code" return-type="Dictionary">
+		<finder name="GroupIdAndCode" return-type="Dictionary">
+			<finder-column name="groupId" />
 			<finder-column name="code" />
-			<finder-column name="groupId" />
 		</finder>
-		<finder name="ParentId" return-type="Collection">
+
+		<finder name="G_P_N_C" return-type="Collection">
+			<finder-column name="groupId" />
 			<finder-column name="parentId" />
-			<finder-column name="groupId" />
+			<finder-column name="name" />
+			<finder-column name="code" />
 		</finder>
+
+		<finder name="GroupIdAndParentId" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="parentId" />
+		</finder>
+
 		<finder name="ParentIdAndIsValid" return-type="Collection">
 			<finder-column name="parentId" />
 			<finder-column name="isValid" />
-			<finder-column name="groupId" />
 		</finder>
-	</entity>
-	
 
-	
+	</entity>
+
+
+
 </service-builder>

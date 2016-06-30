@@ -19,7 +19,7 @@ import com.justonetech.sys.service.DictionaryLocalServiceUtil;
 import java.util.Arrays;
 
 /**
- * @author fanqi
+ * @author justonetech
  * @generated
  */
 public class DictionaryLocalServiceClpInvoker {

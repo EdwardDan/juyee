@@ -19,7 +19,7 @@ import com.liferay.portal.service.ServiceWrapper;
 /**
  * Provides a wrapper for {@link DictionaryService}.
  *
- * @author fanqi
+ * @author justonetech
  * @see DictionaryService
  * @generated
  */
@@ -54,6 +54,42 @@ public class DictionaryServiceWrapper implements DictionaryService,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable {
 		return _dictionaryService.invokeMethod(name, parameterTypes, arguments);
+	}
+
+	@Override
+	public com.justonetech.sys.model.Dictionary findByGroupIdAndCode(
+		long groupId, java.lang.String code)
+		throws com.justonetech.sys.NoSuchDictionaryException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _dictionaryService.findByGroupIdAndCode(groupId, code);
+	}
+
+	@Override
+	public java.util.List<com.justonetech.sys.model.Dictionary> findByGroupIdAndParentId(
+		long groupId, long parentId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _dictionaryService.findByGroupIdAndParentId(groupId, parentId,
+			start, end);
+	}
+
+	@Override
+	public int countByGroupIdAndParentId(long groupId, long parentId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _dictionaryService.countByGroupIdAndParentId(groupId, parentId);
+	}
+
+	@Override
+	public java.util.List<com.justonetech.sys.model.Dictionary> findByParentIdAndIsValid(
+		long parentId, boolean isValid, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _dictionaryService.findByParentIdAndIsValid(parentId, isValid,
+			start, end);
+	}
+
+	@Override
+	public int countByParentIdAndIsValid(long parentId, boolean isValid)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _dictionaryService.countByParentIdAndIsValid(parentId, isValid);
 	}
 
 	/**
