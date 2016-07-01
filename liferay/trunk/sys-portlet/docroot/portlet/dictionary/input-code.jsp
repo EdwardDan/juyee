@@ -1,19 +1,24 @@
 <%@include file="/common/init.jsp"%>
 <%@include file="/common/init-ext.jsp"%>
 <%@ page contentType="text/html;charset=utf-8"%>
+<c:set var="contentPath"
+	value="${request.contextPath}/portlet/dictionary" />
 <%
 	long dictionaryId = ParamUtil.getLong(request, "dictionaryId");
-	Long parentID = (Long) request.getAttribute("parentId");
+	Long parentId = (Long) request.getAttribute("parentId");
+	int edit = ParamUtil.getInteger(request, "edit");
+	System.out.println("///////////////////"+parentId);
 %>
-<portlet:actionURL var="inputCode" name="inputCode">
+<portlet:actionURL var="addCode" name="addCode">    
 	<portlet:param name="redirect" value="${def}" />
-</portlet:actionURL>
+</portlet:actionURL> 
 <portlet:renderURL var="def" />
-<liferay-ui:header title="添加代码项" backURL="${def}" />
+<liferay-ui:header title="添加代码" backURL="${def}" />
 
-<aui:form action="${inputCode}" method="post">
-	<aui:input name="parentID" type="hidden" value="<%=parentID%>" />
+<aui:form action="${addCode}" method="post">
+	<aui:input name="parentId" type="hidden" value="<%=parentId%>" />
 	<aui:input name="dictionaryId" type="hidden" value="<%=dictionaryId%>" />
+	<aui:input name="edit" type="hidden" value="<%=edit%>" />
 
 	<aui:input type="text" label="编码：" name="code" value="${code}">
 		<aui:validator name="required" errorMessage="这里不可空白!"></aui:validator>
@@ -22,7 +27,7 @@
 		<aui:validator name="required" errorMessage="这里不可空白!"></aui:validator>
 	</aui:input>
 	<%
-		if (Validator.isNotNull(parentID)) {
+		if (Validator.isNotNull(parentId)) {
 	%>
 	<aui:input type="number" max="90000" label="排序号:" name="sortNo" value="${sortNo}"></aui:input>
 	<%
