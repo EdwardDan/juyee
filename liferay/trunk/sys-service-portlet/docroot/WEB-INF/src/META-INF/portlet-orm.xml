@@ -32,6 +32,7 @@
 			<basic name="isValid" />
 			<basic name="treePath" />
 			<basic name="sortPath" />
+			<basic name="customContent" />
 			<basic name="parentId" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />

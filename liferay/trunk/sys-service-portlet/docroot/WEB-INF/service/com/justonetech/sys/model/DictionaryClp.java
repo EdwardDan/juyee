@@ -90,6 +90,7 @@ public class DictionaryClp extends BaseModelImpl<Dictionary>
 		attributes.put("isValid", getIsValid());
 		attributes.put("treePath", getTreePath());
 		attributes.put("sortPath", getSortPath());
+		attributes.put("customContent", getCustomContent());
 		attributes.put("parentId", getParentId());
 
 		return attributes;
@@ -185,6 +186,12 @@ public class DictionaryClp extends BaseModelImpl<Dictionary>
 
 		if (sortPath != null) {
 			setSortPath(sortPath);
+		}
+
+		String customContent = (String)attributes.get("customContent");
+
+		if (customContent != null) {
+			setCustomContent(customContent);
 		}
 
 		Long parentId = (Long)attributes.get("parentId");
@@ -560,6 +567,29 @@ public class DictionaryClp extends BaseModelImpl<Dictionary>
 	}
 
 	@Override
+	public String getCustomContent() {
+		return _customContent;
+	}
+
+	@Override
+	public void setCustomContent(String customContent) {
+		_customContent = customContent;
+
+		if (_dictionaryRemoteModel != null) {
+			try {
+				Class<?> clazz = _dictionaryRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setCustomContent", String.class);
+
+				method.invoke(_dictionaryRemoteModel, customContent);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
 	public long getParentId() {
 		return _parentId;
 	}
@@ -698,6 +728,7 @@ public class DictionaryClp extends BaseModelImpl<Dictionary>
 		clone.setIsValid(getIsValid());
 		clone.setTreePath(getTreePath());
 		clone.setSortPath(getSortPath());
+		clone.setCustomContent(getCustomContent());
 		clone.setParentId(getParentId());
 
 		return clone;
@@ -749,7 +780,7 @@ public class DictionaryClp extends BaseModelImpl<Dictionary>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(33);
+		StringBundler sb = new StringBundler(35);
 
 		sb.append("{dictionaryId=");
 		sb.append(getDictionaryId());
@@ -781,6 +812,8 @@ public class DictionaryClp extends BaseModelImpl<Dictionary>
 		sb.append(getTreePath());
 		sb.append(", sortPath=");
 		sb.append(getSortPath());
+		sb.append(", customContent=");
+		sb.append(getCustomContent());
 		sb.append(", parentId=");
 		sb.append(getParentId());
 		sb.append("}");
@@ -790,7 +823,7 @@ public class DictionaryClp extends BaseModelImpl<Dictionary>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(52);
+		StringBundler sb = new StringBundler(55);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.sys.model.Dictionary");
@@ -857,6 +890,10 @@ public class DictionaryClp extends BaseModelImpl<Dictionary>
 		sb.append(getSortPath());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>customContent</column-name><column-value><![CDATA[");
+		sb.append(getCustomContent());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>parentId</column-name><column-value><![CDATA[");
 		sb.append(getParentId());
 		sb.append("]]></column-value></column>");
@@ -882,6 +919,7 @@ public class DictionaryClp extends BaseModelImpl<Dictionary>
 	private boolean _isValid;
 	private String _treePath;
 	private String _sortPath;
+	private String _customContent;
 	private long _parentId;
 	private BaseModel<?> _dictionaryRemoteModel;
 	private Class<?> _clpSerializerClass = com.justonetech.sys.service.ClpSerializer.class;

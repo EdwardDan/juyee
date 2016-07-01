@@ -38,7 +38,7 @@ public class DictionaryCacheModel implements CacheModel<Dictionary>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(33);
+		StringBundler sb = new StringBundler(35);
 
 		sb.append("{dictionaryId=");
 		sb.append(dictionaryId);
@@ -70,6 +70,8 @@ public class DictionaryCacheModel implements CacheModel<Dictionary>,
 		sb.append(treePath);
 		sb.append(", sortPath=");
 		sb.append(sortPath);
+		sb.append(", customContent=");
+		sb.append(customContent);
 		sb.append(", parentId=");
 		sb.append(parentId);
 		sb.append("}");
@@ -153,6 +155,13 @@ public class DictionaryCacheModel implements CacheModel<Dictionary>,
 			dictionaryImpl.setSortPath(sortPath);
 		}
 
+		if (customContent == null) {
+			dictionaryImpl.setCustomContent(StringPool.BLANK);
+		}
+		else {
+			dictionaryImpl.setCustomContent(customContent);
+		}
+
 		dictionaryImpl.setParentId(parentId);
 
 		dictionaryImpl.resetOriginalValues();
@@ -177,6 +186,7 @@ public class DictionaryCacheModel implements CacheModel<Dictionary>,
 		isValid = objectInput.readBoolean();
 		treePath = objectInput.readUTF();
 		sortPath = objectInput.readUTF();
+		customContent = objectInput.readUTF();
 		parentId = objectInput.readLong();
 	}
 
@@ -244,6 +254,13 @@ public class DictionaryCacheModel implements CacheModel<Dictionary>,
 			objectOutput.writeUTF(sortPath);
 		}
 
+		if (customContent == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(customContent);
+		}
+
 		objectOutput.writeLong(parentId);
 	}
 
@@ -262,5 +279,6 @@ public class DictionaryCacheModel implements CacheModel<Dictionary>,
 	public boolean isValid;
 	public String treePath;
 	public String sortPath;
+	public String customContent;
 	public long parentId;
 }

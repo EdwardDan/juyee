@@ -81,9 +81,10 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 			{ "isValid", Types.BOOLEAN },
 			{ "treePath", Types.VARCHAR },
 			{ "sortPath", Types.VARCHAR },
+			{ "customContent", Types.VARCHAR },
 			{ "parentId", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table sys_Dictionary (dictionaryId LONG not null primary key,groupId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,code_ VARCHAR(75) null,name VARCHAR(75) null,isLeaf BOOLEAN,sortNo INTEGER,desc_ VARCHAR(75) null,tag VARCHAR(75) null,isValid BOOLEAN,treePath VARCHAR(75) null,sortPath VARCHAR(75) null,parentId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table sys_Dictionary (dictionaryId LONG not null primary key,groupId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,code_ VARCHAR(75) null,name VARCHAR(75) null,isLeaf BOOLEAN,sortNo INTEGER,desc_ STRING null,tag VARCHAR(75) null,isValid BOOLEAN,treePath VARCHAR(75) null,sortPath VARCHAR(75) null,customContent STRING null,parentId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table sys_Dictionary";
 	public static final String ORDER_BY_JPQL = " ORDER BY dictionary.sortPath ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY sys_Dictionary.sortPath ASC";
@@ -133,6 +134,7 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 		model.setIsValid(soapModel.getIsValid());
 		model.setTreePath(soapModel.getTreePath());
 		model.setSortPath(soapModel.getSortPath());
+		model.setCustomContent(soapModel.getCustomContent());
 		model.setParentId(soapModel.getParentId());
 
 		return model;
@@ -213,6 +215,7 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 		attributes.put("isValid", getIsValid());
 		attributes.put("treePath", getTreePath());
 		attributes.put("sortPath", getSortPath());
+		attributes.put("customContent", getCustomContent());
 		attributes.put("parentId", getParentId());
 
 		return attributes;
@@ -308,6 +311,12 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 
 		if (sortPath != null) {
 			setSortPath(sortPath);
+		}
+
+		String customContent = (String)attributes.get("customContent");
+
+		if (customContent != null) {
+			setCustomContent(customContent);
 		}
 
 		Long parentId = (Long)attributes.get("parentId");
@@ -575,6 +584,22 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 
 	@JSON
 	@Override
+	public String getCustomContent() {
+		if (_customContent == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _customContent;
+		}
+	}
+
+	@Override
+	public void setCustomContent(String customContent) {
+		_customContent = customContent;
+	}
+
+	@JSON
+	@Override
 	public long getParentId() {
 		return _parentId;
 	}
@@ -642,6 +667,7 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 		dictionaryImpl.setIsValid(getIsValid());
 		dictionaryImpl.setTreePath(getTreePath());
 		dictionaryImpl.setSortPath(getSortPath());
+		dictionaryImpl.setCustomContent(getCustomContent());
 		dictionaryImpl.setParentId(getParentId());
 
 		dictionaryImpl.resetOriginalValues();
@@ -800,6 +826,14 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 			dictionaryCacheModel.sortPath = null;
 		}
 
+		dictionaryCacheModel.customContent = getCustomContent();
+
+		String customContent = dictionaryCacheModel.customContent;
+
+		if ((customContent != null) && (customContent.length() == 0)) {
+			dictionaryCacheModel.customContent = null;
+		}
+
 		dictionaryCacheModel.parentId = getParentId();
 
 		return dictionaryCacheModel;
@@ -807,7 +841,7 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(33);
+		StringBundler sb = new StringBundler(35);
 
 		sb.append("{dictionaryId=");
 		sb.append(getDictionaryId());
@@ -839,6 +873,8 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 		sb.append(getTreePath());
 		sb.append(", sortPath=");
 		sb.append(getSortPath());
+		sb.append(", customContent=");
+		sb.append(getCustomContent());
 		sb.append(", parentId=");
 		sb.append(getParentId());
 		sb.append("}");
@@ -848,7 +884,7 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(52);
+		StringBundler sb = new StringBundler(55);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.sys.model.Dictionary");
@@ -915,6 +951,10 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 		sb.append(getSortPath());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>customContent</column-name><column-value><![CDATA[");
+		sb.append(getCustomContent());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>parentId</column-name><column-value><![CDATA[");
 		sb.append(getParentId());
 		sb.append("]]></column-value></column>");
@@ -949,6 +989,7 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 	private boolean _setOriginalIsValid;
 	private String _treePath;
 	private String _sortPath;
+	private String _customContent;
 	private long _parentId;
 	private long _originalParentId;
 	private boolean _setOriginalParentId;

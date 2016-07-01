@@ -46,6 +46,7 @@ public class DictionarySoap implements Serializable {
 		soapModel.setIsValid(model.getIsValid());
 		soapModel.setTreePath(model.getTreePath());
 		soapModel.setSortPath(model.getSortPath());
+		soapModel.setCustomContent(model.getCustomContent());
 		soapModel.setParentId(model.getParentId());
 
 		return soapModel;
@@ -227,6 +228,14 @@ public class DictionarySoap implements Serializable {
 		_sortPath = sortPath;
 	}
 
+	public String getCustomContent() {
+		return _customContent;
+	}
+
+	public void setCustomContent(String customContent) {
+		_customContent = customContent;
+	}
+
 	public long getParentId() {
 		return _parentId;
 	}
@@ -250,5 +259,6 @@ public class DictionarySoap implements Serializable {
 	private boolean _isValid;
 	private String _treePath;
 	private String _sortPath;
+	private String _customContent;
 	private long _parentId;
 }

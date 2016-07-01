@@ -64,6 +64,7 @@ public class DictionaryWrapper implements Dictionary, ModelWrapper<Dictionary> {
 		attributes.put("isValid", getIsValid());
 		attributes.put("treePath", getTreePath());
 		attributes.put("sortPath", getSortPath());
+		attributes.put("customContent", getCustomContent());
 		attributes.put("parentId", getParentId());
 
 		return attributes;
@@ -159,6 +160,12 @@ public class DictionaryWrapper implements Dictionary, ModelWrapper<Dictionary> {
 
 		if (sortPath != null) {
 			setSortPath(sortPath);
+		}
+
+		String customContent = (String)attributes.get("customContent");
+
+		if (customContent != null) {
+			setCustomContent(customContent);
 		}
 
 		Long parentId = (Long)attributes.get("parentId");
@@ -528,6 +535,26 @@ public class DictionaryWrapper implements Dictionary, ModelWrapper<Dictionary> {
 	@Override
 	public void setSortPath(java.lang.String sortPath) {
 		_dictionary.setSortPath(sortPath);
+	}
+
+	/**
+	* Returns the custom content of this dictionary.
+	*
+	* @return the custom content of this dictionary
+	*/
+	@Override
+	public java.lang.String getCustomContent() {
+		return _dictionary.getCustomContent();
+	}
+
+	/**
+	* Sets the custom content of this dictionary.
+	*
+	* @param customContent the custom content of this dictionary
+	*/
+	@Override
+	public void setCustomContent(java.lang.String customContent) {
+		_dictionary.setCustomContent(customContent);
 	}
 
 	/**

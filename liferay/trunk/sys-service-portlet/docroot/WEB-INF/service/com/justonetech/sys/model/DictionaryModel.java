@@ -307,6 +307,21 @@ public interface DictionaryModel extends BaseModel<Dictionary> {
 	public void setSortPath(String sortPath);
 
 	/**
+	 * Returns the custom content of this dictionary.
+	 *
+	 * @return the custom content of this dictionary
+	 */
+	@AutoEscape
+	public String getCustomContent();
+
+	/**
+	 * Sets the custom content of this dictionary.
+	 *
+	 * @param customContent the custom content of this dictionary
+	 */
+	public void setCustomContent(String customContent);
+
+	/**
 	 * Returns the parent ID of this dictionary.
 	 *
 	 * @return the parent ID of this dictionary

@@ -1794,6 +1794,7 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 		dictionaryImpl.setIsValid(dictionary.isIsValid());
 		dictionaryImpl.setTreePath(dictionary.getTreePath());
 		dictionaryImpl.setSortPath(dictionary.getSortPath());
+		dictionaryImpl.setCustomContent(dictionary.getCustomContent());
 		dictionaryImpl.setParentId(dictionary.getParentId());
 
 		return dictionaryImpl;
