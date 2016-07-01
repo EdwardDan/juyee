@@ -8,12 +8,21 @@
 	Long parentId = (Long) request.getAttribute("parentId");
 	int edit = ParamUtil.getInteger(request, "edit");
 %>
-<portlet:actionURL var="addCode" name="addCode">    
+<portlet:actionURL var="addCode" name="addCode">
 	<portlet:param name="redirect" value="${def}" />
-</portlet:actionURL> 
+</portlet:actionURL>
 <portlet:renderURL var="def" />
+<%
+	if (Validator.isNotNull(dictionaryId) && edit == 1) {
+%>
+<liferay-ui:header title="编辑代码" backURL="${def}" />
+<%
+	} else {
+%>
 <liferay-ui:header title="添加代码" backURL="${def}" />
-
+<%
+	}
+%>
 <aui:form action="${addCode}" method="post">
 	<aui:input name="parentId" type="hidden" value="<%=parentId%>" />
 	<aui:input name="dictionaryId" type="hidden" value="<%=dictionaryId%>" />
@@ -26,9 +35,10 @@
 		<aui:validator name="required" errorMessage="这里不可空白!"></aui:validator>
 	</aui:input>
 	<%
-		if (Validator.isNotNull(parentId)) {
+		if (Validator.isNotNull(dictionaryId) && edit == 1) {
 	%>
-	<aui:input type="number" max="90000" label="排序号:" name="sortNo" value="${sortNo}"></aui:input>
+	<aui:input type="number" max="90000" label="排序号:" name="sortNo"
+		value="${sortNo}"></aui:input>
 	<%
 		}
 	%>

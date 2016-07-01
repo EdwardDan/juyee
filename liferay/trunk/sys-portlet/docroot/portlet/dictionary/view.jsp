@@ -8,13 +8,13 @@
 	Long dictionaryId = (Long) request.getAttribute("dictionaryId");
 	String name = null;
 	if (Validator.isNotNull(dictionaryId)) {
-	name = DictionaryLocalServiceUtil.getDictionary(dictionaryId).getName();
+	name = DictionaryLocalServiceUtil.getDictionary(dictionaryId).getName(); 
 %>
 <portlet:renderURL var="def" />
 <liferay-ui:header title="<%=name%>" backURL="${def}" />
 <%
 	}
-%>
+%> 
 <portlet:renderURL var="query" />
 
 <aui:form action="${query }" name="fm">

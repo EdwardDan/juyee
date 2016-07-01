@@ -28,8 +28,9 @@ public class DictionaryPortlet extends MVCPortlet {
 	@Override
 	public void doView(RenderRequest renderRequest,
 			RenderResponse renderResponse) throws IOException, PortletException {
-		// String keywords = ParamUtil.getString(renderRequest, "keywords");
+		String keywords = ParamUtil.getString(renderRequest, "keywords");
 		long dictionaryId = ParamUtil.getLong(renderRequest, "dictionaryId");
+		System.out.println("=================" + dictionaryId);
 		int pageSize = ParamUtil.getInteger(renderRequest, "delta", 15);
 		int pageNumber = ParamUtil.getInteger(renderRequest, "cur", 1);
 		int start = (pageNumber - 1) * pageSize;
@@ -44,16 +45,18 @@ public class DictionaryPortlet extends MVCPortlet {
 				e.printStackTrace();
 			}
 			if (Validator.isNull(dictionaryId)) {
-				dictionaries = DictionaryLocalServiceUtil
-						.findByGroupIdAndParentId(groupId, 0, start, end);
-				totalSize = DictionaryLocalServiceUtil
-						.countByGroupIdAndParentId(groupId, 0);
+				dictionaries = DictionaryLocalServiceUtil.findByG_P_K(groupId,
+						0, keywords, start, end);
+				totalSize = DictionaryLocalServiceUtil.countByG_P_K(groupId, 0,
+						keywords);
 			} else {
-				dictionaries = DictionaryLocalServiceUtil
-						.findByGroupIdAndParentId(groupId, dictionaryId, start,
-								end);
-				totalSize = DictionaryLocalServiceUtil
-						.countByGroupIdAndParentId(groupId, dictionaryId);
+				// dictionaries = DictionaryLocalServiceUtil
+				// .findByGroupIdAndParentId(groupId, dictionaryId, start,
+				// end);
+				dictionaries = DictionaryLocalServiceUtil.findByG_P_K(groupId,
+						dictionaryId, keywords, start, end);
+				totalSize = DictionaryLocalServiceUtil.countByG_P_K(groupId,
+						dictionaryId, keywords);
 			}
 		} catch (SystemException e) {
 			e.printStackTrace();
@@ -93,6 +96,7 @@ public class DictionaryPortlet extends MVCPortlet {
 			dictionary.setGroupId(groupId);
 			dictionary.setIsLeaf(true);
 			dictionary.setDesc(desc);
+			dictionary.setIsValid(isValid);
 			DictionaryLocalServiceUtil.updateDictionary(dictionary);
 			String treePath = "/" + dictionary.getDictionaryId() + "/";
 			dictionary.setTreePath(treePath);
@@ -115,9 +119,17 @@ public class DictionaryPortlet extends MVCPortlet {
 			dictionary.setSortNo(sortNo);
 		} else if (Validator.isNotNull(dictionaryId)
 				&& Validator.isNotNull(parentId)) {// 编辑项
+			sortNo = ParamUtil.getInteger(request, "sortNo");
 			dictionary = DictionaryLocalServiceUtil.getDictionary(dictionaryId);
+			dictionary.setSortNo(sortNo);
+			sortPath = dictionary.getSortPath().substring(0, 6)
+					+ "/"
+					+ ("00000" + sortNo).substring(
+							("00000" + sortNo).length() - 5,
+							("00000" + sortNo).length()) + "/";
 			dictionary.setName(name);
 			dictionary.setCode(code);
+			dictionary.setSortPath(sortPath);
 			dictionary.setModifiedDate(createDate);
 		} else if (Validator.isNotNull(dictionaryId) && parentId == 0) {
 			if (edit != 1) {// 添加项
@@ -132,7 +144,8 @@ public class DictionaryPortlet extends MVCPortlet {
 				dictionary.setDesc(desc);
 				dictionary.setTag(tag);
 				dictionary.setIsValid(isValid);
-				Dictionary dictionary2 = DictionaryLocalServiceUtil.getDictionary(dictionaryId);
+				Dictionary dictionary2 = DictionaryLocalServiceUtil
+						.getDictionary(dictionaryId);
 				dictionary2.setIsLeaf(false);
 				DictionaryLocalServiceUtil.updateDictionary(dictionary2);
 				DictionaryLocalServiceUtil.updateDictionary(dictionary);
@@ -160,11 +173,28 @@ public class DictionaryPortlet extends MVCPortlet {
 				dictionary.setSortNo(sortNo);
 				dictionary.setSortPath(sortPath);
 			} else {// 编辑集
+				sortNo = ParamUtil.getInteger(request, "sortNo");
+				sortPath = "/"
+						+ ("00000" + sortNo).substring(
+								("00000" + sortNo).length() - 5,
+								("00000" + sortNo).length()) + "/";
 				dictionary = DictionaryLocalServiceUtil
 						.getDictionary(dictionaryId);
 				dictionary.setName(name);
 				dictionary.setCode(code);
+				dictionary.setSortNo(sortNo);
+				dictionary.setSortPath(sortPath);
 				dictionary.setModifiedDate(createDate);
+				List<Dictionary> dics = DictionaryLocalServiceUtil
+						.findByGroupIdAndParentId(groupId, dictionaryId, -1, -1);
+				for (Dictionary dic : dics) {
+					String path = sortPath
+							+ dic.getSortPath().substring(
+									dic.getSortPath().length() - 6,
+									dic.getSortPath().length());
+					dic.setSortPath(path);
+					DictionaryLocalServiceUtil.updateDictionary(dic);
+				}
 			}
 		}
 		dictionary.setGroupId(groupId);
@@ -194,6 +224,7 @@ public class DictionaryPortlet extends MVCPortlet {
 		String code = dictionary.getCode();
 		String desc = dictionary.getDesc();
 		String tag = dictionary.getTag();
+		int sortNo = dictionary.getSortNo();
 		long parentId = dictionary.getParentId();
 		boolean isValid = dictionary.getIsValid();
 		request.setAttribute("name", name);
@@ -202,5 +233,6 @@ public class DictionaryPortlet extends MVCPortlet {
 		request.setAttribute("tag", tag);
 		request.setAttribute("isValid", isValid);
 		request.setAttribute("parentId", parentId);
+		request.setAttribute("sortNo", sortNo);
 	}
 }
