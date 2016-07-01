@@ -69,10 +69,11 @@ public class DictionaryPortlet extends MVCPortlet {
 		long dictionaryId = ParamUtil.getLong(request, "dictionaryId");
 		long parentId = ParamUtil.getLong(request, "parentId");
 		long edit = ParamUtil.getInteger(request, "edit");
-		System.out.println("dictionaId=" + dictionaryId + "," + "parentId="
-				+ parentId);
 		String name = ParamUtil.getString(request, "name");
 		String code = ParamUtil.getString(request, "code");
+		String desc = ParamUtil.getString(request, "desc");
+		String tag = ParamUtil.getString(request, "tag");
+		boolean isValid = ParamUtil.getBoolean(request, "isValid");
 		long groupId = PortalUtil.getScopeGroupId(request);
 		long userId = PortalUtil.getUserId(request);
 		String userName = PortalUtil.getUserName(userId, "default");
@@ -90,6 +91,8 @@ public class DictionaryPortlet extends MVCPortlet {
 			dictionary.setCode(code);
 			dictionary.setCreateDate(createDate);
 			dictionary.setGroupId(groupId);
+			dictionary.setIsLeaf(true);
+			dictionary.setDesc(desc);
 			DictionaryLocalServiceUtil.updateDictionary(dictionary);
 			String treePath = "/" + dictionary.getDictionaryId() + "/";
 			dictionary.setTreePath(treePath);
@@ -125,6 +128,13 @@ public class DictionaryPortlet extends MVCPortlet {
 				dictionary.setParentId(dictionaryId);
 				dictionary.setCreateDate(createDate);
 				dictionary.setGroupId(groupId);
+				dictionary.setIsLeaf(true);
+				dictionary.setDesc(desc);
+				dictionary.setTag(tag);
+				dictionary.setIsValid(isValid);
+				Dictionary dictionary2 = DictionaryLocalServiceUtil.getDictionary(dictionaryId);
+				dictionary2.setIsLeaf(false);
+				DictionaryLocalServiceUtil.updateDictionary(dictionary2);
 				DictionaryLocalServiceUtil.updateDictionary(dictionary);
 				String treePath = "/" + dictionaryId + "/"
 						+ dictionary.getDictionaryId() + "/";
@@ -192,6 +202,5 @@ public class DictionaryPortlet extends MVCPortlet {
 		request.setAttribute("tag", tag);
 		request.setAttribute("isValid", isValid);
 		request.setAttribute("parentId", parentId);
-		System.out.println("==================" + dictionaryId);
 	}
 }

@@ -7,7 +7,6 @@
 	long dictionaryId = ParamUtil.getLong(request, "dictionaryId");
 	Long parentId = (Long) request.getAttribute("parentId");
 	int edit = ParamUtil.getInteger(request, "edit");
-	System.out.println("///////////////////"+parentId);
 %>
 <portlet:actionURL var="addCode" name="addCode">    
 	<portlet:param name="redirect" value="${def}" />
