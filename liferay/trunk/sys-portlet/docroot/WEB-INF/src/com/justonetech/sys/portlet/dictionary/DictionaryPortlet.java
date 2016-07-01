@@ -126,9 +126,29 @@ public class DictionaryPortlet extends MVCPortlet {
 				dictionary.setCreateDate(createDate);
 				dictionary.setGroupId(groupId);
 				DictionaryLocalServiceUtil.updateDictionary(dictionary);
-				String treePath = "/"+dictionaryId+"/"+dictionary.getDictionaryId()+"/";
+				String treePath = "/" + dictionaryId + "/"
+						+ dictionary.getDictionaryId() + "/";
 				dictionary.setTreePath(treePath);
-//				List<Dictionary>
+				List<Dictionary> dics = DictionaryLocalServiceUtil
+						.findByGroupIdAndParentId(groupId, dictionaryId, -1, -1);
+				if (Validator.isNotNull(dics)) {
+					for (Dictionary dic : dics) {
+						sortNos.add(dic.getSortNo());
+					}
+					sortNo = Collections.max(sortNos) + 1;
+					sortPath = DictionaryLocalServiceUtil.getDictionary(
+							dictionaryId).getSortPath()
+							+ ("00000" + sortNo).substring(
+									("00000" + sortNo).length() - 5,
+									("00000" + sortNo).length()) + "/";
+				} else {
+					sortNo = 1;
+					sortPath = DictionaryLocalServiceUtil.getDictionary(
+							dictionaryId).getSortPath()
+							+ "00001/";
+				}
+				dictionary.setSortNo(sortNo);
+				dictionary.setSortPath(sortPath);
 			} else {// 编辑集
 				dictionary = DictionaryLocalServiceUtil
 						.getDictionary(dictionaryId);
