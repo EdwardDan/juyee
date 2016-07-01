@@ -1,0 +1,703 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WorkBook xmlVersion="20151125" releaseVersion="8.0.0">
+<TableDataMap>
+<TableData name="user_role" class="com.fr.data.impl.DBTableData">
+<Parameters>
+<Parameter>
+<Attributes name="workDate"/>
+<O t="Date">
+<![CDATA[1467302400000]]></O>
+</Parameter>
+<Parameter>
+<Attributes name="roleId"/>
+<O t="I">
+<![CDATA[41709]]></O>
+</Parameter>
+</Parameters>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[FRDemo]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[SELECT NOW() currentTime, U_R_U.userId,U_R_U.lastName,S.section,W_D.week,W_D.day from 
+(SELECT U_R.userId ,U.lastName FROM users_roles U_R,user_ U where U_R.userId=U.userId and U_R.roleId=${roleId})U_R_U ,
+(SELECT '上午'section union select '下午'section)S,
+(SELECT '星期一'week,date_add('${workDate}', interval -DAYOFWEEK('${workDate}')+2 day) day union 
+SELECT '星期二'week,date_add('${workDate}', interval -DAYOFWEEK('${workDate}')+3 day) day union 
+SELECT '星期三'week,date_add('${workDate}', interval -DAYOFWEEK('${workDate}')+4 day) day union 
+SELECT '星期四'week,date_add('${workDate}', interval -DAYOFWEEK('${workDate}')+5 day) day union 
+SELECT '星期五'week,date_add('${workDate}', interval -DAYOFWEEK('${workDate}')+6 day) day union 
+SELECT '星期六'week,date_add('${workDate}', interval -DAYOFWEEK('${workDate}')+7 day) day union 
+SELECT '星期日'week,date_add('${workDate}', interval -DAYOFWEEK('${workDate}')+8 day) day)W_D]]></Query>
+</TableData>
+<TableData name="leaderWork" class="com.fr.data.impl.DBTableData">
+<Parameters/>
+<Attributes maxMemRowCount="-1"/>
+<Connection class="com.fr.data.impl.NameDatabaseConnection">
+<DatabaseName>
+<![CDATA[FRDemo]]></DatabaseName>
+</Connection>
+<Query>
+<![CDATA[select * from weektaskarrange]]></Query>
+</TableData>
+</TableDataMap>
+<Report class="com.fr.report.worksheet.WorkSheet" name="Sheet1">
+<ReportPageAttr>
+<HR/>
+<FR/>
+<HC/>
+<FC/>
+</ReportPageAttr>
+<ColumnPrivilegeControl/>
+<RowPrivilegeControl/>
+<RowHeight defaultValue="723900">
+<![CDATA[707644,707644,909828,723900,723900,723900,723900,723900,723900,723900,723900]]></RowHeight>
+<ColumnWidth defaultValue="2743200">
+<![CDATA[0,2438400,2438400,4229100,2743200,2743200,2743200,2743200,2743200,2743200,2743200]]></ColumnWidth>
+<CellElementList>
+<C c="0" r="0">
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="1" r="0" cs="2" rs="2" s="0">
+<O>
+<![CDATA[领导名称]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="3" r="0" s="1">
+<O t="DSColumn">
+<Attributes dsName="user_role" columnName="week"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand dir="1"/>
+</C>
+<C c="3" r="1" s="2">
+<O t="DSColumn">
+<Attributes dsName="user_role" columnName="day"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand dir="1"/>
+</C>
+<C c="0" r="2">
+<O t="DSColumn">
+<Attributes dsName="user_role" columnName="userId"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand dir="0"/>
+</C>
+<C c="1" r="2" s="0">
+<O t="DSColumn">
+<Attributes dsName="user_role" columnName="lastName"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand dir="0"/>
+</C>
+<C c="2" r="2" s="0">
+<O t="DSColumn">
+<Attributes dsName="user_role" columnName="section"/>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<Expand dir="0"/>
+</C>
+<C c="3" r="2" s="3">
+<O t="DSColumn">
+<Attributes dsName="leaderWork" columnName="workItem"/>
+<Condition class="com.fr.data.condition.ListCondition">
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[leaderId]]></CNAME>
+<Compare op="0">
+<SimpleDSColumn dsName="user_role" columnName="userId"/>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[workDate]]></CNAME>
+<Compare op="10">
+<SimpleDSColumn dsName="user_role" columnName="day"/>
+</Compare>
+</Condition>
+</JoinCondition>
+<JoinCondition join="0">
+<Condition class="com.fr.data.condition.CommonCondition">
+<CNUMBER>
+<![CDATA[0]]></CNUMBER>
+<CNAME>
+<![CDATA[daySection]]></CNAME>
+<Compare op="0">
+<SimpleDSColumn dsName="user_role" columnName="section"/>
+</Compare>
+</Condition>
+</JoinCondition>
+</Condition>
+<Complex/>
+<RG class="com.fr.report.cell.cellattr.core.group.FunctionGrouper"/>
+<Result>
+<![CDATA[$$$]]></Result>
+<Parameters/>
+</O>
+<PrivilegeControl/>
+<HighlightList>
+<Highlight class="com.fr.report.cell.cellattr.highlight.DefaultHighlight">
+<Name>
+<![CDATA[条件属性1]]></Name>
+<Condition class="com.fr.data.condition.FormulaCondition">
+<Formula>
+<![CDATA[a3 = $p1]]></Formula>
+</Condition>
+<HighlightAction class="com.fr.report.cell.cellattr.highlight.WidgetHighlightAction">
+<Widget class="com.fr.form.ui.TextEditor">
+<WidgetAttr>
+<PrivilegeControl/>
+</WidgetAttr>
+<TextAttr/>
+<Reg class="com.fr.form.ui.reg.NoneReg"/>
+<widgetValue/>
+</Widget>
+</HighlightAction>
+</Highlight>
+</HighlightList>
+<Expand dir="0"/>
+</C>
+</CellElementList>
+<ReportAttrSet>
+<ReportSettings headerHeight="1097280" footerHeight="1097280">
+<PaperSetting>
+<Margin top="2743200" left="2560320" bottom="2743200" right="2560320"/>
+</PaperSetting>
+</ReportSettings>
+<Header reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Header>
+<Footer reportPageType="0">
+<Background name="NullBackground"/>
+<LeftList/>
+<CenterList/>
+<RightList/>
+</Footer>
+</ReportAttrSet>
+<ReportWriteAttr>
+<SubmitVisitor class="com.fr.report.write.BuiltInSQLSubmiter">
+<Name>
+<![CDATA[内置SQL1]]></Name>
+<Attributes dsName="FRDemo"/>
+<DMLConfig class="com.fr.write.config.IntelliDMLConfig">
+<Table schema="" name="oa_leaderwork"/>
+<ColumnConfig name="userId" isKey="true" skipUnmodified="false">
+<ColumnRow column="0" row="2"/>
+</ColumnConfig>
+<ColumnConfig name="workDate" isKey="true" skipUnmodified="false">
+<ColumnRow column="3" row="1"/>
+</ColumnConfig>
+<ColumnConfig name="amOrPm" isKey="true" skipUnmodified="false">
+<ColumnRow column="2" row="2"/>
+</ColumnConfig>
+<ColumnConfig name="userName" isKey="false" skipUnmodified="false">
+<ColumnRow column="1" row="2"/>
+</ColumnConfig>
+<ColumnConfig name="createTime" isKey="false" skipUnmodified="false">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=TODAY()]]></Attributes>
+</O>
+</ColumnConfig>
+<ColumnConfig name="modifiedTime" isKey="false" skipUnmodified="false">
+<O t="Formula" class="Formula">
+<Attributes>
+<![CDATA[=TODAY()]]></Attributes>
+</O>
+</ColumnConfig>
+<ColumnConfig name="content" isKey="false" skipUnmodified="false">
+<ColumnRow column="3" row="2"/>
+</ColumnConfig>
+<NameSubmitJob name="自定义事件1">
+<SubmitJob class="com.fr.data.ClassSubmitJob">
+<ClassAttr className="com.fr.data.CustomSubmitJob"/>
+</SubmitJob>
+</NameSubmitJob>
+<Condition class="com.fr.data.condition.ListCondition"/>
+</DMLConfig>
+</SubmitVisitor>
+</ReportWriteAttr>
+<PrivilegeControl/>
+</Report>
+<Report class="com.fr.report.worksheet.WorkSheet" name="Sheet2">
+<ReportPageAttr>
+<HR/>
+<FR/>
+<HC/>
+<FC/>
+</ReportPageAttr>
+<ColumnPrivilegeControl/>
+<RowPrivilegeControl/>
+<RowHeight defaultValue="723900">
+<![CDATA[707644,707644,707644,707644,707644,707644,707644,707644,707644,707644,707644,707644,723900]]></RowHeight>
+<ColumnWidth defaultValue="2743200">
+<![CDATA[2209800,2857500,2209800,2209800,2209800,2743200,2743200,2743200,2743200,2743200,2743200]]></ColumnWidth>
+<CellElementList>
+<C c="0" r="0" s="4">
+<O>
+<![CDATA[领导1]]></O>
+<PrivilegeControl/>
+</C>
+<C c="1" r="0" s="5">
+<O t="Date">
+<![CDATA[1466956800000]]></O>
+<PrivilegeControl/>
+</C>
+<C c="2" r="0" s="6">
+<O>
+<![CDATA[星期1]]></O>
+<PrivilegeControl/>
+</C>
+<C c="3" r="0" s="7">
+<O>
+<![CDATA[上午]]></O>
+<PrivilegeControl/>
+</C>
+<C c="0" r="1" s="4">
+<O>
+<![CDATA[领导1]]></O>
+<PrivilegeControl/>
+</C>
+<C c="1" r="1" s="5">
+<O t="Date">
+<![CDATA[1466956800000]]></O>
+<PrivilegeControl/>
+</C>
+<C c="2" r="1" s="6">
+<O>
+<![CDATA[星期1]]></O>
+<PrivilegeControl/>
+</C>
+<C c="3" r="1" s="7">
+<O>
+<![CDATA[下午]]></O>
+<PrivilegeControl/>
+</C>
+<C c="0" r="2" s="4">
+<O>
+<![CDATA[领导1]]></O>
+<PrivilegeControl/>
+</C>
+<C c="1" r="2" s="5">
+<O t="Date">
+<![CDATA[1466956800000]]></O>
+<PrivilegeControl/>
+</C>
+<C c="2" r="2" s="6">
+<O>
+<![CDATA[星期1]]></O>
+<PrivilegeControl/>
+</C>
+<C c="3" r="2" s="7">
+<O>
+<![CDATA[上午]]></O>
+<PrivilegeControl/>
+</C>
+<C c="0" r="3" s="4">
+<O>
+<![CDATA[领导1]]></O>
+<PrivilegeControl/>
+</C>
+<C c="1" r="3" s="5">
+<O t="Date">
+<![CDATA[1466956800000]]></O>
+<PrivilegeControl/>
+</C>
+<C c="2" r="3" s="6">
+<O>
+<![CDATA[星期1]]></O>
+<PrivilegeControl/>
+</C>
+<C c="3" r="3" s="7">
+<O>
+<![CDATA[下午]]></O>
+<PrivilegeControl/>
+</C>
+<C c="0" r="4" s="4">
+<O>
+<![CDATA[领导1]]></O>
+<PrivilegeControl/>
+</C>
+<C c="1" r="4" s="5">
+<O t="Date">
+<![CDATA[1466956800000]]></O>
+<PrivilegeControl/>
+</C>
+<C c="2" r="4" s="6">
+<O>
+<![CDATA[星期1]]></O>
+<PrivilegeControl/>
+</C>
+<C c="3" r="4" s="7">
+<O>
+<![CDATA[上午]]></O>
+<PrivilegeControl/>
+</C>
+<C c="0" r="5" s="4">
+<O>
+<![CDATA[领导1]]></O>
+<PrivilegeControl/>
+</C>
+<C c="1" r="5" s="5">
+<O t="Date">
+<![CDATA[1466956800000]]></O>
+<PrivilegeControl/>
+</C>
+<C c="2" r="5" s="6">
+<O>
+<![CDATA[星期1]]></O>
+<PrivilegeControl/>
+</C>
+<C c="3" r="5" s="7">
+<O>
+<![CDATA[下午]]></O>
+<PrivilegeControl/>
+</C>
+<C c="0" r="6" s="4">
+<O>
+<![CDATA[领导1]]></O>
+<PrivilegeControl/>
+</C>
+<C c="1" r="6" s="5">
+<O t="Date">
+<![CDATA[1466956800000]]></O>
+<PrivilegeControl/>
+</C>
+<C c="2" r="6" s="6">
+<O>
+<![CDATA[星期1]]></O>
+<PrivilegeControl/>
+</C>
+<C c="3" r="6" s="7">
+<O>
+<![CDATA[上午]]></O>
+<PrivilegeControl/>
+</C>
+<C c="0" r="7" s="4">
+<O>
+<![CDATA[领导1]]></O>
+<PrivilegeControl/>
+</C>
+<C c="1" r="7" s="5">
+<O t="Date">
+<![CDATA[1466956800000]]></O>
+<PrivilegeControl/>
+</C>
+<C c="2" r="7" s="6">
+<O>
+<![CDATA[星期1]]></O>
+<PrivilegeControl/>
+</C>
+<C c="3" r="7" s="7">
+<O>
+<![CDATA[下午]]></O>
+<PrivilegeControl/>
+</C>
+<C c="0" r="8" s="4">
+<O>
+<![CDATA[领导1]]></O>
+<PrivilegeControl/>
+</C>
+<C c="1" r="8" s="5">
+<O t="Date">
+<![CDATA[1466956800000]]></O>
+<PrivilegeControl/>
+</C>
+<C c="2" r="8" s="6">
+<O>
+<![CDATA[星期1]]></O>
+<PrivilegeControl/>
+</C>
+<C c="3" r="8" s="7">
+<O>
+<![CDATA[上午]]></O>
+<PrivilegeControl/>
+</C>
+<C c="0" r="9" s="4">
+<O>
+<![CDATA[领导1]]></O>
+<PrivilegeControl/>
+</C>
+<C c="1" r="9" s="5">
+<O t="Date">
+<![CDATA[1466956800000]]></O>
+<PrivilegeControl/>
+</C>
+<C c="2" r="9" s="6">
+<O>
+<![CDATA[星期1]]></O>
+<PrivilegeControl/>
+</C>
+<C c="3" r="9" s="7">
+<O>
+<![CDATA[下午]]></O>
+<PrivilegeControl/>
+</C>
+<C c="0" r="10" s="4">
+<O>
+<![CDATA[领导1]]></O>
+<PrivilegeControl/>
+</C>
+<C c="1" r="10" s="5">
+<O t="Date">
+<![CDATA[1466956800000]]></O>
+<PrivilegeControl/>
+</C>
+<C c="2" r="10" s="6">
+<O>
+<![CDATA[星期1]]></O>
+<PrivilegeControl/>
+</C>
+<C c="3" r="10" s="7">
+<O>
+<![CDATA[上午]]></O>
+<PrivilegeControl/>
+</C>
+<C c="0" r="11" s="4">
+<O>
+<![CDATA[领导1]]></O>
+<PrivilegeControl/>
+</C>
+<C c="1" r="11" s="5">
+<O t="Date">
+<![CDATA[1466956800000]]></O>
+<PrivilegeControl/>
+</C>
+<C c="2" r="11" s="6">
+<O>
+<![CDATA[星期1]]></O>
+<PrivilegeControl/>
+</C>
+<C c="3" r="11" s="7">
+<O>
+<![CDATA[下午]]></O>
+<PrivilegeControl/>
+</C>
+</CellElementList>
+<ReportAttrSet>
+<ReportSettings headerHeight="1097280" footerHeight="1097280">
+<PaperSetting orientation="1">
+<Margin top="2743200" left="2560320" bottom="2743200" right="2560320"/>
+</PaperSetting>
+</ReportSettings>
+</ReportAttrSet>
+<PrivilegeControl/>
+</Report>
+<Report class="com.fr.report.worksheet.WorkSheet" name="Sheet3">
+<ReportPageAttr>
+<HR/>
+<FR/>
+<HC/>
+<FC/>
+</ReportPageAttr>
+<ColumnPrivilegeControl/>
+<RowPrivilegeControl/>
+<RowHeight defaultValue="723900">
+<![CDATA[707644,707644,707644,707644,707644,707644,707644,723900,723900,723900,723900]]></RowHeight>
+<ColumnWidth defaultValue="2743200">
+<![CDATA[2857500,2209800,2209800,2743200,2743200,2743200,2743200,2743200,2743200,2743200,2743200]]></ColumnWidth>
+<CellElementList>
+<C c="0" r="0" s="5">
+<O t="Date">
+<![CDATA[1466956800000]]></O>
+<PrivilegeControl/>
+</C>
+<C c="1" r="0" s="6">
+<O>
+<![CDATA[星期1]]></O>
+<PrivilegeControl/>
+</C>
+<C c="0" r="1" s="5">
+<O t="Date">
+<![CDATA[1467043200000]]></O>
+<PrivilegeControl/>
+</C>
+<C c="1" r="1" s="6">
+<O>
+<![CDATA[星期2]]></O>
+<PrivilegeControl/>
+</C>
+<C c="0" r="2" s="5">
+<O t="Date">
+<![CDATA[1467129600000]]></O>
+<PrivilegeControl/>
+</C>
+<C c="1" r="2" s="6">
+<O>
+<![CDATA[星期3]]></O>
+<PrivilegeControl/>
+</C>
+<C c="0" r="3" s="5">
+<O t="Date">
+<![CDATA[1467216000000]]></O>
+<PrivilegeControl/>
+</C>
+<C c="1" r="3" s="6">
+<O>
+<![CDATA[星期4]]></O>
+<PrivilegeControl/>
+</C>
+<C c="0" r="4" s="5">
+<O t="Date">
+<![CDATA[1467302400000]]></O>
+<PrivilegeControl/>
+</C>
+<C c="1" r="4" s="6">
+<O>
+<![CDATA[星期5]]></O>
+<PrivilegeControl/>
+</C>
+<C c="0" r="5" s="5">
+<O t="Date">
+<![CDATA[1467388800000]]></O>
+<PrivilegeControl/>
+</C>
+<C c="1" r="5" s="6">
+<O>
+<![CDATA[星期6]]></O>
+<PrivilegeControl/>
+</C>
+<C c="0" r="6" s="5">
+<O t="Date">
+<![CDATA[1467475200000]]></O>
+<PrivilegeControl/>
+</C>
+<C c="1" r="6" s="6">
+<O>
+<![CDATA[星期7]]></O>
+<PrivilegeControl/>
+</C>
+</CellElementList>
+<ReportAttrSet>
+<ReportSettings headerHeight="1097280" footerHeight="1097280">
+<PaperSetting orientation="1">
+<Margin top="2743200" left="2560320" bottom="2743200" right="2560320"/>
+</PaperSetting>
+</ReportSettings>
+</ReportAttrSet>
+<PrivilegeControl/>
+</Report>
+<ReportParameterAttr>
+<Attributes showWindow="true" delayPlaying="true" windowPosition="1" align="0"/>
+<PWTitle>
+<![CDATA[参数]]></PWTitle>
+<Parameter>
+<Attributes name="p1"/>
+<O t="I">
+<![CDATA[0]]></O>
+</Parameter>
+</ReportParameterAttr>
+<StyleList>
+<Style horizontal_alignment="0" textStyle="1" imageLayout="1">
+<FRFont name="宋体" style="0" size="88"/>
+<Background name="ColorBackground" color="-1"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="2" imageLayout="1">
+<FRFont name="SimSun" style="0" size="72"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" textStyle="1" imageLayout="1">
+<FRFont name="宋体" style="0" size="88"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<Format class="com.fr.base.CoreDecimalFormat">
+<![CDATA[m/d/yy]]></Format>
+<FRFont name="宋体" style="0" size="88"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="0" imageLayout="1">
+<FRFont name="宋体" style="0" size="88"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="2" vertical_alignment="3" textStyle="1" imageLayout="1">
+<FRFont name="宋体" style="0" size="88"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+</StyleList>
+<DesignerVersion DesignerVersion="IAA"/>
+<PreviewType PreviewType="1"/>
+</WorkBook>
