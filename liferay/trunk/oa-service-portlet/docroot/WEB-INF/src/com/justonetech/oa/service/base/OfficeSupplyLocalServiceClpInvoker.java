@@ -106,25 +106,25 @@ public class OfficeSupplyLocalServiceClpInvoker {
 				"com.justonetech.oa.model.OfficeSupply"
 			};
 
-		_methodName52 = "getBeanIdentifier";
+		_methodName60 = "getBeanIdentifier";
 
-		_methodParameterTypes52 = new String[] {  };
+		_methodParameterTypes60 = new String[] {  };
 
-		_methodName53 = "setBeanIdentifier";
+		_methodName61 = "setBeanIdentifier";
 
-		_methodParameterTypes53 = new String[] { "java.lang.String" };
+		_methodParameterTypes61 = new String[] { "java.lang.String" };
 
-		_methodName58 = "findByName";
+		_methodName66 = "findByName";
 
-		_methodParameterTypes58 = new String[] { "java.lang.String", "int", "int" };
+		_methodParameterTypes66 = new String[] { "java.lang.String", "int", "int" };
 
-		_methodName59 = "countByName";
+		_methodName67 = "countByName";
 
-		_methodParameterTypes59 = new String[] { "java.lang.String" };
+		_methodParameterTypes67 = new String[] { "java.lang.String" };
 
-		_methodName60 = "deleteOfficeSupplies";
+		_methodName68 = "deleteOfficeSupplies";
 
-		_methodParameterTypes60 = new String[] { "java.lang.String[][]" };
+		_methodParameterTypes68 = new String[] { "java.lang.String[][]" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -216,32 +216,32 @@ public class OfficeSupplyLocalServiceClpInvoker {
 			return OfficeSupplyLocalServiceUtil.updateOfficeSupply((com.justonetech.oa.model.OfficeSupply)arguments[0]);
 		}
 
-		if (_methodName52.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes52, parameterTypes)) {
+		if (_methodName60.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes60, parameterTypes)) {
 			return OfficeSupplyLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName53.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes53, parameterTypes)) {
+		if (_methodName61.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes61, parameterTypes)) {
 			OfficeSupplyLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName58.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes58, parameterTypes)) {
+		if (_methodName66.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes66, parameterTypes)) {
 			return OfficeSupplyLocalServiceUtil.findByName((java.lang.String)arguments[0],
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue());
 		}
 
-		if (_methodName59.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes59, parameterTypes)) {
+		if (_methodName67.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes67, parameterTypes)) {
 			return OfficeSupplyLocalServiceUtil.countByName((java.lang.String)arguments[0]);
 		}
 
-		if (_methodName60.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes60, parameterTypes)) {
+		if (_methodName68.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes68, parameterTypes)) {
 			OfficeSupplyLocalServiceUtil.deleteOfficeSupplies((java.lang.String[])arguments[0]);
 
 			return null;
@@ -282,14 +282,14 @@ public class OfficeSupplyLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName52;
-	private String[] _methodParameterTypes52;
-	private String _methodName53;
-	private String[] _methodParameterTypes53;
-	private String _methodName58;
-	private String[] _methodParameterTypes58;
-	private String _methodName59;
-	private String[] _methodParameterTypes59;
 	private String _methodName60;
 	private String[] _methodParameterTypes60;
+	private String _methodName61;
+	private String[] _methodParameterTypes61;
+	private String _methodName66;
+	private String[] _methodParameterTypes66;
+	private String _methodName67;
+	private String[] _methodParameterTypes67;
+	private String _methodName68;
+	private String[] _methodParameterTypes68;
 }

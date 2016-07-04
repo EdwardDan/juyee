@@ -33,6 +33,52 @@
 			<finder-column name="name" comparator="LIKE"></finder-column>
 		</finder>
 	</entity>
+	
+	<entity name="OfficeSupplyApply" local-service="true" remote-service="false">
+		<!-- PK fields -->
+		<column name="officeSupplyApplyId" type="long" primary="true" />
+
+		<!-- Group instance -->
+
+		<!-- Audit fields -->
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createTime" type="Date" />
+		<column name="modifiedTime" type="Date" />
+
+		<!-- Other fields -->
+		<column name="deptId" type="long" />
+		<column name="deptName" type="String" />
+		<column name="applicantId" type="long" />
+		<column name="applicantName" type="String" />
+		<column name="introductions" type="String" />
+
+		<!-- Order -->
+		<order>
+			<order-column name="modifiedTime" order-by="desc"></order-column>
+		</order>
+
+		<!-- Finder methods -->
+		<finder name="DeptName" return-type="Collection">
+			<finder-column name="deptName" comparator="LIKE"></finder-column>
+		</finder>
+		<finder name="ApplicantName" return-type="Collection">
+			<finder-column name="applicantName" comparator="LIKE"></finder-column>
+		</finder>
+	</entity>
+	
+	<entity name="OfficeSupplyApplyItem" local-service="true" remote-service="false">
+		<!-- PK fields -->
+		<column name="officeSupplyApplyItemId" type="long" primary="true" />
+
+		<!-- Other fields -->
+		<column name="name" type="String" />
+		<column name="model" type="String" />
+		<column name="unit" type="String" />
+		<column name="unitPrice" type="double" />
+		<column name="quantity" type="int" />
+		
+	</entity>
 
 	<!-- 领导一周工作安排 -->
 	<entity name="LeaderWork" local-service="true" remote-service="false">

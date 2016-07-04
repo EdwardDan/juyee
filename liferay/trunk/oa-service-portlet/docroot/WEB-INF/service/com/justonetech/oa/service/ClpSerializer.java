@@ -18,6 +18,8 @@ import com.justonetech.oa.model.DeptWorkClp;
 import com.justonetech.oa.model.DeptWorkItemClp;
 import com.justonetech.oa.model.DispatchClp;
 import com.justonetech.oa.model.LeaderWorkClp;
+import com.justonetech.oa.model.OfficeSupplyApplyClp;
+import com.justonetech.oa.model.OfficeSupplyApplyItemClp;
 import com.justonetech.oa.model.OfficeSupplyClp;
 import com.justonetech.oa.model.VehicleRequisitionClp;
 
@@ -127,6 +129,14 @@ public class ClpSerializer {
 			return translateInputOfficeSupply(oldModel);
 		}
 
+		if (oldModelClassName.equals(OfficeSupplyApplyClp.class.getName())) {
+			return translateInputOfficeSupplyApply(oldModel);
+		}
+
+		if (oldModelClassName.equals(OfficeSupplyApplyItemClp.class.getName())) {
+			return translateInputOfficeSupplyApplyItem(oldModel);
+		}
+
 		if (oldModelClassName.equals(VehicleRequisitionClp.class.getName())) {
 			return translateInputVehicleRequisition(oldModel);
 		}
@@ -190,6 +200,27 @@ public class ClpSerializer {
 		OfficeSupplyClp oldClpModel = (OfficeSupplyClp)oldModel;
 
 		BaseModel<?> newModel = oldClpModel.getOfficeSupplyRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
+	public static Object translateInputOfficeSupplyApply(BaseModel<?> oldModel) {
+		OfficeSupplyApplyClp oldClpModel = (OfficeSupplyApplyClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getOfficeSupplyApplyRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
+	public static Object translateInputOfficeSupplyApplyItem(
+		BaseModel<?> oldModel) {
+		OfficeSupplyApplyItemClp oldClpModel = (OfficeSupplyApplyItemClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getOfficeSupplyApplyItemRemoteModel();
 
 		newModel.setModelAttributes(oldClpModel.getModelAttributes());
 
@@ -409,6 +440,80 @@ public class ClpSerializer {
 		}
 
 		if (oldModelClassName.equals(
+					"com.justonetech.oa.model.impl.OfficeSupplyApplyImpl")) {
+			return translateOutputOfficeSupplyApply(oldModel);
+		}
+		else if (oldModelClassName.endsWith("Clp")) {
+			try {
+				ClassLoader classLoader = ClpSerializer.class.getClassLoader();
+
+				Method getClpSerializerClassMethod = oldModelClass.getMethod(
+						"getClpSerializerClass");
+
+				Class<?> oldClpSerializerClass = (Class<?>)getClpSerializerClassMethod.invoke(oldModel);
+
+				Class<?> newClpSerializerClass = classLoader.loadClass(oldClpSerializerClass.getName());
+
+				Method translateOutputMethod = newClpSerializerClass.getMethod("translateOutput",
+						BaseModel.class);
+
+				Class<?> oldModelModelClass = oldModel.getModelClass();
+
+				Method getRemoteModelMethod = oldModelClass.getMethod("get" +
+						oldModelModelClass.getSimpleName() + "RemoteModel");
+
+				Object oldRemoteModel = getRemoteModelMethod.invoke(oldModel);
+
+				BaseModel<?> newModel = (BaseModel<?>)translateOutputMethod.invoke(null,
+						oldRemoteModel);
+
+				return newModel;
+			}
+			catch (Throwable t) {
+				if (_log.isInfoEnabled()) {
+					_log.info("Unable to translate " + oldModelClassName, t);
+				}
+			}
+		}
+
+		if (oldModelClassName.equals(
+					"com.justonetech.oa.model.impl.OfficeSupplyApplyItemImpl")) {
+			return translateOutputOfficeSupplyApplyItem(oldModel);
+		}
+		else if (oldModelClassName.endsWith("Clp")) {
+			try {
+				ClassLoader classLoader = ClpSerializer.class.getClassLoader();
+
+				Method getClpSerializerClassMethod = oldModelClass.getMethod(
+						"getClpSerializerClass");
+
+				Class<?> oldClpSerializerClass = (Class<?>)getClpSerializerClassMethod.invoke(oldModel);
+
+				Class<?> newClpSerializerClass = classLoader.loadClass(oldClpSerializerClass.getName());
+
+				Method translateOutputMethod = newClpSerializerClass.getMethod("translateOutput",
+						BaseModel.class);
+
+				Class<?> oldModelModelClass = oldModel.getModelClass();
+
+				Method getRemoteModelMethod = oldModelClass.getMethod("get" +
+						oldModelModelClass.getSimpleName() + "RemoteModel");
+
+				Object oldRemoteModel = getRemoteModelMethod.invoke(oldModel);
+
+				BaseModel<?> newModel = (BaseModel<?>)translateOutputMethod.invoke(null,
+						oldRemoteModel);
+
+				return newModel;
+			}
+			catch (Throwable t) {
+				if (_log.isInfoEnabled()) {
+					_log.info("Unable to translate " + oldModelClassName, t);
+				}
+			}
+		}
+
+		if (oldModelClassName.equals(
 					"com.justonetech.oa.model.impl.VehicleRequisitionImpl")) {
 			return translateOutputVehicleRequisition(oldModel);
 		}
@@ -546,6 +651,16 @@ public class ClpSerializer {
 		}
 
 		if (className.equals(
+					"com.justonetech.oa.NoSuchOfficeSupplyApplyException")) {
+			return new com.justonetech.oa.NoSuchOfficeSupplyApplyException();
+		}
+
+		if (className.equals(
+					"com.justonetech.oa.NoSuchOfficeSupplyApplyItemException")) {
+			return new com.justonetech.oa.NoSuchOfficeSupplyApplyItemException();
+		}
+
+		if (className.equals(
 					"com.justonetech.oa.NoSuchVehicleRequisitionException")) {
 			return new com.justonetech.oa.NoSuchVehicleRequisitionException();
 		}
@@ -599,6 +714,27 @@ public class ClpSerializer {
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
 		newModel.setOfficeSupplyRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputOfficeSupplyApply(BaseModel<?> oldModel) {
+		OfficeSupplyApplyClp newModel = new OfficeSupplyApplyClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setOfficeSupplyApplyRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputOfficeSupplyApplyItem(
+		BaseModel<?> oldModel) {
+		OfficeSupplyApplyItemClp newModel = new OfficeSupplyApplyItemClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setOfficeSupplyApplyItemRemoteModel(oldModel);
 
 		return newModel;
 	}

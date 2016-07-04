@@ -7,6 +7,8 @@
 	<import class="com.justonetech.oa.model.Dispatch" />
 	<import class="com.justonetech.oa.model.LeaderWork" />
 	<import class="com.justonetech.oa.model.OfficeSupply" />
+	<import class="com.justonetech.oa.model.OfficeSupplyApply" />
+	<import class="com.justonetech.oa.model.OfficeSupplyApplyItem" />
 	<import class="com.justonetech.oa.model.VehicleRequisition" />
 	<class name="com.justonetech.oa.model.impl.DeptWorkImpl" table="oa_DeptWork">
 		<cache usage="read-write" />
@@ -78,6 +80,32 @@
 		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="createTime" type="org.hibernate.type.TimestampType" />
 		<property name="modifiedTime" type="org.hibernate.type.TimestampType" />
+		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="model" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="unit" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="unitPrice" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="quantity" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+	</class>
+	<class name="com.justonetech.oa.model.impl.OfficeSupplyApplyImpl" table="oa_OfficeSupplyApply">
+		<cache usage="read-write" />
+		<id name="officeSupplyApplyId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createTime" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedTime" type="org.hibernate.type.TimestampType" />
+		<property name="deptId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="deptName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="applicantId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="applicantName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="introductions" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.justonetech.oa.model.impl.OfficeSupplyApplyItemImpl" table="oa_OfficeSupplyApplyItem">
+		<cache usage="read-write" />
+		<id name="officeSupplyApplyItemId" type="long">
+			<generator class="assigned" />
+		</id>
 		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="model" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="unit" type="com.liferay.portal.dao.orm.hibernate.StringType" />

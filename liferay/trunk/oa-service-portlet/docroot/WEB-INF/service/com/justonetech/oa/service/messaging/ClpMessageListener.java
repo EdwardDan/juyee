@@ -19,6 +19,8 @@ import com.justonetech.oa.service.DeptWorkItemLocalServiceUtil;
 import com.justonetech.oa.service.DeptWorkLocalServiceUtil;
 import com.justonetech.oa.service.DispatchLocalServiceUtil;
 import com.justonetech.oa.service.LeaderWorkLocalServiceUtil;
+import com.justonetech.oa.service.OfficeSupplyApplyItemLocalServiceUtil;
+import com.justonetech.oa.service.OfficeSupplyApplyLocalServiceUtil;
 import com.justonetech.oa.service.OfficeSupplyLocalServiceUtil;
 import com.justonetech.oa.service.VehicleRequisitionLocalServiceUtil;
 
@@ -49,6 +51,10 @@ public class ClpMessageListener extends BaseMessageListener {
 			LeaderWorkLocalServiceUtil.clearService();
 
 			OfficeSupplyLocalServiceUtil.clearService();
+
+			OfficeSupplyApplyLocalServiceUtil.clearService();
+
+			OfficeSupplyApplyItemLocalServiceUtil.clearService();
 
 			VehicleRequisitionLocalServiceUtil.clearService();
 		}
