@@ -118,7 +118,7 @@ public class DeptWorkItemLocalServiceClpInvoker {
 
 		_methodParameterTypes66 = new String[] { "long" };
 
-		_methodName67 = "countByTitle";
+		_methodName67 = "countByDeptWorkId";
 
 		_methodParameterTypes67 = new String[] { "long" };
 	}
@@ -231,7 +231,7 @@ public class DeptWorkItemLocalServiceClpInvoker {
 
 		if (_methodName67.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes67, parameterTypes)) {
-			return DeptWorkItemLocalServiceUtil.countByTitle(((Long)arguments[0]).longValue());
+			return DeptWorkItemLocalServiceUtil.countByDeptWorkId(((Long)arguments[0]).longValue());
 		}
 
 		throw new UnsupportedOperationException();

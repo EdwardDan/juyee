@@ -281,9 +281,9 @@ public class DeptWorkItemLocalServiceUtil {
 		return getService().findByDeptWorkId(deptWorkId);
 	}
 
-	public static int countByTitle(long deptWorkId)
+	public static int countByDeptWorkId(long deptWorkId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().countByTitle(deptWorkId);
+		return getService().countByDeptWorkId(deptWorkId);
 	}
 
 	public static void clearService() {

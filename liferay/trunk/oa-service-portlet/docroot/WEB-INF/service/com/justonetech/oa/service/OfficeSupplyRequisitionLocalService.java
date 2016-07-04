@@ -258,6 +258,6 @@ public interface OfficeSupplyRequisitionLocalService extends BaseLocalService,
 		long officeSupplyRequisitionId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public int countByTitle(long officeSupplyRequisitionId)
+	public int countByOfficeSupplyRequisitionId(long officeSupplyRequisitionId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 }

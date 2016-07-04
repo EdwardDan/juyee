@@ -295,9 +295,9 @@ public class DeptWorkItemLocalServiceWrapper implements DeptWorkItemLocalService
 	}
 
 	@Override
-	public int countByTitle(long deptWorkId)
+	public int countByDeptWorkId(long deptWorkId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _deptWorkItemLocalService.countByTitle(deptWorkId);
+		return _deptWorkItemLocalService.countByDeptWorkId(deptWorkId);
 	}
 
 	/**

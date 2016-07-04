@@ -120,7 +120,7 @@ public class OfficeSupplyRequisitionLocalServiceClp
 
 		_methodParameterTypes19 = new String[] { "long" };
 
-		_methodName20 = "countByTitle";
+		_methodName20 = "countByOfficeSupplyRequisitionId";
 
 		_methodParameterTypes20 = new String[] { "long" };
 	}
@@ -716,7 +716,7 @@ public class OfficeSupplyRequisitionLocalServiceClp
 	}
 
 	@Override
-	public int countByTitle(long officeSupplyRequisitionId)
+	public int countByOfficeSupplyRequisitionId(long officeSupplyRequisitionId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 

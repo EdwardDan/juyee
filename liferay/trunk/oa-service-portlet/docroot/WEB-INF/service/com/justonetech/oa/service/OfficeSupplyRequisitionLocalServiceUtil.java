@@ -286,9 +286,11 @@ public class OfficeSupplyRequisitionLocalServiceUtil {
 		return getService().findByDeptWorkId(officeSupplyRequisitionId);
 	}
 
-	public static int countByTitle(long officeSupplyRequisitionId)
+	public static int countByOfficeSupplyRequisitionId(
+		long officeSupplyRequisitionId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().countByTitle(officeSupplyRequisitionId);
+		return getService()
+				   .countByOfficeSupplyRequisitionId(officeSupplyRequisitionId);
 	}
 
 	public static void clearService() {

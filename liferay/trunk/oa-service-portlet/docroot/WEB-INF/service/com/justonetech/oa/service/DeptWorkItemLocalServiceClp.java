@@ -119,7 +119,7 @@ public class DeptWorkItemLocalServiceClp implements DeptWorkItemLocalService {
 
 		_methodParameterTypes19 = new String[] { "long" };
 
-		_methodName20 = "countByTitle";
+		_methodName20 = "countByDeptWorkId";
 
 		_methodParameterTypes20 = new String[] { "long" };
 	}
@@ -704,7 +704,7 @@ public class DeptWorkItemLocalServiceClp implements DeptWorkItemLocalService {
 	}
 
 	@Override
-	public int countByTitle(long deptWorkId)
+	public int countByDeptWorkId(long deptWorkId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 

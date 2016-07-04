@@ -47,7 +47,7 @@ public class OfficeSupplyRequisitionLocalServiceImpl
 				.findByOfficeSupplyRequisitionId(officeSupplyRequisitionId);
 	}
 
-	public int countByTitle(long officeSupplyRequisitionId)
+	public int countByOfficeSupplyRequisitionId(long officeSupplyRequisitionId)
 			throws SystemException {
 
 		return officeSupplyRequisitionItemPersistence

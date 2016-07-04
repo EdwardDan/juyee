@@ -118,7 +118,7 @@ public class OfficeSupplyRequisitionLocalServiceClpInvoker {
 
 		_methodParameterTypes66 = new String[] { "long" };
 
-		_methodName67 = "countByTitle";
+		_methodName67 = "countByOfficeSupplyRequisitionId";
 
 		_methodParameterTypes67 = new String[] { "long" };
 	}
@@ -231,7 +231,7 @@ public class OfficeSupplyRequisitionLocalServiceClpInvoker {
 
 		if (_methodName67.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes67, parameterTypes)) {
-			return OfficeSupplyRequisitionLocalServiceUtil.countByTitle(((Long)arguments[0]).longValue());
+			return OfficeSupplyRequisitionLocalServiceUtil.countByOfficeSupplyRequisitionId(((Long)arguments[0]).longValue());
 		}
 
 		throw new UnsupportedOperationException();

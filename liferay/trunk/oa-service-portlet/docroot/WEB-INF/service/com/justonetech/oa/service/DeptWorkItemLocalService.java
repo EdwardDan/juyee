@@ -258,6 +258,6 @@ public interface DeptWorkItemLocalService extends BaseLocalService,
 		long deptWorkId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public int countByTitle(long deptWorkId)
+	public int countByDeptWorkId(long deptWorkId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 }

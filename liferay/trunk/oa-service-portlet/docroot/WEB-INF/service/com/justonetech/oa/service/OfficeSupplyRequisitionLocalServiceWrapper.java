@@ -298,9 +298,9 @@ public class OfficeSupplyRequisitionLocalServiceWrapper
 	}
 
 	@Override
-	public int countByTitle(long officeSupplyRequisitionId)
+	public int countByOfficeSupplyRequisitionId(long officeSupplyRequisitionId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _officeSupplyRequisitionLocalService.countByTitle(officeSupplyRequisitionId);
+		return _officeSupplyRequisitionLocalService.countByOfficeSupplyRequisitionId(officeSupplyRequisitionId);
 	}
 
 	/**

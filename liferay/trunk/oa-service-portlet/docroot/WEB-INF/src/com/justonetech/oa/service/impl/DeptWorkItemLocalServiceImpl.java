@@ -46,7 +46,7 @@ public class DeptWorkItemLocalServiceImpl
 		return deptWorkItemPersistence.findByDeptWorkId(deptWorkId);
 	}
 
-	public int countByTitle(long deptWorkId) throws SystemException {
+	public int countByDeptWorkId(long deptWorkId) throws SystemException {
 
 		return deptWorkItemPersistence.countByDeptWorkId(deptWorkId);
 	}
