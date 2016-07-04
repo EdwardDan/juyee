@@ -18,3 +18,4 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.liferay.portal.kernel.util.*"%>
 <%@ page import="com.liferay.portal.kernel.dao.search.RowChecker"%>
+<%@ page import="java.text.SimpleDateFormat"%>
