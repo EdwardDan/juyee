@@ -1,4 +1,3 @@
-<%@page import="java.text.SimpleDateFormat"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
 <c:set var="contentPath"
@@ -31,21 +30,21 @@
 		<liferay-ui:search-container-results results="${dispatches}"
 			total="${dispatchesCount}">
 		</liferay-ui:search-container-results>
-		<liferay-ui:search-container-row className="Dispatch" modelVar="Dispatch" keyProperty="dispatchId">
+		<liferay-ui:search-container-row className="Dispatch" modelVar="dispatch" keyProperty="dispatchId">
 			 <%
-			Dictionary rocordType = DictionaryLocalServiceUtil.getDictionary(Dispatch.getRocordType());
+			Dictionary rocordType = DictionaryLocalServiceUtil.getDictionary(dispatch.getRocordType());
 			%> 
 			<liferay-ui:search-container-column-text name="文种" value="<%=rocordType.getName()%>" />
 			 <%
-			Dictionary securityLevel = DictionaryLocalServiceUtil.getDictionary(Dispatch.getSecurityLevel());
+			Dictionary securityLevel = DictionaryLocalServiceUtil.getDictionary(dispatch.getSecurityLevel());
 			%> 
 			<liferay-ui:search-container-column-text name="密级" value="<%=securityLevel.getName()%>"/>
 			 <%
-			Dictionary organaAbbreviation = DictionaryLocalServiceUtil.getDictionary(Dispatch.getOrganaAbbreviation());
+			Dictionary organaAbbreviation = DictionaryLocalServiceUtil.getDictionary(dispatch.getOrganaAbbreviation());
 			%> 
 			<liferay-ui:search-container-column-text name="沪交建" value="<%=organaAbbreviation.getName()%>"/>
 			 <%
-			Dictionary year = DictionaryLocalServiceUtil.getDictionary(Dispatch.getYear());
+			Dictionary year = DictionaryLocalServiceUtil.getDictionary(dispatch.getYear());
 			%> 
 			<liferay-ui:search-container-column-text name="年" value="<%=year.getName()%>"/>
 			<liferay-ui:search-container-column-text property="serialNo" name="号" />
@@ -53,9 +52,9 @@
 			<liferay-ui:search-container-column-text property="sendOrgan" name="主送机关"/>
 			<liferay-ui:search-container-column-text property="ccOrgan" name="抄送机关"/>
 			<liferay-ui:search-container-column-text property="writtenOrgan" name="成文机关"/>
-			<liferay-ui:search-container-column-text name="成文日期" value="<%=sdf.format(Dispatch.getWrittenDate()) %>"/>
+			<liferay-ui:search-container-column-text name="成文日期" value="<%=sdf.format(dispatch.getWrittenDate()) %>"/>
 			 <%
-			Dictionary urgencyDegree = DictionaryLocalServiceUtil.getDictionary(Dispatch.getUrgencyDegree());
+			Dictionary urgencyDegree = DictionaryLocalServiceUtil.getDictionary(dispatch.getUrgencyDegree());
 			%> 
 			<liferay-ui:search-container-column-text name="紧急程度" value="<%=urgencyDegree.getName()%>"/>
 			<liferay-ui:search-container-column-text>
@@ -65,7 +64,7 @@
 						<portlet:param name="mvcPath" value="${contentPath}/edit-dispatch.jsp" />
 					</portlet:actionURL>
 					<liferay-ui:icon image="edit" label="编辑" url="${editDispatchURL}" />
-					<liferay-ui:icon image="delete" label="删除" url="javascript:void(0);" onClick='<%=renderResponse.getNamespace() + "deleteDispatches("+Dispatch.getDispatchId()+");"%>' />
+					<liferay-ui:icon image="delete" label="删除" url="javascript:void(0);" onClick='<%=renderResponse.getNamespace() + "deleteDispatches("+dispatch.getDispatchId()+");"%>' />
 				</liferay-ui:icon-menu>
 			</liferay-ui:search-container-column-text>
 		</liferay-ui:search-container-row>
