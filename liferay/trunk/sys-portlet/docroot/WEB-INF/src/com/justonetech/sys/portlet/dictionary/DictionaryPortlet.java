@@ -30,7 +30,6 @@ public class DictionaryPortlet extends MVCPortlet {
 			RenderResponse renderResponse) throws IOException, PortletException {
 		String keywords = ParamUtil.getString(renderRequest, "keywords");
 		long dictionaryId = ParamUtil.getLong(renderRequest, "dictionaryId");
-		System.out.println("=================" + dictionaryId);
 		int pageSize = ParamUtil.getInteger(renderRequest, "delta", 15);
 		int pageNumber = ParamUtil.getInteger(renderRequest, "cur", 1);
 		int start = (pageNumber - 1) * pageSize;
@@ -50,9 +49,6 @@ public class DictionaryPortlet extends MVCPortlet {
 				totalSize = DictionaryLocalServiceUtil.countByG_P_K(groupId, 0,
 						keywords);
 			} else {
-				// dictionaries = DictionaryLocalServiceUtil
-				// .findByGroupIdAndParentId(groupId, dictionaryId, start,
-				// end);
 				dictionaries = DictionaryLocalServiceUtil.findByG_P_K(groupId,
 						dictionaryId, keywords, start, end);
 				totalSize = DictionaryLocalServiceUtil.countByG_P_K(groupId,

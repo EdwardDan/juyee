@@ -1,23 +1,29 @@
+<%@page import="org.apache.jasper.tagplugins.jstl.core.Catch"%>
+<%@ page contentType="text/html;charset=utf-8"%>
 <%@page import="com.justonetech.sys.service.DictionaryLocalServiceUtil"%>
 <%@include file="/common/init.jsp"%>
 <%@include file="/common/init-ext.jsp"%>
-<%@ page contentType="text/html;charset=utf-8"%>
 <c:set var="contentPath"
 	value="${request.contextPath}/portlet/dictionary" />
 <%
 	Long dictionaryId = (Long) request.getAttribute("dictionaryId");
+	System.out.println("====================" + dictionaryId);
 	String name = null;
-	if (Validator.isNotNull(dictionaryId)) {
-	name = DictionaryLocalServiceUtil.getDictionary(dictionaryId).getName(); 
+	try {
+		if (Validator.isNotNull(dictionaryId)) {
+			name = DictionaryLocalServiceUtil.getDictionary(
+					dictionaryId).getName();
 %>
 <portlet:renderURL var="def" />
 <liferay-ui:header title="<%=name%>" backURL="${def}" />
 <%
 	}
-%> 
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+%>
 <portlet:renderURL var="query" />
 
-<aui:form action="${query }" name="fm">
 	<aui:form action="${query}" method="post">
 		<aui:nav-bar>
 			<aui:nav>
@@ -35,7 +41,6 @@
 			</aui:nav-bar-search>
 		</aui:nav-bar>
 	</aui:form>
-</aui:form>
 <liferay-ui:search-container delta="15" emptyResultsMessage="没有找到编码。">
 	<liferay-ui:search-container-results results="${dictionaries}"
 		total="${totalSize}" />
