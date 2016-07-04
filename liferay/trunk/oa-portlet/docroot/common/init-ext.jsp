@@ -6,6 +6,8 @@
 <%@page import="com.justonetech.sys.service.DictionaryLocalServiceUtil"%>
 <%@page import="com.liferay.portal.kernel.util.PropsUtil"%>
 <%
+String staticServerURL =PropsUtil.get("static.server.url");
+request.setAttribute("staticServerURL", staticServerURL);
 String defaultDateFormatPattern = PropsUtil.get("default.date.format.pattern");
 request.setAttribute("defaultDateFormatPattern", defaultDateFormatPattern);
 String defaultTimeFormatPattern = PropsUtil.get("default.time.format.pattern");
