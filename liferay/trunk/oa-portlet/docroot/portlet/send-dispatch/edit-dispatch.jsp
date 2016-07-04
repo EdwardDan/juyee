@@ -4,13 +4,14 @@
 <%@ include file="/common/init.jsp"%>
 <script type="text/javascript"
 	src="/html/js/My97DatePicker/WdatePicker.js"></script>
-<% long groupId = PortalUtil.getScopeGroupId(request);
-Dispatch dispatch = (Dispatch) request.getAttribute("dispatch");
-SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-String writtenDateFormat="";
-if(null!=dispatch){
-	writtenDateFormat=sdf.format(dispatch.getWrittenDate());
-}
+<%
+	long groupId = PortalUtil.getScopeGroupId(request);
+	Dispatch dispatch = (Dispatch) request.getAttribute("dispatch");
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	String writtenDateFormat = "";
+	if (null != dispatch) {
+		writtenDateFormat = sdf.format(dispatch.getWrittenDate());
+	}
 %>
 
 <c:set var="contentPath"
@@ -28,8 +29,9 @@ if(null!=dispatch){
 		<aui:input name="dispatchId" type="hidden" />
 		<aui:select name="rocordType" label="文种">
 			<%
-							Dictionary dictionary = DictionaryLocalServiceUtil
+				Dictionary dictionary = DictionaryLocalServiceUtil
 									.findByGroupIdAndCode(groupId, "rocordType");
+			if (null != dictionary) {
 							List<Dictionary> dictionaries = DictionaryLocalServiceUtil
 									.findByGroupIdAndParentId(groupId,
 											dictionary.getDictionaryId(), -1, -1);
@@ -37,13 +39,14 @@ if(null!=dispatch){
 			%>
 			<aui:option value="<%=dic.getDictionaryId()%>"><%=dic.getName()%></aui:option>
 			<%
-				}
+							}}
 			%>
 		</aui:select>
 		<aui:select name="securityLevel" label="密级">
 			<%
-							Dictionary dictionary = DictionaryLocalServiceUtil
+				Dictionary dictionary = DictionaryLocalServiceUtil
 									.findByGroupIdAndCode(groupId, "securityLevel");
+			if (null != dictionary) {
 							List<Dictionary> dictionaries = DictionaryLocalServiceUtil
 									.findByGroupIdAndParentId(groupId,
 											dictionary.getDictionaryId(), -1, -1);
@@ -51,13 +54,15 @@ if(null!=dispatch){
 			%>
 			<aui:option value="<%=dic.getDictionaryId()%>"><%=dic.getName()%></aui:option>
 			<%
-				}
+							}}
 			%>
 		</aui:select>
 		<aui:select name="organaAbbreviation" label="沪交建">
 			<%
-							Dictionary dictionary = DictionaryLocalServiceUtil
-									.findByGroupIdAndCode(groupId, "organaAbbreviation");
+				Dictionary dictionary = DictionaryLocalServiceUtil
+									.findByGroupIdAndCode(groupId,
+											"organaAbbreviation");
+			if (null != dictionary) {
 							List<Dictionary> dictionaries = DictionaryLocalServiceUtil
 									.findByGroupIdAndParentId(groupId,
 											dictionary.getDictionaryId(), -1, -1);
@@ -65,21 +70,24 @@ if(null!=dispatch){
 			%>
 			<aui:option value="<%=dic.getDictionaryId()%>"><%=dic.getName()%></aui:option>
 			<%
-				}
+							}}
 			%>
 		</aui:select>
 		<aui:select name="year" label="年">
 			<%
-							Dictionary dictionary = DictionaryLocalServiceUtil
+				Dictionary dictionary = DictionaryLocalServiceUtil
 									.findByGroupIdAndCode(groupId, "year");
-							List<Dictionary> dictionaries = DictionaryLocalServiceUtil
-									.findByGroupIdAndParentId(groupId,
-											dictionary.getDictionaryId(), -1, -1);
-							for (Dictionary dic : dictionaries) {
+							if (null != dictionary) {
+								List<Dictionary> dictionaries = DictionaryLocalServiceUtil
+										.findByGroupIdAndParentId(groupId,
+												dictionary.getDictionaryId(), -1,
+												-1);
+								for (Dictionary dic : dictionaries) {
 			%>
 			<aui:option value="<%=dic.getDictionaryId()%>"><%=dic.getName()%></aui:option>
 			<%
 				}
+							}
 			%>
 		</aui:select>
 		<aui:input name="serialNo" label="号" />
@@ -88,12 +96,14 @@ if(null!=dispatch){
 		<aui:input name="ccOrgan" label="抄送机关" />
 		<aui:input name="writtenOrgan" label="成文机关" />
 		<aui:input type="text" cssClass="Wdate" name="writtenDateFormat"
-			label="成文日期" onfocus="WdatePicker({lang:'zh-cn'})" value="<%=writtenDateFormat %>" /> 
-		<%--  <input type="text" name="<portlet:namespace/>writtenDate" class="Wdate "  onfocus="WdatePicker({lang:'zh-cn'})" value="<fmt:formatDate value="${dispatch.writtenDate}" pattern="yyyy-MM-dd"/> "/> --%> 
+			label="成文日期" onfocus="WdatePicker({lang:'zh-cn'})"
+			value="<%=writtenDateFormat%>" />
+		<%--  <input type="text" name="<portlet:namespace/>writtenDate" class="Wdate "  onfocus="WdatePicker({lang:'zh-cn'})" value="<fmt:formatDate value="${dispatch.writtenDate}" pattern="yyyy-MM-dd"/> "/> --%>
 		<aui:select name="urgencyDegree" label="紧急程度">
-		<%
-							Dictionary dictionary = DictionaryLocalServiceUtil
+			<%
+				Dictionary dictionary = DictionaryLocalServiceUtil
 									.findByGroupIdAndCode(groupId, "urgencyDegree");
+			if (null != dictionary) {
 							List<Dictionary> dictionaries = DictionaryLocalServiceUtil
 									.findByGroupIdAndParentId(groupId,
 											dictionary.getDictionaryId(), -1, -1);
@@ -101,7 +111,7 @@ if(null!=dispatch){
 			%>
 			<aui:option value="<%=dic.getDictionaryId()%>"><%=dic.getName()%></aui:option>
 			<%
-				}
+				}}
 			%>
 		</aui:select>
 	</aui:fieldset>
