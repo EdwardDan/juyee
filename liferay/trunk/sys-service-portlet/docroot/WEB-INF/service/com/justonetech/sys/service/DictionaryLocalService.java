@@ -255,8 +255,7 @@ public interface DictionaryLocalService extends BaseLocalService,
 
 	public com.justonetech.sys.model.Dictionary findByGroupIdAndCode(
 		long groupId, java.lang.String code)
-		throws com.justonetech.sys.NoSuchDictionaryException,
-			com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.justonetech.sys.model.Dictionary> findByGroupIdAndParentId(
 		long groupId, long parentId, int start, int end)

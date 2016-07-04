@@ -289,8 +289,7 @@ public class DictionaryLocalServiceWrapper implements DictionaryLocalService,
 	@Override
 	public com.justonetech.sys.model.Dictionary findByGroupIdAndCode(
 		long groupId, java.lang.String code)
-		throws com.justonetech.sys.NoSuchDictionaryException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _dictionaryLocalService.findByGroupIdAndCode(groupId, code);
 	}
 

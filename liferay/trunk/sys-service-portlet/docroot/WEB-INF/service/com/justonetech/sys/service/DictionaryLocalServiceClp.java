@@ -733,8 +733,7 @@ public class DictionaryLocalServiceClp implements DictionaryLocalService {
 	@Override
 	public com.justonetech.sys.model.Dictionary findByGroupIdAndCode(
 		long groupId, java.lang.String code)
-		throws com.justonetech.sys.NoSuchDictionaryException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
@@ -744,10 +743,6 @@ public class DictionaryLocalServiceClp implements DictionaryLocalService {
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
-
-			if (t instanceof com.justonetech.sys.NoSuchDictionaryException) {
-				throw (com.justonetech.sys.NoSuchDictionaryException)t;
-			}
 
 			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
 				throw (com.liferay.portal.kernel.exception.SystemException)t;

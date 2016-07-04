@@ -29,6 +29,8 @@ import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
@@ -48,15 +50,24 @@ import com.liferay.portal.model.User;
  */
 public class DictionaryLocalServiceImpl extends DictionaryLocalServiceBaseImpl {
 
+    private static Log log = LogFactoryUtil.getLog(DictionaryLocalServiceImpl.class);
+
     /*
      * NOTE FOR DEVELOPERS: Never reference this interface directly. Always use
      * {@link com.justonetech.sys.service.DictionaryLocalServiceUtil} to access
      * the dictionary local service.
      */
     public Dictionary findByGroupIdAndCode(long groupId, String code)
-        throws SystemException, NoSuchDictionaryException {
+        throws SystemException {
 
-        return dictionaryPersistence.findByGroupIdAndCode(groupId, code);
+        Dictionary dictionary = null;
+        try {
+            dictionary = dictionaryPersistence.findByGroupIdAndCode(groupId, code);
+        }
+        catch (NoSuchDictionaryException e) {
+            log.info("NoSuchDictionaryException:findByGroupIdAndCode(" + groupId + ", " + code + ")");
+        }
+        return dictionary;
     }
 
     public List<Dictionary> findByGroupIdAndParentId(long groupId, long parentId, int start, int end)
