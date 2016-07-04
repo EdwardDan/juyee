@@ -1,7 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
-<script type="text/javascript"
-	src="<%=PropsUtil.get("static.server.url") %>/My97DatePicker/WdatePicker.js"></script>
+<script src="${staticServerURL}/My97DatePicker/WdatePicker.js"></script>
 <c:set var="contentPath"
 	value="${request.contextPath}/portlet/vehicle-requisition" />
 <portlet:renderURL var="viewURL" />
