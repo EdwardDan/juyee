@@ -282,4 +282,22 @@ public interface DictionaryLocalService extends BaseLocalService,
 
 	public com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQueryByG_P_K(
 		long groupId, long parentId, java.lang.String keywords);
+
+	public void deleteDictionaries(java.lang.String[] dictionaryIds);
+
+	public void recursiveDeleteDictionaries(java.lang.String[] dictionaryIds);
+
+	public void recursiveDeleteDictionary(
+		com.justonetech.sys.model.Dictionary parentDictionary)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.justonetech.sys.model.Dictionary updateIsLeaf(
+		com.justonetech.sys.model.Dictionary dictionary, boolean isLeaf,
+		com.liferay.portal.model.User user)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public void recursiveUpdateSortPath(
+		com.justonetech.sys.model.Dictionary parentDictionary)
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

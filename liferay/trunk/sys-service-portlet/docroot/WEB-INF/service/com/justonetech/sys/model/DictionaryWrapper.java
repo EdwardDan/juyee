@@ -53,8 +53,8 @@ public class DictionaryWrapper implements Dictionary, ModelWrapper<Dictionary> {
 		attributes.put("groupId", getGroupId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
-		attributes.put("createDate", getCreateDate());
-		attributes.put("modifiedDate", getModifiedDate());
+		attributes.put("createTime", getCreateTime());
+		attributes.put("modifiedTime", getModifiedTime());
 		attributes.put("code", getCode());
 		attributes.put("name", getName());
 		attributes.put("isLeaf", getIsLeaf());
@@ -96,16 +96,16 @@ public class DictionaryWrapper implements Dictionary, ModelWrapper<Dictionary> {
 			setUserName(userName);
 		}
 
-		Date createDate = (Date)attributes.get("createDate");
+		Date createTime = (Date)attributes.get("createTime");
 
-		if (createDate != null) {
-			setCreateDate(createDate);
+		if (createTime != null) {
+			setCreateTime(createTime);
 		}
 
-		Date modifiedDate = (Date)attributes.get("modifiedDate");
+		Date modifiedTime = (Date)attributes.get("modifiedTime");
 
-		if (modifiedDate != null) {
-			setModifiedDate(modifiedDate);
+		if (modifiedTime != null) {
+			setModifiedTime(modifiedTime);
 		}
 
 		String code = (String)attributes.get("code");
@@ -298,43 +298,43 @@ public class DictionaryWrapper implements Dictionary, ModelWrapper<Dictionary> {
 	}
 
 	/**
-	* Returns the create date of this dictionary.
+	* Returns the create time of this dictionary.
 	*
-	* @return the create date of this dictionary
+	* @return the create time of this dictionary
 	*/
 	@Override
-	public java.util.Date getCreateDate() {
-		return _dictionary.getCreateDate();
+	public java.util.Date getCreateTime() {
+		return _dictionary.getCreateTime();
 	}
 
 	/**
-	* Sets the create date of this dictionary.
+	* Sets the create time of this dictionary.
 	*
-	* @param createDate the create date of this dictionary
+	* @param createTime the create time of this dictionary
 	*/
 	@Override
-	public void setCreateDate(java.util.Date createDate) {
-		_dictionary.setCreateDate(createDate);
+	public void setCreateTime(java.util.Date createTime) {
+		_dictionary.setCreateTime(createTime);
 	}
 
 	/**
-	* Returns the modified date of this dictionary.
+	* Returns the modified time of this dictionary.
 	*
-	* @return the modified date of this dictionary
+	* @return the modified time of this dictionary
 	*/
 	@Override
-	public java.util.Date getModifiedDate() {
-		return _dictionary.getModifiedDate();
+	public java.util.Date getModifiedTime() {
+		return _dictionary.getModifiedTime();
 	}
 
 	/**
-	* Sets the modified date of this dictionary.
+	* Sets the modified time of this dictionary.
 	*
-	* @param modifiedDate the modified date of this dictionary
+	* @param modifiedTime the modified time of this dictionary
 	*/
 	@Override
-	public void setModifiedDate(java.util.Date modifiedDate) {
-		_dictionary.setModifiedDate(modifiedDate);
+	public void setModifiedTime(java.util.Date modifiedTime) {
+		_dictionary.setModifiedTime(modifiedTime);
 	}
 
 	/**
@@ -692,6 +692,13 @@ public class DictionaryWrapper implements Dictionary, ModelWrapper<Dictionary> {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _dictionary.buildTreePath();
+	}
+
+	@Override
+	public com.justonetech.sys.model.Dictionary getParentDictionary()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _dictionary.getParentDictionary();
 	}
 
 	@Override

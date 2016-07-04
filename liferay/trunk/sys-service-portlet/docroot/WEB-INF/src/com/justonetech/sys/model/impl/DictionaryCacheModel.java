@@ -48,10 +48,10 @@ public class DictionaryCacheModel implements CacheModel<Dictionary>,
 		sb.append(userId);
 		sb.append(", userName=");
 		sb.append(userName);
-		sb.append(", createDate=");
-		sb.append(createDate);
-		sb.append(", modifiedDate=");
-		sb.append(modifiedDate);
+		sb.append(", createTime=");
+		sb.append(createTime);
+		sb.append(", modifiedTime=");
+		sb.append(modifiedTime);
 		sb.append(", code=");
 		sb.append(code);
 		sb.append(", name=");
@@ -94,18 +94,18 @@ public class DictionaryCacheModel implements CacheModel<Dictionary>,
 			dictionaryImpl.setUserName(userName);
 		}
 
-		if (createDate == Long.MIN_VALUE) {
-			dictionaryImpl.setCreateDate(null);
+		if (createTime == Long.MIN_VALUE) {
+			dictionaryImpl.setCreateTime(null);
 		}
 		else {
-			dictionaryImpl.setCreateDate(new Date(createDate));
+			dictionaryImpl.setCreateTime(new Date(createTime));
 		}
 
-		if (modifiedDate == Long.MIN_VALUE) {
-			dictionaryImpl.setModifiedDate(null);
+		if (modifiedTime == Long.MIN_VALUE) {
+			dictionaryImpl.setModifiedTime(null);
 		}
 		else {
-			dictionaryImpl.setModifiedDate(new Date(modifiedDate));
+			dictionaryImpl.setModifiedTime(new Date(modifiedTime));
 		}
 
 		if (code == null) {
@@ -175,8 +175,8 @@ public class DictionaryCacheModel implements CacheModel<Dictionary>,
 		groupId = objectInput.readLong();
 		userId = objectInput.readLong();
 		userName = objectInput.readUTF();
-		createDate = objectInput.readLong();
-		modifiedDate = objectInput.readLong();
+		createTime = objectInput.readLong();
+		modifiedTime = objectInput.readLong();
 		code = objectInput.readUTF();
 		name = objectInput.readUTF();
 		isLeaf = objectInput.readBoolean();
@@ -204,8 +204,8 @@ public class DictionaryCacheModel implements CacheModel<Dictionary>,
 			objectOutput.writeUTF(userName);
 		}
 
-		objectOutput.writeLong(createDate);
-		objectOutput.writeLong(modifiedDate);
+		objectOutput.writeLong(createTime);
+		objectOutput.writeLong(modifiedTime);
 
 		if (code == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
@@ -268,8 +268,8 @@ public class DictionaryCacheModel implements CacheModel<Dictionary>,
 	public long groupId;
 	public long userId;
 	public String userName;
-	public long createDate;
-	public long modifiedDate;
+	public long createTime;
+	public long modifiedTime;
 	public String code;
 	public String name;
 	public boolean isLeaf;

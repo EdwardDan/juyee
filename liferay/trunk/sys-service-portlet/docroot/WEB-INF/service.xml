@@ -18,8 +18,8 @@
 		<!-- Audit fields -->
 		<column name="userId" type="long" />
 		<column name="userName" type="String" />
-		<column name="createDate" type="Date" />
-		<column name="modifiedDate" type="Date" />
+		<column name="createTime" type="Date" />
+		<column name="modifiedTime" type="Date" />
 
 
 		<!-- Other fields -->

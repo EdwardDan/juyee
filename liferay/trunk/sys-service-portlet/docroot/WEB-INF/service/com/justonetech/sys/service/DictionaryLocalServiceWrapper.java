@@ -346,6 +346,39 @@ public class DictionaryLocalServiceWrapper implements DictionaryLocalService,
 			parentId, keywords);
 	}
 
+	@Override
+	public void deleteDictionaries(java.lang.String[] dictionaryIds) {
+		_dictionaryLocalService.deleteDictionaries(dictionaryIds);
+	}
+
+	@Override
+	public void recursiveDeleteDictionaries(java.lang.String[] dictionaryIds) {
+		_dictionaryLocalService.recursiveDeleteDictionaries(dictionaryIds);
+	}
+
+	@Override
+	public void recursiveDeleteDictionary(
+		com.justonetech.sys.model.Dictionary parentDictionary)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_dictionaryLocalService.recursiveDeleteDictionary(parentDictionary);
+	}
+
+	@Override
+	public com.justonetech.sys.model.Dictionary updateIsLeaf(
+		com.justonetech.sys.model.Dictionary dictionary, boolean isLeaf,
+		com.liferay.portal.model.User user)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _dictionaryLocalService.updateIsLeaf(dictionary, isLeaf, user);
+	}
+
+	@Override
+	public void recursiveUpdateSortPath(
+		com.justonetech.sys.model.Dictionary parentDictionary)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_dictionaryLocalService.recursiveUpdateSortPath(parentDictionary);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

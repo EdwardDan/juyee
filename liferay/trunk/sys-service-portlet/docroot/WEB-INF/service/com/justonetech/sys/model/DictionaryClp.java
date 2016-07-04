@@ -79,8 +79,8 @@ public class DictionaryClp extends BaseModelImpl<Dictionary>
 		attributes.put("groupId", getGroupId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
-		attributes.put("createDate", getCreateDate());
-		attributes.put("modifiedDate", getModifiedDate());
+		attributes.put("createTime", getCreateTime());
+		attributes.put("modifiedTime", getModifiedTime());
 		attributes.put("code", getCode());
 		attributes.put("name", getName());
 		attributes.put("isLeaf", getIsLeaf());
@@ -122,16 +122,16 @@ public class DictionaryClp extends BaseModelImpl<Dictionary>
 			setUserName(userName);
 		}
 
-		Date createDate = (Date)attributes.get("createDate");
+		Date createTime = (Date)attributes.get("createTime");
 
-		if (createDate != null) {
-			setCreateDate(createDate);
+		if (createTime != null) {
+			setCreateTime(createTime);
 		}
 
-		Date modifiedDate = (Date)attributes.get("modifiedDate");
+		Date modifiedTime = (Date)attributes.get("modifiedTime");
 
-		if (modifiedDate != null) {
-			setModifiedDate(modifiedDate);
+		if (modifiedTime != null) {
+			setModifiedTime(modifiedTime);
 		}
 
 		String code = (String)attributes.get("code");
@@ -304,21 +304,21 @@ public class DictionaryClp extends BaseModelImpl<Dictionary>
 	}
 
 	@Override
-	public Date getCreateDate() {
-		return _createDate;
+	public Date getCreateTime() {
+		return _createTime;
 	}
 
 	@Override
-	public void setCreateDate(Date createDate) {
-		_createDate = createDate;
+	public void setCreateTime(Date createTime) {
+		_createTime = createTime;
 
 		if (_dictionaryRemoteModel != null) {
 			try {
 				Class<?> clazz = _dictionaryRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setCreateDate", Date.class);
+				Method method = clazz.getMethod("setCreateTime", Date.class);
 
-				method.invoke(_dictionaryRemoteModel, createDate);
+				method.invoke(_dictionaryRemoteModel, createTime);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -327,21 +327,21 @@ public class DictionaryClp extends BaseModelImpl<Dictionary>
 	}
 
 	@Override
-	public Date getModifiedDate() {
-		return _modifiedDate;
+	public Date getModifiedTime() {
+		return _modifiedTime;
 	}
 
 	@Override
-	public void setModifiedDate(Date modifiedDate) {
-		_modifiedDate = modifiedDate;
+	public void setModifiedTime(Date modifiedTime) {
+		_modifiedTime = modifiedTime;
 
 		if (_dictionaryRemoteModel != null) {
 			try {
 				Class<?> clazz = _dictionaryRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setModifiedDate", Date.class);
+				Method method = clazz.getMethod("setModifiedTime", Date.class);
 
-				method.invoke(_dictionaryRemoteModel, modifiedDate);
+				method.invoke(_dictionaryRemoteModel, modifiedTime);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -632,6 +632,25 @@ public class DictionaryClp extends BaseModelImpl<Dictionary>
 	}
 
 	@Override
+	public com.justonetech.sys.model.Dictionary getParentDictionary() {
+		try {
+			String methodName = "getParentDictionary";
+
+			Class<?>[] parameterTypes = new Class<?>[] {  };
+
+			Object[] parameterValues = new Object[] {  };
+
+			com.justonetech.sys.model.Dictionary returnObj = (com.justonetech.sys.model.Dictionary)invokeOnRemoteModel(methodName,
+					parameterTypes, parameterValues);
+
+			return returnObj;
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
+	@Override
 	public void updateTreePath(String treePath) {
 		try {
 			_treePath = treePath;
@@ -717,8 +736,8 @@ public class DictionaryClp extends BaseModelImpl<Dictionary>
 		clone.setGroupId(getGroupId());
 		clone.setUserId(getUserId());
 		clone.setUserName(getUserName());
-		clone.setCreateDate(getCreateDate());
-		clone.setModifiedDate(getModifiedDate());
+		clone.setCreateTime(getCreateTime());
+		clone.setModifiedTime(getModifiedTime());
 		clone.setCode(getCode());
 		clone.setName(getName());
 		clone.setIsLeaf(getIsLeaf());
@@ -790,10 +809,10 @@ public class DictionaryClp extends BaseModelImpl<Dictionary>
 		sb.append(getUserId());
 		sb.append(", userName=");
 		sb.append(getUserName());
-		sb.append(", createDate=");
-		sb.append(getCreateDate());
-		sb.append(", modifiedDate=");
-		sb.append(getModifiedDate());
+		sb.append(", createTime=");
+		sb.append(getCreateTime());
+		sb.append(", modifiedTime=");
+		sb.append(getModifiedTime());
 		sb.append(", code=");
 		sb.append(getCode());
 		sb.append(", name=");
@@ -846,12 +865,12 @@ public class DictionaryClp extends BaseModelImpl<Dictionary>
 		sb.append(getUserName());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>createDate</column-name><column-value><![CDATA[");
-		sb.append(getCreateDate());
+			"<column><column-name>createTime</column-name><column-value><![CDATA[");
+		sb.append(getCreateTime());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
-		sb.append(getModifiedDate());
+			"<column><column-name>modifiedTime</column-name><column-value><![CDATA[");
+		sb.append(getModifiedTime());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>code</column-name><column-value><![CDATA[");
@@ -908,8 +927,8 @@ public class DictionaryClp extends BaseModelImpl<Dictionary>
 	private long _userId;
 	private String _userUuid;
 	private String _userName;
-	private Date _createDate;
-	private Date _modifiedDate;
+	private Date _createTime;
+	private Date _modifiedTime;
 	private String _code;
 	private String _name;
 	private boolean _isLeaf;

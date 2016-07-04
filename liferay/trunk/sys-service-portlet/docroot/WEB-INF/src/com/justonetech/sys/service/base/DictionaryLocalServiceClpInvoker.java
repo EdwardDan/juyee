@@ -151,6 +151,33 @@ public class DictionaryLocalServiceClpInvoker {
 		_methodParameterTypes47 = new String[] {
 				"long", "long", "java.lang.String"
 			};
+
+		_methodName48 = "deleteDictionaries";
+
+		_methodParameterTypes48 = new String[] { "java.lang.String[][]" };
+
+		_methodName49 = "recursiveDeleteDictionaries";
+
+		_methodParameterTypes49 = new String[] { "java.lang.String[][]" };
+
+		_methodName50 = "recursiveDeleteDictionary";
+
+		_methodParameterTypes50 = new String[] {
+				"com.justonetech.sys.model.Dictionary"
+			};
+
+		_methodName51 = "updateIsLeaf";
+
+		_methodParameterTypes51 = new String[] {
+				"com.justonetech.sys.model.Dictionary", "boolean",
+				"com.liferay.portal.model.User"
+			};
+
+		_methodName52 = "recursiveUpdateSortPath";
+
+		_methodParameterTypes52 = new String[] {
+				"com.justonetech.sys.model.Dictionary"
+			};
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -309,6 +336,41 @@ public class DictionaryLocalServiceClpInvoker {
 				((Long)arguments[1]).longValue(), (java.lang.String)arguments[2]);
 		}
 
+		if (_methodName48.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes48, parameterTypes)) {
+			DictionaryLocalServiceUtil.deleteDictionaries((java.lang.String[])arguments[0]);
+
+			return null;
+		}
+
+		if (_methodName49.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes49, parameterTypes)) {
+			DictionaryLocalServiceUtil.recursiveDeleteDictionaries((java.lang.String[])arguments[0]);
+
+			return null;
+		}
+
+		if (_methodName50.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes50, parameterTypes)) {
+			DictionaryLocalServiceUtil.recursiveDeleteDictionary((com.justonetech.sys.model.Dictionary)arguments[0]);
+
+			return null;
+		}
+
+		if (_methodName51.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes51, parameterTypes)) {
+			return DictionaryLocalServiceUtil.updateIsLeaf((com.justonetech.sys.model.Dictionary)arguments[0],
+				((Boolean)arguments[1]).booleanValue(),
+				(com.liferay.portal.model.User)arguments[2]);
+		}
+
+		if (_methodName52.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes52, parameterTypes)) {
+			DictionaryLocalServiceUtil.recursiveUpdateSortPath((com.justonetech.sys.model.Dictionary)arguments[0]);
+
+			return null;
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -364,4 +426,14 @@ public class DictionaryLocalServiceClpInvoker {
 	private String[] _methodParameterTypes46;
 	private String _methodName47;
 	private String[] _methodParameterTypes47;
+	private String _methodName48;
+	private String[] _methodParameterTypes48;
+	private String _methodName49;
+	private String[] _methodParameterTypes49;
+	private String _methodName50;
+	private String[] _methodParameterTypes50;
+	private String _methodName51;
+	private String[] _methodParameterTypes51;
+	private String _methodName52;
+	private String[] _methodParameterTypes52;
 }

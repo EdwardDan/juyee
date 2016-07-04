@@ -14,16 +14,24 @@
 
 package com.justonetech.sys.service.impl;
 
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import com.justonetech.sys.NoSuchDictionaryException;
 import com.justonetech.sys.model.Dictionary;
+import com.justonetech.sys.service.DictionaryLocalServiceUtil;
 import com.justonetech.sys.service.base.DictionaryLocalServiceBaseImpl;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.Junction;
+import com.liferay.portal.kernel.dao.orm.OrderFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.User;
 
 /**
  * The implementation of the dictionary local service. <p> All custom service
@@ -96,6 +104,75 @@ public class DictionaryLocalServiceImpl extends DictionaryLocalServiceBaseImpl {
         junction.add(PropertyFactoryUtil.forName("name").like("%" + keywords + "%"));
         junction.add(PropertyFactoryUtil.forName("code").like("%" + keywords + "%"));
         dynamicQuery.add(junction);
+        dynamicQuery.addOrder(OrderFactoryUtil.asc("sortPath"));
         return dynamicQuery;
+    }
+
+    public void deleteDictionaries(String[] dictionaryIds) {
+
+        for (String dictionaryId : dictionaryIds) {
+            try {
+                dictionaryPersistence.remove(Long.parseLong(dictionaryId));
+            }
+            catch (NumberFormatException | PortalException | SystemException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void recursiveDeleteDictionaries(String[] dictionaryIds) {
+
+        for (String dictionaryId : dictionaryIds) {
+            try {
+                recursiveDeleteDictionary(dictionaryPersistence.fetchByPrimaryKey(Long.parseLong(dictionaryId)));
+
+            }
+            catch (NumberFormatException | SystemException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void recursiveDeleteDictionary(Dictionary parentDictionary)
+        throws SystemException {
+
+        dictionaryPersistence.remove(parentDictionary);
+        List<Dictionary> dictionaries =
+            dictionaryPersistence.findByGroupIdAndParentId(
+                parentDictionary.getGroupId(), parentDictionary.getDictionaryId());
+        for (Dictionary dictionary : dictionaries) {
+            recursiveDeleteDictionary(dictionary);
+        }
+    }
+
+    public Dictionary updateIsLeaf(Dictionary dictionary, boolean isLeaf, User user)
+        throws SystemException, PortalException {
+
+        dictionary.setIsLeaf(false);
+        dictionary.setModifiedTime(new Date());
+        if (Validator.isNotNull(user)) {
+            dictionary.setUserId(user.getUserId());
+            dictionary.setUserName(user.getFullName());
+        }
+        return DictionaryLocalServiceUtil.updateDictionary(dictionary);
+    }
+
+    public void recursiveUpdateSortPath(Dictionary parentDictionary)
+        throws SystemException {
+
+        List<Dictionary> dictionaries = Collections.emptyList();
+        dictionaries =
+            dictionaryPersistence.findByGroupIdAndParentId(
+                parentDictionary.getGroupId(), parentDictionary.getDictionaryId());
+
+        for (Dictionary dictionary : dictionaries) {
+            dictionary.setModifiedTime(new Date());
+            dictionary.setUserId(parentDictionary.getUserId());
+            dictionary.setUserName(parentDictionary.getUserName());
+            dictionary.setSortPath((dictionary.getParentId() == 0 ? StringPool.SLASH : parentDictionary.getSortPath()) +
+                String.format("%05d", dictionary.getSortNo()) + StringPool.SLASH);
+            DictionaryLocalServiceUtil.updateDictionary(dictionary);
+            recursiveUpdateSortPath(dictionary);
+        }
     }
 }

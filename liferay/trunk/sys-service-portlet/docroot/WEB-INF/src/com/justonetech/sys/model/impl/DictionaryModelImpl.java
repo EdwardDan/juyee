@@ -70,8 +70,8 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 			{ "groupId", Types.BIGINT },
 			{ "userId", Types.BIGINT },
 			{ "userName", Types.VARCHAR },
-			{ "createDate", Types.TIMESTAMP },
-			{ "modifiedDate", Types.TIMESTAMP },
+			{ "createTime", Types.TIMESTAMP },
+			{ "modifiedTime", Types.TIMESTAMP },
 			{ "code_", Types.VARCHAR },
 			{ "name", Types.VARCHAR },
 			{ "isLeaf", Types.BOOLEAN },
@@ -84,7 +84,7 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 			{ "customContent", Types.VARCHAR },
 			{ "parentId", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table sys_Dictionary (dictionaryId LONG not null primary key,groupId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,code_ VARCHAR(75) null,name VARCHAR(75) null,isLeaf BOOLEAN,sortNo INTEGER,desc_ STRING null,tag VARCHAR(75) null,isValid BOOLEAN,treePath VARCHAR(75) null,sortPath VARCHAR(75) null,customContent STRING null,parentId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table sys_Dictionary (dictionaryId LONG not null primary key,groupId LONG,userId LONG,userName VARCHAR(75) null,createTime DATE null,modifiedTime DATE null,code_ VARCHAR(75) null,name VARCHAR(75) null,isLeaf BOOLEAN,sortNo INTEGER,desc_ STRING null,tag VARCHAR(75) null,isValid BOOLEAN,treePath VARCHAR(75) null,sortPath VARCHAR(75) null,customContent STRING null,parentId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table sys_Dictionary";
 	public static final String ORDER_BY_JPQL = " ORDER BY dictionary.sortPath ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY sys_Dictionary.sortPath ASC";
@@ -123,8 +123,8 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 		model.setGroupId(soapModel.getGroupId());
 		model.setUserId(soapModel.getUserId());
 		model.setUserName(soapModel.getUserName());
-		model.setCreateDate(soapModel.getCreateDate());
-		model.setModifiedDate(soapModel.getModifiedDate());
+		model.setCreateTime(soapModel.getCreateTime());
+		model.setModifiedTime(soapModel.getModifiedTime());
 		model.setCode(soapModel.getCode());
 		model.setName(soapModel.getName());
 		model.setIsLeaf(soapModel.getIsLeaf());
@@ -204,8 +204,8 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 		attributes.put("groupId", getGroupId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
-		attributes.put("createDate", getCreateDate());
-		attributes.put("modifiedDate", getModifiedDate());
+		attributes.put("createTime", getCreateTime());
+		attributes.put("modifiedTime", getModifiedTime());
 		attributes.put("code", getCode());
 		attributes.put("name", getName());
 		attributes.put("isLeaf", getIsLeaf());
@@ -247,16 +247,16 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 			setUserName(userName);
 		}
 
-		Date createDate = (Date)attributes.get("createDate");
+		Date createTime = (Date)attributes.get("createTime");
 
-		if (createDate != null) {
-			setCreateDate(createDate);
+		if (createTime != null) {
+			setCreateTime(createTime);
 		}
 
-		Date modifiedDate = (Date)attributes.get("modifiedDate");
+		Date modifiedTime = (Date)attributes.get("modifiedTime");
 
-		if (modifiedDate != null) {
-			setModifiedDate(modifiedDate);
+		if (modifiedTime != null) {
+			setModifiedTime(modifiedTime);
 		}
 
 		String code = (String)attributes.get("code");
@@ -399,24 +399,24 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 
 	@JSON
 	@Override
-	public Date getCreateDate() {
-		return _createDate;
+	public Date getCreateTime() {
+		return _createTime;
 	}
 
 	@Override
-	public void setCreateDate(Date createDate) {
-		_createDate = createDate;
+	public void setCreateTime(Date createTime) {
+		_createTime = createTime;
 	}
 
 	@JSON
 	@Override
-	public Date getModifiedDate() {
-		return _modifiedDate;
+	public Date getModifiedTime() {
+		return _modifiedTime;
 	}
 
 	@Override
-	public void setModifiedDate(Date modifiedDate) {
-		_modifiedDate = modifiedDate;
+	public void setModifiedTime(Date modifiedTime) {
+		_modifiedTime = modifiedTime;
 	}
 
 	@JSON
@@ -656,8 +656,8 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 		dictionaryImpl.setGroupId(getGroupId());
 		dictionaryImpl.setUserId(getUserId());
 		dictionaryImpl.setUserName(getUserName());
-		dictionaryImpl.setCreateDate(getCreateDate());
-		dictionaryImpl.setModifiedDate(getModifiedDate());
+		dictionaryImpl.setCreateTime(getCreateTime());
+		dictionaryImpl.setModifiedTime(getModifiedTime());
 		dictionaryImpl.setCode(getCode());
 		dictionaryImpl.setName(getName());
 		dictionaryImpl.setIsLeaf(getIsLeaf());
@@ -754,22 +754,22 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 			dictionaryCacheModel.userName = null;
 		}
 
-		Date createDate = getCreateDate();
+		Date createTime = getCreateTime();
 
-		if (createDate != null) {
-			dictionaryCacheModel.createDate = createDate.getTime();
+		if (createTime != null) {
+			dictionaryCacheModel.createTime = createTime.getTime();
 		}
 		else {
-			dictionaryCacheModel.createDate = Long.MIN_VALUE;
+			dictionaryCacheModel.createTime = Long.MIN_VALUE;
 		}
 
-		Date modifiedDate = getModifiedDate();
+		Date modifiedTime = getModifiedTime();
 
-		if (modifiedDate != null) {
-			dictionaryCacheModel.modifiedDate = modifiedDate.getTime();
+		if (modifiedTime != null) {
+			dictionaryCacheModel.modifiedTime = modifiedTime.getTime();
 		}
 		else {
-			dictionaryCacheModel.modifiedDate = Long.MIN_VALUE;
+			dictionaryCacheModel.modifiedTime = Long.MIN_VALUE;
 		}
 
 		dictionaryCacheModel.code = getCode();
@@ -851,10 +851,10 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 		sb.append(getUserId());
 		sb.append(", userName=");
 		sb.append(getUserName());
-		sb.append(", createDate=");
-		sb.append(getCreateDate());
-		sb.append(", modifiedDate=");
-		sb.append(getModifiedDate());
+		sb.append(", createTime=");
+		sb.append(getCreateTime());
+		sb.append(", modifiedTime=");
+		sb.append(getModifiedTime());
 		sb.append(", code=");
 		sb.append(getCode());
 		sb.append(", name=");
@@ -907,12 +907,12 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 		sb.append(getUserName());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>createDate</column-name><column-value><![CDATA[");
-		sb.append(getCreateDate());
+			"<column><column-name>createTime</column-name><column-value><![CDATA[");
+		sb.append(getCreateTime());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
-		sb.append(getModifiedDate());
+			"<column><column-name>modifiedTime</column-name><column-value><![CDATA[");
+		sb.append(getModifiedTime());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>code</column-name><column-value><![CDATA[");
@@ -975,8 +975,8 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 	private long _userId;
 	private String _userUuid;
 	private String _userName;
-	private Date _createDate;
-	private Date _modifiedDate;
+	private Date _createTime;
+	private Date _modifiedTime;
 	private String _code;
 	private String _originalCode;
 	private String _name;

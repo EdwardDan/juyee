@@ -324,6 +324,35 @@ public class DictionaryLocalServiceUtil {
 				   .createDynamicQueryByG_P_K(groupId, parentId, keywords);
 	}
 
+	public static void deleteDictionaries(java.lang.String[] dictionaryIds) {
+		getService().deleteDictionaries(dictionaryIds);
+	}
+
+	public static void recursiveDeleteDictionaries(
+		java.lang.String[] dictionaryIds) {
+		getService().recursiveDeleteDictionaries(dictionaryIds);
+	}
+
+	public static void recursiveDeleteDictionary(
+		com.justonetech.sys.model.Dictionary parentDictionary)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().recursiveDeleteDictionary(parentDictionary);
+	}
+
+	public static com.justonetech.sys.model.Dictionary updateIsLeaf(
+		com.justonetech.sys.model.Dictionary dictionary, boolean isLeaf,
+		com.liferay.portal.model.User user)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().updateIsLeaf(dictionary, isLeaf, user);
+	}
+
+	public static void recursiveUpdateSortPath(
+		com.justonetech.sys.model.Dictionary parentDictionary)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().recursiveUpdateSortPath(parentDictionary);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

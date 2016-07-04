@@ -40,4 +40,8 @@ public interface Dictionary extends DictionaryModel, PersistedModel, TreeModel {
 	@Override
 	public void updateTreePath(java.lang.String treePath)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.justonetech.sys.model.Dictionary getParentDictionary()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 }

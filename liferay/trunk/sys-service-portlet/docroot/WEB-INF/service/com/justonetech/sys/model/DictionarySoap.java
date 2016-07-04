@@ -35,8 +35,8 @@ public class DictionarySoap implements Serializable {
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
-		soapModel.setCreateDate(model.getCreateDate());
-		soapModel.setModifiedDate(model.getModifiedDate());
+		soapModel.setCreateTime(model.getCreateTime());
+		soapModel.setModifiedTime(model.getModifiedTime());
 		soapModel.setCode(model.getCode());
 		soapModel.setName(model.getName());
 		soapModel.setIsLeaf(model.getIsLeaf());
@@ -132,20 +132,20 @@ public class DictionarySoap implements Serializable {
 		_userName = userName;
 	}
 
-	public Date getCreateDate() {
-		return _createDate;
+	public Date getCreateTime() {
+		return _createTime;
 	}
 
-	public void setCreateDate(Date createDate) {
-		_createDate = createDate;
+	public void setCreateTime(Date createTime) {
+		_createTime = createTime;
 	}
 
-	public Date getModifiedDate() {
-		return _modifiedDate;
+	public Date getModifiedTime() {
+		return _modifiedTime;
 	}
 
-	public void setModifiedDate(Date modifiedDate) {
-		_modifiedDate = modifiedDate;
+	public void setModifiedTime(Date modifiedTime) {
+		_modifiedTime = modifiedTime;
 	}
 
 	public String getCode() {
@@ -248,8 +248,8 @@ public class DictionarySoap implements Serializable {
 	private long _groupId;
 	private long _userId;
 	private String _userName;
-	private Date _createDate;
-	private Date _modifiedDate;
+	private Date _createTime;
+	private Date _modifiedTime;
 	private String _code;
 	private String _name;
 	private boolean _isLeaf;

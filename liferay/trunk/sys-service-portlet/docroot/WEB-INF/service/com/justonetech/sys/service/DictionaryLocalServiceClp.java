@@ -152,6 +152,33 @@ public class DictionaryLocalServiceClp implements DictionaryLocalService {
 		_methodParameterTypes26 = new String[] {
 				"long", "long", "java.lang.String"
 			};
+
+		_methodName27 = "deleteDictionaries";
+
+		_methodParameterTypes27 = new String[] { "java.lang.String[][]" };
+
+		_methodName28 = "recursiveDeleteDictionaries";
+
+		_methodParameterTypes28 = new String[] { "java.lang.String[][]" };
+
+		_methodName29 = "recursiveDeleteDictionary";
+
+		_methodParameterTypes29 = new String[] {
+				"com.justonetech.sys.model.Dictionary"
+			};
+
+		_methodName30 = "updateIsLeaf";
+
+		_methodParameterTypes30 = new String[] {
+				"com.justonetech.sys.model.Dictionary", "boolean",
+				"com.liferay.portal.model.User"
+			};
+
+		_methodName31 = "recursiveUpdateSortPath";
+
+		_methodParameterTypes31 = new String[] {
+				"com.justonetech.sys.model.Dictionary"
+			};
 	}
 
 	@Override
@@ -961,6 +988,140 @@ public class DictionaryLocalServiceClp implements DictionaryLocalService {
 		return (com.liferay.portal.kernel.dao.orm.DynamicQuery)ClpSerializer.translateOutput(returnObj);
 	}
 
+	@Override
+	public void deleteDictionaries(java.lang.String[] dictionaryIds) {
+		try {
+			_invokableLocalService.invokeMethod(_methodName27,
+				_methodParameterTypes27,
+				new Object[] { ClpSerializer.translateInput(dictionaryIds) });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
+	@Override
+	public void recursiveDeleteDictionaries(java.lang.String[] dictionaryIds) {
+		try {
+			_invokableLocalService.invokeMethod(_methodName28,
+				_methodParameterTypes28,
+				new Object[] { ClpSerializer.translateInput(dictionaryIds) });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
+	@Override
+	public void recursiveDeleteDictionary(
+		com.justonetech.sys.model.Dictionary parentDictionary)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		try {
+			_invokableLocalService.invokeMethod(_methodName29,
+				_methodParameterTypes29,
+				new Object[] { ClpSerializer.translateInput(parentDictionary) });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
+	@Override
+	public com.justonetech.sys.model.Dictionary updateIsLeaf(
+		com.justonetech.sys.model.Dictionary dictionary, boolean isLeaf,
+		com.liferay.portal.model.User user)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName30,
+					_methodParameterTypes30,
+					new Object[] {
+						ClpSerializer.translateInput(dictionary),
+						
+					isLeaf,
+						
+					ClpSerializer.translateInput(user)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
+				throw (com.liferay.portal.kernel.exception.PortalException)t;
+			}
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.justonetech.sys.model.Dictionary)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public void recursiveUpdateSortPath(
+		com.justonetech.sys.model.Dictionary parentDictionary)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		try {
+			_invokableLocalService.invokeMethod(_methodName31,
+				_methodParameterTypes31,
+				new Object[] { ClpSerializer.translateInput(parentDictionary) });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -1014,4 +1175,14 @@ public class DictionaryLocalServiceClp implements DictionaryLocalService {
 	private String[] _methodParameterTypes25;
 	private String _methodName26;
 	private String[] _methodParameterTypes26;
+	private String _methodName27;
+	private String[] _methodParameterTypes27;
+	private String _methodName28;
+	private String[] _methodParameterTypes28;
+	private String _methodName29;
+	private String[] _methodParameterTypes29;
+	private String _methodName30;
+	private String[] _methodParameterTypes30;
+	private String _methodName31;
+	private String[] _methodParameterTypes31;
 }

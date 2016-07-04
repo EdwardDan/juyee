@@ -1783,8 +1783,8 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 		dictionaryImpl.setGroupId(dictionary.getGroupId());
 		dictionaryImpl.setUserId(dictionary.getUserId());
 		dictionaryImpl.setUserName(dictionary.getUserName());
-		dictionaryImpl.setCreateDate(dictionary.getCreateDate());
-		dictionaryImpl.setModifiedDate(dictionary.getModifiedDate());
+		dictionaryImpl.setCreateTime(dictionary.getCreateTime());
+		dictionaryImpl.setModifiedTime(dictionary.getModifiedTime());
 		dictionaryImpl.setCode(dictionary.getCode());
 		dictionaryImpl.setName(dictionary.getName());
 		dictionaryImpl.setIsLeaf(dictionary.isIsLeaf());

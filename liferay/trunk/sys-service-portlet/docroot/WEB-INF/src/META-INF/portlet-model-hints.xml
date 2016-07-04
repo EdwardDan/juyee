@@ -6,8 +6,8 @@
 		<field name="groupId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
-		<field name="createDate" type="Date" />
-		<field name="modifiedDate" type="Date" />
+		<field name="createTime" type="Date" />
+		<field name="modifiedTime" type="Date" />
 		<field name="code" type="String" />
 		<field name="name" type="String" />
 		<field name="isLeaf" type="boolean" />

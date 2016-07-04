@@ -133,32 +133,32 @@ public interface DictionaryModel extends BaseModel<Dictionary> {
 	public void setUserName(String userName);
 
 	/**
-	 * Returns the create date of this dictionary.
+	 * Returns the create time of this dictionary.
 	 *
-	 * @return the create date of this dictionary
+	 * @return the create time of this dictionary
 	 */
-	public Date getCreateDate();
+	public Date getCreateTime();
 
 	/**
-	 * Sets the create date of this dictionary.
+	 * Sets the create time of this dictionary.
 	 *
-	 * @param createDate the create date of this dictionary
+	 * @param createTime the create time of this dictionary
 	 */
-	public void setCreateDate(Date createDate);
+	public void setCreateTime(Date createTime);
 
 	/**
-	 * Returns the modified date of this dictionary.
+	 * Returns the modified time of this dictionary.
 	 *
-	 * @return the modified date of this dictionary
+	 * @return the modified time of this dictionary
 	 */
-	public Date getModifiedDate();
+	public Date getModifiedTime();
 
 	/**
-	 * Sets the modified date of this dictionary.
+	 * Sets the modified time of this dictionary.
 	 *
-	 * @param modifiedDate the modified date of this dictionary
+	 * @param modifiedTime the modified time of this dictionary
 	 */
-	public void setModifiedDate(Date modifiedDate);
+	public void setModifiedTime(Date modifiedTime);
 
 	/**
 	 * Returns the code of this dictionary.
