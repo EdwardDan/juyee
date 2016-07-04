@@ -9,7 +9,7 @@
 		<portlet-name>dictionary</portlet-name>
 		<display-name>系统字典</display-name>
 		<portlet-class>
-			com.justonetech.sys.portlet.dictionary.DictionaryPortlet</portlet-class>
+			com.justonetech.sys.portlet.DictionaryPortlet</portlet-class>
 		<init-param>
 			<name>view-template</name>
 			<value>/portlet/dictionary/view.jsp</value>

@@ -1,5 +1,5 @@
 
-package com.justonetech.sys.portlet.dictionary;
+package com.justonetech.sys.portlet;
 
 import java.io.IOException;
 import java.util.Collections;
