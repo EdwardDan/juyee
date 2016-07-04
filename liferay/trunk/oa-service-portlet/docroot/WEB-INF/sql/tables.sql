@@ -43,7 +43,7 @@ create table oa_Dispatch (
 
 create table oa_LeaderWork (
 	userId LONG not null,
-	workDate LONG not null,
+	workDate DATE not null,
 	amOrPm LONG not null,
 	userName VARCHAR(75) null,
 	createTime DATE null,

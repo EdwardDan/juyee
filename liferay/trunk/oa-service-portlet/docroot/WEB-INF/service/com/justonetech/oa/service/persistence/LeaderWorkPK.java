@@ -14,10 +14,13 @@
 
 package com.justonetech.oa.service.persistence;
 
+import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.Serializable;
+
+import java.util.Date;
 
 /**
  * @author justonetech
@@ -25,13 +28,13 @@ import java.io.Serializable;
  */
 public class LeaderWorkPK implements Comparable<LeaderWorkPK>, Serializable {
 	public long userId;
-	public long workDate;
+	public Date workDate;
 	public long amOrPm;
 
 	public LeaderWorkPK() {
 	}
 
-	public LeaderWorkPK(long userId, long workDate, long amOrPm) {
+	public LeaderWorkPK(long userId, Date workDate, long amOrPm) {
 		this.userId = userId;
 		this.workDate = workDate;
 		this.amOrPm = amOrPm;
@@ -45,11 +48,11 @@ public class LeaderWorkPK implements Comparable<LeaderWorkPK>, Serializable {
 		this.userId = userId;
 	}
 
-	public long getWorkDate() {
+	public Date getWorkDate() {
 		return workDate;
 	}
 
-	public void setWorkDate(long workDate) {
+	public void setWorkDate(Date workDate) {
 		this.workDate = workDate;
 	}
 
@@ -83,15 +86,7 @@ public class LeaderWorkPK implements Comparable<LeaderWorkPK>, Serializable {
 			return value;
 		}
 
-		if (workDate < pk.workDate) {
-			value = -1;
-		}
-		else if (workDate > pk.workDate) {
-			value = 1;
-		}
-		else {
-			value = 0;
-		}
+		value = DateUtil.compareTo(workDate, pk.workDate);
 
 		if (value != 0) {
 			return value;
@@ -126,7 +121,7 @@ public class LeaderWorkPK implements Comparable<LeaderWorkPK>, Serializable {
 
 		LeaderWorkPK pk = (LeaderWorkPK)obj;
 
-		if ((userId == pk.userId) && (workDate == pk.workDate) &&
+		if ((userId == pk.userId) && (workDate.equals(pk.workDate)) &&
 				(amOrPm == pk.amOrPm)) {
 			return true;
 		}
@@ -137,7 +132,7 @@ public class LeaderWorkPK implements Comparable<LeaderWorkPK>, Serializable {
 
 	@Override
 	public int hashCode() {
-		return (String.valueOf(userId) + String.valueOf(workDate) +
+		return (String.valueOf(userId) + workDate.toString() +
 		String.valueOf(amOrPm)).hashCode();
 	}
 

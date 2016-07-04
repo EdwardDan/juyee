@@ -101,11 +101,11 @@ public class LeaderWorkSoap implements Serializable {
 		_userId = userId;
 	}
 
-	public long getWorkDate() {
+	public Date getWorkDate() {
 		return _workDate;
 	}
 
-	public void setWorkDate(long workDate) {
+	public void setWorkDate(Date workDate) {
 		_workDate = workDate;
 	}
 
@@ -150,7 +150,7 @@ public class LeaderWorkSoap implements Serializable {
 	}
 
 	private long _userId;
-	private long _workDate;
+	private Date _workDate;
 	private long _amOrPm;
 	private String _userName;
 	private Date _createTime;

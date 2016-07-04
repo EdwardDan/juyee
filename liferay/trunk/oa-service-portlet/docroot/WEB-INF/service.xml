@@ -95,7 +95,7 @@
 
 		<!-- PK fields -->
 		<column name="userId" type="long" primary="true" />
-		<column name="workDate" type="long" primary="true" />
+		<column name="workDate" type="Date" primary="true" />
 		<column name="amOrPm" type="long" primary="true" />
 
 

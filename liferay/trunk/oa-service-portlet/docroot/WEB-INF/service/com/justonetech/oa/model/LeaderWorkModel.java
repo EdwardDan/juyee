@@ -96,14 +96,14 @@ public interface LeaderWorkModel extends BaseModel<LeaderWork> {
 	 *
 	 * @return the work date of this leader work
 	 */
-	public long getWorkDate();
+	public Date getWorkDate();
 
 	/**
 	 * Sets the work date of this leader work.
 	 *
 	 * @param workDate the work date of this leader work
 	 */
-	public void setWorkDate(long workDate);
+	public void setWorkDate(Date workDate);
 
 	/**
 	 * Returns the am or pm of this leader work.

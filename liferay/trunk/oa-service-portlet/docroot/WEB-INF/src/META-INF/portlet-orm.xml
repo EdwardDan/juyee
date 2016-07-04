@@ -82,7 +82,9 @@
 		<id-class class="com.justonetech.oa.service.persistence.LeaderWorkPK" />
 		<attributes>
 			<id name="userId" />
-			<id name="workDate" />
+			<id name="workDate">
+				<temporal>TIMESTAMP</temporal>
+			</id>
 			<id name="amOrPm" />
 			<basic name="userName" />
 			<basic name="createTime">

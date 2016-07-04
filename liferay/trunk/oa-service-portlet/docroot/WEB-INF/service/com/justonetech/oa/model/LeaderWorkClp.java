@@ -97,7 +97,7 @@ public class LeaderWorkClp extends BaseModelImpl<LeaderWork>
 			setUserId(userId);
 		}
 
-		Long workDate = (Long)attributes.get("workDate");
+		Date workDate = (Date)attributes.get("workDate");
 
 		if (workDate != null) {
 			setWorkDate(workDate);
@@ -168,19 +168,19 @@ public class LeaderWorkClp extends BaseModelImpl<LeaderWork>
 	}
 
 	@Override
-	public long getWorkDate() {
+	public Date getWorkDate() {
 		return _workDate;
 	}
 
 	@Override
-	public void setWorkDate(long workDate) {
+	public void setWorkDate(Date workDate) {
 		_workDate = workDate;
 
 		if (_leaderWorkRemoteModel != null) {
 			try {
 				Class<?> clazz = _leaderWorkRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setWorkDate", long.class);
+				Method method = clazz.getMethod("setWorkDate", Date.class);
 
 				method.invoke(_leaderWorkRemoteModel, workDate);
 			}
@@ -490,7 +490,7 @@ public class LeaderWorkClp extends BaseModelImpl<LeaderWork>
 
 	private long _userId;
 	private String _userUuid;
-	private long _workDate;
+	private Date _workDate;
 	private long _amOrPm;
 	private String _userName;
 	private Date _createTime;

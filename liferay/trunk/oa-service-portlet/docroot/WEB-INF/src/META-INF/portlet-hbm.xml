@@ -63,7 +63,7 @@
 		<cache usage="read-write" />
 		<composite-id name="primaryKey" class="com.justonetech.oa.service.persistence.LeaderWorkPK">
 			<key-property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-			<key-property name="workDate" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+			<key-property name="workDate" type="org.hibernate.type.TimestampType" />
 			<key-property name="amOrPm" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		</composite-id>
 		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />

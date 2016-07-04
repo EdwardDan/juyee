@@ -59,14 +59,14 @@ public class LeaderWorkModelImpl extends BaseModelImpl<LeaderWork>
 	public static final String TABLE_NAME = "oa_LeaderWork";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "userId", Types.BIGINT },
-			{ "workDate", Types.BIGINT },
+			{ "workDate", Types.TIMESTAMP },
 			{ "amOrPm", Types.BIGINT },
 			{ "userName", Types.VARCHAR },
 			{ "createTime", Types.TIMESTAMP },
 			{ "modifiedTime", Types.TIMESTAMP },
 			{ "content", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table oa_LeaderWork (userId LONG not null,workDate LONG not null,amOrPm LONG not null,userName VARCHAR(75) null,createTime DATE null,modifiedTime DATE null,content VARCHAR(1000) null,primary key (userId, workDate, amOrPm))";
+	public static final String TABLE_SQL_CREATE = "create table oa_LeaderWork (userId LONG not null,workDate DATE not null,amOrPm LONG not null,userName VARCHAR(75) null,createTime DATE null,modifiedTime DATE null,content VARCHAR(1000) null,primary key (userId, workDate, amOrPm))";
 	public static final String TABLE_SQL_DROP = "drop table oa_LeaderWork";
 	public static final String ORDER_BY_JPQL = " ORDER BY leaderWork.id.userId ASC, leaderWork.id.workDate ASC, leaderWork.id.amOrPm ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY oa_LeaderWork.userId ASC, oa_LeaderWork.workDate ASC, oa_LeaderWork.amOrPm ASC";
@@ -141,7 +141,7 @@ public class LeaderWorkModelImpl extends BaseModelImpl<LeaderWork>
 			setUserId(userId);
 		}
 
-		Long workDate = (Long)attributes.get("workDate");
+		Date workDate = (Date)attributes.get("workDate");
 
 		if (workDate != null) {
 			setWorkDate(workDate);
@@ -199,12 +199,12 @@ public class LeaderWorkModelImpl extends BaseModelImpl<LeaderWork>
 	}
 
 	@Override
-	public long getWorkDate() {
+	public Date getWorkDate() {
 		return _workDate;
 	}
 
 	@Override
-	public void setWorkDate(long workDate) {
+	public void setWorkDate(Date workDate) {
 		_workDate = workDate;
 	}
 
@@ -339,7 +339,14 @@ public class LeaderWorkModelImpl extends BaseModelImpl<LeaderWork>
 
 		leaderWorkCacheModel.userId = getUserId();
 
-		leaderWorkCacheModel.workDate = getWorkDate();
+		Date workDate = getWorkDate();
+
+		if (workDate != null) {
+			leaderWorkCacheModel.workDate = workDate.getTime();
+		}
+		else {
+			leaderWorkCacheModel.workDate = Long.MIN_VALUE;
+		}
 
 		leaderWorkCacheModel.amOrPm = getAmOrPm();
 
@@ -451,7 +458,7 @@ public class LeaderWorkModelImpl extends BaseModelImpl<LeaderWork>
 		};
 	private long _userId;
 	private String _userUuid;
-	private long _workDate;
+	private Date _workDate;
 	private long _amOrPm;
 	private String _userName;
 	private Date _createTime;

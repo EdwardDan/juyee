@@ -64,7 +64,14 @@ public class LeaderWorkCacheModel implements CacheModel<LeaderWork>,
 		LeaderWorkImpl leaderWorkImpl = new LeaderWorkImpl();
 
 		leaderWorkImpl.setUserId(userId);
-		leaderWorkImpl.setWorkDate(workDate);
+
+		if (workDate == Long.MIN_VALUE) {
+			leaderWorkImpl.setWorkDate(null);
+		}
+		else {
+			leaderWorkImpl.setWorkDate(new Date(workDate));
+		}
+
 		leaderWorkImpl.setAmOrPm(amOrPm);
 
 		if (userName == null) {

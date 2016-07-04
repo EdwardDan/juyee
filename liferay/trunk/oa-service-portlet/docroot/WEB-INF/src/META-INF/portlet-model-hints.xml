@@ -45,7 +45,7 @@
 	</model>
 	<model name="com.justonetech.oa.model.LeaderWork">
 		<field name="userId" type="long" />
-		<field name="workDate" type="long" />
+		<field name="workDate" type="Date" />
 		<field name="amOrPm" type="long" />
 		<field name="userName" type="String" />
 		<field name="createTime" type="Date" />

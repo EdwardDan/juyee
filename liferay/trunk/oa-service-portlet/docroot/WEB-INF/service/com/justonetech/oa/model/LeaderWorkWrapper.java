@@ -68,7 +68,7 @@ public class LeaderWorkWrapper implements LeaderWork, ModelWrapper<LeaderWork> {
 			setUserId(userId);
 		}
 
-		Long workDate = (Long)attributes.get("workDate");
+		Date workDate = (Date)attributes.get("workDate");
 
 		if (workDate != null) {
 			setWorkDate(workDate);
@@ -174,7 +174,7 @@ public class LeaderWorkWrapper implements LeaderWork, ModelWrapper<LeaderWork> {
 	* @return the work date of this leader work
 	*/
 	@Override
-	public long getWorkDate() {
+	public java.util.Date getWorkDate() {
 		return _leaderWork.getWorkDate();
 	}
 
@@ -184,7 +184,7 @@ public class LeaderWorkWrapper implements LeaderWork, ModelWrapper<LeaderWork> {
 	* @param workDate the work date of this leader work
 	*/
 	@Override
-	public void setWorkDate(long workDate) {
+	public void setWorkDate(java.util.Date workDate) {
 		_leaderWork.setWorkDate(workDate);
 	}
 
