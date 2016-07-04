@@ -14,6 +14,7 @@
 
 package com.justonetech.sys.service.impl;
 
+
 import com.justonetech.sys.service.base.DictionaryServiceBaseImpl;
 
 /**
