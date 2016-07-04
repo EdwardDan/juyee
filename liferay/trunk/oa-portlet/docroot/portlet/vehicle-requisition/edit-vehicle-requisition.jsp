@@ -1,8 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
-<%@ page import="java.text.SimpleDateFormat"%>
 <script type="text/javascript"
-	src="/html/js/My97DatePicker/WdatePicker.js"></script>
+	src="<%=PropsUtil.get("static.server.url") %>/My97DatePicker/WdatePicker.js"></script>
 <c:set var="contentPath"
 	value="${request.contextPath}/portlet/vehicle-requisition" />
 <portlet:renderURL var="viewURL" />
