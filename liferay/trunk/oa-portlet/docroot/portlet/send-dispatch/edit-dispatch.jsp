@@ -1,5 +1,3 @@
-<%@page import="org.apache.taglibs.standard.lang.jstl.test.Bean1"%>
-<%@page import="java.text.SimpleDateFormat"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
 <script type="text/javascript"
