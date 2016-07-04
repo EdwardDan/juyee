@@ -1,79 +1,90 @@
-<%@page import="org.apache.jasper.tagplugins.jstl.core.Catch"%>
-<%@ page contentType="text/html;charset=utf-8"%>
-<%@page import="com.justonetech.sys.service.DictionaryLocalServiceUtil"%>
-<%@include file="/common/init.jsp"%>
-<%@include file="/common/init-ext.jsp"%>
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ include file="/common/init.jsp"%>
 <c:set var="contentPath"
 	value="${request.contextPath}/portlet/dictionary" />
-<%
-	Long dictionaryId = (Long) request.getAttribute("dictionaryId");
-	System.out.println("====================" + dictionaryId);
-	String name = null;
-	try {
-		if (Validator.isNotNull(dictionaryId)) {
-			name = DictionaryLocalServiceUtil.getDictionary(
-					dictionaryId).getName();
-%>
-<portlet:renderURL var="def" />
-<liferay-ui:header title="<%=name%>" backURL="${def}" />
-<%
-	}
-	} catch (Exception e) {
-		e.printStackTrace();
-	}
-%>
-<portlet:renderURL var="query" />
 
-	<aui:form action="${query}" method="post">
-		<aui:nav-bar>
-			<aui:nav>
-				<portlet:renderURL var="addCode">
-					<portlet:param name="mvcPath" value="${contentPath}/add-code.jsp" />
-					<portlet:param name="dictionaryId" value="${dictionaryId}" />
-				</portlet:renderURL>
-				<aui:nav-item href="<%=addCode%>" iconCssClass="icon-plus"
-					label="添加" />
-			</aui:nav>
-			<aui:nav-bar-search cssClass="pull-right">
-				<div class="form-search">
-					<liferay-ui:input-search />
-				</div>
-			</aui:nav-bar-search>
-		</aui:nav-bar>
-	</aui:form>
-<liferay-ui:search-container delta="15" emptyResultsMessage="没有找到编码。">
-	<liferay-ui:search-container-results results="${dictionaries}"
-		total="${totalSize}" />
-	<liferay-ui:search-container-row className="Dictionary" modelVar="dic"
-		keyProperty="dictionaryId">
-		<portlet:renderURL var="view">
-			<portlet:param name="dictionaryId" value="${dic.dictionaryId}" />
-		</portlet:renderURL>
-		<liferay-ui:search-container-column-text name="编码"
-			value="<a href='${view}'>${dic.code}</a>" />
-		<liferay-ui:search-container-column-text name="名称"
-			value="<a href='${view}'>${dic.name}</a>" />
-		<liferay-ui:search-container-column-text name="特殊标记"
-			value="<a href='${view}'>${dic.tag}</a>" />
-		<liferay-ui:search-container-column-text name="是否有效"
-			value="<a href='${view}'>${dic.isValid}</a>" />
-		<liferay-ui:search-container-column-text name="备注"
-			value="<a href='${view}'>${dic.desc}</a>" />
-		<liferay-ui:search-container-column-text name="action">
-			<portlet:actionURL var="del" name="deleteCode">
-				<portlet:param name="dictionaryId" value="${dic.dictionaryId}" />
-			</portlet:actionURL>
-			<portlet:actionURL var="edit" name="editCode">
+<portlet:renderURL var="viewURL" >
+	<portlet:param name="parentId" value="${parentDictionary.dictionaryId}" />
+</portlet:renderURL>
+
+<portlet:actionURL var="deleteDictionariesURL" name="deleteDictionaries">
+	<portlet:param name="parentId" value="${parentDictionary.dictionaryId}" />
+	<portlet:param name="redirect" value="${viewURL}" />
+</portlet:actionURL>
+ 
+<c:if test="${!empty parentDictionary }">
+	<portlet:renderURL var="backURL">
+		<portlet:param name="parentId" value="${parentDictionary.parentId}" />
+	</portlet:renderURL>
+	<liferay-ui:header title="${parentDictionary.name}" backURL="${backURL}" />
+</c:if>
+<aui:form action="${viewURL }" name="fm">
+	<aui:nav-bar>
+		<aui:nav>
+			<portlet:actionURL var="addDictionaryURL" name="editDictionary">
 				<portlet:param name="mvcPath"
-					value="/portlet/dictionary/add-code.jsp" />
-				<portlet:param name="dictionaryId" value="${dic.dictionaryId}" />
-				<portlet:param name="edit" value="1" />
+					value="${contentPath }/edit-dictionary.jsp" />
+				<portlet:param name="parentId" value="${parentDictionary.dictionaryId}" />
 			</portlet:actionURL>
-			<liferay-ui:icon-menu>
-				<liferay-ui:icon-delete image="delete" url="${del}" />
-				<liferay-ui:icon image="edit" url="${edit}" />
-			</liferay-ui:icon-menu>
-		</liferay-ui:search-container-column-text>
-	</liferay-ui:search-container-row>
-	<liferay-ui:search-iterator />
-</liferay-ui:search-container>
+			<aui:nav-item href="<%=addDictionaryURL%>" iconCssClass="icon-plus"
+				label="添加" />
+		</aui:nav>
+		<aui:nav-bar-search cssClass="pull-right">
+			<div class="form-search">
+				<liferay-ui:input-search />
+			</div>
+		</aui:nav-bar-search>
+	</aui:nav-bar>
+	<aui:button-row>
+		<aui:button disabled="<%=true%>" name="deleteDictionariesBtn" value="删除" onClick='<%=renderResponse.getNamespace() + "deleteDictionaries();"%>' />
+	</aui:button-row>
+	<liferay-ui:search-container emptyResultsMessage="没有找到代码。" rowChecker="<%=new RowChecker(renderResponse)%>">
+		<liferay-ui:search-container-results results="${dictionaries }"
+			total="${dictionariesCount }">
+		</liferay-ui:search-container-results>
+		<liferay-ui:search-container-row className="com.justonetech.sys.model.Dictionary" modelVar="dictionary" keyProperty="dictionaryId" >
+			<liferay-portlet:renderURL varImpl="rowURL">
+				<portlet:param name="parentId" value="${dictionary.dictionaryId}" />
+			</liferay-portlet:renderURL>
+			<liferay-ui:search-container-column-text property="name" name="代码名称" href="${rowURL}"/>
+			<liferay-ui:search-container-column-text property="code" name="代码编码" href="${rowURL}"/>
+			<liferay-ui:search-container-column-text name="是否有效" value='${dictionary.isValid?"是":"否" }' href="${rowURL}"/>
+			<liferay-ui:search-container-column-text>
+				<liferay-ui:icon-menu>
+					<portlet:actionURL var="editDictionaryURL" name="editDictionary">
+						<portlet:param name="dictionaryId" value="${dictionary.dictionaryId}" />
+						<portlet:param name="mvcPath" value="${contentPath }/edit-dictionary.jsp" />
+					</portlet:actionURL>
+					<liferay-ui:icon image="edit" label="编辑" url="${editDictionaryURL}" />
+					<liferay-ui:icon image="delete" label="删除" url="javascript:void(0);" onClick='<%=renderResponse.getNamespace() + "deleteDictionaries("+dictionary.getDictionaryId()+");"%>' />
+				</liferay-ui:icon-menu>
+			</liferay-ui:search-container-column-text>
+		</liferay-ui:search-container-row>
+		<liferay-ui:search-iterator>
+		<%
+			String parentId = renderRequest.getAttribute("parentId")+"";
+			PortletURL portletURL = searchContainer.getIteratorURL();
+			portletURL.setParameter("parentId", parentId);
+		%>
+		</liferay-ui:search-iterator>
+	</liferay-ui:search-container>
+</aui:form>
+
+<aui:script>
+	
+	Liferay.Util.toggleSearchContainerButton('#<portlet:namespace />deleteDictionariesBtn', '#<portlet:namespace /><%=searchContainerReference.getId("searchContainer")%>SearchContainer', document.<portlet:namespace />fm, '<portlet:namespace />allRowIds');
+	
+	Liferay.provide(
+			window,
+			'<portlet:namespace />deleteDictionaries',
+			function(dictionaryIds) {
+				if(confirm("确定要删除所选数据吗？")){
+					if(!dictionaryIds){
+						dictionaryIds = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, '<portlet:namespace />allRowIds');
+					}
+					location.href="<%=deleteDictionariesURL%>&<portlet:namespace />dictionaryIds="+ dictionaryIds;
+				}
+			},
+			['liferay-util-list-fields']
+		);
+</aui:script>
