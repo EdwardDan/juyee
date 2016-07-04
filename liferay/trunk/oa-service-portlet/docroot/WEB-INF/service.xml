@@ -33,10 +33,11 @@
 			<finder-column name="name" comparator="LIKE"></finder-column>
 		</finder>
 	</entity>
-	
-	<entity name="OfficeSupplyApply" local-service="true" remote-service="false">
+
+	<entity name="OfficeSupplyRequisition" local-service="true"
+		remote-service="false">
 		<!-- PK fields -->
-		<column name="officeSupplyApplyId" type="long" primary="true" />
+		<column name="officeSupplyRequisitionId" type="long" primary="true" />
 
 		<!-- Group instance -->
 
@@ -66,10 +67,12 @@
 			<finder-column name="applicantName" comparator="LIKE"></finder-column>
 		</finder>
 	</entity>
-	
-	<entity name="OfficeSupplyApplyItem" local-service="true" remote-service="false">
+
+	<entity name="OfficeSupplyRequisitionItem" local-service="true"
+		remote-service="false">
 		<!-- PK fields -->
-		<column name="officeSupplyApplyItemId" type="long" primary="true" />
+		<column name="officeSupplyRequisitionItemId" type="long"
+			primary="true" />
 
 		<!-- Other fields -->
 		<column name="name" type="String" />
@@ -77,7 +80,14 @@
 		<column name="unit" type="String" />
 		<column name="unitPrice" type="double" />
 		<column name="quantity" type="int" />
-		
+		<column name="officeSupplyRequisitionId" type="long" />
+		<column name="officeSupplyId" type="long" />
+
+
+		<finder name="OfficeSupplyRequisitionId" return-type="Collection">
+			<finder-column name="officeSupplyRequisitionId" />
+		</finder>
+
 	</entity>
 
 	<!-- 领导一周工作安排 -->
@@ -154,6 +164,10 @@
 		<column name="schedule" type="String" /><!--重工作进度工作 -->
 		<column name="content" type="String" /><!--工作内容 -->
 		<column name="agentPerson" type="String" /><!--经办人 -->
+
+		<finder name="DeptWorkId" return-type="Collection">
+			<finder-column name="deptWorkId" />
+		</finder>
 
 	</entity>
 

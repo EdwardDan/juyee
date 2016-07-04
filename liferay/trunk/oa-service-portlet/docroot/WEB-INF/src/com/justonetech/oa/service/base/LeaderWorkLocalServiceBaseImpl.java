@@ -21,9 +21,9 @@ import com.justonetech.oa.service.persistence.DeptWorkPersistence;
 import com.justonetech.oa.service.persistence.DispatchPersistence;
 import com.justonetech.oa.service.persistence.LeaderWorkPK;
 import com.justonetech.oa.service.persistence.LeaderWorkPersistence;
-import com.justonetech.oa.service.persistence.OfficeSupplyApplyItemPersistence;
-import com.justonetech.oa.service.persistence.OfficeSupplyApplyPersistence;
 import com.justonetech.oa.service.persistence.OfficeSupplyPersistence;
+import com.justonetech.oa.service.persistence.OfficeSupplyRequisitionItemPersistence;
+import com.justonetech.oa.service.persistence.OfficeSupplyRequisitionPersistence;
 import com.justonetech.oa.service.persistence.VehicleRequisitionPersistence;
 
 import com.liferay.portal.kernel.bean.BeanReference;
@@ -477,79 +477,79 @@ public abstract class LeaderWorkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Returns the office supply apply local service.
+	 * Returns the office supply requisition local service.
 	 *
-	 * @return the office supply apply local service
+	 * @return the office supply requisition local service
 	 */
-	public com.justonetech.oa.service.OfficeSupplyApplyLocalService getOfficeSupplyApplyLocalService() {
-		return officeSupplyApplyLocalService;
+	public com.justonetech.oa.service.OfficeSupplyRequisitionLocalService getOfficeSupplyRequisitionLocalService() {
+		return officeSupplyRequisitionLocalService;
 	}
 
 	/**
-	 * Sets the office supply apply local service.
+	 * Sets the office supply requisition local service.
 	 *
-	 * @param officeSupplyApplyLocalService the office supply apply local service
+	 * @param officeSupplyRequisitionLocalService the office supply requisition local service
 	 */
-	public void setOfficeSupplyApplyLocalService(
-		com.justonetech.oa.service.OfficeSupplyApplyLocalService officeSupplyApplyLocalService) {
-		this.officeSupplyApplyLocalService = officeSupplyApplyLocalService;
+	public void setOfficeSupplyRequisitionLocalService(
+		com.justonetech.oa.service.OfficeSupplyRequisitionLocalService officeSupplyRequisitionLocalService) {
+		this.officeSupplyRequisitionLocalService = officeSupplyRequisitionLocalService;
 	}
 
 	/**
-	 * Returns the office supply apply persistence.
+	 * Returns the office supply requisition persistence.
 	 *
-	 * @return the office supply apply persistence
+	 * @return the office supply requisition persistence
 	 */
-	public OfficeSupplyApplyPersistence getOfficeSupplyApplyPersistence() {
-		return officeSupplyApplyPersistence;
+	public OfficeSupplyRequisitionPersistence getOfficeSupplyRequisitionPersistence() {
+		return officeSupplyRequisitionPersistence;
 	}
 
 	/**
-	 * Sets the office supply apply persistence.
+	 * Sets the office supply requisition persistence.
 	 *
-	 * @param officeSupplyApplyPersistence the office supply apply persistence
+	 * @param officeSupplyRequisitionPersistence the office supply requisition persistence
 	 */
-	public void setOfficeSupplyApplyPersistence(
-		OfficeSupplyApplyPersistence officeSupplyApplyPersistence) {
-		this.officeSupplyApplyPersistence = officeSupplyApplyPersistence;
+	public void setOfficeSupplyRequisitionPersistence(
+		OfficeSupplyRequisitionPersistence officeSupplyRequisitionPersistence) {
+		this.officeSupplyRequisitionPersistence = officeSupplyRequisitionPersistence;
 	}
 
 	/**
-	 * Returns the office supply apply item local service.
+	 * Returns the office supply requisition item local service.
 	 *
-	 * @return the office supply apply item local service
+	 * @return the office supply requisition item local service
 	 */
-	public com.justonetech.oa.service.OfficeSupplyApplyItemLocalService getOfficeSupplyApplyItemLocalService() {
-		return officeSupplyApplyItemLocalService;
+	public com.justonetech.oa.service.OfficeSupplyRequisitionItemLocalService getOfficeSupplyRequisitionItemLocalService() {
+		return officeSupplyRequisitionItemLocalService;
 	}
 
 	/**
-	 * Sets the office supply apply item local service.
+	 * Sets the office supply requisition item local service.
 	 *
-	 * @param officeSupplyApplyItemLocalService the office supply apply item local service
+	 * @param officeSupplyRequisitionItemLocalService the office supply requisition item local service
 	 */
-	public void setOfficeSupplyApplyItemLocalService(
-		com.justonetech.oa.service.OfficeSupplyApplyItemLocalService officeSupplyApplyItemLocalService) {
-		this.officeSupplyApplyItemLocalService = officeSupplyApplyItemLocalService;
+	public void setOfficeSupplyRequisitionItemLocalService(
+		com.justonetech.oa.service.OfficeSupplyRequisitionItemLocalService officeSupplyRequisitionItemLocalService) {
+		this.officeSupplyRequisitionItemLocalService = officeSupplyRequisitionItemLocalService;
 	}
 
 	/**
-	 * Returns the office supply apply item persistence.
+	 * Returns the office supply requisition item persistence.
 	 *
-	 * @return the office supply apply item persistence
+	 * @return the office supply requisition item persistence
 	 */
-	public OfficeSupplyApplyItemPersistence getOfficeSupplyApplyItemPersistence() {
-		return officeSupplyApplyItemPersistence;
+	public OfficeSupplyRequisitionItemPersistence getOfficeSupplyRequisitionItemPersistence() {
+		return officeSupplyRequisitionItemPersistence;
 	}
 
 	/**
-	 * Sets the office supply apply item persistence.
+	 * Sets the office supply requisition item persistence.
 	 *
-	 * @param officeSupplyApplyItemPersistence the office supply apply item persistence
+	 * @param officeSupplyRequisitionItemPersistence the office supply requisition item persistence
 	 */
-	public void setOfficeSupplyApplyItemPersistence(
-		OfficeSupplyApplyItemPersistence officeSupplyApplyItemPersistence) {
-		this.officeSupplyApplyItemPersistence = officeSupplyApplyItemPersistence;
+	public void setOfficeSupplyRequisitionItemPersistence(
+		OfficeSupplyRequisitionItemPersistence officeSupplyRequisitionItemPersistence) {
+		this.officeSupplyRequisitionItemPersistence = officeSupplyRequisitionItemPersistence;
 	}
 
 	/**
@@ -786,14 +786,14 @@ public abstract class LeaderWorkLocalServiceBaseImpl
 	protected com.justonetech.oa.service.OfficeSupplyLocalService officeSupplyLocalService;
 	@BeanReference(type = OfficeSupplyPersistence.class)
 	protected OfficeSupplyPersistence officeSupplyPersistence;
-	@BeanReference(type = com.justonetech.oa.service.OfficeSupplyApplyLocalService.class)
-	protected com.justonetech.oa.service.OfficeSupplyApplyLocalService officeSupplyApplyLocalService;
-	@BeanReference(type = OfficeSupplyApplyPersistence.class)
-	protected OfficeSupplyApplyPersistence officeSupplyApplyPersistence;
-	@BeanReference(type = com.justonetech.oa.service.OfficeSupplyApplyItemLocalService.class)
-	protected com.justonetech.oa.service.OfficeSupplyApplyItemLocalService officeSupplyApplyItemLocalService;
-	@BeanReference(type = OfficeSupplyApplyItemPersistence.class)
-	protected OfficeSupplyApplyItemPersistence officeSupplyApplyItemPersistence;
+	@BeanReference(type = com.justonetech.oa.service.OfficeSupplyRequisitionLocalService.class)
+	protected com.justonetech.oa.service.OfficeSupplyRequisitionLocalService officeSupplyRequisitionLocalService;
+	@BeanReference(type = OfficeSupplyRequisitionPersistence.class)
+	protected OfficeSupplyRequisitionPersistence officeSupplyRequisitionPersistence;
+	@BeanReference(type = com.justonetech.oa.service.OfficeSupplyRequisitionItemLocalService.class)
+	protected com.justonetech.oa.service.OfficeSupplyRequisitionItemLocalService officeSupplyRequisitionItemLocalService;
+	@BeanReference(type = OfficeSupplyRequisitionItemPersistence.class)
+	protected OfficeSupplyRequisitionItemPersistence officeSupplyRequisitionItemPersistence;
 	@BeanReference(type = com.justonetech.oa.service.VehicleRequisitionLocalService.class)
 	protected com.justonetech.oa.service.VehicleRequisitionLocalService vehicleRequisitionLocalService;
 	@BeanReference(type = VehicleRequisitionPersistence.class)

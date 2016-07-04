@@ -80,7 +80,11 @@ public class DeptWorkItemModelImpl extends BaseModelImpl<DeptWorkItem>
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.finder.cache.enabled.com.justonetech.oa.model.DeptWorkItem"),
 			true);
-	public static final boolean COLUMN_BITMASK_ENABLED = false;
+	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
+				"value.object.column.bitmask.enabled.com.justonetech.oa.model.DeptWorkItem"),
+			true);
+	public static long DEPTWORKID_COLUMN_BITMASK = 1L;
+	public static long DEPTWORKITEMID_COLUMN_BITMASK = 2L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
 				"lock.expiration.time.com.justonetech.oa.model.DeptWorkItem"));
 
@@ -201,7 +205,19 @@ public class DeptWorkItemModelImpl extends BaseModelImpl<DeptWorkItem>
 
 	@Override
 	public void setDeptWorkId(long deptWorkId) {
+		_columnBitmask |= DEPTWORKID_COLUMN_BITMASK;
+
+		if (!_setOriginalDeptWorkId) {
+			_setOriginalDeptWorkId = true;
+
+			_originalDeptWorkId = _deptWorkId;
+		}
+
 		_deptWorkId = deptWorkId;
+	}
+
+	public long getOriginalDeptWorkId() {
+		return _originalDeptWorkId;
 	}
 
 	@Override
@@ -289,6 +305,10 @@ public class DeptWorkItemModelImpl extends BaseModelImpl<DeptWorkItem>
 		_agentPerson = agentPerson;
 	}
 
+	public long getColumnBitmask() {
+		return _columnBitmask;
+	}
+
 	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return ExpandoBridgeFactoryUtil.getExpandoBridge(0,
@@ -374,6 +394,13 @@ public class DeptWorkItemModelImpl extends BaseModelImpl<DeptWorkItem>
 
 	@Override
 	public void resetOriginalValues() {
+		DeptWorkItemModelImpl deptWorkItemModelImpl = this;
+
+		deptWorkItemModelImpl._originalDeptWorkId = deptWorkItemModelImpl._deptWorkId;
+
+		deptWorkItemModelImpl._setOriginalDeptWorkId = false;
+
+		deptWorkItemModelImpl._columnBitmask = 0;
 	}
 
 	@Override
@@ -500,11 +527,14 @@ public class DeptWorkItemModelImpl extends BaseModelImpl<DeptWorkItem>
 		};
 	private long _deptWorkItemId;
 	private long _deptWorkId;
+	private long _originalDeptWorkId;
+	private boolean _setOriginalDeptWorkId;
 	private int _sortNo;
 	private String _dutyPerosn;
 	private boolean _mainWork;
 	private String _schedule;
 	private String _content;
 	private String _agentPerson;
+	private long _columnBitmask;
 	private DeptWorkItem _escapedModel;
 }

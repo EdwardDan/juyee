@@ -87,6 +87,30 @@ create table oa_OfficeSupplyApplyItem (
 	quantity INTEGER
 );
 
+create table oa_OfficeSupplyRequisition (
+	officeSupplyRequisitionId LONG not null primary key,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createTime DATE null,
+	modifiedTime DATE null,
+	deptId LONG,
+	deptName VARCHAR(75) null,
+	applicantId LONG,
+	applicantName VARCHAR(75) null,
+	introductions VARCHAR(75) null
+);
+
+create table oa_OfficeSupplyRequisitionItem (
+	officeSupplyRequisitionItemId LONG not null primary key,
+	name VARCHAR(75) null,
+	model VARCHAR(75) null,
+	unit VARCHAR(75) null,
+	unitPrice DOUBLE,
+	quantity INTEGER,
+	officeSupplyRequisitionId LONG,
+	officeSupplyId LONG
+);
+
 create table oa_VehicleRequisition (
 	vehicleRequisitionId LONG not null primary key,
 	userId LONG,

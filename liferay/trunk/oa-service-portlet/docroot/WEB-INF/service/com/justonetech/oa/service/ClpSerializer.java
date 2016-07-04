@@ -18,9 +18,9 @@ import com.justonetech.oa.model.DeptWorkClp;
 import com.justonetech.oa.model.DeptWorkItemClp;
 import com.justonetech.oa.model.DispatchClp;
 import com.justonetech.oa.model.LeaderWorkClp;
-import com.justonetech.oa.model.OfficeSupplyApplyClp;
-import com.justonetech.oa.model.OfficeSupplyApplyItemClp;
 import com.justonetech.oa.model.OfficeSupplyClp;
+import com.justonetech.oa.model.OfficeSupplyRequisitionClp;
+import com.justonetech.oa.model.OfficeSupplyRequisitionItemClp;
 import com.justonetech.oa.model.VehicleRequisitionClp;
 
 import com.liferay.portal.kernel.exception.PortalException;
@@ -129,12 +129,13 @@ public class ClpSerializer {
 			return translateInputOfficeSupply(oldModel);
 		}
 
-		if (oldModelClassName.equals(OfficeSupplyApplyClp.class.getName())) {
-			return translateInputOfficeSupplyApply(oldModel);
+		if (oldModelClassName.equals(OfficeSupplyRequisitionClp.class.getName())) {
+			return translateInputOfficeSupplyRequisition(oldModel);
 		}
 
-		if (oldModelClassName.equals(OfficeSupplyApplyItemClp.class.getName())) {
-			return translateInputOfficeSupplyApplyItem(oldModel);
+		if (oldModelClassName.equals(
+					OfficeSupplyRequisitionItemClp.class.getName())) {
+			return translateInputOfficeSupplyRequisitionItem(oldModel);
 		}
 
 		if (oldModelClassName.equals(VehicleRequisitionClp.class.getName())) {
@@ -206,21 +207,22 @@ public class ClpSerializer {
 		return newModel;
 	}
 
-	public static Object translateInputOfficeSupplyApply(BaseModel<?> oldModel) {
-		OfficeSupplyApplyClp oldClpModel = (OfficeSupplyApplyClp)oldModel;
+	public static Object translateInputOfficeSupplyRequisition(
+		BaseModel<?> oldModel) {
+		OfficeSupplyRequisitionClp oldClpModel = (OfficeSupplyRequisitionClp)oldModel;
 
-		BaseModel<?> newModel = oldClpModel.getOfficeSupplyApplyRemoteModel();
+		BaseModel<?> newModel = oldClpModel.getOfficeSupplyRequisitionRemoteModel();
 
 		newModel.setModelAttributes(oldClpModel.getModelAttributes());
 
 		return newModel;
 	}
 
-	public static Object translateInputOfficeSupplyApplyItem(
+	public static Object translateInputOfficeSupplyRequisitionItem(
 		BaseModel<?> oldModel) {
-		OfficeSupplyApplyItemClp oldClpModel = (OfficeSupplyApplyItemClp)oldModel;
+		OfficeSupplyRequisitionItemClp oldClpModel = (OfficeSupplyRequisitionItemClp)oldModel;
 
-		BaseModel<?> newModel = oldClpModel.getOfficeSupplyApplyItemRemoteModel();
+		BaseModel<?> newModel = oldClpModel.getOfficeSupplyRequisitionItemRemoteModel();
 
 		newModel.setModelAttributes(oldClpModel.getModelAttributes());
 
@@ -440,8 +442,8 @@ public class ClpSerializer {
 		}
 
 		if (oldModelClassName.equals(
-					"com.justonetech.oa.model.impl.OfficeSupplyApplyImpl")) {
-			return translateOutputOfficeSupplyApply(oldModel);
+					"com.justonetech.oa.model.impl.OfficeSupplyRequisitionImpl")) {
+			return translateOutputOfficeSupplyRequisition(oldModel);
 		}
 		else if (oldModelClassName.endsWith("Clp")) {
 			try {
@@ -477,8 +479,8 @@ public class ClpSerializer {
 		}
 
 		if (oldModelClassName.equals(
-					"com.justonetech.oa.model.impl.OfficeSupplyApplyItemImpl")) {
-			return translateOutputOfficeSupplyApplyItem(oldModel);
+					"com.justonetech.oa.model.impl.OfficeSupplyRequisitionItemImpl")) {
+			return translateOutputOfficeSupplyRequisitionItem(oldModel);
 		}
 		else if (oldModelClassName.endsWith("Clp")) {
 			try {
@@ -651,13 +653,13 @@ public class ClpSerializer {
 		}
 
 		if (className.equals(
-					"com.justonetech.oa.NoSuchOfficeSupplyApplyException")) {
-			return new com.justonetech.oa.NoSuchOfficeSupplyApplyException();
+					"com.justonetech.oa.NoSuchOfficeSupplyRequisitionException")) {
+			return new com.justonetech.oa.NoSuchOfficeSupplyRequisitionException();
 		}
 
 		if (className.equals(
-					"com.justonetech.oa.NoSuchOfficeSupplyApplyItemException")) {
-			return new com.justonetech.oa.NoSuchOfficeSupplyApplyItemException();
+					"com.justonetech.oa.NoSuchOfficeSupplyRequisitionItemException")) {
+			return new com.justonetech.oa.NoSuchOfficeSupplyRequisitionItemException();
 		}
 
 		if (className.equals(
@@ -718,23 +720,24 @@ public class ClpSerializer {
 		return newModel;
 	}
 
-	public static Object translateOutputOfficeSupplyApply(BaseModel<?> oldModel) {
-		OfficeSupplyApplyClp newModel = new OfficeSupplyApplyClp();
+	public static Object translateOutputOfficeSupplyRequisition(
+		BaseModel<?> oldModel) {
+		OfficeSupplyRequisitionClp newModel = new OfficeSupplyRequisitionClp();
 
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
-		newModel.setOfficeSupplyApplyRemoteModel(oldModel);
+		newModel.setOfficeSupplyRequisitionRemoteModel(oldModel);
 
 		return newModel;
 	}
 
-	public static Object translateOutputOfficeSupplyApplyItem(
+	public static Object translateOutputOfficeSupplyRequisitionItem(
 		BaseModel<?> oldModel) {
-		OfficeSupplyApplyItemClp newModel = new OfficeSupplyApplyItemClp();
+		OfficeSupplyRequisitionItemClp newModel = new OfficeSupplyRequisitionItemClp();
 
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
-		newModel.setOfficeSupplyApplyItemRemoteModel(oldModel);
+		newModel.setOfficeSupplyRequisitionItemRemoteModel(oldModel);
 
 		return newModel;
 	}

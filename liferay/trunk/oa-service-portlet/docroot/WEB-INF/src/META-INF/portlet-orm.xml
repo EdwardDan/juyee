@@ -120,9 +120,9 @@
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
-	<mapped-superclass class="com.justonetech.oa.model.impl.OfficeSupplyApplyModelImpl">
+	<mapped-superclass class="com.justonetech.oa.model.impl.OfficeSupplyRequisitionModelImpl">
 		<attributes>
-			<id name="officeSupplyApplyId" />
+			<id name="officeSupplyRequisitionId" />
 			<basic name="userId" />
 			<basic name="userName" />
 			<basic name="createTime">
@@ -142,14 +142,16 @@
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
-	<mapped-superclass class="com.justonetech.oa.model.impl.OfficeSupplyApplyItemModelImpl">
+	<mapped-superclass class="com.justonetech.oa.model.impl.OfficeSupplyRequisitionItemModelImpl">
 		<attributes>
-			<id name="officeSupplyApplyItemId" />
+			<id name="officeSupplyRequisitionItemId" />
 			<basic name="name" />
 			<basic name="model" />
 			<basic name="unit" />
 			<basic name="unitPrice" />
 			<basic name="quantity" />
+			<basic name="officeSupplyRequisitionId" />
+			<basic name="officeSupplyId" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
@@ -205,12 +207,12 @@
 		<table name="oa_OfficeSupply" />
 		<attributes />
 	</entity>
-	<entity class="com.justonetech.oa.model.impl.OfficeSupplyApplyImpl" name="OfficeSupplyApply">
-		<table name="oa_OfficeSupplyApply" />
+	<entity class="com.justonetech.oa.model.impl.OfficeSupplyRequisitionImpl" name="OfficeSupplyRequisition">
+		<table name="oa_OfficeSupplyRequisition" />
 		<attributes />
 	</entity>
-	<entity class="com.justonetech.oa.model.impl.OfficeSupplyApplyItemImpl" name="OfficeSupplyApplyItem">
-		<table name="oa_OfficeSupplyApplyItem" />
+	<entity class="com.justonetech.oa.model.impl.OfficeSupplyRequisitionItemImpl" name="OfficeSupplyRequisitionItem">
+		<table name="oa_OfficeSupplyRequisitionItem" />
 		<attributes />
 	</entity>
 	<entity class="com.justonetech.oa.model.impl.VehicleRequisitionImpl" name="VehicleRequisition">

@@ -287,6 +287,19 @@ public class DeptWorkItemLocalServiceWrapper implements DeptWorkItemLocalService
 			arguments);
 	}
 
+	@Override
+	public java.util.List<com.justonetech.oa.model.DeptWorkItem> findByDeptWorkId(
+		long deptWorkId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _deptWorkItemLocalService.findByDeptWorkId(deptWorkId);
+	}
+
+	@Override
+	public int countByTitle(long deptWorkId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _deptWorkItemLocalService.countByTitle(deptWorkId);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

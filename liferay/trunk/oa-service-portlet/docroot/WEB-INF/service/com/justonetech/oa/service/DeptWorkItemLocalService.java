@@ -253,4 +253,11 @@ public interface DeptWorkItemLocalService extends BaseLocalService,
 	public java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
+
+	public java.util.List<com.justonetech.oa.model.DeptWorkItem> findByDeptWorkId(
+		long deptWorkId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int countByTitle(long deptWorkId)
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

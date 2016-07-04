@@ -11,10 +11,10 @@
 	<bean id="com.justonetech.oa.service.persistence.LeaderWorkPersistence" class="com.justonetech.oa.service.persistence.LeaderWorkPersistenceImpl" parent="basePersistence" />
 	<bean id="com.justonetech.oa.service.OfficeSupplyLocalService" class="com.justonetech.oa.service.impl.OfficeSupplyLocalServiceImpl" />
 	<bean id="com.justonetech.oa.service.persistence.OfficeSupplyPersistence" class="com.justonetech.oa.service.persistence.OfficeSupplyPersistenceImpl" parent="basePersistence" />
-	<bean id="com.justonetech.oa.service.OfficeSupplyApplyLocalService" class="com.justonetech.oa.service.impl.OfficeSupplyApplyLocalServiceImpl" />
-	<bean id="com.justonetech.oa.service.persistence.OfficeSupplyApplyPersistence" class="com.justonetech.oa.service.persistence.OfficeSupplyApplyPersistenceImpl" parent="basePersistence" />
-	<bean id="com.justonetech.oa.service.OfficeSupplyApplyItemLocalService" class="com.justonetech.oa.service.impl.OfficeSupplyApplyItemLocalServiceImpl" />
-	<bean id="com.justonetech.oa.service.persistence.OfficeSupplyApplyItemPersistence" class="com.justonetech.oa.service.persistence.OfficeSupplyApplyItemPersistenceImpl" parent="basePersistence" />
+	<bean id="com.justonetech.oa.service.OfficeSupplyRequisitionLocalService" class="com.justonetech.oa.service.impl.OfficeSupplyRequisitionLocalServiceImpl" />
+	<bean id="com.justonetech.oa.service.persistence.OfficeSupplyRequisitionPersistence" class="com.justonetech.oa.service.persistence.OfficeSupplyRequisitionPersistenceImpl" parent="basePersistence" />
+	<bean id="com.justonetech.oa.service.OfficeSupplyRequisitionItemLocalService" class="com.justonetech.oa.service.impl.OfficeSupplyRequisitionItemLocalServiceImpl" />
+	<bean id="com.justonetech.oa.service.persistence.OfficeSupplyRequisitionItemPersistence" class="com.justonetech.oa.service.persistence.OfficeSupplyRequisitionItemPersistenceImpl" parent="basePersistence" />
 	<bean id="com.justonetech.oa.service.VehicleRequisitionLocalService" class="com.justonetech.oa.service.impl.VehicleRequisitionLocalServiceImpl" />
 	<bean id="com.justonetech.oa.service.persistence.VehicleRequisitionPersistence" class="com.justonetech.oa.service.persistence.VehicleRequisitionPersistenceImpl" parent="basePersistence" />
 </beans>

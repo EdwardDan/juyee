@@ -275,6 +275,17 @@ public class DeptWorkItemLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static java.util.List<com.justonetech.oa.model.DeptWorkItem> findByDeptWorkId(
+		long deptWorkId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().findByDeptWorkId(deptWorkId);
+	}
+
+	public static int countByTitle(long deptWorkId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().countByTitle(deptWorkId);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}
