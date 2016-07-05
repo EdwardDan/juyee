@@ -14,7 +14,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/xml" prefix="x"%>
-
+<%@ page import="com.liferay.portal.model.*"%>
+<%@ page import="com.liferay.portal.service.*"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.liferay.portal.kernel.util.*"%>
 <%@ page import="com.liferay.portal.kernel.dao.search.RowChecker"%>
