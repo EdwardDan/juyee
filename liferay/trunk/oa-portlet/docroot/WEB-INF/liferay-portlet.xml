@@ -42,14 +42,14 @@
 		<css-class-wrapper>send-dispatch-portlet</css-class-wrapper>
 	</portlet>
 	<portlet>
-		<portlet-name>vehicle-requisition</portlet-name>
+		<portlet-name>vehicle-application</portlet-name>
 		<icon>/icons/icon.png</icon>
 		<header-portlet-css>/css/main.css</header-portlet-css>
 		<footer-portlet-javascript>
 			/js/main.js
 		</footer-portlet-javascript>
 		<css-class-wrapper>
-			vehicle-requisition-portlet
+			vehicle-application-portlet
 		</css-class-wrapper>
 	</portlet>
 	<portlet>

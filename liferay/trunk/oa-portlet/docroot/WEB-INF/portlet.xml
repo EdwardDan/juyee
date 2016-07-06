@@ -140,14 +140,14 @@
 		</security-role-ref>
 	</portlet>
 	<portlet>
-		<portlet-name>vehicle-requisition</portlet-name>
+		<portlet-name>vehicle-application</portlet-name>
 		<display-name>车辆申请</display-name>
 		<portlet-class>
-			com.justonetech.oa.portlet.VehicleRequisitionPortlet
+			com.justonetech.oa.portlet.VehicleApplicationPortlet
 		</portlet-class>
 		<init-param>
 			<name>view-template</name>
-			<value>/portlet/vehicle-requisition/view.jsp</value>
+			<value>/portlet/vehicle-application/view.jsp</value>
 		</init-param>
 		<init-param>
 			<name>copy-request-parameters</name>
@@ -160,7 +160,7 @@
 		</supports>
 		<portlet-info>
 			<title>车辆申请</title>
-			<short-title>Vehicle Requisition</short-title>
+			<short-title>Vehicle Application</short-title>
 			<keywords></keywords>
 		</portlet-info>
 		<security-role-ref>
