@@ -7,7 +7,6 @@
 	<portlet:param name="redirect" value="${viewURL}" />
 </portlet:actionURL>
 <aui:form action="${viewURL }" name="fm">
-<%SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd"); %>
 	<aui:nav-bar>
 		<aui:nav>
 			<portlet:renderURL var="addDispatchURL">
@@ -42,17 +41,17 @@
 			 <%
 			Dictionary organaAbbreviation = DictionaryLocalServiceUtil.getDictionary(dispatch.getOrganaAbbreviation());
 			%> 
-			<liferay-ui:search-container-column-text name="沪交建" value="<%=organaAbbreviation.getName()%>"/>
+			<liferay-ui:search-container-column-text name="发文机关代字" value="<%=organaAbbreviation.getName()%>"/>
 			 <%
 			Dictionary year = DictionaryLocalServiceUtil.getDictionary(dispatch.getYear());
 			%> 
-			<liferay-ui:search-container-column-text name="年" value="<%=year.getName()%>"/>
-			<liferay-ui:search-container-column-text property="serialNo" name="号" />
+			<liferay-ui:search-container-column-text name="发文年份" value="<%=year.getName()%>"/>
+			<liferay-ui:search-container-column-text property="serialNo" name="文件顺序号" />
 			<liferay-ui:search-container-column-text property="title" name="发文标题" />
 			<liferay-ui:search-container-column-text property="sendOrgan" name="主送机关"/>
 			<liferay-ui:search-container-column-text property="ccOrgan" name="抄送机关"/>
 			<liferay-ui:search-container-column-text property="writtenOrgan" name="成文机关"/>
-			<liferay-ui:search-container-column-text name="成文日期" value="<%=sdf.format(dispatch.getWrittenDate()) %>"/>
+			<liferay-ui:search-container-column-text name="成文日期" value="<%=DateUtil.getDate(dispatch.getWrittenDate(), defaultDateFormatPattern, locale, timeZone) %>"/>
 			 <%
 			Dictionary urgencyDegree = DictionaryLocalServiceUtil.getDictionary(dispatch.getUrgencyDegree());
 			%> 
@@ -60,7 +59,7 @@
 			<liferay-ui:search-container-column-text>
 				<liferay-ui:icon-menu>
 					<portlet:actionURL var="editDispatchURL" name="editDispatch">
-						<portlet:param name="dispatchId" value="${Dispatch.dispatchId}" />
+						<portlet:param name="dispatchId" value="${dispatch.dispatchId}" />
 						<portlet:param name="mvcPath" value="${contentPath}/edit-dispatch.jsp" />
 					</portlet:actionURL>
 					<liferay-ui:icon image="edit" label="编辑" url="${editDispatchURL}" />

@@ -1,22 +1,20 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
-<script type="text/javascript"
-	src="/html/js/My97DatePicker/WdatePicker.js"></script>
+<script src="${staticServerURL}/My97DatePicker/WdatePicker.js"></script>
 <%
 	long groupId = PortalUtil.getScopeGroupId(request);
 	Dispatch dispatch = (Dispatch) request.getAttribute("dispatch");
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	String writtenDateFormat = "";
 	if (null != dispatch) {
-		writtenDateFormat = sdf.format(dispatch.getWrittenDate());
+		writtenDateFormat = DateUtil.getDate(dispatch.getWrittenDate(), defaultDateFormatPattern, locale, timeZone);
 	}
 %>
 
 <c:set var="contentPath"
 	value="${request.contextPath}/portlet/send-Dispatch" />
-<portlet:renderURL var="viewURL" />
+	<portlet:renderURL var="viewURL" />
 <aui:model-context bean="${dispatch}" model="<%=Dispatch.class %>" />
-<portlet:renderURL var="viewURL" />
+
 <liferay-ui:header title='${empty dispatch?"添加":"编辑"}发文记录'
 	backURL="${viewURL }" />
 <portlet:actionURL var="saveDispatchURL" name="saveDispatch">
@@ -55,7 +53,7 @@
 							}}
 			%>
 		</aui:select>
-		<aui:select name="organaAbbreviation" label="沪交建">
+		<aui:select name="organaAbbreviation" label="发文机关代字">
 			<%
 				Dictionary dictionary = DictionaryLocalServiceUtil
 									.findByGroupIdAndCode(groupId,
@@ -71,7 +69,7 @@
 							}}
 			%>
 		</aui:select>
-		<aui:select name="year" label="年">
+		<aui:select name="year" label="发文年份">
 			<%
 				Dictionary dictionary = DictionaryLocalServiceUtil
 									.findByGroupIdAndCode(groupId, "year");
@@ -88,15 +86,25 @@
 							}
 			%>
 		</aui:select>
-		<aui:input name="serialNo" label="号" />
-		<aui:input name="title" label="发文标题" />
-		<aui:input name="sendOrgan" label="主送机关" />
-		<aui:input name="ccOrgan" label="抄送机关" />
-		<aui:input name="writtenOrgan" label="成文机关" />
+		<aui:input name="serialNo" label="文件顺序号">
+		<aui:validator name="required"/>
+		<aui:validator name="number" />
+		</aui:input>
+		<aui:input name="title" label="发文标题">
+		<aui:validator name="required"/>
+		</aui:input>
+		<aui:input name="sendOrgan" label="主送机关">
+		<aui:validator name="required"/>
+		</aui:input>
+		<aui:input name="ccOrgan" label="抄送机关">
+		<aui:validator name="required"/>
+		</aui:input>
+		<aui:input name="writtenOrgan" label="成文机关">
+		<aui:validator name="required"/>
+		</aui:input>
 		<aui:input type="text" cssClass="Wdate" name="writtenDateFormat"
 			label="成文日期" onfocus="WdatePicker({lang:'zh-cn'})"
 			value="<%=writtenDateFormat%>" />
-		<%--  <input type="text" name="<portlet:namespace/>writtenDate" class="Wdate "  onfocus="WdatePicker({lang:'zh-cn'})" value="<fmt:formatDate value="${dispatch.writtenDate}" pattern="yyyy-MM-dd"/> "/> --%>
 		<aui:select name="urgencyDegree" label="紧急程度">
 			<%
 				Dictionary dictionary = DictionaryLocalServiceUtil
