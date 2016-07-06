@@ -114,13 +114,17 @@ public class OfficeSupplyRequisitionLocalServiceClpInvoker {
 
 		_methodParameterTypes61 = new String[] { "java.lang.String" };
 
-		_methodName66 = "findByDeptWorkId";
+		_methodName66 = "findByOfficeSupplyRequisitionId";
 
 		_methodParameterTypes66 = new String[] { "long" };
 
 		_methodName67 = "countByOfficeSupplyRequisitionId";
 
 		_methodParameterTypes67 = new String[] { "long" };
+
+		_methodName68 = "deleteOfficeSupplyRequisitions";
+
+		_methodParameterTypes68 = new String[] { "java.lang.String[][]" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -226,12 +230,19 @@ public class OfficeSupplyRequisitionLocalServiceClpInvoker {
 
 		if (_methodName66.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes66, parameterTypes)) {
-			return OfficeSupplyRequisitionLocalServiceUtil.findByDeptWorkId(((Long)arguments[0]).longValue());
+			return OfficeSupplyRequisitionLocalServiceUtil.findByOfficeSupplyRequisitionId(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName67.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes67, parameterTypes)) {
 			return OfficeSupplyRequisitionLocalServiceUtil.countByOfficeSupplyRequisitionId(((Long)arguments[0]).longValue());
+		}
+
+		if (_methodName68.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes68, parameterTypes)) {
+			OfficeSupplyRequisitionLocalServiceUtil.deleteOfficeSupplyRequisitions((java.lang.String[])arguments[0]);
+
+			return null;
 		}
 
 		throw new UnsupportedOperationException();
@@ -277,4 +288,6 @@ public class OfficeSupplyRequisitionLocalServiceClpInvoker {
 	private String[] _methodParameterTypes66;
 	private String _methodName67;
 	private String[] _methodParameterTypes67;
+	private String _methodName68;
+	private String[] _methodParameterTypes68;
 }

@@ -113,18 +113,6 @@ public class OfficeSupplyLocalServiceClpInvoker {
 		_methodName61 = "setBeanIdentifier";
 
 		_methodParameterTypes61 = new String[] { "java.lang.String" };
-
-		_methodName66 = "findByName";
-
-		_methodParameterTypes66 = new String[] { "java.lang.String", "int", "int" };
-
-		_methodName67 = "countByName";
-
-		_methodParameterTypes67 = new String[] { "java.lang.String" };
-
-		_methodName68 = "deleteOfficeSupplies";
-
-		_methodParameterTypes68 = new String[] { "java.lang.String[][]" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -228,25 +216,6 @@ public class OfficeSupplyLocalServiceClpInvoker {
 			return null;
 		}
 
-		if (_methodName66.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes66, parameterTypes)) {
-			return OfficeSupplyLocalServiceUtil.findByName((java.lang.String)arguments[0],
-				((Integer)arguments[1]).intValue(),
-				((Integer)arguments[2]).intValue());
-		}
-
-		if (_methodName67.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes67, parameterTypes)) {
-			return OfficeSupplyLocalServiceUtil.countByName((java.lang.String)arguments[0]);
-		}
-
-		if (_methodName68.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes68, parameterTypes)) {
-			OfficeSupplyLocalServiceUtil.deleteOfficeSupplies((java.lang.String[])arguments[0]);
-
-			return null;
-		}
-
 		throw new UnsupportedOperationException();
 	}
 
@@ -286,10 +255,4 @@ public class OfficeSupplyLocalServiceClpInvoker {
 	private String[] _methodParameterTypes60;
 	private String _methodName61;
 	private String[] _methodParameterTypes61;
-	private String _methodName66;
-	private String[] _methodParameterTypes66;
-	private String _methodName67;
-	private String[] _methodParameterTypes67;
-	private String _methodName68;
-	private String[] _methodParameterTypes68;
 }

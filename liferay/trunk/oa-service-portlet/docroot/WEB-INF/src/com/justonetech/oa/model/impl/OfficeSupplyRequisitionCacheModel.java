@@ -38,7 +38,7 @@ public class OfficeSupplyRequisitionCacheModel implements CacheModel<OfficeSuppl
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(21);
+		StringBundler sb = new StringBundler(17);
 
 		sb.append("{officeSupplyRequisitionId=");
 		sb.append(officeSupplyRequisitionId);
@@ -54,10 +54,6 @@ public class OfficeSupplyRequisitionCacheModel implements CacheModel<OfficeSuppl
 		sb.append(deptId);
 		sb.append(", deptName=");
 		sb.append(deptName);
-		sb.append(", applicantId=");
-		sb.append(applicantId);
-		sb.append(", applicantName=");
-		sb.append(applicantName);
 		sb.append(", introductions=");
 		sb.append(introductions);
 		sb.append("}");
@@ -102,15 +98,6 @@ public class OfficeSupplyRequisitionCacheModel implements CacheModel<OfficeSuppl
 			officeSupplyRequisitionImpl.setDeptName(deptName);
 		}
 
-		officeSupplyRequisitionImpl.setApplicantId(applicantId);
-
-		if (applicantName == null) {
-			officeSupplyRequisitionImpl.setApplicantName(StringPool.BLANK);
-		}
-		else {
-			officeSupplyRequisitionImpl.setApplicantName(applicantName);
-		}
-
 		if (introductions == null) {
 			officeSupplyRequisitionImpl.setIntroductions(StringPool.BLANK);
 		}
@@ -132,8 +119,6 @@ public class OfficeSupplyRequisitionCacheModel implements CacheModel<OfficeSuppl
 		modifiedTime = objectInput.readLong();
 		deptId = objectInput.readLong();
 		deptName = objectInput.readUTF();
-		applicantId = objectInput.readLong();
-		applicantName = objectInput.readUTF();
 		introductions = objectInput.readUTF();
 	}
 
@@ -161,15 +146,6 @@ public class OfficeSupplyRequisitionCacheModel implements CacheModel<OfficeSuppl
 			objectOutput.writeUTF(deptName);
 		}
 
-		objectOutput.writeLong(applicantId);
-
-		if (applicantName == null) {
-			objectOutput.writeUTF(StringPool.BLANK);
-		}
-		else {
-			objectOutput.writeUTF(applicantName);
-		}
-
 		if (introductions == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
@@ -185,7 +161,5 @@ public class OfficeSupplyRequisitionCacheModel implements CacheModel<OfficeSuppl
 	public long modifiedTime;
 	public long deptId;
 	public String deptName;
-	public long applicantId;
-	public String applicantName;
 	public String introductions;
 }

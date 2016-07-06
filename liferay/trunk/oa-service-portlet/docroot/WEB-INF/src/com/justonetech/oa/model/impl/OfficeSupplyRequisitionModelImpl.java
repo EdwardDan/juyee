@@ -69,11 +69,9 @@ public class OfficeSupplyRequisitionModelImpl extends BaseModelImpl<OfficeSupply
 			{ "modifiedTime", Types.TIMESTAMP },
 			{ "deptId", Types.BIGINT },
 			{ "deptName", Types.VARCHAR },
-			{ "applicantId", Types.BIGINT },
-			{ "applicantName", Types.VARCHAR },
 			{ "introductions", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table oa_OfficeSupplyRequisition (officeSupplyRequisitionId LONG not null primary key,userId LONG,userName VARCHAR(75) null,createTime DATE null,modifiedTime DATE null,deptId LONG,deptName VARCHAR(75) null,applicantId LONG,applicantName VARCHAR(75) null,introductions VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table oa_OfficeSupplyRequisition (officeSupplyRequisitionId LONG not null primary key,userId LONG,userName VARCHAR(75) null,createTime DATE null,modifiedTime DATE null,deptId LONG,deptName VARCHAR(75) null,introductions VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table oa_OfficeSupplyRequisition";
 	public static final String ORDER_BY_JPQL = " ORDER BY officeSupplyRequisition.modifiedTime DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY oa_OfficeSupplyRequisition.modifiedTime DESC";
@@ -86,12 +84,7 @@ public class OfficeSupplyRequisitionModelImpl extends BaseModelImpl<OfficeSupply
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.finder.cache.enabled.com.justonetech.oa.model.OfficeSupplyRequisition"),
 			true);
-	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
-				"value.object.column.bitmask.enabled.com.justonetech.oa.model.OfficeSupplyRequisition"),
-			true);
-	public static long APPLICANTNAME_COLUMN_BITMASK = 1L;
-	public static long DEPTNAME_COLUMN_BITMASK = 2L;
-	public static long MODIFIEDTIME_COLUMN_BITMASK = 4L;
+	public static final boolean COLUMN_BITMASK_ENABLED = false;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
 				"lock.expiration.time.com.justonetech.oa.model.OfficeSupplyRequisition"));
 
@@ -140,8 +133,6 @@ public class OfficeSupplyRequisitionModelImpl extends BaseModelImpl<OfficeSupply
 		attributes.put("modifiedTime", getModifiedTime());
 		attributes.put("deptId", getDeptId());
 		attributes.put("deptName", getDeptName());
-		attributes.put("applicantId", getApplicantId());
-		attributes.put("applicantName", getApplicantName());
 		attributes.put("introductions", getIntroductions());
 
 		return attributes;
@@ -190,18 +181,6 @@ public class OfficeSupplyRequisitionModelImpl extends BaseModelImpl<OfficeSupply
 
 		if (deptName != null) {
 			setDeptName(deptName);
-		}
-
-		Long applicantId = (Long)attributes.get("applicantId");
-
-		if (applicantId != null) {
-			setApplicantId(applicantId);
-		}
-
-		String applicantName = (String)attributes.get("applicantName");
-
-		if (applicantName != null) {
-			setApplicantName(applicantName);
 		}
 
 		String introductions = (String)attributes.get("introductions");
@@ -273,8 +252,6 @@ public class OfficeSupplyRequisitionModelImpl extends BaseModelImpl<OfficeSupply
 
 	@Override
 	public void setModifiedTime(Date modifiedTime) {
-		_columnBitmask = -1L;
-
 		_modifiedTime = modifiedTime;
 	}
 
@@ -300,52 +277,7 @@ public class OfficeSupplyRequisitionModelImpl extends BaseModelImpl<OfficeSupply
 
 	@Override
 	public void setDeptName(String deptName) {
-		_columnBitmask |= DEPTNAME_COLUMN_BITMASK;
-
-		if (_originalDeptName == null) {
-			_originalDeptName = _deptName;
-		}
-
 		_deptName = deptName;
-	}
-
-	public String getOriginalDeptName() {
-		return GetterUtil.getString(_originalDeptName);
-	}
-
-	@Override
-	public long getApplicantId() {
-		return _applicantId;
-	}
-
-	@Override
-	public void setApplicantId(long applicantId) {
-		_applicantId = applicantId;
-	}
-
-	@Override
-	public String getApplicantName() {
-		if (_applicantName == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _applicantName;
-		}
-	}
-
-	@Override
-	public void setApplicantName(String applicantName) {
-		_columnBitmask |= APPLICANTNAME_COLUMN_BITMASK;
-
-		if (_originalApplicantName == null) {
-			_originalApplicantName = _applicantName;
-		}
-
-		_applicantName = applicantName;
-	}
-
-	public String getOriginalApplicantName() {
-		return GetterUtil.getString(_originalApplicantName);
 	}
 
 	@Override
@@ -361,10 +293,6 @@ public class OfficeSupplyRequisitionModelImpl extends BaseModelImpl<OfficeSupply
 	@Override
 	public void setIntroductions(String introductions) {
 		_introductions = introductions;
-	}
-
-	public long getColumnBitmask() {
-		return _columnBitmask;
 	}
 
 	@Override
@@ -401,8 +329,6 @@ public class OfficeSupplyRequisitionModelImpl extends BaseModelImpl<OfficeSupply
 		officeSupplyRequisitionImpl.setModifiedTime(getModifiedTime());
 		officeSupplyRequisitionImpl.setDeptId(getDeptId());
 		officeSupplyRequisitionImpl.setDeptName(getDeptName());
-		officeSupplyRequisitionImpl.setApplicantId(getApplicantId());
-		officeSupplyRequisitionImpl.setApplicantName(getApplicantName());
 		officeSupplyRequisitionImpl.setIntroductions(getIntroductions());
 
 		officeSupplyRequisitionImpl.resetOriginalValues();
@@ -455,13 +381,6 @@ public class OfficeSupplyRequisitionModelImpl extends BaseModelImpl<OfficeSupply
 
 	@Override
 	public void resetOriginalValues() {
-		OfficeSupplyRequisitionModelImpl officeSupplyRequisitionModelImpl = this;
-
-		officeSupplyRequisitionModelImpl._originalDeptName = officeSupplyRequisitionModelImpl._deptName;
-
-		officeSupplyRequisitionModelImpl._originalApplicantName = officeSupplyRequisitionModelImpl._applicantName;
-
-		officeSupplyRequisitionModelImpl._columnBitmask = 0;
 	}
 
 	@Override
@@ -508,16 +427,6 @@ public class OfficeSupplyRequisitionModelImpl extends BaseModelImpl<OfficeSupply
 			officeSupplyRequisitionCacheModel.deptName = null;
 		}
 
-		officeSupplyRequisitionCacheModel.applicantId = getApplicantId();
-
-		officeSupplyRequisitionCacheModel.applicantName = getApplicantName();
-
-		String applicantName = officeSupplyRequisitionCacheModel.applicantName;
-
-		if ((applicantName != null) && (applicantName.length() == 0)) {
-			officeSupplyRequisitionCacheModel.applicantName = null;
-		}
-
 		officeSupplyRequisitionCacheModel.introductions = getIntroductions();
 
 		String introductions = officeSupplyRequisitionCacheModel.introductions;
@@ -531,7 +440,7 @@ public class OfficeSupplyRequisitionModelImpl extends BaseModelImpl<OfficeSupply
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(21);
+		StringBundler sb = new StringBundler(17);
 
 		sb.append("{officeSupplyRequisitionId=");
 		sb.append(getOfficeSupplyRequisitionId());
@@ -547,10 +456,6 @@ public class OfficeSupplyRequisitionModelImpl extends BaseModelImpl<OfficeSupply
 		sb.append(getDeptId());
 		sb.append(", deptName=");
 		sb.append(getDeptName());
-		sb.append(", applicantId=");
-		sb.append(getApplicantId());
-		sb.append(", applicantName=");
-		sb.append(getApplicantName());
 		sb.append(", introductions=");
 		sb.append(getIntroductions());
 		sb.append("}");
@@ -560,7 +465,7 @@ public class OfficeSupplyRequisitionModelImpl extends BaseModelImpl<OfficeSupply
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(34);
+		StringBundler sb = new StringBundler(28);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.oa.model.OfficeSupplyRequisition");
@@ -595,14 +500,6 @@ public class OfficeSupplyRequisitionModelImpl extends BaseModelImpl<OfficeSupply
 		sb.append(getDeptName());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>applicantId</column-name><column-value><![CDATA[");
-		sb.append(getApplicantId());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>applicantName</column-name><column-value><![CDATA[");
-		sb.append(getApplicantName());
-		sb.append("]]></column-value></column>");
-		sb.append(
 			"<column><column-name>introductions</column-name><column-value><![CDATA[");
 		sb.append(getIntroductions());
 		sb.append("]]></column-value></column>");
@@ -624,11 +521,6 @@ public class OfficeSupplyRequisitionModelImpl extends BaseModelImpl<OfficeSupply
 	private Date _modifiedTime;
 	private long _deptId;
 	private String _deptName;
-	private String _originalDeptName;
-	private long _applicantId;
-	private String _applicantName;
-	private String _originalApplicantName;
 	private String _introductions;
-	private long _columnBitmask;
 	private OfficeSupplyRequisition _escapedModel;
 }

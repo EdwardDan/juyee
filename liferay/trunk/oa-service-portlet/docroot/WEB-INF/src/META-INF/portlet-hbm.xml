@@ -97,8 +97,6 @@
 		<property name="modifiedTime" type="org.hibernate.type.TimestampType" />
 		<property name="deptId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="deptName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="applicantId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="applicantName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="introductions" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="com.justonetech.oa.model.impl.OfficeSupplyRequisitionItemImpl" table="oa_OfficeSupplyRequisitionItem">

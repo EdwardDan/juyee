@@ -59,8 +59,6 @@ public class OfficeSupplyRequisitionWrapper implements OfficeSupplyRequisition,
 		attributes.put("modifiedTime", getModifiedTime());
 		attributes.put("deptId", getDeptId());
 		attributes.put("deptName", getDeptName());
-		attributes.put("applicantId", getApplicantId());
-		attributes.put("applicantName", getApplicantName());
 		attributes.put("introductions", getIntroductions());
 
 		return attributes;
@@ -109,18 +107,6 @@ public class OfficeSupplyRequisitionWrapper implements OfficeSupplyRequisition,
 
 		if (deptName != null) {
 			setDeptName(deptName);
-		}
-
-		Long applicantId = (Long)attributes.get("applicantId");
-
-		if (applicantId != null) {
-			setApplicantId(applicantId);
-		}
-
-		String applicantName = (String)attributes.get("applicantName");
-
-		if (applicantName != null) {
-			setApplicantName(applicantName);
 		}
 
 		String introductions = (String)attributes.get("introductions");
@@ -310,46 +296,6 @@ public class OfficeSupplyRequisitionWrapper implements OfficeSupplyRequisition,
 	@Override
 	public void setDeptName(java.lang.String deptName) {
 		_officeSupplyRequisition.setDeptName(deptName);
-	}
-
-	/**
-	* Returns the applicant ID of this office supply requisition.
-	*
-	* @return the applicant ID of this office supply requisition
-	*/
-	@Override
-	public long getApplicantId() {
-		return _officeSupplyRequisition.getApplicantId();
-	}
-
-	/**
-	* Sets the applicant ID of this office supply requisition.
-	*
-	* @param applicantId the applicant ID of this office supply requisition
-	*/
-	@Override
-	public void setApplicantId(long applicantId) {
-		_officeSupplyRequisition.setApplicantId(applicantId);
-	}
-
-	/**
-	* Returns the applicant name of this office supply requisition.
-	*
-	* @return the applicant name of this office supply requisition
-	*/
-	@Override
-	public java.lang.String getApplicantName() {
-		return _officeSupplyRequisition.getApplicantName();
-	}
-
-	/**
-	* Sets the applicant name of this office supply requisition.
-	*
-	* @param applicantName the applicant name of this office supply requisition
-	*/
-	@Override
-	public void setApplicantName(java.lang.String applicantName) {
-		_officeSupplyRequisition.setApplicantName(applicantName);
 	}
 
 	/**

@@ -116,13 +116,17 @@ public class OfficeSupplyRequisitionLocalServiceClp
 
 		_methodParameterTypes17 = new String[] { "java.lang.String" };
 
-		_methodName19 = "findByDeptWorkId";
+		_methodName19 = "findByOfficeSupplyRequisitionId";
 
 		_methodParameterTypes19 = new String[] { "long" };
 
 		_methodName20 = "countByOfficeSupplyRequisitionId";
 
 		_methodParameterTypes20 = new String[] { "long" };
+
+		_methodName21 = "deleteOfficeSupplyRequisitions";
+
+		_methodParameterTypes21 = new String[] { "java.lang.String[][]" };
 	}
 
 	@Override
@@ -686,7 +690,7 @@ public class OfficeSupplyRequisitionLocalServiceClp
 	}
 
 	@Override
-	public java.util.List<com.justonetech.oa.model.OfficeSupplyRequisitionItem> findByDeptWorkId(
+	public java.util.List<com.justonetech.oa.model.OfficeSupplyRequisitionItem> findByOfficeSupplyRequisitionId(
 		long officeSupplyRequisitionId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
@@ -744,6 +748,29 @@ public class OfficeSupplyRequisitionLocalServiceClp
 		return ((Integer)returnObj).intValue();
 	}
 
+	@Override
+	public void deleteOfficeSupplyRequisitions(
+		java.lang.String[] officeSupplyRequisitionIds) {
+		try {
+			_invokableLocalService.invokeMethod(_methodName21,
+				_methodParameterTypes21,
+				new Object[] {
+					ClpSerializer.translateInput(officeSupplyRequisitionIds)
+				});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -785,4 +812,6 @@ public class OfficeSupplyRequisitionLocalServiceClp
 	private String[] _methodParameterTypes19;
 	private String _methodName20;
 	private String[] _methodParameterTypes20;
+	private String _methodName21;
+	private String[] _methodParameterTypes21;
 }

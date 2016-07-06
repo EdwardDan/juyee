@@ -254,10 +254,13 @@ public interface OfficeSupplyRequisitionLocalService extends BaseLocalService,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
 
-	public java.util.List<com.justonetech.oa.model.OfficeSupplyRequisitionItem> findByDeptWorkId(
+	public java.util.List<com.justonetech.oa.model.OfficeSupplyRequisitionItem> findByOfficeSupplyRequisitionId(
 		long officeSupplyRequisitionId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public int countByOfficeSupplyRequisitionId(long officeSupplyRequisitionId)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public void deleteOfficeSupplyRequisitions(
+		java.lang.String[] officeSupplyRequisitionIds);
 }

@@ -84,8 +84,6 @@ public class OfficeSupplyRequisitionClp extends BaseModelImpl<OfficeSupplyRequis
 		attributes.put("modifiedTime", getModifiedTime());
 		attributes.put("deptId", getDeptId());
 		attributes.put("deptName", getDeptName());
-		attributes.put("applicantId", getApplicantId());
-		attributes.put("applicantName", getApplicantName());
 		attributes.put("introductions", getIntroductions());
 
 		return attributes;
@@ -134,18 +132,6 @@ public class OfficeSupplyRequisitionClp extends BaseModelImpl<OfficeSupplyRequis
 
 		if (deptName != null) {
 			setDeptName(deptName);
-		}
-
-		Long applicantId = (Long)attributes.get("applicantId");
-
-		if (applicantId != null) {
-			setApplicantId(applicantId);
-		}
-
-		String applicantName = (String)attributes.get("applicantName");
-
-		if (applicantName != null) {
-			setApplicantName(applicantName);
 		}
 
 		String introductions = (String)attributes.get("introductions");
@@ -329,52 +315,6 @@ public class OfficeSupplyRequisitionClp extends BaseModelImpl<OfficeSupplyRequis
 	}
 
 	@Override
-	public long getApplicantId() {
-		return _applicantId;
-	}
-
-	@Override
-	public void setApplicantId(long applicantId) {
-		_applicantId = applicantId;
-
-		if (_officeSupplyRequisitionRemoteModel != null) {
-			try {
-				Class<?> clazz = _officeSupplyRequisitionRemoteModel.getClass();
-
-				Method method = clazz.getMethod("setApplicantId", long.class);
-
-				method.invoke(_officeSupplyRequisitionRemoteModel, applicantId);
-			}
-			catch (Exception e) {
-				throw new UnsupportedOperationException(e);
-			}
-		}
-	}
-
-	@Override
-	public String getApplicantName() {
-		return _applicantName;
-	}
-
-	@Override
-	public void setApplicantName(String applicantName) {
-		_applicantName = applicantName;
-
-		if (_officeSupplyRequisitionRemoteModel != null) {
-			try {
-				Class<?> clazz = _officeSupplyRequisitionRemoteModel.getClass();
-
-				Method method = clazz.getMethod("setApplicantName", String.class);
-
-				method.invoke(_officeSupplyRequisitionRemoteModel, applicantName);
-			}
-			catch (Exception e) {
-				throw new UnsupportedOperationException(e);
-			}
-		}
-	}
-
-	@Override
 	public String getIntroductions() {
 		return _introductions;
 	}
@@ -475,8 +415,6 @@ public class OfficeSupplyRequisitionClp extends BaseModelImpl<OfficeSupplyRequis
 		clone.setModifiedTime(getModifiedTime());
 		clone.setDeptId(getDeptId());
 		clone.setDeptName(getDeptName());
-		clone.setApplicantId(getApplicantId());
-		clone.setApplicantName(getApplicantName());
 		clone.setIntroductions(getIntroductions());
 
 		return clone;
@@ -531,7 +469,7 @@ public class OfficeSupplyRequisitionClp extends BaseModelImpl<OfficeSupplyRequis
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(21);
+		StringBundler sb = new StringBundler(17);
 
 		sb.append("{officeSupplyRequisitionId=");
 		sb.append(getOfficeSupplyRequisitionId());
@@ -547,10 +485,6 @@ public class OfficeSupplyRequisitionClp extends BaseModelImpl<OfficeSupplyRequis
 		sb.append(getDeptId());
 		sb.append(", deptName=");
 		sb.append(getDeptName());
-		sb.append(", applicantId=");
-		sb.append(getApplicantId());
-		sb.append(", applicantName=");
-		sb.append(getApplicantName());
 		sb.append(", introductions=");
 		sb.append(getIntroductions());
 		sb.append("}");
@@ -560,7 +494,7 @@ public class OfficeSupplyRequisitionClp extends BaseModelImpl<OfficeSupplyRequis
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(34);
+		StringBundler sb = new StringBundler(28);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.oa.model.OfficeSupplyRequisition");
@@ -595,14 +529,6 @@ public class OfficeSupplyRequisitionClp extends BaseModelImpl<OfficeSupplyRequis
 		sb.append(getDeptName());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>applicantId</column-name><column-value><![CDATA[");
-		sb.append(getApplicantId());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>applicantName</column-name><column-value><![CDATA[");
-		sb.append(getApplicantName());
-		sb.append("]]></column-value></column>");
-		sb.append(
 			"<column><column-name>introductions</column-name><column-value><![CDATA[");
 		sb.append(getIntroductions());
 		sb.append("]]></column-value></column>");
@@ -620,8 +546,6 @@ public class OfficeSupplyRequisitionClp extends BaseModelImpl<OfficeSupplyRequis
 	private Date _modifiedTime;
 	private long _deptId;
 	private String _deptName;
-	private long _applicantId;
-	private String _applicantName;
 	private String _introductions;
 	private BaseModel<?> _officeSupplyRequisitionRemoteModel;
 	private Class<?> _clpSerializerClass = com.justonetech.oa.service.ClpSerializer.class;

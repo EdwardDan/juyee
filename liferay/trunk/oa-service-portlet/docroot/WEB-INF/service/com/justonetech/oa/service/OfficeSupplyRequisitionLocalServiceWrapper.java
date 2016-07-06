@@ -291,16 +291,22 @@ public class OfficeSupplyRequisitionLocalServiceWrapper
 	}
 
 	@Override
-	public java.util.List<com.justonetech.oa.model.OfficeSupplyRequisitionItem> findByDeptWorkId(
+	public java.util.List<com.justonetech.oa.model.OfficeSupplyRequisitionItem> findByOfficeSupplyRequisitionId(
 		long officeSupplyRequisitionId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _officeSupplyRequisitionLocalService.findByDeptWorkId(officeSupplyRequisitionId);
+		return _officeSupplyRequisitionLocalService.findByOfficeSupplyRequisitionId(officeSupplyRequisitionId);
 	}
 
 	@Override
 	public int countByOfficeSupplyRequisitionId(long officeSupplyRequisitionId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _officeSupplyRequisitionLocalService.countByOfficeSupplyRequisitionId(officeSupplyRequisitionId);
+	}
+
+	@Override
+	public void deleteOfficeSupplyRequisitions(
+		java.lang.String[] officeSupplyRequisitionIds) {
+		_officeSupplyRequisitionLocalService.deleteOfficeSupplyRequisitions(officeSupplyRequisitionIds);
 	}
 
 	/**

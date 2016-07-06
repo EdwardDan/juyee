@@ -42,7 +42,7 @@ public class DispatchLocalServiceImpl extends DispatchLocalServiceBaseImpl {
 	 *
 	 * Never reference this interface directly. Always use {@link com.justonetech.oa.service.DispatchLocalServiceUtil} to access the dispatch local service.
 	 */
-
+	
 	public List<Dispatch> findByTitle(String title, int start, int end)
 			throws SystemException {
 		return dispatchPersistence.findByTitle("%" + title + "%", start, end);

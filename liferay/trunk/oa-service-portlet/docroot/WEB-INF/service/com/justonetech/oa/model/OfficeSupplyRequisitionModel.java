@@ -176,35 +176,6 @@ public interface OfficeSupplyRequisitionModel extends BaseModel<OfficeSupplyRequ
 	public void setDeptName(String deptName);
 
 	/**
-	 * Returns the applicant ID of this office supply requisition.
-	 *
-	 * @return the applicant ID of this office supply requisition
-	 */
-	public long getApplicantId();
-
-	/**
-	 * Sets the applicant ID of this office supply requisition.
-	 *
-	 * @param applicantId the applicant ID of this office supply requisition
-	 */
-	public void setApplicantId(long applicantId);
-
-	/**
-	 * Returns the applicant name of this office supply requisition.
-	 *
-	 * @return the applicant name of this office supply requisition
-	 */
-	@AutoEscape
-	public String getApplicantName();
-
-	/**
-	 * Sets the applicant name of this office supply requisition.
-	 *
-	 * @param applicantName the applicant name of this office supply requisition
-	 */
-	public void setApplicantName(String applicantName);
-
-	/**
 	 * Returns the introductions of this office supply requisition.
 	 *
 	 * @return the introductions of this office supply requisition

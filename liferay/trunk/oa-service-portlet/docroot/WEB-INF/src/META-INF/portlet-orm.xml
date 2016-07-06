@@ -135,8 +135,6 @@
 			</basic>
 			<basic name="deptId" />
 			<basic name="deptName" />
-			<basic name="applicantId" />
-			<basic name="applicantName" />
 			<basic name="introductions" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />

@@ -74,8 +74,6 @@
 		<field name="modifiedTime" type="Date" />
 		<field name="deptId" type="long" />
 		<field name="deptName" type="String" />
-		<field name="applicantId" type="long" />
-		<field name="applicantName" type="String" />
 		<field name="introductions" type="String" />
 	</model>
 	<model name="com.justonetech.oa.model.OfficeSupplyRequisitionItem">

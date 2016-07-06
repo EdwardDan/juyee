@@ -38,8 +38,6 @@ public class OfficeSupplyRequisitionSoap implements Serializable {
 		soapModel.setModifiedTime(model.getModifiedTime());
 		soapModel.setDeptId(model.getDeptId());
 		soapModel.setDeptName(model.getDeptName());
-		soapModel.setApplicantId(model.getApplicantId());
-		soapModel.setApplicantName(model.getApplicantName());
 		soapModel.setIntroductions(model.getIntroductions());
 
 		return soapModel;
@@ -152,22 +150,6 @@ public class OfficeSupplyRequisitionSoap implements Serializable {
 		_deptName = deptName;
 	}
 
-	public long getApplicantId() {
-		return _applicantId;
-	}
-
-	public void setApplicantId(long applicantId) {
-		_applicantId = applicantId;
-	}
-
-	public String getApplicantName() {
-		return _applicantName;
-	}
-
-	public void setApplicantName(String applicantName) {
-		_applicantName = applicantName;
-	}
-
 	public String getIntroductions() {
 		return _introductions;
 	}
@@ -183,7 +165,5 @@ public class OfficeSupplyRequisitionSoap implements Serializable {
 	private Date _modifiedTime;
 	private long _deptId;
 	private String _deptName;
-	private long _applicantId;
-	private String _applicantName;
 	private String _introductions;
 }

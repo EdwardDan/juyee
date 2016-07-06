@@ -17,7 +17,9 @@ package com.justonetech.oa.service.impl;
 import java.util.List;
 
 import com.justonetech.oa.model.OfficeSupplyRequisitionItem;
+import com.justonetech.oa.service.OfficeSupplyRequisitionLocalServiceUtil;
 import com.justonetech.oa.service.base.OfficeSupplyRequisitionLocalServiceBaseImpl;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 
 /**
@@ -41,7 +43,8 @@ public class OfficeSupplyRequisitionLocalServiceImpl
 	 *
 	 * Never reference this interface directly. Always use {@link com.justonetech.oa.service.OfficeSupplyRequisitionLocalServiceUtil} to access the office supply requisition local service.
 	 */
-	public List<OfficeSupplyRequisitionItem> findByDeptWorkId(
+	
+	public List<OfficeSupplyRequisitionItem> findByOfficeSupplyRequisitionId(
 			long officeSupplyRequisitionId) throws SystemException {
 		return officeSupplyRequisitionItemPersistence
 				.findByOfficeSupplyRequisitionId(officeSupplyRequisitionId);
@@ -52,5 +55,18 @@ public class OfficeSupplyRequisitionLocalServiceImpl
 
 		return officeSupplyRequisitionItemPersistence
 				.countByOfficeSupplyRequisitionId(officeSupplyRequisitionId);
+	}
+
+	public void deleteOfficeSupplyRequisitions(String[] officeSupplyRequisitionIds) {
+
+		for (String officeSupplyRequisitionId : officeSupplyRequisitionIds) {
+			try {
+				OfficeSupplyRequisitionLocalServiceUtil
+						.deleteOfficeSupplyRequisition(Long
+								.parseLong(officeSupplyRequisitionId));
+			} catch (NumberFormatException | PortalException | SystemException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }

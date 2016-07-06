@@ -280,10 +280,11 @@ public class OfficeSupplyRequisitionLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
-	public static java.util.List<com.justonetech.oa.model.OfficeSupplyRequisitionItem> findByDeptWorkId(
+	public static java.util.List<com.justonetech.oa.model.OfficeSupplyRequisitionItem> findByOfficeSupplyRequisitionId(
 		long officeSupplyRequisitionId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().findByDeptWorkId(officeSupplyRequisitionId);
+		return getService()
+				   .findByOfficeSupplyRequisitionId(officeSupplyRequisitionId);
 	}
 
 	public static int countByOfficeSupplyRequisitionId(
@@ -291,6 +292,11 @@ public class OfficeSupplyRequisitionLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .countByOfficeSupplyRequisitionId(officeSupplyRequisitionId);
+	}
+
+	public static void deleteOfficeSupplyRequisitions(
+		java.lang.String[] officeSupplyRequisitionIds) {
+		getService().deleteOfficeSupplyRequisitions(officeSupplyRequisitionIds);
 	}
 
 	public static void clearService() {

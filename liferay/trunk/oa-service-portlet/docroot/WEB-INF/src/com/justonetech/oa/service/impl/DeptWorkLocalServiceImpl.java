@@ -23,59 +23,60 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 
 /**
- * The implementation of the dept work local service. <p> All custom service
- * methods should be put in this class. Whenever methods are added, rerun
- * ServiceBuilder to copy their definitions into the
- * {@link com.justonetech.oa.service.DeptWorkLocalService} interface. <p> This
- * is a local service. Methods of this service will not have security checks
- * based on the propagated JAAS credentials because this service can only be
- * accessed from within the same VM. </p>
+ * The implementation of the dept work local service.
+ *
+ * <p>
+ * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.justonetech.oa.service.DeptWorkLocalService} interface.
+ *
+ * <p>
+ * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
+ * </p>
  *
  * @author justonetech
  * @see com.justonetech.oa.service.base.DeptWorkLocalServiceBaseImpl
  * @see com.justonetech.oa.service.DeptWorkLocalServiceUtil
  */
 public class DeptWorkLocalServiceImpl extends DeptWorkLocalServiceBaseImpl {
+	/*
+	 * NOTE FOR DEVELOPERS:
+	 *
+	 * Never reference this interface directly. Always use {@link com.justonetech.oa.service.DeptWorkLocalServiceUtil} to access the dept work local service.
+	 */
+	
+	public List<DeptWork> findByUserName(String userName, int start, int end)
+	        throws SystemException {
 
-    /*
-     * NOTE FOR DEVELOPERS: Never reference this interface directly. Always use
-     * {@link com.justonetech.oa.service.DeptWorkLocalServiceUtil} to access the
-     * dept work local service.
-     */
+	        return deptWorkPersistence.findByUserName("%" + userName + "%", start, end);
+	    }
 
-    public List<DeptWork> findByUserName(String userName, int start, int end)
-        throws SystemException {
+	    public int countByUserName(String userName)
+	        throws SystemException {
 
-        return deptWorkPersistence.findByUserName("%" + userName + "%", start, end);
-    }
+	        return deptWorkPersistence.countByUserName("%" + userName + "%");
+	    }
 
-    public int countByUserName(String userName)
-        throws SystemException {
+	    public List<DeptWork> findByDeptName(String deptName, int start, int end)
+	        throws SystemException {
 
-        return deptWorkPersistence.countByUserName("%" + userName + "%");
-    }
+	        return deptWorkPersistence.findByDeptName("%" + deptName + "%", start, end);
+	    }
 
-    public List<DeptWork> findByDeptName(String deptName, int start, int end)
-        throws SystemException {
+	    public int countByDeptName(String deptName)
+	        throws SystemException {
 
-        return deptWorkPersistence.findByDeptName("%" + deptName + "%", start, end);
-    }
+	        return deptWorkPersistence.countByDeptName("%" + deptName + "%");
+	    }
 
-    public int countByDeptName(String deptName)
-        throws SystemException {
+	    public void deleteDeptWorks(String[] deptWorkIds) {
 
-        return deptWorkPersistence.countByDeptName("%" + deptName + "%");
-    }
-
-    public void deleteDeptWorks(String[] deptWorkIds) {
-
-        for (String deptWorkId : deptWorkIds) {
-            try {
-                DeptWorkLocalServiceUtil.deleteDeptWork(Long.parseLong(deptWorkId));
-            }
-            catch (NumberFormatException | PortalException | SystemException e) {
-                e.printStackTrace();
-            }
-        }
-    }
+	        for (String deptWorkId : deptWorkIds) {
+	            try {
+	                DeptWorkLocalServiceUtil.deleteDeptWork(Long.parseLong(deptWorkId));
+	            }
+	            catch (NumberFormatException | PortalException | SystemException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	    }
+	    
 }
