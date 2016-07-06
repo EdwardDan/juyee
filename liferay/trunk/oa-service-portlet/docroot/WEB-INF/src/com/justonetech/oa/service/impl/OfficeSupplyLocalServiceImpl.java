@@ -14,7 +14,13 @@
 
 package com.justonetech.oa.service.impl;
 
+import java.util.List;
+
+import com.justonetech.oa.model.OfficeSupply;
+import com.justonetech.oa.service.OfficeSupplyLocalServiceUtil;
 import com.justonetech.oa.service.base.OfficeSupplyLocalServiceBaseImpl;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 
 /**
  * The implementation of the office supply local service.
@@ -37,4 +43,25 @@ public class OfficeSupplyLocalServiceImpl
 	 *
 	 * Never reference this interface directly. Always use {@link com.justonetech.oa.service.OfficeSupplyLocalServiceUtil} to access the office supply local service.
 	 */
+	public List<OfficeSupply> findByName(String name, int start, int end)
+			throws SystemException {
+		return officeSupplyPersistence.findByName("%" + name + "%", start, end);
+	}
+
+	public int countByName(String name) throws SystemException {
+
+		return officeSupplyPersistence.countByName("%" + name + "%");
+	}
+
+	public void deleteOfficeSupplies(String[] officeSupplyIds) {
+
+		for (String officeSupplyId : officeSupplyIds) {
+			try {
+				OfficeSupplyLocalServiceUtil.deleteOfficeSupply(Long
+						.parseLong(officeSupplyId));
+			} catch (NumberFormatException | PortalException | SystemException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 }

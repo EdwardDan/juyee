@@ -253,4 +253,13 @@ public interface OfficeSupplyLocalService extends BaseLocalService,
 	public java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
+
+	public java.util.List<com.justonetech.oa.model.OfficeSupply> findByName(
+		java.lang.String name, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int countByName(java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public void deleteOfficeSupplies(java.lang.String[] officeSupplyIds);
 }

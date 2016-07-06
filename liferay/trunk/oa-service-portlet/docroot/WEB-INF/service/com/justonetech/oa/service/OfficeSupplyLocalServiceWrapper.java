@@ -287,6 +287,24 @@ public class OfficeSupplyLocalServiceWrapper implements OfficeSupplyLocalService
 			arguments);
 	}
 
+	@Override
+	public java.util.List<com.justonetech.oa.model.OfficeSupply> findByName(
+		java.lang.String name, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _officeSupplyLocalService.findByName(name, start, end);
+	}
+
+	@Override
+	public int countByName(java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _officeSupplyLocalService.countByName(name);
+	}
+
+	@Override
+	public void deleteOfficeSupplies(java.lang.String[] officeSupplyIds) {
+		_officeSupplyLocalService.deleteOfficeSupplies(officeSupplyIds);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */
