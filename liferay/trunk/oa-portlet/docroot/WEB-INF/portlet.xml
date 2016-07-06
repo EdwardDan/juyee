@@ -177,14 +177,14 @@
 		</security-role-ref>
 	</portlet>
 	<portlet>
-		<portlet-name>office-supply-apply</portlet-name>
-		<display-name>Office Supply Apply</display-name>
+		<portlet-name>office-supply-application</portlet-name>
+		<display-name>Office Supply Application</display-name>
 		<portlet-class>
-			com.justonetech.oa.portlet.OfficeSupplyApplyPortlet
+			com.justonetech.oa.portlet.OfficeSupplyApplicationPortlet
 		</portlet-class>
 		<init-param>
 			<name>view-template</name>
-			<value>/portlet/office-supply-apply/view.jsp</value>
+			<value>/portlet/office-supply-application/view.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -193,7 +193,7 @@
 		</supports>
 		<portlet-info>
 			<title>办公用品申请</title>
-			<short-title>Office Supply Apply</short-title>
+			<short-title>Office Supply Application</short-title>
 			<keywords></keywords>
 		</portlet-info>
 		<security-role-ref>
