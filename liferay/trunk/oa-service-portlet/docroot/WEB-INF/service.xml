@@ -34,10 +34,10 @@
 		</finder>
 	</entity>
 
-	<entity name="OfficeSupplyRequisition" local-service="true"
+	<entity name="OfficeSupplyApplication" local-service="true"
 		remote-service="false">
 		<!-- PK fields -->
-		<column name="officeSupplyRequisitionId" type="long" primary="true" />
+		<column name="officeSupplyApplicationId" type="long" primary="true" />
 
 		<!-- Group instance -->
 
@@ -63,10 +63,10 @@
 
 	</entity>
 
-	<entity name="OfficeSupplyRequisitionItem" local-service="true"
+	<entity name="OfficeSupplyApplicationItem" local-service="true"
 		remote-service="false">
 		<!-- PK fields -->
-		<column name="officeSupplyRequisitionItemId" type="long"
+		<column name="officeSupplyApplicationItemId" type="long"
 			primary="true" />
 
 		<!-- Other fields -->
@@ -75,12 +75,12 @@
 		<column name="unit" type="String" />
 		<column name="unitPrice" type="double" />
 		<column name="quantity" type="int" />
-		<column name="officeSupplyRequisitionId" type="long" />
+		<column name="officeSupplyApplicationId" type="long" />
 		<column name="officeSupplyId" type="long" />
 
 
-		<finder name="OfficeSupplyRequisitionId" return-type="Collection">
-			<finder-column name="officeSupplyRequisitionId" />
+		<finder name="OfficeSupplyApplicationId" return-type="Collection">
+			<finder-column name="officeSupplyApplicationId" />
 		</finder>
 
 	</entity>
@@ -167,12 +167,12 @@
 	</entity>
 
 	<!-- 车辆申请 -->
-	<entity name="VehicleRequisition" local-service="true"
+	<entity name="VehicleApplication" local-service="true"
 		remote-service="false">
 
 		<!-- PK fields -->
 
-		<column name="vehicleRequisitionId" type="long" primary="true" />
+		<column name="vehicleApplicationId" type="long" primary="true" />
 
 		<!-- Audit fields -->
 
