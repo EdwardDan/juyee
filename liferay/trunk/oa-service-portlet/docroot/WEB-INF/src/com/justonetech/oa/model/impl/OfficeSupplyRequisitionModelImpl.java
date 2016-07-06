@@ -84,7 +84,11 @@ public class OfficeSupplyRequisitionModelImpl extends BaseModelImpl<OfficeSupply
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.finder.cache.enabled.com.justonetech.oa.model.OfficeSupplyRequisition"),
 			true);
-	public static final boolean COLUMN_BITMASK_ENABLED = false;
+	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
+				"value.object.column.bitmask.enabled.com.justonetech.oa.model.OfficeSupplyRequisition"),
+			true);
+	public static long USERID_COLUMN_BITMASK = 1L;
+	public static long MODIFIEDTIME_COLUMN_BITMASK = 2L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
 				"lock.expiration.time.com.justonetech.oa.model.OfficeSupplyRequisition"));
 
@@ -207,6 +211,14 @@ public class OfficeSupplyRequisitionModelImpl extends BaseModelImpl<OfficeSupply
 
 	@Override
 	public void setUserId(long userId) {
+		_columnBitmask |= USERID_COLUMN_BITMASK;
+
+		if (!_setOriginalUserId) {
+			_setOriginalUserId = true;
+
+			_originalUserId = _userId;
+		}
+
 		_userId = userId;
 	}
 
@@ -218,6 +230,10 @@ public class OfficeSupplyRequisitionModelImpl extends BaseModelImpl<OfficeSupply
 	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
+	}
+
+	public long getOriginalUserId() {
+		return _originalUserId;
 	}
 
 	@Override
@@ -252,6 +268,8 @@ public class OfficeSupplyRequisitionModelImpl extends BaseModelImpl<OfficeSupply
 
 	@Override
 	public void setModifiedTime(Date modifiedTime) {
+		_columnBitmask = -1L;
+
 		_modifiedTime = modifiedTime;
 	}
 
@@ -293,6 +311,10 @@ public class OfficeSupplyRequisitionModelImpl extends BaseModelImpl<OfficeSupply
 	@Override
 	public void setIntroductions(String introductions) {
 		_introductions = introductions;
+	}
+
+	public long getColumnBitmask() {
+		return _columnBitmask;
 	}
 
 	@Override
@@ -381,6 +403,13 @@ public class OfficeSupplyRequisitionModelImpl extends BaseModelImpl<OfficeSupply
 
 	@Override
 	public void resetOriginalValues() {
+		OfficeSupplyRequisitionModelImpl officeSupplyRequisitionModelImpl = this;
+
+		officeSupplyRequisitionModelImpl._originalUserId = officeSupplyRequisitionModelImpl._userId;
+
+		officeSupplyRequisitionModelImpl._setOriginalUserId = false;
+
+		officeSupplyRequisitionModelImpl._columnBitmask = 0;
 	}
 
 	@Override
@@ -516,11 +545,14 @@ public class OfficeSupplyRequisitionModelImpl extends BaseModelImpl<OfficeSupply
 	private long _officeSupplyRequisitionId;
 	private long _userId;
 	private String _userUuid;
+	private long _originalUserId;
+	private boolean _setOriginalUserId;
 	private String _userName;
 	private Date _createTime;
 	private Date _modifiedTime;
 	private long _deptId;
 	private String _deptName;
 	private String _introductions;
+	private long _columnBitmask;
 	private OfficeSupplyRequisition _escapedModel;
 }

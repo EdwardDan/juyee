@@ -56,6 +56,10 @@
 		<order>
 			<order-column name="modifiedTime" order-by="desc"></order-column>
 		</order>
+		
+		<finder name="UserId" return-type="Collection">
+			<finder-column name="userId"/>
+		</finder>
 
 	</entity>
 

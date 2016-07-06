@@ -16,6 +16,7 @@ package com.justonetech.oa.service.impl;
 
 import java.util.List;
 
+import com.justonetech.oa.model.OfficeSupplyRequisition;
 import com.justonetech.oa.model.OfficeSupplyRequisitionItem;
 import com.justonetech.oa.service.OfficeSupplyRequisitionLocalServiceUtil;
 import com.justonetech.oa.service.base.OfficeSupplyRequisitionLocalServiceBaseImpl;
@@ -57,7 +58,20 @@ public class OfficeSupplyRequisitionLocalServiceImpl
 				.countByOfficeSupplyRequisitionId(officeSupplyRequisitionId);
 	}
 
-	public void deleteOfficeSupplyRequisitions(String[] officeSupplyRequisitionIds) {
+	public List<OfficeSupplyRequisition> findByUserId(long userId, int start,
+			int end) throws SystemException {
+		return officeSupplyRequisitionPersistence.findByUserId(userId, start,
+				end);
+	}
+
+	public int countByUserId(long userId, int start, int end)
+			throws SystemException {
+
+		return officeSupplyRequisitionPersistence.countByUserId(userId);
+	}
+
+	public void deleteOfficeSupplyRequisitions(
+			String[] officeSupplyRequisitionIds) {
 
 		for (String officeSupplyRequisitionId : officeSupplyRequisitionIds) {
 			try {

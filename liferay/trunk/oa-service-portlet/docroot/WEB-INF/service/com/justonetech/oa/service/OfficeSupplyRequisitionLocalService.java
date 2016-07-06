@@ -261,6 +261,13 @@ public interface OfficeSupplyRequisitionLocalService extends BaseLocalService,
 	public int countByOfficeSupplyRequisitionId(long officeSupplyRequisitionId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public java.util.List<com.justonetech.oa.model.OfficeSupplyRequisition> findByUserId(
+		long userId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int countByUserId(long userId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public void deleteOfficeSupplyRequisitions(
 		java.lang.String[] officeSupplyRequisitionIds);
 }

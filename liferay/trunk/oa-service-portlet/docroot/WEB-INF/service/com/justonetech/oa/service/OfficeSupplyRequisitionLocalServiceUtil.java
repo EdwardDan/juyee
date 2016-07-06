@@ -294,6 +294,17 @@ public class OfficeSupplyRequisitionLocalServiceUtil {
 				   .countByOfficeSupplyRequisitionId(officeSupplyRequisitionId);
 	}
 
+	public static java.util.List<com.justonetech.oa.model.OfficeSupplyRequisition> findByUserId(
+		long userId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().findByUserId(userId, start, end);
+	}
+
+	public static int countByUserId(long userId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().countByUserId(userId, start, end);
+	}
+
 	public static void deleteOfficeSupplyRequisitions(
 		java.lang.String[] officeSupplyRequisitionIds) {
 		getService().deleteOfficeSupplyRequisitions(officeSupplyRequisitionIds);

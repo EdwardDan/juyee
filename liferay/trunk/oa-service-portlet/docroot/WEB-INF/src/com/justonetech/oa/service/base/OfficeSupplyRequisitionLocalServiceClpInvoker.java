@@ -122,9 +122,17 @@ public class OfficeSupplyRequisitionLocalServiceClpInvoker {
 
 		_methodParameterTypes67 = new String[] { "long" };
 
-		_methodName68 = "deleteOfficeSupplyRequisitions";
+		_methodName68 = "findByUserId";
 
-		_methodParameterTypes68 = new String[] { "java.lang.String[][]" };
+		_methodParameterTypes68 = new String[] { "long", "int", "int" };
+
+		_methodName69 = "countByUserId";
+
+		_methodParameterTypes69 = new String[] { "long", "int", "int" };
+
+		_methodName70 = "deleteOfficeSupplyRequisitions";
+
+		_methodParameterTypes70 = new String[] { "java.lang.String[][]" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -240,6 +248,20 @@ public class OfficeSupplyRequisitionLocalServiceClpInvoker {
 
 		if (_methodName68.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes68, parameterTypes)) {
+			return OfficeSupplyRequisitionLocalServiceUtil.findByUserId(((Long)arguments[0]).longValue(),
+				((Integer)arguments[1]).intValue(),
+				((Integer)arguments[2]).intValue());
+		}
+
+		if (_methodName69.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes69, parameterTypes)) {
+			return OfficeSupplyRequisitionLocalServiceUtil.countByUserId(((Long)arguments[0]).longValue(),
+				((Integer)arguments[1]).intValue(),
+				((Integer)arguments[2]).intValue());
+		}
+
+		if (_methodName70.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes70, parameterTypes)) {
 			OfficeSupplyRequisitionLocalServiceUtil.deleteOfficeSupplyRequisitions((java.lang.String[])arguments[0]);
 
 			return null;
@@ -290,4 +312,8 @@ public class OfficeSupplyRequisitionLocalServiceClpInvoker {
 	private String[] _methodParameterTypes67;
 	private String _methodName68;
 	private String[] _methodParameterTypes68;
+	private String _methodName69;
+	private String[] _methodParameterTypes69;
+	private String _methodName70;
+	private String[] _methodParameterTypes70;
 }

@@ -114,6 +114,166 @@ public class OfficeSupplyRequisitionUtil {
 	}
 
 	/**
+	* Returns all the office supply requisitions where userId = &#63;.
+	*
+	* @param userId the user ID
+	* @return the matching office supply requisitions
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.justonetech.oa.model.OfficeSupplyRequisition> findByUserId(
+		long userId) throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByUserId(userId);
+	}
+
+	/**
+	* Returns a range of all the office supply requisitions where userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.justonetech.oa.model.impl.OfficeSupplyRequisitionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param userId the user ID
+	* @param start the lower bound of the range of office supply requisitions
+	* @param end the upper bound of the range of office supply requisitions (not inclusive)
+	* @return the range of matching office supply requisitions
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.justonetech.oa.model.OfficeSupplyRequisition> findByUserId(
+		long userId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByUserId(userId, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the office supply requisitions where userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.justonetech.oa.model.impl.OfficeSupplyRequisitionModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param userId the user ID
+	* @param start the lower bound of the range of office supply requisitions
+	* @param end the upper bound of the range of office supply requisitions (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching office supply requisitions
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.justonetech.oa.model.OfficeSupplyRequisition> findByUserId(
+		long userId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByUserId(userId, start, end, orderByComparator);
+	}
+
+	/**
+	* Returns the first office supply requisition in the ordered set where userId = &#63;.
+	*
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching office supply requisition
+	* @throws com.justonetech.oa.NoSuchOfficeSupplyRequisitionException if a matching office supply requisition could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.justonetech.oa.model.OfficeSupplyRequisition findByUserId_First(
+		long userId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.justonetech.oa.NoSuchOfficeSupplyRequisitionException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByUserId_First(userId, orderByComparator);
+	}
+
+	/**
+	* Returns the first office supply requisition in the ordered set where userId = &#63;.
+	*
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching office supply requisition, or <code>null</code> if a matching office supply requisition could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.justonetech.oa.model.OfficeSupplyRequisition fetchByUserId_First(
+		long userId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().fetchByUserId_First(userId, orderByComparator);
+	}
+
+	/**
+	* Returns the last office supply requisition in the ordered set where userId = &#63;.
+	*
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching office supply requisition
+	* @throws com.justonetech.oa.NoSuchOfficeSupplyRequisitionException if a matching office supply requisition could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.justonetech.oa.model.OfficeSupplyRequisition findByUserId_Last(
+		long userId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.justonetech.oa.NoSuchOfficeSupplyRequisitionException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByUserId_Last(userId, orderByComparator);
+	}
+
+	/**
+	* Returns the last office supply requisition in the ordered set where userId = &#63;.
+	*
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching office supply requisition, or <code>null</code> if a matching office supply requisition could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.justonetech.oa.model.OfficeSupplyRequisition fetchByUserId_Last(
+		long userId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().fetchByUserId_Last(userId, orderByComparator);
+	}
+
+	/**
+	* Returns the office supply requisitions before and after the current office supply requisition in the ordered set where userId = &#63;.
+	*
+	* @param officeSupplyRequisitionId the primary key of the current office supply requisition
+	* @param userId the user ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next office supply requisition
+	* @throws com.justonetech.oa.NoSuchOfficeSupplyRequisitionException if a office supply requisition with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.justonetech.oa.model.OfficeSupplyRequisition[] findByUserId_PrevAndNext(
+		long officeSupplyRequisitionId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.justonetech.oa.NoSuchOfficeSupplyRequisitionException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByUserId_PrevAndNext(officeSupplyRequisitionId, userId,
+			orderByComparator);
+	}
+
+	/**
+	* Removes all the office supply requisitions where userId = &#63; from the database.
+	*
+	* @param userId the user ID
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void removeByUserId(long userId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeByUserId(userId);
+	}
+
+	/**
+	* Returns the number of office supply requisitions where userId = &#63;.
+	*
+	* @param userId the user ID
+	* @return the number of matching office supply requisitions
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countByUserId(long userId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByUserId(userId);
+	}
+
+	/**
 	* Caches the office supply requisition in the entity cache if it is enabled.
 	*
 	* @param officeSupplyRequisition the office supply requisition
