@@ -2,33 +2,33 @@
 <%@ include file="/common/init.jsp"%>
 <script src="${staticServerURL}/My97DatePicker/WdatePicker.js"></script>
 <c:set var="contentPath"
-	value="${request.contextPath}/portlet/vehicle-requisition" />
+	value="${request.contextPath}/portlet/vehicle-application" />
 <portlet:renderURL var="viewURL" />
-<aui:model-context bean="${vehicleRequisition}"
-	model="<%=VehicleRequisition.class %>" />
+<aui:model-context bean="${vehicleApplication}"
+	model="<%=VehicleApplication.class %>" />
 <portlet:renderURL var="viewURL" />
  <%
-	VehicleRequisition vehicleRequisition = (VehicleRequisition) request.getAttribute("vehicleRequisition");
+	VehicleApplication vehicleApplication = (VehicleApplication) request.getAttribute("vehicleApplication");
  	SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 	String startTimes="";
 	String endTimes="";
-	if(null!=vehicleRequisition){
-		startTimes=df.format(vehicleRequisition.getStartTime());
-		endTimes=df.format(vehicleRequisition.getEndTime());
-		if(Validator.isBlank(vehicleRequisition.getDestination())){
-			vehicleRequisition.setDestination("上海市(    )区(    )路(    )号");
+	if(null!=vehicleApplication){
+		startTimes=df.format(vehicleApplication.getStartTime());
+		endTimes=df.format(vehicleApplication.getEndTime());
+		if(Validator.isBlank(vehicleApplication.getDestination())){
+			vehicleApplication.setDestination("上海市(    )区(    )路(    )号");
 		}
 	}
 	
 %>
-<liferay-ui:header title='${empty vehicleRequisition?"添加":"编辑"}车辆申请'
+<liferay-ui:header title='${empty vehicleApplication?"添加":"编辑"}车辆申请'
 	backURL="${viewURL }" />
-<portlet:actionURL var="saveVehicleRequisitionURL" name="saveVehicleRequisition">
+<portlet:actionURL var="saveVehicleApplicationURL" name="saveVehicleApplication">
 	<portlet:param name="redirect" value="${viewURL }" />
 </portlet:actionURL>
-<aui:form action="${saveVehicleRequisitionURL}">
+<aui:form action="${saveVehicleApplicationURL}">
 	<aui:fieldset>
-		<aui:input name="vehicleRequisitionId" type="hidden" />
+		<aui:input name="vehicleApplicationId" type="hidden" />
 		<aui:input name="applicantDeptName" label="申请部门名称" required="true" />
 		<aui:input name="applicantName" label="申请人" required="true"/>
 		<aui:input type="text" cssClass="Wdate" name="startTimes" value="<%=startTimes %>"
