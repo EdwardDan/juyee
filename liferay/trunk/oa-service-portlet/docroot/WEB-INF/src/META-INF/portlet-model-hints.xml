@@ -66,8 +66,8 @@
 		<field name="unitPrice" type="double" />
 		<field name="quantity" type="int" />
 	</model>
-	<model name="com.justonetech.oa.model.OfficeSupplyRequisition">
-		<field name="officeSupplyRequisitionId" type="long" />
+	<model name="com.justonetech.oa.model.OfficeSupplyApplication">
+		<field name="officeSupplyApplicationId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createTime" type="Date" />
@@ -76,18 +76,18 @@
 		<field name="deptName" type="String" />
 		<field name="introductions" type="String" />
 	</model>
-	<model name="com.justonetech.oa.model.OfficeSupplyRequisitionItem">
-		<field name="officeSupplyRequisitionItemId" type="long" />
+	<model name="com.justonetech.oa.model.OfficeSupplyApplicationItem">
+		<field name="officeSupplyApplicationItemId" type="long" />
 		<field name="name" type="String" />
 		<field name="model" type="String" />
 		<field name="unit" type="String" />
 		<field name="unitPrice" type="double" />
 		<field name="quantity" type="int" />
-		<field name="officeSupplyRequisitionId" type="long" />
+		<field name="officeSupplyApplicationId" type="long" />
 		<field name="officeSupplyId" type="long" />
 	</model>
-	<model name="com.justonetech.oa.model.VehicleRequisition">
-		<field name="vehicleRequisitionId" type="long" />
+	<model name="com.justonetech.oa.model.VehicleApplication">
+		<field name="vehicleApplicationId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createTime" type="Date" />
