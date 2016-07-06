@@ -130,7 +130,7 @@ public class OfficeSupplyRequisitionLocalServiceClp
 
 		_methodName22 = "countByUserId";
 
-		_methodParameterTypes22 = new String[] { "long", "int", "int" };
+		_methodParameterTypes22 = new String[] { "long" };
 
 		_methodName23 = "deleteOfficeSupplyRequisitions";
 
@@ -786,13 +786,13 @@ public class OfficeSupplyRequisitionLocalServiceClp
 	}
 
 	@Override
-	public int countByUserId(long userId, int start, int end)
+	public int countByUserId(long userId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName22,
-					_methodParameterTypes22, new Object[] { userId, start, end });
+					_methodParameterTypes22, new Object[] { userId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);

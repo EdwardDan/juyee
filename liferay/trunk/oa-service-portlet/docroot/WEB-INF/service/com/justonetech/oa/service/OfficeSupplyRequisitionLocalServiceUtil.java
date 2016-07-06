@@ -300,9 +300,9 @@ public class OfficeSupplyRequisitionLocalServiceUtil {
 		return getService().findByUserId(userId, start, end);
 	}
 
-	public static int countByUserId(long userId, int start, int end)
+	public static int countByUserId(long userId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().countByUserId(userId, start, end);
+		return getService().countByUserId(userId);
 	}
 
 	public static void deleteOfficeSupplyRequisitions(

@@ -64,7 +64,7 @@ public class OfficeSupplyRequisitionLocalServiceImpl
 				end);
 	}
 
-	public int countByUserId(long userId, int start, int end)
+	public int countByUserId(long userId)
 			throws SystemException {
 
 		return officeSupplyRequisitionPersistence.countByUserId(userId);

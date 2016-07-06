@@ -312,10 +312,9 @@ public class OfficeSupplyRequisitionLocalServiceWrapper
 	}
 
 	@Override
-	public int countByUserId(long userId, int start, int end)
+	public int countByUserId(long userId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _officeSupplyRequisitionLocalService.countByUserId(userId,
-			start, end);
+		return _officeSupplyRequisitionLocalService.countByUserId(userId);
 	}
 
 	@Override

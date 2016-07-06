@@ -128,7 +128,7 @@ public class OfficeSupplyRequisitionLocalServiceClpInvoker {
 
 		_methodName69 = "countByUserId";
 
-		_methodParameterTypes69 = new String[] { "long", "int", "int" };
+		_methodParameterTypes69 = new String[] { "long" };
 
 		_methodName70 = "deleteOfficeSupplyRequisitions";
 
@@ -255,9 +255,7 @@ public class OfficeSupplyRequisitionLocalServiceClpInvoker {
 
 		if (_methodName69.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes69, parameterTypes)) {
-			return OfficeSupplyRequisitionLocalServiceUtil.countByUserId(((Long)arguments[0]).longValue(),
-				((Integer)arguments[1]).intValue(),
-				((Integer)arguments[2]).intValue());
+			return OfficeSupplyRequisitionLocalServiceUtil.countByUserId(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName70.equals(name) &&
