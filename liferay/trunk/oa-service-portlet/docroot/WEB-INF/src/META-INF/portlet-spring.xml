@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<bean id="com.justonetech.oa.service.DeptWorkLocalService" class="com.justonetech.oa.service.impl.DeptWorkLocalServiceImpl" />
+	<bean id="com.justonetech.oa.service.persistence.DeptWorkPersistence" class="com.justonetech.oa.service.persistence.DeptWorkPersistenceImpl" parent="basePersistence" />
+	<bean id="com.justonetech.oa.service.DeptWorkItemLocalService" class="com.justonetech.oa.service.impl.DeptWorkItemLocalServiceImpl" />
+	<bean id="com.justonetech.oa.service.persistence.DeptWorkItemPersistence" class="com.justonetech.oa.service.persistence.DeptWorkItemPersistenceImpl" parent="basePersistence" />
+	<bean id="com.justonetech.oa.service.DispatchLocalService" class="com.justonetech.oa.service.impl.DispatchLocalServiceImpl" />
+	<bean id="com.justonetech.oa.service.persistence.DispatchPersistence" class="com.justonetech.oa.service.persistence.DispatchPersistenceImpl" parent="basePersistence" />
+	<bean id="com.justonetech.oa.service.LeaderWorkLocalService" class="com.justonetech.oa.service.impl.LeaderWorkLocalServiceImpl" />
+	<bean id="com.justonetech.oa.service.persistence.LeaderWorkPersistence" class="com.justonetech.oa.service.persistence.LeaderWorkPersistenceImpl" parent="basePersistence" />
+	<bean id="com.justonetech.oa.service.OfficeSupplyLocalService" class="com.justonetech.oa.service.impl.OfficeSupplyLocalServiceImpl" />
+	<bean id="com.justonetech.oa.service.persistence.OfficeSupplyPersistence" class="com.justonetech.oa.service.persistence.OfficeSupplyPersistenceImpl" parent="basePersistence" />
+	<bean id="com.justonetech.oa.service.OfficeSupplyApplicationLocalService" class="com.justonetech.oa.service.impl.OfficeSupplyApplicationLocalServiceImpl" />
+	<bean id="com.justonetech.oa.service.persistence.OfficeSupplyApplicationPersistence" class="com.justonetech.oa.service.persistence.OfficeSupplyApplicationPersistenceImpl" parent="basePersistence" />
+	<bean id="com.justonetech.oa.service.OfficeSupplyApplicationItemLocalService" class="com.justonetech.oa.service.impl.OfficeSupplyApplicationItemLocalServiceImpl" />
+	<bean id="com.justonetech.oa.service.persistence.OfficeSupplyApplicationItemPersistence" class="com.justonetech.oa.service.persistence.OfficeSupplyApplicationItemPersistenceImpl" parent="basePersistence" />
+	<bean id="com.justonetech.oa.service.VehicleApplicationLocalService" class="com.justonetech.oa.service.impl.VehicleApplicationLocalServiceImpl" />
+	<bean id="com.justonetech.oa.service.persistence.VehicleApplicationPersistence" class="com.justonetech.oa.service.persistence.VehicleApplicationPersistenceImpl" parent="basePersistence" />
+</beans>

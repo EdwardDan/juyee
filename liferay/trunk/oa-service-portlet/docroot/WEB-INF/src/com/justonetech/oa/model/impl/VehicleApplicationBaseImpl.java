@@ -36,7 +36,7 @@ public abstract class VehicleApplicationBaseImpl
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a vehicle Application model instance should use the {@link VehicleApplication} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a vehicle application model instance should use the {@link VehicleApplication} interface instead.
 	 */
 	@Override
 	public void persist() throws SystemException {

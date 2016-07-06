@@ -58,7 +58,7 @@ public class VehicleApplicationModelImpl extends BaseModelImpl<VehicleApplicatio
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a vehicle Application model instance should use the {@link com.justonetech.oa.model.VehicleApplication} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a vehicle application model instance should use the {@link com.justonetech.oa.model.VehicleApplication} interface instead.
 	 */
 	public static final String TABLE_NAME = "oa_VehicleApplication";
 	public static final Object[][] TABLE_COLUMNS = {

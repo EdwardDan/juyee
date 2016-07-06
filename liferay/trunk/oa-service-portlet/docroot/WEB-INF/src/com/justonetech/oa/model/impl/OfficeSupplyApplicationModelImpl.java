@@ -58,7 +58,7 @@ public class OfficeSupplyApplicationModelImpl extends BaseModelImpl<OfficeSupply
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a office supply Application model instance should use the {@link com.justonetech.oa.model.OfficeSupplyApplication} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a office supply application model instance should use the {@link com.justonetech.oa.model.OfficeSupplyApplication} interface instead.
 	 */
 	public static final String TABLE_NAME = "oa_OfficeSupplyApplication";
 	public static final Object[][] TABLE_COLUMNS = {

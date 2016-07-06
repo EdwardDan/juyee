@@ -36,7 +36,7 @@ public abstract class OfficeSupplyApplicationBaseImpl
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a office supply Application model instance should use the {@link OfficeSupplyApplication} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a office supply application model instance should use the {@link OfficeSupplyApplication} interface instead.
 	 */
 	@Override
 	public void persist() throws SystemException {

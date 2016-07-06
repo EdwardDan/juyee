@@ -54,7 +54,7 @@ public class OfficeSupplyApplicationItemModelImpl extends BaseModelImpl<OfficeSu
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a office supply Application item model instance should use the {@link com.justonetech.oa.model.OfficeSupplyApplicationItem} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a office supply application item model instance should use the {@link com.justonetech.oa.model.OfficeSupplyApplicationItem} interface instead.
 	 */
 	public static final String TABLE_NAME = "oa_OfficeSupplyApplicationItem";
 	public static final Object[][] TABLE_COLUMNS = {
@@ -83,8 +83,8 @@ public class OfficeSupplyApplicationItemModelImpl extends BaseModelImpl<OfficeSu
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.column.bitmask.enabled.com.justonetech.oa.model.OfficeSupplyApplicationItem"),
 			true);
-	public static long OFFICESUPPLYApplicationID_COLUMN_BITMASK = 1L;
-	public static long OFFICESUPPLYApplicationITEMID_COLUMN_BITMASK = 2L;
+	public static long OFFICESUPPLYAPPLICATIONID_COLUMN_BITMASK = 1L;
+	public static long OFFICESUPPLYAPPLICATIONITEMID_COLUMN_BITMASK = 2L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
 				"lock.expiration.time.com.justonetech.oa.model.OfficeSupplyApplicationItem"));
 
@@ -275,7 +275,7 @@ public class OfficeSupplyApplicationItemModelImpl extends BaseModelImpl<OfficeSu
 
 	@Override
 	public void setOfficeSupplyApplicationId(long officeSupplyApplicationId) {
-		_columnBitmask |= OFFICESUPPLYApplicationID_COLUMN_BITMASK;
+		_columnBitmask |= OFFICESUPPLYAPPLICATIONID_COLUMN_BITMASK;
 
 		if (!_setOriginalOfficeSupplyApplicationId) {
 			_setOriginalOfficeSupplyApplicationId = true;

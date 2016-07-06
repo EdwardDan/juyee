@@ -1,0 +1,134 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="com.justonetech.oa.model.DeptWork" />
+	<import class="com.justonetech.oa.model.DeptWorkItem" />
+	<import class="com.justonetech.oa.model.Dispatch" />
+	<import class="com.justonetech.oa.model.LeaderWork" />
+	<import class="com.justonetech.oa.model.OfficeSupply" />
+	<import class="com.justonetech.oa.model.OfficeSupplyApplication" />
+	<import class="com.justonetech.oa.model.OfficeSupplyApplicationItem" />
+	<import class="com.justonetech.oa.model.VehicleApplication" />
+	<class name="com.justonetech.oa.model.impl.DeptWorkImpl" table="oa_DeptWork">
+		<cache usage="read-write" />
+		<id name="deptWorkId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createTime" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedTime" type="org.hibernate.type.TimestampType" />
+		<property name="deptId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="deptName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="startDate" type="org.hibernate.type.TimestampType" />
+		<property name="endDate" type="org.hibernate.type.TimestampType" />
+		<property name="status" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.justonetech.oa.model.impl.DeptWorkItemImpl" table="oa_DeptWorkItem">
+		<cache usage="read-write" />
+		<id name="deptWorkItemId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="deptWorkId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="sortNo" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="dutyPerosn" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="mainWork" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="schedule" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="content" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="agentPerson" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.justonetech.oa.model.impl.DispatchImpl" table="oa_Dispatch">
+		<cache usage="read-write" />
+		<id name="dispatchId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createTime" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedTime" type="org.hibernate.type.TimestampType" />
+		<property name="rocordType" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="securityLevel" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="organaAbbreviation" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="year" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="serialNo" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="title" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="sendOrgan" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="ccOrgan" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="writtenOrgan" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="writtenDate" type="org.hibernate.type.TimestampType" />
+		<property name="urgencyDegree" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="com.justonetech.oa.model.impl.LeaderWorkImpl" table="oa_LeaderWork">
+		<cache usage="read-write" />
+		<composite-id name="primaryKey" class="com.justonetech.oa.service.persistence.LeaderWorkPK">
+			<key-property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+			<key-property name="workDate" type="org.hibernate.type.TimestampType" />
+			<key-property name="amOrPm" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		</composite-id>
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createTime" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedTime" type="org.hibernate.type.TimestampType" />
+		<property name="content" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.justonetech.oa.model.impl.OfficeSupplyImpl" table="oa_OfficeSupply">
+		<cache usage="read-write" />
+		<id name="officeSupplyId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createTime" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedTime" type="org.hibernate.type.TimestampType" />
+		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="model" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="unit" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="unitPrice" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="quantity" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+	</class>
+	<class name="com.justonetech.oa.model.impl.OfficeSupplyApplicationImpl" table="oa_OfficeSupplyApplication">
+		<cache usage="read-write" />
+		<id name="officeSupplyApplicationId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createTime" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedTime" type="org.hibernate.type.TimestampType" />
+		<property name="deptId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="deptName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="introductions" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.justonetech.oa.model.impl.OfficeSupplyApplicationItemImpl" table="oa_OfficeSupplyApplicationItem">
+		<cache usage="read-write" />
+		<id name="officeSupplyApplicationItemId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="model" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="unit" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="unitPrice" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="quantity" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="officeSupplyApplicationId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="officeSupplyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="com.justonetech.oa.model.impl.VehicleApplicationImpl" table="oa_VehicleApplication">
+		<cache usage="read-write" />
+		<id name="vehicleApplicationId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createTime" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedTime" type="org.hibernate.type.TimestampType" />
+		<property name="applicantDeptId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="applicantDeptName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="applicantId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="applicantName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="startTime" type="org.hibernate.type.TimestampType" />
+		<property name="endTime" type="org.hibernate.type.TimestampType" />
+		<property name="passengerNum" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="reason" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="destination" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+</hibernate-mapping>
