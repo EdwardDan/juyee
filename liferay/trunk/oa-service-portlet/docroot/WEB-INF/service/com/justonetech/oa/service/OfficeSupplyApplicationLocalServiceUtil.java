@@ -280,20 +280,6 @@ public class OfficeSupplyApplicationLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
-	public static java.util.List<com.justonetech.oa.model.OfficeSupplyApplicationItem> findByOfficeSupplyApplicationId(
-		long officeSupplyApplicationId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .findByOfficeSupplyApplicationId(officeSupplyApplicationId);
-	}
-
-	public static int countByOfficeSupplyApplicationId(
-		long officeSupplyApplicationId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .countByOfficeSupplyApplicationId(officeSupplyApplicationId);
-	}
-
 	public static java.util.List<com.justonetech.oa.model.OfficeSupplyApplication> findByUserId(
 		long userId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {

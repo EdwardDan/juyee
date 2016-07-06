@@ -290,6 +290,19 @@ public class OfficeSupplyApplicationItemLocalServiceWrapper
 			parameterTypes, arguments);
 	}
 
+	@Override
+	public java.util.List<com.justonetech.oa.model.OfficeSupplyApplicationItem> findByOfficeSupplyApplicationId(
+		long officeSupplyApplicationId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _officeSupplyApplicationItemLocalService.findByOfficeSupplyApplicationId(officeSupplyApplicationId);
+	}
+
+	@Override
+	public int countByOfficeSupplyApplicationId(long officeSupplyApplicationId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _officeSupplyApplicationItemLocalService.countByOfficeSupplyApplicationId(officeSupplyApplicationId);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

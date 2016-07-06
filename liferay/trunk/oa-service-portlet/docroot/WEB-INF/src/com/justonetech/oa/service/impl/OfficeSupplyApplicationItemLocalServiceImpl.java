@@ -14,7 +14,11 @@
 
 package com.justonetech.oa.service.impl;
 
+import java.util.List;
+
+import com.justonetech.oa.model.OfficeSupplyApplicationItem;
 import com.justonetech.oa.service.base.OfficeSupplyApplicationItemLocalServiceBaseImpl;
+import com.liferay.portal.kernel.exception.SystemException;
 
 /**
  * The implementation of the office supply Application item local service.
@@ -37,4 +41,17 @@ public class OfficeSupplyApplicationItemLocalServiceImpl
 	 *
 	 * Never reference this interface directly. Always use {@link com.justonetech.oa.service.OfficeSupplyApplicationItemLocalServiceUtil} to access the office supply Application item local service.
 	 */
+	
+	public List<OfficeSupplyApplicationItem> findByOfficeSupplyApplicationId(
+			long officeSupplyApplicationId) throws SystemException {
+		return officeSupplyApplicationItemPersistence
+				.findByOfficeSupplyApplicationId(officeSupplyApplicationId);
+	}
+
+	public int countByOfficeSupplyApplicationId(long officeSupplyApplicationId)
+			throws SystemException {
+
+		return officeSupplyApplicationItemPersistence
+				.countByOfficeSupplyApplicationId(officeSupplyApplicationId);
+	}
 }

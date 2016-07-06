@@ -291,19 +291,6 @@ public class OfficeSupplyApplicationLocalServiceWrapper
 	}
 
 	@Override
-	public java.util.List<com.justonetech.oa.model.OfficeSupplyApplicationItem> findByOfficeSupplyApplicationId(
-		long officeSupplyApplicationId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _officeSupplyApplicationLocalService.findByOfficeSupplyApplicationId(officeSupplyApplicationId);
-	}
-
-	@Override
-	public int countByOfficeSupplyApplicationId(long officeSupplyApplicationId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _officeSupplyApplicationLocalService.countByOfficeSupplyApplicationId(officeSupplyApplicationId);
-	}
-
-	@Override
 	public java.util.List<com.justonetech.oa.model.OfficeSupplyApplication> findByUserId(
 		long userId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {

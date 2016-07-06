@@ -254,13 +254,6 @@ public interface OfficeSupplyApplicationLocalService extends BaseLocalService,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
 
-	public java.util.List<com.justonetech.oa.model.OfficeSupplyApplicationItem> findByOfficeSupplyApplicationId(
-		long officeSupplyApplicationId)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public int countByOfficeSupplyApplicationId(long officeSupplyApplicationId)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
 	public java.util.List<com.justonetech.oa.model.OfficeSupplyApplication> findByUserId(
 		long userId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;

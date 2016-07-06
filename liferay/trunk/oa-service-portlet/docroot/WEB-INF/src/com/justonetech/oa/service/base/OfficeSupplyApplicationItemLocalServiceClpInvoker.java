@@ -113,6 +113,14 @@ public class OfficeSupplyApplicationItemLocalServiceClpInvoker {
 		_methodName61 = "setBeanIdentifier";
 
 		_methodParameterTypes61 = new String[] { "java.lang.String" };
+
+		_methodName66 = "findByOfficeSupplyApplicationId";
+
+		_methodParameterTypes66 = new String[] { "long" };
+
+		_methodName67 = "countByOfficeSupplyApplicationId";
+
+		_methodParameterTypes67 = new String[] { "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -216,6 +224,16 @@ public class OfficeSupplyApplicationItemLocalServiceClpInvoker {
 			return null;
 		}
 
+		if (_methodName66.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes66, parameterTypes)) {
+			return OfficeSupplyApplicationItemLocalServiceUtil.findByOfficeSupplyApplicationId(((Long)arguments[0]).longValue());
+		}
+
+		if (_methodName67.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes67, parameterTypes)) {
+			return OfficeSupplyApplicationItemLocalServiceUtil.countByOfficeSupplyApplicationId(((Long)arguments[0]).longValue());
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -255,4 +273,8 @@ public class OfficeSupplyApplicationItemLocalServiceClpInvoker {
 	private String[] _methodParameterTypes60;
 	private String _methodName61;
 	private String[] _methodParameterTypes61;
+	private String _methodName66;
+	private String[] _methodParameterTypes66;
+	private String _methodName67;
+	private String[] _methodParameterTypes67;
 }

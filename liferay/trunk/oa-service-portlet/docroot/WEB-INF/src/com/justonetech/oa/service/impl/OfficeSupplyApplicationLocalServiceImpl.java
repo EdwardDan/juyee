@@ -44,19 +44,6 @@ public class OfficeSupplyApplicationLocalServiceImpl
 	 *
 	 * Never reference this interface directly. Always use {@link com.justonetech.oa.service.OfficeSupplyApplicationLocalServiceUtil} to access the office supply Application local service.
 	 */
-	
-	public List<OfficeSupplyApplicationItem> findByOfficeSupplyApplicationId(
-			long officeSupplyApplicationId) throws SystemException {
-		return officeSupplyApplicationItemPersistence
-				.findByOfficeSupplyApplicationId(officeSupplyApplicationId);
-	}
-
-	public int countByOfficeSupplyApplicationId(long officeSupplyApplicationId)
-			throws SystemException {
-
-		return officeSupplyApplicationItemPersistence
-				.countByOfficeSupplyApplicationId(officeSupplyApplicationId);
-	}
 
 	public List<OfficeSupplyApplication> findByUserId(long userId, int start,
 			int end) throws SystemException {

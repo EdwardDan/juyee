@@ -14,7 +14,11 @@
 
 package com.justonetech.oa.service.impl;
 
+import java.util.List;
+
+import com.justonetech.oa.model.DeptWorkItem;
 import com.justonetech.oa.service.base.DeptWorkItemLocalServiceBaseImpl;
+import com.liferay.portal.kernel.exception.SystemException;
 
 /**
  * The implementation of the dept work item local service.
@@ -37,4 +41,13 @@ public class DeptWorkItemLocalServiceImpl
 	 *
 	 * Never reference this interface directly. Always use {@link com.justonetech.oa.service.DeptWorkItemLocalServiceUtil} to access the dept work item local service.
 	 */
+	
+	public List<DeptWorkItem> findByDeptWorkId(long deptWorkId) throws SystemException {
+		return deptWorkItemPersistence.findByDeptWorkId(deptWorkId);
+	}
+
+	public int countByDeptWorkId(long deptWorkId) throws SystemException {
+
+		return deptWorkItemPersistence.countByDeptWorkId(deptWorkId);
+	}
 }
