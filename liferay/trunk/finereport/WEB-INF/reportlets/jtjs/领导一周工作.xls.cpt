@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WorkBook xmlVersion="20151125" releaseVersion="8.0.0">
+<Report class="com.fr.report.worksheet.WorkSheet" name="一周工作">
+<ReportPageAttr>
+<HR/>
+<FR/>
+<HC/>
+<FC/>
+</ReportPageAttr>
+<ColumnPrivilegeControl/>
+<RowPrivilegeControl/>
+<RowHeight defaultValue="723900">
+<![CDATA[1465580,1465580,1465580,1465580,1465580,1465580,1465580,1465580,1465580,1465580,1465580,1465580,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900,723900]]></RowHeight>
+<ColumnWidth defaultValue="2743200">
+<![CDATA[4000500,2705100,5372100,5372100,5372100,5372100,5372100,5372100,5372100,3009900,2743200,2743200,2743200,2743200,2743200,2743200,2743200,2743200,2743200,2743200,2743200]]></ColumnWidth>
+<CellElementList>
+<C c="0" r="0" cs="2" rs="2" s="0">
+<O>
+<![CDATA[姓名]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="2" r="0" s="0">
+<O>
+<![CDATA[星期一]]></O>
+<PrivilegeControl/>
+</C>
+<C c="3" r="0" s="0">
+<O>
+<![CDATA[星期二]]></O>
+<PrivilegeControl/>
+</C>
+<C c="4" r="0" s="0">
+<O>
+<![CDATA[星期三]]></O>
+<PrivilegeControl/>
+</C>
+<C c="5" r="0" s="0">
+<O>
+<![CDATA[星期四]]></O>
+<PrivilegeControl/>
+</C>
+<C c="6" r="0" s="0">
+<O>
+<![CDATA[星期五]]></O>
+<PrivilegeControl/>
+</C>
+<C c="7" r="0" s="0">
+<O>
+<![CDATA[星期六]]></O>
+<PrivilegeControl/>
+</C>
+<C c="8" r="0" s="0">
+<O>
+<![CDATA[星期日]]></O>
+<PrivilegeControl/>
+</C>
+<C c="2" r="1" s="0">
+<O>
+<![CDATA[（2016-07-04）]]></O>
+<PrivilegeControl/>
+</C>
+<C c="3" r="1" s="0">
+<O>
+<![CDATA[（2016-07-05）]]></O>
+<PrivilegeControl/>
+</C>
+<C c="4" r="1" s="0">
+<O>
+<![CDATA[（2016-07-06）]]></O>
+<PrivilegeControl/>
+</C>
+<C c="5" r="1" s="0">
+<O>
+<![CDATA[（2016-07-07）]]></O>
+<PrivilegeControl/>
+</C>
+<C c="6" r="1" s="0">
+<O>
+<![CDATA[（2016-07-08）]]></O>
+<PrivilegeControl/>
+</C>
+<C c="7" r="1" s="0">
+<O>
+<![CDATA[（2016-07-09）]]></O>
+<PrivilegeControl/>
+</C>
+<C c="8" r="1" s="0">
+<O>
+<![CDATA[（2016-07-10）]]></O>
+<PrivilegeControl/>
+</C>
+<C c="0" r="2" rs="2" s="0">
+<O>
+<![CDATA[领导1]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="1" r="2" s="0">
+<O>
+<![CDATA[上午]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="2" r="2" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="3" r="2" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="4" r="2" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="5" r="2" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="6" r="2" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="7" r="2" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="8" r="2" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="1" r="3" s="0">
+<O>
+<![CDATA[下午]]></O>
+<PrivilegeControl/>
+</C>
+<C c="2" r="3" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="3" r="3" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="4" r="3" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="5" r="3" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="6" r="3" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="7" r="3" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="8" r="3" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="0" r="4" rs="2" s="0">
+<O>
+<![CDATA[领导2]]></O>
+<PrivilegeControl/>
+<Expand/>
+</C>
+<C c="1" r="4" s="0">
+<O>
+<![CDATA[上午]]></O>
+<PrivilegeControl/>
+</C>
+<C c="2" r="4" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="3" r="4" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="4" r="4" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="5" r="4" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="6" r="4" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="7" r="4" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="8" r="4" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="1" r="5" s="0">
+<O>
+<![CDATA[下午]]></O>
+<PrivilegeControl/>
+</C>
+<C c="2" r="5" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="3" r="5" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="4" r="5" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="5" r="5" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="6" r="5" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="7" r="5" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="8" r="5" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="0" r="6" rs="2" s="0">
+<O>
+<![CDATA[领导3]]></O>
+<PrivilegeControl/>
+</C>
+<C c="1" r="6" s="0">
+<O>
+<![CDATA[上午]]></O>
+<PrivilegeControl/>
+</C>
+<C c="2" r="6" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="3" r="6" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="4" r="6" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="5" r="6" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="6" r="6" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="7" r="6" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="8" r="6" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="1" r="7" s="0">
+<O>
+<![CDATA[下午]]></O>
+<PrivilegeControl/>
+</C>
+<C c="2" r="7" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="3" r="7" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="4" r="7" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="5" r="7" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="6" r="7" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="7" r="7" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="8" r="7" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="0" r="8" rs="2" s="0">
+<O>
+<![CDATA[领导4]]></O>
+<PrivilegeControl/>
+</C>
+<C c="1" r="8" s="0">
+<O>
+<![CDATA[上午]]></O>
+<PrivilegeControl/>
+</C>
+<C c="2" r="8" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="3" r="8" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="4" r="8" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="5" r="8" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="6" r="8" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="7" r="8" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="8" r="8" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="1" r="9" s="0">
+<O>
+<![CDATA[下午]]></O>
+<PrivilegeControl/>
+</C>
+<C c="2" r="9" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="3" r="9" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="4" r="9" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="5" r="9" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="6" r="9" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="7" r="9" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="8" r="9" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="0" r="10" rs="2" s="0">
+<O>
+<![CDATA[领导5]]></O>
+<PrivilegeControl/>
+</C>
+<C c="1" r="10" s="0">
+<O>
+<![CDATA[上午]]></O>
+<PrivilegeControl/>
+</C>
+<C c="2" r="10" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="3" r="10" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="4" r="10" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="5" r="10" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="6" r="10" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="7" r="10" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="8" r="10" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="1" r="11" s="0">
+<O>
+<![CDATA[下午]]></O>
+<PrivilegeControl/>
+</C>
+<C c="2" r="11" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="3" r="11" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="4" r="11" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="5" r="11" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="6" r="11" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="7" r="11" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+<C c="8" r="11" s="1">
+<O>
+<![CDATA[]]></O>
+<PrivilegeControl/>
+</C>
+</CellElementList>
+<ReportAttrSet>
+<ReportSettings headerHeight="1097280" footerHeight="1097280">
+<PaperSetting orientation="1">
+<Margin top="3657600" left="2743200" bottom="3657600" right="2743200"/>
+</PaperSetting>
+</ReportSettings>
+</ReportAttrSet>
+<PrivilegeControl/>
+</Report>
+<StyleList>
+<Style horizontal_alignment="0" textStyle="1" imageLayout="1">
+<FRFont name="DengXian" style="0" size="96"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+<Style horizontal_alignment="2" textStyle="1" imageLayout="1">
+<FRFont name="DengXian" style="0" size="96"/>
+<Background name="NullBackground"/>
+<Border>
+<Top style="1"/>
+<Bottom style="1"/>
+<Left style="1"/>
+<Right style="1"/>
+</Border>
+</Style>
+</StyleList>
+<DesignerVersion DesignerVersion="IAA"/>
+<PreviewType PreviewType="0"/>
+</WorkBook>
