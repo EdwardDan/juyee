@@ -164,10 +164,10 @@
                 column="CONTRACT_PRICE"
                 type="java.lang.Double"
                 not-null="false"
-                length="10"
+                length="15"
                 >
-            <meta attribute="ColumnName">合同价格</meta>
-            <meta attribute="ColumnComment">合同价格</meta>
+            <meta attribute="ColumnName">合同价格（万元）</meta>
+            <meta attribute="ColumnComment">合同价格（万元）</meta>
         </property>
 
         <property
@@ -813,7 +813,7 @@
                 column="ZB_PRICE"
                 type="java.lang.Double"
                 not-null="false"
-                length="10"
+                length="15"
                 >
             <meta attribute="ColumnName">中标价（万元）</meta>
             <meta attribute="ColumnComment">中标价（万元）</meta>
@@ -846,7 +846,7 @@
                 column="PROJECT_PLAN_COST"
                 type="java.lang.Double"
                 not-null="false"
-                length="10"
+                length="15"
                 >
             <meta attribute="ColumnName">项目投资估算（万元）</meta>
             <meta attribute="ColumnComment">项目投资估算（万元）</meta>
