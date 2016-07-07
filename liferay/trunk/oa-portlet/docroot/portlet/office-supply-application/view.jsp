@@ -25,18 +25,24 @@
 			name="申请部门" />
 		<liferay-ui:search-container-column-text property="userName"
 			name="申请人" />
-		<liferay-ui:search-container-column-text property="createTime"
+			<%
+				Date createDate = officeSupplyApplication.getCreateTime();
+				String createTime = DateUtil.getDate(createDate, defaultDateFormatPattern, locale, timeZone);
+			%>
+		<liferay-ui:search-container-column-text value="<%=createTime%>"
 			name="申请时间" />
-		<%-- <liferay-ui:search-container-column-text name="状态" /> --%>
+		<liferay-ui:search-container-column-text name="状态" value="填写"/>
 		<liferay-ui:search-container-column-text name="action">
 		<portlet:actionURL var="editOfficeSupplyApplicationURL" name="editOfficeSupplyApplication">   
 				<portlet:param name="mvcPath" value="${contentPath }/edit-office-supply-application.jsp" />
+				<portlet:param name="officeSupplyApplicationId" value="${officeSupplyApplication.officeSupplyApplicationId}"/>
 			</portlet:actionURL>
 			<portlet:actionURL var="deleteOfficeSupplyApplicationURL" name="deleteOfficeSupplyApplication">
 				<portlet:param name="officeSupplyApplicationId" value="${officeSupplyApplication.officeSupplyApplicationId}"/>
 			</portlet:actionURL>
 			<portlet:actionURL var="viewOfficeSupplyApplicationURL" name="viewOfficeSupplyApplication">
-				<portlet:param name="mvcPath" value="${contentPath }/edit-office-supply-application.jsp" />
+				<portlet:param name="mvcPath" value="${contentPath }/view-office-supply-application.jsp" />
+				<portlet:param name="officeSupplyApplicationId" value="${officeSupplyApplication.officeSupplyApplicationId}"/>
 			</portlet:actionURL>
 		<liferay-ui:icon-menu>
 				<liferay-ui:icon image="edit" url="${editOfficeSupplyApplicationURL}" />

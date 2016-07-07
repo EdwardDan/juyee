@@ -105,9 +105,7 @@
 	<portlet>
 		<portlet-name>send-dispatch</portlet-name>
 		<display-name>发文管理</display-name>
-		<portlet-class>
-			com.justonetech.oa.portlet.SendDispatchPortlet
-		</portlet-class>
+		<portlet-class>com.justonetech.oa.portlet.SendDispatchPortlet</portlet-class>
 		<init-param>
 			<name>view-template</name>
 			<value>/portlet/send-dispatch/view.jsp</value>
@@ -142,9 +140,7 @@
 	<portlet>
 		<portlet-name>vehicle-application</portlet-name>
 		<display-name>车辆申请</display-name>
-		<portlet-class>
-			com.justonetech.oa.portlet.VehicleApplicationPortlet
-		</portlet-class>
+		<portlet-class>com.justonetech.oa.portlet.VehicleApplicationPortlet</portlet-class>
 		<init-param>
 			<name>view-template</name>
 			<value>/portlet/vehicle-application/view.jsp</value>
@@ -180,11 +176,14 @@
 		<portlet-name>office-supply-application</portlet-name>
 		<display-name>Office Supply Application</display-name>
 		<portlet-class>
-			com.justonetech.oa.portlet.OfficeSupplyApplicationPortlet
-		</portlet-class>
+			com.justonetech.oa.portlet.OfficeSupplyApplicationPortlet</portlet-class>
 		<init-param>
 			<name>view-template</name>
 			<value>/portlet/office-supply-application/view.jsp</value>
+		</init-param>
+		<init-param>
+			<name>copy-request-parameters</name>
+			<value>true</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>

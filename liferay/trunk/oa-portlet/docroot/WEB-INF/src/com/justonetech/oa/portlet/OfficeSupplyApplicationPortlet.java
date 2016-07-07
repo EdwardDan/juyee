@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
@@ -44,7 +45,6 @@ public class OfficeSupplyApplicationPortlet extends MVCPortlet {
 		int pageNumber = ParamUtil.getInteger(renderRequest, "cur", 1);
 		int start = pageSize * (pageNumber - 1);
 		int end = pageSize * pageNumber;
-
 		List<OfficeSupplyApplication> officeSupplyApplications = Collections.emptyList();
 		try {
 			officeSupplyApplications = OfficeSupplyApplicationLocalServiceUtil.findByUserId(userId, start, end);
@@ -62,27 +62,50 @@ public class OfficeSupplyApplicationPortlet extends MVCPortlet {
 		super.doView(renderRequest, renderResponse);
 	}
 
-	public void saveOfficeSupplyApplication(ActionRequest request, ActionResponse response) throws SystemException {
+	public void saveOfficeSupplyApplication(ActionRequest request, ActionResponse response) throws SystemException,
+			PortalException {
+		long officeSupplyApplicationId = ParamUtil.getLong(request, "officeSupplyApplicationId");
 		long userId = PortalUtil.getUserId(request);
 		String userName = PortalUtil.getUserName(userId, "default");
 		String deptName = ParamUtil.getString(request, "deptName");
 		String introductions = ParamUtil.getString(request, "introductions");
 		Date now = new Date();
-		OfficeSupplyApplication officeSupplyApplication = OfficeSupplyApplicationLocalServiceUtil
-				.createOfficeSupplyApplication(CounterLocalServiceUtil.increment());
+		OfficeSupplyApplication officeSupplyApplication = null;
+		if (Validator.isNotNull(officeSupplyApplicationId)) {
+			officeSupplyApplication = OfficeSupplyApplicationLocalServiceUtil
+					.getOfficeSupplyApplication(officeSupplyApplicationId);
+		} else {
+			officeSupplyApplication = OfficeSupplyApplicationLocalServiceUtil
+					.createOfficeSupplyApplication(CounterLocalServiceUtil.increment());
+		}
 		officeSupplyApplication.setUserId(userId);
 		officeSupplyApplication.setUserName(userName);
 		officeSupplyApplication.setCreateTime(now);
 		officeSupplyApplication.setModifiedTime(now);
 		officeSupplyApplication.setDeptName(deptName);
-		officeSupplyApplication.setDeptName(introductions);
+		officeSupplyApplication.setIntroductions(introductions);
 		OfficeSupplyApplicationLocalServiceUtil.updateOfficeSupplyApplication(officeSupplyApplication);
-		long officeSupplyApplicationId = officeSupplyApplication.getOfficeSupplyApplicationId();
+
 		String rowIndexes = request.getParameter("rowIndexes");
 		String[] indexOfRows = rowIndexes.split(",");
 		for (int i = 0; i < indexOfRows.length; i++) {
-			OfficeSupplyApplicationItem officeSupplyApplicationItem = OfficeSupplyApplicationItemLocalServiceUtil
-					.createOfficeSupplyApplicationItem(CounterLocalServiceUtil.increment());
+			String officeSupplyApplicationItemIdStr = null;
+			if (Validator.isNotNull(officeSupplyApplicationId)) {
+				officeSupplyApplicationItemIdStr = (request.getParameter("officeSupplyApplicationItemId"
+						+ indexOfRows[i])).trim();
+			}
+			long officeSupplyApplicationItemId = 0;
+			if (Validator.isNotNull(officeSupplyApplicationItemIdStr)) {
+				officeSupplyApplicationItemId = Long.valueOf(officeSupplyApplicationItemIdStr);
+			}
+			OfficeSupplyApplicationItem officeSupplyApplicationItem = null;
+			if (Validator.isNotNull(officeSupplyApplicationItemId)) {
+				officeSupplyApplicationItem = OfficeSupplyApplicationItemLocalServiceUtil
+						.getOfficeSupplyApplicationItem(officeSupplyApplicationItemId);
+			} else {
+				officeSupplyApplicationItem = OfficeSupplyApplicationItemLocalServiceUtil
+						.createOfficeSupplyApplicationItem(CounterLocalServiceUtil.increment());
+			}
 			String name = (request.getParameter("name" + indexOfRows[i])).trim();
 			String model = (request.getParameter("model" + indexOfRows[i])).trim();
 			String unit = (request.getParameter("unit" + indexOfRows[i])).trim();
@@ -95,22 +118,46 @@ public class OfficeSupplyApplicationPortlet extends MVCPortlet {
 			officeSupplyApplicationItem.setUnit(unit);
 			officeSupplyApplicationItem.setUnitPrice(unitPrice);
 			officeSupplyApplicationItem.setQuantity(quantity);
-			officeSupplyApplicationItem.setOfficeSupplyApplicationId(officeSupplyApplicationId);
+			officeSupplyApplicationItem.setOfficeSupplyApplicationId(officeSupplyApplication
+					.getOfficeSupplyApplicationId());
 			OfficeSupplyApplicationItemLocalServiceUtil.updateOfficeSupplyApplicationItem(officeSupplyApplicationItem);
 		}
 	}
-	
-	public void editOfficeSupplyApplication(ActionRequest request, ActionResponse response) {
-		
+
+	public void editOfficeSupplyApplication(ActionRequest request, ActionResponse response) throws PortalException,
+			SystemException {
+		long officeSupplyApplicationId = ParamUtil.getLong(request, "officeSupplyApplicationId");
+		OfficeSupplyApplication officeSupplyApplication = OfficeSupplyApplicationLocalServiceUtil
+				.getOfficeSupplyApplication(officeSupplyApplicationId);
+		List<OfficeSupplyApplicationItem> officeSupplyApplicationItems = OfficeSupplyApplicationItemLocalServiceUtil
+				.findByOfficeSupplyApplicationId(officeSupplyApplicationId);
+		int size = officeSupplyApplicationItems.size();
+		request.setAttribute("officeSupplyApplicationId", officeSupplyApplicationId);
+		request.setAttribute("officeSupplyApplication", officeSupplyApplication);
+		request.setAttribute("officeSupplyApplicationItems", officeSupplyApplicationItems);
+		request.setAttribute("size", size);
 	}
-	
-	public void deleteOfficeSupplyApplication(ActionRequest request, ActionResponse response) throws PortalException, SystemException {
+
+	public void deleteOfficeSupplyApplication(ActionRequest request, ActionResponse response) throws PortalException,
+			SystemException {
 		long officeSupplyApplicationId = ParamUtil.getLong(request, "officeSupplyApplicationId");
 		OfficeSupplyApplicationLocalServiceUtil.deleteOfficeSupplyApplication(officeSupplyApplicationId);
-//		List<OfficeSupplyApplicationItem> officeSupplyApplicationItems = OfficeSupplyApplicationItemLocalServiceUtil.d
+		List<OfficeSupplyApplicationItem> officeSupplyApplicationItems = OfficeSupplyApplicationItemLocalServiceUtil
+				.findByOfficeSupplyApplicationId(officeSupplyApplicationId);
+		for (OfficeSupplyApplicationItem officeSupplyApplicationItem : officeSupplyApplicationItems) {
+			OfficeSupplyApplicationItemLocalServiceUtil.deleteOfficeSupplyApplicationItem(officeSupplyApplicationItem);
+		}
 	}
-	
-	public void viewOfficeSupplyApplication(ActionRequest request, ActionResponse response) {
-		
+
+	public void viewOfficeSupplyApplication(ActionRequest request, ActionResponse response) throws PortalException,
+			SystemException {
+		long officeSupplyApplicationId = ParamUtil.getLong(request, "officeSupplyApplicationId");
+		OfficeSupplyApplication officeSupplyApplication = OfficeSupplyApplicationLocalServiceUtil
+				.getOfficeSupplyApplication(officeSupplyApplicationId);
+		List<OfficeSupplyApplicationItem> officeSupplyApplicationItems = OfficeSupplyApplicationItemLocalServiceUtil
+				.findByOfficeSupplyApplicationId(officeSupplyApplicationId);
+		request.setAttribute("officeSupplyApplicationId", officeSupplyApplicationId);
+		request.setAttribute("officeSupplyApplication", officeSupplyApplication);
+		request.setAttribute("officeSupplyApplicationItems", officeSupplyApplicationItems);
 	}
 }
