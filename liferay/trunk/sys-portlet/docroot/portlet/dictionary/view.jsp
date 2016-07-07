@@ -2,7 +2,7 @@
 <%@ include file="/common/init.jsp"%>
 <c:set var="contentPath"
 	value="${request.contextPath}/portlet/dictionary" />
-
+ 
 <portlet:renderURL var="viewURL" >
 	<portlet:param name="parentId" value="${parentDictionary.dictionaryId}" />
 </portlet:renderURL>
