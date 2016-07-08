@@ -43,8 +43,6 @@
 		</aui:col>
 	</aui:row>
 
-
-
 	<aui:button-row>
 		<aui:button type="submit" value="提交" />
 		<aui:button type="cancel" value="取消" href="${viewURL }" />
