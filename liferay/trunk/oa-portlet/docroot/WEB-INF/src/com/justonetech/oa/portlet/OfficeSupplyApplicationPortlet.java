@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -66,7 +65,7 @@ public class OfficeSupplyApplicationPortlet extends MVCPortlet {
 			PortalException {
 		long officeSupplyApplicationId = ParamUtil.getLong(request, "officeSupplyApplicationId");
 		long userId = PortalUtil.getUserId(request);
-		String userName = PortalUtil.getUserName(userId, "default");
+		String userName = PortalUtil.getUserName(userId, "");
 		String deptName = ParamUtil.getString(request, "deptName");
 		String introductions = ParamUtil.getString(request, "introductions");
 		Date now = new Date();
@@ -74,14 +73,15 @@ public class OfficeSupplyApplicationPortlet extends MVCPortlet {
 		if (Validator.isNotNull(officeSupplyApplicationId)) {
 			officeSupplyApplication = OfficeSupplyApplicationLocalServiceUtil
 					.getOfficeSupplyApplication(officeSupplyApplicationId);
+			officeSupplyApplication.setModifiedTime(now);
 		} else {
 			officeSupplyApplication = OfficeSupplyApplicationLocalServiceUtil
 					.createOfficeSupplyApplication(CounterLocalServiceUtil.increment());
+			officeSupplyApplication.setCreateTime(now);
+			officeSupplyApplication.setModifiedTime(now);
 		}
 		officeSupplyApplication.setUserId(userId);
 		officeSupplyApplication.setUserName(userName);
-		officeSupplyApplication.setCreateTime(now);
-		officeSupplyApplication.setModifiedTime(now);
 		officeSupplyApplication.setDeptName(deptName);
 		officeSupplyApplication.setIntroductions(introductions);
 		OfficeSupplyApplicationLocalServiceUtil.updateOfficeSupplyApplication(officeSupplyApplication);
@@ -95,24 +95,20 @@ public class OfficeSupplyApplicationPortlet extends MVCPortlet {
 						+ indexOfRows[i])).trim();
 			}
 			long officeSupplyApplicationItemId = 0;
+			OfficeSupplyApplicationItem officeSupplyApplicationItem = null;
 			if (Validator.isNotNull(officeSupplyApplicationItemIdStr)) {
 				officeSupplyApplicationItemId = Long.valueOf(officeSupplyApplicationItemIdStr);
-			}
-			OfficeSupplyApplicationItem officeSupplyApplicationItem = null;
-			if (Validator.isNotNull(officeSupplyApplicationItemId)) {
 				officeSupplyApplicationItem = OfficeSupplyApplicationItemLocalServiceUtil
 						.getOfficeSupplyApplicationItem(officeSupplyApplicationItemId);
 			} else {
 				officeSupplyApplicationItem = OfficeSupplyApplicationItemLocalServiceUtil
 						.createOfficeSupplyApplicationItem(CounterLocalServiceUtil.increment());
 			}
-			String name = (request.getParameter("name" + indexOfRows[i])).trim();
-			String model = (request.getParameter("model" + indexOfRows[i])).trim();
-			String unit = (request.getParameter("unit" + indexOfRows[i])).trim();
-			String str1 = (request.getParameter("unitPrice" + indexOfRows[i])).trim();
-			double unitPrice = Double.parseDouble(str1);
-			String str2 = (request.getParameter("quantity" + indexOfRows[i])).trim();
-			int quantity = Integer.valueOf(str2);
+			String name = ParamUtil.getString(request, "name" + indexOfRows[i]);
+			String model = ParamUtil.getString(request, "model" + indexOfRows[i]);
+			String unit = ParamUtil.getString(request, "unit" + indexOfRows[i]);
+			int quantity = ParamUtil.getInteger(request, "quantity" + indexOfRows[i]);
+			double unitPrice = ParamUtil.getDouble(request,"unitPrice" + indexOfRows[i]);
 			officeSupplyApplicationItem.setName(name);
 			officeSupplyApplicationItem.setModel(model);
 			officeSupplyApplicationItem.setUnit(unit);

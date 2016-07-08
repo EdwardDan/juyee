@@ -1,5 +1,3 @@
-<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
-
-<portlet:defineObjects />
-
-This is the <b>科室一周工作</b> portlet in View mode.
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ include file="/common/init.jsp"%>
+This is the <b>一周工作</b> portlet in View mode.
