@@ -60,11 +60,14 @@
 		</aui:col>
 		</aui:row>
 		<aui:row>
-		<aui:col span="12" cssClass="">
+		<aui:col span="6" cssClass="">
 		<aui:input name="passengerNum" label="用车人数" required="true" >
 		<aui:validator name="digits" />
 		<aui:validator name="min">0</aui:validator>
 		</aui:input>
+		</aui:col>
+		<aui:col span="6" cssClass="">
+		<aui:input name="destination" label="目的地" required="true" value="上海市(    )区(    )路(    )号" />
 		</aui:col>
 		</aui:row>
 		<aui:row>
@@ -72,12 +75,6 @@
 		<aui:input name="reason" label="用车事由"  type="textarea" />
 		</aui:col>
 		</aui:row>
-		<aui:row>
-		<aui:col span="12" cssClass="">
-		<aui:input name="destination" label="目的地" required="true" value="上海市(    )区(    )路(    )号" />
-		</aui:col>
-		</aui:row>
-		
 	</aui:fieldset>
 	<aui:button-row>
 		<aui:button type="submit" value="提交" />
