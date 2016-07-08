@@ -17,7 +17,7 @@
 	<aui:row>
 		<aui:col span="6">
 			<aui:input name="officeSupplyId" type="hidden" />
-			<aui:input name="name" label="名称" required="true"/>
+			<aui:input name="name" label="名称" required="true" />
 		</aui:col>
 		<aui:col span="6">
 			<aui:input name="model" label="型号" />
@@ -28,12 +28,16 @@
 			<aui:input name="unit" label="单位" />
 		</aui:col>
 		<aui:col span="6">
-			<aui:input name="unitPrice" label="单价" />
+			<aui:input name="unitPrice" label="单价">
+				<aui:validator name="number" />
+			</aui:input>
 		</aui:col>
 	</aui:row>
 	<aui:row>
 		<aui:col span="6">
-			<aui:input name="quantity" label="库存" />
+			<aui:input name="quantity" label="库存">
+				<aui:validator name="digits" />
+			</aui:input>
 		</aui:col>
 		<aui:col span="6">
 		</aui:col>
