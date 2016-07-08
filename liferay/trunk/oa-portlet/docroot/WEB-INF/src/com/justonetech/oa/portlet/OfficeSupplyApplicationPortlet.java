@@ -38,7 +38,6 @@ public class OfficeSupplyApplicationPortlet extends MVCPortlet {
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
 		long userId = PortalUtil.getUserId(renderRequest);
-		// String userName = PortalUtil.getUserName(userId, "default");
 		int delta = GetterUtil.getInteger(PropsUtil.get(PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA));
 		int pageSize = ParamUtil.getInteger(renderRequest, "delta", delta);
 		int pageNumber = ParamUtil.getInteger(renderRequest, "cur", 1);
