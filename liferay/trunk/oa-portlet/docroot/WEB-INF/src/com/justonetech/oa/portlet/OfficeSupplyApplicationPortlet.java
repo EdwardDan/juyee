@@ -84,25 +84,17 @@ public class OfficeSupplyApplicationPortlet extends MVCPortlet {
 		officeSupplyApplication.setDeptName(deptName);
 		officeSupplyApplication.setIntroductions(introductions);
 		OfficeSupplyApplicationLocalServiceUtil.updateOfficeSupplyApplication(officeSupplyApplication);
-
+		
+		List<OfficeSupplyApplicationItem> officeSupplyApplicationItems = OfficeSupplyApplicationItemLocalServiceUtil
+				.findByOfficeSupplyApplicationId(officeSupplyApplicationId);
+		for (OfficeSupplyApplicationItem officeSupplyApplicationItem : officeSupplyApplicationItems) {
+			OfficeSupplyApplicationItemLocalServiceUtil.deleteOfficeSupplyApplicationItem(officeSupplyApplicationItem);
+		}
 		String rowIndexes = request.getParameter("rowIndexes");
 		String[] indexOfRows = rowIndexes.split(",");
 		for (int i = 0; i < indexOfRows.length; i++) {
-			String officeSupplyApplicationItemIdStr = null;
-			if (Validator.isNotNull(officeSupplyApplicationId)) {
-				officeSupplyApplicationItemIdStr = (request.getParameter("officeSupplyApplicationItemId"
-						+ indexOfRows[i])).trim();
-			}
-			long officeSupplyApplicationItemId = 0;
-			OfficeSupplyApplicationItem officeSupplyApplicationItem = null;
-			if (Validator.isNotNull(officeSupplyApplicationItemIdStr)) {
-				officeSupplyApplicationItemId = Long.valueOf(officeSupplyApplicationItemIdStr);
-				officeSupplyApplicationItem = OfficeSupplyApplicationItemLocalServiceUtil
-						.getOfficeSupplyApplicationItem(officeSupplyApplicationItemId);
-			} else {
-				officeSupplyApplicationItem = OfficeSupplyApplicationItemLocalServiceUtil
-						.createOfficeSupplyApplicationItem(CounterLocalServiceUtil.increment());
-			}
+			OfficeSupplyApplicationItem officeSupplyApplicationItem = OfficeSupplyApplicationItemLocalServiceUtil
+						.createOfficeSupplyApplicationItem(CounterLocalServiceUtil.increment());			
 			String name = ParamUtil.getString(request, "name" + indexOfRows[i]);
 			String model = ParamUtil.getString(request, "model" + indexOfRows[i]);
 			String unit = ParamUtil.getString(request, "unit" + indexOfRows[i]);
@@ -126,11 +118,9 @@ public class OfficeSupplyApplicationPortlet extends MVCPortlet {
 				.getOfficeSupplyApplication(officeSupplyApplicationId);
 		List<OfficeSupplyApplicationItem> officeSupplyApplicationItems = OfficeSupplyApplicationItemLocalServiceUtil
 				.findByOfficeSupplyApplicationId(officeSupplyApplicationId);
-		int size = officeSupplyApplicationItems.size();
-		request.setAttribute("officeSupplyApplicationId", officeSupplyApplicationId);
 		request.setAttribute("officeSupplyApplication", officeSupplyApplication);
+		request.setAttribute("officeSupplyApplicationId", officeSupplyApplicationId);
 		request.setAttribute("officeSupplyApplicationItems", officeSupplyApplicationItems);
-		request.setAttribute("size", size);
 	}
 
 	public void deleteOfficeSupplyApplication(ActionRequest request, ActionResponse response) throws PortalException,

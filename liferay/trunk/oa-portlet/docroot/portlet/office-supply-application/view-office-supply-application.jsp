@@ -5,19 +5,17 @@
 <portlet:renderURL var="viewURL" />
 <liferay-ui:header title='查看办公用品申请' backURL="${viewURL}" />
 <aui:row>
-	<aui:col span="6" cssClass="text-center">
-		<aui:input type="hidden" name="officeSupplyApplicationId"
-			value="${officeSupplyApplicationId}" />
-		<aui:input name="deptName" label="申请部门"
-			value="${officeSupplyApplication.deptName}" inlineField="true"
-			inlineLabel="left" disabled="true" />
-	</aui:col>
-	<aui:col span="6" cssClass="text-center">
-		<aui:input name="userName" label="申请人"
-			value="${officeSupplyApplication.userName}" inlineLabel="left"
-			disabled="true" />
-	</aui:col>
-</aui:row>
+		<aui:col span="6">
+			<aui:input type="hidden" name="officeSupplyApplicationId"
+				value="${officeSupplyApplicationId}" />
+			<aui:input name="deptName" label="申请部门"
+				value="${officeSupplyApplication.deptName}" inlineField="true" disabled="true"/>
+		</aui:col>
+		<aui:col span="6">
+			<aui:input name="userName" label="申请人" value="${officeSupplyApplication.userName}"
+				disabled="true" />
+		</aui:col>
+	</aui:row>
 <liferay-ui:search-container>
 	<liferay-ui:search-container-results
 		results="${officeSupplyApplicationItems}">
@@ -38,6 +36,6 @@
 <aui:row>
 	<aui:col span="12">
 		<aui:input type="textarea" name="introductions" label="申请说明"
-			value="${officeSupplyApplication.introductions}" />
+			value="${officeSupplyApplication.introductions}" style="width:100%" disabled="true"/>
 	</aui:col>
 </aui:row>
