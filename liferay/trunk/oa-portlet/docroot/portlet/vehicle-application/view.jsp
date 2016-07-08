@@ -9,14 +9,14 @@
 	<portlet:param name="redirect" value="${viewURL}" />
 </portlet:actionURL>
 <% 
-	SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+	SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 %>
 <aui:form action="${viewURL }" name="fm">
 	<aui:nav-bar>
 		<aui:nav>
 			<portlet:renderURL var="addVehicleApplicationURL">
 				<portlet:param name="mvcPath"
-					value="${contentPath }/edit-vehicle-application.jsp" />
+					value="${contentPath }/edit-vehicle-aplication.jsp" />
 			</portlet:renderURL>
 			<aui:nav-item href="<%=addVehicleApplicationURL%>" iconCssClass="icon-plus"
 				label="添加" />
@@ -44,7 +44,7 @@
 				<liferay-ui:icon-menu>
 					<portlet:actionURL var="editVehicleApplicationURL" name="editVehicleApplication">
 						<portlet:param name="vehicleApplicationId" value="${vehicleApplication.vehicleApplicationId}" />
-						<portlet:param name="mvcPath" value="${contentPath }/edit-vehicle-application.jsp" />
+						<portlet:param name="mvcPath" value="${contentPath }/edit-vehicle-aplication.jsp" />
 					</portlet:actionURL>
 					<liferay-ui:icon image="edit" label="编辑" url="${editVehicleApplicationURL}" />
 					<liferay-ui:icon image="delete" label="删除" url="javascript:void(0);" onClick='<%=renderResponse.getNamespace() + "deleteVehicleApplications("+vehicleApplication.getVehicleApplicationId()+");"%>' />

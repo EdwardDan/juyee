@@ -81,9 +81,11 @@ public class VehicleApplicationPortlet extends MVCPortlet {
 			long vehicleApplicationId=ParamUtil.getLong(actionRequest, "vehicleApplicationId");
 	        String applicantDeptName = ParamUtil.getString(actionRequest, "applicantDeptName");
 	        String applicantName = ParamUtil.getString(actionRequest, "applicantName");
-	        SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm");
-			Date startTime = ParamUtil.getDate(actionRequest, "startTimes", df);
-			Date endTime = ParamUtil.getDate(actionRequest, "endTimes", df);
+	        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");  
+			String st = ParamUtil.getString(actionRequest, "startTime");
+			Date startTime=df.parse(st);
+			String et = ParamUtil.getString(actionRequest, "endTime");
+			Date endTime=df.parse(et);
 	        String reason = ParamUtil.getString(actionRequest, "reason");
 	        int passengerNum = ParamUtil.getInteger(actionRequest, "passengerNum");
 	        String destination=ParamUtil.getString(actionRequest, "destination");
