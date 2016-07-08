@@ -9,8 +9,6 @@
 	   document.getElementById("status").value=status;
 	   document.forms[0].submit();
  }
-
-
 </script>
 
 <%

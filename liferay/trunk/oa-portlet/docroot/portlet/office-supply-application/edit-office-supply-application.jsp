@@ -84,7 +84,7 @@
 	<aui:row>
 		<aui:col span="12">
 			<aui:input type="textarea" name="introductions" label="申请说明"
-				value="${officeSupplyApplication.introductions}" style="width:100%"/>
+				value="${officeSupplyApplication.introductions}" style="width:90%"/>
 		</aui:col>
 	</aui:row>
 	<aui:button-row>
