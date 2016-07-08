@@ -1,3 +1,4 @@
+
 package com.justonetech.oa.portlet;
 
 import java.io.IOException;
@@ -33,11 +34,16 @@ import com.liferay.util.bridges.mvc.MVCPortlet;
  * Portlet implementation class VehicleApplicationPortlet
  */
 public class VehicleApplicationPortlet extends MVCPortlet {
-	private static Log log = LogFactoryUtil.getLog(VehicleApplicationPortlet.class);
-	@Override
-	public void doView(RenderRequest renderRequest,
-			RenderResponse renderResponse) throws IOException, PortletException {
-		String keywords = ParamUtil.getString(renderRequest, "keywords");
+
+    private static Log log = LogFactoryUtil.getLog(VehicleApplicationPortlet.class);
+    private static String timeFormatPattern = PropsUtil.get("default.date.format.pattern") + " " +
+        PropsUtil.get("default.time.format.pattern").substring(0, 5);
+
+    @Override
+    public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
+        throws IOException, PortletException {
+
+        String keywords = ParamUtil.getString(renderRequest, "keywords");
         int delta = GetterUtil.getInteger(PropsUtil.get(PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA));
         int pageSize = ParamUtil.getInteger(renderRequest, "delta", delta);
         int pageNumber = ParamUtil.getInteger(renderRequest, "cur", 1);
@@ -46,14 +52,14 @@ public class VehicleApplicationPortlet extends MVCPortlet {
 
         List<VehicleApplication> vehicleApplications = Collections.emptyList();
         try {
-        	vehicleApplications = VehicleApplicationLocalServiceUtil.findByApplicantName(keywords, start, end);
+            vehicleApplications = VehicleApplicationLocalServiceUtil.findByApplicantName(keywords, start, end);
         }
         catch (SystemException e) {
             log.error("getVehicleApplicationsByName(" + keywords + ", " + start + ", " + end + ")出错：" + e.getMessage());
         }
         int vehicleApplicationsCount = 0;
         try {
-        	vehicleApplicationsCount = VehicleApplicationLocalServiceUtil.countByName(keywords);
+            vehicleApplicationsCount = VehicleApplicationLocalServiceUtil.countByName(keywords);
         }
         catch (SystemException e) {
             log.error("getVehicleApplicationsCountByName(" + keywords + ")出错：" + e.getMessage());
@@ -63,68 +69,68 @@ public class VehicleApplicationPortlet extends MVCPortlet {
         renderRequest.setAttribute("vehicleApplicationsCount", vehicleApplicationsCount);
 
         super.doView(renderRequest, renderResponse);
-	}
- 
-	//编辑
-	public void editVehicleApplication(ActionRequest actionRequest, ActionResponse actionResponse)
-			throws IOException, PortletException, PortalException, SystemException {
-		long vehicleApplicationId = ParamUtil.getLong(actionRequest, "vehicleApplicationId");
-		VehicleApplication vehicleApplication = null;
-		if (vehicleApplicationId != 0) {
-			vehicleApplication = VehicleApplicationLocalServiceUtil.getVehicleApplication(vehicleApplicationId);
-		}
-		actionRequest.setAttribute("vehicleApplication", vehicleApplication);
-	}
-	//保存并添加
-	public void	saveVehicleApplication(ActionRequest actionRequest, ActionResponse actionResponse)
-	        throws IOException, PortletException, SystemException, PortalException, ParseException {
-			long vehicleApplicationId=ParamUtil.getLong(actionRequest, "vehicleApplicationId");
-	        String applicantDeptName = ParamUtil.getString(actionRequest, "applicantDeptName");
-	        String applicantName = ParamUtil.getString(actionRequest, "applicantName");
-	        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");  
-			String st = ParamUtil.getString(actionRequest, "startTime");
-			Date startTime=df.parse(st);
-			String et = ParamUtil.getString(actionRequest, "endTime");
-			Date endTime=df.parse(et);
-	        String reason = ParamUtil.getString(actionRequest, "reason");
-	        int passengerNum = ParamUtil.getInteger(actionRequest, "passengerNum");
-	        String destination=ParamUtil.getString(actionRequest, "destination");
-	        VehicleApplication vehicleApplication=null;
-	        Date now = new Date();
-	        if (vehicleApplicationId == 0) {
-	        	vehicleApplicationId = CounterLocalServiceUtil.increment();
-	        	vehicleApplication = VehicleApplicationLocalServiceUtil.createVehicleApplication(vehicleApplicationId);
+    }
 
-	        	vehicleApplication.setCreateTime(now);
-	        }
-	        else {
-	        	vehicleApplication = VehicleApplicationLocalServiceUtil.getVehicleApplication(vehicleApplicationId);
-	        }
+    // 编辑
+    public void editVehicleApplication(ActionRequest actionRequest, ActionResponse actionResponse)
+        throws IOException, PortletException, PortalException, SystemException {
 
-	        User user = PortalUtil.getUser(actionRequest);
-	        if (Validator.isNotNull(user)) {
-	        	vehicleApplication.setUserId(user.getUserId());
-	        	vehicleApplication.setUserName(user.getFullName());
-	        }
+        long vehicleApplicationId = ParamUtil.getLong(actionRequest, "vehicleApplicationId");
+        VehicleApplication vehicleApplication = null;
+        if (vehicleApplicationId != 0) {
+            vehicleApplication = VehicleApplicationLocalServiceUtil.getVehicleApplication(vehicleApplicationId);
+        }
+        actionRequest.setAttribute("vehicleApplication", vehicleApplication);
+    }
 
-	        vehicleApplication.setApplicantDeptName(applicantDeptName);
-	        vehicleApplication.setApplicantName(applicantName);
-	        vehicleApplication.setStartTime(startTime);
-	        vehicleApplication.setEndTime(endTime);
-	        vehicleApplication.setReason(reason);
-	        vehicleApplication.setPassengerNum(passengerNum);
-	        vehicleApplication.setDestination(destination);
-	        vehicleApplication.setModifiedTime(now);
-	        VehicleApplicationLocalServiceUtil.updateVehicleApplication(vehicleApplication);
-	        
-		}
-	
-	
-	//删除
-	 public void deleteVehicleApplications(ActionRequest actionRequest, ActionResponse actionResponse)
-		        throws IOException, PortletException, NumberFormatException, PortalException, SystemException {
-		        String deleteVehicleApplicationIds = ParamUtil.getString(actionRequest, "vehicleApplicationIds");
-		        String[] vehicleApplicationIds = deleteVehicleApplicationIds.split(",");
-		        VehicleApplicationLocalServiceUtil.deleteVehicleApplications(vehicleApplicationIds);
-		    }
+    // 保存并添加
+    public void saveVehicleApplication(ActionRequest actionRequest, ActionResponse actionResponse)
+        throws IOException, PortletException, SystemException, PortalException, ParseException {
+
+        long vehicleApplicationId = ParamUtil.getLong(actionRequest, "vehicleApplicationId");
+        String applicantDeptName = ParamUtil.getString(actionRequest, "applicantDeptName");
+        String applicantName = ParamUtil.getString(actionRequest, "applicantName");
+        Date startTime = ParamUtil.getDate(actionRequest, "startTimeFmt", new SimpleDateFormat(timeFormatPattern));
+        Date endTime = ParamUtil.getDate(actionRequest, "endTimeFmt", new SimpleDateFormat(timeFormatPattern));
+        String reason = ParamUtil.getString(actionRequest, "reason");
+        int passengerNum = ParamUtil.getInteger(actionRequest, "passengerNum");
+        String destination = ParamUtil.getString(actionRequest, "destination");
+        VehicleApplication vehicleApplication = null;
+        Date now = new Date();
+        if (vehicleApplicationId == 0) {
+            vehicleApplicationId = CounterLocalServiceUtil.increment();
+            vehicleApplication = VehicleApplicationLocalServiceUtil.createVehicleApplication(vehicleApplicationId);
+
+            vehicleApplication.setCreateTime(now);
+        }
+        else {
+            vehicleApplication = VehicleApplicationLocalServiceUtil.getVehicleApplication(vehicleApplicationId);
+        }
+
+        User user = PortalUtil.getUser(actionRequest);
+        if (Validator.isNotNull(user)) {
+            vehicleApplication.setUserId(user.getUserId());
+            vehicleApplication.setUserName(user.getFullName());
+        }
+
+        vehicleApplication.setApplicantDeptName(applicantDeptName);
+        vehicleApplication.setApplicantName(applicantName);
+        vehicleApplication.setStartTime(startTime);
+        vehicleApplication.setEndTime(endTime);
+        vehicleApplication.setReason(reason);
+        vehicleApplication.setPassengerNum(passengerNum);
+        vehicleApplication.setDestination(destination);
+        vehicleApplication.setModifiedTime(now);
+        VehicleApplicationLocalServiceUtil.updateVehicleApplication(vehicleApplication);
+
+    }
+
+    // 删除
+    public void deleteVehicleApplications(ActionRequest actionRequest, ActionResponse actionResponse)
+        throws IOException, PortletException, NumberFormatException, PortalException, SystemException {
+
+        String deleteVehicleApplicationIds = ParamUtil.getString(actionRequest, "vehicleApplicationIds");
+        String[] vehicleApplicationIds = deleteVehicleApplicationIds.split(",");
+        VehicleApplicationLocalServiceUtil.deleteVehicleApplications(vehicleApplicationIds);
+    }
 }
