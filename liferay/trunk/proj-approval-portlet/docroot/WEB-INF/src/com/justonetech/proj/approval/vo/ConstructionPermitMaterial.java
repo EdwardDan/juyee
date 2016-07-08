@@ -1,15 +1,15 @@
-package com.justonetech.proj.approval.portlet;
+package com.justonetech.proj.approval.vo;
 
-public class ProjApproval {
+public class ConstructionPermitMaterial {
 	
 	private long id;//id
-	private long dictionaryId;//项目类型的ID
+	private long dictionaryId;//项目类型的系统字典id
 	private long type;//材料类型
-	private long no;//序号
+	private int sortNo;//序号
 	private String materialName;//材料名称
 	private String auditReq;//审核要求
 	private String auditReqGreen;//绿色审核要求
-	private long yjNum;//应交份数
+	private int yjNum;//应交份数
 	
 	
 	public long getId() {
@@ -31,12 +31,6 @@ public class ProjApproval {
 	public void setType(long type) {
 		this.type = type;
 	}
-	public long getNo() {
-		return no;
-	}
-	public void setNo(long no) {
-		this.no = no;
-	}
 	public String getMaterialName() {
 		return materialName;
 	}
@@ -55,10 +49,16 @@ public class ProjApproval {
 	public void setAuditReqGreen(String auditReqGreen) {
 		this.auditReqGreen = auditReqGreen;
 	}
-	public long getYjNum() {
+	public int getSortNo() {
+		return sortNo;
+	}
+	public void setSortNo(int sortNo) {
+		this.sortNo = sortNo;
+	}
+	public int getYjNum() {
 		return yjNum;
 	}
-	public void setYjNum(long yjNum) {
+	public void setYjNum(int yjNum) {
 		this.yjNum = yjNum;
 	}
 
