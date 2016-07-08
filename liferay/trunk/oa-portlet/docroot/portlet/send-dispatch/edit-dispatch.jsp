@@ -23,7 +23,9 @@
 <aui:form action="${saveDispatchURL}">
 	<aui:fieldset>
 		<aui:input name="dispatchId" type="hidden" />
-		<aui:select name="rocordType" label="文种">
+		<aui:row>
+		<aui:col span="3" cssClass="text-left">
+		<aui:select name="rocordType" label="文种"  inlineField="true" inlineLabel="left" type="select" style="width:100px">
 			<%
 				Dictionary dictionary = DictionaryLocalServiceUtil
 									.findByGroupIdAndCode(groupId, "rocordType");
@@ -38,7 +40,9 @@
 							}}
 			%>
 		</aui:select>
-		<aui:select name="securityLevel" label="密级">
+		</aui:col>
+		<aui:col span="3" cssClass="text-left">
+		<aui:select name="securityLevel" label="密级" inlineField="true" inlineLabel="left" type="select" style="width:70px">
 			<%
 				Dictionary dictionary = DictionaryLocalServiceUtil
 									.findByGroupIdAndCode(groupId, "securityLevel");
@@ -53,7 +57,9 @@
 							}}
 			%>
 		</aui:select>
-		<aui:select name="organaAbbreviation" label="发文机关代字">
+		</aui:col>
+		<aui:col span="6" cssClass="text-left">
+		<aui:select name="organaAbbreviation" label="" inlineField="true" inlineLabel="left" type="select" style="width:90px">
 			<%
 				Dictionary dictionary = DictionaryLocalServiceUtil
 									.findByGroupIdAndCode(groupId,
@@ -68,8 +74,8 @@
 			<%
 							}}
 			%>
-		</aui:select>
-		<aui:select name="year" label="发文年份">
+		</aui:select>(
+		<aui:select name="year" label="" inlineField="true" inlineLabel="left" type="select" style="width:70px">
 			<%
 				Dictionary dictionary = DictionaryLocalServiceUtil
 									.findByGroupIdAndCode(groupId, "year");
@@ -85,27 +91,33 @@
 				}
 							}
 			%>
-		</aui:select>
-		<aui:input name="serialNo" label="文件顺序号">
+		</aui:select>)
+		<aui:input name="serialNo" label="" inlineField="true" inlineLabel="left" type="text" style="width: 60px; ">
 		<aui:validator name="required"/>
 		<aui:validator name="number" />
-		</aui:input>
-		<aui:input name="title" label="发文标题">
+		</aui:input>号
+		</aui:col>
+		</aui:row>
+		<aui:input name="title" label="发文标题" type="text" style="width: 1000px; ">
 		<aui:validator name="required"/>
 		</aui:input>
-		<aui:input name="sendOrgan" label="主送机关">
+		<aui:input name="sendOrgan" label="主送机关" type="text" style="width: 1000px; ">
 		<aui:validator name="required"/>
 		</aui:input>
-		<aui:input name="ccOrgan" label="抄送机关">
+		<aui:input name="ccOrgan" label="抄送机关" type="text" style="width: 1000px; ">
 		<aui:validator name="required"/>
 		</aui:input>
-		<aui:input name="writtenOrgan" label="成文机关">
+		<aui:input name="writtenOrgan" label="成文机关" type="text" style="width: 1000px; ">
 		<aui:validator name="required"/>
 		</aui:input>
-		<aui:input type="text" cssClass="Wdate" name="writtenDateFormat"
-			label="成文日期" onfocus="WdatePicker({lang:'zh-cn'})"
+		<aui:row>
+		<aui:col span="6" cssClass="text-left">
+		<aui:input type="text" cssClass="Wdate"  inlineField="true" inlineLabel="left" name="writtenDateFormat"
+			label="成文日期" onfocus="WdatePicker({lang:'zh-cn'})" style="width:100px"
 			value="<%=writtenDateFormat%>" />
-		<aui:select name="urgencyDegree" label="紧急程度">
+			</aui:col>
+			<aui:col span="6" cssClass="text-left">
+		<aui:select name="urgencyDegree" label="紧急程度" inlineField="true" inlineLabel="left" type="select" style="width: 60px;">
 			<%
 				Dictionary dictionary = DictionaryLocalServiceUtil
 									.findByGroupIdAndCode(groupId, "urgencyDegree");
@@ -120,6 +132,8 @@
 				}}
 			%>
 		</aui:select>
+		</aui:col>
+		</aui:row>
 	</aui:fieldset>
 	<aui:button-row>
 		<aui:button type="submit" value="提交" />
