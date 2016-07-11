@@ -1,5 +1,8 @@
 package com.justonetech.proj.approval.portlet;
 
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
+
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 /**
@@ -7,5 +10,8 @@ import com.liferay.util.bridges.mvc.MVCPortlet;
  */
 public class ConstructionPermitApplicationPortlet extends MVCPortlet {
  
+	public void add(ActionRequest request, ActionResponse response){
+		
+	}
 
 }
