@@ -24,15 +24,16 @@
 		<liferay-ui:search-container-column-text property="userName"
 			name="提交人" />
 		<liferay-ui:search-container-column-text name="工作时间">
-			<%=DateUtil.getDate(deptWork.getStartDate(), "yyyy-MM-dd", locale, timeZone)%>~
+			<%=DateUtil.getDate(deptWork.getStartDate(), "yyyy-MM-dd", locale, timeZone)%>　~　
 				<%=DateUtil.getDate(deptWork.getEndDate(), "yyyy-MM-dd", locale, timeZone)%>
 		</liferay-ui:search-container-column-text>
 		<liferay-ui:search-container-column-text property="status" name="状态" />
 		<liferay-ui:search-container-column-text>
 			<portlet:actionURL var="editDeptWeeklyWorkURL"
 				name="editDeptWeeklyWork">
-					<portlet:param name="deptWorkId" value="${deptWork.deptWorkId}" />
-					<portlet:param name="mvcPath" value="${contentPath}/edit-dept-weekly-work.jsp"/>
+				<portlet:param name="deptWorkId" value="${deptWork.deptWorkId}" />
+				<portlet:param name="mvcPath"
+					value="${contentPath}/edit-dept-weekly-work.jsp" />
 			</portlet:actionURL>
 			<portlet:actionURL var="deleteDeptWeeklyWorkURL"
 				name="deleteDeptWeeklyWork">
@@ -41,16 +42,23 @@
 			<portlet:actionURL var="viewDeptWeeklyWorkURL"
 				name="viewDeptWeeklyWork">
 				<portlet:param name="deptWorkId" value="${deptWork.deptWorkId}" />
+				<portlet:param name="mvcPath"
+					value="${contentPath}/view-dept-weekly-work.jsp" />
 			</portlet:actionURL>
 			<liferay-ui:icon-menu>
-				<liferay-ui:icon image="edit" url="${editDeptWeeklyWorkURL}" />
-				<liferay-ui:icon-delete image="delete"
-					url="${deleteDeptWeeklyWorkURL}" />
-				<liferay-ui:icon image="view" url="${viewDeptWeeklyWorkURL}" />
+				<c:if test="${deptWork.status eq '提交'}">
+					<liferay-ui:icon image="view" url="${viewDeptWeeklyWorkURL}" />
+				</c:if>
+				<c:if test="${deptWork.status eq '填写'}">
+					<liferay-ui:icon image="view" url="${viewDeptWeeklyWorkURL}" />
+					<liferay-ui:icon image="edit" url="${editDeptWeeklyWorkURL}" />
+					<liferay-ui:icon-delete image="delete"
+						url="${deleteDeptWeeklyWorkURL}" />
+				</c:if>
 			</liferay-ui:icon-menu>
 		</liferay-ui:search-container-column-text>
 	</liferay-ui:search-container-row>
-	<liferay-ui:search-iterator/>
+	<liferay-ui:search-iterator />
 </liferay-ui:search-container>
 
 

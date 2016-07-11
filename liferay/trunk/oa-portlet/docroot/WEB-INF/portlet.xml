@@ -79,6 +79,10 @@
 			<name>view-template</name>
 			<value>/portlet/dept-weekly-work/view.jsp</value>
 		</init-param>
+		<init-param>
+			<name>copy-request-parameters</name>
+			<value>true</value>
+		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
 			<mime-type>text/html</mime-type>
@@ -176,7 +180,8 @@
 		<portlet-name>office-supply-application</portlet-name>
 		<display-name>Office Supply Application</display-name>
 		<portlet-class>
-			com.justonetech.oa.portlet.OfficeSupplyApplicationPortlet</portlet-class>
+			com.justonetech.oa.portlet.OfficeSupplyApplicationPortlet
+		</portlet-class>
 		<init-param>
 			<name>view-template</name>
 			<value>/portlet/office-supply-application/view.jsp</value>
