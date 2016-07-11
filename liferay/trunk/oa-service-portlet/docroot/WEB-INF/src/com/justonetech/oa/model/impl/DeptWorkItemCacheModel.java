@@ -44,8 +44,8 @@ public class DeptWorkItemCacheModel implements CacheModel<DeptWorkItem>,
 		sb.append(deptWorkId);
 		sb.append(", sortNo=");
 		sb.append(sortNo);
-		sb.append(", dutyPerosn=");
-		sb.append(dutyPerosn);
+		sb.append(", dutyPerson=");
+		sb.append(dutyPerson);
 		sb.append(", mainWork=");
 		sb.append(mainWork);
 		sb.append(", schedule=");
@@ -67,11 +67,11 @@ public class DeptWorkItemCacheModel implements CacheModel<DeptWorkItem>,
 		deptWorkItemImpl.setDeptWorkId(deptWorkId);
 		deptWorkItemImpl.setSortNo(sortNo);
 
-		if (dutyPerosn == null) {
-			deptWorkItemImpl.setDutyPerosn(StringPool.BLANK);
+		if (dutyPerson == null) {
+			deptWorkItemImpl.setDutyPerson(StringPool.BLANK);
 		}
 		else {
-			deptWorkItemImpl.setDutyPerosn(dutyPerosn);
+			deptWorkItemImpl.setDutyPerson(dutyPerson);
 		}
 
 		deptWorkItemImpl.setMainWork(mainWork);
@@ -107,7 +107,7 @@ public class DeptWorkItemCacheModel implements CacheModel<DeptWorkItem>,
 		deptWorkItemId = objectInput.readLong();
 		deptWorkId = objectInput.readLong();
 		sortNo = objectInput.readInt();
-		dutyPerosn = objectInput.readUTF();
+		dutyPerson = objectInput.readUTF();
 		mainWork = objectInput.readBoolean();
 		schedule = objectInput.readUTF();
 		content = objectInput.readUTF();
@@ -121,11 +121,11 @@ public class DeptWorkItemCacheModel implements CacheModel<DeptWorkItem>,
 		objectOutput.writeLong(deptWorkId);
 		objectOutput.writeInt(sortNo);
 
-		if (dutyPerosn == null) {
+		if (dutyPerson == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(dutyPerosn);
+			objectOutput.writeUTF(dutyPerson);
 		}
 
 		objectOutput.writeBoolean(mainWork);
@@ -155,7 +155,7 @@ public class DeptWorkItemCacheModel implements CacheModel<DeptWorkItem>,
 	public long deptWorkItemId;
 	public long deptWorkId;
 	public int sortNo;
-	public String dutyPerosn;
+	public String dutyPerson;
 	public boolean mainWork;
 	public String schedule;
 	public String content;

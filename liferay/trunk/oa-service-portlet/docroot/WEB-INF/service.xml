@@ -154,7 +154,7 @@
 
 		<column name="deptWorkId" type="long" /><!--一周安排ID -->
 		<column name="sortNo" type="int" /><!--序号 -->
-		<column name="dutyPerosn" type="String" /><!--责任人 -->
+		<column name="dutyPerson" type="String" /><!--责任人 -->
 		<column name="mainWork" type="boolean" /><!--重点工作 -->
 		<column name="schedule" type="String" /><!--重工作进度工作 -->
 		<column name="content" type="String" /><!--工作内容 -->

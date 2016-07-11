@@ -61,13 +61,13 @@ public class DeptWorkItemModelImpl extends BaseModelImpl<DeptWorkItem>
 			{ "deptWorkItemId", Types.BIGINT },
 			{ "deptWorkId", Types.BIGINT },
 			{ "sortNo", Types.INTEGER },
-			{ "dutyPerosn", Types.VARCHAR },
+			{ "dutyPerson", Types.VARCHAR },
 			{ "mainWork", Types.BOOLEAN },
 			{ "schedule", Types.VARCHAR },
 			{ "content", Types.VARCHAR },
 			{ "agentPerson", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table oa_DeptWorkItem (deptWorkItemId LONG not null primary key,deptWorkId LONG,sortNo INTEGER,dutyPerosn VARCHAR(75) null,mainWork BOOLEAN,schedule VARCHAR(75) null,content VARCHAR(1000) null,agentPerson VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table oa_DeptWorkItem (deptWorkItemId LONG not null primary key,deptWorkId LONG,sortNo INTEGER,dutyPerson VARCHAR(75) null,mainWork BOOLEAN,schedule VARCHAR(75) null,content VARCHAR(1000) null,agentPerson VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table oa_DeptWorkItem";
 	public static final String ORDER_BY_JPQL = " ORDER BY deptWorkItem.deptWorkItemId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY oa_DeptWorkItem.deptWorkItemId ASC";
@@ -128,7 +128,7 @@ public class DeptWorkItemModelImpl extends BaseModelImpl<DeptWorkItem>
 		attributes.put("deptWorkItemId", getDeptWorkItemId());
 		attributes.put("deptWorkId", getDeptWorkId());
 		attributes.put("sortNo", getSortNo());
-		attributes.put("dutyPerosn", getDutyPerosn());
+		attributes.put("dutyPerson", getDutyPerson());
 		attributes.put("mainWork", getMainWork());
 		attributes.put("schedule", getSchedule());
 		attributes.put("content", getContent());
@@ -157,10 +157,10 @@ public class DeptWorkItemModelImpl extends BaseModelImpl<DeptWorkItem>
 			setSortNo(sortNo);
 		}
 
-		String dutyPerosn = (String)attributes.get("dutyPerosn");
+		String dutyPerson = (String)attributes.get("dutyPerson");
 
-		if (dutyPerosn != null) {
-			setDutyPerosn(dutyPerosn);
+		if (dutyPerson != null) {
+			setDutyPerson(dutyPerson);
 		}
 
 		Boolean mainWork = (Boolean)attributes.get("mainWork");
@@ -231,18 +231,18 @@ public class DeptWorkItemModelImpl extends BaseModelImpl<DeptWorkItem>
 	}
 
 	@Override
-	public String getDutyPerosn() {
-		if (_dutyPerosn == null) {
+	public String getDutyPerson() {
+		if (_dutyPerson == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _dutyPerosn;
+			return _dutyPerson;
 		}
 	}
 
 	@Override
-	public void setDutyPerosn(String dutyPerosn) {
-		_dutyPerosn = dutyPerosn;
+	public void setDutyPerson(String dutyPerson) {
+		_dutyPerson = dutyPerson;
 	}
 
 	@Override
@@ -339,7 +339,7 @@ public class DeptWorkItemModelImpl extends BaseModelImpl<DeptWorkItem>
 		deptWorkItemImpl.setDeptWorkItemId(getDeptWorkItemId());
 		deptWorkItemImpl.setDeptWorkId(getDeptWorkId());
 		deptWorkItemImpl.setSortNo(getSortNo());
-		deptWorkItemImpl.setDutyPerosn(getDutyPerosn());
+		deptWorkItemImpl.setDutyPerson(getDutyPerson());
 		deptWorkItemImpl.setMainWork(getMainWork());
 		deptWorkItemImpl.setSchedule(getSchedule());
 		deptWorkItemImpl.setContent(getContent());
@@ -413,12 +413,12 @@ public class DeptWorkItemModelImpl extends BaseModelImpl<DeptWorkItem>
 
 		deptWorkItemCacheModel.sortNo = getSortNo();
 
-		deptWorkItemCacheModel.dutyPerosn = getDutyPerosn();
+		deptWorkItemCacheModel.dutyPerson = getDutyPerson();
 
-		String dutyPerosn = deptWorkItemCacheModel.dutyPerosn;
+		String dutyPerson = deptWorkItemCacheModel.dutyPerson;
 
-		if ((dutyPerosn != null) && (dutyPerosn.length() == 0)) {
-			deptWorkItemCacheModel.dutyPerosn = null;
+		if ((dutyPerson != null) && (dutyPerson.length() == 0)) {
+			deptWorkItemCacheModel.dutyPerson = null;
 		}
 
 		deptWorkItemCacheModel.mainWork = getMainWork();
@@ -460,8 +460,8 @@ public class DeptWorkItemModelImpl extends BaseModelImpl<DeptWorkItem>
 		sb.append(getDeptWorkId());
 		sb.append(", sortNo=");
 		sb.append(getSortNo());
-		sb.append(", dutyPerosn=");
-		sb.append(getDutyPerosn());
+		sb.append(", dutyPerson=");
+		sb.append(getDutyPerson());
 		sb.append(", mainWork=");
 		sb.append(getMainWork());
 		sb.append(", schedule=");
@@ -496,8 +496,8 @@ public class DeptWorkItemModelImpl extends BaseModelImpl<DeptWorkItem>
 		sb.append(getSortNo());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>dutyPerosn</column-name><column-value><![CDATA[");
-		sb.append(getDutyPerosn());
+			"<column><column-name>dutyPerson</column-name><column-value><![CDATA[");
+		sb.append(getDutyPerson());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>mainWork</column-name><column-value><![CDATA[");
@@ -530,7 +530,7 @@ public class DeptWorkItemModelImpl extends BaseModelImpl<DeptWorkItem>
 	private long _originalDeptWorkId;
 	private boolean _setOriginalDeptWorkId;
 	private int _sortNo;
-	private String _dutyPerosn;
+	private String _dutyPerson;
 	private boolean _mainWork;
 	private String _schedule;
 	private String _content;

@@ -38,7 +38,7 @@
 			<id name="deptWorkItemId" />
 			<basic name="deptWorkId" />
 			<basic name="sortNo" />
-			<basic name="dutyPerosn" />
+			<basic name="dutyPerson" />
 			<basic name="mainWork" />
 			<basic name="schedule" />
 			<basic name="content" />

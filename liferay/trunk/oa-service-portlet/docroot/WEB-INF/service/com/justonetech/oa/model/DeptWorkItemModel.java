@@ -100,19 +100,19 @@ public interface DeptWorkItemModel extends BaseModel<DeptWorkItem> {
 	public void setSortNo(int sortNo);
 
 	/**
-	 * Returns the duty perosn of this dept work item.
+	 * Returns the duty person of this dept work item.
 	 *
-	 * @return the duty perosn of this dept work item
+	 * @return the duty person of this dept work item
 	 */
 	@AutoEscape
-	public String getDutyPerosn();
+	public String getDutyPerson();
 
 	/**
-	 * Sets the duty perosn of this dept work item.
+	 * Sets the duty person of this dept work item.
 	 *
-	 * @param dutyPerosn the duty perosn of this dept work item
+	 * @param dutyPerson the duty person of this dept work item
 	 */
-	public void setDutyPerosn(String dutyPerosn);
+	public void setDutyPerson(String dutyPerson);
 
 	/**
 	 * Returns the main work of this dept work item.

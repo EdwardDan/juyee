@@ -76,7 +76,7 @@ public class DeptWorkItemClp extends BaseModelImpl<DeptWorkItem>
 		attributes.put("deptWorkItemId", getDeptWorkItemId());
 		attributes.put("deptWorkId", getDeptWorkId());
 		attributes.put("sortNo", getSortNo());
-		attributes.put("dutyPerosn", getDutyPerosn());
+		attributes.put("dutyPerson", getDutyPerson());
 		attributes.put("mainWork", getMainWork());
 		attributes.put("schedule", getSchedule());
 		attributes.put("content", getContent());
@@ -105,10 +105,10 @@ public class DeptWorkItemClp extends BaseModelImpl<DeptWorkItem>
 			setSortNo(sortNo);
 		}
 
-		String dutyPerosn = (String)attributes.get("dutyPerosn");
+		String dutyPerson = (String)attributes.get("dutyPerson");
 
-		if (dutyPerosn != null) {
-			setDutyPerosn(dutyPerosn);
+		if (dutyPerson != null) {
+			setDutyPerson(dutyPerson);
 		}
 
 		Boolean mainWork = (Boolean)attributes.get("mainWork");
@@ -206,21 +206,21 @@ public class DeptWorkItemClp extends BaseModelImpl<DeptWorkItem>
 	}
 
 	@Override
-	public String getDutyPerosn() {
-		return _dutyPerosn;
+	public String getDutyPerson() {
+		return _dutyPerson;
 	}
 
 	@Override
-	public void setDutyPerosn(String dutyPerosn) {
-		_dutyPerosn = dutyPerosn;
+	public void setDutyPerson(String dutyPerson) {
+		_dutyPerson = dutyPerson;
 
 		if (_deptWorkItemRemoteModel != null) {
 			try {
 				Class<?> clazz = _deptWorkItemRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setDutyPerosn", String.class);
+				Method method = clazz.getMethod("setDutyPerson", String.class);
 
-				method.invoke(_deptWorkItemRemoteModel, dutyPerosn);
+				method.invoke(_deptWorkItemRemoteModel, dutyPerson);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -397,7 +397,7 @@ public class DeptWorkItemClp extends BaseModelImpl<DeptWorkItem>
 		clone.setDeptWorkItemId(getDeptWorkItemId());
 		clone.setDeptWorkId(getDeptWorkId());
 		clone.setSortNo(getSortNo());
-		clone.setDutyPerosn(getDutyPerosn());
+		clone.setDutyPerson(getDutyPerson());
 		clone.setMainWork(getMainWork());
 		clone.setSchedule(getSchedule());
 		clone.setContent(getContent());
@@ -462,8 +462,8 @@ public class DeptWorkItemClp extends BaseModelImpl<DeptWorkItem>
 		sb.append(getDeptWorkId());
 		sb.append(", sortNo=");
 		sb.append(getSortNo());
-		sb.append(", dutyPerosn=");
-		sb.append(getDutyPerosn());
+		sb.append(", dutyPerson=");
+		sb.append(getDutyPerson());
 		sb.append(", mainWork=");
 		sb.append(getMainWork());
 		sb.append(", schedule=");
@@ -498,8 +498,8 @@ public class DeptWorkItemClp extends BaseModelImpl<DeptWorkItem>
 		sb.append(getSortNo());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>dutyPerosn</column-name><column-value><![CDATA[");
-		sb.append(getDutyPerosn());
+			"<column><column-name>dutyPerson</column-name><column-value><![CDATA[");
+		sb.append(getDutyPerson());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>mainWork</column-name><column-value><![CDATA[");
@@ -526,7 +526,7 @@ public class DeptWorkItemClp extends BaseModelImpl<DeptWorkItem>
 	private long _deptWorkItemId;
 	private long _deptWorkId;
 	private int _sortNo;
-	private String _dutyPerosn;
+	private String _dutyPerson;
 	private boolean _mainWork;
 	private String _schedule;
 	private String _content;

@@ -32,7 +32,7 @@
 		</id>
 		<property name="deptWorkId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="sortNo" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
-		<property name="dutyPerosn" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="dutyPerson" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="mainWork" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="schedule" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="content" type="com.liferay.portal.dao.orm.hibernate.StringType" />

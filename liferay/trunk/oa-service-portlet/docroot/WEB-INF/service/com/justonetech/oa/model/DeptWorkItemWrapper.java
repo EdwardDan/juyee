@@ -52,7 +52,7 @@ public class DeptWorkItemWrapper implements DeptWorkItem,
 		attributes.put("deptWorkItemId", getDeptWorkItemId());
 		attributes.put("deptWorkId", getDeptWorkId());
 		attributes.put("sortNo", getSortNo());
-		attributes.put("dutyPerosn", getDutyPerosn());
+		attributes.put("dutyPerson", getDutyPerson());
 		attributes.put("mainWork", getMainWork());
 		attributes.put("schedule", getSchedule());
 		attributes.put("content", getContent());
@@ -81,10 +81,10 @@ public class DeptWorkItemWrapper implements DeptWorkItem,
 			setSortNo(sortNo);
 		}
 
-		String dutyPerosn = (String)attributes.get("dutyPerosn");
+		String dutyPerson = (String)attributes.get("dutyPerson");
 
-		if (dutyPerosn != null) {
-			setDutyPerosn(dutyPerosn);
+		if (dutyPerson != null) {
+			setDutyPerson(dutyPerson);
 		}
 
 		Boolean mainWork = (Boolean)attributes.get("mainWork");
@@ -193,23 +193,23 @@ public class DeptWorkItemWrapper implements DeptWorkItem,
 	}
 
 	/**
-	* Returns the duty perosn of this dept work item.
+	* Returns the duty person of this dept work item.
 	*
-	* @return the duty perosn of this dept work item
+	* @return the duty person of this dept work item
 	*/
 	@Override
-	public java.lang.String getDutyPerosn() {
-		return _deptWorkItem.getDutyPerosn();
+	public java.lang.String getDutyPerson() {
+		return _deptWorkItem.getDutyPerson();
 	}
 
 	/**
-	* Sets the duty perosn of this dept work item.
+	* Sets the duty person of this dept work item.
 	*
-	* @param dutyPerosn the duty perosn of this dept work item
+	* @param dutyPerson the duty person of this dept work item
 	*/
 	@Override
-	public void setDutyPerosn(java.lang.String dutyPerosn) {
-		_deptWorkItem.setDutyPerosn(dutyPerosn);
+	public void setDutyPerson(java.lang.String dutyPerson) {
+		_deptWorkItem.setDutyPerson(dutyPerson);
 	}
 
 	/**

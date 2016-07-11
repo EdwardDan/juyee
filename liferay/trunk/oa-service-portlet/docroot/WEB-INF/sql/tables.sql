@@ -15,7 +15,7 @@ create table oa_DeptWorkItem (
 	deptWorkItemId LONG not null primary key,
 	deptWorkId LONG,
 	sortNo INTEGER,
-	dutyPerosn VARCHAR(75) null,
+	dutyPerson VARCHAR(75) null,
 	mainWork BOOLEAN,
 	schedule VARCHAR(75) null,
 	content VARCHAR(1000) null,

@@ -32,7 +32,7 @@ public class DeptWorkItemSoap implements Serializable {
 		soapModel.setDeptWorkItemId(model.getDeptWorkItemId());
 		soapModel.setDeptWorkId(model.getDeptWorkId());
 		soapModel.setSortNo(model.getSortNo());
-		soapModel.setDutyPerosn(model.getDutyPerosn());
+		soapModel.setDutyPerson(model.getDutyPerson());
 		soapModel.setMainWork(model.getMainWork());
 		soapModel.setSchedule(model.getSchedule());
 		soapModel.setContent(model.getContent());
@@ -113,12 +113,12 @@ public class DeptWorkItemSoap implements Serializable {
 		_sortNo = sortNo;
 	}
 
-	public String getDutyPerosn() {
-		return _dutyPerosn;
+	public String getDutyPerson() {
+		return _dutyPerson;
 	}
 
-	public void setDutyPerosn(String dutyPerosn) {
-		_dutyPerosn = dutyPerosn;
+	public void setDutyPerson(String dutyPerson) {
+		_dutyPerson = dutyPerson;
 	}
 
 	public boolean getMainWork() {
@@ -160,7 +160,7 @@ public class DeptWorkItemSoap implements Serializable {
 	private long _deptWorkItemId;
 	private long _deptWorkId;
 	private int _sortNo;
-	private String _dutyPerosn;
+	private String _dutyPerson;
 	private boolean _mainWork;
 	private String _schedule;
 	private String _content;

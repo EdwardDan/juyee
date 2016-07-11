@@ -839,7 +839,7 @@ public class DeptWorkItemPersistenceImpl extends BasePersistenceImpl<DeptWorkIte
 		deptWorkItemImpl.setDeptWorkItemId(deptWorkItem.getDeptWorkItemId());
 		deptWorkItemImpl.setDeptWorkId(deptWorkItem.getDeptWorkId());
 		deptWorkItemImpl.setSortNo(deptWorkItem.getSortNo());
-		deptWorkItemImpl.setDutyPerosn(deptWorkItem.getDutyPerosn());
+		deptWorkItemImpl.setDutyPerson(deptWorkItem.getDutyPerson());
 		deptWorkItemImpl.setMainWork(deptWorkItem.isMainWork());
 		deptWorkItemImpl.setSchedule(deptWorkItem.getSchedule());
 		deptWorkItemImpl.setContent(deptWorkItem.getContent());
