@@ -1,4 +1,3 @@
-<%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page import="com.justonetech.sys.model.*"%>
 <%@page import="com.liferay.portal.util.PortalUtil"%>
 <%@page import="com.liferay.portal.kernel.util.PropsUtil"%>

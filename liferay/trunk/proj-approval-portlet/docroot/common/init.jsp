@@ -1,11 +1,11 @@
-<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page contentType="text/html;charset=utf-8"%>
 <%@ include file="/common/init-ext.jsp"%>
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet"%>
 <%@ taglib uri="http://liferay.com/tld/portlet" prefix="liferay-portlet"%>
 <portlet:defineObjects />
 <%@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme"%>
 <liferay-theme:defineObjects />
-
+<%@ taglib uri="http://liferay.com/tld/util" prefix="liferay-util" %>
 <%@ taglib uri="http://alloy.liferay.com/tld/aui" prefix="aui"%>
 <%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui"%>
 
