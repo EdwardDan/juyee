@@ -28,10 +28,14 @@
 		<field name="smsId" type="long" />
 		<field name="createTime" type="Date" />
 		<field name="modifiedTime" type="Date" />
-		<field name="content" type="String" />
+		<field name="content" type="String">
+			<hint name="max-length">200</hint>
+		</field>
 		<field name="senderId" type="long" />
 		<field name="senderName" type="String" />
-		<field name="receiver" type="String" />
+		<field name="receiver" type="String">
+			<hint name="max-length">4000</hint>
+		</field>
 		<field name="sendTime" type="Date" />
 	</model>
 </model-hints>

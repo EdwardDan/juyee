@@ -68,7 +68,7 @@ public class SMSModelImpl extends BaseModelImpl<SMS> implements SMSModel {
 			{ "receiver", Types.VARCHAR },
 			{ "sendTime", Types.TIMESTAMP }
 		};
-	public static final String TABLE_SQL_CREATE = "create table sys_SMS (smsId LONG not null primary key,createTime DATE null,modifiedTime DATE null,content VARCHAR(75) null,senderId LONG,senderName VARCHAR(75) null,receiver VARCHAR(75) null,sendTime DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table sys_SMS (smsId LONG not null primary key,createTime DATE null,modifiedTime DATE null,content VARCHAR(200) null,senderId LONG,senderName VARCHAR(75) null,receiver STRING null,sendTime DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table sys_SMS";
 	public static final String ORDER_BY_JPQL = " ORDER BY sms.createTime DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY sys_SMS.createTime DESC";

@@ -22,9 +22,9 @@ create table sys_SMS (
 	smsId LONG not null primary key,
 	createTime DATE null,
 	modifiedTime DATE null,
-	content VARCHAR(75) null,
+	content VARCHAR(200) null,
 	senderId LONG,
 	senderName VARCHAR(75) null,
-	receiver VARCHAR(75) null,
+	receiver STRING null,
 	sendTime DATE null
 );
