@@ -17,6 +17,7 @@ package com.justonetech.sys.service.base;
 import com.justonetech.sys.model.Dictionary;
 import com.justonetech.sys.service.DictionaryService;
 import com.justonetech.sys.service.persistence.DictionaryPersistence;
+import com.justonetech.sys.service.persistence.SMSPersistence;
 
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.bean.IdentifiableBean;
@@ -103,6 +104,43 @@ public abstract class DictionaryServiceBaseImpl extends BaseServiceImpl
 	public void setDictionaryPersistence(
 		DictionaryPersistence dictionaryPersistence) {
 		this.dictionaryPersistence = dictionaryPersistence;
+	}
+
+	/**
+	 * Returns the s m s local service.
+	 *
+	 * @return the s m s local service
+	 */
+	public com.justonetech.sys.service.SMSLocalService getSMSLocalService() {
+		return smsLocalService;
+	}
+
+	/**
+	 * Sets the s m s local service.
+	 *
+	 * @param smsLocalService the s m s local service
+	 */
+	public void setSMSLocalService(
+		com.justonetech.sys.service.SMSLocalService smsLocalService) {
+		this.smsLocalService = smsLocalService;
+	}
+
+	/**
+	 * Returns the s m s persistence.
+	 *
+	 * @return the s m s persistence
+	 */
+	public SMSPersistence getSMSPersistence() {
+		return smsPersistence;
+	}
+
+	/**
+	 * Sets the s m s persistence.
+	 *
+	 * @param smsPersistence the s m s persistence
+	 */
+	public void setSMSPersistence(SMSPersistence smsPersistence) {
+		this.smsPersistence = smsPersistence;
 	}
 
 	/**
@@ -282,6 +320,10 @@ public abstract class DictionaryServiceBaseImpl extends BaseServiceImpl
 	protected com.justonetech.sys.service.DictionaryService dictionaryService;
 	@BeanReference(type = DictionaryPersistence.class)
 	protected DictionaryPersistence dictionaryPersistence;
+	@BeanReference(type = com.justonetech.sys.service.SMSLocalService.class)
+	protected com.justonetech.sys.service.SMSLocalService smsLocalService;
+	@BeanReference(type = SMSPersistence.class)
+	protected SMSPersistence smsPersistence;
 	@BeanReference(type = com.liferay.counter.service.CounterLocalService.class)
 	protected com.liferay.counter.service.CounterLocalService counterLocalService;
 	@BeanReference(type = com.liferay.portal.service.ResourceLocalService.class)

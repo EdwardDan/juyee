@@ -24,24 +24,24 @@ import java.util.Arrays;
  */
 public class DictionaryServiceClpInvoker {
 	public DictionaryServiceClpInvoker() {
-		_methodName18 = "getBeanIdentifier";
+		_methodName22 = "getBeanIdentifier";
 
-		_methodParameterTypes18 = new String[] {  };
+		_methodParameterTypes22 = new String[] {  };
 
-		_methodName19 = "setBeanIdentifier";
+		_methodName23 = "setBeanIdentifier";
 
-		_methodParameterTypes19 = new String[] { "java.lang.String" };
+		_methodParameterTypes23 = new String[] { "java.lang.String" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
 		Object[] arguments) throws Throwable {
-		if (_methodName18.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes18, parameterTypes)) {
+		if (_methodName22.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes22, parameterTypes)) {
 			return DictionaryServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName19.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes19, parameterTypes)) {
+		if (_methodName23.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes23, parameterTypes)) {
 			DictionaryServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
@@ -50,8 +50,8 @@ public class DictionaryServiceClpInvoker {
 		throw new UnsupportedOperationException();
 	}
 
-	private String _methodName18;
-	private String[] _methodParameterTypes18;
-	private String _methodName19;
-	private String[] _methodParameterTypes19;
+	private String _methodName22;
+	private String[] _methodParameterTypes22;
+	private String _methodName23;
+	private String[] _methodParameterTypes23;
 }

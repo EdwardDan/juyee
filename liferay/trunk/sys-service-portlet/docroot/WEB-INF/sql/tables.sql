@@ -17,3 +17,14 @@ create table sys_Dictionary (
 	customContent STRING null,
 	parentId LONG
 );
+
+create table sys_SMS (
+	smsId LONG not null primary key,
+	createTime DATE null,
+	modifiedTime DATE null,
+	content VARCHAR(75) null,
+	senderId LONG,
+	senderName VARCHAR(75) null,
+	receiver VARCHAR(75) null,
+	sendTime DATE null
+);

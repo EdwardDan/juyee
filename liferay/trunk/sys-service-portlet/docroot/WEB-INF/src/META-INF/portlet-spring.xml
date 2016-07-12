@@ -4,4 +4,6 @@
 	<bean id="com.justonetech.sys.service.DictionaryLocalService" class="com.justonetech.sys.service.impl.DictionaryLocalServiceImpl" />
 	<bean id="com.justonetech.sys.service.DictionaryService" class="com.justonetech.sys.service.impl.DictionaryServiceImpl" />
 	<bean id="com.justonetech.sys.service.persistence.DictionaryPersistence" class="com.justonetech.sys.service.persistence.DictionaryPersistenceImpl" parent="basePersistence" />
+	<bean id="com.justonetech.sys.service.SMSLocalService" class="com.justonetech.sys.service.impl.SMSLocalServiceImpl" />
+	<bean id="com.justonetech.sys.service.persistence.SMSPersistence" class="com.justonetech.sys.service.persistence.SMSPersistenceImpl" parent="basePersistence" />
 </beans>

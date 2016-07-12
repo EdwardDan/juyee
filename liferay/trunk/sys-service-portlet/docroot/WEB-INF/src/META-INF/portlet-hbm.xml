@@ -3,6 +3,7 @@
 
 <hibernate-mapping default-lazy="false" auto-import="false">
 	<import class="com.justonetech.sys.model.Dictionary" />
+	<import class="com.justonetech.sys.model.SMS" />
 	<class name="com.justonetech.sys.model.impl.DictionaryImpl" table="sys_Dictionary">
 		<cache usage="read-write" />
 		<id name="dictionaryId" type="long">
@@ -24,5 +25,18 @@
 		<property name="sortPath" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="customContent" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="parentId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="com.justonetech.sys.model.impl.SMSImpl" table="sys_SMS">
+		<cache usage="read-write" />
+		<id name="smsId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="createTime" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedTime" type="org.hibernate.type.TimestampType" />
+		<property name="content" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="senderId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="senderName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="receiver" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="sendTime" type="org.hibernate.type.TimestampType" />
 	</class>
 </hibernate-mapping>

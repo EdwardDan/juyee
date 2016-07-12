@@ -24,4 +24,14 @@
 		</field>
 		<field name="parentId" type="long" />
 	</model>
+	<model name="com.justonetech.sys.model.SMS">
+		<field name="smsId" type="long" />
+		<field name="createTime" type="Date" />
+		<field name="modifiedTime" type="Date" />
+		<field name="content" type="String" />
+		<field name="senderId" type="long" />
+		<field name="senderName" type="String" />
+		<field name="receiver" type="String" />
+		<field name="sendTime" type="Date" />
+	</model>
 </model-hints>

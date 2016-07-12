@@ -15,6 +15,7 @@
 package com.justonetech.sys.service;
 
 import com.justonetech.sys.model.DictionaryClp;
+import com.justonetech.sys.model.SMSClp;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -106,6 +107,10 @@ public class ClpSerializer {
 			return translateInputDictionary(oldModel);
 		}
 
+		if (oldModelClassName.equals(SMSClp.class.getName())) {
+			return translateInputSMS(oldModel);
+		}
+
 		return oldModel;
 	}
 
@@ -125,6 +130,16 @@ public class ClpSerializer {
 		DictionaryClp oldClpModel = (DictionaryClp)oldModel;
 
 		BaseModel<?> newModel = oldClpModel.getDictionaryRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
+	public static Object translateInputSMS(BaseModel<?> oldModel) {
+		SMSClp oldClpModel = (SMSClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getSMSRemoteModel();
 
 		newModel.setModelAttributes(oldClpModel.getModelAttributes());
 
@@ -151,6 +166,42 @@ public class ClpSerializer {
 		if (oldModelClassName.equals(
 					"com.justonetech.sys.model.impl.DictionaryImpl")) {
 			return translateOutputDictionary(oldModel);
+		}
+		else if (oldModelClassName.endsWith("Clp")) {
+			try {
+				ClassLoader classLoader = ClpSerializer.class.getClassLoader();
+
+				Method getClpSerializerClassMethod = oldModelClass.getMethod(
+						"getClpSerializerClass");
+
+				Class<?> oldClpSerializerClass = (Class<?>)getClpSerializerClassMethod.invoke(oldModel);
+
+				Class<?> newClpSerializerClass = classLoader.loadClass(oldClpSerializerClass.getName());
+
+				Method translateOutputMethod = newClpSerializerClass.getMethod("translateOutput",
+						BaseModel.class);
+
+				Class<?> oldModelModelClass = oldModel.getModelClass();
+
+				Method getRemoteModelMethod = oldModelClass.getMethod("get" +
+						oldModelModelClass.getSimpleName() + "RemoteModel");
+
+				Object oldRemoteModel = getRemoteModelMethod.invoke(oldModel);
+
+				BaseModel<?> newModel = (BaseModel<?>)translateOutputMethod.invoke(null,
+						oldRemoteModel);
+
+				return newModel;
+			}
+			catch (Throwable t) {
+				if (_log.isInfoEnabled()) {
+					_log.info("Unable to translate " + oldModelClassName, t);
+				}
+			}
+		}
+
+		if (oldModelClassName.equals("com.justonetech.sys.model.impl.SMSImpl")) {
+			return translateOutputSMS(oldModel);
 		}
 		else if (oldModelClassName.endsWith("Clp")) {
 			try {
@@ -269,6 +320,10 @@ public class ClpSerializer {
 			return new com.justonetech.sys.NoSuchDictionaryException();
 		}
 
+		if (className.equals("com.justonetech.sys.NoSuchSMSException")) {
+			return new com.justonetech.sys.NoSuchSMSException();
+		}
+
 		return throwable;
 	}
 
@@ -278,6 +333,16 @@ public class ClpSerializer {
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
 		newModel.setDictionaryRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputSMS(BaseModel<?> oldModel) {
+		SMSClp newModel = new SMSClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setSMSRemoteModel(oldModel);
 
 		return newModel;
 	}

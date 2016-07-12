@@ -17,6 +17,7 @@ package com.justonetech.sys.service.messaging;
 import com.justonetech.sys.service.ClpSerializer;
 import com.justonetech.sys.service.DictionaryLocalServiceUtil;
 import com.justonetech.sys.service.DictionaryServiceUtil;
+import com.justonetech.sys.service.SMSLocalServiceUtil;
 
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
@@ -39,6 +40,7 @@ public class ClpMessageListener extends BaseMessageListener {
 			DictionaryLocalServiceUtil.clearService();
 
 			DictionaryServiceUtil.clearService();
+			SMSLocalServiceUtil.clearService();
 		}
 	}
 }

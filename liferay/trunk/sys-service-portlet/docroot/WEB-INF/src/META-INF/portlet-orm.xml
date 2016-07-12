@@ -40,8 +40,33 @@
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="com.justonetech.sys.model.impl.SMSModelImpl">
+		<attributes>
+			<id name="smsId" />
+			<basic name="createTime">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedTime">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="content" />
+			<basic name="senderId" />
+			<basic name="senderName" />
+			<basic name="receiver" />
+			<basic name="sendTime">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
 	<entity class="com.justonetech.sys.model.impl.DictionaryImpl" name="Dictionary">
 		<table name="sys_Dictionary" />
+		<attributes />
+	</entity>
+	<entity class="com.justonetech.sys.model.impl.SMSImpl" name="SMS">
+		<table name="sys_SMS" />
 		<attributes />
 	</entity>
 </entity-mappings>
