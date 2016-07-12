@@ -60,7 +60,7 @@
 		</finder>
 
 	</entity>
-	<entity name="SMS" local-service="true" remote-service="true">
+	<entity name="SMS" local-service="true" remote-service="false">
 
 		<!-- PK fields -->
 
