@@ -41,7 +41,7 @@ public class OfficeSupplyApplicationPortlet extends MVCPortlet {
 		int delta = GetterUtil.getInteger(PropsUtil.get(PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA));
 		int pageSize = ParamUtil.getInteger(renderRequest, "delta", delta);
 		int pageNumber = ParamUtil.getInteger(renderRequest, "cur", 1);
-		int start = pageSize * (pageNumber - 1);
+		int start = pageSize * (pageNumber - 1) ;
 		int end = pageSize * pageNumber;
 		List<OfficeSupplyApplication> officeSupplyApplications = Collections.emptyList();
 		try {
@@ -119,7 +119,6 @@ public class OfficeSupplyApplicationPortlet extends MVCPortlet {
 		List<OfficeSupplyApplicationItem> officeSupplyApplicationItems = OfficeSupplyApplicationItemLocalServiceUtil
 				.findByOfficeSupplyApplicationId(officeSupplyApplicationId);
 		request.setAttribute("officeSupplyApplication", officeSupplyApplication);
-		request.setAttribute("officeSupplyApplicationId", officeSupplyApplicationId);
 		request.setAttribute("officeSupplyApplicationItems", officeSupplyApplicationItems);
 	}
 

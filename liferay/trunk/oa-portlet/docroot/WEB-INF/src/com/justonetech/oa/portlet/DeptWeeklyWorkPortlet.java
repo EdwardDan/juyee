@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -36,7 +37,8 @@ import com.liferay.util.bridges.mvc.MVCPortlet;
 public class DeptWeeklyWorkPortlet extends MVCPortlet {
 
 	private static Log log = LogFactoryUtil.getLog(OfficeSupplyApplicationPortlet.class);
-
+	private static String timeFormatPattern = PropsUtil.get("default.date.format.pattern");
+	
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
 		long userId = PortalUtil.getUserId(renderRequest);
@@ -73,7 +75,7 @@ public class DeptWeeklyWorkPortlet extends MVCPortlet {
 			status = "填写";
 		}
 		long deptWorkId = ParamUtil.getLong(request, "deptWorkId");
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat sdf = new SimpleDateFormat(timeFormatPattern);
 		long userId = PortalUtil.getUserId(request);
 		String userName = PortalUtil.getUserName(userId, "");
 		String deptName = ParamUtil.getString(request, "deptName");
