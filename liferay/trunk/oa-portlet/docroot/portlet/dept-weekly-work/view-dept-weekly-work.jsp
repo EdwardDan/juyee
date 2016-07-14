@@ -2,8 +2,6 @@
 <%@ include file="/common/init.jsp"%>
 <c:set var="contentPath"
 	value="${request.contextPath}/portlet/dept-weekly-work" />
-<portlet:renderURL var="viewURL" />
-<liferay-ui:header title='查看科室一周工作' backURL="${viewURL}" />
 <aui:row>
 	<aui:col span="6">
 		<aui:input name="deptName" label="上报科室" value="${deptWork.deptName}"

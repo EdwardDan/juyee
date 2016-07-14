@@ -31,7 +31,7 @@
 			<aui:input type="hidden" name="officeSupplyApplicationId"
 				value="${officeSupplyApplicationId}" />
 			<aui:input name="deptName" label="申请部门"
-				value="${officeSupplyApplication.deptName}" inlineField="true" />
+				value="${officeSupplyApplication.deptName}" inlineField="true"/>
 		</aui:col>
 		<aui:col span="6">
 			<aui:input name="userName" label="申请人" value="<%=userName%>"
@@ -103,7 +103,7 @@
 	<aui:row>
 		<aui:col span="12">
 			<aui:input type="textarea" name="introductions" label="申请说明"
-				value="${officeSupplyApplication.introductions}" style="width:98%" />
+				value="${officeSupplyApplication.introductions}" cssClass="span12" />
 		</aui:col>
 	</aui:row>
 	<aui:button-row>

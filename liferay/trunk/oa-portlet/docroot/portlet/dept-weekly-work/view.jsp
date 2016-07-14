@@ -39,7 +39,7 @@
 				name="deleteDeptWeeklyWork">
 				<portlet:param name="deptWorkId" value="${deptWork.deptWorkId}" />
 			</portlet:actionURL>
-			<portlet:actionURL var="viewDeptWeeklyWorkURL"
+			<portlet:actionURL var="viewDeptWeeklyWorkURL" windowState="pop_up"
 				name="viewDeptWeeklyWork">
 				<portlet:param name="deptWorkId" value="${deptWork.deptWorkId}" />
 				<portlet:param name="mvcPath"
@@ -47,10 +47,10 @@
 			</portlet:actionURL>
 			<liferay-ui:icon-menu>
 				<c:if test="${deptWork.status eq '提交'}">
-					<liferay-ui:icon image="view" url="${viewDeptWeeklyWorkURL}" />
+					<liferay-ui:icon image="view" url="#" onClick="pop_up()"/>
 				</c:if>
 				<c:if test="${deptWork.status eq '填写'}">
-					<liferay-ui:icon image="view" url="${viewDeptWeeklyWorkURL}" />
+					<liferay-ui:icon image="view" url="#" onClick="pop_up()"/>
 					<liferay-ui:icon image="edit" url="${editDeptWeeklyWorkURL}" />
 					<liferay-ui:icon-delete image="delete"
 						url="${deleteDeptWeeklyWorkURL}" />
@@ -60,6 +60,21 @@
 	</liferay-ui:search-container-row>
 	<liferay-ui:search-iterator />
 </liferay-ui:search-container>
+<aui:script>
+	Liferay.provide(window, 'pop_up', function(url) {	
+		var instance = this;
+		Liferay.Util.openWindow({
+			dialog : {
+				centered : true,
+				width : 800,
+				height : 450
+			},
+			title : '查看科室一周工作',
+			uri : '${viewDeptWeeklyWorkURL}',
+			destroyOnClose : true
+		});
+	}, [ 'aui-dialog' ]);
+</aui:script>
 
 
 

@@ -2,8 +2,6 @@
 <%@ include file="/common/init.jsp"%>
 <c:set var="contentPath"
 	value="${request.contextPath}/portlet/office-supply-application" />
-<portlet:renderURL var="viewURL" />
-<liferay-ui:header title='查看办公用品申请' backURL="${viewURL}" />
 <aui:row>
 		<aui:col span="6">
 			<aui:input type="hidden" name="officeSupplyApplicationId"
@@ -36,6 +34,6 @@
 <aui:row>
 	<aui:col span="12">
 		<aui:input type="textarea" name="introductions" label="申请说明"
-			value="${officeSupplyApplication.introductions}" style="width:98%" disabled="true"/>
+			value="${officeSupplyApplication.introductions}" disabled="true" cssClass="input-block-level"/>
 	</aui:col>
 </aui:row>

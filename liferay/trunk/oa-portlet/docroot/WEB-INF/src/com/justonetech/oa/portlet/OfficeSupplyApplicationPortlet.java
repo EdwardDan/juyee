@@ -119,6 +119,7 @@ public class OfficeSupplyApplicationPortlet extends MVCPortlet {
 		List<OfficeSupplyApplicationItem> officeSupplyApplicationItems = OfficeSupplyApplicationItemLocalServiceUtil
 				.findByOfficeSupplyApplicationId(officeSupplyApplicationId);
 		request.setAttribute("officeSupplyApplication", officeSupplyApplication);
+		request.setAttribute("officeSupplyApplicationId", officeSupplyApplicationId);
 		request.setAttribute("officeSupplyApplicationItems", officeSupplyApplicationItems);
 	}
 

@@ -25,31 +25,57 @@
 			name="申请部门" />
 		<liferay-ui:search-container-column-text property="userName"
 			name="申请人" />
-			<%
-				Date createDate = officeSupplyApplication.getCreateTime();
-				String createTime = DateUtil.getDate(createDate, defaultDateFormatPattern, locale, timeZone);
-			%>
+		<%
+			Date createDate = officeSupplyApplication.getCreateTime();
+					String createTime = DateUtil.getDate(createDate, defaultDateFormatPattern, locale, timeZone);
+		%>
 		<liferay-ui:search-container-column-text value="<%=createTime%>"
 			name="申请时间" />
-		<liferay-ui:search-container-column-text name="状态" value="填写"/>
+		<liferay-ui:search-container-column-text name="状态" value="填写" />
 		<liferay-ui:search-container-column-text name="action">
-		<portlet:actionURL var="editOfficeSupplyApplicationURL" name="editOfficeSupplyApplication">   
-				<portlet:param name="mvcPath" value="${contentPath }/edit-office-supply-application.jsp" />
-				<portlet:param name="officeSupplyApplicationId" value="${officeSupplyApplication.officeSupplyApplicationId}"/>
+			<portlet:actionURL var="editOfficeSupplyApplicationURL"
+				name="editOfficeSupplyApplication">
+				<portlet:param name="mvcPath"
+					value="${contentPath }/edit-office-supply-application.jsp" />
+				<portlet:param name="officeSupplyApplicationId"
+					value="${officeSupplyApplication.officeSupplyApplicationId}" />
 			</portlet:actionURL>
-			<portlet:actionURL var="deleteOfficeSupplyApplicationURL" name="deleteOfficeSupplyApplication">
-				<portlet:param name="officeSupplyApplicationId" value="${officeSupplyApplication.officeSupplyApplicationId}"/>
+			<portlet:actionURL var="deleteOfficeSupplyApplicationURL"
+				name="deleteOfficeSupplyApplication">
+				<portlet:param name="officeSupplyApplicationId"
+					value="${officeSupplyApplication.officeSupplyApplicationId}" />
 			</portlet:actionURL>
-			<portlet:actionURL var="viewOfficeSupplyApplicationURL" name="viewOfficeSupplyApplication">
-				<portlet:param name="mvcPath" value="${contentPath }/view-office-supply-application.jsp" />
-				<portlet:param name="officeSupplyApplicationId" value="${officeSupplyApplication.officeSupplyApplicationId}"/>
+			<portlet:actionURL var="viewOfficeSupplyApplicationURL"
+				name="viewOfficeSupplyApplication" windowState="pop_up">
+				<portlet:param name="mvcPath"
+					value="${contentPath }/view-office-supply-application.jsp" />
+				<portlet:param name="officeSupplyApplicationId"
+					value="${officeSupplyApplication.officeSupplyApplicationId}" />
 			</portlet:actionURL>
-		<liferay-ui:icon-menu>
-				<liferay-ui:icon image="edit" url="${editOfficeSupplyApplicationURL}" />
-				<liferay-ui:icon-delete image="delete" url="${deleteOfficeSupplyApplicationURL}"/>
-				<liferay-ui:icon image="view" url="${viewOfficeSupplyApplicationURL}" />
+			<liferay-ui:icon-menu>
+				<liferay-ui:icon image="edit"
+					url="${editOfficeSupplyApplicationURL}" />
+				<liferay-ui:icon-delete image="delete"
+					url="${deleteOfficeSupplyApplicationURL}" />
+				<liferay-ui:icon image="view"
+					url="#" onClick="pop_up()" />
 			</liferay-ui:icon-menu>
 		</liferay-ui:search-container-column-text>
 	</liferay-ui:search-container-row>
-	<liferay-ui:search-iterator/>
+	<liferay-ui:search-iterator />
 </liferay-ui:search-container>
+<aui:script>
+	Liferay.provide(window, 'pop_up', function(url) {	
+		var instance = this;
+		Liferay.Util.openWindow({
+			dialog : {
+				centered : true,
+				width : 800,
+				height : 550
+			},
+			title : '查看办公用品申请',
+			uri : '${viewOfficeSupplyApplicationURL}',
+			destroyOnClose : true
+		});
+	}, [ 'aui-dialog' ]);
+</aui:script>
