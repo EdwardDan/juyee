@@ -29,7 +29,7 @@
 	<aui:row>
 		<aui:col span="6">
 			<aui:input type="hidden" name="officeSupplyApplicationId"
-				value="${officeSupplyApplicationId}" />
+				value="${officeSupplyApplication.officeSupplyApplicationId}" />
 			<aui:input name="deptName" label="申请部门"
 				value="${officeSupplyApplication.deptName}" inlineField="true"/>
 		</aui:col>

@@ -49,23 +49,24 @@
 				name="viewOfficeSupplyApplication" windowState="pop_up">
 				<portlet:param name="mvcPath"
 					value="${contentPath }/view-office-supply-application.jsp" />
-				<portlet:param name="officeSupplyApplicationId"
-					value="${officeSupplyApplication.officeSupplyApplicationId}" />
+			<portlet:param name="officeSupplyApplicationId"
+					value="${officeSupplyApplication.officeSupplyApplicationId}" /> 
 			</portlet:actionURL>
+			
 			<liferay-ui:icon-menu>
 				<liferay-ui:icon image="edit"
-					url="${editOfficeSupplyApplicationURL}" />
+					url="${editOfficeSupplyApplicationURL}"/>
 				<liferay-ui:icon-delete image="delete"
-					url="${deleteOfficeSupplyApplicationURL}" />
+					url="${deleteOfficeSupplyApplicationURL}" /> 
 				<liferay-ui:icon image="view"
 					url="#" onClick="pop_up()" />
-			</liferay-ui:icon-menu>
+			</liferay-ui:icon-menu> 
 		</liferay-ui:search-container-column-text>
 	</liferay-ui:search-container-row>
-	<liferay-ui:search-iterator />
+	<liferay-ui:search-iterator /> 
 </liferay-ui:search-container>
 <aui:script>
-	Liferay.provide(window, 'pop_up', function(url) {	
+	Liferay.provide(window, 'pop_up', function() {	
 		var instance = this;
 		Liferay.Util.openWindow({
 			dialog : {

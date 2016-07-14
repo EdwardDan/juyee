@@ -63,6 +63,7 @@ public class OfficeSupplyApplicationPortlet extends MVCPortlet {
 	public void saveOfficeSupplyApplication(ActionRequest request, ActionResponse response) throws SystemException,
 			PortalException {
 		long officeSupplyApplicationId = ParamUtil.getLong(request, "officeSupplyApplicationId");
+		System.out.println("==================="+officeSupplyApplicationId);
 		long userId = PortalUtil.getUserId(request);
 		String userName = PortalUtil.getUserName(userId, "");
 		String deptName = ParamUtil.getString(request, "deptName");
@@ -137,6 +138,7 @@ public class OfficeSupplyApplicationPortlet extends MVCPortlet {
 	public void viewOfficeSupplyApplication(ActionRequest request, ActionResponse response) throws PortalException,
 			SystemException {
 		long officeSupplyApplicationId = ParamUtil.getLong(request, "officeSupplyApplicationId");
+		System.out.println("====================="+officeSupplyApplicationId);
 		OfficeSupplyApplication officeSupplyApplication = OfficeSupplyApplicationLocalServiceUtil
 				.getOfficeSupplyApplication(officeSupplyApplicationId);
 		List<OfficeSupplyApplicationItem> officeSupplyApplicationItems = OfficeSupplyApplicationItemLocalServiceUtil
