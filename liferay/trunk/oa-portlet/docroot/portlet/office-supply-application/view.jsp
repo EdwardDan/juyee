@@ -46,37 +46,23 @@
 					value="${officeSupplyApplication.officeSupplyApplicationId}" />
 			</portlet:actionURL>
 			<portlet:actionURL var="viewOfficeSupplyApplicationURL"
-				name="viewOfficeSupplyApplication" windowState="pop_up">
+				name="viewOfficeSupplyApplication">
 				<portlet:param name="mvcPath"
 					value="${contentPath }/view-office-supply-application.jsp" />
-			<portlet:param name="officeSupplyApplicationId"
-					value="${officeSupplyApplication.officeSupplyApplicationId}" /> 
+				<portlet:param name="officeSupplyApplicationId"
+					value="${officeSupplyApplication.officeSupplyApplicationId}" />
 			</portlet:actionURL>
-			
+
 			<liferay-ui:icon-menu>
 				<liferay-ui:icon image="edit"
-					url="${editOfficeSupplyApplicationURL}"/>
+					url="${editOfficeSupplyApplicationURL}" />
 				<liferay-ui:icon-delete image="delete"
-					url="${deleteOfficeSupplyApplicationURL}" /> 
+					url="${deleteOfficeSupplyApplicationURL}" />
 				<liferay-ui:icon image="view"
-					url="#" onClick="pop_up()" />
-			</liferay-ui:icon-menu> 
+					url="${viewOfficeSupplyApplicationURL}" />
+			</liferay-ui:icon-menu>
 		</liferay-ui:search-container-column-text>
 	</liferay-ui:search-container-row>
-	<liferay-ui:search-iterator /> 
+	<liferay-ui:search-iterator />
 </liferay-ui:search-container>
-<aui:script>
-	Liferay.provide(window, 'pop_up', function() {	
-		var instance = this;
-		Liferay.Util.openWindow({
-			dialog : {
-				centered : true,
-				width : 800,
-				height : 550
-			},
-			title : '查看办公用品申请',
-			uri : '${viewOfficeSupplyApplicationURL}',
-			destroyOnClose : true
-		});
-	}, [ 'aui-dialog' ]);
-</aui:script>
+

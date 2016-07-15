@@ -1,5 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
+<portlet:renderURL var="viewURL"/>
+<liferay-ui:header title="查看办公用品申请" backURL="${viewURL}"></liferay-ui:header>
 <c:set var="contentPath"
 	value="${request.contextPath}/portlet/office-supply-application" />
 <aui:row>

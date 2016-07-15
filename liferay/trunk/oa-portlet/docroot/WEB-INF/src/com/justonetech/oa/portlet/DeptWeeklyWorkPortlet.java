@@ -150,7 +150,6 @@ public class DeptWeeklyWorkPortlet extends MVCPortlet {
 
 	public void viewDeptWeeklyWork(ActionRequest request, ActionResponse response) throws PortalException, SystemException {
 		Long deptWorkId = ParamUtil.getLong(request, "deptWorkId");
-		System.out.println("===================="+deptWorkId);
 		DeptWork deptWork = DeptWorkLocalServiceUtil.getDeptWork(deptWorkId);
 		List<DeptWorkItem> deptWorkItems = DeptWorkItemLocalServiceUtil.findByDeptWorkId(deptWorkId);
 		request.setAttribute("deptWork", deptWork);

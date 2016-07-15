@@ -1,6 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
-<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='${staticServerURL}/jquery/jquery-1.12.4.min.js'>"+"<"+"/script>");
+</script>
 <portlet:renderURL var="viewURL" />
 <script>
 	function count() {
@@ -97,7 +99,7 @@
 	<aui:row>
 		<aui:col span="6"></aui:col>
 		<aui:col span="6">
-			<aui:input id="total" name="total" label="预计总价" value="" disabled="true"/>
+			<aui:input id="total" name="total" label="预计总价" value="${total}" disabled="true"/>
 		</aui:col>
 	</aui:row>
 	<aui:row>
@@ -109,7 +111,7 @@
 	<aui:button-row>
 		<aui:button type="submit" value="提交" />
 		<aui:button type="submit" value="暂存" />
-		<aui:button type="cancel" value="取消" href="${viewURL }" />
+		<aui:button type="cancel" value="取消" href="${viewURL }"/>
 	</aui:button-row>
 </aui:form>
 
