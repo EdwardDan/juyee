@@ -1,6 +1,7 @@
 package com.justonetech.oa.portlet;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -91,7 +92,7 @@ public class OfficeSupplyApplicationPortlet extends MVCPortlet {
 			OfficeSupplyApplicationItemLocalServiceUtil.deleteOfficeSupplyApplicationItem(officeSupplyApplicationItem);
 		}
 		String rowIndexes = request.getParameter("rowIndexes");
-		System.out.println("==========="+rowIndexes);
+		System.out.println("===========" + rowIndexes);
 		String[] indexOfRows = rowIndexes.split(",");
 		for (int i = 0; i < indexOfRows.length; i++) {
 			OfficeSupplyApplicationItem officeSupplyApplicationItem = OfficeSupplyApplicationItemLocalServiceUtil
@@ -125,8 +126,8 @@ public class OfficeSupplyApplicationPortlet extends MVCPortlet {
 		}
 		request.setAttribute("officeSupplyApplication", officeSupplyApplication);
 		request.setAttribute("officeSupplyApplicationId", officeSupplyApplicationId);
-		request.setAttribute("officeSupplyApplicationItems", OfficeSupplyApplicationItems);		
-		request.setAttribute("total", total);		
+		request.setAttribute("officeSupplyApplicationItems", OfficeSupplyApplicationItems);
+		request.setAttribute("total", total);
 	}
 
 	public void deleteOfficeSupplyApplication(ActionRequest request, ActionResponse response) throws PortalException,
@@ -147,7 +148,14 @@ public class OfficeSupplyApplicationPortlet extends MVCPortlet {
 				.getOfficeSupplyApplication(officeSupplyApplicationId);
 		List<OfficeSupplyApplicationItem> officeSupplyApplicationItems = OfficeSupplyApplicationItemLocalServiceUtil
 				.findByOfficeSupplyApplicationId(officeSupplyApplicationId);
+		List<OfficeSupplyApplicationItem> OfficeSupplyApplicationItems = OfficeSupplyApplicationItemLocalServiceUtil
+				.findByOfficeSupplyApplicationId(officeSupplyApplicationId);
+		double sum = 0;
+		for (OfficeSupplyApplicationItem OfficeSupplyApplicationItem : OfficeSupplyApplicationItems) {
+			sum += OfficeSupplyApplicationItem.getUnitPrice() * OfficeSupplyApplicationItem.getQuantity();
+		}
 		request.setAttribute("officeSupplyApplication", officeSupplyApplication);
 		request.setAttribute("officeSupplyApplicationItems", officeSupplyApplicationItems);
+		request.setAttribute("sum", sum);
 	}
 }

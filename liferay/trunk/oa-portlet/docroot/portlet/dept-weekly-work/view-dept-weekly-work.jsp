@@ -29,7 +29,7 @@
 		<liferay-ui:search-container-column-text property="dutyPerson"
 			name="责任人" />
 		<liferay-ui:search-container-column-text 
-			name="是否重点工作" value="${DeptWorkItem.mainWork ?'是':'否'}"/> 
+			name="是否重点工作" value="${DeptWorkItem.mainWork ? '是':'否'}"/> 
 		<liferay-ui:search-container-column-text property="content"
 			name="工作内容" />
 		<liferay-ui:search-container-column-text property="schedule"

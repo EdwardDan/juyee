@@ -44,6 +44,7 @@
 				name="deleteOfficeSupplyApplication">
 				<portlet:param name="officeSupplyApplicationId"
 					value="${officeSupplyApplication.officeSupplyApplicationId}" />
+				<portlet:param name="redirect" value="${viewURL }" />
 			</portlet:actionURL>
 			<portlet:actionURL var="viewOfficeSupplyApplicationURL"
 				name="viewOfficeSupplyApplication">

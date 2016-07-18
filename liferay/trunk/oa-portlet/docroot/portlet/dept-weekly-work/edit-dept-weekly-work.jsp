@@ -2,8 +2,10 @@
 <%@include file="/common/init.jsp"%>
 <c:set var="contentPath"
 	value="${request.contextPath}/portlet/dept-weekly-work" />
-<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-
+<script type="text/javascript">
+   document.write("<script src='${staticServerURL}/jquery/jquery-1.12.4.min.js'>"+"<"+"/script>");
+</script>
+<script src="${staticServerURL}/My97DatePicker/WdatePicker.js"></script>
 <%
 	long userId = PortalUtil.getUserId(request);
 	String userName = PortalUtil.getUserName(userId, "");
@@ -20,6 +22,7 @@
 <liferay-ui:header title="${empty deptWork?'添加':'编辑'}科室一周工作安排"
 	backURL="${viewURL}" />
 <portlet:actionURL var="saveDeptWorkURL" name="saveDeptWork">
+	<portlet:param name="redirect" value="${viewURL }" />
 </portlet:actionURL>
 <aui:form action="${saveDeptWorkURL}">
 	<aui:row>
@@ -104,6 +107,8 @@
 		});
 	</aui:script>
 		
+
+
 	
 	<aui:button-row>
 		<aui:button type="submit" value="提交" />
