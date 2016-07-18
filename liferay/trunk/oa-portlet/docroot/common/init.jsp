@@ -21,5 +21,4 @@
 <%@ page import="com.liferay.portal.kernel.dao.search.RowChecker"%>
 <%@ page import="java.text.SimpleDateFormat"%>
 
-<script type="text/javascript"
-	src="/html/js/My97DatePicker/WdatePicker.js"></script>
+<script src="${staticServerURL}/My97DatePicker/WdatePicker.js"></script>
