@@ -89,7 +89,7 @@
 						value="${item.content}" type="textarea" />
 					<aui:input name="schedule${status.index+1}" label="工作进度"
 						value="${item.schedule}" type="textarea" />
-					<aui:input name="agentPerson${status.index+1}" label="序号"
+					<aui:input name="agentPerson${status.index+1}" label="经办人"
 						value="${item.agentPerson}" />
 				</div>
 			</div>

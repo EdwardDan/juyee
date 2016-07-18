@@ -91,6 +91,7 @@ public class OfficeSupplyApplicationPortlet extends MVCPortlet {
 			OfficeSupplyApplicationItemLocalServiceUtil.deleteOfficeSupplyApplicationItem(officeSupplyApplicationItem);
 		}
 		String rowIndexes = request.getParameter("rowIndexes");
+		System.out.println("==========="+rowIndexes);
 		String[] indexOfRows = rowIndexes.split(",");
 		for (int i = 0; i < indexOfRows.length; i++) {
 			OfficeSupplyApplicationItem officeSupplyApplicationItem = OfficeSupplyApplicationItemLocalServiceUtil
