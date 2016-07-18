@@ -1,0 +1,1 @@
+create index IX_E45FFE8B on projApproval_ConstructionPermit (userId);

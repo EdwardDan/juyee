@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.justonetech.projApproval.model.ConstructionPermit">
+		<field name="constructionPermitId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createTime" type="Date" />
+		<field name="modifiedTime" type="Date" />
+		<field name="projType" type="long" />
+		<field name="projProperty" type="long" />
+		<field name="county" type="long" />
+		<field name="constructionCode" type="String" />
+		<field name="bidingCode" type="String" />
+		<field name="businessCode" type="String" />
+		<field name="projName" type="String">
+			<hint name="max-length">200</hint>
+		</field>
+		<field name="company" type="String">
+			<hint name="max-length">200</hint>
+		</field>
+		<field name="companyProperty" type="String">
+			<hint name="max-length">200</hint>
+		</field>
+		<field name="companyAddress" type="String">
+			<hint name="max-length">200</hint>
+		</field>
+		<field name="legalPerson" type="String" />
+		<field name="companyTel" type="String" />
+		<field name="companyContacts" type="String" />
+		<field name="companyContactPhone" type="String" />
+		<field name="companySite" type="String">
+			<hint name="max-length">200</hint>
+		</field>
+		<field name="engineerCategory" type="String" />
+		<field name="engineerAttribute" type="long" />
+		<field name="engineerScale" type="String">
+			<hint name="max-length">200</hint>
+		</field>
+		<field name="nationalFundsPer" type="String" />
+		<field name="contractPrice" type="double" />
+		<field name="contractSchedule" type="double" />
+		<field name="bidPrice" type="double" />
+		<field name="investBudget" type="double" />
+		<field name="planStartDate" type="Date" />
+		<field name="planEndDate" type="Date" />
+		<field name="workSituation" type="String">
+			<hint name="max-length">200</hint>
+		</field>
+		<field name="otherInfo" type="String">
+			<hint name="max-length">4000</hint>
+		</field>
+		<field name="applyMaterial" type="String">
+			<hint name="max-length">4000</hint>
+		</field>
+		<field name="receiptNum" type="String" />
+		<field name="certificationDate" type="Date" />
+	</model>
+</model-hints>

@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="com.justonetech.projApproval.model.ConstructionPermit" />
+	<class name="com.justonetech.projApproval.model.impl.ConstructionPermitImpl" table="projApproval_ConstructionPermit">
+		<cache usage="read-write" />
+		<id name="constructionPermitId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createTime" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedTime" type="org.hibernate.type.TimestampType" />
+		<property name="projType" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="projProperty" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="county" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="constructionCode" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="bidingCode" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="businessCode" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="projName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="company" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="companyProperty" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="companyAddress" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="legalPerson" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="companyTel" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="companyContacts" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="companyContactPhone" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="companySite" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="engineerCategory" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="engineerAttribute" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="engineerScale" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="nationalFundsPer" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="contractPrice" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="contractSchedule" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="bidPrice" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="investBudget" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="planStartDate" type="org.hibernate.type.TimestampType" />
+		<property name="planEndDate" type="org.hibernate.type.TimestampType" />
+		<property name="workSituation" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="otherInfo" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="applyMaterial" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="receiptNum" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="certificationDate" type="org.hibernate.type.TimestampType" />
+	</class>
+</hibernate-mapping>

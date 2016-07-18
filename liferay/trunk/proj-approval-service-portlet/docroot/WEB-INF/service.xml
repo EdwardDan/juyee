@@ -1,8 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
-<service-builder package-path="com.liferay.sample">
-	<author>fanqi</author>
-	<namespace>SAMPLE</namespace>
+<service-builder package-path="com.justonetech.projApproval">
+	<author>justonetech</author>
+	<namespace>projApproval</namespace>
 
-	
+	<!-- 施工许可基本信息 -->
+	<entity name="ConstructionPermit" local-service="true"
+		remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="constructionPermitId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createTime" type="Date" />
+		<column name="modifiedTime" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="projType" type="long" />
+		<column name="projProperty" type="long" />
+		<column name="county" type="long" />
+		<column name="constructionCode" type="String" />
+		<column name="bidingCode" type="String" />
+		<column name="businessCode" type="String" />
+		<column name="projName" type="String" />
+		<column name="company" type="String" />
+		<column name="companyProperty" type="String" />
+		<column name="companyAddress" type="String" />
+		<column name="legalPerson" type="String" />
+		<column name="companyTel" type="String" />
+		<column name="companyContacts" type="String" />
+		<column name="companyContactPhone" type="String" />
+		<column name="companySite" type="String" />
+		<column name="engineerCategory" type="String" />
+		<column name="engineerAttribute" type="long" />
+		<column name="engineerScale" type="String" />
+		<column name="nationalFundsPer" type="String" />
+		<column name="contractPrice" type="double" />
+		<column name="contractSchedule" type="double" />
+		<column name="bidPrice" type="double" />
+		<column name="investBudget" type="double" />
+		<column name="planStartDate" type="Date" />
+		<column name="planEndDate" type="Date" />
+		<column name="workSituation" type="String" />
+		<column name="otherInfo" type="String" />
+		<column name="applyMaterial" type="String" />
+		<column name="receiptNum" type="String" />
+		<column name="certificationDate" type="Date" />
+
+		<!-- Finder methods -->
+		<finder name="UserId" return-type="Collection">
+			<finder-column name="userId"></finder-column>
+		</finder>
+
+	</entity>
+
 </service-builder>

@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd">
+	<persistence-unit-metadata>
+		<xml-mapping-metadata-complete/>
+		<persistence-unit-defaults>
+			<access>PROPERTY</access>
+		</persistence-unit-defaults>
+	</persistence-unit-metadata>
+	<mapped-superclass class="com.justonetech.projApproval.model.impl.ConstructionPermitModelImpl">
+		<attributes>
+			<id name="constructionPermitId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createTime">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedTime">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="projType" />
+			<basic name="projProperty" />
+			<basic name="county" />
+			<basic name="constructionCode" />
+			<basic name="bidingCode" />
+			<basic name="businessCode" />
+			<basic name="projName" />
+			<basic name="company" />
+			<basic name="companyProperty" />
+			<basic name="companyAddress" />
+			<basic name="legalPerson" />
+			<basic name="companyTel" />
+			<basic name="companyContacts" />
+			<basic name="companyContactPhone" />
+			<basic name="companySite" />
+			<basic name="engineerCategory" />
+			<basic name="engineerAttribute" />
+			<basic name="engineerScale" />
+			<basic name="nationalFundsPer" />
+			<basic name="contractPrice" />
+			<basic name="contractSchedule" />
+			<basic name="bidPrice" />
+			<basic name="investBudget" />
+			<basic name="planStartDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="planEndDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="workSituation" />
+			<basic name="otherInfo" />
+			<basic name="applyMaterial" />
+			<basic name="receiptNum" />
+			<basic name="certificationDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<entity class="com.justonetech.projApproval.model.impl.ConstructionPermitImpl" name="ConstructionPermit">
+		<table name="projApproval_ConstructionPermit" />
+		<attributes />
+	</entity>
+</entity-mappings>
