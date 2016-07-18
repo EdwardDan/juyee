@@ -21,10 +21,9 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * This class is used by SOAP remote services, specifically {@link com.justonetech.proj.service.http.ProjectServiceSoap}.
+ * This class is used by SOAP remote services.
  *
  * @author fanqi
- * @see com.justonetech.proj.service.http.ProjectServiceSoap
  * @generated
  */
 public class ProjectSoap implements Serializable {
@@ -36,8 +35,8 @@ public class ProjectSoap implements Serializable {
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
-		soapModel.setCreateDate(model.getCreateDate());
-		soapModel.setModifiedDate(model.getModifiedDate());
+		soapModel.setCreateTime(model.getCreateTime());
+		soapModel.setModifiedTime(model.getModifiedTime());
 		soapModel.setBjbh(model.getBjbh());
 		soapModel.setProjNum(model.getProjNum());
 		soapModel.setSortNo(model.getSortNo());
@@ -160,20 +159,20 @@ public class ProjectSoap implements Serializable {
 		_userName = userName;
 	}
 
-	public Date getCreateDate() {
-		return _createDate;
+	public Date getCreateTime() {
+		return _createTime;
 	}
 
-	public void setCreateDate(Date createDate) {
-		_createDate = createDate;
+	public void setCreateTime(Date createTime) {
+		_createTime = createTime;
 	}
 
-	public Date getModifiedDate() {
-		return _modifiedDate;
+	public Date getModifiedTime() {
+		return _modifiedTime;
 	}
 
-	public void setModifiedDate(Date modifiedDate) {
-		_modifiedDate = modifiedDate;
+	public void setModifiedTime(Date modifiedTime) {
+		_modifiedTime = modifiedTime;
 	}
 
 	public String getBjbh() {
@@ -425,8 +424,8 @@ public class ProjectSoap implements Serializable {
 	private long _companyId;
 	private long _userId;
 	private String _userName;
-	private Date _createDate;
-	private Date _modifiedDate;
+	private Date _createTime;
+	private Date _modifiedTime;
 	private String _bjbh;
 	private String _projNum;
 	private int _sortNo;

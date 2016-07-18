@@ -54,8 +54,8 @@ public class ProjectWrapper implements Project, ModelWrapper<Project> {
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
-		attributes.put("createDate", getCreateDate());
-		attributes.put("modifiedDate", getModifiedDate());
+		attributes.put("createTime", getCreateTime());
+		attributes.put("modifiedTime", getModifiedTime());
 		attributes.put("bjbh", getBjbh());
 		attributes.put("projNum", getProjNum());
 		attributes.put("sortNo", getSortNo());
@@ -122,16 +122,16 @@ public class ProjectWrapper implements Project, ModelWrapper<Project> {
 			setUserName(userName);
 		}
 
-		Date createDate = (Date)attributes.get("createDate");
+		Date createTime = (Date)attributes.get("createTime");
 
-		if (createDate != null) {
-			setCreateDate(createDate);
+		if (createTime != null) {
+			setCreateTime(createTime);
 		}
 
-		Date modifiedDate = (Date)attributes.get("modifiedDate");
+		Date modifiedTime = (Date)attributes.get("modifiedTime");
 
-		if (modifiedDate != null) {
-			setModifiedDate(modifiedDate);
+		if (modifiedTime != null) {
+			setModifiedTime(modifiedTime);
 		}
 
 		String bjbh = (String)attributes.get("bjbh");
@@ -458,43 +458,43 @@ public class ProjectWrapper implements Project, ModelWrapper<Project> {
 	}
 
 	/**
-	* Returns the create date of this project.
+	* Returns the create time of this project.
 	*
-	* @return the create date of this project
+	* @return the create time of this project
 	*/
 	@Override
-	public java.util.Date getCreateDate() {
-		return _project.getCreateDate();
+	public java.util.Date getCreateTime() {
+		return _project.getCreateTime();
 	}
 
 	/**
-	* Sets the create date of this project.
+	* Sets the create time of this project.
 	*
-	* @param createDate the create date of this project
+	* @param createTime the create time of this project
 	*/
 	@Override
-	public void setCreateDate(java.util.Date createDate) {
-		_project.setCreateDate(createDate);
+	public void setCreateTime(java.util.Date createTime) {
+		_project.setCreateTime(createTime);
 	}
 
 	/**
-	* Returns the modified date of this project.
+	* Returns the modified time of this project.
 	*
-	* @return the modified date of this project
+	* @return the modified time of this project
 	*/
 	@Override
-	public java.util.Date getModifiedDate() {
-		return _project.getModifiedDate();
+	public java.util.Date getModifiedTime() {
+		return _project.getModifiedTime();
 	}
 
 	/**
-	* Sets the modified date of this project.
+	* Sets the modified time of this project.
 	*
-	* @param modifiedDate the modified date of this project
+	* @param modifiedTime the modified time of this project
 	*/
 	@Override
-	public void setModifiedDate(java.util.Date modifiedDate) {
-		_project.setModifiedDate(modifiedDate);
+	public void setModifiedTime(java.util.Date modifiedTime) {
+		_project.setModifiedTime(modifiedTime);
 	}
 
 	/**

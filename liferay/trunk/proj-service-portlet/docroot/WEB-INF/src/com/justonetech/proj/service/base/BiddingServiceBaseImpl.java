@@ -182,25 +182,6 @@ public abstract class BiddingServiceBaseImpl extends BaseServiceImpl
 	}
 
 	/**
-	 * Returns the project remote service.
-	 *
-	 * @return the project remote service
-	 */
-	public com.justonetech.proj.service.ProjectService getProjectService() {
-		return projectService;
-	}
-
-	/**
-	 * Sets the project remote service.
-	 *
-	 * @param projectService the project remote service
-	 */
-	public void setProjectService(
-		com.justonetech.proj.service.ProjectService projectService) {
-		this.projectService = projectService;
-	}
-
-	/**
 	 * Returns the project persistence.
 	 *
 	 * @return the project persistence
@@ -403,8 +384,6 @@ public abstract class BiddingServiceBaseImpl extends BaseServiceImpl
 	protected CompanyPersistence companyPersistence;
 	@BeanReference(type = com.justonetech.proj.service.ProjectLocalService.class)
 	protected com.justonetech.proj.service.ProjectLocalService projectLocalService;
-	@BeanReference(type = com.justonetech.proj.service.ProjectService.class)
-	protected com.justonetech.proj.service.ProjectService projectService;
 	@BeanReference(type = ProjectPersistence.class)
 	protected ProjectPersistence projectPersistence;
 	@BeanReference(type = com.liferay.counter.service.CounterLocalService.class)

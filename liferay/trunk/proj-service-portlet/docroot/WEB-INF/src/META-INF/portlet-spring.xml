@@ -8,6 +8,5 @@
 	<bean id="com.justonetech.proj.service.CompanyService" class="com.justonetech.proj.service.impl.CompanyServiceImpl" />
 	<bean id="com.justonetech.proj.service.persistence.CompanyPersistence" class="com.justonetech.proj.service.persistence.CompanyPersistenceImpl" parent="basePersistence" />
 	<bean id="com.justonetech.proj.service.ProjectLocalService" class="com.justonetech.proj.service.impl.ProjectLocalServiceImpl" />
-	<bean id="com.justonetech.proj.service.ProjectService" class="com.justonetech.proj.service.impl.ProjectServiceImpl" />
 	<bean id="com.justonetech.proj.service.persistence.ProjectPersistence" class="com.justonetech.proj.service.persistence.ProjectPersistenceImpl" parent="basePersistence" />
 </beans>

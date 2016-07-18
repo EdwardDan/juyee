@@ -79,8 +79,8 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
-		attributes.put("createDate", getCreateDate());
-		attributes.put("modifiedDate", getModifiedDate());
+		attributes.put("createTime", getCreateTime());
+		attributes.put("modifiedTime", getModifiedTime());
 		attributes.put("bjbh", getBjbh());
 		attributes.put("projNum", getProjNum());
 		attributes.put("sortNo", getSortNo());
@@ -147,16 +147,16 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 			setUserName(userName);
 		}
 
-		Date createDate = (Date)attributes.get("createDate");
+		Date createTime = (Date)attributes.get("createTime");
 
-		if (createDate != null) {
-			setCreateDate(createDate);
+		if (createTime != null) {
+			setCreateTime(createTime);
 		}
 
-		Date modifiedDate = (Date)attributes.get("modifiedDate");
+		Date modifiedTime = (Date)attributes.get("modifiedTime");
 
-		if (modifiedDate != null) {
-			setModifiedDate(modifiedDate);
+		if (modifiedTime != null) {
+			setModifiedTime(modifiedTime);
 		}
 
 		String bjbh = (String)attributes.get("bjbh");
@@ -466,21 +466,21 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 	}
 
 	@Override
-	public Date getCreateDate() {
-		return _createDate;
+	public Date getCreateTime() {
+		return _createTime;
 	}
 
 	@Override
-	public void setCreateDate(Date createDate) {
-		_createDate = createDate;
+	public void setCreateTime(Date createTime) {
+		_createTime = createTime;
 
 		if (_projectRemoteModel != null) {
 			try {
 				Class<?> clazz = _projectRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setCreateDate", Date.class);
+				Method method = clazz.getMethod("setCreateTime", Date.class);
 
-				method.invoke(_projectRemoteModel, createDate);
+				method.invoke(_projectRemoteModel, createTime);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -489,21 +489,21 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 	}
 
 	@Override
-	public Date getModifiedDate() {
-		return _modifiedDate;
+	public Date getModifiedTime() {
+		return _modifiedTime;
 	}
 
 	@Override
-	public void setModifiedDate(Date modifiedDate) {
-		_modifiedDate = modifiedDate;
+	public void setModifiedTime(Date modifiedTime) {
+		_modifiedTime = modifiedTime;
 
 		if (_projectRemoteModel != null) {
 			try {
 				Class<?> clazz = _projectRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setModifiedDate", Date.class);
+				Method method = clazz.getMethod("setModifiedTime", Date.class);
 
-				method.invoke(_projectRemoteModel, modifiedDate);
+				method.invoke(_projectRemoteModel, modifiedTime);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -1281,8 +1281,8 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
 		clone.setUserName(getUserName());
-		clone.setCreateDate(getCreateDate());
-		clone.setModifiedDate(getModifiedDate());
+		clone.setCreateTime(getCreateTime());
+		clone.setModifiedTime(getModifiedTime());
 		clone.setBjbh(getBjbh());
 		clone.setProjNum(getProjNum());
 		clone.setSortNo(getSortNo());
@@ -1397,10 +1397,10 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 		sb.append(getUserId());
 		sb.append(", userName=");
 		sb.append(getUserName());
-		sb.append(", createDate=");
-		sb.append(getCreateDate());
-		sb.append(", modifiedDate=");
-		sb.append(getModifiedDate());
+		sb.append(", createTime=");
+		sb.append(getCreateTime());
+		sb.append(", modifiedTime=");
+		sb.append(getModifiedTime());
 		sb.append(", bjbh=");
 		sb.append(getBjbh());
 		sb.append(", projNum=");
@@ -1495,12 +1495,12 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 		sb.append(getUserName());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>createDate</column-name><column-value><![CDATA[");
-		sb.append(getCreateDate());
+			"<column><column-name>createTime</column-name><column-value><![CDATA[");
+		sb.append(getCreateTime());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
-		sb.append(getModifiedDate());
+			"<column><column-name>modifiedTime</column-name><column-value><![CDATA[");
+		sb.append(getModifiedTime());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>bjbh</column-name><column-value><![CDATA[");
@@ -1634,8 +1634,8 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 	private long _userId;
 	private String _userUuid;
 	private String _userName;
-	private Date _createDate;
-	private Date _modifiedDate;
+	private Date _createTime;
+	private Date _modifiedTime;
 	private String _bjbh;
 	private String _projNum;
 	private int _sortNo;

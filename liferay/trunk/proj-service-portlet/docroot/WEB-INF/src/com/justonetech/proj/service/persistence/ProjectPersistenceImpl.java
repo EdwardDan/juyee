@@ -321,8 +321,8 @@ public class ProjectPersistenceImpl extends BasePersistenceImpl<Project>
 		projectImpl.setCompanyId(project.getCompanyId());
 		projectImpl.setUserId(project.getUserId());
 		projectImpl.setUserName(project.getUserName());
-		projectImpl.setCreateDate(project.getCreateDate());
-		projectImpl.setModifiedDate(project.getModifiedDate());
+		projectImpl.setCreateTime(project.getCreateTime());
+		projectImpl.setModifiedTime(project.getModifiedTime());
 		projectImpl.setBjbh(project.getBjbh());
 		projectImpl.setProjNum(project.getProjNum());
 		projectImpl.setSortNo(project.getSortNo());

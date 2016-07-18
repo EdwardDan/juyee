@@ -49,10 +49,10 @@ public class ProjectCacheModel implements CacheModel<Project>, Externalizable {
 		sb.append(userId);
 		sb.append(", userName=");
 		sb.append(userName);
-		sb.append(", createDate=");
-		sb.append(createDate);
-		sb.append(", modifiedDate=");
-		sb.append(modifiedDate);
+		sb.append(", createTime=");
+		sb.append(createTime);
+		sb.append(", modifiedTime=");
+		sb.append(modifiedTime);
 		sb.append(", bjbh=");
 		sb.append(bjbh);
 		sb.append(", projNum=");
@@ -134,18 +134,18 @@ public class ProjectCacheModel implements CacheModel<Project>, Externalizable {
 			projectImpl.setUserName(userName);
 		}
 
-		if (createDate == Long.MIN_VALUE) {
-			projectImpl.setCreateDate(null);
+		if (createTime == Long.MIN_VALUE) {
+			projectImpl.setCreateTime(null);
 		}
 		else {
-			projectImpl.setCreateDate(new Date(createDate));
+			projectImpl.setCreateTime(new Date(createTime));
 		}
 
-		if (modifiedDate == Long.MIN_VALUE) {
-			projectImpl.setModifiedDate(null);
+		if (modifiedTime == Long.MIN_VALUE) {
+			projectImpl.setModifiedTime(null);
 		}
 		else {
-			projectImpl.setModifiedDate(new Date(modifiedDate));
+			projectImpl.setModifiedTime(new Date(modifiedTime));
 		}
 
 		if (bjbh == null) {
@@ -265,8 +265,8 @@ public class ProjectCacheModel implements CacheModel<Project>, Externalizable {
 		companyId = objectInput.readLong();
 		userId = objectInput.readLong();
 		userName = objectInput.readUTF();
-		createDate = objectInput.readLong();
-		modifiedDate = objectInput.readLong();
+		createTime = objectInput.readLong();
+		modifiedTime = objectInput.readLong();
 		bjbh = objectInput.readUTF();
 		projNum = objectInput.readUTF();
 		sortNo = objectInput.readInt();
@@ -314,8 +314,8 @@ public class ProjectCacheModel implements CacheModel<Project>, Externalizable {
 			objectOutput.writeUTF(userName);
 		}
 
-		objectOutput.writeLong(createDate);
-		objectOutput.writeLong(modifiedDate);
+		objectOutput.writeLong(createTime);
+		objectOutput.writeLong(modifiedTime);
 
 		if (bjbh == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
@@ -392,8 +392,8 @@ public class ProjectCacheModel implements CacheModel<Project>, Externalizable {
 	public long companyId;
 	public long userId;
 	public String userName;
-	public long createDate;
-	public long modifiedDate;
+	public long createTime;
+	public long modifiedTime;
 	public String bjbh;
 	public String projNum;
 	public int sortNo;

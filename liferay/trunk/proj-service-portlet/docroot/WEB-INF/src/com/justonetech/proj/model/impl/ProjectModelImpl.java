@@ -16,11 +16,9 @@ package com.justonetech.proj.model.impl;
 
 import com.justonetech.proj.model.Project;
 import com.justonetech.proj.model.ProjectModel;
-import com.justonetech.proj.model.ProjectSoap;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -37,10 +35,8 @@ import java.io.Serializable;
 
 import java.sql.Types;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -56,7 +52,6 @@ import java.util.Map;
  * @see com.justonetech.proj.model.ProjectModel
  * @generated
  */
-@JSON(strict = true)
 public class ProjectModelImpl extends BaseModelImpl<Project>
 	implements ProjectModel {
 	/*
@@ -71,8 +66,8 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 			{ "companyId", Types.BIGINT },
 			{ "userId", Types.BIGINT },
 			{ "userName", Types.VARCHAR },
-			{ "createDate", Types.TIMESTAMP },
-			{ "modifiedDate", Types.TIMESTAMP },
+			{ "createTime", Types.TIMESTAMP },
+			{ "modifiedTime", Types.TIMESTAMP },
 			{ "bjbh", Types.VARCHAR },
 			{ "projNum", Types.VARCHAR },
 			{ "sortNo", Types.INTEGER },
@@ -104,7 +99,7 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 			{ "csPre", Types.DOUBLE },
 			{ "csJafy", Types.DOUBLE }
 		};
-	public static final String TABLE_SQL_CREATE = "create table proj_Project (projectId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,bjbh VARCHAR(75) null,projNum VARCHAR(75) null,sortNo INTEGER,projStatus LONG,industryCategory LONG,manageAttr LONG,isMajor BOOLEAN,projSource LONG,belongCounty LONG,projAttr LONG,startDate DATE null,endDate DATE null,projName VARCHAR(75) null,location VARCHAR(75) null,involveCounty VARCHAR(75) null,ghhx DOUBLE,roadLevel LONG,roadTechLevel LONG,startNode DATE null,endNode DATE null,planStartDate DATE null,planEndDate DATE null,introduction VARCHAR(75) null,planTotle DOUBLE,gkpfTotle DOUBLE,gkpfPre DOUBLE,gkpfJafy DOUBLE,csTotle DOUBLE,csPre DOUBLE,csJafy DOUBLE)";
+	public static final String TABLE_SQL_CREATE = "create table proj_Project (projectId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createTime DATE null,modifiedTime DATE null,bjbh VARCHAR(75) null,projNum VARCHAR(75) null,sortNo INTEGER,projStatus LONG,industryCategory LONG,manageAttr LONG,isMajor BOOLEAN,projSource LONG,belongCounty LONG,projAttr LONG,startDate DATE null,endDate DATE null,projName VARCHAR(75) null,location VARCHAR(75) null,involveCounty VARCHAR(75) null,ghhx DOUBLE,roadLevel LONG,roadTechLevel LONG,startNode DATE null,endNode DATE null,planStartDate DATE null,planEndDate DATE null,introduction VARCHAR(75) null,planTotle DOUBLE,gkpfTotle DOUBLE,gkpfPre DOUBLE,gkpfJafy DOUBLE,csTotle DOUBLE,csPre DOUBLE,csJafy DOUBLE)";
 	public static final String TABLE_SQL_DROP = "drop table proj_Project";
 	public static final String ORDER_BY_JPQL = " ORDER BY project.sortNo ASC, project.projectId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY proj_Project.sortNo ASC, proj_Project.projectId ASC";
@@ -118,81 +113,6 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 				"value.object.finder.cache.enabled.com.justonetech.proj.model.Project"),
 			true);
 	public static final boolean COLUMN_BITMASK_ENABLED = false;
-
-	/**
-	 * Converts the soap model instance into a normal model instance.
-	 *
-	 * @param soapModel the soap model instance to convert
-	 * @return the normal model instance
-	 */
-	public static Project toModel(ProjectSoap soapModel) {
-		if (soapModel == null) {
-			return null;
-		}
-
-		Project model = new ProjectImpl();
-
-		model.setProjectId(soapModel.getProjectId());
-		model.setGroupId(soapModel.getGroupId());
-		model.setCompanyId(soapModel.getCompanyId());
-		model.setUserId(soapModel.getUserId());
-		model.setUserName(soapModel.getUserName());
-		model.setCreateDate(soapModel.getCreateDate());
-		model.setModifiedDate(soapModel.getModifiedDate());
-		model.setBjbh(soapModel.getBjbh());
-		model.setProjNum(soapModel.getProjNum());
-		model.setSortNo(soapModel.getSortNo());
-		model.setProjStatus(soapModel.getProjStatus());
-		model.setIndustryCategory(soapModel.getIndustryCategory());
-		model.setManageAttr(soapModel.getManageAttr());
-		model.setIsMajor(soapModel.getIsMajor());
-		model.setProjSource(soapModel.getProjSource());
-		model.setBelongCounty(soapModel.getBelongCounty());
-		model.setProjAttr(soapModel.getProjAttr());
-		model.setStartDate(soapModel.getStartDate());
-		model.setEndDate(soapModel.getEndDate());
-		model.setProjName(soapModel.getProjName());
-		model.setLocation(soapModel.getLocation());
-		model.setInvolveCounty(soapModel.getInvolveCounty());
-		model.setGhhx(soapModel.getGhhx());
-		model.setRoadLevel(soapModel.getRoadLevel());
-		model.setRoadTechLevel(soapModel.getRoadTechLevel());
-		model.setStartNode(soapModel.getStartNode());
-		model.setEndNode(soapModel.getEndNode());
-		model.setPlanStartDate(soapModel.getPlanStartDate());
-		model.setPlanEndDate(soapModel.getPlanEndDate());
-		model.setIntroduction(soapModel.getIntroduction());
-		model.setPlanTotle(soapModel.getPlanTotle());
-		model.setGkpfTotle(soapModel.getGkpfTotle());
-		model.setGkpfPre(soapModel.getGkpfPre());
-		model.setGkpfJafy(soapModel.getGkpfJafy());
-		model.setCsTotle(soapModel.getCsTotle());
-		model.setCsPre(soapModel.getCsPre());
-		model.setCsJafy(soapModel.getCsJafy());
-
-		return model;
-	}
-
-	/**
-	 * Converts the soap model instances into normal model instances.
-	 *
-	 * @param soapModels the soap model instances to convert
-	 * @return the normal model instances
-	 */
-	public static List<Project> toModels(ProjectSoap[] soapModels) {
-		if (soapModels == null) {
-			return null;
-		}
-
-		List<Project> models = new ArrayList<Project>(soapModels.length);
-
-		for (ProjectSoap soapModel : soapModels) {
-			models.add(toModel(soapModel));
-		}
-
-		return models;
-	}
-
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
 				"lock.expiration.time.com.justonetech.proj.model.Project"));
 
@@ -238,8 +158,8 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
-		attributes.put("createDate", getCreateDate());
-		attributes.put("modifiedDate", getModifiedDate());
+		attributes.put("createTime", getCreateTime());
+		attributes.put("modifiedTime", getModifiedTime());
 		attributes.put("bjbh", getBjbh());
 		attributes.put("projNum", getProjNum());
 		attributes.put("sortNo", getSortNo());
@@ -306,16 +226,16 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 			setUserName(userName);
 		}
 
-		Date createDate = (Date)attributes.get("createDate");
+		Date createTime = (Date)attributes.get("createTime");
 
-		if (createDate != null) {
-			setCreateDate(createDate);
+		if (createTime != null) {
+			setCreateTime(createTime);
 		}
 
-		Date modifiedDate = (Date)attributes.get("modifiedDate");
+		Date modifiedTime = (Date)attributes.get("modifiedTime");
 
-		if (modifiedDate != null) {
-			setModifiedDate(modifiedDate);
+		if (modifiedTime != null) {
+			setModifiedTime(modifiedTime);
 		}
 
 		String bjbh = (String)attributes.get("bjbh");
@@ -499,7 +419,6 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		}
 	}
 
-	@JSON
 	@Override
 	public long getProjectId() {
 		return _projectId;
@@ -510,7 +429,6 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		_projectId = projectId;
 	}
 
-	@JSON
 	@Override
 	public long getGroupId() {
 		return _groupId;
@@ -521,7 +439,6 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		_groupId = groupId;
 	}
 
-	@JSON
 	@Override
 	public long getCompanyId() {
 		return _companyId;
@@ -532,7 +449,6 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		_companyId = companyId;
 	}
 
-	@JSON
 	@Override
 	public long getUserId() {
 		return _userId;
@@ -553,7 +469,6 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		_userUuid = userUuid;
 	}
 
-	@JSON
 	@Override
 	public String getUserName() {
 		if (_userName == null) {
@@ -569,29 +484,26 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		_userName = userName;
 	}
 
-	@JSON
 	@Override
-	public Date getCreateDate() {
-		return _createDate;
+	public Date getCreateTime() {
+		return _createTime;
 	}
 
 	@Override
-	public void setCreateDate(Date createDate) {
-		_createDate = createDate;
-	}
-
-	@JSON
-	@Override
-	public Date getModifiedDate() {
-		return _modifiedDate;
+	public void setCreateTime(Date createTime) {
+		_createTime = createTime;
 	}
 
 	@Override
-	public void setModifiedDate(Date modifiedDate) {
-		_modifiedDate = modifiedDate;
+	public Date getModifiedTime() {
+		return _modifiedTime;
 	}
 
-	@JSON
+	@Override
+	public void setModifiedTime(Date modifiedTime) {
+		_modifiedTime = modifiedTime;
+	}
+
 	@Override
 	public String getBjbh() {
 		if (_bjbh == null) {
@@ -607,7 +519,6 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		_bjbh = bjbh;
 	}
 
-	@JSON
 	@Override
 	public String getProjNum() {
 		if (_projNum == null) {
@@ -623,7 +534,6 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		_projNum = projNum;
 	}
 
-	@JSON
 	@Override
 	public int getSortNo() {
 		return _sortNo;
@@ -634,7 +544,6 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		_sortNo = sortNo;
 	}
 
-	@JSON
 	@Override
 	public long getProjStatus() {
 		return _projStatus;
@@ -645,7 +554,6 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		_projStatus = projStatus;
 	}
 
-	@JSON
 	@Override
 	public long getIndustryCategory() {
 		return _industryCategory;
@@ -656,7 +564,6 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		_industryCategory = industryCategory;
 	}
 
-	@JSON
 	@Override
 	public long getManageAttr() {
 		return _manageAttr;
@@ -667,7 +574,6 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		_manageAttr = manageAttr;
 	}
 
-	@JSON
 	@Override
 	public boolean getIsMajor() {
 		return _isMajor;
@@ -683,7 +589,6 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		_isMajor = isMajor;
 	}
 
-	@JSON
 	@Override
 	public long getProjSource() {
 		return _projSource;
@@ -694,7 +599,6 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		_projSource = projSource;
 	}
 
-	@JSON
 	@Override
 	public long getBelongCounty() {
 		return _belongCounty;
@@ -705,7 +609,6 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		_belongCounty = belongCounty;
 	}
 
-	@JSON
 	@Override
 	public long getProjAttr() {
 		return _projAttr;
@@ -716,7 +619,6 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		_projAttr = projAttr;
 	}
 
-	@JSON
 	@Override
 	public Date getStartDate() {
 		return _startDate;
@@ -727,7 +629,6 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		_startDate = startDate;
 	}
 
-	@JSON
 	@Override
 	public Date getEndDate() {
 		return _endDate;
@@ -738,7 +639,6 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		_endDate = endDate;
 	}
 
-	@JSON
 	@Override
 	public String getProjName() {
 		if (_projName == null) {
@@ -754,7 +654,6 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		_projName = projName;
 	}
 
-	@JSON
 	@Override
 	public String getLocation() {
 		if (_location == null) {
@@ -770,7 +669,6 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		_location = location;
 	}
 
-	@JSON
 	@Override
 	public String getInvolveCounty() {
 		if (_involveCounty == null) {
@@ -786,7 +684,6 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		_involveCounty = involveCounty;
 	}
 
-	@JSON
 	@Override
 	public double getGhhx() {
 		return _ghhx;
@@ -797,7 +694,6 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		_ghhx = ghhx;
 	}
 
-	@JSON
 	@Override
 	public long getRoadLevel() {
 		return _roadLevel;
@@ -808,7 +704,6 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		_roadLevel = roadLevel;
 	}
 
-	@JSON
 	@Override
 	public long getRoadTechLevel() {
 		return _roadTechLevel;
@@ -819,7 +714,6 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		_roadTechLevel = roadTechLevel;
 	}
 
-	@JSON
 	@Override
 	public Date getStartNode() {
 		return _startNode;
@@ -830,7 +724,6 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		_startNode = startNode;
 	}
 
-	@JSON
 	@Override
 	public Date getEndNode() {
 		return _endNode;
@@ -841,7 +734,6 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		_endNode = endNode;
 	}
 
-	@JSON
 	@Override
 	public Date getPlanStartDate() {
 		return _planStartDate;
@@ -852,7 +744,6 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		_planStartDate = planStartDate;
 	}
 
-	@JSON
 	@Override
 	public Date getPlanEndDate() {
 		return _planEndDate;
@@ -863,7 +754,6 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		_planEndDate = planEndDate;
 	}
 
-	@JSON
 	@Override
 	public String getIntroduction() {
 		if (_introduction == null) {
@@ -879,7 +769,6 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		_introduction = introduction;
 	}
 
-	@JSON
 	@Override
 	public double getPlanTotle() {
 		return _planTotle;
@@ -890,7 +779,6 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		_planTotle = planTotle;
 	}
 
-	@JSON
 	@Override
 	public double getGkpfTotle() {
 		return _gkpfTotle;
@@ -901,7 +789,6 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		_gkpfTotle = gkpfTotle;
 	}
 
-	@JSON
 	@Override
 	public double getGkpfPre() {
 		return _gkpfPre;
@@ -912,7 +799,6 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		_gkpfPre = gkpfPre;
 	}
 
-	@JSON
 	@Override
 	public double getGkpfJafy() {
 		return _gkpfJafy;
@@ -923,7 +809,6 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		_gkpfJafy = gkpfJafy;
 	}
 
-	@JSON
 	@Override
 	public double getCsTotle() {
 		return _csTotle;
@@ -934,7 +819,6 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		_csTotle = csTotle;
 	}
 
-	@JSON
 	@Override
 	public double getCsPre() {
 		return _csPre;
@@ -945,7 +829,6 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		_csPre = csPre;
 	}
 
-	@JSON
 	@Override
 	public double getCsJafy() {
 		return _csJafy;
@@ -988,8 +871,8 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		projectImpl.setCompanyId(getCompanyId());
 		projectImpl.setUserId(getUserId());
 		projectImpl.setUserName(getUserName());
-		projectImpl.setCreateDate(getCreateDate());
-		projectImpl.setModifiedDate(getModifiedDate());
+		projectImpl.setCreateTime(getCreateTime());
+		projectImpl.setModifiedTime(getModifiedTime());
 		projectImpl.setBjbh(getBjbh());
 		projectImpl.setProjNum(getProjNum());
 		projectImpl.setSortNo(getSortNo());
@@ -1112,22 +995,22 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 			projectCacheModel.userName = null;
 		}
 
-		Date createDate = getCreateDate();
+		Date createTime = getCreateTime();
 
-		if (createDate != null) {
-			projectCacheModel.createDate = createDate.getTime();
+		if (createTime != null) {
+			projectCacheModel.createTime = createTime.getTime();
 		}
 		else {
-			projectCacheModel.createDate = Long.MIN_VALUE;
+			projectCacheModel.createTime = Long.MIN_VALUE;
 		}
 
-		Date modifiedDate = getModifiedDate();
+		Date modifiedTime = getModifiedTime();
 
-		if (modifiedDate != null) {
-			projectCacheModel.modifiedDate = modifiedDate.getTime();
+		if (modifiedTime != null) {
+			projectCacheModel.modifiedTime = modifiedTime.getTime();
 		}
 		else {
-			projectCacheModel.modifiedDate = Long.MIN_VALUE;
+			projectCacheModel.modifiedTime = Long.MIN_VALUE;
 		}
 
 		projectCacheModel.bjbh = getBjbh();
@@ -1285,10 +1168,10 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		sb.append(getUserId());
 		sb.append(", userName=");
 		sb.append(getUserName());
-		sb.append(", createDate=");
-		sb.append(getCreateDate());
-		sb.append(", modifiedDate=");
-		sb.append(getModifiedDate());
+		sb.append(", createTime=");
+		sb.append(getCreateTime());
+		sb.append(", modifiedTime=");
+		sb.append(getModifiedTime());
 		sb.append(", bjbh=");
 		sb.append(getBjbh());
 		sb.append(", projNum=");
@@ -1383,12 +1266,12 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		sb.append(getUserName());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>createDate</column-name><column-value><![CDATA[");
-		sb.append(getCreateDate());
+			"<column><column-name>createTime</column-name><column-value><![CDATA[");
+		sb.append(getCreateTime());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
-		sb.append(getModifiedDate());
+			"<column><column-name>modifiedTime</column-name><column-value><![CDATA[");
+		sb.append(getModifiedTime());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>bjbh</column-name><column-value><![CDATA[");
@@ -1526,8 +1409,8 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 	private long _userId;
 	private String _userUuid;
 	private String _userName;
-	private Date _createDate;
-	private Date _modifiedDate;
+	private Date _createTime;
+	private Date _modifiedTime;
 	private String _bjbh;
 	private String _projNum;
 	private int _sortNo;

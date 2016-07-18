@@ -69,10 +69,10 @@
 			<basic name="companyId" />
 			<basic name="userId" />
 			<basic name="userName" />
-			<basic name="createDate">
+			<basic name="createTime">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
-			<basic name="modifiedDate">
+			<basic name="modifiedTime">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<basic name="bjbh" />

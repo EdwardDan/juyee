@@ -106,13 +106,13 @@ public class ProjectLocalServiceClpInvoker {
 				"com.justonetech.proj.model.Project"
 			};
 
-		_methodName46 = "getBeanIdentifier";
+		_methodName44 = "getBeanIdentifier";
 
-		_methodParameterTypes46 = new String[] {  };
+		_methodParameterTypes44 = new String[] {  };
 
-		_methodName47 = "setBeanIdentifier";
+		_methodName45 = "setBeanIdentifier";
 
-		_methodParameterTypes47 = new String[] { "java.lang.String" };
+		_methodParameterTypes45 = new String[] { "java.lang.String" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -204,13 +204,13 @@ public class ProjectLocalServiceClpInvoker {
 			return ProjectLocalServiceUtil.updateProject((com.justonetech.proj.model.Project)arguments[0]);
 		}
 
-		if (_methodName46.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes46, parameterTypes)) {
+		if (_methodName44.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes44, parameterTypes)) {
 			return ProjectLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName47.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes47, parameterTypes)) {
+		if (_methodName45.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes45, parameterTypes)) {
 			ProjectLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
@@ -251,8 +251,8 @@ public class ProjectLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName46;
-	private String[] _methodParameterTypes46;
-	private String _methodName47;
-	private String[] _methodParameterTypes47;
+	private String _methodName44;
+	private String[] _methodParameterTypes44;
+	private String _methodName45;
+	private String[] _methodParameterTypes45;
 }

@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.CacheModel;
-import com.liferay.portal.model.GroupedModel;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -40,7 +39,7 @@ import java.util.Date;
  * @see com.justonetech.proj.model.impl.ProjectModelImpl
  * @generated
  */
-public interface ProjectModel extends BaseModel<Project>, GroupedModel {
+public interface ProjectModel extends BaseModel<Project> {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -80,7 +79,6 @@ public interface ProjectModel extends BaseModel<Project>, GroupedModel {
 	 *
 	 * @return the group ID of this project
 	 */
-	@Override
 	public long getGroupId();
 
 	/**
@@ -88,7 +86,6 @@ public interface ProjectModel extends BaseModel<Project>, GroupedModel {
 	 *
 	 * @param groupId the group ID of this project
 	 */
-	@Override
 	public void setGroupId(long groupId);
 
 	/**
@@ -96,7 +93,6 @@ public interface ProjectModel extends BaseModel<Project>, GroupedModel {
 	 *
 	 * @return the company ID of this project
 	 */
-	@Override
 	public long getCompanyId();
 
 	/**
@@ -104,7 +100,6 @@ public interface ProjectModel extends BaseModel<Project>, GroupedModel {
 	 *
 	 * @param companyId the company ID of this project
 	 */
-	@Override
 	public void setCompanyId(long companyId);
 
 	/**
@@ -112,7 +107,6 @@ public interface ProjectModel extends BaseModel<Project>, GroupedModel {
 	 *
 	 * @return the user ID of this project
 	 */
-	@Override
 	public long getUserId();
 
 	/**
@@ -120,7 +114,6 @@ public interface ProjectModel extends BaseModel<Project>, GroupedModel {
 	 *
 	 * @param userId the user ID of this project
 	 */
-	@Override
 	public void setUserId(long userId);
 
 	/**
@@ -129,7 +122,6 @@ public interface ProjectModel extends BaseModel<Project>, GroupedModel {
 	 * @return the user uuid of this project
 	 * @throws SystemException if a system exception occurred
 	 */
-	@Override
 	public String getUserUuid() throws SystemException;
 
 	/**
@@ -137,7 +129,6 @@ public interface ProjectModel extends BaseModel<Project>, GroupedModel {
 	 *
 	 * @param userUuid the user uuid of this project
 	 */
-	@Override
 	public void setUserUuid(String userUuid);
 
 	/**
@@ -146,7 +137,6 @@ public interface ProjectModel extends BaseModel<Project>, GroupedModel {
 	 * @return the user name of this project
 	 */
 	@AutoEscape
-	@Override
 	public String getUserName();
 
 	/**
@@ -154,40 +144,35 @@ public interface ProjectModel extends BaseModel<Project>, GroupedModel {
 	 *
 	 * @param userName the user name of this project
 	 */
-	@Override
 	public void setUserName(String userName);
 
 	/**
-	 * Returns the create date of this project.
+	 * Returns the create time of this project.
 	 *
-	 * @return the create date of this project
+	 * @return the create time of this project
 	 */
-	@Override
-	public Date getCreateDate();
+	public Date getCreateTime();
 
 	/**
-	 * Sets the create date of this project.
+	 * Sets the create time of this project.
 	 *
-	 * @param createDate the create date of this project
+	 * @param createTime the create time of this project
 	 */
-	@Override
-	public void setCreateDate(Date createDate);
+	public void setCreateTime(Date createTime);
 
 	/**
-	 * Returns the modified date of this project.
+	 * Returns the modified time of this project.
 	 *
-	 * @return the modified date of this project
+	 * @return the modified time of this project
 	 */
-	@Override
-	public Date getModifiedDate();
+	public Date getModifiedTime();
 
 	/**
-	 * Sets the modified date of this project.
+	 * Sets the modified time of this project.
 	 *
-	 * @param modifiedDate the modified date of this project
+	 * @param modifiedTime the modified time of this project
 	 */
-	@Override
-	public void setModifiedDate(Date modifiedDate);
+	public void setModifiedTime(Date modifiedTime);
 
 	/**
 	 * Returns the bjbh of this project.

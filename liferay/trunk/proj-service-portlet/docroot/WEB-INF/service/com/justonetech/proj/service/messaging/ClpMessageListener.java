@@ -20,7 +20,6 @@ import com.justonetech.proj.service.ClpSerializer;
 import com.justonetech.proj.service.CompanyLocalServiceUtil;
 import com.justonetech.proj.service.CompanyServiceUtil;
 import com.justonetech.proj.service.ProjectLocalServiceUtil;
-import com.justonetech.proj.service.ProjectServiceUtil;
 
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
@@ -47,8 +46,6 @@ public class ClpMessageListener extends BaseMessageListener {
 
 			CompanyServiceUtil.clearService();
 			ProjectLocalServiceUtil.clearService();
-
-			ProjectServiceUtil.clearService();
 		}
 	}
 }
