@@ -1,8 +1,5 @@
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet"%>
-<%@ page import="com.justonetech.sys.model.Dictionary"%>
-<%@page import="com.justonetech.sys.service.DictionaryLocalServiceUtil"%>
 <%@page import="com.liferay.portal.util.PortalUtil"%>
-<%@ page import="java.util.*"%>
 <%@ include file="/common/init.jsp"%>
 <%@ page contentType="text/html; charset=UTF-8" language="java"%>
 <c:set var="contentPath"
@@ -48,7 +45,7 @@
 			total="${constructionPermitMaterialsCount}">
 		</liferay-ui:search-container-results>
 		<liferay-ui:search-container-row
-			className="com.justonetech.proj.approval.vo.ConstructionPermitMaterial"
+			className="ConstructionPermitMaterial"
 			modelVar="constructionPermitMaterial" keyProperty="dictionaryId">
 
 			<liferay-ui:search-container-column-text name="序号" property="sortNo" />
