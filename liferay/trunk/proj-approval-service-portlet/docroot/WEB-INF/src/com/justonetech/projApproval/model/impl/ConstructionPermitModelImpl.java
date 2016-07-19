@@ -100,9 +100,10 @@ public class ConstructionPermitModelImpl extends BaseModelImpl<ConstructionPermi
 			{ "otherInfo", Types.VARCHAR },
 			{ "applyMaterial", Types.VARCHAR },
 			{ "receiptNum", Types.VARCHAR },
-			{ "certificationDate", Types.TIMESTAMP }
+			{ "certificationDate", Types.TIMESTAMP },
+			{ "constructionPermitCode", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table projApproval_ConstructionPermit (constructionPermitId LONG not null primary key,userId LONG,userName VARCHAR(75) null,createTime DATE null,modifiedTime DATE null,projType LONG,projProperty LONG,county LONG,constructionCode VARCHAR(75) null,bidingCode VARCHAR(75) null,businessCode VARCHAR(75) null,projName VARCHAR(200) null,company VARCHAR(200) null,companyProperty VARCHAR(200) null,companyAddress VARCHAR(200) null,legalPerson VARCHAR(75) null,companyTel VARCHAR(75) null,companyContacts VARCHAR(75) null,companyContactPhone VARCHAR(75) null,companySite VARCHAR(200) null,engineerCategory VARCHAR(75) null,engineerAttribute LONG,engineerScale VARCHAR(200) null,nationalFundsProportion VARCHAR(75) null,contractPrice DOUBLE,contractSchedule DOUBLE,bidPrice DOUBLE,investBudget DOUBLE,planStartDate DATE null,planEndDate DATE null,workSituation VARCHAR(200) null,otherInfo STRING null,applyMaterial STRING null,receiptNum VARCHAR(75) null,certificationDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table projApproval_ConstructionPermit (constructionPermitId LONG not null primary key,userId LONG,userName VARCHAR(75) null,createTime DATE null,modifiedTime DATE null,projType LONG,projProperty LONG,county LONG,constructionCode VARCHAR(75) null,bidingCode VARCHAR(75) null,businessCode VARCHAR(75) null,projName VARCHAR(200) null,company VARCHAR(200) null,companyProperty VARCHAR(200) null,companyAddress VARCHAR(200) null,legalPerson VARCHAR(75) null,companyTel VARCHAR(75) null,companyContacts VARCHAR(75) null,companyContactPhone VARCHAR(75) null,companySite VARCHAR(200) null,engineerCategory VARCHAR(75) null,engineerAttribute LONG,engineerScale VARCHAR(200) null,nationalFundsProportion VARCHAR(75) null,contractPrice DOUBLE,contractSchedule DOUBLE,bidPrice DOUBLE,investBudget DOUBLE,planStartDate DATE null,planEndDate DATE null,workSituation VARCHAR(200) null,otherInfo STRING null,applyMaterial STRING null,receiptNum VARCHAR(75) null,certificationDate DATE null,constructionPermitCode VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table projApproval_ConstructionPermit";
 	public static final String ORDER_BY_JPQL = " ORDER BY constructionPermit.constructionPermitId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY projApproval_ConstructionPermit.constructionPermitId ASC";
@@ -169,6 +170,7 @@ public class ConstructionPermitModelImpl extends BaseModelImpl<ConstructionPermi
 		model.setApplyMaterial(soapModel.getApplyMaterial());
 		model.setReceiptNum(soapModel.getReceiptNum());
 		model.setCertificationDate(soapModel.getCertificationDate());
+		model.setConstructionPermitCode(soapModel.getConstructionPermitCode());
 
 		return model;
 	}
@@ -269,6 +271,7 @@ public class ConstructionPermitModelImpl extends BaseModelImpl<ConstructionPermi
 		attributes.put("applyMaterial", getApplyMaterial());
 		attributes.put("receiptNum", getReceiptNum());
 		attributes.put("certificationDate", getCertificationDate());
+		attributes.put("constructionPermitCode", getConstructionPermitCode());
 
 		return attributes;
 	}
@@ -485,6 +488,13 @@ public class ConstructionPermitModelImpl extends BaseModelImpl<ConstructionPermi
 
 		if (certificationDate != null) {
 			setCertificationDate(certificationDate);
+		}
+
+		String constructionPermitCode = (String)attributes.get(
+				"constructionPermitCode");
+
+		if (constructionPermitCode != null) {
+			setConstructionPermitCode(constructionPermitCode);
 		}
 	}
 
@@ -995,6 +1005,22 @@ public class ConstructionPermitModelImpl extends BaseModelImpl<ConstructionPermi
 		_certificationDate = certificationDate;
 	}
 
+	@JSON
+	@Override
+	public String getConstructionPermitCode() {
+		if (_constructionPermitCode == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _constructionPermitCode;
+		}
+	}
+
+	@Override
+	public void setConstructionPermitCode(String constructionPermitCode) {
+		_constructionPermitCode = constructionPermitCode;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -1061,6 +1087,7 @@ public class ConstructionPermitModelImpl extends BaseModelImpl<ConstructionPermi
 		constructionPermitImpl.setApplyMaterial(getApplyMaterial());
 		constructionPermitImpl.setReceiptNum(getReceiptNum());
 		constructionPermitImpl.setCertificationDate(getCertificationDate());
+		constructionPermitImpl.setConstructionPermitCode(getConstructionPermitCode());
 
 		constructionPermitImpl.resetOriginalValues();
 
@@ -1351,12 +1378,21 @@ public class ConstructionPermitModelImpl extends BaseModelImpl<ConstructionPermi
 			constructionPermitCacheModel.certificationDate = Long.MIN_VALUE;
 		}
 
+		constructionPermitCacheModel.constructionPermitCode = getConstructionPermitCode();
+
+		String constructionPermitCode = constructionPermitCacheModel.constructionPermitCode;
+
+		if ((constructionPermitCode != null) &&
+				(constructionPermitCode.length() == 0)) {
+			constructionPermitCacheModel.constructionPermitCode = null;
+		}
+
 		return constructionPermitCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(71);
+		StringBundler sb = new StringBundler(73);
 
 		sb.append("{constructionPermitId=");
 		sb.append(getConstructionPermitId());
@@ -1428,6 +1464,8 @@ public class ConstructionPermitModelImpl extends BaseModelImpl<ConstructionPermi
 		sb.append(getReceiptNum());
 		sb.append(", certificationDate=");
 		sb.append(getCertificationDate());
+		sb.append(", constructionPermitCode=");
+		sb.append(getConstructionPermitCode());
 		sb.append("}");
 
 		return sb.toString();
@@ -1435,7 +1473,7 @@ public class ConstructionPermitModelImpl extends BaseModelImpl<ConstructionPermi
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(109);
+		StringBundler sb = new StringBundler(112);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.projApproval.model.ConstructionPermit");
@@ -1581,6 +1619,10 @@ public class ConstructionPermitModelImpl extends BaseModelImpl<ConstructionPermi
 			"<column><column-name>certificationDate</column-name><column-value><![CDATA[");
 		sb.append(getCertificationDate());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>constructionPermitCode</column-name><column-value><![CDATA[");
+		sb.append(getConstructionPermitCode());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -1629,6 +1671,7 @@ public class ConstructionPermitModelImpl extends BaseModelImpl<ConstructionPermi
 	private String _applyMaterial;
 	private String _receiptNum;
 	private Date _certificationDate;
+	private String _constructionPermitCode;
 	private long _columnBitmask;
 	private ConstructionPermit _escapedModel;
 }

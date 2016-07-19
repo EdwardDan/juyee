@@ -55,5 +55,6 @@
 		</field>
 		<field name="receiptNum" type="String" />
 		<field name="certificationDate" type="Date" />
+		<field name="constructionPermitCode" type="String" />
 	</model>
 </model-hints>

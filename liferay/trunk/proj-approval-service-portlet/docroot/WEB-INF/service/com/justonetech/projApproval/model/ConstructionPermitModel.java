@@ -585,6 +585,21 @@ public interface ConstructionPermitModel extends BaseModel<ConstructionPermit> {
 	 */
 	public void setCertificationDate(Date certificationDate);
 
+	/**
+	 * Returns the construction permit code of this construction permit.
+	 *
+	 * @return the construction permit code of this construction permit
+	 */
+	@AutoEscape
+	public String getConstructionPermitCode();
+
+	/**
+	 * Sets the construction permit code of this construction permit.
+	 *
+	 * @param constructionPermitCode the construction permit code of this construction permit
+	 */
+	public void setConstructionPermitCode(String constructionPermitCode);
+
 	@Override
 	public boolean isNew();
 

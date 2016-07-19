@@ -38,7 +38,7 @@ public class ConstructionPermitCacheModel implements CacheModel<ConstructionPerm
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(71);
+		StringBundler sb = new StringBundler(73);
 
 		sb.append("{constructionPermitId=");
 		sb.append(constructionPermitId);
@@ -110,6 +110,8 @@ public class ConstructionPermitCacheModel implements CacheModel<ConstructionPerm
 		sb.append(receiptNum);
 		sb.append(", certificationDate=");
 		sb.append(certificationDate);
+		sb.append(", constructionPermitCode=");
+		sb.append(constructionPermitCode);
 		sb.append("}");
 
 		return sb.toString();
@@ -309,6 +311,13 @@ public class ConstructionPermitCacheModel implements CacheModel<ConstructionPerm
 					certificationDate));
 		}
 
+		if (constructionPermitCode == null) {
+			constructionPermitImpl.setConstructionPermitCode(StringPool.BLANK);
+		}
+		else {
+			constructionPermitImpl.setConstructionPermitCode(constructionPermitCode);
+		}
+
 		constructionPermitImpl.resetOriginalValues();
 
 		return constructionPermitImpl;
@@ -351,6 +360,7 @@ public class ConstructionPermitCacheModel implements CacheModel<ConstructionPerm
 		applyMaterial = objectInput.readUTF();
 		receiptNum = objectInput.readUTF();
 		certificationDate = objectInput.readLong();
+		constructionPermitCode = objectInput.readUTF();
 	}
 
 	@Override
@@ -515,6 +525,13 @@ public class ConstructionPermitCacheModel implements CacheModel<ConstructionPerm
 		}
 
 		objectOutput.writeLong(certificationDate);
+
+		if (constructionPermitCode == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(constructionPermitCode);
+		}
 	}
 
 	public long constructionPermitId;
@@ -552,4 +569,5 @@ public class ConstructionPermitCacheModel implements CacheModel<ConstructionPerm
 	public String applyMaterial;
 	public String receiptNum;
 	public long certificationDate;
+	public String constructionPermitCode;
 }

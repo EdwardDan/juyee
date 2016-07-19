@@ -54,6 +54,7 @@
 			<basic name="certificationDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
+			<basic name="constructionPermitCode" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />

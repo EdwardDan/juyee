@@ -33,5 +33,6 @@ create table projApproval_ConstructionPermit (
 	otherInfo STRING null,
 	applyMaterial STRING null,
 	receiptNum VARCHAR(75) null,
-	certificationDate DATE null
+	certificationDate DATE null,
+	constructionPermitCode VARCHAR(75) null
 );

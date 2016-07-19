@@ -85,6 +85,7 @@ public class ConstructionPermitWrapper implements ConstructionPermit,
 		attributes.put("applyMaterial", getApplyMaterial());
 		attributes.put("receiptNum", getReceiptNum());
 		attributes.put("certificationDate", getCertificationDate());
+		attributes.put("constructionPermitCode", getConstructionPermitCode());
 
 		return attributes;
 	}
@@ -301,6 +302,13 @@ public class ConstructionPermitWrapper implements ConstructionPermit,
 
 		if (certificationDate != null) {
 			setCertificationDate(certificationDate);
+		}
+
+		String constructionPermitCode = (String)attributes.get(
+				"constructionPermitCode");
+
+		if (constructionPermitCode != null) {
+			setConstructionPermitCode(constructionPermitCode);
 		}
 	}
 
@@ -1045,6 +1053,27 @@ public class ConstructionPermitWrapper implements ConstructionPermit,
 	@Override
 	public void setCertificationDate(java.util.Date certificationDate) {
 		_constructionPermit.setCertificationDate(certificationDate);
+	}
+
+	/**
+	* Returns the construction permit code of this construction permit.
+	*
+	* @return the construction permit code of this construction permit
+	*/
+	@Override
+	public java.lang.String getConstructionPermitCode() {
+		return _constructionPermit.getConstructionPermitCode();
+	}
+
+	/**
+	* Sets the construction permit code of this construction permit.
+	*
+	* @param constructionPermitCode the construction permit code of this construction permit
+	*/
+	@Override
+	public void setConstructionPermitCode(
+		java.lang.String constructionPermitCode) {
+		_constructionPermit.setConstructionPermitCode(constructionPermitCode);
 	}
 
 	@Override

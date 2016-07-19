@@ -51,6 +51,7 @@
 		<column name="applyMaterial" type="String" />
 		<column name="receiptNum" type="String" />
 		<column name="certificationDate" type="Date" />
+		<column name="constructionPermitCode" type="String" />
 
 		<!-- Finder methods -->
 		<finder name="UserId" return-type="Collection">

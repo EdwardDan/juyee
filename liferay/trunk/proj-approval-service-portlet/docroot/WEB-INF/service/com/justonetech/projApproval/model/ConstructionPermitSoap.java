@@ -66,6 +66,7 @@ public class ConstructionPermitSoap implements Serializable {
 		soapModel.setApplyMaterial(model.getApplyMaterial());
 		soapModel.setReceiptNum(model.getReceiptNum());
 		soapModel.setCertificationDate(model.getCertificationDate());
+		soapModel.setConstructionPermitCode(model.getConstructionPermitCode());
 
 		return soapModel;
 	}
@@ -401,6 +402,14 @@ public class ConstructionPermitSoap implements Serializable {
 		_certificationDate = certificationDate;
 	}
 
+	public String getConstructionPermitCode() {
+		return _constructionPermitCode;
+	}
+
+	public void setConstructionPermitCode(String constructionPermitCode) {
+		_constructionPermitCode = constructionPermitCode;
+	}
+
 	private long _constructionPermitId;
 	private long _userId;
 	private String _userName;
@@ -436,4 +445,5 @@ public class ConstructionPermitSoap implements Serializable {
 	private String _applyMaterial;
 	private String _receiptNum;
 	private Date _certificationDate;
+	private String _constructionPermitCode;
 }

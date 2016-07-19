@@ -876,6 +876,7 @@ public class ConstructionPermitPersistenceImpl extends BasePersistenceImpl<Const
 		constructionPermitImpl.setApplyMaterial(constructionPermit.getApplyMaterial());
 		constructionPermitImpl.setReceiptNum(constructionPermit.getReceiptNum());
 		constructionPermitImpl.setCertificationDate(constructionPermit.getCertificationDate());
+		constructionPermitImpl.setConstructionPermitCode(constructionPermit.getConstructionPermitCode());
 
 		return constructionPermitImpl;
 	}

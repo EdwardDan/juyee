@@ -110,6 +110,7 @@ public class ConstructionPermitClp extends BaseModelImpl<ConstructionPermit>
 		attributes.put("applyMaterial", getApplyMaterial());
 		attributes.put("receiptNum", getReceiptNum());
 		attributes.put("certificationDate", getCertificationDate());
+		attributes.put("constructionPermitCode", getConstructionPermitCode());
 
 		return attributes;
 	}
@@ -326,6 +327,13 @@ public class ConstructionPermitClp extends BaseModelImpl<ConstructionPermit>
 
 		if (certificationDate != null) {
 			setCertificationDate(certificationDate);
+		}
+
+		String constructionPermitCode = (String)attributes.get(
+				"constructionPermitCode");
+
+		if (constructionPermitCode != null) {
+			setConstructionPermitCode(constructionPermitCode);
 		}
 	}
 
@@ -1158,6 +1166,31 @@ public class ConstructionPermitClp extends BaseModelImpl<ConstructionPermit>
 		}
 	}
 
+	@Override
+	public String getConstructionPermitCode() {
+		return _constructionPermitCode;
+	}
+
+	@Override
+	public void setConstructionPermitCode(String constructionPermitCode) {
+		_constructionPermitCode = constructionPermitCode;
+
+		if (_constructionPermitRemoteModel != null) {
+			try {
+				Class<?> clazz = _constructionPermitRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setConstructionPermitCode",
+						String.class);
+
+				method.invoke(_constructionPermitRemoteModel,
+					constructionPermitCode);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
 	public BaseModel<?> getConstructionPermitRemoteModel() {
 		return _constructionPermitRemoteModel;
 	}
@@ -1264,6 +1297,7 @@ public class ConstructionPermitClp extends BaseModelImpl<ConstructionPermit>
 		clone.setApplyMaterial(getApplyMaterial());
 		clone.setReceiptNum(getReceiptNum());
 		clone.setCertificationDate(getCertificationDate());
+		clone.setConstructionPermitCode(getConstructionPermitCode());
 
 		return clone;
 	}
@@ -1316,7 +1350,7 @@ public class ConstructionPermitClp extends BaseModelImpl<ConstructionPermit>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(71);
+		StringBundler sb = new StringBundler(73);
 
 		sb.append("{constructionPermitId=");
 		sb.append(getConstructionPermitId());
@@ -1388,6 +1422,8 @@ public class ConstructionPermitClp extends BaseModelImpl<ConstructionPermit>
 		sb.append(getReceiptNum());
 		sb.append(", certificationDate=");
 		sb.append(getCertificationDate());
+		sb.append(", constructionPermitCode=");
+		sb.append(getConstructionPermitCode());
 		sb.append("}");
 
 		return sb.toString();
@@ -1395,7 +1431,7 @@ public class ConstructionPermitClp extends BaseModelImpl<ConstructionPermit>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(109);
+		StringBundler sb = new StringBundler(112);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.projApproval.model.ConstructionPermit");
@@ -1541,6 +1577,10 @@ public class ConstructionPermitClp extends BaseModelImpl<ConstructionPermit>
 			"<column><column-name>certificationDate</column-name><column-value><![CDATA[");
 		sb.append(getCertificationDate());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>constructionPermitCode</column-name><column-value><![CDATA[");
+		sb.append(getConstructionPermitCode());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -1583,6 +1623,7 @@ public class ConstructionPermitClp extends BaseModelImpl<ConstructionPermit>
 	private String _applyMaterial;
 	private String _receiptNum;
 	private Date _certificationDate;
+	private String _constructionPermitCode;
 	private BaseModel<?> _constructionPermitRemoteModel;
 	private Class<?> _clpSerializerClass = com.justonetech.projApproval.service.ClpSerializer.class;
 }

@@ -42,5 +42,6 @@
 		<property name="applyMaterial" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="receiptNum" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="certificationDate" type="org.hibernate.type.TimestampType" />
+		<property name="constructionPermitCode" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 </hibernate-mapping>
