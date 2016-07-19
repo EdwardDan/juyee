@@ -22,7 +22,7 @@ create table projApproval_ConstructionPermit (
 	engineerCategory VARCHAR(75) null,
 	engineerAttribute LONG,
 	engineerScale VARCHAR(200) null,
-	nationalFundsPer VARCHAR(75) null,
+	nationalFundsProportion VARCHAR(75) null,
 	contractPrice DOUBLE,
 	contractSchedule DOUBLE,
 	bidPrice DOUBLE,

@@ -39,7 +39,7 @@
 		<column name="engineerCategory" type="String" />
 		<column name="engineerAttribute" type="long" />
 		<column name="engineerScale" type="String" />
-		<column name="nationalFundsPer" type="String" />
+		<column name="nationalFundsProportion" type="String" />
 		<column name="contractPrice" type="double" />
 		<column name="contractSchedule" type="double" />
 		<column name="bidPrice" type="double" />

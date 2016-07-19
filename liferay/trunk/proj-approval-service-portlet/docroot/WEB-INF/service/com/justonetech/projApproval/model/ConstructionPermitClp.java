@@ -98,7 +98,7 @@ public class ConstructionPermitClp extends BaseModelImpl<ConstructionPermit>
 		attributes.put("engineerCategory", getEngineerCategory());
 		attributes.put("engineerAttribute", getEngineerAttribute());
 		attributes.put("engineerScale", getEngineerScale());
-		attributes.put("nationalFundsPer", getNationalFundsPer());
+		attributes.put("nationalFundsProportion", getNationalFundsProportion());
 		attributes.put("contractPrice", getContractPrice());
 		attributes.put("contractSchedule", getContractSchedule());
 		attributes.put("bidPrice", getBidPrice());
@@ -255,10 +255,11 @@ public class ConstructionPermitClp extends BaseModelImpl<ConstructionPermit>
 			setEngineerScale(engineerScale);
 		}
 
-		String nationalFundsPer = (String)attributes.get("nationalFundsPer");
+		String nationalFundsProportion = (String)attributes.get(
+				"nationalFundsProportion");
 
-		if (nationalFundsPer != null) {
-			setNationalFundsPer(nationalFundsPer);
+		if (nationalFundsProportion != null) {
+			setNationalFundsProportion(nationalFundsProportion);
 		}
 
 		Double contractPrice = (Double)attributes.get("contractPrice");
@@ -878,22 +879,23 @@ public class ConstructionPermitClp extends BaseModelImpl<ConstructionPermit>
 	}
 
 	@Override
-	public String getNationalFundsPer() {
-		return _nationalFundsPer;
+	public String getNationalFundsProportion() {
+		return _nationalFundsProportion;
 	}
 
 	@Override
-	public void setNationalFundsPer(String nationalFundsPer) {
-		_nationalFundsPer = nationalFundsPer;
+	public void setNationalFundsProportion(String nationalFundsProportion) {
+		_nationalFundsProportion = nationalFundsProportion;
 
 		if (_constructionPermitRemoteModel != null) {
 			try {
 				Class<?> clazz = _constructionPermitRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setNationalFundsPer",
+				Method method = clazz.getMethod("setNationalFundsProportion",
 						String.class);
 
-				method.invoke(_constructionPermitRemoteModel, nationalFundsPer);
+				method.invoke(_constructionPermitRemoteModel,
+					nationalFundsProportion);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -1250,7 +1252,7 @@ public class ConstructionPermitClp extends BaseModelImpl<ConstructionPermit>
 		clone.setEngineerCategory(getEngineerCategory());
 		clone.setEngineerAttribute(getEngineerAttribute());
 		clone.setEngineerScale(getEngineerScale());
-		clone.setNationalFundsPer(getNationalFundsPer());
+		clone.setNationalFundsProportion(getNationalFundsProportion());
 		clone.setContractPrice(getContractPrice());
 		clone.setContractSchedule(getContractSchedule());
 		clone.setBidPrice(getBidPrice());
@@ -1362,8 +1364,8 @@ public class ConstructionPermitClp extends BaseModelImpl<ConstructionPermit>
 		sb.append(getEngineerAttribute());
 		sb.append(", engineerScale=");
 		sb.append(getEngineerScale());
-		sb.append(", nationalFundsPer=");
-		sb.append(getNationalFundsPer());
+		sb.append(", nationalFundsProportion=");
+		sb.append(getNationalFundsProportion());
 		sb.append(", contractPrice=");
 		sb.append(getContractPrice());
 		sb.append(", contractSchedule=");
@@ -1492,8 +1494,8 @@ public class ConstructionPermitClp extends BaseModelImpl<ConstructionPermit>
 		sb.append(getEngineerScale());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>nationalFundsPer</column-name><column-value><![CDATA[");
-		sb.append(getNationalFundsPer());
+			"<column><column-name>nationalFundsProportion</column-name><column-value><![CDATA[");
+		sb.append(getNationalFundsProportion());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>contractPrice</column-name><column-value><![CDATA[");
@@ -1569,7 +1571,7 @@ public class ConstructionPermitClp extends BaseModelImpl<ConstructionPermit>
 	private String _engineerCategory;
 	private long _engineerAttribute;
 	private String _engineerScale;
-	private String _nationalFundsPer;
+	private String _nationalFundsProportion;
 	private double _contractPrice;
 	private double _contractSchedule;
 	private double _bidPrice;

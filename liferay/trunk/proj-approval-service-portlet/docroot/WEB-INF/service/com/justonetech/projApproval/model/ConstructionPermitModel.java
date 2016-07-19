@@ -413,19 +413,19 @@ public interface ConstructionPermitModel extends BaseModel<ConstructionPermit> {
 	public void setEngineerScale(String engineerScale);
 
 	/**
-	 * Returns the national funds per of this construction permit.
+	 * Returns the national funds proportion of this construction permit.
 	 *
-	 * @return the national funds per of this construction permit
+	 * @return the national funds proportion of this construction permit
 	 */
 	@AutoEscape
-	public String getNationalFundsPer();
+	public String getNationalFundsProportion();
 
 	/**
-	 * Sets the national funds per of this construction permit.
+	 * Sets the national funds proportion of this construction permit.
 	 *
-	 * @param nationalFundsPer the national funds per of this construction permit
+	 * @param nationalFundsProportion the national funds proportion of this construction permit
 	 */
-	public void setNationalFundsPer(String nationalFundsPer);
+	public void setNationalFundsProportion(String nationalFundsProportion);
 
 	/**
 	 * Returns the contract price of this construction permit.

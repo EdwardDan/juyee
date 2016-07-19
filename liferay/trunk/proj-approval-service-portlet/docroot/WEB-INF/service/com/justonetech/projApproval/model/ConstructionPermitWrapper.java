@@ -73,7 +73,7 @@ public class ConstructionPermitWrapper implements ConstructionPermit,
 		attributes.put("engineerCategory", getEngineerCategory());
 		attributes.put("engineerAttribute", getEngineerAttribute());
 		attributes.put("engineerScale", getEngineerScale());
-		attributes.put("nationalFundsPer", getNationalFundsPer());
+		attributes.put("nationalFundsProportion", getNationalFundsProportion());
 		attributes.put("contractPrice", getContractPrice());
 		attributes.put("contractSchedule", getContractSchedule());
 		attributes.put("bidPrice", getBidPrice());
@@ -230,10 +230,11 @@ public class ConstructionPermitWrapper implements ConstructionPermit,
 			setEngineerScale(engineerScale);
 		}
 
-		String nationalFundsPer = (String)attributes.get("nationalFundsPer");
+		String nationalFundsProportion = (String)attributes.get(
+				"nationalFundsProportion");
 
-		if (nationalFundsPer != null) {
-			setNationalFundsPer(nationalFundsPer);
+		if (nationalFundsProportion != null) {
+			setNationalFundsProportion(nationalFundsProportion);
 		}
 
 		Double contractPrice = (Double)attributes.get("contractPrice");
@@ -806,23 +807,24 @@ public class ConstructionPermitWrapper implements ConstructionPermit,
 	}
 
 	/**
-	* Returns the national funds per of this construction permit.
+	* Returns the national funds proportion of this construction permit.
 	*
-	* @return the national funds per of this construction permit
+	* @return the national funds proportion of this construction permit
 	*/
 	@Override
-	public java.lang.String getNationalFundsPer() {
-		return _constructionPermit.getNationalFundsPer();
+	public java.lang.String getNationalFundsProportion() {
+		return _constructionPermit.getNationalFundsProportion();
 	}
 
 	/**
-	* Sets the national funds per of this construction permit.
+	* Sets the national funds proportion of this construction permit.
 	*
-	* @param nationalFundsPer the national funds per of this construction permit
+	* @param nationalFundsProportion the national funds proportion of this construction permit
 	*/
 	@Override
-	public void setNationalFundsPer(java.lang.String nationalFundsPer) {
-		_constructionPermit.setNationalFundsPer(nationalFundsPer);
+	public void setNationalFundsProportion(
+		java.lang.String nationalFundsProportion) {
+		_constructionPermit.setNationalFundsProportion(nationalFundsProportion);
 	}
 
 	/**

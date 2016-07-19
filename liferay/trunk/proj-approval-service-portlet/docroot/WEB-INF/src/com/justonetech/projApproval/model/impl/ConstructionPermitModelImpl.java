@@ -89,7 +89,7 @@ public class ConstructionPermitModelImpl extends BaseModelImpl<ConstructionPermi
 			{ "engineerCategory", Types.VARCHAR },
 			{ "engineerAttribute", Types.BIGINT },
 			{ "engineerScale", Types.VARCHAR },
-			{ "nationalFundsPer", Types.VARCHAR },
+			{ "nationalFundsProportion", Types.VARCHAR },
 			{ "contractPrice", Types.DOUBLE },
 			{ "contractSchedule", Types.DOUBLE },
 			{ "bidPrice", Types.DOUBLE },
@@ -102,7 +102,7 @@ public class ConstructionPermitModelImpl extends BaseModelImpl<ConstructionPermi
 			{ "receiptNum", Types.VARCHAR },
 			{ "certificationDate", Types.TIMESTAMP }
 		};
-	public static final String TABLE_SQL_CREATE = "create table projApproval_ConstructionPermit (constructionPermitId LONG not null primary key,userId LONG,userName VARCHAR(75) null,createTime DATE null,modifiedTime DATE null,projType LONG,projProperty LONG,county LONG,constructionCode VARCHAR(75) null,bidingCode VARCHAR(75) null,businessCode VARCHAR(75) null,projName VARCHAR(200) null,company VARCHAR(200) null,companyProperty VARCHAR(200) null,companyAddress VARCHAR(200) null,legalPerson VARCHAR(75) null,companyTel VARCHAR(75) null,companyContacts VARCHAR(75) null,companyContactPhone VARCHAR(75) null,companySite VARCHAR(200) null,engineerCategory VARCHAR(75) null,engineerAttribute LONG,engineerScale VARCHAR(200) null,nationalFundsPer VARCHAR(75) null,contractPrice DOUBLE,contractSchedule DOUBLE,bidPrice DOUBLE,investBudget DOUBLE,planStartDate DATE null,planEndDate DATE null,workSituation VARCHAR(200) null,otherInfo STRING null,applyMaterial STRING null,receiptNum VARCHAR(75) null,certificationDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table projApproval_ConstructionPermit (constructionPermitId LONG not null primary key,userId LONG,userName VARCHAR(75) null,createTime DATE null,modifiedTime DATE null,projType LONG,projProperty LONG,county LONG,constructionCode VARCHAR(75) null,bidingCode VARCHAR(75) null,businessCode VARCHAR(75) null,projName VARCHAR(200) null,company VARCHAR(200) null,companyProperty VARCHAR(200) null,companyAddress VARCHAR(200) null,legalPerson VARCHAR(75) null,companyTel VARCHAR(75) null,companyContacts VARCHAR(75) null,companyContactPhone VARCHAR(75) null,companySite VARCHAR(200) null,engineerCategory VARCHAR(75) null,engineerAttribute LONG,engineerScale VARCHAR(200) null,nationalFundsProportion VARCHAR(75) null,contractPrice DOUBLE,contractSchedule DOUBLE,bidPrice DOUBLE,investBudget DOUBLE,planStartDate DATE null,planEndDate DATE null,workSituation VARCHAR(200) null,otherInfo STRING null,applyMaterial STRING null,receiptNum VARCHAR(75) null,certificationDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table projApproval_ConstructionPermit";
 	public static final String ORDER_BY_JPQL = " ORDER BY constructionPermit.constructionPermitId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY projApproval_ConstructionPermit.constructionPermitId ASC";
@@ -157,7 +157,7 @@ public class ConstructionPermitModelImpl extends BaseModelImpl<ConstructionPermi
 		model.setEngineerCategory(soapModel.getEngineerCategory());
 		model.setEngineerAttribute(soapModel.getEngineerAttribute());
 		model.setEngineerScale(soapModel.getEngineerScale());
-		model.setNationalFundsPer(soapModel.getNationalFundsPer());
+		model.setNationalFundsProportion(soapModel.getNationalFundsProportion());
 		model.setContractPrice(soapModel.getContractPrice());
 		model.setContractSchedule(soapModel.getContractSchedule());
 		model.setBidPrice(soapModel.getBidPrice());
@@ -257,7 +257,7 @@ public class ConstructionPermitModelImpl extends BaseModelImpl<ConstructionPermi
 		attributes.put("engineerCategory", getEngineerCategory());
 		attributes.put("engineerAttribute", getEngineerAttribute());
 		attributes.put("engineerScale", getEngineerScale());
-		attributes.put("nationalFundsPer", getNationalFundsPer());
+		attributes.put("nationalFundsProportion", getNationalFundsProportion());
 		attributes.put("contractPrice", getContractPrice());
 		attributes.put("contractSchedule", getContractSchedule());
 		attributes.put("bidPrice", getBidPrice());
@@ -414,10 +414,11 @@ public class ConstructionPermitModelImpl extends BaseModelImpl<ConstructionPermi
 			setEngineerScale(engineerScale);
 		}
 
-		String nationalFundsPer = (String)attributes.get("nationalFundsPer");
+		String nationalFundsProportion = (String)attributes.get(
+				"nationalFundsProportion");
 
-		if (nationalFundsPer != null) {
-			setNationalFundsPer(nationalFundsPer);
+		if (nationalFundsProportion != null) {
+			setNationalFundsProportion(nationalFundsProportion);
 		}
 
 		Double contractPrice = (Double)attributes.get("contractPrice");
@@ -839,18 +840,18 @@ public class ConstructionPermitModelImpl extends BaseModelImpl<ConstructionPermi
 
 	@JSON
 	@Override
-	public String getNationalFundsPer() {
-		if (_nationalFundsPer == null) {
+	public String getNationalFundsProportion() {
+		if (_nationalFundsProportion == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _nationalFundsPer;
+			return _nationalFundsProportion;
 		}
 	}
 
 	@Override
-	public void setNationalFundsPer(String nationalFundsPer) {
-		_nationalFundsPer = nationalFundsPer;
+	public void setNationalFundsProportion(String nationalFundsProportion) {
+		_nationalFundsProportion = nationalFundsProportion;
 	}
 
 	@JSON
@@ -1048,7 +1049,7 @@ public class ConstructionPermitModelImpl extends BaseModelImpl<ConstructionPermi
 		constructionPermitImpl.setEngineerCategory(getEngineerCategory());
 		constructionPermitImpl.setEngineerAttribute(getEngineerAttribute());
 		constructionPermitImpl.setEngineerScale(getEngineerScale());
-		constructionPermitImpl.setNationalFundsPer(getNationalFundsPer());
+		constructionPermitImpl.setNationalFundsProportion(getNationalFundsProportion());
 		constructionPermitImpl.setContractPrice(getContractPrice());
 		constructionPermitImpl.setContractSchedule(getContractSchedule());
 		constructionPermitImpl.setBidPrice(getBidPrice());
@@ -1274,12 +1275,13 @@ public class ConstructionPermitModelImpl extends BaseModelImpl<ConstructionPermi
 			constructionPermitCacheModel.engineerScale = null;
 		}
 
-		constructionPermitCacheModel.nationalFundsPer = getNationalFundsPer();
+		constructionPermitCacheModel.nationalFundsProportion = getNationalFundsProportion();
 
-		String nationalFundsPer = constructionPermitCacheModel.nationalFundsPer;
+		String nationalFundsProportion = constructionPermitCacheModel.nationalFundsProportion;
 
-		if ((nationalFundsPer != null) && (nationalFundsPer.length() == 0)) {
-			constructionPermitCacheModel.nationalFundsPer = null;
+		if ((nationalFundsProportion != null) &&
+				(nationalFundsProportion.length() == 0)) {
+			constructionPermitCacheModel.nationalFundsProportion = null;
 		}
 
 		constructionPermitCacheModel.contractPrice = getContractPrice();
@@ -1402,8 +1404,8 @@ public class ConstructionPermitModelImpl extends BaseModelImpl<ConstructionPermi
 		sb.append(getEngineerAttribute());
 		sb.append(", engineerScale=");
 		sb.append(getEngineerScale());
-		sb.append(", nationalFundsPer=");
-		sb.append(getNationalFundsPer());
+		sb.append(", nationalFundsProportion=");
+		sb.append(getNationalFundsProportion());
 		sb.append(", contractPrice=");
 		sb.append(getContractPrice());
 		sb.append(", contractSchedule=");
@@ -1532,8 +1534,8 @@ public class ConstructionPermitModelImpl extends BaseModelImpl<ConstructionPermi
 		sb.append(getEngineerScale());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>nationalFundsPer</column-name><column-value><![CDATA[");
-		sb.append(getNationalFundsPer());
+			"<column><column-name>nationalFundsProportion</column-name><column-value><![CDATA[");
+		sb.append(getNationalFundsProportion());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>contractPrice</column-name><column-value><![CDATA[");
@@ -1615,7 +1617,7 @@ public class ConstructionPermitModelImpl extends BaseModelImpl<ConstructionPermi
 	private String _engineerCategory;
 	private long _engineerAttribute;
 	private String _engineerScale;
-	private String _nationalFundsPer;
+	private String _nationalFundsProportion;
 	private double _contractPrice;
 	private double _contractSchedule;
 	private double _bidPrice;

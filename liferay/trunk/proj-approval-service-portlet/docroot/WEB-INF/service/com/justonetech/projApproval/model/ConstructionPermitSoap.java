@@ -54,7 +54,7 @@ public class ConstructionPermitSoap implements Serializable {
 		soapModel.setEngineerCategory(model.getEngineerCategory());
 		soapModel.setEngineerAttribute(model.getEngineerAttribute());
 		soapModel.setEngineerScale(model.getEngineerScale());
-		soapModel.setNationalFundsPer(model.getNationalFundsPer());
+		soapModel.setNationalFundsProportion(model.getNationalFundsProportion());
 		soapModel.setContractPrice(model.getContractPrice());
 		soapModel.setContractSchedule(model.getContractSchedule());
 		soapModel.setBidPrice(model.getBidPrice());
@@ -305,12 +305,12 @@ public class ConstructionPermitSoap implements Serializable {
 		_engineerScale = engineerScale;
 	}
 
-	public String getNationalFundsPer() {
-		return _nationalFundsPer;
+	public String getNationalFundsProportion() {
+		return _nationalFundsProportion;
 	}
 
-	public void setNationalFundsPer(String nationalFundsPer) {
-		_nationalFundsPer = nationalFundsPer;
+	public void setNationalFundsProportion(String nationalFundsProportion) {
+		_nationalFundsProportion = nationalFundsProportion;
 	}
 
 	public double getContractPrice() {
@@ -424,7 +424,7 @@ public class ConstructionPermitSoap implements Serializable {
 	private String _engineerCategory;
 	private long _engineerAttribute;
 	private String _engineerScale;
-	private String _nationalFundsPer;
+	private String _nationalFundsProportion;
 	private double _contractPrice;
 	private double _contractSchedule;
 	private double _bidPrice;

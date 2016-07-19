@@ -86,8 +86,8 @@ public class ConstructionPermitCacheModel implements CacheModel<ConstructionPerm
 		sb.append(engineerAttribute);
 		sb.append(", engineerScale=");
 		sb.append(engineerScale);
-		sb.append(", nationalFundsPer=");
-		sb.append(nationalFundsPer);
+		sb.append(", nationalFundsProportion=");
+		sb.append(nationalFundsProportion);
 		sb.append(", contractPrice=");
 		sb.append(contractPrice);
 		sb.append(", contractSchedule=");
@@ -247,11 +247,11 @@ public class ConstructionPermitCacheModel implements CacheModel<ConstructionPerm
 			constructionPermitImpl.setEngineerScale(engineerScale);
 		}
 
-		if (nationalFundsPer == null) {
-			constructionPermitImpl.setNationalFundsPer(StringPool.BLANK);
+		if (nationalFundsProportion == null) {
+			constructionPermitImpl.setNationalFundsProportion(StringPool.BLANK);
 		}
 		else {
-			constructionPermitImpl.setNationalFundsPer(nationalFundsPer);
+			constructionPermitImpl.setNationalFundsProportion(nationalFundsProportion);
 		}
 
 		constructionPermitImpl.setContractPrice(contractPrice);
@@ -339,7 +339,7 @@ public class ConstructionPermitCacheModel implements CacheModel<ConstructionPerm
 		engineerCategory = objectInput.readUTF();
 		engineerAttribute = objectInput.readLong();
 		engineerScale = objectInput.readUTF();
-		nationalFundsPer = objectInput.readUTF();
+		nationalFundsProportion = objectInput.readUTF();
 		contractPrice = objectInput.readDouble();
 		contractSchedule = objectInput.readDouble();
 		bidPrice = objectInput.readDouble();
@@ -472,11 +472,11 @@ public class ConstructionPermitCacheModel implements CacheModel<ConstructionPerm
 			objectOutput.writeUTF(engineerScale);
 		}
 
-		if (nationalFundsPer == null) {
+		if (nationalFundsProportion == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(nationalFundsPer);
+			objectOutput.writeUTF(nationalFundsProportion);
 		}
 
 		objectOutput.writeDouble(contractPrice);
@@ -540,7 +540,7 @@ public class ConstructionPermitCacheModel implements CacheModel<ConstructionPerm
 	public String engineerCategory;
 	public long engineerAttribute;
 	public String engineerScale;
-	public String nationalFundsPer;
+	public String nationalFundsProportion;
 	public double contractPrice;
 	public double contractSchedule;
 	public double bidPrice;

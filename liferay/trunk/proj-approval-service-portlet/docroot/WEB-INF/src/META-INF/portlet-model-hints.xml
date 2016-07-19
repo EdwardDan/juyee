@@ -37,7 +37,7 @@
 		<field name="engineerScale" type="String">
 			<hint name="max-length">200</hint>
 		</field>
-		<field name="nationalFundsPer" type="String" />
+		<field name="nationalFundsProportion" type="String" />
 		<field name="contractPrice" type="double" />
 		<field name="contractSchedule" type="double" />
 		<field name="bidPrice" type="double" />

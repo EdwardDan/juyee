@@ -36,7 +36,7 @@
 			<basic name="engineerCategory" />
 			<basic name="engineerAttribute" />
 			<basic name="engineerScale" />
-			<basic name="nationalFundsPer" />
+			<basic name="nationalFundsProportion" />
 			<basic name="contractPrice" />
 			<basic name="contractSchedule" />
 			<basic name="bidPrice" />

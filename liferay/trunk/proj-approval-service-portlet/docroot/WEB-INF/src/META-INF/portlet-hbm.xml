@@ -30,7 +30,7 @@
 		<property name="engineerCategory" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="engineerAttribute" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="engineerScale" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="nationalFundsPer" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="nationalFundsProportion" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="contractPrice" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
 		<property name="contractSchedule" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
 		<property name="bidPrice" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
