@@ -407,10 +407,12 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
 
     //施工单位
     private String sgUnitName;
-    //监理单位
     private String jlUnitName;
-    //设计单位
     private String sjUnitName;
+    private String buildSiteCounty;
+    private String nationalFundsPro;
+    private String sgUnitManager;
+    private String jlUnitManager;
 
     // many to one
     private com.justonetech.system.domain.SysCodeDetail projectType;
@@ -1326,6 +1328,38 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
         this.sjUnitName = sjUnitName;
     }
 
+    public String getBuildSiteCounty() {
+        return buildSiteCounty;
+    }
+
+    public void setBuildSiteCounty(String buildSiteCounty) {
+        this.buildSiteCounty = buildSiteCounty;
+    }
+
+    public String getNationalFundsPro() {
+        return nationalFundsPro;
+    }
+
+    public void setNationalFundsPro(String nationalFundsPro) {
+        this.nationalFundsPro = nationalFundsPro;
+    }
+
+    public String getSgUnitManager() {
+        return sgUnitManager;
+    }
+
+    public void setSgUnitManager(String sgUnitManager) {
+        this.sgUnitManager = sgUnitManager;
+    }
+
+    public String getJlUnitManager() {
+        return jlUnitManager;
+    }
+
+    public void setJlUnitManager(String jlUnitManager) {
+        this.jlUnitManager = jlUnitManager;
+    }
+
     public SysCodeDetail getBuildLb() {
         return buildLb;
     }
@@ -1607,6 +1641,10 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
         builder.append(sgUnitName);
         builder.append(jlUnitName);
         builder.append(sjUnitName);
+        builder.append(buildSiteCounty);
+        builder.append(nationalFundsPro);
+        builder.append(sgUnitManager);
+        builder.append(jlUnitManager);
         builder.append(projectPlanCost);
         return builder.toString();
     }

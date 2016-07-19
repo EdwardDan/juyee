@@ -69,8 +69,30 @@
                             path="buildUnitAddress"/></td>
                 </tr>
                 <tr class="tr_dark">
+                    <td class="form_label_right">建设单位法定代表人：</td>
+                    <td class="form_content">${bean.fr}<form:hidden path="fr"/></td>
+                    <td class="form_label_right">建设单位联系电话：</td>
+                    <td class="form_content">${bean.buildUnitPhone}<form:hidden path="buildUnitPhone"/></td>
+                </tr>
+                <tr class="tr_light">
+                    <td class="form_label_right">建设单位联系人：</td>
+                    <td class="form_content">${bean.buildUnitPerson}<form:hidden path="buildUnitPerson"/></td>
+                    <td class="form_label_right">手机号：</td>
+                    <td class="form_content">${bean.buildUnitMobile}<form:hidden path="buildUnitMobile"/></td>
+                </tr>
+                <tr class="tr_dark">
                     <td class="form_label_right">建设地点：</td>
                     <td class="form_content" colspan="3">${bean.buildSite}<form:hidden path="buildSite"/></td>
+                </tr>
+                <tr class="tr_dark">
+                    <td class="form_label_right">建设地点所属区县：</td>
+                    <td class="form_content" colspan="3">
+                        <c:forEach items="${areaList}" var="item" varStatus="status">
+                            <input type="radio" value="${item.id}" disabled
+                                   <c:if test="${item.code==bean.buildSiteCounty}">checked</c:if>>${item.name}&nbsp;
+                            <c:if test="${(status.index+1)%9==0}"><br></c:if>
+                        </c:forEach>
+                    </td>
                 </tr>
                 <tr class="tr_light">
                     <td class="form_label_right">建设工程类别：</td>
@@ -94,6 +116,13 @@
                 <tr class="tr_light">
                     <td class="form_label_right">建设工程规模：</td>
                     <td class="form_content" colspan="3">${bean.buildProjSize}<form:hidden path="buildProjSize"/></td>
+                </tr>
+                <tr class="tr_light">
+                    <td class="form_label_right">国有资金比重%：</td>
+                    <td class="form_content" colspan="3">
+                            ${bean.nationalFundsPro}
+                        <form:hidden path="nationalFundsPro"/>
+                    </td>
                 </tr>
                 <tr class="tr_dark">
                     <td class="form_label_right">合同价格（万元）：</td>
@@ -120,28 +149,20 @@
                     </td>
                 </tr>
                 <tr class="tr_light">
-                    <td class="form_label_right">法定代表人：</td>
-                    <td class="form_content">${bean.fr}<form:hidden path="fr"/></td>
-                    <td class="form_label_right">建设单位联系电话：</td>
-                    <td class="form_content">${bean.buildUnitPhone}<form:hidden path="buildUnitPhone"/></td>
-                </tr>
-                <tr class="tr_dark">
-                    <td class="form_label_right">建设单位联系人：</td>
-                    <td class="form_content">${bean.buildUnitPerson}<form:hidden path="buildUnitPerson"/></td>
-                    <td class="form_label_right">手机号：</td>
-                    <td class="form_content">${bean.buildUnitMobile}<form:hidden path="buildUnitMobile"/></td>
-                </tr>
-                <tr class="tr_light">
                     <td class="form_label_right">现场开工情况：</td>
                     <td class="form_content" colspan="3">${bean.startWorkCon}<form:hidden path="startWorkCon"/></td>
                 </tr>
                 <tr class="tr_dark">
                     <td class="form_label_right">施工单位：</td>
-                    <td class="form_content" colspan="3">${bean.sgUnitName}<form:hidden path="sgUnitName"/></td>
+                    <td class="form_content">${bean.sgUnitName}<form:hidden path="sgUnitName"/></td>
+                    <td class="form_label_right">项目经理：</td>
+                    <td class="form_content">${bean.sgUnitManager}<form:hidden path="sgUnitManager"/></td>
                 </tr>
                 <tr class="tr_light">
                     <td class="form_label_right">监理单位：</td>
-                    <td class="form_content" colspan="3">${bean.jlUnitName}<form:hidden path="jlUnitName"/></td>
+                    <td class="form_content">${bean.jlUnitName}<form:hidden path="jlUnitName"/></td>
+                    <td class="form_label_right">项目总监：</td>
+                    <td class="form_content">${bean.jlUnitManager}<form:hidden path="jlUnitManager"/></td>
                 </tr>
                 <tr class="tr_dark">
                     <td class="form_label_right">设计单位：</td>

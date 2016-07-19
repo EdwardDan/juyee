@@ -5,7 +5,10 @@
     var formId = "bean";
     $(function () {
         //页面验证初始化
-        var validateCondition = [];
+        var validateCondition = [
+            {name:"bjbh", rule:"validate[required,maxSize[100]]"},
+            {name:"bdh", rule:"validate[required,maxSize[100]]"}
+        ];
         validateInit(validateCondition, formId);
     });
 
@@ -49,6 +52,15 @@
     }
     function doCloseWin() {
         parent.closeWindow();
+    }
+
+    function checkNumner(element) {
+        if (/^\d+\.\d+$/.test(element.value) || !isNaN(element.value)) {
+
+        } else {
+            showInfoMsg('只能输入整数和小数！', null);
+            element.value = 0;
+        }
     }
 </script>
 <form:form commandName="bean">
@@ -113,9 +125,39 @@
                     </td>
                 </tr>
                 <tr class="tr_dark">
+                    <td class="form_label_right">建设单位法定代表人：</td>
+                    <td class="form_content">
+                        <form:input path="fr" cssClass="input_text" cssStyle="width: 90%;"/>
+                    </td>
+                    <td class="form_label_right" nowrap>建设单位联系电话：</td>
+                    <td class="form_content">
+                        <form:input path="buildUnitPhone" cssClass="input_text" cssStyle="width: 90%;"/>
+                    </td>
+                </tr>
+                <tr class="tr_light">
+                    <td class="form_label_right" nowrap>建设单位联系人：</td>
+                    <td class="form_content">
+                        <form:input path="buildUnitPerson" cssClass="input_text" cssStyle="width: 90%;"/>
+                    </td>
+                    <td class="form_label_right">手机号：</td>
+                    <td class="form_content">
+                        <form:input path="buildUnitMobile" cssClass="input_text" cssStyle="width: 90%;"/>
+                    </td>
+                </tr>
+                <tr class="tr_dark">
                     <td class="form_label_right">建设地点：</td>
                     <td class="form_content" colspan="3">
                         <form:input path="buildSite" cssClass="input_text" cssStyle="width: 96%;"/>
+                    </td>
+                </tr>
+                <tr class="tr_dark">
+                    <td class="form_label_right">建设地点所属区县：</td>
+                    <td class="form_content" colspan="3">
+                        <c:forEach items="${areaList}" var="item" varStatus="status">
+                            <input type="radio" name="buildSiteCounty" value="${item.id}"
+                                   <c:if test="${item.code==bean.buildSiteCounty}">checked</c:if>>${item.name}&nbsp;
+                            <c:if test="${(status.index+1)%9==0}"><br></c:if>
+                        </c:forEach>
                     </td>
                 </tr>
                 <tr class="tr_light">
@@ -140,6 +182,12 @@
                     <td class="form_label_right">建设工程规模：</td>
                     <td class="form_content" colspan="3">
                         <form:input path="buildProjSize" cssClass="input_text" cssStyle="width: 96%;"/>
+                    </td>
+                </tr>
+                <tr class="tr_light">
+                    <td class="form_label_right">国有资金比重%：</td>
+                    <td class="form_content" colspan="3">
+                        <form:input path="nationalFundsPro" cssClass="input_text_long" onchange="checkNumner(this)"/>
                     </td>
                 </tr>
                 <tr class="tr_dark">
@@ -172,26 +220,6 @@
                     <td class="form_content">
                         <form:input path="contractEndDate" cssClass="input_date" readonly="true"/>
                         <input type="button" class="button_calendar" value=" " onClick="calendar('contractEndDate');">
-                    </td>
-                </tr>
-                <tr class="tr_light">
-                    <td class="form_label_right">法定代表人：</td>
-                    <td class="form_content">
-                        <form:input path="fr" cssClass="input_text" cssStyle="width: 90%;"/>
-                    </td>
-                    <td class="form_label_right" nowrap>建设单位联系电话：</td>
-                    <td class="form_content">
-                        <form:input path="buildUnitPhone" cssClass="input_text" cssStyle="width: 90%;"/>
-                    </td>
-                </tr>
-                <tr class="tr_dark">
-                    <td class="form_label_right" nowrap>建设单位联系人：</td>
-                    <td class="form_content">
-                        <form:input path="buildUnitPerson" cssClass="input_text" cssStyle="width: 90%;"/>
-                    </td>
-                    <td class="form_label_right">手机号：</td>
-                    <td class="form_content">
-                        <form:input path="buildUnitMobile" cssClass="input_text" cssStyle="width: 90%;"/>
                     </td>
                 </tr>
                 <tr class="tr_light">

@@ -550,7 +550,7 @@ public class AreaSgPermitController extends BaseCRUDActionController<AreaSgPermi
             Integer status = target.getStatus();
             if (status == AreaSgPermitStatus.STATUS_SUBMIT.getCode()) {
                 target.setSubmitDate(new Timestamp(System.currentTimeMillis()));
-                target.setBizCode(areaSgPermitManager.getBizCode(target.getProjectType().getCode(), "XX"));
+                target.setBizCode(areaSgPermitManager.getBizCode(target.getProjectType().getCode()));
             }
             if (status == AreaSgPermitStatus.STATUS_SLZX_PASS.getCode() || status == AreaSgPermitStatus.STATUS_SLZX_BACK.getCode()) {
                 target.setAcceptDate(new Timestamp(System.currentTimeMillis()));

@@ -20,9 +20,9 @@ import com.justonetech.system.domain.SysCodeDetail;
 import com.justonetech.system.domain.SysPerson;
 import com.justonetech.system.domain.SysUser;
 import com.justonetech.system.manager.ExcelPrintManager;
+import com.justonetech.system.manager.SimpleQueryManager;
 import com.justonetech.system.manager.SysCodeManager;
 import com.justonetech.system.manager.SysUserManager;
-import com.justonetech.system.utils.PrivilegeCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +35,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -94,6 +95,9 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
 
     @Autowired
     private OaTaskDealService oaTaskDealService;
+
+    @Autowired
+    private SimpleQueryManager simpleQueryManager;
 
     private static final String xlsTemplateName1 = "SgPermit.xls";
     private static final String xlsTemplateName2 = "SgPermit_green.xls";
@@ -566,18 +570,28 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
                         "bizCode",
                         "propertyType",
                         "jgzxYsOpinion",
-                        "jgzxYsDate"
+                        "jgzxYsDate",
+                        "bdh",
+                        "buildSiteCounty",
+                        "nationalFundsPro",
+                        "sgUnitManager",
+                        "jlUnitManager"
                 });
             } else {
                 target = entity;
             }
             target.setAreaCode("sh");
             target.setAreaName("上海市");
+            String buildSiteCounty = request.getParameter("buildSiteCounty");
+            if (!StringHelper.isEmpty(buildSiteCounty)) {
+                SysCodeDetail detail = sysCodeManager.getCodeListById(Long.valueOf(buildSiteCounty));
+                target.setBuildSiteCounty(detail.getCode());
+            }
             SysUser sysUser = sysUserManager.getSysUser();
             Integer status = target.getStatus();
             if (status == SgPermitStatus.STATUS_SUBMIT.getCode()) {
                 target.setSubmitDate(new Timestamp(System.currentTimeMillis()));
-                target.setBizCode(sgPermitManager.getBizCode(target.getProjectType().getCode(), "XX"));
+                target.setBizCode(sgPermitManager.getBizCode(target.getProjectType().getCode()));
             }
             if (status == SgPermitStatus.STATUS_SLZX_PASS.getCode() || status == SgPermitStatus.STATUS_SLZX_BACK.getCode()) {
                 target.setAcceptDate(new Timestamp(System.currentTimeMillis()));
@@ -1074,8 +1088,10 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
                 }
             }
             if (isSubmit) {
+                oaTaskManager.removeTask(simpleName + "_submit", data.getId());
                 oaTaskManager.createTask(simpleName + "_submit", data.getId(), sendContent, managers, false, null, null);
             } else if (isZxsj) {
+                oaTaskManager.removeTask(simpleName + "_sjtg", data.getId());
                 oaTaskManager.createTask(simpleName + "_sjtg", data.getId(), sendContent, managers, false, null, null);
             }
         } else if (isYstg) {//预审通过后，发送给建设单位
@@ -1093,6 +1109,7 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
                 msgMessageManager.sendSmsByUser(sendContent, sysUser, ids);
                 managers.add(receiveUser.getId());
             }
+            oaTaskManager.removeTask(simpleName + "_ys_pass", data.getId());
             oaTaskManager.createTask(simpleName + "_ys_pass", data.getId(), sendContent, managers, false, null, null);
         } else if (isNotYstg) {//预审不通过发给建设单位
             receiveUser = sysUserManager.getSysUserByDisplayName(data.getBuildUnitPerson());
@@ -1102,6 +1119,7 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
                 msgMessageManager.sendSmsByUser(sendContent, sysUser, ids);
                 managers.add(receiveUser.getId());
             }
+            oaTaskManager.removeTask(simpleName + "_ys_back", data.getId());
             oaTaskManager.createTask(simpleName + "_ys_back", data.getId(), sendContent, managers, false, null, null);
         } else if (isCsPass) {
             sendContent = smsContent + "初审已完成，请进行复核。";
@@ -1121,6 +1139,7 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
                     managers.add(receiveUser.getId());
                 }
             }
+            oaTaskManager.removeTask(simpleName + "_ch_pass", data.getId());
             oaTaskManager.createTask(simpleName + "_ch_pass", data.getId(), sendContent, managers, false, null, null);
         } else if (isFhPass || isNotFgldPass) {
             if (isFhPass) {
@@ -1145,8 +1164,10 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
                 }
             }
             if (isFhPass) {
+                oaTaskManager.removeTask(simpleName + "_fh_pass", data.getId());
                 oaTaskManager.createTask(simpleName + "_fh_pass", data.getId(), sendContent, managers, false, null, null);
             } else if (isNotFgldPass) {
+                oaTaskManager.removeTask(simpleName + "_fgldsh_back", data.getId());
                 oaTaskManager.createTask(simpleName + "_fgldsh_back", data.getId(), sendContent, managers, false, null, null);
             }
 
@@ -1158,6 +1179,7 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
                 msgMessageManager.sendSmsByUser(sendContent, sysUser, ids);
                 managers.add(receiveUser.getId());
             }
+            oaTaskManager.removeTask(simpleName + "_sh_pass", data.getId());
             oaTaskManager.createTask(simpleName + "_sh_pass", data.getId(), sendContent, managers, false, null, null);
         } else if (isNotShPass) {
             sendContent = smsContent + "未通过审核，请在系统中修改后提交。";
@@ -1167,6 +1189,7 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
                 msgMessageManager.sendSmsByUser(sendContent, sysUser, ids);
                 managers.add(receiveUser.getId());
             }
+            oaTaskManager.removeTask(simpleName + "_sh_back", data.getId());
             oaTaskManager.createTask(simpleName + "_sh_back", data.getId(), sendContent, managers, false, null, null);
         } else if (isFgldPass) {
             sendContent = smsContent + "审定已完成，请进行审查。";
@@ -1176,6 +1199,7 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
                 msgMessageManager.sendSmsByUser(sendContent, sysUser, ids);
                 managers.add(receiveUser.getId());
             }
+            oaTaskManager.removeTask(simpleName + "_fgldsh_pass", data.getId());
             oaTaskManager.createTask(simpleName + "_fgldsh_pass", data.getId(), sendContent, managers, false, null, null);
         } else if (isZxldPass) {
             sendContent = smsContent + "中心审查已完成，请委建设处进行审查。";
@@ -1228,6 +1252,7 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
                 msgMessageManager.sendSmsByUser(sendContent, sysUser, ids);
                 managers.add(receiveUser.getId());
             }
+            oaTaskManager.removeTask(simpleName + "_zxldsh_back", data.getId());
             oaTaskManager.createTask(simpleName + "_zxldsh_back", data.getId(), sendContent, managers, false, null, null);
         } else if (isJscPass || isNotJscPass) {//委建设处许可和不许可，发给狄永媚。
             sendContent = smsContent + "委建设处审查已完成，请委审批处进行审查。";
@@ -1237,6 +1262,7 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
                 msgMessageManager.sendSmsByUser(sendContent, sysUser, ids);
                 managers.add(receiveUser.getId());
             }
+            oaTaskManager.removeTask(simpleName + "_wjsc", data.getId());
             oaTaskManager.createTask(simpleName + "_wjsc", data.getId(), sendContent, managers, false, null, null);
         } else if (isJscBack) {//退回，发给杨志杰。
             sendContent = smsContent + "委建设处未通过审查，请中心领导进行审查。";
@@ -1246,6 +1272,7 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
                 msgMessageManager.sendSmsByUser(sendContent, sysUser, ids);
                 managers.add(receiveUser.getId());
             }
+            oaTaskManager.removeTask(simpleName + "_wjsc_back", data.getId());
             oaTaskManager.createTask(simpleName + "_wjsc_back", data.getId(), sendContent, managers, false, null, null);
         } else if (isSpcPass || isNotSpcPass) {//委审批处许可和不许可，发给刘军。
             sendContent = smsContent + "委审批处审查已完成，请委领导进行审查。";
@@ -1255,6 +1282,7 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
                 msgMessageManager.sendSmsByUser(sendContent, sysUser, ids);
                 managers.add(receiveUser.getId());
             }
+            oaTaskManager.removeTask(simpleName + "_wspc", data.getId());
             oaTaskManager.createTask(simpleName + "_wspc", data.getId(), sendContent, managers, false, null, null);
         } else if (isSpcBack) {//退回
             sendContent = smsContent + "委审批处未通过审查，请委建设处进行审查。";
@@ -1298,6 +1326,7 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
                     managers.add(receiveUser.getId());
                 }
             }
+            oaTaskManager.removeTask(simpleName + "_wspc_back", data.getId());
             oaTaskManager.createTask(simpleName + "_wspc_back", data.getId(), sendContent, managers, false, null, null);
         } else if (isWldPass) {//委领导许可，发给建设单位。委领导许可，发给行政服务中心龚煜。
             receiveUser = sysUserManager.getSysUserByDisplayName("龚煜");
@@ -1306,6 +1335,7 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
                 sendContent = smsContent + "审查已完成，请准备好施工许可证。";
                 msgMessageManager.sendSmsByUser(sendContent, sysUser, ids);
                 managers.add(receiveUser.getId());
+                oaTaskManager.removeTask(simpleName + "_wldsh_pass", data.getId());
                 oaTaskManager.createTask(simpleName + "_wldsh_pass", data.getId(), sendContent, managers, false, null, null);
             }
             receiveUser = sysUserManager.getSysUserByDisplayName(data.getBuildUnitPerson());
@@ -1314,6 +1344,7 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
                 sendContent = smsContent + "审查已完成，请至交通委行政服务中心领证。";
                 msgMessageManager.sendSmsByUser(sendContent, sysUser, ids);
                 managers.add(receiveUser.getId());
+                oaTaskManager.removeTask(simpleName + "_wldsh_pass", data.getId());
                 oaTaskManager.createTask(simpleName + "_wldsh_pass", data.getId(), sendContent, managers, false, null, null);
             }
         } else if (isWldBack) {//委领导不予许可。
@@ -1323,6 +1354,7 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
                 ids[0] = String.valueOf(receiveUser.getId());
                 msgMessageManager.sendSmsByUser(sendContent, sysUser, ids);
                 managers.add(receiveUser.getId());
+                oaTaskManager.removeTask(simpleName + "_wldsh_back", data.getId());
                 oaTaskManager.createTask(simpleName + "_wldsh_back", data.getId(), sendContent, managers, false, null, null);
             }
         }
@@ -1484,19 +1516,28 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
         String title = "";
         String titleFl = "";
         String code = sgPermit.getProjectType().getCode();
+        String bizCode = "";
         if (code.equals(Constants.PROJECT_TYPE_GKSH)) {
+            bizCode = "GK";
             title = "上海市(港口)工程施工许可证";
             titleFl = "根据《中华人民共和国港口法》等相关法律规定，经审查，本工程符合施工条件，准予施工。";
         } else if (code.equals(Constants.PROJECT_TYPE_GL)) {
+            bizCode = "GL";
             title = "上海市(公路)工程施工许可证";
             titleFl = "根据《中华人民共和国公路法》等相关法律规定，经审查，本工程符合施工条件，准予施工。";
         } else if (code.equals(Constants.PROJECT_TYPE_SZJCSH_SD) || code.equals(Constants.PROJECT_TYPE_SZJCSH_GD) || code.equals(Constants.PROJECT_TYPE_SZJCSH_CSDL) || code.equals(Constants.PROJECT_TYPE_SZJCSH_GJCZ)) {
+            bizCode = "SZ";
             title = "上海市(市政基础设施)工程施工许可证";
             titleFl = "根据《中华人民共和国交通建设法》等相关法律规定，经审查，本工程符合施工条件，准予施工。";
         }
         beans.put("title", title);
         beans.put("titleFl", titleFl);
-
+        SimpleDateFormat sdf = new SimpleDateFormat("yy");
+        Date date = new Date(System.currentTimeMillis());
+        String year = sdf.format(date);
+        String sql = "select nvl(max(substr(biz_code,9,3)),0) max from sg_permit where substr(biz_code,5,2)='" + year.substring(0, 2) + "'";
+        Integer max = simpleQueryManager.getIntegerBySql(sql);
+        beans.put("code", "JT" + sgPermit.getBjbh() + sgPermit.getBdh() + year + bizCode + max);
         excelPrintManager.printExcel(response, request, SgPermit.class.getSimpleName(), xlsTemplateName1, beans, fileName);
     }
 
@@ -1516,19 +1557,29 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
         beans.put("bean", sgPermit);
         String title = "";
         String titleFl = "";
+        String bizCode = "";
         String code = sgPermit.getProjectType().getCode();
         if (code.equals(Constants.PROJECT_TYPE_GKSH)) {
+            bizCode = "GK";
             title = "上海市(港口)工程施工许可证";
             titleFl = "根据《中华人民共和国港口法》等相关法律规定，经审查，本工程符合施工条件，准予施工。";
         } else if (code.equals(Constants.PROJECT_TYPE_GL)) {
+            bizCode = "GL";
             title = "上海市(公路)工程施工许可证";
             titleFl = "根据《中华人民共和国公路法》等相关法律规定，经审查，本工程符合施工条件，准予施工。";
         } else if (code.equals(Constants.PROJECT_TYPE_SZJCSH_SD) || code.equals(Constants.PROJECT_TYPE_SZJCSH_GD) || code.equals(Constants.PROJECT_TYPE_SZJCSH_CSDL) || code.equals(Constants.PROJECT_TYPE_SZJCSH_GJCZ)) {
+            bizCode = "SZ";
             title = "上海市(市政基础设施)工程施工许可证";
             titleFl = "根据《中华人民共和国交通建设法》等相关法律规定，经审查，本工程符合施工条件，准予施工。";
         }
         beans.put("title", title);
         beans.put("titleFl", titleFl);
+        SimpleDateFormat sdf = new SimpleDateFormat("yy");
+        Date date = new Date(System.currentTimeMillis());
+        String year = sdf.format(date);
+        String sql = "select nvl(max(substr(biz_code,9,3)),0) max from sg_permit where substr(biz_code,5,2)='" + year.substring(0, 2) + "'";
+        Integer max = simpleQueryManager.getIntegerBySql(sql);
+        beans.put("code", "JT" + sgPermit.getBjbh() + sgPermit.getBdh() + year + bizCode + max);
 
         excelPrintManager.printExcel(response, request, SgPermit.class.getSimpleName(), xlsTemplateName2, beans, fileName);
     }
@@ -1552,6 +1603,12 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
             SgPermitHdExtend hdExtend = hdExtendSet.iterator().next();
             beans.put("hdExtend", hdExtend);
         }
+        SimpleDateFormat sdf = new SimpleDateFormat("yy");
+        Date date = new Date(System.currentTimeMillis());
+        String year = sdf.format(date);
+        String sql = "select nvl(max(substr(biz_code,9,3)),0) max from sg_permit where substr(biz_code,5,2)='" + year.substring(0, 2) + "'";
+        Integer max = simpleQueryManager.getIntegerBySql(sql);
+        beans.put("code", "JT" + sgPermit.getBjbh() + sgPermit.getBdh() + year + "HD" + max);
 
         excelPrintManager.printExcel(response, request, SgPermit.class.getSimpleName(), xlsTemplateName3, beans, fileName);
     }

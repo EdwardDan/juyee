@@ -32,12 +32,12 @@
                 ${bean.mobiles}
             </td>
         </tr>
-        <tr class="tr_dark">
-            <td class="form_label">是否发送短信：</td>
-            <td class="form_content">&nbsp;
-                <c:choose><c:when test="${bean.isSendSms}">是</c:when><c:otherwise>否</c:otherwise></c:choose>
-            </td>
-        </tr>
+        <%--<tr class="tr_dark">--%>
+            <%--<td class="form_label">是否发送短信：</td>--%>
+            <%--<td class="form_content">&nbsp;--%>
+                <%--<c:choose><c:when test="${bean.isSendSms}">是</c:when><c:otherwise>否</c:otherwise></c:choose>--%>
+            <%--</td>--%>
+        <%--</tr>--%>
         <tr class="tr_light">
             <td class="form_label">发送时间：</td>
             <td class="form_content">&nbsp;

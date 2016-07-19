@@ -52,11 +52,10 @@ public class AreaSgPermitManager {
      * 自动生成业务编码
      *
      * @param type     。
-     * @param unitCode 。
      * @return 。
      */
-    public String getBizCode(String type, String unitCode) {
-        String bizCode = unitCode;
+    public String getBizCode(String type) {
+        String bizCode = "JT";
         String code = type.substring(0, 2).toUpperCase();
         bizCode += code;
         SimpleDateFormat sdf = new SimpleDateFormat("yyMM");

@@ -18,17 +18,21 @@
         if (!validateForm(formId)) {
             return;
         }
-        var msg = getAjaxData("${ctx}/sysRegPerson/getReg.do?loginName=" + $("#loginName").val + "&bjbh=" + $("#bjbh").val + "&unitCode=" + $("#unitCode").val);
-        if (msg.success == "true") {
-            document.getElementById("msg").innerHTML = "";
-        } else {
-            document.getElementById("msg").innerHTML = msg.msg;
-            return true;
-        }
+        var unitCode = $("#unitCode").val();
+        if (unitCode.length <= 12) {
+            var msg = getAjaxData("${ctx}/sysRegPerson/getReg.do?loginName=" + $("#loginName").val + "&bjbh=" + $("#bjbh").val + "&unitCode=" + $("#unitCode").val);
+            if (msg.success == "true") {
+                document.getElementById("msg").innerHTML = "";
+            } else {
+                document.getElementById("msg").innerHTML = msg.msg;
+                return true;
+            }
 
-        //提交表单
-        disableBtn(btn);
-        saveAjaxData("${ctx}/sysRegPerson/save.do", formId);
+            //提交表单
+            saveAjaxData("${ctx}/sysRegPerson/save.do", formId);
+        } else {
+            showInfoMsg("企业编码不能超过12位，请重新填写！");
+        }
     }
 </script>
 <form:form commandName="bean">

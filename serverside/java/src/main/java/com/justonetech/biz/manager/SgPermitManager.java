@@ -56,11 +56,10 @@ public class SgPermitManager {
      * 自动生成业务编码
      *
      * @param type     。
-     * @param unitCode 。
      * @return 。
      */
-    public String getBizCode(String type, String unitCode) {
-        String bizCode = unitCode;
+    public String getBizCode(String type) {
+        String bizCode = "JT";
         String code = type.substring(0, 2).toUpperCase();
         bizCode += code;
         SimpleDateFormat sdf = new SimpleDateFormat("yyMM");
@@ -83,6 +82,9 @@ public class SgPermitManager {
         SysUser sysUser = sysUserManager.getSysUser();
         SysRegPerson regPerson = sysUser.getRegPerson();
         model.addAttribute("isReg", null != regPerson);
+
+        List<SysCodeDetail> areaList = sysCodeManager.getCodeListByCode(Constants.PROJ_INFO_BELONG_AREA);
+        model.addAttribute("areaList", areaList);
 
         model.addAttribute("canEdit", sysUserManager.hasPrivilege(PrivilegeCode.SG_PERMIT_EDIT));//编辑
         model.addAttribute("canJgzxAudit", sysUserManager.hasPrivilege(PrivilegeCode.SG_PERMIT_JGZX_AUDIT));//初审

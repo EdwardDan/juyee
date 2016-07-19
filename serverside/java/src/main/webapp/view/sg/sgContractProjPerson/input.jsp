@@ -5,14 +5,7 @@
     var formId = "bean";
     $(function () {
         //页面验证初始化
-        var validateCondition = [
-            //{name:"num", rule:"validate[required,custom[integer],maxSize[4]"},
-            //{name:"contractCode", rule:"validate[required,maxSize[200]]"},
-            //{name:"unitName", rule:"validate[required,maxSize[200]]"},
-            //{name:"unitMainPerson", rule:"validate[required,maxSize[200]]"},
-            //{name:"unitIdCard", rule:"validate[required,maxSize[200]]"},
-            //{name:"unitPhone", rule:"validate[required,maxSize[20]]"}
-        ];
+        var validateCondition = [];
         validateInit(validateCondition, formId);
     });
 
@@ -68,8 +61,8 @@
                 <td style="width: 15%;text-align: center;" nowrap>合同信息报送编号</td>
                 <td style="width: 15%;text-align: center;" nowrap>单位类型</td>
                 <td style="width: 15%;text-align: center;" nowrap>单位名称</td>
-                <td style="width: 15%;text-align: center;" nowrap>单位负责人</td>
-                <td style="width: 15%;text-align: center;" nowrap>身份证号</td>
+                <td style="width: 15%;text-align: center;" nowrap>项目负责人</td>
+                <%--<td style="width: 15%;text-align: center;" nowrap>身份证号</td>--%>
                 <td style="width: 15%;text-align: center;" nowrap>电话号码</td>
                 <td style="width: 5%;text-align: center;">
                     <input type='button' value='添加' class='button_select_add'
@@ -96,9 +89,9 @@
                         <td style="text-align: center;">
                             <input type="text" class="input_text" name="unitMainPerson" value="${item.unitMainPerson}" style="width: 95%;">
                         </td>
-                        <td style="text-align: center;">
-                            <input type="text" class="input_text" name="unitIdCard" value="${item.unitIdCard}" style="width: 95%;">
-                        </td>
+                        <%--<td style="text-align: center;">--%>
+                            <%--<input type="text" class="input_text" name="unitIdCard" value="${item.unitIdCard}" style="width: 95%;">--%>
+                        <%--</td>--%>
                         <td style="text-align: center;">
                             <input type="text" class="input_text" name="unitPhone" value="${item.unitPhone}" style="width: 95%;">
                         </td>
@@ -122,9 +115,9 @@
                 <td style="text-align: center;">
                     <input type="text" name="unitMainPerson" class="input_text" style="width: 95%;" value="">
                 </td>
-                <td style="text-align: center;">
-                    <input type="text" name="unitIdCard" class="input_text" style="width: 95%;" value="">
-                </td>
+                <%--<td style="text-align: center;">--%>
+                    <%--<input type="text" name="unitIdCard" class="input_text" style="width: 95%;" value="">--%>
+                <%--</td>--%>
                 <td style="text-align: center;">
                     <input type="text" name="unitPhone" class="input_text" style="width: 95%;" value="">
                 </td>
