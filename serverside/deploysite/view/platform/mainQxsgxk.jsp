@@ -61,9 +61,7 @@
         </c:choose>
         <tr>
           <td align="right" colspan="6">
-            <img src="${themePath}/index/more.jpg" width="42" height="16"
-                 border="0" style="cursor:pointer"
-                 onclick="loadPlatPage('sgxk');" title="查看更多"/>
+            <a href="javascript:void(0)" onclick="loadPlatPage('qxsgxk');" title="更多" style="font-size: large;">更多</a>
           </td>
         </tr>
         <tr>

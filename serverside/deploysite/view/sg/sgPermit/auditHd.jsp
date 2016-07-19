@@ -78,8 +78,30 @@
                     <td class="form_content" style="width: 35%;">${bean.buildUnitAddress}</td>
                 </tr>
                 <tr class="tr_dark">
+                    <td class="form_label_right">建设单位法定代表人：</td>
+                    <td class="form_content">${bean.fr}</td>
+                    <td class="form_label_right">建设单位联系电话：</td>
+                    <td class="form_content">${bean.buildUnitPhone}</td>
+                </tr>
+                <tr class="tr_light">
+                    <td class="form_label_right">建设单位联系人：</td>
+                    <td class="form_content">${bean.buildUnitPerson}</td>
+                    <td class="form_label_right">手机号：</td>
+                    <td class="form_content">${bean.buildUnitMobile}</td>
+                </tr>
+                <tr class="tr_dark">
                     <td class="form_label_right">建设地点：</td>
                     <td class="form_content" colspan="3">${bean.buildSite}</td>
+                </tr>
+                <tr class="tr_dark">
+                    <td class="form_label_right">建设地点所属区县：</td>
+                    <td class="form_content" colspan="3">
+                        <c:forEach items="${areaList}" var="item" varStatus="status">
+                            <input type="radio" value="${item.id}" disabled
+                                   <c:if test="${item.code==bean.buildSiteCounty}">checked</c:if>>${item.name}&nbsp;
+                            <c:if test="${(status.index+1)%9==0}"><br></c:if>
+                        </c:forEach>
+                    </td>
                 </tr>
                 <tr class="tr_light">
                     <td class="form_label_right">建设工程类别：</td>
@@ -104,6 +126,10 @@
                     <td class="form_label_right">建设工程规模：</td>
                     <td class="form_content" colspan="3">${bean.buildProjSize}</td>
                 </tr>
+                <tr class="tr_light">
+                    <td class="form_label_right">国有资金比重%：</td>
+                    <td class="form_content" colspan="3">${bean.nationalFundsPro}</td>
+                </tr>
                 <tr class="tr_dark">
                     <td class="form_label_right">合同价格（万元）：</td>
                     <td class="form_content">${bean.contractPrice}</td>
@@ -125,18 +151,6 @@
                     <td class="form_content">
                         <fmt:formatDate value="${bean.contractEndDate}" pattern="yyyy-MM-dd"/>
                     </td>
-                </tr>
-                <tr class="tr_light">
-                    <td class="form_label_right">法定代表人：</td>
-                    <td class="form_content">${bean.fr}</td>
-                    <td class="form_label_right">建设单位联系电话：</td>
-                    <td class="form_content">${bean.buildUnitPhone}</td>
-                </tr>
-                <tr class="tr_dark">
-                    <td class="form_label_right">建设单位联系人：</td>
-                    <td class="form_content">${bean.buildUnitPerson}</td>
-                    <td class="form_label_right">手机号：</td>
-                    <td class="form_content">${bean.buildUnitMobile}</td>
                 </tr>
                 <tr class="tr_light">
                     <td class="form_label_right">现场开工情况：</td>

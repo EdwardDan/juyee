@@ -5,12 +5,7 @@
     var formId = "bean";
     $(function () {
         //页面验证初始化
-        var validateCondition = [
-            //{name:"num", rule:"validate[required,custom[integer],maxSize[4]"},
-            //{name:"unitProjCode", rule:"validate[required,maxSize[200]]"},
-            //{name:"unitProjName", rule:"validate[required,maxSize[200]]"},
-            //{name:"projectIndex", rule:"validate[required,maxSize[20]]"}
-        ];
+        var validateCondition = [];
         validateInit(validateCondition, formId);
     });
 
@@ -65,8 +60,8 @@
                 <td style="width: 5%;text-align: center;">序号</td>
                 <td style="width: 8%;text-align: center;">单位工程编号</td>
                 <td style="width: 10%;text-align: center;">单位工程名称</td>
-                <td style="width: 10%;text-align: center;">单位工程类型</td>
-                <td style="width: 40%;text-align: center;">工程指标</td>
+                <%--<td style="width: 10%;text-align: center;">单位工程类型</td>--%>
+                <td style="width: 40%;text-align: center;">建设内容</td>
                 <td style="width: 5%;text-align: center;">
                     <input type='button' value='添加' class='button_select_add'
                            onclick='addLine(this)'>
@@ -85,10 +80,10 @@
                         <td style="text-align: center;">
                             <input type="text" class="input_text" name="unitProjName" value="${item.unitProjName}" style="width: 95%;">
                         </td>
-                        <td style="text-align: center;">
-                            <sys:code code="${SGDWGCLX}" type="select" name="unitProjType" style="width:95%;"
-                                      sysCodeDetailId="${item.unitProjType.id}"/>
-                        </td>
+                        <%--<td style="text-align: center;">--%>
+                            <%--<sys:code code="${SGDWGCLX}" type="select" name="unitProjType" style="width:95%;"--%>
+                                      <%--sysCodeDetailId="${item.unitProjType.id}"/>--%>
+                        <%--</td>--%>
                         <td style="text-align: center;">
                             <input type="text" class="input_text" name="projectIndex" value="${item.projectIndex}" style="width: 95%;">
                         </td>
@@ -106,9 +101,9 @@
                 <td style="text-align: center;">
                     <input type="text" name="unitProjName" class="input_text" style="width: 95%;" value="">
                 </td>
-                <td style="text-align: center;">
-                    <sys:code code="${SGDWGCLX}" type="select" name="unitProjType" sysCodeDetailId=""/>
-                </td>
+                <%--<td style="text-align: center;">--%>
+                    <%--<sys:code code="${SGDWGCLX}" type="select" name="unitProjType" sysCodeDetailId=""/>--%>
+                <%--</td>--%>
                 <td style="text-align: center;">
                     <input type="text" name="projectIndex" class="input_text" style="width: 95%;" value="">
                 </td>
