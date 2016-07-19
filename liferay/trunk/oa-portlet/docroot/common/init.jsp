@@ -19,9 +19,5 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.liferay.portal.kernel.util.*"%>
 <%@ page import="com.liferay.portal.kernel.dao.search.RowChecker"%>
-<<<<<<< .mine
 <%@ page import="java.text.*"%>
-=======
 <%@ page import="java.text.SimpleDateFormat"%>
-
-<script src="${staticServerURL}/My97DatePicker/WdatePicker.js"></script>>>>>>>> .r960
