@@ -94,7 +94,12 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.finder.cache.enabled.com.justonetech.proj.model.Company"),
 			true);
-	public static final boolean COLUMN_BITMASK_ENABLED = false;
+	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
+				"value.object.column.bitmask.enabled.com.justonetech.proj.model.Company"),
+			true);
+	public static long BIDDINGID_COLUMN_BITMASK = 1L;
+	public static long PROJECTID_COLUMN_BITMASK = 2L;
+	public static long COMPANYID_COLUMN_BITMASK = 4L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -324,6 +329,8 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 
 	@Override
 	public void setCompanyId(long companyId) {
+		_columnBitmask = -1L;
+
 		_companyId = companyId;
 	}
 
@@ -554,7 +561,19 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 
 	@Override
 	public void setProjectId(long projectId) {
+		_columnBitmask |= PROJECTID_COLUMN_BITMASK;
+
+		if (!_setOriginalProjectId) {
+			_setOriginalProjectId = true;
+
+			_originalProjectId = _projectId;
+		}
+
 		_projectId = projectId;
+	}
+
+	public long getOriginalProjectId() {
+		return _originalProjectId;
 	}
 
 	@JSON
@@ -565,7 +584,23 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 
 	@Override
 	public void setBiddingId(long biddingId) {
+		_columnBitmask |= BIDDINGID_COLUMN_BITMASK;
+
+		if (!_setOriginalBiddingId) {
+			_setOriginalBiddingId = true;
+
+			_originalBiddingId = _biddingId;
+		}
+
 		_biddingId = biddingId;
+	}
+
+	public long getOriginalBiddingId() {
+		return _originalBiddingId;
+	}
+
+	public long getColumnBitmask() {
+		return _columnBitmask;
 	}
 
 	@Override
@@ -668,6 +703,17 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 
 	@Override
 	public void resetOriginalValues() {
+		CompanyModelImpl companyModelImpl = this;
+
+		companyModelImpl._originalProjectId = companyModelImpl._projectId;
+
+		companyModelImpl._setOriginalProjectId = false;
+
+		companyModelImpl._originalBiddingId = companyModelImpl._biddingId;
+
+		companyModelImpl._setOriginalBiddingId = false;
+
+		companyModelImpl._columnBitmask = 0;
 	}
 
 	@Override
@@ -934,6 +980,11 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 	private String _linkmanFax;
 	private String _linkmanPhone;
 	private long _projectId;
+	private long _originalProjectId;
+	private boolean _setOriginalProjectId;
 	private long _biddingId;
+	private long _originalBiddingId;
+	private boolean _setOriginalBiddingId;
+	private long _columnBitmask;
 	private Company _escapedModel;
 }

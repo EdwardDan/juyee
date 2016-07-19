@@ -274,6 +274,17 @@ public class BiddingLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static java.util.List<com.justonetech.proj.model.Bidding> findByProjectId(
+		long projectId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().findByProjectId(projectId);
+	}
+
+	public static int countByProjectId(long projectId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().countByProjectId(projectId);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

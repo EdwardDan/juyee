@@ -14,7 +14,11 @@
 
 package com.justonetech.proj.service.impl;
 
+import java.util.List;
+
+import com.justonetech.proj.model.Company;
 import com.justonetech.proj.service.base.CompanyLocalServiceBaseImpl;
+import com.liferay.portal.kernel.exception.SystemException;
 
 /**
  * The implementation of the company local service.
@@ -36,4 +40,22 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 	 *
 	 * Never reference this interface directly. Always use {@link com.justonetech.proj.service.CompanyLocalServiceUtil} to access the company local service.
 	 */
+	
+	public List<Company> findByProjectId(long projectId) throws SystemException {
+		return companyPersistence.findByProjectId(projectId);
+	}
+
+	public int countByProjectId(long projectId) throws SystemException {
+
+		return companyPersistence.countByProjectId(projectId);
+	}
+
+	public List<Company> findByBiddingId(long biddingId) throws SystemException {
+		return companyPersistence.findByBiddingId(biddingId);
+	}
+
+	public int countByBiddingId(long biddingId) throws SystemException {
+
+		return companyPersistence.countByBiddingId(biddingId);
+	}
 }

@@ -274,6 +274,28 @@ public class CompanyLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static java.util.List<com.justonetech.proj.model.Company> findByProjectId(
+		long projectId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().findByProjectId(projectId);
+	}
+
+	public static int countByProjectId(long projectId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().countByProjectId(projectId);
+	}
+
+	public static java.util.List<com.justonetech.proj.model.Company> findByBiddingId(
+		long biddingId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().findByBiddingId(biddingId);
+	}
+
+	public static int countByBiddingId(long biddingId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().countByBiddingId(biddingId);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

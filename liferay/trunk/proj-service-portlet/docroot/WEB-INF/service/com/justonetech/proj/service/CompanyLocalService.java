@@ -249,4 +249,18 @@ public interface CompanyLocalService extends BaseLocalService,
 	public java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
+
+	public java.util.List<com.justonetech.proj.model.Company> findByProjectId(
+		long projectId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int countByProjectId(long projectId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.justonetech.proj.model.Company> findByBiddingId(
+		long biddingId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public int countByBiddingId(long biddingId)
+		throws com.liferay.portal.kernel.exception.SystemException;
 }

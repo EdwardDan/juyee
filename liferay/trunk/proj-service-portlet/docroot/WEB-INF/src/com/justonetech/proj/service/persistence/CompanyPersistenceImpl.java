@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
+import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -36,6 +37,7 @@ import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnmodifiableList;
 import com.liferay.portal.model.CacheModel;
@@ -82,6 +84,984 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(CompanyModelImpl.ENTITY_CACHE_ENABLED,
 			CompanyModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_PROJECTID =
+		new FinderPath(CompanyModelImpl.ENTITY_CACHE_ENABLED,
+			CompanyModelImpl.FINDER_CACHE_ENABLED, CompanyImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByProjectId",
+			new String[] {
+				Long.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_PROJECTID =
+		new FinderPath(CompanyModelImpl.ENTITY_CACHE_ENABLED,
+			CompanyModelImpl.FINDER_CACHE_ENABLED, CompanyImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByProjectId",
+			new String[] { Long.class.getName() },
+			CompanyModelImpl.PROJECTID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_PROJECTID = new FinderPath(CompanyModelImpl.ENTITY_CACHE_ENABLED,
+			CompanyModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByProjectId",
+			new String[] { Long.class.getName() });
+
+	/**
+	 * Returns all the companies where projectId = &#63;.
+	 *
+	 * @param projectId the project ID
+	 * @return the matching companies
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Company> findByProjectId(long projectId)
+		throws SystemException {
+		return findByProjectId(projectId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
+	}
+
+	/**
+	 * Returns a range of all the companies where projectId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.justonetech.proj.model.impl.CompanyModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param projectId the project ID
+	 * @param start the lower bound of the range of companies
+	 * @param end the upper bound of the range of companies (not inclusive)
+	 * @return the range of matching companies
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Company> findByProjectId(long projectId, int start, int end)
+		throws SystemException {
+		return findByProjectId(projectId, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the companies where projectId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.justonetech.proj.model.impl.CompanyModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param projectId the project ID
+	 * @param start the lower bound of the range of companies
+	 * @param end the upper bound of the range of companies (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching companies
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Company> findByProjectId(long projectId, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_PROJECTID;
+			finderArgs = new Object[] { projectId };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_PROJECTID;
+			finderArgs = new Object[] { projectId, start, end, orderByComparator };
+		}
+
+		List<Company> list = (List<Company>)FinderCacheUtil.getResult(finderPath,
+				finderArgs, this);
+
+		if ((list != null) && !list.isEmpty()) {
+			for (Company company : list) {
+				if ((projectId != company.getProjectId())) {
+					list = null;
+
+					break;
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_COMPANY_WHERE);
+
+			query.append(_FINDER_COLUMN_PROJECTID_PROJECTID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(CompanyModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(projectId);
+
+				if (!pagination) {
+					list = (List<Company>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
+					Collections.sort(list);
+
+					list = new UnmodifiableList<Company>(list);
+				}
+				else {
+					list = (List<Company>)QueryUtil.list(q, getDialect(),
+							start, end);
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first company in the ordered set where projectId = &#63;.
+	 *
+	 * @param projectId the project ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching company
+	 * @throws com.justonetech.proj.NoSuchCompanyException if a matching company could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Company findByProjectId_First(long projectId,
+		OrderByComparator orderByComparator)
+		throws NoSuchCompanyException, SystemException {
+		Company company = fetchByProjectId_First(projectId, orderByComparator);
+
+		if (company != null) {
+			return company;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("projectId=");
+		msg.append(projectId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchCompanyException(msg.toString());
+	}
+
+	/**
+	 * Returns the first company in the ordered set where projectId = &#63;.
+	 *
+	 * @param projectId the project ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching company, or <code>null</code> if a matching company could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Company fetchByProjectId_First(long projectId,
+		OrderByComparator orderByComparator) throws SystemException {
+		List<Company> list = findByProjectId(projectId, 0, 1, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last company in the ordered set where projectId = &#63;.
+	 *
+	 * @param projectId the project ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching company
+	 * @throws com.justonetech.proj.NoSuchCompanyException if a matching company could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Company findByProjectId_Last(long projectId,
+		OrderByComparator orderByComparator)
+		throws NoSuchCompanyException, SystemException {
+		Company company = fetchByProjectId_Last(projectId, orderByComparator);
+
+		if (company != null) {
+			return company;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("projectId=");
+		msg.append(projectId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchCompanyException(msg.toString());
+	}
+
+	/**
+	 * Returns the last company in the ordered set where projectId = &#63;.
+	 *
+	 * @param projectId the project ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching company, or <code>null</code> if a matching company could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Company fetchByProjectId_Last(long projectId,
+		OrderByComparator orderByComparator) throws SystemException {
+		int count = countByProjectId(projectId);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<Company> list = findByProjectId(projectId, count - 1, count,
+				orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the companies before and after the current company in the ordered set where projectId = &#63;.
+	 *
+	 * @param companyId the primary key of the current company
+	 * @param projectId the project ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next company
+	 * @throws com.justonetech.proj.NoSuchCompanyException if a company with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Company[] findByProjectId_PrevAndNext(long companyId,
+		long projectId, OrderByComparator orderByComparator)
+		throws NoSuchCompanyException, SystemException {
+		Company company = findByPrimaryKey(companyId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			Company[] array = new CompanyImpl[3];
+
+			array[0] = getByProjectId_PrevAndNext(session, company, projectId,
+					orderByComparator, true);
+
+			array[1] = company;
+
+			array[2] = getByProjectId_PrevAndNext(session, company, projectId,
+					orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected Company getByProjectId_PrevAndNext(Session session,
+		Company company, long projectId, OrderByComparator orderByComparator,
+		boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_COMPANY_WHERE);
+
+		query.append(_FINDER_COLUMN_PROJECTID_PROJECTID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(CompanyModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(projectId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(company);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<Company> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the companies where projectId = &#63; from the database.
+	 *
+	 * @param projectId the project ID
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public void removeByProjectId(long projectId) throws SystemException {
+		for (Company company : findByProjectId(projectId, QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS, null)) {
+			remove(company);
+		}
+	}
+
+	/**
+	 * Returns the number of companies where projectId = &#63;.
+	 *
+	 * @param projectId the project ID
+	 * @return the number of matching companies
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int countByProjectId(long projectId) throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_PROJECTID;
+
+		Object[] finderArgs = new Object[] { projectId };
+
+		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
+				this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_COMPANY_WHERE);
+
+			query.append(_FINDER_COLUMN_PROJECTID_PROJECTID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(projectId);
+
+				count = (Long)q.uniqueResult();
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_PROJECTID_PROJECTID_2 = "company.projectId = ?";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_BIDDINGID =
+		new FinderPath(CompanyModelImpl.ENTITY_CACHE_ENABLED,
+			CompanyModelImpl.FINDER_CACHE_ENABLED, CompanyImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByBiddingId",
+			new String[] {
+				Long.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_BIDDINGID =
+		new FinderPath(CompanyModelImpl.ENTITY_CACHE_ENABLED,
+			CompanyModelImpl.FINDER_CACHE_ENABLED, CompanyImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByBiddingId",
+			new String[] { Long.class.getName() },
+			CompanyModelImpl.BIDDINGID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_BIDDINGID = new FinderPath(CompanyModelImpl.ENTITY_CACHE_ENABLED,
+			CompanyModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByBiddingId",
+			new String[] { Long.class.getName() });
+
+	/**
+	 * Returns all the companies where biddingId = &#63;.
+	 *
+	 * @param biddingId the bidding ID
+	 * @return the matching companies
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Company> findByBiddingId(long biddingId)
+		throws SystemException {
+		return findByBiddingId(biddingId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
+	}
+
+	/**
+	 * Returns a range of all the companies where biddingId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.justonetech.proj.model.impl.CompanyModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param biddingId the bidding ID
+	 * @param start the lower bound of the range of companies
+	 * @param end the upper bound of the range of companies (not inclusive)
+	 * @return the range of matching companies
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Company> findByBiddingId(long biddingId, int start, int end)
+		throws SystemException {
+		return findByBiddingId(biddingId, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the companies where biddingId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.justonetech.proj.model.impl.CompanyModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param biddingId the bidding ID
+	 * @param start the lower bound of the range of companies
+	 * @param end the upper bound of the range of companies (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching companies
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Company> findByBiddingId(long biddingId, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_BIDDINGID;
+			finderArgs = new Object[] { biddingId };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_BIDDINGID;
+			finderArgs = new Object[] { biddingId, start, end, orderByComparator };
+		}
+
+		List<Company> list = (List<Company>)FinderCacheUtil.getResult(finderPath,
+				finderArgs, this);
+
+		if ((list != null) && !list.isEmpty()) {
+			for (Company company : list) {
+				if ((biddingId != company.getBiddingId())) {
+					list = null;
+
+					break;
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_COMPANY_WHERE);
+
+			query.append(_FINDER_COLUMN_BIDDINGID_BIDDINGID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(CompanyModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(biddingId);
+
+				if (!pagination) {
+					list = (List<Company>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
+					Collections.sort(list);
+
+					list = new UnmodifiableList<Company>(list);
+				}
+				else {
+					list = (List<Company>)QueryUtil.list(q, getDialect(),
+							start, end);
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first company in the ordered set where biddingId = &#63;.
+	 *
+	 * @param biddingId the bidding ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching company
+	 * @throws com.justonetech.proj.NoSuchCompanyException if a matching company could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Company findByBiddingId_First(long biddingId,
+		OrderByComparator orderByComparator)
+		throws NoSuchCompanyException, SystemException {
+		Company company = fetchByBiddingId_First(biddingId, orderByComparator);
+
+		if (company != null) {
+			return company;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("biddingId=");
+		msg.append(biddingId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchCompanyException(msg.toString());
+	}
+
+	/**
+	 * Returns the first company in the ordered set where biddingId = &#63;.
+	 *
+	 * @param biddingId the bidding ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching company, or <code>null</code> if a matching company could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Company fetchByBiddingId_First(long biddingId,
+		OrderByComparator orderByComparator) throws SystemException {
+		List<Company> list = findByBiddingId(biddingId, 0, 1, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last company in the ordered set where biddingId = &#63;.
+	 *
+	 * @param biddingId the bidding ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching company
+	 * @throws com.justonetech.proj.NoSuchCompanyException if a matching company could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Company findByBiddingId_Last(long biddingId,
+		OrderByComparator orderByComparator)
+		throws NoSuchCompanyException, SystemException {
+		Company company = fetchByBiddingId_Last(biddingId, orderByComparator);
+
+		if (company != null) {
+			return company;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("biddingId=");
+		msg.append(biddingId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchCompanyException(msg.toString());
+	}
+
+	/**
+	 * Returns the last company in the ordered set where biddingId = &#63;.
+	 *
+	 * @param biddingId the bidding ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching company, or <code>null</code> if a matching company could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Company fetchByBiddingId_Last(long biddingId,
+		OrderByComparator orderByComparator) throws SystemException {
+		int count = countByBiddingId(biddingId);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<Company> list = findByBiddingId(biddingId, count - 1, count,
+				orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the companies before and after the current company in the ordered set where biddingId = &#63;.
+	 *
+	 * @param companyId the primary key of the current company
+	 * @param biddingId the bidding ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next company
+	 * @throws com.justonetech.proj.NoSuchCompanyException if a company with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public Company[] findByBiddingId_PrevAndNext(long companyId,
+		long biddingId, OrderByComparator orderByComparator)
+		throws NoSuchCompanyException, SystemException {
+		Company company = findByPrimaryKey(companyId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			Company[] array = new CompanyImpl[3];
+
+			array[0] = getByBiddingId_PrevAndNext(session, company, biddingId,
+					orderByComparator, true);
+
+			array[1] = company;
+
+			array[2] = getByBiddingId_PrevAndNext(session, company, biddingId,
+					orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected Company getByBiddingId_PrevAndNext(Session session,
+		Company company, long biddingId, OrderByComparator orderByComparator,
+		boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_COMPANY_WHERE);
+
+		query.append(_FINDER_COLUMN_BIDDINGID_BIDDINGID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(CompanyModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(biddingId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(company);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<Company> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the companies where biddingId = &#63; from the database.
+	 *
+	 * @param biddingId the bidding ID
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public void removeByBiddingId(long biddingId) throws SystemException {
+		for (Company company : findByBiddingId(biddingId, QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS, null)) {
+			remove(company);
+		}
+	}
+
+	/**
+	 * Returns the number of companies where biddingId = &#63;.
+	 *
+	 * @param biddingId the bidding ID
+	 * @return the number of matching companies
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int countByBiddingId(long biddingId) throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_BIDDINGID;
+
+		Object[] finderArgs = new Object[] { biddingId };
+
+		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
+				this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_COMPANY_WHERE);
+
+			query.append(_FINDER_COLUMN_BIDDINGID_BIDDINGID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(biddingId);
+
+				count = (Long)q.uniqueResult();
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_BIDDINGID_BIDDINGID_2 = "company.biddingId = ?";
 
 	public CompanyPersistenceImpl() {
 		setModelClass(Company.class);
@@ -275,6 +1255,8 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 
 		boolean isNew = company.isNew();
 
+		CompanyModelImpl companyModelImpl = (CompanyModelImpl)company;
+
 		Session session = null;
 
 		try {
@@ -298,8 +1280,48 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 
-		if (isNew) {
+		if (isNew || !CompanyModelImpl.COLUMN_BITMASK_ENABLED) {
 			FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+		}
+
+		else {
+			if ((companyModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_PROJECTID.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						companyModelImpl.getOriginalProjectId()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_PROJECTID,
+					args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_PROJECTID,
+					args);
+
+				args = new Object[] { companyModelImpl.getProjectId() };
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_PROJECTID,
+					args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_PROJECTID,
+					args);
+			}
+
+			if ((companyModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_BIDDINGID.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						companyModelImpl.getOriginalBiddingId()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_BIDDINGID,
+					args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_BIDDINGID,
+					args);
+
+				args = new Object[] { companyModelImpl.getBiddingId() };
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_BIDDINGID,
+					args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_BIDDINGID,
+					args);
+			}
 		}
 
 		EntityCacheUtil.putResult(CompanyModelImpl.ENTITY_CACHE_ENABLED,
@@ -647,9 +1669,12 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 	}
 
 	private static final String _SQL_SELECT_COMPANY = "SELECT company FROM Company company";
+	private static final String _SQL_SELECT_COMPANY_WHERE = "SELECT company FROM Company company WHERE ";
 	private static final String _SQL_COUNT_COMPANY = "SELECT COUNT(company) FROM Company company";
+	private static final String _SQL_COUNT_COMPANY_WHERE = "SELECT COUNT(company) FROM Company company WHERE ";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "company.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No Company exists with the primary key ";
+	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No Company exists with the key {";
 	private static final boolean _HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE = GetterUtil.getBoolean(PropsUtil.get(
 				PropsKeys.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE));
 	private static Log _log = LogFactoryUtil.getLog(CompanyPersistenceImpl.class);

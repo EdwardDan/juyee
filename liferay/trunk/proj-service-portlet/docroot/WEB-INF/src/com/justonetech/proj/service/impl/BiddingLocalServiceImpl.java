@@ -14,7 +14,11 @@
 
 package com.justonetech.proj.service.impl;
 
+import java.util.List;
+
+import com.justonetech.proj.model.Bidding;
 import com.justonetech.proj.service.base.BiddingLocalServiceBaseImpl;
+import com.liferay.portal.kernel.exception.SystemException;
 
 /**
  * The implementation of the bidding local service.
@@ -36,4 +40,12 @@ public class BiddingLocalServiceImpl extends BiddingLocalServiceBaseImpl {
 	 *
 	 * Never reference this interface directly. Always use {@link com.justonetech.proj.service.BiddingLocalServiceUtil} to access the bidding local service.
 	 */
+	public List<Bidding> findByProjectId(long projectId) throws SystemException {
+		return biddingPersistence.findByProjectId(projectId);
+	}
+
+	public int countByProjectId(long projectId) throws SystemException {
+
+		return biddingPersistence.countByProjectId(projectId);
+	}
 }

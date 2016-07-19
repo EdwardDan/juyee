@@ -280,6 +280,19 @@ public class BiddingLocalServiceWrapper implements BiddingLocalService,
 		return _biddingLocalService.invokeMethod(name, parameterTypes, arguments);
 	}
 
+	@Override
+	public java.util.List<com.justonetech.proj.model.Bidding> findByProjectId(
+		long projectId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _biddingLocalService.findByProjectId(projectId);
+	}
+
+	@Override
+	public int countByProjectId(long projectId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _biddingLocalService.countByProjectId(projectId);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

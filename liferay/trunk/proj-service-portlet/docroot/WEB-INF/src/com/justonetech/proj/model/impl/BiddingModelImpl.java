@@ -95,7 +95,11 @@ public class BiddingModelImpl extends BaseModelImpl<Bidding>
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.finder.cache.enabled.com.justonetech.proj.model.Bidding"),
 			true);
-	public static final boolean COLUMN_BITMASK_ENABLED = false;
+	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
+				"value.object.column.bitmask.enabled.com.justonetech.proj.model.Bidding"),
+			true);
+	public static long PROJECTID_COLUMN_BITMASK = 1L;
+	public static long BIDDINGID_COLUMN_BITMASK = 2L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -309,6 +313,8 @@ public class BiddingModelImpl extends BaseModelImpl<Bidding>
 
 	@Override
 	public void setBiddingId(long biddingId) {
+		_columnBitmask = -1L;
+
 		_biddingId = biddingId;
 	}
 
@@ -513,7 +519,23 @@ public class BiddingModelImpl extends BaseModelImpl<Bidding>
 
 	@Override
 	public void setProjectId(long projectId) {
+		_columnBitmask |= PROJECTID_COLUMN_BITMASK;
+
+		if (!_setOriginalProjectId) {
+			_setOriginalProjectId = true;
+
+			_originalProjectId = _projectId;
+		}
+
 		_projectId = projectId;
+	}
+
+	public long getOriginalProjectId() {
+		return _originalProjectId;
+	}
+
+	public long getColumnBitmask() {
+		return _columnBitmask;
 	}
 
 	@Override
@@ -614,6 +636,13 @@ public class BiddingModelImpl extends BaseModelImpl<Bidding>
 
 	@Override
 	public void resetOriginalValues() {
+		BiddingModelImpl biddingModelImpl = this;
+
+		biddingModelImpl._originalProjectId = biddingModelImpl._projectId;
+
+		biddingModelImpl._setOriginalProjectId = false;
+
+		biddingModelImpl._columnBitmask = 0;
 	}
 
 	@Override
@@ -855,5 +884,8 @@ public class BiddingModelImpl extends BaseModelImpl<Bidding>
 	private String _linkTel;
 	private Date _startDate;
 	private long _projectId;
+	private long _originalProjectId;
+	private boolean _setOriginalProjectId;
+	private long _columnBitmask;
 	private Bidding _escapedModel;
 }

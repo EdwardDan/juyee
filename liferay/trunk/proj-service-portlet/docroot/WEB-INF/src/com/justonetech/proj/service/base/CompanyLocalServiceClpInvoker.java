@@ -113,6 +113,22 @@ public class CompanyLocalServiceClpInvoker {
 		_methodName45 = "setBeanIdentifier";
 
 		_methodParameterTypes45 = new String[] { "java.lang.String" };
+
+		_methodName50 = "findByProjectId";
+
+		_methodParameterTypes50 = new String[] { "long" };
+
+		_methodName51 = "countByProjectId";
+
+		_methodParameterTypes51 = new String[] { "long" };
+
+		_methodName52 = "findByBiddingId";
+
+		_methodParameterTypes52 = new String[] { "long" };
+
+		_methodName53 = "countByBiddingId";
+
+		_methodParameterTypes53 = new String[] { "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -216,6 +232,26 @@ public class CompanyLocalServiceClpInvoker {
 			return null;
 		}
 
+		if (_methodName50.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes50, parameterTypes)) {
+			return CompanyLocalServiceUtil.findByProjectId(((Long)arguments[0]).longValue());
+		}
+
+		if (_methodName51.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes51, parameterTypes)) {
+			return CompanyLocalServiceUtil.countByProjectId(((Long)arguments[0]).longValue());
+		}
+
+		if (_methodName52.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes52, parameterTypes)) {
+			return CompanyLocalServiceUtil.findByBiddingId(((Long)arguments[0]).longValue());
+		}
+
+		if (_methodName53.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes53, parameterTypes)) {
+			return CompanyLocalServiceUtil.countByBiddingId(((Long)arguments[0]).longValue());
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -255,4 +291,12 @@ public class CompanyLocalServiceClpInvoker {
 	private String[] _methodParameterTypes44;
 	private String _methodName45;
 	private String[] _methodParameterTypes45;
+	private String _methodName50;
+	private String[] _methodParameterTypes50;
+	private String _methodName51;
+	private String[] _methodParameterTypes51;
+	private String _methodName52;
+	private String[] _methodParameterTypes52;
+	private String _methodName53;
+	private String[] _methodParameterTypes53;
 }

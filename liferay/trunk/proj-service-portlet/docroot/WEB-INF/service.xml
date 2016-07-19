@@ -97,6 +97,12 @@
 		</order>
 
 		<!-- Finder methods -->
+		<finder name="ProjectId" return-type="Collection">
+			<finder-column name="projectId" />
+		</finder>
+		<finder name="BiddingId" return-type="Collection">
+			<finder-column name="biddingId" />
+		</finder>
 
 	</entity>
 
@@ -133,6 +139,9 @@
 		</order>
 
 		<!-- Finder methods -->
+		<finder name="ProjectId" return-type="Collection">
+			<finder-column name="projectId" />
+		</finder>
 
 	</entity>
 

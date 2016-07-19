@@ -280,6 +280,32 @@ public class CompanyLocalServiceWrapper implements CompanyLocalService,
 		return _companyLocalService.invokeMethod(name, parameterTypes, arguments);
 	}
 
+	@Override
+	public java.util.List<com.justonetech.proj.model.Company> findByProjectId(
+		long projectId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _companyLocalService.findByProjectId(projectId);
+	}
+
+	@Override
+	public int countByProjectId(long projectId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _companyLocalService.countByProjectId(projectId);
+	}
+
+	@Override
+	public java.util.List<com.justonetech.proj.model.Company> findByBiddingId(
+		long biddingId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _companyLocalService.findByBiddingId(biddingId);
+	}
+
+	@Override
+	public int countByBiddingId(long biddingId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _companyLocalService.countByBiddingId(biddingId);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */
