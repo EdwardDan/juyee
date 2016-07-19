@@ -38,7 +38,7 @@ public class ConstructionPermitCacheModel implements CacheModel<ConstructionPerm
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(73);
+		StringBundler sb = new StringBundler(75);
 
 		sb.append("{constructionPermitId=");
 		sb.append(constructionPermitId);
@@ -80,6 +80,8 @@ public class ConstructionPermitCacheModel implements CacheModel<ConstructionPerm
 		sb.append(companyContactPhone);
 		sb.append(", companySite=");
 		sb.append(companySite);
+		sb.append(", companySiteCounty=");
+		sb.append(companySiteCounty);
 		sb.append(", engineerCategory=");
 		sb.append(engineerCategory);
 		sb.append(", engineerAttribute=");
@@ -233,6 +235,13 @@ public class ConstructionPermitCacheModel implements CacheModel<ConstructionPerm
 			constructionPermitImpl.setCompanySite(companySite);
 		}
 
+		if (companySiteCounty == null) {
+			constructionPermitImpl.setCompanySiteCounty(StringPool.BLANK);
+		}
+		else {
+			constructionPermitImpl.setCompanySiteCounty(companySiteCounty);
+		}
+
 		if (engineerCategory == null) {
 			constructionPermitImpl.setEngineerCategory(StringPool.BLANK);
 		}
@@ -345,6 +354,7 @@ public class ConstructionPermitCacheModel implements CacheModel<ConstructionPerm
 		companyContacts = objectInput.readUTF();
 		companyContactPhone = objectInput.readUTF();
 		companySite = objectInput.readUTF();
+		companySiteCounty = objectInput.readUTF();
 		engineerCategory = objectInput.readUTF();
 		engineerAttribute = objectInput.readLong();
 		engineerScale = objectInput.readUTF();
@@ -466,6 +476,13 @@ public class ConstructionPermitCacheModel implements CacheModel<ConstructionPerm
 			objectOutput.writeUTF(companySite);
 		}
 
+		if (companySiteCounty == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(companySiteCounty);
+		}
+
 		if (engineerCategory == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
@@ -554,6 +571,7 @@ public class ConstructionPermitCacheModel implements CacheModel<ConstructionPerm
 	public String companyContacts;
 	public String companyContactPhone;
 	public String companySite;
+	public String companySiteCounty;
 	public String engineerCategory;
 	public long engineerAttribute;
 	public String engineerScale;

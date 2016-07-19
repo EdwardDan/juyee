@@ -19,6 +19,7 @@ create table projApproval_ConstructionPermit (
 	companyContacts VARCHAR(75) null,
 	companyContactPhone VARCHAR(75) null,
 	companySite VARCHAR(200) null,
+	companySiteCounty VARCHAR(75) null,
 	engineerCategory VARCHAR(75) null,
 	engineerAttribute LONG,
 	engineerScale VARCHAR(200) null,

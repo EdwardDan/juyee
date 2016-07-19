@@ -95,6 +95,7 @@ public class ConstructionPermitClp extends BaseModelImpl<ConstructionPermit>
 		attributes.put("companyContacts", getCompanyContacts());
 		attributes.put("companyContactPhone", getCompanyContactPhone());
 		attributes.put("companySite", getCompanySite());
+		attributes.put("companySiteCounty", getCompanySiteCounty());
 		attributes.put("engineerCategory", getEngineerCategory());
 		attributes.put("engineerAttribute", getEngineerAttribute());
 		attributes.put("engineerScale", getEngineerScale());
@@ -236,6 +237,12 @@ public class ConstructionPermitClp extends BaseModelImpl<ConstructionPermit>
 
 		if (companySite != null) {
 			setCompanySite(companySite);
+		}
+
+		String companySiteCounty = (String)attributes.get("companySiteCounty");
+
+		if (companySiteCounty != null) {
+			setCompanySiteCounty(companySiteCounty);
 		}
 
 		String engineerCategory = (String)attributes.get("engineerCategory");
@@ -816,6 +823,30 @@ public class ConstructionPermitClp extends BaseModelImpl<ConstructionPermit>
 	}
 
 	@Override
+	public String getCompanySiteCounty() {
+		return _companySiteCounty;
+	}
+
+	@Override
+	public void setCompanySiteCounty(String companySiteCounty) {
+		_companySiteCounty = companySiteCounty;
+
+		if (_constructionPermitRemoteModel != null) {
+			try {
+				Class<?> clazz = _constructionPermitRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setCompanySiteCounty",
+						String.class);
+
+				method.invoke(_constructionPermitRemoteModel, companySiteCounty);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
 	public String getEngineerCategory() {
 		return _engineerCategory;
 	}
@@ -1282,6 +1313,7 @@ public class ConstructionPermitClp extends BaseModelImpl<ConstructionPermit>
 		clone.setCompanyContacts(getCompanyContacts());
 		clone.setCompanyContactPhone(getCompanyContactPhone());
 		clone.setCompanySite(getCompanySite());
+		clone.setCompanySiteCounty(getCompanySiteCounty());
 		clone.setEngineerCategory(getEngineerCategory());
 		clone.setEngineerAttribute(getEngineerAttribute());
 		clone.setEngineerScale(getEngineerScale());
@@ -1350,7 +1382,7 @@ public class ConstructionPermitClp extends BaseModelImpl<ConstructionPermit>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(73);
+		StringBundler sb = new StringBundler(75);
 
 		sb.append("{constructionPermitId=");
 		sb.append(getConstructionPermitId());
@@ -1392,6 +1424,8 @@ public class ConstructionPermitClp extends BaseModelImpl<ConstructionPermit>
 		sb.append(getCompanyContactPhone());
 		sb.append(", companySite=");
 		sb.append(getCompanySite());
+		sb.append(", companySiteCounty=");
+		sb.append(getCompanySiteCounty());
 		sb.append(", engineerCategory=");
 		sb.append(getEngineerCategory());
 		sb.append(", engineerAttribute=");
@@ -1431,7 +1465,7 @@ public class ConstructionPermitClp extends BaseModelImpl<ConstructionPermit>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(112);
+		StringBundler sb = new StringBundler(115);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.projApproval.model.ConstructionPermit");
@@ -1516,6 +1550,10 @@ public class ConstructionPermitClp extends BaseModelImpl<ConstructionPermit>
 		sb.append(
 			"<column><column-name>companySite</column-name><column-value><![CDATA[");
 		sb.append(getCompanySite());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companySiteCounty</column-name><column-value><![CDATA[");
+		sb.append(getCompanySiteCounty());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>engineerCategory</column-name><column-value><![CDATA[");
@@ -1608,6 +1646,7 @@ public class ConstructionPermitClp extends BaseModelImpl<ConstructionPermit>
 	private String _companyContacts;
 	private String _companyContactPhone;
 	private String _companySite;
+	private String _companySiteCounty;
 	private String _engineerCategory;
 	private long _engineerAttribute;
 	private String _engineerScale;

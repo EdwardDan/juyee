@@ -51,6 +51,7 @@ public class ConstructionPermitSoap implements Serializable {
 		soapModel.setCompanyContacts(model.getCompanyContacts());
 		soapModel.setCompanyContactPhone(model.getCompanyContactPhone());
 		soapModel.setCompanySite(model.getCompanySite());
+		soapModel.setCompanySiteCounty(model.getCompanySiteCounty());
 		soapModel.setEngineerCategory(model.getEngineerCategory());
 		soapModel.setEngineerAttribute(model.getEngineerAttribute());
 		soapModel.setEngineerScale(model.getEngineerScale());
@@ -282,6 +283,14 @@ public class ConstructionPermitSoap implements Serializable {
 		_companySite = companySite;
 	}
 
+	public String getCompanySiteCounty() {
+		return _companySiteCounty;
+	}
+
+	public void setCompanySiteCounty(String companySiteCounty) {
+		_companySiteCounty = companySiteCounty;
+	}
+
 	public String getEngineerCategory() {
 		return _engineerCategory;
 	}
@@ -430,6 +439,7 @@ public class ConstructionPermitSoap implements Serializable {
 	private String _companyContacts;
 	private String _companyContactPhone;
 	private String _companySite;
+	private String _companySiteCounty;
 	private String _engineerCategory;
 	private long _engineerAttribute;
 	private String _engineerScale;

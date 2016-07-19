@@ -70,6 +70,7 @@ public class ConstructionPermitWrapper implements ConstructionPermit,
 		attributes.put("companyContacts", getCompanyContacts());
 		attributes.put("companyContactPhone", getCompanyContactPhone());
 		attributes.put("companySite", getCompanySite());
+		attributes.put("companySiteCounty", getCompanySiteCounty());
 		attributes.put("engineerCategory", getEngineerCategory());
 		attributes.put("engineerAttribute", getEngineerAttribute());
 		attributes.put("engineerScale", getEngineerScale());
@@ -211,6 +212,12 @@ public class ConstructionPermitWrapper implements ConstructionPermit,
 
 		if (companySite != null) {
 			setCompanySite(companySite);
+		}
+
+		String companySiteCounty = (String)attributes.get("companySiteCounty");
+
+		if (companySiteCounty != null) {
+			setCompanySiteCounty(companySiteCounty);
 		}
 
 		String engineerCategory = (String)attributes.get("engineerCategory");
@@ -752,6 +759,26 @@ public class ConstructionPermitWrapper implements ConstructionPermit,
 	@Override
 	public void setCompanySite(java.lang.String companySite) {
 		_constructionPermit.setCompanySite(companySite);
+	}
+
+	/**
+	* Returns the company site county of this construction permit.
+	*
+	* @return the company site county of this construction permit
+	*/
+	@Override
+	public java.lang.String getCompanySiteCounty() {
+		return _constructionPermit.getCompanySiteCounty();
+	}
+
+	/**
+	* Sets the company site county of this construction permit.
+	*
+	* @param companySiteCounty the company site county of this construction permit
+	*/
+	@Override
+	public void setCompanySiteCounty(java.lang.String companySiteCounty) {
+		_constructionPermit.setCompanySiteCounty(companySiteCounty);
 	}
 
 	/**

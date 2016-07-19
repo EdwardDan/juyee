@@ -32,6 +32,7 @@
 		<field name="companySite" type="String">
 			<hint name="max-length">200</hint>
 		</field>
+		<field name="companySiteCounty" type="String" />
 		<field name="engineerCategory" type="String" />
 		<field name="engineerAttribute" type="long" />
 		<field name="engineerScale" type="String">

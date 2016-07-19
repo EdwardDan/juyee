@@ -861,6 +861,7 @@ public class ConstructionPermitPersistenceImpl extends BasePersistenceImpl<Const
 		constructionPermitImpl.setCompanyContacts(constructionPermit.getCompanyContacts());
 		constructionPermitImpl.setCompanyContactPhone(constructionPermit.getCompanyContactPhone());
 		constructionPermitImpl.setCompanySite(constructionPermit.getCompanySite());
+		constructionPermitImpl.setCompanySiteCounty(constructionPermit.getCompanySiteCounty());
 		constructionPermitImpl.setEngineerCategory(constructionPermit.getEngineerCategory());
 		constructionPermitImpl.setEngineerAttribute(constructionPermit.getEngineerAttribute());
 		constructionPermitImpl.setEngineerScale(constructionPermit.getEngineerScale());

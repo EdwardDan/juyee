@@ -369,6 +369,21 @@ public interface ConstructionPermitModel extends BaseModel<ConstructionPermit> {
 	public void setCompanySite(String companySite);
 
 	/**
+	 * Returns the company site county of this construction permit.
+	 *
+	 * @return the company site county of this construction permit
+	 */
+	@AutoEscape
+	public String getCompanySiteCounty();
+
+	/**
+	 * Sets the company site county of this construction permit.
+	 *
+	 * @param companySiteCounty the company site county of this construction permit
+	 */
+	public void setCompanySiteCounty(String companySiteCounty);
+
+	/**
 	 * Returns the engineer category of this construction permit.
 	 *
 	 * @return the engineer category of this construction permit

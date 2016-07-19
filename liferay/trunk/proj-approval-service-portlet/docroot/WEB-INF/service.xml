@@ -36,6 +36,7 @@
 		<column name="companyContacts" type="String" />
 		<column name="companyContactPhone" type="String" />
 		<column name="companySite" type="String" />
+		<column name="companySiteCounty" type="String" />
 		<column name="engineerCategory" type="String" />
 		<column name="engineerAttribute" type="long" />
 		<column name="engineerScale" type="String" />

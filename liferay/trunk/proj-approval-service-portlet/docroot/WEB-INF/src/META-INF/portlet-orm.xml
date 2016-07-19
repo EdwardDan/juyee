@@ -33,6 +33,7 @@
 			<basic name="companyContacts" />
 			<basic name="companyContactPhone" />
 			<basic name="companySite" />
+			<basic name="companySiteCounty" />
 			<basic name="engineerCategory" />
 			<basic name="engineerAttribute" />
 			<basic name="engineerScale" />

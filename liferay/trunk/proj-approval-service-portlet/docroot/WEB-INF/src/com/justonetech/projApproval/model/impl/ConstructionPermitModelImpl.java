@@ -86,6 +86,7 @@ public class ConstructionPermitModelImpl extends BaseModelImpl<ConstructionPermi
 			{ "companyContacts", Types.VARCHAR },
 			{ "companyContactPhone", Types.VARCHAR },
 			{ "companySite", Types.VARCHAR },
+			{ "companySiteCounty", Types.VARCHAR },
 			{ "engineerCategory", Types.VARCHAR },
 			{ "engineerAttribute", Types.BIGINT },
 			{ "engineerScale", Types.VARCHAR },
@@ -103,7 +104,7 @@ public class ConstructionPermitModelImpl extends BaseModelImpl<ConstructionPermi
 			{ "certificationDate", Types.TIMESTAMP },
 			{ "constructionPermitCode", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table projApproval_ConstructionPermit (constructionPermitId LONG not null primary key,userId LONG,userName VARCHAR(75) null,createTime DATE null,modifiedTime DATE null,projType LONG,projProperty LONG,county LONG,constructionCode VARCHAR(75) null,bidingCode VARCHAR(75) null,businessCode VARCHAR(75) null,projName VARCHAR(200) null,company VARCHAR(200) null,companyProperty VARCHAR(200) null,companyAddress VARCHAR(200) null,legalPerson VARCHAR(75) null,companyTel VARCHAR(75) null,companyContacts VARCHAR(75) null,companyContactPhone VARCHAR(75) null,companySite VARCHAR(200) null,engineerCategory VARCHAR(75) null,engineerAttribute LONG,engineerScale VARCHAR(200) null,nationalFundsProportion VARCHAR(75) null,contractPrice DOUBLE,contractSchedule DOUBLE,bidPrice DOUBLE,investBudget DOUBLE,planStartDate DATE null,planEndDate DATE null,workSituation VARCHAR(200) null,otherInfo STRING null,applyMaterial STRING null,receiptNum VARCHAR(75) null,certificationDate DATE null,constructionPermitCode VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table projApproval_ConstructionPermit (constructionPermitId LONG not null primary key,userId LONG,userName VARCHAR(75) null,createTime DATE null,modifiedTime DATE null,projType LONG,projProperty LONG,county LONG,constructionCode VARCHAR(75) null,bidingCode VARCHAR(75) null,businessCode VARCHAR(75) null,projName VARCHAR(200) null,company VARCHAR(200) null,companyProperty VARCHAR(200) null,companyAddress VARCHAR(200) null,legalPerson VARCHAR(75) null,companyTel VARCHAR(75) null,companyContacts VARCHAR(75) null,companyContactPhone VARCHAR(75) null,companySite VARCHAR(200) null,companySiteCounty VARCHAR(75) null,engineerCategory VARCHAR(75) null,engineerAttribute LONG,engineerScale VARCHAR(200) null,nationalFundsProportion VARCHAR(75) null,contractPrice DOUBLE,contractSchedule DOUBLE,bidPrice DOUBLE,investBudget DOUBLE,planStartDate DATE null,planEndDate DATE null,workSituation VARCHAR(200) null,otherInfo STRING null,applyMaterial STRING null,receiptNum VARCHAR(75) null,certificationDate DATE null,constructionPermitCode VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table projApproval_ConstructionPermit";
 	public static final String ORDER_BY_JPQL = " ORDER BY constructionPermit.constructionPermitId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY projApproval_ConstructionPermit.constructionPermitId ASC";
@@ -155,6 +156,7 @@ public class ConstructionPermitModelImpl extends BaseModelImpl<ConstructionPermi
 		model.setCompanyContacts(soapModel.getCompanyContacts());
 		model.setCompanyContactPhone(soapModel.getCompanyContactPhone());
 		model.setCompanySite(soapModel.getCompanySite());
+		model.setCompanySiteCounty(soapModel.getCompanySiteCounty());
 		model.setEngineerCategory(soapModel.getEngineerCategory());
 		model.setEngineerAttribute(soapModel.getEngineerAttribute());
 		model.setEngineerScale(soapModel.getEngineerScale());
@@ -256,6 +258,7 @@ public class ConstructionPermitModelImpl extends BaseModelImpl<ConstructionPermi
 		attributes.put("companyContacts", getCompanyContacts());
 		attributes.put("companyContactPhone", getCompanyContactPhone());
 		attributes.put("companySite", getCompanySite());
+		attributes.put("companySiteCounty", getCompanySiteCounty());
 		attributes.put("engineerCategory", getEngineerCategory());
 		attributes.put("engineerAttribute", getEngineerAttribute());
 		attributes.put("engineerScale", getEngineerScale());
@@ -397,6 +400,12 @@ public class ConstructionPermitModelImpl extends BaseModelImpl<ConstructionPermi
 
 		if (companySite != null) {
 			setCompanySite(companySite);
+		}
+
+		String companySiteCounty = (String)attributes.get("companySiteCounty");
+
+		if (companySiteCounty != null) {
+			setCompanySiteCounty(companySiteCounty);
 		}
 
 		String engineerCategory = (String)attributes.get("engineerCategory");
@@ -807,6 +816,22 @@ public class ConstructionPermitModelImpl extends BaseModelImpl<ConstructionPermi
 
 	@JSON
 	@Override
+	public String getCompanySiteCounty() {
+		if (_companySiteCounty == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _companySiteCounty;
+		}
+	}
+
+	@Override
+	public void setCompanySiteCounty(String companySiteCounty) {
+		_companySiteCounty = companySiteCounty;
+	}
+
+	@JSON
+	@Override
 	public String getEngineerCategory() {
 		if (_engineerCategory == null) {
 			return StringPool.BLANK;
@@ -1072,6 +1097,7 @@ public class ConstructionPermitModelImpl extends BaseModelImpl<ConstructionPermi
 		constructionPermitImpl.setCompanyContacts(getCompanyContacts());
 		constructionPermitImpl.setCompanyContactPhone(getCompanyContactPhone());
 		constructionPermitImpl.setCompanySite(getCompanySite());
+		constructionPermitImpl.setCompanySiteCounty(getCompanySiteCounty());
 		constructionPermitImpl.setEngineerCategory(getEngineerCategory());
 		constructionPermitImpl.setEngineerAttribute(getEngineerAttribute());
 		constructionPermitImpl.setEngineerScale(getEngineerScale());
@@ -1284,6 +1310,14 @@ public class ConstructionPermitModelImpl extends BaseModelImpl<ConstructionPermi
 			constructionPermitCacheModel.companySite = null;
 		}
 
+		constructionPermitCacheModel.companySiteCounty = getCompanySiteCounty();
+
+		String companySiteCounty = constructionPermitCacheModel.companySiteCounty;
+
+		if ((companySiteCounty != null) && (companySiteCounty.length() == 0)) {
+			constructionPermitCacheModel.companySiteCounty = null;
+		}
+
 		constructionPermitCacheModel.engineerCategory = getEngineerCategory();
 
 		String engineerCategory = constructionPermitCacheModel.engineerCategory;
@@ -1392,7 +1426,7 @@ public class ConstructionPermitModelImpl extends BaseModelImpl<ConstructionPermi
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(73);
+		StringBundler sb = new StringBundler(75);
 
 		sb.append("{constructionPermitId=");
 		sb.append(getConstructionPermitId());
@@ -1434,6 +1468,8 @@ public class ConstructionPermitModelImpl extends BaseModelImpl<ConstructionPermi
 		sb.append(getCompanyContactPhone());
 		sb.append(", companySite=");
 		sb.append(getCompanySite());
+		sb.append(", companySiteCounty=");
+		sb.append(getCompanySiteCounty());
 		sb.append(", engineerCategory=");
 		sb.append(getEngineerCategory());
 		sb.append(", engineerAttribute=");
@@ -1473,7 +1509,7 @@ public class ConstructionPermitModelImpl extends BaseModelImpl<ConstructionPermi
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(112);
+		StringBundler sb = new StringBundler(115);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.projApproval.model.ConstructionPermit");
@@ -1558,6 +1594,10 @@ public class ConstructionPermitModelImpl extends BaseModelImpl<ConstructionPermi
 		sb.append(
 			"<column><column-name>companySite</column-name><column-value><![CDATA[");
 		sb.append(getCompanySite());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companySiteCounty</column-name><column-value><![CDATA[");
+		sb.append(getCompanySiteCounty());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>engineerCategory</column-name><column-value><![CDATA[");
@@ -1656,6 +1696,7 @@ public class ConstructionPermitModelImpl extends BaseModelImpl<ConstructionPermi
 	private String _companyContacts;
 	private String _companyContactPhone;
 	private String _companySite;
+	private String _companySiteCounty;
 	private String _engineerCategory;
 	private long _engineerAttribute;
 	private String _engineerScale;

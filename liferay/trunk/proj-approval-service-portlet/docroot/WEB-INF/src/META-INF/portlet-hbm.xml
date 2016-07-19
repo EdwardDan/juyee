@@ -27,6 +27,7 @@
 		<property name="companyContacts" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="companyContactPhone" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="companySite" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="companySiteCounty" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="engineerCategory" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="engineerAttribute" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="engineerScale" type="com.liferay.portal.dao.orm.hibernate.StringType" />
