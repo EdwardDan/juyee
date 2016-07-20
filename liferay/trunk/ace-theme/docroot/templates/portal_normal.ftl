@@ -24,7 +24,7 @@
 		-->
 		<!--ace styles-->
 
-		<link rel="stylesheet" href="${css_folder}/ace-custom.css" />
+		<link rel="stylesheet" href="${ace_folder}/css/ace-custom.css" />
 		<link rel="stylesheet" href="${ace_folder}/css/ace-responsive.min.css" />
 		<link rel="stylesheet" href="${ace_folder}/css/ace-skins.min.css" />
 
