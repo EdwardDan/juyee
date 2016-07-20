@@ -702,7 +702,7 @@ $dockbarOpenGradientStart: #0EA6F9;
 			margin-top: -2px;
 		}
 	}
-	/* ---------- custom ---------- */
+/* ---------- custom ---------- */
 	.table {
 		th,
 		td {
@@ -712,4 +712,8 @@ $dockbarOpenGradientStart: #0EA6F9;
 	.control-group {
 		margin-bottom: 5px;
 	}
+}
+
+.lfr-search-container{
+    margin-top: 0px !important;
 }

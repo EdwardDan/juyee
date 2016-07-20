@@ -3910,3 +3910,6 @@ body:first-of-type .portlet-content:hover .lfr-icon-actions .taglib-text {
   .aui .control-group {
     margin-bottom: 5px; }
 
+.lfr-search-container {
+  margin-top: 0px !important; }
+

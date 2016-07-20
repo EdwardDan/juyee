@@ -5,7 +5,10 @@
 	<#assign nav_level_1_item_has_child = "" />
 
     <#if nav_level_1_item.isSelected()>
-        <#assign nav_level_1_item_selected = "active open" />
+        <#assign nav_level_1_item_selected = "active" />
+        <#if nav_level_1_item.hasChildren()>
+	        <#assign nav_level_1_item_selected = "active open" />
+	    </#if>
     </#if>
     
     <#if nav_level_1_item.hasChildren()>
@@ -28,7 +31,7 @@
 	        <#assign nav_level_2_item_has_child = "" />
 	        
 	        <#if nav_level_2_item.isSelected() || themeDisplay.getLayout().getParentLayoutId() == nav_level_2_item.getLayoutId()>
-	          <#assign nav_level_2_item_selected = "active open" />
+	          <#assign nav_level_2_item_selected = "active" />
 	        </#if>
 	        
 	        <#if nav_level_2_item.hasChildren()>
