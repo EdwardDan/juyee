@@ -11,6 +11,8 @@ import javax.portlet.ActionResponse;
 import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+import javax.portlet.ResourceRequest;
+import javax.portlet.ResourceResponse;
 
 import com.justonetech.oa.model.OfficeSupplyApplication;
 import com.justonetech.oa.model.OfficeSupplyApplicationItem;
@@ -91,26 +93,23 @@ public class OfficeSupplyApplicationPortlet extends MVCPortlet {
 		for (OfficeSupplyApplicationItem officeSupplyApplicationItem : officeSupplyApplicationItems) {
 			OfficeSupplyApplicationItemLocalServiceUtil.deleteOfficeSupplyApplicationItem(officeSupplyApplicationItem);
 		}
-		String rowIndexes = request.getParameter("rowIndexes");
-		System.out.println("===========" + rowIndexes);
-		String[] indexOfRows = rowIndexes.split(",");
-		for (int i = 0; i < indexOfRows.length; i++) {
+		String[] names = request.getParameterValues("name");
+		String[] models = request.getParameterValues("model");
+		String[] units = request.getParameterValues("unit");
+		String[] unitPrices = request.getParameterValues("unitPrice");
+		String[] quantities = request.getParameterValues("quantity");
+		for (int i = 0; i < names.length; i++) {
 			OfficeSupplyApplicationItem officeSupplyApplicationItem = OfficeSupplyApplicationItemLocalServiceUtil
 					.createOfficeSupplyApplicationItem(CounterLocalServiceUtil.increment());
-			String name = ParamUtil.getString(request, "name" + indexOfRows[i]);
-			String model = ParamUtil.getString(request, "model" + indexOfRows[i]);
-			String unit = ParamUtil.getString(request, "unit" + indexOfRows[i]);
-			int quantity = ParamUtil.getInteger(request, "quantity" + indexOfRows[i]);
-			double unitPrice = ParamUtil.getDouble(request, "unitPrice" + indexOfRows[i]);
-			officeSupplyApplicationItem.setName(name);
-			officeSupplyApplicationItem.setModel(model);
-			officeSupplyApplicationItem.setUnit(unit);
-			officeSupplyApplicationItem.setUnitPrice(unitPrice);
-			officeSupplyApplicationItem.setQuantity(quantity);
-			officeSupplyApplicationItem.setOfficeSupplyApplicationId(officeSupplyApplication
-					.getOfficeSupplyApplicationId());
+			officeSupplyApplicationItem.setName(names[i]);
+			officeSupplyApplicationItem.setModel(models[i]);
+			officeSupplyApplicationItem.setUnit(units[i]);
+			officeSupplyApplicationItem.setUnitPrice(Double.valueOf(unitPrices[i]));
+			officeSupplyApplicationItem.setQuantity(Integer.valueOf(quantities[i]));
+			officeSupplyApplicationItem.setOfficeSupplyApplicationId(officeSupplyApplication.getOfficeSupplyApplicationId());
 			OfficeSupplyApplicationItemLocalServiceUtil.updateOfficeSupplyApplicationItem(officeSupplyApplicationItem);
 		}
+
 	}
 
 	public void editOfficeSupplyApplication(ActionRequest request, ActionResponse response) throws PortalException,
@@ -120,14 +119,14 @@ public class OfficeSupplyApplicationPortlet extends MVCPortlet {
 				.getOfficeSupplyApplication(officeSupplyApplicationId);
 		List<OfficeSupplyApplicationItem> OfficeSupplyApplicationItems = OfficeSupplyApplicationItemLocalServiceUtil
 				.findByOfficeSupplyApplicationId(officeSupplyApplicationId);
-		int total = 0;
+		double sum = 0;
 		for (OfficeSupplyApplicationItem OfficeSupplyApplicationItem : OfficeSupplyApplicationItems) {
-			total += OfficeSupplyApplicationItem.getUnitPrice() * OfficeSupplyApplicationItem.getQuantity();
+			sum += OfficeSupplyApplicationItem.getUnitPrice() * OfficeSupplyApplicationItem.getQuantity();
 		}
 		request.setAttribute("officeSupplyApplication", officeSupplyApplication);
 		request.setAttribute("officeSupplyApplicationId", officeSupplyApplicationId);
 		request.setAttribute("officeSupplyApplicationItems", OfficeSupplyApplicationItems);
-		request.setAttribute("total", total);
+		request.setAttribute("sum", sum);
 	}
 
 	public void deleteOfficeSupplyApplication(ActionRequest request, ActionResponse response) throws PortalException,

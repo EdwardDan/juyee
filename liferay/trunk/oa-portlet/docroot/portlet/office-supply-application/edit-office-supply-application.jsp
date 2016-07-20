@@ -1,19 +1,30 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
 <script type="text/javascript">
-   document.write("<script src='${staticServerURL}/jquery/jquery-1.12.4.min.js'>"+"<"+"/script>");
+	document.write("<script src='${staticServerURL}/jquery/jquery-1.12.4.min.js'>" + "<"+"/script>");
 </script>
 <portlet:renderURL var="viewURL" />
-<script>
+<script type="text/javascript">
 	function count() {
-		var total = 0;
-		var indexes = $(".row-fields").length;
-		for (var i = 1; i <= indexes; i++) {
-			var unitPrice = $("#<portlet:namespace/>unitPrice" + i).val();
-			var quantity = $("#<portlet:namespace/>quantity" + i).val();
-			total += unitPrice * quantity;
+		var sum = parseFloat(0);
+		$("input[name='<portlet:namespace/>quantity']").each(function() {
+			var parent = $(this).parents('tr');
+			var price = parent.find("input[name='<portlet:namespace/>unitPrice']").val();
+			sum += parseFloat(this.value * price);
+		});
+		$("#<portlet:namespace/>sum").val(sum);
+	}
+
+	function changeLine(obj) {
+		if (obj.value == "添加") {
+			$("#officeSupplyApplicationItems").append($("#hiddenStyle").html());
+		} else {
+			if (confirm("确定要删除吗？")) {
+				var trObj = obj.parentNode.parentNode;
+				trObj.parentElement.removeChild(trObj);
+				count();
+			}
 		}
-		$("#<portlet:namespace/>total").val(total);
 	}
 </script>
 <%
@@ -27,79 +38,57 @@
 	name="saveOfficeSupplyApplication">
 	<portlet:param name="redirect" value="${viewURL }" />
 </portlet:actionURL>
+<portlet:resourceURL var="addURL" id="add" />
+<portlet:resourceURL var="deleteURL" id="delete" />
 <aui:form action="${saveOfficeSupplyApplicationURL}">
 	<aui:row>
 		<aui:col span="6">
 			<aui:input type="hidden" name="officeSupplyApplicationId"
 				value="${officeSupplyApplication.officeSupplyApplicationId}" />
 			<aui:input name="deptName" label="申请部门"
-				value="${officeSupplyApplication.deptName}" inlineField="true"/>
+				value="${officeSupplyApplication.deptName}" inlineField="true" />
 		</aui:col>
 		<aui:col span="6">
 			<aui:input name="userName" label="申请人" value="<%=userName%>"
 				disabled="true" />
 		</aui:col>
 	</aui:row>
-	<c:if test="${empty officeSupplyApplicationItems}">
-		<div class="member-fields">
-			<div class="lfr-form-row lfr-form-row-inline">
-				<div class="row-fields" style="display: flex;">
-					<aui:input fieldParam='name1' name="name1" label="申请物品"
-						required="true" />
-					<aui:input fieldParam='model1' name="model1" label="型号"/>
-					<aui:input fieldParam='unit1' name="unit1" label="单位" />
-					<aui:input fieldParam='unitPrice1' name="unitPrice1" label="预计单价"
-						id="unitPrice1" onChange="count()">
-						<aui:validator name="number" />
-					</aui:input>
-					<aui:input fieldParam='quantity1' name="quantity1" id="quantity1"
-						label="数量" onChange="count()">
-						<aui:validator name="required" />
-						<aui:validator name="number" />
-					</aui:input>
-				</div>
-			</div>
-		</div>
-	</c:if>
-	<div class="member-fields">
-		<c:forEach items="${officeSupplyApplicationItems}" var="item"
-			varStatus="status">
-			<div class="lfr-form-row lfr-form-row-inline">
-				<div class="row-fields" style="display: flex;">
-					<aui:input name="name${status.index+1}" id="name${status.index+1}"
-						label="申请物品" value="${item.name }" required="true" />
-					<aui:input name="model${status.index+1}"
-						id="model${status.index+1}" label="型号" value="${item.model }" />
-					<aui:input name="unit${status.index+1}" id="unit${status.index+1}"
-						label="单位" value="${item.unit }" />
-					<aui:input name="unitPrice${status.index+1}"
-						id="unitPrice${status.index+1}" label="预计单价" onChange="count()"
-						value="${item.unitPrice}">
-						<aui:validator name="number" />
-					</aui:input>
-					<aui:input name="quantity${status.index+1}" label="数量"
-						id="quantity${status.index+1}" onChange="count()"
-						value="${item.quantity}">
-						<aui:validator name="required" />
-						<aui:validator name="number" />
-					</aui:input>
-				</div>
-			</div>
-		</c:forEach>
-	</div>
-	<aui:script>
-		AUI().use('liferay-auto-fields', function(A) {
-			new Liferay.AutoFields({
-				contentBox : '.member-fields',
-				fieldIndexes : '<portlet:namespace/>rowIndexes'
-			}).render();
-		});
-	</aui:script>	
-	
+	<table border="1" width="90%">
+		<tr align="center">
+			<td style="width: 20%">申请物品</td>
+			<td style="width: 20%">型号</td>
+			<td style="width: 15%">单位</td>
+			<td style="width: 20%">预计单价</td>
+			<td style="width: 20%">数量</td>
+			<td style="width: 5%"><input type="button" value="添加"
+				onclick="changeLine(this)"></td>
+		</tr>
+		<c:if test="${!empty officeSupplyApplication}">
+			<c:forEach items="${officeSupplyApplicationItems}" var="item">
+				<tr align="center">
+					<td><input type="text" name="<portlet:namespace/>name"
+						value="${item.name}" style="width: 93%;" /></td>
+					<td><input type="text" name="<portlet:namespace/>model"
+						value="${item.model}" style="width: 93%;" /></td>
+					<td><input type="text" name="<portlet:namespace/>unit"
+						value="${item.unit}" style="width: 92%;" /></td>
+					<td><input type="text" name="<portlet:namespace/>unitPrice"
+						value="${item.unitPrice}" style="width: 93%;" /></td>
+					<td><input type="text" name="<portlet:namespace/>quantity"
+						value="${item.quantity}" style="width: 93%;"
+						onchange="count()" /></td>
+					<td><input type="button" value="删除" onclick="changeLine(this)" /></td>
+				</tr>
+			</c:forEach>
+		</c:if>
+		<tbody id="officeSupplyApplicationItems"></tbody>
+	</table>
+	</br>
 	<aui:row>
 		<aui:col span="6"></aui:col>
 		<aui:col span="6">
-			<aui:input id="total" name="total" label="预计总价" value="${total}" disabled="true"/>
+			<aui:input id="sum" name="sum" label="预计总价" value="${sum}"
+				readOnly="true" />
 		</aui:col>
 	</aui:row>
 	<aui:row>
@@ -111,9 +100,31 @@
 	<aui:button-row>
 		<aui:button type="submit" value="提交" />
 		<aui:button type="submit" value="暂存" />
-		<aui:button type="cancel" value="取消" href="${viewURL }"/>
+		<aui:button type="cancel" value="取消" href="${viewURL }" />
 	</aui:button-row>
 </aui:form>
+
+<table style="display: none;" border="1" width="90%">
+	<tbody id="hiddenStyle">
+		<tr align="center">
+			<%--标准行--%>
+			<td class="addTd"><input type="text"
+				name="<portlet:namespace/>name" class="input_text"
+				style="width: 93%;"></td>
+			<td class="addTd"><input type="text"
+				name="<portlet:namespace/>model" style="width: 93%;"></td>
+			<td class="addTd"><input type="text"
+				name="<portlet:namespace/>unit" style="width: 92%;"></td>
+			<td class="addTd"><input type="text"
+				name="<portlet:namespace/>unitPrice" style="width: 93%;"></td>
+			<td class="addTd"><input type="number"
+				name="<portlet:namespace/>quantity" onchange="count()"
+				style="width: 93%;"></td>
+			<td class="addTd"><input type="button" value="删除"
+				onclick="changeLine(this)" /></td>
+		</tr>
+	</tbody>
+</table>
 
 
 
