@@ -253,8 +253,16 @@ public interface DictionaryLocalService extends BaseLocalService,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
 
+	public com.justonetech.sys.model.Dictionary findByCode(long groupId,
+		java.lang.String code)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public com.justonetech.sys.model.Dictionary findByGroupIdAndCode(
 		long groupId, java.lang.String code)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.justonetech.sys.model.Dictionary> findByParentId(
+		long parentId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.justonetech.sys.model.Dictionary> findByGroupIdAndParentId(

@@ -275,10 +275,22 @@ public class DictionaryLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static com.justonetech.sys.model.Dictionary findByCode(
+		long groupId, java.lang.String code)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().findByCode(groupId, code);
+	}
+
 	public static com.justonetech.sys.model.Dictionary findByGroupIdAndCode(
 		long groupId, java.lang.String code)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().findByGroupIdAndCode(groupId, code);
+	}
+
+	public static java.util.List<com.justonetech.sys.model.Dictionary> findByParentId(
+		long parentId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().findByParentId(parentId, start, end);
 	}
 
 	public static java.util.List<com.justonetech.sys.model.Dictionary> findByGroupIdAndParentId(

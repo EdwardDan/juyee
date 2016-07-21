@@ -1,3 +1,4 @@
+create index IX_2156BF54 on sys_Dictionary (code_);
 create index IX_956EB3D6 on sys_Dictionary (code_, groupId);
 create index IX_12AC8186 on sys_Dictionary (groupId, code_);
 create index IX_30C35755 on sys_Dictionary (groupId, parentId);

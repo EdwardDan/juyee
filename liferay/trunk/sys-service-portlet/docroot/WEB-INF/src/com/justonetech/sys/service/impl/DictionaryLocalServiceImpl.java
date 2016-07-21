@@ -57,6 +57,19 @@ public class DictionaryLocalServiceImpl extends DictionaryLocalServiceBaseImpl {
      * {@link com.justonetech.sys.service.DictionaryLocalServiceUtil} to access
      * the dictionary local service.
      */
+    public Dictionary findByCode(long groupId, String code)
+        throws SystemException {
+
+        Dictionary dictionary = null;
+        try {
+            dictionary = dictionaryPersistence.findByCode(code);
+        }
+        catch (NoSuchDictionaryException e) {
+            log.info("NoSuchDictionaryException:findByCode(" + code + ")");
+        }
+        return dictionary;
+    }
+
     public Dictionary findByGroupIdAndCode(long groupId, String code)
         throws SystemException {
 
@@ -68,6 +81,12 @@ public class DictionaryLocalServiceImpl extends DictionaryLocalServiceBaseImpl {
             log.info("NoSuchDictionaryException:findByGroupIdAndCode(" + groupId + ", " + code + ")");
         }
         return dictionary;
+    }
+
+    public List<Dictionary> findByParentId(long parentId, int start, int end)
+        throws SystemException {
+
+        return dictionaryPersistence.findByParentId(parentId, start, end);
     }
 
     public List<Dictionary> findByGroupIdAndParentId(long groupId, long parentId, int start, int end)

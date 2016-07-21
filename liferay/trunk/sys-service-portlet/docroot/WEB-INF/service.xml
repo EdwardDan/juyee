@@ -43,7 +43,14 @@
 		</order>
 
 		<!-- Finder methods -->
+		<finder name="Code" return-type="Dictionary">
+			<finder-column name="code" />
+		</finder>
 
+		<finder name="ParentId" return-type="Collection">
+			<finder-column name="parentId" />
+		</finder>
+		
 		<finder name="GroupIdAndCode" return-type="Dictionary">
 			<finder-column name="groupId" />
 			<finder-column name="code" />
