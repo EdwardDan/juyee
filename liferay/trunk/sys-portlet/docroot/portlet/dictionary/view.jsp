@@ -2,11 +2,10 @@
 <%@ include file="/common/init.jsp"%>
 <c:set var="contentPath"
 	value="${request.contextPath}/portlet/dictionary" />
- 
 <portlet:renderURL var="viewURL" >
 	<portlet:param name="parentId" value="${parentDictionary.dictionaryId}" />
 </portlet:renderURL>
-
+<liferay-ui:header title="系统字典"/>
 <portlet:actionURL var="deleteDictionariesURL" name="deleteDictionaries">
 	<portlet:param name="parentId" value="${parentDictionary.dictionaryId}" />
 	<portlet:param name="redirect" value="${viewURL}" />
@@ -19,25 +18,22 @@
 	<liferay-ui:header title="${parentDictionary.name}" backURL="${backURL}" />
 </c:if>
 <aui:form action="${viewURL }" name="fm">
-	<aui:nav-bar>
-		<aui:nav>
+	<aui:row>
+		<aui:col span="6">
 			<portlet:actionURL var="addDictionaryURL" name="editDictionary">
 				<portlet:param name="mvcPath"
 					value="${contentPath }/edit-dictionary.jsp" />
 				<portlet:param name="parentId" value="${parentDictionary.dictionaryId}" />
 			</portlet:actionURL>
-			<aui:nav-item href="<%=addDictionaryURL%>" iconCssClass="icon-plus"
-				label="添加" />
-		</aui:nav>
-		<aui:nav-bar-search cssClass="pull-right">
+			<aui:button value="添加" href="${addDictionaryURL }" icon="icon-plus"/>
+			<aui:button disabled="<%=true%>" icon="icon-remove" name="deleteDictionariesBtn" value="删除" onClick='<%=renderResponse.getNamespace() + "deleteDictionaries();"%>' />
+		</aui:col>
+		<aui:col span="6" cssClass="text-right">
 			<div class="form-search">
-				<liferay-ui:input-search />
+			<liferay-ui:input-search />
 			</div>
-		</aui:nav-bar-search>
-	</aui:nav-bar>
-	<aui:button-row>
-		<aui:button disabled="<%=true%>" name="deleteDictionariesBtn" value="删除" onClick='<%=renderResponse.getNamespace() + "deleteDictionaries();"%>' />
-	</aui:button-row>
+		</aui:col>
+	</aui:row>
 	<liferay-ui:search-container emptyResultsMessage="没有找到代码。" rowChecker="<%=new RowChecker(renderResponse)%>">
 		<liferay-ui:search-container-results results="${dictionaries }"
 			total="${dictionariesCount }">
@@ -46,7 +42,7 @@
 			<liferay-portlet:renderURL varImpl="rowURL">
 				<portlet:param name="parentId" value="${dictionary.dictionaryId}" />
 			</liferay-portlet:renderURL>
-			<liferay-ui:search-container-column-text property="name" name="代码名称" href="${rowURL}"/>
+			<liferay-ui:search-container-column-text property="name" name="代码名称" href="${rowURL}"  />
 			<liferay-ui:search-container-column-text property="code" name="代码编码" href="${rowURL}"/>
 			<liferay-ui:search-container-column-text name="是否有效" value='${dictionary.isValid?"是":"否" }' href="${rowURL}"/>
 			<liferay-ui:search-container-column-text>
