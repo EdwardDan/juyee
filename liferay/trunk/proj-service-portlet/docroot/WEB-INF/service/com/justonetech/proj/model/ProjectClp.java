@@ -81,12 +81,12 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 		attributes.put("userName", getUserName());
 		attributes.put("createTime", getCreateTime());
 		attributes.put("modifiedTime", getModifiedTime());
-		attributes.put("bjbh", getBjbh());
+		attributes.put("constructionCode", getConstructionCode());
 		attributes.put("projNum", getProjNum());
 		attributes.put("sortNo", getSortNo());
 		attributes.put("projStatus", getProjStatus());
 		attributes.put("industryCategory", getIndustryCategory());
-		attributes.put("manageAttr", getManageAttr());
+		attributes.put("manageAttribute", getManageAttribute());
 		attributes.put("isMajor", getIsMajor());
 		attributes.put("projSource", getProjSource());
 		attributes.put("belongCounty", getBelongCounty());
@@ -96,7 +96,7 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 		attributes.put("projName", getProjName());
 		attributes.put("location", getLocation());
 		attributes.put("involveCounty", getInvolveCounty());
-		attributes.put("ghhx", getGhhx());
+		attributes.put("planRedLine", getPlanRedLine());
 		attributes.put("roadLevel", getRoadLevel());
 		attributes.put("roadTechLevel", getRoadTechLevel());
 		attributes.put("startNode", getStartNode());
@@ -104,13 +104,15 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 		attributes.put("planStartDate", getPlanStartDate());
 		attributes.put("planEndDate", getPlanEndDate());
 		attributes.put("introduction", getIntroduction());
-		attributes.put("planTotle", getPlanTotle());
-		attributes.put("gkpfTotle", getGkpfTotle());
-		attributes.put("gkpfPre", getGkpfPre());
-		attributes.put("gkpfJafy", getGkpfJafy());
-		attributes.put("csTotle", getCsTotle());
-		attributes.put("csPre", getCsPre());
-		attributes.put("csJafy", getCsJafy());
+		attributes.put("planTotleInvestment", getPlanTotleInvestment());
+		attributes.put("feasibilityTotleInvestment",
+			getFeasibilityTotleInvestment());
+		attributes.put("feasibilityPreCost", getFeasibilityPreCost());
+		attributes.put("feasibilityJiananCost", getFeasibilityJiananCost());
+		attributes.put("firstFoundedTotleInvestment",
+			getFirstFoundedTotleInvestment());
+		attributes.put("firstFoundedPreCost", getFirstFoundedPreCost());
+		attributes.put("firstFoundedJiananCost", getFirstFoundedJiananCost());
 
 		return attributes;
 	}
@@ -159,10 +161,10 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 			setModifiedTime(modifiedTime);
 		}
 
-		String bjbh = (String)attributes.get("bjbh");
+		String constructionCode = (String)attributes.get("constructionCode");
 
-		if (bjbh != null) {
-			setBjbh(bjbh);
+		if (constructionCode != null) {
+			setConstructionCode(constructionCode);
 		}
 
 		String projNum = (String)attributes.get("projNum");
@@ -189,10 +191,10 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 			setIndustryCategory(industryCategory);
 		}
 
-		Long manageAttr = (Long)attributes.get("manageAttr");
+		Long manageAttribute = (Long)attributes.get("manageAttribute");
 
-		if (manageAttr != null) {
-			setManageAttr(manageAttr);
+		if (manageAttribute != null) {
+			setManageAttribute(manageAttribute);
 		}
 
 		Boolean isMajor = (Boolean)attributes.get("isMajor");
@@ -249,10 +251,10 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 			setInvolveCounty(involveCounty);
 		}
 
-		Double ghhx = (Double)attributes.get("ghhx");
+		Double planRedLine = (Double)attributes.get("planRedLine");
 
-		if (ghhx != null) {
-			setGhhx(ghhx);
+		if (planRedLine != null) {
+			setPlanRedLine(planRedLine);
 		}
 
 		Long roadLevel = (Long)attributes.get("roadLevel");
@@ -297,46 +299,52 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 			setIntroduction(introduction);
 		}
 
-		Double planTotle = (Double)attributes.get("planTotle");
+		Double planTotleInvestment = (Double)attributes.get(
+				"planTotleInvestment");
 
-		if (planTotle != null) {
-			setPlanTotle(planTotle);
+		if (planTotleInvestment != null) {
+			setPlanTotleInvestment(planTotleInvestment);
 		}
 
-		Double gkpfTotle = (Double)attributes.get("gkpfTotle");
+		Double feasibilityTotleInvestment = (Double)attributes.get(
+				"feasibilityTotleInvestment");
 
-		if (gkpfTotle != null) {
-			setGkpfTotle(gkpfTotle);
+		if (feasibilityTotleInvestment != null) {
+			setFeasibilityTotleInvestment(feasibilityTotleInvestment);
 		}
 
-		Double gkpfPre = (Double)attributes.get("gkpfPre");
+		Double feasibilityPreCost = (Double)attributes.get("feasibilityPreCost");
 
-		if (gkpfPre != null) {
-			setGkpfPre(gkpfPre);
+		if (feasibilityPreCost != null) {
+			setFeasibilityPreCost(feasibilityPreCost);
 		}
 
-		Double gkpfJafy = (Double)attributes.get("gkpfJafy");
+		Double feasibilityJiananCost = (Double)attributes.get(
+				"feasibilityJiananCost");
 
-		if (gkpfJafy != null) {
-			setGkpfJafy(gkpfJafy);
+		if (feasibilityJiananCost != null) {
+			setFeasibilityJiananCost(feasibilityJiananCost);
 		}
 
-		Double csTotle = (Double)attributes.get("csTotle");
+		Double firstFoundedTotleInvestment = (Double)attributes.get(
+				"firstFoundedTotleInvestment");
 
-		if (csTotle != null) {
-			setCsTotle(csTotle);
+		if (firstFoundedTotleInvestment != null) {
+			setFirstFoundedTotleInvestment(firstFoundedTotleInvestment);
 		}
 
-		Double csPre = (Double)attributes.get("csPre");
+		Double firstFoundedPreCost = (Double)attributes.get(
+				"firstFoundedPreCost");
 
-		if (csPre != null) {
-			setCsPre(csPre);
+		if (firstFoundedPreCost != null) {
+			setFirstFoundedPreCost(firstFoundedPreCost);
 		}
 
-		Double csJafy = (Double)attributes.get("csJafy");
+		Double firstFoundedJiananCost = (Double)attributes.get(
+				"firstFoundedJiananCost");
 
-		if (csJafy != null) {
-			setCsJafy(csJafy);
+		if (firstFoundedJiananCost != null) {
+			setFirstFoundedJiananCost(firstFoundedJiananCost);
 		}
 	}
 
@@ -512,21 +520,22 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 	}
 
 	@Override
-	public String getBjbh() {
-		return _bjbh;
+	public String getConstructionCode() {
+		return _constructionCode;
 	}
 
 	@Override
-	public void setBjbh(String bjbh) {
-		_bjbh = bjbh;
+	public void setConstructionCode(String constructionCode) {
+		_constructionCode = constructionCode;
 
 		if (_projectRemoteModel != null) {
 			try {
 				Class<?> clazz = _projectRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setBjbh", String.class);
+				Method method = clazz.getMethod("setConstructionCode",
+						String.class);
 
-				method.invoke(_projectRemoteModel, bjbh);
+				method.invoke(_projectRemoteModel, constructionCode);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -628,21 +637,21 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 	}
 
 	@Override
-	public long getManageAttr() {
-		return _manageAttr;
+	public long getManageAttribute() {
+		return _manageAttribute;
 	}
 
 	@Override
-	public void setManageAttr(long manageAttr) {
-		_manageAttr = manageAttr;
+	public void setManageAttribute(long manageAttribute) {
+		_manageAttribute = manageAttribute;
 
 		if (_projectRemoteModel != null) {
 			try {
 				Class<?> clazz = _projectRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setManageAttr", long.class);
+				Method method = clazz.getMethod("setManageAttribute", long.class);
 
-				method.invoke(_projectRemoteModel, manageAttr);
+				method.invoke(_projectRemoteModel, manageAttribute);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -863,21 +872,21 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 	}
 
 	@Override
-	public double getGhhx() {
-		return _ghhx;
+	public double getPlanRedLine() {
+		return _planRedLine;
 	}
 
 	@Override
-	public void setGhhx(double ghhx) {
-		_ghhx = ghhx;
+	public void setPlanRedLine(double planRedLine) {
+		_planRedLine = planRedLine;
 
 		if (_projectRemoteModel != null) {
 			try {
 				Class<?> clazz = _projectRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setGhhx", double.class);
+				Method method = clazz.getMethod("setPlanRedLine", double.class);
 
-				method.invoke(_projectRemoteModel, ghhx);
+				method.invoke(_projectRemoteModel, planRedLine);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -1047,21 +1056,22 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 	}
 
 	@Override
-	public double getPlanTotle() {
-		return _planTotle;
+	public double getPlanTotleInvestment() {
+		return _planTotleInvestment;
 	}
 
 	@Override
-	public void setPlanTotle(double planTotle) {
-		_planTotle = planTotle;
+	public void setPlanTotleInvestment(double planTotleInvestment) {
+		_planTotleInvestment = planTotleInvestment;
 
 		if (_projectRemoteModel != null) {
 			try {
 				Class<?> clazz = _projectRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setPlanTotle", double.class);
+				Method method = clazz.getMethod("setPlanTotleInvestment",
+						double.class);
 
-				method.invoke(_projectRemoteModel, planTotle);
+				method.invoke(_projectRemoteModel, planTotleInvestment);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -1070,21 +1080,22 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 	}
 
 	@Override
-	public double getGkpfTotle() {
-		return _gkpfTotle;
+	public double getFeasibilityTotleInvestment() {
+		return _feasibilityTotleInvestment;
 	}
 
 	@Override
-	public void setGkpfTotle(double gkpfTotle) {
-		_gkpfTotle = gkpfTotle;
+	public void setFeasibilityTotleInvestment(double feasibilityTotleInvestment) {
+		_feasibilityTotleInvestment = feasibilityTotleInvestment;
 
 		if (_projectRemoteModel != null) {
 			try {
 				Class<?> clazz = _projectRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setGkpfTotle", double.class);
+				Method method = clazz.getMethod("setFeasibilityTotleInvestment",
+						double.class);
 
-				method.invoke(_projectRemoteModel, gkpfTotle);
+				method.invoke(_projectRemoteModel, feasibilityTotleInvestment);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -1093,21 +1104,22 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 	}
 
 	@Override
-	public double getGkpfPre() {
-		return _gkpfPre;
+	public double getFeasibilityPreCost() {
+		return _feasibilityPreCost;
 	}
 
 	@Override
-	public void setGkpfPre(double gkpfPre) {
-		_gkpfPre = gkpfPre;
+	public void setFeasibilityPreCost(double feasibilityPreCost) {
+		_feasibilityPreCost = feasibilityPreCost;
 
 		if (_projectRemoteModel != null) {
 			try {
 				Class<?> clazz = _projectRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setGkpfPre", double.class);
+				Method method = clazz.getMethod("setFeasibilityPreCost",
+						double.class);
 
-				method.invoke(_projectRemoteModel, gkpfPre);
+				method.invoke(_projectRemoteModel, feasibilityPreCost);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -1116,21 +1128,22 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 	}
 
 	@Override
-	public double getGkpfJafy() {
-		return _gkpfJafy;
+	public double getFeasibilityJiananCost() {
+		return _feasibilityJiananCost;
 	}
 
 	@Override
-	public void setGkpfJafy(double gkpfJafy) {
-		_gkpfJafy = gkpfJafy;
+	public void setFeasibilityJiananCost(double feasibilityJiananCost) {
+		_feasibilityJiananCost = feasibilityJiananCost;
 
 		if (_projectRemoteModel != null) {
 			try {
 				Class<?> clazz = _projectRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setGkpfJafy", double.class);
+				Method method = clazz.getMethod("setFeasibilityJiananCost",
+						double.class);
 
-				method.invoke(_projectRemoteModel, gkpfJafy);
+				method.invoke(_projectRemoteModel, feasibilityJiananCost);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -1139,21 +1152,23 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 	}
 
 	@Override
-	public double getCsTotle() {
-		return _csTotle;
+	public double getFirstFoundedTotleInvestment() {
+		return _firstFoundedTotleInvestment;
 	}
 
 	@Override
-	public void setCsTotle(double csTotle) {
-		_csTotle = csTotle;
+	public void setFirstFoundedTotleInvestment(
+		double firstFoundedTotleInvestment) {
+		_firstFoundedTotleInvestment = firstFoundedTotleInvestment;
 
 		if (_projectRemoteModel != null) {
 			try {
 				Class<?> clazz = _projectRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setCsTotle", double.class);
+				Method method = clazz.getMethod("setFirstFoundedTotleInvestment",
+						double.class);
 
-				method.invoke(_projectRemoteModel, csTotle);
+				method.invoke(_projectRemoteModel, firstFoundedTotleInvestment);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -1162,21 +1177,22 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 	}
 
 	@Override
-	public double getCsPre() {
-		return _csPre;
+	public double getFirstFoundedPreCost() {
+		return _firstFoundedPreCost;
 	}
 
 	@Override
-	public void setCsPre(double csPre) {
-		_csPre = csPre;
+	public void setFirstFoundedPreCost(double firstFoundedPreCost) {
+		_firstFoundedPreCost = firstFoundedPreCost;
 
 		if (_projectRemoteModel != null) {
 			try {
 				Class<?> clazz = _projectRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setCsPre", double.class);
+				Method method = clazz.getMethod("setFirstFoundedPreCost",
+						double.class);
 
-				method.invoke(_projectRemoteModel, csPre);
+				method.invoke(_projectRemoteModel, firstFoundedPreCost);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -1185,21 +1201,22 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 	}
 
 	@Override
-	public double getCsJafy() {
-		return _csJafy;
+	public double getFirstFoundedJiananCost() {
+		return _firstFoundedJiananCost;
 	}
 
 	@Override
-	public void setCsJafy(double csJafy) {
-		_csJafy = csJafy;
+	public void setFirstFoundedJiananCost(double firstFoundedJiananCost) {
+		_firstFoundedJiananCost = firstFoundedJiananCost;
 
 		if (_projectRemoteModel != null) {
 			try {
 				Class<?> clazz = _projectRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setCsJafy", double.class);
+				Method method = clazz.getMethod("setFirstFoundedJiananCost",
+						double.class);
 
-				method.invoke(_projectRemoteModel, csJafy);
+				method.invoke(_projectRemoteModel, firstFoundedJiananCost);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -1283,12 +1300,12 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 		clone.setUserName(getUserName());
 		clone.setCreateTime(getCreateTime());
 		clone.setModifiedTime(getModifiedTime());
-		clone.setBjbh(getBjbh());
+		clone.setConstructionCode(getConstructionCode());
 		clone.setProjNum(getProjNum());
 		clone.setSortNo(getSortNo());
 		clone.setProjStatus(getProjStatus());
 		clone.setIndustryCategory(getIndustryCategory());
-		clone.setManageAttr(getManageAttr());
+		clone.setManageAttribute(getManageAttribute());
 		clone.setIsMajor(getIsMajor());
 		clone.setProjSource(getProjSource());
 		clone.setBelongCounty(getBelongCounty());
@@ -1298,7 +1315,7 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 		clone.setProjName(getProjName());
 		clone.setLocation(getLocation());
 		clone.setInvolveCounty(getInvolveCounty());
-		clone.setGhhx(getGhhx());
+		clone.setPlanRedLine(getPlanRedLine());
 		clone.setRoadLevel(getRoadLevel());
 		clone.setRoadTechLevel(getRoadTechLevel());
 		clone.setStartNode(getStartNode());
@@ -1306,13 +1323,13 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 		clone.setPlanStartDate(getPlanStartDate());
 		clone.setPlanEndDate(getPlanEndDate());
 		clone.setIntroduction(getIntroduction());
-		clone.setPlanTotle(getPlanTotle());
-		clone.setGkpfTotle(getGkpfTotle());
-		clone.setGkpfPre(getGkpfPre());
-		clone.setGkpfJafy(getGkpfJafy());
-		clone.setCsTotle(getCsTotle());
-		clone.setCsPre(getCsPre());
-		clone.setCsJafy(getCsJafy());
+		clone.setPlanTotleInvestment(getPlanTotleInvestment());
+		clone.setFeasibilityTotleInvestment(getFeasibilityTotleInvestment());
+		clone.setFeasibilityPreCost(getFeasibilityPreCost());
+		clone.setFeasibilityJiananCost(getFeasibilityJiananCost());
+		clone.setFirstFoundedTotleInvestment(getFirstFoundedTotleInvestment());
+		clone.setFirstFoundedPreCost(getFirstFoundedPreCost());
+		clone.setFirstFoundedJiananCost(getFirstFoundedJiananCost());
 
 		return clone;
 	}
@@ -1401,8 +1418,8 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 		sb.append(getCreateTime());
 		sb.append(", modifiedTime=");
 		sb.append(getModifiedTime());
-		sb.append(", bjbh=");
-		sb.append(getBjbh());
+		sb.append(", constructionCode=");
+		sb.append(getConstructionCode());
 		sb.append(", projNum=");
 		sb.append(getProjNum());
 		sb.append(", sortNo=");
@@ -1411,8 +1428,8 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 		sb.append(getProjStatus());
 		sb.append(", industryCategory=");
 		sb.append(getIndustryCategory());
-		sb.append(", manageAttr=");
-		sb.append(getManageAttr());
+		sb.append(", manageAttribute=");
+		sb.append(getManageAttribute());
 		sb.append(", isMajor=");
 		sb.append(getIsMajor());
 		sb.append(", projSource=");
@@ -1431,8 +1448,8 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 		sb.append(getLocation());
 		sb.append(", involveCounty=");
 		sb.append(getInvolveCounty());
-		sb.append(", ghhx=");
-		sb.append(getGhhx());
+		sb.append(", planRedLine=");
+		sb.append(getPlanRedLine());
 		sb.append(", roadLevel=");
 		sb.append(getRoadLevel());
 		sb.append(", roadTechLevel=");
@@ -1447,20 +1464,20 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 		sb.append(getPlanEndDate());
 		sb.append(", introduction=");
 		sb.append(getIntroduction());
-		sb.append(", planTotle=");
-		sb.append(getPlanTotle());
-		sb.append(", gkpfTotle=");
-		sb.append(getGkpfTotle());
-		sb.append(", gkpfPre=");
-		sb.append(getGkpfPre());
-		sb.append(", gkpfJafy=");
-		sb.append(getGkpfJafy());
-		sb.append(", csTotle=");
-		sb.append(getCsTotle());
-		sb.append(", csPre=");
-		sb.append(getCsPre());
-		sb.append(", csJafy=");
-		sb.append(getCsJafy());
+		sb.append(", planTotleInvestment=");
+		sb.append(getPlanTotleInvestment());
+		sb.append(", feasibilityTotleInvestment=");
+		sb.append(getFeasibilityTotleInvestment());
+		sb.append(", feasibilityPreCost=");
+		sb.append(getFeasibilityPreCost());
+		sb.append(", feasibilityJiananCost=");
+		sb.append(getFeasibilityJiananCost());
+		sb.append(", firstFoundedTotleInvestment=");
+		sb.append(getFirstFoundedTotleInvestment());
+		sb.append(", firstFoundedPreCost=");
+		sb.append(getFirstFoundedPreCost());
+		sb.append(", firstFoundedJiananCost=");
+		sb.append(getFirstFoundedJiananCost());
 		sb.append("}");
 
 		return sb.toString();
@@ -1503,8 +1520,8 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 		sb.append(getModifiedTime());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>bjbh</column-name><column-value><![CDATA[");
-		sb.append(getBjbh());
+			"<column><column-name>constructionCode</column-name><column-value><![CDATA[");
+		sb.append(getConstructionCode());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>projNum</column-name><column-value><![CDATA[");
@@ -1523,8 +1540,8 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 		sb.append(getIndustryCategory());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>manageAttr</column-name><column-value><![CDATA[");
-		sb.append(getManageAttr());
+			"<column><column-name>manageAttribute</column-name><column-value><![CDATA[");
+		sb.append(getManageAttribute());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>isMajor</column-name><column-value><![CDATA[");
@@ -1563,8 +1580,8 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 		sb.append(getInvolveCounty());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>ghhx</column-name><column-value><![CDATA[");
-		sb.append(getGhhx());
+			"<column><column-name>planRedLine</column-name><column-value><![CDATA[");
+		sb.append(getPlanRedLine());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>roadLevel</column-name><column-value><![CDATA[");
@@ -1595,32 +1612,32 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 		sb.append(getIntroduction());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>planTotle</column-name><column-value><![CDATA[");
-		sb.append(getPlanTotle());
+			"<column><column-name>planTotleInvestment</column-name><column-value><![CDATA[");
+		sb.append(getPlanTotleInvestment());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>gkpfTotle</column-name><column-value><![CDATA[");
-		sb.append(getGkpfTotle());
+			"<column><column-name>feasibilityTotleInvestment</column-name><column-value><![CDATA[");
+		sb.append(getFeasibilityTotleInvestment());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>gkpfPre</column-name><column-value><![CDATA[");
-		sb.append(getGkpfPre());
+			"<column><column-name>feasibilityPreCost</column-name><column-value><![CDATA[");
+		sb.append(getFeasibilityPreCost());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>gkpfJafy</column-name><column-value><![CDATA[");
-		sb.append(getGkpfJafy());
+			"<column><column-name>feasibilityJiananCost</column-name><column-value><![CDATA[");
+		sb.append(getFeasibilityJiananCost());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>csTotle</column-name><column-value><![CDATA[");
-		sb.append(getCsTotle());
+			"<column><column-name>firstFoundedTotleInvestment</column-name><column-value><![CDATA[");
+		sb.append(getFirstFoundedTotleInvestment());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>csPre</column-name><column-value><![CDATA[");
-		sb.append(getCsPre());
+			"<column><column-name>firstFoundedPreCost</column-name><column-value><![CDATA[");
+		sb.append(getFirstFoundedPreCost());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>csJafy</column-name><column-value><![CDATA[");
-		sb.append(getCsJafy());
+			"<column><column-name>firstFoundedJiananCost</column-name><column-value><![CDATA[");
+		sb.append(getFirstFoundedJiananCost());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -1636,12 +1653,12 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 	private String _userName;
 	private Date _createTime;
 	private Date _modifiedTime;
-	private String _bjbh;
+	private String _constructionCode;
 	private String _projNum;
 	private int _sortNo;
 	private long _projStatus;
 	private long _industryCategory;
-	private long _manageAttr;
+	private long _manageAttribute;
 	private boolean _isMajor;
 	private long _projSource;
 	private long _belongCounty;
@@ -1651,7 +1668,7 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 	private String _projName;
 	private String _location;
 	private String _involveCounty;
-	private double _ghhx;
+	private double _planRedLine;
 	private long _roadLevel;
 	private long _roadTechLevel;
 	private Date _startNode;
@@ -1659,13 +1676,13 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 	private Date _planStartDate;
 	private Date _planEndDate;
 	private String _introduction;
-	private double _planTotle;
-	private double _gkpfTotle;
-	private double _gkpfPre;
-	private double _gkpfJafy;
-	private double _csTotle;
-	private double _csPre;
-	private double _csJafy;
+	private double _planTotleInvestment;
+	private double _feasibilityTotleInvestment;
+	private double _feasibilityPreCost;
+	private double _feasibilityJiananCost;
+	private double _firstFoundedTotleInvestment;
+	private double _firstFoundedPreCost;
+	private double _firstFoundedJiananCost;
 	private BaseModel<?> _projectRemoteModel;
 	private Class<?> _clpSerializerClass = com.justonetech.proj.service.ClpSerializer.class;
 }

@@ -68,12 +68,12 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 			{ "userName", Types.VARCHAR },
 			{ "createTime", Types.TIMESTAMP },
 			{ "modifiedTime", Types.TIMESTAMP },
-			{ "bjbh", Types.VARCHAR },
+			{ "constructionCode", Types.VARCHAR },
 			{ "projNum", Types.VARCHAR },
 			{ "sortNo", Types.INTEGER },
 			{ "projStatus", Types.BIGINT },
 			{ "industryCategory", Types.BIGINT },
-			{ "manageAttr", Types.BIGINT },
+			{ "manageAttribute", Types.BIGINT },
 			{ "isMajor", Types.BOOLEAN },
 			{ "projSource", Types.BIGINT },
 			{ "belongCounty", Types.BIGINT },
@@ -83,7 +83,7 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 			{ "projName", Types.VARCHAR },
 			{ "location", Types.VARCHAR },
 			{ "involveCounty", Types.VARCHAR },
-			{ "ghhx", Types.DOUBLE },
+			{ "planRedLine", Types.DOUBLE },
 			{ "roadLevel", Types.BIGINT },
 			{ "roadTechLevel", Types.BIGINT },
 			{ "startNode", Types.TIMESTAMP },
@@ -91,15 +91,15 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 			{ "planStartDate", Types.TIMESTAMP },
 			{ "planEndDate", Types.TIMESTAMP },
 			{ "introduction", Types.VARCHAR },
-			{ "planTotle", Types.DOUBLE },
-			{ "gkpfTotle", Types.DOUBLE },
-			{ "gkpfPre", Types.DOUBLE },
-			{ "gkpfJafy", Types.DOUBLE },
-			{ "csTotle", Types.DOUBLE },
-			{ "csPre", Types.DOUBLE },
-			{ "csJafy", Types.DOUBLE }
+			{ "planTotleInvestment", Types.DOUBLE },
+			{ "feasibilityTotleInvestment", Types.DOUBLE },
+			{ "feasibilityPreCost", Types.DOUBLE },
+			{ "feasibilityJiananCost", Types.DOUBLE },
+			{ "firstFoundedTotleInvestment", Types.DOUBLE },
+			{ "firstFoundedPreCost", Types.DOUBLE },
+			{ "firstFoundedJiananCost", Types.DOUBLE }
 		};
-	public static final String TABLE_SQL_CREATE = "create table proj_Project (projectId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createTime DATE null,modifiedTime DATE null,bjbh VARCHAR(75) null,projNum VARCHAR(75) null,sortNo INTEGER,projStatus LONG,industryCategory LONG,manageAttr LONG,isMajor BOOLEAN,projSource LONG,belongCounty LONG,projAttr LONG,startDate DATE null,endDate DATE null,projName VARCHAR(75) null,location VARCHAR(75) null,involveCounty VARCHAR(75) null,ghhx DOUBLE,roadLevel LONG,roadTechLevel LONG,startNode DATE null,endNode DATE null,planStartDate DATE null,planEndDate DATE null,introduction VARCHAR(75) null,planTotle DOUBLE,gkpfTotle DOUBLE,gkpfPre DOUBLE,gkpfJafy DOUBLE,csTotle DOUBLE,csPre DOUBLE,csJafy DOUBLE)";
+	public static final String TABLE_SQL_CREATE = "create table proj_Project (projectId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createTime DATE null,modifiedTime DATE null,constructionCode VARCHAR(75) null,projNum VARCHAR(75) null,sortNo INTEGER,projStatus LONG,industryCategory LONG,manageAttribute LONG,isMajor BOOLEAN,projSource LONG,belongCounty LONG,projAttr LONG,startDate DATE null,endDate DATE null,projName VARCHAR(75) null,location VARCHAR(75) null,involveCounty VARCHAR(75) null,planRedLine DOUBLE,roadLevel LONG,roadTechLevel LONG,startNode DATE null,endNode DATE null,planStartDate DATE null,planEndDate DATE null,introduction VARCHAR(75) null,planTotleInvestment DOUBLE,feasibilityTotleInvestment DOUBLE,feasibilityPreCost DOUBLE,feasibilityJiananCost DOUBLE,firstFoundedTotleInvestment DOUBLE,firstFoundedPreCost DOUBLE,firstFoundedJiananCost DOUBLE)";
 	public static final String TABLE_SQL_DROP = "drop table proj_Project";
 	public static final String ORDER_BY_JPQL = " ORDER BY project.sortNo ASC, project.projectId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY proj_Project.sortNo ASC, proj_Project.projectId ASC";
@@ -160,12 +160,12 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		attributes.put("userName", getUserName());
 		attributes.put("createTime", getCreateTime());
 		attributes.put("modifiedTime", getModifiedTime());
-		attributes.put("bjbh", getBjbh());
+		attributes.put("constructionCode", getConstructionCode());
 		attributes.put("projNum", getProjNum());
 		attributes.put("sortNo", getSortNo());
 		attributes.put("projStatus", getProjStatus());
 		attributes.put("industryCategory", getIndustryCategory());
-		attributes.put("manageAttr", getManageAttr());
+		attributes.put("manageAttribute", getManageAttribute());
 		attributes.put("isMajor", getIsMajor());
 		attributes.put("projSource", getProjSource());
 		attributes.put("belongCounty", getBelongCounty());
@@ -175,7 +175,7 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		attributes.put("projName", getProjName());
 		attributes.put("location", getLocation());
 		attributes.put("involveCounty", getInvolveCounty());
-		attributes.put("ghhx", getGhhx());
+		attributes.put("planRedLine", getPlanRedLine());
 		attributes.put("roadLevel", getRoadLevel());
 		attributes.put("roadTechLevel", getRoadTechLevel());
 		attributes.put("startNode", getStartNode());
@@ -183,13 +183,15 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		attributes.put("planStartDate", getPlanStartDate());
 		attributes.put("planEndDate", getPlanEndDate());
 		attributes.put("introduction", getIntroduction());
-		attributes.put("planTotle", getPlanTotle());
-		attributes.put("gkpfTotle", getGkpfTotle());
-		attributes.put("gkpfPre", getGkpfPre());
-		attributes.put("gkpfJafy", getGkpfJafy());
-		attributes.put("csTotle", getCsTotle());
-		attributes.put("csPre", getCsPre());
-		attributes.put("csJafy", getCsJafy());
+		attributes.put("planTotleInvestment", getPlanTotleInvestment());
+		attributes.put("feasibilityTotleInvestment",
+			getFeasibilityTotleInvestment());
+		attributes.put("feasibilityPreCost", getFeasibilityPreCost());
+		attributes.put("feasibilityJiananCost", getFeasibilityJiananCost());
+		attributes.put("firstFoundedTotleInvestment",
+			getFirstFoundedTotleInvestment());
+		attributes.put("firstFoundedPreCost", getFirstFoundedPreCost());
+		attributes.put("firstFoundedJiananCost", getFirstFoundedJiananCost());
 
 		return attributes;
 	}
@@ -238,10 +240,10 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 			setModifiedTime(modifiedTime);
 		}
 
-		String bjbh = (String)attributes.get("bjbh");
+		String constructionCode = (String)attributes.get("constructionCode");
 
-		if (bjbh != null) {
-			setBjbh(bjbh);
+		if (constructionCode != null) {
+			setConstructionCode(constructionCode);
 		}
 
 		String projNum = (String)attributes.get("projNum");
@@ -268,10 +270,10 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 			setIndustryCategory(industryCategory);
 		}
 
-		Long manageAttr = (Long)attributes.get("manageAttr");
+		Long manageAttribute = (Long)attributes.get("manageAttribute");
 
-		if (manageAttr != null) {
-			setManageAttr(manageAttr);
+		if (manageAttribute != null) {
+			setManageAttribute(manageAttribute);
 		}
 
 		Boolean isMajor = (Boolean)attributes.get("isMajor");
@@ -328,10 +330,10 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 			setInvolveCounty(involveCounty);
 		}
 
-		Double ghhx = (Double)attributes.get("ghhx");
+		Double planRedLine = (Double)attributes.get("planRedLine");
 
-		if (ghhx != null) {
-			setGhhx(ghhx);
+		if (planRedLine != null) {
+			setPlanRedLine(planRedLine);
 		}
 
 		Long roadLevel = (Long)attributes.get("roadLevel");
@@ -376,46 +378,52 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 			setIntroduction(introduction);
 		}
 
-		Double planTotle = (Double)attributes.get("planTotle");
+		Double planTotleInvestment = (Double)attributes.get(
+				"planTotleInvestment");
 
-		if (planTotle != null) {
-			setPlanTotle(planTotle);
+		if (planTotleInvestment != null) {
+			setPlanTotleInvestment(planTotleInvestment);
 		}
 
-		Double gkpfTotle = (Double)attributes.get("gkpfTotle");
+		Double feasibilityTotleInvestment = (Double)attributes.get(
+				"feasibilityTotleInvestment");
 
-		if (gkpfTotle != null) {
-			setGkpfTotle(gkpfTotle);
+		if (feasibilityTotleInvestment != null) {
+			setFeasibilityTotleInvestment(feasibilityTotleInvestment);
 		}
 
-		Double gkpfPre = (Double)attributes.get("gkpfPre");
+		Double feasibilityPreCost = (Double)attributes.get("feasibilityPreCost");
 
-		if (gkpfPre != null) {
-			setGkpfPre(gkpfPre);
+		if (feasibilityPreCost != null) {
+			setFeasibilityPreCost(feasibilityPreCost);
 		}
 
-		Double gkpfJafy = (Double)attributes.get("gkpfJafy");
+		Double feasibilityJiananCost = (Double)attributes.get(
+				"feasibilityJiananCost");
 
-		if (gkpfJafy != null) {
-			setGkpfJafy(gkpfJafy);
+		if (feasibilityJiananCost != null) {
+			setFeasibilityJiananCost(feasibilityJiananCost);
 		}
 
-		Double csTotle = (Double)attributes.get("csTotle");
+		Double firstFoundedTotleInvestment = (Double)attributes.get(
+				"firstFoundedTotleInvestment");
 
-		if (csTotle != null) {
-			setCsTotle(csTotle);
+		if (firstFoundedTotleInvestment != null) {
+			setFirstFoundedTotleInvestment(firstFoundedTotleInvestment);
 		}
 
-		Double csPre = (Double)attributes.get("csPre");
+		Double firstFoundedPreCost = (Double)attributes.get(
+				"firstFoundedPreCost");
 
-		if (csPre != null) {
-			setCsPre(csPre);
+		if (firstFoundedPreCost != null) {
+			setFirstFoundedPreCost(firstFoundedPreCost);
 		}
 
-		Double csJafy = (Double)attributes.get("csJafy");
+		Double firstFoundedJiananCost = (Double)attributes.get(
+				"firstFoundedJiananCost");
 
-		if (csJafy != null) {
-			setCsJafy(csJafy);
+		if (firstFoundedJiananCost != null) {
+			setFirstFoundedJiananCost(firstFoundedJiananCost);
 		}
 	}
 
@@ -505,18 +513,18 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 	}
 
 	@Override
-	public String getBjbh() {
-		if (_bjbh == null) {
+	public String getConstructionCode() {
+		if (_constructionCode == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _bjbh;
+			return _constructionCode;
 		}
 	}
 
 	@Override
-	public void setBjbh(String bjbh) {
-		_bjbh = bjbh;
+	public void setConstructionCode(String constructionCode) {
+		_constructionCode = constructionCode;
 	}
 
 	@Override
@@ -565,13 +573,13 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 	}
 
 	@Override
-	public long getManageAttr() {
-		return _manageAttr;
+	public long getManageAttribute() {
+		return _manageAttribute;
 	}
 
 	@Override
-	public void setManageAttr(long manageAttr) {
-		_manageAttr = manageAttr;
+	public void setManageAttribute(long manageAttribute) {
+		_manageAttribute = manageAttribute;
 	}
 
 	@Override
@@ -685,13 +693,13 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 	}
 
 	@Override
-	public double getGhhx() {
-		return _ghhx;
+	public double getPlanRedLine() {
+		return _planRedLine;
 	}
 
 	@Override
-	public void setGhhx(double ghhx) {
-		_ghhx = ghhx;
+	public void setPlanRedLine(double planRedLine) {
+		_planRedLine = planRedLine;
 	}
 
 	@Override
@@ -770,73 +778,74 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 	}
 
 	@Override
-	public double getPlanTotle() {
-		return _planTotle;
+	public double getPlanTotleInvestment() {
+		return _planTotleInvestment;
 	}
 
 	@Override
-	public void setPlanTotle(double planTotle) {
-		_planTotle = planTotle;
+	public void setPlanTotleInvestment(double planTotleInvestment) {
+		_planTotleInvestment = planTotleInvestment;
 	}
 
 	@Override
-	public double getGkpfTotle() {
-		return _gkpfTotle;
+	public double getFeasibilityTotleInvestment() {
+		return _feasibilityTotleInvestment;
 	}
 
 	@Override
-	public void setGkpfTotle(double gkpfTotle) {
-		_gkpfTotle = gkpfTotle;
+	public void setFeasibilityTotleInvestment(double feasibilityTotleInvestment) {
+		_feasibilityTotleInvestment = feasibilityTotleInvestment;
 	}
 
 	@Override
-	public double getGkpfPre() {
-		return _gkpfPre;
+	public double getFeasibilityPreCost() {
+		return _feasibilityPreCost;
 	}
 
 	@Override
-	public void setGkpfPre(double gkpfPre) {
-		_gkpfPre = gkpfPre;
+	public void setFeasibilityPreCost(double feasibilityPreCost) {
+		_feasibilityPreCost = feasibilityPreCost;
 	}
 
 	@Override
-	public double getGkpfJafy() {
-		return _gkpfJafy;
+	public double getFeasibilityJiananCost() {
+		return _feasibilityJiananCost;
 	}
 
 	@Override
-	public void setGkpfJafy(double gkpfJafy) {
-		_gkpfJafy = gkpfJafy;
+	public void setFeasibilityJiananCost(double feasibilityJiananCost) {
+		_feasibilityJiananCost = feasibilityJiananCost;
 	}
 
 	@Override
-	public double getCsTotle() {
-		return _csTotle;
+	public double getFirstFoundedTotleInvestment() {
+		return _firstFoundedTotleInvestment;
 	}
 
 	@Override
-	public void setCsTotle(double csTotle) {
-		_csTotle = csTotle;
+	public void setFirstFoundedTotleInvestment(
+		double firstFoundedTotleInvestment) {
+		_firstFoundedTotleInvestment = firstFoundedTotleInvestment;
 	}
 
 	@Override
-	public double getCsPre() {
-		return _csPre;
+	public double getFirstFoundedPreCost() {
+		return _firstFoundedPreCost;
 	}
 
 	@Override
-	public void setCsPre(double csPre) {
-		_csPre = csPre;
+	public void setFirstFoundedPreCost(double firstFoundedPreCost) {
+		_firstFoundedPreCost = firstFoundedPreCost;
 	}
 
 	@Override
-	public double getCsJafy() {
-		return _csJafy;
+	public double getFirstFoundedJiananCost() {
+		return _firstFoundedJiananCost;
 	}
 
 	@Override
-	public void setCsJafy(double csJafy) {
-		_csJafy = csJafy;
+	public void setFirstFoundedJiananCost(double firstFoundedJiananCost) {
+		_firstFoundedJiananCost = firstFoundedJiananCost;
 	}
 
 	@Override
@@ -873,12 +882,12 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		projectImpl.setUserName(getUserName());
 		projectImpl.setCreateTime(getCreateTime());
 		projectImpl.setModifiedTime(getModifiedTime());
-		projectImpl.setBjbh(getBjbh());
+		projectImpl.setConstructionCode(getConstructionCode());
 		projectImpl.setProjNum(getProjNum());
 		projectImpl.setSortNo(getSortNo());
 		projectImpl.setProjStatus(getProjStatus());
 		projectImpl.setIndustryCategory(getIndustryCategory());
-		projectImpl.setManageAttr(getManageAttr());
+		projectImpl.setManageAttribute(getManageAttribute());
 		projectImpl.setIsMajor(getIsMajor());
 		projectImpl.setProjSource(getProjSource());
 		projectImpl.setBelongCounty(getBelongCounty());
@@ -888,7 +897,7 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		projectImpl.setProjName(getProjName());
 		projectImpl.setLocation(getLocation());
 		projectImpl.setInvolveCounty(getInvolveCounty());
-		projectImpl.setGhhx(getGhhx());
+		projectImpl.setPlanRedLine(getPlanRedLine());
 		projectImpl.setRoadLevel(getRoadLevel());
 		projectImpl.setRoadTechLevel(getRoadTechLevel());
 		projectImpl.setStartNode(getStartNode());
@@ -896,13 +905,13 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		projectImpl.setPlanStartDate(getPlanStartDate());
 		projectImpl.setPlanEndDate(getPlanEndDate());
 		projectImpl.setIntroduction(getIntroduction());
-		projectImpl.setPlanTotle(getPlanTotle());
-		projectImpl.setGkpfTotle(getGkpfTotle());
-		projectImpl.setGkpfPre(getGkpfPre());
-		projectImpl.setGkpfJafy(getGkpfJafy());
-		projectImpl.setCsTotle(getCsTotle());
-		projectImpl.setCsPre(getCsPre());
-		projectImpl.setCsJafy(getCsJafy());
+		projectImpl.setPlanTotleInvestment(getPlanTotleInvestment());
+		projectImpl.setFeasibilityTotleInvestment(getFeasibilityTotleInvestment());
+		projectImpl.setFeasibilityPreCost(getFeasibilityPreCost());
+		projectImpl.setFeasibilityJiananCost(getFeasibilityJiananCost());
+		projectImpl.setFirstFoundedTotleInvestment(getFirstFoundedTotleInvestment());
+		projectImpl.setFirstFoundedPreCost(getFirstFoundedPreCost());
+		projectImpl.setFirstFoundedJiananCost(getFirstFoundedJiananCost());
 
 		projectImpl.resetOriginalValues();
 
@@ -1013,12 +1022,12 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 			projectCacheModel.modifiedTime = Long.MIN_VALUE;
 		}
 
-		projectCacheModel.bjbh = getBjbh();
+		projectCacheModel.constructionCode = getConstructionCode();
 
-		String bjbh = projectCacheModel.bjbh;
+		String constructionCode = projectCacheModel.constructionCode;
 
-		if ((bjbh != null) && (bjbh.length() == 0)) {
-			projectCacheModel.bjbh = null;
+		if ((constructionCode != null) && (constructionCode.length() == 0)) {
+			projectCacheModel.constructionCode = null;
 		}
 
 		projectCacheModel.projNum = getProjNum();
@@ -1035,7 +1044,7 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 
 		projectCacheModel.industryCategory = getIndustryCategory();
 
-		projectCacheModel.manageAttr = getManageAttr();
+		projectCacheModel.manageAttribute = getManageAttribute();
 
 		projectCacheModel.isMajor = getIsMajor();
 
@@ -1087,7 +1096,7 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 			projectCacheModel.involveCounty = null;
 		}
 
-		projectCacheModel.ghhx = getGhhx();
+		projectCacheModel.planRedLine = getPlanRedLine();
 
 		projectCacheModel.roadLevel = getRoadLevel();
 
@@ -1137,19 +1146,19 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 			projectCacheModel.introduction = null;
 		}
 
-		projectCacheModel.planTotle = getPlanTotle();
+		projectCacheModel.planTotleInvestment = getPlanTotleInvestment();
 
-		projectCacheModel.gkpfTotle = getGkpfTotle();
+		projectCacheModel.feasibilityTotleInvestment = getFeasibilityTotleInvestment();
 
-		projectCacheModel.gkpfPre = getGkpfPre();
+		projectCacheModel.feasibilityPreCost = getFeasibilityPreCost();
 
-		projectCacheModel.gkpfJafy = getGkpfJafy();
+		projectCacheModel.feasibilityJiananCost = getFeasibilityJiananCost();
 
-		projectCacheModel.csTotle = getCsTotle();
+		projectCacheModel.firstFoundedTotleInvestment = getFirstFoundedTotleInvestment();
 
-		projectCacheModel.csPre = getCsPre();
+		projectCacheModel.firstFoundedPreCost = getFirstFoundedPreCost();
 
-		projectCacheModel.csJafy = getCsJafy();
+		projectCacheModel.firstFoundedJiananCost = getFirstFoundedJiananCost();
 
 		return projectCacheModel;
 	}
@@ -1172,8 +1181,8 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		sb.append(getCreateTime());
 		sb.append(", modifiedTime=");
 		sb.append(getModifiedTime());
-		sb.append(", bjbh=");
-		sb.append(getBjbh());
+		sb.append(", constructionCode=");
+		sb.append(getConstructionCode());
 		sb.append(", projNum=");
 		sb.append(getProjNum());
 		sb.append(", sortNo=");
@@ -1182,8 +1191,8 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		sb.append(getProjStatus());
 		sb.append(", industryCategory=");
 		sb.append(getIndustryCategory());
-		sb.append(", manageAttr=");
-		sb.append(getManageAttr());
+		sb.append(", manageAttribute=");
+		sb.append(getManageAttribute());
 		sb.append(", isMajor=");
 		sb.append(getIsMajor());
 		sb.append(", projSource=");
@@ -1202,8 +1211,8 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		sb.append(getLocation());
 		sb.append(", involveCounty=");
 		sb.append(getInvolveCounty());
-		sb.append(", ghhx=");
-		sb.append(getGhhx());
+		sb.append(", planRedLine=");
+		sb.append(getPlanRedLine());
 		sb.append(", roadLevel=");
 		sb.append(getRoadLevel());
 		sb.append(", roadTechLevel=");
@@ -1218,20 +1227,20 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		sb.append(getPlanEndDate());
 		sb.append(", introduction=");
 		sb.append(getIntroduction());
-		sb.append(", planTotle=");
-		sb.append(getPlanTotle());
-		sb.append(", gkpfTotle=");
-		sb.append(getGkpfTotle());
-		sb.append(", gkpfPre=");
-		sb.append(getGkpfPre());
-		sb.append(", gkpfJafy=");
-		sb.append(getGkpfJafy());
-		sb.append(", csTotle=");
-		sb.append(getCsTotle());
-		sb.append(", csPre=");
-		sb.append(getCsPre());
-		sb.append(", csJafy=");
-		sb.append(getCsJafy());
+		sb.append(", planTotleInvestment=");
+		sb.append(getPlanTotleInvestment());
+		sb.append(", feasibilityTotleInvestment=");
+		sb.append(getFeasibilityTotleInvestment());
+		sb.append(", feasibilityPreCost=");
+		sb.append(getFeasibilityPreCost());
+		sb.append(", feasibilityJiananCost=");
+		sb.append(getFeasibilityJiananCost());
+		sb.append(", firstFoundedTotleInvestment=");
+		sb.append(getFirstFoundedTotleInvestment());
+		sb.append(", firstFoundedPreCost=");
+		sb.append(getFirstFoundedPreCost());
+		sb.append(", firstFoundedJiananCost=");
+		sb.append(getFirstFoundedJiananCost());
 		sb.append("}");
 
 		return sb.toString();
@@ -1274,8 +1283,8 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		sb.append(getModifiedTime());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>bjbh</column-name><column-value><![CDATA[");
-		sb.append(getBjbh());
+			"<column><column-name>constructionCode</column-name><column-value><![CDATA[");
+		sb.append(getConstructionCode());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>projNum</column-name><column-value><![CDATA[");
@@ -1294,8 +1303,8 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		sb.append(getIndustryCategory());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>manageAttr</column-name><column-value><![CDATA[");
-		sb.append(getManageAttr());
+			"<column><column-name>manageAttribute</column-name><column-value><![CDATA[");
+		sb.append(getManageAttribute());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>isMajor</column-name><column-value><![CDATA[");
@@ -1334,8 +1343,8 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		sb.append(getInvolveCounty());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>ghhx</column-name><column-value><![CDATA[");
-		sb.append(getGhhx());
+			"<column><column-name>planRedLine</column-name><column-value><![CDATA[");
+		sb.append(getPlanRedLine());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>roadLevel</column-name><column-value><![CDATA[");
@@ -1366,32 +1375,32 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		sb.append(getIntroduction());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>planTotle</column-name><column-value><![CDATA[");
-		sb.append(getPlanTotle());
+			"<column><column-name>planTotleInvestment</column-name><column-value><![CDATA[");
+		sb.append(getPlanTotleInvestment());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>gkpfTotle</column-name><column-value><![CDATA[");
-		sb.append(getGkpfTotle());
+			"<column><column-name>feasibilityTotleInvestment</column-name><column-value><![CDATA[");
+		sb.append(getFeasibilityTotleInvestment());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>gkpfPre</column-name><column-value><![CDATA[");
-		sb.append(getGkpfPre());
+			"<column><column-name>feasibilityPreCost</column-name><column-value><![CDATA[");
+		sb.append(getFeasibilityPreCost());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>gkpfJafy</column-name><column-value><![CDATA[");
-		sb.append(getGkpfJafy());
+			"<column><column-name>feasibilityJiananCost</column-name><column-value><![CDATA[");
+		sb.append(getFeasibilityJiananCost());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>csTotle</column-name><column-value><![CDATA[");
-		sb.append(getCsTotle());
+			"<column><column-name>firstFoundedTotleInvestment</column-name><column-value><![CDATA[");
+		sb.append(getFirstFoundedTotleInvestment());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>csPre</column-name><column-value><![CDATA[");
-		sb.append(getCsPre());
+			"<column><column-name>firstFoundedPreCost</column-name><column-value><![CDATA[");
+		sb.append(getFirstFoundedPreCost());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>csJafy</column-name><column-value><![CDATA[");
-		sb.append(getCsJafy());
+			"<column><column-name>firstFoundedJiananCost</column-name><column-value><![CDATA[");
+		sb.append(getFirstFoundedJiananCost());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -1411,12 +1420,12 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 	private String _userName;
 	private Date _createTime;
 	private Date _modifiedTime;
-	private String _bjbh;
+	private String _constructionCode;
 	private String _projNum;
 	private int _sortNo;
 	private long _projStatus;
 	private long _industryCategory;
-	private long _manageAttr;
+	private long _manageAttribute;
 	private boolean _isMajor;
 	private long _projSource;
 	private long _belongCounty;
@@ -1426,7 +1435,7 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 	private String _projName;
 	private String _location;
 	private String _involveCounty;
-	private double _ghhx;
+	private double _planRedLine;
 	private long _roadLevel;
 	private long _roadTechLevel;
 	private Date _startNode;
@@ -1434,12 +1443,12 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 	private Date _planStartDate;
 	private Date _planEndDate;
 	private String _introduction;
-	private double _planTotle;
-	private double _gkpfTotle;
-	private double _gkpfPre;
-	private double _gkpfJafy;
-	private double _csTotle;
-	private double _csPre;
-	private double _csJafy;
+	private double _planTotleInvestment;
+	private double _feasibilityTotleInvestment;
+	private double _feasibilityPreCost;
+	private double _feasibilityJiananCost;
+	private double _firstFoundedTotleInvestment;
+	private double _firstFoundedPreCost;
+	private double _firstFoundedJiananCost;
 	private Project _escapedModel;
 }

@@ -75,12 +75,12 @@
 			<basic name="modifiedTime">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
-			<basic name="bjbh" />
+			<basic name="constructionCode" />
 			<basic name="projNum" />
 			<basic name="sortNo" />
 			<basic name="projStatus" />
 			<basic name="industryCategory" />
-			<basic name="manageAttr" />
+			<basic name="manageAttribute" />
 			<basic name="isMajor" />
 			<basic name="projSource" />
 			<basic name="belongCounty" />
@@ -94,7 +94,7 @@
 			<basic name="projName" />
 			<basic name="location" />
 			<basic name="involveCounty" />
-			<basic name="ghhx" />
+			<basic name="planRedLine" />
 			<basic name="roadLevel" />
 			<basic name="roadTechLevel" />
 			<basic name="startNode">
@@ -110,13 +110,13 @@
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<basic name="introduction" />
-			<basic name="planTotle" />
-			<basic name="gkpfTotle" />
-			<basic name="gkpfPre" />
-			<basic name="gkpfJafy" />
-			<basic name="csTotle" />
-			<basic name="csPre" />
-			<basic name="csJafy" />
+			<basic name="planTotleInvestment" />
+			<basic name="feasibilityTotleInvestment" />
+			<basic name="feasibilityPreCost" />
+			<basic name="feasibilityJiananCost" />
+			<basic name="firstFoundedTotleInvestment" />
+			<basic name="firstFoundedPreCost" />
+			<basic name="firstFoundedJiananCost" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />

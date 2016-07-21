@@ -45,12 +45,12 @@
 		<field name="userName" type="String" />
 		<field name="createTime" type="Date" />
 		<field name="modifiedTime" type="Date" />
-		<field name="bjbh" type="String" />
+		<field name="constructionCode" type="String" />
 		<field name="projNum" type="String" />
 		<field name="sortNo" type="int" />
 		<field name="projStatus" type="long" />
 		<field name="industryCategory" type="long" />
-		<field name="manageAttr" type="long" />
+		<field name="manageAttribute" type="long" />
 		<field name="isMajor" type="boolean" />
 		<field name="projSource" type="long" />
 		<field name="belongCounty" type="long" />
@@ -60,7 +60,7 @@
 		<field name="projName" type="String" />
 		<field name="location" type="String" />
 		<field name="involveCounty" type="String" />
-		<field name="ghhx" type="double" />
+		<field name="planRedLine" type="double" />
 		<field name="roadLevel" type="long" />
 		<field name="roadTechLevel" type="long" />
 		<field name="startNode" type="Date" />
@@ -68,12 +68,12 @@
 		<field name="planStartDate" type="Date" />
 		<field name="planEndDate" type="Date" />
 		<field name="introduction" type="String" />
-		<field name="planTotle" type="double" />
-		<field name="gkpfTotle" type="double" />
-		<field name="gkpfPre" type="double" />
-		<field name="gkpfJafy" type="double" />
-		<field name="csTotle" type="double" />
-		<field name="csPre" type="double" />
-		<field name="csJafy" type="double" />
+		<field name="planTotleInvestment" type="double" />
+		<field name="feasibilityTotleInvestment" type="double" />
+		<field name="feasibilityPreCost" type="double" />
+		<field name="feasibilityJiananCost" type="double" />
+		<field name="firstFoundedTotleInvestment" type="double" />
+		<field name="firstFoundedPreCost" type="double" />
+		<field name="firstFoundedJiananCost" type="double" />
 	</model>
 </model-hints>

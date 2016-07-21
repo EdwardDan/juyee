@@ -53,8 +53,8 @@ public class ProjectCacheModel implements CacheModel<Project>, Externalizable {
 		sb.append(createTime);
 		sb.append(", modifiedTime=");
 		sb.append(modifiedTime);
-		sb.append(", bjbh=");
-		sb.append(bjbh);
+		sb.append(", constructionCode=");
+		sb.append(constructionCode);
 		sb.append(", projNum=");
 		sb.append(projNum);
 		sb.append(", sortNo=");
@@ -63,8 +63,8 @@ public class ProjectCacheModel implements CacheModel<Project>, Externalizable {
 		sb.append(projStatus);
 		sb.append(", industryCategory=");
 		sb.append(industryCategory);
-		sb.append(", manageAttr=");
-		sb.append(manageAttr);
+		sb.append(", manageAttribute=");
+		sb.append(manageAttribute);
 		sb.append(", isMajor=");
 		sb.append(isMajor);
 		sb.append(", projSource=");
@@ -83,8 +83,8 @@ public class ProjectCacheModel implements CacheModel<Project>, Externalizable {
 		sb.append(location);
 		sb.append(", involveCounty=");
 		sb.append(involveCounty);
-		sb.append(", ghhx=");
-		sb.append(ghhx);
+		sb.append(", planRedLine=");
+		sb.append(planRedLine);
 		sb.append(", roadLevel=");
 		sb.append(roadLevel);
 		sb.append(", roadTechLevel=");
@@ -99,20 +99,20 @@ public class ProjectCacheModel implements CacheModel<Project>, Externalizable {
 		sb.append(planEndDate);
 		sb.append(", introduction=");
 		sb.append(introduction);
-		sb.append(", planTotle=");
-		sb.append(planTotle);
-		sb.append(", gkpfTotle=");
-		sb.append(gkpfTotle);
-		sb.append(", gkpfPre=");
-		sb.append(gkpfPre);
-		sb.append(", gkpfJafy=");
-		sb.append(gkpfJafy);
-		sb.append(", csTotle=");
-		sb.append(csTotle);
-		sb.append(", csPre=");
-		sb.append(csPre);
-		sb.append(", csJafy=");
-		sb.append(csJafy);
+		sb.append(", planTotleInvestment=");
+		sb.append(planTotleInvestment);
+		sb.append(", feasibilityTotleInvestment=");
+		sb.append(feasibilityTotleInvestment);
+		sb.append(", feasibilityPreCost=");
+		sb.append(feasibilityPreCost);
+		sb.append(", feasibilityJiananCost=");
+		sb.append(feasibilityJiananCost);
+		sb.append(", firstFoundedTotleInvestment=");
+		sb.append(firstFoundedTotleInvestment);
+		sb.append(", firstFoundedPreCost=");
+		sb.append(firstFoundedPreCost);
+		sb.append(", firstFoundedJiananCost=");
+		sb.append(firstFoundedJiananCost);
 		sb.append("}");
 
 		return sb.toString();
@@ -148,11 +148,11 @@ public class ProjectCacheModel implements CacheModel<Project>, Externalizable {
 			projectImpl.setModifiedTime(new Date(modifiedTime));
 		}
 
-		if (bjbh == null) {
-			projectImpl.setBjbh(StringPool.BLANK);
+		if (constructionCode == null) {
+			projectImpl.setConstructionCode(StringPool.BLANK);
 		}
 		else {
-			projectImpl.setBjbh(bjbh);
+			projectImpl.setConstructionCode(constructionCode);
 		}
 
 		if (projNum == null) {
@@ -165,7 +165,7 @@ public class ProjectCacheModel implements CacheModel<Project>, Externalizable {
 		projectImpl.setSortNo(sortNo);
 		projectImpl.setProjStatus(projStatus);
 		projectImpl.setIndustryCategory(industryCategory);
-		projectImpl.setManageAttr(manageAttr);
+		projectImpl.setManageAttribute(manageAttribute);
 		projectImpl.setIsMajor(isMajor);
 		projectImpl.setProjSource(projSource);
 		projectImpl.setBelongCounty(belongCounty);
@@ -206,7 +206,7 @@ public class ProjectCacheModel implements CacheModel<Project>, Externalizable {
 			projectImpl.setInvolveCounty(involveCounty);
 		}
 
-		projectImpl.setGhhx(ghhx);
+		projectImpl.setPlanRedLine(planRedLine);
 		projectImpl.setRoadLevel(roadLevel);
 		projectImpl.setRoadTechLevel(roadTechLevel);
 
@@ -245,13 +245,13 @@ public class ProjectCacheModel implements CacheModel<Project>, Externalizable {
 			projectImpl.setIntroduction(introduction);
 		}
 
-		projectImpl.setPlanTotle(planTotle);
-		projectImpl.setGkpfTotle(gkpfTotle);
-		projectImpl.setGkpfPre(gkpfPre);
-		projectImpl.setGkpfJafy(gkpfJafy);
-		projectImpl.setCsTotle(csTotle);
-		projectImpl.setCsPre(csPre);
-		projectImpl.setCsJafy(csJafy);
+		projectImpl.setPlanTotleInvestment(planTotleInvestment);
+		projectImpl.setFeasibilityTotleInvestment(feasibilityTotleInvestment);
+		projectImpl.setFeasibilityPreCost(feasibilityPreCost);
+		projectImpl.setFeasibilityJiananCost(feasibilityJiananCost);
+		projectImpl.setFirstFoundedTotleInvestment(firstFoundedTotleInvestment);
+		projectImpl.setFirstFoundedPreCost(firstFoundedPreCost);
+		projectImpl.setFirstFoundedJiananCost(firstFoundedJiananCost);
 
 		projectImpl.resetOriginalValues();
 
@@ -267,12 +267,12 @@ public class ProjectCacheModel implements CacheModel<Project>, Externalizable {
 		userName = objectInput.readUTF();
 		createTime = objectInput.readLong();
 		modifiedTime = objectInput.readLong();
-		bjbh = objectInput.readUTF();
+		constructionCode = objectInput.readUTF();
 		projNum = objectInput.readUTF();
 		sortNo = objectInput.readInt();
 		projStatus = objectInput.readLong();
 		industryCategory = objectInput.readLong();
-		manageAttr = objectInput.readLong();
+		manageAttribute = objectInput.readLong();
 		isMajor = objectInput.readBoolean();
 		projSource = objectInput.readLong();
 		belongCounty = objectInput.readLong();
@@ -282,7 +282,7 @@ public class ProjectCacheModel implements CacheModel<Project>, Externalizable {
 		projName = objectInput.readUTF();
 		location = objectInput.readUTF();
 		involveCounty = objectInput.readUTF();
-		ghhx = objectInput.readDouble();
+		planRedLine = objectInput.readDouble();
 		roadLevel = objectInput.readLong();
 		roadTechLevel = objectInput.readLong();
 		startNode = objectInput.readLong();
@@ -290,13 +290,13 @@ public class ProjectCacheModel implements CacheModel<Project>, Externalizable {
 		planStartDate = objectInput.readLong();
 		planEndDate = objectInput.readLong();
 		introduction = objectInput.readUTF();
-		planTotle = objectInput.readDouble();
-		gkpfTotle = objectInput.readDouble();
-		gkpfPre = objectInput.readDouble();
-		gkpfJafy = objectInput.readDouble();
-		csTotle = objectInput.readDouble();
-		csPre = objectInput.readDouble();
-		csJafy = objectInput.readDouble();
+		planTotleInvestment = objectInput.readDouble();
+		feasibilityTotleInvestment = objectInput.readDouble();
+		feasibilityPreCost = objectInput.readDouble();
+		feasibilityJiananCost = objectInput.readDouble();
+		firstFoundedTotleInvestment = objectInput.readDouble();
+		firstFoundedPreCost = objectInput.readDouble();
+		firstFoundedJiananCost = objectInput.readDouble();
 	}
 
 	@Override
@@ -317,11 +317,11 @@ public class ProjectCacheModel implements CacheModel<Project>, Externalizable {
 		objectOutput.writeLong(createTime);
 		objectOutput.writeLong(modifiedTime);
 
-		if (bjbh == null) {
+		if (constructionCode == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(bjbh);
+			objectOutput.writeUTF(constructionCode);
 		}
 
 		if (projNum == null) {
@@ -334,7 +334,7 @@ public class ProjectCacheModel implements CacheModel<Project>, Externalizable {
 		objectOutput.writeInt(sortNo);
 		objectOutput.writeLong(projStatus);
 		objectOutput.writeLong(industryCategory);
-		objectOutput.writeLong(manageAttr);
+		objectOutput.writeLong(manageAttribute);
 		objectOutput.writeBoolean(isMajor);
 		objectOutput.writeLong(projSource);
 		objectOutput.writeLong(belongCounty);
@@ -363,7 +363,7 @@ public class ProjectCacheModel implements CacheModel<Project>, Externalizable {
 			objectOutput.writeUTF(involveCounty);
 		}
 
-		objectOutput.writeDouble(ghhx);
+		objectOutput.writeDouble(planRedLine);
 		objectOutput.writeLong(roadLevel);
 		objectOutput.writeLong(roadTechLevel);
 		objectOutput.writeLong(startNode);
@@ -378,13 +378,13 @@ public class ProjectCacheModel implements CacheModel<Project>, Externalizable {
 			objectOutput.writeUTF(introduction);
 		}
 
-		objectOutput.writeDouble(planTotle);
-		objectOutput.writeDouble(gkpfTotle);
-		objectOutput.writeDouble(gkpfPre);
-		objectOutput.writeDouble(gkpfJafy);
-		objectOutput.writeDouble(csTotle);
-		objectOutput.writeDouble(csPre);
-		objectOutput.writeDouble(csJafy);
+		objectOutput.writeDouble(planTotleInvestment);
+		objectOutput.writeDouble(feasibilityTotleInvestment);
+		objectOutput.writeDouble(feasibilityPreCost);
+		objectOutput.writeDouble(feasibilityJiananCost);
+		objectOutput.writeDouble(firstFoundedTotleInvestment);
+		objectOutput.writeDouble(firstFoundedPreCost);
+		objectOutput.writeDouble(firstFoundedJiananCost);
 	}
 
 	public long projectId;
@@ -394,12 +394,12 @@ public class ProjectCacheModel implements CacheModel<Project>, Externalizable {
 	public String userName;
 	public long createTime;
 	public long modifiedTime;
-	public String bjbh;
+	public String constructionCode;
 	public String projNum;
 	public int sortNo;
 	public long projStatus;
 	public long industryCategory;
-	public long manageAttr;
+	public long manageAttribute;
 	public boolean isMajor;
 	public long projSource;
 	public long belongCounty;
@@ -409,7 +409,7 @@ public class ProjectCacheModel implements CacheModel<Project>, Externalizable {
 	public String projName;
 	public String location;
 	public String involveCounty;
-	public double ghhx;
+	public double planRedLine;
 	public long roadLevel;
 	public long roadTechLevel;
 	public long startNode;
@@ -417,11 +417,11 @@ public class ProjectCacheModel implements CacheModel<Project>, Externalizable {
 	public long planStartDate;
 	public long planEndDate;
 	public String introduction;
-	public double planTotle;
-	public double gkpfTotle;
-	public double gkpfPre;
-	public double gkpfJafy;
-	public double csTotle;
-	public double csPre;
-	public double csJafy;
+	public double planTotleInvestment;
+	public double feasibilityTotleInvestment;
+	public double feasibilityPreCost;
+	public double feasibilityJiananCost;
+	public double firstFoundedTotleInvestment;
+	public double firstFoundedPreCost;
+	public double firstFoundedJiananCost;
 }

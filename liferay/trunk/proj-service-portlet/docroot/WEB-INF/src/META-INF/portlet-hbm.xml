@@ -58,12 +58,12 @@
 		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="createTime" type="org.hibernate.type.TimestampType" />
 		<property name="modifiedTime" type="org.hibernate.type.TimestampType" />
-		<property name="bjbh" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="constructionCode" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="projNum" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="sortNo" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="projStatus" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="industryCategory" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="manageAttr" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="manageAttribute" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="isMajor" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="projSource" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="belongCounty" type="com.liferay.portal.dao.orm.hibernate.LongType" />
@@ -73,7 +73,7 @@
 		<property name="projName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="location" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="involveCounty" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="ghhx" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="planRedLine" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
 		<property name="roadLevel" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="roadTechLevel" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="startNode" type="org.hibernate.type.TimestampType" />
@@ -81,12 +81,12 @@
 		<property name="planStartDate" type="org.hibernate.type.TimestampType" />
 		<property name="planEndDate" type="org.hibernate.type.TimestampType" />
 		<property name="introduction" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="planTotle" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
-		<property name="gkpfTotle" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
-		<property name="gkpfPre" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
-		<property name="gkpfJafy" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
-		<property name="csTotle" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
-		<property name="csPre" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
-		<property name="csJafy" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="planTotleInvestment" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="feasibilityTotleInvestment" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="feasibilityPreCost" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="feasibilityJiananCost" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="firstFoundedTotleInvestment" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="firstFoundedPreCost" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="firstFoundedJiananCost" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
 	</class>
 </hibernate-mapping>

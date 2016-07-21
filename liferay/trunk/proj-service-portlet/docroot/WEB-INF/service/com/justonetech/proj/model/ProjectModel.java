@@ -175,19 +175,19 @@ public interface ProjectModel extends BaseModel<Project> {
 	public void setModifiedTime(Date modifiedTime);
 
 	/**
-	 * Returns the bjbh of this project.
+	 * Returns the construction code of this project.
 	 *
-	 * @return the bjbh of this project
+	 * @return the construction code of this project
 	 */
 	@AutoEscape
-	public String getBjbh();
+	public String getConstructionCode();
 
 	/**
-	 * Sets the bjbh of this project.
+	 * Sets the construction code of this project.
 	 *
-	 * @param bjbh the bjbh of this project
+	 * @param constructionCode the construction code of this project
 	 */
-	public void setBjbh(String bjbh);
+	public void setConstructionCode(String constructionCode);
 
 	/**
 	 * Returns the proj num of this project.
@@ -247,18 +247,18 @@ public interface ProjectModel extends BaseModel<Project> {
 	public void setIndustryCategory(long industryCategory);
 
 	/**
-	 * Returns the manage attr of this project.
+	 * Returns the manage attribute of this project.
 	 *
-	 * @return the manage attr of this project
+	 * @return the manage attribute of this project
 	 */
-	public long getManageAttr();
+	public long getManageAttribute();
 
 	/**
-	 * Sets the manage attr of this project.
+	 * Sets the manage attribute of this project.
 	 *
-	 * @param manageAttr the manage attr of this project
+	 * @param manageAttribute the manage attribute of this project
 	 */
-	public void setManageAttr(long manageAttr);
+	public void setManageAttribute(long manageAttribute);
 
 	/**
 	 * Returns the is major of this project.
@@ -397,18 +397,18 @@ public interface ProjectModel extends BaseModel<Project> {
 	public void setInvolveCounty(String involveCounty);
 
 	/**
-	 * Returns the ghhx of this project.
+	 * Returns the plan red line of this project.
 	 *
-	 * @return the ghhx of this project
+	 * @return the plan red line of this project
 	 */
-	public double getGhhx();
+	public double getPlanRedLine();
 
 	/**
-	 * Sets the ghhx of this project.
+	 * Sets the plan red line of this project.
 	 *
-	 * @param ghhx the ghhx of this project
+	 * @param planRedLine the plan red line of this project
 	 */
-	public void setGhhx(double ghhx);
+	public void setPlanRedLine(double planRedLine);
 
 	/**
 	 * Returns the road level of this project.
@@ -510,102 +510,103 @@ public interface ProjectModel extends BaseModel<Project> {
 	public void setIntroduction(String introduction);
 
 	/**
-	 * Returns the plan totle of this project.
+	 * Returns the plan totle investment of this project.
 	 *
-	 * @return the plan totle of this project
+	 * @return the plan totle investment of this project
 	 */
-	public double getPlanTotle();
+	public double getPlanTotleInvestment();
 
 	/**
-	 * Sets the plan totle of this project.
+	 * Sets the plan totle investment of this project.
 	 *
-	 * @param planTotle the plan totle of this project
+	 * @param planTotleInvestment the plan totle investment of this project
 	 */
-	public void setPlanTotle(double planTotle);
+	public void setPlanTotleInvestment(double planTotleInvestment);
 
 	/**
-	 * Returns the gkpf totle of this project.
+	 * Returns the feasibility totle investment of this project.
 	 *
-	 * @return the gkpf totle of this project
+	 * @return the feasibility totle investment of this project
 	 */
-	public double getGkpfTotle();
+	public double getFeasibilityTotleInvestment();
 
 	/**
-	 * Sets the gkpf totle of this project.
+	 * Sets the feasibility totle investment of this project.
 	 *
-	 * @param gkpfTotle the gkpf totle of this project
+	 * @param feasibilityTotleInvestment the feasibility totle investment of this project
 	 */
-	public void setGkpfTotle(double gkpfTotle);
+	public void setFeasibilityTotleInvestment(double feasibilityTotleInvestment);
 
 	/**
-	 * Returns the gkpf pre of this project.
+	 * Returns the feasibility pre cost of this project.
 	 *
-	 * @return the gkpf pre of this project
+	 * @return the feasibility pre cost of this project
 	 */
-	public double getGkpfPre();
+	public double getFeasibilityPreCost();
 
 	/**
-	 * Sets the gkpf pre of this project.
+	 * Sets the feasibility pre cost of this project.
 	 *
-	 * @param gkpfPre the gkpf pre of this project
+	 * @param feasibilityPreCost the feasibility pre cost of this project
 	 */
-	public void setGkpfPre(double gkpfPre);
+	public void setFeasibilityPreCost(double feasibilityPreCost);
 
 	/**
-	 * Returns the gkpf jafy of this project.
+	 * Returns the feasibility jianan cost of this project.
 	 *
-	 * @return the gkpf jafy of this project
+	 * @return the feasibility jianan cost of this project
 	 */
-	public double getGkpfJafy();
+	public double getFeasibilityJiananCost();
 
 	/**
-	 * Sets the gkpf jafy of this project.
+	 * Sets the feasibility jianan cost of this project.
 	 *
-	 * @param gkpfJafy the gkpf jafy of this project
+	 * @param feasibilityJiananCost the feasibility jianan cost of this project
 	 */
-	public void setGkpfJafy(double gkpfJafy);
+	public void setFeasibilityJiananCost(double feasibilityJiananCost);
 
 	/**
-	 * Returns the cs totle of this project.
+	 * Returns the first founded totle investment of this project.
 	 *
-	 * @return the cs totle of this project
+	 * @return the first founded totle investment of this project
 	 */
-	public double getCsTotle();
+	public double getFirstFoundedTotleInvestment();
 
 	/**
-	 * Sets the cs totle of this project.
+	 * Sets the first founded totle investment of this project.
 	 *
-	 * @param csTotle the cs totle of this project
+	 * @param firstFoundedTotleInvestment the first founded totle investment of this project
 	 */
-	public void setCsTotle(double csTotle);
+	public void setFirstFoundedTotleInvestment(
+		double firstFoundedTotleInvestment);
 
 	/**
-	 * Returns the cs pre of this project.
+	 * Returns the first founded pre cost of this project.
 	 *
-	 * @return the cs pre of this project
+	 * @return the first founded pre cost of this project
 	 */
-	public double getCsPre();
+	public double getFirstFoundedPreCost();
 
 	/**
-	 * Sets the cs pre of this project.
+	 * Sets the first founded pre cost of this project.
 	 *
-	 * @param csPre the cs pre of this project
+	 * @param firstFoundedPreCost the first founded pre cost of this project
 	 */
-	public void setCsPre(double csPre);
+	public void setFirstFoundedPreCost(double firstFoundedPreCost);
 
 	/**
-	 * Returns the cs jafy of this project.
+	 * Returns the first founded jianan cost of this project.
 	 *
-	 * @return the cs jafy of this project
+	 * @return the first founded jianan cost of this project
 	 */
-	public double getCsJafy();
+	public double getFirstFoundedJiananCost();
 
 	/**
-	 * Sets the cs jafy of this project.
+	 * Sets the first founded jianan cost of this project.
 	 *
-	 * @param csJafy the cs jafy of this project
+	 * @param firstFoundedJiananCost the first founded jianan cost of this project
 	 */
-	public void setCsJafy(double csJafy);
+	public void setFirstFoundedJiananCost(double firstFoundedJiananCost);
 
 	@Override
 	public boolean isNew();

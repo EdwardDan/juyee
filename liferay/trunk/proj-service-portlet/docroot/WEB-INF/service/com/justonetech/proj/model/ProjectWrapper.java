@@ -56,12 +56,12 @@ public class ProjectWrapper implements Project, ModelWrapper<Project> {
 		attributes.put("userName", getUserName());
 		attributes.put("createTime", getCreateTime());
 		attributes.put("modifiedTime", getModifiedTime());
-		attributes.put("bjbh", getBjbh());
+		attributes.put("constructionCode", getConstructionCode());
 		attributes.put("projNum", getProjNum());
 		attributes.put("sortNo", getSortNo());
 		attributes.put("projStatus", getProjStatus());
 		attributes.put("industryCategory", getIndustryCategory());
-		attributes.put("manageAttr", getManageAttr());
+		attributes.put("manageAttribute", getManageAttribute());
 		attributes.put("isMajor", getIsMajor());
 		attributes.put("projSource", getProjSource());
 		attributes.put("belongCounty", getBelongCounty());
@@ -71,7 +71,7 @@ public class ProjectWrapper implements Project, ModelWrapper<Project> {
 		attributes.put("projName", getProjName());
 		attributes.put("location", getLocation());
 		attributes.put("involveCounty", getInvolveCounty());
-		attributes.put("ghhx", getGhhx());
+		attributes.put("planRedLine", getPlanRedLine());
 		attributes.put("roadLevel", getRoadLevel());
 		attributes.put("roadTechLevel", getRoadTechLevel());
 		attributes.put("startNode", getStartNode());
@@ -79,13 +79,15 @@ public class ProjectWrapper implements Project, ModelWrapper<Project> {
 		attributes.put("planStartDate", getPlanStartDate());
 		attributes.put("planEndDate", getPlanEndDate());
 		attributes.put("introduction", getIntroduction());
-		attributes.put("planTotle", getPlanTotle());
-		attributes.put("gkpfTotle", getGkpfTotle());
-		attributes.put("gkpfPre", getGkpfPre());
-		attributes.put("gkpfJafy", getGkpfJafy());
-		attributes.put("csTotle", getCsTotle());
-		attributes.put("csPre", getCsPre());
-		attributes.put("csJafy", getCsJafy());
+		attributes.put("planTotleInvestment", getPlanTotleInvestment());
+		attributes.put("feasibilityTotleInvestment",
+			getFeasibilityTotleInvestment());
+		attributes.put("feasibilityPreCost", getFeasibilityPreCost());
+		attributes.put("feasibilityJiananCost", getFeasibilityJiananCost());
+		attributes.put("firstFoundedTotleInvestment",
+			getFirstFoundedTotleInvestment());
+		attributes.put("firstFoundedPreCost", getFirstFoundedPreCost());
+		attributes.put("firstFoundedJiananCost", getFirstFoundedJiananCost());
 
 		return attributes;
 	}
@@ -134,10 +136,10 @@ public class ProjectWrapper implements Project, ModelWrapper<Project> {
 			setModifiedTime(modifiedTime);
 		}
 
-		String bjbh = (String)attributes.get("bjbh");
+		String constructionCode = (String)attributes.get("constructionCode");
 
-		if (bjbh != null) {
-			setBjbh(bjbh);
+		if (constructionCode != null) {
+			setConstructionCode(constructionCode);
 		}
 
 		String projNum = (String)attributes.get("projNum");
@@ -164,10 +166,10 @@ public class ProjectWrapper implements Project, ModelWrapper<Project> {
 			setIndustryCategory(industryCategory);
 		}
 
-		Long manageAttr = (Long)attributes.get("manageAttr");
+		Long manageAttribute = (Long)attributes.get("manageAttribute");
 
-		if (manageAttr != null) {
-			setManageAttr(manageAttr);
+		if (manageAttribute != null) {
+			setManageAttribute(manageAttribute);
 		}
 
 		Boolean isMajor = (Boolean)attributes.get("isMajor");
@@ -224,10 +226,10 @@ public class ProjectWrapper implements Project, ModelWrapper<Project> {
 			setInvolveCounty(involveCounty);
 		}
 
-		Double ghhx = (Double)attributes.get("ghhx");
+		Double planRedLine = (Double)attributes.get("planRedLine");
 
-		if (ghhx != null) {
-			setGhhx(ghhx);
+		if (planRedLine != null) {
+			setPlanRedLine(planRedLine);
 		}
 
 		Long roadLevel = (Long)attributes.get("roadLevel");
@@ -272,46 +274,52 @@ public class ProjectWrapper implements Project, ModelWrapper<Project> {
 			setIntroduction(introduction);
 		}
 
-		Double planTotle = (Double)attributes.get("planTotle");
+		Double planTotleInvestment = (Double)attributes.get(
+				"planTotleInvestment");
 
-		if (planTotle != null) {
-			setPlanTotle(planTotle);
+		if (planTotleInvestment != null) {
+			setPlanTotleInvestment(planTotleInvestment);
 		}
 
-		Double gkpfTotle = (Double)attributes.get("gkpfTotle");
+		Double feasibilityTotleInvestment = (Double)attributes.get(
+				"feasibilityTotleInvestment");
 
-		if (gkpfTotle != null) {
-			setGkpfTotle(gkpfTotle);
+		if (feasibilityTotleInvestment != null) {
+			setFeasibilityTotleInvestment(feasibilityTotleInvestment);
 		}
 
-		Double gkpfPre = (Double)attributes.get("gkpfPre");
+		Double feasibilityPreCost = (Double)attributes.get("feasibilityPreCost");
 
-		if (gkpfPre != null) {
-			setGkpfPre(gkpfPre);
+		if (feasibilityPreCost != null) {
+			setFeasibilityPreCost(feasibilityPreCost);
 		}
 
-		Double gkpfJafy = (Double)attributes.get("gkpfJafy");
+		Double feasibilityJiananCost = (Double)attributes.get(
+				"feasibilityJiananCost");
 
-		if (gkpfJafy != null) {
-			setGkpfJafy(gkpfJafy);
+		if (feasibilityJiananCost != null) {
+			setFeasibilityJiananCost(feasibilityJiananCost);
 		}
 
-		Double csTotle = (Double)attributes.get("csTotle");
+		Double firstFoundedTotleInvestment = (Double)attributes.get(
+				"firstFoundedTotleInvestment");
 
-		if (csTotle != null) {
-			setCsTotle(csTotle);
+		if (firstFoundedTotleInvestment != null) {
+			setFirstFoundedTotleInvestment(firstFoundedTotleInvestment);
 		}
 
-		Double csPre = (Double)attributes.get("csPre");
+		Double firstFoundedPreCost = (Double)attributes.get(
+				"firstFoundedPreCost");
 
-		if (csPre != null) {
-			setCsPre(csPre);
+		if (firstFoundedPreCost != null) {
+			setFirstFoundedPreCost(firstFoundedPreCost);
 		}
 
-		Double csJafy = (Double)attributes.get("csJafy");
+		Double firstFoundedJiananCost = (Double)attributes.get(
+				"firstFoundedJiananCost");
 
-		if (csJafy != null) {
-			setCsJafy(csJafy);
+		if (firstFoundedJiananCost != null) {
+			setFirstFoundedJiananCost(firstFoundedJiananCost);
 		}
 	}
 
@@ -498,23 +506,23 @@ public class ProjectWrapper implements Project, ModelWrapper<Project> {
 	}
 
 	/**
-	* Returns the bjbh of this project.
+	* Returns the construction code of this project.
 	*
-	* @return the bjbh of this project
+	* @return the construction code of this project
 	*/
 	@Override
-	public java.lang.String getBjbh() {
-		return _project.getBjbh();
+	public java.lang.String getConstructionCode() {
+		return _project.getConstructionCode();
 	}
 
 	/**
-	* Sets the bjbh of this project.
+	* Sets the construction code of this project.
 	*
-	* @param bjbh the bjbh of this project
+	* @param constructionCode the construction code of this project
 	*/
 	@Override
-	public void setBjbh(java.lang.String bjbh) {
-		_project.setBjbh(bjbh);
+	public void setConstructionCode(java.lang.String constructionCode) {
+		_project.setConstructionCode(constructionCode);
 	}
 
 	/**
@@ -598,23 +606,23 @@ public class ProjectWrapper implements Project, ModelWrapper<Project> {
 	}
 
 	/**
-	* Returns the manage attr of this project.
+	* Returns the manage attribute of this project.
 	*
-	* @return the manage attr of this project
+	* @return the manage attribute of this project
 	*/
 	@Override
-	public long getManageAttr() {
-		return _project.getManageAttr();
+	public long getManageAttribute() {
+		return _project.getManageAttribute();
 	}
 
 	/**
-	* Sets the manage attr of this project.
+	* Sets the manage attribute of this project.
 	*
-	* @param manageAttr the manage attr of this project
+	* @param manageAttribute the manage attribute of this project
 	*/
 	@Override
-	public void setManageAttr(long manageAttr) {
-		_project.setManageAttr(manageAttr);
+	public void setManageAttribute(long manageAttribute) {
+		_project.setManageAttribute(manageAttribute);
 	}
 
 	/**
@@ -808,23 +816,23 @@ public class ProjectWrapper implements Project, ModelWrapper<Project> {
 	}
 
 	/**
-	* Returns the ghhx of this project.
+	* Returns the plan red line of this project.
 	*
-	* @return the ghhx of this project
+	* @return the plan red line of this project
 	*/
 	@Override
-	public double getGhhx() {
-		return _project.getGhhx();
+	public double getPlanRedLine() {
+		return _project.getPlanRedLine();
 	}
 
 	/**
-	* Sets the ghhx of this project.
+	* Sets the plan red line of this project.
 	*
-	* @param ghhx the ghhx of this project
+	* @param planRedLine the plan red line of this project
 	*/
 	@Override
-	public void setGhhx(double ghhx) {
-		_project.setGhhx(ghhx);
+	public void setPlanRedLine(double planRedLine) {
+		_project.setPlanRedLine(planRedLine);
 	}
 
 	/**
@@ -968,143 +976,144 @@ public class ProjectWrapper implements Project, ModelWrapper<Project> {
 	}
 
 	/**
-	* Returns the plan totle of this project.
+	* Returns the plan totle investment of this project.
 	*
-	* @return the plan totle of this project
+	* @return the plan totle investment of this project
 	*/
 	@Override
-	public double getPlanTotle() {
-		return _project.getPlanTotle();
+	public double getPlanTotleInvestment() {
+		return _project.getPlanTotleInvestment();
 	}
 
 	/**
-	* Sets the plan totle of this project.
+	* Sets the plan totle investment of this project.
 	*
-	* @param planTotle the plan totle of this project
+	* @param planTotleInvestment the plan totle investment of this project
 	*/
 	@Override
-	public void setPlanTotle(double planTotle) {
-		_project.setPlanTotle(planTotle);
+	public void setPlanTotleInvestment(double planTotleInvestment) {
+		_project.setPlanTotleInvestment(planTotleInvestment);
 	}
 
 	/**
-	* Returns the gkpf totle of this project.
+	* Returns the feasibility totle investment of this project.
 	*
-	* @return the gkpf totle of this project
+	* @return the feasibility totle investment of this project
 	*/
 	@Override
-	public double getGkpfTotle() {
-		return _project.getGkpfTotle();
+	public double getFeasibilityTotleInvestment() {
+		return _project.getFeasibilityTotleInvestment();
 	}
 
 	/**
-	* Sets the gkpf totle of this project.
+	* Sets the feasibility totle investment of this project.
 	*
-	* @param gkpfTotle the gkpf totle of this project
+	* @param feasibilityTotleInvestment the feasibility totle investment of this project
 	*/
 	@Override
-	public void setGkpfTotle(double gkpfTotle) {
-		_project.setGkpfTotle(gkpfTotle);
+	public void setFeasibilityTotleInvestment(double feasibilityTotleInvestment) {
+		_project.setFeasibilityTotleInvestment(feasibilityTotleInvestment);
 	}
 
 	/**
-	* Returns the gkpf pre of this project.
+	* Returns the feasibility pre cost of this project.
 	*
-	* @return the gkpf pre of this project
+	* @return the feasibility pre cost of this project
 	*/
 	@Override
-	public double getGkpfPre() {
-		return _project.getGkpfPre();
+	public double getFeasibilityPreCost() {
+		return _project.getFeasibilityPreCost();
 	}
 
 	/**
-	* Sets the gkpf pre of this project.
+	* Sets the feasibility pre cost of this project.
 	*
-	* @param gkpfPre the gkpf pre of this project
+	* @param feasibilityPreCost the feasibility pre cost of this project
 	*/
 	@Override
-	public void setGkpfPre(double gkpfPre) {
-		_project.setGkpfPre(gkpfPre);
+	public void setFeasibilityPreCost(double feasibilityPreCost) {
+		_project.setFeasibilityPreCost(feasibilityPreCost);
 	}
 
 	/**
-	* Returns the gkpf jafy of this project.
+	* Returns the feasibility jianan cost of this project.
 	*
-	* @return the gkpf jafy of this project
+	* @return the feasibility jianan cost of this project
 	*/
 	@Override
-	public double getGkpfJafy() {
-		return _project.getGkpfJafy();
+	public double getFeasibilityJiananCost() {
+		return _project.getFeasibilityJiananCost();
 	}
 
 	/**
-	* Sets the gkpf jafy of this project.
+	* Sets the feasibility jianan cost of this project.
 	*
-	* @param gkpfJafy the gkpf jafy of this project
+	* @param feasibilityJiananCost the feasibility jianan cost of this project
 	*/
 	@Override
-	public void setGkpfJafy(double gkpfJafy) {
-		_project.setGkpfJafy(gkpfJafy);
+	public void setFeasibilityJiananCost(double feasibilityJiananCost) {
+		_project.setFeasibilityJiananCost(feasibilityJiananCost);
 	}
 
 	/**
-	* Returns the cs totle of this project.
+	* Returns the first founded totle investment of this project.
 	*
-	* @return the cs totle of this project
+	* @return the first founded totle investment of this project
 	*/
 	@Override
-	public double getCsTotle() {
-		return _project.getCsTotle();
+	public double getFirstFoundedTotleInvestment() {
+		return _project.getFirstFoundedTotleInvestment();
 	}
 
 	/**
-	* Sets the cs totle of this project.
+	* Sets the first founded totle investment of this project.
 	*
-	* @param csTotle the cs totle of this project
+	* @param firstFoundedTotleInvestment the first founded totle investment of this project
 	*/
 	@Override
-	public void setCsTotle(double csTotle) {
-		_project.setCsTotle(csTotle);
+	public void setFirstFoundedTotleInvestment(
+		double firstFoundedTotleInvestment) {
+		_project.setFirstFoundedTotleInvestment(firstFoundedTotleInvestment);
 	}
 
 	/**
-	* Returns the cs pre of this project.
+	* Returns the first founded pre cost of this project.
 	*
-	* @return the cs pre of this project
+	* @return the first founded pre cost of this project
 	*/
 	@Override
-	public double getCsPre() {
-		return _project.getCsPre();
+	public double getFirstFoundedPreCost() {
+		return _project.getFirstFoundedPreCost();
 	}
 
 	/**
-	* Sets the cs pre of this project.
+	* Sets the first founded pre cost of this project.
 	*
-	* @param csPre the cs pre of this project
+	* @param firstFoundedPreCost the first founded pre cost of this project
 	*/
 	@Override
-	public void setCsPre(double csPre) {
-		_project.setCsPre(csPre);
+	public void setFirstFoundedPreCost(double firstFoundedPreCost) {
+		_project.setFirstFoundedPreCost(firstFoundedPreCost);
 	}
 
 	/**
-	* Returns the cs jafy of this project.
+	* Returns the first founded jianan cost of this project.
 	*
-	* @return the cs jafy of this project
+	* @return the first founded jianan cost of this project
 	*/
 	@Override
-	public double getCsJafy() {
-		return _project.getCsJafy();
+	public double getFirstFoundedJiananCost() {
+		return _project.getFirstFoundedJiananCost();
 	}
 
 	/**
-	* Sets the cs jafy of this project.
+	* Sets the first founded jianan cost of this project.
 	*
-	* @param csJafy the cs jafy of this project
+	* @param firstFoundedJiananCost the first founded jianan cost of this project
 	*/
 	@Override
-	public void setCsJafy(double csJafy) {
-		_project.setCsJafy(csJafy);
+	public void setFirstFoundedJiananCost(double firstFoundedJiananCost) {
+		_project.setFirstFoundedJiananCost(firstFoundedJiananCost);
 	}
 
 	@Override

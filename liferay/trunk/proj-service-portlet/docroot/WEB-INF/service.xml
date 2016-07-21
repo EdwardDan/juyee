@@ -25,12 +25,12 @@
 
 		<!-- Other fields -->
 
-		<column name="bjbh" type="String" /><!--报建编号 -->
+		<column name="constructionCode" type="String" /><!--报建编号 -->
 		<column name="projNum" type="String" /><!--项目编号 -->
 		<column name="sortNo" type="int" /><!--项目排序号 -->
 		<column name="projStatus" type="long" /><!--项目状态 -->
 		<column name="industryCategory" type="long" /><!--业态类别 -->
-		<column name="manageAttr" type="long" /><!--管理属性 -->
+		<column name="manageAttribute" type="long" /><!--管理属性 -->
 		<column name="isMajor" type="boolean" /><!--是否重大 -->
 		<column name="projSource" type="long" /><!--项目来源 -->
 		<column name="belongCounty" type="long" /><!--所属区县 -->
@@ -40,7 +40,7 @@
 		<column name="projName" type="String" /><!--项目名称 -->
 		<column name="location" type="String" /><!--起讫地点 -->
 		<column name="involveCounty" type="String" /><!--涉及区（县） -->
-		<column name="ghhx" type="double" /><!--规划红线（宽度m） -->
+		<column name="planRedLine" type="double" /><!--规划红线（宽度m） -->
 		<column name="roadLevel" type="long" /><!--道路等级 -->
 		<column name="roadTechLevel" type="long" /><!--道路技术等级 -->
 		<column name="startNode" type="Date" /><!--目标开工节点 -->
@@ -48,13 +48,13 @@
 		<column name="planStartDate" type="Date" /><!--目标计划开工时间 -->
 		<column name="planEndDate" type="Date" /><!--目标计划完工时间 -->
 		<column name="introduction" type="String" /><!--工程范围和主要内容 -->
-		<column name="planTotle" type="double" /><!--计划总投资 -->
-		<column name="gkpfTotle" type="double" /><!--工可批复总投资 -->
-		<column name="gkpfPre" type="double" /><!--工可批复前期费用 -->
-		<column name="gkpfJafy" type="double" /><!--工可批复建安费用 -->
-		<column name="csTotle" type="double" /><!--初设批复总投资 -->
-		<column name="csPre" type="double" /><!--初设批复前期费用 -->
-		<column name="csJafy" type="double" /><!--初设批复建安费用 -->
+		<column name="planTotleInvestment" type="double" /><!--计划总投资 -->
+		<column name="feasibilityTotleInvestment" type="double" /><!--工可批复总投资 -->
+		<column name="feasibilityPreCost" type="double" /><!--工可批复前期费用 -->
+		<column name="feasibilityJiananCost" type="double" /><!--工可批复建安费用 -->
+		<column name="firstFoundedTotleInvestment" type="double" /><!--初设批复总投资 -->
+		<column name="firstFoundedPreCost" type="double" /><!--初设批复前期费用 -->
+		<column name="firstFoundedJiananCost" type="double" /><!--初设批复建安费用 -->
 
 		<!-- Order -->
 

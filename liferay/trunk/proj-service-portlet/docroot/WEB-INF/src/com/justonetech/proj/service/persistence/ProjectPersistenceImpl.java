@@ -323,12 +323,12 @@ public class ProjectPersistenceImpl extends BasePersistenceImpl<Project>
 		projectImpl.setUserName(project.getUserName());
 		projectImpl.setCreateTime(project.getCreateTime());
 		projectImpl.setModifiedTime(project.getModifiedTime());
-		projectImpl.setBjbh(project.getBjbh());
+		projectImpl.setConstructionCode(project.getConstructionCode());
 		projectImpl.setProjNum(project.getProjNum());
 		projectImpl.setSortNo(project.getSortNo());
 		projectImpl.setProjStatus(project.getProjStatus());
 		projectImpl.setIndustryCategory(project.getIndustryCategory());
-		projectImpl.setManageAttr(project.getManageAttr());
+		projectImpl.setManageAttribute(project.getManageAttribute());
 		projectImpl.setIsMajor(project.isIsMajor());
 		projectImpl.setProjSource(project.getProjSource());
 		projectImpl.setBelongCounty(project.getBelongCounty());
@@ -338,7 +338,7 @@ public class ProjectPersistenceImpl extends BasePersistenceImpl<Project>
 		projectImpl.setProjName(project.getProjName());
 		projectImpl.setLocation(project.getLocation());
 		projectImpl.setInvolveCounty(project.getInvolveCounty());
-		projectImpl.setGhhx(project.getGhhx());
+		projectImpl.setPlanRedLine(project.getPlanRedLine());
 		projectImpl.setRoadLevel(project.getRoadLevel());
 		projectImpl.setRoadTechLevel(project.getRoadTechLevel());
 		projectImpl.setStartNode(project.getStartNode());
@@ -346,13 +346,13 @@ public class ProjectPersistenceImpl extends BasePersistenceImpl<Project>
 		projectImpl.setPlanStartDate(project.getPlanStartDate());
 		projectImpl.setPlanEndDate(project.getPlanEndDate());
 		projectImpl.setIntroduction(project.getIntroduction());
-		projectImpl.setPlanTotle(project.getPlanTotle());
-		projectImpl.setGkpfTotle(project.getGkpfTotle());
-		projectImpl.setGkpfPre(project.getGkpfPre());
-		projectImpl.setGkpfJafy(project.getGkpfJafy());
-		projectImpl.setCsTotle(project.getCsTotle());
-		projectImpl.setCsPre(project.getCsPre());
-		projectImpl.setCsJafy(project.getCsJafy());
+		projectImpl.setPlanTotleInvestment(project.getPlanTotleInvestment());
+		projectImpl.setFeasibilityTotleInvestment(project.getFeasibilityTotleInvestment());
+		projectImpl.setFeasibilityPreCost(project.getFeasibilityPreCost());
+		projectImpl.setFeasibilityJiananCost(project.getFeasibilityJiananCost());
+		projectImpl.setFirstFoundedTotleInvestment(project.getFirstFoundedTotleInvestment());
+		projectImpl.setFirstFoundedPreCost(project.getFirstFoundedPreCost());
+		projectImpl.setFirstFoundedJiananCost(project.getFirstFoundedJiananCost());
 
 		return projectImpl;
 	}

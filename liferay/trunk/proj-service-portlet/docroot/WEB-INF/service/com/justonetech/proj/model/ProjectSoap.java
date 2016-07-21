@@ -37,12 +37,12 @@ public class ProjectSoap implements Serializable {
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateTime(model.getCreateTime());
 		soapModel.setModifiedTime(model.getModifiedTime());
-		soapModel.setBjbh(model.getBjbh());
+		soapModel.setConstructionCode(model.getConstructionCode());
 		soapModel.setProjNum(model.getProjNum());
 		soapModel.setSortNo(model.getSortNo());
 		soapModel.setProjStatus(model.getProjStatus());
 		soapModel.setIndustryCategory(model.getIndustryCategory());
-		soapModel.setManageAttr(model.getManageAttr());
+		soapModel.setManageAttribute(model.getManageAttribute());
 		soapModel.setIsMajor(model.getIsMajor());
 		soapModel.setProjSource(model.getProjSource());
 		soapModel.setBelongCounty(model.getBelongCounty());
@@ -52,7 +52,7 @@ public class ProjectSoap implements Serializable {
 		soapModel.setProjName(model.getProjName());
 		soapModel.setLocation(model.getLocation());
 		soapModel.setInvolveCounty(model.getInvolveCounty());
-		soapModel.setGhhx(model.getGhhx());
+		soapModel.setPlanRedLine(model.getPlanRedLine());
 		soapModel.setRoadLevel(model.getRoadLevel());
 		soapModel.setRoadTechLevel(model.getRoadTechLevel());
 		soapModel.setStartNode(model.getStartNode());
@@ -60,13 +60,13 @@ public class ProjectSoap implements Serializable {
 		soapModel.setPlanStartDate(model.getPlanStartDate());
 		soapModel.setPlanEndDate(model.getPlanEndDate());
 		soapModel.setIntroduction(model.getIntroduction());
-		soapModel.setPlanTotle(model.getPlanTotle());
-		soapModel.setGkpfTotle(model.getGkpfTotle());
-		soapModel.setGkpfPre(model.getGkpfPre());
-		soapModel.setGkpfJafy(model.getGkpfJafy());
-		soapModel.setCsTotle(model.getCsTotle());
-		soapModel.setCsPre(model.getCsPre());
-		soapModel.setCsJafy(model.getCsJafy());
+		soapModel.setPlanTotleInvestment(model.getPlanTotleInvestment());
+		soapModel.setFeasibilityTotleInvestment(model.getFeasibilityTotleInvestment());
+		soapModel.setFeasibilityPreCost(model.getFeasibilityPreCost());
+		soapModel.setFeasibilityJiananCost(model.getFeasibilityJiananCost());
+		soapModel.setFirstFoundedTotleInvestment(model.getFirstFoundedTotleInvestment());
+		soapModel.setFirstFoundedPreCost(model.getFirstFoundedPreCost());
+		soapModel.setFirstFoundedJiananCost(model.getFirstFoundedJiananCost());
 
 		return soapModel;
 	}
@@ -175,12 +175,12 @@ public class ProjectSoap implements Serializable {
 		_modifiedTime = modifiedTime;
 	}
 
-	public String getBjbh() {
-		return _bjbh;
+	public String getConstructionCode() {
+		return _constructionCode;
 	}
 
-	public void setBjbh(String bjbh) {
-		_bjbh = bjbh;
+	public void setConstructionCode(String constructionCode) {
+		_constructionCode = constructionCode;
 	}
 
 	public String getProjNum() {
@@ -215,12 +215,12 @@ public class ProjectSoap implements Serializable {
 		_industryCategory = industryCategory;
 	}
 
-	public long getManageAttr() {
-		return _manageAttr;
+	public long getManageAttribute() {
+		return _manageAttribute;
 	}
 
-	public void setManageAttr(long manageAttr) {
-		_manageAttr = manageAttr;
+	public void setManageAttribute(long manageAttribute) {
+		_manageAttribute = manageAttribute;
 	}
 
 	public boolean getIsMajor() {
@@ -299,12 +299,12 @@ public class ProjectSoap implements Serializable {
 		_involveCounty = involveCounty;
 	}
 
-	public double getGhhx() {
-		return _ghhx;
+	public double getPlanRedLine() {
+		return _planRedLine;
 	}
 
-	public void setGhhx(double ghhx) {
-		_ghhx = ghhx;
+	public void setPlanRedLine(double planRedLine) {
+		_planRedLine = planRedLine;
 	}
 
 	public long getRoadLevel() {
@@ -363,60 +363,61 @@ public class ProjectSoap implements Serializable {
 		_introduction = introduction;
 	}
 
-	public double getPlanTotle() {
-		return _planTotle;
+	public double getPlanTotleInvestment() {
+		return _planTotleInvestment;
 	}
 
-	public void setPlanTotle(double planTotle) {
-		_planTotle = planTotle;
+	public void setPlanTotleInvestment(double planTotleInvestment) {
+		_planTotleInvestment = planTotleInvestment;
 	}
 
-	public double getGkpfTotle() {
-		return _gkpfTotle;
+	public double getFeasibilityTotleInvestment() {
+		return _feasibilityTotleInvestment;
 	}
 
-	public void setGkpfTotle(double gkpfTotle) {
-		_gkpfTotle = gkpfTotle;
+	public void setFeasibilityTotleInvestment(double feasibilityTotleInvestment) {
+		_feasibilityTotleInvestment = feasibilityTotleInvestment;
 	}
 
-	public double getGkpfPre() {
-		return _gkpfPre;
+	public double getFeasibilityPreCost() {
+		return _feasibilityPreCost;
 	}
 
-	public void setGkpfPre(double gkpfPre) {
-		_gkpfPre = gkpfPre;
+	public void setFeasibilityPreCost(double feasibilityPreCost) {
+		_feasibilityPreCost = feasibilityPreCost;
 	}
 
-	public double getGkpfJafy() {
-		return _gkpfJafy;
+	public double getFeasibilityJiananCost() {
+		return _feasibilityJiananCost;
 	}
 
-	public void setGkpfJafy(double gkpfJafy) {
-		_gkpfJafy = gkpfJafy;
+	public void setFeasibilityJiananCost(double feasibilityJiananCost) {
+		_feasibilityJiananCost = feasibilityJiananCost;
 	}
 
-	public double getCsTotle() {
-		return _csTotle;
+	public double getFirstFoundedTotleInvestment() {
+		return _firstFoundedTotleInvestment;
 	}
 
-	public void setCsTotle(double csTotle) {
-		_csTotle = csTotle;
+	public void setFirstFoundedTotleInvestment(
+		double firstFoundedTotleInvestment) {
+		_firstFoundedTotleInvestment = firstFoundedTotleInvestment;
 	}
 
-	public double getCsPre() {
-		return _csPre;
+	public double getFirstFoundedPreCost() {
+		return _firstFoundedPreCost;
 	}
 
-	public void setCsPre(double csPre) {
-		_csPre = csPre;
+	public void setFirstFoundedPreCost(double firstFoundedPreCost) {
+		_firstFoundedPreCost = firstFoundedPreCost;
 	}
 
-	public double getCsJafy() {
-		return _csJafy;
+	public double getFirstFoundedJiananCost() {
+		return _firstFoundedJiananCost;
 	}
 
-	public void setCsJafy(double csJafy) {
-		_csJafy = csJafy;
+	public void setFirstFoundedJiananCost(double firstFoundedJiananCost) {
+		_firstFoundedJiananCost = firstFoundedJiananCost;
 	}
 
 	private long _projectId;
@@ -426,12 +427,12 @@ public class ProjectSoap implements Serializable {
 	private String _userName;
 	private Date _createTime;
 	private Date _modifiedTime;
-	private String _bjbh;
+	private String _constructionCode;
 	private String _projNum;
 	private int _sortNo;
 	private long _projStatus;
 	private long _industryCategory;
-	private long _manageAttr;
+	private long _manageAttribute;
 	private boolean _isMajor;
 	private long _projSource;
 	private long _belongCounty;
@@ -441,7 +442,7 @@ public class ProjectSoap implements Serializable {
 	private String _projName;
 	private String _location;
 	private String _involveCounty;
-	private double _ghhx;
+	private double _planRedLine;
 	private long _roadLevel;
 	private long _roadTechLevel;
 	private Date _startNode;
@@ -449,11 +450,11 @@ public class ProjectSoap implements Serializable {
 	private Date _planStartDate;
 	private Date _planEndDate;
 	private String _introduction;
-	private double _planTotle;
-	private double _gkpfTotle;
-	private double _gkpfPre;
-	private double _gkpfJafy;
-	private double _csTotle;
-	private double _csPre;
-	private double _csJafy;
+	private double _planTotleInvestment;
+	private double _feasibilityTotleInvestment;
+	private double _feasibilityPreCost;
+	private double _feasibilityJiananCost;
+	private double _firstFoundedTotleInvestment;
+	private double _firstFoundedPreCost;
+	private double _firstFoundedJiananCost;
 }
