@@ -50,47 +50,53 @@
 		</aui:col>
 		<aui:col span="6">
 			<aui:input name="userName" label="申请人" value="<%=userName%>"
-				disabled="true" />
+				readonly="true" />
 		</aui:col>
 	</aui:row>
-	<table border="1" width="90%">
-		<tr align="center">
+	<table border="1" width="100%" style="border: solid thin #D4D4D4">
+		<tr align="center" height="29px">
 			<td style="width: 20%">申请物品</td>
 			<td style="width: 20%">型号</td>
 			<td style="width: 15%">单位</td>
 			<td style="width: 20%">预计单价</td>
 			<td style="width: 20%">数量</td>
 			<td style="width: 5%"><input type="button" value="添加"
-				onclick="changeLine(this)"></td>
+				style="width: 98%;" onclick="changeLine(this)"></td>
 		</tr>
 		<c:if test="${!empty officeSupplyApplication}">
 			<c:forEach items="${officeSupplyApplicationItems}" var="item">
 				<tr align="center">
-					<td><input type="text" name="<portlet:namespace/>name"
-						value="${item.name}" style="width: 93%;" /></td>
-					<td><input type="text" name="<portlet:namespace/>model"
-						value="${item.model}" style="width: 93%;" /></td>
-					<td><input type="text" name="<portlet:namespace/>unit"
-						value="${item.unit}" style="width: 92%;" /></td>
-					<td><input type="text" name="<portlet:namespace/>unitPrice"
-						value="${item.unitPrice}" style="width: 93%;" /></td>
-					<td><input type="text" name="<portlet:namespace/>quantity"
-						value="${item.quantity}" style="width: 93%;"
-						onchange="count()" /></td>
-					<td><input type="button" value="删除" onclick="changeLine(this)" /></td>
+					<td><input name="<portlet:namespace/>name"
+						value="${item.name}"
+						style="width: 98%; color: #8B8B83; border-top: #D4D4D4 1px solid; border-bottom: #D4D4D4 1px solid; border-left: #D4D4D4 1px solid; border-right: #D4D4D4 1px solid;" /></td>
+					<td><input name="<portlet:namespace/>model"
+						value="${item.model}"
+						style="width: 98%; color: #8B8B83; border-top: #D4D4D4 1px solid; border-bottom: #D4D4D4 1px solid; border-left: #D4D4D4 1px solid; border-right: #D4D4D4 1px solid;" /></td>
+					<td><input name="<portlet:namespace/>unit"
+						value="${item.unit}"
+						style="width: 98%; color: #8B8B83; border-top: #D4D4D4 1px solid; border-bottom: #D4D4D4 1px solid; border-left: #D4D4D4 1px solid; border-right: #D4D4D4 1px solid;" /></td>
+					<td><input name="<portlet:namespace/>unitPrice"
+						value="${item.unitPrice}"
+						style="width: 98%; color: #8B8B83; border-top: #D4D4D4 1px solid; border-bottom: #D4D4D4 1px solid; border-left: #D4D4D4 1px solid; border-right: #D4D4D4 1px solid;" /></td>
+					<td><input name="<portlet:namespace/>quantity"
+						placeholder="输入正整数" value="${item.quantity}"
+						style="width: 98%; color: #8B8B83; border-top: #D4D4D4 1px solid; border-bottom: #D4D4D4 1px solid; border-left: #D4D4D4 1px solid; border-right: #D4D4D4 1px solid;"
+						onchange="count()"
+						onkeyup="this.value=this.value.replace(/[^\d]/ig,'')" /></td>
+					<td><input type="button" value="删除" onclick="changeLine(this)"
+						style="width: 98%;" /></td>
 				</tr>
 			</c:forEach>
 		</c:if>
 		<tbody id="officeSupplyApplicationItems"></tbody>
 	</table>
 	</br>
-	<aui:row>
-		<aui:col span="6"></aui:col>
-		<aui:col span="6">
-			<aui:input id="sum" name="sum" label="预计总价" value="${sum}"
-				readOnly="true" />
-		</aui:col>
-	</aui:row>
+	<table width="100%">
+		<tr>
+			<td align="right"><aui:input id="sum" name="sum" label="预计总价"
+					value="${sum}" inlineLabel="left" readonly="true" /></td>
+		</tr>
+	</table>
 	<aui:row>
 		<aui:col span="12">
 			<aui:input type="textarea" name="introductions" label="申请说明"
@@ -107,21 +113,21 @@
 <table style="display: none;" border="1" width="90%">
 	<tbody id="hiddenStyle">
 		<tr align="center">
-			<%--标准行--%>
-			<td class="addTd"><input type="text"
-				name="<portlet:namespace/>name" class="input_text"
-				style="width: 93%;"></td>
-			<td class="addTd"><input type="text"
-				name="<portlet:namespace/>model" style="width: 93%;"></td>
-			<td class="addTd"><input type="text"
-				name="<portlet:namespace/>unit" style="width: 92%;"></td>
-			<td class="addTd"><input type="text"
-				name="<portlet:namespace/>unitPrice" style="width: 93%;"></td>
-			<td class="addTd"><input type="number"
-				name="<portlet:namespace/>quantity" onchange="count()"
-				style="width: 93%;"></td>
-			<td class="addTd"><input type="button" value="删除"
-				onclick="changeLine(this)" /></td>
+			<td><input name="<portlet:namespace/>name"
+				style="width: 98%; color: #8B8B83; border-top: #D4D4D4 1px solid; border-bottom: #D4D4D4 1px solid; border-left: #D4D4D4 1px solid; border-right: #D4D4D4 1px solid;"></td>
+			<td><input name="<portlet:namespace/>model"
+				style="width: 98%; color: #8B8B83; border-top: #D4D4D4 1px solid; border-bottom: #D4D4D4 1px solid; border-left: #D4D4D4 1px solid; border-right: #D4D4D4 1px solid;"></td>
+			<td><input name="<portlet:namespace/>unit"
+				style="width: 98%; color: #8B8B83; border-top: #D4D4D4 1px solid; border-bottom: #D4D4D4 1px solid; border-left: #D4D4D4 1px solid; border-right: #D4D4D4 1px solid;"></td>
+			<td><input name="<portlet:namespace/>unitPrice"
+				style="width: 98%; color: #8B8B83; border-top: #D4D4D4 1px solid; border-bottom: #D4D4D4 1px solid; border-left: #D4D4D4 1px solid; border-right: #D4D4D4 1px solid;"></td>
+			<td><input name="<portlet:namespace/>quantity"
+				placeholder="输入正整数"
+				onkeyup="this.value=this.value.replace(/[^\d]/ig,'')"
+				onchange="count()"
+				style="width: 98%; color: #8B8B83; border-top: #D4D4D4 1px solid; border-bottom: #D4D4D4 1px solid; border-left: #D4D4D4 1px solid; border-right: #D4D4D4 1px solid;"></td>
+			<td><input type="button" value="删除" onclick="changeLine(this)"
+				style="width: 98%;" /></td>
 		</tr>
 	</tbody>
 </table>

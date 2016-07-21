@@ -8,12 +8,12 @@
 	<aui:col span="6">
 		<aui:input type="hidden" name="officeSupplyApplicationId"
 			value="${officeSupplyApplicationId}" />
-		<aui:input name="deptName" label="申请部门"
+		<aui:input name="deptName" label="申请部门" 
 			value="${officeSupplyApplication.deptName}" inlineField="true"
 			disabled="true" />
 	</aui:col>
 	<aui:col span="6">
-		<aui:input name="userName" label="申请人"
+		<aui:input name="userName" label="申请人" 
 			value="${officeSupplyApplication.userName}" disabled="true" />
 	</aui:col>
 </aui:row>
@@ -34,13 +34,12 @@
 	</liferay-ui:search-container-row>
 	<liferay-ui:search-iterator />
 </liferay-ui:search-container>
-<aui:row>
-	<aui:col span="6"></aui:col>
-	<aui:col span="6">
-		<aui:input name="sum"  label="预计总价" value="${sum}"
-			disabled="true" />
-	</aui:col>
-</aui:row>
+<table width="100%">
+	<tr>
+		<td align="right"><aui:input id="sum" name="sum" label="预计总价"
+				value="${sum}" inlineLabel="left" readonly="true" /></td>
+	</tr>
+</table>
 <aui:row>
 	<aui:col span="12">
 		<aui:input type="textarea" name="introductions" label="申请说明"
