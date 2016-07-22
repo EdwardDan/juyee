@@ -14,6 +14,14 @@
 
 package com.justonetech.projApproval.model.impl;
 
+
+
+import com.justonetech.sys.model.Dictionary;
+import com.justonetech.sys.service.DictionaryLocalServiceUtil;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.Validator;
+
 /**
  * The extended model implementation for the ConstructionPermit service. Represents a row in the &quot;projApproval_ConstructionPermit&quot; database table, with each column mapped to a property of this class.
  *
@@ -31,4 +39,16 @@ public class ConstructionPermitImpl extends ConstructionPermitBaseImpl {
 	 */
 	public ConstructionPermitImpl() {
 	}
+	
+	public String getProjTypeStr() throws PortalException, SystemException{
+		String projTypeName="";
+		if(Validator.isNotNull(getProjType())){
+			Dictionary dictionary=DictionaryLocalServiceUtil.getDictionary(getProjType());
+			projTypeName=dictionary.getName();
+		}
+		return projTypeName;
+	}
+		
+		
+	
 }
