@@ -13,7 +13,7 @@ import java.util.List;
  * 快信通短信发送（暂时）
  */
 public class SendKxt {
-    public static void SendKxtSMS(SMS msgSendDetail) {
+    public static void SendKxtSMS(String content,String receiver) {
         String url = PropsUtil.get("sms.server.url");;
         SMSMessage sm = new SMSMessage();
         /**
@@ -27,10 +27,9 @@ public class SendKxt {
         sm.setCid(PropsUtil.get("sms.server.cid"));
         sm.setUid(PropsUtil.get("sms.server.uid"));
         sm.setPwd(PropsUtil.get("sms.server.pwd"));
-        sm.setContent(msgSendDetail.getContent());
+        sm.setContent(content);
         List<String> msd = new ArrayList<String>();
-        String receiveMobile = msgSendDetail.getReceiver();
-            String[] mobiles = receiveMobile.split(",");
+            String[] mobiles = receiver.split(",");
             for (String mobile : mobiles) {
                 msd.add(mobile);
             }
