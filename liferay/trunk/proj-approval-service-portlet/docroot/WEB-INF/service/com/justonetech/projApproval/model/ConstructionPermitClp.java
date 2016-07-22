@@ -1222,6 +1222,25 @@ public class ConstructionPermitClp extends BaseModelImpl<ConstructionPermit>
 		}
 	}
 
+	@Override
+	public java.lang.String getProjTypeStr() {
+		try {
+			String methodName = "getProjTypeStr";
+
+			Class<?>[] parameterTypes = new Class<?>[] {  };
+
+			Object[] parameterValues = new Object[] {  };
+
+			java.lang.String returnObj = (java.lang.String)invokeOnRemoteModel(methodName,
+					parameterTypes, parameterValues);
+
+			return returnObj;
+		}
+		catch (Exception e) {
+			throw new UnsupportedOperationException(e);
+		}
+	}
+
 	public BaseModel<?> getConstructionPermitRemoteModel() {
 		return _constructionPermitRemoteModel;
 	}

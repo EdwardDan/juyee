@@ -1209,6 +1209,13 @@ public class ConstructionPermitWrapper implements ConstructionPermit,
 	}
 
 	@Override
+	public java.lang.String getProjTypeStr()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _constructionPermit.getProjTypeStr();
+	}
+
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;

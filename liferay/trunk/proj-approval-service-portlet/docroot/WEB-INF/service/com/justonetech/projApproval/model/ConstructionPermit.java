@@ -32,4 +32,7 @@ public interface ConstructionPermit extends ConstructionPermitModel,
 	 *
 	 * Never modify this interface directly. Add methods to {@link com.justonetech.projApproval.model.impl.ConstructionPermitImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	public java.lang.String getProjTypeStr()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 }
