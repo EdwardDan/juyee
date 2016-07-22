@@ -53,7 +53,7 @@
 				readonly="true" />
 		</aui:col>
 	</aui:row>
-	<table border="1" width="100%" style="border: solid thin #D4D4D4">
+	<table border="1" width="100%" class="table table-bordered table-hover">
 		<tr align="center" height="29px">
 			<td style="width: 20%">申请物品</td>
 			<td style="width: 20%">型号</td>
@@ -61,30 +61,31 @@
 			<td style="width: 20%">预计单价</td>
 			<td style="width: 20%">数量</td>
 			<td style="width: 5%"><input type="button" value="添加"
-				style="width: 98%;" onclick="changeLine(this)"></td>
+				class="btn" style="width: 100%;" onclick="changeLine(this)" /></td>
 		</tr>
 		<c:if test="${!empty officeSupplyApplication}">
 			<c:forEach items="${officeSupplyApplicationItems}" var="item">
 				<tr align="center">
 					<td><input name="<portlet:namespace/>name"
 						value="${item.name}"
-						style="width: 98%; color: #8B8B83; border-top: #D4D4D4 1px solid; border-bottom: #D4D4D4 1px solid; border-left: #D4D4D4 1px solid; border-right: #D4D4D4 1px solid;" /></td>
+						style="width: 100%; height: 100%; color: #8B8B83; border-top: #D4D4D4 1px solid; border-bottom: #D4D4D4 1px solid; border-left: #D4D4D4 1px solid; border-right: #D4D4D4 1px solid;" /></td>
 					<td><input name="<portlet:namespace/>model"
 						value="${item.model}"
-						style="width: 98%; color: #8B8B83; border-top: #D4D4D4 1px solid; border-bottom: #D4D4D4 1px solid; border-left: #D4D4D4 1px solid; border-right: #D4D4D4 1px solid;" /></td>
+						style="width: 100%; height: 100%; color: #8B8B83; border-top: #D4D4D4 1px solid; border-bottom: #D4D4D4 1px solid; border-left: #D4D4D4 1px solid; border-right: #D4D4D4 1px solid;" /></td>
 					<td><input name="<portlet:namespace/>unit"
 						value="${item.unit}"
-						style="width: 98%; color: #8B8B83; border-top: #D4D4D4 1px solid; border-bottom: #D4D4D4 1px solid; border-left: #D4D4D4 1px solid; border-right: #D4D4D4 1px solid;" /></td>
+						style="width: 100%; height: 100%; color: #8B8B83; border-top: #D4D4D4 1px solid; border-bottom: #D4D4D4 1px solid; border-left: #D4D4D4 1px solid; border-right: #D4D4D4 1px solid;" /></td>
 					<td><input name="<portlet:namespace/>unitPrice"
-						value="${item.unitPrice}"
-						style="width: 98%; color: #8B8B83; border-top: #D4D4D4 1px solid; border-bottom: #D4D4D4 1px solid; border-left: #D4D4D4 1px solid; border-right: #D4D4D4 1px solid;" /></td>
+						placeholder="请输入正数" value="${item.unitPrice}" onchange="count()"
+						onkeyup="value=value.replace(/[^\d.]/g,'')"
+						style="width: 100%; height: 100%; color: #8B8B83; border-top: #D4D4D4 1px solid; border-bottom: #D4D4D4 1px solid; border-left: #D4D4D4 1px solid; border-right: #D4D4D4 1px solid;" /></td>
 					<td><input name="<portlet:namespace/>quantity"
-						placeholder="输入正整数" value="${item.quantity}"
-						style="width: 98%; color: #8B8B83; border-top: #D4D4D4 1px solid; border-bottom: #D4D4D4 1px solid; border-left: #D4D4D4 1px solid; border-right: #D4D4D4 1px solid;"
+						placeholder="请输入正整数" value="${item.quantity}"
+						style="width: 100%; height: 100%; color: #8B8B83; border-top: #D4D4D4 1px solid; border-bottom: #D4D4D4 1px solid; border-left: #D4D4D4 1px solid; border-right: #D4D4D4 1px solid;"
 						onchange="count()"
 						onkeyup="this.value=this.value.replace(/[^\d]/ig,'')" /></td>
-					<td><input type="button" value="删除" onclick="changeLine(this)"
-						style="width: 98%;" /></td>
+					<td><input type="button" class="btn" value="删除"
+						onclick="changeLine(this)" style="width: 100%;" /></td>
 				</tr>
 			</c:forEach>
 		</c:if>
@@ -114,20 +115,22 @@
 	<tbody id="hiddenStyle">
 		<tr align="center">
 			<td><input name="<portlet:namespace/>name"
-				style="width: 98%; color: #8B8B83; border-top: #D4D4D4 1px solid; border-bottom: #D4D4D4 1px solid; border-left: #D4D4D4 1px solid; border-right: #D4D4D4 1px solid;"></td>
+				style="width: 100%; height: 100%; color: #8B8B83; border-top: #D4D4D4 1px solid; border-bottom: #D4D4D4 1px solid; border-left: #D4D4D4 1px solid; border-right: #D4D4D4 1px solid;"></td>
 			<td><input name="<portlet:namespace/>model"
-				style="width: 98%; color: #8B8B83; border-top: #D4D4D4 1px solid; border-bottom: #D4D4D4 1px solid; border-left: #D4D4D4 1px solid; border-right: #D4D4D4 1px solid;"></td>
+				style="width: 100%; height: 100%; color: #8B8B83; border-top: #D4D4D4 1px solid; border-bottom: #D4D4D4 1px solid; border-left: #D4D4D4 1px solid; border-right: #D4D4D4 1px solid;"></td>
 			<td><input name="<portlet:namespace/>unit"
-				style="width: 98%; color: #8B8B83; border-top: #D4D4D4 1px solid; border-bottom: #D4D4D4 1px solid; border-left: #D4D4D4 1px solid; border-right: #D4D4D4 1px solid;"></td>
+				style="width: 100%; height: 100%; color: #8B8B83; border-top: #D4D4D4 1px solid; border-bottom: #D4D4D4 1px solid; border-left: #D4D4D4 1px solid; border-right: #D4D4D4 1px solid;"></td>
 			<td><input name="<portlet:namespace/>unitPrice"
-				style="width: 98%; color: #8B8B83; border-top: #D4D4D4 1px solid; border-bottom: #D4D4D4 1px solid; border-left: #D4D4D4 1px solid; border-right: #D4D4D4 1px solid;"></td>
+				onkeyup="value=value.replace(/[^\d.]/g,'')" onchange="count()"
+				placeholder="请输入正数"
+				style="width: 100%; height: 100%; color: #8B8B83; border-top: #D4D4D4 1px solid; border-bottom: #D4D4D4 1px solid; border-left: #D4D4D4 1px solid; border-right: #D4D4D4 1px solid;"></td>
 			<td><input name="<portlet:namespace/>quantity"
-				placeholder="输入正整数"
+				placeholder="请输入正整数"
 				onkeyup="this.value=this.value.replace(/[^\d]/ig,'')"
 				onchange="count()"
-				style="width: 98%; color: #8B8B83; border-top: #D4D4D4 1px solid; border-bottom: #D4D4D4 1px solid; border-left: #D4D4D4 1px solid; border-right: #D4D4D4 1px solid;"></td>
-			<td><input type="button" value="删除" onclick="changeLine(this)"
-				style="width: 98%;" /></td>
+				style="width: 100%; height: 100%; color: #8B8B83; border-top: #D4D4D4 1px solid; border-bottom: #D4D4D4 1px solid; border-left: #D4D4D4 1px solid; border-right: #D4D4D4 1px solid;"></td>
+			<td><input type="button" class="btn" value="删除"
+				onclick="changeLine(this)" style="width: 100%;" /></td>
 		</tr>
 	</tbody>
 </table>

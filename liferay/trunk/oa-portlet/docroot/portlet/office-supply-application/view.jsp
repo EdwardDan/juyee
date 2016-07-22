@@ -13,7 +13,7 @@
 			iconCssClass="icon-plus" label="添加" />
 	</aui:nav>
 </aui:nav-bar>
-<liferay-ui:search-container emptyResultsMessage="没有找到办公用品申请。">
+<liferay-ui:search-container emptyResultsMessage="没有找到办公用品申请信息。">
 	<liferay-ui:search-container-results
 		results="${officeSupplyApplications}"
 		total="${OfficeSupplyApplicationsCount}">
