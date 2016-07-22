@@ -32,7 +32,7 @@
             var objCell;
             var ssa = document.getElementById("hiddenStyle");
             //列的个数
-            for (var i = 0; i < 8; i++) {
+            for (var i = 0; i < 7; i++) {
                 var indexNo = document.getElementById("table1").rows.length - 2;
                 objCell = objRow.insertCell(i);
                 objCell.noWrap = "true";
