@@ -38,12 +38,10 @@ public class DictionaryCacheModel implements CacheModel<Dictionary>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(35);
+		StringBundler sb = new StringBundler(33);
 
 		sb.append("{dictionaryId=");
 		sb.append(dictionaryId);
-		sb.append(", groupId=");
-		sb.append(groupId);
 		sb.append(", userId=");
 		sb.append(userId);
 		sb.append(", userName=");
@@ -84,7 +82,6 @@ public class DictionaryCacheModel implements CacheModel<Dictionary>,
 		DictionaryImpl dictionaryImpl = new DictionaryImpl();
 
 		dictionaryImpl.setDictionaryId(dictionaryId);
-		dictionaryImpl.setGroupId(groupId);
 		dictionaryImpl.setUserId(userId);
 
 		if (userName == null) {
@@ -172,7 +169,6 @@ public class DictionaryCacheModel implements CacheModel<Dictionary>,
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		dictionaryId = objectInput.readLong();
-		groupId = objectInput.readLong();
 		userId = objectInput.readLong();
 		userName = objectInput.readUTF();
 		createTime = objectInput.readLong();
@@ -194,7 +190,6 @@ public class DictionaryCacheModel implements CacheModel<Dictionary>,
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(dictionaryId);
-		objectOutput.writeLong(groupId);
 		objectOutput.writeLong(userId);
 
 		if (userName == null) {
@@ -265,7 +260,6 @@ public class DictionaryCacheModel implements CacheModel<Dictionary>,
 	}
 
 	public long dictionaryId;
-	public long groupId;
 	public long userId;
 	public String userName;
 	public long createTime;

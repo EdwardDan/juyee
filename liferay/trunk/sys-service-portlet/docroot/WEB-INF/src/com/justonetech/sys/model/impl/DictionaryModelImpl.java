@@ -67,7 +67,6 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 	public static final String TABLE_NAME = "sys_Dictionary";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "dictionaryId", Types.BIGINT },
-			{ "groupId", Types.BIGINT },
 			{ "userId", Types.BIGINT },
 			{ "userName", Types.VARCHAR },
 			{ "createTime", Types.TIMESTAMP },
@@ -84,7 +83,7 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 			{ "customContent", Types.VARCHAR },
 			{ "parentId", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table sys_Dictionary (dictionaryId LONG not null primary key,groupId LONG,userId LONG,userName VARCHAR(75) null,createTime DATE null,modifiedTime DATE null,code_ VARCHAR(75) null,name VARCHAR(75) null,isLeaf BOOLEAN,sortNo INTEGER,desc_ STRING null,tag VARCHAR(75) null,isValid BOOLEAN,treePath VARCHAR(75) null,sortPath VARCHAR(75) null,customContent STRING null,parentId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table sys_Dictionary (dictionaryId LONG not null primary key,userId LONG,userName VARCHAR(75) null,createTime DATE null,modifiedTime DATE null,code_ VARCHAR(75) null,name VARCHAR(75) null,isLeaf BOOLEAN,sortNo INTEGER,desc_ STRING null,tag VARCHAR(75) null,isValid BOOLEAN,treePath VARCHAR(75) null,sortPath VARCHAR(75) null,customContent STRING null,parentId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table sys_Dictionary";
 	public static final String ORDER_BY_JPQL = " ORDER BY dictionary.sortPath ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY sys_Dictionary.sortPath ASC";
@@ -101,10 +100,9 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 				"value.object.column.bitmask.enabled.com.justonetech.sys.model.Dictionary"),
 			true);
 	public static long CODE_COLUMN_BITMASK = 1L;
-	public static long GROUPID_COLUMN_BITMASK = 2L;
-	public static long ISVALID_COLUMN_BITMASK = 4L;
-	public static long PARENTID_COLUMN_BITMASK = 8L;
-	public static long SORTPATH_COLUMN_BITMASK = 16L;
+	public static long ISVALID_COLUMN_BITMASK = 2L;
+	public static long PARENTID_COLUMN_BITMASK = 4L;
+	public static long SORTPATH_COLUMN_BITMASK = 8L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -120,7 +118,6 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 		Dictionary model = new DictionaryImpl();
 
 		model.setDictionaryId(soapModel.getDictionaryId());
-		model.setGroupId(soapModel.getGroupId());
 		model.setUserId(soapModel.getUserId());
 		model.setUserName(soapModel.getUserName());
 		model.setCreateTime(soapModel.getCreateTime());
@@ -201,7 +198,6 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("dictionaryId", getDictionaryId());
-		attributes.put("groupId", getGroupId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
 		attributes.put("createTime", getCreateTime());
@@ -227,12 +223,6 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 
 		if (dictionaryId != null) {
 			setDictionaryId(dictionaryId);
-		}
-
-		Long groupId = (Long)attributes.get("groupId");
-
-		if (groupId != null) {
-			setGroupId(groupId);
 		}
 
 		Long userId = (Long)attributes.get("userId");
@@ -335,29 +325,6 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 	@Override
 	public void setDictionaryId(long dictionaryId) {
 		_dictionaryId = dictionaryId;
-	}
-
-	@JSON
-	@Override
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	@Override
-	public void setGroupId(long groupId) {
-		_columnBitmask |= GROUPID_COLUMN_BITMASK;
-
-		if (!_setOriginalGroupId) {
-			_setOriginalGroupId = true;
-
-			_originalGroupId = _groupId;
-		}
-
-		_groupId = groupId;
-	}
-
-	public long getOriginalGroupId() {
-		return _originalGroupId;
 	}
 
 	@JSON
@@ -653,7 +620,6 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 		DictionaryImpl dictionaryImpl = new DictionaryImpl();
 
 		dictionaryImpl.setDictionaryId(getDictionaryId());
-		dictionaryImpl.setGroupId(getGroupId());
 		dictionaryImpl.setUserId(getUserId());
 		dictionaryImpl.setUserName(getUserName());
 		dictionaryImpl.setCreateTime(getCreateTime());
@@ -719,10 +685,6 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 	public void resetOriginalValues() {
 		DictionaryModelImpl dictionaryModelImpl = this;
 
-		dictionaryModelImpl._originalGroupId = dictionaryModelImpl._groupId;
-
-		dictionaryModelImpl._setOriginalGroupId = false;
-
 		dictionaryModelImpl._originalCode = dictionaryModelImpl._code;
 
 		dictionaryModelImpl._originalIsValid = dictionaryModelImpl._isValid;
@@ -741,8 +703,6 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 		DictionaryCacheModel dictionaryCacheModel = new DictionaryCacheModel();
 
 		dictionaryCacheModel.dictionaryId = getDictionaryId();
-
-		dictionaryCacheModel.groupId = getGroupId();
 
 		dictionaryCacheModel.userId = getUserId();
 
@@ -841,12 +801,10 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(35);
+		StringBundler sb = new StringBundler(33);
 
 		sb.append("{dictionaryId=");
 		sb.append(getDictionaryId());
-		sb.append(", groupId=");
-		sb.append(getGroupId());
 		sb.append(", userId=");
 		sb.append(getUserId());
 		sb.append(", userName=");
@@ -884,7 +842,7 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(55);
+		StringBundler sb = new StringBundler(52);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.sys.model.Dictionary");
@@ -893,10 +851,6 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 		sb.append(
 			"<column><column-name>dictionaryId</column-name><column-value><![CDATA[");
 		sb.append(getDictionaryId());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>groupId</column-name><column-value><![CDATA[");
-		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userId</column-name><column-value><![CDATA[");
@@ -969,9 +923,6 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 			Dictionary.class
 		};
 	private long _dictionaryId;
-	private long _groupId;
-	private long _originalGroupId;
-	private boolean _setOriginalGroupId;
 	private long _userId;
 	private String _userUuid;
 	private String _userName;

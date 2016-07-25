@@ -10,7 +10,6 @@
 	<mapped-superclass class="com.justonetech.sys.model.impl.DictionaryModelImpl">
 		<attributes>
 			<id name="dictionaryId" />
-			<basic name="groupId" />
 			<basic name="userId" />
 			<basic name="userName" />
 			<basic name="createTime">

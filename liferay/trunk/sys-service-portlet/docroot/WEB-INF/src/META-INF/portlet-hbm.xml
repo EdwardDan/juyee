@@ -9,7 +9,6 @@
 		<id name="dictionaryId" type="long">
 			<generator class="assigned" />
 		</id>
-		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="createTime" type="org.hibernate.type.TimestampType" />

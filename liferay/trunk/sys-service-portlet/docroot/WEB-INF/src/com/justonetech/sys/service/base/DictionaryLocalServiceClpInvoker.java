@@ -116,74 +116,62 @@ public class DictionaryLocalServiceClpInvoker {
 
 		_methodName44 = "findByCode";
 
-		_methodParameterTypes44 = new String[] { "long", "java.lang.String" };
+		_methodParameterTypes44 = new String[] { "java.lang.String" };
 
-		_methodName45 = "findByGroupIdAndCode";
+		_methodName45 = "findByParentId";
 
-		_methodParameterTypes45 = new String[] { "long", "java.lang.String" };
+		_methodParameterTypes45 = new String[] { "long", "int", "int" };
 
-		_methodName46 = "findByParentId";
+		_methodName46 = "countByParentId";
 
-		_methodParameterTypes46 = new String[] { "long", "int", "int" };
+		_methodParameterTypes46 = new String[] { "long" };
 
-		_methodName47 = "findByGroupIdAndParentId";
+		_methodName47 = "findByParentIdAndIsValid";
 
-		_methodParameterTypes47 = new String[] { "long", "long", "int", "int" };
+		_methodParameterTypes47 = new String[] { "long", "boolean", "int", "int" };
 
-		_methodName48 = "countByGroupIdAndParentId";
+		_methodName48 = "countByParentIdIsValid";
 
-		_methodParameterTypes48 = new String[] { "long", "long" };
+		_methodParameterTypes48 = new String[] { "long", "boolean" };
 
-		_methodName49 = "findByParentIdAndIsValid";
+		_methodName49 = "findByParentIdKeywords";
 
-		_methodParameterTypes49 = new String[] { "long", "boolean", "int", "int" };
-
-		_methodName50 = "countByParentIdAndIsValid";
-
-		_methodParameterTypes50 = new String[] { "long", "boolean" };
-
-		_methodName51 = "findByG_P_K";
-
-		_methodParameterTypes51 = new String[] {
-				"long", "long", "java.lang.String", "int", "int"
+		_methodParameterTypes49 = new String[] {
+				"long", "java.lang.String", "int", "int"
 			};
 
-		_methodName52 = "countByG_P_K";
+		_methodName50 = "countByParentIdKeywords";
 
-		_methodParameterTypes52 = new String[] {
-				"long", "long", "java.lang.String"
-			};
+		_methodParameterTypes50 = new String[] { "long", "java.lang.String" };
 
-		_methodName53 = "createDynamicQueryByG_P_K";
+		_methodName51 = "createByParentIdKeywords";
 
-		_methodParameterTypes53 = new String[] {
-				"long", "long", "java.lang.String"
-			};
+		_methodParameterTypes51 = new String[] { "long", "java.lang.String" };
 
-		_methodName54 = "deleteDictionaries";
+		_methodName52 = "deleteDictionaries";
 
-		_methodParameterTypes54 = new String[] { "java.lang.String[][]" };
+		_methodParameterTypes52 = new String[] { "java.lang.String[][]" };
 
-		_methodName55 = "recursiveDeleteDictionaries";
+		_methodName53 = "recursiveDeleteDictionaries";
 
-		_methodParameterTypes55 = new String[] { "java.lang.String[][]" };
+		_methodParameterTypes53 = new String[] { "java.lang.String[][]" };
 
-		_methodName56 = "recursiveDeleteDictionary";
+		_methodName54 = "recursiveDeleteDictionary";
 
-		_methodParameterTypes56 = new String[] {
+		_methodParameterTypes54 = new String[] {
 				"com.justonetech.sys.model.Dictionary"
 			};
 
-		_methodName57 = "updateIsLeaf";
+		_methodName55 = "updateIsLeaf";
 
-		_methodParameterTypes57 = new String[] {
+		_methodParameterTypes55 = new String[] {
 				"com.justonetech.sys.model.Dictionary", "boolean",
 				"com.liferay.portal.model.User"
 			};
 
-		_methodName58 = "recursiveUpdateSortPath";
+		_methodName56 = "recursiveUpdateSortPath";
 
-		_methodParameterTypes58 = new String[] {
+		_methodParameterTypes56 = new String[] {
 				"com.justonetech.sys.model.Dictionary"
 			};
 	}
@@ -291,102 +279,85 @@ public class DictionaryLocalServiceClpInvoker {
 
 		if (_methodName44.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes44, parameterTypes)) {
-			return DictionaryLocalServiceUtil.findByCode(((Long)arguments[0]).longValue(),
-				(java.lang.String)arguments[1]);
+			return DictionaryLocalServiceUtil.findByCode((java.lang.String)arguments[0]);
 		}
 
 		if (_methodName45.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes45, parameterTypes)) {
-			return DictionaryLocalServiceUtil.findByGroupIdAndCode(((Long)arguments[0]).longValue(),
-				(java.lang.String)arguments[1]);
-		}
-
-		if (_methodName46.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes46, parameterTypes)) {
 			return DictionaryLocalServiceUtil.findByParentId(((Long)arguments[0]).longValue(),
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue());
 		}
 
+		if (_methodName46.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes46, parameterTypes)) {
+			return DictionaryLocalServiceUtil.countByParentId(((Long)arguments[0]).longValue());
+		}
+
 		if (_methodName47.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes47, parameterTypes)) {
-			return DictionaryLocalServiceUtil.findByGroupIdAndParentId(((Long)arguments[0]).longValue(),
-				((Long)arguments[1]).longValue(),
-				((Integer)arguments[2]).intValue(),
-				((Integer)arguments[3]).intValue());
-		}
-
-		if (_methodName48.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes48, parameterTypes)) {
-			return DictionaryLocalServiceUtil.countByGroupIdAndParentId(((Long)arguments[0]).longValue(),
-				((Long)arguments[1]).longValue());
-		}
-
-		if (_methodName49.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes49, parameterTypes)) {
 			return DictionaryLocalServiceUtil.findByParentIdAndIsValid(((Long)arguments[0]).longValue(),
 				((Boolean)arguments[1]).booleanValue(),
 				((Integer)arguments[2]).intValue(),
 				((Integer)arguments[3]).intValue());
 		}
 
+		if (_methodName48.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes48, parameterTypes)) {
+			return DictionaryLocalServiceUtil.countByParentIdIsValid(((Long)arguments[0]).longValue(),
+				((Boolean)arguments[1]).booleanValue());
+		}
+
+		if (_methodName49.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes49, parameterTypes)) {
+			return DictionaryLocalServiceUtil.findByParentIdKeywords(((Long)arguments[0]).longValue(),
+				(java.lang.String)arguments[1],
+				((Integer)arguments[2]).intValue(),
+				((Integer)arguments[3]).intValue());
+		}
+
 		if (_methodName50.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes50, parameterTypes)) {
-			return DictionaryLocalServiceUtil.countByParentIdAndIsValid(((Long)arguments[0]).longValue(),
-				((Boolean)arguments[1]).booleanValue());
+			return DictionaryLocalServiceUtil.countByParentIdKeywords(((Long)arguments[0]).longValue(),
+				(java.lang.String)arguments[1]);
 		}
 
 		if (_methodName51.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes51, parameterTypes)) {
-			return DictionaryLocalServiceUtil.findByG_P_K(((Long)arguments[0]).longValue(),
-				((Long)arguments[1]).longValue(),
-				(java.lang.String)arguments[2],
-				((Integer)arguments[3]).intValue(),
-				((Integer)arguments[4]).intValue());
+			return DictionaryLocalServiceUtil.createByParentIdKeywords(((Long)arguments[0]).longValue(),
+				(java.lang.String)arguments[1]);
 		}
 
 		if (_methodName52.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes52, parameterTypes)) {
-			return DictionaryLocalServiceUtil.countByG_P_K(((Long)arguments[0]).longValue(),
-				((Long)arguments[1]).longValue(), (java.lang.String)arguments[2]);
+			DictionaryLocalServiceUtil.deleteDictionaries((java.lang.String[])arguments[0]);
+
+			return null;
 		}
 
 		if (_methodName53.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes53, parameterTypes)) {
-			return DictionaryLocalServiceUtil.createDynamicQueryByG_P_K(((Long)arguments[0]).longValue(),
-				((Long)arguments[1]).longValue(), (java.lang.String)arguments[2]);
+			DictionaryLocalServiceUtil.recursiveDeleteDictionaries((java.lang.String[])arguments[0]);
+
+			return null;
 		}
 
 		if (_methodName54.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes54, parameterTypes)) {
-			DictionaryLocalServiceUtil.deleteDictionaries((java.lang.String[])arguments[0]);
+			DictionaryLocalServiceUtil.recursiveDeleteDictionary((com.justonetech.sys.model.Dictionary)arguments[0]);
 
 			return null;
 		}
 
 		if (_methodName55.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes55, parameterTypes)) {
-			DictionaryLocalServiceUtil.recursiveDeleteDictionaries((java.lang.String[])arguments[0]);
-
-			return null;
-		}
-
-		if (_methodName56.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes56, parameterTypes)) {
-			DictionaryLocalServiceUtil.recursiveDeleteDictionary((com.justonetech.sys.model.Dictionary)arguments[0]);
-
-			return null;
-		}
-
-		if (_methodName57.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes57, parameterTypes)) {
 			return DictionaryLocalServiceUtil.updateIsLeaf((com.justonetech.sys.model.Dictionary)arguments[0],
 				((Boolean)arguments[1]).booleanValue(),
 				(com.liferay.portal.model.User)arguments[2]);
 		}
 
-		if (_methodName58.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes58, parameterTypes)) {
+		if (_methodName56.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes56, parameterTypes)) {
 			DictionaryLocalServiceUtil.recursiveUpdateSortPath((com.justonetech.sys.model.Dictionary)arguments[0]);
 
 			return null;
@@ -457,8 +428,4 @@ public class DictionaryLocalServiceClpInvoker {
 	private String[] _methodParameterTypes55;
 	private String _methodName56;
 	private String[] _methodParameterTypes56;
-	private String _methodName57;
-	private String[] _methodParameterTypes57;
-	private String _methodName58;
-	private String[] _methodParameterTypes58;
 }

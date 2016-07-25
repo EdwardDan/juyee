@@ -276,33 +276,19 @@ public class DictionaryLocalServiceUtil {
 	}
 
 	public static com.justonetech.sys.model.Dictionary findByCode(
-		long groupId, java.lang.String code)
+		java.lang.String code)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().findByCode(groupId, code);
-	}
-
-	public static com.justonetech.sys.model.Dictionary findByGroupIdAndCode(
-		long groupId, java.lang.String code)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().findByGroupIdAndCode(groupId, code);
+		return getService().findByCode(code);
 	}
 
 	public static java.util.List<com.justonetech.sys.model.Dictionary> findByParentId(
-		long parentId, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		long parentId, int start, int end) {
 		return getService().findByParentId(parentId, start, end);
 	}
 
-	public static java.util.List<com.justonetech.sys.model.Dictionary> findByGroupIdAndParentId(
-		long groupId, long parentId, int start, int end)
+	public static int countByParentId(long parentId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .findByGroupIdAndParentId(groupId, parentId, start, end);
-	}
-
-	public static int countByGroupIdAndParentId(long groupId, long parentId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().countByGroupIdAndParentId(groupId, parentId);
+		return getService().countByParentId(parentId);
 	}
 
 	public static java.util.List<com.justonetech.sys.model.Dictionary> findByParentIdAndIsValid(
@@ -312,27 +298,26 @@ public class DictionaryLocalServiceUtil {
 				   .findByParentIdAndIsValid(parentId, isValid, start, end);
 	}
 
-	public static int countByParentIdAndIsValid(long parentId, boolean isValid)
+	public static int countByParentIdIsValid(long parentId, boolean isValid)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().countByParentIdAndIsValid(parentId, isValid);
+		return getService().countByParentIdIsValid(parentId, isValid);
 	}
 
-	public static java.util.List<com.justonetech.sys.model.Dictionary> findByG_P_K(
-		long groupId, long parentId, java.lang.String keywords, int start,
-		int end) throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().findByG_P_K(groupId, parentId, keywords, start, end);
+	public static java.util.List<com.justonetech.sys.model.Dictionary> findByParentIdKeywords(
+		long parentId, java.lang.String keywords, int start, int end) {
+		return getService()
+				   .findByParentIdKeywords(parentId, keywords, start, end);
 	}
 
-	public static int countByG_P_K(long groupId, long parentId,
+	public static int countByParentIdKeywords(long parentId,
 		java.lang.String keywords)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().countByG_P_K(groupId, parentId, keywords);
+		return getService().countByParentIdKeywords(parentId, keywords);
 	}
 
-	public static com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQueryByG_P_K(
-		long groupId, long parentId, java.lang.String keywords) {
-		return getService()
-				   .createDynamicQueryByG_P_K(groupId, parentId, keywords);
+	public static com.liferay.portal.kernel.dao.orm.DynamicQuery createByParentIdKeywords(
+		long parentId, java.lang.String keywords) {
+		return getService().createByParentIdKeywords(parentId, keywords);
 	}
 
 	public static void deleteDictionaries(java.lang.String[] dictionaryIds) {

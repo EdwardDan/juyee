@@ -57,7 +57,7 @@ public class DictionaryLocalServiceImpl extends DictionaryLocalServiceBaseImpl {
      * {@link com.justonetech.sys.service.DictionaryLocalServiceUtil} to access
      * the dictionary local service.
      */
-    public Dictionary findByCode(long groupId, String code)
+    public Dictionary findByCode(String code)
         throws SystemException {
 
         Dictionary dictionary = null;
@@ -65,70 +65,60 @@ public class DictionaryLocalServiceImpl extends DictionaryLocalServiceBaseImpl {
             dictionary = dictionaryPersistence.findByCode(code);
         }
         catch (NoSuchDictionaryException e) {
-            log.info("NoSuchDictionaryException:findByCode(" + code + ")");
+            log.info("获取code="+code+"的Dictionary出错！");
         }
         return dictionary;
     }
 
-    public Dictionary findByGroupIdAndCode(long groupId, String code)
-        throws SystemException {
+    public List<Dictionary> findByParentId(long parentId, int start, int end){
 
-        Dictionary dictionary = null;
         try {
-            dictionary = dictionaryPersistence.findByGroupIdAndCode(groupId, code);
+            return dictionaryPersistence.findByParentId(parentId, start, end);
         }
-        catch (NoSuchDictionaryException e) {
-            log.info("NoSuchDictionaryException:findByGroupIdAndCode(" + groupId + ", " + code + ")");
+        catch (SystemException e) {
+            e.printStackTrace();
         }
-        return dictionary;
+        return Collections.emptyList();
     }
 
-    public List<Dictionary> findByParentId(long parentId, int start, int end)
+    public int countByParentId(long parentId)
         throws SystemException {
 
-        return dictionaryPersistence.findByParentId(parentId, start, end);
-    }
-
-    public List<Dictionary> findByGroupIdAndParentId(long groupId, long parentId, int start, int end)
-        throws SystemException {
-
-        return dictionaryPersistence.findByGroupIdAndParentId(groupId, parentId, start, end);
-    }
-
-    public int countByGroupIdAndParentId(long groupId, long parentId)
-        throws SystemException {
-
-        return dictionaryPersistence.countByGroupIdAndParentId(groupId, parentId);
+        return dictionaryPersistence.countByParentId(parentId);
     }
 
     public List<Dictionary> findByParentIdAndIsValid(long parentId, boolean isValid, int start, int end)
         throws SystemException {
 
-        return dictionaryPersistence.findByParentIdAndIsValid(parentId, isValid, start, end);
+        return dictionaryPersistence.findByParentIdIsValid(parentId, isValid, start, end);
     }
 
-    public int countByParentIdAndIsValid(long parentId, boolean isValid)
+    public int countByParentIdIsValid(long parentId, boolean isValid)
         throws SystemException {
 
-        return dictionaryPersistence.countByParentIdAndIsValid(parentId, isValid);
+        return dictionaryPersistence.countByParentIdIsValid(parentId, isValid);
     }
 
-    public List<Dictionary> findByG_P_K(long groupId, long parentId, String keywords, int start, int end)
+    public List<Dictionary> findByParentIdKeywords(long parentId, String keywords, int start, int end) {
+
+        try {
+            return this.dynamicQuery(createByParentIdKeywords(parentId, keywords), start, end);
+        }
+        catch (SystemException e) {
+            e.printStackTrace();
+        }
+        return Collections.emptyList(); 
+    }
+
+    public int countByParentIdKeywords(long parentId, String keywords)
         throws SystemException {
 
-        return this.dynamicQuery(createDynamicQueryByG_P_K(groupId, parentId, keywords), start, end);
+        return (int) this.dynamicQueryCount(createByParentIdKeywords(parentId, keywords));
     }
 
-    public int countByG_P_K(long groupId, long parentId, String keywords)
-        throws SystemException {
-
-        return (int) this.dynamicQueryCount(createDynamicQueryByG_P_K(groupId, parentId, keywords));
-    }
-
-    public DynamicQuery createDynamicQueryByG_P_K(long groupId, long parentId, String keywords) {
+    public DynamicQuery createByParentIdKeywords(long parentId, String keywords) {
 
         DynamicQuery dynamicQuery = this.dynamicQuery();
-        dynamicQuery.add(PropertyFactoryUtil.forName("groupId").eq(groupId));
         dynamicQuery.add(PropertyFactoryUtil.forName("parentId").eq(parentId));
         Junction junction = RestrictionsFactoryUtil.disjunction();
         junction.add(PropertyFactoryUtil.forName("name").like("%" + keywords + "%"));
@@ -168,8 +158,7 @@ public class DictionaryLocalServiceImpl extends DictionaryLocalServiceBaseImpl {
 
         dictionaryPersistence.remove(parentDictionary);
         List<Dictionary> dictionaries =
-            dictionaryPersistence.findByGroupIdAndParentId(
-                parentDictionary.getGroupId(), parentDictionary.getDictionaryId());
+            dictionaryPersistence.findByParentId(parentDictionary.getDictionaryId());
         for (Dictionary dictionary : dictionaries) {
             recursiveDeleteDictionary(dictionary);
         }
@@ -192,8 +181,7 @@ public class DictionaryLocalServiceImpl extends DictionaryLocalServiceBaseImpl {
 
         List<Dictionary> dictionaries = Collections.emptyList();
         dictionaries =
-            dictionaryPersistence.findByGroupIdAndParentId(
-                parentDictionary.getGroupId(), parentDictionary.getDictionaryId());
+            dictionaryPersistence.findByParentId(parentDictionary.getDictionaryId());
 
         for (Dictionary dictionary : dictionaries) {
             dictionary.setModifiedTime(new Date());

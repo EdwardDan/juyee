@@ -75,20 +75,6 @@ public interface DictionaryModel extends BaseModel<Dictionary> {
 	public void setDictionaryId(long dictionaryId);
 
 	/**
-	 * Returns the group ID of this dictionary.
-	 *
-	 * @return the group ID of this dictionary
-	 */
-	public long getGroupId();
-
-	/**
-	 * Sets the group ID of this dictionary.
-	 *
-	 * @param groupId the group ID of this dictionary
-	 */
-	public void setGroupId(long groupId);
-
-	/**
 	 * Returns the user ID of this dictionary.
 	 *
 	 * @return the user ID of this dictionary

@@ -287,39 +287,22 @@ public class DictionaryLocalServiceWrapper implements DictionaryLocalService,
 	}
 
 	@Override
-	public com.justonetech.sys.model.Dictionary findByCode(long groupId,
+	public com.justonetech.sys.model.Dictionary findByCode(
 		java.lang.String code)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _dictionaryLocalService.findByCode(groupId, code);
-	}
-
-	@Override
-	public com.justonetech.sys.model.Dictionary findByGroupIdAndCode(
-		long groupId, java.lang.String code)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _dictionaryLocalService.findByGroupIdAndCode(groupId, code);
+		return _dictionaryLocalService.findByCode(code);
 	}
 
 	@Override
 	public java.util.List<com.justonetech.sys.model.Dictionary> findByParentId(
-		long parentId, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		long parentId, int start, int end) {
 		return _dictionaryLocalService.findByParentId(parentId, start, end);
 	}
 
 	@Override
-	public java.util.List<com.justonetech.sys.model.Dictionary> findByGroupIdAndParentId(
-		long groupId, long parentId, int start, int end)
+	public int countByParentId(long parentId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _dictionaryLocalService.findByGroupIdAndParentId(groupId,
-			parentId, start, end);
-	}
-
-	@Override
-	public int countByGroupIdAndParentId(long groupId, long parentId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _dictionaryLocalService.countByGroupIdAndParentId(groupId,
-			parentId);
+		return _dictionaryLocalService.countByParentId(parentId);
 	}
 
 	@Override
@@ -331,32 +314,30 @@ public class DictionaryLocalServiceWrapper implements DictionaryLocalService,
 	}
 
 	@Override
-	public int countByParentIdAndIsValid(long parentId, boolean isValid)
+	public int countByParentIdIsValid(long parentId, boolean isValid)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _dictionaryLocalService.countByParentIdAndIsValid(parentId,
-			isValid);
+		return _dictionaryLocalService.countByParentIdIsValid(parentId, isValid);
 	}
 
 	@Override
-	public java.util.List<com.justonetech.sys.model.Dictionary> findByG_P_K(
-		long groupId, long parentId, java.lang.String keywords, int start,
-		int end) throws com.liferay.portal.kernel.exception.SystemException {
-		return _dictionaryLocalService.findByG_P_K(groupId, parentId, keywords,
-			start, end);
+	public java.util.List<com.justonetech.sys.model.Dictionary> findByParentIdKeywords(
+		long parentId, java.lang.String keywords, int start, int end) {
+		return _dictionaryLocalService.findByParentIdKeywords(parentId,
+			keywords, start, end);
 	}
 
 	@Override
-	public int countByG_P_K(long groupId, long parentId,
-		java.lang.String keywords)
+	public int countByParentIdKeywords(long parentId, java.lang.String keywords)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _dictionaryLocalService.countByG_P_K(groupId, parentId, keywords);
+		return _dictionaryLocalService.countByParentIdKeywords(parentId,
+			keywords);
 	}
 
 	@Override
-	public com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQueryByG_P_K(
-		long groupId, long parentId, java.lang.String keywords) {
-		return _dictionaryLocalService.createDynamicQueryByG_P_K(groupId,
-			parentId, keywords);
+	public com.liferay.portal.kernel.dao.orm.DynamicQuery createByParentIdKeywords(
+		long parentId, java.lang.String keywords) {
+		return _dictionaryLocalService.createByParentIdKeywords(parentId,
+			keywords);
 	}
 
 	@Override

@@ -32,7 +32,6 @@ public class DictionarySoap implements Serializable {
 		DictionarySoap soapModel = new DictionarySoap();
 
 		soapModel.setDictionaryId(model.getDictionaryId());
-		soapModel.setGroupId(model.getGroupId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateTime(model.getCreateTime());
@@ -106,14 +105,6 @@ public class DictionarySoap implements Serializable {
 
 	public void setDictionaryId(long dictionaryId) {
 		_dictionaryId = dictionaryId;
-	}
-
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	public void setGroupId(long groupId) {
-		_groupId = groupId;
 	}
 
 	public long getUserId() {
@@ -245,7 +236,6 @@ public class DictionarySoap implements Serializable {
 	}
 
 	private long _dictionaryId;
-	private long _groupId;
 	private long _userId;
 	private String _userName;
 	private Date _createTime;

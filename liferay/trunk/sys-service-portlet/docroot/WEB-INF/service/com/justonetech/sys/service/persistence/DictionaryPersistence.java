@@ -234,217 +234,6 @@ public interface DictionaryPersistence extends BasePersistence<Dictionary> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns the dictionary where groupId = &#63; and code = &#63; or throws a {@link com.justonetech.sys.NoSuchDictionaryException} if it could not be found.
-	*
-	* @param groupId the group ID
-	* @param code the code
-	* @return the matching dictionary
-	* @throws com.justonetech.sys.NoSuchDictionaryException if a matching dictionary could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.justonetech.sys.model.Dictionary findByGroupIdAndCode(
-		long groupId, java.lang.String code)
-		throws com.justonetech.sys.NoSuchDictionaryException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns the dictionary where groupId = &#63; and code = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	*
-	* @param groupId the group ID
-	* @param code the code
-	* @return the matching dictionary, or <code>null</code> if a matching dictionary could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.justonetech.sys.model.Dictionary fetchByGroupIdAndCode(
-		long groupId, java.lang.String code)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns the dictionary where groupId = &#63; and code = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	*
-	* @param groupId the group ID
-	* @param code the code
-	* @param retrieveFromCache whether to use the finder cache
-	* @return the matching dictionary, or <code>null</code> if a matching dictionary could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.justonetech.sys.model.Dictionary fetchByGroupIdAndCode(
-		long groupId, java.lang.String code, boolean retrieveFromCache)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Removes the dictionary where groupId = &#63; and code = &#63; from the database.
-	*
-	* @param groupId the group ID
-	* @param code the code
-	* @return the dictionary that was removed
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.justonetech.sys.model.Dictionary removeByGroupIdAndCode(
-		long groupId, java.lang.String code)
-		throws com.justonetech.sys.NoSuchDictionaryException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns the number of dictionaries where groupId = &#63; and code = &#63;.
-	*
-	* @param groupId the group ID
-	* @param code the code
-	* @return the number of matching dictionaries
-	* @throws SystemException if a system exception occurred
-	*/
-	public int countByGroupIdAndCode(long groupId, java.lang.String code)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns all the dictionaries where groupId = &#63; and parentId = &#63;.
-	*
-	* @param groupId the group ID
-	* @param parentId the parent ID
-	* @return the matching dictionaries
-	* @throws SystemException if a system exception occurred
-	*/
-	public java.util.List<com.justonetech.sys.model.Dictionary> findByGroupIdAndParentId(
-		long groupId, long parentId)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns a range of all the dictionaries where groupId = &#63; and parentId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.justonetech.sys.model.impl.DictionaryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param groupId the group ID
-	* @param parentId the parent ID
-	* @param start the lower bound of the range of dictionaries
-	* @param end the upper bound of the range of dictionaries (not inclusive)
-	* @return the range of matching dictionaries
-	* @throws SystemException if a system exception occurred
-	*/
-	public java.util.List<com.justonetech.sys.model.Dictionary> findByGroupIdAndParentId(
-		long groupId, long parentId, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns an ordered range of all the dictionaries where groupId = &#63; and parentId = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.justonetech.sys.model.impl.DictionaryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param groupId the group ID
-	* @param parentId the parent ID
-	* @param start the lower bound of the range of dictionaries
-	* @param end the upper bound of the range of dictionaries (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching dictionaries
-	* @throws SystemException if a system exception occurred
-	*/
-	public java.util.List<com.justonetech.sys.model.Dictionary> findByGroupIdAndParentId(
-		long groupId, long parentId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns the first dictionary in the ordered set where groupId = &#63; and parentId = &#63;.
-	*
-	* @param groupId the group ID
-	* @param parentId the parent ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching dictionary
-	* @throws com.justonetech.sys.NoSuchDictionaryException if a matching dictionary could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.justonetech.sys.model.Dictionary findByGroupIdAndParentId_First(
-		long groupId, long parentId,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.justonetech.sys.NoSuchDictionaryException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns the first dictionary in the ordered set where groupId = &#63; and parentId = &#63;.
-	*
-	* @param groupId the group ID
-	* @param parentId the parent ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching dictionary, or <code>null</code> if a matching dictionary could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.justonetech.sys.model.Dictionary fetchByGroupIdAndParentId_First(
-		long groupId, long parentId,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns the last dictionary in the ordered set where groupId = &#63; and parentId = &#63;.
-	*
-	* @param groupId the group ID
-	* @param parentId the parent ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching dictionary
-	* @throws com.justonetech.sys.NoSuchDictionaryException if a matching dictionary could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.justonetech.sys.model.Dictionary findByGroupIdAndParentId_Last(
-		long groupId, long parentId,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.justonetech.sys.NoSuchDictionaryException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns the last dictionary in the ordered set where groupId = &#63; and parentId = &#63;.
-	*
-	* @param groupId the group ID
-	* @param parentId the parent ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching dictionary, or <code>null</code> if a matching dictionary could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.justonetech.sys.model.Dictionary fetchByGroupIdAndParentId_Last(
-		long groupId, long parentId,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns the dictionaries before and after the current dictionary in the ordered set where groupId = &#63; and parentId = &#63;.
-	*
-	* @param dictionaryId the primary key of the current dictionary
-	* @param groupId the group ID
-	* @param parentId the parent ID
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the previous, current, and next dictionary
-	* @throws com.justonetech.sys.NoSuchDictionaryException if a dictionary with the primary key could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.justonetech.sys.model.Dictionary[] findByGroupIdAndParentId_PrevAndNext(
-		long dictionaryId, long groupId, long parentId,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.justonetech.sys.NoSuchDictionaryException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Removes all the dictionaries where groupId = &#63; and parentId = &#63; from the database.
-	*
-	* @param groupId the group ID
-	* @param parentId the parent ID
-	* @throws SystemException if a system exception occurred
-	*/
-	public void removeByGroupIdAndParentId(long groupId, long parentId)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns the number of dictionaries where groupId = &#63; and parentId = &#63;.
-	*
-	* @param groupId the group ID
-	* @param parentId the parent ID
-	* @return the number of matching dictionaries
-	* @throws SystemException if a system exception occurred
-	*/
-	public int countByGroupIdAndParentId(long groupId, long parentId)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
 	* Returns all the dictionaries where parentId = &#63; and isValid = &#63;.
 	*
 	* @param parentId the parent ID
@@ -452,7 +241,7 @@ public interface DictionaryPersistence extends BasePersistence<Dictionary> {
 	* @return the matching dictionaries
 	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.justonetech.sys.model.Dictionary> findByParentIdAndIsValid(
+	public java.util.List<com.justonetech.sys.model.Dictionary> findByParentIdIsValid(
 		long parentId, boolean isValid)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -470,7 +259,7 @@ public interface DictionaryPersistence extends BasePersistence<Dictionary> {
 	* @return the range of matching dictionaries
 	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.justonetech.sys.model.Dictionary> findByParentIdAndIsValid(
+	public java.util.List<com.justonetech.sys.model.Dictionary> findByParentIdIsValid(
 		long parentId, boolean isValid, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -489,7 +278,7 @@ public interface DictionaryPersistence extends BasePersistence<Dictionary> {
 	* @return the ordered range of matching dictionaries
 	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.justonetech.sys.model.Dictionary> findByParentIdAndIsValid(
+	public java.util.List<com.justonetech.sys.model.Dictionary> findByParentIdIsValid(
 		long parentId, boolean isValid, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -504,7 +293,7 @@ public interface DictionaryPersistence extends BasePersistence<Dictionary> {
 	* @throws com.justonetech.sys.NoSuchDictionaryException if a matching dictionary could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.justonetech.sys.model.Dictionary findByParentIdAndIsValid_First(
+	public com.justonetech.sys.model.Dictionary findByParentIdIsValid_First(
 		long parentId, boolean isValid,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.justonetech.sys.NoSuchDictionaryException,
@@ -519,7 +308,7 @@ public interface DictionaryPersistence extends BasePersistence<Dictionary> {
 	* @return the first matching dictionary, or <code>null</code> if a matching dictionary could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.justonetech.sys.model.Dictionary fetchByParentIdAndIsValid_First(
+	public com.justonetech.sys.model.Dictionary fetchByParentIdIsValid_First(
 		long parentId, boolean isValid,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -534,7 +323,7 @@ public interface DictionaryPersistence extends BasePersistence<Dictionary> {
 	* @throws com.justonetech.sys.NoSuchDictionaryException if a matching dictionary could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.justonetech.sys.model.Dictionary findByParentIdAndIsValid_Last(
+	public com.justonetech.sys.model.Dictionary findByParentIdIsValid_Last(
 		long parentId, boolean isValid,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.justonetech.sys.NoSuchDictionaryException,
@@ -549,7 +338,7 @@ public interface DictionaryPersistence extends BasePersistence<Dictionary> {
 	* @return the last matching dictionary, or <code>null</code> if a matching dictionary could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.justonetech.sys.model.Dictionary fetchByParentIdAndIsValid_Last(
+	public com.justonetech.sys.model.Dictionary fetchByParentIdIsValid_Last(
 		long parentId, boolean isValid,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -565,7 +354,7 @@ public interface DictionaryPersistence extends BasePersistence<Dictionary> {
 	* @throws com.justonetech.sys.NoSuchDictionaryException if a dictionary with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.justonetech.sys.model.Dictionary[] findByParentIdAndIsValid_PrevAndNext(
+	public com.justonetech.sys.model.Dictionary[] findByParentIdIsValid_PrevAndNext(
 		long dictionaryId, long parentId, boolean isValid,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.justonetech.sys.NoSuchDictionaryException,
@@ -578,7 +367,7 @@ public interface DictionaryPersistence extends BasePersistence<Dictionary> {
 	* @param isValid the is valid
 	* @throws SystemException if a system exception occurred
 	*/
-	public void removeByParentIdAndIsValid(long parentId, boolean isValid)
+	public void removeByParentIdIsValid(long parentId, boolean isValid)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
@@ -589,7 +378,7 @@ public interface DictionaryPersistence extends BasePersistence<Dictionary> {
 	* @return the number of matching dictionaries
 	* @throws SystemException if a system exception occurred
 	*/
-	public int countByParentIdAndIsValid(long parentId, boolean isValid)
+	public int countByParentIdIsValid(long parentId, boolean isValid)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**

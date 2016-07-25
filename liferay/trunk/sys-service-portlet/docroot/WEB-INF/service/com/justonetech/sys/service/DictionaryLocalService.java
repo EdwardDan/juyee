@@ -253,42 +253,31 @@ public interface DictionaryLocalService extends BaseLocalService,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
 
-	public com.justonetech.sys.model.Dictionary findByCode(long groupId,
+	public com.justonetech.sys.model.Dictionary findByCode(
 		java.lang.String code)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public com.justonetech.sys.model.Dictionary findByGroupIdAndCode(
-		long groupId, java.lang.String code)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
 	public java.util.List<com.justonetech.sys.model.Dictionary> findByParentId(
-		long parentId, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException;
+		long parentId, int start, int end);
 
-	public java.util.List<com.justonetech.sys.model.Dictionary> findByGroupIdAndParentId(
-		long groupId, long parentId, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public int countByGroupIdAndParentId(long groupId, long parentId)
+	public int countByParentId(long parentId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.justonetech.sys.model.Dictionary> findByParentIdAndIsValid(
 		long parentId, boolean isValid, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public int countByParentIdAndIsValid(long parentId, boolean isValid)
+	public int countByParentIdIsValid(long parentId, boolean isValid)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public java.util.List<com.justonetech.sys.model.Dictionary> findByG_P_K(
-		long groupId, long parentId, java.lang.String keywords, int start,
-		int end) throws com.liferay.portal.kernel.exception.SystemException;
+	public java.util.List<com.justonetech.sys.model.Dictionary> findByParentIdKeywords(
+		long parentId, java.lang.String keywords, int start, int end);
 
-	public int countByG_P_K(long groupId, long parentId,
-		java.lang.String keywords)
+	public int countByParentIdKeywords(long parentId, java.lang.String keywords)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQueryByG_P_K(
-		long groupId, long parentId, java.lang.String keywords);
+	public com.liferay.portal.kernel.dao.orm.DynamicQuery createByParentIdKeywords(
+		long parentId, java.lang.String keywords);
 
 	public void deleteDictionaries(java.lang.String[] dictionaryIds);
 

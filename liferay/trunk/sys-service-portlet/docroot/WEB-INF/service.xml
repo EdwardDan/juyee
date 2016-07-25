@@ -13,8 +13,6 @@
 
 		<!-- Group instance -->
 
-		<column name="groupId" type="long" />
-
 		<!-- Audit fields -->
 		<column name="userId" type="long" />
 		<column name="userName" type="String" />
@@ -50,18 +48,8 @@
 		<finder name="ParentId" return-type="Collection">
 			<finder-column name="parentId" />
 		</finder>
-		
-		<finder name="GroupIdAndCode" return-type="Dictionary">
-			<finder-column name="groupId" />
-			<finder-column name="code" />
-		</finder>
 
-		<finder name="GroupIdAndParentId" return-type="Collection">
-			<finder-column name="groupId" />
-			<finder-column name="parentId" />
-		</finder>
-
-		<finder name="ParentIdAndIsValid" return-type="Collection">
+		<finder name="ParentIdIsValid" return-type="Collection">
 			<finder-column name="parentId" />
 			<finder-column name="isValid" />
 		</finder>

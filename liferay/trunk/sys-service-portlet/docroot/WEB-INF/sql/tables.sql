@@ -1,6 +1,5 @@
 create table sys_Dictionary (
 	dictionaryId LONG not null primary key,
-	groupId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
 	createTime DATE null,

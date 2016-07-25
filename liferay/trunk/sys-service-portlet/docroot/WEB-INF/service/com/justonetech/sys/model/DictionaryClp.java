@@ -76,7 +76,6 @@ public class DictionaryClp extends BaseModelImpl<Dictionary>
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("dictionaryId", getDictionaryId());
-		attributes.put("groupId", getGroupId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
 		attributes.put("createTime", getCreateTime());
@@ -102,12 +101,6 @@ public class DictionaryClp extends BaseModelImpl<Dictionary>
 
 		if (dictionaryId != null) {
 			setDictionaryId(dictionaryId);
-		}
-
-		Long groupId = (Long)attributes.get("groupId");
-
-		if (groupId != null) {
-			setGroupId(groupId);
 		}
 
 		Long userId = (Long)attributes.get("userId");
@@ -217,29 +210,6 @@ public class DictionaryClp extends BaseModelImpl<Dictionary>
 				Method method = clazz.getMethod("setDictionaryId", long.class);
 
 				method.invoke(_dictionaryRemoteModel, dictionaryId);
-			}
-			catch (Exception e) {
-				throw new UnsupportedOperationException(e);
-			}
-		}
-	}
-
-	@Override
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	@Override
-	public void setGroupId(long groupId) {
-		_groupId = groupId;
-
-		if (_dictionaryRemoteModel != null) {
-			try {
-				Class<?> clazz = _dictionaryRemoteModel.getClass();
-
-				Method method = clazz.getMethod("setGroupId", long.class);
-
-				method.invoke(_dictionaryRemoteModel, groupId);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -733,7 +703,6 @@ public class DictionaryClp extends BaseModelImpl<Dictionary>
 		DictionaryClp clone = new DictionaryClp();
 
 		clone.setDictionaryId(getDictionaryId());
-		clone.setGroupId(getGroupId());
 		clone.setUserId(getUserId());
 		clone.setUserName(getUserName());
 		clone.setCreateTime(getCreateTime());
@@ -799,12 +768,10 @@ public class DictionaryClp extends BaseModelImpl<Dictionary>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(35);
+		StringBundler sb = new StringBundler(33);
 
 		sb.append("{dictionaryId=");
 		sb.append(getDictionaryId());
-		sb.append(", groupId=");
-		sb.append(getGroupId());
 		sb.append(", userId=");
 		sb.append(getUserId());
 		sb.append(", userName=");
@@ -842,7 +809,7 @@ public class DictionaryClp extends BaseModelImpl<Dictionary>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(55);
+		StringBundler sb = new StringBundler(52);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.sys.model.Dictionary");
@@ -851,10 +818,6 @@ public class DictionaryClp extends BaseModelImpl<Dictionary>
 		sb.append(
 			"<column><column-name>dictionaryId</column-name><column-value><![CDATA[");
 		sb.append(getDictionaryId());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>groupId</column-name><column-value><![CDATA[");
-		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userId</column-name><column-value><![CDATA[");
@@ -923,7 +886,6 @@ public class DictionaryClp extends BaseModelImpl<Dictionary>
 	}
 
 	private long _dictionaryId;
-	private long _groupId;
 	private long _userId;
 	private String _userUuid;
 	private String _userName;
