@@ -33,6 +33,8 @@ $theme.include($body_top_include)
 						<span class="site-name" title="#language_format ("go-to-x", [$site_name])">
 							$site_name
 						</span>
+					#else
+						$theme.getSetting("site-name")
 					#end
 				</a>
 
@@ -64,7 +66,7 @@ $theme.include($body_top_include)
 
 	<footer id="footer" role="contentinfo">
 		<p class="powered-by">
-			#language ("powered-by") <a href="http://www.liferay.com" rel="external">Liferay</a>
+			#language ("powered-by") $theme.getSetting("powered-by-company")
 		</p>
 	</footer>
 </div>

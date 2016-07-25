@@ -7,8 +7,12 @@
 	</compatibility>
 	<theme id="dev" name="Dev">
 		<settings>
-			<setting configurable="false" key="portlet-setup-show-borders-default"
-				type="checkbox" value="false" />
+			<setting configurable="true" key="portlet-setup-show-borders-default"
+				type="checkbox" value="true" />
+			<setting configurable="true" key="site-name" type="text"
+				value="" />
+			<setting configurable="true" key="powered-by-company" type="text"
+				value="Liferay" />
 		</settings>
 	</theme>
 </look-and-feel>
