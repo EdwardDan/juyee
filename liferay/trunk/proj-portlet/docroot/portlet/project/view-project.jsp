@@ -6,7 +6,7 @@
 <portlet:actionURL var="saveProject" name="saveProject">
 	<portlet:param name="redirect" value="${viewURL}" />
 </portlet:actionURL>
- 
+
 <%
 	Long projectId = ParamUtil.getLong(request, "projectId");
 	String title = "添加项目信息";
@@ -98,40 +98,29 @@
 	<liferay-ui:panel-container accordion="true" extended="true">
 		<liferay-ui:panel title="项目基本信息">
 			<aui:fieldset>
-				<aui:input name="projectId" type="hidden" value="<%=projectId%>" />
+				<%-- <aui:input name="projectId" type="hidden" value="<%=projectId%>" /> --%>
 				<aui:row>
 					<aui:col span="6" cssClass="text-left">
-						<aui:input type="text" label="项目编号" name="projNum"
-							value="${project.projNum}">
-							<aui:validator name="required" errorMessage="项目编号不能为空!"></aui:validator>
-							<aui:validator name="maxLength" errorMessage="">75</aui:validator>
-						</aui:input>
+						<label class="control-label"> 项目编号 </label>
+						${project.projNum}
 					</aui:col>
 					<aui:col span="6" cssClass="text-left">
-						<aui:input type="text" label="项目名称" name="projName"
-							value="${project.projName}">
-							<aui:validator name="required" errorMessage="项目名称不能为空!"></aui:validator>
-						</aui:input>
+						<label class="control-label"> 项目名称 </label>
+						${project.projName}
 					</aui:col>
 				</aui:row>
 				<aui:row>
 					<aui:col span="6" cssClass="text-left">
-						<aui:input type="text" label="项目排序号" name="sortNo"
-							value="${project.sortNo}">
-							<aui:validator name="required" errorMessage="项目排序号不能为空!"></aui:validator>
-						</aui:input>
+						<label class="control-label"> 项目排序号</label>${project.sortNo}
 					</aui:col>
 					<aui:col span="6" cssClass="text-left">
-						<label class="control-label" for="startDate"> 实际开工 </label>
-						<input type="text" class="field" name="startDate"
-							id="startDate" onfocus="WdatePicker({lang:'zh-cn'})"
-							required="required"
-							value='<fmt:formatDate value="${project.startDate }" pattern="yyyy-MM-dd"/>'>
+						<label class="control-label"> 实际开工</label>
+						<fmt:formatDate value="${project.startDate }" pattern="yyyy-MM-dd" />
 					</aui:col>
 				</aui:row>
 				<aui:row>
 					<aui:col span="6" cssClass="text-left">
-						<aui:select label="项目状态" name="projStatus">
+						<aui:select label="项目状态" name="projStatus" disabled="true">
 							<c:forEach items="${projectStatuses }" var="projStatus">
 								<aui:option value="${projStatus.dictionaryId}"
 									selected="${projStatus.dictionaryId eq project.projStatus}">${projStatus.name }</aui:option>
@@ -139,15 +128,13 @@
 						</aui:select>
 					</aui:col>
 					<aui:col span="6" cssClass="text-left">
-						<label class="control-label" for="endDate"> 实际完成 </label>
-						<input type="text" class="field" name="endDate" id="endDate"
-							onfocus="WdatePicker({lang:'zh-cn'})" required="required"
-							value='<fmt:formatDate value="${project.endDate }" pattern="yyyy-MM-dd"/>'>
+						<label class="control-label"> 实际完成 </label>
+						<fmt:formatDate value="${project.endDate }" pattern="yyyy-MM-dd" />
 					</aui:col>
 				</aui:row>
 				<aui:row>
 					<aui:col span="6" cssClass="text-left">
-						<aui:select label="业态类别" name="industryCategory">
+						<aui:select disabled="true" label="业态类别" name="industryCategory">
 							<c:forEach items="${serviceTypes }" var="industryCategory">
 								<aui:option value="${industryCategory.dictionaryId}"
 									selected="${industryCategory.dictionaryId eq project.industryCategory}">${industryCategory.name }</aui:option>
@@ -158,7 +145,7 @@
 						<aui:field-wrapper name="涉及区县">
 							<c:forEach items="${areaNames }" var="areaName"
 								varStatus="sortNo">
-								<aui:input name="involveCounty" type="checkbox"
+								<aui:input name="involveCounty" type="checkbox" disabled="true"
 									value="${areaName.dictionaryId}"
 									checked="${fn:contains(project.involveCounty ,areaName.dictionaryId) }"
 									label="${areaName. name}" inlineField="true" />
@@ -171,28 +158,25 @@
 				</aui:row>
 				<aui:row>
 					<aui:col span="6" cssClass="text-left">
-						<aui:select label="管理属性" name="manageAttr" inlineField="true">
+						<aui:select disabled="true" label="管理属性" name="manageAttr" inlineField="true">
 							<c:forEach items="${manageTypes }" var="managerAttr">
 								<aui:option value="${managerAttr. dictionaryId }"
 									selected="${managerAttr. dictionaryId eq project.manageAttr }">${managerAttr.name }</aui:option>
 							</c:forEach>
 						</aui:select>
-						<aui:select label="" name="isMajor" inlineField="true">
+						<aui:select disabled="true" label="" name="isMajor" inlineField="true">
 							<aui:option value="1" selected="${project. isMajor}">重大</aui:option>
 							<aui:option value="0" selected="${!project. isMajor}">非重大</aui:option>
 						</aui:select>
 					</aui:col>
 
 					<aui:col span="6" cssClass="text-left">
-						<aui:input type="text" label="规划红线（宽度m）" name="ghhx"
-							value="${project.ghhx}">
-							<aui:validator name="required" errorMessage="规划红线（宽度m）不能为空!"></aui:validator>
-						</aui:input>
+						<label class="control-label"> 规划红线（宽度m）</label>${project.ghhx}
 					</aui:col>
 				</aui:row>
 				<aui:row>
 					<aui:col span="6" cssClass="text-left">
-						<aui:select label="项目来源" name="projSource">
+						<aui:select disabled="true" label="项目来源" name="projSource">
 							<c:forEach items="${projectSources }" var="projSource">
 								<aui:option value="${projSource. dictionaryId }"
 									selected="${projSource.dictionaryId eq project.projSource}">${projSource.name }</aui:option>
@@ -200,7 +184,7 @@
 						</aui:select>
 					</aui:col>
 					<aui:col span="6" cssClass="text-left">
-						<aui:select label="道路技术等级" name="roadTechLevel">
+						<aui:select disabled="true" label="道路技术等级" name="roadTechLevel">
 							<c:forEach items="${roadTechLevels }" var="roadTechLevel">
 								<aui:option value="${roadTechLevel.dictionaryId }"
 									selected="${roadTechLevel.dictionaryId eq project.roadTechLevel}">${roadTechLevel.name }</aui:option>
@@ -210,7 +194,7 @@
 				</aui:row>
 				<aui:row>
 					<aui:col span="6" cssClass="text-left">
-						<aui:select label="所属区县" name="belongCounty">
+						<aui:select disabled="true" label="所属区县" name="belongCounty">
 							<aui:option value="0">上海市</aui:option>
 							<c:forEach items="${countys }" var="belongCounty">
 								<aui:option value="${belongCounty.dictionaryId}"
@@ -219,7 +203,7 @@
 						</aui:select>
 					</aui:col>
 					<aui:col span="6" cssClass="text-left">
-						<aui:select label="道路等级" name="roadLevel">
+						<aui:select disabled="true" label="道路等级" name="roadLevel">
 							<c:forEach items="${roadLevels }" var="roadLevel">
 								<aui:option value="${roadLevel.dictionaryId}"
 									selected="${roadLevel.dictionaryId eq project.roadLevel}">${roadLevel .name}</aui:option>
@@ -231,7 +215,7 @@
 
 				<aui:row>
 					<aui:col span="6" cssClass="text-left">
-						<aui:select label="项目属性" name="projAttr">
+						<aui:select disabled="true" label="项目属性" name="projAttr">
 							<c:forEach items="${projectProperties }" var="projAttr">
 								<aui:option value="${projAttr.dictionaryId }"
 									selected="${projAttr.dictionaryId eq project.projAttr}">${projAttr.name }</aui:option>
@@ -239,10 +223,7 @@
 						</aui:select>
 					</aui:col>
 					<aui:col span="6" cssClass="text-left">
-						<aui:input type="text" label="起讫地点" name="location"
-							value="${project.location}">
-							<aui:validator name="required" errorMessage="起讫地点不能为空!"></aui:validator>
-						</aui:input>
+						<label class="control-label"> 起讫地点</label>${project.location}
 					</aui:col>
 				</aui:row>
 			</aui:fieldset>
@@ -251,144 +232,107 @@
 			<aui:fieldset>
 				<aui:row>
 					<aui:col span="6" cssClass="text-left">
-						<label class="control-label" for="startNode"> 目标开工节点 </label>
-						<input type="text" class="field" name="startNode error-field"
-							id="startNode" onfocus="WdatePicker({lang:'zh-cn'})"
-							required="required"
-							value='<fmt:formatDate value="${project.startNode }" pattern="yyyy-MM-dd"/>'>
+						<label class="control-label"> 目标开工节点 </label>
+						<fmt:formatDate value="${project.startNode }" pattern="yyyy-MM-dd" />
 					</aui:col>
 					<aui:col span="6" cssClass="text-left">
-						<aui:input type="text" label="计划总投资" name="planTotle"
-							value="${project.planTotle}">
-							<aui:validator name="required" errorMessage="计划总投资不能为空!"></aui:validator>
-						</aui:input>
+						<label class="control-label"> 计划总投资</label>${project.planTotle}
 					</aui:col>
 				</aui:row>
 				<aui:row>
 					<aui:col span="6" cssClass="text-left">
-						<label class="control-label" for="endNode"> 目标开工节点 </label>
-						<input type="text" class="field" name="endNode error-field"
-							id="endNode" onfocus="WdatePicker({lang:'zh-cn'})"
-							required="required"
-							value='<fmt:formatDate value="${project.endNode }" pattern="yyyy-MM-dd"/>'>
+						<label class="control-label"> 目标开工节点 </label>
+						<fmt:formatDate value="${project.endNode }" pattern="yyyy-MM-dd" />
 					</aui:col>
 					<aui:col span="6" cssClass="text-left">
-						<aui:input type="text" label="工可批复总投资" name="gkpfTotle"
-							value="${project.gkpfTotle}" />
+						<label class="control-label"> 工可批复总投资</label>${project.gkpfTotle}
 					</aui:col>
 				</aui:row>
 				<aui:row>
 					<aui:col span="6" cssClass="text-left">
-						<label class="control-label" for="planStartDate"> 目标开工节点 </label>
-						<input type="text" class="field" name="planStartDate error-field"
-							id="planStartDate" onfocus="WdatePicker({lang:'zh-cn'})"
-							required="required"
-							value='<fmt:formatDate value="${project.planStartDate }" pattern="yyyy-MM-dd"/>'>
+						<label class="control-label"> 目标开工节点 </label>
+						<fmt:formatDate value="${project.planStartDate }"
+							pattern="yyyy-MM-dd" />
 					</aui:col>
 					<aui:col span="6" cssClass="text-left">
-						<aui:input type="text" label="工可批复前期费用" name="gkpfPre"
-							value="${project.gkpfPre}" />
+						<label class="control-label"> 工可批复前期费用</label>${project.gkpfPre}
 					</aui:col>
 				</aui:row>
 				<aui:row>
 					<aui:col span="6" cssClass="text-left">
-						<label class="control-label" for="planEndDate"> 目标开工节点 </label>
-						<input type="text" class="field" name="planEndDate error-field"
-							id="planEndDate" onfocus="WdatePicker({lang:'zh-cn'})"
-							required="required"
-							value='<fmt:formatDate value="${project.planEndDate }" pattern="yyyy-MM-dd"/>'>
+						<label class="control-label"> 目标开工节点</label>
+						<fmt:formatDate value="${project.planEndDate }"
+							pattern="yyyy-MM-dd" />
 					</aui:col>
 					<aui:col span="6" cssClass="text-left">
-						<aui:input type="text" label="工可批复建安费用" name="gkpfJafy"
-							value="${project.gkpfJafy}" />
+						<label class="control-label"> 工可批复建安费用</label>${project.gkpfJafy}
 					</aui:col>
 				</aui:row>
 				<aui:row>
 					<aui:col span="6" cssClass="text-left">
-						<aui:input type="textarea" label="工程范围和主要内容" name="introduction"
-							value="${project.introduction}" />
+						<label class="control-label"> 工程范围和主要内容</label>${project.introduction}
 					</aui:col>
 					<aui:col span="6" cssClass="text-left">
-						<aui:input type="text" label="初设批复总投资" name="csTotle"
-							value="${project.csTotle}" />
+						<label class="control-label"> 初设批复总投资</label>${project.csTotle}
 					</aui:col>
 				</aui:row>
 				<aui:row>
 					<aui:col span="6" cssClass="text-left">
-						<aui:input type="text" label="初设批复前期费用" name="csPre"
-							value="${project.csPre}" />
+						<label class="control-label"> 初设批复前期费用</label>${project.csPre}
 					</aui:col>
 					<aui:col span="6" cssClass="text-left">
-						<aui:input type="text" label="初设批复建安费用" name="csJafy"
-							value="${project.csJafy}" />
+						<label class="control-label"> 初设批复建安费用</label>${project.csJafy}
 					</aui:col>
 				</aui:row>
 
 				<liferay-ui:tabs names="${companyName }" refresh="false">
 					<c:forEach items="${companyMap }" var="map">
 						<liferay-ui:section>
-							<aui:input name="type" type="hidden"
-								value="${map.key.dictionaryId }" />
-							<aui:input name="companyId" type="hidden"
-								value="${map.value.companyId }" />
 							<aui:row>
 								<aui:col span="6" cssClass="text-left">
-									<aui:input type="text" label="${map.key.name }" name="unitName"
-										value="${map.value.unitName}" />
+									<label class="control-label"> ${map.key.name }</label>${map.value.unitName}
 								</aui:col>
 							</aui:row>
 							<aui:row>
 								<aui:col span="3" cssClass="text-left">
-									<aui:input type="text" label="独立法人" name="indepLegal"
-										value="${map.value.indepLegal}" />
+									<label class="control-label"> 独立法人</label>${map.value.indepLegal}
 								</aui:col>
 								<aui:col span="3" cssClass="text-left">
-									<aui:input type="text" label="独立法人电话" name="indepLegalTel"
-										value="${map.value.indepLegalTel}" />
+									<label class="control-label"> 独立法人电话</label>${map.value.indepLegalTel}
 								</aui:col>
 								<aui:col span="3" cssClass="text-left">
-									<aui:input type="text" label="独立法人传真" name="indepLegalFax"
-										value="${map.value.indepLegalFax}" />
+									<label class="control-label"> 独立法人传真</label>${map.value.indepLegalFax}
 								</aui:col>
 								<aui:col span="3" cssClass="text-left">
-									<aui:input type="text" label="独立法人手机" name="indepLegalPhone"
-										value="${map.value.indepLegalPhone}" />
+									<label class="control-label"> 独立法人手机</label>${map.value.indepLegalPhone}
 								</aui:col>
 							</aui:row>
 							<aui:row>
 								<aui:col span="3" cssClass="text-left">
-									<aui:input type="text" label="项目法人" name="projLegal"
-										value="${map.value.projLegal}" />
+									<label class="control-label"> 项目法人</label>${map.value.projLegal}
 								</aui:col>
 								<aui:col span="3" cssClass="text-left">
-									<aui:input type="text" label="项目法人电话" name="projLegalTel"
-										value="${map.value.projLegalTel}" />
+									<label class="control-label"> 项目法人电话</label>${map.value.projLegalTel}
 								</aui:col>
 								<aui:col span="3" cssClass="text-left">
-									<aui:input type="text" label="项目法人传真" name="projLegalFax"
-										value="${map.value.projLegalFax}" />
+									<label class="control-label"> 项目法人传真</label>${map.value.projLegalFax}
 								</aui:col>
 								<aui:col span="3" cssClass="text-left">
-									<aui:input type="text" label="项目法人手机" name="projLegalPhone"
-										value="${map.value.projLegalPhone}" />
+									<label class="control-label"> 项目法人手机</label>${map.value.projLegalPhone}
 								</aui:col>
 							</aui:row>
 							<aui:row>
 								<aui:col span="3" cssClass="text-left">
-									<aui:input type="text" label="联系人" name="linkman"
-										value="${map.value.linkman}" />
+									<label class="control-label"> 联系人</label>${map.value.linkman}
 								</aui:col>
 								<aui:col span="3" cssClass="text-left">
-									<aui:input type="text" label="联系人电话" name="linkmanTel"
-										value="${map.value.linkmanTel}" />
+									<label class="control-label"> 联系人电话</label>${map.value.linkmanTel}
 								</aui:col>
 								<aui:col span="3" cssClass="text-left">
-									<aui:input type="text" label="联系人传真" name="linkmanFax"
-										value="${map.value.linkmanFax}" />
+									<label class="control-label"> 联系人传真</label>${map.value.linkmanFax}
 								</aui:col>
 								<aui:col span="3" cssClass="text-left">
-									<aui:input type="text" label="联系人手机" name="linkmanPhone"
-										value="${map.value.linkmanPhone}" />
+									<label class="control-label"> 联系人手机 </label>${map.value.linkmanPhone}
 								</aui:col>
 							</aui:row>
 						</liferay-ui:section>

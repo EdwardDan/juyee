@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ include file="/common/init.jsp"%>
 
-<c:set var="contentPath" value="${request.contextPath}/portlet/project" />
+<c:set var="contentPath" value="${request.contextPath}/portlet/bidding" />
 <portlet:renderURL var="viewURL" />
 <portlet:renderURL var="add">
 	<portlet:param name="mvcPath" value="${contentPath }/edit-project.jsp" />
@@ -42,23 +42,13 @@
 				property="gkpfTotle" />
 			<liferay-ui:search-container-column-text name="action">
 
-				<portlet:renderURL var="view">
+				<portlet:renderURL var="viewBidding">
 					<portlet:param name="projectId" value="${proj.projectId}" />
 					<portlet:param name="mvcPath"
-						value="${contentPath }/view-project.jsp" />
+						value="${contentPath }/viewBidding.jsp" />
 				</portlet:renderURL>
-				<portlet:actionURL var="del" name="doDelete">
-					<portlet:param name="projectId" value="${proj.projectId}" />
-				</portlet:actionURL>
-				<portlet:actionURL var="edit" name="editProject">
-					<portlet:param name="projectId" value="${proj.projectId}" />
-					<portlet:param name="mvcPath"
-						value="${contentPath }/edit-project.jsp" />
-				</portlet:actionURL>
 				<liferay-ui:icon-menu>
-					<liferay-ui:icon image="view" url="${view}" />
-					<liferay-ui:icon image="edit" url="${edit}" />
-					<liferay-ui:icon-delete image="delete" url="${del}" />
+					<liferay-ui:icon image="edit" url="${viewBidding}" />
 				</liferay-ui:icon-menu>
 			</liferay-ui:search-container-column-text>
 		</liferay-ui:search-container-row>
