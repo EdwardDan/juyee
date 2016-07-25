@@ -5,18 +5,21 @@
 <portlet:renderURL var="viewURL" >
 	<portlet:param name="parentId" value="${parentDictionary.dictionaryId}" />
 </portlet:renderURL>
-<liferay-ui:header title="系统字典"/>
 <portlet:actionURL var="deleteDictionariesURL" name="deleteDictionaries">
 	<portlet:param name="parentId" value="${parentDictionary.dictionaryId}" />
 	<portlet:param name="redirect" value="${viewURL}" />
 </portlet:actionURL>
- 
-<c:if test="${!empty parentDictionary }">
+<c:choose>
+<c:when test="${!empty parentDictionary }">
 	<portlet:renderURL var="backURL">
 		<portlet:param name="parentId" value="${parentDictionary.parentId}" />
 	</portlet:renderURL>
 	<liferay-ui:header title="${parentDictionary.name}" backURL="${backURL}" />
-</c:if>
+</c:when>
+<c:otherwise>
+	<liferay-ui:header title="系统字典"/>
+</c:otherwise>
+</c:choose> 
 <aui:form action="${viewURL }" name="fm">
 	<aui:row>
 		<aui:col span="6">

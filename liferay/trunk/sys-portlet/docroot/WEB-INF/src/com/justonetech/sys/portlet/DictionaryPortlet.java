@@ -42,13 +42,6 @@ public class DictionaryPortlet extends MVCPortlet {
     public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
         throws IOException, PortletException {
 
-        long groupId = 0;
-        try {
-            groupId = PortalUtil.getScopeGroupId(renderRequest);
-        }
-        catch (PortalException | SystemException e) {
-            log.info("无法获取groupId：" + e.getMessage());
-        }
         long parentId = ParamUtil.getLong(renderRequest, "parentId", 0);
         Dictionary parentDictionary = null;
         if (parentId != 0) {
@@ -66,17 +59,10 @@ public class DictionaryPortlet extends MVCPortlet {
         int start = pageSize * (pageNumber - 1);
         int end = pageSize * pageNumber;
 
-        List<Dictionary> dictionaries = Collections.emptyList();
-        try {
-            dictionaries = DictionaryLocalServiceUtil.findByG_P_K(groupId, parentId, keywords, start, end);
-        }
-        catch (SystemException e) {
-            log.info("DictionaryLocalServiceUtil.findByG_P_K(" + keywords + ", " + start + ", " + end + ")出错：" +
-                e.getMessage());
-        }
+        List<Dictionary> dictionaries = DictionaryLocalServiceUtil.findByParentIdKeywords(parentId, keywords, start, end);
         int dictionariesCount = 0;
         try {
-            dictionariesCount = DictionaryLocalServiceUtil.countByG_P_K(groupId, parentId, keywords);
+            dictionariesCount = DictionaryLocalServiceUtil.countByParentIdKeywords(parentId, keywords);
         }
         catch (SystemException e) {
             log.info("DictionaryLocalServiceUtil.countByG_P_K(" + keywords + ")出错：" + e.getMessage());
@@ -105,10 +91,9 @@ public class DictionaryPortlet extends MVCPortlet {
                 parentDictionary = DictionaryLocalServiceUtil.getDictionary(parentId);
                 actionRequest.setAttribute("parentDictionary", parentDictionary);
             }
-            long groupId = PortalUtil.getScopeGroupId(actionRequest);
             List<Dictionary> dictionaries =
-                DictionaryLocalServiceUtil.findByGroupIdAndParentId(
-                    groupId, parentId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+                DictionaryLocalServiceUtil.findByParentId(
+                    parentId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
             int sortNo = (dictionaries.isEmpty() ? 0 : dictionaries.get(dictionaries.size() - 1).getSortNo()) + 1;
             actionRequest.setAttribute("sortNo", sortNo);
@@ -137,9 +122,6 @@ public class DictionaryPortlet extends MVCPortlet {
             dictionaryId = CounterLocalServiceUtil.increment();
             dictionary = DictionaryLocalServiceUtil.createDictionary(dictionaryId);
 
-            long groupId = PortalUtil.getScopeGroupId(actionRequest);
-
-            dictionary.setGroupId(groupId);
             long parentId = ParamUtil.getLong(actionRequest, "parentId");
             dictionary.setParentId(parentId);
             dictionary.setTreePath((dictionary.getParentId() == 0
@@ -195,9 +177,8 @@ public class DictionaryPortlet extends MVCPortlet {
         String deleteDictionaryIds = ParamUtil.getString(actionRequest, "dictionaryIds");
         String[] dictionaryIds = deleteDictionaryIds.split(",");
         DictionaryLocalServiceUtil.recursiveDeleteDictionaries(dictionaryIds);
-        long groupId = PortalUtil.getScopeGroupId(actionRequest);
         if (parentId != 0) {
-            int dictionariesCount = DictionaryLocalServiceUtil.countByGroupIdAndParentId(groupId, parentId);
+            int dictionariesCount = DictionaryLocalServiceUtil.countByParentId(parentId);
             if (dictionariesCount == 0) {
                 DictionaryLocalServiceUtil.updateIsLeaf(
                     DictionaryLocalServiceUtil.getDictionary(parentId), true, PortalUtil.getUser(actionRequest));
