@@ -712,6 +712,9 @@ $dockbarOpenGradientStart: #0EA6F9;
 	.control-group {
 		margin-bottom: 5px;
 	}
+	input[type="radio"],input[type="checkbox"] {
+		margin: 0px;
+	}
 }
 
 .lfr-search-container{

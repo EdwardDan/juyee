@@ -1352,6 +1352,8 @@
     vertical-align: middle; }
   .aui .control-group {
     margin-bottom: 5px; }
+  .aui input[type="radio"], .aui input[type="checkbox"] {
+    margin: 0px; }
 
 .lfr-search-container {
   margin-top: 0px !important; }
