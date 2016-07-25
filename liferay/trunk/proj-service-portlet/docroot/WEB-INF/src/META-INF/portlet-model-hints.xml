@@ -68,11 +68,11 @@
 		<field name="planStartDate" type="Date" />
 		<field name="planEndDate" type="Date" />
 		<field name="introduction" type="String" />
-		<field name="planTotleInvestment" type="double" />
-		<field name="feasibilityTotleInvestment" type="double" />
+		<field name="planTotalInvestment" type="double" />
+		<field name="feasibilityTotalInvestment" type="double" />
 		<field name="feasibilityPreCost" type="double" />
 		<field name="feasibilityJiananCost" type="double" />
-		<field name="firstFoundedTotleInvestment" type="double" />
+		<field name="firstFoundedTotalInvestment" type="double" />
 		<field name="firstFoundedPreCost" type="double" />
 		<field name="firstFoundedJiananCost" type="double" />
 	</model>

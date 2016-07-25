@@ -510,32 +510,32 @@ public interface ProjectModel extends BaseModel<Project> {
 	public void setIntroduction(String introduction);
 
 	/**
-	 * Returns the plan totle investment of this project.
+	 * Returns the plan total investment of this project.
 	 *
-	 * @return the plan totle investment of this project
+	 * @return the plan total investment of this project
 	 */
-	public double getPlanTotleInvestment();
+	public double getPlanTotalInvestment();
 
 	/**
-	 * Sets the plan totle investment of this project.
+	 * Sets the plan total investment of this project.
 	 *
-	 * @param planTotleInvestment the plan totle investment of this project
+	 * @param planTotalInvestment the plan total investment of this project
 	 */
-	public void setPlanTotleInvestment(double planTotleInvestment);
+	public void setPlanTotalInvestment(double planTotalInvestment);
 
 	/**
-	 * Returns the feasibility totle investment of this project.
+	 * Returns the feasibility total investment of this project.
 	 *
-	 * @return the feasibility totle investment of this project
+	 * @return the feasibility total investment of this project
 	 */
-	public double getFeasibilityTotleInvestment();
+	public double getFeasibilityTotalInvestment();
 
 	/**
-	 * Sets the feasibility totle investment of this project.
+	 * Sets the feasibility total investment of this project.
 	 *
-	 * @param feasibilityTotleInvestment the feasibility totle investment of this project
+	 * @param feasibilityTotalInvestment the feasibility total investment of this project
 	 */
-	public void setFeasibilityTotleInvestment(double feasibilityTotleInvestment);
+	public void setFeasibilityTotalInvestment(double feasibilityTotalInvestment);
 
 	/**
 	 * Returns the feasibility pre cost of this project.
@@ -566,19 +566,19 @@ public interface ProjectModel extends BaseModel<Project> {
 	public void setFeasibilityJiananCost(double feasibilityJiananCost);
 
 	/**
-	 * Returns the first founded totle investment of this project.
+	 * Returns the first founded total investment of this project.
 	 *
-	 * @return the first founded totle investment of this project
+	 * @return the first founded total investment of this project
 	 */
-	public double getFirstFoundedTotleInvestment();
+	public double getFirstFoundedTotalInvestment();
 
 	/**
-	 * Sets the first founded totle investment of this project.
+	 * Sets the first founded total investment of this project.
 	 *
-	 * @param firstFoundedTotleInvestment the first founded totle investment of this project
+	 * @param firstFoundedTotalInvestment the first founded total investment of this project
 	 */
-	public void setFirstFoundedTotleInvestment(
-		double firstFoundedTotleInvestment);
+	public void setFirstFoundedTotalInvestment(
+		double firstFoundedTotalInvestment);
 
 	/**
 	 * Returns the first founded pre cost of this project.

@@ -346,11 +346,11 @@ public class ProjectPersistenceImpl extends BasePersistenceImpl<Project>
 		projectImpl.setPlanStartDate(project.getPlanStartDate());
 		projectImpl.setPlanEndDate(project.getPlanEndDate());
 		projectImpl.setIntroduction(project.getIntroduction());
-		projectImpl.setPlanTotleInvestment(project.getPlanTotleInvestment());
-		projectImpl.setFeasibilityTotleInvestment(project.getFeasibilityTotleInvestment());
+		projectImpl.setPlanTotalInvestment(project.getPlanTotalInvestment());
+		projectImpl.setFeasibilityTotalInvestment(project.getFeasibilityTotalInvestment());
 		projectImpl.setFeasibilityPreCost(project.getFeasibilityPreCost());
 		projectImpl.setFeasibilityJiananCost(project.getFeasibilityJiananCost());
-		projectImpl.setFirstFoundedTotleInvestment(project.getFirstFoundedTotleInvestment());
+		projectImpl.setFirstFoundedTotalInvestment(project.getFirstFoundedTotalInvestment());
 		projectImpl.setFirstFoundedPreCost(project.getFirstFoundedPreCost());
 		projectImpl.setFirstFoundedJiananCost(project.getFirstFoundedJiananCost());
 

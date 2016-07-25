@@ -110,11 +110,11 @@
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<basic name="introduction" />
-			<basic name="planTotleInvestment" />
-			<basic name="feasibilityTotleInvestment" />
+			<basic name="planTotalInvestment" />
+			<basic name="feasibilityTotalInvestment" />
 			<basic name="feasibilityPreCost" />
 			<basic name="feasibilityJiananCost" />
-			<basic name="firstFoundedTotleInvestment" />
+			<basic name="firstFoundedTotalInvestment" />
 			<basic name="firstFoundedPreCost" />
 			<basic name="firstFoundedJiananCost" />
 			<transient name="modelAttributes" />

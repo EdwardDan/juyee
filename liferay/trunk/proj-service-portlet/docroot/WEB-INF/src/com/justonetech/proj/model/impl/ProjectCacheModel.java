@@ -99,16 +99,16 @@ public class ProjectCacheModel implements CacheModel<Project>, Externalizable {
 		sb.append(planEndDate);
 		sb.append(", introduction=");
 		sb.append(introduction);
-		sb.append(", planTotleInvestment=");
-		sb.append(planTotleInvestment);
-		sb.append(", feasibilityTotleInvestment=");
-		sb.append(feasibilityTotleInvestment);
+		sb.append(", planTotalInvestment=");
+		sb.append(planTotalInvestment);
+		sb.append(", feasibilityTotalInvestment=");
+		sb.append(feasibilityTotalInvestment);
 		sb.append(", feasibilityPreCost=");
 		sb.append(feasibilityPreCost);
 		sb.append(", feasibilityJiananCost=");
 		sb.append(feasibilityJiananCost);
-		sb.append(", firstFoundedTotleInvestment=");
-		sb.append(firstFoundedTotleInvestment);
+		sb.append(", firstFoundedTotalInvestment=");
+		sb.append(firstFoundedTotalInvestment);
 		sb.append(", firstFoundedPreCost=");
 		sb.append(firstFoundedPreCost);
 		sb.append(", firstFoundedJiananCost=");
@@ -245,11 +245,11 @@ public class ProjectCacheModel implements CacheModel<Project>, Externalizable {
 			projectImpl.setIntroduction(introduction);
 		}
 
-		projectImpl.setPlanTotleInvestment(planTotleInvestment);
-		projectImpl.setFeasibilityTotleInvestment(feasibilityTotleInvestment);
+		projectImpl.setPlanTotalInvestment(planTotalInvestment);
+		projectImpl.setFeasibilityTotalInvestment(feasibilityTotalInvestment);
 		projectImpl.setFeasibilityPreCost(feasibilityPreCost);
 		projectImpl.setFeasibilityJiananCost(feasibilityJiananCost);
-		projectImpl.setFirstFoundedTotleInvestment(firstFoundedTotleInvestment);
+		projectImpl.setFirstFoundedTotalInvestment(firstFoundedTotalInvestment);
 		projectImpl.setFirstFoundedPreCost(firstFoundedPreCost);
 		projectImpl.setFirstFoundedJiananCost(firstFoundedJiananCost);
 
@@ -290,11 +290,11 @@ public class ProjectCacheModel implements CacheModel<Project>, Externalizable {
 		planStartDate = objectInput.readLong();
 		planEndDate = objectInput.readLong();
 		introduction = objectInput.readUTF();
-		planTotleInvestment = objectInput.readDouble();
-		feasibilityTotleInvestment = objectInput.readDouble();
+		planTotalInvestment = objectInput.readDouble();
+		feasibilityTotalInvestment = objectInput.readDouble();
 		feasibilityPreCost = objectInput.readDouble();
 		feasibilityJiananCost = objectInput.readDouble();
-		firstFoundedTotleInvestment = objectInput.readDouble();
+		firstFoundedTotalInvestment = objectInput.readDouble();
 		firstFoundedPreCost = objectInput.readDouble();
 		firstFoundedJiananCost = objectInput.readDouble();
 	}
@@ -378,11 +378,11 @@ public class ProjectCacheModel implements CacheModel<Project>, Externalizable {
 			objectOutput.writeUTF(introduction);
 		}
 
-		objectOutput.writeDouble(planTotleInvestment);
-		objectOutput.writeDouble(feasibilityTotleInvestment);
+		objectOutput.writeDouble(planTotalInvestment);
+		objectOutput.writeDouble(feasibilityTotalInvestment);
 		objectOutput.writeDouble(feasibilityPreCost);
 		objectOutput.writeDouble(feasibilityJiananCost);
-		objectOutput.writeDouble(firstFoundedTotleInvestment);
+		objectOutput.writeDouble(firstFoundedTotalInvestment);
 		objectOutput.writeDouble(firstFoundedPreCost);
 		objectOutput.writeDouble(firstFoundedJiananCost);
 	}
@@ -417,11 +417,11 @@ public class ProjectCacheModel implements CacheModel<Project>, Externalizable {
 	public long planStartDate;
 	public long planEndDate;
 	public String introduction;
-	public double planTotleInvestment;
-	public double feasibilityTotleInvestment;
+	public double planTotalInvestment;
+	public double feasibilityTotalInvestment;
 	public double feasibilityPreCost;
 	public double feasibilityJiananCost;
-	public double firstFoundedTotleInvestment;
+	public double firstFoundedTotalInvestment;
 	public double firstFoundedPreCost;
 	public double firstFoundedJiananCost;
 }

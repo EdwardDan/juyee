@@ -91,15 +91,15 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 			{ "planStartDate", Types.TIMESTAMP },
 			{ "planEndDate", Types.TIMESTAMP },
 			{ "introduction", Types.VARCHAR },
-			{ "planTotleInvestment", Types.DOUBLE },
-			{ "feasibilityTotleInvestment", Types.DOUBLE },
+			{ "planTotalInvestment", Types.DOUBLE },
+			{ "feasibilityTotalInvestment", Types.DOUBLE },
 			{ "feasibilityPreCost", Types.DOUBLE },
 			{ "feasibilityJiananCost", Types.DOUBLE },
-			{ "firstFoundedTotleInvestment", Types.DOUBLE },
+			{ "firstFoundedTotalInvestment", Types.DOUBLE },
 			{ "firstFoundedPreCost", Types.DOUBLE },
 			{ "firstFoundedJiananCost", Types.DOUBLE }
 		};
-	public static final String TABLE_SQL_CREATE = "create table proj_Project (projectId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createTime DATE null,modifiedTime DATE null,constructionCode VARCHAR(75) null,projNum VARCHAR(75) null,sortNo INTEGER,projStatus LONG,industryCategory LONG,manageAttribute LONG,isMajor BOOLEAN,projSource LONG,belongCounty LONG,projAttr LONG,startDate DATE null,endDate DATE null,projName VARCHAR(75) null,location VARCHAR(75) null,involveCounty VARCHAR(75) null,planRedLine DOUBLE,roadLevel LONG,roadTechLevel LONG,startNode DATE null,endNode DATE null,planStartDate DATE null,planEndDate DATE null,introduction VARCHAR(75) null,planTotleInvestment DOUBLE,feasibilityTotleInvestment DOUBLE,feasibilityPreCost DOUBLE,feasibilityJiananCost DOUBLE,firstFoundedTotleInvestment DOUBLE,firstFoundedPreCost DOUBLE,firstFoundedJiananCost DOUBLE)";
+	public static final String TABLE_SQL_CREATE = "create table proj_Project (projectId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createTime DATE null,modifiedTime DATE null,constructionCode VARCHAR(75) null,projNum VARCHAR(75) null,sortNo INTEGER,projStatus LONG,industryCategory LONG,manageAttribute LONG,isMajor BOOLEAN,projSource LONG,belongCounty LONG,projAttr LONG,startDate DATE null,endDate DATE null,projName VARCHAR(75) null,location VARCHAR(75) null,involveCounty VARCHAR(75) null,planRedLine DOUBLE,roadLevel LONG,roadTechLevel LONG,startNode DATE null,endNode DATE null,planStartDate DATE null,planEndDate DATE null,introduction VARCHAR(75) null,planTotalInvestment DOUBLE,feasibilityTotalInvestment DOUBLE,feasibilityPreCost DOUBLE,feasibilityJiananCost DOUBLE,firstFoundedTotalInvestment DOUBLE,firstFoundedPreCost DOUBLE,firstFoundedJiananCost DOUBLE)";
 	public static final String TABLE_SQL_DROP = "drop table proj_Project";
 	public static final String ORDER_BY_JPQL = " ORDER BY project.sortNo ASC, project.projectId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY proj_Project.sortNo ASC, proj_Project.projectId ASC";
@@ -183,13 +183,13 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		attributes.put("planStartDate", getPlanStartDate());
 		attributes.put("planEndDate", getPlanEndDate());
 		attributes.put("introduction", getIntroduction());
-		attributes.put("planTotleInvestment", getPlanTotleInvestment());
-		attributes.put("feasibilityTotleInvestment",
-			getFeasibilityTotleInvestment());
+		attributes.put("planTotalInvestment", getPlanTotalInvestment());
+		attributes.put("feasibilityTotalInvestment",
+			getFeasibilityTotalInvestment());
 		attributes.put("feasibilityPreCost", getFeasibilityPreCost());
 		attributes.put("feasibilityJiananCost", getFeasibilityJiananCost());
-		attributes.put("firstFoundedTotleInvestment",
-			getFirstFoundedTotleInvestment());
+		attributes.put("firstFoundedTotalInvestment",
+			getFirstFoundedTotalInvestment());
 		attributes.put("firstFoundedPreCost", getFirstFoundedPreCost());
 		attributes.put("firstFoundedJiananCost", getFirstFoundedJiananCost());
 
@@ -378,18 +378,18 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 			setIntroduction(introduction);
 		}
 
-		Double planTotleInvestment = (Double)attributes.get(
-				"planTotleInvestment");
+		Double planTotalInvestment = (Double)attributes.get(
+				"planTotalInvestment");
 
-		if (planTotleInvestment != null) {
-			setPlanTotleInvestment(planTotleInvestment);
+		if (planTotalInvestment != null) {
+			setPlanTotalInvestment(planTotalInvestment);
 		}
 
-		Double feasibilityTotleInvestment = (Double)attributes.get(
-				"feasibilityTotleInvestment");
+		Double feasibilityTotalInvestment = (Double)attributes.get(
+				"feasibilityTotalInvestment");
 
-		if (feasibilityTotleInvestment != null) {
-			setFeasibilityTotleInvestment(feasibilityTotleInvestment);
+		if (feasibilityTotalInvestment != null) {
+			setFeasibilityTotalInvestment(feasibilityTotalInvestment);
 		}
 
 		Double feasibilityPreCost = (Double)attributes.get("feasibilityPreCost");
@@ -405,11 +405,11 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 			setFeasibilityJiananCost(feasibilityJiananCost);
 		}
 
-		Double firstFoundedTotleInvestment = (Double)attributes.get(
-				"firstFoundedTotleInvestment");
+		Double firstFoundedTotalInvestment = (Double)attributes.get(
+				"firstFoundedTotalInvestment");
 
-		if (firstFoundedTotleInvestment != null) {
-			setFirstFoundedTotleInvestment(firstFoundedTotleInvestment);
+		if (firstFoundedTotalInvestment != null) {
+			setFirstFoundedTotalInvestment(firstFoundedTotalInvestment);
 		}
 
 		Double firstFoundedPreCost = (Double)attributes.get(
@@ -778,23 +778,23 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 	}
 
 	@Override
-	public double getPlanTotleInvestment() {
-		return _planTotleInvestment;
+	public double getPlanTotalInvestment() {
+		return _planTotalInvestment;
 	}
 
 	@Override
-	public void setPlanTotleInvestment(double planTotleInvestment) {
-		_planTotleInvestment = planTotleInvestment;
+	public void setPlanTotalInvestment(double planTotalInvestment) {
+		_planTotalInvestment = planTotalInvestment;
 	}
 
 	@Override
-	public double getFeasibilityTotleInvestment() {
-		return _feasibilityTotleInvestment;
+	public double getFeasibilityTotalInvestment() {
+		return _feasibilityTotalInvestment;
 	}
 
 	@Override
-	public void setFeasibilityTotleInvestment(double feasibilityTotleInvestment) {
-		_feasibilityTotleInvestment = feasibilityTotleInvestment;
+	public void setFeasibilityTotalInvestment(double feasibilityTotalInvestment) {
+		_feasibilityTotalInvestment = feasibilityTotalInvestment;
 	}
 
 	@Override
@@ -818,14 +818,14 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 	}
 
 	@Override
-	public double getFirstFoundedTotleInvestment() {
-		return _firstFoundedTotleInvestment;
+	public double getFirstFoundedTotalInvestment() {
+		return _firstFoundedTotalInvestment;
 	}
 
 	@Override
-	public void setFirstFoundedTotleInvestment(
-		double firstFoundedTotleInvestment) {
-		_firstFoundedTotleInvestment = firstFoundedTotleInvestment;
+	public void setFirstFoundedTotalInvestment(
+		double firstFoundedTotalInvestment) {
+		_firstFoundedTotalInvestment = firstFoundedTotalInvestment;
 	}
 
 	@Override
@@ -905,11 +905,11 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		projectImpl.setPlanStartDate(getPlanStartDate());
 		projectImpl.setPlanEndDate(getPlanEndDate());
 		projectImpl.setIntroduction(getIntroduction());
-		projectImpl.setPlanTotleInvestment(getPlanTotleInvestment());
-		projectImpl.setFeasibilityTotleInvestment(getFeasibilityTotleInvestment());
+		projectImpl.setPlanTotalInvestment(getPlanTotalInvestment());
+		projectImpl.setFeasibilityTotalInvestment(getFeasibilityTotalInvestment());
 		projectImpl.setFeasibilityPreCost(getFeasibilityPreCost());
 		projectImpl.setFeasibilityJiananCost(getFeasibilityJiananCost());
-		projectImpl.setFirstFoundedTotleInvestment(getFirstFoundedTotleInvestment());
+		projectImpl.setFirstFoundedTotalInvestment(getFirstFoundedTotalInvestment());
 		projectImpl.setFirstFoundedPreCost(getFirstFoundedPreCost());
 		projectImpl.setFirstFoundedJiananCost(getFirstFoundedJiananCost());
 
@@ -1146,15 +1146,15 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 			projectCacheModel.introduction = null;
 		}
 
-		projectCacheModel.planTotleInvestment = getPlanTotleInvestment();
+		projectCacheModel.planTotalInvestment = getPlanTotalInvestment();
 
-		projectCacheModel.feasibilityTotleInvestment = getFeasibilityTotleInvestment();
+		projectCacheModel.feasibilityTotalInvestment = getFeasibilityTotalInvestment();
 
 		projectCacheModel.feasibilityPreCost = getFeasibilityPreCost();
 
 		projectCacheModel.feasibilityJiananCost = getFeasibilityJiananCost();
 
-		projectCacheModel.firstFoundedTotleInvestment = getFirstFoundedTotleInvestment();
+		projectCacheModel.firstFoundedTotalInvestment = getFirstFoundedTotalInvestment();
 
 		projectCacheModel.firstFoundedPreCost = getFirstFoundedPreCost();
 
@@ -1227,16 +1227,16 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		sb.append(getPlanEndDate());
 		sb.append(", introduction=");
 		sb.append(getIntroduction());
-		sb.append(", planTotleInvestment=");
-		sb.append(getPlanTotleInvestment());
-		sb.append(", feasibilityTotleInvestment=");
-		sb.append(getFeasibilityTotleInvestment());
+		sb.append(", planTotalInvestment=");
+		sb.append(getPlanTotalInvestment());
+		sb.append(", feasibilityTotalInvestment=");
+		sb.append(getFeasibilityTotalInvestment());
 		sb.append(", feasibilityPreCost=");
 		sb.append(getFeasibilityPreCost());
 		sb.append(", feasibilityJiananCost=");
 		sb.append(getFeasibilityJiananCost());
-		sb.append(", firstFoundedTotleInvestment=");
-		sb.append(getFirstFoundedTotleInvestment());
+		sb.append(", firstFoundedTotalInvestment=");
+		sb.append(getFirstFoundedTotalInvestment());
 		sb.append(", firstFoundedPreCost=");
 		sb.append(getFirstFoundedPreCost());
 		sb.append(", firstFoundedJiananCost=");
@@ -1375,12 +1375,12 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		sb.append(getIntroduction());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>planTotleInvestment</column-name><column-value><![CDATA[");
-		sb.append(getPlanTotleInvestment());
+			"<column><column-name>planTotalInvestment</column-name><column-value><![CDATA[");
+		sb.append(getPlanTotalInvestment());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>feasibilityTotleInvestment</column-name><column-value><![CDATA[");
-		sb.append(getFeasibilityTotleInvestment());
+			"<column><column-name>feasibilityTotalInvestment</column-name><column-value><![CDATA[");
+		sb.append(getFeasibilityTotalInvestment());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>feasibilityPreCost</column-name><column-value><![CDATA[");
@@ -1391,8 +1391,8 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 		sb.append(getFeasibilityJiananCost());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>firstFoundedTotleInvestment</column-name><column-value><![CDATA[");
-		sb.append(getFirstFoundedTotleInvestment());
+			"<column><column-name>firstFoundedTotalInvestment</column-name><column-value><![CDATA[");
+		sb.append(getFirstFoundedTotalInvestment());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>firstFoundedPreCost</column-name><column-value><![CDATA[");
@@ -1443,11 +1443,11 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 	private Date _planStartDate;
 	private Date _planEndDate;
 	private String _introduction;
-	private double _planTotleInvestment;
-	private double _feasibilityTotleInvestment;
+	private double _planTotalInvestment;
+	private double _feasibilityTotalInvestment;
 	private double _feasibilityPreCost;
 	private double _feasibilityJiananCost;
-	private double _firstFoundedTotleInvestment;
+	private double _firstFoundedTotalInvestment;
 	private double _firstFoundedPreCost;
 	private double _firstFoundedJiananCost;
 	private Project _escapedModel;

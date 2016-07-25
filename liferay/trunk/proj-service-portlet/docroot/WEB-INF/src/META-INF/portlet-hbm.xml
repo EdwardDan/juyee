@@ -81,11 +81,11 @@
 		<property name="planStartDate" type="org.hibernate.type.TimestampType" />
 		<property name="planEndDate" type="org.hibernate.type.TimestampType" />
 		<property name="introduction" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="planTotleInvestment" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
-		<property name="feasibilityTotleInvestment" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="planTotalInvestment" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="feasibilityTotalInvestment" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
 		<property name="feasibilityPreCost" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
 		<property name="feasibilityJiananCost" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
-		<property name="firstFoundedTotleInvestment" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="firstFoundedTotalInvestment" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
 		<property name="firstFoundedPreCost" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
 		<property name="firstFoundedJiananCost" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
 	</class>

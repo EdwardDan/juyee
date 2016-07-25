@@ -79,13 +79,13 @@ public class ProjectWrapper implements Project, ModelWrapper<Project> {
 		attributes.put("planStartDate", getPlanStartDate());
 		attributes.put("planEndDate", getPlanEndDate());
 		attributes.put("introduction", getIntroduction());
-		attributes.put("planTotleInvestment", getPlanTotleInvestment());
-		attributes.put("feasibilityTotleInvestment",
-			getFeasibilityTotleInvestment());
+		attributes.put("planTotalInvestment", getPlanTotalInvestment());
+		attributes.put("feasibilityTotalInvestment",
+			getFeasibilityTotalInvestment());
 		attributes.put("feasibilityPreCost", getFeasibilityPreCost());
 		attributes.put("feasibilityJiananCost", getFeasibilityJiananCost());
-		attributes.put("firstFoundedTotleInvestment",
-			getFirstFoundedTotleInvestment());
+		attributes.put("firstFoundedTotalInvestment",
+			getFirstFoundedTotalInvestment());
 		attributes.put("firstFoundedPreCost", getFirstFoundedPreCost());
 		attributes.put("firstFoundedJiananCost", getFirstFoundedJiananCost());
 
@@ -274,18 +274,18 @@ public class ProjectWrapper implements Project, ModelWrapper<Project> {
 			setIntroduction(introduction);
 		}
 
-		Double planTotleInvestment = (Double)attributes.get(
-				"planTotleInvestment");
+		Double planTotalInvestment = (Double)attributes.get(
+				"planTotalInvestment");
 
-		if (planTotleInvestment != null) {
-			setPlanTotleInvestment(planTotleInvestment);
+		if (planTotalInvestment != null) {
+			setPlanTotalInvestment(planTotalInvestment);
 		}
 
-		Double feasibilityTotleInvestment = (Double)attributes.get(
-				"feasibilityTotleInvestment");
+		Double feasibilityTotalInvestment = (Double)attributes.get(
+				"feasibilityTotalInvestment");
 
-		if (feasibilityTotleInvestment != null) {
-			setFeasibilityTotleInvestment(feasibilityTotleInvestment);
+		if (feasibilityTotalInvestment != null) {
+			setFeasibilityTotalInvestment(feasibilityTotalInvestment);
 		}
 
 		Double feasibilityPreCost = (Double)attributes.get("feasibilityPreCost");
@@ -301,11 +301,11 @@ public class ProjectWrapper implements Project, ModelWrapper<Project> {
 			setFeasibilityJiananCost(feasibilityJiananCost);
 		}
 
-		Double firstFoundedTotleInvestment = (Double)attributes.get(
-				"firstFoundedTotleInvestment");
+		Double firstFoundedTotalInvestment = (Double)attributes.get(
+				"firstFoundedTotalInvestment");
 
-		if (firstFoundedTotleInvestment != null) {
-			setFirstFoundedTotleInvestment(firstFoundedTotleInvestment);
+		if (firstFoundedTotalInvestment != null) {
+			setFirstFoundedTotalInvestment(firstFoundedTotalInvestment);
 		}
 
 		Double firstFoundedPreCost = (Double)attributes.get(
@@ -976,43 +976,43 @@ public class ProjectWrapper implements Project, ModelWrapper<Project> {
 	}
 
 	/**
-	* Returns the plan totle investment of this project.
+	* Returns the plan total investment of this project.
 	*
-	* @return the plan totle investment of this project
+	* @return the plan total investment of this project
 	*/
 	@Override
-	public double getPlanTotleInvestment() {
-		return _project.getPlanTotleInvestment();
+	public double getPlanTotalInvestment() {
+		return _project.getPlanTotalInvestment();
 	}
 
 	/**
-	* Sets the plan totle investment of this project.
+	* Sets the plan total investment of this project.
 	*
-	* @param planTotleInvestment the plan totle investment of this project
+	* @param planTotalInvestment the plan total investment of this project
 	*/
 	@Override
-	public void setPlanTotleInvestment(double planTotleInvestment) {
-		_project.setPlanTotleInvestment(planTotleInvestment);
+	public void setPlanTotalInvestment(double planTotalInvestment) {
+		_project.setPlanTotalInvestment(planTotalInvestment);
 	}
 
 	/**
-	* Returns the feasibility totle investment of this project.
+	* Returns the feasibility total investment of this project.
 	*
-	* @return the feasibility totle investment of this project
+	* @return the feasibility total investment of this project
 	*/
 	@Override
-	public double getFeasibilityTotleInvestment() {
-		return _project.getFeasibilityTotleInvestment();
+	public double getFeasibilityTotalInvestment() {
+		return _project.getFeasibilityTotalInvestment();
 	}
 
 	/**
-	* Sets the feasibility totle investment of this project.
+	* Sets the feasibility total investment of this project.
 	*
-	* @param feasibilityTotleInvestment the feasibility totle investment of this project
+	* @param feasibilityTotalInvestment the feasibility total investment of this project
 	*/
 	@Override
-	public void setFeasibilityTotleInvestment(double feasibilityTotleInvestment) {
-		_project.setFeasibilityTotleInvestment(feasibilityTotleInvestment);
+	public void setFeasibilityTotalInvestment(double feasibilityTotalInvestment) {
+		_project.setFeasibilityTotalInvestment(feasibilityTotalInvestment);
 	}
 
 	/**
@@ -1056,24 +1056,24 @@ public class ProjectWrapper implements Project, ModelWrapper<Project> {
 	}
 
 	/**
-	* Returns the first founded totle investment of this project.
+	* Returns the first founded total investment of this project.
 	*
-	* @return the first founded totle investment of this project
+	* @return the first founded total investment of this project
 	*/
 	@Override
-	public double getFirstFoundedTotleInvestment() {
-		return _project.getFirstFoundedTotleInvestment();
+	public double getFirstFoundedTotalInvestment() {
+		return _project.getFirstFoundedTotalInvestment();
 	}
 
 	/**
-	* Sets the first founded totle investment of this project.
+	* Sets the first founded total investment of this project.
 	*
-	* @param firstFoundedTotleInvestment the first founded totle investment of this project
+	* @param firstFoundedTotalInvestment the first founded total investment of this project
 	*/
 	@Override
-	public void setFirstFoundedTotleInvestment(
-		double firstFoundedTotleInvestment) {
-		_project.setFirstFoundedTotleInvestment(firstFoundedTotleInvestment);
+	public void setFirstFoundedTotalInvestment(
+		double firstFoundedTotalInvestment) {
+		_project.setFirstFoundedTotalInvestment(firstFoundedTotalInvestment);
 	}
 
 	/**

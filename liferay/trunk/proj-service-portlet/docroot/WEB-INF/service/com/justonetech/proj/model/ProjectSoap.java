@@ -60,11 +60,11 @@ public class ProjectSoap implements Serializable {
 		soapModel.setPlanStartDate(model.getPlanStartDate());
 		soapModel.setPlanEndDate(model.getPlanEndDate());
 		soapModel.setIntroduction(model.getIntroduction());
-		soapModel.setPlanTotleInvestment(model.getPlanTotleInvestment());
-		soapModel.setFeasibilityTotleInvestment(model.getFeasibilityTotleInvestment());
+		soapModel.setPlanTotalInvestment(model.getPlanTotalInvestment());
+		soapModel.setFeasibilityTotalInvestment(model.getFeasibilityTotalInvestment());
 		soapModel.setFeasibilityPreCost(model.getFeasibilityPreCost());
 		soapModel.setFeasibilityJiananCost(model.getFeasibilityJiananCost());
-		soapModel.setFirstFoundedTotleInvestment(model.getFirstFoundedTotleInvestment());
+		soapModel.setFirstFoundedTotalInvestment(model.getFirstFoundedTotalInvestment());
 		soapModel.setFirstFoundedPreCost(model.getFirstFoundedPreCost());
 		soapModel.setFirstFoundedJiananCost(model.getFirstFoundedJiananCost());
 
@@ -363,20 +363,20 @@ public class ProjectSoap implements Serializable {
 		_introduction = introduction;
 	}
 
-	public double getPlanTotleInvestment() {
-		return _planTotleInvestment;
+	public double getPlanTotalInvestment() {
+		return _planTotalInvestment;
 	}
 
-	public void setPlanTotleInvestment(double planTotleInvestment) {
-		_planTotleInvestment = planTotleInvestment;
+	public void setPlanTotalInvestment(double planTotalInvestment) {
+		_planTotalInvestment = planTotalInvestment;
 	}
 
-	public double getFeasibilityTotleInvestment() {
-		return _feasibilityTotleInvestment;
+	public double getFeasibilityTotalInvestment() {
+		return _feasibilityTotalInvestment;
 	}
 
-	public void setFeasibilityTotleInvestment(double feasibilityTotleInvestment) {
-		_feasibilityTotleInvestment = feasibilityTotleInvestment;
+	public void setFeasibilityTotalInvestment(double feasibilityTotalInvestment) {
+		_feasibilityTotalInvestment = feasibilityTotalInvestment;
 	}
 
 	public double getFeasibilityPreCost() {
@@ -395,13 +395,13 @@ public class ProjectSoap implements Serializable {
 		_feasibilityJiananCost = feasibilityJiananCost;
 	}
 
-	public double getFirstFoundedTotleInvestment() {
-		return _firstFoundedTotleInvestment;
+	public double getFirstFoundedTotalInvestment() {
+		return _firstFoundedTotalInvestment;
 	}
 
-	public void setFirstFoundedTotleInvestment(
-		double firstFoundedTotleInvestment) {
-		_firstFoundedTotleInvestment = firstFoundedTotleInvestment;
+	public void setFirstFoundedTotalInvestment(
+		double firstFoundedTotalInvestment) {
+		_firstFoundedTotalInvestment = firstFoundedTotalInvestment;
 	}
 
 	public double getFirstFoundedPreCost() {
@@ -450,11 +450,11 @@ public class ProjectSoap implements Serializable {
 	private Date _planStartDate;
 	private Date _planEndDate;
 	private String _introduction;
-	private double _planTotleInvestment;
-	private double _feasibilityTotleInvestment;
+	private double _planTotalInvestment;
+	private double _feasibilityTotalInvestment;
 	private double _feasibilityPreCost;
 	private double _feasibilityJiananCost;
-	private double _firstFoundedTotleInvestment;
+	private double _firstFoundedTotalInvestment;
 	private double _firstFoundedPreCost;
 	private double _firstFoundedJiananCost;
 }

@@ -48,11 +48,11 @@
 		<column name="planStartDate" type="Date" /><!--目标计划开工时间 -->
 		<column name="planEndDate" type="Date" /><!--目标计划完工时间 -->
 		<column name="introduction" type="String" /><!--工程范围和主要内容 -->
-		<column name="planTotleInvestment" type="double" /><!--计划总投资 -->
-		<column name="feasibilityTotleInvestment" type="double" /><!--工可批复总投资 -->
+		<column name="planTotalInvestment" type="double" /><!--计划总投资 -->
+		<column name="feasibilityTotalInvestment" type="double" /><!--工可批复总投资 -->
 		<column name="feasibilityPreCost" type="double" /><!--工可批复前期费用 -->
 		<column name="feasibilityJiananCost" type="double" /><!--工可批复建安费用 -->
-		<column name="firstFoundedTotleInvestment" type="double" /><!--初设批复总投资 -->
+		<column name="firstFoundedTotalInvestment" type="double" /><!--初设批复总投资 -->
 		<column name="firstFoundedPreCost" type="double" /><!--初设批复前期费用 -->
 		<column name="firstFoundedJiananCost" type="double" /><!--初设批复建安费用 -->
 

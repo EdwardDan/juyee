@@ -67,11 +67,11 @@ create table proj_Project (
 	planStartDate DATE null,
 	planEndDate DATE null,
 	introduction VARCHAR(75) null,
-	planTotleInvestment DOUBLE,
-	feasibilityTotleInvestment DOUBLE,
+	planTotalInvestment DOUBLE,
+	feasibilityTotalInvestment DOUBLE,
 	feasibilityPreCost DOUBLE,
 	feasibilityJiananCost DOUBLE,
-	firstFoundedTotleInvestment DOUBLE,
+	firstFoundedTotalInvestment DOUBLE,
 	firstFoundedPreCost DOUBLE,
 	firstFoundedJiananCost DOUBLE
 );

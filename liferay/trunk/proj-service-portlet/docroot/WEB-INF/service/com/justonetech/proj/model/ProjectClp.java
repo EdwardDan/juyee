@@ -104,13 +104,13 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 		attributes.put("planStartDate", getPlanStartDate());
 		attributes.put("planEndDate", getPlanEndDate());
 		attributes.put("introduction", getIntroduction());
-		attributes.put("planTotleInvestment", getPlanTotleInvestment());
-		attributes.put("feasibilityTotleInvestment",
-			getFeasibilityTotleInvestment());
+		attributes.put("planTotalInvestment", getPlanTotalInvestment());
+		attributes.put("feasibilityTotalInvestment",
+			getFeasibilityTotalInvestment());
 		attributes.put("feasibilityPreCost", getFeasibilityPreCost());
 		attributes.put("feasibilityJiananCost", getFeasibilityJiananCost());
-		attributes.put("firstFoundedTotleInvestment",
-			getFirstFoundedTotleInvestment());
+		attributes.put("firstFoundedTotalInvestment",
+			getFirstFoundedTotalInvestment());
 		attributes.put("firstFoundedPreCost", getFirstFoundedPreCost());
 		attributes.put("firstFoundedJiananCost", getFirstFoundedJiananCost());
 
@@ -299,18 +299,18 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 			setIntroduction(introduction);
 		}
 
-		Double planTotleInvestment = (Double)attributes.get(
-				"planTotleInvestment");
+		Double planTotalInvestment = (Double)attributes.get(
+				"planTotalInvestment");
 
-		if (planTotleInvestment != null) {
-			setPlanTotleInvestment(planTotleInvestment);
+		if (planTotalInvestment != null) {
+			setPlanTotalInvestment(planTotalInvestment);
 		}
 
-		Double feasibilityTotleInvestment = (Double)attributes.get(
-				"feasibilityTotleInvestment");
+		Double feasibilityTotalInvestment = (Double)attributes.get(
+				"feasibilityTotalInvestment");
 
-		if (feasibilityTotleInvestment != null) {
-			setFeasibilityTotleInvestment(feasibilityTotleInvestment);
+		if (feasibilityTotalInvestment != null) {
+			setFeasibilityTotalInvestment(feasibilityTotalInvestment);
 		}
 
 		Double feasibilityPreCost = (Double)attributes.get("feasibilityPreCost");
@@ -326,11 +326,11 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 			setFeasibilityJiananCost(feasibilityJiananCost);
 		}
 
-		Double firstFoundedTotleInvestment = (Double)attributes.get(
-				"firstFoundedTotleInvestment");
+		Double firstFoundedTotalInvestment = (Double)attributes.get(
+				"firstFoundedTotalInvestment");
 
-		if (firstFoundedTotleInvestment != null) {
-			setFirstFoundedTotleInvestment(firstFoundedTotleInvestment);
+		if (firstFoundedTotalInvestment != null) {
+			setFirstFoundedTotalInvestment(firstFoundedTotalInvestment);
 		}
 
 		Double firstFoundedPreCost = (Double)attributes.get(
@@ -1056,22 +1056,22 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 	}
 
 	@Override
-	public double getPlanTotleInvestment() {
-		return _planTotleInvestment;
+	public double getPlanTotalInvestment() {
+		return _planTotalInvestment;
 	}
 
 	@Override
-	public void setPlanTotleInvestment(double planTotleInvestment) {
-		_planTotleInvestment = planTotleInvestment;
+	public void setPlanTotalInvestment(double planTotalInvestment) {
+		_planTotalInvestment = planTotalInvestment;
 
 		if (_projectRemoteModel != null) {
 			try {
 				Class<?> clazz = _projectRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setPlanTotleInvestment",
+				Method method = clazz.getMethod("setPlanTotalInvestment",
 						double.class);
 
-				method.invoke(_projectRemoteModel, planTotleInvestment);
+				method.invoke(_projectRemoteModel, planTotalInvestment);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -1080,22 +1080,22 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 	}
 
 	@Override
-	public double getFeasibilityTotleInvestment() {
-		return _feasibilityTotleInvestment;
+	public double getFeasibilityTotalInvestment() {
+		return _feasibilityTotalInvestment;
 	}
 
 	@Override
-	public void setFeasibilityTotleInvestment(double feasibilityTotleInvestment) {
-		_feasibilityTotleInvestment = feasibilityTotleInvestment;
+	public void setFeasibilityTotalInvestment(double feasibilityTotalInvestment) {
+		_feasibilityTotalInvestment = feasibilityTotalInvestment;
 
 		if (_projectRemoteModel != null) {
 			try {
 				Class<?> clazz = _projectRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setFeasibilityTotleInvestment",
+				Method method = clazz.getMethod("setFeasibilityTotalInvestment",
 						double.class);
 
-				method.invoke(_projectRemoteModel, feasibilityTotleInvestment);
+				method.invoke(_projectRemoteModel, feasibilityTotalInvestment);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -1152,23 +1152,23 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 	}
 
 	@Override
-	public double getFirstFoundedTotleInvestment() {
-		return _firstFoundedTotleInvestment;
+	public double getFirstFoundedTotalInvestment() {
+		return _firstFoundedTotalInvestment;
 	}
 
 	@Override
-	public void setFirstFoundedTotleInvestment(
-		double firstFoundedTotleInvestment) {
-		_firstFoundedTotleInvestment = firstFoundedTotleInvestment;
+	public void setFirstFoundedTotalInvestment(
+		double firstFoundedTotalInvestment) {
+		_firstFoundedTotalInvestment = firstFoundedTotalInvestment;
 
 		if (_projectRemoteModel != null) {
 			try {
 				Class<?> clazz = _projectRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setFirstFoundedTotleInvestment",
+				Method method = clazz.getMethod("setFirstFoundedTotalInvestment",
 						double.class);
 
-				method.invoke(_projectRemoteModel, firstFoundedTotleInvestment);
+				method.invoke(_projectRemoteModel, firstFoundedTotalInvestment);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -1323,11 +1323,11 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 		clone.setPlanStartDate(getPlanStartDate());
 		clone.setPlanEndDate(getPlanEndDate());
 		clone.setIntroduction(getIntroduction());
-		clone.setPlanTotleInvestment(getPlanTotleInvestment());
-		clone.setFeasibilityTotleInvestment(getFeasibilityTotleInvestment());
+		clone.setPlanTotalInvestment(getPlanTotalInvestment());
+		clone.setFeasibilityTotalInvestment(getFeasibilityTotalInvestment());
 		clone.setFeasibilityPreCost(getFeasibilityPreCost());
 		clone.setFeasibilityJiananCost(getFeasibilityJiananCost());
-		clone.setFirstFoundedTotleInvestment(getFirstFoundedTotleInvestment());
+		clone.setFirstFoundedTotalInvestment(getFirstFoundedTotalInvestment());
 		clone.setFirstFoundedPreCost(getFirstFoundedPreCost());
 		clone.setFirstFoundedJiananCost(getFirstFoundedJiananCost());
 
@@ -1464,16 +1464,16 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 		sb.append(getPlanEndDate());
 		sb.append(", introduction=");
 		sb.append(getIntroduction());
-		sb.append(", planTotleInvestment=");
-		sb.append(getPlanTotleInvestment());
-		sb.append(", feasibilityTotleInvestment=");
-		sb.append(getFeasibilityTotleInvestment());
+		sb.append(", planTotalInvestment=");
+		sb.append(getPlanTotalInvestment());
+		sb.append(", feasibilityTotalInvestment=");
+		sb.append(getFeasibilityTotalInvestment());
 		sb.append(", feasibilityPreCost=");
 		sb.append(getFeasibilityPreCost());
 		sb.append(", feasibilityJiananCost=");
 		sb.append(getFeasibilityJiananCost());
-		sb.append(", firstFoundedTotleInvestment=");
-		sb.append(getFirstFoundedTotleInvestment());
+		sb.append(", firstFoundedTotalInvestment=");
+		sb.append(getFirstFoundedTotalInvestment());
 		sb.append(", firstFoundedPreCost=");
 		sb.append(getFirstFoundedPreCost());
 		sb.append(", firstFoundedJiananCost=");
@@ -1612,12 +1612,12 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 		sb.append(getIntroduction());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>planTotleInvestment</column-name><column-value><![CDATA[");
-		sb.append(getPlanTotleInvestment());
+			"<column><column-name>planTotalInvestment</column-name><column-value><![CDATA[");
+		sb.append(getPlanTotalInvestment());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>feasibilityTotleInvestment</column-name><column-value><![CDATA[");
-		sb.append(getFeasibilityTotleInvestment());
+			"<column><column-name>feasibilityTotalInvestment</column-name><column-value><![CDATA[");
+		sb.append(getFeasibilityTotalInvestment());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>feasibilityPreCost</column-name><column-value><![CDATA[");
@@ -1628,8 +1628,8 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 		sb.append(getFeasibilityJiananCost());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>firstFoundedTotleInvestment</column-name><column-value><![CDATA[");
-		sb.append(getFirstFoundedTotleInvestment());
+			"<column><column-name>firstFoundedTotalInvestment</column-name><column-value><![CDATA[");
+		sb.append(getFirstFoundedTotalInvestment());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>firstFoundedPreCost</column-name><column-value><![CDATA[");
@@ -1676,11 +1676,11 @@ public class ProjectClp extends BaseModelImpl<Project> implements Project {
 	private Date _planStartDate;
 	private Date _planEndDate;
 	private String _introduction;
-	private double _planTotleInvestment;
-	private double _feasibilityTotleInvestment;
+	private double _planTotalInvestment;
+	private double _feasibilityTotalInvestment;
 	private double _feasibilityPreCost;
 	private double _feasibilityJiananCost;
-	private double _firstFoundedTotleInvestment;
+	private double _firstFoundedTotalInvestment;
 	private double _firstFoundedPreCost;
 	private double _firstFoundedJiananCost;
 	private BaseModel<?> _projectRemoteModel;
