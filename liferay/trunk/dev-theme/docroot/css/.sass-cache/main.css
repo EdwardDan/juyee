@@ -3911,6 +3911,8 @@ body:first-of-type .portlet-content:hover .lfr-icon-actions .taglib-text {
     margin-bottom: 5px; }
   .aui #breadcrumbs {
     margin-bottom: 0px; }
+  .aui input[type="radio"], .aui input[type="checkbox"] {
+    margin: 0px; }
 
 .lfr-search-container {
   margin-top: 0px !important; }
