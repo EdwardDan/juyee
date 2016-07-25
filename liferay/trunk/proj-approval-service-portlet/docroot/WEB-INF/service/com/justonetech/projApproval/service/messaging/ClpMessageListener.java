@@ -15,8 +15,10 @@
 package com.justonetech.projApproval.service.messaging;
 
 import com.justonetech.projApproval.service.ClpSerializer;
+import com.justonetech.projApproval.service.ConstructionParticipantUnitsLocalServiceUtil;
 import com.justonetech.projApproval.service.ConstructionPermitLocalServiceUtil;
 import com.justonetech.projApproval.service.ConstructionPermitServiceUtil;
+import com.justonetech.projApproval.service.ConstructionUnitProjectLocalServiceUtil;
 
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
@@ -36,9 +38,12 @@ public class ClpMessageListener extends BaseMessageListener {
 
 		if (command.equals("undeploy") &&
 				servletContextName.equals(getServletContextName())) {
+			ConstructionParticipantUnitsLocalServiceUtil.clearService();
+
 			ConstructionPermitLocalServiceUtil.clearService();
 
 			ConstructionPermitServiceUtil.clearService();
+			ConstructionUnitProjectLocalServiceUtil.clearService();
 		}
 	}
 }

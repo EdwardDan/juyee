@@ -1,6 +1,18 @@
 <?xml version="1.0"?>
 
 <model-hints>
+	<model name="com.justonetech.projApproval.model.ConstructionParticipantUnits">
+		<field name="constructionParticipantUnitsId" type="long" />
+		<field name="sortNo" type="int" />
+		<field name="contractInfoSubmitNum" type="String" />
+		<field name="unitType" type="long" />
+		<field name="unitName" type="String">
+			<hint name="max-length">200</hint>
+		</field>
+		<field name="projectLeader" type="String" />
+		<field name="telephoneNum" type="String" />
+		<field name="constructionPermitId" type="long" />
+	</model>
 	<model name="com.justonetech.projApproval.model.ConstructionPermit">
 		<field name="constructionPermitId" type="long" />
 		<field name="userId" type="long" />
@@ -57,5 +69,17 @@
 		<field name="receiptNum" type="String" />
 		<field name="certificationDate" type="Date" />
 		<field name="constructionPermitCode" type="String" />
+	</model>
+	<model name="com.justonetech.projApproval.model.ConstructionUnitProject">
+		<field name="constructionUnitProjectId" type="long" />
+		<field name="sortNo" type="int" />
+		<field name="unitProjectNum" type="String" />
+		<field name="unitProjectName" type="String">
+			<hint name="max-length">200</hint>
+		</field>
+		<field name="constructionContent" type="String">
+			<hint name="max-length">1000</hint>
+		</field>
+		<field name="constructionPermitId" type="long" />
 	</model>
 </model-hints>

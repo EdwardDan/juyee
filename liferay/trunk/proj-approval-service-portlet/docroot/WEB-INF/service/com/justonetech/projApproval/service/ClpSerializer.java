@@ -14,7 +14,9 @@
 
 package com.justonetech.projApproval.service;
 
+import com.justonetech.projApproval.model.ConstructionParticipantUnitsClp;
 import com.justonetech.projApproval.model.ConstructionPermitClp;
+import com.justonetech.projApproval.model.ConstructionUnitProjectClp;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -102,8 +104,17 @@ public class ClpSerializer {
 
 		String oldModelClassName = oldModelClass.getName();
 
+		if (oldModelClassName.equals(
+					ConstructionParticipantUnitsClp.class.getName())) {
+			return translateInputConstructionParticipantUnits(oldModel);
+		}
+
 		if (oldModelClassName.equals(ConstructionPermitClp.class.getName())) {
 			return translateInputConstructionPermit(oldModel);
+		}
+
+		if (oldModelClassName.equals(ConstructionUnitProjectClp.class.getName())) {
+			return translateInputConstructionUnitProject(oldModel);
 		}
 
 		return oldModel;
@@ -121,10 +132,32 @@ public class ClpSerializer {
 		return newList;
 	}
 
+	public static Object translateInputConstructionParticipantUnits(
+		BaseModel<?> oldModel) {
+		ConstructionParticipantUnitsClp oldClpModel = (ConstructionParticipantUnitsClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getConstructionParticipantUnitsRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
 	public static Object translateInputConstructionPermit(BaseModel<?> oldModel) {
 		ConstructionPermitClp oldClpModel = (ConstructionPermitClp)oldModel;
 
 		BaseModel<?> newModel = oldClpModel.getConstructionPermitRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
+	public static Object translateInputConstructionUnitProject(
+		BaseModel<?> oldModel) {
+		ConstructionUnitProjectClp oldClpModel = (ConstructionUnitProjectClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getConstructionUnitProjectRemoteModel();
 
 		newModel.setModelAttributes(oldClpModel.getModelAttributes());
 
@@ -149,8 +182,82 @@ public class ClpSerializer {
 		String oldModelClassName = oldModelClass.getName();
 
 		if (oldModelClassName.equals(
+					"com.justonetech.projApproval.model.impl.ConstructionParticipantUnitsImpl")) {
+			return translateOutputConstructionParticipantUnits(oldModel);
+		}
+		else if (oldModelClassName.endsWith("Clp")) {
+			try {
+				ClassLoader classLoader = ClpSerializer.class.getClassLoader();
+
+				Method getClpSerializerClassMethod = oldModelClass.getMethod(
+						"getClpSerializerClass");
+
+				Class<?> oldClpSerializerClass = (Class<?>)getClpSerializerClassMethod.invoke(oldModel);
+
+				Class<?> newClpSerializerClass = classLoader.loadClass(oldClpSerializerClass.getName());
+
+				Method translateOutputMethod = newClpSerializerClass.getMethod("translateOutput",
+						BaseModel.class);
+
+				Class<?> oldModelModelClass = oldModel.getModelClass();
+
+				Method getRemoteModelMethod = oldModelClass.getMethod("get" +
+						oldModelModelClass.getSimpleName() + "RemoteModel");
+
+				Object oldRemoteModel = getRemoteModelMethod.invoke(oldModel);
+
+				BaseModel<?> newModel = (BaseModel<?>)translateOutputMethod.invoke(null,
+						oldRemoteModel);
+
+				return newModel;
+			}
+			catch (Throwable t) {
+				if (_log.isInfoEnabled()) {
+					_log.info("Unable to translate " + oldModelClassName, t);
+				}
+			}
+		}
+
+		if (oldModelClassName.equals(
 					"com.justonetech.projApproval.model.impl.ConstructionPermitImpl")) {
 			return translateOutputConstructionPermit(oldModel);
+		}
+		else if (oldModelClassName.endsWith("Clp")) {
+			try {
+				ClassLoader classLoader = ClpSerializer.class.getClassLoader();
+
+				Method getClpSerializerClassMethod = oldModelClass.getMethod(
+						"getClpSerializerClass");
+
+				Class<?> oldClpSerializerClass = (Class<?>)getClpSerializerClassMethod.invoke(oldModel);
+
+				Class<?> newClpSerializerClass = classLoader.loadClass(oldClpSerializerClass.getName());
+
+				Method translateOutputMethod = newClpSerializerClass.getMethod("translateOutput",
+						BaseModel.class);
+
+				Class<?> oldModelModelClass = oldModel.getModelClass();
+
+				Method getRemoteModelMethod = oldModelClass.getMethod("get" +
+						oldModelModelClass.getSimpleName() + "RemoteModel");
+
+				Object oldRemoteModel = getRemoteModelMethod.invoke(oldModel);
+
+				BaseModel<?> newModel = (BaseModel<?>)translateOutputMethod.invoke(null,
+						oldRemoteModel);
+
+				return newModel;
+			}
+			catch (Throwable t) {
+				if (_log.isInfoEnabled()) {
+					_log.info("Unable to translate " + oldModelClassName, t);
+				}
+			}
+		}
+
+		if (oldModelClassName.equals(
+					"com.justonetech.projApproval.model.impl.ConstructionUnitProjectImpl")) {
+			return translateOutputConstructionUnitProject(oldModel);
 		}
 		else if (oldModelClassName.endsWith("Clp")) {
 			try {
@@ -266,11 +373,32 @@ public class ClpSerializer {
 		}
 
 		if (className.equals(
+					"com.justonetech.projApproval.NoSuchConstructionParticipantUnitsException")) {
+			return new com.justonetech.projApproval.NoSuchConstructionParticipantUnitsException();
+		}
+
+		if (className.equals(
 					"com.justonetech.projApproval.NoSuchConstructionPermitException")) {
 			return new com.justonetech.projApproval.NoSuchConstructionPermitException();
 		}
 
+		if (className.equals(
+					"com.justonetech.projApproval.NoSuchConstructionUnitProjectException")) {
+			return new com.justonetech.projApproval.NoSuchConstructionUnitProjectException();
+		}
+
 		return throwable;
+	}
+
+	public static Object translateOutputConstructionParticipantUnits(
+		BaseModel<?> oldModel) {
+		ConstructionParticipantUnitsClp newModel = new ConstructionParticipantUnitsClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setConstructionParticipantUnitsRemoteModel(oldModel);
+
+		return newModel;
 	}
 
 	public static Object translateOutputConstructionPermit(
@@ -280,6 +408,17 @@ public class ClpSerializer {
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
 		newModel.setConstructionPermitRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputConstructionUnitProject(
+		BaseModel<?> oldModel) {
+		ConstructionUnitProjectClp newModel = new ConstructionUnitProjectClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setConstructionUnitProjectRemoteModel(oldModel);
 
 		return newModel;
 	}

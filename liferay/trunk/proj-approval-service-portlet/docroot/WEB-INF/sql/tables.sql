@@ -1,3 +1,14 @@
+create table projApproval_ConstructionParticipantUnits (
+	constructionParticipantUnitsId LONG not null primary key,
+	sortNo INTEGER,
+	contractInfoSubmitNum VARCHAR(75) null,
+	unitType LONG,
+	unitName VARCHAR(200) null,
+	projectLeader VARCHAR(75) null,
+	telephoneNum VARCHAR(75) null,
+	constructionPermitId LONG
+);
+
 create table projApproval_ConstructionPermit (
 	constructionPermitId LONG not null primary key,
 	userId LONG,
@@ -36,4 +47,13 @@ create table projApproval_ConstructionPermit (
 	receiptNum VARCHAR(75) null,
 	certificationDate DATE null,
 	constructionPermitCode VARCHAR(75) null
+);
+
+create table projApproval_ConstructionUnitProject (
+	constructionUnitProjectId LONG not null primary key,
+	sortNo INTEGER,
+	unitProjectNum VARCHAR(75) null,
+	unitProjectName VARCHAR(200) null,
+	constructionContent VARCHAR(1000) null,
+	constructionPermitId LONG
 );

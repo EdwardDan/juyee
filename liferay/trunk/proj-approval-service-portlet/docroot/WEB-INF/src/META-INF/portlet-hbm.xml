@@ -2,7 +2,22 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="com.justonetech.projApproval.model.ConstructionParticipantUnits" />
 	<import class="com.justonetech.projApproval.model.ConstructionPermit" />
+	<import class="com.justonetech.projApproval.model.ConstructionUnitProject" />
+	<class name="com.justonetech.projApproval.model.impl.ConstructionParticipantUnitsImpl" table="projApproval_ConstructionParticipantUnits">
+		<cache usage="read-write" />
+		<id name="constructionParticipantUnitsId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="sortNo" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="contractInfoSubmitNum" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="unitType" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="unitName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="projectLeader" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="telephoneNum" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="constructionPermitId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
 	<class name="com.justonetech.projApproval.model.impl.ConstructionPermitImpl" table="projApproval_ConstructionPermit">
 		<cache usage="read-write" />
 		<id name="constructionPermitId" type="long">
@@ -44,5 +59,16 @@
 		<property name="receiptNum" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="certificationDate" type="org.hibernate.type.TimestampType" />
 		<property name="constructionPermitCode" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.justonetech.projApproval.model.impl.ConstructionUnitProjectImpl" table="projApproval_ConstructionUnitProject">
+		<cache usage="read-write" />
+		<id name="constructionUnitProjectId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="sortNo" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="unitProjectNum" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="unitProjectName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="constructionContent" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="constructionPermitId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
 </hibernate-mapping>

@@ -1,7 +1,11 @@
 <?xml version="1.0"?>
 
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<bean id="com.justonetech.projApproval.service.ConstructionParticipantUnitsLocalService" class="com.justonetech.projApproval.service.impl.ConstructionParticipantUnitsLocalServiceImpl" />
+	<bean id="com.justonetech.projApproval.service.persistence.ConstructionParticipantUnitsPersistence" class="com.justonetech.projApproval.service.persistence.ConstructionParticipantUnitsPersistenceImpl" parent="basePersistence" />
 	<bean id="com.justonetech.projApproval.service.ConstructionPermitLocalService" class="com.justonetech.projApproval.service.impl.ConstructionPermitLocalServiceImpl" />
 	<bean id="com.justonetech.projApproval.service.ConstructionPermitService" class="com.justonetech.projApproval.service.impl.ConstructionPermitServiceImpl" />
 	<bean id="com.justonetech.projApproval.service.persistence.ConstructionPermitPersistence" class="com.justonetech.projApproval.service.persistence.ConstructionPermitPersistenceImpl" parent="basePersistence" />
+	<bean id="com.justonetech.projApproval.service.ConstructionUnitProjectLocalService" class="com.justonetech.projApproval.service.impl.ConstructionUnitProjectLocalServiceImpl" />
+	<bean id="com.justonetech.projApproval.service.persistence.ConstructionUnitProjectPersistence" class="com.justonetech.projApproval.service.persistence.ConstructionUnitProjectPersistenceImpl" parent="basePersistence" />
 </beans>

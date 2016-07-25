@@ -16,7 +16,9 @@ package com.justonetech.projApproval.service.base;
 
 import com.justonetech.projApproval.model.ConstructionPermit;
 import com.justonetech.projApproval.service.ConstructionPermitService;
+import com.justonetech.projApproval.service.persistence.ConstructionParticipantUnitsPersistence;
 import com.justonetech.projApproval.service.persistence.ConstructionPermitPersistence;
+import com.justonetech.projApproval.service.persistence.ConstructionUnitProjectPersistence;
 
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.bean.IdentifiableBean;
@@ -47,6 +49,44 @@ public abstract class ConstructionPermitServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * Never modify or reference this class directly. Always use {@link com.justonetech.projApproval.service.ConstructionPermitServiceUtil} to access the construction permit remote service.
 	 */
+
+	/**
+	 * Returns the construction participant units local service.
+	 *
+	 * @return the construction participant units local service
+	 */
+	public com.justonetech.projApproval.service.ConstructionParticipantUnitsLocalService getConstructionParticipantUnitsLocalService() {
+		return constructionParticipantUnitsLocalService;
+	}
+
+	/**
+	 * Sets the construction participant units local service.
+	 *
+	 * @param constructionParticipantUnitsLocalService the construction participant units local service
+	 */
+	public void setConstructionParticipantUnitsLocalService(
+		com.justonetech.projApproval.service.ConstructionParticipantUnitsLocalService constructionParticipantUnitsLocalService) {
+		this.constructionParticipantUnitsLocalService = constructionParticipantUnitsLocalService;
+	}
+
+	/**
+	 * Returns the construction participant units persistence.
+	 *
+	 * @return the construction participant units persistence
+	 */
+	public ConstructionParticipantUnitsPersistence getConstructionParticipantUnitsPersistence() {
+		return constructionParticipantUnitsPersistence;
+	}
+
+	/**
+	 * Sets the construction participant units persistence.
+	 *
+	 * @param constructionParticipantUnitsPersistence the construction participant units persistence
+	 */
+	public void setConstructionParticipantUnitsPersistence(
+		ConstructionParticipantUnitsPersistence constructionParticipantUnitsPersistence) {
+		this.constructionParticipantUnitsPersistence = constructionParticipantUnitsPersistence;
+	}
 
 	/**
 	 * Returns the construction permit local service.
@@ -103,6 +143,44 @@ public abstract class ConstructionPermitServiceBaseImpl extends BaseServiceImpl
 	public void setConstructionPermitPersistence(
 		ConstructionPermitPersistence constructionPermitPersistence) {
 		this.constructionPermitPersistence = constructionPermitPersistence;
+	}
+
+	/**
+	 * Returns the construction unit project local service.
+	 *
+	 * @return the construction unit project local service
+	 */
+	public com.justonetech.projApproval.service.ConstructionUnitProjectLocalService getConstructionUnitProjectLocalService() {
+		return constructionUnitProjectLocalService;
+	}
+
+	/**
+	 * Sets the construction unit project local service.
+	 *
+	 * @param constructionUnitProjectLocalService the construction unit project local service
+	 */
+	public void setConstructionUnitProjectLocalService(
+		com.justonetech.projApproval.service.ConstructionUnitProjectLocalService constructionUnitProjectLocalService) {
+		this.constructionUnitProjectLocalService = constructionUnitProjectLocalService;
+	}
+
+	/**
+	 * Returns the construction unit project persistence.
+	 *
+	 * @return the construction unit project persistence
+	 */
+	public ConstructionUnitProjectPersistence getConstructionUnitProjectPersistence() {
+		return constructionUnitProjectPersistence;
+	}
+
+	/**
+	 * Sets the construction unit project persistence.
+	 *
+	 * @param constructionUnitProjectPersistence the construction unit project persistence
+	 */
+	public void setConstructionUnitProjectPersistence(
+		ConstructionUnitProjectPersistence constructionUnitProjectPersistence) {
+		this.constructionUnitProjectPersistence = constructionUnitProjectPersistence;
 	}
 
 	/**
@@ -276,12 +354,20 @@ public abstract class ConstructionPermitServiceBaseImpl extends BaseServiceImpl
 		}
 	}
 
+	@BeanReference(type = com.justonetech.projApproval.service.ConstructionParticipantUnitsLocalService.class)
+	protected com.justonetech.projApproval.service.ConstructionParticipantUnitsLocalService constructionParticipantUnitsLocalService;
+	@BeanReference(type = ConstructionParticipantUnitsPersistence.class)
+	protected ConstructionParticipantUnitsPersistence constructionParticipantUnitsPersistence;
 	@BeanReference(type = com.justonetech.projApproval.service.ConstructionPermitLocalService.class)
 	protected com.justonetech.projApproval.service.ConstructionPermitLocalService constructionPermitLocalService;
 	@BeanReference(type = com.justonetech.projApproval.service.ConstructionPermitService.class)
 	protected com.justonetech.projApproval.service.ConstructionPermitService constructionPermitService;
 	@BeanReference(type = ConstructionPermitPersistence.class)
 	protected ConstructionPermitPersistence constructionPermitPersistence;
+	@BeanReference(type = com.justonetech.projApproval.service.ConstructionUnitProjectLocalService.class)
+	protected com.justonetech.projApproval.service.ConstructionUnitProjectLocalService constructionUnitProjectLocalService;
+	@BeanReference(type = ConstructionUnitProjectPersistence.class)
+	protected ConstructionUnitProjectPersistence constructionUnitProjectPersistence;
 	@BeanReference(type = com.liferay.counter.service.CounterLocalService.class)
 	protected com.liferay.counter.service.CounterLocalService counterLocalService;
 	@BeanReference(type = com.liferay.portal.service.ResourceLocalService.class)

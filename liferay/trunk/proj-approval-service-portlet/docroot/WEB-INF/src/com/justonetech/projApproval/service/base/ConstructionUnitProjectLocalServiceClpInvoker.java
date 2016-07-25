@@ -14,7 +14,7 @@
 
 package com.justonetech.projApproval.service.base;
 
-import com.justonetech.projApproval.service.ConstructionPermitLocalServiceUtil;
+import com.justonetech.projApproval.service.ConstructionUnitProjectLocalServiceUtil;
 
 import java.util.Arrays;
 
@@ -22,26 +22,26 @@ import java.util.Arrays;
  * @author justonetech
  * @generated
  */
-public class ConstructionPermitLocalServiceClpInvoker {
-	public ConstructionPermitLocalServiceClpInvoker() {
-		_methodName0 = "addConstructionPermit";
+public class ConstructionUnitProjectLocalServiceClpInvoker {
+	public ConstructionUnitProjectLocalServiceClpInvoker() {
+		_methodName0 = "addConstructionUnitProject";
 
 		_methodParameterTypes0 = new String[] {
-				"com.justonetech.projApproval.model.ConstructionPermit"
+				"com.justonetech.projApproval.model.ConstructionUnitProject"
 			};
 
-		_methodName1 = "createConstructionPermit";
+		_methodName1 = "createConstructionUnitProject";
 
 		_methodParameterTypes1 = new String[] { "long" };
 
-		_methodName2 = "deleteConstructionPermit";
+		_methodName2 = "deleteConstructionUnitProject";
 
 		_methodParameterTypes2 = new String[] { "long" };
 
-		_methodName3 = "deleteConstructionPermit";
+		_methodName3 = "deleteConstructionUnitProject";
 
 		_methodParameterTypes3 = new String[] {
-				"com.justonetech.projApproval.model.ConstructionPermit"
+				"com.justonetech.projApproval.model.ConstructionUnitProject"
 			};
 
 		_methodName4 = "dynamicQuery";
@@ -80,11 +80,11 @@ public class ConstructionPermitLocalServiceClpInvoker {
 				"com.liferay.portal.kernel.dao.orm.Projection"
 			};
 
-		_methodName10 = "fetchConstructionPermit";
+		_methodName10 = "fetchConstructionUnitProject";
 
 		_methodParameterTypes10 = new String[] { "long" };
 
-		_methodName11 = "getConstructionPermit";
+		_methodName11 = "getConstructionUnitProject";
 
 		_methodParameterTypes11 = new String[] { "long" };
 
@@ -92,18 +92,18 @@ public class ConstructionPermitLocalServiceClpInvoker {
 
 		_methodParameterTypes12 = new String[] { "java.io.Serializable" };
 
-		_methodName13 = "getConstructionPermits";
+		_methodName13 = "getConstructionUnitProjects";
 
 		_methodParameterTypes13 = new String[] { "int", "int" };
 
-		_methodName14 = "getConstructionPermitsCount";
+		_methodName14 = "getConstructionUnitProjectsCount";
 
 		_methodParameterTypes14 = new String[] {  };
 
-		_methodName15 = "updateConstructionPermit";
+		_methodName15 = "updateConstructionUnitProject";
 
 		_methodParameterTypes15 = new String[] {
-				"com.justonetech.projApproval.model.ConstructionPermit"
+				"com.justonetech.projApproval.model.ConstructionUnitProject"
 			};
 
 		_methodName42 = "getBeanIdentifier";
@@ -114,61 +114,53 @@ public class ConstructionPermitLocalServiceClpInvoker {
 
 		_methodParameterTypes43 = new String[] { "java.lang.String" };
 
-		_methodName48 = "findByUserId";
+		_methodName48 = "findByConstructionPermitId";
 
-		_methodParameterTypes48 = new String[] { "long", "int", "int" };
-
-		_methodName49 = "countByUserId";
-
-		_methodParameterTypes49 = new String[] { "long" };
-
-		_methodName50 = "deleteConstructionPermits";
-
-		_methodParameterTypes50 = new String[] { "java.lang.String[][]" };
+		_methodParameterTypes48 = new String[] { "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
 		Object[] arguments) throws Throwable {
 		if (_methodName0.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes0, parameterTypes)) {
-			return ConstructionPermitLocalServiceUtil.addConstructionPermit((com.justonetech.projApproval.model.ConstructionPermit)arguments[0]);
+			return ConstructionUnitProjectLocalServiceUtil.addConstructionUnitProject((com.justonetech.projApproval.model.ConstructionUnitProject)arguments[0]);
 		}
 
 		if (_methodName1.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes1, parameterTypes)) {
-			return ConstructionPermitLocalServiceUtil.createConstructionPermit(((Long)arguments[0]).longValue());
+			return ConstructionUnitProjectLocalServiceUtil.createConstructionUnitProject(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName2.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes2, parameterTypes)) {
-			return ConstructionPermitLocalServiceUtil.deleteConstructionPermit(((Long)arguments[0]).longValue());
+			return ConstructionUnitProjectLocalServiceUtil.deleteConstructionUnitProject(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName3.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes3, parameterTypes)) {
-			return ConstructionPermitLocalServiceUtil.deleteConstructionPermit((com.justonetech.projApproval.model.ConstructionPermit)arguments[0]);
+			return ConstructionUnitProjectLocalServiceUtil.deleteConstructionUnitProject((com.justonetech.projApproval.model.ConstructionUnitProject)arguments[0]);
 		}
 
 		if (_methodName4.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes4, parameterTypes)) {
-			return ConstructionPermitLocalServiceUtil.dynamicQuery();
+			return ConstructionUnitProjectLocalServiceUtil.dynamicQuery();
 		}
 
 		if (_methodName5.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes5, parameterTypes)) {
-			return ConstructionPermitLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0]);
+			return ConstructionUnitProjectLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0]);
 		}
 
 		if (_methodName6.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes6, parameterTypes)) {
-			return ConstructionPermitLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
+			return ConstructionUnitProjectLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue());
 		}
 
 		if (_methodName7.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes7, parameterTypes)) {
-			return ConstructionPermitLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
+			return ConstructionUnitProjectLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue(),
 				(com.liferay.portal.kernel.util.OrderByComparator)arguments[3]);
@@ -176,75 +168,61 @@ public class ConstructionPermitLocalServiceClpInvoker {
 
 		if (_methodName8.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes8, parameterTypes)) {
-			return ConstructionPermitLocalServiceUtil.dynamicQueryCount((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0]);
+			return ConstructionUnitProjectLocalServiceUtil.dynamicQueryCount((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0]);
 		}
 
 		if (_methodName9.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes9, parameterTypes)) {
-			return ConstructionPermitLocalServiceUtil.dynamicQueryCount((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
+			return ConstructionUnitProjectLocalServiceUtil.dynamicQueryCount((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
 				(com.liferay.portal.kernel.dao.orm.Projection)arguments[1]);
 		}
 
 		if (_methodName10.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes10, parameterTypes)) {
-			return ConstructionPermitLocalServiceUtil.fetchConstructionPermit(((Long)arguments[0]).longValue());
+			return ConstructionUnitProjectLocalServiceUtil.fetchConstructionUnitProject(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName11.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes11, parameterTypes)) {
-			return ConstructionPermitLocalServiceUtil.getConstructionPermit(((Long)arguments[0]).longValue());
+			return ConstructionUnitProjectLocalServiceUtil.getConstructionUnitProject(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName12.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes12, parameterTypes)) {
-			return ConstructionPermitLocalServiceUtil.getPersistedModel((java.io.Serializable)arguments[0]);
+			return ConstructionUnitProjectLocalServiceUtil.getPersistedModel((java.io.Serializable)arguments[0]);
 		}
 
 		if (_methodName13.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes13, parameterTypes)) {
-			return ConstructionPermitLocalServiceUtil.getConstructionPermits(((Integer)arguments[0]).intValue(),
+			return ConstructionUnitProjectLocalServiceUtil.getConstructionUnitProjects(((Integer)arguments[0]).intValue(),
 				((Integer)arguments[1]).intValue());
 		}
 
 		if (_methodName14.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes14, parameterTypes)) {
-			return ConstructionPermitLocalServiceUtil.getConstructionPermitsCount();
+			return ConstructionUnitProjectLocalServiceUtil.getConstructionUnitProjectsCount();
 		}
 
 		if (_methodName15.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes15, parameterTypes)) {
-			return ConstructionPermitLocalServiceUtil.updateConstructionPermit((com.justonetech.projApproval.model.ConstructionPermit)arguments[0]);
+			return ConstructionUnitProjectLocalServiceUtil.updateConstructionUnitProject((com.justonetech.projApproval.model.ConstructionUnitProject)arguments[0]);
 		}
 
 		if (_methodName42.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes42, parameterTypes)) {
-			return ConstructionPermitLocalServiceUtil.getBeanIdentifier();
+			return ConstructionUnitProjectLocalServiceUtil.getBeanIdentifier();
 		}
 
 		if (_methodName43.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes43, parameterTypes)) {
-			ConstructionPermitLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
+			ConstructionUnitProjectLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
 		if (_methodName48.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes48, parameterTypes)) {
-			return ConstructionPermitLocalServiceUtil.findByUserId(((Long)arguments[0]).longValue(),
-				((Integer)arguments[1]).intValue(),
-				((Integer)arguments[2]).intValue());
-		}
-
-		if (_methodName49.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes49, parameterTypes)) {
-			return ConstructionPermitLocalServiceUtil.countByUserId(((Long)arguments[0]).longValue());
-		}
-
-		if (_methodName50.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes50, parameterTypes)) {
-			ConstructionPermitLocalServiceUtil.deleteConstructionPermits((java.lang.String[])arguments[0]);
-
-			return null;
+			return ConstructionUnitProjectLocalServiceUtil.findByConstructionPermitId(((Long)arguments[0]).longValue());
 		}
 
 		throw new UnsupportedOperationException();
@@ -288,8 +266,4 @@ public class ConstructionPermitLocalServiceClpInvoker {
 	private String[] _methodParameterTypes43;
 	private String _methodName48;
 	private String[] _methodParameterTypes48;
-	private String _methodName49;
-	private String[] _methodParameterTypes49;
-	private String _methodName50;
-	private String[] _methodParameterTypes50;
 }

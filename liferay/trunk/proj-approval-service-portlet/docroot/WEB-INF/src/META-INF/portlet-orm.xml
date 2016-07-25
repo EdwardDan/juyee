@@ -7,6 +7,21 @@
 			<access>PROPERTY</access>
 		</persistence-unit-defaults>
 	</persistence-unit-metadata>
+	<mapped-superclass class="com.justonetech.projApproval.model.impl.ConstructionParticipantUnitsModelImpl">
+		<attributes>
+			<id name="constructionParticipantUnitsId" />
+			<basic name="sortNo" />
+			<basic name="contractInfoSubmitNum" />
+			<basic name="unitType" />
+			<basic name="unitName" />
+			<basic name="projectLeader" />
+			<basic name="telephoneNum" />
+			<basic name="constructionPermitId" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="com.justonetech.projApproval.model.impl.ConstructionPermitModelImpl">
 		<attributes>
 			<id name="constructionPermitId" />
@@ -62,8 +77,29 @@
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="com.justonetech.projApproval.model.impl.ConstructionUnitProjectModelImpl">
+		<attributes>
+			<id name="constructionUnitProjectId" />
+			<basic name="sortNo" />
+			<basic name="unitProjectNum" />
+			<basic name="unitProjectName" />
+			<basic name="constructionContent" />
+			<basic name="constructionPermitId" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<entity class="com.justonetech.projApproval.model.impl.ConstructionParticipantUnitsImpl" name="ConstructionParticipantUnits">
+		<table name="projApproval_ConstructionParticipantUnits" />
+		<attributes />
+	</entity>
 	<entity class="com.justonetech.projApproval.model.impl.ConstructionPermitImpl" name="ConstructionPermit">
 		<table name="projApproval_ConstructionPermit" />
+		<attributes />
+	</entity>
+	<entity class="com.justonetech.projApproval.model.impl.ConstructionUnitProjectImpl" name="ConstructionUnitProject">
+		<table name="projApproval_ConstructionUnitProject" />
 		<attributes />
 	</entity>
 </entity-mappings>

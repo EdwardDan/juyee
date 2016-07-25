@@ -61,4 +61,55 @@
 
 	</entity>
 
+	<!-- 施工许可参建单位 -->
+	<entity name="ConstructionParticipantUnits" local-service="true"
+		remote-service="false">
+
+		<!-- PK fields -->
+
+		<column name="constructionParticipantUnitsId" type="long"
+			primary="true" />
+
+		<!-- Other fields -->
+
+		<column name="sortNo" type="int" />
+		<column name="contractInfoSubmitNum" type="String" />
+		<column name="unitType" type="long" />
+		<column name="unitName" type="String" />
+		<column name="projectLeader" type="String" />
+		<column name="telephoneNum" type="String" />
+		<column name="constructionPermitId" type="long" />
+
+
+		<!-- Finder methods -->
+		<finder name="ConstructionPermitId" return-type="ConstructionParticipantUnits">
+			<finder-column name="constructionPermitId"></finder-column>
+		</finder>
+
+	</entity>
+
+	<!-- 施工许可单位工程 -->
+	<entity name="ConstructionUnitProject" local-service="true"
+		remote-service="false">
+
+		<!-- PK fields -->
+
+		<column name="constructionUnitProjectId" type="long" primary="true" />
+
+		<!-- Other fields -->
+
+		<column name="sortNo" type="int" />
+		<column name="unitProjectNum" type="String" />
+		<column name="unitProjectName" type="String" />
+		<column name="constructionContent" type="String" />
+		<column name="constructionPermitId" type="long" />
+
+
+		<!-- Finder methods -->
+		<finder name="ConstructionPermitId" return-type="ConstructionUnitProject">
+			<finder-column name="constructionPermitId"></finder-column>
+		</finder>
+
+	</entity>
+
 </service-builder>
