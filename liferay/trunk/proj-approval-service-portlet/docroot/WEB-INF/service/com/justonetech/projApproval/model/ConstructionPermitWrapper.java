@@ -87,6 +87,14 @@ public class ConstructionPermitWrapper implements ConstructionPermit,
 		attributes.put("receiptNum", getReceiptNum());
 		attributes.put("certificationDate", getCertificationDate());
 		attributes.put("constructionPermitCode", getConstructionPermitCode());
+		attributes.put("companyId", getCompanyId());
+		attributes.put("groupId", getGroupId());
+		attributes.put("title", getTitle());
+		attributes.put("content", getContent());
+		attributes.put("status", getStatus());
+		attributes.put("statusByUserId", getStatusByUserId());
+		attributes.put("statusByUserName", getStatusByUserName());
+		attributes.put("statusDate", getStatusDate());
 
 		return attributes;
 	}
@@ -316,6 +324,54 @@ public class ConstructionPermitWrapper implements ConstructionPermit,
 
 		if (constructionPermitCode != null) {
 			setConstructionPermitCode(constructionPermitCode);
+		}
+
+		Long companyId = (Long)attributes.get("companyId");
+
+		if (companyId != null) {
+			setCompanyId(companyId);
+		}
+
+		Long groupId = (Long)attributes.get("groupId");
+
+		if (groupId != null) {
+			setGroupId(groupId);
+		}
+
+		String title = (String)attributes.get("title");
+
+		if (title != null) {
+			setTitle(title);
+		}
+
+		String content = (String)attributes.get("content");
+
+		if (content != null) {
+			setContent(content);
+		}
+
+		Integer status = (Integer)attributes.get("status");
+
+		if (status != null) {
+			setStatus(status);
+		}
+
+		Long statusByUserId = (Long)attributes.get("statusByUserId");
+
+		if (statusByUserId != null) {
+			setStatusByUserId(statusByUserId);
+		}
+
+		String statusByUserName = (String)attributes.get("statusByUserName");
+
+		if (statusByUserName != null) {
+			setStatusByUserName(statusByUserName);
+		}
+
+		Date statusDate = (Date)attributes.get("statusDate");
+
+		if (statusDate != null) {
+			setStatusDate(statusDate);
 		}
 	}
 
@@ -1101,6 +1157,276 @@ public class ConstructionPermitWrapper implements ConstructionPermit,
 	public void setConstructionPermitCode(
 		java.lang.String constructionPermitCode) {
 		_constructionPermit.setConstructionPermitCode(constructionPermitCode);
+	}
+
+	/**
+	* Returns the company ID of this construction permit.
+	*
+	* @return the company ID of this construction permit
+	*/
+	@Override
+	public long getCompanyId() {
+		return _constructionPermit.getCompanyId();
+	}
+
+	/**
+	* Sets the company ID of this construction permit.
+	*
+	* @param companyId the company ID of this construction permit
+	*/
+	@Override
+	public void setCompanyId(long companyId) {
+		_constructionPermit.setCompanyId(companyId);
+	}
+
+	/**
+	* Returns the group ID of this construction permit.
+	*
+	* @return the group ID of this construction permit
+	*/
+	@Override
+	public long getGroupId() {
+		return _constructionPermit.getGroupId();
+	}
+
+	/**
+	* Sets the group ID of this construction permit.
+	*
+	* @param groupId the group ID of this construction permit
+	*/
+	@Override
+	public void setGroupId(long groupId) {
+		_constructionPermit.setGroupId(groupId);
+	}
+
+	/**
+	* Returns the title of this construction permit.
+	*
+	* @return the title of this construction permit
+	*/
+	@Override
+	public java.lang.String getTitle() {
+		return _constructionPermit.getTitle();
+	}
+
+	/**
+	* Sets the title of this construction permit.
+	*
+	* @param title the title of this construction permit
+	*/
+	@Override
+	public void setTitle(java.lang.String title) {
+		_constructionPermit.setTitle(title);
+	}
+
+	/**
+	* Returns the content of this construction permit.
+	*
+	* @return the content of this construction permit
+	*/
+	@Override
+	public java.lang.String getContent() {
+		return _constructionPermit.getContent();
+	}
+
+	/**
+	* Sets the content of this construction permit.
+	*
+	* @param content the content of this construction permit
+	*/
+	@Override
+	public void setContent(java.lang.String content) {
+		_constructionPermit.setContent(content);
+	}
+
+	/**
+	* Returns the status of this construction permit.
+	*
+	* @return the status of this construction permit
+	*/
+	@Override
+	public int getStatus() {
+		return _constructionPermit.getStatus();
+	}
+
+	/**
+	* Sets the status of this construction permit.
+	*
+	* @param status the status of this construction permit
+	*/
+	@Override
+	public void setStatus(int status) {
+		_constructionPermit.setStatus(status);
+	}
+
+	/**
+	* Returns the status by user ID of this construction permit.
+	*
+	* @return the status by user ID of this construction permit
+	*/
+	@Override
+	public long getStatusByUserId() {
+		return _constructionPermit.getStatusByUserId();
+	}
+
+	/**
+	* Sets the status by user ID of this construction permit.
+	*
+	* @param statusByUserId the status by user ID of this construction permit
+	*/
+	@Override
+	public void setStatusByUserId(long statusByUserId) {
+		_constructionPermit.setStatusByUserId(statusByUserId);
+	}
+
+	/**
+	* Returns the status by user uuid of this construction permit.
+	*
+	* @return the status by user uuid of this construction permit
+	* @throws SystemException if a system exception occurred
+	*/
+	@Override
+	public java.lang.String getStatusByUserUuid()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _constructionPermit.getStatusByUserUuid();
+	}
+
+	/**
+	* Sets the status by user uuid of this construction permit.
+	*
+	* @param statusByUserUuid the status by user uuid of this construction permit
+	*/
+	@Override
+	public void setStatusByUserUuid(java.lang.String statusByUserUuid) {
+		_constructionPermit.setStatusByUserUuid(statusByUserUuid);
+	}
+
+	/**
+	* Returns the status by user name of this construction permit.
+	*
+	* @return the status by user name of this construction permit
+	*/
+	@Override
+	public java.lang.String getStatusByUserName() {
+		return _constructionPermit.getStatusByUserName();
+	}
+
+	/**
+	* Sets the status by user name of this construction permit.
+	*
+	* @param statusByUserName the status by user name of this construction permit
+	*/
+	@Override
+	public void setStatusByUserName(java.lang.String statusByUserName) {
+		_constructionPermit.setStatusByUserName(statusByUserName);
+	}
+
+	/**
+	* Returns the status date of this construction permit.
+	*
+	* @return the status date of this construction permit
+	*/
+	@Override
+	public java.util.Date getStatusDate() {
+		return _constructionPermit.getStatusDate();
+	}
+
+	/**
+	* Sets the status date of this construction permit.
+	*
+	* @param statusDate the status date of this construction permit
+	*/
+	@Override
+	public void setStatusDate(java.util.Date statusDate) {
+		_constructionPermit.setStatusDate(statusDate);
+	}
+
+	/**
+	* @deprecated As of 6.1.0, replaced by {@link #isApproved()}
+	*/
+	@Override
+	public boolean getApproved() {
+		return _constructionPermit.getApproved();
+	}
+
+	/**
+	* Returns <code>true</code> if this construction permit is approved.
+	*
+	* @return <code>true</code> if this construction permit is approved; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isApproved() {
+		return _constructionPermit.isApproved();
+	}
+
+	/**
+	* Returns <code>true</code> if this construction permit is denied.
+	*
+	* @return <code>true</code> if this construction permit is denied; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isDenied() {
+		return _constructionPermit.isDenied();
+	}
+
+	/**
+	* Returns <code>true</code> if this construction permit is a draft.
+	*
+	* @return <code>true</code> if this construction permit is a draft; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isDraft() {
+		return _constructionPermit.isDraft();
+	}
+
+	/**
+	* Returns <code>true</code> if this construction permit is expired.
+	*
+	* @return <code>true</code> if this construction permit is expired; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isExpired() {
+		return _constructionPermit.isExpired();
+	}
+
+	/**
+	* Returns <code>true</code> if this construction permit is inactive.
+	*
+	* @return <code>true</code> if this construction permit is inactive; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isInactive() {
+		return _constructionPermit.isInactive();
+	}
+
+	/**
+	* Returns <code>true</code> if this construction permit is incomplete.
+	*
+	* @return <code>true</code> if this construction permit is incomplete; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isIncomplete() {
+		return _constructionPermit.isIncomplete();
+	}
+
+	/**
+	* Returns <code>true</code> if this construction permit is pending.
+	*
+	* @return <code>true</code> if this construction permit is pending; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isPending() {
+		return _constructionPermit.isPending();
+	}
+
+	/**
+	* Returns <code>true</code> if this construction permit is scheduled.
+	*
+	* @return <code>true</code> if this construction permit is scheduled; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isScheduled() {
+		return _constructionPermit.isScheduled();
 	}
 
 	@Override

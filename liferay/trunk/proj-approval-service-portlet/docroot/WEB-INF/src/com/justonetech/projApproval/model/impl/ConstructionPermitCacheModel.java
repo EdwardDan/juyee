@@ -38,7 +38,7 @@ public class ConstructionPermitCacheModel implements CacheModel<ConstructionPerm
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(75);
+		StringBundler sb = new StringBundler(91);
 
 		sb.append("{constructionPermitId=");
 		sb.append(constructionPermitId);
@@ -114,6 +114,22 @@ public class ConstructionPermitCacheModel implements CacheModel<ConstructionPerm
 		sb.append(certificationDate);
 		sb.append(", constructionPermitCode=");
 		sb.append(constructionPermitCode);
+		sb.append(", companyId=");
+		sb.append(companyId);
+		sb.append(", groupId=");
+		sb.append(groupId);
+		sb.append(", title=");
+		sb.append(title);
+		sb.append(", content=");
+		sb.append(content);
+		sb.append(", status=");
+		sb.append(status);
+		sb.append(", statusByUserId=");
+		sb.append(statusByUserId);
+		sb.append(", statusByUserName=");
+		sb.append(statusByUserName);
+		sb.append(", statusDate=");
+		sb.append(statusDate);
 		sb.append("}");
 
 		return sb.toString();
@@ -327,6 +343,40 @@ public class ConstructionPermitCacheModel implements CacheModel<ConstructionPerm
 			constructionPermitImpl.setConstructionPermitCode(constructionPermitCode);
 		}
 
+		constructionPermitImpl.setCompanyId(companyId);
+		constructionPermitImpl.setGroupId(groupId);
+
+		if (title == null) {
+			constructionPermitImpl.setTitle(StringPool.BLANK);
+		}
+		else {
+			constructionPermitImpl.setTitle(title);
+		}
+
+		if (content == null) {
+			constructionPermitImpl.setContent(StringPool.BLANK);
+		}
+		else {
+			constructionPermitImpl.setContent(content);
+		}
+
+		constructionPermitImpl.setStatus(status);
+		constructionPermitImpl.setStatusByUserId(statusByUserId);
+
+		if (statusByUserName == null) {
+			constructionPermitImpl.setStatusByUserName(StringPool.BLANK);
+		}
+		else {
+			constructionPermitImpl.setStatusByUserName(statusByUserName);
+		}
+
+		if (statusDate == Long.MIN_VALUE) {
+			constructionPermitImpl.setStatusDate(null);
+		}
+		else {
+			constructionPermitImpl.setStatusDate(new Date(statusDate));
+		}
+
 		constructionPermitImpl.resetOriginalValues();
 
 		return constructionPermitImpl;
@@ -371,6 +421,14 @@ public class ConstructionPermitCacheModel implements CacheModel<ConstructionPerm
 		receiptNum = objectInput.readUTF();
 		certificationDate = objectInput.readLong();
 		constructionPermitCode = objectInput.readUTF();
+		companyId = objectInput.readLong();
+		groupId = objectInput.readLong();
+		title = objectInput.readUTF();
+		content = objectInput.readUTF();
+		status = objectInput.readInt();
+		statusByUserId = objectInput.readLong();
+		statusByUserName = objectInput.readUTF();
+		statusDate = objectInput.readLong();
 	}
 
 	@Override
@@ -549,6 +607,35 @@ public class ConstructionPermitCacheModel implements CacheModel<ConstructionPerm
 		else {
 			objectOutput.writeUTF(constructionPermitCode);
 		}
+
+		objectOutput.writeLong(companyId);
+		objectOutput.writeLong(groupId);
+
+		if (title == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(title);
+		}
+
+		if (content == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(content);
+		}
+
+		objectOutput.writeInt(status);
+		objectOutput.writeLong(statusByUserId);
+
+		if (statusByUserName == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(statusByUserName);
+		}
+
+		objectOutput.writeLong(statusDate);
 	}
 
 	public long constructionPermitId;
@@ -588,4 +675,12 @@ public class ConstructionPermitCacheModel implements CacheModel<ConstructionPerm
 	public String receiptNum;
 	public long certificationDate;
 	public String constructionPermitCode;
+	public long companyId;
+	public long groupId;
+	public String title;
+	public String content;
+	public int status;
+	public long statusByUserId;
+	public String statusByUserName;
+	public long statusDate;
 }

@@ -59,6 +59,14 @@
 		<property name="receiptNum" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="certificationDate" type="org.hibernate.type.TimestampType" />
 		<property name="constructionPermitCode" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="title" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="content" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="status" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="statusByUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="statusByUserName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="statusDate" type="org.hibernate.type.TimestampType" />
 	</class>
 	<class name="com.justonetech.projApproval.model.impl.ConstructionUnitProjectImpl" table="projApproval_ConstructionUnitProject">
 		<cache usage="read-write" />

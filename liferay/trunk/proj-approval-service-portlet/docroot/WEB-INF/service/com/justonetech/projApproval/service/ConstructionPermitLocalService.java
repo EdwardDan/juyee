@@ -263,4 +263,10 @@ public interface ConstructionPermitLocalService extends BaseLocalService,
 
 	public void deleteConstructionPermits(
 		java.lang.String[] constructionPermitIds);
+
+	public com.justonetech.projApproval.model.ConstructionPermit updateStatus(
+		long userId, long resourcePrimKey, int status,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.kernel.exception.SystemException;
 }

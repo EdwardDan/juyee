@@ -291,6 +291,15 @@ public class ConstructionPermitLocalServiceUtil {
 		getService().deleteConstructionPermits(constructionPermitIds);
 	}
 
+	public static com.justonetech.projApproval.model.ConstructionPermit updateStatus(
+		long userId, long resourcePrimKey, int status,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .updateStatus(userId, resourcePrimKey, status, serviceContext);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

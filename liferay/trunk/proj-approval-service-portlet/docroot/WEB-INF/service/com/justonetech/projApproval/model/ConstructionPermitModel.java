@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.CacheModel;
+import com.liferay.portal.model.WorkflowedModel;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -39,7 +40,8 @@ import java.util.Date;
  * @see com.justonetech.projApproval.model.impl.ConstructionPermitModelImpl
  * @generated
  */
-public interface ConstructionPermitModel extends BaseModel<ConstructionPermit> {
+public interface ConstructionPermitModel extends BaseModel<ConstructionPermit>,
+	WorkflowedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -614,6 +616,216 @@ public interface ConstructionPermitModel extends BaseModel<ConstructionPermit> {
 	 * @param constructionPermitCode the construction permit code of this construction permit
 	 */
 	public void setConstructionPermitCode(String constructionPermitCode);
+
+	/**
+	 * Returns the company ID of this construction permit.
+	 *
+	 * @return the company ID of this construction permit
+	 */
+	public long getCompanyId();
+
+	/**
+	 * Sets the company ID of this construction permit.
+	 *
+	 * @param companyId the company ID of this construction permit
+	 */
+	public void setCompanyId(long companyId);
+
+	/**
+	 * Returns the group ID of this construction permit.
+	 *
+	 * @return the group ID of this construction permit
+	 */
+	public long getGroupId();
+
+	/**
+	 * Sets the group ID of this construction permit.
+	 *
+	 * @param groupId the group ID of this construction permit
+	 */
+	public void setGroupId(long groupId);
+
+	/**
+	 * Returns the title of this construction permit.
+	 *
+	 * @return the title of this construction permit
+	 */
+	@AutoEscape
+	public String getTitle();
+
+	/**
+	 * Sets the title of this construction permit.
+	 *
+	 * @param title the title of this construction permit
+	 */
+	public void setTitle(String title);
+
+	/**
+	 * Returns the content of this construction permit.
+	 *
+	 * @return the content of this construction permit
+	 */
+	@AutoEscape
+	public String getContent();
+
+	/**
+	 * Sets the content of this construction permit.
+	 *
+	 * @param content the content of this construction permit
+	 */
+	public void setContent(String content);
+
+	/**
+	 * Returns the status of this construction permit.
+	 *
+	 * @return the status of this construction permit
+	 */
+	@Override
+	public int getStatus();
+
+	/**
+	 * Sets the status of this construction permit.
+	 *
+	 * @param status the status of this construction permit
+	 */
+	@Override
+	public void setStatus(int status);
+
+	/**
+	 * Returns the status by user ID of this construction permit.
+	 *
+	 * @return the status by user ID of this construction permit
+	 */
+	@Override
+	public long getStatusByUserId();
+
+	/**
+	 * Sets the status by user ID of this construction permit.
+	 *
+	 * @param statusByUserId the status by user ID of this construction permit
+	 */
+	@Override
+	public void setStatusByUserId(long statusByUserId);
+
+	/**
+	 * Returns the status by user uuid of this construction permit.
+	 *
+	 * @return the status by user uuid of this construction permit
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public String getStatusByUserUuid() throws SystemException;
+
+	/**
+	 * Sets the status by user uuid of this construction permit.
+	 *
+	 * @param statusByUserUuid the status by user uuid of this construction permit
+	 */
+	@Override
+	public void setStatusByUserUuid(String statusByUserUuid);
+
+	/**
+	 * Returns the status by user name of this construction permit.
+	 *
+	 * @return the status by user name of this construction permit
+	 */
+	@AutoEscape
+	@Override
+	public String getStatusByUserName();
+
+	/**
+	 * Sets the status by user name of this construction permit.
+	 *
+	 * @param statusByUserName the status by user name of this construction permit
+	 */
+	@Override
+	public void setStatusByUserName(String statusByUserName);
+
+	/**
+	 * Returns the status date of this construction permit.
+	 *
+	 * @return the status date of this construction permit
+	 */
+	@Override
+	public Date getStatusDate();
+
+	/**
+	 * Sets the status date of this construction permit.
+	 *
+	 * @param statusDate the status date of this construction permit
+	 */
+	@Override
+	public void setStatusDate(Date statusDate);
+
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #isApproved()}
+	 */
+	@Override
+	public boolean getApproved();
+
+	/**
+	 * Returns <code>true</code> if this construction permit is approved.
+	 *
+	 * @return <code>true</code> if this construction permit is approved; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isApproved();
+
+	/**
+	 * Returns <code>true</code> if this construction permit is denied.
+	 *
+	 * @return <code>true</code> if this construction permit is denied; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isDenied();
+
+	/**
+	 * Returns <code>true</code> if this construction permit is a draft.
+	 *
+	 * @return <code>true</code> if this construction permit is a draft; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isDraft();
+
+	/**
+	 * Returns <code>true</code> if this construction permit is expired.
+	 *
+	 * @return <code>true</code> if this construction permit is expired; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isExpired();
+
+	/**
+	 * Returns <code>true</code> if this construction permit is inactive.
+	 *
+	 * @return <code>true</code> if this construction permit is inactive; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isInactive();
+
+	/**
+	 * Returns <code>true</code> if this construction permit is incomplete.
+	 *
+	 * @return <code>true</code> if this construction permit is incomplete; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isIncomplete();
+
+	/**
+	 * Returns <code>true</code> if this construction permit is pending.
+	 *
+	 * @return <code>true</code> if this construction permit is pending; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isPending();
+
+	/**
+	 * Returns <code>true</code> if this construction permit is scheduled.
+	 *
+	 * @return <code>true</code> if this construction permit is scheduled; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isScheduled();
 
 	@Override
 	public boolean isNew();

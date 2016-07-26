@@ -308,6 +308,16 @@ public class ConstructionPermitLocalServiceWrapper
 		_constructionPermitLocalService.deleteConstructionPermits(constructionPermitIds);
 	}
 
+	@Override
+	public com.justonetech.projApproval.model.ConstructionPermit updateStatus(
+		long userId, long resourcePrimKey, int status,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.NoSuchUserException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _constructionPermitLocalService.updateStatus(userId,
+			resourcePrimKey, status, serviceContext);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

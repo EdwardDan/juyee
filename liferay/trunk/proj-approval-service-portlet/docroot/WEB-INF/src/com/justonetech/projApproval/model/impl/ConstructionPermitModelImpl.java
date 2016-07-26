@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.service.ServiceContext;
@@ -102,9 +103,17 @@ public class ConstructionPermitModelImpl extends BaseModelImpl<ConstructionPermi
 			{ "applyMaterial", Types.VARCHAR },
 			{ "receiptNum", Types.VARCHAR },
 			{ "certificationDate", Types.TIMESTAMP },
-			{ "constructionPermitCode", Types.VARCHAR }
+			{ "constructionPermitCode", Types.VARCHAR },
+			{ "companyId", Types.BIGINT },
+			{ "groupId", Types.BIGINT },
+			{ "title", Types.VARCHAR },
+			{ "content", Types.VARCHAR },
+			{ "status", Types.INTEGER },
+			{ "statusByUserId", Types.BIGINT },
+			{ "statusByUserName", Types.VARCHAR },
+			{ "statusDate", Types.TIMESTAMP }
 		};
-	public static final String TABLE_SQL_CREATE = "create table projApproval_ConstructionPermit (constructionPermitId LONG not null primary key,userId LONG,userName VARCHAR(75) null,createTime DATE null,modifiedTime DATE null,projType LONG,projProperty LONG,county LONG,constructionCode VARCHAR(75) null,bidingCode VARCHAR(75) null,businessCode VARCHAR(75) null,projName VARCHAR(200) null,company VARCHAR(200) null,companyProperty VARCHAR(200) null,companyAddress VARCHAR(200) null,legalPerson VARCHAR(75) null,companyTel VARCHAR(75) null,companyContacts VARCHAR(75) null,companyContactPhone VARCHAR(75) null,companySite VARCHAR(200) null,companySiteCounty VARCHAR(75) null,engineerCategory VARCHAR(75) null,engineerAttribute LONG,engineerScale VARCHAR(200) null,nationalFundsProportion VARCHAR(75) null,contractPrice DOUBLE,contractSchedule DOUBLE,bidPrice DOUBLE,investBudget DOUBLE,planStartDate DATE null,planEndDate DATE null,workSituation VARCHAR(200) null,otherInfo STRING null,applyMaterial STRING null,receiptNum VARCHAR(75) null,certificationDate DATE null,constructionPermitCode VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table projApproval_ConstructionPermit (constructionPermitId LONG not null primary key,userId LONG,userName VARCHAR(75) null,createTime DATE null,modifiedTime DATE null,projType LONG,projProperty LONG,county LONG,constructionCode VARCHAR(75) null,bidingCode VARCHAR(75) null,businessCode VARCHAR(75) null,projName VARCHAR(200) null,company VARCHAR(200) null,companyProperty VARCHAR(200) null,companyAddress VARCHAR(200) null,legalPerson VARCHAR(75) null,companyTel VARCHAR(75) null,companyContacts VARCHAR(75) null,companyContactPhone VARCHAR(75) null,companySite VARCHAR(200) null,companySiteCounty VARCHAR(75) null,engineerCategory VARCHAR(75) null,engineerAttribute LONG,engineerScale VARCHAR(200) null,nationalFundsProportion VARCHAR(75) null,contractPrice DOUBLE,contractSchedule DOUBLE,bidPrice DOUBLE,investBudget DOUBLE,planStartDate DATE null,planEndDate DATE null,workSituation VARCHAR(200) null,otherInfo STRING null,applyMaterial STRING null,receiptNum VARCHAR(75) null,certificationDate DATE null,constructionPermitCode VARCHAR(75) null,companyId LONG,groupId LONG,title VARCHAR(75) null,content VARCHAR(75) null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table projApproval_ConstructionPermit";
 	public static final String ORDER_BY_JPQL = " ORDER BY constructionPermit.constructionPermitId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY projApproval_ConstructionPermit.constructionPermitId ASC";
@@ -173,6 +182,14 @@ public class ConstructionPermitModelImpl extends BaseModelImpl<ConstructionPermi
 		model.setReceiptNum(soapModel.getReceiptNum());
 		model.setCertificationDate(soapModel.getCertificationDate());
 		model.setConstructionPermitCode(soapModel.getConstructionPermitCode());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setGroupId(soapModel.getGroupId());
+		model.setTitle(soapModel.getTitle());
+		model.setContent(soapModel.getContent());
+		model.setStatus(soapModel.getStatus());
+		model.setStatusByUserId(soapModel.getStatusByUserId());
+		model.setStatusByUserName(soapModel.getStatusByUserName());
+		model.setStatusDate(soapModel.getStatusDate());
 
 		return model;
 	}
@@ -275,6 +292,14 @@ public class ConstructionPermitModelImpl extends BaseModelImpl<ConstructionPermi
 		attributes.put("receiptNum", getReceiptNum());
 		attributes.put("certificationDate", getCertificationDate());
 		attributes.put("constructionPermitCode", getConstructionPermitCode());
+		attributes.put("companyId", getCompanyId());
+		attributes.put("groupId", getGroupId());
+		attributes.put("title", getTitle());
+		attributes.put("content", getContent());
+		attributes.put("status", getStatus());
+		attributes.put("statusByUserId", getStatusByUserId());
+		attributes.put("statusByUserName", getStatusByUserName());
+		attributes.put("statusDate", getStatusDate());
 
 		return attributes;
 	}
@@ -504,6 +529,54 @@ public class ConstructionPermitModelImpl extends BaseModelImpl<ConstructionPermi
 
 		if (constructionPermitCode != null) {
 			setConstructionPermitCode(constructionPermitCode);
+		}
+
+		Long companyId = (Long)attributes.get("companyId");
+
+		if (companyId != null) {
+			setCompanyId(companyId);
+		}
+
+		Long groupId = (Long)attributes.get("groupId");
+
+		if (groupId != null) {
+			setGroupId(groupId);
+		}
+
+		String title = (String)attributes.get("title");
+
+		if (title != null) {
+			setTitle(title);
+		}
+
+		String content = (String)attributes.get("content");
+
+		if (content != null) {
+			setContent(content);
+		}
+
+		Integer status = (Integer)attributes.get("status");
+
+		if (status != null) {
+			setStatus(status);
+		}
+
+		Long statusByUserId = (Long)attributes.get("statusByUserId");
+
+		if (statusByUserId != null) {
+			setStatusByUserId(statusByUserId);
+		}
+
+		String statusByUserName = (String)attributes.get("statusByUserName");
+
+		if (statusByUserName != null) {
+			setStatusByUserName(statusByUserName);
+		}
+
+		Date statusDate = (Date)attributes.get("statusDate");
+
+		if (statusDate != null) {
+			setStatusDate(statusDate);
 		}
 	}
 
@@ -1046,13 +1119,215 @@ public class ConstructionPermitModelImpl extends BaseModelImpl<ConstructionPermi
 		_constructionPermitCode = constructionPermitCode;
 	}
 
+	@JSON
+	@Override
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	@Override
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
+	}
+
+	@JSON
+	@Override
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	@Override
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+	}
+
+	@JSON
+	@Override
+	public String getTitle() {
+		if (_title == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _title;
+		}
+	}
+
+	@Override
+	public void setTitle(String title) {
+		_title = title;
+	}
+
+	@JSON
+	@Override
+	public String getContent() {
+		if (_content == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _content;
+		}
+	}
+
+	@Override
+	public void setContent(String content) {
+		_content = content;
+	}
+
+	@JSON
+	@Override
+	public int getStatus() {
+		return _status;
+	}
+
+	@Override
+	public void setStatus(int status) {
+		_status = status;
+	}
+
+	@JSON
+	@Override
+	public long getStatusByUserId() {
+		return _statusByUserId;
+	}
+
+	@Override
+	public void setStatusByUserId(long statusByUserId) {
+		_statusByUserId = statusByUserId;
+	}
+
+	@Override
+	public String getStatusByUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getStatusByUserId(), "uuid",
+			_statusByUserUuid);
+	}
+
+	@Override
+	public void setStatusByUserUuid(String statusByUserUuid) {
+		_statusByUserUuid = statusByUserUuid;
+	}
+
+	@JSON
+	@Override
+	public String getStatusByUserName() {
+		if (_statusByUserName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _statusByUserName;
+		}
+	}
+
+	@Override
+	public void setStatusByUserName(String statusByUserName) {
+		_statusByUserName = statusByUserName;
+	}
+
+	@JSON
+	@Override
+	public Date getStatusDate() {
+		return _statusDate;
+	}
+
+	@Override
+	public void setStatusDate(Date statusDate) {
+		_statusDate = statusDate;
+	}
+
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #isApproved}
+	 */
+	@Override
+	public boolean getApproved() {
+		return isApproved();
+	}
+
+	@Override
+	public boolean isApproved() {
+		if (getStatus() == WorkflowConstants.STATUS_APPROVED) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isDenied() {
+		if (getStatus() == WorkflowConstants.STATUS_DENIED) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isDraft() {
+		if (getStatus() == WorkflowConstants.STATUS_DRAFT) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isExpired() {
+		if (getStatus() == WorkflowConstants.STATUS_EXPIRED) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isInactive() {
+		if (getStatus() == WorkflowConstants.STATUS_INACTIVE) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isIncomplete() {
+		if (getStatus() == WorkflowConstants.STATUS_INCOMPLETE) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isPending() {
+		if (getStatus() == WorkflowConstants.STATUS_PENDING) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isScheduled() {
+		if (getStatus() == WorkflowConstants.STATUS_SCHEDULED) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
 
 	@Override
 	public ExpandoBridge getExpandoBridge() {
-		return ExpandoBridgeFactoryUtil.getExpandoBridge(0,
+		return ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
 			ConstructionPermit.class.getName(), getPrimaryKey());
 	}
 
@@ -1114,6 +1389,14 @@ public class ConstructionPermitModelImpl extends BaseModelImpl<ConstructionPermi
 		constructionPermitImpl.setReceiptNum(getReceiptNum());
 		constructionPermitImpl.setCertificationDate(getCertificationDate());
 		constructionPermitImpl.setConstructionPermitCode(getConstructionPermitCode());
+		constructionPermitImpl.setCompanyId(getCompanyId());
+		constructionPermitImpl.setGroupId(getGroupId());
+		constructionPermitImpl.setTitle(getTitle());
+		constructionPermitImpl.setContent(getContent());
+		constructionPermitImpl.setStatus(getStatus());
+		constructionPermitImpl.setStatusByUserId(getStatusByUserId());
+		constructionPermitImpl.setStatusByUserName(getStatusByUserName());
+		constructionPermitImpl.setStatusDate(getStatusDate());
 
 		constructionPermitImpl.resetOriginalValues();
 
@@ -1421,12 +1704,53 @@ public class ConstructionPermitModelImpl extends BaseModelImpl<ConstructionPermi
 			constructionPermitCacheModel.constructionPermitCode = null;
 		}
 
+		constructionPermitCacheModel.companyId = getCompanyId();
+
+		constructionPermitCacheModel.groupId = getGroupId();
+
+		constructionPermitCacheModel.title = getTitle();
+
+		String title = constructionPermitCacheModel.title;
+
+		if ((title != null) && (title.length() == 0)) {
+			constructionPermitCacheModel.title = null;
+		}
+
+		constructionPermitCacheModel.content = getContent();
+
+		String content = constructionPermitCacheModel.content;
+
+		if ((content != null) && (content.length() == 0)) {
+			constructionPermitCacheModel.content = null;
+		}
+
+		constructionPermitCacheModel.status = getStatus();
+
+		constructionPermitCacheModel.statusByUserId = getStatusByUserId();
+
+		constructionPermitCacheModel.statusByUserName = getStatusByUserName();
+
+		String statusByUserName = constructionPermitCacheModel.statusByUserName;
+
+		if ((statusByUserName != null) && (statusByUserName.length() == 0)) {
+			constructionPermitCacheModel.statusByUserName = null;
+		}
+
+		Date statusDate = getStatusDate();
+
+		if (statusDate != null) {
+			constructionPermitCacheModel.statusDate = statusDate.getTime();
+		}
+		else {
+			constructionPermitCacheModel.statusDate = Long.MIN_VALUE;
+		}
+
 		return constructionPermitCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(75);
+		StringBundler sb = new StringBundler(91);
 
 		sb.append("{constructionPermitId=");
 		sb.append(getConstructionPermitId());
@@ -1502,6 +1826,22 @@ public class ConstructionPermitModelImpl extends BaseModelImpl<ConstructionPermi
 		sb.append(getCertificationDate());
 		sb.append(", constructionPermitCode=");
 		sb.append(getConstructionPermitCode());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
+		sb.append(", title=");
+		sb.append(getTitle());
+		sb.append(", content=");
+		sb.append(getContent());
+		sb.append(", status=");
+		sb.append(getStatus());
+		sb.append(", statusByUserId=");
+		sb.append(getStatusByUserId());
+		sb.append(", statusByUserName=");
+		sb.append(getStatusByUserName());
+		sb.append(", statusDate=");
+		sb.append(getStatusDate());
 		sb.append("}");
 
 		return sb.toString();
@@ -1509,7 +1849,7 @@ public class ConstructionPermitModelImpl extends BaseModelImpl<ConstructionPermi
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(115);
+		StringBundler sb = new StringBundler(139);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.projApproval.model.ConstructionPermit");
@@ -1663,6 +2003,38 @@ public class ConstructionPermitModelImpl extends BaseModelImpl<ConstructionPermi
 			"<column><column-name>constructionPermitCode</column-name><column-value><![CDATA[");
 		sb.append(getConstructionPermitCode());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append(getCompanyId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append(getGroupId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>title</column-name><column-value><![CDATA[");
+		sb.append(getTitle());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>content</column-name><column-value><![CDATA[");
+		sb.append(getContent());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>status</column-name><column-value><![CDATA[");
+		sb.append(getStatus());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>statusByUserId</column-name><column-value><![CDATA[");
+		sb.append(getStatusByUserId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>statusByUserName</column-name><column-value><![CDATA[");
+		sb.append(getStatusByUserName());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>statusDate</column-name><column-value><![CDATA[");
+		sb.append(getStatusDate());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -1713,6 +2085,15 @@ public class ConstructionPermitModelImpl extends BaseModelImpl<ConstructionPermi
 	private String _receiptNum;
 	private Date _certificationDate;
 	private String _constructionPermitCode;
+	private long _companyId;
+	private long _groupId;
+	private String _title;
+	private String _content;
+	private int _status;
+	private long _statusByUserId;
+	private String _statusByUserUuid;
+	private String _statusByUserName;
+	private Date _statusDate;
 	private long _columnBitmask;
 	private ConstructionPermit _escapedModel;
 }

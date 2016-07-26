@@ -69,6 +69,14 @@
 		<field name="receiptNum" type="String" />
 		<field name="certificationDate" type="Date" />
 		<field name="constructionPermitCode" type="String" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="title" type="String" />
+		<field name="content" type="String" />
+		<field name="status" type="int" />
+		<field name="statusByUserId" type="long" />
+		<field name="statusByUserName" type="String" />
+		<field name="statusDate" type="Date" />
 	</model>
 	<model name="com.justonetech.projApproval.model.ConstructionUnitProject">
 		<field name="constructionUnitProjectId" type="long" />

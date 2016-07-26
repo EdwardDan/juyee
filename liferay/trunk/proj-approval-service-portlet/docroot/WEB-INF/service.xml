@@ -53,11 +53,26 @@
 		<column name="receiptNum" type="String" />
 		<column name="certificationDate" type="Date" />
 		<column name="constructionPermitCode" type="String" />
+		
+		<!-- 工作流 -->  
+		<column name="companyId" type="long" />
+		<column name="groupId" type="long" />
+		<column name="title" type="String"></column>
+		<column name="content" type="String"></column>
+
+		<column name="status" type="int"></column>
+		<column name="statusByUserId" type="long"></column>
+		<column name="statusByUserName" type="String"></column>
+		<column name="statusDate" type="Date"></column>
+		
 
 		<!-- Finder methods -->
 		<finder name="UserId" return-type="Collection">
 			<finder-column name="userId"></finder-column>
 		</finder>
+		
+		
+		<reference package-path="com.liferay.portal" entity="WorkflowInstanceLink"></reference> 
 
 	</entity>
 

@@ -46,7 +46,15 @@ create table projApproval_ConstructionPermit (
 	applyMaterial STRING null,
 	receiptNum VARCHAR(75) null,
 	certificationDate DATE null,
-	constructionPermitCode VARCHAR(75) null
+	constructionPermitCode VARCHAR(75) null,
+	companyId LONG,
+	groupId LONG,
+	title VARCHAR(75) null,
+	content VARCHAR(75) null,
+	status INTEGER,
+	statusByUserId LONG,
+	statusByUserName VARCHAR(75) null,
+	statusDate DATE null
 );
 
 create table projApproval_ConstructionUnitProject (

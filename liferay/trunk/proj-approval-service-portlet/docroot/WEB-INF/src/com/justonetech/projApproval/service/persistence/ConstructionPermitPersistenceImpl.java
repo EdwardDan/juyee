@@ -878,6 +878,14 @@ public class ConstructionPermitPersistenceImpl extends BasePersistenceImpl<Const
 		constructionPermitImpl.setReceiptNum(constructionPermit.getReceiptNum());
 		constructionPermitImpl.setCertificationDate(constructionPermit.getCertificationDate());
 		constructionPermitImpl.setConstructionPermitCode(constructionPermit.getConstructionPermitCode());
+		constructionPermitImpl.setCompanyId(constructionPermit.getCompanyId());
+		constructionPermitImpl.setGroupId(constructionPermit.getGroupId());
+		constructionPermitImpl.setTitle(constructionPermit.getTitle());
+		constructionPermitImpl.setContent(constructionPermit.getContent());
+		constructionPermitImpl.setStatus(constructionPermit.getStatus());
+		constructionPermitImpl.setStatusByUserId(constructionPermit.getStatusByUserId());
+		constructionPermitImpl.setStatusByUserName(constructionPermit.getStatusByUserName());
+		constructionPermitImpl.setStatusDate(constructionPermit.getStatusDate());
 
 		return constructionPermitImpl;
 	}
