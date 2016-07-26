@@ -1,6 +1,4 @@
 <%@ page contentType="text/html;charset=utf-8"%>
-<%@ page import="com.justonetech.sys.model.Dictionary"%>
-<%@page import="com.justonetech.sys.service.DictionaryLocalServiceUtil"%>
 <%@ include file="/common/init.jsp"%>
 
 

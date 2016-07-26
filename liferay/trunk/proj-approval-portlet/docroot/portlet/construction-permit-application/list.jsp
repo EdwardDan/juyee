@@ -1,8 +1,7 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ include file="/common/init.jsp"%>
 
-<aui:input type="text" name="123" label="123" disabled="true"
- style="border:none;background:none" value="123"></aui:input>
+
  
 <c:set var="contentPath"
 	value="${request.contextPath}/portlet/construction-permit-application" />
