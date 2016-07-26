@@ -52,9 +52,11 @@ public class ConstructionPermitApplicationPortlet extends MVCPortlet {
 	 private static String dateFormatPattern = PropsUtil.get("default.date.format.pattern");
 	 private static String timeFormatPattern =PropsUtil.get("default.time.format.pattern");
 	
-//查看
+//list
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
+		String statusName=ParamUtil.getString(renderRequest, "statusName");
+		System.out.println(statusName);
 		String keywords = ParamUtil.getString(renderRequest, "keywords");
         int delta = GetterUtil.getInteger(PropsUtil.get(PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA));
         int pageSize = ParamUtil.getInteger(renderRequest, "delta", delta);
@@ -83,8 +85,36 @@ public class ConstructionPermitApplicationPortlet extends MVCPortlet {
         super.doView(renderRequest, renderResponse);
 	}
 	
+	
+	//查看的方法（目前和编辑的内容是一样的，但是后面会不一样）
+		public void  viewConstructionPermit(ActionRequest request, ActionResponse response) throws PortalException, SystemException, ParseException {
+			long constructionPermitId = ParamUtil.getLong(request, "constructionPermitId", 0);
+	        ConstructionPermit constructionPermit = new ConstructionPermitClp();
+	        Dictionary dictionary=new DictionaryClp();
+	        ConstructionPermitApplication permitApplication=new ConstructionPermitApplication();
+	   
+	        if (constructionPermitId != 0) {
+	        	constructionPermit = ConstructionPermitLocalServiceUtil.getConstructionPermit(constructionPermitId);
+	        	String otherInfo=constructionPermit.getOtherInfo();
+	        	//把扩展信息解析成对象
+	        	if(Validator.isNotNull(otherInfo)){
+	            	permitApplication=JSONArray.parseObject(otherInfo, ConstructionPermitApplication.class);
+	        	}
+	        	
+	        }       
+	        //找到该申请的项目类型
+	        long projType=constructionPermit.getProjType();
+	        if(Validator.isNotNull(projType)){
+	        	dictionary= DictionaryLocalServiceUtil.getDictionary(projType);
+	       }
+	        request.setAttribute("permitApplication", permitApplication);
+	        request.setAttribute("constructionPermit", constructionPermit);
+	        request.setAttribute("dictionary", dictionary);
+		}
+	
+	
 
-//编辑
+//编辑和查看的方法
 	public void  editConstructionPermit(ActionRequest request, ActionResponse response) throws PortalException, SystemException, ParseException {
 		long constructionPermitId = ParamUtil.getLong(request, "constructionPermitId", 0);
         ConstructionPermit constructionPermit = new ConstructionPermitClp();

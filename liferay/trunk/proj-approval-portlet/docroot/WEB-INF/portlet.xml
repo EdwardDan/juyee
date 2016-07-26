@@ -50,7 +50,7 @@
 		<init-param>
 			<name>view-template</name>
 			<value>
-				/portlet/construction-permit-application/edit.jsp
+				/portlet/construction-permit-application/list.jsp
 			</value>
 		</init-param>
 		<init-param> 
