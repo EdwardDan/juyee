@@ -1,55 +1,33 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@include file="/common/init.jsp"%>
-
 <c:set var="contentPath" value="${request.contextPath}/portlet/project" />
 <portlet:renderURL var="viewURL" />
-<portlet:actionURL var="saveProject" name="saveProject">
+<portlet:actionURL var="saveProjectURL" name="saveProject">
 	<portlet:param name="redirect" value="${viewURL}" />
 </portlet:actionURL>
- 
+
 <%
-	Long projectId = ParamUtil.getLong(request, "projectId");
-	String title = "添加项目信息";
-	List<Company> companies = CompanyLocalServiceUtil.findByProjectId(projectId);
-
-	Project project = null;
-	if (Validator.isNotNull(projectId)) {
-		title = "编辑项目信息";
-		project = ProjectLocalServiceUtil.getProject(projectId);
-		request.setAttribute("project", project);
-	}
-
 	long groupId = PortalUtil.getScopeGroupId(request);
-	Dictionary projectTypeDic = DictionaryLocalServiceUtil.findByGroupIdAndCode(groupId, "ProjectType");
-	Dictionary projectPropertyDic = DictionaryLocalServiceUtil.findByGroupIdAndCode(groupId, "ProjectProperty");
-	Dictionary areaNameDic = DictionaryLocalServiceUtil.findByGroupIdAndCode(groupId, "AreaName");
-	Dictionary constructionTypeDic = DictionaryLocalServiceUtil.findByGroupIdAndCode(groupId,
-			"ConstructionType");
-	Dictionary constructionPropertyDic = DictionaryLocalServiceUtil.findByGroupIdAndCode(groupId,
-			"ConstructionProperty");
-	Dictionary projectStatusDic = DictionaryLocalServiceUtil.findByGroupIdAndCode(groupId, "ProjectStatus");
-	Dictionary serviceTypeDic = DictionaryLocalServiceUtil.findByGroupIdAndCode(groupId, "ServiceType");
-	Dictionary manageTypeDic = DictionaryLocalServiceUtil.findByGroupIdAndCode(groupId, "ManageType");
-	Dictionary projectSourceDic = DictionaryLocalServiceUtil.findByGroupIdAndCode(groupId, "ProjectSource");
+	Dictionary projectPropertyDic = DictionaryLocalServiceUtil.findByGroupIdAndCode(groupId, "projectProperty");
+	Dictionary involveCountryDic = DictionaryLocalServiceUtil.findByGroupIdAndCode(groupId, "involveCountry");
+	Dictionary industryCategoryDic = DictionaryLocalServiceUtil.findByGroupIdAndCode(groupId,
+			"industryCategory");
+	Dictionary projectStatusDic = DictionaryLocalServiceUtil.findByGroupIdAndCode(groupId, "projectStatus");
+	Dictionary manageTypeDic = DictionaryLocalServiceUtil.findByGroupIdAndCode(groupId, "manageType");
+	Dictionary projectSourceDic = DictionaryLocalServiceUtil.findByGroupIdAndCode(groupId, "projectSource");
 	Dictionary projectPropertiesDic = DictionaryLocalServiceUtil.findByGroupIdAndCode(groupId,
-			"ProjectProperties");
-	Dictionary roadLevelDic = DictionaryLocalServiceUtil.findByGroupIdAndCode(groupId, "RoadLevel");
-	Dictionary roadTechLevelDic = DictionaryLocalServiceUtil.findByGroupIdAndCode(groupId, "RoadTechLevel");
-	Dictionary companyTypeDic = DictionaryLocalServiceUtil.findByGroupIdAndCode(groupId, "CompanyType");
-	List<Dictionary> projectTypes = projectTypeDic != null ? DictionaryLocalServiceUtil
-			.findByGroupIdAndParentId(groupId, projectTypeDic.getDictionaryId(), -1, -1) : null;
+			"projectProperty");
+	Dictionary roadLevelDic = DictionaryLocalServiceUtil.findByGroupIdAndCode(groupId, "roadLevel");
+	Dictionary roadTechLevelDic = DictionaryLocalServiceUtil.findByGroupIdAndCode(groupId, "roadTechLevel");
+	Dictionary companyTypeDic = DictionaryLocalServiceUtil.findByGroupIdAndCode(groupId, "companyType");
 	List<Dictionary> projectPropertys = projectPropertyDic != null ? DictionaryLocalServiceUtil
 			.findByGroupIdAndParentId(groupId, projectPropertyDic.getDictionaryId(), -1, -1) : null;
-	List<Dictionary> areaNames = areaNameDic != null ? DictionaryLocalServiceUtil.findByGroupIdAndParentId(
-			groupId, areaNameDic.getDictionaryId(), -1, -1) : null;
-	List<Dictionary> constructionTypes = constructionTypeDic != null ? DictionaryLocalServiceUtil
-			.findByGroupIdAndParentId(groupId, constructionTypeDic.getDictionaryId(), -1, -1) : null;
-	List<Dictionary> constructionPropertys = constructionPropertyDic != null ? DictionaryLocalServiceUtil
-			.findByGroupIdAndParentId(groupId, constructionPropertyDic.getDictionaryId(), -1, -1) : null;
+	List<Dictionary> involveCounties = involveCountryDic != null ? DictionaryLocalServiceUtil
+			.findByGroupIdAndParentId(groupId, involveCountryDic.getDictionaryId(), -1, -1) : null;
+	List<Dictionary> industryCategories = industryCategoryDic != null ? DictionaryLocalServiceUtil
+			.findByGroupIdAndParentId(groupId, industryCategoryDic.getDictionaryId(), -1, -1) : null;
 	List<Dictionary> projectStatuses = projectStatusDic != null ? DictionaryLocalServiceUtil
 			.findByGroupIdAndParentId(groupId, projectStatusDic.getDictionaryId(), -1, -1) : null;
-	List<Dictionary> serviceTypes = serviceTypeDic != null ? DictionaryLocalServiceUtil
-			.findByGroupIdAndParentId(groupId, serviceTypeDic.getDictionaryId(), -1, -1) : null;
 	List<Dictionary> manageTypes = manageTypeDic != null ? DictionaryLocalServiceUtil.findByGroupIdAndParentId(
 			groupId, manageTypeDic.getDictionaryId(), -1, -1) : null;
 	List<Dictionary> projectSources = projectSourceDic != null ? DictionaryLocalServiceUtil
@@ -63,42 +41,40 @@
 	List<Dictionary> companyTypes = companyTypeDic != null ? DictionaryLocalServiceUtil
 			.findByGroupIdAndParentId(groupId, companyTypeDic.getDictionaryId(), -1, -1) : null;
 
-	request.setAttribute("projectTypes", projectTypes);
 	request.setAttribute("projectPropertys", projectPropertys);
-	request.setAttribute("areaNames", areaNames);
-	request.setAttribute("constructionTypes", constructionTypes);
-	request.setAttribute("constructionPropertys", constructionPropertys);
+	request.setAttribute("involveCounties", involveCounties);
+	request.setAttribute("industryCategories", industryCategories);
 	request.setAttribute("projectStatuses", projectStatuses);
 	request.setAttribute("manageTypes", manageTypes);
 	request.setAttribute("projectSources", projectSources);
 	request.setAttribute("projectProperties", projectProperties);
 	request.setAttribute("roadLevels", roadLevels);
-	request.setAttribute("serviceTypes", serviceTypes);
 	request.setAttribute("roadTechLevels", roadTechLevels);
 	Map<Dictionary, Company> companyMap = new TreeMap<Dictionary, Company>();
-
+	List<Company> companies = (List<Company>) request.getAttribute("companies");
 	String companyName = "";
 	for (Dictionary dictionary : companyTypes) {
 		companyMap.put(dictionary, null);
 		if (companies != null) {
-			for (Company companyDept : companies) {
-				Dictionary dictionary1 = DictionaryLocalServiceUtil.getDictionary(companyDept.getType());
-				if (dictionary.equals(dictionary1)) {
-					companyMap.put(dictionary, companyDept);
+			for (Company com : companies) {
+				Dictionary dic = DictionaryLocalServiceUtil.getDictionary(com.getType());
+				if (dictionary.equals(dic)) {
+					companyMap.put(dictionary, com);
 				}
 			}
 		}
-		companyName += "," + dictionary.getName();
+		companyName += dictionary.getName() + ",";
 	}
 	request.setAttribute("companyMap", companyMap);
-	request.setAttribute("companyName", companyName.substring(1));
+	request.setAttribute("companyName", companyName);
 %>
-<liferay-ui:header title="<%=title %>" backURL="${def}" />
-<aui:form action="${saveProject}" method="post">
+<liferay-ui:header title="${empty project?'添加':'编辑'}项目基本信息"
+	backURL="${viewURL}" />
+<aui:form action="${saveProjectURL}" method="post">
 	<liferay-ui:panel-container accordion="true" extended="true">
 		<liferay-ui:panel title="项目基本信息">
 			<aui:fieldset>
-				<aui:input name="projectId" type="hidden" value="<%=projectId%>" />
+				<aui:input name="projectId" type="hidden" value="${projectId}" />
 				<aui:row>
 					<aui:col span="6" cssClass="text-left">
 						<aui:input type="text" label="项目编号" name="projNum"
@@ -117,29 +93,28 @@
 				<aui:row>
 					<aui:col span="6" cssClass="text-left">
 						<aui:input type="text" label="项目排序号" name="sortNo"
-							value="${project.sortNo}">
+							value="${sortNo}">
 							<aui:validator name="required" errorMessage="项目排序号不能为空!"></aui:validator>
 						</aui:input>
 					</aui:col>
 					<aui:col span="6" cssClass="text-left">
-						<label class="control-label" for="startDate"> 实际开工 </label>
-						<input type="text" class="field" name="startDate"
-							id="startDate" onfocus="WdatePicker({lang:'zh-cn'})"
-							required="required"
+						<label class="control-label" for="startDate">实际开工时间 </label>
+						<input type="text" class="field" name="startDate" id="startDate"
+							onfocus="WdatePicker({lang:'zh-cn'})" required="required"
 							value='<fmt:formatDate value="${project.startDate }" pattern="yyyy-MM-dd"/>'>
 					</aui:col>
 				</aui:row>
 				<aui:row>
 					<aui:col span="6" cssClass="text-left">
 						<aui:select label="项目状态" name="projStatus">
-							<c:forEach items="${projectStatuses }" var="projStatus">
+							<c:forEach items="${projectStatuses}" var="projStatus">
 								<aui:option value="${projStatus.dictionaryId}"
 									selected="${projStatus.dictionaryId eq project.projStatus}">${projStatus.name }</aui:option>
 							</c:forEach>
 						</aui:select>
 					</aui:col>
 					<aui:col span="6" cssClass="text-left">
-						<label class="control-label" for="endDate"> 实际完成 </label>
+						<label class="control-label" for="endDate">实际完成时间</label>
 						<input type="text" class="field" name="endDate" id="endDate"
 							onfocus="WdatePicker({lang:'zh-cn'})" required="required"
 							value='<fmt:formatDate value="${project.endDate }" pattern="yyyy-MM-dd"/>'>
@@ -148,7 +123,7 @@
 				<aui:row>
 					<aui:col span="6" cssClass="text-left">
 						<aui:select label="业态类别" name="industryCategory">
-							<c:forEach items="${serviceTypes }" var="industryCategory">
+							<c:forEach items="${industryCategories}" var="industryCategory">
 								<aui:option value="${industryCategory.dictionaryId}"
 									selected="${industryCategory.dictionaryId eq project.industryCategory}">${industryCategory.name }</aui:option>
 							</c:forEach>
@@ -156,12 +131,12 @@
 					</aui:col>
 					<aui:col span="6" cssClass="text-left">
 						<aui:field-wrapper name="涉及区县">
-							<c:forEach items="${areaNames }" var="areaName"
+							<c:forEach items="${involveCounties}" var="involveCounty"
 								varStatus="sortNo">
 								<aui:input name="involveCounty" type="checkbox"
-									value="${areaName.dictionaryId}"
-									checked="${fn:contains(project.involveCounty ,areaName.dictionaryId) }"
-									label="${areaName. name}" inlineField="true" />
+									value="${involveCounty.dictionaryId}"
+									checked="${fn:contains(project.involveCounty ,involveCounty.dictionaryId) }"
+									label="${involveCounty. name}" inlineField="true" />
 								<c:if test="${sortNo.index>0 && (sortNo.index+1) % 9 == 0}">
 									<br>
 								</c:if>
@@ -171,10 +146,10 @@
 				</aui:row>
 				<aui:row>
 					<aui:col span="6" cssClass="text-left">
-						<aui:select label="管理属性" name="manageAttr" inlineField="true">
-							<c:forEach items="${manageTypes }" var="managerAttr">
-								<aui:option value="${managerAttr. dictionaryId }"
-									selected="${managerAttr. dictionaryId eq project.manageAttr }">${managerAttr.name }</aui:option>
+						<aui:select label="管理属性" name="manageAttribute" inlineField="true">
+							<c:forEach items="${manageTypes}" var="manageAttribute">
+								<aui:option value="${manageAttribute. dictionaryId }"
+									selected="${manageAttribute. dictionaryId eq project.manageAttribute }">${manageAttribute.name }</aui:option>
 							</c:forEach>
 						</aui:select>
 						<aui:select label="" name="isMajor" inlineField="true">
@@ -184,8 +159,9 @@
 					</aui:col>
 
 					<aui:col span="6" cssClass="text-left">
-						<aui:input type="text" label="规划红线（宽度m）" name="ghhx"
-							value="${project.ghhx}">
+						<aui:input type="text" label="规划红线（宽度m）" name="planRedLine"
+							placeholder="请输入正数" value="${project.planRedLine}"
+							onkeyup="value=value.replace(/[^\d.]/g,'')">
 							<aui:validator name="required" errorMessage="规划红线（宽度m）不能为空!"></aui:validator>
 						</aui:input>
 					</aui:col>
@@ -212,7 +188,7 @@
 					<aui:col span="6" cssClass="text-left">
 						<aui:select label="所属区县" name="belongCounty">
 							<aui:option value="0">上海市</aui:option>
-							<c:forEach items="${countys }" var="belongCounty">
+							<c:forEach items="${countys}" var="belongCounty">
 								<aui:option value="${belongCounty.dictionaryId}"
 									selected="${belongCounty.dictionaryId eq project.belongCounty}">${project.belongCounty }</aui:option>
 							</c:forEach>
@@ -258,8 +234,9 @@
 							value='<fmt:formatDate value="${project.startNode }" pattern="yyyy-MM-dd"/>'>
 					</aui:col>
 					<aui:col span="6" cssClass="text-left">
-						<aui:input type="text" label="计划总投资" name="planTotle"
-							value="${project.planTotle}">
+						<aui:input type="text" label="计划总投资" name="planTotalInvestment"
+							placeholder="请输入正数" value="${project.planTotalInvestment}"
+							onkeyup="value=value.replace(/[^\d.]/g,'')">
 							<aui:validator name="required" errorMessage="计划总投资不能为空!"></aui:validator>
 						</aui:input>
 					</aui:col>
@@ -273,34 +250,40 @@
 							value='<fmt:formatDate value="${project.endNode }" pattern="yyyy-MM-dd"/>'>
 					</aui:col>
 					<aui:col span="6" cssClass="text-left">
-						<aui:input type="text" label="工可批复总投资" name="gkpfTotle"
-							value="${project.gkpfTotle}" />
+						<aui:input type="text" label="工可批复总投资" placeholder="请输入正数"
+							name="feasibilityTotalInvestment"
+							onkeyup="value=value.replace(/[^\d.]/g,'')"
+							value="${project.feasibilityTotalInvestment}" />
 					</aui:col>
 				</aui:row>
 				<aui:row>
 					<aui:col span="6" cssClass="text-left">
-						<label class="control-label" for="planStartDate"> 目标开工节点 </label>
+						<label class="control-label" for="planStartDate"> 目标计划开工时间
+						</label>
 						<input type="text" class="field" name="planStartDate error-field"
 							id="planStartDate" onfocus="WdatePicker({lang:'zh-cn'})"
 							required="required"
 							value='<fmt:formatDate value="${project.planStartDate }" pattern="yyyy-MM-dd"/>'>
 					</aui:col>
 					<aui:col span="6" cssClass="text-left">
-						<aui:input type="text" label="工可批复前期费用" name="gkpfPre"
-							value="${project.gkpfPre}" />
+						<aui:input type="text" label="工可批复前期费用" name="feasibilityPreCost"
+							placeholder="请输入正数" value="${project.feasibilityPreCost}"
+							onkeyup="value=value.replace(/[^\d.]/g,'')" />
 					</aui:col>
 				</aui:row>
 				<aui:row>
 					<aui:col span="6" cssClass="text-left">
-						<label class="control-label" for="planEndDate"> 目标开工节点 </label>
+						<label class="control-label" for="planEndDate"> 目标计划完工时间 </label>
 						<input type="text" class="field" name="planEndDate error-field"
 							id="planEndDate" onfocus="WdatePicker({lang:'zh-cn'})"
 							required="required"
 							value='<fmt:formatDate value="${project.planEndDate }" pattern="yyyy-MM-dd"/>'>
 					</aui:col>
 					<aui:col span="6" cssClass="text-left">
-						<aui:input type="text" label="工可批复建安费用" name="gkpfJafy"
-							value="${project.gkpfJafy}" />
+						<aui:input type="text" label="工可批复建安费用"
+							name="feasibilityJiananCost"
+							onkeyup="value=value.replace(/[^\d.]/g,'')"
+							value="${project.feasibilityJiananCost}" />
 					</aui:col>
 				</aui:row>
 				<aui:row>
@@ -309,31 +292,36 @@
 							value="${project.introduction}" />
 					</aui:col>
 					<aui:col span="6" cssClass="text-left">
-						<aui:input type="text" label="初设批复总投资" name="csTotle"
-							value="${project.csTotle}" />
+						<aui:input type="text" label="初设批复总投资"
+							name="firstFoundedTotalInvestment"
+							onkeyup="value=value.replace(/[^\d.]/g,'')"
+							value="${project.firstFoundedTotalInvestment}" />
 					</aui:col>
 				</aui:row>
 				<aui:row>
 					<aui:col span="6" cssClass="text-left">
-						<aui:input type="text" label="初设批复前期费用" name="csPre"
-							value="${project.csPre}" />
+						<aui:input type="text" label="初设批复前期费用" name="firstFoundedPreCost"
+							value="${project.firstFoundedPreCost}"
+							onkeyup="value=value.replace(/[^\d.]/g,'')" />
 					</aui:col>
 					<aui:col span="6" cssClass="text-left">
-						<aui:input type="text" label="初设批复建安费用" name="csJafy"
-							value="${project.csJafy}" />
+						<aui:input type="text" label="初设批复建安费用"
+							name="firstFoundedJiananCost"
+							value="${project.firstFoundedJiananCost}"
+							onkeyup="value=value.replace(/[^\d.]/g,'')" />
 					</aui:col>
 				</aui:row>
 
-				<liferay-ui:tabs names="${companyName }" refresh="false">
-					<c:forEach items="${companyMap }" var="map">
+				<liferay-ui:tabs names="${companyName}" refresh="false">
+					<c:forEach items="${companyMap}" var="map">
 						<liferay-ui:section>
 							<aui:input name="type" type="hidden"
-								value="${map.key.dictionaryId }" />
+								value="${map.key.dictionaryId}" />
 							<aui:input name="companyId" type="hidden"
-								value="${map.value.companyId }" />
+								value="${map.value.companyId}" />
 							<aui:row>
 								<aui:col span="6" cssClass="text-left">
-									<aui:input type="text" label="${map.key.name }" name="unitName"
+									<aui:input type="text" label="单位名称" name="unitName"
 										value="${map.value.unitName}" />
 								</aui:col>
 							</aui:row>

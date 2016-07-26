@@ -16,6 +16,7 @@ import com.justonetech.proj.model.Company;
 import com.justonetech.proj.model.Project;
 import com.justonetech.proj.service.CompanyLocalServiceUtil;
 import com.justonetech.proj.service.ProjectLocalServiceUtil;
+import com.justonetech.sys.service.DictionaryLocalServiceUtil;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -36,9 +37,6 @@ public class ProjectPortlet extends MVCPortlet {
 	private static Log log = LogFactoryUtil.getLog(ProjectPortlet.class);
 	private static String timeFormatPattern = PropsUtil.get("default.date.format.pattern");
 
-	/**
-	 * 项目列表
-	 */
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
 		String keywords = ParamUtil.getString(renderRequest, "keywords");
@@ -56,93 +54,69 @@ public class ProjectPortlet extends MVCPortlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		// try {
-		// projects = ProjectLocalServiceUtil.
-		// } catch (SystemException e) {
-		// log.error("findByUserNam(" + userName + "," + start + "," + end +
-		// ")错误：" + e.getMessage());
-		// }
-		// int projectCount = 0;
-		// try {
-		// projectCount = ProjectLocalServiceUtil.getProjectsCount()(userName);
-		// } catch (SystemException e) {
-		// log.error("countByUserNam(" + userName + ")错误：" + e.getMessage());
-		// }
 		renderRequest.setAttribute("projects", projects);
 		renderRequest.setAttribute("projectCount", projectsCount);
-		// renderRequest.setAttribute("projectCount", projectCount);
 		super.doView(renderRequest, renderResponse);
 	}
 
-	/**
-	 * 项目编辑
-	 * 
-	 * @param request
-	 * @param response
-	 * @throws PortalException
-	 * @throws SystemException
-	 * @throws ParseException
-	 */
 	public void editProject(ActionRequest request, ActionResponse response) throws PortalException, SystemException,
 			ParseException {
 		long projectId = ParamUtil.getInteger(request, "projectId");
-
-		Project project = ProjectLocalServiceUtil.getProject(projectId);
-		request.setAttribute("project", project);
-
+		List<Project> projects = ProjectLocalServiceUtil.getProjects(-1, -1);
+		int sortNo = 0;
+		if(Validator.isNull(projectId)){
+			sortNo = (projects.isEmpty()?0:projects.get(projects.size()-1).getSortNo())+1;
+		}else{
+			sortNo = ProjectLocalServiceUtil.getProject(projectId).getSortNo();
+			Project project = ProjectLocalServiceUtil.getProject(projectId);
+			request.setAttribute("project", project);
+			request.setAttribute("projectId", projectId);
+			List<Company> companies = CompanyLocalServiceUtil.getCompanies(-1, -1);
+			request.setAttribute("companies", companies);
+		}
+		request.setAttribute("sortNo", sortNo);
 	}
 
-	/**
-	 * 项目保存
-	 * 
-	 * @param request
-	 * @param response
-	 * @throws PortalException
-	 * @throws SystemException
-	 * @throws ParseException
-	 */
 	public void saveProject(ActionRequest request, ActionResponse response) throws PortalException, SystemException,
 			ParseException {
 		long projectId = ParamUtil.getLong(request, "projectId");
+		// 项目基本信息
 		String projNum = ParamUtil.getString(request, "projNum");
 		String projName = ParamUtil.getString(request, "projName");
-		// String projNum = ParamUtil.getString(request, "projNum");
 		int sortNo = ParamUtil.getInteger(request, "sortNo");
 		Date startDate = ParamUtil.getDate(request, "startDate", new SimpleDateFormat(timeFormatPattern));
 		Date endDate = ParamUtil.getDate(request, "endDate", new SimpleDateFormat(timeFormatPattern));
 		long projStatus = ParamUtil.getLong(request, "projStatus");
 		long industryCategory = ParamUtil.getLong(request, "industryCategory");
 		String[] involveCountyArrs = ParamUtil.getParameterValues(request, "involveCountyCheckbox");
-		String involveCountys = "";
+		String involveCounties = "";
 		if (null != involveCountyArrs && involveCountyArrs.length > 0) {
 			for (String involveString : involveCountyArrs) {
-				involveCountys += "," + involveString;
+				involveCounties += "," + involveString;
 			}
-
 		}
 		long manageAttrId = ParamUtil.getLong(request, "manageAttr");
 		boolean isMajor = ParamUtil.getBoolean(request, "isMajor");
-		Double ghhx = ParamUtil.getDouble(request, "ghhx");
+		Double planRedLine = ParamUtil.getDouble(request, "planRedLine");
 		long projSourceId = ParamUtil.getLong(request, "projSource");
-		long roadTechLevelId = ParamUtil.getLong(request, "roadTechLevel");
-		long belongCountyId = ParamUtil.getLong(request, "belongCounty");
-		long roadLevelId = ParamUtil.getLong(request, "roadLevel");
-		long projAttrId = ParamUtil.getLong(request, "projAttr");
+		long roadTechLevel = ParamUtil.getLong(request, "roadTechLevel");
+		long belongCounty = ParamUtil.getLong(request, "belongCounty");
+		long roadLevel = ParamUtil.getLong(request, "roadLevel");
+		long projAttr = ParamUtil.getLong(request, "projAttr");
 		String location = ParamUtil.getString(request, "location");
 		Date startNode = ParamUtil.getDate(request, "startNode", new SimpleDateFormat(timeFormatPattern));
 		Date endNode = ParamUtil.getDate(request, "endNode", new SimpleDateFormat(timeFormatPattern));
-		Double planTotle = ParamUtil.getDouble(request, "planTotle");
-		Double gkpfTotle = ParamUtil.getDouble(request, "gkpfTotle");
+		Double planTotalInvestment = ParamUtil.getDouble(request, "planTotalInvestment");
+		Double feasibilityTotalInvestment = ParamUtil.getDouble(request, "feasibilityTotalInvestment");
 		Date planStartDate = ParamUtil.getDate(request, "planStartDate", new SimpleDateFormat(timeFormatPattern));
 		Date planEndDate = ParamUtil.getDate(request, "planEndDate", new SimpleDateFormat(timeFormatPattern));
 
-		Double gkpfPre = ParamUtil.getDouble(request, "gkpfPre");
-		Double gkpfJafy = ParamUtil.getDouble(request, "gkpfJafy");
+		Double feasibilityPreCost = ParamUtil.getDouble(request, "feasibilityPreCost");
+		Double feasibilityJiananCost = ParamUtil.getDouble(request, "feasibilityJiananCost");
 		String introduction = ParamUtil.getString(request, "introduction");
-		Double csTotle = ParamUtil.getDouble(request, "csTotle");
-		Double csPre = ParamUtil.getDouble(request, "csPre");
-		Double csJafy = ParamUtil.getDouble(request, "csJafy");
+		Double firstFoundedTotalInvestment = ParamUtil.getDouble(request, "firstFoundedTotalInvestment");
+		Double firstFoundedPreCost = ParamUtil.getDouble(request, "firstFoundedPreCost");
+		Double firstFoundedJiananCost = ParamUtil.getDouble(request, "firstFoundedJiananCost");
 
 		Project project = null;
 		if (Validator.isNotNull(projectId)) {
@@ -157,28 +131,28 @@ public class ProjectPortlet extends MVCPortlet {
 		project.setEndDate(endDate);
 		project.setProjStatus(projStatus);
 		project.setIndustryCategory(industryCategory);
-		project.setInvolveCounty(involveCountys);
-		project.setManageAttr(manageAttrId);
+		project.setInvolveCounty(involveCounties);
+		project.setManageAttribute(manageAttrId);
 		project.setIsMajor(isMajor);
-		project.setGhhx(ghhx);
+		project.setPlanRedLine(planRedLine);
 		project.setProjSource(projSourceId);
-		project.setRoadTechLevel(roadTechLevelId);
-		project.setBelongCounty(belongCountyId);
-		project.setRoadLevel(roadLevelId);
-		project.setProjAttr(projAttrId);
+		project.setRoadTechLevel(roadTechLevel);
+		project.setBelongCounty(belongCounty);
+		project.setRoadLevel(roadLevel);
+		project.setProjAttr(projAttr);
 		project.setLocation(location);
 		project.setStartNode(startNode);
 		project.setEndNode(endNode);
-		project.setPlanTotle(planTotle);
-		project.setGkpfTotle(gkpfTotle);
+		project.setPlanTotalInvestment(planTotalInvestment);
+		project.setFeasibilityTotalInvestment(feasibilityTotalInvestment);
 		project.setPlanStartDate(planStartDate);
 		project.setPlanEndDate(planEndDate);
-		project.setGkpfPre(gkpfPre);
-		project.setGkpfJafy(gkpfJafy);
+		project.setFeasibilityPreCost(feasibilityPreCost);
+		project.setFeasibilityJiananCost(feasibilityJiananCost);
 		project.setIntroduction(introduction);
-		project.setCsTotle(csTotle);
-		project.setCsJafy(csJafy);
-		project.setCsPre(csPre);
+		project.setFirstFoundedTotalInvestment(firstFoundedTotalInvestment);
+		project.setFirstFoundedPreCost(firstFoundedPreCost);
+		project.setFirstFoundedJiananCost(firstFoundedJiananCost);
 
 		ProjectLocalServiceUtil.updateProject(project);
 
@@ -204,7 +178,6 @@ public class ProjectPortlet extends MVCPortlet {
 			} else {
 				company = CompanyLocalServiceUtil.createCompany(CounterLocalServiceUtil.increment());
 			}
-
 			company.setType(types[i]);
 			company.setUnitName(unitNames[i]);
 			company.setIndepLegal(indepLegals[i]);
@@ -225,14 +198,15 @@ public class ProjectPortlet extends MVCPortlet {
 
 	}
 
-	/**
-	 * 项目删除
-	 * 
-	 * @param request
-	 * @param response
-	 * @throws SystemException
-	 * @throws PortalException
-	 */
+	public void viewProject(ActionRequest request, ActionResponse response) throws PortalException, SystemException {
+		long projectId = ParamUtil.getInteger(request, "projectId");
+		Project project = ProjectLocalServiceUtil.getProject(projectId);
+		List<Company> companies = CompanyLocalServiceUtil.getCompanies(-1, -1);
+		request.setAttribute("project", project);
+		request.setAttribute("projectId", projectId);
+		request.setAttribute("companies", companies);
+	}
+
 	public void deleteProjects(ActionRequest actionRequest, ActionResponse actionResponse) throws IOException,
 			PortletException, NumberFormatException, PortalException, SystemException {
 		String projectIds = ParamUtil.getString(actionRequest, "projectIds");
