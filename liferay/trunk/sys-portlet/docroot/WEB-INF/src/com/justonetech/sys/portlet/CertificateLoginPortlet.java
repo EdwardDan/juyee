@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
+import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.model.ExpandoColumn;
@@ -137,8 +138,8 @@ public class CertificateLoginPortlet extends MVCPortlet {
                     }
                     catch (Exception e) {
                         // 获取用户失败则创建用户
-                        createUser(UniqueID, prikeypwd, userName, companyId_, resourceRequest, digitalCertificateData);// 创建用户
                         try {
+                            createUser(UniqueID, prikeypwd, userName, companyId_, resourceRequest, digitalCertificateData);// 创建用户
                             user = UserLocalServiceUtil.getUserByScreenName(companyId_, UniqueID);
                         }
                         catch (PortalException | SystemException e1) {
@@ -176,8 +177,8 @@ public class CertificateLoginPortlet extends MVCPortlet {
 
     public void createUser(
         String UniqueID, String prikeypwd, String userName, Long companyId_, ResourceRequest resourceRequest,
-        String digitalCertificateData) {
-
+        String digitalCertificateData) throws PortalException, SystemException {
+        
         // 获取参数
         long companyId = companyId_;
         boolean autoPassword = false;
@@ -185,7 +186,8 @@ public class CertificateLoginPortlet extends MVCPortlet {
         String password2 = prikeypwd;
         boolean autoScreenName = false;
         String screenName = UniqueID;
-        String emailAddress = UniqueID + "@liferay.com";// 必填
+        System.out.println();
+        String emailAddress = UniqueID + "@"+PortalUtil.getCompany(resourceRequest).getMx();// 必填
         long facebookId = 0;
         String openId = "";
         Locale locale = PortalUtil.getLocale(resourceRequest);
@@ -195,11 +197,11 @@ public class CertificateLoginPortlet extends MVCPortlet {
         int prefixId = 0;
         int suffixId = 0;
         boolean male = true;
-        int birthdayMonth = 3;
-        int birthdayDay = 5;
-        int birthdayYear = 1991;
+        int birthdayMonth = 0;
+        int birthdayDay = 1;
+        int birthdayYear = 1970;
         String jobTitle = "";
-        long[] groupIds = null;
+        long[] groupIds = {20181};
         long[] organizationIds = null;
         long[] roleIds = null;
         long[] userGroupIds = null;
@@ -216,6 +218,7 @@ public class CertificateLoginPortlet extends MVCPortlet {
                     emailAddress, facebookId, openId, locale, firstName, middleName, lastName, prefixId, suffixId,
                     male, birthdayMonth, birthdayDay, birthdayYear, jobTitle, groupIds, organizationIds, roleIds,
                     userGroupIds, sendEmail, serviceContext);
+            UserGroupRoleLocalServiceUtil.addUserGroupRoles(user.getUserId(), 20181, new long[]{21700});
 
 //            ExpandoTable eTable =
 //                ExpandoTableLocalServiceUtil.getDefaultTable(PortalUtil.getDefaultCompanyId(), User.class.getName());
