@@ -86,10 +86,24 @@ public class ConstructionParticipantUnitsPersistenceImpl
 			ConstructionParticipantUnitsModelImpl.FINDER_CACHE_ENABLED,
 			Long.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll",
 			new String[0]);
-	public static final FinderPath FINDER_PATH_FETCH_BY_CONSTRUCTIONPERMITID = new FinderPath(ConstructionParticipantUnitsModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_CONSTRUCTIONPERMITID =
+		new FinderPath(ConstructionParticipantUnitsModelImpl.ENTITY_CACHE_ENABLED,
 			ConstructionParticipantUnitsModelImpl.FINDER_CACHE_ENABLED,
-			ConstructionParticipantUnitsImpl.class, FINDER_CLASS_NAME_ENTITY,
-			"fetchByConstructionPermitId",
+			ConstructionParticipantUnitsImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			"findByConstructionPermitId",
+			new String[] {
+				Long.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CONSTRUCTIONPERMITID =
+		new FinderPath(ConstructionParticipantUnitsModelImpl.ENTITY_CACHE_ENABLED,
+			ConstructionParticipantUnitsModelImpl.FINDER_CACHE_ENABLED,
+			ConstructionParticipantUnitsImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"findByConstructionPermitId",
 			new String[] { Long.class.getName() },
 			ConstructionParticipantUnitsModelImpl.CONSTRUCTIONPERMITID_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_CONSTRUCTIONPERMITID = new FinderPath(ConstructionParticipantUnitsModelImpl.ENTITY_CACHE_ENABLED,
@@ -98,87 +112,112 @@ public class ConstructionParticipantUnitsPersistenceImpl
 			"countByConstructionPermitId", new String[] { Long.class.getName() });
 
 	/**
-	 * Returns the construction participant units where constructionPermitId = &#63; or throws a {@link com.justonetech.projApproval.NoSuchConstructionParticipantUnitsException} if it could not be found.
+	 * Returns all the construction participant unitses where constructionPermitId = &#63;.
 	 *
 	 * @param constructionPermitId the construction permit ID
-	 * @return the matching construction participant units
-	 * @throws com.justonetech.projApproval.NoSuchConstructionParticipantUnitsException if a matching construction participant units could not be found
+	 * @return the matching construction participant unitses
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public ConstructionParticipantUnits findByConstructionPermitId(
-		long constructionPermitId)
-		throws NoSuchConstructionParticipantUnitsException, SystemException {
-		ConstructionParticipantUnits constructionParticipantUnits = fetchByConstructionPermitId(constructionPermitId);
-
-		if (constructionParticipantUnits == null) {
-			StringBundler msg = new StringBundler(4);
-
-			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-			msg.append("constructionPermitId=");
-			msg.append(constructionPermitId);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			if (_log.isWarnEnabled()) {
-				_log.warn(msg.toString());
-			}
-
-			throw new NoSuchConstructionParticipantUnitsException(msg.toString());
-		}
-
-		return constructionParticipantUnits;
-	}
-
-	/**
-	 * Returns the construction participant units where constructionPermitId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	 *
-	 * @param constructionPermitId the construction permit ID
-	 * @return the matching construction participant units, or <code>null</code> if a matching construction participant units could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public ConstructionParticipantUnits fetchByConstructionPermitId(
+	public List<ConstructionParticipantUnits> findByConstructionPermitId(
 		long constructionPermitId) throws SystemException {
-		return fetchByConstructionPermitId(constructionPermitId, true);
+		return findByConstructionPermitId(constructionPermitId,
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns the construction participant units where constructionPermitId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns a range of all the construction participant unitses where constructionPermitId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.justonetech.projApproval.model.impl.ConstructionParticipantUnitsModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
 	 *
 	 * @param constructionPermitId the construction permit ID
-	 * @param retrieveFromCache whether to use the finder cache
-	 * @return the matching construction participant units, or <code>null</code> if a matching construction participant units could not be found
+	 * @param start the lower bound of the range of construction participant unitses
+	 * @param end the upper bound of the range of construction participant unitses (not inclusive)
+	 * @return the range of matching construction participant unitses
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public ConstructionParticipantUnits fetchByConstructionPermitId(
-		long constructionPermitId, boolean retrieveFromCache)
+	public List<ConstructionParticipantUnits> findByConstructionPermitId(
+		long constructionPermitId, int start, int end)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { constructionPermitId };
+		return findByConstructionPermitId(constructionPermitId, start, end, null);
+	}
 
-		Object result = null;
+	/**
+	 * Returns an ordered range of all the construction participant unitses where constructionPermitId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.justonetech.projApproval.model.impl.ConstructionParticipantUnitsModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param constructionPermitId the construction permit ID
+	 * @param start the lower bound of the range of construction participant unitses
+	 * @param end the upper bound of the range of construction participant unitses (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching construction participant unitses
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<ConstructionParticipantUnits> findByConstructionPermitId(
+		long constructionPermitId, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
 
-		if (retrieveFromCache) {
-			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_CONSTRUCTIONPERMITID,
-					finderArgs, this);
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CONSTRUCTIONPERMITID;
+			finderArgs = new Object[] { constructionPermitId };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_CONSTRUCTIONPERMITID;
+			finderArgs = new Object[] {
+					constructionPermitId,
+					
+					start, end, orderByComparator
+				};
 		}
 
-		if (result instanceof ConstructionParticipantUnits) {
-			ConstructionParticipantUnits constructionParticipantUnits = (ConstructionParticipantUnits)result;
+		List<ConstructionParticipantUnits> list = (List<ConstructionParticipantUnits>)FinderCacheUtil.getResult(finderPath,
+				finderArgs, this);
 
-			if ((constructionPermitId != constructionParticipantUnits.getConstructionPermitId())) {
-				result = null;
+		if ((list != null) && !list.isEmpty()) {
+			for (ConstructionParticipantUnits constructionParticipantUnits : list) {
+				if ((constructionPermitId != constructionParticipantUnits.getConstructionPermitId())) {
+					list = null;
+
+					break;
+				}
 			}
 		}
 
-		if (result == null) {
-			StringBundler query = new StringBundler(3);
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
 
 			query.append(_SQL_SELECT_CONSTRUCTIONPARTICIPANTUNITS_WHERE);
 
 			query.append(_FINDER_COLUMN_CONSTRUCTIONPERMITID_CONSTRUCTIONPERMITID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(ConstructionParticipantUnitsModelImpl.ORDER_BY_JPQL);
+			}
 
 			String sql = query.toString();
 
@@ -193,35 +232,25 @@ public class ConstructionParticipantUnitsPersistenceImpl
 
 				qPos.add(constructionPermitId);
 
-				List<ConstructionParticipantUnits> list = q.list();
+				if (!pagination) {
+					list = (List<ConstructionParticipantUnits>)QueryUtil.list(q,
+							getDialect(), start, end, false);
 
-				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CONSTRUCTIONPERMITID,
-						finderArgs, list);
+					Collections.sort(list);
+
+					list = new UnmodifiableList<ConstructionParticipantUnits>(list);
 				}
 				else {
-					if ((list.size() > 1) && _log.isWarnEnabled()) {
-						_log.warn(
-							"ConstructionParticipantUnitsPersistenceImpl.fetchByConstructionPermitId(long, boolean) with parameters (" +
-							StringUtil.merge(finderArgs) +
-							") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
-					}
-
-					ConstructionParticipantUnits constructionParticipantUnits = list.get(0);
-
-					result = constructionParticipantUnits;
-
-					cacheResult(constructionParticipantUnits);
-
-					if ((constructionParticipantUnits.getConstructionPermitId() != constructionPermitId)) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CONSTRUCTIONPERMITID,
-							finderArgs, constructionParticipantUnits);
-					}
+					list = (List<ConstructionParticipantUnits>)QueryUtil.list(q,
+							getDialect(), start, end);
 				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, list);
 			}
 			catch (Exception e) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CONSTRUCTIONPERMITID,
-					finderArgs);
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
 
 				throw processException(e);
 			}
@@ -230,28 +259,287 @@ public class ConstructionParticipantUnitsPersistenceImpl
 			}
 		}
 
-		if (result instanceof List<?>) {
+		return list;
+	}
+
+	/**
+	 * Returns the first construction participant units in the ordered set where constructionPermitId = &#63;.
+	 *
+	 * @param constructionPermitId the construction permit ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching construction participant units
+	 * @throws com.justonetech.projApproval.NoSuchConstructionParticipantUnitsException if a matching construction participant units could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public ConstructionParticipantUnits findByConstructionPermitId_First(
+		long constructionPermitId, OrderByComparator orderByComparator)
+		throws NoSuchConstructionParticipantUnitsException, SystemException {
+		ConstructionParticipantUnits constructionParticipantUnits = fetchByConstructionPermitId_First(constructionPermitId,
+				orderByComparator);
+
+		if (constructionParticipantUnits != null) {
+			return constructionParticipantUnits;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("constructionPermitId=");
+		msg.append(constructionPermitId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchConstructionParticipantUnitsException(msg.toString());
+	}
+
+	/**
+	 * Returns the first construction participant units in the ordered set where constructionPermitId = &#63;.
+	 *
+	 * @param constructionPermitId the construction permit ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching construction participant units, or <code>null</code> if a matching construction participant units could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public ConstructionParticipantUnits fetchByConstructionPermitId_First(
+		long constructionPermitId, OrderByComparator orderByComparator)
+		throws SystemException {
+		List<ConstructionParticipantUnits> list = findByConstructionPermitId(constructionPermitId,
+				0, 1, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last construction participant units in the ordered set where constructionPermitId = &#63;.
+	 *
+	 * @param constructionPermitId the construction permit ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching construction participant units
+	 * @throws com.justonetech.projApproval.NoSuchConstructionParticipantUnitsException if a matching construction participant units could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public ConstructionParticipantUnits findByConstructionPermitId_Last(
+		long constructionPermitId, OrderByComparator orderByComparator)
+		throws NoSuchConstructionParticipantUnitsException, SystemException {
+		ConstructionParticipantUnits constructionParticipantUnits = fetchByConstructionPermitId_Last(constructionPermitId,
+				orderByComparator);
+
+		if (constructionParticipantUnits != null) {
+			return constructionParticipantUnits;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("constructionPermitId=");
+		msg.append(constructionPermitId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchConstructionParticipantUnitsException(msg.toString());
+	}
+
+	/**
+	 * Returns the last construction participant units in the ordered set where constructionPermitId = &#63;.
+	 *
+	 * @param constructionPermitId the construction permit ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching construction participant units, or <code>null</code> if a matching construction participant units could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public ConstructionParticipantUnits fetchByConstructionPermitId_Last(
+		long constructionPermitId, OrderByComparator orderByComparator)
+		throws SystemException {
+		int count = countByConstructionPermitId(constructionPermitId);
+
+		if (count == 0) {
 			return null;
 		}
+
+		List<ConstructionParticipantUnits> list = findByConstructionPermitId(constructionPermitId,
+				count - 1, count, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the construction participant unitses before and after the current construction participant units in the ordered set where constructionPermitId = &#63;.
+	 *
+	 * @param constructionParticipantUnitsId the primary key of the current construction participant units
+	 * @param constructionPermitId the construction permit ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next construction participant units
+	 * @throws com.justonetech.projApproval.NoSuchConstructionParticipantUnitsException if a construction participant units with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public ConstructionParticipantUnits[] findByConstructionPermitId_PrevAndNext(
+		long constructionParticipantUnitsId, long constructionPermitId,
+		OrderByComparator orderByComparator)
+		throws NoSuchConstructionParticipantUnitsException, SystemException {
+		ConstructionParticipantUnits constructionParticipantUnits = findByPrimaryKey(constructionParticipantUnitsId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			ConstructionParticipantUnits[] array = new ConstructionParticipantUnitsImpl[3];
+
+			array[0] = getByConstructionPermitId_PrevAndNext(session,
+					constructionParticipantUnits, constructionPermitId,
+					orderByComparator, true);
+
+			array[1] = constructionParticipantUnits;
+
+			array[2] = getByConstructionPermitId_PrevAndNext(session,
+					constructionParticipantUnits, constructionPermitId,
+					orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected ConstructionParticipantUnits getByConstructionPermitId_PrevAndNext(
+		Session session,
+		ConstructionParticipantUnits constructionParticipantUnits,
+		long constructionPermitId, OrderByComparator orderByComparator,
+		boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
 		else {
-			return (ConstructionParticipantUnits)result;
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_CONSTRUCTIONPARTICIPANTUNITS_WHERE);
+
+		query.append(_FINDER_COLUMN_CONSTRUCTIONPERMITID_CONSTRUCTIONPERMITID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(ConstructionParticipantUnitsModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(constructionPermitId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(constructionParticipantUnits);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<ConstructionParticipantUnits> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 
 	/**
-	 * Removes the construction participant units where constructionPermitId = &#63; from the database.
+	 * Removes all the construction participant unitses where constructionPermitId = &#63; from the database.
 	 *
 	 * @param constructionPermitId the construction permit ID
-	 * @return the construction participant units that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public ConstructionParticipantUnits removeByConstructionPermitId(
-		long constructionPermitId)
-		throws NoSuchConstructionParticipantUnitsException, SystemException {
-		ConstructionParticipantUnits constructionParticipantUnits = findByConstructionPermitId(constructionPermitId);
-
-		return remove(constructionParticipantUnits);
+	public void removeByConstructionPermitId(long constructionPermitId)
+		throws SystemException {
+		for (ConstructionParticipantUnits constructionParticipantUnits : findByConstructionPermitId(
+				constructionPermitId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+			remove(constructionParticipantUnits);
+		}
 	}
 
 	/**
@@ -328,10 +616,6 @@ public class ConstructionParticipantUnitsPersistenceImpl
 			constructionParticipantUnits.getPrimaryKey(),
 			constructionParticipantUnits);
 
-		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CONSTRUCTIONPERMITID,
-			new Object[] { constructionParticipantUnits.getConstructionPermitId() },
-			constructionParticipantUnits);
-
 		constructionParticipantUnits.resetOriginalValues();
 	}
 
@@ -392,8 +676,6 @@ public class ConstructionParticipantUnitsPersistenceImpl
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		clearUniqueFindersCache(constructionParticipantUnits);
 	}
 
 	@Override
@@ -406,65 +688,6 @@ public class ConstructionParticipantUnitsPersistenceImpl
 			EntityCacheUtil.removeResult(ConstructionParticipantUnitsModelImpl.ENTITY_CACHE_ENABLED,
 				ConstructionParticipantUnitsImpl.class,
 				constructionParticipantUnits.getPrimaryKey());
-
-			clearUniqueFindersCache(constructionParticipantUnits);
-		}
-	}
-
-	protected void cacheUniqueFindersCache(
-		ConstructionParticipantUnits constructionParticipantUnits) {
-		if (constructionParticipantUnits.isNew()) {
-			Object[] args = new Object[] {
-					constructionParticipantUnits.getConstructionPermitId()
-				};
-
-			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_CONSTRUCTIONPERMITID,
-				args, Long.valueOf(1));
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CONSTRUCTIONPERMITID,
-				args, constructionParticipantUnits);
-		}
-		else {
-			ConstructionParticipantUnitsModelImpl constructionParticipantUnitsModelImpl =
-				(ConstructionParticipantUnitsModelImpl)constructionParticipantUnits;
-
-			if ((constructionParticipantUnitsModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_CONSTRUCTIONPERMITID.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						constructionParticipantUnits.getConstructionPermitId()
-					};
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_CONSTRUCTIONPERMITID,
-					args, Long.valueOf(1));
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CONSTRUCTIONPERMITID,
-					args, constructionParticipantUnits);
-			}
-		}
-	}
-
-	protected void clearUniqueFindersCache(
-		ConstructionParticipantUnits constructionParticipantUnits) {
-		ConstructionParticipantUnitsModelImpl constructionParticipantUnitsModelImpl =
-			(ConstructionParticipantUnitsModelImpl)constructionParticipantUnits;
-
-		Object[] args = new Object[] {
-				constructionParticipantUnits.getConstructionPermitId()
-			};
-
-		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_CONSTRUCTIONPERMITID,
-			args);
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CONSTRUCTIONPERMITID,
-			args);
-
-		if ((constructionParticipantUnitsModelImpl.getColumnBitmask() &
-				FINDER_PATH_FETCH_BY_CONSTRUCTIONPERMITID.getColumnBitmask()) != 0) {
-			args = new Object[] {
-					constructionParticipantUnitsModelImpl.getOriginalConstructionPermitId()
-				};
-
-			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_CONSTRUCTIONPERMITID,
-				args);
-			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CONSTRUCTIONPERMITID,
-				args);
 		}
 	}
 
@@ -583,6 +806,9 @@ public class ConstructionParticipantUnitsPersistenceImpl
 
 		boolean isNew = constructionParticipantUnits.isNew();
 
+		ConstructionParticipantUnitsModelImpl constructionParticipantUnitsModelImpl =
+			(ConstructionParticipantUnitsModelImpl)constructionParticipantUnits;
+
 		Session session = null;
 
 		try {
@@ -611,13 +837,33 @@ public class ConstructionParticipantUnitsPersistenceImpl
 			FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 		}
 
+		else {
+			if ((constructionParticipantUnitsModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CONSTRUCTIONPERMITID.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						constructionParticipantUnitsModelImpl.getOriginalConstructionPermitId()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_CONSTRUCTIONPERMITID,
+					args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CONSTRUCTIONPERMITID,
+					args);
+
+				args = new Object[] {
+						constructionParticipantUnitsModelImpl.getConstructionPermitId()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_CONSTRUCTIONPERMITID,
+					args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CONSTRUCTIONPERMITID,
+					args);
+			}
+		}
+
 		EntityCacheUtil.putResult(ConstructionParticipantUnitsModelImpl.ENTITY_CACHE_ENABLED,
 			ConstructionParticipantUnitsImpl.class,
 			constructionParticipantUnits.getPrimaryKey(),
 			constructionParticipantUnits);
-
-		clearUniqueFindersCache(constructionParticipantUnits);
-		cacheUniqueFindersCache(constructionParticipantUnits);
 
 		return constructionParticipantUnits;
 	}

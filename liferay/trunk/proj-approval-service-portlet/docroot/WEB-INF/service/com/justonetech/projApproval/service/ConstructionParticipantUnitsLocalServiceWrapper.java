@@ -291,7 +291,7 @@ public class ConstructionParticipantUnitsLocalServiceWrapper
 	}
 
 	@Override
-	public com.justonetech.projApproval.model.ConstructionParticipantUnits findByConstructionPermitId(
+	public java.util.List<com.justonetech.projApproval.model.ConstructionParticipantUnits> findByConstructionPermitId(
 		long constructionPermitId)
 		throws com.justonetech.projApproval.NoSuchConstructionParticipantUnitsException,
 			com.justonetech.projApproval.NoSuchConstructionUnitProjectException,

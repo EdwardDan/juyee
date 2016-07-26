@@ -282,7 +282,7 @@ public class ConstructionParticipantUnitsLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
-	public static com.justonetech.projApproval.model.ConstructionParticipantUnits findByConstructionPermitId(
+	public static java.util.List<com.justonetech.projApproval.model.ConstructionParticipantUnits> findByConstructionPermitId(
 		long constructionPermitId)
 		throws com.justonetech.projApproval.NoSuchConstructionParticipantUnitsException,
 			com.justonetech.projApproval.NoSuchConstructionUnitProjectException,

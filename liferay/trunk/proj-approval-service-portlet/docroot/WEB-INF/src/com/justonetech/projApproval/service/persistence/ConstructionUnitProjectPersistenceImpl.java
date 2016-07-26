@@ -84,10 +84,24 @@ public class ConstructionUnitProjectPersistenceImpl extends BasePersistenceImpl<
 	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(ConstructionUnitProjectModelImpl.ENTITY_CACHE_ENABLED,
 			ConstructionUnitProjectModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
-	public static final FinderPath FINDER_PATH_FETCH_BY_CONSTRUCTIONPERMITID = new FinderPath(ConstructionUnitProjectModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_CONSTRUCTIONPERMITID =
+		new FinderPath(ConstructionUnitProjectModelImpl.ENTITY_CACHE_ENABLED,
 			ConstructionUnitProjectModelImpl.FINDER_CACHE_ENABLED,
-			ConstructionUnitProjectImpl.class, FINDER_CLASS_NAME_ENTITY,
-			"fetchByConstructionPermitId",
+			ConstructionUnitProjectImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			"findByConstructionPermitId",
+			new String[] {
+				Long.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CONSTRUCTIONPERMITID =
+		new FinderPath(ConstructionUnitProjectModelImpl.ENTITY_CACHE_ENABLED,
+			ConstructionUnitProjectModelImpl.FINDER_CACHE_ENABLED,
+			ConstructionUnitProjectImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"findByConstructionPermitId",
 			new String[] { Long.class.getName() },
 			ConstructionUnitProjectModelImpl.CONSTRUCTIONPERMITID_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_CONSTRUCTIONPERMITID = new FinderPath(ConstructionUnitProjectModelImpl.ENTITY_CACHE_ENABLED,
@@ -96,87 +110,112 @@ public class ConstructionUnitProjectPersistenceImpl extends BasePersistenceImpl<
 			"countByConstructionPermitId", new String[] { Long.class.getName() });
 
 	/**
-	 * Returns the construction unit project where constructionPermitId = &#63; or throws a {@link com.justonetech.projApproval.NoSuchConstructionUnitProjectException} if it could not be found.
+	 * Returns all the construction unit projects where constructionPermitId = &#63;.
 	 *
 	 * @param constructionPermitId the construction permit ID
-	 * @return the matching construction unit project
-	 * @throws com.justonetech.projApproval.NoSuchConstructionUnitProjectException if a matching construction unit project could not be found
+	 * @return the matching construction unit projects
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public ConstructionUnitProject findByConstructionPermitId(
-		long constructionPermitId)
-		throws NoSuchConstructionUnitProjectException, SystemException {
-		ConstructionUnitProject constructionUnitProject = fetchByConstructionPermitId(constructionPermitId);
-
-		if (constructionUnitProject == null) {
-			StringBundler msg = new StringBundler(4);
-
-			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-			msg.append("constructionPermitId=");
-			msg.append(constructionPermitId);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			if (_log.isWarnEnabled()) {
-				_log.warn(msg.toString());
-			}
-
-			throw new NoSuchConstructionUnitProjectException(msg.toString());
-		}
-
-		return constructionUnitProject;
-	}
-
-	/**
-	 * Returns the construction unit project where constructionPermitId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	 *
-	 * @param constructionPermitId the construction permit ID
-	 * @return the matching construction unit project, or <code>null</code> if a matching construction unit project could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public ConstructionUnitProject fetchByConstructionPermitId(
+	public List<ConstructionUnitProject> findByConstructionPermitId(
 		long constructionPermitId) throws SystemException {
-		return fetchByConstructionPermitId(constructionPermitId, true);
+		return findByConstructionPermitId(constructionPermitId,
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns the construction unit project where constructionPermitId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns a range of all the construction unit projects where constructionPermitId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.justonetech.projApproval.model.impl.ConstructionUnitProjectModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
 	 *
 	 * @param constructionPermitId the construction permit ID
-	 * @param retrieveFromCache whether to use the finder cache
-	 * @return the matching construction unit project, or <code>null</code> if a matching construction unit project could not be found
+	 * @param start the lower bound of the range of construction unit projects
+	 * @param end the upper bound of the range of construction unit projects (not inclusive)
+	 * @return the range of matching construction unit projects
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public ConstructionUnitProject fetchByConstructionPermitId(
-		long constructionPermitId, boolean retrieveFromCache)
+	public List<ConstructionUnitProject> findByConstructionPermitId(
+		long constructionPermitId, int start, int end)
 		throws SystemException {
-		Object[] finderArgs = new Object[] { constructionPermitId };
+		return findByConstructionPermitId(constructionPermitId, start, end, null);
+	}
 
-		Object result = null;
+	/**
+	 * Returns an ordered range of all the construction unit projects where constructionPermitId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.justonetech.projApproval.model.impl.ConstructionUnitProjectModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param constructionPermitId the construction permit ID
+	 * @param start the lower bound of the range of construction unit projects
+	 * @param end the upper bound of the range of construction unit projects (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching construction unit projects
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<ConstructionUnitProject> findByConstructionPermitId(
+		long constructionPermitId, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
 
-		if (retrieveFromCache) {
-			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_CONSTRUCTIONPERMITID,
-					finderArgs, this);
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CONSTRUCTIONPERMITID;
+			finderArgs = new Object[] { constructionPermitId };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_CONSTRUCTIONPERMITID;
+			finderArgs = new Object[] {
+					constructionPermitId,
+					
+					start, end, orderByComparator
+				};
 		}
 
-		if (result instanceof ConstructionUnitProject) {
-			ConstructionUnitProject constructionUnitProject = (ConstructionUnitProject)result;
+		List<ConstructionUnitProject> list = (List<ConstructionUnitProject>)FinderCacheUtil.getResult(finderPath,
+				finderArgs, this);
 
-			if ((constructionPermitId != constructionUnitProject.getConstructionPermitId())) {
-				result = null;
+		if ((list != null) && !list.isEmpty()) {
+			for (ConstructionUnitProject constructionUnitProject : list) {
+				if ((constructionPermitId != constructionUnitProject.getConstructionPermitId())) {
+					list = null;
+
+					break;
+				}
 			}
 		}
 
-		if (result == null) {
-			StringBundler query = new StringBundler(3);
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
 
 			query.append(_SQL_SELECT_CONSTRUCTIONUNITPROJECT_WHERE);
 
 			query.append(_FINDER_COLUMN_CONSTRUCTIONPERMITID_CONSTRUCTIONPERMITID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(ConstructionUnitProjectModelImpl.ORDER_BY_JPQL);
+			}
 
 			String sql = query.toString();
 
@@ -191,35 +230,25 @@ public class ConstructionUnitProjectPersistenceImpl extends BasePersistenceImpl<
 
 				qPos.add(constructionPermitId);
 
-				List<ConstructionUnitProject> list = q.list();
+				if (!pagination) {
+					list = (List<ConstructionUnitProject>)QueryUtil.list(q,
+							getDialect(), start, end, false);
 
-				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CONSTRUCTIONPERMITID,
-						finderArgs, list);
+					Collections.sort(list);
+
+					list = new UnmodifiableList<ConstructionUnitProject>(list);
 				}
 				else {
-					if ((list.size() > 1) && _log.isWarnEnabled()) {
-						_log.warn(
-							"ConstructionUnitProjectPersistenceImpl.fetchByConstructionPermitId(long, boolean) with parameters (" +
-							StringUtil.merge(finderArgs) +
-							") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
-					}
-
-					ConstructionUnitProject constructionUnitProject = list.get(0);
-
-					result = constructionUnitProject;
-
-					cacheResult(constructionUnitProject);
-
-					if ((constructionUnitProject.getConstructionPermitId() != constructionPermitId)) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CONSTRUCTIONPERMITID,
-							finderArgs, constructionUnitProject);
-					}
+					list = (List<ConstructionUnitProject>)QueryUtil.list(q,
+							getDialect(), start, end);
 				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, list);
 			}
 			catch (Exception e) {
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CONSTRUCTIONPERMITID,
-					finderArgs);
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
 
 				throw processException(e);
 			}
@@ -228,28 +257,286 @@ public class ConstructionUnitProjectPersistenceImpl extends BasePersistenceImpl<
 			}
 		}
 
-		if (result instanceof List<?>) {
+		return list;
+	}
+
+	/**
+	 * Returns the first construction unit project in the ordered set where constructionPermitId = &#63;.
+	 *
+	 * @param constructionPermitId the construction permit ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching construction unit project
+	 * @throws com.justonetech.projApproval.NoSuchConstructionUnitProjectException if a matching construction unit project could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public ConstructionUnitProject findByConstructionPermitId_First(
+		long constructionPermitId, OrderByComparator orderByComparator)
+		throws NoSuchConstructionUnitProjectException, SystemException {
+		ConstructionUnitProject constructionUnitProject = fetchByConstructionPermitId_First(constructionPermitId,
+				orderByComparator);
+
+		if (constructionUnitProject != null) {
+			return constructionUnitProject;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("constructionPermitId=");
+		msg.append(constructionPermitId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchConstructionUnitProjectException(msg.toString());
+	}
+
+	/**
+	 * Returns the first construction unit project in the ordered set where constructionPermitId = &#63;.
+	 *
+	 * @param constructionPermitId the construction permit ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching construction unit project, or <code>null</code> if a matching construction unit project could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public ConstructionUnitProject fetchByConstructionPermitId_First(
+		long constructionPermitId, OrderByComparator orderByComparator)
+		throws SystemException {
+		List<ConstructionUnitProject> list = findByConstructionPermitId(constructionPermitId,
+				0, 1, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last construction unit project in the ordered set where constructionPermitId = &#63;.
+	 *
+	 * @param constructionPermitId the construction permit ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching construction unit project
+	 * @throws com.justonetech.projApproval.NoSuchConstructionUnitProjectException if a matching construction unit project could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public ConstructionUnitProject findByConstructionPermitId_Last(
+		long constructionPermitId, OrderByComparator orderByComparator)
+		throws NoSuchConstructionUnitProjectException, SystemException {
+		ConstructionUnitProject constructionUnitProject = fetchByConstructionPermitId_Last(constructionPermitId,
+				orderByComparator);
+
+		if (constructionUnitProject != null) {
+			return constructionUnitProject;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("constructionPermitId=");
+		msg.append(constructionPermitId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchConstructionUnitProjectException(msg.toString());
+	}
+
+	/**
+	 * Returns the last construction unit project in the ordered set where constructionPermitId = &#63;.
+	 *
+	 * @param constructionPermitId the construction permit ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching construction unit project, or <code>null</code> if a matching construction unit project could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public ConstructionUnitProject fetchByConstructionPermitId_Last(
+		long constructionPermitId, OrderByComparator orderByComparator)
+		throws SystemException {
+		int count = countByConstructionPermitId(constructionPermitId);
+
+		if (count == 0) {
 			return null;
 		}
+
+		List<ConstructionUnitProject> list = findByConstructionPermitId(constructionPermitId,
+				count - 1, count, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the construction unit projects before and after the current construction unit project in the ordered set where constructionPermitId = &#63;.
+	 *
+	 * @param constructionUnitProjectId the primary key of the current construction unit project
+	 * @param constructionPermitId the construction permit ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next construction unit project
+	 * @throws com.justonetech.projApproval.NoSuchConstructionUnitProjectException if a construction unit project with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public ConstructionUnitProject[] findByConstructionPermitId_PrevAndNext(
+		long constructionUnitProjectId, long constructionPermitId,
+		OrderByComparator orderByComparator)
+		throws NoSuchConstructionUnitProjectException, SystemException {
+		ConstructionUnitProject constructionUnitProject = findByPrimaryKey(constructionUnitProjectId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			ConstructionUnitProject[] array = new ConstructionUnitProjectImpl[3];
+
+			array[0] = getByConstructionPermitId_PrevAndNext(session,
+					constructionUnitProject, constructionPermitId,
+					orderByComparator, true);
+
+			array[1] = constructionUnitProject;
+
+			array[2] = getByConstructionPermitId_PrevAndNext(session,
+					constructionUnitProject, constructionPermitId,
+					orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected ConstructionUnitProject getByConstructionPermitId_PrevAndNext(
+		Session session, ConstructionUnitProject constructionUnitProject,
+		long constructionPermitId, OrderByComparator orderByComparator,
+		boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
 		else {
-			return (ConstructionUnitProject)result;
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_CONSTRUCTIONUNITPROJECT_WHERE);
+
+		query.append(_FINDER_COLUMN_CONSTRUCTIONPERMITID_CONSTRUCTIONPERMITID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(ConstructionUnitProjectModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(constructionPermitId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(constructionUnitProject);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<ConstructionUnitProject> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
 		}
 	}
 
 	/**
-	 * Removes the construction unit project where constructionPermitId = &#63; from the database.
+	 * Removes all the construction unit projects where constructionPermitId = &#63; from the database.
 	 *
 	 * @param constructionPermitId the construction permit ID
-	 * @return the construction unit project that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public ConstructionUnitProject removeByConstructionPermitId(
-		long constructionPermitId)
-		throws NoSuchConstructionUnitProjectException, SystemException {
-		ConstructionUnitProject constructionUnitProject = findByConstructionPermitId(constructionPermitId);
-
-		return remove(constructionUnitProject);
+	public void removeByConstructionPermitId(long constructionPermitId)
+		throws SystemException {
+		for (ConstructionUnitProject constructionUnitProject : findByConstructionPermitId(
+				constructionPermitId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+			remove(constructionUnitProject);
+		}
 	}
 
 	/**
@@ -324,10 +611,6 @@ public class ConstructionUnitProjectPersistenceImpl extends BasePersistenceImpl<
 			ConstructionUnitProjectImpl.class,
 			constructionUnitProject.getPrimaryKey(), constructionUnitProject);
 
-		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CONSTRUCTIONPERMITID,
-			new Object[] { constructionUnitProject.getConstructionPermitId() },
-			constructionUnitProject);
-
 		constructionUnitProject.resetOriginalValues();
 	}
 
@@ -387,8 +670,6 @@ public class ConstructionUnitProjectPersistenceImpl extends BasePersistenceImpl<
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
-
-		clearUniqueFindersCache(constructionUnitProject);
 	}
 
 	@Override
@@ -401,63 +682,6 @@ public class ConstructionUnitProjectPersistenceImpl extends BasePersistenceImpl<
 			EntityCacheUtil.removeResult(ConstructionUnitProjectModelImpl.ENTITY_CACHE_ENABLED,
 				ConstructionUnitProjectImpl.class,
 				constructionUnitProject.getPrimaryKey());
-
-			clearUniqueFindersCache(constructionUnitProject);
-		}
-	}
-
-	protected void cacheUniqueFindersCache(
-		ConstructionUnitProject constructionUnitProject) {
-		if (constructionUnitProject.isNew()) {
-			Object[] args = new Object[] {
-					constructionUnitProject.getConstructionPermitId()
-				};
-
-			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_CONSTRUCTIONPERMITID,
-				args, Long.valueOf(1));
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CONSTRUCTIONPERMITID,
-				args, constructionUnitProject);
-		}
-		else {
-			ConstructionUnitProjectModelImpl constructionUnitProjectModelImpl = (ConstructionUnitProjectModelImpl)constructionUnitProject;
-
-			if ((constructionUnitProjectModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_CONSTRUCTIONPERMITID.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						constructionUnitProject.getConstructionPermitId()
-					};
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_CONSTRUCTIONPERMITID,
-					args, Long.valueOf(1));
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CONSTRUCTIONPERMITID,
-					args, constructionUnitProject);
-			}
-		}
-	}
-
-	protected void clearUniqueFindersCache(
-		ConstructionUnitProject constructionUnitProject) {
-		ConstructionUnitProjectModelImpl constructionUnitProjectModelImpl = (ConstructionUnitProjectModelImpl)constructionUnitProject;
-
-		Object[] args = new Object[] {
-				constructionUnitProject.getConstructionPermitId()
-			};
-
-		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_CONSTRUCTIONPERMITID,
-			args);
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CONSTRUCTIONPERMITID,
-			args);
-
-		if ((constructionUnitProjectModelImpl.getColumnBitmask() &
-				FINDER_PATH_FETCH_BY_CONSTRUCTIONPERMITID.getColumnBitmask()) != 0) {
-			args = new Object[] {
-					constructionUnitProjectModelImpl.getOriginalConstructionPermitId()
-				};
-
-			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_CONSTRUCTIONPERMITID,
-				args);
-			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CONSTRUCTIONPERMITID,
-				args);
 		}
 	}
 
@@ -574,6 +798,8 @@ public class ConstructionUnitProjectPersistenceImpl extends BasePersistenceImpl<
 
 		boolean isNew = constructionUnitProject.isNew();
 
+		ConstructionUnitProjectModelImpl constructionUnitProjectModelImpl = (ConstructionUnitProjectModelImpl)constructionUnitProject;
+
 		Session session = null;
 
 		try {
@@ -601,12 +827,32 @@ public class ConstructionUnitProjectPersistenceImpl extends BasePersistenceImpl<
 			FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 		}
 
+		else {
+			if ((constructionUnitProjectModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CONSTRUCTIONPERMITID.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						constructionUnitProjectModelImpl.getOriginalConstructionPermitId()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_CONSTRUCTIONPERMITID,
+					args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CONSTRUCTIONPERMITID,
+					args);
+
+				args = new Object[] {
+						constructionUnitProjectModelImpl.getConstructionPermitId()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_CONSTRUCTIONPERMITID,
+					args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CONSTRUCTIONPERMITID,
+					args);
+			}
+		}
+
 		EntityCacheUtil.putResult(ConstructionUnitProjectModelImpl.ENTITY_CACHE_ENABLED,
 			ConstructionUnitProjectImpl.class,
 			constructionUnitProject.getPrimaryKey(), constructionUnitProject);
-
-		clearUniqueFindersCache(constructionUnitProject);
-		cacheUniqueFindersCache(constructionUnitProject);
 
 		return constructionUnitProject;
 	}

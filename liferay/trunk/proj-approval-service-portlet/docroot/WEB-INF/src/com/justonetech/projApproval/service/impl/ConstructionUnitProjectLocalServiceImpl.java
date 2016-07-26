@@ -14,6 +14,8 @@
 
 package com.justonetech.projApproval.service.impl;
 
+import java.util.List;
+
 import com.justonetech.projApproval.NoSuchConstructionUnitProjectException;
 import com.justonetech.projApproval.model.ConstructionUnitProject;
 import com.justonetech.projApproval.service.base.ConstructionUnitProjectLocalServiceBaseImpl;
@@ -41,7 +43,7 @@ public class ConstructionUnitProjectLocalServiceImpl
 	 * Never reference this interface directly. Always use {@link com.justonetech.projApproval.service.ConstructionUnitProjectLocalServiceUtil} to access the construction unit project local service.
 	 */
 	
-	public ConstructionUnitProject findByConstructionPermitId(
+	public List<ConstructionUnitProject> findByConstructionPermitId(
 			long constructionPermitId)
 			throws NoSuchConstructionUnitProjectException, SystemException {
 		return constructionUnitProjectPersistence

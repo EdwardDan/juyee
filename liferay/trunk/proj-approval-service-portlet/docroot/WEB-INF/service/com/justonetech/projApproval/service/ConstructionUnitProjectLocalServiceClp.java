@@ -682,7 +682,7 @@ public class ConstructionUnitProjectLocalServiceClp
 	}
 
 	@Override
-	public com.justonetech.projApproval.model.ConstructionUnitProject findByConstructionPermitId(
+	public java.util.List<com.justonetech.projApproval.model.ConstructionUnitProject> findByConstructionPermitId(
 		long constructionPermitId)
 		throws com.justonetech.projApproval.NoSuchConstructionUnitProjectException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -713,7 +713,7 @@ public class ConstructionUnitProjectLocalServiceClp
 			}
 		}
 
-		return (com.justonetech.projApproval.model.ConstructionUnitProject)ClpSerializer.translateOutput(returnObj);
+		return (java.util.List<com.justonetech.projApproval.model.ConstructionUnitProject>)ClpSerializer.translateOutput(returnObj);
 	}
 
 	private InvokableLocalService _invokableLocalService;

@@ -97,7 +97,7 @@
 
 
 		<!-- Finder methods -->
-		<finder name="ConstructionPermitId" return-type="ConstructionParticipantUnits">
+		<finder name="ConstructionPermitId" return-type="Collection">
 			<finder-column name="constructionPermitId"></finder-column>
 		</finder>
 
@@ -121,7 +121,7 @@
 
 
 		<!-- Finder methods -->
-		<finder name="ConstructionPermitId" return-type="ConstructionUnitProject">
+		<finder name="ConstructionPermitId" return-type="Collection">
 			<finder-column name="constructionPermitId"></finder-column>
 		</finder>
 

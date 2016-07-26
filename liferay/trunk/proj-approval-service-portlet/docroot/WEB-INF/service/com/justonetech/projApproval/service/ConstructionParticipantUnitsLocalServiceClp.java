@@ -685,7 +685,7 @@ public class ConstructionParticipantUnitsLocalServiceClp
 	}
 
 	@Override
-	public com.justonetech.projApproval.model.ConstructionParticipantUnits findByConstructionPermitId(
+	public java.util.List<com.justonetech.projApproval.model.ConstructionParticipantUnits> findByConstructionPermitId(
 		long constructionPermitId)
 		throws com.justonetech.projApproval.NoSuchConstructionParticipantUnitsException,
 			com.justonetech.projApproval.NoSuchConstructionUnitProjectException,
@@ -721,7 +721,7 @@ public class ConstructionParticipantUnitsLocalServiceClp
 			}
 		}
 
-		return (com.justonetech.projApproval.model.ConstructionParticipantUnits)ClpSerializer.translateOutput(returnObj);
+		return (java.util.List<com.justonetech.projApproval.model.ConstructionParticipantUnits>)ClpSerializer.translateOutput(returnObj);
 	}
 
 	private InvokableLocalService _invokableLocalService;

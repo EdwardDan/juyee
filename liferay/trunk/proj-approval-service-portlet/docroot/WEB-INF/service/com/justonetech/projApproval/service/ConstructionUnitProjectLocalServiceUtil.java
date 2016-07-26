@@ -280,7 +280,7 @@ public class ConstructionUnitProjectLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
-	public static com.justonetech.projApproval.model.ConstructionUnitProject findByConstructionPermitId(
+	public static java.util.List<com.justonetech.projApproval.model.ConstructionUnitProject> findByConstructionPermitId(
 		long constructionPermitId)
 		throws com.justonetech.projApproval.NoSuchConstructionUnitProjectException,
 			com.liferay.portal.kernel.exception.SystemException {

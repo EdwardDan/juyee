@@ -291,7 +291,7 @@ public class ConstructionUnitProjectLocalServiceWrapper
 	}
 
 	@Override
-	public com.justonetech.projApproval.model.ConstructionUnitProject findByConstructionPermitId(
+	public java.util.List<com.justonetech.projApproval.model.ConstructionUnitProject> findByConstructionPermitId(
 		long constructionPermitId)
 		throws com.justonetech.projApproval.NoSuchConstructionUnitProjectException,
 			com.liferay.portal.kernel.exception.SystemException {
