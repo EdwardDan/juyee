@@ -1,7 +1,5 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ include file="/common/init.jsp"%>
-
-
  
 <c:set var="contentPath"
 	value="${request.contextPath}/portlet/construction-permit-application" />
@@ -10,26 +8,24 @@
 	value="<%=renderResponse.getNamespace()%>" />
 
 <%
-		long groupId = PortalUtil.getScopeGroupId(request);
-			Dictionary projTypeDic = DictionaryLocalServiceUtil
-		.findByGroupIdAndCode(groupId, "ProjectType");
-			
-			Dictionary consPerStaQueryDic = DictionaryLocalServiceUtil
-					.findByGroupIdAndCode(groupId, "ConstructionPermitStatusQuery");
-			
-			List<Dictionary> projTypeDics=new ArrayList<Dictionary>();
-			List<Dictionary> consPerStaQueryDics=new ArrayList<Dictionary>();
-			
-		if (null != projTypeDic) {
-			projTypeDics = DictionaryLocalServiceUtil
-		.findByGroupIdAndParentId(groupId,
+	Dictionary projTypeDic = DictionaryLocalServiceUtil
+			.findByCode("ProjectType");
+
+	Dictionary consPerStaQueryDic = DictionaryLocalServiceUtil
+			.findByCode("ConstructionPermitStatusQuery");
+
+	List<Dictionary> projTypeDics = new ArrayList<Dictionary>();
+	List<Dictionary> consPerStaQueryDics = new ArrayList<Dictionary>();
+
+	if (null != projTypeDic) {
+		projTypeDics = DictionaryLocalServiceUtil.findByParentId(
 				projTypeDic.getDictionaryId(), -1, -1);
-		}
-		if (null != consPerStaQueryDic) {
-			consPerStaQueryDics = DictionaryLocalServiceUtil
-		.findByGroupIdAndParentId(groupId,
-				consPerStaQueryDic.getDictionaryId(), -1, -1);
-		}
+	}
+	if (null != consPerStaQueryDic) {
+		consPerStaQueryDics = DictionaryLocalServiceUtil
+				.findByParentId(consPerStaQueryDic.getDictionaryId(),
+						-1, -1);
+	}
 %>
 
 <!--各种查询和按状态查询  -->
@@ -103,7 +99,7 @@
 		<aui:button disabled="true" name="deleteConstructionPermitsBtn" value="删除" onClick='<%=renderResponse.getNamespace() + "deleteDictionaries();"%>' />
 	</aui:button-row> 
 	
-<!-- 页面展示 -->
+<!-- 页面展示 --> 
 
 	<liferay-ui:search-container emptyResultsMessage="没有找到代码。"  rowChecker="<%=new RowChecker(renderResponse)%>">
 		<liferay-ui:search-container-results results="${constructionPermits}"

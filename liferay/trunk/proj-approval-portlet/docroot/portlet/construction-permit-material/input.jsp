@@ -1,35 +1,27 @@
-<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet"%>
-<%@ page import="com.justonetech.sys.model.Dictionary"%>
-<%@ page import="com.justonetech.proj.approval.vo.ConstructionPermitMaterial"%>
-<%@page import="com.justonetech.sys.service.DictionaryLocalServiceUtil"%>
-<%@page import="com.liferay.portal.util.PortalUtil"%>
-<%@ page import="java.util.*"%>
+<%@ page contentType="text/html;charset=utf-8"%>
 <%@ include file="/common/init.jsp"%>
-<%@ page contentType="text/html; charset=UTF-8" language="java"%>
 <portlet:defineObjects />
 <c:set var="contentPath"
 	value="${request.contextPath}/portlet/construction-permit-material" />
 <%
-	long dictionaryId=ParamUtil.getLong(renderRequest, "dictionaryId"); 
-	int id=ParamUtil.getInteger(renderRequest, "id"); 
-	int sortNoMax=ParamUtil.getInteger(renderRequest, "sortNoMax"); 
-	request.setAttribute("sortNoMax", sortNoMax+1);
-	Dictionary typeDictionary=DictionaryLocalServiceUtil.getDictionary(dictionaryId);
+	long dictionaryId = ParamUtil
+			.getLong(renderRequest, "dictionaryId");
+	int id = ParamUtil.getInteger(renderRequest, "id");
+	int sortNoMax = ParamUtil.getInteger(renderRequest, "sortNoMax");
+	request.setAttribute("sortNoMax", sortNoMax + 1);
+	Dictionary typeDictionary = DictionaryLocalServiceUtil
+			.getDictionary(dictionaryId);
 	request.setAttribute("typeDictionary", typeDictionary.getName());
-	long groupId = PortalUtil.getScopeGroupId(request);
-	String type=ParamUtil.getString(renderRequest,"type");
+	String type = ParamUtil.getString(renderRequest, "type");
 	request.setAttribute("type", type);
-	Dictionary apply = DictionaryLocalServiceUtil
-							.findByGroupIdAndCode(groupId, "apply");
+	Dictionary apply = DictionaryLocalServiceUtil.findByCode("apply");
 	request.setAttribute("apply", apply.getDictionaryId());
-	Dictionary submit = DictionaryLocalServiceUtil
-			.findByGroupIdAndCode(groupId, "submit");
+	Dictionary submit = DictionaryLocalServiceUtil.findByCode("submit");
 	request.setAttribute("submit", submit.getDictionaryId());
 %>
-<portlet:renderURL var="viewURL" />
+<portlet:renderURL var="viewURL" /> 
 <portlet:renderURL var="thisURL">
-<portlet:param name="mvcPath"
-					value="${contentPath }/input.jsp" />
+<portlet:param name="mvcPath" value="${contentPath }/input.jsp" />
 </portlet:renderURL>
 <aui:model-context bean="${constructionPermitMaterial}"
 	model="<%=ConstructionPermitMaterial.class %>" />
@@ -44,20 +36,21 @@
 			value="<%=dictionaryId%>" />
 			<div id="myDiv" class="aui-helper-hidden" style="display:none">
 		<aui:input name="id" type="text" value="<%=id%>" /></div>
-		<aui:select name="type" id="type" label="材料类型"
-		>
+		<aui:select name="type" id="type" label="材料类型">
 			<%
 				Dictionary dictionary = DictionaryLocalServiceUtil
-										.findByGroupIdAndCode(groupId, "materialType");
-				if (null != dictionary) {
+									.findByCode("materialType");
+							if (null != dictionary) {
 								List<Dictionary> dictionaries = DictionaryLocalServiceUtil
-										.findByGroupIdAndParentId(groupId,
-												dictionary.getDictionaryId(), -1, -1);
+										.findByParentId(
+												dictionary.getDictionaryId(), -1,
+												-1);
 								for (Dictionary dic : dictionaries) {
 			%>
 			<aui:option value="<%=dic.getDictionaryId()%>"><%=dic.getName()%></aui:option>
 			<%
-				}}
+				}
+							}
 			%>
 		</aui:select>
 		<aui:input type="text" name="sortNo" label="序号" value="${sortNoMax}">
@@ -107,6 +100,7 @@
                    }
                 }
             );
-        }    );
+        }    
+       );
     
     </aui:script>

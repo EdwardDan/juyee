@@ -4,9 +4,10 @@
 
 <%
 	SimpleDateFormat sf = new SimpleDateFormat(defaultDateFormatPattern);
-	ConstructionPermit consPer = (ConstructionPermit) renderRequest.getAttribute("constructionPermit");
+	ConstructionPermit consPer = (ConstructionPermit) renderRequest
+			.getAttribute("constructionPermit");
 	if (consPer == null) {
-		consPer = new ConstructionPermitClp();
+		consPer = new ConstructionPermitClp(); 
 	}
 	ConstructionPermitApplication perApp = (ConstructionPermitApplication) renderRequest
 			.getAttribute("permitApplication");
@@ -14,35 +15,35 @@
 		perApp = new ConstructionPermitApplication();
 	}
 
-	long groupId = PortalUtil.getScopeGroupId(request);
-	Dictionary projPropertyDictionary = DictionaryLocalServiceUtil.findByGroupIdAndCode(groupId,
-			"ProjectProperty");
+	Dictionary projPropertyDictionary = DictionaryLocalServiceUtil
+			.findByCode("ProjectProperty");
 	List<Dictionary> projPropertyDics = new ArrayList<Dictionary>();
 	if (null != projPropertyDictionary) {
-		projPropertyDics = DictionaryLocalServiceUtil.findByGroupIdAndParentId(groupId,
+		projPropertyDics = DictionaryLocalServiceUtil.findByParentId(
 				projPropertyDictionary.getDictionaryId(), -1, -1);
 	}
 
-	Dictionary areaNameDictionary = DictionaryLocalServiceUtil.findByGroupIdAndCode(groupId, "AreaName");
+	Dictionary areaNameDictionary = DictionaryLocalServiceUtil
+			.findByCode("AreaName");
 	List<Dictionary> areaNameDics = new ArrayList<Dictionary>();
 	if (null != areaNameDictionary) {
-		areaNameDics = DictionaryLocalServiceUtil.findByGroupIdAndParentId(groupId,
+		areaNameDics = DictionaryLocalServiceUtil.findByParentId(
 				areaNameDictionary.getDictionaryId(), -1, -1);
 	}
 
 	Dictionary consTypeDictionary = DictionaryLocalServiceUtil
-			.findByGroupIdAndCode(groupId, "ConstructionType");
+			.findByCode("ConstructionType");
 	List<Dictionary> consTypeDics = new ArrayList<Dictionary>();
 	if (null != consTypeDictionary) {
-		consTypeDics = DictionaryLocalServiceUtil.findByGroupIdAndParentId(groupId,
+		consTypeDics = DictionaryLocalServiceUtil.findByParentId(
 				consTypeDictionary.getDictionaryId(), -1, -1);
 	}
 
-	Dictionary consProperDictionary = DictionaryLocalServiceUtil.findByGroupIdAndCode(groupId,
-			"ConstructionProperty");
+	Dictionary consProperDictionary = DictionaryLocalServiceUtil
+			.findByCode("ConstructionProperty");
 	List<Dictionary> consProperDics = new ArrayList<Dictionary>();
 	if (null != consProperDictionary) {
-		consProperDics = DictionaryLocalServiceUtil.findByGroupIdAndParentId(groupId,
+		consProperDics = DictionaryLocalServiceUtil.findByParentId(
 				consProperDictionary.getDictionaryId(), -1, -1);
 	}
 %>
@@ -195,7 +196,7 @@
 			<aui:col span="2" cssClass="textcenter">
 			建设地点所属区县：
 			</aui:col>
-			<aui:col span="6">
+			<aui:col span="10">
 				
 					<c:forEach items="<%=areaNameDics%>" var="areaNameDic">
 					<aui:input type="radio" name="companySiteCounty"

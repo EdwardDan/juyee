@@ -35,12 +35,10 @@ public class ConstructionPermitMaterialPortlet extends MVCPortlet {
 			int pageNumber = ParamUtil.getInteger(renderRequest, "cur", 1);
 			int start = (pageNumber - 1) * pageSize;
 			int end = pageNumber * pageSize;
-			System.out.println("start1=" + start + "&end1=" + end);
-			long groupId = PortalUtil.getScopeGroupId(renderRequest);
-			Dictionary projectType = DictionaryLocalServiceUtil.findByGroupIdAndCode(groupId, "ProjectType");
+			Dictionary projectType = DictionaryLocalServiceUtil.findByCode( "ProjectType");
 			long dictionaryId = 0L;
 			if (null != projectType) {
-				List<Dictionary> dictionaries = DictionaryLocalServiceUtil.findByGroupIdAndParentId(groupId,
+				List<Dictionary> dictionaries = DictionaryLocalServiceUtil.findByParentId(
 						projectType.getDictionaryId(), -1, -1);
 				dictionaryId = dictionaries.get(0).getDictionaryId();
 			}
@@ -77,7 +75,6 @@ public class ConstructionPermitMaterialPortlet extends MVCPortlet {
 				if (end > constructionPermitMaterials.size()) {
 					end = constructionPermitMaterials.size();
 				}
-				System.out.println("end="+end);
 			renderRequest.setAttribute("constructionPermitMaterials", constructionPermitMaterials.subList(start, end));
 			renderRequest.setAttribute("constructionPermitMaterialsCount", constructionPermitMaterials.size());
 		} catch (PortalException | SystemException e) {

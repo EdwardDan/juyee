@@ -1,7 +1,5 @@
-<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet"%>
-<%@page import="com.liferay.portal.util.PortalUtil"%>
+<%@ page contentType="text/html;charset=utf-8"%>
 <%@ include file="/common/init.jsp"%>
-<%@ page contentType="text/html; charset=UTF-8" language="java"%>
 <c:set var="contentPath"
 	value="${request.contextPath}/portlet/construction-permit-material" />
 <portlet:defineObjects />
@@ -15,14 +13,12 @@
 %>
 <select name="projectType" onchange="projectType()">
 	<%
-		long groupId = PortalUtil.getScopeGroupId(request);
-			Dictionary dictionary = DictionaryLocalServiceUtil
-								.findByGroupIdAndCode(groupId, "ProjectType");
+		Dictionary dictionary = DictionaryLocalServiceUtil
+				.findByCode("ProjectType");
 		if (null != dictionary) {
-						List<Dictionary> dictionaries = DictionaryLocalServiceUtil
-								.findByGroupIdAndParentId(groupId,
-										dictionary.getDictionaryId(), -1, -1);
-						for (Dictionary dic : dictionaries) {
+			List<Dictionary> dictionaries = DictionaryLocalServiceUtil
+					.findByParentId(dictionary.getDictionaryId(), -1, -1);
+			for (Dictionary dic : dictionaries) {
 	%>
 	<option value="<%=dic.getDictionaryId()%>"
 		<c:if test="<%=type==dic.getDictionaryId()%>">selected</c:if>><%=dic.getName()%></option>

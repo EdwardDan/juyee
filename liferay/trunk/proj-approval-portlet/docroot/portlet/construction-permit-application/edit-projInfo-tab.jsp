@@ -1,46 +1,48 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ include file="/common/init.jsp"%>
 
-<% SimpleDateFormat sf=new SimpleDateFormat(defaultDateFormatPattern); 
-ConstructionPermit consPer=(ConstructionPermit)renderRequest.getAttribute("constructionPermit");
-if(consPer==null){
-	consPer=new ConstructionPermitClp();
-}
+<%
+	SimpleDateFormat sf = new SimpleDateFormat(defaultDateFormatPattern);
+	ConstructionPermit consPer = (ConstructionPermit) renderRequest
+			.getAttribute("constructionPermit");
+	if (consPer == null) {
+		consPer = new ConstructionPermitClp();
+	}
 
-long groupId = PortalUtil.getScopeGroupId(request);
-Dictionary projPropertyDictionary = DictionaryLocalServiceUtil.findByGroupIdAndCode(groupId,
-		"ProjectProperty");
-List<Dictionary> projPropertyDics = new ArrayList<Dictionary>();
-if (null != projPropertyDictionary) {
-	projPropertyDics = DictionaryLocalServiceUtil.findByGroupIdAndParentId(groupId,
-			projPropertyDictionary.getDictionaryId(), -1, -1);
-}
+	Dictionary projPropertyDictionary = DictionaryLocalServiceUtil
+			.findByCode("ProjectProperty");
+	List<Dictionary> projPropertyDics = new ArrayList<Dictionary>();
+	if (null != projPropertyDictionary) {
+		projPropertyDics = DictionaryLocalServiceUtil.findByParentId(
+				projPropertyDictionary.getDictionaryId(), -1, -1);
+	}
 
-Dictionary areaNameDictionary = DictionaryLocalServiceUtil.findByGroupIdAndCode(groupId, "AreaName");
-List<Dictionary> areaNameDics = new ArrayList<Dictionary>();
-if (null != areaNameDictionary) {
-	areaNameDics = DictionaryLocalServiceUtil.findByGroupIdAndParentId(groupId,
-			areaNameDictionary.getDictionaryId(), -1, -1);
-}
+	Dictionary areaNameDictionary = DictionaryLocalServiceUtil
+			.findByCode("AreaName");
+	List<Dictionary> areaNameDics = new ArrayList<Dictionary>();
+	if (null != areaNameDictionary) {
+		areaNameDics = DictionaryLocalServiceUtil.findByParentId(
+				areaNameDictionary.getDictionaryId(), -1, -1);
+	}
 
-Dictionary consTypeDictionary = DictionaryLocalServiceUtil
-		.findByGroupIdAndCode(groupId, "ConstructionType");
-List<Dictionary> consTypeDics = new ArrayList<Dictionary>();
-if (null != consTypeDictionary) {
-	consTypeDics = DictionaryLocalServiceUtil.findByGroupIdAndParentId(groupId,
-			consTypeDictionary.getDictionaryId(), -1, -1);
-}
+	Dictionary consTypeDictionary = DictionaryLocalServiceUtil
+			.findByCode("ConstructionType");
+	List<Dictionary> consTypeDics = new ArrayList<Dictionary>();
+	if (null != consTypeDictionary) {
+		consTypeDics = DictionaryLocalServiceUtil.findByParentId(
+				consTypeDictionary.getDictionaryId(), -1, -1);
+	}
 
-Dictionary consProperDictionary = DictionaryLocalServiceUtil.findByGroupIdAndCode(groupId,
-		"ConstructionProperty");
-List<Dictionary> consProperDics = new ArrayList<Dictionary>();
-if (null != consProperDictionary) {
-	consProperDics = DictionaryLocalServiceUtil.findByGroupIdAndParentId(groupId,
-			consProperDictionary.getDictionaryId(), -1, -1);
-}
+	Dictionary consProperDictionary = DictionaryLocalServiceUtil
+			.findByCode("ConstructionProperty");
+	List<Dictionary> consProperDics = new ArrayList<Dictionary>();
+	if (null != consProperDictionary) {
+		consProperDics = DictionaryLocalServiceUtil.findByParentId(
+				consProperDictionary.getDictionaryId(), -1, -1);
+	}
 %>
 
-	
+
 <liferay-ui:panel-container accordion="true" extended="true">
 	<liferay-ui:panel title="项目基本信息">
 		<aui:row>
