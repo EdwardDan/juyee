@@ -91,14 +91,16 @@
 			</liferay-ui:search-container-column-text>
 		</liferay-ui:search-container-row>
 		<liferay-ui:search-iterator>
-		<%
-		String typeChoosen=ParamUtil.getString(request, "type");
-	if(null==typeChoosen){}
-	else{
-	searchContainer.getIteratorURL().setParameter("type", typeChoosen);
-	}
-	%>
-	</liferay-ui:search-iterator>
+			<%
+				String typeChoosen = ParamUtil.getString(request,
+									"type");
+							if (null == typeChoosen) {
+							} else {
+								searchContainer.getIteratorURL().setParameter(
+										"type", typeChoosen);
+							}
+			%>
+		</liferay-ui:search-iterator>
 	</liferay-ui:search-container>
 </aui:form>
 <script>
