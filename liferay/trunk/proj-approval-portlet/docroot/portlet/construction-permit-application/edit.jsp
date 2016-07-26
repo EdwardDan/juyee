@@ -43,7 +43,7 @@
 <portlet:actionURL var="editApplicationURL"
 	name="saveConstructionPermit" />
 
-<!-- 编辑时后台来的对象 -->
+<!-- 编辑时后台来的对象 ，这个要不要都行-->
 <aui:model-context bean="${constructionPermit}"
 	model="<%=ConstructionPermit.class %>" />
 
