@@ -8,7 +8,7 @@
             <td style="width: 5%;text-align: center;">序号</td>
             <td style="width: 8%;text-align: center;">单位工程编号</td>
             <td style="width: 10%;text-align: center;">单位工程名称</td>
-            <td style="width: 10%;text-align: center;">单位工程类型</td>
+            <%--<td style="width: 10%;text-align: center;">单位工程类型</td>--%>
             <td style="width: 40%;text-align: center;">工程指标</td>
         </tr>
         <c:if test="${not empty bean}">
@@ -17,7 +17,7 @@
                     <td style="text-align: center;">${item.num}</td>
                     <td style="text-align: center;">${item.unitProjCode}</td>
                     <td style="text-align: center;">${item.unitProjName}</td>
-                    <td style="text-align: center;">${item.unitProjType.name}</td>
+                    <%--<td style="text-align: center;">${item.unitProjType.name}</td>--%>
                     <td style="text-align: left;">${item.projectIndex}</td>
                 </tr>
             </c:forEach>
