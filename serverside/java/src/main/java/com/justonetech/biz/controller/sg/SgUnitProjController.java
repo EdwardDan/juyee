@@ -117,7 +117,7 @@ public class SgUnitProjController extends BaseCRUDActionController<SgUnitProj> {
             String[] nums = request.getParameterValues("num");
             String[] unitProjCodes = request.getParameterValues("unitProjCode");
             String[] unitProjNames = request.getParameterValues("unitProjName");
-            String[] unitProjTypes = request.getParameterValues("unitProjType");
+//            String[] unitProjTypes = request.getParameterValues("unitProjType");
             String[] projectIndexs = request.getParameterValues("projectIndex");
             //保存数据
             List<SgUnitProj> saveList = new ArrayList<SgUnitProj>();
@@ -126,12 +126,12 @@ public class SgUnitProjController extends BaseCRUDActionController<SgUnitProj> {
                     SgUnitProj sgUnitProj = new SgUnitProj();
                     int no = Integer.parseInt(num) - 1;
                     sgUnitProj.setSgPermit(target);
-                    if (null != unitProjTypes) {
-                        if (!StringHelper.isEmpty(unitProjTypes[no])) {
-                            SysCodeDetail type = sysCodeManager.getCodeListById(Long.valueOf(unitProjTypes[no]));
-                            sgUnitProj.setUnitProjType(type);
-                        }
-                    }
+//                    if (null != unitProjTypes) {
+//                        if (!StringHelper.isEmpty(unitProjTypes[no])) {
+//                            SysCodeDetail type = sysCodeManager.getCodeListById(Long.valueOf(unitProjTypes[no]));
+//                            sgUnitProj.setUnitProjType(type);
+//                        }
+//                    }
                     sgUnitProj.setNum(Integer.valueOf(num));
                     if (!StringHelper.isEmpty(unitProjCodes[no])) {
                         sgUnitProj.setUnitProjCode(unitProjCodes[no]);

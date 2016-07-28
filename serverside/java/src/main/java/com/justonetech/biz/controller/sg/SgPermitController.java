@@ -128,8 +128,9 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
      * @param rows     .
      */
     @RequestMapping
-    public void gridDataCustom(HttpServletResponse response, String filters, String columns, int page, int rows, HttpSession session) {
+    public void gridDataCustom(HttpServletResponse response,HttpServletRequest request, String filters, String columns, int page, int rows, HttpSession session) {
         try {
+            String queryStatus = request.getParameter("queryStatus");
             Page pageModel = new Page(page, rows, true);
             SysUser sysUser = sysUserManager.getSysUser();
             String area = "";
@@ -138,6 +139,10 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
                 area = person.getAreaCode();
             }
             String hql = "from SgPermit where 1=1";
+            if (StringHelper.isEmpty(queryStatus)){
+                queryStatus= String.valueOf(SgPermitStatus.STATUS_SUBMIT.getCode());
+            }
+            hql += " and status=" + queryStatus ;
             if (null != sysUser.getRegPerson()) {
                 hql += " and createUser='" + sysUser.getLoginName() + "'";
             }

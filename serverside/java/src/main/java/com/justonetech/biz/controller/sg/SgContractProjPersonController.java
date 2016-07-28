@@ -119,7 +119,7 @@ public class SgContractProjPersonController extends BaseCRUDActionController<SgC
             String[] unitTypes = request.getParameterValues("unitType");
             String[] unitNames = request.getParameterValues("unitName");
             String[] unitMainPersons = request.getParameterValues("unitMainPerson");
-            String[] unitIdCards = request.getParameterValues("unitIdCard");
+//            String[] unitIdCards = request.getParameterValues("unitIdCard");
             String[] unitPhones = request.getParameterValues("unitPhone");
             //保存数据
             List<SgContractProjPerson> saveList = new ArrayList<SgContractProjPerson>();
@@ -144,9 +144,9 @@ public class SgContractProjPersonController extends BaseCRUDActionController<SgC
                     if (!StringHelper.isEmpty(unitMainPersons[no])) {
                         person.setUnitMainPerson(unitMainPersons[no]);
                     }
-                    if (!StringHelper.isEmpty(unitIdCards[no])) {
-                        person.setUnitIdCard(unitIdCards[no]);
-                    }
+//                    if (!StringHelper.isEmpty(unitIdCards[no])) {
+//                        person.setUnitIdCard(unitIdCards[no]);
+//                    }
                     if (!StringHelper.isEmpty(unitPhones[no])) {
                         person.setUnitPhone(unitPhones[no]);
                     }

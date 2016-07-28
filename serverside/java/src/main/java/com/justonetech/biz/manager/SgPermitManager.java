@@ -123,6 +123,7 @@ public class SgPermitManager {
         model.addAttribute("STATUS_SPC_BACK", SgPermitStatus.STATUS_SPC_BACK.getCode());//建管中心领导审核退回
         model.addAttribute("STATUS_WLD_PASS", SgPermitStatus.STATUS_WLD_PASS.getCode());//委领导审核通过
         model.addAttribute("STATUS_WLD_BACK", SgPermitStatus.STATUS_WLD_BACK.getCode());//委领导审核退回
+        model.addAttribute("options",SgPermitStatus.getOptions(String.valueOf(SgPermitStatus.STATUS_SUBMIT.getCode())));
 
         //退回材料枚举类
         SgPermitNotAcceptMat[] mats = SgPermitNotAcceptMat.values();
