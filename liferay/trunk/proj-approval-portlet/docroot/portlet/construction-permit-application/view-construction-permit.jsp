@@ -9,12 +9,12 @@
 <portlet:renderURL var="viewURL" />
 
 <!-- 项目信息的默认页面是 edit-projInfo-tab.jsp-->
-<c:set var="pagePath" value="${contextPath}/view-projInfo-tab.jsp" />
+<c:set var="pagePath" value="${contextPath}/view-other-basicInfo-tab.jsp" />
 	
 <!--从后台跳转来,比如编辑， 如果选择航道 页面为edit-projInfoExt-tab.jsp-->
 <c:if test="${dictionary!=null}">
 	<c:if test="${dictionary.name=='航道'}">
-		<c:set var="pagePath" value="${contextPath}/view-projInfoExt-tab.jsp" />
+		<c:set var="pagePath" value="${contextPath}/view-channel-basicInfo-tab.jsp" />
 	</c:if>
 	<c:set var="projTypeName" value='${dictionary.name}' />
 	<c:set var="projType" value='${dictionary.dictionaryId}' />
@@ -35,12 +35,12 @@
 		</liferay-ui:section>
 		<liferay-ui:section>
 			<liferay-util:include
-				page="${contextPath}/view-companyHeadInfo-tab.jsp"
+				page="${contextPath}/view-paticipant-unitsInfo-tab.jsp"
 				servletContext="<%=this.getServletContext()%>">
 			</liferay-util:include>
 		</liferay-ui:section>
 		<liferay-ui:section>
-			<liferay-util:include page="${contextPath}/view-companyList-tab.jsp"
+			<liferay-util:include page="${contextPath}/view-unit-engineering-tab.jsp"
 				servletContext="<%=this.getServletContext()%>">
 			</liferay-util:include>
 		</liferay-ui:section>
