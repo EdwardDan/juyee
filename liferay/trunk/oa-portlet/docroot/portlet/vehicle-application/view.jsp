@@ -2,7 +2,7 @@
 <%@ include file="/common/init.jsp"%>
 <%@ page import="java.text.SimpleDateFormat"%>
 
-<c:set var="contentPath"
+<c:set var="contextPath"
 	value="${request.contextPath}/portlet/vehicle-application" />
 <portlet:renderURL var="viewURL" />
 <portlet:actionURL var="deleteVehicleApplicationsURL" name="deleteVehicleApplications">
@@ -16,7 +16,7 @@
 		<aui:nav>
 			<portlet:renderURL var="addVehicleApplicationURL">
 				<portlet:param name="mvcPath"
-					value="${contentPath }/edit-vehicle-aplication.jsp" />
+					value="${contextPath }/edit-vehicle-aplication.jsp" />
 			</portlet:renderURL>
 			<aui:nav-item href="<%=addVehicleApplicationURL%>" iconCssClass="icon-plus"
 				label="添加" />
@@ -44,7 +44,7 @@
 				<liferay-ui:icon-menu>
 					<portlet:actionURL var="editVehicleApplicationURL" name="editVehicleApplication">
 						<portlet:param name="vehicleApplicationId" value="${vehicleApplication.vehicleApplicationId}" />
-						<portlet:param name="mvcPath" value="${contentPath }/edit-vehicle-aplication.jsp" />
+						<portlet:param name="mvcPath" value="${contextPath }/edit-vehicle-aplication.jsp" />
 					</portlet:actionURL>
 					<liferay-ui:icon image="edit" label="编辑" url="${editVehicleApplicationURL}" />
 					<liferay-ui:icon image="delete" label="删除" url="javascript:void(0);" onClick='<%=renderResponse.getNamespace() + "deleteVehicleApplications("+vehicleApplication.getVehicleApplicationId()+");"%>' />

@@ -1,13 +1,13 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
-<c:set var="contentPath"
+<c:set var="contextPath"
 	value="${request.contextPath}/portlet/office-supply-application" />
 <portlet:renderURL var="viewURL" />
 <aui:nav-bar>
 	<aui:nav>
 		<portlet:renderURL var="addOfficeSupplyApplicationURL">
 			<portlet:param name="mvcPath"
-				value="${contentPath }/edit-office-supply-application.jsp" />
+				value="${contextPath }/edit-office-supply-application.jsp" />
 		</portlet:renderURL>
 		<aui:nav-item href="<%=addOfficeSupplyApplicationURL%>"
 			iconCssClass="icon-plus" label="添加" />
@@ -36,7 +36,7 @@
 			<portlet:actionURL var="editOfficeSupplyApplicationURL"
 				name="editOfficeSupplyApplication">
 				<portlet:param name="mvcPath"
-					value="${contentPath }/edit-office-supply-application.jsp" />
+					value="${contextPath }/edit-office-supply-application.jsp" />
 				<portlet:param name="officeSupplyApplicationId"
 					value="${officeSupplyApplication.officeSupplyApplicationId}" />
 			</portlet:actionURL>
@@ -49,7 +49,7 @@
 			<portlet:actionURL var="viewOfficeSupplyApplicationURL"
 				name="viewOfficeSupplyApplication">
 				<portlet:param name="mvcPath"
-					value="${contentPath }/view-office-supply-application.jsp" />
+					value="${contextPath }/view-office-supply-application.jsp" />
 				<portlet:param name="officeSupplyApplicationId"
 					value="${officeSupplyApplication.officeSupplyApplicationId}" />
 			</portlet:actionURL>

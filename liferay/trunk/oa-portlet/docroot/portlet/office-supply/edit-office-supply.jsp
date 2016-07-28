@@ -1,10 +1,8 @@
 
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
-<c:set var="contentPath"
+<c:set var="contextPath"
 	value="${request.contextPath}/portlet/office-supply" />
-
-<portlet:renderURL var="viewURL" />
 <aui:model-context bean="${officeSupply}"
 	model="<%=OfficeSupply.class %>" />
 <portlet:renderURL var="viewURL" />

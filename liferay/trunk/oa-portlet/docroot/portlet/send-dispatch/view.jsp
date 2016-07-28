@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
-<c:set var="contentPath"
+<c:set var="contextPath"
 	value="${request.contextPath}/portlet/send-dispatch" />
 <portlet:renderURL var="viewURL" />
 <portlet:actionURL var="deleteDispatchesURL" name="deleteDispatches">
@@ -11,7 +11,7 @@
 		<aui:nav>
 			<portlet:renderURL var="addDispatchURL">
 				<portlet:param name="mvcPath"
-					value="${contentPath }/edit-dispatch.jsp" />
+					value="${contextPath }/edit-dispatch.jsp" />
 			</portlet:renderURL>
 			<aui:nav-item href="<%=addDispatchURL%>" iconCssClass="icon-plus"
 				label="添加" />
@@ -60,7 +60,7 @@
 				<liferay-ui:icon-menu>
 					<portlet:actionURL var="editDispatchURL" name="editDispatch">
 						<portlet:param name="dispatchId" value="${dispatch.dispatchId}" />
-						<portlet:param name="mvcPath" value="${contentPath}/edit-dispatch.jsp" />
+						<portlet:param name="mvcPath" value="${contextPath}/edit-dispatch.jsp" />
 					</portlet:actionURL>
 					<liferay-ui:icon image="edit" label="编辑" url="${editDispatchURL}" />
 					<liferay-ui:icon image="delete" label="删除" url="javascript:void(0);" onClick='<%=renderResponse.getNamespace() + "deleteDispatches("+dispatch.getDispatchId()+");"%>' />

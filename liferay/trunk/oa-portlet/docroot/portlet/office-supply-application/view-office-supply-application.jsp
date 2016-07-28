@@ -2,7 +2,7 @@
 <%@ include file="/common/init.jsp"%>
 <portlet:renderURL var="viewURL" />
 <liferay-ui:header title="查看办公用品申请" backURL="${viewURL}"></liferay-ui:header>
-<c:set var="contentPath"
+<c:set var="contextPath"
 	value="${request.contextPath}/portlet/office-supply-application" />
 <aui:row>
 	<aui:col span="6">

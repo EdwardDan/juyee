@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
-<c:set var="contentPath"
+<c:set var="contextPath"
 	value="${request.contextPath}/portlet/dept-weekly-work" />
 <portlet:renderURL var="viewURL"/>
 <liferay-ui:header title="查看一周科室工作" backURL="${viewURL}"/>

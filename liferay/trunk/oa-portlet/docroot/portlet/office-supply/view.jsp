@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
-<c:set var="contentPath"
+<c:set var="contextPath"
 	value="${request.contextPath}/portlet/office-supply" />
 <portlet:renderURL var="viewURL" />
 <portlet:actionURL var="deleteOfficeSuppliesURL" name="deleteOfficeSupplies">
@@ -11,7 +11,7 @@
 		<aui:nav>
 			<portlet:renderURL var="addOfficeSupplyURL">
 				<portlet:param name="mvcPath"
-					value="${contentPath }/edit-office-supply.jsp" />
+					value="${contextPath }/edit-office-supply.jsp" />
 			</portlet:renderURL>
 			<aui:nav-item href="<%=addOfficeSupplyURL%>" iconCssClass="icon-plus"
 				label="添加" />
@@ -39,7 +39,7 @@
 				<liferay-ui:icon-menu>
 					<portlet:actionURL var="editOfficeSupplyURL" name="editOfficeSupply">
 						<portlet:param name="officeSupplyId" value="${officeSupply.officeSupplyId}" />
-						<portlet:param name="mvcPath" value="${contentPath }/edit-office-supply.jsp" />
+						<portlet:param name="mvcPath" value="${contextPath }/edit-office-supply.jsp" />
 					</portlet:actionURL>
 					<liferay-ui:icon image="edit" label="编辑" url="${editOfficeSupplyURL}" />
 					<liferay-ui:icon image="delete" label="删除" url="javascript:void(0);" onClick='<%=renderResponse.getNamespace() + "deleteOfficeSupplies("+officeSupply.getOfficeSupplyId()+");"%>' />

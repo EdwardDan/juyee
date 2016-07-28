@@ -11,7 +11,7 @@
 	}
 %>
 
-<c:set var="contentPath"
+<c:set var="contextPath"
 	value="${request.contextPath}/portlet/send-Dispatch" />
 <portlet:renderURL var="viewURL" />
 <aui:model-context bean="${dispatch}" model="<%=Dispatch.class %>" />

@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
 <script src="${staticServerURL}/My97DatePicker/WdatePicker.js"></script>
-<c:set var="contentPath"
+<c:set var="contextPath"
 	value="${request.contextPath}/portlet/vehicle-application" />
 <c:set var="namespace" value="<%=renderResponse.getNamespace()%>" />
 <portlet:renderURL var="viewURL" />

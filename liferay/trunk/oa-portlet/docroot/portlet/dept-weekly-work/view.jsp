@@ -1,13 +1,13 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
-<c:set var="contentPath"
+<c:set var="contextPath"
 	value="${request.contextPath}/portlet/dept-weekly-work" />
 <portlet:renderURL var="viewURL" />
 <aui:nav-bar>
 	<aui:nav>
 		<portlet:renderURL var="addDeptWeeklyWorkURL">
 			<portlet:param name="mvcPath"
-				value="${contentPath }/edit-dept-weekly-work.jsp" />
+				value="${contextPath }/edit-dept-weekly-work.jsp" />
 		</portlet:renderURL>
 		<aui:nav-item href="<%=addDeptWeeklyWorkURL%>"
 			iconCssClass="icon-plus" label="添加" />
@@ -33,7 +33,7 @@
 				name="editDeptWeeklyWork">
 				<portlet:param name="deptWorkId" value="${deptWork.deptWorkId}" />
 				<portlet:param name="mvcPath"
-					value="${contentPath}/edit-dept-weekly-work.jsp" />
+					value="${contextPath}/edit-dept-weekly-work.jsp" />
 			</portlet:actionURL>
 			<portlet:actionURL var="deleteDeptWeeklyWorkURL"
 				name="deleteDeptWeeklyWork">
@@ -44,7 +44,7 @@
 				name="viewDeptWeeklyWork">
 				<portlet:param name="deptWorkId" value="${deptWork.deptWorkId}" />
 				<portlet:param name="mvcPath"
-					value="${contentPath}/view-dept-weekly-work.jsp" />
+					value="${contextPath}/view-dept-weekly-work.jsp" />
 			</portlet:actionURL>
 			<liferay-ui:icon-menu>
 				<c:if test="${deptWork.status eq '提交'}">
