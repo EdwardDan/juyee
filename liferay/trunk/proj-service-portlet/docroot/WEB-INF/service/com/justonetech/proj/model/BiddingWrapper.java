@@ -54,7 +54,6 @@ public class BiddingWrapper implements Bidding, ModelWrapper<Bidding> {
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("bidCode", getBidCode());
 		attributes.put("sortNo", getSortNo());
 		attributes.put("bidName", getBidName());
 		attributes.put("bidCategoryCode", getBidCategoryCode());
@@ -98,12 +97,6 @@ public class BiddingWrapper implements Bidding, ModelWrapper<Bidding> {
 
 		if (modifiedDate != null) {
 			setModifiedDate(modifiedDate);
-		}
-
-		String bidCode = (String)attributes.get("bidCode");
-
-		if (bidCode != null) {
-			setBidCode(bidCode);
 		}
 
 		Integer sortNo = (Integer)attributes.get("sortNo");
@@ -301,26 +294,6 @@ public class BiddingWrapper implements Bidding, ModelWrapper<Bidding> {
 	@Override
 	public void setModifiedDate(java.util.Date modifiedDate) {
 		_bidding.setModifiedDate(modifiedDate);
-	}
-
-	/**
-	* Returns the bid code of this bidding.
-	*
-	* @return the bid code of this bidding
-	*/
-	@Override
-	public java.lang.String getBidCode() {
-		return _bidding.getBidCode();
-	}
-
-	/**
-	* Sets the bid code of this bidding.
-	*
-	* @param bidCode the bid code of this bidding
-	*/
-	@Override
-	public void setBidCode(java.lang.String bidCode) {
-		_bidding.setBidCode(bidCode);
 	}
 
 	/**

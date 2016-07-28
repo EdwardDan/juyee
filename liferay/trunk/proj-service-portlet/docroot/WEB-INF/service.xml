@@ -121,7 +121,6 @@
 
 		<!-- Other fields -->
 
-		<column name="bidCode" type="String" /><!--标段编号 -->
 		<column name="sortNo" type="int" /><!--标段序号 -->
 		<column name="bidName" type="String" /><!--标段名称 -->
 		<column name="bidCategoryCode" type="String" /><!--标段类别编码(形象进度/办证推进) -->

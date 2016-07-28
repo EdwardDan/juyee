@@ -4,7 +4,6 @@ create table proj_Bidding (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	bidCode VARCHAR(75) null,
 	sortNo INTEGER,
 	bidName VARCHAR(75) null,
 	bidCategoryCode VARCHAR(75) null,

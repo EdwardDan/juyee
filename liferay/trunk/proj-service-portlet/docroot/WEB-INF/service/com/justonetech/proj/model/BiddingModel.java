@@ -147,21 +147,6 @@ public interface BiddingModel extends BaseModel<Bidding> {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Returns the bid code of this bidding.
-	 *
-	 * @return the bid code of this bidding
-	 */
-	@AutoEscape
-	public String getBidCode();
-
-	/**
-	 * Sets the bid code of this bidding.
-	 *
-	 * @param bidCode the bid code of this bidding
-	 */
-	public void setBidCode(String bidCode);
-
-	/**
 	 * Returns the sort no of this bidding.
 	 *
 	 * @return the sort no of this bidding

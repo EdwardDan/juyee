@@ -71,7 +71,6 @@ public class BiddingModelImpl extends BaseModelImpl<Bidding>
 			{ "userName", Types.VARCHAR },
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
-			{ "bidCode", Types.VARCHAR },
 			{ "sortNo", Types.INTEGER },
 			{ "bidName", Types.VARCHAR },
 			{ "bidCategoryCode", Types.VARCHAR },
@@ -82,7 +81,7 @@ public class BiddingModelImpl extends BaseModelImpl<Bidding>
 			{ "startDate", Types.TIMESTAMP },
 			{ "projectId", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table proj_Bidding (biddingId LONG not null primary key,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,bidCode VARCHAR(75) null,sortNo INTEGER,bidName VARCHAR(75) null,bidCategoryCode VARCHAR(75) null,buildMileage VARCHAR(75) null,involveCounty VARCHAR(75) null,projLinkman VARCHAR(75) null,linkTel VARCHAR(75) null,startDate DATE null,projectId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table proj_Bidding (biddingId LONG not null primary key,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,sortNo INTEGER,bidName VARCHAR(75) null,bidCategoryCode VARCHAR(75) null,buildMileage VARCHAR(75) null,involveCounty VARCHAR(75) null,projLinkman VARCHAR(75) null,linkTel VARCHAR(75) null,startDate DATE null,projectId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table proj_Bidding";
 	public static final String ORDER_BY_JPQL = " ORDER BY bidding.biddingId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY proj_Bidding.biddingId ASC";
@@ -119,7 +118,6 @@ public class BiddingModelImpl extends BaseModelImpl<Bidding>
 		model.setUserName(soapModel.getUserName());
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
-		model.setBidCode(soapModel.getBidCode());
 		model.setSortNo(soapModel.getSortNo());
 		model.setBidName(soapModel.getBidName());
 		model.setBidCategoryCode(soapModel.getBidCategoryCode());
@@ -198,7 +196,6 @@ public class BiddingModelImpl extends BaseModelImpl<Bidding>
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("bidCode", getBidCode());
 		attributes.put("sortNo", getSortNo());
 		attributes.put("bidName", getBidName());
 		attributes.put("bidCategoryCode", getBidCategoryCode());
@@ -242,12 +239,6 @@ public class BiddingModelImpl extends BaseModelImpl<Bidding>
 
 		if (modifiedDate != null) {
 			setModifiedDate(modifiedDate);
-		}
-
-		String bidCode = (String)attributes.get("bidCode");
-
-		if (bidCode != null) {
-			setBidCode(bidCode);
 		}
 
 		Integer sortNo = (Integer)attributes.get("sortNo");
@@ -375,22 +366,6 @@ public class BiddingModelImpl extends BaseModelImpl<Bidding>
 	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_modifiedDate = modifiedDate;
-	}
-
-	@JSON
-	@Override
-	public String getBidCode() {
-		if (_bidCode == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _bidCode;
-		}
-	}
-
-	@Override
-	public void setBidCode(String bidCode) {
-		_bidCode = bidCode;
 	}
 
 	@JSON
@@ -570,7 +545,6 @@ public class BiddingModelImpl extends BaseModelImpl<Bidding>
 		biddingImpl.setUserName(getUserName());
 		biddingImpl.setCreateDate(getCreateDate());
 		biddingImpl.setModifiedDate(getModifiedDate());
-		biddingImpl.setBidCode(getBidCode());
 		biddingImpl.setSortNo(getSortNo());
 		biddingImpl.setBidName(getBidName());
 		biddingImpl.setBidCategoryCode(getBidCategoryCode());
@@ -679,14 +653,6 @@ public class BiddingModelImpl extends BaseModelImpl<Bidding>
 			biddingCacheModel.modifiedDate = Long.MIN_VALUE;
 		}
 
-		biddingCacheModel.bidCode = getBidCode();
-
-		String bidCode = biddingCacheModel.bidCode;
-
-		if ((bidCode != null) && (bidCode.length() == 0)) {
-			biddingCacheModel.bidCode = null;
-		}
-
 		biddingCacheModel.sortNo = getSortNo();
 
 		biddingCacheModel.bidName = getBidName();
@@ -753,7 +719,7 @@ public class BiddingModelImpl extends BaseModelImpl<Bidding>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(31);
+		StringBundler sb = new StringBundler(29);
 
 		sb.append("{biddingId=");
 		sb.append(getBiddingId());
@@ -765,8 +731,6 @@ public class BiddingModelImpl extends BaseModelImpl<Bidding>
 		sb.append(getCreateDate());
 		sb.append(", modifiedDate=");
 		sb.append(getModifiedDate());
-		sb.append(", bidCode=");
-		sb.append(getBidCode());
 		sb.append(", sortNo=");
 		sb.append(getSortNo());
 		sb.append(", bidName=");
@@ -792,7 +756,7 @@ public class BiddingModelImpl extends BaseModelImpl<Bidding>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(49);
+		StringBundler sb = new StringBundler(46);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.proj.model.Bidding");
@@ -817,10 +781,6 @@ public class BiddingModelImpl extends BaseModelImpl<Bidding>
 		sb.append(
 			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
 		sb.append(getModifiedDate());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>bidCode</column-name><column-value><![CDATA[");
-		sb.append(getBidCode());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>sortNo</column-name><column-value><![CDATA[");
@@ -874,7 +834,6 @@ public class BiddingModelImpl extends BaseModelImpl<Bidding>
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private String _bidCode;
 	private int _sortNo;
 	private String _bidName;
 	private String _bidCategoryCode;

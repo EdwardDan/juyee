@@ -14,7 +14,6 @@
 		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="createDate" type="org.hibernate.type.TimestampType" />
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
-		<property name="bidCode" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="sortNo" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="bidName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="bidCategoryCode" type="com.liferay.portal.dao.orm.hibernate.StringType" />

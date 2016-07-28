@@ -79,7 +79,6 @@ public class BiddingClp extends BaseModelImpl<Bidding> implements Bidding {
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("bidCode", getBidCode());
 		attributes.put("sortNo", getSortNo());
 		attributes.put("bidName", getBidName());
 		attributes.put("bidCategoryCode", getBidCategoryCode());
@@ -123,12 +122,6 @@ public class BiddingClp extends BaseModelImpl<Bidding> implements Bidding {
 
 		if (modifiedDate != null) {
 			setModifiedDate(modifiedDate);
-		}
-
-		String bidCode = (String)attributes.get("bidCode");
-
-		if (bidCode != null) {
-			setBidCode(bidCode);
 		}
 
 		Integer sortNo = (Integer)attributes.get("sortNo");
@@ -304,29 +297,6 @@ public class BiddingClp extends BaseModelImpl<Bidding> implements Bidding {
 				Method method = clazz.getMethod("setModifiedDate", Date.class);
 
 				method.invoke(_biddingRemoteModel, modifiedDate);
-			}
-			catch (Exception e) {
-				throw new UnsupportedOperationException(e);
-			}
-		}
-	}
-
-	@Override
-	public String getBidCode() {
-		return _bidCode;
-	}
-
-	@Override
-	public void setBidCode(String bidCode) {
-		_bidCode = bidCode;
-
-		if (_biddingRemoteModel != null) {
-			try {
-				Class<?> clazz = _biddingRemoteModel.getClass();
-
-				Method method = clazz.getMethod("setBidCode", String.class);
-
-				method.invoke(_biddingRemoteModel, bidCode);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -616,7 +586,6 @@ public class BiddingClp extends BaseModelImpl<Bidding> implements Bidding {
 		clone.setUserName(getUserName());
 		clone.setCreateDate(getCreateDate());
 		clone.setModifiedDate(getModifiedDate());
-		clone.setBidCode(getBidCode());
 		clone.setSortNo(getSortNo());
 		clone.setBidName(getBidName());
 		clone.setBidCategoryCode(getBidCategoryCode());
@@ -684,7 +653,7 @@ public class BiddingClp extends BaseModelImpl<Bidding> implements Bidding {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(31);
+		StringBundler sb = new StringBundler(29);
 
 		sb.append("{biddingId=");
 		sb.append(getBiddingId());
@@ -696,8 +665,6 @@ public class BiddingClp extends BaseModelImpl<Bidding> implements Bidding {
 		sb.append(getCreateDate());
 		sb.append(", modifiedDate=");
 		sb.append(getModifiedDate());
-		sb.append(", bidCode=");
-		sb.append(getBidCode());
 		sb.append(", sortNo=");
 		sb.append(getSortNo());
 		sb.append(", bidName=");
@@ -723,7 +690,7 @@ public class BiddingClp extends BaseModelImpl<Bidding> implements Bidding {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(49);
+		StringBundler sb = new StringBundler(46);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.proj.model.Bidding");
@@ -748,10 +715,6 @@ public class BiddingClp extends BaseModelImpl<Bidding> implements Bidding {
 		sb.append(
 			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
 		sb.append(getModifiedDate());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>bidCode</column-name><column-value><![CDATA[");
-		sb.append(getBidCode());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>sortNo</column-name><column-value><![CDATA[");
@@ -801,7 +764,6 @@ public class BiddingClp extends BaseModelImpl<Bidding> implements Bidding {
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private String _bidCode;
 	private int _sortNo;
 	private String _bidName;
 	private String _bidCategoryCode;

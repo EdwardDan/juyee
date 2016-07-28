@@ -36,7 +36,6 @@ public class BiddingSoap implements Serializable {
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
-		soapModel.setBidCode(model.getBidCode());
 		soapModel.setSortNo(model.getSortNo());
 		soapModel.setBidName(model.getBidName());
 		soapModel.setBidCategoryCode(model.getBidCategoryCode());
@@ -138,14 +137,6 @@ public class BiddingSoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
-	public String getBidCode() {
-		return _bidCode;
-	}
-
-	public void setBidCode(String bidCode) {
-		_bidCode = bidCode;
-	}
-
 	public int getSortNo() {
 		return _sortNo;
 	}
@@ -223,7 +214,6 @@ public class BiddingSoap implements Serializable {
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private String _bidCode;
 	private int _sortNo;
 	private String _bidName;
 	private String _bidCategoryCode;

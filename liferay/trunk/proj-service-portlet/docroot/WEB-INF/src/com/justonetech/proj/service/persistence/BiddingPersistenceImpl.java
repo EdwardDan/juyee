@@ -835,7 +835,6 @@ public class BiddingPersistenceImpl extends BasePersistenceImpl<Bidding>
 		biddingImpl.setUserName(bidding.getUserName());
 		biddingImpl.setCreateDate(bidding.getCreateDate());
 		biddingImpl.setModifiedDate(bidding.getModifiedDate());
-		biddingImpl.setBidCode(bidding.getBidCode());
 		biddingImpl.setSortNo(bidding.getSortNo());
 		biddingImpl.setBidName(bidding.getBidName());
 		biddingImpl.setBidCategoryCode(bidding.getBidCategoryCode());

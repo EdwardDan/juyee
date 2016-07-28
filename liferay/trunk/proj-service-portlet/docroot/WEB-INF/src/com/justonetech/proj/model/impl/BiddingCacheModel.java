@@ -37,7 +37,7 @@ import java.util.Date;
 public class BiddingCacheModel implements CacheModel<Bidding>, Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(31);
+		StringBundler sb = new StringBundler(29);
 
 		sb.append("{biddingId=");
 		sb.append(biddingId);
@@ -49,8 +49,6 @@ public class BiddingCacheModel implements CacheModel<Bidding>, Externalizable {
 		sb.append(createDate);
 		sb.append(", modifiedDate=");
 		sb.append(modifiedDate);
-		sb.append(", bidCode=");
-		sb.append(bidCode);
 		sb.append(", sortNo=");
 		sb.append(sortNo);
 		sb.append(", bidName=");
@@ -100,13 +98,6 @@ public class BiddingCacheModel implements CacheModel<Bidding>, Externalizable {
 		}
 		else {
 			biddingImpl.setModifiedDate(new Date(modifiedDate));
-		}
-
-		if (bidCode == null) {
-			biddingImpl.setBidCode(StringPool.BLANK);
-		}
-		else {
-			biddingImpl.setBidCode(bidCode);
 		}
 
 		biddingImpl.setSortNo(sortNo);
@@ -174,7 +165,6 @@ public class BiddingCacheModel implements CacheModel<Bidding>, Externalizable {
 		userName = objectInput.readUTF();
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
-		bidCode = objectInput.readUTF();
 		sortNo = objectInput.readInt();
 		bidName = objectInput.readUTF();
 		bidCategoryCode = objectInput.readUTF();
@@ -201,14 +191,6 @@ public class BiddingCacheModel implements CacheModel<Bidding>, Externalizable {
 
 		objectOutput.writeLong(createDate);
 		objectOutput.writeLong(modifiedDate);
-
-		if (bidCode == null) {
-			objectOutput.writeUTF(StringPool.BLANK);
-		}
-		else {
-			objectOutput.writeUTF(bidCode);
-		}
-
 		objectOutput.writeInt(sortNo);
 
 		if (bidName == null) {
@@ -262,7 +244,6 @@ public class BiddingCacheModel implements CacheModel<Bidding>, Externalizable {
 	public String userName;
 	public long createDate;
 	public long modifiedDate;
-	public String bidCode;
 	public int sortNo;
 	public String bidName;
 	public String bidCategoryCode;
