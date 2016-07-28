@@ -88,6 +88,22 @@ public class BiddingPortlet extends MVCPortlet {
 				}
 			}
 		}
+		Dictionary projectStatusDic = null;
+		Dictionary industryCategoryDic = null;
+		List<Dictionary> projectStatuses = null;
+		List<Dictionary> industryCategories = null;
+		try {
+			projectStatusDic = DictionaryLocalServiceUtil.findByCode("projectStatus");
+			projectStatuses = projectStatusDic != null ? DictionaryLocalServiceUtil.findByParentId(
+					projectStatusDic.getDictionaryId(), -1, -1) : null;
+			industryCategoryDic = DictionaryLocalServiceUtil.findByCode("industryCategory");
+			industryCategories = industryCategoryDic != null ? DictionaryLocalServiceUtil.findByParentId(
+					industryCategoryDic.getDictionaryId(), -1, -1) : null;
+		} catch (SystemException e) {
+			e.printStackTrace();
+		}
+		renderRequest.setAttribute("projectStatuses", projectStatuses);
+		renderRequest.setAttribute("industryCategories", industryCategories);
 		renderRequest.setAttribute("manageAttrId", manageAttrId);
 		renderRequest.setAttribute("biddingCount", biddingCount);
 		renderRequest.setAttribute("projects", projects);
@@ -110,7 +126,6 @@ public class BiddingPortlet extends MVCPortlet {
 			biddings = BiddingLocalServiceUtil.findByProjectId(projectId);
 			biddingsCount = BiddingLocalServiceUtil.getBiddingsCount();
 		} catch (SystemException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		Long biddingId = (Long) request.getAttribute("biddingId");

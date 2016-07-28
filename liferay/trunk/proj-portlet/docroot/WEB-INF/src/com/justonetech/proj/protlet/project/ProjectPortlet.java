@@ -58,8 +58,24 @@ public class ProjectPortlet extends MVCPortlet {
 		} catch (SystemException e) {
 			log.error(e.getMessage());
 		}
+		Dictionary projectStatusDic = null;
+		Dictionary industryCategoryDic = null;
+		List<Dictionary> projectStatuses = null;
+		List<Dictionary> industryCategories = null;
+		try {
+			projectStatusDic = DictionaryLocalServiceUtil.findByCode("projectStatus");
+			projectStatuses = projectStatusDic != null ? DictionaryLocalServiceUtil.findByParentId(
+					projectStatusDic.getDictionaryId(), -1, -1) : null;
+			industryCategoryDic = DictionaryLocalServiceUtil.findByCode("industryCategory");
+			industryCategories = industryCategoryDic != null ? DictionaryLocalServiceUtil.findByParentId(
+					industryCategoryDic.getDictionaryId(), -1, -1) : null;
+		} catch (SystemException e) {
+			e.printStackTrace();
+		}
 		renderRequest.setAttribute("projects", projects);
 		renderRequest.setAttribute("projectCount", projectsCount);
+		renderRequest.setAttribute("projectStatuses", projectStatuses);
+		renderRequest.setAttribute("industryCategories", industryCategories);
 		super.doView(renderRequest, renderResponse);
 	}
 

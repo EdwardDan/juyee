@@ -133,7 +133,7 @@
 					<aui:col span="6" cssClass="text-left">
 						<aui:select label="所属区县" name="belongCounty"
 							showEmptyOption="true">
-							<aui:option value="0">上海市</aui:option>
+							<aui:option value="0" selected="${project.belongCounty==0}">上海市</aui:option>
 							<c:forEach items="${countys}" var="belongCounty">
 								<aui:option value="${belongCounty.dictionaryId}"
 									selected="${belongCounty.dictionaryId eq project.belongCounty}">${project.belongCounty }</aui:option>
