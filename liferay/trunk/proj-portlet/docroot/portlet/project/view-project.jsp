@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@include file="/common/init.jsp"%>
-
 <c:set var="contentPath" value="${request.contextPath}/portlet/project" />
 <portlet:renderURL var="viewURL" />
 <portlet:actionURL var="saveProject" name="saveProject">
@@ -9,43 +8,42 @@
 
 <%
 	long groupId = PortalUtil.getScopeGroupId(request);
-	Dictionary projectPropertyDic = DictionaryLocalServiceUtil.findByGroupIdAndCode(groupId, "projectProperty");
-	Dictionary involveCountryDic = DictionaryLocalServiceUtil.findByGroupIdAndCode(groupId, "involveCountry");
-	Dictionary industryCategoryDic = DictionaryLocalServiceUtil.findByGroupIdAndCode(groupId,
-			"industryCategory");
-	Dictionary projectStatusDic = DictionaryLocalServiceUtil.findByGroupIdAndCode(groupId, "projectStatus");
-	Dictionary manageTypeDic = DictionaryLocalServiceUtil.findByGroupIdAndCode(groupId, "manageType");
-	Dictionary projectSourceDic = DictionaryLocalServiceUtil.findByGroupIdAndCode(groupId, "projectSource");
-	Dictionary projectPropertiesDic = DictionaryLocalServiceUtil.findByGroupIdAndCode(groupId,
-			"projectProperty");
-	Dictionary roadLevelDic = DictionaryLocalServiceUtil.findByGroupIdAndCode(groupId, "roadLevel");
-	Dictionary roadTechLevelDic = DictionaryLocalServiceUtil.findByGroupIdAndCode(groupId, "roadTechLevel");
-	Dictionary companyTypeDic = DictionaryLocalServiceUtil.findByGroupIdAndCode(groupId, "companyType");
+	Dictionary projectPropertyDic = DictionaryLocalServiceUtil.findByCode("projAttr");
+	Dictionary involveCountyDic = DictionaryLocalServiceUtil.findByCode("areaName");
+	Dictionary industryCategoryDic = DictionaryLocalServiceUtil.findByCode("industryCategory");
+	Dictionary projectStatusDic = DictionaryLocalServiceUtil.findByCode("projectStatus");
+	Dictionary manageAttributeDic = DictionaryLocalServiceUtil.findByCode( "manageAttribute");
+	
+	Dictionary projectSourceDic = DictionaryLocalServiceUtil.findByCode( "projectSource");
+	Dictionary projectPropertiesDic = DictionaryLocalServiceUtil.findByCode("projAttr");
+	Dictionary roadLevelDic = DictionaryLocalServiceUtil.findByCode( "roadLevel");
+	Dictionary roadTechLevelDic = DictionaryLocalServiceUtil.findByCode( "roadTechLevel");
+	Dictionary companyTypeDic = DictionaryLocalServiceUtil.findByCode( "companyType");
 	List<Dictionary> projectPropertys = projectPropertyDic != null ? DictionaryLocalServiceUtil
-			.findByGroupIdAndParentId(groupId, projectPropertyDic.getDictionaryId(), -1, -1) : null;
-	List<Dictionary> involveCounties = involveCountryDic != null ? DictionaryLocalServiceUtil
-			.findByGroupIdAndParentId(groupId, involveCountryDic.getDictionaryId(), -1, -1) : null;
+			.findByParentId( projectPropertyDic.getDictionaryId(), -1, -1) : null;
+	List<Dictionary> involveCounties = involveCountyDic != null ? DictionaryLocalServiceUtil
+			.findByParentId( involveCountyDic.getDictionaryId(), -1, -1) : null;
 	List<Dictionary> industryCategories = industryCategoryDic != null ? DictionaryLocalServiceUtil
-			.findByGroupIdAndParentId(groupId, industryCategoryDic.getDictionaryId(), -1, -1) : null;
+			.findByParentId( industryCategoryDic.getDictionaryId(), -1, -1) : null;
 	List<Dictionary> projectStatuses = projectStatusDic != null ? DictionaryLocalServiceUtil
-			.findByGroupIdAndParentId(groupId, projectStatusDic.getDictionaryId(), -1, -1) : null;
-	List<Dictionary> manageTypes = manageTypeDic != null ? DictionaryLocalServiceUtil.findByGroupIdAndParentId(
-			groupId, manageTypeDic.getDictionaryId(), -1, -1) : null;
+			.findByParentId( projectStatusDic.getDictionaryId(), -1, -1) : null;
+	List<Dictionary> manageAttributes = manageAttributeDic != null ? DictionaryLocalServiceUtil.findByParentId(
+			manageAttributeDic.getDictionaryId(), -1, -1) : null;
 	List<Dictionary> projectSources = projectSourceDic != null ? DictionaryLocalServiceUtil
-			.findByGroupIdAndParentId(groupId, projectSourceDic.getDictionaryId(), -1, -1) : null;
+			.findByParentId( projectSourceDic.getDictionaryId(), -1, -1) : null;
 	List<Dictionary> projectProperties = projectPropertiesDic != null ? DictionaryLocalServiceUtil
-			.findByGroupIdAndParentId(groupId, projectPropertiesDic.getDictionaryId(), -1, -1) : null;
-	List<Dictionary> roadLevels = roadLevelDic != null ? DictionaryLocalServiceUtil.findByGroupIdAndParentId(
-			groupId, roadLevelDic.getDictionaryId(), -1, -1) : null;
+			.findByParentId( projectPropertiesDic.getDictionaryId(), -1, -1) : null;
+	List<Dictionary> roadLevels = roadLevelDic != null ? DictionaryLocalServiceUtil.findByParentId(
+			 roadLevelDic.getDictionaryId(), -1, -1) : null;
 	List<Dictionary> roadTechLevels = roadTechLevelDic != null ? DictionaryLocalServiceUtil
-			.findByGroupIdAndParentId(groupId, roadTechLevelDic.getDictionaryId(), -1, -1) : null;
+			.findByParentId( roadTechLevelDic.getDictionaryId(), -1, -1) : null;
 	List<Dictionary> companyTypes = companyTypeDic != null ? DictionaryLocalServiceUtil
-			.findByGroupIdAndParentId(groupId, companyTypeDic.getDictionaryId(), -1, -1) : null;
+			.findByParentId( companyTypeDic.getDictionaryId(), -1, -1) : null;
 	request.setAttribute("projectPropertys", projectPropertys);
 	request.setAttribute("involveCounties", involveCounties);
 	request.setAttribute("industryCategories", industryCategories);
 	request.setAttribute("projectStatuses", projectStatuses);
-	request.setAttribute("manageTypes", manageTypes);
+	request.setAttribute("manageAttributes", manageAttributes);
 	request.setAttribute("projectSources", projectSources);
 	request.setAttribute("projectProperties", projectProperties);
 	request.setAttribute("roadLevels", roadLevels);
@@ -132,8 +130,8 @@
 						<aui:field-wrapper name="涉及区县">
 							<c:forEach items="${involveCounties}" var="involveCounty" varStatus="sortNo">
 								<aui:input name="involveCounty" type="checkbox" disabled="true"
-									value="${involveCounty.dictionaryId}"
-									checked="${fn:contains(project.involveCounty ,involveCounty.dictionaryId) }"
+									value="${involveCounty.dictionaryId}" 
+									checked="${fn:contains(project.involveCounty ,involveCounty.dictionaryId)}"
 									label="${involveCounty. name}" inlineField="true" />
 								<c:if test="${sortNo.index>0 && (sortNo.index+1) % 9 == 0}">
 									<br>
@@ -145,7 +143,7 @@
 				<aui:row>
 					<aui:col span="6" cssClass="text-left">
 						<aui:select label="管理属性" name="manageAttribute" inlineField="true" disabled="true">
-							<c:forEach items="${manageTypes}" var="manageAttribute">
+							<c:forEach items="${manageAttributes}" var="manageAttribute">
 								<aui:option value="${manageAttribute. dictionaryId }"
 									selected="${manageAttribute. dictionaryId eq project.manageAttribute }">${manageAttribute.name }</aui:option>
 							</c:forEach>

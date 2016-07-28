@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ include file="/common/init.jsp"%>
-
 <c:set var="contentPath" value="${request.contextPath}/portlet/bidding" />
 <portlet:renderURL var="viewURL" />
 <portlet:renderURL var="add">
@@ -11,9 +10,6 @@
 </portlet:actionURL>
 <aui:form action="${viewURL }" name="fm">
 	<aui:nav-bar>
-		<aui:nav>
-			<aui:nav-item href="<%=add%>" iconCssClass="icon-plus" label="添加" />
-		</aui:nav>
 		<aui:nav-bar-search cssClass="pull-right">
 			<div class="form-search">
 				<liferay-ui:input-search />
@@ -32,24 +28,22 @@
 			keyProperty="projectId">
 			<liferay-ui:search-container-column-text name="项目名称"
 				property="projName" />
-			<liferay-ui:search-container-column-text name="所属区县"
-				property="belongCounty" />
+			<liferay-ui:search-container-column-text name="项目性质"
+				value="${proj.manageAttribute==24530?'市属':'区属'}" />
 			<liferay-ui:search-container-column-text name="项目状态"
-				property="projStatus" />
+				value="<%=DictionaryLocalServiceUtil.getDictionary(proj.getProjStatus()).getName()%>"/>
 			<liferay-ui:search-container-column-text name="业态类别"
-				property="industryCategory" />
+				value="<%=DictionaryLocalServiceUtil.getDictionary(proj.getIndustryCategory()).getName()%>" />
 			<liferay-ui:search-container-column-text name="工可批复总投资(亿元)"
-				property="gkpfTotle" />
+				property="feasibilityTotalInvestment" />
+			<liferay-ui:search-container-column-text name="标段数" value="${biddingCount[proj.projectId]}"/>
 			<liferay-ui:search-container-column-text name="action">
-
 				<portlet:renderURL var="viewBidding">
 					<portlet:param name="projectId" value="${proj.projectId}" />
 					<portlet:param name="mvcPath"
-						value="${contentPath }/viewBidding.jsp" />
+						value="${contentPath }/view-bidding.jsp" />
 				</portlet:renderURL>
-				<liferay-ui:icon-menu>
-					<liferay-ui:icon image="edit" url="${viewBidding}" />
-				</liferay-ui:icon-menu>
+				<aui:button value="维护标段" href="${viewBidding}"></aui:button>
 			</liferay-ui:search-container-column-text>
 		</liferay-ui:search-container-row>
 		<liferay-ui:search-iterator />

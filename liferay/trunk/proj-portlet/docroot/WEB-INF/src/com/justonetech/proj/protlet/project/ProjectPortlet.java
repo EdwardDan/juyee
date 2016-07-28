@@ -48,11 +48,10 @@ public class ProjectPortlet extends MVCPortlet {
 		List<Project> projects = null;
 		int projectsCount = 0;
 		try {
-			projects = ProjectLocalServiceUtil.getProjects(-1, -1);
+			projects = ProjectLocalServiceUtil.getProjects(start, end);
 			projectsCount = ProjectLocalServiceUtil.getProjectsCount();
 		} catch (SystemException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error(e.getMessage());
 		}
 		renderRequest.setAttribute("projects", projects);
 		renderRequest.setAttribute("projectCount", projectsCount);
@@ -71,7 +70,7 @@ public class ProjectPortlet extends MVCPortlet {
 			Project project = ProjectLocalServiceUtil.getProject(projectId);
 			request.setAttribute("project", project);
 			request.setAttribute("projectId", projectId);
-			List<Company> companies = CompanyLocalServiceUtil.getCompanies(-1, -1);
+			List<Company> companies = CompanyLocalServiceUtil.findByProjectId(projectId);
 			request.setAttribute("companies", companies);
 		}
 		request.setAttribute("sortNo", sortNo);
@@ -95,7 +94,7 @@ public class ProjectPortlet extends MVCPortlet {
 				involveCounties += "," + involveString;
 			}
 		}
-		long manageAttrId = ParamUtil.getLong(request, "manageAttr");
+		long manageAttrId = ParamUtil.getLong(request, "manageAttribute");
 		boolean isMajor = ParamUtil.getBoolean(request, "isMajor");
 		Double planRedLine = ParamUtil.getDouble(request, "planRedLine");
 		long projSourceId = ParamUtil.getLong(request, "projSource");
@@ -153,7 +152,6 @@ public class ProjectPortlet extends MVCPortlet {
 		project.setFirstFoundedTotalInvestment(firstFoundedTotalInvestment);
 		project.setFirstFoundedPreCost(firstFoundedPreCost);
 		project.setFirstFoundedJiananCost(firstFoundedJiananCost);
-
 		ProjectLocalServiceUtil.updateProject(project);
 
 		long[] companyIds = ParamUtil.getLongValues(request, "companyId");
@@ -192,16 +190,15 @@ public class ProjectPortlet extends MVCPortlet {
 			company.setLinkmanTel(linkmanTels[i]);
 			company.setLinkmanFax(linkmanFaxs[i]);
 			company.setLinkmanPhone(linkmanPhones[i]);
-			company.setProjectId(projectId);
+			company.setProjectId(project.getProjectId());
 			CompanyLocalServiceUtil.updateCompany(company);
 		}
-
 	}
 
 	public void viewProject(ActionRequest request, ActionResponse response) throws PortalException, SystemException {
 		long projectId = ParamUtil.getInteger(request, "projectId");
 		Project project = ProjectLocalServiceUtil.getProject(projectId);
-		List<Company> companies = CompanyLocalServiceUtil.getCompanies(-1, -1);
+		List<Company> companies = CompanyLocalServiceUtil.findByProjectId(projectId);
 		request.setAttribute("project", project);
 		request.setAttribute("projectId", projectId);
 		request.setAttribute("companies", companies);
@@ -218,9 +215,7 @@ public class ProjectPortlet extends MVCPortlet {
 					CompanyLocalServiceUtil.deleteCompany(company);
 				}
 			}
-
 			ProjectLocalServiceUtil.deleteProject(Long.parseLong(projectId));
 		}
 	}
-
 }

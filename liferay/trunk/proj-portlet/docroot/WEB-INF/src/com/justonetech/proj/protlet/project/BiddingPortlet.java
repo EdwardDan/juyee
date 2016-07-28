@@ -3,8 +3,11 @@ package com.justonetech.proj.protlet.project;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -38,9 +41,6 @@ public class BiddingPortlet extends MVCPortlet {
 	private static Log log = LogFactoryUtil.getLog(BiddingPortlet.class);
 	private static String timeFormatPattern = PropsUtil.get("default.date.format.pattern");
 
-	/**
-	 * 项目列表
-	 */
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
 		String keywords = ParamUtil.getString(renderRequest, "keywords");
@@ -55,32 +55,26 @@ public class BiddingPortlet extends MVCPortlet {
 			projects = ProjectLocalServiceUtil.getProjects(-1, -1);
 			projectsCount = ProjectLocalServiceUtil.getProjectsCount();
 		} catch (SystemException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		// try {
-		// projects = ProjectLocalServiceUtil.
-		// } catch (SystemException e) {
-		// log.error("findByUserNam(" + userName + "," + start + "," + end +
-		// ")错误：" + e.getMessage());
-		// }
-		// int projectCount = 0;
-		// try {
-		// projectCount = ProjectLocalServiceUtil.getProjectsCount()(userName);
-		// } catch (SystemException e) {
-		// log.error("countByUserNam(" + userName + ")错误：" + e.getMessage());
-		// }
+		Map biddingCount = new HashMap();
+		for (Project project : projects) {
+			try {
+				List<Bidding> biddings = BiddingLocalServiceUtil.findByProjectId(project.getProjectId());
+				biddingCount.put(project.getProjectId(),biddings.size());
+			} catch (SystemException e) {
+				e.printStackTrace();
+			}
+		}
+		renderRequest.setAttribute("biddingCount", biddingCount);
 		renderRequest.setAttribute("projects", projects);
 		renderRequest.setAttribute("projectCount", projectsCount);
-		// renderRequest.setAttribute("projectCount", projectCount);
 		super.doView(renderRequest, renderResponse);
 	}
-	
-	/**
-	 * 标段列表
-	 */
-	public void doViewBiddings(ActionRequest actionRequest, ActionResponse actionResponse) throws IOException, PortletException {
+
+	public void doViewBiddings(ActionRequest actionRequest, ActionResponse actionResponse) throws IOException,
+			PortletException {
 		String keywords = ParamUtil.getString(actionRequest, "keywords");
 		long projectId = ParamUtil.getLong(actionRequest, "projectId");
 		int delta = GetterUtil.getInteger(PropsUtil.get(PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA));
@@ -103,27 +97,17 @@ public class BiddingPortlet extends MVCPortlet {
 		actionRequest.setAttribute("biddingsCount", biddingsCount);
 	}
 
-	/**
-	 * 项目保存
-	 * 
-	 * @param request
-	 * @param response
-	 * @throws PortalException
-	 * @throws SystemException
-	 * @throws ParseException
-	 */
 	public void saveBidding(ActionRequest request, ActionResponse response) throws PortalException, SystemException,
 			ParseException {
 		long projectId = ParamUtil.getLong(request, "projectId");
 		long biddingId = ParamUtil.getLong(request, "biddingId");
-		Integer sortNo = ParamUtil.getInteger(request, "sortNo");
+		int sortNo = ParamUtil.getInteger(request, "sortNo");
 		String bidName = ParamUtil.getString(request, "bidName");
 		Date startDate = ParamUtil.getDate(request, "startDate", new SimpleDateFormat(timeFormatPattern));
 		String[] involveCountys = ParamUtil.getParameterValues(request, "involveCountyCheckbox");
 		String buildMileage = ParamUtil.getString(request, "buildMileage");
 		String projLinkman = ParamUtil.getString(request, "projLinkman");
 		String linkTel = ParamUtil.getString(request, "linkTel");
-
 		Bidding bidding = null;
 		if (Validator.isNotNull(biddingId)) {
 			bidding = BiddingLocalServiceUtil.getBidding(biddingId);
@@ -144,8 +128,7 @@ public class BiddingPortlet extends MVCPortlet {
 		bidding.setBuildMileage(buildMileage);
 		bidding.setProjLinkman(projLinkman);
 		bidding.setLinkTel(linkTel);
-		
-		
+
 		BiddingLocalServiceUtil.updateBidding(bidding);
 		long[] companyIds = ParamUtil.getLongValues(request, "companyId");
 		long[] typeIds = ParamUtil.getLongValues(request, "typeId");
@@ -164,24 +147,15 @@ public class BiddingPortlet extends MVCPortlet {
 			company.setType(typeIds[i]);
 			company.setLinkman(linkmans[i]);
 			company.setLinkmanTel(linkmanTels[i]);
-			company.setBiddingId(biddingId);
+			company.setBiddingId(bidding.getBiddingId());
 			CompanyLocalServiceUtil.updateCompany(company);
 		}
-
 	}
 
-	/**
-	 * 项目删除
-	 * 
-	 * @param request
-	 * @param response
-	 * @throws SystemException
-	 * @throws PortalException
-	 */
-	public void deleteBiddings(ActionRequest actionRequest, ActionResponse actionResponse) throws IOException,
-			PortletException, NumberFormatException, PortalException, SystemException {
-		String biddingIds = ParamUtil.getString(actionRequest, "biddingIds");
-		long projectId = ParamUtil.getLong(actionRequest, "projectId");
+	public void deleteBiddings(ActionRequest request, ActionResponse response) throws IOException, PortletException,
+			NumberFormatException, PortalException, SystemException {
+		String biddingIds = ParamUtil.getString(request, "biddingIds");
+		long projectId = ParamUtil.getLong(request, "projectId");
 		String[] biddingsId = biddingIds.split(",");
 		for (String biddingId : biddingsId) {
 			List<Company> companies = CompanyLocalServiceUtil.findByBiddingId(Long.parseLong(biddingId));
@@ -190,11 +164,43 @@ public class BiddingPortlet extends MVCPortlet {
 					CompanyLocalServiceUtil.deleteCompany(company);
 				}
 			}
-
 			BiddingLocalServiceUtil.deleteBidding(Long.parseLong(biddingId));
 		}
-		actionRequest.setAttribute("projectId", projectId);
-		actionResponse.setRenderParameter("mvcPath", "/portlet/bidding/viewBidding.jsp");
+		request.setAttribute("projectId", projectId);
+		response.setRenderParameter("mvcPath", "/portlet/bidding/view-bidding.jsp");
 	}
 
+	public void editBidding(ActionRequest request, ActionResponse response) throws PortalException, SystemException {
+		long biddingId = ParamUtil.getLong(request, "biddingId");
+		long projectId = 0;
+		List<Company> companies = null;
+		int sortNo = 0;
+		if (Validator.isNotNull(biddingId)) {
+			Bidding bidding = BiddingLocalServiceUtil.getBidding(biddingId);
+			projectId = bidding.getProjectId();
+			sortNo = bidding.getSortNo();
+			companies = CompanyLocalServiceUtil.findByBiddingId(biddingId);
+			request.setAttribute("bidding", bidding);
+			request.setAttribute("biddingId", biddingId);
+			request.setAttribute("companies", companies);
+		} else {
+			projectId = ParamUtil.getLong(request, "projectId");
+			List<Bidding> biddings = BiddingLocalServiceUtil.findByProjectId(projectId);
+			sortNo = (biddings.isEmpty() ? 0 : biddings.get(biddings.size() - 1).getSortNo() + 1);
+		}
+		request.setAttribute("projectId", projectId);
+		request.setAttribute("sortNo", sortNo);
+	}
+
+	public void viewBiddingDetail(ActionRequest request, ActionResponse response) throws PortalException,
+			SystemException {
+		long biddingId = ParamUtil.getLong(request, "biddingId");
+		Bidding bidding = BiddingLocalServiceUtil.getBidding(biddingId);
+		long projectId = bidding.getProjectId();
+		List<Company> companies = CompanyLocalServiceUtil.findByBiddingId(biddingId);
+		request.setAttribute("biddingId", biddingId);
+		request.setAttribute("bidding", bidding);
+		request.setAttribute("projectId", projectId);
+		request.setAttribute("companies", companies);
+	}
 }

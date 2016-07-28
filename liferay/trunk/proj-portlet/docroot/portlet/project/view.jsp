@@ -12,7 +12,8 @@
 <aui:form action="${viewURL }" name="fm">
 	<aui:nav-bar>
 		<aui:nav>
-			<aui:nav-item href="<%=addProjectURL%>" iconCssClass="icon-plus" label="添加" />
+			<aui:nav-item href="<%=addProjectURL%>" iconCssClass="icon-plus"
+				label="添加" />
 		</aui:nav>
 		<aui:nav-bar-search cssClass="pull-right">
 			<div class="form-search">
@@ -32,12 +33,12 @@
 			keyProperty="projectId">
 			<liferay-ui:search-container-column-text name="项目名称"
 				property="projName" />
-			<liferay-ui:search-container-column-text name="所属区县"
+			<liferay-ui:search-container-column-text name="所属区县" 
 				value="${proj.belongCounty==0?'上海市':''}" />
 			<liferay-ui:search-container-column-text name="项目状态"
 				value="<%=DictionaryLocalServiceUtil.getDictionary(proj.getProjStatus()).getName()%>" />
 			<liferay-ui:search-container-column-text name="业态类别"
-				value="<%=DictionaryLocalServiceUtil.getDictionary(proj.getIndustryCategory()).getName() %>" />
+				value="<%=DictionaryLocalServiceUtil.getDictionary(proj.getIndustryCategory()).getName()%>" />
 			<liferay-ui:search-container-column-text name="工可批复总投资(亿元)"
 				property="feasibilityTotalInvestment" />
 			<liferay-ui:search-container-column-text name="action">
@@ -57,7 +58,9 @@
 				<liferay-ui:icon-menu>
 					<liferay-ui:icon image="view" url="${viewProjectURL}" />
 					<liferay-ui:icon image="edit" url="${editProjectURL}" />
-					<liferay-ui:icon image="delete" label="删除" url="javascript:void(0);" onClick='<%=renderResponse.getNamespace()+"deleteProjects("+proj.getProjectId()+");" %>'/>
+					<liferay-ui:icon image="delete" label="删除"
+						url="javascript:void(0);"
+						onClick='<%=renderResponse.getNamespace()+"deleteProjects("+proj.getProjectId()+");"%>' />
 				</liferay-ui:icon-menu>
 			</liferay-ui:search-container-column-text>
 		</liferay-ui:search-container-row>
@@ -66,7 +69,6 @@
 </aui:form>
 <aui:script>
 	Liferay.Util.toggleSearchContainerButton('#<portlet:namespace />deleteProjectsBtn', '#<portlet:namespace /><%=searchContainerReference.getId("searchContainer")%>SearchContainer', document.<portlet:namespace />fm, '<portlet:namespace />allRowIds');
-	
 	Liferay.provide(
 			window,
 			'<portlet:namespace />deleteProjects',
@@ -82,6 +84,10 @@
 		);
 </aui:script>
 	
+
+
+
+
 
 
 
