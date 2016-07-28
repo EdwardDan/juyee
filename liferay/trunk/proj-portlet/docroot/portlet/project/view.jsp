@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ include file="/common/init.jsp"%>
-
 <c:set var="contextPath" value="${request.contextPath}/portlet/project" />
 <portlet:renderURL var="viewURL" />
 <portlet:actionURL var="addProjectURL" name="editProject">
@@ -31,10 +30,16 @@
 				property="projName" />
 			<liferay-ui:search-container-column-text name="所属区县"
 				value="${proj.belongCounty==0?'上海市':''}" />
-			<liferay-ui:search-container-column-text name="项目状态"
-				value="<%=DictionaryLocalServiceUtil.getDictionary(proj.getProjStatus()).getName()%>" />
-			<liferay-ui:search-container-column-text name="业态类别"
-				value="<%=DictionaryLocalServiceUtil.getDictionary(proj.getIndustryCategory()).getName()%>" />
+			<liferay-ui:search-container-column-text name="项目状态">
+				<c:if test="${!empty projectStatuses}">
+					<%=DictionaryLocalServiceUtil.getDictionary(proj.getProjStatus()).getName()%>
+				</c:if>
+			</liferay-ui:search-container-column-text>
+			<liferay-ui:search-container-column-text name="业态类别">
+			<c:if test="${!empty industryCategories}">
+				<%=DictionaryLocalServiceUtil.getDictionary(proj.getIndustryCategory()).getName()%>
+			</c:if>
+			</liferay-ui:search-container-column-text>
 			<liferay-ui:search-container-column-text name="工可批复总投资(亿元)"
 				property="feasibilityTotalInvestment" />
 			<liferay-ui:search-container-column-text name="action">

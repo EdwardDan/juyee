@@ -5,6 +5,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -18,6 +20,7 @@ import com.justonetech.proj.model.Project;
 import com.justonetech.proj.service.BiddingLocalServiceUtil;
 import com.justonetech.proj.service.CompanyLocalServiceUtil;
 import com.justonetech.proj.service.ProjectLocalServiceUtil;
+import com.justonetech.sys.model.Dictionary;
 import com.justonetech.sys.service.DictionaryLocalServiceUtil;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -75,6 +78,63 @@ public class ProjectPortlet extends MVCPortlet {
 			List<Company> companies = CompanyLocalServiceUtil.findByProjectId(projectId);
 			request.setAttribute("companies", companies);
 		}
+		Dictionary projAttrDic = DictionaryLocalServiceUtil.findByCode("projAttr");
+		Dictionary involveCountyDic = DictionaryLocalServiceUtil.findByCode("areaName");
+		Dictionary industryCategoryDic = DictionaryLocalServiceUtil.findByCode("industryCategory");
+		Dictionary projectStatusDic = DictionaryLocalServiceUtil.findByCode("projectStatus");
+		Dictionary manageAttributeDic = DictionaryLocalServiceUtil.findByCode("manageAttribute");
+		Dictionary projectSourceDic = DictionaryLocalServiceUtil.findByCode("projectSource");
+		Dictionary roadLevelDic = DictionaryLocalServiceUtil.findByCode("roadLevel");
+		Dictionary roadTechLevelDic = DictionaryLocalServiceUtil.findByCode("roadTechLevel");
+		Dictionary companyTypeDic = DictionaryLocalServiceUtil.findByCode("companyType");
+		List<Dictionary> projAttrs = projAttrDic != null ? DictionaryLocalServiceUtil.findByParentId(
+				projAttrDic.getDictionaryId(), -1, -1) : null;
+		List<Dictionary> involveCounties = involveCountyDic != null ? DictionaryLocalServiceUtil.findByParentId(
+				involveCountyDic.getDictionaryId(), -1, -1) : null;
+		List<Dictionary> industryCategories = industryCategoryDic != null ? DictionaryLocalServiceUtil.findByParentId(
+				industryCategoryDic.getDictionaryId(), -1, -1) : null;
+		List<Dictionary> projectStatuses = projectStatusDic != null ? DictionaryLocalServiceUtil.findByParentId(
+				projectStatusDic.getDictionaryId(), -1, -1) : null;
+		List<Dictionary> manageAttributes = manageAttributeDic != null ? DictionaryLocalServiceUtil.findByParentId(
+				manageAttributeDic.getDictionaryId(), -1, -1) : null;
+		List<Dictionary> projectSources = projectSourceDic != null ? DictionaryLocalServiceUtil.findByParentId(
+				projectSourceDic.getDictionaryId(), -1, -1) : null;
+		List<Dictionary> roadLevels = roadLevelDic != null ? DictionaryLocalServiceUtil.findByParentId(
+				roadLevelDic.getDictionaryId(), -1, -1) : null;
+		List<Dictionary> roadTechLevels = roadTechLevelDic != null ? DictionaryLocalServiceUtil.findByParentId(
+				roadTechLevelDic.getDictionaryId(), -1, -1) : null;
+		List<Dictionary> companyTypes = companyTypeDic != null ? DictionaryLocalServiceUtil.findByParentId(
+				companyTypeDic.getDictionaryId(), -1, -1) : null;
+
+		request.setAttribute("projAttrs", projAttrs);
+		request.setAttribute("involveCounties", involveCounties);
+		request.setAttribute("industryCategories", industryCategories);
+		request.setAttribute("projectStatuses", projectStatuses);
+		request.setAttribute("manageAttributes", manageAttributes);
+		request.setAttribute("projectSources", projectSources);
+		request.setAttribute("projAttrs", projAttrs);
+		request.setAttribute("roadLevels", roadLevels);
+		request.setAttribute("roadTechLevels", roadTechLevels);
+		request.setAttribute("companyTypes", companyTypes);
+		Map<Dictionary, Company> companyMap = new TreeMap<Dictionary, Company>();
+		List<Company> companies = (List<Company>) request.getAttribute("companies");
+		String companyName = "";
+		if (Validator.isNotNull(companyTypes)) {
+			for (Dictionary dictionary : companyTypes) {
+				companyMap.put(dictionary, null);
+				if (companies != null) {
+					for (Company com : companies) {
+						Dictionary dic = DictionaryLocalServiceUtil.getDictionary(com.getType());
+						if (dictionary.equals(dic)) {
+							companyMap.put(dictionary, com);
+						}
+					}
+				}
+				companyName += dictionary.getName() + ",";
+			}
+		}
+		request.setAttribute("companyMap", companyMap);
+		request.setAttribute("companyName", companyName);
 		request.setAttribute("sortNo", sortNo);
 	}
 

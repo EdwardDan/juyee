@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -21,6 +22,8 @@ import com.justonetech.proj.model.Project;
 import com.justonetech.proj.service.BiddingLocalServiceUtil;
 import com.justonetech.proj.service.CompanyLocalServiceUtil;
 import com.justonetech.proj.service.ProjectLocalServiceUtil;
+import com.justonetech.sys.model.Dictionary;
+import com.justonetech.sys.service.DictionaryLocalServiceUtil;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -32,6 +35,7 @@ import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.bridges.mvc.MVCPortlet;
+import com.sun.org.apache.bcel.internal.generic.I2F;
 
 /**
  * Portlet implementation class BiddingPortlet
@@ -67,19 +71,37 @@ public class BiddingPortlet extends MVCPortlet {
 				e.printStackTrace();
 			}
 		}
+		long manageAttrId = 0;
+		Dictionary manageAttributeDic = null;
+		;
+		try {
+			manageAttributeDic = DictionaryLocalServiceUtil.findByCode("manageAttribute");
+		} catch (SystemException e) {
+			e.printStackTrace();
+		}
+		if (Validator.isNotNull(manageAttributeDic)) {
+			List<Dictionary> manageAttributes = DictionaryLocalServiceUtil.findByParentId(
+					manageAttributeDic.getDictionaryId(), -1, -1);
+			for (Dictionary manageAttribute : manageAttributes) {
+				if (manageAttribute.getName().equals("市属")) {
+					manageAttrId = manageAttribute.getDictionaryId();
+				}
+			}
+		}
+		renderRequest.setAttribute("manageAttrId", manageAttrId);
 		renderRequest.setAttribute("biddingCount", biddingCount);
 		renderRequest.setAttribute("projects", projects);
 		renderRequest.setAttribute("projectCount", projectsCount);
 		super.doView(renderRequest, renderResponse);
 	}
 
-	public void doViewBiddings(ActionRequest actionRequest, ActionResponse actionResponse) throws IOException,
-			PortletException {
-		String keywords = ParamUtil.getString(actionRequest, "keywords");
-		long projectId = ParamUtil.getLong(actionRequest, "projectId");
+	public void doViewBiddings(ActionRequest request, ActionResponse response) throws IOException, PortletException,
+			SystemException, PortalException {
+		String keywords = ParamUtil.getString(request, "keywords");
+		long projectId = ParamUtil.getLong(request, "projectId");
 		int delta = GetterUtil.getInteger(PropsUtil.get(PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA));
-		int pageSize = ParamUtil.getInteger(actionRequest, "delta", delta);
-		int pageNumber = ParamUtil.getInteger(actionRequest, "cur", 1);
+		int pageSize = ParamUtil.getInteger(request, "delta", delta);
+		int pageNumber = ParamUtil.getInteger(request, "cur", 1);
 		int start = pageSize * (pageNumber - 1);
 		int end = pageSize * pageNumber;
 		List<Bidding> biddings = null;
@@ -91,10 +113,36 @@ public class BiddingPortlet extends MVCPortlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		actionRequest.setAttribute("biddings", biddings);
-		actionRequest.setAttribute("projectId", projectId);
-		actionRequest.setAttribute("biddingsCount", biddingsCount);
+		Long biddingId = (Long) request.getAttribute("biddingId");
+		List<Company> companies = CompanyLocalServiceUtil.findByBiddingId(biddingId);
+		Dictionary companyTypeDic = DictionaryLocalServiceUtil.findByCode("CompanyType");
+		List<Dictionary> companyTypes = companyTypeDic != null ? DictionaryLocalServiceUtil.findByParentId(
+				companyTypeDic.getDictionaryId(), -1, -1) : null;
+		Map<Dictionary, Company> companyMap = new TreeMap<Dictionary, Company>();
+		if (Validator.isNotNull(companyTypes)) {
+			for (Dictionary dictionary : companyTypes) {
+				companyMap.put(dictionary, null);
+				if (companies != null) {
+					for (Company com : companies) {
+						if (Validator.isNotNull(com.getType())) {
+							Dictionary dic = DictionaryLocalServiceUtil.getDictionary(com.getType());
+							if (dictionary.equals(dic)) {
+								companyMap.put(dictionary, com);
+							}
+						}
+					}
+				}
+			}
+		}
+		Dictionary involveCountyDic = DictionaryLocalServiceUtil.findByCode("areaName");
+		List<Dictionary> involveCountys = involveCountyDic != null ? DictionaryLocalServiceUtil.findByParentId(
+				involveCountyDic.getDictionaryId(), -1, -1) : null;
+		request.setAttribute("involveCountys", involveCountys);
+		request.setAttribute("companyMap", companyMap);
+		request.setAttribute("companies", companies);
+		request.setAttribute("biddings", biddings);
+		request.setAttribute("projectId", projectId);
+		request.setAttribute("biddingsCount", biddingsCount);
 	}
 
 	public void saveBidding(ActionRequest request, ActionResponse response) throws PortalException, SystemException,
@@ -182,12 +230,39 @@ public class BiddingPortlet extends MVCPortlet {
 			companies = CompanyLocalServiceUtil.findByBiddingId(biddingId);
 			request.setAttribute("bidding", bidding);
 			request.setAttribute("biddingId", biddingId);
-			request.setAttribute("companies", companies);
 		} else {
 			projectId = ParamUtil.getLong(request, "projectId");
 			List<Bidding> biddings = BiddingLocalServiceUtil.findByProjectId(projectId);
 			sortNo = (biddings.isEmpty() ? 0 : biddings.get(biddings.size() - 1).getSortNo()) + 1;
 		}
+		if (Validator.isNotNull(biddingId)) {
+			companies = CompanyLocalServiceUtil.findByBiddingId(biddingId);
+		}
+		Dictionary companyTypeDic = DictionaryLocalServiceUtil.findByCode("CompanyType");
+		List<Dictionary> companyTypes = companyTypeDic != null ? DictionaryLocalServiceUtil.findByParentId(
+				companyTypeDic.getDictionaryId(), -1, -1) : null;
+		Map<Dictionary, Company> companyMap = new TreeMap<Dictionary, Company>();
+		if (Validator.isNotNull(companyTypes)) {
+			for (Dictionary dictionary : companyTypes) {
+				companyMap.put(dictionary, null);
+				if (companies != null) {
+					for (Company com : companies) {
+						if (Validator.isNotNull(com.getType())) {
+							Dictionary dic = DictionaryLocalServiceUtil.getDictionary(com.getType());
+							if (dictionary.equals(dic)) {
+								companyMap.put(dictionary, com);
+							}
+						}
+					}
+				}
+			}
+		}
+		Dictionary involveCountyDic = DictionaryLocalServiceUtil.findByCode("areaName");
+		List<Dictionary> involveCountys = involveCountyDic != null ? DictionaryLocalServiceUtil.findByParentId(
+				involveCountyDic.getDictionaryId(), -1, -1) : null;
+		request.setAttribute("involveCountys", involveCountys);
+		request.setAttribute("companyMap", companyMap);
+		request.setAttribute("companies", companies);
 		request.setAttribute("projectId", projectId);
 		request.setAttribute("sortNo", sortNo);
 	}

@@ -5,7 +5,6 @@
 <portlet:actionURL var="saveProject" name="saveProject">
 	<portlet:param name="redirect" value="${viewURL}" />
 </portlet:actionURL>
-
 <%
 	long groupId = PortalUtil.getScopeGroupId(request);
 	Dictionary projectPropertyDic = DictionaryLocalServiceUtil.findByCode("projAttr");

@@ -5,63 +5,6 @@
 <portlet:actionURL var="saveProjectURL" name="saveProject">
 	<portlet:param name="redirect" value="${viewURL}" />
 </portlet:actionURL>
-
-<%
-	Dictionary projAttrDic = DictionaryLocalServiceUtil.findByCode("projAttr"); 
-	Dictionary involveCountyDic = DictionaryLocalServiceUtil.findByCode("areaName");
-	Dictionary industryCategoryDic = DictionaryLocalServiceUtil.findByCode("industryCategory");
-	Dictionary projectStatusDic = DictionaryLocalServiceUtil.findByCode("projectStatus");
-	Dictionary manageAttributeDic = DictionaryLocalServiceUtil.findByCode("manageAttribute");
-	Dictionary projectSourceDic = DictionaryLocalServiceUtil.findByCode("projectSource");
-	Dictionary roadLevelDic = DictionaryLocalServiceUtil.findByCode("roadLevel");
-	Dictionary roadTechLevelDic = DictionaryLocalServiceUtil.findByCode("roadTechLevel");
-	Dictionary companyTypeDic = DictionaryLocalServiceUtil.findByCode("companyType"); 
-	List<Dictionary> projAttrs = projAttrDic != null ? DictionaryLocalServiceUtil
-			.findByParentId(projAttrDic.getDictionaryId(), -1, -1) : null;
-	List<Dictionary> involveCounties = involveCountyDic != null ? DictionaryLocalServiceUtil
-			.findByParentId(involveCountyDic.getDictionaryId(), -1, -1) : null;
-	List<Dictionary> industryCategories = industryCategoryDic != null ? DictionaryLocalServiceUtil
-			.findByParentId(industryCategoryDic.getDictionaryId(), -1, -1) : null;
-	List<Dictionary> projectStatuses = projectStatusDic != null ? DictionaryLocalServiceUtil
-			.findByParentId(projectStatusDic.getDictionaryId(), -1, -1) : null;
-	List<Dictionary> manageAttributes = manageAttributeDic != null ? DictionaryLocalServiceUtil.findByParentId(manageAttributeDic.getDictionaryId(), -1, -1) : null;
-	List<Dictionary> projectSources = projectSourceDic != null ? DictionaryLocalServiceUtil
-			.findByParentId(projectSourceDic.getDictionaryId(), -1, -1) : null;
-	/* List<Dictionary> projAttrs = projAttrDic != null ? DictionaryLocalServiceUtil
-			.findByParentId(projAttrDic.getDictionaryId(), -1, -1) : null; */
-	List<Dictionary> roadLevels = roadLevelDic != null ? DictionaryLocalServiceUtil.findByParentId(roadLevelDic.getDictionaryId(), -1, -1) : null;
-	List<Dictionary> roadTechLevels = roadTechLevelDic != null ? DictionaryLocalServiceUtil
-			.findByParentId(roadTechLevelDic.getDictionaryId(), -1, -1) : null;
-	List<Dictionary> companyTypes = companyTypeDic != null ? DictionaryLocalServiceUtil
-			.findByParentId(companyTypeDic.getDictionaryId(), -1, -1) : null;
-
-	request.setAttribute("projAttrs", projAttrs);
-	request.setAttribute("involveCounties", involveCounties);
-	request.setAttribute("industryCategories", industryCategories);
-	request.setAttribute("projectStatuses", projectStatuses);
-	request.setAttribute("manageAttributes", manageAttributes);
-	request.setAttribute("projectSources", projectSources);
-	request.setAttribute("projAttrs", projAttrs);
-	request.setAttribute("roadLevels", roadLevels);
-	request.setAttribute("roadTechLevels", roadTechLevels);
-	Map<Dictionary, Company> companyMap = new TreeMap<Dictionary, Company>();
-	List<Company> companies = (List<Company>) request.getAttribute("companies");
-	String companyName = "";
-	for (Dictionary dictionary : companyTypes) {
-		companyMap.put(dictionary, null);
-		if (companies != null) {
-			for (Company com : companies) {
-				Dictionary dic = DictionaryLocalServiceUtil.getDictionary(com.getType());
-				if (dictionary.equals(dic)) {
-					companyMap.put(dictionary, com);
-				}
-			}
-		}
-		companyName += dictionary.getName() + ",";
-	}
-	request.setAttribute("companyMap", companyMap);
-	request.setAttribute("companyName", companyName);
-%>
 <liferay-ui:header title="${empty project?'添加':'编辑'}项目基本信息"
 	backURL="${viewURL}" />
 <aui:form action="${saveProjectURL}" method="post">
@@ -93,14 +36,16 @@
 					</aui:col>
 					<aui:col span="6" cssClass="text-left">
 						<label class="control-label" for="startDate">实际开工时间 </label>
-						<input type="text" class="field" name="<portlet:namespace/>startDate" id="startDate"
+						<input type="text" class="field"
+							name="<portlet:namespace/>startDate" id="startDate"
 							onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'endDate\')}',lang:'zh-cn',dateFmt:'yyyy-MM-dd'})"
-							required="required"	value='<fmt:formatDate value="${project.startDate}" pattern="yyyy-MM-dd"/>'>
+							required="required"
+							value='<fmt:formatDate value="${project.startDate}" pattern="yyyy-MM-dd"/>'>
 					</aui:col>
 				</aui:row>
 				<aui:row>
 					<aui:col span="6" cssClass="text-left">
-						<aui:select label="项目状态" name="projStatus">
+						<aui:select label="项目状态" name="projStatus" showEmptyOption="true">
 							<c:forEach items="${projectStatuses}" var="projStatus">
 								<aui:option value="${projStatus.dictionaryId}"
 									selected="${projStatus.dictionaryId eq project.projStatus}">${projStatus.name }</aui:option>
@@ -109,14 +54,17 @@
 					</aui:col>
 					<aui:col span="6" cssClass="text-left">
 						<label class="control-label" for="endDate">实际完成时间</label>
-						<input type="text" class="field" name="<portlet:namespace/>endDate" id="endDate"
+						<input type="text" class="field"
+							name="<portlet:namespace/>endDate" id="endDate"
 							onfocus="WdatePicker({minDate:'#F{$dp.$D(\'startDate\')}',lang:'zh-cn',dateFmt:'yyyy-MM-dd'})"
-							required="required"	value='<fmt:formatDate value="${project.endDate }" pattern="yyyy-MM-dd"/>'>
+							required="required"
+							value='<fmt:formatDate value="${project.endDate }" pattern="yyyy-MM-dd"/>'>
 					</aui:col>
 				</aui:row>
 				<aui:row>
 					<aui:col span="6" cssClass="text-left">
-						<aui:select label="业态类别" name="industryCategory">
+						<aui:select label="业态类别" name="industryCategory"
+							showEmptyOption="true">
 							<c:forEach items="${industryCategories}" var="industryCategory">
 								<aui:option value="${industryCategory.dictionaryId}"
 									selected="${industryCategory.dictionaryId eq project.industryCategory}">${industryCategory.name }</aui:option>
@@ -130,7 +78,7 @@
 								<aui:input name="involveCounty" type="checkbox"
 									value="${involveCounty.dictionaryId}"
 									checked="${fn:contains(project.involveCounty ,involveCounty.dictionaryId)}"
-									label="${involveCounty. name}" inlineField="true" /> 
+									label="${involveCounty. name}" inlineField="true" />
 								<c:if test="${sortNo.index>0 && (sortNo.index+1) % 9 == 0}">
 									<br>
 								</c:if>
@@ -140,13 +88,15 @@
 				</aui:row>
 				<aui:row>
 					<aui:col span="6" cssClass="text-left">
-						<aui:select label="管理属性" name="manageAttribute" inlineField="true">
+						<aui:select label="管理属性" name="manageAttribute" inlineField="true"
+							showEmptyOption="true">
 							<c:forEach items="${manageAttributes}" var="manageAttribute">
 								<aui:option value="${manageAttribute. dictionaryId }"
 									selected="${manageAttribute. dictionaryId eq project.manageAttribute }">${manageAttribute.name }</aui:option>
 							</c:forEach>
 						</aui:select>
-						<aui:select label="" name="isMajor" inlineField="true">
+						<aui:select label="" name="isMajor" inlineField="true"
+							showEmptyOption="true">
 							<aui:option value="1" selected="${project. isMajor}">重大</aui:option>
 							<aui:option value="0" selected="${!project. isMajor}">非重大</aui:option>
 						</aui:select>
@@ -162,7 +112,7 @@
 				</aui:row>
 				<aui:row>
 					<aui:col span="6" cssClass="text-left">
-						<aui:select label="项目来源" name="projSource">
+						<aui:select label="项目来源" name="projSource" showEmptyOption="true">
 							<c:forEach items="${projectSources }" var="projSource">
 								<aui:option value="${projSource. dictionaryId }"
 									selected="${projSource.dictionaryId eq project.projSource}">${projSource.name }</aui:option>
@@ -170,7 +120,8 @@
 						</aui:select>
 					</aui:col>
 					<aui:col span="6" cssClass="text-left">
-						<aui:select label="道路技术等级" name="roadTechLevel">
+						<aui:select label="道路技术等级" name="roadTechLevel"
+							showEmptyOption="true">
 							<c:forEach items="${roadTechLevels }" var="roadTechLevel">
 								<aui:option value="${roadTechLevel.dictionaryId }"
 									selected="${roadTechLevel.dictionaryId eq project.roadTechLevel}">${roadTechLevel.name }</aui:option>
@@ -180,7 +131,8 @@
 				</aui:row>
 				<aui:row>
 					<aui:col span="6" cssClass="text-left">
-						<aui:select label="所属区县" name="belongCounty">
+						<aui:select label="所属区县" name="belongCounty"
+							showEmptyOption="true">
 							<aui:option value="0">上海市</aui:option>
 							<c:forEach items="${countys}" var="belongCounty">
 								<aui:option value="${belongCounty.dictionaryId}"
@@ -189,8 +141,8 @@
 						</aui:select>
 					</aui:col>
 					<aui:col span="6" cssClass="text-left">
-						<aui:select label="道路等级" name="roadLevel">
-							<c:forEach items="${roadLevels }" var="roadLevel">
+						<aui:select label="道路等级" name="roadLevel" showEmptyOption="true">
+							<c:forEach items="${roadLevels}" var="roadLevel">
 								<aui:option value="${roadLevel.dictionaryId}"
 									selected="${roadLevel.dictionaryId eq project.roadLevel}">${roadLevel .name}</aui:option>
 							</c:forEach>
@@ -201,7 +153,7 @@
 
 				<aui:row>
 					<aui:col span="6" cssClass="text-left">
-						<aui:select label="项目属性" name="projAttr">
+						<aui:select label="项目属性" name="projAttr" showEmptyOption="true">
 							<c:forEach items="${projAttrs}" var="projAttr">
 								<aui:option value="${projAttr.dictionaryId }"
 									selected="${projAttr.dictionaryId eq project.projAttr}">${projAttr.name }</aui:option>
@@ -222,8 +174,9 @@
 				<aui:row>
 					<aui:col span="6" cssClass="text-left">
 						<label class="control-label" for="startNode"> 目标开工节点 </label>
-						<input type="text" class="field" name="<portlet:namespace/>startNode error-field"
-							id="startNode" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'endNode\')}',lang:'zh-cn',dateFmt:'yyyy-MM-dd'})"
+						<input type="text" class="field"
+							name="<portlet:namespace/>startNode error-field" id="startNode"
+							onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'endNode\')}',lang:'zh-cn',dateFmt:'yyyy-MM-dd'})"
 							required="required"
 							value='<fmt:formatDate value="${project.startNode }" pattern="yyyy-MM-dd"/>'>
 					</aui:col>
@@ -238,8 +191,9 @@
 				<aui:row>
 					<aui:col span="6" cssClass="text-left">
 						<label class="control-label" for="endNode"> 目标完工节点 </label>
-						<input type="text" class="field" name="<portlet:namespace/>endNode error-field"
-							id="endNode" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'startNode\')}',lang:'zh-cn',dateFmt:'yyyy-MM-dd'})"
+						<input type="text" class="field"
+							name="<portlet:namespace/>endNode error-field" id="endNode"
+							onfocus="WdatePicker({minDate:'#F{$dp.$D(\'startNode\')}',lang:'zh-cn',dateFmt:'yyyy-MM-dd'})"
 							required="required"
 							value='<fmt:formatDate value="${project.endNode }" pattern="yyyy-MM-dd"/>'>
 					</aui:col>
@@ -254,8 +208,10 @@
 					<aui:col span="6" cssClass="text-left">
 						<label class="control-label" for="planStartDate"> 目标计划开工时间
 						</label>
-						<input type="text" class="field" name="<portlet:namespace/>planStartDate error-field"
-							id="planStartDate" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'planEndDate\')}',lang:'zh-cn',dateFmt:'yyyy-MM-dd'})"
+						<input type="text" class="field"
+							name="<portlet:namespace/>planStartDate error-field"
+							id="planStartDate"
+							onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'planEndDate\')}',lang:'zh-cn',dateFmt:'yyyy-MM-dd'})"
 							required="required"
 							value='<fmt:formatDate value="${project.planStartDate }" pattern="yyyy-MM-dd"/>'>
 					</aui:col>
@@ -268,8 +224,10 @@
 				<aui:row>
 					<aui:col span="6" cssClass="text-left">
 						<label class="control-label" for="planEndDate"> 目标计划完工时间 </label>
-						<input type="text" class="field" name="<portlet:namespace/>planEndDate error-field"
-							id="planEndDate" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'planStartDate\')}',lang:'zh-cn',dateFmt:'yyyy-MM-dd'})"
+						<input type="text" class="field"
+							name="<portlet:namespace/>planEndDate error-field"
+							id="planEndDate"
+							onfocus="WdatePicker({minDate:'#F{$dp.$D(\'planStartDate\')}',lang:'zh-cn',dateFmt:'yyyy-MM-dd'})"
 							required="required"
 							value='<fmt:formatDate value="${project.planEndDate }" pattern="yyyy-MM-dd"/>'>
 					</aui:col>
@@ -305,7 +263,6 @@
 							onkeyup="value=value.replace(/[^\d.]/g,'')" />
 					</aui:col>
 				</aui:row>
-
 				<liferay-ui:tabs names="${companyName}" refresh="false">
 					<c:forEach items="${companyMap}" var="map">
 						<liferay-ui:section>

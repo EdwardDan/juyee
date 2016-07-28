@@ -4,34 +4,7 @@
 <c:set var="contextPath" value="${request.contextPath}/portlet/bidding" />
 
 <%
-	Long biddingId = (Long) request.getAttribute("biddingId");
-	List<Company> companies = null;
-	if (Validator.isNotNull(biddingId)) {
-		companies = CompanyLocalServiceUtil.findByBiddingId(biddingId);
-	}
-	Dictionary companyTypeDic = DictionaryLocalServiceUtil.findByCode("CompanyType");
-	List<Dictionary> companyTypes = companyTypeDic != null ? DictionaryLocalServiceUtil.findByParentId(
-			companyTypeDic.getDictionaryId(), -1, -1) : null;
-	Map<Dictionary, Company> companyMap = new TreeMap<Dictionary, Company>();
-	for (Dictionary dictionary : companyTypes) {
-		companyMap.put(dictionary, null);
-		if (companies != null) {
-			for (Company com : companies) {
-				if (Validator.isNotNull(com.getType())) {
-					Dictionary dic = DictionaryLocalServiceUtil.getDictionary(com.getType());
-					if (dictionary.equals(dic)) {
-						companyMap.put(dictionary, com);
-					}
-				}
-			}
-		}
-	}
-	Dictionary involveCountyDic = DictionaryLocalServiceUtil.findByCode("areaName");
-	List<Dictionary> involveCountys = involveCountyDic != null ? DictionaryLocalServiceUtil.findByParentId(
-			involveCountyDic.getDictionaryId(), -1, -1) : null;
-	request.setAttribute("involveCountys", involveCountys);
-	request.setAttribute("companyMap", companyMap);
-	request.setAttribute("companies", companies);
+	
 %>
 
 <portlet:renderURL var="viewURL">
