@@ -3,7 +3,7 @@
 
 <display>
 	
-	<category name="category.sample">
+	<category name="工程项目管理">
 		<portlet id="project"></portlet>
 		<portlet id="bidding"></portlet>
 	</category>
