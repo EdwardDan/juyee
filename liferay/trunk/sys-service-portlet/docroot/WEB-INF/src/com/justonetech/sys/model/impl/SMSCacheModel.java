@@ -37,10 +37,14 @@ import java.util.Date;
 public class SMSCacheModel implements CacheModel<SMS>, Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(21);
 
 		sb.append("{smsId=");
 		sb.append(smsId);
+		sb.append(", groupId=");
+		sb.append(groupId);
+		sb.append(", companyId=");
+		sb.append(companyId);
 		sb.append(", createTime=");
 		sb.append(createTime);
 		sb.append(", modifiedTime=");
@@ -65,6 +69,8 @@ public class SMSCacheModel implements CacheModel<SMS>, Externalizable {
 		SMSImpl smsImpl = new SMSImpl();
 
 		smsImpl.setSmsId(smsId);
+		smsImpl.setGroupId(groupId);
+		smsImpl.setCompanyId(companyId);
 
 		if (createTime == Long.MIN_VALUE) {
 			smsImpl.setCreateTime(null);
@@ -118,6 +124,8 @@ public class SMSCacheModel implements CacheModel<SMS>, Externalizable {
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		smsId = objectInput.readLong();
+		groupId = objectInput.readLong();
+		companyId = objectInput.readLong();
 		createTime = objectInput.readLong();
 		modifiedTime = objectInput.readLong();
 		content = objectInput.readUTF();
@@ -131,6 +139,8 @@ public class SMSCacheModel implements CacheModel<SMS>, Externalizable {
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(smsId);
+		objectOutput.writeLong(groupId);
+		objectOutput.writeLong(companyId);
 		objectOutput.writeLong(createTime);
 		objectOutput.writeLong(modifiedTime);
 
@@ -161,6 +171,8 @@ public class SMSCacheModel implements CacheModel<SMS>, Externalizable {
 	}
 
 	public long smsId;
+	public long groupId;
+	public long companyId;
 	public long createTime;
 	public long modifiedTime;
 	public String content;

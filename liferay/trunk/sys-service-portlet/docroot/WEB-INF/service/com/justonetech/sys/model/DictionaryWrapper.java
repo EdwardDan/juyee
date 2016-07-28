@@ -50,6 +50,8 @@ public class DictionaryWrapper implements Dictionary, ModelWrapper<Dictionary> {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("dictionaryId", getDictionaryId());
+		attributes.put("groupId", getGroupId());
+		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
 		attributes.put("createTime", getCreateTime());
@@ -75,6 +77,18 @@ public class DictionaryWrapper implements Dictionary, ModelWrapper<Dictionary> {
 
 		if (dictionaryId != null) {
 			setDictionaryId(dictionaryId);
+		}
+
+		Long groupId = (Long)attributes.get("groupId");
+
+		if (groupId != null) {
+			setGroupId(groupId);
+		}
+
+		Long companyId = (Long)attributes.get("companyId");
+
+		if (companyId != null) {
+			setCompanyId(companyId);
 		}
 
 		Long userId = (Long)attributes.get("userId");
@@ -206,6 +220,46 @@ public class DictionaryWrapper implements Dictionary, ModelWrapper<Dictionary> {
 	@Override
 	public void setDictionaryId(long dictionaryId) {
 		_dictionary.setDictionaryId(dictionaryId);
+	}
+
+	/**
+	* Returns the group ID of this dictionary.
+	*
+	* @return the group ID of this dictionary
+	*/
+	@Override
+	public long getGroupId() {
+		return _dictionary.getGroupId();
+	}
+
+	/**
+	* Sets the group ID of this dictionary.
+	*
+	* @param groupId the group ID of this dictionary
+	*/
+	@Override
+	public void setGroupId(long groupId) {
+		_dictionary.setGroupId(groupId);
+	}
+
+	/**
+	* Returns the company ID of this dictionary.
+	*
+	* @return the company ID of this dictionary
+	*/
+	@Override
+	public long getCompanyId() {
+		return _dictionary.getCompanyId();
+	}
+
+	/**
+	* Sets the company ID of this dictionary.
+	*
+	* @param companyId the company ID of this dictionary
+	*/
+	@Override
+	public void setCompanyId(long companyId) {
+		_dictionary.setCompanyId(companyId);
 	}
 
 	/**

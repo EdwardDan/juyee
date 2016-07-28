@@ -50,6 +50,8 @@ public class SMSWrapper implements SMS, ModelWrapper<SMS> {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("smsId", getSmsId());
+		attributes.put("groupId", getGroupId());
+		attributes.put("companyId", getCompanyId());
 		attributes.put("createTime", getCreateTime());
 		attributes.put("modifiedTime", getModifiedTime());
 		attributes.put("content", getContent());
@@ -67,6 +69,18 @@ public class SMSWrapper implements SMS, ModelWrapper<SMS> {
 
 		if (smsId != null) {
 			setSmsId(smsId);
+		}
+
+		Long groupId = (Long)attributes.get("groupId");
+
+		if (groupId != null) {
+			setGroupId(groupId);
+		}
+
+		Long companyId = (Long)attributes.get("companyId");
+
+		if (companyId != null) {
+			setCompanyId(companyId);
 		}
 
 		Date createTime = (Date)attributes.get("createTime");
@@ -150,6 +164,46 @@ public class SMSWrapper implements SMS, ModelWrapper<SMS> {
 	@Override
 	public void setSmsId(long smsId) {
 		_sms.setSmsId(smsId);
+	}
+
+	/**
+	* Returns the group ID of this s m s.
+	*
+	* @return the group ID of this s m s
+	*/
+	@Override
+	public long getGroupId() {
+		return _sms.getGroupId();
+	}
+
+	/**
+	* Sets the group ID of this s m s.
+	*
+	* @param groupId the group ID of this s m s
+	*/
+	@Override
+	public void setGroupId(long groupId) {
+		_sms.setGroupId(groupId);
+	}
+
+	/**
+	* Returns the company ID of this s m s.
+	*
+	* @return the company ID of this s m s
+	*/
+	@Override
+	public long getCompanyId() {
+		return _sms.getCompanyId();
+	}
+
+	/**
+	* Sets the company ID of this s m s.
+	*
+	* @param companyId the company ID of this s m s
+	*/
+	@Override
+	public void setCompanyId(long companyId) {
+		_sms.setCompanyId(companyId);
 	}
 
 	/**

@@ -1692,6 +1692,8 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 		dictionaryImpl.setPrimaryKey(dictionary.getPrimaryKey());
 
 		dictionaryImpl.setDictionaryId(dictionary.getDictionaryId());
+		dictionaryImpl.setGroupId(dictionary.getGroupId());
+		dictionaryImpl.setCompanyId(dictionary.getCompanyId());
 		dictionaryImpl.setUserId(dictionary.getUserId());
 		dictionaryImpl.setUserName(dictionary.getUserName());
 		dictionaryImpl.setCreateTime(dictionary.getCreateTime());

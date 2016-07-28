@@ -67,6 +67,8 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 	public static final String TABLE_NAME = "sys_Dictionary";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "dictionaryId", Types.BIGINT },
+			{ "groupId", Types.BIGINT },
+			{ "companyId", Types.BIGINT },
 			{ "userId", Types.BIGINT },
 			{ "userName", Types.VARCHAR },
 			{ "createTime", Types.TIMESTAMP },
@@ -83,7 +85,7 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 			{ "customContent", Types.VARCHAR },
 			{ "parentId", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table sys_Dictionary (dictionaryId LONG not null primary key,userId LONG,userName VARCHAR(75) null,createTime DATE null,modifiedTime DATE null,code_ VARCHAR(75) null,name VARCHAR(75) null,isLeaf BOOLEAN,sortNo INTEGER,desc_ STRING null,tag VARCHAR(75) null,isValid BOOLEAN,treePath VARCHAR(75) null,sortPath VARCHAR(75) null,customContent STRING null,parentId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table sys_Dictionary (dictionaryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createTime DATE null,modifiedTime DATE null,code_ VARCHAR(75) null,name VARCHAR(75) null,isLeaf BOOLEAN,sortNo INTEGER,desc_ STRING null,tag VARCHAR(75) null,isValid BOOLEAN,treePath VARCHAR(75) null,sortPath VARCHAR(75) null,customContent STRING null,parentId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table sys_Dictionary";
 	public static final String ORDER_BY_JPQL = " ORDER BY dictionary.sortPath ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY sys_Dictionary.sortPath ASC";
@@ -118,6 +120,8 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 		Dictionary model = new DictionaryImpl();
 
 		model.setDictionaryId(soapModel.getDictionaryId());
+		model.setGroupId(soapModel.getGroupId());
+		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
 		model.setUserName(soapModel.getUserName());
 		model.setCreateTime(soapModel.getCreateTime());
@@ -198,6 +202,8 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("dictionaryId", getDictionaryId());
+		attributes.put("groupId", getGroupId());
+		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
 		attributes.put("createTime", getCreateTime());
@@ -223,6 +229,18 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 
 		if (dictionaryId != null) {
 			setDictionaryId(dictionaryId);
+		}
+
+		Long groupId = (Long)attributes.get("groupId");
+
+		if (groupId != null) {
+			setGroupId(groupId);
+		}
+
+		Long companyId = (Long)attributes.get("companyId");
+
+		if (companyId != null) {
+			setCompanyId(companyId);
 		}
 
 		Long userId = (Long)attributes.get("userId");
@@ -325,6 +343,28 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 	@Override
 	public void setDictionaryId(long dictionaryId) {
 		_dictionaryId = dictionaryId;
+	}
+
+	@JSON
+	@Override
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	@Override
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+	}
+
+	@JSON
+	@Override
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	@Override
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
 	}
 
 	@JSON
@@ -594,7 +634,7 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 
 	@Override
 	public ExpandoBridge getExpandoBridge() {
-		return ExpandoBridgeFactoryUtil.getExpandoBridge(0,
+		return ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
 			Dictionary.class.getName(), getPrimaryKey());
 	}
 
@@ -620,6 +660,8 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 		DictionaryImpl dictionaryImpl = new DictionaryImpl();
 
 		dictionaryImpl.setDictionaryId(getDictionaryId());
+		dictionaryImpl.setGroupId(getGroupId());
+		dictionaryImpl.setCompanyId(getCompanyId());
 		dictionaryImpl.setUserId(getUserId());
 		dictionaryImpl.setUserName(getUserName());
 		dictionaryImpl.setCreateTime(getCreateTime());
@@ -703,6 +745,10 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 		DictionaryCacheModel dictionaryCacheModel = new DictionaryCacheModel();
 
 		dictionaryCacheModel.dictionaryId = getDictionaryId();
+
+		dictionaryCacheModel.groupId = getGroupId();
+
+		dictionaryCacheModel.companyId = getCompanyId();
 
 		dictionaryCacheModel.userId = getUserId();
 
@@ -801,10 +847,14 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(33);
+		StringBundler sb = new StringBundler(37);
 
 		sb.append("{dictionaryId=");
 		sb.append(getDictionaryId());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
 		sb.append(", userId=");
 		sb.append(getUserId());
 		sb.append(", userName=");
@@ -842,7 +892,7 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(52);
+		StringBundler sb = new StringBundler(58);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.sys.model.Dictionary");
@@ -851,6 +901,14 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 		sb.append(
 			"<column><column-name>dictionaryId</column-name><column-value><![CDATA[");
 		sb.append(getDictionaryId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append(getGroupId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userId</column-name><column-value><![CDATA[");
@@ -923,6 +981,8 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 			Dictionary.class
 		};
 	private long _dictionaryId;
+	private long _groupId;
+	private long _companyId;
 	private long _userId;
 	private String _userUuid;
 	private String _userName;

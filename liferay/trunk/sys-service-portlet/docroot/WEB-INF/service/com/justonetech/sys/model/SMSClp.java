@@ -75,6 +75,8 @@ public class SMSClp extends BaseModelImpl<SMS> implements SMS {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("smsId", getSmsId());
+		attributes.put("groupId", getGroupId());
+		attributes.put("companyId", getCompanyId());
 		attributes.put("createTime", getCreateTime());
 		attributes.put("modifiedTime", getModifiedTime());
 		attributes.put("content", getContent());
@@ -92,6 +94,18 @@ public class SMSClp extends BaseModelImpl<SMS> implements SMS {
 
 		if (smsId != null) {
 			setSmsId(smsId);
+		}
+
+		Long groupId = (Long)attributes.get("groupId");
+
+		if (groupId != null) {
+			setGroupId(groupId);
+		}
+
+		Long companyId = (Long)attributes.get("companyId");
+
+		if (companyId != null) {
+			setCompanyId(companyId);
 		}
 
 		Date createTime = (Date)attributes.get("createTime");
@@ -153,6 +167,52 @@ public class SMSClp extends BaseModelImpl<SMS> implements SMS {
 				Method method = clazz.getMethod("setSmsId", long.class);
 
 				method.invoke(_smsRemoteModel, smsId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	@Override
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+
+		if (_smsRemoteModel != null) {
+			try {
+				Class<?> clazz = _smsRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setGroupId", long.class);
+
+				method.invoke(_smsRemoteModel, groupId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	@Override
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
+
+		if (_smsRemoteModel != null) {
+			try {
+				Class<?> clazz = _smsRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setCompanyId", long.class);
+
+				method.invoke(_smsRemoteModel, companyId);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -391,6 +451,8 @@ public class SMSClp extends BaseModelImpl<SMS> implements SMS {
 		SMSClp clone = new SMSClp();
 
 		clone.setSmsId(getSmsId());
+		clone.setGroupId(getGroupId());
+		clone.setCompanyId(getCompanyId());
 		clone.setCreateTime(getCreateTime());
 		clone.setModifiedTime(getModifiedTime());
 		clone.setContent(getContent());
@@ -450,10 +512,14 @@ public class SMSClp extends BaseModelImpl<SMS> implements SMS {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(21);
 
 		sb.append("{smsId=");
 		sb.append(getSmsId());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
 		sb.append(", createTime=");
 		sb.append(getCreateTime());
 		sb.append(", modifiedTime=");
@@ -475,7 +541,7 @@ public class SMSClp extends BaseModelImpl<SMS> implements SMS {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(28);
+		StringBundler sb = new StringBundler(34);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.sys.model.SMS");
@@ -484,6 +550,14 @@ public class SMSClp extends BaseModelImpl<SMS> implements SMS {
 		sb.append(
 			"<column><column-name>smsId</column-name><column-value><![CDATA[");
 		sb.append(getSmsId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append(getGroupId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>createTime</column-name><column-value><![CDATA[");
@@ -520,6 +594,8 @@ public class SMSClp extends BaseModelImpl<SMS> implements SMS {
 	}
 
 	private long _smsId;
+	private long _groupId;
+	private long _companyId;
 	private Date _createTime;
 	private Date _modifiedTime;
 	private String _content;

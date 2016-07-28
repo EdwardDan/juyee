@@ -126,7 +126,7 @@ public class DictionaryLocalServiceClpInvoker {
 
 		_methodParameterTypes46 = new String[] { "long" };
 
-		_methodName47 = "findByParentIdAndIsValid";
+		_methodName47 = "findByParentIdIsValid";
 
 		_methodParameterTypes47 = new String[] { "long", "boolean", "int", "int" };
 
@@ -296,7 +296,7 @@ public class DictionaryLocalServiceClpInvoker {
 
 		if (_methodName47.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes47, parameterTypes)) {
-			return DictionaryLocalServiceUtil.findByParentIdAndIsValid(((Long)arguments[0]).longValue(),
+			return DictionaryLocalServiceUtil.findByParentIdIsValid(((Long)arguments[0]).longValue(),
 				((Boolean)arguments[1]).booleanValue(),
 				((Integer)arguments[2]).intValue(),
 				((Integer)arguments[3]).intValue());

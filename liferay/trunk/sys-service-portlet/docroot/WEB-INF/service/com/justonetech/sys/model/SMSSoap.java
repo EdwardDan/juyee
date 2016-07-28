@@ -31,6 +31,8 @@ public class SMSSoap implements Serializable {
 		SMSSoap soapModel = new SMSSoap();
 
 		soapModel.setSmsId(model.getSmsId());
+		soapModel.setGroupId(model.getGroupId());
+		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setCreateTime(model.getCreateTime());
 		soapModel.setModifiedTime(model.getModifiedTime());
 		soapModel.setContent(model.getContent());
@@ -98,6 +100,22 @@ public class SMSSoap implements Serializable {
 		_smsId = smsId;
 	}
 
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+	}
+
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
+	}
+
 	public Date getCreateTime() {
 		return _createTime;
 	}
@@ -155,6 +173,8 @@ public class SMSSoap implements Serializable {
 	}
 
 	private long _smsId;
+	private long _groupId;
+	private long _companyId;
 	private Date _createTime;
 	private Date _modifiedTime;
 	private String _content;

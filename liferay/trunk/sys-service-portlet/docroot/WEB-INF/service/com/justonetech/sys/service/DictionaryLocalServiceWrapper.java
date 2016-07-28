@@ -306,11 +306,11 @@ public class DictionaryLocalServiceWrapper implements DictionaryLocalService,
 	}
 
 	@Override
-	public java.util.List<com.justonetech.sys.model.Dictionary> findByParentIdAndIsValid(
+	public java.util.List<com.justonetech.sys.model.Dictionary> findByParentIdIsValid(
 		long parentId, boolean isValid, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _dictionaryLocalService.findByParentIdAndIsValid(parentId,
-			isValid, start, end);
+		return _dictionaryLocalService.findByParentIdIsValid(parentId, isValid,
+			start, end);
 	}
 
 	@Override

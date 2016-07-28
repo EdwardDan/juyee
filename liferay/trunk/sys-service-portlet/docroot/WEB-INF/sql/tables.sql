@@ -1,5 +1,7 @@
 create table sys_Dictionary (
 	dictionaryId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
 	createTime DATE null,
@@ -19,6 +21,8 @@ create table sys_Dictionary (
 
 create table sys_SMS (
 	smsId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
 	createTime DATE null,
 	modifiedTime DATE null,
 	content VARCHAR(200) null,

@@ -87,7 +87,7 @@ public class DictionaryLocalServiceImpl extends DictionaryLocalServiceBaseImpl {
         return dictionaryPersistence.countByParentId(parentId);
     }
 
-    public List<Dictionary> findByParentIdAndIsValid(long parentId, boolean isValid, int start, int end)
+    public List<Dictionary> findByParentIdIsValid(long parentId, boolean isValid, int start, int end)
         throws SystemException {
 
         return dictionaryPersistence.findByParentIdIsValid(parentId, isValid, start, end);

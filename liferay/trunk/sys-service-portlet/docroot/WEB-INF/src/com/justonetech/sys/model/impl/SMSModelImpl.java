@@ -60,6 +60,8 @@ public class SMSModelImpl extends BaseModelImpl<SMS> implements SMSModel {
 	public static final String TABLE_NAME = "sys_SMS";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "smsId", Types.BIGINT },
+			{ "groupId", Types.BIGINT },
+			{ "companyId", Types.BIGINT },
 			{ "createTime", Types.TIMESTAMP },
 			{ "modifiedTime", Types.TIMESTAMP },
 			{ "content", Types.VARCHAR },
@@ -68,7 +70,7 @@ public class SMSModelImpl extends BaseModelImpl<SMS> implements SMSModel {
 			{ "receiver", Types.VARCHAR },
 			{ "sendTime", Types.TIMESTAMP }
 		};
-	public static final String TABLE_SQL_CREATE = "create table sys_SMS (smsId LONG not null primary key,createTime DATE null,modifiedTime DATE null,content VARCHAR(200) null,senderId LONG,senderName VARCHAR(75) null,receiver STRING null,sendTime DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table sys_SMS (smsId LONG not null primary key,groupId LONG,companyId LONG,createTime DATE null,modifiedTime DATE null,content VARCHAR(200) null,senderId LONG,senderName VARCHAR(75) null,receiver STRING null,sendTime DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table sys_SMS";
 	public static final String ORDER_BY_JPQL = " ORDER BY sms.createTime DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY sys_SMS.createTime DESC";
@@ -123,6 +125,8 @@ public class SMSModelImpl extends BaseModelImpl<SMS> implements SMSModel {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("smsId", getSmsId());
+		attributes.put("groupId", getGroupId());
+		attributes.put("companyId", getCompanyId());
 		attributes.put("createTime", getCreateTime());
 		attributes.put("modifiedTime", getModifiedTime());
 		attributes.put("content", getContent());
@@ -140,6 +144,18 @@ public class SMSModelImpl extends BaseModelImpl<SMS> implements SMSModel {
 
 		if (smsId != null) {
 			setSmsId(smsId);
+		}
+
+		Long groupId = (Long)attributes.get("groupId");
+
+		if (groupId != null) {
+			setGroupId(groupId);
+		}
+
+		Long companyId = (Long)attributes.get("companyId");
+
+		if (companyId != null) {
+			setCompanyId(companyId);
 		}
 
 		Date createTime = (Date)attributes.get("createTime");
@@ -193,6 +209,26 @@ public class SMSModelImpl extends BaseModelImpl<SMS> implements SMSModel {
 	@Override
 	public void setSmsId(long smsId) {
 		_smsId = smsId;
+	}
+
+	@Override
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	@Override
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+	}
+
+	@Override
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	@Override
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
 	}
 
 	@Override
@@ -282,7 +318,7 @@ public class SMSModelImpl extends BaseModelImpl<SMS> implements SMSModel {
 
 	@Override
 	public ExpandoBridge getExpandoBridge() {
-		return ExpandoBridgeFactoryUtil.getExpandoBridge(0,
+		return ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
 			SMS.class.getName(), getPrimaryKey());
 	}
 
@@ -308,6 +344,8 @@ public class SMSModelImpl extends BaseModelImpl<SMS> implements SMSModel {
 		SMSImpl smsImpl = new SMSImpl();
 
 		smsImpl.setSmsId(getSmsId());
+		smsImpl.setGroupId(getGroupId());
+		smsImpl.setCompanyId(getCompanyId());
 		smsImpl.setCreateTime(getCreateTime());
 		smsImpl.setModifiedTime(getModifiedTime());
 		smsImpl.setContent(getContent());
@@ -373,6 +411,10 @@ public class SMSModelImpl extends BaseModelImpl<SMS> implements SMSModel {
 
 		smsCacheModel.smsId = getSmsId();
 
+		smsCacheModel.groupId = getGroupId();
+
+		smsCacheModel.companyId = getCompanyId();
+
 		Date createTime = getCreateTime();
 
 		if (createTime != null) {
@@ -431,10 +473,14 @@ public class SMSModelImpl extends BaseModelImpl<SMS> implements SMSModel {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(21);
 
 		sb.append("{smsId=");
 		sb.append(getSmsId());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
 		sb.append(", createTime=");
 		sb.append(getCreateTime());
 		sb.append(", modifiedTime=");
@@ -456,7 +502,7 @@ public class SMSModelImpl extends BaseModelImpl<SMS> implements SMSModel {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(28);
+		StringBundler sb = new StringBundler(34);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.sys.model.SMS");
@@ -465,6 +511,14 @@ public class SMSModelImpl extends BaseModelImpl<SMS> implements SMSModel {
 		sb.append(
 			"<column><column-name>smsId</column-name><column-value><![CDATA[");
 		sb.append(getSmsId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append(getGroupId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>createTime</column-name><column-value><![CDATA[");
@@ -503,6 +557,8 @@ public class SMSModelImpl extends BaseModelImpl<SMS> implements SMSModel {
 	private static ClassLoader _classLoader = SMS.class.getClassLoader();
 	private static Class<?>[] _escapedModelInterfaces = new Class[] { SMS.class };
 	private long _smsId;
+	private long _groupId;
+	private long _companyId;
 	private Date _createTime;
 	private Date _modifiedTime;
 	private String _content;

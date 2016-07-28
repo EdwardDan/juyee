@@ -3,6 +3,8 @@
 <model-hints>
 	<model name="com.justonetech.sys.model.Dictionary">
 		<field name="dictionaryId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createTime" type="Date" />
@@ -25,6 +27,8 @@
 	</model>
 	<model name="com.justonetech.sys.model.SMS">
 		<field name="smsId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
 		<field name="createTime" type="Date" />
 		<field name="modifiedTime" type="Date" />
 		<field name="content" type="String">

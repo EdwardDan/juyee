@@ -74,6 +74,34 @@ public interface SMSModel extends BaseModel<SMS> {
 	public void setSmsId(long smsId);
 
 	/**
+	 * Returns the group ID of this s m s.
+	 *
+	 * @return the group ID of this s m s
+	 */
+	public long getGroupId();
+
+	/**
+	 * Sets the group ID of this s m s.
+	 *
+	 * @param groupId the group ID of this s m s
+	 */
+	public void setGroupId(long groupId);
+
+	/**
+	 * Returns the company ID of this s m s.
+	 *
+	 * @return the company ID of this s m s
+	 */
+	public long getCompanyId();
+
+	/**
+	 * Sets the company ID of this s m s.
+	 *
+	 * @param companyId the company ID of this s m s
+	 */
+	public void setCompanyId(long companyId);
+
+	/**
 	 * Returns the create time of this s m s.
 	 *
 	 * @return the create time of this s m s

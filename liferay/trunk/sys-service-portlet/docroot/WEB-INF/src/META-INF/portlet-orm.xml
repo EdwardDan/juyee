@@ -10,6 +10,8 @@
 	<mapped-superclass class="com.justonetech.sys.model.impl.DictionaryModelImpl">
 		<attributes>
 			<id name="dictionaryId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
 			<basic name="userId" />
 			<basic name="userName" />
 			<basic name="createTime">
@@ -42,6 +44,8 @@
 	<mapped-superclass class="com.justonetech.sys.model.impl.SMSModelImpl">
 		<attributes>
 			<id name="smsId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
 			<basic name="createTime">
 				<temporal>TIMESTAMP</temporal>
 			</basic>

@@ -314,6 +314,8 @@ public class SMSPersistenceImpl extends BasePersistenceImpl<SMS>
 		smsImpl.setPrimaryKey(sms.getPrimaryKey());
 
 		smsImpl.setSmsId(sms.getSmsId());
+		smsImpl.setGroupId(sms.getGroupId());
+		smsImpl.setCompanyId(sms.getCompanyId());
 		smsImpl.setCreateTime(sms.getCreateTime());
 		smsImpl.setModifiedTime(sms.getModifiedTime());
 		smsImpl.setContent(sms.getContent());

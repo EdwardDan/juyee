@@ -127,7 +127,7 @@ public class DictionaryLocalServiceClp implements DictionaryLocalService {
 
 		_methodParameterTypes21 = new String[] { "long" };
 
-		_methodName22 = "findByParentIdAndIsValid";
+		_methodName22 = "findByParentIdIsValid";
 
 		_methodParameterTypes22 = new String[] { "long", "boolean", "int", "int" };
 
@@ -810,7 +810,7 @@ public class DictionaryLocalServiceClp implements DictionaryLocalService {
 	}
 
 	@Override
-	public java.util.List<com.justonetech.sys.model.Dictionary> findByParentIdAndIsValid(
+	public java.util.List<com.justonetech.sys.model.Dictionary> findByParentIdIsValid(
 		long parentId, boolean isValid, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;

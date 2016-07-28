@@ -291,11 +291,10 @@ public class DictionaryLocalServiceUtil {
 		return getService().countByParentId(parentId);
 	}
 
-	public static java.util.List<com.justonetech.sys.model.Dictionary> findByParentIdAndIsValid(
+	public static java.util.List<com.justonetech.sys.model.Dictionary> findByParentIdIsValid(
 		long parentId, boolean isValid, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .findByParentIdAndIsValid(parentId, isValid, start, end);
+		return getService().findByParentIdIsValid(parentId, isValid, start, end);
 	}
 
 	public static int countByParentIdIsValid(long parentId, boolean isValid)
