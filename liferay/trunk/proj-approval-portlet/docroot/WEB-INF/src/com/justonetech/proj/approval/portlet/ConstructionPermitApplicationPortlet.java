@@ -42,7 +42,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
-import com.sun.org.apache.bcel.internal.generic.NEW;
 
 /**
  * Portlet implementation class ConstructionPermitApplicationPortlet

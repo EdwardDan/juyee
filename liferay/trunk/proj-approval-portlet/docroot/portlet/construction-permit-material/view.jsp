@@ -1,13 +1,13 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ include file="/common/init.jsp"%>
-<c:set var="contentPath"
+<c:set var="contextPath"
 	value="${request.contextPath}/portlet/construction-permit-material" />
 <portlet:defineObjects />
 <portlet:renderURL var="inputURL">
-	<portlet:param name="mvcPath" value="${contentPath}/input.jsp" />
+	<portlet:param name="mvcPath" value="${contextPath}/input.jsp" />
 	<portlet:param name="sortNoMax" value="${constructionPermitMaterialsCount}" />
 </portlet:renderURL>
-<portlet:renderURL var="viewURL" />
+<portlet:renderURL var="viewURL" /> 
 <%
 	long type=ParamUtil.getLong(request, "type");
 %>
@@ -31,7 +31,7 @@
 		<aui:nav>
 			<portlet:renderURL var="addDispatchURL">
 				<portlet:param name="mvcPath"
-					value="${contentPath }/edit-dispatch.jsp" />
+					value="${contextPath }/edit-dispatch.jsp" />
 			</portlet:renderURL>
 			<aui:nav-item iconCssClass="icon-plus" label="添加" onclick="add()" />
 		</aui:nav>
@@ -74,7 +74,7 @@
 						<portlet:param name="dictionaryId"
 							value="${constructionPermitMaterial.dictionaryId}" />
 							<portlet:param name="type" value="${constructionPermitMaterial.type }"/>
-						<portlet:param name="mvcPath" value="${contentPath}/input.jsp" />
+						<portlet:param name="mvcPath" value="${contextPath}/input.jsp" />
 					</portlet:actionURL>
 					<portlet:actionURL var="deleteConstructionPermitMaterialURL"
 						name="deleteConstructionPermitMaterial">

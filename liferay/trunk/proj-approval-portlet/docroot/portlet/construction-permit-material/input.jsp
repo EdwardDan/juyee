@@ -1,7 +1,6 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ include file="/common/init.jsp"%>
-<portlet:defineObjects />
-<c:set var="contentPath"
+<c:set var="contextPath"
 	value="${request.contextPath}/portlet/construction-permit-material" />
 <%
 	long dictionaryId = ParamUtil
@@ -21,7 +20,7 @@
 %>
 <portlet:renderURL var="viewURL" /> 
 <portlet:renderURL var="thisURL">
-<portlet:param name="mvcPath" value="${contentPath }/input.jsp" />
+<portlet:param name="mvcPath" value="${contextPath }/input.jsp" />
 </portlet:renderURL>
 <aui:model-context bean="${constructionPermitMaterial}"
 	model="<%=ConstructionPermitMaterial.class %>" />

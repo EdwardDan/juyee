@@ -2,19 +2,19 @@
 <%@ include file="/common/init.jsp"%>
 
 
-<c:set var="contentPath"
+<c:set var="contextPath"
 	value="${request.contextPath}/portlet/construction-permit-application" />
 
 
 <portlet:renderURL var="viewURL" />
 
 <!-- 项目信息的默认页面是 edit-projInfo-tab.jsp-->
-<c:set var="pagePath" value="${contentPath}/edit-projInfo-tab.jsp" />
+<c:set var="pagePath" value="${contextPath}/edit-projInfo-tab.jsp" />
 
 
 <!--从view.jsp跳转来 如果选择航道 页面为edit-projInfoExt-tab.jsp-->
 <c:if test='<%=ParamUtil.getBoolean(request, "pageType")%>'>
-	<c:set var="pagePath" value="${contentPath}/edit-projInfoExt-tab.jsp" />
+	<c:set var="pagePath" value="${contextPath}/edit-projInfoExt-tab.jsp" />
 </c:if>
 
 
@@ -31,7 +31,7 @@
 <!--从后台跳转来,比如编辑， 如果选择航道 页面为edit-projInfoExt-tab.jsp-->
 <c:if test="${dictionary!=null}">
 	<c:if test="${dictionary.name=='航道'}">
-		<c:set var="pagePath" value="${contentPath}/edit-projInfoExt-tab.jsp" />
+		<c:set var="pagePath" value="${contextPath}/edit-projInfoExt-tab.jsp" />
 	</c:if>
 	<c:set var="projTypeName" value='${dictionary.name}' />
 	<c:set var="projType" value='${dictionary.dictionaryId}' />
@@ -60,12 +60,12 @@
 		</liferay-ui:section>
 		<liferay-ui:section>
 			<liferay-util:include
-				page="${contentPath}/edit-companyHeadInfo-tab.jsp"
+				page="${contextPath}/edit-companyHeadInfo-tab.jsp"
 				servletContext="<%=this.getServletContext()%>">
 			</liferay-util:include>
 		</liferay-ui:section>
 		<liferay-ui:section>
-			<liferay-util:include page="${contentPath}/edit-companyList-tab.jsp"
+			<liferay-util:include page="${contextPath}/edit-companyList-tab.jsp"
 				servletContext="<%=this.getServletContext()%>">
 			</liferay-util:include>
 		</liferay-ui:section>

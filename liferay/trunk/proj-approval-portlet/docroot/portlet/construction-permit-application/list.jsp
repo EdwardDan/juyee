@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ include file="/common/init.jsp"%>
  
-<c:set var="contentPath"
+<c:set var="contextPath"
 	value="${request.contextPath}/portlet/construction-permit-application" />
 
 <c:set var="namespace"
@@ -40,7 +40,7 @@
 <!-- 添加功能 -->
 <portlet:renderURL var="addConstructionPermitURL">
 				<portlet:param name="mvcPath"
-					value="${contentPath}/edit.jsp" />
+					value="${contextPath}/edit.jsp" />
 </portlet:renderURL>
 
 
@@ -120,11 +120,11 @@
 				<liferay-ui:icon-menu>
 					<portlet:actionURL var="editConstructionPermitURL" name="editConstructionPermit">
 						<portlet:param name="constructionPermitId" value="${constructionPermit.constructionPermitId}" />
-						<portlet:param name="mvcPath" value="${contentPath }/edit.jsp" />
+						<portlet:param name="mvcPath" value="${contextPath }/edit.jsp" />
 					</portlet:actionURL>
 					<portlet:actionURL var="viewConstructionPermitURL" name="viewConstructionPermit">
 						<portlet:param name="constructionPermitId" value="${constructionPermit.constructionPermitId}" />
-						<portlet:param name="mvcPath" value="${contentPath }/view.jsp" />
+						<portlet:param name="mvcPath" value="${contextPath }/view.jsp" />
 					</portlet:actionURL>
 					<liferay-ui:icon image="view" label="查看" url="${viewConstructionPermitURL}" />
 					<liferay-ui:icon image="edit" label="编辑" url="${editConstructionPermitURL}" />

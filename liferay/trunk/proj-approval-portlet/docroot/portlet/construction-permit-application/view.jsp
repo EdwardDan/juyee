@@ -2,19 +2,19 @@
 <%@ include file="/common/init.jsp"%>
 
 
-<c:set var="contentPath"
+<c:set var="contextPath"
 	value="${request.contextPath}/portlet/construction-permit-application" />
 
 
 <portlet:renderURL var="viewURL" />
 
 <!-- 项目信息的默认页面是 edit-projInfo-tab.jsp-->
-<c:set var="pagePath" value="${contentPath}/view-projInfo-tab.jsp" />
+<c:set var="pagePath" value="${contextPath}/view-projInfo-tab.jsp" />
 	
 <!--从后台跳转来,比如编辑， 如果选择航道 页面为edit-projInfoExt-tab.jsp-->
 <c:if test="${dictionary!=null}">
 	<c:if test="${dictionary.name=='航道'}">
-		<c:set var="pagePath" value="${contentPath}/view-projInfoExt-tab.jsp" />
+		<c:set var="pagePath" value="${contextPath}/view-projInfoExt-tab.jsp" />
 	</c:if>
 	<c:set var="projTypeName" value='${dictionary.name}' />
 	<c:set var="projType" value='${dictionary.dictionaryId}' />
@@ -35,12 +35,12 @@
 		</liferay-ui:section>
 		<liferay-ui:section>
 			<liferay-util:include
-				page="${contentPath}/view-companyHeadInfo-tab.jsp"
+				page="${contextPath}/view-companyHeadInfo-tab.jsp"
 				servletContext="<%=this.getServletContext()%>">
 			</liferay-util:include>
 		</liferay-ui:section>
 		<liferay-ui:section>
-			<liferay-util:include page="${contentPath}/view-companyList-tab.jsp"
+			<liferay-util:include page="${contextPath}/view-companyList-tab.jsp"
 				servletContext="<%=this.getServletContext()%>">
 			</liferay-util:include>
 		</liferay-ui:section>
