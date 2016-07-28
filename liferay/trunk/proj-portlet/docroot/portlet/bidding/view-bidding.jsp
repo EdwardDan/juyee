@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ include file="/common/init.jsp"%>
-<c:set var="contentPath" value="${request.contextPath}/portlet/bidding" />
+<c:set var="contextPath" value="${request.contextPath}/portlet/bidding" />
 <%
 	long projectId = ParamUtil.getLong(request, "projectId"); 
 	List<Bidding> biddings = null;
@@ -16,15 +16,15 @@
 <portlet:renderURL var="viewURL" />
 <portlet:actionURL var="doViewBidding" name="doViewBiddings">
 	<portlet:param name="projectId" value="${projectId}" />
-	<portlet:param name="mvcPath" value="${contentPath }/viewBidding.jsp" />
+	<portlet:param name="mvcPath" value="${contextPath }/viewBidding.jsp" />
 </portlet:actionURL>
 <portlet:actionURL var="addBiddingURL" name="editBidding">
 	<portlet:param name="projectId" value="${projectId}" />
-	<portlet:param name="mvcPath" value="${contentPath }/edit-bidding.jsp" />
+	<portlet:param name="mvcPath" value="${contextPath }/edit-bidding.jsp" />
 </portlet:actionURL>
 <portlet:actionURL var="deleteBiddingsURL" name="deleteBiddings">
 	<portlet:param name="projectId" value="${projectId}" />
-	<portlet:param name="mvcPath" value="${contentPath }/view-bidding.jsp" />
+	<portlet:param name="mvcPath" value="${contextPath }/view-bidding.jsp" />
 </portlet:actionURL>
 <liferay-ui:header title="标段维护" backURL="${viewURL}" />
 <aui:form action="${doViewBidding }" name="fm">
@@ -64,15 +64,15 @@
 			<portlet:actionURL var="view" name="viewBiddingDetail">
 				<portlet:param name="biddingId" value="${bidding.biddingId}" />
 				<portlet:param name="mvcPath"
-					value="${contentPath }/view-bidding-detail.jsp" />
+					value="${contextPath }/view-bidding-detail.jsp" />
 			</portlet:actionURL>
 			<portlet:actionURL var="deleteURL" name="deleteBiddings">
 				<portlet:param name="biddingIds" value="${bidding.biddingId}" />
-				<portlet:param name="redirect" value="${contentPath }/view-bidding.jsp" />
+				<portlet:param name="redirect" value="${contextPath }/view-bidding.jsp" />
 			</portlet:actionURL>
 			<portlet:actionURL var="editURL" name="editBidding"> 
 				<portlet:param name="biddingId" value="${bidding.biddingId}" />
-				<portlet:param name="mvcPath" value="${contentPath }/edit-bidding.jsp" />
+				<portlet:param name="mvcPath" value="${contextPath }/edit-bidding.jsp" />
 			</portlet:actionURL>
 			<liferay-ui:icon-menu>
 				<liferay-ui:icon image="view" url="${view}" />

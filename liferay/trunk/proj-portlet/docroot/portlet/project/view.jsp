@@ -1,10 +1,10 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ include file="/common/init.jsp"%>
 
-<c:set var="contentPath" value="${request.contextPath}/portlet/project" />
+<c:set var="contextPath" value="${request.contextPath}/portlet/project" />
 <portlet:renderURL var="viewURL" />
 <portlet:actionURL var="addProjectURL" name="editProject">
-	<portlet:param name="mvcPath" value="${contentPath }/edit-project.jsp" />
+	<portlet:param name="mvcPath" value="${contextPath }/edit-project.jsp" />
 </portlet:actionURL>
 <portlet:actionURL var="deleteProjectsURL" name="deleteProjects">
 	<portlet:param name="redirect" value="${viewURL}" />
@@ -41,7 +41,7 @@
 				<portlet:actionURL var="viewProjectURL" name="viewProject">
 					<portlet:param name="projectId" value="${proj.projectId}" />
 					<portlet:param name="mvcPath"
-						value="${contentPath }/view-project.jsp" />
+						value="${contextPath }/view-project.jsp" />
 				</portlet:actionURL>
 				<portlet:actionURL var="deleteURL">
 					<portlet:param name="projectId" value="${proj.projectId}" />
@@ -49,7 +49,7 @@
 				<portlet:actionURL var="editProjectURL" name="editProject">
 					<portlet:param name="projectId" value="${proj.projectId}" />
 					<portlet:param name="mvcPath"
-						value="${contentPath }/edit-project.jsp" />
+						value="${contextPath }/edit-project.jsp" />
 				</portlet:actionURL>
 				<liferay-ui:icon-menu>
 					<liferay-ui:icon image="view" url="${viewProjectURL}" />

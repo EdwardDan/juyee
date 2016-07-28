@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@include file="/common/init.jsp"%>
 
-<c:set var="contentPath" value="${request.contextPath}/portlet/bidding" />
+<c:set var="contextPath" value="${request.contextPath}/portlet/bidding" />
 
 <%
 	Long biddingId = (Long) request.getAttribute("biddingId");
@@ -35,7 +35,7 @@
 %>
 
 <portlet:renderURL var="viewURL">
-	<portlet:param name="mvcPath" value="${contentPath}/view-bidding.jsp" />
+	<portlet:param name="mvcPath" value="${contextPath}/view-bidding.jsp" />
 	<portlet:param name="projectId" value="${projectId}" />
 </portlet:renderURL>
 <portlet:actionURL var="saveBidding" name="saveBidding">

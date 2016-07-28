@@ -1,9 +1,9 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ include file="/common/init.jsp"%>
-<c:set var="contentPath" value="${request.contextPath}/portlet/bidding" />
+<c:set var="contextPath" value="${request.contextPath}/portlet/bidding" />
 <portlet:renderURL var="viewURL" />
 <portlet:renderURL var="add">
-	<portlet:param name="mvcPath" value="${contentPath }/edit-project.jsp" />
+	<portlet:param name="mvcPath" value="${contextPath }/edit-project.jsp" />
 </portlet:renderURL>
 <portlet:actionURL var="deleteProjectsURL" name="deleteProjects">
 	<portlet:param name="redirect" value="${viewURL}" />
@@ -37,7 +37,7 @@
 				<portlet:renderURL var="viewBidding">
 					<portlet:param name="projectId" value="${proj.projectId}" />
 					<portlet:param name="mvcPath"
-						value="${contentPath }/view-bidding.jsp" />
+						value="${contextPath }/view-bidding.jsp" />
 				</portlet:renderURL>
 				<aui:button value="维护标段" href="${viewBidding}"></aui:button>
 			</liferay-ui:search-container-column-text>

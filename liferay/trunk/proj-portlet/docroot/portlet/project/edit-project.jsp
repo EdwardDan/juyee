@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@include file="/common/init.jsp"%>
-<c:set var="contentPath" value="${request.contextPath}/portlet/project" />
+<c:set var="contextPath" value="${request.contextPath}/portlet/project" />
 <portlet:renderURL var="viewURL" />
 <portlet:actionURL var="saveProjectURL" name="saveProject">
 	<portlet:param name="redirect" value="${viewURL}" />
