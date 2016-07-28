@@ -4,40 +4,44 @@
 	value="${request.contextPath}/portlet/construction-permit-material" />
 <portlet:defineObjects />
 <portlet:renderURL var="inputURL">
-	<portlet:param name="mvcPath" value="${contextPath}/input.jsp" />
-	<portlet:param name="sortNoMax" value="${constructionPermitMaterialsCount}" />
+	<portlet:param name="mvcPath" value="${contextPath}/edit-construction-permit-material.jsp" />
+	<portlet:param name="sortNoMax"
+		value="${constructionPermitMaterialsCount}" />
 </portlet:renderURL>
-<portlet:renderURL var="viewURL" /> 
+<portlet:renderURL var="viewURL" />
 <%
 	long type=ParamUtil.getLong(request, "type");
 %>
-<select name="projectType" onchange="projectType()">
-	<%
-		Dictionary dictionary = DictionaryLocalServiceUtil
-				.findByCode("ProjectType");
-		if (null != dictionary) {
+<aui:form action="${viewURL }" name="fm">
+	<portlet:renderURL var="addDispatchURL">
+		<portlet:param name="mvcPath"
+			value="${contextPath }/edit-dispatch.jsp" />
+	</portlet:renderURL>
+	<aui:row style="margin-bottom:-20px">
+		<aui:col span="6">
+	<aui:select id="projectType" name="projectType" label="项目类型："
+		inlineField="true" inlineLabel="left" onchange="projectType()" >
+		<%
+			Dictionary dictionary = DictionaryLocalServiceUtil
+				.findByCode("projectType");
+				if (null != dictionary) {
 			List<Dictionary> dictionaries = DictionaryLocalServiceUtil
 					.findByParentId(dictionary.getDictionaryId(), -1, -1);
 			for (Dictionary dic : dictionaries) {
-	%>
-	<option value="<%=dic.getDictionaryId()%>"
-		<c:if test="<%=type==dic.getDictionaryId()%>">selected</c:if>><%=dic.getName()%></option>
-	<%
-		}}
-	%>
-</select>
-<aui:form action="${viewURL }" name="fm">
-	<aui:nav-bar>
-		<aui:nav>
-			<portlet:renderURL var="addDispatchURL">
-				<portlet:param name="mvcPath"
-					value="${contextPath }/edit-dispatch.jsp" />
-			</portlet:renderURL>
-			<aui:nav-item iconCssClass="icon-plus" label="添加" onclick="add()" />
-		</aui:nav>
-	</aui:nav-bar>
-	<liferay-ui:search-container delta="5" emptyResultsMessage="没有找到施工材料信息。">
-		<liferay-ui:search-container-results results="${constructionPermitMaterials}"
+		%>
+		<option value="<%=dic.getDictionaryId()%>"
+			<c:if test="<%=type==dic.getDictionaryId()%>">selected</c:if>><%=dic.getName()%></option>
+		<%
+			}}
+		%>
+	</aui:select>
+	<aui:button value="添加" onclick="add()" icon="icon-plus"></aui:button>
+	</aui:col>
+	</aui:row>
+	<liferay-ui:search-container delta="5"
+		emptyResultsMessage="没有找到施工材料信息。">
+		<liferay-ui:search-container-results
+			results="${constructionPermitMaterials}"
 			total="${constructionPermitMaterialsCount}">
 		</liferay-ui:search-container-results>
 		<liferay-ui:search-container-row
@@ -45,15 +49,15 @@
 			modelVar="constructionPermitMaterial" keyProperty="dictionaryId">
 
 			<liferay-ui:search-container-column-text name="序号" property="sortNo" />
-			 <%
+			<%
 				Dictionary projectType=DictionaryLocalServiceUtil.getDictionary(constructionPermitMaterial.getDictionaryId());
-				if(null!=projectType){
+					if(null!=projectType){
 			%>
 			<liferay-ui:search-container-column-text name="项目类型"
 				value="<%=projectType.getName()%>" />
 			<%
 				}
-			%> 
+			%>
 			<%
 				Dictionary materialType = DictionaryLocalServiceUtil.getDictionary(constructionPermitMaterial.getType());
 			%>
@@ -63,18 +67,17 @@
 				property="materialName" />
 			<liferay-ui:search-container-column-text name="审核要求"
 				property="auditReq" />
-			<%-- <liferay-ui:search-container-column-text name="绿色审核要求"
-				property="auditReqGreen" />
-			<liferay-ui:search-container-column-text name="应交份数" property="yjNum" /> --%>
 			<liferay-ui:search-container-column-text>
 				<liferay-ui:icon-menu>
 					<portlet:actionURL var="editConstructionPermitMaterialURL"
 						name="editConstructionPermitMaterial">
-						<portlet:param name="sortNo" value="${constructionPermitMaterial.sortNo}" />
+						<portlet:param name="sortNo"
+							value="${constructionPermitMaterial.sortNo}" />
 						<portlet:param name="dictionaryId"
 							value="${constructionPermitMaterial.dictionaryId}" />
-							<portlet:param name="type" value="${constructionPermitMaterial.type }"/>
-						<portlet:param name="mvcPath" value="${contextPath}/input.jsp" />
+						<portlet:param name="type"
+							value="${constructionPermitMaterial.type }" />
+						<portlet:param name="mvcPath" value="${contextPath}/edit-construction-permit-material.jsp" />
 					</portlet:actionURL>
 					<portlet:actionURL var="deleteConstructionPermitMaterialURL"
 						name="deleteConstructionPermitMaterial">
@@ -93,23 +96,29 @@
 		<liferay-ui:search-iterator>
 			<%
 				String typeChoosen = ParamUtil.getString(request,
-									"type");
-							if (null == typeChoosen) {
-							} else {
-								searchContainer.getIteratorURL().setParameter(
-										"type", typeChoosen);
-							}
+										"type");
+								if (null == typeChoosen) {
+								} else {
+									searchContainer.getIteratorURL().setParameter(
+											"type", typeChoosen);
+								}
 			%>
 		</liferay-ui:search-iterator>
 	</liferay-ui:search-container>
 </aui:form>
 <script>
 	function add() {
-		window.location.href = "${inputURL}&<portlet:namespace/>dictionaryId="
-				+ document.getElementsByName("projectType")[0].value;
+		if (document.getElementsByName("<portlet:namespace/>projectType")[0].value != "") {
+			window.location.href = "${inputURL}&<portlet:namespace/>dictionaryId="
+					+ document
+							.getElementsByName("<portlet:namespace/>projectType")[0].value;
+		} else {
+			alert("系统字典项目类型未维护！");
+		}
+
 	}
 	function projectType() {
 		window.location.href = "${viewURL}&<portlet:namespace/>type="
-				+ document.getElementsByName("projectType")[0].value;
+				+ document.getElementsByName("<portlet:namespace/>projectType")[0].value;
 	}
 </script>
