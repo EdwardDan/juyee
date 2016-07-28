@@ -47,6 +47,10 @@
 <aui:model-context bean="${constructionPermit}"
 	model="<%=ConstructionPermit.class %>" />
 
+<liferay-ui:header title='${empty constructionPermit?"添加":"编辑"}施工许可申请'
+	backURL="${viewURL}" />
+
+
 <aui:form action="${editApplicationURL}">
 	<aui:input name="projType" type="hidden" value="${projType}"></aui:input>
 	<aui:input name="constructionPermitId" type="hidden" value="${constructionPermit.constructionPermitId}"></aui:input>
