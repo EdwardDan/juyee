@@ -29,11 +29,11 @@
 				<aui:select name="rocordType" label="文种" inlineField="true"
 					inlineLabel="left" type="select" style="width:100px">
 					<%
-						Dictionary dictionary = DictionaryLocalServiceUtil.findByGroupIdAndCode(groupId,
+						Dictionary dictionary = DictionaryLocalServiceUtil.findByCode(
 													"rocordType");
 											if (null != dictionary) {
 												List<Dictionary> dictionaries = DictionaryLocalServiceUtil
-														.findByGroupIdAndParentId(groupId, dictionary.getDictionaryId(), -1, -1);
+														.findByParentId( dictionary.getDictionaryId(), -1, -1);
 												for (Dictionary dic : dictionaries) {
 					%>
 					<aui:option value="<%=dic.getDictionaryId()%>"><%=dic.getName()%></aui:option>
@@ -47,11 +47,11 @@
 				<aui:select name="securityLevel" label="密级" inlineField="true"
 					inlineLabel="left" type="select" style="width:70px">
 					<%
-						Dictionary dictionary = DictionaryLocalServiceUtil.findByGroupIdAndCode(groupId,
+						Dictionary dictionary = DictionaryLocalServiceUtil.findByCode(
 													"securityLevel");
 											if (null != dictionary) {
 												List<Dictionary> dictionaries = DictionaryLocalServiceUtil
-														.findByGroupIdAndParentId(groupId, dictionary.getDictionaryId(), -1, -1);
+														.findByParentId( dictionary.getDictionaryId(), -1, -1);
 												for (Dictionary dic : dictionaries) {
 					%>
 					<aui:option value="<%=dic.getDictionaryId()%>"><%=dic.getName()%></aui:option>
@@ -65,11 +65,11 @@
 				<aui:select name="organaAbbreviation" label="" inlineField="true"
 					inlineLabel="left" type="select" style="width:90px">
 					<%
-						Dictionary dictionary = DictionaryLocalServiceUtil.findByGroupIdAndCode(groupId,
+						Dictionary dictionary = DictionaryLocalServiceUtil.findByCode(
 													"organaAbbreviation");
 											if (null != dictionary) {
 												List<Dictionary> dictionaries = DictionaryLocalServiceUtil
-														.findByGroupIdAndParentId(groupId, dictionary.getDictionaryId(), -1, -1);
+														.findByParentId( dictionary.getDictionaryId(), -1, -1);
 												for (Dictionary dic : dictionaries) {
 					%>
 					<aui:option value="<%=dic.getDictionaryId()%>"><%=dic.getName()%></aui:option>
@@ -82,10 +82,10 @@
 					type="select" style="width:70px">
 					<%
 						Dictionary dictionary = DictionaryLocalServiceUtil
-													.findByGroupIdAndCode(groupId, "year");
+													.findByCode( "year");
 											if (null != dictionary) {
 												List<Dictionary> dictionaries = DictionaryLocalServiceUtil
-														.findByGroupIdAndParentId(groupId, dictionary.getDictionaryId(), -1, -1);
+														.findByParentId( dictionary.getDictionaryId(), -1, -1);
 												for (Dictionary dic : dictionaries) {
 					%>
 					<aui:option value="<%=dic.getDictionaryId()%>"><%=dic.getName()%></aui:option>
@@ -140,11 +140,11 @@
 				<aui:select name="urgencyDegree" label="紧急程度" inlineField="true"
 					inlineLabel="left" type="select" style="width: 60px;">
 					<%
-						Dictionary dictionary = DictionaryLocalServiceUtil.findByGroupIdAndCode(groupId,
+						Dictionary dictionary = DictionaryLocalServiceUtil.findByCode(
 													"urgencyDegree");
 											if (null != dictionary) {
 												List<Dictionary> dictionaries = DictionaryLocalServiceUtil
-														.findByGroupIdAndParentId(groupId, dictionary.getDictionaryId(), -1, -1);
+														.findByParentId( dictionary.getDictionaryId(), -1, -1);
 												for (Dictionary dic : dictionaries) {
 					%>
 					<aui:option value="<%=dic.getDictionaryId()%>"><%=dic.getName()%></aui:option>
