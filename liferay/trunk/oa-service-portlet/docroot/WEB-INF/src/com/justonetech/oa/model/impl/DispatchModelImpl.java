@@ -63,11 +63,13 @@ public class DispatchModelImpl extends BaseModelImpl<Dispatch>
 	public static final String TABLE_NAME = "oa_Dispatch";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "dispatchId", Types.BIGINT },
+			{ "groupId", Types.BIGINT },
+			{ "companyId", Types.BIGINT },
 			{ "userId", Types.BIGINT },
 			{ "userName", Types.VARCHAR },
 			{ "createTime", Types.TIMESTAMP },
 			{ "modifiedTime", Types.TIMESTAMP },
-			{ "rocordType", Types.BIGINT },
+			{ "recordType", Types.BIGINT },
 			{ "securityLevel", Types.BIGINT },
 			{ "organaAbbreviation", Types.BIGINT },
 			{ "year", Types.INTEGER },
@@ -79,7 +81,7 @@ public class DispatchModelImpl extends BaseModelImpl<Dispatch>
 			{ "writtenDate", Types.TIMESTAMP },
 			{ "urgencyDegree", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table oa_Dispatch (dispatchId LONG not null primary key,userId LONG,userName VARCHAR(75) null,createTime DATE null,modifiedTime DATE null,rocordType LONG,securityLevel LONG,organaAbbreviation LONG,year INTEGER,serialNo INTEGER,title VARCHAR(75) null,sendOrgan VARCHAR(75) null,ccOrgan VARCHAR(75) null,writtenOrgan VARCHAR(75) null,writtenDate DATE null,urgencyDegree LONG)";
+	public static final String TABLE_SQL_CREATE = "create table oa_Dispatch (dispatchId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createTime DATE null,modifiedTime DATE null,recordType LONG,securityLevel LONG,organaAbbreviation LONG,year INTEGER,serialNo INTEGER,title VARCHAR(75) null,sendOrgan VARCHAR(75) null,ccOrgan VARCHAR(75) null,writtenOrgan VARCHAR(75) null,writtenDate DATE null,urgencyDegree LONG)";
 	public static final String TABLE_SQL_DROP = "drop table oa_Dispatch";
 	public static final String ORDER_BY_JPQL = " ORDER BY dispatch.modifiedTime DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY oa_Dispatch.modifiedTime DESC";
@@ -138,11 +140,13 @@ public class DispatchModelImpl extends BaseModelImpl<Dispatch>
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("dispatchId", getDispatchId());
+		attributes.put("groupId", getGroupId());
+		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
 		attributes.put("createTime", getCreateTime());
 		attributes.put("modifiedTime", getModifiedTime());
-		attributes.put("rocordType", getRocordType());
+		attributes.put("recordType", getRecordType());
 		attributes.put("securityLevel", getSecurityLevel());
 		attributes.put("organaAbbreviation", getOrganaAbbreviation());
 		attributes.put("year", getYear());
@@ -163,6 +167,18 @@ public class DispatchModelImpl extends BaseModelImpl<Dispatch>
 
 		if (dispatchId != null) {
 			setDispatchId(dispatchId);
+		}
+
+		Long groupId = (Long)attributes.get("groupId");
+
+		if (groupId != null) {
+			setGroupId(groupId);
+		}
+
+		Long companyId = (Long)attributes.get("companyId");
+
+		if (companyId != null) {
+			setCompanyId(companyId);
 		}
 
 		Long userId = (Long)attributes.get("userId");
@@ -189,10 +205,10 @@ public class DispatchModelImpl extends BaseModelImpl<Dispatch>
 			setModifiedTime(modifiedTime);
 		}
 
-		Long rocordType = (Long)attributes.get("rocordType");
+		Long recordType = (Long)attributes.get("recordType");
 
-		if (rocordType != null) {
-			setRocordType(rocordType);
+		if (recordType != null) {
+			setRecordType(recordType);
 		}
 
 		Long securityLevel = (Long)attributes.get("securityLevel");
@@ -267,6 +283,26 @@ public class DispatchModelImpl extends BaseModelImpl<Dispatch>
 	}
 
 	@Override
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	@Override
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+	}
+
+	@Override
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	@Override
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
+	}
+
+	@Override
 	public long getUserId() {
 		return _userId;
 	}
@@ -324,13 +360,13 @@ public class DispatchModelImpl extends BaseModelImpl<Dispatch>
 	}
 
 	@Override
-	public long getRocordType() {
-		return _rocordType;
+	public long getRecordType() {
+		return _recordType;
 	}
 
 	@Override
-	public void setRocordType(long rocordType) {
-		_rocordType = rocordType;
+	public void setRecordType(long recordType) {
+		_recordType = recordType;
 	}
 
 	@Override
@@ -469,7 +505,7 @@ public class DispatchModelImpl extends BaseModelImpl<Dispatch>
 
 	@Override
 	public ExpandoBridge getExpandoBridge() {
-		return ExpandoBridgeFactoryUtil.getExpandoBridge(0,
+		return ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
 			Dispatch.class.getName(), getPrimaryKey());
 	}
 
@@ -495,11 +531,13 @@ public class DispatchModelImpl extends BaseModelImpl<Dispatch>
 		DispatchImpl dispatchImpl = new DispatchImpl();
 
 		dispatchImpl.setDispatchId(getDispatchId());
+		dispatchImpl.setGroupId(getGroupId());
+		dispatchImpl.setCompanyId(getCompanyId());
 		dispatchImpl.setUserId(getUserId());
 		dispatchImpl.setUserName(getUserName());
 		dispatchImpl.setCreateTime(getCreateTime());
 		dispatchImpl.setModifiedTime(getModifiedTime());
-		dispatchImpl.setRocordType(getRocordType());
+		dispatchImpl.setRecordType(getRecordType());
 		dispatchImpl.setSecurityLevel(getSecurityLevel());
 		dispatchImpl.setOrganaAbbreviation(getOrganaAbbreviation());
 		dispatchImpl.setYear(getYear());
@@ -573,6 +611,10 @@ public class DispatchModelImpl extends BaseModelImpl<Dispatch>
 
 		dispatchCacheModel.dispatchId = getDispatchId();
 
+		dispatchCacheModel.groupId = getGroupId();
+
+		dispatchCacheModel.companyId = getCompanyId();
+
 		dispatchCacheModel.userId = getUserId();
 
 		dispatchCacheModel.userName = getUserName();
@@ -601,7 +643,7 @@ public class DispatchModelImpl extends BaseModelImpl<Dispatch>
 			dispatchCacheModel.modifiedTime = Long.MIN_VALUE;
 		}
 
-		dispatchCacheModel.rocordType = getRocordType();
+		dispatchCacheModel.recordType = getRecordType();
 
 		dispatchCacheModel.securityLevel = getSecurityLevel();
 
@@ -659,10 +701,14 @@ public class DispatchModelImpl extends BaseModelImpl<Dispatch>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(33);
+		StringBundler sb = new StringBundler(37);
 
 		sb.append("{dispatchId=");
 		sb.append(getDispatchId());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
 		sb.append(", userId=");
 		sb.append(getUserId());
 		sb.append(", userName=");
@@ -671,8 +717,8 @@ public class DispatchModelImpl extends BaseModelImpl<Dispatch>
 		sb.append(getCreateTime());
 		sb.append(", modifiedTime=");
 		sb.append(getModifiedTime());
-		sb.append(", rocordType=");
-		sb.append(getRocordType());
+		sb.append(", recordType=");
+		sb.append(getRecordType());
 		sb.append(", securityLevel=");
 		sb.append(getSecurityLevel());
 		sb.append(", organaAbbreviation=");
@@ -700,7 +746,7 @@ public class DispatchModelImpl extends BaseModelImpl<Dispatch>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(52);
+		StringBundler sb = new StringBundler(58);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.oa.model.Dispatch");
@@ -709,6 +755,14 @@ public class DispatchModelImpl extends BaseModelImpl<Dispatch>
 		sb.append(
 			"<column><column-name>dispatchId</column-name><column-value><![CDATA[");
 		sb.append(getDispatchId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append(getGroupId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userId</column-name><column-value><![CDATA[");
@@ -727,8 +781,8 @@ public class DispatchModelImpl extends BaseModelImpl<Dispatch>
 		sb.append(getModifiedTime());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>rocordType</column-name><column-value><![CDATA[");
-		sb.append(getRocordType());
+			"<column><column-name>recordType</column-name><column-value><![CDATA[");
+		sb.append(getRecordType());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>securityLevel</column-name><column-value><![CDATA[");
@@ -781,12 +835,14 @@ public class DispatchModelImpl extends BaseModelImpl<Dispatch>
 			Dispatch.class
 		};
 	private long _dispatchId;
+	private long _groupId;
+	private long _companyId;
 	private long _userId;
 	private String _userUuid;
 	private String _userName;
 	private Date _createTime;
 	private Date _modifiedTime;
-	private long _rocordType;
+	private long _recordType;
 	private long _securityLevel;
 	private long _organaAbbreviation;
 	private int _year;

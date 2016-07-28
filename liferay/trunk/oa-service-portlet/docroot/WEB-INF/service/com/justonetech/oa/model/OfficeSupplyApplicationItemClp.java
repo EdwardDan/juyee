@@ -75,6 +75,8 @@ public class OfficeSupplyApplicationItemClp extends BaseModelImpl<OfficeSupplyAp
 
 		attributes.put("officeSupplyApplicationItemId",
 			getOfficeSupplyApplicationItemId());
+		attributes.put("groupId", getGroupId());
+		attributes.put("companyId", getCompanyId());
 		attributes.put("name", getName());
 		attributes.put("model", getModel());
 		attributes.put("unit", getUnit());
@@ -94,6 +96,18 @@ public class OfficeSupplyApplicationItemClp extends BaseModelImpl<OfficeSupplyAp
 
 		if (officeSupplyApplicationItemId != null) {
 			setOfficeSupplyApplicationItemId(officeSupplyApplicationItemId);
+		}
+
+		Long groupId = (Long)attributes.get("groupId");
+
+		if (groupId != null) {
+			setGroupId(groupId);
+		}
+
+		Long companyId = (Long)attributes.get("companyId");
+
+		if (companyId != null) {
+			setCompanyId(companyId);
 		}
 
 		String name = (String)attributes.get("name");
@@ -159,6 +173,52 @@ public class OfficeSupplyApplicationItemClp extends BaseModelImpl<OfficeSupplyAp
 
 				method.invoke(_officeSupplyApplicationItemRemoteModel,
 					officeSupplyApplicationItemId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	@Override
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+
+		if (_officeSupplyApplicationItemRemoteModel != null) {
+			try {
+				Class<?> clazz = _officeSupplyApplicationItemRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setGroupId", long.class);
+
+				method.invoke(_officeSupplyApplicationItemRemoteModel, groupId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	@Override
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
+
+		if (_officeSupplyApplicationItemRemoteModel != null) {
+			try {
+				Class<?> clazz = _officeSupplyApplicationItemRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setCompanyId", long.class);
+
+				method.invoke(_officeSupplyApplicationItemRemoteModel, companyId);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -402,6 +462,8 @@ public class OfficeSupplyApplicationItemClp extends BaseModelImpl<OfficeSupplyAp
 		OfficeSupplyApplicationItemClp clone = new OfficeSupplyApplicationItemClp();
 
 		clone.setOfficeSupplyApplicationItemId(getOfficeSupplyApplicationItemId());
+		clone.setGroupId(getGroupId());
+		clone.setCompanyId(getCompanyId());
 		clone.setName(getName());
 		clone.setModel(getModel());
 		clone.setUnit(getUnit());
@@ -462,10 +524,14 @@ public class OfficeSupplyApplicationItemClp extends BaseModelImpl<OfficeSupplyAp
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(21);
 
 		sb.append("{officeSupplyApplicationItemId=");
 		sb.append(getOfficeSupplyApplicationItemId());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
 		sb.append(", name=");
 		sb.append(getName());
 		sb.append(", model=");
@@ -487,7 +553,7 @@ public class OfficeSupplyApplicationItemClp extends BaseModelImpl<OfficeSupplyAp
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(28);
+		StringBundler sb = new StringBundler(34);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.oa.model.OfficeSupplyApplicationItem");
@@ -496,6 +562,14 @@ public class OfficeSupplyApplicationItemClp extends BaseModelImpl<OfficeSupplyAp
 		sb.append(
 			"<column><column-name>officeSupplyApplicationItemId</column-name><column-value><![CDATA[");
 		sb.append(getOfficeSupplyApplicationItemId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append(getGroupId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>name</column-name><column-value><![CDATA[");
@@ -532,6 +606,8 @@ public class OfficeSupplyApplicationItemClp extends BaseModelImpl<OfficeSupplyAp
 	}
 
 	private long _officeSupplyApplicationItemId;
+	private long _groupId;
+	private long _companyId;
 	private String _name;
 	private String _model;
 	private String _unit;

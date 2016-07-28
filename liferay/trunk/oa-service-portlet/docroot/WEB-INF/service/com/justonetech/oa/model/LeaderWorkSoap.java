@@ -35,6 +35,8 @@ public class LeaderWorkSoap implements Serializable {
 		soapModel.setUserId(model.getUserId());
 		soapModel.setWorkDate(model.getWorkDate());
 		soapModel.setAmOrPm(model.getAmOrPm());
+		soapModel.setGroupId(model.getGroupId());
+		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateTime(model.getCreateTime());
 		soapModel.setModifiedTime(model.getModifiedTime());
@@ -117,6 +119,22 @@ public class LeaderWorkSoap implements Serializable {
 		_amOrPm = amOrPm;
 	}
 
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+	}
+
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
+	}
+
 	public String getUserName() {
 		return _userName;
 	}
@@ -152,6 +170,8 @@ public class LeaderWorkSoap implements Serializable {
 	private long _userId;
 	private Date _workDate;
 	private long _amOrPm;
+	private long _groupId;
+	private long _companyId;
 	private String _userName;
 	private Date _createTime;
 	private Date _modifiedTime;

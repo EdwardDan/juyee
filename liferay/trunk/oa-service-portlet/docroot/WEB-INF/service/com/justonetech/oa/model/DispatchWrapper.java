@@ -50,11 +50,13 @@ public class DispatchWrapper implements Dispatch, ModelWrapper<Dispatch> {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("dispatchId", getDispatchId());
+		attributes.put("groupId", getGroupId());
+		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
 		attributes.put("createTime", getCreateTime());
 		attributes.put("modifiedTime", getModifiedTime());
-		attributes.put("rocordType", getRocordType());
+		attributes.put("recordType", getRecordType());
 		attributes.put("securityLevel", getSecurityLevel());
 		attributes.put("organaAbbreviation", getOrganaAbbreviation());
 		attributes.put("year", getYear());
@@ -75,6 +77,18 @@ public class DispatchWrapper implements Dispatch, ModelWrapper<Dispatch> {
 
 		if (dispatchId != null) {
 			setDispatchId(dispatchId);
+		}
+
+		Long groupId = (Long)attributes.get("groupId");
+
+		if (groupId != null) {
+			setGroupId(groupId);
+		}
+
+		Long companyId = (Long)attributes.get("companyId");
+
+		if (companyId != null) {
+			setCompanyId(companyId);
 		}
 
 		Long userId = (Long)attributes.get("userId");
@@ -101,10 +115,10 @@ public class DispatchWrapper implements Dispatch, ModelWrapper<Dispatch> {
 			setModifiedTime(modifiedTime);
 		}
 
-		Long rocordType = (Long)attributes.get("rocordType");
+		Long recordType = (Long)attributes.get("recordType");
 
-		if (rocordType != null) {
-			setRocordType(rocordType);
+		if (recordType != null) {
+			setRecordType(recordType);
 		}
 
 		Long securityLevel = (Long)attributes.get("securityLevel");
@@ -206,6 +220,46 @@ public class DispatchWrapper implements Dispatch, ModelWrapper<Dispatch> {
 	@Override
 	public void setDispatchId(long dispatchId) {
 		_dispatch.setDispatchId(dispatchId);
+	}
+
+	/**
+	* Returns the group ID of this dispatch.
+	*
+	* @return the group ID of this dispatch
+	*/
+	@Override
+	public long getGroupId() {
+		return _dispatch.getGroupId();
+	}
+
+	/**
+	* Sets the group ID of this dispatch.
+	*
+	* @param groupId the group ID of this dispatch
+	*/
+	@Override
+	public void setGroupId(long groupId) {
+		_dispatch.setGroupId(groupId);
+	}
+
+	/**
+	* Returns the company ID of this dispatch.
+	*
+	* @return the company ID of this dispatch
+	*/
+	@Override
+	public long getCompanyId() {
+		return _dispatch.getCompanyId();
+	}
+
+	/**
+	* Sets the company ID of this dispatch.
+	*
+	* @param companyId the company ID of this dispatch
+	*/
+	@Override
+	public void setCompanyId(long companyId) {
+		_dispatch.setCompanyId(companyId);
 	}
 
 	/**
@@ -311,23 +365,23 @@ public class DispatchWrapper implements Dispatch, ModelWrapper<Dispatch> {
 	}
 
 	/**
-	* Returns the rocord type of this dispatch.
+	* Returns the record type of this dispatch.
 	*
-	* @return the rocord type of this dispatch
+	* @return the record type of this dispatch
 	*/
 	@Override
-	public long getRocordType() {
-		return _dispatch.getRocordType();
+	public long getRecordType() {
+		return _dispatch.getRecordType();
 	}
 
 	/**
-	* Sets the rocord type of this dispatch.
+	* Sets the record type of this dispatch.
 	*
-	* @param rocordType the rocord type of this dispatch
+	* @param recordType the record type of this dispatch
 	*/
 	@Override
-	public void setRocordType(long rocordType) {
-		_dispatch.setRocordType(rocordType);
+	public void setRecordType(long recordType) {
+		_dispatch.setRecordType(recordType);
 	}
 
 	/**

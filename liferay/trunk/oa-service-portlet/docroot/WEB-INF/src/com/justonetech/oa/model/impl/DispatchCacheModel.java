@@ -37,10 +37,14 @@ import java.util.Date;
 public class DispatchCacheModel implements CacheModel<Dispatch>, Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(33);
+		StringBundler sb = new StringBundler(37);
 
 		sb.append("{dispatchId=");
 		sb.append(dispatchId);
+		sb.append(", groupId=");
+		sb.append(groupId);
+		sb.append(", companyId=");
+		sb.append(companyId);
 		sb.append(", userId=");
 		sb.append(userId);
 		sb.append(", userName=");
@@ -49,8 +53,8 @@ public class DispatchCacheModel implements CacheModel<Dispatch>, Externalizable 
 		sb.append(createTime);
 		sb.append(", modifiedTime=");
 		sb.append(modifiedTime);
-		sb.append(", rocordType=");
-		sb.append(rocordType);
+		sb.append(", recordType=");
+		sb.append(recordType);
 		sb.append(", securityLevel=");
 		sb.append(securityLevel);
 		sb.append(", organaAbbreviation=");
@@ -81,6 +85,8 @@ public class DispatchCacheModel implements CacheModel<Dispatch>, Externalizable 
 		DispatchImpl dispatchImpl = new DispatchImpl();
 
 		dispatchImpl.setDispatchId(dispatchId);
+		dispatchImpl.setGroupId(groupId);
+		dispatchImpl.setCompanyId(companyId);
 		dispatchImpl.setUserId(userId);
 
 		if (userName == null) {
@@ -104,7 +110,7 @@ public class DispatchCacheModel implements CacheModel<Dispatch>, Externalizable 
 			dispatchImpl.setModifiedTime(new Date(modifiedTime));
 		}
 
-		dispatchImpl.setRocordType(rocordType);
+		dispatchImpl.setRecordType(recordType);
 		dispatchImpl.setSecurityLevel(securityLevel);
 		dispatchImpl.setOrganaAbbreviation(organaAbbreviation);
 		dispatchImpl.setYear(year);
@@ -155,11 +161,13 @@ public class DispatchCacheModel implements CacheModel<Dispatch>, Externalizable 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		dispatchId = objectInput.readLong();
+		groupId = objectInput.readLong();
+		companyId = objectInput.readLong();
 		userId = objectInput.readLong();
 		userName = objectInput.readUTF();
 		createTime = objectInput.readLong();
 		modifiedTime = objectInput.readLong();
-		rocordType = objectInput.readLong();
+		recordType = objectInput.readLong();
 		securityLevel = objectInput.readLong();
 		organaAbbreviation = objectInput.readLong();
 		year = objectInput.readInt();
@@ -176,6 +184,8 @@ public class DispatchCacheModel implements CacheModel<Dispatch>, Externalizable 
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(dispatchId);
+		objectOutput.writeLong(groupId);
+		objectOutput.writeLong(companyId);
 		objectOutput.writeLong(userId);
 
 		if (userName == null) {
@@ -187,7 +197,7 @@ public class DispatchCacheModel implements CacheModel<Dispatch>, Externalizable 
 
 		objectOutput.writeLong(createTime);
 		objectOutput.writeLong(modifiedTime);
-		objectOutput.writeLong(rocordType);
+		objectOutput.writeLong(recordType);
 		objectOutput.writeLong(securityLevel);
 		objectOutput.writeLong(organaAbbreviation);
 		objectOutput.writeInt(year);
@@ -226,11 +236,13 @@ public class DispatchCacheModel implements CacheModel<Dispatch>, Externalizable 
 	}
 
 	public long dispatchId;
+	public long groupId;
+	public long companyId;
 	public long userId;
 	public String userName;
 	public long createTime;
 	public long modifiedTime;
-	public long rocordType;
+	public long recordType;
 	public long securityLevel;
 	public long organaAbbreviation;
 	public int year;

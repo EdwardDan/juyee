@@ -72,6 +72,34 @@ public interface DeptWorkItemModel extends BaseModel<DeptWorkItem> {
 	public void setDeptWorkItemId(long deptWorkItemId);
 
 	/**
+	 * Returns the group ID of this dept work item.
+	 *
+	 * @return the group ID of this dept work item
+	 */
+	public long getGroupId();
+
+	/**
+	 * Sets the group ID of this dept work item.
+	 *
+	 * @param groupId the group ID of this dept work item
+	 */
+	public void setGroupId(long groupId);
+
+	/**
+	 * Returns the company ID of this dept work item.
+	 *
+	 * @return the company ID of this dept work item
+	 */
+	public long getCompanyId();
+
+	/**
+	 * Sets the company ID of this dept work item.
+	 *
+	 * @param companyId the company ID of this dept work item
+	 */
+	public void setCompanyId(long companyId);
+
+	/**
 	 * Returns the dept work ID of this dept work item.
 	 *
 	 * @return the dept work ID of this dept work item

@@ -51,6 +51,8 @@ public class OfficeSupplyWrapper implements OfficeSupply,
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("officeSupplyId", getOfficeSupplyId());
+		attributes.put("groupId", getGroupId());
+		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
 		attributes.put("createTime", getCreateTime());
@@ -70,6 +72,18 @@ public class OfficeSupplyWrapper implements OfficeSupply,
 
 		if (officeSupplyId != null) {
 			setOfficeSupplyId(officeSupplyId);
+		}
+
+		Long groupId = (Long)attributes.get("groupId");
+
+		if (groupId != null) {
+			setGroupId(groupId);
+		}
+
+		Long companyId = (Long)attributes.get("companyId");
+
+		if (companyId != null) {
+			setCompanyId(companyId);
 		}
 
 		Long userId = (Long)attributes.get("userId");
@@ -165,6 +179,46 @@ public class OfficeSupplyWrapper implements OfficeSupply,
 	@Override
 	public void setOfficeSupplyId(long officeSupplyId) {
 		_officeSupply.setOfficeSupplyId(officeSupplyId);
+	}
+
+	/**
+	* Returns the group ID of this office supply.
+	*
+	* @return the group ID of this office supply
+	*/
+	@Override
+	public long getGroupId() {
+		return _officeSupply.getGroupId();
+	}
+
+	/**
+	* Sets the group ID of this office supply.
+	*
+	* @param groupId the group ID of this office supply
+	*/
+	@Override
+	public void setGroupId(long groupId) {
+		_officeSupply.setGroupId(groupId);
+	}
+
+	/**
+	* Returns the company ID of this office supply.
+	*
+	* @return the company ID of this office supply
+	*/
+	@Override
+	public long getCompanyId() {
+		return _officeSupply.getCompanyId();
+	}
+
+	/**
+	* Sets the company ID of this office supply.
+	*
+	* @param companyId the company ID of this office supply
+	*/
+	@Override
+	public void setCompanyId(long companyId) {
+		_officeSupply.setCompanyId(companyId);
 	}
 
 	/**

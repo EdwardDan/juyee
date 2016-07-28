@@ -63,6 +63,8 @@ public class OfficeSupplyModelImpl extends BaseModelImpl<OfficeSupply>
 	public static final String TABLE_NAME = "oa_OfficeSupply";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "officeSupplyId", Types.BIGINT },
+			{ "groupId", Types.BIGINT },
+			{ "companyId", Types.BIGINT },
 			{ "userId", Types.BIGINT },
 			{ "userName", Types.VARCHAR },
 			{ "createTime", Types.TIMESTAMP },
@@ -73,7 +75,7 @@ public class OfficeSupplyModelImpl extends BaseModelImpl<OfficeSupply>
 			{ "unitPrice", Types.DOUBLE },
 			{ "quantity", Types.INTEGER }
 		};
-	public static final String TABLE_SQL_CREATE = "create table oa_OfficeSupply (officeSupplyId LONG not null primary key,userId LONG,userName VARCHAR(75) null,createTime DATE null,modifiedTime DATE null,name VARCHAR(75) null,model VARCHAR(75) null,unit VARCHAR(75) null,unitPrice DOUBLE,quantity INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table oa_OfficeSupply (officeSupplyId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createTime DATE null,modifiedTime DATE null,name VARCHAR(75) null,model VARCHAR(75) null,unit VARCHAR(75) null,unitPrice DOUBLE,quantity INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table oa_OfficeSupply";
 	public static final String ORDER_BY_JPQL = " ORDER BY officeSupply.modifiedTime DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY oa_OfficeSupply.modifiedTime DESC";
@@ -132,6 +134,8 @@ public class OfficeSupplyModelImpl extends BaseModelImpl<OfficeSupply>
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("officeSupplyId", getOfficeSupplyId());
+		attributes.put("groupId", getGroupId());
+		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
 		attributes.put("createTime", getCreateTime());
@@ -151,6 +155,18 @@ public class OfficeSupplyModelImpl extends BaseModelImpl<OfficeSupply>
 
 		if (officeSupplyId != null) {
 			setOfficeSupplyId(officeSupplyId);
+		}
+
+		Long groupId = (Long)attributes.get("groupId");
+
+		if (groupId != null) {
+			setGroupId(groupId);
+		}
+
+		Long companyId = (Long)attributes.get("companyId");
+
+		if (companyId != null) {
+			setCompanyId(companyId);
 		}
 
 		Long userId = (Long)attributes.get("userId");
@@ -216,6 +232,26 @@ public class OfficeSupplyModelImpl extends BaseModelImpl<OfficeSupply>
 	@Override
 	public void setOfficeSupplyId(long officeSupplyId) {
 		_officeSupplyId = officeSupplyId;
+	}
+
+	@Override
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	@Override
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+	}
+
+	@Override
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	@Override
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
 	}
 
 	@Override
@@ -356,7 +392,7 @@ public class OfficeSupplyModelImpl extends BaseModelImpl<OfficeSupply>
 
 	@Override
 	public ExpandoBridge getExpandoBridge() {
-		return ExpandoBridgeFactoryUtil.getExpandoBridge(0,
+		return ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
 			OfficeSupply.class.getName(), getPrimaryKey());
 	}
 
@@ -382,6 +418,8 @@ public class OfficeSupplyModelImpl extends BaseModelImpl<OfficeSupply>
 		OfficeSupplyImpl officeSupplyImpl = new OfficeSupplyImpl();
 
 		officeSupplyImpl.setOfficeSupplyId(getOfficeSupplyId());
+		officeSupplyImpl.setGroupId(getGroupId());
+		officeSupplyImpl.setCompanyId(getCompanyId());
 		officeSupplyImpl.setUserId(getUserId());
 		officeSupplyImpl.setUserName(getUserName());
 		officeSupplyImpl.setCreateTime(getCreateTime());
@@ -455,6 +493,10 @@ public class OfficeSupplyModelImpl extends BaseModelImpl<OfficeSupply>
 
 		officeSupplyCacheModel.officeSupplyId = getOfficeSupplyId();
 
+		officeSupplyCacheModel.groupId = getGroupId();
+
+		officeSupplyCacheModel.companyId = getCompanyId();
+
 		officeSupplyCacheModel.userId = getUserId();
 
 		officeSupplyCacheModel.userName = getUserName();
@@ -516,10 +558,14 @@ public class OfficeSupplyModelImpl extends BaseModelImpl<OfficeSupply>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(21);
+		StringBundler sb = new StringBundler(25);
 
 		sb.append("{officeSupplyId=");
 		sb.append(getOfficeSupplyId());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
 		sb.append(", userId=");
 		sb.append(getUserId());
 		sb.append(", userName=");
@@ -545,7 +591,7 @@ public class OfficeSupplyModelImpl extends BaseModelImpl<OfficeSupply>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(34);
+		StringBundler sb = new StringBundler(40);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.oa.model.OfficeSupply");
@@ -554,6 +600,14 @@ public class OfficeSupplyModelImpl extends BaseModelImpl<OfficeSupply>
 		sb.append(
 			"<column><column-name>officeSupplyId</column-name><column-value><![CDATA[");
 		sb.append(getOfficeSupplyId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append(getGroupId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userId</column-name><column-value><![CDATA[");
@@ -602,6 +656,8 @@ public class OfficeSupplyModelImpl extends BaseModelImpl<OfficeSupply>
 			OfficeSupply.class
 		};
 	private long _officeSupplyId;
+	private long _groupId;
+	private long _companyId;
 	private long _userId;
 	private String _userUuid;
 	private String _userName;

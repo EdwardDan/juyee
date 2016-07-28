@@ -9,8 +9,10 @@
 		<column name="officeSupplyId" type="long" primary="true" />
 
 		<!-- Group instance -->
+		<column name="groupId" type="long" />
 
 		<!-- Audit fields -->
+		<column name="companyId" type="long" />
 		<column name="userId" type="long" />
 		<column name="userName" type="String" />
 		<column name="createTime" type="Date" />
@@ -40,8 +42,10 @@
 		<column name="officeSupplyApplicationId" type="long" primary="true" />
 
 		<!-- Group instance -->
+		<column name="groupId" type="long" />
 
 		<!-- Audit fields -->
+		<column name="companyId" type="long" />
 		<column name="userId" type="long" />
 		<column name="userName" type="String" />
 		<column name="createTime" type="Date" />
@@ -69,7 +73,11 @@
 		<column name="officeSupplyApplicationItemId" type="long"
 			primary="true" />
 
-		<!-- Other fields -->
+		<!-- Group instance -->
+		<column name="groupId" type="long" />
+
+		<!-- Audit fields -->
+		<column name="companyId" type="long" />
 		<column name="name" type="String" />
 		<column name="model" type="String" />
 		<column name="unit" type="String" />
@@ -94,8 +102,11 @@
 		<column name="amOrPm" type="long" primary="true" />
 
 
-		<!-- Audit fields -->
+		<!-- Group instance -->
+		<column name="groupId" type="long" />
 
+		<!-- Audit fields -->
+		<column name="companyId" type="long" />
 		<column name="userName" type="String" />
 		<column name="createTime" type="Date" />
 		<column name="modifiedTime" type="Date" />
@@ -113,8 +124,11 @@
 
 		<column name="deptWorkId" type="long" primary="true" />
 
-		<!-- Audit fields -->
+		<!-- Group instance -->
+		<column name="groupId" type="long" />
 
+		<!-- Audit fields -->
+		<column name="companyId" type="long" />
 		<column name="userId" type="long" />
 		<column name="userName" type="String" />
 		<column name="createTime" type="Date" />
@@ -150,8 +164,11 @@
 
 		<column name="deptWorkItemId" type="long" primary="true" />
 
-		<!-- Other fields -->
+		<!-- Group instance -->
+		<column name="groupId" type="long" />
 
+		<!-- Audit fields -->
+		<column name="companyId" type="long" />
 		<column name="deptWorkId" type="long" /><!--一周安排ID -->
 		<column name="sortNo" type="int" /><!--序号 -->
 		<column name="dutyPerson" type="String" /><!--责任人 -->
@@ -174,8 +191,11 @@
 
 		<column name="vehicleApplicationId" type="long" primary="true" />
 
-		<!-- Audit fields -->
+		<!-- Group instance -->
+		<column name="groupId" type="long" />
 
+		<!-- Audit fields -->
+		<column name="companyId" type="long" />
 		<column name="userId" type="long" />
 		<column name="userName" type="String" />
 		<column name="createTime" type="Date" />
@@ -212,8 +232,11 @@
 
 		<column name="dispatchId" type="long" primary="true" />
 
-		<!-- Audit fields -->
+		<!-- Group instance -->
+		<column name="groupId" type="long" />
 
+		<!-- Audit fields -->
+		<column name="companyId" type="long" />
 		<column name="userId" type="long" />
 		<column name="userName" type="String" />
 		<column name="createTime" type="Date" />
@@ -221,7 +244,7 @@
 
 		<!-- Other fields -->
 
-		<column name="rocordType" type="long" />
+		<column name="recordType" type="long" />
 		<column name="securityLevel" type="long" />
 		<column name="organaAbbreviation" type="long" />
 		<column name="year" type="int" />

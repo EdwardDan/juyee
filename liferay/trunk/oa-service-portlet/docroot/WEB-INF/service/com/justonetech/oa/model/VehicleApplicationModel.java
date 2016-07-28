@@ -75,6 +75,34 @@ public interface VehicleApplicationModel extends BaseModel<VehicleApplication> {
 	public void setVehicleApplicationId(long vehicleApplicationId);
 
 	/**
+	 * Returns the group ID of this vehicle application.
+	 *
+	 * @return the group ID of this vehicle application
+	 */
+	public long getGroupId();
+
+	/**
+	 * Sets the group ID of this vehicle application.
+	 *
+	 * @param groupId the group ID of this vehicle application
+	 */
+	public void setGroupId(long groupId);
+
+	/**
+	 * Returns the company ID of this vehicle application.
+	 *
+	 * @return the company ID of this vehicle application
+	 */
+	public long getCompanyId();
+
+	/**
+	 * Sets the company ID of this vehicle application.
+	 *
+	 * @param companyId the company ID of this vehicle application
+	 */
+	public void setCompanyId(long companyId);
+
+	/**
 	 * Returns the user ID of this vehicle application.
 	 *
 	 * @return the user ID of this vehicle application

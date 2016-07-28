@@ -50,6 +50,8 @@ public class DeptWorkItemWrapper implements DeptWorkItem,
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("deptWorkItemId", getDeptWorkItemId());
+		attributes.put("groupId", getGroupId());
+		attributes.put("companyId", getCompanyId());
 		attributes.put("deptWorkId", getDeptWorkId());
 		attributes.put("sortNo", getSortNo());
 		attributes.put("dutyPerson", getDutyPerson());
@@ -67,6 +69,18 @@ public class DeptWorkItemWrapper implements DeptWorkItem,
 
 		if (deptWorkItemId != null) {
 			setDeptWorkItemId(deptWorkItemId);
+		}
+
+		Long groupId = (Long)attributes.get("groupId");
+
+		if (groupId != null) {
+			setGroupId(groupId);
+		}
+
+		Long companyId = (Long)attributes.get("companyId");
+
+		if (companyId != null) {
+			setCompanyId(companyId);
 		}
 
 		Long deptWorkId = (Long)attributes.get("deptWorkId");
@@ -150,6 +164,46 @@ public class DeptWorkItemWrapper implements DeptWorkItem,
 	@Override
 	public void setDeptWorkItemId(long deptWorkItemId) {
 		_deptWorkItem.setDeptWorkItemId(deptWorkItemId);
+	}
+
+	/**
+	* Returns the group ID of this dept work item.
+	*
+	* @return the group ID of this dept work item
+	*/
+	@Override
+	public long getGroupId() {
+		return _deptWorkItem.getGroupId();
+	}
+
+	/**
+	* Sets the group ID of this dept work item.
+	*
+	* @param groupId the group ID of this dept work item
+	*/
+	@Override
+	public void setGroupId(long groupId) {
+		_deptWorkItem.setGroupId(groupId);
+	}
+
+	/**
+	* Returns the company ID of this dept work item.
+	*
+	* @return the company ID of this dept work item
+	*/
+	@Override
+	public long getCompanyId() {
+		return _deptWorkItem.getCompanyId();
+	}
+
+	/**
+	* Sets the company ID of this dept work item.
+	*
+	* @param companyId the company ID of this dept work item
+	*/
+	@Override
+	public void setCompanyId(long companyId) {
+		_deptWorkItem.setCompanyId(companyId);
 	}
 
 	/**

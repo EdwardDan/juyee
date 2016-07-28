@@ -74,6 +74,8 @@ public class DeptWorkItemClp extends BaseModelImpl<DeptWorkItem>
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("deptWorkItemId", getDeptWorkItemId());
+		attributes.put("groupId", getGroupId());
+		attributes.put("companyId", getCompanyId());
 		attributes.put("deptWorkId", getDeptWorkId());
 		attributes.put("sortNo", getSortNo());
 		attributes.put("dutyPerson", getDutyPerson());
@@ -91,6 +93,18 @@ public class DeptWorkItemClp extends BaseModelImpl<DeptWorkItem>
 
 		if (deptWorkItemId != null) {
 			setDeptWorkItemId(deptWorkItemId);
+		}
+
+		Long groupId = (Long)attributes.get("groupId");
+
+		if (groupId != null) {
+			setGroupId(groupId);
+		}
+
+		Long companyId = (Long)attributes.get("companyId");
+
+		if (companyId != null) {
+			setCompanyId(companyId);
 		}
 
 		Long deptWorkId = (Long)attributes.get("deptWorkId");
@@ -152,6 +166,52 @@ public class DeptWorkItemClp extends BaseModelImpl<DeptWorkItem>
 				Method method = clazz.getMethod("setDeptWorkItemId", long.class);
 
 				method.invoke(_deptWorkItemRemoteModel, deptWorkItemId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	@Override
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+
+		if (_deptWorkItemRemoteModel != null) {
+			try {
+				Class<?> clazz = _deptWorkItemRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setGroupId", long.class);
+
+				method.invoke(_deptWorkItemRemoteModel, groupId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	@Override
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
+
+		if (_deptWorkItemRemoteModel != null) {
+			try {
+				Class<?> clazz = _deptWorkItemRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setCompanyId", long.class);
+
+				method.invoke(_deptWorkItemRemoteModel, companyId);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -395,6 +455,8 @@ public class DeptWorkItemClp extends BaseModelImpl<DeptWorkItem>
 		DeptWorkItemClp clone = new DeptWorkItemClp();
 
 		clone.setDeptWorkItemId(getDeptWorkItemId());
+		clone.setGroupId(getGroupId());
+		clone.setCompanyId(getCompanyId());
 		clone.setDeptWorkId(getDeptWorkId());
 		clone.setSortNo(getSortNo());
 		clone.setDutyPerson(getDutyPerson());
@@ -454,10 +516,14 @@ public class DeptWorkItemClp extends BaseModelImpl<DeptWorkItem>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(21);
 
 		sb.append("{deptWorkItemId=");
 		sb.append(getDeptWorkItemId());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
 		sb.append(", deptWorkId=");
 		sb.append(getDeptWorkId());
 		sb.append(", sortNo=");
@@ -479,7 +545,7 @@ public class DeptWorkItemClp extends BaseModelImpl<DeptWorkItem>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(28);
+		StringBundler sb = new StringBundler(34);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.oa.model.DeptWorkItem");
@@ -488,6 +554,14 @@ public class DeptWorkItemClp extends BaseModelImpl<DeptWorkItem>
 		sb.append(
 			"<column><column-name>deptWorkItemId</column-name><column-value><![CDATA[");
 		sb.append(getDeptWorkItemId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append(getGroupId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>deptWorkId</column-name><column-value><![CDATA[");
@@ -524,6 +598,8 @@ public class DeptWorkItemClp extends BaseModelImpl<DeptWorkItem>
 	}
 
 	private long _deptWorkItemId;
+	private long _groupId;
+	private long _companyId;
 	private long _deptWorkId;
 	private int _sortNo;
 	private String _dutyPerson;

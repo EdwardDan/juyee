@@ -36,10 +36,14 @@ public class OfficeSupplyApplicationItemCacheModel implements CacheModel<OfficeS
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(21);
 
 		sb.append("{officeSupplyApplicationItemId=");
 		sb.append(officeSupplyApplicationItemId);
+		sb.append(", groupId=");
+		sb.append(groupId);
+		sb.append(", companyId=");
+		sb.append(companyId);
 		sb.append(", name=");
 		sb.append(name);
 		sb.append(", model=");
@@ -64,6 +68,8 @@ public class OfficeSupplyApplicationItemCacheModel implements CacheModel<OfficeS
 		OfficeSupplyApplicationItemImpl officeSupplyApplicationItemImpl = new OfficeSupplyApplicationItemImpl();
 
 		officeSupplyApplicationItemImpl.setOfficeSupplyApplicationItemId(officeSupplyApplicationItemId);
+		officeSupplyApplicationItemImpl.setGroupId(groupId);
+		officeSupplyApplicationItemImpl.setCompanyId(companyId);
 
 		if (name == null) {
 			officeSupplyApplicationItemImpl.setName(StringPool.BLANK);
@@ -99,6 +105,8 @@ public class OfficeSupplyApplicationItemCacheModel implements CacheModel<OfficeS
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		officeSupplyApplicationItemId = objectInput.readLong();
+		groupId = objectInput.readLong();
+		companyId = objectInput.readLong();
 		name = objectInput.readUTF();
 		model = objectInput.readUTF();
 		unit = objectInput.readUTF();
@@ -112,6 +120,8 @@ public class OfficeSupplyApplicationItemCacheModel implements CacheModel<OfficeS
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(officeSupplyApplicationItemId);
+		objectOutput.writeLong(groupId);
+		objectOutput.writeLong(companyId);
 
 		if (name == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
@@ -141,6 +151,8 @@ public class OfficeSupplyApplicationItemCacheModel implements CacheModel<OfficeS
 	}
 
 	public long officeSupplyApplicationItemId;
+	public long groupId;
+	public long companyId;
 	public String name;
 	public String model;
 	public String unit;

@@ -36,10 +36,14 @@ public class DeptWorkItemCacheModel implements CacheModel<DeptWorkItem>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(21);
 
 		sb.append("{deptWorkItemId=");
 		sb.append(deptWorkItemId);
+		sb.append(", groupId=");
+		sb.append(groupId);
+		sb.append(", companyId=");
+		sb.append(companyId);
 		sb.append(", deptWorkId=");
 		sb.append(deptWorkId);
 		sb.append(", sortNo=");
@@ -64,6 +68,8 @@ public class DeptWorkItemCacheModel implements CacheModel<DeptWorkItem>,
 		DeptWorkItemImpl deptWorkItemImpl = new DeptWorkItemImpl();
 
 		deptWorkItemImpl.setDeptWorkItemId(deptWorkItemId);
+		deptWorkItemImpl.setGroupId(groupId);
+		deptWorkItemImpl.setCompanyId(companyId);
 		deptWorkItemImpl.setDeptWorkId(deptWorkId);
 		deptWorkItemImpl.setSortNo(sortNo);
 
@@ -105,6 +111,8 @@ public class DeptWorkItemCacheModel implements CacheModel<DeptWorkItem>,
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		deptWorkItemId = objectInput.readLong();
+		groupId = objectInput.readLong();
+		companyId = objectInput.readLong();
 		deptWorkId = objectInput.readLong();
 		sortNo = objectInput.readInt();
 		dutyPerson = objectInput.readUTF();
@@ -118,6 +126,8 @@ public class DeptWorkItemCacheModel implements CacheModel<DeptWorkItem>,
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(deptWorkItemId);
+		objectOutput.writeLong(groupId);
+		objectOutput.writeLong(companyId);
 		objectOutput.writeLong(deptWorkId);
 		objectOutput.writeInt(sortNo);
 
@@ -153,6 +163,8 @@ public class DeptWorkItemCacheModel implements CacheModel<DeptWorkItem>,
 	}
 
 	public long deptWorkItemId;
+	public long groupId;
+	public long companyId;
 	public long deptWorkId;
 	public int sortNo;
 	public String dutyPerson;

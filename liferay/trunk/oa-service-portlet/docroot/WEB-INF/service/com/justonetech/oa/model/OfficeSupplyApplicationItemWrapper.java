@@ -53,6 +53,8 @@ public class OfficeSupplyApplicationItemWrapper
 
 		attributes.put("officeSupplyApplicationItemId",
 			getOfficeSupplyApplicationItemId());
+		attributes.put("groupId", getGroupId());
+		attributes.put("companyId", getCompanyId());
 		attributes.put("name", getName());
 		attributes.put("model", getModel());
 		attributes.put("unit", getUnit());
@@ -72,6 +74,18 @@ public class OfficeSupplyApplicationItemWrapper
 
 		if (officeSupplyApplicationItemId != null) {
 			setOfficeSupplyApplicationItemId(officeSupplyApplicationItemId);
+		}
+
+		Long groupId = (Long)attributes.get("groupId");
+
+		if (groupId != null) {
+			setGroupId(groupId);
+		}
+
+		Long companyId = (Long)attributes.get("companyId");
+
+		if (companyId != null) {
+			setCompanyId(companyId);
 		}
 
 		String name = (String)attributes.get("name");
@@ -157,6 +171,46 @@ public class OfficeSupplyApplicationItemWrapper
 	public void setOfficeSupplyApplicationItemId(
 		long officeSupplyApplicationItemId) {
 		_officeSupplyApplicationItem.setOfficeSupplyApplicationItemId(officeSupplyApplicationItemId);
+	}
+
+	/**
+	* Returns the group ID of this office supply application item.
+	*
+	* @return the group ID of this office supply application item
+	*/
+	@Override
+	public long getGroupId() {
+		return _officeSupplyApplicationItem.getGroupId();
+	}
+
+	/**
+	* Sets the group ID of this office supply application item.
+	*
+	* @param groupId the group ID of this office supply application item
+	*/
+	@Override
+	public void setGroupId(long groupId) {
+		_officeSupplyApplicationItem.setGroupId(groupId);
+	}
+
+	/**
+	* Returns the company ID of this office supply application item.
+	*
+	* @return the company ID of this office supply application item
+	*/
+	@Override
+	public long getCompanyId() {
+		return _officeSupplyApplicationItem.getCompanyId();
+	}
+
+	/**
+	* Sets the company ID of this office supply application item.
+	*
+	* @param companyId the company ID of this office supply application item
+	*/
+	@Override
+	public void setCompanyId(long companyId) {
+		_officeSupplyApplicationItem.setCompanyId(companyId);
 	}
 
 	/**

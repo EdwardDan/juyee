@@ -321,6 +321,8 @@ public class LeaderWorkPersistenceImpl extends BasePersistenceImpl<LeaderWork>
 		leaderWorkImpl.setUserId(leaderWork.getUserId());
 		leaderWorkImpl.setWorkDate(leaderWork.getWorkDate());
 		leaderWorkImpl.setAmOrPm(leaderWork.getAmOrPm());
+		leaderWorkImpl.setGroupId(leaderWork.getGroupId());
+		leaderWorkImpl.setCompanyId(leaderWork.getCompanyId());
 		leaderWorkImpl.setUserName(leaderWork.getUserName());
 		leaderWorkImpl.setCreateTime(leaderWork.getCreateTime());
 		leaderWorkImpl.setModifiedTime(leaderWork.getModifiedTime());

@@ -1,5 +1,7 @@
 create table oa_DeptWork (
 	deptWorkId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
 	createTime DATE null,
@@ -13,6 +15,8 @@ create table oa_DeptWork (
 
 create table oa_DeptWorkItem (
 	deptWorkItemId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
 	deptWorkId LONG,
 	sortNo INTEGER,
 	dutyPerson VARCHAR(75) null,
@@ -24,11 +28,13 @@ create table oa_DeptWorkItem (
 
 create table oa_Dispatch (
 	dispatchId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
 	createTime DATE null,
 	modifiedTime DATE null,
-	rocordType LONG,
+	recordType LONG,
 	securityLevel LONG,
 	organaAbbreviation LONG,
 	year INTEGER,
@@ -45,6 +51,8 @@ create table oa_LeaderWork (
 	userId LONG not null,
 	workDate DATE not null,
 	amOrPm LONG not null,
+	groupId LONG,
+	companyId LONG,
 	userName VARCHAR(75) null,
 	createTime DATE null,
 	modifiedTime DATE null,
@@ -54,6 +62,8 @@ create table oa_LeaderWork (
 
 create table oa_OfficeSupply (
 	officeSupplyId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
 	createTime DATE null,
@@ -67,6 +77,8 @@ create table oa_OfficeSupply (
 
 create table oa_OfficeSupplyApplication (
 	officeSupplyApplicationId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
 	createTime DATE null,
@@ -78,6 +90,8 @@ create table oa_OfficeSupplyApplication (
 
 create table oa_OfficeSupplyApplicationItem (
 	officeSupplyApplicationItemId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
 	name VARCHAR(75) null,
 	model VARCHAR(75) null,
 	unit VARCHAR(75) null,
@@ -89,6 +103,8 @@ create table oa_OfficeSupplyApplicationItem (
 
 create table oa_VehicleApplication (
 	vehicleApplicationId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
 	createTime DATE null,

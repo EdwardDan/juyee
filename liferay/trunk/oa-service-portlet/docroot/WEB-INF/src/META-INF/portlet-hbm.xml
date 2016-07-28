@@ -15,6 +15,8 @@
 		<id name="deptWorkId" type="long">
 			<generator class="assigned" />
 		</id>
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="createTime" type="org.hibernate.type.TimestampType" />
@@ -30,6 +32,8 @@
 		<id name="deptWorkItemId" type="long">
 			<generator class="assigned" />
 		</id>
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="deptWorkId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="sortNo" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="dutyPerson" type="com.liferay.portal.dao.orm.hibernate.StringType" />
@@ -43,11 +47,13 @@
 		<id name="dispatchId" type="long">
 			<generator class="assigned" />
 		</id>
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="createTime" type="org.hibernate.type.TimestampType" />
 		<property name="modifiedTime" type="org.hibernate.type.TimestampType" />
-		<property name="rocordType" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="recordType" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="securityLevel" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="organaAbbreviation" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="year" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
@@ -66,6 +72,8 @@
 			<key-property name="workDate" type="org.hibernate.type.TimestampType" />
 			<key-property name="amOrPm" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		</composite-id>
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="createTime" type="org.hibernate.type.TimestampType" />
 		<property name="modifiedTime" type="org.hibernate.type.TimestampType" />
@@ -76,6 +84,8 @@
 		<id name="officeSupplyId" type="long">
 			<generator class="assigned" />
 		</id>
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="createTime" type="org.hibernate.type.TimestampType" />
@@ -91,6 +101,8 @@
 		<id name="officeSupplyApplicationId" type="long">
 			<generator class="assigned" />
 		</id>
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="createTime" type="org.hibernate.type.TimestampType" />
@@ -104,6 +116,8 @@
 		<id name="officeSupplyApplicationItemId" type="long">
 			<generator class="assigned" />
 		</id>
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="model" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="unit" type="com.liferay.portal.dao.orm.hibernate.StringType" />
@@ -117,6 +131,8 @@
 		<id name="vehicleApplicationId" type="long">
 			<generator class="assigned" />
 		</id>
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="createTime" type="org.hibernate.type.TimestampType" />

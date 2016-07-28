@@ -53,6 +53,8 @@ public class OfficeSupplyApplicationWrapper implements OfficeSupplyApplication,
 
 		attributes.put("officeSupplyApplicationId",
 			getOfficeSupplyApplicationId());
+		attributes.put("groupId", getGroupId());
+		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
 		attributes.put("createTime", getCreateTime());
@@ -71,6 +73,18 @@ public class OfficeSupplyApplicationWrapper implements OfficeSupplyApplication,
 
 		if (officeSupplyApplicationId != null) {
 			setOfficeSupplyApplicationId(officeSupplyApplicationId);
+		}
+
+		Long groupId = (Long)attributes.get("groupId");
+
+		if (groupId != null) {
+			setGroupId(groupId);
+		}
+
+		Long companyId = (Long)attributes.get("companyId");
+
+		if (companyId != null) {
+			setCompanyId(companyId);
 		}
 
 		Long userId = (Long)attributes.get("userId");
@@ -154,6 +168,46 @@ public class OfficeSupplyApplicationWrapper implements OfficeSupplyApplication,
 	@Override
 	public void setOfficeSupplyApplicationId(long officeSupplyApplicationId) {
 		_officeSupplyApplication.setOfficeSupplyApplicationId(officeSupplyApplicationId);
+	}
+
+	/**
+	* Returns the group ID of this office supply application.
+	*
+	* @return the group ID of this office supply application
+	*/
+	@Override
+	public long getGroupId() {
+		return _officeSupplyApplication.getGroupId();
+	}
+
+	/**
+	* Sets the group ID of this office supply application.
+	*
+	* @param groupId the group ID of this office supply application
+	*/
+	@Override
+	public void setGroupId(long groupId) {
+		_officeSupplyApplication.setGroupId(groupId);
+	}
+
+	/**
+	* Returns the company ID of this office supply application.
+	*
+	* @return the company ID of this office supply application
+	*/
+	@Override
+	public long getCompanyId() {
+		return _officeSupplyApplication.getCompanyId();
+	}
+
+	/**
+	* Sets the company ID of this office supply application.
+	*
+	* @param companyId the company ID of this office supply application
+	*/
+	@Override
+	public void setCompanyId(long companyId) {
+		_officeSupplyApplication.setCompanyId(companyId);
 	}
 
 	/**

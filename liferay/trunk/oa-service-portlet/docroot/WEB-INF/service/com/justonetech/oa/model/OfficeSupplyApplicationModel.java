@@ -75,6 +75,34 @@ public interface OfficeSupplyApplicationModel extends BaseModel<OfficeSupplyAppl
 	public void setOfficeSupplyApplicationId(long officeSupplyApplicationId);
 
 	/**
+	 * Returns the group ID of this office supply application.
+	 *
+	 * @return the group ID of this office supply application
+	 */
+	public long getGroupId();
+
+	/**
+	 * Sets the group ID of this office supply application.
+	 *
+	 * @param groupId the group ID of this office supply application
+	 */
+	public void setGroupId(long groupId);
+
+	/**
+	 * Returns the company ID of this office supply application.
+	 *
+	 * @return the company ID of this office supply application
+	 */
+	public long getCompanyId();
+
+	/**
+	 * Sets the company ID of this office supply application.
+	 *
+	 * @param companyId the company ID of this office supply application
+	 */
+	public void setCompanyId(long companyId);
+
+	/**
 	 * Returns the user ID of this office supply application.
 	 *
 	 * @return the user ID of this office supply application

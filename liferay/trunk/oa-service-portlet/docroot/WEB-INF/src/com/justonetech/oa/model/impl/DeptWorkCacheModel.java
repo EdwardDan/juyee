@@ -37,10 +37,14 @@ import java.util.Date;
 public class DeptWorkCacheModel implements CacheModel<DeptWork>, Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(21);
+		StringBundler sb = new StringBundler(25);
 
 		sb.append("{deptWorkId=");
 		sb.append(deptWorkId);
+		sb.append(", groupId=");
+		sb.append(groupId);
+		sb.append(", companyId=");
+		sb.append(companyId);
 		sb.append(", userId=");
 		sb.append(userId);
 		sb.append(", userName=");
@@ -69,6 +73,8 @@ public class DeptWorkCacheModel implements CacheModel<DeptWork>, Externalizable 
 		DeptWorkImpl deptWorkImpl = new DeptWorkImpl();
 
 		deptWorkImpl.setDeptWorkId(deptWorkId);
+		deptWorkImpl.setGroupId(groupId);
+		deptWorkImpl.setCompanyId(companyId);
 		deptWorkImpl.setUserId(userId);
 
 		if (userName == null) {
@@ -130,6 +136,8 @@ public class DeptWorkCacheModel implements CacheModel<DeptWork>, Externalizable 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		deptWorkId = objectInput.readLong();
+		groupId = objectInput.readLong();
+		companyId = objectInput.readLong();
 		userId = objectInput.readLong();
 		userName = objectInput.readUTF();
 		createTime = objectInput.readLong();
@@ -145,6 +153,8 @@ public class DeptWorkCacheModel implements CacheModel<DeptWork>, Externalizable 
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(deptWorkId);
+		objectOutput.writeLong(groupId);
+		objectOutput.writeLong(companyId);
 		objectOutput.writeLong(userId);
 
 		if (userName == null) {
@@ -177,6 +187,8 @@ public class DeptWorkCacheModel implements CacheModel<DeptWork>, Externalizable 
 	}
 
 	public long deptWorkId;
+	public long groupId;
+	public long companyId;
 	public long userId;
 	public String userName;
 	public long createTime;

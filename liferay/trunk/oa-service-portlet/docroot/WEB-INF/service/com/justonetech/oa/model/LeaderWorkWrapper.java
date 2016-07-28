@@ -52,6 +52,8 @@ public class LeaderWorkWrapper implements LeaderWork, ModelWrapper<LeaderWork> {
 		attributes.put("userId", getUserId());
 		attributes.put("workDate", getWorkDate());
 		attributes.put("amOrPm", getAmOrPm());
+		attributes.put("groupId", getGroupId());
+		attributes.put("companyId", getCompanyId());
 		attributes.put("userName", getUserName());
 		attributes.put("createTime", getCreateTime());
 		attributes.put("modifiedTime", getModifiedTime());
@@ -78,6 +80,18 @@ public class LeaderWorkWrapper implements LeaderWork, ModelWrapper<LeaderWork> {
 
 		if (amOrPm != null) {
 			setAmOrPm(amOrPm);
+		}
+
+		Long groupId = (Long)attributes.get("groupId");
+
+		if (groupId != null) {
+			setGroupId(groupId);
+		}
+
+		Long companyId = (Long)attributes.get("companyId");
+
+		if (companyId != null) {
+			setCompanyId(companyId);
 		}
 
 		String userName = (String)attributes.get("userName");
@@ -206,6 +220,46 @@ public class LeaderWorkWrapper implements LeaderWork, ModelWrapper<LeaderWork> {
 	@Override
 	public void setAmOrPm(long amOrPm) {
 		_leaderWork.setAmOrPm(amOrPm);
+	}
+
+	/**
+	* Returns the group ID of this leader work.
+	*
+	* @return the group ID of this leader work
+	*/
+	@Override
+	public long getGroupId() {
+		return _leaderWork.getGroupId();
+	}
+
+	/**
+	* Sets the group ID of this leader work.
+	*
+	* @param groupId the group ID of this leader work
+	*/
+	@Override
+	public void setGroupId(long groupId) {
+		_leaderWork.setGroupId(groupId);
+	}
+
+	/**
+	* Returns the company ID of this leader work.
+	*
+	* @return the company ID of this leader work
+	*/
+	@Override
+	public long getCompanyId() {
+		return _leaderWork.getCompanyId();
+	}
+
+	/**
+	* Sets the company ID of this leader work.
+	*
+	* @param companyId the company ID of this leader work
+	*/
+	@Override
+	public void setCompanyId(long companyId) {
+		_leaderWork.setCompanyId(companyId);
 	}
 
 	/**

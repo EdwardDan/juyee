@@ -38,10 +38,14 @@ public class OfficeSupplyApplicationCacheModel implements CacheModel<OfficeSuppl
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(21);
 
 		sb.append("{officeSupplyApplicationId=");
 		sb.append(officeSupplyApplicationId);
+		sb.append(", groupId=");
+		sb.append(groupId);
+		sb.append(", companyId=");
+		sb.append(companyId);
 		sb.append(", userId=");
 		sb.append(userId);
 		sb.append(", userName=");
@@ -66,6 +70,8 @@ public class OfficeSupplyApplicationCacheModel implements CacheModel<OfficeSuppl
 		OfficeSupplyApplicationImpl officeSupplyApplicationImpl = new OfficeSupplyApplicationImpl();
 
 		officeSupplyApplicationImpl.setOfficeSupplyApplicationId(officeSupplyApplicationId);
+		officeSupplyApplicationImpl.setGroupId(groupId);
+		officeSupplyApplicationImpl.setCompanyId(companyId);
 		officeSupplyApplicationImpl.setUserId(userId);
 
 		if (userName == null) {
@@ -113,6 +119,8 @@ public class OfficeSupplyApplicationCacheModel implements CacheModel<OfficeSuppl
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		officeSupplyApplicationId = objectInput.readLong();
+		groupId = objectInput.readLong();
+		companyId = objectInput.readLong();
 		userId = objectInput.readLong();
 		userName = objectInput.readUTF();
 		createTime = objectInput.readLong();
@@ -126,6 +134,8 @@ public class OfficeSupplyApplicationCacheModel implements CacheModel<OfficeSuppl
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(officeSupplyApplicationId);
+		objectOutput.writeLong(groupId);
+		objectOutput.writeLong(companyId);
 		objectOutput.writeLong(userId);
 
 		if (userName == null) {
@@ -155,6 +165,8 @@ public class OfficeSupplyApplicationCacheModel implements CacheModel<OfficeSuppl
 	}
 
 	public long officeSupplyApplicationId;
+	public long groupId;
+	public long companyId;
 	public long userId;
 	public String userName;
 	public long createTime;

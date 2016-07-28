@@ -75,6 +75,34 @@ public interface DeptWorkModel extends BaseModel<DeptWork> {
 	public void setDeptWorkId(long deptWorkId);
 
 	/**
+	 * Returns the group ID of this dept work.
+	 *
+	 * @return the group ID of this dept work
+	 */
+	public long getGroupId();
+
+	/**
+	 * Sets the group ID of this dept work.
+	 *
+	 * @param groupId the group ID of this dept work
+	 */
+	public void setGroupId(long groupId);
+
+	/**
+	 * Returns the company ID of this dept work.
+	 *
+	 * @return the company ID of this dept work
+	 */
+	public long getCompanyId();
+
+	/**
+	 * Sets the company ID of this dept work.
+	 *
+	 * @param companyId the company ID of this dept work
+	 */
+	public void setCompanyId(long companyId);
+
+	/**
 	 * Returns the user ID of this dept work.
 	 *
 	 * @return the user ID of this dept work

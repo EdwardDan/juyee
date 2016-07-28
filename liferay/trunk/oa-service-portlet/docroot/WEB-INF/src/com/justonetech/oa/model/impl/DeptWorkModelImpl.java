@@ -63,6 +63,8 @@ public class DeptWorkModelImpl extends BaseModelImpl<DeptWork>
 	public static final String TABLE_NAME = "oa_DeptWork";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "deptWorkId", Types.BIGINT },
+			{ "groupId", Types.BIGINT },
+			{ "companyId", Types.BIGINT },
 			{ "userId", Types.BIGINT },
 			{ "userName", Types.VARCHAR },
 			{ "createTime", Types.TIMESTAMP },
@@ -73,7 +75,7 @@ public class DeptWorkModelImpl extends BaseModelImpl<DeptWork>
 			{ "endDate", Types.TIMESTAMP },
 			{ "status", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table oa_DeptWork (deptWorkId LONG not null primary key,userId LONG,userName VARCHAR(75) null,createTime DATE null,modifiedTime DATE null,deptId LONG,deptName VARCHAR(75) null,startDate DATE null,endDate DATE null,status VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table oa_DeptWork (deptWorkId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createTime DATE null,modifiedTime DATE null,deptId LONG,deptName VARCHAR(75) null,startDate DATE null,endDate DATE null,status VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table oa_DeptWork";
 	public static final String ORDER_BY_JPQL = " ORDER BY deptWork.modifiedTime DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY oa_DeptWork.modifiedTime DESC";
@@ -133,6 +135,8 @@ public class DeptWorkModelImpl extends BaseModelImpl<DeptWork>
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("deptWorkId", getDeptWorkId());
+		attributes.put("groupId", getGroupId());
+		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
 		attributes.put("createTime", getCreateTime());
@@ -152,6 +156,18 @@ public class DeptWorkModelImpl extends BaseModelImpl<DeptWork>
 
 		if (deptWorkId != null) {
 			setDeptWorkId(deptWorkId);
+		}
+
+		Long groupId = (Long)attributes.get("groupId");
+
+		if (groupId != null) {
+			setGroupId(groupId);
+		}
+
+		Long companyId = (Long)attributes.get("companyId");
+
+		if (companyId != null) {
+			setCompanyId(companyId);
 		}
 
 		Long userId = (Long)attributes.get("userId");
@@ -217,6 +233,26 @@ public class DeptWorkModelImpl extends BaseModelImpl<DeptWork>
 	@Override
 	public void setDeptWorkId(long deptWorkId) {
 		_deptWorkId = deptWorkId;
+	}
+
+	@Override
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	@Override
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+	}
+
+	@Override
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	@Override
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
 	}
 
 	@Override
@@ -362,7 +398,7 @@ public class DeptWorkModelImpl extends BaseModelImpl<DeptWork>
 
 	@Override
 	public ExpandoBridge getExpandoBridge() {
-		return ExpandoBridgeFactoryUtil.getExpandoBridge(0,
+		return ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
 			DeptWork.class.getName(), getPrimaryKey());
 	}
 
@@ -388,6 +424,8 @@ public class DeptWorkModelImpl extends BaseModelImpl<DeptWork>
 		DeptWorkImpl deptWorkImpl = new DeptWorkImpl();
 
 		deptWorkImpl.setDeptWorkId(getDeptWorkId());
+		deptWorkImpl.setGroupId(getGroupId());
+		deptWorkImpl.setCompanyId(getCompanyId());
 		deptWorkImpl.setUserId(getUserId());
 		deptWorkImpl.setUserName(getUserName());
 		deptWorkImpl.setCreateTime(getCreateTime());
@@ -462,6 +500,10 @@ public class DeptWorkModelImpl extends BaseModelImpl<DeptWork>
 
 		deptWorkCacheModel.deptWorkId = getDeptWorkId();
 
+		deptWorkCacheModel.groupId = getGroupId();
+
+		deptWorkCacheModel.companyId = getCompanyId();
+
 		deptWorkCacheModel.userId = getUserId();
 
 		deptWorkCacheModel.userName = getUserName();
@@ -531,10 +573,14 @@ public class DeptWorkModelImpl extends BaseModelImpl<DeptWork>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(21);
+		StringBundler sb = new StringBundler(25);
 
 		sb.append("{deptWorkId=");
 		sb.append(getDeptWorkId());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
 		sb.append(", userId=");
 		sb.append(getUserId());
 		sb.append(", userName=");
@@ -560,7 +606,7 @@ public class DeptWorkModelImpl extends BaseModelImpl<DeptWork>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(34);
+		StringBundler sb = new StringBundler(40);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.oa.model.DeptWork");
@@ -569,6 +615,14 @@ public class DeptWorkModelImpl extends BaseModelImpl<DeptWork>
 		sb.append(
 			"<column><column-name>deptWorkId</column-name><column-value><![CDATA[");
 		sb.append(getDeptWorkId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append(getGroupId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userId</column-name><column-value><![CDATA[");
@@ -617,6 +671,8 @@ public class DeptWorkModelImpl extends BaseModelImpl<DeptWork>
 			DeptWork.class
 		};
 	private long _deptWorkId;
+	private long _groupId;
+	private long _companyId;
 	private long _userId;
 	private String _userUuid;
 	private String _userName;

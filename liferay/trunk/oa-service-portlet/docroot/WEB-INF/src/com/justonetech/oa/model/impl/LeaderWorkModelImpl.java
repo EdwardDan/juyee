@@ -61,12 +61,14 @@ public class LeaderWorkModelImpl extends BaseModelImpl<LeaderWork>
 			{ "userId", Types.BIGINT },
 			{ "workDate", Types.TIMESTAMP },
 			{ "amOrPm", Types.BIGINT },
+			{ "groupId", Types.BIGINT },
+			{ "companyId", Types.BIGINT },
 			{ "userName", Types.VARCHAR },
 			{ "createTime", Types.TIMESTAMP },
 			{ "modifiedTime", Types.TIMESTAMP },
 			{ "content", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table oa_LeaderWork (userId LONG not null,workDate DATE not null,amOrPm LONG not null,userName VARCHAR(75) null,createTime DATE null,modifiedTime DATE null,content VARCHAR(1000) null,primary key (userId, workDate, amOrPm))";
+	public static final String TABLE_SQL_CREATE = "create table oa_LeaderWork (userId LONG not null,workDate DATE not null,amOrPm LONG not null,groupId LONG,companyId LONG,userName VARCHAR(75) null,createTime DATE null,modifiedTime DATE null,content VARCHAR(1000) null,primary key (userId, workDate, amOrPm))";
 	public static final String TABLE_SQL_DROP = "drop table oa_LeaderWork";
 	public static final String ORDER_BY_JPQL = " ORDER BY leaderWork.id.userId ASC, leaderWork.id.workDate ASC, leaderWork.id.amOrPm ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY oa_LeaderWork.userId ASC, oa_LeaderWork.workDate ASC, oa_LeaderWork.amOrPm ASC";
@@ -125,6 +127,8 @@ public class LeaderWorkModelImpl extends BaseModelImpl<LeaderWork>
 		attributes.put("userId", getUserId());
 		attributes.put("workDate", getWorkDate());
 		attributes.put("amOrPm", getAmOrPm());
+		attributes.put("groupId", getGroupId());
+		attributes.put("companyId", getCompanyId());
 		attributes.put("userName", getUserName());
 		attributes.put("createTime", getCreateTime());
 		attributes.put("modifiedTime", getModifiedTime());
@@ -151,6 +155,18 @@ public class LeaderWorkModelImpl extends BaseModelImpl<LeaderWork>
 
 		if (amOrPm != null) {
 			setAmOrPm(amOrPm);
+		}
+
+		Long groupId = (Long)attributes.get("groupId");
+
+		if (groupId != null) {
+			setGroupId(groupId);
+		}
+
+		Long companyId = (Long)attributes.get("companyId");
+
+		if (companyId != null) {
+			setCompanyId(companyId);
 		}
 
 		String userName = (String)attributes.get("userName");
@@ -216,6 +232,26 @@ public class LeaderWorkModelImpl extends BaseModelImpl<LeaderWork>
 	@Override
 	public void setAmOrPm(long amOrPm) {
 		_amOrPm = amOrPm;
+	}
+
+	@Override
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	@Override
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+	}
+
+	@Override
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	@Override
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
 	}
 
 	@Override
@@ -285,6 +321,8 @@ public class LeaderWorkModelImpl extends BaseModelImpl<LeaderWork>
 		leaderWorkImpl.setUserId(getUserId());
 		leaderWorkImpl.setWorkDate(getWorkDate());
 		leaderWorkImpl.setAmOrPm(getAmOrPm());
+		leaderWorkImpl.setGroupId(getGroupId());
+		leaderWorkImpl.setCompanyId(getCompanyId());
 		leaderWorkImpl.setUserName(getUserName());
 		leaderWorkImpl.setCreateTime(getCreateTime());
 		leaderWorkImpl.setModifiedTime(getModifiedTime());
@@ -350,6 +388,10 @@ public class LeaderWorkModelImpl extends BaseModelImpl<LeaderWork>
 
 		leaderWorkCacheModel.amOrPm = getAmOrPm();
 
+		leaderWorkCacheModel.groupId = getGroupId();
+
+		leaderWorkCacheModel.companyId = getCompanyId();
+
 		leaderWorkCacheModel.userName = getUserName();
 
 		String userName = leaderWorkCacheModel.userName;
@@ -389,7 +431,7 @@ public class LeaderWorkModelImpl extends BaseModelImpl<LeaderWork>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(15);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{userId=");
 		sb.append(getUserId());
@@ -397,6 +439,10 @@ public class LeaderWorkModelImpl extends BaseModelImpl<LeaderWork>
 		sb.append(getWorkDate());
 		sb.append(", amOrPm=");
 		sb.append(getAmOrPm());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
 		sb.append(", userName=");
 		sb.append(getUserName());
 		sb.append(", createTime=");
@@ -412,7 +458,7 @@ public class LeaderWorkModelImpl extends BaseModelImpl<LeaderWork>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.oa.model.LeaderWork");
@@ -429,6 +475,14 @@ public class LeaderWorkModelImpl extends BaseModelImpl<LeaderWork>
 		sb.append(
 			"<column><column-name>amOrPm</column-name><column-value><![CDATA[");
 		sb.append(getAmOrPm());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append(getGroupId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userName</column-name><column-value><![CDATA[");
@@ -460,6 +514,8 @@ public class LeaderWorkModelImpl extends BaseModelImpl<LeaderWork>
 	private String _userUuid;
 	private Date _workDate;
 	private long _amOrPm;
+	private long _groupId;
+	private long _companyId;
 	private String _userName;
 	private Date _createTime;
 	private Date _modifiedTime;

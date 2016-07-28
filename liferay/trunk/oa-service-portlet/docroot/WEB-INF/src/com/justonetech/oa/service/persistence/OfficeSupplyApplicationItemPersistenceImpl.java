@@ -884,6 +884,8 @@ public class OfficeSupplyApplicationItemPersistenceImpl
 		officeSupplyApplicationItemImpl.setPrimaryKey(officeSupplyApplicationItem.getPrimaryKey());
 
 		officeSupplyApplicationItemImpl.setOfficeSupplyApplicationItemId(officeSupplyApplicationItem.getOfficeSupplyApplicationItemId());
+		officeSupplyApplicationItemImpl.setGroupId(officeSupplyApplicationItem.getGroupId());
+		officeSupplyApplicationItemImpl.setCompanyId(officeSupplyApplicationItem.getCompanyId());
 		officeSupplyApplicationItemImpl.setName(officeSupplyApplicationItem.getName());
 		officeSupplyApplicationItemImpl.setModel(officeSupplyApplicationItem.getModel());
 		officeSupplyApplicationItemImpl.setUnit(officeSupplyApplicationItem.getUnit());

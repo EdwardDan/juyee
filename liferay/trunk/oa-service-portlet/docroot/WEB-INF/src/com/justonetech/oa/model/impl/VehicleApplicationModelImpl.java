@@ -63,6 +63,8 @@ public class VehicleApplicationModelImpl extends BaseModelImpl<VehicleApplicatio
 	public static final String TABLE_NAME = "oa_VehicleApplication";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "vehicleApplicationId", Types.BIGINT },
+			{ "groupId", Types.BIGINT },
+			{ "companyId", Types.BIGINT },
 			{ "userId", Types.BIGINT },
 			{ "userName", Types.VARCHAR },
 			{ "createTime", Types.TIMESTAMP },
@@ -77,7 +79,7 @@ public class VehicleApplicationModelImpl extends BaseModelImpl<VehicleApplicatio
 			{ "reason", Types.VARCHAR },
 			{ "destination", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table oa_VehicleApplication (vehicleApplicationId LONG not null primary key,userId LONG,userName VARCHAR(75) null,createTime DATE null,modifiedTime DATE null,applicantDeptId LONG,applicantDeptName VARCHAR(75) null,applicantId LONG,applicantName VARCHAR(75) null,startTime DATE null,endTime DATE null,passengerNum INTEGER,reason VARCHAR(1000) null,destination VARCHAR(200) null)";
+	public static final String TABLE_SQL_CREATE = "create table oa_VehicleApplication (vehicleApplicationId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createTime DATE null,modifiedTime DATE null,applicantDeptId LONG,applicantDeptName VARCHAR(75) null,applicantId LONG,applicantName VARCHAR(75) null,startTime DATE null,endTime DATE null,passengerNum INTEGER,reason VARCHAR(1000) null,destination VARCHAR(200) null)";
 	public static final String TABLE_SQL_DROP = "drop table oa_VehicleApplication";
 	public static final String ORDER_BY_JPQL = " ORDER BY vehicleApplication.modifiedTime DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY oa_VehicleApplication.modifiedTime DESC";
@@ -136,6 +138,8 @@ public class VehicleApplicationModelImpl extends BaseModelImpl<VehicleApplicatio
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("vehicleApplicationId", getVehicleApplicationId());
+		attributes.put("groupId", getGroupId());
+		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
 		attributes.put("createTime", getCreateTime());
@@ -159,6 +163,18 @@ public class VehicleApplicationModelImpl extends BaseModelImpl<VehicleApplicatio
 
 		if (vehicleApplicationId != null) {
 			setVehicleApplicationId(vehicleApplicationId);
+		}
+
+		Long groupId = (Long)attributes.get("groupId");
+
+		if (groupId != null) {
+			setGroupId(groupId);
+		}
+
+		Long companyId = (Long)attributes.get("companyId");
+
+		if (companyId != null) {
+			setCompanyId(companyId);
 		}
 
 		Long userId = (Long)attributes.get("userId");
@@ -248,6 +264,26 @@ public class VehicleApplicationModelImpl extends BaseModelImpl<VehicleApplicatio
 	@Override
 	public void setVehicleApplicationId(long vehicleApplicationId) {
 		_vehicleApplicationId = vehicleApplicationId;
+	}
+
+	@Override
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	@Override
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+	}
+
+	@Override
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	@Override
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
 	}
 
 	@Override
@@ -433,7 +469,7 @@ public class VehicleApplicationModelImpl extends BaseModelImpl<VehicleApplicatio
 
 	@Override
 	public ExpandoBridge getExpandoBridge() {
-		return ExpandoBridgeFactoryUtil.getExpandoBridge(0,
+		return ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
 			VehicleApplication.class.getName(), getPrimaryKey());
 	}
 
@@ -459,6 +495,8 @@ public class VehicleApplicationModelImpl extends BaseModelImpl<VehicleApplicatio
 		VehicleApplicationImpl vehicleApplicationImpl = new VehicleApplicationImpl();
 
 		vehicleApplicationImpl.setVehicleApplicationId(getVehicleApplicationId());
+		vehicleApplicationImpl.setGroupId(getGroupId());
+		vehicleApplicationImpl.setCompanyId(getCompanyId());
 		vehicleApplicationImpl.setUserId(getUserId());
 		vehicleApplicationImpl.setUserName(getUserName());
 		vehicleApplicationImpl.setCreateTime(getCreateTime());
@@ -535,6 +573,10 @@ public class VehicleApplicationModelImpl extends BaseModelImpl<VehicleApplicatio
 		VehicleApplicationCacheModel vehicleApplicationCacheModel = new VehicleApplicationCacheModel();
 
 		vehicleApplicationCacheModel.vehicleApplicationId = getVehicleApplicationId();
+
+		vehicleApplicationCacheModel.groupId = getGroupId();
+
+		vehicleApplicationCacheModel.companyId = getCompanyId();
 
 		vehicleApplicationCacheModel.userId = getUserId();
 
@@ -625,10 +667,14 @@ public class VehicleApplicationModelImpl extends BaseModelImpl<VehicleApplicatio
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(29);
+		StringBundler sb = new StringBundler(33);
 
 		sb.append("{vehicleApplicationId=");
 		sb.append(getVehicleApplicationId());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
 		sb.append(", userId=");
 		sb.append(getUserId());
 		sb.append(", userName=");
@@ -662,7 +708,7 @@ public class VehicleApplicationModelImpl extends BaseModelImpl<VehicleApplicatio
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(46);
+		StringBundler sb = new StringBundler(52);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.oa.model.VehicleApplication");
@@ -671,6 +717,14 @@ public class VehicleApplicationModelImpl extends BaseModelImpl<VehicleApplicatio
 		sb.append(
 			"<column><column-name>vehicleApplicationId</column-name><column-value><![CDATA[");
 		sb.append(getVehicleApplicationId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append(getGroupId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userId</column-name><column-value><![CDATA[");
@@ -735,6 +789,8 @@ public class VehicleApplicationModelImpl extends BaseModelImpl<VehicleApplicatio
 			VehicleApplication.class
 		};
 	private long _vehicleApplicationId;
+	private long _groupId;
+	private long _companyId;
 	private long _userId;
 	private String _userUuid;
 	private String _userName;

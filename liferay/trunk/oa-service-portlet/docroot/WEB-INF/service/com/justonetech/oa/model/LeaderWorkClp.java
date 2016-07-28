@@ -81,6 +81,8 @@ public class LeaderWorkClp extends BaseModelImpl<LeaderWork>
 		attributes.put("userId", getUserId());
 		attributes.put("workDate", getWorkDate());
 		attributes.put("amOrPm", getAmOrPm());
+		attributes.put("groupId", getGroupId());
+		attributes.put("companyId", getCompanyId());
 		attributes.put("userName", getUserName());
 		attributes.put("createTime", getCreateTime());
 		attributes.put("modifiedTime", getModifiedTime());
@@ -107,6 +109,18 @@ public class LeaderWorkClp extends BaseModelImpl<LeaderWork>
 
 		if (amOrPm != null) {
 			setAmOrPm(amOrPm);
+		}
+
+		Long groupId = (Long)attributes.get("groupId");
+
+		if (groupId != null) {
+			setGroupId(groupId);
+		}
+
+		Long companyId = (Long)attributes.get("companyId");
+
+		if (companyId != null) {
+			setCompanyId(companyId);
 		}
 
 		String userName = (String)attributes.get("userName");
@@ -206,6 +220,52 @@ public class LeaderWorkClp extends BaseModelImpl<LeaderWork>
 				Method method = clazz.getMethod("setAmOrPm", long.class);
 
 				method.invoke(_leaderWorkRemoteModel, amOrPm);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	@Override
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+
+		if (_leaderWorkRemoteModel != null) {
+			try {
+				Class<?> clazz = _leaderWorkRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setGroupId", long.class);
+
+				method.invoke(_leaderWorkRemoteModel, groupId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	@Override
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
+
+		if (_leaderWorkRemoteModel != null) {
+			try {
+				Class<?> clazz = _leaderWorkRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setCompanyId", long.class);
+
+				method.invoke(_leaderWorkRemoteModel, companyId);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -377,6 +437,8 @@ public class LeaderWorkClp extends BaseModelImpl<LeaderWork>
 		clone.setUserId(getUserId());
 		clone.setWorkDate(getWorkDate());
 		clone.setAmOrPm(getAmOrPm());
+		clone.setGroupId(getGroupId());
+		clone.setCompanyId(getCompanyId());
 		clone.setUserName(getUserName());
 		clone.setCreateTime(getCreateTime());
 		clone.setModifiedTime(getModifiedTime());
@@ -425,7 +487,7 @@ public class LeaderWorkClp extends BaseModelImpl<LeaderWork>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(15);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{userId=");
 		sb.append(getUserId());
@@ -433,6 +495,10 @@ public class LeaderWorkClp extends BaseModelImpl<LeaderWork>
 		sb.append(getWorkDate());
 		sb.append(", amOrPm=");
 		sb.append(getAmOrPm());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
 		sb.append(", userName=");
 		sb.append(getUserName());
 		sb.append(", createTime=");
@@ -448,7 +514,7 @@ public class LeaderWorkClp extends BaseModelImpl<LeaderWork>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.oa.model.LeaderWork");
@@ -465,6 +531,14 @@ public class LeaderWorkClp extends BaseModelImpl<LeaderWork>
 		sb.append(
 			"<column><column-name>amOrPm</column-name><column-value><![CDATA[");
 		sb.append(getAmOrPm());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append(getGroupId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userName</column-name><column-value><![CDATA[");
@@ -492,6 +566,8 @@ public class LeaderWorkClp extends BaseModelImpl<LeaderWork>
 	private String _userUuid;
 	private Date _workDate;
 	private long _amOrPm;
+	private long _groupId;
+	private long _companyId;
 	private String _userName;
 	private Date _createTime;
 	private Date _modifiedTime;

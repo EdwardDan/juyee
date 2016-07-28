@@ -77,6 +77,8 @@ public class VehicleApplicationClp extends BaseModelImpl<VehicleApplication>
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("vehicleApplicationId", getVehicleApplicationId());
+		attributes.put("groupId", getGroupId());
+		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
 		attributes.put("createTime", getCreateTime());
@@ -100,6 +102,18 @@ public class VehicleApplicationClp extends BaseModelImpl<VehicleApplication>
 
 		if (vehicleApplicationId != null) {
 			setVehicleApplicationId(vehicleApplicationId);
+		}
+
+		Long groupId = (Long)attributes.get("groupId");
+
+		if (groupId != null) {
+			setGroupId(groupId);
+		}
+
+		Long companyId = (Long)attributes.get("companyId");
+
+		if (companyId != null) {
+			setCompanyId(companyId);
 		}
 
 		Long userId = (Long)attributes.get("userId");
@@ -199,6 +213,52 @@ public class VehicleApplicationClp extends BaseModelImpl<VehicleApplication>
 
 				method.invoke(_vehicleApplicationRemoteModel,
 					vehicleApplicationId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	@Override
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+
+		if (_vehicleApplicationRemoteModel != null) {
+			try {
+				Class<?> clazz = _vehicleApplicationRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setGroupId", long.class);
+
+				method.invoke(_vehicleApplicationRemoteModel, groupId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	@Override
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
+
+		if (_vehicleApplicationRemoteModel != null) {
+			try {
+				Class<?> clazz = _vehicleApplicationRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setCompanyId", long.class);
+
+				method.invoke(_vehicleApplicationRemoteModel, companyId);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -588,6 +648,8 @@ public class VehicleApplicationClp extends BaseModelImpl<VehicleApplication>
 		VehicleApplicationClp clone = new VehicleApplicationClp();
 
 		clone.setVehicleApplicationId(getVehicleApplicationId());
+		clone.setGroupId(getGroupId());
+		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
 		clone.setUserName(getUserName());
 		clone.setCreateTime(getCreateTime());
@@ -654,10 +716,14 @@ public class VehicleApplicationClp extends BaseModelImpl<VehicleApplication>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(29);
+		StringBundler sb = new StringBundler(33);
 
 		sb.append("{vehicleApplicationId=");
 		sb.append(getVehicleApplicationId());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
 		sb.append(", userId=");
 		sb.append(getUserId());
 		sb.append(", userName=");
@@ -691,7 +757,7 @@ public class VehicleApplicationClp extends BaseModelImpl<VehicleApplication>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(46);
+		StringBundler sb = new StringBundler(52);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.oa.model.VehicleApplication");
@@ -700,6 +766,14 @@ public class VehicleApplicationClp extends BaseModelImpl<VehicleApplication>
 		sb.append(
 			"<column><column-name>vehicleApplicationId</column-name><column-value><![CDATA[");
 		sb.append(getVehicleApplicationId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append(getGroupId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userId</column-name><column-value><![CDATA[");
@@ -760,6 +834,8 @@ public class VehicleApplicationClp extends BaseModelImpl<VehicleApplication>
 	}
 
 	private long _vehicleApplicationId;
+	private long _groupId;
+	private long _companyId;
 	private long _userId;
 	private String _userUuid;
 	private String _userName;

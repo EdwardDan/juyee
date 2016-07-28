@@ -861,6 +861,8 @@ public class VehicleApplicationPersistenceImpl extends BasePersistenceImpl<Vehic
 		vehicleApplicationImpl.setPrimaryKey(vehicleApplication.getPrimaryKey());
 
 		vehicleApplicationImpl.setVehicleApplicationId(vehicleApplication.getVehicleApplicationId());
+		vehicleApplicationImpl.setGroupId(vehicleApplication.getGroupId());
+		vehicleApplicationImpl.setCompanyId(vehicleApplication.getCompanyId());
 		vehicleApplicationImpl.setUserId(vehicleApplication.getUserId());
 		vehicleApplicationImpl.setUserName(vehicleApplication.getUserName());
 		vehicleApplicationImpl.setCreateTime(vehicleApplication.getCreateTime());

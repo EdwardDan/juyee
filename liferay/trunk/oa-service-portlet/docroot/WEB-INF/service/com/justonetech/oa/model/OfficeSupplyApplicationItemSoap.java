@@ -31,6 +31,8 @@ public class OfficeSupplyApplicationItemSoap implements Serializable {
 		OfficeSupplyApplicationItemSoap soapModel = new OfficeSupplyApplicationItemSoap();
 
 		soapModel.setOfficeSupplyApplicationItemId(model.getOfficeSupplyApplicationItemId());
+		soapModel.setGroupId(model.getGroupId());
+		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setName(model.getName());
 		soapModel.setModel(model.getModel());
 		soapModel.setUnit(model.getUnit());
@@ -102,6 +104,22 @@ public class OfficeSupplyApplicationItemSoap implements Serializable {
 		_officeSupplyApplicationItemId = officeSupplyApplicationItemId;
 	}
 
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+	}
+
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
+	}
+
 	public String getName() {
 		return _name;
 	}
@@ -159,6 +177,8 @@ public class OfficeSupplyApplicationItemSoap implements Serializable {
 	}
 
 	private long _officeSupplyApplicationItemId;
+	private long _groupId;
+	private long _companyId;
 	private String _name;
 	private String _model;
 	private String _unit;

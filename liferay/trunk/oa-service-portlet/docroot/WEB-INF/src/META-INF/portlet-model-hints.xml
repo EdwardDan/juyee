@@ -3,6 +3,8 @@
 <model-hints>
 	<model name="com.justonetech.oa.model.DeptWork">
 		<field name="deptWorkId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createTime" type="Date" />
@@ -15,6 +17,8 @@
 	</model>
 	<model name="com.justonetech.oa.model.DeptWorkItem">
 		<field name="deptWorkItemId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
 		<field name="deptWorkId" type="long" />
 		<field name="sortNo" type="int" />
 		<field name="dutyPerson" type="String" />
@@ -27,11 +31,13 @@
 	</model>
 	<model name="com.justonetech.oa.model.Dispatch">
 		<field name="dispatchId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createTime" type="Date" />
 		<field name="modifiedTime" type="Date" />
-		<field name="rocordType" type="long" />
+		<field name="recordType" type="long" />
 		<field name="securityLevel" type="long" />
 		<field name="organaAbbreviation" type="long" />
 		<field name="year" type="int" />
@@ -47,6 +53,8 @@
 		<field name="userId" type="long" />
 		<field name="workDate" type="Date" />
 		<field name="amOrPm" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createTime" type="Date" />
 		<field name="modifiedTime" type="Date" />
@@ -56,6 +64,8 @@
 	</model>
 	<model name="com.justonetech.oa.model.OfficeSupply">
 		<field name="officeSupplyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createTime" type="Date" />
@@ -68,6 +78,8 @@
 	</model>
 	<model name="com.justonetech.oa.model.OfficeSupplyApplication">
 		<field name="officeSupplyApplicationId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createTime" type="Date" />
@@ -78,6 +90,8 @@
 	</model>
 	<model name="com.justonetech.oa.model.OfficeSupplyApplicationItem">
 		<field name="officeSupplyApplicationItemId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
 		<field name="name" type="String" />
 		<field name="model" type="String" />
 		<field name="unit" type="String" />
@@ -88,6 +102,8 @@
 	</model>
 	<model name="com.justonetech.oa.model.VehicleApplication">
 		<field name="vehicleApplicationId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createTime" type="Date" />

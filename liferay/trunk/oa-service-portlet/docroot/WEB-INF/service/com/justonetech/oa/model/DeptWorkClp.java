@@ -76,6 +76,8 @@ public class DeptWorkClp extends BaseModelImpl<DeptWork> implements DeptWork {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("deptWorkId", getDeptWorkId());
+		attributes.put("groupId", getGroupId());
+		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
 		attributes.put("createTime", getCreateTime());
@@ -95,6 +97,18 @@ public class DeptWorkClp extends BaseModelImpl<DeptWork> implements DeptWork {
 
 		if (deptWorkId != null) {
 			setDeptWorkId(deptWorkId);
+		}
+
+		Long groupId = (Long)attributes.get("groupId");
+
+		if (groupId != null) {
+			setGroupId(groupId);
+		}
+
+		Long companyId = (Long)attributes.get("companyId");
+
+		if (companyId != null) {
+			setCompanyId(companyId);
 		}
 
 		Long userId = (Long)attributes.get("userId");
@@ -168,6 +182,52 @@ public class DeptWorkClp extends BaseModelImpl<DeptWork> implements DeptWork {
 				Method method = clazz.getMethod("setDeptWorkId", long.class);
 
 				method.invoke(_deptWorkRemoteModel, deptWorkId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	@Override
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+
+		if (_deptWorkRemoteModel != null) {
+			try {
+				Class<?> clazz = _deptWorkRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setGroupId", long.class);
+
+				method.invoke(_deptWorkRemoteModel, groupId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	@Override
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
+
+		if (_deptWorkRemoteModel != null) {
+			try {
+				Class<?> clazz = _deptWorkRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setCompanyId", long.class);
+
+				method.invoke(_deptWorkRemoteModel, companyId);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -462,6 +522,8 @@ public class DeptWorkClp extends BaseModelImpl<DeptWork> implements DeptWork {
 		DeptWorkClp clone = new DeptWorkClp();
 
 		clone.setDeptWorkId(getDeptWorkId());
+		clone.setGroupId(getGroupId());
+		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
 		clone.setUserName(getUserName());
 		clone.setCreateTime(getCreateTime());
@@ -523,10 +585,14 @@ public class DeptWorkClp extends BaseModelImpl<DeptWork> implements DeptWork {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(21);
+		StringBundler sb = new StringBundler(25);
 
 		sb.append("{deptWorkId=");
 		sb.append(getDeptWorkId());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
 		sb.append(", userId=");
 		sb.append(getUserId());
 		sb.append(", userName=");
@@ -552,7 +618,7 @@ public class DeptWorkClp extends BaseModelImpl<DeptWork> implements DeptWork {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(34);
+		StringBundler sb = new StringBundler(40);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.oa.model.DeptWork");
@@ -561,6 +627,14 @@ public class DeptWorkClp extends BaseModelImpl<DeptWork> implements DeptWork {
 		sb.append(
 			"<column><column-name>deptWorkId</column-name><column-value><![CDATA[");
 		sb.append(getDeptWorkId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append(getGroupId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userId</column-name><column-value><![CDATA[");
@@ -605,6 +679,8 @@ public class DeptWorkClp extends BaseModelImpl<DeptWork> implements DeptWork {
 	}
 
 	private long _deptWorkId;
+	private long _groupId;
+	private long _companyId;
 	private long _userId;
 	private String _userUuid;
 	private String _userName;

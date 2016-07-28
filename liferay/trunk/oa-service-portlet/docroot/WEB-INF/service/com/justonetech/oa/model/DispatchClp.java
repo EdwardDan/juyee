@@ -76,11 +76,13 @@ public class DispatchClp extends BaseModelImpl<Dispatch> implements Dispatch {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("dispatchId", getDispatchId());
+		attributes.put("groupId", getGroupId());
+		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
 		attributes.put("createTime", getCreateTime());
 		attributes.put("modifiedTime", getModifiedTime());
-		attributes.put("rocordType", getRocordType());
+		attributes.put("recordType", getRecordType());
 		attributes.put("securityLevel", getSecurityLevel());
 		attributes.put("organaAbbreviation", getOrganaAbbreviation());
 		attributes.put("year", getYear());
@@ -101,6 +103,18 @@ public class DispatchClp extends BaseModelImpl<Dispatch> implements Dispatch {
 
 		if (dispatchId != null) {
 			setDispatchId(dispatchId);
+		}
+
+		Long groupId = (Long)attributes.get("groupId");
+
+		if (groupId != null) {
+			setGroupId(groupId);
+		}
+
+		Long companyId = (Long)attributes.get("companyId");
+
+		if (companyId != null) {
+			setCompanyId(companyId);
 		}
 
 		Long userId = (Long)attributes.get("userId");
@@ -127,10 +141,10 @@ public class DispatchClp extends BaseModelImpl<Dispatch> implements Dispatch {
 			setModifiedTime(modifiedTime);
 		}
 
-		Long rocordType = (Long)attributes.get("rocordType");
+		Long recordType = (Long)attributes.get("recordType");
 
-		if (rocordType != null) {
-			setRocordType(rocordType);
+		if (recordType != null) {
+			setRecordType(recordType);
 		}
 
 		Long securityLevel = (Long)attributes.get("securityLevel");
@@ -210,6 +224,52 @@ public class DispatchClp extends BaseModelImpl<Dispatch> implements Dispatch {
 				Method method = clazz.getMethod("setDispatchId", long.class);
 
 				method.invoke(_dispatchRemoteModel, dispatchId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	@Override
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+
+		if (_dispatchRemoteModel != null) {
+			try {
+				Class<?> clazz = _dispatchRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setGroupId", long.class);
+
+				method.invoke(_dispatchRemoteModel, groupId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	@Override
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
+
+		if (_dispatchRemoteModel != null) {
+			try {
+				Class<?> clazz = _dispatchRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setCompanyId", long.class);
+
+				method.invoke(_dispatchRemoteModel, companyId);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -320,21 +380,21 @@ public class DispatchClp extends BaseModelImpl<Dispatch> implements Dispatch {
 	}
 
 	@Override
-	public long getRocordType() {
-		return _rocordType;
+	public long getRecordType() {
+		return _recordType;
 	}
 
 	@Override
-	public void setRocordType(long rocordType) {
-		_rocordType = rocordType;
+	public void setRecordType(long recordType) {
+		_recordType = recordType;
 
 		if (_dispatchRemoteModel != null) {
 			try {
 				Class<?> clazz = _dispatchRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setRocordType", long.class);
+				Method method = clazz.getMethod("setRecordType", long.class);
 
-				method.invoke(_dispatchRemoteModel, rocordType);
+				method.invoke(_dispatchRemoteModel, recordType);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -643,11 +703,13 @@ public class DispatchClp extends BaseModelImpl<Dispatch> implements Dispatch {
 		DispatchClp clone = new DispatchClp();
 
 		clone.setDispatchId(getDispatchId());
+		clone.setGroupId(getGroupId());
+		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
 		clone.setUserName(getUserName());
 		clone.setCreateTime(getCreateTime());
 		clone.setModifiedTime(getModifiedTime());
-		clone.setRocordType(getRocordType());
+		clone.setRecordType(getRecordType());
 		clone.setSecurityLevel(getSecurityLevel());
 		clone.setOrganaAbbreviation(getOrganaAbbreviation());
 		clone.setYear(getYear());
@@ -710,10 +772,14 @@ public class DispatchClp extends BaseModelImpl<Dispatch> implements Dispatch {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(33);
+		StringBundler sb = new StringBundler(37);
 
 		sb.append("{dispatchId=");
 		sb.append(getDispatchId());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
 		sb.append(", userId=");
 		sb.append(getUserId());
 		sb.append(", userName=");
@@ -722,8 +788,8 @@ public class DispatchClp extends BaseModelImpl<Dispatch> implements Dispatch {
 		sb.append(getCreateTime());
 		sb.append(", modifiedTime=");
 		sb.append(getModifiedTime());
-		sb.append(", rocordType=");
-		sb.append(getRocordType());
+		sb.append(", recordType=");
+		sb.append(getRecordType());
 		sb.append(", securityLevel=");
 		sb.append(getSecurityLevel());
 		sb.append(", organaAbbreviation=");
@@ -751,7 +817,7 @@ public class DispatchClp extends BaseModelImpl<Dispatch> implements Dispatch {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(52);
+		StringBundler sb = new StringBundler(58);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.oa.model.Dispatch");
@@ -760,6 +826,14 @@ public class DispatchClp extends BaseModelImpl<Dispatch> implements Dispatch {
 		sb.append(
 			"<column><column-name>dispatchId</column-name><column-value><![CDATA[");
 		sb.append(getDispatchId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append(getGroupId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userId</column-name><column-value><![CDATA[");
@@ -778,8 +852,8 @@ public class DispatchClp extends BaseModelImpl<Dispatch> implements Dispatch {
 		sb.append(getModifiedTime());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>rocordType</column-name><column-value><![CDATA[");
-		sb.append(getRocordType());
+			"<column><column-name>recordType</column-name><column-value><![CDATA[");
+		sb.append(getRecordType());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>securityLevel</column-name><column-value><![CDATA[");
@@ -828,12 +902,14 @@ public class DispatchClp extends BaseModelImpl<Dispatch> implements Dispatch {
 	}
 
 	private long _dispatchId;
+	private long _groupId;
+	private long _companyId;
 	private long _userId;
 	private String _userUuid;
 	private String _userName;
 	private Date _createTime;
 	private Date _modifiedTime;
-	private long _rocordType;
+	private long _recordType;
 	private long _securityLevel;
 	private long _organaAbbreviation;
 	private int _year;

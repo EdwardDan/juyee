@@ -841,6 +841,8 @@ public class OfficeSupplyPersistenceImpl extends BasePersistenceImpl<OfficeSuppl
 		officeSupplyImpl.setPrimaryKey(officeSupply.getPrimaryKey());
 
 		officeSupplyImpl.setOfficeSupplyId(officeSupply.getOfficeSupplyId());
+		officeSupplyImpl.setGroupId(officeSupply.getGroupId());
+		officeSupplyImpl.setCompanyId(officeSupply.getCompanyId());
 		officeSupplyImpl.setUserId(officeSupply.getUserId());
 		officeSupplyImpl.setUserName(officeSupply.getUserName());
 		officeSupplyImpl.setCreateTime(officeSupply.getCreateTime());

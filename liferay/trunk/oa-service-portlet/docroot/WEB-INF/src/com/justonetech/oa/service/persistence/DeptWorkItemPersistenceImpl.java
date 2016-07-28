@@ -837,6 +837,8 @@ public class DeptWorkItemPersistenceImpl extends BasePersistenceImpl<DeptWorkIte
 		deptWorkItemImpl.setPrimaryKey(deptWorkItem.getPrimaryKey());
 
 		deptWorkItemImpl.setDeptWorkItemId(deptWorkItem.getDeptWorkItemId());
+		deptWorkItemImpl.setGroupId(deptWorkItem.getGroupId());
+		deptWorkItemImpl.setCompanyId(deptWorkItem.getCompanyId());
 		deptWorkItemImpl.setDeptWorkId(deptWorkItem.getDeptWorkId());
 		deptWorkItemImpl.setSortNo(deptWorkItem.getSortNo());
 		deptWorkItemImpl.setDutyPerson(deptWorkItem.getDutyPerson());

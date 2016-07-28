@@ -59,6 +59,8 @@ public class OfficeSupplyApplicationItemModelImpl extends BaseModelImpl<OfficeSu
 	public static final String TABLE_NAME = "oa_OfficeSupplyApplicationItem";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "officeSupplyApplicationItemId", Types.BIGINT },
+			{ "groupId", Types.BIGINT },
+			{ "companyId", Types.BIGINT },
 			{ "name", Types.VARCHAR },
 			{ "model", Types.VARCHAR },
 			{ "unit", Types.VARCHAR },
@@ -67,7 +69,7 @@ public class OfficeSupplyApplicationItemModelImpl extends BaseModelImpl<OfficeSu
 			{ "officeSupplyApplicationId", Types.BIGINT },
 			{ "officeSupplyId", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table oa_OfficeSupplyApplicationItem (officeSupplyApplicationItemId LONG not null primary key,name VARCHAR(75) null,model VARCHAR(75) null,unit VARCHAR(75) null,unitPrice DOUBLE,quantity INTEGER,officeSupplyApplicationId LONG,officeSupplyId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table oa_OfficeSupplyApplicationItem (officeSupplyApplicationItemId LONG not null primary key,groupId LONG,companyId LONG,name VARCHAR(75) null,model VARCHAR(75) null,unit VARCHAR(75) null,unitPrice DOUBLE,quantity INTEGER,officeSupplyApplicationId LONG,officeSupplyId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table oa_OfficeSupplyApplicationItem";
 	public static final String ORDER_BY_JPQL = " ORDER BY officeSupplyApplicationItem.officeSupplyApplicationItemId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY oa_OfficeSupplyApplicationItem.officeSupplyApplicationItemId ASC";
@@ -127,6 +129,8 @@ public class OfficeSupplyApplicationItemModelImpl extends BaseModelImpl<OfficeSu
 
 		attributes.put("officeSupplyApplicationItemId",
 			getOfficeSupplyApplicationItemId());
+		attributes.put("groupId", getGroupId());
+		attributes.put("companyId", getCompanyId());
 		attributes.put("name", getName());
 		attributes.put("model", getModel());
 		attributes.put("unit", getUnit());
@@ -146,6 +150,18 @@ public class OfficeSupplyApplicationItemModelImpl extends BaseModelImpl<OfficeSu
 
 		if (officeSupplyApplicationItemId != null) {
 			setOfficeSupplyApplicationItemId(officeSupplyApplicationItemId);
+		}
+
+		Long groupId = (Long)attributes.get("groupId");
+
+		if (groupId != null) {
+			setGroupId(groupId);
+		}
+
+		Long companyId = (Long)attributes.get("companyId");
+
+		if (companyId != null) {
+			setCompanyId(companyId);
 		}
 
 		String name = (String)attributes.get("name");
@@ -201,6 +217,26 @@ public class OfficeSupplyApplicationItemModelImpl extends BaseModelImpl<OfficeSu
 	public void setOfficeSupplyApplicationItemId(
 		long officeSupplyApplicationItemId) {
 		_officeSupplyApplicationItemId = officeSupplyApplicationItemId;
+	}
+
+	@Override
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	@Override
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+	}
+
+	@Override
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	@Override
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
 	}
 
 	@Override
@@ -306,7 +342,7 @@ public class OfficeSupplyApplicationItemModelImpl extends BaseModelImpl<OfficeSu
 
 	@Override
 	public ExpandoBridge getExpandoBridge() {
-		return ExpandoBridgeFactoryUtil.getExpandoBridge(0,
+		return ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
 			OfficeSupplyApplicationItem.class.getName(), getPrimaryKey());
 	}
 
@@ -332,6 +368,8 @@ public class OfficeSupplyApplicationItemModelImpl extends BaseModelImpl<OfficeSu
 		OfficeSupplyApplicationItemImpl officeSupplyApplicationItemImpl = new OfficeSupplyApplicationItemImpl();
 
 		officeSupplyApplicationItemImpl.setOfficeSupplyApplicationItemId(getOfficeSupplyApplicationItemId());
+		officeSupplyApplicationItemImpl.setGroupId(getGroupId());
+		officeSupplyApplicationItemImpl.setCompanyId(getCompanyId());
 		officeSupplyApplicationItemImpl.setName(getName());
 		officeSupplyApplicationItemImpl.setModel(getModel());
 		officeSupplyApplicationItemImpl.setUnit(getUnit());
@@ -407,6 +445,10 @@ public class OfficeSupplyApplicationItemModelImpl extends BaseModelImpl<OfficeSu
 
 		officeSupplyApplicationItemCacheModel.officeSupplyApplicationItemId = getOfficeSupplyApplicationItemId();
 
+		officeSupplyApplicationItemCacheModel.groupId = getGroupId();
+
+		officeSupplyApplicationItemCacheModel.companyId = getCompanyId();
+
 		officeSupplyApplicationItemCacheModel.name = getName();
 
 		String name = officeSupplyApplicationItemCacheModel.name;
@@ -444,10 +486,14 @@ public class OfficeSupplyApplicationItemModelImpl extends BaseModelImpl<OfficeSu
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(21);
 
 		sb.append("{officeSupplyApplicationItemId=");
 		sb.append(getOfficeSupplyApplicationItemId());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
 		sb.append(", name=");
 		sb.append(getName());
 		sb.append(", model=");
@@ -469,7 +515,7 @@ public class OfficeSupplyApplicationItemModelImpl extends BaseModelImpl<OfficeSu
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(28);
+		StringBundler sb = new StringBundler(34);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.oa.model.OfficeSupplyApplicationItem");
@@ -478,6 +524,14 @@ public class OfficeSupplyApplicationItemModelImpl extends BaseModelImpl<OfficeSu
 		sb.append(
 			"<column><column-name>officeSupplyApplicationItemId</column-name><column-value><![CDATA[");
 		sb.append(getOfficeSupplyApplicationItemId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append(getGroupId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>name</column-name><column-value><![CDATA[");
@@ -518,6 +572,8 @@ public class OfficeSupplyApplicationItemModelImpl extends BaseModelImpl<OfficeSu
 			OfficeSupplyApplicationItem.class
 		};
 	private long _officeSupplyApplicationItemId;
+	private long _groupId;
+	private long _companyId;
 	private String _name;
 	private String _model;
 	private String _unit;

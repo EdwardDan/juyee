@@ -38,7 +38,7 @@ public class LeaderWorkCacheModel implements CacheModel<LeaderWork>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(15);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{userId=");
 		sb.append(userId);
@@ -46,6 +46,10 @@ public class LeaderWorkCacheModel implements CacheModel<LeaderWork>,
 		sb.append(workDate);
 		sb.append(", amOrPm=");
 		sb.append(amOrPm);
+		sb.append(", groupId=");
+		sb.append(groupId);
+		sb.append(", companyId=");
+		sb.append(companyId);
 		sb.append(", userName=");
 		sb.append(userName);
 		sb.append(", createTime=");
@@ -73,6 +77,8 @@ public class LeaderWorkCacheModel implements CacheModel<LeaderWork>,
 		}
 
 		leaderWorkImpl.setAmOrPm(amOrPm);
+		leaderWorkImpl.setGroupId(groupId);
+		leaderWorkImpl.setCompanyId(companyId);
 
 		if (userName == null) {
 			leaderWorkImpl.setUserName(StringPool.BLANK);
@@ -112,6 +118,8 @@ public class LeaderWorkCacheModel implements CacheModel<LeaderWork>,
 		userId = objectInput.readLong();
 		workDate = objectInput.readLong();
 		amOrPm = objectInput.readLong();
+		groupId = objectInput.readLong();
+		companyId = objectInput.readLong();
 		userName = objectInput.readUTF();
 		createTime = objectInput.readLong();
 		modifiedTime = objectInput.readLong();
@@ -124,6 +132,8 @@ public class LeaderWorkCacheModel implements CacheModel<LeaderWork>,
 		objectOutput.writeLong(userId);
 		objectOutput.writeLong(workDate);
 		objectOutput.writeLong(amOrPm);
+		objectOutput.writeLong(groupId);
+		objectOutput.writeLong(companyId);
 
 		if (userName == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
@@ -146,6 +156,8 @@ public class LeaderWorkCacheModel implements CacheModel<LeaderWork>,
 	public long userId;
 	public long workDate;
 	public long amOrPm;
+	public long groupId;
+	public long companyId;
 	public String userName;
 	public long createTime;
 	public long modifiedTime;

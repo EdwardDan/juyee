@@ -120,6 +120,34 @@ public interface LeaderWorkModel extends BaseModel<LeaderWork> {
 	public void setAmOrPm(long amOrPm);
 
 	/**
+	 * Returns the group ID of this leader work.
+	 *
+	 * @return the group ID of this leader work
+	 */
+	public long getGroupId();
+
+	/**
+	 * Sets the group ID of this leader work.
+	 *
+	 * @param groupId the group ID of this leader work
+	 */
+	public void setGroupId(long groupId);
+
+	/**
+	 * Returns the company ID of this leader work.
+	 *
+	 * @return the company ID of this leader work
+	 */
+	public long getCompanyId();
+
+	/**
+	 * Sets the company ID of this leader work.
+	 *
+	 * @param companyId the company ID of this leader work
+	 */
+	public void setCompanyId(long companyId);
+
+	/**
 	 * Returns the user name of this leader work.
 	 *
 	 * @return the user name of this leader work

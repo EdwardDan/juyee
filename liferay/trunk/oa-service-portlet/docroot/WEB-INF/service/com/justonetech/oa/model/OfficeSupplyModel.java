@@ -75,6 +75,34 @@ public interface OfficeSupplyModel extends BaseModel<OfficeSupply> {
 	public void setOfficeSupplyId(long officeSupplyId);
 
 	/**
+	 * Returns the group ID of this office supply.
+	 *
+	 * @return the group ID of this office supply
+	 */
+	public long getGroupId();
+
+	/**
+	 * Sets the group ID of this office supply.
+	 *
+	 * @param groupId the group ID of this office supply
+	 */
+	public void setGroupId(long groupId);
+
+	/**
+	 * Returns the company ID of this office supply.
+	 *
+	 * @return the company ID of this office supply
+	 */
+	public long getCompanyId();
+
+	/**
+	 * Sets the company ID of this office supply.
+	 *
+	 * @param companyId the company ID of this office supply
+	 */
+	public void setCompanyId(long companyId);
+
+	/**
 	 * Returns the user ID of this office supply.
 	 *
 	 * @return the user ID of this office supply

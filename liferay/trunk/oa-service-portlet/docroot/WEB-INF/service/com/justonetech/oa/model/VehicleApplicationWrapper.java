@@ -51,6 +51,8 @@ public class VehicleApplicationWrapper implements VehicleApplication,
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("vehicleApplicationId", getVehicleApplicationId());
+		attributes.put("groupId", getGroupId());
+		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
 		attributes.put("createTime", getCreateTime());
@@ -74,6 +76,18 @@ public class VehicleApplicationWrapper implements VehicleApplication,
 
 		if (vehicleApplicationId != null) {
 			setVehicleApplicationId(vehicleApplicationId);
+		}
+
+		Long groupId = (Long)attributes.get("groupId");
+
+		if (groupId != null) {
+			setGroupId(groupId);
+		}
+
+		Long companyId = (Long)attributes.get("companyId");
+
+		if (companyId != null) {
+			setCompanyId(companyId);
 		}
 
 		Long userId = (Long)attributes.get("userId");
@@ -193,6 +207,46 @@ public class VehicleApplicationWrapper implements VehicleApplication,
 	@Override
 	public void setVehicleApplicationId(long vehicleApplicationId) {
 		_vehicleApplication.setVehicleApplicationId(vehicleApplicationId);
+	}
+
+	/**
+	* Returns the group ID of this vehicle application.
+	*
+	* @return the group ID of this vehicle application
+	*/
+	@Override
+	public long getGroupId() {
+		return _vehicleApplication.getGroupId();
+	}
+
+	/**
+	* Sets the group ID of this vehicle application.
+	*
+	* @param groupId the group ID of this vehicle application
+	*/
+	@Override
+	public void setGroupId(long groupId) {
+		_vehicleApplication.setGroupId(groupId);
+	}
+
+	/**
+	* Returns the company ID of this vehicle application.
+	*
+	* @return the company ID of this vehicle application
+	*/
+	@Override
+	public long getCompanyId() {
+		return _vehicleApplication.getCompanyId();
+	}
+
+	/**
+	* Sets the company ID of this vehicle application.
+	*
+	* @param companyId the company ID of this vehicle application
+	*/
+	@Override
+	public void setCompanyId(long companyId) {
+		_vehicleApplication.setCompanyId(companyId);
 	}
 
 	/**

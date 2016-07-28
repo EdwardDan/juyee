@@ -31,11 +31,13 @@ public class DispatchSoap implements Serializable {
 		DispatchSoap soapModel = new DispatchSoap();
 
 		soapModel.setDispatchId(model.getDispatchId());
+		soapModel.setGroupId(model.getGroupId());
+		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateTime(model.getCreateTime());
 		soapModel.setModifiedTime(model.getModifiedTime());
-		soapModel.setRocordType(model.getRocordType());
+		soapModel.setRecordType(model.getRecordType());
 		soapModel.setSecurityLevel(model.getSecurityLevel());
 		soapModel.setOrganaAbbreviation(model.getOrganaAbbreviation());
 		soapModel.setYear(model.getYear());
@@ -106,6 +108,22 @@ public class DispatchSoap implements Serializable {
 		_dispatchId = dispatchId;
 	}
 
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+	}
+
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
+	}
+
 	public long getUserId() {
 		return _userId;
 	}
@@ -138,12 +156,12 @@ public class DispatchSoap implements Serializable {
 		_modifiedTime = modifiedTime;
 	}
 
-	public long getRocordType() {
-		return _rocordType;
+	public long getRecordType() {
+		return _recordType;
 	}
 
-	public void setRocordType(long rocordType) {
-		_rocordType = rocordType;
+	public void setRecordType(long recordType) {
+		_recordType = recordType;
 	}
 
 	public long getSecurityLevel() {
@@ -227,11 +245,13 @@ public class DispatchSoap implements Serializable {
 	}
 
 	private long _dispatchId;
+	private long _groupId;
+	private long _companyId;
 	private long _userId;
 	private String _userName;
 	private Date _createTime;
 	private Date _modifiedTime;
-	private long _rocordType;
+	private long _recordType;
 	private long _securityLevel;
 	private long _organaAbbreviation;
 	private int _year;

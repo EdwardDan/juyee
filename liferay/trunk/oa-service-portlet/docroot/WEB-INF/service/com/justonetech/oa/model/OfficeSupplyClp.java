@@ -77,6 +77,8 @@ public class OfficeSupplyClp extends BaseModelImpl<OfficeSupply>
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("officeSupplyId", getOfficeSupplyId());
+		attributes.put("groupId", getGroupId());
+		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
 		attributes.put("createTime", getCreateTime());
@@ -96,6 +98,18 @@ public class OfficeSupplyClp extends BaseModelImpl<OfficeSupply>
 
 		if (officeSupplyId != null) {
 			setOfficeSupplyId(officeSupplyId);
+		}
+
+		Long groupId = (Long)attributes.get("groupId");
+
+		if (groupId != null) {
+			setGroupId(groupId);
+		}
+
+		Long companyId = (Long)attributes.get("companyId");
+
+		if (companyId != null) {
+			setCompanyId(companyId);
 		}
 
 		Long userId = (Long)attributes.get("userId");
@@ -169,6 +183,52 @@ public class OfficeSupplyClp extends BaseModelImpl<OfficeSupply>
 				Method method = clazz.getMethod("setOfficeSupplyId", long.class);
 
 				method.invoke(_officeSupplyRemoteModel, officeSupplyId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	@Override
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+
+		if (_officeSupplyRemoteModel != null) {
+			try {
+				Class<?> clazz = _officeSupplyRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setGroupId", long.class);
+
+				method.invoke(_officeSupplyRemoteModel, groupId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	@Override
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
+
+		if (_officeSupplyRemoteModel != null) {
+			try {
+				Class<?> clazz = _officeSupplyRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setCompanyId", long.class);
+
+				method.invoke(_officeSupplyRemoteModel, companyId);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -463,6 +523,8 @@ public class OfficeSupplyClp extends BaseModelImpl<OfficeSupply>
 		OfficeSupplyClp clone = new OfficeSupplyClp();
 
 		clone.setOfficeSupplyId(getOfficeSupplyId());
+		clone.setGroupId(getGroupId());
+		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
 		clone.setUserName(getUserName());
 		clone.setCreateTime(getCreateTime());
@@ -525,10 +587,14 @@ public class OfficeSupplyClp extends BaseModelImpl<OfficeSupply>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(21);
+		StringBundler sb = new StringBundler(25);
 
 		sb.append("{officeSupplyId=");
 		sb.append(getOfficeSupplyId());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
 		sb.append(", userId=");
 		sb.append(getUserId());
 		sb.append(", userName=");
@@ -554,7 +620,7 @@ public class OfficeSupplyClp extends BaseModelImpl<OfficeSupply>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(34);
+		StringBundler sb = new StringBundler(40);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.oa.model.OfficeSupply");
@@ -563,6 +629,14 @@ public class OfficeSupplyClp extends BaseModelImpl<OfficeSupply>
 		sb.append(
 			"<column><column-name>officeSupplyId</column-name><column-value><![CDATA[");
 		sb.append(getOfficeSupplyId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append(getGroupId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userId</column-name><column-value><![CDATA[");
@@ -607,6 +681,8 @@ public class OfficeSupplyClp extends BaseModelImpl<OfficeSupply>
 	}
 
 	private long _officeSupplyId;
+	private long _groupId;
+	private long _companyId;
 	private long _userId;
 	private String _userUuid;
 	private String _userName;

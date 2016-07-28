@@ -839,11 +839,13 @@ public class DispatchPersistenceImpl extends BasePersistenceImpl<Dispatch>
 		dispatchImpl.setPrimaryKey(dispatch.getPrimaryKey());
 
 		dispatchImpl.setDispatchId(dispatch.getDispatchId());
+		dispatchImpl.setGroupId(dispatch.getGroupId());
+		dispatchImpl.setCompanyId(dispatch.getCompanyId());
 		dispatchImpl.setUserId(dispatch.getUserId());
 		dispatchImpl.setUserName(dispatch.getUserName());
 		dispatchImpl.setCreateTime(dispatch.getCreateTime());
 		dispatchImpl.setModifiedTime(dispatch.getModifiedTime());
-		dispatchImpl.setRocordType(dispatch.getRocordType());
+		dispatchImpl.setRecordType(dispatch.getRecordType());
 		dispatchImpl.setSecurityLevel(dispatch.getSecurityLevel());
 		dispatchImpl.setOrganaAbbreviation(dispatch.getOrganaAbbreviation());
 		dispatchImpl.setYear(dispatch.getYear());

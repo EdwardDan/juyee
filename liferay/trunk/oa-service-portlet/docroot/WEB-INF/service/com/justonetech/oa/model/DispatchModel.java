@@ -75,6 +75,34 @@ public interface DispatchModel extends BaseModel<Dispatch> {
 	public void setDispatchId(long dispatchId);
 
 	/**
+	 * Returns the group ID of this dispatch.
+	 *
+	 * @return the group ID of this dispatch
+	 */
+	public long getGroupId();
+
+	/**
+	 * Sets the group ID of this dispatch.
+	 *
+	 * @param groupId the group ID of this dispatch
+	 */
+	public void setGroupId(long groupId);
+
+	/**
+	 * Returns the company ID of this dispatch.
+	 *
+	 * @return the company ID of this dispatch
+	 */
+	public long getCompanyId();
+
+	/**
+	 * Sets the company ID of this dispatch.
+	 *
+	 * @param companyId the company ID of this dispatch
+	 */
+	public void setCompanyId(long companyId);
+
+	/**
 	 * Returns the user ID of this dispatch.
 	 *
 	 * @return the user ID of this dispatch
@@ -147,18 +175,18 @@ public interface DispatchModel extends BaseModel<Dispatch> {
 	public void setModifiedTime(Date modifiedTime);
 
 	/**
-	 * Returns the rocord type of this dispatch.
+	 * Returns the record type of this dispatch.
 	 *
-	 * @return the rocord type of this dispatch
+	 * @return the record type of this dispatch
 	 */
-	public long getRocordType();
+	public long getRecordType();
 
 	/**
-	 * Sets the rocord type of this dispatch.
+	 * Sets the record type of this dispatch.
 	 *
-	 * @param rocordType the rocord type of this dispatch
+	 * @param recordType the record type of this dispatch
 	 */
-	public void setRocordType(long rocordType);
+	public void setRecordType(long recordType);
 
 	/**
 	 * Returns the security level of this dispatch.

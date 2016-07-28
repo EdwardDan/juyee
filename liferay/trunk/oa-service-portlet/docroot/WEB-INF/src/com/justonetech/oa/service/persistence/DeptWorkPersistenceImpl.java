@@ -1363,6 +1363,8 @@ public class DeptWorkPersistenceImpl extends BasePersistenceImpl<DeptWork>
 		deptWorkImpl.setPrimaryKey(deptWork.getPrimaryKey());
 
 		deptWorkImpl.setDeptWorkId(deptWork.getDeptWorkId());
+		deptWorkImpl.setGroupId(deptWork.getGroupId());
+		deptWorkImpl.setCompanyId(deptWork.getCompanyId());
 		deptWorkImpl.setUserId(deptWork.getUserId());
 		deptWorkImpl.setUserName(deptWork.getUserName());
 		deptWorkImpl.setCreateTime(deptWork.getCreateTime());

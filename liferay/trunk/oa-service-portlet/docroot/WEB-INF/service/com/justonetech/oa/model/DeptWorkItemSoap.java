@@ -30,6 +30,8 @@ public class DeptWorkItemSoap implements Serializable {
 		DeptWorkItemSoap soapModel = new DeptWorkItemSoap();
 
 		soapModel.setDeptWorkItemId(model.getDeptWorkItemId());
+		soapModel.setGroupId(model.getGroupId());
+		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setDeptWorkId(model.getDeptWorkId());
 		soapModel.setSortNo(model.getSortNo());
 		soapModel.setDutyPerson(model.getDutyPerson());
@@ -97,6 +99,22 @@ public class DeptWorkItemSoap implements Serializable {
 		_deptWorkItemId = deptWorkItemId;
 	}
 
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+	}
+
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
+	}
+
 	public long getDeptWorkId() {
 		return _deptWorkId;
 	}
@@ -158,6 +176,8 @@ public class DeptWorkItemSoap implements Serializable {
 	}
 
 	private long _deptWorkItemId;
+	private long _groupId;
+	private long _companyId;
 	private long _deptWorkId;
 	private int _sortNo;
 	private String _dutyPerson;

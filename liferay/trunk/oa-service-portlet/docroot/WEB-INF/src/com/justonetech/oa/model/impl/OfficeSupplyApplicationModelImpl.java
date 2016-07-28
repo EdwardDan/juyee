@@ -63,6 +63,8 @@ public class OfficeSupplyApplicationModelImpl extends BaseModelImpl<OfficeSupply
 	public static final String TABLE_NAME = "oa_OfficeSupplyApplication";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "officeSupplyApplicationId", Types.BIGINT },
+			{ "groupId", Types.BIGINT },
+			{ "companyId", Types.BIGINT },
 			{ "userId", Types.BIGINT },
 			{ "userName", Types.VARCHAR },
 			{ "createTime", Types.TIMESTAMP },
@@ -71,7 +73,7 @@ public class OfficeSupplyApplicationModelImpl extends BaseModelImpl<OfficeSupply
 			{ "deptName", Types.VARCHAR },
 			{ "introductions", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table oa_OfficeSupplyApplication (officeSupplyApplicationId LONG not null primary key,userId LONG,userName VARCHAR(75) null,createTime DATE null,modifiedTime DATE null,deptId LONG,deptName VARCHAR(75) null,introductions VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table oa_OfficeSupplyApplication (officeSupplyApplicationId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createTime DATE null,modifiedTime DATE null,deptId LONG,deptName VARCHAR(75) null,introductions VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table oa_OfficeSupplyApplication";
 	public static final String ORDER_BY_JPQL = " ORDER BY officeSupplyApplication.modifiedTime DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY oa_OfficeSupplyApplication.modifiedTime DESC";
@@ -131,6 +133,8 @@ public class OfficeSupplyApplicationModelImpl extends BaseModelImpl<OfficeSupply
 
 		attributes.put("officeSupplyApplicationId",
 			getOfficeSupplyApplicationId());
+		attributes.put("groupId", getGroupId());
+		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
 		attributes.put("createTime", getCreateTime());
@@ -149,6 +153,18 @@ public class OfficeSupplyApplicationModelImpl extends BaseModelImpl<OfficeSupply
 
 		if (officeSupplyApplicationId != null) {
 			setOfficeSupplyApplicationId(officeSupplyApplicationId);
+		}
+
+		Long groupId = (Long)attributes.get("groupId");
+
+		if (groupId != null) {
+			setGroupId(groupId);
+		}
+
+		Long companyId = (Long)attributes.get("companyId");
+
+		if (companyId != null) {
+			setCompanyId(companyId);
 		}
 
 		Long userId = (Long)attributes.get("userId");
@@ -202,6 +218,26 @@ public class OfficeSupplyApplicationModelImpl extends BaseModelImpl<OfficeSupply
 	@Override
 	public void setOfficeSupplyApplicationId(long officeSupplyApplicationId) {
 		_officeSupplyApplicationId = officeSupplyApplicationId;
+	}
+
+	@Override
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	@Override
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+	}
+
+	@Override
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	@Override
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
 	}
 
 	@Override
@@ -319,7 +355,7 @@ public class OfficeSupplyApplicationModelImpl extends BaseModelImpl<OfficeSupply
 
 	@Override
 	public ExpandoBridge getExpandoBridge() {
-		return ExpandoBridgeFactoryUtil.getExpandoBridge(0,
+		return ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
 			OfficeSupplyApplication.class.getName(), getPrimaryKey());
 	}
 
@@ -345,6 +381,8 @@ public class OfficeSupplyApplicationModelImpl extends BaseModelImpl<OfficeSupply
 		OfficeSupplyApplicationImpl officeSupplyApplicationImpl = new OfficeSupplyApplicationImpl();
 
 		officeSupplyApplicationImpl.setOfficeSupplyApplicationId(getOfficeSupplyApplicationId());
+		officeSupplyApplicationImpl.setGroupId(getGroupId());
+		officeSupplyApplicationImpl.setCompanyId(getCompanyId());
 		officeSupplyApplicationImpl.setUserId(getUserId());
 		officeSupplyApplicationImpl.setUserName(getUserName());
 		officeSupplyApplicationImpl.setCreateTime(getCreateTime());
@@ -418,6 +456,10 @@ public class OfficeSupplyApplicationModelImpl extends BaseModelImpl<OfficeSupply
 
 		officeSupplyApplicationCacheModel.officeSupplyApplicationId = getOfficeSupplyApplicationId();
 
+		officeSupplyApplicationCacheModel.groupId = getGroupId();
+
+		officeSupplyApplicationCacheModel.companyId = getCompanyId();
+
 		officeSupplyApplicationCacheModel.userId = getUserId();
 
 		officeSupplyApplicationCacheModel.userName = getUserName();
@@ -469,10 +511,14 @@ public class OfficeSupplyApplicationModelImpl extends BaseModelImpl<OfficeSupply
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(21);
 
 		sb.append("{officeSupplyApplicationId=");
 		sb.append(getOfficeSupplyApplicationId());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
 		sb.append(", userId=");
 		sb.append(getUserId());
 		sb.append(", userName=");
@@ -494,7 +540,7 @@ public class OfficeSupplyApplicationModelImpl extends BaseModelImpl<OfficeSupply
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(28);
+		StringBundler sb = new StringBundler(34);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.oa.model.OfficeSupplyApplication");
@@ -503,6 +549,14 @@ public class OfficeSupplyApplicationModelImpl extends BaseModelImpl<OfficeSupply
 		sb.append(
 			"<column><column-name>officeSupplyApplicationId</column-name><column-value><![CDATA[");
 		sb.append(getOfficeSupplyApplicationId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append(getGroupId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userId</column-name><column-value><![CDATA[");
@@ -543,6 +597,8 @@ public class OfficeSupplyApplicationModelImpl extends BaseModelImpl<OfficeSupply
 			OfficeSupplyApplication.class
 		};
 	private long _officeSupplyApplicationId;
+	private long _groupId;
+	private long _companyId;
 	private long _userId;
 	private String _userUuid;
 	private long _originalUserId;
