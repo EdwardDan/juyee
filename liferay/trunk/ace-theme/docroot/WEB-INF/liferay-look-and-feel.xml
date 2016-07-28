@@ -8,8 +8,12 @@
 	<theme id="ace" name="Ace">
 		<template-extension>ftl</template-extension>
 		<settings>
-			<setting configurable="false" key="portlet-setup-show-borders-default"
+			<setting configurable="true" key="portlet-setup-show-borders-default"
 				type="checkbox" value="false" />
+			<setting configurable="true" key="show-custom-site-name"
+				type="checkbox" value="false" />
+			<setting configurable="true" key="custom-site-name" type="text"
+				value="" />
 		</settings>
 	</theme>
 </look-and-feel>

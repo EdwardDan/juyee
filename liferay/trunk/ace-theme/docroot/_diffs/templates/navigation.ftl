@@ -17,7 +17,7 @@
     </#if>
     <li class="${nav_level_1_item_selected}">
         <a class="${nav_level_1_item_has_child}" href="${nav_level_1_item_url}" ${nav_level_1_item.getTarget()}>
-            <i class="icon-dashboard"></i>
+            ${nav_level_1_item.icon()}
             <span class="menu-text"> ${nav_level_1_item.getName()}</span>
             <#if nav_level_1_item.hasChildren()>
                 <b class="arrow icon-angle-down"></b>

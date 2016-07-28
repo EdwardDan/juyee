@@ -40,12 +40,17 @@
 			<div class="navbar-inner">
 				<div class="container-fluid">
 					<a href="${site_default_url}" class="brand">
+						<img alt="${logo_description}" height="${site_logo_height}" src="${site_logo}" width="${site_logo_width}" />
 						<small>
-							<i class="icon-leaf"></i>
-							${site_name}
+							<#assign show_custom_site_name = getterUtil.getBoolean(theme.getSetting("show-custom-site-name"), false) />
+							<#if show_custom_site_name>
+								${theme.getSetting("custom-site-name")}
+							<#else>
+								${site_name}
+							</#if>
 						</small>
 					</a><!--/.brand-->
-
+					<#if is_signed_in>
 					<ul class="nav ace-nav pull-right">
 						<li class="light-blue">
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
@@ -58,7 +63,7 @@
 
 								<i class="icon-caret-down"></i>
 							</a>
-
+							
 							<ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-closer">
 								
 								<li>
@@ -79,6 +84,7 @@
 							</ul>
 						</li>
 					</ul><!--/.ace-nav-->
+					</#if>
 				</div><!--/.container-fluid-->
 			</div><!--/.navbar-inner-->
 		</div>
