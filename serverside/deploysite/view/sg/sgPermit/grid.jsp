@@ -163,6 +163,14 @@
             }
         });
     }
+
+    //按是否标注过滤数据
+    function loadThisGrid() {
+
+        var v = $("#queryStatus option:selected").val();
+       alert(v);
+        jQuery("#listGrid").jqGrid('setGridParam', {postData: {'queryStatus': v}}).trigger('reloadGrid');
+    }
 </script>
 
 <div class="title_Search">
@@ -173,6 +181,9 @@
         <div style="float:left;padding-left: 10px" id="conditionsDesc">
             <input type="text" name="queryConditionDesc" id="queryConditionDesc" value="" class="title_input"
                    readonly="true"/>
+            <select name="queryStatus" id="queryStatus" class="form_select" onchange="loadThisGrid()">
+                ${options}
+            </select>
         </div>
         <div style="float:right;padding-right: 10px">
             <c:if test="${canEdit||isReg}">
