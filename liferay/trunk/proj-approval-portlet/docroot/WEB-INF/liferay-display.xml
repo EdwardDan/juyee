@@ -3,7 +3,7 @@
 
 <display>
 	
-	<category name="项目审批">
+	<category name="项目审批管理">
 		<portlet id="construction-permit-material"></portlet>
 		<portlet id="construction-permit-application"></portlet>
 	</category>
