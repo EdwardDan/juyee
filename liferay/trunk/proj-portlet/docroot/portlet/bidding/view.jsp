@@ -8,14 +8,15 @@
 <portlet:actionURL var="deleteProjectsURL" name="deleteProjects">
 	<portlet:param name="redirect" value="${viewURL}" />
 </portlet:actionURL>
+<liferay-ui:header title="标段信息"/>
 <aui:form action="${viewURL}" name="fm">
-	<aui:nav-bar>
+	<%-- <aui:nav-bar>
 		<aui:nav-bar-search cssClass="pull-right">
 			<div class="form-search">
 				<liferay-ui:input-search />
 			</div>
 		</aui:nav-bar-search>
-	</aui:nav-bar>
+	</aui:nav-bar> --%>
 	<liferay-ui:search-container emptyResultsMessage="没有找到项目。">
 		<liferay-ui:search-container-results results="${projects}"
 			total="${projectCount}" />

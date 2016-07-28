@@ -16,7 +16,6 @@
 					<aui:col span="6" cssClass="text-left">
 						<aui:input type="text" label="项目编号" name="projNum"
 							value="${project.projNum}">
-							<aui:validator name="required" errorMessage="项目编号不能为空!"></aui:validator>
 							<aui:validator name="maxLength" errorMessage="">75</aui:validator>
 						</aui:input>
 					</aui:col>
@@ -39,7 +38,6 @@
 						<input type="text" class="field"
 							name="<portlet:namespace/>startDate" id="startDate"
 							onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'endDate\')}',lang:'zh-cn',dateFmt:'yyyy-MM-dd'})"
-							required="required"
 							value='<fmt:formatDate value="${project.startDate}" pattern="yyyy-MM-dd"/>'>
 					</aui:col>
 				</aui:row>
@@ -57,7 +55,6 @@
 						<input type="text" class="field"
 							name="<portlet:namespace/>endDate" id="endDate"
 							onfocus="WdatePicker({minDate:'#F{$dp.$D(\'startDate\')}',lang:'zh-cn',dateFmt:'yyyy-MM-dd'})"
-							required="required"
 							value='<fmt:formatDate value="${project.endDate }" pattern="yyyy-MM-dd"/>'>
 					</aui:col>
 				</aui:row>
@@ -95,8 +92,7 @@
 									selected="${manageAttribute. dictionaryId eq project.manageAttribute }">${manageAttribute.name }</aui:option>
 							</c:forEach>
 						</aui:select>
-						<aui:select label="" name="isMajor" inlineField="true"
-							showEmptyOption="true">
+						<aui:select label="" name="isMajor" inlineField="true">
 							<aui:option value="1" selected="${project. isMajor}">重大</aui:option>
 							<aui:option value="0" selected="${!project. isMajor}">非重大</aui:option>
 						</aui:select>
@@ -106,7 +102,6 @@
 						<aui:input type="text" label="规划红线（宽度m）" name="planRedLine"
 							placeholder="请输入正数" value="${project.planRedLine}"
 							onkeyup="value=value.replace(/[^\d.]/g,'')">
-							<aui:validator name="required" errorMessage="规划红线（宽度m）不能为空!"></aui:validator>
 						</aui:input>
 					</aui:col>
 				</aui:row>
@@ -163,7 +158,6 @@
 					<aui:col span="6" cssClass="text-left">
 						<aui:input type="text" label="起讫地点" name="location"
 							value="${project.location}">
-							<aui:validator name="required" errorMessage="起讫地点不能为空!"></aui:validator>
 						</aui:input>
 					</aui:col>
 				</aui:row>
@@ -175,16 +169,14 @@
 					<aui:col span="6" cssClass="text-left">
 						<label class="control-label" for="startNode"> 目标开工节点 </label>
 						<input type="text" class="field"
-							name="<portlet:namespace/>startNode error-field" id="startNode"
+							name="<portlet:namespace/>startNode" id="startNode"
 							onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'endNode\')}',lang:'zh-cn',dateFmt:'yyyy-MM-dd'})"
-							required="required"
 							value='<fmt:formatDate value="${project.startNode }" pattern="yyyy-MM-dd"/>'>
 					</aui:col>
 					<aui:col span="6" cssClass="text-left">
 						<aui:input type="text" label="计划总投资" name="planTotalInvestment"
 							placeholder="请输入正数" value="${project.planTotalInvestment}"
 							onkeyup="value=value.replace(/[^\d.]/g,'')">
-							<aui:validator name="required" errorMessage="计划总投资不能为空!"></aui:validator>
 						</aui:input>
 					</aui:col>
 				</aui:row>
@@ -192,9 +184,8 @@
 					<aui:col span="6" cssClass="text-left">
 						<label class="control-label" for="endNode"> 目标完工节点 </label>
 						<input type="text" class="field"
-							name="<portlet:namespace/>endNode error-field" id="endNode"
+							name="<portlet:namespace/>endNode" id="endNode"
 							onfocus="WdatePicker({minDate:'#F{$dp.$D(\'startNode\')}',lang:'zh-cn',dateFmt:'yyyy-MM-dd'})"
-							required="required"
 							value='<fmt:formatDate value="${project.endNode }" pattern="yyyy-MM-dd"/>'>
 					</aui:col>
 					<aui:col span="6" cssClass="text-left">
@@ -209,10 +200,9 @@
 						<label class="control-label" for="planStartDate"> 目标计划开工时间
 						</label>
 						<input type="text" class="field"
-							name="<portlet:namespace/>planStartDate error-field"
+							name="<portlet:namespace/>planStartDate"
 							id="planStartDate"
 							onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'planEndDate\')}',lang:'zh-cn',dateFmt:'yyyy-MM-dd'})"
-							required="required"
 							value='<fmt:formatDate value="${project.planStartDate }" pattern="yyyy-MM-dd"/>'>
 					</aui:col>
 					<aui:col span="6" cssClass="text-left">
@@ -225,10 +215,9 @@
 					<aui:col span="6" cssClass="text-left">
 						<label class="control-label" for="planEndDate"> 目标计划完工时间 </label>
 						<input type="text" class="field"
-							name="<portlet:namespace/>planEndDate error-field"
+							name="<portlet:namespace/>planEndDate"
 							id="planEndDate"
 							onfocus="WdatePicker({minDate:'#F{$dp.$D(\'planStartDate\')}',lang:'zh-cn',dateFmt:'yyyy-MM-dd'})"
-							required="required"
 							value='<fmt:formatDate value="${project.planEndDate }" pattern="yyyy-MM-dd"/>'>
 					</aui:col>
 					<aui:col span="6" cssClass="text-left">

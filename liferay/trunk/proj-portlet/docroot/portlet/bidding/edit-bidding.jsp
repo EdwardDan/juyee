@@ -1,11 +1,6 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@include file="/common/init.jsp"%>
-
 <c:set var="contextPath" value="${request.contextPath}/portlet/bidding" />
-
-<%
-	
-%>
 
 <portlet:renderURL var="viewURL">
 	<portlet:param name="mvcPath" value="${contextPath}/view-bidding.jsp" />
@@ -25,7 +20,6 @@
 			<aui:col span="6" cssClass="text-left">
 				<aui:input type="text" label="标段序号" name="sortNo"
 					value="${sortNo}">
-					<aui:validator name="required" errorMessage="标段序号不能为空!"></aui:validator>
 					<aui:validator name="maxLength" errorMessage="">75</aui:validator>
 				</aui:input>
 			</aui:col>
@@ -46,7 +40,6 @@
 				<label class="control-label" for="startDate"> 开工日期 </label>
 				<input type="text" class="field"
 					name="<portlet:namespace/>startDate" id="startDate"
-					onfocus="WdatePicker({lang:'zh-cn'})" required="required"
 					value='<fmt:formatDate value="${bidding.startDate }" pattern="yyyy-MM-dd"/>'>
 			</aui:col>
 		</aui:row>
@@ -72,7 +65,6 @@
 			<aui:col span="6" cssClass="text-left">
 				<aui:input type="text" label="联系电话" name="linkTel"
 					value="${bidding.linkTel}">
-					<aui:validator name="required" errorMessage="联系电话!"></aui:validator>
 				</aui:input>
 			</aui:col>
 		</aui:row>

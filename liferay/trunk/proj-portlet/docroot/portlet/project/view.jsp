@@ -8,17 +8,18 @@
 <portlet:actionURL var="deleteProjectsURL" name="deleteProjects">
 	<portlet:param name="redirect" value="${viewURL}" />
 </portlet:actionURL>
+<liferay-ui:header title="项目基本信息"/>
 <aui:form action="${viewURL }" name="fm">
 	<aui:row>
 		<aui:col span="6">
 			<aui:button value="添加" href="${addProjectURL}" icon="icon-plus"/>
 			<aui:button disabled="<%=true%>" icon="icon-remove" name="deleteProjectsBtn" value="删除" onClick='<%=renderResponse.getNamespace() + "deleteProjects();"%>' />
 		</aui:col>
-		<aui:col span="6" cssClass="text-right">
+		<%-- <aui:col span="6" cssClass="text-right">
 			<div class="form-search">
 			<liferay-ui:input-search />
 			</div>
-		</aui:col>
+		</aui:col> --%>
 	</aui:row>
 	<liferay-ui:search-container emptyResultsMessage="没有找到项目基本信息。"
 		rowChecker="<%=new RowChecker (renderResponse)%>">

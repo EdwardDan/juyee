@@ -35,11 +35,11 @@
 				name="deleteBiddingsBtn" value="删除"
 				onClick='<%=renderResponse.getNamespace() + "deleteBiddings();"%>' />
 		</aui:col>
-		<aui:col span="6" cssClass="text-right">
+		<%-- <aui:col span="6" cssClass="text-right">
 			<div class="form-search">
 			<liferay-ui:input-search />
 			</div>
-		</aui:col>
+		</aui:col> --%>
 	</aui:row>
 	<liferay-ui:search-container emptyResultsMessage="没有找到项目。"
 		rowChecker="<%=new RowChecker (renderResponse)%>">

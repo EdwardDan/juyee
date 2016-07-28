@@ -62,13 +62,13 @@ public class BiddingPortlet extends MVCPortlet {
 			e.printStackTrace();
 		}
 
-		Map biddingCount = new HashMap();
+		Map<Long,Integer> biddingCount = new HashMap<Long,Integer>();
 		for (Project project : projects) {
 			try {
 				List<Bidding> biddings = BiddingLocalServiceUtil.findByProjectId(project.getProjectId());
 				biddingCount.put(project.getProjectId(), biddings.size());
 			} catch (SystemException e) {
-				e.printStackTrace();
+				log.info("findByProjectId 出错"+e.getMessage());
 			}
 		}
 		long manageAttrId = 0;
