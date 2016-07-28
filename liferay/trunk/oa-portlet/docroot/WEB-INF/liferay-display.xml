@@ -3,7 +3,7 @@
 
 <display>
 	
-	<category name="协同办公">
+	<category name="协同办公管理">
 		<portlet id="office-supply"></portlet>
 		<portlet id="leader-weekly-work"></portlet>
 		<portlet id="dept-weekly-work"></portlet>

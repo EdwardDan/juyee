@@ -87,7 +87,7 @@ public class SendDispatchPortlet extends MVCPortlet {
 
 		long dispatchId = ParamUtil.getLong(actionRequest, "dispatchId");
 
-		long rocordType = ParamUtil.getLong(actionRequest, "rocordType");
+		long recordType = ParamUtil.getLong(actionRequest, "recordType");
 		long securityLevel = ParamUtil.getLong(actionRequest, "securityLevel");
 		long organaAbbreviation = ParamUtil.getLong(actionRequest,
 				"organaAbbreviation");
@@ -117,7 +117,7 @@ public class SendDispatchPortlet extends MVCPortlet {
 			dispatch.setUserId(user.getUserId());
 			dispatch.setUserName(user.getFullName());
 		}
-		dispatch.setRocordType(rocordType);
+		dispatch.setRecordType(recordType);
 		dispatch.setSecurityLevel(securityLevel);
 		dispatch.setOrganaAbbreviation(organaAbbreviation);
 		dispatch.setYear(year);

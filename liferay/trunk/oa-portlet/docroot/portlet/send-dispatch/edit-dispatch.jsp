@@ -26,11 +26,11 @@
 		<aui:input name="dispatchId" type="hidden" />
 		<aui:row>
 			<aui:col span="3" cssClass="text-left">
-				<aui:select name="rocordType" label="文种" inlineField="true"
+				<aui:select name="recordType" label="文种" inlineField="true"
 					inlineLabel="left" type="select" style="width:100px">
 					<%
 						Dictionary dictionary = DictionaryLocalServiceUtil.findByCode(
-													"rocordType");
+													"recordType");
 											if (null != dictionary) {
 												List<Dictionary> dictionaries = DictionaryLocalServiceUtil
 														.findByParentId( dictionary.getDictionaryId(), -1, -1);

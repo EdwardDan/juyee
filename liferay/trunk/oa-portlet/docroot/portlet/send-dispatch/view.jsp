@@ -31,9 +31,9 @@
 		</liferay-ui:search-container-results>
 		<liferay-ui:search-container-row className="Dispatch" modelVar="dispatch" keyProperty="dispatchId">
 			 <%
-			Dictionary rocordType = DictionaryLocalServiceUtil.getDictionary(dispatch.getRocordType());
+			Dictionary recordType = DictionaryLocalServiceUtil.getDictionary(dispatch.getRecordType());
 			%> 
-			<liferay-ui:search-container-column-text name="文种" value="<%=rocordType.getName()%>" />
+			<liferay-ui:search-container-column-text name="文种" value="<%=recordType.getName()%>" />
 			 <%
 			Dictionary securityLevel = DictionaryLocalServiceUtil.getDictionary(dispatch.getSecurityLevel());
 			%> 
