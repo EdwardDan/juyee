@@ -94,8 +94,8 @@
 					<aui:col span="6" cssClass="text-left">
 						<label class="control-label" for="startDate">实际开工时间 </label>
 						<input type="text" class="field" name="<portlet:namespace/>startDate" id="startDate"
-							onfocus="WdatePicker({lang:'zh-cn'})" required="required"
-							value='<fmt:formatDate value="${project.startDate}" pattern="yyyy-MM-dd"/>'>
+							onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'endDate\')}',lang:'zh-cn',dateFmt:'yyyy-MM-dd'})"
+							required="required"	value='<fmt:formatDate value="${project.startDate}" pattern="yyyy-MM-dd"/>'>
 					</aui:col>
 				</aui:row>
 				<aui:row>
@@ -110,8 +110,8 @@
 					<aui:col span="6" cssClass="text-left">
 						<label class="control-label" for="endDate">实际完成时间</label>
 						<input type="text" class="field" name="<portlet:namespace/>endDate" id="endDate"
-							onfocus="WdatePicker({lang:'zh-cn'})" required="required"
-							value='<fmt:formatDate value="${project.endDate }" pattern="yyyy-MM-dd"/>'>
+							onfocus="WdatePicker({minDate:'#F{$dp.$D(\'startDate\')}',lang:'zh-cn',dateFmt:'yyyy-MM-dd'})"
+							required="required"	value='<fmt:formatDate value="${project.endDate }" pattern="yyyy-MM-dd"/>'>
 					</aui:col>
 				</aui:row>
 				<aui:row>
@@ -223,7 +223,7 @@
 					<aui:col span="6" cssClass="text-left">
 						<label class="control-label" for="startNode"> 目标开工节点 </label>
 						<input type="text" class="field" name="<portlet:namespace/>startNode error-field"
-							id="startNode" onfocus="WdatePicker({lang:'zh-cn'})"
+							id="startNode" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'endNode\')}',lang:'zh-cn',dateFmt:'yyyy-MM-dd'})"
 							required="required"
 							value='<fmt:formatDate value="${project.startNode }" pattern="yyyy-MM-dd"/>'>
 					</aui:col>
@@ -237,9 +237,9 @@
 				</aui:row>
 				<aui:row>
 					<aui:col span="6" cssClass="text-left">
-						<label class="control-label" for="endNode"> 目标开工节点 </label>
+						<label class="control-label" for="endNode"> 目标完工节点 </label>
 						<input type="text" class="field" name="<portlet:namespace/>endNode error-field"
-							id="endNode" onfocus="WdatePicker({lang:'zh-cn'})"
+							id="endNode" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'startNode\')}',lang:'zh-cn',dateFmt:'yyyy-MM-dd'})"
 							required="required"
 							value='<fmt:formatDate value="${project.endNode }" pattern="yyyy-MM-dd"/>'>
 					</aui:col>
@@ -255,7 +255,7 @@
 						<label class="control-label" for="planStartDate"> 目标计划开工时间
 						</label>
 						<input type="text" class="field" name="<portlet:namespace/>planStartDate error-field"
-							id="planStartDate" onfocus="WdatePicker({lang:'zh-cn'})"
+							id="planStartDate" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'planEndDate\')}',lang:'zh-cn',dateFmt:'yyyy-MM-dd'})"
 							required="required"
 							value='<fmt:formatDate value="${project.planStartDate }" pattern="yyyy-MM-dd"/>'>
 					</aui:col>
@@ -269,7 +269,7 @@
 					<aui:col span="6" cssClass="text-left">
 						<label class="control-label" for="planEndDate"> 目标计划完工时间 </label>
 						<input type="text" class="field" name="<portlet:namespace/>planEndDate error-field"
-							id="planEndDate" onfocus="WdatePicker({lang:'zh-cn'})"
+							id="planEndDate" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'planStartDate\')}',lang:'zh-cn',dateFmt:'yyyy-MM-dd'})"
 							required="required"
 							value='<fmt:formatDate value="${project.planEndDate }" pattern="yyyy-MM-dd"/>'>
 					</aui:col>

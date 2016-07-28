@@ -28,21 +28,19 @@
 </portlet:actionURL>
 <liferay-ui:header title="标段维护" backURL="${viewURL}" />
 <aui:form action="${doViewBidding }" name="fm">
-	<aui:nav-bar>
-		<aui:nav>
-			<aui:nav-item href="<%=addBiddingURL%>" iconCssClass="icon-plus"
-				label="添加" />
-		</aui:nav>
-		<aui:nav-bar-search cssClass="pull-right">
+	<aui:row>
+		<aui:col span="6">
+			<aui:button value="添加" href="${addBiddingURL}" icon="icon-plus" />
+			<aui:button disabled="<%=true%>" icon="icon-remove"
+				name="deleteBiddingsBtn" value="删除"
+				onClick='<%=renderResponse.getNamespace() + "deleteBiddings();"%>' />
+		</aui:col>
+		<aui:col span="6" cssClass="text-right">
 			<div class="form-search">
-				<liferay-ui:input-search />
+			<liferay-ui:input-search />
 			</div>
-		</aui:nav-bar-search>
-	</aui:nav-bar>
-	<aui:button-row>
-		<aui:button disabled="<%=true%>" name="deleteBiddingsBtn" value="删除"
-			onClick='<%=renderResponse.getNamespace() + "deleteBiddings();"%>' />
-	</aui:button-row>
+		</aui:col>
+	</aui:row>
 	<liferay-ui:search-container emptyResultsMessage="没有找到项目。"
 		rowChecker="<%=new RowChecker (renderResponse)%>">
 		<liferay-ui:search-container-results results="${biddings}"

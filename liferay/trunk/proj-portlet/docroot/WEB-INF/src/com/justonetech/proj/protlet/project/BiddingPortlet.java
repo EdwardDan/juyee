@@ -62,7 +62,7 @@ public class BiddingPortlet extends MVCPortlet {
 		for (Project project : projects) {
 			try {
 				List<Bidding> biddings = BiddingLocalServiceUtil.findByProjectId(project.getProjectId());
-				biddingCount.put(project.getProjectId(),biddings.size());
+				biddingCount.put(project.getProjectId(), biddings.size());
 			} catch (SystemException e) {
 				e.printStackTrace();
 			}
@@ -186,7 +186,7 @@ public class BiddingPortlet extends MVCPortlet {
 		} else {
 			projectId = ParamUtil.getLong(request, "projectId");
 			List<Bidding> biddings = BiddingLocalServiceUtil.findByProjectId(projectId);
-			sortNo = (biddings.isEmpty() ? 0 : biddings.get(biddings.size() - 1).getSortNo() + 1);
+			sortNo = (biddings.isEmpty() ? 0 : biddings.get(biddings.size() - 1).getSortNo()) + 1;
 		}
 		request.setAttribute("projectId", projectId);
 		request.setAttribute("sortNo", sortNo);

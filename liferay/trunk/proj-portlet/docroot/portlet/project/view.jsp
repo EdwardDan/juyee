@@ -10,21 +10,17 @@
 	<portlet:param name="redirect" value="${viewURL}" />
 </portlet:actionURL>
 <aui:form action="${viewURL }" name="fm">
-	<aui:nav-bar>
-		<aui:nav>
-			<aui:nav-item href="<%=addProjectURL%>" iconCssClass="icon-plus"
-				label="添加" />
-		</aui:nav>
-		<aui:nav-bar-search cssClass="pull-right">
+	<aui:row>
+		<aui:col span="6">
+			<aui:button value="添加" href="${addProjectURL}" icon="icon-plus"/>
+			<aui:button disabled="<%=true%>" icon="icon-remove" name="deleteProjectsBtn" value="删除" onClick='<%=renderResponse.getNamespace() + "deleteProjects();"%>' />
+		</aui:col>
+		<aui:col span="6" cssClass="text-right">
 			<div class="form-search">
-				<liferay-ui:input-search />
+			<liferay-ui:input-search />
 			</div>
-		</aui:nav-bar-search>
-	</aui:nav-bar>
-	<aui:button-row>
-		<aui:button disabled="<%=true%>" name="deleteProjectsBtn" value="删除"
-			onClick='<%=renderResponse.getNamespace() + "deleteProjects();"%>' />
-	</aui:button-row>
+		</aui:col>
+	</aui:row>
 	<liferay-ui:search-container emptyResultsMessage="没有找到项目基本信息。"
 		rowChecker="<%=new RowChecker (renderResponse)%>">
 		<liferay-ui:search-container-results results="${projects}"
@@ -33,7 +29,7 @@
 			keyProperty="projectId">
 			<liferay-ui:search-container-column-text name="项目名称"
 				property="projName" />
-			<liferay-ui:search-container-column-text name="所属区县" 
+			<liferay-ui:search-container-column-text name="所属区县"
 				value="${proj.belongCounty==0?'上海市':''}" />
 			<liferay-ui:search-container-column-text name="项目状态"
 				value="<%=DictionaryLocalServiceUtil.getDictionary(proj.getProjStatus()).getName()%>" />
@@ -84,6 +80,10 @@
 		);
 </aui:script>
 	
+
+
+
+
 
 
 

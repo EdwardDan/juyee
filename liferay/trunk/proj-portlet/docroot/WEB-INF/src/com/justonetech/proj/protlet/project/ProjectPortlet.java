@@ -12,8 +12,10 @@ import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
+import com.justonetech.proj.model.Bidding;
 import com.justonetech.proj.model.Company;
 import com.justonetech.proj.model.Project;
+import com.justonetech.proj.service.BiddingLocalServiceUtil;
 import com.justonetech.proj.service.CompanyLocalServiceUtil;
 import com.justonetech.proj.service.ProjectLocalServiceUtil;
 import com.justonetech.sys.service.DictionaryLocalServiceUtil;
@@ -63,9 +65,9 @@ public class ProjectPortlet extends MVCPortlet {
 		long projectId = ParamUtil.getInteger(request, "projectId");
 		List<Project> projects = ProjectLocalServiceUtil.getProjects(-1, -1);
 		int sortNo = 0;
-		if(Validator.isNull(projectId)){
-			sortNo = (projects.isEmpty()?0:projects.get(projects.size()-1).getSortNo())+1;
-		}else{
+		if (Validator.isNull(projectId)) {
+			sortNo = (projects.isEmpty() ? 0 : projects.get(projects.size() - 1).getSortNo()) + 1;
+		} else {
 			sortNo = ProjectLocalServiceUtil.getProject(projectId).getSortNo();
 			Project project = ProjectLocalServiceUtil.getProject(projectId);
 			request.setAttribute("project", project);
@@ -210,9 +212,15 @@ public class ProjectPortlet extends MVCPortlet {
 		String[] projectsId = projectIds.split(",");
 		for (String projectId : projectsId) {
 			List<Company> companies = CompanyLocalServiceUtil.findByProjectId(Long.parseLong(projectId));
+			List<Bidding> biddings = BiddingLocalServiceUtil.findByProjectId(Long.parseLong(projectId));
 			if (null != companies && companies.size() > 0) {
 				for (Company company : companies) {
 					CompanyLocalServiceUtil.deleteCompany(company);
+				}
+			}
+			if (null != biddings && biddings.size() > 0) {
+				for (Bidding bidding : biddings) {
+					BiddingLocalServiceUtil.deleteBidding(bidding);
 				}
 			}
 			ProjectLocalServiceUtil.deleteProject(Long.parseLong(projectId));
