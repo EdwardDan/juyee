@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
 <div class="portlet-body">
-	<form action="/web/jtjs/-?p_p_id=58&amp;p_p_lifecycle=1&amp;p_p_state=normal&amp;p_p_mode=view&amp;p_p_col_id=column-1&amp;p_p_col_count=1&amp;_58_struts_action=%2Flogin%2Flogin" class="form sign-in-form " id="_58_fm" method="post" name="_58_fm" autocomplete="on">
+	<form action="/web/jtjs/-?p_p_id=58&amp;p_p_lifecycle=1&amp;p_p_state=normal&amp;p_p_mode=view&amp;p_p_col_id=column-1&amp;p_p_col_count=1&amp;_58_struts_action=%2Flogin%2Flogin&amp;_58_redirect=%2Fgroup%2Fjtjs%2F-" class="form sign-in-form " id="_58_fm" method="post" name="_58_fm" autocomplete="on">
 		<fieldset class="input-container" disabled="disabled">
 			<input type="hidden" id="cCert" name="cCert" value="" /> <input type="hidden" id="cSign" name="cSign" value="" /> <input type="hidden" id="<portlet:namespace/>content" name="<portlet:namespace/>content" value="${UUID}" /> <input name="_58_formDate" type="hidden" value="1469076641141" /> <input class="field" id="_58_saveLastPath" name="_58_saveLastPath" type="hidden" value="false" /> <input class="field" id="_58_redirect" name="_58_redirect" type="hidden" value="" /> <input class="field" id="_58_doActionAfterLogin" name="_58_doActionAfterLogin" type="hidden" value="false" />
 			<fieldset class="fieldset ">
