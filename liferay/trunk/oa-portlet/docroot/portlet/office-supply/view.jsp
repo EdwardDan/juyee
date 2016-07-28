@@ -5,7 +5,7 @@
 <portlet:renderURL var="viewURL" />
 <portlet:actionURL var="deleteOfficeSuppliesURL" name="deleteOfficeSupplies">
 	<portlet:param name="redirect" value="${viewURL}" />
-</portlet:actionURL>
+</portlet:actionURL>qw
 <aui:form action="${viewURL }" name="fm">
 	<aui:nav-bar>
 		<aui:nav>

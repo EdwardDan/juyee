@@ -90,38 +90,6 @@
 				<aui:input name="destination" label="目的地" required="true"
 					value="上海市(    )区(    )路(    )号" />
 			</aui:col>
-			<aui:col span="6">
-				<aui:input type="text" name="startTimeFmt" label="开始时间"
-					cssClass="Wdate" required="true"
-					onfocus="WdatePicker({maxDate:'#F{$dp.$D(\\'${namespace }endTimeFmt\\')}',dateFmt:'${timeFormatPattern}'})"
-					value="${startTimeFmt}"></aui:input>
-			</aui:col>
-			<aui:col span="6">
-				<aui:input type="text" name="endTimeFmt" label="结束时间"
-					cssClass="Wdate" required="true"
-					onfocus="WdatePicker({minDate:'#F{$dp.$D(\\'${namespace }startTimeFmt\\')}',dateFmt:'${timeFormatPattern}'})"
-					value="${endTimeFmt}"></aui:input>
-			</aui:col>
-		</aui:row>
-		<aui:row>
-			<aui:col span="12" cssClass="">
-				<aui:input name="reason" label="用车事由" type="textarea" />
-			</aui:col>
-			<aui:col span="6">
-				<aui:input name="passengerNum" label="用车人数">
-					<aui:validator name="digits" />
-					<aui:validator name="min" errorMessage="请输入大于0的值。">0</aui:validator>
-				</aui:input>
-			</aui:col>
-			<aui:col span="6">
-				<aui:input name="destination" label="目的地" required="true"
-					value="上海市(    )区(    )路(    )号" />
-			</aui:col>
-		</aui:row>
-		<aui:row>
-			<aui:col span="12">
-				<aui:input name="reason" label="用车事由" type="textarea" />
-			</aui:col>
 		</aui:row>
 	</aui:fieldset>
 	<aui:button-row>
