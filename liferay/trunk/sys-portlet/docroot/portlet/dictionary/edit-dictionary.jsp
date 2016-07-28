@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
-<c:set var="contentPath"
+<c:set var="contextPath"
 	value="${request.contextPath}/portlet/dictionary" />
 <c:set var="parentDictionary"
 	value="${empty dictionary?parentDictionary:dictionary.parentDictionary}" />

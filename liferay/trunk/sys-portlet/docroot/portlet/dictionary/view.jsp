@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
-<c:set var="contentPath"
+<c:set var="contextPath"
 	value="${request.contextPath}/portlet/dictionary" />
 <portlet:renderURL var="viewURL" >
 	<portlet:param name="parentId" value="${parentDictionary.dictionaryId}" />
@@ -25,7 +25,7 @@
 		<aui:col span="6">
 			<portlet:actionURL var="addDictionaryURL" name="editDictionary">
 				<portlet:param name="mvcPath"
-					value="${contentPath }/edit-dictionary.jsp" />
+					value="${contextPath }/edit-dictionary.jsp" />
 				<portlet:param name="parentId" value="${parentDictionary.dictionaryId}" />
 			</portlet:actionURL>
 			<aui:button value="添加" href="${addDictionaryURL }" icon="icon-plus"/>
@@ -52,7 +52,7 @@
 				<liferay-ui:icon-menu>
 					<portlet:actionURL var="editDictionaryURL" name="editDictionary">
 						<portlet:param name="dictionaryId" value="${dictionary.dictionaryId}" />
-						<portlet:param name="mvcPath" value="${contentPath }/edit-dictionary.jsp" />
+						<portlet:param name="mvcPath" value="${contextPath }/edit-dictionary.jsp" />
 					</portlet:actionURL>
 					<liferay-ui:icon image="edit" label="编辑" url="${editDictionaryURL}" />
 					<liferay-ui:icon image="delete" label="删除" url="javascript:void(0);" onClick='<%=renderResponse.getNamespace() + "deleteDictionaries("+dictionary.getDictionaryId()+");"%>' />
