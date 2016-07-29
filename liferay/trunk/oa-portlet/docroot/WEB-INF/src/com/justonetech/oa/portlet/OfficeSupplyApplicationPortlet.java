@@ -98,18 +98,19 @@ public class OfficeSupplyApplicationPortlet extends MVCPortlet {
 		String[] units = request.getParameterValues("unit");
 		String[] unitPrices = request.getParameterValues("unitPrice");
 		String[] quantities = request.getParameterValues("quantity");
-		for (int i = 0; i < names.length; i++) {
-			OfficeSupplyApplicationItem officeSupplyApplicationItem = OfficeSupplyApplicationItemLocalServiceUtil
-					.createOfficeSupplyApplicationItem(CounterLocalServiceUtil.increment());
-			officeSupplyApplicationItem.setName(names[i]);
-			officeSupplyApplicationItem.setModel(models[i]);
-			officeSupplyApplicationItem.setUnit(units[i]);
-			officeSupplyApplicationItem.setUnitPrice(Double.valueOf(unitPrices[i]));
-			officeSupplyApplicationItem.setQuantity(Integer.valueOf(quantities[i]));
-			officeSupplyApplicationItem.setOfficeSupplyApplicationId(officeSupplyApplication.getOfficeSupplyApplicationId());
-			OfficeSupplyApplicationItemLocalServiceUtil.updateOfficeSupplyApplicationItem(officeSupplyApplicationItem);
+			for (int i = 0; i < names.length; i++) {
+				OfficeSupplyApplicationItem officeSupplyApplicationItem = OfficeSupplyApplicationItemLocalServiceUtil
+						.createOfficeSupplyApplicationItem(CounterLocalServiceUtil.increment());
+				officeSupplyApplicationItem.setName(names[i]);
+				officeSupplyApplicationItem.setModel(models[i]);
+				officeSupplyApplicationItem.setUnit(units[i]);
+				officeSupplyApplicationItem.setUnitPrice(Double.valueOf(unitPrices[i]));
+				officeSupplyApplicationItem.setQuantity(Integer.valueOf(quantities[i]));
+				officeSupplyApplicationItem.setOfficeSupplyApplicationId(officeSupplyApplication
+						.getOfficeSupplyApplicationId());
+				OfficeSupplyApplicationItemLocalServiceUtil
+						.updateOfficeSupplyApplicationItem(officeSupplyApplicationItem);
 		}
-
 	}
 
 	public void editOfficeSupplyApplication(ActionRequest request, ActionResponse response) throws PortalException,

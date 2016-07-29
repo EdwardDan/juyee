@@ -8,12 +8,12 @@
 	<aui:col span="6">
 		<aui:input type="hidden" name="officeSupplyApplicationId"
 			value="${officeSupplyApplicationId}" />
-		<aui:input name="deptName" label="申请部门" 
+		<aui:input name="deptName" label="申请部门"
 			value="${officeSupplyApplication.deptName}" inlineField="true"
 			disabled="true" />
 	</aui:col>
 	<aui:col span="6">
-		<aui:input name="userName" label="申请人" 
+		<aui:input name="userName" label="申请人"
 			value="${officeSupplyApplication.userName}" disabled="true" />
 	</aui:col>
 </aui:row>

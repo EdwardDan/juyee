@@ -106,10 +106,6 @@
 			}).render();
 		});
 	</aui:script>
-		
-
-
-	
 	<aui:button-row>
 		<aui:button type="submit" value="提交" />
 		<aui:button type="submit" value="保存" onClick="change()" />

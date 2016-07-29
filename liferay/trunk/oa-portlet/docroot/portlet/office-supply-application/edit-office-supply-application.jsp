@@ -26,6 +26,12 @@
 			}
 		}
 	}
+	function validate() {
+		if ($("#<portlet:namespace/>sum").val() == "" || $("#<portlet:namespace/>sum").val() == 0) {
+			alert("请添加数据！");
+			return false;
+		}
+	}
 </script>
 <%
 	long userId = PortalUtil.getUserId(request);
@@ -89,7 +95,8 @@
 				</tr>
 			</c:forEach>
 		</c:if>
-		<tbody id="officeSupplyApplicationItems"></tbody>
+		<tbody id="officeSupplyApplicationItems">
+		</tbody>
 	</table>
 	</br>
 	<table width="100%">
@@ -105,8 +112,8 @@
 		</aui:col>
 	</aui:row>
 	<aui:button-row>
-		<aui:button type="submit" value="提交" />
-		<aui:button type="submit" value="暂存" />
+		<aui:button onClick="return validate()" type="submit" value="提交" />
+		<aui:button onClick="return validate()" type="submit" value="暂存" />
 		<aui:button type="cancel" value="取消" href="${viewURL }" />
 	</aui:button-row>
 </aui:form>
@@ -122,10 +129,10 @@
 				style="width: 100%; height: 100%; color: #8B8B83; border-top: #D4D4D4 1px solid; border-bottom: #D4D4D4 1px solid; border-left: #D4D4D4 1px solid; border-right: #D4D4D4 1px solid;"></td>
 			<td><input name="<portlet:namespace/>unitPrice"
 				onkeyup="value=value.replace(/[^\d.]/g,'')" onchange="count()"
-				placeholder="请输入正数"
+				placeholder="请输入正数" required="required"
 				style="width: 100%; height: 100%; color: #8B8B83; border-top: #D4D4D4 1px solid; border-bottom: #D4D4D4 1px solid; border-left: #D4D4D4 1px solid; border-right: #D4D4D4 1px solid;"></td>
 			<td><input name="<portlet:namespace/>quantity"
-				placeholder="请输入正整数"
+				placeholder="请输入正整数" required="required"
 				onkeyup="this.value=this.value.replace(/[^\d]/ig,'')"
 				onchange="count()"
 				style="width: 100%; height: 100%; color: #8B8B83; border-top: #D4D4D4 1px solid; border-bottom: #D4D4D4 1px solid; border-left: #D4D4D4 1px solid; border-right: #D4D4D4 1px solid;"></td>
