@@ -45,8 +45,8 @@
 				</aui:input>
 			</aui:col>
 			<aui:col span="6" cssClass="text-left">
-				<label class="control-label" for="startDate"> 开工日期 </label>
-				<input type="text" class="field"
+				<label class="control-label" for="startDate">开工日期 </label>
+				<input type="text" class="field" onfocus="WdatePicker()"
 					name="<portlet:namespace/>startDate" id="startDate"
 					value='<fmt:formatDate value="${bidding.startDate }" pattern="yyyy-MM-dd"/>'>
 			</aui:col>
@@ -62,7 +62,6 @@
 					</c:forEach>
 				</aui:field-wrapper>
 			</aui:col>
-
 		</aui:row>
 		<aui:row>
 			<aui:col span="6" cssClass="text-left">

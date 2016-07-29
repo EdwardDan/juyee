@@ -129,33 +129,10 @@ public class BiddingPortlet extends MVCPortlet {
 		} catch (SystemException e) {
 			e.printStackTrace();
 		}
-		Long biddingId = (Long) request.getAttribute("biddingId");
-		List<Company> companies = CompanyLocalServiceUtil.findByBiddingId(biddingId);
-		Dictionary companyTypeDic = DictionaryLocalServiceUtil.findByCode("CompanyType");
-		List<Dictionary> companyTypes = companyTypeDic != null ? DictionaryLocalServiceUtil.findByParentId(
-				companyTypeDic.getDictionaryId(), -1, -1) : null;
-		Map<Dictionary, Company> companyMap = new TreeMap<Dictionary, Company>();
-		if (Validator.isNotNull(companyTypes)) {
-			for (Dictionary dictionary : companyTypes) {
-				companyMap.put(dictionary, null);
-				if (companies != null) {
-					for (Company com : companies) {
-						if (Validator.isNotNull(com.getType())) {
-							Dictionary dic = DictionaryLocalServiceUtil.getDictionary(com.getType());
-							if (dictionary.equals(dic)) {
-								companyMap.put(dictionary, com);
-							}
-						}
-					}
-				}
-			}
-		}
 		Dictionary involveCountyDic = DictionaryLocalServiceUtil.findByCode("areaName");
 		List<Dictionary> involveCountys = involveCountyDic != null ? DictionaryLocalServiceUtil.findByParentId(
 				involveCountyDic.getDictionaryId(), -1, -1) : null;
 		request.setAttribute("involveCountys", involveCountys);
-		request.setAttribute("companyMap", companyMap);
-		request.setAttribute("companies", companies);
 		request.setAttribute("biddings", biddings);
 		request.setAttribute("projectId", projectId);
 		request.setAttribute("biddingsCount", biddingsCount);
@@ -241,7 +218,6 @@ public class BiddingPortlet extends MVCPortlet {
 			BiddingLocalServiceUtil.deleteBidding(Long.parseLong(biddingId));
 		}
 		request.setAttribute("projectId", projectId);
-		response.setRenderParameter("mvcPath", "/portlet/bidding/view-bidding.jsp");
 	}
 
 	public void editBidding(ActionRequest request, ActionResponse response) throws PortalException, SystemException {
