@@ -11,6 +11,12 @@
 <portlet:renderURL var="viewURL" />
 <%
 	long type=ParamUtil.getLong(request, "type");
+request.setAttribute("type", type);
+Dictionary dictionary = DictionaryLocalServiceUtil.findByCode("projectType");
+List<Dictionary> dictionaries=null;
+if (null != dictionary) {
+dictionaries = DictionaryLocalServiceUtil.findByParentId(dictionary.getDictionaryId(), -1, -1);
+}
 %>
 <aui:form action="${viewURL }" name="fm">
 	<portlet:renderURL var="addDispatchURL">
@@ -19,22 +25,12 @@
 	</portlet:renderURL>
 	<aui:row style="margin-bottom:-20px">
 		<aui:col span="6">
-	<aui:select id="projectType" name="projectType" label="项目类型："
+		<aui:select id="projectType" name="projectType" label="项目类型："
 		inlineField="true" inlineLabel="left" onchange="projectType()" >
-		<%
-			Dictionary dictionary = DictionaryLocalServiceUtil
-				.findByCode("projectType");
-				if (null != dictionary) {
-			List<Dictionary> dictionaries = DictionaryLocalServiceUtil
-					.findByParentId(dictionary.getDictionaryId(), -1, -1);
-			for (Dictionary dic : dictionaries) {
-		%>
-		<option value="<%=dic.getDictionaryId()%>"
-			<c:if test="<%=type==dic.getDictionaryId()%>">selected</c:if>><%=dic.getName()%></option>
-		<%
-			}}
-		%>
-	</aui:select>
+		<c:forEach items="<%=dictionaries%>" var="dictionary">
+		<option value="${dictionary.dictionaryId}"	<c:if test="${type eq dictionary.dictionaryId }">selected</c:if>>${dictionary.name}</option>
+		</c:forEach>
+		</aui:select>
 	<aui:button value="添加" onclick="add()" icon="icon-plus"></aui:button>
 	</aui:col>
 	</aui:row>
