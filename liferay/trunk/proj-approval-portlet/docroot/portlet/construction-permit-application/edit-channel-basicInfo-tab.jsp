@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ include file="/common/init.jsp"%>
-
+<c:set var="namespace" value="<%=renderResponse.getNamespace() %>"></c:set>
 
 <%
 	SimpleDateFormat sf = new SimpleDateFormat(defaultDateFormatPattern);
@@ -110,7 +110,7 @@
 		<aui:row>
 			<aui:col span="6">
 				<aui:input type="text" label="发证日期：" name="certificationDate"
-					cssClass="span8"
+					cssClass="Wdate"
 					value="<%=consPer.getCertificationDate() == null ? null : sf.format(consPer
 										.getCertificationDate())%>"
 					disabled="true">
@@ -256,7 +256,7 @@
 				<aui:input type="text" label="国有资金比重%："
 					name="nationalFundsProportion" cssClass="span8"
 					value="${constructionPermit.nationalFundsProportion}">
-
+					<aui:validator name="digits" />
 				</aui:input>
 			</aui:col>
 			
@@ -267,13 +267,14 @@
 				<aui:input type="text" label="合同价格：" name="contractPrice"
 					cssClass="span8"
 					value="${constructionPermit.contractPrice}">
-
+				<aui:validator name="number" />
 				</aui:input>
 			</aui:col>
 
 			<aui:col span="6">
 				<aui:input type="text" label="合同工期：" name="contractSchedule"
 					cssClass="span8" value="${constructionPermit.contractSchedule}">
+					<aui:validator name="number" />
 				</aui:input>
 			</aui:col>
 			
@@ -284,32 +285,35 @@
 			<aui:col span="6">
 				<aui:input type="text" label="中标价格：" name="bidPrice"
 					cssClass="span8" value="${constructionPermit.bidPrice}">
-
+					<aui:validator name="number" />
 				</aui:input>
 			</aui:col>
 
 			<aui:col span="6">
 				<aui:input type="text" label="项目投资估算：" name="investBudget"
 					cssClass="span8" value="${constructionPermit.investBudget}">
+					<aui:validator name="number" />
 				</aui:input>
 			</aui:col>
 			
 		</aui:row>
+		
 
 		<aui:row>
 			<aui:col span="6">
-				<aui:input type="text" label="计划开工：" name="planStartDate"
+				<aui:input type="text" label="计划开工：" name="planStartDate" id="planStartDate" cssClass="Wdate"
 					value="<%=consPer.getPlanStartDate() == null ? null : sf.format(consPer
 										.getPlanStartDate())%>"
-					onfocus="WdatePicker({lang:'zh-cn'})">
+					onfocus="WdatePicker({maxDate:'#F{$dp.$D(\\'${namespace}planEndDate\\')}',maxDate:'2020-10-01'})">
 
-				</aui:input>
+				</aui:input>	
 			</aui:col>
 			<aui:col span="6">
-				<aui:input type="text" label="计划竣工：" name="planEndDate"
+				<aui:input type="text" label="计划竣工：" name="planEndDate" id="planEndDate" cssClass="Wdate"
 					value="<%=consPer.getPlanEndDate() == null ? null : sf.format(consPer.getPlanEndDate())%>"
-					onfocus="WdatePicker({lang:'zh-cn'})">
+					onfocus="WdatePicker({minDate:'#F{$dp.$D(\\'${namespace}planStartDate\\')}',maxDate:'2020-10-01'})">
 				</aui:input>
+				
 			</aui:col>
 			
 		</aui:row>
@@ -344,6 +348,8 @@
 			<aui:col span="6">
 				<aui:input type="text" label="中标价：" name="designBidPrice"
 					cssClass="span8" value="${permitApplication.designBidPrice}">
+					 <aui:validator name="number" />
+					
 				</aui:input>
 			</aui:col>
 		</aui:row>
@@ -396,6 +402,7 @@
 			<aui:col span="6">
 				<aui:input type="text" label="中标价：" name="supervisionBidPrice"
 					cssClass="span8" value="${permitApplication.supervisionBidPrice}">
+					 <aui:validator name="number" />
 				</aui:input>
 			</aui:col>
 		</aui:row>
@@ -449,6 +456,7 @@
 			<aui:col span="6">
 				<aui:input type="text" label="中标价：" name="constructionBidPrice"
 					cssClass="span8" value="${permitApplication.constructionBidPrice}">
+					<aui:validator name="number" />
 				</aui:input>
 			</aui:col>
 		</aui:row>
@@ -494,11 +502,10 @@
 				</aui:input>
 			</aui:col>
 			<aui:col span="6">
-				<aui:input type="text" label="批复或核准日期：" class="Wdate"
+				<aui:input type="text" label="批复或核准日期：" cssClass="Wdate"
 					value="<%=perApp.getFeasibilityReplyDate() == null ? null : sf.format(perApp
 										.getFeasibilityReplyDate())%>"
-					name="feasibilityReplyDate" onfocus="WdatePicker({lang:'zh-cn'})"
-					cssClass="span8">
+					name="feasibilityReplyDate" onfocus="WdatePicker({lang:'zh-cn'})">
 				</aui:input>
 			</aui:col>
 		</aui:row>
@@ -513,17 +520,17 @@
 			<aui:col span="6">
 				<aui:input type="text" label="投资估算：" name="investmentEstimation"
 					cssClass="span8" value="${permitApplication.investmentEstimation}">
+					<aui:validator name="number" />
 				</aui:input>
 			</aui:col>
 		</aui:row>
 
 		<aui:row>
 			<aui:col span="6">
-				<aui:input type="text" label="批复日期：" class="Wdate"
+				<aui:input type="text" label="批复日期：" cssClass="Wdate"
 					value="<%=perApp.getInitialDesignReplyDate() == null ? null : sf.format(perApp
 										.getInitialDesignReplyDate())%>"
-					name="initialDesignReplyDate" onfocus="WdatePicker({lang:'zh-cn'})"
-					cssClass="span8">
+					name="initialDesignReplyDate" onfocus="WdatePicker({lang:'zh-cn'})">
 				</aui:input>
 			</aui:col>
 			<aui:col span="6">
@@ -538,6 +545,7 @@
 			<aui:col span="6">
 				<aui:input type="text" label="总概算：" name="totalBudget"
 					cssClass="span8" value="${permitApplication.totalBudget}">
+					<aui:validator name="number" />
 				</aui:input>
 			</aui:col>
 			<aui:col span="6">

@@ -1,7 +1,6 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ include file="/common/init.jsp"%>
- 
-<c:set var="contextPath"
+ <c:set var="contextPath"
 	value="${request.contextPath}/portlet/construction-permit-application" />
 
 <c:set var="namespace"

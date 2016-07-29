@@ -1,44 +1,37 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ include file="/common/init.jsp"%>
-
+<c:set var="namespace" value="<%=renderResponse.getNamespace() %>"></c:set>
 <%
 	SimpleDateFormat sf = new SimpleDateFormat(defaultDateFormatPattern);
-	ConstructionPermit consPer = (ConstructionPermit) renderRequest
-			.getAttribute("constructionPermit");
+	ConstructionPermit consPer = (ConstructionPermit) renderRequest.getAttribute("constructionPermit");
 	if (consPer == null) {
 		consPer = new ConstructionPermitClp();
 	}
 
-	Dictionary projPropertyDictionary = DictionaryLocalServiceUtil
-			.findByCode("ProjectProperty");
+	Dictionary projPropertyDictionary = DictionaryLocalServiceUtil.findByCode("ProjectProperty");
 	List<Dictionary> projPropertyDics = new ArrayList<Dictionary>();
 	if (null != projPropertyDictionary) {
-		projPropertyDics = DictionaryLocalServiceUtil.findByParentId(
-				projPropertyDictionary.getDictionaryId(), -1, -1);
+		projPropertyDics = DictionaryLocalServiceUtil.findByParentId(projPropertyDictionary.getDictionaryId(),
+				-1, -1);
 	}
 
-	Dictionary areaNameDictionary = DictionaryLocalServiceUtil
-			.findByCode("AreaName");
+	Dictionary areaNameDictionary = DictionaryLocalServiceUtil.findByCode("AreaName");
 	List<Dictionary> areaNameDics = new ArrayList<Dictionary>();
 	if (null != areaNameDictionary) {
-		areaNameDics = DictionaryLocalServiceUtil.findByParentId(
-				areaNameDictionary.getDictionaryId(), -1, -1);
+		areaNameDics = DictionaryLocalServiceUtil.findByParentId(areaNameDictionary.getDictionaryId(), -1, -1);
 	}
 
-	Dictionary consTypeDictionary = DictionaryLocalServiceUtil
-			.findByCode("ConstructionType");
+	Dictionary consTypeDictionary = DictionaryLocalServiceUtil.findByCode("ConstructionType");
 	List<Dictionary> consTypeDics = new ArrayList<Dictionary>();
 	if (null != consTypeDictionary) {
-		consTypeDics = DictionaryLocalServiceUtil.findByParentId(
-				consTypeDictionary.getDictionaryId(), -1, -1);
+		consTypeDics = DictionaryLocalServiceUtil.findByParentId(consTypeDictionary.getDictionaryId(), -1, -1);
 	}
 
-	Dictionary consProperDictionary = DictionaryLocalServiceUtil
-			.findByCode("ConstructionProperty");
+	Dictionary consProperDictionary = DictionaryLocalServiceUtil.findByCode("ConstructionProperty");
 	List<Dictionary> consProperDics = new ArrayList<Dictionary>();
 	if (null != consProperDictionary) {
-		consProperDics = DictionaryLocalServiceUtil.findByParentId(
-				consProperDictionary.getDictionaryId(), -1, -1);
+		consProperDics = DictionaryLocalServiceUtil.findByParentId(consProperDictionary.getDictionaryId(), -1,
+				-1);
 	}
 %>
 
@@ -103,7 +96,7 @@
 		<aui:row>
 			<aui:col span="6">
 				<aui:input type="text" label="发证日期：" name="certificationDate"
-					cssClass="span8"
+					cssClass="Wdate"
 					value="<%=consPer.getCertificationDate() == null ? null : sf.format(consPer
 										.getCertificationDate())%>"
 					disabled="true">
@@ -154,12 +147,16 @@
 			<aui:col span="6">
 				<aui:input type="text" label="建设单位联系电话：" name="companyTel"
 					cssClass="span8" value="${constructionPermit.companyTel}">
+					<aui:validator name="digits" />
+					
 				</aui:input>
 			</aui:col>
 
 			<aui:col span="6">
 				<aui:input type="text" label="手机号：" name="companyContactPhone"
 					cssClass="span8" value="${constructionPermit.companyContactPhone}">
+					<aui:validator name="digits" />
+					
 				</aui:input>
 			</aui:col>
 
@@ -188,16 +185,16 @@
 			建设地点所属区县：
 			</aui:col>
 			<aui:col span="6">
-				
-					<c:forEach items="<%=areaNameDics%>" var="areaNameDic">
+
+				<c:forEach items="<%=areaNameDics%>" var="areaNameDic">
 					<aui:input type="radio" name="companySiteCounty"
-						label="${areaNameDic.name}" inlineLabel="right"
-						inlineField="true" value="${areaNameDic.dictionaryId}"
+						label="${areaNameDic.name}" inlineLabel="right" inlineField="true"
+						value="${areaNameDic.dictionaryId}"
 						checked="${constructionPermit.companySiteCounty eq areaNameDic.dictionaryId}"></aui:input>
-					</c:forEach>
-					
+				</c:forEach>
+
 			</aui:col>
-			
+
 
 		</aui:row>
 
@@ -209,14 +206,13 @@
 			</aui:col>
 			<aui:col span="10">
 				<c:forEach items="<%=consTypeDics%>" var="consTypeDic">
-				<c:if test='${fn:contains(constructionPermit.engineerCategory, consTypeDic.dictionaryId)}' >
- 						<c:set var="isChecked" value="true"></c:set>
- 					</c:if>
+					<c:if
+						test='${fn:contains(constructionPermit.engineerCategory, consTypeDic.dictionaryId)}'>
+						<c:set var="isChecked" value="true"></c:set>
+					</c:if>
 					<aui:input type="checkbox" name="engineerCategory"
 						label="${consTypeDic.name}" inlineLabel="right" inlineField="true"
-						value="${consTypeDic.dictionaryId}"
-						checked="${isChecked}"
-						 />
+						value="${consTypeDic.dictionaryId}" checked="${isChecked}" />
 					<c:set var="isChecked" value="false"></c:set>
 				</c:forEach>
 			</aui:col>
@@ -249,18 +245,17 @@
 				<aui:input type="text" label="国有资金比重%："
 					name="nationalFundsProportion" cssClass="span8"
 					value="${constructionPermit.nationalFundsProportion}">
-
+					<aui:validator name="number" />
 				</aui:input>
 			</aui:col>
-			
+
 		</aui:row>
 
 		<aui:row>
 			<aui:col span="6">
 				<aui:input type="text" label="合同价格：" name="contractPrice"
-					cssClass="span8"
-					value="${constructionPermit.contractPrice}">
-
+					cssClass="span8" value="${constructionPermit.contractPrice}">
+					<aui:validator name="number" />
 				</aui:input>
 			</aui:col>
 
@@ -269,7 +264,7 @@
 					cssClass="span8" value="${constructionPermit.contractSchedule}">
 				</aui:input>
 			</aui:col>
-			
+
 		</aui:row>
 
 
@@ -277,73 +272,77 @@
 			<aui:col span="6">
 				<aui:input type="text" label="中标价格：" name="bidPrice"
 					cssClass="span8" value="${constructionPermit.bidPrice}">
-
+					<aui:validator name="number" />
 				</aui:input>
 			</aui:col>
 
 			<aui:col span="6">
 				<aui:input type="text" label="项目投资估算：" name="investBudget"
 					cssClass="span8" value="${constructionPermit.investBudget}">
+					<aui:validator name="number" />
 				</aui:input>
 			</aui:col>
-			
+
 		</aui:row>
 
 		<aui:row>
 			<aui:col span="6">
-				<aui:input type="text" label="计划开工：" name="planStartDate"
+				<aui:input type="text" label="计划开工：" name="planStartDate" id="planStartDate" cssClass="Wdate"
 					value="<%=consPer.getPlanStartDate() == null ? null : sf.format(consPer
 										.getPlanStartDate())%>"
-					onfocus="WdatePicker({lang:'zh-cn'})">
+					onfocus="WdatePicker({maxDate:'#F{$dp.$D(\\'${namespace}planEndDate\\')}',maxDate:'2020-10-01'})">
 
-				</aui:input>
+				</aui:input>	
 			</aui:col>
 			<aui:col span="6">
-				<aui:input type="text" label="计划竣工：" name="planEndDate"
+				<aui:input type="text" label="计划竣工：" name="planEndDate" id="planEndDate" cssClass="Wdate"
 					value="<%=consPer.getPlanEndDate() == null ? null : sf.format(consPer.getPlanEndDate())%>"
-					onfocus="WdatePicker({lang:'zh-cn'})">
+					onfocus="WdatePicker({minDate:'#F{$dp.$D(\\'${namespace}planStartDate\\')}',maxDate:'2020-10-01'})">
 				</aui:input>
+				
 			</aui:col>
-			
+
 		</aui:row>
 		<aui:row>
-		<aui:col span="6">
-				<aui:input type="text" label="施工单位名称：" cssClass="span8" value="${permitApplication.constructionCompany}"
+			<aui:col span="6">
+				<aui:input type="text" label="施工单位名称：" cssClass="span8"
+					value="${permitApplication.constructionCompany}"
 					name="constructionCompany">
 
 				</aui:input>
 			</aui:col>
 			<aui:col span="6">
-				<aui:input type="text" label="项目经理：" cssClass="span8" value="${permitApplication.projManager}"
-					name="projManager">
+				<aui:input type="text" label="项目经理：" cssClass="span8"
+					value="${permitApplication.projManager}" name="projManager">
 
-				</aui:input>
-			</aui:col>
-		</aui:row>
-		
-		<aui:row>	
-			
-			
-			<aui:col span="6">
-				<aui:input type="text" label="监理单位名称：" name="supervisionCompany" cssClass="span8" value="${permitApplication.supervisionCompany}">
-				</aui:input>
-			</aui:col>
-			<aui:col span="6">
-				<aui:input type="text" label="项目总监：" cssClass="span8" value="${permitApplication.projDirector}"
-					name="projDirector">
 				</aui:input>
 			</aui:col>
 		</aui:row>
 
 		<aui:row>
-		<aui:col span="6">
-				<aui:input type="text" label="设计单位名称：" cssClass="span8" value="${permitApplication.designCompany}"
-					name="designCompany">
+
+
+			<aui:col span="6">
+				<aui:input type="text" label="监理单位名称：" name="supervisionCompany"
+					cssClass="span8" value="${permitApplication.supervisionCompany}">
 				</aui:input>
 			</aui:col>
 			<aui:col span="6">
-				<aui:input type="textarea" label="现场开工情况：" cssClass="span8" value="${constructionPermit.workSituation}"
-					name="workSituation">
+				<aui:input type="text" label="项目总监：" cssClass="span8"
+					value="${permitApplication.projDirector}" name="projDirector">
+				</aui:input>
+			</aui:col>
+		</aui:row>
+
+		<aui:row>
+			<aui:col span="6">
+				<aui:input type="text" label="设计单位名称：" cssClass="span8"
+					value="${permitApplication.designCompany}" name="designCompany">
+				</aui:input>
+			</aui:col>
+			<aui:col span="6">
+				<aui:input type="textarea" label="现场开工情况：" cssClass="span8"
+					value="${constructionPermit.workSituation}" name="workSituation">
 				</aui:input>
 			</aui:col>
 		</aui:row>

@@ -74,7 +74,7 @@
 			</liferay-util:include>
 		</liferay-ui:section>
 	</liferay-ui:tabs>
-	<aui:button type="submit" value="提交" />
+	<aui:button type="submit" value="暂存" />
 	<aui:button type="cancel" value="取消" href="${viewURL}" />
 </aui:form>
 
