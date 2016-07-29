@@ -90,6 +90,7 @@
 		<tbody id="deptWorkItems">
 			<c:if test="${!empty deptWorkItems}">
 				<c:forEach items="${deptWorkItems}" var="item">
+				${item.mainWork}
 					<tr align="center">
 						<td><input name="<portlet:namespace/>sortNo"
 							value="${item.sortNo}" required="required"
@@ -99,8 +100,8 @@
 							style="width: 100%; height: 100%; color: #8B8B83; border-top: #D4D4D4 1px solid; border-bottom: #D4D4D4 1px solid; border-left: #D4D4D4 1px solid; border-right: #D4D4D4 1px solid;" /></td>
 						<td><select name="<portlet:namespace/>mainWork"
 							style="width: 100%; height: 130%; color: #8B8B83; border-top: #D4D4D4 1px solid; border-bottom: #D4D4D4 1px solid; border-left: #D4D4D4 1px solid; border-right: #D4D4D4 1px solid;">
-								<option value="1" selected="${item.mainWork}">是</option>
-								<option value="0" selected="${!item.mainWork}">否</option>
+								<aui:option value="1" selected="${item.mainWork}">是</aui:option>
+								<aui:option value="0" selected="${!item.mainWork}">否</aui:option>
 						</select></td>
 						<td><input name="<portlet:namespace/>content"
 							value="${item.content}"
