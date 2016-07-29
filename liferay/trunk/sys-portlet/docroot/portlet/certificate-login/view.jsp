@@ -1,34 +1,33 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
-<div class="portlet-body">
-	<form action="/web/jtjs/-?p_p_id=58&amp;p_p_lifecycle=1&amp;p_p_state=normal&amp;p_p_mode=view&amp;p_p_col_id=column-1&amp;p_p_col_count=1&amp;_58_struts_action=%2Flogin%2Flogin&amp;_58_redirect=%2Fgroup%2Fjtjs%2F-" class="form sign-in-form " id="_58_fm" method="post" name="_58_fm" autocomplete="on">
-		<fieldset class="input-container" disabled="disabled">
-			<input type="hidden" id="cCert" name="cCert" value="" /> <input type="hidden" id="cSign" name="cSign" value="" /> <input type="hidden" id="<portlet:namespace/>content" name="<portlet:namespace/>content" value="${UUID}" /> <input name="_58_formDate" type="hidden" value="1469076641141" /> <input class="field" id="_58_saveLastPath" name="_58_saveLastPath" type="hidden" value="false" /> <input class="field" id="_58_redirect" name="_58_redirect" type="hidden" value="" /> <input class="field" id="_58_doActionAfterLogin" name="_58_doActionAfterLogin" type="hidden" value="false" />
-			<fieldset class="fieldset ">
-				<div class="">
-					<div class="control-group input-text-wrapper">
-						<label class="control-label" for="_58_login"> </label> <input class="field clearable" id="_58_login" name="_58_login" type="hidden" value="" />
-					</div>
-					<div class="control-group input-text-wrapper">
-						<label class="control-label" for="_58_password"> 密码 </label> <input class="field" id="_58_password" name="_58_password" type="password" maxlength="10" value="" />
-					</div>
+<liferay-ui:header title="证书登录"/>
+<form action="/web/jtjs/-?p_p_id=58&amp;p_p_lifecycle=1&amp;p_p_state=normal&amp;p_p_mode=view&amp;p_p_col_id=column-1&amp;p_p_col_count=1&amp;_58_struts_action=%2Flogin%2Flogin&amp;_58_redirect=%2Fgroup%2Fjtjs%2F-" class="form sign-in-form " id="_58_fm" method="post" name="_58_fm" autocomplete="on">
+	<fieldset class="input-container" disabled="disabled">
+		<input type="hidden" id="cCert" name="cCert" value="" /> <input type="hidden" id="cSign" name="cSign" value="" /> <input type="hidden" id="<portlet:namespace/>content" name="<portlet:namespace/>content" value="${UUID}" /> <input name="_58_formDate" type="hidden" value="1469076641141" /> <input class="field" id="_58_saveLastPath" name="_58_saveLastPath" type="hidden" value="false" /> <input class="field" id="_58_redirect" name="_58_redirect" type="hidden" value="" /> <input class="field" id="_58_doActionAfterLogin" name="_58_doActionAfterLogin" type="hidden" value="false" />
+		<fieldset class="fieldset ">
+			<div class="">
+				<div class="control-group input-text-wrapper">
+					<label class="control-label" for="_58_login"> </label> <input class="field clearable" id="_58_login" name="_58_login" type="hidden" value="" />
 				</div>
-			</fieldset>
-			<div class="button-holder ">
-				<button class="btn btn-primary" type='submit' id="btnSub" name="btnSub">登录</button>
-			</div>
-			<div>
-				<OBJECT ID="SafeEngineCtl" CLASSID="CLSID:B48B9648-E9F0-48A3-90A5-8C588CE0898F" width="300" height="50" border=0 hidden="hidden"></OBJECT>
-			</div>
-			<div>
-				请先插入数字证书后再输入密码<br> <a href="" target="_blank"><font color="blue">【数字证书管理器及控件下载】</font></a>
-			</div>
-			<div>
-				数字证书使用注意事项：<a href="" target="_blank"><font color="blue">【帮助文档下载】</font></a> <br /> 1、请使用IE浏览器（32位），其他浏览器不支持；<br /> 2、首次使用必须安装证书驱动；<br /> 3、首次使用IE浏览器会弹出控件提示栏，请选择“运行加载项”。<br />
+				<div class="control-group input-text-wrapper">
+					<label class="control-label" for="_58_password"> 密码 </label> <input class="field" id="_58_password" name="_58_password" type="password" maxlength="10" value="" />
+				</div>
 			</div>
 		</fieldset>
-	</form>
-</div>
+		<div class="button-holder ">
+			<button class="btn btn-primary" type='submit' id="btnSub" name="btnSub">登录</button>
+		</div>
+		<div>
+			<OBJECT ID="SafeEngineCtl" CLASSID="CLSID:B48B9648-E9F0-48A3-90A5-8C588CE0898F" width="300" height="50" border=0 hidden="hidden"></OBJECT>
+		</div>
+		<div style="display:none;">
+			请先插入数字证书后再输入密码<br> <a href="" target="_blank"><font color="blue">【数字证书管理器及控件下载】</font></a>
+		</div>
+		<div style="display:none;">
+			数字证书使用注意事项：<a href="" target="_blank"><font color="blue">【帮助文档下载】</font></a> <br /> 1、请使用IE浏览器（32位），其他浏览器不支持；<br /> 2、首次使用必须安装证书驱动；<br /> 3、首次使用IE浏览器会弹出控件提示栏，请选择“运行加载项”。<br />
+		</div>
+	</fieldset>
+</form>
 <script type="text/javascript">
 	function checkForm() {
 		var password = $("#_58_password").val();
