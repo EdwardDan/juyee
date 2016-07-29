@@ -15,10 +15,19 @@
 	request.setAttribute("apply", apply.getDictionaryId());
 	Dictionary submit = DictionaryLocalServiceUtil.findByCode("submit");
 	request.setAttribute("submit", submit.getDictionaryId());
+	Dictionary dictionary = DictionaryLocalServiceUtil
+			.findByCode("materialType");
+	List<Dictionary> dictionaries=null;
+	if (null != dictionary) {
+		 dictionaries = DictionaryLocalServiceUtil
+				.findByParentId(
+						dictionary.getDictionaryId(), -1,
+						-1);
+	}
 %>
 <portlet:renderURL var="viewURL" />
 <portlet:renderURL var="thisURL">
-	<portlet:param name="mvcPath" value="${contextPath }/input.jsp" />
+	<portlet:param name="mvcPath" value="${contextPath }/edit-construction-permit-material.jsp" />
 </portlet:renderURL>
 <aui:model-context bean="${constructionPermitMaterial}"
 	model="<%=ConstructionPermitMaterial.class %>" />
@@ -36,21 +45,9 @@
 			<aui:input name="id" type="text" value="<%=id%>" />
 		</div>
 		<aui:select name="type" id="type" label="材料类型">
-			<%
-				Dictionary dictionary = DictionaryLocalServiceUtil
-										.findByCode("materialType");
-								if (null != dictionary) {
-									List<Dictionary> dictionaries = DictionaryLocalServiceUtil
-											.findByParentId(
-													dictionary.getDictionaryId(), -1,
-													-1);
-									for (Dictionary dic : dictionaries) {
-			%>
-			<aui:option value="<%=dic.getDictionaryId()%>"><%=dic.getName()%></aui:option>
-			<%
-				}
-								}
-			%>
+		<c:forEach items="<%=dictionaries%>" var="dictionary">
+			<aui:option value="${dictionary.dictionaryId}">${dictionary.name }</aui:option>
+			</c:forEach>
 		</aui:select>
 		<aui:input type="text" name="sortNo" label="序号" value="${sortNoMax}">
 			<aui:validator name="required" errorMessage="请输入序号！" />
