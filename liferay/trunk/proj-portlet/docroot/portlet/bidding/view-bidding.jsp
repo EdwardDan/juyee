@@ -21,7 +21,7 @@
 <portlet:renderURL var="viewURL" />
 <portlet:actionURL var="doViewBidding" name="doViewBiddings">
 	<portlet:param name="projectId" value="${projectId}" />
-	<portlet:param name="mvcPath" value="${contextPath }/viewBidding.jsp" />
+	<portlet:param name="mvcPath" value="${contextPath }/view-bidding.jsp" />
 </portlet:actionURL>
 <portlet:actionURL var="addBiddingURL" name="editBidding">
 	<portlet:param name="projectId" value="${projectId}" />
@@ -29,7 +29,7 @@
 </portlet:actionURL>
 <portlet:actionURL var="deleteBiddingsURL" name="deleteBiddings">
 	<portlet:param name="projectId" value="${projectId}" />
-	<portlet:param name="mvcPath" value="${contextPath }/view-bidding.jsp" />
+	<portlet:param name="redirect" value="${doViewBidding}" />
 </portlet:actionURL>
 <liferay-ui:header title="标段维护" backURL="${viewURL}" />
 <aui:form action="${doViewBidding }" name="fm">
@@ -71,10 +71,10 @@
 				<portlet:param name="mvcPath"
 					value="${contextPath }/view-bidding-detail.jsp" />
 			</portlet:actionURL>
-			<portlet:actionURL var="deleteURL" name="deleteBiddings">
+			<%-- <portlet:actionURL var="deleteURL" name="deleteBiddings">
 				<portlet:param name="biddingIds" value="${bidding.biddingId}" />
 				<portlet:param name="redirect" value="${contextPath }/view-bidding.jsp" />
-			</portlet:actionURL>
+			</portlet:actionURL> --%>
 			<portlet:actionURL var="editURL" name="editBidding"> 
 				<portlet:param name="biddingId" value="${bidding.biddingId}" />
 				<portlet:param name="mvcPath" value="${contextPath }/edit-bidding.jsp" />
