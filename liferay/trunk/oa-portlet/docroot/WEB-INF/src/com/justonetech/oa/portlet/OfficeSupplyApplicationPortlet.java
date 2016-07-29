@@ -68,6 +68,8 @@ public class OfficeSupplyApplicationPortlet extends MVCPortlet {
 		long officeSupplyApplicationId = ParamUtil.getLong(request, "officeSupplyApplicationId");
 		long userId = PortalUtil.getUserId(request);
 		String userName = PortalUtil.getUserName(userId, "");
+		long groupId = PortalUtil.getScopeGroupId(request);
+		long companyId = PortalUtil.getCompanyId(request);
 		String deptName = ParamUtil.getString(request, "deptName");
 		String introductions = ParamUtil.getString(request, "introductions");
 		Date now = new Date();
@@ -83,6 +85,8 @@ public class OfficeSupplyApplicationPortlet extends MVCPortlet {
 			officeSupplyApplication.setModifiedTime(now);
 		}
 		officeSupplyApplication.setUserId(userId);
+		officeSupplyApplication.setGroupId(groupId);
+		officeSupplyApplication.setCompanyId(companyId);
 		officeSupplyApplication.setUserName(userName);
 		officeSupplyApplication.setDeptName(deptName);
 		officeSupplyApplication.setIntroductions(introductions);

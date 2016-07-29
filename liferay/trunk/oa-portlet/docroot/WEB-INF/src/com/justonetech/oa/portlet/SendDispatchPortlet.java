@@ -117,7 +117,7 @@ public class SendDispatchPortlet extends MVCPortlet {
 			dispatch.setUserId(user.getUserId());
 			dispatch.setUserName(user.getFullName());
 		}
-		dispatch.setRocordType(recordType);
+		dispatch.setRecordType(recordType);
 		dispatch.setSecurityLevel(securityLevel);
 		dispatch.setOrganaAbbreviation(organaAbbreviation);
 		dispatch.setYear(year);

@@ -78,6 +78,8 @@ public class DeptWeeklyWorkPortlet extends MVCPortlet {
 		SimpleDateFormat sdf = new SimpleDateFormat(timeFormatPattern);
 		long userId = PortalUtil.getUserId(request);
 		String userName = PortalUtil.getUserName(userId, "");
+		long groupId = PortalUtil.getScopeGroupId(request);
+		long companyId = PortalUtil.getCompanyId(request);
 		String deptName = ParamUtil.getString(request, "deptName");
 		String startdate = ParamUtil.getString(request, "startDate");
 		Date startDate = sdf.parse(startdate);
@@ -95,6 +97,8 @@ public class DeptWeeklyWorkPortlet extends MVCPortlet {
 		}
 		deptWork.setDeptName(deptName);
 		deptWork.setUserId(userId);
+		deptWork.setCompanyId(companyId);
+		deptWork.setGroupId(groupId);
 		deptWork.setUserName(userName);
 		deptWork.setDeptName(deptName);
 		deptWork.setStartDate(startDate);
@@ -106,25 +110,24 @@ public class DeptWeeklyWorkPortlet extends MVCPortlet {
 		for (DeptWorkItem deptWorkItem : deptWorkItems) {
 			DeptWorkItemLocalServiceUtil.deleteDeptWorkItem(deptWorkItem);
 		}
-
-		String rowIndexes = request.getParameter("rowIndexes");
-		String[] indexOfRows = rowIndexes.split(",");
-		for (int i = 0; i < indexOfRows.length; i++) {
-			DeptWorkItem deptWorkItem = DeptWorkItemLocalServiceUtil.createDeptWorkItem(CounterLocalServiceUtil
-					.increment());
-			int sortNo = ParamUtil.getInteger(request, "sortNo" + indexOfRows[i]);
-			String dutyPerson = ParamUtil.getString(request, "dutyPerson" + indexOfRows[i]);
-			String mainWork = ParamUtil.getString(request, "mainWork" + indexOfRows[i]);
-			String content = ParamUtil.getString(request, "content" + indexOfRows[i]);
-			String schedule = ParamUtil.getString(request, "schedule" + indexOfRows[i]);
-			String agentPerson = ParamUtil.getString(request, "agentPerson" + indexOfRows[i]);
+		String[] sortNos = request.getParameterValues("sortNo");
+		String[] dutyPersons = request.getParameterValues("dutyPerson");
+		String[] mainWorks = request.getParameterValues("mainWork");
+		String[] contents = request.getParameterValues("content");
+		String[] schedules = request.getParameterValues("schedule");
+		String[] agentPersonString = request.getParameterValues("agentPerson");
+		for(int i=0;i<sortNos.length;i++){
+			DeptWorkItem deptWorkItem = DeptWorkItemLocalServiceUtil.createDeptWorkItem(CounterLocalServiceUtil.increment());
+			deptWorkItem.setSortNo(Integer.valueOf(sortNos[i]));
+			deptWorkItem.setDutyPerson(dutyPersons[i]);
+			boolean mainWork = mainWorks[i].equals("1")?true:false;
+			deptWorkItem.setMainWork(mainWork);
+			deptWorkItem.setContent(contents[i]);
+			deptWorkItem.setSchedule(schedules[i]);
+			deptWorkItem.setAgentPerson(agentPersonString[i]);
 			deptWorkItem.setDeptWorkId(deptWork.getDeptWorkId());
-			deptWorkItem.setSortNo(sortNo);
-			deptWorkItem.setDutyPerson(dutyPerson);
-			deptWorkItem.setMainWork(Boolean.parseBoolean(mainWork));
-			deptWorkItem.setSchedule(schedule);
-			deptWorkItem.setContent(content);
-			deptWorkItem.setAgentPerson(agentPerson);
+			deptWorkItem.setCompanyId(companyId);
+			deptWorkItem.setGroupId(groupId);
 			DeptWorkItemLocalServiceUtil.updateDeptWorkItem(deptWorkItem);
 		}
 	}
