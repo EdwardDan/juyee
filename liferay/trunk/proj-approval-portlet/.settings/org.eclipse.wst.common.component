@@ -5,6 +5,9 @@
         <dependent-module archiveName="sys-service-portlet-service.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/sys-service-portlet/docroot/WEB-INF/lib/sys-service-portlet-service.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="proj-approval-service-portlet-service.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/proj-approval-service-portlet/docroot/WEB-INF/lib/proj-approval-service-portlet-service.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="proj-approval-portlet"/>
         <property name="java-output-path" value="/proj-approval-portlet/docroot/WEB-INF/classes"/>
     </wb-module>
