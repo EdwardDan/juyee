@@ -32,14 +32,14 @@
 			<liferay-ui:search-container-column-text name="所属区县"
 				value="${proj.belongCounty==0?'上海市':''}" />
 			<liferay-ui:search-container-column-text name="项目状态">
-				<c:if test="${!empty projectStatuses}">
+				 <c:if test="<%=Validator.isNotNull(proj.getProjStatus()) %>">
 					<%=DictionaryLocalServiceUtil.getDictionary(proj.getProjStatus()).getName()%>
-				</c:if>
+				</c:if>  
 			</liferay-ui:search-container-column-text>
 			<liferay-ui:search-container-column-text name="业态类别">
-			<c:if test="${!empty industryCategories}">
+			  <c:if test="<%=Validator.isNotNull(proj.getIndustryCategory()) %>">
 				<%=DictionaryLocalServiceUtil.getDictionary(proj.getIndustryCategory()).getName()%>
-			</c:if>
+			</c:if>  
 			</liferay-ui:search-container-column-text>
 			<liferay-ui:search-container-column-text name="工可批复总投资(亿元)"
 				property="feasibilityTotalInvestment" />
@@ -62,7 +62,7 @@
 					<liferay-ui:icon image="edit" url="${editProjectURL}" />
 					<liferay-ui:icon image="delete" label="删除"
 						url="javascript:void(0);"
-						onClick='<%=renderResponse.getNamespace()+"deleteProjects("+proj.getProjectId()+");"%>' />
+					onClick='<%=renderResponse.getNamespace()+"deleteProjects("+proj.getProjectId()+");"%>' />
 				</liferay-ui:icon-menu>
 			</liferay-ui:search-container-column-text>
 		</liferay-ui:search-container-row>

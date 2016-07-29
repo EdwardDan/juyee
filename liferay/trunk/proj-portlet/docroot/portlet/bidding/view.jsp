@@ -27,12 +27,12 @@
 			<liferay-ui:search-container-column-text name="项目性质"
 				value="${proj.manageAttribute==manageAttrId?'市属':'区属'}" />
 			<liferay-ui:search-container-column-text name="项目状态">
-				<c:if test="${! empty projectStatuses}">
+				<c:if test="<%=Validator.isNotNull(proj.getProjStatus())%>">
 					<%=DictionaryLocalServiceUtil.getDictionary(proj.getProjStatus()).getName()%>
 				</c:if>
 			</liferay-ui:search-container-column-text>
 			<liferay-ui:search-container-column-text name="业态类别">
-				<c:if test="${!empty industryCategories}">
+				<c:if test="<%=Validator.isNotNull(proj.getIndustryCategory())%>">
 					<%=DictionaryLocalServiceUtil.getDictionary(proj.getIndustryCategory()).getName()%>
 				</c:if>
 			</liferay-ui:search-container-column-text>

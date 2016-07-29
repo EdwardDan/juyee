@@ -5,6 +5,11 @@
 	long projectId = ParamUtil.getLong(request, "projectId"); 
 	List<Bidding> biddings = null;
 	int biddingsCount = 0;
+	int delta = GetterUtil.getInteger(PropsUtil.get(PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA));
+    int pageSize = ParamUtil.getInteger(renderRequest, "delta", delta);
+    int pageNumber = ParamUtil.getInteger(renderRequest, "cur", 1);
+    int start = pageSize * (pageNumber - 1);
+    int end = pageSize * pageNumber;
 	if (Validator.isNotNull(projectId)) {
 		biddings = BiddingLocalServiceUtil.findByProjectId(projectId);
 		biddingsCount = biddings.size();
@@ -41,7 +46,7 @@
 			</div>
 		</aui:col> --%>
 	</aui:row>
-	<liferay-ui:search-container emptyResultsMessage="没有找到项目。"
+	<liferay-ui:search-container emptyResultsMessage="没有找到项目。" delta="5"
 		rowChecker="<%=new RowChecker (renderResponse)%>">
 		<liferay-ui:search-container-results results="${biddings}"
 		total="${biddingsCount}" />
@@ -81,7 +86,14 @@
 			</liferay-ui:icon-menu>
 		</liferay-ui:search-container-column-text>
 	</liferay-ui:search-container-row>
-	<liferay-ui:search-iterator />
+	<liferay-ui:search-iterator>
+		<%
+			String projectIdStr = renderRequest.getAttribute("projectId")+"";
+			PortletURL portletURL = searchContainer.getIteratorURL(); 
+			searchContainer.getIteratorURL().setParameter("projectId", projectIdStr);
+			searchContainer.getIteratorURL().setParameter("mvcPath", "/portlet/bidding/view-bidding.jsp");			
+		%>
+	</liferay-ui:search-iterator>
 	</liferay-ui:search-container>
 </aui:form>
 <aui:script>

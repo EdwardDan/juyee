@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 /**
@@ -156,6 +157,10 @@ public class ProjectPortlet extends MVCPortlet {
 
 	public void saveProject(ActionRequest request, ActionResponse response) throws PortalException, SystemException,
 			ParseException {
+		long userId = PortalUtil.getUserId(request);
+		String userName = PortalUtil.getUserName(userId, "");
+		long groupId = PortalUtil.getScopeGroupId(request);
+		long companyId = PortalUtil.getCompanyId(request);
 		long projectId = ParamUtil.getLong(request, "projectId");
 		// 项目基本信息
 		String projNum = ParamUtil.getString(request, "projNum");
@@ -201,6 +206,10 @@ public class ProjectPortlet extends MVCPortlet {
 		} else {
 			project = ProjectLocalServiceUtil.createProject(CounterLocalServiceUtil.increment());
 		}
+		project.setUserId(userId);
+		project.setUserName(userName);
+		project.setGroupId(groupId);
+		project.setCompanyId(companyId);
 		project.setProjNum(projNum);
 		project.setProjName(projName);
 		project.setSortNo(sortNo);
@@ -287,16 +296,20 @@ public class ProjectPortlet extends MVCPortlet {
 		String projectIds = ParamUtil.getString(actionRequest, "projectIds");
 		String[] projectsId = projectIds.split(",");
 		for (String projectId : projectsId) {
-			List<Company> companies = CompanyLocalServiceUtil.findByProjectId(Long.parseLong(projectId));
+			List<Company> companiesPro = CompanyLocalServiceUtil.findByProjectId(Long.parseLong(projectId));
 			List<Bidding> biddings = BiddingLocalServiceUtil.findByProjectId(Long.parseLong(projectId));
-			if (null != companies && companies.size() > 0) {
-				for (Company company : companies) {
+			if (null != companiesPro && companiesPro.size() > 0) {
+				for (Company company : companiesPro) {
 					CompanyLocalServiceUtil.deleteCompany(company);
 				}
 			}
 			if (null != biddings && biddings.size() > 0) {
 				for (Bidding bidding : biddings) {
 					BiddingLocalServiceUtil.deleteBidding(bidding);
+					List<Company> companiesBid = CompanyLocalServiceUtil.findByBiddingId(bidding.getBiddingId());
+					for (Company company : companiesBid) {
+						CompanyLocalServiceUtil.deleteCompany(company);
+					}
 				}
 			}
 			ProjectLocalServiceUtil.deleteProject(Long.parseLong(projectId));

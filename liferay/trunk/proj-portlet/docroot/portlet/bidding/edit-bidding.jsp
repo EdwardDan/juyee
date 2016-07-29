@@ -17,6 +17,14 @@
 		<aui:input name="biddingId" type="hidden"
 			value="${bidding.biddingId }" />
 		<aui:row>
+			<aui:col span="12" cssClass="text-left">
+				<aui:select label="标段类别编码" name="bidCategoryCode">
+					<aui:option value="1" selected="${bidding.bidCategoryCode eq '1'}">形象进度</aui:option>
+					<aui:option value="2" selected="${bidding.bidCategoryCode eq '2'}">办证推进</aui:option>
+				</aui:select>
+			</aui:col>
+		</aui:row>
+		<aui:row>
 			<aui:col span="6" cssClass="text-left">
 				<aui:input type="text" label="标段序号" name="sortNo"
 					value="${sortNo}">

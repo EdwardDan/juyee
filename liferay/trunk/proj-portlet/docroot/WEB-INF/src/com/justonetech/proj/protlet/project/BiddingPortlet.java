@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 import com.sun.org.apache.bcel.internal.generic.I2F;
 
@@ -57,11 +58,11 @@ public class BiddingPortlet extends MVCPortlet {
 		int projectsCount = 0;
 		try {
 			projects = ProjectLocalServiceUtil.getProjects(-1, -1);
-			projectsCount = ProjectLocalServiceUtil.getProjectsCount();
+			projectsCount = projects.size();
 		} catch (SystemException e) {
 			e.printStackTrace();
 		}
-
+		
 		Map<Long,Integer> biddingCount = new HashMap<Long,Integer>();
 		for (Project project : projects) {
 			try {
@@ -162,8 +163,11 @@ public class BiddingPortlet extends MVCPortlet {
 
 	public void saveBidding(ActionRequest request, ActionResponse response) throws PortalException, SystemException,
 			ParseException {
+		long userId = PortalUtil.getUserId(request);
+		String userName = PortalUtil.getUserName(userId, "");
 		long projectId = ParamUtil.getLong(request, "projectId");
 		long biddingId = ParamUtil.getLong(request, "biddingId");
+		String bidCategoryCode = ParamUtil.getString(request, "bidCategoryCode");
 		int sortNo = ParamUtil.getInteger(request, "sortNo");
 		String bidName = ParamUtil.getString(request, "bidName");
 		Date startDate = ParamUtil.getDate(request, "startDate", new SimpleDateFormat(timeFormatPattern));
@@ -171,11 +175,15 @@ public class BiddingPortlet extends MVCPortlet {
 		String buildMileage = ParamUtil.getString(request, "buildMileage");
 		String projLinkman = ParamUtil.getString(request, "projLinkman");
 		String linkTel = ParamUtil.getString(request, "linkTel");
+		Date now = new Date();
 		Bidding bidding = null;
 		if (Validator.isNotNull(biddingId)) {
 			bidding = BiddingLocalServiceUtil.getBidding(biddingId);
+			bidding.setModifiedDate(now);
 		} else {
 			bidding = BiddingLocalServiceUtil.createBidding(CounterLocalServiceUtil.increment());
+			bidding.setCreateDate(now);
+			bidding.setModifiedDate(now);
 		}
 		String involveCountyIds = "";
 		if (null != involveCountys && involveCountys.length > 0) {
@@ -183,6 +191,9 @@ public class BiddingPortlet extends MVCPortlet {
 				involveCountyIds += "," + involveString;
 			}
 		}
+		bidding.setUserId(userId);
+		bidding.setUserName(userName);
+		bidding.setBidCategoryCode(bidCategoryCode);
 		bidding.setProjectId(projectId);
 		bidding.setSortNo(sortNo);
 		bidding.setBidName(bidName);
