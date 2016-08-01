@@ -72,7 +72,7 @@
 						<aui:field-wrapper name="涉及区县">
 							<c:forEach items="${involveCounties}" var="involveCounty"
 								varStatus="sortNo">
-								<aui:input name="involveCounty" type="checkbox"
+								<aui:input name="involveCounty" type="checkbox" id="involveCounty${sortNo.index}"
 									value="${involveCounty.dictionaryId}"
 									checked="${fn:contains(project.involveCounty ,involveCounty.dictionaryId)}"
 									label="${involveCounty. name}" inlineField="true" />

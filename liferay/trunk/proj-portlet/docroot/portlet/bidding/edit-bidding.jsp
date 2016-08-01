@@ -54,8 +54,8 @@
 		<aui:row>
 			<aui:col span="12" cssClass="text-left">
 				<aui:field-wrapper name="涉及区县">
-					<c:forEach items="${involveCountys}" var="involveCounty">
-						<aui:input name="involveCounty" type="checkbox"
+					<c:forEach items="${involveCountys}" var="involveCounty" varStatus="sortNo"> 
+						<aui:input name="involveCounty" type="checkbox" id="involveCounty${sortNo.index}"
 							value="${involveCounty.dictionaryId}"
 							checked="${fn:contains(bidding.involveCounty,involveCounty.dictionaryId)}"
 							label="${involveCounty.name}" inlineField="true" />
