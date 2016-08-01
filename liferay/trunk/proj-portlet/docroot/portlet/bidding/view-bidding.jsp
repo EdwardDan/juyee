@@ -46,7 +46,7 @@
 			</div>
 		</aui:col> --%>
 	</aui:row>
-	<liferay-ui:search-container emptyResultsMessage="没有找到项目。" delta="5"
+	<liferay-ui:search-container emptyResultsMessage="没有找到标段信息。"
 		rowChecker="<%=new RowChecker (renderResponse)%>">
 		<liferay-ui:search-container-results results="${biddings}"
 		total="${biddingsCount}" />

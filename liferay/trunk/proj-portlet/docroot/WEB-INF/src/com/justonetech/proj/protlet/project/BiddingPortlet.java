@@ -282,6 +282,26 @@ public class BiddingPortlet extends MVCPortlet {
 		Bidding bidding = BiddingLocalServiceUtil.getBidding(biddingId);
 		long projectId = bidding.getProjectId();
 		List<Company> companies = CompanyLocalServiceUtil.findByBiddingId(biddingId);
+		Dictionary companyTypeDic = DictionaryLocalServiceUtil.findByCode("CompanyType");
+		List<Dictionary> companyTypes = companyTypeDic != null ? DictionaryLocalServiceUtil.findByParentId(
+				companyTypeDic.getDictionaryId(), -1, -1) : null;
+		Map<Dictionary, Company> companyMap = new TreeMap<Dictionary, Company>();
+		if (Validator.isNotNull(companyTypes)) {
+			for (Dictionary dictionary : companyTypes) {
+				companyMap.put(dictionary, null);
+				if (companies != null) {
+					for (Company com : companies) {
+						if (Validator.isNotNull(com.getType())) {
+							Dictionary dic = DictionaryLocalServiceUtil.getDictionary(com.getType());
+							if (dictionary.equals(dic)) {
+								companyMap.put(dictionary, com);
+							}
+						}
+					}
+				}
+			}
+		}
+		request.setAttribute("companyMap", companyMap);
 		request.setAttribute("biddingId", biddingId);
 		request.setAttribute("bidding", bidding);
 		request.setAttribute("projectId", projectId);
