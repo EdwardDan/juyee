@@ -62,14 +62,14 @@ public class BiddingPortlet extends MVCPortlet {
 		} catch (SystemException e) {
 			e.printStackTrace();
 		}
-		
-		Map<Long,Integer> biddingCount = new HashMap<Long,Integer>();
+
+		Map<Long, Integer> biddingCount = new HashMap<Long, Integer>();
 		for (Project project : projects) {
 			try {
 				List<Bidding> biddings = BiddingLocalServiceUtil.findByProjectId(project.getProjectId());
 				biddingCount.put(project.getProjectId(), biddings.size());
 			} catch (SystemException e) {
-				log.info("findByProjectId 出错"+e.getMessage());
+				log.info("findByProjectId 出错" + e.getMessage());
 			}
 		}
 		long manageAttrId = 0;
@@ -218,6 +218,13 @@ public class BiddingPortlet extends MVCPortlet {
 			BiddingLocalServiceUtil.deleteBidding(Long.parseLong(biddingId));
 		}
 		request.setAttribute("projectId", projectId);
+		List<Bidding> biddings = BiddingLocalServiceUtil.getBiddings(-1, -1);
+		int i = 1;
+		for (Bidding bidding : biddings) {
+			bidding.setSortNo(i);
+			i += 1;
+			BiddingLocalServiceUtil.updateBidding(bidding);
+		}
 	}
 
 	public void editBidding(ActionRequest request, ActionResponse response) throws PortalException, SystemException {

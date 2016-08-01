@@ -27,7 +27,7 @@
 		<aui:row>
 			<aui:col span="6" cssClass="text-left">
 				<aui:input type="text" label="标段序号" name="sortNo"
-					value="${sortNo}">
+					value="${sortNo}" readonly="true">
 					<aui:validator name="maxLength" errorMessage="">75</aui:validator>
 				</aui:input>
 			</aui:col>
