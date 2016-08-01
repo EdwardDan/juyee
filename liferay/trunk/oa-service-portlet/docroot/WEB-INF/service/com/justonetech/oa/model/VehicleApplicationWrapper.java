@@ -66,6 +66,10 @@ public class VehicleApplicationWrapper implements VehicleApplication,
 		attributes.put("passengerNum", getPassengerNum());
 		attributes.put("reason", getReason());
 		attributes.put("destination", getDestination());
+		attributes.put("proposeVehicle", getProposeVehicle());
+		attributes.put("isProposeDriver", getIsProposeDriver());
+		attributes.put("driver", getDriver());
+		attributes.put("phone", getPhone());
 
 		return attributes;
 	}
@@ -166,6 +170,30 @@ public class VehicleApplicationWrapper implements VehicleApplication,
 
 		if (destination != null) {
 			setDestination(destination);
+		}
+
+		Long proposeVehicle = (Long)attributes.get("proposeVehicle");
+
+		if (proposeVehicle != null) {
+			setProposeVehicle(proposeVehicle);
+		}
+
+		Integer isProposeDriver = (Integer)attributes.get("isProposeDriver");
+
+		if (isProposeDriver != null) {
+			setIsProposeDriver(isProposeDriver);
+		}
+
+		String driver = (String)attributes.get("driver");
+
+		if (driver != null) {
+			setDriver(driver);
+		}
+
+		String phone = (String)attributes.get("phone");
+
+		if (phone != null) {
+			setPhone(phone);
 		}
 	}
 
@@ -529,6 +557,86 @@ public class VehicleApplicationWrapper implements VehicleApplication,
 	@Override
 	public void setDestination(java.lang.String destination) {
 		_vehicleApplication.setDestination(destination);
+	}
+
+	/**
+	* Returns the propose vehicle of this vehicle application.
+	*
+	* @return the propose vehicle of this vehicle application
+	*/
+	@Override
+	public long getProposeVehicle() {
+		return _vehicleApplication.getProposeVehicle();
+	}
+
+	/**
+	* Sets the propose vehicle of this vehicle application.
+	*
+	* @param proposeVehicle the propose vehicle of this vehicle application
+	*/
+	@Override
+	public void setProposeVehicle(long proposeVehicle) {
+		_vehicleApplication.setProposeVehicle(proposeVehicle);
+	}
+
+	/**
+	* Returns the is propose driver of this vehicle application.
+	*
+	* @return the is propose driver of this vehicle application
+	*/
+	@Override
+	public int getIsProposeDriver() {
+		return _vehicleApplication.getIsProposeDriver();
+	}
+
+	/**
+	* Sets the is propose driver of this vehicle application.
+	*
+	* @param isProposeDriver the is propose driver of this vehicle application
+	*/
+	@Override
+	public void setIsProposeDriver(int isProposeDriver) {
+		_vehicleApplication.setIsProposeDriver(isProposeDriver);
+	}
+
+	/**
+	* Returns the driver of this vehicle application.
+	*
+	* @return the driver of this vehicle application
+	*/
+	@Override
+	public java.lang.String getDriver() {
+		return _vehicleApplication.getDriver();
+	}
+
+	/**
+	* Sets the driver of this vehicle application.
+	*
+	* @param driver the driver of this vehicle application
+	*/
+	@Override
+	public void setDriver(java.lang.String driver) {
+		_vehicleApplication.setDriver(driver);
+	}
+
+	/**
+	* Returns the phone of this vehicle application.
+	*
+	* @return the phone of this vehicle application
+	*/
+	@Override
+	public java.lang.String getPhone() {
+		return _vehicleApplication.getPhone();
+	}
+
+	/**
+	* Sets the phone of this vehicle application.
+	*
+	* @param phone the phone of this vehicle application
+	*/
+	@Override
+	public void setPhone(java.lang.String phone) {
+		_vehicleApplication.setPhone(phone);
 	}
 
 	@Override

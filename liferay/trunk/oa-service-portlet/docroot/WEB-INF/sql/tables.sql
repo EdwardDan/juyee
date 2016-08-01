@@ -117,5 +117,9 @@ create table oa_VehicleApplication (
 	endTime DATE null,
 	passengerNum INTEGER,
 	reason VARCHAR(1000) null,
-	destination VARCHAR(200) null
+	destination VARCHAR(200) null,
+	proposeVehicle LONG,
+	isProposeDriver INTEGER,
+	driver VARCHAR(75) null,
+	phone VARCHAR(75) null
 );

@@ -146,5 +146,9 @@
 		<property name="passengerNum" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="reason" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="destination" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="proposeVehicle" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="isProposeDriver" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="driver" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="phone" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 </hibernate-mapping>

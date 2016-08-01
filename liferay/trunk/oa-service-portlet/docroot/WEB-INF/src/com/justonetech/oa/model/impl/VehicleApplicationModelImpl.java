@@ -77,9 +77,13 @@ public class VehicleApplicationModelImpl extends BaseModelImpl<VehicleApplicatio
 			{ "endTime", Types.TIMESTAMP },
 			{ "passengerNum", Types.INTEGER },
 			{ "reason", Types.VARCHAR },
-			{ "destination", Types.VARCHAR }
+			{ "destination", Types.VARCHAR },
+			{ "proposeVehicle", Types.BIGINT },
+			{ "isProposeDriver", Types.INTEGER },
+			{ "driver", Types.VARCHAR },
+			{ "phone", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table oa_VehicleApplication (vehicleApplicationId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createTime DATE null,modifiedTime DATE null,applicantDeptId LONG,applicantDeptName VARCHAR(75) null,applicantId LONG,applicantName VARCHAR(75) null,startTime DATE null,endTime DATE null,passengerNum INTEGER,reason VARCHAR(1000) null,destination VARCHAR(200) null)";
+	public static final String TABLE_SQL_CREATE = "create table oa_VehicleApplication (vehicleApplicationId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createTime DATE null,modifiedTime DATE null,applicantDeptId LONG,applicantDeptName VARCHAR(75) null,applicantId LONG,applicantName VARCHAR(75) null,startTime DATE null,endTime DATE null,passengerNum INTEGER,reason VARCHAR(1000) null,destination VARCHAR(200) null,proposeVehicle LONG,isProposeDriver INTEGER,driver VARCHAR(75) null,phone VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table oa_VehicleApplication";
 	public static final String ORDER_BY_JPQL = " ORDER BY vehicleApplication.modifiedTime DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY oa_VehicleApplication.modifiedTime DESC";
@@ -153,6 +157,10 @@ public class VehicleApplicationModelImpl extends BaseModelImpl<VehicleApplicatio
 		attributes.put("passengerNum", getPassengerNum());
 		attributes.put("reason", getReason());
 		attributes.put("destination", getDestination());
+		attributes.put("proposeVehicle", getProposeVehicle());
+		attributes.put("isProposeDriver", getIsProposeDriver());
+		attributes.put("driver", getDriver());
+		attributes.put("phone", getPhone());
 
 		return attributes;
 	}
@@ -253,6 +261,30 @@ public class VehicleApplicationModelImpl extends BaseModelImpl<VehicleApplicatio
 
 		if (destination != null) {
 			setDestination(destination);
+		}
+
+		Long proposeVehicle = (Long)attributes.get("proposeVehicle");
+
+		if (proposeVehicle != null) {
+			setProposeVehicle(proposeVehicle);
+		}
+
+		Integer isProposeDriver = (Integer)attributes.get("isProposeDriver");
+
+		if (isProposeDriver != null) {
+			setIsProposeDriver(isProposeDriver);
+		}
+
+		String driver = (String)attributes.get("driver");
+
+		if (driver != null) {
+			setDriver(driver);
+		}
+
+		String phone = (String)attributes.get("phone");
+
+		if (phone != null) {
+			setPhone(phone);
 		}
 	}
 
@@ -463,6 +495,56 @@ public class VehicleApplicationModelImpl extends BaseModelImpl<VehicleApplicatio
 		_destination = destination;
 	}
 
+	@Override
+	public long getProposeVehicle() {
+		return _proposeVehicle;
+	}
+
+	@Override
+	public void setProposeVehicle(long proposeVehicle) {
+		_proposeVehicle = proposeVehicle;
+	}
+
+	@Override
+	public int getIsProposeDriver() {
+		return _isProposeDriver;
+	}
+
+	@Override
+	public void setIsProposeDriver(int isProposeDriver) {
+		_isProposeDriver = isProposeDriver;
+	}
+
+	@Override
+	public String getDriver() {
+		if (_driver == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _driver;
+		}
+	}
+
+	@Override
+	public void setDriver(String driver) {
+		_driver = driver;
+	}
+
+	@Override
+	public String getPhone() {
+		if (_phone == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _phone;
+		}
+	}
+
+	@Override
+	public void setPhone(String phone) {
+		_phone = phone;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -510,6 +592,10 @@ public class VehicleApplicationModelImpl extends BaseModelImpl<VehicleApplicatio
 		vehicleApplicationImpl.setPassengerNum(getPassengerNum());
 		vehicleApplicationImpl.setReason(getReason());
 		vehicleApplicationImpl.setDestination(getDestination());
+		vehicleApplicationImpl.setProposeVehicle(getProposeVehicle());
+		vehicleApplicationImpl.setIsProposeDriver(getIsProposeDriver());
+		vehicleApplicationImpl.setDriver(getDriver());
+		vehicleApplicationImpl.setPhone(getPhone());
 
 		vehicleApplicationImpl.resetOriginalValues();
 
@@ -662,12 +748,32 @@ public class VehicleApplicationModelImpl extends BaseModelImpl<VehicleApplicatio
 			vehicleApplicationCacheModel.destination = null;
 		}
 
+		vehicleApplicationCacheModel.proposeVehicle = getProposeVehicle();
+
+		vehicleApplicationCacheModel.isProposeDriver = getIsProposeDriver();
+
+		vehicleApplicationCacheModel.driver = getDriver();
+
+		String driver = vehicleApplicationCacheModel.driver;
+
+		if ((driver != null) && (driver.length() == 0)) {
+			vehicleApplicationCacheModel.driver = null;
+		}
+
+		vehicleApplicationCacheModel.phone = getPhone();
+
+		String phone = vehicleApplicationCacheModel.phone;
+
+		if ((phone != null) && (phone.length() == 0)) {
+			vehicleApplicationCacheModel.phone = null;
+		}
+
 		return vehicleApplicationCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(33);
+		StringBundler sb = new StringBundler(41);
 
 		sb.append("{vehicleApplicationId=");
 		sb.append(getVehicleApplicationId());
@@ -701,6 +807,14 @@ public class VehicleApplicationModelImpl extends BaseModelImpl<VehicleApplicatio
 		sb.append(getReason());
 		sb.append(", destination=");
 		sb.append(getDestination());
+		sb.append(", proposeVehicle=");
+		sb.append(getProposeVehicle());
+		sb.append(", isProposeDriver=");
+		sb.append(getIsProposeDriver());
+		sb.append(", driver=");
+		sb.append(getDriver());
+		sb.append(", phone=");
+		sb.append(getPhone());
 		sb.append("}");
 
 		return sb.toString();
@@ -708,7 +822,7 @@ public class VehicleApplicationModelImpl extends BaseModelImpl<VehicleApplicatio
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(52);
+		StringBundler sb = new StringBundler(64);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.oa.model.VehicleApplication");
@@ -778,6 +892,22 @@ public class VehicleApplicationModelImpl extends BaseModelImpl<VehicleApplicatio
 			"<column><column-name>destination</column-name><column-value><![CDATA[");
 		sb.append(getDestination());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>proposeVehicle</column-name><column-value><![CDATA[");
+		sb.append(getProposeVehicle());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>isProposeDriver</column-name><column-value><![CDATA[");
+		sb.append(getIsProposeDriver());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>driver</column-name><column-value><![CDATA[");
+		sb.append(getDriver());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>phone</column-name><column-value><![CDATA[");
+		sb.append(getPhone());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -806,6 +936,10 @@ public class VehicleApplicationModelImpl extends BaseModelImpl<VehicleApplicatio
 	private int _passengerNum;
 	private String _reason;
 	private String _destination;
+	private long _proposeVehicle;
+	private int _isProposeDriver;
+	private String _driver;
+	private String _phone;
 	private long _columnBitmask;
 	private VehicleApplication _escapedModel;
 }

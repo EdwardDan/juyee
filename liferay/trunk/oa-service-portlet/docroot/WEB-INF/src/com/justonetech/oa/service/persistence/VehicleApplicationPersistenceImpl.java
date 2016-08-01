@@ -876,6 +876,10 @@ public class VehicleApplicationPersistenceImpl extends BasePersistenceImpl<Vehic
 		vehicleApplicationImpl.setPassengerNum(vehicleApplication.getPassengerNum());
 		vehicleApplicationImpl.setReason(vehicleApplication.getReason());
 		vehicleApplicationImpl.setDestination(vehicleApplication.getDestination());
+		vehicleApplicationImpl.setProposeVehicle(vehicleApplication.getProposeVehicle());
+		vehicleApplicationImpl.setIsProposeDriver(vehicleApplication.getIsProposeDriver());
+		vehicleApplicationImpl.setDriver(vehicleApplication.getDriver());
+		vehicleApplicationImpl.setPhone(vehicleApplication.getPhone());
 
 		return vehicleApplicationImpl;
 	}

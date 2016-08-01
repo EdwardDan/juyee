@@ -46,6 +46,10 @@ public class VehicleApplicationSoap implements Serializable {
 		soapModel.setPassengerNum(model.getPassengerNum());
 		soapModel.setReason(model.getReason());
 		soapModel.setDestination(model.getDestination());
+		soapModel.setProposeVehicle(model.getProposeVehicle());
+		soapModel.setIsProposeDriver(model.getIsProposeDriver());
+		soapModel.setDriver(model.getDriver());
+		soapModel.setPhone(model.getPhone());
 
 		return soapModel;
 	}
@@ -229,6 +233,38 @@ public class VehicleApplicationSoap implements Serializable {
 		_destination = destination;
 	}
 
+	public long getProposeVehicle() {
+		return _proposeVehicle;
+	}
+
+	public void setProposeVehicle(long proposeVehicle) {
+		_proposeVehicle = proposeVehicle;
+	}
+
+	public int getIsProposeDriver() {
+		return _isProposeDriver;
+	}
+
+	public void setIsProposeDriver(int isProposeDriver) {
+		_isProposeDriver = isProposeDriver;
+	}
+
+	public String getDriver() {
+		return _driver;
+	}
+
+	public void setDriver(String driver) {
+		_driver = driver;
+	}
+
+	public String getPhone() {
+		return _phone;
+	}
+
+	public void setPhone(String phone) {
+		_phone = phone;
+	}
+
 	private long _vehicleApplicationId;
 	private long _groupId;
 	private long _companyId;
@@ -245,4 +281,8 @@ public class VehicleApplicationSoap implements Serializable {
 	private int _passengerNum;
 	private String _reason;
 	private String _destination;
+	private long _proposeVehicle;
+	private int _isProposeDriver;
+	private String _driver;
+	private String _phone;
 }

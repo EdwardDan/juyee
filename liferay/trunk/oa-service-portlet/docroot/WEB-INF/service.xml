@@ -212,6 +212,10 @@
 		<column name="passengerNum" type="int" />
 		<column name="reason" type="String" />
 		<column name="destination" type="String" />
+		<column name="proposeVehicle" type="long" />
+		<column name="isProposeDriver" type="int" />
+		<column name="driver" type="String" />
+		<column name="phone" type="String" />
 
 		<!-- Order -->
 		<order>

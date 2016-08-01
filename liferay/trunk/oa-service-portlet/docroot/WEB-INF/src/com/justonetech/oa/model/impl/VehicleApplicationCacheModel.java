@@ -38,7 +38,7 @@ public class VehicleApplicationCacheModel implements CacheModel<VehicleApplicati
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(33);
+		StringBundler sb = new StringBundler(41);
 
 		sb.append("{vehicleApplicationId=");
 		sb.append(vehicleApplicationId);
@@ -72,6 +72,14 @@ public class VehicleApplicationCacheModel implements CacheModel<VehicleApplicati
 		sb.append(reason);
 		sb.append(", destination=");
 		sb.append(destination);
+		sb.append(", proposeVehicle=");
+		sb.append(proposeVehicle);
+		sb.append(", isProposeDriver=");
+		sb.append(isProposeDriver);
+		sb.append(", driver=");
+		sb.append(driver);
+		sb.append(", phone=");
+		sb.append(phone);
 		sb.append("}");
 
 		return sb.toString();
@@ -155,6 +163,23 @@ public class VehicleApplicationCacheModel implements CacheModel<VehicleApplicati
 			vehicleApplicationImpl.setDestination(destination);
 		}
 
+		vehicleApplicationImpl.setProposeVehicle(proposeVehicle);
+		vehicleApplicationImpl.setIsProposeDriver(isProposeDriver);
+
+		if (driver == null) {
+			vehicleApplicationImpl.setDriver(StringPool.BLANK);
+		}
+		else {
+			vehicleApplicationImpl.setDriver(driver);
+		}
+
+		if (phone == null) {
+			vehicleApplicationImpl.setPhone(StringPool.BLANK);
+		}
+		else {
+			vehicleApplicationImpl.setPhone(phone);
+		}
+
 		vehicleApplicationImpl.resetOriginalValues();
 
 		return vehicleApplicationImpl;
@@ -178,6 +203,10 @@ public class VehicleApplicationCacheModel implements CacheModel<VehicleApplicati
 		passengerNum = objectInput.readInt();
 		reason = objectInput.readUTF();
 		destination = objectInput.readUTF();
+		proposeVehicle = objectInput.readLong();
+		isProposeDriver = objectInput.readInt();
+		driver = objectInput.readUTF();
+		phone = objectInput.readUTF();
 	}
 
 	@Override
@@ -232,6 +261,23 @@ public class VehicleApplicationCacheModel implements CacheModel<VehicleApplicati
 		else {
 			objectOutput.writeUTF(destination);
 		}
+
+		objectOutput.writeLong(proposeVehicle);
+		objectOutput.writeInt(isProposeDriver);
+
+		if (driver == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(driver);
+		}
+
+		if (phone == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(phone);
+		}
 	}
 
 	public long vehicleApplicationId;
@@ -250,4 +296,8 @@ public class VehicleApplicationCacheModel implements CacheModel<VehicleApplicati
 	public int passengerNum;
 	public String reason;
 	public String destination;
+	public long proposeVehicle;
+	public int isProposeDriver;
+	public String driver;
+	public String phone;
 }

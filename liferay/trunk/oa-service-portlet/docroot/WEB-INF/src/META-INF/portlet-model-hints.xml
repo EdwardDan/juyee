@@ -121,5 +121,9 @@
 		<field name="destination" type="String">
 			<hint name="max-length">200</hint>
 		</field>
+		<field name="proposeVehicle" type="long" />
+		<field name="isProposeDriver" type="int" />
+		<field name="driver" type="String" />
+		<field name="phone" type="String" />
 	</model>
 </model-hints>

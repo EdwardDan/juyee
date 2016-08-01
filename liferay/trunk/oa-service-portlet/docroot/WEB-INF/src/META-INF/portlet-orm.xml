@@ -197,6 +197,10 @@
 			<basic name="passengerNum" />
 			<basic name="reason" />
 			<basic name="destination" />
+			<basic name="proposeVehicle" />
+			<basic name="isProposeDriver" />
+			<basic name="driver" />
+			<basic name="phone" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />

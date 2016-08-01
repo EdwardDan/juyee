@@ -92,6 +92,10 @@ public class VehicleApplicationClp extends BaseModelImpl<VehicleApplication>
 		attributes.put("passengerNum", getPassengerNum());
 		attributes.put("reason", getReason());
 		attributes.put("destination", getDestination());
+		attributes.put("proposeVehicle", getProposeVehicle());
+		attributes.put("isProposeDriver", getIsProposeDriver());
+		attributes.put("driver", getDriver());
+		attributes.put("phone", getPhone());
 
 		return attributes;
 	}
@@ -192,6 +196,30 @@ public class VehicleApplicationClp extends BaseModelImpl<VehicleApplication>
 
 		if (destination != null) {
 			setDestination(destination);
+		}
+
+		Long proposeVehicle = (Long)attributes.get("proposeVehicle");
+
+		if (proposeVehicle != null) {
+			setProposeVehicle(proposeVehicle);
+		}
+
+		Integer isProposeDriver = (Integer)attributes.get("isProposeDriver");
+
+		if (isProposeDriver != null) {
+			setIsProposeDriver(isProposeDriver);
+		}
+
+		String driver = (String)attributes.get("driver");
+
+		if (driver != null) {
+			setDriver(driver);
+		}
+
+		String phone = (String)attributes.get("phone");
+
+		if (phone != null) {
+			setPhone(phone);
 		}
 	}
 
@@ -576,6 +604,98 @@ public class VehicleApplicationClp extends BaseModelImpl<VehicleApplication>
 		}
 	}
 
+	@Override
+	public long getProposeVehicle() {
+		return _proposeVehicle;
+	}
+
+	@Override
+	public void setProposeVehicle(long proposeVehicle) {
+		_proposeVehicle = proposeVehicle;
+
+		if (_vehicleApplicationRemoteModel != null) {
+			try {
+				Class<?> clazz = _vehicleApplicationRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setProposeVehicle", long.class);
+
+				method.invoke(_vehicleApplicationRemoteModel, proposeVehicle);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public int getIsProposeDriver() {
+		return _isProposeDriver;
+	}
+
+	@Override
+	public void setIsProposeDriver(int isProposeDriver) {
+		_isProposeDriver = isProposeDriver;
+
+		if (_vehicleApplicationRemoteModel != null) {
+			try {
+				Class<?> clazz = _vehicleApplicationRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setIsProposeDriver", int.class);
+
+				method.invoke(_vehicleApplicationRemoteModel, isProposeDriver);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getDriver() {
+		return _driver;
+	}
+
+	@Override
+	public void setDriver(String driver) {
+		_driver = driver;
+
+		if (_vehicleApplicationRemoteModel != null) {
+			try {
+				Class<?> clazz = _vehicleApplicationRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setDriver", String.class);
+
+				method.invoke(_vehicleApplicationRemoteModel, driver);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getPhone() {
+		return _phone;
+	}
+
+	@Override
+	public void setPhone(String phone) {
+		_phone = phone;
+
+		if (_vehicleApplicationRemoteModel != null) {
+			try {
+				Class<?> clazz = _vehicleApplicationRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setPhone", String.class);
+
+				method.invoke(_vehicleApplicationRemoteModel, phone);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
 	public BaseModel<?> getVehicleApplicationRemoteModel() {
 		return _vehicleApplicationRemoteModel;
 	}
@@ -663,6 +783,10 @@ public class VehicleApplicationClp extends BaseModelImpl<VehicleApplication>
 		clone.setPassengerNum(getPassengerNum());
 		clone.setReason(getReason());
 		clone.setDestination(getDestination());
+		clone.setProposeVehicle(getProposeVehicle());
+		clone.setIsProposeDriver(getIsProposeDriver());
+		clone.setDriver(getDriver());
+		clone.setPhone(getPhone());
 
 		return clone;
 	}
@@ -716,7 +840,7 @@ public class VehicleApplicationClp extends BaseModelImpl<VehicleApplication>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(33);
+		StringBundler sb = new StringBundler(41);
 
 		sb.append("{vehicleApplicationId=");
 		sb.append(getVehicleApplicationId());
@@ -750,6 +874,14 @@ public class VehicleApplicationClp extends BaseModelImpl<VehicleApplication>
 		sb.append(getReason());
 		sb.append(", destination=");
 		sb.append(getDestination());
+		sb.append(", proposeVehicle=");
+		sb.append(getProposeVehicle());
+		sb.append(", isProposeDriver=");
+		sb.append(getIsProposeDriver());
+		sb.append(", driver=");
+		sb.append(getDriver());
+		sb.append(", phone=");
+		sb.append(getPhone());
 		sb.append("}");
 
 		return sb.toString();
@@ -757,7 +889,7 @@ public class VehicleApplicationClp extends BaseModelImpl<VehicleApplication>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(52);
+		StringBundler sb = new StringBundler(64);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.oa.model.VehicleApplication");
@@ -827,6 +959,22 @@ public class VehicleApplicationClp extends BaseModelImpl<VehicleApplication>
 			"<column><column-name>destination</column-name><column-value><![CDATA[");
 		sb.append(getDestination());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>proposeVehicle</column-name><column-value><![CDATA[");
+		sb.append(getProposeVehicle());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>isProposeDriver</column-name><column-value><![CDATA[");
+		sb.append(getIsProposeDriver());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>driver</column-name><column-value><![CDATA[");
+		sb.append(getDriver());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>phone</column-name><column-value><![CDATA[");
+		sb.append(getPhone());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -850,6 +998,10 @@ public class VehicleApplicationClp extends BaseModelImpl<VehicleApplication>
 	private int _passengerNum;
 	private String _reason;
 	private String _destination;
+	private long _proposeVehicle;
+	private int _isProposeDriver;
+	private String _driver;
+	private String _phone;
 	private BaseModel<?> _vehicleApplicationRemoteModel;
 	private Class<?> _clpSerializerClass = com.justonetech.oa.service.ClpSerializer.class;
 }

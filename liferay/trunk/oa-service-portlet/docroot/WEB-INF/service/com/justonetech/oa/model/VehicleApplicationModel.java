@@ -304,6 +304,64 @@ public interface VehicleApplicationModel extends BaseModel<VehicleApplication> {
 	 */
 	public void setDestination(String destination);
 
+	/**
+	 * Returns the propose vehicle of this vehicle application.
+	 *
+	 * @return the propose vehicle of this vehicle application
+	 */
+	public long getProposeVehicle();
+
+	/**
+	 * Sets the propose vehicle of this vehicle application.
+	 *
+	 * @param proposeVehicle the propose vehicle of this vehicle application
+	 */
+	public void setProposeVehicle(long proposeVehicle);
+
+	/**
+	 * Returns the is propose driver of this vehicle application.
+	 *
+	 * @return the is propose driver of this vehicle application
+	 */
+	public int getIsProposeDriver();
+
+	/**
+	 * Sets the is propose driver of this vehicle application.
+	 *
+	 * @param isProposeDriver the is propose driver of this vehicle application
+	 */
+	public void setIsProposeDriver(int isProposeDriver);
+
+	/**
+	 * Returns the driver of this vehicle application.
+	 *
+	 * @return the driver of this vehicle application
+	 */
+	@AutoEscape
+	public String getDriver();
+
+	/**
+	 * Sets the driver of this vehicle application.
+	 *
+	 * @param driver the driver of this vehicle application
+	 */
+	public void setDriver(String driver);
+
+	/**
+	 * Returns the phone of this vehicle application.
+	 *
+	 * @return the phone of this vehicle application
+	 */
+	@AutoEscape
+	public String getPhone();
+
+	/**
+	 * Sets the phone of this vehicle application.
+	 *
+	 * @param phone the phone of this vehicle application
+	 */
+	public void setPhone(String phone);
+
 	@Override
 	public boolean isNew();
 
