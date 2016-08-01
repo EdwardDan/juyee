@@ -218,7 +218,7 @@ public class BiddingPortlet extends MVCPortlet {
 			BiddingLocalServiceUtil.deleteBidding(Long.parseLong(biddingId));
 		}
 		request.setAttribute("projectId", projectId);
-		List<Bidding> biddings = BiddingLocalServiceUtil.getBiddings(-1, -1);
+		List<Bidding> biddings = BiddingLocalServiceUtil.findByProjectId(projectId);
 		int i = 1;
 		for (Bidding bidding : biddings) {
 			bidding.setSortNo(i);
