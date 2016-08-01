@@ -301,6 +301,10 @@ public class BiddingPortlet extends MVCPortlet {
 				}
 			}
 		}
+		Dictionary involveCountyDic = DictionaryLocalServiceUtil.findByCode("areaName");
+		List<Dictionary> involveCountys = involveCountyDic != null ? DictionaryLocalServiceUtil.findByParentId(
+				involveCountyDic.getDictionaryId(), -1, -1) : null;
+		request.setAttribute("involveCountys", involveCountys);
 		request.setAttribute("companyMap", companyMap);
 		request.setAttribute("biddingId", biddingId);
 		request.setAttribute("bidding", bidding);
