@@ -35,7 +35,7 @@
 					</aui:col>
 					<aui:col span="6" cssClass="text-left">
 						<label class="control-label" for="startDate">实际开工时间 </label>
-						<input type="text" class="field"
+						<input type="text" class="Wdate"
 							name="<portlet:namespace/>startDate" id="startDate"
 							onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'endDate\')}',lang:'zh-cn',dateFmt:'yyyy-MM-dd'})"
 							value='<fmt:formatDate value="${project.startDate}" pattern="yyyy-MM-dd"/>'>
@@ -52,7 +52,7 @@
 					</aui:col>
 					<aui:col span="6" cssClass="text-left">
 						<label class="control-label" for="endDate">实际完成时间</label>
-						<input type="text" class="field"
+						<input type="text" class="Wdate"
 							name="<portlet:namespace/>endDate" id="endDate"
 							onfocus="WdatePicker({minDate:'#F{$dp.$D(\'startDate\')}',lang:'zh-cn',dateFmt:'yyyy-MM-dd'})"
 							value='<fmt:formatDate value="${project.endDate }" pattern="yyyy-MM-dd"/>'>
@@ -168,7 +168,7 @@
 				<aui:row>
 					<aui:col span="6" cssClass="text-left">
 						<label class="control-label" for="startNode"> 目标开工节点 </label>
-						<input type="text" class="field"
+						<input type="text" class="Wdate"
 							name="<portlet:namespace/>startNode" id="startNode"
 							onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'endNode\')}',lang:'zh-cn',dateFmt:'yyyy-MM-dd'})"
 							value='<fmt:formatDate value="${project.startNode }" pattern="yyyy-MM-dd"/>'>
@@ -183,7 +183,7 @@
 				<aui:row>
 					<aui:col span="6" cssClass="text-left">
 						<label class="control-label" for="endNode"> 目标完工节点 </label>
-						<input type="text" class="field"
+						<input type="text" class="Wdate"
 							name="<portlet:namespace/>endNode" id="endNode"
 							onfocus="WdatePicker({minDate:'#F{$dp.$D(\'startNode\')}',lang:'zh-cn',dateFmt:'yyyy-MM-dd'})"
 							value='<fmt:formatDate value="${project.endNode }" pattern="yyyy-MM-dd"/>'>
@@ -199,7 +199,7 @@
 					<aui:col span="6" cssClass="text-left">
 						<label class="control-label" for="planStartDate"> 目标计划开工时间
 						</label>
-						<input type="text" class="field"
+						<input type="text" class="Wdate"
 							name="<portlet:namespace/>planStartDate"
 							id="planStartDate"
 							onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'planEndDate\')}',lang:'zh-cn',dateFmt:'yyyy-MM-dd'})"
@@ -214,7 +214,7 @@
 				<aui:row>
 					<aui:col span="6" cssClass="text-left">
 						<label class="control-label" for="planEndDate"> 目标计划完工时间 </label>
-						<input type="text" class="field"
+						<input type="text" class="Wdate"
 							name="<portlet:namespace/>planEndDate"
 							id="planEndDate"
 							onfocus="WdatePicker({minDate:'#F{$dp.$D(\'planStartDate\')}',lang:'zh-cn',dateFmt:'yyyy-MM-dd'})"
