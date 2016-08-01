@@ -74,7 +74,6 @@ public class BiddingPortlet extends MVCPortlet {
 		}
 		long manageAttrId = 0;
 		Dictionary manageAttributeDic = null;
-		;
 		try {
 			manageAttributeDic = DictionaryLocalServiceUtil.findByCode("manageAttribute");
 		} catch (SystemException e) {
@@ -239,14 +238,11 @@ public class BiddingPortlet extends MVCPortlet {
 			sortNo = bidding.getSortNo();
 			companies = CompanyLocalServiceUtil.findByBiddingId(biddingId);
 			request.setAttribute("bidding", bidding);
-			request.setAttribute("biddingId", biddingId);
+			companies = CompanyLocalServiceUtil.findByBiddingId(biddingId);
 		} else {
 			projectId = ParamUtil.getLong(request, "projectId");
 			List<Bidding> biddings = BiddingLocalServiceUtil.findByProjectId(projectId);
 			sortNo = (biddings.isEmpty() ? 0 : biddings.get(biddings.size() - 1).getSortNo()) + 1;
-		}
-		if (Validator.isNotNull(biddingId)) {
-			companies = CompanyLocalServiceUtil.findByBiddingId(biddingId);
 		}
 		Dictionary companyTypeDic = DictionaryLocalServiceUtil.findByCode("CompanyType");
 		List<Dictionary> companyTypes = companyTypeDic != null ? DictionaryLocalServiceUtil.findByParentId(
@@ -307,7 +303,6 @@ public class BiddingPortlet extends MVCPortlet {
 				involveCountyDic.getDictionaryId(), -1, -1) : null;
 		request.setAttribute("involveCountys", involveCountys);
 		request.setAttribute("companyMap", companyMap);
-		request.setAttribute("biddingId", biddingId);
 		request.setAttribute("bidding", bidding);
 		request.setAttribute("projectId", projectId);
 		request.setAttribute("companies", companies);
