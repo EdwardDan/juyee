@@ -34,13 +34,13 @@
 
 
 
-<table class="table table-bordered table-hover" border="1" id="table1">
+<table class="table table-bordered"  id="table1">
 	<tr align="center" height="29px">
 		<td style="width: 5%; text-align: center;" nowrap>序号</td>
 		<td style="width: 20%; text-align: center;" nowrap>合同信息报送编号</td>
 		<td style="width: 15%; text-align: center;" nowrap>单位类型</td>
 		<td style="width: 20%; text-align: center;" nowrap>单位名称</td>
-		<td style="width: 15%; text-align: center;" nowrap>单位负责人</td>
+		<td style="width: 15%; text-align: center;" nowrap>项目负责人</td>
 		<td style="width: 15%; text-align: center;" nowrap>电话号码</td>
 		<td style="width: 5%; text-align: center;"><input type='button'
 			value='添加' class='btn' onclick='addLineParticipantUnits(this)' /></td>
@@ -58,9 +58,9 @@
 					style="width: 95%; height: 100%; color: #8B8B83; border-top: #D4D4D4 1px solid; border-bottom: #D4D4D4 1px solid; border-left: #D4D4D4 1px solid; border-right: #D4D4D4 1px solid;"
 					name="${namespace}contractInfoSubmitNum"
 					value="${item.contractInfoSubmitNum}" /></td>
-				<td><input type="text"
+				<td><select 
 					style="width: 95%; height: 100%; color: #8B8B83; border-top: #D4D4D4 1px solid; border-bottom: #D4D4D4 1px solid; border-left: #D4D4D4 1px solid; border-right: #D4D4D4 1px solid;"
-					name="${namespace}unitType" value="${item.unitType}" /></td>
+					name="${namespace}unitType" > </select></td>
 				<td><input type="text"
 					style="width: 95%; height: 100%; color: #8B8B83; border-top: #D4D4D4 1px solid; border-bottom: #D4D4D4 1px solid; border-left: #D4D4D4 1px solid; border-right: #D4D4D4 1px solid;"
 					name="${namespace}unitName" value="${item.unitName}" /></td>

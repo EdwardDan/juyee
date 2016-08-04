@@ -33,7 +33,7 @@
 
 
 <table 
-	class="table table-bordered table-hover" border="1" id="table2">
+	class="table table-bordered" border="1" id="table2">
 	<tr align="center" height="29px">
 		<td style="width: 5%; text-align: center;" nowrap>序号</td>
 		<td style="width: 25%; text-align: center;" nowrap>单位工程编号</td>
