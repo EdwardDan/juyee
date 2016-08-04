@@ -166,9 +166,7 @@
 
     //按是否标注过滤数据
     function loadThisGrid() {
-
         var v = $("#queryStatus option:selected").val();
-       alert(v);
         jQuery("#listGrid").jqGrid('setGridParam', {postData: {'queryStatus': v}}).trigger('reloadGrid');
     }
 </script>
@@ -182,7 +180,10 @@
             <input type="text" name="queryConditionDesc" id="queryConditionDesc" value="" class="title_input"
                    readonly="true"/>
             <select name="queryStatus" id="queryStatus" class="form_select" onchange="loadThisGrid()">
-                ${options}
+                <option value="-1">请选择</option>
+                <option value="0">撤回</option>
+                <option value="1">未提交</option>
+                <option value="2" selected>已提交</option>
             </select>
         </div>
         <div style="float:right;padding-right: 10px">
