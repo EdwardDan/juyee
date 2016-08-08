@@ -180,7 +180,6 @@
             <input type="text" name="queryConditionDesc" id="queryConditionDesc" value="" class="title_input"
                    readonly="true"/>
             <select name="queryStatus" id="queryStatus" class="form_select" onchange="loadThisGrid()">
-                <option value="-1">请选择</option>
                 <option value="0">撤回</option>
                 <option value="1">未提交</option>
                 <option value="2" selected>已提交</option>
