@@ -46,7 +46,6 @@ public class AssetViewerPortlet extends MVCPortlet {
 					Map map = new HashMap();
 					AssetEntry assetEntry_ = AssetEntryLocalServiceUtil.getEntry(assetLink.getEntryId2());
 					DLFileEntry dlFileEntry = DLFileEntryLocalServiceUtil.getDLFileEntryByUuidAndCompanyId(assetEntry_.getClassUuid(), assetEntry_.getCompanyId());
-					System.out.println(dlFileEntry);
 					if (assetEntry_ != null && dlFileEntry != null) {
 						map.put("assetEntry", assetEntry_);
 						map.put("dlFileEntry", dlFileEntry);
