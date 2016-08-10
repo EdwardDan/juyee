@@ -5,5 +5,10 @@
 	<compatibility>
 		<version>6.2.5+</version>
 	</compatibility>
-	<theme id="portal" name="Portal" />
+	<theme id="portal" name="Portal">
+		<settings>
+			<setting configurable="true" key="portlet-setup-show-borders-default"
+				type="checkbox" value="false" />
+		</settings>
+	</theme>
 </look-and-feel>
