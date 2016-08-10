@@ -3037,8 +3037,8 @@
     *z-index: 2; }
   .aui .navbar-inner {
     min-height: 40px;
-    padding-left: 0px;
-    padding-right: 0px;
+    padding-left: 20px;
+    padding-right: 20px;
     background-color: #f6f6f6;
     background-image: -moz-linear-gradient(top, #f9f9f9, #f3f3f3);
     background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#f9f9f9), to(#f3f3f3));
@@ -3061,6 +3061,8 @@
       line-height: 0; }
     .aui .navbar-inner:after {
       clear: both; }
+  .aui .navbar .container {
+    width: auto; }
   .aui .nav-collapse.collapse {
     height: auto;
     overflow: visible; }
@@ -4952,8 +4954,8 @@
       width: 710px; } }
   @media (max-width: 767px) {
     .aui body {
-      padding-left: 0px;
-      padding-right: 0px; }
+      padding-left: 20px;
+      padding-right: 20px; }
     .aui .navbar-fixed-top,
     .aui .navbar-fixed-bottom,
     .aui .navbar-static-top {

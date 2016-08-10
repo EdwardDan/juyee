@@ -6,10 +6,12 @@
     padding: 0; }
   .aui #heading {
     bottom: 100%;
-    margin-top: 0em;
+    margin-top: -2em;
     position: relative; }
     .aui #heading .site-title {
       font-size: 26px; }
+      .aui #heading .site-title img {
+        width: 35px; }
   .aui #navigation {
     display: none; }
     .aui #navigation.open {
@@ -119,7 +121,7 @@
               background-color: #5BBAE8; }
   .aui .portlet-dockbar {
     display: inline-block;
-    width: 90%; }
+    width: 100%; }
   .aui .signed-out #_145_navAddControlsNavbarBtn {
     display: none; } }
 .aui {
@@ -166,7 +168,7 @@
     border: 1px solid #DDD;
     color: #8D8D8D;
     font-weight: 200;
-    /* margin-bottom: 7px; */ }
+    margin-bottom: 7px; }
     .aui input[type="color"]:focus, .aui input[type="date"]:focus, .aui input[type="datetime"]:focus, .aui input[type="datetime-local"]:focus, .aui input[type="email"]:focus, .aui input[type="month"]:focus, .aui input[type="number"]:focus, .aui input[type="password"]:focus, .aui input[type="search"]:focus, .aui input[type="tel"]:focus, .aui input[type="text"]:focus, .aui input[type="time"]:focus, .aui input[type="url"]:focus, .aui input[type="week"]:focus, .aui select:focus, .aui textarea:focus, .aui .uneditable-input:focus {
       border-color: rgba(0, 172, 255, 0.8); }
   .aui input[type="submit"] {
@@ -258,7 +260,7 @@
     background: none;
     visibility: hidden; }
   .aui .dockbar-split.dockbar-ready .dockbar .navbar-inner {
-    visibility: hidden; }
+    visibility: visible; }
   .aui .dockbar.navbar .navbar-inner {
     min-height: 40px; }
   .aui .dockbar .navbar-inner {

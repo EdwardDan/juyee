@@ -15,11 +15,15 @@
 
 		#heading {
 			bottom: 100%;
-			margin-top: 0em;
+			margin-top: -2em;
 			position: relative;
 
 			.site-title {
 				font-size: 26px;
+
+				img {
+					width: 35px;
+				}
 			}
 		}
 
@@ -199,7 +203,7 @@
 
 		.portlet-dockbar {
 			display: inline-block;
-			width: 90%;
+			width: 100%;
 		}
 
 		.signed-out #_145_navAddControlsNavbarBtn {

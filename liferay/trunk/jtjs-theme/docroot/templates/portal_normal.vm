@@ -2,109 +2,88 @@
 
 #parse ($init)
 
-<html class="$root_css_class" dir="#language ("lang.dir")" lang="$w3c_language_id">
+<html class="$root_css_class" dir="#language (" lang.dir")" lang="$w3c_language_id">
 
 <head>
     <title>$the_title - $company_name</title>
-
-    <meta content="initial-scale=1.0, width=device-width" name="viewport" />
-
+    <meta http-equiv="CONTENT-TYPE" content="text/html;charset=utf-8">
+    <meta content="initial-scale=1.0, width=device-width" name="viewport"/>
     $theme.include($top_head_include)
 
     <script type="text/javascript">
-        function verify(){
-            var input=document.getElementById("keywords");
-            if( input.value==null || input.value==''){
+        function verify() {
+            var input = document.getElementById("submit");
+            if (input.value == null || input.value == '') {
                 alert("请输入搜索内容！");
                 return false;
             }
             return true;
         }
     </script>
-    <script>
-        var _hmt = _hmt || [];
-        (function() {
-            var hm = document.createElement("script");
-            hm.src = "//hm.baidu.com/hm.js?ece79c00ee71a1b0ec051eda435b228b";
-            var s = document.getElementsByTagName("script")[0];
-            s.parentNode.insertBefore(hm, s);
-        })();
-    </script>
     <script src="http://apps.bdimg.com/libs/jquery/1.11.3/jquery.min.js"></script>
 </head>
 
 <body class="$css_class">
 
-<a href="#main-content" id="skip-to-content">#language ("skip-to-content")</a>
 
 $theme.include($body_top_include)
 
-#dockbar()
+<div class="favorite">
+    <span style="position: relative;left: 80%">收藏本站</span>
+</div>
 
-<div class="container-fluid" id="wrapper">
-    <header id="banner" role="banner">
-        <div class="container" id="heading">
-            <div style="background-color: #F0F0F0">
-				<span style="position: relative;left: 80%">
-				收藏本站
-				</span>
-            </div>
-            <div class="row-fluid">
-                <div class="span6">
-                    <a class="$logo_css_class" href="$themeDisplay.getURLHome()" title="#language_format ("go-to-x", [$site_name])">
-                    <img alt="$logo_description" height="$site_logo_height" src="$site_logo" width="$site_logo_width" />
-                    上海市交通建设工程管理中心
-                    </a>
-                </div>
-                <div class="text-right span6">
-                    <div class="top-link" style="margin-bottom:10px">
-                        <span style="position: relative;left: -160px;">全站检索：</span>
-                        <form class="form-search" method="get" onsubmit="return verify();" action="/ssjg">
-                            <input type="hidden" name="p_p_id" value="3">
-                            <input type="hidden" name="_3_struts_action" value="/search/search">
-                            <input type="hidden" name="_3_redirect" value="/ssjg">
-                            <input type="text" name="_3_keywords" id="keywords" class="input-medium search-query" style="margin-left:30px;margin-bottom:5px;height:15px">
-                            <button type="submit" class="btn" style="height:25px;margin-bottom:5px;line-height:normal">搜索</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div style="position: relative;top: 20px;color: white">
-            #if ($has_navigation || $is_signed_in)
-            #parse ("$full_templates_path/navigation.vm")
-            #end
-        </div>
-    </header>
-
-    <div class="container" id="content" style="position: relative;top: 30px">
-
-        #if ($selectable)
-        $theme.include($content_include)
-        #else
-        $portletDisplay.recycle()
-
-        $portletDisplay.setTitle($the_title)
-
-        $theme.wrapPortlet("portlet.vm", $content_include)
-        #end
+<header id="banner" role="banner">
+    <div class="organizationImg">
+    <span class="organizationImgSpan1">
+        <img src="$images_folder/head.png" width="420px" height="120px">
+    </span>
+    <span class="organizationImgSpan2">
+    <div class="search" align="center">
+        全站搜索
+    </div>
+        <form method="get" action="">
+            <input type="text" class="inputText">
+            <input name="submit" type="image" value="" src="$images_folder/search.png" onclick="verify()"
+                   class="searchButton"/>
+        </form>
+    </span>
     </div>
 
-    <footer id="footer" role="contentinfo">
-        <div class="text-center">
-            友情链接
-        </div>
-        <fieldset class="" style="background-color: #0066CC;color: white">
-            <div class="text-center copyright">
-                <p id="">
-                    首页&nbsp&nbsp&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp&nbsp&nbsp工作动态&nbsp&nbsp&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp&nbsp&nbsp信息公开&nbsp&nbsp&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp&nbsp&nbsp网上办事&nbsp&nbsp&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp&nbsp&nbsp政策法规&nbsp&nbsp&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp&nbsp&nbsp互动平台<br>
-                    @2016&nbsp上海市交通建设工程管理中心&nbsp&nbsp版权所有<br>
-                    沪ICP备&nbsp14011940号
-                </p>
-            </div>
-        </fieldset>
-    </footer>
+    <div class="navigationDiv">
+        #if ($has_navigation || $is_signed_in)
+        #parse ("$full_templates_path/navigation.vm")
+        #end
+    </div>
+</header>
+
+<div class="container" id="content" style="position: relative;top: 50px;width: 959px">
+    #if ($selectable)
+    $theme.include($content_include)
+    #else
+    $portletDisplay.recycle()
+
+    $portletDisplay.setTitle($the_title)
+
+    $theme.wrapPortlet("portlet.vm", $content_include)
+    #end
 </div>
+
+
+<footer id="footer" role="contentinfo">
+    <div class="text-center">
+        友情链接
+    </div>
+    <div class="copyRightDiv">
+        <div class="text-center copyright">
+            <br>
+            <span><a href="">首页</a></span>|<span><a href="">工作动态</a></span>|<span><a href="">信息公开</a></span>|<span><a
+                href="">网上办事</a></span>|<span><a href="">政策法规</a></span>|<span><a href="">互动平台</a></span><br><br>
+            @2016&nbsp上海市交通建设工程管理中心&nbsp&nbsp版权所有<br><br>
+            沪ICP备&nbsp14011940号
+        </div>
+    </div>
+</footer>
+
 
 $theme.include($body_bottom_include)
 

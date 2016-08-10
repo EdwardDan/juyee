@@ -66,7 +66,7 @@
 		border: 1px solid #DDD;
 		color: #8D8D8D;
 		font-weight: 200;
-		/* margin-bottom: 7px; */
+		margin-bottom: 7px;
 
 		&:focus {
 			border-color: rgba(0, 172, 255, 0.8);
@@ -252,7 +252,7 @@
 		}
 
 		&.dockbar-ready .dockbar .navbar-inner {
-			visibility: hidden;
+			visibility: visible;
 		}
 	}
 

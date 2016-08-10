@@ -633,17 +633,16 @@ body.html-editor {
 
 /* ---------- Wrapper ---------- */
 #wrapper {
-  padding: 0em 0em 0;
-  position: relative;
-  border-top: 4px #1d4ba2 solid; }
+  padding: 2em 5em 0;
+  position: relative; }
   @media (max-width: 767px) {
     #wrapper {
-      padding-left: 0em;
-      padding-right: 0em; } }
+      padding-left: 0.5em;
+      padding-right: 0.5em; } }
   @media (min-width: 768px) and (max-width: 979px) {
     #wrapper {
-      padding-left: 0em;
-      padding-right: 0em; } }
+      padding-left: 2em;
+      padding-right: 2em; } }
 
 .aui {
   /* ---------- Staging dockbar ---------- */
@@ -2564,10 +2563,12 @@ body:first-of-type .portlet-content:hover .lfr-icon-actions .taglib-text {
     padding: 0; }
   .aui #heading {
     bottom: 100%;
-    margin-top: 0em;
+    margin-top: -2em;
     position: relative; }
     .aui #heading .site-title {
       font-size: 26px; }
+      .aui #heading .site-title img {
+        width: 35px; }
   .aui #navigation {
     display: none; }
     .aui #navigation.open {
@@ -2677,7 +2678,7 @@ body:first-of-type .portlet-content:hover .lfr-icon-actions .taglib-text {
               background-color: #5BBAE8; }
   .aui .portlet-dockbar {
     display: inline-block;
-    width: 90%; }
+    width: 100%; }
   .aui .signed-out #_145_navAddControlsNavbarBtn {
     display: none; } }
 .aui {
@@ -2724,7 +2725,7 @@ body:first-of-type .portlet-content:hover .lfr-icon-actions .taglib-text {
     border: 1px solid #DDD;
     color: #8D8D8D;
     font-weight: 200;
-    /* margin-bottom: 7px; */ }
+    margin-bottom: 7px; }
     .aui input[type="color"]:focus, .aui input[type="date"]:focus, .aui input[type="datetime"]:focus, .aui input[type="datetime-local"]:focus, .aui input[type="email"]:focus, .aui input[type="month"]:focus, .aui input[type="number"]:focus, .aui input[type="password"]:focus, .aui input[type="search"]:focus, .aui input[type="tel"]:focus, .aui input[type="text"]:focus, .aui input[type="time"]:focus, .aui input[type="url"]:focus, .aui input[type="week"]:focus, .aui select:focus, .aui textarea:focus, .aui .uneditable-input:focus {
       border-color: rgba(0, 172, 255, 0.8); }
   .aui input[type="submit"] {
@@ -2816,7 +2817,7 @@ body:first-of-type .portlet-content:hover .lfr-icon-actions .taglib-text {
     background: none;
     visibility: hidden; }
   .aui .dockbar-split.dockbar-ready .dockbar .navbar-inner {
-    visibility: hidden; }
+    visibility: visible; }
   .aui .dockbar.navbar .navbar-inner {
     min-height: 40px; }
   .aui .dockbar .navbar-inner {
@@ -3619,12 +3620,18 @@ body:first-of-type .portlet-content:hover .lfr-icon-actions .taglib-text {
       border-top-color: #FFF; }
   .aui #navigation .nav li.open > a {
     background-color: #A3A3A3;
-    color: #FFF; }
+    color: #FFF;
+    height: 50px;
+    line-height: 50px; }
   .aui #navigation .nav li.active > a {
-    background-color: #FF8000;
-    color: #FFF; }
+    background-color: #fd901d;
+    color: #FFF;
+    min-height: 50px;
+    line-height: 50px; }
   .aui #navigation .nav > li > a {
-    padding: 4px 15px 5px; }
+    min-height: 50px;
+    line-height: 50px;
+    padding: 0px 15px 0px; }
   .aui #navigation .nav .dropdown-menu {
     background: #333;
     border-width: 0;
@@ -3637,9 +3644,9 @@ body:first-of-type .portlet-content:hover .lfr-icon-actions .taglib-text {
         background: none;
         text-decoration: underline; }
   .aui #navigation .navbar-inner {
-    background: #0066CC;
+    background: #2a78c3;
     border-width: 0;
-    min-height: 36px; }
+    min-height: 50px; }
     .aui #navigation .navbar-inner li a {
       color: #FFF; }
   .aui .modify-pages .delete-tab {
@@ -3920,6 +3927,10 @@ body:first-of-type .portlet-content:hover .lfr-icon-actions .taglib-text {
 
 .copyright {
   margin: 20px 0px; }
+  .copyright span {
+    margin: 0px 30px; }
+  .copyright a {
+    color: white; }
 
 #heading {
   margin: 8px auto; }
@@ -3940,7 +3951,8 @@ body:first-of-type .portlet-content:hover .lfr-icon-actions .taglib-text {
 .nav-menu ul {
   list-style-type: none;
   padding-left: 0px;
-  margin: 0px; }
+  margin: 0px;
+  line-height: 50px; }
   .nav-menu ul li {
     padding: 0px;
     text-align: center;
@@ -3964,4 +3976,76 @@ body:first-of-type .portlet-content:hover .lfr-icon-actions .taglib-text {
 
 .right-logo {
   height: 60px; }
+
+/* other */
+html, body {
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  color: #707070;
+  font-family: "Microsoft YaHei" !important; }
+
+.favorite {
+  background-color: #f5f5f5;
+  height: 30px;
+  width: 100%;
+  line-height: 30px;
+  border-bottom-style: solid;
+  border-bottom-width: 1px; }
+
+.organizationImg {
+  width: 959px;
+  height: 100px;
+  margin: 0px auto;
+  height: auto; }
+
+.organizationImgSpan1 {
+  float: left;
+  height: 50%; }
+
+.organizationImgSpan2 {
+  float: right;
+  width: 300px; }
+
+.search {
+  width: 100px;
+  height: 30px;
+  line-height: 30px;
+  background-color: #2a79c4;
+  color: white;
+  position: relative;
+  left: 0px;
+  top: 10px; }
+
+.inputText {
+  height: 20px;
+  width: 200px;
+  position: relative;
+  top: 10px; }
+
+.searchButton {
+  position: relative;
+  left: -5px;
+  top: 7px;
+  width: 40px;
+  height: 30px; }
+
+.navigationDiv {
+  background-color: #2a78c3;
+  color: white;
+  height: 50px;
+  line-height: 50px;
+  clear: both;
+  width: 100%; }
+
+.copyRightDiv {
+  background-color: #2a79c4;
+  color: white;
+  height: 150px;
+  margin: 0px;
+  padding: 0px; }
+
+.middle {
+  width: 959px !important;
+  margin: 0 auto !important; }
 

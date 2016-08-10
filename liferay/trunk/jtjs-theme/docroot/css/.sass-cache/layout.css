@@ -4,15 +4,14 @@
 
 /* ---------- Wrapper ---------- */
 #wrapper {
-  padding: 0em 0em 0;
-  position: relative;
-  border-top: 4px #1d4ba2 solid; }
+  padding: 2em 5em 0;
+  position: relative; }
   @media (max-width: 767px) {
     #wrapper {
-      padding-left: 0em;
-      padding-right: 0em; } }
+      padding-left: 0.5em;
+      padding-right: 0.5em; } }
   @media (min-width: 768px) and (max-width: 979px) {
     #wrapper {
-      padding-left: 0em;
-      padding-right: 0em; } }
+      padding-left: 2em;
+      padding-right: 2em; } }
 
