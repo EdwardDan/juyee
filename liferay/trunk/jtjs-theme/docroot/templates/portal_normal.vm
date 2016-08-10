@@ -29,13 +29,15 @@
 $theme.include($body_top_include)
 
 <div class="favorite">
-    <span style="position: relative;left: 80%">收藏本站</span>
+    <span style="position: relative;left: 80%"><a href ="#"  onClick ="javascript:window.external.AddFavorite(document.URL,document.title);return false" rel="sidebar">收藏本站</a></span>
 </div>
 
 <header id="banner" role="banner">
     <div class="organizationImg">
     <span class="organizationImgSpan1">
+    <a class="$logo_css_class" href="$site_default_url" title="#language_format ("go-to-x", [$site_name])">
         <img src="$images_folder/head.png" width="420px" height="120px">
+        </a>
     </span>
     <span class="organizationImgSpan2">
     <div class="search" align="center">
@@ -56,7 +58,7 @@ $theme.include($body_top_include)
     </div>
 </header>
 
-<div class="container" id="content" style="position: relative;top: 50px;width: 959px">
+<div class="container" id="content" style="position: relative;top: 50px;min-width: 959px">
     #if ($selectable)
     $theme.include($content_include)
     #else

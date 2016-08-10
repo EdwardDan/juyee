@@ -1434,7 +1434,10 @@ html, body {
   width: 100%;
   line-height: 30px;
   border-bottom-style: solid;
-  border-bottom-width: 1px; }
+  border-bottom-width: 1px;
+  min-width: 960px; }
+  .favorite a {
+    color: #707070; }
 
 .organizationImg {
   width: 959px;
@@ -1479,16 +1482,18 @@ html, body {
   height: 50px;
   line-height: 50px;
   clear: both;
-  width: 100%; }
+  width: 100%;
+  min-width: 960px; }
 
 .copyRightDiv {
   background-color: #2a79c4;
   color: white;
   height: 150px;
   margin: 0px;
-  padding: 0px; }
+  padding: 0px;
+  min-width: 960px; }
 
 .middle {
-  width: 800px !important;
-  margin: 0 auto !important; }
+  max-width: 800px;
+  margin: 0 auto; }
 
