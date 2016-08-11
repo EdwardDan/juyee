@@ -1,5 +1,7 @@
 package com.justonetech.proj.approval.vo;
 
+import java.util.List;
+
 public class ConstructionPermitMaterial {
 	
 	private long id;//id
@@ -10,8 +12,22 @@ public class ConstructionPermitMaterial {
 	private String auditReq;//审核要求
 	private String auditReqGreen;//绿色审核要求
 	private int yjNum;//应交份数
-	
-	
+	private int realPostNum;//实交份数
+	private String  dlFileEntryIds;//附件ids
+	private List<String>filePaths;  //附件路径
+
+	public List<String> getFilePaths() {
+		return filePaths;
+	}
+	public void setFilePaths(List<String> filePaths) {
+		this.filePaths = filePaths;
+	}
+	public String getDlFileEntryIds() {
+		return dlFileEntryIds;
+	}
+	public void setDlFileEntryIds(String dlFileEntryIds) {
+		this.dlFileEntryIds = dlFileEntryIds;
+	}
 	public long getId() {
 		return id;
 	}
@@ -60,6 +76,19 @@ public class ConstructionPermitMaterial {
 	}
 	public void setYjNum(int yjNum) {
 		this.yjNum = yjNum;
+	}
+	public int getRealPostNum() {
+		return realPostNum;
+	}
+	public void setRealPostNum(int realPostNum) {
+		this.realPostNum = realPostNum;
+	}
+	@Override
+	public String toString() {
+		return "ConstructionPermitMaterial [id=" + id + ", dictionaryId=" + dictionaryId + ", type=" + type
+				+ ", sortNo=" + sortNo + ", materialName=" + materialName + ", auditReq=" + auditReq
+				+ ", auditReqGreen=" + auditReqGreen + ", yjNum=" + yjNum + ", realPostNum=" + realPostNum
+				+ ", dlFileEntryIds=" + dlFileEntryIds + "]";
 	}
 
 	
