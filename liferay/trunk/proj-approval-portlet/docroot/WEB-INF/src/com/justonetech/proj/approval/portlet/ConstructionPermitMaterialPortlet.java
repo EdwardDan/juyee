@@ -155,7 +155,5 @@ public class ConstructionPermitMaterialPortlet extends MVCPortlet {
 				actionRequest.setAttribute("constructionPermitMaterial", constructionPermitMaterial);
 			}
 		}
-
-	}
-	
+	}	
 }

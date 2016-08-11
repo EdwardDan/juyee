@@ -1,6 +1,8 @@
 package com.justonetech.proj.approval.portlet;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -17,10 +19,19 @@ import javax.portlet.ActionResponse;
 import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+import javax.portlet.ResourceRequest;
+import javax.portlet.ResourceResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.http.entity.FileEntity;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.justonetech.proj.approval.vo.ConstructionPermitApplication;
+import com.justonetech.proj.approval.vo.ConstructionPermitMaterial;
+import com.justonetech.projApproval.NoSuchConstructionParticipantUnitsException;
+import com.justonetech.projApproval.NoSuchConstructionUnitProjectException;
 import com.justonetech.projApproval.model.ConstructionParticipantUnits;
 import com.justonetech.projApproval.model.ConstructionPermit;
 import com.justonetech.projApproval.model.ConstructionPermitClp;
@@ -36,15 +47,29 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.repository.model.FileEntry;
+import com.liferay.portal.kernel.servlet.ServletResponseUtil;
+import com.liferay.portal.kernel.upload.UploadPortletRequest;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.DateUtil;
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.documentlibrary.model.DLFileEntryTypeConstants;
+import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
+import com.sun.org.apache.bcel.internal.generic.NEW;
 
 /**
  * Portlet implementation class ConstructionPermitApplicationPortlet
@@ -53,6 +78,98 @@ public class ConstructionPermitApplicationPortlet extends MVCPortlet {
 	private static Log log = LogFactoryUtil.getLog(ConstructionPermitApplicationPortlet.class);
 	private static String dateFormatPattern = PropsUtil.get("default.date.format.pattern");
 	private static String timeFormatPattern = PropsUtil.get("default.time.format.pattern");
+
+	public void testFile(ActionRequest request, ActionResponse response) throws PortalException, SystemException,
+			IOException {
+		UploadPortletRequest uploadPortletRequest = PortalUtil.getUploadPortletRequest(request);
+		String[] fileSourceNames = uploadPortletRequest.getFileNames("photo");
+		File[] files = uploadPortletRequest.getFiles("photo");
+		/*InputStream[] streams = uploadPortletRequest.getFilesAsStream("photo");*/
+		
+
+		System.out.println(Arrays.asList(files)); 
+		User user = PortalUtil.getUser(request);
+		long userId = user.getUserId();
+		Long groupId = user.getGroupId();
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(ConstructionPermit.class.getName(), request);
+		Long folderId = DLFileEntryTypeConstants.FILE_ENTRY_TYPE_ID_BASIC_DOCUMENT;
+		for (int i = 0; i < fileSourceNames.length; i++) {
+			byte[] bytes=FileUtil.getBytes(files[i]);
+			System.out.println(bytes.length);
+			Date date = new Date();
+			String title = DateUtil.getDate(date, "yyyy-MM-dd hh-mm-ss", Locale.CHINA) + fileSourceNames[i];
+			System.out.println(title);
+//			FileEntry fileEntry = DLAppLocalServiceUtil.addFileEntry(userId, groupId, folderId, fileSourceNames[i],
+//					MimeTypesUtil.getContentType(fileSourceNames[i]), title, null, null, bytes, serviceContext);
+
+		}
+	}
+
+	@Override
+	public void serveResource(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException,
+			PortletException {
+		// TODO Auto-generated method stub
+		String resourceId = resourceRequest.getResourceID();
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(resourceRequest);
+		HttpServletResponse response = PortalUtil.getHttpServletResponse(resourceResponse);
+		try {
+			DLAppLocalServiceUtil.deleteFileEntry(26548);
+		} catch (PortalException | SystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		/*
+		 * String filePath = ""; try { FileEntry fileEntry =
+		 * DLAppLocalServiceUtil.getFileEntry(25809l); filePath =
+		 * getFilePath(fileEntry); System.out.println(filePath); } catch
+		 * (PortalException e) { // TODO Auto-generated catch block
+		 * e.printStackTrace(); } catch (SystemException e) { // TODO
+		 * Auto-generated catch block e.printStackTrace(); }
+		 * 
+		 * // File file = new File("d:\\系统字典要点.txt"); File file = new File(
+		 * "/documents/20201/0/11+-+%E5%89%AF%E6%9C%AC.txt/5cf4de78-1d26-49b7-9502-a79327f57c02?version=1.0&download=true"
+		 * ); byte[] bytes = FileUtil.getBytes(file);
+		 * ServletResponseUtil.sendFile(request, response, "test.txt", bytes,
+		 * ContentTypes.APPLICATION_OCTET_STREAM);
+		 */
+
+		super.serveResource(resourceRequest, resourceResponse);
+	}
+
+	// 文件上传测试
+
+	public List<FileEntry> uploadFileToDest(ActionRequest request, String[] fileSourceNames, InputStream[] streams)
+			throws PortalException, SystemException, IOException {
+		User user = PortalUtil.getUser(request);
+		long userId = user.getUserId();
+		Long groupId = user.getGroupId();
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(ConstructionPermit.class.getName(), request);
+		Long folderId = DLFileEntryTypeConstants.FILE_ENTRY_TYPE_ID_BASIC_DOCUMENT;
+		List<FileEntry> fileEntryList = new ArrayList<FileEntry>();
+
+		if (fileSourceNames != null && fileSourceNames.length > 0 && streams.length > 0 && streams != null) {
+			for (int i = 0; i < fileSourceNames.length; i++) {
+				byte[] bytes = FileUtil.getBytes(streams[i]);
+
+				String title = DateUtil.getDate(new Date(), "yyyy-MM-dd hh-mm-ss", Locale.CHINA) + fileSourceNames[i];
+				FileEntry fileEntry = DLAppLocalServiceUtil.addFileEntry(userId, groupId, folderId, fileSourceNames[i],
+						MimeTypesUtil.getContentType(fileSourceNames[i]), title, null, null, bytes, serviceContext);
+				fileEntryList.add(fileEntry);
+			}
+		}
+		return fileEntryList;
+	}
+
+	public static String getFilePath(FileEntry fileEntry) {
+		if (null != fileEntry) {
+			return "/documents/" + fileEntry.getGroupId() + "/" + fileEntry.getFolderId() + "/" + fileEntry.getTitle()
+					+ "/" + fileEntry.getUuid();
+		} else {
+			// 如有需要，此处可以定义一个默认图片
+			return StringPool.BLANK;
+		}
+	}
 
 	// list
 	@Override
@@ -102,17 +219,23 @@ public class ConstructionPermitApplicationPortlet extends MVCPortlet {
 				permitApplication = JSONArray.parseObject(otherInfo, ConstructionPermitApplication.class);
 			}
 			// 取出参建单位信息
-						constructionParticipantUnitsList = ConstructionParticipantUnitsLocalServiceUtil
-								.findByConstructionPermitId(constructionPermitId);
-						// 取出单位工程信息
-						constructionUnitProjects = ConstructionUnitProjectLocalServiceUtil
-								.findByConstructionPermitId(constructionPermitId);
+			constructionParticipantUnitsList = ConstructionParticipantUnitsLocalServiceUtil
+					.findByConstructionPermitId(constructionPermitId);
+			// 取出单位工程信息
+			constructionUnitProjects = ConstructionUnitProjectLocalServiceUtil
+					.findByConstructionPermitId(constructionPermitId);
 		}
 		// 找到该申请的项目类型
 		long projType = constructionPermit.getProjType();
 		if (Validator.isNotNull(projType)) {
 			dictionary = DictionaryLocalServiceUtil.getDictionary(projType);
 		}
+
+		// 附件的信息
+		String json = constructionPermit.getApplyMaterial();
+		List<ConstructionPermitMaterial> materials = JSON.parseArray(json, ConstructionPermitMaterial.class);
+
+		request.setAttribute("materials", materials);
 		request.setAttribute("constructionParticipantUnitsS", constructionParticipantUnitsList);
 		request.setAttribute("constructionUnitProjects", constructionUnitProjects);
 		request.setAttribute("permitApplication", permitApplication);
@@ -144,10 +267,20 @@ public class ConstructionPermitApplicationPortlet extends MVCPortlet {
 					.findByConstructionPermitId(constructionPermitId);
 		}
 		// 找到该申请的项目类型
+		String customContent = "";
 		long projType = constructionPermit.getProjType();
 		if (Validator.isNotNull(projType)) {
 			dictionary = DictionaryLocalServiceUtil.getDictionary(projType);
+			customContent = dictionary.getCustomContent();
 		}
+
+		String json = constructionPermit.getApplyMaterial();
+		if (Validator.isNull(json)) {
+			json = customContent;
+		}
+		List<ConstructionPermitMaterial> materials = JSON.parseArray(json, ConstructionPermitMaterial.class);
+
+		request.setAttribute("materials", materials);
 		request.setAttribute("permitApplication", permitApplication);
 		request.setAttribute("constructionPermit", constructionPermit);
 		request.setAttribute("constructionParticipantUnitsS", constructionParticipantUnitsList);
@@ -157,7 +290,7 @@ public class ConstructionPermitApplicationPortlet extends MVCPortlet {
 
 	// 保存
 	public void saveConstructionPermit(ActionRequest request, ActionResponse response) throws SystemException,
-			PortalException, ParseException {
+			PortalException, ParseException, IOException {
 
 		// 获取基本信息
 		long constructionPermitId = ParamUtil.getLong(request, "constructionPermitId", 0);
@@ -311,9 +444,11 @@ public class ConstructionPermitApplicationPortlet extends MVCPortlet {
 		String[] unitProjectNames = request.getParameterValues("unitProjectName");
 		String[] constructionContents = request.getParameterValues("constructionContent");
 
+		Integer statusProxy = -1;
 		// 保存基本信息
 		ConstructionPermit constructionPermit = null;
 		if (constructionPermitId == 0) {
+
 			constructionPermitId = CounterLocalServiceUtil.increment();
 			constructionPermit = ConstructionPermitLocalServiceUtil.createConstructionPermit(constructionPermitId);
 			constructionPermit.setCreateTime(new Date());
@@ -323,6 +458,7 @@ public class ConstructionPermitApplicationPortlet extends MVCPortlet {
 					.findByConstructionPermitId(constructionPermitId);
 			constructionUnitProjectList = ConstructionUnitProjectLocalServiceUtil
 					.findByConstructionPermitId(constructionPermitId);
+			statusProxy = constructionPermit.getStatus();
 		}
 
 		User user = PortalUtil.getUser(request);
@@ -367,15 +503,75 @@ public class ConstructionPermitApplicationPortlet extends MVCPortlet {
 		constructionPermit.setPlanEndDate(planEndDate);
 		constructionPermit.setWorkSituation(workSituation);
 		constructionPermit.setModifiedTime(new Date());
-
 		// 保存扩展信息
 		constructionPermit.setOtherInfo(otherInfoJson);
-		ConstructionPermitLocalServiceUtil.updateConstructionPermit(constructionPermit);
 
+		if (statusProxy >= 0) {
+			System.out.println("0");
+			// 申请材料的信息
+			Dictionary channelDictionary = DictionaryLocalServiceUtil.findByCode("ProjectType1");
+			String jsonString = channelDictionary.getCustomContent();
+			List<ConstructionPermitMaterial> materials = JSON.parseArray(jsonString, ConstructionPermitMaterial.class);
+			List<ConstructionPermitMaterial> applyMaterials = new ArrayList<ConstructionPermitMaterial>();
+			for (ConstructionPermitMaterial material : materials) {
+				long type = material.getType();
+
+				Dictionary materialType = DictionaryLocalServiceUtil.getDictionary(type);
+
+				if (materialType.getCode().equals("apply")) {
+					applyMaterials.add(material);
+				}
+			}
+
+			// 保存附件信息
+			// 1.保存附件到数据库表和本地文档及保存实交份数信息
+			// 得到liferay的api
+			UploadPortletRequest uploadPortletRequest = PortalUtil.getUploadPortletRequest(request);
+			// 得到实交份数
+			String[] realPostNums = ParamUtil.getParameterValues(request, "realPostNum");
+			for (ConstructionPermitMaterial applyMaterial : applyMaterials) {
+				System.out.println("2");
+				List<FileEntry> fileEntryList = null;
+				InputStream[] streams = null;
+				String[] fileSourceNames = null;
+				String fileEntryIds = "";
+				streams = uploadPortletRequest.getFilesAsStream("applyMaterial" + applyMaterial.getSortNo());
+				fileSourceNames = uploadPortletRequest.getFileNames("applyMaterial" + applyMaterial.getSortNo());
+				// 从上面两个方法获取的files和fileSourceNames如果没有上传附件，长度是1，而不是0
+				if (fileSourceNames != null && streams != null) {
+
+					if (!((streams.length <= 1 && streams[0] != null) || (fileSourceNames.length <= 1 && fileSourceNames[0] == ""))) {
+						fileEntryList = uploadFileToDest(request, fileSourceNames, streams);
+					}
+				}
+				// 生成文件的ids和文件的路径
+				List<String> filePaths = new ArrayList<String>();
+				if (Validator.isNotNull(fileEntryList)) {
+					for (FileEntry fileEntry : fileEntryList) {
+						fileEntryIds += fileEntry.getFileEntryId() + ",";
+						filePaths.add(getFilePath(fileEntry));
+					}
+					fileEntryIds = fileEntryIds.substring(0, fileEntryIds.length() - 1);
+				}
+				// 保存附件的路径
+				applyMaterial.setFilePaths(filePaths);
+
+				// 保存附件的ids
+				applyMaterial.setDlFileEntryIds(fileEntryIds);
+				// 保存实交份数
+				applyMaterial.setRealPostNum(Integer.valueOf(realPostNums[applyMaterial.getSortNo() - 1]));
+			}
+
+			// 2.保存附件的fileEntryId到施工许可申请的applyMaterial字段中
+			String applyMaterialJson = "";
+			applyMaterialJson = JSON.toJSONString(applyMaterials);
+			constructionPermit.setApplyMaterial(applyMaterialJson);
+		}
+		ConstructionPermitLocalServiceUtil.updateConstructionPermit(constructionPermit);
 		// 保存参建单位信息和单位工程信息
 		// 判断对应的constructionPermitId是否有参建单位信息和单位工程信息，如果有信息，在保存新信息之前删除掉旧的信息
 
-		// 删除参建单位信息
+		// 删除参建单位信息s
 		if (null != constructionParticipantUnitsList && constructionParticipantUnitsList.size() > 0) {
 			for (ConstructionParticipantUnits constructionParticipantUnits : constructionParticipantUnitsList) {
 				ConstructionParticipantUnitsLocalServiceUtil
@@ -443,10 +639,33 @@ public class ConstructionPermitApplicationPortlet extends MVCPortlet {
 	}
 
 	// 删除
-	public void deleteConstructionPermits(ActionRequest request, ActionResponse response) {
+	public void deleteConstructionPermits(ActionRequest request, ActionResponse response)
+			throws NoSuchConstructionParticipantUnitsException, NoSuchConstructionUnitProjectException,
+			NumberFormatException, SystemException {
 
 		String deleteConstructionPermitIds = ParamUtil.getString(request, "constructionPermitIds");
 		String[] constructionPermitIds = deleteConstructionPermitIds.split(",");
+		for (String constructionPermitId : constructionPermitIds) {
+			if (Validator.isNotNull(constructionPermitId)) {
+				// 删除参建单位及负责人信息
+				List<ConstructionParticipantUnits> constructionParticipantUnitsList = ConstructionParticipantUnitsLocalServiceUtil
+						.findByConstructionPermitId(Long.valueOf(constructionPermitId));
+				if (Validator.isNotNull(constructionParticipantUnitsList)) {
+					for (ConstructionParticipantUnits constructionParticipantUnits : constructionParticipantUnitsList) {
+						ConstructionParticipantUnitsLocalServiceUtil
+								.deleteConstructionParticipantUnits(constructionParticipantUnits);
+					}
+				}
+				// 删除单位工程信息
+				List<ConstructionUnitProject> constructionUnitProjectList = ConstructionUnitProjectLocalServiceUtil
+						.findByConstructionPermitId(Long.valueOf(constructionPermitId));
+				if (Validator.isNotNull(constructionUnitProjectList)) {
+					for (ConstructionUnitProject constructionUnitProject : constructionUnitProjectList) {
+						ConstructionUnitProjectLocalServiceUtil.deleteConstructionUnitProject(constructionUnitProject);
+					}
+				}
+			}
+		}
 		ConstructionPermitLocalServiceUtil.deleteConstructionPermits(constructionPermitIds);
 	}
 
