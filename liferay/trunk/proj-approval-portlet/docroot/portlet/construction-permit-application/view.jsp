@@ -1,10 +1,47 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ include file="/common/init.jsp"%>
+
  <c:set var="contextPath"
 	value="${request.contextPath}/portlet/construction-permit-application" />
 
 <c:set var="namespace"
 	value="<%=renderResponse.getNamespace()%>" />
+
+
+<portlet:renderURL var="fileURL" windowState="pop_up">
+<portlet:param name="mvcPath" value="${contextPath}/NewFileUpLoad.jsp"/>
+</portlet:renderURL>
+  
+
+<aui:button value="新增"  onClick="newWindow('${fileURL}')" />
+
+<aui:script>
+//打开一个新窗口的方法
+	Liferay.provide(window, 'newWindow', function(url) {		
+		var instance = this;
+		Liferay.Util.openWindow({
+			dialog : {
+				centered : true,
+				width : 1000,
+				height : 800
+			},
+			 id:"popup",
+			title : '上传文件',
+			uri : url,
+			destroyOnClose : true
+		});
+	}, [ 'aui-dialog' ]);
+//关闭一个新窗口的方法
+Liferay.provide(window,'closeYourPopUp',
+            function(dialogId) {
+                var A = AUI();
+                var dialog = Liferay.Util.Window.getById(dialogId);
+                dialog.destroy();
+            },
+            ['liferay-util-window']
+    );
+</aui:script>
+
 
 <%
 	Dictionary projTypeDic = DictionaryLocalServiceUtil
@@ -77,12 +114,12 @@
 
 		</aui:nav>
 		<aui:nav>
-		<aui:nav-item dropdown="true" label="按状态查询">
+		<%-- <aui:nav-item dropdown="true" label="按状态查询">
 		<c:forEach items="<%=consPerStaQueryDics%>" var="consPerStaQuery">
 			<aui:nav-item   href='${viewURL}&${namespace}statusName=${consPerStaQuery.name}'			
 				 iconCssClass="icon-file" label="${consPerStaQuery.name}"/>			
 		</c:forEach>
-		</aui:nav-item>
+		</aui:nav-item> --%>
 		
 		</aui:nav>
 		
@@ -93,14 +130,26 @@
 		</aui:nav-bar-search>
 	</aui:nav-bar>
 	
-<!-- 删除功能 -->	
-	<aui:button-row>
-		<aui:button disabled="true" name="deleteConstructionPermitsBtn" value="删除" onClick='<%=renderResponse.getNamespace() + "deleteDictionaries();"%>' />
-	</aui:button-row> 
-	
+	<!-- 按状态查询 -->
+	<aui:row style="margin-bottom:-20px">
+		<aui:col span="12" >
+			<aui:select name="" label="按状态查询:" inlineField="true" inlineLabel="left">
+				<c:forEach items="<%=consPerStaQueryDics%>" var="consPerStaQuery">
+					<aui:option iconCssClass="icon-file"
+						label="${consPerStaQuery.name}">
+						<aui:a
+							href='${viewURL}&${namespace}statusName=${consPerStaQuery.name}' />
+					</aui:option>
+				</c:forEach>
+			</aui:select>
+			<!-- 删除功能 -->	
+			<aui:button inlineField="true" inlineLabel="right" disabled="true" name="deleteConstructionPermitsBtn" value="删除" onClick='<%=renderResponse.getNamespace() + "deleteDictionaries();"%>' />
+		</aui:col>
+	</aui:row>
+
 <!-- 页面展示 --> 
 
-	<liferay-ui:search-container emptyResultsMessage="没有找到代码。"  rowChecker="<%=new RowChecker(renderResponse)%>">
+	<liferay-ui:search-container emptyResultsMessage="没有找到施工许可申请信息"  rowChecker="<%=new RowChecker(renderResponse)%>">
 		<liferay-ui:search-container-results results="${constructionPermits}"
 			total="${constructionPermitsCount}">
 		</liferay-ui:search-container-results>

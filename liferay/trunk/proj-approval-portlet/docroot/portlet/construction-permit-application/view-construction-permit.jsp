@@ -1,6 +1,30 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ include file="/common/init.jsp"%>
 
+<%-- <%
+	String projectTypeCode="";
+	String projTypeName=ParamUtil.getString(request, "projTypeName");
+	Boolean pageType=false;
+	if("航道".equals(projTypeName)){
+		pageType=true;
+	}
+	if("公路".equals(projTypeName)){
+		projectTypeCode="ProjectType2";
+	}else if("港口设施".equals(projTypeName)){
+		projectTypeCode="ProjectType3";
+	}else if("市政基础设施-隧道".equals(projTypeName)){
+		projectTypeCode="ProjectType4";
+	}else if("市政基础设施-轨道".equals(projTypeName)){
+		projectTypeCode="ProjectType5";
+	}else if("市政基础设施-公交场站".equals(projTypeName)){
+		projectTypeCode="ProjectType6";
+	}else if("市政基础设施-城市道路".equals(projTypeName)){
+		projectTypeCode="ProjectType7";
+	}
+	renderRequest.setAttribute("projectTypeCode", projectTypeCode);
+%> --%>
+
+
 
 <c:set var="contextPath"
 	value="${request.contextPath}/portlet/construction-permit-application" />

@@ -8,7 +8,7 @@
 		<td style="width: 18%; text-align: center;" nowrap>合同信息报送编号</td>
 		<td style="width: 18%; text-align: center;" nowrap>单位类型</td>
 		<td style="width: 18%; text-align: center;" nowrap>单位名称</td>
-		<td style="width: 16%; text-align: center;" nowrap>单位负责人</td>
+		<td style="width: 16%; text-align: center;" nowrap>项目负责人</td>
 		<td style="width: 20%; text-align: center;" nowrap>电话号码</td>
 
 	</tr>

@@ -1,6 +1,30 @@
 <%@ page contentType="text/html;charset=utf-8"%>
 <%@ include file="/common/init.jsp"%>
 
+<%
+	String projectTypeCode="";
+	String projTypeName=ParamUtil.getString(request, "projTypeName");
+	Boolean pageType=false;
+	if("航道".equals(projTypeName)){
+		pageType=true;
+	}
+	if("公路".equals(projTypeName)){
+		projectTypeCode="ProjectType2";
+	}else if("港口设施".equals(projTypeName)){
+		projectTypeCode="ProjectType3";
+	}else if("市政基础设施-隧道".equals(projTypeName)){
+		projectTypeCode="ProjectType4";
+	}else if("市政基础设施-轨道".equals(projTypeName)){
+		projectTypeCode="ProjectType5";
+	}else if("市政基础设施-公交场站".equals(projTypeName)){
+		projectTypeCode="ProjectType6";
+	}else if("市政基础设施-城市道路".equals(projTypeName)){
+		projectTypeCode="ProjectType7";
+	}
+	renderRequest.setAttribute("projectTypeCode", projectTypeCode);
+%>
+
+
 
 <c:set var="contextPath"
 	value="${request.contextPath}/portlet/construction-permit-application" />
@@ -13,7 +37,11 @@
 
 
 <!--从view.jsp跳转来 如果选择航道 页面为edit-projInfoExt-tab.jsp-->
-<c:if test='<%=ParamUtil.getBoolean(request, "pageType")%>'>
+<!--原来的写法 -->
+<%-- <c:if test='<%=ParamUtil.getBoolean(request, "pageType")%>'>
+	<c:set var="pagePath" value="${contextPath}/edit-channel-basicInfo-tab.jsp" />
+</c:if> --%>
+<c:if test="<%=pageType%>">
 	<c:set var="pagePath" value="${contextPath}/edit-channel-basicInfo-tab.jsp" />
 </c:if>
 
@@ -51,7 +79,7 @@
 	backURL="${viewURL}" />
 
 
-<aui:form action="${editApplicationURL}">
+<aui:form action="${editApplicationURL}" enctype="multipart/form-data" method="post">
 	<aui:input name="projType" type="hidden" value="${projType}"></aui:input>
 	<aui:input name="constructionPermitId" type="hidden" value="${constructionPermit.constructionPermitId}"></aui:input>
 
