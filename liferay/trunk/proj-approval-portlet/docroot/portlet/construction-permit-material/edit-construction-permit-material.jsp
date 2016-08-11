@@ -58,10 +58,10 @@
 		</aui:input>
 		<c:if test="${type==submit}">
 			<aui:input type="text" name="auditReq" label="审核要求">
-				<aui:validator name="required" errorMessage="请输入审核要求！" />
+				<%-- <aui:validator name="required" errorMessage="请输入审核要求！" /> --%>
 			</aui:input>
 			<aui:input type="text" name="auditReqGreen" label="绿色审核要求">
-				<aui:validator name="required" errorMessage="请输入绿色审核要求！" />
+				<%-- <aui:validator name="required" errorMessage="请输入绿色审核要求！" /> --%>
 			</aui:input>
 		</c:if>
 		<c:if test="${type==apply||type==''}">
