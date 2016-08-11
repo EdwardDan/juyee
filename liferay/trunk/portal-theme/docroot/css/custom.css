@@ -823,9 +823,9 @@ html, body {
     border-bottom-style: solid;
     border-bottom-width: 1px;
     min-width: 960px;
-a{
-    color: #707070;
-}
+	a{
+    	color: #707070;
+	}
 }
 
 .organizationImg {
@@ -893,4 +893,9 @@ a{
 .middle{
     max-width: 800px;
     margin: 0 auto;
+}
+
+.row-fluid{
+	width: 960px !important;
+	margin: auto !important;
 }

@@ -1497,3 +1497,7 @@ html, body {
   max-width: 800px;
   margin: 0 auto; }
 
+.row-fluid {
+  width: 960px !important;
+  margin: auto !important; }
+
