@@ -1378,41 +1378,6 @@
 #heading {
   margin: 8px auto; }
 
-.nav-menu h2 {
-  text-align: center;
-  /*width: 267px;*/
-  border: 1px #c5d1e8 solid;
-  height: 62px;
-  line-height: 62px;
-  border-radius: 4px;
-  margin-bottom: 10px;
-  font-size: 18px;
-  background: url(@theme_image_path@/botton_bg.png); }
-  .nav-menu h2 a {
-    color: #1d4ba2;
-    font-weight: bold; }
-.nav-menu ul {
-  list-style-type: none;
-  padding-left: 0px;
-  margin: 0px;
-  line-height: 50px; }
-  .nav-menu ul li {
-    padding: 0px;
-    text-align: center;
-    /*width: 267px;*/
-    border: 1px #c5d1e8 solid;
-    height: 45px;
-    line-height: 45px;
-    font-size: 18px;
-    border-radius: 4px;
-    margin-bottom: 10px; }
-    .nav-menu ul li a {
-      color: #1d4ba2; }
-  .nav-menu ul .selected {
-    border: 1px #1d4ba2 solid;
-    color: #fff !important;
-    background: #1d4ba2; }
-
 .top-link {
   height: 40px;
   line-height: 40px; }
@@ -1420,7 +1385,7 @@
 .right-logo {
   height: 60px; }
 
-/* other */
+/* ---------- other ---------- */
 html, body {
   margin: 0;
   padding: 0;
@@ -1431,7 +1396,6 @@ html, body {
 .favorite {
   background-color: #f5f5f5;
   height: 30px;
-  width: 100%;
   line-height: 30px;
   border-bottom-style: solid;
   border-bottom-width: 1px;
@@ -1482,7 +1446,6 @@ html, body {
   height: 50px;
   line-height: 50px;
   clear: both;
-  width: 100%;
   min-width: 960px; }
 
 .copyRightDiv {
@@ -1500,4 +1463,41 @@ html, body {
 .row-fluid {
   width: 960px !important;
   margin: auto !important; }
+
+/* ---------- container ---------- */
+div.nav-menu {
+  border-left: 1px solid #dbdbdb;
+  border-right: 1px solid #dbdbdb;
+  border-bottom: 1px solid #dbdbdb; }
+  div.nav-menu h2 {
+    border-top: 4px solid #fd901d;
+    border-bottom: 1px solid #dbdbdb;
+    background-color: #f5f5f5;
+    height: 45px;
+    padding-left: 10px; }
+    div.nav-menu h2 a {
+      font-family: "Microsoft YaHei UI";
+      font-size: 20px;
+      color: #515151;
+      text-decoration: none;
+      font-weight: 700; }
+  div.nav-menu ul {
+    list-style-type: none;
+    padding-right: 10px;
+    padding-left: 10px;
+    margin: 0px; }
+    div.nav-menu ul li {
+      margin-top: 10px;
+      margin-bottom: 10px;
+      padding-top: 10px;
+      text-align: center;
+      background-color: #f5f5f5;
+      height: 35px;
+      border-radius: 5px; }
+      div.nav-menu ul li a {
+        text-decoration: none;
+        font-family: "Microsoft YaHei UI";
+        color: #515151; }
+    div.nav-menu ul .selected {
+      background-color: #cbe5ff; }
 
