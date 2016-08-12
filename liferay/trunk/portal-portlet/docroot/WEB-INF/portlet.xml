@@ -78,4 +78,45 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	
+	<portlet>
+		<portlet-name>management-center-login</portlet-name>
+		<display-name>管理中心登录</display-name>
+		<portlet-class>
+			com.justonetech.portal.portlet.CustomLoginPortlet
+		</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/portlet/custom-login/view.jsp</value>
+		</init-param>
+		<init-param>
+			<name>config-template</name>
+			<value>/portlet/custom-login/config.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+			<portlet-mode>config</portlet-mode>
+		</supports>
+		<portlet-info>
+			<title>管理中心登录</title>
+			<short-title>Management Center Login</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+
+	
 </portlet-app>
