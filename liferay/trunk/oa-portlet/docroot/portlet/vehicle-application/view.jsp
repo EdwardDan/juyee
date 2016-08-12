@@ -10,7 +10,7 @@
 <%@ page import="com.liferay.portal.kernel.exception.SystemException" %>
 <%@ page import="com.liferay.portal.kernel.workflow.WorkflowException" %>
 <%@ page import="com.liferay.portal.kernel.dao.search.ResultRow" %>
-<c:set var="contextPath"
+<c:set var="contentPath"
 	value="${request.contextPath}/portlet/vehicle-application" />
 <portlet:renderURL var="viewURL" />
 <portlet:actionURL var="deleteVehicleApplicationsURL" name="deleteVehicleApplications">
@@ -54,7 +54,7 @@ try {
 		<aui:nav>
 			<portlet:renderURL var="addVehicleApplicationURL">
 				<portlet:param name="mvcPath"
-					value="${contextPath }/edit-vehicle-aplication.jsp" />
+					value="${contentPath }/edit-vehicle-aplication.jsp" />
 			</portlet:renderURL>
 			<c:if test="${!fn:contains(roles,'20162')}">
 			<aui:nav-item href="<%=addVehicleApplicationURL%>" iconCssClass="icon-plus"
@@ -198,7 +198,7 @@ try {
 				
 					<portlet:actionURL var="editVehicleApplicationURL" name="editVehicleApplication">
 						<portlet:param name="vehicleApplicationId" value="${vehicleApplication.vehicleApplicationId}" />
-						<portlet:param name="mvcPath" value="${contextPath }/edit-vehicle-aplication.jsp" />
+						<portlet:param name="mvcPath" value="${contentPath }/edit-vehicle-aplication.jsp" />
 					</portlet:actionURL>
 				 <portlet:actionURL var="viewVehicleApplicationURL" name="editVehicleApplication">
 						<portlet:param name="vehicleApplicationId" value="${vehicleApplication.vehicleApplicationId}" />
