@@ -49,11 +49,11 @@ $theme.include($body_top_include)
     <div class="organizationImg">
     <span class="organizationImgSpan1">
     <a class="$logo_css_class" href="$site_default_url" title="#language_format ("go-to-x", [$site_name])">
-        <img src="$images_folder/head.png" width="420px" height="120px">
+        <img height="120%" src="$site_logo" width="120%">
         </a>
     </span>
     <span class="organizationImgSpan2">
-    <div class="search" align="center">
+    <div class="searchImg" align="center">
         全站搜索
     </div>
         <form method="get" action="">
@@ -69,9 +69,11 @@ $theme.include($body_top_include)
         #parse ("$full_templates_path/navigation.vm")
         #end
     </div>
+    <nav id="breadcrumbs">#breadcrumbs()</nav>
 </header>
 
-<div class="container" id="content" style="position: relative;top: 50px;min-width: 959px">
+<div id="bodyBackGround">
+<div class="container middle2" id="content" >
     #if ($selectable)
     $theme.include($content_include)
     #else
@@ -82,17 +84,31 @@ $theme.include($body_top_include)
     $theme.wrapPortlet("portlet.vm", $content_include)
     #end
 </div>
-
+</div>
 
 <footer id="footer" role="contentinfo">
-    <div class="text-center">
-        友情链接
-    </div>
     <div class="copyRightDiv">
         <div class="text-center copyright">
             <br>
-            <span><a href="">首页</a></span>|<span><a href="">工作动态</a></span>|<span><a href="">信息公开</a></span>|<span><a
-                href="">网上办事</a></span>|<span><a href="">政策法规</a></span>|<span><a href="">互动平台</a></span><br><br>
+            #foreach ($nav_item in $nav_items)
+				#set ($nav_item_attr_selected="")
+				#set ($nav_item_attr_has_popup="")
+				#set ($nav_item_caret="")
+				#set ($nav_item_css_class="lfr-nav-item")
+				#set ($nav_item_link_css_class="")
+
+				#if ($nav_item.isSelected())
+					#set ($nav_item_attr_selected="aria-selected='true'")
+					#set ($nav_item_css_class="$nav_item_css_class selected active")
+				#end
+				<a aria-labelledby="layout_$nav_item.getLayoutId()" $nav_item_attr_has_popup class="$nav_item_link_css_class" href="$nav_item.getURL()" $nav_item.getTarget() role="menuitem">
+					<span>$nav_item.icon() $nav_item.getName() $nav_item_caret</span>
+				</a>
+				<span class="verticalBar">|</span>
+			#end
+        </div>
+        <br>
+        <div class="text-center copyright">
             @2016&nbsp上海市交通建设工程管理中心&nbsp&nbsp版权所有<br><br>
             沪ICP备&nbsp14011940号
         </div>

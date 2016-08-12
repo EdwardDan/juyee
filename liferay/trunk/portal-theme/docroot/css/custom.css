@@ -738,9 +738,9 @@ select{
 }
 
 .copyright{
-    margin:20px 0px;
+    margin:0px 0px;
 span{
-    margin : 0px 30px;
+    margin : 0px 20px;
 }
 a{
     color: white;
@@ -770,7 +770,7 @@ html, body {
     padding: 0;
     font-size: 14px;
     color: #707070;
-    font-family: "Microsoft YaHei" ! important;
+    font-family: Microsoft Yahei,arial,tahoma,\5b8b\4f53;
 }
 
 .favorite {
@@ -787,9 +787,10 @@ html, body {
 
 .organizationImg {
     width: 959px;
-    height: 100px;
+    height: 131px;
     margin: 0px auto;
-    height: auto;
+   	line-height:131px;
+    
 }
 
 .organizationImgSpan1 {
@@ -800,30 +801,32 @@ html, body {
 .organizationImgSpan2 {
     float: right;
     width: 300px;
+    height:131px;
 }
 
-.search {
+.searchImg {
     width: 100px;
     height: 30px;
     line-height: 30px;
     background-color: #2a79c4;
     color: white;
     position: relative;
-    left: 0px;
-    top: 10px
+    left: 38px;
+    top: 30px
 }
 
 .inputText {
     height: 20px;
     width: 200px;
     position: relative;
-    top: 10px
+    top: -20px;
+    left:38px;
 }
 
 .searchButton {
     position: relative;
-    left: -5px;
-    top: 7px;
+    left: 33px;
+    top: -24px;
     width: 40px;
     height: 30px
 }
@@ -847,16 +850,79 @@ html, body {
 }
 
 .middle{
-    max-width: 800px;
+    width:550px !important;
     margin: 0 auto;
 }
 
-.row-fluid{
+.middle2{
 	width: 960px !important;
-	margin: auto !important;
+	margin:0 auto !important;
 }
 
-/* ---------- container ---------- */
+#content{
+	min-width: 960px	
+}
+
+#bodyBackGround{
+	background-color: #faf9f9;
+}
+
+.verticalBar:last-child{ 
+	display:none;
+}
+
+#breadcrumbs {
+    margin-bottom: 0px !important;
+    background-color: #e9f7ff;
+    .breadcrumb{
+	width: 960px !important;
+	height:30px;
+	margin: 1px auto !important;
+	background-color: #e9f7ff;
+	line-height:30px;
+}
+}
+
+.portlet-borderless-container{
+	background:rgba(0,0,0,0) !important;
+}
+
+#column-1 {
+	
+    
+}
+
+#column-2{
+	
+	
+    
+}
+
+#column-3{
+	
+	
+    
+    
+}
+
+#column-4{
+	
+	
+    
+}
+
+#column-5{
+	
+	
+    
+}
+
+#column-6{
+	
+	
+}
+
+/* ---------- catalogue ---------- */
 div.nav-menu {
             border-left: 1px solid #dbdbdb;
             border-right: 1px solid #dbdbdb;
@@ -889,10 +955,12 @@ div.nav-menu {
             padding-top: 10px;
             text-align: center;
             background-color: #f5f5f5;
-            height: 35px;
             border-radius: 5px;
-       
+            height:auto !important;
+      
             a {
+            display:block;
+            height:35px;
             text-decoration: none;
             font-family: "Microsoft YaHei UI";
             color: #515151;
@@ -900,6 +968,9 @@ div.nav-menu {
         	}
         	.selected{
 			background-color:#cbe5ff;
+			a{
+				font-weight:100;
+			}
 			}
         }
 
