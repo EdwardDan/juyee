@@ -960,7 +960,8 @@ div.nav-menu {
       
             a {
             display:block;
-            height:35px;
+			height:35px !important;
+			border-radius:5px;
             text-decoration: none;
             font-family: "Microsoft YaHei UI";
             color: #515151;
@@ -973,5 +974,12 @@ div.nav-menu {
 			}
 			}
         }
+        .nav-menu ul.level-1 li a{
+        	font-size:16px;
+        }
+        .nav-menu ul.level-2 li a{
+        	font-size:16px;
+        }
+		
 
 }
