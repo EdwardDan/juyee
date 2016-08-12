@@ -2,7 +2,7 @@
 <!DOCTYPE liferay-portlet-app PUBLIC "-//Liferay//DTD Portlet Application 6.2.0//EN" "http://www.liferay.com/dtd/liferay-portlet-app_6_2_0.dtd">
 
 <liferay-portlet-app>
-	
+
 	<portlet>
 		<portlet-name>asset-viewer</portlet-name>
 		<icon>/icons/icon.png</icon>
@@ -12,6 +12,16 @@
 			/js/main.js
 		</footer-portlet-javascript>
 		<css-class-wrapper>asset-viewer-portlet</css-class-wrapper>
+	</portlet>
+	<portlet>
+		<portlet-name>custom-login</portlet-name>
+		<icon>/icons/icon.png</icon>
+		<configuration-action-class>com.justonetech.portal.portlet.CustomLoginConfigurationAction</configuration-action-class>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>custom-login-portlet</css-class-wrapper>
 	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
