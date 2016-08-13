@@ -770,7 +770,7 @@ html, body {
     padding: 0;
     font-size: 14px;
     color: #707070;
-    font-family: Microsoft Yahei,arial,tahoma,\5b8b\4f53;
+    font-family:"Hiragino Sans GB","Century Gothic",system, Arial, Verdana, Tahoma,"微软雅黑";
 }
 
 .favorite {
@@ -838,6 +838,7 @@ html, body {
     line-height: 50px;
     clear: both;
     min-width: 960px;
+    font-size: 16px;
 }
 
 .copyRightDiv {
@@ -850,7 +851,7 @@ html, body {
 }
 
 .middle{
-    width:550px !important;
+    width:730px !important;
     margin: 0 auto;
 }
 
@@ -863,7 +864,14 @@ html, body {
 	min-width: 960px	
 }
 
-#bodyBackGround{
+.syBackGround{
+	background-image: url('background.jpg') ;
+	background-repeat:no-repeat;
+	background-clip:content-box;
+	background-color: #faf9f9;
+}
+
+.backGround{
 	background-color: #faf9f9;
 }
 
@@ -884,42 +892,46 @@ html, body {
 }
 
 .portlet-borderless-container{
+	
+}
+
+.lfr-nav-item{
+	width:120px;
+}
+
+.portlet-borderless-container{
+	padding:0px !important;
+}
+
+.syc1{
+	margin-top:5px;
+	height:308px !important;
+}
+
+.syc2{
+	margin-top:5px;
+	margin-left:15px !important;
+	height:308px !important;
 	background:rgba(0,0,0,0) !important;
 }
 
-#column-1 {
-	
-    
+.syc3{
+	margin-top:55px !important;
+	width:337px !important;
+	height:262px !important;
 }
 
-#column-2{
-	
-	
-    
+.syc4{
+	margin-top:55px !important;
+	width:337px !important;
+	height:262px !important;
+	margin-left:10px !important;
 }
 
-#column-3{
-	
-	
-    
-    
-}
-
-#column-4{
-	
-	
-    
-}
-
-#column-5{
-	
-	
-    
-}
-
-#column-6{
-	
-	
+.syc5{
+	margin-top:55px !important;
+	width:266px !important;
+	margin-left:10px !important;
 }
 
 /* ---------- catalogue ---------- */

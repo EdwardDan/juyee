@@ -3948,7 +3948,7 @@ html, body {
   padding: 0;
   font-size: 14px;
   color: #707070;
-  font-family: Microsoft Yahei,arial,tahoma,\5b8b\4f53; }
+  font-family: "Hiragino Sans GB","Century Gothic",system, Arial, Verdana, Tahoma,"微软雅黑"; }
 
 .favorite {
   background-color: #f5f5f5;
@@ -4005,7 +4005,8 @@ html, body {
   height: 50px;
   line-height: 50px;
   clear: both;
-  min-width: 960px; }
+  min-width: 960px;
+  font-size: 16px; }
 
 .copyRightDiv {
   background-color: #2a79c4;
@@ -4016,7 +4017,7 @@ html, body {
   min-width: 960px; }
 
 .middle {
-  width: 550px !important;
+  width: 730px !important;
   margin: 0 auto; }
 
 .middle2 {
@@ -4026,7 +4027,13 @@ html, body {
 #content {
   min-width: 960px; }
 
-#bodyBackGround {
+.syBackGround {
+  background-image: url("@base_url@/css/background.jpg");
+  background-repeat: no-repeat;
+  background-clip: content-box;
+  background-color: #faf9f9; }
+
+.backGround {
   background-color: #faf9f9; }
 
 .verticalBar:last-child {
@@ -4042,8 +4049,37 @@ html, body {
     background-color: #e9f7ff;
     line-height: 30px; }
 
+.lfr-nav-item {
+  width: 120px; }
+
 .portlet-borderless-container {
+  padding: 0px !important; }
+
+.syc1 {
+  margin-top: 5px;
+  height: 308px !important; }
+
+.syc2 {
+  margin-top: 5px;
+  margin-left: 15px !important;
+  height: 308px !important;
   background: rgba(0, 0, 0, 0) !important; }
+
+.syc3 {
+  margin-top: 55px !important;
+  width: 337px !important;
+  height: 262px !important; }
+
+.syc4 {
+  margin-top: 55px !important;
+  width: 337px !important;
+  height: 262px !important;
+  margin-left: 10px !important; }
+
+.syc5 {
+  margin-top: 55px !important;
+  width: 266px !important;
+  margin-left: 10px !important; }
 
 /* ---------- catalogue ---------- */
 div.nav-menu {
@@ -4073,11 +4109,16 @@ div.nav-menu {
       padding-top: 10px;
       text-align: center;
       background-color: #f5f5f5;
-      border-radius: 5px; }
+      border-radius: 5px;
+      height: auto !important; }
       div.nav-menu ul li a {
+        display: block;
+        height: 35px;
         text-decoration: none;
         font-family: "Microsoft YaHei UI";
         color: #515151; }
     div.nav-menu ul .selected {
       background-color: #cbe5ff; }
+      div.nav-menu ul .selected a {
+        font-weight: 100; }
 
