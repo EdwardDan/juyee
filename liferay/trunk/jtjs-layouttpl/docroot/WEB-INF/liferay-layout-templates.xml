@@ -8,5 +8,10 @@
 			<wap-template-path>/jtjs.wap.tpl</wap-template-path>
 			<thumbnail-path>/jtjs.png</thumbnail-path>
 		</layout-template>
+		<layout-template id="portalindex" name="Portal-index">
+			<template-path>/portalindex.tpl</template-path>
+			<wap-template-path>/portalindex.wap.tpl</wap-template-path>
+			<thumbnail-path>/portalindex.png</thumbnail-path>
+		</layout-template>
 	</custom>
 </layout-templates>
