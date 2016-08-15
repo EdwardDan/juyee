@@ -51,7 +51,7 @@ public class ManagementCenterLoginPortlet extends MVCPortlet{
 		try {
 			List<User> userList = UserLocalServiceUtil.getUsers(-1, -1);
 
-			if (Validator.isNotNull(loginUser) && !loginUser.equals("ÇëÊäÈëÓÃ»§Ãû")) {
+			if (Validator.isNotNull(loginUser) && !loginUser.equals("è¯·è¾“å…¥ç”¨æˆ·å")) {
 				User defaultUser = null;
 				for (User user : userList) {
 					if (loginUser.equals(user.getEmailAddress())) {
@@ -73,15 +73,15 @@ public class ManagementCenterLoginPortlet extends MVCPortlet{
 					if (authResult == Authenticator.SUCCESS) {
 						loginState = true;
 					} else {
-						responseContent = "ÃÜÂë´íÎó£¡";
+						responseContent = "å¯†ç é”™è¯¯ï¼";
 					}
 				} else {
-					responseContent = "ÓÃ»§Ãû´íÎó£¡";
+					responseContent = "ç”¨æˆ·åé”™è¯¯ï¼";
 				}
 
 			} else {
 
-				responseContent = "ÓÃ»§ÃûºÍÃÜÂë²»ÄÜÎª¿Õ£¡";
+				responseContent = "è¯·è¾“å…¥ç”¨æˆ·åå’Œå¯†ç ï¼";
 			}
 
 		} catch (SystemException e) {

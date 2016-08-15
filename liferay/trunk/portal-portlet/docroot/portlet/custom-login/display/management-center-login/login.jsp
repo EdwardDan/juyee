@@ -3,7 +3,7 @@
 <style>
 body {
 	background-image:
-		url('http://localhost:8080/documents/20181/0/bg2.jpg/0c2b3a54-8c02-490b-bb43-c37cfe80f053?t=1470966094000');
+		url('http://jtjs.justonetech.com:8180/documents/20181/26528/bg2.jpg/bd2a5f4a-a6bb-4628-ba39-a6dffa06266a?t=1471228095083');
 	background-repeat: no-repeat;
 	background-clip: content-box;
 	background-size: 100% 100%;
@@ -16,7 +16,7 @@ body {
 	left: calc(50% - 150px);
 	top: 30%;
 	background:
-		url('http://localhost:8080/documents/20181/0/title.png/78c06171-d4cc-4baa-b345-e018023e01a5?t=1470966094633')
+		url('http://jtjs.justonetech.com:8180/documents/20181/26528/title.png/c6ff6869-256e-4849-a49e-1f978942c746?t=1471228096790')
 		no-repeat;
 	background-size: cover;
 }
@@ -67,7 +67,7 @@ body {
 	height: 10%;
 	width: 78%;
 	background:
-		url('http://localhost:8080/documents/20181/0/titlez.png/734762e5-8455-41a0-8b92-e8bb5d8bc3fb?t=1470966095055')
+		url('http://jtjs.justonetech.com:8180/documents/20181/26528/titlez.png/61ed49b1-5732-4797-8971-4061f0472c7d?t=1471228099387')
 		no-repeat;
 	background-size: 100% 100%;
 }
@@ -78,7 +78,7 @@ body {
 	border-radius: 3px !important;
 	border: 1px solid #cccccc;
 	background-image:
-		url('http://localhost:8080/documents/20181/0/yhm.png/65abb28a-d2b1-46f8-8498-0b521a4b423a?t=1470966095477');
+		url('http://jtjs.justonetech.com:8180/documents/20181/26528/yhm.png/4d87d41a-6bfe-4545-bba1-0c03ec488ba6?t=1471228101421');
 	background-repeat: no-repeat;
 	background-position: left;
 	text-indent: 25px;	
@@ -86,7 +86,7 @@ body {
 
 .login_input_password {
 	background-image:
-		url('http://localhost:8080/documents/20181/0/mm.png/e8d67e4d-36a7-4aeb-9da6-475abf3c01d2?t=1470966094242');
+		url('http://jtjs.justonetech.com:8180/documents/20181/26528/mm.png/dbdbc505-4cef-4eb7-a6a0-b662ffe69b83?t=1471228095798');
 	background-repeat: no-repeat;
 	background-position: left;
 	text-indent: 25px;
@@ -192,7 +192,7 @@ body {
 
 	function validateForm(){
 			$.ajax({
-				type:"GET",
+				type:"post",
 				url:"<%=loginUrl%>",
 					data : {
 						'<portlet:namespace/>_58_login' : $('#_58_login').val(),
