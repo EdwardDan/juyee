@@ -3,7 +3,7 @@
 <style>
 body {
 	background-image:
-		url('http://jtjs.justonetech.com:8180/documents/20181/26528/bg2.jpg/bd2a5f4a-a6bb-4628-ba39-a6dffa06266a?t=1471228095083');
+		url('http://jtjs.justonetech.com:8180/documents/20181/26528/bg2.jpg/790f7e40-1897-4255-bd46-9a2a73e8bb5f?t=1471230827268');
 	background-repeat: no-repeat;
 	background-clip: content-box;
 	background-size: 100% 100%;
@@ -16,7 +16,7 @@ body {
 	left: calc(50% - 150px);
 	top: 30%;
 	background:
-		url('http://jtjs.justonetech.com:8180/documents/20181/26528/title.png/c6ff6869-256e-4849-a49e-1f978942c746?t=1471228096790')
+		url('http://jtjs.justonetech.com:8180/documents/20181/26528/title.png/8b022b71-0d92-41b5-afcf-e387f219e45c?t=1471230828827')
 		no-repeat;
 	background-size: cover;
 }
@@ -67,7 +67,7 @@ body {
 	height: 10%;
 	width: 78%;
 	background:
-		url('http://jtjs.justonetech.com:8180/documents/20181/26528/titlez.png/61ed49b1-5732-4797-8971-4061f0472c7d?t=1471228099387')
+		url('http://jtjs.justonetech.com:8180/documents/20181/26528/titlez.png/21c2440d-500c-47b4-ac04-54de5f468888?t=1471230831730')
 		no-repeat;
 	background-size: 100% 100%;
 }
@@ -78,7 +78,7 @@ body {
 	border-radius: 3px !important;
 	border: 1px solid #cccccc;
 	background-image:
-		url('http://jtjs.justonetech.com:8180/documents/20181/26528/yhm.png/4d87d41a-6bfe-4545-bba1-0c03ec488ba6?t=1471228101421');
+		url('http://jtjs.justonetech.com:8180/documents/20181/26528/yhm.png/f0b3e438-3314-4ed5-ab89-90728db1ba78?t=1471230832470');
 	background-repeat: no-repeat;
 	background-position: left;
 	text-indent: 25px;	
@@ -86,7 +86,7 @@ body {
 
 .login_input_password {
 	background-image:
-		url('http://jtjs.justonetech.com:8180/documents/20181/26528/mm.png/dbdbc505-4cef-4eb7-a6a0-b662ffe69b83?t=1471228095798');
+		url('http://jtjs.justonetech.com:8180/documents/20181/26528/mm.png/86f1ec4b-e6fe-4f20-9679-d1aeb6a480ac?t=1471230828280');
 	background-repeat: no-repeat;
 	background-position: left;
 	text-indent: 25px;
