@@ -161,6 +161,11 @@ form.login_form {
 					name="_58_password" maxlength="10" type="password" value=""
 					placeholder="密　码" class="login_input password_input">
 			</div>
+			<div>
+				<OBJECT ID="SafeEngineCtl"
+					CLASSID="CLSID:B48B9648-E9F0-48A3-90A5-8C588CE0898F" width="300"
+					height="50" border=0 hidden="hidden"></OBJECT>
+			</div>
 			<div class="login_tip">
 				请先插入数字证书后再输入密码<br /> 请使用IE浏览器访问本系统
 			</div>
@@ -248,6 +253,7 @@ form.login_form {
 	function checkCaObj() {
 		var rtnVal = false;
 		var tmpobj = document.getElementById("SafeEngineCtl");
+		alert(SafeEngineCtl);
 		if (!tmpobj || typeof (tmpobj.SEH_InitialSession) == 'unknow'
 				|| typeof (tmpobj.SEH_InitialSession) == 'undefined') {
 			alert('数字证书驱动未装或者驱动程序未注册，请点击按钮边上"数字证书管理器及控件下载"下载驱动程序并安装！');
@@ -356,7 +362,8 @@ form.login_form {
 						if (checkForm()) {
 							$.ajax({
 								type:"GET",
-								url:"<%=loginUrl%>",
+								url:"<%=loginUrl%>
+	",
 								data : {
 									'<portlet:namespace/>cCert' : $('#cCert').val(),
 									'<portlet:namespace/>cSign' : $('#cSign').val(),
