@@ -27,7 +27,7 @@
 	<portlet>
 		<portlet-name>management-center-login</portlet-name>
 		<icon>/icons/icon.png</icon>
-		<configuration-action-class>com.justonetech.portal.portlet.CustomLoginConfigurationAction</configuration-action-class>
+		<configuration-action-class>com.justonetech.portal.portlet.ManagementCenterLoginConfigurationAction</configuration-action-class>
 		<header-portlet-css>/css/main.css</header-portlet-css>
 		<footer-portlet-javascript>
 			/js/main.js

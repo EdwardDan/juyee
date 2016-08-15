@@ -83,7 +83,7 @@
 		<portlet-name>management-center-login</portlet-name>
 		<display-name>管理中心登录</display-name>
 		<portlet-class>
-			com.justonetech.portal.portlet.CustomLoginPortlet
+			com.justonetech.portal.portlet.ManagementCenterLoginPortlet
 		</portlet-class>
 		<init-param>
 			<name>view-template</name>

@@ -14,12 +14,14 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 
-public class CustomLoginConfigurationAction extends DefaultConfigurationAction {
+public class ManagementCenterLoginConfigurationAction extends DefaultConfigurationAction{
 	@Override
 	public String render(PortletConfig portletConfig,
 			RenderRequest renderRequest, RenderResponse renderResponse)
 			throws Exception {
+		System.out.println(123);
 		String portletId = renderRequest.getParameter("portletResource");
+		System.out.println(portletId);
 		PortletPreferences preferences = PortletPreferencesFactoryUtil
 				.getPortletSetup(renderRequest, portletId);
 		String loginPage = preferences.getValue("loginPage", StringPool.BLANK);
@@ -31,13 +33,14 @@ public class CustomLoginConfigurationAction extends DefaultConfigurationAction {
 		return "/portlet/custom-login/config.jsp";
 	}
 	
-	
 	@Override
 	public void processAction(PortletConfig portletConfig,
 			ActionRequest actionRequest, ActionResponse actionResponse)
 			throws Exception {
+		System.out.println(456);
 		String portletResource = ParamUtil.getString(actionRequest,
 				"portletResource");
+		System.out.println(portletResource);
 		PortletPreferences preferences = PortletPreferencesFactoryUtil
 				.getPortletSetup(actionRequest, portletResource);
 		if (Validator.isNotNull(preferences)) {
