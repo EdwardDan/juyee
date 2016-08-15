@@ -54,7 +54,7 @@ public class ManagementCenterLoginPortlet extends MVCPortlet{
 			if (Validator.isNotNull(loginUser) && !loginUser.equals("请输入用户名")) {
 				User defaultUser = null;
 				for (User user : userList) {
-					if (loginUser.equals(user.getEmailAddress())) {
+					if (loginUser.equals(user.getScreenName())) {
 						defaultUser = user;
 					}
 				}
@@ -63,7 +63,7 @@ public class ManagementCenterLoginPortlet extends MVCPortlet{
 					int authResult = Authenticator.FAILURE;
 					try {
 						authResult = UserLocalServiceUtil
-								.authenticateByEmailAddress(compangyId,
+								.authenticateByScreenName(compangyId,
 										loginUser, loginPassword, null, null,
 										null);
 					} catch (PortalException e) {
@@ -76,12 +76,12 @@ public class ManagementCenterLoginPortlet extends MVCPortlet{
 						responseContent = "密码错误！";
 					}
 				} else {
-					responseContent = "用户名错误！";
+					responseContent = "用户名错误!";
 				}
 
 			} else {
 
-				responseContent = "请输入用户名和密码！";
+				responseContent = "请输入用户名和密码!";
 			}
 
 		} catch (SystemException e) {
