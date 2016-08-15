@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet"%>
-
+<%@ include file="/common/init.jsp"%>
 <portlet:defineObjects />
 <script type="text/javascript">
 	$(function() {
