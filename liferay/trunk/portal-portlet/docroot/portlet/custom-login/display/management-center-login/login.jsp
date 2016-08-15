@@ -16,7 +16,7 @@ body {
 	left: calc(50% - 150px);
 	top: 30%;
 	background:
-		url('http://jtjs.justonetech.com:8180/documents/20181/26528/title.png/8b022b71-0d92-41b5-afcf-e387f219e45c?t=1471230829000')
+		url('http://jtjs.justonetech.com:8180/documents/20181/26528/title.png/a241be9f-cd0a-4693-9872-2dc45cdde235?t=1471247909387')
 		no-repeat;
 	background-size: cover;
 }
@@ -67,7 +67,7 @@ body {
 	height: 10%;
 	width: 78%;
 	background:
-		url('http://jtjs.justonetech.com:8180/documents/20181/26528/titlez.png/21c2440d-500c-47b4-ac04-54de5f468888?t=1471230832000')
+		url('http://jtjs.justonetech.com:8180/documents/20181/26528/titlez.png/c0971fda-277f-4c99-8905-274a20706c89?t=1471247910203')
 		no-repeat;
 	background-size: 100% 100%;
 }
@@ -78,7 +78,7 @@ body {
 	border-radius: 3px !important;
 	border: 1px solid #cccccc;
 	background-image:
-		url('http://jtjs.justonetech.com:8180/documents/20181/26528/yhm.png/f0b3e438-3314-4ed5-ab89-90728db1ba78?t=1471230832000');
+		url('http://jtjs.justonetech.com:8180/documents/20181/26528/yhm.png/4f58e524-167e-4cb6-b442-49001d60a5c7?t=1471247910604');
 	background-repeat: no-repeat;
 	background-position: left;
 	text-indent: 25px;	
@@ -86,7 +86,7 @@ body {
 
 .login_input_password {
 	background-image:
-		url('http://jtjs.justonetech.com:8180/documents/20181/26528/mm.png/86f1ec4b-e6fe-4f20-9679-d1aeb6a480ac?t=1471230828000');
+		url('http://jtjs.justonetech.com:8180/documents/20181/26528/mm.png/87bb62c9-2731-4aba-9e76-e01036916d91?t=1471247908696');
 	background-repeat: no-repeat;
 	background-position: left;
 	text-indent: 25px;
@@ -152,7 +152,9 @@ body {
 					class="login_input_password" type="text"
 					onfocus="passwordFocus(this)" onblur="passwordBlur(this)">
 			</div>
-
+			
+<!-- 			<div> <label  for="_58_rememberMeCheckbox"> <input id="_58_rememberMe" name="_58_rememberMe" type="hidden" value="false"> <input  id="_58_rememberMeCheckbox" name="_58_rememberMeCheckbox" onclick="Liferay.Util.updateCheckboxValue(this); " type="checkbox" value="false"> 记住我 </label> </div>
+ -->			
 			<div id="loginMessage" class="loginMessage"></div>
 
 			<div class="login_div_btn">
