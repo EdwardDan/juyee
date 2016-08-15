@@ -140,7 +140,7 @@ form.login_form {
 <!-- <body class="bg1"> -->
 <!-- <div id="login_div" class="login_back"> -->
 <form
-	action="${themeDisplay.getURLCurrent()}/-?p_p_id=58&amp;p_p_lifecycle=1&amp;p_p_state=normal&amp;p_p_mode=view&amp;p_p_col_id=column-1&amp;p_p_col_count=1&amp;_58_struts_action=%2Flogin%2Flogin"
+	action="${themeDisplay.getURLCurrent()}?p_p_id=58&amp;p_p_lifecycle=1&amp;p_p_state=normal&amp;p_p_mode=view&amp;p_p_col_id=column-1&amp;p_p_col_count=1&amp;_58_struts_action=%2Flogin%2Flogin"
 	class="login_form" id="_58_fm" method="post" name="_58_fm"
 	autocomplete="on">
 	<div id="login_div">
@@ -201,6 +201,7 @@ form.login_form {
 
 		/* 初始化KEY */
 		var tmpobj = document.getElementById("SafeEngineCtl");
+		
 		tmpobj.SEH_InitialSession(0xa, "com1", password, 0, 0xa, "com1", "");
 		if (tmpobj.ErrorCode != 0) {
 			var errCode = tmpobj.ErrorCode;
@@ -216,7 +217,6 @@ form.login_form {
 		}
 <%--/* 获取客户端KEY中证书 */--%>
 	var strCert = tmpobj.SEH_GetSelfCertificate(0xa, "com1", "");
-
 		if (tmpobj.ErrorCode != 0) {
 			alert("SEH_GetSelfCertificate error:" + tmpobj.ErrorCode);
 			tmpobj.SEH_ClearSession();
@@ -232,7 +232,7 @@ form.login_form {
 			$("#btnSub").disabled = false;
 			return false;
 		}
-
+			
 		/* 签名随机数 */
 		var strSigned = tmpobj.SEH_SignData("${UUID}", 3);
 		/*本Demo中随机数“abcd1234”固定写死，没有用函数生成*/
@@ -253,7 +253,6 @@ form.login_form {
 	function checkCaObj() {
 		var rtnVal = false;
 		var tmpobj = document.getElementById("SafeEngineCtl");
-		alert(SafeEngineCtl);
 		if (!tmpobj || typeof (tmpobj.SEH_InitialSession) == 'unknow'
 				|| typeof (tmpobj.SEH_InitialSession) == 'undefined') {
 			alert('数字证书驱动未装或者驱动程序未注册，请点击按钮边上"数字证书管理器及控件下载"下载驱动程序并安装！');
@@ -362,8 +361,7 @@ form.login_form {
 						if (checkForm()) {
 							$.ajax({
 								type:"GET",
-								url:"<%=loginUrl%>
-	",
+								url:"<%=loginUrl%>",
 								data : {
 									'<portlet:namespace/>cCert' : $('#cCert').val(),
 									'<portlet:namespace/>cSign' : $('#cSign').val(),

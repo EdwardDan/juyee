@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 import java.util.Locale;
+import java.util.UUID;
 
 import javax.portlet.PortletException;
 import javax.portlet.PortletPreferences;
@@ -40,6 +41,8 @@ public class CustomLoginPortlet extends MVCPortlet {
 	@Override
 	public void render(RenderRequest renderRequest,
 			RenderResponse renderResponse) throws PortletException, IOException {
+		renderRequest.setAttribute("UUID", UUID.randomUUID().toString());
+		renderRequest.setAttribute("certSwitch", true);
 		PortletPreferences preferences = renderRequest.getPreferences();
 		String loginPage = preferences.getValue("loginPage", StringPool.BLANK);
 		renderRequest.setAttribute("loginPage", loginPage);
@@ -51,7 +54,7 @@ public class CustomLoginPortlet extends MVCPortlet {
 		renderRequest.setAttribute("redirectPage", redirectPage);
 		super.render(renderRequest, renderResponse);
 	}
-
+	
 	@Override
 	public void serveResource(ResourceRequest resourceRequest,
 			ResourceResponse resourceResponse) throws IOException,
@@ -68,6 +71,7 @@ public class CustomLoginPortlet extends MVCPortlet {
 		// 获取证书链
 		FileInputStream oFile = new FileInputStream(
 				PropsUtil.get("sheca.certificate.chain.file"));
+//		FileInputStream oFile = new FileInputStream("D:\\SHECA_G2.spc");
 		byte[] bChain = null;
 		int iFile = 0;
 		try {
