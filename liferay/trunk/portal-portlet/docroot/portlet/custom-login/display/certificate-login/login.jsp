@@ -48,15 +48,21 @@
 	width: 50%;
 	height: 40%;
 	background:
-		url(http://jtjs.justonetech.com:8180/documents/20181/0/login_form.png/4e09dfaf-30b8-4465-a65f-be713276692a?t=1471228081000)
+		url(http://jtjs.justonetech.com:8180/documents/20181/0/login_form.png/4e09dfaf-30b8-4465-a65f-be713276692a?t=1471245176656)
 		no-repeat;
 	background-size: 100% 100%;
+	-moz-box-shadow: 5px 5px 5px #999; /* For Firefox3.6+ */
+	-webkit-box-shadow: 5px 5px 5px #999; /* For Chrome5+, Safari5+ */
+	box-shadow : 5px 5px 5px #999; /* For Latest Opera */
 	position: absolute;
 	left: 25%;
 	top: 35%;
 	border-radius: 5px;
 	filter: alpha(opacity = 95);
 	opacity: .95;
+	-webkit-box-shadow: 5px 5px 5px #999; /* For Chrome5+, Safari5+ */
+	box-shadow: 5px 5px 5px #999;
+	box-shadow: 5px 5px 5px #999;
 }
 
 .login_div {
@@ -144,7 +150,7 @@ form.login_form {
 	class="login_form" id="_58_fm" method="post" name="_58_fm"
 	autocomplete="on">
 	<div id="login_div">
-		<div class="login">
+		<div id="login_form" class="login">
 			<div class="login_div">
 				<input type="hidden" id="cCert" name="cCert" value="" /> <input
 					type="hidden" id="cSign" name="cSign" value="" /> <input
@@ -269,11 +275,13 @@ form.login_form {
 		login_body[0].style.height = $(window).height() + "px";
 		$("#login_div").height(($(window).height()*0.90) + "px");
 		login_body[0].style.backgroundSize = $(window).width() + "px" + " " + $(window).height() + "px";
+		$("#login_form").height($("#login_form").width()*398/861);
 		$(window).resize(function() {
 			login_body[0].style.width = $(window).width() + "px";
 			login_body[0].style.height = $(window).height() + "px";
 			$("#login_div").height(($(window).height()*0.90) + "px");
 			login_body[0].style.backgroundSize = $(window).width() + "px" + " " + $(window).height() + "px";
+			$("#login_form").height($("#login_form").width()*398/861);
 		});
 
 		/* login_body[0].innerHTML = $("#login_div").html(); */
@@ -361,7 +369,8 @@ form.login_form {
 						if (checkForm()) {
 							$.ajax({
 								type:"GET",
-								url:"<%=loginUrl%>",
+								url:"<%=loginUrl%>
+	",
 								data : {
 									'<portlet:namespace/>cCert' : $('#cCert').val(),
 									'<portlet:namespace/>cSign' : $('#cSign').val(),
