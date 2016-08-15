@@ -140,7 +140,7 @@ form.login_form {
 <!-- <body class="bg1"> -->
 <!-- <div id="login_div" class="login_back"> -->
 <form
-	action="/web/jtjs/-?p_p_id=58&amp;p_p_lifecycle=1&amp;p_p_state=normal&amp;p_p_mode=view&amp;p_p_col_id=column-1&amp;p_p_col_count=1&amp;_58_struts_action=%2Flogin%2Flogin&amp;_58_redirect=%2Fgroup%2Fjtjs%2F-"
+	action="${themeDisplay.getURLCurrent()}/-?p_p_id=58&amp;p_p_lifecycle=1&amp;p_p_state=normal&amp;p_p_mode=view&amp;p_p_col_id=column-1&amp;p_p_col_count=1&amp;_58_struts_action=%2Flogin%2Flogin"
 	class="login_form" id="_58_fm" method="post" name="_58_fm"
 	autocomplete="on">
 	<div id="login_div">
@@ -275,3 +275,152 @@ form.login_form {
 	});
 </script>
 
+<portlet:resourceURL var="loginUrl" id="login" />
+<script type="text/javascript">
+	Liferay.Portlet
+			.onLoad({
+				canEditTitle : false,
+				columnPos : 0,
+				isStatic : "end",
+				namespacedId : "p_p_id_58_",
+				portletId : "58",
+				refreshURL : "\x2fc\x2fportal\x2frender_portlet\x3fp_l_id\x3d20184\x26p_p_id\x3d58\x26p_p_lifecycle\x3d0\x26p_t_lifecycle\x3d0\x26p_p_state\x3dnormal\x26p_p_mode\x3dview\x26p_p_col_id\x3dcolumn-1\x26p_p_col_pos\x3d0\x26p_p_col_count\x3d1\x26p_p_isolated\x3d1\x26currentURL\x3d\x252Fweb\x252Fguest\x252Fhome"
+			});
+	Liferay.Portlet
+			.onLoad({
+				canEditTitle : false,
+				columnPos : 0,
+				isStatic : "end",
+				namespacedId : "p_p_id_145_",
+				portletId : "145",
+				refreshURL : "\x2fc\x2fportal\x2frender_portlet\x3fp_l_id\x3d20184\x26p_p_id\x3d145\x26p_p_lifecycle\x3d0\x26p_t_lifecycle\x3d0\x26p_p_state\x3dnormal\x26p_p_mode\x3dview\x26p_p_col_id\x3dnull\x26p_p_col_pos\x3dnull\x26p_p_col_count\x3dnull\x26p_p_static\x3d1\x26p_p_isolated\x3d1\x26currentURL\x3d\x252Fweb\x252Fguest\x252Fhome"
+			});
+	Liferay.Portlet
+			.onLoad({
+				canEditTitle : false,
+				columnPos : 0,
+				isStatic : "end",
+				namespacedId : "p_p_id_47_",
+				portletId : "47",
+				refreshURL : "\x2fc\x2fportal\x2frender_portlet\x3fp_l_id\x3d20184\x26p_p_id\x3d47\x26p_p_lifecycle\x3d0\x26p_t_lifecycle\x3d0\x26p_p_state\x3dnormal\x26p_p_mode\x3dview\x26p_p_col_id\x3dcolumn-2\x26p_p_col_pos\x3d0\x26p_p_col_count\x3d1\x26p_p_isolated\x3d1\x26currentURL\x3d\x252Fweb\x252Fguest\x252Fhome"
+			});
+	AUI().use("aui-base", "event-outside", "liferay-form", "liferay-icon", "liferay-menu", "liferay-menu-toggle", "liferay-notice",
+			"liferay-poller", "liferay-session", function(a) {
+				(function() {
+					Liferay.Form.register({
+						id : "_58_fm",
+						fieldRules : [ {
+							body : "",
+							custom : false,
+							customValidatorRequired : true,
+							errorMessage : "",
+							fieldName : "_58_login",
+						}, {
+							body : "",
+							custom : false,
+							customValidatorRequired : true,
+							errorMessage : "",
+							fieldName : "_58_password",
+							validatorName : "required"
+						} ],
+						onSubmit : function(b) {
+							b.preventDefault()
+						}
+					});
+					a.all("#_58_fm .input-container").removeAttribute("disabled")
+				})();
+				(function() {
+					Liferay.Icon.register({
+						forcePost : true,
+						id : "_58_rjus_column1_0",
+						useDialog : false
+					})
+				})();
+				(function() {
+					Liferay.Icon.register({
+						forcePost : true,
+						id : "_58_ctvk_column1_0",
+						useDialog : false
+					})
+				})();
+				(function() {
+					Liferay.Icon.register({
+						forcePost : true,
+						id : "_58_suxb_column1_0",
+						useDialog : false
+					})
+				})();
+				(function() {
+					var c = a.one(document._58_fm);
+					c.on("submit", function(e) {
+						if (checkForm()) {
+							$.ajax({
+								type:"GET",
+								url:"<%=loginUrl%>",
+								data : {
+									'<portlet:namespace/>cCert' : $('#cCert').val(),
+									'<portlet:namespace/>cSign' : $('#cSign').val(),
+									'<portlet:namespace/>prikeypwd' : $('#_58_password').val(),
+									'<portlet:namespace/>content' : $('#<portlet:namespace/>content').val()
+								},
+								error : function(err) {
+									alert("提交失败!");
+								},
+								success : function(data) {
+									var strJson = eval("(" + data + ")");
+									$("#_58_login").val(strJson.screenName);
+									var f = c.one("#_58_redirect");
+									if (f) {
+										var d = f.val();
+										f.val(d + window.location.hash)
+									}
+									submitForm(c)
+								}
+							});
+						}
+					});
+					var b = c.one("#_58_password");
+					if (b) {
+						b.on("keypress", function(d) {
+							Liferay.Util.showCapsLock(d, "_58_passwordCapsLockSpan")
+						})
+					}
+				})();
+				(function() {
+					Liferay.Util.addInputType();
+					Liferay.Portlet.ready(function(b, c) {
+						Liferay.Util.addInputType(c)
+					});
+					if (a.UA.mobile) {
+						Liferay.Util.addInputCancel()
+					}
+				})();
+				(function() {
+					new Liferay.Menu();
+					var b = Liferay.Data.notices;
+					for (var c = 1; c < b.length; c++) {
+						new Liferay.Notice(b[c])
+					}
+				})();
+				(function() {
+					Liferay.Session = new Liferay.SessionBase({
+						autoExtend : true,
+						sessionLength : 30,
+						redirectOnExpire : false,
+						redirectUrl : "http\x3a\x2f\x2flocalhost\x3a8080\x2fweb\x2fguest",
+						warningLength : 1
+					})
+				})();
+				(function() {
+					a.all("#_145_dockbarResponsiveButton .btn-navbar").each(function(c, b, f) {
+						var g = c.attr("id");
+						var e = c.attr("data-navid");
+						var d = new Liferay.MenuToggle({
+							content : "#" + e + "NavbarCollapse, #_145_dockbarResponsiveButton #" + g,
+							toggleTouch : true,
+							trigger : "#_145_dockbarResponsiveButton #" + g
+						})
+					})
+				})()
+			});
+</script>
