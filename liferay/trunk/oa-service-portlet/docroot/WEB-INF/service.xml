@@ -60,9 +60,9 @@
 		<order>
 			<order-column name="modifiedTime" order-by="desc"></order-column>
 		</order>
-		
+
 		<finder name="UserId" return-type="Collection">
-			<finder-column name="userId"/>
+			<finder-column name="userId" />
 		</finder>
 
 	</entity>
@@ -217,16 +217,30 @@
 		<column name="driver" type="String" />
 		<column name="phone" type="String" />
 
+		<column name="companyId" type="long" />
+		<column name="groupId" type="long" />
+		<column name="title" type="String"></column>
+		<column name="content" type="String"></column>
+
+		<column name="status" type="int"></column>
+		<column name="statusByUserId" type="long"></column>
+		<column name="statusByUserName" type="String"></column>
+		<column name="statusDate" type="Date"></column>
+		
+		<column name="proposeVehicle" type="long" />
+		<column name="isProposeDriver" type="int" />
+		<column name="driver" type="String" />
+		<column name="phone" type="String" />
+
 		<!-- Order -->
 		<order>
 			<order-column name="modifiedTime" order-by="desc"></order-column>
 		</order>
-
 		<!-- Finder methods -->
-
 		<finder name="ApplicantName" return-type="Collection">
 			<finder-column name="applicantName" comparator="LIKE" />
 		</finder>
+		<reference package-path="com.liferay.portal" entity="WorkflowInstanceLink"></reference>
 	</entity>
 
 	<!-- 发文记录 -->
