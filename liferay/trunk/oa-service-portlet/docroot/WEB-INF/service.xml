@@ -191,11 +191,8 @@
 
 		<column name="vehicleApplicationId" type="long" primary="true" />
 
-		<!-- Group instance -->
-		<column name="groupId" type="long" />
-
 		<!-- Audit fields -->
-		<column name="companyId" type="long" />
+
 		<column name="userId" type="long" />
 		<column name="userName" type="String" />
 		<column name="createTime" type="Date" />
@@ -212,10 +209,6 @@
 		<column name="passengerNum" type="int" />
 		<column name="reason" type="String" />
 		<column name="destination" type="String" />
-		<column name="proposeVehicle" type="long" />
-		<column name="isProposeDriver" type="int" />
-		<column name="driver" type="String" />
-		<column name="phone" type="String" />
 
 		<column name="companyId" type="long" />
 		<column name="groupId" type="long" />
