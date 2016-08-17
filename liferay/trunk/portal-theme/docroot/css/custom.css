@@ -826,7 +826,7 @@ html, body {
 .searchButton {
     position: relative;
     left: 33px;
-    top: -24px;
+    top: -23px;
     width: 40px;
     height: 30px
 }
@@ -834,7 +834,7 @@ html, body {
 .navigationDiv {
     background-color: #2a78c3;
     color: white;
-    height: 50px;
+    height: 51px;
     line-height: 50px;
     clear: both;
     min-width: 960px;
@@ -891,8 +891,8 @@ html, body {
 }
 }
 
-.portlet-borderless-container{
-	
+.syc2 .portlet-borderless-container{
+	background-color: transparent !important;
 }
 
 .lfr-nav-item{
@@ -904,32 +904,32 @@ html, body {
 }
 
 .syc1{
-	margin-top:5px;
+	margin-top:25px;
 	height:308px !important;
 }
 
 .syc2{
-	margin-top:5px;
+	margin-top:25px;
 	margin-left:15px !important;
 	height:308px !important;
 	background:rgba(0,0,0,0) !important;
 }
 
 .syc3{
-	margin-top:55px !important;
+	margin-top:35px !important;
 	width:337px !important;
 	height:262px !important;
 }
 
 .syc4{
-	margin-top:55px !important;
+	margin-top:35px !important;
 	width:337px !important;
 	height:262px !important;
 	margin-left:10px !important;
 }
 
 .syc5{
-	margin-top:55px !important;
+	margin-top:35px !important;
 	width:266px !important;
 	margin-left:10px !important;
 }

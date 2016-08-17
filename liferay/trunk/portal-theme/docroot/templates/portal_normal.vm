@@ -13,25 +13,26 @@
 
     <script type="text/javascript">
         function verify() {
-            var input = document.getElementById("submit");
-            if (input.value == null || input.value == '') {
+            var submitValue = $("#submitValue").val();
+            if (submitValue == null || submitValue == '') {
                 alert("请输入搜索内容！");
                 return false;
             }
             return true;
         }
         function AddFavorite(url,title) {
-            try {
-                window.external.addFavorite(url, title);
-            }
-            catch (e) {
-                try {
-                    window.sidebar.addPanel(title, url, "");
-                }
-                catch (e) {
-                    alert("抱歉，您所使用的浏览器无法完成此操作。\n\n加入收藏失败，请使用Ctrl+D进行添加");
-                }
-            }
+            	try {
+                	window.external.addFavorite(url, title);
+            	}
+            	catch (e) {
+                	try {
+                   	 window.sidebar.addPanel(title, url, "");
+               	 	}
+                	catch (e) {
+                		alert(e);
+                    	alert("抱歉，您所使用的浏览器无法完成此操作。\n\n加入收藏失败，请使用Ctrl+D进行添加");
+                	}
+           		}
         }
     </script>
     <script src="http://apps.bdimg.com/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -58,7 +59,7 @@ $theme.include($body_top_include)
         全站搜索
     </div>
         <form method="get" action="">
-            <input type="text" class="inputText">
+            <input type="text" class="inputText"  id="submitValue">
             <input name="submit" type="image" value="" src="$images_folder/search.png" onclick="verify()"
                    class="searchButton"/>
         </form>
