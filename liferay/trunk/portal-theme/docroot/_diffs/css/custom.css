@@ -779,6 +779,7 @@ html, body {
     line-height: 30px;
     border-bottom-style: solid;
     border-bottom-width: 1px;
+    border-bottom-color: #a6a6a6;
     min-width: 960px;
 	a{
     	color: #707070;
