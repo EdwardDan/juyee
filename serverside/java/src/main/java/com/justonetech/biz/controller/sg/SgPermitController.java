@@ -139,10 +139,15 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
                 area = person.getAreaCode();
             }
             String hql = "from SgPermit where 1=1";
-            if (StringHelper.isEmpty(queryStatus)){
-                queryStatus= String.valueOf(SgPermitStatus.STATUS_SUBMIT.getCode());
+            if (StringHelper.isEmpty(queryStatus)) {
+                hql += " and status >=" + SgPermitStatus.STATUS_SUBMIT.getCode() + " and status<=" + SgPermitStatus.STATUS_WLD_BACK.getCode();
+            } else {
+                if (SgPermitStatus.STATUS_CH.getCode() == JspHelper.getInteger(queryStatus) || SgPermitStatus.STATUS_EDIT.getCode() == JspHelper.getInteger(queryStatus)) {
+                    hql += " and status=" + queryStatus;
+                } else if(SgPermitStatus.STATUS_SUBMIT.getCode() == JspHelper.getInteger(queryStatus)){
+                    hql += " and status >=" + SgPermitStatus.STATUS_SUBMIT.getCode() + " and status<=" + SgPermitStatus.STATUS_WLD_BACK.getCode();
+                }
             }
-            hql += " and status=" + queryStatus ;
             if (null != sysUser.getRegPerson()) {
                 hql += " and createUser='" + sysUser.getLoginName() + "'";
             }

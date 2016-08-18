@@ -9,7 +9,7 @@
             <td style="width: 8%;text-align: center;">单位工程编号</td>
             <td style="width: 10%;text-align: center;">单位工程名称</td>
             <%--<td style="width: 10%;text-align: center;">单位工程类型</td>--%>
-            <td style="width: 40%;text-align: center;">工程指标</td>
+            <td style="width: 40%;text-align: center;">建设内容</td>
         </tr>
         <c:if test="${not empty bean}">
             <c:forEach items="${bean.sgUnitProjs}" var="item">

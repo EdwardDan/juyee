@@ -687,7 +687,7 @@ mso-char-indent-count:9.0;mso-line-height-alt:12.0pt'><span style='font-size:
   mso-border-top-alt:solid black .5pt;mso-border-left-alt:solid black .5pt;
   mso-border-alt:solid black .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
         <p class=MsoNoSpacing><span lang=EN-US style='font-size:12.0pt'><o:p><sys:toHtml>${bean.fgldOpinion}</sys:toHtml></o:p></span></p>
-        <p class=MsoNoSpacing><span lang=EN-US style='font-size:12.0pt'><o:p>${bean.fgldDate}</o:p></span></p>
+        <p class=MsoNoSpacing><span lang=EN-US style='font-size:12.0pt'><o:p>${bean.fgldUser}</o:p></span></p>
         <p class=MsoNoSpacing><span lang=EN-US style='font-size:12.0pt'><o:p>&nbsp;</o:p></span></p>
         <p class=MsoNoSpacing><span style='font-size:12.0pt;font-family:宋体;
   mso-ascii-font-family:Calibri;mso-hansi-font-family:Calibri'>日期</span><span
@@ -710,7 +710,7 @@ mso-char-indent-count:9.0;mso-line-height-alt:12.0pt'><span style='font-size:
   mso-border-top-alt:solid black .5pt;mso-border-left-alt:solid black .5pt;
   mso-border-alt:solid black .5pt;padding:0cm 5.4pt 0cm 5.4pt'>
         <p class=MsoNoSpacing><span lang=EN-US style='font-size:12.0pt'><o:p><sys:toHtml>${bean.zxldOpinion}</sys:toHtml></o:p></span></p>
-        <p class=MsoNoSpacing><span lang=EN-US style='font-size:12.0pt'><o:p>${bean.zxldDate}</o:p></span></p>
+        <p class=MsoNoSpacing><span lang=EN-US style='font-size:12.0pt'><o:p>${bean.zxldUser}</o:p></span></p>
         <p class=MsoNoSpacing><span lang=EN-US style='font-size:12.0pt'><o:p>&nbsp;</o:p></span></p>
         <p class=MsoNoSpacing><span style='font-size:12.0pt;font-family:宋体;
   mso-ascii-font-family:Calibri;mso-hansi-font-family:Calibri'>日期</span><span
