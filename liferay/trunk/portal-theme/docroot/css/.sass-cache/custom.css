@@ -1439,9 +1439,10 @@ html, body {
 .searchButton {
   position: relative;
   left: 33px;
-  top: -23px;
+  top: -24px;
   width: 40px;
-  height: 30px; }
+  height: 30px !important;
+  cursor: pointer; }
 
 .navigationDiv {
   background-color: #2a78c3;
