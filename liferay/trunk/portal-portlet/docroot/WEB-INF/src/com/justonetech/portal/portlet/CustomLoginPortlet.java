@@ -40,6 +40,7 @@ public class CustomLoginPortlet extends MVCPortlet {
 
 	@Override
 	public void render(RenderRequest renderRequest, RenderResponse renderResponse) throws PortletException, IOException {
+		
 		renderRequest.setAttribute("UUID", UUID.randomUUID().toString());
 		renderRequest.setAttribute("certSwitch", true);
 		PortletPreferences preferences = renderRequest.getPreferences();

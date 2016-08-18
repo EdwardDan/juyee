@@ -48,6 +48,7 @@
 			window.open('', '_self');
 			window.close();
 		}
+		$("#_58_fm").removeAttr("hidden");
 	}
 
 </script>
@@ -156,7 +157,7 @@ form.login_form {
 }
 </style>
 
-<form action="${themeDisplay.getURLCurrent()}?p_p_id=58&amp;p_p_lifecycle=1&amp;p_p_state=normal&amp;p_p_mode=view&amp;p_p_col_id=column-1&amp;p_p_col_pos=2&amp;p_p_col_count=3&amp;_58_struts_action=%2Flogin%2Flogin" class="form sign-in-form " id="_58_fm" method="post" name="_58_fm" autocomplete="off">
+<form action="${themeDisplay.getURLCurrent()}?p_p_id=58&amp;p_p_lifecycle=1&amp;p_p_state=normal&amp;p_p_mode=view&amp;p_p_col_id=column-1&amp;p_p_col_pos=2&amp;p_p_col_count=3&amp;_58_struts_action=%2Flogin%2Flogin" class="form sign-in-form " id="_58_fm" method="post" name="_58_fm" autocomplete="off" hidden="true">
 	<div id="login_div">
 		<div id="login_form" class="login">
 			<div class="login_div">
