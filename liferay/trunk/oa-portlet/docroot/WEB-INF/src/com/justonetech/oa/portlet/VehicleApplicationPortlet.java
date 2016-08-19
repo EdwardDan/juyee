@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -18,6 +18,7 @@ import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 import javax.servlet.http.HttpServletResponse;
 
+import com.justonetech.kxt.SendKxt;
 import com.justonetech.oa.model.VehicleApplication;
 import com.justonetech.oa.service.VehicleApplicationLocalServiceUtil;
 import com.justonetech.sys.model.Dictionary;
@@ -32,6 +33,7 @@ import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.SessionMessages;
+import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -43,10 +45,8 @@ import com.liferay.portal.kernel.workflow.WorkflowException;
 import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
 import com.liferay.portal.kernel.workflow.WorkflowTask;
 import com.liferay.portal.kernel.workflow.WorkflowTaskManagerUtil;
-import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.WorkflowDefinitionLink;
-import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.service.WorkflowDefinitionLinkLocalServiceUtil;
@@ -65,7 +65,7 @@ public class VehicleApplicationPortlet extends MVCPortlet {
 	private static Log log = LogFactoryUtil.getLog(VehicleApplicationPortlet.class);
 	private static String timeFormatPattern = PropsUtil.get("default.date.format.pattern") + " "
 			+ PropsUtil.get("default.time.format.pattern").substring(0, 5);
-
+	
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
 		String keywords = ParamUtil.getString(renderRequest, "keywords");
@@ -148,6 +148,18 @@ public class VehicleApplicationPortlet extends MVCPortlet {
 		Boolean isProposeDriver = ParamUtil.getBoolean(actionRequest, "isProposeDriver");
 		String driver = ParamUtil.getString(actionRequest, "driver");
 		String phone = ParamUtil.getString(actionRequest, "phone");
+		if(!driver.equals("")&&!phone.equals("")){
+			//调度后增加短信提醒
+						Dictionary car=null;
+			if(proposeVehicle!=0){
+				 car = DictionaryLocalServiceUtil.getDictionary(proposeVehicle);
+			}
+			String date=DateUtil.getDate(startTime, timeFormatPattern, Locale.CHINA);
+			String content="你好，"+driver+"。请于"+date+"驾驶车牌号为"+car.getName()+"的车辆前往"+destination;
+			System.out.println(content);
+			SendKxt.SendKxtSMS(content, phone);
+		}
+		
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(VehicleApplication.class.getName(),
 				actionRequest);
 		VehicleApplication vehicleApplication = null;

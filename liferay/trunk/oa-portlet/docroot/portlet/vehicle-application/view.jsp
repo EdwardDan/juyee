@@ -246,7 +246,7 @@ try {
 						<portlet:param name="isAudit" value="1"/>
 				    </portlet:actionURL> 
 					<liferay-ui:icon image="view" label="查看" url="${viewVehicleApplicationURL}" />
-					<c:if test="${(vehicleApplication.status==1&&vehicleApplication.userId==userId)||(vehicleApplication.status==4&&vehicleApplication.userId==userId)||(vehicleApplication.status==6&&vehicleApplication.userId==userId)||(vehicleApplication.status==5&&fn:contains(roles,'30104'))}"><liferay-ui:icon image="edit" label="编辑" url="${editVehicleApplicationURL}" /> </c:if> 
+					<c:if test="${(vehicleApplication.status==1&&vehicleApplication.userId==userId)||(vehicleApplication.status==4&&vehicleApplication.userId==userId)||(vehicleApplication.status==6&&vehicleApplication.userId==userId)||(vehicleApplication.status==5&&fn:contains(roles,'46812'))}"><liferay-ui:icon image="edit" label="编辑" url="${editVehicleApplicationURL}" /> </c:if> 
 					<c:if test="${(vehicleApplication.status==2&&fn:contains(kezhangRole,'44239')&&isAssignedToUser)||(vehicleApplication.status==3&&fn:contains(roles,'30104')&&isAssignedToUser)}"><liferay-ui:icon image="checked" label="checked" url="${auditVehicleApplicationURL}" /></c:if>
 					<c:if test="${vehicleApplication.status==1&&vehicleApplication.userId==userId}"><liferay-ui:icon image="delete" label="删除" url="javascript:void(0);" onClick='<%=renderResponse.getNamespace() + "deleteVehicleApplications("+vehicleApplication.getVehicleApplicationId()+");"%>' /></c:if>
 				</liferay-ui:icon-menu>

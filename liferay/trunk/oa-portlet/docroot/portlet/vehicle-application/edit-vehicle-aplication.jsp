@@ -114,19 +114,19 @@ System.out.println("strBackUrl="+strBackUrl);
 		</aui:row>
 		<aui:row>
 			<aui:col span="6" cssClass="">
-				<aui:input name="passengerNum"  type="text" label="用车人数" required="true">
+				<aui:input name="passengerNum"  type="text" label="用车人数:" required="true">
 					<aui:validator name="digits" />
 					<aui:validator name="min">0</aui:validator>
 				</aui:input>
 			</aui:col>
 			<aui:col span="6" cssClass="">
-				<aui:input name="destination"   type="text" label="目的地" required="true" 
+				<aui:input name="destination"   type="text" label="目的地:" required="true" 
 					value="上海市(    )区(    )路(    )号" ></aui:input>
 			</aui:col>
 		</aui:row>
 		<aui:row>
 			<aui:col span="12">
-				<aui:input name="reason" label="用车事由" type="textarea" style="width:45%;height:100px"/>
+				<aui:input name="reason" label="用车事由:" type="textarea" style="width:45%;height:100px"/>
 			</aui:col>
 		</aui:row>
 		</c:if>
@@ -147,33 +147,31 @@ System.out.println("strBackUrl="+strBackUrl);
 		开始时间：<br>
 				<input type="text" class="Wdate" id="startTime"
 					name="<portlet:namespace/>startTime" value="${startTimes}" 
-					onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'endTime\')}',lang:'zh-cn',dateFmt:'yyyy-MM-dd HH:mm'})"
-					required="true" />
+					readonly="true" />
 				<br>
 			</aui:col>
 			<aui:col span="6" cssClass="">
 		结束时间：<br>
 				<input type="text" class="Wdate" id="endTime"
 					name="<portlet:namespace/>endTime" value="${endTimes}" 
-					onfocus="WdatePicker({minDate:'#F{$dp.$D(\'startTime\')}',lang:'zh-cn',dateFmt:'yyyy-MM-dd HH:mm'})"
-					required="true" />
+				  readonly="true"/>
 			</aui:col>
 		</aui:row>
 		<aui:row>
 			<aui:col span="6" cssClass="">
-				<aui:input name="passengerNum"  type="text" label="用车人数" required="true" readonly="true">
+				<aui:input name="passengerNum"  type="text" label="用车人数:" required="true" readonly="true">
 					<aui:validator name="digits" />
 					<aui:validator name="min">0</aui:validator>
 				</aui:input>
 			</aui:col>
 			<aui:col span="6" cssClass="">
-				<aui:input name="destination"   type="text" label="目的地" required="true" readonly="true"
+				<aui:input name="destination"   type="text" label="目的地:" required="true" readonly="true"
 					value="上海市(    )区(    )路(    )号" ></aui:input>
 			</aui:col>
 		</aui:row>
 		<aui:row>
 			<aui:col span="12">
-				<aui:input name="reason" label="用车事由" type="textarea" readonly="true" style="width:45%;height:100px"/>
+				<aui:input name="reason" label="用车事由:" type="textarea" readonly="true" style="width:45%;height:100px"/>
 			</aui:col>
 		</aui:row>
 		<aui:row>
