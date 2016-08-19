@@ -14,8 +14,9 @@
 <%@ page import="com.liferay.portal.kernel.language.LanguageUtil" %>
 <%@ page import="com.liferay.portal.kernel.workflow.comparator.WorkflowComparatorFactoryUtil" %>
 <%@ page import="com.liferay.portal.kernel.dao.orm.QueryUtil" %>
-  
 <%   
+String randomId = StringPool.BLANK;
+randomId = StringUtil.randomId();
 String isAudit=request.getParameter("isAudit");
 VehicleApplication vehicleApplication = (VehicleApplication)request.getAttribute("vehicleApplication");   
 String proposeVehicle="";
@@ -60,7 +61,7 @@ if(vehicleApplication.getProposeVehicle()!=0&&vehicleApplication.getProposeVehic
 		<c:if test="${vehicleApplication.status==7}">
 		<aui:row>
 		<aui:col span="6" cssClass="">
-			<aui:input name="isProposeDriver" type="checkbox"  label="是否拟派车辆:" checked="${vehicleApplication.isProposeDriver==1}" onclick="return false;"/>
+			<aui:input name="isProposeDriver" type="text"  label="是否拟派车辆:" value="${vehicleApplication.isProposeDriver==1?'是':'否'}" readonly="true"/>
 			</aui:col>
 			<aui:col span="6" cssClass="">
 			<aui:input name="proposeVehicle" label="拟派车辆:" value="<%=proposeVehicle%>" readonly="true"/>
@@ -88,7 +89,6 @@ if(vehicleApplication.getProposeVehicle()!=0&&vehicleApplication.getProposeVehic
         + ":"   
         + request.getServerPort() ;          //端口号  
        System.out.println("strBackUrl="+strBackUrl);
-		String randomId = StringPool.BLANK;
 				String[] assetTypes = new String[1];
 		    	assetTypes[0]="com.justonetech.oa.model.VehicleApplication";
 	    	OrderByComparator orderByComparator=null;
@@ -138,7 +138,35 @@ if(vehicleApplication.getProposeVehicle()!=0&&vehicleApplication.getProposeVehic
 						if(isAudit.equals("1")){
 
 				%>
-		<aui:button type="button" value="<%=message %>" href="<%=url %>"/>
+				<div class="hide" id="<%= randomId %>updateComments">
+	<aui:input cols="55" name="_153_comment" id="_153_comment" label="审核意见" useNamespace="false" rows="10" type="textarea" />
+</div>
+		<%-- <aui:button type="button" value="<%=message %>" href="<%=url %>"/>  --%>
+		<c:if test='<%=message.equals("通过") %>'>
+		<liferay-ui:icon
+				cssClass='<%= "workflow-task-" + randomId + " task-change-status-link" %>'
+				id='<%= randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink" %>'
+				image="check"
+				message="<%= message %>"
+				method="get"
+				url="<%= url %>"
+			/>
+			</c:if>
+			<c:if test='<%=message.equals("驳回") %>'>
+		<liferay-ui:icon
+				cssClass='<%= "workflow-task-" + randomId + " task-change-status-link" %>'
+				id='<%= randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink" %>'
+				image="close"
+				message="<%= message %>"
+				method="get"
+				url="<%= url %>"
+			/>
+			</c:if>
+			<aui:script use="liferay-workflow-tasks">
+var onTaskClickFn = A.rbind('onTaskClick', Liferay.WorkflowTasks,'<%= randomId %>');
+Liferay.delegateClick('<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(transitionName) %>taskChangeStatusLink', onTaskClickFn);
+</aui:script>
+		
 				<%
 		}}
 		    		}
@@ -241,4 +269,4 @@ if(vehicleApplication.getProposeVehicle()!=0&&vehicleApplication.getProposeVehic
 	<%}%>
 	
 	
-	
+

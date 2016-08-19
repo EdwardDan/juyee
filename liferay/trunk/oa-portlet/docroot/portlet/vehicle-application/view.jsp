@@ -27,6 +27,7 @@ private boolean isAssignedToUser(long assigneeUserId, User user) {
 %>
 <% 
 String randomId = StringPool.BLANK;
+randomId = StringUtil.randomId();
 String strBackUrl = "http://" + request.getServerName() //服务器地址  
                     + ":"   
                     + request.getServerPort() ;          //端口号  
@@ -41,6 +42,23 @@ try {
 	}
 	request.setAttribute("roles", roles.toString());
 	System.out.println("roles===========" + roles.toString());
+	
+	List<UserGroupRole> userGroupRoles = UserGroupRoleLocalServiceUtil. getUserGroupRoles(themeDisplay.getUserId());
+	List<UserGroupRole> organizationRoles = new ArrayList<UserGroupRole>();
+	Set<Long> kezhangRole = new HashSet<Long>();
+	Set<Long> kezhangGroup=new HashSet<Long>();
+	for(UserGroupRole userGroupRole : userGroupRoles) {
+	int roleType = userGroupRole.getRole().getType();
+	if (roleType == RoleConstants.TYPE_ORGANIZATION) {
+		organizationRoles.add(userGroupRole);
+		kezhangRole.add(userGroupRole.getRoleId());
+		kezhangGroup.add(userGroupRole.getGroupId());
+		}
+	}
+	request.setAttribute("kezhangGroup",kezhangGroup.toString());
+	request.setAttribute("kezhangRole",kezhangRole.toString());
+	System.out.println("kezhangRole===========" + kezhangRole.toString());
+	System.out.println("kezhangGroup=== "+ kezhangGroup.toString() );
 } catch (SystemException e) {
 	// TODO Auto-generated catch block
 	e.printStackTrace();
@@ -88,6 +106,24 @@ try {
 			<liferay-ui:search-container-column-text>
 				<liferay-ui:icon-menu>
 				<%
+				//查看登陆人是否符合同一组织内
+				 List<UserGroupRole> userGroupRoles = UserGroupRoleLocalServiceUtil. getUserGroupRoles(vehicleApplication.getUserId());
+			List<UserGroupRole> organizationRoles = new ArrayList<UserGroupRole>();
+			Set<Long> keyuanGroup = new HashSet<Long>();
+			for(UserGroupRole userGroupRole : userGroupRoles) {
+			int roleType = userGroupRole.getRole().getType();
+				if (roleType == RoleConstants.TYPE_ORGANIZATION) {
+					keyuanGroup.add(userGroupRole.getGroupId());
+					}
+				}
+			Iterator<Long> it = keyuanGroup.iterator();
+			Long oneGroup=0L;
+			while(it.hasNext()){
+				//一般科员只有一个部门
+			oneGroup=it.next();
+			}
+			//用来判断，提交人的groupId是否和科长的groupId一致
+			request.setAttribute("oneGroup", oneGroup.toString());
 				String[] assetTypes = new String[1];
 		    	assetTypes[0]="com.justonetech.oa.model.VehicleApplication";
 	    	OrderByComparator orderByComparator=null;
@@ -150,7 +186,7 @@ try {
 			</c:if>
 			<%
 		}%>
-			<c:if test="${vehicleApplication.status==2&&fn:contains(roles,'30103')&&people<0}">
+			<c:if test="${vehicleApplication.status==2&&fn:contains(kezhangRole,'44239')&&fn:contains(kezhangGroup,oneGroup)&&people<0}">
 			<liferay-ui:icon
 			cssClass='<%= "workflow-task-" + randomId + " task-assign-to-me-link" %>'
 			iconCssClass="icon-signin"
@@ -190,7 +226,7 @@ try {
 		<%
 		}%>
 				<div class="hide" id="<%= randomId %>updateComments">
-	<aui:input cols="55" name="comment" rows="10" type="textarea" />
+	<aui:input cols="55" name="_153_comment" id="_153_comment" label="备注" useNamespace="false" rows="10" type="textarea" />
 </div>
 <div class="hide" id="<%= randomId %>updateAsigneeToMe">
 	<aui:input name="asigneeUserId" type="hidden" value="<%= user.getUserId() %>" />
@@ -211,7 +247,7 @@ try {
 				    </portlet:actionURL> 
 					<liferay-ui:icon image="view" label="查看" url="${viewVehicleApplicationURL}" />
 					<c:if test="${(vehicleApplication.status==1&&vehicleApplication.userId==userId)||(vehicleApplication.status==4&&vehicleApplication.userId==userId)||(vehicleApplication.status==6&&vehicleApplication.userId==userId)||(vehicleApplication.status==5&&fn:contains(roles,'30104'))}"><liferay-ui:icon image="edit" label="编辑" url="${editVehicleApplicationURL}" /> </c:if> 
-					<c:if test="${(vehicleApplication.status==2&&fn:contains(roles,'30103')&&isAssignedToUser)||(vehicleApplication.status==3&&fn:contains(roles,'30104')&&isAssignedToUser)}"><liferay-ui:icon image="checked" label="checked" url="${auditVehicleApplicationURL}" /></c:if>
+					<c:if test="${(vehicleApplication.status==2&&fn:contains(kezhangRole,'44239')&&isAssignedToUser)||(vehicleApplication.status==3&&fn:contains(roles,'30104')&&isAssignedToUser)}"><liferay-ui:icon image="checked" label="checked" url="${auditVehicleApplicationURL}" /></c:if>
 					<c:if test="${vehicleApplication.status==1&&vehicleApplication.userId==userId}"><liferay-ui:icon image="delete" label="删除" url="javascript:void(0);" onClick='<%=renderResponse.getNamespace() + "deleteVehicleApplications("+vehicleApplication.getVehicleApplicationId()+");"%>' /></c:if>
 				</liferay-ui:icon-menu>
 			</liferay-ui:search-container-column-text>
@@ -220,7 +256,7 @@ try {
 	</liferay-ui:search-container>
 </aui:form>
 
-<aui:script>
+<aui:script use="liferay-util-window,aui-base">
 	
 	Liferay.Util.toggleSearchContainerButton('#<portlet:namespace />deleteVehicleApplicationsBtn', '#<portlet:namespace /><%=searchContainerReference.getId("searchContainer")%>SearchContainer', document.<portlet:namespace />fm, '<portlet:namespace />allRowIds');
 	
@@ -239,8 +275,7 @@ try {
 		);
 </aui:script>
 
-
 <aui:script use="liferay-workflow-tasks">
-var onTaskClickFn = A.rbind(Liferay.WorkflowTasks.onTaskClick, Liferay.WorkflowTasks,'');
-Liferay.delegateClick('<portlet:namespace />taskAssignToMeLink', onTaskClickFn);
+var onTaskClickFn = A.rbind('onTaskClick', Liferay.WorkflowTasks,'<%= randomId %>');
+Liferay.delegateClick('<portlet:namespace /><%= randomId %>taskAssignToMeLink', onTaskClickFn);
 </aui:script>
