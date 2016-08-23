@@ -59,6 +59,7 @@
 	background-repeat: no-repeat;
 	background-clip: content-box;
 	background-size: cover;
+	overflow: hidden
 }
 
 .login {
