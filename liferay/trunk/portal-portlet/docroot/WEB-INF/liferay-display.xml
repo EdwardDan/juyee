@@ -6,6 +6,6 @@
 	<category name="门户">
 		<portlet id="asset-viewer"></portlet>
 		<portlet id="custom-login"></portlet>
-		<portlet id="management-center-login"></portlet>
+		
 	</category>
 </display>

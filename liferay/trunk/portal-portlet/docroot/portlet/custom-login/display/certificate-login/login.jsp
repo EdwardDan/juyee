@@ -275,7 +275,7 @@ form.login_form {
 	});
 </script>
 
-<portlet:resourceURL var="loginUrl" id="login" />
+<portlet:resourceURL var="loginUrl" id="certificate-login" />
 <script type="text/javascript">
 	function loginToBSDT(){
 		if (checkForm()) {

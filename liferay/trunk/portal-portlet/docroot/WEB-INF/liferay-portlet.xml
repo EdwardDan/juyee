@@ -24,16 +24,7 @@
 		<css-class-wrapper>custom-login-portlet</css-class-wrapper>
 	</portlet>
 	
-	<portlet>
-		<portlet-name>management-center-login</portlet-name>
-		<icon>/icons/icon.png</icon>
-		<configuration-action-class>com.justonetech.portal.portlet.ManagementCenterLoginConfigurationAction</configuration-action-class>
-		<header-portlet-css>/css/main.css</header-portlet-css>
-		<footer-portlet-javascript>
-			/js/main.js
-		</footer-portlet-javascript>
-		<css-class-wrapper>management-center-login-portlet</css-class-wrapper>
-	</portlet>
+	
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>

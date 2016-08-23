@@ -110,12 +110,14 @@ body {
 	border: none;
 }
 
-#p_p_id_managementcenterlogin_WAR_portalportlet_ .portlet-borderless-container {
+#p_p_id_customlogin_WAR_portalportlet_ .portlet-borderless-container{
 	background-color: transparent !important;
 }
+
+
 </style>
 
-<portlet:resourceURL var="loginUrl" id="login" />
+<portlet:resourceURL var="loginUrl" id="Management-Center-login" />
 
 <form action="${themeDisplay.getURLCurrent()}?p_p_id=58&amp;p_p_lifecycle=1&amp;p_p_state=normal&amp;p_p_mode=view&amp;p_p_col_id=column-1&amp;p_p_col_pos=2&amp;p_p_col_count=3&amp;_58_struts_action=%2Flogin%2Flogin" class="form sign-in-form " id="_58_fm" method="post" name="_58_fm" autocomplete="off">
 	<input name="_58_formDate" type="hidden" value="1470964064174"> <input class="field" id="_58_saveLastPath" name="_58_saveLastPath" type="hidden" value="false"> <input class="field" id="_58_redirect" name="_58_redirect" type="hidden" value="${redirectPage}"> <input class="field" id="_58_doActionAfterLogin" name="_58_doActionAfterLogin" type="hidden" value="false">
