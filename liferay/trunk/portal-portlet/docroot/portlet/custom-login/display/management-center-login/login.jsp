@@ -146,6 +146,7 @@ body {
 <script>
 	$(document).ready(
 			function() {
+				document.onkeydown=keyDownSearch; 
 				var login_body = document.getElementsByTagName("body");
 				login_body[0].style.width = $(window).width() + "px";
 				login_body[0].style.height = $(window).height() + "px";
@@ -162,6 +163,19 @@ body {
 									+ "px" + " " + $(window).height() + "px";
 						});
 			});
+	
+	function keyDownSearch(e) {    
+	    // 兼容FF和IE和Opera    
+	    var theEvent = e || window.event;    
+	    var code = theEvent.keyCode || theEvent.which || theEvent.charCode;    
+	    if (code == 13) { 
+	    	 setTimeout(function(){
+	    		 validateForm();
+	         },0);
+	         e.preventDefault ? e.preventDefault() : (e.returnValue = false);
+
+	    }    
+	} 
 	
 	function userFocus(ele){if(ele.value=='请输入用户名'){ele.value='';ele.style.color='#666666';}
 		document.getElementById("loginMessage").style.visibility="hidden";}

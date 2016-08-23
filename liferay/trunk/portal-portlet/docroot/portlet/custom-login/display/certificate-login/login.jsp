@@ -46,7 +46,7 @@
 			alert("请使用ie8或以上版本浏览器访问本页面！");
 			window.opener = null;
 			window.open('', '_self');
-			window.close();
+			window.close(); 
 		}
 		$("#_58_fm").removeAttr("hidden");
 	}
