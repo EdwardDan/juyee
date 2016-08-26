@@ -7,37 +7,39 @@
 	<entity name="Project" local-service="true" remote-service="false">
 
 		<!-- PK fields -->
-
-		<column name="fooId" type="long" primary="true" />
+		<column name="bjbh" type="String" primary="true" />
 
 		<!-- Group instance -->
-
 		<column name="groupId" type="long" />
 
 		<!-- Audit fields -->
-
 		<column name="companyId" type="long" />
 		<column name="userId" type="long" />
 		<column name="userName" type="String" />
 		<column name="createDate" type="Date" />
 		<column name="modifiedDate" type="Date" />
 
-		<!-- Other fields -->
-
-		<column name="field1" type="String" />
-		<column name="field2" type="boolean" />
-		<column name="field3" type="int" />
-		<column name="field4" type="Date" />
-		<column name="field5" type="String" />
+		<!-- business fields -->
+		<column name="xmxz" type="long" /><!-- 项目性质 -->
+		<column name="ywbm" type="String" /><!-- 业务编号 -->
+		<column name="jsddssqx" type="String" /><!-- 建设地点所属区县 -->
+		<column name="jsgclb" type="String" /><!-- 建设工程类别 -->
+		<column name="gyzjbz" type="String" /><!-- 国有资金比重% -->
+		<column name="jhkg" type="Date" /><!-- 计划开工 -->
+		<column name="jhjg" type="Date" /><!-- 计划竣工 -->
+		<column name="xckgqk" type="String" /><!-- 现场开工情况 -->
+		<column name="sgdw" type="String" /><!-- 施工单位 -->
+		<column name="sgdwxmjl" type="String" /><!-- 施工单位项目经理 -->
+		<column name="jldw" type="String" /><!-- 监理单位 -->
+		<column name="jldwxmzj" type="String" /><!-- 监理单位项目总监 -->
+		<column name="sjdw" type="String" /><!-- 设计单位 -->
 
 		<!-- Order -->
-
 		<order by="asc">
 			<order-column name="field1" />
 		</order>
 
 		<!-- Finder methods -->
-
 		<finder name="Field2" return-type="Collection">
 			<finder-column name="field2" />
 		</finder>

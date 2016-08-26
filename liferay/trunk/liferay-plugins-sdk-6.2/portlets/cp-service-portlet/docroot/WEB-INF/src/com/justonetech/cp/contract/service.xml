@@ -8,7 +8,7 @@
 
 		<!-- PK fields -->
 
-		<column name="fooId" type="long" primary="true" />
+		<column name="id" type="long" primary="true" />
 
 		<!-- Group instance -->
 
@@ -22,24 +22,20 @@
 		<column name="createDate" type="Date" />
 		<column name="modifiedDate" type="Date" />
 
-		<!-- Other fields -->
-
-		<column name="field1" type="String" />
-		<column name="field2" type="boolean" />
-		<column name="field3" type="int" />
-		<column name="field4" type="Date" />
-		<column name="field5" type="String" />
+		<!-- business fields -->
+		<column name="xmqHtId" type="long" /><!-- 小木桥合同ID -->
+		<column name="bjbh" type="String" /><!-- 报建编号 -->
+		<column name="zbjg" type="Double" /><!-- 中标价格（万元） -->
+		<column name="htgq" type="Double" /><!-- 合同工期（日历天 -->
 
 		<!-- Order -->
-
 		<order by="asc">
-			<order-column name="field1" />
+			<order-column name="bjbh" />
 		</order>
 
 		<!-- Finder methods -->
-
-		<finder name="Field2" return-type="Collection">
-			<finder-column name="field2" />
+		<finder name="Bjbh" return-type="Collection">
+			<finder-column name="bjbh" />
 		</finder>
 	</entity>
 </service-builder>

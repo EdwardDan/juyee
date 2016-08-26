@@ -7,39 +7,47 @@
 	<entity name="Permit" local-service="true" remote-service="false">
 
 		<!-- PK fields -->
-
-		<column name="fooId" type="long" primary="true" />
+		<column name="id" type="long" primary="true" />
 
 		<!-- Group instance -->
-
 		<column name="groupId" type="long" />
 
 		<!-- Audit fields -->
-
 		<column name="companyId" type="long" />
 		<column name="userId" type="long" />
 		<column name="userName" type="String" />
-		<column name="createDate" type="Date" />
-		<column name="modifiedDate" type="Date" />
+		<column name="createTime" type="Date" />
+		<column name="modifiedTime" type="Date" />
 
-		<!-- Other fields -->
+		<!-- business fields -->
+		<column name="bjbh" type="String" /><!-- 报建编号 -->
+		<column name="slbh" type="String" /><!-- 受理编号 -->
+		<column name="hjgsz" type="String" /><!-- 沪交管收字 -->
+		<column name="sqr" type="String" /><!-- 申请人 -->
+		<column name="sqsx" type="String" /><!-- 申请事项 -->
+		<column name="sqh" type="String" /><!-- 申请号 -->
+		<column name="cltjr" type="String" /><!-- 材料提交人 -->
+		<column name="cltjrlxdh" type="String" /><!-- 材料提交人联系电话 -->
+		<column name="cltjrlxdz" type="String" /><!-- 材料提交人联系地址 -->
+		<column name="sjr" type="String" /><!-- 收件人 -->
+		<column name="sjrlxdh" type="String" /><!--收件人联系电话 -->
 
-		<column name="field1" type="String" />
-		<column name="field2" type="boolean" />
-		<column name="field3" type="int" />
-		<column name="field4" type="Date" />
-		<column name="field5" type="String" />
-
+		<!-- WorkFlow fields -->
+		<column name="status" type="int"></column>
+		<column name="statusByUserId" type="long"></column>
+		<column name="statusByUserName" type="String"></column>
+		<column name="statusDate" type="Date"></column>
+		
 		<!-- Order -->
-
 		<order by="asc">
-			<order-column name="field1" />
+			<order-column name="bjbh" />
 		</order>
 
 		<!-- Finder methods -->
-
-		<finder name="Field2" return-type="Collection">
-			<finder-column name="field2" />
+		<finder name="bjbh" return-type="Collection">
+			<finder-column name="bjbh"></finder-column>
 		</finder>
+
+		<reference package-path="com.liferay.portal" entity="WorkflowInstanceLink"></reference>
 	</entity>
 </service-builder>
