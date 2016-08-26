@@ -4,5 +4,42 @@
 	<author>justonetech</author>
 	<namespace>cp</namespace>
 
-	
+	<entity name="ConstructionProject" local-service="true" remote-service="false">
+		<!-- PK fields -->
+		
+		<column name="id" type="long" primary="true" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+		
+		<!-- Other fields -->
+		
+		<!-- Relationships -->
+		
+		<!-- Workflow fields -->
+		
+		<!-- Order -->
+		<order by="asc">
+			<order-column name="field1" />
+		</order>
+
+		<!-- Finder methods -->
+		<finder name="Field2" return-type="Collection">
+			<finder-column name="field2" />
+		</finder>
+		
+		<!-- References -->
+		
+		<!-- Transactions -->
+		
+	</entity>
 </service-builder>
