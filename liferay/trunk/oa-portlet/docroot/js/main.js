@@ -35,7 +35,8 @@ AUI.add(
 					form.setAttribute('method', 'POST');
 
 					var comments = A.one('#' + randomId + 'updateComments');
-
+					
+					
 					if (content) {
 						form.append(content);
 						content.show();

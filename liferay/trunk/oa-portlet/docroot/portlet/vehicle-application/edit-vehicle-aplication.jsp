@@ -15,10 +15,16 @@
 	model="<%=VehicleApplication.class %>" />
 <portlet:resourceURL var="ajaxUrl3" id="test3" />
 <%
+long userId = PortalUtil.getUserId(request);
+User user_ = UserServiceUtil.getUserById(userId);
+List<Organization> organizations = user_.getOrganizations();
+String organzationName = organizations.get(0).getName();
+String userName=user_.getFirstName();
+request.setAttribute("organzationName",organzationName);
+request.setAttribute("userName", userName);
 String strBackUrl = "http://" + request.getServerName() //服务器地址  
 + ":"   
 + request.getServerPort() ;          //端口号  
-System.out.println("strBackUrl="+strBackUrl);
 	VehicleApplication vehicleApplication = (VehicleApplication) request.getAttribute("vehicleApplication");
 	String startDate = "";
 	String startDates = "";
@@ -89,10 +95,10 @@ System.out.println("strBackUrl="+strBackUrl);
 				<aui:input name="vehicleApplicationId" type="hidden" />
 				<aui:input name="type" value="submit" id="type" type="hidden" />
 				<aui:input name="applicantDeptName" type="text" label="申请部门名称:"
-					required="true" />
+					required="true" value="${organzationName}"/>
 			</aui:col>
 			<aui:col span="6" cssClass="">
-				<aui:input name="applicantName" label="申请人:" type="text"  required="true" />
+				<aui:input name="applicantName" label="申请人:" type="text"  required="true" value="${userName }"/>
 			</aui:col>
 		</aui:row>
 		<aui:row>

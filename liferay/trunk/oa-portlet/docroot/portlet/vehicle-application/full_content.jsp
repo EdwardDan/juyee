@@ -178,12 +178,12 @@ Liferay.delegateClick('<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(tra
 				if(null!=me){%>
 	<liferay-ui:panel defaultState="open" title="审核活动">
 
-<table border="1">
-	<tr style="width: 800px">
+<table border="1" class="table table-bordered table-hover">
+	<tr>
 
-		<th style="width: 150px">时间</th>
-		<th style="width: 350px">活动</th>
-		<th style="width: 300px">意见</th>
+		<th>时间</th>
+		<th>活动</th>
+		<th>意见</th>
 	</tr>
 
 
@@ -261,61 +261,6 @@ Liferay.delegateClick('<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(tra
 							</c:choose></td>
 		<td><%= workflowLog.getComment() %></td>
 		</tr>
-					<%-- <div class="task-activity task-type-<%= workflowLog.getType() %>">
-						<div class="task-activity-date">
-							<%= dateFormatDateTime.format(workflowLog.getCreateDate()) %>
-						</div>
-
-						<div class="task-activity-message">
-							<c:choose>
-								<c:when test="<%= workflowLog.getType() == WorkflowLog.TASK_COMPLETION %>">
-									<%= LanguageUtil.format(pageContext, "x-completed-the-task-x", new Object[] {HtmlUtil.escape(actorName), HtmlUtil.escape(workflowLog.getState())}) %>
-								</c:when>
-								<c:when test="<%= workflowLog.getType() == WorkflowLog.TASK_UPDATE %>">
-									<%= LanguageUtil.format(pageContext, "x-updated-the-due-date", HtmlUtil.escape(actorName)) %>
-								</c:when>
-								<c:when test="<%= (workflowLog.getType() == WorkflowLog.TRANSITION) %>">
-									<%= LanguageUtil.format(pageContext, "x-changed-the-state-from-x-to-x", new Object[] {HtmlUtil.escape(actorName), HtmlUtil.escape(workflowLog.getPreviousState()), HtmlUtil.escape(workflowLog.getState())}) %>
-								</c:when>
-								<c:otherwise>
-									<c:choose>
-										<c:when test="<%= (workflowLog.getPreviousUserId() == 0) && (curUser != null) %>">
-											<%= LanguageUtil.format(pageContext, curUser.isMale() ? "x-assigned-the-task-to-himself" : "x-assigned-the-task-to-herself", HtmlUtil.escape(curUser.getFullName())) %>
-										</c:when>
-										<c:otherwise>
-
-											<%
-											String previousActorName = null;
-
-											if (curRole == null) {
-												previousActorName = PortalUtil.getUserName(workflowLog.getPreviousUserId(), StringPool.BLANK);
-											%>
-
-												<%= LanguageUtil.format(pageContext, "task-assigned-to-x.-previous-assignee-was-x", new Object[] {HtmlUtil.escape(actorName), HtmlUtil.escape(previousActorName)}) %>
-
-											<%
-											}
-											else {
-												previousActorName = curRole.getDescriptiveName();
-											%>
-
-												<%= LanguageUtil.format(pageContext, "task-initially-assigned-to-the-x-role", new Object[] {HtmlUtil.escape(actorName)}) %>
-
-											<%
-											}
-											%>
-
-										</c:otherwise>
-									</c:choose>
-								</c:otherwise>
-							</c:choose>
-						</div>
-
-						<div class="task-activity-comment">
-							<%= workflowLog.getComment() %>
-						</div>
-					</div> --%>
-
 				<%
 				}
 				
