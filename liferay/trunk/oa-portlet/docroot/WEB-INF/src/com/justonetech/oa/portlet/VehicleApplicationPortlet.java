@@ -78,20 +78,6 @@ public class VehicleApplicationPortlet extends MVCPortlet {
 	
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
-//		try{
-//		JSONObject payloadJSON = JSONFactoryUtil
-//                .createJSONObject();
-//        payloadJSON.put("userId",30105L);
-//        payloadJSON.put("viewURL","http://www.baidu.com");
-//        payloadJSON.put("temperature","3度");
-//        payloadJSON.put("picTime","2016-12-21 09:00");
-        UserNotificationEventLocalServiceUtil.addUserNotificationEvent(30105L, "vehicleapplication_WAR_oaportlet",
-//                        (new Date()).getTime(),
-//                        30105L,
-//                        "", false,
-//                        serviceContext);
-//		}catch(Exception e){
-//		}
 		String keywords = ParamUtil.getString(renderRequest, "keywords");
 		int delta = GetterUtil.getInteger(PropsUtil.get(PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA));
 		int pageSize = ParamUtil.getInteger(renderRequest, "delta", delta);
