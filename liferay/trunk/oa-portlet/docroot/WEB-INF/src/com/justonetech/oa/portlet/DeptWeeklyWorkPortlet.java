@@ -15,6 +15,7 @@ import javax.portlet.RenderResponse;
 
 import com.justonetech.oa.model.DeptWork;
 import com.justonetech.oa.model.DeptWorkItem;
+import com.justonetech.oa.model.VehicleApplication;
 import com.justonetech.oa.service.DeptWorkItemLocalServiceUtil;
 import com.justonetech.oa.service.DeptWorkLocalServiceUtil;
 import com.liferay.counter.service.CounterLocalServiceUtil;
@@ -28,7 +29,13 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextFactory;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 /**
@@ -36,7 +43,7 @@ import com.liferay.util.bridges.mvc.MVCPortlet;
  */
 public class DeptWeeklyWorkPortlet extends MVCPortlet {
 
-	private static Log log = LogFactoryUtil.getLog(OfficeSupplyApplicationPortlet.class);
+	private static Log log = LogFactoryUtil.getLog(DeptWeeklyWorkPortlet.class);
 	private static String timeFormatPattern = PropsUtil.get("default.date.format.pattern");
 	
 	@Override
@@ -50,7 +57,7 @@ public class DeptWeeklyWorkPortlet extends MVCPortlet {
 		int end = pageSize * pageNumber;
 		List<DeptWork> deptWorks = Collections.emptyList();
 		try {
-			deptWorks = DeptWorkLocalServiceUtil.findByUserName(userName, start, end);
+			deptWorks = DeptWorkLocalServiceUtil.getDeptWorks(-1, -1);
 		} catch (SystemException e) {
 			log.error("findByUserNam(" + userName + "," + start + "," + end + ")错误：" + e.getMessage());
 		}
@@ -60,6 +67,7 @@ public class DeptWeeklyWorkPortlet extends MVCPortlet {
 		} catch (SystemException e) {
 			log.error("countByUserNam(" + userName + ")错误：" + e.getMessage());
 		}
+		
 		renderRequest.setAttribute("deptWorks", deptWorks);
 		renderRequest.setAttribute("deptWorkCount", deptWorkCount);
 		super.doView(renderRequest, renderResponse);
@@ -67,12 +75,16 @@ public class DeptWeeklyWorkPortlet extends MVCPortlet {
 
 	public void saveDeptWork(ActionRequest request, ActionResponse response) throws SystemException, PortalException,
 			ParseException {
+		ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(VehicleApplication.class.getName(),
+				request);
 		String type = ParamUtil.getString(request, "type");
-		String status = null;
+		String statusStr = null;
 		if(type.equals("submit")){
-			status = "提交";
+			statusStr = "提交";
+			
 		}else{
-			status = "填写";
+			statusStr = "填写";
 		}
 		long deptWorkId = ParamUtil.getLong(request, "deptWorkId");
 		SimpleDateFormat sdf = new SimpleDateFormat(timeFormatPattern);
@@ -103,7 +115,7 @@ public class DeptWeeklyWorkPortlet extends MVCPortlet {
 		deptWork.setDeptName(deptName);
 		deptWork.setStartDate(startDate);
 		deptWork.setEndDate(endDate);
-		deptWork.setStatus(status);
+		deptWork.setStatusStr(statusStr);
 		DeptWorkLocalServiceUtil.updateDeptWork(deptWork);
 
 		List<DeptWorkItem> deptWorkItems = DeptWorkItemLocalServiceUtil.findByDeptWorkId(deptWorkId);
@@ -130,6 +142,11 @@ public class DeptWeeklyWorkPortlet extends MVCPortlet {
 			deptWorkItem.setGroupId(groupId);
 			DeptWorkItemLocalServiceUtil.updateDeptWorkItem(deptWorkItem);
 		}
+		AssetEntryLocalServiceUtil.updateEntry(themeDisplay.getUserId(), deptWork.getGroupId(),
+				DeptWork.class.getName(), deptWork.getDeptWorkId(), null, null);
+		WorkflowHandlerRegistryUtil.startWorkflowInstance(deptWork.getCompanyId(),
+				deptWork.getUserId(), DeptWork.class.getName(),
+				deptWork.getDeptWorkId(), deptWork, serviceContext);
 	}
 
 	public void editDeptWeeklyWork(ActionRequest request, ActionResponse response) throws IOException,
@@ -144,6 +161,7 @@ public class DeptWeeklyWorkPortlet extends MVCPortlet {
 	public void deleteDeptWeeklyWork(ActionRequest request, ActionResponse response) throws PortalException,
 			SystemException {
 		long deptWorkId = ParamUtil.getLong(request, "deptWorkId");
+		System.out.println(deptWorkId);
 		DeptWorkLocalServiceUtil.deleteDeptWork(deptWorkId);
 		List<DeptWorkItem> deptWorkItems = DeptWorkItemLocalServiceUtil.findByDeptWorkId(deptWorkId);
 		for (DeptWorkItem deptWorkItem : deptWorkItems) {

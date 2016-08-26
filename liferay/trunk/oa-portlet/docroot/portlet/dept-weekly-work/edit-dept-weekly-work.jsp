@@ -8,6 +8,9 @@
 <script src="${staticServerURL}/My97DatePicker/WdatePicker.js"></script>
 <%
 	long userId = PortalUtil.getUserId(request);
+	User user_ = UserServiceUtil.getUserById(userId);
+	List<Organization> organizations = user_.getOrganizations();
+	String organzationName = organizations.get(0).getName();
 	String userName = PortalUtil.getUserName(userId, "");
 	DeptWork deptWork = (DeptWork)request.getAttribute("deptWork");
 	String startDate ="";
@@ -29,9 +32,7 @@
 		}
 	}
 
-	function change() {
-		$("#<portlet:namespace/>type").val("save");
-	}
+	
 
 	function validate1() {
 		if ($("#deptWorkItems").html() == ' ') {
@@ -59,7 +60,7 @@
 			<aui:input name="deptWorkId" value="${deptWork.deptWorkId}"
 				type="hidden" />
 			<aui:input name="type" value="submit" id="type" type="hidden" />
-			<aui:input name="deptName" label="上报科室" value="${deptWork.deptName}" />
+			<aui:input name="deptName" label="上报科室" value="<%=organzationName%>" readonly="true"/>
 		</aui:col>
 		<aui:col span="6">
 			<aui:input name="userName" label="上报人" value="<%=userName%>"
@@ -120,7 +121,9 @@
 		</tbody>
 	</table>
 	<aui:button-row>
+	<c:if test="<%=deptWork==null%>">
 		<aui:button onClick="return validate1()" type="submit" value="提交" />
+	</c:if>
 		<aui:button onClick="return validate2()" type="submit" value="保存" />
 
 		<aui:button type="cancel" value="取消" href="${viewURL}" />
