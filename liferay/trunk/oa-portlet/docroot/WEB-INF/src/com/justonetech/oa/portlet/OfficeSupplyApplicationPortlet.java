@@ -1,7 +1,6 @@
 package com.justonetech.oa.portlet;
 
 import java.io.IOException;
-import java.text.DecimalFormat;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -21,6 +20,8 @@ import com.justonetech.oa.service.OfficeSupplyApplicationLocalServiceUtil;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -28,8 +29,18 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
+import com.liferay.portal.model.UserGroupRole;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextFactory;
+import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
+import com.liferay.portal.service.UserNotificationEventLocalServiceUtil;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
+import com.sun.org.apache.bcel.internal.generic.NEW;
 
 /**
  * Portlet implementation class OfficeSupplyApplicationPortlet
@@ -48,11 +59,13 @@ public class OfficeSupplyApplicationPortlet extends MVCPortlet {
 		int end = pageSize * pageNumber;
 		List<OfficeSupplyApplication> officeSupplyApplications = Collections.emptyList();
 		try {
-			officeSupplyApplications = OfficeSupplyApplicationLocalServiceUtil.findByUserId(userId, start, end);
+//			officeSupplyApplications = OfficeSupplyApplicationLocalServiceUtil.findByUserId(userId, start, end);
+			officeSupplyApplications = OfficeSupplyApplicationLocalServiceUtil.getOfficeSupplyApplications(-1, -1);
 		} catch (SystemException e) {
 			log.error("findByUserId(" + userId + "," + start + "," + end + ")出错：" + e.getMessage());
 		}
 		int OfficeSupplyApplicationsCount = 0;
+		System.out.println(new Date());
 		try {
 			OfficeSupplyApplicationsCount = OfficeSupplyApplicationLocalServiceUtil.countByUserId(userId);
 		} catch (SystemException e) {
@@ -65,19 +78,29 @@ public class OfficeSupplyApplicationPortlet extends MVCPortlet {
 
 	public void saveOfficeSupplyApplication(ActionRequest request, ActionResponse response) throws SystemException,
 			PortalException {
+		ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
 		long officeSupplyApplicationId = ParamUtil.getLong(request, "officeSupplyApplicationId");
 		long userId = PortalUtil.getUserId(request);
-		String userName = PortalUtil.getUserName(userId, "");
+		String userName = ParamUtil.getString(request, "userName");
 		long groupId = PortalUtil.getScopeGroupId(request);
 		long companyId = PortalUtil.getCompanyId(request);
 		String deptName = ParamUtil.getString(request, "deptName");
 		String introductions = ParamUtil.getString(request, "introductions");
+		String type = ParamUtil.getString(request, "type");
+		String perposeClerk = "";
+		if(type.equals("appoint")){
+			perposeClerk = ParamUtil.getString(request, "perposeClerk");
+		}
 		Date now = new Date();
 		OfficeSupplyApplication officeSupplyApplication = null;
 		if (Validator.isNotNull(officeSupplyApplicationId)) {
 			officeSupplyApplication = OfficeSupplyApplicationLocalServiceUtil
 					.getOfficeSupplyApplication(officeSupplyApplicationId);
 			officeSupplyApplication.setModifiedTime(now);
+			if(type.equals("appoint")){
+				officeSupplyApplication.setStatus(7);
+				officeSupplyApplication.setPerposeClerk(perposeClerk);
+			}
 		} else {
 			officeSupplyApplication = OfficeSupplyApplicationLocalServiceUtil
 					.createOfficeSupplyApplication(CounterLocalServiceUtil.increment());
@@ -102,19 +125,26 @@ public class OfficeSupplyApplicationPortlet extends MVCPortlet {
 		String[] units = request.getParameterValues("unit");
 		String[] unitPrices = request.getParameterValues("unitPrice");
 		String[] quantities = request.getParameterValues("quantity");
-			for (int i = 0; i < names.length; i++) {
-				OfficeSupplyApplicationItem officeSupplyApplicationItem = OfficeSupplyApplicationItemLocalServiceUtil
-						.createOfficeSupplyApplicationItem(CounterLocalServiceUtil.increment());
-				officeSupplyApplicationItem.setName(names[i]);
-				officeSupplyApplicationItem.setModel(models[i]);
-				officeSupplyApplicationItem.setUnit(units[i]);
-				officeSupplyApplicationItem.setUnitPrice(Double.valueOf(unitPrices[i]));
-				officeSupplyApplicationItem.setQuantity(Integer.valueOf(quantities[i]));
-				officeSupplyApplicationItem.setOfficeSupplyApplicationId(officeSupplyApplication
-						.getOfficeSupplyApplicationId());
-				OfficeSupplyApplicationItemLocalServiceUtil
-						.updateOfficeSupplyApplicationItem(officeSupplyApplicationItem);
+		for (int i = 0; i < names.length; i++) {
+			OfficeSupplyApplicationItem officeSupplyApplicationItem = OfficeSupplyApplicationItemLocalServiceUtil
+					.createOfficeSupplyApplicationItem(CounterLocalServiceUtil.increment());
+			officeSupplyApplicationItem.setName(names[i]);
+			officeSupplyApplicationItem.setModel(models[i]);
+			officeSupplyApplicationItem.setUnit(units[i]);
+			officeSupplyApplicationItem.setUnitPrice(Double.valueOf(unitPrices[i]));
+			officeSupplyApplicationItem.setQuantity(Integer.valueOf(quantities[i]));
+			officeSupplyApplicationItem.setOfficeSupplyApplicationId(officeSupplyApplication
+					.getOfficeSupplyApplicationId());
+			OfficeSupplyApplicationItemLocalServiceUtil.updateOfficeSupplyApplicationItem(officeSupplyApplicationItem);
 		}
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(OfficeSupplyApplication.class.getName(),
+				request);
+		AssetEntryLocalServiceUtil.updateEntry(themeDisplay.getUserId(), officeSupplyApplication.getGroupId(),
+				OfficeSupplyApplication.class.getName(), officeSupplyApplication.getOfficeSupplyApplicationId(), null,
+				null);
+		WorkflowHandlerRegistryUtil.startWorkflowInstance(officeSupplyApplication.getCompanyId(),
+				officeSupplyApplication.getUserId(), OfficeSupplyApplication.class.getName(),
+				officeSupplyApplication.getOfficeSupplyApplicationId(), officeSupplyApplication, serviceContext);
 	}
 
 	public void editOfficeSupplyApplication(ActionRequest request, ActionResponse response) throws PortalException,
@@ -162,4 +192,34 @@ public class OfficeSupplyApplicationPortlet extends MVCPortlet {
 		request.setAttribute("officeSupplyApplicationItems", officeSupplyApplicationItems);
 		request.setAttribute("sum", sum);
 	}
+	
+	public void notification(ResourceRequest request, List<UserGroupRole> userGroupRoles) {
+		try {
+			ServiceContext serviceContext = ServiceContextFactory.getInstance(request);
+			JSONObject payloadJSON = JSONFactoryUtil.createJSONObject();
+			for (UserGroupRole userGroupRole: userGroupRoles) {
+//				UserNotificationEventLocalServiceUtil.addUserNotificationEvent(userGroupRole.getUserId(), com.longshine.notifications.WarnNotificationHandler.PORTLET_ID, (new Date()).getTime(), userGroupRole.getUserId(), payloadJSON.toString(), false, serviceContext);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	
+	@Override
+	public void serveResource(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException,
+			PortletException {
+		Long organizationId = ParamUtil.getLong(resourceRequest, "organizationId");
+		Long groupId = organizationId + 1;
+		List<UserGroupRole> userGroupRoles = null;
+		try {1
+			userGroupRoles = UserGroupRoleLocalServiceUtil.getUserGroupRolesByGroupAndRole(groupId, (long)29829);
+		} catch (SystemException e) {
+			e.printStackTrace();
+		}
+		if(userGroupRoles!=null){
+			notification(resourceRequest,userGroupRoles);
+		}
+		super.serveResource(resourceRequest, resourceResponse);
+	}
+	
 }
