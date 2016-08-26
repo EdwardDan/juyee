@@ -4,10 +4,13 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -41,14 +44,22 @@ import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.workflow.WorkflowException;
 import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
 import com.liferay.portal.kernel.workflow.WorkflowTask;
 import com.liferay.portal.kernel.workflow.WorkflowTaskManagerUtil;
+import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.UserGroupRole;
 import com.liferay.portal.model.WorkflowDefinitionLink;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
+import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
+import com.liferay.portal.service.UserNotificationEventLocalServiceUtil;
+import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.service.WorkflowDefinitionLinkLocalServiceUtil;
 import com.liferay.portal.service.WorkflowInstanceLinkLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -56,7 +67,6 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.workflow.kaleo.service.KaleoTaskInstanceTokenLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
-
 /**
  * Portlet implementation class VehicleApplicationPortlet
  */
@@ -68,6 +78,20 @@ public class VehicleApplicationPortlet extends MVCPortlet {
 	
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
+//		try{
+//		JSONObject payloadJSON = JSONFactoryUtil
+//                .createJSONObject();
+//        payloadJSON.put("userId",30105L);
+//        payloadJSON.put("viewURL","http://www.baidu.com");
+//        payloadJSON.put("temperature","3度");
+//        payloadJSON.put("picTime","2016-12-21 09:00");
+        UserNotificationEventLocalServiceUtil.addUserNotificationEvent(30105L, "vehicleapplication_WAR_oaportlet",
+//                        (new Date()).getTime(),
+//                        30105L,
+//                        "", false,
+//                        serviceContext);
+//		}catch(Exception e){
+//		}
 		String keywords = ParamUtil.getString(renderRequest, "keywords");
 		int delta = GetterUtil.getInteger(PropsUtil.get(PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA));
 		int pageSize = ParamUtil.getInteger(renderRequest, "delta", delta);
@@ -121,7 +145,6 @@ public class VehicleApplicationPortlet extends MVCPortlet {
 				e.printStackTrace();
 			}
 		}
-
 		VehicleApplication vehicleApplication = null;
 		if (vehicleApplicationId != 0) {
 			vehicleApplication = VehicleApplicationLocalServiceUtil.getVehicleApplication(vehicleApplicationId);
@@ -150,7 +173,7 @@ public class VehicleApplicationPortlet extends MVCPortlet {
 		String phone = ParamUtil.getString(actionRequest, "phone");
 		if(!driver.equals("")&&!phone.equals("")){
 			//调度后增加短信提醒
-						Dictionary car=null;
+			Dictionary car=null;
 			if(proposeVehicle!=0){
 				 car = DictionaryLocalServiceUtil.getDictionary(proposeVehicle);
 			}
@@ -213,7 +236,6 @@ public class VehicleApplicationPortlet extends MVCPortlet {
 			AssetEntryLocalServiceUtil.updateEntry(themeDisplay.getUserId(), vehicleApplication.getGroupId(),
 					VehicleApplication.class.getName(), vehicleApplication.getVehicleApplicationId(), null, null);
 			// if(null==WorkflowHandlerRegistryUtil.getWorkflowHandler(VehicleApplication.class.getName())){
-			System.out.println("id=" + vehicleApplication.getVehicleApplicationId());
 			WorkflowHandlerRegistryUtil.startWorkflowInstance(vehicleApplication.getCompanyId(),
 					vehicleApplication.getUserId(), VehicleApplication.class.getName(),
 					vehicleApplication.getVehicleApplicationId(), vehicleApplication, serviceContext);
