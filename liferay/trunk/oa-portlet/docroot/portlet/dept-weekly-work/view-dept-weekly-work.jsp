@@ -15,11 +15,52 @@
 <%@ page import="com.liferay.portal.kernel.dao.orm.QueryUtil"%>
 <c:set var="contextPath" value="${request.contextPath}/portlet/dept-weekly-work" />
 
+<script type="text/javascript">
+	document.write("<script src='${staticServerURL}/jquery/jquery-1.12.4.min.js'>" + "<"+"/script>");
+</script>
 <%
 	String isView = request.getParameter("isView");
 	DeptWork deptWork = (DeptWork) request.getAttribute("deptWork");
-	System.out.println(isView);
+	Long leaderId = ParamUtil.getLong(request, "leaderId");
+	Long userId = ParamUtil.getLong(request, "userId");
+	System.out.println(leaderId+";"+userId);
 %>
+<portlet:resourceURL var="stateReject" id="stateReject" />
+<portlet:resourceURL var="stateToReviewByBranchedLeader" id="stateToReviewByBranchedLeader" />
+<script>
+function stateReject() {
+	$.ajax({
+		type:"GET",
+		url:"<%=stateReject%>",
+				data : {
+					'<portlet:namespace/>userId_' : <%=deptWork.getUserId()%>,
+				},
+				error : function(err) {
+					alert("通知失败!");
+				},
+				success : function(data) {
+					
+					
+				}
+			});
+}
+function stateToReviewByBranchedLeader() {
+	$.ajax({
+		type:"GET",
+		url:"<%=stateToReviewByBranchedLeader%>",
+				data : {
+					'<portlet:namespace/>leaderId' : <%=leaderId%>,
+				},
+				error : function(err) {
+					alert("通知失败!");
+				},
+				success : function(data) {
+					
+					
+				}
+			});
+}
+</script>
 <portlet:renderURL var="viewURL" />
 <liferay-ui:header title="查看一周科室工作" backURL="${viewURL}" />
 <aui:row>
@@ -104,18 +145,21 @@
 	<div class="hide" id="<%=randomId%>updateComments">
 		<aui:input cols="55" name="_153_comment" id="_153_comment" label="审核意见" useNamespace="false" rows="10" type="textarea" />
 	</div>
-	<c:if test='<%=message.equals("approve")%>'>
+	<!-- 科长批准按钮 -->
+	<c:if test='<%=message.equals("approve")&&!leaderId.equals(userId)%>'>
+		<liferay-ui:icon cssClass='<%="workflow-task-" + randomId + " task-change-status-link"%>' id='<%=randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink"%>' image="check" message="<%=message%>" method="get" url="<%=url%>" onClick="stateToReviewByBranchedLeader()"/>
+	</c:if>
+	<!-- 分管领导批准按钮 -->
+	<c:if test='<%=message.equals("approve")&&leaderId.equals(userId)%>'>
 		<liferay-ui:icon cssClass='<%="workflow-task-" + randomId + " task-change-status-link"%>' id='<%=randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink"%>' image="check" message="<%=message%>" method="get" url="<%=url%>" />
 	</c:if>
 	<c:if test='<%=message.equals("reject")%>'>
-		<liferay-ui:icon cssClass='<%="workflow-task-" + randomId + " task-change-status-link"%>' id='<%=randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink"%>' image="close" message="<%=message%>" method="get" url="<%=url%>" />
+		<liferay-ui:icon cssClass='<%="workflow-task-" + randomId + " task-change-status-link"%>' id='<%=randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink"%>' image="close" message="<%=message%>" method="get" url="<%=url%>" onClick="stateReject()"/>
 	</c:if>
 	<aui:script use="liferay-workflow-tasks">
 		var onTaskClickFn = A.rbind('onTaskClick', Liferay.WorkflowTasks, '<%= randomId %>');
 		Liferay.delegateClick('<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(transitionName) %>taskChangeStatusLink', onTaskClickFn);
 	</aui:script>
-		
-
 	
 	<%
 		}
@@ -129,18 +173,19 @@
 	User me = PortalUtil.getUser(request);
 	if (null != me) {
 %>
+
+
+
+
+<!-- 审核活动详情 -->
 <liferay-ui:panel defaultState="closed" title="审核活动">
 
 	<table border="1" class="table table-bordered table-hover">
 		<tr>
-
 			<th>时间</th>
 			<th>活动</th>
 			<th>意见</th>
 		</tr>
-
-
-
 		<%
 			Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
 					List<Integer> logTypes = new ArrayList<Integer>();
@@ -189,8 +234,8 @@
 								<%
 									String previousActorName = null;
 
-																if (curRole == null) {
-																	previousActorName = PortalUtil.getUserName(workflowLog.getPreviousUserId(), StringPool.BLANK);
+									if (curRole == null) {
+										previousActorName = PortalUtil.getUserName(workflowLog.getPreviousUserId(), StringPool.BLANK);
 								%>
 
 								<%=LanguageUtil.format(pageContext, "task-assigned-to-x.-previous-assignee-was-x", new Object[] { HtmlUtil.escape(actorName), HtmlUtil.escape(previousActorName) })%>

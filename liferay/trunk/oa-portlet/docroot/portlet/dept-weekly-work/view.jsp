@@ -17,7 +17,9 @@
 <%@ page import="com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil"%>
 <c:set var="contextPath" value="${request.contextPath}/portlet/dept-weekly-work" />
 <portlet:renderURL var="viewURL" />
-
+<script type="text/javascript">
+	document.write("<script src='${staticServerURL}/jquery/jquery-1.12.4.min.js'>" + "<"+"/script>");
+</script>
 <%!private boolean isAssignedToUser(long assigneeUserId, User user) {
 		if (assigneeUserId == user.getUserId()) {
 			return true;
@@ -28,6 +30,7 @@
 	String randomId = StringPool.BLANK;
 	randomId = StringUtil.randomId();
 	String strBackUrl = PortalUtil.getPortalURL(request);
+	Long organizationId = 0L;
 	try {
 		request.setAttribute("userId",user.getUserId());
 		List<Role> userRoles = RoleLocalServiceUtil.getUserRoles(user.getUserId());
@@ -42,9 +45,14 @@
 		List<UserGroupRole> siteRoles = new ArrayList<UserGroupRole>();
 		Set<Long> kezhangRole = new HashSet<Long>();
 		Set<Long> kezhangGroup = new HashSet<Long>();
+		if(userGroupRoles!=null&&userGroupRoles.size()>0){
+			organizationId = userGroupRoles.get(0).getGroupId()-1;
+		}
+		
 		for(UserGroupRole userGroupRole : userGroupRoles) {
 		int roleType = userGroupRole.getRole().getType();
 		if (roleType == RoleConstants.TYPE_ORGANIZATION) {
+		
 	organizationRoles.add(userGroupRole);
 	kezhangRole.add(userGroupRole.getRoleId());
 	kezhangGroup.add(userGroupRole.getGroupId());
@@ -87,89 +95,89 @@
 			<liferay-ui:icon-menu>
 				<%
 					//查看登陆人是否符合同一组织内
-							List<UserGroupRole> userGroupRoles = UserGroupRoleLocalServiceUtil. getUserGroupRoles(deptWork.getUserId());
-							List<UserGroupRole> organizationRoles = new ArrayList<UserGroupRole>();
-							Set<Long> keyuanGroup = new HashSet<Long>();
-							for(UserGroupRole userGroupRole : userGroupRoles) {
-							int roleType = userGroupRole.getRole().getType();
-								if (roleType == RoleConstants.TYPE_ORGANIZATION) {
-									keyuanGroup.add(userGroupRole.getGroupId());
-									}
-								}
-							Iterator<Long> it = keyuanGroup.iterator();
-							Long oneGroup=0L;
-							while(it.hasNext()){
-								//一般科员只有一个部门
-							oneGroup=it.next();
-							}
-							//用来判断，提交人的groupId是否和科长的groupId一致
-							request.setAttribute("oneGroup", oneGroup.toString());
-							Long leaderId=0L;
-							User user3=null;
-							Group group2=GroupLocalServiceUtil.getGroup(oneGroup);
-							ExpandoValue a = ExpandoValueLocalServiceUtil.getValue(20154L,"com.liferay.portal.model.Organization", "CUSTOM_FIELDS", "分管领导", group2.getClassPK());
-							if(null!=a){
-								DynamicQuery dq = DynamicQueryFactoryUtil.forClass(User.class).add(PropertyFactoryUtil.forName("firstName").like("%"+a.getData()+"%"));
-								List<User> list = UserLocalServiceUtil.dynamicQuery(dq);
-								
-								for(User c:list){
-								leaderId=c.getUserId();
-								}
-							}
-							request.setAttribute("leaderId", leaderId);
-							
-							
-									String[] assetTypes = new String[1];
-											assetTypes[0]="com.justonetech.oa.model.DeptWork";
-											OrderByComparator orderByComparator=null;
-															    	
-											List<WorkflowTask> results1=null;
-											User me=PortalUtil.getUser(request);
-											if(null!=me){
-												try {
-													//遍历工作流任务
-													results1= WorkflowTaskManagerUtil.search(me.getCompanyId(), me.getUserId(), null, assetTypes, null, null, -1, -1, orderByComparator);
-												} catch (WorkflowException e3) {
-													// TODO Auto-generated catch block
-													e3.printStackTrace();
-												}
-												long workflowTaskId=0L;
-												long people=0L;
-												String url="";
-												List<String> transitionNames = null;//遍历工作流任务
-												String token="";//授权随机代码
-												if(null!=deptWork){
-													if(results1.size()>0){
-														//工作流任务
-														for(WorkflowTask task:results1){
-															if(null!=task){
-																if(KaleoTaskInstanceTokenLocalServiceUtil.getKaleoTaskInstanceToken(task.getWorkflowTaskId()).getClassPK()==deptWork.getDeptWorkId()){
-																    workflowTaskId=task.getWorkflowTaskId();
-																	people=task.getAssigneeUserId();
-															}
-														}
-													}
-												}
-											request.setAttribute("people", people);
-											token=com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
-											if(workflowTaskId==0){
-												transitionNames=new ArrayList<String>();
-											}else{
-												transitionNames=WorkflowTaskManagerUtil.getNextTransitionNames(me.getCompanyId(), me.getUserId(), workflowTaskId);
+									List<UserGroupRole> userGroupRoles = UserGroupRoleLocalServiceUtil. getUserGroupRoles(deptWork.getUserId());
+									List<UserGroupRole> organizationRoles = new ArrayList<UserGroupRole>();
+									Set<Long> keyuanGroup = new HashSet<Long>();
+									for(UserGroupRole userGroupRole : userGroupRoles) {
+									int roleType = userGroupRole.getRole().getType();
+										if (roleType == RoleConstants.TYPE_ORGANIZATION) {
+											keyuanGroup.add(userGroupRole.getGroupId());
 											}
 										}
-										String assignToMeURL=strBackUrl+"/group/control_panel/manage/-/my_workflow_tasks/view/"+workflowTaskId+"?p_auth="+token+"&p_p_lifecycle=1&doAsGroupId="+PortalUtil.getUser(request).getGroupId()+"&refererPlid=25177&controlPanelCategory=my&_153_cmd=assign&_153_assigneeUserId="+me.getUserId()+"&_153_redirect="+strBackUrl+"/group/zhxx/-&_153_struts_action=/my_workflow_tasks/edit_workflow_task";
-										request.setAttribute("isAssignedToUser",isAssignedToUser(people,me));
-										for(int i=transitionNames.size()-1;i>=0;i--){
-											String transitionName=transitionNames.get(i);
-											String message = "proceed";
-										if (Validator.isNotNull(transitionName)) {
-											message = HtmlUtil.escape(transitionName);
+									Iterator<Long> it = keyuanGroup.iterator();
+									Long oneGroup=0L;
+									while(it.hasNext()){
+										//一般科员只有一个部门
+									oneGroup=it.next();
+									}
+									//用来判断，提交人的groupId是否和科长的groupId一致
+									request.setAttribute("oneGroup", oneGroup.toString());
+									Long leaderId=0L;
+									User user3=null;
+									Group group2=GroupLocalServiceUtil.getGroup(oneGroup);
+									ExpandoValue a = ExpandoValueLocalServiceUtil.getValue(20154L,"com.liferay.portal.model.Organization", "CUSTOM_FIELDS", "分管领导", group2.getClassPK());
+									if(null!=a){
+										DynamicQuery dq = DynamicQueryFactoryUtil.forClass(User.class).add(PropertyFactoryUtil.forName("firstName").like("%"+a.getData()+"%"));
+										List<User> list = UserLocalServiceUtil.dynamicQuery(dq);
+										
+										for(User c:list){
+										leaderId=c.getUserId();
 										}
-										url=strBackUrl+"/group/control_panel/manage/-/my_workflow_tasks/view/"+workflowTaskId+"?p_auth="+token+"&p_p_lifecycle=1&doAsGroupId="+PortalUtil.getUser(request).getGroupId()+"&refererPlid=25177&controlPanelCategory=my&_153_cmd=save&_153_assigneeUserId="+people+"&_153_redirect="+strBackUrl+"/group/zhxx/-&_153_struts_action=/my_workflow_tasks/edit_workflow_task&_153_transitionName="+message;
+									}
+									request.setAttribute("leaderId", leaderId);
+									
+									
+											String[] assetTypes = new String[1];
+													assetTypes[0]="com.justonetech.oa.model.DeptWork";
+													OrderByComparator orderByComparator=null;
+																	    	
+													List<WorkflowTask> results1=null;
+													User me=PortalUtil.getUser(request);
+													if(null!=me){
+														try {
+															//遍历工作流任务
+															results1= WorkflowTaskManagerUtil.search(me.getCompanyId(), me.getUserId(), null, assetTypes, null, null, -1, -1, orderByComparator);
+														} catch (WorkflowException e3) {
+															// TODO Auto-generated catch block
+															e3.printStackTrace();
+														}
+														long workflowTaskId=0L;
+														long people=0L;
+														String url="";
+														List<String> transitionNames = null;//遍历工作流任务
+														String token="";//授权随机代码
+														if(null!=deptWork){
+															if(results1.size()>0){
+																//工作流任务
+																for(WorkflowTask task:results1){
+																	if(null!=task){
+																		if(KaleoTaskInstanceTokenLocalServiceUtil.getKaleoTaskInstanceToken(task.getWorkflowTaskId()).getClassPK()==deptWork.getDeptWorkId()){
+																		    workflowTaskId=task.getWorkflowTaskId();
+																			people=task.getAssigneeUserId();
+																	}
+																}
+															}
+														}
+													request.setAttribute("people", people);
+													token=com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
+													if(workflowTaskId==0){
+														transitionNames=new ArrayList<String>();
+													}else{
+														transitionNames=WorkflowTaskManagerUtil.getNextTransitionNames(me.getCompanyId(), me.getUserId(), workflowTaskId);
+													}
+												}
+												String assignToMeURL=strBackUrl+"/group/control_panel/manage/-/my_workflow_tasks/view/"+workflowTaskId+"?p_auth="+token+"&p_p_lifecycle=1&doAsGroupId="+PortalUtil.getUser(request).getGroupId()+"&refererPlid=25177&controlPanelCategory=my&_153_cmd=assign&_153_assigneeUserId="+me.getUserId()+"&_153_redirect="+strBackUrl+"/group/zhxx/-&_153_struts_action=/my_workflow_tasks/edit_workflow_task";
+												request.setAttribute("isAssignedToUser",isAssignedToUser(people,me));
+												for(int i=transitionNames.size()-1;i>=0;i--){
+													String transitionName=transitionNames.get(i);
+													String message = "proceed";
+												if (Validator.isNotNull(transitionName)) {
+													message = HtmlUtil.escape(transitionName);
+												}
+												url=strBackUrl+"/group/control_panel/manage/-/my_workflow_tasks/view/"+workflowTaskId+"?p_auth="+token+"&p_p_lifecycle=1&doAsGroupId="+PortalUtil.getUser(request).getGroupId()+"&refererPlid=25177&controlPanelCategory=my&_153_cmd=save&_153_assigneeUserId="+people+"&_153_redirect="+strBackUrl+"/group/zhxx/-&_153_struts_action=/my_workflow_tasks/edit_workflow_task&_153_transitionName="+message;
 				%>
 				<c:if test="${(deptWork.status==1&&deptWork.userId==userId)||(deptWork.status==4&&deptWork.userId==userId)||(deptWork.status==6&&deptWork.userId==userId)}">
-					<liferay-ui:icon cssClass='<%="workflow-task-" + randomId + " task-change-status-link"%>' id='<%=randomId + "taskChangeStatusLink"%>' image="../aui/random" message="<%=message%>" method="get" url="<%=url%>" />
+					<liferay-ui:icon cssClass='<%="workflow-task-" + randomId + " task-change-status-link"%>' id='<%=randomId + "taskChangeStatusLink"%>' image="../aui/random" message="<%=message%>" method="get" url="<%=url%>" onClick="stateToReviewBySectionChief()" />
 				</c:if>
 				<%
 					}
@@ -207,6 +215,8 @@
 					<portlet:param name="deptWorkId" value="${deptWork.deptWorkId}" />
 					<portlet:param name="mvcPath" value="${contextPath}/view-dept-weekly-work.jsp" />
 					<portlet:param name="isView" value="false" />
+					<portlet:param name="leaderId" value="${leaderId}" />
+					<portlet:param name="userId" value="${user.getUserId()}" />
 				</portlet:actionURL>
 
 				<portlet:actionURL var="deleteDeptWeeklyWorkURL" name="deleteDeptWeeklyWork">
@@ -240,41 +250,22 @@
 	var onTaskClickFn = A.rbind(Liferay.WorkflowTasks.onTaskClick, Liferay.WorkflowTasks, '');
 	Liferay.delegateClick('<portlet:namespace />taskAssignToMeLink', onTaskClickFn);
 </aui:script>
-	
 
+<portlet:resourceURL var="stateToReviewBySectionChief" id="stateToReviewBySectionChief" />
+<script>
+	function stateToReviewBySectionChief(){
+		$.ajax({
+			type:"GET",
+			url:"<%=stateToReviewBySectionChief%>",
+			data : {
+				'<portlet:namespace/>organizationId' :<%=organizationId%>,
+			},
+			error : function(err) {
+				alert("通知失败!");
+			},
+			success : function(data) {
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+			}
+		});
+	}
+</script>

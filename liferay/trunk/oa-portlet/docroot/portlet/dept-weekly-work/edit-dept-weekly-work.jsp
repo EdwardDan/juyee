@@ -11,6 +11,7 @@
 	User user_ = UserServiceUtil.getUserById(userId);
 	List<Organization> organizations = user_.getOrganizations();
 	String organzationName = organizations.get(0).getName();
+	Long organizationId = organizations.get(0).getOrganizationId();
 	String userName = PortalUtil.getUserName(userId, "");
 	DeptWork deptWork = (DeptWork)request.getAttribute("deptWork");
 	String startDate ="";
@@ -20,6 +21,9 @@
 		endDate = DateUtil.getDate(deptWork.getEndDate(), defaultDateFormatPattern, locale, timeZone);
 	}
 %>
+
+<portlet:resourceURL var="stateToReviewBySectionChief" id="stateToReviewBySectionChief" />
+
 <script type="text/javascript">
 	function changeLine(obj) {
 		if (obj.value == "添加") {
@@ -39,6 +43,20 @@
 			alert("请添加数据！");
 			return false;
 		}
+		$.ajax({
+			type:"GET",
+			url:"<%=stateToReviewBySectionChief%>",
+					data : {
+						'<portlet:namespace/>organizationId' : <%=organizationId%>,
+					},
+					error : function(err) {
+						alert("通知失败!");
+					},
+					success : function(data) {
+						
+						
+					}
+				});
 	}
 	function validate2() {
 		if ($("#deptWorkItems").html() == ' ') {
