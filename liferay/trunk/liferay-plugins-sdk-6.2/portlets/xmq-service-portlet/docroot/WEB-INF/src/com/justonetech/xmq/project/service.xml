@@ -10,7 +10,7 @@
 		<!-- Group instance -->
 		<!-- Business fields -->
 		<column name="bjrq" type="Date" /><!-- 报建日期 -->
-		<column name="bjWebid" type="" /><!-- 网上申请编号 -->
+		<column name="bjWebid" type="String" /><!-- 网上申请编号 -->
 		<column name="xmmc" type="String" /><!--项目名称 -->
 		<column name="bjwcbj" type="String" /><!-- 报建完成标志 -->
 		<!-- Workflow fields -->
