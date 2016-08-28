@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
+<service-builder package-path="com.justonetech.xmq.project">
+	<author>fanqi</author>
+	<namespace>xmq</namespace>
+	<!-- 报建项目 -->
+	<entity name="Project" local-service="true" remote-service="false">
+		<!-- PK fields -->
+		<column name="bjbh" type="String" primary="true" /><!-- 报建编号 -->
+		<!-- Group instance -->
+		<!-- Business fields -->
+		<column name="bjrq" type="Date" /><!-- 报建日期 -->
+		<column name="bjWebid" type="" /><!-- 网上申请编号 -->
+		<column name="xmmc" type="String" /><!--项目名称 -->
+		<column name="bjwcbj" type="String" /><!-- 报建完成标志 -->
+		<!-- Workflow fields -->
+		<!-- Order -->
+		<order>
+			<order-column name="bjrq" order-by="desc"></order-column><!-- 报建日期逆序 -->
+		</order>
+		<!-- Finder methods -->
+	</entity>
+</service-builder>
