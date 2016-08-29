@@ -2,7 +2,7 @@
 <!DOCTYPE user-notification-definitions PUBLIC "-//Liferay//DTD User Notification Definitions 6.2.0//EN" "http://www.liferay.com/dtd/liferay-user-notification-definitions_6_2_0.dtd">
 <user-notification-definitions>
     <definition>
-        <notification-type>${com.justonetech.oa.workflow.WarnNotificationHandler.PORTLET_ID}</notification-type>
+        <notification-type>${com.justonetech.oa.notification.VehicleApplicationNotificationHandler.PORTLET_ID}</notification-type>
         <description>receive-a-notification-when-example-triggered</description>
         <delivery-type>
             <name>website</name>
