@@ -18,6 +18,11 @@
 <script type="text/javascript">
 	document.write("<script src='${staticServerURL}/jquery/jquery-1.12.4.min.js'>" + "<"+"/script>");
 </script>
+<style type="text/css">
+	.table tr td{
+		border:1px solid #ddd;
+	}
+</style>
 <%
 	String isView = request.getParameter("isView");
 	DeptWork deptWork = (DeptWork) request.getAttribute("deptWork");
@@ -182,14 +187,14 @@ function stateToReviewByBranchedLeader() {
 
 	<table border="1" class="table table-bordered table-hover">
 		<tr>
-			<th>时间</th>
-			<th>活动</th>
-			<th>意见</th>
+			<td>时间</td>
+			<td>活动</td>
+			<td>意见</td>
 		</tr>
 		<%
 			Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
 					List<Integer> logTypes = new ArrayList<Integer>();
-
+					
 					System.out.println("me.getCompanyId(), me.getGroupId()" + me.getCompanyId() + "," + me.getGroupId());
 					logTypes.add(WorkflowLog.TASK_ASSIGN);
 					logTypes.add(WorkflowLog.TASK_COMPLETION);

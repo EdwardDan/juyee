@@ -86,7 +86,7 @@ public class DeptWeeklyWorkPortlet extends MVCPortlet {
 			ServiceContext serviceContext = ServiceContextFactory.getInstance(request);
 			JSONObject payloadJSON = JSONFactoryUtil.createJSONObject();
 			for (UserGroupRole userGroupRole : userGroupRoles) {
-				UserNotificationEventLocalServiceUtil.addUserNotificationEvent(userGroupRole.getUserId(), com.longshine.notifications.WarnNotificationHandler.PORTLET_ID, (new Date()).getTime(), userGroupRole.getUserId(), payloadJSON.toString(), false, serviceContext);
+				UserNotificationEventLocalServiceUtil.addUserNotificationEvent(userGroupRole.getUserId(), com.justonetech.oa.notification.DeptWeeklyWorkNotificationHandler.PORTLET_ID, (new Date()).getTime(), userGroupRole.getUserId(), payloadJSON.toString(), false, serviceContext);
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -118,7 +118,7 @@ public class DeptWeeklyWorkPortlet extends MVCPortlet {
 			try {
 				ServiceContext serviceContext = ServiceContextFactory.getInstance(resourceRequest);
 				JSONObject payloadJSON = JSONFactoryUtil.createJSONObject();
-				UserNotificationEventLocalServiceUtil.addUserNotificationEvent(leaderId, com.longshine.notifications.WarnNotificationHandler.PORTLET_ID, (new Date()).getTime(), leaderId, payloadJSON.toString(), false, serviceContext);
+				UserNotificationEventLocalServiceUtil.addUserNotificationEvent(leaderId, com.justonetech.oa.notification.DeptWeeklyWorkNotificationHandler.PORTLET_ID, (new Date()).getTime(), leaderId, payloadJSON.toString(), false, serviceContext);
 
 			} catch (Exception e) {
 				// TODO: handle exception
@@ -130,7 +130,7 @@ public class DeptWeeklyWorkPortlet extends MVCPortlet {
 			try {
 				ServiceContext serviceContext = ServiceContextFactory.getInstance(resourceRequest);
 				JSONObject payloadJSON = JSONFactoryUtil.createJSONObject();
-				UserNotificationEventLocalServiceUtil.addUserNotificationEvent(userId_, com.longshine.notifications.WarnNotificationHandler.PORTLET_ID, (new Date()).getTime(), userId_, payloadJSON.toString(), false, serviceContext);
+				UserNotificationEventLocalServiceUtil.addUserNotificationEvent(userId_, com.justonetech.oa.notification.DeptWeeklyWorkNotificationHandler.PORTLET_ID, (new Date()).getTime(), userId_, payloadJSON.toString(), false, serviceContext);
 
 			} catch (Exception e) {
 				// TODO: handle exception
