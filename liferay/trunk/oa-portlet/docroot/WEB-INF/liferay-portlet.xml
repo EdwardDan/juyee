@@ -25,8 +25,6 @@
 	<portlet>
 		<portlet-name>dept-weekly-work</portlet-name>
 		<icon>/icons/icon.png</icon>
-		<asset-renderer-factory>com.justonetech.oa.asset.DeptWeeklyWorkAssetRenderFactory</asset-renderer-factory>
-	    <workflow-handler>com.justonetech.oa.workflow.DeptWeeklyWorkWorkflowHandler</workflow-handler>
 		<header-portlet-css>/css/main.css</header-portlet-css>
 		<footer-portlet-javascript>
 			/js/main.js
@@ -46,7 +44,7 @@
 		<portlet-name>vehicle-application</portlet-name>
 		<icon>/icons/icon.png</icon>
 		<user-notification-definitions>warn-notification-definitions.xml</user-notification-definitions>
-        <user-notification-handler-class>com.justonetech.oa.workflow.WarnNotificationHandler</user-notification-handler-class>
+        <user-notification-handler-class>com.justonetech.oa.notification.VehicleApplicationNotificationHandler</user-notification-handler-class>
 		<asset-renderer-factory>com.justonetech.oa.asset.VehicleApplicationAssetRenderFactory</asset-renderer-factory>
 	    <workflow-handler>com.justonetech.oa.workflow.VehicleApplicationWorkflowHandler</workflow-handler>
 		<header-portlet-css>/css/main.css</header-portlet-css>
