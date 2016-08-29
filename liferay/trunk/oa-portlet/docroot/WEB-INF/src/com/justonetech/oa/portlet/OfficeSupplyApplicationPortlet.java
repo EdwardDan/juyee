@@ -211,7 +211,7 @@ public class OfficeSupplyApplicationPortlet extends MVCPortlet {
 		Long organizationId = ParamUtil.getLong(resourceRequest, "organizationId");
 		Long groupId = organizationId + 1;
 		List<UserGroupRole> userGroupRoles = null;
-		try {1
+		try {
 			userGroupRoles = UserGroupRoleLocalServiceUtil.getUserGroupRolesByGroupAndRole(groupId, (long)29829);
 		} catch (SystemException e) {
 			e.printStackTrace();

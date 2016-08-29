@@ -31,7 +31,7 @@ public class VehicleApplicationAssetRenderFactory extends BaseAssetRendererFacto
 //	     if (type == TYPE_LATEST_APPROVED) {   
 //	         status = WorkflowConstants.STATUS_APPROVED;   
 //	     }   
-//	        
+//	        s
 //	     VehicleApplication vehicleApplication = VehicleApplicationLocalServiceUtil.getVehicleApplication(classPk);   
 //	     return new VehicleApplicationAssetRender(vehicleApplication);   
 //	 }   

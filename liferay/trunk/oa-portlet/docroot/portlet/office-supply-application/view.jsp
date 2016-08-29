@@ -87,8 +87,7 @@
 		%>
 		<liferay-ui:search-container-column-text value="<%=createTime%>"
 			name="申请时间" />
-		<liferay-ui:search-container-column-text
-			name="status" value="<%=status[officeSupplyApplication.getStatus()]%>"/>
+		<liferay-ui:search-container-column-text name="status" value="<%=status[officeSupplyApplication.getStatus()]%>"/>
 		<liferay-ui:search-container-column-text name="action">
 			<portlet:actionURL var="editOfficeSupplyApplicationURL"
 				name="editOfficeSupplyApplication">
