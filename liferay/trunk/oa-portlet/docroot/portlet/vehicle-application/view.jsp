@@ -131,16 +131,19 @@ try {
 			request.setAttribute("oneGroup", oneGroup.toString());
 			Long leaderId=0L;
 			User user3=null;
-			Group group2=GroupLocalServiceUtil.getGroup(oneGroup);
-			ExpandoValue a=ExpandoValueLocalServiceUtil.getValue(20154L,"com.liferay.portal.model.Organization", "CUSTOM_FIELDS", "分管领导", group2.getClassPK());
-			if(null!=a){
-				DynamicQuery dq = DynamicQueryFactoryUtil.forClass(User.class).add(PropertyFactoryUtil.forName("firstName").like("%"+a.getData()+"%"));
-				List<User> list = UserLocalServiceUtil.dynamicQuery(dq);
-				for(User c:list){
-					leaderId=c.getUserId();
+			if(oneGroup!=0){
+				Group group2=GroupLocalServiceUtil.getGroup(oneGroup);
+				ExpandoValue a=ExpandoValueLocalServiceUtil.getValue(20154L,"com.liferay.portal.model.Organization", "CUSTOM_FIELDS", "分管领导", group2.getClassPK());
+				if(null!=a){
+					DynamicQuery dq = DynamicQueryFactoryUtil.forClass(User.class).add(PropertyFactoryUtil.forName("firstName").like("%"+a.getData()+"%"));
+					List<User> list = UserLocalServiceUtil.dynamicQuery(dq);
+					for(User c:list){
+						leaderId=c.getUserId();
+					}
 				}
+				request.setAttribute("user3", leaderId);
 			}
-			request.setAttribute("user3", leaderId);
+			
 			
 				String[] assetTypes = new String[1];
 		    	assetTypes[0]="com.justonetech.oa.model.VehicleApplication";

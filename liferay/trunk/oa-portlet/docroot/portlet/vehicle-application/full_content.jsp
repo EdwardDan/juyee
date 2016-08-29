@@ -14,12 +14,20 @@
 <%@ page import="com.liferay.portal.kernel.language.LanguageUtil" %>
 <%@ page import="com.liferay.portal.kernel.workflow.comparator.WorkflowComparatorFactoryUtil" %>
 <%@ page import="com.liferay.portal.kernel.dao.orm.QueryUtil" %>
+<style type="text/css">
+	.table tr td{
+		border:1px solid #ddd;
+	}
+</style>
+
 <%   
 String randomId = StringPool.BLANK;
 randomId = StringUtil.randomId();
 String isAudit=request.getParameter("isAudit");
-VehicleApplication vehicleApplication = (VehicleApplication)request.getAttribute("vehicleApplication");   
+VehicleApplication vehicleApplication = (VehicleApplication)request.getAttribute("vehicleApplication");  
+System.out.println("111"+request.getAttribute("_153_workflowTaskId"));
 String proposeVehicle="";
+System.out.println("车辆的号码"+vehicleApplication.getProposeVehicle());
 if(vehicleApplication.getProposeVehicle()!=0&&vehicleApplication.getProposeVehicle()!=1){
 	proposeVehicle=DictionaryLocalServiceUtil.getDictionary(vehicleApplication.getProposeVehicle()).getName();
 }
@@ -65,11 +73,6 @@ if(vehicleApplication.getProposeVehicle()!=0&&vehicleApplication.getProposeVehic
 			</aui:col>
 			<aui:col span="6" cssClass="">
 			<aui:input name="proposeVehicle" label="拟派车辆:" value="<%=proposeVehicle%>" readonly="true"/>
-				<%-- <aui:select name="proposeVehicle" label="拟派车辆:" inlineField="true"
-					inlineLabel="left" type="select" style="width:100px">
-					<aui:option value="0" selected="${vehicleApplication.proposeVehicle eq 0}">沪A12345</aui:option>
-					<aui:option value="1" selected="${vehicleApplication.proposeVehicle eq 1}">沪B12345</aui:option>
-				</aui:select> --%>
 			</aui:col>
 		</aui:row>
 		<aui:row>
@@ -85,10 +88,18 @@ if(vehicleApplication.getProposeVehicle()!=0&&vehicleApplication.getProposeVehic
 	</aui:fieldset>
 	<aui:button-row>
 		<%
+		
 		String strBackUrl = "http://" + request.getServerName() //服务器地址  
         + ":"   
         + request.getServerPort() ;          //端口号  
        System.out.println("strBackUrl="+strBackUrl);
+     /*   String redirect = ParamUtil.getString(request, "redirect");
+
+		if (Validator.isNull(redirect)) {
+			redirect = strBackUrl+"/web/guest/shouye";
+		} */
+		
+		
 				String[] assetTypes = new String[1];
 		    	assetTypes[0]="com.justonetech.oa.model.VehicleApplication";
 	    	OrderByComparator orderByComparator=null;
@@ -133,7 +144,7 @@ if(vehicleApplication.getProposeVehicle()!=0&&vehicleApplication.getProposeVehic
 					if (Validator.isNotNull(transitionName)) {
 						message = HtmlUtil.escape(transitionName);
 					}
-				 url=strBackUrl+"/group/control_panel/manage/-/my_workflow_tasks/view/"+workflowTaskId+"?p_auth="+token+"&p_p_lifecycle=1&doAsGroupId="+PortalUtil.getUser(request).getGroupId()+"&refererPlid=25177&controlPanelCategory=my&_153_cmd=save&_153_assigneeUserId="+people+"&_153_redirect="+strBackUrl+"/web/guest/shouye&_153_struts_action=/my_workflow_tasks/edit_workflow_task&_153_transitionName="+message;
+				url=strBackUrl+"/group/control_panel/manage/-/my_workflow_tasks/view/"+workflowTaskId+"?p_auth="+token+"&p_p_lifecycle=1&doAsGroupId="+PortalUtil.getUser(request).getGroupId()+"&refererPlid=25177&controlPanelCategory=my&_153_cmd=save&_153_assigneeUserId="+people+"&_153_redirect="+strBackUrl+"/web/guest/shouye&_153_struts_action=/my_workflow_tasks/edit_workflow_task&_153_transitionName="+message;
 				 if(isAudit!=null){
 						if(isAudit.equals("1")){
 
@@ -142,11 +153,23 @@ if(vehicleApplication.getProposeVehicle()!=0&&vehicleApplication.getProposeVehic
 	<aui:input cols="55" name="_153_comment" id="_153_comment" label="审核意见" useNamespace="false" rows="10" type="textarea" />
 </div>
 		<%-- <aui:button type="button" value="<%=message %>" href="<%=url %>"/>  --%>
+		
+	<%-- 	<liferay-portlet:actionURL var="editURL" portletName="153">
+				<liferay-portlet:param name="struts_action" value="/my_workflow_tasks/edit_workflow_task"/>
+				<liferay-portlet:param name="<%= Constants.CMD %>" value="<%= Constants.SAVE %>" />
+				<liferay-portlet:param name="redirect" value="${viewURL }" />
+				<liferay-portlet:param name="workflowTaskId" value="<%= String.valueOf(workflowTaskId) %>" />
+				<liferay-portlet:param name="assigneeUserId" value="<%= String.valueOf(people) %>" />
+				<c:if test="<%= transitionName != null %>">
+					<liferay-portlet:param name="transitionName" value="<%= transitionName %>" />
+				</c:if>
+			</liferay-portlet:actionURL> --%>
+		
 		<c:if test='<%=message.equals("通过") %>'>
 		<liferay-ui:icon
 				cssClass='<%= "workflow-task-" + randomId + " task-change-status-link" %>'
 				id='<%= randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink" %>'
-				image="check"
+				image="pass"
 				message="<%= message %>"
 				method="get"
 				url="<%= url %>"
@@ -156,7 +179,7 @@ if(vehicleApplication.getProposeVehicle()!=0&&vehicleApplication.getProposeVehic
 		<liferay-ui:icon
 				cssClass='<%= "workflow-task-" + randomId + " task-change-status-link" %>'
 				id='<%= randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink" %>'
-				image="close"
+				image="reject"
 				message="<%= message %>"
 				method="get"
 				url="<%= url %>"
@@ -181,9 +204,9 @@ Liferay.delegateClick('<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(tra
 <table border="1" class="table table-bordered table-hover">
 	<tr>
 
-		<th>时间</th>
-		<th>活动</th>
-		<th>意见</th>
+		<td>时间</td>
+		<td>活动</td>
+		<td>意见</td>
 	</tr>
 
 
