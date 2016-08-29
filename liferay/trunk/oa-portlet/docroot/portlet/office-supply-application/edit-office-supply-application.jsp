@@ -11,7 +11,6 @@
 .table tr td {
 	border: 1px solid #ddd;
 }
-
 .table tr td input {
 	width: 100%;
 	height: 28px;
@@ -23,7 +22,7 @@
 	document.write("<script src='${staticServerURL}/jquery/jquery-1.12.4.min.js'>" + "<"+"/script>");
 </script>
 <portlet:renderURL var="viewURL" />
-<portlet:resourceURL var="notifyURL"/>
+<portlet:resourceURL var="notifyURL" id="stateToReviewByKezhang"/>
 <%
 	long userId = PortalUtil.getUserId(request);
 	String strBackUrl = "http://" + request.getServerName() //服务器地址  
@@ -102,7 +101,6 @@
 			alert("请添加数据！");
 			return false;
 		}
-		alert(1233),
 		$.ajax({			
 			type:"GET",
 			url:"<%=notifyURL%>",
@@ -141,7 +139,7 @@
 	<aui:row>
 		<aui:col span="6">
 			<aui:input type="hidden" name="officeSupplyApplicationId"
-				value="${officeSupplyApplication.officeSupplyApplicationId}" />
+				value="${officeSupplyApplication.officeSupplyApplicationId}"/>
 			<aui:input name="type" value="submit" id="status" type="hidden" />
 			<aui:input name="deptName" label="申请部门"
 				value="${officeSupplyApplication.status==5?officeSupplyApplication.getDeptName():organizationName}"
@@ -167,19 +165,19 @@
 			<c:forEach items="${officeSupplyApplicationItems}" var="item">
 				<tr align="center">
 					<td><input name="<portlet:namespace/>name"
-						value="${item.name}" /></td>
+						value="${item.name}" readonly="${officeSupplyApplication.status==5?true:false}"/></td>
 					<td><input name="<portlet:namespace/>model"
-						value="${item.model}" /></td>
+						value="${item.model}" readonly="${officeSupplyApplication.status==5?true:false}"/></td>
 					<td><input name="<portlet:namespace/>unit"
-						value="${item.unit}" /></td>
+						value="${item.unit}" readonly="${officeSupplyApplication.status==5?true:false}"/></td>
 					<td><input name="<portlet:namespace/>unitPrice"
 						placeholder="请输入正数" value="${item.unitPrice}" onchange="count()"
-						onkeyup="value=value.replace(/[^\d.]/g,'')" /></td>
+						onkeyup="value=value.replace(/[^\d.]/g,'')" readonly="${officeSupplyApplication.status==5?true:false}"/></td>
 					<td><input name="<portlet:namespace/>quantity"
 						placeholder="请输入正整数" value="${item.quantity}" onchange="count()"
-						onkeyup="this.value=this.value.replace(/[^\d]/ig,'')" /></td>
+						onkeyup="this.value=this.value.replace(/[^\d]/ig,'')" readonly="${officeSupplyApplication.status==5?true:false}"/></td>
 					<td><input type="button" class="btn" value="删除"
-						onclick="changeLine(this)" style="width: 100%;" /></td>
+						onclick="changeLine(this)" style="width: 100%;" readonly="${officeSupplyApplication.status==5?true:false}"/></td>
 				</tr>
 			</c:forEach>
 		</c:if>
@@ -196,7 +194,7 @@
 	<aui:row>
 		<aui:col span="12">
 			<aui:input type="textarea" name="introductions" label="申请说明"
-				value="${officeSupplyApplication.introductions}" cssClass="span12" />
+				value="${officeSupplyApplication.introductions}" cssClass="span12" readonly="${officeSupplyApplication.status==5?true:false}"/>
 		</aui:col>
 	</aui:row>
 	<c:if test="${officeSupplyApplication.status==5}">

@@ -11,6 +11,9 @@
 <c:set var="contextPath"
 	value="${request.contextPath}/portlet/office-supply-application" />
 <portlet:renderURL var="viewURL" />
+<script type="text/javascript">
+	document.write("<script src='${staticServerURL}/jquery/jquery-1.12.4.min.js'>" + "<"+"/script>");
+</script>
 <%!private boolean isAssignedToUser(long assigneeUserId, User user) {
 			if (assigneeUserId == user.getUserId()) {
 				return true;
@@ -24,9 +27,9 @@
 		                    + ":"   
 		                    + request.getServerPort() ;          //端口号  
 		System.out.println("strBackUrl=" + strBackUrl);
+		Long organizationId = 0L;
 		try {
 			request.setAttribute("userId", user.getUserId());
-			System.out.println("userId=" + user.getUserId());
 			List<UserGroupRole> userGroupRoles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(themeDisplay.getUserId());
 			Set<Long> siteRole = new HashSet<Long>();
 			 for(UserGroupRole userGroupRole : userGroupRoles) {
@@ -38,6 +41,9 @@
 			List<UserGroupRole> organizationRoles = new ArrayList<UserGroupRole>();
 			Set<Long> kezhangRole = new HashSet<Long>();
 			Set<Long> kezhangGroup = new HashSet<Long>();
+			if(userGroupRoles!=null&&userGroupRoles.size()>0){
+				organizationId = userGroupRoles.get(0).getGroupId()-1;
+			}
 			for (UserGroupRole userGroupRole : userGroupRoles) {
 				int roleType = userGroupRole.getRole().getType();
 				if (roleType == RoleConstants.TYPE_ORGANIZATION) {
@@ -188,7 +194,7 @@
 						cssClass='<%= "workflow-task-" + randomId + " task-change-status-link" %>'
 						id='<%= randomId + "taskChangeStatusLink" %>'
 						image="../aui/random" message="<%=message%>" method="get"
-						url="<%=url%>" />
+						url="<%=url%>" onClick="stateToReviewByKezhang()"/>
 			    </c:if>
 				<%
 					}
@@ -242,3 +248,22 @@
 	</liferay-ui:search-container-row>
   	<liferay-ui:search-iterator />
 </liferay-ui:search-container>
+<portlet:resourceURL var="stateToReviewByKezhang" id="stateToReviewByKezhang" />
+<script>
+	function stateToReviewByKezhang(){
+		alert(123456);
+		$.ajax({
+			type:"GET",
+			url:"<%=stateToReviewByKezhang%>",
+			data : {
+				'<portlet:namespace/>organizationId' :<%=organizationId%>,
+			},
+			error : function(err) {
+				alert("通知失败!");
+			},
+			success : function(data) {
+
+			}
+		});
+	}
+</script>

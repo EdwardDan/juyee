@@ -26,15 +26,13 @@ public class OfficeSupplyApplicationNotificationHandler extends BaseUserNotifica
 //	                .getString("picTime");
 //	        String temperature = jsonObject.getString("temperature");
 	        String title = "<strong>"
-	               +"您有一个办公用品申请审核任务，快去处理！"
+	               +"您有一个办公用品申请审核任务。"
 	                + "</strong>";
-	        String bodyText = "点击查看";
 	        StringBundler sb = new StringBundler(5);
 	        sb.append("<div class=\"title\">");
 	        sb.append(title);
 	        sb.append("</div> <div ");
 	        sb.append("class=\"body\">");
-	        sb.append(bodyText);
 	        sb.append("</div>");
 	        return sb.toString();
 	    }
