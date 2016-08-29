@@ -3,6 +3,7 @@ package com.justonetech.oa.portlet;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -12,6 +13,8 @@ import javax.portlet.ActionResponse;
 import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+import javax.portlet.ResourceRequest;
+import javax.portlet.ResourceResponse;
 
 import com.justonetech.oa.model.DeptWork;
 import com.justonetech.oa.model.DeptWorkItem;
@@ -21,6 +24,8 @@ import com.justonetech.oa.service.DeptWorkLocalServiceUtil;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.DateUtil;
@@ -31,8 +36,12 @@ import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
+import com.liferay.portal.model.User;
+import com.liferay.portal.model.UserGroupRole;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
+import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
+import com.liferay.portal.service.UserNotificationEventLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil;
@@ -45,7 +54,7 @@ public class DeptWeeklyWorkPortlet extends MVCPortlet {
 
 	private static Log log = LogFactoryUtil.getLog(DeptWeeklyWorkPortlet.class);
 	private static String timeFormatPattern = PropsUtil.get("default.date.format.pattern");
-	
+
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
 		long userId = PortalUtil.getUserId(renderRequest);
@@ -67,23 +76,80 @@ public class DeptWeeklyWorkPortlet extends MVCPortlet {
 		} catch (SystemException e) {
 			log.error("countByUserNam(" + userName + ")错误：" + e.getMessage());
 		}
-		
 		renderRequest.setAttribute("deptWorks", deptWorks);
 		renderRequest.setAttribute("deptWorkCount", deptWorkCount);
 		super.doView(renderRequest, renderResponse);
 	}
 
-	public void saveDeptWork(ActionRequest request, ActionResponse response) throws SystemException, PortalException,
-			ParseException {
+	public void notification(ResourceRequest request, List<UserGroupRole> userGroupRoles) {
+		try {
+			ServiceContext serviceContext = ServiceContextFactory.getInstance(request);
+			JSONObject payloadJSON = JSONFactoryUtil.createJSONObject();
+			for (UserGroupRole userGroupRole : userGroupRoles) {
+				UserNotificationEventLocalServiceUtil.addUserNotificationEvent(userGroupRole.getUserId(), com.longshine.notifications.WarnNotificationHandler.PORTLET_ID, (new Date()).getTime(), userGroupRole.getUserId(), payloadJSON.toString(), false, serviceContext);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+
+	public void serveResource(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException, PortletException {
+		System.out.println("发出通知:");
+		String resourceId = resourceRequest.getResourceID();
+		System.out.println(resourceId);
+		// 通知科长审核
+		if (resourceId.equals("stateToReviewBySectionChief")) {
+			Long organizationId = ParamUtil.getLong(resourceRequest, "organizationId");
+			Long groupId = organizationId + 1;
+			List<UserGroupRole> userGroupRoles = null;
+			try {
+				userGroupRoles = UserGroupRoleLocalServiceUtil.getUserGroupRolesByGroupAndRole(groupId, (long) 29829);
+				super.serveResource(resourceRequest, resourceResponse);
+			} catch (SystemException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if (userGroupRoles != null) {
+				notification(resourceRequest, userGroupRoles);
+			}
+		} else if (resourceId.equals("stateToReviewByBranchedLeader")) {
+			Long leaderId = ParamUtil.getLong(resourceRequest, "leaderId");
+			System.out.println("leaderId=" + leaderId);
+			try {
+				ServiceContext serviceContext = ServiceContextFactory.getInstance(resourceRequest);
+				JSONObject payloadJSON = JSONFactoryUtil.createJSONObject();
+				UserNotificationEventLocalServiceUtil.addUserNotificationEvent(leaderId, com.longshine.notifications.WarnNotificationHandler.PORTLET_ID, (new Date()).getTime(), leaderId, payloadJSON.toString(), false, serviceContext);
+
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+
+		} else if (resourceId.equals("stateReject")) {
+			Long userId_ = ParamUtil.getLong(resourceRequest, "userId_");
+			System.out.println(userId_);
+			try {
+				ServiceContext serviceContext = ServiceContextFactory.getInstance(resourceRequest);
+				JSONObject payloadJSON = JSONFactoryUtil.createJSONObject();
+				UserNotificationEventLocalServiceUtil.addUserNotificationEvent(userId_, com.longshine.notifications.WarnNotificationHandler.PORTLET_ID, (new Date()).getTime(), userId_, payloadJSON.toString(), false, serviceContext);
+
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+
+		}
+
+	}
+
+	public void saveDeptWork(ActionRequest request, ActionResponse response) throws SystemException, PortalException, ParseException {
 		ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(VehicleApplication.class.getName(),
-				request);
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(VehicleApplication.class.getName(), request);
 		String type = ParamUtil.getString(request, "type");
 		String statusStr = null;
-		if(type.equals("submit")){
+
+		if (type.equals("submit")) {
 			statusStr = "提交";
-			
-		}else{
+
+		} else {
 			statusStr = "填写";
 		}
 		long deptWorkId = ParamUtil.getLong(request, "deptWorkId");
@@ -128,11 +194,11 @@ public class DeptWeeklyWorkPortlet extends MVCPortlet {
 		String[] contents = request.getParameterValues("content");
 		String[] schedules = request.getParameterValues("schedule");
 		String[] agentPersonString = request.getParameterValues("agentPerson");
-		for(int i=0;i<sortNos.length;i++){
+		for (int i = 0; i < sortNos.length; i++) {
 			DeptWorkItem deptWorkItem = DeptWorkItemLocalServiceUtil.createDeptWorkItem(CounterLocalServiceUtil.increment());
 			deptWorkItem.setSortNo(Integer.valueOf(sortNos[i]));
 			deptWorkItem.setDutyPerson(dutyPersons[i]);
-			boolean mainWork = mainWorks[i].equals("1")?true:false;
+			boolean mainWork = mainWorks[i].equals("1") ? true : false;
 			deptWorkItem.setMainWork(mainWork);
 			deptWorkItem.setContent(contents[i]);
 			deptWorkItem.setSchedule(schedules[i]);
@@ -142,15 +208,11 @@ public class DeptWeeklyWorkPortlet extends MVCPortlet {
 			deptWorkItem.setGroupId(groupId);
 			DeptWorkItemLocalServiceUtil.updateDeptWorkItem(deptWorkItem);
 		}
-		AssetEntryLocalServiceUtil.updateEntry(themeDisplay.getUserId(), deptWork.getGroupId(),
-				DeptWork.class.getName(), deptWork.getDeptWorkId(), null, null);
-		WorkflowHandlerRegistryUtil.startWorkflowInstance(deptWork.getCompanyId(),
-				deptWork.getUserId(), DeptWork.class.getName(),
-				deptWork.getDeptWorkId(), deptWork, serviceContext);
+		AssetEntryLocalServiceUtil.updateEntry(themeDisplay.getUserId(), deptWork.getGroupId(), DeptWork.class.getName(), deptWork.getDeptWorkId(), null, null);
+		WorkflowHandlerRegistryUtil.startWorkflowInstance(deptWork.getCompanyId(), deptWork.getUserId(), DeptWork.class.getName(), deptWork.getDeptWorkId(), deptWork, serviceContext);
 	}
 
-	public void editDeptWeeklyWork(ActionRequest request, ActionResponse response) throws IOException,
-			PortletException, PortalException, SystemException {
+	public void editDeptWeeklyWork(ActionRequest request, ActionResponse response) throws IOException, PortletException, PortalException, SystemException {
 		Long deptWorkId = ParamUtil.getLong(request, "deptWorkId");
 		DeptWork deptWork = DeptWorkLocalServiceUtil.getDeptWork(deptWorkId);
 		List<DeptWorkItem> deptWorkItems = DeptWorkItemLocalServiceUtil.findByDeptWorkId(deptWorkId);
@@ -158,8 +220,7 @@ public class DeptWeeklyWorkPortlet extends MVCPortlet {
 		request.setAttribute("deptWorkItems", deptWorkItems);
 	}
 
-	public void deleteDeptWeeklyWork(ActionRequest request, ActionResponse response) throws PortalException,
-			SystemException {
+	public void deleteDeptWeeklyWork(ActionRequest request, ActionResponse response) throws PortalException, SystemException {
 		long deptWorkId = ParamUtil.getLong(request, "deptWorkId");
 		System.out.println(deptWorkId);
 		DeptWorkLocalServiceUtil.deleteDeptWork(deptWorkId);
