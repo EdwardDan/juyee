@@ -59,7 +59,9 @@ public class OfficeSupplyApplicationPortlet extends MVCPortlet {
 		int end = pageSize * pageNumber;
 		List<OfficeSupplyApplication> officeSupplyApplications = Collections.emptyList();
 		try {
-//			officeSupplyApplications = OfficeSupplyApplicationLocalServiceUtil.findByUserId(userId, start, end);
+			// officeSupplyApplications =
+			// OfficeSupplyApplicationLocalServiceUtil.findByUserId(userId,
+			// start, end);
 			officeSupplyApplications = OfficeSupplyApplicationLocalServiceUtil.getOfficeSupplyApplications(-1, -1);
 		} catch (SystemException e) {
 			log.error("findByUserId(" + userId + "," + start + "," + end + ")出错：" + e.getMessage());
@@ -88,7 +90,7 @@ public class OfficeSupplyApplicationPortlet extends MVCPortlet {
 		String introductions = ParamUtil.getString(request, "introductions");
 		String type = ParamUtil.getString(request, "type");
 		String perposeClerk = "";
-		if(type.equals("appoint")){
+		if (type.equals("appoint")) {
 			perposeClerk = ParamUtil.getString(request, "perposeClerk");
 		}
 		Date now = new Date();
@@ -97,7 +99,7 @@ public class OfficeSupplyApplicationPortlet extends MVCPortlet {
 			officeSupplyApplication = OfficeSupplyApplicationLocalServiceUtil
 					.getOfficeSupplyApplication(officeSupplyApplicationId);
 			officeSupplyApplication.setModifiedTime(now);
-			if(type.equals("appoint")){
+			if (type.equals("appoint")) {
 				officeSupplyApplication.setStatus(7);
 				officeSupplyApplication.setPerposeClerk(perposeClerk);
 			}
@@ -192,34 +194,40 @@ public class OfficeSupplyApplicationPortlet extends MVCPortlet {
 		request.setAttribute("officeSupplyApplicationItems", officeSupplyApplicationItems);
 		request.setAttribute("sum", sum);
 	}
-	
+
 	public void notification(ResourceRequest request, List<UserGroupRole> userGroupRoles) {
 		try {
 			ServiceContext serviceContext = ServiceContextFactory.getInstance(request);
 			JSONObject payloadJSON = JSONFactoryUtil.createJSONObject();
-			for (UserGroupRole userGroupRole: userGroupRoles) {
-//				UserNotificationEventLocalServiceUtil.addUserNotificationEvent(userGroupRole.getUserId(), com.longshine.notifications.WarnNotificationHandler.PORTLET_ID, (new Date()).getTime(), userGroupRole.getUserId(), payloadJSON.toString(), false, serviceContext);
+			for (UserGroupRole userGroupRole : userGroupRoles) {
+				 UserNotificationEventLocalServiceUtil.addUserNotificationEvent(userGroupRole.getUserId(),
+				 com.justonetech.oa.notification.OfficeSupplyApplicationNotificationHandler.PORTLET_ID,
+				 (new Date()).getTime(), userGroupRole.getUserId(),
+				 payloadJSON.toString(), false, serviceContext);
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 	}
-	
+
 	@Override
 	public void serveResource(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException,
 			PortletException {
-		Long organizationId = ParamUtil.getLong(resourceRequest, "organizationId");
-		Long groupId = organizationId + 1;
-		List<UserGroupRole> userGroupRoles = null;
-		try {
-			userGroupRoles = UserGroupRoleLocalServiceUtil.getUserGroupRolesByGroupAndRole(groupId, (long)29829);
-		} catch (SystemException e) {
-			e.printStackTrace();
-		}
-		if(userGroupRoles!=null){
-			notification(resourceRequest,userGroupRoles);
-		}
+		String resourceId = resourceRequest.getResourceID();
+		System.out.println("resourceId==========//=============" + resourceId);
+			Long organizationId = ParamUtil.getLong(resourceRequest, "organizationId");
+			System.out.println("organizationId============//========="+organizationId);
+			Long groupId = organizationId + 1;
+			List<UserGroupRole> userGroupRoles = null;
+			try {
+				userGroupRoles = UserGroupRoleLocalServiceUtil.getUserGroupRolesByGroupAndRole(groupId, (long)29656);
+			} catch (SystemException e) {
+				e.printStackTrace();
+			}
+			if (userGroupRoles != null) {
+				notification(resourceRequest, userGroupRoles);
+			}
 		super.serveResource(resourceRequest, resourceResponse);
 	}
-	
+
 }
