@@ -57,7 +57,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>office-supply-application</portlet-name>
-		<icon>/icon.png</icon>
+		<icon>/icons/icon.png</icon>
 		<user-notification-definitions>warn-notification-definitions.xml</user-notification-definitions>
         <user-notification-handler-class>com.justonetech.oa.notification.OfficeSupplyApplicationNotificationHandler</user-notification-handler-class>
 		<asset-renderer-factory>com.justonetech.oa.asset.OfficeSupplyApplicationAssetRenderFactory</asset-renderer-factory>
