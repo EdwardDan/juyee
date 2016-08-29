@@ -200,13 +200,12 @@ public class OfficeSupplyApplicationPortlet extends MVCPortlet {
 			ServiceContext serviceContext = ServiceContextFactory.getInstance(request);
 			JSONObject payloadJSON = JSONFactoryUtil.createJSONObject();
 			for (UserGroupRole userGroupRole : userGroupRoles) {
-				 UserNotificationEventLocalServiceUtil.addUserNotificationEvent(userGroupRole.getUserId(),
-				 com.justonetech.oa.notification.OfficeSupplyApplicationNotificationHandler.PORTLET_ID,
-				 (new Date()).getTime(), userGroupRole.getUserId(),
-				 payloadJSON.toString(), false, serviceContext);
+				UserNotificationEventLocalServiceUtil.addUserNotificationEvent(userGroupRole.getUserId(),
+						com.justonetech.oa.notification.OfficeSupplyApplicationNotificationHandler.PORTLET_ID,
+						(new Date()).getTime(), userGroupRole.getUserId(), payloadJSON.toString(), false,
+						serviceContext);
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
 		}
 	}
 
@@ -215,18 +214,18 @@ public class OfficeSupplyApplicationPortlet extends MVCPortlet {
 			PortletException {
 		String resourceId = resourceRequest.getResourceID();
 		System.out.println("resourceId==========//=============" + resourceId);
-			Long organizationId = ParamUtil.getLong(resourceRequest, "organizationId");
-			System.out.println("organizationId============//========="+organizationId);
-			Long groupId = organizationId + 1;
-			List<UserGroupRole> userGroupRoles = null;
-			try {
-				userGroupRoles = UserGroupRoleLocalServiceUtil.getUserGroupRolesByGroupAndRole(groupId, (long)29656);
-			} catch (SystemException e) {
-				e.printStackTrace();
-			}
-			if (userGroupRoles != null) {
-				notification(resourceRequest, userGroupRoles);
-			}
+		Long organizationId = ParamUtil.getLong(resourceRequest, "organizationId");
+		System.out.println("organizationId============//=========" + organizationId);
+		Long groupId = organizationId + 1;
+		List<UserGroupRole> userGroupRoles = null;
+		try {
+			userGroupRoles = UserGroupRoleLocalServiceUtil.getUserGroupRolesByGroupAndRole(groupId, (long) 29656);
+		} catch (SystemException e) {
+			e.printStackTrace();
+		}
+		if (userGroupRoles != null) {
+			notification(resourceRequest, userGroupRoles);
+		}
 		super.serveResource(resourceRequest, resourceResponse);
 	}
 
