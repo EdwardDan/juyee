@@ -52,6 +52,7 @@ public class AssetViewerPortlet extends MVCPortlet {
 					}
 					lists.add(map);
 				}
+				renderRequest.setAttribute("listsSize", lists.size());
 				renderRequest.setAttribute("assetEntry", assetEntry);
 				renderRequest.setAttribute("lists", lists);
 				renderRequest.setAttribute("entryId", entryId);
