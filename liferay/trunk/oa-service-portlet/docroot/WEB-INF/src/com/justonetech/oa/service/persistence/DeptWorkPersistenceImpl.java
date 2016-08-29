@@ -1373,7 +1373,13 @@ public class DeptWorkPersistenceImpl extends BasePersistenceImpl<DeptWork>
 		deptWorkImpl.setDeptName(deptWork.getDeptName());
 		deptWorkImpl.setStartDate(deptWork.getStartDate());
 		deptWorkImpl.setEndDate(deptWork.getEndDate());
+		deptWorkImpl.setStatusStr(deptWork.getStatusStr());
+		deptWorkImpl.setTitle(deptWork.getTitle());
+		deptWorkImpl.setContent(deptWork.getContent());
 		deptWorkImpl.setStatus(deptWork.getStatus());
+		deptWorkImpl.setStatusByUserId(deptWork.getStatusByUserId());
+		deptWorkImpl.setStatusByUserName(deptWork.getStatusByUserName());
+		deptWorkImpl.setStatusDate(deptWork.getStatusDate());
 
 		return deptWorkImpl;
 	}

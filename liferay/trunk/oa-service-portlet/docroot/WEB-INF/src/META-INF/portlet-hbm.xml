@@ -25,7 +25,13 @@
 		<property name="deptName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="startDate" type="org.hibernate.type.TimestampType" />
 		<property name="endDate" type="org.hibernate.type.TimestampType" />
-		<property name="status" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="statusStr" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="title" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="content" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="status" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="statusByUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="statusByUserName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="statusDate" type="org.hibernate.type.TimestampType" />
 	</class>
 	<class name="com.justonetech.oa.model.impl.DeptWorkItemImpl" table="oa_DeptWorkItem">
 		<cache usage="read-write" />

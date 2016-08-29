@@ -41,7 +41,13 @@ public class DeptWorkSoap implements Serializable {
 		soapModel.setDeptName(model.getDeptName());
 		soapModel.setStartDate(model.getStartDate());
 		soapModel.setEndDate(model.getEndDate());
+		soapModel.setStatusStr(model.getStatusStr());
+		soapModel.setTitle(model.getTitle());
+		soapModel.setContent(model.getContent());
 		soapModel.setStatus(model.getStatus());
+		soapModel.setStatusByUserId(model.getStatusByUserId());
+		soapModel.setStatusByUserName(model.getStatusByUserName());
+		soapModel.setStatusDate(model.getStatusDate());
 
 		return soapModel;
 	}
@@ -182,12 +188,60 @@ public class DeptWorkSoap implements Serializable {
 		_endDate = endDate;
 	}
 
-	public String getStatus() {
+	public String getStatusStr() {
+		return _statusStr;
+	}
+
+	public void setStatusStr(String statusStr) {
+		_statusStr = statusStr;
+	}
+
+	public String getTitle() {
+		return _title;
+	}
+
+	public void setTitle(String title) {
+		_title = title;
+	}
+
+	public String getContent() {
+		return _content;
+	}
+
+	public void setContent(String content) {
+		_content = content;
+	}
+
+	public int getStatus() {
 		return _status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(int status) {
 		_status = status;
+	}
+
+	public long getStatusByUserId() {
+		return _statusByUserId;
+	}
+
+	public void setStatusByUserId(long statusByUserId) {
+		_statusByUserId = statusByUserId;
+	}
+
+	public String getStatusByUserName() {
+		return _statusByUserName;
+	}
+
+	public void setStatusByUserName(String statusByUserName) {
+		_statusByUserName = statusByUserName;
+	}
+
+	public Date getStatusDate() {
+		return _statusDate;
+	}
+
+	public void setStatusDate(Date statusDate) {
+		_statusDate = statusDate;
 	}
 
 	private long _deptWorkId;
@@ -201,5 +255,11 @@ public class DeptWorkSoap implements Serializable {
 	private String _deptName;
 	private Date _startDate;
 	private Date _endDate;
-	private String _status;
+	private String _statusStr;
+	private String _title;
+	private String _content;
+	private int _status;
+	private long _statusByUserId;
+	private String _statusByUserName;
+	private Date _statusDate;
 }

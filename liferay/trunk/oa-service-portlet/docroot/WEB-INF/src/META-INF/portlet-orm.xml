@@ -28,10 +28,19 @@
 			<basic name="endDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
+			<basic name="statusStr" />
+			<basic name="title" />
+			<basic name="content" />
 			<basic name="status" />
+			<basic name="statusByUserId" />
+			<basic name="statusByUserName" />
+			<basic name="statusDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
+			<transient name="statusByUserUuid" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>

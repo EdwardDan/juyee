@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.CacheModel;
+import com.liferay.portal.model.WorkflowedModel;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -39,7 +40,7 @@ import java.util.Date;
  * @see com.justonetech.oa.model.impl.DeptWorkModelImpl
  * @generated
  */
-public interface DeptWorkModel extends BaseModel<DeptWork> {
+public interface DeptWorkModel extends BaseModel<DeptWork>, WorkflowedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -232,19 +233,201 @@ public interface DeptWorkModel extends BaseModel<DeptWork> {
 	public void setEndDate(Date endDate);
 
 	/**
+	 * Returns the status str of this dept work.
+	 *
+	 * @return the status str of this dept work
+	 */
+	@AutoEscape
+	public String getStatusStr();
+
+	/**
+	 * Sets the status str of this dept work.
+	 *
+	 * @param statusStr the status str of this dept work
+	 */
+	public void setStatusStr(String statusStr);
+
+	/**
+	 * Returns the title of this dept work.
+	 *
+	 * @return the title of this dept work
+	 */
+	@AutoEscape
+	public String getTitle();
+
+	/**
+	 * Sets the title of this dept work.
+	 *
+	 * @param title the title of this dept work
+	 */
+	public void setTitle(String title);
+
+	/**
+	 * Returns the content of this dept work.
+	 *
+	 * @return the content of this dept work
+	 */
+	@AutoEscape
+	public String getContent();
+
+	/**
+	 * Sets the content of this dept work.
+	 *
+	 * @param content the content of this dept work
+	 */
+	public void setContent(String content);
+
+	/**
 	 * Returns the status of this dept work.
 	 *
 	 * @return the status of this dept work
 	 */
-	@AutoEscape
-	public String getStatus();
+	@Override
+	public int getStatus();
 
 	/**
 	 * Sets the status of this dept work.
 	 *
 	 * @param status the status of this dept work
 	 */
-	public void setStatus(String status);
+	@Override
+	public void setStatus(int status);
+
+	/**
+	 * Returns the status by user ID of this dept work.
+	 *
+	 * @return the status by user ID of this dept work
+	 */
+	@Override
+	public long getStatusByUserId();
+
+	/**
+	 * Sets the status by user ID of this dept work.
+	 *
+	 * @param statusByUserId the status by user ID of this dept work
+	 */
+	@Override
+	public void setStatusByUserId(long statusByUserId);
+
+	/**
+	 * Returns the status by user uuid of this dept work.
+	 *
+	 * @return the status by user uuid of this dept work
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public String getStatusByUserUuid() throws SystemException;
+
+	/**
+	 * Sets the status by user uuid of this dept work.
+	 *
+	 * @param statusByUserUuid the status by user uuid of this dept work
+	 */
+	@Override
+	public void setStatusByUserUuid(String statusByUserUuid);
+
+	/**
+	 * Returns the status by user name of this dept work.
+	 *
+	 * @return the status by user name of this dept work
+	 */
+	@AutoEscape
+	@Override
+	public String getStatusByUserName();
+
+	/**
+	 * Sets the status by user name of this dept work.
+	 *
+	 * @param statusByUserName the status by user name of this dept work
+	 */
+	@Override
+	public void setStatusByUserName(String statusByUserName);
+
+	/**
+	 * Returns the status date of this dept work.
+	 *
+	 * @return the status date of this dept work
+	 */
+	@Override
+	public Date getStatusDate();
+
+	/**
+	 * Sets the status date of this dept work.
+	 *
+	 * @param statusDate the status date of this dept work
+	 */
+	@Override
+	public void setStatusDate(Date statusDate);
+
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #isApproved()}
+	 */
+	@Override
+	public boolean getApproved();
+
+	/**
+	 * Returns <code>true</code> if this dept work is approved.
+	 *
+	 * @return <code>true</code> if this dept work is approved; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isApproved();
+
+	/**
+	 * Returns <code>true</code> if this dept work is denied.
+	 *
+	 * @return <code>true</code> if this dept work is denied; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isDenied();
+
+	/**
+	 * Returns <code>true</code> if this dept work is a draft.
+	 *
+	 * @return <code>true</code> if this dept work is a draft; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isDraft();
+
+	/**
+	 * Returns <code>true</code> if this dept work is expired.
+	 *
+	 * @return <code>true</code> if this dept work is expired; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isExpired();
+
+	/**
+	 * Returns <code>true</code> if this dept work is inactive.
+	 *
+	 * @return <code>true</code> if this dept work is inactive; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isInactive();
+
+	/**
+	 * Returns <code>true</code> if this dept work is incomplete.
+	 *
+	 * @return <code>true</code> if this dept work is incomplete; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isIncomplete();
+
+	/**
+	 * Returns <code>true</code> if this dept work is pending.
+	 *
+	 * @return <code>true</code> if this dept work is pending; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isPending();
+
+	/**
+	 * Returns <code>true</code> if this dept work is scheduled.
+	 *
+	 * @return <code>true</code> if this dept work is scheduled; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isScheduled();
 
 	@Override
 	public boolean isNew();

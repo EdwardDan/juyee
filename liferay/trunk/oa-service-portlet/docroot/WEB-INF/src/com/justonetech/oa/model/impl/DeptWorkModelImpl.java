@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.service.ServiceContext;
@@ -73,9 +74,15 @@ public class DeptWorkModelImpl extends BaseModelImpl<DeptWork>
 			{ "deptName", Types.VARCHAR },
 			{ "startDate", Types.TIMESTAMP },
 			{ "endDate", Types.TIMESTAMP },
-			{ "status", Types.VARCHAR }
+			{ "statusStr", Types.VARCHAR },
+			{ "title", Types.VARCHAR },
+			{ "content", Types.VARCHAR },
+			{ "status", Types.INTEGER },
+			{ "statusByUserId", Types.BIGINT },
+			{ "statusByUserName", Types.VARCHAR },
+			{ "statusDate", Types.TIMESTAMP }
 		};
-	public static final String TABLE_SQL_CREATE = "create table oa_DeptWork (deptWorkId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createTime DATE null,modifiedTime DATE null,deptId LONG,deptName VARCHAR(75) null,startDate DATE null,endDate DATE null,status VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table oa_DeptWork (deptWorkId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createTime DATE null,modifiedTime DATE null,deptId LONG,deptName VARCHAR(75) null,startDate DATE null,endDate DATE null,statusStr VARCHAR(75) null,title VARCHAR(75) null,content VARCHAR(75) null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table oa_DeptWork";
 	public static final String ORDER_BY_JPQL = " ORDER BY deptWork.modifiedTime DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY oa_DeptWork.modifiedTime DESC";
@@ -145,7 +152,13 @@ public class DeptWorkModelImpl extends BaseModelImpl<DeptWork>
 		attributes.put("deptName", getDeptName());
 		attributes.put("startDate", getStartDate());
 		attributes.put("endDate", getEndDate());
+		attributes.put("statusStr", getStatusStr());
+		attributes.put("title", getTitle());
+		attributes.put("content", getContent());
 		attributes.put("status", getStatus());
+		attributes.put("statusByUserId", getStatusByUserId());
+		attributes.put("statusByUserName", getStatusByUserName());
+		attributes.put("statusDate", getStatusDate());
 
 		return attributes;
 	}
@@ -218,10 +231,46 @@ public class DeptWorkModelImpl extends BaseModelImpl<DeptWork>
 			setEndDate(endDate);
 		}
 
-		String status = (String)attributes.get("status");
+		String statusStr = (String)attributes.get("statusStr");
+
+		if (statusStr != null) {
+			setStatusStr(statusStr);
+		}
+
+		String title = (String)attributes.get("title");
+
+		if (title != null) {
+			setTitle(title);
+		}
+
+		String content = (String)attributes.get("content");
+
+		if (content != null) {
+			setContent(content);
+		}
+
+		Integer status = (Integer)attributes.get("status");
 
 		if (status != null) {
 			setStatus(status);
+		}
+
+		Long statusByUserId = (Long)attributes.get("statusByUserId");
+
+		if (statusByUserId != null) {
+			setStatusByUserId(statusByUserId);
+		}
+
+		String statusByUserName = (String)attributes.get("statusByUserName");
+
+		if (statusByUserName != null) {
+			setStatusByUserName(statusByUserName);
+		}
+
+		Date statusDate = (Date)attributes.get("statusDate");
+
+		if (statusDate != null) {
+			setStatusDate(statusDate);
 		}
 	}
 
@@ -378,18 +427,192 @@ public class DeptWorkModelImpl extends BaseModelImpl<DeptWork>
 	}
 
 	@Override
-	public String getStatus() {
-		if (_status == null) {
+	public String getStatusStr() {
+		if (_statusStr == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _status;
+			return _statusStr;
 		}
 	}
 
 	@Override
-	public void setStatus(String status) {
+	public void setStatusStr(String statusStr) {
+		_statusStr = statusStr;
+	}
+
+	@Override
+	public String getTitle() {
+		if (_title == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _title;
+		}
+	}
+
+	@Override
+	public void setTitle(String title) {
+		_title = title;
+	}
+
+	@Override
+	public String getContent() {
+		if (_content == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _content;
+		}
+	}
+
+	@Override
+	public void setContent(String content) {
+		_content = content;
+	}
+
+	@Override
+	public int getStatus() {
+		return _status;
+	}
+
+	@Override
+	public void setStatus(int status) {
 		_status = status;
+	}
+
+	@Override
+	public long getStatusByUserId() {
+		return _statusByUserId;
+	}
+
+	@Override
+	public void setStatusByUserId(long statusByUserId) {
+		_statusByUserId = statusByUserId;
+	}
+
+	@Override
+	public String getStatusByUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getStatusByUserId(), "uuid",
+			_statusByUserUuid);
+	}
+
+	@Override
+	public void setStatusByUserUuid(String statusByUserUuid) {
+		_statusByUserUuid = statusByUserUuid;
+	}
+
+	@Override
+	public String getStatusByUserName() {
+		if (_statusByUserName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _statusByUserName;
+		}
+	}
+
+	@Override
+	public void setStatusByUserName(String statusByUserName) {
+		_statusByUserName = statusByUserName;
+	}
+
+	@Override
+	public Date getStatusDate() {
+		return _statusDate;
+	}
+
+	@Override
+	public void setStatusDate(Date statusDate) {
+		_statusDate = statusDate;
+	}
+
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #isApproved}
+	 */
+	@Override
+	public boolean getApproved() {
+		return isApproved();
+	}
+
+	@Override
+	public boolean isApproved() {
+		if (getStatus() == WorkflowConstants.STATUS_APPROVED) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isDenied() {
+		if (getStatus() == WorkflowConstants.STATUS_DENIED) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isDraft() {
+		if (getStatus() == WorkflowConstants.STATUS_DRAFT) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isExpired() {
+		if (getStatus() == WorkflowConstants.STATUS_EXPIRED) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isInactive() {
+		if (getStatus() == WorkflowConstants.STATUS_INACTIVE) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isIncomplete() {
+		if (getStatus() == WorkflowConstants.STATUS_INCOMPLETE) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isPending() {
+		if (getStatus() == WorkflowConstants.STATUS_PENDING) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isScheduled() {
+		if (getStatus() == WorkflowConstants.STATUS_SCHEDULED) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public long getColumnBitmask() {
@@ -434,7 +657,13 @@ public class DeptWorkModelImpl extends BaseModelImpl<DeptWork>
 		deptWorkImpl.setDeptName(getDeptName());
 		deptWorkImpl.setStartDate(getStartDate());
 		deptWorkImpl.setEndDate(getEndDate());
+		deptWorkImpl.setStatusStr(getStatusStr());
+		deptWorkImpl.setTitle(getTitle());
+		deptWorkImpl.setContent(getContent());
 		deptWorkImpl.setStatus(getStatus());
+		deptWorkImpl.setStatusByUserId(getStatusByUserId());
+		deptWorkImpl.setStatusByUserName(getStatusByUserName());
+		deptWorkImpl.setStatusDate(getStatusDate());
 
 		deptWorkImpl.resetOriginalValues();
 
@@ -560,12 +789,49 @@ public class DeptWorkModelImpl extends BaseModelImpl<DeptWork>
 			deptWorkCacheModel.endDate = Long.MIN_VALUE;
 		}
 
+		deptWorkCacheModel.statusStr = getStatusStr();
+
+		String statusStr = deptWorkCacheModel.statusStr;
+
+		if ((statusStr != null) && (statusStr.length() == 0)) {
+			deptWorkCacheModel.statusStr = null;
+		}
+
+		deptWorkCacheModel.title = getTitle();
+
+		String title = deptWorkCacheModel.title;
+
+		if ((title != null) && (title.length() == 0)) {
+			deptWorkCacheModel.title = null;
+		}
+
+		deptWorkCacheModel.content = getContent();
+
+		String content = deptWorkCacheModel.content;
+
+		if ((content != null) && (content.length() == 0)) {
+			deptWorkCacheModel.content = null;
+		}
+
 		deptWorkCacheModel.status = getStatus();
 
-		String status = deptWorkCacheModel.status;
+		deptWorkCacheModel.statusByUserId = getStatusByUserId();
 
-		if ((status != null) && (status.length() == 0)) {
-			deptWorkCacheModel.status = null;
+		deptWorkCacheModel.statusByUserName = getStatusByUserName();
+
+		String statusByUserName = deptWorkCacheModel.statusByUserName;
+
+		if ((statusByUserName != null) && (statusByUserName.length() == 0)) {
+			deptWorkCacheModel.statusByUserName = null;
+		}
+
+		Date statusDate = getStatusDate();
+
+		if (statusDate != null) {
+			deptWorkCacheModel.statusDate = statusDate.getTime();
+		}
+		else {
+			deptWorkCacheModel.statusDate = Long.MIN_VALUE;
 		}
 
 		return deptWorkCacheModel;
@@ -573,7 +839,7 @@ public class DeptWorkModelImpl extends BaseModelImpl<DeptWork>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(37);
 
 		sb.append("{deptWorkId=");
 		sb.append(getDeptWorkId());
@@ -597,8 +863,20 @@ public class DeptWorkModelImpl extends BaseModelImpl<DeptWork>
 		sb.append(getStartDate());
 		sb.append(", endDate=");
 		sb.append(getEndDate());
+		sb.append(", statusStr=");
+		sb.append(getStatusStr());
+		sb.append(", title=");
+		sb.append(getTitle());
+		sb.append(", content=");
+		sb.append(getContent());
 		sb.append(", status=");
 		sb.append(getStatus());
+		sb.append(", statusByUserId=");
+		sb.append(getStatusByUserId());
+		sb.append(", statusByUserName=");
+		sb.append(getStatusByUserName());
+		sb.append(", statusDate=");
+		sb.append(getStatusDate());
 		sb.append("}");
 
 		return sb.toString();
@@ -606,7 +884,7 @@ public class DeptWorkModelImpl extends BaseModelImpl<DeptWork>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(40);
+		StringBundler sb = new StringBundler(58);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.oa.model.DeptWork");
@@ -657,8 +935,32 @@ public class DeptWorkModelImpl extends BaseModelImpl<DeptWork>
 		sb.append(getEndDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>statusStr</column-name><column-value><![CDATA[");
+		sb.append(getStatusStr());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>title</column-name><column-value><![CDATA[");
+		sb.append(getTitle());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>content</column-name><column-value><![CDATA[");
+		sb.append(getContent());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>status</column-name><column-value><![CDATA[");
 		sb.append(getStatus());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>statusByUserId</column-name><column-value><![CDATA[");
+		sb.append(getStatusByUserId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>statusByUserName</column-name><column-value><![CDATA[");
+		sb.append(getStatusByUserName());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>statusDate</column-name><column-value><![CDATA[");
+		sb.append(getStatusDate());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -684,7 +986,14 @@ public class DeptWorkModelImpl extends BaseModelImpl<DeptWork>
 	private String _originalDeptName;
 	private Date _startDate;
 	private Date _endDate;
-	private String _status;
+	private String _statusStr;
+	private String _title;
+	private String _content;
+	private int _status;
+	private long _statusByUserId;
+	private String _statusByUserUuid;
+	private String _statusByUserName;
+	private Date _statusDate;
 	private long _columnBitmask;
 	private DeptWork _escapedModel;
 }

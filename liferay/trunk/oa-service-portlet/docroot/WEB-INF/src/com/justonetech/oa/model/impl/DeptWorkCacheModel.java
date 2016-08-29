@@ -37,7 +37,7 @@ import java.util.Date;
 public class DeptWorkCacheModel implements CacheModel<DeptWork>, Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(37);
 
 		sb.append("{deptWorkId=");
 		sb.append(deptWorkId);
@@ -61,8 +61,20 @@ public class DeptWorkCacheModel implements CacheModel<DeptWork>, Externalizable 
 		sb.append(startDate);
 		sb.append(", endDate=");
 		sb.append(endDate);
+		sb.append(", statusStr=");
+		sb.append(statusStr);
+		sb.append(", title=");
+		sb.append(title);
+		sb.append(", content=");
+		sb.append(content);
 		sb.append(", status=");
 		sb.append(status);
+		sb.append(", statusByUserId=");
+		sb.append(statusByUserId);
+		sb.append(", statusByUserName=");
+		sb.append(statusByUserName);
+		sb.append(", statusDate=");
+		sb.append(statusDate);
 		sb.append("}");
 
 		return sb.toString();
@@ -121,11 +133,42 @@ public class DeptWorkCacheModel implements CacheModel<DeptWork>, Externalizable 
 			deptWorkImpl.setEndDate(new Date(endDate));
 		}
 
-		if (status == null) {
-			deptWorkImpl.setStatus(StringPool.BLANK);
+		if (statusStr == null) {
+			deptWorkImpl.setStatusStr(StringPool.BLANK);
 		}
 		else {
-			deptWorkImpl.setStatus(status);
+			deptWorkImpl.setStatusStr(statusStr);
+		}
+
+		if (title == null) {
+			deptWorkImpl.setTitle(StringPool.BLANK);
+		}
+		else {
+			deptWorkImpl.setTitle(title);
+		}
+
+		if (content == null) {
+			deptWorkImpl.setContent(StringPool.BLANK);
+		}
+		else {
+			deptWorkImpl.setContent(content);
+		}
+
+		deptWorkImpl.setStatus(status);
+		deptWorkImpl.setStatusByUserId(statusByUserId);
+
+		if (statusByUserName == null) {
+			deptWorkImpl.setStatusByUserName(StringPool.BLANK);
+		}
+		else {
+			deptWorkImpl.setStatusByUserName(statusByUserName);
+		}
+
+		if (statusDate == Long.MIN_VALUE) {
+			deptWorkImpl.setStatusDate(null);
+		}
+		else {
+			deptWorkImpl.setStatusDate(new Date(statusDate));
 		}
 
 		deptWorkImpl.resetOriginalValues();
@@ -146,7 +189,13 @@ public class DeptWorkCacheModel implements CacheModel<DeptWork>, Externalizable 
 		deptName = objectInput.readUTF();
 		startDate = objectInput.readLong();
 		endDate = objectInput.readLong();
-		status = objectInput.readUTF();
+		statusStr = objectInput.readUTF();
+		title = objectInput.readUTF();
+		content = objectInput.readUTF();
+		status = objectInput.readInt();
+		statusByUserId = objectInput.readLong();
+		statusByUserName = objectInput.readUTF();
+		statusDate = objectInput.readLong();
 	}
 
 	@Override
@@ -178,12 +227,38 @@ public class DeptWorkCacheModel implements CacheModel<DeptWork>, Externalizable 
 		objectOutput.writeLong(startDate);
 		objectOutput.writeLong(endDate);
 
-		if (status == null) {
+		if (statusStr == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(status);
+			objectOutput.writeUTF(statusStr);
 		}
+
+		if (title == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(title);
+		}
+
+		if (content == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(content);
+		}
+
+		objectOutput.writeInt(status);
+		objectOutput.writeLong(statusByUserId);
+
+		if (statusByUserName == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(statusByUserName);
+		}
+
+		objectOutput.writeLong(statusDate);
 	}
 
 	public long deptWorkId;
@@ -197,5 +272,11 @@ public class DeptWorkCacheModel implements CacheModel<DeptWork>, Externalizable 
 	public String deptName;
 	public long startDate;
 	public long endDate;
-	public String status;
+	public String statusStr;
+	public String title;
+	public String content;
+	public int status;
+	public long statusByUserId;
+	public String statusByUserName;
+	public long statusDate;
 }

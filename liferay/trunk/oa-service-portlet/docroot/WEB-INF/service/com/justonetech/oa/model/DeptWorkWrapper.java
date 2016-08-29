@@ -60,7 +60,13 @@ public class DeptWorkWrapper implements DeptWork, ModelWrapper<DeptWork> {
 		attributes.put("deptName", getDeptName());
 		attributes.put("startDate", getStartDate());
 		attributes.put("endDate", getEndDate());
+		attributes.put("statusStr", getStatusStr());
+		attributes.put("title", getTitle());
+		attributes.put("content", getContent());
 		attributes.put("status", getStatus());
+		attributes.put("statusByUserId", getStatusByUserId());
+		attributes.put("statusByUserName", getStatusByUserName());
+		attributes.put("statusDate", getStatusDate());
 
 		return attributes;
 	}
@@ -133,10 +139,46 @@ public class DeptWorkWrapper implements DeptWork, ModelWrapper<DeptWork> {
 			setEndDate(endDate);
 		}
 
-		String status = (String)attributes.get("status");
+		String statusStr = (String)attributes.get("statusStr");
+
+		if (statusStr != null) {
+			setStatusStr(statusStr);
+		}
+
+		String title = (String)attributes.get("title");
+
+		if (title != null) {
+			setTitle(title);
+		}
+
+		String content = (String)attributes.get("content");
+
+		if (content != null) {
+			setContent(content);
+		}
+
+		Integer status = (Integer)attributes.get("status");
 
 		if (status != null) {
 			setStatus(status);
+		}
+
+		Long statusByUserId = (Long)attributes.get("statusByUserId");
+
+		if (statusByUserId != null) {
+			setStatusByUserId(statusByUserId);
+		}
+
+		String statusByUserName = (String)attributes.get("statusByUserName");
+
+		if (statusByUserName != null) {
+			setStatusByUserName(statusByUserName);
+		}
+
+		Date statusDate = (Date)attributes.get("statusDate");
+
+		if (statusDate != null) {
+			setStatusDate(statusDate);
 		}
 	}
 
@@ -403,12 +445,72 @@ public class DeptWorkWrapper implements DeptWork, ModelWrapper<DeptWork> {
 	}
 
 	/**
+	* Returns the status str of this dept work.
+	*
+	* @return the status str of this dept work
+	*/
+	@Override
+	public java.lang.String getStatusStr() {
+		return _deptWork.getStatusStr();
+	}
+
+	/**
+	* Sets the status str of this dept work.
+	*
+	* @param statusStr the status str of this dept work
+	*/
+	@Override
+	public void setStatusStr(java.lang.String statusStr) {
+		_deptWork.setStatusStr(statusStr);
+	}
+
+	/**
+	* Returns the title of this dept work.
+	*
+	* @return the title of this dept work
+	*/
+	@Override
+	public java.lang.String getTitle() {
+		return _deptWork.getTitle();
+	}
+
+	/**
+	* Sets the title of this dept work.
+	*
+	* @param title the title of this dept work
+	*/
+	@Override
+	public void setTitle(java.lang.String title) {
+		_deptWork.setTitle(title);
+	}
+
+	/**
+	* Returns the content of this dept work.
+	*
+	* @return the content of this dept work
+	*/
+	@Override
+	public java.lang.String getContent() {
+		return _deptWork.getContent();
+	}
+
+	/**
+	* Sets the content of this dept work.
+	*
+	* @param content the content of this dept work
+	*/
+	@Override
+	public void setContent(java.lang.String content) {
+		_deptWork.setContent(content);
+	}
+
+	/**
 	* Returns the status of this dept work.
 	*
 	* @return the status of this dept work
 	*/
 	@Override
-	public java.lang.String getStatus() {
+	public int getStatus() {
 		return _deptWork.getStatus();
 	}
 
@@ -418,8 +520,178 @@ public class DeptWorkWrapper implements DeptWork, ModelWrapper<DeptWork> {
 	* @param status the status of this dept work
 	*/
 	@Override
-	public void setStatus(java.lang.String status) {
+	public void setStatus(int status) {
 		_deptWork.setStatus(status);
+	}
+
+	/**
+	* Returns the status by user ID of this dept work.
+	*
+	* @return the status by user ID of this dept work
+	*/
+	@Override
+	public long getStatusByUserId() {
+		return _deptWork.getStatusByUserId();
+	}
+
+	/**
+	* Sets the status by user ID of this dept work.
+	*
+	* @param statusByUserId the status by user ID of this dept work
+	*/
+	@Override
+	public void setStatusByUserId(long statusByUserId) {
+		_deptWork.setStatusByUserId(statusByUserId);
+	}
+
+	/**
+	* Returns the status by user uuid of this dept work.
+	*
+	* @return the status by user uuid of this dept work
+	* @throws SystemException if a system exception occurred
+	*/
+	@Override
+	public java.lang.String getStatusByUserUuid()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _deptWork.getStatusByUserUuid();
+	}
+
+	/**
+	* Sets the status by user uuid of this dept work.
+	*
+	* @param statusByUserUuid the status by user uuid of this dept work
+	*/
+	@Override
+	public void setStatusByUserUuid(java.lang.String statusByUserUuid) {
+		_deptWork.setStatusByUserUuid(statusByUserUuid);
+	}
+
+	/**
+	* Returns the status by user name of this dept work.
+	*
+	* @return the status by user name of this dept work
+	*/
+	@Override
+	public java.lang.String getStatusByUserName() {
+		return _deptWork.getStatusByUserName();
+	}
+
+	/**
+	* Sets the status by user name of this dept work.
+	*
+	* @param statusByUserName the status by user name of this dept work
+	*/
+	@Override
+	public void setStatusByUserName(java.lang.String statusByUserName) {
+		_deptWork.setStatusByUserName(statusByUserName);
+	}
+
+	/**
+	* Returns the status date of this dept work.
+	*
+	* @return the status date of this dept work
+	*/
+	@Override
+	public java.util.Date getStatusDate() {
+		return _deptWork.getStatusDate();
+	}
+
+	/**
+	* Sets the status date of this dept work.
+	*
+	* @param statusDate the status date of this dept work
+	*/
+	@Override
+	public void setStatusDate(java.util.Date statusDate) {
+		_deptWork.setStatusDate(statusDate);
+	}
+
+	/**
+	* @deprecated As of 6.1.0, replaced by {@link #isApproved()}
+	*/
+	@Override
+	public boolean getApproved() {
+		return _deptWork.getApproved();
+	}
+
+	/**
+	* Returns <code>true</code> if this dept work is approved.
+	*
+	* @return <code>true</code> if this dept work is approved; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isApproved() {
+		return _deptWork.isApproved();
+	}
+
+	/**
+	* Returns <code>true</code> if this dept work is denied.
+	*
+	* @return <code>true</code> if this dept work is denied; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isDenied() {
+		return _deptWork.isDenied();
+	}
+
+	/**
+	* Returns <code>true</code> if this dept work is a draft.
+	*
+	* @return <code>true</code> if this dept work is a draft; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isDraft() {
+		return _deptWork.isDraft();
+	}
+
+	/**
+	* Returns <code>true</code> if this dept work is expired.
+	*
+	* @return <code>true</code> if this dept work is expired; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isExpired() {
+		return _deptWork.isExpired();
+	}
+
+	/**
+	* Returns <code>true</code> if this dept work is inactive.
+	*
+	* @return <code>true</code> if this dept work is inactive; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isInactive() {
+		return _deptWork.isInactive();
+	}
+
+	/**
+	* Returns <code>true</code> if this dept work is incomplete.
+	*
+	* @return <code>true</code> if this dept work is incomplete; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isIncomplete() {
+		return _deptWork.isIncomplete();
+	}
+
+	/**
+	* Returns <code>true</code> if this dept work is pending.
+	*
+	* @return <code>true</code> if this dept work is pending; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isPending() {
+		return _deptWork.isPending();
+	}
+
+	/**
+	* Returns <code>true</code> if this dept work is scheduled.
+	*
+	* @return <code>true</code> if this dept work is scheduled; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isScheduled() {
+		return _deptWork.isScheduled();
 	}
 
 	@Override

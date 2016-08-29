@@ -106,33 +106,33 @@ public class DeptWorkLocalServiceClpInvoker {
 				"com.justonetech.oa.model.DeptWork"
 			};
 
-		_methodName60 = "getBeanIdentifier";
+		_methodName64 = "getBeanIdentifier";
 
-		_methodParameterTypes60 = new String[] {  };
+		_methodParameterTypes64 = new String[] {  };
 
-		_methodName61 = "setBeanIdentifier";
+		_methodName65 = "setBeanIdentifier";
 
-		_methodParameterTypes61 = new String[] { "java.lang.String" };
+		_methodParameterTypes65 = new String[] { "java.lang.String" };
 
-		_methodName66 = "findByUserName";
+		_methodName70 = "findByUserName";
 
-		_methodParameterTypes66 = new String[] { "java.lang.String", "int", "int" };
+		_methodParameterTypes70 = new String[] { "java.lang.String", "int", "int" };
 
-		_methodName67 = "countByUserName";
+		_methodName71 = "countByUserName";
 
-		_methodParameterTypes67 = new String[] { "java.lang.String" };
+		_methodParameterTypes71 = new String[] { "java.lang.String" };
 
-		_methodName68 = "findByDeptName";
+		_methodName72 = "findByDeptName";
 
-		_methodParameterTypes68 = new String[] { "java.lang.String", "int", "int" };
+		_methodParameterTypes72 = new String[] { "java.lang.String", "int", "int" };
 
-		_methodName69 = "countByDeptName";
+		_methodName73 = "countByDeptName";
 
-		_methodParameterTypes69 = new String[] { "java.lang.String" };
+		_methodParameterTypes73 = new String[] { "java.lang.String" };
 
-		_methodName70 = "deleteDeptWorks";
+		_methodName74 = "deleteDeptWorks";
 
-		_methodParameterTypes70 = new String[] { "java.lang.String[][]" };
+		_methodParameterTypes74 = new String[] { "java.lang.String[][]" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -224,44 +224,44 @@ public class DeptWorkLocalServiceClpInvoker {
 			return DeptWorkLocalServiceUtil.updateDeptWork((com.justonetech.oa.model.DeptWork)arguments[0]);
 		}
 
-		if (_methodName60.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes60, parameterTypes)) {
+		if (_methodName64.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes64, parameterTypes)) {
 			return DeptWorkLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName61.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes61, parameterTypes)) {
+		if (_methodName65.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes65, parameterTypes)) {
 			DeptWorkLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName66.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes66, parameterTypes)) {
+		if (_methodName70.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes70, parameterTypes)) {
 			return DeptWorkLocalServiceUtil.findByUserName((java.lang.String)arguments[0],
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue());
 		}
 
-		if (_methodName67.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes67, parameterTypes)) {
+		if (_methodName71.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes71, parameterTypes)) {
 			return DeptWorkLocalServiceUtil.countByUserName((java.lang.String)arguments[0]);
 		}
 
-		if (_methodName68.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes68, parameterTypes)) {
+		if (_methodName72.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes72, parameterTypes)) {
 			return DeptWorkLocalServiceUtil.findByDeptName((java.lang.String)arguments[0],
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue());
 		}
 
-		if (_methodName69.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes69, parameterTypes)) {
+		if (_methodName73.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes73, parameterTypes)) {
 			return DeptWorkLocalServiceUtil.countByDeptName((java.lang.String)arguments[0]);
 		}
 
-		if (_methodName70.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes70, parameterTypes)) {
+		if (_methodName74.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes74, parameterTypes)) {
 			DeptWorkLocalServiceUtil.deleteDeptWorks((java.lang.String[])arguments[0]);
 
 			return null;
@@ -302,18 +302,18 @@ public class DeptWorkLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName60;
-	private String[] _methodParameterTypes60;
-	private String _methodName61;
-	private String[] _methodParameterTypes61;
-	private String _methodName66;
-	private String[] _methodParameterTypes66;
-	private String _methodName67;
-	private String[] _methodParameterTypes67;
-	private String _methodName68;
-	private String[] _methodParameterTypes68;
-	private String _methodName69;
-	private String[] _methodParameterTypes69;
+	private String _methodName64;
+	private String[] _methodParameterTypes64;
+	private String _methodName65;
+	private String[] _methodParameterTypes65;
 	private String _methodName70;
 	private String[] _methodParameterTypes70;
+	private String _methodName71;
+	private String[] _methodParameterTypes71;
+	private String _methodName72;
+	private String[] _methodParameterTypes72;
+	private String _methodName73;
+	private String[] _methodParameterTypes73;
+	private String _methodName74;
+	private String[] _methodParameterTypes74;
 }

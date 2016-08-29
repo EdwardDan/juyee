@@ -10,7 +10,13 @@ create table oa_DeptWork (
 	deptName VARCHAR(75) null,
 	startDate DATE null,
 	endDate DATE null,
-	status VARCHAR(75) null
+	statusStr VARCHAR(75) null,
+	title VARCHAR(75) null,
+	content VARCHAR(75) null,
+	status INTEGER,
+	statusByUserId LONG,
+	statusByUserName VARCHAR(75) null,
+	statusDate DATE null
 );
 
 create table oa_DeptWorkItem (
