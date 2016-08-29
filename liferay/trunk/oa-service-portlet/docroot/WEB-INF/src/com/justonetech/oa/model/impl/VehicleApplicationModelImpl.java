@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.service.ServiceContext;
@@ -63,8 +64,6 @@ public class VehicleApplicationModelImpl extends BaseModelImpl<VehicleApplicatio
 	public static final String TABLE_NAME = "oa_VehicleApplication";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "vehicleApplicationId", Types.BIGINT },
-			{ "groupId", Types.BIGINT },
-			{ "companyId", Types.BIGINT },
 			{ "userId", Types.BIGINT },
 			{ "userName", Types.VARCHAR },
 			{ "createTime", Types.TIMESTAMP },
@@ -78,12 +77,20 @@ public class VehicleApplicationModelImpl extends BaseModelImpl<VehicleApplicatio
 			{ "passengerNum", Types.INTEGER },
 			{ "reason", Types.VARCHAR },
 			{ "destination", Types.VARCHAR },
+			{ "companyId", Types.BIGINT },
+			{ "groupId", Types.BIGINT },
+			{ "title", Types.VARCHAR },
+			{ "content", Types.VARCHAR },
+			{ "status", Types.INTEGER },
+			{ "statusByUserId", Types.BIGINT },
+			{ "statusByUserName", Types.VARCHAR },
+			{ "statusDate", Types.TIMESTAMP },
 			{ "proposeVehicle", Types.BIGINT },
 			{ "isProposeDriver", Types.INTEGER },
 			{ "driver", Types.VARCHAR },
 			{ "phone", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table oa_VehicleApplication (vehicleApplicationId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createTime DATE null,modifiedTime DATE null,applicantDeptId LONG,applicantDeptName VARCHAR(75) null,applicantId LONG,applicantName VARCHAR(75) null,startTime DATE null,endTime DATE null,passengerNum INTEGER,reason VARCHAR(1000) null,destination VARCHAR(200) null,proposeVehicle LONG,isProposeDriver INTEGER,driver VARCHAR(75) null,phone VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table oa_VehicleApplication (vehicleApplicationId LONG not null primary key,userId LONG,userName VARCHAR(75) null,createTime DATE null,modifiedTime DATE null,applicantDeptId LONG,applicantDeptName VARCHAR(75) null,applicantId LONG,applicantName VARCHAR(75) null,startTime DATE null,endTime DATE null,passengerNum INTEGER,reason VARCHAR(1000) null,destination VARCHAR(200) null,companyId LONG,groupId LONG,title VARCHAR(75) null,content VARCHAR(75) null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null,proposeVehicle LONG,isProposeDriver INTEGER,driver VARCHAR(75) null,phone VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table oa_VehicleApplication";
 	public static final String ORDER_BY_JPQL = " ORDER BY vehicleApplication.modifiedTime DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY oa_VehicleApplication.modifiedTime DESC";
@@ -142,8 +149,6 @@ public class VehicleApplicationModelImpl extends BaseModelImpl<VehicleApplicatio
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("vehicleApplicationId", getVehicleApplicationId());
-		attributes.put("groupId", getGroupId());
-		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
 		attributes.put("createTime", getCreateTime());
@@ -157,6 +162,14 @@ public class VehicleApplicationModelImpl extends BaseModelImpl<VehicleApplicatio
 		attributes.put("passengerNum", getPassengerNum());
 		attributes.put("reason", getReason());
 		attributes.put("destination", getDestination());
+		attributes.put("companyId", getCompanyId());
+		attributes.put("groupId", getGroupId());
+		attributes.put("title", getTitle());
+		attributes.put("content", getContent());
+		attributes.put("status", getStatus());
+		attributes.put("statusByUserId", getStatusByUserId());
+		attributes.put("statusByUserName", getStatusByUserName());
+		attributes.put("statusDate", getStatusDate());
 		attributes.put("proposeVehicle", getProposeVehicle());
 		attributes.put("isProposeDriver", getIsProposeDriver());
 		attributes.put("driver", getDriver());
@@ -171,18 +184,6 @@ public class VehicleApplicationModelImpl extends BaseModelImpl<VehicleApplicatio
 
 		if (vehicleApplicationId != null) {
 			setVehicleApplicationId(vehicleApplicationId);
-		}
-
-		Long groupId = (Long)attributes.get("groupId");
-
-		if (groupId != null) {
-			setGroupId(groupId);
-		}
-
-		Long companyId = (Long)attributes.get("companyId");
-
-		if (companyId != null) {
-			setCompanyId(companyId);
 		}
 
 		Long userId = (Long)attributes.get("userId");
@@ -263,6 +264,54 @@ public class VehicleApplicationModelImpl extends BaseModelImpl<VehicleApplicatio
 			setDestination(destination);
 		}
 
+		Long companyId = (Long)attributes.get("companyId");
+
+		if (companyId != null) {
+			setCompanyId(companyId);
+		}
+
+		Long groupId = (Long)attributes.get("groupId");
+
+		if (groupId != null) {
+			setGroupId(groupId);
+		}
+
+		String title = (String)attributes.get("title");
+
+		if (title != null) {
+			setTitle(title);
+		}
+
+		String content = (String)attributes.get("content");
+
+		if (content != null) {
+			setContent(content);
+		}
+
+		Integer status = (Integer)attributes.get("status");
+
+		if (status != null) {
+			setStatus(status);
+		}
+
+		Long statusByUserId = (Long)attributes.get("statusByUserId");
+
+		if (statusByUserId != null) {
+			setStatusByUserId(statusByUserId);
+		}
+
+		String statusByUserName = (String)attributes.get("statusByUserName");
+
+		if (statusByUserName != null) {
+			setStatusByUserName(statusByUserName);
+		}
+
+		Date statusDate = (Date)attributes.get("statusDate");
+
+		if (statusDate != null) {
+			setStatusDate(statusDate);
+		}
+
 		Long proposeVehicle = (Long)attributes.get("proposeVehicle");
 
 		if (proposeVehicle != null) {
@@ -296,26 +345,6 @@ public class VehicleApplicationModelImpl extends BaseModelImpl<VehicleApplicatio
 	@Override
 	public void setVehicleApplicationId(long vehicleApplicationId) {
 		_vehicleApplicationId = vehicleApplicationId;
-	}
-
-	@Override
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	@Override
-	public void setGroupId(long groupId) {
-		_groupId = groupId;
-	}
-
-	@Override
-	public long getCompanyId() {
-		return _companyId;
-	}
-
-	@Override
-	public void setCompanyId(long companyId) {
-		_companyId = companyId;
 	}
 
 	@Override
@@ -496,6 +525,112 @@ public class VehicleApplicationModelImpl extends BaseModelImpl<VehicleApplicatio
 	}
 
 	@Override
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	@Override
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
+	}
+
+	@Override
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	@Override
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+	}
+
+	@Override
+	public String getTitle() {
+		if (_title == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _title;
+		}
+	}
+
+	@Override
+	public void setTitle(String title) {
+		_title = title;
+	}
+
+	@Override
+	public String getContent() {
+		if (_content == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _content;
+		}
+	}
+
+	@Override
+	public void setContent(String content) {
+		_content = content;
+	}
+
+	@Override
+	public int getStatus() {
+		return _status;
+	}
+
+	@Override
+	public void setStatus(int status) {
+		_status = status;
+	}
+
+	@Override
+	public long getStatusByUserId() {
+		return _statusByUserId;
+	}
+
+	@Override
+	public void setStatusByUserId(long statusByUserId) {
+		_statusByUserId = statusByUserId;
+	}
+
+	@Override
+	public String getStatusByUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getStatusByUserId(), "uuid",
+			_statusByUserUuid);
+	}
+
+	@Override
+	public void setStatusByUserUuid(String statusByUserUuid) {
+		_statusByUserUuid = statusByUserUuid;
+	}
+
+	@Override
+	public String getStatusByUserName() {
+		if (_statusByUserName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _statusByUserName;
+		}
+	}
+
+	@Override
+	public void setStatusByUserName(String statusByUserName) {
+		_statusByUserName = statusByUserName;
+	}
+
+	@Override
+	public Date getStatusDate() {
+		return _statusDate;
+	}
+
+	@Override
+	public void setStatusDate(Date statusDate) {
+		_statusDate = statusDate;
+	}
+
+	@Override
 	public long getProposeVehicle() {
 		return _proposeVehicle;
 	}
@@ -545,6 +680,94 @@ public class VehicleApplicationModelImpl extends BaseModelImpl<VehicleApplicatio
 		_phone = phone;
 	}
 
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #isApproved}
+	 */
+	@Override
+	public boolean getApproved() {
+		return isApproved();
+	}
+
+	@Override
+	public boolean isApproved() {
+		if (getStatus() == WorkflowConstants.STATUS_APPROVED) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isDenied() {
+		if (getStatus() == WorkflowConstants.STATUS_DENIED) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isDraft() {
+		if (getStatus() == WorkflowConstants.STATUS_DRAFT) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isExpired() {
+		if (getStatus() == WorkflowConstants.STATUS_EXPIRED) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isInactive() {
+		if (getStatus() == WorkflowConstants.STATUS_INACTIVE) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isIncomplete() {
+		if (getStatus() == WorkflowConstants.STATUS_INCOMPLETE) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isPending() {
+		if (getStatus() == WorkflowConstants.STATUS_PENDING) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isScheduled() {
+		if (getStatus() == WorkflowConstants.STATUS_SCHEDULED) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -577,8 +800,6 @@ public class VehicleApplicationModelImpl extends BaseModelImpl<VehicleApplicatio
 		VehicleApplicationImpl vehicleApplicationImpl = new VehicleApplicationImpl();
 
 		vehicleApplicationImpl.setVehicleApplicationId(getVehicleApplicationId());
-		vehicleApplicationImpl.setGroupId(getGroupId());
-		vehicleApplicationImpl.setCompanyId(getCompanyId());
 		vehicleApplicationImpl.setUserId(getUserId());
 		vehicleApplicationImpl.setUserName(getUserName());
 		vehicleApplicationImpl.setCreateTime(getCreateTime());
@@ -592,6 +813,14 @@ public class VehicleApplicationModelImpl extends BaseModelImpl<VehicleApplicatio
 		vehicleApplicationImpl.setPassengerNum(getPassengerNum());
 		vehicleApplicationImpl.setReason(getReason());
 		vehicleApplicationImpl.setDestination(getDestination());
+		vehicleApplicationImpl.setCompanyId(getCompanyId());
+		vehicleApplicationImpl.setGroupId(getGroupId());
+		vehicleApplicationImpl.setTitle(getTitle());
+		vehicleApplicationImpl.setContent(getContent());
+		vehicleApplicationImpl.setStatus(getStatus());
+		vehicleApplicationImpl.setStatusByUserId(getStatusByUserId());
+		vehicleApplicationImpl.setStatusByUserName(getStatusByUserName());
+		vehicleApplicationImpl.setStatusDate(getStatusDate());
 		vehicleApplicationImpl.setProposeVehicle(getProposeVehicle());
 		vehicleApplicationImpl.setIsProposeDriver(getIsProposeDriver());
 		vehicleApplicationImpl.setDriver(getDriver());
@@ -659,10 +888,6 @@ public class VehicleApplicationModelImpl extends BaseModelImpl<VehicleApplicatio
 		VehicleApplicationCacheModel vehicleApplicationCacheModel = new VehicleApplicationCacheModel();
 
 		vehicleApplicationCacheModel.vehicleApplicationId = getVehicleApplicationId();
-
-		vehicleApplicationCacheModel.groupId = getGroupId();
-
-		vehicleApplicationCacheModel.companyId = getCompanyId();
 
 		vehicleApplicationCacheModel.userId = getUserId();
 
@@ -748,6 +973,47 @@ public class VehicleApplicationModelImpl extends BaseModelImpl<VehicleApplicatio
 			vehicleApplicationCacheModel.destination = null;
 		}
 
+		vehicleApplicationCacheModel.companyId = getCompanyId();
+
+		vehicleApplicationCacheModel.groupId = getGroupId();
+
+		vehicleApplicationCacheModel.title = getTitle();
+
+		String title = vehicleApplicationCacheModel.title;
+
+		if ((title != null) && (title.length() == 0)) {
+			vehicleApplicationCacheModel.title = null;
+		}
+
+		vehicleApplicationCacheModel.content = getContent();
+
+		String content = vehicleApplicationCacheModel.content;
+
+		if ((content != null) && (content.length() == 0)) {
+			vehicleApplicationCacheModel.content = null;
+		}
+
+		vehicleApplicationCacheModel.status = getStatus();
+
+		vehicleApplicationCacheModel.statusByUserId = getStatusByUserId();
+
+		vehicleApplicationCacheModel.statusByUserName = getStatusByUserName();
+
+		String statusByUserName = vehicleApplicationCacheModel.statusByUserName;
+
+		if ((statusByUserName != null) && (statusByUserName.length() == 0)) {
+			vehicleApplicationCacheModel.statusByUserName = null;
+		}
+
+		Date statusDate = getStatusDate();
+
+		if (statusDate != null) {
+			vehicleApplicationCacheModel.statusDate = statusDate.getTime();
+		}
+		else {
+			vehicleApplicationCacheModel.statusDate = Long.MIN_VALUE;
+		}
+
 		vehicleApplicationCacheModel.proposeVehicle = getProposeVehicle();
 
 		vehicleApplicationCacheModel.isProposeDriver = getIsProposeDriver();
@@ -773,14 +1039,10 @@ public class VehicleApplicationModelImpl extends BaseModelImpl<VehicleApplicatio
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(41);
+		StringBundler sb = new StringBundler(53);
 
 		sb.append("{vehicleApplicationId=");
 		sb.append(getVehicleApplicationId());
-		sb.append(", groupId=");
-		sb.append(getGroupId());
-		sb.append(", companyId=");
-		sb.append(getCompanyId());
 		sb.append(", userId=");
 		sb.append(getUserId());
 		sb.append(", userName=");
@@ -807,6 +1069,22 @@ public class VehicleApplicationModelImpl extends BaseModelImpl<VehicleApplicatio
 		sb.append(getReason());
 		sb.append(", destination=");
 		sb.append(getDestination());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
+		sb.append(", title=");
+		sb.append(getTitle());
+		sb.append(", content=");
+		sb.append(getContent());
+		sb.append(", status=");
+		sb.append(getStatus());
+		sb.append(", statusByUserId=");
+		sb.append(getStatusByUserId());
+		sb.append(", statusByUserName=");
+		sb.append(getStatusByUserName());
+		sb.append(", statusDate=");
+		sb.append(getStatusDate());
 		sb.append(", proposeVehicle=");
 		sb.append(getProposeVehicle());
 		sb.append(", isProposeDriver=");
@@ -822,7 +1100,7 @@ public class VehicleApplicationModelImpl extends BaseModelImpl<VehicleApplicatio
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(64);
+		StringBundler sb = new StringBundler(82);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.oa.model.VehicleApplication");
@@ -831,14 +1109,6 @@ public class VehicleApplicationModelImpl extends BaseModelImpl<VehicleApplicatio
 		sb.append(
 			"<column><column-name>vehicleApplicationId</column-name><column-value><![CDATA[");
 		sb.append(getVehicleApplicationId());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>groupId</column-name><column-value><![CDATA[");
-		sb.append(getGroupId());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>companyId</column-name><column-value><![CDATA[");
-		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userId</column-name><column-value><![CDATA[");
@@ -893,6 +1163,38 @@ public class VehicleApplicationModelImpl extends BaseModelImpl<VehicleApplicatio
 		sb.append(getDestination());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append(getCompanyId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append(getGroupId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>title</column-name><column-value><![CDATA[");
+		sb.append(getTitle());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>content</column-name><column-value><![CDATA[");
+		sb.append(getContent());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>status</column-name><column-value><![CDATA[");
+		sb.append(getStatus());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>statusByUserId</column-name><column-value><![CDATA[");
+		sb.append(getStatusByUserId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>statusByUserName</column-name><column-value><![CDATA[");
+		sb.append(getStatusByUserName());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>statusDate</column-name><column-value><![CDATA[");
+		sb.append(getStatusDate());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>proposeVehicle</column-name><column-value><![CDATA[");
 		sb.append(getProposeVehicle());
 		sb.append("]]></column-value></column>");
@@ -919,8 +1221,6 @@ public class VehicleApplicationModelImpl extends BaseModelImpl<VehicleApplicatio
 			VehicleApplication.class
 		};
 	private long _vehicleApplicationId;
-	private long _groupId;
-	private long _companyId;
 	private long _userId;
 	private String _userUuid;
 	private String _userName;
@@ -936,6 +1236,15 @@ public class VehicleApplicationModelImpl extends BaseModelImpl<VehicleApplicatio
 	private int _passengerNum;
 	private String _reason;
 	private String _destination;
+	private long _companyId;
+	private long _groupId;
+	private String _title;
+	private String _content;
+	private int _status;
+	private long _statusByUserId;
+	private String _statusByUserUuid;
+	private String _statusByUserName;
+	private Date _statusDate;
 	private long _proposeVehicle;
 	private int _isProposeDriver;
 	private String _driver;

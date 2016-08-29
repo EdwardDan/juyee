@@ -41,6 +41,13 @@ public class OfficeSupplyApplicationSoap implements Serializable {
 		soapModel.setDeptId(model.getDeptId());
 		soapModel.setDeptName(model.getDeptName());
 		soapModel.setIntroductions(model.getIntroductions());
+		soapModel.setPerposeClerk(model.getPerposeClerk());
+		soapModel.setTitle(model.getTitle());
+		soapModel.setContent(model.getContent());
+		soapModel.setStatus(model.getStatus());
+		soapModel.setStatusByUserId(model.getStatusByUserId());
+		soapModel.setStatusByUserName(model.getStatusByUserName());
+		soapModel.setStatusDate(model.getStatusDate());
 
 		return soapModel;
 	}
@@ -176,6 +183,62 @@ public class OfficeSupplyApplicationSoap implements Serializable {
 		_introductions = introductions;
 	}
 
+	public String getPerposeClerk() {
+		return _perposeClerk;
+	}
+
+	public void setPerposeClerk(String perposeClerk) {
+		_perposeClerk = perposeClerk;
+	}
+
+	public String getTitle() {
+		return _title;
+	}
+
+	public void setTitle(String title) {
+		_title = title;
+	}
+
+	public String getContent() {
+		return _content;
+	}
+
+	public void setContent(String content) {
+		_content = content;
+	}
+
+	public int getStatus() {
+		return _status;
+	}
+
+	public void setStatus(int status) {
+		_status = status;
+	}
+
+	public long getStatusByUserId() {
+		return _statusByUserId;
+	}
+
+	public void setStatusByUserId(long statusByUserId) {
+		_statusByUserId = statusByUserId;
+	}
+
+	public String getStatusByUserName() {
+		return _statusByUserName;
+	}
+
+	public void setStatusByUserName(String statusByUserName) {
+		_statusByUserName = statusByUserName;
+	}
+
+	public Date getStatusDate() {
+		return _statusDate;
+	}
+
+	public void setStatusDate(Date statusDate) {
+		_statusDate = statusDate;
+	}
+
 	private long _officeSupplyApplicationId;
 	private long _groupId;
 	private long _companyId;
@@ -186,4 +249,11 @@ public class OfficeSupplyApplicationSoap implements Serializable {
 	private long _deptId;
 	private String _deptName;
 	private String _introductions;
+	private String _perposeClerk;
+	private String _title;
+	private String _content;
+	private int _status;
+	private long _statusByUserId;
+	private String _statusByUserName;
+	private Date _statusDate;
 }

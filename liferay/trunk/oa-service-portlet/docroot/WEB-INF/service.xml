@@ -55,7 +55,15 @@
 		<column name="deptId" type="long" />
 		<column name="deptName" type="String" />
 		<column name="introductions" type="String" />
+		<column name="perposeClerk" type="String" />
+		
+		<column name="title" type="String"></column>
+		<column name="content" type="String"></column>
 
+		<column name="status" type="int"></column>
+		<column name="statusByUserId" type="long"></column>
+		<column name="statusByUserName" type="String"></column>
+		<column name="statusDate" type="Date"></column>
 		<!-- Order -->
 		<order>
 			<order-column name="modifiedTime" order-by="desc"></order-column>
@@ -64,7 +72,8 @@
 		<finder name="UserId" return-type="Collection">
 			<finder-column name="userId" />
 		</finder>
-
+		
+		<reference package-path="com.liferay.portal" entity="WorkflowInstanceLink"></reference>
 	</entity>
 
 	<entity name="OfficeSupplyApplicationItem" local-service="true"

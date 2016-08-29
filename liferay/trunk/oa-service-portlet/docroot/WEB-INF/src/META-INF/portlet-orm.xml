@@ -148,9 +148,19 @@
 			<basic name="deptId" />
 			<basic name="deptName" />
 			<basic name="introductions" />
+			<basic name="perposeClerk" />
+			<basic name="title" />
+			<basic name="content" />
+			<basic name="status" />
+			<basic name="statusByUserId" />
+			<basic name="statusByUserName" />
+			<basic name="statusDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
+			<transient name="statusByUserUuid" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
@@ -174,8 +184,6 @@
 	<mapped-superclass class="com.justonetech.oa.model.impl.VehicleApplicationModelImpl">
 		<attributes>
 			<id name="vehicleApplicationId" />
-			<basic name="groupId" />
-			<basic name="companyId" />
 			<basic name="userId" />
 			<basic name="userName" />
 			<basic name="createTime">
@@ -197,6 +205,16 @@
 			<basic name="passengerNum" />
 			<basic name="reason" />
 			<basic name="destination" />
+			<basic name="companyId" />
+			<basic name="groupId" />
+			<basic name="title" />
+			<basic name="content" />
+			<basic name="status" />
+			<basic name="statusByUserId" />
+			<basic name="statusByUserName" />
+			<basic name="statusDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
 			<basic name="proposeVehicle" />
 			<basic name="isProposeDriver" />
 			<basic name="driver" />
@@ -204,6 +222,7 @@
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
+			<transient name="statusByUserUuid" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>

@@ -85,7 +85,14 @@ create table oa_OfficeSupplyApplication (
 	modifiedTime DATE null,
 	deptId LONG,
 	deptName VARCHAR(75) null,
-	introductions VARCHAR(75) null
+	introductions VARCHAR(75) null,
+	perposeClerk VARCHAR(75) null,
+	title VARCHAR(75) null,
+	content VARCHAR(75) null,
+	status INTEGER,
+	statusByUserId LONG,
+	statusByUserName VARCHAR(75) null,
+	statusDate DATE null
 );
 
 create table oa_OfficeSupplyApplicationItem (
@@ -103,8 +110,6 @@ create table oa_OfficeSupplyApplicationItem (
 
 create table oa_VehicleApplication (
 	vehicleApplicationId LONG not null primary key,
-	groupId LONG,
-	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
 	createTime DATE null,
@@ -118,6 +123,14 @@ create table oa_VehicleApplication (
 	passengerNum INTEGER,
 	reason VARCHAR(1000) null,
 	destination VARCHAR(200) null,
+	companyId LONG,
+	groupId LONG,
+	title VARCHAR(75) null,
+	content VARCHAR(75) null,
+	status INTEGER,
+	statusByUserId LONG,
+	statusByUserName VARCHAR(75) null,
+	statusDate DATE null,
 	proposeVehicle LONG,
 	isProposeDriver INTEGER,
 	driver VARCHAR(75) null,

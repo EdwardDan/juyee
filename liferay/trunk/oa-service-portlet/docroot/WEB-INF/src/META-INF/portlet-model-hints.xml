@@ -87,6 +87,13 @@
 		<field name="deptId" type="long" />
 		<field name="deptName" type="String" />
 		<field name="introductions" type="String" />
+		<field name="perposeClerk" type="String" />
+		<field name="title" type="String" />
+		<field name="content" type="String" />
+		<field name="status" type="int" />
+		<field name="statusByUserId" type="long" />
+		<field name="statusByUserName" type="String" />
+		<field name="statusDate" type="Date" />
 	</model>
 	<model name="com.justonetech.oa.model.OfficeSupplyApplicationItem">
 		<field name="officeSupplyApplicationItemId" type="long" />
@@ -102,8 +109,6 @@
 	</model>
 	<model name="com.justonetech.oa.model.VehicleApplication">
 		<field name="vehicleApplicationId" type="long" />
-		<field name="groupId" type="long" />
-		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createTime" type="Date" />
@@ -121,6 +126,14 @@
 		<field name="destination" type="String">
 			<hint name="max-length">200</hint>
 		</field>
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="title" type="String" />
+		<field name="content" type="String" />
+		<field name="status" type="int" />
+		<field name="statusByUserId" type="long" />
+		<field name="statusByUserName" type="String" />
+		<field name="statusDate" type="Date" />
 		<field name="proposeVehicle" type="long" />
 		<field name="isProposeDriver" type="int" />
 		<field name="driver" type="String" />

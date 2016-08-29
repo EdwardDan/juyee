@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PortalUtil;
@@ -87,6 +88,13 @@ public class OfficeSupplyApplicationClp extends BaseModelImpl<OfficeSupplyApplic
 		attributes.put("deptId", getDeptId());
 		attributes.put("deptName", getDeptName());
 		attributes.put("introductions", getIntroductions());
+		attributes.put("perposeClerk", getPerposeClerk());
+		attributes.put("title", getTitle());
+		attributes.put("content", getContent());
+		attributes.put("status", getStatus());
+		attributes.put("statusByUserId", getStatusByUserId());
+		attributes.put("statusByUserName", getStatusByUserName());
+		attributes.put("statusDate", getStatusDate());
 
 		return attributes;
 	}
@@ -152,6 +160,48 @@ public class OfficeSupplyApplicationClp extends BaseModelImpl<OfficeSupplyApplic
 
 		if (introductions != null) {
 			setIntroductions(introductions);
+		}
+
+		String perposeClerk = (String)attributes.get("perposeClerk");
+
+		if (perposeClerk != null) {
+			setPerposeClerk(perposeClerk);
+		}
+
+		String title = (String)attributes.get("title");
+
+		if (title != null) {
+			setTitle(title);
+		}
+
+		String content = (String)attributes.get("content");
+
+		if (content != null) {
+			setContent(content);
+		}
+
+		Integer status = (Integer)attributes.get("status");
+
+		if (status != null) {
+			setStatus(status);
+		}
+
+		Long statusByUserId = (Long)attributes.get("statusByUserId");
+
+		if (statusByUserId != null) {
+			setStatusByUserId(statusByUserId);
+		}
+
+		String statusByUserName = (String)attributes.get("statusByUserName");
+
+		if (statusByUserName != null) {
+			setStatusByUserName(statusByUserName);
+		}
+
+		Date statusDate = (Date)attributes.get("statusDate");
+
+		if (statusDate != null) {
+			setStatusDate(statusDate);
 		}
 	}
 
@@ -397,6 +447,269 @@ public class OfficeSupplyApplicationClp extends BaseModelImpl<OfficeSupplyApplic
 		}
 	}
 
+	@Override
+	public String getPerposeClerk() {
+		return _perposeClerk;
+	}
+
+	@Override
+	public void setPerposeClerk(String perposeClerk) {
+		_perposeClerk = perposeClerk;
+
+		if (_officeSupplyApplicationRemoteModel != null) {
+			try {
+				Class<?> clazz = _officeSupplyApplicationRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setPerposeClerk", String.class);
+
+				method.invoke(_officeSupplyApplicationRemoteModel, perposeClerk);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getTitle() {
+		return _title;
+	}
+
+	@Override
+	public void setTitle(String title) {
+		_title = title;
+
+		if (_officeSupplyApplicationRemoteModel != null) {
+			try {
+				Class<?> clazz = _officeSupplyApplicationRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setTitle", String.class);
+
+				method.invoke(_officeSupplyApplicationRemoteModel, title);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getContent() {
+		return _content;
+	}
+
+	@Override
+	public void setContent(String content) {
+		_content = content;
+
+		if (_officeSupplyApplicationRemoteModel != null) {
+			try {
+				Class<?> clazz = _officeSupplyApplicationRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setContent", String.class);
+
+				method.invoke(_officeSupplyApplicationRemoteModel, content);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public int getStatus() {
+		return _status;
+	}
+
+	@Override
+	public void setStatus(int status) {
+		_status = status;
+
+		if (_officeSupplyApplicationRemoteModel != null) {
+			try {
+				Class<?> clazz = _officeSupplyApplicationRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setStatus", int.class);
+
+				method.invoke(_officeSupplyApplicationRemoteModel, status);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public long getStatusByUserId() {
+		return _statusByUserId;
+	}
+
+	@Override
+	public void setStatusByUserId(long statusByUserId) {
+		_statusByUserId = statusByUserId;
+
+		if (_officeSupplyApplicationRemoteModel != null) {
+			try {
+				Class<?> clazz = _officeSupplyApplicationRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setStatusByUserId", long.class);
+
+				method.invoke(_officeSupplyApplicationRemoteModel,
+					statusByUserId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getStatusByUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getStatusByUserId(), "uuid",
+			_statusByUserUuid);
+	}
+
+	@Override
+	public void setStatusByUserUuid(String statusByUserUuid) {
+		_statusByUserUuid = statusByUserUuid;
+	}
+
+	@Override
+	public String getStatusByUserName() {
+		return _statusByUserName;
+	}
+
+	@Override
+	public void setStatusByUserName(String statusByUserName) {
+		_statusByUserName = statusByUserName;
+
+		if (_officeSupplyApplicationRemoteModel != null) {
+			try {
+				Class<?> clazz = _officeSupplyApplicationRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setStatusByUserName",
+						String.class);
+
+				method.invoke(_officeSupplyApplicationRemoteModel,
+					statusByUserName);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public Date getStatusDate() {
+		return _statusDate;
+	}
+
+	@Override
+	public void setStatusDate(Date statusDate) {
+		_statusDate = statusDate;
+
+		if (_officeSupplyApplicationRemoteModel != null) {
+			try {
+				Class<?> clazz = _officeSupplyApplicationRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setStatusDate", Date.class);
+
+				method.invoke(_officeSupplyApplicationRemoteModel, statusDate);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #isApproved}
+	 */
+	@Override
+	public boolean getApproved() {
+		return isApproved();
+	}
+
+	@Override
+	public boolean isApproved() {
+		if (getStatus() == WorkflowConstants.STATUS_APPROVED) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isDenied() {
+		if (getStatus() == WorkflowConstants.STATUS_DENIED) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isDraft() {
+		if (getStatus() == WorkflowConstants.STATUS_DRAFT) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isExpired() {
+		if (getStatus() == WorkflowConstants.STATUS_EXPIRED) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isInactive() {
+		if (getStatus() == WorkflowConstants.STATUS_INACTIVE) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isIncomplete() {
+		if (getStatus() == WorkflowConstants.STATUS_INCOMPLETE) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isPending() {
+		if (getStatus() == WorkflowConstants.STATUS_PENDING) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isScheduled() {
+		if (getStatus() == WorkflowConstants.STATUS_SCHEDULED) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public BaseModel<?> getOfficeSupplyApplicationRemoteModel() {
 		return _officeSupplyApplicationRemoteModel;
 	}
@@ -478,6 +791,13 @@ public class OfficeSupplyApplicationClp extends BaseModelImpl<OfficeSupplyApplic
 		clone.setDeptId(getDeptId());
 		clone.setDeptName(getDeptName());
 		clone.setIntroductions(getIntroductions());
+		clone.setPerposeClerk(getPerposeClerk());
+		clone.setTitle(getTitle());
+		clone.setContent(getContent());
+		clone.setStatus(getStatus());
+		clone.setStatusByUserId(getStatusByUserId());
+		clone.setStatusByUserName(getStatusByUserName());
+		clone.setStatusDate(getStatusDate());
 
 		return clone;
 	}
@@ -531,7 +851,7 @@ public class OfficeSupplyApplicationClp extends BaseModelImpl<OfficeSupplyApplic
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(21);
+		StringBundler sb = new StringBundler(35);
 
 		sb.append("{officeSupplyApplicationId=");
 		sb.append(getOfficeSupplyApplicationId());
@@ -553,6 +873,20 @@ public class OfficeSupplyApplicationClp extends BaseModelImpl<OfficeSupplyApplic
 		sb.append(getDeptName());
 		sb.append(", introductions=");
 		sb.append(getIntroductions());
+		sb.append(", perposeClerk=");
+		sb.append(getPerposeClerk());
+		sb.append(", title=");
+		sb.append(getTitle());
+		sb.append(", content=");
+		sb.append(getContent());
+		sb.append(", status=");
+		sb.append(getStatus());
+		sb.append(", statusByUserId=");
+		sb.append(getStatusByUserId());
+		sb.append(", statusByUserName=");
+		sb.append(getStatusByUserName());
+		sb.append(", statusDate=");
+		sb.append(getStatusDate());
 		sb.append("}");
 
 		return sb.toString();
@@ -560,7 +894,7 @@ public class OfficeSupplyApplicationClp extends BaseModelImpl<OfficeSupplyApplic
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(34);
+		StringBundler sb = new StringBundler(55);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.oa.model.OfficeSupplyApplication");
@@ -606,6 +940,34 @@ public class OfficeSupplyApplicationClp extends BaseModelImpl<OfficeSupplyApplic
 			"<column><column-name>introductions</column-name><column-value><![CDATA[");
 		sb.append(getIntroductions());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>perposeClerk</column-name><column-value><![CDATA[");
+		sb.append(getPerposeClerk());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>title</column-name><column-value><![CDATA[");
+		sb.append(getTitle());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>content</column-name><column-value><![CDATA[");
+		sb.append(getContent());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>status</column-name><column-value><![CDATA[");
+		sb.append(getStatus());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>statusByUserId</column-name><column-value><![CDATA[");
+		sb.append(getStatusByUserId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>statusByUserName</column-name><column-value><![CDATA[");
+		sb.append(getStatusByUserName());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>statusDate</column-name><column-value><![CDATA[");
+		sb.append(getStatusDate());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -623,6 +985,14 @@ public class OfficeSupplyApplicationClp extends BaseModelImpl<OfficeSupplyApplic
 	private long _deptId;
 	private String _deptName;
 	private String _introductions;
+	private String _perposeClerk;
+	private String _title;
+	private String _content;
+	private int _status;
+	private long _statusByUserId;
+	private String _statusByUserUuid;
+	private String _statusByUserName;
+	private Date _statusDate;
 	private BaseModel<?> _officeSupplyApplicationRemoteModel;
 	private Class<?> _clpSerializerClass = com.justonetech.oa.service.ClpSerializer.class;
 }

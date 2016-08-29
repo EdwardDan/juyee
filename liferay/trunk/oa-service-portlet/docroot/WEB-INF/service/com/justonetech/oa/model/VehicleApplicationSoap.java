@@ -31,8 +31,6 @@ public class VehicleApplicationSoap implements Serializable {
 		VehicleApplicationSoap soapModel = new VehicleApplicationSoap();
 
 		soapModel.setVehicleApplicationId(model.getVehicleApplicationId());
-		soapModel.setGroupId(model.getGroupId());
-		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateTime(model.getCreateTime());
@@ -46,6 +44,14 @@ public class VehicleApplicationSoap implements Serializable {
 		soapModel.setPassengerNum(model.getPassengerNum());
 		soapModel.setReason(model.getReason());
 		soapModel.setDestination(model.getDestination());
+		soapModel.setCompanyId(model.getCompanyId());
+		soapModel.setGroupId(model.getGroupId());
+		soapModel.setTitle(model.getTitle());
+		soapModel.setContent(model.getContent());
+		soapModel.setStatus(model.getStatus());
+		soapModel.setStatusByUserId(model.getStatusByUserId());
+		soapModel.setStatusByUserName(model.getStatusByUserName());
+		soapModel.setStatusDate(model.getStatusDate());
 		soapModel.setProposeVehicle(model.getProposeVehicle());
 		soapModel.setIsProposeDriver(model.getIsProposeDriver());
 		soapModel.setDriver(model.getDriver());
@@ -111,22 +117,6 @@ public class VehicleApplicationSoap implements Serializable {
 
 	public void setVehicleApplicationId(long vehicleApplicationId) {
 		_vehicleApplicationId = vehicleApplicationId;
-	}
-
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	public void setGroupId(long groupId) {
-		_groupId = groupId;
-	}
-
-	public long getCompanyId() {
-		return _companyId;
-	}
-
-	public void setCompanyId(long companyId) {
-		_companyId = companyId;
 	}
 
 	public long getUserId() {
@@ -233,6 +223,70 @@ public class VehicleApplicationSoap implements Serializable {
 		_destination = destination;
 	}
 
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
+	}
+
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+	}
+
+	public String getTitle() {
+		return _title;
+	}
+
+	public void setTitle(String title) {
+		_title = title;
+	}
+
+	public String getContent() {
+		return _content;
+	}
+
+	public void setContent(String content) {
+		_content = content;
+	}
+
+	public int getStatus() {
+		return _status;
+	}
+
+	public void setStatus(int status) {
+		_status = status;
+	}
+
+	public long getStatusByUserId() {
+		return _statusByUserId;
+	}
+
+	public void setStatusByUserId(long statusByUserId) {
+		_statusByUserId = statusByUserId;
+	}
+
+	public String getStatusByUserName() {
+		return _statusByUserName;
+	}
+
+	public void setStatusByUserName(String statusByUserName) {
+		_statusByUserName = statusByUserName;
+	}
+
+	public Date getStatusDate() {
+		return _statusDate;
+	}
+
+	public void setStatusDate(Date statusDate) {
+		_statusDate = statusDate;
+	}
+
 	public long getProposeVehicle() {
 		return _proposeVehicle;
 	}
@@ -266,8 +320,6 @@ public class VehicleApplicationSoap implements Serializable {
 	}
 
 	private long _vehicleApplicationId;
-	private long _groupId;
-	private long _companyId;
 	private long _userId;
 	private String _userName;
 	private Date _createTime;
@@ -281,6 +333,14 @@ public class VehicleApplicationSoap implements Serializable {
 	private int _passengerNum;
 	private String _reason;
 	private String _destination;
+	private long _companyId;
+	private long _groupId;
+	private String _title;
+	private String _content;
+	private int _status;
+	private long _statusByUserId;
+	private String _statusByUserName;
+	private Date _statusDate;
 	private long _proposeVehicle;
 	private int _isProposeDriver;
 	private String _driver;

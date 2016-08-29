@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.CacheModel;
+import com.liferay.portal.model.WorkflowedModel;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -39,7 +40,8 @@ import java.util.Date;
  * @see com.justonetech.oa.model.impl.OfficeSupplyApplicationModelImpl
  * @generated
  */
-public interface OfficeSupplyApplicationModel extends BaseModel<OfficeSupplyApplication> {
+public interface OfficeSupplyApplicationModel extends BaseModel<OfficeSupplyApplication>,
+	WorkflowedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -217,6 +219,203 @@ public interface OfficeSupplyApplicationModel extends BaseModel<OfficeSupplyAppl
 	 * @param introductions the introductions of this office supply application
 	 */
 	public void setIntroductions(String introductions);
+
+	/**
+	 * Returns the perpose clerk of this office supply application.
+	 *
+	 * @return the perpose clerk of this office supply application
+	 */
+	@AutoEscape
+	public String getPerposeClerk();
+
+	/**
+	 * Sets the perpose clerk of this office supply application.
+	 *
+	 * @param perposeClerk the perpose clerk of this office supply application
+	 */
+	public void setPerposeClerk(String perposeClerk);
+
+	/**
+	 * Returns the title of this office supply application.
+	 *
+	 * @return the title of this office supply application
+	 */
+	@AutoEscape
+	public String getTitle();
+
+	/**
+	 * Sets the title of this office supply application.
+	 *
+	 * @param title the title of this office supply application
+	 */
+	public void setTitle(String title);
+
+	/**
+	 * Returns the content of this office supply application.
+	 *
+	 * @return the content of this office supply application
+	 */
+	@AutoEscape
+	public String getContent();
+
+	/**
+	 * Sets the content of this office supply application.
+	 *
+	 * @param content the content of this office supply application
+	 */
+	public void setContent(String content);
+
+	/**
+	 * Returns the status of this office supply application.
+	 *
+	 * @return the status of this office supply application
+	 */
+	@Override
+	public int getStatus();
+
+	/**
+	 * Sets the status of this office supply application.
+	 *
+	 * @param status the status of this office supply application
+	 */
+	@Override
+	public void setStatus(int status);
+
+	/**
+	 * Returns the status by user ID of this office supply application.
+	 *
+	 * @return the status by user ID of this office supply application
+	 */
+	@Override
+	public long getStatusByUserId();
+
+	/**
+	 * Sets the status by user ID of this office supply application.
+	 *
+	 * @param statusByUserId the status by user ID of this office supply application
+	 */
+	@Override
+	public void setStatusByUserId(long statusByUserId);
+
+	/**
+	 * Returns the status by user uuid of this office supply application.
+	 *
+	 * @return the status by user uuid of this office supply application
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public String getStatusByUserUuid() throws SystemException;
+
+	/**
+	 * Sets the status by user uuid of this office supply application.
+	 *
+	 * @param statusByUserUuid the status by user uuid of this office supply application
+	 */
+	@Override
+	public void setStatusByUserUuid(String statusByUserUuid);
+
+	/**
+	 * Returns the status by user name of this office supply application.
+	 *
+	 * @return the status by user name of this office supply application
+	 */
+	@AutoEscape
+	@Override
+	public String getStatusByUserName();
+
+	/**
+	 * Sets the status by user name of this office supply application.
+	 *
+	 * @param statusByUserName the status by user name of this office supply application
+	 */
+	@Override
+	public void setStatusByUserName(String statusByUserName);
+
+	/**
+	 * Returns the status date of this office supply application.
+	 *
+	 * @return the status date of this office supply application
+	 */
+	@Override
+	public Date getStatusDate();
+
+	/**
+	 * Sets the status date of this office supply application.
+	 *
+	 * @param statusDate the status date of this office supply application
+	 */
+	@Override
+	public void setStatusDate(Date statusDate);
+
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #isApproved()}
+	 */
+	@Override
+	public boolean getApproved();
+
+	/**
+	 * Returns <code>true</code> if this office supply application is approved.
+	 *
+	 * @return <code>true</code> if this office supply application is approved; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isApproved();
+
+	/**
+	 * Returns <code>true</code> if this office supply application is denied.
+	 *
+	 * @return <code>true</code> if this office supply application is denied; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isDenied();
+
+	/**
+	 * Returns <code>true</code> if this office supply application is a draft.
+	 *
+	 * @return <code>true</code> if this office supply application is a draft; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isDraft();
+
+	/**
+	 * Returns <code>true</code> if this office supply application is expired.
+	 *
+	 * @return <code>true</code> if this office supply application is expired; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isExpired();
+
+	/**
+	 * Returns <code>true</code> if this office supply application is inactive.
+	 *
+	 * @return <code>true</code> if this office supply application is inactive; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isInactive();
+
+	/**
+	 * Returns <code>true</code> if this office supply application is incomplete.
+	 *
+	 * @return <code>true</code> if this office supply application is incomplete; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isIncomplete();
+
+	/**
+	 * Returns <code>true</code> if this office supply application is pending.
+	 *
+	 * @return <code>true</code> if this office supply application is pending; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isPending();
+
+	/**
+	 * Returns <code>true</code> if this office supply application is scheduled.
+	 *
+	 * @return <code>true</code> if this office supply application is scheduled; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isScheduled();
 
 	@Override
 	public boolean isNew();

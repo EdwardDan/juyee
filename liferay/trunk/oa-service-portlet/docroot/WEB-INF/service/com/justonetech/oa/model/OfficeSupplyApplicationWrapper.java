@@ -62,6 +62,13 @@ public class OfficeSupplyApplicationWrapper implements OfficeSupplyApplication,
 		attributes.put("deptId", getDeptId());
 		attributes.put("deptName", getDeptName());
 		attributes.put("introductions", getIntroductions());
+		attributes.put("perposeClerk", getPerposeClerk());
+		attributes.put("title", getTitle());
+		attributes.put("content", getContent());
+		attributes.put("status", getStatus());
+		attributes.put("statusByUserId", getStatusByUserId());
+		attributes.put("statusByUserName", getStatusByUserName());
+		attributes.put("statusDate", getStatusDate());
 
 		return attributes;
 	}
@@ -127,6 +134,48 @@ public class OfficeSupplyApplicationWrapper implements OfficeSupplyApplication,
 
 		if (introductions != null) {
 			setIntroductions(introductions);
+		}
+
+		String perposeClerk = (String)attributes.get("perposeClerk");
+
+		if (perposeClerk != null) {
+			setPerposeClerk(perposeClerk);
+		}
+
+		String title = (String)attributes.get("title");
+
+		if (title != null) {
+			setTitle(title);
+		}
+
+		String content = (String)attributes.get("content");
+
+		if (content != null) {
+			setContent(content);
+		}
+
+		Integer status = (Integer)attributes.get("status");
+
+		if (status != null) {
+			setStatus(status);
+		}
+
+		Long statusByUserId = (Long)attributes.get("statusByUserId");
+
+		if (statusByUserId != null) {
+			setStatusByUserId(statusByUserId);
+		}
+
+		String statusByUserName = (String)attributes.get("statusByUserName");
+
+		if (statusByUserName != null) {
+			setStatusByUserName(statusByUserName);
+		}
+
+		Date statusDate = (Date)attributes.get("statusDate");
+
+		if (statusDate != null) {
+			setStatusDate(statusDate);
 		}
 	}
 
@@ -370,6 +419,256 @@ public class OfficeSupplyApplicationWrapper implements OfficeSupplyApplication,
 	@Override
 	public void setIntroductions(java.lang.String introductions) {
 		_officeSupplyApplication.setIntroductions(introductions);
+	}
+
+	/**
+	* Returns the perpose clerk of this office supply application.
+	*
+	* @return the perpose clerk of this office supply application
+	*/
+	@Override
+	public java.lang.String getPerposeClerk() {
+		return _officeSupplyApplication.getPerposeClerk();
+	}
+
+	/**
+	* Sets the perpose clerk of this office supply application.
+	*
+	* @param perposeClerk the perpose clerk of this office supply application
+	*/
+	@Override
+	public void setPerposeClerk(java.lang.String perposeClerk) {
+		_officeSupplyApplication.setPerposeClerk(perposeClerk);
+	}
+
+	/**
+	* Returns the title of this office supply application.
+	*
+	* @return the title of this office supply application
+	*/
+	@Override
+	public java.lang.String getTitle() {
+		return _officeSupplyApplication.getTitle();
+	}
+
+	/**
+	* Sets the title of this office supply application.
+	*
+	* @param title the title of this office supply application
+	*/
+	@Override
+	public void setTitle(java.lang.String title) {
+		_officeSupplyApplication.setTitle(title);
+	}
+
+	/**
+	* Returns the content of this office supply application.
+	*
+	* @return the content of this office supply application
+	*/
+	@Override
+	public java.lang.String getContent() {
+		return _officeSupplyApplication.getContent();
+	}
+
+	/**
+	* Sets the content of this office supply application.
+	*
+	* @param content the content of this office supply application
+	*/
+	@Override
+	public void setContent(java.lang.String content) {
+		_officeSupplyApplication.setContent(content);
+	}
+
+	/**
+	* Returns the status of this office supply application.
+	*
+	* @return the status of this office supply application
+	*/
+	@Override
+	public int getStatus() {
+		return _officeSupplyApplication.getStatus();
+	}
+
+	/**
+	* Sets the status of this office supply application.
+	*
+	* @param status the status of this office supply application
+	*/
+	@Override
+	public void setStatus(int status) {
+		_officeSupplyApplication.setStatus(status);
+	}
+
+	/**
+	* Returns the status by user ID of this office supply application.
+	*
+	* @return the status by user ID of this office supply application
+	*/
+	@Override
+	public long getStatusByUserId() {
+		return _officeSupplyApplication.getStatusByUserId();
+	}
+
+	/**
+	* Sets the status by user ID of this office supply application.
+	*
+	* @param statusByUserId the status by user ID of this office supply application
+	*/
+	@Override
+	public void setStatusByUserId(long statusByUserId) {
+		_officeSupplyApplication.setStatusByUserId(statusByUserId);
+	}
+
+	/**
+	* Returns the status by user uuid of this office supply application.
+	*
+	* @return the status by user uuid of this office supply application
+	* @throws SystemException if a system exception occurred
+	*/
+	@Override
+	public java.lang.String getStatusByUserUuid()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _officeSupplyApplication.getStatusByUserUuid();
+	}
+
+	/**
+	* Sets the status by user uuid of this office supply application.
+	*
+	* @param statusByUserUuid the status by user uuid of this office supply application
+	*/
+	@Override
+	public void setStatusByUserUuid(java.lang.String statusByUserUuid) {
+		_officeSupplyApplication.setStatusByUserUuid(statusByUserUuid);
+	}
+
+	/**
+	* Returns the status by user name of this office supply application.
+	*
+	* @return the status by user name of this office supply application
+	*/
+	@Override
+	public java.lang.String getStatusByUserName() {
+		return _officeSupplyApplication.getStatusByUserName();
+	}
+
+	/**
+	* Sets the status by user name of this office supply application.
+	*
+	* @param statusByUserName the status by user name of this office supply application
+	*/
+	@Override
+	public void setStatusByUserName(java.lang.String statusByUserName) {
+		_officeSupplyApplication.setStatusByUserName(statusByUserName);
+	}
+
+	/**
+	* Returns the status date of this office supply application.
+	*
+	* @return the status date of this office supply application
+	*/
+	@Override
+	public java.util.Date getStatusDate() {
+		return _officeSupplyApplication.getStatusDate();
+	}
+
+	/**
+	* Sets the status date of this office supply application.
+	*
+	* @param statusDate the status date of this office supply application
+	*/
+	@Override
+	public void setStatusDate(java.util.Date statusDate) {
+		_officeSupplyApplication.setStatusDate(statusDate);
+	}
+
+	/**
+	* @deprecated As of 6.1.0, replaced by {@link #isApproved()}
+	*/
+	@Override
+	public boolean getApproved() {
+		return _officeSupplyApplication.getApproved();
+	}
+
+	/**
+	* Returns <code>true</code> if this office supply application is approved.
+	*
+	* @return <code>true</code> if this office supply application is approved; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isApproved() {
+		return _officeSupplyApplication.isApproved();
+	}
+
+	/**
+	* Returns <code>true</code> if this office supply application is denied.
+	*
+	* @return <code>true</code> if this office supply application is denied; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isDenied() {
+		return _officeSupplyApplication.isDenied();
+	}
+
+	/**
+	* Returns <code>true</code> if this office supply application is a draft.
+	*
+	* @return <code>true</code> if this office supply application is a draft; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isDraft() {
+		return _officeSupplyApplication.isDraft();
+	}
+
+	/**
+	* Returns <code>true</code> if this office supply application is expired.
+	*
+	* @return <code>true</code> if this office supply application is expired; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isExpired() {
+		return _officeSupplyApplication.isExpired();
+	}
+
+	/**
+	* Returns <code>true</code> if this office supply application is inactive.
+	*
+	* @return <code>true</code> if this office supply application is inactive; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isInactive() {
+		return _officeSupplyApplication.isInactive();
+	}
+
+	/**
+	* Returns <code>true</code> if this office supply application is incomplete.
+	*
+	* @return <code>true</code> if this office supply application is incomplete; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isIncomplete() {
+		return _officeSupplyApplication.isIncomplete();
+	}
+
+	/**
+	* Returns <code>true</code> if this office supply application is pending.
+	*
+	* @return <code>true</code> if this office supply application is pending; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isPending() {
+		return _officeSupplyApplication.isPending();
+	}
+
+	/**
+	* Returns <code>true</code> if this office supply application is scheduled.
+	*
+	* @return <code>true</code> if this office supply application is scheduled; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isScheduled() {
+		return _officeSupplyApplication.isScheduled();
 	}
 
 	@Override

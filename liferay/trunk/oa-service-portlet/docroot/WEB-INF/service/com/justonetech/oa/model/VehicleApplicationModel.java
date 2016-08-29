@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.CacheModel;
+import com.liferay.portal.model.WorkflowedModel;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -39,7 +40,8 @@ import java.util.Date;
  * @see com.justonetech.oa.model.impl.VehicleApplicationModelImpl
  * @generated
  */
-public interface VehicleApplicationModel extends BaseModel<VehicleApplication> {
+public interface VehicleApplicationModel extends BaseModel<VehicleApplication>,
+	WorkflowedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -73,34 +75,6 @@ public interface VehicleApplicationModel extends BaseModel<VehicleApplication> {
 	 * @param vehicleApplicationId the vehicle application ID of this vehicle application
 	 */
 	public void setVehicleApplicationId(long vehicleApplicationId);
-
-	/**
-	 * Returns the group ID of this vehicle application.
-	 *
-	 * @return the group ID of this vehicle application
-	 */
-	public long getGroupId();
-
-	/**
-	 * Sets the group ID of this vehicle application.
-	 *
-	 * @param groupId the group ID of this vehicle application
-	 */
-	public void setGroupId(long groupId);
-
-	/**
-	 * Returns the company ID of this vehicle application.
-	 *
-	 * @return the company ID of this vehicle application
-	 */
-	public long getCompanyId();
-
-	/**
-	 * Sets the company ID of this vehicle application.
-	 *
-	 * @param companyId the company ID of this vehicle application
-	 */
-	public void setCompanyId(long companyId);
 
 	/**
 	 * Returns the user ID of this vehicle application.
@@ -305,6 +279,146 @@ public interface VehicleApplicationModel extends BaseModel<VehicleApplication> {
 	public void setDestination(String destination);
 
 	/**
+	 * Returns the company ID of this vehicle application.
+	 *
+	 * @return the company ID of this vehicle application
+	 */
+	public long getCompanyId();
+
+	/**
+	 * Sets the company ID of this vehicle application.
+	 *
+	 * @param companyId the company ID of this vehicle application
+	 */
+	public void setCompanyId(long companyId);
+
+	/**
+	 * Returns the group ID of this vehicle application.
+	 *
+	 * @return the group ID of this vehicle application
+	 */
+	public long getGroupId();
+
+	/**
+	 * Sets the group ID of this vehicle application.
+	 *
+	 * @param groupId the group ID of this vehicle application
+	 */
+	public void setGroupId(long groupId);
+
+	/**
+	 * Returns the title of this vehicle application.
+	 *
+	 * @return the title of this vehicle application
+	 */
+	@AutoEscape
+	public String getTitle();
+
+	/**
+	 * Sets the title of this vehicle application.
+	 *
+	 * @param title the title of this vehicle application
+	 */
+	public void setTitle(String title);
+
+	/**
+	 * Returns the content of this vehicle application.
+	 *
+	 * @return the content of this vehicle application
+	 */
+	@AutoEscape
+	public String getContent();
+
+	/**
+	 * Sets the content of this vehicle application.
+	 *
+	 * @param content the content of this vehicle application
+	 */
+	public void setContent(String content);
+
+	/**
+	 * Returns the status of this vehicle application.
+	 *
+	 * @return the status of this vehicle application
+	 */
+	@Override
+	public int getStatus();
+
+	/**
+	 * Sets the status of this vehicle application.
+	 *
+	 * @param status the status of this vehicle application
+	 */
+	@Override
+	public void setStatus(int status);
+
+	/**
+	 * Returns the status by user ID of this vehicle application.
+	 *
+	 * @return the status by user ID of this vehicle application
+	 */
+	@Override
+	public long getStatusByUserId();
+
+	/**
+	 * Sets the status by user ID of this vehicle application.
+	 *
+	 * @param statusByUserId the status by user ID of this vehicle application
+	 */
+	@Override
+	public void setStatusByUserId(long statusByUserId);
+
+	/**
+	 * Returns the status by user uuid of this vehicle application.
+	 *
+	 * @return the status by user uuid of this vehicle application
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public String getStatusByUserUuid() throws SystemException;
+
+	/**
+	 * Sets the status by user uuid of this vehicle application.
+	 *
+	 * @param statusByUserUuid the status by user uuid of this vehicle application
+	 */
+	@Override
+	public void setStatusByUserUuid(String statusByUserUuid);
+
+	/**
+	 * Returns the status by user name of this vehicle application.
+	 *
+	 * @return the status by user name of this vehicle application
+	 */
+	@AutoEscape
+	@Override
+	public String getStatusByUserName();
+
+	/**
+	 * Sets the status by user name of this vehicle application.
+	 *
+	 * @param statusByUserName the status by user name of this vehicle application
+	 */
+	@Override
+	public void setStatusByUserName(String statusByUserName);
+
+	/**
+	 * Returns the status date of this vehicle application.
+	 *
+	 * @return the status date of this vehicle application
+	 */
+	@Override
+	public Date getStatusDate();
+
+	/**
+	 * Sets the status date of this vehicle application.
+	 *
+	 * @param statusDate the status date of this vehicle application
+	 */
+	@Override
+	public void setStatusDate(Date statusDate);
+
+	/**
 	 * Returns the propose vehicle of this vehicle application.
 	 *
 	 * @return the propose vehicle of this vehicle application
@@ -361,6 +475,76 @@ public interface VehicleApplicationModel extends BaseModel<VehicleApplication> {
 	 * @param phone the phone of this vehicle application
 	 */
 	public void setPhone(String phone);
+
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #isApproved()}
+	 */
+	@Override
+	public boolean getApproved();
+
+	/**
+	 * Returns <code>true</code> if this vehicle application is approved.
+	 *
+	 * @return <code>true</code> if this vehicle application is approved; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isApproved();
+
+	/**
+	 * Returns <code>true</code> if this vehicle application is denied.
+	 *
+	 * @return <code>true</code> if this vehicle application is denied; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isDenied();
+
+	/**
+	 * Returns <code>true</code> if this vehicle application is a draft.
+	 *
+	 * @return <code>true</code> if this vehicle application is a draft; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isDraft();
+
+	/**
+	 * Returns <code>true</code> if this vehicle application is expired.
+	 *
+	 * @return <code>true</code> if this vehicle application is expired; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isExpired();
+
+	/**
+	 * Returns <code>true</code> if this vehicle application is inactive.
+	 *
+	 * @return <code>true</code> if this vehicle application is inactive; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isInactive();
+
+	/**
+	 * Returns <code>true</code> if this vehicle application is incomplete.
+	 *
+	 * @return <code>true</code> if this vehicle application is incomplete; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isIncomplete();
+
+	/**
+	 * Returns <code>true</code> if this vehicle application is pending.
+	 *
+	 * @return <code>true</code> if this vehicle application is pending; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isPending();
+
+	/**
+	 * Returns <code>true</code> if this vehicle application is scheduled.
+	 *
+	 * @return <code>true</code> if this vehicle application is scheduled; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isScheduled();
 
 	@Override
 	public boolean isNew();

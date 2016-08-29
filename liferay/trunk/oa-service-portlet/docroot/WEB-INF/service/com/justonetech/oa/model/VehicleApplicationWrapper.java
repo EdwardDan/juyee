@@ -51,8 +51,6 @@ public class VehicleApplicationWrapper implements VehicleApplication,
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("vehicleApplicationId", getVehicleApplicationId());
-		attributes.put("groupId", getGroupId());
-		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
 		attributes.put("createTime", getCreateTime());
@@ -66,6 +64,14 @@ public class VehicleApplicationWrapper implements VehicleApplication,
 		attributes.put("passengerNum", getPassengerNum());
 		attributes.put("reason", getReason());
 		attributes.put("destination", getDestination());
+		attributes.put("companyId", getCompanyId());
+		attributes.put("groupId", getGroupId());
+		attributes.put("title", getTitle());
+		attributes.put("content", getContent());
+		attributes.put("status", getStatus());
+		attributes.put("statusByUserId", getStatusByUserId());
+		attributes.put("statusByUserName", getStatusByUserName());
+		attributes.put("statusDate", getStatusDate());
 		attributes.put("proposeVehicle", getProposeVehicle());
 		attributes.put("isProposeDriver", getIsProposeDriver());
 		attributes.put("driver", getDriver());
@@ -80,18 +86,6 @@ public class VehicleApplicationWrapper implements VehicleApplication,
 
 		if (vehicleApplicationId != null) {
 			setVehicleApplicationId(vehicleApplicationId);
-		}
-
-		Long groupId = (Long)attributes.get("groupId");
-
-		if (groupId != null) {
-			setGroupId(groupId);
-		}
-
-		Long companyId = (Long)attributes.get("companyId");
-
-		if (companyId != null) {
-			setCompanyId(companyId);
 		}
 
 		Long userId = (Long)attributes.get("userId");
@@ -172,6 +166,54 @@ public class VehicleApplicationWrapper implements VehicleApplication,
 			setDestination(destination);
 		}
 
+		Long companyId = (Long)attributes.get("companyId");
+
+		if (companyId != null) {
+			setCompanyId(companyId);
+		}
+
+		Long groupId = (Long)attributes.get("groupId");
+
+		if (groupId != null) {
+			setGroupId(groupId);
+		}
+
+		String title = (String)attributes.get("title");
+
+		if (title != null) {
+			setTitle(title);
+		}
+
+		String content = (String)attributes.get("content");
+
+		if (content != null) {
+			setContent(content);
+		}
+
+		Integer status = (Integer)attributes.get("status");
+
+		if (status != null) {
+			setStatus(status);
+		}
+
+		Long statusByUserId = (Long)attributes.get("statusByUserId");
+
+		if (statusByUserId != null) {
+			setStatusByUserId(statusByUserId);
+		}
+
+		String statusByUserName = (String)attributes.get("statusByUserName");
+
+		if (statusByUserName != null) {
+			setStatusByUserName(statusByUserName);
+		}
+
+		Date statusDate = (Date)attributes.get("statusDate");
+
+		if (statusDate != null) {
+			setStatusDate(statusDate);
+		}
+
 		Long proposeVehicle = (Long)attributes.get("proposeVehicle");
 
 		if (proposeVehicle != null) {
@@ -235,46 +277,6 @@ public class VehicleApplicationWrapper implements VehicleApplication,
 	@Override
 	public void setVehicleApplicationId(long vehicleApplicationId) {
 		_vehicleApplication.setVehicleApplicationId(vehicleApplicationId);
-	}
-
-	/**
-	* Returns the group ID of this vehicle application.
-	*
-	* @return the group ID of this vehicle application
-	*/
-	@Override
-	public long getGroupId() {
-		return _vehicleApplication.getGroupId();
-	}
-
-	/**
-	* Sets the group ID of this vehicle application.
-	*
-	* @param groupId the group ID of this vehicle application
-	*/
-	@Override
-	public void setGroupId(long groupId) {
-		_vehicleApplication.setGroupId(groupId);
-	}
-
-	/**
-	* Returns the company ID of this vehicle application.
-	*
-	* @return the company ID of this vehicle application
-	*/
-	@Override
-	public long getCompanyId() {
-		return _vehicleApplication.getCompanyId();
-	}
-
-	/**
-	* Sets the company ID of this vehicle application.
-	*
-	* @param companyId the company ID of this vehicle application
-	*/
-	@Override
-	public void setCompanyId(long companyId) {
-		_vehicleApplication.setCompanyId(companyId);
 	}
 
 	/**
@@ -560,6 +562,188 @@ public class VehicleApplicationWrapper implements VehicleApplication,
 	}
 
 	/**
+	* Returns the company ID of this vehicle application.
+	*
+	* @return the company ID of this vehicle application
+	*/
+	@Override
+	public long getCompanyId() {
+		return _vehicleApplication.getCompanyId();
+	}
+
+	/**
+	* Sets the company ID of this vehicle application.
+	*
+	* @param companyId the company ID of this vehicle application
+	*/
+	@Override
+	public void setCompanyId(long companyId) {
+		_vehicleApplication.setCompanyId(companyId);
+	}
+
+	/**
+	* Returns the group ID of this vehicle application.
+	*
+	* @return the group ID of this vehicle application
+	*/
+	@Override
+	public long getGroupId() {
+		return _vehicleApplication.getGroupId();
+	}
+
+	/**
+	* Sets the group ID of this vehicle application.
+	*
+	* @param groupId the group ID of this vehicle application
+	*/
+	@Override
+	public void setGroupId(long groupId) {
+		_vehicleApplication.setGroupId(groupId);
+	}
+
+	/**
+	* Returns the title of this vehicle application.
+	*
+	* @return the title of this vehicle application
+	*/
+	@Override
+	public java.lang.String getTitle() {
+		return _vehicleApplication.getTitle();
+	}
+
+	/**
+	* Sets the title of this vehicle application.
+	*
+	* @param title the title of this vehicle application
+	*/
+	@Override
+	public void setTitle(java.lang.String title) {
+		_vehicleApplication.setTitle(title);
+	}
+
+	/**
+	* Returns the content of this vehicle application.
+	*
+	* @return the content of this vehicle application
+	*/
+	@Override
+	public java.lang.String getContent() {
+		return _vehicleApplication.getContent();
+	}
+
+	/**
+	* Sets the content of this vehicle application.
+	*
+	* @param content the content of this vehicle application
+	*/
+	@Override
+	public void setContent(java.lang.String content) {
+		_vehicleApplication.setContent(content);
+	}
+
+	/**
+	* Returns the status of this vehicle application.
+	*
+	* @return the status of this vehicle application
+	*/
+	@Override
+	public int getStatus() {
+		return _vehicleApplication.getStatus();
+	}
+
+	/**
+	* Sets the status of this vehicle application.
+	*
+	* @param status the status of this vehicle application
+	*/
+	@Override
+	public void setStatus(int status) {
+		_vehicleApplication.setStatus(status);
+	}
+
+	/**
+	* Returns the status by user ID of this vehicle application.
+	*
+	* @return the status by user ID of this vehicle application
+	*/
+	@Override
+	public long getStatusByUserId() {
+		return _vehicleApplication.getStatusByUserId();
+	}
+
+	/**
+	* Sets the status by user ID of this vehicle application.
+	*
+	* @param statusByUserId the status by user ID of this vehicle application
+	*/
+	@Override
+	public void setStatusByUserId(long statusByUserId) {
+		_vehicleApplication.setStatusByUserId(statusByUserId);
+	}
+
+	/**
+	* Returns the status by user uuid of this vehicle application.
+	*
+	* @return the status by user uuid of this vehicle application
+	* @throws SystemException if a system exception occurred
+	*/
+	@Override
+	public java.lang.String getStatusByUserUuid()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _vehicleApplication.getStatusByUserUuid();
+	}
+
+	/**
+	* Sets the status by user uuid of this vehicle application.
+	*
+	* @param statusByUserUuid the status by user uuid of this vehicle application
+	*/
+	@Override
+	public void setStatusByUserUuid(java.lang.String statusByUserUuid) {
+		_vehicleApplication.setStatusByUserUuid(statusByUserUuid);
+	}
+
+	/**
+	* Returns the status by user name of this vehicle application.
+	*
+	* @return the status by user name of this vehicle application
+	*/
+	@Override
+	public java.lang.String getStatusByUserName() {
+		return _vehicleApplication.getStatusByUserName();
+	}
+
+	/**
+	* Sets the status by user name of this vehicle application.
+	*
+	* @param statusByUserName the status by user name of this vehicle application
+	*/
+	@Override
+	public void setStatusByUserName(java.lang.String statusByUserName) {
+		_vehicleApplication.setStatusByUserName(statusByUserName);
+	}
+
+	/**
+	* Returns the status date of this vehicle application.
+	*
+	* @return the status date of this vehicle application
+	*/
+	@Override
+	public java.util.Date getStatusDate() {
+		return _vehicleApplication.getStatusDate();
+	}
+
+	/**
+	* Sets the status date of this vehicle application.
+	*
+	* @param statusDate the status date of this vehicle application
+	*/
+	@Override
+	public void setStatusDate(java.util.Date statusDate) {
+		_vehicleApplication.setStatusDate(statusDate);
+	}
+
+	/**
 	* Returns the propose vehicle of this vehicle application.
 	*
 	* @return the propose vehicle of this vehicle application
@@ -637,6 +821,94 @@ public class VehicleApplicationWrapper implements VehicleApplication,
 	@Override
 	public void setPhone(java.lang.String phone) {
 		_vehicleApplication.setPhone(phone);
+	}
+
+	/**
+	* @deprecated As of 6.1.0, replaced by {@link #isApproved()}
+	*/
+	@Override
+	public boolean getApproved() {
+		return _vehicleApplication.getApproved();
+	}
+
+	/**
+	* Returns <code>true</code> if this vehicle application is approved.
+	*
+	* @return <code>true</code> if this vehicle application is approved; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isApproved() {
+		return _vehicleApplication.isApproved();
+	}
+
+	/**
+	* Returns <code>true</code> if this vehicle application is denied.
+	*
+	* @return <code>true</code> if this vehicle application is denied; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isDenied() {
+		return _vehicleApplication.isDenied();
+	}
+
+	/**
+	* Returns <code>true</code> if this vehicle application is a draft.
+	*
+	* @return <code>true</code> if this vehicle application is a draft; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isDraft() {
+		return _vehicleApplication.isDraft();
+	}
+
+	/**
+	* Returns <code>true</code> if this vehicle application is expired.
+	*
+	* @return <code>true</code> if this vehicle application is expired; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isExpired() {
+		return _vehicleApplication.isExpired();
+	}
+
+	/**
+	* Returns <code>true</code> if this vehicle application is inactive.
+	*
+	* @return <code>true</code> if this vehicle application is inactive; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isInactive() {
+		return _vehicleApplication.isInactive();
+	}
+
+	/**
+	* Returns <code>true</code> if this vehicle application is incomplete.
+	*
+	* @return <code>true</code> if this vehicle application is incomplete; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isIncomplete() {
+		return _vehicleApplication.isIncomplete();
+	}
+
+	/**
+	* Returns <code>true</code> if this vehicle application is pending.
+	*
+	* @return <code>true</code> if this vehicle application is pending; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isPending() {
+		return _vehicleApplication.isPending();
+	}
+
+	/**
+	* Returns <code>true</code> if this vehicle application is scheduled.
+	*
+	* @return <code>true</code> if this vehicle application is scheduled; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isScheduled() {
+		return _vehicleApplication.isScheduled();
 	}
 
 	@Override

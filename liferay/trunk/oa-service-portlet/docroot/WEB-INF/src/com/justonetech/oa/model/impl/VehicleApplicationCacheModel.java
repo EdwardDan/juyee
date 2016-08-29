@@ -38,14 +38,10 @@ public class VehicleApplicationCacheModel implements CacheModel<VehicleApplicati
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(41);
+		StringBundler sb = new StringBundler(53);
 
 		sb.append("{vehicleApplicationId=");
 		sb.append(vehicleApplicationId);
-		sb.append(", groupId=");
-		sb.append(groupId);
-		sb.append(", companyId=");
-		sb.append(companyId);
 		sb.append(", userId=");
 		sb.append(userId);
 		sb.append(", userName=");
@@ -72,6 +68,22 @@ public class VehicleApplicationCacheModel implements CacheModel<VehicleApplicati
 		sb.append(reason);
 		sb.append(", destination=");
 		sb.append(destination);
+		sb.append(", companyId=");
+		sb.append(companyId);
+		sb.append(", groupId=");
+		sb.append(groupId);
+		sb.append(", title=");
+		sb.append(title);
+		sb.append(", content=");
+		sb.append(content);
+		sb.append(", status=");
+		sb.append(status);
+		sb.append(", statusByUserId=");
+		sb.append(statusByUserId);
+		sb.append(", statusByUserName=");
+		sb.append(statusByUserName);
+		sb.append(", statusDate=");
+		sb.append(statusDate);
 		sb.append(", proposeVehicle=");
 		sb.append(proposeVehicle);
 		sb.append(", isProposeDriver=");
@@ -90,8 +102,6 @@ public class VehicleApplicationCacheModel implements CacheModel<VehicleApplicati
 		VehicleApplicationImpl vehicleApplicationImpl = new VehicleApplicationImpl();
 
 		vehicleApplicationImpl.setVehicleApplicationId(vehicleApplicationId);
-		vehicleApplicationImpl.setGroupId(groupId);
-		vehicleApplicationImpl.setCompanyId(companyId);
 		vehicleApplicationImpl.setUserId(userId);
 
 		if (userName == null) {
@@ -163,6 +173,40 @@ public class VehicleApplicationCacheModel implements CacheModel<VehicleApplicati
 			vehicleApplicationImpl.setDestination(destination);
 		}
 
+		vehicleApplicationImpl.setCompanyId(companyId);
+		vehicleApplicationImpl.setGroupId(groupId);
+
+		if (title == null) {
+			vehicleApplicationImpl.setTitle(StringPool.BLANK);
+		}
+		else {
+			vehicleApplicationImpl.setTitle(title);
+		}
+
+		if (content == null) {
+			vehicleApplicationImpl.setContent(StringPool.BLANK);
+		}
+		else {
+			vehicleApplicationImpl.setContent(content);
+		}
+
+		vehicleApplicationImpl.setStatus(status);
+		vehicleApplicationImpl.setStatusByUserId(statusByUserId);
+
+		if (statusByUserName == null) {
+			vehicleApplicationImpl.setStatusByUserName(StringPool.BLANK);
+		}
+		else {
+			vehicleApplicationImpl.setStatusByUserName(statusByUserName);
+		}
+
+		if (statusDate == Long.MIN_VALUE) {
+			vehicleApplicationImpl.setStatusDate(null);
+		}
+		else {
+			vehicleApplicationImpl.setStatusDate(new Date(statusDate));
+		}
+
 		vehicleApplicationImpl.setProposeVehicle(proposeVehicle);
 		vehicleApplicationImpl.setIsProposeDriver(isProposeDriver);
 
@@ -188,8 +232,6 @@ public class VehicleApplicationCacheModel implements CacheModel<VehicleApplicati
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		vehicleApplicationId = objectInput.readLong();
-		groupId = objectInput.readLong();
-		companyId = objectInput.readLong();
 		userId = objectInput.readLong();
 		userName = objectInput.readUTF();
 		createTime = objectInput.readLong();
@@ -203,6 +245,14 @@ public class VehicleApplicationCacheModel implements CacheModel<VehicleApplicati
 		passengerNum = objectInput.readInt();
 		reason = objectInput.readUTF();
 		destination = objectInput.readUTF();
+		companyId = objectInput.readLong();
+		groupId = objectInput.readLong();
+		title = objectInput.readUTF();
+		content = objectInput.readUTF();
+		status = objectInput.readInt();
+		statusByUserId = objectInput.readLong();
+		statusByUserName = objectInput.readUTF();
+		statusDate = objectInput.readLong();
 		proposeVehicle = objectInput.readLong();
 		isProposeDriver = objectInput.readInt();
 		driver = objectInput.readUTF();
@@ -213,8 +263,6 @@ public class VehicleApplicationCacheModel implements CacheModel<VehicleApplicati
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(vehicleApplicationId);
-		objectOutput.writeLong(groupId);
-		objectOutput.writeLong(companyId);
 		objectOutput.writeLong(userId);
 
 		if (userName == null) {
@@ -262,6 +310,34 @@ public class VehicleApplicationCacheModel implements CacheModel<VehicleApplicati
 			objectOutput.writeUTF(destination);
 		}
 
+		objectOutput.writeLong(companyId);
+		objectOutput.writeLong(groupId);
+
+		if (title == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(title);
+		}
+
+		if (content == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(content);
+		}
+
+		objectOutput.writeInt(status);
+		objectOutput.writeLong(statusByUserId);
+
+		if (statusByUserName == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(statusByUserName);
+		}
+
+		objectOutput.writeLong(statusDate);
 		objectOutput.writeLong(proposeVehicle);
 		objectOutput.writeInt(isProposeDriver);
 
@@ -281,8 +357,6 @@ public class VehicleApplicationCacheModel implements CacheModel<VehicleApplicati
 	}
 
 	public long vehicleApplicationId;
-	public long groupId;
-	public long companyId;
 	public long userId;
 	public String userName;
 	public long createTime;
@@ -296,6 +370,14 @@ public class VehicleApplicationCacheModel implements CacheModel<VehicleApplicati
 	public int passengerNum;
 	public String reason;
 	public String destination;
+	public long companyId;
+	public long groupId;
+	public String title;
+	public String content;
+	public int status;
+	public long statusByUserId;
+	public String statusByUserName;
+	public long statusDate;
 	public long proposeVehicle;
 	public int isProposeDriver;
 	public String driver;

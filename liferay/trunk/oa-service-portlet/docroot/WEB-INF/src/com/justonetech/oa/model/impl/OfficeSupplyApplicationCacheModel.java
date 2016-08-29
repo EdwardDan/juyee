@@ -38,7 +38,7 @@ public class OfficeSupplyApplicationCacheModel implements CacheModel<OfficeSuppl
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(21);
+		StringBundler sb = new StringBundler(35);
 
 		sb.append("{officeSupplyApplicationId=");
 		sb.append(officeSupplyApplicationId);
@@ -60,6 +60,20 @@ public class OfficeSupplyApplicationCacheModel implements CacheModel<OfficeSuppl
 		sb.append(deptName);
 		sb.append(", introductions=");
 		sb.append(introductions);
+		sb.append(", perposeClerk=");
+		sb.append(perposeClerk);
+		sb.append(", title=");
+		sb.append(title);
+		sb.append(", content=");
+		sb.append(content);
+		sb.append(", status=");
+		sb.append(status);
+		sb.append(", statusByUserId=");
+		sb.append(statusByUserId);
+		sb.append(", statusByUserName=");
+		sb.append(statusByUserName);
+		sb.append(", statusDate=");
+		sb.append(statusDate);
 		sb.append("}");
 
 		return sb.toString();
@@ -111,6 +125,44 @@ public class OfficeSupplyApplicationCacheModel implements CacheModel<OfficeSuppl
 			officeSupplyApplicationImpl.setIntroductions(introductions);
 		}
 
+		if (perposeClerk == null) {
+			officeSupplyApplicationImpl.setPerposeClerk(StringPool.BLANK);
+		}
+		else {
+			officeSupplyApplicationImpl.setPerposeClerk(perposeClerk);
+		}
+
+		if (title == null) {
+			officeSupplyApplicationImpl.setTitle(StringPool.BLANK);
+		}
+		else {
+			officeSupplyApplicationImpl.setTitle(title);
+		}
+
+		if (content == null) {
+			officeSupplyApplicationImpl.setContent(StringPool.BLANK);
+		}
+		else {
+			officeSupplyApplicationImpl.setContent(content);
+		}
+
+		officeSupplyApplicationImpl.setStatus(status);
+		officeSupplyApplicationImpl.setStatusByUserId(statusByUserId);
+
+		if (statusByUserName == null) {
+			officeSupplyApplicationImpl.setStatusByUserName(StringPool.BLANK);
+		}
+		else {
+			officeSupplyApplicationImpl.setStatusByUserName(statusByUserName);
+		}
+
+		if (statusDate == Long.MIN_VALUE) {
+			officeSupplyApplicationImpl.setStatusDate(null);
+		}
+		else {
+			officeSupplyApplicationImpl.setStatusDate(new Date(statusDate));
+		}
+
 		officeSupplyApplicationImpl.resetOriginalValues();
 
 		return officeSupplyApplicationImpl;
@@ -128,6 +180,13 @@ public class OfficeSupplyApplicationCacheModel implements CacheModel<OfficeSuppl
 		deptId = objectInput.readLong();
 		deptName = objectInput.readUTF();
 		introductions = objectInput.readUTF();
+		perposeClerk = objectInput.readUTF();
+		title = objectInput.readUTF();
+		content = objectInput.readUTF();
+		status = objectInput.readInt();
+		statusByUserId = objectInput.readLong();
+		statusByUserName = objectInput.readUTF();
+		statusDate = objectInput.readLong();
 	}
 
 	@Override
@@ -162,6 +221,39 @@ public class OfficeSupplyApplicationCacheModel implements CacheModel<OfficeSuppl
 		else {
 			objectOutput.writeUTF(introductions);
 		}
+
+		if (perposeClerk == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(perposeClerk);
+		}
+
+		if (title == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(title);
+		}
+
+		if (content == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(content);
+		}
+
+		objectOutput.writeInt(status);
+		objectOutput.writeLong(statusByUserId);
+
+		if (statusByUserName == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(statusByUserName);
+		}
+
+		objectOutput.writeLong(statusDate);
 	}
 
 	public long officeSupplyApplicationId;
@@ -174,4 +266,11 @@ public class OfficeSupplyApplicationCacheModel implements CacheModel<OfficeSuppl
 	public long deptId;
 	public String deptName;
 	public String introductions;
+	public String perposeClerk;
+	public String title;
+	public String content;
+	public int status;
+	public long statusByUserId;
+	public String statusByUserName;
+	public long statusDate;
 }

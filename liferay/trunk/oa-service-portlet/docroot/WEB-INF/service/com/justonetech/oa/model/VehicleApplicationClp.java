@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PortalUtil;
@@ -77,8 +78,6 @@ public class VehicleApplicationClp extends BaseModelImpl<VehicleApplication>
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("vehicleApplicationId", getVehicleApplicationId());
-		attributes.put("groupId", getGroupId());
-		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
 		attributes.put("createTime", getCreateTime());
@@ -92,6 +91,14 @@ public class VehicleApplicationClp extends BaseModelImpl<VehicleApplication>
 		attributes.put("passengerNum", getPassengerNum());
 		attributes.put("reason", getReason());
 		attributes.put("destination", getDestination());
+		attributes.put("companyId", getCompanyId());
+		attributes.put("groupId", getGroupId());
+		attributes.put("title", getTitle());
+		attributes.put("content", getContent());
+		attributes.put("status", getStatus());
+		attributes.put("statusByUserId", getStatusByUserId());
+		attributes.put("statusByUserName", getStatusByUserName());
+		attributes.put("statusDate", getStatusDate());
 		attributes.put("proposeVehicle", getProposeVehicle());
 		attributes.put("isProposeDriver", getIsProposeDriver());
 		attributes.put("driver", getDriver());
@@ -106,18 +113,6 @@ public class VehicleApplicationClp extends BaseModelImpl<VehicleApplication>
 
 		if (vehicleApplicationId != null) {
 			setVehicleApplicationId(vehicleApplicationId);
-		}
-
-		Long groupId = (Long)attributes.get("groupId");
-
-		if (groupId != null) {
-			setGroupId(groupId);
-		}
-
-		Long companyId = (Long)attributes.get("companyId");
-
-		if (companyId != null) {
-			setCompanyId(companyId);
 		}
 
 		Long userId = (Long)attributes.get("userId");
@@ -198,6 +193,54 @@ public class VehicleApplicationClp extends BaseModelImpl<VehicleApplication>
 			setDestination(destination);
 		}
 
+		Long companyId = (Long)attributes.get("companyId");
+
+		if (companyId != null) {
+			setCompanyId(companyId);
+		}
+
+		Long groupId = (Long)attributes.get("groupId");
+
+		if (groupId != null) {
+			setGroupId(groupId);
+		}
+
+		String title = (String)attributes.get("title");
+
+		if (title != null) {
+			setTitle(title);
+		}
+
+		String content = (String)attributes.get("content");
+
+		if (content != null) {
+			setContent(content);
+		}
+
+		Integer status = (Integer)attributes.get("status");
+
+		if (status != null) {
+			setStatus(status);
+		}
+
+		Long statusByUserId = (Long)attributes.get("statusByUserId");
+
+		if (statusByUserId != null) {
+			setStatusByUserId(statusByUserId);
+		}
+
+		String statusByUserName = (String)attributes.get("statusByUserName");
+
+		if (statusByUserName != null) {
+			setStatusByUserName(statusByUserName);
+		}
+
+		Date statusDate = (Date)attributes.get("statusDate");
+
+		if (statusDate != null) {
+			setStatusDate(statusDate);
+		}
+
 		Long proposeVehicle = (Long)attributes.get("proposeVehicle");
 
 		if (proposeVehicle != null) {
@@ -241,52 +284,6 @@ public class VehicleApplicationClp extends BaseModelImpl<VehicleApplication>
 
 				method.invoke(_vehicleApplicationRemoteModel,
 					vehicleApplicationId);
-			}
-			catch (Exception e) {
-				throw new UnsupportedOperationException(e);
-			}
-		}
-	}
-
-	@Override
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	@Override
-	public void setGroupId(long groupId) {
-		_groupId = groupId;
-
-		if (_vehicleApplicationRemoteModel != null) {
-			try {
-				Class<?> clazz = _vehicleApplicationRemoteModel.getClass();
-
-				Method method = clazz.getMethod("setGroupId", long.class);
-
-				method.invoke(_vehicleApplicationRemoteModel, groupId);
-			}
-			catch (Exception e) {
-				throw new UnsupportedOperationException(e);
-			}
-		}
-	}
-
-	@Override
-	public long getCompanyId() {
-		return _companyId;
-	}
-
-	@Override
-	public void setCompanyId(long companyId) {
-		_companyId = companyId;
-
-		if (_vehicleApplicationRemoteModel != null) {
-			try {
-				Class<?> clazz = _vehicleApplicationRemoteModel.getClass();
-
-				Method method = clazz.getMethod("setCompanyId", long.class);
-
-				method.invoke(_vehicleApplicationRemoteModel, companyId);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -605,6 +602,202 @@ public class VehicleApplicationClp extends BaseModelImpl<VehicleApplication>
 	}
 
 	@Override
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	@Override
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
+
+		if (_vehicleApplicationRemoteModel != null) {
+			try {
+				Class<?> clazz = _vehicleApplicationRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setCompanyId", long.class);
+
+				method.invoke(_vehicleApplicationRemoteModel, companyId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	@Override
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+
+		if (_vehicleApplicationRemoteModel != null) {
+			try {
+				Class<?> clazz = _vehicleApplicationRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setGroupId", long.class);
+
+				method.invoke(_vehicleApplicationRemoteModel, groupId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getTitle() {
+		return _title;
+	}
+
+	@Override
+	public void setTitle(String title) {
+		_title = title;
+
+		if (_vehicleApplicationRemoteModel != null) {
+			try {
+				Class<?> clazz = _vehicleApplicationRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setTitle", String.class);
+
+				method.invoke(_vehicleApplicationRemoteModel, title);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getContent() {
+		return _content;
+	}
+
+	@Override
+	public void setContent(String content) {
+		_content = content;
+
+		if (_vehicleApplicationRemoteModel != null) {
+			try {
+				Class<?> clazz = _vehicleApplicationRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setContent", String.class);
+
+				method.invoke(_vehicleApplicationRemoteModel, content);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public int getStatus() {
+		return _status;
+	}
+
+	@Override
+	public void setStatus(int status) {
+		_status = status;
+
+		if (_vehicleApplicationRemoteModel != null) {
+			try {
+				Class<?> clazz = _vehicleApplicationRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setStatus", int.class);
+
+				method.invoke(_vehicleApplicationRemoteModel, status);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public long getStatusByUserId() {
+		return _statusByUserId;
+	}
+
+	@Override
+	public void setStatusByUserId(long statusByUserId) {
+		_statusByUserId = statusByUserId;
+
+		if (_vehicleApplicationRemoteModel != null) {
+			try {
+				Class<?> clazz = _vehicleApplicationRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setStatusByUserId", long.class);
+
+				method.invoke(_vehicleApplicationRemoteModel, statusByUserId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getStatusByUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getStatusByUserId(), "uuid",
+			_statusByUserUuid);
+	}
+
+	@Override
+	public void setStatusByUserUuid(String statusByUserUuid) {
+		_statusByUserUuid = statusByUserUuid;
+	}
+
+	@Override
+	public String getStatusByUserName() {
+		return _statusByUserName;
+	}
+
+	@Override
+	public void setStatusByUserName(String statusByUserName) {
+		_statusByUserName = statusByUserName;
+
+		if (_vehicleApplicationRemoteModel != null) {
+			try {
+				Class<?> clazz = _vehicleApplicationRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setStatusByUserName",
+						String.class);
+
+				method.invoke(_vehicleApplicationRemoteModel, statusByUserName);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public Date getStatusDate() {
+		return _statusDate;
+	}
+
+	@Override
+	public void setStatusDate(Date statusDate) {
+		_statusDate = statusDate;
+
+		if (_vehicleApplicationRemoteModel != null) {
+			try {
+				Class<?> clazz = _vehicleApplicationRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setStatusDate", Date.class);
+
+				method.invoke(_vehicleApplicationRemoteModel, statusDate);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
 	public long getProposeVehicle() {
 		return _proposeVehicle;
 	}
@@ -696,6 +889,94 @@ public class VehicleApplicationClp extends BaseModelImpl<VehicleApplication>
 		}
 	}
 
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #isApproved}
+	 */
+	@Override
+	public boolean getApproved() {
+		return isApproved();
+	}
+
+	@Override
+	public boolean isApproved() {
+		if (getStatus() == WorkflowConstants.STATUS_APPROVED) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isDenied() {
+		if (getStatus() == WorkflowConstants.STATUS_DENIED) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isDraft() {
+		if (getStatus() == WorkflowConstants.STATUS_DRAFT) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isExpired() {
+		if (getStatus() == WorkflowConstants.STATUS_EXPIRED) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isInactive() {
+		if (getStatus() == WorkflowConstants.STATUS_INACTIVE) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isIncomplete() {
+		if (getStatus() == WorkflowConstants.STATUS_INCOMPLETE) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isPending() {
+		if (getStatus() == WorkflowConstants.STATUS_PENDING) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isScheduled() {
+		if (getStatus() == WorkflowConstants.STATUS_SCHEDULED) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public BaseModel<?> getVehicleApplicationRemoteModel() {
 		return _vehicleApplicationRemoteModel;
 	}
@@ -768,8 +1049,6 @@ public class VehicleApplicationClp extends BaseModelImpl<VehicleApplication>
 		VehicleApplicationClp clone = new VehicleApplicationClp();
 
 		clone.setVehicleApplicationId(getVehicleApplicationId());
-		clone.setGroupId(getGroupId());
-		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
 		clone.setUserName(getUserName());
 		clone.setCreateTime(getCreateTime());
@@ -783,6 +1062,14 @@ public class VehicleApplicationClp extends BaseModelImpl<VehicleApplication>
 		clone.setPassengerNum(getPassengerNum());
 		clone.setReason(getReason());
 		clone.setDestination(getDestination());
+		clone.setCompanyId(getCompanyId());
+		clone.setGroupId(getGroupId());
+		clone.setTitle(getTitle());
+		clone.setContent(getContent());
+		clone.setStatus(getStatus());
+		clone.setStatusByUserId(getStatusByUserId());
+		clone.setStatusByUserName(getStatusByUserName());
+		clone.setStatusDate(getStatusDate());
 		clone.setProposeVehicle(getProposeVehicle());
 		clone.setIsProposeDriver(getIsProposeDriver());
 		clone.setDriver(getDriver());
@@ -840,14 +1127,10 @@ public class VehicleApplicationClp extends BaseModelImpl<VehicleApplication>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(41);
+		StringBundler sb = new StringBundler(53);
 
 		sb.append("{vehicleApplicationId=");
 		sb.append(getVehicleApplicationId());
-		sb.append(", groupId=");
-		sb.append(getGroupId());
-		sb.append(", companyId=");
-		sb.append(getCompanyId());
 		sb.append(", userId=");
 		sb.append(getUserId());
 		sb.append(", userName=");
@@ -874,6 +1157,22 @@ public class VehicleApplicationClp extends BaseModelImpl<VehicleApplication>
 		sb.append(getReason());
 		sb.append(", destination=");
 		sb.append(getDestination());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
+		sb.append(", title=");
+		sb.append(getTitle());
+		sb.append(", content=");
+		sb.append(getContent());
+		sb.append(", status=");
+		sb.append(getStatus());
+		sb.append(", statusByUserId=");
+		sb.append(getStatusByUserId());
+		sb.append(", statusByUserName=");
+		sb.append(getStatusByUserName());
+		sb.append(", statusDate=");
+		sb.append(getStatusDate());
 		sb.append(", proposeVehicle=");
 		sb.append(getProposeVehicle());
 		sb.append(", isProposeDriver=");
@@ -889,7 +1188,7 @@ public class VehicleApplicationClp extends BaseModelImpl<VehicleApplication>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(64);
+		StringBundler sb = new StringBundler(82);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.oa.model.VehicleApplication");
@@ -898,14 +1197,6 @@ public class VehicleApplicationClp extends BaseModelImpl<VehicleApplication>
 		sb.append(
 			"<column><column-name>vehicleApplicationId</column-name><column-value><![CDATA[");
 		sb.append(getVehicleApplicationId());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>groupId</column-name><column-value><![CDATA[");
-		sb.append(getGroupId());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>companyId</column-name><column-value><![CDATA[");
-		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>userId</column-name><column-value><![CDATA[");
@@ -960,6 +1251,38 @@ public class VehicleApplicationClp extends BaseModelImpl<VehicleApplication>
 		sb.append(getDestination());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append(getCompanyId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append(getGroupId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>title</column-name><column-value><![CDATA[");
+		sb.append(getTitle());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>content</column-name><column-value><![CDATA[");
+		sb.append(getContent());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>status</column-name><column-value><![CDATA[");
+		sb.append(getStatus());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>statusByUserId</column-name><column-value><![CDATA[");
+		sb.append(getStatusByUserId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>statusByUserName</column-name><column-value><![CDATA[");
+		sb.append(getStatusByUserName());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>statusDate</column-name><column-value><![CDATA[");
+		sb.append(getStatusDate());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>proposeVehicle</column-name><column-value><![CDATA[");
 		sb.append(getProposeVehicle());
 		sb.append("]]></column-value></column>");
@@ -982,8 +1305,6 @@ public class VehicleApplicationClp extends BaseModelImpl<VehicleApplication>
 	}
 
 	private long _vehicleApplicationId;
-	private long _groupId;
-	private long _companyId;
 	private long _userId;
 	private String _userUuid;
 	private String _userName;
@@ -998,6 +1319,15 @@ public class VehicleApplicationClp extends BaseModelImpl<VehicleApplication>
 	private int _passengerNum;
 	private String _reason;
 	private String _destination;
+	private long _companyId;
+	private long _groupId;
+	private String _title;
+	private String _content;
+	private int _status;
+	private long _statusByUserId;
+	private String _statusByUserUuid;
+	private String _statusByUserName;
+	private Date _statusDate;
 	private long _proposeVehicle;
 	private int _isProposeDriver;
 	private String _driver;

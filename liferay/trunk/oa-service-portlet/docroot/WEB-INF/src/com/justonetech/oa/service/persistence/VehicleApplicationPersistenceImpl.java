@@ -861,8 +861,6 @@ public class VehicleApplicationPersistenceImpl extends BasePersistenceImpl<Vehic
 		vehicleApplicationImpl.setPrimaryKey(vehicleApplication.getPrimaryKey());
 
 		vehicleApplicationImpl.setVehicleApplicationId(vehicleApplication.getVehicleApplicationId());
-		vehicleApplicationImpl.setGroupId(vehicleApplication.getGroupId());
-		vehicleApplicationImpl.setCompanyId(vehicleApplication.getCompanyId());
 		vehicleApplicationImpl.setUserId(vehicleApplication.getUserId());
 		vehicleApplicationImpl.setUserName(vehicleApplication.getUserName());
 		vehicleApplicationImpl.setCreateTime(vehicleApplication.getCreateTime());
@@ -876,6 +874,14 @@ public class VehicleApplicationPersistenceImpl extends BasePersistenceImpl<Vehic
 		vehicleApplicationImpl.setPassengerNum(vehicleApplication.getPassengerNum());
 		vehicleApplicationImpl.setReason(vehicleApplication.getReason());
 		vehicleApplicationImpl.setDestination(vehicleApplication.getDestination());
+		vehicleApplicationImpl.setCompanyId(vehicleApplication.getCompanyId());
+		vehicleApplicationImpl.setGroupId(vehicleApplication.getGroupId());
+		vehicleApplicationImpl.setTitle(vehicleApplication.getTitle());
+		vehicleApplicationImpl.setContent(vehicleApplication.getContent());
+		vehicleApplicationImpl.setStatus(vehicleApplication.getStatus());
+		vehicleApplicationImpl.setStatusByUserId(vehicleApplication.getStatusByUserId());
+		vehicleApplicationImpl.setStatusByUserName(vehicleApplication.getStatusByUserName());
+		vehicleApplicationImpl.setStatusDate(vehicleApplication.getStatusDate());
 		vehicleApplicationImpl.setProposeVehicle(vehicleApplication.getProposeVehicle());
 		vehicleApplicationImpl.setIsProposeDriver(vehicleApplication.getIsProposeDriver());
 		vehicleApplicationImpl.setDriver(vehicleApplication.getDriver());

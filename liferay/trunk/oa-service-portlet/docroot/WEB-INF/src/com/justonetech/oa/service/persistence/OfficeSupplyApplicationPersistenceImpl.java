@@ -857,6 +857,13 @@ public class OfficeSupplyApplicationPersistenceImpl extends BasePersistenceImpl<
 		officeSupplyApplicationImpl.setDeptId(officeSupplyApplication.getDeptId());
 		officeSupplyApplicationImpl.setDeptName(officeSupplyApplication.getDeptName());
 		officeSupplyApplicationImpl.setIntroductions(officeSupplyApplication.getIntroductions());
+		officeSupplyApplicationImpl.setPerposeClerk(officeSupplyApplication.getPerposeClerk());
+		officeSupplyApplicationImpl.setTitle(officeSupplyApplication.getTitle());
+		officeSupplyApplicationImpl.setContent(officeSupplyApplication.getContent());
+		officeSupplyApplicationImpl.setStatus(officeSupplyApplication.getStatus());
+		officeSupplyApplicationImpl.setStatusByUserId(officeSupplyApplication.getStatusByUserId());
+		officeSupplyApplicationImpl.setStatusByUserName(officeSupplyApplication.getStatusByUserName());
+		officeSupplyApplicationImpl.setStatusDate(officeSupplyApplication.getStatusDate());
 
 		return officeSupplyApplicationImpl;
 	}

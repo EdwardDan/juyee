@@ -110,6 +110,13 @@
 		<property name="deptId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="deptName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="introductions" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="perposeClerk" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="title" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="content" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="status" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="statusByUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="statusByUserName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="statusDate" type="org.hibernate.type.TimestampType" />
 	</class>
 	<class name="com.justonetech.oa.model.impl.OfficeSupplyApplicationItemImpl" table="oa_OfficeSupplyApplicationItem">
 		<cache usage="read-write" />
@@ -131,8 +138,6 @@
 		<id name="vehicleApplicationId" type="long">
 			<generator class="assigned" />
 		</id>
-		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="createTime" type="org.hibernate.type.TimestampType" />
@@ -146,6 +151,14 @@
 		<property name="passengerNum" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="reason" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="destination" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="title" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="content" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="status" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="statusByUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="statusByUserName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="statusDate" type="org.hibernate.type.TimestampType" />
 		<property name="proposeVehicle" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="isProposeDriver" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="driver" type="com.liferay.portal.dao.orm.hibernate.StringType" />
