@@ -230,7 +230,7 @@
 				<liferay-ui:icon image="edit"
 					url="${editOfficeSupplyApplicationURL}" /></c:if>
 				<c:if test="${officeSupplyApplication.status==5&&fn:contains(siteRole,'29658')}">
-					<liferay-ui:icon image="appoint" url="${editOfficeSupplyApplicationURL}" />
+					<liferay-ui:icon image="edit" url="${editOfficeSupplyApplicationURL}" />
 				</c:if>
 				<c:if test="${officeSupplyApplication.status==1&&officeSupplyApplication.userId==userId}">				
 				<liferay-ui:icon-delete image="delete"
@@ -251,7 +251,6 @@
 <portlet:resourceURL var="stateToReviewByKezhang" id="stateToReviewByKezhang" />
 <script>
 	function stateToReviewByKezhang(){
-		alert(123456);
 		$.ajax({
 			type:"GET",
 			url:"<%=stateToReviewByKezhang%>",

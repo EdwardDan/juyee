@@ -171,14 +171,14 @@
 				<liferay-ui:icon
 					cssClass='<%="workflow-task-" + randomId + " task-change-status-link"%>'
 					id='<%=randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink"%>'
-					image="check" message="<%=message%>" method="get"
+					image="pass" message="<%=message%>" method="get"
 					url="<%=url%>" />
 			</c:if>
 			<c:if test='<%=message.equals("驳回")%>'>
 				<liferay-ui:icon
 					cssClass='<%="workflow-task-" + randomId + " task-change-status-link"%>'
 					id='<%=randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink"%>'
-					image="close" message="<%=message%>" method="get"
+					image="reject" message="<%=message%>" method="get"
 					url="<%=url%>" />
 			</c:if>
 		</c:if>
@@ -188,10 +188,7 @@
 		Liferay.delegateClick(
 				'<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(transitionName) %>taskChangeStatusLink',
 				onTaskClickFn);
-	</aui:script>
-				
-
-	
+	</aui:script>	
 			<%
 		}
 					}
