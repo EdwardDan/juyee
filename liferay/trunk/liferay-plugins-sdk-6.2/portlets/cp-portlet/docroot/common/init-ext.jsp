@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+
 <%@page import="com.liferay.portal.kernel.util.PropsUtil"%>
 <%
 	String staticServerURL = PropsUtil.get("static.server.url");
@@ -18,3 +19,6 @@
 <script type="text/javascript">
     window.jQuery || document.write("<script src='/static/jquery/jquery-1.12.4.min.js'>"+"<"+"/script>");
 </script> 
+
+<%@page import="com.justonetech.cp.util.PortletKeys"%>
+<%@page import="com.justonetech.cp.contract.model.*"%> 

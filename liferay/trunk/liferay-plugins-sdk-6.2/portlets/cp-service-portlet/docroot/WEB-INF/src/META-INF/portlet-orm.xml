@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd">
+	<persistence-unit-metadata>
+		<xml-mapping-metadata-complete/>
+		<persistence-unit-defaults>
+			<access>PROPERTY</access>
+		</persistence-unit-defaults>
+	</persistence-unit-metadata>
+	<mapped-superclass class="com.justonetech.cp.project.model.impl.ProjectModelImpl">
+		<attributes>
+			<id name="projectId" />
+			<basic name="zzjgdm" />
+			<basic name="bjrq">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="bjWebid" />
+			<basic name="xmmc" />
+			<basic name="bjwcbj" />
+			<basic name="jsdwmc" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.justonetech.cp.contract.model.impl.ContractModelImpl">
+		<attributes>
+			<id name="contractId" />
+			<basic name="htlb" />
+			<basic name="bjbh" />
+			<basic name="bdh" />
+			<basic name="cbfs" />
+			<basic name="htmc" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<entity class="com.justonetech.cp.project.model.impl.ProjectImpl" name="Project">
+		<table name="cp_Project" />
+		<attributes />
+	</entity>
+	<entity class="com.justonetech.cp.contract.model.impl.ContractImpl" name="Contract">
+		<table name="cp_Contract" />
+		<attributes />
+	</entity>
+</entity-mappings>

@@ -2,6 +2,9 @@
     <wb-module deploy-name="cp-portlet">
         <wb-resource deploy-path="/" source-path="/docroot" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/docroot/WEB-INF/src"/>
+        <dependent-module archiveName="cp-service-portlet-service.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/cp-service-portlet/docroot/WEB-INF/lib/cp-service-portlet-service.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="cp-portlet"/>
         <property name="java-output-path" value="/cp-portlet/docroot/WEB-INF/classes"/>
     </wb-module>

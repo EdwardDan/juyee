@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="com.justonetech.cp.project.model.Project" />
+	<import class="com.justonetech.cp.contract.model.Contract" />
+	<class name="com.justonetech.cp.project.model.impl.ProjectImpl" table="cp_Project">
+		<cache usage="read-write" />
+		<id name="projectId" type="java.lang.String">
+			<generator class="assigned" />
+		</id>
+		<property name="zzjgdm" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="bjrq" type="org.hibernate.type.TimestampType" />
+		<property name="bjWebid" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="xmmc" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="bjwcbj" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="jsdwmc" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.justonetech.cp.contract.model.impl.ContractImpl" table="cp_Contract">
+		<cache usage="read-write" />
+		<id name="contractId" type="java.lang.String">
+			<generator class="assigned" />
+		</id>
+		<property name="htlb" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="bjbh" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="bdh" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="cbfs" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="htmc" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+</hibernate-mapping>

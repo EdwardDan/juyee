@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.justonetech.cp.project.model.Project">
+		<field name="projectId" type="String" />
+		<field name="zzjgdm" type="String" />
+		<field name="bjrq" type="Date" />
+		<field name="bjWebid" type="String" />
+		<field name="xmmc" type="String" />
+		<field name="bjwcbj" type="String" />
+		<field name="jsdwmc" type="String" />
+	</model>
+	<model name="com.justonetech.cp.contract.model.Contract">
+		<field name="contractId" type="String" />
+		<field name="htlb" type="String" />
+		<field name="bjbh" type="String" />
+		<field name="bdh" type="String" />
+		<field name="cbfs" type="String" />
+		<field name="htmc" type="String" />
+	</model>
+</model-hints>
