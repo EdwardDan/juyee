@@ -200,7 +200,8 @@ public class CustomLoginPortlet extends MVCPortlet {
 							digitalCertificate.put("issuerCity", oSE.getCertDetail(9, clientCert));
 							digitalCertificate.put("issuerEmail", oSE.getCertDetail(10, clientCert));
 							digitalCertificate.put("startDate", oSE.getCertDetail(11, clientCert));
-							digitalCertificate.put("expirationDate", oSE.getCertDetail(12, clientCert));
+							String expirationDate = oSE.getCertDetail(12, clientCert);
+							digitalCertificate.put("expirationDate", expirationDate.substring(0, 4)+"-"+expirationDate.substring(4, 6)+"-"+expirationDate.substring(6, 8));
 							digitalCertificate.put("userCountry", oSE.getCertDetail(13, clientCert));
 							digitalCertificate.put("userOrganization", oSE.getCertDetail(14, clientCert));
 							digitalCertificate.put("userDepartment", oSE.getCertDetail(15, clientCert));
@@ -209,8 +210,10 @@ public class CustomLoginPortlet extends MVCPortlet {
 							digitalCertificate.put("userCity", oSE.getCertDetail(18, clientCert));
 							digitalCertificate.put("userEmail", oSE.getCertDetail(19, clientCert));
 							digitalCertificate.put("key", oSE.getCertDetail(20, clientCert));
+							digitalCertificate.put("UniqueID", UniqueID);
 						} catch (Exception e) {
 							// TODO: handle exception
+							e.printStackTrace();
 						}
 						String digitalCertificateData = digitalCertificate.toString();
 						User user = null;
@@ -226,12 +229,12 @@ public class CustomLoginPortlet extends MVCPortlet {
 								e1.printStackTrace();
 							}
 						}
-
 						try {
 							ExpandoTable eTable = ExpandoTableLocalServiceUtil.getDefaultTable(PortalUtil.getDefaultCompanyId(), User.class.getName());
 							ExpandoColumn eColumn = ExpandoColumnLocalServiceUtil.getColumn(eTable.getTableId(), "digitalCertificate");
 							try {
 								ExpandoValue expandoValue = ExpandoValueLocalServiceUtil.getValue(eTable.getTableId(), eColumn.getColumnId(), user.getUserId());
+								expandoValue.setData(digitalCertificateData);
 								ExpandoValueLocalServiceUtil.updateExpandoValue(expandoValue);
 							} catch (Exception e) {
 								// TODO: handle exception
@@ -239,6 +242,7 @@ public class CustomLoginPortlet extends MVCPortlet {
 							}
 						} catch (Exception e) {
 							// TODO: handle exception
+							e.printStackTrace();
 						}
 
 						com.liferay.portal.kernel.json.JSONObject userJson = JSONFactoryUtil.createJSONObject();
