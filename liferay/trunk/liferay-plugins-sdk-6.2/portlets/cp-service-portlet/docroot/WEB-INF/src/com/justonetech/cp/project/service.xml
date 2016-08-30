@@ -13,10 +13,49 @@
 		<!-- Business fields -->
 		<column name="zzjgdm" type="String" /><!-- 组织机构代码 -->
 		<column name="bjrq" type="Date" /><!-- 报建日期 -->
-		<column name="bjWebid" type="String" /><!-- 网上申请编号 -->
+		<column name="wssqbh" type="String" /><!-- 网上申请编号 -->
 		<column name="xmmc" type="String" /><!--项目名称 -->
 		<column name="bjwcbj" type="String" /><!-- 报建完成标志 -->
 		<column name="jsdwmc" type="String" /><!-- 建设单位名称 -->
+		<column name="bjxmxz" type="String" /><!-- 建设项目属性 -->
+		<column name="szqx" type="String" /><!-- 所在区县 -->
+		<column name="szqy" type="String" /><!-- 所在区域 -->
+		<column name="jsdd" type="String" /><!-- 建设地点 -->
+		<column name="jsdwbgdz" type="String" /><!-- 建设单位办公地址 -->
+		<column name="yzbm" type="String" /><!-- 邮政编码 -->
+		<column name="gczhh" type="String" /><!-- 工程账户号 -->
+		<column name="jsdwfddbr" type="String" /><!-- 建设单位法定代表人 -->
+		<column name="jsdwlxr" type="String" /><!-- 建设单位联系人 -->
+		<column name="lxrsj" type="String" /><!-- 联系人手机 -->
+		<column name="jsdwzczj" type="String" /><!-- 建设单位注册资金（万元） -->
+		<column name="jsdwxz" type="String" /><!-- 建设单位性质 -->
+		<column name="jsxz" type="String" /><!-- 建设性质 -->
+		<column name="lxhpzwjmc" type="String" /><!-- 立项或批准文件名称 -->
+		<column name="lxhpzwjwh" type="String" /><!-- 立项或批准文件文号 -->
+		<column name="fwdw" type="String" /><!-- 发文单位 -->
+		<column name="fwrq" type="String" /><!-- 发文日期 -->
+		<column name="lxjb" type="String" /><!-- 立项级别 -->
+		<column name="lxfl" type="String" /><!-- 立项分类 -->
+
+		<column name="ztz" type="String" /><!-- 总投资 -->
+		<column name="sbtz" type="String" /><!-- 设备投资 -->
+		<column name="jsgcgm" type="String" /><!-- 建设工程规模 -->
+
+		<column name="xmfl" type="String" /><!-- 项目分类 -->
+
+		<column name="sfgyzbkg" type="String" /><!-- 是否国有资本控股 -->
+		<column name="sfzslx" type="String" /><!-- 是否正式立项 -->
+
+		<column name="sfzdgcxm" type="String" /><!-- 是否重大工程项目 -->
+		<column name="jsbbh" type="String" /><!-- 建设部编号 -->
+		<column name="bz" type="String" /><!-- 备注 -->
+		<column name="sfdcfjmsq" type="String" /><!-- 是否地处风景名胜区 -->
+		<column name="sfyjngznr" type="String" /><!-- 如为既有建筑改造是否有节能改造内容 -->
+		<column name="sfymfss" type="String" /><!-- 是否有民防设施 -->
+
+		<column name="sfsblsjzbs" type="String" /><!-- 是否申报绿色建筑标识 -->
+
+
 
 		<!-- Workflow fields -->
 		<!-- Order -->
