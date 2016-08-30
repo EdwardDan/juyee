@@ -3,11 +3,11 @@
 <service-builder package-path="com.justonetech.cp.permit">
 	<author>fanqi</author>
 	<namespace>cp</namespace>
-
+	
+	<!-- 施工许可 -->
 	<entity name="Permit" local-service="true" remote-service="false">
-
 		<!-- PK fields -->
-		<column name="id" type="long" primary="true" />
+		<column name="permitId" type="long" primary="true" />
 
 		<!-- Group instance -->
 		<column name="groupId" type="long" />
@@ -16,38 +16,111 @@
 		<column name="companyId" type="long" />
 		<column name="userId" type="long" />
 		<column name="userName" type="String" />
-		<column name="createTime" type="Date" />
-		<column name="modifiedTime" type="Date" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
 
-		<!-- business fields -->
+		<!-- Business fields -->
+		<column name="zzjgdm" type="String" /><!-- 组织机构代码 -->
 		<column name="bjbh" type="String" /><!-- 报建编号 -->
-		<column name="slbh" type="String" /><!-- 受理编号 -->
-		<column name="hjgsz" type="String" /><!-- 沪交管收字 -->
-		<column name="sqr" type="String" /><!-- 申请人 -->
-		<column name="sqsx" type="String" /><!-- 申请事项 -->
-		<column name="sqh" type="String" /><!-- 申请号 -->
-		<column name="cltjr" type="String" /><!-- 材料提交人 -->
-		<column name="cltjrlxdh" type="String" /><!-- 材料提交人联系电话 -->
-		<column name="cltjrlxdz" type="String" /><!-- 材料提交人联系地址 -->
-		<column name="sjr" type="String" /><!-- 收件人 -->
-		<column name="sjrlxdh" type="String" /><!--收件人联系电话 -->
-
-		<!-- WorkFlow fields -->
-		<column name="status" type="int"></column>
-		<column name="statusByUserId" type="long"></column>
-		<column name="statusByUserName" type="String"></column>
-		<column name="statusDate" type="Date"></column>
-		
 		<!-- Order -->
-		<order by="asc">
-			<order-column name="bjbh" />
-		</order>
 
 		<!-- Finder methods -->
-		<finder name="bjbh" return-type="Collection">
-			<finder-column name="bjbh"></finder-column>
+		<finder name="Zzjgdm" return-type="Collection">
+			<finder-column name="zzjgdm"></finder-column>
 		</finder>
+	</entity>
+	<!-- 工程概况 -->
+	<entity name="ProjectProfile" local-service="true"
+		remote-service="false">
+		<!-- PK fields -->
+		<column name="unitId" type="long" primary="true" />
 
-		<reference package-path="com.liferay.portal" entity="WorkflowInstanceLink"></reference>
+		<!-- Group instance -->
+
+		<!-- Audit fields -->
+
+		<!-- Business fields -->
+		<column name="permitId" type="String" /><!-- 施工许可Id -->
+		<!-- Order -->
+
+		<!-- Finder methods -->
+		<finder name="PermitId" return-type="Collection">
+			<finder-column name="permitId"></finder-column>
+		</finder>
+	</entity>
+	<!-- 参建单位 -->
+	<entity name="ParticipationUnit" local-service="true"
+		remote-service="false">
+		<!-- PK fields -->
+		<column name="unitId" type="long" primary="true" />
+
+		<!-- Group instance -->
+
+		<!-- Audit fields -->
+
+		<!-- Business fields -->
+		<column name="permitId" type="String" /><!-- 施工许可Id -->
+		<column name="htxxbsbh" type="String" /><!-- 合同信息报送编号 -->
+		<column name="dwlx" type="String" /><!-- 单位类型 -->
+		<column name="dwmc" type="String" /><!-- 单位名称 -->
+		<column name="xmfzr" type="String" /><!-- 项目负责人 -->
+		<column name="dhhm" type="String" /><!-- 电话号码 -->
+		<!-- Order -->
+
+		<!-- Finder methods -->
+		<finder name="PermitId" return-type="Collection">
+			<finder-column name="permitId"></finder-column>
+		</finder>
+	</entity>
+	<!-- 单位工程 -->
+	<entity name="UnitProject" local-service="true" remote-service="false">
+		<!-- PK fields -->
+		<column name="projectId" type="long" primary="true" />
+
+		<!-- Group instance -->
+
+		<!-- Audit fields -->
+
+		<!-- Business fields -->
+		<column name="permitId" type="String" /><!-- 施工许可Id -->
+		<column name="gcbh" type="int" /><!-- 工程编号 -->
+		<column name="gcmc" type="int" /><!-- 工程名称 -->
+		<column name="jsnr" type="int" /><!-- 建设内容 -->
+		<!-- Order -->
+		<order>
+			<order-column name="gcbh" order-by="asc"></order-column>
+		</order>
+		
+		<!-- Finder methods -->
+		<finder name="PermitId" return-type="Collection">
+			<finder-column name="permitId"></finder-column>
+		</finder>
+	</entity>
+	<!-- 申请材料 -->
+	<entity name="ApplyMaterial" local-service="true" remote-service="false">
+		<!-- PK fields -->
+		<column name="materialId" type="long" primary="true" />
+
+		<!-- Group instance -->
+
+		<!-- Audit fields -->
+		
+		<!-- Business fields -->
+		<column name="permitId" type="String" /><!-- 施工许可Id -->
+		<column name="xh" type="int" /><!-- 序号 -->
+		<column name="clmc" type="String" /><!-- 材料名称 -->
+		<column name="yjfs" type="int" /><!-- 应交份数 -->
+		<column name="sjfs" type="int" /><!-- 实交份数 -->
+		
+		<!-- Order -->
+		<order>
+			<order-column name="xh" order-by="asc"></order-column>
+		</order>
+		
+		<!-- Finder methods -->
+		<finder name="PermitId" return-type="Collection">
+			<finder-column name="permitId"></finder-column>
+		</finder>
+		
 	</entity>
 </service-builder>

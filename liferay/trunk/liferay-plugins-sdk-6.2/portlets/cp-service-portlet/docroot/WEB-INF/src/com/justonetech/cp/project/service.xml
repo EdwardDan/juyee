@@ -4,44 +4,28 @@
 	<author>fanqi</author>
 	<namespace>cp</namespace>
 
+	<!-- 报建项目 -->
 	<entity name="Project" local-service="true" remote-service="false">
-
 		<!-- PK fields -->
-		<column name="bjbh" type="String" primary="true" />
-
+		<column name="projectId" type="String" primary="true" /><!-- 报建编号 -->
 		<!-- Group instance -->
-		<column name="groupId" type="long" />
-
 		<!-- Audit fields -->
-		<column name="companyId" type="long" />
-		<column name="userId" type="long" />
-		<column name="userName" type="String" />
-		<column name="createDate" type="Date" />
-		<column name="modifiedDate" type="Date" />
+		<!-- Business fields -->
+		<column name="zzjgdm" type="String" /><!-- 组织机构代码 -->
+		<column name="bjrq" type="Date" /><!-- 报建日期 -->
+		<column name="bjWebid" type="String" /><!-- 网上申请编号 -->
+		<column name="xmmc" type="String" /><!--项目名称 -->
+		<column name="bjwcbj" type="String" /><!-- 报建完成标志 -->
+		<column name="jsdwmc" type="String" /><!-- 建设单位名称 -->
 
-		<!-- business fields -->
-		<column name="xmxz" type="long" /><!-- 项目性质 -->
-		<column name="ywbm" type="String" /><!-- 业务编号 -->
-		<column name="jsddssqx" type="String" /><!-- 建设地点所属区县 -->
-		<column name="jsgclb" type="String" /><!-- 建设工程类别 -->
-		<column name="gyzjbz" type="String" /><!-- 国有资金比重% -->
-		<column name="jhkg" type="Date" /><!-- 计划开工 -->
-		<column name="jhjg" type="Date" /><!-- 计划竣工 -->
-		<column name="xckgqk" type="String" /><!-- 现场开工情况 -->
-		<column name="sgdw" type="String" /><!-- 施工单位 -->
-		<column name="sgdwxmjl" type="String" /><!-- 施工单位项目经理 -->
-		<column name="jldw" type="String" /><!-- 监理单位 -->
-		<column name="jldwxmzj" type="String" /><!-- 监理单位项目总监 -->
-		<column name="sjdw" type="String" /><!-- 设计单位 -->
-
+		<!-- Workflow fields -->
 		<!-- Order -->
-		<order by="asc">
-			<order-column name="field1" />
+		<order>
+			<order-column name="bjrq" order-by="desc"></order-column><!-- 报建日期逆序 -->
 		</order>
-
 		<!-- Finder methods -->
-		<finder name="Field2" return-type="Collection">
-			<finder-column name="field2" />
+		<finder name="Zzjgdm" return-type="Collection">
+			<finder-column name="zzjgdm"></finder-column>
 		</finder>
 	</entity>
 </service-builder>
