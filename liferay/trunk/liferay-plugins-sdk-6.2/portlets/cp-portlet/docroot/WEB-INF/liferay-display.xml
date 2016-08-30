@@ -4,5 +4,8 @@
 <display>
 	
 	<category name="建设程序">
+		<portlet id="project-search"></portlet>
+		<portlet id="contract-search"></portlet>
+		<portlet id="permit-application"></portlet>
 	</category>
 </display>

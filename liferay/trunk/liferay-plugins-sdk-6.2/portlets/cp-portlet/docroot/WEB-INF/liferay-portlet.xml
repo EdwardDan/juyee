@@ -3,6 +3,35 @@
 
 <liferay-portlet-app>
 	
+	<portlet>
+		<portlet-name>project-search</portlet-name>
+		<icon>/icon/icon.png</icon>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>project-search-portlet</css-class-wrapper>
+	</portlet>
+	<portlet>
+		<portlet-name>contract-search</portlet-name>
+		<icon>/icons/icon.png</icon>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>contract-search-portlet</css-class-wrapper>
+	</portlet>
+	<portlet>
+		<portlet-name>permit-application</portlet-name>
+		<icon>/icons/icon.png</icon>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>
+			permit-application-portlet
+		</css-class-wrapper>
+	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>
