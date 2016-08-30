@@ -176,15 +176,18 @@
 												}
 												url=strBackUrl+"/group/control_panel/manage/-/my_workflow_tasks/view/"+workflowTaskId+"?p_auth="+token+"&p_p_lifecycle=1&doAsGroupId="+PortalUtil.getUser(request).getGroupId()+"&refererPlid=25177&controlPanelCategory=my&_153_cmd=save&_153_assigneeUserId="+people+"&_153_redirect="+strBackUrl+"/group/zhxx/-&_153_struts_action=/my_workflow_tasks/edit_workflow_task&_153_transitionName="+message;
 				%>
+				<!-- 提交 -->
 				<c:if test="${(deptWork.status==1&&deptWork.userId==userId)||(deptWork.status==4&&deptWork.userId==userId)||(deptWork.status==6&&deptWork.userId==userId)}">
 					<liferay-ui:icon cssClass='<%="workflow-task-" + randomId + " task-change-status-link"%>' id='<%=randomId + "taskChangeStatusLink"%>' image="../aui/random" message="<%=message%>" method="get" url="<%=url%>" onClick="stateToReviewBySectionChief()" />
 				</c:if>
 				<%
 					}
 				%>
+				<!-- 科长分配给我 -->
 				<c:if test="${deptWork.status==2&&fn:contains(kezhangRole,'29829')&&people<0}">
 					<liferay-ui:icon cssClass='<%="workflow-task-" + randomId + " task-assign-to-me-link"%>' iconCssClass="icon-signin" id='<%=randomId + "taskAssignToMeLink"%>' message="assign-to-me" method="get" url="<%=assignToMeURL%>" />
 				</c:if>
+				<!-- 分管领导分配给我 -->
 				<c:if test="${deptWork.status==3&&leaderId==userId&&people<0}">
 					<liferay-ui:icon cssClass='<%="workflow-task-" + randomId + " task-assign-to-me-link"%>' iconCssClass="icon-signin" id='<%=randomId + "taskAssignToMeLink"%>' message="assign-to-me" method="get" url="<%=assignToMeURL%>" />
 				</c:if>

@@ -152,14 +152,14 @@ function stateToReviewByBranchedLeader() {
 	</div>
 	<!-- 科长批准按钮 -->
 	<c:if test='<%=message.equals("approve")&&!leaderId.equals(userId)%>'>
-		<liferay-ui:icon cssClass='<%="workflow-task-" + randomId + " task-change-status-link"%>' id='<%=randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink"%>' image="check" message="<%=message%>" method="get" url="<%=url%>" onClick="stateToReviewByBranchedLeader()"/>
+		<liferay-ui:icon cssClass='<%="workflow-task-" + randomId + " task-change-status-link"%>' id='<%=randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink"%>' image="pass" message="<%=message%>" method="get" url="<%=url%>" onClick="stateToReviewByBranchedLeader()"/>
 	</c:if>
 	<!-- 分管领导批准按钮 -->
 	<c:if test='<%=message.equals("approve")&&leaderId.equals(userId)%>'>
-		<liferay-ui:icon cssClass='<%="workflow-task-" + randomId + " task-change-status-link"%>' id='<%=randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink"%>' image="check" message="<%=message%>" method="get" url="<%=url%>" />
+		<liferay-ui:icon cssClass='<%="workflow-task-" + randomId + " task-change-status-link"%>' id='<%=randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink"%>' image="pass" message="<%=message%>" method="get" url="<%=url%>" />
 	</c:if>
 	<c:if test='<%=message.equals("reject")%>'>
-		<liferay-ui:icon cssClass='<%="workflow-task-" + randomId + " task-change-status-link"%>' id='<%=randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink"%>' image="close" message="<%=message%>" method="get" url="<%=url%>" onClick="stateReject()"/>
+		<liferay-ui:icon cssClass='<%="workflow-task-" + randomId + " task-change-status-link"%>' id='<%=randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink"%>' image="reject" message="<%=message%>" method="get" url="<%=url%>" onClick="stateReject()"/>
 	</c:if>
 	<aui:script use="liferay-workflow-tasks">
 		var onTaskClickFn = A.rbind('onTaskClick', Liferay.WorkflowTasks, '<%= randomId %>');

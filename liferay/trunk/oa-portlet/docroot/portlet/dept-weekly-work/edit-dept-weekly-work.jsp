@@ -78,7 +78,7 @@
 <portlet:renderURL var="viewURL" />
 <liferay-ui:header title="${empty deptWork?'添加':'编辑'}科室一周工作安排" backURL="${viewURL}" />
 <portlet:actionURL var="saveDeptWorkURL" name="saveDeptWork">
-	<portlet:param name="redirect" value="${viewURL }" />
+	<portlet:param name="mvcPath" value="${contextPath}/handle.jsp" />
 </portlet:actionURL>
 <aui:form action="${saveDeptWorkURL}">
 	<aui:row>
