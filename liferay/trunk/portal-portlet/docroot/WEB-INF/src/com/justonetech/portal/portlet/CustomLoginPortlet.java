@@ -15,6 +15,7 @@ import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 import javax.servlet.http.HttpServletResponse;
 
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
@@ -29,7 +30,14 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.expando.model.ExpandoColumn;
+import com.liferay.portlet.expando.model.ExpandoTable;
+import com.liferay.portlet.expando.model.ExpandoValue;
+import com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil;
+import com.liferay.portlet.expando.service.ExpandoTableLocalServiceUtil;
+import com.liferay.portlet.expando.service.ExpandoValueLocalServiceUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 import com.sheca.safeengine.javasafeengine;
 
@@ -40,6 +48,18 @@ public class CustomLoginPortlet extends MVCPortlet {
 
 	@Override
 	public void render(RenderRequest renderRequest, RenderResponse renderResponse) throws PortletException, IOException {
+
+		try {
+			User user = UserServiceUtil.getCurrentUser();
+			ExpandoTable eTable = ExpandoTableLocalServiceUtil.getDefaultTable(PortalUtil.getDefaultCompanyId(), User.class.getName());
+			ExpandoColumn eColumn = ExpandoColumnLocalServiceUtil.getColumn(eTable.getTableId(), "digitalCertificate");
+			ExpandoValue expandoTable = ExpandoValueLocalServiceUtil.getValue(eTable.getTableId(), eColumn.getColumnId(), user.getUserId());
+			String digitalCertificateData = expandoTable.getData();
+			com.alibaba.fastjson.JSONObject digitalCertificate = com.alibaba.fastjson.JSONObject.parseObject(digitalCertificateData);
+			renderRequest.setAttribute("digitalCertificate", digitalCertificate);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		
 		renderRequest.setAttribute("UUID", UUID.randomUUID().toString());
 		renderRequest.setAttribute("certSwitch", true);
@@ -56,9 +76,9 @@ public class CustomLoginPortlet extends MVCPortlet {
 	@Override
 	public void serveResource(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException, PortletException {
 		String resourceId = resourceRequest.getResourceID();
-		if("Management-Center-login".equals(resourceId)){
+		if ("Management-Center-login".equals(resourceId)) {
 			String loginUser = ParamUtil.get(resourceRequest, "_58_login", "");
-			String loginPassword = ParamUtil.get(resourceRequest, "_58_password","");
+			String loginPassword = ParamUtil.get(resourceRequest, "_58_password", "");
 			Boolean loginState = false;
 			String responseContent = "";
 
@@ -76,10 +96,7 @@ public class CustomLoginPortlet extends MVCPortlet {
 						long compangyId = PortalUtil.getCompanyId(resourceRequest);
 						int authResult = Authenticator.FAILURE;
 						try {
-							authResult = UserLocalServiceUtil
-									.authenticateByScreenName(compangyId,
-											loginUser, loginPassword, null, null,
-											null);
+							authResult = UserLocalServiceUtil.authenticateByScreenName(compangyId, loginUser, loginPassword, null, null, null);
 						} catch (PortalException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -118,10 +135,10 @@ public class CustomLoginPortlet extends MVCPortlet {
 			out.close();
 			resourceResponse.setContentType("text/html");
 			super.serveResource(resourceRequest, resourceResponse);
-		
+
 		}
-		
-		if("certificate-login".equals(resourceId)){
+
+		if ("certificate-login".equals(resourceId)) {
 			String prikeypwd = ParamUtil.get(resourceRequest, "prikeypwd", "");
 			String cCert = ParamUtil.get(resourceRequest, "cCert", "");
 			String cSign = ParamUtil.get(resourceRequest, "cSign", "");
@@ -132,8 +149,9 @@ public class CustomLoginPortlet extends MVCPortlet {
 			byte[] signed = oSE.base64Decode(cSign);
 			byte[] clientCert = oSE.base64Decode(cCert);
 			// 获取证书链
-//			FileInputStream oFile = new FileInputStream(PropsUtil.get("sheca.certificate.chain.file"));
-			 FileInputStream oFile = new FileInputStream("D:/server/jtjs-demo/SHECA_G2.spc");
+			// FileInputStream oFile = new
+			// FileInputStream(PropsUtil.get("sheca.certificate.chain.file"));
+			FileInputStream oFile = new FileInputStream("D:/server/jtjs-demo/SHECA_G2.spc");
 			byte[] bChain = null;
 			int iFile = 0;
 			try {
@@ -167,13 +185,34 @@ public class CustomLoginPortlet extends MVCPortlet {
 					}
 					if (!Validator.isNull(UniqueID)) {
 						long companyId_ = PortalUtil.getCompanyId(resourceRequest);
+						JSONObject digitalCertificate = JSONFactoryUtil.createJSONObject();
 						String userName = null;
 						try {
 							userName = oSE.getCertDetail(17, clientCert);
-						} catch (Exception e2) {
-							// TODO Auto-generated catch block
-							e2.printStackTrace();
+							digitalCertificate.put("version", oSE.getCertDetail(1, clientCert));
+							digitalCertificate.put("certificateSerialNo", oSE.getCertDetail(2, clientCert));
+							digitalCertificate.put("signatureAlgorithm", oSE.getCertDetail(3, clientCert));
+							digitalCertificate.put("issuerCountry", oSE.getCertDetail(4, clientCert));
+							digitalCertificate.put("issuerOrganization", oSE.getCertDetail(5, clientCert));
+							digitalCertificate.put("issuerDepartment", oSE.getCertDetail(6, clientCert));
+							digitalCertificate.put("issuerProvinces", oSE.getCertDetail(7, clientCert));
+							digitalCertificate.put("issuerName", oSE.getCertDetail(8, clientCert));
+							digitalCertificate.put("issuerCity", oSE.getCertDetail(9, clientCert));
+							digitalCertificate.put("issuerEmail", oSE.getCertDetail(10, clientCert));
+							digitalCertificate.put("startDate", oSE.getCertDetail(11, clientCert));
+							digitalCertificate.put("expirationDate", oSE.getCertDetail(12, clientCert));
+							digitalCertificate.put("userCountry", oSE.getCertDetail(13, clientCert));
+							digitalCertificate.put("userOrganization", oSE.getCertDetail(14, clientCert));
+							digitalCertificate.put("userDepartment", oSE.getCertDetail(15, clientCert));
+							digitalCertificate.put("userProvinces", oSE.getCertDetail(16, clientCert));
+							digitalCertificate.put("userName", oSE.getCertDetail(17, clientCert));
+							digitalCertificate.put("userCity", oSE.getCertDetail(18, clientCert));
+							digitalCertificate.put("userEmail", oSE.getCertDetail(19, clientCert));
+							digitalCertificate.put("key", oSE.getCertDetail(20, clientCert));
+						} catch (Exception e) {
+							// TODO: handle exception
 						}
+						String digitalCertificateData = digitalCertificate.toString();
 						User user = null;
 						try {
 							user = UserLocalServiceUtil.getUserByScreenName(companyId_, UniqueID);
@@ -186,6 +225,20 @@ public class CustomLoginPortlet extends MVCPortlet {
 								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							}
+						}
+
+						try {
+							ExpandoTable eTable = ExpandoTableLocalServiceUtil.getDefaultTable(PortalUtil.getDefaultCompanyId(), User.class.getName());
+							ExpandoColumn eColumn = ExpandoColumnLocalServiceUtil.getColumn(eTable.getTableId(), "digitalCertificate");
+							try {
+								ExpandoValue expandoValue = ExpandoValueLocalServiceUtil.getValue(eTable.getTableId(), eColumn.getColumnId(), user.getUserId());
+								ExpandoValueLocalServiceUtil.updateExpandoValue(expandoValue);
+							} catch (Exception e) {
+								// TODO: handle exception
+								ExpandoValueLocalServiceUtil.addValue(eTable.getClassNameId(), eTable.getTableId(), eColumn.getColumnId(), user.getUserId(), digitalCertificateData);
+							}
+						} catch (Exception e) {
+							// TODO: handle exception
 						}
 
 						com.liferay.portal.kernel.json.JSONObject userJson = JSONFactoryUtil.createJSONObject();
@@ -213,8 +266,7 @@ public class CustomLoginPortlet extends MVCPortlet {
 				}
 			}
 		}
-		
-		
+
 	}
 
 	public void createUser(String UniqueID, String prikeypwd, String userName, Long companyId_, ResourceRequest resourceRequest) throws PortalException, SystemException {

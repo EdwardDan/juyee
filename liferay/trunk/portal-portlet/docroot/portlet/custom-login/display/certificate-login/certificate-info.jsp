@@ -13,24 +13,24 @@
                 企业名称：
             </td>
             <td class="td3">
-                上海建工四建集团有限公司
+                ${digitalCertificate.userOrganization}
             </td>
         </tr>
         <tr>
             <td class="td2">机构代码证：</td>
-            <td class="td3">63129128-9</td>
+            <td class="td3">${digitalCertificate.userOrganization}</td>
         </tr>
         <tr>
             <td class="td2">证书唯一标识码：</td>
-            <td class="td3">7@GS310115000488261</td>
+            <td class="td3"></td>
         </tr>
         <tr>
             <td class="td2">证书序列号：</td>
-            <td class="td3">42D244219BD493A57C89C732D32BEBDD</td>
+            <td class="td3">${digitalCertificate.certificateSerialNo}</td>
         </tr>
         <tr>
             <td class="td2">有效期至：</td>
-            <td class="td3">2015-11-14 00:00:00</td>
+            <td class="td3">${digitalCertificate.expirationDate}</td>
         </tr>
     </table>
 </div>
@@ -44,16 +44,16 @@
                 证书昵称：
             </td>
             <td class="td3">
-                543534
+                ${digitalCertificate.issuerName}
             </td>
         </tr>
         <tr>
             <td class="td2">证书持有人：</td>
-            <td class="td3">543543</td>
+            <td class="td3">${digitalCertificate.userName}</td>
         </tr>
         <tr>
             <td class="td2">证书持有人手机：</td>
-            <td class="td3">15921026918</td>
+            <td class="td3"></td>
         </tr>
     </table>
 </div>
