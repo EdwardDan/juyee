@@ -22,7 +22,11 @@
 		<!-- Business fields -->
 		<column name="zzjgdm" type="String" /><!-- 组织机构代码 -->
 		<column name="bjbh" type="String" /><!-- 报建编号 -->
+		
+		<column name="wssqbh" type="String" /><!-- 网上申请编号 -->
 		<column name="sqbz" type="int" /><!-- 申请步骤 -->
+		<column name="sqzt" type="String" /><!-- 申请状态 -->
+		<column name="bdh" type="String" /><!-- 标段号 -->
 		<!-- Order -->
 
 		<!-- Finder methods -->
@@ -42,6 +46,7 @@
 
 		<!-- Business fields -->
 		<column name="permitId" type="String" /><!-- 施工许可Id -->
+		<column name="gcmc" type="String" /><!-- 工程名称 -->
 		<!-- Order -->
 
 		<!-- Finder methods -->
@@ -97,5 +102,31 @@
 			<finder-column name="permitId"></finder-column>
 		</finder>
 	</entity>
+	<!-- 申请材料 -->
+	<entity name="ApplyMaterial" local-service="true" remote-service="false">
+		<!-- PK fields -->
+		<column name="materialId" type="long" primary="true" />
 
+		<!-- Group instance -->
+
+		<!-- Audit fields -->
+		
+		<!-- Business fields -->
+		<column name="permitId" type="String" /><!-- 施工许可Id -->
+		<column name="xh" type="int" /><!-- 序号 -->
+		<column name="clmc" type="String" /><!-- 材料名称 -->
+		<column name="yjfs" type="int" /><!-- 应交份数 -->
+		<column name="sjfs" type="int" /><!-- 实交份数 -->
+		
+		<!-- Order -->
+		<order>
+			<order-column name="xh" order-by="asc"></order-column>
+		</order>
+		
+		<!-- Finder methods -->
+		<finder name="PermitId" return-type="Collection">
+			<finder-column name="permitId"></finder-column>
+		</finder>
+		
+	</entity>
 </service-builder>
