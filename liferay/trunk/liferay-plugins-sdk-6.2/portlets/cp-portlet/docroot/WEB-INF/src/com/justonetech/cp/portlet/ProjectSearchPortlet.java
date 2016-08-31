@@ -5,11 +5,9 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-
 import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
-
 import com.justonetech.cp.project.model.Project;
 import com.justonetech.cp.project.service.ProjectLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -47,7 +45,7 @@ public class ProjectSearchPortlet extends MVCPortlet {
 		}
 		String zzjgdm = Validator.isNull(user) ? "" : user.getScreenName();
 		String bjbh = ParamUtil.getString(renderRequest, "bjbh");
-		String bjWebid = ParamUtil.getString(renderRequest, "bjWebid");
+		String wssqbh = ParamUtil.getString(renderRequest, "wssqbh");
 		String xmmc = ParamUtil.getString(renderRequest, "xmmc");
 		Date bjrqStart = ParamUtil.getDate(renderRequest, "bjrqStart", new SimpleDateFormat(dateFormatPattern), null);
 		Date bjrqEnd = ParamUtil.getDate(renderRequest, "bjrqEnd", new SimpleDateFormat(dateFormatPattern), null);
@@ -58,10 +56,10 @@ public class ProjectSearchPortlet extends MVCPortlet {
 		int start = delta * (cur - 1);
 		int end = delta * cur;
 
-		List<Project> projects = ProjectLocalServiceUtil.getProjects(zzjgdm, bjbh, bjWebid, xmmc, bjrqStart, bjrqEnd, bjwcbj, start, end);
-		int projectsCount = ProjectLocalServiceUtil.getProjectsCount(zzjgdm, bjbh, bjWebid, xmmc, bjrqStart, bjrqEnd, bjwcbj);
+		List<Project> projects = ProjectLocalServiceUtil.getProjects(zzjgdm, bjbh, wssqbh, xmmc, bjrqStart, bjrqEnd, bjwcbj, start, end);
+		int projectsCount = ProjectLocalServiceUtil.getProjectsCount(zzjgdm, bjbh, wssqbh, xmmc, bjrqStart, bjrqEnd, bjwcbj);
 		renderRequest.setAttribute("bjbh", bjbh);
-		renderRequest.setAttribute("bjWebid", bjWebid);
+		renderRequest.setAttribute("wssqbh", wssqbh);
 		renderRequest.setAttribute("xmmc", xmmc);
 		renderRequest.setAttribute("bjrqStart", bjrqStart);
 		renderRequest.setAttribute("bjrqEnd", bjrqEnd);
