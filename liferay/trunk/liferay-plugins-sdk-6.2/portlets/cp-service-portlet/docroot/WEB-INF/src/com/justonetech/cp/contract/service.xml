@@ -19,6 +19,7 @@
 		<column name="bjbh" type="String" /><!-- 报建编号 -->
 		<column name="bdh" type="String" /><!-- 标段号 -->
 		<column name="xmmc" type="String" /><!-- 项目名称 -->
+		<column name="htmc" type="String" /><!-- 合同名称 -->
 		<column name="htlx" type="String" /><!-- 合同类型 -->
 		<column name="bgxx" type="String" /><!-- 变更信息 -->
 		<column name="bgzt" type="String" /><!-- 变更状态 -->
