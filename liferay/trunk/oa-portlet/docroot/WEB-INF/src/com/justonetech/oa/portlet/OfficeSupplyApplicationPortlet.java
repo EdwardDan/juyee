@@ -218,15 +218,43 @@ public class OfficeSupplyApplicationPortlet extends MVCPortlet {
 		System.out.println("organizationId============//=========" + organizationId);
 		Long groupId = organizationId + 1;
 		List<UserGroupRole> userGroupRoles = null;
-		try {
-			userGroupRoles = UserGroupRoleLocalServiceUtil.getUserGroupRolesByGroupAndRole(groupId, (long) 29656);
-		} catch (SystemException e) {
-			e.printStackTrace();
-		}
-		if (userGroupRoles != null) {
-			notification(resourceRequest, userGroupRoles);
+		if (resourceId.equals("stateToReviewByKezhang")) {
+			try {
+				userGroupRoles = UserGroupRoleLocalServiceUtil.getUserGroupRolesByGroupAndRole(groupId, (long) 29656);
+			} catch (SystemException e) {
+				e.printStackTrace();
+			}
+			if (userGroupRoles != null) {
+				notification(resourceRequest, userGroupRoles);
+			}
+		} else if (resourceId.equals("passURL")) {
+			Long leaderId = ParamUtil.getLong(resourceRequest, "leaderId");
+			try {
+				ServiceContext serviceContext = ServiceContextFactory.getInstance(resourceRequest);
+				JSONObject payloadJSON = JSONFactoryUtil.createJSONObject();
+				UserNotificationEventLocalServiceUtil.addUserNotificationEvent(leaderId,
+						com.justonetech.oa.notification.OfficeSupplyApplicationNotificationHandler.PORTLET_ID,
+						(new Date()).getTime(), leaderId, payloadJSON.toString(), false, serviceContext);
+			} catch (PortalException e) {
+				e.printStackTrace();
+			} catch (SystemException e) {
+				e.printStackTrace();
+			}
+		}else if(resourceId.equals("rejectURL")){
+			Long userId = ParamUtil.getLong(resourceRequest, "userId");
+			System.out.println("===============userId="+userId+"123456789");
+			try {
+				ServiceContext serviceContext = ServiceContextFactory.getInstance(resourceRequest);
+				JSONObject payloadJSON = JSONFactoryUtil.createJSONObject();
+				UserNotificationEventLocalServiceUtil.addUserNotificationEvent(userId,
+						com.justonetech.oa.notification.OfficeSupplyApplicationNotificationHandler.PORTLET_ID,
+						(new Date()).getTime(), userId, payloadJSON.toString(), false, serviceContext);
+			} catch (PortalException e) {
+				e.printStackTrace();
+			} catch (SystemException e) {
+				e.printStackTrace();
+			}
 		}
 		super.serveResource(resourceRequest, resourceResponse);
 	}
-
 }
