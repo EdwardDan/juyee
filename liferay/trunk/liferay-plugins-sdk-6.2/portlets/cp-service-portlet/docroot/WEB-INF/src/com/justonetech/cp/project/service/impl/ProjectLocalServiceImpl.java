@@ -51,10 +51,10 @@ public class ProjectLocalServiceImpl extends ProjectLocalServiceBaseImpl {
 	private static Log log = LogFactoryUtil.getLog(ProjectLocalServiceImpl.class);
 
 	@SuppressWarnings("unchecked")
-	public List<Project> getProjects(String zzjgdm,String bjbh, String bjWebid, String xmmc, Date bjrqStart, Date bjrqEnd, String bjwcbj, int start, int end) {
+	public List<Project> getProjects(String zzjgdm,String projectId, String wssqbh, String xmmc, Date bjrqStart, Date bjrqEnd, String bjwcbj, int start, int end) {
 
 		try {
-			return this.dynamicQuery(createDynamicQuery(zzjgdm,bjbh, bjWebid, xmmc, bjrqStart, bjrqEnd, bjwcbj), start, end);
+			return this.dynamicQuery(createDynamicQuery(zzjgdm,projectId, wssqbh, xmmc, bjrqStart, bjrqEnd, bjwcbj), start, end);
 		}
 		catch (SystemException e) {
 			log.info(e.getMessage());
@@ -62,10 +62,10 @@ public class ProjectLocalServiceImpl extends ProjectLocalServiceBaseImpl {
 		return Collections.emptyList();
 	}
 
-	public int getProjectsCount(String zzjgdm,String bjbh, String bjWebid, String xmmc, Date bjrqStart, Date bjrqEnd, String bjwcbj) {
+	public int getProjectsCount(String zzjgdm,String projectId, String wssqbh, String xmmc, Date bjrqStart, Date bjrqEnd, String bjwcbj) {
 
 		try {
-			return (int) this.dynamicQueryCount(createDynamicQuery(zzjgdm,bjbh, bjWebid, xmmc, bjrqStart, bjrqEnd, bjwcbj));
+			return (int) this.dynamicQueryCount(createDynamicQuery(zzjgdm,projectId, wssqbh, xmmc, bjrqStart, bjrqEnd, bjwcbj));
 		}
 		catch (SystemException e) {
 			log.info(e.getMessage());
@@ -73,17 +73,17 @@ public class ProjectLocalServiceImpl extends ProjectLocalServiceBaseImpl {
 		return 0;
 	}
 
-	public DynamicQuery createDynamicQuery(String zzjgdm,String bjbh, String bjWebid, String xmmc, Date bjrqStart, Date bjrqEnd, String bjwcbj) {
+	public DynamicQuery createDynamicQuery(String zzjgdm,String projectId, String wssqbh, String xmmc, Date bjrqStart, Date bjrqEnd, String bjwcbj) {
 
 		DynamicQuery dynamicQuery = this.dynamicQuery();
 		if (!Validator.isBlank(zzjgdm)) {
 			dynamicQuery.add(PropertyFactoryUtil.forName("zzjgdm").eq(zzjgdm));
 		}
-		if (!Validator.isBlank(bjbh)) {
-			dynamicQuery.add(PropertyFactoryUtil.forName("bjbh").like("%" + bjbh + "%"));
+		if (!Validator.isBlank(projectId)) {
+			dynamicQuery.add(PropertyFactoryUtil.forName("projectId").like("%" + projectId + "%"));
 		}
-		if (!Validator.isBlank(bjWebid)) {
-			dynamicQuery.add(PropertyFactoryUtil.forName("bjWebid").like("%" + bjWebid + "%"));
+		if (!Validator.isBlank(wssqbh)) {
+			dynamicQuery.add(PropertyFactoryUtil.forName("wssqbh").like("%" + wssqbh + "%"));
 		}
 		if (!Validator.isBlank(xmmc)) {
 			dynamicQuery.add(PropertyFactoryUtil.forName("xmmc").like("%" + xmmc + "%"));
