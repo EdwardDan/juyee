@@ -49,9 +49,6 @@
 		<!-- Order -->
 
 		<!-- Finder methods -->
-		<finder name="PermitId" return-type="Collection">
-			<finder-column name="permitId"></finder-column>
-		</finder>
 	</entity>
 	<!-- 参建单位 -->
 	<entity name="ParticipationUnit" local-service="true"
