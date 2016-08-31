@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-
+<%@page import="com.justonetech.cp.project.service.ProjectLocalServiceUtil"%>
+<%@page import="com.justonetech.cp.project.model.Project"%>
 <%@page import="com.liferay.portal.kernel.util.PropsUtil"%>
 <%
 	String staticServerURL = PropsUtil.get("static.server.url");
