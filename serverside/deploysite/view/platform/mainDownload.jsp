@@ -62,5 +62,14 @@
                        onclick="window.open('${ctx}/tools/施工许可证办理操作流程.doc')">
             </td>
         </tr>
+        <tr class="tr_light">
+            <td class="form_border">7</td>
+            <td class="form_border" nowrap>&nbsp;施工许可</td>
+            <td class="form_border" align="left">&nbsp;上海市交通建设装配式技术应用推广方案</td>
+            <td class="form_border" nowrap>&nbsp;
+                <input type="button" value="下载" class="button_normal"
+                       onclick="window.open('${ctx}/tools/上海市交通委员会关于印发《上海市交通建设装配式技术应用推广方案（2016-2018）》的通知.pdf')">
+            </td>
+        </tr>
     </table>
 </div>

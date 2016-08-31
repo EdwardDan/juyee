@@ -10,6 +10,9 @@
             return;
         }
     }
+    String remoteAddr = request.getRemoteAddr();
+    System.out.println("remoteAddr = " + remoteAddr);
+    String[] ips={"192.168.3.","127.0.0."};
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -74,6 +77,8 @@
 </head>
 
 <body class="userlogin_body">
+<c:choose>
+    <c:when test="<%=remoteAddr.startsWith(ips[0])||remoteAddr.startsWith(ips[1])%>">
 <form id="loginForm" name="loginForm" action="j_spring_security_check" method="post" onsubmit="return submitForm(this)">
     <div id="loginDiv" class="loginDiv" style="width:916px;height:490px;">
         <div style="width:230px; height:170px;float:right;margin-right:95px;margin-top:140px">
@@ -104,5 +109,22 @@
         </div>
     </div>
 </form>
-</body>
+    </c:when>
+    <c:otherwise>
+        <div style="text-align: left;">
+            <h3>&nbsp;&nbsp;关于更换系统服务器的通知</h3>
+            <br>
+
+            <h3>
+                &nbsp;&nbsp;本系统将于2016年9月1日——2016年9月6日进行服务器升级，各单位急需办理的施工许可业务，公路、港口、航道类请联系
+                施伟13901989413，市政基础设施类请联系顾顺兴13386029910。由此带来的不便敬请谅解。
+            </h3><br><br>
+
+            <h3>&nbsp;&nbsp;上海市交通建设工程管理中心</h3><br>
+
+            <h3>&nbsp;&nbsp;2016年8月31日</h3>
+        </div>
+    </c:otherwise>
+</c:choose>
+    </body>
 </html>
