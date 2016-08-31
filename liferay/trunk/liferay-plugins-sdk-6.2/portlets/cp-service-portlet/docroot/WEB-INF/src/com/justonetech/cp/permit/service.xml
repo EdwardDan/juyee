@@ -38,14 +38,13 @@
 	<entity name="ProjectProfile" local-service="true"
 		remote-service="false">
 		<!-- PK fields -->
-		<column name="unitId" type="long" primary="true" />
+		<column name="permitId" type="long" primary="true" /><!-- 施工许可Id -->
 
 		<!-- Group instance -->
 
 		<!-- Audit fields -->
 
 		<!-- Business fields -->
-		<column name="permitId" type="String" /><!-- 施工许可Id -->
 		<column name="gcmc" type="String" /><!-- 工程名称 -->
 		<!-- Order -->
 
