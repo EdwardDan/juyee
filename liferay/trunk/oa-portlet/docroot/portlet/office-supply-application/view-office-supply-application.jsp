@@ -8,12 +8,17 @@
 <%@ page import="com.liferay.portal.kernel.exception.SystemException"%>
 <%@ page import="com.liferay.portal.kernel.workflow.WorkflowException"%>
 <%@ page import="com.liferay.portal.workflow.kaleo.service.*" %>
+<script type="text/javascript">
+	document.write("<script src='${staticServerURL}/jquery/jquery-1.12.4.min.js'>" + "<"+"/script>");
+</script>
 <style type="text/css">
 	.table tr td{
 		border:1px solid #ddd;
 	}
 </style>
 <portlet:renderURL var="viewURL" />
+<portlet:resourceURL var="passURL" id="passURL"/>
+<portlet:resourceURL var="rejectURL" id="rejectURL"/>
 <liferay-ui:header title="查看办公用品申请" backURL="${viewURL}"></liferay-ui:header>
 <c:set var="contextPath"
 	value="${request.contextPath}/portlet/office-supply-application" />
@@ -25,9 +30,11 @@
 	}%>
 <%
 	String randomId = StringPool.BLANK;
-		randomId = StringUtil.randomId();
-		String isAudit=request.getParameter("isAudit");
-		OfficeSupplyApplication officeSupplyApplication = (OfficeSupplyApplication)request.getAttribute("officeSupplyApplication");
+	randomId = StringUtil.randomId();
+	String isAudit=request.getParameter("isAudit");
+	Long leaderId = 21356L;
+	OfficeSupplyApplication officeSupplyApplication = (OfficeSupplyApplication)request.getAttribute("officeSupplyApplication");
+	Long userId = officeSupplyApplication.getUserId();
 %>
 <aui:row>
 	<aui:col span="6">
@@ -82,9 +89,11 @@
 	        + ":"   
 	        + request.getServerPort() ;          //端口号  
 	       System.out.println("strBackUrl="+strBackUrl);
-	       try {
+	    
+	 	try {
 		request.setAttribute("userId", user.getUserId());
 		System.out.println("userId=" + user.getUserId());
+		
 		List<Role> userRoles = RoleLocalServiceUtil.getUserRoles(user.getUserId());
 		ArrayList<String> roles = new ArrayList<String>();
 		for (Role role : userRoles) {
@@ -163,7 +172,6 @@
 		<aui:input cols="55" name="_153_comment" id="_153_comment"
 			label="审核意见" useNamespace="false" rows="10" type="textarea" />
 	</div>
-	<%-- <aui:button type="button" value="<%=message %>" href="<%=url %>"/>  --%>
 	<c:if test="${isAudit!=''}">
 		<c:if
 			test="${officeSupplyApplication.status==2&&fn:contains(kezhangRole,'29656')||officeSupplyApplication.status==3&&fn:contains(roles,'20165')}">
@@ -172,14 +180,14 @@
 					cssClass='<%="workflow-task-" + randomId + " task-change-status-link"%>'
 					id='<%=randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink"%>'
 					image="pass" message="<%=message%>" method="get"
-					url="<%=url%>" />
+					url="<%=url%>" onClick="pass()"/>
 			</c:if>
 			<c:if test='<%=message.equals("驳回")%>'>
 				<liferay-ui:icon
 					cssClass='<%="workflow-task-" + randomId + " task-change-status-link"%>'
 					id='<%=randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink"%>'
 					image="reject" message="<%=message%>" method="get"
-					url="<%=url%>" />
+					url="<%=url%>" onClick="reject()"/>
 			</c:if>
 		</c:if>
 	</c:if>
@@ -189,14 +197,36 @@
 				'<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(transitionName) %>taskChangeStatusLink',
 				onTaskClickFn);
 	</aui:script>	
-			<%
-		}
+	<%
 					}
 				}
 			}
+		}
 	%>
 	<aui:button type="cancel" value="返回" href="${viewURL}" />
 </aui:button-row>
+<script>
+	function pass(){
+		$.ajax({
+			type:"GET",
+			url:"<%=passURL%>",
+			data:{
+				'<portlet:namespace/>leaderId' :<%=leaderId%>,
+			}
+		});
+	}
+	
+	function reject(){		
+		$.ajax({
+			type:"GET",
+			url:"<%=rejectURL%>",
+			data:{
+				'<portlet:namespace/>userId' :<%=userId%>,
+			}
+		});
+		alert(123456);
+	}
+</script>	
 <%
 	User me = PortalUtil.getUser(request);
 	if (null != me) {
@@ -211,9 +241,7 @@
 		<%
 			Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
 					List<Integer> logTypes = new ArrayList<Integer>();
-
-					System.out
-							.println("me.getCompanyId(), me.getGroupId()" + me.getCompanyId() + "," + me.getGroupId());
+					System.out.println("me.getCompanyId(), me.getGroupId()" + me.getCompanyId() + "," + me.getGroupId());
 					logTypes.add(WorkflowLog.TASK_ASSIGN);
 					logTypes.add(WorkflowLog.TASK_COMPLETION);
 					logTypes.add(WorkflowLog.TASK_UPDATE);
@@ -309,61 +337,6 @@
 				</c:choose></td>
 			<td><%=workflowLog.getComment()%></td>
 		</tr>
-		<%-- <div class="task-activity task-type-<%= workflowLog.getType() %>">
-						<div class="task-activity-date">
-							<%= dateFormatDateTime.format(workflowLog.getCreateDate()) %>
-						</div>
-
-						<div class="task-activity-message">
-							<c:choose>
-								<c:when test="<%= workflowLog.getType() == WorkflowLog.TASK_COMPLETION %>">
-									<%= LanguageUtil.format(pageContext, "x-completed-the-task-x", new Object[] {HtmlUtil.escape(actorName), HtmlUtil.escape(workflowLog.getState())}) %>
-								</c:when>
-								<c:when test="<%= workflowLog.getType() == WorkflowLog.TASK_UPDATE %>">
-									<%= LanguageUtil.format(pageContext, "x-updated-the-due-date", HtmlUtil.escape(actorName)) %>
-								</c:when>
-								<c:when test="<%= (workflowLog.getType() == WorkflowLog.TRANSITION) %>">
-									<%= LanguageUtil.format(pageContext, "x-changed-the-state-from-x-to-x", new Object[] {HtmlUtil.escape(actorName), HtmlUtil.escape(workflowLog.getPreviousState()), HtmlUtil.escape(workflowLog.getState())}) %>
-								</c:when>
-								<c:otherwise>
-									<c:choose>
-										<c:when test="<%= (workflowLog.getPreviousUserId() == 0) && (curUser != null) %>">
-											<%= LanguageUtil.format(pageContext, curUser.isMale() ? "x-assigned-the-task-to-himself" : "x-assigned-the-task-to-herself", HtmlUtil.escape(curUser.getFullName())) %>
-										</c:when>
-										<c:otherwise>
-
-											<%
-											String previousActorName = null;
-
-											if (curRole == null) {
-												previousActorName = PortalUtil.getUserName(workflowLog.getPreviousUserId(), StringPool.BLANK);
-											%>
-
-												<%= LanguageUtil.format(pageContext, "task-assigned-to-x.-previous-assignee-was-x", new Object[] {HtmlUtil.escape(actorName), HtmlUtil.escape(previousActorName)}) %>
-
-											<%
-											}
-											else {
-												previousActorName = curRole.getDescriptiveName();
-											%>
-
-												<%= LanguageUtil.format(pageContext, "task-initially-assigned-to-the-x-role", new Object[] {HtmlUtil.escape(actorName)}) %>
-
-											<%
-											}
-											%>
-
-										</c:otherwise>
-									</c:choose>
-								</c:otherwise>
-							</c:choose>
-						</div>
-
-						<div class="task-activity-comment">
-							<%= workflowLog.getComment() %>
-						</div>
-					</div> --%>
-
 		<%
 			}
 		%>
@@ -372,3 +345,4 @@
 		<%
 			}
 		%>
+

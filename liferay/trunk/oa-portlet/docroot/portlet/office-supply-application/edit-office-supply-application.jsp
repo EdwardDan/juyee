@@ -22,14 +22,14 @@
 	document.write("<script src='${staticServerURL}/jquery/jquery-1.12.4.min.js'>" + "<"+"/script>");
 </script>
 <portlet:renderURL var="viewURL" />
-<portlet:resourceURL var="notifyURL" id="stateToReviewByKezhang"/>
+<portlet:resourceURL var="notifyURL" id="stateToReviewByKezhang" />
 <%
 	long userId = PortalUtil.getUserId(request);
 	String strBackUrl = "http://" + request.getServerName() //服务器地址  
-			+ ":" + request.getServerPort(); //端口号  
+	+ ":" + request.getServerPort(); //端口号  
 	User _user = UserServiceUtil.getUserById(userId);
 	OfficeSupplyApplication officeSupplyApplication = (OfficeSupplyApplication) request
-			.getAttribute("officeSupplyApplication");
+	.getAttribute("officeSupplyApplication");
 	List<Organization> organizations = _user.getOrganizations();
 	String organizationName = organizations.get(0).getName();
 	Long organizationId = organizations.get(0).getOrganizationId();
@@ -44,34 +44,34 @@
 		List<WorkflowTask> results1 = null;
 		User me = PortalUtil.getUser(request);
 		try {
-			results1 = WorkflowTaskManagerUtil.search(me.getCompanyId(), me.getUserId(), null, assetTypes,
-					null, null, -1, -1, orderByComparator);
+	results1 = WorkflowTaskManagerUtil.search(me.getCompanyId(), me.getUserId(), null, assetTypes,
+			null, null, -1, -1, orderByComparator);
 		} catch (WorkflowException e3) {
-			// TODO Auto-generated catch block
-			e3.printStackTrace();
+	// TODO Auto-generated catch block
+	e3.printStackTrace();
 		}
 		long workflowTaskId = 0L;
 		long people = 0L;
 		for (WorkflowTask task : results1) {
-			if (KaleoTaskInstanceTokenLocalServiceUtil.getKaleoTaskInstanceToken(task.getWorkflowTaskId())
-					.getClassPK() == officeSupplyApplication.getOfficeSupplyApplicationId()) {
-				workflowTaskId = task.getWorkflowTaskId();
-				people = task.getAssigneeUserId();
-			}
+	if (KaleoTaskInstanceTokenLocalServiceUtil.getKaleoTaskInstanceToken(task.getWorkflowTaskId())
+			.getClassPK() == officeSupplyApplication.getOfficeSupplyApplicationId()) {
+		workflowTaskId = task.getWorkflowTaskId();
+		people = task.getAssigneeUserId();
+	}
 		}
 		String token = com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
 		url = strBackUrl
-				+ "/group/control_panel/manage/-/my_workflow_tasks/view/"
-				+ workflowTaskId
-				+ "?p_auth="
-				+ token
-				+ "&p_p_lifecycle=1&doAsGroupId="
-				+ PortalUtil.getUser(request).getGroupId()
-				+ "&refererPlid=25177&controlPanelCategory=my&_153_cmd=save&_153_assigneeUserId="
-				+ people
-				+ "&_153_redirect="
-				+ strBackUrl
-				+ "/web/guest/sy&_153_struts_action=/my_workflow_tasks/edit_workflow_task&_153_transitionName=调度";
+		+ "/group/control_panel/manage/-/my_workflow_tasks/view/"
+		+ workflowTaskId
+		+ "?p_auth="
+		+ token
+		+ "&p_p_lifecycle=1&doAsGroupId="
+		+ PortalUtil.getUser(request).getGroupId()
+		+ "&refererPlid=25177&controlPanelCategory=my&_153_cmd=save&_153_assigneeUserId="
+		+ people
+		+ "&_153_redirect="
+		+ strBackUrl
+		+ "/web/guest/sy&_153_struts_action=/my_workflow_tasks/edit_workflow_task&_153_transitionName=调度";
 	}
 %>
 <script type="text/javascript">
@@ -104,9 +104,11 @@
 		$.ajax({			
 			type:"GET",
 			url:"<%=notifyURL%>",
-			data:{
-				"<portlet:namespace/>organizationId":<%=organizationId%>,			
-				}
+			data : {
+				"<portlet:namespace/>organizationId" :
+<%=organizationId%>
+	,
+			}
 		});
 	}
 	function validate2() {
@@ -139,7 +141,7 @@
 	<aui:row>
 		<aui:col span="6">
 			<aui:input type="hidden" name="officeSupplyApplicationId"
-				value="${officeSupplyApplication.officeSupplyApplicationId}"/>
+				value="${officeSupplyApplication.officeSupplyApplicationId}" />
 			<aui:input name="type" value="submit" id="status" type="hidden" />
 			<aui:input name="deptName" label="申请部门"
 				value="${officeSupplyApplication.status==5?officeSupplyApplication.getDeptName():organizationName}"
@@ -147,8 +149,8 @@
 		</aui:col>
 		<aui:col span="6">
 			<aui:input name="userName" label="申请人"
-				value="${officeSupplyApplication.status==5?officeSupplyApplication.getUserName():userName}"
-				readonly="true" />
+				value="${f.status==5?officeSupplyApplication.getUserName():userName}"
+				readonly="true"/>
 		</aui:col>
 	</aui:row>
 	<table border="1" width="100%" class="table table-bordered table-hover">
@@ -165,19 +167,19 @@
 			<c:forEach items="${officeSupplyApplicationItems}" var="item">
 				<tr align="center">
 					<td><input name="<portlet:namespace/>name"
-						value="${item.name}" readonly="${officeSupplyApplication.status==5?true:false}"/></td>
+						value="${item.name}"<c:if test="${officeSupplyApplication.status==5}">readonly</c:if>/></td>
 					<td><input name="<portlet:namespace/>model"
-						value="${item.model}" readonly="${officeSupplyApplication.status==5?true:false}"/></td>
+						value="${item.model}" <c:if test="${officeSupplyApplication.status==5}">readonly</c:if>/></td>
 					<td><input name="<portlet:namespace/>unit"
-						value="${item.unit}" readonly="${officeSupplyApplication.status==5?true:false}"/></td>
+						value="${item.unit}"<c:if test="${officeSupplyApplication.status==5}">readonly</c:if>/></td>
 					<td><input name="<portlet:namespace/>unitPrice"
 						placeholder="请输入正数" value="${item.unitPrice}" onchange="count()"
-						onkeyup="value=value.replace(/[^\d.]/g,'')" readonly="${officeSupplyApplication.status==5?true:false}"/></td>
+						onkeyup="value=value.replace(/[^\d.]/g,'')"<c:if test="${officeSupplyApplication.status==5}">readonly</c:if>/></td>
 					<td><input name="<portlet:namespace/>quantity"
 						placeholder="请输入正整数" value="${item.quantity}" onchange="count()"
-						onkeyup="this.value=this.value.replace(/[^\d]/ig,'')" readonly="${officeSupplyApplication.status==5?true:false}"/></td>
+						onkeyup="this.value=this.value.replace(/[^\d]/ig,'')"<c:if test="${officeSupplyApplication.status==5}">readonly</c:if>/></td>
 					<td><input type="button" class="btn" value="删除"
-						onclick="changeLine(this)" style="width: 100%;" readonly="${officeSupplyApplication.status==5?true:false}"/></td>
+						onclick="changeLine(this)" style="width: 100%;"/></td>
 				</tr>
 			</c:forEach>
 		</c:if>
@@ -193,8 +195,16 @@
 	</table>
 	<aui:row>
 		<aui:col span="12">
+		<c:if test="${officeSupplyApplication.status!=5}">
 			<aui:input type="textarea" name="introductions" label="申请说明"
-				value="${officeSupplyApplication.introductions}" cssClass="span12" readonly="${officeSupplyApplication.status==5?true:false}"/>
+				value="${officeSupplyApplication.introductions}" cssClass="span12">
+			</aui:input>
+		</c:if>
+		<c:if test="${officeSupplyApplication.status==5}">
+			<aui:input type="textarea" name="introductions" label="申请说明"
+				value="${officeSupplyApplication.introductions}" cssClass="span12" readonly="readonly">
+			</aui:input>
+		</c:if>
 		</aui:col>
 	</aui:row>
 	<c:if test="${officeSupplyApplication.status==5}">
@@ -218,7 +228,6 @@
 		<aui:button type="cancel" value="取消" href="${viewURL }" />
 	</aui:button-row>
 </aui:form>
-
 <table style="display: none;" border="1" width="90%">
 	<tbody id="hiddenStyle">
 		<tr align="center">
@@ -237,7 +246,6 @@
 		</tr>
 	</tbody>
 </table>
-
 
 
 
