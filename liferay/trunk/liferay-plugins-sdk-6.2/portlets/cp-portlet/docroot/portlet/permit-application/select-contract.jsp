@@ -19,7 +19,7 @@
 				</tr>
 				<tr>
 					<td style="width: 10%;">合同名称</td>
-					<td colspan="3"><aui:input type="text" name="gcmc" label="" cssClass="span12" /></td>
+					<td colspan="3"><aui:input type="text" name="htmc" label="" cssClass="span12" /></td>
 				</tr>
 				<tr style="height: 40px;">
 					<td colspan="4" align="center"><aui:button type="submit" value="查询"></aui:button></td>
@@ -34,7 +34,7 @@
 	<c:set var="contextPath" value="${request.contextPath}/portlet/permit-application" />
 	<liferay-ui:panel title="已报送施工总包合同信息列表" collapsible="false">
 		<liferay-ui:search-container emptyResultsMessage="没有找到已报送施工总包合同信息">
-			<liferay-ui:search-container-results results="${contracts}" total="${contractsCount}">
+			<liferay-ui:search-container-results results="${ybssgzbContracts}" total="${ybssgzbContractsCount}">
 			</liferay-ui:search-container-results>
 			<liferay-ui:search-container-row className="Contract" modelVar="contract" keyProperty="contractId">
 				<liferay-ui:search-container-column-text value="<%=n%>" name=" " />
@@ -47,10 +47,30 @@
 				<liferay-ui:search-container-column-text property="contractId" name="合同信息报送编号" />
 				<portlet:renderURL var="editPermitURL">
 					<portlet:param name="mvcPath" value="${contextPath }/edit-permit.jsp" />
+					<portlet:param name="contractId" value="${contract.contractId}" />
+					<portlet:param name="bjbh" value="${contract.bjbh}" />
 				</portlet:renderURL>
 				<liferay-ui:search-container-column-text property="htmc" name="合同名称" href="${editPermitURL}" />
+				<liferay-ui:search-container-column-text name="操作">
+					<liferay-ui:icon-menu>
+						<a href="${editPermitURL}">选择</a>
+					</liferay-ui:icon-menu>
+				</liferay-ui:search-container-column-text>
 			</liferay-ui:search-container-row>
-			<liferay-ui:search-iterator />
+			<liferay-ui:search-iterator>
+				<%
+					String bjbh = ParamUtil.getString(request, "bjbh");
+									String bdh = ParamUtil.getString(request, "bdh");
+									String htmc = ParamUtil.getString(request, "htmc");
+									String zzjgdm = ParamUtil.getString(request, "zzjgdm");
+									PortletURL portletURL = searchContainer.getIteratorURL();
+									portletURL.setParameter("mvcPath", "/portlet/permit-application/select-contract.jsp");
+									portletURL.setParameter("bjbh", bjbh);
+									portletURL.setParameter("bdh", bdh);
+									portletURL.setParameter("htmc", htmc);
+									portletURL.setParameter("zzjgdm", zzjgdm);
+				%>
+			</liferay-ui:search-iterator>
 		</liferay-ui:search-container>
 	</liferay-ui:panel>
 </liferay-ui:panel-container>
