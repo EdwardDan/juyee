@@ -2,6 +2,7 @@
 package com.justonetech.cp.portlet;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 import javax.portlet.PortletException;
@@ -9,8 +10,13 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
 import com.justonetech.cp.contract.model.Contract;
+import com.justonetech.cp.contract.service.ContractLocalServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 /**
@@ -25,12 +31,28 @@ public class ContractSearchPortlet extends MVCPortlet {
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
-
-		List<Contract> contracts = null;
+		int delta = GetterUtil.getInteger(PropsUtil.get(PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA));
+		int pageSize = ParamUtil.getInteger(renderRequest, "delta", delta);
+		int pageNumber = ParamUtil.getInteger(renderRequest, "cur", 1);
+		int start = pageSize * (pageNumber - 1);
+		int end = pageSize * pageNumber;
+		String zzjgdm = "";
+		String bjbh = ParamUtil.getString(renderRequest, "bjbh");
+		String bdh = ParamUtil.getString(renderRequest, "bdh");
+		String xmmc = ParamUtil.getString(renderRequest, "xmmc");
+		String htlb = ParamUtil.getString(renderRequest, "htlb");
+		if(htlb.equals("sy")){
+			htlb = "";
+		}
+		List<Contract> contracts = Collections.emptyList();
+		contracts = ContractLocalServiceUtil.getContracts(zzjgdm, bjbh, bdh, xmmc, htlb, "", start, end);
 		int contractsCount = 0;
-
+		contractsCount = ContractLocalServiceUtil.getContractsCount("", bjbh, bdh, xmmc, htlb, "");
 		renderRequest.setAttribute("contracts", contracts);
 		renderRequest.setAttribute("contractsCount", contractsCount);
+		renderRequest.setAttribute("bjbh", bjbh);
+		renderRequest.setAttribute("bdh", bdh);
+		renderRequest.setAttribute("xmmc", xmmc);
 		super.doView(renderRequest, renderResponse);
 	}
 
