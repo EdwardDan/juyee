@@ -23,10 +23,11 @@
 		<column name="zzjgdm" type="String" /><!-- 组织机构代码 -->
 		<column name="bjbh" type="String" /><!-- 报建编号 -->
 		<column name="htxxbsbh" type="String" /><!-- 合同信息报送编号 -->
-		<column name="wssqbh" type="String" /><!-- 网上申请编号 -->
 		<column name="sqbz" type="int" /><!-- 申请步骤 -->
 		<column name="sqzt" type="String" /><!-- 申请状态 -->
 		<column name="bdh" type="String" /><!-- 标段号 -->
+		<column name="ywbh" type="String" /><!-- 业务编号 -->
+		<column name="sgxkzbh" type="String" /><!--施工许可证编号 -->
 		<!-- Order -->
 
 		<!-- Finder methods -->
