@@ -56,9 +56,9 @@
 		<column name="htjg" type="String" /><!-- 合同价格（万元） -->
 		<column name="htgq" type="int" /><!-- 合同工期（日历天） -->
 		<column name="fddbr" type="String" /><!-- 法定代表人 -->
-		<column name="jsdwlxr" type="String" /><!-- 建设单位联系电话 -->
+		<column name="jsdwlxdh" type="String" /><!-- 建设单位联系电话 -->
 		<column name="jsdwlxr" type="String" /><!-- 建设单位联系人 -->
-		<column name="jsdwlxr" type="String" /><!-- 联系人手机号 -->
+		<column name="jsdwsjh" type="String" /><!-- 联系人手机号 -->
 		<column name="jsydpzwjhfdccqzbh" type="String" /><!-- 建设用地批准文件或房地产产权证编号 -->
 		<column name="jsgcghxkzbh" type="String" /><!-- 建设工程规划许可证编号 -->
 		<column name="xckgqk" type="String" /><!--现场开工情况 -->
