@@ -10,14 +10,19 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
 import com.justonetech.cp.contract.model.Contract;
-import com.justonetech.cp.contract.service.ContractLocalServiceUtil;
 import com.justonetech.cp.permit.model.Permit;
 import com.justonetech.cp.permit.service.PermitLocalServiceUtil;
-import com.justonetech.cp.project.model.Project;
-import com.justonetech.cp.project.service.ProjectLocalServiceUtil;
-import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.Junction;
+import com.liferay.portal.kernel.dao.orm.OrderFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
@@ -86,10 +91,19 @@ public class PermitApplicationPortlet extends MVCPortlet {
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 		String bjbh = ParamUtil.getString(renderRequest, "bjbh");
+		String zzjgdm =ParamUtil.getString(renderRequest, "zzjgdm");
 		String wssqbh = ParamUtil.getString(renderRequest, "wssqbh");
 		String gcmc = ParamUtil.getString(renderRequest, "gcmc");
+		int defaultDelta = GetterUtil.getInteger(PropsUtil.get(PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA));
+		int delta = ParamUtil.getInteger(renderRequest, "delta", defaultDelta);
+		int cur = ParamUtil.getInteger(renderRequest, "cur", 1);
+		int start = delta * (cur - 1);
+		int end = delta * cur;
+
 		List<Permit> permits = new ArrayList<Permit>();
 		int permitsCount = 0;
+		permits = PermitLocalServiceUtil.getPermits(zzjgdm, bjbh, wssqbh, gcmc, start, end);
+		permitsCount = PermitLocalServiceUtil.getPermitsCount(zzjgdm, bjbh, wssqbh, gcmc);
 		renderRequest.setAttribute("permits", permits);
 		renderRequest.setAttribute("permitsCount", permitsCount);
 		super.doView(renderRequest, renderResponse);
