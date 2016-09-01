@@ -132,12 +132,15 @@ public class ContractLocalServiceImpl extends ContractLocalServiceBaseImpl {
 		if (!Validator.isBlank(bdh)) {
 			dynamicQuery.add(PropertyFactoryUtil.forName("bdh").like("%" + bdh + "%"));
 		}
-		dynamicQuery.add(PropertyFactoryUtil.forName("bdh").like("V%"));
 		if (!Validator.isBlank(htmc)) {
 			dynamicQuery.add(PropertyFactoryUtil.forName("htmc").like("%" + htmc + "%"));
 		}
-		dynamicQuery.add(PropertyFactoryUtil.forName("cbfs").eq("总包"));
 		dynamicQuery.add(PropertyFactoryUtil.forName("htzt").eq("已报送"));
+		Junction junction = RestrictionsFactoryUtil.disjunction();
+		junction.add(PropertyFactoryUtil.forName("zbfgx").like("%CZ"));
+		junction.add(PropertyFactoryUtil.forName("zbfgx").like("%VZ"));
+		junction.add(PropertyFactoryUtil.forName("zbfgx").like("%WZ"));
+		dynamicQuery.add(junction);
 		return dynamicQuery;
 	}
 }

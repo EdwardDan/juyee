@@ -26,6 +26,7 @@
 		<column name="bgzt" type="String" /><!-- 变更状态 -->
 		<column name="cbfs" type="String" /><!-- 承包方式 -->
 		<column name="htzt" type="String" /><!-- 合同状态 -->
+		<column name="zfbgx" type="String" /><!-- 总分包关系 -->
 		<!-- Order -->
 
 
