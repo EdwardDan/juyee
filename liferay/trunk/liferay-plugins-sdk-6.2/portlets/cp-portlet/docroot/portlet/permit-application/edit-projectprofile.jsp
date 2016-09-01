@@ -26,9 +26,14 @@ tr.body td.content {
 <%
 	String contractId = ParamUtil.getString(request, "bjbh");
 	System.out.println("================" + contractId);
-	Long permitId = ParamUtil.getLong(request,"permitId");
-	request.setAttribute("projectProfile", ProjectProfileLocalServiceUtil.getProjectProfile(permitId));
-	System.out.println("permitId=="+permitId);
+	
+		Long permitId = ParamUtil.getLong(request,"permitId");
+		ProjectProfile projectProfile = null;
+	if(permitId!=0){
+		 projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
+		request.setAttribute("projectProfile", ProjectProfileLocalServiceUtil.getProjectProfile(permitId));
+	}
+	
 %>
 <portlet:renderURL var="viewURL" />
 <portlet:actionURL var="saveProjectProfileURL" name="saveProjectProfile">
@@ -60,14 +65,11 @@ tr.body td.content {
 					label="" type="text" style="width:50%" value="" readonly="true">
 				</aui:input></td>
 		</tr>
-	 	<%
-					ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
-				%> 
 		<tr class="body">
 			<td class="title">工程名称</td>
 			<td class="content" colspan="3">
 			<aui:input name="gcmc"
-					label="" type="text" style="width:60%" value="<%=projectProfile.getGcmc() %>">
+					label="" type="text" style="width:60%" value="">
 				</aui:input>(本次申请施工许可名称)</td>
 		</tr>
 		<tr class="body">
