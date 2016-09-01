@@ -92,7 +92,7 @@ public class ContractLocalServiceImpl extends ContractLocalServiceBaseImpl {
 			dynamicQuery.add(PropertyFactoryUtil.forName("htlx").like("%" + htlx + "%"));
 		}
 		if (!Validator.isBlank(htxxbsbh)) {
-			dynamicQuery.add(PropertyFactoryUtil.forName("htxxbsbh").like("%" + htxxbsbh + "%"));
+			dynamicQuery.add(PropertyFactoryUtil.forName("contractId").like("%" + htxxbsbh + "%"));
 		}
 		return dynamicQuery;
 	}
