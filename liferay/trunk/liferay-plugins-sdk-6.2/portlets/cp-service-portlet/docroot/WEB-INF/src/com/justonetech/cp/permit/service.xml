@@ -22,7 +22,7 @@
 		<!-- Business fields -->
 		<column name="zzjgdm" type="String" /><!-- 组织机构代码 -->
 		<column name="bjbh" type="String" /><!-- 报建编号 -->
-		
+		<column name="htxxbsbh" type="String" /><!-- 合同信息报送编号 -->
 		<column name="wssqbh" type="String" /><!-- 网上申请编号 -->
 		<column name="sqbz" type="int" /><!-- 申请步骤 -->
 		<column name="sqzt" type="String" /><!-- 申请状态 -->
@@ -45,7 +45,24 @@
 		<!-- Audit fields -->
 
 		<!-- Business fields -->
+		<column name="bjbh" type="String" /><!-- 报建编号 -->
+		<column name="jsdwmc" type="String" /><!-- 建设单位名称 -->
+		<column name="jsdwxz" type="String" /><!-- 建设单位性质 -->
+		<column name="jsdwdz" type="String" /><!-- 建设单位地址 -->
 		<column name="gcmc" type="String" /><!-- 工程名称 -->
+		<column name="jsdd" type="String" /><!-- 建设地点 -->
+		<column name="jsgcgm" type="String" /><!-- 建设工程规模 -->
+		<column name="fwjzmc" type="String" /><!-- 房屋建筑面积（平方米） -->
+		<column name="htjg" type="String" /><!-- 合同价格（万元） -->
+		<column name="htgq" type="int" /><!-- 合同工期（日历天） -->
+		<column name="fddbr" type="String" /><!-- 法定代表人 -->
+		<column name="jsdwlxr" type="String" /><!-- 建设单位联系电话 -->
+		<column name="jsdwlxr" type="String" /><!-- 建设单位联系人 -->
+		<column name="jsdwlxr" type="String" /><!-- 联系人手机号 -->
+		<column name="jsydpzwjhfdccqzbh" type="String" /><!-- 建设用地批准文件或房地产产权证编号 -->
+		<column name="jsgcghxkzbh" type="String" /><!-- 建设工程规划许可证编号 -->
+		<column name="xckgqk" type="String" /><!--现场开工情况 -->
+		
 		<!-- Order -->
 
 		<!-- Finder methods -->
