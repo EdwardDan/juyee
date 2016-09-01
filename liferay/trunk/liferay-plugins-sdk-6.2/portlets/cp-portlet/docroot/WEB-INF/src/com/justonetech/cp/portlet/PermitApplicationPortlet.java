@@ -10,16 +10,11 @@ import javax.portlet.RenderResponse;
 
 import com.justonetech.cp.contract.model.Contract;
 import com.justonetech.cp.contract.service.ContractLocalServiceUtil;
-import com.justonetech.cp.permit.model.ParticipationUnit;
 import com.justonetech.cp.permit.model.Permit;
-import com.justonetech.cp.permit.service.ParticipationUnitLocalServiceUtil;
-import com.justonetech.cp.permit.service.PermitLocalServiceUtil;
-import com.justonetech.cp.project.model.Project;
-import com.justonetech.cp.project.service.ProjectLocalServiceUtil;
-import com.liferay.portal.kernel.dao.orm.QueryUtil;
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
@@ -33,22 +28,26 @@ public class PermitApplicationPortlet extends MVCPortlet {
 
 		String mvcPath = ParamUtil.getString(renderRequest, "mvcPath");
 		if (Validator.equals(mvcPath, "/portlet/permit-application/select-contract.jsp")) {
-			String bjbh = ParamUtil.getString(renderRequest, "bjbh");
-			String bdh = ParamUtil.getString(renderRequest, "bdh");
-			String htmc = ParamUtil.getString(renderRequest, "htmc");
-			String zzjgdm = ParamUtil.getString(renderRequest, "zzjgdm");
-			List<Contract> YbssgzbContracts = new ArrayList<Contract>();
-			int YbssgzbContractsCount = 0;
+			String bjbh = ParamUtil.getString(renderRequest, "bjbh","");
+			String bdh = ParamUtil.getString(renderRequest, "bdh","");
+			String htmc = ParamUtil.getString(renderRequest, "htmc","");
+			String zzjgdm = ParamUtil.getString(renderRequest, "zzjgdm","");
+			renderRequest.setAttribute("bjbh", bjbh);
+			renderRequest.setAttribute("bdh", bdh);
+			renderRequest.setAttribute("htmc", htmc);
+			renderRequest.setAttribute("zzjgdm", zzjgdm);
 			
-			try {
-				YbssgzbContracts = ContractLocalServiceUtil.getYbssgzbContracts(zzjgdm,bjbh,bdh,htmc, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
-				YbssgzbContractsCount = ContractLocalServiceUtil.getContractsCount();
-			} catch (SystemException e) {
-				e.printStackTrace();
-			}
-			
-			renderRequest.setAttribute("Ybssgzbcontracts", YbssgzbContracts);
-			renderRequest.setAttribute("YbssgzbContractsCount", YbssgzbContractsCount);
+			List<Contract> ybssgzbContracts = new ArrayList<Contract>();
+			int ybssgzbContractsCount = 0;
+			int defaultDelta = GetterUtil.getInteger(PropsUtil.get(PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA));
+			int delta = ParamUtil.getInteger(renderRequest, "delta", defaultDelta);
+			int cur = ParamUtil.getInteger(renderRequest, "cur", 1);
+			int start = delta * (cur - 1);
+			int end = delta * cur;
+			ybssgzbContracts = ContractLocalServiceUtil.getYbssgzbContracts(zzjgdm,bjbh,bdh,htmc,start, end);
+			ybssgzbContractsCount = ContractLocalServiceUtil.getYbssgzbContractsCount(zzjgdm, bjbh, bdh, htmc);
+			renderRequest.setAttribute("ybssgzbContracts", ybssgzbContracts);
+			renderRequest.setAttribute("ybssgzbContractsCount", ybssgzbContractsCount);
 		} else if (Validator.equals(mvcPath, "/portlet/permit-application/edit-permit.jsp")) {
 
 			// String projectId = ParamUtil.getString(renderRequest,
