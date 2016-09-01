@@ -52,7 +52,7 @@
 		<column name="gcmc" type="String" /><!-- 工程名称 -->
 		<column name="jsdd" type="String" /><!-- 建设地点 -->
 		<column name="jsgcgm" type="String" /><!-- 建设工程规模 -->
-		<column name="fwjzmc" type="String" /><!-- 房屋建筑面积（平方米） -->
+		<column name="fwjzmj" type="String" /><!-- 房屋建筑面积（平方米） -->
 		<column name="htjg" type="String" /><!-- 合同价格（万元） -->
 		<column name="htgq" type="int" /><!-- 合同工期（日历天） -->
 		<column name="fddbr" type="String" /><!-- 法定代表人 -->
