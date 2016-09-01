@@ -66,8 +66,12 @@ public class PermitApplicationPortlet extends MVCPortlet {
 			// Project project = null;
 			// Contract contract = null;
 			// Permit permit = null;
+			String bjbh = ParamUtil.getString(renderRequest, "bjbh");
+			Long permitId = ParamUtil.getLong(renderRequest, "permitId");
 			int sqbz = ParamUtil.getInteger(renderRequest, "sqbz", 1);
 			renderRequest.setAttribute("sqbz", sqbz);
+			renderRequest.setAttribute("bjbh", bjbh);
+			renderRequest.setAttribute("permitId", permitId);
 			// if(sqbz==1){
 			//
 			// }else if(sqbz==2){
