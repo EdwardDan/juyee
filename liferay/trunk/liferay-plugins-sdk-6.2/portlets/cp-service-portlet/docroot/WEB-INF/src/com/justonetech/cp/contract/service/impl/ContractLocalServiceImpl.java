@@ -51,10 +51,10 @@ public class ContractLocalServiceImpl extends ContractLocalServiceBaseImpl {
 	private static Log log = LogFactoryUtil.getLog(ContractLocalServiceImpl.class);
 
 	@SuppressWarnings("unchecked")
-	public List<Contract> getContracts(String zzjgdm, String bjbh, String bdh, String xmmc, String htlx, String htxxbsbh, int start, int end) {
+	public List<Contract> getContracts(String zzjgdm, String bjbh, String bdh, String xmmc, String htlb, String contractId, int start, int end) {
 
 		try {
-			return this.dynamicQuery(createDynamicQuery(zzjgdm, bjbh, bdh, xmmc, htlx, htxxbsbh), start, end);
+			return this.dynamicQuery(createDynamicQuery(zzjgdm, bjbh, bdh, xmmc, htlb, contractId), start, end);
 		}
 		catch (SystemException e) {
 			log.info(e.getMessage());
@@ -62,10 +62,10 @@ public class ContractLocalServiceImpl extends ContractLocalServiceBaseImpl {
 		return Collections.emptyList();
 	}
 
-	public int getContractsCount(String zzjgdm, String bjbh, String bdh, String xmmc, String htlx, String htxxbsbh) {
+	public int getContractsCount(String zzjgdm, String bjbh, String bdh, String xmmc, String htlb, String contractId) {
 
 		try {
-			return (int) this.dynamicQueryCount(createDynamicQuery(zzjgdm, bjbh, bdh, xmmc, htlx, htxxbsbh));
+			return (int) this.dynamicQueryCount(createDynamicQuery(zzjgdm, bjbh, bdh, xmmc, htlb, contractId));
 		}
 		catch (SystemException e) {
 			log.info(e.getMessage());
@@ -73,7 +73,7 @@ public class ContractLocalServiceImpl extends ContractLocalServiceBaseImpl {
 		return 0;
 	}
 
-	public DynamicQuery createDynamicQuery(String zzjgdm, String bjbh, String bdh, String xmmc, String htlx, String htxxbsbh) {
+	public DynamicQuery createDynamicQuery(String zzjgdm, String bjbh, String bdh, String xmmc, String htlb, String contractId) {
 
 		DynamicQuery dynamicQuery = this.dynamicQuery();
 		if (!Validator.isBlank(zzjgdm)) {
@@ -88,11 +88,11 @@ public class ContractLocalServiceImpl extends ContractLocalServiceBaseImpl {
 		if (!Validator.isBlank(xmmc)) {
 			dynamicQuery.add(PropertyFactoryUtil.forName("xmmc").like("%" + xmmc + "%"));
 		}
-		if (!Validator.isBlank(htlx)) {
-			dynamicQuery.add(PropertyFactoryUtil.forName("htlx").like("%" + htlx + "%"));
+		if (!Validator.isBlank(htlb)) {
+			dynamicQuery.add(PropertyFactoryUtil.forName("htlb").like("%" + htlb + "%"));
 		}
-		if (!Validator.isBlank(htxxbsbh)) {
-			dynamicQuery.add(PropertyFactoryUtil.forName("contractId").like("%" + htxxbsbh + "%"));
+		if (!Validator.isBlank(contractId)) {
+			dynamicQuery.add(PropertyFactoryUtil.forName("contractId").like("%" + contractId + "%"));
 		}
 		return dynamicQuery;
 	}
