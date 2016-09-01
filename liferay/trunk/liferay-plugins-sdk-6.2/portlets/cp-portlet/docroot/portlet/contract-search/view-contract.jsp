@@ -1,3 +1,4 @@
+<%@page import="com.justonetech.cp.contract.service.ContractLocalServiceUtil"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
     <style type="text/css">
@@ -21,7 +22,7 @@
     </style>
 <%
 	String contractId = ParamUtil.getString(request,"bjbh");
-	System.out.println("================"+contractId);
+	Contract contract = ContractLocalServiceUtil.getContract(contractId);
 %>
 <table border="1" width="100%">
     <tr class="head">
