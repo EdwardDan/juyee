@@ -23,3 +23,5 @@
 
 <%@page import="com.justonetech.cp.util.PortletKeys"%>
 <%@page import="com.justonetech.cp.contract.model.*"%> 
+<%@page import="com.justonetech.cp.permit.model.ProjectProfile"%>
+<%@page import="com.justonetech.cp.permit.service.ProjectProfileLocalServiceUtil"%>
