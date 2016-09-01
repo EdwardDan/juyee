@@ -14,7 +14,17 @@
 
 package com.justonetech.cp.contract.service.impl;
 
+import java.util.Collections;
+import java.util.List;
+
+import com.justonetech.cp.contract.model.Contract;
 import com.justonetech.cp.contract.service.base.ContractLocalServiceBaseImpl;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.Validator;
 
 /**
  * The implementation of the contract local service.
@@ -36,4 +46,52 @@ public class ContractLocalServiceImpl extends ContractLocalServiceBaseImpl {
 	 *
 	 * Never reference this interface directly. Always use {@link com.justonetech.cp.contract.service.ContractLocalServiceUtil} to access the contract local service.
 	 */
+	private static Log log = LogFactoryUtil.getLog(ContractLocalServiceImpl.class);
+
+	@SuppressWarnings("unchecked")
+	public List<Contract> getContracts(String zzjgdm, String bjbh, String bdh, String xmmc, String htlx,String htxxbsbh, int start, int end) {
+
+		try {
+			return this.dynamicQuery(createDynamicQuery(zzjgdm, bjbh, bdh, xmmc, htlx, htxxbsbh), start, end);
+		}
+		catch (SystemException e) {
+			log.info(e.getMessage());
+		}
+		return Collections.emptyList();
+	}
+
+	public int getContractsCount(String zzjgdm, String bjbh, String bdh, String xmmc, String htlx,String htxxbsbh) {
+
+		try {
+			return (int) this.dynamicQueryCount(createDynamicQuery(zzjgdm, bjbh, bdh, xmmc, htlx, htxxbsbh));
+		}
+		catch (SystemException e) {
+			log.info(e.getMessage());
+		}
+		return 0;
+	}
+
+	public DynamicQuery createDynamicQuery(String zzjgdm, String bjbh, String bdh, String xmmc, String htlx,String htxxbsbh) {
+
+		DynamicQuery dynamicQuery = this.dynamicQuery();
+		if (!Validator.isBlank(zzjgdm)) {
+			dynamicQuery.add(PropertyFactoryUtil.forName("zzjgdm").eq(zzjgdm));
+		}
+		if (!Validator.isBlank(bjbh)) {
+			dynamicQuery.add(PropertyFactoryUtil.forName("bjbh").like("%" + bjbh + "%"));
+		}
+		if (!Validator.isBlank(bdh)) {
+			dynamicQuery.add(PropertyFactoryUtil.forName("bdh").like("%" + bdh + "%"));
+		}
+		if (!Validator.isBlank(xmmc)) {
+			dynamicQuery.add(PropertyFactoryUtil.forName("xmmc").like("%" + xmmc + "%"));
+		}
+		if (!Validator.isBlank(htlx)) {
+			dynamicQuery.add(PropertyFactoryUtil.forName("htlx").like("%" + htlx + "%"));
+		}
+		if (!Validator.isBlank(htxxbsbh)) {
+			dynamicQuery.add(PropertyFactoryUtil.forName("htxxbsbh").like("%" + htxxbsbh + "%"));
+		}
+		return dynamicQuery;
+	}
 }
