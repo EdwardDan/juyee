@@ -7,8 +7,9 @@
 	String stepTabsNames = "工程概况,参建单位,单位工程,申请材料";
 	String stepTabsValues = "gcgk,cjdw,dwgc,sqcl";
 %>
-
-当前报建编号：${permit.bjbh}
+当前步骤：${sqbz}
+许可申请ID：${permitId}
+当前报建编号：${bjbh}
 网上申请编号：${permit.wssqbh} 
 项目名称：${projectProfile.xmmc}
 <portlet:renderURL var="editPermitURL">
