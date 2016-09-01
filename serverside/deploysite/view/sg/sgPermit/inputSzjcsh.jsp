@@ -62,6 +62,17 @@
             element.value = 0;
         }
     }
+
+
+    function showYzzpl() {
+        if (document.getElementById("isZftzl").checked) {
+            $("#isZftzl").val("true");
+            document.getElementById("yzzpl").style.display = "";
+        } else {
+            $("#isZftzl").val("false");
+            document.getElementById("yzzpl").style.display = "none";
+        }
+    }
 </script>
 <form:form commandName="bean">
     <form:hidden path="id"/>
@@ -252,6 +263,36 @@
                     <td class="form_label_right">设计单位：</td>
                     <td class="form_content" colspan="3">
                         <form:input path="sjUnitName" cssClass="input_text" cssStyle="width: 96%;"/>
+                    </td>
+                </tr>
+                <tr class="tr_light">
+                    <td colspan="4" class="form_content">
+                        <input type="checkbox" id="isZftzl" name="isZftzl"
+                               <c:if test="${not empty bean.isZftzl}">checked </c:if>
+                               onchange="showYzzpl()">是否政府投资类
+                    </td>
+                </tr>
+                <tr id="yzzpl" <c:if test="${empty bean.isZftzl}">style="display: none" </c:if> class="tr_dark">
+                    <td colspan="4">
+                        <table style="width: 99%;">
+                            <tr>
+                                <td rowspan="4" valign="top">预制装配率</td>
+                                <td>单跨跨径100米以下桥梁工程承台顶面以上构件</td>
+                                <td><form:input path="yzzpl_1" cssClass="input_line_long" cssStyle="width: 50px;"/>%</td>
+                            </tr>
+                            <tr>
+                                <td>隧道工程盾构段</td>
+                                <td><form:input path="yzzpl_2" cssClass="input_line_long" cssStyle="width: 50px;"/>%</td>
+                            </tr>
+                            <tr>
+                                <td>轨道交通工程地下过街通道</td>
+                                <td><form:input path="yzzpl_3" cssClass="input_line_long" cssStyle="width: 50px;"/>%</td>
+                            </tr>
+                            <tr>
+                                <td>水运工程（港口）桩顶面以上构件</td>
+                                <td><form:input path="yzzpl_4" cssClass="input_line_long" cssStyle="width: 50px;"/>%</td>
+                            </tr>
+                        </table>
                     </td>
                 </tr>
                 <tr>

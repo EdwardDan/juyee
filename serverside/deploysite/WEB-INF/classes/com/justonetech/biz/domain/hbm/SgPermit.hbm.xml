@@ -676,6 +676,61 @@
             <meta attribute="ColumnComment">委领导审核日期</meta>
         </property>
 
+        <property
+                name="isZftzl"
+                column="IS_ZFTZL"
+                type="java.lang.Boolean"
+                not-null="false"
+                length="1"
+                >
+            <meta attribute="ColumnName">是否政府投资类</meta>
+            <meta attribute="ColumnComment">是否政府投资类</meta>
+        </property>
+
+        <property
+                name="yzzpl_1"
+                column="YZZPL_1"
+                type="java.lang.String"
+                not-null="false"
+                length="50"
+                >
+            <meta attribute="ColumnName">单跨跨径100米以下桥梁工程承台顶面以上构件</meta>
+            <meta attribute="ColumnComment">单跨跨径100米以下桥梁工程承台顶面以上构件</meta>
+        </property>
+
+        <property
+                name="yzzpl_2"
+                column="YZZPL_2"
+                type="java.lang.String"
+                not-null="false"
+                length="50"
+                >
+            <meta attribute="ColumnName">隧道工程盾构段</meta>
+            <meta attribute="ColumnComment">隧道工程盾构段</meta>
+        </property>
+
+        <property
+                name="yzzpl_3"
+                column="YZZPL_3"
+                type="java.lang.String"
+                not-null="false"
+                length="50"
+                >
+            <meta attribute="ColumnName">轨道交通工程地下过街通道</meta>
+            <meta attribute="ColumnComment">轨道交通工程地下过街通道</meta>
+        </property>
+
+        <property
+                name="yzzpl_4"
+                column="YZZPL_4"
+                type="java.lang.String"
+                not-null="false"
+                length="50"
+                >
+            <meta attribute="ColumnName">水运工程（港口）桩顶面以上构件</meta>
+            <meta attribute="ColumnComment">水运工程（港口）桩顶面以上构件</meta>
+        </property>
+
 		<property
 			name="createTime"
 			column="CREATE_TIME"

@@ -169,6 +169,35 @@
                     <td class="form_label_right">设计单位：</td>
                     <td class="form_content" colspan="3">${bean.sjUnitName}<form:hidden path="sjUnitName"/></td>
                 </tr>
+                <tr class="tr_light">
+                    <td colspan="4" class="form_content">
+                        <input type="checkbox" <c:if test="${not empty bean.isZftzl}">checked </c:if> disabled>是否政府投资类
+                        <form:hidden path="isZftzl"/>
+                    </td>
+                </tr>
+                <tr id="yzzpl" <c:if test="${empty bean.isZftzl}">style="display: none" </c:if> class="tr_dark">
+                    <td colspan="4">
+                        <table style="width: 99%;">
+                            <tr>
+                                <td rowspan="4" valign="top">预制装配率</td>
+                                <td>单跨跨径100米以下桥梁工程承台顶面以上构件</td>
+                                <td>${bean.yzzpl_1}<form:hidden path="yzzpl_1"/>%</td>
+                            </tr>
+                            <tr>
+                                <td>隧道工程盾构段</td>
+                                <td>${bean.yzzpl_2}<form:hidden path="yzzpl_2"/>%</td>
+                            </tr>
+                            <tr>
+                                <td>轨道交通工程地下过街通道</td>
+                                <td>${bean.yzzpl_3}<form:hidden path="yzzpl_3"/>%</td>
+                            </tr>
+                            <tr>
+                                <td>水运工程（港口）桩顶面以上构件</td>
+                                <td>${bean.yzzpl_4}<form:hidden path="yzzpl_4"/>%</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
                 <tr>
                     <td colspan="4">
                         <table cellpadding="0" cellspacing="0" class="table_thin_line" border="1" style="width: 100%;">
