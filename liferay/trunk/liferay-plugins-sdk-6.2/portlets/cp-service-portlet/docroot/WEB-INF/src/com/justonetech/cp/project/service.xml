@@ -11,7 +11,7 @@
 		<!-- Group instance -->
 		<!-- Audit fields -->
 		<!-- Business fields -->
-		<column name="bjrq" type="String" /><!--报建日期 -->
+		<column name="bjrq" type="Date" /><!--报建日期 -->
 		<column name="jsdw" type="String" /><!--建设单位 -->
 		<column name="jsdwxz" type="String" /><!--建设单位性质 -->
 		<column name="jsdwdz" type="String" /><!--建设单位地址 -->
