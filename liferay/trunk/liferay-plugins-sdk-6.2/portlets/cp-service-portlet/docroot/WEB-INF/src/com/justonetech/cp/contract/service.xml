@@ -78,7 +78,7 @@
 		<column name="htj" type="String" /><!-- 合同价（万元） -->
 		<column name="sjf" type="String" /><!-- 设计费（万元） -->
 		<column name="kcf" type="String" /><!-- 勘察费（万元） -->
-		<column name="jazz" type="String" /><!-- 建安造价（万元） -->
+		<column name="jazj" type="String" /><!-- 建安造价（万元） -->
 		<column name="zlje" type="String" /><!-- 暂列金额（万元） -->
 		<column name="zgj" type="String" /><!-- 暂估价（万元） -->
 		<column name="aqfhwmsgcsf" type="String" /><!-- 安全防护文明施工措施费（万元） -->
