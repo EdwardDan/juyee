@@ -49,6 +49,7 @@
 					<portlet:param name="mvcPath" value="${contextPath }/edit-permit.jsp" />
 					<portlet:param name="contractId" value="${contract.contractId}" />
 					<portlet:param name="bjbh" value="${contract.bjbh}" />
+					<portlet:param name="bdh" value="${contract.bdh }"/>
 				</portlet:renderURL>
 				<liferay-ui:search-container-column-text property="htmc" name="合同名称" href="${editPermitURL}" />
 				<liferay-ui:search-container-column-text name="操作">
