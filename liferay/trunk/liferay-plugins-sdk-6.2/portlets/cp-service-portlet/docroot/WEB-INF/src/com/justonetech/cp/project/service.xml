@@ -11,49 +11,156 @@
 		<!-- Group instance -->
 		<!-- Audit fields -->
 		<!-- Business fields -->
-		<column name="zzjgdm" type="String" /><!-- 组织机构代码 -->
-		<column name="bjrq" type="Date" /><!-- 报建日期 -->
-		<column name="wssqbh" type="String" /><!-- 网上申请编号 -->
+		<column name="bjrq" type="String" /><!--报建日期 -->
+		<column name="jsdw" type="String" /><!--建设单位 -->
+		<column name="jsdwxz" type="String" /><!--建设单位性质 -->
+		<column name="jsdwdz" type="String" /><!--建设单位地址 -->
+		<column name="jsdwdh" type="String" /><!--建设单位电话 -->
+		<column name="jsdwfr" type="String" /><!--建设单位法人 -->
+		<column name="jsdwlxr" type="String" /><!--建设单位联系人 -->
+		<column name="jsdwyb" type="String" /><!--建设单位邮编 -->
+		<column name="jsdwzczj" type="String" /><!--建设单位注册资金 -->
 		<column name="xmmc" type="String" /><!--项目名称 -->
-		<column name="bjwcbj" type="String" /><!-- 报建完成标志 -->
-		<column name="jsdwmc" type="String" /><!-- 建设单位名称 -->
-		<column name="bjxmxz" type="String" /><!-- 建设项目属性 -->
-		<column name="szqx" type="String" /><!-- 所在区县 -->
-		<column name="szqy" type="String" /><!-- 所在区域 -->
-		<column name="jsdd" type="String" /><!-- 建设地点 -->
-		<column name="jsdwbgdz" type="String" /><!-- 建设单位办公地址 -->
-		<column name="yzbm" type="String" /><!-- 邮政编码 -->
-		<column name="gczhh" type="String" /><!-- 工程账户号 -->
-		<column name="jsdwfddbr" type="String" /><!-- 建设单位法定代表人 -->
-		<column name="jsdwlxr" type="String" /><!-- 建设单位联系人 -->
-		<column name="lxrsj" type="String" /><!-- 联系人手机 -->
-		<column name="jsdwzczj" type="String" /><!-- 建设单位注册资金（万元） -->
-		<column name="jsdwxz" type="String" /><!-- 建设单位性质 -->
-		<column name="jsxz" type="String" /><!-- 建设性质 -->
-		<column name="lxhpzwjmc" type="String" /><!-- 立项或批准文件名称 -->
-		<column name="lxhpzwjwh" type="String" /><!-- 立项或批准文件文号 -->
-		<column name="fwdw" type="String" /><!-- 发文单位 -->
-		<column name="fwrq" type="String" /><!-- 发文日期 -->
-		<column name="lxjb" type="String" /><!-- 立项级别 -->
-		<column name="lxfl" type="String" /><!-- 立项分类 -->
-
-		<column name="ztz" type="String" /><!-- 总投资 -->
-		<column name="sbtz" type="String" /><!-- 设备投资 -->
-		<column name="jsgcgm" type="String" /><!-- 建设工程规模 -->
-
-		<column name="xmfl" type="String" /><!-- 项目分类 -->
-
-		<column name="sfgyzbkg" type="String" /><!-- 是否国有资本控股 -->
-		<column name="sfzslx" type="String" /><!-- 是否正式立项 -->
-
-		<column name="sfzdgcxm" type="String" /><!-- 是否重大工程项目 -->
-		<column name="jsbbh" type="String" /><!-- 建设部编号 -->
-		<column name="bz" type="String" /><!-- 备注 -->
-		<column name="sfdcfjmsq" type="String" /><!-- 是否地处风景名胜区 -->
-		<column name="sfyjngznr" type="String" /><!-- 如为既有建筑改造是否有节能改造内容 -->
-		<column name="sfymfss" type="String" /><!-- 是否有民防设施 -->
-
-		<column name="sfsblsjzbs" type="String" /><!-- 是否申报绿色建筑标识 -->
+		<column name="jsdd" type="String" /><!--建设地点 -->
+		<column name="lxwj" type="String" /><!--立项文件 -->
+		<column name="lxwh" type="String" /><!--立项文号 -->
+		<column name="lxjb" type="String" /><!--立项级别 -->
+		<column name="pzjg" type="String" /><!--批准机关 -->
+		<column name="pzrq" type="String" /><!--批准日期 -->
+		<column name="ztz" type="String" /><!--总投资 -->
+		<column name="sbtz" type="String" /><!--设备投资 -->
+		<column name="jsxz" type="String" /><!--建设性质 -->
+		<column name="jsgm" type="String" /><!--建设规模 -->
+		<column name="zmj" type="String" /><!--总面积 -->
+		<column name="kgrq" type="String" /><!--开工日期 -->
+		<column name="xmxz" type="String" /><!--项目性质 -->
+		<column name="cjqk" type="String" /><!--筹建情况 -->
+		<column name="smqk" type="String" /><!--说明情况 -->
+		<column name="bjbz" type="String" /><!--报建备注 -->
+		<column name="fbzgsc" type="String" /><!--发包资格审查 -->
+		<column name="cardid" type="String" /><!--项目卡号 -->
+		<column name="zjlygc_1" type="String" /><!--资金来源：国家投资 -->
+		<column name="zjlygc_2" type="String" /><!--资金来源：国家融资 -->
+		<column name="zjlygc_3" type="String" /><!--资金来源：国际组织外国政府资金 -->
+		<column name="zjlygc_4" type="String" /><!--资金来源：集体经济投资 -->
+		<column name="zjlygc_5" type="String" /><!--资金来源：外商投资 -->
+		<column name="zjlygc_6" type="String" /><!--资金来源：私民营投资 -->
+		<column name="zjlygc_7" type="String" /><!--资金来源：自有资金 -->
+		<column name="zjlygc_8" type="String" /><!--资金来源：其他 -->
+		<column name="zjlygc_9" type="String" /><!--资金来源：港、澳、台投资 -->
+		<column name="jgxs" type="String" /><!--结构形式 -->
+		<column name="xmfl" type="String" /><!--项目分类 -->
+		<column name="jzmq" type="String" /><!--建筑幕墙 -->
+		<column name="ywdt" type="String" /><!--电梯 -->
+		<column name="dxsck" type="String" /><!--地下室车库 -->
+		<column name="bhjz" type="String" /><!--保护建筑 -->
+		<column name="fjms" type="String" /><!--风景名胜 -->
+		<column name="sfsbxm" type="String" /><!--是否世博项目 -->
+		<column name="hzyj" type="String" /><!--核准意见 -->
+		<column name="bj_sx" type="String" /><!--报建项目属性 -->
+		<column name="bj_webid" type="String" /><!--网上申报编号 -->
+		<column name="bjwcbj" type="String" /><!--报建完成标志 -->
+		<column name="bmdm" type="String" /><!--部门代码 -->
+		<column name="jbr" type="String" /><!--经办人 -->
+		<column name="shr" type="String" /><!--审核人 -->
+		<column name="shbmdm" type="String" /><!--审核部门代码 -->
+		<column name="wcbjsj" type="String" /><!--完成报建时间 -->
+		<column name="old_bjbh" type="String" /><!--旧报建编号 -->
+		<column name="sffb" type="String" /><!--是否正式立项 -->
+		<column name="timeflag" type="String" /><!--插入时点 -->
+		<column name="jbrdm" type="String" /><!--经办人代码 -->
+		<column name="shrdm" type="String" /><!--审核人代码 -->
+		<column name="jsbh" type="String" /><!--建设部编号 -->
+		<column name="needSbjl" type="String" /><!--是否需要设备监理 -->
+		<column name="wcSbjl" type="String" /><!--设备监理是否完成 -->
+		<column name="sfgyzbkg" type="String" /><!--是否国有资本控股 -->
+		<column name="jyzxfbxx" type="String" /><!--仅在交易中心发布信息 -->
+		<column name="sgGkzbfb" type="String" /><!--先发布施工公开信息 -->
+		<column name="sgjlGkzbfb" type="String" /><!--先发布监理公开信息 -->
+		<column name="fxglxm" type="String" /><!--是否风险管理项目 -->
+		<column name="fxglxmJbr" type="String" /><!--经办人(风险管理项目) -->
+		<column name="fxglxmJbrdm" type="String" /><!--经办人代码(风险管理项目) -->
+		<column name="fxglxmJbrq" type="String" /><!--经办日期(风险管理项目) -->
+		<column name="jsdwjgdm" type="String" /><!--建设单位机构代码 -->
+		<column name="szqy" type="String" /><!--所在区域 -->
+		<column name="ywxjfwjz" type="String" /><!--有无新建房屋建筑 -->
+		<column name="ywgbfwjg" type="String" /><!--有无改变原房屋结构（jsxz装饰装修专用） -->
+		<column name="gczh" type="String" /><!--工程账户 -->
+		<column name="zdcyyn" type="String" /><!--重点产业项目 -->
+		<column name="lxfl" type="String" /><!--立项分类 -->
+		<column name="ms1" type="String" /><!-- -->
+		<column name="ms2" type="String" /><!-- -->
+		<column name="ms3" type="String" /><!-- -->
+		<column name="zdxmyn" type="String" /><!--重大项目 -->
+		<column name="dxjzsq" type="String" /><!--大型居住社区项目 -->
+		<column name="ywjzxzz" type="String" /><!--有无精装修住宅（仅对住宅） -->
+		<column name="fgwjhm" type="String" /><!--发改委交换码 -->
+		<column name="zzbl" type="String" /><!--全装修住宅比例 -->
+		<column name="ChangeTime" type="String" /><!--行数据变动时间 -->
+		<column name="PD_SW" type="String" /><!--浦东项目所属南区北区 -->
+		<column name="bmpfrq" type="String" /><!--保密批复日期 -->
+		<column name="bmpfwh" type="String" /><!--保密批复文号 -->
+		<column name="bmpfwj" type="String" /><!--保密批复文件 -->
+		<column name="CertificateKey" type="String" /><!--数字证书唯一标识 -->
+		<column name="dsjzmj" type="String" /><!--地上建筑面积 -->
+		<column name="dxjzmj" type="String" /><!--地下建筑面积 -->
+		<column name="gdzctzbh" type="String" /><!--项目审批、核准、备案文件上的项目代码 -->
+		<column name="jsxz_2011" type="String" /><!--建设性质备份字段 -->
+		<column name="lhmj" type="String" /><!--绿化面积 -->
+		<column name="lxjb_2011" type="String" /><!--立项级别备份字段 -->
+		<column name="mfmj" type="String" /><!--民防面积 -->
+		<column name="other_qx" type="String" /><!--跨区或市境外的地区 -->
+		<column name="ProjectSlyj" type="String" /><!--受理意见 -->
+		<column name="qxbz" type="String" /><!--区县备注 -->
+		<column name="sfcysjkfq" type="String" /><!--是否处于市级开发区内 -->
+		<column name="sfmfss" type="String" /><!--是否民防设施 -->
+		<column name="szqx" type="String" /><!--所在区县 -->
+		<column name="tsgs" type="String" /><!--项目归属(高桥石化:gqsh,金山石化:jssh,宝钢:bg,上海电力:shdl） -->
+		<column name="xmfl_2011" type="String" /><!--项目分类(用于关联dict_zbb_xmfl_2011) -->
+		<column name="xsjpw" type="String" /><!--先设计批文 -->
+		<column name="xsjpzdw" type="String" /><!--先设计批准单位 -->
+		<column name="zjlygc_10" type="String" /><!--各级政府财政资金投资 -->
+		<column name="zjlygc_11" type="String" /><!--国有企业资金投资 -->
+		<column name="zjlygc_xs_1" type="String" /><!--市级政府财力补贴资金 -->
+		<column name="zjlygc_xs_2" type="String" /><!--维修资金 -->
+		<column name="zjlygc_xs_3" type="String" /><!--区级政府财力补贴资金 -->
+		<column name="zjlygc_xs_4" type="String" /><!--业主自筹资金 -->
+		<column name="zjlygc_1_2" type="String" /><!--国有资金总计 -->
+		<column name="zjlygc_1_2_4" type="String" /><!--国有集体资金总计 -->
+		<column name="ywptlh" type="String" /><!--有无配套绿化 -->
+		<column name="gyyqbh" type="String" /><!--产业项目所属工业园区 -->
+		<column name="sfcyxm" type="String" /><!--是否产业项目 -->
+		<column name="zbxmfzrxm" type="String" /><!-- -->
+		<column name="zbxmfzrzjh" type="String" /><!-- -->
+		<column name="zbxmfzrzjlx" type="String" /><!-- -->
+		<column name="zbxmfzrqrsj" type="String" /><!-- -->
+		<column name="sflsjzbs" type="String" /><!--是否申报绿色建筑标示 -->
+		<column name="sjbs" type="String" /><!--设计标示星级标准(1表示1星2表示2星3表示3星) -->
+		<column name="yxbs" type="String" /><!--运行标示星级标准(1表示1星2表示2星3表示3星) -->
+		<column name="sfyjngz" type="String" /><!--是否有节能改造内容 -->
+		<column name="sfsszpjz" type="String" /><!--是否实施装配建筑 -->
+		<column name="zczxjgdmz" type="String" /><!-- -->
+		<column name="ischeckxmbm" type="String" /><!--是否验证项目编码 -->
+		<column name="zddtmj" type="String" /><!-- -->
+		<column name="sjjdYn" type="String" /><!-- -->
+		<column name="sgjdYn" type="String" /><!-- -->
+		<column name="yxjdYn" type="String" /><!-- -->
+		<column name="tdhtqdbh" type="String" /><!-- -->
+		<column name="tdhtqdrq" type="String" /><!-- -->
+		<column name="dkbh" type="String" /><!-- -->
+		<column name="zpsjzlsbl" type="String" /><!-- -->
+		<column name="zpsjzmj" type="String" /><!-- -->
+		<column name="dwyzzpl" type="String" /><!-- -->
+		<column name="zdh" type="String" /><!-- -->
+		<column name="sfgdcg" type="String" /><!-- -->
+		<column name="ptlhmj" type="String" /><!-- -->
+		<column name="bimjszxfy" type="String" /><!-- -->
+		<column name="bz" type="String" /><!-- -->
+		<column name="sfzcxm" type="String" /><!-- -->
+		<column name="zcxmbm" type="String" /><!-- -->
+		<column name="sfzmqxm" type="String" /><!-- -->
+		<column name="printPDFTime" type="String" /><!-- -->
+		<column name="isBgPrint" type="String" /><!-- -->
 
 
 
@@ -63,8 +170,5 @@
 			<order-column name="bjrq" order-by="desc"></order-column><!-- 报建日期逆序 -->
 		</order>
 		<!-- Finder methods -->
-		<finder name="Zzjgdm" return-type="Collection">
-			<finder-column name="zzjgdm"></finder-column>
-		</finder>
 	</entity>
 </service-builder>
