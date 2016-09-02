@@ -103,11 +103,11 @@
 
 		<!-- Business fields -->
 		<column name="permitId" type="String" /><!-- 施工许可Id -->
-		<column name="bjbh" type="int" /><!-- 报建编号 -->
-		<column name="gclx" type="int" /><!-- 工程类型 -->
-		<column name="gcbh" type="int" /><!-- 工程编号 -->
-		<column name="gcmc" type="int" /><!-- 工程名称 -->
-		<column name="jsnr" type="int" /><!-- 建设内容 -->
+		<column name="bjbh" type="String" /><!-- 报建编号 -->
+		<column name="gclx" type="String" /><!-- 工程类型 -->
+		<column name="gcbh" type="String" /><!-- 工程编号 -->
+		<column name="gcmc" type="String" /><!-- 工程名称 -->
+		<column name="jsnr" type="String" /><!-- 建设内容 -->
 		<!-- Order -->
 		<order>
 			<order-column name="gcbh" order-by="asc"></order-column>
