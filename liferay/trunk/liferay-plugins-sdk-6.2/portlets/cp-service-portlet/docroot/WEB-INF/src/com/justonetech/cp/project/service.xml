@@ -7,7 +7,7 @@
 	<!-- 报建项目 -->
 	<entity name="Project" local-service="true" remote-service="false">
 		<!-- PK fields -->
-		<column name="projectId" type="String" primary="true" /><!-- 报建编号 -->
+		<column name="bjbh" type="String" primary="true" /><!-- 报建编号 -->
 		<!-- Group instance -->
 		<!-- Audit fields -->
 		<!-- Business fields -->
