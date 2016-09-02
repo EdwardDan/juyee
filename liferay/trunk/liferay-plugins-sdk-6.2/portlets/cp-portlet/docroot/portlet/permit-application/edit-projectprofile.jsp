@@ -26,7 +26,6 @@ tr.body td.content {
 <%
 	String bjbh = ParamUtil.getString(request, "bjbh");
 	Long permitId = ParamUtil.getLong(request, "permitId");
-	System.out.println("bjbh=" + bjbh + " permitId=" + permitId);
 	ProjectProfile projectProfile = null;
 	Project project = null;
 	if (permitId != 0) {
@@ -50,6 +49,7 @@ tr.body td.content {
 	<aui:input name="permitId" type="hidden" value="<%=permitId%>" />
 	<aui:input name="bjbh" type="hidden" value="<%=bjbh%>" />
 	<aui:input name="bdh" type="hidden" value="${bdh }" />
+	<aui:input name="sqbz" type="hidden" value="2" />
 	<table border="1" width="100%">
 		<tr class="body">
 			<td class="title">建设单位名称</td>
