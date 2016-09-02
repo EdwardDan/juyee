@@ -179,6 +179,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		Long permitId =ParamUtil.getLong(request, "permitId");
 		String bjbh = ParamUtil.getString(request, "bjbh");
 		String bdh = ParamUtil.getString(request, "bdh");
+		int sqbz = ParamUtil.getInteger(request, "sqbz");
 		ProjectProfile projectProfile= null;
 		Permit permit=null;
 		if(permitId!=0){
@@ -206,7 +207,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		projectProfile.setXckgqk(xckgqk);
 		ProjectProfileLocalServiceUtil.updateProjectProfile(projectProfile);
 		permit.setBjbh(bjbh);
-		permit.setSqbz(2);
+		permit.setSqbz(sqbz);
 		permit.setBdh(bdh);
 		PermitLocalServiceUtil.updatePermit(permit);
 	}
