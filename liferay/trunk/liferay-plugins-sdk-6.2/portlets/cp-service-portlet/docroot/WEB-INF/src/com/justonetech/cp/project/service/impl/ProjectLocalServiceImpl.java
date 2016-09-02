@@ -80,7 +80,7 @@ public class ProjectLocalServiceImpl extends ProjectLocalServiceBaseImpl {
 			dynamicQuery.add(PropertyFactoryUtil.forName("jsdwjgdm").eq(zzjgdm));
 		}
 		if (!Validator.isBlank(bjbh)) {
-			dynamicQuery.add(PropertyFactoryUtil.forName("projectId").like("%" + bjbh + "%"));
+			dynamicQuery.add(PropertyFactoryUtil.forName("bjbh").like("%" + bjbh + "%"));
 		}
 		if (!Validator.isBlank(wssqbh)) {
 			dynamicQuery.add(PropertyFactoryUtil.forName("bj_webid").like("%" + wssqbh + "%"));
