@@ -16,6 +16,8 @@ import com.justonetech.cp.permit.model.Permit;
 import com.justonetech.cp.permit.model.ProjectProfile;
 import com.justonetech.cp.permit.service.PermitLocalServiceUtil;
 import com.justonetech.cp.permit.service.ProjectProfileLocalServiceUtil;
+import com.justonetech.cp.project.model.Project;
+import com.justonetech.cp.project.service.ProjectLocalServiceUtil;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -68,10 +70,38 @@ public class PermitApplicationPortlet extends MVCPortlet {
 			// Permit permit = null;
 			String bjbh = ParamUtil.getString(renderRequest, "bjbh");
 			Long permitId = ParamUtil.getLong(renderRequest, "permitId");
+			String bdh=ParamUtil.getString(renderRequest,"bdh");
+			String contractId=ParamUtil.getString(renderRequest, "contractId");
 			int sqbz = ParamUtil.getInteger(renderRequest, "sqbz", 1);
 			renderRequest.setAttribute("sqbz", sqbz);
 			renderRequest.setAttribute("bjbh", bjbh);
 			renderRequest.setAttribute("permitId", permitId);
+			renderRequest.setAttribute("bdh", bdh);
+			Project project=null;
+			ProjectProfile projectProfile=null;
+			Contract contract=null;
+			try {
+				if(permitId!=0){
+					projectProfile=ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
+					renderRequest.setAttribute("xmmc",projectProfile.getGcmc());
+				}else{
+					project=ProjectLocalServiceUtil.getProject(bjbh);
+					renderRequest.setAttribute("xmmc",project.getXmmc());
+				}
+				if(Validator.isNotNull(contractId)){
+					contract=ContractLocalServiceUtil.getContract(contractId);
+					renderRequest.setAttribute("contract", contract);
+				}
+			} catch (PortalException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SystemException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			
 			// if(sqbz==1){
 			//
 			// }else if(sqbz==2){
@@ -109,8 +139,8 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		String wssqbh = ParamUtil.getString(renderRequest, "wssqbh");
 		String gcmc = ParamUtil.getString(renderRequest, "gcmc");
 		String zzjgdm =ParamUtil.getString(renderRequest, "zzjgdm");
-		
-		int delta = ParamUtil.getInteger(renderRequest, "delta", 2);
+		int defaultDelta = GetterUtil.getInteger(PropsUtil.get(PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA));
+		int delta = ParamUtil.getInteger(renderRequest, "delta", defaultDelta);
 		int cur = ParamUtil.getInteger(renderRequest, "cur", 1);
 		int start = delta * (cur - 1);
 		int end = delta * cur;
@@ -146,13 +176,17 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		String jsydpzwjhfdccqzbh= ParamUtil.getString(request, "jsydpzwjhfdccqzbh");
 		String jsgcghxkzbh = ParamUtil.getString(request, "jsgcghxkzbh");
 		String xckgqk = ParamUtil.getString(request, "xckgqk");
-		System.out.println(jsdwmc+"==="+gcmc);
 		Long permitId =ParamUtil.getLong(request, "permitId");
+		String bjbh = ParamUtil.getString(request, "bjbh");
+		String bdh = ParamUtil.getString(request, "bdh");
 		ProjectProfile projectProfile= null;
-		if(Validator.isNotNull(permitId)){
+		Permit permit=null;
+		if(permitId!=0){
 			projectProfile=ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
+			permit=PermitLocalServiceUtil.getPermit(permitId);
 		}else{
 			projectProfile=ProjectProfileLocalServiceUtil.createProjectProfile(CounterLocalServiceUtil.increment());	
+			permit=PermitLocalServiceUtil.createPermit(projectProfile.getPermitId());
 		}
 		projectProfile.setJsdwmc(jsdwmc);
 		projectProfile.setJsdwxz(jsdwxz);
@@ -171,6 +205,10 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		projectProfile.setJsgcghxkzbh(jsgcghxkzbh);
 		projectProfile.setXckgqk(xckgqk);
 		ProjectProfileLocalServiceUtil.updateProjectProfile(projectProfile);
+		permit.setBjbh(bjbh);
+		permit.setSqbz(2);
+		permit.setBdh(bdh);
+		PermitLocalServiceUtil.updatePermit(permit);
 	}
 	
 }
