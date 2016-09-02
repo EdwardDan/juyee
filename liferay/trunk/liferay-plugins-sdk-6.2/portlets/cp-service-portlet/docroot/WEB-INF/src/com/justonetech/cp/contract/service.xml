@@ -45,9 +45,10 @@
 		<column name="fbfs" type="String" /><!-- 发包方式 -->
 		<column name="cbfs" type="String" /><!-- 承包方式 -->
 		<column name="zycbht" type="String" /><!-- 专业承包合同 -->
-		<column name="zygcht" type="String" /><!-- 专业工程类别 -->
+		<column name="zygclb" type="String" /><!-- 专业工程类别 -->
 		<column name="htmc" type="String" /><!-- 合同名称 -->
 		<column name="fbdw" type="String" /><!-- 发包单位 -->
+		<column name="cbdw" type="String" /><!-- 承包单位 -->
 		<column name="sjdw" type="String" /><!-- 设计单位 -->
 		<column name="xmfzr" type="String" /><!-- 项目负责人 -->
 		<column name="xmfzrzjlx" type="String" /><!-- 项目负责人证件类型 -->
