@@ -7,13 +7,17 @@
 	String stepTabsNames = "工程概况,参建单位,单位工程,申请材料";
 	String stepTabsValues = "gcgk,cjdw,dwgc,sqcl";
 %>
-当前步骤：${sqbz}
-许可申请ID：${permitId}
+<%-- 当前步骤：${sqbz}
+标段号：${bdh }
+许可申请ID：${permitId} --%>
 当前报建编号：${bjbh}
-网上申请编号：${permit.wssqbh} 
-项目名称：${projectProfile.xmmc}
+<br/>
+项目名称：${xmmc}
 <portlet:renderURL var="editPermitURL">
 	<portlet:param name="mvcPath" value="${contextPath }/edit-permit.jsp" />
+	<portlet:param name="bjbh" value="${bjbh }"/>
+	<portlet:param name="permitId" value="${permitId }"/>
+	<portlet:param name="bdh" value="${bdh }"/>
 </portlet:renderURL>
 <ul class="nav nav-tabs">
 	<li class="${sqbz eq 1?"active":"" }">
