@@ -19,14 +19,14 @@
 				<tr>
 					<td style="width: 10%; text-align: right">报建编号：</td>
 					<td style="width: 40%;"><aui:input type="text" name="bjbh"
-							id="bjbh" label="" /></td>
+							id="bjbh" label="" cssClass="span12"/></td>
 					<td style="width: 15%; text-align: right">标段号：</td>
 					<td style="width: 35%;"><aui:input type="text" name="bdh"
-							label="" /></td>
+							label="" cssClass="span12"/></td>
 				</tr>
 				<tr>
 					<td style="width: 10%; text-align: right">项目名称：</td>
-					<td colspan="3"><aui:input type="text" name="xmmc" label="" /></td>
+					<td colspan="3"><aui:input type="text" name="xmmc" label="" cssClass="span12"/></td>
 				<tr style="height: 40px;">
 					<td colspan="4" align="center"><aui:button type="submit"
 							value="提交查询"></aui:button></td>
