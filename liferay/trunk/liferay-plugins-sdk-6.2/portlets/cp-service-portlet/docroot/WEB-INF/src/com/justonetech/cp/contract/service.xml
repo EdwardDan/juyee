@@ -8,7 +8,7 @@
 
 		<!-- PK fields -->
 
-		<column name="contractId" type="String" primary="true" /><!-- 合同信息报送编号 -->
+		<column name="contractId" type="String" primary="true" /><!-- 合同信息报送编号/网上申请编号 -->
 
 		<!-- Group instance -->
 
@@ -16,24 +16,84 @@
 
 		<!-- Business fields -->
 		<column name="zzjgdm" type="long" /><!-- 组织机构代码 -->
-		<column name="bjbh" type="String" /><!-- 报建编号 -->
 		<column name="htlb" type="String" /><!-- 合同类别 -->
-		<column name="bdh" type="String" /><!-- 标段号 -->
-		<column name="xmmc" type="String" /><!-- 项目名称 -->
-		<column name="htmc" type="String" /><!-- 合同名称 -->
+		
 		<column name="htbh" type="String" /><!-- 合同编号 -->
 		<column name="zbhtbh" type="String" /><!-- 总包合同编号 -->
 		<column name="fbhtbh" type="String" /><!-- 分包合同编号 -->
 		<column name="htlx" type="String" /><!-- 合同类型 -->
-		<column name="cbfs" type="String" /><!-- 承包方式 -->
 		<column name="htzt" type="String" /><!-- 合同状态 -->
 		<column name="zfbgx" type="String" /><!-- 总分包关系 -->
-		<column name="fbdwmc" type="String" /><!-- 发包单位名称 -->
-		<column name="cbdwmc" type="String" /><!-- 承包包单位名称 -->
 		<column name="bsrq" type="Date" /><!-- 报送日期 -->
 		<column name="slsj" type="Date" /><!-- 受理时间 -->
+		
+		<column name="bjbh" type="String" /><!-- 报建编号 -->
+		<column name="szdq" type="String" /><!-- 所在地区 -->
+		<column name="xmmc" type="String" /><!-- 项目名称  -->
+		<column name="jsdw" type="String" /><!-- 建设单位  -->
+		<column name="jsdd" type="String" /><!-- 建设地点  -->
+		<column name="lxpw" type="String" /><!-- 立项批文  -->
+		<column name="pzwh" type="String" /><!-- 批准文号  -->
+		<column name="dwxz" type="String" /><!-- 单位性质  -->
+		<column name="zjlygc" type="String" /><!-- 资金来源构成  -->
+		<column name="ztz" type="String" /><!-- 总投资（万元）  -->
+		<column name="zjzmj" type="String" /><!-- 总建筑面积（平方米）  -->
+		<column name="xmfl" type="String" /><!-- 项目分类  -->
+		<column name="jzgm" type="String" /><!-- 建筑规模  -->
+		
+		<column name="bdh" type="String" /><!-- 标段号 -->
+		<column name="fbfs" type="String" /><!-- 发包方式 -->
+		<column name="cbfs" type="String" /><!-- 承包方式 -->
+		<column name="zycbht" type="String" /><!-- 专业承包合同 -->
+		<column name="zygcht" type="String" /><!-- 专业工程类别 -->
+		<column name="htmc" type="String" /><!-- 合同名称 -->
+		<column name="fbdw" type="String" /><!-- 发包单位 -->
+		<column name="szdw" type="String" /><!-- 设计单位 -->
+		<column name="xmfzr" type="String" /><!-- 项目负责人 -->
+		<column name="xmfzrzjlx" type="String" /><!-- 项目负责人证件类型 -->
+		<column name="xmfzrzjh" type="String" /><!-- 项目负责人证件号 -->
+		<column name="szfzr" type="String" /><!-- 设计负责人 -->
+		<column name="sjfzrzjlx" type="String" /><!-- 设计负责人证件类型 -->
+		<column name="sjfzrzjh" type="String" /><!-- 设计负责人证件号 -->
+		<column name="kcdwmc" type="String" /><!-- 勘察单位名称 -->
+		<column name="kcfzr" type="String" /><!-- 勘察负责人 -->
+		<column name="kcfzrzjlx" type="String" /><!-- 勘察负责人证件类型 -->
+		<column name="kcfzrzjh" type="String" /><!-- 勘察负责人证件号 -->
+		<column name="sgdwmc" type="String" /><!-- 施工单位名称 -->
+		<column name="sgfzr" type="String" /><!-- 施工负责人 -->
+		<column name="sgfzrzjlx" type="String" /><!-- 施工负责人证件类型 -->
+		<column name="sgfzrzjh" type="String" /><!-- 施工负责人证件号 -->
+		<column name="xmlb" type="String" /><!-- 项目类别 -->
+		<column name="gclb" type="String" /><!-- 工程类别 -->
+		<column name="gcgm" type="String" /><!-- 工程规模 -->
+		<column name="sjxmlb" type="String" /><!-- 设计项目类别 -->
+		<column name="sjgclb" type="String" /><!-- 设计工程类别 -->
+		<column name="sjgcgm" type="String" /><!-- 设计工程规模 -->
+		<column name="sgxmlb" type="String" /><!-- 施工项目类别 -->
+		<column name="sggclb" type="String" /><!-- 施工工程类别 -->
+		<column name="sggcgm" type="String" /><!-- 施工工程规模 -->
+		<column name="kgrq" type="Date" /><!-- 开工日期 -->
+		<column name="jgrq" type="Date" /><!-- 竣工日期 -->
+		<column name="jsfs" type="String" /><!-- 结算方式 -->
+		<column name="htj" type="String" /><!-- 合同价（万元） -->
+		<column name="sjf" type="String" /><!-- 设计费（万元） -->
+		<column name="kcf" type="String" /><!-- 勘察费（万元） -->
+		<column name="jazz" type="String" /><!-- 建安造价（万元） -->
+		<column name="zlje" type="String" /><!-- 暂列金额（万元） -->
+		<column name="zgj" type="String" /><!-- 暂估价（万元） -->
+		<column name="aqfhwmsgcsf" type="String" /><!-- 安全防护文明施工措施费（万元） -->
+		<column name="htqdrq" type="Date" /><!-- 合同签订日期 -->
+		<column name="htqzrq" type="String" /><!-- 合同起止日期 -->
+		<column name="cbnr" type="String" /><!-- 承包内容 -->
+		<column name="cyhtsfwb" type="String" /><!-- 采用合同示范文本 -->
+		<column name="fzjqtsm" type="String" /><!-- 附注及其他说明 -->
+		<column name="sfzx" type="String" /><!-- 是否注销 -->
+		<column name="zxsj" type="Date" /><!-- 注销时间 -->
+		<column name="zxsm" type="Date" /><!-- 注销说明 -->
 		<!-- Order -->
-
+		<order>
+			<order-column name="bsrq" order-by="desc"></order-column><!-- 报送日期逆序 -->
+		</order>
 
 		<!-- Finder methods -->
 
