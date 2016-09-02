@@ -2,20 +2,326 @@
 
 <model-hints>
 	<model name="com.justonetech.cp.project.model.Project">
-		<field name="projectId" type="String" />
-		<field name="zzjgdm" type="String" />
-		<field name="bjrq" type="Date" />
-		<field name="bjWebid" type="String" />
-		<field name="xmmc" type="String" />
+		<field name="bjbh" type="String" />
+		<field name="bjrq" type="String" />
+		<field name="jsdw" type="String">
+			<hint name="max-length">100</hint>
+		</field>
+		<field name="jsdwxz" type="String" />
+		<field name="jsdwdz" type="String">
+			<hint name="max-length">200</hint>
+		</field>
+		<field name="jsdwdh" type="String" />
+		<field name="jsdwfr" type="String" />
+		<field name="jsdwlxr" type="String" />
+		<field name="jsdwyb" type="String" />
+		<field name="jsdwzczj" type="String" />
+		<field name="xmmc" type="String">
+			<hint name="max-length">200</hint>
+		</field>
+		<field name="jsdd" type="String">
+			<hint name="max-length">200</hint>
+		</field>
+		<field name="lxwj" type="String">
+			<hint name="max-length">200</hint>
+		</field>
+		<field name="lxwh" type="String">
+			<hint name="max-length">200</hint>
+		</field>
+		<field name="lxjb" type="String" />
+		<field name="pzjg" type="String">
+			<hint name="max-length">100</hint>
+		</field>
+		<field name="pzrq" type="String" />
+		<field name="ztz" type="String" />
+		<field name="sbtz" type="String" />
+		<field name="jsxz" type="String" />
+		<field name="jsgm" type="String">
+			<hint name="max-length">200</hint>
+		</field>
+		<field name="zmj" type="String" />
+		<field name="kgrq" type="String" />
+		<field name="xmxz" type="String" />
+		<field name="cjqk" type="String">
+			<hint name="max-length">200</hint>
+		</field>
+		<field name="smqk" type="String">
+			<hint name="max-length">600</hint>
+		</field>
+		<field name="bjbz" type="String">
+			<hint name="max-length">600</hint>
+		</field>
+		<field name="fbzgsc" type="String" />
+		<field name="cardid" type="String" />
+		<field name="zjlygc_1" type="String" />
+		<field name="zjlygc_2" type="String" />
+		<field name="zjlygc_3" type="String" />
+		<field name="zjlygc_4" type="String" />
+		<field name="zjlygc_5" type="String" />
+		<field name="zjlygc_6" type="String" />
+		<field name="zjlygc_7" type="String" />
+		<field name="zjlygc_8" type="String" />
+		<field name="zjlygc_9" type="String" />
+		<field name="jgxs" type="String" />
+		<field name="xmfl" type="String" />
+		<field name="jzmq" type="String" />
+		<field name="ywdt" type="String" />
+		<field name="dxsck" type="String" />
+		<field name="bhjz" type="String" />
+		<field name="fjms" type="String" />
+		<field name="sfsbxm" type="String" />
+		<field name="hzyj" type="String" />
+		<field name="bj_sx" type="String" />
+		<field name="bj_webid" type="String" />
 		<field name="bjwcbj" type="String" />
-		<field name="jsdwmc" type="String" />
+		<field name="bmdm" type="String" />
+		<field name="jbr" type="String" />
+		<field name="shr" type="String" />
+		<field name="shbmdm" type="String" />
+		<field name="wcbjsj" type="String" />
+		<field name="old_bjbh" type="String" />
+		<field name="sffb" type="String" />
+		<field name="timeflag" type="String" />
+		<field name="jbrdm" type="String" />
+		<field name="shrdm" type="String" />
+		<field name="jsbh" type="String" />
+		<field name="needSbjl" type="String" />
+		<field name="wcSbjl" type="String" />
+		<field name="sfgyzbkg" type="String" />
+		<field name="jyzxfbxx" type="String" />
+		<field name="sgGkzbfb" type="String" />
+		<field name="sgjlGkzbfb" type="String" />
+		<field name="fxglxm" type="String" />
+		<field name="fxglxmJbr" type="String" />
+		<field name="fxglxmJbrdm" type="String" />
+		<field name="fxglxmJbrq" type="String" />
+		<field name="jsdwjgdm" type="String" />
+		<field name="szqy" type="String" />
+		<field name="ywxjfwjz" type="String" />
+		<field name="ywgbfwjg" type="String" />
+		<field name="gczh" type="String">
+			<hint name="max-length">100</hint>
+		</field>
+		<field name="zdcyyn" type="String" />
+		<field name="lxfl" type="String" />
+		<field name="ms1" type="String" />
+		<field name="ms2" type="String" />
+		<field name="ms3" type="String" />
+		<field name="zdxmyn" type="String" />
+		<field name="dxjzsq" type="String" />
+		<field name="ywjzxzz" type="String" />
+		<field name="fgwjhm" type="String" />
+		<field name="zzbl" type="String" />
+		<field name="ChangeTime" type="String" />
+		<field name="PD_SW" type="String" />
+		<field name="bmpfrq" type="String" />
+		<field name="bmpfwh" type="String">
+			<hint name="max-length">200</hint>
+		</field>
+		<field name="bmpfwj" type="String">
+			<hint name="max-length">200</hint>
+		</field>
+		<field name="CertificateKey" type="String" />
+		<field name="dsjzmj" type="String" />
+		<field name="dxjzmj" type="String" />
+		<field name="gdzctzbh" type="String" />
+		<field name="jsxz_2011" type="String" />
+		<field name="lhmj" type="String" />
+		<field name="lxjb_2011" type="String" />
+		<field name="mfmj" type="String" />
+		<field name="other_qx" type="String">
+			<hint name="max-length">100</hint>
+		</field>
+		<field name="ProjectSlyj" type="String">
+			<hint name="max-length">200</hint>
+		</field>
+		<field name="qxbz" type="String" />
+		<field name="sfcysjkfq" type="String" />
+		<field name="sfmfss" type="String" />
+		<field name="szqx" type="String" />
+		<field name="tsgs" type="String" />
+		<field name="xmfl_2011" type="String" />
+		<field name="xsjpw" type="String" />
+		<field name="xsjpzdw" type="String" />
+		<field name="zjlygc_10" type="String" />
+		<field name="zjlygc_11" type="String" />
+		<field name="zjlygc_xs_1" type="String" />
+		<field name="zjlygc_xs_2" type="String" />
+		<field name="zjlygc_xs_3" type="String" />
+		<field name="zjlygc_xs_4" type="String" />
+		<field name="zjlygc_1_2" type="String" />
+		<field name="zjlygc_1_2_4" type="String" />
+		<field name="ywptlh" type="String" />
+		<field name="gyyqbh" type="String" />
+		<field name="sfcyxm" type="String" />
+		<field name="zbxmfzrxm" type="String" />
+		<field name="zbxmfzrzjh" type="String" />
+		<field name="zbxmfzrzjlx" type="String" />
+		<field name="zbxmfzrqrsj" type="String" />
+		<field name="sflsjzbs" type="String" />
+		<field name="sjbs" type="String" />
+		<field name="yxbs" type="String" />
+		<field name="sfyjngz" type="String" />
+		<field name="sfsszpjz" type="String" />
+		<field name="zczxjgdmz" type="String" />
+		<field name="ischeckxmbm" type="String" />
+		<field name="zddtmj" type="String" />
+		<field name="sjjdYn" type="String" />
+		<field name="sgjdYn" type="String" />
+		<field name="yxjdYn" type="String" />
+		<field name="tdhtqdbh" type="String" />
+		<field name="tdhtqdrq" type="String" />
+		<field name="dkbh" type="String" />
+		<field name="zpsjzlsbl" type="String" />
+		<field name="zpsjzmj" type="String" />
+		<field name="dwyzzpl" type="String" />
+		<field name="zdh" type="String" />
+		<field name="sfgdcg" type="String" />
+		<field name="ptlhmj" type="String" />
+		<field name="bimjszxfy" type="String" />
+		<field name="bz" type="String">
+			<hint name="max-length">2000</hint>
+		</field>
+		<field name="sfzcxm" type="String" />
+		<field name="zcxmbm" type="String" />
+		<field name="sfzmqxm" type="String" />
+		<field name="printPDFTime" type="String" />
+		<field name="isBgPrint" type="String" />
 	</model>
 	<model name="com.justonetech.cp.contract.model.Contract">
 		<field name="contractId" type="String" />
+		<field name="zzjgdm" type="long" />
 		<field name="htlb" type="String" />
+		<field name="htbh" type="String" />
+		<field name="zbhtbh" type="String" />
+		<field name="fbhtbh" type="String" />
+		<field name="htlx" type="String" />
+		<field name="htzt" type="String" />
+		<field name="zfbgx" type="String" />
+		<field name="bsrq" type="Date" />
+		<field name="slsj" type="Date" />
 		<field name="bjbh" type="String" />
+		<field name="szdq" type="String" />
+		<field name="xmmc" type="String" />
+		<field name="jsdw" type="String" />
+		<field name="jsdd" type="String" />
+		<field name="lxpw" type="String" />
+		<field name="pzwh" type="String" />
+		<field name="dwxz" type="String" />
+		<field name="zjlygc" type="String" />
+		<field name="ztz" type="String" />
+		<field name="zjzmj" type="String" />
+		<field name="xmfl" type="String" />
+		<field name="jzgm" type="String" />
 		<field name="bdh" type="String" />
+		<field name="fbfs" type="String" />
 		<field name="cbfs" type="String" />
+		<field name="zycbht" type="String" />
+		<field name="zygcht" type="String" />
 		<field name="htmc" type="String" />
+		<field name="fbdw" type="String" />
+		<field name="szdw" type="String" />
+		<field name="xmfzr" type="String" />
+		<field name="xmfzrzjlx" type="String" />
+		<field name="xmfzrzjh" type="String" />
+		<field name="szfzr" type="String" />
+		<field name="sjfzrzjlx" type="String" />
+		<field name="sjfzrzjh" type="String" />
+		<field name="kcdwmc" type="String" />
+		<field name="kcfzr" type="String" />
+		<field name="kcfzrzjlx" type="String" />
+		<field name="kcfzrzjh" type="String" />
+		<field name="sgdwmc" type="String" />
+		<field name="sgfzr" type="String" />
+		<field name="sgfzrzjlx" type="String" />
+		<field name="sgfzrzjh" type="String" />
+		<field name="xmlb" type="String" />
+		<field name="gclb" type="String" />
+		<field name="gcgm" type="String" />
+		<field name="sjxmlb" type="String" />
+		<field name="sjgclb" type="String" />
+		<field name="sjgcgm" type="String" />
+		<field name="sgxmlb" type="String" />
+		<field name="sggclb" type="String" />
+		<field name="sggcgm" type="String" />
+		<field name="kgrq" type="Date" />
+		<field name="jgrq" type="Date" />
+		<field name="jsfs" type="String" />
+		<field name="htj" type="String" />
+		<field name="sjf" type="String" />
+		<field name="kcf" type="String" />
+		<field name="jazz" type="String" />
+		<field name="zlje" type="String" />
+		<field name="zgj" type="String" />
+		<field name="aqfhwmsgcsf" type="String" />
+		<field name="htqdrq" type="Date" />
+		<field name="htqzrq" type="String" />
+		<field name="cbnr" type="String" />
+		<field name="cyhtsfwb" type="String" />
+		<field name="fzjqtsm" type="String" />
+		<field name="sfzx" type="String" />
+		<field name="zxsj" type="Date" />
+		<field name="zxsm" type="Date" />
+	</model>
+	<model name="com.justonetech.cp.permit.model.ApplyMaterial">
+		<field name="materialId" type="long" />
+		<field name="permitId" type="String" />
+		<field name="xh" type="int" />
+		<field name="clmc" type="String" />
+		<field name="yjfs" type="int" />
+		<field name="sjfs" type="int" />
+	</model>
+	<model name="com.justonetech.cp.permit.model.ParticipationUnit">
+		<field name="unitId" type="long" />
+		<field name="permitId" type="String" />
+		<field name="htxxbsbh" type="String" />
+		<field name="dwlx" type="String" />
+		<field name="dwmc" type="String" />
+		<field name="xmfzr" type="String" />
+		<field name="dhhm" type="String" />
+	</model>
+	<model name="com.justonetech.cp.permit.model.Permit">
+		<field name="permitId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="zzjgdm" type="String" />
+		<field name="bjbh" type="String" />
+		<field name="htxxbsbh" type="String" />
+		<field name="sqbz" type="int" />
+		<field name="sqzt" type="String" />
+		<field name="bdh" type="String" />
+		<field name="ywbh" type="String" />
+		<field name="sgxkzbh" type="String" />
+	</model>
+	<model name="com.justonetech.cp.permit.model.ProjectProfile">
+		<field name="permitId" type="long" />
+		<field name="bjbh" type="String" />
+		<field name="jsdwmc" type="String" />
+		<field name="jsdwxz" type="String" />
+		<field name="jsdwdz" type="String" />
+		<field name="gcmc" type="String" />
+		<field name="jsdd" type="String" />
+		<field name="jsgcgm" type="String" />
+		<field name="fwjzmj" type="String" />
+		<field name="htjg" type="String" />
+		<field name="htgq" type="int" />
+		<field name="fddbr" type="String" />
+		<field name="jsdwlxdh" type="String" />
+		<field name="jsdwlxr" type="String" />
+		<field name="jsdwsjh" type="String" />
+		<field name="jsydpzwjhfdccqzbh" type="String" />
+		<field name="jsgcghxkzbh" type="String" />
+		<field name="xckgqk" type="String" />
+	</model>
+	<model name="com.justonetech.cp.permit.model.UnitProject">
+		<field name="projectId" type="long" />
+		<field name="permitId" type="String" />
+		<field name="gcbh" type="int" />
+		<field name="gcmc" type="int" />
+		<field name="jsnr" type="int" />
 	</model>
 </model-hints>
