@@ -38,6 +38,51 @@ td.content span {
 </style>
 <!-- 施工总包合同详细信息 -->
 <table border="2">
+<tr class="head">
+		<td colspan="4">项目信息</td>
+	</tr>
+	<tr class="body">
+		<td class="title">报建编号:</td>
+		<td class="content">${contract.bjbh}</td>
+		<td class="title">所在地区:</td>
+		<td class="content">${contract.szdq}</td>
+	</tr>
+	<tr class="body">
+		<td class="title">项目名称:</td>
+		<td class="content" colspan="3">${contract.xmmc}</td>
+	</tr>
+	<tr class="body">
+		<td class="title">建设单位:</td>
+		<td class="content" colspan="3">${contract.jsdw}</td>
+	</tr>
+	<tr class="body">
+		<td class="title">建设地点:</td>
+		<td class="content" colspan="3">${contract.jsdd}</td>
+	</tr>
+	<tr class="body">
+		<td class="title">立项批文:</td>
+		<td class="content">${contract.lxpw}</td>
+		<td class="title">批准文号:</td>
+		<td class="content">${contract.pzwh}</td>
+	</tr>
+	<tr class="body">
+		<td class="title">单位性质:</td>
+		<td class="content">${contract.dwxz}</td>
+		<td class="title">资金来源构成:</td>
+		<td class="content">${contract.zjlygc}</td>
+	</tr>
+	<tr class="body">
+		<td class="title">总投资(万元):</td>
+		<td class="content">${contract.ztz}</td>
+		<td class="title">总建筑面积(㎡):</td>
+		<td class="content">${contract.zjzmj}</td>
+	</tr>
+	<tr class="body">
+		<td class="title">项目分类:</td>
+		<td class="content">${contract.xmfl}</td>
+		<td class="title">建设规模:</td>
+		<td class="content">${contract.jzgm}</td>
+	</tr>
 	<tr class="head">
 		<td colspan="4">合同信息报送编号:${contract.contractId}</td>
 	</tr>
