@@ -1,11 +1,12 @@
+<%@page import="sun.org.mozilla.javascript.internal.regexp.SubString"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
 <c:set var="contextPath"
 	value="${request.contextPath}/portlet/contract-search" />
 <portlet:renderURL var="searchURL">
-	<portlet:param name="bjbh" value="${bjbh}"/>
-	<portlet:param name="bdh" value="${bdh}"/>
-	<portlet:param name="xmmc" value="${xmmc}"/>  
+	<portlet:param name="bjbh" value="${bjbh}" />
+	<portlet:param name="bdh" value="${bdh}" />
+	<portlet:param name="xmmc" value="${xmmc}" />
 </portlet:renderURL>
 <liferay-ui:header title="报送合同查询" />
 <liferay-ui:panel-container accordion="false" extended="true">
@@ -17,8 +18,8 @@
 			<table style="width: 100%;" border="1">
 				<tr>
 					<td style="width: 10%; text-align: right">报建编号：</td>
-					<td style="width: 40%;"><aui:input type="text" name="bjbh" id="bjbh"
-							label="" /></td>
+					<td style="width: 40%;"><aui:input type="text" name="bjbh"
+							id="bjbh" label="" /></td>
 					<td style="width: 15%; text-align: right">标段号：</td>
 					<td style="width: 35%;"><aui:input type="text" name="bdh"
 							label="" /></td>
@@ -33,15 +34,15 @@
 			</table>
 			</br>
 			<%
-				String htlbLabel = "所有,勘察合同,设计合同,施工合同,监理合同,一体化合同,设备监理合同,招标代理合同,造价合同,项目管理合同";			
+				String htlbLabel = "所有,勘察合同,设计合同,施工合同,监理合同,一体化合同,设备监理合同,招标代理合同,造价合同,项目管理合同";
 				String htlbValue = "sy,kc,sj,sg,jl,yth,sbjl,dl,zj,xmgl";
 				int sortNo = 0;
-				Integer contractsCount = (Integer)request.getAttribute("contractsCount");
+				Integer contractsCount = (Integer) request.getAttribute("contractsCount");
 			%>
-			<liferay-ui:tabs names="<%=htlbLabel%>" param="htlb" tabsValues="<%=htlbValue%>" url="<%=searchURL%>">				
+			<liferay-ui:tabs names="<%=htlbLabel%>" param="htlb"
+				tabsValues="<%=htlbValue%>" url="<%=searchURL%>" type="pills">
 				<liferay-ui:panel title="合同列表" collapsible="false">
-					<liferay-ui:search-container 
-						emptyResultsMessage="没有报送合同数据。">
+					<liferay-ui:search-container emptyResultsMessage="没有报送合同数据。">
 						<liferay-ui:search-container-results results="${contracts}"
 							total="${contractsCount}">
 						</liferay-ui:search-container-results>
@@ -50,21 +51,54 @@
 							keyProperty="contractId" modelVar="contract">
 							<liferay-portlet:renderURL varImpl="rowURL">
 								<portlet:param name="bjbh" value="${contract.contractId}" />
-								<portlet:param name="mvcPath"
-									value="${contextPath}/view-contract.jsp" />
+								<c:if
+									test="<%=contract.getZfbgx().substring(0, 2).equals(\"CZ\")%>">
+									<portlet:param name="mvcPath"
+										value="${contextPath}/view-contract-cz.jsp" />
+								</c:if>
+								<c:if
+									test="<%=contract.getZfbgx().substring(0, 2).equals(\"VZ\")%>">
+									<portlet:param name="mvcPath"
+										value="${contextPath}/view-contract-vz.jsp" />
+								</c:if>
+								<c:if
+									test="<%=contract.getZfbgx().substring(0, 2).equals(\"WZ\")%>">
+									<portlet:param name="mvcPath"
+										value="${contextPath}/view-contract-wz.jsp" />
+								</c:if>
 							</liferay-portlet:renderURL>
 							<liferay-ui:search-container-column-text name="序号"
 								value="<%=String.valueOf(++sortNo)%>" />
 							<liferay-ui:search-container-column-text property="bjbh"
-								name="报建编号" href="${rowURL }" />
+								name="报建编号" />
 							<liferay-ui:search-container-column-text property="bdh"
-								name="标段号" href="${rowURL }" />
+								name="标段号" />
 							<liferay-ui:search-container-column-text property="contractId"
-								name="合同信息报送编号" href="${rowURL }" />
+								name="合同信息报送编号" />
+							<c:choose>
+							<c:when test="<%=contract.getZfbgx().substring(0, 2).equals(\"CZ\")||contract.getZfbgx().substring(0, 2).equals(\"VZ\")||contract.getZfbgx().substring(0, 2).equals(\"WZ\")%>">
 							<liferay-ui:search-container-column-text property="htmc"
-								name="合同名称" href="${rowURL }" />
+								name="合同名称" href="${rowURL}"/>
+							</c:when>
+							<c:otherwise>
+							<liferay-ui:search-container-column-text property="htmc"
+								name="合同名称"/>
+							</c:otherwise>
+							</c:choose>
 						</liferay-ui:search-container-row>
-						<liferay-ui:search-iterator/>					
+						<liferay-ui:search-iterator>
+							<%
+								String bjbh = (String) renderRequest.getAttribute("bjbh");
+								String bdh = (String) renderRequest.getAttribute("bdh");
+								String xmmc = (String) renderRequest.getAttribute("xmmc");
+								String htlb = (String) renderRequest.getAttribute("htlb");
+								PortletURL portletURL = searchContainer.getIteratorURL();
+								portletURL.setParameter("bjbh", bjbh);
+								portletURL.setParameter("bdh", bdh);
+								portletURL.setParameter("xmmc", xmmc);
+								portletURL.setParameter("htlb", htlb);
+							%>
+						</liferay-ui:search-iterator>
 					</liferay-ui:search-container>
 				</liferay-ui:panel>
 			</liferay-ui:tabs>
