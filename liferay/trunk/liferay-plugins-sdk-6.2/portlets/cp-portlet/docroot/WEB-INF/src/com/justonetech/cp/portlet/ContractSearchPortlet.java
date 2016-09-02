@@ -53,6 +53,7 @@ public class ContractSearchPortlet extends MVCPortlet {
 		renderRequest.setAttribute("bjbh", bjbh);
 		renderRequest.setAttribute("bdh", bdh);
 		renderRequest.setAttribute("xmmc", xmmc);
+		renderRequest.setAttribute("htlb", htlb);
 		super.doView(renderRequest, renderResponse);
 	}
 
