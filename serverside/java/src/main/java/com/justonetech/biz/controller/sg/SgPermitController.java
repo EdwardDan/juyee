@@ -128,7 +128,7 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
      * @param rows     .
      */
     @RequestMapping
-    public void gridDataCustom(HttpServletResponse response,HttpServletRequest request, String filters, String columns, int page, int rows, HttpSession session) {
+    public void gridDataCustom(HttpServletResponse response, HttpServletRequest request, String filters, String columns, int page, int rows, HttpSession session) {
         try {
             String queryStatus = request.getParameter("queryStatus");
             Page pageModel = new Page(page, rows, true);
@@ -144,7 +144,7 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
             } else {
                 if (SgPermitStatus.STATUS_CH.getCode() == JspHelper.getInteger(queryStatus) || SgPermitStatus.STATUS_EDIT.getCode() == JspHelper.getInteger(queryStatus)) {
                     hql += " and status=" + queryStatus;
-                } else if(SgPermitStatus.STATUS_SUBMIT.getCode() == JspHelper.getInteger(queryStatus)){
+                } else if (SgPermitStatus.STATUS_SUBMIT.getCode() == JspHelper.getInteger(queryStatus)) {
                     hql += " and status >=" + SgPermitStatus.STATUS_SUBMIT.getCode() + " and status<=" + SgPermitStatus.STATUS_WLD_BACK.getCode();
                 }
             }
@@ -585,7 +585,12 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
                         "buildSiteCounty",
                         "nationalFundsPro",
                         "sgUnitManager",
-                        "jlUnitManager"
+                        "jlUnitManager",
+                        "isZftzl",
+                        "yzzpl_1",
+                        "yzzpl_2",
+                        "yzzpl_3",
+                        "yzzpl_4",
                 });
             } else {
                 target = entity;

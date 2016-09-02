@@ -345,6 +345,13 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
     /*委领导审核日期*/
     private java.sql.Timestamp wldDate;
 
+    private java.lang.Boolean isZftzl;
+
+    private java.lang.String yzzpl_1;
+    private java.lang.String yzzpl_2;
+    private java.lang.String yzzpl_3;
+    private java.lang.String yzzpl_4;
+
     /*创建时间*/
     /*创建时间*/
     private java.sql.Timestamp createTime;
@@ -1131,6 +1138,46 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
 
     public void setWldDate(Timestamp wldDate) {
         this.wldDate = wldDate;
+    }
+
+    public Boolean getIsZftzl() {
+        return isZftzl;
+    }
+
+    public void setIsZftzl(Boolean isZftzl) {
+        this.isZftzl = isZftzl;
+    }
+
+    public String getYzzpl_1() {
+        return yzzpl_1;
+    }
+
+    public void setYzzpl_1(String yzzpl_1) {
+        this.yzzpl_1 = yzzpl_1;
+    }
+
+    public String getYzzpl_2() {
+        return yzzpl_2;
+    }
+
+    public void setYzzpl_2(String yzzpl_2) {
+        this.yzzpl_2 = yzzpl_2;
+    }
+
+    public String getYzzpl_3() {
+        return yzzpl_3;
+    }
+
+    public void setYzzpl_3(String yzzpl_3) {
+        this.yzzpl_3 = yzzpl_3;
+    }
+
+    public String getYzzpl_4() {
+        return yzzpl_4;
+    }
+
+    public void setYzzpl_4(String yzzpl_4) {
+        this.yzzpl_4 = yzzpl_4;
     }
 
     /**
