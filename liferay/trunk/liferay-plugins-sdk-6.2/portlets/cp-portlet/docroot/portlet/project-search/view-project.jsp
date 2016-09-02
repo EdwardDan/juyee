@@ -1,9 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
 <%
-	String projectId = ParamUtil.getString(request, "projectId");
+	String bjbh = ParamUtil.getString(request, "bjbh");
 	//根据报建编号获取报建项目信息
-	Project project = ProjectLocalServiceUtil.getProject(projectId);
+	Project project = ProjectLocalServiceUtil.getProject(bjbh);
 	request.setAttribute("project", project);
 %>
 <portlet:renderURL var="viewURL" />
@@ -11,18 +11,18 @@
 <table style="width: 100%;" border="1">
 	<tr>
 		<td style="width: 15%;">建设项目属性</td>
-		<td style="width: 85%;" colspan="3">${project.bjxmxz}</td>
+		<td style="width: 85%;" colspan="3">${project.xmxz}</td>
 	</tr>
 	<tr>
 		<td style="width: 15%%;">报建日期</td>
 		<td style="width: 35%;"><fmt:formatDate value="${project.bjrq}"
 				pattern="yyyy-MM-dd" /></td>
 		<td style="width: 15%;">报建编号</td>
-		<td style="width: 35%;">${project.projectId}</td>
+		<td style="width: 35%;">${project.bjbh}</td>
 	</tr>
 	<tr>
 		<td>网上申请编号</td>
-		<td>${project.wssqbh}</td>
+		<td>${project.bj_webid}</td>
 		<td>统一审批编码</td>
 		<td>&nbsp;</td>
 	</tr>
@@ -42,29 +42,29 @@
 	</tr>
 	<tr>
 		<td>建设单位</td>
-		<td colspan="3">${project.jsdwmc}</td>
+		<td colspan="3">${project.jsdw}</td>
 	</tr>
 	<tr>
 		<td>建设单位办公地址</td>
-		<td>${project.jsdwbgdz}</td>
+		<td>${project.jsdwdz}</td>
 		<td>邮政编码</td>
-		<td>${project.yzbm}</td>
+		<td>${project.jsdwyb}</td>
 	</tr>
 	<tr>
 		<td>机构代码</td>
-		<td>${project.zzjgdm}</td>
+		<td>${project.jsdwjgdm}</td>
 		<td>工程账户号</td>
-		<td>${project.gczhh}</td>
+		<td>${project.gczh}</td>
 	</tr>
 	<tr>
 		<td>建设单位法定代表人</td>
-		<td>${project.jsdwfddbr}</td>
+		<td>${project.jsdwfr}</td>
 		<td>建设单位联系人</td>
 		<td>${project.jsdwlxr}</td>
 	</tr>
 	<tr>
 		<td>联系人手机</td>
-		<td>${project.lxrsj}</td>
+		<td>${project.jsdwdh}</td>
 		<td>建设单位注册资金（万元）</td>
 		<td>${project.jsdwzczj}</td>
 	</tr>
@@ -76,19 +76,19 @@
 	</tr>
 	<tr>
 		<td>立项或批准文件名称</td>
-		<td colspan="3">${project.lxhpzwjmc}</td>
+		<td colspan="3">${project.lxwj}</td>
 	</tr>
 	<tr>
 		<td>立项或批准文件文号</td>
-		<td>${project.lxhpzwjwh}</td>
+		<td>${project.lxwh}</td>
 		<td>立项文件项目代码</td>
 		<td>&nbsp;</td>
 	</tr>
 	<tr>
 		<td>发文单位</td>
-		<td>${project.fwdw}</td>
+		<td>${project.pzjg}</td>
 		<td>发文日期</td>
-		<td>${project.fwrq}</td>
+		<td>${project.pzrq}</td>
 	</tr>
 	<tr>
 		<td>立项级别</td>
@@ -106,7 +106,7 @@
 	</tr>
 	<tr>
 		<td>建设工程规模</td>
-		<td colspan="3">${project.jsgcgm}</td>
+		<td colspan="3">${project.jsgm}</td>
 	</tr>
 	<tr>
 		<td>项目资金来源构成</td>
@@ -126,44 +126,44 @@
 		<td>立项批文中是否指定招标方式</td>
 		<td>&nbsp;</td>
 		<td>是否国有资本控股</td>
-		<td><c:if test="${project.sfgyzbkg=='y'}">是</c:if>
-			<c:if test="${project.sfgyzbkg=='n'}">否</c:if></td>
+		<td><c:if test="${project.sfgyzbkg=='y'}">是</c:if> <c:if
+				test="${project.sfgyzbkg=='n'}">否</c:if></td>
 	</tr>
 	<tr>
 		<td>是否正式立项</td>
-		<td><c:if test="${project.sfzslx=='y'}">是</c:if>
-			<c:if test="${project.sfzslx=='n'}">否</c:if></td>
+		<td><c:if test="${project.sffb=='y'}">是</c:if> <c:if
+				test="${project.sffb=='n'}">否</c:if></td>
 		<td>是否保护性建筑</td>
 		<td>&nbsp;</td>
 	</tr>
 	<tr>
 		<td>是否重大工程项目</td>
-		<td colspan="3"><c:if test="${project.sfzdgcxm=='y'}">是</c:if>
-			<c:if test="${project.sfzdgcxm=='n'}">否</c:if></td>
+		<td colspan="3"><c:if test="${project.zdxmyn=='y'}">是</c:if> <c:if
+				test="${project.zdxmyn=='n'}">否</c:if></td>
 	</tr>
 	<tr>
 		<td>建设部编号</td>
-		<td colspan="3">${project.jsbbh}</td>
+		<td colspan="3">${project.jsbh}</td>
 	</tr>
 	<tr>
 		<td>备注</td>
-		<td colspan="3">${project.bz}</td>
+		<td colspan="3">${project.bjbz}</td>
 	</tr>
 	<tr>
 		<td colspan="4">其他相关信息</td>
 	</tr>
 	<tr>
 		<td>是否地处风景名胜区</td>
-		<td><c:if test="${project.sfdcfjmsq=='y'}">是</c:if>
-			<c:if test="${project.sfdcfjmsq=='n'}">否</c:if></td>
+		<td><c:if test="${project.fjms=='y'}">是</c:if> <c:if
+				test="${project.fjms=='n'}">否</c:if></td>
 		<td>如为既有建筑改造是否有节能改造内容</td>
-		<td><c:if test="${project.sfyjngznr=='y'}">是</c:if>
-			<c:if test="${project.sfyjngznr=='n'}">否</c:if></td>
+		<td><c:if test="${project.sfyjngz=='y'}">是</c:if> <c:if
+				test="${project.sfyjngz=='n'}">否</c:if></td>
 	</tr>
 	<tr>
 		<td>是否有民防设施</td>
-		<td><c:if test="${project.sfymfss=='y'}">是</c:if>
-			<c:if test="${project.sfymfss=='n'}">否</c:if></td>
+		<td><c:if test="${project.sfmfss=='y'}">是</c:if> <c:if
+				test="${project.sfmfss=='n'}">否</c:if></td>
 		<td>有无配套绿化</td>
 		<td></td>
 	</tr>
@@ -206,8 +206,8 @@
 	</tr>
 	<tr>
 		<td>是否申报绿色建筑标识</td>
-		<td colspan="3"><c:if test="${project.sfsblsjzbs=='y'}">是</c:if>
-			<c:if test="${project.sfsblsjzbs=='n'}">否</c:if></td>
+		<td colspan="3"><c:if test="${project.sflsjzbs=='y'}">是</c:if> <c:if
+				test="${project.sflsjzbs=='n'}">否</c:if></td>
 	</tr>
 	<tr>
 		<td>设计标识</td>

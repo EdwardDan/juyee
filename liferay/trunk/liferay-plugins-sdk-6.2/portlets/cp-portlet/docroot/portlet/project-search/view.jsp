@@ -65,17 +65,17 @@
 			</liferay-ui:search-container-results>
 			<liferay-ui:search-container-row
 				className="com.justonetech.cp.project.model.Project"
-				modelVar="project" keyProperty="projectId">
+				modelVar="project" keyProperty="bjbh">
 				<liferay-portlet:renderURL varImpl="rowURL">
-					<portlet:param name="projectId" value="${project.projectId}" />
+					<portlet:param name="bjbh" value="${project.bjbh}" />
 					<portlet:param name="mvcPath"
 						value="${contextPath }/view-project.jsp" />
 				</liferay-portlet:renderURL>
-				<liferay-ui:search-container-column-text property="projectId" name="报建编号"
+				<liferay-ui:search-container-column-text property="bjbh" name="报建编号"
 					href="${rowURL }" align="right" />
 				<liferay-ui:search-container-column-text property="xmmc"
 					name="项目名称" href="${rowURL }" align="center" />
-				<liferay-ui:search-container-column-text property="wssqbh"
+				<liferay-ui:search-container-column-text property="bj_webid"
 					name="网上申报编号" href="${rowURL }" />
 				<liferay-ui:search-container-column-text name="报建日期"
 					href="${rowURL }">
