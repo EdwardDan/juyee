@@ -13,15 +13,14 @@
 	border: #D4D4D4 1px solid;
 }
 </style>
-
 <portlet:actionURL var="saveUnitProjects" name="saveUnitProjects">
 </portlet:actionURL>
-<aui:form action="" onSubmit="false">
+<aui:form action="${saveUnitProjects}">
 	<table border="1" width="100%" class="table table-bordered table-hover">
 		<tr height="29px">
 			<td style="width: 15%; text-align: center">单位工程编号</td>
 			<td style="width: 15%; text-align: center">单位工程名称</td>
-			<td style="width: 15%; text-align: center">单位工程类别</td>
+			<td style="width: 15%; text-align: center">单位工程类型</td>
 			<td style="width: 45%; text-align: center">建设内容</td>
 			<td style="width: 10%; text-align: center"><input type="button" value="添加" class="btn" style="width: 100%;" onclick="changeLine(this)" /></td>
 		</tr>
@@ -31,7 +30,7 @@
 					<tr>
 						<td style="width: 15%; text-align: center"><input name="<portlet:namespace/>gcbh" value="${unitProject.gcbh}" readonly="true" /></td>
 						<td style="width: 15%; text-align: center"><input name="<portlet:namespace/>gcmc" value="${unitProject.gcmc}" /></td>
-						<td style="width: 15%; text-align: center"><input name="<portlet:namespace/>gcmc" value="${unitProject.gclb}" /></td>
+						<td style="width: 15%; text-align: center"><input name="<portlet:namespace/>gclx" value="${unitProject.gclx}" /></td>
 						<td style="width: 45%; text-align: center"><input name="<portlet:namespace/>jsnr" value="${unitProject.jsnr}" /></td>
 						<td style="width: 10%; text-align: center"><input type="button" class="btn" value="删除" onclick="changeLine(this)" style="width: 100%;" /></td>
 					</tr>
@@ -44,15 +43,16 @@
 			<tr>
 				<td style="width: 15%; text-align: center"><input name="<portlet:namespace/>gcbh" readonly="true"></td>
 				<td style="width: 15%; text-align: center"><input name="<portlet:namespace/>gcmc"></td>
-				<td style="width: 15%; text-align: center"><input name="<portlet:namespace/>gclb"></td>
+				<td style="width: 15%; text-align: center"><input name="<portlet:namespace/>gclx"></td>
 				<td style="width: 45%; text-align: center"><input name="<portlet:namespace/>jsnr"></td>
 				<td style="width: 10%; text-align: center"><input type="button" class="btn" value="删除" onclick="changeLine(this)" style="width: 100%;" /></td>
 			</tr>
 		</tbody>
 	</table>
 	<aui:button-row>
-		<aui:button type="submit" value="保存"/>
-		<aui:button type="cancel" value="取消" href="#" />
+		<span style="position: relative; left: 45%"> <aui:button type="submit" value="保存" />
+			<aui:button type="cancel" value="取消" href="#" />
+		</span>
 	</aui:button-row>
 
 	<div>注释：单位工程名称请参考规划许可证内容填写</div>
