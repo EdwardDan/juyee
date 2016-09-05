@@ -18,21 +18,19 @@
 <aui:form action="${saveUnitProjects}">
 	<table border="1" width="100%" class="table table-bordered table-hover">
 		<tr height="29px">
-			<td style="width: 15%; text-align: center">单位工程编号</td>
-			<td style="width: 15%; text-align: center">单位工程名称</td>
-			<td style="width: 15%; text-align: center">单位工程类型</td>
-			<td style="width: 45%; text-align: center">建设内容</td>
-			<td style="width: 10%; text-align: center"><input type="button" value="添加" class="btn" style="width: 100%;" onclick="changeLine(this)" /></td>
+			<td style="width: 10%; text-align: center">单位工程编号</td>
+			<td style="width: 20%; text-align: center">单位工程名称</td>
+			<td style="width: 65%; text-align: center">建设内容</td>
+			<td style="width: 5%; text-align: center"><input type="button" value="添加" class="btn" style="width: 100%;" onclick="changeLine(this)" /></td>
 		</tr>
 		<tbody id="unitProjects">
 			<c:if test="${!empty unitProjects}">
 				<c:forEach items="${unitProjects}" var="unitProject">
 					<tr>
-						<td style="width: 15%; text-align: center"><input name="<portlet:namespace/>gcbh" value="${unitProject.gcbh}" readonly="true" /></td>
-						<td style="width: 15%; text-align: center"><input name="<portlet:namespace/>gcmc" value="${unitProject.gcmc}" /></td>
-						<td style="width: 15%; text-align: center"><input name="<portlet:namespace/>gclx" value="${unitProject.gclx}" /></td>
-						<td style="width: 45%; text-align: center"><input name="<portlet:namespace/>jsnr" value="${unitProject.jsnr}" /></td>
-						<td style="width: 10%; text-align: center"><input type="button" class="btn" value="删除" onclick="changeLine(this)" style="width: 100%;" /></td>
+						<td><input name="<portlet:namespace/>gcbh" value="${unitProject.gcbh}" readonly="true" /></td>
+						<td><input name="<portlet:namespace/>gcmc" value="${unitProject.gcmc}" /></td>
+						<td><input name="<portlet:namespace/>jsnr" value="${unitProject.jsnr}" /></td>
+						<td><input type="button" class="btn" value="删除" onclick="changeLine(this)" style="width: 100%;" /></td>
 					</tr>
 				</c:forEach>
 			</c:if>
@@ -41,11 +39,10 @@
 	<table style="display: none;" border="1" width="90%">
 		<tbody id="hiddenStyle">
 			<tr>
-				<td style="width: 15%; text-align: center"><input name="<portlet:namespace/>gcbh" readonly="true"></td>
-				<td style="width: 15%; text-align: center"><input name="<portlet:namespace/>gcmc"></td>
-				<td style="width: 15%; text-align: center"><input name="<portlet:namespace/>gclx"></td>
-				<td style="width: 45%; text-align: center"><input name="<portlet:namespace/>jsnr"></td>
-				<td style="width: 10%; text-align: center"><input type="button" class="btn" value="删除" onclick="changeLine(this)" style="width: 100%;" /></td>
+				<td><input name="<portlet:namespace/>gcbh" readonly="true"></td>
+				<td><input name="<portlet:namespace/>gcmc"></td>
+				<td><input name="<portlet:namespace/>jsnr"></td>
+				<td><input type="button" class="btn" value="删除" onclick="changeLine(this)" style="width: 100%;" /></td>
 			</tr>
 		</tbody>
 	</table>
