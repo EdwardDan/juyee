@@ -3,7 +3,7 @@
 <service-builder package-path="com.justonetech.cp.permit">
 	<author>fanqi</author>
 	<namespace>cp</namespace>
-	
+
 	<!-- 施工许可 -->
 	<entity name="Permit" local-service="true" remote-service="false">
 		<!-- PK fields -->
@@ -63,7 +63,40 @@
 		<column name="jsydpzwjhfdccqzbh" type="String" /><!-- 建设用地批准文件或房地产产权证编号 -->
 		<column name="jsgcghxkzbh" type="String" /><!-- 建设工程规划许可证编号 -->
 		<column name="xckgqk" type="String" /><!--现场开工情况 -->
-		
+		<column name="xmlx" type="long" /><!--项目类型 -->
+		<column name="lxjb" type="String" /><!--立项级别 -->
+		<column name="xmxz" type="long" /><!--项目性质 -->
+		<column name="ssqx" type="String" /><!--所属区县 -->
+		<column name="ywbm" type="String" /><!--业务编码 -->
+		<column name="jsddssqx" type="long" /><!--建设地点所属区县 -->
+		<column name="jsgclb" type="String" /><!--建设工程类别 -->
+		<column name="jsgcsx" type="long" /><!--建设工程属性 -->
+		<column name="gyzjbz" type="String" /><!--国有资金比重% -->
+		<column name="zbjg" type="String" /><!--中标价格（万元） -->
+		<column name="xmtzgs" type="String" /><!--项目投资估算（万元） -->
+		<column name="jhkg" type="Date" /><!--计划开工 -->
+		<column name="jhjg" type="Date" /><!--计划竣工 -->
+		<column name="sfzftzl" type="boolean" /><!--是否政府投资类 -->
+		<column name="yzzpl1" type="String" /><!--预制装配率 -->
+		<column name="yzzpl2" type="String" /><!--预制装配率 -->
+		<column name="yzzpl3" type="String" /><!--预制装配率 -->
+		<column name="yzzpl4" type="String" /><!--预制装配率 -->
+		<column name="tjsj" type="Date" /><!--提交时间 -->
+		<column name="slbh" type="String" /><!--受理编号 -->
+		<column name="hjgsz" type="int" /><!--沪交管收字 -->
+		<column name="hjgsh" type="int" /><!--沪交管收号 -->
+		<column name="sqr" type="String" /><!--申请人 -->
+		<column name="sqsx" type="String" /><!--申请事项 -->
+		<column name="sqh" type="String" /><!--申请号 -->
+		<column name="cltjr" type="String" /><!--材料提交人 -->
+		<column name="cltjrlxdh" type="String" /><!--材料提交人联系电话 -->
+		<column name="cltjrlxdz" type="String" /><!--材料提交人联系地址 -->
+		<column name="sjr" type="String" /><!--收件人 -->
+		<column name="sjrlxdh" type="String" /><!--收件人联系电话 -->
+		<column name="slyj" type="String" /><!--受理意见 -->
+		<column name="slsj" type="String" /><!--受理时间 -->
+
+
 		<!-- Order -->
 
 		<!-- Finder methods -->
@@ -111,37 +144,38 @@
 		<order>
 			<order-column name="gcbh" order-by="asc"></order-column>
 		</order>
-		
+
 		<!-- Finder methods -->
 		<finder name="PermitId" return-type="Collection">
 			<finder-column name="permitId"></finder-column>
 		</finder>
 	</entity>
 	<!-- 申请材料 -->
-	<entity name="ApplyMaterial" local-service="true" remote-service="false">
+	<entity name="ApplyMaterial" local-service="true"
+		remote-service="false">
 		<!-- PK fields -->
 		<column name="materialId" type="long" primary="true" />
 
 		<!-- Group instance -->
 
 		<!-- Audit fields -->
-		
+
 		<!-- Business fields -->
 		<column name="permitId" type="String" /><!-- 施工许可Id -->
 		<column name="xh" type="int" /><!-- 序号 -->
 		<column name="clmc" type="String" /><!-- 材料名称 -->
 		<column name="yjfs" type="int" /><!-- 应交份数 -->
 		<column name="sjfs" type="int" /><!-- 实交份数 -->
-		
+
 		<!-- Order -->
 		<order>
 			<order-column name="xh" order-by="asc"></order-column>
 		</order>
-		
+
 		<!-- Finder methods -->
 		<finder name="PermitId" return-type="Collection">
 			<finder-column name="permitId"></finder-column>
 		</finder>
-		
+
 	</entity>
 </service-builder>
