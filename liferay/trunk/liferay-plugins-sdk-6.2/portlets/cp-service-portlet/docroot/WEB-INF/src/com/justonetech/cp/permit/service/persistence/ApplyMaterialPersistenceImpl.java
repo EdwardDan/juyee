@@ -39,7 +39,6 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnmodifiableList;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
@@ -90,7 +89,7 @@ public class ApplyMaterialPersistenceImpl extends BasePersistenceImpl<ApplyMater
 			ApplyMaterialImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
 			"findByPermitId",
 			new String[] {
-				String.class.getName(),
+				Long.class.getName(),
 				
 			Integer.class.getName(), Integer.class.getName(),
 				OrderByComparator.class.getName()
@@ -99,13 +98,13 @@ public class ApplyMaterialPersistenceImpl extends BasePersistenceImpl<ApplyMater
 		new FinderPath(ApplyMaterialModelImpl.ENTITY_CACHE_ENABLED,
 			ApplyMaterialModelImpl.FINDER_CACHE_ENABLED,
 			ApplyMaterialImpl.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
-			"findByPermitId", new String[] { String.class.getName() },
+			"findByPermitId", new String[] { Long.class.getName() },
 			ApplyMaterialModelImpl.PERMITID_COLUMN_BITMASK |
 			ApplyMaterialModelImpl.XH_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_PERMITID = new FinderPath(ApplyMaterialModelImpl.ENTITY_CACHE_ENABLED,
 			ApplyMaterialModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByPermitId",
-			new String[] { String.class.getName() });
+			new String[] { Long.class.getName() });
 
 	/**
 	 * Returns all the apply materials where permitId = &#63;.
@@ -115,7 +114,7 @@ public class ApplyMaterialPersistenceImpl extends BasePersistenceImpl<ApplyMater
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<ApplyMaterial> findByPermitId(String permitId)
+	public List<ApplyMaterial> findByPermitId(long permitId)
 		throws SystemException {
 		return findByPermitId(permitId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 			null);
@@ -135,8 +134,8 @@ public class ApplyMaterialPersistenceImpl extends BasePersistenceImpl<ApplyMater
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<ApplyMaterial> findByPermitId(String permitId, int start,
-		int end) throws SystemException {
+	public List<ApplyMaterial> findByPermitId(long permitId, int start, int end)
+		throws SystemException {
 		return findByPermitId(permitId, start, end, null);
 	}
 
@@ -155,7 +154,7 @@ public class ApplyMaterialPersistenceImpl extends BasePersistenceImpl<ApplyMater
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<ApplyMaterial> findByPermitId(String permitId, int start,
+	public List<ApplyMaterial> findByPermitId(long permitId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -177,7 +176,7 @@ public class ApplyMaterialPersistenceImpl extends BasePersistenceImpl<ApplyMater
 
 		if ((list != null) && !list.isEmpty()) {
 			for (ApplyMaterial applyMaterial : list) {
-				if (!Validator.equals(permitId, applyMaterial.getPermitId())) {
+				if ((permitId != applyMaterial.getPermitId())) {
 					list = null;
 
 					break;
@@ -198,19 +197,7 @@ public class ApplyMaterialPersistenceImpl extends BasePersistenceImpl<ApplyMater
 
 			query.append(_SQL_SELECT_APPLYMATERIAL_WHERE);
 
-			boolean bindPermitId = false;
-
-			if (permitId == null) {
-				query.append(_FINDER_COLUMN_PERMITID_PERMITID_1);
-			}
-			else if (permitId.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_PERMITID_PERMITID_3);
-			}
-			else {
-				bindPermitId = true;
-
-				query.append(_FINDER_COLUMN_PERMITID_PERMITID_2);
-			}
+			query.append(_FINDER_COLUMN_PERMITID_PERMITID_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -232,9 +219,7 @@ public class ApplyMaterialPersistenceImpl extends BasePersistenceImpl<ApplyMater
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				if (bindPermitId) {
-					qPos.add(permitId);
-				}
+				qPos.add(permitId);
 
 				if (!pagination) {
 					list = (List<ApplyMaterial>)QueryUtil.list(q, getDialect(),
@@ -276,7 +261,7 @@ public class ApplyMaterialPersistenceImpl extends BasePersistenceImpl<ApplyMater
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public ApplyMaterial findByPermitId_First(String permitId,
+	public ApplyMaterial findByPermitId_First(long permitId,
 		OrderByComparator orderByComparator)
 		throws NoSuchApplyMaterialException, SystemException {
 		ApplyMaterial applyMaterial = fetchByPermitId_First(permitId,
@@ -307,7 +292,7 @@ public class ApplyMaterialPersistenceImpl extends BasePersistenceImpl<ApplyMater
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public ApplyMaterial fetchByPermitId_First(String permitId,
+	public ApplyMaterial fetchByPermitId_First(long permitId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<ApplyMaterial> list = findByPermitId(permitId, 0, 1,
 				orderByComparator);
@@ -329,7 +314,7 @@ public class ApplyMaterialPersistenceImpl extends BasePersistenceImpl<ApplyMater
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public ApplyMaterial findByPermitId_Last(String permitId,
+	public ApplyMaterial findByPermitId_Last(long permitId,
 		OrderByComparator orderByComparator)
 		throws NoSuchApplyMaterialException, SystemException {
 		ApplyMaterial applyMaterial = fetchByPermitId_Last(permitId,
@@ -360,7 +345,7 @@ public class ApplyMaterialPersistenceImpl extends BasePersistenceImpl<ApplyMater
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public ApplyMaterial fetchByPermitId_Last(String permitId,
+	public ApplyMaterial fetchByPermitId_Last(long permitId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByPermitId(permitId);
 
@@ -390,7 +375,7 @@ public class ApplyMaterialPersistenceImpl extends BasePersistenceImpl<ApplyMater
 	 */
 	@Override
 	public ApplyMaterial[] findByPermitId_PrevAndNext(long materialId,
-		String permitId, OrderByComparator orderByComparator)
+		long permitId, OrderByComparator orderByComparator)
 		throws NoSuchApplyMaterialException, SystemException {
 		ApplyMaterial applyMaterial = findByPrimaryKey(materialId);
 
@@ -420,7 +405,7 @@ public class ApplyMaterialPersistenceImpl extends BasePersistenceImpl<ApplyMater
 	}
 
 	protected ApplyMaterial getByPermitId_PrevAndNext(Session session,
-		ApplyMaterial applyMaterial, String permitId,
+		ApplyMaterial applyMaterial, long permitId,
 		OrderByComparator orderByComparator, boolean previous) {
 		StringBundler query = null;
 
@@ -434,19 +419,7 @@ public class ApplyMaterialPersistenceImpl extends BasePersistenceImpl<ApplyMater
 
 		query.append(_SQL_SELECT_APPLYMATERIAL_WHERE);
 
-		boolean bindPermitId = false;
-
-		if (permitId == null) {
-			query.append(_FINDER_COLUMN_PERMITID_PERMITID_1);
-		}
-		else if (permitId.equals(StringPool.BLANK)) {
-			query.append(_FINDER_COLUMN_PERMITID_PERMITID_3);
-		}
-		else {
-			bindPermitId = true;
-
-			query.append(_FINDER_COLUMN_PERMITID_PERMITID_2);
-		}
+		query.append(_FINDER_COLUMN_PERMITID_PERMITID_2);
 
 		if (orderByComparator != null) {
 			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
@@ -516,9 +489,7 @@ public class ApplyMaterialPersistenceImpl extends BasePersistenceImpl<ApplyMater
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		if (bindPermitId) {
-			qPos.add(permitId);
-		}
+		qPos.add(permitId);
 
 		if (orderByComparator != null) {
 			Object[] values = orderByComparator.getOrderByConditionValues(applyMaterial);
@@ -545,7 +516,7 @@ public class ApplyMaterialPersistenceImpl extends BasePersistenceImpl<ApplyMater
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public void removeByPermitId(String permitId) throws SystemException {
+	public void removeByPermitId(long permitId) throws SystemException {
 		for (ApplyMaterial applyMaterial : findByPermitId(permitId,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(applyMaterial);
@@ -560,7 +531,7 @@ public class ApplyMaterialPersistenceImpl extends BasePersistenceImpl<ApplyMater
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public int countByPermitId(String permitId) throws SystemException {
+	public int countByPermitId(long permitId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_PERMITID;
 
 		Object[] finderArgs = new Object[] { permitId };
@@ -573,19 +544,7 @@ public class ApplyMaterialPersistenceImpl extends BasePersistenceImpl<ApplyMater
 
 			query.append(_SQL_COUNT_APPLYMATERIAL_WHERE);
 
-			boolean bindPermitId = false;
-
-			if (permitId == null) {
-				query.append(_FINDER_COLUMN_PERMITID_PERMITID_1);
-			}
-			else if (permitId.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_PERMITID_PERMITID_3);
-			}
-			else {
-				bindPermitId = true;
-
-				query.append(_FINDER_COLUMN_PERMITID_PERMITID_2);
-			}
+			query.append(_FINDER_COLUMN_PERMITID_PERMITID_2);
 
 			String sql = query.toString();
 
@@ -598,9 +557,7 @@ public class ApplyMaterialPersistenceImpl extends BasePersistenceImpl<ApplyMater
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				if (bindPermitId) {
-					qPos.add(permitId);
-				}
+				qPos.add(permitId);
 
 				count = (Long)q.uniqueResult();
 
@@ -619,9 +576,7 @@ public class ApplyMaterialPersistenceImpl extends BasePersistenceImpl<ApplyMater
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_PERMITID_PERMITID_1 = "applyMaterial.permitId IS NULL";
 	private static final String _FINDER_COLUMN_PERMITID_PERMITID_2 = "applyMaterial.permitId = ?";
-	private static final String _FINDER_COLUMN_PERMITID_PERMITID_3 = "(applyMaterial.permitId IS NULL OR applyMaterial.permitId = '')";
 
 	public ApplyMaterialPersistenceImpl() {
 		setModelClass(ApplyMaterial.class);
@@ -890,6 +845,7 @@ public class ApplyMaterialPersistenceImpl extends BasePersistenceImpl<ApplyMater
 		applyMaterialImpl.setClmc(applyMaterial.getClmc());
 		applyMaterialImpl.setYjfs(applyMaterial.getYjfs());
 		applyMaterialImpl.setSjfs(applyMaterial.getSjfs());
+		applyMaterialImpl.setFileEntryIds(applyMaterial.getFileEntryIds());
 
 		return applyMaterialImpl;
 	}

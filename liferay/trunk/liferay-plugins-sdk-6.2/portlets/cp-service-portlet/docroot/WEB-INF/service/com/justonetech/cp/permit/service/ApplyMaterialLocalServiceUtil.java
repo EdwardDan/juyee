@@ -275,6 +275,15 @@ public class ApplyMaterialLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static java.util.List<com.justonetech.cp.permit.model.ApplyMaterial> findByPermitId(
+		long permitId, int start, int end) {
+		return getService().findByPermitId(permitId, start, end);
+	}
+
+	public static int countByPermitId(long permitId) {
+		return getService().countByPermitId(permitId);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

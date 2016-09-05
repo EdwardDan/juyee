@@ -76,29 +76,29 @@ public interface ApplyMaterialModel extends BaseModel<ApplyMaterial> {
 	 *
 	 * @return the permit ID of this apply material
 	 */
-	@AutoEscape
-	public String getPermitId();
+	public long getPermitId();
 
 	/**
 	 * Sets the permit ID of this apply material.
 	 *
 	 * @param permitId the permit ID of this apply material
 	 */
-	public void setPermitId(String permitId);
+	public void setPermitId(long permitId);
 
 	/**
 	 * Returns the xh of this apply material.
 	 *
 	 * @return the xh of this apply material
 	 */
-	public int getXh();
+	@AutoEscape
+	public String getXh();
 
 	/**
 	 * Sets the xh of this apply material.
 	 *
 	 * @param xh the xh of this apply material
 	 */
-	public void setXh(int xh);
+	public void setXh(String xh);
 
 	/**
 	 * Returns the clmc of this apply material.
@@ -142,6 +142,21 @@ public interface ApplyMaterialModel extends BaseModel<ApplyMaterial> {
 	 * @param sjfs the sjfs of this apply material
 	 */
 	public void setSjfs(int sjfs);
+
+	/**
+	 * Returns the file entry IDs of this apply material.
+	 *
+	 * @return the file entry IDs of this apply material
+	 */
+	@AutoEscape
+	public String getFileEntryIds();
+
+	/**
+	 * Sets the file entry IDs of this apply material.
+	 *
+	 * @param fileEntryIds the file entry IDs of this apply material
+	 */
+	public void setFileEntryIds(String fileEntryIds);
 
 	@Override
 	public boolean isNew();

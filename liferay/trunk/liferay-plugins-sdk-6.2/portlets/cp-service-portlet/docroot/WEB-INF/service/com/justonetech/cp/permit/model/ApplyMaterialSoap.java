@@ -35,6 +35,7 @@ public class ApplyMaterialSoap implements Serializable {
 		soapModel.setClmc(model.getClmc());
 		soapModel.setYjfs(model.getYjfs());
 		soapModel.setSjfs(model.getSjfs());
+		soapModel.setFileEntryIds(model.getFileEntryIds());
 
 		return soapModel;
 	}
@@ -95,19 +96,19 @@ public class ApplyMaterialSoap implements Serializable {
 		_materialId = materialId;
 	}
 
-	public String getPermitId() {
+	public long getPermitId() {
 		return _permitId;
 	}
 
-	public void setPermitId(String permitId) {
+	public void setPermitId(long permitId) {
 		_permitId = permitId;
 	}
 
-	public int getXh() {
+	public String getXh() {
 		return _xh;
 	}
 
-	public void setXh(int xh) {
+	public void setXh(String xh) {
 		_xh = xh;
 	}
 
@@ -135,10 +136,19 @@ public class ApplyMaterialSoap implements Serializable {
 		_sjfs = sjfs;
 	}
 
+	public String getFileEntryIds() {
+		return _fileEntryIds;
+	}
+
+	public void setFileEntryIds(String fileEntryIds) {
+		_fileEntryIds = fileEntryIds;
+	}
+
 	private long _materialId;
-	private String _permitId;
-	private int _xh;
+	private long _permitId;
+	private String _xh;
 	private String _clmc;
 	private int _yjfs;
 	private int _sjfs;
+	private String _fileEntryIds;
 }

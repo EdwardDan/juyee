@@ -270,6 +270,7 @@
 			<basic name="clmc" />
 			<basic name="yjfs" />
 			<basic name="sjfs" />
+			<basic name="fileEntryIds" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
@@ -336,6 +337,44 @@
 			<basic name="jsydpzwjhfdccqzbh" />
 			<basic name="jsgcghxkzbh" />
 			<basic name="xckgqk" />
+			<basic name="xmlx" />
+			<basic name="lxjb" />
+			<basic name="xmxz" />
+			<basic name="ssqx" />
+			<basic name="ywbm" />
+			<basic name="jsddssqx" />
+			<basic name="jsgclb" />
+			<basic name="jsgcsx" />
+			<basic name="gyzjbz" />
+			<basic name="zbjg" />
+			<basic name="xmtzgs" />
+			<basic name="jhkg">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="jhjg">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="sfzftzl" />
+			<basic name="yzzpl1" />
+			<basic name="yzzpl2" />
+			<basic name="yzzpl3" />
+			<basic name="yzzpl4" />
+			<basic name="tjsj">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="slbh" />
+			<basic name="hjgsz" />
+			<basic name="hjgsh" />
+			<basic name="sqr" />
+			<basic name="sqsx" />
+			<basic name="sqh" />
+			<basic name="cltjr" />
+			<basic name="cltjrlxdh" />
+			<basic name="cltjrlxdz" />
+			<basic name="sjr" />
+			<basic name="sjrlxdh" />
+			<basic name="slyj" />
+			<basic name="slsj" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />

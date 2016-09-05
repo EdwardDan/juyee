@@ -25,6 +25,8 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
+import java.util.Date;
+
 /**
  * The cache model class for representing ProjectProfile in entity cache.
  *
@@ -36,7 +38,7 @@ public class ProjectProfileCacheModel implements CacheModel<ProjectProfile>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(101);
 
 		sb.append("{permitId=");
 		sb.append(permitId);
@@ -74,6 +76,70 @@ public class ProjectProfileCacheModel implements CacheModel<ProjectProfile>,
 		sb.append(jsgcghxkzbh);
 		sb.append(", xckgqk=");
 		sb.append(xckgqk);
+		sb.append(", xmlx=");
+		sb.append(xmlx);
+		sb.append(", lxjb=");
+		sb.append(lxjb);
+		sb.append(", xmxz=");
+		sb.append(xmxz);
+		sb.append(", ssqx=");
+		sb.append(ssqx);
+		sb.append(", ywbm=");
+		sb.append(ywbm);
+		sb.append(", jsddssqx=");
+		sb.append(jsddssqx);
+		sb.append(", jsgclb=");
+		sb.append(jsgclb);
+		sb.append(", jsgcsx=");
+		sb.append(jsgcsx);
+		sb.append(", gyzjbz=");
+		sb.append(gyzjbz);
+		sb.append(", zbjg=");
+		sb.append(zbjg);
+		sb.append(", xmtzgs=");
+		sb.append(xmtzgs);
+		sb.append(", jhkg=");
+		sb.append(jhkg);
+		sb.append(", jhjg=");
+		sb.append(jhjg);
+		sb.append(", sfzftzl=");
+		sb.append(sfzftzl);
+		sb.append(", yzzpl1=");
+		sb.append(yzzpl1);
+		sb.append(", yzzpl2=");
+		sb.append(yzzpl2);
+		sb.append(", yzzpl3=");
+		sb.append(yzzpl3);
+		sb.append(", yzzpl4=");
+		sb.append(yzzpl4);
+		sb.append(", tjsj=");
+		sb.append(tjsj);
+		sb.append(", slbh=");
+		sb.append(slbh);
+		sb.append(", hjgsz=");
+		sb.append(hjgsz);
+		sb.append(", hjgsh=");
+		sb.append(hjgsh);
+		sb.append(", sqr=");
+		sb.append(sqr);
+		sb.append(", sqsx=");
+		sb.append(sqsx);
+		sb.append(", sqh=");
+		sb.append(sqh);
+		sb.append(", cltjr=");
+		sb.append(cltjr);
+		sb.append(", cltjrlxdh=");
+		sb.append(cltjrlxdh);
+		sb.append(", cltjrlxdz=");
+		sb.append(cltjrlxdz);
+		sb.append(", sjr=");
+		sb.append(sjr);
+		sb.append(", sjrlxdh=");
+		sb.append(sjrlxdh);
+		sb.append(", slyj=");
+		sb.append(slyj);
+		sb.append(", slsj=");
+		sb.append(slsj);
 		sb.append("}");
 
 		return sb.toString();
@@ -199,6 +265,194 @@ public class ProjectProfileCacheModel implements CacheModel<ProjectProfile>,
 			projectProfileImpl.setXckgqk(xckgqk);
 		}
 
+		projectProfileImpl.setXmlx(xmlx);
+
+		if (lxjb == null) {
+			projectProfileImpl.setLxjb(StringPool.BLANK);
+		}
+		else {
+			projectProfileImpl.setLxjb(lxjb);
+		}
+
+		projectProfileImpl.setXmxz(xmxz);
+
+		if (ssqx == null) {
+			projectProfileImpl.setSsqx(StringPool.BLANK);
+		}
+		else {
+			projectProfileImpl.setSsqx(ssqx);
+		}
+
+		if (ywbm == null) {
+			projectProfileImpl.setYwbm(StringPool.BLANK);
+		}
+		else {
+			projectProfileImpl.setYwbm(ywbm);
+		}
+
+		projectProfileImpl.setJsddssqx(jsddssqx);
+
+		if (jsgclb == null) {
+			projectProfileImpl.setJsgclb(StringPool.BLANK);
+		}
+		else {
+			projectProfileImpl.setJsgclb(jsgclb);
+		}
+
+		projectProfileImpl.setJsgcsx(jsgcsx);
+
+		if (gyzjbz == null) {
+			projectProfileImpl.setGyzjbz(StringPool.BLANK);
+		}
+		else {
+			projectProfileImpl.setGyzjbz(gyzjbz);
+		}
+
+		if (zbjg == null) {
+			projectProfileImpl.setZbjg(StringPool.BLANK);
+		}
+		else {
+			projectProfileImpl.setZbjg(zbjg);
+		}
+
+		if (xmtzgs == null) {
+			projectProfileImpl.setXmtzgs(StringPool.BLANK);
+		}
+		else {
+			projectProfileImpl.setXmtzgs(xmtzgs);
+		}
+
+		if (jhkg == Long.MIN_VALUE) {
+			projectProfileImpl.setJhkg(null);
+		}
+		else {
+			projectProfileImpl.setJhkg(new Date(jhkg));
+		}
+
+		if (jhjg == Long.MIN_VALUE) {
+			projectProfileImpl.setJhjg(null);
+		}
+		else {
+			projectProfileImpl.setJhjg(new Date(jhjg));
+		}
+
+		projectProfileImpl.setSfzftzl(sfzftzl);
+
+		if (yzzpl1 == null) {
+			projectProfileImpl.setYzzpl1(StringPool.BLANK);
+		}
+		else {
+			projectProfileImpl.setYzzpl1(yzzpl1);
+		}
+
+		if (yzzpl2 == null) {
+			projectProfileImpl.setYzzpl2(StringPool.BLANK);
+		}
+		else {
+			projectProfileImpl.setYzzpl2(yzzpl2);
+		}
+
+		if (yzzpl3 == null) {
+			projectProfileImpl.setYzzpl3(StringPool.BLANK);
+		}
+		else {
+			projectProfileImpl.setYzzpl3(yzzpl3);
+		}
+
+		if (yzzpl4 == null) {
+			projectProfileImpl.setYzzpl4(StringPool.BLANK);
+		}
+		else {
+			projectProfileImpl.setYzzpl4(yzzpl4);
+		}
+
+		if (tjsj == Long.MIN_VALUE) {
+			projectProfileImpl.setTjsj(null);
+		}
+		else {
+			projectProfileImpl.setTjsj(new Date(tjsj));
+		}
+
+		if (slbh == null) {
+			projectProfileImpl.setSlbh(StringPool.BLANK);
+		}
+		else {
+			projectProfileImpl.setSlbh(slbh);
+		}
+
+		projectProfileImpl.setHjgsz(hjgsz);
+		projectProfileImpl.setHjgsh(hjgsh);
+
+		if (sqr == null) {
+			projectProfileImpl.setSqr(StringPool.BLANK);
+		}
+		else {
+			projectProfileImpl.setSqr(sqr);
+		}
+
+		if (sqsx == null) {
+			projectProfileImpl.setSqsx(StringPool.BLANK);
+		}
+		else {
+			projectProfileImpl.setSqsx(sqsx);
+		}
+
+		if (sqh == null) {
+			projectProfileImpl.setSqh(StringPool.BLANK);
+		}
+		else {
+			projectProfileImpl.setSqh(sqh);
+		}
+
+		if (cltjr == null) {
+			projectProfileImpl.setCltjr(StringPool.BLANK);
+		}
+		else {
+			projectProfileImpl.setCltjr(cltjr);
+		}
+
+		if (cltjrlxdh == null) {
+			projectProfileImpl.setCltjrlxdh(StringPool.BLANK);
+		}
+		else {
+			projectProfileImpl.setCltjrlxdh(cltjrlxdh);
+		}
+
+		if (cltjrlxdz == null) {
+			projectProfileImpl.setCltjrlxdz(StringPool.BLANK);
+		}
+		else {
+			projectProfileImpl.setCltjrlxdz(cltjrlxdz);
+		}
+
+		if (sjr == null) {
+			projectProfileImpl.setSjr(StringPool.BLANK);
+		}
+		else {
+			projectProfileImpl.setSjr(sjr);
+		}
+
+		if (sjrlxdh == null) {
+			projectProfileImpl.setSjrlxdh(StringPool.BLANK);
+		}
+		else {
+			projectProfileImpl.setSjrlxdh(sjrlxdh);
+		}
+
+		if (slyj == null) {
+			projectProfileImpl.setSlyj(StringPool.BLANK);
+		}
+		else {
+			projectProfileImpl.setSlyj(slyj);
+		}
+
+		if (slsj == null) {
+			projectProfileImpl.setSlsj(StringPool.BLANK);
+		}
+		else {
+			projectProfileImpl.setSlsj(slsj);
+		}
+
 		projectProfileImpl.resetOriginalValues();
 
 		return projectProfileImpl;
@@ -224,6 +478,38 @@ public class ProjectProfileCacheModel implements CacheModel<ProjectProfile>,
 		jsydpzwjhfdccqzbh = objectInput.readUTF();
 		jsgcghxkzbh = objectInput.readUTF();
 		xckgqk = objectInput.readUTF();
+		xmlx = objectInput.readLong();
+		lxjb = objectInput.readUTF();
+		xmxz = objectInput.readLong();
+		ssqx = objectInput.readUTF();
+		ywbm = objectInput.readUTF();
+		jsddssqx = objectInput.readLong();
+		jsgclb = objectInput.readUTF();
+		jsgcsx = objectInput.readLong();
+		gyzjbz = objectInput.readUTF();
+		zbjg = objectInput.readUTF();
+		xmtzgs = objectInput.readUTF();
+		jhkg = objectInput.readLong();
+		jhjg = objectInput.readLong();
+		sfzftzl = objectInput.readBoolean();
+		yzzpl1 = objectInput.readUTF();
+		yzzpl2 = objectInput.readUTF();
+		yzzpl3 = objectInput.readUTF();
+		yzzpl4 = objectInput.readUTF();
+		tjsj = objectInput.readLong();
+		slbh = objectInput.readUTF();
+		hjgsz = objectInput.readInt();
+		hjgsh = objectInput.readInt();
+		sqr = objectInput.readUTF();
+		sqsx = objectInput.readUTF();
+		sqh = objectInput.readUTF();
+		cltjr = objectInput.readUTF();
+		cltjrlxdh = objectInput.readUTF();
+		cltjrlxdz = objectInput.readUTF();
+		sjr = objectInput.readUTF();
+		sjrlxdh = objectInput.readUTF();
+		slyj = objectInput.readUTF();
+		slsj = objectInput.readUTF();
 	}
 
 	@Override
@@ -344,6 +630,177 @@ public class ProjectProfileCacheModel implements CacheModel<ProjectProfile>,
 		else {
 			objectOutput.writeUTF(xckgqk);
 		}
+
+		objectOutput.writeLong(xmlx);
+
+		if (lxjb == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(lxjb);
+		}
+
+		objectOutput.writeLong(xmxz);
+
+		if (ssqx == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(ssqx);
+		}
+
+		if (ywbm == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(ywbm);
+		}
+
+		objectOutput.writeLong(jsddssqx);
+
+		if (jsgclb == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(jsgclb);
+		}
+
+		objectOutput.writeLong(jsgcsx);
+
+		if (gyzjbz == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(gyzjbz);
+		}
+
+		if (zbjg == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(zbjg);
+		}
+
+		if (xmtzgs == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(xmtzgs);
+		}
+
+		objectOutput.writeLong(jhkg);
+		objectOutput.writeLong(jhjg);
+		objectOutput.writeBoolean(sfzftzl);
+
+		if (yzzpl1 == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(yzzpl1);
+		}
+
+		if (yzzpl2 == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(yzzpl2);
+		}
+
+		if (yzzpl3 == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(yzzpl3);
+		}
+
+		if (yzzpl4 == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(yzzpl4);
+		}
+
+		objectOutput.writeLong(tjsj);
+
+		if (slbh == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(slbh);
+		}
+
+		objectOutput.writeInt(hjgsz);
+		objectOutput.writeInt(hjgsh);
+
+		if (sqr == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(sqr);
+		}
+
+		if (sqsx == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(sqsx);
+		}
+
+		if (sqh == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(sqh);
+		}
+
+		if (cltjr == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(cltjr);
+		}
+
+		if (cltjrlxdh == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(cltjrlxdh);
+		}
+
+		if (cltjrlxdz == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(cltjrlxdz);
+		}
+
+		if (sjr == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(sjr);
+		}
+
+		if (sjrlxdh == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(sjrlxdh);
+		}
+
+		if (slyj == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(slyj);
+		}
+
+		if (slsj == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(slsj);
+		}
 	}
 
 	public long permitId;
@@ -364,4 +821,36 @@ public class ProjectProfileCacheModel implements CacheModel<ProjectProfile>,
 	public String jsydpzwjhfdccqzbh;
 	public String jsgcghxkzbh;
 	public String xckgqk;
+	public long xmlx;
+	public String lxjb;
+	public long xmxz;
+	public String ssqx;
+	public String ywbm;
+	public long jsddssqx;
+	public String jsgclb;
+	public long jsgcsx;
+	public String gyzjbz;
+	public String zbjg;
+	public String xmtzgs;
+	public long jhkg;
+	public long jhjg;
+	public boolean sfzftzl;
+	public String yzzpl1;
+	public String yzzpl2;
+	public String yzzpl3;
+	public String yzzpl4;
+	public long tjsj;
+	public String slbh;
+	public int hjgsz;
+	public int hjgsh;
+	public String sqr;
+	public String sqsx;
+	public String sqh;
+	public String cltjr;
+	public String cltjrlxdh;
+	public String cltjrlxdz;
+	public String sjr;
+	public String sjrlxdh;
+	public String slyj;
+	public String slsj;
 }

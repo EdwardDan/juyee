@@ -17,6 +17,7 @@ package com.justonetech.cp.permit.model;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelWrapper;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -67,6 +68,38 @@ public class ProjectProfileWrapper implements ProjectProfile,
 		attributes.put("jsydpzwjhfdccqzbh", getJsydpzwjhfdccqzbh());
 		attributes.put("jsgcghxkzbh", getJsgcghxkzbh());
 		attributes.put("xckgqk", getXckgqk());
+		attributes.put("xmlx", getXmlx());
+		attributes.put("lxjb", getLxjb());
+		attributes.put("xmxz", getXmxz());
+		attributes.put("ssqx", getSsqx());
+		attributes.put("ywbm", getYwbm());
+		attributes.put("jsddssqx", getJsddssqx());
+		attributes.put("jsgclb", getJsgclb());
+		attributes.put("jsgcsx", getJsgcsx());
+		attributes.put("gyzjbz", getGyzjbz());
+		attributes.put("zbjg", getZbjg());
+		attributes.put("xmtzgs", getXmtzgs());
+		attributes.put("jhkg", getJhkg());
+		attributes.put("jhjg", getJhjg());
+		attributes.put("sfzftzl", getSfzftzl());
+		attributes.put("yzzpl1", getYzzpl1());
+		attributes.put("yzzpl2", getYzzpl2());
+		attributes.put("yzzpl3", getYzzpl3());
+		attributes.put("yzzpl4", getYzzpl4());
+		attributes.put("tjsj", getTjsj());
+		attributes.put("slbh", getSlbh());
+		attributes.put("hjgsz", getHjgsz());
+		attributes.put("hjgsh", getHjgsh());
+		attributes.put("sqr", getSqr());
+		attributes.put("sqsx", getSqsx());
+		attributes.put("sqh", getSqh());
+		attributes.put("cltjr", getCltjr());
+		attributes.put("cltjrlxdh", getCltjrlxdh());
+		attributes.put("cltjrlxdz", getCltjrlxdz());
+		attributes.put("sjr", getSjr());
+		attributes.put("sjrlxdh", getSjrlxdh());
+		attributes.put("slyj", getSlyj());
+		attributes.put("slsj", getSlsj());
 
 		return attributes;
 	}
@@ -179,6 +212,198 @@ public class ProjectProfileWrapper implements ProjectProfile,
 
 		if (xckgqk != null) {
 			setXckgqk(xckgqk);
+		}
+
+		Long xmlx = (Long)attributes.get("xmlx");
+
+		if (xmlx != null) {
+			setXmlx(xmlx);
+		}
+
+		String lxjb = (String)attributes.get("lxjb");
+
+		if (lxjb != null) {
+			setLxjb(lxjb);
+		}
+
+		Long xmxz = (Long)attributes.get("xmxz");
+
+		if (xmxz != null) {
+			setXmxz(xmxz);
+		}
+
+		String ssqx = (String)attributes.get("ssqx");
+
+		if (ssqx != null) {
+			setSsqx(ssqx);
+		}
+
+		String ywbm = (String)attributes.get("ywbm");
+
+		if (ywbm != null) {
+			setYwbm(ywbm);
+		}
+
+		Long jsddssqx = (Long)attributes.get("jsddssqx");
+
+		if (jsddssqx != null) {
+			setJsddssqx(jsddssqx);
+		}
+
+		String jsgclb = (String)attributes.get("jsgclb");
+
+		if (jsgclb != null) {
+			setJsgclb(jsgclb);
+		}
+
+		Long jsgcsx = (Long)attributes.get("jsgcsx");
+
+		if (jsgcsx != null) {
+			setJsgcsx(jsgcsx);
+		}
+
+		String gyzjbz = (String)attributes.get("gyzjbz");
+
+		if (gyzjbz != null) {
+			setGyzjbz(gyzjbz);
+		}
+
+		String zbjg = (String)attributes.get("zbjg");
+
+		if (zbjg != null) {
+			setZbjg(zbjg);
+		}
+
+		String xmtzgs = (String)attributes.get("xmtzgs");
+
+		if (xmtzgs != null) {
+			setXmtzgs(xmtzgs);
+		}
+
+		Date jhkg = (Date)attributes.get("jhkg");
+
+		if (jhkg != null) {
+			setJhkg(jhkg);
+		}
+
+		Date jhjg = (Date)attributes.get("jhjg");
+
+		if (jhjg != null) {
+			setJhjg(jhjg);
+		}
+
+		Boolean sfzftzl = (Boolean)attributes.get("sfzftzl");
+
+		if (sfzftzl != null) {
+			setSfzftzl(sfzftzl);
+		}
+
+		String yzzpl1 = (String)attributes.get("yzzpl1");
+
+		if (yzzpl1 != null) {
+			setYzzpl1(yzzpl1);
+		}
+
+		String yzzpl2 = (String)attributes.get("yzzpl2");
+
+		if (yzzpl2 != null) {
+			setYzzpl2(yzzpl2);
+		}
+
+		String yzzpl3 = (String)attributes.get("yzzpl3");
+
+		if (yzzpl3 != null) {
+			setYzzpl3(yzzpl3);
+		}
+
+		String yzzpl4 = (String)attributes.get("yzzpl4");
+
+		if (yzzpl4 != null) {
+			setYzzpl4(yzzpl4);
+		}
+
+		Date tjsj = (Date)attributes.get("tjsj");
+
+		if (tjsj != null) {
+			setTjsj(tjsj);
+		}
+
+		String slbh = (String)attributes.get("slbh");
+
+		if (slbh != null) {
+			setSlbh(slbh);
+		}
+
+		Integer hjgsz = (Integer)attributes.get("hjgsz");
+
+		if (hjgsz != null) {
+			setHjgsz(hjgsz);
+		}
+
+		Integer hjgsh = (Integer)attributes.get("hjgsh");
+
+		if (hjgsh != null) {
+			setHjgsh(hjgsh);
+		}
+
+		String sqr = (String)attributes.get("sqr");
+
+		if (sqr != null) {
+			setSqr(sqr);
+		}
+
+		String sqsx = (String)attributes.get("sqsx");
+
+		if (sqsx != null) {
+			setSqsx(sqsx);
+		}
+
+		String sqh = (String)attributes.get("sqh");
+
+		if (sqh != null) {
+			setSqh(sqh);
+		}
+
+		String cltjr = (String)attributes.get("cltjr");
+
+		if (cltjr != null) {
+			setCltjr(cltjr);
+		}
+
+		String cltjrlxdh = (String)attributes.get("cltjrlxdh");
+
+		if (cltjrlxdh != null) {
+			setCltjrlxdh(cltjrlxdh);
+		}
+
+		String cltjrlxdz = (String)attributes.get("cltjrlxdz");
+
+		if (cltjrlxdz != null) {
+			setCltjrlxdz(cltjrlxdz);
+		}
+
+		String sjr = (String)attributes.get("sjr");
+
+		if (sjr != null) {
+			setSjr(sjr);
+		}
+
+		String sjrlxdh = (String)attributes.get("sjrlxdh");
+
+		if (sjrlxdh != null) {
+			setSjrlxdh(sjrlxdh);
+		}
+
+		String slyj = (String)attributes.get("slyj");
+
+		if (slyj != null) {
+			setSlyj(slyj);
+		}
+
+		String slsj = (String)attributes.get("slsj");
+
+		if (slsj != null) {
+			setSlsj(slsj);
 		}
 	}
 
@@ -560,6 +785,656 @@ public class ProjectProfileWrapper implements ProjectProfile,
 	@Override
 	public void setXckgqk(java.lang.String xckgqk) {
 		_projectProfile.setXckgqk(xckgqk);
+	}
+
+	/**
+	* Returns the xmlx of this project profile.
+	*
+	* @return the xmlx of this project profile
+	*/
+	@Override
+	public long getXmlx() {
+		return _projectProfile.getXmlx();
+	}
+
+	/**
+	* Sets the xmlx of this project profile.
+	*
+	* @param xmlx the xmlx of this project profile
+	*/
+	@Override
+	public void setXmlx(long xmlx) {
+		_projectProfile.setXmlx(xmlx);
+	}
+
+	/**
+	* Returns the lxjb of this project profile.
+	*
+	* @return the lxjb of this project profile
+	*/
+	@Override
+	public java.lang.String getLxjb() {
+		return _projectProfile.getLxjb();
+	}
+
+	/**
+	* Sets the lxjb of this project profile.
+	*
+	* @param lxjb the lxjb of this project profile
+	*/
+	@Override
+	public void setLxjb(java.lang.String lxjb) {
+		_projectProfile.setLxjb(lxjb);
+	}
+
+	/**
+	* Returns the xmxz of this project profile.
+	*
+	* @return the xmxz of this project profile
+	*/
+	@Override
+	public long getXmxz() {
+		return _projectProfile.getXmxz();
+	}
+
+	/**
+	* Sets the xmxz of this project profile.
+	*
+	* @param xmxz the xmxz of this project profile
+	*/
+	@Override
+	public void setXmxz(long xmxz) {
+		_projectProfile.setXmxz(xmxz);
+	}
+
+	/**
+	* Returns the ssqx of this project profile.
+	*
+	* @return the ssqx of this project profile
+	*/
+	@Override
+	public java.lang.String getSsqx() {
+		return _projectProfile.getSsqx();
+	}
+
+	/**
+	* Sets the ssqx of this project profile.
+	*
+	* @param ssqx the ssqx of this project profile
+	*/
+	@Override
+	public void setSsqx(java.lang.String ssqx) {
+		_projectProfile.setSsqx(ssqx);
+	}
+
+	/**
+	* Returns the ywbm of this project profile.
+	*
+	* @return the ywbm of this project profile
+	*/
+	@Override
+	public java.lang.String getYwbm() {
+		return _projectProfile.getYwbm();
+	}
+
+	/**
+	* Sets the ywbm of this project profile.
+	*
+	* @param ywbm the ywbm of this project profile
+	*/
+	@Override
+	public void setYwbm(java.lang.String ywbm) {
+		_projectProfile.setYwbm(ywbm);
+	}
+
+	/**
+	* Returns the jsddssqx of this project profile.
+	*
+	* @return the jsddssqx of this project profile
+	*/
+	@Override
+	public long getJsddssqx() {
+		return _projectProfile.getJsddssqx();
+	}
+
+	/**
+	* Sets the jsddssqx of this project profile.
+	*
+	* @param jsddssqx the jsddssqx of this project profile
+	*/
+	@Override
+	public void setJsddssqx(long jsddssqx) {
+		_projectProfile.setJsddssqx(jsddssqx);
+	}
+
+	/**
+	* Returns the jsgclb of this project profile.
+	*
+	* @return the jsgclb of this project profile
+	*/
+	@Override
+	public java.lang.String getJsgclb() {
+		return _projectProfile.getJsgclb();
+	}
+
+	/**
+	* Sets the jsgclb of this project profile.
+	*
+	* @param jsgclb the jsgclb of this project profile
+	*/
+	@Override
+	public void setJsgclb(java.lang.String jsgclb) {
+		_projectProfile.setJsgclb(jsgclb);
+	}
+
+	/**
+	* Returns the jsgcsx of this project profile.
+	*
+	* @return the jsgcsx of this project profile
+	*/
+	@Override
+	public long getJsgcsx() {
+		return _projectProfile.getJsgcsx();
+	}
+
+	/**
+	* Sets the jsgcsx of this project profile.
+	*
+	* @param jsgcsx the jsgcsx of this project profile
+	*/
+	@Override
+	public void setJsgcsx(long jsgcsx) {
+		_projectProfile.setJsgcsx(jsgcsx);
+	}
+
+	/**
+	* Returns the gyzjbz of this project profile.
+	*
+	* @return the gyzjbz of this project profile
+	*/
+	@Override
+	public java.lang.String getGyzjbz() {
+		return _projectProfile.getGyzjbz();
+	}
+
+	/**
+	* Sets the gyzjbz of this project profile.
+	*
+	* @param gyzjbz the gyzjbz of this project profile
+	*/
+	@Override
+	public void setGyzjbz(java.lang.String gyzjbz) {
+		_projectProfile.setGyzjbz(gyzjbz);
+	}
+
+	/**
+	* Returns the zbjg of this project profile.
+	*
+	* @return the zbjg of this project profile
+	*/
+	@Override
+	public java.lang.String getZbjg() {
+		return _projectProfile.getZbjg();
+	}
+
+	/**
+	* Sets the zbjg of this project profile.
+	*
+	* @param zbjg the zbjg of this project profile
+	*/
+	@Override
+	public void setZbjg(java.lang.String zbjg) {
+		_projectProfile.setZbjg(zbjg);
+	}
+
+	/**
+	* Returns the xmtzgs of this project profile.
+	*
+	* @return the xmtzgs of this project profile
+	*/
+	@Override
+	public java.lang.String getXmtzgs() {
+		return _projectProfile.getXmtzgs();
+	}
+
+	/**
+	* Sets the xmtzgs of this project profile.
+	*
+	* @param xmtzgs the xmtzgs of this project profile
+	*/
+	@Override
+	public void setXmtzgs(java.lang.String xmtzgs) {
+		_projectProfile.setXmtzgs(xmtzgs);
+	}
+
+	/**
+	* Returns the jhkg of this project profile.
+	*
+	* @return the jhkg of this project profile
+	*/
+	@Override
+	public java.util.Date getJhkg() {
+		return _projectProfile.getJhkg();
+	}
+
+	/**
+	* Sets the jhkg of this project profile.
+	*
+	* @param jhkg the jhkg of this project profile
+	*/
+	@Override
+	public void setJhkg(java.util.Date jhkg) {
+		_projectProfile.setJhkg(jhkg);
+	}
+
+	/**
+	* Returns the jhjg of this project profile.
+	*
+	* @return the jhjg of this project profile
+	*/
+	@Override
+	public java.util.Date getJhjg() {
+		return _projectProfile.getJhjg();
+	}
+
+	/**
+	* Sets the jhjg of this project profile.
+	*
+	* @param jhjg the jhjg of this project profile
+	*/
+	@Override
+	public void setJhjg(java.util.Date jhjg) {
+		_projectProfile.setJhjg(jhjg);
+	}
+
+	/**
+	* Returns the sfzftzl of this project profile.
+	*
+	* @return the sfzftzl of this project profile
+	*/
+	@Override
+	public boolean getSfzftzl() {
+		return _projectProfile.getSfzftzl();
+	}
+
+	/**
+	* Returns <code>true</code> if this project profile is sfzftzl.
+	*
+	* @return <code>true</code> if this project profile is sfzftzl; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isSfzftzl() {
+		return _projectProfile.isSfzftzl();
+	}
+
+	/**
+	* Sets whether this project profile is sfzftzl.
+	*
+	* @param sfzftzl the sfzftzl of this project profile
+	*/
+	@Override
+	public void setSfzftzl(boolean sfzftzl) {
+		_projectProfile.setSfzftzl(sfzftzl);
+	}
+
+	/**
+	* Returns the yzzpl1 of this project profile.
+	*
+	* @return the yzzpl1 of this project profile
+	*/
+	@Override
+	public java.lang.String getYzzpl1() {
+		return _projectProfile.getYzzpl1();
+	}
+
+	/**
+	* Sets the yzzpl1 of this project profile.
+	*
+	* @param yzzpl1 the yzzpl1 of this project profile
+	*/
+	@Override
+	public void setYzzpl1(java.lang.String yzzpl1) {
+		_projectProfile.setYzzpl1(yzzpl1);
+	}
+
+	/**
+	* Returns the yzzpl2 of this project profile.
+	*
+	* @return the yzzpl2 of this project profile
+	*/
+	@Override
+	public java.lang.String getYzzpl2() {
+		return _projectProfile.getYzzpl2();
+	}
+
+	/**
+	* Sets the yzzpl2 of this project profile.
+	*
+	* @param yzzpl2 the yzzpl2 of this project profile
+	*/
+	@Override
+	public void setYzzpl2(java.lang.String yzzpl2) {
+		_projectProfile.setYzzpl2(yzzpl2);
+	}
+
+	/**
+	* Returns the yzzpl3 of this project profile.
+	*
+	* @return the yzzpl3 of this project profile
+	*/
+	@Override
+	public java.lang.String getYzzpl3() {
+		return _projectProfile.getYzzpl3();
+	}
+
+	/**
+	* Sets the yzzpl3 of this project profile.
+	*
+	* @param yzzpl3 the yzzpl3 of this project profile
+	*/
+	@Override
+	public void setYzzpl3(java.lang.String yzzpl3) {
+		_projectProfile.setYzzpl3(yzzpl3);
+	}
+
+	/**
+	* Returns the yzzpl4 of this project profile.
+	*
+	* @return the yzzpl4 of this project profile
+	*/
+	@Override
+	public java.lang.String getYzzpl4() {
+		return _projectProfile.getYzzpl4();
+	}
+
+	/**
+	* Sets the yzzpl4 of this project profile.
+	*
+	* @param yzzpl4 the yzzpl4 of this project profile
+	*/
+	@Override
+	public void setYzzpl4(java.lang.String yzzpl4) {
+		_projectProfile.setYzzpl4(yzzpl4);
+	}
+
+	/**
+	* Returns the tjsj of this project profile.
+	*
+	* @return the tjsj of this project profile
+	*/
+	@Override
+	public java.util.Date getTjsj() {
+		return _projectProfile.getTjsj();
+	}
+
+	/**
+	* Sets the tjsj of this project profile.
+	*
+	* @param tjsj the tjsj of this project profile
+	*/
+	@Override
+	public void setTjsj(java.util.Date tjsj) {
+		_projectProfile.setTjsj(tjsj);
+	}
+
+	/**
+	* Returns the slbh of this project profile.
+	*
+	* @return the slbh of this project profile
+	*/
+	@Override
+	public java.lang.String getSlbh() {
+		return _projectProfile.getSlbh();
+	}
+
+	/**
+	* Sets the slbh of this project profile.
+	*
+	* @param slbh the slbh of this project profile
+	*/
+	@Override
+	public void setSlbh(java.lang.String slbh) {
+		_projectProfile.setSlbh(slbh);
+	}
+
+	/**
+	* Returns the hjgsz of this project profile.
+	*
+	* @return the hjgsz of this project profile
+	*/
+	@Override
+	public int getHjgsz() {
+		return _projectProfile.getHjgsz();
+	}
+
+	/**
+	* Sets the hjgsz of this project profile.
+	*
+	* @param hjgsz the hjgsz of this project profile
+	*/
+	@Override
+	public void setHjgsz(int hjgsz) {
+		_projectProfile.setHjgsz(hjgsz);
+	}
+
+	/**
+	* Returns the hjgsh of this project profile.
+	*
+	* @return the hjgsh of this project profile
+	*/
+	@Override
+	public int getHjgsh() {
+		return _projectProfile.getHjgsh();
+	}
+
+	/**
+	* Sets the hjgsh of this project profile.
+	*
+	* @param hjgsh the hjgsh of this project profile
+	*/
+	@Override
+	public void setHjgsh(int hjgsh) {
+		_projectProfile.setHjgsh(hjgsh);
+	}
+
+	/**
+	* Returns the sqr of this project profile.
+	*
+	* @return the sqr of this project profile
+	*/
+	@Override
+	public java.lang.String getSqr() {
+		return _projectProfile.getSqr();
+	}
+
+	/**
+	* Sets the sqr of this project profile.
+	*
+	* @param sqr the sqr of this project profile
+	*/
+	@Override
+	public void setSqr(java.lang.String sqr) {
+		_projectProfile.setSqr(sqr);
+	}
+
+	/**
+	* Returns the sqsx of this project profile.
+	*
+	* @return the sqsx of this project profile
+	*/
+	@Override
+	public java.lang.String getSqsx() {
+		return _projectProfile.getSqsx();
+	}
+
+	/**
+	* Sets the sqsx of this project profile.
+	*
+	* @param sqsx the sqsx of this project profile
+	*/
+	@Override
+	public void setSqsx(java.lang.String sqsx) {
+		_projectProfile.setSqsx(sqsx);
+	}
+
+	/**
+	* Returns the sqh of this project profile.
+	*
+	* @return the sqh of this project profile
+	*/
+	@Override
+	public java.lang.String getSqh() {
+		return _projectProfile.getSqh();
+	}
+
+	/**
+	* Sets the sqh of this project profile.
+	*
+	* @param sqh the sqh of this project profile
+	*/
+	@Override
+	public void setSqh(java.lang.String sqh) {
+		_projectProfile.setSqh(sqh);
+	}
+
+	/**
+	* Returns the cltjr of this project profile.
+	*
+	* @return the cltjr of this project profile
+	*/
+	@Override
+	public java.lang.String getCltjr() {
+		return _projectProfile.getCltjr();
+	}
+
+	/**
+	* Sets the cltjr of this project profile.
+	*
+	* @param cltjr the cltjr of this project profile
+	*/
+	@Override
+	public void setCltjr(java.lang.String cltjr) {
+		_projectProfile.setCltjr(cltjr);
+	}
+
+	/**
+	* Returns the cltjrlxdh of this project profile.
+	*
+	* @return the cltjrlxdh of this project profile
+	*/
+	@Override
+	public java.lang.String getCltjrlxdh() {
+		return _projectProfile.getCltjrlxdh();
+	}
+
+	/**
+	* Sets the cltjrlxdh of this project profile.
+	*
+	* @param cltjrlxdh the cltjrlxdh of this project profile
+	*/
+	@Override
+	public void setCltjrlxdh(java.lang.String cltjrlxdh) {
+		_projectProfile.setCltjrlxdh(cltjrlxdh);
+	}
+
+	/**
+	* Returns the cltjrlxdz of this project profile.
+	*
+	* @return the cltjrlxdz of this project profile
+	*/
+	@Override
+	public java.lang.String getCltjrlxdz() {
+		return _projectProfile.getCltjrlxdz();
+	}
+
+	/**
+	* Sets the cltjrlxdz of this project profile.
+	*
+	* @param cltjrlxdz the cltjrlxdz of this project profile
+	*/
+	@Override
+	public void setCltjrlxdz(java.lang.String cltjrlxdz) {
+		_projectProfile.setCltjrlxdz(cltjrlxdz);
+	}
+
+	/**
+	* Returns the sjr of this project profile.
+	*
+	* @return the sjr of this project profile
+	*/
+	@Override
+	public java.lang.String getSjr() {
+		return _projectProfile.getSjr();
+	}
+
+	/**
+	* Sets the sjr of this project profile.
+	*
+	* @param sjr the sjr of this project profile
+	*/
+	@Override
+	public void setSjr(java.lang.String sjr) {
+		_projectProfile.setSjr(sjr);
+	}
+
+	/**
+	* Returns the sjrlxdh of this project profile.
+	*
+	* @return the sjrlxdh of this project profile
+	*/
+	@Override
+	public java.lang.String getSjrlxdh() {
+		return _projectProfile.getSjrlxdh();
+	}
+
+	/**
+	* Sets the sjrlxdh of this project profile.
+	*
+	* @param sjrlxdh the sjrlxdh of this project profile
+	*/
+	@Override
+	public void setSjrlxdh(java.lang.String sjrlxdh) {
+		_projectProfile.setSjrlxdh(sjrlxdh);
+	}
+
+	/**
+	* Returns the slyj of this project profile.
+	*
+	* @return the slyj of this project profile
+	*/
+	@Override
+	public java.lang.String getSlyj() {
+		return _projectProfile.getSlyj();
+	}
+
+	/**
+	* Sets the slyj of this project profile.
+	*
+	* @param slyj the slyj of this project profile
+	*/
+	@Override
+	public void setSlyj(java.lang.String slyj) {
+		_projectProfile.setSlyj(slyj);
+	}
+
+	/**
+	* Returns the slsj of this project profile.
+	*
+	* @return the slsj of this project profile
+	*/
+	@Override
+	public java.lang.String getSlsj() {
+		return _projectProfile.getSlsj();
+	}
+
+	/**
+	* Sets the slsj of this project profile.
+	*
+	* @param slsj the slsj of this project profile
+	*/
+	@Override
+	public void setSlsj(java.lang.String slsj) {
+		_projectProfile.setSlsj(slsj);
 	}
 
 	@Override

@@ -17,6 +17,7 @@ package com.justonetech.cp.permit.model;
 import java.io.Serializable;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -47,6 +48,38 @@ public class ProjectProfileSoap implements Serializable {
 		soapModel.setJsydpzwjhfdccqzbh(model.getJsydpzwjhfdccqzbh());
 		soapModel.setJsgcghxkzbh(model.getJsgcghxkzbh());
 		soapModel.setXckgqk(model.getXckgqk());
+		soapModel.setXmlx(model.getXmlx());
+		soapModel.setLxjb(model.getLxjb());
+		soapModel.setXmxz(model.getXmxz());
+		soapModel.setSsqx(model.getSsqx());
+		soapModel.setYwbm(model.getYwbm());
+		soapModel.setJsddssqx(model.getJsddssqx());
+		soapModel.setJsgclb(model.getJsgclb());
+		soapModel.setJsgcsx(model.getJsgcsx());
+		soapModel.setGyzjbz(model.getGyzjbz());
+		soapModel.setZbjg(model.getZbjg());
+		soapModel.setXmtzgs(model.getXmtzgs());
+		soapModel.setJhkg(model.getJhkg());
+		soapModel.setJhjg(model.getJhjg());
+		soapModel.setSfzftzl(model.getSfzftzl());
+		soapModel.setYzzpl1(model.getYzzpl1());
+		soapModel.setYzzpl2(model.getYzzpl2());
+		soapModel.setYzzpl3(model.getYzzpl3());
+		soapModel.setYzzpl4(model.getYzzpl4());
+		soapModel.setTjsj(model.getTjsj());
+		soapModel.setSlbh(model.getSlbh());
+		soapModel.setHjgsz(model.getHjgsz());
+		soapModel.setHjgsh(model.getHjgsh());
+		soapModel.setSqr(model.getSqr());
+		soapModel.setSqsx(model.getSqsx());
+		soapModel.setSqh(model.getSqh());
+		soapModel.setCltjr(model.getCltjr());
+		soapModel.setCltjrlxdh(model.getCltjrlxdh());
+		soapModel.setCltjrlxdz(model.getCltjrlxdz());
+		soapModel.setSjr(model.getSjr());
+		soapModel.setSjrlxdh(model.getSjrlxdh());
+		soapModel.setSlyj(model.getSlyj());
+		soapModel.setSlsj(model.getSlsj());
 
 		return soapModel;
 	}
@@ -243,6 +276,266 @@ public class ProjectProfileSoap implements Serializable {
 		_xckgqk = xckgqk;
 	}
 
+	public long getXmlx() {
+		return _xmlx;
+	}
+
+	public void setXmlx(long xmlx) {
+		_xmlx = xmlx;
+	}
+
+	public String getLxjb() {
+		return _lxjb;
+	}
+
+	public void setLxjb(String lxjb) {
+		_lxjb = lxjb;
+	}
+
+	public long getXmxz() {
+		return _xmxz;
+	}
+
+	public void setXmxz(long xmxz) {
+		_xmxz = xmxz;
+	}
+
+	public String getSsqx() {
+		return _ssqx;
+	}
+
+	public void setSsqx(String ssqx) {
+		_ssqx = ssqx;
+	}
+
+	public String getYwbm() {
+		return _ywbm;
+	}
+
+	public void setYwbm(String ywbm) {
+		_ywbm = ywbm;
+	}
+
+	public long getJsddssqx() {
+		return _jsddssqx;
+	}
+
+	public void setJsddssqx(long jsddssqx) {
+		_jsddssqx = jsddssqx;
+	}
+
+	public String getJsgclb() {
+		return _jsgclb;
+	}
+
+	public void setJsgclb(String jsgclb) {
+		_jsgclb = jsgclb;
+	}
+
+	public long getJsgcsx() {
+		return _jsgcsx;
+	}
+
+	public void setJsgcsx(long jsgcsx) {
+		_jsgcsx = jsgcsx;
+	}
+
+	public String getGyzjbz() {
+		return _gyzjbz;
+	}
+
+	public void setGyzjbz(String gyzjbz) {
+		_gyzjbz = gyzjbz;
+	}
+
+	public String getZbjg() {
+		return _zbjg;
+	}
+
+	public void setZbjg(String zbjg) {
+		_zbjg = zbjg;
+	}
+
+	public String getXmtzgs() {
+		return _xmtzgs;
+	}
+
+	public void setXmtzgs(String xmtzgs) {
+		_xmtzgs = xmtzgs;
+	}
+
+	public Date getJhkg() {
+		return _jhkg;
+	}
+
+	public void setJhkg(Date jhkg) {
+		_jhkg = jhkg;
+	}
+
+	public Date getJhjg() {
+		return _jhjg;
+	}
+
+	public void setJhjg(Date jhjg) {
+		_jhjg = jhjg;
+	}
+
+	public boolean getSfzftzl() {
+		return _sfzftzl;
+	}
+
+	public boolean isSfzftzl() {
+		return _sfzftzl;
+	}
+
+	public void setSfzftzl(boolean sfzftzl) {
+		_sfzftzl = sfzftzl;
+	}
+
+	public String getYzzpl1() {
+		return _yzzpl1;
+	}
+
+	public void setYzzpl1(String yzzpl1) {
+		_yzzpl1 = yzzpl1;
+	}
+
+	public String getYzzpl2() {
+		return _yzzpl2;
+	}
+
+	public void setYzzpl2(String yzzpl2) {
+		_yzzpl2 = yzzpl2;
+	}
+
+	public String getYzzpl3() {
+		return _yzzpl3;
+	}
+
+	public void setYzzpl3(String yzzpl3) {
+		_yzzpl3 = yzzpl3;
+	}
+
+	public String getYzzpl4() {
+		return _yzzpl4;
+	}
+
+	public void setYzzpl4(String yzzpl4) {
+		_yzzpl4 = yzzpl4;
+	}
+
+	public Date getTjsj() {
+		return _tjsj;
+	}
+
+	public void setTjsj(Date tjsj) {
+		_tjsj = tjsj;
+	}
+
+	public String getSlbh() {
+		return _slbh;
+	}
+
+	public void setSlbh(String slbh) {
+		_slbh = slbh;
+	}
+
+	public int getHjgsz() {
+		return _hjgsz;
+	}
+
+	public void setHjgsz(int hjgsz) {
+		_hjgsz = hjgsz;
+	}
+
+	public int getHjgsh() {
+		return _hjgsh;
+	}
+
+	public void setHjgsh(int hjgsh) {
+		_hjgsh = hjgsh;
+	}
+
+	public String getSqr() {
+		return _sqr;
+	}
+
+	public void setSqr(String sqr) {
+		_sqr = sqr;
+	}
+
+	public String getSqsx() {
+		return _sqsx;
+	}
+
+	public void setSqsx(String sqsx) {
+		_sqsx = sqsx;
+	}
+
+	public String getSqh() {
+		return _sqh;
+	}
+
+	public void setSqh(String sqh) {
+		_sqh = sqh;
+	}
+
+	public String getCltjr() {
+		return _cltjr;
+	}
+
+	public void setCltjr(String cltjr) {
+		_cltjr = cltjr;
+	}
+
+	public String getCltjrlxdh() {
+		return _cltjrlxdh;
+	}
+
+	public void setCltjrlxdh(String cltjrlxdh) {
+		_cltjrlxdh = cltjrlxdh;
+	}
+
+	public String getCltjrlxdz() {
+		return _cltjrlxdz;
+	}
+
+	public void setCltjrlxdz(String cltjrlxdz) {
+		_cltjrlxdz = cltjrlxdz;
+	}
+
+	public String getSjr() {
+		return _sjr;
+	}
+
+	public void setSjr(String sjr) {
+		_sjr = sjr;
+	}
+
+	public String getSjrlxdh() {
+		return _sjrlxdh;
+	}
+
+	public void setSjrlxdh(String sjrlxdh) {
+		_sjrlxdh = sjrlxdh;
+	}
+
+	public String getSlyj() {
+		return _slyj;
+	}
+
+	public void setSlyj(String slyj) {
+		_slyj = slyj;
+	}
+
+	public String getSlsj() {
+		return _slsj;
+	}
+
+	public void setSlsj(String slsj) {
+		_slsj = slsj;
+	}
+
 	private long _permitId;
 	private String _bjbh;
 	private String _jsdwmc;
@@ -261,4 +554,36 @@ public class ProjectProfileSoap implements Serializable {
 	private String _jsydpzwjhfdccqzbh;
 	private String _jsgcghxkzbh;
 	private String _xckgqk;
+	private long _xmlx;
+	private String _lxjb;
+	private long _xmxz;
+	private String _ssqx;
+	private String _ywbm;
+	private long _jsddssqx;
+	private String _jsgclb;
+	private long _jsgcsx;
+	private String _gyzjbz;
+	private String _zbjg;
+	private String _xmtzgs;
+	private Date _jhkg;
+	private Date _jhjg;
+	private boolean _sfzftzl;
+	private String _yzzpl1;
+	private String _yzzpl2;
+	private String _yzzpl3;
+	private String _yzzpl4;
+	private Date _tjsj;
+	private String _slbh;
+	private int _hjgsz;
+	private int _hjgsh;
+	private String _sqr;
+	private String _sqsx;
+	private String _sqh;
+	private String _cltjr;
+	private String _cltjrlxdh;
+	private String _cltjrlxdz;
+	private String _sjr;
+	private String _sjrlxdh;
+	private String _slyj;
+	private String _slsj;
 }

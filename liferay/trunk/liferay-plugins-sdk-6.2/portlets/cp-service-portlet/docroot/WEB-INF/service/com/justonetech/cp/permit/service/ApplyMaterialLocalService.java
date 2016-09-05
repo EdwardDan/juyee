@@ -253,4 +253,9 @@ public interface ApplyMaterialLocalService extends BaseLocalService,
 	public java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
+
+	public java.util.List<com.justonetech.cp.permit.model.ApplyMaterial> findByPermitId(
+		long permitId, int start, int end);
+
+	public int countByPermitId(long permitId);
 }

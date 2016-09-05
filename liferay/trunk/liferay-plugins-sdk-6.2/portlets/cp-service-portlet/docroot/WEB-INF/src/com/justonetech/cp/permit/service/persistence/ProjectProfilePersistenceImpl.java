@@ -341,6 +341,38 @@ public class ProjectProfilePersistenceImpl extends BasePersistenceImpl<ProjectPr
 		projectProfileImpl.setJsydpzwjhfdccqzbh(projectProfile.getJsydpzwjhfdccqzbh());
 		projectProfileImpl.setJsgcghxkzbh(projectProfile.getJsgcghxkzbh());
 		projectProfileImpl.setXckgqk(projectProfile.getXckgqk());
+		projectProfileImpl.setXmlx(projectProfile.getXmlx());
+		projectProfileImpl.setLxjb(projectProfile.getLxjb());
+		projectProfileImpl.setXmxz(projectProfile.getXmxz());
+		projectProfileImpl.setSsqx(projectProfile.getSsqx());
+		projectProfileImpl.setYwbm(projectProfile.getYwbm());
+		projectProfileImpl.setJsddssqx(projectProfile.getJsddssqx());
+		projectProfileImpl.setJsgclb(projectProfile.getJsgclb());
+		projectProfileImpl.setJsgcsx(projectProfile.getJsgcsx());
+		projectProfileImpl.setGyzjbz(projectProfile.getGyzjbz());
+		projectProfileImpl.setZbjg(projectProfile.getZbjg());
+		projectProfileImpl.setXmtzgs(projectProfile.getXmtzgs());
+		projectProfileImpl.setJhkg(projectProfile.getJhkg());
+		projectProfileImpl.setJhjg(projectProfile.getJhjg());
+		projectProfileImpl.setSfzftzl(projectProfile.isSfzftzl());
+		projectProfileImpl.setYzzpl1(projectProfile.getYzzpl1());
+		projectProfileImpl.setYzzpl2(projectProfile.getYzzpl2());
+		projectProfileImpl.setYzzpl3(projectProfile.getYzzpl3());
+		projectProfileImpl.setYzzpl4(projectProfile.getYzzpl4());
+		projectProfileImpl.setTjsj(projectProfile.getTjsj());
+		projectProfileImpl.setSlbh(projectProfile.getSlbh());
+		projectProfileImpl.setHjgsz(projectProfile.getHjgsz());
+		projectProfileImpl.setHjgsh(projectProfile.getHjgsh());
+		projectProfileImpl.setSqr(projectProfile.getSqr());
+		projectProfileImpl.setSqsx(projectProfile.getSqsx());
+		projectProfileImpl.setSqh(projectProfile.getSqh());
+		projectProfileImpl.setCltjr(projectProfile.getCltjr());
+		projectProfileImpl.setCltjrlxdh(projectProfile.getCltjrlxdh());
+		projectProfileImpl.setCltjrlxdz(projectProfile.getCltjrlxdz());
+		projectProfileImpl.setSjr(projectProfile.getSjr());
+		projectProfileImpl.setSjrlxdh(projectProfile.getSjrlxdh());
+		projectProfileImpl.setSlyj(projectProfile.getSlyj());
+		projectProfileImpl.setSlsj(projectProfile.getSlsj());
 
 		return projectProfileImpl;
 	}

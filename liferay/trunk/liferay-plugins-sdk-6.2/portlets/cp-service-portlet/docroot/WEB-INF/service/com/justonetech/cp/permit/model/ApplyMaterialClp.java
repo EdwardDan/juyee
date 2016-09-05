@@ -79,6 +79,7 @@ public class ApplyMaterialClp extends BaseModelImpl<ApplyMaterial>
 		attributes.put("clmc", getClmc());
 		attributes.put("yjfs", getYjfs());
 		attributes.put("sjfs", getSjfs());
+		attributes.put("fileEntryIds", getFileEntryIds());
 
 		return attributes;
 	}
@@ -91,13 +92,13 @@ public class ApplyMaterialClp extends BaseModelImpl<ApplyMaterial>
 			setMaterialId(materialId);
 		}
 
-		String permitId = (String)attributes.get("permitId");
+		Long permitId = (Long)attributes.get("permitId");
 
 		if (permitId != null) {
 			setPermitId(permitId);
 		}
 
-		Integer xh = (Integer)attributes.get("xh");
+		String xh = (String)attributes.get("xh");
 
 		if (xh != null) {
 			setXh(xh);
@@ -119,6 +120,12 @@ public class ApplyMaterialClp extends BaseModelImpl<ApplyMaterial>
 
 		if (sjfs != null) {
 			setSjfs(sjfs);
+		}
+
+		String fileEntryIds = (String)attributes.get("fileEntryIds");
+
+		if (fileEntryIds != null) {
+			setFileEntryIds(fileEntryIds);
 		}
 	}
 
@@ -146,19 +153,19 @@ public class ApplyMaterialClp extends BaseModelImpl<ApplyMaterial>
 	}
 
 	@Override
-	public String getPermitId() {
+	public long getPermitId() {
 		return _permitId;
 	}
 
 	@Override
-	public void setPermitId(String permitId) {
+	public void setPermitId(long permitId) {
 		_permitId = permitId;
 
 		if (_applyMaterialRemoteModel != null) {
 			try {
 				Class<?> clazz = _applyMaterialRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setPermitId", String.class);
+				Method method = clazz.getMethod("setPermitId", long.class);
 
 				method.invoke(_applyMaterialRemoteModel, permitId);
 			}
@@ -169,19 +176,19 @@ public class ApplyMaterialClp extends BaseModelImpl<ApplyMaterial>
 	}
 
 	@Override
-	public int getXh() {
+	public String getXh() {
 		return _xh;
 	}
 
 	@Override
-	public void setXh(int xh) {
+	public void setXh(String xh) {
 		_xh = xh;
 
 		if (_applyMaterialRemoteModel != null) {
 			try {
 				Class<?> clazz = _applyMaterialRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setXh", int.class);
+				Method method = clazz.getMethod("setXh", String.class);
 
 				method.invoke(_applyMaterialRemoteModel, xh);
 			}
@@ -253,6 +260,29 @@ public class ApplyMaterialClp extends BaseModelImpl<ApplyMaterial>
 				Method method = clazz.getMethod("setSjfs", int.class);
 
 				method.invoke(_applyMaterialRemoteModel, sjfs);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getFileEntryIds() {
+		return _fileEntryIds;
+	}
+
+	@Override
+	public void setFileEntryIds(String fileEntryIds) {
+		_fileEntryIds = fileEntryIds;
+
+		if (_applyMaterialRemoteModel != null) {
+			try {
+				Class<?> clazz = _applyMaterialRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setFileEntryIds", String.class);
+
+				method.invoke(_applyMaterialRemoteModel, fileEntryIds);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -336,6 +366,7 @@ public class ApplyMaterialClp extends BaseModelImpl<ApplyMaterial>
 		clone.setClmc(getClmc());
 		clone.setYjfs(getYjfs());
 		clone.setSjfs(getSjfs());
+		clone.setFileEntryIds(getFileEntryIds());
 
 		return clone;
 	}
@@ -344,15 +375,7 @@ public class ApplyMaterialClp extends BaseModelImpl<ApplyMaterial>
 	public int compareTo(ApplyMaterial applyMaterial) {
 		int value = 0;
 
-		if (getXh() < applyMaterial.getXh()) {
-			value = -1;
-		}
-		else if (getXh() > applyMaterial.getXh()) {
-			value = 1;
-		}
-		else {
-			value = 0;
-		}
+		value = getXh().compareTo(applyMaterial.getXh());
 
 		if (value != 0) {
 			return value;
@@ -394,7 +417,7 @@ public class ApplyMaterialClp extends BaseModelImpl<ApplyMaterial>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(13);
+		StringBundler sb = new StringBundler(15);
 
 		sb.append("{materialId=");
 		sb.append(getMaterialId());
@@ -408,6 +431,8 @@ public class ApplyMaterialClp extends BaseModelImpl<ApplyMaterial>
 		sb.append(getYjfs());
 		sb.append(", sjfs=");
 		sb.append(getSjfs());
+		sb.append(", fileEntryIds=");
+		sb.append(getFileEntryIds());
 		sb.append("}");
 
 		return sb.toString();
@@ -415,7 +440,7 @@ public class ApplyMaterialClp extends BaseModelImpl<ApplyMaterial>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(22);
+		StringBundler sb = new StringBundler(25);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.cp.permit.model.ApplyMaterial");
@@ -445,6 +470,10 @@ public class ApplyMaterialClp extends BaseModelImpl<ApplyMaterial>
 			"<column><column-name>sjfs</column-name><column-value><![CDATA[");
 		sb.append(getSjfs());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>fileEntryIds</column-name><column-value><![CDATA[");
+		sb.append(getFileEntryIds());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -452,11 +481,12 @@ public class ApplyMaterialClp extends BaseModelImpl<ApplyMaterial>
 	}
 
 	private long _materialId;
-	private String _permitId;
-	private int _xh;
+	private long _permitId;
+	private String _xh;
 	private String _clmc;
 	private int _yjfs;
 	private int _sjfs;
+	private String _fileEntryIds;
 	private BaseModel<?> _applyMaterialRemoteModel;
 	private Class<?> _clpSerializerClass = com.justonetech.cp.permit.service.ClpSerializer.class;
 }

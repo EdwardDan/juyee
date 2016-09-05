@@ -113,6 +113,14 @@ public class ApplyMaterialLocalServiceClpInvoker {
 		_methodName49 = "setBeanIdentifier";
 
 		_methodParameterTypes49 = new String[] { "java.lang.String" };
+
+		_methodName54 = "findByPermitId";
+
+		_methodParameterTypes54 = new String[] { "long", "int", "int" };
+
+		_methodName55 = "countByPermitId";
+
+		_methodParameterTypes55 = new String[] { "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -216,6 +224,18 @@ public class ApplyMaterialLocalServiceClpInvoker {
 			return null;
 		}
 
+		if (_methodName54.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes54, parameterTypes)) {
+			return ApplyMaterialLocalServiceUtil.findByPermitId(((Long)arguments[0]).longValue(),
+				((Integer)arguments[1]).intValue(),
+				((Integer)arguments[2]).intValue());
+		}
+
+		if (_methodName55.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes55, parameterTypes)) {
+			return ApplyMaterialLocalServiceUtil.countByPermitId(((Long)arguments[0]).longValue());
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -255,4 +275,8 @@ public class ApplyMaterialLocalServiceClpInvoker {
 	private String[] _methodParameterTypes48;
 	private String _methodName49;
 	private String[] _methodParameterTypes49;
+	private String _methodName54;
+	private String[] _methodParameterTypes54;
+	private String _methodName55;
+	private String[] _methodParameterTypes55;
 }

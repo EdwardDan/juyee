@@ -36,7 +36,7 @@ public class ApplyMaterialCacheModel implements CacheModel<ApplyMaterial>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(13);
+		StringBundler sb = new StringBundler(15);
 
 		sb.append("{materialId=");
 		sb.append(materialId);
@@ -50,6 +50,8 @@ public class ApplyMaterialCacheModel implements CacheModel<ApplyMaterial>,
 		sb.append(yjfs);
 		sb.append(", sjfs=");
 		sb.append(sjfs);
+		sb.append(", fileEntryIds=");
+		sb.append(fileEntryIds);
 		sb.append("}");
 
 		return sb.toString();
@@ -60,15 +62,14 @@ public class ApplyMaterialCacheModel implements CacheModel<ApplyMaterial>,
 		ApplyMaterialImpl applyMaterialImpl = new ApplyMaterialImpl();
 
 		applyMaterialImpl.setMaterialId(materialId);
+		applyMaterialImpl.setPermitId(permitId);
 
-		if (permitId == null) {
-			applyMaterialImpl.setPermitId(StringPool.BLANK);
+		if (xh == null) {
+			applyMaterialImpl.setXh(StringPool.BLANK);
 		}
 		else {
-			applyMaterialImpl.setPermitId(permitId);
+			applyMaterialImpl.setXh(xh);
 		}
-
-		applyMaterialImpl.setXh(xh);
 
 		if (clmc == null) {
 			applyMaterialImpl.setClmc(StringPool.BLANK);
@@ -80,6 +81,13 @@ public class ApplyMaterialCacheModel implements CacheModel<ApplyMaterial>,
 		applyMaterialImpl.setYjfs(yjfs);
 		applyMaterialImpl.setSjfs(sjfs);
 
+		if (fileEntryIds == null) {
+			applyMaterialImpl.setFileEntryIds(StringPool.BLANK);
+		}
+		else {
+			applyMaterialImpl.setFileEntryIds(fileEntryIds);
+		}
+
 		applyMaterialImpl.resetOriginalValues();
 
 		return applyMaterialImpl;
@@ -88,26 +96,26 @@ public class ApplyMaterialCacheModel implements CacheModel<ApplyMaterial>,
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		materialId = objectInput.readLong();
-		permitId = objectInput.readUTF();
-		xh = objectInput.readInt();
+		permitId = objectInput.readLong();
+		xh = objectInput.readUTF();
 		clmc = objectInput.readUTF();
 		yjfs = objectInput.readInt();
 		sjfs = objectInput.readInt();
+		fileEntryIds = objectInput.readUTF();
 	}
 
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(materialId);
+		objectOutput.writeLong(permitId);
 
-		if (permitId == null) {
+		if (xh == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(permitId);
+			objectOutput.writeUTF(xh);
 		}
-
-		objectOutput.writeInt(xh);
 
 		if (clmc == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
@@ -118,12 +126,20 @@ public class ApplyMaterialCacheModel implements CacheModel<ApplyMaterial>,
 
 		objectOutput.writeInt(yjfs);
 		objectOutput.writeInt(sjfs);
+
+		if (fileEntryIds == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(fileEntryIds);
+		}
 	}
 
 	public long materialId;
-	public String permitId;
-	public int xh;
+	public long permitId;
+	public String xh;
 	public String clmc;
 	public int yjfs;
 	public int sjfs;
+	public String fileEntryIds;
 }

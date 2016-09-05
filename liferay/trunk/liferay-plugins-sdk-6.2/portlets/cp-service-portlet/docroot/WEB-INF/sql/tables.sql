@@ -1,10 +1,11 @@
 create table cp_ApplyMaterial (
 	materialId LONG not null primary key,
-	permitId VARCHAR(75) null,
-	xh INTEGER,
+	permitId LONG,
+	xh VARCHAR(75) null,
 	clmc VARCHAR(75) null,
 	yjfs INTEGER,
-	sjfs INTEGER
+	sjfs INTEGER,
+	fileEntryIds VARCHAR(75) null
 );
 
 create table cp_Contract (
@@ -269,12 +270,12 @@ create table cp_Project (
 create table cp_ProjectProfile (
 	permitId LONG not null primary key,
 	bjbh VARCHAR(75) null,
-	jsdwmc VARCHAR(75) null,
+	jsdwmc VARCHAR(300) null,
 	jsdwxz VARCHAR(75) null,
-	jsdwdz VARCHAR(75) null,
-	gcmc VARCHAR(75) null,
-	jsdd VARCHAR(75) null,
-	jsgcgm VARCHAR(75) null,
+	jsdwdz VARCHAR(300) null,
+	gcmc VARCHAR(300) null,
+	jsdd VARCHAR(300) null,
+	jsgcgm VARCHAR(500) null,
 	fwjzmj VARCHAR(75) null,
 	htjg VARCHAR(75) null,
 	htgq INTEGER,
@@ -284,7 +285,39 @@ create table cp_ProjectProfile (
 	jsdwsjh VARCHAR(75) null,
 	jsydpzwjhfdccqzbh VARCHAR(75) null,
 	jsgcghxkzbh VARCHAR(75) null,
-	xckgqk VARCHAR(75) null
+	xckgqk VARCHAR(75) null,
+	xmlx LONG,
+	lxjb VARCHAR(75) null,
+	xmxz LONG,
+	ssqx VARCHAR(75) null,
+	ywbm VARCHAR(75) null,
+	jsddssqx LONG,
+	jsgclb VARCHAR(75) null,
+	jsgcsx LONG,
+	gyzjbz VARCHAR(75) null,
+	zbjg VARCHAR(75) null,
+	xmtzgs VARCHAR(75) null,
+	jhkg DATE null,
+	jhjg DATE null,
+	sfzftzl BOOLEAN,
+	yzzpl1 VARCHAR(75) null,
+	yzzpl2 VARCHAR(75) null,
+	yzzpl3 VARCHAR(75) null,
+	yzzpl4 VARCHAR(75) null,
+	tjsj DATE null,
+	slbh VARCHAR(75) null,
+	hjgsz INTEGER,
+	hjgsh INTEGER,
+	sqr VARCHAR(75) null,
+	sqsx VARCHAR(1000) null,
+	sqh VARCHAR(75) null,
+	cltjr VARCHAR(75) null,
+	cltjrlxdh VARCHAR(75) null,
+	cltjrlxdz VARCHAR(500) null,
+	sjr VARCHAR(75) null,
+	sjrlxdh VARCHAR(75) null,
+	slyj VARCHAR(1000) null,
+	slsj VARCHAR(75) null
 );
 
 create table cp_UnitProject (

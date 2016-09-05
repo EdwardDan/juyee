@@ -45,7 +45,7 @@ public interface ApplyMaterialPersistence extends BasePersistence<ApplyMaterial>
 	* @throws SystemException if a system exception occurred
 	*/
 	public java.util.List<com.justonetech.cp.permit.model.ApplyMaterial> findByPermitId(
-		java.lang.String permitId)
+		long permitId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
@@ -62,7 +62,7 @@ public interface ApplyMaterialPersistence extends BasePersistence<ApplyMaterial>
 	* @throws SystemException if a system exception occurred
 	*/
 	public java.util.List<com.justonetech.cp.permit.model.ApplyMaterial> findByPermitId(
-		java.lang.String permitId, int start, int end)
+		long permitId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
@@ -80,7 +80,7 @@ public interface ApplyMaterialPersistence extends BasePersistence<ApplyMaterial>
 	* @throws SystemException if a system exception occurred
 	*/
 	public java.util.List<com.justonetech.cp.permit.model.ApplyMaterial> findByPermitId(
-		java.lang.String permitId, int start, int end,
+		long permitId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -94,7 +94,7 @@ public interface ApplyMaterialPersistence extends BasePersistence<ApplyMaterial>
 	* @throws SystemException if a system exception occurred
 	*/
 	public com.justonetech.cp.permit.model.ApplyMaterial findByPermitId_First(
-		java.lang.String permitId,
+		long permitId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.justonetech.cp.permit.NoSuchApplyMaterialException,
 			com.liferay.portal.kernel.exception.SystemException;
@@ -108,7 +108,7 @@ public interface ApplyMaterialPersistence extends BasePersistence<ApplyMaterial>
 	* @throws SystemException if a system exception occurred
 	*/
 	public com.justonetech.cp.permit.model.ApplyMaterial fetchByPermitId_First(
-		java.lang.String permitId,
+		long permitId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -122,7 +122,7 @@ public interface ApplyMaterialPersistence extends BasePersistence<ApplyMaterial>
 	* @throws SystemException if a system exception occurred
 	*/
 	public com.justonetech.cp.permit.model.ApplyMaterial findByPermitId_Last(
-		java.lang.String permitId,
+		long permitId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.justonetech.cp.permit.NoSuchApplyMaterialException,
 			com.liferay.portal.kernel.exception.SystemException;
@@ -136,7 +136,7 @@ public interface ApplyMaterialPersistence extends BasePersistence<ApplyMaterial>
 	* @throws SystemException if a system exception occurred
 	*/
 	public com.justonetech.cp.permit.model.ApplyMaterial fetchByPermitId_Last(
-		java.lang.String permitId,
+		long permitId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -151,7 +151,7 @@ public interface ApplyMaterialPersistence extends BasePersistence<ApplyMaterial>
 	* @throws SystemException if a system exception occurred
 	*/
 	public com.justonetech.cp.permit.model.ApplyMaterial[] findByPermitId_PrevAndNext(
-		long materialId, java.lang.String permitId,
+		long materialId, long permitId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.justonetech.cp.permit.NoSuchApplyMaterialException,
 			com.liferay.portal.kernel.exception.SystemException;
@@ -162,7 +162,7 @@ public interface ApplyMaterialPersistence extends BasePersistence<ApplyMaterial>
 	* @param permitId the permit ID
 	* @throws SystemException if a system exception occurred
 	*/
-	public void removeByPermitId(java.lang.String permitId)
+	public void removeByPermitId(long permitId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
@@ -172,7 +172,7 @@ public interface ApplyMaterialPersistence extends BasePersistence<ApplyMaterial>
 	* @return the number of matching apply materials
 	* @throws SystemException if a system exception occurred
 	*/
-	public int countByPermitId(java.lang.String permitId)
+	public int countByPermitId(long permitId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**

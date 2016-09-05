@@ -266,11 +266,12 @@
 	</model>
 	<model name="com.justonetech.cp.permit.model.ApplyMaterial">
 		<field name="materialId" type="long" />
-		<field name="permitId" type="String" />
-		<field name="xh" type="int" />
+		<field name="permitId" type="long" />
+		<field name="xh" type="String" />
 		<field name="clmc" type="String" />
 		<field name="yjfs" type="int" />
 		<field name="sjfs" type="int" />
+		<field name="fileEntryIds" type="String" />
 	</model>
 	<model name="com.justonetech.cp.permit.model.ParticipationUnit">
 		<field name="unitId" type="long" />

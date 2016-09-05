@@ -55,6 +55,7 @@ public class ApplyMaterialWrapper implements ApplyMaterial,
 		attributes.put("clmc", getClmc());
 		attributes.put("yjfs", getYjfs());
 		attributes.put("sjfs", getSjfs());
+		attributes.put("fileEntryIds", getFileEntryIds());
 
 		return attributes;
 	}
@@ -67,13 +68,13 @@ public class ApplyMaterialWrapper implements ApplyMaterial,
 			setMaterialId(materialId);
 		}
 
-		String permitId = (String)attributes.get("permitId");
+		Long permitId = (Long)attributes.get("permitId");
 
 		if (permitId != null) {
 			setPermitId(permitId);
 		}
 
-		Integer xh = (Integer)attributes.get("xh");
+		String xh = (String)attributes.get("xh");
 
 		if (xh != null) {
 			setXh(xh);
@@ -95,6 +96,12 @@ public class ApplyMaterialWrapper implements ApplyMaterial,
 
 		if (sjfs != null) {
 			setSjfs(sjfs);
+		}
+
+		String fileEntryIds = (String)attributes.get("fileEntryIds");
+
+		if (fileEntryIds != null) {
+			setFileEntryIds(fileEntryIds);
 		}
 	}
 
@@ -144,7 +151,7 @@ public class ApplyMaterialWrapper implements ApplyMaterial,
 	* @return the permit ID of this apply material
 	*/
 	@Override
-	public java.lang.String getPermitId() {
+	public long getPermitId() {
 		return _applyMaterial.getPermitId();
 	}
 
@@ -154,7 +161,7 @@ public class ApplyMaterialWrapper implements ApplyMaterial,
 	* @param permitId the permit ID of this apply material
 	*/
 	@Override
-	public void setPermitId(java.lang.String permitId) {
+	public void setPermitId(long permitId) {
 		_applyMaterial.setPermitId(permitId);
 	}
 
@@ -164,7 +171,7 @@ public class ApplyMaterialWrapper implements ApplyMaterial,
 	* @return the xh of this apply material
 	*/
 	@Override
-	public int getXh() {
+	public java.lang.String getXh() {
 		return _applyMaterial.getXh();
 	}
 
@@ -174,7 +181,7 @@ public class ApplyMaterialWrapper implements ApplyMaterial,
 	* @param xh the xh of this apply material
 	*/
 	@Override
-	public void setXh(int xh) {
+	public void setXh(java.lang.String xh) {
 		_applyMaterial.setXh(xh);
 	}
 
@@ -236,6 +243,26 @@ public class ApplyMaterialWrapper implements ApplyMaterial,
 	@Override
 	public void setSjfs(int sjfs) {
 		_applyMaterial.setSjfs(sjfs);
+	}
+
+	/**
+	* Returns the file entry IDs of this apply material.
+	*
+	* @return the file entry IDs of this apply material
+	*/
+	@Override
+	public java.lang.String getFileEntryIds() {
+		return _applyMaterial.getFileEntryIds();
+	}
+
+	/**
+	* Sets the file entry IDs of this apply material.
+	*
+	* @param fileEntryIds the file entry IDs of this apply material
+	*/
+	@Override
+	public void setFileEntryIds(java.lang.String fileEntryIds) {
+		_applyMaterial.setFileEntryIds(fileEntryIds);
 	}
 
 	@Override
