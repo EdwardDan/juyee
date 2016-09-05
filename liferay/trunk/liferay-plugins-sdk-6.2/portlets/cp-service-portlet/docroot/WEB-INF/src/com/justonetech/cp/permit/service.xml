@@ -161,11 +161,12 @@
 		<!-- Audit fields -->
 
 		<!-- Business fields -->
-		<column name="permitId" type="String" /><!-- 施工许可Id -->
-		<column name="xh" type="int" /><!-- 序号 -->
+		<column name="permitId" type="long" /><!-- 施工许可Id -->
+		<column name="xh" type="String" /><!-- 序号 -->
 		<column name="clmc" type="String" /><!-- 材料名称 -->
 		<column name="yjfs" type="int" /><!-- 应交份数 -->
 		<column name="sjfs" type="int" /><!-- 实交份数 -->
+		<column name="fileEntryIds" type="String" /><!-- 文件Id集合 -->
 
 		<!-- Order -->
 		<order>
