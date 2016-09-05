@@ -14,7 +14,14 @@
 
 package com.justonetech.cp.permit.service.impl;
 
+import java.util.Collections;
+import java.util.List;
+
+import com.justonetech.cp.permit.model.ApplyMaterial;
 import com.justonetech.cp.permit.service.base.ApplyMaterialLocalServiceBaseImpl;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 /**
  * The implementation of the apply material local service.
@@ -37,4 +44,25 @@ public class ApplyMaterialLocalServiceImpl
 	 *
 	 * Never reference this interface directly. Always use {@link com.justonetech.cp.permit.service.ApplyMaterialLocalServiceUtil} to access the apply material local service.
 	 */
+	private static Log log = LogFactoryUtil.getLog(ApplyMaterialLocalServiceImpl.class);
+	public List<ApplyMaterial> findByPermitId(long permitId,int start,int end){
+		try {
+			return applyMaterialPersistence.findByPermitId(permitId, start, end);
+		}
+		catch (SystemException e) {
+			log.info(e.getMessage());
+		}
+		return Collections.emptyList();
+	}
+	
+	public int countByPermitId(long permitId) {
+
+		try {
+			return (int) applyMaterialPersistence.countByPermitId(permitId);
+		}
+		catch (SystemException e) {
+			log.info(e.getMessage());
+		}
+		return 0;
+	}
 }
