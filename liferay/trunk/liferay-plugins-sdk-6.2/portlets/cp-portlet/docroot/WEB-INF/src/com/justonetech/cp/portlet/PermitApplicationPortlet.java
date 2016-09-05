@@ -10,12 +10,16 @@ import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
+import org.apache.tools.ant.taskdefs.WaitFor.Unit;
+
 import com.justonetech.cp.contract.model.Contract;
 import com.justonetech.cp.contract.service.ContractLocalServiceUtil;
 import com.justonetech.cp.permit.model.Permit;
 import com.justonetech.cp.permit.model.ProjectProfile;
+import com.justonetech.cp.permit.model.UnitProject;
 import com.justonetech.cp.permit.service.PermitLocalServiceUtil;
 import com.justonetech.cp.permit.service.ProjectProfileLocalServiceUtil;
+import com.justonetech.cp.permit.service.UnitProjectLocalServiceUtil;
 import com.justonetech.cp.project.model.Project;
 import com.justonetech.cp.project.service.ProjectLocalServiceUtil;
 import com.liferay.counter.service.CounterLocalServiceUtil;
@@ -39,10 +43,10 @@ public class PermitApplicationPortlet extends MVCPortlet {
 
 		String mvcPath = ParamUtil.getString(renderRequest, "mvcPath");
 		if (Validator.equals(mvcPath, "/portlet/permit-application/select-contract.jsp")) {
-			String bjbh = ParamUtil.getString(renderRequest, "bjbh","");
-			String bdh = ParamUtil.getString(renderRequest, "bdh","");
-			String htmc = ParamUtil.getString(renderRequest, "htmc","");
-			String zzjgdm = ParamUtil.getString(renderRequest, "zzjgdm","");
+			String bjbh = ParamUtil.getString(renderRequest, "bjbh", "");
+			String bdh = ParamUtil.getString(renderRequest, "bdh", "");
+			String htmc = ParamUtil.getString(renderRequest, "htmc", "");
+			String zzjgdm = ParamUtil.getString(renderRequest, "zzjgdm", "");
 			renderRequest.setAttribute("bjbh", bjbh);
 			renderRequest.setAttribute("bdh", bdh);
 			renderRequest.setAttribute("htmc", htmc);
@@ -54,7 +58,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 			int cur = ParamUtil.getInteger(renderRequest, "cur", 1);
 			int start = delta * (cur - 1);
 			int end = delta * cur;
-			ybssgzbContracts = ContractLocalServiceUtil.getYbssgzbContracts(zzjgdm,bjbh,bdh,htmc,start, end);
+			ybssgzbContracts = ContractLocalServiceUtil.getYbssgzbContracts(zzjgdm, bjbh, bdh, htmc, start, end);
 			ybssgzbContractsCount = ContractLocalServiceUtil.getYbssgzbContractsCount(zzjgdm, bjbh, bdh, htmc);
 			renderRequest.setAttribute("ybssgzbContracts", ybssgzbContracts);
 			renderRequest.setAttribute("ybssgzbContractsCount", ybssgzbContractsCount);
@@ -70,26 +74,26 @@ public class PermitApplicationPortlet extends MVCPortlet {
 			// Permit permit = null;
 			String bjbh = ParamUtil.getString(renderRequest, "bjbh");
 			Long permitId = ParamUtil.getLong(renderRequest, "permitId");
-			String bdh=ParamUtil.getString(renderRequest,"bdh");
-			String contractId=ParamUtil.getString(renderRequest, "contractId");
+			String bdh = ParamUtil.getString(renderRequest, "bdh");
+			String contractId = ParamUtil.getString(renderRequest, "contractId");
 			int sqbz = ParamUtil.getInteger(renderRequest, "sqbz", 1);
 			renderRequest.setAttribute("sqbz", sqbz);
 			renderRequest.setAttribute("bjbh", bjbh);
 			renderRequest.setAttribute("permitId", permitId);
 			renderRequest.setAttribute("bdh", bdh);
-			Project project=null;
-			ProjectProfile projectProfile=null;
-			Contract contract=null;
+			Project project = null;
+			ProjectProfile projectProfile = null;
+			Contract contract = null;
 			try {
-				if(permitId!=0){
-					projectProfile=ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
-					renderRequest.setAttribute("xmmc",projectProfile.getGcmc());
-				}else{
-					project=ProjectLocalServiceUtil.getProject(bjbh);
-					renderRequest.setAttribute("xmmc",project.getXmmc());
+				if (permitId != 0) {
+					projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
+					renderRequest.setAttribute("xmmc", projectProfile.getGcmc());
+				} else {
+					project = ProjectLocalServiceUtil.getProject(bjbh);
+					renderRequest.setAttribute("xmmc", project.getXmmc());
 				}
-				if(Validator.isNotNull(contractId)){
-					contract=ContractLocalServiceUtil.getContract(contractId);
+				if (Validator.isNotNull(contractId)) {
+					contract = ContractLocalServiceUtil.getContract(contractId);
 					renderRequest.setAttribute("contract", contract);
 				}
 			} catch (PortalException e) {
@@ -99,18 +103,17 @@ public class PermitApplicationPortlet extends MVCPortlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-			
-			
-			// if(sqbz==1){
-			//
-			// }else if(sqbz==2){
-			//
-			// }else if(sqbz==3){
-			//
-			// }else if(sqbz==4){
-			//
-			// }
+
+			if (sqbz == 1) {
+
+			} else if (sqbz == 2) {
+
+			} else if (sqbz == 3) {
+				List<UnitProject> unitProjects = UnitProjectLocalServiceUtil.findByPermitId(permitId, -1, -1);
+				renderRequest.setAttribute("unitProjects", unitProjects);
+			} else if (sqbz == 4) {
+
+			}
 			// try {
 			// project = ProjectLocalServiceUtil.getProject(projectId);
 			// contract = ContractLocalServiceUtil.getContract(contractId);
@@ -138,7 +141,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		String bjbh = ParamUtil.getString(renderRequest, "bjbh");
 		String wssqbh = ParamUtil.getString(renderRequest, "wssqbh");
 		String gcmc = ParamUtil.getString(renderRequest, "gcmc");
-		String zzjgdm =ParamUtil.getString(renderRequest, "zzjgdm");
+		String zzjgdm = ParamUtil.getString(renderRequest, "zzjgdm");
 		int defaultDelta = GetterUtil.getInteger(PropsUtil.get(PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA));
 		int delta = ParamUtil.getInteger(renderRequest, "delta", defaultDelta);
 		int cur = ParamUtil.getInteger(renderRequest, "cur", 1);
@@ -157,9 +160,8 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		renderRequest.setAttribute("gcmc", gcmc);
 		super.doView(renderRequest, renderResponse);
 	}
-	
-	public void saveProjectProfile(ActionRequest request, ActionResponse response)
-			throws SystemException, PortalException, ParseException {
+
+	public void saveProjectProfile(ActionRequest request, ActionResponse response) throws SystemException, PortalException, ParseException {
 		String jsdwmc = ParamUtil.getString(request, "jsdwmc");
 		String jsdwxz = ParamUtil.getString(request, "jsdwxz");
 		String jsdwdz = ParamUtil.getString(request, "jsdwdz");
@@ -173,21 +175,21 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		String jsdwlxdh = ParamUtil.getString(request, "jsdwlxdh");
 		String jsdwlxr = ParamUtil.getString(request, "jsdwlxr");
 		String jsdwsjh = ParamUtil.getString(request, "jsdwsjh");
-		String jsydpzwjhfdccqzbh= ParamUtil.getString(request, "jsydpzwjhfdccqzbh");
+		String jsydpzwjhfdccqzbh = ParamUtil.getString(request, "jsydpzwjhfdccqzbh");
 		String jsgcghxkzbh = ParamUtil.getString(request, "jsgcghxkzbh");
 		String xckgqk = ParamUtil.getString(request, "xckgqk");
-		Long permitId =ParamUtil.getLong(request, "permitId");
+		Long permitId = ParamUtil.getLong(request, "permitId");
 		String bjbh = ParamUtil.getString(request, "bjbh");
 		String bdh = ParamUtil.getString(request, "bdh");
 		int sqbz = ParamUtil.getInteger(request, "sqbz");
-		ProjectProfile projectProfile= null;
-		Permit permit=null;
-		if(permitId!=0){
-			projectProfile=ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
-			permit=PermitLocalServiceUtil.getPermit(permitId);
-		}else{
-			projectProfile=ProjectProfileLocalServiceUtil.createProjectProfile(CounterLocalServiceUtil.increment());	
-			permit=PermitLocalServiceUtil.createPermit(projectProfile.getPermitId());
+		ProjectProfile projectProfile = null;
+		Permit permit = null;
+		if (permitId != 0) {
+			projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
+			permit = PermitLocalServiceUtil.getPermit(permitId);
+		} else {
+			projectProfile = ProjectProfileLocalServiceUtil.createProjectProfile(CounterLocalServiceUtil.increment());
+			permit = PermitLocalServiceUtil.createPermit(projectProfile.getPermitId());
 		}
 		projectProfile.setJsdwmc(jsdwmc);
 		projectProfile.setJsdwxz(jsdwxz);
@@ -211,5 +213,25 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		permit.setBdh(bdh);
 		PermitLocalServiceUtil.updatePermit(permit);
 	}
-	
+
+	public void saveUnitProjects(ActionRequest request, ActionResponse response) throws SystemException, PortalException, ParseException {
+		Long permitId = ParamUtil.getLong(request, "permitId");
+		List<UnitProject> unitProjects = UnitProjectLocalServiceUtil.findByPermitId(permitId, -1, -1);
+		for(UnitProject unitProject:unitProjects){
+			UnitProjectLocalServiceUtil.deleteUnitProject(unitProject);
+		}
+		String bjbh = ParamUtil.getString(request, "bjbh");
+		String[] gcbhs = ParamUtil.getParameterValues(request, "gcbh");
+		String[] gcmcs = ParamUtil.getParameterValues(request, "gcmc");
+		String[] jsnrs = ParamUtil.getParameterValues(request, "jsnr");
+		for(int i = 0;i<gcbhs.length-1;i++){
+			UnitProject unitProject = UnitProjectLocalServiceUtil.createUnitProject(CounterLocalServiceUtil.increment());
+			unitProject.setBjbh(bjbh);
+			unitProject.setPermitId(permitId);
+			unitProject.setGcbh(gcbhs[i]);
+			unitProject.setGcmc(gcmcs[i]);
+			unitProject.setJsnr(jsnrs[i]);
+			UnitProjectLocalServiceUtil.addUnitProject(unitProject);
+		}
+	}
 }
