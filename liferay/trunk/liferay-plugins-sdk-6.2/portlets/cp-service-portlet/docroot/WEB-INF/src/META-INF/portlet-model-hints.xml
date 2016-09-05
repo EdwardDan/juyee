@@ -301,12 +301,22 @@
 	<model name="com.justonetech.cp.permit.model.ProjectProfile">
 		<field name="permitId" type="long" />
 		<field name="bjbh" type="String" />
-		<field name="jsdwmc" type="String" />
+		<field name="jsdwmc" type="String">
+			<hint name="max-length">300</hint>
+		</field>
 		<field name="jsdwxz" type="String" />
-		<field name="jsdwdz" type="String" />
-		<field name="gcmc" type="String" />
-		<field name="jsdd" type="String" />
-		<field name="jsgcgm" type="String" />
+		<field name="jsdwdz" type="String">
+			<hint name="max-length">300</hint>
+		</field>
+		<field name="gcmc" type="String">
+			<hint name="max-length">300</hint>
+		</field>
+		<field name="jsdd" type="String">
+			<hint name="max-length">300</hint>
+		</field>
+		<field name="jsgcgm" type="String">
+			<hint name="max-length">500</hint>
+		</field>
 		<field name="fwjzmj" type="String" />
 		<field name="htjg" type="String" />
 		<field name="htgq" type="int" />
@@ -317,6 +327,44 @@
 		<field name="jsydpzwjhfdccqzbh" type="String" />
 		<field name="jsgcghxkzbh" type="String" />
 		<field name="xckgqk" type="String" />
+		<field name="xmlx" type="long" />
+		<field name="lxjb" type="String" />
+		<field name="xmxz" type="long" />
+		<field name="ssqx" type="String" />
+		<field name="ywbm" type="String" />
+		<field name="jsddssqx" type="long" />
+		<field name="jsgclb" type="String" />
+		<field name="jsgcsx" type="long" />
+		<field name="gyzjbz" type="String" />
+		<field name="zbjg" type="String" />
+		<field name="xmtzgs" type="String" />
+		<field name="jhkg" type="Date" />
+		<field name="jhjg" type="Date" />
+		<field name="sfzftzl" type="boolean" />
+		<field name="yzzpl1" type="String" />
+		<field name="yzzpl2" type="String" />
+		<field name="yzzpl3" type="String" />
+		<field name="yzzpl4" type="String" />
+		<field name="tjsj" type="Date" />
+		<field name="slbh" type="String" />
+		<field name="hjgsz" type="int" />
+		<field name="hjgsh" type="int" />
+		<field name="sqr" type="String" />
+		<field name="sqsx" type="String">
+			<hint name="max-length">1000</hint>
+		</field>
+		<field name="sqh" type="String" />
+		<field name="cltjr" type="String" />
+		<field name="cltjrlxdh" type="String" />
+		<field name="cltjrlxdz" type="String">
+			<hint name="max-length">500</hint>
+		</field>
+		<field name="sjr" type="String" />
+		<field name="sjrlxdh" type="String" />
+		<field name="slyj" type="String">
+			<hint name="max-length">1000</hint>
+		</field>
+		<field name="slsj" type="String" />
 	</model>
 	<model name="com.justonetech.cp.permit.model.UnitProject">
 		<field name="projectId" type="long" />
