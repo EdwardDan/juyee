@@ -32,6 +32,15 @@
 			permit-application-portlet
 		</css-class-wrapper>
 	</portlet>
+	<portlet>
+		<portlet-name>permit-approval</portlet-name>
+		<icon>/icons/icon.png</icon>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<footer-portlet-javascript>
+			/js/main.js
+		</footer-portlet-javascript>
+		<css-class-wrapper>permit-approval-portlet</css-class-wrapper>
+	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>
