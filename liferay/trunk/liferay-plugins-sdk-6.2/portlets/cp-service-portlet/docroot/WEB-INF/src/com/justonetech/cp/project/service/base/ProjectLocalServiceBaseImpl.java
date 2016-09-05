@@ -79,27 +79,27 @@ public abstract class ProjectLocalServiceBaseImpl extends BaseLocalServiceImpl
 	/**
 	 * Creates a new project with the primary key. Does not add the project to the database.
 	 *
-	 * @param projectId the primary key for the new project
+	 * @param bjbh the primary key for the new project
 	 * @return the new project
 	 */
 	@Override
-	public Project createProject(String projectId) {
-		return projectPersistence.create(projectId);
+	public Project createProject(String bjbh) {
+		return projectPersistence.create(bjbh);
 	}
 
 	/**
 	 * Deletes the project with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param projectId the primary key of the project
+	 * @param bjbh the primary key of the project
 	 * @return the project that was removed
 	 * @throws PortalException if a project with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Indexable(type = IndexableType.DELETE)
 	@Override
-	public Project deleteProject(String projectId)
+	public Project deleteProject(String bjbh)
 		throws PortalException, SystemException {
-		return projectPersistence.remove(projectId);
+		return projectPersistence.remove(bjbh);
 	}
 
 	/**
@@ -207,22 +207,22 @@ public abstract class ProjectLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	@Override
-	public Project fetchProject(String projectId) throws SystemException {
-		return projectPersistence.fetchByPrimaryKey(projectId);
+	public Project fetchProject(String bjbh) throws SystemException {
+		return projectPersistence.fetchByPrimaryKey(bjbh);
 	}
 
 	/**
 	 * Returns the project with the primary key.
 	 *
-	 * @param projectId the primary key of the project
+	 * @param bjbh the primary key of the project
 	 * @return the project
 	 * @throws PortalException if a project with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public Project getProject(String projectId)
+	public Project getProject(String bjbh)
 		throws PortalException, SystemException {
-		return projectPersistence.findByPrimaryKey(projectId);
+		return projectPersistence.findByPrimaryKey(bjbh);
 	}
 
 	@Override

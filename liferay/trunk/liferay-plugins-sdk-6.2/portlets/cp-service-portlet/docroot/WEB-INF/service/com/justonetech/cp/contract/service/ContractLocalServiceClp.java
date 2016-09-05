@@ -113,6 +113,49 @@ public class ContractLocalServiceClp implements ContractLocalService {
 		_methodName17 = "setBeanIdentifier";
 
 		_methodParameterTypes17 = new String[] { "java.lang.String" };
+
+		_methodName19 = "getContracts";
+
+		_methodParameterTypes19 = new String[] {
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"int", "int"
+			};
+
+		_methodName20 = "getContractsCount";
+
+		_methodParameterTypes20 = new String[] {
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "java.lang.String"
+			};
+
+		_methodName21 = "createDynamicQuery";
+
+		_methodParameterTypes21 = new String[] {
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "java.lang.String"
+			};
+
+		_methodName22 = "getYbssgzbContracts";
+
+		_methodParameterTypes22 = new String[] {
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "int", "int"
+			};
+
+		_methodName23 = "getYbssgzbContractsCount";
+
+		_methodParameterTypes23 = new String[] {
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String"
+			};
+
+		_methodName24 = "createYbssgzbDQ";
+
+		_methodParameterTypes24 = new String[] {
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String"
+			};
 	}
 
 	@Override
@@ -669,6 +712,231 @@ public class ContractLocalServiceClp implements ContractLocalService {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
+	public java.util.List<com.justonetech.cp.contract.model.Contract> getContracts(
+		java.lang.String zzjgdm, java.lang.String bjbh, java.lang.String bdh,
+		java.lang.String xmmc, java.lang.String htlb,
+		java.lang.String contractId, int start, int end) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName19,
+					_methodParameterTypes19,
+					new Object[] {
+						ClpSerializer.translateInput(zzjgdm),
+						
+					ClpSerializer.translateInput(bjbh),
+						
+					ClpSerializer.translateInput(bdh),
+						
+					ClpSerializer.translateInput(xmmc),
+						
+					ClpSerializer.translateInput(htlb),
+						
+					ClpSerializer.translateInput(contractId),
+						
+					start,
+						
+					end
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<com.justonetech.cp.contract.model.Contract>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public int getContractsCount(java.lang.String zzjgdm,
+		java.lang.String bjbh, java.lang.String bdh, java.lang.String xmmc,
+		java.lang.String htlb, java.lang.String contractId) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName20,
+					_methodParameterTypes20,
+					new Object[] {
+						ClpSerializer.translateInput(zzjgdm),
+						
+					ClpSerializer.translateInput(bjbh),
+						
+					ClpSerializer.translateInput(bdh),
+						
+					ClpSerializer.translateInput(xmmc),
+						
+					ClpSerializer.translateInput(htlb),
+						
+					ClpSerializer.translateInput(contractId)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return ((Integer)returnObj).intValue();
+	}
+
+	@Override
+	public com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQuery(
+		java.lang.String zzjgdm, java.lang.String bjbh, java.lang.String bdh,
+		java.lang.String xmmc, java.lang.String htlb,
+		java.lang.String contractId) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName21,
+					_methodParameterTypes21,
+					new Object[] {
+						ClpSerializer.translateInput(zzjgdm),
+						
+					ClpSerializer.translateInput(bjbh),
+						
+					ClpSerializer.translateInput(bdh),
+						
+					ClpSerializer.translateInput(xmmc),
+						
+					ClpSerializer.translateInput(htlb),
+						
+					ClpSerializer.translateInput(contractId)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.liferay.portal.kernel.dao.orm.DynamicQuery)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public java.util.List<com.justonetech.cp.contract.model.Contract> getYbssgzbContracts(
+		java.lang.String zzjgdm, java.lang.String bjbh, java.lang.String bdh,
+		java.lang.String htmc, int start, int end) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName22,
+					_methodParameterTypes22,
+					new Object[] {
+						ClpSerializer.translateInput(zzjgdm),
+						
+					ClpSerializer.translateInput(bjbh),
+						
+					ClpSerializer.translateInput(bdh),
+						
+					ClpSerializer.translateInput(htmc),
+						
+					start,
+						
+					end
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<com.justonetech.cp.contract.model.Contract>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public int getYbssgzbContractsCount(java.lang.String zzjgdm,
+		java.lang.String bjbh, java.lang.String bdh, java.lang.String htmc) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName23,
+					_methodParameterTypes23,
+					new Object[] {
+						ClpSerializer.translateInput(zzjgdm),
+						
+					ClpSerializer.translateInput(bjbh),
+						
+					ClpSerializer.translateInput(bdh),
+						
+					ClpSerializer.translateInput(htmc)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return ((Integer)returnObj).intValue();
+	}
+
+	@Override
+	public com.liferay.portal.kernel.dao.orm.DynamicQuery createYbssgzbDQ(
+		java.lang.String zzjgdm, java.lang.String bjbh, java.lang.String bdh,
+		java.lang.String htmc) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName24,
+					_methodParameterTypes24,
+					new Object[] {
+						ClpSerializer.translateInput(zzjgdm),
+						
+					ClpSerializer.translateInput(bjbh),
+						
+					ClpSerializer.translateInput(bdh),
+						
+					ClpSerializer.translateInput(htmc)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.liferay.portal.kernel.dao.orm.DynamicQuery)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -706,4 +974,16 @@ public class ContractLocalServiceClp implements ContractLocalService {
 	private String[] _methodParameterTypes16;
 	private String _methodName17;
 	private String[] _methodParameterTypes17;
+	private String _methodName19;
+	private String[] _methodParameterTypes19;
+	private String _methodName20;
+	private String[] _methodParameterTypes20;
+	private String _methodName21;
+	private String[] _methodParameterTypes21;
+	private String _methodName22;
+	private String[] _methodParameterTypes22;
+	private String _methodName23;
+	private String[] _methodParameterTypes23;
+	private String _methodName24;
+	private String[] _methodParameterTypes24;
 }

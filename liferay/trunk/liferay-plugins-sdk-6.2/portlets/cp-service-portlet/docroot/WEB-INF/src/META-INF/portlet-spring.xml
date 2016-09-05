@@ -5,4 +5,14 @@
 	<bean id="com.justonetech.cp.project.service.persistence.ProjectPersistence" class="com.justonetech.cp.project.service.persistence.ProjectPersistenceImpl" parent="basePersistence" />
 	<bean id="com.justonetech.cp.contract.service.ContractLocalService" class="com.justonetech.cp.contract.service.impl.ContractLocalServiceImpl" />
 	<bean id="com.justonetech.cp.contract.service.persistence.ContractPersistence" class="com.justonetech.cp.contract.service.persistence.ContractPersistenceImpl" parent="basePersistence" />
+	<bean id="com.justonetech.cp.permit.service.ApplyMaterialLocalService" class="com.justonetech.cp.permit.service.impl.ApplyMaterialLocalServiceImpl" />
+	<bean id="com.justonetech.cp.permit.service.persistence.ApplyMaterialPersistence" class="com.justonetech.cp.permit.service.persistence.ApplyMaterialPersistenceImpl" parent="basePersistence" />
+	<bean id="com.justonetech.cp.permit.service.ParticipationUnitLocalService" class="com.justonetech.cp.permit.service.impl.ParticipationUnitLocalServiceImpl" />
+	<bean id="com.justonetech.cp.permit.service.persistence.ParticipationUnitPersistence" class="com.justonetech.cp.permit.service.persistence.ParticipationUnitPersistenceImpl" parent="basePersistence" />
+	<bean id="com.justonetech.cp.permit.service.PermitLocalService" class="com.justonetech.cp.permit.service.impl.PermitLocalServiceImpl" />
+	<bean id="com.justonetech.cp.permit.service.persistence.PermitPersistence" class="com.justonetech.cp.permit.service.persistence.PermitPersistenceImpl" parent="basePersistence" />
+	<bean id="com.justonetech.cp.permit.service.ProjectProfileLocalService" class="com.justonetech.cp.permit.service.impl.ProjectProfileLocalServiceImpl" />
+	<bean id="com.justonetech.cp.permit.service.persistence.ProjectProfilePersistence" class="com.justonetech.cp.permit.service.persistence.ProjectProfilePersistenceImpl" parent="basePersistence" />
+	<bean id="com.justonetech.cp.permit.service.UnitProjectLocalService" class="com.justonetech.cp.permit.service.impl.UnitProjectLocalServiceImpl" />
+	<bean id="com.justonetech.cp.permit.service.persistence.UnitProjectPersistence" class="com.justonetech.cp.permit.service.persistence.UnitProjectPersistenceImpl" parent="basePersistence" />
 </beans>

@@ -171,13 +171,13 @@ public class ProjectLocalServiceClp implements ProjectLocalService {
 
 	@Override
 	public com.justonetech.cp.project.model.Project createProject(
-		java.lang.String projectId) {
+		java.lang.String bjbh) {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName1,
 					_methodParameterTypes1,
-					new Object[] { ClpSerializer.translateInput(projectId) });
+					new Object[] { ClpSerializer.translateInput(bjbh) });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -196,7 +196,7 @@ public class ProjectLocalServiceClp implements ProjectLocalService {
 
 	@Override
 	public com.justonetech.cp.project.model.Project deleteProject(
-		java.lang.String projectId)
+		java.lang.String bjbh)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
@@ -204,7 +204,7 @@ public class ProjectLocalServiceClp implements ProjectLocalService {
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName2,
 					_methodParameterTypes2,
-					new Object[] { ClpSerializer.translateInput(projectId) });
+					new Object[] { ClpSerializer.translateInput(bjbh) });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -458,14 +458,14 @@ public class ProjectLocalServiceClp implements ProjectLocalService {
 
 	@Override
 	public com.justonetech.cp.project.model.Project fetchProject(
-		java.lang.String projectId)
+		java.lang.String bjbh)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName10,
 					_methodParameterTypes10,
-					new Object[] { ClpSerializer.translateInput(projectId) });
+					new Object[] { ClpSerializer.translateInput(bjbh) });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -488,7 +488,7 @@ public class ProjectLocalServiceClp implements ProjectLocalService {
 
 	@Override
 	public com.justonetech.cp.project.model.Project getProject(
-		java.lang.String projectId)
+		java.lang.String bjbh)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
@@ -496,7 +496,7 @@ public class ProjectLocalServiceClp implements ProjectLocalService {
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName11,
 					_methodParameterTypes11,
-					new Object[] { ClpSerializer.translateInput(projectId) });
+					new Object[] { ClpSerializer.translateInput(bjbh) });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -696,7 +696,7 @@ public class ProjectLocalServiceClp implements ProjectLocalService {
 	@Override
 	public java.util.List<com.justonetech.cp.project.model.Project> getProjects(
 		java.lang.String zzjgdm, java.lang.String bjbh,
-		java.lang.String bjWebid, java.lang.String xmmc,
+		java.lang.String wssqbh, java.lang.String xmmc,
 		java.util.Date bjrqStart, java.util.Date bjrqEnd,
 		java.lang.String bjwcbj, int start, int end) {
 		Object returnObj = null;
@@ -709,7 +709,7 @@ public class ProjectLocalServiceClp implements ProjectLocalService {
 						
 					ClpSerializer.translateInput(bjbh),
 						
-					ClpSerializer.translateInput(bjWebid),
+					ClpSerializer.translateInput(wssqbh),
 						
 					ClpSerializer.translateInput(xmmc),
 						
@@ -741,7 +741,7 @@ public class ProjectLocalServiceClp implements ProjectLocalService {
 
 	@Override
 	public int getProjectsCount(java.lang.String zzjgdm, java.lang.String bjbh,
-		java.lang.String bjWebid, java.lang.String xmmc,
+		java.lang.String wssqbh, java.lang.String xmmc,
 		java.util.Date bjrqStart, java.util.Date bjrqEnd,
 		java.lang.String bjwcbj) {
 		Object returnObj = null;
@@ -754,7 +754,7 @@ public class ProjectLocalServiceClp implements ProjectLocalService {
 						
 					ClpSerializer.translateInput(bjbh),
 						
-					ClpSerializer.translateInput(bjWebid),
+					ClpSerializer.translateInput(wssqbh),
 						
 					ClpSerializer.translateInput(xmmc),
 						
@@ -783,7 +783,7 @@ public class ProjectLocalServiceClp implements ProjectLocalService {
 	@Override
 	public com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQuery(
 		java.lang.String zzjgdm, java.lang.String bjbh,
-		java.lang.String bjWebid, java.lang.String xmmc,
+		java.lang.String wssqbh, java.lang.String xmmc,
 		java.util.Date bjrqStart, java.util.Date bjrqEnd,
 		java.lang.String bjwcbj) {
 		Object returnObj = null;
@@ -796,7 +796,7 @@ public class ProjectLocalServiceClp implements ProjectLocalService {
 						
 					ClpSerializer.translateInput(bjbh),
 						
-					ClpSerializer.translateInput(bjWebid),
+					ClpSerializer.translateInput(wssqbh),
 						
 					ClpSerializer.translateInput(xmmc),
 						

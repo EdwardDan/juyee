@@ -9,15 +9,159 @@
 	</persistence-unit-metadata>
 	<mapped-superclass class="com.justonetech.cp.project.model.impl.ProjectModelImpl">
 		<attributes>
-			<id name="projectId" />
-			<basic name="zzjgdm" />
+			<id name="bjbh" />
 			<basic name="bjrq">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
-			<basic name="bjWebid" />
+			<basic name="jsdw" />
+			<basic name="jsdwxz" />
+			<basic name="jsdwdz" />
+			<basic name="jsdwdh" />
+			<basic name="jsdwfr" />
+			<basic name="jsdwlxr" />
+			<basic name="jsdwyb" />
+			<basic name="jsdwzczj" />
 			<basic name="xmmc" />
+			<basic name="jsdd" />
+			<basic name="lxwj" />
+			<basic name="lxwh" />
+			<basic name="lxjb" />
+			<basic name="pzjg" />
+			<basic name="pzrq" />
+			<basic name="ztz" />
+			<basic name="sbtz" />
+			<basic name="jsxz" />
+			<basic name="jsgm" />
+			<basic name="zmj" />
+			<basic name="kgrq" />
+			<basic name="xmxz" />
+			<basic name="cjqk" />
+			<basic name="smqk" />
+			<basic name="bjbz" />
+			<basic name="fbzgsc" />
+			<basic name="cardid" />
+			<basic name="zjlygc_1" />
+			<basic name="zjlygc_2" />
+			<basic name="zjlygc_3" />
+			<basic name="zjlygc_4" />
+			<basic name="zjlygc_5" />
+			<basic name="zjlygc_6" />
+			<basic name="zjlygc_7" />
+			<basic name="zjlygc_8" />
+			<basic name="zjlygc_9" />
+			<basic name="jgxs" />
+			<basic name="xmfl" />
+			<basic name="jzmq" />
+			<basic name="ywdt" />
+			<basic name="dxsck" />
+			<basic name="bhjz" />
+			<basic name="fjms" />
+			<basic name="sfsbxm" />
+			<basic name="hzyj" />
+			<basic name="bj_sx" />
+			<basic name="bj_webid" />
 			<basic name="bjwcbj" />
-			<basic name="jsdwmc" />
+			<basic name="bmdm" />
+			<basic name="jbr" />
+			<basic name="shr" />
+			<basic name="shbmdm" />
+			<basic name="wcbjsj" />
+			<basic name="old_bjbh" />
+			<basic name="sffb" />
+			<basic name="timeflag" />
+			<basic name="jbrdm" />
+			<basic name="shrdm" />
+			<basic name="jsbh" />
+			<basic name="needSbjl" />
+			<basic name="wcSbjl" />
+			<basic name="sfgyzbkg" />
+			<basic name="jyzxfbxx" />
+			<basic name="sgGkzbfb" />
+			<basic name="sgjlGkzbfb" />
+			<basic name="fxglxm" />
+			<basic name="fxglxmJbr" />
+			<basic name="fxglxmJbrdm" />
+			<basic name="fxglxmJbrq" />
+			<basic name="jsdwjgdm" />
+			<basic name="szqy" />
+			<basic name="ywxjfwjz" />
+			<basic name="ywgbfwjg" />
+			<basic name="gczh" />
+			<basic name="zdcyyn" />
+			<basic name="lxfl" />
+			<basic name="ms1" />
+			<basic name="ms2" />
+			<basic name="ms3" />
+			<basic name="zdxmyn" />
+			<basic name="dxjzsq" />
+			<basic name="ywjzxzz" />
+			<basic name="fgwjhm" />
+			<basic name="zzbl" />
+			<basic name="ChangeTime" />
+			<basic name="PD_SW" />
+			<basic name="bmpfrq" />
+			<basic name="bmpfwh" />
+			<basic name="bmpfwj" />
+			<basic name="CertificateKey" />
+			<basic name="dsjzmj" />
+			<basic name="dxjzmj" />
+			<basic name="gdzctzbh" />
+			<basic name="jsxz_2011" />
+			<basic name="lhmj" />
+			<basic name="lxjb_2011" />
+			<basic name="mfmj" />
+			<basic name="other_qx" />
+			<basic name="ProjectSlyj" />
+			<basic name="qxbz" />
+			<basic name="sfcysjkfq" />
+			<basic name="sfmfss" />
+			<basic name="szqx" />
+			<basic name="tsgs" />
+			<basic name="xmfl_2011" />
+			<basic name="xsjpw" />
+			<basic name="xsjpzdw" />
+			<basic name="zjlygc_10" />
+			<basic name="zjlygc_11" />
+			<basic name="zjlygc_xs_1" />
+			<basic name="zjlygc_xs_2" />
+			<basic name="zjlygc_xs_3" />
+			<basic name="zjlygc_xs_4" />
+			<basic name="zjlygc_1_2" />
+			<basic name="zjlygc_1_2_4" />
+			<basic name="ywptlh" />
+			<basic name="gyyqbh" />
+			<basic name="sfcyxm" />
+			<basic name="zbxmfzrxm" />
+			<basic name="zbxmfzrzjh" />
+			<basic name="zbxmfzrzjlx" />
+			<basic name="zbxmfzrqrsj" />
+			<basic name="sflsjzbs" />
+			<basic name="sjbs" />
+			<basic name="yxbs" />
+			<basic name="sfyjngz" />
+			<basic name="sfsszpjz" />
+			<basic name="zczxjgdmz" />
+			<basic name="ischeckxmbm" />
+			<basic name="zddtmj" />
+			<basic name="sjjdYn" />
+			<basic name="sgjdYn" />
+			<basic name="yxjdYn" />
+			<basic name="tdhtqdbh" />
+			<basic name="tdhtqdrq" />
+			<basic name="dkbh" />
+			<basic name="zpsjzlsbl" />
+			<basic name="zpsjzmj" />
+			<basic name="dwyzzpl" />
+			<basic name="zdh" />
+			<basic name="sfgdcg" />
+			<basic name="ptlhmj" />
+			<basic name="bimjszxfy" />
+			<basic name="bz" />
+			<basic name="sfzcxm" />
+			<basic name="zcxmbm" />
+			<basic name="sfzmqxm" />
+			<basic name="printPDFTime" />
+			<basic name="isBgPrint" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
@@ -26,11 +170,185 @@
 	<mapped-superclass class="com.justonetech.cp.contract.model.impl.ContractModelImpl">
 		<attributes>
 			<id name="contractId" />
+			<basic name="zzjgdm" />
 			<basic name="htlb" />
+			<basic name="htbh" />
+			<basic name="zbhtbh" />
+			<basic name="fbhtbh" />
+			<basic name="htlx" />
+			<basic name="htzt" />
+			<basic name="zfbgx" />
+			<basic name="bsrq">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="slsj">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
 			<basic name="bjbh" />
+			<basic name="szdq" />
+			<basic name="xmmc" />
+			<basic name="jsdw" />
+			<basic name="jsdd" />
+			<basic name="lxpw" />
+			<basic name="pzwh" />
+			<basic name="dwxz" />
+			<basic name="zjlygc" />
+			<basic name="ztz" />
+			<basic name="zjzmj" />
+			<basic name="xmfl" />
+			<basic name="jzgm" />
 			<basic name="bdh" />
+			<basic name="fbfs" />
 			<basic name="cbfs" />
+			<basic name="zycbht" />
+			<basic name="zygclb" />
 			<basic name="htmc" />
+			<basic name="fbdw" />
+			<basic name="cbdw" />
+			<basic name="sjdw" />
+			<basic name="xmfzr" />
+			<basic name="xmfzrzjlx" />
+			<basic name="xmfzrzjh" />
+			<basic name="sjfzr" />
+			<basic name="sjfzrzjlx" />
+			<basic name="sjfzrzjh" />
+			<basic name="kcdwmc" />
+			<basic name="kcfzr" />
+			<basic name="kcfzrzjlx" />
+			<basic name="kcfzrzjh" />
+			<basic name="sgdwmc" />
+			<basic name="sgfzr" />
+			<basic name="sgfzrzjlx" />
+			<basic name="sgfzrzjh" />
+			<basic name="xmlb" />
+			<basic name="gclb" />
+			<basic name="gcgm" />
+			<basic name="sjxmlb" />
+			<basic name="sjgclb" />
+			<basic name="sjgcgm" />
+			<basic name="sgxmlb" />
+			<basic name="sggclb" />
+			<basic name="sggcgm" />
+			<basic name="kgrq">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="jgrq">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="jsfs" />
+			<basic name="htj" />
+			<basic name="sjf" />
+			<basic name="kcf" />
+			<basic name="jazj" />
+			<basic name="zlje" />
+			<basic name="zgj" />
+			<basic name="aqfhwmsgcsf" />
+			<basic name="htqdrq">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="htqzrq" />
+			<basic name="cbnr" />
+			<basic name="cyhtsfwb" />
+			<basic name="fzjqtsm" />
+			<basic name="sfzx" />
+			<basic name="zxsj">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="zxsm">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.justonetech.cp.permit.model.impl.ApplyMaterialModelImpl">
+		<attributes>
+			<id name="materialId" />
+			<basic name="permitId" />
+			<basic name="xh" />
+			<basic name="clmc" />
+			<basic name="yjfs" />
+			<basic name="sjfs" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.justonetech.cp.permit.model.impl.ParticipationUnitModelImpl">
+		<attributes>
+			<id name="unitId" />
+			<basic name="permitId" />
+			<basic name="htxxbsbh" />
+			<basic name="dwlx" />
+			<basic name="dwmc" />
+			<basic name="xmfzr" />
+			<basic name="dhhm" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.justonetech.cp.permit.model.impl.PermitModelImpl">
+		<attributes>
+			<id name="permitId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="zzjgdm" />
+			<basic name="bjbh" />
+			<basic name="htxxbsbh" />
+			<basic name="sqbz" />
+			<basic name="sqzt" />
+			<basic name="bdh" />
+			<basic name="ywbh" />
+			<basic name="sgxkzbh" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.justonetech.cp.permit.model.impl.ProjectProfileModelImpl">
+		<attributes>
+			<id name="permitId" />
+			<basic name="bjbh" />
+			<basic name="jsdwmc" />
+			<basic name="jsdwxz" />
+			<basic name="jsdwdz" />
+			<basic name="gcmc" />
+			<basic name="jsdd" />
+			<basic name="jsgcgm" />
+			<basic name="fwjzmj" />
+			<basic name="htjg" />
+			<basic name="htgq" />
+			<basic name="fddbr" />
+			<basic name="jsdwlxdh" />
+			<basic name="jsdwlxr" />
+			<basic name="jsdwsjh" />
+			<basic name="jsydpzwjhfdccqzbh" />
+			<basic name="jsgcghxkzbh" />
+			<basic name="xckgqk" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.justonetech.cp.permit.model.impl.UnitProjectModelImpl">
+		<attributes>
+			<id name="projectId" />
+			<basic name="permitId" />
+			<basic name="bjbh" />
+			<basic name="gcbh" />
+			<basic name="gcmc" />
+			<basic name="jsnr" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
@@ -42,6 +360,26 @@
 	</entity>
 	<entity class="com.justonetech.cp.contract.model.impl.ContractImpl" name="Contract">
 		<table name="cp_Contract" />
+		<attributes />
+	</entity>
+	<entity class="com.justonetech.cp.permit.model.impl.ApplyMaterialImpl" name="ApplyMaterial">
+		<table name="cp_ApplyMaterial" />
+		<attributes />
+	</entity>
+	<entity class="com.justonetech.cp.permit.model.impl.ParticipationUnitImpl" name="ParticipationUnit">
+		<table name="cp_ParticipationUnit" />
+		<attributes />
+	</entity>
+	<entity class="com.justonetech.cp.permit.model.impl.PermitImpl" name="Permit">
+		<table name="cp_Permit" />
+		<attributes />
+	</entity>
+	<entity class="com.justonetech.cp.permit.model.impl.ProjectProfileImpl" name="ProjectProfile">
+		<table name="cp_ProjectProfile" />
+		<attributes />
+	</entity>
+	<entity class="com.justonetech.cp.permit.model.impl.UnitProjectImpl" name="UnitProject">
+		<table name="cp_UnitProject" />
 		<attributes />
 	</entity>
 </entity-mappings>

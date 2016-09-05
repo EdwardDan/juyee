@@ -275,6 +275,48 @@ public class ContractLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static java.util.List<com.justonetech.cp.contract.model.Contract> getContracts(
+		java.lang.String zzjgdm, java.lang.String bjbh, java.lang.String bdh,
+		java.lang.String xmmc, java.lang.String htlb,
+		java.lang.String contractId, int start, int end) {
+		return getService()
+				   .getContracts(zzjgdm, bjbh, bdh, xmmc, htlb, contractId,
+			start, end);
+	}
+
+	public static int getContractsCount(java.lang.String zzjgdm,
+		java.lang.String bjbh, java.lang.String bdh, java.lang.String xmmc,
+		java.lang.String htlb, java.lang.String contractId) {
+		return getService()
+				   .getContractsCount(zzjgdm, bjbh, bdh, xmmc, htlb, contractId);
+	}
+
+	public static com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQuery(
+		java.lang.String zzjgdm, java.lang.String bjbh, java.lang.String bdh,
+		java.lang.String xmmc, java.lang.String htlb,
+		java.lang.String contractId) {
+		return getService()
+				   .createDynamicQuery(zzjgdm, bjbh, bdh, xmmc, htlb, contractId);
+	}
+
+	public static java.util.List<com.justonetech.cp.contract.model.Contract> getYbssgzbContracts(
+		java.lang.String zzjgdm, java.lang.String bjbh, java.lang.String bdh,
+		java.lang.String htmc, int start, int end) {
+		return getService()
+				   .getYbssgzbContracts(zzjgdm, bjbh, bdh, htmc, start, end);
+	}
+
+	public static int getYbssgzbContractsCount(java.lang.String zzjgdm,
+		java.lang.String bjbh, java.lang.String bdh, java.lang.String htmc) {
+		return getService().getYbssgzbContractsCount(zzjgdm, bjbh, bdh, htmc);
+	}
+
+	public static com.liferay.portal.kernel.dao.orm.DynamicQuery createYbssgzbDQ(
+		java.lang.String zzjgdm, java.lang.String bjbh, java.lang.String bdh,
+		java.lang.String htmc) {
+		return getService().createYbssgzbDQ(zzjgdm, bjbh, bdh, htmc);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

@@ -56,15 +56,159 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 	 */
 	public static final String TABLE_NAME = "cp_Project";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "projectId", Types.VARCHAR },
-			{ "zzjgdm", Types.VARCHAR },
+			{ "bjbh", Types.VARCHAR },
 			{ "bjrq", Types.TIMESTAMP },
-			{ "bjWebid", Types.VARCHAR },
+			{ "jsdw", Types.VARCHAR },
+			{ "jsdwxz", Types.VARCHAR },
+			{ "jsdwdz", Types.VARCHAR },
+			{ "jsdwdh", Types.VARCHAR },
+			{ "jsdwfr", Types.VARCHAR },
+			{ "jsdwlxr", Types.VARCHAR },
+			{ "jsdwyb", Types.VARCHAR },
+			{ "jsdwzczj", Types.VARCHAR },
 			{ "xmmc", Types.VARCHAR },
+			{ "jsdd", Types.VARCHAR },
+			{ "lxwj", Types.VARCHAR },
+			{ "lxwh", Types.VARCHAR },
+			{ "lxjb", Types.VARCHAR },
+			{ "pzjg", Types.VARCHAR },
+			{ "pzrq", Types.VARCHAR },
+			{ "ztz", Types.VARCHAR },
+			{ "sbtz", Types.VARCHAR },
+			{ "jsxz", Types.VARCHAR },
+			{ "jsgm", Types.VARCHAR },
+			{ "zmj", Types.VARCHAR },
+			{ "kgrq", Types.VARCHAR },
+			{ "xmxz", Types.VARCHAR },
+			{ "cjqk", Types.VARCHAR },
+			{ "smqk", Types.VARCHAR },
+			{ "bjbz", Types.VARCHAR },
+			{ "fbzgsc", Types.VARCHAR },
+			{ "cardid", Types.VARCHAR },
+			{ "zjlygc_1", Types.VARCHAR },
+			{ "zjlygc_2", Types.VARCHAR },
+			{ "zjlygc_3", Types.VARCHAR },
+			{ "zjlygc_4", Types.VARCHAR },
+			{ "zjlygc_5", Types.VARCHAR },
+			{ "zjlygc_6", Types.VARCHAR },
+			{ "zjlygc_7", Types.VARCHAR },
+			{ "zjlygc_8", Types.VARCHAR },
+			{ "zjlygc_9", Types.VARCHAR },
+			{ "jgxs", Types.VARCHAR },
+			{ "xmfl", Types.VARCHAR },
+			{ "jzmq", Types.VARCHAR },
+			{ "ywdt", Types.VARCHAR },
+			{ "dxsck", Types.VARCHAR },
+			{ "bhjz", Types.VARCHAR },
+			{ "fjms", Types.VARCHAR },
+			{ "sfsbxm", Types.VARCHAR },
+			{ "hzyj", Types.VARCHAR },
+			{ "bj_sx", Types.VARCHAR },
+			{ "bj_webid", Types.VARCHAR },
 			{ "bjwcbj", Types.VARCHAR },
-			{ "jsdwmc", Types.VARCHAR }
+			{ "bmdm", Types.VARCHAR },
+			{ "jbr", Types.VARCHAR },
+			{ "shr", Types.VARCHAR },
+			{ "shbmdm", Types.VARCHAR },
+			{ "wcbjsj", Types.VARCHAR },
+			{ "old_bjbh", Types.VARCHAR },
+			{ "sffb", Types.VARCHAR },
+			{ "timeflag", Types.VARCHAR },
+			{ "jbrdm", Types.VARCHAR },
+			{ "shrdm", Types.VARCHAR },
+			{ "jsbh", Types.VARCHAR },
+			{ "needSbjl", Types.VARCHAR },
+			{ "wcSbjl", Types.VARCHAR },
+			{ "sfgyzbkg", Types.VARCHAR },
+			{ "jyzxfbxx", Types.VARCHAR },
+			{ "sgGkzbfb", Types.VARCHAR },
+			{ "sgjlGkzbfb", Types.VARCHAR },
+			{ "fxglxm", Types.VARCHAR },
+			{ "fxglxmJbr", Types.VARCHAR },
+			{ "fxglxmJbrdm", Types.VARCHAR },
+			{ "fxglxmJbrq", Types.VARCHAR },
+			{ "jsdwjgdm", Types.VARCHAR },
+			{ "szqy", Types.VARCHAR },
+			{ "ywxjfwjz", Types.VARCHAR },
+			{ "ywgbfwjg", Types.VARCHAR },
+			{ "gczh", Types.VARCHAR },
+			{ "zdcyyn", Types.VARCHAR },
+			{ "lxfl", Types.VARCHAR },
+			{ "ms1", Types.VARCHAR },
+			{ "ms2", Types.VARCHAR },
+			{ "ms3", Types.VARCHAR },
+			{ "zdxmyn", Types.VARCHAR },
+			{ "dxjzsq", Types.VARCHAR },
+			{ "ywjzxzz", Types.VARCHAR },
+			{ "fgwjhm", Types.VARCHAR },
+			{ "zzbl", Types.VARCHAR },
+			{ "ChangeTime", Types.VARCHAR },
+			{ "PD_SW", Types.VARCHAR },
+			{ "bmpfrq", Types.VARCHAR },
+			{ "bmpfwh", Types.VARCHAR },
+			{ "bmpfwj", Types.VARCHAR },
+			{ "CertificateKey", Types.VARCHAR },
+			{ "dsjzmj", Types.VARCHAR },
+			{ "dxjzmj", Types.VARCHAR },
+			{ "gdzctzbh", Types.VARCHAR },
+			{ "jsxz_2011", Types.VARCHAR },
+			{ "lhmj", Types.VARCHAR },
+			{ "lxjb_2011", Types.VARCHAR },
+			{ "mfmj", Types.VARCHAR },
+			{ "other_qx", Types.VARCHAR },
+			{ "ProjectSlyj", Types.VARCHAR },
+			{ "qxbz", Types.VARCHAR },
+			{ "sfcysjkfq", Types.VARCHAR },
+			{ "sfmfss", Types.VARCHAR },
+			{ "szqx", Types.VARCHAR },
+			{ "tsgs", Types.VARCHAR },
+			{ "xmfl_2011", Types.VARCHAR },
+			{ "xsjpw", Types.VARCHAR },
+			{ "xsjpzdw", Types.VARCHAR },
+			{ "zjlygc_10", Types.VARCHAR },
+			{ "zjlygc_11", Types.VARCHAR },
+			{ "zjlygc_xs_1", Types.VARCHAR },
+			{ "zjlygc_xs_2", Types.VARCHAR },
+			{ "zjlygc_xs_3", Types.VARCHAR },
+			{ "zjlygc_xs_4", Types.VARCHAR },
+			{ "zjlygc_1_2", Types.VARCHAR },
+			{ "zjlygc_1_2_4", Types.VARCHAR },
+			{ "ywptlh", Types.VARCHAR },
+			{ "gyyqbh", Types.VARCHAR },
+			{ "sfcyxm", Types.VARCHAR },
+			{ "zbxmfzrxm", Types.VARCHAR },
+			{ "zbxmfzrzjh", Types.VARCHAR },
+			{ "zbxmfzrzjlx", Types.VARCHAR },
+			{ "zbxmfzrqrsj", Types.VARCHAR },
+			{ "sflsjzbs", Types.VARCHAR },
+			{ "sjbs", Types.VARCHAR },
+			{ "yxbs", Types.VARCHAR },
+			{ "sfyjngz", Types.VARCHAR },
+			{ "sfsszpjz", Types.VARCHAR },
+			{ "zczxjgdmz", Types.VARCHAR },
+			{ "ischeckxmbm", Types.VARCHAR },
+			{ "zddtmj", Types.VARCHAR },
+			{ "sjjdYn", Types.VARCHAR },
+			{ "sgjdYn", Types.VARCHAR },
+			{ "yxjdYn", Types.VARCHAR },
+			{ "tdhtqdbh", Types.VARCHAR },
+			{ "tdhtqdrq", Types.VARCHAR },
+			{ "dkbh", Types.VARCHAR },
+			{ "zpsjzlsbl", Types.VARCHAR },
+			{ "zpsjzmj", Types.VARCHAR },
+			{ "dwyzzpl", Types.VARCHAR },
+			{ "zdh", Types.VARCHAR },
+			{ "sfgdcg", Types.VARCHAR },
+			{ "ptlhmj", Types.VARCHAR },
+			{ "bimjszxfy", Types.VARCHAR },
+			{ "bz", Types.VARCHAR },
+			{ "sfzcxm", Types.VARCHAR },
+			{ "zcxmbm", Types.VARCHAR },
+			{ "sfzmqxm", Types.VARCHAR },
+			{ "printPDFTime", Types.VARCHAR },
+			{ "isBgPrint", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table cp_Project (projectId VARCHAR(75) not null primary key,zzjgdm VARCHAR(75) null,bjrq DATE null,bjWebid VARCHAR(75) null,xmmc VARCHAR(75) null,bjwcbj VARCHAR(75) null,jsdwmc VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table cp_Project (bjbh VARCHAR(75) not null primary key,bjrq DATE null,jsdw VARCHAR(100) null,jsdwxz VARCHAR(75) null,jsdwdz VARCHAR(200) null,jsdwdh VARCHAR(75) null,jsdwfr VARCHAR(75) null,jsdwlxr VARCHAR(75) null,jsdwyb VARCHAR(75) null,jsdwzczj VARCHAR(75) null,xmmc VARCHAR(200) null,jsdd VARCHAR(200) null,lxwj VARCHAR(200) null,lxwh VARCHAR(200) null,lxjb VARCHAR(75) null,pzjg VARCHAR(100) null,pzrq VARCHAR(75) null,ztz VARCHAR(75) null,sbtz VARCHAR(75) null,jsxz VARCHAR(75) null,jsgm VARCHAR(200) null,zmj VARCHAR(75) null,kgrq VARCHAR(75) null,xmxz VARCHAR(75) null,cjqk VARCHAR(200) null,smqk VARCHAR(600) null,bjbz VARCHAR(600) null,fbzgsc VARCHAR(75) null,cardid VARCHAR(75) null,zjlygc_1 VARCHAR(75) null,zjlygc_2 VARCHAR(75) null,zjlygc_3 VARCHAR(75) null,zjlygc_4 VARCHAR(75) null,zjlygc_5 VARCHAR(75) null,zjlygc_6 VARCHAR(75) null,zjlygc_7 VARCHAR(75) null,zjlygc_8 VARCHAR(75) null,zjlygc_9 VARCHAR(75) null,jgxs VARCHAR(75) null,xmfl VARCHAR(75) null,jzmq VARCHAR(75) null,ywdt VARCHAR(75) null,dxsck VARCHAR(75) null,bhjz VARCHAR(75) null,fjms VARCHAR(75) null,sfsbxm VARCHAR(75) null,hzyj VARCHAR(75) null,bj_sx VARCHAR(75) null,bj_webid VARCHAR(75) null,bjwcbj VARCHAR(75) null,bmdm VARCHAR(75) null,jbr VARCHAR(75) null,shr VARCHAR(75) null,shbmdm VARCHAR(75) null,wcbjsj VARCHAR(75) null,old_bjbh VARCHAR(75) null,sffb VARCHAR(75) null,timeflag VARCHAR(75) null,jbrdm VARCHAR(75) null,shrdm VARCHAR(75) null,jsbh VARCHAR(75) null,needSbjl VARCHAR(75) null,wcSbjl VARCHAR(75) null,sfgyzbkg VARCHAR(75) null,jyzxfbxx VARCHAR(75) null,sgGkzbfb VARCHAR(75) null,sgjlGkzbfb VARCHAR(75) null,fxglxm VARCHAR(75) null,fxglxmJbr VARCHAR(75) null,fxglxmJbrdm VARCHAR(75) null,fxglxmJbrq VARCHAR(75) null,jsdwjgdm VARCHAR(75) null,szqy VARCHAR(75) null,ywxjfwjz VARCHAR(75) null,ywgbfwjg VARCHAR(75) null,gczh VARCHAR(100) null,zdcyyn VARCHAR(75) null,lxfl VARCHAR(75) null,ms1 VARCHAR(75) null,ms2 VARCHAR(75) null,ms3 VARCHAR(75) null,zdxmyn VARCHAR(75) null,dxjzsq VARCHAR(75) null,ywjzxzz VARCHAR(75) null,fgwjhm VARCHAR(75) null,zzbl VARCHAR(75) null,ChangeTime VARCHAR(75) null,PD_SW VARCHAR(75) null,bmpfrq VARCHAR(75) null,bmpfwh VARCHAR(200) null,bmpfwj VARCHAR(200) null,CertificateKey VARCHAR(75) null,dsjzmj VARCHAR(75) null,dxjzmj VARCHAR(75) null,gdzctzbh VARCHAR(75) null,jsxz_2011 VARCHAR(75) null,lhmj VARCHAR(75) null,lxjb_2011 VARCHAR(75) null,mfmj VARCHAR(75) null,other_qx VARCHAR(100) null,ProjectSlyj VARCHAR(200) null,qxbz VARCHAR(75) null,sfcysjkfq VARCHAR(75) null,sfmfss VARCHAR(75) null,szqx VARCHAR(75) null,tsgs VARCHAR(75) null,xmfl_2011 VARCHAR(75) null,xsjpw VARCHAR(75) null,xsjpzdw VARCHAR(75) null,zjlygc_10 VARCHAR(75) null,zjlygc_11 VARCHAR(75) null,zjlygc_xs_1 VARCHAR(75) null,zjlygc_xs_2 VARCHAR(75) null,zjlygc_xs_3 VARCHAR(75) null,zjlygc_xs_4 VARCHAR(75) null,zjlygc_1_2 VARCHAR(75) null,zjlygc_1_2_4 VARCHAR(75) null,ywptlh VARCHAR(75) null,gyyqbh VARCHAR(75) null,sfcyxm VARCHAR(75) null,zbxmfzrxm VARCHAR(75) null,zbxmfzrzjh VARCHAR(75) null,zbxmfzrzjlx VARCHAR(75) null,zbxmfzrqrsj VARCHAR(75) null,sflsjzbs VARCHAR(75) null,sjbs VARCHAR(75) null,yxbs VARCHAR(75) null,sfyjngz VARCHAR(75) null,sfsszpjz VARCHAR(75) null,zczxjgdmz VARCHAR(75) null,ischeckxmbm VARCHAR(75) null,zddtmj VARCHAR(75) null,sjjdYn VARCHAR(75) null,sgjdYn VARCHAR(75) null,yxjdYn VARCHAR(75) null,tdhtqdbh VARCHAR(75) null,tdhtqdrq VARCHAR(75) null,dkbh VARCHAR(75) null,zpsjzlsbl VARCHAR(75) null,zpsjzmj VARCHAR(75) null,dwyzzpl VARCHAR(75) null,zdh VARCHAR(75) null,sfgdcg VARCHAR(75) null,ptlhmj VARCHAR(75) null,bimjszxfy VARCHAR(75) null,bz VARCHAR(2000) null,sfzcxm VARCHAR(75) null,zcxmbm VARCHAR(75) null,sfzmqxm VARCHAR(75) null,printPDFTime VARCHAR(75) null,isBgPrint VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table cp_Project";
 	public static final String ORDER_BY_JPQL = " ORDER BY project.bjrq DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY cp_Project.bjrq DESC";
@@ -77,11 +221,7 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.finder.cache.enabled.com.justonetech.cp.project.model.Project"),
 			true);
-	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
-				"value.object.column.bitmask.enabled.com.justonetech.cp.project.model.Project"),
-			true);
-	public static long ZZJGDM_COLUMN_BITMASK = 1L;
-	public static long BJRQ_COLUMN_BITMASK = 2L;
+	public static final boolean COLUMN_BITMASK_ENABLED = false;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
 				"lock.expiration.time.com.justonetech.cp.project.model.Project"));
 
@@ -90,17 +230,17 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 
 	@Override
 	public String getPrimaryKey() {
-		return _projectId;
+		return _bjbh;
 	}
 
 	@Override
 	public void setPrimaryKey(String primaryKey) {
-		setProjectId(primaryKey);
+		setBjbh(primaryKey);
 	}
 
 	@Override
 	public Serializable getPrimaryKeyObj() {
-		return _projectId;
+		return _bjbh;
 	}
 
 	@Override
@@ -122,29 +262,167 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
-		attributes.put("projectId", getProjectId());
-		attributes.put("zzjgdm", getZzjgdm());
+		attributes.put("bjbh", getBjbh());
 		attributes.put("bjrq", getBjrq());
-		attributes.put("bjWebid", getBjWebid());
+		attributes.put("jsdw", getJsdw());
+		attributes.put("jsdwxz", getJsdwxz());
+		attributes.put("jsdwdz", getJsdwdz());
+		attributes.put("jsdwdh", getJsdwdh());
+		attributes.put("jsdwfr", getJsdwfr());
+		attributes.put("jsdwlxr", getJsdwlxr());
+		attributes.put("jsdwyb", getJsdwyb());
+		attributes.put("jsdwzczj", getJsdwzczj());
 		attributes.put("xmmc", getXmmc());
+		attributes.put("jsdd", getJsdd());
+		attributes.put("lxwj", getLxwj());
+		attributes.put("lxwh", getLxwh());
+		attributes.put("lxjb", getLxjb());
+		attributes.put("pzjg", getPzjg());
+		attributes.put("pzrq", getPzrq());
+		attributes.put("ztz", getZtz());
+		attributes.put("sbtz", getSbtz());
+		attributes.put("jsxz", getJsxz());
+		attributes.put("jsgm", getJsgm());
+		attributes.put("zmj", getZmj());
+		attributes.put("kgrq", getKgrq());
+		attributes.put("xmxz", getXmxz());
+		attributes.put("cjqk", getCjqk());
+		attributes.put("smqk", getSmqk());
+		attributes.put("bjbz", getBjbz());
+		attributes.put("fbzgsc", getFbzgsc());
+		attributes.put("cardid", getCardid());
+		attributes.put("zjlygc_1", getZjlygc_1());
+		attributes.put("zjlygc_2", getZjlygc_2());
+		attributes.put("zjlygc_3", getZjlygc_3());
+		attributes.put("zjlygc_4", getZjlygc_4());
+		attributes.put("zjlygc_5", getZjlygc_5());
+		attributes.put("zjlygc_6", getZjlygc_6());
+		attributes.put("zjlygc_7", getZjlygc_7());
+		attributes.put("zjlygc_8", getZjlygc_8());
+		attributes.put("zjlygc_9", getZjlygc_9());
+		attributes.put("jgxs", getJgxs());
+		attributes.put("xmfl", getXmfl());
+		attributes.put("jzmq", getJzmq());
+		attributes.put("ywdt", getYwdt());
+		attributes.put("dxsck", getDxsck());
+		attributes.put("bhjz", getBhjz());
+		attributes.put("fjms", getFjms());
+		attributes.put("sfsbxm", getSfsbxm());
+		attributes.put("hzyj", getHzyj());
+		attributes.put("bj_sx", getBj_sx());
+		attributes.put("bj_webid", getBj_webid());
 		attributes.put("bjwcbj", getBjwcbj());
-		attributes.put("jsdwmc", getJsdwmc());
+		attributes.put("bmdm", getBmdm());
+		attributes.put("jbr", getJbr());
+		attributes.put("shr", getShr());
+		attributes.put("shbmdm", getShbmdm());
+		attributes.put("wcbjsj", getWcbjsj());
+		attributes.put("old_bjbh", getOld_bjbh());
+		attributes.put("sffb", getSffb());
+		attributes.put("timeflag", getTimeflag());
+		attributes.put("jbrdm", getJbrdm());
+		attributes.put("shrdm", getShrdm());
+		attributes.put("jsbh", getJsbh());
+		attributes.put("needSbjl", getNeedSbjl());
+		attributes.put("wcSbjl", getWcSbjl());
+		attributes.put("sfgyzbkg", getSfgyzbkg());
+		attributes.put("jyzxfbxx", getJyzxfbxx());
+		attributes.put("sgGkzbfb", getSgGkzbfb());
+		attributes.put("sgjlGkzbfb", getSgjlGkzbfb());
+		attributes.put("fxglxm", getFxglxm());
+		attributes.put("fxglxmJbr", getFxglxmJbr());
+		attributes.put("fxglxmJbrdm", getFxglxmJbrdm());
+		attributes.put("fxglxmJbrq", getFxglxmJbrq());
+		attributes.put("jsdwjgdm", getJsdwjgdm());
+		attributes.put("szqy", getSzqy());
+		attributes.put("ywxjfwjz", getYwxjfwjz());
+		attributes.put("ywgbfwjg", getYwgbfwjg());
+		attributes.put("gczh", getGczh());
+		attributes.put("zdcyyn", getZdcyyn());
+		attributes.put("lxfl", getLxfl());
+		attributes.put("ms1", getMs1());
+		attributes.put("ms2", getMs2());
+		attributes.put("ms3", getMs3());
+		attributes.put("zdxmyn", getZdxmyn());
+		attributes.put("dxjzsq", getDxjzsq());
+		attributes.put("ywjzxzz", getYwjzxzz());
+		attributes.put("fgwjhm", getFgwjhm());
+		attributes.put("zzbl", getZzbl());
+		attributes.put("ChangeTime", getChangeTime());
+		attributes.put("PD_SW", getPD_SW());
+		attributes.put("bmpfrq", getBmpfrq());
+		attributes.put("bmpfwh", getBmpfwh());
+		attributes.put("bmpfwj", getBmpfwj());
+		attributes.put("CertificateKey", getCertificateKey());
+		attributes.put("dsjzmj", getDsjzmj());
+		attributes.put("dxjzmj", getDxjzmj());
+		attributes.put("gdzctzbh", getGdzctzbh());
+		attributes.put("jsxz_2011", getJsxz_2011());
+		attributes.put("lhmj", getLhmj());
+		attributes.put("lxjb_2011", getLxjb_2011());
+		attributes.put("mfmj", getMfmj());
+		attributes.put("other_qx", getOther_qx());
+		attributes.put("ProjectSlyj", getProjectSlyj());
+		attributes.put("qxbz", getQxbz());
+		attributes.put("sfcysjkfq", getSfcysjkfq());
+		attributes.put("sfmfss", getSfmfss());
+		attributes.put("szqx", getSzqx());
+		attributes.put("tsgs", getTsgs());
+		attributes.put("xmfl_2011", getXmfl_2011());
+		attributes.put("xsjpw", getXsjpw());
+		attributes.put("xsjpzdw", getXsjpzdw());
+		attributes.put("zjlygc_10", getZjlygc_10());
+		attributes.put("zjlygc_11", getZjlygc_11());
+		attributes.put("zjlygc_xs_1", getZjlygc_xs_1());
+		attributes.put("zjlygc_xs_2", getZjlygc_xs_2());
+		attributes.put("zjlygc_xs_3", getZjlygc_xs_3());
+		attributes.put("zjlygc_xs_4", getZjlygc_xs_4());
+		attributes.put("zjlygc_1_2", getZjlygc_1_2());
+		attributes.put("zjlygc_1_2_4", getZjlygc_1_2_4());
+		attributes.put("ywptlh", getYwptlh());
+		attributes.put("gyyqbh", getGyyqbh());
+		attributes.put("sfcyxm", getSfcyxm());
+		attributes.put("zbxmfzrxm", getZbxmfzrxm());
+		attributes.put("zbxmfzrzjh", getZbxmfzrzjh());
+		attributes.put("zbxmfzrzjlx", getZbxmfzrzjlx());
+		attributes.put("zbxmfzrqrsj", getZbxmfzrqrsj());
+		attributes.put("sflsjzbs", getSflsjzbs());
+		attributes.put("sjbs", getSjbs());
+		attributes.put("yxbs", getYxbs());
+		attributes.put("sfyjngz", getSfyjngz());
+		attributes.put("sfsszpjz", getSfsszpjz());
+		attributes.put("zczxjgdmz", getZczxjgdmz());
+		attributes.put("ischeckxmbm", getIscheckxmbm());
+		attributes.put("zddtmj", getZddtmj());
+		attributes.put("sjjdYn", getSjjdYn());
+		attributes.put("sgjdYn", getSgjdYn());
+		attributes.put("yxjdYn", getYxjdYn());
+		attributes.put("tdhtqdbh", getTdhtqdbh());
+		attributes.put("tdhtqdrq", getTdhtqdrq());
+		attributes.put("dkbh", getDkbh());
+		attributes.put("zpsjzlsbl", getZpsjzlsbl());
+		attributes.put("zpsjzmj", getZpsjzmj());
+		attributes.put("dwyzzpl", getDwyzzpl());
+		attributes.put("zdh", getZdh());
+		attributes.put("sfgdcg", getSfgdcg());
+		attributes.put("ptlhmj", getPtlhmj());
+		attributes.put("bimjszxfy", getBimjszxfy());
+		attributes.put("bz", getBz());
+		attributes.put("sfzcxm", getSfzcxm());
+		attributes.put("zcxmbm", getZcxmbm());
+		attributes.put("sfzmqxm", getSfzmqxm());
+		attributes.put("printPDFTime", getPrintPDFTime());
+		attributes.put("isBgPrint", getIsBgPrint());
 
 		return attributes;
 	}
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
-		String projectId = (String)attributes.get("projectId");
+		String bjbh = (String)attributes.get("bjbh");
 
-		if (projectId != null) {
-			setProjectId(projectId);
-		}
-
-		String zzjgdm = (String)attributes.get("zzjgdm");
-
-		if (zzjgdm != null) {
-			setZzjgdm(zzjgdm);
+		if (bjbh != null) {
+			setBjbh(bjbh);
 		}
 
 		Date bjrq = (Date)attributes.get("bjrq");
@@ -153,10 +431,52 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 			setBjrq(bjrq);
 		}
 
-		String bjWebid = (String)attributes.get("bjWebid");
+		String jsdw = (String)attributes.get("jsdw");
 
-		if (bjWebid != null) {
-			setBjWebid(bjWebid);
+		if (jsdw != null) {
+			setJsdw(jsdw);
+		}
+
+		String jsdwxz = (String)attributes.get("jsdwxz");
+
+		if (jsdwxz != null) {
+			setJsdwxz(jsdwxz);
+		}
+
+		String jsdwdz = (String)attributes.get("jsdwdz");
+
+		if (jsdwdz != null) {
+			setJsdwdz(jsdwdz);
+		}
+
+		String jsdwdh = (String)attributes.get("jsdwdh");
+
+		if (jsdwdh != null) {
+			setJsdwdh(jsdwdh);
+		}
+
+		String jsdwfr = (String)attributes.get("jsdwfr");
+
+		if (jsdwfr != null) {
+			setJsdwfr(jsdwfr);
+		}
+
+		String jsdwlxr = (String)attributes.get("jsdwlxr");
+
+		if (jsdwlxr != null) {
+			setJsdwlxr(jsdwlxr);
+		}
+
+		String jsdwyb = (String)attributes.get("jsdwyb");
+
+		if (jsdwyb != null) {
+			setJsdwyb(jsdwyb);
+		}
+
+		String jsdwzczj = (String)attributes.get("jsdwzczj");
+
+		if (jsdwzczj != null) {
+			setJsdwzczj(jsdwzczj);
 		}
 
 		String xmmc = (String)attributes.get("xmmc");
@@ -165,57 +485,860 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 			setXmmc(xmmc);
 		}
 
+		String jsdd = (String)attributes.get("jsdd");
+
+		if (jsdd != null) {
+			setJsdd(jsdd);
+		}
+
+		String lxwj = (String)attributes.get("lxwj");
+
+		if (lxwj != null) {
+			setLxwj(lxwj);
+		}
+
+		String lxwh = (String)attributes.get("lxwh");
+
+		if (lxwh != null) {
+			setLxwh(lxwh);
+		}
+
+		String lxjb = (String)attributes.get("lxjb");
+
+		if (lxjb != null) {
+			setLxjb(lxjb);
+		}
+
+		String pzjg = (String)attributes.get("pzjg");
+
+		if (pzjg != null) {
+			setPzjg(pzjg);
+		}
+
+		String pzrq = (String)attributes.get("pzrq");
+
+		if (pzrq != null) {
+			setPzrq(pzrq);
+		}
+
+		String ztz = (String)attributes.get("ztz");
+
+		if (ztz != null) {
+			setZtz(ztz);
+		}
+
+		String sbtz = (String)attributes.get("sbtz");
+
+		if (sbtz != null) {
+			setSbtz(sbtz);
+		}
+
+		String jsxz = (String)attributes.get("jsxz");
+
+		if (jsxz != null) {
+			setJsxz(jsxz);
+		}
+
+		String jsgm = (String)attributes.get("jsgm");
+
+		if (jsgm != null) {
+			setJsgm(jsgm);
+		}
+
+		String zmj = (String)attributes.get("zmj");
+
+		if (zmj != null) {
+			setZmj(zmj);
+		}
+
+		String kgrq = (String)attributes.get("kgrq");
+
+		if (kgrq != null) {
+			setKgrq(kgrq);
+		}
+
+		String xmxz = (String)attributes.get("xmxz");
+
+		if (xmxz != null) {
+			setXmxz(xmxz);
+		}
+
+		String cjqk = (String)attributes.get("cjqk");
+
+		if (cjqk != null) {
+			setCjqk(cjqk);
+		}
+
+		String smqk = (String)attributes.get("smqk");
+
+		if (smqk != null) {
+			setSmqk(smqk);
+		}
+
+		String bjbz = (String)attributes.get("bjbz");
+
+		if (bjbz != null) {
+			setBjbz(bjbz);
+		}
+
+		String fbzgsc = (String)attributes.get("fbzgsc");
+
+		if (fbzgsc != null) {
+			setFbzgsc(fbzgsc);
+		}
+
+		String cardid = (String)attributes.get("cardid");
+
+		if (cardid != null) {
+			setCardid(cardid);
+		}
+
+		String zjlygc_1 = (String)attributes.get("zjlygc_1");
+
+		if (zjlygc_1 != null) {
+			setZjlygc_1(zjlygc_1);
+		}
+
+		String zjlygc_2 = (String)attributes.get("zjlygc_2");
+
+		if (zjlygc_2 != null) {
+			setZjlygc_2(zjlygc_2);
+		}
+
+		String zjlygc_3 = (String)attributes.get("zjlygc_3");
+
+		if (zjlygc_3 != null) {
+			setZjlygc_3(zjlygc_3);
+		}
+
+		String zjlygc_4 = (String)attributes.get("zjlygc_4");
+
+		if (zjlygc_4 != null) {
+			setZjlygc_4(zjlygc_4);
+		}
+
+		String zjlygc_5 = (String)attributes.get("zjlygc_5");
+
+		if (zjlygc_5 != null) {
+			setZjlygc_5(zjlygc_5);
+		}
+
+		String zjlygc_6 = (String)attributes.get("zjlygc_6");
+
+		if (zjlygc_6 != null) {
+			setZjlygc_6(zjlygc_6);
+		}
+
+		String zjlygc_7 = (String)attributes.get("zjlygc_7");
+
+		if (zjlygc_7 != null) {
+			setZjlygc_7(zjlygc_7);
+		}
+
+		String zjlygc_8 = (String)attributes.get("zjlygc_8");
+
+		if (zjlygc_8 != null) {
+			setZjlygc_8(zjlygc_8);
+		}
+
+		String zjlygc_9 = (String)attributes.get("zjlygc_9");
+
+		if (zjlygc_9 != null) {
+			setZjlygc_9(zjlygc_9);
+		}
+
+		String jgxs = (String)attributes.get("jgxs");
+
+		if (jgxs != null) {
+			setJgxs(jgxs);
+		}
+
+		String xmfl = (String)attributes.get("xmfl");
+
+		if (xmfl != null) {
+			setXmfl(xmfl);
+		}
+
+		String jzmq = (String)attributes.get("jzmq");
+
+		if (jzmq != null) {
+			setJzmq(jzmq);
+		}
+
+		String ywdt = (String)attributes.get("ywdt");
+
+		if (ywdt != null) {
+			setYwdt(ywdt);
+		}
+
+		String dxsck = (String)attributes.get("dxsck");
+
+		if (dxsck != null) {
+			setDxsck(dxsck);
+		}
+
+		String bhjz = (String)attributes.get("bhjz");
+
+		if (bhjz != null) {
+			setBhjz(bhjz);
+		}
+
+		String fjms = (String)attributes.get("fjms");
+
+		if (fjms != null) {
+			setFjms(fjms);
+		}
+
+		String sfsbxm = (String)attributes.get("sfsbxm");
+
+		if (sfsbxm != null) {
+			setSfsbxm(sfsbxm);
+		}
+
+		String hzyj = (String)attributes.get("hzyj");
+
+		if (hzyj != null) {
+			setHzyj(hzyj);
+		}
+
+		String bj_sx = (String)attributes.get("bj_sx");
+
+		if (bj_sx != null) {
+			setBj_sx(bj_sx);
+		}
+
+		String bj_webid = (String)attributes.get("bj_webid");
+
+		if (bj_webid != null) {
+			setBj_webid(bj_webid);
+		}
+
 		String bjwcbj = (String)attributes.get("bjwcbj");
 
 		if (bjwcbj != null) {
 			setBjwcbj(bjwcbj);
 		}
 
-		String jsdwmc = (String)attributes.get("jsdwmc");
+		String bmdm = (String)attributes.get("bmdm");
 
-		if (jsdwmc != null) {
-			setJsdwmc(jsdwmc);
+		if (bmdm != null) {
+			setBmdm(bmdm);
+		}
+
+		String jbr = (String)attributes.get("jbr");
+
+		if (jbr != null) {
+			setJbr(jbr);
+		}
+
+		String shr = (String)attributes.get("shr");
+
+		if (shr != null) {
+			setShr(shr);
+		}
+
+		String shbmdm = (String)attributes.get("shbmdm");
+
+		if (shbmdm != null) {
+			setShbmdm(shbmdm);
+		}
+
+		String wcbjsj = (String)attributes.get("wcbjsj");
+
+		if (wcbjsj != null) {
+			setWcbjsj(wcbjsj);
+		}
+
+		String old_bjbh = (String)attributes.get("old_bjbh");
+
+		if (old_bjbh != null) {
+			setOld_bjbh(old_bjbh);
+		}
+
+		String sffb = (String)attributes.get("sffb");
+
+		if (sffb != null) {
+			setSffb(sffb);
+		}
+
+		String timeflag = (String)attributes.get("timeflag");
+
+		if (timeflag != null) {
+			setTimeflag(timeflag);
+		}
+
+		String jbrdm = (String)attributes.get("jbrdm");
+
+		if (jbrdm != null) {
+			setJbrdm(jbrdm);
+		}
+
+		String shrdm = (String)attributes.get("shrdm");
+
+		if (shrdm != null) {
+			setShrdm(shrdm);
+		}
+
+		String jsbh = (String)attributes.get("jsbh");
+
+		if (jsbh != null) {
+			setJsbh(jsbh);
+		}
+
+		String needSbjl = (String)attributes.get("needSbjl");
+
+		if (needSbjl != null) {
+			setNeedSbjl(needSbjl);
+		}
+
+		String wcSbjl = (String)attributes.get("wcSbjl");
+
+		if (wcSbjl != null) {
+			setWcSbjl(wcSbjl);
+		}
+
+		String sfgyzbkg = (String)attributes.get("sfgyzbkg");
+
+		if (sfgyzbkg != null) {
+			setSfgyzbkg(sfgyzbkg);
+		}
+
+		String jyzxfbxx = (String)attributes.get("jyzxfbxx");
+
+		if (jyzxfbxx != null) {
+			setJyzxfbxx(jyzxfbxx);
+		}
+
+		String sgGkzbfb = (String)attributes.get("sgGkzbfb");
+
+		if (sgGkzbfb != null) {
+			setSgGkzbfb(sgGkzbfb);
+		}
+
+		String sgjlGkzbfb = (String)attributes.get("sgjlGkzbfb");
+
+		if (sgjlGkzbfb != null) {
+			setSgjlGkzbfb(sgjlGkzbfb);
+		}
+
+		String fxglxm = (String)attributes.get("fxglxm");
+
+		if (fxglxm != null) {
+			setFxglxm(fxglxm);
+		}
+
+		String fxglxmJbr = (String)attributes.get("fxglxmJbr");
+
+		if (fxglxmJbr != null) {
+			setFxglxmJbr(fxglxmJbr);
+		}
+
+		String fxglxmJbrdm = (String)attributes.get("fxglxmJbrdm");
+
+		if (fxglxmJbrdm != null) {
+			setFxglxmJbrdm(fxglxmJbrdm);
+		}
+
+		String fxglxmJbrq = (String)attributes.get("fxglxmJbrq");
+
+		if (fxglxmJbrq != null) {
+			setFxglxmJbrq(fxglxmJbrq);
+		}
+
+		String jsdwjgdm = (String)attributes.get("jsdwjgdm");
+
+		if (jsdwjgdm != null) {
+			setJsdwjgdm(jsdwjgdm);
+		}
+
+		String szqy = (String)attributes.get("szqy");
+
+		if (szqy != null) {
+			setSzqy(szqy);
+		}
+
+		String ywxjfwjz = (String)attributes.get("ywxjfwjz");
+
+		if (ywxjfwjz != null) {
+			setYwxjfwjz(ywxjfwjz);
+		}
+
+		String ywgbfwjg = (String)attributes.get("ywgbfwjg");
+
+		if (ywgbfwjg != null) {
+			setYwgbfwjg(ywgbfwjg);
+		}
+
+		String gczh = (String)attributes.get("gczh");
+
+		if (gczh != null) {
+			setGczh(gczh);
+		}
+
+		String zdcyyn = (String)attributes.get("zdcyyn");
+
+		if (zdcyyn != null) {
+			setZdcyyn(zdcyyn);
+		}
+
+		String lxfl = (String)attributes.get("lxfl");
+
+		if (lxfl != null) {
+			setLxfl(lxfl);
+		}
+
+		String ms1 = (String)attributes.get("ms1");
+
+		if (ms1 != null) {
+			setMs1(ms1);
+		}
+
+		String ms2 = (String)attributes.get("ms2");
+
+		if (ms2 != null) {
+			setMs2(ms2);
+		}
+
+		String ms3 = (String)attributes.get("ms3");
+
+		if (ms3 != null) {
+			setMs3(ms3);
+		}
+
+		String zdxmyn = (String)attributes.get("zdxmyn");
+
+		if (zdxmyn != null) {
+			setZdxmyn(zdxmyn);
+		}
+
+		String dxjzsq = (String)attributes.get("dxjzsq");
+
+		if (dxjzsq != null) {
+			setDxjzsq(dxjzsq);
+		}
+
+		String ywjzxzz = (String)attributes.get("ywjzxzz");
+
+		if (ywjzxzz != null) {
+			setYwjzxzz(ywjzxzz);
+		}
+
+		String fgwjhm = (String)attributes.get("fgwjhm");
+
+		if (fgwjhm != null) {
+			setFgwjhm(fgwjhm);
+		}
+
+		String zzbl = (String)attributes.get("zzbl");
+
+		if (zzbl != null) {
+			setZzbl(zzbl);
+		}
+
+		String ChangeTime = (String)attributes.get("ChangeTime");
+
+		if (ChangeTime != null) {
+			setChangeTime(ChangeTime);
+		}
+
+		String PD_SW = (String)attributes.get("PD_SW");
+
+		if (PD_SW != null) {
+			setPD_SW(PD_SW);
+		}
+
+		String bmpfrq = (String)attributes.get("bmpfrq");
+
+		if (bmpfrq != null) {
+			setBmpfrq(bmpfrq);
+		}
+
+		String bmpfwh = (String)attributes.get("bmpfwh");
+
+		if (bmpfwh != null) {
+			setBmpfwh(bmpfwh);
+		}
+
+		String bmpfwj = (String)attributes.get("bmpfwj");
+
+		if (bmpfwj != null) {
+			setBmpfwj(bmpfwj);
+		}
+
+		String CertificateKey = (String)attributes.get("CertificateKey");
+
+		if (CertificateKey != null) {
+			setCertificateKey(CertificateKey);
+		}
+
+		String dsjzmj = (String)attributes.get("dsjzmj");
+
+		if (dsjzmj != null) {
+			setDsjzmj(dsjzmj);
+		}
+
+		String dxjzmj = (String)attributes.get("dxjzmj");
+
+		if (dxjzmj != null) {
+			setDxjzmj(dxjzmj);
+		}
+
+		String gdzctzbh = (String)attributes.get("gdzctzbh");
+
+		if (gdzctzbh != null) {
+			setGdzctzbh(gdzctzbh);
+		}
+
+		String jsxz_2011 = (String)attributes.get("jsxz_2011");
+
+		if (jsxz_2011 != null) {
+			setJsxz_2011(jsxz_2011);
+		}
+
+		String lhmj = (String)attributes.get("lhmj");
+
+		if (lhmj != null) {
+			setLhmj(lhmj);
+		}
+
+		String lxjb_2011 = (String)attributes.get("lxjb_2011");
+
+		if (lxjb_2011 != null) {
+			setLxjb_2011(lxjb_2011);
+		}
+
+		String mfmj = (String)attributes.get("mfmj");
+
+		if (mfmj != null) {
+			setMfmj(mfmj);
+		}
+
+		String other_qx = (String)attributes.get("other_qx");
+
+		if (other_qx != null) {
+			setOther_qx(other_qx);
+		}
+
+		String ProjectSlyj = (String)attributes.get("ProjectSlyj");
+
+		if (ProjectSlyj != null) {
+			setProjectSlyj(ProjectSlyj);
+		}
+
+		String qxbz = (String)attributes.get("qxbz");
+
+		if (qxbz != null) {
+			setQxbz(qxbz);
+		}
+
+		String sfcysjkfq = (String)attributes.get("sfcysjkfq");
+
+		if (sfcysjkfq != null) {
+			setSfcysjkfq(sfcysjkfq);
+		}
+
+		String sfmfss = (String)attributes.get("sfmfss");
+
+		if (sfmfss != null) {
+			setSfmfss(sfmfss);
+		}
+
+		String szqx = (String)attributes.get("szqx");
+
+		if (szqx != null) {
+			setSzqx(szqx);
+		}
+
+		String tsgs = (String)attributes.get("tsgs");
+
+		if (tsgs != null) {
+			setTsgs(tsgs);
+		}
+
+		String xmfl_2011 = (String)attributes.get("xmfl_2011");
+
+		if (xmfl_2011 != null) {
+			setXmfl_2011(xmfl_2011);
+		}
+
+		String xsjpw = (String)attributes.get("xsjpw");
+
+		if (xsjpw != null) {
+			setXsjpw(xsjpw);
+		}
+
+		String xsjpzdw = (String)attributes.get("xsjpzdw");
+
+		if (xsjpzdw != null) {
+			setXsjpzdw(xsjpzdw);
+		}
+
+		String zjlygc_10 = (String)attributes.get("zjlygc_10");
+
+		if (zjlygc_10 != null) {
+			setZjlygc_10(zjlygc_10);
+		}
+
+		String zjlygc_11 = (String)attributes.get("zjlygc_11");
+
+		if (zjlygc_11 != null) {
+			setZjlygc_11(zjlygc_11);
+		}
+
+		String zjlygc_xs_1 = (String)attributes.get("zjlygc_xs_1");
+
+		if (zjlygc_xs_1 != null) {
+			setZjlygc_xs_1(zjlygc_xs_1);
+		}
+
+		String zjlygc_xs_2 = (String)attributes.get("zjlygc_xs_2");
+
+		if (zjlygc_xs_2 != null) {
+			setZjlygc_xs_2(zjlygc_xs_2);
+		}
+
+		String zjlygc_xs_3 = (String)attributes.get("zjlygc_xs_3");
+
+		if (zjlygc_xs_3 != null) {
+			setZjlygc_xs_3(zjlygc_xs_3);
+		}
+
+		String zjlygc_xs_4 = (String)attributes.get("zjlygc_xs_4");
+
+		if (zjlygc_xs_4 != null) {
+			setZjlygc_xs_4(zjlygc_xs_4);
+		}
+
+		String zjlygc_1_2 = (String)attributes.get("zjlygc_1_2");
+
+		if (zjlygc_1_2 != null) {
+			setZjlygc_1_2(zjlygc_1_2);
+		}
+
+		String zjlygc_1_2_4 = (String)attributes.get("zjlygc_1_2_4");
+
+		if (zjlygc_1_2_4 != null) {
+			setZjlygc_1_2_4(zjlygc_1_2_4);
+		}
+
+		String ywptlh = (String)attributes.get("ywptlh");
+
+		if (ywptlh != null) {
+			setYwptlh(ywptlh);
+		}
+
+		String gyyqbh = (String)attributes.get("gyyqbh");
+
+		if (gyyqbh != null) {
+			setGyyqbh(gyyqbh);
+		}
+
+		String sfcyxm = (String)attributes.get("sfcyxm");
+
+		if (sfcyxm != null) {
+			setSfcyxm(sfcyxm);
+		}
+
+		String zbxmfzrxm = (String)attributes.get("zbxmfzrxm");
+
+		if (zbxmfzrxm != null) {
+			setZbxmfzrxm(zbxmfzrxm);
+		}
+
+		String zbxmfzrzjh = (String)attributes.get("zbxmfzrzjh");
+
+		if (zbxmfzrzjh != null) {
+			setZbxmfzrzjh(zbxmfzrzjh);
+		}
+
+		String zbxmfzrzjlx = (String)attributes.get("zbxmfzrzjlx");
+
+		if (zbxmfzrzjlx != null) {
+			setZbxmfzrzjlx(zbxmfzrzjlx);
+		}
+
+		String zbxmfzrqrsj = (String)attributes.get("zbxmfzrqrsj");
+
+		if (zbxmfzrqrsj != null) {
+			setZbxmfzrqrsj(zbxmfzrqrsj);
+		}
+
+		String sflsjzbs = (String)attributes.get("sflsjzbs");
+
+		if (sflsjzbs != null) {
+			setSflsjzbs(sflsjzbs);
+		}
+
+		String sjbs = (String)attributes.get("sjbs");
+
+		if (sjbs != null) {
+			setSjbs(sjbs);
+		}
+
+		String yxbs = (String)attributes.get("yxbs");
+
+		if (yxbs != null) {
+			setYxbs(yxbs);
+		}
+
+		String sfyjngz = (String)attributes.get("sfyjngz");
+
+		if (sfyjngz != null) {
+			setSfyjngz(sfyjngz);
+		}
+
+		String sfsszpjz = (String)attributes.get("sfsszpjz");
+
+		if (sfsszpjz != null) {
+			setSfsszpjz(sfsszpjz);
+		}
+
+		String zczxjgdmz = (String)attributes.get("zczxjgdmz");
+
+		if (zczxjgdmz != null) {
+			setZczxjgdmz(zczxjgdmz);
+		}
+
+		String ischeckxmbm = (String)attributes.get("ischeckxmbm");
+
+		if (ischeckxmbm != null) {
+			setIscheckxmbm(ischeckxmbm);
+		}
+
+		String zddtmj = (String)attributes.get("zddtmj");
+
+		if (zddtmj != null) {
+			setZddtmj(zddtmj);
+		}
+
+		String sjjdYn = (String)attributes.get("sjjdYn");
+
+		if (sjjdYn != null) {
+			setSjjdYn(sjjdYn);
+		}
+
+		String sgjdYn = (String)attributes.get("sgjdYn");
+
+		if (sgjdYn != null) {
+			setSgjdYn(sgjdYn);
+		}
+
+		String yxjdYn = (String)attributes.get("yxjdYn");
+
+		if (yxjdYn != null) {
+			setYxjdYn(yxjdYn);
+		}
+
+		String tdhtqdbh = (String)attributes.get("tdhtqdbh");
+
+		if (tdhtqdbh != null) {
+			setTdhtqdbh(tdhtqdbh);
+		}
+
+		String tdhtqdrq = (String)attributes.get("tdhtqdrq");
+
+		if (tdhtqdrq != null) {
+			setTdhtqdrq(tdhtqdrq);
+		}
+
+		String dkbh = (String)attributes.get("dkbh");
+
+		if (dkbh != null) {
+			setDkbh(dkbh);
+		}
+
+		String zpsjzlsbl = (String)attributes.get("zpsjzlsbl");
+
+		if (zpsjzlsbl != null) {
+			setZpsjzlsbl(zpsjzlsbl);
+		}
+
+		String zpsjzmj = (String)attributes.get("zpsjzmj");
+
+		if (zpsjzmj != null) {
+			setZpsjzmj(zpsjzmj);
+		}
+
+		String dwyzzpl = (String)attributes.get("dwyzzpl");
+
+		if (dwyzzpl != null) {
+			setDwyzzpl(dwyzzpl);
+		}
+
+		String zdh = (String)attributes.get("zdh");
+
+		if (zdh != null) {
+			setZdh(zdh);
+		}
+
+		String sfgdcg = (String)attributes.get("sfgdcg");
+
+		if (sfgdcg != null) {
+			setSfgdcg(sfgdcg);
+		}
+
+		String ptlhmj = (String)attributes.get("ptlhmj");
+
+		if (ptlhmj != null) {
+			setPtlhmj(ptlhmj);
+		}
+
+		String bimjszxfy = (String)attributes.get("bimjszxfy");
+
+		if (bimjszxfy != null) {
+			setBimjszxfy(bimjszxfy);
+		}
+
+		String bz = (String)attributes.get("bz");
+
+		if (bz != null) {
+			setBz(bz);
+		}
+
+		String sfzcxm = (String)attributes.get("sfzcxm");
+
+		if (sfzcxm != null) {
+			setSfzcxm(sfzcxm);
+		}
+
+		String zcxmbm = (String)attributes.get("zcxmbm");
+
+		if (zcxmbm != null) {
+			setZcxmbm(zcxmbm);
+		}
+
+		String sfzmqxm = (String)attributes.get("sfzmqxm");
+
+		if (sfzmqxm != null) {
+			setSfzmqxm(sfzmqxm);
+		}
+
+		String printPDFTime = (String)attributes.get("printPDFTime");
+
+		if (printPDFTime != null) {
+			setPrintPDFTime(printPDFTime);
+		}
+
+		String isBgPrint = (String)attributes.get("isBgPrint");
+
+		if (isBgPrint != null) {
+			setIsBgPrint(isBgPrint);
 		}
 	}
 
 	@Override
-	public String getProjectId() {
-		if (_projectId == null) {
+	public String getBjbh() {
+		if (_bjbh == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _projectId;
+			return _bjbh;
 		}
 	}
 
 	@Override
-	public void setProjectId(String projectId) {
-		_projectId = projectId;
-	}
-
-	@Override
-	public String getZzjgdm() {
-		if (_zzjgdm == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _zzjgdm;
-		}
-	}
-
-	@Override
-	public void setZzjgdm(String zzjgdm) {
-		_columnBitmask |= ZZJGDM_COLUMN_BITMASK;
-
-		if (_originalZzjgdm == null) {
-			_originalZzjgdm = _zzjgdm;
-		}
-
-		_zzjgdm = zzjgdm;
-	}
-
-	public String getOriginalZzjgdm() {
-		return GetterUtil.getString(_originalZzjgdm);
+	public void setBjbh(String bjbh) {
+		_bjbh = bjbh;
 	}
 
 	@Override
@@ -225,24 +1348,127 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 
 	@Override
 	public void setBjrq(Date bjrq) {
-		_columnBitmask = -1L;
-
 		_bjrq = bjrq;
 	}
 
 	@Override
-	public String getBjWebid() {
-		if (_bjWebid == null) {
+	public String getJsdw() {
+		if (_jsdw == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _bjWebid;
+			return _jsdw;
 		}
 	}
 
 	@Override
-	public void setBjWebid(String bjWebid) {
-		_bjWebid = bjWebid;
+	public void setJsdw(String jsdw) {
+		_jsdw = jsdw;
+	}
+
+	@Override
+	public String getJsdwxz() {
+		if (_jsdwxz == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _jsdwxz;
+		}
+	}
+
+	@Override
+	public void setJsdwxz(String jsdwxz) {
+		_jsdwxz = jsdwxz;
+	}
+
+	@Override
+	public String getJsdwdz() {
+		if (_jsdwdz == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _jsdwdz;
+		}
+	}
+
+	@Override
+	public void setJsdwdz(String jsdwdz) {
+		_jsdwdz = jsdwdz;
+	}
+
+	@Override
+	public String getJsdwdh() {
+		if (_jsdwdh == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _jsdwdh;
+		}
+	}
+
+	@Override
+	public void setJsdwdh(String jsdwdh) {
+		_jsdwdh = jsdwdh;
+	}
+
+	@Override
+	public String getJsdwfr() {
+		if (_jsdwfr == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _jsdwfr;
+		}
+	}
+
+	@Override
+	public void setJsdwfr(String jsdwfr) {
+		_jsdwfr = jsdwfr;
+	}
+
+	@Override
+	public String getJsdwlxr() {
+		if (_jsdwlxr == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _jsdwlxr;
+		}
+	}
+
+	@Override
+	public void setJsdwlxr(String jsdwlxr) {
+		_jsdwlxr = jsdwlxr;
+	}
+
+	@Override
+	public String getJsdwyb() {
+		if (_jsdwyb == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _jsdwyb;
+		}
+	}
+
+	@Override
+	public void setJsdwyb(String jsdwyb) {
+		_jsdwyb = jsdwyb;
+	}
+
+	@Override
+	public String getJsdwzczj() {
+		if (_jsdwzczj == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _jsdwzczj;
+		}
+	}
+
+	@Override
+	public void setJsdwzczj(String jsdwzczj) {
+		_jsdwzczj = jsdwzczj;
 	}
 
 	@Override
@@ -261,6 +1487,576 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 	}
 
 	@Override
+	public String getJsdd() {
+		if (_jsdd == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _jsdd;
+		}
+	}
+
+	@Override
+	public void setJsdd(String jsdd) {
+		_jsdd = jsdd;
+	}
+
+	@Override
+	public String getLxwj() {
+		if (_lxwj == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _lxwj;
+		}
+	}
+
+	@Override
+	public void setLxwj(String lxwj) {
+		_lxwj = lxwj;
+	}
+
+	@Override
+	public String getLxwh() {
+		if (_lxwh == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _lxwh;
+		}
+	}
+
+	@Override
+	public void setLxwh(String lxwh) {
+		_lxwh = lxwh;
+	}
+
+	@Override
+	public String getLxjb() {
+		if (_lxjb == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _lxjb;
+		}
+	}
+
+	@Override
+	public void setLxjb(String lxjb) {
+		_lxjb = lxjb;
+	}
+
+	@Override
+	public String getPzjg() {
+		if (_pzjg == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _pzjg;
+		}
+	}
+
+	@Override
+	public void setPzjg(String pzjg) {
+		_pzjg = pzjg;
+	}
+
+	@Override
+	public String getPzrq() {
+		if (_pzrq == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _pzrq;
+		}
+	}
+
+	@Override
+	public void setPzrq(String pzrq) {
+		_pzrq = pzrq;
+	}
+
+	@Override
+	public String getZtz() {
+		if (_ztz == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _ztz;
+		}
+	}
+
+	@Override
+	public void setZtz(String ztz) {
+		_ztz = ztz;
+	}
+
+	@Override
+	public String getSbtz() {
+		if (_sbtz == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _sbtz;
+		}
+	}
+
+	@Override
+	public void setSbtz(String sbtz) {
+		_sbtz = sbtz;
+	}
+
+	@Override
+	public String getJsxz() {
+		if (_jsxz == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _jsxz;
+		}
+	}
+
+	@Override
+	public void setJsxz(String jsxz) {
+		_jsxz = jsxz;
+	}
+
+	@Override
+	public String getJsgm() {
+		if (_jsgm == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _jsgm;
+		}
+	}
+
+	@Override
+	public void setJsgm(String jsgm) {
+		_jsgm = jsgm;
+	}
+
+	@Override
+	public String getZmj() {
+		if (_zmj == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _zmj;
+		}
+	}
+
+	@Override
+	public void setZmj(String zmj) {
+		_zmj = zmj;
+	}
+
+	@Override
+	public String getKgrq() {
+		if (_kgrq == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _kgrq;
+		}
+	}
+
+	@Override
+	public void setKgrq(String kgrq) {
+		_kgrq = kgrq;
+	}
+
+	@Override
+	public String getXmxz() {
+		if (_xmxz == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _xmxz;
+		}
+	}
+
+	@Override
+	public void setXmxz(String xmxz) {
+		_xmxz = xmxz;
+	}
+
+	@Override
+	public String getCjqk() {
+		if (_cjqk == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _cjqk;
+		}
+	}
+
+	@Override
+	public void setCjqk(String cjqk) {
+		_cjqk = cjqk;
+	}
+
+	@Override
+	public String getSmqk() {
+		if (_smqk == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _smqk;
+		}
+	}
+
+	@Override
+	public void setSmqk(String smqk) {
+		_smqk = smqk;
+	}
+
+	@Override
+	public String getBjbz() {
+		if (_bjbz == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _bjbz;
+		}
+	}
+
+	@Override
+	public void setBjbz(String bjbz) {
+		_bjbz = bjbz;
+	}
+
+	@Override
+	public String getFbzgsc() {
+		if (_fbzgsc == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _fbzgsc;
+		}
+	}
+
+	@Override
+	public void setFbzgsc(String fbzgsc) {
+		_fbzgsc = fbzgsc;
+	}
+
+	@Override
+	public String getCardid() {
+		if (_cardid == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _cardid;
+		}
+	}
+
+	@Override
+	public void setCardid(String cardid) {
+		_cardid = cardid;
+	}
+
+	@Override
+	public String getZjlygc_1() {
+		if (_zjlygc_1 == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _zjlygc_1;
+		}
+	}
+
+	@Override
+	public void setZjlygc_1(String zjlygc_1) {
+		_zjlygc_1 = zjlygc_1;
+	}
+
+	@Override
+	public String getZjlygc_2() {
+		if (_zjlygc_2 == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _zjlygc_2;
+		}
+	}
+
+	@Override
+	public void setZjlygc_2(String zjlygc_2) {
+		_zjlygc_2 = zjlygc_2;
+	}
+
+	@Override
+	public String getZjlygc_3() {
+		if (_zjlygc_3 == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _zjlygc_3;
+		}
+	}
+
+	@Override
+	public void setZjlygc_3(String zjlygc_3) {
+		_zjlygc_3 = zjlygc_3;
+	}
+
+	@Override
+	public String getZjlygc_4() {
+		if (_zjlygc_4 == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _zjlygc_4;
+		}
+	}
+
+	@Override
+	public void setZjlygc_4(String zjlygc_4) {
+		_zjlygc_4 = zjlygc_4;
+	}
+
+	@Override
+	public String getZjlygc_5() {
+		if (_zjlygc_5 == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _zjlygc_5;
+		}
+	}
+
+	@Override
+	public void setZjlygc_5(String zjlygc_5) {
+		_zjlygc_5 = zjlygc_5;
+	}
+
+	@Override
+	public String getZjlygc_6() {
+		if (_zjlygc_6 == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _zjlygc_6;
+		}
+	}
+
+	@Override
+	public void setZjlygc_6(String zjlygc_6) {
+		_zjlygc_6 = zjlygc_6;
+	}
+
+	@Override
+	public String getZjlygc_7() {
+		if (_zjlygc_7 == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _zjlygc_7;
+		}
+	}
+
+	@Override
+	public void setZjlygc_7(String zjlygc_7) {
+		_zjlygc_7 = zjlygc_7;
+	}
+
+	@Override
+	public String getZjlygc_8() {
+		if (_zjlygc_8 == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _zjlygc_8;
+		}
+	}
+
+	@Override
+	public void setZjlygc_8(String zjlygc_8) {
+		_zjlygc_8 = zjlygc_8;
+	}
+
+	@Override
+	public String getZjlygc_9() {
+		if (_zjlygc_9 == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _zjlygc_9;
+		}
+	}
+
+	@Override
+	public void setZjlygc_9(String zjlygc_9) {
+		_zjlygc_9 = zjlygc_9;
+	}
+
+	@Override
+	public String getJgxs() {
+		if (_jgxs == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _jgxs;
+		}
+	}
+
+	@Override
+	public void setJgxs(String jgxs) {
+		_jgxs = jgxs;
+	}
+
+	@Override
+	public String getXmfl() {
+		if (_xmfl == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _xmfl;
+		}
+	}
+
+	@Override
+	public void setXmfl(String xmfl) {
+		_xmfl = xmfl;
+	}
+
+	@Override
+	public String getJzmq() {
+		if (_jzmq == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _jzmq;
+		}
+	}
+
+	@Override
+	public void setJzmq(String jzmq) {
+		_jzmq = jzmq;
+	}
+
+	@Override
+	public String getYwdt() {
+		if (_ywdt == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _ywdt;
+		}
+	}
+
+	@Override
+	public void setYwdt(String ywdt) {
+		_ywdt = ywdt;
+	}
+
+	@Override
+	public String getDxsck() {
+		if (_dxsck == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _dxsck;
+		}
+	}
+
+	@Override
+	public void setDxsck(String dxsck) {
+		_dxsck = dxsck;
+	}
+
+	@Override
+	public String getBhjz() {
+		if (_bhjz == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _bhjz;
+		}
+	}
+
+	@Override
+	public void setBhjz(String bhjz) {
+		_bhjz = bhjz;
+	}
+
+	@Override
+	public String getFjms() {
+		if (_fjms == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _fjms;
+		}
+	}
+
+	@Override
+	public void setFjms(String fjms) {
+		_fjms = fjms;
+	}
+
+	@Override
+	public String getSfsbxm() {
+		if (_sfsbxm == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _sfsbxm;
+		}
+	}
+
+	@Override
+	public void setSfsbxm(String sfsbxm) {
+		_sfsbxm = sfsbxm;
+	}
+
+	@Override
+	public String getHzyj() {
+		if (_hzyj == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _hzyj;
+		}
+	}
+
+	@Override
+	public void setHzyj(String hzyj) {
+		_hzyj = hzyj;
+	}
+
+	@Override
+	public String getBj_sx() {
+		if (_bj_sx == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _bj_sx;
+		}
+	}
+
+	@Override
+	public void setBj_sx(String bj_sx) {
+		_bj_sx = bj_sx;
+	}
+
+	@Override
+	public String getBj_webid() {
+		if (_bj_webid == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _bj_webid;
+		}
+	}
+
+	@Override
+	public void setBj_webid(String bj_webid) {
+		_bj_webid = bj_webid;
+	}
+
+	@Override
 	public String getBjwcbj() {
 		if (_bjwcbj == null) {
 			return StringPool.BLANK;
@@ -276,22 +2072,1518 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 	}
 
 	@Override
-	public String getJsdwmc() {
-		if (_jsdwmc == null) {
+	public String getBmdm() {
+		if (_bmdm == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _jsdwmc;
+			return _bmdm;
 		}
 	}
 
 	@Override
-	public void setJsdwmc(String jsdwmc) {
-		_jsdwmc = jsdwmc;
+	public void setBmdm(String bmdm) {
+		_bmdm = bmdm;
 	}
 
-	public long getColumnBitmask() {
-		return _columnBitmask;
+	@Override
+	public String getJbr() {
+		if (_jbr == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _jbr;
+		}
+	}
+
+	@Override
+	public void setJbr(String jbr) {
+		_jbr = jbr;
+	}
+
+	@Override
+	public String getShr() {
+		if (_shr == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _shr;
+		}
+	}
+
+	@Override
+	public void setShr(String shr) {
+		_shr = shr;
+	}
+
+	@Override
+	public String getShbmdm() {
+		if (_shbmdm == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _shbmdm;
+		}
+	}
+
+	@Override
+	public void setShbmdm(String shbmdm) {
+		_shbmdm = shbmdm;
+	}
+
+	@Override
+	public String getWcbjsj() {
+		if (_wcbjsj == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _wcbjsj;
+		}
+	}
+
+	@Override
+	public void setWcbjsj(String wcbjsj) {
+		_wcbjsj = wcbjsj;
+	}
+
+	@Override
+	public String getOld_bjbh() {
+		if (_old_bjbh == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _old_bjbh;
+		}
+	}
+
+	@Override
+	public void setOld_bjbh(String old_bjbh) {
+		_old_bjbh = old_bjbh;
+	}
+
+	@Override
+	public String getSffb() {
+		if (_sffb == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _sffb;
+		}
+	}
+
+	@Override
+	public void setSffb(String sffb) {
+		_sffb = sffb;
+	}
+
+	@Override
+	public String getTimeflag() {
+		if (_timeflag == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _timeflag;
+		}
+	}
+
+	@Override
+	public void setTimeflag(String timeflag) {
+		_timeflag = timeflag;
+	}
+
+	@Override
+	public String getJbrdm() {
+		if (_jbrdm == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _jbrdm;
+		}
+	}
+
+	@Override
+	public void setJbrdm(String jbrdm) {
+		_jbrdm = jbrdm;
+	}
+
+	@Override
+	public String getShrdm() {
+		if (_shrdm == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _shrdm;
+		}
+	}
+
+	@Override
+	public void setShrdm(String shrdm) {
+		_shrdm = shrdm;
+	}
+
+	@Override
+	public String getJsbh() {
+		if (_jsbh == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _jsbh;
+		}
+	}
+
+	@Override
+	public void setJsbh(String jsbh) {
+		_jsbh = jsbh;
+	}
+
+	@Override
+	public String getNeedSbjl() {
+		if (_needSbjl == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _needSbjl;
+		}
+	}
+
+	@Override
+	public void setNeedSbjl(String needSbjl) {
+		_needSbjl = needSbjl;
+	}
+
+	@Override
+	public String getWcSbjl() {
+		if (_wcSbjl == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _wcSbjl;
+		}
+	}
+
+	@Override
+	public void setWcSbjl(String wcSbjl) {
+		_wcSbjl = wcSbjl;
+	}
+
+	@Override
+	public String getSfgyzbkg() {
+		if (_sfgyzbkg == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _sfgyzbkg;
+		}
+	}
+
+	@Override
+	public void setSfgyzbkg(String sfgyzbkg) {
+		_sfgyzbkg = sfgyzbkg;
+	}
+
+	@Override
+	public String getJyzxfbxx() {
+		if (_jyzxfbxx == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _jyzxfbxx;
+		}
+	}
+
+	@Override
+	public void setJyzxfbxx(String jyzxfbxx) {
+		_jyzxfbxx = jyzxfbxx;
+	}
+
+	@Override
+	public String getSgGkzbfb() {
+		if (_sgGkzbfb == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _sgGkzbfb;
+		}
+	}
+
+	@Override
+	public void setSgGkzbfb(String sgGkzbfb) {
+		_sgGkzbfb = sgGkzbfb;
+	}
+
+	@Override
+	public String getSgjlGkzbfb() {
+		if (_sgjlGkzbfb == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _sgjlGkzbfb;
+		}
+	}
+
+	@Override
+	public void setSgjlGkzbfb(String sgjlGkzbfb) {
+		_sgjlGkzbfb = sgjlGkzbfb;
+	}
+
+	@Override
+	public String getFxglxm() {
+		if (_fxglxm == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _fxglxm;
+		}
+	}
+
+	@Override
+	public void setFxglxm(String fxglxm) {
+		_fxglxm = fxglxm;
+	}
+
+	@Override
+	public String getFxglxmJbr() {
+		if (_fxglxmJbr == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _fxglxmJbr;
+		}
+	}
+
+	@Override
+	public void setFxglxmJbr(String fxglxmJbr) {
+		_fxglxmJbr = fxglxmJbr;
+	}
+
+	@Override
+	public String getFxglxmJbrdm() {
+		if (_fxglxmJbrdm == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _fxglxmJbrdm;
+		}
+	}
+
+	@Override
+	public void setFxglxmJbrdm(String fxglxmJbrdm) {
+		_fxglxmJbrdm = fxglxmJbrdm;
+	}
+
+	@Override
+	public String getFxglxmJbrq() {
+		if (_fxglxmJbrq == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _fxglxmJbrq;
+		}
+	}
+
+	@Override
+	public void setFxglxmJbrq(String fxglxmJbrq) {
+		_fxglxmJbrq = fxglxmJbrq;
+	}
+
+	@Override
+	public String getJsdwjgdm() {
+		if (_jsdwjgdm == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _jsdwjgdm;
+		}
+	}
+
+	@Override
+	public void setJsdwjgdm(String jsdwjgdm) {
+		_jsdwjgdm = jsdwjgdm;
+	}
+
+	@Override
+	public String getSzqy() {
+		if (_szqy == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _szqy;
+		}
+	}
+
+	@Override
+	public void setSzqy(String szqy) {
+		_szqy = szqy;
+	}
+
+	@Override
+	public String getYwxjfwjz() {
+		if (_ywxjfwjz == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _ywxjfwjz;
+		}
+	}
+
+	@Override
+	public void setYwxjfwjz(String ywxjfwjz) {
+		_ywxjfwjz = ywxjfwjz;
+	}
+
+	@Override
+	public String getYwgbfwjg() {
+		if (_ywgbfwjg == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _ywgbfwjg;
+		}
+	}
+
+	@Override
+	public void setYwgbfwjg(String ywgbfwjg) {
+		_ywgbfwjg = ywgbfwjg;
+	}
+
+	@Override
+	public String getGczh() {
+		if (_gczh == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _gczh;
+		}
+	}
+
+	@Override
+	public void setGczh(String gczh) {
+		_gczh = gczh;
+	}
+
+	@Override
+	public String getZdcyyn() {
+		if (_zdcyyn == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _zdcyyn;
+		}
+	}
+
+	@Override
+	public void setZdcyyn(String zdcyyn) {
+		_zdcyyn = zdcyyn;
+	}
+
+	@Override
+	public String getLxfl() {
+		if (_lxfl == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _lxfl;
+		}
+	}
+
+	@Override
+	public void setLxfl(String lxfl) {
+		_lxfl = lxfl;
+	}
+
+	@Override
+	public String getMs1() {
+		if (_ms1 == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _ms1;
+		}
+	}
+
+	@Override
+	public void setMs1(String ms1) {
+		_ms1 = ms1;
+	}
+
+	@Override
+	public String getMs2() {
+		if (_ms2 == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _ms2;
+		}
+	}
+
+	@Override
+	public void setMs2(String ms2) {
+		_ms2 = ms2;
+	}
+
+	@Override
+	public String getMs3() {
+		if (_ms3 == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _ms3;
+		}
+	}
+
+	@Override
+	public void setMs3(String ms3) {
+		_ms3 = ms3;
+	}
+
+	@Override
+	public String getZdxmyn() {
+		if (_zdxmyn == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _zdxmyn;
+		}
+	}
+
+	@Override
+	public void setZdxmyn(String zdxmyn) {
+		_zdxmyn = zdxmyn;
+	}
+
+	@Override
+	public String getDxjzsq() {
+		if (_dxjzsq == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _dxjzsq;
+		}
+	}
+
+	@Override
+	public void setDxjzsq(String dxjzsq) {
+		_dxjzsq = dxjzsq;
+	}
+
+	@Override
+	public String getYwjzxzz() {
+		if (_ywjzxzz == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _ywjzxzz;
+		}
+	}
+
+	@Override
+	public void setYwjzxzz(String ywjzxzz) {
+		_ywjzxzz = ywjzxzz;
+	}
+
+	@Override
+	public String getFgwjhm() {
+		if (_fgwjhm == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _fgwjhm;
+		}
+	}
+
+	@Override
+	public void setFgwjhm(String fgwjhm) {
+		_fgwjhm = fgwjhm;
+	}
+
+	@Override
+	public String getZzbl() {
+		if (_zzbl == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _zzbl;
+		}
+	}
+
+	@Override
+	public void setZzbl(String zzbl) {
+		_zzbl = zzbl;
+	}
+
+	@Override
+	public String getChangeTime() {
+		if (_ChangeTime == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _ChangeTime;
+		}
+	}
+
+	@Override
+	public void setChangeTime(String ChangeTime) {
+		_ChangeTime = ChangeTime;
+	}
+
+	@Override
+	public String getPD_SW() {
+		if (_PD_SW == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _PD_SW;
+		}
+	}
+
+	@Override
+	public void setPD_SW(String PD_SW) {
+		_PD_SW = PD_SW;
+	}
+
+	@Override
+	public String getBmpfrq() {
+		if (_bmpfrq == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _bmpfrq;
+		}
+	}
+
+	@Override
+	public void setBmpfrq(String bmpfrq) {
+		_bmpfrq = bmpfrq;
+	}
+
+	@Override
+	public String getBmpfwh() {
+		if (_bmpfwh == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _bmpfwh;
+		}
+	}
+
+	@Override
+	public void setBmpfwh(String bmpfwh) {
+		_bmpfwh = bmpfwh;
+	}
+
+	@Override
+	public String getBmpfwj() {
+		if (_bmpfwj == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _bmpfwj;
+		}
+	}
+
+	@Override
+	public void setBmpfwj(String bmpfwj) {
+		_bmpfwj = bmpfwj;
+	}
+
+	@Override
+	public String getCertificateKey() {
+		if (_CertificateKey == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _CertificateKey;
+		}
+	}
+
+	@Override
+	public void setCertificateKey(String CertificateKey) {
+		_CertificateKey = CertificateKey;
+	}
+
+	@Override
+	public String getDsjzmj() {
+		if (_dsjzmj == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _dsjzmj;
+		}
+	}
+
+	@Override
+	public void setDsjzmj(String dsjzmj) {
+		_dsjzmj = dsjzmj;
+	}
+
+	@Override
+	public String getDxjzmj() {
+		if (_dxjzmj == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _dxjzmj;
+		}
+	}
+
+	@Override
+	public void setDxjzmj(String dxjzmj) {
+		_dxjzmj = dxjzmj;
+	}
+
+	@Override
+	public String getGdzctzbh() {
+		if (_gdzctzbh == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _gdzctzbh;
+		}
+	}
+
+	@Override
+	public void setGdzctzbh(String gdzctzbh) {
+		_gdzctzbh = gdzctzbh;
+	}
+
+	@Override
+	public String getJsxz_2011() {
+		if (_jsxz_2011 == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _jsxz_2011;
+		}
+	}
+
+	@Override
+	public void setJsxz_2011(String jsxz_2011) {
+		_jsxz_2011 = jsxz_2011;
+	}
+
+	@Override
+	public String getLhmj() {
+		if (_lhmj == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _lhmj;
+		}
+	}
+
+	@Override
+	public void setLhmj(String lhmj) {
+		_lhmj = lhmj;
+	}
+
+	@Override
+	public String getLxjb_2011() {
+		if (_lxjb_2011 == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _lxjb_2011;
+		}
+	}
+
+	@Override
+	public void setLxjb_2011(String lxjb_2011) {
+		_lxjb_2011 = lxjb_2011;
+	}
+
+	@Override
+	public String getMfmj() {
+		if (_mfmj == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _mfmj;
+		}
+	}
+
+	@Override
+	public void setMfmj(String mfmj) {
+		_mfmj = mfmj;
+	}
+
+	@Override
+	public String getOther_qx() {
+		if (_other_qx == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _other_qx;
+		}
+	}
+
+	@Override
+	public void setOther_qx(String other_qx) {
+		_other_qx = other_qx;
+	}
+
+	@Override
+	public String getProjectSlyj() {
+		if (_ProjectSlyj == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _ProjectSlyj;
+		}
+	}
+
+	@Override
+	public void setProjectSlyj(String ProjectSlyj) {
+		_ProjectSlyj = ProjectSlyj;
+	}
+
+	@Override
+	public String getQxbz() {
+		if (_qxbz == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _qxbz;
+		}
+	}
+
+	@Override
+	public void setQxbz(String qxbz) {
+		_qxbz = qxbz;
+	}
+
+	@Override
+	public String getSfcysjkfq() {
+		if (_sfcysjkfq == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _sfcysjkfq;
+		}
+	}
+
+	@Override
+	public void setSfcysjkfq(String sfcysjkfq) {
+		_sfcysjkfq = sfcysjkfq;
+	}
+
+	@Override
+	public String getSfmfss() {
+		if (_sfmfss == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _sfmfss;
+		}
+	}
+
+	@Override
+	public void setSfmfss(String sfmfss) {
+		_sfmfss = sfmfss;
+	}
+
+	@Override
+	public String getSzqx() {
+		if (_szqx == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _szqx;
+		}
+	}
+
+	@Override
+	public void setSzqx(String szqx) {
+		_szqx = szqx;
+	}
+
+	@Override
+	public String getTsgs() {
+		if (_tsgs == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _tsgs;
+		}
+	}
+
+	@Override
+	public void setTsgs(String tsgs) {
+		_tsgs = tsgs;
+	}
+
+	@Override
+	public String getXmfl_2011() {
+		if (_xmfl_2011 == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _xmfl_2011;
+		}
+	}
+
+	@Override
+	public void setXmfl_2011(String xmfl_2011) {
+		_xmfl_2011 = xmfl_2011;
+	}
+
+	@Override
+	public String getXsjpw() {
+		if (_xsjpw == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _xsjpw;
+		}
+	}
+
+	@Override
+	public void setXsjpw(String xsjpw) {
+		_xsjpw = xsjpw;
+	}
+
+	@Override
+	public String getXsjpzdw() {
+		if (_xsjpzdw == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _xsjpzdw;
+		}
+	}
+
+	@Override
+	public void setXsjpzdw(String xsjpzdw) {
+		_xsjpzdw = xsjpzdw;
+	}
+
+	@Override
+	public String getZjlygc_10() {
+		if (_zjlygc_10 == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _zjlygc_10;
+		}
+	}
+
+	@Override
+	public void setZjlygc_10(String zjlygc_10) {
+		_zjlygc_10 = zjlygc_10;
+	}
+
+	@Override
+	public String getZjlygc_11() {
+		if (_zjlygc_11 == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _zjlygc_11;
+		}
+	}
+
+	@Override
+	public void setZjlygc_11(String zjlygc_11) {
+		_zjlygc_11 = zjlygc_11;
+	}
+
+	@Override
+	public String getZjlygc_xs_1() {
+		if (_zjlygc_xs_1 == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _zjlygc_xs_1;
+		}
+	}
+
+	@Override
+	public void setZjlygc_xs_1(String zjlygc_xs_1) {
+		_zjlygc_xs_1 = zjlygc_xs_1;
+	}
+
+	@Override
+	public String getZjlygc_xs_2() {
+		if (_zjlygc_xs_2 == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _zjlygc_xs_2;
+		}
+	}
+
+	@Override
+	public void setZjlygc_xs_2(String zjlygc_xs_2) {
+		_zjlygc_xs_2 = zjlygc_xs_2;
+	}
+
+	@Override
+	public String getZjlygc_xs_3() {
+		if (_zjlygc_xs_3 == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _zjlygc_xs_3;
+		}
+	}
+
+	@Override
+	public void setZjlygc_xs_3(String zjlygc_xs_3) {
+		_zjlygc_xs_3 = zjlygc_xs_3;
+	}
+
+	@Override
+	public String getZjlygc_xs_4() {
+		if (_zjlygc_xs_4 == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _zjlygc_xs_4;
+		}
+	}
+
+	@Override
+	public void setZjlygc_xs_4(String zjlygc_xs_4) {
+		_zjlygc_xs_4 = zjlygc_xs_4;
+	}
+
+	@Override
+	public String getZjlygc_1_2() {
+		if (_zjlygc_1_2 == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _zjlygc_1_2;
+		}
+	}
+
+	@Override
+	public void setZjlygc_1_2(String zjlygc_1_2) {
+		_zjlygc_1_2 = zjlygc_1_2;
+	}
+
+	@Override
+	public String getZjlygc_1_2_4() {
+		if (_zjlygc_1_2_4 == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _zjlygc_1_2_4;
+		}
+	}
+
+	@Override
+	public void setZjlygc_1_2_4(String zjlygc_1_2_4) {
+		_zjlygc_1_2_4 = zjlygc_1_2_4;
+	}
+
+	@Override
+	public String getYwptlh() {
+		if (_ywptlh == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _ywptlh;
+		}
+	}
+
+	@Override
+	public void setYwptlh(String ywptlh) {
+		_ywptlh = ywptlh;
+	}
+
+	@Override
+	public String getGyyqbh() {
+		if (_gyyqbh == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _gyyqbh;
+		}
+	}
+
+	@Override
+	public void setGyyqbh(String gyyqbh) {
+		_gyyqbh = gyyqbh;
+	}
+
+	@Override
+	public String getSfcyxm() {
+		if (_sfcyxm == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _sfcyxm;
+		}
+	}
+
+	@Override
+	public void setSfcyxm(String sfcyxm) {
+		_sfcyxm = sfcyxm;
+	}
+
+	@Override
+	public String getZbxmfzrxm() {
+		if (_zbxmfzrxm == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _zbxmfzrxm;
+		}
+	}
+
+	@Override
+	public void setZbxmfzrxm(String zbxmfzrxm) {
+		_zbxmfzrxm = zbxmfzrxm;
+	}
+
+	@Override
+	public String getZbxmfzrzjh() {
+		if (_zbxmfzrzjh == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _zbxmfzrzjh;
+		}
+	}
+
+	@Override
+	public void setZbxmfzrzjh(String zbxmfzrzjh) {
+		_zbxmfzrzjh = zbxmfzrzjh;
+	}
+
+	@Override
+	public String getZbxmfzrzjlx() {
+		if (_zbxmfzrzjlx == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _zbxmfzrzjlx;
+		}
+	}
+
+	@Override
+	public void setZbxmfzrzjlx(String zbxmfzrzjlx) {
+		_zbxmfzrzjlx = zbxmfzrzjlx;
+	}
+
+	@Override
+	public String getZbxmfzrqrsj() {
+		if (_zbxmfzrqrsj == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _zbxmfzrqrsj;
+		}
+	}
+
+	@Override
+	public void setZbxmfzrqrsj(String zbxmfzrqrsj) {
+		_zbxmfzrqrsj = zbxmfzrqrsj;
+	}
+
+	@Override
+	public String getSflsjzbs() {
+		if (_sflsjzbs == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _sflsjzbs;
+		}
+	}
+
+	@Override
+	public void setSflsjzbs(String sflsjzbs) {
+		_sflsjzbs = sflsjzbs;
+	}
+
+	@Override
+	public String getSjbs() {
+		if (_sjbs == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _sjbs;
+		}
+	}
+
+	@Override
+	public void setSjbs(String sjbs) {
+		_sjbs = sjbs;
+	}
+
+	@Override
+	public String getYxbs() {
+		if (_yxbs == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _yxbs;
+		}
+	}
+
+	@Override
+	public void setYxbs(String yxbs) {
+		_yxbs = yxbs;
+	}
+
+	@Override
+	public String getSfyjngz() {
+		if (_sfyjngz == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _sfyjngz;
+		}
+	}
+
+	@Override
+	public void setSfyjngz(String sfyjngz) {
+		_sfyjngz = sfyjngz;
+	}
+
+	@Override
+	public String getSfsszpjz() {
+		if (_sfsszpjz == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _sfsszpjz;
+		}
+	}
+
+	@Override
+	public void setSfsszpjz(String sfsszpjz) {
+		_sfsszpjz = sfsszpjz;
+	}
+
+	@Override
+	public String getZczxjgdmz() {
+		if (_zczxjgdmz == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _zczxjgdmz;
+		}
+	}
+
+	@Override
+	public void setZczxjgdmz(String zczxjgdmz) {
+		_zczxjgdmz = zczxjgdmz;
+	}
+
+	@Override
+	public String getIscheckxmbm() {
+		if (_ischeckxmbm == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _ischeckxmbm;
+		}
+	}
+
+	@Override
+	public void setIscheckxmbm(String ischeckxmbm) {
+		_ischeckxmbm = ischeckxmbm;
+	}
+
+	@Override
+	public String getZddtmj() {
+		if (_zddtmj == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _zddtmj;
+		}
+	}
+
+	@Override
+	public void setZddtmj(String zddtmj) {
+		_zddtmj = zddtmj;
+	}
+
+	@Override
+	public String getSjjdYn() {
+		if (_sjjdYn == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _sjjdYn;
+		}
+	}
+
+	@Override
+	public void setSjjdYn(String sjjdYn) {
+		_sjjdYn = sjjdYn;
+	}
+
+	@Override
+	public String getSgjdYn() {
+		if (_sgjdYn == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _sgjdYn;
+		}
+	}
+
+	@Override
+	public void setSgjdYn(String sgjdYn) {
+		_sgjdYn = sgjdYn;
+	}
+
+	@Override
+	public String getYxjdYn() {
+		if (_yxjdYn == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _yxjdYn;
+		}
+	}
+
+	@Override
+	public void setYxjdYn(String yxjdYn) {
+		_yxjdYn = yxjdYn;
+	}
+
+	@Override
+	public String getTdhtqdbh() {
+		if (_tdhtqdbh == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _tdhtqdbh;
+		}
+	}
+
+	@Override
+	public void setTdhtqdbh(String tdhtqdbh) {
+		_tdhtqdbh = tdhtqdbh;
+	}
+
+	@Override
+	public String getTdhtqdrq() {
+		if (_tdhtqdrq == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _tdhtqdrq;
+		}
+	}
+
+	@Override
+	public void setTdhtqdrq(String tdhtqdrq) {
+		_tdhtqdrq = tdhtqdrq;
+	}
+
+	@Override
+	public String getDkbh() {
+		if (_dkbh == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _dkbh;
+		}
+	}
+
+	@Override
+	public void setDkbh(String dkbh) {
+		_dkbh = dkbh;
+	}
+
+	@Override
+	public String getZpsjzlsbl() {
+		if (_zpsjzlsbl == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _zpsjzlsbl;
+		}
+	}
+
+	@Override
+	public void setZpsjzlsbl(String zpsjzlsbl) {
+		_zpsjzlsbl = zpsjzlsbl;
+	}
+
+	@Override
+	public String getZpsjzmj() {
+		if (_zpsjzmj == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _zpsjzmj;
+		}
+	}
+
+	@Override
+	public void setZpsjzmj(String zpsjzmj) {
+		_zpsjzmj = zpsjzmj;
+	}
+
+	@Override
+	public String getDwyzzpl() {
+		if (_dwyzzpl == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _dwyzzpl;
+		}
+	}
+
+	@Override
+	public void setDwyzzpl(String dwyzzpl) {
+		_dwyzzpl = dwyzzpl;
+	}
+
+	@Override
+	public String getZdh() {
+		if (_zdh == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _zdh;
+		}
+	}
+
+	@Override
+	public void setZdh(String zdh) {
+		_zdh = zdh;
+	}
+
+	@Override
+	public String getSfgdcg() {
+		if (_sfgdcg == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _sfgdcg;
+		}
+	}
+
+	@Override
+	public void setSfgdcg(String sfgdcg) {
+		_sfgdcg = sfgdcg;
+	}
+
+	@Override
+	public String getPtlhmj() {
+		if (_ptlhmj == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _ptlhmj;
+		}
+	}
+
+	@Override
+	public void setPtlhmj(String ptlhmj) {
+		_ptlhmj = ptlhmj;
+	}
+
+	@Override
+	public String getBimjszxfy() {
+		if (_bimjszxfy == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _bimjszxfy;
+		}
+	}
+
+	@Override
+	public void setBimjszxfy(String bimjszxfy) {
+		_bimjszxfy = bimjszxfy;
+	}
+
+	@Override
+	public String getBz() {
+		if (_bz == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _bz;
+		}
+	}
+
+	@Override
+	public void setBz(String bz) {
+		_bz = bz;
+	}
+
+	@Override
+	public String getSfzcxm() {
+		if (_sfzcxm == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _sfzcxm;
+		}
+	}
+
+	@Override
+	public void setSfzcxm(String sfzcxm) {
+		_sfzcxm = sfzcxm;
+	}
+
+	@Override
+	public String getZcxmbm() {
+		if (_zcxmbm == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _zcxmbm;
+		}
+	}
+
+	@Override
+	public void setZcxmbm(String zcxmbm) {
+		_zcxmbm = zcxmbm;
+	}
+
+	@Override
+	public String getSfzmqxm() {
+		if (_sfzmqxm == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _sfzmqxm;
+		}
+	}
+
+	@Override
+	public void setSfzmqxm(String sfzmqxm) {
+		_sfzmqxm = sfzmqxm;
+	}
+
+	@Override
+	public String getPrintPDFTime() {
+		if (_printPDFTime == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _printPDFTime;
+		}
+	}
+
+	@Override
+	public void setPrintPDFTime(String printPDFTime) {
+		_printPDFTime = printPDFTime;
+	}
+
+	@Override
+	public String getIsBgPrint() {
+		if (_isBgPrint == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _isBgPrint;
+		}
+	}
+
+	@Override
+	public void setIsBgPrint(String isBgPrint) {
+		_isBgPrint = isBgPrint;
 	}
 
 	@Override
@@ -308,13 +3600,157 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 	public Object clone() {
 		ProjectImpl projectImpl = new ProjectImpl();
 
-		projectImpl.setProjectId(getProjectId());
-		projectImpl.setZzjgdm(getZzjgdm());
+		projectImpl.setBjbh(getBjbh());
 		projectImpl.setBjrq(getBjrq());
-		projectImpl.setBjWebid(getBjWebid());
+		projectImpl.setJsdw(getJsdw());
+		projectImpl.setJsdwxz(getJsdwxz());
+		projectImpl.setJsdwdz(getJsdwdz());
+		projectImpl.setJsdwdh(getJsdwdh());
+		projectImpl.setJsdwfr(getJsdwfr());
+		projectImpl.setJsdwlxr(getJsdwlxr());
+		projectImpl.setJsdwyb(getJsdwyb());
+		projectImpl.setJsdwzczj(getJsdwzczj());
 		projectImpl.setXmmc(getXmmc());
+		projectImpl.setJsdd(getJsdd());
+		projectImpl.setLxwj(getLxwj());
+		projectImpl.setLxwh(getLxwh());
+		projectImpl.setLxjb(getLxjb());
+		projectImpl.setPzjg(getPzjg());
+		projectImpl.setPzrq(getPzrq());
+		projectImpl.setZtz(getZtz());
+		projectImpl.setSbtz(getSbtz());
+		projectImpl.setJsxz(getJsxz());
+		projectImpl.setJsgm(getJsgm());
+		projectImpl.setZmj(getZmj());
+		projectImpl.setKgrq(getKgrq());
+		projectImpl.setXmxz(getXmxz());
+		projectImpl.setCjqk(getCjqk());
+		projectImpl.setSmqk(getSmqk());
+		projectImpl.setBjbz(getBjbz());
+		projectImpl.setFbzgsc(getFbzgsc());
+		projectImpl.setCardid(getCardid());
+		projectImpl.setZjlygc_1(getZjlygc_1());
+		projectImpl.setZjlygc_2(getZjlygc_2());
+		projectImpl.setZjlygc_3(getZjlygc_3());
+		projectImpl.setZjlygc_4(getZjlygc_4());
+		projectImpl.setZjlygc_5(getZjlygc_5());
+		projectImpl.setZjlygc_6(getZjlygc_6());
+		projectImpl.setZjlygc_7(getZjlygc_7());
+		projectImpl.setZjlygc_8(getZjlygc_8());
+		projectImpl.setZjlygc_9(getZjlygc_9());
+		projectImpl.setJgxs(getJgxs());
+		projectImpl.setXmfl(getXmfl());
+		projectImpl.setJzmq(getJzmq());
+		projectImpl.setYwdt(getYwdt());
+		projectImpl.setDxsck(getDxsck());
+		projectImpl.setBhjz(getBhjz());
+		projectImpl.setFjms(getFjms());
+		projectImpl.setSfsbxm(getSfsbxm());
+		projectImpl.setHzyj(getHzyj());
+		projectImpl.setBj_sx(getBj_sx());
+		projectImpl.setBj_webid(getBj_webid());
 		projectImpl.setBjwcbj(getBjwcbj());
-		projectImpl.setJsdwmc(getJsdwmc());
+		projectImpl.setBmdm(getBmdm());
+		projectImpl.setJbr(getJbr());
+		projectImpl.setShr(getShr());
+		projectImpl.setShbmdm(getShbmdm());
+		projectImpl.setWcbjsj(getWcbjsj());
+		projectImpl.setOld_bjbh(getOld_bjbh());
+		projectImpl.setSffb(getSffb());
+		projectImpl.setTimeflag(getTimeflag());
+		projectImpl.setJbrdm(getJbrdm());
+		projectImpl.setShrdm(getShrdm());
+		projectImpl.setJsbh(getJsbh());
+		projectImpl.setNeedSbjl(getNeedSbjl());
+		projectImpl.setWcSbjl(getWcSbjl());
+		projectImpl.setSfgyzbkg(getSfgyzbkg());
+		projectImpl.setJyzxfbxx(getJyzxfbxx());
+		projectImpl.setSgGkzbfb(getSgGkzbfb());
+		projectImpl.setSgjlGkzbfb(getSgjlGkzbfb());
+		projectImpl.setFxglxm(getFxglxm());
+		projectImpl.setFxglxmJbr(getFxglxmJbr());
+		projectImpl.setFxglxmJbrdm(getFxglxmJbrdm());
+		projectImpl.setFxglxmJbrq(getFxglxmJbrq());
+		projectImpl.setJsdwjgdm(getJsdwjgdm());
+		projectImpl.setSzqy(getSzqy());
+		projectImpl.setYwxjfwjz(getYwxjfwjz());
+		projectImpl.setYwgbfwjg(getYwgbfwjg());
+		projectImpl.setGczh(getGczh());
+		projectImpl.setZdcyyn(getZdcyyn());
+		projectImpl.setLxfl(getLxfl());
+		projectImpl.setMs1(getMs1());
+		projectImpl.setMs2(getMs2());
+		projectImpl.setMs3(getMs3());
+		projectImpl.setZdxmyn(getZdxmyn());
+		projectImpl.setDxjzsq(getDxjzsq());
+		projectImpl.setYwjzxzz(getYwjzxzz());
+		projectImpl.setFgwjhm(getFgwjhm());
+		projectImpl.setZzbl(getZzbl());
+		projectImpl.setChangeTime(getChangeTime());
+		projectImpl.setPD_SW(getPD_SW());
+		projectImpl.setBmpfrq(getBmpfrq());
+		projectImpl.setBmpfwh(getBmpfwh());
+		projectImpl.setBmpfwj(getBmpfwj());
+		projectImpl.setCertificateKey(getCertificateKey());
+		projectImpl.setDsjzmj(getDsjzmj());
+		projectImpl.setDxjzmj(getDxjzmj());
+		projectImpl.setGdzctzbh(getGdzctzbh());
+		projectImpl.setJsxz_2011(getJsxz_2011());
+		projectImpl.setLhmj(getLhmj());
+		projectImpl.setLxjb_2011(getLxjb_2011());
+		projectImpl.setMfmj(getMfmj());
+		projectImpl.setOther_qx(getOther_qx());
+		projectImpl.setProjectSlyj(getProjectSlyj());
+		projectImpl.setQxbz(getQxbz());
+		projectImpl.setSfcysjkfq(getSfcysjkfq());
+		projectImpl.setSfmfss(getSfmfss());
+		projectImpl.setSzqx(getSzqx());
+		projectImpl.setTsgs(getTsgs());
+		projectImpl.setXmfl_2011(getXmfl_2011());
+		projectImpl.setXsjpw(getXsjpw());
+		projectImpl.setXsjpzdw(getXsjpzdw());
+		projectImpl.setZjlygc_10(getZjlygc_10());
+		projectImpl.setZjlygc_11(getZjlygc_11());
+		projectImpl.setZjlygc_xs_1(getZjlygc_xs_1());
+		projectImpl.setZjlygc_xs_2(getZjlygc_xs_2());
+		projectImpl.setZjlygc_xs_3(getZjlygc_xs_3());
+		projectImpl.setZjlygc_xs_4(getZjlygc_xs_4());
+		projectImpl.setZjlygc_1_2(getZjlygc_1_2());
+		projectImpl.setZjlygc_1_2_4(getZjlygc_1_2_4());
+		projectImpl.setYwptlh(getYwptlh());
+		projectImpl.setGyyqbh(getGyyqbh());
+		projectImpl.setSfcyxm(getSfcyxm());
+		projectImpl.setZbxmfzrxm(getZbxmfzrxm());
+		projectImpl.setZbxmfzrzjh(getZbxmfzrzjh());
+		projectImpl.setZbxmfzrzjlx(getZbxmfzrzjlx());
+		projectImpl.setZbxmfzrqrsj(getZbxmfzrqrsj());
+		projectImpl.setSflsjzbs(getSflsjzbs());
+		projectImpl.setSjbs(getSjbs());
+		projectImpl.setYxbs(getYxbs());
+		projectImpl.setSfyjngz(getSfyjngz());
+		projectImpl.setSfsszpjz(getSfsszpjz());
+		projectImpl.setZczxjgdmz(getZczxjgdmz());
+		projectImpl.setIscheckxmbm(getIscheckxmbm());
+		projectImpl.setZddtmj(getZddtmj());
+		projectImpl.setSjjdYn(getSjjdYn());
+		projectImpl.setSgjdYn(getSgjdYn());
+		projectImpl.setYxjdYn(getYxjdYn());
+		projectImpl.setTdhtqdbh(getTdhtqdbh());
+		projectImpl.setTdhtqdrq(getTdhtqdrq());
+		projectImpl.setDkbh(getDkbh());
+		projectImpl.setZpsjzlsbl(getZpsjzlsbl());
+		projectImpl.setZpsjzmj(getZpsjzmj());
+		projectImpl.setDwyzzpl(getDwyzzpl());
+		projectImpl.setZdh(getZdh());
+		projectImpl.setSfgdcg(getSfgdcg());
+		projectImpl.setPtlhmj(getPtlhmj());
+		projectImpl.setBimjszxfy(getBimjszxfy());
+		projectImpl.setBz(getBz());
+		projectImpl.setSfzcxm(getSfzcxm());
+		projectImpl.setZcxmbm(getZcxmbm());
+		projectImpl.setSfzmqxm(getSfzmqxm());
+		projectImpl.setPrintPDFTime(getPrintPDFTime());
+		projectImpl.setIsBgPrint(getIsBgPrint());
 
 		projectImpl.resetOriginalValues();
 
@@ -365,31 +3801,18 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 
 	@Override
 	public void resetOriginalValues() {
-		ProjectModelImpl projectModelImpl = this;
-
-		projectModelImpl._originalZzjgdm = projectModelImpl._zzjgdm;
-
-		projectModelImpl._columnBitmask = 0;
 	}
 
 	@Override
 	public CacheModel<Project> toCacheModel() {
 		ProjectCacheModel projectCacheModel = new ProjectCacheModel();
 
-		projectCacheModel.projectId = getProjectId();
+		projectCacheModel.bjbh = getBjbh();
 
-		String projectId = projectCacheModel.projectId;
+		String bjbh = projectCacheModel.bjbh;
 
-		if ((projectId != null) && (projectId.length() == 0)) {
-			projectCacheModel.projectId = null;
-		}
-
-		projectCacheModel.zzjgdm = getZzjgdm();
-
-		String zzjgdm = projectCacheModel.zzjgdm;
-
-		if ((zzjgdm != null) && (zzjgdm.length() == 0)) {
-			projectCacheModel.zzjgdm = null;
+		if ((bjbh != null) && (bjbh.length() == 0)) {
+			projectCacheModel.bjbh = null;
 		}
 
 		Date bjrq = getBjrq();
@@ -401,12 +3824,68 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 			projectCacheModel.bjrq = Long.MIN_VALUE;
 		}
 
-		projectCacheModel.bjWebid = getBjWebid();
+		projectCacheModel.jsdw = getJsdw();
 
-		String bjWebid = projectCacheModel.bjWebid;
+		String jsdw = projectCacheModel.jsdw;
 
-		if ((bjWebid != null) && (bjWebid.length() == 0)) {
-			projectCacheModel.bjWebid = null;
+		if ((jsdw != null) && (jsdw.length() == 0)) {
+			projectCacheModel.jsdw = null;
+		}
+
+		projectCacheModel.jsdwxz = getJsdwxz();
+
+		String jsdwxz = projectCacheModel.jsdwxz;
+
+		if ((jsdwxz != null) && (jsdwxz.length() == 0)) {
+			projectCacheModel.jsdwxz = null;
+		}
+
+		projectCacheModel.jsdwdz = getJsdwdz();
+
+		String jsdwdz = projectCacheModel.jsdwdz;
+
+		if ((jsdwdz != null) && (jsdwdz.length() == 0)) {
+			projectCacheModel.jsdwdz = null;
+		}
+
+		projectCacheModel.jsdwdh = getJsdwdh();
+
+		String jsdwdh = projectCacheModel.jsdwdh;
+
+		if ((jsdwdh != null) && (jsdwdh.length() == 0)) {
+			projectCacheModel.jsdwdh = null;
+		}
+
+		projectCacheModel.jsdwfr = getJsdwfr();
+
+		String jsdwfr = projectCacheModel.jsdwfr;
+
+		if ((jsdwfr != null) && (jsdwfr.length() == 0)) {
+			projectCacheModel.jsdwfr = null;
+		}
+
+		projectCacheModel.jsdwlxr = getJsdwlxr();
+
+		String jsdwlxr = projectCacheModel.jsdwlxr;
+
+		if ((jsdwlxr != null) && (jsdwlxr.length() == 0)) {
+			projectCacheModel.jsdwlxr = null;
+		}
+
+		projectCacheModel.jsdwyb = getJsdwyb();
+
+		String jsdwyb = projectCacheModel.jsdwyb;
+
+		if ((jsdwyb != null) && (jsdwyb.length() == 0)) {
+			projectCacheModel.jsdwyb = null;
+		}
+
+		projectCacheModel.jsdwzczj = getJsdwzczj();
+
+		String jsdwzczj = projectCacheModel.jsdwzczj;
+
+		if ((jsdwzczj != null) && (jsdwzczj.length() == 0)) {
+			projectCacheModel.jsdwzczj = null;
 		}
 
 		projectCacheModel.xmmc = getXmmc();
@@ -417,6 +3896,310 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 			projectCacheModel.xmmc = null;
 		}
 
+		projectCacheModel.jsdd = getJsdd();
+
+		String jsdd = projectCacheModel.jsdd;
+
+		if ((jsdd != null) && (jsdd.length() == 0)) {
+			projectCacheModel.jsdd = null;
+		}
+
+		projectCacheModel.lxwj = getLxwj();
+
+		String lxwj = projectCacheModel.lxwj;
+
+		if ((lxwj != null) && (lxwj.length() == 0)) {
+			projectCacheModel.lxwj = null;
+		}
+
+		projectCacheModel.lxwh = getLxwh();
+
+		String lxwh = projectCacheModel.lxwh;
+
+		if ((lxwh != null) && (lxwh.length() == 0)) {
+			projectCacheModel.lxwh = null;
+		}
+
+		projectCacheModel.lxjb = getLxjb();
+
+		String lxjb = projectCacheModel.lxjb;
+
+		if ((lxjb != null) && (lxjb.length() == 0)) {
+			projectCacheModel.lxjb = null;
+		}
+
+		projectCacheModel.pzjg = getPzjg();
+
+		String pzjg = projectCacheModel.pzjg;
+
+		if ((pzjg != null) && (pzjg.length() == 0)) {
+			projectCacheModel.pzjg = null;
+		}
+
+		projectCacheModel.pzrq = getPzrq();
+
+		String pzrq = projectCacheModel.pzrq;
+
+		if ((pzrq != null) && (pzrq.length() == 0)) {
+			projectCacheModel.pzrq = null;
+		}
+
+		projectCacheModel.ztz = getZtz();
+
+		String ztz = projectCacheModel.ztz;
+
+		if ((ztz != null) && (ztz.length() == 0)) {
+			projectCacheModel.ztz = null;
+		}
+
+		projectCacheModel.sbtz = getSbtz();
+
+		String sbtz = projectCacheModel.sbtz;
+
+		if ((sbtz != null) && (sbtz.length() == 0)) {
+			projectCacheModel.sbtz = null;
+		}
+
+		projectCacheModel.jsxz = getJsxz();
+
+		String jsxz = projectCacheModel.jsxz;
+
+		if ((jsxz != null) && (jsxz.length() == 0)) {
+			projectCacheModel.jsxz = null;
+		}
+
+		projectCacheModel.jsgm = getJsgm();
+
+		String jsgm = projectCacheModel.jsgm;
+
+		if ((jsgm != null) && (jsgm.length() == 0)) {
+			projectCacheModel.jsgm = null;
+		}
+
+		projectCacheModel.zmj = getZmj();
+
+		String zmj = projectCacheModel.zmj;
+
+		if ((zmj != null) && (zmj.length() == 0)) {
+			projectCacheModel.zmj = null;
+		}
+
+		projectCacheModel.kgrq = getKgrq();
+
+		String kgrq = projectCacheModel.kgrq;
+
+		if ((kgrq != null) && (kgrq.length() == 0)) {
+			projectCacheModel.kgrq = null;
+		}
+
+		projectCacheModel.xmxz = getXmxz();
+
+		String xmxz = projectCacheModel.xmxz;
+
+		if ((xmxz != null) && (xmxz.length() == 0)) {
+			projectCacheModel.xmxz = null;
+		}
+
+		projectCacheModel.cjqk = getCjqk();
+
+		String cjqk = projectCacheModel.cjqk;
+
+		if ((cjqk != null) && (cjqk.length() == 0)) {
+			projectCacheModel.cjqk = null;
+		}
+
+		projectCacheModel.smqk = getSmqk();
+
+		String smqk = projectCacheModel.smqk;
+
+		if ((smqk != null) && (smqk.length() == 0)) {
+			projectCacheModel.smqk = null;
+		}
+
+		projectCacheModel.bjbz = getBjbz();
+
+		String bjbz = projectCacheModel.bjbz;
+
+		if ((bjbz != null) && (bjbz.length() == 0)) {
+			projectCacheModel.bjbz = null;
+		}
+
+		projectCacheModel.fbzgsc = getFbzgsc();
+
+		String fbzgsc = projectCacheModel.fbzgsc;
+
+		if ((fbzgsc != null) && (fbzgsc.length() == 0)) {
+			projectCacheModel.fbzgsc = null;
+		}
+
+		projectCacheModel.cardid = getCardid();
+
+		String cardid = projectCacheModel.cardid;
+
+		if ((cardid != null) && (cardid.length() == 0)) {
+			projectCacheModel.cardid = null;
+		}
+
+		projectCacheModel.zjlygc_1 = getZjlygc_1();
+
+		String zjlygc_1 = projectCacheModel.zjlygc_1;
+
+		if ((zjlygc_1 != null) && (zjlygc_1.length() == 0)) {
+			projectCacheModel.zjlygc_1 = null;
+		}
+
+		projectCacheModel.zjlygc_2 = getZjlygc_2();
+
+		String zjlygc_2 = projectCacheModel.zjlygc_2;
+
+		if ((zjlygc_2 != null) && (zjlygc_2.length() == 0)) {
+			projectCacheModel.zjlygc_2 = null;
+		}
+
+		projectCacheModel.zjlygc_3 = getZjlygc_3();
+
+		String zjlygc_3 = projectCacheModel.zjlygc_3;
+
+		if ((zjlygc_3 != null) && (zjlygc_3.length() == 0)) {
+			projectCacheModel.zjlygc_3 = null;
+		}
+
+		projectCacheModel.zjlygc_4 = getZjlygc_4();
+
+		String zjlygc_4 = projectCacheModel.zjlygc_4;
+
+		if ((zjlygc_4 != null) && (zjlygc_4.length() == 0)) {
+			projectCacheModel.zjlygc_4 = null;
+		}
+
+		projectCacheModel.zjlygc_5 = getZjlygc_5();
+
+		String zjlygc_5 = projectCacheModel.zjlygc_5;
+
+		if ((zjlygc_5 != null) && (zjlygc_5.length() == 0)) {
+			projectCacheModel.zjlygc_5 = null;
+		}
+
+		projectCacheModel.zjlygc_6 = getZjlygc_6();
+
+		String zjlygc_6 = projectCacheModel.zjlygc_6;
+
+		if ((zjlygc_6 != null) && (zjlygc_6.length() == 0)) {
+			projectCacheModel.zjlygc_6 = null;
+		}
+
+		projectCacheModel.zjlygc_7 = getZjlygc_7();
+
+		String zjlygc_7 = projectCacheModel.zjlygc_7;
+
+		if ((zjlygc_7 != null) && (zjlygc_7.length() == 0)) {
+			projectCacheModel.zjlygc_7 = null;
+		}
+
+		projectCacheModel.zjlygc_8 = getZjlygc_8();
+
+		String zjlygc_8 = projectCacheModel.zjlygc_8;
+
+		if ((zjlygc_8 != null) && (zjlygc_8.length() == 0)) {
+			projectCacheModel.zjlygc_8 = null;
+		}
+
+		projectCacheModel.zjlygc_9 = getZjlygc_9();
+
+		String zjlygc_9 = projectCacheModel.zjlygc_9;
+
+		if ((zjlygc_9 != null) && (zjlygc_9.length() == 0)) {
+			projectCacheModel.zjlygc_9 = null;
+		}
+
+		projectCacheModel.jgxs = getJgxs();
+
+		String jgxs = projectCacheModel.jgxs;
+
+		if ((jgxs != null) && (jgxs.length() == 0)) {
+			projectCacheModel.jgxs = null;
+		}
+
+		projectCacheModel.xmfl = getXmfl();
+
+		String xmfl = projectCacheModel.xmfl;
+
+		if ((xmfl != null) && (xmfl.length() == 0)) {
+			projectCacheModel.xmfl = null;
+		}
+
+		projectCacheModel.jzmq = getJzmq();
+
+		String jzmq = projectCacheModel.jzmq;
+
+		if ((jzmq != null) && (jzmq.length() == 0)) {
+			projectCacheModel.jzmq = null;
+		}
+
+		projectCacheModel.ywdt = getYwdt();
+
+		String ywdt = projectCacheModel.ywdt;
+
+		if ((ywdt != null) && (ywdt.length() == 0)) {
+			projectCacheModel.ywdt = null;
+		}
+
+		projectCacheModel.dxsck = getDxsck();
+
+		String dxsck = projectCacheModel.dxsck;
+
+		if ((dxsck != null) && (dxsck.length() == 0)) {
+			projectCacheModel.dxsck = null;
+		}
+
+		projectCacheModel.bhjz = getBhjz();
+
+		String bhjz = projectCacheModel.bhjz;
+
+		if ((bhjz != null) && (bhjz.length() == 0)) {
+			projectCacheModel.bhjz = null;
+		}
+
+		projectCacheModel.fjms = getFjms();
+
+		String fjms = projectCacheModel.fjms;
+
+		if ((fjms != null) && (fjms.length() == 0)) {
+			projectCacheModel.fjms = null;
+		}
+
+		projectCacheModel.sfsbxm = getSfsbxm();
+
+		String sfsbxm = projectCacheModel.sfsbxm;
+
+		if ((sfsbxm != null) && (sfsbxm.length() == 0)) {
+			projectCacheModel.sfsbxm = null;
+		}
+
+		projectCacheModel.hzyj = getHzyj();
+
+		String hzyj = projectCacheModel.hzyj;
+
+		if ((hzyj != null) && (hzyj.length() == 0)) {
+			projectCacheModel.hzyj = null;
+		}
+
+		projectCacheModel.bj_sx = getBj_sx();
+
+		String bj_sx = projectCacheModel.bj_sx;
+
+		if ((bj_sx != null) && (bj_sx.length() == 0)) {
+			projectCacheModel.bj_sx = null;
+		}
+
+		projectCacheModel.bj_webid = getBj_webid();
+
+		String bj_webid = projectCacheModel.bj_webid;
+
+		if ((bj_webid != null) && (bj_webid.length() == 0)) {
+			projectCacheModel.bj_webid = null;
+		}
+
 		projectCacheModel.bjwcbj = getBjwcbj();
 
 		String bjwcbj = projectCacheModel.bjwcbj;
@@ -425,12 +4208,812 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 			projectCacheModel.bjwcbj = null;
 		}
 
-		projectCacheModel.jsdwmc = getJsdwmc();
+		projectCacheModel.bmdm = getBmdm();
 
-		String jsdwmc = projectCacheModel.jsdwmc;
+		String bmdm = projectCacheModel.bmdm;
 
-		if ((jsdwmc != null) && (jsdwmc.length() == 0)) {
-			projectCacheModel.jsdwmc = null;
+		if ((bmdm != null) && (bmdm.length() == 0)) {
+			projectCacheModel.bmdm = null;
+		}
+
+		projectCacheModel.jbr = getJbr();
+
+		String jbr = projectCacheModel.jbr;
+
+		if ((jbr != null) && (jbr.length() == 0)) {
+			projectCacheModel.jbr = null;
+		}
+
+		projectCacheModel.shr = getShr();
+
+		String shr = projectCacheModel.shr;
+
+		if ((shr != null) && (shr.length() == 0)) {
+			projectCacheModel.shr = null;
+		}
+
+		projectCacheModel.shbmdm = getShbmdm();
+
+		String shbmdm = projectCacheModel.shbmdm;
+
+		if ((shbmdm != null) && (shbmdm.length() == 0)) {
+			projectCacheModel.shbmdm = null;
+		}
+
+		projectCacheModel.wcbjsj = getWcbjsj();
+
+		String wcbjsj = projectCacheModel.wcbjsj;
+
+		if ((wcbjsj != null) && (wcbjsj.length() == 0)) {
+			projectCacheModel.wcbjsj = null;
+		}
+
+		projectCacheModel.old_bjbh = getOld_bjbh();
+
+		String old_bjbh = projectCacheModel.old_bjbh;
+
+		if ((old_bjbh != null) && (old_bjbh.length() == 0)) {
+			projectCacheModel.old_bjbh = null;
+		}
+
+		projectCacheModel.sffb = getSffb();
+
+		String sffb = projectCacheModel.sffb;
+
+		if ((sffb != null) && (sffb.length() == 0)) {
+			projectCacheModel.sffb = null;
+		}
+
+		projectCacheModel.timeflag = getTimeflag();
+
+		String timeflag = projectCacheModel.timeflag;
+
+		if ((timeflag != null) && (timeflag.length() == 0)) {
+			projectCacheModel.timeflag = null;
+		}
+
+		projectCacheModel.jbrdm = getJbrdm();
+
+		String jbrdm = projectCacheModel.jbrdm;
+
+		if ((jbrdm != null) && (jbrdm.length() == 0)) {
+			projectCacheModel.jbrdm = null;
+		}
+
+		projectCacheModel.shrdm = getShrdm();
+
+		String shrdm = projectCacheModel.shrdm;
+
+		if ((shrdm != null) && (shrdm.length() == 0)) {
+			projectCacheModel.shrdm = null;
+		}
+
+		projectCacheModel.jsbh = getJsbh();
+
+		String jsbh = projectCacheModel.jsbh;
+
+		if ((jsbh != null) && (jsbh.length() == 0)) {
+			projectCacheModel.jsbh = null;
+		}
+
+		projectCacheModel.needSbjl = getNeedSbjl();
+
+		String needSbjl = projectCacheModel.needSbjl;
+
+		if ((needSbjl != null) && (needSbjl.length() == 0)) {
+			projectCacheModel.needSbjl = null;
+		}
+
+		projectCacheModel.wcSbjl = getWcSbjl();
+
+		String wcSbjl = projectCacheModel.wcSbjl;
+
+		if ((wcSbjl != null) && (wcSbjl.length() == 0)) {
+			projectCacheModel.wcSbjl = null;
+		}
+
+		projectCacheModel.sfgyzbkg = getSfgyzbkg();
+
+		String sfgyzbkg = projectCacheModel.sfgyzbkg;
+
+		if ((sfgyzbkg != null) && (sfgyzbkg.length() == 0)) {
+			projectCacheModel.sfgyzbkg = null;
+		}
+
+		projectCacheModel.jyzxfbxx = getJyzxfbxx();
+
+		String jyzxfbxx = projectCacheModel.jyzxfbxx;
+
+		if ((jyzxfbxx != null) && (jyzxfbxx.length() == 0)) {
+			projectCacheModel.jyzxfbxx = null;
+		}
+
+		projectCacheModel.sgGkzbfb = getSgGkzbfb();
+
+		String sgGkzbfb = projectCacheModel.sgGkzbfb;
+
+		if ((sgGkzbfb != null) && (sgGkzbfb.length() == 0)) {
+			projectCacheModel.sgGkzbfb = null;
+		}
+
+		projectCacheModel.sgjlGkzbfb = getSgjlGkzbfb();
+
+		String sgjlGkzbfb = projectCacheModel.sgjlGkzbfb;
+
+		if ((sgjlGkzbfb != null) && (sgjlGkzbfb.length() == 0)) {
+			projectCacheModel.sgjlGkzbfb = null;
+		}
+
+		projectCacheModel.fxglxm = getFxglxm();
+
+		String fxglxm = projectCacheModel.fxglxm;
+
+		if ((fxglxm != null) && (fxglxm.length() == 0)) {
+			projectCacheModel.fxglxm = null;
+		}
+
+		projectCacheModel.fxglxmJbr = getFxglxmJbr();
+
+		String fxglxmJbr = projectCacheModel.fxglxmJbr;
+
+		if ((fxglxmJbr != null) && (fxglxmJbr.length() == 0)) {
+			projectCacheModel.fxglxmJbr = null;
+		}
+
+		projectCacheModel.fxglxmJbrdm = getFxglxmJbrdm();
+
+		String fxglxmJbrdm = projectCacheModel.fxglxmJbrdm;
+
+		if ((fxglxmJbrdm != null) && (fxglxmJbrdm.length() == 0)) {
+			projectCacheModel.fxglxmJbrdm = null;
+		}
+
+		projectCacheModel.fxglxmJbrq = getFxglxmJbrq();
+
+		String fxglxmJbrq = projectCacheModel.fxglxmJbrq;
+
+		if ((fxglxmJbrq != null) && (fxglxmJbrq.length() == 0)) {
+			projectCacheModel.fxglxmJbrq = null;
+		}
+
+		projectCacheModel.jsdwjgdm = getJsdwjgdm();
+
+		String jsdwjgdm = projectCacheModel.jsdwjgdm;
+
+		if ((jsdwjgdm != null) && (jsdwjgdm.length() == 0)) {
+			projectCacheModel.jsdwjgdm = null;
+		}
+
+		projectCacheModel.szqy = getSzqy();
+
+		String szqy = projectCacheModel.szqy;
+
+		if ((szqy != null) && (szqy.length() == 0)) {
+			projectCacheModel.szqy = null;
+		}
+
+		projectCacheModel.ywxjfwjz = getYwxjfwjz();
+
+		String ywxjfwjz = projectCacheModel.ywxjfwjz;
+
+		if ((ywxjfwjz != null) && (ywxjfwjz.length() == 0)) {
+			projectCacheModel.ywxjfwjz = null;
+		}
+
+		projectCacheModel.ywgbfwjg = getYwgbfwjg();
+
+		String ywgbfwjg = projectCacheModel.ywgbfwjg;
+
+		if ((ywgbfwjg != null) && (ywgbfwjg.length() == 0)) {
+			projectCacheModel.ywgbfwjg = null;
+		}
+
+		projectCacheModel.gczh = getGczh();
+
+		String gczh = projectCacheModel.gczh;
+
+		if ((gczh != null) && (gczh.length() == 0)) {
+			projectCacheModel.gczh = null;
+		}
+
+		projectCacheModel.zdcyyn = getZdcyyn();
+
+		String zdcyyn = projectCacheModel.zdcyyn;
+
+		if ((zdcyyn != null) && (zdcyyn.length() == 0)) {
+			projectCacheModel.zdcyyn = null;
+		}
+
+		projectCacheModel.lxfl = getLxfl();
+
+		String lxfl = projectCacheModel.lxfl;
+
+		if ((lxfl != null) && (lxfl.length() == 0)) {
+			projectCacheModel.lxfl = null;
+		}
+
+		projectCacheModel.ms1 = getMs1();
+
+		String ms1 = projectCacheModel.ms1;
+
+		if ((ms1 != null) && (ms1.length() == 0)) {
+			projectCacheModel.ms1 = null;
+		}
+
+		projectCacheModel.ms2 = getMs2();
+
+		String ms2 = projectCacheModel.ms2;
+
+		if ((ms2 != null) && (ms2.length() == 0)) {
+			projectCacheModel.ms2 = null;
+		}
+
+		projectCacheModel.ms3 = getMs3();
+
+		String ms3 = projectCacheModel.ms3;
+
+		if ((ms3 != null) && (ms3.length() == 0)) {
+			projectCacheModel.ms3 = null;
+		}
+
+		projectCacheModel.zdxmyn = getZdxmyn();
+
+		String zdxmyn = projectCacheModel.zdxmyn;
+
+		if ((zdxmyn != null) && (zdxmyn.length() == 0)) {
+			projectCacheModel.zdxmyn = null;
+		}
+
+		projectCacheModel.dxjzsq = getDxjzsq();
+
+		String dxjzsq = projectCacheModel.dxjzsq;
+
+		if ((dxjzsq != null) && (dxjzsq.length() == 0)) {
+			projectCacheModel.dxjzsq = null;
+		}
+
+		projectCacheModel.ywjzxzz = getYwjzxzz();
+
+		String ywjzxzz = projectCacheModel.ywjzxzz;
+
+		if ((ywjzxzz != null) && (ywjzxzz.length() == 0)) {
+			projectCacheModel.ywjzxzz = null;
+		}
+
+		projectCacheModel.fgwjhm = getFgwjhm();
+
+		String fgwjhm = projectCacheModel.fgwjhm;
+
+		if ((fgwjhm != null) && (fgwjhm.length() == 0)) {
+			projectCacheModel.fgwjhm = null;
+		}
+
+		projectCacheModel.zzbl = getZzbl();
+
+		String zzbl = projectCacheModel.zzbl;
+
+		if ((zzbl != null) && (zzbl.length() == 0)) {
+			projectCacheModel.zzbl = null;
+		}
+
+		projectCacheModel.ChangeTime = getChangeTime();
+
+		String ChangeTime = projectCacheModel.ChangeTime;
+
+		if ((ChangeTime != null) && (ChangeTime.length() == 0)) {
+			projectCacheModel.ChangeTime = null;
+		}
+
+		projectCacheModel.PD_SW = getPD_SW();
+
+		String PD_SW = projectCacheModel.PD_SW;
+
+		if ((PD_SW != null) && (PD_SW.length() == 0)) {
+			projectCacheModel.PD_SW = null;
+		}
+
+		projectCacheModel.bmpfrq = getBmpfrq();
+
+		String bmpfrq = projectCacheModel.bmpfrq;
+
+		if ((bmpfrq != null) && (bmpfrq.length() == 0)) {
+			projectCacheModel.bmpfrq = null;
+		}
+
+		projectCacheModel.bmpfwh = getBmpfwh();
+
+		String bmpfwh = projectCacheModel.bmpfwh;
+
+		if ((bmpfwh != null) && (bmpfwh.length() == 0)) {
+			projectCacheModel.bmpfwh = null;
+		}
+
+		projectCacheModel.bmpfwj = getBmpfwj();
+
+		String bmpfwj = projectCacheModel.bmpfwj;
+
+		if ((bmpfwj != null) && (bmpfwj.length() == 0)) {
+			projectCacheModel.bmpfwj = null;
+		}
+
+		projectCacheModel.CertificateKey = getCertificateKey();
+
+		String CertificateKey = projectCacheModel.CertificateKey;
+
+		if ((CertificateKey != null) && (CertificateKey.length() == 0)) {
+			projectCacheModel.CertificateKey = null;
+		}
+
+		projectCacheModel.dsjzmj = getDsjzmj();
+
+		String dsjzmj = projectCacheModel.dsjzmj;
+
+		if ((dsjzmj != null) && (dsjzmj.length() == 0)) {
+			projectCacheModel.dsjzmj = null;
+		}
+
+		projectCacheModel.dxjzmj = getDxjzmj();
+
+		String dxjzmj = projectCacheModel.dxjzmj;
+
+		if ((dxjzmj != null) && (dxjzmj.length() == 0)) {
+			projectCacheModel.dxjzmj = null;
+		}
+
+		projectCacheModel.gdzctzbh = getGdzctzbh();
+
+		String gdzctzbh = projectCacheModel.gdzctzbh;
+
+		if ((gdzctzbh != null) && (gdzctzbh.length() == 0)) {
+			projectCacheModel.gdzctzbh = null;
+		}
+
+		projectCacheModel.jsxz_2011 = getJsxz_2011();
+
+		String jsxz_2011 = projectCacheModel.jsxz_2011;
+
+		if ((jsxz_2011 != null) && (jsxz_2011.length() == 0)) {
+			projectCacheModel.jsxz_2011 = null;
+		}
+
+		projectCacheModel.lhmj = getLhmj();
+
+		String lhmj = projectCacheModel.lhmj;
+
+		if ((lhmj != null) && (lhmj.length() == 0)) {
+			projectCacheModel.lhmj = null;
+		}
+
+		projectCacheModel.lxjb_2011 = getLxjb_2011();
+
+		String lxjb_2011 = projectCacheModel.lxjb_2011;
+
+		if ((lxjb_2011 != null) && (lxjb_2011.length() == 0)) {
+			projectCacheModel.lxjb_2011 = null;
+		}
+
+		projectCacheModel.mfmj = getMfmj();
+
+		String mfmj = projectCacheModel.mfmj;
+
+		if ((mfmj != null) && (mfmj.length() == 0)) {
+			projectCacheModel.mfmj = null;
+		}
+
+		projectCacheModel.other_qx = getOther_qx();
+
+		String other_qx = projectCacheModel.other_qx;
+
+		if ((other_qx != null) && (other_qx.length() == 0)) {
+			projectCacheModel.other_qx = null;
+		}
+
+		projectCacheModel.ProjectSlyj = getProjectSlyj();
+
+		String ProjectSlyj = projectCacheModel.ProjectSlyj;
+
+		if ((ProjectSlyj != null) && (ProjectSlyj.length() == 0)) {
+			projectCacheModel.ProjectSlyj = null;
+		}
+
+		projectCacheModel.qxbz = getQxbz();
+
+		String qxbz = projectCacheModel.qxbz;
+
+		if ((qxbz != null) && (qxbz.length() == 0)) {
+			projectCacheModel.qxbz = null;
+		}
+
+		projectCacheModel.sfcysjkfq = getSfcysjkfq();
+
+		String sfcysjkfq = projectCacheModel.sfcysjkfq;
+
+		if ((sfcysjkfq != null) && (sfcysjkfq.length() == 0)) {
+			projectCacheModel.sfcysjkfq = null;
+		}
+
+		projectCacheModel.sfmfss = getSfmfss();
+
+		String sfmfss = projectCacheModel.sfmfss;
+
+		if ((sfmfss != null) && (sfmfss.length() == 0)) {
+			projectCacheModel.sfmfss = null;
+		}
+
+		projectCacheModel.szqx = getSzqx();
+
+		String szqx = projectCacheModel.szqx;
+
+		if ((szqx != null) && (szqx.length() == 0)) {
+			projectCacheModel.szqx = null;
+		}
+
+		projectCacheModel.tsgs = getTsgs();
+
+		String tsgs = projectCacheModel.tsgs;
+
+		if ((tsgs != null) && (tsgs.length() == 0)) {
+			projectCacheModel.tsgs = null;
+		}
+
+		projectCacheModel.xmfl_2011 = getXmfl_2011();
+
+		String xmfl_2011 = projectCacheModel.xmfl_2011;
+
+		if ((xmfl_2011 != null) && (xmfl_2011.length() == 0)) {
+			projectCacheModel.xmfl_2011 = null;
+		}
+
+		projectCacheModel.xsjpw = getXsjpw();
+
+		String xsjpw = projectCacheModel.xsjpw;
+
+		if ((xsjpw != null) && (xsjpw.length() == 0)) {
+			projectCacheModel.xsjpw = null;
+		}
+
+		projectCacheModel.xsjpzdw = getXsjpzdw();
+
+		String xsjpzdw = projectCacheModel.xsjpzdw;
+
+		if ((xsjpzdw != null) && (xsjpzdw.length() == 0)) {
+			projectCacheModel.xsjpzdw = null;
+		}
+
+		projectCacheModel.zjlygc_10 = getZjlygc_10();
+
+		String zjlygc_10 = projectCacheModel.zjlygc_10;
+
+		if ((zjlygc_10 != null) && (zjlygc_10.length() == 0)) {
+			projectCacheModel.zjlygc_10 = null;
+		}
+
+		projectCacheModel.zjlygc_11 = getZjlygc_11();
+
+		String zjlygc_11 = projectCacheModel.zjlygc_11;
+
+		if ((zjlygc_11 != null) && (zjlygc_11.length() == 0)) {
+			projectCacheModel.zjlygc_11 = null;
+		}
+
+		projectCacheModel.zjlygc_xs_1 = getZjlygc_xs_1();
+
+		String zjlygc_xs_1 = projectCacheModel.zjlygc_xs_1;
+
+		if ((zjlygc_xs_1 != null) && (zjlygc_xs_1.length() == 0)) {
+			projectCacheModel.zjlygc_xs_1 = null;
+		}
+
+		projectCacheModel.zjlygc_xs_2 = getZjlygc_xs_2();
+
+		String zjlygc_xs_2 = projectCacheModel.zjlygc_xs_2;
+
+		if ((zjlygc_xs_2 != null) && (zjlygc_xs_2.length() == 0)) {
+			projectCacheModel.zjlygc_xs_2 = null;
+		}
+
+		projectCacheModel.zjlygc_xs_3 = getZjlygc_xs_3();
+
+		String zjlygc_xs_3 = projectCacheModel.zjlygc_xs_3;
+
+		if ((zjlygc_xs_3 != null) && (zjlygc_xs_3.length() == 0)) {
+			projectCacheModel.zjlygc_xs_3 = null;
+		}
+
+		projectCacheModel.zjlygc_xs_4 = getZjlygc_xs_4();
+
+		String zjlygc_xs_4 = projectCacheModel.zjlygc_xs_4;
+
+		if ((zjlygc_xs_4 != null) && (zjlygc_xs_4.length() == 0)) {
+			projectCacheModel.zjlygc_xs_4 = null;
+		}
+
+		projectCacheModel.zjlygc_1_2 = getZjlygc_1_2();
+
+		String zjlygc_1_2 = projectCacheModel.zjlygc_1_2;
+
+		if ((zjlygc_1_2 != null) && (zjlygc_1_2.length() == 0)) {
+			projectCacheModel.zjlygc_1_2 = null;
+		}
+
+		projectCacheModel.zjlygc_1_2_4 = getZjlygc_1_2_4();
+
+		String zjlygc_1_2_4 = projectCacheModel.zjlygc_1_2_4;
+
+		if ((zjlygc_1_2_4 != null) && (zjlygc_1_2_4.length() == 0)) {
+			projectCacheModel.zjlygc_1_2_4 = null;
+		}
+
+		projectCacheModel.ywptlh = getYwptlh();
+
+		String ywptlh = projectCacheModel.ywptlh;
+
+		if ((ywptlh != null) && (ywptlh.length() == 0)) {
+			projectCacheModel.ywptlh = null;
+		}
+
+		projectCacheModel.gyyqbh = getGyyqbh();
+
+		String gyyqbh = projectCacheModel.gyyqbh;
+
+		if ((gyyqbh != null) && (gyyqbh.length() == 0)) {
+			projectCacheModel.gyyqbh = null;
+		}
+
+		projectCacheModel.sfcyxm = getSfcyxm();
+
+		String sfcyxm = projectCacheModel.sfcyxm;
+
+		if ((sfcyxm != null) && (sfcyxm.length() == 0)) {
+			projectCacheModel.sfcyxm = null;
+		}
+
+		projectCacheModel.zbxmfzrxm = getZbxmfzrxm();
+
+		String zbxmfzrxm = projectCacheModel.zbxmfzrxm;
+
+		if ((zbxmfzrxm != null) && (zbxmfzrxm.length() == 0)) {
+			projectCacheModel.zbxmfzrxm = null;
+		}
+
+		projectCacheModel.zbxmfzrzjh = getZbxmfzrzjh();
+
+		String zbxmfzrzjh = projectCacheModel.zbxmfzrzjh;
+
+		if ((zbxmfzrzjh != null) && (zbxmfzrzjh.length() == 0)) {
+			projectCacheModel.zbxmfzrzjh = null;
+		}
+
+		projectCacheModel.zbxmfzrzjlx = getZbxmfzrzjlx();
+
+		String zbxmfzrzjlx = projectCacheModel.zbxmfzrzjlx;
+
+		if ((zbxmfzrzjlx != null) && (zbxmfzrzjlx.length() == 0)) {
+			projectCacheModel.zbxmfzrzjlx = null;
+		}
+
+		projectCacheModel.zbxmfzrqrsj = getZbxmfzrqrsj();
+
+		String zbxmfzrqrsj = projectCacheModel.zbxmfzrqrsj;
+
+		if ((zbxmfzrqrsj != null) && (zbxmfzrqrsj.length() == 0)) {
+			projectCacheModel.zbxmfzrqrsj = null;
+		}
+
+		projectCacheModel.sflsjzbs = getSflsjzbs();
+
+		String sflsjzbs = projectCacheModel.sflsjzbs;
+
+		if ((sflsjzbs != null) && (sflsjzbs.length() == 0)) {
+			projectCacheModel.sflsjzbs = null;
+		}
+
+		projectCacheModel.sjbs = getSjbs();
+
+		String sjbs = projectCacheModel.sjbs;
+
+		if ((sjbs != null) && (sjbs.length() == 0)) {
+			projectCacheModel.sjbs = null;
+		}
+
+		projectCacheModel.yxbs = getYxbs();
+
+		String yxbs = projectCacheModel.yxbs;
+
+		if ((yxbs != null) && (yxbs.length() == 0)) {
+			projectCacheModel.yxbs = null;
+		}
+
+		projectCacheModel.sfyjngz = getSfyjngz();
+
+		String sfyjngz = projectCacheModel.sfyjngz;
+
+		if ((sfyjngz != null) && (sfyjngz.length() == 0)) {
+			projectCacheModel.sfyjngz = null;
+		}
+
+		projectCacheModel.sfsszpjz = getSfsszpjz();
+
+		String sfsszpjz = projectCacheModel.sfsszpjz;
+
+		if ((sfsszpjz != null) && (sfsszpjz.length() == 0)) {
+			projectCacheModel.sfsszpjz = null;
+		}
+
+		projectCacheModel.zczxjgdmz = getZczxjgdmz();
+
+		String zczxjgdmz = projectCacheModel.zczxjgdmz;
+
+		if ((zczxjgdmz != null) && (zczxjgdmz.length() == 0)) {
+			projectCacheModel.zczxjgdmz = null;
+		}
+
+		projectCacheModel.ischeckxmbm = getIscheckxmbm();
+
+		String ischeckxmbm = projectCacheModel.ischeckxmbm;
+
+		if ((ischeckxmbm != null) && (ischeckxmbm.length() == 0)) {
+			projectCacheModel.ischeckxmbm = null;
+		}
+
+		projectCacheModel.zddtmj = getZddtmj();
+
+		String zddtmj = projectCacheModel.zddtmj;
+
+		if ((zddtmj != null) && (zddtmj.length() == 0)) {
+			projectCacheModel.zddtmj = null;
+		}
+
+		projectCacheModel.sjjdYn = getSjjdYn();
+
+		String sjjdYn = projectCacheModel.sjjdYn;
+
+		if ((sjjdYn != null) && (sjjdYn.length() == 0)) {
+			projectCacheModel.sjjdYn = null;
+		}
+
+		projectCacheModel.sgjdYn = getSgjdYn();
+
+		String sgjdYn = projectCacheModel.sgjdYn;
+
+		if ((sgjdYn != null) && (sgjdYn.length() == 0)) {
+			projectCacheModel.sgjdYn = null;
+		}
+
+		projectCacheModel.yxjdYn = getYxjdYn();
+
+		String yxjdYn = projectCacheModel.yxjdYn;
+
+		if ((yxjdYn != null) && (yxjdYn.length() == 0)) {
+			projectCacheModel.yxjdYn = null;
+		}
+
+		projectCacheModel.tdhtqdbh = getTdhtqdbh();
+
+		String tdhtqdbh = projectCacheModel.tdhtqdbh;
+
+		if ((tdhtqdbh != null) && (tdhtqdbh.length() == 0)) {
+			projectCacheModel.tdhtqdbh = null;
+		}
+
+		projectCacheModel.tdhtqdrq = getTdhtqdrq();
+
+		String tdhtqdrq = projectCacheModel.tdhtqdrq;
+
+		if ((tdhtqdrq != null) && (tdhtqdrq.length() == 0)) {
+			projectCacheModel.tdhtqdrq = null;
+		}
+
+		projectCacheModel.dkbh = getDkbh();
+
+		String dkbh = projectCacheModel.dkbh;
+
+		if ((dkbh != null) && (dkbh.length() == 0)) {
+			projectCacheModel.dkbh = null;
+		}
+
+		projectCacheModel.zpsjzlsbl = getZpsjzlsbl();
+
+		String zpsjzlsbl = projectCacheModel.zpsjzlsbl;
+
+		if ((zpsjzlsbl != null) && (zpsjzlsbl.length() == 0)) {
+			projectCacheModel.zpsjzlsbl = null;
+		}
+
+		projectCacheModel.zpsjzmj = getZpsjzmj();
+
+		String zpsjzmj = projectCacheModel.zpsjzmj;
+
+		if ((zpsjzmj != null) && (zpsjzmj.length() == 0)) {
+			projectCacheModel.zpsjzmj = null;
+		}
+
+		projectCacheModel.dwyzzpl = getDwyzzpl();
+
+		String dwyzzpl = projectCacheModel.dwyzzpl;
+
+		if ((dwyzzpl != null) && (dwyzzpl.length() == 0)) {
+			projectCacheModel.dwyzzpl = null;
+		}
+
+		projectCacheModel.zdh = getZdh();
+
+		String zdh = projectCacheModel.zdh;
+
+		if ((zdh != null) && (zdh.length() == 0)) {
+			projectCacheModel.zdh = null;
+		}
+
+		projectCacheModel.sfgdcg = getSfgdcg();
+
+		String sfgdcg = projectCacheModel.sfgdcg;
+
+		if ((sfgdcg != null) && (sfgdcg.length() == 0)) {
+			projectCacheModel.sfgdcg = null;
+		}
+
+		projectCacheModel.ptlhmj = getPtlhmj();
+
+		String ptlhmj = projectCacheModel.ptlhmj;
+
+		if ((ptlhmj != null) && (ptlhmj.length() == 0)) {
+			projectCacheModel.ptlhmj = null;
+		}
+
+		projectCacheModel.bimjszxfy = getBimjszxfy();
+
+		String bimjszxfy = projectCacheModel.bimjszxfy;
+
+		if ((bimjszxfy != null) && (bimjszxfy.length() == 0)) {
+			projectCacheModel.bimjszxfy = null;
+		}
+
+		projectCacheModel.bz = getBz();
+
+		String bz = projectCacheModel.bz;
+
+		if ((bz != null) && (bz.length() == 0)) {
+			projectCacheModel.bz = null;
+		}
+
+		projectCacheModel.sfzcxm = getSfzcxm();
+
+		String sfzcxm = projectCacheModel.sfzcxm;
+
+		if ((sfzcxm != null) && (sfzcxm.length() == 0)) {
+			projectCacheModel.sfzcxm = null;
+		}
+
+		projectCacheModel.zcxmbm = getZcxmbm();
+
+		String zcxmbm = projectCacheModel.zcxmbm;
+
+		if ((zcxmbm != null) && (zcxmbm.length() == 0)) {
+			projectCacheModel.zcxmbm = null;
+		}
+
+		projectCacheModel.sfzmqxm = getSfzmqxm();
+
+		String sfzmqxm = projectCacheModel.sfzmqxm;
+
+		if ((sfzmqxm != null) && (sfzmqxm.length() == 0)) {
+			projectCacheModel.sfzmqxm = null;
+		}
+
+		projectCacheModel.printPDFTime = getPrintPDFTime();
+
+		String printPDFTime = projectCacheModel.printPDFTime;
+
+		if ((printPDFTime != null) && (printPDFTime.length() == 0)) {
+			projectCacheModel.printPDFTime = null;
+		}
+
+		projectCacheModel.isBgPrint = getIsBgPrint();
+
+		String isBgPrint = projectCacheModel.isBgPrint;
+
+		if ((isBgPrint != null) && (isBgPrint.length() == 0)) {
+			projectCacheModel.isBgPrint = null;
 		}
 
 		return projectCacheModel;
@@ -438,22 +5021,310 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(15);
+		StringBundler sb = new StringBundler(303);
 
-		sb.append("{projectId=");
-		sb.append(getProjectId());
-		sb.append(", zzjgdm=");
-		sb.append(getZzjgdm());
+		sb.append("{bjbh=");
+		sb.append(getBjbh());
 		sb.append(", bjrq=");
 		sb.append(getBjrq());
-		sb.append(", bjWebid=");
-		sb.append(getBjWebid());
+		sb.append(", jsdw=");
+		sb.append(getJsdw());
+		sb.append(", jsdwxz=");
+		sb.append(getJsdwxz());
+		sb.append(", jsdwdz=");
+		sb.append(getJsdwdz());
+		sb.append(", jsdwdh=");
+		sb.append(getJsdwdh());
+		sb.append(", jsdwfr=");
+		sb.append(getJsdwfr());
+		sb.append(", jsdwlxr=");
+		sb.append(getJsdwlxr());
+		sb.append(", jsdwyb=");
+		sb.append(getJsdwyb());
+		sb.append(", jsdwzczj=");
+		sb.append(getJsdwzczj());
 		sb.append(", xmmc=");
 		sb.append(getXmmc());
+		sb.append(", jsdd=");
+		sb.append(getJsdd());
+		sb.append(", lxwj=");
+		sb.append(getLxwj());
+		sb.append(", lxwh=");
+		sb.append(getLxwh());
+		sb.append(", lxjb=");
+		sb.append(getLxjb());
+		sb.append(", pzjg=");
+		sb.append(getPzjg());
+		sb.append(", pzrq=");
+		sb.append(getPzrq());
+		sb.append(", ztz=");
+		sb.append(getZtz());
+		sb.append(", sbtz=");
+		sb.append(getSbtz());
+		sb.append(", jsxz=");
+		sb.append(getJsxz());
+		sb.append(", jsgm=");
+		sb.append(getJsgm());
+		sb.append(", zmj=");
+		sb.append(getZmj());
+		sb.append(", kgrq=");
+		sb.append(getKgrq());
+		sb.append(", xmxz=");
+		sb.append(getXmxz());
+		sb.append(", cjqk=");
+		sb.append(getCjqk());
+		sb.append(", smqk=");
+		sb.append(getSmqk());
+		sb.append(", bjbz=");
+		sb.append(getBjbz());
+		sb.append(", fbzgsc=");
+		sb.append(getFbzgsc());
+		sb.append(", cardid=");
+		sb.append(getCardid());
+		sb.append(", zjlygc_1=");
+		sb.append(getZjlygc_1());
+		sb.append(", zjlygc_2=");
+		sb.append(getZjlygc_2());
+		sb.append(", zjlygc_3=");
+		sb.append(getZjlygc_3());
+		sb.append(", zjlygc_4=");
+		sb.append(getZjlygc_4());
+		sb.append(", zjlygc_5=");
+		sb.append(getZjlygc_5());
+		sb.append(", zjlygc_6=");
+		sb.append(getZjlygc_6());
+		sb.append(", zjlygc_7=");
+		sb.append(getZjlygc_7());
+		sb.append(", zjlygc_8=");
+		sb.append(getZjlygc_8());
+		sb.append(", zjlygc_9=");
+		sb.append(getZjlygc_9());
+		sb.append(", jgxs=");
+		sb.append(getJgxs());
+		sb.append(", xmfl=");
+		sb.append(getXmfl());
+		sb.append(", jzmq=");
+		sb.append(getJzmq());
+		sb.append(", ywdt=");
+		sb.append(getYwdt());
+		sb.append(", dxsck=");
+		sb.append(getDxsck());
+		sb.append(", bhjz=");
+		sb.append(getBhjz());
+		sb.append(", fjms=");
+		sb.append(getFjms());
+		sb.append(", sfsbxm=");
+		sb.append(getSfsbxm());
+		sb.append(", hzyj=");
+		sb.append(getHzyj());
+		sb.append(", bj_sx=");
+		sb.append(getBj_sx());
+		sb.append(", bj_webid=");
+		sb.append(getBj_webid());
 		sb.append(", bjwcbj=");
 		sb.append(getBjwcbj());
-		sb.append(", jsdwmc=");
-		sb.append(getJsdwmc());
+		sb.append(", bmdm=");
+		sb.append(getBmdm());
+		sb.append(", jbr=");
+		sb.append(getJbr());
+		sb.append(", shr=");
+		sb.append(getShr());
+		sb.append(", shbmdm=");
+		sb.append(getShbmdm());
+		sb.append(", wcbjsj=");
+		sb.append(getWcbjsj());
+		sb.append(", old_bjbh=");
+		sb.append(getOld_bjbh());
+		sb.append(", sffb=");
+		sb.append(getSffb());
+		sb.append(", timeflag=");
+		sb.append(getTimeflag());
+		sb.append(", jbrdm=");
+		sb.append(getJbrdm());
+		sb.append(", shrdm=");
+		sb.append(getShrdm());
+		sb.append(", jsbh=");
+		sb.append(getJsbh());
+		sb.append(", needSbjl=");
+		sb.append(getNeedSbjl());
+		sb.append(", wcSbjl=");
+		sb.append(getWcSbjl());
+		sb.append(", sfgyzbkg=");
+		sb.append(getSfgyzbkg());
+		sb.append(", jyzxfbxx=");
+		sb.append(getJyzxfbxx());
+		sb.append(", sgGkzbfb=");
+		sb.append(getSgGkzbfb());
+		sb.append(", sgjlGkzbfb=");
+		sb.append(getSgjlGkzbfb());
+		sb.append(", fxglxm=");
+		sb.append(getFxglxm());
+		sb.append(", fxglxmJbr=");
+		sb.append(getFxglxmJbr());
+		sb.append(", fxglxmJbrdm=");
+		sb.append(getFxglxmJbrdm());
+		sb.append(", fxglxmJbrq=");
+		sb.append(getFxglxmJbrq());
+		sb.append(", jsdwjgdm=");
+		sb.append(getJsdwjgdm());
+		sb.append(", szqy=");
+		sb.append(getSzqy());
+		sb.append(", ywxjfwjz=");
+		sb.append(getYwxjfwjz());
+		sb.append(", ywgbfwjg=");
+		sb.append(getYwgbfwjg());
+		sb.append(", gczh=");
+		sb.append(getGczh());
+		sb.append(", zdcyyn=");
+		sb.append(getZdcyyn());
+		sb.append(", lxfl=");
+		sb.append(getLxfl());
+		sb.append(", ms1=");
+		sb.append(getMs1());
+		sb.append(", ms2=");
+		sb.append(getMs2());
+		sb.append(", ms3=");
+		sb.append(getMs3());
+		sb.append(", zdxmyn=");
+		sb.append(getZdxmyn());
+		sb.append(", dxjzsq=");
+		sb.append(getDxjzsq());
+		sb.append(", ywjzxzz=");
+		sb.append(getYwjzxzz());
+		sb.append(", fgwjhm=");
+		sb.append(getFgwjhm());
+		sb.append(", zzbl=");
+		sb.append(getZzbl());
+		sb.append(", ChangeTime=");
+		sb.append(getChangeTime());
+		sb.append(", PD_SW=");
+		sb.append(getPD_SW());
+		sb.append(", bmpfrq=");
+		sb.append(getBmpfrq());
+		sb.append(", bmpfwh=");
+		sb.append(getBmpfwh());
+		sb.append(", bmpfwj=");
+		sb.append(getBmpfwj());
+		sb.append(", CertificateKey=");
+		sb.append(getCertificateKey());
+		sb.append(", dsjzmj=");
+		sb.append(getDsjzmj());
+		sb.append(", dxjzmj=");
+		sb.append(getDxjzmj());
+		sb.append(", gdzctzbh=");
+		sb.append(getGdzctzbh());
+		sb.append(", jsxz_2011=");
+		sb.append(getJsxz_2011());
+		sb.append(", lhmj=");
+		sb.append(getLhmj());
+		sb.append(", lxjb_2011=");
+		sb.append(getLxjb_2011());
+		sb.append(", mfmj=");
+		sb.append(getMfmj());
+		sb.append(", other_qx=");
+		sb.append(getOther_qx());
+		sb.append(", ProjectSlyj=");
+		sb.append(getProjectSlyj());
+		sb.append(", qxbz=");
+		sb.append(getQxbz());
+		sb.append(", sfcysjkfq=");
+		sb.append(getSfcysjkfq());
+		sb.append(", sfmfss=");
+		sb.append(getSfmfss());
+		sb.append(", szqx=");
+		sb.append(getSzqx());
+		sb.append(", tsgs=");
+		sb.append(getTsgs());
+		sb.append(", xmfl_2011=");
+		sb.append(getXmfl_2011());
+		sb.append(", xsjpw=");
+		sb.append(getXsjpw());
+		sb.append(", xsjpzdw=");
+		sb.append(getXsjpzdw());
+		sb.append(", zjlygc_10=");
+		sb.append(getZjlygc_10());
+		sb.append(", zjlygc_11=");
+		sb.append(getZjlygc_11());
+		sb.append(", zjlygc_xs_1=");
+		sb.append(getZjlygc_xs_1());
+		sb.append(", zjlygc_xs_2=");
+		sb.append(getZjlygc_xs_2());
+		sb.append(", zjlygc_xs_3=");
+		sb.append(getZjlygc_xs_3());
+		sb.append(", zjlygc_xs_4=");
+		sb.append(getZjlygc_xs_4());
+		sb.append(", zjlygc_1_2=");
+		sb.append(getZjlygc_1_2());
+		sb.append(", zjlygc_1_2_4=");
+		sb.append(getZjlygc_1_2_4());
+		sb.append(", ywptlh=");
+		sb.append(getYwptlh());
+		sb.append(", gyyqbh=");
+		sb.append(getGyyqbh());
+		sb.append(", sfcyxm=");
+		sb.append(getSfcyxm());
+		sb.append(", zbxmfzrxm=");
+		sb.append(getZbxmfzrxm());
+		sb.append(", zbxmfzrzjh=");
+		sb.append(getZbxmfzrzjh());
+		sb.append(", zbxmfzrzjlx=");
+		sb.append(getZbxmfzrzjlx());
+		sb.append(", zbxmfzrqrsj=");
+		sb.append(getZbxmfzrqrsj());
+		sb.append(", sflsjzbs=");
+		sb.append(getSflsjzbs());
+		sb.append(", sjbs=");
+		sb.append(getSjbs());
+		sb.append(", yxbs=");
+		sb.append(getYxbs());
+		sb.append(", sfyjngz=");
+		sb.append(getSfyjngz());
+		sb.append(", sfsszpjz=");
+		sb.append(getSfsszpjz());
+		sb.append(", zczxjgdmz=");
+		sb.append(getZczxjgdmz());
+		sb.append(", ischeckxmbm=");
+		sb.append(getIscheckxmbm());
+		sb.append(", zddtmj=");
+		sb.append(getZddtmj());
+		sb.append(", sjjdYn=");
+		sb.append(getSjjdYn());
+		sb.append(", sgjdYn=");
+		sb.append(getSgjdYn());
+		sb.append(", yxjdYn=");
+		sb.append(getYxjdYn());
+		sb.append(", tdhtqdbh=");
+		sb.append(getTdhtqdbh());
+		sb.append(", tdhtqdrq=");
+		sb.append(getTdhtqdrq());
+		sb.append(", dkbh=");
+		sb.append(getDkbh());
+		sb.append(", zpsjzlsbl=");
+		sb.append(getZpsjzlsbl());
+		sb.append(", zpsjzmj=");
+		sb.append(getZpsjzmj());
+		sb.append(", dwyzzpl=");
+		sb.append(getDwyzzpl());
+		sb.append(", zdh=");
+		sb.append(getZdh());
+		sb.append(", sfgdcg=");
+		sb.append(getSfgdcg());
+		sb.append(", ptlhmj=");
+		sb.append(getPtlhmj());
+		sb.append(", bimjszxfy=");
+		sb.append(getBimjszxfy());
+		sb.append(", bz=");
+		sb.append(getBz());
+		sb.append(", sfzcxm=");
+		sb.append(getSfzcxm());
+		sb.append(", zcxmbm=");
+		sb.append(getZcxmbm());
+		sb.append(", sfzmqxm=");
+		sb.append(getSfzmqxm());
+		sb.append(", printPDFTime=");
+		sb.append(getPrintPDFTime());
+		sb.append(", isBgPrint=");
+		sb.append(getIsBgPrint());
 		sb.append("}");
 
 		return sb.toString();
@@ -461,39 +5332,615 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(457);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.cp.project.model.Project");
 		sb.append("</model-name>");
 
 		sb.append(
-			"<column><column-name>projectId</column-name><column-value><![CDATA[");
-		sb.append(getProjectId());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>zzjgdm</column-name><column-value><![CDATA[");
-		sb.append(getZzjgdm());
+			"<column><column-name>bjbh</column-name><column-value><![CDATA[");
+		sb.append(getBjbh());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>bjrq</column-name><column-value><![CDATA[");
 		sb.append(getBjrq());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>bjWebid</column-name><column-value><![CDATA[");
-		sb.append(getBjWebid());
+			"<column><column-name>jsdw</column-name><column-value><![CDATA[");
+		sb.append(getJsdw());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>jsdwxz</column-name><column-value><![CDATA[");
+		sb.append(getJsdwxz());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>jsdwdz</column-name><column-value><![CDATA[");
+		sb.append(getJsdwdz());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>jsdwdh</column-name><column-value><![CDATA[");
+		sb.append(getJsdwdh());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>jsdwfr</column-name><column-value><![CDATA[");
+		sb.append(getJsdwfr());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>jsdwlxr</column-name><column-value><![CDATA[");
+		sb.append(getJsdwlxr());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>jsdwyb</column-name><column-value><![CDATA[");
+		sb.append(getJsdwyb());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>jsdwzczj</column-name><column-value><![CDATA[");
+		sb.append(getJsdwzczj());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>xmmc</column-name><column-value><![CDATA[");
 		sb.append(getXmmc());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>jsdd</column-name><column-value><![CDATA[");
+		sb.append(getJsdd());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>lxwj</column-name><column-value><![CDATA[");
+		sb.append(getLxwj());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>lxwh</column-name><column-value><![CDATA[");
+		sb.append(getLxwh());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>lxjb</column-name><column-value><![CDATA[");
+		sb.append(getLxjb());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>pzjg</column-name><column-value><![CDATA[");
+		sb.append(getPzjg());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>pzrq</column-name><column-value><![CDATA[");
+		sb.append(getPzrq());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>ztz</column-name><column-value><![CDATA[");
+		sb.append(getZtz());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>sbtz</column-name><column-value><![CDATA[");
+		sb.append(getSbtz());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>jsxz</column-name><column-value><![CDATA[");
+		sb.append(getJsxz());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>jsgm</column-name><column-value><![CDATA[");
+		sb.append(getJsgm());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>zmj</column-name><column-value><![CDATA[");
+		sb.append(getZmj());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>kgrq</column-name><column-value><![CDATA[");
+		sb.append(getKgrq());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>xmxz</column-name><column-value><![CDATA[");
+		sb.append(getXmxz());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>cjqk</column-name><column-value><![CDATA[");
+		sb.append(getCjqk());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>smqk</column-name><column-value><![CDATA[");
+		sb.append(getSmqk());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>bjbz</column-name><column-value><![CDATA[");
+		sb.append(getBjbz());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>fbzgsc</column-name><column-value><![CDATA[");
+		sb.append(getFbzgsc());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>cardid</column-name><column-value><![CDATA[");
+		sb.append(getCardid());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>zjlygc_1</column-name><column-value><![CDATA[");
+		sb.append(getZjlygc_1());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>zjlygc_2</column-name><column-value><![CDATA[");
+		sb.append(getZjlygc_2());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>zjlygc_3</column-name><column-value><![CDATA[");
+		sb.append(getZjlygc_3());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>zjlygc_4</column-name><column-value><![CDATA[");
+		sb.append(getZjlygc_4());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>zjlygc_5</column-name><column-value><![CDATA[");
+		sb.append(getZjlygc_5());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>zjlygc_6</column-name><column-value><![CDATA[");
+		sb.append(getZjlygc_6());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>zjlygc_7</column-name><column-value><![CDATA[");
+		sb.append(getZjlygc_7());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>zjlygc_8</column-name><column-value><![CDATA[");
+		sb.append(getZjlygc_8());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>zjlygc_9</column-name><column-value><![CDATA[");
+		sb.append(getZjlygc_9());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>jgxs</column-name><column-value><![CDATA[");
+		sb.append(getJgxs());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>xmfl</column-name><column-value><![CDATA[");
+		sb.append(getXmfl());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>jzmq</column-name><column-value><![CDATA[");
+		sb.append(getJzmq());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>ywdt</column-name><column-value><![CDATA[");
+		sb.append(getYwdt());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>dxsck</column-name><column-value><![CDATA[");
+		sb.append(getDxsck());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>bhjz</column-name><column-value><![CDATA[");
+		sb.append(getBhjz());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>fjms</column-name><column-value><![CDATA[");
+		sb.append(getFjms());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>sfsbxm</column-name><column-value><![CDATA[");
+		sb.append(getSfsbxm());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>hzyj</column-name><column-value><![CDATA[");
+		sb.append(getHzyj());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>bj_sx</column-name><column-value><![CDATA[");
+		sb.append(getBj_sx());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>bj_webid</column-name><column-value><![CDATA[");
+		sb.append(getBj_webid());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>bjwcbj</column-name><column-value><![CDATA[");
 		sb.append(getBjwcbj());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>jsdwmc</column-name><column-value><![CDATA[");
-		sb.append(getJsdwmc());
+			"<column><column-name>bmdm</column-name><column-value><![CDATA[");
+		sb.append(getBmdm());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>jbr</column-name><column-value><![CDATA[");
+		sb.append(getJbr());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>shr</column-name><column-value><![CDATA[");
+		sb.append(getShr());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>shbmdm</column-name><column-value><![CDATA[");
+		sb.append(getShbmdm());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>wcbjsj</column-name><column-value><![CDATA[");
+		sb.append(getWcbjsj());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>old_bjbh</column-name><column-value><![CDATA[");
+		sb.append(getOld_bjbh());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>sffb</column-name><column-value><![CDATA[");
+		sb.append(getSffb());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>timeflag</column-name><column-value><![CDATA[");
+		sb.append(getTimeflag());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>jbrdm</column-name><column-value><![CDATA[");
+		sb.append(getJbrdm());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>shrdm</column-name><column-value><![CDATA[");
+		sb.append(getShrdm());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>jsbh</column-name><column-value><![CDATA[");
+		sb.append(getJsbh());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>needSbjl</column-name><column-value><![CDATA[");
+		sb.append(getNeedSbjl());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>wcSbjl</column-name><column-value><![CDATA[");
+		sb.append(getWcSbjl());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>sfgyzbkg</column-name><column-value><![CDATA[");
+		sb.append(getSfgyzbkg());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>jyzxfbxx</column-name><column-value><![CDATA[");
+		sb.append(getJyzxfbxx());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>sgGkzbfb</column-name><column-value><![CDATA[");
+		sb.append(getSgGkzbfb());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>sgjlGkzbfb</column-name><column-value><![CDATA[");
+		sb.append(getSgjlGkzbfb());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>fxglxm</column-name><column-value><![CDATA[");
+		sb.append(getFxglxm());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>fxglxmJbr</column-name><column-value><![CDATA[");
+		sb.append(getFxglxmJbr());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>fxglxmJbrdm</column-name><column-value><![CDATA[");
+		sb.append(getFxglxmJbrdm());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>fxglxmJbrq</column-name><column-value><![CDATA[");
+		sb.append(getFxglxmJbrq());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>jsdwjgdm</column-name><column-value><![CDATA[");
+		sb.append(getJsdwjgdm());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>szqy</column-name><column-value><![CDATA[");
+		sb.append(getSzqy());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>ywxjfwjz</column-name><column-value><![CDATA[");
+		sb.append(getYwxjfwjz());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>ywgbfwjg</column-name><column-value><![CDATA[");
+		sb.append(getYwgbfwjg());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>gczh</column-name><column-value><![CDATA[");
+		sb.append(getGczh());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>zdcyyn</column-name><column-value><![CDATA[");
+		sb.append(getZdcyyn());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>lxfl</column-name><column-value><![CDATA[");
+		sb.append(getLxfl());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>ms1</column-name><column-value><![CDATA[");
+		sb.append(getMs1());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>ms2</column-name><column-value><![CDATA[");
+		sb.append(getMs2());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>ms3</column-name><column-value><![CDATA[");
+		sb.append(getMs3());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>zdxmyn</column-name><column-value><![CDATA[");
+		sb.append(getZdxmyn());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>dxjzsq</column-name><column-value><![CDATA[");
+		sb.append(getDxjzsq());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>ywjzxzz</column-name><column-value><![CDATA[");
+		sb.append(getYwjzxzz());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>fgwjhm</column-name><column-value><![CDATA[");
+		sb.append(getFgwjhm());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>zzbl</column-name><column-value><![CDATA[");
+		sb.append(getZzbl());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>ChangeTime</column-name><column-value><![CDATA[");
+		sb.append(getChangeTime());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>PD_SW</column-name><column-value><![CDATA[");
+		sb.append(getPD_SW());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>bmpfrq</column-name><column-value><![CDATA[");
+		sb.append(getBmpfrq());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>bmpfwh</column-name><column-value><![CDATA[");
+		sb.append(getBmpfwh());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>bmpfwj</column-name><column-value><![CDATA[");
+		sb.append(getBmpfwj());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>CertificateKey</column-name><column-value><![CDATA[");
+		sb.append(getCertificateKey());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>dsjzmj</column-name><column-value><![CDATA[");
+		sb.append(getDsjzmj());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>dxjzmj</column-name><column-value><![CDATA[");
+		sb.append(getDxjzmj());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>gdzctzbh</column-name><column-value><![CDATA[");
+		sb.append(getGdzctzbh());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>jsxz_2011</column-name><column-value><![CDATA[");
+		sb.append(getJsxz_2011());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>lhmj</column-name><column-value><![CDATA[");
+		sb.append(getLhmj());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>lxjb_2011</column-name><column-value><![CDATA[");
+		sb.append(getLxjb_2011());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>mfmj</column-name><column-value><![CDATA[");
+		sb.append(getMfmj());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>other_qx</column-name><column-value><![CDATA[");
+		sb.append(getOther_qx());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>ProjectSlyj</column-name><column-value><![CDATA[");
+		sb.append(getProjectSlyj());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>qxbz</column-name><column-value><![CDATA[");
+		sb.append(getQxbz());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>sfcysjkfq</column-name><column-value><![CDATA[");
+		sb.append(getSfcysjkfq());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>sfmfss</column-name><column-value><![CDATA[");
+		sb.append(getSfmfss());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>szqx</column-name><column-value><![CDATA[");
+		sb.append(getSzqx());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>tsgs</column-name><column-value><![CDATA[");
+		sb.append(getTsgs());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>xmfl_2011</column-name><column-value><![CDATA[");
+		sb.append(getXmfl_2011());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>xsjpw</column-name><column-value><![CDATA[");
+		sb.append(getXsjpw());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>xsjpzdw</column-name><column-value><![CDATA[");
+		sb.append(getXsjpzdw());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>zjlygc_10</column-name><column-value><![CDATA[");
+		sb.append(getZjlygc_10());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>zjlygc_11</column-name><column-value><![CDATA[");
+		sb.append(getZjlygc_11());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>zjlygc_xs_1</column-name><column-value><![CDATA[");
+		sb.append(getZjlygc_xs_1());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>zjlygc_xs_2</column-name><column-value><![CDATA[");
+		sb.append(getZjlygc_xs_2());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>zjlygc_xs_3</column-name><column-value><![CDATA[");
+		sb.append(getZjlygc_xs_3());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>zjlygc_xs_4</column-name><column-value><![CDATA[");
+		sb.append(getZjlygc_xs_4());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>zjlygc_1_2</column-name><column-value><![CDATA[");
+		sb.append(getZjlygc_1_2());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>zjlygc_1_2_4</column-name><column-value><![CDATA[");
+		sb.append(getZjlygc_1_2_4());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>ywptlh</column-name><column-value><![CDATA[");
+		sb.append(getYwptlh());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>gyyqbh</column-name><column-value><![CDATA[");
+		sb.append(getGyyqbh());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>sfcyxm</column-name><column-value><![CDATA[");
+		sb.append(getSfcyxm());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>zbxmfzrxm</column-name><column-value><![CDATA[");
+		sb.append(getZbxmfzrxm());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>zbxmfzrzjh</column-name><column-value><![CDATA[");
+		sb.append(getZbxmfzrzjh());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>zbxmfzrzjlx</column-name><column-value><![CDATA[");
+		sb.append(getZbxmfzrzjlx());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>zbxmfzrqrsj</column-name><column-value><![CDATA[");
+		sb.append(getZbxmfzrqrsj());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>sflsjzbs</column-name><column-value><![CDATA[");
+		sb.append(getSflsjzbs());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>sjbs</column-name><column-value><![CDATA[");
+		sb.append(getSjbs());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>yxbs</column-name><column-value><![CDATA[");
+		sb.append(getYxbs());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>sfyjngz</column-name><column-value><![CDATA[");
+		sb.append(getSfyjngz());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>sfsszpjz</column-name><column-value><![CDATA[");
+		sb.append(getSfsszpjz());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>zczxjgdmz</column-name><column-value><![CDATA[");
+		sb.append(getZczxjgdmz());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>ischeckxmbm</column-name><column-value><![CDATA[");
+		sb.append(getIscheckxmbm());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>zddtmj</column-name><column-value><![CDATA[");
+		sb.append(getZddtmj());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>sjjdYn</column-name><column-value><![CDATA[");
+		sb.append(getSjjdYn());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>sgjdYn</column-name><column-value><![CDATA[");
+		sb.append(getSgjdYn());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>yxjdYn</column-name><column-value><![CDATA[");
+		sb.append(getYxjdYn());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>tdhtqdbh</column-name><column-value><![CDATA[");
+		sb.append(getTdhtqdbh());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>tdhtqdrq</column-name><column-value><![CDATA[");
+		sb.append(getTdhtqdrq());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>dkbh</column-name><column-value><![CDATA[");
+		sb.append(getDkbh());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>zpsjzlsbl</column-name><column-value><![CDATA[");
+		sb.append(getZpsjzlsbl());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>zpsjzmj</column-name><column-value><![CDATA[");
+		sb.append(getZpsjzmj());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>dwyzzpl</column-name><column-value><![CDATA[");
+		sb.append(getDwyzzpl());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>zdh</column-name><column-value><![CDATA[");
+		sb.append(getZdh());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>sfgdcg</column-name><column-value><![CDATA[");
+		sb.append(getSfgdcg());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>ptlhmj</column-name><column-value><![CDATA[");
+		sb.append(getPtlhmj());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>bimjszxfy</column-name><column-value><![CDATA[");
+		sb.append(getBimjszxfy());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>bz</column-name><column-value><![CDATA[");
+		sb.append(getBz());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>sfzcxm</column-name><column-value><![CDATA[");
+		sb.append(getSfzcxm());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>zcxmbm</column-name><column-value><![CDATA[");
+		sb.append(getZcxmbm());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>sfzmqxm</column-name><column-value><![CDATA[");
+		sb.append(getSfzmqxm());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>printPDFTime</column-name><column-value><![CDATA[");
+		sb.append(getPrintPDFTime());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>isBgPrint</column-name><column-value><![CDATA[");
+		sb.append(getIsBgPrint());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -505,14 +5952,156 @@ public class ProjectModelImpl extends BaseModelImpl<Project>
 	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			Project.class
 		};
-	private String _projectId;
-	private String _zzjgdm;
-	private String _originalZzjgdm;
+	private String _bjbh;
 	private Date _bjrq;
-	private String _bjWebid;
+	private String _jsdw;
+	private String _jsdwxz;
+	private String _jsdwdz;
+	private String _jsdwdh;
+	private String _jsdwfr;
+	private String _jsdwlxr;
+	private String _jsdwyb;
+	private String _jsdwzczj;
 	private String _xmmc;
+	private String _jsdd;
+	private String _lxwj;
+	private String _lxwh;
+	private String _lxjb;
+	private String _pzjg;
+	private String _pzrq;
+	private String _ztz;
+	private String _sbtz;
+	private String _jsxz;
+	private String _jsgm;
+	private String _zmj;
+	private String _kgrq;
+	private String _xmxz;
+	private String _cjqk;
+	private String _smqk;
+	private String _bjbz;
+	private String _fbzgsc;
+	private String _cardid;
+	private String _zjlygc_1;
+	private String _zjlygc_2;
+	private String _zjlygc_3;
+	private String _zjlygc_4;
+	private String _zjlygc_5;
+	private String _zjlygc_6;
+	private String _zjlygc_7;
+	private String _zjlygc_8;
+	private String _zjlygc_9;
+	private String _jgxs;
+	private String _xmfl;
+	private String _jzmq;
+	private String _ywdt;
+	private String _dxsck;
+	private String _bhjz;
+	private String _fjms;
+	private String _sfsbxm;
+	private String _hzyj;
+	private String _bj_sx;
+	private String _bj_webid;
 	private String _bjwcbj;
-	private String _jsdwmc;
-	private long _columnBitmask;
+	private String _bmdm;
+	private String _jbr;
+	private String _shr;
+	private String _shbmdm;
+	private String _wcbjsj;
+	private String _old_bjbh;
+	private String _sffb;
+	private String _timeflag;
+	private String _jbrdm;
+	private String _shrdm;
+	private String _jsbh;
+	private String _needSbjl;
+	private String _wcSbjl;
+	private String _sfgyzbkg;
+	private String _jyzxfbxx;
+	private String _sgGkzbfb;
+	private String _sgjlGkzbfb;
+	private String _fxglxm;
+	private String _fxglxmJbr;
+	private String _fxglxmJbrdm;
+	private String _fxglxmJbrq;
+	private String _jsdwjgdm;
+	private String _szqy;
+	private String _ywxjfwjz;
+	private String _ywgbfwjg;
+	private String _gczh;
+	private String _zdcyyn;
+	private String _lxfl;
+	private String _ms1;
+	private String _ms2;
+	private String _ms3;
+	private String _zdxmyn;
+	private String _dxjzsq;
+	private String _ywjzxzz;
+	private String _fgwjhm;
+	private String _zzbl;
+	private String _ChangeTime;
+	private String _PD_SW;
+	private String _bmpfrq;
+	private String _bmpfwh;
+	private String _bmpfwj;
+	private String _CertificateKey;
+	private String _dsjzmj;
+	private String _dxjzmj;
+	private String _gdzctzbh;
+	private String _jsxz_2011;
+	private String _lhmj;
+	private String _lxjb_2011;
+	private String _mfmj;
+	private String _other_qx;
+	private String _ProjectSlyj;
+	private String _qxbz;
+	private String _sfcysjkfq;
+	private String _sfmfss;
+	private String _szqx;
+	private String _tsgs;
+	private String _xmfl_2011;
+	private String _xsjpw;
+	private String _xsjpzdw;
+	private String _zjlygc_10;
+	private String _zjlygc_11;
+	private String _zjlygc_xs_1;
+	private String _zjlygc_xs_2;
+	private String _zjlygc_xs_3;
+	private String _zjlygc_xs_4;
+	private String _zjlygc_1_2;
+	private String _zjlygc_1_2_4;
+	private String _ywptlh;
+	private String _gyyqbh;
+	private String _sfcyxm;
+	private String _zbxmfzrxm;
+	private String _zbxmfzrzjh;
+	private String _zbxmfzrzjlx;
+	private String _zbxmfzrqrsj;
+	private String _sflsjzbs;
+	private String _sjbs;
+	private String _yxbs;
+	private String _sfyjngz;
+	private String _sfsszpjz;
+	private String _zczxjgdmz;
+	private String _ischeckxmbm;
+	private String _zddtmj;
+	private String _sjjdYn;
+	private String _sgjdYn;
+	private String _yxjdYn;
+	private String _tdhtqdbh;
+	private String _tdhtqdrq;
+	private String _dkbh;
+	private String _zpsjzlsbl;
+	private String _zpsjzmj;
+	private String _dwyzzpl;
+	private String _zdh;
+	private String _sfgdcg;
+	private String _ptlhmj;
+	private String _bimjszxfy;
+	private String _bz;
+	private String _sfzcxm;
+	private String _zcxmbm;
+	private String _sfzmqxm;
+	private String _printPDFTime;
+	private String _isBgPrint;
 	private Project _escapedModel;
 }

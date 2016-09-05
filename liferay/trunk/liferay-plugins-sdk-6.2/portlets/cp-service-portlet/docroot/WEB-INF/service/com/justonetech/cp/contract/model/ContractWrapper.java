@@ -17,6 +17,7 @@ package com.justonetech.cp.contract.model;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelWrapper;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -49,11 +50,79 @@ public class ContractWrapper implements Contract, ModelWrapper<Contract> {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("contractId", getContractId());
+		attributes.put("zzjgdm", getZzjgdm());
 		attributes.put("htlb", getHtlb());
+		attributes.put("htbh", getHtbh());
+		attributes.put("zbhtbh", getZbhtbh());
+		attributes.put("fbhtbh", getFbhtbh());
+		attributes.put("htlx", getHtlx());
+		attributes.put("htzt", getHtzt());
+		attributes.put("zfbgx", getZfbgx());
+		attributes.put("bsrq", getBsrq());
+		attributes.put("slsj", getSlsj());
 		attributes.put("bjbh", getBjbh());
+		attributes.put("szdq", getSzdq());
+		attributes.put("xmmc", getXmmc());
+		attributes.put("jsdw", getJsdw());
+		attributes.put("jsdd", getJsdd());
+		attributes.put("lxpw", getLxpw());
+		attributes.put("pzwh", getPzwh());
+		attributes.put("dwxz", getDwxz());
+		attributes.put("zjlygc", getZjlygc());
+		attributes.put("ztz", getZtz());
+		attributes.put("zjzmj", getZjzmj());
+		attributes.put("xmfl", getXmfl());
+		attributes.put("jzgm", getJzgm());
 		attributes.put("bdh", getBdh());
+		attributes.put("fbfs", getFbfs());
 		attributes.put("cbfs", getCbfs());
+		attributes.put("zycbht", getZycbht());
+		attributes.put("zygclb", getZygclb());
 		attributes.put("htmc", getHtmc());
+		attributes.put("fbdw", getFbdw());
+		attributes.put("cbdw", getCbdw());
+		attributes.put("sjdw", getSjdw());
+		attributes.put("xmfzr", getXmfzr());
+		attributes.put("xmfzrzjlx", getXmfzrzjlx());
+		attributes.put("xmfzrzjh", getXmfzrzjh());
+		attributes.put("sjfzr", getSjfzr());
+		attributes.put("sjfzrzjlx", getSjfzrzjlx());
+		attributes.put("sjfzrzjh", getSjfzrzjh());
+		attributes.put("kcdwmc", getKcdwmc());
+		attributes.put("kcfzr", getKcfzr());
+		attributes.put("kcfzrzjlx", getKcfzrzjlx());
+		attributes.put("kcfzrzjh", getKcfzrzjh());
+		attributes.put("sgdwmc", getSgdwmc());
+		attributes.put("sgfzr", getSgfzr());
+		attributes.put("sgfzrzjlx", getSgfzrzjlx());
+		attributes.put("sgfzrzjh", getSgfzrzjh());
+		attributes.put("xmlb", getXmlb());
+		attributes.put("gclb", getGclb());
+		attributes.put("gcgm", getGcgm());
+		attributes.put("sjxmlb", getSjxmlb());
+		attributes.put("sjgclb", getSjgclb());
+		attributes.put("sjgcgm", getSjgcgm());
+		attributes.put("sgxmlb", getSgxmlb());
+		attributes.put("sggclb", getSggclb());
+		attributes.put("sggcgm", getSggcgm());
+		attributes.put("kgrq", getKgrq());
+		attributes.put("jgrq", getJgrq());
+		attributes.put("jsfs", getJsfs());
+		attributes.put("htj", getHtj());
+		attributes.put("sjf", getSjf());
+		attributes.put("kcf", getKcf());
+		attributes.put("jazj", getJazj());
+		attributes.put("zlje", getZlje());
+		attributes.put("zgj", getZgj());
+		attributes.put("aqfhwmsgcsf", getAqfhwmsgcsf());
+		attributes.put("htqdrq", getHtqdrq());
+		attributes.put("htqzrq", getHtqzrq());
+		attributes.put("cbnr", getCbnr());
+		attributes.put("cyhtsfwb", getCyhtsfwb());
+		attributes.put("fzjqtsm", getFzjqtsm());
+		attributes.put("sfzx", getSfzx());
+		attributes.put("zxsj", getZxsj());
+		attributes.put("zxsm", getZxsm());
 
 		return attributes;
 	}
@@ -66,10 +135,64 @@ public class ContractWrapper implements Contract, ModelWrapper<Contract> {
 			setContractId(contractId);
 		}
 
+		Long zzjgdm = (Long)attributes.get("zzjgdm");
+
+		if (zzjgdm != null) {
+			setZzjgdm(zzjgdm);
+		}
+
 		String htlb = (String)attributes.get("htlb");
 
 		if (htlb != null) {
 			setHtlb(htlb);
+		}
+
+		String htbh = (String)attributes.get("htbh");
+
+		if (htbh != null) {
+			setHtbh(htbh);
+		}
+
+		String zbhtbh = (String)attributes.get("zbhtbh");
+
+		if (zbhtbh != null) {
+			setZbhtbh(zbhtbh);
+		}
+
+		String fbhtbh = (String)attributes.get("fbhtbh");
+
+		if (fbhtbh != null) {
+			setFbhtbh(fbhtbh);
+		}
+
+		String htlx = (String)attributes.get("htlx");
+
+		if (htlx != null) {
+			setHtlx(htlx);
+		}
+
+		String htzt = (String)attributes.get("htzt");
+
+		if (htzt != null) {
+			setHtzt(htzt);
+		}
+
+		String zfbgx = (String)attributes.get("zfbgx");
+
+		if (zfbgx != null) {
+			setZfbgx(zfbgx);
+		}
+
+		Date bsrq = (Date)attributes.get("bsrq");
+
+		if (bsrq != null) {
+			setBsrq(bsrq);
+		}
+
+		Date slsj = (Date)attributes.get("slsj");
+
+		if (slsj != null) {
+			setSlsj(slsj);
 		}
 
 		String bjbh = (String)attributes.get("bjbh");
@@ -78,10 +201,88 @@ public class ContractWrapper implements Contract, ModelWrapper<Contract> {
 			setBjbh(bjbh);
 		}
 
+		String szdq = (String)attributes.get("szdq");
+
+		if (szdq != null) {
+			setSzdq(szdq);
+		}
+
+		String xmmc = (String)attributes.get("xmmc");
+
+		if (xmmc != null) {
+			setXmmc(xmmc);
+		}
+
+		String jsdw = (String)attributes.get("jsdw");
+
+		if (jsdw != null) {
+			setJsdw(jsdw);
+		}
+
+		String jsdd = (String)attributes.get("jsdd");
+
+		if (jsdd != null) {
+			setJsdd(jsdd);
+		}
+
+		String lxpw = (String)attributes.get("lxpw");
+
+		if (lxpw != null) {
+			setLxpw(lxpw);
+		}
+
+		String pzwh = (String)attributes.get("pzwh");
+
+		if (pzwh != null) {
+			setPzwh(pzwh);
+		}
+
+		String dwxz = (String)attributes.get("dwxz");
+
+		if (dwxz != null) {
+			setDwxz(dwxz);
+		}
+
+		String zjlygc = (String)attributes.get("zjlygc");
+
+		if (zjlygc != null) {
+			setZjlygc(zjlygc);
+		}
+
+		String ztz = (String)attributes.get("ztz");
+
+		if (ztz != null) {
+			setZtz(ztz);
+		}
+
+		String zjzmj = (String)attributes.get("zjzmj");
+
+		if (zjzmj != null) {
+			setZjzmj(zjzmj);
+		}
+
+		String xmfl = (String)attributes.get("xmfl");
+
+		if (xmfl != null) {
+			setXmfl(xmfl);
+		}
+
+		String jzgm = (String)attributes.get("jzgm");
+
+		if (jzgm != null) {
+			setJzgm(jzgm);
+		}
+
 		String bdh = (String)attributes.get("bdh");
 
 		if (bdh != null) {
 			setBdh(bdh);
+		}
+
+		String fbfs = (String)attributes.get("fbfs");
+
+		if (fbfs != null) {
+			setFbfs(fbfs);
 		}
 
 		String cbfs = (String)attributes.get("cbfs");
@@ -90,10 +291,286 @@ public class ContractWrapper implements Contract, ModelWrapper<Contract> {
 			setCbfs(cbfs);
 		}
 
+		String zycbht = (String)attributes.get("zycbht");
+
+		if (zycbht != null) {
+			setZycbht(zycbht);
+		}
+
+		String zygclb = (String)attributes.get("zygclb");
+
+		if (zygclb != null) {
+			setZygclb(zygclb);
+		}
+
 		String htmc = (String)attributes.get("htmc");
 
 		if (htmc != null) {
 			setHtmc(htmc);
+		}
+
+		String fbdw = (String)attributes.get("fbdw");
+
+		if (fbdw != null) {
+			setFbdw(fbdw);
+		}
+
+		String cbdw = (String)attributes.get("cbdw");
+
+		if (cbdw != null) {
+			setCbdw(cbdw);
+		}
+
+		String sjdw = (String)attributes.get("sjdw");
+
+		if (sjdw != null) {
+			setSjdw(sjdw);
+		}
+
+		String xmfzr = (String)attributes.get("xmfzr");
+
+		if (xmfzr != null) {
+			setXmfzr(xmfzr);
+		}
+
+		String xmfzrzjlx = (String)attributes.get("xmfzrzjlx");
+
+		if (xmfzrzjlx != null) {
+			setXmfzrzjlx(xmfzrzjlx);
+		}
+
+		String xmfzrzjh = (String)attributes.get("xmfzrzjh");
+
+		if (xmfzrzjh != null) {
+			setXmfzrzjh(xmfzrzjh);
+		}
+
+		String sjfzr = (String)attributes.get("sjfzr");
+
+		if (sjfzr != null) {
+			setSjfzr(sjfzr);
+		}
+
+		String sjfzrzjlx = (String)attributes.get("sjfzrzjlx");
+
+		if (sjfzrzjlx != null) {
+			setSjfzrzjlx(sjfzrzjlx);
+		}
+
+		String sjfzrzjh = (String)attributes.get("sjfzrzjh");
+
+		if (sjfzrzjh != null) {
+			setSjfzrzjh(sjfzrzjh);
+		}
+
+		String kcdwmc = (String)attributes.get("kcdwmc");
+
+		if (kcdwmc != null) {
+			setKcdwmc(kcdwmc);
+		}
+
+		String kcfzr = (String)attributes.get("kcfzr");
+
+		if (kcfzr != null) {
+			setKcfzr(kcfzr);
+		}
+
+		String kcfzrzjlx = (String)attributes.get("kcfzrzjlx");
+
+		if (kcfzrzjlx != null) {
+			setKcfzrzjlx(kcfzrzjlx);
+		}
+
+		String kcfzrzjh = (String)attributes.get("kcfzrzjh");
+
+		if (kcfzrzjh != null) {
+			setKcfzrzjh(kcfzrzjh);
+		}
+
+		String sgdwmc = (String)attributes.get("sgdwmc");
+
+		if (sgdwmc != null) {
+			setSgdwmc(sgdwmc);
+		}
+
+		String sgfzr = (String)attributes.get("sgfzr");
+
+		if (sgfzr != null) {
+			setSgfzr(sgfzr);
+		}
+
+		String sgfzrzjlx = (String)attributes.get("sgfzrzjlx");
+
+		if (sgfzrzjlx != null) {
+			setSgfzrzjlx(sgfzrzjlx);
+		}
+
+		String sgfzrzjh = (String)attributes.get("sgfzrzjh");
+
+		if (sgfzrzjh != null) {
+			setSgfzrzjh(sgfzrzjh);
+		}
+
+		String xmlb = (String)attributes.get("xmlb");
+
+		if (xmlb != null) {
+			setXmlb(xmlb);
+		}
+
+		String gclb = (String)attributes.get("gclb");
+
+		if (gclb != null) {
+			setGclb(gclb);
+		}
+
+		String gcgm = (String)attributes.get("gcgm");
+
+		if (gcgm != null) {
+			setGcgm(gcgm);
+		}
+
+		String sjxmlb = (String)attributes.get("sjxmlb");
+
+		if (sjxmlb != null) {
+			setSjxmlb(sjxmlb);
+		}
+
+		String sjgclb = (String)attributes.get("sjgclb");
+
+		if (sjgclb != null) {
+			setSjgclb(sjgclb);
+		}
+
+		String sjgcgm = (String)attributes.get("sjgcgm");
+
+		if (sjgcgm != null) {
+			setSjgcgm(sjgcgm);
+		}
+
+		String sgxmlb = (String)attributes.get("sgxmlb");
+
+		if (sgxmlb != null) {
+			setSgxmlb(sgxmlb);
+		}
+
+		String sggclb = (String)attributes.get("sggclb");
+
+		if (sggclb != null) {
+			setSggclb(sggclb);
+		}
+
+		String sggcgm = (String)attributes.get("sggcgm");
+
+		if (sggcgm != null) {
+			setSggcgm(sggcgm);
+		}
+
+		Date kgrq = (Date)attributes.get("kgrq");
+
+		if (kgrq != null) {
+			setKgrq(kgrq);
+		}
+
+		Date jgrq = (Date)attributes.get("jgrq");
+
+		if (jgrq != null) {
+			setJgrq(jgrq);
+		}
+
+		String jsfs = (String)attributes.get("jsfs");
+
+		if (jsfs != null) {
+			setJsfs(jsfs);
+		}
+
+		String htj = (String)attributes.get("htj");
+
+		if (htj != null) {
+			setHtj(htj);
+		}
+
+		String sjf = (String)attributes.get("sjf");
+
+		if (sjf != null) {
+			setSjf(sjf);
+		}
+
+		String kcf = (String)attributes.get("kcf");
+
+		if (kcf != null) {
+			setKcf(kcf);
+		}
+
+		String jazj = (String)attributes.get("jazj");
+
+		if (jazj != null) {
+			setJazj(jazj);
+		}
+
+		String zlje = (String)attributes.get("zlje");
+
+		if (zlje != null) {
+			setZlje(zlje);
+		}
+
+		String zgj = (String)attributes.get("zgj");
+
+		if (zgj != null) {
+			setZgj(zgj);
+		}
+
+		String aqfhwmsgcsf = (String)attributes.get("aqfhwmsgcsf");
+
+		if (aqfhwmsgcsf != null) {
+			setAqfhwmsgcsf(aqfhwmsgcsf);
+		}
+
+		Date htqdrq = (Date)attributes.get("htqdrq");
+
+		if (htqdrq != null) {
+			setHtqdrq(htqdrq);
+		}
+
+		String htqzrq = (String)attributes.get("htqzrq");
+
+		if (htqzrq != null) {
+			setHtqzrq(htqzrq);
+		}
+
+		String cbnr = (String)attributes.get("cbnr");
+
+		if (cbnr != null) {
+			setCbnr(cbnr);
+		}
+
+		String cyhtsfwb = (String)attributes.get("cyhtsfwb");
+
+		if (cyhtsfwb != null) {
+			setCyhtsfwb(cyhtsfwb);
+		}
+
+		String fzjqtsm = (String)attributes.get("fzjqtsm");
+
+		if (fzjqtsm != null) {
+			setFzjqtsm(fzjqtsm);
+		}
+
+		String sfzx = (String)attributes.get("sfzx");
+
+		if (sfzx != null) {
+			setSfzx(sfzx);
+		}
+
+		Date zxsj = (Date)attributes.get("zxsj");
+
+		if (zxsj != null) {
+			setZxsj(zxsj);
+		}
+
+		Date zxsm = (Date)attributes.get("zxsm");
+
+		if (zxsm != null) {
+			setZxsm(zxsm);
 		}
 	}
 
@@ -138,6 +615,26 @@ public class ContractWrapper implements Contract, ModelWrapper<Contract> {
 	}
 
 	/**
+	* Returns the zzjgdm of this contract.
+	*
+	* @return the zzjgdm of this contract
+	*/
+	@Override
+	public long getZzjgdm() {
+		return _contract.getZzjgdm();
+	}
+
+	/**
+	* Sets the zzjgdm of this contract.
+	*
+	* @param zzjgdm the zzjgdm of this contract
+	*/
+	@Override
+	public void setZzjgdm(long zzjgdm) {
+		_contract.setZzjgdm(zzjgdm);
+	}
+
+	/**
 	* Returns the htlb of this contract.
 	*
 	* @return the htlb of this contract
@@ -155,6 +652,166 @@ public class ContractWrapper implements Contract, ModelWrapper<Contract> {
 	@Override
 	public void setHtlb(java.lang.String htlb) {
 		_contract.setHtlb(htlb);
+	}
+
+	/**
+	* Returns the htbh of this contract.
+	*
+	* @return the htbh of this contract
+	*/
+	@Override
+	public java.lang.String getHtbh() {
+		return _contract.getHtbh();
+	}
+
+	/**
+	* Sets the htbh of this contract.
+	*
+	* @param htbh the htbh of this contract
+	*/
+	@Override
+	public void setHtbh(java.lang.String htbh) {
+		_contract.setHtbh(htbh);
+	}
+
+	/**
+	* Returns the zbhtbh of this contract.
+	*
+	* @return the zbhtbh of this contract
+	*/
+	@Override
+	public java.lang.String getZbhtbh() {
+		return _contract.getZbhtbh();
+	}
+
+	/**
+	* Sets the zbhtbh of this contract.
+	*
+	* @param zbhtbh the zbhtbh of this contract
+	*/
+	@Override
+	public void setZbhtbh(java.lang.String zbhtbh) {
+		_contract.setZbhtbh(zbhtbh);
+	}
+
+	/**
+	* Returns the fbhtbh of this contract.
+	*
+	* @return the fbhtbh of this contract
+	*/
+	@Override
+	public java.lang.String getFbhtbh() {
+		return _contract.getFbhtbh();
+	}
+
+	/**
+	* Sets the fbhtbh of this contract.
+	*
+	* @param fbhtbh the fbhtbh of this contract
+	*/
+	@Override
+	public void setFbhtbh(java.lang.String fbhtbh) {
+		_contract.setFbhtbh(fbhtbh);
+	}
+
+	/**
+	* Returns the htlx of this contract.
+	*
+	* @return the htlx of this contract
+	*/
+	@Override
+	public java.lang.String getHtlx() {
+		return _contract.getHtlx();
+	}
+
+	/**
+	* Sets the htlx of this contract.
+	*
+	* @param htlx the htlx of this contract
+	*/
+	@Override
+	public void setHtlx(java.lang.String htlx) {
+		_contract.setHtlx(htlx);
+	}
+
+	/**
+	* Returns the htzt of this contract.
+	*
+	* @return the htzt of this contract
+	*/
+	@Override
+	public java.lang.String getHtzt() {
+		return _contract.getHtzt();
+	}
+
+	/**
+	* Sets the htzt of this contract.
+	*
+	* @param htzt the htzt of this contract
+	*/
+	@Override
+	public void setHtzt(java.lang.String htzt) {
+		_contract.setHtzt(htzt);
+	}
+
+	/**
+	* Returns the zfbgx of this contract.
+	*
+	* @return the zfbgx of this contract
+	*/
+	@Override
+	public java.lang.String getZfbgx() {
+		return _contract.getZfbgx();
+	}
+
+	/**
+	* Sets the zfbgx of this contract.
+	*
+	* @param zfbgx the zfbgx of this contract
+	*/
+	@Override
+	public void setZfbgx(java.lang.String zfbgx) {
+		_contract.setZfbgx(zfbgx);
+	}
+
+	/**
+	* Returns the bsrq of this contract.
+	*
+	* @return the bsrq of this contract
+	*/
+	@Override
+	public java.util.Date getBsrq() {
+		return _contract.getBsrq();
+	}
+
+	/**
+	* Sets the bsrq of this contract.
+	*
+	* @param bsrq the bsrq of this contract
+	*/
+	@Override
+	public void setBsrq(java.util.Date bsrq) {
+		_contract.setBsrq(bsrq);
+	}
+
+	/**
+	* Returns the slsj of this contract.
+	*
+	* @return the slsj of this contract
+	*/
+	@Override
+	public java.util.Date getSlsj() {
+		return _contract.getSlsj();
+	}
+
+	/**
+	* Sets the slsj of this contract.
+	*
+	* @param slsj the slsj of this contract
+	*/
+	@Override
+	public void setSlsj(java.util.Date slsj) {
+		_contract.setSlsj(slsj);
 	}
 
 	/**
@@ -178,6 +835,246 @@ public class ContractWrapper implements Contract, ModelWrapper<Contract> {
 	}
 
 	/**
+	* Returns the szdq of this contract.
+	*
+	* @return the szdq of this contract
+	*/
+	@Override
+	public java.lang.String getSzdq() {
+		return _contract.getSzdq();
+	}
+
+	/**
+	* Sets the szdq of this contract.
+	*
+	* @param szdq the szdq of this contract
+	*/
+	@Override
+	public void setSzdq(java.lang.String szdq) {
+		_contract.setSzdq(szdq);
+	}
+
+	/**
+	* Returns the xmmc of this contract.
+	*
+	* @return the xmmc of this contract
+	*/
+	@Override
+	public java.lang.String getXmmc() {
+		return _contract.getXmmc();
+	}
+
+	/**
+	* Sets the xmmc of this contract.
+	*
+	* @param xmmc the xmmc of this contract
+	*/
+	@Override
+	public void setXmmc(java.lang.String xmmc) {
+		_contract.setXmmc(xmmc);
+	}
+
+	/**
+	* Returns the jsdw of this contract.
+	*
+	* @return the jsdw of this contract
+	*/
+	@Override
+	public java.lang.String getJsdw() {
+		return _contract.getJsdw();
+	}
+
+	/**
+	* Sets the jsdw of this contract.
+	*
+	* @param jsdw the jsdw of this contract
+	*/
+	@Override
+	public void setJsdw(java.lang.String jsdw) {
+		_contract.setJsdw(jsdw);
+	}
+
+	/**
+	* Returns the jsdd of this contract.
+	*
+	* @return the jsdd of this contract
+	*/
+	@Override
+	public java.lang.String getJsdd() {
+		return _contract.getJsdd();
+	}
+
+	/**
+	* Sets the jsdd of this contract.
+	*
+	* @param jsdd the jsdd of this contract
+	*/
+	@Override
+	public void setJsdd(java.lang.String jsdd) {
+		_contract.setJsdd(jsdd);
+	}
+
+	/**
+	* Returns the lxpw of this contract.
+	*
+	* @return the lxpw of this contract
+	*/
+	@Override
+	public java.lang.String getLxpw() {
+		return _contract.getLxpw();
+	}
+
+	/**
+	* Sets the lxpw of this contract.
+	*
+	* @param lxpw the lxpw of this contract
+	*/
+	@Override
+	public void setLxpw(java.lang.String lxpw) {
+		_contract.setLxpw(lxpw);
+	}
+
+	/**
+	* Returns the pzwh of this contract.
+	*
+	* @return the pzwh of this contract
+	*/
+	@Override
+	public java.lang.String getPzwh() {
+		return _contract.getPzwh();
+	}
+
+	/**
+	* Sets the pzwh of this contract.
+	*
+	* @param pzwh the pzwh of this contract
+	*/
+	@Override
+	public void setPzwh(java.lang.String pzwh) {
+		_contract.setPzwh(pzwh);
+	}
+
+	/**
+	* Returns the dwxz of this contract.
+	*
+	* @return the dwxz of this contract
+	*/
+	@Override
+	public java.lang.String getDwxz() {
+		return _contract.getDwxz();
+	}
+
+	/**
+	* Sets the dwxz of this contract.
+	*
+	* @param dwxz the dwxz of this contract
+	*/
+	@Override
+	public void setDwxz(java.lang.String dwxz) {
+		_contract.setDwxz(dwxz);
+	}
+
+	/**
+	* Returns the zjlygc of this contract.
+	*
+	* @return the zjlygc of this contract
+	*/
+	@Override
+	public java.lang.String getZjlygc() {
+		return _contract.getZjlygc();
+	}
+
+	/**
+	* Sets the zjlygc of this contract.
+	*
+	* @param zjlygc the zjlygc of this contract
+	*/
+	@Override
+	public void setZjlygc(java.lang.String zjlygc) {
+		_contract.setZjlygc(zjlygc);
+	}
+
+	/**
+	* Returns the ztz of this contract.
+	*
+	* @return the ztz of this contract
+	*/
+	@Override
+	public java.lang.String getZtz() {
+		return _contract.getZtz();
+	}
+
+	/**
+	* Sets the ztz of this contract.
+	*
+	* @param ztz the ztz of this contract
+	*/
+	@Override
+	public void setZtz(java.lang.String ztz) {
+		_contract.setZtz(ztz);
+	}
+
+	/**
+	* Returns the zjzmj of this contract.
+	*
+	* @return the zjzmj of this contract
+	*/
+	@Override
+	public java.lang.String getZjzmj() {
+		return _contract.getZjzmj();
+	}
+
+	/**
+	* Sets the zjzmj of this contract.
+	*
+	* @param zjzmj the zjzmj of this contract
+	*/
+	@Override
+	public void setZjzmj(java.lang.String zjzmj) {
+		_contract.setZjzmj(zjzmj);
+	}
+
+	/**
+	* Returns the xmfl of this contract.
+	*
+	* @return the xmfl of this contract
+	*/
+	@Override
+	public java.lang.String getXmfl() {
+		return _contract.getXmfl();
+	}
+
+	/**
+	* Sets the xmfl of this contract.
+	*
+	* @param xmfl the xmfl of this contract
+	*/
+	@Override
+	public void setXmfl(java.lang.String xmfl) {
+		_contract.setXmfl(xmfl);
+	}
+
+	/**
+	* Returns the jzgm of this contract.
+	*
+	* @return the jzgm of this contract
+	*/
+	@Override
+	public java.lang.String getJzgm() {
+		return _contract.getJzgm();
+	}
+
+	/**
+	* Sets the jzgm of this contract.
+	*
+	* @param jzgm the jzgm of this contract
+	*/
+	@Override
+	public void setJzgm(java.lang.String jzgm) {
+		_contract.setJzgm(jzgm);
+	}
+
+	/**
 	* Returns the bdh of this contract.
 	*
 	* @return the bdh of this contract
@@ -195,6 +1092,26 @@ public class ContractWrapper implements Contract, ModelWrapper<Contract> {
 	@Override
 	public void setBdh(java.lang.String bdh) {
 		_contract.setBdh(bdh);
+	}
+
+	/**
+	* Returns the fbfs of this contract.
+	*
+	* @return the fbfs of this contract
+	*/
+	@Override
+	public java.lang.String getFbfs() {
+		return _contract.getFbfs();
+	}
+
+	/**
+	* Sets the fbfs of this contract.
+	*
+	* @param fbfs the fbfs of this contract
+	*/
+	@Override
+	public void setFbfs(java.lang.String fbfs) {
+		_contract.setFbfs(fbfs);
 	}
 
 	/**
@@ -218,6 +1135,46 @@ public class ContractWrapper implements Contract, ModelWrapper<Contract> {
 	}
 
 	/**
+	* Returns the zycbht of this contract.
+	*
+	* @return the zycbht of this contract
+	*/
+	@Override
+	public java.lang.String getZycbht() {
+		return _contract.getZycbht();
+	}
+
+	/**
+	* Sets the zycbht of this contract.
+	*
+	* @param zycbht the zycbht of this contract
+	*/
+	@Override
+	public void setZycbht(java.lang.String zycbht) {
+		_contract.setZycbht(zycbht);
+	}
+
+	/**
+	* Returns the zygclb of this contract.
+	*
+	* @return the zygclb of this contract
+	*/
+	@Override
+	public java.lang.String getZygclb() {
+		return _contract.getZygclb();
+	}
+
+	/**
+	* Sets the zygclb of this contract.
+	*
+	* @param zygclb the zygclb of this contract
+	*/
+	@Override
+	public void setZygclb(java.lang.String zygclb) {
+		_contract.setZygclb(zygclb);
+	}
+
+	/**
 	* Returns the htmc of this contract.
 	*
 	* @return the htmc of this contract
@@ -235,6 +1192,886 @@ public class ContractWrapper implements Contract, ModelWrapper<Contract> {
 	@Override
 	public void setHtmc(java.lang.String htmc) {
 		_contract.setHtmc(htmc);
+	}
+
+	/**
+	* Returns the fbdw of this contract.
+	*
+	* @return the fbdw of this contract
+	*/
+	@Override
+	public java.lang.String getFbdw() {
+		return _contract.getFbdw();
+	}
+
+	/**
+	* Sets the fbdw of this contract.
+	*
+	* @param fbdw the fbdw of this contract
+	*/
+	@Override
+	public void setFbdw(java.lang.String fbdw) {
+		_contract.setFbdw(fbdw);
+	}
+
+	/**
+	* Returns the cbdw of this contract.
+	*
+	* @return the cbdw of this contract
+	*/
+	@Override
+	public java.lang.String getCbdw() {
+		return _contract.getCbdw();
+	}
+
+	/**
+	* Sets the cbdw of this contract.
+	*
+	* @param cbdw the cbdw of this contract
+	*/
+	@Override
+	public void setCbdw(java.lang.String cbdw) {
+		_contract.setCbdw(cbdw);
+	}
+
+	/**
+	* Returns the sjdw of this contract.
+	*
+	* @return the sjdw of this contract
+	*/
+	@Override
+	public java.lang.String getSjdw() {
+		return _contract.getSjdw();
+	}
+
+	/**
+	* Sets the sjdw of this contract.
+	*
+	* @param sjdw the sjdw of this contract
+	*/
+	@Override
+	public void setSjdw(java.lang.String sjdw) {
+		_contract.setSjdw(sjdw);
+	}
+
+	/**
+	* Returns the xmfzr of this contract.
+	*
+	* @return the xmfzr of this contract
+	*/
+	@Override
+	public java.lang.String getXmfzr() {
+		return _contract.getXmfzr();
+	}
+
+	/**
+	* Sets the xmfzr of this contract.
+	*
+	* @param xmfzr the xmfzr of this contract
+	*/
+	@Override
+	public void setXmfzr(java.lang.String xmfzr) {
+		_contract.setXmfzr(xmfzr);
+	}
+
+	/**
+	* Returns the xmfzrzjlx of this contract.
+	*
+	* @return the xmfzrzjlx of this contract
+	*/
+	@Override
+	public java.lang.String getXmfzrzjlx() {
+		return _contract.getXmfzrzjlx();
+	}
+
+	/**
+	* Sets the xmfzrzjlx of this contract.
+	*
+	* @param xmfzrzjlx the xmfzrzjlx of this contract
+	*/
+	@Override
+	public void setXmfzrzjlx(java.lang.String xmfzrzjlx) {
+		_contract.setXmfzrzjlx(xmfzrzjlx);
+	}
+
+	/**
+	* Returns the xmfzrzjh of this contract.
+	*
+	* @return the xmfzrzjh of this contract
+	*/
+	@Override
+	public java.lang.String getXmfzrzjh() {
+		return _contract.getXmfzrzjh();
+	}
+
+	/**
+	* Sets the xmfzrzjh of this contract.
+	*
+	* @param xmfzrzjh the xmfzrzjh of this contract
+	*/
+	@Override
+	public void setXmfzrzjh(java.lang.String xmfzrzjh) {
+		_contract.setXmfzrzjh(xmfzrzjh);
+	}
+
+	/**
+	* Returns the sjfzr of this contract.
+	*
+	* @return the sjfzr of this contract
+	*/
+	@Override
+	public java.lang.String getSjfzr() {
+		return _contract.getSjfzr();
+	}
+
+	/**
+	* Sets the sjfzr of this contract.
+	*
+	* @param sjfzr the sjfzr of this contract
+	*/
+	@Override
+	public void setSjfzr(java.lang.String sjfzr) {
+		_contract.setSjfzr(sjfzr);
+	}
+
+	/**
+	* Returns the sjfzrzjlx of this contract.
+	*
+	* @return the sjfzrzjlx of this contract
+	*/
+	@Override
+	public java.lang.String getSjfzrzjlx() {
+		return _contract.getSjfzrzjlx();
+	}
+
+	/**
+	* Sets the sjfzrzjlx of this contract.
+	*
+	* @param sjfzrzjlx the sjfzrzjlx of this contract
+	*/
+	@Override
+	public void setSjfzrzjlx(java.lang.String sjfzrzjlx) {
+		_contract.setSjfzrzjlx(sjfzrzjlx);
+	}
+
+	/**
+	* Returns the sjfzrzjh of this contract.
+	*
+	* @return the sjfzrzjh of this contract
+	*/
+	@Override
+	public java.lang.String getSjfzrzjh() {
+		return _contract.getSjfzrzjh();
+	}
+
+	/**
+	* Sets the sjfzrzjh of this contract.
+	*
+	* @param sjfzrzjh the sjfzrzjh of this contract
+	*/
+	@Override
+	public void setSjfzrzjh(java.lang.String sjfzrzjh) {
+		_contract.setSjfzrzjh(sjfzrzjh);
+	}
+
+	/**
+	* Returns the kcdwmc of this contract.
+	*
+	* @return the kcdwmc of this contract
+	*/
+	@Override
+	public java.lang.String getKcdwmc() {
+		return _contract.getKcdwmc();
+	}
+
+	/**
+	* Sets the kcdwmc of this contract.
+	*
+	* @param kcdwmc the kcdwmc of this contract
+	*/
+	@Override
+	public void setKcdwmc(java.lang.String kcdwmc) {
+		_contract.setKcdwmc(kcdwmc);
+	}
+
+	/**
+	* Returns the kcfzr of this contract.
+	*
+	* @return the kcfzr of this contract
+	*/
+	@Override
+	public java.lang.String getKcfzr() {
+		return _contract.getKcfzr();
+	}
+
+	/**
+	* Sets the kcfzr of this contract.
+	*
+	* @param kcfzr the kcfzr of this contract
+	*/
+	@Override
+	public void setKcfzr(java.lang.String kcfzr) {
+		_contract.setKcfzr(kcfzr);
+	}
+
+	/**
+	* Returns the kcfzrzjlx of this contract.
+	*
+	* @return the kcfzrzjlx of this contract
+	*/
+	@Override
+	public java.lang.String getKcfzrzjlx() {
+		return _contract.getKcfzrzjlx();
+	}
+
+	/**
+	* Sets the kcfzrzjlx of this contract.
+	*
+	* @param kcfzrzjlx the kcfzrzjlx of this contract
+	*/
+	@Override
+	public void setKcfzrzjlx(java.lang.String kcfzrzjlx) {
+		_contract.setKcfzrzjlx(kcfzrzjlx);
+	}
+
+	/**
+	* Returns the kcfzrzjh of this contract.
+	*
+	* @return the kcfzrzjh of this contract
+	*/
+	@Override
+	public java.lang.String getKcfzrzjh() {
+		return _contract.getKcfzrzjh();
+	}
+
+	/**
+	* Sets the kcfzrzjh of this contract.
+	*
+	* @param kcfzrzjh the kcfzrzjh of this contract
+	*/
+	@Override
+	public void setKcfzrzjh(java.lang.String kcfzrzjh) {
+		_contract.setKcfzrzjh(kcfzrzjh);
+	}
+
+	/**
+	* Returns the sgdwmc of this contract.
+	*
+	* @return the sgdwmc of this contract
+	*/
+	@Override
+	public java.lang.String getSgdwmc() {
+		return _contract.getSgdwmc();
+	}
+
+	/**
+	* Sets the sgdwmc of this contract.
+	*
+	* @param sgdwmc the sgdwmc of this contract
+	*/
+	@Override
+	public void setSgdwmc(java.lang.String sgdwmc) {
+		_contract.setSgdwmc(sgdwmc);
+	}
+
+	/**
+	* Returns the sgfzr of this contract.
+	*
+	* @return the sgfzr of this contract
+	*/
+	@Override
+	public java.lang.String getSgfzr() {
+		return _contract.getSgfzr();
+	}
+
+	/**
+	* Sets the sgfzr of this contract.
+	*
+	* @param sgfzr the sgfzr of this contract
+	*/
+	@Override
+	public void setSgfzr(java.lang.String sgfzr) {
+		_contract.setSgfzr(sgfzr);
+	}
+
+	/**
+	* Returns the sgfzrzjlx of this contract.
+	*
+	* @return the sgfzrzjlx of this contract
+	*/
+	@Override
+	public java.lang.String getSgfzrzjlx() {
+		return _contract.getSgfzrzjlx();
+	}
+
+	/**
+	* Sets the sgfzrzjlx of this contract.
+	*
+	* @param sgfzrzjlx the sgfzrzjlx of this contract
+	*/
+	@Override
+	public void setSgfzrzjlx(java.lang.String sgfzrzjlx) {
+		_contract.setSgfzrzjlx(sgfzrzjlx);
+	}
+
+	/**
+	* Returns the sgfzrzjh of this contract.
+	*
+	* @return the sgfzrzjh of this contract
+	*/
+	@Override
+	public java.lang.String getSgfzrzjh() {
+		return _contract.getSgfzrzjh();
+	}
+
+	/**
+	* Sets the sgfzrzjh of this contract.
+	*
+	* @param sgfzrzjh the sgfzrzjh of this contract
+	*/
+	@Override
+	public void setSgfzrzjh(java.lang.String sgfzrzjh) {
+		_contract.setSgfzrzjh(sgfzrzjh);
+	}
+
+	/**
+	* Returns the xmlb of this contract.
+	*
+	* @return the xmlb of this contract
+	*/
+	@Override
+	public java.lang.String getXmlb() {
+		return _contract.getXmlb();
+	}
+
+	/**
+	* Sets the xmlb of this contract.
+	*
+	* @param xmlb the xmlb of this contract
+	*/
+	@Override
+	public void setXmlb(java.lang.String xmlb) {
+		_contract.setXmlb(xmlb);
+	}
+
+	/**
+	* Returns the gclb of this contract.
+	*
+	* @return the gclb of this contract
+	*/
+	@Override
+	public java.lang.String getGclb() {
+		return _contract.getGclb();
+	}
+
+	/**
+	* Sets the gclb of this contract.
+	*
+	* @param gclb the gclb of this contract
+	*/
+	@Override
+	public void setGclb(java.lang.String gclb) {
+		_contract.setGclb(gclb);
+	}
+
+	/**
+	* Returns the gcgm of this contract.
+	*
+	* @return the gcgm of this contract
+	*/
+	@Override
+	public java.lang.String getGcgm() {
+		return _contract.getGcgm();
+	}
+
+	/**
+	* Sets the gcgm of this contract.
+	*
+	* @param gcgm the gcgm of this contract
+	*/
+	@Override
+	public void setGcgm(java.lang.String gcgm) {
+		_contract.setGcgm(gcgm);
+	}
+
+	/**
+	* Returns the sjxmlb of this contract.
+	*
+	* @return the sjxmlb of this contract
+	*/
+	@Override
+	public java.lang.String getSjxmlb() {
+		return _contract.getSjxmlb();
+	}
+
+	/**
+	* Sets the sjxmlb of this contract.
+	*
+	* @param sjxmlb the sjxmlb of this contract
+	*/
+	@Override
+	public void setSjxmlb(java.lang.String sjxmlb) {
+		_contract.setSjxmlb(sjxmlb);
+	}
+
+	/**
+	* Returns the sjgclb of this contract.
+	*
+	* @return the sjgclb of this contract
+	*/
+	@Override
+	public java.lang.String getSjgclb() {
+		return _contract.getSjgclb();
+	}
+
+	/**
+	* Sets the sjgclb of this contract.
+	*
+	* @param sjgclb the sjgclb of this contract
+	*/
+	@Override
+	public void setSjgclb(java.lang.String sjgclb) {
+		_contract.setSjgclb(sjgclb);
+	}
+
+	/**
+	* Returns the sjgcgm of this contract.
+	*
+	* @return the sjgcgm of this contract
+	*/
+	@Override
+	public java.lang.String getSjgcgm() {
+		return _contract.getSjgcgm();
+	}
+
+	/**
+	* Sets the sjgcgm of this contract.
+	*
+	* @param sjgcgm the sjgcgm of this contract
+	*/
+	@Override
+	public void setSjgcgm(java.lang.String sjgcgm) {
+		_contract.setSjgcgm(sjgcgm);
+	}
+
+	/**
+	* Returns the sgxmlb of this contract.
+	*
+	* @return the sgxmlb of this contract
+	*/
+	@Override
+	public java.lang.String getSgxmlb() {
+		return _contract.getSgxmlb();
+	}
+
+	/**
+	* Sets the sgxmlb of this contract.
+	*
+	* @param sgxmlb the sgxmlb of this contract
+	*/
+	@Override
+	public void setSgxmlb(java.lang.String sgxmlb) {
+		_contract.setSgxmlb(sgxmlb);
+	}
+
+	/**
+	* Returns the sggclb of this contract.
+	*
+	* @return the sggclb of this contract
+	*/
+	@Override
+	public java.lang.String getSggclb() {
+		return _contract.getSggclb();
+	}
+
+	/**
+	* Sets the sggclb of this contract.
+	*
+	* @param sggclb the sggclb of this contract
+	*/
+	@Override
+	public void setSggclb(java.lang.String sggclb) {
+		_contract.setSggclb(sggclb);
+	}
+
+	/**
+	* Returns the sggcgm of this contract.
+	*
+	* @return the sggcgm of this contract
+	*/
+	@Override
+	public java.lang.String getSggcgm() {
+		return _contract.getSggcgm();
+	}
+
+	/**
+	* Sets the sggcgm of this contract.
+	*
+	* @param sggcgm the sggcgm of this contract
+	*/
+	@Override
+	public void setSggcgm(java.lang.String sggcgm) {
+		_contract.setSggcgm(sggcgm);
+	}
+
+	/**
+	* Returns the kgrq of this contract.
+	*
+	* @return the kgrq of this contract
+	*/
+	@Override
+	public java.util.Date getKgrq() {
+		return _contract.getKgrq();
+	}
+
+	/**
+	* Sets the kgrq of this contract.
+	*
+	* @param kgrq the kgrq of this contract
+	*/
+	@Override
+	public void setKgrq(java.util.Date kgrq) {
+		_contract.setKgrq(kgrq);
+	}
+
+	/**
+	* Returns the jgrq of this contract.
+	*
+	* @return the jgrq of this contract
+	*/
+	@Override
+	public java.util.Date getJgrq() {
+		return _contract.getJgrq();
+	}
+
+	/**
+	* Sets the jgrq of this contract.
+	*
+	* @param jgrq the jgrq of this contract
+	*/
+	@Override
+	public void setJgrq(java.util.Date jgrq) {
+		_contract.setJgrq(jgrq);
+	}
+
+	/**
+	* Returns the jsfs of this contract.
+	*
+	* @return the jsfs of this contract
+	*/
+	@Override
+	public java.lang.String getJsfs() {
+		return _contract.getJsfs();
+	}
+
+	/**
+	* Sets the jsfs of this contract.
+	*
+	* @param jsfs the jsfs of this contract
+	*/
+	@Override
+	public void setJsfs(java.lang.String jsfs) {
+		_contract.setJsfs(jsfs);
+	}
+
+	/**
+	* Returns the htj of this contract.
+	*
+	* @return the htj of this contract
+	*/
+	@Override
+	public java.lang.String getHtj() {
+		return _contract.getHtj();
+	}
+
+	/**
+	* Sets the htj of this contract.
+	*
+	* @param htj the htj of this contract
+	*/
+	@Override
+	public void setHtj(java.lang.String htj) {
+		_contract.setHtj(htj);
+	}
+
+	/**
+	* Returns the sjf of this contract.
+	*
+	* @return the sjf of this contract
+	*/
+	@Override
+	public java.lang.String getSjf() {
+		return _contract.getSjf();
+	}
+
+	/**
+	* Sets the sjf of this contract.
+	*
+	* @param sjf the sjf of this contract
+	*/
+	@Override
+	public void setSjf(java.lang.String sjf) {
+		_contract.setSjf(sjf);
+	}
+
+	/**
+	* Returns the kcf of this contract.
+	*
+	* @return the kcf of this contract
+	*/
+	@Override
+	public java.lang.String getKcf() {
+		return _contract.getKcf();
+	}
+
+	/**
+	* Sets the kcf of this contract.
+	*
+	* @param kcf the kcf of this contract
+	*/
+	@Override
+	public void setKcf(java.lang.String kcf) {
+		_contract.setKcf(kcf);
+	}
+
+	/**
+	* Returns the jazj of this contract.
+	*
+	* @return the jazj of this contract
+	*/
+	@Override
+	public java.lang.String getJazj() {
+		return _contract.getJazj();
+	}
+
+	/**
+	* Sets the jazj of this contract.
+	*
+	* @param jazj the jazj of this contract
+	*/
+	@Override
+	public void setJazj(java.lang.String jazj) {
+		_contract.setJazj(jazj);
+	}
+
+	/**
+	* Returns the zlje of this contract.
+	*
+	* @return the zlje of this contract
+	*/
+	@Override
+	public java.lang.String getZlje() {
+		return _contract.getZlje();
+	}
+
+	/**
+	* Sets the zlje of this contract.
+	*
+	* @param zlje the zlje of this contract
+	*/
+	@Override
+	public void setZlje(java.lang.String zlje) {
+		_contract.setZlje(zlje);
+	}
+
+	/**
+	* Returns the zgj of this contract.
+	*
+	* @return the zgj of this contract
+	*/
+	@Override
+	public java.lang.String getZgj() {
+		return _contract.getZgj();
+	}
+
+	/**
+	* Sets the zgj of this contract.
+	*
+	* @param zgj the zgj of this contract
+	*/
+	@Override
+	public void setZgj(java.lang.String zgj) {
+		_contract.setZgj(zgj);
+	}
+
+	/**
+	* Returns the aqfhwmsgcsf of this contract.
+	*
+	* @return the aqfhwmsgcsf of this contract
+	*/
+	@Override
+	public java.lang.String getAqfhwmsgcsf() {
+		return _contract.getAqfhwmsgcsf();
+	}
+
+	/**
+	* Sets the aqfhwmsgcsf of this contract.
+	*
+	* @param aqfhwmsgcsf the aqfhwmsgcsf of this contract
+	*/
+	@Override
+	public void setAqfhwmsgcsf(java.lang.String aqfhwmsgcsf) {
+		_contract.setAqfhwmsgcsf(aqfhwmsgcsf);
+	}
+
+	/**
+	* Returns the htqdrq of this contract.
+	*
+	* @return the htqdrq of this contract
+	*/
+	@Override
+	public java.util.Date getHtqdrq() {
+		return _contract.getHtqdrq();
+	}
+
+	/**
+	* Sets the htqdrq of this contract.
+	*
+	* @param htqdrq the htqdrq of this contract
+	*/
+	@Override
+	public void setHtqdrq(java.util.Date htqdrq) {
+		_contract.setHtqdrq(htqdrq);
+	}
+
+	/**
+	* Returns the htqzrq of this contract.
+	*
+	* @return the htqzrq of this contract
+	*/
+	@Override
+	public java.lang.String getHtqzrq() {
+		return _contract.getHtqzrq();
+	}
+
+	/**
+	* Sets the htqzrq of this contract.
+	*
+	* @param htqzrq the htqzrq of this contract
+	*/
+	@Override
+	public void setHtqzrq(java.lang.String htqzrq) {
+		_contract.setHtqzrq(htqzrq);
+	}
+
+	/**
+	* Returns the cbnr of this contract.
+	*
+	* @return the cbnr of this contract
+	*/
+	@Override
+	public java.lang.String getCbnr() {
+		return _contract.getCbnr();
+	}
+
+	/**
+	* Sets the cbnr of this contract.
+	*
+	* @param cbnr the cbnr of this contract
+	*/
+	@Override
+	public void setCbnr(java.lang.String cbnr) {
+		_contract.setCbnr(cbnr);
+	}
+
+	/**
+	* Returns the cyhtsfwb of this contract.
+	*
+	* @return the cyhtsfwb of this contract
+	*/
+	@Override
+	public java.lang.String getCyhtsfwb() {
+		return _contract.getCyhtsfwb();
+	}
+
+	/**
+	* Sets the cyhtsfwb of this contract.
+	*
+	* @param cyhtsfwb the cyhtsfwb of this contract
+	*/
+	@Override
+	public void setCyhtsfwb(java.lang.String cyhtsfwb) {
+		_contract.setCyhtsfwb(cyhtsfwb);
+	}
+
+	/**
+	* Returns the fzjqtsm of this contract.
+	*
+	* @return the fzjqtsm of this contract
+	*/
+	@Override
+	public java.lang.String getFzjqtsm() {
+		return _contract.getFzjqtsm();
+	}
+
+	/**
+	* Sets the fzjqtsm of this contract.
+	*
+	* @param fzjqtsm the fzjqtsm of this contract
+	*/
+	@Override
+	public void setFzjqtsm(java.lang.String fzjqtsm) {
+		_contract.setFzjqtsm(fzjqtsm);
+	}
+
+	/**
+	* Returns the sfzx of this contract.
+	*
+	* @return the sfzx of this contract
+	*/
+	@Override
+	public java.lang.String getSfzx() {
+		return _contract.getSfzx();
+	}
+
+	/**
+	* Sets the sfzx of this contract.
+	*
+	* @param sfzx the sfzx of this contract
+	*/
+	@Override
+	public void setSfzx(java.lang.String sfzx) {
+		_contract.setSfzx(sfzx);
+	}
+
+	/**
+	* Returns the zxsj of this contract.
+	*
+	* @return the zxsj of this contract
+	*/
+	@Override
+	public java.util.Date getZxsj() {
+		return _contract.getZxsj();
+	}
+
+	/**
+	* Sets the zxsj of this contract.
+	*
+	* @param zxsj the zxsj of this contract
+	*/
+	@Override
+	public void setZxsj(java.util.Date zxsj) {
+		_contract.setZxsj(zxsj);
+	}
+
+	/**
+	* Returns the zxsm of this contract.
+	*
+	* @return the zxsm of this contract
+	*/
+	@Override
+	public java.util.Date getZxsm() {
+		return _contract.getZxsm();
+	}
+
+	/**
+	* Sets the zxsm of this contract.
+	*
+	* @param zxsm the zxsm of this contract
+	*/
+	@Override
+	public void setZxsm(java.util.Date zxsm) {
+		_contract.setZxsm(zxsm);
 	}
 
 	@Override

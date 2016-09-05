@@ -253,4 +253,33 @@ public interface ContractLocalService extends BaseLocalService,
 	public java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.justonetech.cp.contract.model.Contract> getContracts(
+		java.lang.String zzjgdm, java.lang.String bjbh, java.lang.String bdh,
+		java.lang.String xmmc, java.lang.String htlb,
+		java.lang.String contractId, int start, int end);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getContractsCount(java.lang.String zzjgdm,
+		java.lang.String bjbh, java.lang.String bdh, java.lang.String xmmc,
+		java.lang.String htlb, java.lang.String contractId);
+
+	public com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQuery(
+		java.lang.String zzjgdm, java.lang.String bjbh, java.lang.String bdh,
+		java.lang.String xmmc, java.lang.String htlb,
+		java.lang.String contractId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.justonetech.cp.contract.model.Contract> getYbssgzbContracts(
+		java.lang.String zzjgdm, java.lang.String bjbh, java.lang.String bdh,
+		java.lang.String htmc, int start, int end);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getYbssgzbContractsCount(java.lang.String zzjgdm,
+		java.lang.String bjbh, java.lang.String bdh, java.lang.String htmc);
+
+	public com.liferay.portal.kernel.dao.orm.DynamicQuery createYbssgzbDQ(
+		java.lang.String zzjgdm, java.lang.String bjbh, java.lang.String bdh,
+		java.lang.String htmc);
 }

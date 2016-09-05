@@ -38,144 +38,6 @@ public interface ProjectPersistence extends BasePersistence<Project> {
 	 */
 
 	/**
-	* Returns all the projects where zzjgdm = &#63;.
-	*
-	* @param zzjgdm the zzjgdm
-	* @return the matching projects
-	* @throws SystemException if a system exception occurred
-	*/
-	public java.util.List<com.justonetech.cp.project.model.Project> findByZzjgdm(
-		java.lang.String zzjgdm)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns a range of all the projects where zzjgdm = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.justonetech.cp.project.model.impl.ProjectModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param zzjgdm the zzjgdm
-	* @param start the lower bound of the range of projects
-	* @param end the upper bound of the range of projects (not inclusive)
-	* @return the range of matching projects
-	* @throws SystemException if a system exception occurred
-	*/
-	public java.util.List<com.justonetech.cp.project.model.Project> findByZzjgdm(
-		java.lang.String zzjgdm, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns an ordered range of all the projects where zzjgdm = &#63;.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.justonetech.cp.project.model.impl.ProjectModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
-	* </p>
-	*
-	* @param zzjgdm the zzjgdm
-	* @param start the lower bound of the range of projects
-	* @param end the upper bound of the range of projects (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	* @return the ordered range of matching projects
-	* @throws SystemException if a system exception occurred
-	*/
-	public java.util.List<com.justonetech.cp.project.model.Project> findByZzjgdm(
-		java.lang.String zzjgdm, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns the first project in the ordered set where zzjgdm = &#63;.
-	*
-	* @param zzjgdm the zzjgdm
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching project
-	* @throws com.justonetech.cp.project.NoSuchProjectException if a matching project could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.justonetech.cp.project.model.Project findByZzjgdm_First(
-		java.lang.String zzjgdm,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.justonetech.cp.project.NoSuchProjectException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns the first project in the ordered set where zzjgdm = &#63;.
-	*
-	* @param zzjgdm the zzjgdm
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the first matching project, or <code>null</code> if a matching project could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.justonetech.cp.project.model.Project fetchByZzjgdm_First(
-		java.lang.String zzjgdm,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns the last project in the ordered set where zzjgdm = &#63;.
-	*
-	* @param zzjgdm the zzjgdm
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching project
-	* @throws com.justonetech.cp.project.NoSuchProjectException if a matching project could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.justonetech.cp.project.model.Project findByZzjgdm_Last(
-		java.lang.String zzjgdm,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.justonetech.cp.project.NoSuchProjectException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns the last project in the ordered set where zzjgdm = &#63;.
-	*
-	* @param zzjgdm the zzjgdm
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the last matching project, or <code>null</code> if a matching project could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.justonetech.cp.project.model.Project fetchByZzjgdm_Last(
-		java.lang.String zzjgdm,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns the projects before and after the current project in the ordered set where zzjgdm = &#63;.
-	*
-	* @param projectId the primary key of the current project
-	* @param zzjgdm the zzjgdm
-	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	* @return the previous, current, and next project
-	* @throws com.justonetech.cp.project.NoSuchProjectException if a project with the primary key could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.justonetech.cp.project.model.Project[] findByZzjgdm_PrevAndNext(
-		java.lang.String projectId, java.lang.String zzjgdm,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.justonetech.cp.project.NoSuchProjectException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Removes all the projects where zzjgdm = &#63; from the database.
-	*
-	* @param zzjgdm the zzjgdm
-	* @throws SystemException if a system exception occurred
-	*/
-	public void removeByZzjgdm(java.lang.String zzjgdm)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Returns the number of projects where zzjgdm = &#63;.
-	*
-	* @param zzjgdm the zzjgdm
-	* @return the number of matching projects
-	* @throws SystemException if a system exception occurred
-	*/
-	public int countByZzjgdm(java.lang.String zzjgdm)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
 	* Caches the project in the entity cache if it is enabled.
 	*
 	* @param project the project
@@ -193,22 +55,22 @@ public interface ProjectPersistence extends BasePersistence<Project> {
 	/**
 	* Creates a new project with the primary key. Does not add the project to the database.
 	*
-	* @param projectId the primary key for the new project
+	* @param bjbh the primary key for the new project
 	* @return the new project
 	*/
 	public com.justonetech.cp.project.model.Project create(
-		java.lang.String projectId);
+		java.lang.String bjbh);
 
 	/**
 	* Removes the project with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param projectId the primary key of the project
+	* @param bjbh the primary key of the project
 	* @return the project that was removed
 	* @throws com.justonetech.cp.project.NoSuchProjectException if a project with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public com.justonetech.cp.project.model.Project remove(
-		java.lang.String projectId)
+		java.lang.String bjbh)
 		throws com.justonetech.cp.project.NoSuchProjectException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -219,25 +81,25 @@ public interface ProjectPersistence extends BasePersistence<Project> {
 	/**
 	* Returns the project with the primary key or throws a {@link com.justonetech.cp.project.NoSuchProjectException} if it could not be found.
 	*
-	* @param projectId the primary key of the project
+	* @param bjbh the primary key of the project
 	* @return the project
 	* @throws com.justonetech.cp.project.NoSuchProjectException if a project with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public com.justonetech.cp.project.model.Project findByPrimaryKey(
-		java.lang.String projectId)
+		java.lang.String bjbh)
 		throws com.justonetech.cp.project.NoSuchProjectException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
 	* Returns the project with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param projectId the primary key of the project
+	* @param bjbh the primary key of the project
 	* @return the project, or <code>null</code> if a project with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public com.justonetech.cp.project.model.Project fetchByPrimaryKey(
-		java.lang.String projectId)
+		java.lang.String bjbh)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**

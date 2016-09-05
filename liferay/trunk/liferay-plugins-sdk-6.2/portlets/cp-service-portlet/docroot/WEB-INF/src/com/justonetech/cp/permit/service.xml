@@ -102,9 +102,8 @@
 		<!-- Audit fields -->
 
 		<!-- Business fields -->
-		<column name="permitId" type="String" /><!-- 施工许可Id -->
+		<column name="permitId" type="long" /><!-- 施工许可Id -->
 		<column name="bjbh" type="String" /><!-- 报建编号 -->
-		<column name="gclx" type="String" /><!-- 工程类型 -->
 		<column name="gcbh" type="String" /><!-- 工程编号 -->
 		<column name="gcmc" type="String" /><!-- 工程名称 -->
 		<column name="jsnr" type="String" /><!-- 建设内容 -->

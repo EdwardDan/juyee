@@ -60,34 +60,19 @@ public interface ProjectModel extends BaseModel<Project> {
 	public void setPrimaryKey(String primaryKey);
 
 	/**
-	 * Returns the project ID of this project.
+	 * Returns the bjbh of this project.
 	 *
-	 * @return the project ID of this project
+	 * @return the bjbh of this project
 	 */
 	@AutoEscape
-	public String getProjectId();
+	public String getBjbh();
 
 	/**
-	 * Sets the project ID of this project.
+	 * Sets the bjbh of this project.
 	 *
-	 * @param projectId the project ID of this project
+	 * @param bjbh the bjbh of this project
 	 */
-	public void setProjectId(String projectId);
-
-	/**
-	 * Returns the zzjgdm of this project.
-	 *
-	 * @return the zzjgdm of this project
-	 */
-	@AutoEscape
-	public String getZzjgdm();
-
-	/**
-	 * Sets the zzjgdm of this project.
-	 *
-	 * @param zzjgdm the zzjgdm of this project
-	 */
-	public void setZzjgdm(String zzjgdm);
+	public void setBjbh(String bjbh);
 
 	/**
 	 * Returns the bjrq of this project.
@@ -104,19 +89,124 @@ public interface ProjectModel extends BaseModel<Project> {
 	public void setBjrq(Date bjrq);
 
 	/**
-	 * Returns the bj webid of this project.
+	 * Returns the jsdw of this project.
 	 *
-	 * @return the bj webid of this project
+	 * @return the jsdw of this project
 	 */
 	@AutoEscape
-	public String getBjWebid();
+	public String getJsdw();
 
 	/**
-	 * Sets the bj webid of this project.
+	 * Sets the jsdw of this project.
 	 *
-	 * @param bjWebid the bj webid of this project
+	 * @param jsdw the jsdw of this project
 	 */
-	public void setBjWebid(String bjWebid);
+	public void setJsdw(String jsdw);
+
+	/**
+	 * Returns the jsdwxz of this project.
+	 *
+	 * @return the jsdwxz of this project
+	 */
+	@AutoEscape
+	public String getJsdwxz();
+
+	/**
+	 * Sets the jsdwxz of this project.
+	 *
+	 * @param jsdwxz the jsdwxz of this project
+	 */
+	public void setJsdwxz(String jsdwxz);
+
+	/**
+	 * Returns the jsdwdz of this project.
+	 *
+	 * @return the jsdwdz of this project
+	 */
+	@AutoEscape
+	public String getJsdwdz();
+
+	/**
+	 * Sets the jsdwdz of this project.
+	 *
+	 * @param jsdwdz the jsdwdz of this project
+	 */
+	public void setJsdwdz(String jsdwdz);
+
+	/**
+	 * Returns the jsdwdh of this project.
+	 *
+	 * @return the jsdwdh of this project
+	 */
+	@AutoEscape
+	public String getJsdwdh();
+
+	/**
+	 * Sets the jsdwdh of this project.
+	 *
+	 * @param jsdwdh the jsdwdh of this project
+	 */
+	public void setJsdwdh(String jsdwdh);
+
+	/**
+	 * Returns the jsdwfr of this project.
+	 *
+	 * @return the jsdwfr of this project
+	 */
+	@AutoEscape
+	public String getJsdwfr();
+
+	/**
+	 * Sets the jsdwfr of this project.
+	 *
+	 * @param jsdwfr the jsdwfr of this project
+	 */
+	public void setJsdwfr(String jsdwfr);
+
+	/**
+	 * Returns the jsdwlxr of this project.
+	 *
+	 * @return the jsdwlxr of this project
+	 */
+	@AutoEscape
+	public String getJsdwlxr();
+
+	/**
+	 * Sets the jsdwlxr of this project.
+	 *
+	 * @param jsdwlxr the jsdwlxr of this project
+	 */
+	public void setJsdwlxr(String jsdwlxr);
+
+	/**
+	 * Returns the jsdwyb of this project.
+	 *
+	 * @return the jsdwyb of this project
+	 */
+	@AutoEscape
+	public String getJsdwyb();
+
+	/**
+	 * Sets the jsdwyb of this project.
+	 *
+	 * @param jsdwyb the jsdwyb of this project
+	 */
+	public void setJsdwyb(String jsdwyb);
+
+	/**
+	 * Returns the jsdwzczj of this project.
+	 *
+	 * @return the jsdwzczj of this project
+	 */
+	@AutoEscape
+	public String getJsdwzczj();
+
+	/**
+	 * Sets the jsdwzczj of this project.
+	 *
+	 * @param jsdwzczj the jsdwzczj of this project
+	 */
+	public void setJsdwzczj(String jsdwzczj);
 
 	/**
 	 * Returns the xmmc of this project.
@@ -134,6 +224,576 @@ public interface ProjectModel extends BaseModel<Project> {
 	public void setXmmc(String xmmc);
 
 	/**
+	 * Returns the jsdd of this project.
+	 *
+	 * @return the jsdd of this project
+	 */
+	@AutoEscape
+	public String getJsdd();
+
+	/**
+	 * Sets the jsdd of this project.
+	 *
+	 * @param jsdd the jsdd of this project
+	 */
+	public void setJsdd(String jsdd);
+
+	/**
+	 * Returns the lxwj of this project.
+	 *
+	 * @return the lxwj of this project
+	 */
+	@AutoEscape
+	public String getLxwj();
+
+	/**
+	 * Sets the lxwj of this project.
+	 *
+	 * @param lxwj the lxwj of this project
+	 */
+	public void setLxwj(String lxwj);
+
+	/**
+	 * Returns the lxwh of this project.
+	 *
+	 * @return the lxwh of this project
+	 */
+	@AutoEscape
+	public String getLxwh();
+
+	/**
+	 * Sets the lxwh of this project.
+	 *
+	 * @param lxwh the lxwh of this project
+	 */
+	public void setLxwh(String lxwh);
+
+	/**
+	 * Returns the lxjb of this project.
+	 *
+	 * @return the lxjb of this project
+	 */
+	@AutoEscape
+	public String getLxjb();
+
+	/**
+	 * Sets the lxjb of this project.
+	 *
+	 * @param lxjb the lxjb of this project
+	 */
+	public void setLxjb(String lxjb);
+
+	/**
+	 * Returns the pzjg of this project.
+	 *
+	 * @return the pzjg of this project
+	 */
+	@AutoEscape
+	public String getPzjg();
+
+	/**
+	 * Sets the pzjg of this project.
+	 *
+	 * @param pzjg the pzjg of this project
+	 */
+	public void setPzjg(String pzjg);
+
+	/**
+	 * Returns the pzrq of this project.
+	 *
+	 * @return the pzrq of this project
+	 */
+	@AutoEscape
+	public String getPzrq();
+
+	/**
+	 * Sets the pzrq of this project.
+	 *
+	 * @param pzrq the pzrq of this project
+	 */
+	public void setPzrq(String pzrq);
+
+	/**
+	 * Returns the ztz of this project.
+	 *
+	 * @return the ztz of this project
+	 */
+	@AutoEscape
+	public String getZtz();
+
+	/**
+	 * Sets the ztz of this project.
+	 *
+	 * @param ztz the ztz of this project
+	 */
+	public void setZtz(String ztz);
+
+	/**
+	 * Returns the sbtz of this project.
+	 *
+	 * @return the sbtz of this project
+	 */
+	@AutoEscape
+	public String getSbtz();
+
+	/**
+	 * Sets the sbtz of this project.
+	 *
+	 * @param sbtz the sbtz of this project
+	 */
+	public void setSbtz(String sbtz);
+
+	/**
+	 * Returns the jsxz of this project.
+	 *
+	 * @return the jsxz of this project
+	 */
+	@AutoEscape
+	public String getJsxz();
+
+	/**
+	 * Sets the jsxz of this project.
+	 *
+	 * @param jsxz the jsxz of this project
+	 */
+	public void setJsxz(String jsxz);
+
+	/**
+	 * Returns the jsgm of this project.
+	 *
+	 * @return the jsgm of this project
+	 */
+	@AutoEscape
+	public String getJsgm();
+
+	/**
+	 * Sets the jsgm of this project.
+	 *
+	 * @param jsgm the jsgm of this project
+	 */
+	public void setJsgm(String jsgm);
+
+	/**
+	 * Returns the zmj of this project.
+	 *
+	 * @return the zmj of this project
+	 */
+	@AutoEscape
+	public String getZmj();
+
+	/**
+	 * Sets the zmj of this project.
+	 *
+	 * @param zmj the zmj of this project
+	 */
+	public void setZmj(String zmj);
+
+	/**
+	 * Returns the kgrq of this project.
+	 *
+	 * @return the kgrq of this project
+	 */
+	@AutoEscape
+	public String getKgrq();
+
+	/**
+	 * Sets the kgrq of this project.
+	 *
+	 * @param kgrq the kgrq of this project
+	 */
+	public void setKgrq(String kgrq);
+
+	/**
+	 * Returns the xmxz of this project.
+	 *
+	 * @return the xmxz of this project
+	 */
+	@AutoEscape
+	public String getXmxz();
+
+	/**
+	 * Sets the xmxz of this project.
+	 *
+	 * @param xmxz the xmxz of this project
+	 */
+	public void setXmxz(String xmxz);
+
+	/**
+	 * Returns the cjqk of this project.
+	 *
+	 * @return the cjqk of this project
+	 */
+	@AutoEscape
+	public String getCjqk();
+
+	/**
+	 * Sets the cjqk of this project.
+	 *
+	 * @param cjqk the cjqk of this project
+	 */
+	public void setCjqk(String cjqk);
+
+	/**
+	 * Returns the smqk of this project.
+	 *
+	 * @return the smqk of this project
+	 */
+	@AutoEscape
+	public String getSmqk();
+
+	/**
+	 * Sets the smqk of this project.
+	 *
+	 * @param smqk the smqk of this project
+	 */
+	public void setSmqk(String smqk);
+
+	/**
+	 * Returns the bjbz of this project.
+	 *
+	 * @return the bjbz of this project
+	 */
+	@AutoEscape
+	public String getBjbz();
+
+	/**
+	 * Sets the bjbz of this project.
+	 *
+	 * @param bjbz the bjbz of this project
+	 */
+	public void setBjbz(String bjbz);
+
+	/**
+	 * Returns the fbzgsc of this project.
+	 *
+	 * @return the fbzgsc of this project
+	 */
+	@AutoEscape
+	public String getFbzgsc();
+
+	/**
+	 * Sets the fbzgsc of this project.
+	 *
+	 * @param fbzgsc the fbzgsc of this project
+	 */
+	public void setFbzgsc(String fbzgsc);
+
+	/**
+	 * Returns the cardid of this project.
+	 *
+	 * @return the cardid of this project
+	 */
+	@AutoEscape
+	public String getCardid();
+
+	/**
+	 * Sets the cardid of this project.
+	 *
+	 * @param cardid the cardid of this project
+	 */
+	public void setCardid(String cardid);
+
+	/**
+	 * Returns the zjlygc_1 of this project.
+	 *
+	 * @return the zjlygc_1 of this project
+	 */
+	@AutoEscape
+	public String getZjlygc_1();
+
+	/**
+	 * Sets the zjlygc_1 of this project.
+	 *
+	 * @param zjlygc_1 the zjlygc_1 of this project
+	 */
+	public void setZjlygc_1(String zjlygc_1);
+
+	/**
+	 * Returns the zjlygc_2 of this project.
+	 *
+	 * @return the zjlygc_2 of this project
+	 */
+	@AutoEscape
+	public String getZjlygc_2();
+
+	/**
+	 * Sets the zjlygc_2 of this project.
+	 *
+	 * @param zjlygc_2 the zjlygc_2 of this project
+	 */
+	public void setZjlygc_2(String zjlygc_2);
+
+	/**
+	 * Returns the zjlygc_3 of this project.
+	 *
+	 * @return the zjlygc_3 of this project
+	 */
+	@AutoEscape
+	public String getZjlygc_3();
+
+	/**
+	 * Sets the zjlygc_3 of this project.
+	 *
+	 * @param zjlygc_3 the zjlygc_3 of this project
+	 */
+	public void setZjlygc_3(String zjlygc_3);
+
+	/**
+	 * Returns the zjlygc_4 of this project.
+	 *
+	 * @return the zjlygc_4 of this project
+	 */
+	@AutoEscape
+	public String getZjlygc_4();
+
+	/**
+	 * Sets the zjlygc_4 of this project.
+	 *
+	 * @param zjlygc_4 the zjlygc_4 of this project
+	 */
+	public void setZjlygc_4(String zjlygc_4);
+
+	/**
+	 * Returns the zjlygc_5 of this project.
+	 *
+	 * @return the zjlygc_5 of this project
+	 */
+	@AutoEscape
+	public String getZjlygc_5();
+
+	/**
+	 * Sets the zjlygc_5 of this project.
+	 *
+	 * @param zjlygc_5 the zjlygc_5 of this project
+	 */
+	public void setZjlygc_5(String zjlygc_5);
+
+	/**
+	 * Returns the zjlygc_6 of this project.
+	 *
+	 * @return the zjlygc_6 of this project
+	 */
+	@AutoEscape
+	public String getZjlygc_6();
+
+	/**
+	 * Sets the zjlygc_6 of this project.
+	 *
+	 * @param zjlygc_6 the zjlygc_6 of this project
+	 */
+	public void setZjlygc_6(String zjlygc_6);
+
+	/**
+	 * Returns the zjlygc_7 of this project.
+	 *
+	 * @return the zjlygc_7 of this project
+	 */
+	@AutoEscape
+	public String getZjlygc_7();
+
+	/**
+	 * Sets the zjlygc_7 of this project.
+	 *
+	 * @param zjlygc_7 the zjlygc_7 of this project
+	 */
+	public void setZjlygc_7(String zjlygc_7);
+
+	/**
+	 * Returns the zjlygc_8 of this project.
+	 *
+	 * @return the zjlygc_8 of this project
+	 */
+	@AutoEscape
+	public String getZjlygc_8();
+
+	/**
+	 * Sets the zjlygc_8 of this project.
+	 *
+	 * @param zjlygc_8 the zjlygc_8 of this project
+	 */
+	public void setZjlygc_8(String zjlygc_8);
+
+	/**
+	 * Returns the zjlygc_9 of this project.
+	 *
+	 * @return the zjlygc_9 of this project
+	 */
+	@AutoEscape
+	public String getZjlygc_9();
+
+	/**
+	 * Sets the zjlygc_9 of this project.
+	 *
+	 * @param zjlygc_9 the zjlygc_9 of this project
+	 */
+	public void setZjlygc_9(String zjlygc_9);
+
+	/**
+	 * Returns the jgxs of this project.
+	 *
+	 * @return the jgxs of this project
+	 */
+	@AutoEscape
+	public String getJgxs();
+
+	/**
+	 * Sets the jgxs of this project.
+	 *
+	 * @param jgxs the jgxs of this project
+	 */
+	public void setJgxs(String jgxs);
+
+	/**
+	 * Returns the xmfl of this project.
+	 *
+	 * @return the xmfl of this project
+	 */
+	@AutoEscape
+	public String getXmfl();
+
+	/**
+	 * Sets the xmfl of this project.
+	 *
+	 * @param xmfl the xmfl of this project
+	 */
+	public void setXmfl(String xmfl);
+
+	/**
+	 * Returns the jzmq of this project.
+	 *
+	 * @return the jzmq of this project
+	 */
+	@AutoEscape
+	public String getJzmq();
+
+	/**
+	 * Sets the jzmq of this project.
+	 *
+	 * @param jzmq the jzmq of this project
+	 */
+	public void setJzmq(String jzmq);
+
+	/**
+	 * Returns the ywdt of this project.
+	 *
+	 * @return the ywdt of this project
+	 */
+	@AutoEscape
+	public String getYwdt();
+
+	/**
+	 * Sets the ywdt of this project.
+	 *
+	 * @param ywdt the ywdt of this project
+	 */
+	public void setYwdt(String ywdt);
+
+	/**
+	 * Returns the dxsck of this project.
+	 *
+	 * @return the dxsck of this project
+	 */
+	@AutoEscape
+	public String getDxsck();
+
+	/**
+	 * Sets the dxsck of this project.
+	 *
+	 * @param dxsck the dxsck of this project
+	 */
+	public void setDxsck(String dxsck);
+
+	/**
+	 * Returns the bhjz of this project.
+	 *
+	 * @return the bhjz of this project
+	 */
+	@AutoEscape
+	public String getBhjz();
+
+	/**
+	 * Sets the bhjz of this project.
+	 *
+	 * @param bhjz the bhjz of this project
+	 */
+	public void setBhjz(String bhjz);
+
+	/**
+	 * Returns the fjms of this project.
+	 *
+	 * @return the fjms of this project
+	 */
+	@AutoEscape
+	public String getFjms();
+
+	/**
+	 * Sets the fjms of this project.
+	 *
+	 * @param fjms the fjms of this project
+	 */
+	public void setFjms(String fjms);
+
+	/**
+	 * Returns the sfsbxm of this project.
+	 *
+	 * @return the sfsbxm of this project
+	 */
+	@AutoEscape
+	public String getSfsbxm();
+
+	/**
+	 * Sets the sfsbxm of this project.
+	 *
+	 * @param sfsbxm the sfsbxm of this project
+	 */
+	public void setSfsbxm(String sfsbxm);
+
+	/**
+	 * Returns the hzyj of this project.
+	 *
+	 * @return the hzyj of this project
+	 */
+	@AutoEscape
+	public String getHzyj();
+
+	/**
+	 * Sets the hzyj of this project.
+	 *
+	 * @param hzyj the hzyj of this project
+	 */
+	public void setHzyj(String hzyj);
+
+	/**
+	 * Returns the bj_sx of this project.
+	 *
+	 * @return the bj_sx of this project
+	 */
+	@AutoEscape
+	public String getBj_sx();
+
+	/**
+	 * Sets the bj_sx of this project.
+	 *
+	 * @param bj_sx the bj_sx of this project
+	 */
+	public void setBj_sx(String bj_sx);
+
+	/**
+	 * Returns the bj_webid of this project.
+	 *
+	 * @return the bj_webid of this project
+	 */
+	@AutoEscape
+	public String getBj_webid();
+
+	/**
+	 * Sets the bj_webid of this project.
+	 *
+	 * @param bj_webid the bj_webid of this project
+	 */
+	public void setBj_webid(String bj_webid);
+
+	/**
 	 * Returns the bjwcbj of this project.
 	 *
 	 * @return the bjwcbj of this project
@@ -149,19 +809,1519 @@ public interface ProjectModel extends BaseModel<Project> {
 	public void setBjwcbj(String bjwcbj);
 
 	/**
-	 * Returns the jsdwmc of this project.
+	 * Returns the bmdm of this project.
 	 *
-	 * @return the jsdwmc of this project
+	 * @return the bmdm of this project
 	 */
 	@AutoEscape
-	public String getJsdwmc();
+	public String getBmdm();
 
 	/**
-	 * Sets the jsdwmc of this project.
+	 * Sets the bmdm of this project.
 	 *
-	 * @param jsdwmc the jsdwmc of this project
+	 * @param bmdm the bmdm of this project
 	 */
-	public void setJsdwmc(String jsdwmc);
+	public void setBmdm(String bmdm);
+
+	/**
+	 * Returns the jbr of this project.
+	 *
+	 * @return the jbr of this project
+	 */
+	@AutoEscape
+	public String getJbr();
+
+	/**
+	 * Sets the jbr of this project.
+	 *
+	 * @param jbr the jbr of this project
+	 */
+	public void setJbr(String jbr);
+
+	/**
+	 * Returns the shr of this project.
+	 *
+	 * @return the shr of this project
+	 */
+	@AutoEscape
+	public String getShr();
+
+	/**
+	 * Sets the shr of this project.
+	 *
+	 * @param shr the shr of this project
+	 */
+	public void setShr(String shr);
+
+	/**
+	 * Returns the shbmdm of this project.
+	 *
+	 * @return the shbmdm of this project
+	 */
+	@AutoEscape
+	public String getShbmdm();
+
+	/**
+	 * Sets the shbmdm of this project.
+	 *
+	 * @param shbmdm the shbmdm of this project
+	 */
+	public void setShbmdm(String shbmdm);
+
+	/**
+	 * Returns the wcbjsj of this project.
+	 *
+	 * @return the wcbjsj of this project
+	 */
+	@AutoEscape
+	public String getWcbjsj();
+
+	/**
+	 * Sets the wcbjsj of this project.
+	 *
+	 * @param wcbjsj the wcbjsj of this project
+	 */
+	public void setWcbjsj(String wcbjsj);
+
+	/**
+	 * Returns the old_bjbh of this project.
+	 *
+	 * @return the old_bjbh of this project
+	 */
+	@AutoEscape
+	public String getOld_bjbh();
+
+	/**
+	 * Sets the old_bjbh of this project.
+	 *
+	 * @param old_bjbh the old_bjbh of this project
+	 */
+	public void setOld_bjbh(String old_bjbh);
+
+	/**
+	 * Returns the sffb of this project.
+	 *
+	 * @return the sffb of this project
+	 */
+	@AutoEscape
+	public String getSffb();
+
+	/**
+	 * Sets the sffb of this project.
+	 *
+	 * @param sffb the sffb of this project
+	 */
+	public void setSffb(String sffb);
+
+	/**
+	 * Returns the timeflag of this project.
+	 *
+	 * @return the timeflag of this project
+	 */
+	@AutoEscape
+	public String getTimeflag();
+
+	/**
+	 * Sets the timeflag of this project.
+	 *
+	 * @param timeflag the timeflag of this project
+	 */
+	public void setTimeflag(String timeflag);
+
+	/**
+	 * Returns the jbrdm of this project.
+	 *
+	 * @return the jbrdm of this project
+	 */
+	@AutoEscape
+	public String getJbrdm();
+
+	/**
+	 * Sets the jbrdm of this project.
+	 *
+	 * @param jbrdm the jbrdm of this project
+	 */
+	public void setJbrdm(String jbrdm);
+
+	/**
+	 * Returns the shrdm of this project.
+	 *
+	 * @return the shrdm of this project
+	 */
+	@AutoEscape
+	public String getShrdm();
+
+	/**
+	 * Sets the shrdm of this project.
+	 *
+	 * @param shrdm the shrdm of this project
+	 */
+	public void setShrdm(String shrdm);
+
+	/**
+	 * Returns the jsbh of this project.
+	 *
+	 * @return the jsbh of this project
+	 */
+	@AutoEscape
+	public String getJsbh();
+
+	/**
+	 * Sets the jsbh of this project.
+	 *
+	 * @param jsbh the jsbh of this project
+	 */
+	public void setJsbh(String jsbh);
+
+	/**
+	 * Returns the need sbjl of this project.
+	 *
+	 * @return the need sbjl of this project
+	 */
+	@AutoEscape
+	public String getNeedSbjl();
+
+	/**
+	 * Sets the need sbjl of this project.
+	 *
+	 * @param needSbjl the need sbjl of this project
+	 */
+	public void setNeedSbjl(String needSbjl);
+
+	/**
+	 * Returns the wc sbjl of this project.
+	 *
+	 * @return the wc sbjl of this project
+	 */
+	@AutoEscape
+	public String getWcSbjl();
+
+	/**
+	 * Sets the wc sbjl of this project.
+	 *
+	 * @param wcSbjl the wc sbjl of this project
+	 */
+	public void setWcSbjl(String wcSbjl);
+
+	/**
+	 * Returns the sfgyzbkg of this project.
+	 *
+	 * @return the sfgyzbkg of this project
+	 */
+	@AutoEscape
+	public String getSfgyzbkg();
+
+	/**
+	 * Sets the sfgyzbkg of this project.
+	 *
+	 * @param sfgyzbkg the sfgyzbkg of this project
+	 */
+	public void setSfgyzbkg(String sfgyzbkg);
+
+	/**
+	 * Returns the jyzxfbxx of this project.
+	 *
+	 * @return the jyzxfbxx of this project
+	 */
+	@AutoEscape
+	public String getJyzxfbxx();
+
+	/**
+	 * Sets the jyzxfbxx of this project.
+	 *
+	 * @param jyzxfbxx the jyzxfbxx of this project
+	 */
+	public void setJyzxfbxx(String jyzxfbxx);
+
+	/**
+	 * Returns the sg gkzbfb of this project.
+	 *
+	 * @return the sg gkzbfb of this project
+	 */
+	@AutoEscape
+	public String getSgGkzbfb();
+
+	/**
+	 * Sets the sg gkzbfb of this project.
+	 *
+	 * @param sgGkzbfb the sg gkzbfb of this project
+	 */
+	public void setSgGkzbfb(String sgGkzbfb);
+
+	/**
+	 * Returns the sgjl gkzbfb of this project.
+	 *
+	 * @return the sgjl gkzbfb of this project
+	 */
+	@AutoEscape
+	public String getSgjlGkzbfb();
+
+	/**
+	 * Sets the sgjl gkzbfb of this project.
+	 *
+	 * @param sgjlGkzbfb the sgjl gkzbfb of this project
+	 */
+	public void setSgjlGkzbfb(String sgjlGkzbfb);
+
+	/**
+	 * Returns the fxglxm of this project.
+	 *
+	 * @return the fxglxm of this project
+	 */
+	@AutoEscape
+	public String getFxglxm();
+
+	/**
+	 * Sets the fxglxm of this project.
+	 *
+	 * @param fxglxm the fxglxm of this project
+	 */
+	public void setFxglxm(String fxglxm);
+
+	/**
+	 * Returns the fxglxm jbr of this project.
+	 *
+	 * @return the fxglxm jbr of this project
+	 */
+	@AutoEscape
+	public String getFxglxmJbr();
+
+	/**
+	 * Sets the fxglxm jbr of this project.
+	 *
+	 * @param fxglxmJbr the fxglxm jbr of this project
+	 */
+	public void setFxglxmJbr(String fxglxmJbr);
+
+	/**
+	 * Returns the fxglxm jbrdm of this project.
+	 *
+	 * @return the fxglxm jbrdm of this project
+	 */
+	@AutoEscape
+	public String getFxglxmJbrdm();
+
+	/**
+	 * Sets the fxglxm jbrdm of this project.
+	 *
+	 * @param fxglxmJbrdm the fxglxm jbrdm of this project
+	 */
+	public void setFxglxmJbrdm(String fxglxmJbrdm);
+
+	/**
+	 * Returns the fxglxm jbrq of this project.
+	 *
+	 * @return the fxglxm jbrq of this project
+	 */
+	@AutoEscape
+	public String getFxglxmJbrq();
+
+	/**
+	 * Sets the fxglxm jbrq of this project.
+	 *
+	 * @param fxglxmJbrq the fxglxm jbrq of this project
+	 */
+	public void setFxglxmJbrq(String fxglxmJbrq);
+
+	/**
+	 * Returns the jsdwjgdm of this project.
+	 *
+	 * @return the jsdwjgdm of this project
+	 */
+	@AutoEscape
+	public String getJsdwjgdm();
+
+	/**
+	 * Sets the jsdwjgdm of this project.
+	 *
+	 * @param jsdwjgdm the jsdwjgdm of this project
+	 */
+	public void setJsdwjgdm(String jsdwjgdm);
+
+	/**
+	 * Returns the szqy of this project.
+	 *
+	 * @return the szqy of this project
+	 */
+	@AutoEscape
+	public String getSzqy();
+
+	/**
+	 * Sets the szqy of this project.
+	 *
+	 * @param szqy the szqy of this project
+	 */
+	public void setSzqy(String szqy);
+
+	/**
+	 * Returns the ywxjfwjz of this project.
+	 *
+	 * @return the ywxjfwjz of this project
+	 */
+	@AutoEscape
+	public String getYwxjfwjz();
+
+	/**
+	 * Sets the ywxjfwjz of this project.
+	 *
+	 * @param ywxjfwjz the ywxjfwjz of this project
+	 */
+	public void setYwxjfwjz(String ywxjfwjz);
+
+	/**
+	 * Returns the ywgbfwjg of this project.
+	 *
+	 * @return the ywgbfwjg of this project
+	 */
+	@AutoEscape
+	public String getYwgbfwjg();
+
+	/**
+	 * Sets the ywgbfwjg of this project.
+	 *
+	 * @param ywgbfwjg the ywgbfwjg of this project
+	 */
+	public void setYwgbfwjg(String ywgbfwjg);
+
+	/**
+	 * Returns the gczh of this project.
+	 *
+	 * @return the gczh of this project
+	 */
+	@AutoEscape
+	public String getGczh();
+
+	/**
+	 * Sets the gczh of this project.
+	 *
+	 * @param gczh the gczh of this project
+	 */
+	public void setGczh(String gczh);
+
+	/**
+	 * Returns the zdcyyn of this project.
+	 *
+	 * @return the zdcyyn of this project
+	 */
+	@AutoEscape
+	public String getZdcyyn();
+
+	/**
+	 * Sets the zdcyyn of this project.
+	 *
+	 * @param zdcyyn the zdcyyn of this project
+	 */
+	public void setZdcyyn(String zdcyyn);
+
+	/**
+	 * Returns the lxfl of this project.
+	 *
+	 * @return the lxfl of this project
+	 */
+	@AutoEscape
+	public String getLxfl();
+
+	/**
+	 * Sets the lxfl of this project.
+	 *
+	 * @param lxfl the lxfl of this project
+	 */
+	public void setLxfl(String lxfl);
+
+	/**
+	 * Returns the ms1 of this project.
+	 *
+	 * @return the ms1 of this project
+	 */
+	@AutoEscape
+	public String getMs1();
+
+	/**
+	 * Sets the ms1 of this project.
+	 *
+	 * @param ms1 the ms1 of this project
+	 */
+	public void setMs1(String ms1);
+
+	/**
+	 * Returns the ms2 of this project.
+	 *
+	 * @return the ms2 of this project
+	 */
+	@AutoEscape
+	public String getMs2();
+
+	/**
+	 * Sets the ms2 of this project.
+	 *
+	 * @param ms2 the ms2 of this project
+	 */
+	public void setMs2(String ms2);
+
+	/**
+	 * Returns the ms3 of this project.
+	 *
+	 * @return the ms3 of this project
+	 */
+	@AutoEscape
+	public String getMs3();
+
+	/**
+	 * Sets the ms3 of this project.
+	 *
+	 * @param ms3 the ms3 of this project
+	 */
+	public void setMs3(String ms3);
+
+	/**
+	 * Returns the zdxmyn of this project.
+	 *
+	 * @return the zdxmyn of this project
+	 */
+	@AutoEscape
+	public String getZdxmyn();
+
+	/**
+	 * Sets the zdxmyn of this project.
+	 *
+	 * @param zdxmyn the zdxmyn of this project
+	 */
+	public void setZdxmyn(String zdxmyn);
+
+	/**
+	 * Returns the dxjzsq of this project.
+	 *
+	 * @return the dxjzsq of this project
+	 */
+	@AutoEscape
+	public String getDxjzsq();
+
+	/**
+	 * Sets the dxjzsq of this project.
+	 *
+	 * @param dxjzsq the dxjzsq of this project
+	 */
+	public void setDxjzsq(String dxjzsq);
+
+	/**
+	 * Returns the ywjzxzz of this project.
+	 *
+	 * @return the ywjzxzz of this project
+	 */
+	@AutoEscape
+	public String getYwjzxzz();
+
+	/**
+	 * Sets the ywjzxzz of this project.
+	 *
+	 * @param ywjzxzz the ywjzxzz of this project
+	 */
+	public void setYwjzxzz(String ywjzxzz);
+
+	/**
+	 * Returns the fgwjhm of this project.
+	 *
+	 * @return the fgwjhm of this project
+	 */
+	@AutoEscape
+	public String getFgwjhm();
+
+	/**
+	 * Sets the fgwjhm of this project.
+	 *
+	 * @param fgwjhm the fgwjhm of this project
+	 */
+	public void setFgwjhm(String fgwjhm);
+
+	/**
+	 * Returns the zzbl of this project.
+	 *
+	 * @return the zzbl of this project
+	 */
+	@AutoEscape
+	public String getZzbl();
+
+	/**
+	 * Sets the zzbl of this project.
+	 *
+	 * @param zzbl the zzbl of this project
+	 */
+	public void setZzbl(String zzbl);
+
+	/**
+	 * Returns the change time of this project.
+	 *
+	 * @return the change time of this project
+	 */
+	@AutoEscape
+	public String getChangeTime();
+
+	/**
+	 * Sets the change time of this project.
+	 *
+	 * @param ChangeTime the change time of this project
+	 */
+	public void setChangeTime(String ChangeTime);
+
+	/**
+	 * Returns the p d_ s w of this project.
+	 *
+	 * @return the p d_ s w of this project
+	 */
+	@AutoEscape
+	public String getPD_SW();
+
+	/**
+	 * Sets the p d_ s w of this project.
+	 *
+	 * @param PD_SW the p d_ s w of this project
+	 */
+	public void setPD_SW(String PD_SW);
+
+	/**
+	 * Returns the bmpfrq of this project.
+	 *
+	 * @return the bmpfrq of this project
+	 */
+	@AutoEscape
+	public String getBmpfrq();
+
+	/**
+	 * Sets the bmpfrq of this project.
+	 *
+	 * @param bmpfrq the bmpfrq of this project
+	 */
+	public void setBmpfrq(String bmpfrq);
+
+	/**
+	 * Returns the bmpfwh of this project.
+	 *
+	 * @return the bmpfwh of this project
+	 */
+	@AutoEscape
+	public String getBmpfwh();
+
+	/**
+	 * Sets the bmpfwh of this project.
+	 *
+	 * @param bmpfwh the bmpfwh of this project
+	 */
+	public void setBmpfwh(String bmpfwh);
+
+	/**
+	 * Returns the bmpfwj of this project.
+	 *
+	 * @return the bmpfwj of this project
+	 */
+	@AutoEscape
+	public String getBmpfwj();
+
+	/**
+	 * Sets the bmpfwj of this project.
+	 *
+	 * @param bmpfwj the bmpfwj of this project
+	 */
+	public void setBmpfwj(String bmpfwj);
+
+	/**
+	 * Returns the certificate key of this project.
+	 *
+	 * @return the certificate key of this project
+	 */
+	@AutoEscape
+	public String getCertificateKey();
+
+	/**
+	 * Sets the certificate key of this project.
+	 *
+	 * @param CertificateKey the certificate key of this project
+	 */
+	public void setCertificateKey(String CertificateKey);
+
+	/**
+	 * Returns the dsjzmj of this project.
+	 *
+	 * @return the dsjzmj of this project
+	 */
+	@AutoEscape
+	public String getDsjzmj();
+
+	/**
+	 * Sets the dsjzmj of this project.
+	 *
+	 * @param dsjzmj the dsjzmj of this project
+	 */
+	public void setDsjzmj(String dsjzmj);
+
+	/**
+	 * Returns the dxjzmj of this project.
+	 *
+	 * @return the dxjzmj of this project
+	 */
+	@AutoEscape
+	public String getDxjzmj();
+
+	/**
+	 * Sets the dxjzmj of this project.
+	 *
+	 * @param dxjzmj the dxjzmj of this project
+	 */
+	public void setDxjzmj(String dxjzmj);
+
+	/**
+	 * Returns the gdzctzbh of this project.
+	 *
+	 * @return the gdzctzbh of this project
+	 */
+	@AutoEscape
+	public String getGdzctzbh();
+
+	/**
+	 * Sets the gdzctzbh of this project.
+	 *
+	 * @param gdzctzbh the gdzctzbh of this project
+	 */
+	public void setGdzctzbh(String gdzctzbh);
+
+	/**
+	 * Returns the jsxz_2011 of this project.
+	 *
+	 * @return the jsxz_2011 of this project
+	 */
+	@AutoEscape
+	public String getJsxz_2011();
+
+	/**
+	 * Sets the jsxz_2011 of this project.
+	 *
+	 * @param jsxz_2011 the jsxz_2011 of this project
+	 */
+	public void setJsxz_2011(String jsxz_2011);
+
+	/**
+	 * Returns the lhmj of this project.
+	 *
+	 * @return the lhmj of this project
+	 */
+	@AutoEscape
+	public String getLhmj();
+
+	/**
+	 * Sets the lhmj of this project.
+	 *
+	 * @param lhmj the lhmj of this project
+	 */
+	public void setLhmj(String lhmj);
+
+	/**
+	 * Returns the lxjb_2011 of this project.
+	 *
+	 * @return the lxjb_2011 of this project
+	 */
+	@AutoEscape
+	public String getLxjb_2011();
+
+	/**
+	 * Sets the lxjb_2011 of this project.
+	 *
+	 * @param lxjb_2011 the lxjb_2011 of this project
+	 */
+	public void setLxjb_2011(String lxjb_2011);
+
+	/**
+	 * Returns the mfmj of this project.
+	 *
+	 * @return the mfmj of this project
+	 */
+	@AutoEscape
+	public String getMfmj();
+
+	/**
+	 * Sets the mfmj of this project.
+	 *
+	 * @param mfmj the mfmj of this project
+	 */
+	public void setMfmj(String mfmj);
+
+	/**
+	 * Returns the other_qx of this project.
+	 *
+	 * @return the other_qx of this project
+	 */
+	@AutoEscape
+	public String getOther_qx();
+
+	/**
+	 * Sets the other_qx of this project.
+	 *
+	 * @param other_qx the other_qx of this project
+	 */
+	public void setOther_qx(String other_qx);
+
+	/**
+	 * Returns the project slyj of this project.
+	 *
+	 * @return the project slyj of this project
+	 */
+	@AutoEscape
+	public String getProjectSlyj();
+
+	/**
+	 * Sets the project slyj of this project.
+	 *
+	 * @param ProjectSlyj the project slyj of this project
+	 */
+	public void setProjectSlyj(String ProjectSlyj);
+
+	/**
+	 * Returns the qxbz of this project.
+	 *
+	 * @return the qxbz of this project
+	 */
+	@AutoEscape
+	public String getQxbz();
+
+	/**
+	 * Sets the qxbz of this project.
+	 *
+	 * @param qxbz the qxbz of this project
+	 */
+	public void setQxbz(String qxbz);
+
+	/**
+	 * Returns the sfcysjkfq of this project.
+	 *
+	 * @return the sfcysjkfq of this project
+	 */
+	@AutoEscape
+	public String getSfcysjkfq();
+
+	/**
+	 * Sets the sfcysjkfq of this project.
+	 *
+	 * @param sfcysjkfq the sfcysjkfq of this project
+	 */
+	public void setSfcysjkfq(String sfcysjkfq);
+
+	/**
+	 * Returns the sfmfss of this project.
+	 *
+	 * @return the sfmfss of this project
+	 */
+	@AutoEscape
+	public String getSfmfss();
+
+	/**
+	 * Sets the sfmfss of this project.
+	 *
+	 * @param sfmfss the sfmfss of this project
+	 */
+	public void setSfmfss(String sfmfss);
+
+	/**
+	 * Returns the szqx of this project.
+	 *
+	 * @return the szqx of this project
+	 */
+	@AutoEscape
+	public String getSzqx();
+
+	/**
+	 * Sets the szqx of this project.
+	 *
+	 * @param szqx the szqx of this project
+	 */
+	public void setSzqx(String szqx);
+
+	/**
+	 * Returns the tsgs of this project.
+	 *
+	 * @return the tsgs of this project
+	 */
+	@AutoEscape
+	public String getTsgs();
+
+	/**
+	 * Sets the tsgs of this project.
+	 *
+	 * @param tsgs the tsgs of this project
+	 */
+	public void setTsgs(String tsgs);
+
+	/**
+	 * Returns the xmfl_2011 of this project.
+	 *
+	 * @return the xmfl_2011 of this project
+	 */
+	@AutoEscape
+	public String getXmfl_2011();
+
+	/**
+	 * Sets the xmfl_2011 of this project.
+	 *
+	 * @param xmfl_2011 the xmfl_2011 of this project
+	 */
+	public void setXmfl_2011(String xmfl_2011);
+
+	/**
+	 * Returns the xsjpw of this project.
+	 *
+	 * @return the xsjpw of this project
+	 */
+	@AutoEscape
+	public String getXsjpw();
+
+	/**
+	 * Sets the xsjpw of this project.
+	 *
+	 * @param xsjpw the xsjpw of this project
+	 */
+	public void setXsjpw(String xsjpw);
+
+	/**
+	 * Returns the xsjpzdw of this project.
+	 *
+	 * @return the xsjpzdw of this project
+	 */
+	@AutoEscape
+	public String getXsjpzdw();
+
+	/**
+	 * Sets the xsjpzdw of this project.
+	 *
+	 * @param xsjpzdw the xsjpzdw of this project
+	 */
+	public void setXsjpzdw(String xsjpzdw);
+
+	/**
+	 * Returns the zjlygc_10 of this project.
+	 *
+	 * @return the zjlygc_10 of this project
+	 */
+	@AutoEscape
+	public String getZjlygc_10();
+
+	/**
+	 * Sets the zjlygc_10 of this project.
+	 *
+	 * @param zjlygc_10 the zjlygc_10 of this project
+	 */
+	public void setZjlygc_10(String zjlygc_10);
+
+	/**
+	 * Returns the zjlygc_11 of this project.
+	 *
+	 * @return the zjlygc_11 of this project
+	 */
+	@AutoEscape
+	public String getZjlygc_11();
+
+	/**
+	 * Sets the zjlygc_11 of this project.
+	 *
+	 * @param zjlygc_11 the zjlygc_11 of this project
+	 */
+	public void setZjlygc_11(String zjlygc_11);
+
+	/**
+	 * Returns the zjlygc_xs_1 of this project.
+	 *
+	 * @return the zjlygc_xs_1 of this project
+	 */
+	@AutoEscape
+	public String getZjlygc_xs_1();
+
+	/**
+	 * Sets the zjlygc_xs_1 of this project.
+	 *
+	 * @param zjlygc_xs_1 the zjlygc_xs_1 of this project
+	 */
+	public void setZjlygc_xs_1(String zjlygc_xs_1);
+
+	/**
+	 * Returns the zjlygc_xs_2 of this project.
+	 *
+	 * @return the zjlygc_xs_2 of this project
+	 */
+	@AutoEscape
+	public String getZjlygc_xs_2();
+
+	/**
+	 * Sets the zjlygc_xs_2 of this project.
+	 *
+	 * @param zjlygc_xs_2 the zjlygc_xs_2 of this project
+	 */
+	public void setZjlygc_xs_2(String zjlygc_xs_2);
+
+	/**
+	 * Returns the zjlygc_xs_3 of this project.
+	 *
+	 * @return the zjlygc_xs_3 of this project
+	 */
+	@AutoEscape
+	public String getZjlygc_xs_3();
+
+	/**
+	 * Sets the zjlygc_xs_3 of this project.
+	 *
+	 * @param zjlygc_xs_3 the zjlygc_xs_3 of this project
+	 */
+	public void setZjlygc_xs_3(String zjlygc_xs_3);
+
+	/**
+	 * Returns the zjlygc_xs_4 of this project.
+	 *
+	 * @return the zjlygc_xs_4 of this project
+	 */
+	@AutoEscape
+	public String getZjlygc_xs_4();
+
+	/**
+	 * Sets the zjlygc_xs_4 of this project.
+	 *
+	 * @param zjlygc_xs_4 the zjlygc_xs_4 of this project
+	 */
+	public void setZjlygc_xs_4(String zjlygc_xs_4);
+
+	/**
+	 * Returns the zjlygc_1_2 of this project.
+	 *
+	 * @return the zjlygc_1_2 of this project
+	 */
+	@AutoEscape
+	public String getZjlygc_1_2();
+
+	/**
+	 * Sets the zjlygc_1_2 of this project.
+	 *
+	 * @param zjlygc_1_2 the zjlygc_1_2 of this project
+	 */
+	public void setZjlygc_1_2(String zjlygc_1_2);
+
+	/**
+	 * Returns the zjlygc_1_2_4 of this project.
+	 *
+	 * @return the zjlygc_1_2_4 of this project
+	 */
+	@AutoEscape
+	public String getZjlygc_1_2_4();
+
+	/**
+	 * Sets the zjlygc_1_2_4 of this project.
+	 *
+	 * @param zjlygc_1_2_4 the zjlygc_1_2_4 of this project
+	 */
+	public void setZjlygc_1_2_4(String zjlygc_1_2_4);
+
+	/**
+	 * Returns the ywptlh of this project.
+	 *
+	 * @return the ywptlh of this project
+	 */
+	@AutoEscape
+	public String getYwptlh();
+
+	/**
+	 * Sets the ywptlh of this project.
+	 *
+	 * @param ywptlh the ywptlh of this project
+	 */
+	public void setYwptlh(String ywptlh);
+
+	/**
+	 * Returns the gyyqbh of this project.
+	 *
+	 * @return the gyyqbh of this project
+	 */
+	@AutoEscape
+	public String getGyyqbh();
+
+	/**
+	 * Sets the gyyqbh of this project.
+	 *
+	 * @param gyyqbh the gyyqbh of this project
+	 */
+	public void setGyyqbh(String gyyqbh);
+
+	/**
+	 * Returns the sfcyxm of this project.
+	 *
+	 * @return the sfcyxm of this project
+	 */
+	@AutoEscape
+	public String getSfcyxm();
+
+	/**
+	 * Sets the sfcyxm of this project.
+	 *
+	 * @param sfcyxm the sfcyxm of this project
+	 */
+	public void setSfcyxm(String sfcyxm);
+
+	/**
+	 * Returns the zbxmfzrxm of this project.
+	 *
+	 * @return the zbxmfzrxm of this project
+	 */
+	@AutoEscape
+	public String getZbxmfzrxm();
+
+	/**
+	 * Sets the zbxmfzrxm of this project.
+	 *
+	 * @param zbxmfzrxm the zbxmfzrxm of this project
+	 */
+	public void setZbxmfzrxm(String zbxmfzrxm);
+
+	/**
+	 * Returns the zbxmfzrzjh of this project.
+	 *
+	 * @return the zbxmfzrzjh of this project
+	 */
+	@AutoEscape
+	public String getZbxmfzrzjh();
+
+	/**
+	 * Sets the zbxmfzrzjh of this project.
+	 *
+	 * @param zbxmfzrzjh the zbxmfzrzjh of this project
+	 */
+	public void setZbxmfzrzjh(String zbxmfzrzjh);
+
+	/**
+	 * Returns the zbxmfzrzjlx of this project.
+	 *
+	 * @return the zbxmfzrzjlx of this project
+	 */
+	@AutoEscape
+	public String getZbxmfzrzjlx();
+
+	/**
+	 * Sets the zbxmfzrzjlx of this project.
+	 *
+	 * @param zbxmfzrzjlx the zbxmfzrzjlx of this project
+	 */
+	public void setZbxmfzrzjlx(String zbxmfzrzjlx);
+
+	/**
+	 * Returns the zbxmfzrqrsj of this project.
+	 *
+	 * @return the zbxmfzrqrsj of this project
+	 */
+	@AutoEscape
+	public String getZbxmfzrqrsj();
+
+	/**
+	 * Sets the zbxmfzrqrsj of this project.
+	 *
+	 * @param zbxmfzrqrsj the zbxmfzrqrsj of this project
+	 */
+	public void setZbxmfzrqrsj(String zbxmfzrqrsj);
+
+	/**
+	 * Returns the sflsjzbs of this project.
+	 *
+	 * @return the sflsjzbs of this project
+	 */
+	@AutoEscape
+	public String getSflsjzbs();
+
+	/**
+	 * Sets the sflsjzbs of this project.
+	 *
+	 * @param sflsjzbs the sflsjzbs of this project
+	 */
+	public void setSflsjzbs(String sflsjzbs);
+
+	/**
+	 * Returns the sjbs of this project.
+	 *
+	 * @return the sjbs of this project
+	 */
+	@AutoEscape
+	public String getSjbs();
+
+	/**
+	 * Sets the sjbs of this project.
+	 *
+	 * @param sjbs the sjbs of this project
+	 */
+	public void setSjbs(String sjbs);
+
+	/**
+	 * Returns the yxbs of this project.
+	 *
+	 * @return the yxbs of this project
+	 */
+	@AutoEscape
+	public String getYxbs();
+
+	/**
+	 * Sets the yxbs of this project.
+	 *
+	 * @param yxbs the yxbs of this project
+	 */
+	public void setYxbs(String yxbs);
+
+	/**
+	 * Returns the sfyjngz of this project.
+	 *
+	 * @return the sfyjngz of this project
+	 */
+	@AutoEscape
+	public String getSfyjngz();
+
+	/**
+	 * Sets the sfyjngz of this project.
+	 *
+	 * @param sfyjngz the sfyjngz of this project
+	 */
+	public void setSfyjngz(String sfyjngz);
+
+	/**
+	 * Returns the sfsszpjz of this project.
+	 *
+	 * @return the sfsszpjz of this project
+	 */
+	@AutoEscape
+	public String getSfsszpjz();
+
+	/**
+	 * Sets the sfsszpjz of this project.
+	 *
+	 * @param sfsszpjz the sfsszpjz of this project
+	 */
+	public void setSfsszpjz(String sfsszpjz);
+
+	/**
+	 * Returns the zczxjgdmz of this project.
+	 *
+	 * @return the zczxjgdmz of this project
+	 */
+	@AutoEscape
+	public String getZczxjgdmz();
+
+	/**
+	 * Sets the zczxjgdmz of this project.
+	 *
+	 * @param zczxjgdmz the zczxjgdmz of this project
+	 */
+	public void setZczxjgdmz(String zczxjgdmz);
+
+	/**
+	 * Returns the ischeckxmbm of this project.
+	 *
+	 * @return the ischeckxmbm of this project
+	 */
+	@AutoEscape
+	public String getIscheckxmbm();
+
+	/**
+	 * Sets the ischeckxmbm of this project.
+	 *
+	 * @param ischeckxmbm the ischeckxmbm of this project
+	 */
+	public void setIscheckxmbm(String ischeckxmbm);
+
+	/**
+	 * Returns the zddtmj of this project.
+	 *
+	 * @return the zddtmj of this project
+	 */
+	@AutoEscape
+	public String getZddtmj();
+
+	/**
+	 * Sets the zddtmj of this project.
+	 *
+	 * @param zddtmj the zddtmj of this project
+	 */
+	public void setZddtmj(String zddtmj);
+
+	/**
+	 * Returns the sjjd yn of this project.
+	 *
+	 * @return the sjjd yn of this project
+	 */
+	@AutoEscape
+	public String getSjjdYn();
+
+	/**
+	 * Sets the sjjd yn of this project.
+	 *
+	 * @param sjjdYn the sjjd yn of this project
+	 */
+	public void setSjjdYn(String sjjdYn);
+
+	/**
+	 * Returns the sgjd yn of this project.
+	 *
+	 * @return the sgjd yn of this project
+	 */
+	@AutoEscape
+	public String getSgjdYn();
+
+	/**
+	 * Sets the sgjd yn of this project.
+	 *
+	 * @param sgjdYn the sgjd yn of this project
+	 */
+	public void setSgjdYn(String sgjdYn);
+
+	/**
+	 * Returns the yxjd yn of this project.
+	 *
+	 * @return the yxjd yn of this project
+	 */
+	@AutoEscape
+	public String getYxjdYn();
+
+	/**
+	 * Sets the yxjd yn of this project.
+	 *
+	 * @param yxjdYn the yxjd yn of this project
+	 */
+	public void setYxjdYn(String yxjdYn);
+
+	/**
+	 * Returns the tdhtqdbh of this project.
+	 *
+	 * @return the tdhtqdbh of this project
+	 */
+	@AutoEscape
+	public String getTdhtqdbh();
+
+	/**
+	 * Sets the tdhtqdbh of this project.
+	 *
+	 * @param tdhtqdbh the tdhtqdbh of this project
+	 */
+	public void setTdhtqdbh(String tdhtqdbh);
+
+	/**
+	 * Returns the tdhtqdrq of this project.
+	 *
+	 * @return the tdhtqdrq of this project
+	 */
+	@AutoEscape
+	public String getTdhtqdrq();
+
+	/**
+	 * Sets the tdhtqdrq of this project.
+	 *
+	 * @param tdhtqdrq the tdhtqdrq of this project
+	 */
+	public void setTdhtqdrq(String tdhtqdrq);
+
+	/**
+	 * Returns the dkbh of this project.
+	 *
+	 * @return the dkbh of this project
+	 */
+	@AutoEscape
+	public String getDkbh();
+
+	/**
+	 * Sets the dkbh of this project.
+	 *
+	 * @param dkbh the dkbh of this project
+	 */
+	public void setDkbh(String dkbh);
+
+	/**
+	 * Returns the zpsjzlsbl of this project.
+	 *
+	 * @return the zpsjzlsbl of this project
+	 */
+	@AutoEscape
+	public String getZpsjzlsbl();
+
+	/**
+	 * Sets the zpsjzlsbl of this project.
+	 *
+	 * @param zpsjzlsbl the zpsjzlsbl of this project
+	 */
+	public void setZpsjzlsbl(String zpsjzlsbl);
+
+	/**
+	 * Returns the zpsjzmj of this project.
+	 *
+	 * @return the zpsjzmj of this project
+	 */
+	@AutoEscape
+	public String getZpsjzmj();
+
+	/**
+	 * Sets the zpsjzmj of this project.
+	 *
+	 * @param zpsjzmj the zpsjzmj of this project
+	 */
+	public void setZpsjzmj(String zpsjzmj);
+
+	/**
+	 * Returns the dwyzzpl of this project.
+	 *
+	 * @return the dwyzzpl of this project
+	 */
+	@AutoEscape
+	public String getDwyzzpl();
+
+	/**
+	 * Sets the dwyzzpl of this project.
+	 *
+	 * @param dwyzzpl the dwyzzpl of this project
+	 */
+	public void setDwyzzpl(String dwyzzpl);
+
+	/**
+	 * Returns the zdh of this project.
+	 *
+	 * @return the zdh of this project
+	 */
+	@AutoEscape
+	public String getZdh();
+
+	/**
+	 * Sets the zdh of this project.
+	 *
+	 * @param zdh the zdh of this project
+	 */
+	public void setZdh(String zdh);
+
+	/**
+	 * Returns the sfgdcg of this project.
+	 *
+	 * @return the sfgdcg of this project
+	 */
+	@AutoEscape
+	public String getSfgdcg();
+
+	/**
+	 * Sets the sfgdcg of this project.
+	 *
+	 * @param sfgdcg the sfgdcg of this project
+	 */
+	public void setSfgdcg(String sfgdcg);
+
+	/**
+	 * Returns the ptlhmj of this project.
+	 *
+	 * @return the ptlhmj of this project
+	 */
+	@AutoEscape
+	public String getPtlhmj();
+
+	/**
+	 * Sets the ptlhmj of this project.
+	 *
+	 * @param ptlhmj the ptlhmj of this project
+	 */
+	public void setPtlhmj(String ptlhmj);
+
+	/**
+	 * Returns the bimjszxfy of this project.
+	 *
+	 * @return the bimjszxfy of this project
+	 */
+	@AutoEscape
+	public String getBimjszxfy();
+
+	/**
+	 * Sets the bimjszxfy of this project.
+	 *
+	 * @param bimjszxfy the bimjszxfy of this project
+	 */
+	public void setBimjszxfy(String bimjszxfy);
+
+	/**
+	 * Returns the bz of this project.
+	 *
+	 * @return the bz of this project
+	 */
+	@AutoEscape
+	public String getBz();
+
+	/**
+	 * Sets the bz of this project.
+	 *
+	 * @param bz the bz of this project
+	 */
+	public void setBz(String bz);
+
+	/**
+	 * Returns the sfzcxm of this project.
+	 *
+	 * @return the sfzcxm of this project
+	 */
+	@AutoEscape
+	public String getSfzcxm();
+
+	/**
+	 * Sets the sfzcxm of this project.
+	 *
+	 * @param sfzcxm the sfzcxm of this project
+	 */
+	public void setSfzcxm(String sfzcxm);
+
+	/**
+	 * Returns the zcxmbm of this project.
+	 *
+	 * @return the zcxmbm of this project
+	 */
+	@AutoEscape
+	public String getZcxmbm();
+
+	/**
+	 * Sets the zcxmbm of this project.
+	 *
+	 * @param zcxmbm the zcxmbm of this project
+	 */
+	public void setZcxmbm(String zcxmbm);
+
+	/**
+	 * Returns the sfzmqxm of this project.
+	 *
+	 * @return the sfzmqxm of this project
+	 */
+	@AutoEscape
+	public String getSfzmqxm();
+
+	/**
+	 * Sets the sfzmqxm of this project.
+	 *
+	 * @param sfzmqxm the sfzmqxm of this project
+	 */
+	public void setSfzmqxm(String sfzmqxm);
+
+	/**
+	 * Returns the print p d f time of this project.
+	 *
+	 * @return the print p d f time of this project
+	 */
+	@AutoEscape
+	public String getPrintPDFTime();
+
+	/**
+	 * Sets the print p d f time of this project.
+	 *
+	 * @param printPDFTime the print p d f time of this project
+	 */
+	public void setPrintPDFTime(String printPDFTime);
+
+	/**
+	 * Returns the is bg print of this project.
+	 *
+	 * @return the is bg print of this project
+	 */
+	@AutoEscape
+	public String getIsBgPrint();
+
+	/**
+	 * Sets the is bg print of this project.
+	 *
+	 * @param isBgPrint the is bg print of this project
+	 */
+	public void setIsBgPrint(String isBgPrint);
 
 	@Override
 	public boolean isNew();

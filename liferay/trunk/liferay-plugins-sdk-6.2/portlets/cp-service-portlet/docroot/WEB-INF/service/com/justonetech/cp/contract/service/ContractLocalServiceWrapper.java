@@ -286,6 +286,54 @@ public class ContractLocalServiceWrapper implements ContractLocalService,
 			arguments);
 	}
 
+	@Override
+	public java.util.List<com.justonetech.cp.contract.model.Contract> getContracts(
+		java.lang.String zzjgdm, java.lang.String bjbh, java.lang.String bdh,
+		java.lang.String xmmc, java.lang.String htlb,
+		java.lang.String contractId, int start, int end) {
+		return _contractLocalService.getContracts(zzjgdm, bjbh, bdh, xmmc,
+			htlb, contractId, start, end);
+	}
+
+	@Override
+	public int getContractsCount(java.lang.String zzjgdm,
+		java.lang.String bjbh, java.lang.String bdh, java.lang.String xmmc,
+		java.lang.String htlb, java.lang.String contractId) {
+		return _contractLocalService.getContractsCount(zzjgdm, bjbh, bdh, xmmc,
+			htlb, contractId);
+	}
+
+	@Override
+	public com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQuery(
+		java.lang.String zzjgdm, java.lang.String bjbh, java.lang.String bdh,
+		java.lang.String xmmc, java.lang.String htlb,
+		java.lang.String contractId) {
+		return _contractLocalService.createDynamicQuery(zzjgdm, bjbh, bdh,
+			xmmc, htlb, contractId);
+	}
+
+	@Override
+	public java.util.List<com.justonetech.cp.contract.model.Contract> getYbssgzbContracts(
+		java.lang.String zzjgdm, java.lang.String bjbh, java.lang.String bdh,
+		java.lang.String htmc, int start, int end) {
+		return _contractLocalService.getYbssgzbContracts(zzjgdm, bjbh, bdh,
+			htmc, start, end);
+	}
+
+	@Override
+	public int getYbssgzbContractsCount(java.lang.String zzjgdm,
+		java.lang.String bjbh, java.lang.String bdh, java.lang.String htmc) {
+		return _contractLocalService.getYbssgzbContractsCount(zzjgdm, bjbh,
+			bdh, htmc);
+	}
+
+	@Override
+	public com.liferay.portal.kernel.dao.orm.DynamicQuery createYbssgzbDQ(
+		java.lang.String zzjgdm, java.lang.String bjbh, java.lang.String bdh,
+		java.lang.String htmc) {
+		return _contractLocalService.createYbssgzbDQ(zzjgdm, bjbh, bdh, htmc);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

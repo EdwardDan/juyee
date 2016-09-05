@@ -3,7 +3,7 @@
 <model-hints>
 	<model name="com.justonetech.cp.project.model.Project">
 		<field name="bjbh" type="String" />
-		<field name="bjrq" type="String" />
+		<field name="bjrq" type="Date" />
 		<field name="jsdw" type="String">
 			<hint name="max-length">100</hint>
 		</field>
@@ -217,14 +217,15 @@
 		<field name="fbfs" type="String" />
 		<field name="cbfs" type="String" />
 		<field name="zycbht" type="String" />
-		<field name="zygcht" type="String" />
+		<field name="zygclb" type="String" />
 		<field name="htmc" type="String" />
 		<field name="fbdw" type="String" />
-		<field name="szdw" type="String" />
+		<field name="cbdw" type="String" />
+		<field name="sjdw" type="String" />
 		<field name="xmfzr" type="String" />
 		<field name="xmfzrzjlx" type="String" />
 		<field name="xmfzrzjh" type="String" />
-		<field name="szfzr" type="String" />
+		<field name="sjfzr" type="String" />
 		<field name="sjfzrzjlx" type="String" />
 		<field name="sjfzrzjh" type="String" />
 		<field name="kcdwmc" type="String" />
@@ -250,7 +251,7 @@
 		<field name="htj" type="String" />
 		<field name="sjf" type="String" />
 		<field name="kcf" type="String" />
-		<field name="jazz" type="String" />
+		<field name="jazj" type="String" />
 		<field name="zlje" type="String" />
 		<field name="zgj" type="String" />
 		<field name="aqfhwmsgcsf" type="String" />
@@ -319,9 +320,10 @@
 	</model>
 	<model name="com.justonetech.cp.permit.model.UnitProject">
 		<field name="projectId" type="long" />
-		<field name="permitId" type="String" />
-		<field name="gcbh" type="int" />
-		<field name="gcmc" type="int" />
-		<field name="jsnr" type="int" />
+		<field name="permitId" type="long" />
+		<field name="bjbh" type="String" />
+		<field name="gcbh" type="String" />
+		<field name="gcmc" type="String" />
+		<field name="jsnr" type="String" />
 	</model>
 </model-hints>

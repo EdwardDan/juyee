@@ -61,23 +61,23 @@ public interface ProjectLocalService extends BaseLocalService,
 	/**
 	* Creates a new project with the primary key. Does not add the project to the database.
 	*
-	* @param projectId the primary key for the new project
+	* @param bjbh the primary key for the new project
 	* @return the new project
 	*/
 	public com.justonetech.cp.project.model.Project createProject(
-		java.lang.String projectId);
+		java.lang.String bjbh);
 
 	/**
 	* Deletes the project with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param projectId the primary key of the project
+	* @param bjbh the primary key of the project
 	* @return the project that was removed
 	* @throws PortalException if a project with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
 	public com.justonetech.cp.project.model.Project deleteProject(
-		java.lang.String projectId)
+		java.lang.String bjbh)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -172,20 +172,20 @@ public interface ProjectLocalService extends BaseLocalService,
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.justonetech.cp.project.model.Project fetchProject(
-		java.lang.String projectId)
+		java.lang.String bjbh)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
 	* Returns the project with the primary key.
 	*
-	* @param projectId the primary key of the project
+	* @param bjbh the primary key of the project
 	* @return the project
 	* @throws PortalException if a project with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.justonetech.cp.project.model.Project getProject(
-		java.lang.String projectId)
+		java.lang.String bjbh)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -257,19 +257,19 @@ public interface ProjectLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.justonetech.cp.project.model.Project> getProjects(
 		java.lang.String zzjgdm, java.lang.String bjbh,
-		java.lang.String bjWebid, java.lang.String xmmc,
+		java.lang.String wssqbh, java.lang.String xmmc,
 		java.util.Date bjrqStart, java.util.Date bjrqEnd,
 		java.lang.String bjwcbj, int start, int end);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getProjectsCount(java.lang.String zzjgdm, java.lang.String bjbh,
-		java.lang.String bjWebid, java.lang.String xmmc,
+		java.lang.String wssqbh, java.lang.String xmmc,
 		java.util.Date bjrqStart, java.util.Date bjrqEnd,
 		java.lang.String bjwcbj);
 
 	public com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQuery(
 		java.lang.String zzjgdm, java.lang.String bjbh,
-		java.lang.String bjWebid, java.lang.String xmmc,
+		java.lang.String wssqbh, java.lang.String xmmc,
 		java.util.Date bjrqStart, java.util.Date bjrqEnd,
 		java.lang.String bjwcbj);
 }

@@ -55,27 +55,27 @@ public class ProjectLocalServiceUtil {
 	/**
 	* Creates a new project with the primary key. Does not add the project to the database.
 	*
-	* @param projectId the primary key for the new project
+	* @param bjbh the primary key for the new project
 	* @return the new project
 	*/
 	public static com.justonetech.cp.project.model.Project createProject(
-		java.lang.String projectId) {
-		return getService().createProject(projectId);
+		java.lang.String bjbh) {
+		return getService().createProject(bjbh);
 	}
 
 	/**
 	* Deletes the project with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param projectId the primary key of the project
+	* @param bjbh the primary key of the project
 	* @return the project that was removed
 	* @throws PortalException if a project with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.justonetech.cp.project.model.Project deleteProject(
-		java.lang.String projectId)
+		java.lang.String bjbh)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().deleteProject(projectId);
+		return getService().deleteProject(bjbh);
 	}
 
 	/**
@@ -182,24 +182,24 @@ public class ProjectLocalServiceUtil {
 	}
 
 	public static com.justonetech.cp.project.model.Project fetchProject(
-		java.lang.String projectId)
+		java.lang.String bjbh)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().fetchProject(projectId);
+		return getService().fetchProject(bjbh);
 	}
 
 	/**
 	* Returns the project with the primary key.
 	*
-	* @param projectId the primary key of the project
+	* @param bjbh the primary key of the project
 	* @return the project
 	* @throws PortalException if a project with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.justonetech.cp.project.model.Project getProject(
-		java.lang.String projectId)
+		java.lang.String bjbh)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().getProject(projectId);
+		return getService().getProject(bjbh);
 	}
 
 	public static com.liferay.portal.model.PersistedModel getPersistedModel(
@@ -277,30 +277,30 @@ public class ProjectLocalServiceUtil {
 
 	public static java.util.List<com.justonetech.cp.project.model.Project> getProjects(
 		java.lang.String zzjgdm, java.lang.String bjbh,
-		java.lang.String bjWebid, java.lang.String xmmc,
+		java.lang.String wssqbh, java.lang.String xmmc,
 		java.util.Date bjrqStart, java.util.Date bjrqEnd,
 		java.lang.String bjwcbj, int start, int end) {
 		return getService()
-				   .getProjects(zzjgdm, bjbh, bjWebid, xmmc, bjrqStart,
-			bjrqEnd, bjwcbj, start, end);
+				   .getProjects(zzjgdm, bjbh, wssqbh, xmmc, bjrqStart, bjrqEnd,
+			bjwcbj, start, end);
 	}
 
 	public static int getProjectsCount(java.lang.String zzjgdm,
-		java.lang.String bjbh, java.lang.String bjWebid, java.lang.String xmmc,
+		java.lang.String bjbh, java.lang.String wssqbh, java.lang.String xmmc,
 		java.util.Date bjrqStart, java.util.Date bjrqEnd,
 		java.lang.String bjwcbj) {
 		return getService()
-				   .getProjectsCount(zzjgdm, bjbh, bjWebid, xmmc, bjrqStart,
+				   .getProjectsCount(zzjgdm, bjbh, wssqbh, xmmc, bjrqStart,
 			bjrqEnd, bjwcbj);
 	}
 
 	public static com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQuery(
 		java.lang.String zzjgdm, java.lang.String bjbh,
-		java.lang.String bjWebid, java.lang.String xmmc,
+		java.lang.String wssqbh, java.lang.String xmmc,
 		java.util.Date bjrqStart, java.util.Date bjrqEnd,
 		java.lang.String bjwcbj) {
 		return getService()
-				   .createDynamicQuery(zzjgdm, bjbh, bjWebid, xmmc, bjrqStart,
+				   .createDynamicQuery(zzjgdm, bjbh, wssqbh, xmmc, bjrqStart,
 			bjrqEnd, bjwcbj);
 	}
 
