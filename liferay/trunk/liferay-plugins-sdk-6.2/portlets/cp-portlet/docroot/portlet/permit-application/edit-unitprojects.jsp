@@ -1,6 +1,12 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
 <%@ page import="com.justonetech.cp.permit.model.UnitProject"%>
+<%@ page import="com.justonetech.cp.permit.service.UnitProjectLocalServiceUtil"%>
+<%
+	Long permitId = ParamUtil.getLong(request, "permitId");
+	List<UnitProject> unitProjects = UnitProjectLocalServiceUtil.findByPermitId(permitId, -1, -1);
+	renderRequest.setAttribute("unitProjects", unitProjects);
+%>
 <style>
 .table tr td {
 	border: 1px solid #ddd;
@@ -14,8 +20,8 @@
 }
 </style>
 <portlet:actionURL var="saveUnitProjects" name="saveUnitProjects">
-<portlet:param name="bjbh" value="${bjbh}"/>
-<portlet:param name="permitId" value="${permitId}"/>
+	<portlet:param name="bjbh" value="${bjbh}" />
+	<portlet:param name="permitId" value="${permitId}" />
 </portlet:actionURL>
 <aui:form action="${saveUnitProjects}">
 	<table border="1" width="100%" class="table table-bordered table-hover">
@@ -27,7 +33,7 @@
 		</tr>
 		<tbody id="unitProjects">
 			<c:if test="${!empty unitProjects}">
-				<c:forEach items="${unitProjects}" var="unitProject">
+				<c:forEach items="<%=unitProjects%>" var="unitProject">
 					<tr>
 						<td><input name="<portlet:namespace/>gcbh" value="${unitProject.gcbh}" readonly="true" /></td>
 						<td><input name="<portlet:namespace/>gcmc" value="${unitProject.gcmc}" /></td>
@@ -69,8 +75,8 @@
 			}
 		}
 	}
-	
-	function setGcbh(){
+
+	function setGcbh() {
 		var gcbhs = document.getElementsByName("<portlet:namespace/>gcbh");
 		for (var i = 1; i < gcbhs.length; i++) {
 			if (i.toString().length == 1) {
@@ -84,5 +90,4 @@
 			}
 		}
 	}
-	
 </script>
