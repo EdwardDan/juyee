@@ -59,8 +59,14 @@
 					value="<%=String.valueOf(++rowNo)%>" />
 				<%
 					ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permit.getPermitId());
+				Dictionary xmlx=null;
+				String xmlxName="";
+				if(projectProfile.getXmlx()!=0){
+				 xmlx = DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx());
+				 xmlxName=xmlx.getName();
+				}	
 				%>
-				<liferay-ui:search-container-column-text name="项目类型"  value="<%=String.valueOf(projectProfile.getXmlx()) %>"/>
+				<liferay-ui:search-container-column-text name="项目类型"  value="<%=xmlxName %>"/>
 				<liferay-ui:search-container-column-text property="bjbh" name="报建编号" />
 				<liferay-ui:search-container-column-text property="bdh"
 					name="施工许可标段号" />

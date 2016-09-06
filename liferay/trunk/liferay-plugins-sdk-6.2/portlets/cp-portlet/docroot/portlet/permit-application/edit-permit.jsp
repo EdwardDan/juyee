@@ -25,11 +25,13 @@
 		}
 %>
 <%-- 当前步骤：${sqbz}
-标段号：${bdh }
+
 许可申请ID：${permitId} --%>
 当前报建编号：${bjbh}
 <br/>
 项目名称：${xmmc}
+<br/>
+标段号：${bdh }
 <portlet:renderURL var="editPermitURL">
 	<portlet:param name="mvcPath" value="${contextPath }/edit-permit.jsp" />
 	<portlet:param name="bjbh" value="${bjbh }"/>

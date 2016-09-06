@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
+<script src="${staticServerURL}/My97DatePicker/WdatePicker.js"></script>
 <style type="text/css">
 tr {
 	text-align: center;
@@ -32,6 +33,15 @@ tr.body td.content {
 		projectProfile = ProjectProfileLocalServiceUtil
 				.getProjectProfile(permitId);
 		request.setAttribute("projectProfile", projectProfile);
+		String startDate = "";
+		String endDate = "";
+		if (null != projectProfile.getJhkg()&&null != projectProfile.getJhjg()) {
+			startDate = DateUtil.getDate(projectProfile.getJhkg(), defaultDateFormatPattern, locale,
+					timeZone);
+			endDate = DateUtil.getDate(projectProfile.getJhjg(), defaultDateFormatPattern, locale, timeZone);
+			request.setAttribute("jhkg", startDate);
+			request.setAttribute("jhjg", endDate);
+		}
 	} else {
 		if (Validator.isNotNull(bjbh)) {
 			project = ProjectLocalServiceUtil.getProject(bjbh);
@@ -53,23 +63,46 @@ tr.body td.content {
 	<table border="1" width="100%">
 	<tr class="body">
 			<td class="title">项目类型</td>
-			<td class="content"><aui:input name="xmlx" label="" type="text"
-					style="width:50%" value="">
-				</aui:input></td>
-			<td class="title">立案级别</td>
+			<td class="content"><aui:select name="xmlx" label="" showEmptyOption="true"
+					type="select" style="width:50%">
+					<%
+						Dictionary dictionary = DictionaryLocalServiceUtil.findByCode(
+													"xmlx");
+											if (null != dictionary) {
+												List<Dictionary> dictionaries = DictionaryLocalServiceUtil
+														.findByParentId( dictionary.getDictionaryId(), -1, -1);
+												for (Dictionary dic : dictionaries) {
+					%>
+					<aui:option value="<%=dic.getDictionaryId()%>"><%=dic.getName()%></aui:option>
+					<%
+						}
+											}
+					%>
+				</aui:select>
+				</td>
+			<td class="title">立项级别</td>
 			<td class="content"><aui:input name="lxjb" label="" type="text"
-					style="width:50%" value="">
+					style="width:50%" value="${project.lxjb }">
 				</aui:input></td>
 		</tr>
 		<tr class="body">
 			<td class="title">项目性质</td>
-			<td class="content"><aui:input name="xmxz" label="" type="text"
-					style="width:50%" value="">
-				</aui:input></td>
-			<td class="title">所属区县</td>
-			<td class="content"><aui:input name="ssqx" label="" type="text"
-					style="width:50%" value="">
-				</aui:input></td>
+			<td class="content" colspan="3"><aui:select name="xmxz" label="" showEmptyOption="true"
+					type="select" style="width:18.7%">
+					<%
+						Dictionary dictionary = DictionaryLocalServiceUtil.findByCode(
+													"xmxz");
+											if (null != dictionary) {
+												List<Dictionary> dictionaries = DictionaryLocalServiceUtil
+														.findByParentId( dictionary.getDictionaryId(), -1, -1);
+												for (Dictionary dic : dictionaries) {
+					%>
+					<aui:option value="<%=dic.getDictionaryId()%>"><%=dic.getName()%></aui:option>
+					<%
+						}
+											}
+					%>
+				</aui:select></td>
 		</tr>
 		<tr class="body">
 			<td class="title">业务编码</td>
@@ -112,9 +145,24 @@ tr.body td.content {
 		</tr>
 		<tr class="body">
 			<td class="title">建设地点所属区县</td>
-			<td class="content" colspan="3"><aui:input name="jsddssqx" label="" type="text"
-					style="width:50%" value="">
-				</aui:input></td>
+			<td class="content" colspan="3">
+			<aui:select name="jsddssqx" label="" showEmptyOption="true"
+					type="select" style="width:70px">
+					<%
+						Dictionary dictionary = DictionaryLocalServiceUtil.findByCode(
+													"jsddssqx");
+											if (null != dictionary) {
+												List<Dictionary> dictionaries = DictionaryLocalServiceUtil
+														.findByParentId( dictionary.getDictionaryId(), -1, -1);
+												for (Dictionary dic : dictionaries) {
+					%>
+					<aui:option value="<%=dic.getDictionaryId()%>"><%=dic.getName()%></aui:option>
+					<%
+						}
+											}
+					%>
+				</aui:select>
+			</td>
 		</tr>
 		<tr class="body">
 			<td class="title">建设工程类别</td>
@@ -124,9 +172,24 @@ tr.body td.content {
 		</tr>
 		<tr class="body">
 			<td class="title">建设工程属性</td>
-			<td class="content" colspan="3"><aui:input name="jsgcsx" label="" type="text"
-					style="width:50%" value="">
-				</aui:input></td>
+			<td class="content" colspan="3">
+			<aui:select name="jsgcsx" label="" showEmptyOption="true"
+					type="select" style="width:70px">
+					<%
+						Dictionary dictionary = DictionaryLocalServiceUtil.findByCode(
+													"jsgcsx");
+											if (null != dictionary) {
+												List<Dictionary> dictionaries = DictionaryLocalServiceUtil
+														.findByParentId( dictionary.getDictionaryId(), -1, -1);
+												for (Dictionary dic : dictionaries) {
+					%>
+					<aui:option value="<%=dic.getDictionaryId()%>"><%=dic.getName()%></aui:option>
+					<%
+						}
+											}
+					%>
+				</aui:select>
+			</td>
 		</tr>
 		<tr class="body">
 			<td class="title">建设工程规模</td>
@@ -213,13 +276,15 @@ tr.body td.content {
 		</tr>
 		<tr class="body">
 			<td class="title">计划开工</td>
-			<td class="content"><aui:input name="jhkg" label="" type="text"
-					style="width:50%" value="">
-				</aui:input></td>
+			<td class="content"><input type="text" class="Wdate" id="jhkg"
+					name="<portlet:namespace/>jhkg" value="${jhkg}" 
+					onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'jhkg\')}',lang:'zh-cn',dateFmt:'yyyy-MM-dd'})"
+			required="required"/></td>
 			<td class="title">计划竣工</td>
-			<td class="content"><aui:input name="jhjg" label="" type="text"
-					style="width:50%" value="">
-				</aui:input></td>
+			<td class="content"><input type="text" class="Wdate" id="jhjg"
+					name="<portlet:namespace/>jhjg" value="${jhjg}" 
+					onfocus="WdatePicker({minDate:'#F{$dp.$D(\'jhjg\')}',lang:'zh-cn',dateFmt:'yyyy-MM-dd'})"
+			required="required"/></td>
 		</tr>
 	<tr class="body">
 			<td class="content" colspan="4"><c:choose>
