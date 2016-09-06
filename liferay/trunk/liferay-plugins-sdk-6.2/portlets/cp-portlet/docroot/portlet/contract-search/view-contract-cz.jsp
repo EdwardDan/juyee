@@ -15,17 +15,14 @@ table {
 }
 
 tr.head  td {
-	background-color: #63B8FF;
 	text-align: center;
 	font-size: 16px;
-	color: white;
 	font-family: "宋体";
 	font-weight: bold;
 }
 
 tr.body td.title {
 	width: 20%;
-	background-color: #D1EEEE;
 	text-align: center;
 }
 
