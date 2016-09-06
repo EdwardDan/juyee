@@ -112,12 +112,15 @@
 		<!-- Audit fields -->
 
 		<!-- Business fields -->
-		<column name="permitId" type="String" /><!-- 施工许可Id -->
-		<column name="htxxbsbh" type="String" /><!-- 合同信息报送编号 -->
+		<column name="permitId" type="long" /><!-- 施工许可Id -->
 		<column name="dwlx" type="String" /><!-- 单位类型 -->
 		<column name="dwmc" type="String" /><!-- 单位名称 -->
 		<column name="xmfzr" type="String" /><!-- 项目负责人 -->
 		<column name="dhhm" type="String" /><!-- 电话号码 -->
+		<column name="zjlx" type="String" /><!-- 证件类型 -->
+		<column name="zjh" type="String" /><!-- 证件号 -->
+		<column name="sfyssj" type="String" /><!-- 是否原始数据 -->
+		
 		<!-- Order -->
 
 		<!-- Finder methods -->
