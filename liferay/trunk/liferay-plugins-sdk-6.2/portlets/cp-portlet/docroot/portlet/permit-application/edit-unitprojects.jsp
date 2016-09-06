@@ -22,6 +22,10 @@
 	color: #8B8B83;
 	border: #D4D4D4 1px solid;
 }
+
+aui:input{
+	width: 98%
+}
 </style>
 <aui:form action="${saveUnitProjectsURL}">
 	<aui:input name="bjbh" value="${bjbh }" type="hidden"></aui:input>
@@ -37,10 +41,10 @@
 			<c:if test="${!empty unitProjects}">
 				<c:forEach items="<%=unitProjects%>" var="unitProject">
 					<tr>
-						<td><input name="<portlet:namespace/>gcbh" value="${unitProject.gcbh}" readonly="true" /></td>
-						<td><input name="<portlet:namespace/>gcmc" value="${unitProject.gcmc}" /></td>
-						<td><input name="<portlet:namespace/>jsnr" value="${unitProject.jsnr}" /></td>
-						<td><input type="button" class="btn" value="删除" onclick="${renderResponse.namespace}changeLine(this)" style="width: 100%;" /></td>
+						<td><aui:input name="gcbh" value="${unitProject.gcbh}" readonly="true" type="text" style="width: 85%;" label=""/></td>
+						<td><aui:input name="gcmc" value="${unitProject.gcmc}"  type="text" style="width: 93%;" label=""/></td>
+						<td><aui:input name="jsnr" value="${unitProject.jsnr}"  type="text" style="width: 98%;" label=""/></td>
+						<td><aui:button name="delete" class="btn" value="删除" onclick="${renderResponse.namespace}changeLine(this)"  /></td>
 					</tr>
 				</c:forEach>
 			</c:if>
@@ -49,10 +53,10 @@
 	<table style="display: none;" border="1" width="90%">
 		<tbody id="hiddenStyle">
 			<tr>
-				<td><input name="<portlet:namespace/>gcbh" readonly="true"></td>
-				<td><input name="<portlet:namespace/>gcmc"></td>
-				<td><input name="<portlet:namespace/>jsnr"></td>
-				<td><input type="button" class="btn" value="删除" onclick="${renderResponse.namespace}changeLine(this)" style="width: 100%;" /></td>
+				<td><aui:input name="gcbh" readonly="true"  type="text" style="width: 85%;" label=""/></td>
+				<td><aui:input name="gcmc"  type="text" style="width: 93%;"  label=""/></td>
+				<td><aui:input name="jsnr"  type="text" style="width: 98%;"  label=""/></td>
+				<td><aui:button class="btn" name="delete" value="删除" onclick="${renderResponse.namespace}changeLine(this)" /></td>
 			</tr>
 		</tbody>
 	</table>
