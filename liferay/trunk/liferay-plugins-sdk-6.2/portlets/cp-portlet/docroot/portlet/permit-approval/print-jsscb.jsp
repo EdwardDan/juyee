@@ -1,10 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
-<portlet:renderURL var="viewURL" />
 <style media=print type="text/css">
     .noprint{visibility:hidden}
 </style>
-<!--startprint-->
 <html>
 <head>
 <link rel=themeData href="建管中心模板.files/themedata.thmx">
@@ -371,24 +369,12 @@ mso-char-indent-count:2.0;mso-line-height-alt:12.0pt'><span style='font-size:
 <p class=MsoNormal><span lang=EN-US><o:p>&nbsp;</o:p></span></p>
 
 </div>
-<!--endprint-->
 	<div class="div_space"></div>
 	<div align="center">
-		<input type="button" class="noprint" onclick="doPrint()" value="打印" />
-		<input type="button" value="返回" onclick="history.go(-1)">
+		<input type="button" class="noprint" onclick="window.print()" value="打印" />
+		<input type="button" class="noprint" value="返回" onclick="history.go(-1)">
 	</div>
-
 </body>
 </html>
-<script>
-	function doPrint() {
-		bdhtml = window.document.body.innerHTML;
-		sprnstr = "<!--startprint-->";
-		eprnstr = "<!--endprint-->";
-		prnhtml = bdhtml.substr(bdhtml.indexOf(sprnstr) + 17);
-		prnhtml = prnhtml.substring(0, prnhtml.indexOf(eprnstr));
-		window.document.body.innerHTML = prnhtml;
-		window.print();
-	}
-</script>
+
 

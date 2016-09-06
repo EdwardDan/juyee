@@ -2,22 +2,22 @@
 <%@ include file="/common/init.jsp"%>
 <c:set var="contextPath"
 	value="${request.contextPath}/portlet/permit-approval" />
-<portlet:renderURL var="printsjpzURL">
+<portlet:renderURL var="printsjpzURL" windowState="pop_up">
 	<portlet:param name="mvcPath" value="${contextPath}/print-sjpz.jsp"/>
 </portlet:renderURL>
-<portlet:renderURL var="printsltzsURL">
+<portlet:renderURL var="printsltzsURL" windowState="pop_up">
 	<portlet:param name="mvcPath" value="${contextPath}/print-sltzs.jsp"/>
 </portlet:renderURL>
-<portlet:renderURL var="printbysljdsURL">
+<portlet:renderURL var="printbysljdsURL" windowState="pop_up">
 	<portlet:param name="mvcPath" value="${contextPath}/print-bysljds.jsp"/>
 </portlet:renderURL>
-<portlet:renderURL var="printbzclURL">
+<portlet:renderURL var="printbzclURL" windowState="pop_up">
 	<portlet:param name="mvcPath" value="${contextPath}/print-bzcl.jsp"/>
 </portlet:renderURL>
-<portlet:renderURL var="printjsscbURL">
+<portlet:renderURL var="printjsscbURL" windowState="pop_up">
 	<portlet:param name="mvcPath" value="${contextPath}/print-jsscb.jsp"/>
 </portlet:renderURL>
-<portlet:renderURL var="printsgxklszsURL">
+<portlet:renderURL var="printsgxklszsURL" windowState="pop_up">
 	<portlet:param name="mvcPath" value="${contextPath}/print-sgxklszs.jsp"/>
 </portlet:renderURL>
 <liferay-ui:tabs names="工程概况,参建单位,单位工程,申请材料" refresh="false">
@@ -44,5 +44,6 @@
 	<aui:button value="施工许可(绿色)" onClick="${printsgxklszsURL}"/>
 	<aui:button value="施工许可" onClick=""/>
 </div>
+
 
 

@@ -5,9 +5,6 @@
 	visibility: hidden
 }
 </style>
-<portlet:renderURL var="viewURL" />
-<liferay-ui:header title="打印受理通知书" backURL="${viewURL}" />
-<!--startprint-->
 <html>
 <head>
 <title>受理通知书</title>
@@ -313,23 +310,11 @@ div.Section1 {
 		</p>
 
 	</div>
-	<!--endprint-->
 	<div class="div_space"></div>
 	<div align="center">
-		<input type="button" class="noprint" onclick="doPrint()" value="打印" />
-		<input type="button" value="返回" onclick="history.go(-1)">
+		<input type="button" class="noprint" onclick="window.print()" value="打印" />
+		<input type="button" class="noprint" value="返回" onclick="history.go(-1)">
 	</div>
 
 </body>
 </html>
-<script>
-	function doPrint() {
-		bdhtml = window.document.body.innerHTML;
-		sprnstr = "<!--startprint-->";
-		eprnstr = "<!--endprint-->";
-		prnhtml = bdhtml.substr(bdhtml.indexOf(sprnstr) + 17);
-		prnhtml = prnhtml.substring(0, prnhtml.indexOf(eprnstr));
-		window.document.body.innerHTML = prnhtml;
-		window.print();
-	}
-</script>
