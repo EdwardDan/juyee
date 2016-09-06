@@ -23,10 +23,10 @@
 			<table style="width: 100%;" border="1">
 				<tr>
 					<td style="width: 10%;">报建编号</td>
-					<td style="width: 40%;"><aui:input type="text" name="bjbh"
+					<td style="width: 40%;"><aui:input type="text" name="bjbh"  style="width:80%"
 							label="" /></td>
-					<td style="width: 15%;">工程名称</td>
-					<td style="width: 35%;"><aui:input type="text" name="gcmc"
+					<td style="width: 10%;">工程名称</td>
+					<td style="width: 40%;"><aui:input type="text" name="gcmc" style="width:80%"
 							label="" /></td>
 				</tr>
 				<tr style="height: 40px;">
@@ -57,12 +57,13 @@
 				</liferay-portlet:renderURL>
 				<liferay-ui:search-container-column-text
 					value="<%=String.valueOf(++rowNo)%>" />
-				<liferay-ui:search-container-column-text property="bjbh" name="报建编号" />
-				<liferay-ui:search-container-column-text property="bdh"
-					name="施工许可标段号" />
 				<%
 					ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permit.getPermitId());
 				%>
+				<liferay-ui:search-container-column-text name="项目类型"  value="<%=String.valueOf(projectProfile.getXmlx()) %>"/>
+				<liferay-ui:search-container-column-text property="bjbh" name="报建编号" />
+				<liferay-ui:search-container-column-text property="bdh"
+					name="施工许可标段号" />
 				<liferay-ui:search-container-column-text
 					value="<%=projectProfile.getGcmc() %>" name="工程名称"
 					href="${rowURL }" />

@@ -51,6 +51,32 @@ tr.body td.content {
 	<aui:input name="bdh" type="hidden" value="${bdh }" />
 	<aui:input name="sqbz" type="hidden" value="2" />
 	<table border="1" width="100%">
+	<tr class="body">
+			<td class="title">项目类型</td>
+			<td class="content"><aui:input name="xmlx" label="" type="text"
+					style="width:50%" value="">
+				</aui:input></td>
+			<td class="title">立案级别</td>
+			<td class="content"><aui:input name="lxjb" label="" type="text"
+					style="width:50%" value="">
+				</aui:input></td>
+		</tr>
+		<tr class="body">
+			<td class="title">项目性质</td>
+			<td class="content"><aui:input name="xmxz" label="" type="text"
+					style="width:50%" value="">
+				</aui:input></td>
+			<td class="title">所属区县</td>
+			<td class="content"><aui:input name="ssqx" label="" type="text"
+					style="width:50%" value="">
+				</aui:input></td>
+		</tr>
+		<tr class="body">
+			<td class="title">业务编码</td>
+			<td class="content" colspan="3"><aui:input name="ywbm" label="" type="text"
+					style="width:50%" value="">
+				</aui:input></td>
+		</tr>
 		<tr class="body">
 			<td class="title">建设单位名称</td>
 			<td class="content" colspan="3"><aui:input name="jsdwmc"
@@ -85,9 +111,33 @@ tr.body td.content {
 				</aui:input>(请按建设工程规划许可证填写本次申请施工许可的建设地点)</td>
 		</tr>
 		<tr class="body">
+			<td class="title">建设地点所属区县</td>
+			<td class="content" colspan="3"><aui:input name="jsddssqx" label="" type="text"
+					style="width:50%" value="">
+				</aui:input></td>
+		</tr>
+		<tr class="body">
+			<td class="title">建设工程类别</td>
+			<td class="content" colspan="3"><aui:input name="jsgclb" label="" type="text"
+					style="width:50%" value="">
+				</aui:input></td>
+		</tr>
+		<tr class="body">
+			<td class="title">建设工程属性</td>
+			<td class="content" colspan="3"><aui:input name="jsgcsx" label="" type="text"
+					style="width:50%" value="">
+				</aui:input></td>
+		</tr>
+		<tr class="body">
 			<td class="title">建设工程规模</td>
 			<td class="content" colspan="3"><aui:input name="jsgcgm"
 					label="" type="text" style="width:50%" value="${project.jsgm}">
+				</aui:input></td>
+		</tr>
+		<tr class="body">
+			<td class="title">国有资金比重%</td>
+			<td class="content" colspan="3"><aui:input name="gyzjbz" label="" type="text"
+					style="width:50%" value="">
 				</aui:input></td>
 		</tr>
 		<tr class="body">
@@ -103,6 +153,16 @@ tr.body td.content {
 				</aui:input></td>
 			<td class="title">合同工期(日历天)</td>
 			<td class="content"><aui:input name="htgq" label="" type="text"
+					style="width:50%" value="">
+				</aui:input></td>
+		</tr>
+			<tr class="body">
+			<td class="title">中标价格(万元)</td>
+			<td class="content"><aui:input name="zbjg" label="" type="text"
+					style="width:50%" value="">
+				</aui:input></td>
+			<td class="title">项目投资估算(万元)</td>
+			<td class="content"><aui:input name="xmtzgs" label="" type="text"
 					style="width:50%" value="">
 				</aui:input></td>
 		</tr>
@@ -152,6 +212,68 @@ tr.body td.content {
 				</aui:select></td>
 		</tr>
 		<tr class="body">
+			<td class="title">计划开工</td>
+			<td class="content"><aui:input name="jhkg" label="" type="text"
+					style="width:50%" value="">
+				</aui:input></td>
+			<td class="title">计划竣工</td>
+			<td class="content"><aui:input name="jhjg" label="" type="text"
+					style="width:50%" value="">
+				</aui:input></td>
+		</tr>
+	<tr class="body">
+			<td class="content" colspan="4"><c:choose>
+					<c:when test="${projectProfile.sfzftzl }">
+						<aui:input name="sfzftzl" id="sfzftzl" label="是否政府投资类"
+							type="checkbox" checked="true" onchange="showYzzpl(this)">
+						</aui:input>
+					</c:when>
+					<c:otherwise>
+						<aui:input name="sfzftzl" id="sfzftzl" label="是否政府投资类"
+							type="checkbox" checked="false" onchange="showYzzpl(this)">
+						</aui:input>
+					</c:otherwise>
+				</c:choose></td>
+		</tr>
+		<c:choose>
+			<c:when test="${projectProfile.sfzftzl }">
+				<tr class="body" id="yzzpl">
+			</c:when>
+			<c:otherwise>
+				<tr class="body" id="yzzpl" style="display: none">
+			</c:otherwise>
+		</c:choose>
+		<td colspan="4">
+			<table style="width: 99%;">
+				<tr class="body">
+					<td class="title" rowspan="4">预制装配率</td>
+					<td class="content" colspan="2">单跨跨径100米以下桥梁工程承台顶面以上构件</td>
+					<td class="content"><aui:row><aui:input name="yzzpl1" label="" inlineField="true"
+							type="text" style="width:30px" value="">
+						</aui:input>%</aui:row></td>
+				</tr>
+				<tr class="body">
+					<td class="content" colspan="2">隧道工程盾构段</td>
+					<td class="content"><aui:row><aui:input name="yzzpl2" label="" inlineField="true"
+							type="text" style="width:30px" value="">
+						</aui:input>%</aui:row></td>
+				</tr>
+				<tr class="body">
+					<td class="content" colspan="2">轨道交通工程地下过街通道</td>
+					<td class="content"><aui:row><aui:input name="yzzpl3" label="" inlineField="true"
+							type="text" style="width:30px" value="">
+						</aui:input>%</aui:row></td>
+				</tr>
+				<tr class="body">
+					<td class="content" colspan="2">水运工程（港口）桩顶面以上构件</td>
+					<td class="content"><aui:row><aui:input name="yzzpl4" label="" inlineField="true"
+							type="text" style="width:30px" value="">
+						</aui:input>%</aui:row></td>
+				</tr>
+			</table>
+		</td>
+		</tr>
+		<tr class="body">
 			<td class="title" colspan="4">注:信息保存后，请进入参见单位和项目负责人信息页面，填写参建单位和项目负责人信息</td>
 		</tr>
 		<tr class="body">
@@ -161,3 +283,16 @@ tr.body td.content {
 	</table>
 
 </aui:form>
+
+<script>
+
+function showYzzpl(obj) {	
+    if (obj.checked) {
+        $("#sfzftzl").val("true");
+        document.getElementById("yzzpl").style.display = "";
+    } else {
+        $("#sfzftzl").val("false");
+        document.getElementById("yzzpl").style.display = "none";
+    }
+}
+</script>
