@@ -1,7 +1,11 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ include file="/common/init.jsp"%>
 <%@ page import="com.justonetech.cp.permit.model.UnitProject"%>
 <%@ page import="com.justonetech.cp.permit.service.UnitProjectLocalServiceUtil"%>
+<%@ include file="/common/init.jsp"%>
+<%@ include file="init.jsp"%>
+<portlet:actionURL var="saveUnitProjectsURL" name="saveUnitProjects">
+	<portlet:param name="redirectURL" value="${editPermitURL }"/>
+</portlet:actionURL>
 <%
 	Long permitId = ParamUtil.getLong(request, "permitId");
 	List<UnitProject> unitProjects = UnitProjectLocalServiceUtil.findByPermitId(permitId, -1, -1);
@@ -19,11 +23,9 @@
 	border: #D4D4D4 1px solid;
 }
 </style>
-<portlet:actionURL var="saveUnitProjects" name="saveUnitProjects">
-	<portlet:param name="bjbh" value="${bjbh}" />
-	<portlet:param name="permitId" value="${permitId}" />
-</portlet:actionURL>
-<aui:form action="${saveUnitProjects}">
+<aui:form action="${saveUnitProjectsURL}">
+	<aui:input name="bjbh" value="${bjbh }" type="hidden"></aui:input>
+	<aui:input name="permitId" value="<%=permitId %>" type="hidden"></aui:input>
 	<table border="1" width="100%" class="table table-bordered table-hover">
 		<tr height="29px">
 			<td style="width: 10%; text-align: center">单位工程编号</td>

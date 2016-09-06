@@ -5,6 +5,9 @@
         <dependent-module archiveName="cp-service-portlet-service.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/cp-service-portlet/docroot/WEB-INF/lib/cp-service-portlet-service.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="sys-service-portlet-service.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/sys-service-portlet/docroot/WEB-INF/lib/sys-service-portlet-service.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="cp-portlet"/>
         <property name="java-output-path" value="/cp-portlet/docroot/WEB-INF/classes"/>
     </wb-module>

@@ -1,6 +1,9 @@
-
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
+<%@ include file="init.jsp"%>
+<portlet:actionURL var="saveApplyMaterialsURL" name="saveApplyMaterials">
+<portlet:param name="redirectURL" value="${editPermitURL }"/>
+</portlet:actionURL>
 <style>
 .aui .table th, .aui .table td {
 	vertical-align: middle;
@@ -12,7 +15,7 @@
 }
 </style>
 
-<% String permitId =ParamUtil.getString(renderRequest,"permitId");
+<% long permitId =ParamUtil.getLong(renderRequest,"permitId");
 	List<ApplyMaterial> materialList=ApplyMaterialLocalServiceUtil.findByPermitId(1, -1, -1);
     System.out.println(Arrays.asList(materialList));
     System.out.println(123);
@@ -23,8 +26,8 @@
 <portlet:resourceURL var="fileUpLoadURL" id="fileUpLoad" />
 <portlet:resourceURL var="fileDeleteURL" id="fileDelete" />
 
-<form id="fmFile" enctype="multipart/form-data">
-
+<aui:form id="fmFile" enctype="multipart/form-data" action="${saveApplyMaterialsURL }">
+<aui:input name="permitId" type="hidden" value="<%=permitId%>" />
 <table class="table table-bordered" style="font-size: 14px;">
 	<tr style="text-align: center; height: 45px;">
 		<td style="text-align: center; width: 5%;">序号</td>
@@ -62,7 +65,7 @@
 <div style="text-align: center">
 	<aui:button type="submit" value="保存" />
 </div>
-</form>
+</aui:form>
 
 <aui:script>
 	/* 上传 */

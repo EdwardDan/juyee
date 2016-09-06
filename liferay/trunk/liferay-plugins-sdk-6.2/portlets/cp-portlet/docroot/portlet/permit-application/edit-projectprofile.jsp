@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
-<script src="${staticServerURL}/My97DatePicker/WdatePicker.js"></script>
+<%@ include file="init.jsp"%>
 <style type="text/css">
 tr {
 	text-align: center;
@@ -51,7 +51,7 @@ tr.body td.content {
 %>
 <portlet:renderURL var="viewURL" />
 <portlet:actionURL var="saveProjectProfileURL" name="saveProjectProfile">
-	<portlet:param name="redirect" value="${viewURL }" />
+	<portlet:param name="redirectURL" value="${editPermitURL }"/>
 </portlet:actionURL>
 <aui:model-context bean="${projectProfile}"
 	model="<%=ProjectProfile.class%>" />

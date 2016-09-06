@@ -8,7 +8,10 @@
 	import=" com.justonetech.cp.permit.service.ParticipationUnitLocalServiceUtil"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
-
+<%@ include file="init.jsp"%>
+<portlet:actionURL var="saveParticipationUnitsURL" name="saveParticipationUnits">
+<portlet:param name="redirectURL" value="${editPermitURL }"/>
+</portlet:actionURL>
 <style>
 .divAccordion-inner {
 	padding: 9px 15px;
@@ -63,12 +66,8 @@ if(null!=dictionaryCertificateType){
 	request.setAttribute("certificateTypes", certificateTypes);
 }
 %>
-<!-- <portlet:renderURL var="viewURL" /> -->
-<portlet:actionURL var="saveParticipationUnitURL"
-	name="saveParticipationUnits">
-	<portlet:param name="permitId" value="${permitId }" />
-</portlet:actionURL>
-<aui:form action="${saveParticipationUnitURL }" onSubmit="false">
+<aui:form action="${saveParticipationUnitsURL }">
+	<aui:input name="permitId" type="hidden" value="<%=permitId%>" />
 	<div class="divAccordion-inner">
 		<aui:row>
 			<aui:col span="12">
