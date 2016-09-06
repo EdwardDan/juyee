@@ -1,7 +1,9 @@
 package com.justonetech.cp.portlet;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.portlet.ActionRequest;
@@ -12,16 +14,12 @@ import javax.portlet.RenderResponse;
 
 import com.justonetech.cp.contract.model.Contract;
 import com.justonetech.cp.contract.service.ContractLocalServiceUtil;
-import com.justonetech.cp.permit.model.ParticipationUnit;
 import com.justonetech.cp.permit.model.Permit;
 import com.justonetech.cp.permit.model.ProjectProfile;
 import com.justonetech.cp.permit.model.UnitProject;
-import com.justonetech.cp.permit.service.ParticipationUnitLocalServiceUtil;
 import com.justonetech.cp.permit.service.PermitLocalServiceUtil;
 import com.justonetech.cp.permit.service.ProjectProfileLocalServiceUtil;
 import com.justonetech.cp.permit.service.UnitProjectLocalServiceUtil;
-import com.justonetech.cp.project.model.Project;
-import com.justonetech.cp.project.service.ProjectLocalServiceUtil;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -37,7 +35,9 @@ import com.liferay.util.bridges.mvc.MVCPortlet;
  * Portlet implementation class PermitApplicationPortlet
  */
 public class PermitApplicationPortlet extends MVCPortlet {
-
+	private static String dateFormatPattern = PropsUtil.get("default.date.format.pattern");
+	
+	
 	@Override
 	public void render(RenderRequest renderRequest, RenderResponse renderResponse) throws PortletException, IOException {
 
@@ -81,41 +81,10 @@ public class PermitApplicationPortlet extends MVCPortlet {
 			renderRequest.setAttribute("bjbh", bjbh);
 			renderRequest.setAttribute("permitId", permitId);
 			renderRequest.setAttribute("bdh", bdh);
-			Project project = null;
-			ProjectProfile projectProfile = null;
-			Contract contract = null;
-			try {
-				if (permitId != 0) {
-					projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
-					renderRequest.setAttribute("xmmc", projectProfile.getGcmc());
-				} else {
-					project = ProjectLocalServiceUtil.getProject(bjbh);
-					renderRequest.setAttribute("xmmc", project.getXmmc());
-				}
-				if (Validator.isNotNull(contractId)) {
-					contract = ContractLocalServiceUtil.getContract(contractId);
-					renderRequest.setAttribute("contract", contract);
-				}
-			} catch (PortalException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SystemException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
+			renderRequest.setAttribute("contractId",contractId);
 			if (sqbz == 1) {
-
 			} else if (sqbz == 2) {
-//				ParticipationUnitLocalServiceUtil
-				if (Validator.isNotNull(permitId)) {
-					ParticipationUnit participationUnit = null;
-//					participationUnit
-				}
-
 			} else if (sqbz == 3) {
-				List<UnitProject> unitProjects = UnitProjectLocalServiceUtil.findByPermitId(permitId, -1, -1);
-				renderRequest.setAttribute("unitProjects", unitProjects);
 			} else if (sqbz == 4) {
 
 			}
@@ -168,44 +137,73 @@ public class PermitApplicationPortlet extends MVCPortlet {
 
 	public void saveProjectProfile(ActionRequest request, ActionResponse response) throws SystemException,
 			PortalException, ParseException {
+		Long xmlx=ParamUtil.getLong(request, "xmlx");
+		String lxjb=ParamUtil.getString(request, "lxjb");
+		Long xmxz=ParamUtil.getLong(request, "xmxz");
+		String ssqx=ParamUtil.getString(request, "ssqx");
+		String ywbm=ParamUtil.getString(request, "ywbm");
 		String jsdwmc = ParamUtil.getString(request, "jsdwmc");
 		String jsdwxz = ParamUtil.getString(request, "jsdwxz");
 		String jsdwdz = ParamUtil.getString(request, "jsdwdz");
 		String gcmc = ParamUtil.getString(request, "gcmc");
 		String jsdd = ParamUtil.getString(request, "jsdd");
+		Long jsddssqx = ParamUtil.getLong(request, "jsddssqx");
+		String jsgclb = ParamUtil.getString(request, "jsgclb");
+		Long jsgcsx = ParamUtil.getLong(request, "jsgcsx");
 		String jsgcgm = ParamUtil.getString(request, "jsgcgm");
+		String gyzjbz = ParamUtil.getString(request, "gyzjbz");
 		String fwjzmj = ParamUtil.getString(request, "fwjzmj");
 		String htjg = ParamUtil.getString(request, "htjg");
 		int htgq = ParamUtil.getInteger(request, "htgq");
+		String zbjg = ParamUtil.getString(request, "zbjg");
+		String xmtzgs = ParamUtil.getString(request, "xmtzgs");
 		String fddbr = ParamUtil.getString(request, "fddbr");
 		String jsdwlxdh = ParamUtil.getString(request, "jsdwlxdh");
 		String jsdwlxr = ParamUtil.getString(request, "jsdwlxr");
 		String jsdwsjh = ParamUtil.getString(request, "jsdwsjh");
-		String jsydpzwjhfdccqzbh = ParamUtil.getString(request, "jsydpzwjhfdccqzbh");
+		String jsydpzwjhfdccqzbh= ParamUtil.getString(request, "jsydpzwjhfdccqzbh");
 		String jsgcghxkzbh = ParamUtil.getString(request, "jsgcghxkzbh");
 		String xckgqk = ParamUtil.getString(request, "xckgqk");
-		Long permitId = ParamUtil.getLong(request, "permitId");
+		Date jhkg = ParamUtil.getDate(request, "jhkg", new SimpleDateFormat(dateFormatPattern));
+		Date jhjg = ParamUtil.getDate(request, "jhjg", new SimpleDateFormat(dateFormatPattern));
+		Boolean sfzftzl = ParamUtil.getBoolean(request, "sfzftzl");
+		String yzzpl1 = ParamUtil.getString(request, "yzzpl1");
+		String yzzpl2 = ParamUtil.getString(request, "yzzpl2");
+		String yzzpl3 = ParamUtil.getString(request, "yzzpl3");
+		String yzzpl4 = ParamUtil.getString(request, "yzzpl4");
+		Long permitId =ParamUtil.getLong(request, "permitId");
 		String bjbh = ParamUtil.getString(request, "bjbh");
 		String bdh = ParamUtil.getString(request, "bdh");
 		int sqbz = ParamUtil.getInteger(request, "sqbz");
-		ProjectProfile projectProfile = null;
-		Permit permit = null;
-		if (permitId != 0) {
-			projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
-			permit = PermitLocalServiceUtil.getPermit(permitId);
-		} else {
-			projectProfile = ProjectProfileLocalServiceUtil.createProjectProfile(CounterLocalServiceUtil.increment());
-			permit = PermitLocalServiceUtil.createPermit(projectProfile.getPermitId());
+		ProjectProfile projectProfile= null;
+		Permit permit=null;
+		if(permitId!=0){
+			projectProfile=ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
+			permit=PermitLocalServiceUtil.getPermit(permitId);
+		}else{
+			projectProfile=ProjectProfileLocalServiceUtil.createProjectProfile(CounterLocalServiceUtil.increment());	
+			permit=PermitLocalServiceUtil.createPermit(projectProfile.getPermitId());
 		}
+		projectProfile.setXmlx(xmlx);
+		projectProfile.setLxjb(lxjb);
+		projectProfile.setXmxz(xmxz);
+		projectProfile.setSsqx(ssqx);
+		projectProfile.setYwbm(ywbm);
 		projectProfile.setJsdwmc(jsdwmc);
 		projectProfile.setJsdwxz(jsdwxz);
 		projectProfile.setJsdwdz(jsdwdz);
 		projectProfile.setGcmc(gcmc);
 		projectProfile.setJsdd(jsdd);
+		projectProfile.setJsddssqx(jsddssqx);
+		projectProfile.setJsgclb(jsgclb);
+		projectProfile.setJsgcsx(jsgcsx);
 		projectProfile.setJsgcgm(jsgcgm);
+		projectProfile.setGyzjbz(gyzjbz);
 		projectProfile.setFwjzmj(fwjzmj);
 		projectProfile.setHtjg(htjg);
 		projectProfile.setHtgq(htgq);
+		projectProfile.setZbjg(zbjg);
+		projectProfile.setXmtzgs(xmtzgs);
 		projectProfile.setFddbr(fddbr);
 		projectProfile.setJsdwlxdh(jsdwlxdh);
 		projectProfile.setJsdwlxr(jsdwlxr);
@@ -213,6 +211,13 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		projectProfile.setJsydpzwjhfdccqzbh(jsydpzwjhfdccqzbh);
 		projectProfile.setJsgcghxkzbh(jsgcghxkzbh);
 		projectProfile.setXckgqk(xckgqk);
+		projectProfile.setJhkg(jhkg);
+		projectProfile.setJhjg(jhjg);
+		projectProfile.setSfzftzl(sfzftzl);
+		projectProfile.setYzzpl1(yzzpl1);
+		projectProfile.setYzzpl2(yzzpl2);
+		projectProfile.setYzzpl3(yzzpl3);
+		projectProfile.setYzzpl4(yzzpl4);
 		ProjectProfileLocalServiceUtil.updateProjectProfile(projectProfile);
 		permit.setBjbh(bjbh);
 		permit.setSqbz(sqbz);
