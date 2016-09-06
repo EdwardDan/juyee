@@ -1,3 +1,4 @@
+
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
 <style>
@@ -6,204 +7,156 @@
 	padding: 8px;
 }
 
+.aui input[type="file"] {
+	width: 150px;
+}
 </style>
+
+<% String permitId =ParamUtil.getString(renderRequest,"permitId");
+	List<ApplyMaterial> materialList=ApplyMaterialLocalServiceUtil.findByPermitId(1, -1, -1);
+    System.out.println(Arrays.asList(materialList));
+    System.out.println(123);
+%>
+
 
 <c:set var="namespace" value="<%=renderResponse.getNamespace()%>"></c:set>
 <portlet:resourceURL var="fileUpLoadURL" id="fileUpLoad" />
+<portlet:resourceURL var="fileDeleteURL" id="fileDelete" />
 
-<form>
+<form id="fmFile" enctype="multipart/form-data">
+
 <table class="table table-bordered" style="font-size: 14px;">
 	<tr style="text-align: center; height: 45px;">
 		<td style="text-align: center; width: 5%;">序号</td>
 		<td style="text-align: center; width: 30%;">申请材料名称</td>
-		<td style="text-align: center; width: 50%;">附件</td>
-		<td style="text-align: center; width: 15%;">操作</td>
+		<td style="text-align: center; width: 45%;">附件</td>
+		<td style="text-align: center; width: 20%;">操作</td>
 	</tr>
-	<tr style="text-align: center">
-		<td style="text-align: center">1</td>
-		<td>航道建设项目项目开工备案表</td>
-		<td style="text-align: center">
-			<div id="div1">
-				<a href="javascript:void(0);">航道建设项目项目开工备案表-01.jpg</a>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);">删除</a><br /> <a
-				href="javascript:void(0);">航道建设项目项目开工备案表-02.pdf</a>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);">删除</a><br /> <a
-				href="javascript:void(0);">航道建设项目项目开工备案表-03.jpg</a>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:void(0);">删除</a><br />
-			</div>
-		</td>
-		<td style="text-align: center">
-			<input type="button" value="上传"  onclick="document.getElementById('file1').click();">
-			
-				<input  id="file1" name="${namespace}file1" type="file" multiple=""
-					style="display: none; width: 150px;"
-					onchange=";"></input>
-			
-		</td>
-	</tr>
-	<tr style="text-align: center">
-		<td style="text-align: center">2</td>
-		<td>工程可行性研究报告批复</td>
-		<td style="text-align: center"></td>
-		<td style="text-align: center">
-		<input type="button" value="上传" >
-		</td>
-	</tr>
-	<tr style="text-align: center">
-		<td style="text-align: center">3</td>
-		<td>工程初步设计文件批复</td>
-		<td style="text-align: center"></td>
-		<td style="text-align: center">
-		<input type="button" value="上传" >
-		</td>
-	</tr>
-	<tr style="text-align: center">
-		<td style="text-align: center">4</td>
-		<td>建设项目用地规划许可证</td>
-		<td style="text-align: center"></td>
-		<td style="text-align: center">
-		<input type="button" value="上传" >
-		</td>
-	</tr>
-	<tr style="text-align: center">
-		<td style="text-align: center">5</td>
-		<td>施工图设计文件批复</td>
-		<td style="text-align: center"></td>
-		<td style="text-align: center">
-		<input type="button" value="上传" >
-		</td>
-	</tr>
-	<tr style="text-align: center">
-		<td style="text-align: center">6</td>
-		<td>建设资金落实证明</td>
-		<td style="text-align: center"></td>
-		<td style="text-align: center">
-		<input type="button" value="上传" >
-		</td>
-	</tr>
-	<tr style="text-align: center">
-		<td style="text-align: center">7</td>
-		<td>提供项目场地内完成动迁的证明材料</td>
-		<td style="text-align: center"></td>
-		<td style="text-align: center">
-		<input type="button" value="上传" >
-		</td>
-	</tr>
-	<tr style="text-align: center">
-		<td style="text-align: center">8-1</td>
-		<td>主体工程施工中标通知书</td>
-		<td style="text-align: center"></td>
-		<td style="text-align: center">
-		<input type="button" value="上传" >
-		</td>
-	</tr>
-	<tr style="text-align: center">
-		<td style="text-align: center">8-2</td>
-		<td>承发包合同</td>
-		<td style="text-align: center"></td>
-		<td style="text-align: center">
-		<input type="button" value="上传" >
-		</td>
-	</tr>
-	<tr style="text-align: center">
-		<td style="text-align: center">8-3</td>
-		<td>企业的营业执照</td>
-		<td style="text-align: center"></td>
-		<td style="text-align: center">
-		<input type="button" value="上传" >
-		</td>
-	</tr>
-	<tr style="text-align: center">
-		<td style="text-align: center">8-4</td>
-		<td>资质证书</td>
-		<td style="text-align: center"></td>
-		<td style="text-align: center">
-		<input type="button" value="上传" >
-		</td>
-	</tr>
-	<tr style="text-align: center">
-		<td style="text-align: center">8-5</td>
-		<td>安全生产许可证书</td>
-		<td style="text-align: center"></td>
-		<td style="text-align: center">
-		<input type="button" value="上传" >
-		</td>
-	</tr>
-	<tr style="text-align: center">
-		<td style="text-align: center">8-6</td>
-		<td>项目经理的注册建造师资格证书</td>
-		<td style="text-align: center"></td>
-		<td style="text-align: center">
-		<input type="button" value="上传" >
-		</td>
-	</tr>
-
-	<tr style="text-align: center">
-		<td style="text-align: center">9-1</td>
-		<td>主体工程监理中标通知书</td>
-		<td style="text-align: center"></td>
-		<td style="text-align: center">
-		<input type="button" value="上传" >
-		</td>
-	</tr>
-	<tr style="text-align: center">
-		<td style="text-align: center">9-2</td>
-		<td>承发包合同</td>
-		<td style="text-align: center"></td>
-		<td style="text-align: center">
-		<input type="button" value="上传" >
-		</td>
-	</tr>
-	<tr style="text-align: center">
-		<td style="text-align: center">9-3</td>
-		<td>企业的营业执照</td>
-		<td style="text-align: center"></td>
-		<td style="text-align: center">
-		<input type="button" value="上传" >
-		</td>
-	</tr>
-	<tr style="text-align: center">
-		<td style="text-align: center">9-4</td>
-		<td>资质证书</td>
-		<td style="text-align: center"></td>
-		<td style="text-align: center">
-		<input type="button" value="上传" >
-		</td>
-	</tr>
-	<tr style="text-align: center">
-		<td style="text-align: center">9-5</td>
-		<td>相应的总监注册监理工程师资格证书</td>
-		<td style="text-align: center"></td>
-		<td style="text-align: center">
-		<input type="button" value="上传" >
-		</td>
-	</tr>
-	<tr style="text-align: center">
-		<td style="text-align: center">10</td>
-		<td>主体工程安全质量报监证明手续</td>
-		<td style="text-align: center"></td>
-		<td style="text-align: center">
-		<input type="button" value="上传" >
-		</td>
-	</tr>
-	<tr style="text-align: center">
-		<td style="text-align: center">11</td>
-		<td>其他证明资料</td>
-		<td style="text-align: center"></td>
-		<td style="text-align: center">
-		<input type="button" value="上传" >
-		</td>
-	</tr>
-
+	<c:forEach items="<%=materialList%>" var="material" varStatus="status"> 
+		<tr style="text-align: center">
+			<td style="text-align: center">${material.xh}</td>
+			<td>${material.clmc}</td>
+			<td style="text-align: center">
+				<div id="fileDiv${status.index+1}">
+				<c:if test="${not empty material.fileEntryIds}">
+				<c:forEach items="${fn:split(material.fileEntryIds,',')}" var="fileEntryId" varStatus="statusSub">
+					<div name="file${status.index+1}">
+					<a class="fileName" href="javascript:void(0);">
+								${material.clmc}-${statusSub.index+1}</a> &nbsp;&nbsp;&nbsp;
+					<a href='javascript:void(0)'; onclick="fileDelete(this,${fileEntryId},${material.materialId})">删除</a></div>
+				</c:forEach>
+				</c:if>
+				</div>
+			</td>
+			<td style="text-align: center">
+				<input type="button" value="上传" onclick="document.getElementById('fileInput${status.index+1}').click();"> 
+				<input id="fileInput${status.index+1}" name="${namespace}fileInput${status.index+1}" type="file" multiple=""
+				style="display:none;width: 150px;"  onchange="fileUpLoad(${status.index+1},${material.materialId},'${material.clmc}');"></input>
+	
+			</td>
+		</tr>
+	</c:forEach>
+	
 </table>
 
 <div style="text-align: center">
 	<aui:button type="submit" value="保存" />
 </div>
-
 </form>
 
+<aui:script>
+	/* 上传 */
+	function fileUpLoad(divNo,materialId,materialName) {
+		var fmFile = document.getElementById("fmFile");
+		var oMyForm = new FormData(fmFile);
+		oMyForm.append("<portlet:namespace/>divNo",divNo);
+		oMyForm.append("<portlet:namespace/>materialId",materialId);
+		var no = findFileNo(divNo);
+		
+		$.ajax({
+					url : "<%=fileUpLoadURL%>",
+					type : "post",
+					data : oMyForm,
+					cache : false,
+					processData : false,
+					contentType : false,
+					success : function(data) {
+						var fileData = eval("(" + data + ")");
+						if(fileData.upLoadStatus){
+							var ele = "<div name='file"+divNo+"'><a class='fileName' href='javascript:void(0);'>"
+							+ materialName+"-"+no+"."+fileData.extension
+							+ "</a> &nbsp;&nbsp;&nbsp;<a href='javascript:void(0)'; onclick='fileDelete(this,"
+							+ fileData.fileId + ","+materialId+")'>删除</a></div>";
+							$("#fileDiv" + divNo).append(ele);
+							domSort(divNo); 
+							alert("操作成功！");		}
+						else{
+							alert(fileData.validatorMessage);
+							}			
 
+					},
+					error : function(e) {
+						alert("网络错误，请重试！！");
+					}
+				});
+	}
 
-
-
+	/* 删除 */
+	function fileDelete(divObj, fileId, materialId) {
+		if (!confirm("确定要删除此文件吗？"))
+			return;
+		$.ajax({
+			url : "<%=fileDeleteURL%>",
+			type : "post",
+			data : {
+				'<portlet:namespace/>fileId' : fileId,
+				'<portlet:namespace/>materialId' : materialId
+			},
+			success : function(data) {
+				$(divObj).parent().remove();
+				alert("成功删除文件!");
+			},
+			error : function(e) {
+				alert("网络错误，请重试！！");
+			}
+		});
+	}
+	/* 查找某一类文件的数量 */
+	function findFileNo(divNo) {
+		var indexNo = 0;
+		var fileNameNoArr=new Array();
+		$("div[name^='file" + divNo + "']").each(function() {
+			var text=$(this).children("a.fileName").text().split('.')[0].split('-')[1];
+			fileNameNoArr[indexNo]=text;
+			indexNo = (indexNo + 1);
+		});
+		return getNo(fileNameNoArr);
+	}
+	
+	function getNo(fileNameNoArr){
+		var no;
+		for(var i=1;i<50;i++){
+			var r=fileNameNoArr.indexOf(i.toString());
+			if(r==-1){
+				no=i;
+				return no;
+			}
+		}
+	}
+	
+	
+	/* 给div元素重新排序 */
+	function domSort(divNo){
+		var sortEle=$("div[name^='file" + divNo + "']").sort(function(a,b){
+		    var valveNumOfa = $(a).children("a.fileName").text().split('.')[0].split('-')[1];
+		    var valveNumOfb = $(b).children("a.fileName").text().split('.')[0].split('-')[1];
+		    if(parseInt(valveNumOfa) < parseInt(valveNumOfb)) return -1;
+		    else return 1;
+		});
+		$('#fileDiv'+divNo).empty().append(sortEle);
+	}
+	
+	
+	
+	
+</aui:script>
