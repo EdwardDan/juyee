@@ -5,7 +5,6 @@
 <%@ include file="/common/init.jsp"%>
 <c:set var="contextPath"
 	value="${request.contextPath}/portlet/permit-approval" />
-<portlet:renderURL var="searchURL"/>
 <liferay-ui:header title="施工许可审核" />
 <%	
 	String ywbh = ParamUtil.getString(request, "ywbh");
@@ -24,6 +23,7 @@
 	request.setAttribute("permits", permits);
 	request.setAttribute("permitsCount", permitsCount);
 %>
+<portlet:renderURL var="searchURL"/>
 <c:set var="contextPath"
 	value="${request.contextPath}/portlet/permit-approval" />
 <liferay-ui:panel-container accordion="false" extended="true">
@@ -87,7 +87,7 @@
 				%>
 				<liferay-ui:search-container-column-text name="序号"
 					value="<%=String.valueOf(++sortNo)%>" />
-				<liferay-ui:search-container-column-text name="绿色" value="${projectProfile.xmxz==21817?'':'★' }"/>
+				<liferay-ui:search-container-column-text name="绿色" value="${projectProfile.xmxz==21817?'':'★'}"/>
 				<liferay-ui:search-container-column-text property="ywbh" name="业务编号" />
 				<liferay-ui:search-container-column-text property="bjbh" name="报建编号" />
 				<liferay-ui:search-container-column-text name="项目名称" value="${projectProfile.gcmc}"/>
@@ -99,8 +99,13 @@
 						<portlet:param name="mvcPath" value="${contextPath}/view-permit.jsp"/>
 						<portlet:param name="permitId" value="${permit.permitId}"/>
 					</portlet:renderURL>
+					<portlet:renderURL var="approvalPermitURL">
+						<portlet:param name="mvcPath" value="${contextPath}/approval-permit.jsp"/>
+						<portlet:param name="permitId" value="${permit.permitId}"/>
+					</portlet:renderURL>
 					<liferay-ui:icon-menu>
 						<liferay-ui:icon image="view" label="查看" url="${viewPermitURL}"/>
+						<liferay-ui:icon image="checked" url="${approvalPermitURL}"/>
 					</liferay-ui:icon-menu>
 				</liferay-ui:search-container-column-text>
 			</liferay-ui:search-container-row>
