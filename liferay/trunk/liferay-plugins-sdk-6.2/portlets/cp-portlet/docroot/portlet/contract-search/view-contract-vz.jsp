@@ -7,6 +7,8 @@
 	Contract contract = ContractLocalServiceUtil.getContract(contractId);
 	request.setAttribute("contract", contract);
 %>
+<portlet:renderURL var="viewURL"/>
+<liferay-ui:header title="查看详细信息" backURL="${viewURL}" />
 <style type="text/css">
 table {
 	width: 100%
