@@ -1,4 +1,3 @@
-
 package com.justonetech.cp.portlet;
 
 import java.io.IOException;
@@ -29,8 +28,7 @@ public class ContractSearchPortlet extends MVCPortlet {
 	private static String dateFormatPattern = "yyyy-MM-dd";
 
 	@Override
-	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
-		throws IOException, PortletException {
+	public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
 		int delta = GetterUtil.getInteger(PropsUtil.get(PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA));
 		int pageSize = ParamUtil.getInteger(renderRequest, "delta", delta);
 		int pageNumber = ParamUtil.getInteger(renderRequest, "cur", 1);
@@ -41,7 +39,7 @@ public class ContractSearchPortlet extends MVCPortlet {
 		String bdh = ParamUtil.getString(renderRequest, "bdh");
 		String xmmc = ParamUtil.getString(renderRequest, "xmmc");
 		String htlb = ParamUtil.getString(renderRequest, "htlb");
-		if(htlb.equals("sy")){
+		if (htlb.equals("sy")) {
 			htlb = "";
 		}
 		List<Contract> contracts = Collections.emptyList();
