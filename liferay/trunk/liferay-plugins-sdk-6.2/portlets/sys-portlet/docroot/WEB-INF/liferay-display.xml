@@ -6,6 +6,5 @@
 	<category name="系统管理">
 		<portlet id="dictionary"></portlet>
 		<portlet id="sms-platform"></portlet>
-		<portlet id="certificate-login"></portlet>
 	</category>
 </display>

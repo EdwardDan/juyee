@@ -66,6 +66,11 @@
 			<aui:input name="desc" label="描述" type="textarea" cssClass="span12"  />
 		</aui:col>
 	</aui:row>
+	<aui:row>
+		<aui:col span="12">
+			<aui:input name="customContent" label="自定义内容" type="textarea" cssClass="span12"  />
+		</aui:col>
+	</aui:row>
 	<aui:button-row>
 		<aui:button type="submit" value="提交" />
 		<aui:button type="cancel" value="取消" href="${viewURL }" />
