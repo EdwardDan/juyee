@@ -59,20 +59,18 @@
 							value="提交查询"></aui:button></td>
 				</tr>
 			</table>
-			<br>
-			<%
-				String stateLabel = "所有,撤回,未提交,已提交";
-				String stateValue = "sy,ch,wtj,ytj";
-			%>
-			<liferay-ui:tabs names="<%=stateLabel%>" param="state"
-				tabsValues="<%=stateValue%>" url="<%=searchURL%>" type="pills">
-			</liferay-ui:tabs>
+			<br>		
 		</aui:form>
 	</liferay-ui:panel>
 	<%
 		int sortNo = 0;
+		String stateLabel = "所有,撤回,未提交,已提交";
+		String stateValue = "sy,ch,wtj,ytj";
 	%>
 	<liferay-ui:panel title="施工许可列表" collapsible="false">
+	<liferay-ui:tabs names="<%=stateLabel%>" param="state"
+				tabsValues="<%=stateValue%>" url="<%=searchURL%>" type="pills">
+			</liferay-ui:tabs>
 		<liferay-ui:search-container emptyResultsMessage="没有施工许可数据。">
 			<liferay-ui:search-container-results results="${permits}"
 				total="${permitsCount}">
