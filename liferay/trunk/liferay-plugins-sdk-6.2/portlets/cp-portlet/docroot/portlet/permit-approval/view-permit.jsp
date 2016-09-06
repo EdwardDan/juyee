@@ -1,23 +1,23 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
 <%@ include file="init.jsp"%>
-
+<liferay-ui:header title="查看施工许可申请"  backURL="${viewURL }"/>
 <liferay-ui:tabs names="工程概况,参建单位,单位工程,申请材料" refresh="false">
 	<liferay-ui:section>
-		工程概况
+		<jsp:include page="${contextPath }/view-projectprofile.jsp"/>
 	</liferay-ui:section>
 	<liferay-ui:section>
-		参建单位
+		<jsp:include page="${contextPath }/view-participationunits.jsp"/>
 	</liferay-ui:section>
 	<liferay-ui:section>
-		单位工程
+		<jsp:include page="${contextPath }/view-unitprojects.jsp"/>
 	</liferay-ui:section>
 	<liferay-ui:section>
-		申请材料
+		<jsp:include page="${contextPath }/view-applymaterials.jsp"/>
 	</liferay-ui:section>
 </liferay-ui:tabs>
 <br>
-<aui:button-row>
+<aui:button-row cssClass="text-center">
 	<portlet:renderURL var="printsjpzURL" windowState="pop_up">
 		<portlet:param name="mvcPath"
 			value="${contextPath}/print-sjpz.jsp" />
