@@ -10,13 +10,13 @@ import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
-import org.apache.tools.ant.taskdefs.WaitFor.Unit;
-
 import com.justonetech.cp.contract.model.Contract;
 import com.justonetech.cp.contract.service.ContractLocalServiceUtil;
+import com.justonetech.cp.permit.model.ParticipationUnit;
 import com.justonetech.cp.permit.model.Permit;
 import com.justonetech.cp.permit.model.ProjectProfile;
 import com.justonetech.cp.permit.model.UnitProject;
+import com.justonetech.cp.permit.service.ParticipationUnitLocalServiceUtil;
 import com.justonetech.cp.permit.service.PermitLocalServiceUtil;
 import com.justonetech.cp.permit.service.ProjectProfileLocalServiceUtil;
 import com.justonetech.cp.permit.service.UnitProjectLocalServiceUtil;
@@ -107,6 +107,11 @@ public class PermitApplicationPortlet extends MVCPortlet {
 			if (sqbz == 1) {
 
 			} else if (sqbz == 2) {
+//				ParticipationUnitLocalServiceUtil
+				if (Validator.isNotNull(permitId)) {
+					ParticipationUnit participationUnit = null;
+//					participationUnit
+				}
 
 			} else if (sqbz == 3) {
 				List<UnitProject> unitProjects = UnitProjectLocalServiceUtil.findByPermitId(permitId, -1, -1);
@@ -161,7 +166,8 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		super.doView(renderRequest, renderResponse);
 	}
 
-	public void saveProjectProfile(ActionRequest request, ActionResponse response) throws SystemException, PortalException, ParseException {
+	public void saveProjectProfile(ActionRequest request, ActionResponse response) throws SystemException,
+			PortalException, ParseException {
 		String jsdwmc = ParamUtil.getString(request, "jsdwmc");
 		String jsdwxz = ParamUtil.getString(request, "jsdwxz");
 		String jsdwdz = ParamUtil.getString(request, "jsdwdz");
@@ -214,18 +220,20 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		PermitLocalServiceUtil.updatePermit(permit);
 	}
 
-	public void saveUnitProjects(ActionRequest request, ActionResponse response) throws SystemException, PortalException, ParseException {
+	public void saveUnitProjects(ActionRequest request, ActionResponse response) throws SystemException,
+			PortalException, ParseException {
 		Long permitId = ParamUtil.getLong(request, "permitId");
 		List<UnitProject> unitProjects = UnitProjectLocalServiceUtil.findByPermitId(permitId, -1, -1);
-		for(UnitProject unitProject:unitProjects){
+		for (UnitProject unitProject : unitProjects) {
 			UnitProjectLocalServiceUtil.deleteUnitProject(unitProject);
 		}
 		String bjbh = ParamUtil.getString(request, "bjbh");
 		String[] gcbhs = ParamUtil.getParameterValues(request, "gcbh");
 		String[] gcmcs = ParamUtil.getParameterValues(request, "gcmc");
 		String[] jsnrs = ParamUtil.getParameterValues(request, "jsnr");
-		for(int i = 0;i<gcbhs.length-1;i++){
-			UnitProject unitProject = UnitProjectLocalServiceUtil.createUnitProject(CounterLocalServiceUtil.increment());
+		for (int i = 0; i < gcbhs.length - 1; i++) {
+			UnitProject unitProject = UnitProjectLocalServiceUtil
+					.createUnitProject(CounterLocalServiceUtil.increment());
 			unitProject.setBjbh(bjbh);
 			unitProject.setPermitId(permitId);
 			unitProject.setGcbh(gcbhs[i]);
