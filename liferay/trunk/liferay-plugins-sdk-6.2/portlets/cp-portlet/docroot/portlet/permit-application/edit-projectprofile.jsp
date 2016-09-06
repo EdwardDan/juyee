@@ -245,12 +245,11 @@ tr.body td.content {
 					type="text" style="width:50%" value="${project.jsdwlxr}">
 				</aui:input></td>
 			<td class="title">联系人手机号</td>
-			<td class="content"><aui:row>
-					<aui:input name="jsdwsjh" label="" inlineField="true" type="text"
-						style="width:93%" value="">
+			<td class="content">
+					<aui:input name="jsdwsjh" label=""  type="text"
+						style="width:50%" value="">
 					</aui:input>
-					<aui:button name="button" value="验证手机"></aui:button>
-				</aui:row></td>
+			</td>
 		</tr>
 		<tr class="body">
 			<td class="title">建设用地批准文件或房地产产权证编号</td>
