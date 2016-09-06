@@ -25,3 +25,6 @@
 <%@page import="com.justonetech.cp.contract.model.*"%> 
 <%@page import="com.justonetech.cp.permit.model.ProjectProfile"%>
 <%@page import="com.justonetech.cp.permit.service.ProjectProfileLocalServiceUtil"%>
+<%@page import="com.justonetech.cp.contract.service.ContractLocalServiceUtil"%>
+<%@page import="com.justonetech.sys.service.DictionaryLocalServiceUtil"%>
+<%@ page import="com.justonetech.sys.model.Dictionary"%>
