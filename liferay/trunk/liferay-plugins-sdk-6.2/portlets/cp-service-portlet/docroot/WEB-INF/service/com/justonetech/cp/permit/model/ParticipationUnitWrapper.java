@@ -51,11 +51,13 @@ public class ParticipationUnitWrapper implements ParticipationUnit,
 
 		attributes.put("unitId", getUnitId());
 		attributes.put("permitId", getPermitId());
-		attributes.put("htxxbsbh", getHtxxbsbh());
 		attributes.put("dwlx", getDwlx());
 		attributes.put("dwmc", getDwmc());
 		attributes.put("xmfzr", getXmfzr());
 		attributes.put("dhhm", getDhhm());
+		attributes.put("zjlx", getZjlx());
+		attributes.put("zjh", getZjh());
+		attributes.put("sfyssj", getSfyssj());
 
 		return attributes;
 	}
@@ -68,16 +70,10 @@ public class ParticipationUnitWrapper implements ParticipationUnit,
 			setUnitId(unitId);
 		}
 
-		String permitId = (String)attributes.get("permitId");
+		Long permitId = (Long)attributes.get("permitId");
 
 		if (permitId != null) {
 			setPermitId(permitId);
-		}
-
-		String htxxbsbh = (String)attributes.get("htxxbsbh");
-
-		if (htxxbsbh != null) {
-			setHtxxbsbh(htxxbsbh);
 		}
 
 		String dwlx = (String)attributes.get("dwlx");
@@ -102,6 +98,24 @@ public class ParticipationUnitWrapper implements ParticipationUnit,
 
 		if (dhhm != null) {
 			setDhhm(dhhm);
+		}
+
+		String zjlx = (String)attributes.get("zjlx");
+
+		if (zjlx != null) {
+			setZjlx(zjlx);
+		}
+
+		String zjh = (String)attributes.get("zjh");
+
+		if (zjh != null) {
+			setZjh(zjh);
+		}
+
+		Boolean sfyssj = (Boolean)attributes.get("sfyssj");
+
+		if (sfyssj != null) {
+			setSfyssj(sfyssj);
 		}
 	}
 
@@ -151,7 +165,7 @@ public class ParticipationUnitWrapper implements ParticipationUnit,
 	* @return the permit ID of this participation unit
 	*/
 	@Override
-	public java.lang.String getPermitId() {
+	public long getPermitId() {
 		return _participationUnit.getPermitId();
 	}
 
@@ -161,28 +175,8 @@ public class ParticipationUnitWrapper implements ParticipationUnit,
 	* @param permitId the permit ID of this participation unit
 	*/
 	@Override
-	public void setPermitId(java.lang.String permitId) {
+	public void setPermitId(long permitId) {
 		_participationUnit.setPermitId(permitId);
-	}
-
-	/**
-	* Returns the htxxbsbh of this participation unit.
-	*
-	* @return the htxxbsbh of this participation unit
-	*/
-	@Override
-	public java.lang.String getHtxxbsbh() {
-		return _participationUnit.getHtxxbsbh();
-	}
-
-	/**
-	* Sets the htxxbsbh of this participation unit.
-	*
-	* @param htxxbsbh the htxxbsbh of this participation unit
-	*/
-	@Override
-	public void setHtxxbsbh(java.lang.String htxxbsbh) {
-		_participationUnit.setHtxxbsbh(htxxbsbh);
 	}
 
 	/**
@@ -263,6 +257,76 @@ public class ParticipationUnitWrapper implements ParticipationUnit,
 	@Override
 	public void setDhhm(java.lang.String dhhm) {
 		_participationUnit.setDhhm(dhhm);
+	}
+
+	/**
+	* Returns the zjlx of this participation unit.
+	*
+	* @return the zjlx of this participation unit
+	*/
+	@Override
+	public java.lang.String getZjlx() {
+		return _participationUnit.getZjlx();
+	}
+
+	/**
+	* Sets the zjlx of this participation unit.
+	*
+	* @param zjlx the zjlx of this participation unit
+	*/
+	@Override
+	public void setZjlx(java.lang.String zjlx) {
+		_participationUnit.setZjlx(zjlx);
+	}
+
+	/**
+	* Returns the zjh of this participation unit.
+	*
+	* @return the zjh of this participation unit
+	*/
+	@Override
+	public java.lang.String getZjh() {
+		return _participationUnit.getZjh();
+	}
+
+	/**
+	* Sets the zjh of this participation unit.
+	*
+	* @param zjh the zjh of this participation unit
+	*/
+	@Override
+	public void setZjh(java.lang.String zjh) {
+		_participationUnit.setZjh(zjh);
+	}
+
+	/**
+	* Returns the sfyssj of this participation unit.
+	*
+	* @return the sfyssj of this participation unit
+	*/
+	@Override
+	public boolean getSfyssj() {
+		return _participationUnit.getSfyssj();
+	}
+
+	/**
+	* Returns <code>true</code> if this participation unit is sfyssj.
+	*
+	* @return <code>true</code> if this participation unit is sfyssj; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isSfyssj() {
+		return _participationUnit.isSfyssj();
+	}
+
+	/**
+	* Sets whether this participation unit is sfyssj.
+	*
+	* @param sfyssj the sfyssj of this participation unit
+	*/
+	@Override
+	public void setSfyssj(boolean sfyssj) {
+		_participationUnit.setSfyssj(sfyssj);
 	}
 
 	@Override

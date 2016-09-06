@@ -36,14 +36,12 @@ public class ParticipationUnitCacheModel implements CacheModel<ParticipationUnit
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(15);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{unitId=");
 		sb.append(unitId);
 		sb.append(", permitId=");
 		sb.append(permitId);
-		sb.append(", htxxbsbh=");
-		sb.append(htxxbsbh);
 		sb.append(", dwlx=");
 		sb.append(dwlx);
 		sb.append(", dwmc=");
@@ -52,6 +50,12 @@ public class ParticipationUnitCacheModel implements CacheModel<ParticipationUnit
 		sb.append(xmfzr);
 		sb.append(", dhhm=");
 		sb.append(dhhm);
+		sb.append(", zjlx=");
+		sb.append(zjlx);
+		sb.append(", zjh=");
+		sb.append(zjh);
+		sb.append(", sfyssj=");
+		sb.append(sfyssj);
 		sb.append("}");
 
 		return sb.toString();
@@ -62,20 +66,7 @@ public class ParticipationUnitCacheModel implements CacheModel<ParticipationUnit
 		ParticipationUnitImpl participationUnitImpl = new ParticipationUnitImpl();
 
 		participationUnitImpl.setUnitId(unitId);
-
-		if (permitId == null) {
-			participationUnitImpl.setPermitId(StringPool.BLANK);
-		}
-		else {
-			participationUnitImpl.setPermitId(permitId);
-		}
-
-		if (htxxbsbh == null) {
-			participationUnitImpl.setHtxxbsbh(StringPool.BLANK);
-		}
-		else {
-			participationUnitImpl.setHtxxbsbh(htxxbsbh);
-		}
+		participationUnitImpl.setPermitId(permitId);
 
 		if (dwlx == null) {
 			participationUnitImpl.setDwlx(StringPool.BLANK);
@@ -105,6 +96,22 @@ public class ParticipationUnitCacheModel implements CacheModel<ParticipationUnit
 			participationUnitImpl.setDhhm(dhhm);
 		}
 
+		if (zjlx == null) {
+			participationUnitImpl.setZjlx(StringPool.BLANK);
+		}
+		else {
+			participationUnitImpl.setZjlx(zjlx);
+		}
+
+		if (zjh == null) {
+			participationUnitImpl.setZjh(StringPool.BLANK);
+		}
+		else {
+			participationUnitImpl.setZjh(zjh);
+		}
+
+		participationUnitImpl.setSfyssj(sfyssj);
+
 		participationUnitImpl.resetOriginalValues();
 
 		return participationUnitImpl;
@@ -113,32 +120,21 @@ public class ParticipationUnitCacheModel implements CacheModel<ParticipationUnit
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		unitId = objectInput.readLong();
-		permitId = objectInput.readUTF();
-		htxxbsbh = objectInput.readUTF();
+		permitId = objectInput.readLong();
 		dwlx = objectInput.readUTF();
 		dwmc = objectInput.readUTF();
 		xmfzr = objectInput.readUTF();
 		dhhm = objectInput.readUTF();
+		zjlx = objectInput.readUTF();
+		zjh = objectInput.readUTF();
+		sfyssj = objectInput.readBoolean();
 	}
 
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(unitId);
-
-		if (permitId == null) {
-			objectOutput.writeUTF(StringPool.BLANK);
-		}
-		else {
-			objectOutput.writeUTF(permitId);
-		}
-
-		if (htxxbsbh == null) {
-			objectOutput.writeUTF(StringPool.BLANK);
-		}
-		else {
-			objectOutput.writeUTF(htxxbsbh);
-		}
+		objectOutput.writeLong(permitId);
 
 		if (dwlx == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
@@ -167,13 +163,31 @@ public class ParticipationUnitCacheModel implements CacheModel<ParticipationUnit
 		else {
 			objectOutput.writeUTF(dhhm);
 		}
+
+		if (zjlx == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(zjlx);
+		}
+
+		if (zjh == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(zjh);
+		}
+
+		objectOutput.writeBoolean(sfyssj);
 	}
 
 	public long unitId;
-	public String permitId;
-	public String htxxbsbh;
+	public long permitId;
 	public String dwlx;
 	public String dwmc;
 	public String xmfzr;
 	public String dhhm;
+	public String zjlx;
+	public String zjh;
+	public boolean sfyssj;
 }

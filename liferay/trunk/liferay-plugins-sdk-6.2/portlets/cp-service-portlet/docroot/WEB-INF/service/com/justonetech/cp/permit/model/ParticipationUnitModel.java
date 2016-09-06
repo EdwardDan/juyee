@@ -76,30 +76,14 @@ public interface ParticipationUnitModel extends BaseModel<ParticipationUnit> {
 	 *
 	 * @return the permit ID of this participation unit
 	 */
-	@AutoEscape
-	public String getPermitId();
+	public long getPermitId();
 
 	/**
 	 * Sets the permit ID of this participation unit.
 	 *
 	 * @param permitId the permit ID of this participation unit
 	 */
-	public void setPermitId(String permitId);
-
-	/**
-	 * Returns the htxxbsbh of this participation unit.
-	 *
-	 * @return the htxxbsbh of this participation unit
-	 */
-	@AutoEscape
-	public String getHtxxbsbh();
-
-	/**
-	 * Sets the htxxbsbh of this participation unit.
-	 *
-	 * @param htxxbsbh the htxxbsbh of this participation unit
-	 */
-	public void setHtxxbsbh(String htxxbsbh);
+	public void setPermitId(long permitId);
 
 	/**
 	 * Returns the dwlx of this participation unit.
@@ -160,6 +144,57 @@ public interface ParticipationUnitModel extends BaseModel<ParticipationUnit> {
 	 * @param dhhm the dhhm of this participation unit
 	 */
 	public void setDhhm(String dhhm);
+
+	/**
+	 * Returns the zjlx of this participation unit.
+	 *
+	 * @return the zjlx of this participation unit
+	 */
+	@AutoEscape
+	public String getZjlx();
+
+	/**
+	 * Sets the zjlx of this participation unit.
+	 *
+	 * @param zjlx the zjlx of this participation unit
+	 */
+	public void setZjlx(String zjlx);
+
+	/**
+	 * Returns the zjh of this participation unit.
+	 *
+	 * @return the zjh of this participation unit
+	 */
+	@AutoEscape
+	public String getZjh();
+
+	/**
+	 * Sets the zjh of this participation unit.
+	 *
+	 * @param zjh the zjh of this participation unit
+	 */
+	public void setZjh(String zjh);
+
+	/**
+	 * Returns the sfyssj of this participation unit.
+	 *
+	 * @return the sfyssj of this participation unit
+	 */
+	public boolean getSfyssj();
+
+	/**
+	 * Returns <code>true</code> if this participation unit is sfyssj.
+	 *
+	 * @return <code>true</code> if this participation unit is sfyssj; <code>false</code> otherwise
+	 */
+	public boolean isSfyssj();
+
+	/**
+	 * Sets whether this participation unit is sfyssj.
+	 *
+	 * @param sfyssj the sfyssj of this participation unit
+	 */
+	public void setSfyssj(boolean sfyssj);
 
 	@Override
 	public boolean isNew();

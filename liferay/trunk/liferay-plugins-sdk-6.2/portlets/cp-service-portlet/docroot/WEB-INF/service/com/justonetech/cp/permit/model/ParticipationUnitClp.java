@@ -75,11 +75,13 @@ public class ParticipationUnitClp extends BaseModelImpl<ParticipationUnit>
 
 		attributes.put("unitId", getUnitId());
 		attributes.put("permitId", getPermitId());
-		attributes.put("htxxbsbh", getHtxxbsbh());
 		attributes.put("dwlx", getDwlx());
 		attributes.put("dwmc", getDwmc());
 		attributes.put("xmfzr", getXmfzr());
 		attributes.put("dhhm", getDhhm());
+		attributes.put("zjlx", getZjlx());
+		attributes.put("zjh", getZjh());
+		attributes.put("sfyssj", getSfyssj());
 
 		return attributes;
 	}
@@ -92,16 +94,10 @@ public class ParticipationUnitClp extends BaseModelImpl<ParticipationUnit>
 			setUnitId(unitId);
 		}
 
-		String permitId = (String)attributes.get("permitId");
+		Long permitId = (Long)attributes.get("permitId");
 
 		if (permitId != null) {
 			setPermitId(permitId);
-		}
-
-		String htxxbsbh = (String)attributes.get("htxxbsbh");
-
-		if (htxxbsbh != null) {
-			setHtxxbsbh(htxxbsbh);
 		}
 
 		String dwlx = (String)attributes.get("dwlx");
@@ -126,6 +122,24 @@ public class ParticipationUnitClp extends BaseModelImpl<ParticipationUnit>
 
 		if (dhhm != null) {
 			setDhhm(dhhm);
+		}
+
+		String zjlx = (String)attributes.get("zjlx");
+
+		if (zjlx != null) {
+			setZjlx(zjlx);
+		}
+
+		String zjh = (String)attributes.get("zjh");
+
+		if (zjh != null) {
+			setZjh(zjh);
+		}
+
+		Boolean sfyssj = (Boolean)attributes.get("sfyssj");
+
+		if (sfyssj != null) {
+			setSfyssj(sfyssj);
 		}
 	}
 
@@ -153,44 +167,21 @@ public class ParticipationUnitClp extends BaseModelImpl<ParticipationUnit>
 	}
 
 	@Override
-	public String getPermitId() {
+	public long getPermitId() {
 		return _permitId;
 	}
 
 	@Override
-	public void setPermitId(String permitId) {
+	public void setPermitId(long permitId) {
 		_permitId = permitId;
 
 		if (_participationUnitRemoteModel != null) {
 			try {
 				Class<?> clazz = _participationUnitRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setPermitId", String.class);
+				Method method = clazz.getMethod("setPermitId", long.class);
 
 				method.invoke(_participationUnitRemoteModel, permitId);
-			}
-			catch (Exception e) {
-				throw new UnsupportedOperationException(e);
-			}
-		}
-	}
-
-	@Override
-	public String getHtxxbsbh() {
-		return _htxxbsbh;
-	}
-
-	@Override
-	public void setHtxxbsbh(String htxxbsbh) {
-		_htxxbsbh = htxxbsbh;
-
-		if (_participationUnitRemoteModel != null) {
-			try {
-				Class<?> clazz = _participationUnitRemoteModel.getClass();
-
-				Method method = clazz.getMethod("setHtxxbsbh", String.class);
-
-				method.invoke(_participationUnitRemoteModel, htxxbsbh);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -290,6 +281,80 @@ public class ParticipationUnitClp extends BaseModelImpl<ParticipationUnit>
 		}
 	}
 
+	@Override
+	public String getZjlx() {
+		return _zjlx;
+	}
+
+	@Override
+	public void setZjlx(String zjlx) {
+		_zjlx = zjlx;
+
+		if (_participationUnitRemoteModel != null) {
+			try {
+				Class<?> clazz = _participationUnitRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setZjlx", String.class);
+
+				method.invoke(_participationUnitRemoteModel, zjlx);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getZjh() {
+		return _zjh;
+	}
+
+	@Override
+	public void setZjh(String zjh) {
+		_zjh = zjh;
+
+		if (_participationUnitRemoteModel != null) {
+			try {
+				Class<?> clazz = _participationUnitRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setZjh", String.class);
+
+				method.invoke(_participationUnitRemoteModel, zjh);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public boolean getSfyssj() {
+		return _sfyssj;
+	}
+
+	@Override
+	public boolean isSfyssj() {
+		return _sfyssj;
+	}
+
+	@Override
+	public void setSfyssj(boolean sfyssj) {
+		_sfyssj = sfyssj;
+
+		if (_participationUnitRemoteModel != null) {
+			try {
+				Class<?> clazz = _participationUnitRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setSfyssj", boolean.class);
+
+				method.invoke(_participationUnitRemoteModel, sfyssj);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
 	public BaseModel<?> getParticipationUnitRemoteModel() {
 		return _participationUnitRemoteModel;
 	}
@@ -363,11 +428,13 @@ public class ParticipationUnitClp extends BaseModelImpl<ParticipationUnit>
 
 		clone.setUnitId(getUnitId());
 		clone.setPermitId(getPermitId());
-		clone.setHtxxbsbh(getHtxxbsbh());
 		clone.setDwlx(getDwlx());
 		clone.setDwmc(getDwmc());
 		clone.setXmfzr(getXmfzr());
 		clone.setDhhm(getDhhm());
+		clone.setZjlx(getZjlx());
+		clone.setZjh(getZjh());
+		clone.setSfyssj(getSfyssj());
 
 		return clone;
 	}
@@ -420,14 +487,12 @@ public class ParticipationUnitClp extends BaseModelImpl<ParticipationUnit>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(15);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{unitId=");
 		sb.append(getUnitId());
 		sb.append(", permitId=");
 		sb.append(getPermitId());
-		sb.append(", htxxbsbh=");
-		sb.append(getHtxxbsbh());
 		sb.append(", dwlx=");
 		sb.append(getDwlx());
 		sb.append(", dwmc=");
@@ -436,6 +501,12 @@ public class ParticipationUnitClp extends BaseModelImpl<ParticipationUnit>
 		sb.append(getXmfzr());
 		sb.append(", dhhm=");
 		sb.append(getDhhm());
+		sb.append(", zjlx=");
+		sb.append(getZjlx());
+		sb.append(", zjh=");
+		sb.append(getZjh());
+		sb.append(", sfyssj=");
+		sb.append(getSfyssj());
 		sb.append("}");
 
 		return sb.toString();
@@ -443,7 +514,7 @@ public class ParticipationUnitClp extends BaseModelImpl<ParticipationUnit>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.cp.permit.model.ParticipationUnit");
@@ -456,10 +527,6 @@ public class ParticipationUnitClp extends BaseModelImpl<ParticipationUnit>
 		sb.append(
 			"<column><column-name>permitId</column-name><column-value><![CDATA[");
 		sb.append(getPermitId());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>htxxbsbh</column-name><column-value><![CDATA[");
-		sb.append(getHtxxbsbh());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>dwlx</column-name><column-value><![CDATA[");
@@ -477,6 +544,18 @@ public class ParticipationUnitClp extends BaseModelImpl<ParticipationUnit>
 			"<column><column-name>dhhm</column-name><column-value><![CDATA[");
 		sb.append(getDhhm());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>zjlx</column-name><column-value><![CDATA[");
+		sb.append(getZjlx());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>zjh</column-name><column-value><![CDATA[");
+		sb.append(getZjh());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>sfyssj</column-name><column-value><![CDATA[");
+		sb.append(getSfyssj());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -484,12 +563,14 @@ public class ParticipationUnitClp extends BaseModelImpl<ParticipationUnit>
 	}
 
 	private long _unitId;
-	private String _permitId;
-	private String _htxxbsbh;
+	private long _permitId;
 	private String _dwlx;
 	private String _dwmc;
 	private String _xmfzr;
 	private String _dhhm;
+	private String _zjlx;
+	private String _zjh;
+	private boolean _sfyssj;
 	private BaseModel<?> _participationUnitRemoteModel;
 	private Class<?> _clpSerializerClass = com.justonetech.cp.permit.service.ClpSerializer.class;
 }

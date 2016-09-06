@@ -31,11 +31,13 @@ public class ParticipationUnitSoap implements Serializable {
 
 		soapModel.setUnitId(model.getUnitId());
 		soapModel.setPermitId(model.getPermitId());
-		soapModel.setHtxxbsbh(model.getHtxxbsbh());
 		soapModel.setDwlx(model.getDwlx());
 		soapModel.setDwmc(model.getDwmc());
 		soapModel.setXmfzr(model.getXmfzr());
 		soapModel.setDhhm(model.getDhhm());
+		soapModel.setZjlx(model.getZjlx());
+		soapModel.setZjh(model.getZjh());
+		soapModel.setSfyssj(model.getSfyssj());
 
 		return soapModel;
 	}
@@ -99,20 +101,12 @@ public class ParticipationUnitSoap implements Serializable {
 		_unitId = unitId;
 	}
 
-	public String getPermitId() {
+	public long getPermitId() {
 		return _permitId;
 	}
 
-	public void setPermitId(String permitId) {
+	public void setPermitId(long permitId) {
 		_permitId = permitId;
-	}
-
-	public String getHtxxbsbh() {
-		return _htxxbsbh;
-	}
-
-	public void setHtxxbsbh(String htxxbsbh) {
-		_htxxbsbh = htxxbsbh;
 	}
 
 	public String getDwlx() {
@@ -147,11 +141,41 @@ public class ParticipationUnitSoap implements Serializable {
 		_dhhm = dhhm;
 	}
 
+	public String getZjlx() {
+		return _zjlx;
+	}
+
+	public void setZjlx(String zjlx) {
+		_zjlx = zjlx;
+	}
+
+	public String getZjh() {
+		return _zjh;
+	}
+
+	public void setZjh(String zjh) {
+		_zjh = zjh;
+	}
+
+	public boolean getSfyssj() {
+		return _sfyssj;
+	}
+
+	public boolean isSfyssj() {
+		return _sfyssj;
+	}
+
+	public void setSfyssj(boolean sfyssj) {
+		_sfyssj = sfyssj;
+	}
+
 	private long _unitId;
-	private String _permitId;
-	private String _htxxbsbh;
+	private long _permitId;
 	private String _dwlx;
 	private String _dwmc;
 	private String _xmfzr;
 	private String _dhhm;
+	private String _zjlx;
+	private String _zjh;
+	private boolean _sfyssj;
 }

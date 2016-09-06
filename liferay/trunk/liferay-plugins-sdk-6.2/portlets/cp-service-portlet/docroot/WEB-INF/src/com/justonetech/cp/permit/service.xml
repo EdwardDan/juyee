@@ -119,7 +119,7 @@
 		<column name="dhhm" type="String" /><!-- 电话号码 -->
 		<column name="zjlx" type="String" /><!-- 证件类型 -->
 		<column name="zjh" type="String" /><!-- 证件号 -->
-		<column name="sfyssj" type="String" /><!-- 是否原始数据 -->
+		<column name="sfyssj" type="boolean" /><!-- 是否原始数据 -->
 		
 		<!-- Order -->
 

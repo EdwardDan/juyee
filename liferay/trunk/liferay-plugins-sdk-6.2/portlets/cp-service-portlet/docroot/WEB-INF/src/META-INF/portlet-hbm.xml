@@ -261,12 +261,14 @@
 		<id name="unitId" type="long">
 			<generator class="assigned" />
 		</id>
-		<property name="permitId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="htxxbsbh" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="permitId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="dwlx" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="dwmc" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="xmfzr" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="dhhm" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="zjlx" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="zjh" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="sfyssj" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 	</class>
 	<class name="com.justonetech.cp.permit.model.impl.PermitImpl" table="cp_Permit">
 		<cache usage="read-write" />

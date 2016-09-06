@@ -280,11 +280,13 @@
 		<attributes>
 			<id name="unitId" />
 			<basic name="permitId" />
-			<basic name="htxxbsbh" />
 			<basic name="dwlx" />
 			<basic name="dwmc" />
 			<basic name="xmfzr" />
 			<basic name="dhhm" />
+			<basic name="zjlx" />
+			<basic name="zjh" />
+			<basic name="sfyssj" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />

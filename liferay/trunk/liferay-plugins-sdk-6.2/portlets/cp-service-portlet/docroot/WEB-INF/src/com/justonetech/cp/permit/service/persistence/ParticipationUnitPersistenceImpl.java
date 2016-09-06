@@ -39,7 +39,6 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnmodifiableList;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
@@ -90,7 +89,7 @@ public class ParticipationUnitPersistenceImpl extends BasePersistenceImpl<Partic
 			ParticipationUnitImpl.class,
 			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByPermitId",
 			new String[] {
-				String.class.getName(),
+				Long.class.getName(),
 				
 			Integer.class.getName(), Integer.class.getName(),
 				OrderByComparator.class.getName()
@@ -100,12 +99,12 @@ public class ParticipationUnitPersistenceImpl extends BasePersistenceImpl<Partic
 			ParticipationUnitModelImpl.FINDER_CACHE_ENABLED,
 			ParticipationUnitImpl.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByPermitId",
-			new String[] { String.class.getName() },
+			new String[] { Long.class.getName() },
 			ParticipationUnitModelImpl.PERMITID_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_PERMITID = new FinderPath(ParticipationUnitModelImpl.ENTITY_CACHE_ENABLED,
 			ParticipationUnitModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByPermitId",
-			new String[] { String.class.getName() });
+			new String[] { Long.class.getName() });
 
 	/**
 	 * Returns all the participation units where permitId = &#63;.
@@ -115,7 +114,7 @@ public class ParticipationUnitPersistenceImpl extends BasePersistenceImpl<Partic
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<ParticipationUnit> findByPermitId(String permitId)
+	public List<ParticipationUnit> findByPermitId(long permitId)
 		throws SystemException {
 		return findByPermitId(permitId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 			null);
@@ -135,7 +134,7 @@ public class ParticipationUnitPersistenceImpl extends BasePersistenceImpl<Partic
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<ParticipationUnit> findByPermitId(String permitId, int start,
+	public List<ParticipationUnit> findByPermitId(long permitId, int start,
 		int end) throws SystemException {
 		return findByPermitId(permitId, start, end, null);
 	}
@@ -155,7 +154,7 @@ public class ParticipationUnitPersistenceImpl extends BasePersistenceImpl<Partic
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<ParticipationUnit> findByPermitId(String permitId, int start,
+	public List<ParticipationUnit> findByPermitId(long permitId, int start,
 		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -177,7 +176,7 @@ public class ParticipationUnitPersistenceImpl extends BasePersistenceImpl<Partic
 
 		if ((list != null) && !list.isEmpty()) {
 			for (ParticipationUnit participationUnit : list) {
-				if (!Validator.equals(permitId, participationUnit.getPermitId())) {
+				if ((permitId != participationUnit.getPermitId())) {
 					list = null;
 
 					break;
@@ -198,19 +197,7 @@ public class ParticipationUnitPersistenceImpl extends BasePersistenceImpl<Partic
 
 			query.append(_SQL_SELECT_PARTICIPATIONUNIT_WHERE);
 
-			boolean bindPermitId = false;
-
-			if (permitId == null) {
-				query.append(_FINDER_COLUMN_PERMITID_PERMITID_1);
-			}
-			else if (permitId.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_PERMITID_PERMITID_3);
-			}
-			else {
-				bindPermitId = true;
-
-				query.append(_FINDER_COLUMN_PERMITID_PERMITID_2);
-			}
+			query.append(_FINDER_COLUMN_PERMITID_PERMITID_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -232,9 +219,7 @@ public class ParticipationUnitPersistenceImpl extends BasePersistenceImpl<Partic
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				if (bindPermitId) {
-					qPos.add(permitId);
-				}
+				qPos.add(permitId);
 
 				if (!pagination) {
 					list = (List<ParticipationUnit>)QueryUtil.list(q,
@@ -276,7 +261,7 @@ public class ParticipationUnitPersistenceImpl extends BasePersistenceImpl<Partic
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public ParticipationUnit findByPermitId_First(String permitId,
+	public ParticipationUnit findByPermitId_First(long permitId,
 		OrderByComparator orderByComparator)
 		throws NoSuchParticipationUnitException, SystemException {
 		ParticipationUnit participationUnit = fetchByPermitId_First(permitId,
@@ -307,7 +292,7 @@ public class ParticipationUnitPersistenceImpl extends BasePersistenceImpl<Partic
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public ParticipationUnit fetchByPermitId_First(String permitId,
+	public ParticipationUnit fetchByPermitId_First(long permitId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<ParticipationUnit> list = findByPermitId(permitId, 0, 1,
 				orderByComparator);
@@ -329,7 +314,7 @@ public class ParticipationUnitPersistenceImpl extends BasePersistenceImpl<Partic
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public ParticipationUnit findByPermitId_Last(String permitId,
+	public ParticipationUnit findByPermitId_Last(long permitId,
 		OrderByComparator orderByComparator)
 		throws NoSuchParticipationUnitException, SystemException {
 		ParticipationUnit participationUnit = fetchByPermitId_Last(permitId,
@@ -360,7 +345,7 @@ public class ParticipationUnitPersistenceImpl extends BasePersistenceImpl<Partic
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public ParticipationUnit fetchByPermitId_Last(String permitId,
+	public ParticipationUnit fetchByPermitId_Last(long permitId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByPermitId(permitId);
 
@@ -390,7 +375,7 @@ public class ParticipationUnitPersistenceImpl extends BasePersistenceImpl<Partic
 	 */
 	@Override
 	public ParticipationUnit[] findByPermitId_PrevAndNext(long unitId,
-		String permitId, OrderByComparator orderByComparator)
+		long permitId, OrderByComparator orderByComparator)
 		throws NoSuchParticipationUnitException, SystemException {
 		ParticipationUnit participationUnit = findByPrimaryKey(unitId);
 
@@ -420,7 +405,7 @@ public class ParticipationUnitPersistenceImpl extends BasePersistenceImpl<Partic
 	}
 
 	protected ParticipationUnit getByPermitId_PrevAndNext(Session session,
-		ParticipationUnit participationUnit, String permitId,
+		ParticipationUnit participationUnit, long permitId,
 		OrderByComparator orderByComparator, boolean previous) {
 		StringBundler query = null;
 
@@ -434,19 +419,7 @@ public class ParticipationUnitPersistenceImpl extends BasePersistenceImpl<Partic
 
 		query.append(_SQL_SELECT_PARTICIPATIONUNIT_WHERE);
 
-		boolean bindPermitId = false;
-
-		if (permitId == null) {
-			query.append(_FINDER_COLUMN_PERMITID_PERMITID_1);
-		}
-		else if (permitId.equals(StringPool.BLANK)) {
-			query.append(_FINDER_COLUMN_PERMITID_PERMITID_3);
-		}
-		else {
-			bindPermitId = true;
-
-			query.append(_FINDER_COLUMN_PERMITID_PERMITID_2);
-		}
+		query.append(_FINDER_COLUMN_PERMITID_PERMITID_2);
 
 		if (orderByComparator != null) {
 			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
@@ -516,9 +489,7 @@ public class ParticipationUnitPersistenceImpl extends BasePersistenceImpl<Partic
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		if (bindPermitId) {
-			qPos.add(permitId);
-		}
+		qPos.add(permitId);
 
 		if (orderByComparator != null) {
 			Object[] values = orderByComparator.getOrderByConditionValues(participationUnit);
@@ -545,7 +516,7 @@ public class ParticipationUnitPersistenceImpl extends BasePersistenceImpl<Partic
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public void removeByPermitId(String permitId) throws SystemException {
+	public void removeByPermitId(long permitId) throws SystemException {
 		for (ParticipationUnit participationUnit : findByPermitId(permitId,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(participationUnit);
@@ -560,7 +531,7 @@ public class ParticipationUnitPersistenceImpl extends BasePersistenceImpl<Partic
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public int countByPermitId(String permitId) throws SystemException {
+	public int countByPermitId(long permitId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_PERMITID;
 
 		Object[] finderArgs = new Object[] { permitId };
@@ -573,19 +544,7 @@ public class ParticipationUnitPersistenceImpl extends BasePersistenceImpl<Partic
 
 			query.append(_SQL_COUNT_PARTICIPATIONUNIT_WHERE);
 
-			boolean bindPermitId = false;
-
-			if (permitId == null) {
-				query.append(_FINDER_COLUMN_PERMITID_PERMITID_1);
-			}
-			else if (permitId.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_PERMITID_PERMITID_3);
-			}
-			else {
-				bindPermitId = true;
-
-				query.append(_FINDER_COLUMN_PERMITID_PERMITID_2);
-			}
+			query.append(_FINDER_COLUMN_PERMITID_PERMITID_2);
 
 			String sql = query.toString();
 
@@ -598,9 +557,7 @@ public class ParticipationUnitPersistenceImpl extends BasePersistenceImpl<Partic
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				if (bindPermitId) {
-					qPos.add(permitId);
-				}
+				qPos.add(permitId);
 
 				count = (Long)q.uniqueResult();
 
@@ -619,9 +576,7 @@ public class ParticipationUnitPersistenceImpl extends BasePersistenceImpl<Partic
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_PERMITID_PERMITID_1 = "participationUnit.permitId IS NULL";
 	private static final String _FINDER_COLUMN_PERMITID_PERMITID_2 = "participationUnit.permitId = ?";
-	private static final String _FINDER_COLUMN_PERMITID_PERMITID_3 = "(participationUnit.permitId IS NULL OR participationUnit.permitId = '')";
 
 	public ParticipationUnitPersistenceImpl() {
 		setModelClass(ParticipationUnit.class);
@@ -888,11 +843,13 @@ public class ParticipationUnitPersistenceImpl extends BasePersistenceImpl<Partic
 
 		participationUnitImpl.setUnitId(participationUnit.getUnitId());
 		participationUnitImpl.setPermitId(participationUnit.getPermitId());
-		participationUnitImpl.setHtxxbsbh(participationUnit.getHtxxbsbh());
 		participationUnitImpl.setDwlx(participationUnit.getDwlx());
 		participationUnitImpl.setDwmc(participationUnit.getDwmc());
 		participationUnitImpl.setXmfzr(participationUnit.getXmfzr());
 		participationUnitImpl.setDhhm(participationUnit.getDhhm());
+		participationUnitImpl.setZjlx(participationUnit.getZjlx());
+		participationUnitImpl.setZjh(participationUnit.getZjh());
+		participationUnitImpl.setSfyssj(participationUnit.isSfyssj());
 
 		return participationUnitImpl;
 	}

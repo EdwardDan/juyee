@@ -87,12 +87,14 @@ create table cp_Contract (
 
 create table cp_ParticipationUnit (
 	unitId LONG not null primary key,
-	permitId VARCHAR(75) null,
-	htxxbsbh VARCHAR(75) null,
+	permitId LONG,
 	dwlx VARCHAR(75) null,
 	dwmc VARCHAR(75) null,
 	xmfzr VARCHAR(75) null,
-	dhhm VARCHAR(75) null
+	dhhm VARCHAR(75) null,
+	zjlx VARCHAR(75) null,
+	zjh VARCHAR(75) null,
+	sfyssj BOOLEAN
 );
 
 create table cp_Permit (
