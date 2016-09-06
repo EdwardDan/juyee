@@ -3,15 +3,16 @@
 <%@page import="com.justonetech.cp.permit.model.Permit"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
-<<<<<<< .mine
+<c:set var="contextPath"
+	value="${request.contextPath}/portlet/permit-approval" />
 <portlet:renderURL var="searchURL"/>
 <liferay-ui:header title="施工许可审核" />
 <%	
-	String _ywbh = ParamUtil.getString(request, "ywbh");
-	String _bjbh = ParamUtil.getString(request, "bjbh");
-	String _xmmc = ParamUtil.getString(request, "xmmc");
-	String _xmlx = ParamUtil.getString(request, "xmlx");
-	String _jsdw = ParamUtil.getString(request, "jsdw");
+	String ywbh = ParamUtil.getString(request, "ywbh");
+	String bjbh = ParamUtil.getString(request, "bjbh");
+	String xmmc = ParamUtil.getString(request, "xmmc");
+	String xmlx = ParamUtil.getString(request, "xmlx");
+	String jsdw = ParamUtil.getString(request, "jsdw");
 	String state = ParamUtil.getString(request, "state");
 	int defaultDelta = GetterUtil.getInteger(PropsUtil.get(PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA));
 	int delta = ParamUtil.getInteger(renderRequest, "delta", defaultDelta);
@@ -23,11 +24,8 @@
 	request.setAttribute("permits", permits);
 	request.setAttribute("permitsCount", permitsCount);
 %>
-||||||| .r1338
-=======
 <c:set var="contextPath"
 	value="${request.contextPath}/portlet/permit-approval" />
->>>>>>> .r1344
 <liferay-ui:panel-container accordion="false" extended="true">
 	<liferay-ui:panel title="查询条件" collapsible="true">
 		<aui:form name="fm" id="fm" method="get" action="${searchURL}">
@@ -84,34 +82,29 @@
 				keyProperty="permitId" modelVar="permit">
 				<%
 					Long permitId = permit.getPermitId();
-					String xmmc = ProjectProfileLocalServiceUtil.getProjectProfile(permitId).getGcmc();
-					Long xmxz = ProjectProfileLocalServiceUtil.getProjectProfile(permitId).getXmxz();
-					Long xmlx = ProjectProfileLocalServiceUtil.getProjectProfile(permitId).getXmlx();
-					String jsdw = ProjectProfileLocalServiceUtil.getProjectProfile(permitId).getJsdwmc();
-					request.setAttribute("xmxz", xmxz);
-					request.setAttribute("xmmc", xmmc);
-					request.setAttribute("xmlx", xmlx);
-					request.setAttribute("jsdw", jsdw);
+					ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
+					request.setAttribute("projectProfile", projectProfile);
 				%>
 				<liferay-ui:search-container-column-text name="序号"
 					value="<%=String.valueOf(++sortNo)%>" />
-				<liferay-ui:search-container-column-text name="绿色" value="${xmxz==21817?'':'★' }"/>
+				<liferay-ui:search-container-column-text name="绿色" value="${projectProfile.xmxz==21817?'':'★' }"/>
 				<liferay-ui:search-container-column-text property="ywbh" name="业务编号" />
 				<liferay-ui:search-container-column-text property="bjbh" name="报建编号" />
-				<liferay-ui:search-container-column-text name="项目名称" value="${xmmc}"/>
-				<liferay-ui:search-container-column-text name="项目类型" value="${xmlx}"/>
-				<liferay-ui:search-container-column-text name="建设单位" value="${jsdw}"/>
+				<liferay-ui:search-container-column-text name="项目名称" value="${projectProfile.gcmc}"/>
+				<liferay-ui:search-container-column-text name="项目类型" value="${projectProfile.xmlx}"/>
+				<liferay-ui:search-container-column-text name="建设单位" value="${projectProfile.jsdwmc}"/>
 				<liferay-ui:search-container-column-text name="状态" value=""/>
 				<liferay-ui:search-container-column-text name="操作">
+					<portlet:renderURL var="viewPermitURL">
+						<portlet:param name="mvcPath" value="${contextPath}/view-permit.jsp"/>
+						<portlet:param name="permitId" value="${permit.permitId}"/>
+					</portlet:renderURL>
 					<liferay-ui:icon-menu>
+						<liferay-ui:icon image="view" label="查看" url="${viewPermitURL}"/>
 					</liferay-ui:icon-menu>
 				</liferay-ui:search-container-column-text>
 			</liferay-ui:search-container-row>
 			<liferay-ui:search-iterator/>
 		</liferay-ui:search-container>
-		<portlet:renderURL var="viewPermitURL">
-			<portlet:param name="mvcPath" value="${contextPath}/view-permit.jsp"/>
-		</portlet:renderURL>
-		<aui:button href="${viewPermitURL }"></aui:button>
 	</liferay-ui:panel>
 </liferay-ui:panel-container>
