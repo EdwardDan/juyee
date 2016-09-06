@@ -6,6 +6,23 @@
 <%
 	String stepTabsNames = "工程概况,参建单位,单位工程,申请材料";
 	String stepTabsValues = "gcgk,cjdw,dwgc,sqcl";
+	Long permitId = ParamUtil.getLong(request,"permitId");
+	String bjbh = ParamUtil.getString(request,"bjbh");
+	String contractId = ParamUtil.getString(request,"contractId");
+	Project project = null;
+	ProjectProfile projectProfile = null;
+	Contract contract = null;
+		if (permitId != 0) {
+			projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
+			renderRequest.setAttribute("xmmc", projectProfile.getGcmc());
+		} else {
+			project = ProjectLocalServiceUtil.getProject(bjbh);
+			renderRequest.setAttribute("xmmc", project.getXmmc());
+		}
+		if (Validator.isNotNull(contractId)) {
+			contract = ContractLocalServiceUtil.getContract(contractId);
+			renderRequest.setAttribute("contract", contract);
+		}
 %>
 <%-- 当前步骤：${sqbz}
 标段号：${bdh }
