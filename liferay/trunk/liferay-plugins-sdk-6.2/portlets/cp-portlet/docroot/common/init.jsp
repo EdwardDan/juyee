@@ -21,3 +21,5 @@
 <%@ page import="com.liferay.portal.kernel.dao.search.RowChecker"%>
 <%@ page import="javax.portlet.PortletURL"%>  
 <%@ page import="com.justonetech.cp.contract.service.ContractLocalServiceUtil"%>
+<%@ page import="com.justonetech.cp.permit.service.PermitLocalServiceUtil"%>
+<%@ page import="com.justonetech.cp.permit.model.Permit"%>
