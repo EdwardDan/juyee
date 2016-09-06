@@ -20,3 +20,4 @@
 <%@ page import="com.liferay.portal.kernel.util.*"%>
 <%@ page import="com.liferay.portal.kernel.dao.search.RowChecker"%>
 <%@ page import="javax.portlet.PortletURL"%>  
+<%@ page import="com.justonetech.cp.contract.service.ContractLocalServiceUtil"%>
