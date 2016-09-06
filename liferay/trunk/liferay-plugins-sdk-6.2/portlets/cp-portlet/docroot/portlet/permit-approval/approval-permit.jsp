@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@page import="com.justonetech.cp.permit.service.ProjectProfileLocalServiceUtil"%>
 <%@ include file="/common/init.jsp"%>
+<%@ include file="init.jsp"%>
 <%
 	long permitId = ParamUtil.getLong(request, "permitId");
 	long xmlx = ProjectProfileLocalServiceUtil.getProjectProfile(permitId).getXmlx();
@@ -17,5 +17,8 @@
 	</liferay-ui:section>
 	<liferay-ui:section>
 		申请材料
+	</liferay-ui:section>
+	<liferay-ui:section>
+		审核
 	</liferay-ui:section>
 </liferay-ui:tabs>

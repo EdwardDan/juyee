@@ -1,10 +1,6 @@
-<%@page import="com.justonetech.cp.permit.service.PermitLocalServiceUtil"%>
-<%@page import="com.justonetech.cp.permit.service.ProjectProfileLocalServiceUtil"%>
-<%@page import="com.justonetech.cp.permit.model.Permit"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
-<c:set var="contextPath"
-	value="${request.contextPath}/portlet/permit-approval" />
+<%@ include file="init.jsp"%>
 <liferay-ui:header title="施工许可审核" />
 <%	
 	String ywbh = ParamUtil.getString(request, "ywbh");
