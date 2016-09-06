@@ -5,6 +5,7 @@
 	long permitId = ParamUtil.getLong(request, "permitId");
 	long xmlx = ProjectProfileLocalServiceUtil.getProjectProfile(permitId).getXmlx();
 %>
+<liferay-ui:header title="施工许可申请审核"  backURL="${viewURL }"/>
 <liferay-ui:tabs names="审核,工程概况,参建单位,单位工程,申请材料" refresh="false">
 	<liferay-ui:section>
 		审核
