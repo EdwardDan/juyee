@@ -34,20 +34,19 @@
 				</tr>
 			</table>
 			<br>
-			<%
+			
+		</aui:form>
+	</liferay-ui:panel>	
+	<liferay-ui:panel title="合同列表" collapsible="false">
+	<%
 				String htlbLabel = "所有,勘察合同,设计合同,施工合同,监理合同,一体化合同,设备监理合同,招标代理合同,造价合同,项目管理合同";
 				String htlbValue = "sy,kc,sj,sg,jl,yth,sbjl,dl,zj,xmgl";
 				Integer contractsCount = (Integer) request.getAttribute("contractsCount");
-			%>
+				int sortNo = 0;
+	%>
 			<liferay-ui:tabs names="<%=htlbLabel%>" param="htlb"
 				tabsValues="<%=htlbValue%>" url="<%=searchURL%>" type="pills">
 			</liferay-ui:tabs>
-		</aui:form>
-	</liferay-ui:panel>
-	<%
-		int sortNo = 0;
-	%>
-	<liferay-ui:panel title="合同列表" collapsible="false">
 		<liferay-ui:search-container emptyResultsMessage="没有报送合同数据。">
 			<liferay-ui:search-container-results results="${contracts}"
 				total="${contractsCount}">
