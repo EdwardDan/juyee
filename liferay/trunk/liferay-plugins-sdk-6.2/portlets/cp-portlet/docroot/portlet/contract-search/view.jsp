@@ -72,7 +72,7 @@
 							value="${contextPath}/view-contract-wz.jsp" />
 					</c:if>
 				</liferay-portlet:renderURL>
-				<liferay-ui:search-container-column-text name="序号"
+				<liferay-ui:search-container-column-text name=""
 					value="<%=String.valueOf(++sortNo)%>" />
 				<liferay-ui:search-container-column-text property="bjbh" name="报建编号" />
 				<liferay-ui:search-container-column-text property="bdh" name="标段号" />
