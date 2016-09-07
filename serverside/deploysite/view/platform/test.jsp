@@ -2,11 +2,11 @@
 <%@ include file="/common/taglibs.jsp" %>
 <%@ include file="/common/header.jsp" %>
 <br>
-<input type="button" class="button_normal_long" value="企业资质"
-       onclick="window.location.href='${ctx}/platform/jump.do?code=qyzz&account=admin&name=&type=sg'">
+<input type="button" class="button_normal_long" value="建设单位管理"
+       onclick="window.location.href='${ctx}/platform/jump.do?code=jsdwgl&account=admin&name=&type=sg'">
 <br><br>
-<input type="button" class="button_normal_long" value="注册人员资格"
-       onclick="window.location.href='${ctx}/platform/jump.do?code=zcryzg&account=gq&name=&type=sg'">
+<input type="button" class="button_normal_long" value="项目基本信息填报"
+       onclick="window.location.href='${ctx}/platform/jump.do?code=xmjbxxtb&account=admin&name=&type=sg'">
 <br><br>
-<input type="button" class="button_normal_long" value="三类人员资格"
-       onclick="window.location.href='${ctx}/platform/jump.do?code=slryzg&account=gq&name=&type=sg'">
+<input type="button" class="button_normal_long" value="项目办证标段管理"
+       onclick="window.location.href='${ctx}/platform/jump.do?code=xmbzbdgl&account=admin&name=&type=sg'">
