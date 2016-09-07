@@ -89,7 +89,7 @@
 
     </c:if>
     function jumpProjInfoGrid() {
-        loadAjaxData("mainContent", "${ctx}/projBid/grid.do?typeCode=${typeCode}");
+        loadAjaxData("mainContent", "${ctx}/projBid/grid.do?typeCode=${typeCode}&account=${account}");
     }
 </script>
 
