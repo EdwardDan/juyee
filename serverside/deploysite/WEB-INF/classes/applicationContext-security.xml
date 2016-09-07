@@ -33,6 +33,9 @@
         <intercept-url pattern="/skin/**" filters="none"/>
         <intercept-url pattern="/js/**" filters="none"/>
 
+        <!--网站不验证权限-->
+        <intercept-url pattern="/view/platform/**" filters="none"/>
+
         <!--单点登录不验证权限-->
         <intercept-url pattern="/view/loginForSite" filters="none"/>
         <intercept-url pattern="/login/loginForSite.do*" filters="none"/>
