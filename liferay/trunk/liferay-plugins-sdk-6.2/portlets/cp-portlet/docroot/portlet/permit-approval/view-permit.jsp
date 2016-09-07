@@ -7,7 +7,7 @@
 		<jsp:include page="${contextPath }/view-projectprofile.jsp"/>
 	</liferay-ui:section>
 	<liferay-ui:section>
-		<jsp:include page="${contextPath }/view-participationunits.jsp"/>
+		<jsp:include page="${contextPath }/view/participationunits.jsp"/>
 	</liferay-ui:section>
 	<liferay-ui:section>
 		<jsp:include page="${contextPath }/view-unitprojects.jsp"/>
