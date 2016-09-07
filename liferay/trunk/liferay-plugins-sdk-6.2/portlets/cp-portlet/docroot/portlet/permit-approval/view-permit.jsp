@@ -20,27 +20,27 @@
 <aui:button-row cssClass="text-center">
 	<portlet:renderURL var="printsjpzURL" windowState="pop_up">
 		<portlet:param name="mvcPath"
-			value="${contextPath}/print-sjpz.jsp" />
+			value="${contextPath}/print/sjpz.jsp" />
 	</portlet:renderURL>
 	<portlet:renderURL var="printsltzsURL" windowState="pop_up">
 		<portlet:param name="mvcPath"
-			value="${contextPath}/print-sltzs.jsp" />
+			value="${contextPath}/print/sltzs.jsp" />
 	</portlet:renderURL>
 	<portlet:renderURL var="printbysljdsURL" windowState="pop_up">
 		<portlet:param name="mvcPath"
-			value="${contextPath}/print-bysljds.jsp" />
+			value="${contextPath}/print/bysljds.jsp" />
 	</portlet:renderURL>
 	<portlet:renderURL var="printbzclURL" windowState="pop_up">
 		<portlet:param name="mvcPath"
-			value="${contextPath}/print-bzcl.jsp" />
+			value="${contextPath}/print/bzcl.jsp" />
 	</portlet:renderURL>
 	<portlet:renderURL var="printjsscbURL" windowState="pop_up">
 		<portlet:param name="mvcPath"
-			value="${contextPath}/print-jsscb.jsp" />
+			value="${contextPath}/print/jsscb.jsp" />
 	</portlet:renderURL>
 	<portlet:renderURL var="printsgxklszsURL" windowState="pop_up">
 		<portlet:param name="mvcPath"
-			value="${contextPath}/print-sgxklszs.jsp" />
+			value="${contextPath}/print/sgxklszs.jsp" />
 	</portlet:renderURL>
 	<aui:button value="收件凭证" onClick="${printsjpzURL}" useDialog="true"/>
 	<aui:button value="受理通知书" onClick="${printsltzsURL}" useDialog="true"/>
