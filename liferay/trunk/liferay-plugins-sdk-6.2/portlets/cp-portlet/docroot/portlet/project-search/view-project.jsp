@@ -10,10 +10,6 @@
 <liferay-ui:header title="项目列表" backURL="${viewURL}" />
 <table style="width: 100%;" border="1">
 	<tr>
-		<td style="width: 15%;">建设项目属性</td>
-		<td style="width: 85%;" colspan="3">${project.xmxz}</td>
-	</tr>
-	<tr>
 		<td style="width: 15%%;">报建日期</td>
 		<td style="width: 35%;"><fmt:formatDate value="${project.bjrq}"
 				pattern="yyyy-MM-dd" /></td>
