@@ -308,7 +308,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 				}
 			}
 		}
-		Long num = 1L;
+		Long num = 0L;
 		for(Long num_:nums){
 			if(num_>num){
 				num=num_;
