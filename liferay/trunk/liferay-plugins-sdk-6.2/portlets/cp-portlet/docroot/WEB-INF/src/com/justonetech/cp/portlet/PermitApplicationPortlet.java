@@ -192,9 +192,20 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		projectProfile.setYzzpl3(yzzpl3);
 		projectProfile.setYzzpl4(yzzpl4);
 		ProjectProfileLocalServiceUtil.updateProjectProfile(projectProfile);
+		String ywbh = "JT";
+		Dictionary xmlxDic = DictionaryLocalServiceUtil.getDictionary(xmlx);
+		ywbh = ywbh + xmlxDic.getCode();
+Locale locale = LocaleUtil.getDefault();
+		String currentDate = DateUtil.getCurrentDate("yyyy-MM-dd", locale);
+		String currentDateStr = currentDate.substring(2, 4) + currentDate.substring(5, 7);
+		ywbh = ywbh + currentDateStr+"0000";
+		permit.setYwbh(ywbh);
 		permit.setBjbh(bjbh);
 		permit.setBdh(bdh);
 		PermitLocalServiceUtil.updatePermit(permit);
+		
+		
+				
 		redirect(request, response, permit, 1);
 	}
 
@@ -338,4 +349,25 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		redirect += "&" + response.getNamespace() + "tabSqbz=" + tabSqbz;
 		response.sendRedirect(redirect);
 	}
+	
+	public void deletePermits(ActionRequest actionRequest,
+			ActionResponse actionResponse) throws NumberFormatException, PortalException, SystemException  {
+		String deletePermitIds = ParamUtil.getString(actionRequest,
+				"permitIds");
+		String[] permitIds = deletePermitIds.split(",");
+		for (String permitId : permitIds) {
+			ProjectProfileLocalServiceUtil.deleteProjectProfile(Long
+					.parseLong(permitId));
+			List<UnitProject> unitProjects = UnitProjectLocalServiceUtil.findByPermitId(Long
+					.parseLong(permitId), -1, -1);
+			for (UnitProject unitProject : unitProjects) {
+				UnitProjectLocalServiceUtil.deleteUnitProject(unitProject);
+			}
+//			List<ParticipationUnit> 
+//			ParticipationUnitLocalServiceUtil.deleteParticipationUnit(unitId);
+			PermitLocalServiceUtil.deletePermit(Long
+					.parseLong(permitId));
+		}
+	}
 }
+
