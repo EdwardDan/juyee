@@ -272,6 +272,10 @@
 		<field name="yjfs" type="int" />
 		<field name="sjfs" type="int" />
 		<field name="fileEntryIds" type="String" />
+		<field name="shyq" type="String" />
+		<field name="csyj" type="String" />
+		<field name="fhyj" type="String" />
+		<field name="shyj" type="String" />
 	</model>
 	<model name="com.justonetech.cp.permit.model.ParticipationUnit">
 		<field name="unitId" type="long" />

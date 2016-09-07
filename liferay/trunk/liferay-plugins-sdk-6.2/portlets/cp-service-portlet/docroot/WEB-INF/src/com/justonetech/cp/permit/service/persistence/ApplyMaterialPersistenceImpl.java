@@ -99,8 +99,7 @@ public class ApplyMaterialPersistenceImpl extends BasePersistenceImpl<ApplyMater
 			ApplyMaterialModelImpl.FINDER_CACHE_ENABLED,
 			ApplyMaterialImpl.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
 			"findByPermitId", new String[] { Long.class.getName() },
-			ApplyMaterialModelImpl.PERMITID_COLUMN_BITMASK |
-			ApplyMaterialModelImpl.XH_COLUMN_BITMASK);
+			ApplyMaterialModelImpl.PERMITID_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_PERMITID = new FinderPath(ApplyMaterialModelImpl.ENTITY_CACHE_ENABLED,
 			ApplyMaterialModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByPermitId",
@@ -846,6 +845,10 @@ public class ApplyMaterialPersistenceImpl extends BasePersistenceImpl<ApplyMater
 		applyMaterialImpl.setYjfs(applyMaterial.getYjfs());
 		applyMaterialImpl.setSjfs(applyMaterial.getSjfs());
 		applyMaterialImpl.setFileEntryIds(applyMaterial.getFileEntryIds());
+		applyMaterialImpl.setShyq(applyMaterial.getShyq());
+		applyMaterialImpl.setCsyj(applyMaterial.getCsyj());
+		applyMaterialImpl.setFhyj(applyMaterial.getFhyj());
+		applyMaterialImpl.setShyj(applyMaterial.getShyj());
 
 		return applyMaterialImpl;
 	}

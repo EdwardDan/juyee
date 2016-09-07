@@ -56,6 +56,10 @@ public class ApplyMaterialWrapper implements ApplyMaterial,
 		attributes.put("yjfs", getYjfs());
 		attributes.put("sjfs", getSjfs());
 		attributes.put("fileEntryIds", getFileEntryIds());
+		attributes.put("shyq", getShyq());
+		attributes.put("csyj", getCsyj());
+		attributes.put("fhyj", getFhyj());
+		attributes.put("shyj", getShyj());
 
 		return attributes;
 	}
@@ -102,6 +106,30 @@ public class ApplyMaterialWrapper implements ApplyMaterial,
 
 		if (fileEntryIds != null) {
 			setFileEntryIds(fileEntryIds);
+		}
+
+		String shyq = (String)attributes.get("shyq");
+
+		if (shyq != null) {
+			setShyq(shyq);
+		}
+
+		String csyj = (String)attributes.get("csyj");
+
+		if (csyj != null) {
+			setCsyj(csyj);
+		}
+
+		String fhyj = (String)attributes.get("fhyj");
+
+		if (fhyj != null) {
+			setFhyj(fhyj);
+		}
+
+		String shyj = (String)attributes.get("shyj");
+
+		if (shyj != null) {
+			setShyj(shyj);
 		}
 	}
 
@@ -263,6 +291,86 @@ public class ApplyMaterialWrapper implements ApplyMaterial,
 	@Override
 	public void setFileEntryIds(java.lang.String fileEntryIds) {
 		_applyMaterial.setFileEntryIds(fileEntryIds);
+	}
+
+	/**
+	* Returns the shyq of this apply material.
+	*
+	* @return the shyq of this apply material
+	*/
+	@Override
+	public java.lang.String getShyq() {
+		return _applyMaterial.getShyq();
+	}
+
+	/**
+	* Sets the shyq of this apply material.
+	*
+	* @param shyq the shyq of this apply material
+	*/
+	@Override
+	public void setShyq(java.lang.String shyq) {
+		_applyMaterial.setShyq(shyq);
+	}
+
+	/**
+	* Returns the csyj of this apply material.
+	*
+	* @return the csyj of this apply material
+	*/
+	@Override
+	public java.lang.String getCsyj() {
+		return _applyMaterial.getCsyj();
+	}
+
+	/**
+	* Sets the csyj of this apply material.
+	*
+	* @param csyj the csyj of this apply material
+	*/
+	@Override
+	public void setCsyj(java.lang.String csyj) {
+		_applyMaterial.setCsyj(csyj);
+	}
+
+	/**
+	* Returns the fhyj of this apply material.
+	*
+	* @return the fhyj of this apply material
+	*/
+	@Override
+	public java.lang.String getFhyj() {
+		return _applyMaterial.getFhyj();
+	}
+
+	/**
+	* Sets the fhyj of this apply material.
+	*
+	* @param fhyj the fhyj of this apply material
+	*/
+	@Override
+	public void setFhyj(java.lang.String fhyj) {
+		_applyMaterial.setFhyj(fhyj);
+	}
+
+	/**
+	* Returns the shyj of this apply material.
+	*
+	* @return the shyj of this apply material
+	*/
+	@Override
+	public java.lang.String getShyj() {
+		return _applyMaterial.getShyj();
+	}
+
+	/**
+	* Sets the shyj of this apply material.
+	*
+	* @param shyj the shyj of this apply material
+	*/
+	@Override
+	public void setShyj(java.lang.String shyj) {
+		_applyMaterial.setShyj(shyj);
 	}
 
 	@Override

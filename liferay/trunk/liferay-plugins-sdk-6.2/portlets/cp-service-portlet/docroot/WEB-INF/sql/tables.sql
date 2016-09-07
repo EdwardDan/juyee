@@ -5,7 +5,11 @@ create table cp_ApplyMaterial (
 	clmc VARCHAR(75) null,
 	yjfs INTEGER,
 	sjfs INTEGER,
-	fileEntryIds VARCHAR(75) null
+	fileEntryIds VARCHAR(75) null,
+	shyq VARCHAR(75) null,
+	csyj VARCHAR(75) null,
+	fhyj VARCHAR(75) null,
+	shyj VARCHAR(75) null
 );
 
 create table cp_Contract (

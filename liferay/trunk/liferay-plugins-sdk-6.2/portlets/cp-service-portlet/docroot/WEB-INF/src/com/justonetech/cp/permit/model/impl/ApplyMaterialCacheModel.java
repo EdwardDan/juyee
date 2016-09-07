@@ -36,7 +36,7 @@ public class ApplyMaterialCacheModel implements CacheModel<ApplyMaterial>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(15);
+		StringBundler sb = new StringBundler(23);
 
 		sb.append("{materialId=");
 		sb.append(materialId);
@@ -52,6 +52,14 @@ public class ApplyMaterialCacheModel implements CacheModel<ApplyMaterial>,
 		sb.append(sjfs);
 		sb.append(", fileEntryIds=");
 		sb.append(fileEntryIds);
+		sb.append(", shyq=");
+		sb.append(shyq);
+		sb.append(", csyj=");
+		sb.append(csyj);
+		sb.append(", fhyj=");
+		sb.append(fhyj);
+		sb.append(", shyj=");
+		sb.append(shyj);
 		sb.append("}");
 
 		return sb.toString();
@@ -88,6 +96,34 @@ public class ApplyMaterialCacheModel implements CacheModel<ApplyMaterial>,
 			applyMaterialImpl.setFileEntryIds(fileEntryIds);
 		}
 
+		if (shyq == null) {
+			applyMaterialImpl.setShyq(StringPool.BLANK);
+		}
+		else {
+			applyMaterialImpl.setShyq(shyq);
+		}
+
+		if (csyj == null) {
+			applyMaterialImpl.setCsyj(StringPool.BLANK);
+		}
+		else {
+			applyMaterialImpl.setCsyj(csyj);
+		}
+
+		if (fhyj == null) {
+			applyMaterialImpl.setFhyj(StringPool.BLANK);
+		}
+		else {
+			applyMaterialImpl.setFhyj(fhyj);
+		}
+
+		if (shyj == null) {
+			applyMaterialImpl.setShyj(StringPool.BLANK);
+		}
+		else {
+			applyMaterialImpl.setShyj(shyj);
+		}
+
 		applyMaterialImpl.resetOriginalValues();
 
 		return applyMaterialImpl;
@@ -102,6 +138,10 @@ public class ApplyMaterialCacheModel implements CacheModel<ApplyMaterial>,
 		yjfs = objectInput.readInt();
 		sjfs = objectInput.readInt();
 		fileEntryIds = objectInput.readUTF();
+		shyq = objectInput.readUTF();
+		csyj = objectInput.readUTF();
+		fhyj = objectInput.readUTF();
+		shyj = objectInput.readUTF();
 	}
 
 	@Override
@@ -133,6 +173,34 @@ public class ApplyMaterialCacheModel implements CacheModel<ApplyMaterial>,
 		else {
 			objectOutput.writeUTF(fileEntryIds);
 		}
+
+		if (shyq == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(shyq);
+		}
+
+		if (csyj == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(csyj);
+		}
+
+		if (fhyj == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(fhyj);
+		}
+
+		if (shyj == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(shyj);
+		}
 	}
 
 	public long materialId;
@@ -142,4 +210,8 @@ public class ApplyMaterialCacheModel implements CacheModel<ApplyMaterial>,
 	public int yjfs;
 	public int sjfs;
 	public String fileEntryIds;
+	public String shyq;
+	public String csyj;
+	public String fhyj;
+	public String shyj;
 }

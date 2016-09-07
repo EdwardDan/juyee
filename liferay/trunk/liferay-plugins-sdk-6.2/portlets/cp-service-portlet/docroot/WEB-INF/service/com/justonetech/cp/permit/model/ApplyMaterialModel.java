@@ -158,6 +158,66 @@ public interface ApplyMaterialModel extends BaseModel<ApplyMaterial> {
 	 */
 	public void setFileEntryIds(String fileEntryIds);
 
+	/**
+	 * Returns the shyq of this apply material.
+	 *
+	 * @return the shyq of this apply material
+	 */
+	@AutoEscape
+	public String getShyq();
+
+	/**
+	 * Sets the shyq of this apply material.
+	 *
+	 * @param shyq the shyq of this apply material
+	 */
+	public void setShyq(String shyq);
+
+	/**
+	 * Returns the csyj of this apply material.
+	 *
+	 * @return the csyj of this apply material
+	 */
+	@AutoEscape
+	public String getCsyj();
+
+	/**
+	 * Sets the csyj of this apply material.
+	 *
+	 * @param csyj the csyj of this apply material
+	 */
+	public void setCsyj(String csyj);
+
+	/**
+	 * Returns the fhyj of this apply material.
+	 *
+	 * @return the fhyj of this apply material
+	 */
+	@AutoEscape
+	public String getFhyj();
+
+	/**
+	 * Sets the fhyj of this apply material.
+	 *
+	 * @param fhyj the fhyj of this apply material
+	 */
+	public void setFhyj(String fhyj);
+
+	/**
+	 * Returns the shyj of this apply material.
+	 *
+	 * @return the shyj of this apply material
+	 */
+	@AutoEscape
+	public String getShyj();
+
+	/**
+	 * Sets the shyj of this apply material.
+	 *
+	 * @param shyj the shyj of this apply material
+	 */
+	public void setShyj(String shyj);
+
 	@Override
 	public boolean isNew();
 

@@ -271,6 +271,10 @@
 			<basic name="yjfs" />
 			<basic name="sjfs" />
 			<basic name="fileEntryIds" />
+			<basic name="shyq" />
+			<basic name="csyj" />
+			<basic name="fhyj" />
+			<basic name="shyj" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />

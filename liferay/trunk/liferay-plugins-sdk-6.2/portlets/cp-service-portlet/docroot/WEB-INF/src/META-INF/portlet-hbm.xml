@@ -255,6 +255,10 @@
 		<property name="yjfs" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="sjfs" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="fileEntryIds" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="shyq" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="csyj" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="fhyj" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="shyj" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="com.justonetech.cp.permit.model.impl.ParticipationUnitImpl" table="cp_ParticipationUnit">
 		<cache usage="read-write" />
