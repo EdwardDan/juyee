@@ -100,8 +100,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		super.doView(renderRequest, renderResponse);
 	}
 
-	public void saveProjectProfile(ActionRequest request, ActionResponse response) throws SystemException,
-			PortalException, ParseException, IOException {
+	public void saveProjectProfile(ActionRequest request, ActionResponse response) throws SystemException, PortalException, ParseException, IOException {
 
 		Long xmlx = ParamUtil.getLong(request, "xmlx");
 		String lxjb = ParamUtil.getString(request, "lxjb");
@@ -199,8 +198,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		redirect(request, response, permit, 1);
 	}
 
-	public void saveParticipationUnits(ActionRequest request, ActionResponse response) throws SystemException,
-			PortalException, ParseException, IOException {
+	public void saveParticipationUnits(ActionRequest request, ActionResponse response) throws SystemException, PortalException, ParseException, IOException {
 
 		long permitId = ParamUtil.getLong(request, "permitId");
 		Permit permit = PermitLocalServiceUtil.getPermit(permitId);
@@ -225,8 +223,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		String[] dhhms = ParamUtil.getParameterValues(request, "dhhm");
 		System.out.println("=========" + dwmcs.toString() + dwmcs.length);
 		for (int i = 0; i < dwmcs.length; i++) {
-			ParticipationUnit participationUnit = ParticipationUnitLocalServiceUtil
-					.createParticipationUnit(CounterLocalServiceUtil.increment());
+			ParticipationUnit participationUnit = ParticipationUnitLocalServiceUtil.createParticipationUnit(CounterLocalServiceUtil.increment());
 			participationUnit.setDwmc(dwmcs[i]);
 			participationUnit.setSfyssj(Boolean.valueOf(sfssjs[i]));
 			participationUnit.setDwlx(dwlxs[i]);
@@ -247,8 +244,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		redirect(request, response, permit, 2);
 	}
 
-	public void saveUnitProjects(ActionRequest request, ActionResponse response) throws SystemException,
-			PortalException, ParseException, IOException {
+	public void saveUnitProjects(ActionRequest request, ActionResponse response) throws SystemException, PortalException, ParseException, IOException {
 
 		long permitId = ParamUtil.getLong(request, "permitId");
 
@@ -261,8 +257,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		String[] gcmcs = ParamUtil.getParameterValues(request, "gcmc");
 		String[] jsnrs = ParamUtil.getParameterValues(request, "jsnr");
 		for (int i = 0; i < gcbhs.length - 1; i++) {
-			UnitProject unitProject = UnitProjectLocalServiceUtil
-					.createUnitProject(CounterLocalServiceUtil.increment());
+			UnitProject unitProject = UnitProjectLocalServiceUtil.createUnitProject(CounterLocalServiceUtil.increment());
 			unitProject.setBjbh(bjbh);
 			unitProject.setPermitId(permitId);
 			unitProject.setGcbh(gcbhs[i]);
@@ -279,53 +274,50 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		redirect(request, response, permit, 3);
 	}
 
-	public void saveApplyMaterials(ActionRequest request, ActionResponse response) throws SystemException,
-			PortalException, ParseException, IOException {
-		
+	public void saveApplyMaterials(ActionRequest request, ActionResponse response) throws SystemException, PortalException, ParseException, IOException {
+
 		long permitId = ParamUtil.getLong(request, "permitId");
 		String ywbh = "JT";
 		Permit permit = PermitLocalServiceUtil.getPermit(permitId);
 		if (permit.getSqbz() == 3) {
 			permit.setSqbz(4);
 		}
-		
+
 		ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
 		Dictionary xmlx = DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx());
 		ywbh = ywbh + xmlx.getCode();
-		
+
 		Locale locale = LocaleUtil.getDefault();
 		String currentDate = DateUtil.getCurrentDate("yyyy-MM-dd", locale);
-		String currentDateStr = currentDate.substring(2, 4) +currentDate.substring(5, 7);
+		String currentDateStr = currentDate.substring(2, 4) + currentDate.substring(5, 7);
 		ywbh = ywbh + currentDateStr;
-		
+
 		List<Permit> permits = PermitLocalServiceUtil.getPermits(-1, -1);
 		List<Long> nums = new ArrayList<Long>();
 		System.out.println(permits);
-		for(Permit permit_:permits){
-			if(permit_.getPermitId()!=permitId){
-				if(permit_.getYwbh().substring(4, 8).equals(currentDateStr)){
-					nums.add(Long.parseLong(permit_.getYwbh().substring(8, 12)));
-				}
+		for (Permit permit_ : permits) {
+			if (permit_.getYwbh().substring(4, 8).equals(currentDateStr)) {
+				nums.add(Long.parseLong(permit_.getYwbh().substring(8, 12)));
 			}
 		}
 		Long num = 0L;
-		for(Long num_:nums){
-			if(num_>num){
-				num=num_;
+		for (Long num_ : nums) {
+			if (num_ > num) {
+				num = num_;
 			}
 		}
 		num++;
-		
-		if(num/10<1){
+
+		if (num / 10 < 1) {
 			ywbh = ywbh + "000" + num;
-		}else if(num/100<1){
+		} else if (num / 100 < 1) {
 			ywbh = ywbh + "00" + num;
-		}else if(num/1000<1){
+		} else if (num / 1000 < 1) {
 			ywbh = ywbh + "0" + num;
-		}else if(num/10000<1){
+		} else if (num / 10000 < 1) {
 			ywbh = ywbh + num;
 		}
-				
+
 		permit.setYwbh(ywbh);
 		PermitLocalServiceUtil.updatePermit(permit);
 		redirect(request, response, permit, 4);
