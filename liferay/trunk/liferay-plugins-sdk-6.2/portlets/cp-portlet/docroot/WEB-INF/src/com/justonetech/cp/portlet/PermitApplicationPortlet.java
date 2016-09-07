@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -21,16 +22,21 @@ import com.justonetech.cp.permit.model.UnitProject;
 import com.justonetech.cp.permit.service.PermitLocalServiceUtil;
 import com.justonetech.cp.permit.service.ProjectProfileLocalServiceUtil;
 import com.justonetech.cp.permit.service.UnitProjectLocalServiceUtil;
+import com.justonetech.sys.model.Dictionary;
+import com.justonetech.sys.service.DictionaryLocalServiceUtil;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.search.ParseException;
+import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.bridges.mvc.MVCPortlet;
+import com.sun.j3d.utils.universe.LocaleFactory;
 
 /**
  * Portlet implementation class PermitApplicationPortlet
@@ -242,12 +248,50 @@ public class PermitApplicationPortlet extends MVCPortlet {
 
 	public void saveApplyMaterials(ActionRequest request, ActionResponse response)
 		throws SystemException, PortalException, ParseException, IOException {
-
+		
 		long permitId = ParamUtil.getLong(request, "permitId");
+		String ywbh = "JT";
 		Permit permit = PermitLocalServiceUtil.getPermit(permitId);
 		if (permit.getSqbz() == 3) {
 			permit.setSqbz(4);
 		}
+		
+		ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
+		Dictionary xmlx = DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx());
+		ywbh = ywbh + xmlx.getCode();
+		
+		Locale locale = LocaleUtil.getDefault();
+		String currentDate = DateUtil.getCurrentDate("yyyy-MM-dd", locale);
+		String currentDateStr = currentDate.substring(2, 4) +currentDate.substring(5, 7);
+		ywbh = ywbh + currentDateStr;
+		
+		List<Permit> permits = PermitLocalServiceUtil.getPermits(-1, -1);
+		List<Long> nums = new ArrayList<Long>();
+		System.out.println(permits);
+		for(Permit permit_:permits){
+			if(permit_.getYwbh().substring(4, 8).equals(currentDateStr)){
+				nums.add(Long.parseLong(permit_.getYwbh().substring(8, 12)));
+			}
+		}
+		Long num = 0L;
+		for(Long num_:nums){
+			if(num_>num){
+				num=num_;
+			}
+		}
+		num++;
+		
+		if(num/10<1){
+			ywbh = ywbh + "000" + num;
+		}else if(num/100<1){
+			ywbh = ywbh + "00" + num;
+		}else if(num/1000<1){
+			ywbh = ywbh + "0" + num;
+		}else if(num/10000<1){
+			ywbh = ywbh + num;
+		}
+				
+		permit.setYwbh(ywbh);
 		PermitLocalServiceUtil.updatePermit(permit);
 		redirect(request, response, permit, 4);
 	}
