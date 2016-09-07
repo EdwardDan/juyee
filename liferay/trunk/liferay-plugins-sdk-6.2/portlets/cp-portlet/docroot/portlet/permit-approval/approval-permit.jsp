@@ -18,15 +18,15 @@
 	</liferay-ui:panel-container>
 	</liferay-ui:section>
 	<liferay-ui:section>
-		<jsp:include page="${contextPath }/view-projectprofile.jsp"/>
+		<jsp:include page="${contextPath }/view-permit/projectprofile.jsp"/>
 	</liferay-ui:section>
 	<liferay-ui:section>
-		<jsp:include page="${contextPath }/view-participationunits.jsp"/>
+		<jsp:include page="${contextPath }/view-permit/participationunits.jsp"/>
 	</liferay-ui:section>
 	<liferay-ui:section>
-		<jsp:include page="${contextPath }/view-unitprojects.jsp"/>
+		<jsp:include page="${contextPath }/view-permit/unitprojects.jsp"/>
 	</liferay-ui:section>
 	<liferay-ui:section>
-		<jsp:include page="${contextPath }/view-applymaterials.jsp"/>
+		<jsp:include page="${contextPath }/view-permit/applymaterials.jsp"/>
 	</liferay-ui:section>
 </liferay-ui:tabs>
