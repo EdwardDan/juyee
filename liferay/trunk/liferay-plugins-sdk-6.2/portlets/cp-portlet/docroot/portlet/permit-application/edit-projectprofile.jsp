@@ -48,6 +48,10 @@ tr.body td.content {
 			request.setAttribute("project", project);
 		}
 	}
+	Dictionary jsgclbDic = DictionaryLocalServiceUtil.findByCode("jsgclb");
+	List<Dictionary> jsgclbs = jsgclbDic != null ? DictionaryLocalServiceUtil.findByParentId(
+			jsgclbDic.getDictionaryId(), -1, -1) : null;
+			request.setAttribute("jsgclbs",jsgclbs);
 %>
 <portlet:renderURL var="viewURL" />
 <portlet:actionURL var="saveProjectProfileURL" name="saveProjectProfile">
@@ -63,7 +67,7 @@ tr.body td.content {
 	<table border="1" width="100%">
 	<tr class="body">
 			<td class="title">项目类型</td>
-			<td class="content"><aui:select name="xmlx" label="" showEmptyOption="true"
+			<td class="content"><aui:select name="xmlx" label="" 
 					type="select" style="width:50%">
 					<%
 						Dictionary dictionary = DictionaryLocalServiceUtil.findByCode(
@@ -87,7 +91,7 @@ tr.body td.content {
 		</tr>
 		<tr class="body">
 			<td class="title">项目性质</td>
-			<td class="content" colspan="3"><aui:select name="xmxz" label="" showEmptyOption="true"
+			<td class="content" colspan="3"><aui:select name="xmxz" label=""
 					type="select" style="width:18.7%">
 					<%
 						Dictionary dictionary = DictionaryLocalServiceUtil.findByCode(
@@ -150,7 +154,7 @@ tr.body td.content {
 					type="select" style="width:70px">
 					<%
 						Dictionary dictionary = DictionaryLocalServiceUtil.findByCode(
-													"jsddssqx");
+													"qx");
 											if (null != dictionary) {
 												List<Dictionary> dictionaries = DictionaryLocalServiceUtil
 														.findByParentId( dictionary.getDictionaryId(), -1, -1);
@@ -166,14 +170,23 @@ tr.body td.content {
 		</tr>
 		<tr class="body">
 			<td class="title">建设工程类别</td>
-			<td class="content" colspan="3"><aui:input name="jsgclb" label="" type="text"
-					style="width:50%" value="">
-				</aui:input></td>
+			<td class="content" colspan="3">
+			<c:forEach items="${jsgclbs}" var="jsgclb"
+								varStatus="sortNo">
+								<aui:input name="jsgclb" type="checkbox" id="jsgclb${sortNo.index}"
+									value="${jsgclb.dictionaryId}"
+									checked="${fn:contains(projectProfile.jsgclb,jsgclb.dictionaryId)}"
+									label="${jsgclb. name}" inlineField="true" />
+								<c:if test="${sortNo.index>0 && (sortNo.index+1) % 9 == 0}">
+									<br>
+								</c:if>
+							</c:forEach>
+			</td>
 		</tr>
 		<tr class="body">
 			<td class="title">建设工程属性</td>
 			<td class="content" colspan="3">
-			<aui:select name="jsgcsx" label="" showEmptyOption="true"
+			<aui:select name="jsgcsx" label=""
 					type="select" style="width:70px">
 					<%
 						Dictionary dictionary = DictionaryLocalServiceUtil.findByCode(
@@ -266,11 +279,21 @@ tr.body td.content {
 		</tr>
 		<tr class="body">
 			<td class="title">现场开工情况</td>
-			<td class="content" colspan="3"><aui:select name="xckgqk"
-					label="" style="width:20%">
-					<aui:option value=""></aui:option>
-					<aui:option value="0" selected="${projectProfile.xckgqk eq 0}">未开工</aui:option>
-					<aui:option value="1" selected="${projectProfile.xckgqk eq 1}">已开工</aui:option>
+			<td class="content" colspan="3"><aui:select name="xckgqk" label=""
+					type="select" style="width:80px">
+					<%
+						Dictionary dictionary = DictionaryLocalServiceUtil.findByCode(
+													"xckgqk");
+											if (null != dictionary) {
+												List<Dictionary> dictionaries = DictionaryLocalServiceUtil
+														.findByParentId( dictionary.getDictionaryId(), -1, -1);
+												for (Dictionary dic : dictionaries) {
+					%>
+					<aui:option value="<%=dic.getDictionaryId()%>"><%=dic.getName()%></aui:option>
+					<%
+						}
+											}
+					%>
 				</aui:select></td>
 		</tr>
 		<tr class="body">
