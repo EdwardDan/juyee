@@ -170,10 +170,14 @@
 		<column name="yjfs" type="int" /><!-- 应交份数 -->
 		<column name="sjfs" type="int" /><!-- 实交份数 -->
 		<column name="fileEntryIds" type="String" /><!-- 文件Id集合 -->
-
+		<!-- Workflow fields -->
+		<column name="shyq" type="String" /><!-- 审核要求 -->
+		<column name="csyj" type="String" /><!-- 初审意见 -->
+		<column name="fhyj" type="String" /><!-- 复核意见 -->
+		<column name="shyj" type="String" /><!-- 审核意见 -->
 		<!-- Order -->
 		<order>
-			<order-column name="xh" order-by="asc"></order-column>
+			<order-column name="materialId" order-by="asc"></order-column>
 		</order>
 
 		<!-- Finder methods -->
