@@ -64,6 +64,7 @@
     }
 
     function showYzzpl() {
+        alert
         if (document.getElementById("isZftzl").checked) {
             $("#isZftzl").val("true");
             document.getElementById("yzzpl").style.display = "";
