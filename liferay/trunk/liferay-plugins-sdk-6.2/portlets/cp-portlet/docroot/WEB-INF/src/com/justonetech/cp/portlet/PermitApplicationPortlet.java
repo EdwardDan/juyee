@@ -37,7 +37,6 @@ import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.bridges.mvc.MVCPortlet;
-import com.sun.j3d.utils.universe.LocaleFactory;
 
 /**
  * Portlet implementation class PermitApplicationPortlet
