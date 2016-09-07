@@ -1,4 +1,3 @@
-
 package com.justonetech.cp.portlet;
 
 import java.io.IOException;
@@ -16,9 +15,11 @@ import javax.portlet.RenderResponse;
 
 import com.justonetech.cp.contract.model.Contract;
 import com.justonetech.cp.contract.service.ContractLocalServiceUtil;
+import com.justonetech.cp.permit.model.ParticipationUnit;
 import com.justonetech.cp.permit.model.Permit;
 import com.justonetech.cp.permit.model.ProjectProfile;
 import com.justonetech.cp.permit.model.UnitProject;
+import com.justonetech.cp.permit.service.ParticipationUnitLocalServiceUtil;
 import com.justonetech.cp.permit.service.PermitLocalServiceUtil;
 import com.justonetech.cp.permit.service.ProjectProfileLocalServiceUtil;
 import com.justonetech.cp.permit.service.UnitProjectLocalServiceUtil;
@@ -46,8 +47,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 	private static String dateFormatPattern = PropsUtil.get("default.date.format.pattern");
 
 	@Override
-	public void render(RenderRequest renderRequest, RenderResponse renderResponse)
-		throws PortletException, IOException {
+	public void render(RenderRequest renderRequest, RenderResponse renderResponse) throws PortletException, IOException {
 
 		String mvcPath = ParamUtil.getString(renderRequest, "mvcPath");
 		if (Validator.equals(mvcPath, "/portlet/permit-application/select-contract.jsp")) {
@@ -70,15 +70,13 @@ public class PermitApplicationPortlet extends MVCPortlet {
 			ybssgzbContractsCount = ContractLocalServiceUtil.getYbssgzbContractsCount(zzjgdm, bjbh, bdh, htmc);
 			renderRequest.setAttribute("ybssgzbContracts", ybssgzbContracts);
 			renderRequest.setAttribute("ybssgzbContractsCount", ybssgzbContractsCount);
-		}
-		else if (Validator.equals(mvcPath, "/portlet/permit-application/edit-permit.jsp")) {
+		} else if (Validator.equals(mvcPath, "/portlet/permit-application/edit-permit.jsp")) {
 		}
 		super.render(renderRequest, renderResponse);
 	}
 
 	@Override
-	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
-		throws IOException, PortletException {
+	public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
 
 		String bjbh = ParamUtil.getString(renderRequest, "bjbh");
 		String wssqbh = ParamUtil.getString(renderRequest, "wssqbh");
@@ -103,8 +101,8 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		super.doView(renderRequest, renderResponse);
 	}
 
-	public void saveProjectProfile(ActionRequest request, ActionResponse response)
-		throws SystemException, PortalException, ParseException, IOException {
+	public void saveProjectProfile(ActionRequest request, ActionResponse response) throws SystemException,
+			PortalException, ParseException, IOException {
 
 		Long xmlx = ParamUtil.getLong(request, "xmlx");
 		String lxjb = ParamUtil.getString(request, "lxjb");
@@ -120,7 +118,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		String[] jsgclbArrs = ParamUtil.getParameterValues(request, "jsgclbCheckbox");
 		String jsgclbs = "";
 		if (null != jsgclbArrs && jsgclbArrs.length > 0) {
-			for (String jsgclb: jsgclbArrs) {
+			for (String jsgclb : jsgclbArrs) {
 				jsgclbs += "," + jsgclb;
 			}
 		}
@@ -155,8 +153,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		if (permitId != 0) {
 			projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
 			permit = PermitLocalServiceUtil.getPermit(permitId);
-		}
-		else {
+		} else {
 			projectProfile = ProjectProfileLocalServiceUtil.createProjectProfile(CounterLocalServiceUtil.increment());
 			permit = PermitLocalServiceUtil.createPermit(projectProfile.getPermitId());
 			permit.setSqbz(1);
@@ -203,8 +200,8 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		redirect(request, response, permit, 1);
 	}
 
-	public void saveParticipationUnits(ActionRequest request, ActionResponse response)
-		throws SystemException, PortalException, ParseException, IOException {
+	public void saveParticipationUnits(ActionRequest request, ActionResponse response) throws SystemException,
+			PortalException, ParseException, IOException {
 
 		long permitId = ParamUtil.getLong(request, "permitId");
 		Permit permit = PermitLocalServiceUtil.getPermit(permitId);
@@ -213,11 +210,46 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		}
 
 		PermitLocalServiceUtil.updatePermit(permit);
+
+		List<ParticipationUnit> participationUnits = ParticipationUnitLocalServiceUtil.findByPermitId(permitId, -1, -1);
+		if (null != participationUnits) {
+			for (ParticipationUnit participationUnit : participationUnits) {
+				ParticipationUnitLocalServiceUtil.deleteParticipationUnit(participationUnit);
+			}
+		}
+		String[] dwmcs = ParamUtil.getParameterValues(request, "dwmc");
+		String[] sfssjs = ParamUtil.getParameterValues(request, "sfyssj");
+		String[] dwlxs = ParamUtil.getParameterValues(request, "dwlx");
+		String[] xmfzrs = ParamUtil.getParameterValues(request, "xmfzr");
+		String[] zjlxs = ParamUtil.getParameterValues(request, "zjlx");
+		String[] zjhs = ParamUtil.getParameterValues(request, "zjh");
+		String[] dhhms = ParamUtil.getParameterValues(request, "dhhm");
+		System.out.println("=========" + dwmcs.toString() + dwmcs.length);
+		for (int i = 0; i < dwmcs.length; i++) {
+			ParticipationUnit participationUnit = ParticipationUnitLocalServiceUtil
+					.createParticipationUnit(CounterLocalServiceUtil.increment());
+			participationUnit.setDwmc(dwmcs[i]);
+			participationUnit.setSfyssj(Boolean.valueOf(sfssjs[i]));
+			participationUnit.setDwlx(dwlxs[i]);
+			if (xmfzrs.length > 0) {
+				participationUnit.setXmfzr(xmfzrs[i]);
+			}
+			if (zjhs.length > 0) {
+				participationUnit.setZjh(zjhs[i]);
+			}
+			participationUnit.setZjlx(zjlxs[i]);
+			if (dhhms.length > 0) {
+				participationUnit.setDhhm(dhhms[i]);
+			}
+			participationUnit.setPermitId(permitId);
+			ParticipationUnitLocalServiceUtil.addParticipationUnit(participationUnit);
+
+		}
 		redirect(request, response, permit, 2);
 	}
 
-	public void saveUnitProjects(ActionRequest request, ActionResponse response)
-		throws SystemException, PortalException, ParseException, IOException {
+	public void saveUnitProjects(ActionRequest request, ActionResponse response) throws SystemException,
+			PortalException, ParseException, IOException {
 
 		long permitId = ParamUtil.getLong(request, "permitId");
 
@@ -230,7 +262,8 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		String[] gcmcs = ParamUtil.getParameterValues(request, "gcmc");
 		String[] jsnrs = ParamUtil.getParameterValues(request, "jsnr");
 		for (int i = 0; i < gcbhs.length - 1; i++) {
-			UnitProject unitProject = UnitProjectLocalServiceUtil.createUnitProject(CounterLocalServiceUtil.increment());
+			UnitProject unitProject = UnitProjectLocalServiceUtil
+					.createUnitProject(CounterLocalServiceUtil.increment());
 			unitProject.setBjbh(bjbh);
 			unitProject.setPermitId(permitId);
 			unitProject.setGcbh(gcbhs[i]);
@@ -239,6 +272,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 			UnitProjectLocalServiceUtil.addUnitProject(unitProject);
 		}
 		Permit permit = PermitLocalServiceUtil.getPermit(permitId);
+
 		if (permit.getSqbz() == 2) {
 			permit.setSqbz(3);
 		}
@@ -246,8 +280,8 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		redirect(request, response, permit, 3);
 	}
 
-	public void saveApplyMaterials(ActionRequest request, ActionResponse response)
-		throws SystemException, PortalException, ParseException, IOException {
+	public void saveApplyMaterials(ActionRequest request, ActionResponse response) throws SystemException,
+			PortalException, ParseException, IOException {
 		
 		long permitId = ParamUtil.getLong(request, "permitId");
 		String ywbh = "JT";
@@ -296,18 +330,15 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		redirect(request, response, permit, 4);
 	}
 
-	public void redirect(ActionRequest request, ActionResponse response, Permit permit, int sqbz)
-		throws IOException {
+	public void redirect(ActionRequest request, ActionResponse response, Permit permit, int sqbz) throws IOException {
 
 		String redirect = ParamUtil.getString(request, "redirectURL");
 		int tabSqbz = 1;
 		if (permit.getSqbz() == sqbz && sqbz < 4) {
 			tabSqbz = sqbz + 1;
-		}
-		else if (permit.getSqbz() == sqbz && sqbz == 4) {
+		} else if (permit.getSqbz() == sqbz && sqbz == 4) {
 			tabSqbz = sqbz;
-		}
-		else if (permit.getSqbz() > sqbz) {
+		} else if (permit.getSqbz() > sqbz) {
 			tabSqbz = sqbz;
 		}
 		redirect += "&" + response.getNamespace() + "permitId=" + permit.getPermitId();
