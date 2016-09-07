@@ -5,6 +5,9 @@
 <portlet:renderURL var="searchURL">
 	<portlet:param name="mvcPath" value="${contextPath }/apply-permit.jsp" />
 </portlet:renderURL>
+<portlet:actionURL var="deletePermitsURL" name="deletePermits">
+	<portlet:param name="redirect" value="${viewURL}" />
+</portlet:actionURL>
 <%
 	int rowNo = 0;
 %>
@@ -81,6 +84,7 @@
 				<liferay-ui:search-container-column-text name="操作">
 					<liferay-ui:icon-menu>
 						<liferay-ui:icon image="edit" url="${rowURL}" />
+						<liferay-ui:icon image="delete" label="删除" url="javascript:void(0);" onClick='<%=renderResponse.getNamespace() + "deletePermits("+permit.getPermitId()+");"%>' />
 					</liferay-ui:icon-menu>
 				</liferay-ui:search-container-column-text>
 			</liferay-ui:search-container-row>
@@ -100,3 +104,21 @@
 		</liferay-ui:search-container>
 	</liferay-ui:panel>
 </liferay-ui:panel-container>
+<aui:script>
+	
+	Liferay.Util.toggleSearchContainerButton('#<portlet:namespace />deletePermitsBtn', '#<portlet:namespace /><%=searchContainerReference.getId("searchContainer")%>SearchContainer', document.<portlet:namespace />fm, '<portlet:namespace />allRowIds');
+	
+	Liferay.provide(
+			window,
+			'<portlet:namespace />deletePermits',
+			function(permitIds) {
+				if(confirm("确定要删除所选数据吗？")){
+					if(!permitIds){
+						permitIds = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, '<portlet:namespace />allRowIds');
+					}
+					location.href="<%=deletePermitsURL%>&<portlet:namespace/>permitIds="+ permitIds;
+				}
+			},
+			['liferay-util-list-fields']
+		);
+</aui:script>

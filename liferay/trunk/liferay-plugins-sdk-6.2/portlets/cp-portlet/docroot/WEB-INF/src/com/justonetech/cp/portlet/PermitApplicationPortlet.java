@@ -15,10 +15,12 @@ import javax.portlet.RenderResponse;
 
 import com.justonetech.cp.contract.model.Contract;
 import com.justonetech.cp.contract.service.ContractLocalServiceUtil;
+import com.justonetech.cp.permit.model.ApplyMaterial;
 import com.justonetech.cp.permit.model.ParticipationUnit;
 import com.justonetech.cp.permit.model.Permit;
 import com.justonetech.cp.permit.model.ProjectProfile;
 import com.justonetech.cp.permit.model.UnitProject;
+import com.justonetech.cp.permit.service.ApplyMaterialLocalServiceUtil;
 import com.justonetech.cp.permit.service.ParticipationUnitLocalServiceUtil;
 import com.justonetech.cp.permit.service.PermitLocalServiceUtil;
 import com.justonetech.cp.permit.service.ProjectProfileLocalServiceUtil;
@@ -232,7 +234,6 @@ Locale locale = LocaleUtil.getDefault();
 		String[] zjlxs = ParamUtil.getParameterValues(request, "zjlx");
 		String[] zjhs = ParamUtil.getParameterValues(request, "zjh");
 		String[] dhhms = ParamUtil.getParameterValues(request, "dhhm");
-		System.out.println("=========" + dwmcs.toString() + dwmcs.length);
 		for (int i = 0; i < dwmcs.length; i++) {
 			ParticipationUnit participationUnit = ParticipationUnitLocalServiceUtil.createParticipationUnit(CounterLocalServiceUtil.increment());
 			participationUnit.setDwmc(dwmcs[i]);
@@ -305,7 +306,6 @@ Locale locale = LocaleUtil.getDefault();
 
 		List<Permit> permits = PermitLocalServiceUtil.getPermits(-1, -1);
 		List<Long> nums = new ArrayList<Long>();
-		System.out.println(permits);
 		for (Permit permit_ : permits) {
 			if (permit_.getYwbh().substring(4, 8).equals(currentDateStr)) {
 				nums.add(Long.parseLong(permit_.getYwbh().substring(8, 12)));
@@ -363,8 +363,16 @@ Locale locale = LocaleUtil.getDefault();
 			for (UnitProject unitProject : unitProjects) {
 				UnitProjectLocalServiceUtil.deleteUnitProject(unitProject);
 			}
-//			List<ParticipationUnit> 
-//			ParticipationUnitLocalServiceUtil.deleteParticipationUnit(unitId);
+			List<ParticipationUnit> participationUnits=ParticipationUnitLocalServiceUtil.findByPermitId(Long
+					.parseLong(permitId), -1, -1);
+			for(ParticipationUnit participationUnit:participationUnits){
+				ParticipationUnitLocalServiceUtil.deleteParticipationUnit(participationUnit);
+			}
+			List<ApplyMaterial> applyMaterials=ApplyMaterialLocalServiceUtil.findByPermitId(Long
+					.parseLong(permitId), -1, -1);
+			for(ApplyMaterial applyMaterial:applyMaterials){
+				ApplyMaterialLocalServiceUtil.deleteApplyMaterial(applyMaterial);
+			}
 			PermitLocalServiceUtil.deletePermit(Long
 					.parseLong(permitId));
 		}
