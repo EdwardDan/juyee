@@ -302,11 +302,13 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		List<Long> nums = new ArrayList<Long>();
 		System.out.println(permits);
 		for(Permit permit_:permits){
-			if(permit_.getYwbh().substring(4, 8).equals(currentDateStr)){
-				nums.add(Long.parseLong(permit_.getYwbh().substring(8, 12)));
+			if(permit_.getPermitId()!=permitId){
+				if(permit_.getYwbh().substring(4, 8).equals(currentDateStr)){
+					nums.add(Long.parseLong(permit_.getYwbh().substring(8, 12)));
+				}
 			}
 		}
-		Long num = 0L;
+		Long num = 1L;
 		for(Long num_:nums){
 			if(num_>num){
 				num=num_;
