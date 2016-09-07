@@ -86,13 +86,13 @@ tr.body td.content {
 				</td>
 			<td class="title">立项级别</td>
 			<td class="content"><aui:input name="lxjb" label="" type="text"
-					style="width:50%" value="${project.lxjb }">
+					style="width:50%" value="${project.lxjb }" readonly="true">
 				</aui:input></td>
 		</tr>
 		<tr class="body">
 			<td class="title">项目性质</td>
-			<td class="content" colspan="3"><aui:select name="xmxz" label=""
-					type="select" style="width:18.7%">
+			<td class="content"><aui:select name="xmxz" label=""
+					type="select" style="width:50%">
 					<%
 						Dictionary dictionary = DictionaryLocalServiceUtil.findByCode(
 													"xmxz");
@@ -107,6 +107,10 @@ tr.body td.content {
 											}
 					%>
 				</aui:select></td>
+				<td class="title">所属区县</td>
+				<td class="content">
+				<aui:input name="ssqx" label="" type="text"
+					style="width:50%" value="${project.szqx}" readonly="true"></aui:input></td>
 		</tr>
 		<tr class="body">
 			<td class="title">业务编码</td>

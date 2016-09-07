@@ -23,11 +23,11 @@
 			<table style="width: 100%;" border="1">
 				<tr>
 					<td style="width: 10%;">报建编号</td>
-					<td style="width: 40%;"><aui:input type="text" name="bjbh"  style="width:80%"
-							label="" /></td>
+					<td style="width: 40%;"><aui:input type="text" name="bjbh"
+							style="width:80%" label="" /></td>
 					<td style="width: 10%;">工程名称</td>
-					<td style="width: 40%;"><aui:input type="text" name="gcmc" style="width:80%"
-							label="" /></td>
+					<td style="width: 40%;"><aui:input type="text" name="gcmc"
+							style="width:80%" label="" /></td>
 				</tr>
 				<tr style="height: 40px;">
 					<td colspan="4" align="center"><aui:button type="submit"
@@ -39,7 +39,7 @@
 	</liferay-ui:panel>
 
 	<liferay-ui:panel title="施工许可列表" collapsible="false">
-		<liferay-ui:search-container  emptyResultsMessage="没有施工许可数据。">
+		<liferay-ui:search-container emptyResultsMessage="没有施工许可数据。">
 			<liferay-ui:search-container-results results="${permits}"
 				total="${permitsCount }">
 			</liferay-ui:search-container-results>
@@ -50,7 +50,7 @@
 					<portlet:param name="bjbh" value="${permit.bjbh}" />
 					<portlet:param name="sqbz" value="${permit.sqbz}" />
 					<portlet:param name="permitId" value="${permit.permitId}" />
-					<portlet:param name="bdh" value="${permit.bdh }"/>
+					<portlet:param name="bdh" value="${permit.bdh }" />
 					<%-- <portlet:param name="gcmc" value="${permit.gcmc }"/> --%>
 					<portlet:param name="mvcPath"
 						value="${contextPath }/edit-permit.jsp" />
@@ -62,11 +62,15 @@
 					Dictionary xmlx=null;
 					String xmlxName="";
 					if(projectProfile.getXmlx()!=0){
-					 xmlx = DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx());
-					 xmlxName=xmlx.getName();
-					}	
+						try{
+					  xmlx = DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx());
+					 xmlxName=xmlx.getName(); 
+						}catch(Exception e){
+						}
+						}
 				%>
-				<liferay-ui:search-container-column-text name="项目类型"  value="<%=xmlxName %>"/>
+				<liferay-ui:search-container-column-text name="项目类型"
+					value="<%=xmlxName %>" />
 				<liferay-ui:search-container-column-text property="bjbh" name="报建编号" />
 				<liferay-ui:search-container-column-text property="bdh"
 					name="施工许可标段号" />
