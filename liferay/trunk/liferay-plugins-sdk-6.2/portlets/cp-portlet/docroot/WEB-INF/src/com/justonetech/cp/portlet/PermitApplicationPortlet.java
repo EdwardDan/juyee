@@ -66,7 +66,6 @@ public class PermitApplicationPortlet extends MVCPortlet {
 			renderRequest.setAttribute("ybssgzbContractsCount", ybssgzbContractsCount);
 		}
 		else if (Validator.equals(mvcPath, "/portlet/permit-application/edit-permit.jsp")) {
-
 		}
 		super.render(renderRequest, renderResponse);
 	}
@@ -112,7 +111,13 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		String gcmc = ParamUtil.getString(request, "gcmc");
 		String jsdd = ParamUtil.getString(request, "jsdd");
 		Long jsddssqx = ParamUtil.getLong(request, "jsddssqx");
-		String jsgclb = ParamUtil.getString(request, "jsgclb");
+		String[] jsgclbArrs = ParamUtil.getParameterValues(request, "jsgclbCheckbox");
+		String jsgclbs = "";
+		if (null != jsgclbArrs && jsgclbArrs.length > 0) {
+			for (String jsgclb: jsgclbArrs) {
+				jsgclbs += "," + jsgclb;
+			}
+		}
 		Long jsgcsx = ParamUtil.getLong(request, "jsgcsx");
 		String jsgcgm = ParamUtil.getString(request, "jsgcgm");
 		String gyzjbz = ParamUtil.getString(request, "gyzjbz");
@@ -162,7 +167,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		projectProfile.setGcmc(gcmc);
 		projectProfile.setJsdd(jsdd);
 		projectProfile.setJsddssqx(jsddssqx);
-		projectProfile.setJsgclb(jsgclb);
+		projectProfile.setJsgclb(jsgclbs);
 		projectProfile.setJsgcsx(jsgcsx);
 		projectProfile.setJsgcgm(jsgcgm);
 		projectProfile.setGyzjbz(gyzjbz);
