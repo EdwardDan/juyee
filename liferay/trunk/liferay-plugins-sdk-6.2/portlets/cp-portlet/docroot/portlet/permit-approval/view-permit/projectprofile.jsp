@@ -41,7 +41,7 @@ tr.body td.content {
 		</tr>
 		<tr class="body">
 			<td class="title">项目性质</td>
-			<td class="content">${projectProfile.xmxz}</td>
+			<td class="content"><%=DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmxz()).getName()%></td>
 			<td class="title">所属区县</td>
 			<td class="content">${projectProfile.ssqx}</td>
 		</tr>
