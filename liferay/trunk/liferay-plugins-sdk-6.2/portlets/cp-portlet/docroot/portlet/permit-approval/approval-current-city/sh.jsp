@@ -56,7 +56,7 @@
 				<aui:button name="pass" value="审核通过" cssClass="btn" />
 			</div>
 			<div class="btn-group">
-				<aui:button name="close" value="审核退回" cssClass="btn" />
+				<aui:button name="close" value="审核退回" cssClass="btn" onClick="shth()"/>
 			</div>
 			<div class="btn-group">
 				<aui:button name="close" value="补正退回" cssClass="btn" />
@@ -70,3 +70,52 @@
 		</div>
 	</div>
 </aui:form>
+<portlet:renderURL var="shthUrl" windowState="pop_up">
+<portlet:param name="mvcPath" value="${contextPath }/approval-current-city/sh-shth.jsp"/>
+</portlet:renderURL>
+<aui:script>
+function shth(){
+	AUI().use('aui-modal','aui-dialog-iframe-deprecated','io-plugin-deprecated'
+	,function(A) {
+	var url = '${shthUrl}';
+	    var modal = new A.Modal(
+	      {
+	        bodyContent: '正文件',
+	        centered: true,
+	        headerContent: '<h3>退回选择页面</h3>',
+	        modal: false,
+	        destroyOnHide: true,
+	        render: '#modal',
+	        width: 750,
+	        height:600,
+	        toolbars:{
+	        footer:[
+	              {
+	                 label: '取消',
+	                 on: {
+	                   click: function() {
+	                     modal.hide();
+	                   }
+	                 }
+	               },
+	               {
+	                 label: '确定',
+	                 on: {
+	                   click: function() {
+	                     alert('点击了确定，可以在这里调用其他函数');
+	                   }
+	                 },
+	                primary: true
+	               }         ]
+	        }
+	      }
+	    ).plug(
+	       A.Plugin.DialogIframe,
+	        {
+	        uri: url,
+	        }
+	       )
+	.render();
+	});
+	}
+</aui:script>
