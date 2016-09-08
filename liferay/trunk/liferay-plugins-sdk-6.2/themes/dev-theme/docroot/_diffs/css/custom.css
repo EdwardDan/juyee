@@ -737,3 +737,7 @@ $dockbarOpenGradientStart: #0EA6F9;
 	.aui .uneditable-input {
 	margin-bottom: 0px;
 }
+
+.aui .table th, .aui .table td{
+	text-align:center;
+}
