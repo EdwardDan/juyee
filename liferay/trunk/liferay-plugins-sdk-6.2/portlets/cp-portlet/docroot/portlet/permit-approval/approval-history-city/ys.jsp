@@ -1,4 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
 <%@ include file="../init.jsp"%>
-预审
+<aui:row>
+	<aui:col span="12" cssClass="text-left">
+		<aui:input name="opinion" label="审核意见：" inlineLabel="true"
+			type="textarea" cssClass="span7" value=""></aui:input>
+	</aui:col>
+</aui:row>

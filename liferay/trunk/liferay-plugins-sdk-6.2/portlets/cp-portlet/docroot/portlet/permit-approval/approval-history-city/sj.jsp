@@ -49,7 +49,7 @@ td.content {
 		<td class="content"></td>
 	</tr>
 	<tr>
-		<td class="title">受理意见</td>
+		<td class="title">受理意见：</td>
 		<td class="content" colspan="3"></td>
 	</tr>
 </table>
