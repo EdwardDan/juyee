@@ -43,12 +43,12 @@
 	<portlet:param name="mvcPath" value="${contextPath}/wldsh.jsp" />
 </portlet:renderURL>
 <table class="table table-border table-hover table-striped" style="width: 100% ；text-align:center;">
-	<tr>
-		<td>审核步骤</td>
-		<td>审核意见</td>
-		<td>审核人</td>
-		<td>审核时间</td>
-	</tr>
+	<thead>
+		<th style="text-align: center">审核步骤</th>
+		<th style="text-align: center">审核意见</th>
+		<th style="text-align: center">审核人</th>
+		<th style="text-align: center">审核时间</th>
+	</thead>
 	<tr>
 		<td>预审</td>
 		<td></td>
