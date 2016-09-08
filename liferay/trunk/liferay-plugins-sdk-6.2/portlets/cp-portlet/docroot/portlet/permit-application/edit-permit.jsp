@@ -37,11 +37,16 @@
 		renderRequest.setAttribute("xmmc", project.getXmmc());
 	}
 %>
+<style>
+.sp{
+	margin-right: 30px;
+}
+</style>
 <c:if test="${permitId ne 0}">
 	<c:set var="editPermitURL"
 		value="${editPermitURL }&${renderResponse.namespace}permitId=${permitId}"></c:set>
 </c:if>
-当前报建编号：${bjbh}&nbsp;&nbsp;项目名称：${xmmc}&nbsp;&nbsp;标段号:${bdh}
+<div class="alert alert-info"><span class="sp">当前报建编号：${bjbh}</span><span class="sp">项目名称：${xmmc}</span><span class="sp">标段号:${bdh}</span></div>
 <ul class="nav nav-tabs">
 	<li class="${tabSqbz eq 1?"active":"" }">
 		<a href="${editPermitURL }&_${portletDisplay.id }_tabSqbz=1">工程概况</a>
