@@ -8,7 +8,7 @@
 %>
 <aui:form>
 	<div class="text-center">
-		<table style="width: 98%" border="1">
+		<table style="width: 98%" class="table table-striped table-bordered table-hover">
 			<tr>
 				<td width="5%">序号</td>
 				<td width="30%">材料提交名称</td>

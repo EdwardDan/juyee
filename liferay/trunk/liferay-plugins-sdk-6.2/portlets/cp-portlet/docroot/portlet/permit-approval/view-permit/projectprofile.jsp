@@ -5,7 +5,7 @@
 <%@ include file="../init.jsp"%>
 <style type="text/css">
 tr {
-	text-align: center;
+	text-align: right;
 }
 
 tr.body td.title {
@@ -15,6 +15,7 @@ tr.body td.title {
 tr.body td.content {
 	width: 30%;
 	text-align: left;
+	background-color: white;
 }
 </style>
 <%
@@ -32,7 +33,7 @@ tr.body td.content {
 	request.setAttribute("jsgclbs", jsgclbs);
 %>
 <fieldset style="">
-	<table border="1" width="100%">
+	<table class="table table-border" width="100%" >
 		<tr class="body">
 			<td class="title">项目类型</td>
 			<td class="content"><%=DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx()).getName()%></td>

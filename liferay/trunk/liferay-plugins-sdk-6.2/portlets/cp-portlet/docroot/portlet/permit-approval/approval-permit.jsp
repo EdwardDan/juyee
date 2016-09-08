@@ -8,7 +8,8 @@
 	}
 	tr.body td.content{
 		text-align: left;
-		width:30%；
+		width:30%;
+		background-color:white;
 	}
 </style>
 <%@ include file="init.jsp"%>

@@ -70,14 +70,14 @@
 		</div>
 	</div>
 </aui:form>
-<portlet:renderURL var="shthUrl" windowState="pop_up">
+<portlet:renderURL var="shthURL" windowState="pop_up">
 <portlet:param name="mvcPath" value="${contextPath }/approval-current-city/sh-shth.jsp"/>
 </portlet:renderURL>
 <aui:script>
 function shth(){
-	AUI().use('aui-modal','aui-dialog-iframe-deprecated','io-plugin-deprecated'
+	/* AUI().use('aui-modal','aui-dialog-iframe-deprecated','io-plugin-deprecated'
 	,function(A) {
-	var url = '${shthUrl}';
+	var url = '${shthURL}';
 	    var modal = new A.Modal(
 	      {
 	        bodyContent: '正文件',
@@ -116,6 +116,39 @@ function shth(){
 	        }
 	       )
 	.render();
+	}); */
+}
+Liferay.provide(window, 'shth', function() {
+	Liferay.Util.openWindow({
+		dialog : {
+			centered : true,
+			width : 800,
+			height : 600,
+			toolbars:{
+		        footer:[
+		              {
+		                 label: '取消',
+		                 on: {
+		                   click: function() {
+		                	  dialog.destroy();
+		                   }
+		                 }
+		               },
+		               {
+		                 label: '确定',
+		                 on: {
+		                   click: function() {
+		                     alert('点击了确定，可以在这里调用其他函数');
+		                   }
+		                 },
+		                primary: true
+		               }         ]
+		        }
+		},
+		id : 'popup',
+		title : '审批',
+		uri : '${shthURL}',
+		destroyOnClose : true
 	});
-	}
+}, [ 'aui-dialog' ]);
 </aui:script>
