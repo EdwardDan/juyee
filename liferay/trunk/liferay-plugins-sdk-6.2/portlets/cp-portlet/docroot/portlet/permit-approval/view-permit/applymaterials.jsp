@@ -32,7 +32,7 @@
 				<c:if test="${not empty material.fileEntryIds}">
 				<c:forEach items="${fn:split(material.fileEntryIds,',')}" var="fileEntryId" varStatus="statusSub">
 					<div>
-						<a class="fileName" href="${fn:split(fileEntryId,'|')[2]}" target="_Blank">
+						<a class="fileName" href="${fn:split(fileEntryId,'|')[2]}" >
 									${material.clmc}-${statusSub.index+1}.${fn:split(fileEntryId,'|')[1]}</a>
 					</div> 
 					</c:forEach>
