@@ -9,7 +9,7 @@
 <portlet:renderURL var="viewURL" />
 <liferay-ui:header title="项目详情" backURL="${viewURL}" />
 <liferay-ui:panel-container accordion="false" extended="true">
-	<liferay-ui:panel title="" collapsible="false">
+	<liferay-ui:panel title="项目详细信息" collapsible="false">
 		<table class="table table-bordered">
 			<tr>
 				<td style="width: 15%%;" class="text-right">报建日期</td>
