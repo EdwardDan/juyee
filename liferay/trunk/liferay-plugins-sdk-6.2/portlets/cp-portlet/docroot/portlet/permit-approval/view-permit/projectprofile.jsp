@@ -81,7 +81,7 @@ tr.body td.content {
 					<aui:input name="jsgclb" type="checkbox" id="jsgclb${sortNo.index}"
 						value="${jsgclb.dictionaryId}"
 						checked="${fn:contains(projectProfile.jsgclb,jsgclb.dictionaryId)}"
-						label="${jsgclb.name}" inlineField="true" readonly="true" />
+						label="${jsgclb.name}" inlineField="true" onClick="return false"/>
 				</c:forEach></td>
 		</tr>
 		<tr class="body">
