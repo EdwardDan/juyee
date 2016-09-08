@@ -213,7 +213,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		String ywbm = "JT";
 		Dictionary xmlxDic = DictionaryLocalServiceUtil.getDictionary(xmlx);
 		ywbm = ywbm + xmlxDic.getCode();
-Locale locale = LocaleUtil.getDefault();
+		Locale locale = LocaleUtil.getDefault();
 		String currentDate = DateUtil.getCurrentDate("yyyy-MM-dd", locale);
 		String currentDateStr = currentDate.substring(2, 4) + currentDate.substring(5, 7);
 		ywbm = ywbm + currentDateStr+"0000";
@@ -395,7 +395,7 @@ Locale locale = LocaleUtil.getDefault();
 					}else{
 						if("jpg".equals(fileExtension)&&fileBytes.length>2097152){
 							validatorMessage="您上传的图片大小超过2M,请上传小于2M的图片！";
-						}else if("pdf".equals(fileExtension)&&fileBytes.length>20971520){	
+						}else if("pdf".equals(fileExtension)&&fileBytes.length>2097152){	
 								validatorMessage="您上传的文件大小超过20M,请上传小于20M的文件！";
 						}else{
 							fileEntry = uploadFile(resourceRequest,
@@ -506,14 +506,14 @@ Locale locale = LocaleUtil.getDefault();
 	}
 	
 	public static String getFilePath(FileEntry fileEntry) throws PortalException, SystemException {
-		return "/documents/" + fileEntry.getGroupId() + "/" + fileEntry.getFolderId() + "/" + fileEntry.getTitle() ;
+		return fileEntry.getGroupId() + "/" + fileEntry.getFolderId() + "/" + fileEntry.getTitle() ;
 		/*+ "/" + dlFileEntry.getUuid()*/
 	}
 	
 	public static String getFilePath(Long fileEntryId) throws PortalException, SystemException {
 		if(Validator.isNotNull(fileEntryId)){
 			DLFileEntry dLFileEntry=DLFileEntryLocalServiceUtil.getDLFileEntry(fileEntryId);
-			return "/documents/" + dLFileEntry.getGroupId() + "/" + dLFileEntry.getFolderId() + "/" + dLFileEntry.getTitle() ;
+			return dLFileEntry.getGroupId() + "/" + dLFileEntry.getFolderId() + "/" + dLFileEntry.getTitle();
 		}else
 			return "";
 	}
