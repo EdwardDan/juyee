@@ -1,9 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
-<%@ include file="init.jsp"%>
-<portlet:actionURL var="saveApplyMaterialsURL" name="saveApplyMaterials">
-<portlet:param name="redirectURL" value="${editPermitURL }"/>
-</portlet:actionURL>
 <style>
 .aui .table th, .aui .table td {
 	vertical-align: middle;
@@ -15,38 +11,43 @@
 }
 </style>
 
-<% long permitId =ParamUtil.getLong(renderRequest,"permitId");
+<% String permitId =ParamUtil.getString(renderRequest,"permitId");
 	List<ApplyMaterial> materialList=ApplyMaterialLocalServiceUtil.findByPermitId(1, -1, -1);
-    System.out.println(Arrays.asList(materialList));
-    System.out.println(123);
 %>
-
 
 <c:set var="namespace" value="<%=renderResponse.getNamespace()%>"></c:set>
 <portlet:resourceURL var="fileUpLoadURL" id="fileUpLoad" />
 <portlet:resourceURL var="fileDeleteURL" id="fileDelete" />
+<portlet:actionURL var="fileSaveURL" name="saveMaterials" ></portlet:actionURL>
 
-<aui:form id="fmFile" enctype="multipart/form-data" action="${saveApplyMaterialsURL }">
-<aui:input name="permitId" type="hidden" value="<%=permitId%>" />
-<table class="table table-bordered" style="font-size: 14px;">
+<form id="fmFile" action="${fileSaveURL}" enctype="multipart/form-data" method="post">
+<table class="table table-bordered" style="font-size: 14px;" id="fileTable">
 	<tr style="text-align: center; height: 45px;">
 		<td style="text-align: center; width: 5%;">序号</td>
 		<td style="text-align: center; width: 30%;">申请材料名称</td>
 		<td style="text-align: center; width: 45%;">附件</td>
-		<td style="text-align: center; width: 20%;">操作</td>
+		<td style="text-align: center; width: 20%;">操作
+			<span class="taglib-icon-help">
+			<img id="yui_patched_v3_11_0_1_1473298445453_1601" tabindex="0" src="http://localhost:8080/html/themes/control_panel/images/portlet/help.png" onmouseover="Liferay.Portal.ToolTip.show(this);" onfocus="Liferay.Portal.ToolTip.show(this);" onblur="Liferay.Portal.ToolTip.hide();" aria-labelledby="vfyl" alt="">
+			<span id="vfyl" class="hide-accessible tooltip-text">注:请上传jpg或pdf格式的文件，jpg格式文件大小不能超过2M,pdf格式文件不能超过20M,如果文件超过限定大小，请拆分后重新上传！</span>
+			</span>
+		</td>
 	</tr>
 	<c:forEach items="<%=materialList%>" var="material" varStatus="status"> 
-		<tr style="text-align: center">
-			<td style="text-align: center">${material.xh}</td>
+		<tr style="text-align: center" class="fileTr">
+			<td style="text-align: center" class="fileNo">${material.xh}</td>
 			<td>${material.clmc}</td>
 			<td style="text-align: center">
 				<div id="fileDiv${status.index+1}">
+				<!-- todo
+				此处可以根据状态来隐藏删除按钮的显示，提交后删除按钮不再显示
+				 -->
 				<c:if test="${not empty material.fileEntryIds}">
 				<c:forEach items="${fn:split(material.fileEntryIds,',')}" var="fileEntryId" varStatus="statusSub">
 					<div name="file${status.index+1}">
 					<a class="fileName" href="javascript:void(0);">
-								${material.clmc}-${statusSub.index+1}</a> &nbsp;&nbsp;&nbsp;
-					<a href='javascript:void(0)'; onclick="fileDelete(this,${fileEntryId},${material.materialId})">删除</a></div>
+								${material.clmc}-${statusSub.index+1}.${fn:split(fileEntryId,'|')[1]}</a> &nbsp;&nbsp;&nbsp;
+					<a href='javascript:void(0)';  onclick="${renderResponse.namespace}fileDelete(this,${fn:split(fileEntryId,'|')[0]},${material.materialId},'${fn:split(fileEntryId,'|')[1]}')">删除</a></div>
 				</c:forEach>
 				</c:if>
 				</div>
@@ -54,22 +55,35 @@
 			<td style="text-align: center">
 				<input type="button" value="上传" onclick="document.getElementById('fileInput${status.index+1}').click();"> 
 				<input id="fileInput${status.index+1}" name="${namespace}fileInput${status.index+1}" type="file" multiple=""
-				style="display:none;width: 150px;"  onchange="fileUpLoad(${status.index+1},${material.materialId},'${material.clmc}');"></input>
+				style="display:none;width: 150px;" accept="application/pdf,image/jpeg"  onchange="${renderResponse.namespace}fileUpLoad(${status.index+1},${material.materialId},'${material.clmc}');"></input>
 	
 			</td>
 		</tr>
 	</c:forEach>
 	
 </table>
-
+<!-- <div style="font-size:12px;font-family:宋体"><span style="color:red;">★</span>注:请上传jpg或pdf格式的文件，jpg格式文件大小不能超过2M,pdf格式文件不能超过20M,如果文件超过限定大小，请拆分后重新上传！</div>
+<br/> -->
 <div style="text-align: center">
-	<aui:button type="submit" value="保存" />
+	<aui:button type="submit" value="保存"  onclick="hideDeleteTag()"/>
 </div>
-</aui:form>
 
-<aui:script>
+</form>
+
+<script>
+	$(function(){
+		var sortEle=$("tr.fileTr").each(function(){
+		   var fileNo= $(this).children("td.fileNo").text();
+		   if(parseInt(fileNo)>=10){
+			   $('#fileTable').append($(this));
+			   /* $(this).empty(); */
+		   }	   
+		});
+		
+	});
+		
 	/* 上传 */
-	function fileUpLoad(divNo,materialId,materialName) {
+	function <portlet:namespace/>fileUpLoad(divNo,materialId,materialName) {
 		var fmFile = document.getElementById("fmFile");
 		var oMyForm = new FormData(fmFile);
 		oMyForm.append("<portlet:namespace/>divNo",divNo);
@@ -88,15 +102,14 @@
 						if(fileData.upLoadStatus){
 							var ele = "<div name='file"+divNo+"'><a class='fileName' href='javascript:void(0);'>"
 							+ materialName+"-"+no+"."+fileData.extension
-							+ "</a> &nbsp;&nbsp;&nbsp;<a href='javascript:void(0)'; onclick='fileDelete(this,"
-							+ fileData.fileId + ","+materialId+")'>删除</a></div>";
+							+ "</a> &nbsp;&nbsp;&nbsp;<a href='javascript:void(0)';  onclick='${renderResponse.namespace}fileDelete(this,"
+							+ fileData.fileId + ","+materialId+",\""+fileData.extension+"\")'>删除</a></div>";
 							$("#fileDiv" + divNo).append(ele);
 							domSort(divNo); 
-							alert("操作成功！");		}
+							alert("上传成功！");		}
 						else{
 							alert(fileData.validatorMessage);
 							}			
-
 					},
 					error : function(e) {
 						alert("网络错误，请重试！！");
@@ -105,7 +118,7 @@
 	}
 
 	/* 删除 */
-	function fileDelete(divObj, fileId, materialId) {
+	function <portlet:namespace/>fileDelete(divObj, fileId, materialId,fileExtension) {
 		if (!confirm("确定要删除此文件吗？"))
 			return;
 		$.ajax({
@@ -113,7 +126,8 @@
 			type : "post",
 			data : {
 				'<portlet:namespace/>fileId' : fileId,
-				'<portlet:namespace/>materialId' : materialId
+				'<portlet:namespace/>materialId' : materialId,
+				'<portlet:namespace/>fileExtension' : fileExtension
 			},
 			success : function(data) {
 				$(divObj).parent().remove();
@@ -130,9 +144,11 @@
 		var fileNameNoArr=new Array();
 		$("div[name^='file" + divNo + "']").each(function() {
 			var text=$(this).children("a.fileName").text().split('.')[0].split('-')[1];
+			//把已有的附件名称后缀的数字放到数组中
 			fileNameNoArr[indexNo]=text;
 			indexNo = (indexNo + 1);
 		});
+		//判断数组中从1开始缺少哪些数字，缺少的数字即为需要的数字
 		return getNo(fileNameNoArr);
 	}
 	
@@ -158,8 +174,5 @@
 		});
 		$('#fileDiv'+divNo).empty().append(sortEle);
 	}
-	
-	
-	
-	
-</aui:script>
+
+</script>
