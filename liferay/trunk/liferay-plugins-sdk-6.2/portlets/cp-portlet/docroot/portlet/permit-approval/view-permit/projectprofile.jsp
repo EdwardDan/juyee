@@ -134,7 +134,7 @@ tr.body td.content {
 		</tr>
 		<tr class="body">
 			<td class="title">现场开工情况</td>
-			<td class="content" colspan="3">${projectProfile.xckgqk}</td>
+			<td class="content" colspan="3"><%=DictionaryLocalServiceUtil.getDictionary(Long.valueOf(projectProfile.getXckgqk())).getName() %></td>
 		</tr>
 		<tr class="body">
 			<td class="title">计划开工</td>
