@@ -82,10 +82,10 @@
 				<liferay-ui:search-container-column-text name="序号"
 					value="<%=String.valueOf(++sortNo)%>" />
 				<liferay-ui:search-container-column-text name="绿色" value="${projectProfile.xmxz==21817?'':'★'}"/>
+				<liferay-ui:search-container-column-text name="项目类型" value="<%=DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx()).getName()%>"/>
 				<liferay-ui:search-container-column-text property="ywbh" name="业务编号" />
 				<liferay-ui:search-container-column-text property="bjbh" name="报建编号" />
 				<liferay-ui:search-container-column-text name="项目名称" value="${projectProfile.gcmc}"/>
-				<liferay-ui:search-container-column-text name="项目类型" value="<%=DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx()).getName()%>"/>
 				<liferay-ui:search-container-column-text name="建设单位" value="${projectProfile.jsdwmc}"/>
 				<liferay-ui:search-container-column-text name="状态" value=""/>
 				<liferay-ui:search-container-column-text name="操作">
