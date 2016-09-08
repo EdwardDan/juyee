@@ -42,7 +42,7 @@
 <portlet:renderURL var="wldshURL" >
 	<portlet:param name="mvcPath" value="${contextPath}/wldsh.jsp" />
 </portlet:renderURL>
-<table class="table table-border table-hover" style="width: 100% ；text-align:center;">
+<table class="table table-border table-hover table-striped" style="width: 100% ；text-align:center;">
 	<tr>
 		<td>审核步骤</td>
 		<td>审核意见</td>

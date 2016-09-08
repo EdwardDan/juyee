@@ -24,7 +24,7 @@
 <portlet:renderURL var="spURL" windowState="pop_up">
 	<portlet:param name="mvcPath" value="${contextPath}/sp.jsp" />
 </portlet:renderURL>
-<table class="table table-bordered table-hover" style="width: 100% ；text-align:center;">
+<table class="table table-bordered table-hover table-striped" style="width: 100% ；text-align:center;">
 	<tr>
 		<td>审核步骤</td>
 		<td>审核意见</td>
