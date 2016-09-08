@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
+
 <c:set var="contextPath"
 	value="${request.contextPath}/portlet/project-search" />
 <liferay-ui:header title="报建项目查询" />
@@ -20,38 +21,38 @@
 			<aui:input name="p_p_id" type="hidden" useNamespace="false"
 				value="${portletDisplay.id }"></aui:input>
 			<aui:input type="hidden" name="delta" value="${delta}"></aui:input>
-			<table style="width: 100%;" border="0" class="table table-bordered">
+			<table style="width: 100%;" class="table table-bordered">
 				<tr>
-					<td style="width: 10%;">报建编号</td>
-					<td style="width: 40%;"><aui:input type="text" name="bjbh"
+					<td style="width: 10%;" class="text-right">报建编号</td>
+					<td style="width: 40%;" class="bg-white"><aui:input type="text" name="bjbh"
 							label="" /></td>
-					<td style="width: 15%;">网上申请编号</td>
-					<td style="width: 35%;"><aui:input type="text" name="wssqbh"
+					<td style="width: 15%;" class="text-right">网上申请编号</td>
+					<td style="width: 35%;" class="bg-white"><aui:input type="text" name="wssqbh"
 							label="" /></td>
 				</tr>
 				<tr>
-					<td>项目名称</td>
-					<td colspan="3"><aui:input type="text" name="xmmc" label=""
+					<td class="text-right">项目名称</td>
+					<td colspan="3" class="bg-white"><aui:input type="text" name="xmmc" label=""
 							cssClass="span12" /></td>
 				</tr>
 				<tr>
-					<td>报建日期从</td>
-					<td><aui:input type="text" name="bjrqStart"
+					<td class="text-right">报建日期从</td>
+					<td class="bg-white"><aui:input type="text" name="bjrqStart"
 							cssClass="Wdate input-small" label=""
 							onfocus="WdatePicker({maxDate:\'#F{$dp.$D(\\'${renderResponse.namespace }bjrqEnd\\');}\'})"
 							inlineField="true"></aui:input> &nbsp;至&nbsp; <aui:input
 							type="text" name="bjrqEnd" cssClass="Wdate input-small" label=""
 							onfocus="WdatePicker({minDate:\'#F{$dp.$D(\\'${renderResponse.namespace }bjrqStart\\');}\'})"
 							inlineField="true"></aui:input></td>
-					<td>项目状态</td>
-					<td><aui:select name="bjwcbj" showEmptyOption="true"
+					<td class="text-right">项目状态</td>
+					<td class="bg-white"><aui:select name="bjwcbj" showEmptyOption="true"
 							cssClass="input-small" label="">
 							<aui:option value="y" label="已完成"></aui:option>
 							<aui:option value="n" label="未完成"></aui:option>
 						</aui:select></td>
 				</tr>
 				<tr style="height: 40px;">
-					<td colspan="4" align="center">
+					<td colspan="4" align="center" class="bg-white">
 					<div class="text-center"><aui:button type="submit"
 							value="提交查询"></aui:button></div>
 					</td>
