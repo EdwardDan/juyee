@@ -33,8 +33,8 @@
 					<td style="width: 10%; text-align: right">项目名称</td>
 					<td colspan="3" class="content"><aui:input type="text" name="xmmc" label=""
 							cssClass="span12" /></td>
-				<tr style="height: 40px;">
-					<td colspan="4" style="text-align:center"><aui:button type="submit"
+				<tr style="height: 40px;" class="body">
+					<td colspan="4" style="text-align:center;" class="content"><aui:button type="submit"
 							value="提交查询"></aui:button></td>
 				</tr>
 			</table>
@@ -74,7 +74,7 @@
 							value="${contextPath}/view-contract-wz.jsp" />
 					</c:if>
 				</liferay-portlet:renderURL>
-				<liferay-ui:search-container-column-text name=""
+				<liferay-ui:search-container-column-text name="序号"
 					value="<%=String.valueOf(++sortNo)%>" />
 				<liferay-ui:search-container-column-text property="bjbh" name="报建编号" />
 				<liferay-ui:search-container-column-text property="bdh" name="标段号" />
