@@ -1,40 +1,49 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
 <%@ include file="init.jsp"%>
+<style type="text/css">
+	a{
+		cursor: pointer;
+	}
+	table{
+		width:100%;
+		text-align:center;
+	}
+</style>
 <c:set var="contextPath"
 	value="${request.contextPath}/portlet/permit-approval/approval-history-city" />
 <portlet:renderURL var="ysURL">
-	<portlet:param name="mvcPath" value="${contextPath}/ys.jsp"/>
+	<portlet:param name="mvcPath" value="${contextPath}/ys.jsp" />
 </portlet:renderURL>
-<portlet:renderURL var="sjURL">
-	<portlet:param name="mvcPath" value="${contextPath}/sj.jsp"/>
+<portlet:renderURL var="sjURL" windowState="pop_up">
+	<portlet:param name="mvcPath" value="${contextPath}/sj.jsp" />
 </portlet:renderURL>
-<portlet:renderURL var="csURL">
-	<portlet:param name="mvcPath" value="${contextPath}/cs.jsp"/>
+<portlet:renderURL var="csURL" windowState="pop_up">
+	<portlet:param name="mvcPath" value="${contextPath}/cs.jsp" />
 </portlet:renderURL>
-<portlet:renderURL var="fhURL">
-	<portlet:param name="mvcPath" value="${contextPath}/fh.jsp"/>
+<portlet:renderURL var="fhURL" windowState="pop_up">
+	<portlet:param name="mvcPath" value="${contextPath}/fh.jsp" />
 </portlet:renderURL>
-<portlet:renderURL var="shURL">
-	<portlet:param name="mvcPath" value="${contextPath}/sh.jsp"/>
+<portlet:renderURL var="shURL" windowState="pop_up">
+	<portlet:param name="mvcPath" value="${contextPath}/sh.jsp" />
 </portlet:renderURL>
-<portlet:renderURL var="fgldshURL" windowState="pop_up">
-	<portlet:param name="mvcPath" value="${contextPath}/fgldsh.jsp"/>
+<portlet:renderURL var="fgldshURL" >
+	<portlet:param name="mvcPath" value="${contextPath}/fgldsh.jsp" />
 </portlet:renderURL>
-<portlet:renderURL var="zxldshURL" windowState="pop_up">
-	<portlet:param name="mvcPath" value="${contextPath}/zxldsh.jsp"/>
+<portlet:renderURL var="zxldshURL" >
+	<portlet:param name="mvcPath" value="${contextPath}/zxldsh.jsp" />
 </portlet:renderURL>
-<portlet:renderURL var="wjscshURL" windowState="pop_up">
-	<portlet:param name="mvcPath" value="${contextPath}/wjscsh.jsp"/>
+<portlet:renderURL var="wjscshURL" >
+	<portlet:param name="mvcPath" value="${contextPath}/wjscsh.jsp" />
 </portlet:renderURL>
-<portlet:renderURL var="wspcshURL" windowState="pop_up">
-	<portlet:param name="mvcPath" value="${contextPath}/wspcsh.jsp"/>
+<portlet:renderURL var="wspcshURL">
+	<portlet:param name="mvcPath" value="${contextPath}/wspcsh.jsp" />
 </portlet:renderURL>
-<portlet:renderURL var="wldshURL" windowState="pop_up">
-	<portlet:param name="mvcPath" value="${contextPath}/wldsh.jsp"/>
+<portlet:renderURL var="wldshURL" >
+	<portlet:param name="mvcPath" value="${contextPath}/wldsh.jsp" />
 </portlet:renderURL>
 历史审核步骤
-<table border="1" style="width: 100%；text-align:center;">
+<table border="1" style="width: 100% ；text-align:center;">
 	<tr>
 		<td>审核步骤</td>
 		<td>审核意见</td>
@@ -42,63 +51,117 @@
 		<td>审核时间</td>
 	</tr>
 	<tr>
-		<td><a href="${ysURL}">预审</a></td> 
-		<td><a href="${ysURL}"></a></td>
-		<td><a href="${ysURL}"></a></td>
-		<td><a href="${ysURL}"></a></td>
+		<td>预审/td>
+		<td>材料符合要求，审核通过</td>
+		<td></td>
+		<td></td>
 	</tr>
 	<tr>
-		<td><a href="${sjURL}">收件</a></td>
-		<td><a href="${sjURL}"></a></td>
-		<td><a href="${sjURL}"></a></td>
-		<td><a href="${sjURL}"></a></td>
+		<td><a onclick="sj()">收件</a></td>
+		<td><a onclick="sj()"></a></td>
+		<td><a onclick="sj()"></a></td>
+		<td><a onclick="sj()"></a></td>
 	</tr>
 	<tr>
-		<td><a href="${csURL}">初审</a></td>
-		<td><a href="${csURL}"></a></td>
-		<td><a href="${csURL}"></a></td>
-		<td><a href="${csURL}"></a></td>
+		<td><a onclick="cs()">初审</a></td>
+		<td><a onclick="cs()"></a></td>
+		<td><a onclick="cs()"></a></td>
+		<td><a onclick="cs()"></a></td>
 	</tr>
 	<tr>
-		<td><a href="${fhURL}">复核</a></td>
-		<td><a href="${fhURL}"></a></td>
-		<td><a href="${fhURL}"></a></td>
-		<td><a href="${fhURL}"></a></td>
+		<td><a onclick="fh()">复核</a></td>
+		<td><a onclick="fh()"></a></td>
+		<td><a onclick="fh()"></a></td>
+		<td><a onclick="fh()"></a></td>
 	</tr>
 	<tr>
-		<td><a href="${shURL}">审核</a></td>
-		<td><a href="${shURL}"></a></td>
-		<td><a href="${shURL}"></a></td>
-		<td><a href="${shURL}"></a></td>
+		<td><a onclick="sh()">审核</a></td>
+		<td><a onclick="sh()"></a></td>
+		<td><a onclick="sh()"></a></td>
+		<td><a onclick="sh()"></a></td>
 	</tr>
 	<tr>
-		<td><a href="${fgldshURL}">分管领导审核</a></td>
-		<td><a href="${fgldshURL}"></a></td>
-		<td><a href="${fgldshURL}"></a></td>
-		<td><a href="${fgldshURL}"></a></td>
+		<td>分管领导审核</td>
+		<td></td>
+		<td></td>
+		<td></td>
 	</tr>
 	<tr>
-		<td><a href="${zxldshURL}">中心领导审核</a></td>
-		<td><a href="${zxldshURL}"></a></td>
-		<td><a href="${zxldshURL}"></a></td>
-		<td><a href="${zxldshURL}"></a></td>
+		<td>中心领导审核</td>
+		<td></td>
+		<td></td>
+		<td></td>
 	</tr>
 	<tr>
-		<td><a href="${wjscshURL}">委建设处审核</a></td>
-		<td><a href="${wjscshURL}"></a></td>
-		<td><a href="${wjscshURL}"></a></td>
-		<td><a href="${wjscshURL}"></a></td>
+		<td>委建设处审核</td>
+		<td></td>
+		<td></td>
+		<td></td>
 	</tr>
 	<tr>
-		<td><a href="${wspcshURL}">委审批处审核</a></td>
-		<td><a href="${wspcshURL}"></a></td>
-		<td><a href="${wspcshURL}"></a></td>
-		<td><a href="${wspcshURL}"></a></td>
+		<td>委审批处审核</td>
+		<td></td>
+		<td></td>
+		<td></td>
 	</tr>
 	<tr>
-		<td><a href="${wldshURL}">委领导审核</a></td>
-		<td><a href="${wldshURL}"></a></td>
-		<td><a href="${wldshURL}"></a></td>
-		<td><a href="${wldshURL}"></a></td>
+		<td>委领导审核</td>
+		<td></td>
+		<td></td>
+		<td></td>
 	</tr>
 </table>
+<script>
+	Liferay.provide(window, 'sj', function() {
+		Liferay.Util.openWindow({
+			dialog : {
+				centered : true,
+				width : 800,
+				height : 600
+			},
+			id : 'popup',
+			title : '收件',
+			uri : '${sjURL}',
+			destroyOnClose : true
+		});
+	}, [ 'aui-dialog' ]);
+	Liferay.provide(window, 'cs', function() {
+		Liferay.Util.openWindow({
+			dialog : {
+				centered : true,
+				width : 800,
+				height : 600
+			},
+			id : 'popup',
+			title : '初审',
+			uri : '${csURL}',
+			destroyOnClose : true
+		});
+	}, [ 'aui-dialog' ]);
+	Liferay.provide(window, 'fh', function() {
+		Liferay.Util.openWindow({
+			dialog : {
+				centered : true,
+				width : 800,
+				height : 600
+			},
+			id : 'popup',
+			title : '复核',
+			uri : '${fhURL}',
+			destroyOnClose : true
+		});
+	}, [ 'aui-dialog' ]);
+	Liferay.provide(window, 'sh', function() {
+		Liferay.Util.openWindow({
+			dialog : {
+				centered : true,
+				width : 800,
+				height : 600
+			},
+			id : 'popup',
+			title : '审核',
+			uri : '${shURL}',
+			destroyOnClose : true
+		});
+	}, [ 'aui-dialog' ]);
+</script>
