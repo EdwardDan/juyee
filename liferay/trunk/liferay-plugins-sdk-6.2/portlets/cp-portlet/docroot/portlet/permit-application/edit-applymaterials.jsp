@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
+<%@ include file="init.jsp"%>
 <style>
 .aui .table th, .aui .table td {
 	vertical-align: middle;
@@ -11,16 +12,19 @@
 }
 </style>
 
-<% String permitId =ParamUtil.getString(renderRequest,"permitId");
-	List<ApplyMaterial> materialList=ApplyMaterialLocalServiceUtil.findByPermitId(1, -1, -1);
+<% Long permitId =ParamUtil.getLong(renderRequest,"permitId");
+	List<ApplyMaterial> materialList=ApplyMaterialLocalServiceUtil.findByPermitId(permitId, -1, -1);
 %>
 
 <c:set var="namespace" value="<%=renderResponse.getNamespace()%>"></c:set>
 <portlet:resourceURL var="fileUpLoadURL" id="fileUpLoad" />
 <portlet:resourceURL var="fileDeleteURL" id="fileDelete" />
-<portlet:actionURL var="fileSaveURL" name="saveMaterials" ></portlet:actionURL>
 
+<portlet:actionURL var="fileSaveURL" name="saveApplyMaterials">
+	<portlet:param name="redirectURL" value="${editPermitURL}" />
+</portlet:actionURL>
 <form id="fmFile" action="${fileSaveURL}" enctype="multipart/form-data" method="post">
+<aui:input type="hidden" name="permitId" value="<%=permitId%>"></aui:input>
 <table class="table table-bordered" style="font-size: 14px;" id="fileTable">
 	<tr style="text-align: center; height: 45px;">
 		<td style="text-align: center; width: 5%;">序号</td>
@@ -66,6 +70,7 @@
 <br/> -->
 <div style="text-align: center">
 	<aui:button type="submit" value="保存"  onclick="hideDeleteTag()"/>
+	<aui:button type="submit" value="上报"  onclick="hideDeleteTag()"/>
 </div>
 
 </form>
