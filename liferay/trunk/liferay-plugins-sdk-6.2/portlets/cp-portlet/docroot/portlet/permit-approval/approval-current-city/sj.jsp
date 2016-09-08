@@ -60,20 +60,6 @@ span{
 	</aui:row>
 	<aui:row>
 		<aui:col span="6" cssClass="text-left">
-			<label class="control-label" for="sqr">申请人：</label>
-			<div class="controls">
-				<input type="text" id="sqr">
-			</div>
-		</aui:col>
-		<aui:col span="6" cssClass="text-left">
-			<label class="control-label" for="lxdz">联系地址：</label>
-			<div class="controls">
-				<input type="text" id="lxdz">
-			</div>
-		</aui:col>
-	</aui:row>
-	<aui:row>
-		<aui:col span="6" cssClass="text-left">
 			<label class="control-label" for="sqsx">申请事项：</label>
 			<div class="controls">
 				<input type="text" id="sqsx">
