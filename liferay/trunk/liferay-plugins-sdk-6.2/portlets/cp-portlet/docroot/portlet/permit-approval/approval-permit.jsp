@@ -90,7 +90,6 @@
 		<jsp:include page="${contextPath }/view-permit/projectprofile.jsp"/>
 	</liferay-ui:section>
 	<liferay-ui:section>
-
 		<jsp:include page="${contextPath }/view-participationunits.jsp"/>
 		<jsp:include page="${contextPath }/view-participationunits.jsp"/>
 		<jsp:include page="${contextPath }/view-permit/participationunits.jsp"/>
