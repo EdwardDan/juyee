@@ -28,4 +28,6 @@
 <%@page import="com.justonetech.cp.contract.service.ContractLocalServiceUtil"%>
 <%@page import="com.justonetech.sys.service.DictionaryLocalServiceUtil"%>
 <%@ page import="com.justonetech.sys.model.Dictionary"%>
+<%@page import="com.justonetech.cp.util.CityPermitStatus"%>
+<%@page import="com.justonetech.cp.util.CountyPermitStatus"%>
 
