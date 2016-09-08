@@ -10,19 +10,19 @@
 		<aui:form name="fm" method="get" action="${searchURL }">
 			<aui:input name="p_p_id" type="hidden" useNamespace="false" value="${portletDisplay.id }"></aui:input>
 			<aui:input name="mvcPath" type="hidden" value="${contextPath }/select-contract.jsp"></aui:input>
-			<table style="width: 100%;" border="1">
+			<table style="width: 100%;" class="table table-bordered">
 				<tr>
-					<td style="width: 10%;">报建编号</td>
-					<td style="width: 40%;"><aui:input type="text" name="bjbh" label="" /></td>
-					<td style="width: 15%;">标段号</td>
-					<td style="width: 35%;"><aui:input type="text" name="bdh" label="" /></td>
+					<td style="width: 10%;" class="text-right">报建编号</td>
+					<td style="width: 40%;" class="bg-white"><aui:input type="text" name="bjbh" label="" /></td>
+					<td style="width: 15%;" class="text-right">标段号</td>
+					<td style="width: 35%;" class="bg-white"><aui:input type="text" name="bdh" label="" /></td>
 				</tr>
 				<tr>
-					<td style="width: 10%;">合同名称</td>
-					<td colspan="3"><aui:input type="text" name="htmc" label="" cssClass="span12" /></td>
+					<td style="width: 10%;" class="text-right">合同名称</td>
+					<td colspan="3" class="bg-white"><aui:input type="text" name="htmc" label="" cssClass="span12" /></td>
 				</tr>
 				<tr style="height: 40px;">
-					<td colspan="4" align="center"><aui:button type="submit" value="查询"></aui:button></td>
+					<td colspan="4" align="center" class="bg-white"><aui:button type="submit" value="查询"></aui:button></td>
 				</tr>
 			</table>
 		</aui:form>

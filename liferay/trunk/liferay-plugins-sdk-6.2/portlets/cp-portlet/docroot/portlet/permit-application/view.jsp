@@ -23,17 +23,17 @@
 			<aui:input name="mvcPath" type="hidden" useNamespace="false"
 				value="${contextPath }/apply-permit.jsp"></aui:input>
 			<aui:input type="hidden" name="delta" value="${delta}"></aui:input>
-			<table style="width: 100%;" border="1">
+			<table style="width: 100%;" class="table table-bordered">
 				<tr>
-					<td style="width: 10%;">报建编号</td>
-					<td style="width: 40%;"><aui:input type="text" name="bjbh"
+					<td style="width: 10%;" class="text-right">报建编号</td>
+					<td style="width: 40%;" class="bg-white"><aui:input type="text" name="bjbh"
 							style="width:80%" label="" /></td>
-					<td style="width: 10%;">工程名称</td>
-					<td style="width: 40%;"><aui:input type="text" name="gcmc"
+					<td style="width: 10%;" class="text-right">工程名称</td>
+					<td style="width: 40%;" class="bg-white"><aui:input type="text" name="gcmc"
 							style="width:80%" label="" /></td>
 				</tr>
 				<tr style="height: 40px;">
-					<td colspan="4" align="center"><aui:button type="submit"
+					<td colspan="4" align="center"  class="bg-white"><aui:button type="submit"
 							value="查询"></aui:button> <aui:button type="button" value="申请"
 							href="${selectContractURL}"></aui:button></td>
 				</tr>
