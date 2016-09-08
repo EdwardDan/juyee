@@ -1,6 +1,11 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
 <%@ include file="init.jsp"%>
+<style type="text/css">
+	tr.body td.content{
+		background-color: white;
+	}
+</style>
 <liferay-ui:header title="施工许可审核"/>
 <%	
 	String ywbh = ParamUtil.getString(request, "ywbh");
@@ -28,30 +33,30 @@
 			<aui:input name="p_p_id" type="hidden" useNamespace="false"
 				value="${portletDisplay.id }"></aui:input>
 			<aui:input type="hidden" name="delta" value="${delta}"></aui:input>
-			<table style="width: 100%;" border="1">
-				<tr>
+			<table style="width: 100%;" class="table table-bordered">
+				<tr class="body">
 					<td style="width: 10%; text-align: right">业务编号</td>
-					<td style="width: 40%;"><aui:input type="text" name="ywbh"
+					<td style="width: 40%;" class="content"><aui:input type="text" name="ywbh"
 							id="bjbh" label="" cssClass="span12" /></td>
 					<td style="width: 15%; text-align: right">报建编号</td>
-					<td style="width: 35%;"><aui:input type="text" name="bjbh"
+					<td style="width: 35%;" class="content"><aui:input type="text" name="bjbh"
 							label="" cssClass="span12" /></td>
 				</tr>
-				<tr>
+				<tr class="body">
 					<td style="width: 10%; text-align: right">项目名称</td>
-					<td ><aui:input type="text" name="xmmc" label=""
+					<td class="content"><aui:input type="text" name="xmmc" label=""
 							cssClass="span12" /></td>
 					<td style="width: 15%; text-align: right">项目类型</td>
-					<td style="width: 35%;"><aui:input type="text" name="xmlx"
+					<td style="width: 35%;" class="content"><aui:input type="text" name="xmlx"
 							label="" cssClass="span12" /></td>
 				</tr>
-				<tr>
+				<tr class="body">
 					<td style="width: 10%; text-align: right">建设单位</td>
-					<td colspan="3"><aui:input type="text" name="jsdw" label=""
+					<td colspan="3" class="content"><aui:input type="text" name="jsdw" label=""
 							cssClass="span12" /></td>
 				</tr>
 				<tr style="height: 40px;">
-					<td colspan="4" align="center"><aui:button type="submit"
+					<td colspan="4" style="text-align:center"><aui:button type="submit"
 							value="提交查询"></aui:button></td>
 				</tr>
 			</table>
