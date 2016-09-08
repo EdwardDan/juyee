@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
 <%@ include file="init.jsp"%>
-<liferay-ui:header title="施工许可审核" />
+<liferay-ui:header title="施工许可审核"/>
 <%	
 	String ywbh = ParamUtil.getString(request, "ywbh");
 	String bjbh = ParamUtil.getString(request, "bjbh");
@@ -30,23 +30,23 @@
 			<aui:input type="hidden" name="delta" value="${delta}"></aui:input>
 			<table style="width: 100%;" border="1">
 				<tr>
-					<td style="width: 10%; text-align: right">业务编号：</td>
+					<td style="width: 10%; text-align: right">业务编号</td>
 					<td style="width: 40%;"><aui:input type="text" name="ywbh"
 							id="bjbh" label="" cssClass="span12" /></td>
-					<td style="width: 15%; text-align: right">报建编号：</td>
+					<td style="width: 15%; text-align: right">报建编号</td>
 					<td style="width: 35%;"><aui:input type="text" name="bjbh"
 							label="" cssClass="span12" /></td>
 				</tr>
 				<tr>
-					<td style="width: 10%; text-align: right">项目名称：</td>
+					<td style="width: 10%; text-align: right">项目名称</td>
 					<td ><aui:input type="text" name="xmmc" label=""
 							cssClass="span12" /></td>
-					<td style="width: 15%; text-align: right">项目类型：</td>
+					<td style="width: 15%; text-align: right">项目类型</td>
 					<td style="width: 35%;"><aui:input type="text" name="xmlx"
 							label="" cssClass="span12" /></td>
 				</tr>
 				<tr>
-					<td style="width: 10%; text-align: right">建设单位：</td>
+					<td style="width: 10%; text-align: right">建设单位</td>
 					<td colspan="3"><aui:input type="text" name="jsdw" label=""
 							cssClass="span12" /></td>
 				</tr>
