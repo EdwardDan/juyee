@@ -175,7 +175,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 			projectProfile = ProjectProfileLocalServiceUtil.createProjectProfile(CounterLocalServiceUtil.increment());
 			permit = PermitLocalServiceUtil.createPermit(projectProfile.getPermitId());
 			permit.setSqbz(1);
-			permit.setSqzt("填写");
+			permit.setSqzt("1");
 		}
 		projectProfile.setXmlx(xmlx);
 		projectProfile.setLxjb(lxjb);
