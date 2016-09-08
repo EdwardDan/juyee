@@ -30,12 +30,15 @@ tr.body td.content {
 	long permitId = ParamUtil.getLong(request, "permitId");
 	Permit permit = PermitLocalServiceUtil.getPermit(permitId);
 	ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
+	String jsddssqx = projectProfile.getJsddssqx() == 0 ? null : DictionaryLocalServiceUtil.getDictionary(
+			projectProfile.getJsddssqx()).getName();
 	Dictionary jsgclb = DictionaryLocalServiceUtil.findByCode("jsgclb");
 	List<Dictionary> jsgclbs = jsgclb != null ? DictionaryLocalServiceUtil.findByParentId(
 			jsgclb.getDictionaryId(), -1, -1) : null;
 	request.setAttribute("permit", permit);
 	request.setAttribute("projectProfile", projectProfile);
 	request.setAttribute("jsgclbs", jsgclbs);
+	request.setAttribute("jsddssqx", jsddssqx);
 %>
 <fieldset style="">
 	<legend align="center">申请信息</legend>
@@ -78,7 +81,7 @@ tr.body td.content {
 		</tr>
 		<tr class="body">
 			<td class="title">建设地点所属区县</td>
-			<td class="content" colspan="3"><%=DictionaryLocalServiceUtil.getDictionary(projectProfile.getJsddssqx()).getName()%></td>
+			<td class="content" colspan="3">${jsddssqx}</td>
 		</tr>
 		<tr class="body">
 			<td class="title">建设工程类别</td>
@@ -87,7 +90,7 @@ tr.body td.content {
 					<aui:input name="jsgclb" type="checkbox" id="jsgclb${sortNo.index}"
 						value="${jsgclb.dictionaryId}"
 						checked="${fn:contains(projectProfile.jsgclb,jsgclb.dictionaryId)}"
-						label="${jsgclb.name}" inlineField="true" readonly="true"/>
+						label="${jsgclb.name}" inlineField="true" readonly="true" />
 				</c:forEach></td>
 		</tr>
 		<tr class="body">
@@ -144,12 +147,16 @@ tr.body td.content {
 		</tr>
 		<tr class="body">
 			<td class="title">计划开工</td>
-			<td class="content"><fmt:formatDate value="${project.jhkg}" pattern="yyyy-MM-dd"/></td>
+			<td class="content"><fmt:formatDate value="${project.jhkg}"
+					pattern="yyyy-MM-dd" /></td>
 			<td class="title">计划竣工</td>
-			<td class="content"><fmt:formatDate value="${project.jhjg}" pattern="yyyy-MM-dd"/></td>
+			<td class="content"><fmt:formatDate value="${project.jhjg}"
+					pattern="yyyy-MM-dd" /></td>
 		</tr>
 		<tr class="body">
-			<td class="content" colspan="4"><aui:input name="是否政府投资类" type="checkbox" checked="${projectProfile.sfzftzl?true:false}" readonly="true"/></td>
+			<td class="content" colspan="4"><aui:input name="是否政府投资类"
+					type="checkbox" checked="${projectProfile.sfzftzl?true:false}"
+					readonly="true" /></td>
 		</tr>
 	</table>
 </fieldset>
