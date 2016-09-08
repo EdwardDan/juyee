@@ -20,7 +20,7 @@
 			<aui:input name="p_p_id" type="hidden" useNamespace="false"
 				value="${portletDisplay.id }"></aui:input>
 			<aui:input type="hidden" name="delta" value="${delta}"></aui:input>
-			<table style="width: 100%;" border="1">
+			<table style="width: 100%;" border="0" class="table table-bordered">
 				<tr>
 					<td style="width: 10%;">报建编号</td>
 					<td style="width: 40%;"><aui:input type="text" name="bjbh"
@@ -51,8 +51,10 @@
 						</aui:select></td>
 				</tr>
 				<tr style="height: 40px;">
-					<td colspan="4" align="center"><aui:button type="submit"
-							value="提交查询"></aui:button></td>
+					<td colspan="4" align="center">
+					<div class="text-center"><aui:button type="submit"
+							value="提交查询"></aui:button></div>
+					</td>
 				</tr>
 			</table>
 		</aui:form>

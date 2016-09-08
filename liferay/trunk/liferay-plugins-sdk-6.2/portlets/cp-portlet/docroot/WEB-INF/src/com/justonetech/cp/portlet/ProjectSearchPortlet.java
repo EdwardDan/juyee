@@ -56,8 +56,8 @@ public class ProjectSearchPortlet extends MVCPortlet {
 		int start = delta * (cur - 1);
 		int end = delta * cur;
 
-		List<Project> projects = ProjectLocalServiceUtil.getProjects(zzjgdm, bjbh, wssqbh, xmmc, bjrqStart, bjrqEnd, bjwcbj, start, end);
-		int projectsCount = ProjectLocalServiceUtil.getProjectsCount(zzjgdm, bjbh, wssqbh, xmmc, bjrqStart, bjrqEnd, bjwcbj);
+		List<Project> projects = ProjectLocalServiceUtil.getProjects("", bjbh, wssqbh, xmmc, bjrqStart, bjrqEnd, bjwcbj, start, end);
+		int projectsCount = ProjectLocalServiceUtil.getProjectsCount("", bjbh, wssqbh, xmmc, bjrqStart, bjrqEnd, bjwcbj);
 		renderRequest.setAttribute("bjbh", bjbh);
 		renderRequest.setAttribute("wssqbh", wssqbh);
 		renderRequest.setAttribute("xmmc", xmmc);

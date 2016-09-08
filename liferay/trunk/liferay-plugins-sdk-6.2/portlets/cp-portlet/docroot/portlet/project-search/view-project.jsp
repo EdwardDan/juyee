@@ -7,8 +7,8 @@
 	request.setAttribute("project", project);
 %>
 <portlet:renderURL var="viewURL" />
-<liferay-ui:header title="项目列表" backURL="${viewURL}" />
-<table style="width: 100%;" border="1">
+<liferay-ui:header title="项目详情" backURL="${viewURL}" />
+<table class="table table-bordered">
 	<tr>
 		<td style="width: 15%%;">报建日期</td>
 		<td style="width: 35%;"><fmt:formatDate value="${project.bjrq}"
