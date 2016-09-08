@@ -20,6 +20,6 @@
 		<jsp:include page="${contextPath }/approval-history-county.jsp" />
 	</c:when>
 	<c:otherwise>
+		<jsp:include page="${contextPath }/approval-history-city.jsp" />
 	</c:otherwise>
 </c:choose>
-		<jsp:include page="${contextPath }/approval-history-city.jsp" />
