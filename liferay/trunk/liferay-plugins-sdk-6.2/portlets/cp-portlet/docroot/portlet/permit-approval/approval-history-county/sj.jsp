@@ -17,7 +17,7 @@ td.content {
 }
 </style>
 
-<table class="table table-bordered table-hover">
+<table class="table table-bordered table-hover table-striped">
 	<tr>
 		<td class="title">受理编号</td>
 		<td class="content"></td>
