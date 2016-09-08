@@ -24,7 +24,6 @@
 <portlet:renderURL var="spURL" windowState="pop_up">
 	<portlet:param name="mvcPath" value="${contextPath}/sp.jsp" />
 </portlet:renderURL>
-区县历史审核步骤
 <table border="1" style="width: 100% ；text-align:center;">
 	<tr>
 		<td>审核步骤</td>
@@ -55,36 +54,6 @@
 		<td><a onclick="sp()"></a></td>
 		<td><a onclick="sp()"></a></td>
 		<td><a onclick="sp()"></a></td>
-	</tr>
-	<tr>
-		<td>分管领导审核</td>
-		<td></td>
-		<td></td>
-		<td></td>
-	</tr>
-	<tr>
-		<td>中心领导审核</td>
-		<td></td>
-		<td></td>
-		<td></td>
-	</tr>
-	<tr>
-		<td>委建设处审核</td>
-		<td></td>
-		<td></td>
-		<td></td>
-	</tr>
-	<tr>
-		<td>委审批处审核</td>
-		<td></td>
-		<td></td>
-		<td></td>
-	</tr>
-	<tr>
-		<td>委领导审核</td>
-		<td></td>
-		<td></td>
-		<td></td>
 	</tr>
 </table>
 <script>

@@ -42,7 +42,6 @@
 <portlet:renderURL var="wldshURL" >
 	<portlet:param name="mvcPath" value="${contextPath}/wldsh.jsp" />
 </portlet:renderURL>
-历史审核步骤
 <table border="1" style="width: 100% ；text-align:center;">
 	<tr>
 		<td>审核步骤</td>
@@ -51,8 +50,8 @@
 		<td>审核时间</td>
 	</tr>
 	<tr>
-		<td>预审/td>
-		<td>材料符合要求，审核通过</td>
+		<td>预审</td>
+		<td></td>
 		<td></td>
 		<td></td>
 	</tr>
