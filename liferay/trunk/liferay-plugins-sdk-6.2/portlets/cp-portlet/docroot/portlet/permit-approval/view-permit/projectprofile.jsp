@@ -32,7 +32,6 @@ tr.body td.content {
 	request.setAttribute("jsgclbs", jsgclbs);
 %>
 <fieldset style="">
-	<legend align="center">申请信息</legend>
 	<table border="1" width="100%">
 		<tr class="body">
 			<td class="title">项目类型</td>
