@@ -60,8 +60,8 @@
 	</liferay-ui:panel>
 	<%
 		int sortNo = 0;
-		String stateLabel = "所有,撤回,未提交,已提交";
-		String stateValue = "sy,ch,wtj,ytj";
+		String stateLabel = "所有,未提交,已提交";
+		String stateValue = "sy,wtj,ytj";
 	%>
 	<liferay-ui:panel title="施工许可列表" collapsible="false">
 	<liferay-ui:tabs names="<%=stateLabel%>" param="state"
@@ -85,7 +85,7 @@
 				<liferay-ui:search-container-column-text property="ywbh" name="业务编号" />
 				<liferay-ui:search-container-column-text property="bjbh" name="报建编号" />
 				<liferay-ui:search-container-column-text name="项目名称" value="${projectProfile.gcmc}"/>
-				<liferay-ui:search-container-column-text name="项目类型" value="${projectProfile.xmlx}"/>
+				<liferay-ui:search-container-column-text name="项目类型" value="<%=DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx()).getName()%>"/>
 				<liferay-ui:search-container-column-text name="建设单位" value="${projectProfile.jsdwmc}"/>
 				<liferay-ui:search-container-column-text name="状态" value=""/>
 				<liferay-ui:search-container-column-text name="操作">
