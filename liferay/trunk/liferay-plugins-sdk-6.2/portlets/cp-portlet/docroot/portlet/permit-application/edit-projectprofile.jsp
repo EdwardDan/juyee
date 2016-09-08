@@ -384,7 +384,7 @@ tr.body td.content {
 			<td class="title" colspan="4">注:信息保存后，请进入参见单位和项目负责人信息页面，填写参建单位和项目负责人信息</td>
 		</tr>
 		<tr class="body">
-			<td class="title" colspan="4"><aui:button type="submit" /> <aui:button
+			<td class="title" colspan="4"><aui:button type="submit"  onClick="return checkInputMobilesNormal();"/> <aui:button
 					value="返回" href="${viewURL}" /></td>
 		</tr>
 	</table>
@@ -401,5 +401,42 @@ function showYzzpl(obj) {
         $("#sfzftzl").val("false");
         document.getElementById("yzzpl").style.display = "none";
     }
+}
+
+/**
+ * 检查手动输入的电话号码是否符合手机号码规范。
+ */
+function checkInputMobilesNormal() {
+    var mobiles = $("#<portlet:namespace />jsdwsjh").val();
+    var reg = /^1[3|4|5|8][0-9]\d{8}$/;
+    if (mobiles != null && mobiles != "") {
+        if (mobiles.indexOf(",") == -1) {
+            if (!reg.test(mobiles)) {
+                alert('“' + mobiles + '”是无效的手机号码！');
+                focusInput($("#<portlet:namespace />jsdwsjh"));
+                return false;
+            }
+        } else {
+            var arr = mobiles.split(",");
+            var length = arr.length;
+            for (var i = 0; i < length; i++) {
+                if (!reg.test(arr[i])) {
+                	alert('“' + arr[i] + '”是无效的手机号码！');
+                	focusInput($("#<portlet:namespace />jsdwsjh"));
+                    return false;
+                }
+            }
+        }
+    }
+    if(mobiles==""){
+    	 alert('手机号不能为空！');
+         focusInput($("#<portlet:namespace />jsdwsjh"));
+    	return false;
+    }
+    return true;
+}
+
+function focusInput(obj) {
+	$(obj).css("border", "1px solid red");
 }
 </script>
