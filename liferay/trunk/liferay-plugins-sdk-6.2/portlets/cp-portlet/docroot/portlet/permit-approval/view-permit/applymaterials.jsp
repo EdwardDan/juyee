@@ -12,8 +12,8 @@
 }
 </style>
 
-<% String permitId =ParamUtil.getString(renderRequest,"permitId");
-	List<ApplyMaterial> materialList=ApplyMaterialLocalServiceUtil.findByPermitId(1, -1, -1);
+<% long permitId =ParamUtil.getLong(renderRequest,"permitId");
+	List<ApplyMaterial> materialList=ApplyMaterialLocalServiceUtil.findByPermitId(permitId, -1, -1);
 %>
 
 <c:set var="namespace" value="<%=renderResponse.getNamespace()%>"></c:set>
