@@ -47,16 +47,21 @@
 					<td class="content"><aui:input type="text" name="xmmc" label=""
 							cssClass="span12" /></td>
 					<td style="width: 15%; text-align: right">项目类型</td>
-					<td style="width: 35%;" class="content"><aui:input type="text" name="xmlx"
-							label="" cssClass="span12" /></td>
+					<td style="width: 35%;" class="content">
+						<aui:select name="xmlx" cssClass="span12" label="">
+							<c:forEach items="">
+								<aui:option></aui:option>
+							</c:forEach>
+						</aui:select>
+					</td>
 				</tr>
 				<tr class="body">
 					<td style="width: 10%; text-align: right">建设单位</td>
 					<td colspan="3" class="content"><aui:input type="text" name="jsdw" label=""
 							cssClass="span12" /></td>
 				</tr>
-				<tr style="height: 40px;">
-					<td colspan="4" style="text-align:center"><aui:button type="submit"
+				<tr style="height: 40px;" class="body">
+					<td colspan="4" style="text-align:center" class="content"><aui:button type="submit"
 							value="提交查询"></aui:button></td>
 				</tr>
 			</table>
