@@ -37,8 +37,8 @@ tr.body td.content {
 			jsgclb.getDictionaryId(), -1, -1) : null;
 	request.setAttribute("permit", permit);
 	request.setAttribute("projectProfile", projectProfile);
-	request.setAttribute("jsgclbs", jsgclbs);
 	request.setAttribute("jsddssqx", jsddssqx);
+	request.setAttribute("jsgclbs", jsgclbs);
 %>
 <fieldset style="">
 	<legend align="center">申请信息</legend>
