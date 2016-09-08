@@ -27,21 +27,6 @@
 <portlet:renderURL var="shURL" windowState="pop_up">
 	<portlet:param name="mvcPath" value="${contextPath}/sh.jsp" />
 </portlet:renderURL>
-<portlet:renderURL var="fgldshURL" >
-	<portlet:param name="mvcPath" value="${contextPath}/fgldsh.jsp" />
-</portlet:renderURL>
-<portlet:renderURL var="zxldshURL" >
-	<portlet:param name="mvcPath" value="${contextPath}/zxldsh.jsp" />
-</portlet:renderURL>
-<portlet:renderURL var="wjscshURL" >
-	<portlet:param name="mvcPath" value="${contextPath}/wjscsh.jsp" />
-</portlet:renderURL>
-<portlet:renderURL var="wspcshURL">
-	<portlet:param name="mvcPath" value="${contextPath}/wspcsh.jsp" />
-</portlet:renderURL>
-<portlet:renderURL var="wldshURL" >
-	<portlet:param name="mvcPath" value="${contextPath}/wldsh.jsp" />
-</portlet:renderURL>
 历史审核步骤
 <table border="1" style="width: 100% ；text-align:center;">
 	<tr>
