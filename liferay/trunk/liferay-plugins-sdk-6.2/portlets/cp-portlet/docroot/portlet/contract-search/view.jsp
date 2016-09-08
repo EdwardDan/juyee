@@ -1,6 +1,11 @@
 <%@page import="sun.org.mozilla.javascript.internal.regexp.SubString"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
+<style type="text/css">
+	tr.body td.content{
+		background-color: white;
+	}
+</style>
 <c:set var="contextPath"
 	value="${request.contextPath}/portlet/contract-search" />
 <portlet:renderURL var="searchURL">
@@ -15,26 +20,25 @@
 			<aui:input name="p_p_id" type="hidden" useNamespace="false"
 				value="${portletDisplay.id }"></aui:input>
 			<aui:input type="hidden" name="delta" value="${delta}"></aui:input>
-			<table style="width: 100%;" border="1">
-				<tr>
-					<td style="width: 10%; text-align: right">报建编号：</td>
-					<td style="width: 40%;"><aui:input type="text" name="bjbh"
-							id="bjbh" label="" cssClass="span12" /></td>
-					<td style="width: 15%; text-align: right">标段号：</td>
-					<td style="width: 35%;"><aui:input type="text" name="bdh"
+			<table style="width: 100%;" class="table table-bordered" >
+				<tr class="body">
+					<td style="width: 10%; text-align: right">报建编号</td>
+					<td style="width: 40%;" class="content"><aui:input type="text" name="bjbh"
+							id="bjbh" label="" cssClass="span12" class="content"/></td>
+					<td style="width: 15%; text-align: right" >标段号</td>
+					<td style="width: 35%;" class="content"><aui:input type="text" name="bdh"
 							label="" cssClass="span12" /></td>
 				</tr>
-				<tr>
-					<td style="width: 10%; text-align: right">项目名称：</td>
-					<td colspan="3"><aui:input type="text" name="xmmc" label=""
+				<tr class="body">
+					<td style="width: 10%; text-align: right">项目名称</td>
+					<td colspan="3" class="content"><aui:input type="text" name="xmmc" label=""
 							cssClass="span12" /></td>
 				<tr style="height: 40px;">
-					<td colspan="4" align="center"><aui:button type="submit"
+					<td colspan="4" style="text-align:center"><aui:button type="submit"
 							value="提交查询"></aui:button></td>
 				</tr>
 			</table>
-			<br>
-			
+			<br>			
 		</aui:form>
 	</liferay-ui:panel>	
 	<liferay-ui:panel title="合同列表" collapsible="false">
@@ -58,8 +62,7 @@
 					<portlet:param name="bjbh" value="${contract.contractId}" />
 					<c:if
 						test="<%=contract.getZfbgx().substring(0, 2).equals(\"CZ\")%>">
-						<portlet:param name="mvcPath"
-							value="${contextPath}/view-contract-cz.jsp" />
+						<portlet:param name="mvcPath" value="${contextPath}/view-contract-cz.jsp" /> 
 					</c:if>
 					<c:if
 						test="<%=contract.getZfbgx().substring(0, 2).equals(\"VZ\")%>">
@@ -97,7 +100,7 @@
 					String bjbh = (String) renderRequest.getAttribute("bjbh");
 					String bdh = (String) renderRequest.getAttribute("bdh");
 					String xmmc = (String) renderRequest.getAttribute("xmmc");
-					String htlb = (String) renderRequest.getAttribute("htlb");
+					String htlb = (String) renderRequest.getAttribute("htlb"); 
 					PortletURL portletURL = searchContainer.getIteratorURL();
 					portletURL.setParameter("bjbh", bjbh);
 					portletURL.setParameter("bdh", bdh);
