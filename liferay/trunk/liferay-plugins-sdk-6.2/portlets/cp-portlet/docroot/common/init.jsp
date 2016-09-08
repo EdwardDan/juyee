@@ -23,3 +23,4 @@
 <%@ page import="com.justonetech.cp.contract.service.ContractLocalServiceUtil"%>
 <%@ page import="com.justonetech.cp.permit.service.PermitLocalServiceUtil"%>
 <%@ page import="com.justonetech.cp.permit.model.Permit"%>
+<%@ page import="com.justonetech.cp.permit.service.ApplyMaterialLocalServiceUtil"%>
