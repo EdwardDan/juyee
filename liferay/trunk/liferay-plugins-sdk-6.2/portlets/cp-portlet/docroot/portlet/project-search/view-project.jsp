@@ -13,7 +13,7 @@
 		<table class="table table-bordered">
 			<tr>
 				<td style="width: 15%%;" class="text-right">报建日期</td>
-				<td style="width: 35%;"><fmt:formatDate value="${project.bjrq}" pattern="yyyy-MM-dd" /></td>
+				<td style="width: 35%;" class="bg-white"><fmt:formatDate value="${project.bjrq}" pattern="yyyy-MM-dd" /></td>
 				<td style="width: 15%;" class="text-right">报建编号</td>
 				<td style="width: 35%;" class="bg-white">${project.bjbh}</td>
 			</tr>
@@ -31,7 +31,7 @@
 			</tr>
 			<tr>
 				<td class="text-right">建设工程名称</td>
-				<td colspan="3">${project.xmmc}</td>
+				<td colspan="3" class="bg-white">${project.xmmc}</td>
 			</tr>
 			<tr>
 				<td class="text-right">建设地点</td>
