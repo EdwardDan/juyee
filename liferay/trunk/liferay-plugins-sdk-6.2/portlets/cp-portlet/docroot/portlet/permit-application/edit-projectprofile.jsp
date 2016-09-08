@@ -29,10 +29,13 @@ tr.body td.content {
 	Long permitId = ParamUtil.getLong(request, "permitId");
 	ProjectProfile projectProfile = null;
 	Project project = null;
+	Permit permit=null;
 	if (permitId != 0) {
 		projectProfile = ProjectProfileLocalServiceUtil
 				.getProjectProfile(permitId);
 		request.setAttribute("projectProfile", projectProfile);
+		permit = PermitLocalServiceUtil.getPermit(permitId);
+		request.setAttribute("bjbh",permit.getBjbh());
 		String startDate = "";
 		String endDate = "";
 		if (null != projectProfile.getJhkg()&&null != projectProfile.getJhjg()) {
@@ -41,11 +44,14 @@ tr.body td.content {
 			endDate = DateUtil.getDate(projectProfile.getJhjg(), defaultDateFormatPattern, locale, timeZone);
 			request.setAttribute("jhkg", startDate);
 			request.setAttribute("jhjg", endDate);
+			request.setAttribute("ywbm",!projectProfile.getYwbm().substring(8,12).equals("0000"));
+			
 		}
 	} else {
 		if (Validator.isNotNull(bjbh)) {
 			project = ProjectLocalServiceUtil.getProject(bjbh);
 			request.setAttribute("project", project);
+			request.setAttribute("bjbh",bjbh);
 		}
 	}
 	Dictionary jsgclbDic = DictionaryLocalServiceUtil.findByCode("jsgclb");
@@ -61,7 +67,7 @@ tr.body td.content {
 	model="<%=ProjectProfile.class%>" />
 <aui:form action="${saveProjectProfileURL}">
 	<aui:input name="permitId" type="hidden" value="<%=permitId%>" />
-	<aui:input name="bjbh" type="hidden" value="<%=bjbh%>" />
+	<aui:input name="bjbh" type="hidden" value="${bjbh }" />
 	<aui:input name="bdh" type="hidden" value="${bdh }" />
 	<aui:input name="sqbz" type="hidden" value="2" />
 	<table border="1" width="100%">
@@ -114,9 +120,19 @@ tr.body td.content {
 		</tr>
 		<tr class="body">
 			<td class="title">业务编码</td>
-			<td class="content" colspan="3"><aui:input name="ywbm" label="" type="text"
-					style="width:50%" value="">
-				</aui:input></td>
+			<td class="content" colspan="3">
+			<c:choose>
+			<c:when test="${ywbm}">
+			<aui:input name="ywbm" label="" type="text"
+					style="width:50%" value="" readonly="true">
+				</aui:input>
+				</c:when>
+				<c:otherwise><aui:input name="ywbmqta" label="" type="text"
+					style="width:50%" value="" readonly="true">
+				</aui:input>
+				</c:otherwise>
+				</c:choose>
+				</td>
 		</tr>
 		<tr class="body">
 			<td class="title">建设单位名称</td>

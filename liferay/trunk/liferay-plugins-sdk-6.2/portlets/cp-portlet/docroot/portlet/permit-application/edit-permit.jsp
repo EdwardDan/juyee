@@ -15,7 +15,6 @@
 	tabSqbz = tabSqbz > sqbz ? sqbz : tabSqbz;
 	renderRequest.setAttribute("tabSqbz", tabSqbz);
 	renderRequest.setAttribute("sqbz", sqbz);
-	String bjbh = ParamUtil.getString(request, "bjbh");
 	String contractId = ParamUtil.getString(request, "contractId");
 	Project project = null;
 	ProjectProfile projectProfile = null;
@@ -29,9 +28,12 @@
 		projectProfile = ProjectProfileLocalServiceUtil
 				.getProjectProfile(permitId);
 		renderRequest.setAttribute("bdh", permit.getBdh());
+		renderRequest.setAttribute("bjbh",permit.getBjbh());
 		renderRequest.setAttribute("xmmc", projectProfile.getGcmc());
 	} else {
+		String bjbh = ParamUtil.getString(request, "bjbh");
 		project = ProjectLocalServiceUtil.getProject(bjbh);
+		renderRequest.setAttribute("bjbh",bjbh);
 		renderRequest.setAttribute("xmmc", project.getXmmc());
 	}
 %>
@@ -39,7 +41,7 @@
 	<c:set var="editPermitURL"
 		value="${editPermitURL }&${renderResponse.namespace}permitId=${permitId}"></c:set>
 </c:if>
-当前报建编号：${param.bjbh}&nbsp;&nbsp;项目名称：${xmmc}&nbsp;&nbsp;标段号:${bdh}
+当前报建编号：${bjbh}&nbsp;&nbsp;项目名称：${xmmc}&nbsp;&nbsp;标段号:${bdh}
 <ul class="nav nav-tabs">
 	<li class="${tabSqbz eq 1?"active":"" }">
 		<a href="${editPermitURL }&_${portletDisplay.id }_tabSqbz=1">工程概况</a>

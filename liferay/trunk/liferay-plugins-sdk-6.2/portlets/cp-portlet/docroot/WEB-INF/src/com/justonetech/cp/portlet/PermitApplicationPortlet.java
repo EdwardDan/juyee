@@ -108,7 +108,6 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		String lxjb = ParamUtil.getString(request, "lxjb");
 		Long xmxz = ParamUtil.getLong(request, "xmxz");
 		String ssqx = ParamUtil.getString(request, "ssqx");
-		String ywbm = ParamUtil.getString(request, "ywbm");
 		String jsdwmc = ParamUtil.getString(request, "jsdwmc");
 		String jsdwxz = ParamUtil.getString(request, "jsdwxz");
 		String jsdwdz = ParamUtil.getString(request, "jsdwdz");
@@ -163,7 +162,6 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		projectProfile.setLxjb(lxjb);
 		projectProfile.setXmxz(xmxz);
 		projectProfile.setSsqx(ssqx);
-		projectProfile.setYwbm(ywbm);
 		projectProfile.setJsdwmc(jsdwmc);
 		projectProfile.setJsdwxz(jsdwxz);
 		projectProfile.setJsdwdz(jsdwdz);
@@ -193,21 +191,18 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		projectProfile.setYzzpl2(yzzpl2);
 		projectProfile.setYzzpl3(yzzpl3);
 		projectProfile.setYzzpl4(yzzpl4);
-		ProjectProfileLocalServiceUtil.updateProjectProfile(projectProfile);
-		String ywbh = "JT";
+		String ywbm = "JT";
 		Dictionary xmlxDic = DictionaryLocalServiceUtil.getDictionary(xmlx);
-		ywbh = ywbh + xmlxDic.getCode();
+		ywbm = ywbm + xmlxDic.getCode();
 Locale locale = LocaleUtil.getDefault();
 		String currentDate = DateUtil.getCurrentDate("yyyy-MM-dd", locale);
 		String currentDateStr = currentDate.substring(2, 4) + currentDate.substring(5, 7);
-		ywbh = ywbh + currentDateStr+"0000";
-		permit.setYwbh(ywbh);
+		ywbm = ywbm + currentDateStr+"0000";
+		projectProfile.setYwbm(ywbm);
+		ProjectProfileLocalServiceUtil.updateProjectProfile(projectProfile);
 		permit.setBjbh(bjbh);
 		permit.setBdh(bdh);
 		PermitLocalServiceUtil.updatePermit(permit);
-		
-		
-				
 		redirect(request, response, permit, 1);
 	}
 
@@ -289,7 +284,7 @@ Locale locale = LocaleUtil.getDefault();
 	public void saveApplyMaterials(ActionRequest request, ActionResponse response) throws SystemException, PortalException, ParseException, IOException {
 
 		long permitId = ParamUtil.getLong(request, "permitId");
-		String ywbh = "JT";
+		String ywbm = "JT";
 		Permit permit = PermitLocalServiceUtil.getPermit(permitId);
 		if (permit.getSqbz() == 3) {
 			permit.setSqbz(4);
@@ -297,18 +292,18 @@ Locale locale = LocaleUtil.getDefault();
 
 		ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
 		Dictionary xmlx = DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx());
-		ywbh = ywbh + xmlx.getCode();
+		ywbm = ywbm + xmlx.getCode();
 
 		Locale locale = LocaleUtil.getDefault();
 		String currentDate = DateUtil.getCurrentDate("yyyy-MM-dd", locale);
 		String currentDateStr = currentDate.substring(2, 4) + currentDate.substring(5, 7);
-		ywbh = ywbh + currentDateStr;
+		ywbm = ywbm + currentDateStr;
 
-		List<Permit> permits = PermitLocalServiceUtil.getPermits(-1, -1);
+		List<ProjectProfile> projectProfiles =ProjectProfileLocalServiceUtil.getProjectProfiles(-1, -1);
 		List<Long> nums = new ArrayList<Long>();
-		for (Permit permit_ : permits) {
-			if (permit_.getYwbh().substring(4, 8).equals(currentDateStr)) {
-				nums.add(Long.parseLong(permit_.getYwbh().substring(8, 12)));
+		for (ProjectProfile projectProfile_ : projectProfiles) {
+			if (projectProfile_.getYwbm().substring(4, 8).equals(currentDateStr)) {
+				nums.add(Long.parseLong(projectProfile_.getYwbm().substring(8, 12)));
 			}
 		}
 		Long num = 0L;
@@ -320,17 +315,17 @@ Locale locale = LocaleUtil.getDefault();
 		num++;
 
 		if (num / 10 < 1) {
-			ywbh = ywbh + "000" + num;
+			ywbm = ywbm + "000" + num;
 		} else if (num / 100 < 1) {
-			ywbh = ywbh + "00" + num;
+			ywbm = ywbm + "00" + num;
 		} else if (num / 1000 < 1) {
-			ywbh = ywbh + "0" + num;
+			ywbm = ywbm + "0" + num;
 		} else if (num / 10000 < 1) {
-			ywbh = ywbh + num;
+			ywbm = ywbm + num;
 		}
-
-		permit.setYwbh(ywbh);
 		PermitLocalServiceUtil.updatePermit(permit);
+		projectProfile.setYwbm(ywbm);
+		ProjectProfileLocalServiceUtil.updateProjectProfile(projectProfile);
 		redirect(request, response, permit, 4);
 	}
 
