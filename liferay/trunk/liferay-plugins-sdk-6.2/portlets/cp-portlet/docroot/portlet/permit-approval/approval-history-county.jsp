@@ -11,38 +11,20 @@
 	}
 </style>
 <c:set var="contextPath"
-	value="${request.contextPath}/portlet/permit-approval/approval-history-city" />
-<portlet:renderURL var="ysURL">
-	<portlet:param name="mvcPath" value="${contextPath}/ys.jsp" />
-</portlet:renderURL>
+	value="${request.contextPath}/portlet/permit-approval/approval-history-county" />
 <portlet:renderURL var="sjURL" windowState="pop_up">
 	<portlet:param name="mvcPath" value="${contextPath}/sj.jsp" />
 </portlet:renderURL>
-<portlet:renderURL var="csURL" windowState="pop_up">
-	<portlet:param name="mvcPath" value="${contextPath}/cs.jsp" />
-</portlet:renderURL>
-<portlet:renderURL var="fhURL" windowState="pop_up">
-	<portlet:param name="mvcPath" value="${contextPath}/fh.jsp" />
+<portlet:renderURL var="slURL" windowState="pop_up">
+	<portlet:param name="mvcPath" value="${contextPath}/sl.jsp" />
 </portlet:renderURL>
 <portlet:renderURL var="shURL" windowState="pop_up">
 	<portlet:param name="mvcPath" value="${contextPath}/sh.jsp" />
 </portlet:renderURL>
-<portlet:renderURL var="fgldshURL" >
-	<portlet:param name="mvcPath" value="${contextPath}/fgldsh.jsp" />
+<portlet:renderURL var="spURL" windowState="pop_up">
+	<portlet:param name="mvcPath" value="${contextPath}/sp.jsp" />
 </portlet:renderURL>
-<portlet:renderURL var="zxldshURL" >
-	<portlet:param name="mvcPath" value="${contextPath}/zxldsh.jsp" />
-</portlet:renderURL>
-<portlet:renderURL var="wjscshURL" >
-	<portlet:param name="mvcPath" value="${contextPath}/wjscsh.jsp" />
-</portlet:renderURL>
-<portlet:renderURL var="wspcshURL">
-	<portlet:param name="mvcPath" value="${contextPath}/wspcsh.jsp" />
-</portlet:renderURL>
-<portlet:renderURL var="wldshURL" >
-	<portlet:param name="mvcPath" value="${contextPath}/wldsh.jsp" />
-</portlet:renderURL>
-历史审核步骤
+区县历史审核步骤
 <table border="1" style="width: 100% ；text-align:center;">
 	<tr>
 		<td>审核步骤</td>
@@ -51,34 +33,28 @@
 		<td>审核时间</td>
 	</tr>
 	<tr>
-		<td>预审/td>
-		<td>材料符合要求，审核通过</td>
-		<td></td>
-		<td></td>
-	</tr>
-	<tr>
 		<td><a onclick="sj()">收件</a></td>
 		<td><a onclick="sj()"></a></td>
 		<td><a onclick="sj()"></a></td>
 		<td><a onclick="sj()"></a></td>
 	</tr>
 	<tr>
-		<td><a onclick="cs()">初审</a></td>
-		<td><a onclick="cs()"></a></td>
-		<td><a onclick="cs()"></a></td>
-		<td><a onclick="cs()"></a></td>
-	</tr>
-	<tr>
-		<td><a onclick="fh()">复核</a></td>
-		<td><a onclick="fh()"></a></td>
-		<td><a onclick="fh()"></a></td>
-		<td><a onclick="fh()"></a></td>
+		<td><a onclick="sl()">受理</a></td>
+		<td><a onclick="sl()"></a></td>
+		<td><a onclick="sl()"></a></td>
+		<td><a onclick="sl()"></a></td>
 	</tr>
 	<tr>
 		<td><a onclick="sh()">审核</a></td>
 		<td><a onclick="sh()"></a></td>
 		<td><a onclick="sh()"></a></td>
 		<td><a onclick="sh()"></a></td>
+	</tr>
+	<tr>
+		<td><a onclick="sp()">审批</a></td>
+		<td><a onclick="sp()"></a></td>
+		<td><a onclick="sp()"></a></td>
+		<td><a onclick="sp()"></a></td>
 	</tr>
 	<tr>
 		<td>分管领导审核</td>
@@ -125,7 +101,7 @@
 			destroyOnClose : true
 		});
 	}, [ 'aui-dialog' ]);
-	Liferay.provide(window, 'cs', function() {
+	Liferay.provide(window, 'sl', function() {
 		Liferay.Util.openWindow({
 			dialog : {
 				centered : true,
@@ -133,21 +109,8 @@
 				height : 600
 			},
 			id : 'popup',
-			title : '初审',
-			uri : '${csURL}',
-			destroyOnClose : true
-		});
-	}, [ 'aui-dialog' ]);
-	Liferay.provide(window, 'fh', function() {
-		Liferay.Util.openWindow({
-			dialog : {
-				centered : true,
-				width : 800,
-				height : 600
-			},
-			id : 'popup',
-			title : '复核',
-			uri : '${fhURL}',
+			title : '受理',
+			uri : '${slURL}',
 			destroyOnClose : true
 		});
 	}, [ 'aui-dialog' ]);
@@ -161,6 +124,19 @@
 			id : 'popup',
 			title : '审核',
 			uri : '${shURL}',
+			destroyOnClose : true
+		});
+	}, [ 'aui-dialog' ]);
+	Liferay.provide(window, 'sp', function() {
+		Liferay.Util.openWindow({
+			dialog : {
+				centered : true,
+				width : 800,
+				height : 600
+			},
+			id : 'popup',
+			title : '审批',
+			uri : '${spURL}',
 			destroyOnClose : true
 		});
 	}, [ 'aui-dialog' ]);
