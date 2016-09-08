@@ -6,7 +6,7 @@
 		text-align: center;
 	}
 </style>
-<table border="1" style="width: 100%">
+<table class="table table-bordered table-hover" style="width: 100%">
 	<tr>
 		<td class="title">序号</td>
 		<td class="content">提交材料名称</td>

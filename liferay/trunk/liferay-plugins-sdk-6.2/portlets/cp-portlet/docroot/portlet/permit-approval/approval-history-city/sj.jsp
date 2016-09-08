@@ -16,8 +16,7 @@ td.content {
 	text-align: left;
 }
 </style>
-收件受理
-<table border="1">
+<table class="table table-bordered table-hover">
 	<tr>
 		<td class="title">受理编号</td>
 		<td class="content"></td>
