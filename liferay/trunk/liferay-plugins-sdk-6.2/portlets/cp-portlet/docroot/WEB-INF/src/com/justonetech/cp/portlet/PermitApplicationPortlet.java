@@ -1,6 +1,10 @@
 package com.justonetech.cp.portlet;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,14 +16,19 @@ import javax.portlet.ActionResponse;
 import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+import javax.portlet.ResourceRequest;
+import javax.portlet.ResourceResponse;
+import javax.servlet.http.HttpServletResponse;
 
 import com.justonetech.cp.contract.model.Contract;
 import com.justonetech.cp.contract.service.ContractLocalServiceUtil;
+import com.justonetech.cp.permit.model.ApplyMaterial;
 import com.justonetech.cp.permit.model.ApplyMaterial;
 import com.justonetech.cp.permit.model.ParticipationUnit;
 import com.justonetech.cp.permit.model.Permit;
 import com.justonetech.cp.permit.model.ProjectProfile;
 import com.justonetech.cp.permit.model.UnitProject;
+import com.justonetech.cp.permit.service.ApplyMaterialLocalServiceUtil;
 import com.justonetech.cp.permit.service.ApplyMaterialLocalServiceUtil;
 import com.justonetech.cp.permit.service.ParticipationUnitLocalServiceUtil;
 import com.justonetech.cp.permit.service.PermitLocalServiceUtil;
@@ -30,15 +39,33 @@ import com.justonetech.sys.service.DictionaryLocalServiceUtil;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.search.ParseException;
+import com.liferay.portal.kernel.upload.UploadPortletRequest;
+import com.liferay.portal.kernel.util.DateUtil;
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.User;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextFactory;
+import com.liferay.portal.service.persistence.LayoutUtil;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.model.DLFileEntryConstants;
+import com.liferay.portlet.documentlibrary.model.DLFileEntryTypeConstants;
+import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
+import com.sun.org.apache.regexp.internal.recompile;
 
 /**
  * Portlet implementation class PermitApplicationPortlet
@@ -108,6 +135,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		String lxjb = ParamUtil.getString(request, "lxjb");
 		Long xmxz = ParamUtil.getLong(request, "xmxz");
 		String ssqx = ParamUtil.getString(request, "ssqx");
+		String ywbm = ParamUtil.getString(request, "ywbm");
 		String jsdwmc = ParamUtil.getString(request, "jsdwmc");
 		String jsdwxz = ParamUtil.getString(request, "jsdwxz");
 		String jsdwdz = ParamUtil.getString(request, "jsdwdz");
@@ -162,6 +190,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		projectProfile.setLxjb(lxjb);
 		projectProfile.setXmxz(xmxz);
 		projectProfile.setSsqx(ssqx);
+		projectProfile.setYwbm(ywbm);
 		projectProfile.setJsdwmc(jsdwmc);
 		projectProfile.setJsdwxz(jsdwxz);
 		projectProfile.setJsdwdz(jsdwdz);
@@ -191,18 +220,21 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		projectProfile.setYzzpl2(yzzpl2);
 		projectProfile.setYzzpl3(yzzpl3);
 		projectProfile.setYzzpl4(yzzpl4);
-		String ywbm = "JT";
+		ProjectProfileLocalServiceUtil.updateProjectProfile(projectProfile);
+		String ywbh = "JT";
 		Dictionary xmlxDic = DictionaryLocalServiceUtil.getDictionary(xmlx);
-		ywbm = ywbm + xmlxDic.getCode();
+		ywbh = ywbh + xmlxDic.getCode();
 Locale locale = LocaleUtil.getDefault();
 		String currentDate = DateUtil.getCurrentDate("yyyy-MM-dd", locale);
 		String currentDateStr = currentDate.substring(2, 4) + currentDate.substring(5, 7);
-		ywbm = ywbm + currentDateStr+"0000";
-		projectProfile.setYwbm(ywbm);
-		ProjectProfileLocalServiceUtil.updateProjectProfile(projectProfile);
+		ywbh = ywbh + currentDateStr+"0000";
+		permit.setYwbh(ywbh);
 		permit.setBjbh(bjbh);
 		permit.setBdh(bdh);
 		PermitLocalServiceUtil.updatePermit(permit);
+		
+		
+				
 		redirect(request, response, permit, 1);
 	}
 
@@ -284,7 +316,7 @@ Locale locale = LocaleUtil.getDefault();
 	public void saveApplyMaterials(ActionRequest request, ActionResponse response) throws SystemException, PortalException, ParseException, IOException {
 
 		long permitId = ParamUtil.getLong(request, "permitId");
-		String ywbm = "JT";
+		String ywbh = "JT";
 		Permit permit = PermitLocalServiceUtil.getPermit(permitId);
 		if (permit.getSqbz() == 3) {
 			permit.setSqbz(4);
@@ -292,18 +324,18 @@ Locale locale = LocaleUtil.getDefault();
 
 		ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
 		Dictionary xmlx = DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx());
-		ywbm = ywbm + xmlx.getCode();
+		ywbh = ywbh + xmlx.getCode();
 
 		Locale locale = LocaleUtil.getDefault();
 		String currentDate = DateUtil.getCurrentDate("yyyy-MM-dd", locale);
 		String currentDateStr = currentDate.substring(2, 4) + currentDate.substring(5, 7);
-		ywbm = ywbm + currentDateStr;
+		ywbh = ywbh + currentDateStr;
 
-		List<ProjectProfile> projectProfiles =ProjectProfileLocalServiceUtil.getProjectProfiles(-1, -1);
+		List<Permit> permits = PermitLocalServiceUtil.getPermits(-1, -1);
 		List<Long> nums = new ArrayList<Long>();
-		for (ProjectProfile projectProfile_ : projectProfiles) {
-			if (projectProfile_.getYwbm().substring(4, 8).equals(currentDateStr)) {
-				nums.add(Long.parseLong(projectProfile_.getYwbm().substring(8, 12)));
+		for (Permit permit_ : permits) {
+			if (permit_.getYwbh().substring(4, 8).equals(currentDateStr)) {
+				nums.add(Long.parseLong(permit_.getYwbh().substring(8, 12)));
 			}
 		}
 		Long num = 0L;
@@ -315,17 +347,17 @@ Locale locale = LocaleUtil.getDefault();
 		num++;
 
 		if (num / 10 < 1) {
-			ywbm = ywbm + "000" + num;
+			ywbh = ywbh + "000" + num;
 		} else if (num / 100 < 1) {
-			ywbm = ywbm + "00" + num;
+			ywbh = ywbh + "00" + num;
 		} else if (num / 1000 < 1) {
-			ywbm = ywbm + "0" + num;
+			ywbh = ywbh + "0" + num;
 		} else if (num / 10000 < 1) {
-			ywbm = ywbm + num;
+			ywbh = ywbh + num;
 		}
+
+		permit.setYwbh(ywbh);
 		PermitLocalServiceUtil.updatePermit(permit);
-		projectProfile.setYwbm(ywbm);
-		ProjectProfileLocalServiceUtil.updateProjectProfile(projectProfile);
 		redirect(request, response, permit, 4);
 	}
 
@@ -344,6 +376,173 @@ Locale locale = LocaleUtil.getDefault();
 		redirect += "&" + response.getNamespace() + "tabSqbz=" + tabSqbz;
 		response.sendRedirect(redirect);
 	}
+
+	
+	@Override
+	public void serveResource(ResourceRequest resourceRequest,
+			ResourceResponse resourceResponse) throws IOException,
+			PortletException {
+		// TODO Auto-generated method stub
+
+		try {
+			String resourceId = resourceRequest.getResourceID();
+			String fileSourceName = "";
+			String validatorMessage="";
+			Boolean upLoadStatus=false;
+			//上传文件
+			if ("fileUpLoad".equals(resourceId)) {
+				UploadPortletRequest uploadPortletRequest = PortalUtil
+						.getUploadPortletRequest(resourceRequest);
+
+				ServiceContext serviceContext;
+				JSONObject fileJson = JSONFactoryUtil.createJSONObject();
+				serviceContext = ServiceContextFactory.getInstance(
+						Permit.class.getName(), resourceRequest);
+				FileEntry fileEntry=null;
+				//对应的是第几类材料的div
+				String divNo=ParamUtil.get(resourceRequest, "divNo","");
+				String materialId = ParamUtil.get(resourceRequest, "materialId", "0");
+				
+				System.out.println(materialId);
+				fileSourceName = uploadPortletRequest.getFileName("fileInput"+divNo);
+				InputStream stream = uploadPortletRequest.getFileAsStream("fileInput"+divNo);
+				byte[] fileBytes=null;
+				String fileExtension="";
+				if(null!=stream){
+					fileBytes=FileUtil.getBytes(stream);
+				}
+				if(Validator.isNotNull(fileSourceName))
+					fileExtension =fileSourceName.split("\\.")[1];
+					
+					if(!"jpgpdf".contains(fileExtension)){
+						validatorMessage="您上传的文件格式为"+fileExtension+"不符合要求，请上传符合要求的文件！";
+					}else{
+						if("jpg".equals(fileExtension)&&fileBytes.length>2097152){
+							validatorMessage="您上传的图片大小超过2M,请上传小于2M的图片！";
+						}else if("pdf".equals(fileExtension)&&fileBytes.length>20971520){	
+								validatorMessage="您上传的文件大小超过20M,请上传小于20M的文件！";
+						}else{
+							fileEntry = uploadFile(resourceRequest,
+									fileSourceName, fileBytes, serviceContext);
+							if(!materialId.equals("0")){
+								ApplyMaterial applyMaterial=ApplyMaterialLocalServiceUtil.getApplyMaterial(Long.valueOf(materialId));
+								String fileEntryIds =applyMaterial.getFileEntryIds();
+								//文件路径
+								String filePath=getFilePath(fileEntry);
+								//添加第一条数据时
+								if(Validator.isNull(fileEntryIds)){
+									fileEntryIds=fileEntry.getFileEntryId()+"|"+fileEntry.getExtension()+"|"+filePath;
+								}
+								//如果已有数据
+								else{
+									fileEntryIds=fileEntryIds+","+fileEntry.getFileEntryId()+"|"+fileEntry.getExtension()+"|"+filePath;
+								}
+								applyMaterial.setFileEntryIds(fileEntryIds);
+								ApplyMaterialLocalServiceUtil.updateApplyMaterial(applyMaterial);
+							}
+						
+						fileJson.put("fileId", fileEntry.getFileEntryId());
+						fileJson.put("title", fileEntry.getTitle());
+						fileJson.put("extension", fileEntry.getExtension());
+						upLoadStatus=true;
+					}
+					
+				}
+				
+				
+				fileJson.put("validatorMessage", validatorMessage);	
+				fileJson.put("upLoadStatus", upLoadStatus);
+				HttpServletResponse response = PortalUtil
+							.getHttpServletResponse(resourceResponse);
+				response.setContentType("text/html;charset=UTF-8");
+				PrintWriter out = null;
+				out = response.getWriter();
+				out.print(fileJson.toString());
+				out.flush();
+				out.close();
+			}
+			
+			//删除文件
+			if ("fileDelete".equals(resourceId)) {
+				String fileId = ParamUtil.get(resourceRequest, "fileId", "0");
+				String materialId = ParamUtil.get(resourceRequest, "materialId", "0");
+				String fileExtension = ParamUtil.get(resourceRequest, "fileExtension", "");
+				System.out.println(111);
+				System.out.println(fileExtension);
+				if (!fileId.equals("0")) {
+					if(!materialId.equals("0")){
+						System.out.println(fileId);
+						ApplyMaterial applyMaterial=ApplyMaterialLocalServiceUtil.getApplyMaterial(Long.valueOf(materialId));
+						String fileEntryIds =applyMaterial.getFileEntryIds();
+						fileEntryIds=fileEntryIds+",";//加上逗号为了容易替换
+						//获取文件路径
+						String filePath=getFilePath(Long.valueOf(fileId));
+						String str=fileId+"\\|"+fileExtension+"\\|"+filePath+"\\,";
+						fileEntryIds=fileEntryIds.replaceFirst(str, "");
+						System.out.println(fileEntryIds);
+						if(Validator.isNotNull(fileEntryIds)){
+							fileEntryIds=fileEntryIds.substring(0,fileEntryIds.length()-1);//最后一步再把逗号去掉
+						}
+						applyMaterial.setFileEntryIds(fileEntryIds);
+						ApplyMaterialLocalServiceUtil.updateApplyMaterial(applyMaterial);
+					}
+					DLFileEntryLocalServiceUtil.deleteDLFileEntry(Long.valueOf(fileId));
+				}
+			}
+		} catch (PortalException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		super.serveResource(resourceRequest, resourceResponse);
+	}
+	
+	
+	public void saveMaterials(ActionRequest request, ActionResponse response) throws PortalException, SystemException, IOException{
+		
+		response.setRenderParameter("mvcPath", "/portlet/permit-application/edit-applymaterials.jsp");
+	}
+	
+	
+
+
+	public FileEntry uploadFile(ResourceRequest request, String fileSourceName,
+			byte[] fileBytes, ServiceContext serviceContext)
+			throws PortalException, SystemException, IOException {
+		User user = PortalUtil.getUser(request);
+		long userId = user.getUserId();
+		Long groupId = user.getGroupId();
+		Long folderId = DLFileEntryTypeConstants.FILE_ENTRY_TYPE_ID_BASIC_DOCUMENT;
+		FileEntry fileEntry = null;
+		if (fileBytes != null) {
+			String title = DateUtil.getDate(new Date(), "yyyy-MM-dd hh-mm-ss",
+					Locale.CHINA) + fileSourceName; // the filename pattern?
+			fileEntry = DLAppLocalServiceUtil.addFileEntry(userId, groupId,
+					folderId, fileSourceName,
+					MimeTypesUtil.getContentType(fileSourceName), title, null,
+					null, fileBytes, serviceContext);
+		}
+		return fileEntry;
+	}
+	
+	public static String getFilePath(FileEntry fileEntry) throws PortalException, SystemException {
+		return "/documents/" + fileEntry.getGroupId() + "/" + fileEntry.getFolderId() + "/" + fileEntry.getTitle() ;
+		/*+ "/" + dlFileEntry.getUuid()*/
+	}
+	
+	public static String getFilePath(Long fileEntryId) throws PortalException, SystemException {
+		if(Validator.isNotNull(fileEntryId)){
+			DLFileEntry dLFileEntry=DLFileEntryLocalServiceUtil.getDLFileEntry(fileEntryId);
+			return "/documents/" + dLFileEntry.getGroupId() + "/" + dLFileEntry.getFolderId() + "/" + dLFileEntry.getTitle() ;
+		}else
+			return "";
+	}
+
+
 	
 	public void deletePermits(ActionRequest actionRequest,
 			ActionResponse actionResponse) throws NumberFormatException, PortalException, SystemException  {
@@ -372,5 +571,6 @@ Locale locale = LocaleUtil.getDefault();
 					.parseLong(permitId));
 		}
 	}
+
 }
 
