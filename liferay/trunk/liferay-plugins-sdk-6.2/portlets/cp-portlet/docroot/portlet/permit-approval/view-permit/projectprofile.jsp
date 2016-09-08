@@ -30,20 +30,12 @@ tr.body td.content {
 	long permitId = ParamUtil.getLong(request, "permitId");
 	Permit permit = PermitLocalServiceUtil.getPermit(permitId);
 	ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
-	Dictionary areaName = DictionaryLocalServiceUtil.findByCode("areaName");
-	Dictionary constructionType = DictionaryLocalServiceUtil.findByCode("constructionType");
-	Dictionary constructionProperty = DictionaryLocalServiceUtil.findByCode("constructionProperty");
-	List<Dictionary> areaNames = areaName != null ? DictionaryLocalServiceUtil.findByParentId(
-			areaName.getDictionaryId(), -1, -1) : null;
-	List<Dictionary> constructionTypes = constructionType != null ? DictionaryLocalServiceUtil.findByParentId(
-			constructionType.getDictionaryId(), -1, -1) : null;
-	List<Dictionary> constructionProperties = constructionProperty != null ? DictionaryLocalServiceUtil
-			.findByParentId(constructionProperty.getDictionaryId(), -1, -1) : null;
+	Dictionary jsgclb = DictionaryLocalServiceUtil.findByCode("jsgclb");
+	List<Dictionary> jsgclbs = jsgclb != null ? DictionaryLocalServiceUtil.findByParentId(
+			jsgclb.getDictionaryId(), -1, -1) : null;
 	request.setAttribute("permit", permit);
 	request.setAttribute("projectProfile", projectProfile);
-	request.setAttribute("areaNames", areaNames);
-	request.setAttribute("constructionTypes", constructionTypes);
-	request.setAttribute("constructionProperties", constructionProperties);
+	request.setAttribute("jsgclbs", jsgclbs);
 %>
 <fieldset style="">
 	<legend align="center">申请信息</legend>
@@ -90,12 +82,12 @@ tr.body td.content {
 		</tr>
 		<tr class="body">
 			<td class="title">建设工程类别</td>
-			<td class="content" colspan="3"><c:forEach items="${constructionTypes}"
-					var="constructionType" varStatus="sortNo">
-					<aui:input name="jsgclb" type="checkbox" id="constructionType${sortNo.index}"
-						value="${constructionType.dictionaryId}"
-						checked="${fn:contains(projectProfile.jsgclb,constructionType.dictionaryId)}"
-						label="${constructionType.name}" inlineField="true" readonly="true"/>
+			<td class="content" colspan="3"><c:forEach items="${jsgclbs}"
+					var="jsgclb" varStatus="sortNo">
+					<aui:input name="jsgclb" type="checkbox" id="jsgclb${sortNo.index}"
+						value="${jsgclb.dictionaryId}"
+						checked="${fn:contains(projectProfile.jsgclb,jsgclb.dictionaryId)}"
+						label="${jsgclb.name}" inlineField="true" readonly="true"/>
 				</c:forEach></td>
 		</tr>
 		<tr class="body">
