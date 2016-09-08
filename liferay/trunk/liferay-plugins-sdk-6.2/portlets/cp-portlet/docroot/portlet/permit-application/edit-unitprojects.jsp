@@ -4,7 +4,7 @@
 <%@ include file="/common/init.jsp"%>
 <%@ include file="init.jsp"%>
 <portlet:actionURL var="saveUnitProjectsURL" name="saveUnitProjects">
-	<portlet:param name="redirectURL" value="${editPermitURL }"/>
+	<portlet:param name="redirectURL" value="${editPermitURL }" />
 </portlet:actionURL>
 <%
 	Long permitId = ParamUtil.getLong(request, "permitId");
@@ -12,6 +12,10 @@
 	renderRequest.setAttribute("unitProjects", unitProjects);
 %>
 <style>
+.divAccordion-inner {
+	padding: 9px 15px;
+}
+
 .table tr td {
 	border: 1px solid #ddd;
 }
@@ -23,50 +27,60 @@
 	border: #D4D4D4 1px solid;
 }
 
-aui:input{
+aui:input {
 	width: 98%
 }
 </style>
 <aui:form action="${saveUnitProjectsURL}">
 	<aui:input name="bjbh" value="${bjbh }" type="hidden"></aui:input>
-	<aui:input name="permitId" value="<%=permitId %>" type="hidden"></aui:input>
-	<table border="1" width="100%" class="table table-bordered table-hover">
-		<tr height="29px">
-			<td style="width: 10%; text-align: center">单位工程编号</td>
-			<td style="width: 20%; text-align: center">单位工程名称</td>
-			<td style="width: 65%; text-align: center">建设内容</td>
-			<td style="width: 5%; text-align: center"><input type="button" value="添加" class="btn" style="width: 100%;" onclick="${renderResponse.namespace}changeLine(this)" /></td>
-		</tr>
-		<tbody id="unitProjects">
-			<c:if test="${!empty unitProjects}">
-				<c:forEach items="<%=unitProjects%>" var="unitProject">
-					<tr>
-						<td><aui:input name="gcbh" value="${unitProject.gcbh}" readonly="true" type="text" style="width: 85%;" label=""/></td>
-						<td><aui:input name="gcmc" value="${unitProject.gcmc}"  type="text" style="width: 93%;" label=""/></td>
-						<td><aui:input name="jsnr" value="${unitProject.jsnr}"  type="text" style="width: 98%;" label=""/></td>
-						<td><aui:button name="delete" class="btn" value="删除" onclick="${renderResponse.namespace}changeLine(this)"  /></td>
-					</tr>
-				</c:forEach>
-			</c:if>
-		</tbody>
-	</table>
-	<table style="display: none;" border="1" width="90%">
-		<tbody id="hiddenStyle">
-			<tr>
-				<td><aui:input name="gcbh" readonly="true"  type="text" style="width: 85%;" label=""/></td>
-				<td><aui:input name="gcmc"  type="text" style="width: 93%;"  label=""/></td>
-				<td><aui:input name="jsnr"  type="text" style="width: 98%;"  label=""/></td>
-				<td><aui:button class="btn" name="delete" value="删除" onclick="${renderResponse.namespace}changeLine(this)" /></td>
+	<aui:input name="permitId" value="<%=permitId%>" type="hidden"></aui:input>
+	<div class="divAccordion-inner">
+		<aui:row>
+			<aui:col span="12">
+				<input type="button" value="添加" class="btn" style="" onclick="${renderResponse.namespace}changeLine(this)" />
+				<input type="button" value="删除" class="btn" style="" onclick="${renderResponse.namespace}changeLine(this)" />
+			</aui:col>
+		</aui:row>
+	</div>
+	<div class="accordion-inner">
+		<table border="1" width="100%" class="table table-bordered table-hover">
+			<tr height="29px">
+				<td style="width: 2%; text-align: center"></td>
+				<td style="width: 10%; text-align: center">单位工程编号</td>
+				<td style="width: 20%; text-align: center">单位工程名称</td>
+				<td style="width: 65%; text-align: center">建设内容</td>
 			</tr>
-		</tbody>
-	</table>
-	<div>注释：单位工程名称请参考规划许可证内容填写</div>
+			<tbody id="unitProjects">
+				<c:if test="${!empty unitProjects}">
+					<c:forEach items="<%=unitProjects%>" var="unitProject">
+						<tr>
+							<td style="width: 2%; text-align: center"><input type="checkbox" name="<portlet:namespace/>isDelete" /></td>
+							<td><aui:input name="gcbh" value="${unitProject.gcbh}" readonly="true" type="text" style="width: 85%;" label="" /></td>
+							<td><aui:input name="gcmc" value="${unitProject.gcmc}" type="text" style="width: 93%;" label="" /></td>
+							<td><aui:input name="jsnr" value="${unitProject.jsnr}" type="text" style="width: 98%;" label="" /></td>
+						</tr>
+					</c:forEach>
+				</c:if>
+			</tbody>
+		</table>
+		<table style="display: none;" border="1" width="90%">
+			<tbody id="hiddenStyle">
+				<tr>
+					<td style="width: 2%; text-align: center"><input type="checkbox" name="<portlet:namespace/>isDelete" /></td>
+					<td><aui:input name="gcbh" readonly="true" type="text" style="width: 85%;" label="" /></td>
+					<td><aui:input name="gcmc" type="text" style="width: 93%;" label="" /></td>
+					<td><aui:input name="jsnr" type="text" style="width: 98%;" label="" /></td>
+				</tr>
+			</tbody>
+		</table>
+		<div>注释：单位工程名称请参考规划许可证内容填写</div>
+	</div>
 	<aui:button-row>
 		<span style="position: relative; left: 45%"> <aui:button type="submit" value="保存" /> <aui:button type="cancel" value="取消" href="#" />
 		</span>
 	</aui:button-row>
 
-	
+
 
 </aui:form>
 <script>
@@ -76,8 +90,11 @@ aui:input{
 			setGcbh();
 		} else {
 			if (confirm("确定要删除吗？")) {
-				var trObj = obj.parentNode.parentNode;
-				trObj.parentElement.removeChild(trObj);
+				$("input[name='<portlet:namespace/>isDelete']").each(function() {
+					if (this.checked) {
+						$(this).parent().parent().remove();
+					}
+				});
 				setGcbh();
 			}
 		}
