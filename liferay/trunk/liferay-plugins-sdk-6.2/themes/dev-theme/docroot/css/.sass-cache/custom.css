@@ -1371,3 +1371,6 @@
 .aui .uneditable-input {
   margin-bottom: 0px; }
 
+.aui .table th {
+  text-align: center; }
+

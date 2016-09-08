@@ -3928,3 +3928,6 @@ body:first-of-type .portlet-content:hover .lfr-icon-actions .taglib-text {
 .aui .uneditable-input {
   margin-bottom: 0px; }
 
+.aui .table th {
+  text-align: center; }
+
