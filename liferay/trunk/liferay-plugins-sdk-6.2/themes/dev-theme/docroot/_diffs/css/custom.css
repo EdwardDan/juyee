@@ -736,11 +736,12 @@ $dockbarOpenGradientStart: #0EA6F9;
 	.aui input[type="url"], .aui input[type="week"], .aui select, .aui textarea,
 	.aui .uneditable-input {
 	margin-bottom: 0px;
-
+}
 
 .bg-white{
 	background-color: #fff !important;
-
+}
 
 .aui .table th{
 	text-align:center;
+}
