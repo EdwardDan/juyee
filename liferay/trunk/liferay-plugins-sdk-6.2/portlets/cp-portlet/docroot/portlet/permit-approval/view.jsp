@@ -60,7 +60,6 @@
 							value="提交查询"></aui:button></td>
 				</tr>
 			</table>
-			<br>		
 		</aui:form>
 	</liferay-ui:panel>
 	<%
