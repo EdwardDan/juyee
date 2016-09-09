@@ -100,7 +100,7 @@
 				<liferay-ui:search-container-column-text property="bjbh" name="报建编号" />
 				<liferay-ui:search-container-column-text name="项目名称" value="${projectProfile.gcmc}"/>
 				<liferay-ui:search-container-column-text name="建设单位" value="${projectProfile.jsdwmc}"/>
-				<liferay-ui:search-container-column-text name="状态" value=""/>
+				<liferay-ui:search-container-column-text name="状态" property="sqzt"/>
 				<liferay-ui:search-container-column-text name="操作">
 					<portlet:renderURL var="viewPermitURL">
 						<portlet:param name="mvcPath" value="${contextPath}/view-permit.jsp"/>
