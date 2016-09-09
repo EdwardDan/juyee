@@ -5,23 +5,23 @@ package com.justonetech.cp.util;
  * Created by gq on 2016/3/9.
  */
 public enum CountyPermitStatus {
-    STATUS_EDIT("1", "填写", "red", "tx"),
-    STATUS_SB("2", "已上报", "blue", "submit"),
-    STATUS_SJ_PASS("3", "收件通过", "green", "sj_pass"),
-    STATUS_SJ_BACK("4", "收件退回", "red", "sj_back"),
-    STATUS_SL_PASS("5", "受理通过", "green", "sl_pass"),
-    STATUS_SL_BACK("6", "受理退回", "red", "sl_back"),
-    STATUS_SH_PASS("7", "审核通过", "green", "sh_pass"),
-    STATUS_SH_BACK("8", "审核退回", "red", "sh_back"),
-    STATUS_SP_PASS("9", "审批通过", "green", "sp_pass"),
-    STATUS_SP_BACK("10", "审批退回", "red", "sp_back");
+    STATUS_EDIT(1, "填写", "red", "tx"),
+    STATUS_SB(2, "已上报", "blue", "submit"),
+    STATUS_SJ_PASS(3, "收件通过", "green", "sj_pass"),
+    STATUS_SJ_BACK(4, "收件退回", "red", "sj_back"),
+    STATUS_SL_PASS(5, "受理通过", "green", "sl_pass"),
+    STATUS_SL_BACK(6, "受理退回", "red", "sl_back"),
+    STATUS_SH_PASS(7, "审核通过", "green", "sh_pass"),
+    STATUS_SH_BACK(8, "审核退回", "red", "sh_back"),
+    STATUS_SP_PASS(9, "审批通过", "green", "sp_pass"),
+    STATUS_SP_BACK(10, "审批退回", "red", "sp_back");
 
-	private String code;
+	private int code;
 	private String name;
 	private String color;
 	private String stepCode;
 
-	private CountyPermitStatus(String code, String name, String color,
+	private CountyPermitStatus(int code, String name, String color,
 			String stepCode) {
 		this.code = code;
 		this.name = name;
@@ -29,11 +29,11 @@ public enum CountyPermitStatus {
 		this.stepCode = stepCode;
 	}
 
-	public String getCode() {
+	public int getCode() {
 		return code;
 	}
 
-	public void setCode(String code) {
+	public void setCode(int code) {
 		this.code = code;
 	}
 
@@ -68,7 +68,7 @@ public enum CountyPermitStatus {
 	 *            .
 	 * @return .
 	 */
-	public static String getNameByCode(String code) {
+	public static String getNameByCode(int code) {
 		for (CountyPermitStatus aType : values()) {
 			if (aType.getCode() == code)
 				return aType.getName();
@@ -83,7 +83,7 @@ public enum CountyPermitStatus {
 	 *            .
 	 * @return .
 	 */
-	public static String getTypeCode(String code) {
+	public static String getTypeCode(int code) {
 		for (CountyPermitStatus aType : values()) {
 			if (aType.getCode() == code)
 				return aType.getStepCode();
@@ -91,7 +91,7 @@ public enum CountyPermitStatus {
 		return null;
 	}
 
-	public static String getColorNameByCode(String code) {
+	public static String getColorNameByCode(int code) {
 		for (CountyPermitStatus aType : values()) {
 			if (aType.getCode() == code)
 				return "<font color=" + aType.getColor() + ">"
