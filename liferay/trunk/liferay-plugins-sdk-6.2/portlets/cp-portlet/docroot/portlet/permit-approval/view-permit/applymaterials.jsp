@@ -62,7 +62,7 @@
 						
 						<a href="#" onclick="previewPdf('<%=pdfURL%>')"><%=fileName%></a>
 					</c:if>
-					<a href="/documents/<%=filePath%>?&download=true" target="_Blank">下载</a>
+					<a href="/documents/<%=filePath%>?&download=true" >下载</a>
 				</div>
 				<%
 					}
