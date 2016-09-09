@@ -370,8 +370,6 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		try {
 			String resourceId = resourceRequest.getResourceID();
 			String fileSourceName = "";
-			String validatorMessage="";
-			Boolean upLoadStatus=false;
 			//上传文件
 			if ("fileUpLoad".equals(resourceId)) {
 				UploadPortletRequest uploadPortletRequest = PortalUtil
@@ -386,56 +384,36 @@ public class PermitApplicationPortlet extends MVCPortlet {
 				String divNo=ParamUtil.get(resourceRequest, "divNo","");
 				String materialId = ParamUtil.get(resourceRequest, "materialId", "0");
 				String portletId = ParamUtil.get(resourceRequest, "portletId", "");
+				fileSourceName = uploadPortletRequest.getFileName("userfile");
+				InputStream stream = uploadPortletRequest.getFileAsStream("userfile");
 				
-				
+				/*
 				fileSourceName = uploadPortletRequest.getFileName("fileInput"+divNo);
-				InputStream stream = uploadPortletRequest.getFileAsStream("fileInput"+divNo);
+				InputStream stream = uploadPortletRequest.getFileAsStream("fileInput"+divNo);*/
 				byte[] fileBytes=null;
 				String fileExtension="";
 				if(null!=stream){
 					fileBytes=FileUtil.getBytes(stream);
 				}
-				if(Validator.isNotNull(fileSourceName))
-					fileExtension =fileSourceName.split("\\.")[1];
-					
-					if(!"jpgpdf".contains(fileExtension)){
-						validatorMessage="您上传的文件格式为"+fileExtension+"不符合要求，请上传符合要求的文件！";
-					}else{
-						if("jpg".equals(fileExtension)&&fileBytes.length>2097152){
-							validatorMessage="您上传的图片大小超过2M,请上传小于2M的图片！";
-						}else if("pdf".equals(fileExtension)&&fileBytes.length>20971520){	
-								validatorMessage="您上传的文件大小超过20M,请上传小于20M的文件！";
-						}else{
-
-							if(!materialId.equals("0")){
-								fileEntry = uploadFile(resourceRequest,
-										fileSourceName, fileBytes, serviceContext,portletId,materialId);
-								ApplyMaterial applyMaterial=ApplyMaterialLocalServiceUtil.getApplyMaterial(Long.valueOf(materialId));
-								String fileEntryIds =applyMaterial.getFileEntryIds();
-								//添加第一条数据时
-								if(Validator.isNull(fileEntryIds)){
-									fileEntryIds=fileEntry.getFileEntryId()+"|"+fileEntry.getExtension();
-								}
-								//如果已有数据
-								else{
-									fileEntryIds=fileEntryIds+","+fileEntry.getFileEntryId()+"|"+fileEntry.getExtension();
-								}
-								applyMaterial.setFileEntryIds(fileEntryIds);
-								ApplyMaterialLocalServiceUtil.updateApplyMaterial(applyMaterial);
-								fileJson.put("materialName", applyMaterial.getClmc());
-							}
-						
-						fileJson.put("fileId", fileEntry.getFileEntryId());
-						fileJson.put("title", fileEntry.getTitle());
-						fileJson.put("extension", fileEntry.getExtension());
-						upLoadStatus=true;
+				if(!materialId.equals("0")){
+					fileEntry = uploadFile(resourceRequest,
+							fileSourceName, fileBytes, serviceContext,portletId,materialId);
+					ApplyMaterial applyMaterial=ApplyMaterialLocalServiceUtil.getApplyMaterial(Long.valueOf(materialId));
+					String fileEntryIds =applyMaterial.getFileEntryIds();
+					//添加第一条数据时
+					if(Validator.isNull(fileEntryIds)){
+						fileEntryIds=fileEntry.getFileEntryId()+"|"+fileEntry.getExtension();
 					}
-					
+					//如果已有数据
+					else{
+						fileEntryIds=fileEntryIds+","+fileEntry.getFileEntryId()+"|"+fileEntry.getExtension();
+					}
+					applyMaterial.setFileEntryIds(fileEntryIds);
+					ApplyMaterialLocalServiceUtil.updateApplyMaterial(applyMaterial);
+					fileJson.put("materialName", applyMaterial.getClmc());
 				}
-				
-				
-				fileJson.put("validatorMessage", validatorMessage);	
-				fileJson.put("upLoadStatus", upLoadStatus);
+				fileJson.put("fileId", fileEntry.getFileEntryId());
+				fileJson.put("extension", fileEntry.getExtension());
 				HttpServletResponse response = PortalUtil
 							.getHttpServletResponse(resourceResponse);
 				response.setContentType("text/html;charset=UTF-8");
@@ -478,9 +456,9 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		} catch (SystemException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (IOException e) {
+		}/* catch (IOException e) {
 			e.printStackTrace();
-		}
+		}*/
 		super.serveResource(resourceRequest, resourceResponse);
 	}
 	
