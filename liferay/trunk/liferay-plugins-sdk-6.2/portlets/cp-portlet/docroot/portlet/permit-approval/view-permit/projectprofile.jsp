@@ -4,9 +4,6 @@
 <%@ include file="/common/init.jsp"%>
 <%@ include file="../init.jsp"%>
 <style type="text/css">
-tr {
-	text-align: right;
-}
 
 tr.body td.title {
 	width: 20%;
