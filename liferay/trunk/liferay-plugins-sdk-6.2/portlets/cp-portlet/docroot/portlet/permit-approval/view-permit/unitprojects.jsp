@@ -7,10 +7,6 @@
 	request.setAttribute("unitProjects", unitProjects);
 %>
 <style>
-.table tr td {
-	border: 1px solid #ddd;
-}
-
 .table tr td input {
 	width: 100%;
 	height: 28px;
