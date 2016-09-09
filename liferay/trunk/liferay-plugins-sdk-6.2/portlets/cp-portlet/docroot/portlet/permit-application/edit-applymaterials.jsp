@@ -28,8 +28,7 @@
 <portlet:actionURL var="fileSaveURL" name="saveMaterials">
 	<portlet:param name="redirectURL" value="${editPermitURL}" />
 </portlet:actionURL>
-<form id="fmFile" action="${fileSaveURL}" enctype="multipart/form-data" method="post">
-附件：<input type="file" name="fileTest" >
+<form id="fm" action="${fileSaveURL}" enctype="multipart/form-data" method="post">
 
 <aui:input type="hidden" name="permitId" value="<%=permitId%>"></aui:input>
 <table class="table table-bordered" style="font-size: 14px;" id="fileTable">
@@ -53,14 +52,14 @@
 				<!-- todo
 				此处可以根据状态来隐藏删除按钮的显示，提交后删除按钮不再显示
 				 -->
-				<c:if test="${not empty material.fileEntryIds}">
-				<c:forEach items="${fn:split(material.fileEntryIds,',')}" var="fileEntryId" varStatus="statusSub">
-					<div name="file${status.index+1}">
-					<a class="fileName" href="javascript:void(0);">
-								${material.clmc}-${statusSub.index+1}.${fn:split(fileEntryId,'|')[1]}</a> &nbsp;&nbsp;&nbsp;
-					<a href='javascript:void(0)';  onclick="${renderResponse.namespace}fileDelete(this,${fn:split(fileEntryId,'|')[0]},${material.materialId})">删除</a></div>
-				</c:forEach>
-				</c:if>
+					<c:if test="${not empty material.fileEntryIds}">
+						<c:forEach items="${fn:split(material.fileEntryIds,',')}" var="fileEntryId" varStatus="statusSub">
+							<div name="file${status.index+1}">
+							<a class="fileName" href="javascript:void(0);">
+										${material.clmc}-${statusSub.index+1}.${fn:split(fileEntryId,'|')[1]}</a> &nbsp;&nbsp;&nbsp;
+							<a href='javascript:void(0)';  onclick="${renderResponse.namespace}fileDelete(this,${fn:split(fileEntryId,'|')[0]},${material.materialId})">删除</a></div>
+						</c:forEach>
+					</c:if>
 				</div>
 			</td>
 			<td style="text-align: center">
@@ -81,52 +80,73 @@
 
 </form>
 
+<form id="fmFile" enctype="multipart/form-data" method="post">
+
+</form>
+
 <script>
-	$(function(){
-		var sortEle=$("tr.fileTr").each(function(){
-		   var fileNo= $(this).children("td.fileNo").text();
-		   if(parseInt(fileNo)>=10){
-			   $('#fileTable').append($(this));
-			   /* $(this).empty(); */
-		   }	   
-		});
-		
-	});
+	//文件类型和大小的验证
+	function fileValidator(inputFileId){
+		 var fileInput = $("#"+inputFileId)[0];
+         if(fileInput){
+         	var fileName=fileInput.files[0].name;
+         	var fileExtension=fileName.split('.')[1].toUpperCase();
+	        var fileSize  =Math.ceil(fileInput.files[0].size / (1024*1024)) ;//kb为单位
+	        if(fileExtension!="JPG"&&fileExtension!="PDF"){
+	        	alert("文件上传仅限于jpg或者pdf格式！");
+	        	return false;
+	        }else if(fileExtension=="JPG"){
+	        	if(fileSize>2){	
+	        		alert("上传的jpg文件超过2M,请压缩后上传！")
+	        		return false;
+	        	}
+	        }else if(fileExtension=="PDF"){
+	        	if(fileSize>20){	
+	        		alert("上传的pdf文件超过20M,请压缩或拆分后上传！")
+	        		return false;
+	        	}
+	        }	         
+         }      
+	     return true;
+	 }
+
+
+
+	
 		
 	/* 上传 */
 	function <portlet:namespace/>fileUpLoad(divNo,materialId,portletId) {
-		var fmFile = document.getElementById("fmFile");
-		var oMyForm = new FormData(fmFile);
-		oMyForm.append("<portlet:namespace/>divNo",divNo);
-		oMyForm.append("<portlet:namespace/>materialId",materialId);
-		oMyForm.append("<portlet:namespace/>portletId",portletId);
-		var no = findFileNo(divNo);
-		
-		$.ajax({
-					url : "<%=fileUpLoadURL%>",
-					type : "post",
-					data : oMyForm,
-					cache : false,
-					processData : false,
-					contentType : false,
-					success : function(data) {
-						var fileData = eval("(" + data + ")");
-						if(fileData.upLoadStatus){
+		if(fileValidator("fileInput"+divNo)){
+			var fmFile = document.getElementById("fmFile");
+			var oMyForm = new FormData(fmFile);
+			oMyForm.append("<portlet:namespace/>divNo",divNo);
+			oMyForm.append("<portlet:namespace/>materialId",materialId);
+			oMyForm.append("<portlet:namespace/>portletId",portletId);
+			oMyForm.append("<portlet:namespace/>userfile", $("#fileInput"+divNo)[0].files[0]);
+			var no = findFileNo(divNo);
+			
+			$.ajax({
+						url : "<%=fileUpLoadURL%>",
+						type : "post",
+						data : oMyForm,
+						cache : false,
+						processData : false,
+						contentType : false,
+						success : function(data) {
+							var fileData = eval("(" + data + ")");
 							var ele = "<div name='file"+divNo+"'><a class='fileName' href='javascript:void(0);'>"
 							+ fileData.materialName+"-"+no+"."+fileData.extension
 							+ "</a> &nbsp;&nbsp;&nbsp;<a href='javascript:void(0)';  onclick='${renderResponse.namespace}fileDelete(this,"
 							+ fileData.fileId + ","+materialId+")'>删除</a></div>";
 							$("#fileDiv" + divNo).append(ele);
 							domSort(divNo); 
-							alert("上传成功！");		}
-						else{
-							alert(fileData.validatorMessage);
-							}			
-					},
-					error : function(e) {
-						alert("网络错误，请重试！！");
-					}
-				});
+							alert("上传成功！");				
+						},
+						error : function(e) {
+							alert("网络错误，请重试！！");
+						}
+					});
+		}
 	}
 
 	/* 删除 */
