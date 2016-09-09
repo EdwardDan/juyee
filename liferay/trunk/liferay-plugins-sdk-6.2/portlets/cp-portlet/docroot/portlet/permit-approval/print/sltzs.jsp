@@ -6,6 +6,8 @@
 	visibility: hidden
 }
 </style>
+<OBJECT id="WebBrowser1" height=0 width=0
+	classid=CLSID:8856F961-340A-11D0-A96B-00C04FD705A2 name=wb></OBJECT>
 <html>
 <head>
 <title>受理通知书</title>
@@ -199,7 +201,7 @@ div.Section1 {
 					style='mso-spacerun: yes'>&nbsp;${bean.applyPerson}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				</span><span style='mso-spacerun: yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
 					style='mso-spacerun: yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-				<o:p></o:p></span></u>
+					<o:p></o:p></span></u>
 		</p>
 
 		<p class=MsoNormal style='text-indent: 27.0pt; line-height: 150%'>
@@ -281,8 +283,7 @@ div.Section1 {
 
 		<p class=MsoNormal>
 			<span lang=EN-US style='font-size: 14.0pt'><span
-				style='mso-spacerun: yes'>&nbsp;&nbsp;&nbsp; </span>
-			<o:p></o:p></span>
+				style='mso-spacerun: yes'>&nbsp;&nbsp;&nbsp; </span> <o:p></o:p></span>
 		</p>
 
 		<p class=MsoNormal>
@@ -299,8 +300,7 @@ div.Section1 {
 		<p class=MsoNormal>
 			<span lang=EN-US style='font-size: 14.0pt'><span
 				style='mso-spacerun: yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			</span>
-			<o:p></o:p></span>
+			</span> <o:p></o:p></span>
 		</p>
 
 		<p class=MsoNormal>
@@ -311,11 +311,15 @@ div.Section1 {
 		</p>
 
 	</div>
-	<div class="div_space"></div>
 	<div align="center">
-		<input type="button" class="noprint" onclick="window.print()" value="打印" />
-		<input type="button" class="noprint" value="返回" onclick="history.go(-1)">
+		<input type="button" class="noprint" value="打印预览"
+			onclick="printPreivew()"> <input type="button"
+			class="noprint" onclick="window.print()" value="打印" />
 	</div>
-
 </body>
 </html>
+<script>
+	function printPreivew() {
+		document.getElementById("WebBrowser1").execWB(7, 1);
+	}
+</script>

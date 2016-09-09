@@ -6,6 +6,7 @@
 	visibility: hidden
 }
 </style>
+<OBJECT id="WebBrowser1" height=0 width=0 classid=CLSID:8856F961-340A-11D0-A96B-00C04FD705A2 name=wb></OBJECT> 
 <html>
 <head>
 <title>不予受理决定书</title>
@@ -325,9 +326,13 @@ div.Section1 {
 	</div>
 	<div class="div_space"></div>
 	<div align="center">
+		<input type="button" class="noprint" value="打印预览" onclick="printPreivew()">
 		<input type="button" class="noprint" onclick="window.print()" value="打印" />
-		<input type="button" class="noprint" value="返回" onclick="history.go(-1)">
 	</div>
-
 </body>
 </html>
+<script>
+function printPreivew(){  
+    document.getElementById("WebBrowser1").execWB(7,1);  
+}  
+</script>
