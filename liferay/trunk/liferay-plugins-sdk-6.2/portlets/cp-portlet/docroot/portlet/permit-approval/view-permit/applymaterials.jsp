@@ -3,9 +3,8 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
 <%@ include file="../init.jsp"%>
-<link rel="stylesheet" href="/static/viewer-master/dist/viewer.min.css">
-<script src="/static/viewer-master/assets/js/jquery.min.js"></script>
-<script src="/static/viewer-master/dist/viewer.min.js"></script>
+<link rel="stylesheet" href="/static/viewer-master/viewer.min.css">
+<script src="/static/viewer-master/viewer.min.js"></script>
 <style>
 .aui .table th, .aui .table td {
 	vertical-align: middle;
@@ -40,25 +39,29 @@
 			<div class=<%=materialList.get(i).getMaterialId()%>>
 				<%
 					if(Validator.isNotNull(materialList.get(i))){
-													ApplyMaterial applyMaterial=materialList.get(i);
-													String fileEntryIds=applyMaterial.getFileEntryIds();
-													if(Validator.isNotNull(fileEntryIds)){
-														String[] fileEntryIdsArr=fileEntryIds.split("\\,");
-														for(int j=0;j<fileEntryIdsArr.length;j++){
-															if(Validator.isNotNull(fileEntryIdsArr[j])){
-																String fileEntryId=fileEntryIdsArr[j].split("\\|")[0];
-																DLFileEntry dlFileEntry=DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(fileEntryId));
-																String filePath=dlFileEntry.getGroupId() + "/" + dlFileEntry.getFolderId() + "/" + dlFileEntry.getTitle();
-																String fileName=applyMaterial.getClmc()+"-"+(j+1)+"."+dlFileEntry.getExtension();
+																			ApplyMaterial applyMaterial=materialList.get(i);
+																			String fileEntryIds=applyMaterial.getFileEntryIds();
+																			if(Validator.isNotNull(fileEntryIds)){
+																				String[] fileEntryIdsArr=fileEntryIds.split("\\,");
+																				for(int j=0;j<fileEntryIdsArr.length;j++){
+																					if(Validator.isNotNull(fileEntryIdsArr[j])){
+																						String fileEntryId=fileEntryIdsArr[j].split("\\|")[0];
+																						DLFileEntry dlFileEntry=DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(fileEntryId));
+																						String filePath=dlFileEntry.getGroupId() + "/" + dlFileEntry.getFolderId() + "/" + dlFileEntry.getTitle();
+																						String fileName=applyMaterial.getClmc()+"-"+(j+1)+"."+dlFileEntry.getExtension();
+																						String jpg = "jpg";
 				%>
 				<div>
-					<a href="#" onclick="preview(<%=materialList.get(i).getMaterialId()%>,<%=fileEntryId%>)"><%=fileName%></a> <a href="/documents/<%=filePath%>?&download=true" target="_Blank">下载</a><img src="/documents/<%=filePath%>" hidden="true" id=<%=fileEntryId%>>
+					<a href="#" onclick="preview(<%=materialList.get(i).getMaterialId()%>,<%=fileEntryId%>)"><%=fileName%></a> <a href="/documents/<%=filePath%>?&download=true" target="_Blank">下载</a>
+					<c:if test="<%=dlFileEntry.getExtension().equals(jpg)%>">
+						<img src="/documents/<%=filePath%>" hidden="true" id=<%=fileEntryId%>>
+					</c:if>
 				</div>
 				<%
 					}
-								 					}
-								 				}
-								 			}
+														 					}
+														 				}
+														 			}
 				%>
 			</div>
 		</td>
