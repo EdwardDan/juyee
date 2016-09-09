@@ -39,7 +39,7 @@ td.content span {
 <!-- 设计施工一体化 -->
 <liferay-ui:panel-container accordion="false" extended="true">
 	<liferay-ui:panel title="项目信息" collapsible="false">
-		<table border="1" class="table table-bordered">
+		<table class="table table-bordered">
 			<tr class="body">
 				<td class="title">报建编号</td>
 				<td class="content">${contract.bjbh}</td>
@@ -86,7 +86,7 @@ td.content span {
 	</liferay-ui:panel>
 	<liferay-ui:panel title="合同信息报送编号:${contract.contractId}"
 		collapsible="false">
-		<table border="1" class="table table-bordered">
+		<table class="table table-bordered">
 			<tr class="body">
 				<td class="title">标段号</td>
 				<td class="content" colspan="3">${contract.bdh}</td>
