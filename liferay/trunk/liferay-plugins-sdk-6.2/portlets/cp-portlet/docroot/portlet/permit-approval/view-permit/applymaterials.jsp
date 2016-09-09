@@ -1,3 +1,5 @@
+<%@page import="com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil"%>
+<%@page import="com.liferay.portlet.documentlibrary.model.DLFileEntry"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
 <%@ include file="../init.jsp"%>
@@ -24,22 +26,44 @@
 		<td style="text-align: center; width: 40%;">申请材料名称</td>
 		<td style="text-align: center; width: 55%;">附件</td>
 	</tr>
-	<c:forEach items="<%=materialList%>" var="material" varStatus="status"> 
+	<%-- <c:forEach items="<%=materialList%>" var="material" varStatus="status">  --%>
+	<%
+		for(int i=0;i<materialList.size();i++){
+	%>
 		<tr style="text-align: center" class="fileTr">
 			<td style="text-align: center" class="fileNo">${material.xh}</td>
-			<td>${material.clmc}</td>
+			<td><%=materialList.get(i).getClmc() %></td>
 			<td style="text-align: center">
-				<c:if test="${not empty material.fileEntryIds}">
-				<c:forEach items="${fn:split(material.fileEntryIds,',')}" var="fileEntryId" varStatus="statusSub">
+				<%
+					if(Validator.isNotNull(materialList.get(i))){
+						ApplyMaterial applyMaterial=materialList.get(i);
+						String fileEntryIds=applyMaterial.getFileEntryIds();
+						if(Validator.isNotNull(fileEntryIds)){
+							String[] fileEntryIdsArr=fileEntryIds.split("\\,");
+							for(int j=0;j<fileEntryIdsArr.length;j++){
+								if(Validator.isNotNull(fileEntryIdsArr[j])){
+									String fileEntryId=fileEntryIdsArr[j].split("\\|")[0];
+									DLFileEntry dlFileEntry=DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(fileEntryId));
+									String filePath=dlFileEntry.getGroupId() + "/" + dlFileEntry.getFolderId() + "/" + dlFileEntry.getTitle();
+									String fileName=applyMaterial.getClmc()+"-"+(j+1)+"."+dlFileEntry.getExtension();
+				%>
 					<div>
-						<a class="fileName" href="/documents/${fn:split(fileEntryId,'|')[2]}?&download=true" >
-									${material.clmc}-${statusSub.index+1}.${fn:split(fileEntryId,'|')[1]}</a>
+						<a  href="/documents/<%=filePath%>"  target="_Blank"><%=fileName%></a>
 					</div> 
-					</c:forEach>
-				</c:if>
+					
+				<%
+								}
+							}
+						}
+					}
+				%>
 			</td>
 		</tr>
-	</c:forEach>
+	<%
+		}
+	
+	%>
+	<%-- </c:forEach> --%>
 	
 </table>
 
