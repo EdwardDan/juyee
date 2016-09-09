@@ -52,7 +52,7 @@
 							cssClass="span12" /></td>
 					<td style="width: 15%; text-align: right">项目类型</td>
 					<td style="width: 35%;" class="content">
-						<aui:select name="xmlx" cssClass="span12" label="">
+						<aui:select name="xmlx" cssClass="span12" label="" showEmptyOption="true">
 							<c:forEach items="${xmlxDics}" var="xmlx">
 								<aui:option value="${xmlx.dictionaryId}">${xmlx.name}</aui:option>
 							</c:forEach>
