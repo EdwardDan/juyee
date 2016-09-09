@@ -13,6 +13,7 @@ tr.body td.title {
 tr.body td.content {
 	width: 30%;
 	background-color: white;
+	text-align: left;
 }
 </style>
 <%
@@ -144,7 +145,7 @@ tr.body td.content {
 		<tr class="body">
 			<td class="content" colspan="4"><aui:input name="是否政府投资类"
 					type="checkbox" checked="${projectProfile.sfzftzl?true:false}"
-					readonly="true" /></td>
+					onClick="return false" /></td>
 		</tr>
 	</table>
 </fieldset>
