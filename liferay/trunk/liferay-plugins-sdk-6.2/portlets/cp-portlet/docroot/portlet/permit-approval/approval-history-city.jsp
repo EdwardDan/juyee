@@ -5,10 +5,6 @@
 	a{
 		cursor: pointer;
 	}
-	table{
-		width:100%;
-		text-align:center;
-	}
 </style>
 <c:set var="contextPath"
 	value="${request.contextPath}/portlet/permit-approval/approval-history-city" />
@@ -42,7 +38,7 @@
 <portlet:renderURL var="wldshURL" >
 	<portlet:param name="mvcPath" value="${contextPath}/wldsh.jsp" />
 </portlet:renderURL>
-<table class="table table-border table-hover table-striped" style="width: 100% ；text-align:center;">
+<table class="table table-hover table-striped" style="text-align: center">
 	<thead>
 		<th style="text-align: center">审核步骤</th>
 		<th style="text-align: center">审核意见</th>
