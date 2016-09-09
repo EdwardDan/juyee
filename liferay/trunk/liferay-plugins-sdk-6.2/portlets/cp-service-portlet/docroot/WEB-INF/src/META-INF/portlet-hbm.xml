@@ -289,7 +289,7 @@
 		<property name="bjbh" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="htxxbsbh" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="sqbz" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
-		<property name="sqzt" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="sqzt" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="bdh" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="ywbh" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="sgxkzbh" type="com.liferay.portal.dao.orm.hibernate.StringType" />

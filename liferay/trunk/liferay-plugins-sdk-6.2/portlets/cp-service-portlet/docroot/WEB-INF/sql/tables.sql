@@ -113,7 +113,7 @@ create table cp_Permit (
 	bjbh VARCHAR(75) null,
 	htxxbsbh VARCHAR(75) null,
 	sqbz INTEGER,
-	sqzt VARCHAR(75) null,
+	sqzt INTEGER,
 	bdh VARCHAR(75) null,
 	ywbh VARCHAR(75) null,
 	sgxkzbh VARCHAR(75) null

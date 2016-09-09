@@ -185,11 +185,11 @@ public class PermitSoap implements Serializable {
 		_sqbz = sqbz;
 	}
 
-	public String getSqzt() {
+	public int getSqzt() {
 		return _sqzt;
 	}
 
-	public void setSqzt(String sqzt) {
+	public void setSqzt(int sqzt) {
 		_sqzt = sqzt;
 	}
 
@@ -228,7 +228,7 @@ public class PermitSoap implements Serializable {
 	private String _bjbh;
 	private String _htxxbsbh;
 	private int _sqbz;
-	private String _sqzt;
+	private int _sqzt;
 	private String _bdh;
 	private String _ywbh;
 	private String _sgxkzbh;

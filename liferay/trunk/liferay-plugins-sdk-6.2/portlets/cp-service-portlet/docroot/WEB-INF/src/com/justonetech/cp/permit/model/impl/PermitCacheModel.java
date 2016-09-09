@@ -126,13 +126,7 @@ public class PermitCacheModel implements CacheModel<Permit>, Externalizable {
 		}
 
 		permitImpl.setSqbz(sqbz);
-
-		if (sqzt == null) {
-			permitImpl.setSqzt(StringPool.BLANK);
-		}
-		else {
-			permitImpl.setSqzt(sqzt);
-		}
+		permitImpl.setSqzt(sqzt);
 
 		if (bdh == null) {
 			permitImpl.setBdh(StringPool.BLANK);
@@ -173,7 +167,7 @@ public class PermitCacheModel implements CacheModel<Permit>, Externalizable {
 		bjbh = objectInput.readUTF();
 		htxxbsbh = objectInput.readUTF();
 		sqbz = objectInput.readInt();
-		sqzt = objectInput.readUTF();
+		sqzt = objectInput.readInt();
 		bdh = objectInput.readUTF();
 		ywbh = objectInput.readUTF();
 		sgxkzbh = objectInput.readUTF();
@@ -219,13 +213,7 @@ public class PermitCacheModel implements CacheModel<Permit>, Externalizable {
 		}
 
 		objectOutput.writeInt(sqbz);
-
-		if (sqzt == null) {
-			objectOutput.writeUTF(StringPool.BLANK);
-		}
-		else {
-			objectOutput.writeUTF(sqzt);
-		}
+		objectOutput.writeInt(sqzt);
 
 		if (bdh == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
@@ -260,7 +248,7 @@ public class PermitCacheModel implements CacheModel<Permit>, Externalizable {
 	public String bjbh;
 	public String htxxbsbh;
 	public int sqbz;
-	public String sqzt;
+	public int sqzt;
 	public String bdh;
 	public String ywbh;
 	public String sgxkzbh;

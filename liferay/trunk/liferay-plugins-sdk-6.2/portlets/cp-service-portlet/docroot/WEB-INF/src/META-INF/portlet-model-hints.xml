@@ -300,7 +300,7 @@
 		<field name="bjbh" type="String" />
 		<field name="htxxbsbh" type="String" />
 		<field name="sqbz" type="int" />
-		<field name="sqzt" type="String" />
+		<field name="sqzt" type="int" />
 		<field name="bdh" type="String" />
 		<field name="ywbh" type="String" />
 		<field name="sgxkzbh" type="String" />

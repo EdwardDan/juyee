@@ -136,7 +136,7 @@ public class PermitWrapper implements Permit, ModelWrapper<Permit> {
 			setSqbz(sqbz);
 		}
 
-		String sqzt = (String)attributes.get("sqzt");
+		Integer sqzt = (Integer)attributes.get("sqzt");
 
 		if (sqzt != null) {
 			setSqzt(sqzt);
@@ -429,7 +429,7 @@ public class PermitWrapper implements Permit, ModelWrapper<Permit> {
 	* @return the sqzt of this permit
 	*/
 	@Override
-	public java.lang.String getSqzt() {
+	public int getSqzt() {
 		return _permit.getSqzt();
 	}
 
@@ -439,7 +439,7 @@ public class PermitWrapper implements Permit, ModelWrapper<Permit> {
 	* @param sqzt the sqzt of this permit
 	*/
 	@Override
-	public void setSqzt(java.lang.String sqzt) {
+	public void setSqzt(int sqzt) {
 		_permit.setSqzt(sqzt);
 	}
 

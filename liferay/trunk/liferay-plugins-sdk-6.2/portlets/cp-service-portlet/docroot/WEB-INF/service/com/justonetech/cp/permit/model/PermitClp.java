@@ -161,7 +161,7 @@ public class PermitClp extends BaseModelImpl<Permit> implements Permit {
 			setSqbz(sqbz);
 		}
 
-		String sqzt = (String)attributes.get("sqzt");
+		Integer sqzt = (Integer)attributes.get("sqzt");
 
 		if (sqzt != null) {
 			setSqzt(sqzt);
@@ -450,19 +450,19 @@ public class PermitClp extends BaseModelImpl<Permit> implements Permit {
 	}
 
 	@Override
-	public String getSqzt() {
+	public int getSqzt() {
 		return _sqzt;
 	}
 
 	@Override
-	public void setSqzt(String sqzt) {
+	public void setSqzt(int sqzt) {
 		_sqzt = sqzt;
 
 		if (_permitRemoteModel != null) {
 			try {
 				Class<?> clazz = _permitRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setSqzt", String.class);
+				Method method = clazz.getMethod("setSqzt", int.class);
 
 				method.invoke(_permitRemoteModel, sqzt);
 			}
@@ -800,7 +800,7 @@ public class PermitClp extends BaseModelImpl<Permit> implements Permit {
 	private String _bjbh;
 	private String _htxxbsbh;
 	private int _sqbz;
-	private String _sqzt;
+	private int _sqzt;
 	private String _bdh;
 	private String _ywbh;
 	private String _sgxkzbh;

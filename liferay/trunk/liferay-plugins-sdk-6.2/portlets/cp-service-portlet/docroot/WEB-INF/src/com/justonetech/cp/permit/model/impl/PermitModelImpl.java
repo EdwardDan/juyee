@@ -72,12 +72,12 @@ public class PermitModelImpl extends BaseModelImpl<Permit>
 			{ "bjbh", Types.VARCHAR },
 			{ "htxxbsbh", Types.VARCHAR },
 			{ "sqbz", Types.INTEGER },
-			{ "sqzt", Types.VARCHAR },
+			{ "sqzt", Types.INTEGER },
 			{ "bdh", Types.VARCHAR },
 			{ "ywbh", Types.VARCHAR },
 			{ "sgxkzbh", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table cp_Permit (permitId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,zzjgdm VARCHAR(75) null,bjbh VARCHAR(75) null,htxxbsbh VARCHAR(75) null,sqbz INTEGER,sqzt VARCHAR(75) null,bdh VARCHAR(75) null,ywbh VARCHAR(75) null,sgxkzbh VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table cp_Permit (permitId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,zzjgdm VARCHAR(75) null,bjbh VARCHAR(75) null,htxxbsbh VARCHAR(75) null,sqbz INTEGER,sqzt INTEGER,bdh VARCHAR(75) null,ywbh VARCHAR(75) null,sgxkzbh VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table cp_Permit";
 	public static final String ORDER_BY_JPQL = " ORDER BY permit.permitId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY cp_Permit.permitId ASC";
@@ -222,7 +222,7 @@ public class PermitModelImpl extends BaseModelImpl<Permit>
 			setSqbz(sqbz);
 		}
 
-		String sqzt = (String)attributes.get("sqzt");
+		Integer sqzt = (Integer)attributes.get("sqzt");
 
 		if (sqzt != null) {
 			setSqzt(sqzt);
@@ -398,17 +398,12 @@ public class PermitModelImpl extends BaseModelImpl<Permit>
 	}
 
 	@Override
-	public String getSqzt() {
-		if (_sqzt == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _sqzt;
-		}
+	public int getSqzt() {
+		return _sqzt;
 	}
 
 	@Override
-	public void setSqzt(String sqzt) {
+	public void setSqzt(int sqzt) {
 		_sqzt = sqzt;
 	}
 
@@ -626,12 +621,6 @@ public class PermitModelImpl extends BaseModelImpl<Permit>
 
 		permitCacheModel.sqzt = getSqzt();
 
-		String sqzt = permitCacheModel.sqzt;
-
-		if ((sqzt != null) && (sqzt.length() == 0)) {
-			permitCacheModel.sqzt = null;
-		}
-
 		permitCacheModel.bdh = getBdh();
 
 		String bdh = permitCacheModel.bdh;
@@ -787,7 +776,7 @@ public class PermitModelImpl extends BaseModelImpl<Permit>
 	private String _bjbh;
 	private String _htxxbsbh;
 	private int _sqbz;
-	private String _sqzt;
+	private int _sqzt;
 	private String _bdh;
 	private String _ywbh;
 	private String _sgxkzbh;

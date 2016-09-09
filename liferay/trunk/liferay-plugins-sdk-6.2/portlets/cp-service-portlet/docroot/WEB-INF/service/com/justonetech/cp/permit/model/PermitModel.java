@@ -253,15 +253,14 @@ public interface PermitModel extends BaseModel<Permit>, GroupedModel {
 	 *
 	 * @return the sqzt of this permit
 	 */
-	@AutoEscape
-	public String getSqzt();
+	public int getSqzt();
 
 	/**
 	 * Sets the sqzt of this permit.
 	 *
 	 * @param sqzt the sqzt of this permit
 	 */
-	public void setSqzt(String sqzt);
+	public void setSqzt(int sqzt);
 
 	/**
 	 * Returns the bdh of this permit.
