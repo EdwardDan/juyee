@@ -12,10 +12,6 @@
 	padding: 9px 15px;
 }
 
-.table tr td {
-	border: 1px solid #ddd;
-}
-
 .table tr td input {
 	width: 100%;
 	height: 28px;
