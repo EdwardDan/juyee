@@ -19,10 +19,6 @@
 <% Long permitId =ParamUtil.getLong(renderRequest,"permitId");
 	List<ApplyMaterial> materialList=ApplyMaterialLocalServiceUtil.findByPermitId(permitId, -1, -1);
 	PortletPreferences preferences=renderRequest.getPreferences();
-
-	System.out.println("portletDisplay getId---->"+portletDisplay.getId());
-	
-	
 %>
 
 <c:set var="namespace" value="<%=renderResponse.getNamespace()%>"></c:set>
