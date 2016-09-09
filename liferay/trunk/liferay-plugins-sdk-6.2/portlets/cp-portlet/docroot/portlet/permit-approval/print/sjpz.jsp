@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
 <%@ include file="../init.jsp"%>
+<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <style media=print type="text/css">
 .noprint {
 	visibility: hidden
@@ -384,5 +385,14 @@ div.Section1 {
 	function printPreivew() {
 		document.getElementById("WebBrowser1").execWB(7, 1);
 	}
+
+	$(document).ready(function(){
+    var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
+    var isOpera = userAgent.indexOf("Opera") > -1; //判断是否Opera浏览器
+    var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1 && !isOpera; //判断是否IE浏览器
+    var isFF = userAgent.indexOf("Firefox") > -1; //判断是否Firefox浏览器
+    var isSafari = userAgent.indexOf("Safari") > -1; //判断是否Safari浏览器
+	alert(isIE);
+})
 </script>
 
