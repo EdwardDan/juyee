@@ -10,11 +10,11 @@ tr {
 
 tr.body td.title {
 	width: 20%;
+	text-align: right;
 }
 
 tr.body td.content {
 	width: 30%;
-	text-align: left;
 	background-color: white;
 }
 </style>
