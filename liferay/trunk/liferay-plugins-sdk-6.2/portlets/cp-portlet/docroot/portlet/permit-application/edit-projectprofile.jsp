@@ -386,7 +386,7 @@ function showYzzpl(obj) {
  */
 function checkInputMobilesNormal() {
     var mobiles = $("#<portlet:namespace />jsdwsjh").val();
-    var reg = /^1[3|4|5|8][0-9]\d{8}$/;
+    var reg = /^1[3|4|5|7|8][0-9]\d{8}$/;
     if (mobiles != null && mobiles != "") {
         if (mobiles.indexOf(",") == -1) {
             if (!reg.test(mobiles)) {
