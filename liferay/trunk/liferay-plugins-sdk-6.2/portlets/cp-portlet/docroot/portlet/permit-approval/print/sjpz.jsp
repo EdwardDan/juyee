@@ -1,7 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
 <%@ include file="../init.jsp"%>
-<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript"
+	src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <style media=print type="text/css">
 .noprint {
 	visibility: hidden
@@ -375,9 +376,8 @@ div.Section1 {
 		</p>
 	</div>
 	<div align="center">
-		<input type="button" class="noprint" value="打印预览"
-			onclick="printPreivew()"> <input type="button"
-			class="noprint" onclick="window.print()" value="打印" />
+		<input type="button" class="noprint" value="打印预览" onclick="printPreivew()" id="printPreivew" style="display: none"/> 
+		<input type="button" class="noprint" onclick="window.print()" value="打印" />
 	</div>
 </body>
 </html>
@@ -385,14 +385,15 @@ div.Section1 {
 	function printPreivew() {
 		document.getElementById("WebBrowser1").execWB(7, 1);
 	}
-
-	$(document).ready(function(){
-    var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
-    var isOpera = userAgent.indexOf("Opera") > -1; //判断是否Opera浏览器
-    var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1 && !isOpera; //判断是否IE浏览器
-    var isFF = userAgent.indexOf("Firefox") > -1; //判断是否Firefox浏览器
-    var isSafari = userAgent.indexOf("Safari") > -1; //判断是否Safari浏览器
-	alert(isIE);
-})
+	$(document).ready(
+			function() {
+				var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
+				var isIE11 = (/Trident\/7\./).test(navigator.userAgent);
+				var isIE = userAgent.indexOf("compatible") > -1
+						&& userAgent.indexOf("MSIE") > -1 && !isOpera; //判断是否IE浏览器
+				if (isIE||isIE11) {
+					document.getElementById("printPreivew").style.display="";
+				}
+			})
 </script>
 
