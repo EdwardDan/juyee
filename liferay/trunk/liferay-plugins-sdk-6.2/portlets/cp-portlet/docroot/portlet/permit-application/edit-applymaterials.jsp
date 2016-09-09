@@ -1,6 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
 <%@ include file="init.jsp"%>
+<%@ page import="javax.portlet.PortletPreferences"%>
+<%@ page import="com.liferay.portlet.PortletPreferencesFactoryUtil"%>
+<%@ page import="com.liferay.portal.theme.PortletDisplay"%>
+
 <style>
 .aui .table th, .aui .table td {
 	vertical-align: middle;
@@ -14,16 +18,23 @@
 
 <% Long permitId =ParamUtil.getLong(renderRequest,"permitId");
 	List<ApplyMaterial> materialList=ApplyMaterialLocalServiceUtil.findByPermitId(permitId, -1, -1);
+	PortletPreferences preferences=renderRequest.getPreferences();
+
+	System.out.println("portletDisplay getId---->"+portletDisplay.getId());
+	
+	
 %>
 
 <c:set var="namespace" value="<%=renderResponse.getNamespace()%>"></c:set>
 <portlet:resourceURL var="fileUpLoadURL" id="fileUpLoad" />
 <portlet:resourceURL var="fileDeleteURL" id="fileDelete" />
 
-<portlet:actionURL var="fileSaveURL" name="saveApplyMaterials">
+<portlet:actionURL var="fileSaveURL" name="saveMaterials">
 	<portlet:param name="redirectURL" value="${editPermitURL}" />
 </portlet:actionURL>
 <form id="fmFile" action="${fileSaveURL}" enctype="multipart/form-data" method="post">
+附件：<input type="file" name="fileTest" >
+
 <aui:input type="hidden" name="permitId" value="<%=permitId%>"></aui:input>
 <table class="table table-bordered" style="font-size: 14px;" id="fileTable">
 	<tr style="text-align: center; height: 45px;">
@@ -51,7 +62,7 @@
 					<div name="file${status.index+1}">
 					<a class="fileName" href="javascript:void(0);">
 								${material.clmc}-${statusSub.index+1}.${fn:split(fileEntryId,'|')[1]}</a> &nbsp;&nbsp;&nbsp;
-					<a href='javascript:void(0)';  onclick="${renderResponse.namespace}fileDelete(this,${fn:split(fileEntryId,'|')[0]},${material.materialId},'${fn:split(fileEntryId,'|')[1]}')">删除</a></div>
+					<a href='javascript:void(0)';  onclick="${renderResponse.namespace}fileDelete(this,${fn:split(fileEntryId,'|')[0]},${material.materialId})">删除</a></div>
 				</c:forEach>
 				</c:if>
 				</div>
@@ -59,15 +70,14 @@
 			<td style="text-align: center">
 				<input type="button" value="上传" onclick="document.getElementById('fileInput${status.index+1}').click();"> 
 				<input id="fileInput${status.index+1}" name="${namespace}fileInput${status.index+1}" type="file" multiple=""
-				style="display:none;width: 150px;" accept="application/pdf,image/jpeg"  onchange="${renderResponse.namespace}fileUpLoad(${status.index+1},${material.materialId},'${material.clmc}');"></input>
+				style="display:none;width: 150px;" accept="application/pdf,image/jpeg"  onchange="${renderResponse.namespace}fileUpLoad(${status.index+1},${material.materialId},'<%=portletDisplay.getId() %>');"></input>
 	
 			</td>
 		</tr>
 	</c:forEach>
 	
 </table>
-<!-- <div style="font-size:12px;font-family:宋体"><span style="color:red;">★</span>注:请上传jpg或pdf格式的文件，jpg格式文件大小不能超过2M,pdf格式文件不能超过20M,如果文件超过限定大小，请拆分后重新上传！</div>
-<br/> -->
+
 <div style="text-align: center">
 	<aui:button type="submit" value="保存"  onclick="hideDeleteTag()"/>
 	<aui:button type="submit" value="上报"  onclick="hideDeleteTag()"/>
@@ -88,11 +98,12 @@
 	});
 		
 	/* 上传 */
-	function <portlet:namespace/>fileUpLoad(divNo,materialId,materialName) {
+	function <portlet:namespace/>fileUpLoad(divNo,materialId,portletId) {
 		var fmFile = document.getElementById("fmFile");
 		var oMyForm = new FormData(fmFile);
 		oMyForm.append("<portlet:namespace/>divNo",divNo);
 		oMyForm.append("<portlet:namespace/>materialId",materialId);
+		oMyForm.append("<portlet:namespace/>portletId",portletId);
 		var no = findFileNo(divNo);
 		
 		$.ajax({
@@ -106,9 +117,9 @@
 						var fileData = eval("(" + data + ")");
 						if(fileData.upLoadStatus){
 							var ele = "<div name='file"+divNo+"'><a class='fileName' href='javascript:void(0);'>"
-							+ materialName+"-"+no+"."+fileData.extension
+							+ fileData.materialName+"-"+no+"."+fileData.extension
 							+ "</a> &nbsp;&nbsp;&nbsp;<a href='javascript:void(0)';  onclick='${renderResponse.namespace}fileDelete(this,"
-							+ fileData.fileId + ","+materialId+",\""+fileData.extension+"\")'>删除</a></div>";
+							+ fileData.fileId + ","+materialId+")'>删除</a></div>";
 							$("#fileDiv" + divNo).append(ele);
 							domSort(divNo); 
 							alert("上传成功！");		}
@@ -123,7 +134,7 @@
 	}
 
 	/* 删除 */
-	function <portlet:namespace/>fileDelete(divObj, fileId, materialId,fileExtension) {
+	function <portlet:namespace/>fileDelete(divObj, fileId, materialId) {
 		if (!confirm("确定要删除此文件吗？"))
 			return;
 		$.ajax({
@@ -131,8 +142,7 @@
 			type : "post",
 			data : {
 				'<portlet:namespace/>fileId' : fileId,
-				'<portlet:namespace/>materialId' : materialId,
-				'<portlet:namespace/>fileExtension' : fileExtension
+				'<portlet:namespace/>materialId' : materialId
 			},
 			success : function(data) {
 				$(divObj).parent().remove();
