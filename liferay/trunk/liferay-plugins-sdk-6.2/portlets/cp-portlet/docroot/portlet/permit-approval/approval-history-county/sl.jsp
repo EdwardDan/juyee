@@ -1,18 +1,13 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
 <%@ include file="../init.jsp"%>
-<style type="text/css">
-	table{
-		text-align: center;
-	}
-</style>
 <table class="table table-bordered table-hover table-striped" style="width: 100%">
-	<tr>
-		<td class="title">序号</td>
-		<td class="content">提交材料名称</td>
-		<td class="title">审核要求</td>
-		<td class="content">受理意见</td>
-	</tr>
+	<thead>
+		<th style="text-align: center">序号</th>
+		<th style="text-align: center">提交材料名称</th>
+		<th style="text-align: center">审核要求</th>
+		<th style="text-align: center">受理意见</th>
+	</thead>
 	<c:forEach items="">
 		<tr>
 			<td></td>
