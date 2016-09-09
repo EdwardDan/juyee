@@ -39,34 +39,36 @@
 			<div class=<%=materialList.get(i).getMaterialId()%>>
 				<%
 					if(Validator.isNotNull(materialList.get(i))){
-								ApplyMaterial applyMaterial=materialList.get(i);
-								String fileEntryIds=applyMaterial.getFileEntryIds();
-								if(Validator.isNotNull(fileEntryIds)){
-								String[] fileEntryIdsArr=fileEntryIds.split("\\,");
-								for(int j=0;j<fileEntryIdsArr.length;j++){
-									if(Validator.isNotNull(fileEntryIdsArr[j])){
-										String fileEntryId=fileEntryIdsArr[j].split("\\|")[0];
-										DLFileEntry dlFileEntry=DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(fileEntryId));
-										String filePath=dlFileEntry.getGroupId() + "/" + dlFileEntry.getFolderId() + "/" + dlFileEntry.getTitle();
-										String fileName=applyMaterial.getClmc()+"-"+(j+1)+"."+dlFileEntry.getExtension();
-										String jpg = "jpg";
-										String pdf = "pdf";
+						ApplyMaterial applyMaterial=materialList.get(i);
+						String fileEntryIds=applyMaterial.getFileEntryIds();
+						if(Validator.isNotNull(fileEntryIds)){
+						String[] fileEntryIdsArr=fileEntryIds.split("\\,");
+						for(int j=0;j<fileEntryIdsArr.length;j++){
+							if(Validator.isNotNull(fileEntryIdsArr[j])){
+								String fileEntryId=fileEntryIdsArr[j].split("\\|")[0];
+								DLFileEntry dlFileEntry=DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(fileEntryId));
+								String filePath=dlFileEntry.getGroupId() + "/" + dlFileEntry.getFolderId() + "/" + dlFileEntry.getTitle();
+								String fileName=applyMaterial.getClmc()+"-"+(j+1)+"."+dlFileEntry.getExtension();
+								String jpg = "jpg";
+								String pdf = "pdf";
+								String pdfURL = "/documents/"+filePath;
 				%>
 				<div>
 					<c:if test="<%=dlFileEntry.getExtension().equals(jpg)%>">
 						<a href="#" onclick="previewJpg(<%=materialList.get(i).getMaterialId()%>,<%=fileEntryId%>)"><%=fileName%></a>
-						<img src="/documents/<%=filePath%>" hidden="true" id=<%=fileEntryId%>>
+						<img src="/documents/<%=filePath%>" hidden="true" id=<%=fileEntryId%> alt="<%=dlFileEntry.getTitle()%>">
 					</c:if>
 					<c:if test="<%=dlFileEntry.getExtension().equals(pdf)%>">
-						<a href="#" onclick="previewPdf()"><%=fileName%></a>
+						
+						<a href="#" onclick="previewPdf('<%=pdfURL%>')"><%=fileName%></a>
 					</c:if>
 					<a href="/documents/<%=filePath%>?&download=true" target="_Blank">下载</a>
 				</div>
 				<%
 					}
-																 					}
-																 				}
-																 			}
+						}
+					}
+						}
 				%>
 			</div>
 		</td>
@@ -76,14 +78,30 @@
 	%>
 
 </table>
+<c:set var="contextPath" value="${request.contextPath}/portlet/permit-approval" />
+<portlet:renderURL var="previewPdfURL" windowState="pop_up">
+	<portlet:param name="mvcPath" value="${contextPath}/view-permit/applymaterials-pdf.jsp" />
+</portlet:renderURL>
 <script>
 	function previewJpg(materialId,imgURL) {
 		$('.'+materialId).viewer();
 		$('#'+imgURL).click();
 	}
-	function previewPdf(){
-		alert("查看PDF");	
+	
+	function previewPdf(pdfURL){
+		Liferay.Util.openWindow({
+			dialog : {
+				centered : true,
+				width : 1000,
+				height : 600,
+			},
+			id : 'popup',
+			title : '预览',
+			uri : '${previewPdfURL}&<portlet:namespace/>pdfURL='+pdfURL,
+			destroyOnClose : true
+		});
 	}
+	
 </script>
 
 
