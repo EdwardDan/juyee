@@ -1,5 +1,3 @@
-<%@page import="com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil"%>
-<%@page import="com.liferay.portlet.documentlibrary.model.DLFileEntry"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
 <%@ include file="../init.jsp"%>
