@@ -1,0 +1,14 @@
+@import "compass";
+.aui{
+	.table {
+		th,
+		td {
+			vertical-align: middle;
+	  	}
+	}
+	.table {
+		th{
+			text-align:center;
+	  	}
+	}
+}
