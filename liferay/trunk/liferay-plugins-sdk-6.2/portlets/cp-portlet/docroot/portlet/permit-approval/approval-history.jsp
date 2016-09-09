@@ -4,7 +4,7 @@
 <%
 	long permitIdInit = ParamUtil.getLong(request, "permitId");
 	Permit permitInit = PermitLocalServiceUtil.getPermit(permitIdInit);
-	String sqztInit = permitInit.getSqzt();
+	int sqztInit = permitInit.getSqzt();
 	String bjbhInit = permitInit.getBjbh();
 	//根据报建编号获取报建项目信息
 	Project projectInit = ProjectLocalServiceUtil.getProject(bjbhInit);
