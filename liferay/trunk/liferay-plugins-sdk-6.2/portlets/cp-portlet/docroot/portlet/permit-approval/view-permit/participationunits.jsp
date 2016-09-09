@@ -2,7 +2,7 @@
 <%@ include file="/common/init.jsp"%>
 <%@ include file="../init.jsp"%>
 <%
-	long permitId = ParamUtil.getLong(renderRequest, "permitId");
+	long permitId = ParamUtil.getLong(request, "permitId");
 	List<ParticipationUnit> participationUnits = ParticipationUnitLocalServiceUtil.findByPermitId(permitId, -1,
 			-1);
 
@@ -10,8 +10,7 @@
 %>
 <aui:form action="${saveParticipationUnitsURL }">
 	<div class="accordion-inner">
-		<table border="1" width="100%"
-			class="table table-bordered table-hover">
+		<table width="100%"	class="table table-bordered table-hover">
 			<tr height="29px">
 				<td style="width: 28%; text-align: center">单位名称</td>
 				<td style="width: 13%; text-align: center">单位类型</td>

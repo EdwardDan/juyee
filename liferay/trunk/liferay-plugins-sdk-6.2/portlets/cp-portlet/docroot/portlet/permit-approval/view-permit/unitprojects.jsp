@@ -4,7 +4,7 @@
 <%
 	Long permitId = ParamUtil.getLong(request, "permitId");
 	List<UnitProject> unitProjects = UnitProjectLocalServiceUtil.findByPermitId(permitId, -1, -1);
-	renderRequest.setAttribute("unitProjects", unitProjects);
+	request.setAttribute("unitProjects", unitProjects);
 %>
 <style>
 .table tr td {
@@ -23,7 +23,7 @@ aui:input {
 }
 </style>
 
-<table border="1" width="100%" class="table table-bordered table-hover">
+<table width="100%" class="table table-bordered table-hover">
 	<tr height="29px">
 		<td style="width: 10%; text-align: center">单位工程编号</td>
 		<td style="width: 20%; text-align: center">单位工程名称</td>
