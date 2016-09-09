@@ -45,8 +45,8 @@
 	<a class="btn" href="${printsjpzURL}" target="_blank">收件凭证</a>
 	<a class="btn" href="${printsltzsURL}" target="_blank">受理通知书</a>
 	<a class="btn" href="${printbysljdsURL}" target="_blank">不予受理决定书</a>
-	<a class="btn" href="${printjsscbURL}" target="_blank">补正材料</a>
-	<a class="btn" href="${printsjpzURL}" target="_blank">技术审查表</a>
+	<a class="btn" href="${printbzclURL}" target="_blank">补正材料</a>
+	<a class="btn" href="${printjsscbURL}" target="_blank">技术审查表</a>
 	<a class="btn" href="${printsgxklszsURL}" target="_blank">施工许可(绿色)</a>
 	<a class="btn" href="" target="_blank">施工许可</a>
 </aui:button-row>
