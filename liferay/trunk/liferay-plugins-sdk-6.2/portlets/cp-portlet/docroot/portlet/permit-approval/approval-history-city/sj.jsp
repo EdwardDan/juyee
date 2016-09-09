@@ -16,7 +16,7 @@ tr.body td.content {
 	background-color: white;
 }
 </style>
-<table class="table table-bordered table-hover table-striped">
+<table class="table table-bordered table-hover">
 	<tr class="body">
 		<td class="title">受理编号</td>
 		<td class="content"></td>
@@ -52,3 +52,6 @@ tr.body td.content {
 		<td class="content" colspan="3"></td>
 	</tr>
 </table>
+<aui:button-row cssClass="text-center">
+	<aui:button type="cancel" value="关闭" href="#" />
+</aui:button-row>

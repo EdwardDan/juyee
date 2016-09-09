@@ -7,12 +7,12 @@
 	}
 </style>
 <table class="table table-bordered table-hover table-striped" style="width: 100%">
-	<tr>
-		<td class="title">序号</td>
-		<td class="content">提交材料名称</td>
-		<td class="title">审核要求</td>
-		<td class="content">初审意见</td>
-	</tr>
+	<thead>
+		<th style="text-align: center">序号</th>
+		<th style="text-align: center">提交材料名称</th>
+		<th style="text-align: center">审核要求</th>
+		<th style="text-align: center">初审意见</th>
+	</thead>
 	<c:forEach items="">
 		<tr>
 			<td></td>
