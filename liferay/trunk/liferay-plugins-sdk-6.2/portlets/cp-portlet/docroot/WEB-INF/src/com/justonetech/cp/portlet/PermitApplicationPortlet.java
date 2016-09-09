@@ -12,6 +12,7 @@ import java.util.Locale;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletException;
+import javax.portlet.PortletPreferences;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
@@ -49,14 +50,20 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
+import com.liferay.portal.theme.PortletDisplay;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryTypeConstants;
+import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 /**
@@ -68,7 +75,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 
 	@Override
 	public void render(RenderRequest renderRequest, RenderResponse renderResponse) throws PortletException, IOException {
-
+		
 		String mvcPath = ParamUtil.getString(renderRequest, "mvcPath");
 		if (Validator.equals(mvcPath, "/portlet/permit-application/select-contract.jsp")) {
 			String bjbh = ParamUtil.getString(renderRequest, "bjbh", "");
@@ -175,7 +182,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 			projectProfile = ProjectProfileLocalServiceUtil.createProjectProfile(CounterLocalServiceUtil.increment());
 			permit = PermitLocalServiceUtil.createPermit(projectProfile.getPermitId());
 			permit.setSqbz(1);
-			permit.setSqzt("1");
+			permit.setSqzt("填写");
 		}
 		projectProfile.setXmlx(xmlx);
 		projectProfile.setLxjb(lxjb);
@@ -378,8 +385,9 @@ public class PermitApplicationPortlet extends MVCPortlet {
 				//对应的是第几类材料的div
 				String divNo=ParamUtil.get(resourceRequest, "divNo","");
 				String materialId = ParamUtil.get(resourceRequest, "materialId", "0");
+				String portletId = ParamUtil.get(resourceRequest, "portletId", "");
 				
-				System.out.println(materialId);
+				
 				fileSourceName = uploadPortletRequest.getFileName("fileInput"+divNo);
 				InputStream stream = uploadPortletRequest.getFileAsStream("fileInput"+divNo);
 				byte[] fileBytes=null;
@@ -395,26 +403,26 @@ public class PermitApplicationPortlet extends MVCPortlet {
 					}else{
 						if("jpg".equals(fileExtension)&&fileBytes.length>2097152){
 							validatorMessage="您上传的图片大小超过2M,请上传小于2M的图片！";
-						}else if("pdf".equals(fileExtension)&&fileBytes.length>2097152){	
+						}else if("pdf".equals(fileExtension)&&fileBytes.length>20971520){	
 								validatorMessage="您上传的文件大小超过20M,请上传小于20M的文件！";
 						}else{
-							fileEntry = uploadFile(resourceRequest,
-									fileSourceName, fileBytes, serviceContext);
+
 							if(!materialId.equals("0")){
+								fileEntry = uploadFile(resourceRequest,
+										fileSourceName, fileBytes, serviceContext,portletId,materialId);
 								ApplyMaterial applyMaterial=ApplyMaterialLocalServiceUtil.getApplyMaterial(Long.valueOf(materialId));
 								String fileEntryIds =applyMaterial.getFileEntryIds();
-								//文件路径
-								String filePath=getFilePath(fileEntry);
 								//添加第一条数据时
 								if(Validator.isNull(fileEntryIds)){
-									fileEntryIds=fileEntry.getFileEntryId()+"|"+fileEntry.getExtension()+"|"+filePath;
+									fileEntryIds=fileEntry.getFileEntryId()+"|"+fileEntry.getExtension();
 								}
 								//如果已有数据
 								else{
-									fileEntryIds=fileEntryIds+","+fileEntry.getFileEntryId()+"|"+fileEntry.getExtension()+"|"+filePath;
+									fileEntryIds=fileEntryIds+","+fileEntry.getFileEntryId()+"|"+fileEntry.getExtension();
 								}
 								applyMaterial.setFileEntryIds(fileEntryIds);
 								ApplyMaterialLocalServiceUtil.updateApplyMaterial(applyMaterial);
+								fileJson.put("materialName", applyMaterial.getClmc());
 							}
 						
 						fileJson.put("fileId", fileEntry.getFileEntryId());
@@ -442,10 +450,9 @@ public class PermitApplicationPortlet extends MVCPortlet {
 			if ("fileDelete".equals(resourceId)) {
 				String fileId = ParamUtil.get(resourceRequest, "fileId", "0");
 				String materialId = ParamUtil.get(resourceRequest, "materialId", "0");
-				String fileExtension = ParamUtil.get(resourceRequest, "fileExtension", "");
 				System.out.println(111);
-				System.out.println(fileExtension);
 				if (!fileId.equals("0")) {
+					DLFileEntry dlFileEntry=DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(fileId));
 					if(!materialId.equals("0")){
 						System.out.println(fileId);
 						ApplyMaterial applyMaterial=ApplyMaterialLocalServiceUtil.getApplyMaterial(Long.valueOf(materialId));
@@ -453,7 +460,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 						fileEntryIds=fileEntryIds+",";//加上逗号为了容易替换
 						//获取文件路径
 						String filePath=getFilePath(Long.valueOf(fileId));
-						String str=fileId+"\\|"+fileExtension+"\\|"+filePath+"\\,";
+						String str=fileId+"\\|"+dlFileEntry.getExtension()+"\\,";
 						fileEntryIds=fileEntryIds.replaceFirst(str, "");
 						System.out.println(fileEntryIds);
 						if(Validator.isNotNull(fileEntryIds)){
@@ -477,38 +484,43 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		super.serveResource(resourceRequest, resourceResponse);
 	}
 	
-	
-	public void saveMaterials(ActionRequest request, ActionResponse response) throws PortalException, SystemException, IOException{
-		
-		response.setRenderParameter("mvcPath", "/portlet/permit-application/edit-applymaterials.jsp");
-	}
-	
-	
-
 
 	public FileEntry uploadFile(ResourceRequest request, String fileSourceName,
-			byte[] fileBytes, ServiceContext serviceContext)
+			byte[] fileBytes, ServiceContext serviceContext,String portletId,String materialId)
 			throws PortalException, SystemException, IOException {
 		User user = PortalUtil.getUser(request);
 		long userId = user.getUserId();
 		Long groupId = user.getGroupId();
-		Long folderId = DLFileEntryTypeConstants.FILE_ENTRY_TYPE_ID_BASIC_DOCUMENT;
+		Long rootFolderId = DLFileEntryTypeConstants.FILE_ENTRY_TYPE_ID_BASIC_DOCUMENT;
 		FileEntry fileEntry = null;
+		
+		//为每一种材料名称创建一个文件夹,如果已有就不再创建
+		DLFolder dlParentFolder=null;
+		DLFolder dlChildFolder=null;
+		if(Validator.isNotNull(portletId)&&Validator.isNotNull(materialId)){
+			dlParentFolder=DLFolderLocalServiceUtil.fetchFolder(groupId, rootFolderId, portletId);
+			
+			if(Validator.isNotNull(dlParentFolder)){
+				dlChildFolder=DLFolderLocalServiceUtil.fetchFolder(groupId, dlParentFolder.getFolderId(), materialId);
+				if(Validator.isNull(dlChildFolder)){
+					dlChildFolder=DLFolderLocalServiceUtil.addFolder(userId, groupId, groupId, false, dlParentFolder.getFolderId(), materialId, "", false, serviceContext);
+				}
+			}else{
+				dlParentFolder=DLFolderLocalServiceUtil.addFolder(userId, groupId, groupId, true, rootFolderId, portletId, "", true, serviceContext);
+				dlChildFolder=DLFolderLocalServiceUtil.addFolder(userId, groupId, groupId, false, dlParentFolder.getFolderId(), materialId, "", false, serviceContext);			
+			}
+		}
+
+		
 		if (fileBytes != null) {
-			String title = DateUtil.getDate(new Date(), "yyyy-MM-dd hh-mm-ss",
-					Locale.CHINA) + fileSourceName; // the filename pattern?
 			fileEntry = DLAppLocalServiceUtil.addFileEntry(userId, groupId,
-					folderId, fileSourceName,
-					MimeTypesUtil.getContentType(fileSourceName), title, null,
+					dlChildFolder.getFolderId(), fileSourceName,
+					MimeTypesUtil.getContentType(fileSourceName), fileSourceName, null,
 					null, fileBytes, serviceContext);
 		}
 		return fileEntry;
 	}
-	
-	public static String getFilePath(FileEntry fileEntry) throws PortalException, SystemException {
-		return fileEntry.getGroupId() + "/" + fileEntry.getFolderId() + "/" + fileEntry.getTitle() ;
-		/*+ "/" + dlFileEntry.getUuid()*/
-	}
+
 	
 	public static String getFilePath(Long fileEntryId) throws PortalException, SystemException {
 		if(Validator.isNotNull(fileEntryId)){
