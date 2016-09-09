@@ -745,3 +745,7 @@ $dockbarOpenGradientStart: #0EA6F9;
 .aui .table th{
 	text-align:center;
 }
+
+.viewer-toolbar{
+	margin: 0 auto 5px !important;
+}
