@@ -14,6 +14,8 @@
 	String xmlx = ParamUtil.getString(request, "xmlx");
 	String jsdw = ParamUtil.getString(request, "jsdw");
 	String state = ParamUtil.getString(request, "state");
+	Dictionary xmlxDic = DictionaryLocalServiceUtil.findByCode("xmlx");
+	List<Dictionary> xmlxDics = DictionaryLocalServiceUtil.findByParentId(xmlxDic.getDictionaryId(), -1, -1);
 	int defaultDelta = GetterUtil.getInteger(PropsUtil.get(PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA));
 	int delta = ParamUtil.getInteger(renderRequest, "delta", defaultDelta);
 	int cur = ParamUtil.getInteger(renderRequest, "cur", 1);
@@ -23,6 +25,7 @@
 	int permitsCount = PermitLocalServiceUtil.getPermitsCount("", "", "", "");
 	request.setAttribute("permits", permits);
 	request.setAttribute("permitsCount", permitsCount);
+	request.setAttribute("xmlxDics", xmlxDics);
 %>
 <portlet:renderURL var="searchURL"/>
 <c:set var="contextPath"
@@ -42,6 +45,7 @@
 					<td style="width: 35%;" class="content"><aui:input type="text" name="bjbh"
 							label="" cssClass="span12" /></td>
 				</tr>
+				
 				<tr class="body">
 					<td style="width: 10%; text-align: right">项目名称</td>
 					<td class="content"><aui:input type="text" name="xmmc" label=""
@@ -49,8 +53,8 @@
 					<td style="width: 15%; text-align: right">项目类型</td>
 					<td style="width: 35%;" class="content">
 						<aui:select name="xmlx" cssClass="span12" label="">
-							<c:forEach items="">
-								<aui:option></aui:option>
+							<c:forEach items="${xmlxDics}" var="xmlx">
+								<aui:option value="${xmlx.dictionaryId}">${xmlx.name}</aui:option>
 							</c:forEach>
 						</aui:select>
 					</td>
