@@ -9,10 +9,10 @@
 		</div>
 		<div>
 			<div class="btn-group">
-				<aui:button name="pass" value="预审通过" cssClass="btn" />
+				<aui:button name="pass" value="预审通过" cssClass="btn btn-primary" />
 			</div>
 			<div class="btn-group">
-				<aui:button name="reject" value="预审退回" cssClass="btn" />
+				<aui:button name="reject" value="预审退回" cssClass="btn btn-danger" />
 			</div>
 			<div class="btn-group">
 				<aui:button name="close" value="关闭" cssClass="btn" href="${viewURL}"/>

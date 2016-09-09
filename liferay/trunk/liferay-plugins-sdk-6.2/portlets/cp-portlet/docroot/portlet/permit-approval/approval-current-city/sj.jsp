@@ -97,10 +97,10 @@ span{
 	<div class="text-center">
 		<div>
 			<div class="btn-group">
-				<aui:button name="pass" value="收件通过" cssClass="btn" />
+				<aui:button name="pass" value="收件通过" cssClass="btn btn-primary" />
 			</div>
 			<div class="btn-group">
-				<aui:button name="reject" value="收件退回" cssClass="btn" />
+				<aui:button name="reject" value="收件退回" cssClass="btn btn-danger" />
 			</div>
 			<div class="btn-group">
 				<aui:button name="close" value="关闭" cssClass="btn" href="${viewURL}"/>
