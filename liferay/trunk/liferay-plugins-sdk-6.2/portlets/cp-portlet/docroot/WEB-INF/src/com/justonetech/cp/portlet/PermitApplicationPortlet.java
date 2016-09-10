@@ -382,6 +382,9 @@ public class PermitApplicationPortlet extends MVCPortlet {
 				FileEntry fileEntry=null;
 				//对应的是第几类材料的div
 				String divNo=ParamUtil.get(resourceRequest, "divNo","");
+				//文件材料的名称编号
+				String no=ParamUtil.get(resourceRequest, "no","");
+				String fileExtension=ParamUtil.get(resourceRequest, "fileExtension","");
 				String materialId = ParamUtil.get(resourceRequest, "materialId", "0");
 				String portletId = ParamUtil.get(resourceRequest, "portletId", "");
 				fileSourceName = uploadPortletRequest.getFileName("userfile");
@@ -391,14 +394,16 @@ public class PermitApplicationPortlet extends MVCPortlet {
 				fileSourceName = uploadPortletRequest.getFileName("fileInput"+divNo);
 				InputStream stream = uploadPortletRequest.getFileAsStream("fileInput"+divNo);*/
 				byte[] fileBytes=null;
-				String fileExtension="";
 				if(null!=stream){
 					fileBytes=FileUtil.getBytes(stream);
 				}
 				if(!materialId.equals("0")){
-					fileEntry = uploadFile(resourceRequest,
-							fileSourceName, fileBytes, serviceContext,portletId,materialId);
 					ApplyMaterial applyMaterial=ApplyMaterialLocalServiceUtil.getApplyMaterial(Long.valueOf(materialId));
+					String fileTitle=applyMaterial.getClmc()+"-"+no+"."+fileExtension;
+					
+					fileEntry = uploadFile(resourceRequest,
+							fileSourceName, fileBytes, serviceContext,portletId,materialId,fileTitle);
+					
 					String fileEntryIds =applyMaterial.getFileEntryIds();
 					//添加第一条数据时
 					if(Validator.isNull(fileEntryIds)){
@@ -413,7 +418,6 @@ public class PermitApplicationPortlet extends MVCPortlet {
 					fileJson.put("materialName", applyMaterial.getClmc());
 				}
 				fileJson.put("fileId", fileEntry.getFileEntryId());
-				fileJson.put("extension", fileEntry.getExtension());
 				HttpServletResponse response = PortalUtil
 							.getHttpServletResponse(resourceResponse);
 				response.setContentType("text/html;charset=UTF-8");
@@ -464,14 +468,13 @@ public class PermitApplicationPortlet extends MVCPortlet {
 	
 
 	public FileEntry uploadFile(ResourceRequest request, String fileSourceName,
-			byte[] fileBytes, ServiceContext serviceContext,String portletId,String materialId)
+			byte[] fileBytes, ServiceContext serviceContext,String portletId,String materialId,String fileTitle)
 			throws PortalException, SystemException, IOException {
 		User user = PortalUtil.getUser(request);
 		long userId = user.getUserId();
 		Long groupId = user.getGroupId();
 		Long rootFolderId = DLFileEntryTypeConstants.FILE_ENTRY_TYPE_ID_BASIC_DOCUMENT;
 		FileEntry fileEntry = null;
-		
 		//为每一种材料名称创建一个文件夹,如果已有就不再创建
 		DLFolder dlParentFolder=null;
 		DLFolder dlChildFolder=null;
@@ -493,7 +496,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		if (fileBytes != null) {
 			fileEntry = DLAppLocalServiceUtil.addFileEntry(userId, groupId,
 					dlChildFolder.getFolderId(), fileSourceName,
-					MimeTypesUtil.getContentType(fileSourceName), fileSourceName, null,
+					MimeTypesUtil.getContentType(fileSourceName), fileTitle, null,
 					null, fileBytes, serviceContext);
 		}
 		return fileEntry;
