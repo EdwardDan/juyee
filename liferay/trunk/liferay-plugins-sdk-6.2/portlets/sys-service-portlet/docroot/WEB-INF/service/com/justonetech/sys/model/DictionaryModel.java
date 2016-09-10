@@ -349,6 +349,81 @@ public interface DictionaryModel extends BaseModel<Dictionary> {
 	 */
 	public void setParentId(long parentId);
 
+	/**
+	 * Returns the custom field1 of this dictionary.
+	 *
+	 * @return the custom field1 of this dictionary
+	 */
+	@AutoEscape
+	public String getCustomField1();
+
+	/**
+	 * Sets the custom field1 of this dictionary.
+	 *
+	 * @param customField1 the custom field1 of this dictionary
+	 */
+	public void setCustomField1(String customField1);
+
+	/**
+	 * Returns the custom field2 of this dictionary.
+	 *
+	 * @return the custom field2 of this dictionary
+	 */
+	@AutoEscape
+	public String getCustomField2();
+
+	/**
+	 * Sets the custom field2 of this dictionary.
+	 *
+	 * @param customField2 the custom field2 of this dictionary
+	 */
+	public void setCustomField2(String customField2);
+
+	/**
+	 * Returns the custom field3 of this dictionary.
+	 *
+	 * @return the custom field3 of this dictionary
+	 */
+	@AutoEscape
+	public String getCustomField3();
+
+	/**
+	 * Sets the custom field3 of this dictionary.
+	 *
+	 * @param customField3 the custom field3 of this dictionary
+	 */
+	public void setCustomField3(String customField3);
+
+	/**
+	 * Returns the custom field4 of this dictionary.
+	 *
+	 * @return the custom field4 of this dictionary
+	 */
+	@AutoEscape
+	public String getCustomField4();
+
+	/**
+	 * Sets the custom field4 of this dictionary.
+	 *
+	 * @param customField4 the custom field4 of this dictionary
+	 */
+	public void setCustomField4(String customField4);
+
+	/**
+	 * Returns the custom field5 of this dictionary.
+	 *
+	 * @return the custom field5 of this dictionary
+	 */
+	@AutoEscape
+	public String getCustomField5();
+
+	/**
+	 * Sets the custom field5 of this dictionary.
+	 *
+	 * @param customField5 the custom field5 of this dictionary
+	 */
+	public void setCustomField5(String customField5);
+
 	@Override
 	public boolean isNew();
 

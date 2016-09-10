@@ -35,7 +35,11 @@
 		<column name="sortPath" type="String" /><!--树结构排序号 -->
 		<column name="customContent" type="String" /><!--自定义字段 -->
 		<column name="parentId" type="long" /><!-- 父亲ID -->
-
+		<column name="customField1" type="String" /><!--自定义字段1 -->
+		<column name="customField2" type="String" /><!--自定义字段2 -->
+		<column name="customField3" type="String" /><!--自定义字段3 -->
+		<column name="customField4" type="String" /><!--自定义字段4 -->
+		<column name="customField5" type="String" /><!--自定义字段5 -->
 		<!-- Order -->
 
 		<order>

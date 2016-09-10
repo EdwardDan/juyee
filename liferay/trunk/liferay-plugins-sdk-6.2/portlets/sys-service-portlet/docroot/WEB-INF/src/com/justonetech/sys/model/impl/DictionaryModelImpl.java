@@ -83,9 +83,14 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 			{ "treePath", Types.VARCHAR },
 			{ "sortPath", Types.VARCHAR },
 			{ "customContent", Types.VARCHAR },
-			{ "parentId", Types.BIGINT }
+			{ "parentId", Types.BIGINT },
+			{ "customField1", Types.VARCHAR },
+			{ "customField2", Types.VARCHAR },
+			{ "customField3", Types.VARCHAR },
+			{ "customField4", Types.VARCHAR },
+			{ "customField5", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table sys_Dictionary (dictionaryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createTime DATE null,modifiedTime DATE null,code_ VARCHAR(75) null,name VARCHAR(75) null,isLeaf BOOLEAN,sortNo INTEGER,desc_ STRING null,tag VARCHAR(75) null,isValid BOOLEAN,treePath VARCHAR(75) null,sortPath VARCHAR(75) null,customContent STRING null,parentId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table sys_Dictionary (dictionaryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createTime DATE null,modifiedTime DATE null,code_ VARCHAR(75) null,name VARCHAR(75) null,isLeaf BOOLEAN,sortNo INTEGER,desc_ STRING null,tag VARCHAR(75) null,isValid BOOLEAN,treePath VARCHAR(75) null,sortPath VARCHAR(75) null,customContent STRING null,parentId LONG,customField1 VARCHAR(75) null,customField2 VARCHAR(75) null,customField3 VARCHAR(75) null,customField4 VARCHAR(75) null,customField5 VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table sys_Dictionary";
 	public static final String ORDER_BY_JPQL = " ORDER BY dictionary.sortPath ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY sys_Dictionary.sortPath ASC";
@@ -137,6 +142,11 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 		model.setSortPath(soapModel.getSortPath());
 		model.setCustomContent(soapModel.getCustomContent());
 		model.setParentId(soapModel.getParentId());
+		model.setCustomField1(soapModel.getCustomField1());
+		model.setCustomField2(soapModel.getCustomField2());
+		model.setCustomField3(soapModel.getCustomField3());
+		model.setCustomField4(soapModel.getCustomField4());
+		model.setCustomField5(soapModel.getCustomField5());
 
 		return model;
 	}
@@ -219,6 +229,11 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 		attributes.put("sortPath", getSortPath());
 		attributes.put("customContent", getCustomContent());
 		attributes.put("parentId", getParentId());
+		attributes.put("customField1", getCustomField1());
+		attributes.put("customField2", getCustomField2());
+		attributes.put("customField3", getCustomField3());
+		attributes.put("customField4", getCustomField4());
+		attributes.put("customField5", getCustomField5());
 
 		return attributes;
 	}
@@ -331,6 +346,36 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 
 		if (parentId != null) {
 			setParentId(parentId);
+		}
+
+		String customField1 = (String)attributes.get("customField1");
+
+		if (customField1 != null) {
+			setCustomField1(customField1);
+		}
+
+		String customField2 = (String)attributes.get("customField2");
+
+		if (customField2 != null) {
+			setCustomField2(customField2);
+		}
+
+		String customField3 = (String)attributes.get("customField3");
+
+		if (customField3 != null) {
+			setCustomField3(customField3);
+		}
+
+		String customField4 = (String)attributes.get("customField4");
+
+		if (customField4 != null) {
+			setCustomField4(customField4);
+		}
+
+		String customField5 = (String)attributes.get("customField5");
+
+		if (customField5 != null) {
+			setCustomField5(customField5);
 		}
 	}
 
@@ -628,6 +673,86 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 		return _originalParentId;
 	}
 
+	@JSON
+	@Override
+	public String getCustomField1() {
+		if (_customField1 == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _customField1;
+		}
+	}
+
+	@Override
+	public void setCustomField1(String customField1) {
+		_customField1 = customField1;
+	}
+
+	@JSON
+	@Override
+	public String getCustomField2() {
+		if (_customField2 == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _customField2;
+		}
+	}
+
+	@Override
+	public void setCustomField2(String customField2) {
+		_customField2 = customField2;
+	}
+
+	@JSON
+	@Override
+	public String getCustomField3() {
+		if (_customField3 == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _customField3;
+		}
+	}
+
+	@Override
+	public void setCustomField3(String customField3) {
+		_customField3 = customField3;
+	}
+
+	@JSON
+	@Override
+	public String getCustomField4() {
+		if (_customField4 == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _customField4;
+		}
+	}
+
+	@Override
+	public void setCustomField4(String customField4) {
+		_customField4 = customField4;
+	}
+
+	@JSON
+	@Override
+	public String getCustomField5() {
+		if (_customField5 == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _customField5;
+		}
+	}
+
+	@Override
+	public void setCustomField5(String customField5) {
+		_customField5 = customField5;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -677,6 +802,11 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 		dictionaryImpl.setSortPath(getSortPath());
 		dictionaryImpl.setCustomContent(getCustomContent());
 		dictionaryImpl.setParentId(getParentId());
+		dictionaryImpl.setCustomField1(getCustomField1());
+		dictionaryImpl.setCustomField2(getCustomField2());
+		dictionaryImpl.setCustomField3(getCustomField3());
+		dictionaryImpl.setCustomField4(getCustomField4());
+		dictionaryImpl.setCustomField5(getCustomField5());
 
 		dictionaryImpl.resetOriginalValues();
 
@@ -842,12 +972,52 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 
 		dictionaryCacheModel.parentId = getParentId();
 
+		dictionaryCacheModel.customField1 = getCustomField1();
+
+		String customField1 = dictionaryCacheModel.customField1;
+
+		if ((customField1 != null) && (customField1.length() == 0)) {
+			dictionaryCacheModel.customField1 = null;
+		}
+
+		dictionaryCacheModel.customField2 = getCustomField2();
+
+		String customField2 = dictionaryCacheModel.customField2;
+
+		if ((customField2 != null) && (customField2.length() == 0)) {
+			dictionaryCacheModel.customField2 = null;
+		}
+
+		dictionaryCacheModel.customField3 = getCustomField3();
+
+		String customField3 = dictionaryCacheModel.customField3;
+
+		if ((customField3 != null) && (customField3.length() == 0)) {
+			dictionaryCacheModel.customField3 = null;
+		}
+
+		dictionaryCacheModel.customField4 = getCustomField4();
+
+		String customField4 = dictionaryCacheModel.customField4;
+
+		if ((customField4 != null) && (customField4.length() == 0)) {
+			dictionaryCacheModel.customField4 = null;
+		}
+
+		dictionaryCacheModel.customField5 = getCustomField5();
+
+		String customField5 = dictionaryCacheModel.customField5;
+
+		if ((customField5 != null) && (customField5.length() == 0)) {
+			dictionaryCacheModel.customField5 = null;
+		}
+
 		return dictionaryCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(47);
 
 		sb.append("{dictionaryId=");
 		sb.append(getDictionaryId());
@@ -885,6 +1055,16 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 		sb.append(getCustomContent());
 		sb.append(", parentId=");
 		sb.append(getParentId());
+		sb.append(", customField1=");
+		sb.append(getCustomField1());
+		sb.append(", customField2=");
+		sb.append(getCustomField2());
+		sb.append(", customField3=");
+		sb.append(getCustomField3());
+		sb.append(", customField4=");
+		sb.append(getCustomField4());
+		sb.append(", customField5=");
+		sb.append(getCustomField5());
 		sb.append("}");
 
 		return sb.toString();
@@ -892,7 +1072,7 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(58);
+		StringBundler sb = new StringBundler(73);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.sys.model.Dictionary");
@@ -970,6 +1150,26 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 			"<column><column-name>parentId</column-name><column-value><![CDATA[");
 		sb.append(getParentId());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>customField1</column-name><column-value><![CDATA[");
+		sb.append(getCustomField1());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>customField2</column-name><column-value><![CDATA[");
+		sb.append(getCustomField2());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>customField3</column-name><column-value><![CDATA[");
+		sb.append(getCustomField3());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>customField4</column-name><column-value><![CDATA[");
+		sb.append(getCustomField4());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>customField5</column-name><column-value><![CDATA[");
+		sb.append(getCustomField5());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -1004,6 +1204,11 @@ public class DictionaryModelImpl extends BaseModelImpl<Dictionary>
 	private long _parentId;
 	private long _originalParentId;
 	private boolean _setOriginalParentId;
+	private String _customField1;
+	private String _customField2;
+	private String _customField3;
+	private String _customField4;
+	private String _customField5;
 	private long _columnBitmask;
 	private Dictionary _escapedModel;
 }

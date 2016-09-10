@@ -24,6 +24,11 @@
 			<hint name="max-length">4000</hint>
 		</field>
 		<field name="parentId" type="long" />
+		<field name="customField1" type="String" />
+		<field name="customField2" type="String" />
+		<field name="customField3" type="String" />
+		<field name="customField4" type="String" />
+		<field name="customField5" type="String" />
 	</model>
 	<model name="com.justonetech.sys.model.SMS">
 		<field name="smsId" type="long" />

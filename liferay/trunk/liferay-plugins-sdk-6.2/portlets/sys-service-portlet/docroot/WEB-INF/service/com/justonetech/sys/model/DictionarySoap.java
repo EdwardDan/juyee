@@ -49,6 +49,11 @@ public class DictionarySoap implements Serializable {
 		soapModel.setSortPath(model.getSortPath());
 		soapModel.setCustomContent(model.getCustomContent());
 		soapModel.setParentId(model.getParentId());
+		soapModel.setCustomField1(model.getCustomField1());
+		soapModel.setCustomField2(model.getCustomField2());
+		soapModel.setCustomField3(model.getCustomField3());
+		soapModel.setCustomField4(model.getCustomField4());
+		soapModel.setCustomField5(model.getCustomField5());
 
 		return soapModel;
 	}
@@ -253,6 +258,46 @@ public class DictionarySoap implements Serializable {
 		_parentId = parentId;
 	}
 
+	public String getCustomField1() {
+		return _customField1;
+	}
+
+	public void setCustomField1(String customField1) {
+		_customField1 = customField1;
+	}
+
+	public String getCustomField2() {
+		return _customField2;
+	}
+
+	public void setCustomField2(String customField2) {
+		_customField2 = customField2;
+	}
+
+	public String getCustomField3() {
+		return _customField3;
+	}
+
+	public void setCustomField3(String customField3) {
+		_customField3 = customField3;
+	}
+
+	public String getCustomField4() {
+		return _customField4;
+	}
+
+	public void setCustomField4(String customField4) {
+		_customField4 = customField4;
+	}
+
+	public String getCustomField5() {
+		return _customField5;
+	}
+
+	public void setCustomField5(String customField5) {
+		_customField5 = customField5;
+	}
+
 	private long _dictionaryId;
 	private long _groupId;
 	private long _companyId;
@@ -271,4 +316,9 @@ public class DictionarySoap implements Serializable {
 	private String _sortPath;
 	private String _customContent;
 	private long _parentId;
+	private String _customField1;
+	private String _customField2;
+	private String _customField3;
+	private String _customField4;
+	private String _customField5;
 }

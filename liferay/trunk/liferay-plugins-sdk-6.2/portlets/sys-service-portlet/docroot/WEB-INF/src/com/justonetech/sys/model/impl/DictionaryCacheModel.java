@@ -38,7 +38,7 @@ public class DictionaryCacheModel implements CacheModel<Dictionary>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(47);
 
 		sb.append("{dictionaryId=");
 		sb.append(dictionaryId);
@@ -76,6 +76,16 @@ public class DictionaryCacheModel implements CacheModel<Dictionary>,
 		sb.append(customContent);
 		sb.append(", parentId=");
 		sb.append(parentId);
+		sb.append(", customField1=");
+		sb.append(customField1);
+		sb.append(", customField2=");
+		sb.append(customField2);
+		sb.append(", customField3=");
+		sb.append(customField3);
+		sb.append(", customField4=");
+		sb.append(customField4);
+		sb.append(", customField5=");
+		sb.append(customField5);
 		sb.append("}");
 
 		return sb.toString();
@@ -167,6 +177,41 @@ public class DictionaryCacheModel implements CacheModel<Dictionary>,
 
 		dictionaryImpl.setParentId(parentId);
 
+		if (customField1 == null) {
+			dictionaryImpl.setCustomField1(StringPool.BLANK);
+		}
+		else {
+			dictionaryImpl.setCustomField1(customField1);
+		}
+
+		if (customField2 == null) {
+			dictionaryImpl.setCustomField2(StringPool.BLANK);
+		}
+		else {
+			dictionaryImpl.setCustomField2(customField2);
+		}
+
+		if (customField3 == null) {
+			dictionaryImpl.setCustomField3(StringPool.BLANK);
+		}
+		else {
+			dictionaryImpl.setCustomField3(customField3);
+		}
+
+		if (customField4 == null) {
+			dictionaryImpl.setCustomField4(StringPool.BLANK);
+		}
+		else {
+			dictionaryImpl.setCustomField4(customField4);
+		}
+
+		if (customField5 == null) {
+			dictionaryImpl.setCustomField5(StringPool.BLANK);
+		}
+		else {
+			dictionaryImpl.setCustomField5(customField5);
+		}
+
 		dictionaryImpl.resetOriginalValues();
 
 		return dictionaryImpl;
@@ -192,6 +237,11 @@ public class DictionaryCacheModel implements CacheModel<Dictionary>,
 		sortPath = objectInput.readUTF();
 		customContent = objectInput.readUTF();
 		parentId = objectInput.readLong();
+		customField1 = objectInput.readUTF();
+		customField2 = objectInput.readUTF();
+		customField3 = objectInput.readUTF();
+		customField4 = objectInput.readUTF();
+		customField5 = objectInput.readUTF();
 	}
 
 	@Override
@@ -267,6 +317,41 @@ public class DictionaryCacheModel implements CacheModel<Dictionary>,
 		}
 
 		objectOutput.writeLong(parentId);
+
+		if (customField1 == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(customField1);
+		}
+
+		if (customField2 == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(customField2);
+		}
+
+		if (customField3 == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(customField3);
+		}
+
+		if (customField4 == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(customField4);
+		}
+
+		if (customField5 == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(customField5);
+		}
 	}
 
 	public long dictionaryId;
@@ -287,4 +372,9 @@ public class DictionaryCacheModel implements CacheModel<Dictionary>,
 	public String sortPath;
 	public String customContent;
 	public long parentId;
+	public String customField1;
+	public String customField2;
+	public String customField3;
+	public String customField4;
+	public String customField5;
 }

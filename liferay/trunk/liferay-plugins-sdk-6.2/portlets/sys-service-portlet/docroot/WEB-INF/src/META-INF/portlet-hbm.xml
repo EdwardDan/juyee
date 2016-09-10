@@ -26,6 +26,11 @@
 		<property name="sortPath" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="customContent" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="parentId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="customField1" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="customField2" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="customField3" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="customField4" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="customField5" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="com.justonetech.sys.model.impl.SMSImpl" table="sys_SMS">
 		<cache usage="read-write" />

@@ -1709,6 +1709,11 @@ public class DictionaryPersistenceImpl extends BasePersistenceImpl<Dictionary>
 		dictionaryImpl.setSortPath(dictionary.getSortPath());
 		dictionaryImpl.setCustomContent(dictionary.getCustomContent());
 		dictionaryImpl.setParentId(dictionary.getParentId());
+		dictionaryImpl.setCustomField1(dictionary.getCustomField1());
+		dictionaryImpl.setCustomField2(dictionary.getCustomField2());
+		dictionaryImpl.setCustomField3(dictionary.getCustomField3());
+		dictionaryImpl.setCustomField4(dictionary.getCustomField4());
+		dictionaryImpl.setCustomField5(dictionary.getCustomField5());
 
 		return dictionaryImpl;
 	}

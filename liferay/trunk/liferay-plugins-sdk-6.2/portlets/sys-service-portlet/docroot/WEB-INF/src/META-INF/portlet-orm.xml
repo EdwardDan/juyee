@@ -35,6 +35,11 @@
 			<basic name="sortPath" />
 			<basic name="customContent" />
 			<basic name="parentId" />
+			<basic name="customField1" />
+			<basic name="customField2" />
+			<basic name="customField3" />
+			<basic name="customField4" />
+			<basic name="customField5" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />

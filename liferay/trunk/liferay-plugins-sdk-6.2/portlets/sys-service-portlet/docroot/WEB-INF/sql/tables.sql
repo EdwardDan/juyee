@@ -16,7 +16,12 @@ create table sys_Dictionary (
 	treePath VARCHAR(75) null,
 	sortPath VARCHAR(75) null,
 	customContent STRING null,
-	parentId LONG
+	parentId LONG,
+	customField1 VARCHAR(75) null,
+	customField2 VARCHAR(75) null,
+	customField3 VARCHAR(75) null,
+	customField4 VARCHAR(75) null,
+	customField5 VARCHAR(75) null
 );
 
 create table sys_SMS (

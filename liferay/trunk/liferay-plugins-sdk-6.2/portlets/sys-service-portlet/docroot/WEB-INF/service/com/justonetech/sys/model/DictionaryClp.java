@@ -93,6 +93,11 @@ public class DictionaryClp extends BaseModelImpl<Dictionary>
 		attributes.put("sortPath", getSortPath());
 		attributes.put("customContent", getCustomContent());
 		attributes.put("parentId", getParentId());
+		attributes.put("customField1", getCustomField1());
+		attributes.put("customField2", getCustomField2());
+		attributes.put("customField3", getCustomField3());
+		attributes.put("customField4", getCustomField4());
+		attributes.put("customField5", getCustomField5());
 
 		return attributes;
 	}
@@ -205,6 +210,36 @@ public class DictionaryClp extends BaseModelImpl<Dictionary>
 
 		if (parentId != null) {
 			setParentId(parentId);
+		}
+
+		String customField1 = (String)attributes.get("customField1");
+
+		if (customField1 != null) {
+			setCustomField1(customField1);
+		}
+
+		String customField2 = (String)attributes.get("customField2");
+
+		if (customField2 != null) {
+			setCustomField2(customField2);
+		}
+
+		String customField3 = (String)attributes.get("customField3");
+
+		if (customField3 != null) {
+			setCustomField3(customField3);
+		}
+
+		String customField4 = (String)attributes.get("customField4");
+
+		if (customField4 != null) {
+			setCustomField4(customField4);
+		}
+
+		String customField5 = (String)attributes.get("customField5");
+
+		if (customField5 != null) {
+			setCustomField5(customField5);
 		}
 	}
 
@@ -643,6 +678,121 @@ public class DictionaryClp extends BaseModelImpl<Dictionary>
 	}
 
 	@Override
+	public String getCustomField1() {
+		return _customField1;
+	}
+
+	@Override
+	public void setCustomField1(String customField1) {
+		_customField1 = customField1;
+
+		if (_dictionaryRemoteModel != null) {
+			try {
+				Class<?> clazz = _dictionaryRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setCustomField1", String.class);
+
+				method.invoke(_dictionaryRemoteModel, customField1);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getCustomField2() {
+		return _customField2;
+	}
+
+	@Override
+	public void setCustomField2(String customField2) {
+		_customField2 = customField2;
+
+		if (_dictionaryRemoteModel != null) {
+			try {
+				Class<?> clazz = _dictionaryRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setCustomField2", String.class);
+
+				method.invoke(_dictionaryRemoteModel, customField2);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getCustomField3() {
+		return _customField3;
+	}
+
+	@Override
+	public void setCustomField3(String customField3) {
+		_customField3 = customField3;
+
+		if (_dictionaryRemoteModel != null) {
+			try {
+				Class<?> clazz = _dictionaryRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setCustomField3", String.class);
+
+				method.invoke(_dictionaryRemoteModel, customField3);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getCustomField4() {
+		return _customField4;
+	}
+
+	@Override
+	public void setCustomField4(String customField4) {
+		_customField4 = customField4;
+
+		if (_dictionaryRemoteModel != null) {
+			try {
+				Class<?> clazz = _dictionaryRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setCustomField4", String.class);
+
+				method.invoke(_dictionaryRemoteModel, customField4);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getCustomField5() {
+		return _customField5;
+	}
+
+	@Override
+	public void setCustomField5(String customField5) {
+		_customField5 = customField5;
+
+		if (_dictionaryRemoteModel != null) {
+			try {
+				Class<?> clazz = _dictionaryRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setCustomField5", String.class);
+
+				method.invoke(_dictionaryRemoteModel, customField5);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
 	public java.lang.String buildTreePath() {
 		try {
 			String methodName = "buildTreePath";
@@ -780,6 +930,11 @@ public class DictionaryClp extends BaseModelImpl<Dictionary>
 		clone.setSortPath(getSortPath());
 		clone.setCustomContent(getCustomContent());
 		clone.setParentId(getParentId());
+		clone.setCustomField1(getCustomField1());
+		clone.setCustomField2(getCustomField2());
+		clone.setCustomField3(getCustomField3());
+		clone.setCustomField4(getCustomField4());
+		clone.setCustomField5(getCustomField5());
 
 		return clone;
 	}
@@ -830,7 +985,7 @@ public class DictionaryClp extends BaseModelImpl<Dictionary>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(47);
 
 		sb.append("{dictionaryId=");
 		sb.append(getDictionaryId());
@@ -868,6 +1023,16 @@ public class DictionaryClp extends BaseModelImpl<Dictionary>
 		sb.append(getCustomContent());
 		sb.append(", parentId=");
 		sb.append(getParentId());
+		sb.append(", customField1=");
+		sb.append(getCustomField1());
+		sb.append(", customField2=");
+		sb.append(getCustomField2());
+		sb.append(", customField3=");
+		sb.append(getCustomField3());
+		sb.append(", customField4=");
+		sb.append(getCustomField4());
+		sb.append(", customField5=");
+		sb.append(getCustomField5());
 		sb.append("}");
 
 		return sb.toString();
@@ -875,7 +1040,7 @@ public class DictionaryClp extends BaseModelImpl<Dictionary>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(58);
+		StringBundler sb = new StringBundler(73);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.sys.model.Dictionary");
@@ -953,6 +1118,26 @@ public class DictionaryClp extends BaseModelImpl<Dictionary>
 			"<column><column-name>parentId</column-name><column-value><![CDATA[");
 		sb.append(getParentId());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>customField1</column-name><column-value><![CDATA[");
+		sb.append(getCustomField1());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>customField2</column-name><column-value><![CDATA[");
+		sb.append(getCustomField2());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>customField3</column-name><column-value><![CDATA[");
+		sb.append(getCustomField3());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>customField4</column-name><column-value><![CDATA[");
+		sb.append(getCustomField4());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>customField5</column-name><column-value><![CDATA[");
+		sb.append(getCustomField5());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -978,6 +1163,11 @@ public class DictionaryClp extends BaseModelImpl<Dictionary>
 	private String _sortPath;
 	private String _customContent;
 	private long _parentId;
+	private String _customField1;
+	private String _customField2;
+	private String _customField3;
+	private String _customField4;
+	private String _customField5;
 	private BaseModel<?> _dictionaryRemoteModel;
 	private Class<?> _clpSerializerClass = com.justonetech.sys.service.ClpSerializer.class;
 }

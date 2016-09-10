@@ -67,6 +67,11 @@ public class DictionaryWrapper implements Dictionary, ModelWrapper<Dictionary> {
 		attributes.put("sortPath", getSortPath());
 		attributes.put("customContent", getCustomContent());
 		attributes.put("parentId", getParentId());
+		attributes.put("customField1", getCustomField1());
+		attributes.put("customField2", getCustomField2());
+		attributes.put("customField3", getCustomField3());
+		attributes.put("customField4", getCustomField4());
+		attributes.put("customField5", getCustomField5());
 
 		return attributes;
 	}
@@ -179,6 +184,36 @@ public class DictionaryWrapper implements Dictionary, ModelWrapper<Dictionary> {
 
 		if (parentId != null) {
 			setParentId(parentId);
+		}
+
+		String customField1 = (String)attributes.get("customField1");
+
+		if (customField1 != null) {
+			setCustomField1(customField1);
+		}
+
+		String customField2 = (String)attributes.get("customField2");
+
+		if (customField2 != null) {
+			setCustomField2(customField2);
+		}
+
+		String customField3 = (String)attributes.get("customField3");
+
+		if (customField3 != null) {
+			setCustomField3(customField3);
+		}
+
+		String customField4 = (String)attributes.get("customField4");
+
+		if (customField4 != null) {
+			setCustomField4(customField4);
+		}
+
+		String customField5 = (String)attributes.get("customField5");
+
+		if (customField5 != null) {
+			setCustomField5(customField5);
 		}
 	}
 
@@ -602,6 +637,106 @@ public class DictionaryWrapper implements Dictionary, ModelWrapper<Dictionary> {
 	@Override
 	public void setParentId(long parentId) {
 		_dictionary.setParentId(parentId);
+	}
+
+	/**
+	* Returns the custom field1 of this dictionary.
+	*
+	* @return the custom field1 of this dictionary
+	*/
+	@Override
+	public java.lang.String getCustomField1() {
+		return _dictionary.getCustomField1();
+	}
+
+	/**
+	* Sets the custom field1 of this dictionary.
+	*
+	* @param customField1 the custom field1 of this dictionary
+	*/
+	@Override
+	public void setCustomField1(java.lang.String customField1) {
+		_dictionary.setCustomField1(customField1);
+	}
+
+	/**
+	* Returns the custom field2 of this dictionary.
+	*
+	* @return the custom field2 of this dictionary
+	*/
+	@Override
+	public java.lang.String getCustomField2() {
+		return _dictionary.getCustomField2();
+	}
+
+	/**
+	* Sets the custom field2 of this dictionary.
+	*
+	* @param customField2 the custom field2 of this dictionary
+	*/
+	@Override
+	public void setCustomField2(java.lang.String customField2) {
+		_dictionary.setCustomField2(customField2);
+	}
+
+	/**
+	* Returns the custom field3 of this dictionary.
+	*
+	* @return the custom field3 of this dictionary
+	*/
+	@Override
+	public java.lang.String getCustomField3() {
+		return _dictionary.getCustomField3();
+	}
+
+	/**
+	* Sets the custom field3 of this dictionary.
+	*
+	* @param customField3 the custom field3 of this dictionary
+	*/
+	@Override
+	public void setCustomField3(java.lang.String customField3) {
+		_dictionary.setCustomField3(customField3);
+	}
+
+	/**
+	* Returns the custom field4 of this dictionary.
+	*
+	* @return the custom field4 of this dictionary
+	*/
+	@Override
+	public java.lang.String getCustomField4() {
+		return _dictionary.getCustomField4();
+	}
+
+	/**
+	* Sets the custom field4 of this dictionary.
+	*
+	* @param customField4 the custom field4 of this dictionary
+	*/
+	@Override
+	public void setCustomField4(java.lang.String customField4) {
+		_dictionary.setCustomField4(customField4);
+	}
+
+	/**
+	* Returns the custom field5 of this dictionary.
+	*
+	* @return the custom field5 of this dictionary
+	*/
+	@Override
+	public java.lang.String getCustomField5() {
+		return _dictionary.getCustomField5();
+	}
+
+	/**
+	* Sets the custom field5 of this dictionary.
+	*
+	* @param customField5 the custom field5 of this dictionary
+	*/
+	@Override
+	public void setCustomField5(java.lang.String customField5) {
+		_dictionary.setCustomField5(customField5);
 	}
 
 	@Override
