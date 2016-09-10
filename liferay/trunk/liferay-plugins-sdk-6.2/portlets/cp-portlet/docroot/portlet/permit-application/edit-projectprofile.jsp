@@ -22,7 +22,6 @@
 			endDate = DateUtil.getDate(projectProfile.getJhjg(), defaultDateFormatPattern, locale, timeZone);
 			request.setAttribute("jhkg", startDate);
 			request.setAttribute("jhjg", endDate);
-			request.setAttribute("ywbm",!projectProfile.getYwbm().substring(8,12).equals("0000"));
 			
 		}
 	} else {
