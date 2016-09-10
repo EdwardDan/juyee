@@ -88,6 +88,12 @@
 <portlet:actionURL var="fileSaveURL" name="saveApplyMaterials">
 	<portlet:param name="redirectURL" value="${editPermitURL}" />
 </portlet:actionURL>
+
+<portlet:actionURL var="submitAllURL" name="submitAll">
+	<portlet:param name="redirect" value="${viewURL}" />
+</portlet:actionURL>
+
+
 <form id="fm" action="${fileSaveURL}" enctype="multipart/form-data" method="post">
 
 <aui:input type="hidden" name="permitId" value="<%=permitId%>"></aui:input>
@@ -134,9 +140,10 @@
 </table>
 
 <div style="text-align: center">
-	<aui:button type="submit" value="保存"  onclick="hideDeleteTag()"/>
-	<aui:button type="submit" value="上报"  onclick="hideDeleteTag()"/>
+	<aui:button  value="保存"  onclick="saveMaterials()"/>
+	<aui:button  value="上报"  onclick="submitAll()"/>
 </div>
+
 
 </form>
 
@@ -145,10 +152,24 @@
 </form>
 
 <script>
+	function saveMaterials(){
+		document.getElementById("fm").action='${fileSaveURL}';
+		document.getElementById("fm").submit();
+	}
+
+	function submitAll(){
+		document.getElementById("fm").action='${submitAllURL}';
+		document.getElementById("fm").submit();
+		
+	}
+
+
+
+
+
 	//文件类型和大小的验证
 	function fileValidator(inputFileId){
 		 var fileInput = $("#"+inputFileId)[0];
-		
          if(fileInput){
          	var fileName=fileInput.files[0].name;
          	var fileExtension=fileName.split('.')[1].toUpperCase();
@@ -188,7 +209,6 @@
 			oMyForm.append("<portlet:namespace/>userfile", $("#fileInput"+divNo)[0].files[0]);
 			oMyForm.append("<portlet:namespace/>no", no);
 			oMyForm.append("<portlet:namespace/>fileExtension", fileExtension);
-			
 			$.ajax({
 						url : "<%=fileUpLoadURL%>",
 						type : "post",
