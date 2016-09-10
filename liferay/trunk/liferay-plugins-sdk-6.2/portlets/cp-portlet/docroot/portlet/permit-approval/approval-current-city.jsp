@@ -3,32 +3,24 @@
 <%@ include file="init.jsp"%>
 <%
 	Integer sqztInit = (Integer) request.getAttribute("sqztInit");
-	boolean issb = sqztInit
-			==CityPermitStatus.STATUS_SB.getCode();
-	boolean isys = sqztInit==CityPermitStatus.STATUS_YS_PASS
-			.getCode();
-	boolean issj = sqztInit==CityPermitStatus.STATUS_SJ_PASS
-			.getCode();
-	boolean iscs = sqztInit==CityPermitStatus.STATUS_CS_PASS
-			.getCode();
-	boolean isfh = sqztInit==CityPermitStatus.STATUS_FH_PASS
-			.getCode();
-	boolean issh = sqztInit==CityPermitStatus.STATUS_SH_PASS
-			.getCode();
-	boolean isfgld = sqztInit==CityPermitStatus.STATUS_FGLD_PASS
-			.getCode();
-	boolean iszxld = sqztInit==CityPermitStatus.STATUS_ZXLD_PASS
-			.getCode();
-	boolean isjscxk = sqztInit==CityPermitStatus.STATUS_JSC_XK
-			.getCode();
-	boolean isjscbxk = sqztInit==CityPermitStatus.STATUS_JSC_BXK
-			.getCode();
-	boolean isspcxk = sqztInit==CityPermitStatus.STATUS_SPC_XK
-			.getCode();
-	boolean isspcbxk = sqztInit==CityPermitStatus.STATUS_SPC_BXK
-			.getCode();
-	boolean iswld = sqztInit==CityPermitStatus.STATUS_WLD_PASS
-			.getCode();
+	boolean issb = sqztInit == CityPermitStatus.STATUS_SB.getCode();
+	boolean isys = sqztInit == CityPermitStatus.STATUS_YS_PASS.getCode()
+			|| sqztInit == CityPermitStatus.STATUS_SH_BACK.getCode();
+	boolean issj = sqztInit == CityPermitStatus.STATUS_SJ_PASS.getCode();
+	boolean iscs = sqztInit == CityPermitStatus.STATUS_CS_PASS.getCode();
+	boolean isfh = sqztInit == CityPermitStatus.STATUS_FH_PASS.getCode()
+			||sqztInit == CityPermitStatus.STATUS_FGLD_BACK.getCode()
+			||sqztInit == CityPermitStatus.STATUS_ZXLD_BACK.getCode();
+	boolean issh = sqztInit == CityPermitStatus.STATUS_SH_PASS.getCode();
+	boolean isfgld = sqztInit == CityPermitStatus.STATUS_FGLD_PASS.getCode()
+			||sqztInit == CityPermitStatus.STATUS_JSC_BACK.getCode();
+	boolean iszxld = sqztInit == CityPermitStatus.STATUS_ZXLD_PASS.getCode()
+			||sqztInit == CityPermitStatus.STATUS_SPC_BACK.getCode();
+	boolean isjscxk = sqztInit == CityPermitStatus.STATUS_JSC_XK.getCode();
+	boolean isjscbxk = sqztInit == CityPermitStatus.STATUS_JSC_BXK.getCode();
+	boolean isspcxk = sqztInit == CityPermitStatus.STATUS_SPC_XK.getCode();
+	boolean isspcbxk = sqztInit == CityPermitStatus.STATUS_SPC_BXK.getCode();
+	boolean iswld = sqztInit == CityPermitStatus.STATUS_WLD_PASS.getCode();
 %>
 
 <c:choose>
