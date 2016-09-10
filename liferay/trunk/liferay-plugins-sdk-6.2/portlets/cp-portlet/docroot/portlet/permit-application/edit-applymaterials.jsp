@@ -19,8 +19,10 @@
 	Long permitId =ParamUtil.getLong(renderRequest,"permitId",0);
 	if(Validator.isNotNull(permitId)){
 		applyMaterialList= ApplyMaterialLocalServiceUtil.findByPermitId(permitId, -1, -1);
+
 		//对材料表进行初始化
 		if(applyMaterialList.size()<=0){
+			
 			ProjectProfile projectProfile=ProjectProfileLocalServiceUtil.fetchProjectProfile(permitId);
 			long xmlxId=projectProfile.getXmlx();//项目类型
 			long jsgcsxId=projectProfile.getJsgcsx();//建设工程属性
@@ -96,7 +98,7 @@
 		<td style="text-align: center; width: 45%;">附件</td>
 		<td style="text-align: center; width: 20%;">操作
 			<span class="taglib-icon-help">
-			<img id="yui_patched_v3_11_0_1_1473298445453_1601" tabindex="0" src="http://localhost:8080/html/themes/control_panel/images/portlet/help.png" onmouseover="Liferay.Portal.ToolTip.show(this);" onfocus="Liferay.Portal.ToolTip.show(this);" onblur="Liferay.Portal.ToolTip.hide();" aria-labelledby="vfyl" alt="">
+			<img id="yui_patched_v3_11_0_1_1473298445453_1601" tabindex="0" src="/html/themes/control_panel/images/portlet/help.png" onmouseover="Liferay.Portal.ToolTip.show(this);" onfocus="Liferay.Portal.ToolTip.show(this);" onblur="Liferay.Portal.ToolTip.hide();" aria-labelledby="vfyl" alt="">
 			<span id="vfyl" class="hide-accessible tooltip-text">注:请上传jpg或pdf格式的文件，jpg格式文件大小不能超过2M,pdf格式文件不能超过20M,如果文件超过限定大小，请拆分后重新上传！</span>
 			</span>
 		</td>
@@ -176,7 +178,6 @@
 	/* 上传 */
 	function <portlet:namespace/>fileUpLoad(divNo,materialId,portletId) {
 		if(fileValidator("fileInput"+divNo)){
-			
 			var fileExtension=$("#fileInput"+divNo)[0].files[0].name.split('.')[1];
 			var no = findFileNo(divNo);
 			var fmFile = document.getElementById("fmFile");
