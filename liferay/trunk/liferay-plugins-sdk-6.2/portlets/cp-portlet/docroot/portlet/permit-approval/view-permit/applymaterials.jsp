@@ -31,7 +31,7 @@
 		for(int i=0;i<materialList.size();i++){
 	%>
 	<tr style="text-align: center" class="fileTr">
-		<td style="text-align: center" class="fileNo">${material.xh}</td>
+		<td style="text-align: center" class="fileNo"><%=materialList.get(i).getXh() %></td>
 		<td><%=materialList.get(i).getClmc()%></td>
 		<td style="text-align: center">
 			<div class=<%=materialList.get(i).getMaterialId()%>>
