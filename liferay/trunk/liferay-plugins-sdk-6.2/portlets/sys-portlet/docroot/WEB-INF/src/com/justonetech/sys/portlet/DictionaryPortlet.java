@@ -114,7 +114,11 @@ public class DictionaryPortlet extends MVCPortlet {
         boolean isValid = ParamUtil.getBoolean(actionRequest, "isValid");
         String tag = ParamUtil.getString(actionRequest, "tag");
         String desc = ParamUtil.getString(actionRequest, "desc");
-        String customContent = ParamUtil.getString(actionRequest, "customContent");
+        String customField1 = ParamUtil.getString(actionRequest, "customField1");
+        String customField2 = ParamUtil.getString(actionRequest, "customField2");
+        String customField3 = ParamUtil.getString(actionRequest, "customField3");
+        String customField4 = ParamUtil.getString(actionRequest, "customField4");
+        String customField5 = ParamUtil.getString(actionRequest, "customField5");
         Dictionary dictionary = null;
         String cmd = "add";
         Date now = new Date();
@@ -155,7 +159,11 @@ public class DictionaryPortlet extends MVCPortlet {
         
         dictionary.setIsValid(isValid);
         dictionary.setDesc(desc);
-        dictionary.setCustomContent(customContent);
+        dictionary.setCustomField1(customField1);
+        dictionary.setCustomField2(customField2);
+        dictionary.setCustomField3(customField3);
+        dictionary.setCustomField4(customField4);
+        dictionary.setCustomField5(customField5);
         dictionary.setTag(tag);
         dictionary.setModifiedTime(now);
 

@@ -68,7 +68,27 @@
 	</aui:row>
 	<aui:row>
 		<aui:col span="12">
-			<aui:input name="customContent" label="自定义内容" type="textarea" cssClass="span12"  />
+			<aui:input name="customField1" label="自定义字段1" type="textarea" cssClass="span12"  />
+		</aui:col>
+	</aui:row>
+	<aui:row>
+		<aui:col span="12">
+			<aui:input name="customField2" label="自定义字段2" type="textarea" cssClass="span12"  />
+		</aui:col>
+	</aui:row>
+	<aui:row>
+		<aui:col span="12">
+			<aui:input name="customField3" label="自定义字段3" type="textarea" cssClass="span12"  />
+		</aui:col>
+	</aui:row>
+	<aui:row>
+		<aui:col span="12">
+			<aui:input name="customField4" label="自定义字段4" type="textarea" cssClass="span12"  />
+		</aui:col>
+	</aui:row>
+	<aui:row>
+		<aui:col span="12">
+			<aui:input name="customField5" label="自定义字段5" type="textarea" cssClass="span12"  />
 		</aui:col>
 	</aui:row>
 	<aui:button-row>

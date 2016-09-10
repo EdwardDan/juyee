@@ -82,4 +82,42 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	<portlet>
+		<portlet-name>custom-iframe</portlet-name>
+		<display-name>自定义Iframe</display-name>
+		<portlet-class>
+			com.justonetech.sys.portlet.CustomIframePortlet
+		</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/portlet/custom-iframe/view.jsp</value>
+		</init-param>
+		<init-param>
+			<name>config-template</name>
+			<value>/portlet/custom-iframe/config.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+			<portlet-mode>config</portlet-mode>
+		</supports>
+		<portlet-info>
+			<title>自定义Iframe</title>
+			<short-title>Custom Iframe</short-title>
+			<keywords></keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
 </portlet-app>
