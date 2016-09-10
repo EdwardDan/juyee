@@ -25,7 +25,7 @@
 <portlet:resourceURL var="fileUpLoadURL" id="fileUpLoad" />
 <portlet:resourceURL var="fileDeleteURL" id="fileDelete" />
 
-<portlet:actionURL var="fileSaveURL" name="saveMaterials">
+<portlet:actionURL var="fileSaveURL" name="saveApplyMaterials">
 	<portlet:param name="redirectURL" value="${editPermitURL}" />
 </portlet:actionURL>
 <form id="fm" action="${fileSaveURL}" enctype="multipart/form-data" method="post">
@@ -91,7 +91,7 @@
          if(fileInput){
          	var fileName=fileInput.files[0].name;
          	var fileExtension=fileName.split('.')[1].toUpperCase();
-	        var fileSize  =Math.ceil(fileInput.files[0].size / (1024*1024)) ;//kb为单位
+	        var fileSize  =Math.ceil(fileInput.files[0].size / (1024*1024)) ;//M为单位
 	        if(fileExtension!="JPG"&&fileExtension!="PDF"){
 	        	alert("文件上传仅限于jpg或者pdf格式！");
 	        	return false;
@@ -117,13 +117,16 @@
 	/* 上传 */
 	function <portlet:namespace/>fileUpLoad(divNo,materialId,portletId) {
 		if(fileValidator("fileInput"+divNo)){
+			var fileExtension=$("#fileInput"+divNo)[0].files[0].name.split('.')[1];
+			var no = findFileNo(divNo);
 			var fmFile = document.getElementById("fmFile");
 			var oMyForm = new FormData(fmFile);
 			oMyForm.append("<portlet:namespace/>divNo",divNo);
 			oMyForm.append("<portlet:namespace/>materialId",materialId);
 			oMyForm.append("<portlet:namespace/>portletId",portletId);
 			oMyForm.append("<portlet:namespace/>userfile", $("#fileInput"+divNo)[0].files[0]);
-			var no = findFileNo(divNo);
+			oMyForm.append("<portlet:namespace/>no", no);
+			oMyForm.append("<portlet:namespace/>fileExtension", fileExtension);
 			
 			$.ajax({
 						url : "<%=fileUpLoadURL%>",
@@ -135,7 +138,7 @@
 						success : function(data) {
 							var fileData = eval("(" + data + ")");
 							var ele = "<div name='file"+divNo+"'><a class='fileName' href='javascript:void(0);'>"
-							+ fileData.materialName+"-"+no+"."+fileData.extension
+							+ fileData.materialName+"-"+no+"."+fileExtension
 							+ "</a> &nbsp;&nbsp;&nbsp;<a href='javascript:void(0)';  onclick='${renderResponse.namespace}fileDelete(this,"
 							+ fileData.fileId + ","+materialId+")'>删除</a></div>";
 							$("#fileDiv" + divNo).append(ele);
