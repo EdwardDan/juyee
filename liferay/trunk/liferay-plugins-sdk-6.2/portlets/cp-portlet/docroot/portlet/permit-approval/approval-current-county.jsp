@@ -2,17 +2,13 @@
 <%@ include file="/common/init.jsp"%>
 <%@ include file="init.jsp"%>
 <%
-Integer sqztInit = (Integer) request.getAttribute("sqztInit");
-	boolean issb = sqztInit==CountyPermitStatus.STATUS_SB
-			.getCode();
-	boolean issj = sqztInit==CountyPermitStatus.STATUS_SJ_PASS
-			.getCode();
-	boolean issl = sqztInit==CountyPermitStatus.STATUS_SL_PASS
-			.getCode();
-	boolean issh = sqztInit==CountyPermitStatus.STATUS_SH_PASS
-			.getCode();
-	boolean issp = sqztInit==CountyPermitStatus.STATUS_SP_PASS
-			.getCode();
+	Integer sqztInit = (Integer) request.getAttribute("sqztInit");
+	boolean issb = sqztInit == CountyPermitStatus.STATUS_SB.getCode();
+	boolean issj = sqztInit == CountyPermitStatus.STATUS_SJ_PASS.getCode()
+			||sqztInit == CountyPermitStatus.STATUS_SP_BACK.getCode();
+	boolean issl = sqztInit == CountyPermitStatus.STATUS_SL_PASS.getCode();
+	boolean issh = sqztInit == CountyPermitStatus.STATUS_SH_PASS.getCode();
+	boolean issp = sqztInit == CountyPermitStatus.STATUS_SP_PASS.getCode();
 %>
 <c:choose>
 	<c:when test="<%=issb%>">
