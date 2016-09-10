@@ -92,11 +92,10 @@ if(null!=dictionaryCertificateType){
 							<td style="width: 2%; text-align: center"><input
 								type="checkbox" name="<portlet:namespace/>isDelete"
 								<c:if test="${participationUnit. sfyssj }">disabled="disabled"</c:if> /></td>
-							<td style="width: 28%; text-align: left"><aui:input
-									style="width: 95%" name="dwmc" label="" 
-									value="${participationUnit. dwmc}">
-									<aui:validator name="required" />
-								</aui:input> <input name="<portlet:namespace/>sfyssj" type="hidden"
+							<td style="width: 28%; text-align: left"><input
+								style="width: 98%" name="<portlet:namespace/>dwmc"
+								value="${participationUnit. dwmc}" required="required">
+								<input name="<portlet:namespace/>sfyssj" type="hidden"
 								value="${participationUnit. sfyssj}"></td>
 							<td style="width: 13%; text-align: center"><select
 								id="<portlet:namespace/>dwlx" name="<portlet:namespace/>dwlx"
@@ -129,7 +128,7 @@ if(null!=dictionaryCertificateType){
 			</tbody>
 		</table>
 	</div>
-	
+
 	<aui:button-row>
 		<span style="position: relative; left: 45%"> <aui:button
 				type="submit" value="保存" onClick="return submitSave()" /> <aui:button
@@ -139,39 +138,38 @@ if(null!=dictionaryCertificateType){
 
 </aui:form>
 <table style="display: none;" border="1">
-		<tbody id="hiddenStyle">
-			<tr height="29px">
-				<td style="width: 2%; text-align: center"><input
-					type="checkbox" name="<portlet:namespace/>isDelete" /></td>
-				<td style="width: 28%; text-align: left"><aui:input
-						style="width: 95%" name="dwmc" label="">
-						<aui:validator name="required" />
-					</aui:input> <input name="<portlet:namespace/>sfyssj" type="hidden"
-					value="false"></td>
-				<td style="width: 13%; text-align: center"><select
-					id="<portlet:namespace/>dwlx" name="<portlet:namespace/>dwlx"
-					style="width: 100%">
-						<c:forEach items="${deptTypes}" var="deptType">
-							<option value="${deptType.name }">${deptType.name }</option>
-						</c:forEach>
-				</select></td>
-				<td style="width: 10%; text-align: center"><input
-					style="width: 100%" name="<portlet:namespace/>xmfzr"></td>
-				<td style="width: 12%; text-align: center"><select
-					id="<portlet:namespace/>zjlx" name="<portlet:namespace/>zjlx"
-					style="width: 100%">
-						<c:forEach items="${certificateTypes}" var="certificateType">
-							<option value="${certificateType.name }">${certificateType.name }</option>
-						</c:forEach>
-				</select></td>
-				<td style="width: 20%; text-align: center"><input
-					style="width: 100%" name="<portlet:namespace/>zjh"></td>
-				<td style="width: 10%; text-align: center"><aui:input
-						style="width: 95%" name="dhhm" label="" value="">
-					</aui:input></td>
-			</tr>
-		</tbody>
-	</table>
+	<tbody id="hiddenStyle">
+		<tr height="29px">
+			<td style="width: 2%; text-align: center"><input type="checkbox"
+				name="<portlet:namespace/>isDelete" /></td>
+			<td style="width: 28%; text-align: left"><input
+				style="width: 98%" name="<portlet:namespace/>dwmc"
+				required="required"> <input
+				name="<portlet:namespace/>sfyssj" type="hidden" value="false"></td>
+			<td style="width: 13%; text-align: center"><select
+				id="<portlet:namespace/>dwlx" name="<portlet:namespace/>dwlx"
+				style="width: 100%">
+					<c:forEach items="${deptTypes}" var="deptType">
+						<option value="${deptType.name }">${deptType.name }</option>
+					</c:forEach>
+			</select></td>
+			<td style="width: 10%; text-align: center"><input
+				style="width: 100%" name="<portlet:namespace/>xmfzr"></td>
+			<td style="width: 12%; text-align: center"><select
+				id="<portlet:namespace/>zjlx" name="<portlet:namespace/>zjlx"
+				style="width: 100%">
+					<c:forEach items="${certificateTypes}" var="certificateType">
+						<option value="${certificateType.name }">${certificateType.name }</option>
+					</c:forEach>
+			</select></td>
+			<td style="width: 20%; text-align: center"><input
+				style="width: 100%" name="<portlet:namespace/>zjh"></td>
+			<td style="width: 10%; text-align: center"><aui:input
+					style="width: 95%" name="dhhm" label="" value="">
+				</aui:input></td>
+		</tr>
+	</tbody>
+</table>
 <script>
 	function <portlet:namespace/>changeLine(obj) {
 		if (obj.value == "添加") {
@@ -206,7 +204,7 @@ if(null!=dictionaryCertificateType){
 			alert("电话号码有误！！")
 			return false;
 		}
-		
+
 		var deptCodes = "";
 		var flagDept = true;
 		var len = $("select[name='<portlet:namespace/>dwlx']").length;
@@ -219,7 +217,7 @@ if(null!=dictionaryCertificateType){
 			}
 
 		});
-		
+
 		if (!flagDept) {
 			alert("单位类型存在重复！！")
 			return false;
