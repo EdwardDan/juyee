@@ -24,7 +24,7 @@ public class CustomIframeConfigurationAction extends DefaultConfigurationAction 
 				.getPortletSetup(renderRequest, portletId);
 		String src = preferences.getValue("src", StringPool.BLANK);
 		renderRequest.setAttribute("src", src);
-		String height = preferences.getValue("height", "600");
+		String height = preferences.getValue("height", StringPool.BLANK);
 		renderRequest.setAttribute("height", height);
 		String isAddUserParam = preferences.getValue("isAddUserParam", "false");
 		renderRequest.setAttribute("isAddUserParam", isAddUserParam);
