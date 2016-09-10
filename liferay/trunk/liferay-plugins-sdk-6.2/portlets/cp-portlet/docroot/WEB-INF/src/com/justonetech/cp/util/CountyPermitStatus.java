@@ -1,20 +1,20 @@
 package com.justonetech.cp.util;
 
+
 /**
  * 区县施工许可状态
  * Created by gq on 2016/3/9.
  */
 public enum CountyPermitStatus {
+	STATUS_WZ(0, "未知", "yellow", "wz"),
     STATUS_EDIT(1, "填写", "red", "tx"),
     STATUS_SB(2, "已上报", "blue", "submit"),
     STATUS_SJ_PASS(3, "收件通过", "green", "sj_pass"),
     STATUS_SJ_BACK(4, "收件退回", "red", "sj_back"),
     STATUS_SL_PASS(5, "受理通过", "green", "sl_pass"),
-    STATUS_SL_BACK(6, "受理退回", "red", "sl_back"),
-    STATUS_SH_PASS(7, "审核通过", "green", "sh_pass"),
-    STATUS_SH_BACK(8, "审核退回", "red", "sh_back"),
-    STATUS_SP_PASS(9, "审批通过", "green", "sp_pass"),
-    STATUS_SP_BACK(10, "审批退回", "red", "sp_back");
+    STATUS_SH_PASS(6, "审核通过", "green", "sh_pass"),
+    STATUS_SP_PASS(7, "审批通过", "green", "sp_pass"),
+    STATUS_SP_BACK(8, "审批退回", "red", "sp_back");
 
 	private int code;
 	private String name;
