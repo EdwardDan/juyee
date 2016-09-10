@@ -17,13 +17,10 @@
 	List<Dictionary> materialDictionaries=new ArrayList<Dictionary>();
 	List<ApplyMaterial> applyMaterialList=new ArrayList<ApplyMaterial>();
 	Long permitId =ParamUtil.getLong(renderRequest,"permitId",0);
-	System.out.println(permitId);
 	if(Validator.isNotNull(permitId)){
 		applyMaterialList= ApplyMaterialLocalServiceUtil.findByPermitId(permitId, -1, -1);
-		System.out.println(Arrays.asList(applyMaterialList));
 		//对材料表进行初始化
 		if(applyMaterialList.size()<=0){
-			System.out.println(123);
 			ProjectProfile projectProfile=ProjectProfileLocalServiceUtil.fetchProjectProfile(permitId);
 			long xmlxId=projectProfile.getXmlx();//项目类型
 			long jsgcsxId=projectProfile.getJsgcsx();//建设工程属性
