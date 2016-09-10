@@ -432,11 +432,9 @@ public class PermitApplicationPortlet extends MVCPortlet {
 			if ("fileDelete".equals(resourceId)) {
 				String fileId = ParamUtil.get(resourceRequest, "fileId", "0");
 				String materialId = ParamUtil.get(resourceRequest, "materialId", "0");
-				System.out.println(111);
 				if (!fileId.equals("0")) {
 					DLFileEntry dlFileEntry=DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(fileId));
 					if(!materialId.equals("0")){
-						System.out.println(fileId);
 						ApplyMaterial applyMaterial=ApplyMaterialLocalServiceUtil.getApplyMaterial(Long.valueOf(materialId));
 						String fileEntryIds =applyMaterial.getFileEntryIds();
 						fileEntryIds=fileEntryIds+",";//加上逗号为了容易替换
@@ -444,7 +442,6 @@ public class PermitApplicationPortlet extends MVCPortlet {
 						String filePath=getFilePath(Long.valueOf(fileId));
 						String str=fileId+"\\|"+dlFileEntry.getExtension()+"\\,";
 						fileEntryIds=fileEntryIds.replaceFirst(str, "");
-						System.out.println(fileEntryIds);
 						if(Validator.isNotNull(fileEntryIds)){
 							fileEntryIds=fileEntryIds.substring(0,fileEntryIds.length()-1);//最后一步再把逗号去掉
 						}
