@@ -20,7 +20,7 @@
         <intercept-url pattern="/sys*/**" access="ROLE_USER"/>
         <intercept-url pattern="/view/**" access="ROLE_USER"/>
         <intercept-url pattern="/oa*/**" access="ROLE_USER"/>
-        <!--<intercept-url pattern="/oaPublicInfo/**" filters="none"/>-->
+        <intercept-url pattern="/platform/**" filters="none"/>
         <intercept-url pattern="/sysRegPerson/**" filters="none"/>
         <intercept-url pattern="/sms*/**" access="ROLE_USER"/>
         <intercept-url pattern="/bpm*/**" access="ROLE_USER"/>
