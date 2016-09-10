@@ -31,6 +31,7 @@ import com.justonetech.cp.permit.service.ParticipationUnitLocalServiceUtil;
 import com.justonetech.cp.permit.service.PermitLocalServiceUtil;
 import com.justonetech.cp.permit.service.ProjectProfileLocalServiceUtil;
 import com.justonetech.cp.permit.service.UnitProjectLocalServiceUtil;
+import com.justonetech.cp.util.CityPermitStatus;
 import com.justonetech.sys.model.Dictionary;
 import com.justonetech.sys.service.DictionaryLocalServiceUtil;
 import com.liferay.counter.service.CounterLocalServiceUtil;
@@ -308,6 +309,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 	}
 
 	public void saveApplyMaterials(ActionRequest request, ActionResponse response) throws SystemException, PortalException, ParseException, IOException {
+		System.out.println(456);
 		long permitId = ParamUtil.getLong(request, "permitId");
 		Permit permit = PermitLocalServiceUtil.getPermit(permitId);
 		if (permit.getSqbz() == 3) {
@@ -316,6 +318,50 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		PermitLocalServiceUtil.updatePermit(permit);
 		redirect(request, response, permit, 4);
 	}
+	
+	public void submitAll(ActionRequest request,ActionResponse response) throws PortalException, SystemException{
+		long permitId=ParamUtil.getLong(request, "permitId");
+		String ywbm = "JT";
+		Permit permit = PermitLocalServiceUtil.getPermit(permitId);
+
+		ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
+		Dictionary xmlx = DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx());
+		ywbm = ywbm + xmlx.getCode();
+		Locale locale = LocaleUtil.getDefault();
+		String currentDate = DateUtil.getCurrentDate("yyyy-MM-dd", locale);
+		String currentDateStr = currentDate.substring(2, 4) + currentDate.substring(5, 7);
+		ywbm = ywbm + currentDateStr;
+		List<ProjectProfile> projectProfiles =ProjectProfileLocalServiceUtil.getProjectProfiles(-1, -1);
+		List<Long> nums = new ArrayList<Long>();
+		for (ProjectProfile projectProfile_ : projectProfiles) {
+			if (projectProfile_.getYwbm().substring(4, 8).equals(currentDateStr)) {
+				nums.add(Long.parseLong(projectProfile_.getYwbm().substring(8, 12)));
+			}
+		}
+		Long num = 0L;
+		for (Long num_ : nums) {
+			if (num_ > num) {
+				num = num_;
+			}
+		}
+		num++;
+
+		if (num / 10 < 1) {
+			ywbm = ywbm + "000" + num;
+		} else if (num / 100 < 1) {
+			ywbm = ywbm + "00" + num;
+		} else if (num / 1000 < 1) {
+			ywbm = ywbm + "0" + num;
+		} else if (num / 10000 < 1) {
+			ywbm = ywbm + num;
+		}
+		projectProfile.setYwbm(ywbm);
+		ProjectProfileLocalServiceUtil.updateProjectProfile(projectProfile);
+		//保存状态
+		permit.setSqzt(CityPermitStatus.STATUS_SB.getCode());
+		PermitLocalServiceUtil.updatePermit(permit);
+	}
+
 
 	public void redirect(ActionRequest request, ActionResponse response, Permit permit, int sqbz) throws IOException {
 
