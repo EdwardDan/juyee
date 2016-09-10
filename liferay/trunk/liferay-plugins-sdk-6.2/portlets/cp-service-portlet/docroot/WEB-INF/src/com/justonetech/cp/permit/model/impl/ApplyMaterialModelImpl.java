@@ -70,7 +70,7 @@ public class ApplyMaterialModelImpl extends BaseModelImpl<ApplyMaterial>
 			{ "fhyj", Types.VARCHAR },
 			{ "shyj", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table cp_ApplyMaterial (materialId LONG not null primary key,permitId LONG,xh VARCHAR(75) null,clmc VARCHAR(75) null,yjfs INTEGER,sjfs INTEGER,fileEntryIds VARCHAR(75) null,shyq VARCHAR(75) null,csyj VARCHAR(75) null,fhyj VARCHAR(75) null,shyj VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table cp_ApplyMaterial (materialId LONG not null primary key,permitId LONG,xh VARCHAR(75) null,clmc VARCHAR(75) null,yjfs INTEGER,sjfs INTEGER,fileEntryIds VARCHAR(500) null,shyq VARCHAR(75) null,csyj VARCHAR(75) null,fhyj VARCHAR(75) null,shyj VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table cp_ApplyMaterial";
 	public static final String ORDER_BY_JPQL = " ORDER BY applyMaterial.materialId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY cp_ApplyMaterial.materialId ASC";
