@@ -2,6 +2,8 @@
 <%@page import="com.justonetech.cp.project.service.ProjectLocalServiceUtil"%>
 <%@page import="com.justonetech.cp.project.model.Project"%>
 <%@page import="com.liferay.portal.kernel.util.PropsUtil"%>
+<%@page import="com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil"%>
+<%@page import="com.liferay.portlet.documentlibrary.model.DLFileEntry"%>
 <%
 	String staticServerURL = PropsUtil.get("static.server.url");
 	request.setAttribute("staticServerURL", staticServerURL);
