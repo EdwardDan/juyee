@@ -1,9 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
 <%@ include file="init.jsp"%>
-<%@ page import="javax.portlet.PortletPreferences"%>
-<%@ page import="com.liferay.portlet.PortletPreferencesFactoryUtil"%>
-<%@ page import="com.liferay.portal.theme.PortletDisplay"%>
 
 <style>
 .aui .table th, .aui .table td {
@@ -16,9 +13,73 @@
 }
 </style>
 
-<% Long permitId =ParamUtil.getLong(renderRequest,"permitId");
-	List<ApplyMaterial> materialList=ApplyMaterialLocalServiceUtil.findByPermitId(permitId, -1, -1);
-	PortletPreferences preferences=renderRequest.getPreferences();
+<% 	
+	List<Dictionary> materialDictionaries=new ArrayList<Dictionary>();
+	List<ApplyMaterial> applyMaterialList=new ArrayList<ApplyMaterial>();
+	Long permitId =ParamUtil.getLong(renderRequest,"permitId",0);
+	System.out.println(permitId);
+	if(Validator.isNotNull(permitId)){
+		applyMaterialList= ApplyMaterialLocalServiceUtil.findByPermitId(permitId, -1, -1);
+		System.out.println(Arrays.asList(applyMaterialList));
+		//对材料表进行初始化
+		if(applyMaterialList.size()<=0){
+			System.out.println(123);
+			ProjectProfile projectProfile=ProjectProfileLocalServiceUtil.fetchProjectProfile(permitId);
+			long xmlxId=projectProfile.getXmlx();//项目类型
+			long jsgcsxId=projectProfile.getJsgcsx();//建设工程属性
+			if(Validator.isNotNull(xmlxId)&&Validator.isNotNull(jsgcsxId)){
+				Dictionary xmlxDictionary= DictionaryLocalServiceUtil.getDictionary(xmlxId);
+				Dictionary jsgcsxDictionary= DictionaryLocalServiceUtil.getDictionary(jsgcsxId);
+				String xmlxCode=xmlxDictionary.getCode();
+				String jsgcsxCode=jsgcsxDictionary.getCode();
+				if("XJ".equals(jsgcsxCode)||"KJ".equals(jsgcsxCode)||"GJ".equals(jsgcsxCode)){//新改扩
+					if("GK".equals(xmlxCode)){
+						Dictionary gk_xgk_Dictionary=DictionaryLocalServiceUtil.findByCode("gk_xgk");
+						materialDictionaries=DictionaryLocalServiceUtil.findByParentId(gk_xgk_Dictionary.getDictionaryId(), -1, -1);
+					}
+					if("HD".equals(xmlxCode)){
+						Dictionary hd_xgk_Dictionary=DictionaryLocalServiceUtil.findByCode("hd_xgk");
+						materialDictionaries=DictionaryLocalServiceUtil.findByParentId(hd_xgk_Dictionary.getDictionaryId(), -1, -1);
+					}
+					if("GL".equals(xmlxCode)){
+						Dictionary gl_xgk_Dictionary=DictionaryLocalServiceUtil.findByCode("gl_xgk");
+						materialDictionaries=DictionaryLocalServiceUtil.findByParentId(gl_xgk_Dictionary.getDictionaryId(), -1, -1);
+					}
+					if("SZ".equals(xmlxCode)){
+						Dictionary szjt_xgk_Dictionary=DictionaryLocalServiceUtil.findByCode("szjt_xgk");
+						materialDictionaries=DictionaryLocalServiceUtil.findByParentId(szjt_xgk_Dictionary.getDictionaryId(), -1, -1);
+					}
+	
+					
+				}else{
+					
+					if("GL".equals(xmlxCode)){
+						Dictionary gl_xgk_Dictionary=DictionaryLocalServiceUtil.findByCode("gl_dx");
+						materialDictionaries=DictionaryLocalServiceUtil.findByParentId(gl_xgk_Dictionary.getDictionaryId(), -1, -1);
+					}
+					if("SZ".equals(xmlxCode)){
+						Dictionary szjt_xgk_Dictionary=DictionaryLocalServiceUtil.findByCode("szjt_dx");
+						materialDictionaries=DictionaryLocalServiceUtil.findByParentId(szjt_xgk_Dictionary.getDictionaryId(), -1, -1);
+					}
+				}
+			}
+			
+			for(Dictionary dic: materialDictionaries){
+				 ApplyMaterial applyMaterial=ApplyMaterialLocalServiceUtil.createApplyMaterial(CounterLocalServiceUtil.increment());
+				 applyMaterial.setPermitId(permitId);
+				 applyMaterial.setXh(dic.getTag());
+				 applyMaterial.setClmc(dic.getName());
+				 applyMaterialList.add(applyMaterial);
+				 ApplyMaterialLocalServiceUtil.updateApplyMaterial(applyMaterial);		
+			}
+		}
+	
+	}
+	
+	
+	
+	
+	
 %>
 
 <c:set var="namespace" value="<%=renderResponse.getNamespace()%>"></c:set>
@@ -43,7 +104,7 @@
 			</span>
 		</td>
 	</tr>
-	<c:forEach items="<%=materialList%>" var="material" varStatus="status"> 
+	<c:forEach items="<%=applyMaterialList%>" var="material" varStatus="status"> 
 		<tr style="text-align: center" class="fileTr">
 			<td style="text-align: center" class="fileNo">${material.xh}</td>
 			<td>${material.clmc}</td>
@@ -88,6 +149,7 @@
 	//文件类型和大小的验证
 	function fileValidator(inputFileId){
 		 var fileInput = $("#"+inputFileId)[0];
+		
          if(fileInput){
          	var fileName=fileInput.files[0].name;
          	var fileExtension=fileName.split('.')[1].toUpperCase();
@@ -117,6 +179,7 @@
 	/* 上传 */
 	function <portlet:namespace/>fileUpLoad(divNo,materialId,portletId) {
 		if(fileValidator("fileInput"+divNo)){
+			
 			var fileExtension=$("#fileInput"+divNo)[0].files[0].name.split('.')[1];
 			var no = findFileNo(divNo);
 			var fmFile = document.getElementById("fmFile");
