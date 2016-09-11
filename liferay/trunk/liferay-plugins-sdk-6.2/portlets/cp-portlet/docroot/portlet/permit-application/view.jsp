@@ -88,9 +88,15 @@
 				<liferay-ui:search-container-column-text property="bjbh" name="报建编号" />
 				<liferay-ui:search-container-column-text property="bdh"
 					name="施工许可标段号" />
-				<liferay-ui:search-container-column-text
-					value="<%=projectProfile.getGcmc() %>" name="工程名称"
-					href="${rowURL }" />
+				<c:if test="<%=(applyStatus<=2)%>"> 
+					<liferay-ui:search-container-column-text
+						value="<%=projectProfile.getGcmc() %>" name="工程名称"
+						href="${rowURL }" />
+				</c:if>
+				<c:if test="<%=(applyStatus>2)%>"> 
+					<liferay-ui:search-container-column-text
+						value="<%=projectProfile.getGcmc() %>" name="工程名称" />
+				</c:if>
 				<liferay-ui:search-container-column-text property="sqzt" name="申请状态" />
 				<liferay-ui:search-container-column-text name="操作">
 					<liferay-ui:icon-menu>
