@@ -130,7 +130,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 	}
 
 	public void saveProjectProfile(ActionRequest request, ActionResponse response) throws SystemException, PortalException, ParseException, IOException {
-
+		
 		Long xmlx = ParamUtil.getLong(request, "xmlx");
 		String lxjb = ParamUtil.getString(request, "lxjb");
 		Long xmxz = ParamUtil.getLong(request, "xmxz");
@@ -182,9 +182,9 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		} else {
 			projectProfile = ProjectProfileLocalServiceUtil.createProjectProfile(CounterLocalServiceUtil.increment());
 			permit = PermitLocalServiceUtil.createPermit(projectProfile.getPermitId());
-			permit.setSqbz(1);
 			permit.setSqzt(1);
 		}
+		permit.setSqbz(1);
 		projectProfile.setXmlx(xmlx);
 		projectProfile.setLxjb(lxjb);
 		projectProfile.setXmxz(xmxz);
@@ -218,15 +218,15 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		projectProfile.setYzzpl2(yzzpl2);
 		projectProfile.setYzzpl3(yzzpl3);
 		projectProfile.setYzzpl4(yzzpl4);
-		String ywbm = "JT";
+		ProjectProfileLocalServiceUtil.updateProjectProfile(projectProfile);
+		String ywbh = "JT";
 		Dictionary xmlxDic = DictionaryLocalServiceUtil.getDictionary(xmlx);
-		ywbm = ywbm + xmlxDic.getCode();
+		ywbh = ywbh + xmlxDic.getCode();
 		Locale locale = LocaleUtil.getDefault();
 		String currentDate = DateUtil.getCurrentDate("yyyy-MM-dd", locale);
 		String currentDateStr = currentDate.substring(2, 4) + currentDate.substring(5, 7);
-		ywbm = ywbm + currentDateStr+"0000";
-		projectProfile.setYwbm(ywbm);
-		ProjectProfileLocalServiceUtil.updateProjectProfile(projectProfile);
+		ywbh = ywbh + currentDateStr+"0000";
+		permit.setYwbh(ywbh);		
 		permit.setBjbh(bjbh);
 		permit.setBdh(bdh);
 		PermitLocalServiceUtil.updatePermit(permit);
@@ -309,7 +309,6 @@ public class PermitApplicationPortlet extends MVCPortlet {
 	}
 
 	public void saveApplyMaterials(ActionRequest request, ActionResponse response) throws SystemException, PortalException, ParseException, IOException {
-		System.out.println(456);
 		long permitId = ParamUtil.getLong(request, "permitId");
 		Permit permit = PermitLocalServiceUtil.getPermit(permitId);
 		if (permit.getSqbz() == 3) {
@@ -321,21 +320,21 @@ public class PermitApplicationPortlet extends MVCPortlet {
 	
 	public void submitAll(ActionRequest request,ActionResponse response) throws PortalException, SystemException{
 		long permitId=ParamUtil.getLong(request, "permitId");
-		String ywbm = "JT";
+		String ywbh = "JT";
 		Permit permit = PermitLocalServiceUtil.getPermit(permitId);
 
 		ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
 		Dictionary xmlx = DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx());
-		ywbm = ywbm + xmlx.getCode();
+		ywbh = ywbh + xmlx.getCode();
 		Locale locale = LocaleUtil.getDefault();
 		String currentDate = DateUtil.getCurrentDate("yyyy-MM-dd", locale);
 		String currentDateStr = currentDate.substring(2, 4) + currentDate.substring(5, 7);
-		ywbm = ywbm + currentDateStr;
-		List<ProjectProfile> projectProfiles =ProjectProfileLocalServiceUtil.getProjectProfiles(-1, -1);
+		ywbh = ywbh + currentDateStr;
+		List<Permit> permits =PermitLocalServiceUtil.getPermits(-1, -1);
 		List<Long> nums = new ArrayList<Long>();
-		for (ProjectProfile projectProfile_ : projectProfiles) {
-			if (projectProfile_.getYwbm().substring(4, 8).equals(currentDateStr)) {
-				nums.add(Long.parseLong(projectProfile_.getYwbm().substring(8, 12)));
+		for (Permit permit_ : permits) {
+			if(Validator.isNotNull(permit_.getYwbh())&&permit_.getYwbh().substring(4, 8).equals(currentDateStr)){
+				nums.add(Long.parseLong(permit_.getYwbh().substring(8, 12)));
 			}
 		}
 		Long num = 0L;
@@ -347,18 +346,18 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		num++;
 
 		if (num / 10 < 1) {
-			ywbm = ywbm + "000" + num;
+			ywbh = ywbh + "000" + num;
 		} else if (num / 100 < 1) {
-			ywbm = ywbm + "00" + num;
+			ywbh = ywbh + "00" + num;
 		} else if (num / 1000 < 1) {
-			ywbm = ywbm + "0" + num;
+			ywbh = ywbh + "0" + num;
 		} else if (num / 10000 < 1) {
-			ywbm = ywbm + num;
+			ywbh = ywbh + num;
 		}
-		projectProfile.setYwbm(ywbm);
-		ProjectProfileLocalServiceUtil.updateProjectProfile(projectProfile);
+		permit.setYwbh(ywbh);
 		//保存状态
 		permit.setSqzt(CityPermitStatus.STATUS_SB.getCode());
+		permit.setSqbz(0);
 		PermitLocalServiceUtil.updatePermit(permit);
 	}
 
@@ -458,12 +457,13 @@ public class PermitApplicationPortlet extends MVCPortlet {
 					//如果已有数据
 					else{
 						fileEntryIds=fileEntryIds+","+fileEntry.getFileEntryId()+"|"+fileEntry.getExtension();
+						fileJson.put("fileId", fileEntry.getFileEntryId());
 					}
 					applyMaterial.setFileEntryIds(fileEntryIds);
 					ApplyMaterialLocalServiceUtil.updateApplyMaterial(applyMaterial);
 					fileJson.put("materialName", applyMaterial.getClmc());
 				}
-				fileJson.put("fileId", fileEntry.getFileEntryId());
+				
 				HttpServletResponse response = PortalUtil
 							.getHttpServletResponse(resourceResponse);
 				response.setContentType("text/html;charset=UTF-8");
@@ -497,15 +497,16 @@ public class PermitApplicationPortlet extends MVCPortlet {
 					DLFileEntryLocalServiceUtil.deleteDLFileEntry(Long.valueOf(fileId));
 				}
 			}
+			
 		} catch (PortalException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SystemException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}/* catch (IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
-		}*/
+		}
 		super.serveResource(resourceRequest, resourceResponse);
 	}
 	
