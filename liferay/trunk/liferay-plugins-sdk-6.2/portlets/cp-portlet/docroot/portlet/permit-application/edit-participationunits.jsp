@@ -130,10 +130,10 @@ if(null!=dictionaryCertificateType){
 	</div>
 
 	<aui:button-row>
-		<span style="position: relative; left: 45%"> <aui:button
-				type="submit" value="保存" onClick="return submitSave()" /> <aui:button
-				type="cancel" value="取消" href="${viewURL}" />
-		</span>
+		<div style="text-align: center">
+				 <aui:button type="submit" value="保存" onClick="return submitSave()" /> 
+				 <aui:button type="cancel" value="返回" href="${viewURL}" />
+		</div>
 	</aui:button-row>
 
 </aui:form>

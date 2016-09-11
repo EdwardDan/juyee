@@ -8,11 +8,16 @@
 	ProjectProfile projectProfile = null;
 	Project project = null;
 	Permit permit=null;
+	String ywbh="";
 	if (permitId != 0) {
 		projectProfile = ProjectProfileLocalServiceUtil
 				.getProjectProfile(permitId);
 		request.setAttribute("projectProfile", projectProfile);
 		permit = PermitLocalServiceUtil.getPermit(permitId);
+		ywbh=permit.getYwbh();
+		if(Validator.isNotNull(ywbh)&&ywbh.substring(8).equals("0000")){
+			ywbh="";	
+		}
 		request.setAttribute("bjbh",permit.getBjbh());
 		String startDate = "";
 		String endDate = "";
@@ -24,6 +29,7 @@
 			request.setAttribute("jhjg", endDate);
 			
 		}
+		
 	} else {
 		if (Validator.isNotNull(bjbh)) {
 			project = ProjectLocalServiceUtil.getProject(bjbh);
@@ -96,20 +102,12 @@
 					style="width:50%" value="${project.szqx}" readonly="true"></aui:input></td>
 		</tr>
 		<tr class="body">
-			<td class="text-right">业务编码</td>
+			<td class="text-right">业务编号</td>
 			<td class="bg-white" colspan="3">
-			<c:choose>
-			<c:when test="${ywbm}">
-			<aui:input name="ywbm" label="" type="text"
-					style="width:50%" value="" readonly="true">
+				<aui:input name="ywbh" label="" type="text"
+					style="width:50%" value="<%=ywbh%>" readonly="true">
 				</aui:input>
-				</c:when>
-				<c:otherwise><aui:input name="ywbmqta" label="" type="text"
-					style="width:50%" value="" readonly="true">
-				</aui:input>
-				</c:otherwise>
-				</c:choose>
-				</td>
+			</td>
 		</tr>
 		<tr class="body">
 			<td class="text-right">建设单位名称</td>
@@ -360,11 +358,11 @@
 		<tr class="body">
 			<td  class="bg-white" colspan="4">注:信息保存后，请进入参见单位和项目负责人信息页面，填写参建单位和项目负责人信息</td>
 		</tr>
-		<tr class="body">
-			<td  class="bg-white text-center" colspan="4"><aui:button type="submit"  onClick="return checkInputMobilesNormal();"/> <aui:button
-					value="返回" href="${viewURL}" /></td>
-		</tr>
 	</table>
+	<div style="text-align: center">
+	<aui:button type="submit"  onClick="return checkInputMobilesNormal();"/> <aui:button
+					value="返回" href="${viewURL}" />
+	</div>
 
 </aui:form>
 

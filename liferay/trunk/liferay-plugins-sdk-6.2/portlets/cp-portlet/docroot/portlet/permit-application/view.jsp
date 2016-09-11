@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
+
 <c:set var="contextPath"
 	value="${request.contextPath}/portlet/permit-application" />
 <portlet:renderURL var="searchURL">
@@ -49,17 +50,6 @@
 			<liferay-ui:search-container-row
 				className="com.justonetech.cp.permit.model.Permit"
 				keyProperty="permitId" modelVar="permit">
-				<liferay-portlet:renderURL varImpl="rowURL">
-					<portlet:param name="bjbh" value="${permit.bjbh}" />
-					<portlet:param name="sqbz" value="${permit.sqbz}" />
-					<portlet:param name="permitId" value="${permit.permitId}" />
-					<portlet:param name="bdh" value="${permit.bdh }" />
-					<%-- <portlet:param name="gcmc" value="${permit.gcmc }"/> --%>
-					<portlet:param name="mvcPath"
-						value="${contextPath }/edit-permit.jsp" />
-				</liferay-portlet:renderURL>
-				<liferay-ui:search-container-column-text
-					value="<%=String.valueOf(++rowNo)%>" />
 				<%
 					ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permit.getPermitId());
 					Dictionary xmlx=null;
@@ -71,7 +61,28 @@
 						}catch(Exception e){
 						}
 						}
+					int applyStatus=permit.getSqzt();
 				%>
+				
+					<liferay-portlet:renderURL varImpl="rowURL">
+						<portlet:param name="bjbh" value="${permit.bjbh}" />
+						<portlet:param name="sqbz" value="${permit.sqbz}" />
+						<portlet:param name="permitId" value="${permit.permitId}" />
+						<portlet:param name="bdh" value="${permit.bdh }" />
+						<%-- <portlet:param name="gcmc" value="${permit.gcmc }"/> --%>
+						<portlet:param name="mvcPath"
+							value="${contextPath }/edit-permit.jsp" />
+					</liferay-portlet:renderURL>
+				
+				
+					<portlet:renderURL var="viewPermitURL">
+							<portlet:param name="mvcPath" value="${contextPath}/view-permit.jsp"/>
+							<portlet:param name="permitId" value="${permit.permitId}"/>
+					</portlet:renderURL>
+				
+				<liferay-ui:search-container-column-text
+					value="<%=String.valueOf(++rowNo)%>" />
+				
 				<liferay-ui:search-container-column-text name="项目类型"
 					value="<%=xmlxName %>" />
 				<liferay-ui:search-container-column-text property="bjbh" name="报建编号" />
@@ -83,9 +94,15 @@
 				<liferay-ui:search-container-column-text property="sqzt" name="申请状态" />
 				<liferay-ui:search-container-column-text name="操作">
 					<liferay-ui:icon-menu>
-						<liferay-ui:icon image="edit" url="${rowURL}" />
-						<liferay-ui:icon image="delete" label="删除" url="javascript:void(0);" onClick='<%=renderResponse.getNamespace() + "deletePermits("+permit.getPermitId()+");"%>' />
+						<c:if test="<%=(applyStatus>2)%>">
+							<liferay-ui:icon image="view" url="${viewPermitURL}" />
+						</c:if>  
+						<c:if test="<%=(applyStatus<=2)%>"> 
+							<liferay-ui:icon image="edit" url="${rowURL}" />
+							<liferay-ui:icon image="delete" label="删除" url="javascript:void(0);" onClick='<%=renderResponse.getNamespace() + "deletePermits("+permit.getPermitId()+");"%>' />
+						</c:if> 
 					</liferay-ui:icon-menu>
+					
 				</liferay-ui:search-container-column-text>
 			</liferay-ui:search-container-row>
 			<liferay-ui:search-iterator>

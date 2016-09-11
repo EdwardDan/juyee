@@ -80,7 +80,7 @@
 	
 	
 %>
-
+<portlet:renderURL var="viewURL"/>
 <c:set var="namespace" value="<%=renderResponse.getNamespace()%>"></c:set>
 <portlet:resourceURL var="fileUpLoadURL" id="fileUpLoad" />
 <portlet:resourceURL var="fileDeleteURL" id="fileDelete" />
@@ -140,8 +140,8 @@
 </table>
 
 <div style="text-align: center">
-	<aui:button  value="保存"  onclick="saveMaterials()"/>
-	<aui:button  value="上报"  onclick="submitAll()"/>
+	<aui:button  value="保存"  onclick="saveMaterials()" cssClass="btn btn-primary"/>
+	<aui:button  value="上报"  onclick="submitAll()" cssClass="btn btn-primary"/>
 </div>
 
 

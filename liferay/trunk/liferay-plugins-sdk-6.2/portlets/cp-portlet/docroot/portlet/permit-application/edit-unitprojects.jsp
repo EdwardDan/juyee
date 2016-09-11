@@ -76,8 +76,10 @@ aui:input {
 		<div>注释：单位工程名称请参考规划许可证内容填写</div>
 	</div>
 	<aui:button-row>
-		<span style="position: relative; left: 45%"> <aui:button type="submit" value="保存" /> <aui:button type="cancel" value="取消" href="#" />
-		</span>
+		<div style="text-align: center">
+		<aui:button type="submit" value="保存" /> 
+		<aui:button type="cancel" value="返回" href="${viewURL}" />
+		</div>
 	</aui:button-row>
 
 
