@@ -43,7 +43,7 @@ aui:input {
 		</aui:row>
 	</div>
 	<div class="accordion-inner">
-		<table border="1" width="100%" class="table table-bordered table-hover">
+		<table width="100%" class="table table-bordered table-hover">
 			<tr height="29px">
 				<td style="width: 2%; text-align: center"></td>
 				<td style="width: 10%; text-align: center">单位工程编号</td>

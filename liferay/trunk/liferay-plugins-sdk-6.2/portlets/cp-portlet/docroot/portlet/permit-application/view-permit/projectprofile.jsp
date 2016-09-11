@@ -7,16 +7,12 @@
 tr.body td.title {
 	width: 20%;
 	text-align: right;
-	border-left: 1px solid #ddd;
-	border-right: 1px solid #ddd;
 }
 
 tr.body td.content {
 	width: 30%;
 	background-color: white;
 	text-align: left;
-	border-right: 1px solid #ddd;
-	border-left: 1px solid #ddd;
 }
 </style>
 <%
@@ -33,7 +29,7 @@ tr.body td.content {
 	request.setAttribute("jsddssqx", jsddssqx);
 	request.setAttribute("jsgclbs", jsgclbs);
 %>
-<table class="table table-border">
+<table class="table table-bordered">
 	<tr class="body">
 		<td class="title">项目类型</td>
 		<td class="content"><%=DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx()).getName()%></td>
