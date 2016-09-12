@@ -2,12 +2,17 @@
 <%@ include file="/common/init.jsp"%>
 <%@ include file="../init.jsp"%>
 <%
-	List<ApplyMaterial> applyMaterials = ApplyMaterialLocalServiceUtil.getApplyMaterials(-1, -1);
-	request.setAttribute("applyMaterials", applyMaterials);
+	long permitId = ParamUtil.getLong(request, "permitId");
+request.setAttribute("permitId", permitId);
+List<ApplyMaterial> applyMaterials = ApplyMaterialLocalServiceUtil.findByPermitId(permitId, -1, -1);
+request.setAttribute("applyMaterials", applyMaterials);
 	int num = 1;
 %>
 
-<aui:form>
+<portlet:actionURL var="saveShURL" name="saveSh">
+	<portlet:param name="permitId" value="${permitId}" />
+</portlet:actionURL>
+<aui:form action="${saveShURL}" method="post">
 	<table style="width: 98%" class="table table-striped table-bordered table-hover">
 		<thead>
 			<tr>
@@ -26,17 +31,21 @@
 						<td class="text-center"><%=String.valueOf(num)%></td>
 						<td class="text-left">${applyMaterial.clmc}</td>
 						<td class="text-left">${applyMaterial.shyq}</td>
-						<td><aui:select name="csyj" label="" cssClass="span11">
-								<aui:option>符合</aui:option>
-								<aui:option>不符合</aui:option>
-							</aui:select></td>
-						<td><aui:select name="fhyj" label="" cssClass="span11">
-								<aui:option>符合</aui:option>
-								<aui:option>不符合</aui:option>
-							</aui:select></td>
+						<td>${applyMaterial.csyj}</td>
+						<td>${applyMaterial.fhyj}</td>
 						<td><aui:select name="shyj" label="" cssClass="span11">
-								<aui:option>符合</aui:option>
-								<aui:option>不符合</aui:option>
+								<c:if test="${applyMaterial.shyj==''}">
+									<aui:option value="符合">符合</aui:option>
+									<aui:option value="不符合">不符合</aui:option>
+								</c:if>
+								<c:if test="${applyMaterial.shyj=='符合'}">
+									<aui:option value="符合">符合</aui:option>
+									<aui:option value="不符合">不符合</aui:option>
+								</c:if>
+								<c:if test="${applyMaterial.shyj=='不符合'}">
+									<aui:option value="符合">符合</aui:option>
+									<aui:option value="不符合" selected="true">不符合</aui:option>
+								</c:if>
 							</aui:select></td>
 					</tr>
 					<%
@@ -48,12 +57,15 @@
 
 	</table>
 
-	<div class="text-center">
+	<!-- <div class="text-center">
 		审核意见：
 		<textarea rows="3" name="shyj" style="width: 70%; margin-bottom: 15px; margin-top: 15px"></textarea>
-	</div>
+	</div> -->
 	<div class="text-center">
 		<div class="btn-group">
+			<aui:button name="pass" type="submit" value="保存" cssClass="btn btn-primary" />
+		</div>
+		<%-- <div class="btn-group">
 			<aui:button name="pass" value="审核通过" cssClass="btn btn-primary" />
 		</div>
 		<div class="btn-group">
@@ -64,7 +76,7 @@
 		</div>
 		<div class="btn-group">
 			<aui:button name="close" value="内部退回" cssClass="btn btn-danger" />
-		</div>
+		</div> --%>
 		<div class="btn-group">
 			<aui:button name="close" value="关闭" cssClass="btn" href="${viewURL}" />
 		</div>

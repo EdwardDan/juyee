@@ -2,12 +2,17 @@
 <%@ include file="/common/init.jsp"%>
 <%@ include file="../init.jsp"%>
 <%
-	List<ApplyMaterial> applyMaterials = ApplyMaterialLocalServiceUtil.getApplyMaterials(-1, -1);
+	long permitId = ParamUtil.getLong(request, "permitId");
+	request.setAttribute("permitId", permitId);
+	List<ApplyMaterial> applyMaterials = ApplyMaterialLocalServiceUtil.findByPermitId(permitId, -1, -1);
 	request.setAttribute("applyMaterials", applyMaterials);
 	int num = 1;
 %>
 
-<aui:form>
+<portlet:actionURL var="saveShURL" name="saveSh">
+	<portlet:param name="permitId" value="${permitId}" />
+</portlet:actionURL>
+<aui:form action="${saveShURL}" method="post">
 	<div class="text-center">
 		<table style="width: 98%" border="1">
 			<tr>
@@ -25,17 +30,22 @@
 							<td><%=String.valueOf(num)%></td>
 							<td>${applyMaterial.clmc}</td>
 							<td>${applyMaterial.shyq}</td>
-							<td><aui:select name="csyj" label="" cssClass="span11">
-									<aui:option>符合</aui:option>
-									<aui:option>不符合</aui:option>
-								</aui:select></td>
-							<td><aui:select name="fhyj" label="" cssClass="span11">
-									<aui:option>符合</aui:option>
-									<aui:option>不符合</aui:option>
-								</aui:select></td>
-							<td><aui:select name="shyj" label="" cssClass="span11">
-									<aui:option>符合</aui:option>
-									<aui:option>不符合</aui:option>
+							<td>${applyMaterial.csyj}</td>
+							<td>${applyMaterial.fhyj}</td>
+							<td>
+								<aui:select name="shyj" label="" cssClass="span11">
+									<c:if test="${applyMaterial.shyj==''}">
+										<aui:option value="符合">符合</aui:option>
+										<aui:option value="不符合">不符合</aui:option>
+									</c:if>
+									<c:if test="${applyMaterial.shyj=='符合'}">
+										<aui:option value="符合">符合</aui:option>
+										<aui:option value="不符合">不符合</aui:option>
+									</c:if>
+									<c:if test="${applyMaterial.shyj=='不符合'}">
+										<aui:option value="符合">符合</aui:option>
+										<aui:option value="不符合" selected="true">不符合</aui:option>
+									</c:if>
 								</aui:select></td>
 						</tr>
 						<%
@@ -47,23 +57,27 @@
 
 		</table>
 
-		<div>
+		<!-- <div>
 			审核意见：
 			<textarea rows="3" name="shyj" style="width: 70%; margin-bottom: 15px; margin-top: 15px"></textarea>
-		</div>
+		</div> -->
+		<br>
 		<div>
 			<div class="btn-group">
+				<aui:button name="pass" type="submit" value="保存" cssClass="btn btn-primary" />
+			</div>
+			<%-- <div class="btn-group">
 				<aui:button name="pass" value="审核通过" cssClass="btn" />
 			</div>
 			<div class="btn-group">
-				<aui:button name="close" value="审核退回" cssClass="btn" onClick="shth()"/>
+				<aui:button name="close" value="审核退回" cssClass="btn" onClick="shth()" />
 			</div>
 			<div class="btn-group">
 				<aui:button name="close" value="补正退回" cssClass="btn" />
 			</div>
 			<div class="btn-group">
 				<aui:button name="close" value="内部退回" cssClass="btn" />
-			</div>
+			</div> --%>
 			<div class="btn-group">
 				<aui:button name="close" value="关闭" cssClass="btn" href="${viewURL}" />
 			</div>
@@ -71,51 +85,44 @@
 	</div>
 </aui:form>
 <portlet:renderURL var="shthUrl" windowState="pop_up">
-<portlet:param name="mvcPath" value="${contextPath }/approval-current-city/sh-shth.jsp"/>
+	<portlet:param name="mvcPath" value="${contextPath }/approval-current-city/sh-shth.jsp" />
 </portlet:renderURL>
 <aui:script>
-function shth(){
-	AUI().use('aui-modal','aui-dialog-iframe-deprecated','io-plugin-deprecated'
-	,function(A) {
-	var url = '${shthUrl}';
-	    var modal = new A.Modal(
-	      {
-	        bodyContent: '正文件',
-	        centered: true,
-	        headerContent: '<h3>退回选择页面</h3>',
-	        modal: false,
-	        destroyOnHide: true,
-	        render: '#modal',
-	        width: 750,
-	        height:600,
-	        toolbars:{
-	        footer:[
-	              {
-	                 label: '取消',
-	                 on: {
-	                   click: function() {
-	                     modal.hide();
-	                   }
-	                 }
-	               },
-	               {
-	                 label: '确定',
-	                 on: {
-	                   click: function() {
-	                     alert('点击了确定，可以在这里调用其他函数');
-	                   }
-	                 },
-	                primary: true
-	               }         ]
-	        }
-	      }
-	    ).plug(
-	       A.Plugin.DialogIframe,
-	        {
-	        uri: url,
-	        }
-	       )
-	.render();
-	});
+	function shth() {
+		AUI().use('aui-modal', 'aui-dialog-iframe-deprecated', 'io-plugin-deprecated', function(A) {
+			var url = '${shthUrl}';
+			var modal = new A.Modal({
+				bodyContent : '正文件',
+				centered : true,
+				headerContent : '<h3>退回选择页面</h3>',
+				modal : false,
+				destroyOnHide : true,
+				render : '#modal',
+				width : 750,
+				height : 600,
+				toolbars : {
+					footer : [ {
+						label : '取消',
+						on : {
+							click : function() {
+								modal.hide();
+							}
+						}
+					}, {
+						label : '确定',
+						on : {
+							click : function() {
+								alert('点击了确定，可以在这里调用其他函数');
+							}
+						},
+						primary : true
+					} ]
+				}
+			}).plug(A.Plugin.DialogIframe, {
+				uri : url,
+			}).render();
+		});
 	}
+
+	
 </aui:script>
