@@ -172,7 +172,7 @@
 		 var fileInput = $("#"+inputFileId)[0];
          if(fileInput){
          	var fileName=fileInput.files[0].name;
-         	var fileExtension=fileName.split('.')[1].toUpperCase();
+         	var fileExtension=fileName.split('.').pop().toUpperCase();
 	        var fileSize  =Math.ceil(fileInput.files[0].size / (1024*1024)) ;//M为单位
 	        if(fileExtension!="JPG"&&fileExtension!="PDF"){
 	        	alert("文件上传仅限于jpg或者pdf格式！");
@@ -199,7 +199,7 @@
 	/* 上传 */
 	function <portlet:namespace/>fileUpLoad(divNo,materialId,portletId) {
 		if(fileValidator("fileInput"+divNo)){
-			var fileExtension=$("#fileInput"+divNo)[0].files[0].name.split('.')[1];
+			var fileExtension=$("#fileInput"+divNo)[0].files[0].name.split('.').pop();
 			var no = findFileNo(divNo);
 			var fmFile = document.getElementById("fmFile");
 			var oMyForm = new FormData(fmFile);
