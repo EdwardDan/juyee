@@ -35,4 +35,8 @@
 <%@ page import="com.justonetech.sys.model.Dictionary"%>
 <%@page import="com.justonetech.cp.util.CityPermitStatus"%>
 <%@page import="com.justonetech.cp.util.CountyPermitStatus"%>
+<%@page import="com.justonetech.cp.complete.model.Complete"%>
+<%@page import="com.justonetech.cp.complete.service.CompleteLocalServiceUtil"%>
+<%@page import="com.justonetech.cp.complete.model.CompleteProjectProfile"%>
+<%@page import="com.justonetech.cp.complete.service.CompleteProjectProfileLocalServiceUtil"%>
 

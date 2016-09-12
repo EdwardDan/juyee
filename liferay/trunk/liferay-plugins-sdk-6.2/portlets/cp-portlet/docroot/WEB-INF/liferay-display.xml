@@ -8,5 +8,7 @@
 		<portlet id="contract-search"></portlet>
 		<portlet id="permit-application"></portlet>
 		<portlet id="permit-approval"></portlet>
+		<portlet id="complete-application"></portlet>
+		<portlet id="complete-approval"></portlet>
 	</category>
 </display>
