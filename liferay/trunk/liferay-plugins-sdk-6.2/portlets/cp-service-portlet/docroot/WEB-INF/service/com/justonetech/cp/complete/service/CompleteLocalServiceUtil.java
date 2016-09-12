@@ -275,6 +275,23 @@ public class CompleteLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static java.util.List<com.justonetech.cp.complete.model.Complete> getCompletes(
+		java.lang.String zzjgdm, java.lang.String bjbh,
+		java.lang.String wssqbh, java.lang.String gcmc, int start, int end) {
+		return getService().getCompletes(zzjgdm, bjbh, wssqbh, gcmc, start, end);
+	}
+
+	public static int getCompletesCount(java.lang.String zzjgdm,
+		java.lang.String bjbh, java.lang.String wssqbh, java.lang.String gcmc) {
+		return getService().getCompletesCount(zzjgdm, bjbh, wssqbh, gcmc);
+	}
+
+	public static com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQuery(
+		java.lang.String zzjgdm, java.lang.String bjbh,
+		java.lang.String wssqbh, java.lang.String gcmc) {
+		return getService().createDynamicQuery(zzjgdm, bjbh, wssqbh, gcmc);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

@@ -262,6 +262,35 @@ public interface CompleteModel extends BaseModel<Complete>, GroupedModel {
 	 */
 	public void setBabh(String babh);
 
+	/**
+	 * Returns the wssqbh of this complete.
+	 *
+	 * @return the wssqbh of this complete
+	 */
+	@AutoEscape
+	public String getWssqbh();
+
+	/**
+	 * Sets the wssqbh of this complete.
+	 *
+	 * @param wssqbh the wssqbh of this complete
+	 */
+	public void setWssqbh(String wssqbh);
+
+	/**
+	 * Returns the sbrq of this complete.
+	 *
+	 * @return the sbrq of this complete
+	 */
+	public Date getSbrq();
+
+	/**
+	 * Sets the sbrq of this complete.
+	 *
+	 * @param sbrq the sbrq of this complete
+	 */
+	public void setSbrq(Date sbrq);
+
 	@Override
 	public boolean isNew();
 

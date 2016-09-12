@@ -24,7 +24,9 @@ create table cp_Complete (
 	bjbh VARCHAR(75) null,
 	sqbz INTEGER,
 	sqzt INTEGER,
-	babh VARCHAR(75) null
+	babh VARCHAR(75) null,
+	wssqbh VARCHAR(75) null,
+	sbrq DATE null
 );
 
 create table cp_CompleteApplyMaterial (

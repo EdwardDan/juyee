@@ -61,6 +61,8 @@ public class CompleteWrapper implements Complete, ModelWrapper<Complete> {
 		attributes.put("sqbz", getSqbz());
 		attributes.put("sqzt", getSqzt());
 		attributes.put("babh", getBabh());
+		attributes.put("wssqbh", getWssqbh());
+		attributes.put("sbrq", getSbrq());
 
 		return attributes;
 	}
@@ -137,6 +139,18 @@ public class CompleteWrapper implements Complete, ModelWrapper<Complete> {
 
 		if (babh != null) {
 			setBabh(babh);
+		}
+
+		String wssqbh = (String)attributes.get("wssqbh");
+
+		if (wssqbh != null) {
+			setWssqbh(wssqbh);
+		}
+
+		Date sbrq = (Date)attributes.get("sbrq");
+
+		if (sbrq != null) {
+			setSbrq(sbrq);
 		}
 	}
 
@@ -420,6 +434,46 @@ public class CompleteWrapper implements Complete, ModelWrapper<Complete> {
 	@Override
 	public void setBabh(java.lang.String babh) {
 		_complete.setBabh(babh);
+	}
+
+	/**
+	* Returns the wssqbh of this complete.
+	*
+	* @return the wssqbh of this complete
+	*/
+	@Override
+	public java.lang.String getWssqbh() {
+		return _complete.getWssqbh();
+	}
+
+	/**
+	* Sets the wssqbh of this complete.
+	*
+	* @param wssqbh the wssqbh of this complete
+	*/
+	@Override
+	public void setWssqbh(java.lang.String wssqbh) {
+		_complete.setWssqbh(wssqbh);
+	}
+
+	/**
+	* Returns the sbrq of this complete.
+	*
+	* @return the sbrq of this complete
+	*/
+	@Override
+	public java.util.Date getSbrq() {
+		return _complete.getSbrq();
+	}
+
+	/**
+	* Sets the sbrq of this complete.
+	*
+	* @param sbrq the sbrq of this complete
+	*/
+	@Override
+	public void setSbrq(java.util.Date sbrq) {
+		_complete.setSbrq(sbrq);
 	}
 
 	@Override

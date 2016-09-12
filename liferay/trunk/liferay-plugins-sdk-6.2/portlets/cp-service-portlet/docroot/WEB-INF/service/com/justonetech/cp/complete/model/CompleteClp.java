@@ -86,6 +86,8 @@ public class CompleteClp extends BaseModelImpl<Complete> implements Complete {
 		attributes.put("sqbz", getSqbz());
 		attributes.put("sqzt", getSqzt());
 		attributes.put("babh", getBabh());
+		attributes.put("wssqbh", getWssqbh());
+		attributes.put("sbrq", getSbrq());
 
 		return attributes;
 	}
@@ -162,6 +164,18 @@ public class CompleteClp extends BaseModelImpl<Complete> implements Complete {
 
 		if (babh != null) {
 			setBabh(babh);
+		}
+
+		String wssqbh = (String)attributes.get("wssqbh");
+
+		if (wssqbh != null) {
+			setWssqbh(wssqbh);
+		}
+
+		Date sbrq = (Date)attributes.get("sbrq");
+
+		if (sbrq != null) {
+			setSbrq(sbrq);
 		}
 	}
 
@@ -451,6 +465,52 @@ public class CompleteClp extends BaseModelImpl<Complete> implements Complete {
 		}
 	}
 
+	@Override
+	public String getWssqbh() {
+		return _wssqbh;
+	}
+
+	@Override
+	public void setWssqbh(String wssqbh) {
+		_wssqbh = wssqbh;
+
+		if (_completeRemoteModel != null) {
+			try {
+				Class<?> clazz = _completeRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setWssqbh", String.class);
+
+				method.invoke(_completeRemoteModel, wssqbh);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public Date getSbrq() {
+		return _sbrq;
+	}
+
+	@Override
+	public void setSbrq(Date sbrq) {
+		_sbrq = sbrq;
+
+		if (_completeRemoteModel != null) {
+			try {
+				Class<?> clazz = _completeRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setSbrq", Date.class);
+
+				method.invoke(_completeRemoteModel, sbrq);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
 	public BaseModel<?> getCompleteRemoteModel() {
 		return _completeRemoteModel;
 	}
@@ -532,6 +592,8 @@ public class CompleteClp extends BaseModelImpl<Complete> implements Complete {
 		clone.setSqbz(getSqbz());
 		clone.setSqzt(getSqzt());
 		clone.setBabh(getBabh());
+		clone.setWssqbh(getWssqbh());
+		clone.setSbrq(getSbrq());
 
 		return clone;
 	}
@@ -584,7 +646,7 @@ public class CompleteClp extends BaseModelImpl<Complete> implements Complete {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(29);
 
 		sb.append("{completeId=");
 		sb.append(getCompleteId());
@@ -610,6 +672,10 @@ public class CompleteClp extends BaseModelImpl<Complete> implements Complete {
 		sb.append(getSqzt());
 		sb.append(", babh=");
 		sb.append(getBabh());
+		sb.append(", wssqbh=");
+		sb.append(getWssqbh());
+		sb.append(", sbrq=");
+		sb.append(getSbrq());
 		sb.append("}");
 
 		return sb.toString();
@@ -617,7 +683,7 @@ public class CompleteClp extends BaseModelImpl<Complete> implements Complete {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(40);
+		StringBundler sb = new StringBundler(46);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.cp.complete.model.Complete");
@@ -671,6 +737,14 @@ public class CompleteClp extends BaseModelImpl<Complete> implements Complete {
 			"<column><column-name>babh</column-name><column-value><![CDATA[");
 		sb.append(getBabh());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>wssqbh</column-name><column-value><![CDATA[");
+		sb.append(getWssqbh());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>sbrq</column-name><column-value><![CDATA[");
+		sb.append(getSbrq());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -690,6 +764,8 @@ public class CompleteClp extends BaseModelImpl<Complete> implements Complete {
 	private int _sqbz;
 	private int _sqzt;
 	private String _babh;
+	private String _wssqbh;
+	private Date _sbrq;
 	private BaseModel<?> _completeRemoteModel;
 	private Class<?> _clpSerializerClass = com.justonetech.cp.complete.service.ClpSerializer.class;
 }

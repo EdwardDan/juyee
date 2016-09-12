@@ -286,6 +286,29 @@ public class CompleteLocalServiceWrapper implements CompleteLocalService,
 			arguments);
 	}
 
+	@Override
+	public java.util.List<com.justonetech.cp.complete.model.Complete> getCompletes(
+		java.lang.String zzjgdm, java.lang.String bjbh,
+		java.lang.String wssqbh, java.lang.String gcmc, int start, int end) {
+		return _completeLocalService.getCompletes(zzjgdm, bjbh, wssqbh, gcmc,
+			start, end);
+	}
+
+	@Override
+	public int getCompletesCount(java.lang.String zzjgdm,
+		java.lang.String bjbh, java.lang.String wssqbh, java.lang.String gcmc) {
+		return _completeLocalService.getCompletesCount(zzjgdm, bjbh, wssqbh,
+			gcmc);
+	}
+
+	@Override
+	public com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQuery(
+		java.lang.String zzjgdm, java.lang.String bjbh,
+		java.lang.String wssqbh, java.lang.String gcmc) {
+		return _completeLocalService.createDynamicQuery(zzjgdm, bjbh, wssqbh,
+			gcmc);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

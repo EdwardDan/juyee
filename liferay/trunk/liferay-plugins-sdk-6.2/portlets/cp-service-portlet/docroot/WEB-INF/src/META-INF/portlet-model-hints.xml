@@ -390,6 +390,8 @@
 		<field name="sqbz" type="int" />
 		<field name="sqzt" type="int" />
 		<field name="babh" type="String" />
+		<field name="wssqbh" type="String" />
+		<field name="sbrq" type="Date" />
 	</model>
 	<model name="com.justonetech.cp.complete.model.CompleteApplyMaterial">
 		<field name="materialId" type="long" />

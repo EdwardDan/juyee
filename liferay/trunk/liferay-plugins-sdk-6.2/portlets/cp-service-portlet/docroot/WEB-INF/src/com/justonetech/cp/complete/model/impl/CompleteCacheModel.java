@@ -37,7 +37,7 @@ import java.util.Date;
 public class CompleteCacheModel implements CacheModel<Complete>, Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(29);
 
 		sb.append("{completeId=");
 		sb.append(completeId);
@@ -63,6 +63,10 @@ public class CompleteCacheModel implements CacheModel<Complete>, Externalizable 
 		sb.append(sqzt);
 		sb.append(", babh=");
 		sb.append(babh);
+		sb.append(", wssqbh=");
+		sb.append(wssqbh);
+		sb.append(", sbrq=");
+		sb.append(sbrq);
 		sb.append("}");
 
 		return sb.toString();
@@ -122,6 +126,20 @@ public class CompleteCacheModel implements CacheModel<Complete>, Externalizable 
 			completeImpl.setBabh(babh);
 		}
 
+		if (wssqbh == null) {
+			completeImpl.setWssqbh(StringPool.BLANK);
+		}
+		else {
+			completeImpl.setWssqbh(wssqbh);
+		}
+
+		if (sbrq == Long.MIN_VALUE) {
+			completeImpl.setSbrq(null);
+		}
+		else {
+			completeImpl.setSbrq(new Date(sbrq));
+		}
+
 		completeImpl.resetOriginalValues();
 
 		return completeImpl;
@@ -141,6 +159,8 @@ public class CompleteCacheModel implements CacheModel<Complete>, Externalizable 
 		sqbz = objectInput.readInt();
 		sqzt = objectInput.readInt();
 		babh = objectInput.readUTF();
+		wssqbh = objectInput.readUTF();
+		sbrq = objectInput.readLong();
 	}
 
 	@Override
@@ -184,6 +204,15 @@ public class CompleteCacheModel implements CacheModel<Complete>, Externalizable 
 		else {
 			objectOutput.writeUTF(babh);
 		}
+
+		if (wssqbh == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(wssqbh);
+		}
+
+		objectOutput.writeLong(sbrq);
 	}
 
 	public long completeId;
@@ -198,4 +227,6 @@ public class CompleteCacheModel implements CacheModel<Complete>, Externalizable 
 	public int sqbz;
 	public int sqzt;
 	public String babh;
+	public String wssqbh;
+	public long sbrq;
 }

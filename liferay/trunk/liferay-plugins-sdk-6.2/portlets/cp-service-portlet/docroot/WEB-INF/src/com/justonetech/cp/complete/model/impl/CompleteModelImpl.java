@@ -72,9 +72,11 @@ public class CompleteModelImpl extends BaseModelImpl<Complete>
 			{ "bjbh", Types.VARCHAR },
 			{ "sqbz", Types.INTEGER },
 			{ "sqzt", Types.INTEGER },
-			{ "babh", Types.VARCHAR }
+			{ "babh", Types.VARCHAR },
+			{ "wssqbh", Types.VARCHAR },
+			{ "sbrq", Types.TIMESTAMP }
 		};
-	public static final String TABLE_SQL_CREATE = "create table cp_Complete (completeId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,zzjgdm VARCHAR(75) null,bjbh VARCHAR(75) null,sqbz INTEGER,sqzt INTEGER,babh VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table cp_Complete (completeId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,zzjgdm VARCHAR(75) null,bjbh VARCHAR(75) null,sqbz INTEGER,sqzt INTEGER,babh VARCHAR(75) null,wssqbh VARCHAR(75) null,sbrq DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table cp_Complete";
 	public static final String ORDER_BY_JPQL = " ORDER BY complete.completeId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY cp_Complete.completeId ASC";
@@ -144,6 +146,8 @@ public class CompleteModelImpl extends BaseModelImpl<Complete>
 		attributes.put("sqbz", getSqbz());
 		attributes.put("sqzt", getSqzt());
 		attributes.put("babh", getBabh());
+		attributes.put("wssqbh", getWssqbh());
+		attributes.put("sbrq", getSbrq());
 
 		return attributes;
 	}
@@ -220,6 +224,18 @@ public class CompleteModelImpl extends BaseModelImpl<Complete>
 
 		if (babh != null) {
 			setBabh(babh);
+		}
+
+		String wssqbh = (String)attributes.get("wssqbh");
+
+		if (wssqbh != null) {
+			setWssqbh(wssqbh);
+		}
+
+		Date sbrq = (Date)attributes.get("sbrq");
+
+		if (sbrq != null) {
+			setSbrq(sbrq);
 		}
 	}
 
@@ -383,6 +399,31 @@ public class CompleteModelImpl extends BaseModelImpl<Complete>
 		_babh = babh;
 	}
 
+	@Override
+	public String getWssqbh() {
+		if (_wssqbh == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _wssqbh;
+		}
+	}
+
+	@Override
+	public void setWssqbh(String wssqbh) {
+		_wssqbh = wssqbh;
+	}
+
+	@Override
+	public Date getSbrq() {
+		return _sbrq;
+	}
+
+	@Override
+	public void setSbrq(Date sbrq) {
+		_sbrq = sbrq;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -426,6 +467,8 @@ public class CompleteModelImpl extends BaseModelImpl<Complete>
 		completeImpl.setSqbz(getSqbz());
 		completeImpl.setSqzt(getSqzt());
 		completeImpl.setBabh(getBabh());
+		completeImpl.setWssqbh(getWssqbh());
+		completeImpl.setSbrq(getSbrq());
 
 		completeImpl.resetOriginalValues();
 
@@ -549,12 +592,29 @@ public class CompleteModelImpl extends BaseModelImpl<Complete>
 			completeCacheModel.babh = null;
 		}
 
+		completeCacheModel.wssqbh = getWssqbh();
+
+		String wssqbh = completeCacheModel.wssqbh;
+
+		if ((wssqbh != null) && (wssqbh.length() == 0)) {
+			completeCacheModel.wssqbh = null;
+		}
+
+		Date sbrq = getSbrq();
+
+		if (sbrq != null) {
+			completeCacheModel.sbrq = sbrq.getTime();
+		}
+		else {
+			completeCacheModel.sbrq = Long.MIN_VALUE;
+		}
+
 		return completeCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(29);
 
 		sb.append("{completeId=");
 		sb.append(getCompleteId());
@@ -580,6 +640,10 @@ public class CompleteModelImpl extends BaseModelImpl<Complete>
 		sb.append(getSqzt());
 		sb.append(", babh=");
 		sb.append(getBabh());
+		sb.append(", wssqbh=");
+		sb.append(getWssqbh());
+		sb.append(", sbrq=");
+		sb.append(getSbrq());
 		sb.append("}");
 
 		return sb.toString();
@@ -587,7 +651,7 @@ public class CompleteModelImpl extends BaseModelImpl<Complete>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(40);
+		StringBundler sb = new StringBundler(46);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.cp.complete.model.Complete");
@@ -641,6 +705,14 @@ public class CompleteModelImpl extends BaseModelImpl<Complete>
 			"<column><column-name>babh</column-name><column-value><![CDATA[");
 		sb.append(getBabh());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>wssqbh</column-name><column-value><![CDATA[");
+		sb.append(getWssqbh());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>sbrq</column-name><column-value><![CDATA[");
+		sb.append(getSbrq());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -665,6 +737,8 @@ public class CompleteModelImpl extends BaseModelImpl<Complete>
 	private int _sqbz;
 	private int _sqzt;
 	private String _babh;
+	private String _wssqbh;
+	private Date _sbrq;
 	private long _columnBitmask;
 	private Complete _escapedModel;
 }

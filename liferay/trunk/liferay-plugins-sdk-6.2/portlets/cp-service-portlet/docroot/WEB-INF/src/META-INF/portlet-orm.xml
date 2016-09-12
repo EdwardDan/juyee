@@ -417,6 +417,10 @@
 			<basic name="sqbz" />
 			<basic name="sqzt" />
 			<basic name="babh" />
+			<basic name="wssqbh" />
+			<basic name="sbrq">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />

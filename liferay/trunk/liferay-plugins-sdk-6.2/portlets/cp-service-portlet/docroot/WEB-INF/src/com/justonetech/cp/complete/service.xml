@@ -25,6 +25,8 @@
 		<column name="sqbz" type="int" /><!-- 申请步骤 -->
 		<column name="sqzt" type="int" /><!-- 申请状态 -->
 		<column name="babh" type="String" /><!-- 备案编号 -->
+		<column name="wssqbh" type="String" /><!-- 网上申请编号 -->
+		<column name="sbrq" type="Date" /><!-- 上报日期 -->
 
 		<!-- Order -->
 		<finder name="Zzjgdm" return-type="Collection">

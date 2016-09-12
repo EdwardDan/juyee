@@ -14,16 +14,33 @@
 
 package com.justonetech.cp.complete.service.impl;
 
+import java.util.Collections;
+import java.util.List;
+
+import com.justonetech.cp.complete.model.Complete;
+import com.justonetech.cp.complete.model.CompleteProjectProfile;
 import com.justonetech.cp.complete.service.base.CompleteLocalServiceBaseImpl;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.Validator;
 
 /**
  * The implementation of the complete local service.
  *
  * <p>
- * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.justonetech.cp.complete.service.CompleteLocalService} interface.
+ * All custom service methods should be put in this class. Whenever methods are
+ * added, rerun ServiceBuilder to copy their definitions into the
+ * {@link com.justonetech.cp.complete.service.CompleteLocalService} interface.
  *
  * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
+ * This is a local service. Methods of this service will not have security
+ * checks based on the propagated JAAS credentials because this service can only
+ * be accessed from within the same VM.
  * </p>
  *
  * @author fanqi
@@ -33,7 +50,64 @@ import com.justonetech.cp.complete.service.base.CompleteLocalServiceBaseImpl;
 public class CompleteLocalServiceImpl extends CompleteLocalServiceBaseImpl {
 	/*
 	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this interface directly. Always use {@link com.justonetech.cp.complete.service.CompleteLocalServiceUtil} to access the complete local service.
+	 * 
+	 * Never reference this interface directly. Always use {@link
+	 * com.justonetech.cp.complete.service.CompleteLocalServiceUtil} to access
+	 * the complete local service.
 	 */
+	private static Log log = LogFactoryUtil
+			.getLog(CompleteLocalServiceImpl.class);
+
+	@SuppressWarnings("unchecked")
+	public List<Complete> getCompletes(String zzjgdm, String bjbh,
+			String wssqbh, String gcmc, int start, int end) {
+
+		try {
+			return this.dynamicQuery(
+					createDynamicQuery(zzjgdm, bjbh, wssqbh, gcmc), start, end);
+		} catch (SystemException e) {
+			log.info(e.getMessage());
+		}
+		return Collections.emptyList();
+	}
+
+	public int getCompletesCount(String zzjgdm, String bjbh, String wssqbh,
+			String gcmc) {
+
+		try {
+			return (int) this.dynamicQueryCount(createDynamicQuery(zzjgdm,
+					bjbh, wssqbh, gcmc));
+		} catch (SystemException e) {
+			log.info(e.getMessage());
+		}
+		return 0;
+	}
+
+	public DynamicQuery createDynamicQuery(String zzjgdm, String bjbh,
+			String wssqbh, String gcmc) {
+
+		DynamicQuery dynamicQuery = this.dynamicQuery();
+		if (!Validator.isBlank(zzjgdm)) {
+			dynamicQuery.add(PropertyFactoryUtil.forName("zzjgdm").eq(zzjgdm));
+		}
+		if (!Validator.isBlank(bjbh)) {
+			dynamicQuery.add(PropertyFactoryUtil.forName("bjbh").like(
+					"%" + bjbh + "%"));
+		}
+		if (!Validator.isBlank(wssqbh)) {
+			dynamicQuery.add(PropertyFactoryUtil.forName("wssqbh").like(
+					"%" + wssqbh + "%"));
+		}
+		if (!Validator.isBlank(gcmc)) {
+			DynamicQuery projectProfileDQ = DynamicQueryFactoryUtil
+					.forClass(CompleteProjectProfile.class);
+			projectProfileDQ.setProjection(ProjectionFactoryUtil
+					.property("completeId"));
+			projectProfileDQ.add(PropertyFactoryUtil.forName("gcmc").like(
+					"%" + gcmc + "%"));
+			dynamicQuery.add(PropertyFactoryUtil.forName("completeId").in(
+					projectProfileDQ));
+		}
+		return dynamicQuery;
+	}
 }
