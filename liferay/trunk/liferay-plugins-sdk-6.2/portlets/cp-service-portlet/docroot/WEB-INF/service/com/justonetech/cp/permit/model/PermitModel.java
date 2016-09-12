@@ -307,6 +307,199 @@ public interface PermitModel extends BaseModel<Permit>, GroupedModel {
 	 */
 	public void setSgxkzbh(String sgxkzbh);
 
+	/**
+	 * Returns the slbh of this permit.
+	 *
+	 * @return the slbh of this permit
+	 */
+	@AutoEscape
+	public String getSlbh();
+
+	/**
+	 * Sets the slbh of this permit.
+	 *
+	 * @param slbh the slbh of this permit
+	 */
+	public void setSlbh(String slbh);
+
+	/**
+	 * Returns the hjgsz of this permit.
+	 *
+	 * @return the hjgsz of this permit
+	 */
+	public int getHjgsz();
+
+	/**
+	 * Sets the hjgsz of this permit.
+	 *
+	 * @param hjgsz the hjgsz of this permit
+	 */
+	public void setHjgsz(int hjgsz);
+
+	/**
+	 * Returns the hjgsh of this permit.
+	 *
+	 * @return the hjgsh of this permit
+	 */
+	public int getHjgsh();
+
+	/**
+	 * Sets the hjgsh of this permit.
+	 *
+	 * @param hjgsh the hjgsh of this permit
+	 */
+	public void setHjgsh(int hjgsh);
+
+	/**
+	 * Returns the sqr of this permit.
+	 *
+	 * @return the sqr of this permit
+	 */
+	@AutoEscape
+	public String getSqr();
+
+	/**
+	 * Sets the sqr of this permit.
+	 *
+	 * @param sqr the sqr of this permit
+	 */
+	public void setSqr(String sqr);
+
+	/**
+	 * Returns the sqsx of this permit.
+	 *
+	 * @return the sqsx of this permit
+	 */
+	@AutoEscape
+	public String getSqsx();
+
+	/**
+	 * Sets the sqsx of this permit.
+	 *
+	 * @param sqsx the sqsx of this permit
+	 */
+	public void setSqsx(String sqsx);
+
+	/**
+	 * Returns the sqh of this permit.
+	 *
+	 * @return the sqh of this permit
+	 */
+	@AutoEscape
+	public String getSqh();
+
+	/**
+	 * Sets the sqh of this permit.
+	 *
+	 * @param sqh the sqh of this permit
+	 */
+	public void setSqh(String sqh);
+
+	/**
+	 * Returns the cltjr of this permit.
+	 *
+	 * @return the cltjr of this permit
+	 */
+	@AutoEscape
+	public String getCltjr();
+
+	/**
+	 * Sets the cltjr of this permit.
+	 *
+	 * @param cltjr the cltjr of this permit
+	 */
+	public void setCltjr(String cltjr);
+
+	/**
+	 * Returns the cltjrlxdh of this permit.
+	 *
+	 * @return the cltjrlxdh of this permit
+	 */
+	@AutoEscape
+	public String getCltjrlxdh();
+
+	/**
+	 * Sets the cltjrlxdh of this permit.
+	 *
+	 * @param cltjrlxdh the cltjrlxdh of this permit
+	 */
+	public void setCltjrlxdh(String cltjrlxdh);
+
+	/**
+	 * Returns the cltjrlxdz of this permit.
+	 *
+	 * @return the cltjrlxdz of this permit
+	 */
+	@AutoEscape
+	public String getCltjrlxdz();
+
+	/**
+	 * Sets the cltjrlxdz of this permit.
+	 *
+	 * @param cltjrlxdz the cltjrlxdz of this permit
+	 */
+	public void setCltjrlxdz(String cltjrlxdz);
+
+	/**
+	 * Returns the sjr of this permit.
+	 *
+	 * @return the sjr of this permit
+	 */
+	@AutoEscape
+	public String getSjr();
+
+	/**
+	 * Sets the sjr of this permit.
+	 *
+	 * @param sjr the sjr of this permit
+	 */
+	public void setSjr(String sjr);
+
+	/**
+	 * Returns the sjrlxdh of this permit.
+	 *
+	 * @return the sjrlxdh of this permit
+	 */
+	@AutoEscape
+	public String getSjrlxdh();
+
+	/**
+	 * Sets the sjrlxdh of this permit.
+	 *
+	 * @param sjrlxdh the sjrlxdh of this permit
+	 */
+	public void setSjrlxdh(String sjrlxdh);
+
+	/**
+	 * Returns the slyj of this permit.
+	 *
+	 * @return the slyj of this permit
+	 */
+	@AutoEscape
+	public String getSlyj();
+
+	/**
+	 * Sets the slyj of this permit.
+	 *
+	 * @param slyj the slyj of this permit
+	 */
+	public void setSlyj(String slyj);
+
+	/**
+	 * Returns the slsj of this permit.
+	 *
+	 * @return the slsj of this permit
+	 */
+	@AutoEscape
+	public String getSlsj();
+
+	/**
+	 * Sets the slsj of this permit.
+	 *
+	 * @param slsj the slsj of this permit
+	 */
+	public void setSlsj(String slsj);
+
 	@Override
 	public boolean isNew();
 

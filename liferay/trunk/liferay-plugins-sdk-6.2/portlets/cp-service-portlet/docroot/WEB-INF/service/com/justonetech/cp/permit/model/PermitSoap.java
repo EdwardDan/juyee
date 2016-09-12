@@ -45,6 +45,19 @@ public class PermitSoap implements Serializable {
 		soapModel.setBdh(model.getBdh());
 		soapModel.setYwbh(model.getYwbh());
 		soapModel.setSgxkzbh(model.getSgxkzbh());
+		soapModel.setSlbh(model.getSlbh());
+		soapModel.setHjgsz(model.getHjgsz());
+		soapModel.setHjgsh(model.getHjgsh());
+		soapModel.setSqr(model.getSqr());
+		soapModel.setSqsx(model.getSqsx());
+		soapModel.setSqh(model.getSqh());
+		soapModel.setCltjr(model.getCltjr());
+		soapModel.setCltjrlxdh(model.getCltjrlxdh());
+		soapModel.setCltjrlxdz(model.getCltjrlxdz());
+		soapModel.setSjr(model.getSjr());
+		soapModel.setSjrlxdh(model.getSjrlxdh());
+		soapModel.setSlyj(model.getSlyj());
+		soapModel.setSlsj(model.getSlsj());
 
 		return soapModel;
 	}
@@ -217,6 +230,110 @@ public class PermitSoap implements Serializable {
 		_sgxkzbh = sgxkzbh;
 	}
 
+	public String getSlbh() {
+		return _slbh;
+	}
+
+	public void setSlbh(String slbh) {
+		_slbh = slbh;
+	}
+
+	public int getHjgsz() {
+		return _hjgsz;
+	}
+
+	public void setHjgsz(int hjgsz) {
+		_hjgsz = hjgsz;
+	}
+
+	public int getHjgsh() {
+		return _hjgsh;
+	}
+
+	public void setHjgsh(int hjgsh) {
+		_hjgsh = hjgsh;
+	}
+
+	public String getSqr() {
+		return _sqr;
+	}
+
+	public void setSqr(String sqr) {
+		_sqr = sqr;
+	}
+
+	public String getSqsx() {
+		return _sqsx;
+	}
+
+	public void setSqsx(String sqsx) {
+		_sqsx = sqsx;
+	}
+
+	public String getSqh() {
+		return _sqh;
+	}
+
+	public void setSqh(String sqh) {
+		_sqh = sqh;
+	}
+
+	public String getCltjr() {
+		return _cltjr;
+	}
+
+	public void setCltjr(String cltjr) {
+		_cltjr = cltjr;
+	}
+
+	public String getCltjrlxdh() {
+		return _cltjrlxdh;
+	}
+
+	public void setCltjrlxdh(String cltjrlxdh) {
+		_cltjrlxdh = cltjrlxdh;
+	}
+
+	public String getCltjrlxdz() {
+		return _cltjrlxdz;
+	}
+
+	public void setCltjrlxdz(String cltjrlxdz) {
+		_cltjrlxdz = cltjrlxdz;
+	}
+
+	public String getSjr() {
+		return _sjr;
+	}
+
+	public void setSjr(String sjr) {
+		_sjr = sjr;
+	}
+
+	public String getSjrlxdh() {
+		return _sjrlxdh;
+	}
+
+	public void setSjrlxdh(String sjrlxdh) {
+		_sjrlxdh = sjrlxdh;
+	}
+
+	public String getSlyj() {
+		return _slyj;
+	}
+
+	public void setSlyj(String slyj) {
+		_slyj = slyj;
+	}
+
+	public String getSlsj() {
+		return _slsj;
+	}
+
+	public void setSlsj(String slsj) {
+		_slsj = slsj;
+	}
+
 	private long _permitId;
 	private long _groupId;
 	private long _companyId;
@@ -232,4 +349,17 @@ public class PermitSoap implements Serializable {
 	private String _bdh;
 	private String _ywbh;
 	private String _sgxkzbh;
+	private String _slbh;
+	private int _hjgsz;
+	private int _hjgsh;
+	private String _sqr;
+	private String _sqsx;
+	private String _sqh;
+	private String _cltjr;
+	private String _cltjrlxdh;
+	private String _cltjrlxdz;
+	private String _sjr;
+	private String _sjrlxdh;
+	private String _slyj;
+	private String _slsj;
 }

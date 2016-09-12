@@ -38,7 +38,7 @@ public class ProjectProfileCacheModel implements CacheModel<ProjectProfile>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(101);
+		StringBundler sb = new StringBundler(75);
 
 		sb.append("{permitId=");
 		sb.append(permitId);
@@ -114,32 +114,6 @@ public class ProjectProfileCacheModel implements CacheModel<ProjectProfile>,
 		sb.append(yzzpl4);
 		sb.append(", tjsj=");
 		sb.append(tjsj);
-		sb.append(", slbh=");
-		sb.append(slbh);
-		sb.append(", hjgsz=");
-		sb.append(hjgsz);
-		sb.append(", hjgsh=");
-		sb.append(hjgsh);
-		sb.append(", sqr=");
-		sb.append(sqr);
-		sb.append(", sqsx=");
-		sb.append(sqsx);
-		sb.append(", sqh=");
-		sb.append(sqh);
-		sb.append(", cltjr=");
-		sb.append(cltjr);
-		sb.append(", cltjrlxdh=");
-		sb.append(cltjrlxdh);
-		sb.append(", cltjrlxdz=");
-		sb.append(cltjrlxdz);
-		sb.append(", sjr=");
-		sb.append(sjr);
-		sb.append(", sjrlxdh=");
-		sb.append(sjrlxdh);
-		sb.append(", slyj=");
-		sb.append(slyj);
-		sb.append(", slsj=");
-		sb.append(slsj);
 		sb.append("}");
 
 		return sb.toString();
@@ -373,86 +347,6 @@ public class ProjectProfileCacheModel implements CacheModel<ProjectProfile>,
 			projectProfileImpl.setTjsj(new Date(tjsj));
 		}
 
-		if (slbh == null) {
-			projectProfileImpl.setSlbh(StringPool.BLANK);
-		}
-		else {
-			projectProfileImpl.setSlbh(slbh);
-		}
-
-		projectProfileImpl.setHjgsz(hjgsz);
-		projectProfileImpl.setHjgsh(hjgsh);
-
-		if (sqr == null) {
-			projectProfileImpl.setSqr(StringPool.BLANK);
-		}
-		else {
-			projectProfileImpl.setSqr(sqr);
-		}
-
-		if (sqsx == null) {
-			projectProfileImpl.setSqsx(StringPool.BLANK);
-		}
-		else {
-			projectProfileImpl.setSqsx(sqsx);
-		}
-
-		if (sqh == null) {
-			projectProfileImpl.setSqh(StringPool.BLANK);
-		}
-		else {
-			projectProfileImpl.setSqh(sqh);
-		}
-
-		if (cltjr == null) {
-			projectProfileImpl.setCltjr(StringPool.BLANK);
-		}
-		else {
-			projectProfileImpl.setCltjr(cltjr);
-		}
-
-		if (cltjrlxdh == null) {
-			projectProfileImpl.setCltjrlxdh(StringPool.BLANK);
-		}
-		else {
-			projectProfileImpl.setCltjrlxdh(cltjrlxdh);
-		}
-
-		if (cltjrlxdz == null) {
-			projectProfileImpl.setCltjrlxdz(StringPool.BLANK);
-		}
-		else {
-			projectProfileImpl.setCltjrlxdz(cltjrlxdz);
-		}
-
-		if (sjr == null) {
-			projectProfileImpl.setSjr(StringPool.BLANK);
-		}
-		else {
-			projectProfileImpl.setSjr(sjr);
-		}
-
-		if (sjrlxdh == null) {
-			projectProfileImpl.setSjrlxdh(StringPool.BLANK);
-		}
-		else {
-			projectProfileImpl.setSjrlxdh(sjrlxdh);
-		}
-
-		if (slyj == null) {
-			projectProfileImpl.setSlyj(StringPool.BLANK);
-		}
-		else {
-			projectProfileImpl.setSlyj(slyj);
-		}
-
-		if (slsj == null) {
-			projectProfileImpl.setSlsj(StringPool.BLANK);
-		}
-		else {
-			projectProfileImpl.setSlsj(slsj);
-		}
-
 		projectProfileImpl.resetOriginalValues();
 
 		return projectProfileImpl;
@@ -497,19 +391,6 @@ public class ProjectProfileCacheModel implements CacheModel<ProjectProfile>,
 		yzzpl3 = objectInput.readUTF();
 		yzzpl4 = objectInput.readUTF();
 		tjsj = objectInput.readLong();
-		slbh = objectInput.readUTF();
-		hjgsz = objectInput.readInt();
-		hjgsh = objectInput.readInt();
-		sqr = objectInput.readUTF();
-		sqsx = objectInput.readUTF();
-		sqh = objectInput.readUTF();
-		cltjr = objectInput.readUTF();
-		cltjrlxdh = objectInput.readUTF();
-		cltjrlxdz = objectInput.readUTF();
-		sjr = objectInput.readUTF();
-		sjrlxdh = objectInput.readUTF();
-		slyj = objectInput.readUTF();
-		slsj = objectInput.readUTF();
 	}
 
 	@Override
@@ -721,86 +602,6 @@ public class ProjectProfileCacheModel implements CacheModel<ProjectProfile>,
 		}
 
 		objectOutput.writeLong(tjsj);
-
-		if (slbh == null) {
-			objectOutput.writeUTF(StringPool.BLANK);
-		}
-		else {
-			objectOutput.writeUTF(slbh);
-		}
-
-		objectOutput.writeInt(hjgsz);
-		objectOutput.writeInt(hjgsh);
-
-		if (sqr == null) {
-			objectOutput.writeUTF(StringPool.BLANK);
-		}
-		else {
-			objectOutput.writeUTF(sqr);
-		}
-
-		if (sqsx == null) {
-			objectOutput.writeUTF(StringPool.BLANK);
-		}
-		else {
-			objectOutput.writeUTF(sqsx);
-		}
-
-		if (sqh == null) {
-			objectOutput.writeUTF(StringPool.BLANK);
-		}
-		else {
-			objectOutput.writeUTF(sqh);
-		}
-
-		if (cltjr == null) {
-			objectOutput.writeUTF(StringPool.BLANK);
-		}
-		else {
-			objectOutput.writeUTF(cltjr);
-		}
-
-		if (cltjrlxdh == null) {
-			objectOutput.writeUTF(StringPool.BLANK);
-		}
-		else {
-			objectOutput.writeUTF(cltjrlxdh);
-		}
-
-		if (cltjrlxdz == null) {
-			objectOutput.writeUTF(StringPool.BLANK);
-		}
-		else {
-			objectOutput.writeUTF(cltjrlxdz);
-		}
-
-		if (sjr == null) {
-			objectOutput.writeUTF(StringPool.BLANK);
-		}
-		else {
-			objectOutput.writeUTF(sjr);
-		}
-
-		if (sjrlxdh == null) {
-			objectOutput.writeUTF(StringPool.BLANK);
-		}
-		else {
-			objectOutput.writeUTF(sjrlxdh);
-		}
-
-		if (slyj == null) {
-			objectOutput.writeUTF(StringPool.BLANK);
-		}
-		else {
-			objectOutput.writeUTF(slyj);
-		}
-
-		if (slsj == null) {
-			objectOutput.writeUTF(StringPool.BLANK);
-		}
-		else {
-			objectOutput.writeUTF(slsj);
-		}
 	}
 
 	public long permitId;
@@ -840,17 +641,4 @@ public class ProjectProfileCacheModel implements CacheModel<ProjectProfile>,
 	public String yzzpl3;
 	public String yzzpl4;
 	public long tjsj;
-	public String slbh;
-	public int hjgsz;
-	public int hjgsh;
-	public String sqr;
-	public String sqsx;
-	public String sqh;
-	public String cltjr;
-	public String cltjrlxdh;
-	public String cltjrlxdz;
-	public String sjr;
-	public String sjrlxdh;
-	public String slyj;
-	public String slsj;
 }

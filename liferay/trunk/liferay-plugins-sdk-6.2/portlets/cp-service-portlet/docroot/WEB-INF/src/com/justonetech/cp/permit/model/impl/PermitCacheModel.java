@@ -37,7 +37,7 @@ import java.util.Date;
 public class PermitCacheModel implements CacheModel<Permit>, Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(31);
+		StringBundler sb = new StringBundler(57);
 
 		sb.append("{permitId=");
 		sb.append(permitId);
@@ -69,6 +69,32 @@ public class PermitCacheModel implements CacheModel<Permit>, Externalizable {
 		sb.append(ywbh);
 		sb.append(", sgxkzbh=");
 		sb.append(sgxkzbh);
+		sb.append(", slbh=");
+		sb.append(slbh);
+		sb.append(", hjgsz=");
+		sb.append(hjgsz);
+		sb.append(", hjgsh=");
+		sb.append(hjgsh);
+		sb.append(", sqr=");
+		sb.append(sqr);
+		sb.append(", sqsx=");
+		sb.append(sqsx);
+		sb.append(", sqh=");
+		sb.append(sqh);
+		sb.append(", cltjr=");
+		sb.append(cltjr);
+		sb.append(", cltjrlxdh=");
+		sb.append(cltjrlxdh);
+		sb.append(", cltjrlxdz=");
+		sb.append(cltjrlxdz);
+		sb.append(", sjr=");
+		sb.append(sjr);
+		sb.append(", sjrlxdh=");
+		sb.append(sjrlxdh);
+		sb.append(", slyj=");
+		sb.append(slyj);
+		sb.append(", slsj=");
+		sb.append(slsj);
 		sb.append("}");
 
 		return sb.toString();
@@ -149,6 +175,86 @@ public class PermitCacheModel implements CacheModel<Permit>, Externalizable {
 			permitImpl.setSgxkzbh(sgxkzbh);
 		}
 
+		if (slbh == null) {
+			permitImpl.setSlbh(StringPool.BLANK);
+		}
+		else {
+			permitImpl.setSlbh(slbh);
+		}
+
+		permitImpl.setHjgsz(hjgsz);
+		permitImpl.setHjgsh(hjgsh);
+
+		if (sqr == null) {
+			permitImpl.setSqr(StringPool.BLANK);
+		}
+		else {
+			permitImpl.setSqr(sqr);
+		}
+
+		if (sqsx == null) {
+			permitImpl.setSqsx(StringPool.BLANK);
+		}
+		else {
+			permitImpl.setSqsx(sqsx);
+		}
+
+		if (sqh == null) {
+			permitImpl.setSqh(StringPool.BLANK);
+		}
+		else {
+			permitImpl.setSqh(sqh);
+		}
+
+		if (cltjr == null) {
+			permitImpl.setCltjr(StringPool.BLANK);
+		}
+		else {
+			permitImpl.setCltjr(cltjr);
+		}
+
+		if (cltjrlxdh == null) {
+			permitImpl.setCltjrlxdh(StringPool.BLANK);
+		}
+		else {
+			permitImpl.setCltjrlxdh(cltjrlxdh);
+		}
+
+		if (cltjrlxdz == null) {
+			permitImpl.setCltjrlxdz(StringPool.BLANK);
+		}
+		else {
+			permitImpl.setCltjrlxdz(cltjrlxdz);
+		}
+
+		if (sjr == null) {
+			permitImpl.setSjr(StringPool.BLANK);
+		}
+		else {
+			permitImpl.setSjr(sjr);
+		}
+
+		if (sjrlxdh == null) {
+			permitImpl.setSjrlxdh(StringPool.BLANK);
+		}
+		else {
+			permitImpl.setSjrlxdh(sjrlxdh);
+		}
+
+		if (slyj == null) {
+			permitImpl.setSlyj(StringPool.BLANK);
+		}
+		else {
+			permitImpl.setSlyj(slyj);
+		}
+
+		if (slsj == null) {
+			permitImpl.setSlsj(StringPool.BLANK);
+		}
+		else {
+			permitImpl.setSlsj(slsj);
+		}
+
 		permitImpl.resetOriginalValues();
 
 		return permitImpl;
@@ -171,6 +277,19 @@ public class PermitCacheModel implements CacheModel<Permit>, Externalizable {
 		bdh = objectInput.readUTF();
 		ywbh = objectInput.readUTF();
 		sgxkzbh = objectInput.readUTF();
+		slbh = objectInput.readUTF();
+		hjgsz = objectInput.readInt();
+		hjgsh = objectInput.readInt();
+		sqr = objectInput.readUTF();
+		sqsx = objectInput.readUTF();
+		sqh = objectInput.readUTF();
+		cltjr = objectInput.readUTF();
+		cltjrlxdh = objectInput.readUTF();
+		cltjrlxdz = objectInput.readUTF();
+		sjr = objectInput.readUTF();
+		sjrlxdh = objectInput.readUTF();
+		slyj = objectInput.readUTF();
+		slsj = objectInput.readUTF();
 	}
 
 	@Override
@@ -235,6 +354,86 @@ public class PermitCacheModel implements CacheModel<Permit>, Externalizable {
 		else {
 			objectOutput.writeUTF(sgxkzbh);
 		}
+
+		if (slbh == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(slbh);
+		}
+
+		objectOutput.writeInt(hjgsz);
+		objectOutput.writeInt(hjgsh);
+
+		if (sqr == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(sqr);
+		}
+
+		if (sqsx == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(sqsx);
+		}
+
+		if (sqh == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(sqh);
+		}
+
+		if (cltjr == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(cltjr);
+		}
+
+		if (cltjrlxdh == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(cltjrlxdh);
+		}
+
+		if (cltjrlxdz == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(cltjrlxdz);
+		}
+
+		if (sjr == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(sjr);
+		}
+
+		if (sjrlxdh == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(sjrlxdh);
+		}
+
+		if (slyj == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(slyj);
+		}
+
+		if (slsj == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(slsj);
+		}
 	}
 
 	public long permitId;
@@ -252,4 +451,17 @@ public class PermitCacheModel implements CacheModel<Permit>, Externalizable {
 	public String bdh;
 	public String ywbh;
 	public String sgxkzbh;
+	public String slbh;
+	public int hjgsz;
+	public int hjgsh;
+	public String sqr;
+	public String sqsx;
+	public String sqh;
+	public String cltjr;
+	public String cltjrlxdh;
+	public String cltjrlxdz;
+	public String sjr;
+	public String sjrlxdh;
+	public String slyj;
+	public String slsj;
 }

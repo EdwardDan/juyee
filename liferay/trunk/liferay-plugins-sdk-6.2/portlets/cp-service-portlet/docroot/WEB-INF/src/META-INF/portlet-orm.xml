@@ -317,6 +317,19 @@
 			<basic name="bdh" />
 			<basic name="ywbh" />
 			<basic name="sgxkzbh" />
+			<basic name="slbh" />
+			<basic name="hjgsz" />
+			<basic name="hjgsh" />
+			<basic name="sqr" />
+			<basic name="sqsx" />
+			<basic name="sqh" />
+			<basic name="cltjr" />
+			<basic name="cltjrlxdh" />
+			<basic name="cltjrlxdz" />
+			<basic name="sjr" />
+			<basic name="sjrlxdh" />
+			<basic name="slyj" />
+			<basic name="slsj" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
@@ -368,19 +381,6 @@
 			<basic name="tjsj">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
-			<basic name="slbh" />
-			<basic name="hjgsz" />
-			<basic name="hjgsh" />
-			<basic name="sqr" />
-			<basic name="sqsx" />
-			<basic name="sqh" />
-			<basic name="cltjr" />
-			<basic name="cltjrlxdh" />
-			<basic name="cltjrlxdz" />
-			<basic name="sjr" />
-			<basic name="sjrlxdh" />
-			<basic name="slyj" />
-			<basic name="slsj" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
@@ -391,6 +391,74 @@
 			<id name="projectId" />
 			<basic name="permitId" />
 			<basic name="bjbh" />
+			<basic name="gcbh" />
+			<basic name="gcmc" />
+			<basic name="jsnr" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.justonetech.cp.complete.model.impl.CompleteModelImpl">
+		<attributes>
+			<id name="completeId" />
+			<basic name="groupId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="createDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="zzjgdm" />
+			<basic name="bjbh" />
+			<basic name="sqbz" />
+			<basic name="sqzt" />
+			<basic name="babh" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.justonetech.cp.complete.model.impl.CompleteApplyMaterialModelImpl">
+		<attributes>
+			<id name="materialId" />
+			<basic name="completeId" />
+			<basic name="xh" />
+			<basic name="clmc" />
+			<basic name="fileEntryIds" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.justonetech.cp.complete.model.impl.CompleteProjectProfileModelImpl">
+		<attributes>
+			<id name="completeId" />
+			<basic name="bjbh" />
+			<basic name="gcmc" />
+			<basic name="jsdwmc" />
+			<basic name="jsdwdz" />
+			<basic name="jsdd" />
+			<basic name="szqx" />
+			<basic name="fddbr" />
+			<basic name="lxr" />
+			<basic name="lxdh" />
+			<basic name="bz" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.justonetech.cp.complete.model.impl.CompleteUnitProjectModelImpl">
+		<attributes>
+			<id name="projectId" />
+			<basic name="completeId" />
+			<basic name="bjbh" />
+			<basic name="sgxkzbh" />
 			<basic name="gcbh" />
 			<basic name="gcmc" />
 			<basic name="jsnr" />
@@ -425,6 +493,22 @@
 	</entity>
 	<entity class="com.justonetech.cp.permit.model.impl.UnitProjectImpl" name="UnitProject">
 		<table name="cp_UnitProject" />
+		<attributes />
+	</entity>
+	<entity class="com.justonetech.cp.complete.model.impl.CompleteImpl" name="Complete">
+		<table name="cp_Complete" />
+		<attributes />
+	</entity>
+	<entity class="com.justonetech.cp.complete.model.impl.CompleteApplyMaterialImpl" name="CompleteApplyMaterial">
+		<table name="cp_CompleteApplyMaterial" />
+		<attributes />
+	</entity>
+	<entity class="com.justonetech.cp.complete.model.impl.CompleteProjectProfileImpl" name="CompleteProjectProfile">
+		<table name="cp_CompleteProjectProfile" />
+		<attributes />
+	</entity>
+	<entity class="com.justonetech.cp.complete.model.impl.CompleteUnitProjectImpl" name="CompleteUnitProject">
+		<table name="cp_CompleteUnitProject" />
 		<attributes />
 	</entity>
 </entity-mappings>

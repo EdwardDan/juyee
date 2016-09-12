@@ -75,9 +75,22 @@ public class PermitModelImpl extends BaseModelImpl<Permit>
 			{ "sqzt", Types.INTEGER },
 			{ "bdh", Types.VARCHAR },
 			{ "ywbh", Types.VARCHAR },
-			{ "sgxkzbh", Types.VARCHAR }
+			{ "sgxkzbh", Types.VARCHAR },
+			{ "slbh", Types.VARCHAR },
+			{ "hjgsz", Types.INTEGER },
+			{ "hjgsh", Types.INTEGER },
+			{ "sqr", Types.VARCHAR },
+			{ "sqsx", Types.VARCHAR },
+			{ "sqh", Types.VARCHAR },
+			{ "cltjr", Types.VARCHAR },
+			{ "cltjrlxdh", Types.VARCHAR },
+			{ "cltjrlxdz", Types.VARCHAR },
+			{ "sjr", Types.VARCHAR },
+			{ "sjrlxdh", Types.VARCHAR },
+			{ "slyj", Types.VARCHAR },
+			{ "slsj", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table cp_Permit (permitId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,zzjgdm VARCHAR(75) null,bjbh VARCHAR(75) null,htxxbsbh VARCHAR(75) null,sqbz INTEGER,sqzt INTEGER,bdh VARCHAR(75) null,ywbh VARCHAR(75) null,sgxkzbh VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table cp_Permit (permitId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,zzjgdm VARCHAR(75) null,bjbh VARCHAR(75) null,htxxbsbh VARCHAR(75) null,sqbz INTEGER,sqzt INTEGER,bdh VARCHAR(75) null,ywbh VARCHAR(75) null,sgxkzbh VARCHAR(75) null,slbh VARCHAR(75) null,hjgsz INTEGER,hjgsh INTEGER,sqr VARCHAR(75) null,sqsx VARCHAR(75) null,sqh VARCHAR(75) null,cltjr VARCHAR(75) null,cltjrlxdh VARCHAR(75) null,cltjrlxdz VARCHAR(75) null,sjr VARCHAR(75) null,sjrlxdh VARCHAR(75) null,slyj VARCHAR(75) null,slsj VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table cp_Permit";
 	public static final String ORDER_BY_JPQL = " ORDER BY permit.permitId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY cp_Permit.permitId ASC";
@@ -150,6 +163,19 @@ public class PermitModelImpl extends BaseModelImpl<Permit>
 		attributes.put("bdh", getBdh());
 		attributes.put("ywbh", getYwbh());
 		attributes.put("sgxkzbh", getSgxkzbh());
+		attributes.put("slbh", getSlbh());
+		attributes.put("hjgsz", getHjgsz());
+		attributes.put("hjgsh", getHjgsh());
+		attributes.put("sqr", getSqr());
+		attributes.put("sqsx", getSqsx());
+		attributes.put("sqh", getSqh());
+		attributes.put("cltjr", getCltjr());
+		attributes.put("cltjrlxdh", getCltjrlxdh());
+		attributes.put("cltjrlxdz", getCltjrlxdz());
+		attributes.put("sjr", getSjr());
+		attributes.put("sjrlxdh", getSjrlxdh());
+		attributes.put("slyj", getSlyj());
+		attributes.put("slsj", getSlsj());
 
 		return attributes;
 	}
@@ -244,6 +270,84 @@ public class PermitModelImpl extends BaseModelImpl<Permit>
 
 		if (sgxkzbh != null) {
 			setSgxkzbh(sgxkzbh);
+		}
+
+		String slbh = (String)attributes.get("slbh");
+
+		if (slbh != null) {
+			setSlbh(slbh);
+		}
+
+		Integer hjgsz = (Integer)attributes.get("hjgsz");
+
+		if (hjgsz != null) {
+			setHjgsz(hjgsz);
+		}
+
+		Integer hjgsh = (Integer)attributes.get("hjgsh");
+
+		if (hjgsh != null) {
+			setHjgsh(hjgsh);
+		}
+
+		String sqr = (String)attributes.get("sqr");
+
+		if (sqr != null) {
+			setSqr(sqr);
+		}
+
+		String sqsx = (String)attributes.get("sqsx");
+
+		if (sqsx != null) {
+			setSqsx(sqsx);
+		}
+
+		String sqh = (String)attributes.get("sqh");
+
+		if (sqh != null) {
+			setSqh(sqh);
+		}
+
+		String cltjr = (String)attributes.get("cltjr");
+
+		if (cltjr != null) {
+			setCltjr(cltjr);
+		}
+
+		String cltjrlxdh = (String)attributes.get("cltjrlxdh");
+
+		if (cltjrlxdh != null) {
+			setCltjrlxdh(cltjrlxdh);
+		}
+
+		String cltjrlxdz = (String)attributes.get("cltjrlxdz");
+
+		if (cltjrlxdz != null) {
+			setCltjrlxdz(cltjrlxdz);
+		}
+
+		String sjr = (String)attributes.get("sjr");
+
+		if (sjr != null) {
+			setSjr(sjr);
+		}
+
+		String sjrlxdh = (String)attributes.get("sjrlxdh");
+
+		if (sjrlxdh != null) {
+			setSjrlxdh(sjrlxdh);
+		}
+
+		String slyj = (String)attributes.get("slyj");
+
+		if (slyj != null) {
+			setSlyj(slyj);
+		}
+
+		String slsj = (String)attributes.get("slsj");
+
+		if (slsj != null) {
+			setSlsj(slsj);
 		}
 	}
 
@@ -452,6 +556,191 @@ public class PermitModelImpl extends BaseModelImpl<Permit>
 		_sgxkzbh = sgxkzbh;
 	}
 
+	@Override
+	public String getSlbh() {
+		if (_slbh == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _slbh;
+		}
+	}
+
+	@Override
+	public void setSlbh(String slbh) {
+		_slbh = slbh;
+	}
+
+	@Override
+	public int getHjgsz() {
+		return _hjgsz;
+	}
+
+	@Override
+	public void setHjgsz(int hjgsz) {
+		_hjgsz = hjgsz;
+	}
+
+	@Override
+	public int getHjgsh() {
+		return _hjgsh;
+	}
+
+	@Override
+	public void setHjgsh(int hjgsh) {
+		_hjgsh = hjgsh;
+	}
+
+	@Override
+	public String getSqr() {
+		if (_sqr == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _sqr;
+		}
+	}
+
+	@Override
+	public void setSqr(String sqr) {
+		_sqr = sqr;
+	}
+
+	@Override
+	public String getSqsx() {
+		if (_sqsx == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _sqsx;
+		}
+	}
+
+	@Override
+	public void setSqsx(String sqsx) {
+		_sqsx = sqsx;
+	}
+
+	@Override
+	public String getSqh() {
+		if (_sqh == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _sqh;
+		}
+	}
+
+	@Override
+	public void setSqh(String sqh) {
+		_sqh = sqh;
+	}
+
+	@Override
+	public String getCltjr() {
+		if (_cltjr == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _cltjr;
+		}
+	}
+
+	@Override
+	public void setCltjr(String cltjr) {
+		_cltjr = cltjr;
+	}
+
+	@Override
+	public String getCltjrlxdh() {
+		if (_cltjrlxdh == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _cltjrlxdh;
+		}
+	}
+
+	@Override
+	public void setCltjrlxdh(String cltjrlxdh) {
+		_cltjrlxdh = cltjrlxdh;
+	}
+
+	@Override
+	public String getCltjrlxdz() {
+		if (_cltjrlxdz == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _cltjrlxdz;
+		}
+	}
+
+	@Override
+	public void setCltjrlxdz(String cltjrlxdz) {
+		_cltjrlxdz = cltjrlxdz;
+	}
+
+	@Override
+	public String getSjr() {
+		if (_sjr == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _sjr;
+		}
+	}
+
+	@Override
+	public void setSjr(String sjr) {
+		_sjr = sjr;
+	}
+
+	@Override
+	public String getSjrlxdh() {
+		if (_sjrlxdh == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _sjrlxdh;
+		}
+	}
+
+	@Override
+	public void setSjrlxdh(String sjrlxdh) {
+		_sjrlxdh = sjrlxdh;
+	}
+
+	@Override
+	public String getSlyj() {
+		if (_slyj == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _slyj;
+		}
+	}
+
+	@Override
+	public void setSlyj(String slyj) {
+		_slyj = slyj;
+	}
+
+	@Override
+	public String getSlsj() {
+		if (_slsj == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _slsj;
+		}
+	}
+
+	@Override
+	public void setSlsj(String slsj) {
+		_slsj = slsj;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -498,6 +787,19 @@ public class PermitModelImpl extends BaseModelImpl<Permit>
 		permitImpl.setBdh(getBdh());
 		permitImpl.setYwbh(getYwbh());
 		permitImpl.setSgxkzbh(getSgxkzbh());
+		permitImpl.setSlbh(getSlbh());
+		permitImpl.setHjgsz(getHjgsz());
+		permitImpl.setHjgsh(getHjgsh());
+		permitImpl.setSqr(getSqr());
+		permitImpl.setSqsx(getSqsx());
+		permitImpl.setSqh(getSqh());
+		permitImpl.setCltjr(getCltjr());
+		permitImpl.setCltjrlxdh(getCltjrlxdh());
+		permitImpl.setCltjrlxdz(getCltjrlxdz());
+		permitImpl.setSjr(getSjr());
+		permitImpl.setSjrlxdh(getSjrlxdh());
+		permitImpl.setSlyj(getSlyj());
+		permitImpl.setSlsj(getSlsj());
 
 		permitImpl.resetOriginalValues();
 
@@ -645,12 +947,104 @@ public class PermitModelImpl extends BaseModelImpl<Permit>
 			permitCacheModel.sgxkzbh = null;
 		}
 
+		permitCacheModel.slbh = getSlbh();
+
+		String slbh = permitCacheModel.slbh;
+
+		if ((slbh != null) && (slbh.length() == 0)) {
+			permitCacheModel.slbh = null;
+		}
+
+		permitCacheModel.hjgsz = getHjgsz();
+
+		permitCacheModel.hjgsh = getHjgsh();
+
+		permitCacheModel.sqr = getSqr();
+
+		String sqr = permitCacheModel.sqr;
+
+		if ((sqr != null) && (sqr.length() == 0)) {
+			permitCacheModel.sqr = null;
+		}
+
+		permitCacheModel.sqsx = getSqsx();
+
+		String sqsx = permitCacheModel.sqsx;
+
+		if ((sqsx != null) && (sqsx.length() == 0)) {
+			permitCacheModel.sqsx = null;
+		}
+
+		permitCacheModel.sqh = getSqh();
+
+		String sqh = permitCacheModel.sqh;
+
+		if ((sqh != null) && (sqh.length() == 0)) {
+			permitCacheModel.sqh = null;
+		}
+
+		permitCacheModel.cltjr = getCltjr();
+
+		String cltjr = permitCacheModel.cltjr;
+
+		if ((cltjr != null) && (cltjr.length() == 0)) {
+			permitCacheModel.cltjr = null;
+		}
+
+		permitCacheModel.cltjrlxdh = getCltjrlxdh();
+
+		String cltjrlxdh = permitCacheModel.cltjrlxdh;
+
+		if ((cltjrlxdh != null) && (cltjrlxdh.length() == 0)) {
+			permitCacheModel.cltjrlxdh = null;
+		}
+
+		permitCacheModel.cltjrlxdz = getCltjrlxdz();
+
+		String cltjrlxdz = permitCacheModel.cltjrlxdz;
+
+		if ((cltjrlxdz != null) && (cltjrlxdz.length() == 0)) {
+			permitCacheModel.cltjrlxdz = null;
+		}
+
+		permitCacheModel.sjr = getSjr();
+
+		String sjr = permitCacheModel.sjr;
+
+		if ((sjr != null) && (sjr.length() == 0)) {
+			permitCacheModel.sjr = null;
+		}
+
+		permitCacheModel.sjrlxdh = getSjrlxdh();
+
+		String sjrlxdh = permitCacheModel.sjrlxdh;
+
+		if ((sjrlxdh != null) && (sjrlxdh.length() == 0)) {
+			permitCacheModel.sjrlxdh = null;
+		}
+
+		permitCacheModel.slyj = getSlyj();
+
+		String slyj = permitCacheModel.slyj;
+
+		if ((slyj != null) && (slyj.length() == 0)) {
+			permitCacheModel.slyj = null;
+		}
+
+		permitCacheModel.slsj = getSlsj();
+
+		String slsj = permitCacheModel.slsj;
+
+		if ((slsj != null) && (slsj.length() == 0)) {
+			permitCacheModel.slsj = null;
+		}
+
 		return permitCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(31);
+		StringBundler sb = new StringBundler(57);
 
 		sb.append("{permitId=");
 		sb.append(getPermitId());
@@ -682,6 +1076,32 @@ public class PermitModelImpl extends BaseModelImpl<Permit>
 		sb.append(getYwbh());
 		sb.append(", sgxkzbh=");
 		sb.append(getSgxkzbh());
+		sb.append(", slbh=");
+		sb.append(getSlbh());
+		sb.append(", hjgsz=");
+		sb.append(getHjgsz());
+		sb.append(", hjgsh=");
+		sb.append(getHjgsh());
+		sb.append(", sqr=");
+		sb.append(getSqr());
+		sb.append(", sqsx=");
+		sb.append(getSqsx());
+		sb.append(", sqh=");
+		sb.append(getSqh());
+		sb.append(", cltjr=");
+		sb.append(getCltjr());
+		sb.append(", cltjrlxdh=");
+		sb.append(getCltjrlxdh());
+		sb.append(", cltjrlxdz=");
+		sb.append(getCltjrlxdz());
+		sb.append(", sjr=");
+		sb.append(getSjr());
+		sb.append(", sjrlxdh=");
+		sb.append(getSjrlxdh());
+		sb.append(", slyj=");
+		sb.append(getSlyj());
+		sb.append(", slsj=");
+		sb.append(getSlsj());
 		sb.append("}");
 
 		return sb.toString();
@@ -689,7 +1109,7 @@ public class PermitModelImpl extends BaseModelImpl<Permit>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(49);
+		StringBundler sb = new StringBundler(88);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.cp.permit.model.Permit");
@@ -755,6 +1175,58 @@ public class PermitModelImpl extends BaseModelImpl<Permit>
 			"<column><column-name>sgxkzbh</column-name><column-value><![CDATA[");
 		sb.append(getSgxkzbh());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>slbh</column-name><column-value><![CDATA[");
+		sb.append(getSlbh());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>hjgsz</column-name><column-value><![CDATA[");
+		sb.append(getHjgsz());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>hjgsh</column-name><column-value><![CDATA[");
+		sb.append(getHjgsh());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>sqr</column-name><column-value><![CDATA[");
+		sb.append(getSqr());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>sqsx</column-name><column-value><![CDATA[");
+		sb.append(getSqsx());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>sqh</column-name><column-value><![CDATA[");
+		sb.append(getSqh());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>cltjr</column-name><column-value><![CDATA[");
+		sb.append(getCltjr());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>cltjrlxdh</column-name><column-value><![CDATA[");
+		sb.append(getCltjrlxdh());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>cltjrlxdz</column-name><column-value><![CDATA[");
+		sb.append(getCltjrlxdz());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>sjr</column-name><column-value><![CDATA[");
+		sb.append(getSjr());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>sjrlxdh</column-name><column-value><![CDATA[");
+		sb.append(getSjrlxdh());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>slyj</column-name><column-value><![CDATA[");
+		sb.append(getSlyj());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>slsj</column-name><column-value><![CDATA[");
+		sb.append(getSlsj());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -780,6 +1252,19 @@ public class PermitModelImpl extends BaseModelImpl<Permit>
 	private String _bdh;
 	private String _ywbh;
 	private String _sgxkzbh;
+	private String _slbh;
+	private int _hjgsz;
+	private int _hjgsh;
+	private String _sqr;
+	private String _sqsx;
+	private String _sqh;
+	private String _cltjr;
+	private String _cltjrlxdh;
+	private String _cltjrlxdz;
+	private String _sjr;
+	private String _sjrlxdh;
+	private String _slyj;
+	private String _slsj;
 	private long _columnBitmask;
 	private Permit _escapedModel;
 }

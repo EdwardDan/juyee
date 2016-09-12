@@ -64,6 +64,19 @@ public class PermitWrapper implements Permit, ModelWrapper<Permit> {
 		attributes.put("bdh", getBdh());
 		attributes.put("ywbh", getYwbh());
 		attributes.put("sgxkzbh", getSgxkzbh());
+		attributes.put("slbh", getSlbh());
+		attributes.put("hjgsz", getHjgsz());
+		attributes.put("hjgsh", getHjgsh());
+		attributes.put("sqr", getSqr());
+		attributes.put("sqsx", getSqsx());
+		attributes.put("sqh", getSqh());
+		attributes.put("cltjr", getCltjr());
+		attributes.put("cltjrlxdh", getCltjrlxdh());
+		attributes.put("cltjrlxdz", getCltjrlxdz());
+		attributes.put("sjr", getSjr());
+		attributes.put("sjrlxdh", getSjrlxdh());
+		attributes.put("slyj", getSlyj());
+		attributes.put("slsj", getSlsj());
 
 		return attributes;
 	}
@@ -158,6 +171,84 @@ public class PermitWrapper implements Permit, ModelWrapper<Permit> {
 
 		if (sgxkzbh != null) {
 			setSgxkzbh(sgxkzbh);
+		}
+
+		String slbh = (String)attributes.get("slbh");
+
+		if (slbh != null) {
+			setSlbh(slbh);
+		}
+
+		Integer hjgsz = (Integer)attributes.get("hjgsz");
+
+		if (hjgsz != null) {
+			setHjgsz(hjgsz);
+		}
+
+		Integer hjgsh = (Integer)attributes.get("hjgsh");
+
+		if (hjgsh != null) {
+			setHjgsh(hjgsh);
+		}
+
+		String sqr = (String)attributes.get("sqr");
+
+		if (sqr != null) {
+			setSqr(sqr);
+		}
+
+		String sqsx = (String)attributes.get("sqsx");
+
+		if (sqsx != null) {
+			setSqsx(sqsx);
+		}
+
+		String sqh = (String)attributes.get("sqh");
+
+		if (sqh != null) {
+			setSqh(sqh);
+		}
+
+		String cltjr = (String)attributes.get("cltjr");
+
+		if (cltjr != null) {
+			setCltjr(cltjr);
+		}
+
+		String cltjrlxdh = (String)attributes.get("cltjrlxdh");
+
+		if (cltjrlxdh != null) {
+			setCltjrlxdh(cltjrlxdh);
+		}
+
+		String cltjrlxdz = (String)attributes.get("cltjrlxdz");
+
+		if (cltjrlxdz != null) {
+			setCltjrlxdz(cltjrlxdz);
+		}
+
+		String sjr = (String)attributes.get("sjr");
+
+		if (sjr != null) {
+			setSjr(sjr);
+		}
+
+		String sjrlxdh = (String)attributes.get("sjrlxdh");
+
+		if (sjrlxdh != null) {
+			setSjrlxdh(sjrlxdh);
+		}
+
+		String slyj = (String)attributes.get("slyj");
+
+		if (slyj != null) {
+			setSlyj(slyj);
+		}
+
+		String slsj = (String)attributes.get("slsj");
+
+		if (slsj != null) {
+			setSlsj(slsj);
 		}
 	}
 
@@ -501,6 +592,266 @@ public class PermitWrapper implements Permit, ModelWrapper<Permit> {
 	@Override
 	public void setSgxkzbh(java.lang.String sgxkzbh) {
 		_permit.setSgxkzbh(sgxkzbh);
+	}
+
+	/**
+	* Returns the slbh of this permit.
+	*
+	* @return the slbh of this permit
+	*/
+	@Override
+	public java.lang.String getSlbh() {
+		return _permit.getSlbh();
+	}
+
+	/**
+	* Sets the slbh of this permit.
+	*
+	* @param slbh the slbh of this permit
+	*/
+	@Override
+	public void setSlbh(java.lang.String slbh) {
+		_permit.setSlbh(slbh);
+	}
+
+	/**
+	* Returns the hjgsz of this permit.
+	*
+	* @return the hjgsz of this permit
+	*/
+	@Override
+	public int getHjgsz() {
+		return _permit.getHjgsz();
+	}
+
+	/**
+	* Sets the hjgsz of this permit.
+	*
+	* @param hjgsz the hjgsz of this permit
+	*/
+	@Override
+	public void setHjgsz(int hjgsz) {
+		_permit.setHjgsz(hjgsz);
+	}
+
+	/**
+	* Returns the hjgsh of this permit.
+	*
+	* @return the hjgsh of this permit
+	*/
+	@Override
+	public int getHjgsh() {
+		return _permit.getHjgsh();
+	}
+
+	/**
+	* Sets the hjgsh of this permit.
+	*
+	* @param hjgsh the hjgsh of this permit
+	*/
+	@Override
+	public void setHjgsh(int hjgsh) {
+		_permit.setHjgsh(hjgsh);
+	}
+
+	/**
+	* Returns the sqr of this permit.
+	*
+	* @return the sqr of this permit
+	*/
+	@Override
+	public java.lang.String getSqr() {
+		return _permit.getSqr();
+	}
+
+	/**
+	* Sets the sqr of this permit.
+	*
+	* @param sqr the sqr of this permit
+	*/
+	@Override
+	public void setSqr(java.lang.String sqr) {
+		_permit.setSqr(sqr);
+	}
+
+	/**
+	* Returns the sqsx of this permit.
+	*
+	* @return the sqsx of this permit
+	*/
+	@Override
+	public java.lang.String getSqsx() {
+		return _permit.getSqsx();
+	}
+
+	/**
+	* Sets the sqsx of this permit.
+	*
+	* @param sqsx the sqsx of this permit
+	*/
+	@Override
+	public void setSqsx(java.lang.String sqsx) {
+		_permit.setSqsx(sqsx);
+	}
+
+	/**
+	* Returns the sqh of this permit.
+	*
+	* @return the sqh of this permit
+	*/
+	@Override
+	public java.lang.String getSqh() {
+		return _permit.getSqh();
+	}
+
+	/**
+	* Sets the sqh of this permit.
+	*
+	* @param sqh the sqh of this permit
+	*/
+	@Override
+	public void setSqh(java.lang.String sqh) {
+		_permit.setSqh(sqh);
+	}
+
+	/**
+	* Returns the cltjr of this permit.
+	*
+	* @return the cltjr of this permit
+	*/
+	@Override
+	public java.lang.String getCltjr() {
+		return _permit.getCltjr();
+	}
+
+	/**
+	* Sets the cltjr of this permit.
+	*
+	* @param cltjr the cltjr of this permit
+	*/
+	@Override
+	public void setCltjr(java.lang.String cltjr) {
+		_permit.setCltjr(cltjr);
+	}
+
+	/**
+	* Returns the cltjrlxdh of this permit.
+	*
+	* @return the cltjrlxdh of this permit
+	*/
+	@Override
+	public java.lang.String getCltjrlxdh() {
+		return _permit.getCltjrlxdh();
+	}
+
+	/**
+	* Sets the cltjrlxdh of this permit.
+	*
+	* @param cltjrlxdh the cltjrlxdh of this permit
+	*/
+	@Override
+	public void setCltjrlxdh(java.lang.String cltjrlxdh) {
+		_permit.setCltjrlxdh(cltjrlxdh);
+	}
+
+	/**
+	* Returns the cltjrlxdz of this permit.
+	*
+	* @return the cltjrlxdz of this permit
+	*/
+	@Override
+	public java.lang.String getCltjrlxdz() {
+		return _permit.getCltjrlxdz();
+	}
+
+	/**
+	* Sets the cltjrlxdz of this permit.
+	*
+	* @param cltjrlxdz the cltjrlxdz of this permit
+	*/
+	@Override
+	public void setCltjrlxdz(java.lang.String cltjrlxdz) {
+		_permit.setCltjrlxdz(cltjrlxdz);
+	}
+
+	/**
+	* Returns the sjr of this permit.
+	*
+	* @return the sjr of this permit
+	*/
+	@Override
+	public java.lang.String getSjr() {
+		return _permit.getSjr();
+	}
+
+	/**
+	* Sets the sjr of this permit.
+	*
+	* @param sjr the sjr of this permit
+	*/
+	@Override
+	public void setSjr(java.lang.String sjr) {
+		_permit.setSjr(sjr);
+	}
+
+	/**
+	* Returns the sjrlxdh of this permit.
+	*
+	* @return the sjrlxdh of this permit
+	*/
+	@Override
+	public java.lang.String getSjrlxdh() {
+		return _permit.getSjrlxdh();
+	}
+
+	/**
+	* Sets the sjrlxdh of this permit.
+	*
+	* @param sjrlxdh the sjrlxdh of this permit
+	*/
+	@Override
+	public void setSjrlxdh(java.lang.String sjrlxdh) {
+		_permit.setSjrlxdh(sjrlxdh);
+	}
+
+	/**
+	* Returns the slyj of this permit.
+	*
+	* @return the slyj of this permit
+	*/
+	@Override
+	public java.lang.String getSlyj() {
+		return _permit.getSlyj();
+	}
+
+	/**
+	* Sets the slyj of this permit.
+	*
+	* @param slyj the slyj of this permit
+	*/
+	@Override
+	public void setSlyj(java.lang.String slyj) {
+		_permit.setSlyj(slyj);
+	}
+
+	/**
+	* Returns the slsj of this permit.
+	*
+	* @return the slsj of this permit
+	*/
+	@Override
+	public java.lang.String getSlsj() {
+		return _permit.getSlsj();
+	}
+
+	/**
+	* Sets the slsj of this permit.
+	*
+	* @param slsj the slsj of this permit
+	*/
+	@Override
+	public void setSlsj(java.lang.String slsj) {
+		_permit.setSlsj(slsj);
 	}
 
 	@Override

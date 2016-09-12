@@ -67,19 +67,6 @@ public class ProjectProfileSoap implements Serializable {
 		soapModel.setYzzpl3(model.getYzzpl3());
 		soapModel.setYzzpl4(model.getYzzpl4());
 		soapModel.setTjsj(model.getTjsj());
-		soapModel.setSlbh(model.getSlbh());
-		soapModel.setHjgsz(model.getHjgsz());
-		soapModel.setHjgsh(model.getHjgsh());
-		soapModel.setSqr(model.getSqr());
-		soapModel.setSqsx(model.getSqsx());
-		soapModel.setSqh(model.getSqh());
-		soapModel.setCltjr(model.getCltjr());
-		soapModel.setCltjrlxdh(model.getCltjrlxdh());
-		soapModel.setCltjrlxdz(model.getCltjrlxdz());
-		soapModel.setSjr(model.getSjr());
-		soapModel.setSjrlxdh(model.getSjrlxdh());
-		soapModel.setSlyj(model.getSlyj());
-		soapModel.setSlsj(model.getSlsj());
 
 		return soapModel;
 	}
@@ -432,110 +419,6 @@ public class ProjectProfileSoap implements Serializable {
 		_tjsj = tjsj;
 	}
 
-	public String getSlbh() {
-		return _slbh;
-	}
-
-	public void setSlbh(String slbh) {
-		_slbh = slbh;
-	}
-
-	public int getHjgsz() {
-		return _hjgsz;
-	}
-
-	public void setHjgsz(int hjgsz) {
-		_hjgsz = hjgsz;
-	}
-
-	public int getHjgsh() {
-		return _hjgsh;
-	}
-
-	public void setHjgsh(int hjgsh) {
-		_hjgsh = hjgsh;
-	}
-
-	public String getSqr() {
-		return _sqr;
-	}
-
-	public void setSqr(String sqr) {
-		_sqr = sqr;
-	}
-
-	public String getSqsx() {
-		return _sqsx;
-	}
-
-	public void setSqsx(String sqsx) {
-		_sqsx = sqsx;
-	}
-
-	public String getSqh() {
-		return _sqh;
-	}
-
-	public void setSqh(String sqh) {
-		_sqh = sqh;
-	}
-
-	public String getCltjr() {
-		return _cltjr;
-	}
-
-	public void setCltjr(String cltjr) {
-		_cltjr = cltjr;
-	}
-
-	public String getCltjrlxdh() {
-		return _cltjrlxdh;
-	}
-
-	public void setCltjrlxdh(String cltjrlxdh) {
-		_cltjrlxdh = cltjrlxdh;
-	}
-
-	public String getCltjrlxdz() {
-		return _cltjrlxdz;
-	}
-
-	public void setCltjrlxdz(String cltjrlxdz) {
-		_cltjrlxdz = cltjrlxdz;
-	}
-
-	public String getSjr() {
-		return _sjr;
-	}
-
-	public void setSjr(String sjr) {
-		_sjr = sjr;
-	}
-
-	public String getSjrlxdh() {
-		return _sjrlxdh;
-	}
-
-	public void setSjrlxdh(String sjrlxdh) {
-		_sjrlxdh = sjrlxdh;
-	}
-
-	public String getSlyj() {
-		return _slyj;
-	}
-
-	public void setSlyj(String slyj) {
-		_slyj = slyj;
-	}
-
-	public String getSlsj() {
-		return _slsj;
-	}
-
-	public void setSlsj(String slsj) {
-		_slsj = slsj;
-	}
-
 	private long _permitId;
 	private String _bjbh;
 	private String _jsdwmc;
@@ -573,17 +456,4 @@ public class ProjectProfileSoap implements Serializable {
 	private String _yzzpl3;
 	private String _yzzpl4;
 	private Date _tjsj;
-	private String _slbh;
-	private int _hjgsz;
-	private int _hjgsh;
-	private String _sqr;
-	private String _sqsx;
-	private String _sqh;
-	private String _cltjr;
-	private String _cltjrlxdh;
-	private String _cltjrlxdz;
-	private String _sjr;
-	private String _sjrlxdh;
-	private String _slyj;
-	private String _slsj;
 }

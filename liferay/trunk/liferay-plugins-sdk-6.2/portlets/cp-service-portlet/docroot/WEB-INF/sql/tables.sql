@@ -12,6 +12,53 @@ create table cp_ApplyMaterial (
 	shyj VARCHAR(75) null
 );
 
+create table cp_Complete (
+	completeId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	zzjgdm VARCHAR(75) null,
+	bjbh VARCHAR(75) null,
+	sqbz INTEGER,
+	sqzt INTEGER,
+	babh VARCHAR(75) null
+);
+
+create table cp_CompleteApplyMaterial (
+	materialId LONG not null primary key,
+	completeId LONG,
+	xh VARCHAR(75) null,
+	clmc VARCHAR(75) null,
+	fileEntryIds VARCHAR(75) null
+);
+
+create table cp_CompleteProjectProfile (
+	completeId LONG not null primary key,
+	bjbh VARCHAR(75) null,
+	gcmc VARCHAR(500) null,
+	jsdwmc VARCHAR(500) null,
+	jsdwdz VARCHAR(500) null,
+	jsdd VARCHAR(500) null,
+	szqx VARCHAR(75) null,
+	fddbr VARCHAR(75) null,
+	lxr VARCHAR(75) null,
+	lxdh VARCHAR(75) null,
+	bz VARCHAR(1000) null
+);
+
+create table cp_CompleteUnitProject (
+	projectId LONG not null primary key,
+	completeId LONG,
+	bjbh VARCHAR(75) null,
+	sgxkzbh VARCHAR(75) null,
+	gcbh VARCHAR(75) null,
+	gcmc VARCHAR(500) null,
+	jsnr VARCHAR(1000) null
+);
+
 create table cp_Contract (
 	contractId VARCHAR(75) not null primary key,
 	zzjgdm LONG,
@@ -116,7 +163,20 @@ create table cp_Permit (
 	sqzt INTEGER,
 	bdh VARCHAR(75) null,
 	ywbh VARCHAR(75) null,
-	sgxkzbh VARCHAR(75) null
+	sgxkzbh VARCHAR(75) null,
+	slbh VARCHAR(75) null,
+	hjgsz INTEGER,
+	hjgsh INTEGER,
+	sqr VARCHAR(75) null,
+	sqsx VARCHAR(75) null,
+	sqh VARCHAR(75) null,
+	cltjr VARCHAR(75) null,
+	cltjrlxdh VARCHAR(75) null,
+	cltjrlxdz VARCHAR(75) null,
+	sjr VARCHAR(75) null,
+	sjrlxdh VARCHAR(75) null,
+	slyj VARCHAR(75) null,
+	slsj VARCHAR(75) null
 );
 
 create table cp_Project (
@@ -310,20 +370,7 @@ create table cp_ProjectProfile (
 	yzzpl2 VARCHAR(75) null,
 	yzzpl3 VARCHAR(75) null,
 	yzzpl4 VARCHAR(75) null,
-	tjsj DATE null,
-	slbh VARCHAR(75) null,
-	hjgsz INTEGER,
-	hjgsh INTEGER,
-	sqr VARCHAR(75) null,
-	sqsx VARCHAR(1000) null,
-	sqh VARCHAR(75) null,
-	cltjr VARCHAR(75) null,
-	cltjrlxdh VARCHAR(75) null,
-	cltjrlxdz VARCHAR(500) null,
-	sjr VARCHAR(75) null,
-	sjrlxdh VARCHAR(75) null,
-	slyj VARCHAR(1000) null,
-	slsj VARCHAR(75) null
+	tjsj DATE null
 );
 
 create table cp_UnitProject (

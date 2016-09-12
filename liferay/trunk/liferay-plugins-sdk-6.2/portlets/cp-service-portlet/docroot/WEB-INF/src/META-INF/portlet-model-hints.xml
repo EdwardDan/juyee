@@ -306,6 +306,19 @@
 		<field name="bdh" type="String" />
 		<field name="ywbh" type="String" />
 		<field name="sgxkzbh" type="String" />
+		<field name="slbh" type="String" />
+		<field name="hjgsz" type="int" />
+		<field name="hjgsh" type="int" />
+		<field name="sqr" type="String" />
+		<field name="sqsx" type="String" />
+		<field name="sqh" type="String" />
+		<field name="cltjr" type="String" />
+		<field name="cltjrlxdh" type="String" />
+		<field name="cltjrlxdz" type="String" />
+		<field name="sjr" type="String" />
+		<field name="sjrlxdh" type="String" />
+		<field name="slyj" type="String" />
+		<field name="slsj" type="String" />
 	</model>
 	<model name="com.justonetech.cp.permit.model.ProjectProfile">
 		<field name="permitId" type="long" />
@@ -355,25 +368,6 @@
 		<field name="yzzpl3" type="String" />
 		<field name="yzzpl4" type="String" />
 		<field name="tjsj" type="Date" />
-		<field name="slbh" type="String" />
-		<field name="hjgsz" type="int" />
-		<field name="hjgsh" type="int" />
-		<field name="sqr" type="String" />
-		<field name="sqsx" type="String">
-			<hint name="max-length">1000</hint>
-		</field>
-		<field name="sqh" type="String" />
-		<field name="cltjr" type="String" />
-		<field name="cltjrlxdh" type="String" />
-		<field name="cltjrlxdz" type="String">
-			<hint name="max-length">500</hint>
-		</field>
-		<field name="sjr" type="String" />
-		<field name="sjrlxdh" type="String" />
-		<field name="slyj" type="String">
-			<hint name="max-length">1000</hint>
-		</field>
-		<field name="slsj" type="String" />
 	</model>
 	<model name="com.justonetech.cp.permit.model.UnitProject">
 		<field name="projectId" type="long" />
@@ -382,5 +376,62 @@
 		<field name="gcbh" type="String" />
 		<field name="gcmc" type="String" />
 		<field name="jsnr" type="String" />
+	</model>
+	<model name="com.justonetech.cp.complete.model.Complete">
+		<field name="completeId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="zzjgdm" type="String" />
+		<field name="bjbh" type="String" />
+		<field name="sqbz" type="int" />
+		<field name="sqzt" type="int" />
+		<field name="babh" type="String" />
+	</model>
+	<model name="com.justonetech.cp.complete.model.CompleteApplyMaterial">
+		<field name="materialId" type="long" />
+		<field name="completeId" type="long" />
+		<field name="xh" type="String" />
+		<field name="clmc" type="String" />
+		<field name="fileEntryIds" type="String" />
+	</model>
+	<model name="com.justonetech.cp.complete.model.CompleteProjectProfile">
+		<field name="completeId" type="long" />
+		<field name="bjbh" type="String" />
+		<field name="gcmc" type="String">
+			<hint name="max-length">500</hint>
+		</field>
+		<field name="jsdwmc" type="String">
+			<hint name="max-length">500</hint>
+		</field>
+		<field name="jsdwdz" type="String">
+			<hint name="max-length">500</hint>
+		</field>
+		<field name="jsdd" type="String">
+			<hint name="max-length">500</hint>
+		</field>
+		<field name="szqx" type="String" />
+		<field name="fddbr" type="String" />
+		<field name="lxr" type="String" />
+		<field name="lxdh" type="String" />
+		<field name="bz" type="String">
+			<hint name="max-length">1000</hint>
+		</field>
+	</model>
+	<model name="com.justonetech.cp.complete.model.CompleteUnitProject">
+		<field name="projectId" type="long" />
+		<field name="completeId" type="long" />
+		<field name="bjbh" type="String" />
+		<field name="sgxkzbh" type="String" />
+		<field name="gcbh" type="String" />
+		<field name="gcmc" type="String">
+			<hint name="max-length">500</hint>
+		</field>
+		<field name="jsnr" type="String">
+			<hint name="max-length">1000</hint>
+		</field>
 	</model>
 </model-hints>

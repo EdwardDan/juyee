@@ -15,4 +15,12 @@
 	<bean id="com.justonetech.cp.permit.service.persistence.ProjectProfilePersistence" class="com.justonetech.cp.permit.service.persistence.ProjectProfilePersistenceImpl" parent="basePersistence" />
 	<bean id="com.justonetech.cp.permit.service.UnitProjectLocalService" class="com.justonetech.cp.permit.service.impl.UnitProjectLocalServiceImpl" />
 	<bean id="com.justonetech.cp.permit.service.persistence.UnitProjectPersistence" class="com.justonetech.cp.permit.service.persistence.UnitProjectPersistenceImpl" parent="basePersistence" />
+	<bean id="com.justonetech.cp.complete.service.CompleteLocalService" class="com.justonetech.cp.complete.service.impl.CompleteLocalServiceImpl" />
+	<bean id="com.justonetech.cp.complete.service.persistence.CompletePersistence" class="com.justonetech.cp.complete.service.persistence.CompletePersistenceImpl" parent="basePersistence" />
+	<bean id="com.justonetech.cp.complete.service.CompleteApplyMaterialLocalService" class="com.justonetech.cp.complete.service.impl.CompleteApplyMaterialLocalServiceImpl" />
+	<bean id="com.justonetech.cp.complete.service.persistence.CompleteApplyMaterialPersistence" class="com.justonetech.cp.complete.service.persistence.CompleteApplyMaterialPersistenceImpl" parent="basePersistence" />
+	<bean id="com.justonetech.cp.complete.service.CompleteProjectProfileLocalService" class="com.justonetech.cp.complete.service.impl.CompleteProjectProfileLocalServiceImpl" />
+	<bean id="com.justonetech.cp.complete.service.persistence.CompleteProjectProfilePersistence" class="com.justonetech.cp.complete.service.persistence.CompleteProjectProfilePersistenceImpl" parent="basePersistence" />
+	<bean id="com.justonetech.cp.complete.service.CompleteUnitProjectLocalService" class="com.justonetech.cp.complete.service.impl.CompleteUnitProjectLocalServiceImpl" />
+	<bean id="com.justonetech.cp.complete.service.persistence.CompleteUnitProjectPersistence" class="com.justonetech.cp.complete.service.persistence.CompleteUnitProjectPersistenceImpl" parent="basePersistence" />
 </beans>

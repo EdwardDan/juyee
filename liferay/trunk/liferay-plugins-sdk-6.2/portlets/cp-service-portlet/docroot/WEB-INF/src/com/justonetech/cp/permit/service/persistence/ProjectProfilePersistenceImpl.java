@@ -360,19 +360,6 @@ public class ProjectProfilePersistenceImpl extends BasePersistenceImpl<ProjectPr
 		projectProfileImpl.setYzzpl3(projectProfile.getYzzpl3());
 		projectProfileImpl.setYzzpl4(projectProfile.getYzzpl4());
 		projectProfileImpl.setTjsj(projectProfile.getTjsj());
-		projectProfileImpl.setSlbh(projectProfile.getSlbh());
-		projectProfileImpl.setHjgsz(projectProfile.getHjgsz());
-		projectProfileImpl.setHjgsh(projectProfile.getHjgsh());
-		projectProfileImpl.setSqr(projectProfile.getSqr());
-		projectProfileImpl.setSqsx(projectProfile.getSqsx());
-		projectProfileImpl.setSqh(projectProfile.getSqh());
-		projectProfileImpl.setCltjr(projectProfile.getCltjr());
-		projectProfileImpl.setCltjrlxdh(projectProfile.getCltjrlxdh());
-		projectProfileImpl.setCltjrlxdz(projectProfile.getCltjrlxdz());
-		projectProfileImpl.setSjr(projectProfile.getSjr());
-		projectProfileImpl.setSjrlxdh(projectProfile.getSjrlxdh());
-		projectProfileImpl.setSlyj(projectProfile.getSlyj());
-		projectProfileImpl.setSlsj(projectProfile.getSlsj());
 
 		return projectProfileImpl;
 	}

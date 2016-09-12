@@ -95,22 +95,9 @@ public class ProjectProfileModelImpl extends BaseModelImpl<ProjectProfile>
 			{ "yzzpl2", Types.VARCHAR },
 			{ "yzzpl3", Types.VARCHAR },
 			{ "yzzpl4", Types.VARCHAR },
-			{ "tjsj", Types.TIMESTAMP },
-			{ "slbh", Types.VARCHAR },
-			{ "hjgsz", Types.INTEGER },
-			{ "hjgsh", Types.INTEGER },
-			{ "sqr", Types.VARCHAR },
-			{ "sqsx", Types.VARCHAR },
-			{ "sqh", Types.VARCHAR },
-			{ "cltjr", Types.VARCHAR },
-			{ "cltjrlxdh", Types.VARCHAR },
-			{ "cltjrlxdz", Types.VARCHAR },
-			{ "sjr", Types.VARCHAR },
-			{ "sjrlxdh", Types.VARCHAR },
-			{ "slyj", Types.VARCHAR },
-			{ "slsj", Types.VARCHAR }
+			{ "tjsj", Types.TIMESTAMP }
 		};
-	public static final String TABLE_SQL_CREATE = "create table cp_ProjectProfile (permitId LONG not null primary key,bjbh VARCHAR(75) null,jsdwmc VARCHAR(300) null,jsdwxz VARCHAR(75) null,jsdwdz VARCHAR(300) null,gcmc VARCHAR(300) null,jsdd VARCHAR(300) null,jsgcgm VARCHAR(500) null,fwjzmj VARCHAR(75) null,htjg VARCHAR(75) null,htgq INTEGER,fddbr VARCHAR(75) null,jsdwlxdh VARCHAR(75) null,jsdwlxr VARCHAR(75) null,jsdwsjh VARCHAR(75) null,jsydpzwjhfdccqzbh VARCHAR(75) null,jsgcghxkzbh VARCHAR(75) null,xckgqk VARCHAR(75) null,xmlx LONG,lxjb VARCHAR(75) null,xmxz LONG,ssqx VARCHAR(75) null,ywbm VARCHAR(75) null,jsddssqx LONG,jsgclb VARCHAR(75) null,jsgcsx LONG,gyzjbz VARCHAR(75) null,zbjg VARCHAR(75) null,xmtzgs VARCHAR(75) null,jhkg DATE null,jhjg DATE null,sfzftzl BOOLEAN,yzzpl1 VARCHAR(75) null,yzzpl2 VARCHAR(75) null,yzzpl3 VARCHAR(75) null,yzzpl4 VARCHAR(75) null,tjsj DATE null,slbh VARCHAR(75) null,hjgsz INTEGER,hjgsh INTEGER,sqr VARCHAR(75) null,sqsx VARCHAR(1000) null,sqh VARCHAR(75) null,cltjr VARCHAR(75) null,cltjrlxdh VARCHAR(75) null,cltjrlxdz VARCHAR(500) null,sjr VARCHAR(75) null,sjrlxdh VARCHAR(75) null,slyj VARCHAR(1000) null,slsj VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table cp_ProjectProfile (permitId LONG not null primary key,bjbh VARCHAR(75) null,jsdwmc VARCHAR(300) null,jsdwxz VARCHAR(75) null,jsdwdz VARCHAR(300) null,gcmc VARCHAR(300) null,jsdd VARCHAR(300) null,jsgcgm VARCHAR(500) null,fwjzmj VARCHAR(75) null,htjg VARCHAR(75) null,htgq INTEGER,fddbr VARCHAR(75) null,jsdwlxdh VARCHAR(75) null,jsdwlxr VARCHAR(75) null,jsdwsjh VARCHAR(75) null,jsydpzwjhfdccqzbh VARCHAR(75) null,jsgcghxkzbh VARCHAR(75) null,xckgqk VARCHAR(75) null,xmlx LONG,lxjb VARCHAR(75) null,xmxz LONG,ssqx VARCHAR(75) null,ywbm VARCHAR(75) null,jsddssqx LONG,jsgclb VARCHAR(75) null,jsgcsx LONG,gyzjbz VARCHAR(75) null,zbjg VARCHAR(75) null,xmtzgs VARCHAR(75) null,jhkg DATE null,jhjg DATE null,sfzftzl BOOLEAN,yzzpl1 VARCHAR(75) null,yzzpl2 VARCHAR(75) null,yzzpl3 VARCHAR(75) null,yzzpl4 VARCHAR(75) null,tjsj DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table cp_ProjectProfile";
 	public static final String ORDER_BY_JPQL = " ORDER BY projectProfile.permitId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY cp_ProjectProfile.permitId ASC";
@@ -201,19 +188,6 @@ public class ProjectProfileModelImpl extends BaseModelImpl<ProjectProfile>
 		attributes.put("yzzpl3", getYzzpl3());
 		attributes.put("yzzpl4", getYzzpl4());
 		attributes.put("tjsj", getTjsj());
-		attributes.put("slbh", getSlbh());
-		attributes.put("hjgsz", getHjgsz());
-		attributes.put("hjgsh", getHjgsh());
-		attributes.put("sqr", getSqr());
-		attributes.put("sqsx", getSqsx());
-		attributes.put("sqh", getSqh());
-		attributes.put("cltjr", getCltjr());
-		attributes.put("cltjrlxdh", getCltjrlxdh());
-		attributes.put("cltjrlxdz", getCltjrlxdz());
-		attributes.put("sjr", getSjr());
-		attributes.put("sjrlxdh", getSjrlxdh());
-		attributes.put("slyj", getSlyj());
-		attributes.put("slsj", getSlsj());
 
 		return attributes;
 	}
@@ -440,84 +414,6 @@ public class ProjectProfileModelImpl extends BaseModelImpl<ProjectProfile>
 
 		if (tjsj != null) {
 			setTjsj(tjsj);
-		}
-
-		String slbh = (String)attributes.get("slbh");
-
-		if (slbh != null) {
-			setSlbh(slbh);
-		}
-
-		Integer hjgsz = (Integer)attributes.get("hjgsz");
-
-		if (hjgsz != null) {
-			setHjgsz(hjgsz);
-		}
-
-		Integer hjgsh = (Integer)attributes.get("hjgsh");
-
-		if (hjgsh != null) {
-			setHjgsh(hjgsh);
-		}
-
-		String sqr = (String)attributes.get("sqr");
-
-		if (sqr != null) {
-			setSqr(sqr);
-		}
-
-		String sqsx = (String)attributes.get("sqsx");
-
-		if (sqsx != null) {
-			setSqsx(sqsx);
-		}
-
-		String sqh = (String)attributes.get("sqh");
-
-		if (sqh != null) {
-			setSqh(sqh);
-		}
-
-		String cltjr = (String)attributes.get("cltjr");
-
-		if (cltjr != null) {
-			setCltjr(cltjr);
-		}
-
-		String cltjrlxdh = (String)attributes.get("cltjrlxdh");
-
-		if (cltjrlxdh != null) {
-			setCltjrlxdh(cltjrlxdh);
-		}
-
-		String cltjrlxdz = (String)attributes.get("cltjrlxdz");
-
-		if (cltjrlxdz != null) {
-			setCltjrlxdz(cltjrlxdz);
-		}
-
-		String sjr = (String)attributes.get("sjr");
-
-		if (sjr != null) {
-			setSjr(sjr);
-		}
-
-		String sjrlxdh = (String)attributes.get("sjrlxdh");
-
-		if (sjrlxdh != null) {
-			setSjrlxdh(sjrlxdh);
-		}
-
-		String slyj = (String)attributes.get("slyj");
-
-		if (slyj != null) {
-			setSlyj(slyj);
-		}
-
-		String slsj = (String)attributes.get("slsj");
-
-		if (slsj != null) {
-			setSlsj(slsj);
 		}
 	}
 
@@ -1032,191 +928,6 @@ public class ProjectProfileModelImpl extends BaseModelImpl<ProjectProfile>
 	}
 
 	@Override
-	public String getSlbh() {
-		if (_slbh == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _slbh;
-		}
-	}
-
-	@Override
-	public void setSlbh(String slbh) {
-		_slbh = slbh;
-	}
-
-	@Override
-	public int getHjgsz() {
-		return _hjgsz;
-	}
-
-	@Override
-	public void setHjgsz(int hjgsz) {
-		_hjgsz = hjgsz;
-	}
-
-	@Override
-	public int getHjgsh() {
-		return _hjgsh;
-	}
-
-	@Override
-	public void setHjgsh(int hjgsh) {
-		_hjgsh = hjgsh;
-	}
-
-	@Override
-	public String getSqr() {
-		if (_sqr == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _sqr;
-		}
-	}
-
-	@Override
-	public void setSqr(String sqr) {
-		_sqr = sqr;
-	}
-
-	@Override
-	public String getSqsx() {
-		if (_sqsx == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _sqsx;
-		}
-	}
-
-	@Override
-	public void setSqsx(String sqsx) {
-		_sqsx = sqsx;
-	}
-
-	@Override
-	public String getSqh() {
-		if (_sqh == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _sqh;
-		}
-	}
-
-	@Override
-	public void setSqh(String sqh) {
-		_sqh = sqh;
-	}
-
-	@Override
-	public String getCltjr() {
-		if (_cltjr == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _cltjr;
-		}
-	}
-
-	@Override
-	public void setCltjr(String cltjr) {
-		_cltjr = cltjr;
-	}
-
-	@Override
-	public String getCltjrlxdh() {
-		if (_cltjrlxdh == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _cltjrlxdh;
-		}
-	}
-
-	@Override
-	public void setCltjrlxdh(String cltjrlxdh) {
-		_cltjrlxdh = cltjrlxdh;
-	}
-
-	@Override
-	public String getCltjrlxdz() {
-		if (_cltjrlxdz == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _cltjrlxdz;
-		}
-	}
-
-	@Override
-	public void setCltjrlxdz(String cltjrlxdz) {
-		_cltjrlxdz = cltjrlxdz;
-	}
-
-	@Override
-	public String getSjr() {
-		if (_sjr == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _sjr;
-		}
-	}
-
-	@Override
-	public void setSjr(String sjr) {
-		_sjr = sjr;
-	}
-
-	@Override
-	public String getSjrlxdh() {
-		if (_sjrlxdh == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _sjrlxdh;
-		}
-	}
-
-	@Override
-	public void setSjrlxdh(String sjrlxdh) {
-		_sjrlxdh = sjrlxdh;
-	}
-
-	@Override
-	public String getSlyj() {
-		if (_slyj == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _slyj;
-		}
-	}
-
-	@Override
-	public void setSlyj(String slyj) {
-		_slyj = slyj;
-	}
-
-	@Override
-	public String getSlsj() {
-		if (_slsj == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _slsj;
-		}
-	}
-
-	@Override
-	public void setSlsj(String slsj) {
-		_slsj = slsj;
-	}
-
-	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return ExpandoBridgeFactoryUtil.getExpandoBridge(0,
 			ProjectProfile.class.getName(), getPrimaryKey());
@@ -1280,19 +991,6 @@ public class ProjectProfileModelImpl extends BaseModelImpl<ProjectProfile>
 		projectProfileImpl.setYzzpl3(getYzzpl3());
 		projectProfileImpl.setYzzpl4(getYzzpl4());
 		projectProfileImpl.setTjsj(getTjsj());
-		projectProfileImpl.setSlbh(getSlbh());
-		projectProfileImpl.setHjgsz(getHjgsz());
-		projectProfileImpl.setHjgsh(getHjgsh());
-		projectProfileImpl.setSqr(getSqr());
-		projectProfileImpl.setSqsx(getSqsx());
-		projectProfileImpl.setSqh(getSqh());
-		projectProfileImpl.setCltjr(getCltjr());
-		projectProfileImpl.setCltjrlxdh(getCltjrlxdh());
-		projectProfileImpl.setCltjrlxdz(getCltjrlxdz());
-		projectProfileImpl.setSjr(getSjr());
-		projectProfileImpl.setSjrlxdh(getSjrlxdh());
-		projectProfileImpl.setSlyj(getSlyj());
-		projectProfileImpl.setSlsj(getSlsj());
 
 		projectProfileImpl.resetOriginalValues();
 
@@ -1606,104 +1304,12 @@ public class ProjectProfileModelImpl extends BaseModelImpl<ProjectProfile>
 			projectProfileCacheModel.tjsj = Long.MIN_VALUE;
 		}
 
-		projectProfileCacheModel.slbh = getSlbh();
-
-		String slbh = projectProfileCacheModel.slbh;
-
-		if ((slbh != null) && (slbh.length() == 0)) {
-			projectProfileCacheModel.slbh = null;
-		}
-
-		projectProfileCacheModel.hjgsz = getHjgsz();
-
-		projectProfileCacheModel.hjgsh = getHjgsh();
-
-		projectProfileCacheModel.sqr = getSqr();
-
-		String sqr = projectProfileCacheModel.sqr;
-
-		if ((sqr != null) && (sqr.length() == 0)) {
-			projectProfileCacheModel.sqr = null;
-		}
-
-		projectProfileCacheModel.sqsx = getSqsx();
-
-		String sqsx = projectProfileCacheModel.sqsx;
-
-		if ((sqsx != null) && (sqsx.length() == 0)) {
-			projectProfileCacheModel.sqsx = null;
-		}
-
-		projectProfileCacheModel.sqh = getSqh();
-
-		String sqh = projectProfileCacheModel.sqh;
-
-		if ((sqh != null) && (sqh.length() == 0)) {
-			projectProfileCacheModel.sqh = null;
-		}
-
-		projectProfileCacheModel.cltjr = getCltjr();
-
-		String cltjr = projectProfileCacheModel.cltjr;
-
-		if ((cltjr != null) && (cltjr.length() == 0)) {
-			projectProfileCacheModel.cltjr = null;
-		}
-
-		projectProfileCacheModel.cltjrlxdh = getCltjrlxdh();
-
-		String cltjrlxdh = projectProfileCacheModel.cltjrlxdh;
-
-		if ((cltjrlxdh != null) && (cltjrlxdh.length() == 0)) {
-			projectProfileCacheModel.cltjrlxdh = null;
-		}
-
-		projectProfileCacheModel.cltjrlxdz = getCltjrlxdz();
-
-		String cltjrlxdz = projectProfileCacheModel.cltjrlxdz;
-
-		if ((cltjrlxdz != null) && (cltjrlxdz.length() == 0)) {
-			projectProfileCacheModel.cltjrlxdz = null;
-		}
-
-		projectProfileCacheModel.sjr = getSjr();
-
-		String sjr = projectProfileCacheModel.sjr;
-
-		if ((sjr != null) && (sjr.length() == 0)) {
-			projectProfileCacheModel.sjr = null;
-		}
-
-		projectProfileCacheModel.sjrlxdh = getSjrlxdh();
-
-		String sjrlxdh = projectProfileCacheModel.sjrlxdh;
-
-		if ((sjrlxdh != null) && (sjrlxdh.length() == 0)) {
-			projectProfileCacheModel.sjrlxdh = null;
-		}
-
-		projectProfileCacheModel.slyj = getSlyj();
-
-		String slyj = projectProfileCacheModel.slyj;
-
-		if ((slyj != null) && (slyj.length() == 0)) {
-			projectProfileCacheModel.slyj = null;
-		}
-
-		projectProfileCacheModel.slsj = getSlsj();
-
-		String slsj = projectProfileCacheModel.slsj;
-
-		if ((slsj != null) && (slsj.length() == 0)) {
-			projectProfileCacheModel.slsj = null;
-		}
-
 		return projectProfileCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(101);
+		StringBundler sb = new StringBundler(75);
 
 		sb.append("{permitId=");
 		sb.append(getPermitId());
@@ -1779,32 +1385,6 @@ public class ProjectProfileModelImpl extends BaseModelImpl<ProjectProfile>
 		sb.append(getYzzpl4());
 		sb.append(", tjsj=");
 		sb.append(getTjsj());
-		sb.append(", slbh=");
-		sb.append(getSlbh());
-		sb.append(", hjgsz=");
-		sb.append(getHjgsz());
-		sb.append(", hjgsh=");
-		sb.append(getHjgsh());
-		sb.append(", sqr=");
-		sb.append(getSqr());
-		sb.append(", sqsx=");
-		sb.append(getSqsx());
-		sb.append(", sqh=");
-		sb.append(getSqh());
-		sb.append(", cltjr=");
-		sb.append(getCltjr());
-		sb.append(", cltjrlxdh=");
-		sb.append(getCltjrlxdh());
-		sb.append(", cltjrlxdz=");
-		sb.append(getCltjrlxdz());
-		sb.append(", sjr=");
-		sb.append(getSjr());
-		sb.append(", sjrlxdh=");
-		sb.append(getSjrlxdh());
-		sb.append(", slyj=");
-		sb.append(getSlyj());
-		sb.append(", slsj=");
-		sb.append(getSlsj());
 		sb.append("}");
 
 		return sb.toString();
@@ -1812,7 +1392,7 @@ public class ProjectProfileModelImpl extends BaseModelImpl<ProjectProfile>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(154);
+		StringBundler sb = new StringBundler(115);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.cp.permit.model.ProjectProfile");
@@ -1966,58 +1546,6 @@ public class ProjectProfileModelImpl extends BaseModelImpl<ProjectProfile>
 			"<column><column-name>tjsj</column-name><column-value><![CDATA[");
 		sb.append(getTjsj());
 		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>slbh</column-name><column-value><![CDATA[");
-		sb.append(getSlbh());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>hjgsz</column-name><column-value><![CDATA[");
-		sb.append(getHjgsz());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>hjgsh</column-name><column-value><![CDATA[");
-		sb.append(getHjgsh());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>sqr</column-name><column-value><![CDATA[");
-		sb.append(getSqr());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>sqsx</column-name><column-value><![CDATA[");
-		sb.append(getSqsx());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>sqh</column-name><column-value><![CDATA[");
-		sb.append(getSqh());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>cltjr</column-name><column-value><![CDATA[");
-		sb.append(getCltjr());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>cltjrlxdh</column-name><column-value><![CDATA[");
-		sb.append(getCltjrlxdh());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>cltjrlxdz</column-name><column-value><![CDATA[");
-		sb.append(getCltjrlxdz());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>sjr</column-name><column-value><![CDATA[");
-		sb.append(getSjr());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>sjrlxdh</column-name><column-value><![CDATA[");
-		sb.append(getSjrlxdh());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>slyj</column-name><column-value><![CDATA[");
-		sb.append(getSlyj());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>slsj</column-name><column-value><![CDATA[");
-		sb.append(getSlsj());
-		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -2065,18 +1593,5 @@ public class ProjectProfileModelImpl extends BaseModelImpl<ProjectProfile>
 	private String _yzzpl3;
 	private String _yzzpl4;
 	private Date _tjsj;
-	private String _slbh;
-	private int _hjgsz;
-	private int _hjgsh;
-	private String _sqr;
-	private String _sqsx;
-	private String _sqh;
-	private String _cltjr;
-	private String _cltjrlxdh;
-	private String _cltjrlxdz;
-	private String _sjr;
-	private String _sjrlxdh;
-	private String _slyj;
-	private String _slsj;
 	private ProjectProfile _escapedModel;
 }
