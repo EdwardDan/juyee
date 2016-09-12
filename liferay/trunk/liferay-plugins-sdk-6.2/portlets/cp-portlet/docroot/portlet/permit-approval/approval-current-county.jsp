@@ -2,6 +2,8 @@
 <%@ include file="/common/init.jsp"%>
 <%@ include file="init.jsp"%>
 <%
+	long permitId = ParamUtil.getLong(request, "permitId");
+	request.setAttribute("permitId", permitId);
 	Integer sqztInit = (Integer) request.getAttribute("sqztInit");
 	boolean issb = sqztInit == CountyPermitStatus.STATUS_SB.getCode();
 	boolean issj = sqztInit == CountyPermitStatus.STATUS_SJ_PASS.getCode()

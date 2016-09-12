@@ -3,6 +3,7 @@
 <%@ include file="init.jsp"%>
 <%
 	long permitIdInit = ParamUtil.getLong(request, "permitId");
+	request.setAttribute("permitId", permitIdInit);
 	Permit permitInit = PermitLocalServiceUtil.getPermit(permitIdInit);
 	int sqztInit = permitInit.getSqzt();
 	request.setAttribute("sqztInit", sqztInit);
@@ -11,6 +12,7 @@
 	Project projectInit = ProjectLocalServiceUtil.getProject(bjbhInit);
 	String lxjbInit = projectInit.getLxjb();
 	String qxLxjbInit = "区县级机关或区县级单位";
+	
 %>
 <c:choose>
 	<c:when test="<%=lxjbInit.equals(qxLxjbInit)%>">
