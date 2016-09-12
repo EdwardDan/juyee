@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PortalUtil;
@@ -85,7 +86,7 @@ public class PermitClp extends BaseModelImpl<Permit> implements Permit {
 		attributes.put("bjbh", getBjbh());
 		attributes.put("htxxbsbh", getHtxxbsbh());
 		attributes.put("sqbz", getSqbz());
-		attributes.put("sqzt", getSqzt());
+		attributes.put("status", getStatus());
 		attributes.put("bdh", getBdh());
 		attributes.put("ywbh", getYwbh());
 		attributes.put("sgxkzbh", getSgxkzbh());
@@ -102,6 +103,11 @@ public class PermitClp extends BaseModelImpl<Permit> implements Permit {
 		attributes.put("sjrlxdh", getSjrlxdh());
 		attributes.put("slyj", getSlyj());
 		attributes.put("slsj", getSlsj());
+		attributes.put("title", getTitle());
+		attributes.put("content", getContent());
+		attributes.put("statusByUserId", getStatusByUserId());
+		attributes.put("statusByUserName", getStatusByUserName());
+		attributes.put("statusDate", getStatusDate());
 
 		return attributes;
 	}
@@ -174,10 +180,10 @@ public class PermitClp extends BaseModelImpl<Permit> implements Permit {
 			setSqbz(sqbz);
 		}
 
-		Integer sqzt = (Integer)attributes.get("sqzt");
+		Integer status = (Integer)attributes.get("status");
 
-		if (sqzt != null) {
-			setSqzt(sqzt);
+		if (status != null) {
+			setStatus(status);
 		}
 
 		String bdh = (String)attributes.get("bdh");
@@ -274,6 +280,36 @@ public class PermitClp extends BaseModelImpl<Permit> implements Permit {
 
 		if (slsj != null) {
 			setSlsj(slsj);
+		}
+
+		String title = (String)attributes.get("title");
+
+		if (title != null) {
+			setTitle(title);
+		}
+
+		String content = (String)attributes.get("content");
+
+		if (content != null) {
+			setContent(content);
+		}
+
+		Long statusByUserId = (Long)attributes.get("statusByUserId");
+
+		if (statusByUserId != null) {
+			setStatusByUserId(statusByUserId);
+		}
+
+		String statusByUserName = (String)attributes.get("statusByUserName");
+
+		if (statusByUserName != null) {
+			setStatusByUserName(statusByUserName);
+		}
+
+		Date statusDate = (Date)attributes.get("statusDate");
+
+		if (statusDate != null) {
+			setStatusDate(statusDate);
 		}
 	}
 
@@ -541,21 +577,21 @@ public class PermitClp extends BaseModelImpl<Permit> implements Permit {
 	}
 
 	@Override
-	public int getSqzt() {
-		return _sqzt;
+	public int getStatus() {
+		return _status;
 	}
 
 	@Override
-	public void setSqzt(int sqzt) {
-		_sqzt = sqzt;
+	public void setStatus(int status) {
+		_status = status;
 
 		if (_permitRemoteModel != null) {
 			try {
 				Class<?> clazz = _permitRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setSqzt", int.class);
+				Method method = clazz.getMethod("setStatus", int.class);
 
-				method.invoke(_permitRemoteModel, sqzt);
+				method.invoke(_permitRemoteModel, status);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -931,6 +967,221 @@ public class PermitClp extends BaseModelImpl<Permit> implements Permit {
 		}
 	}
 
+	@Override
+	public String getTitle() {
+		return _title;
+	}
+
+	@Override
+	public void setTitle(String title) {
+		_title = title;
+
+		if (_permitRemoteModel != null) {
+			try {
+				Class<?> clazz = _permitRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setTitle", String.class);
+
+				method.invoke(_permitRemoteModel, title);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getContent() {
+		return _content;
+	}
+
+	@Override
+	public void setContent(String content) {
+		_content = content;
+
+		if (_permitRemoteModel != null) {
+			try {
+				Class<?> clazz = _permitRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setContent", String.class);
+
+				method.invoke(_permitRemoteModel, content);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public long getStatusByUserId() {
+		return _statusByUserId;
+	}
+
+	@Override
+	public void setStatusByUserId(long statusByUserId) {
+		_statusByUserId = statusByUserId;
+
+		if (_permitRemoteModel != null) {
+			try {
+				Class<?> clazz = _permitRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setStatusByUserId", long.class);
+
+				method.invoke(_permitRemoteModel, statusByUserId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getStatusByUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getStatusByUserId(), "uuid",
+			_statusByUserUuid);
+	}
+
+	@Override
+	public void setStatusByUserUuid(String statusByUserUuid) {
+		_statusByUserUuid = statusByUserUuid;
+	}
+
+	@Override
+	public String getStatusByUserName() {
+		return _statusByUserName;
+	}
+
+	@Override
+	public void setStatusByUserName(String statusByUserName) {
+		_statusByUserName = statusByUserName;
+
+		if (_permitRemoteModel != null) {
+			try {
+				Class<?> clazz = _permitRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setStatusByUserName",
+						String.class);
+
+				method.invoke(_permitRemoteModel, statusByUserName);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public Date getStatusDate() {
+		return _statusDate;
+	}
+
+	@Override
+	public void setStatusDate(Date statusDate) {
+		_statusDate = statusDate;
+
+		if (_permitRemoteModel != null) {
+			try {
+				Class<?> clazz = _permitRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setStatusDate", Date.class);
+
+				method.invoke(_permitRemoteModel, statusDate);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #isApproved}
+	 */
+	@Override
+	public boolean getApproved() {
+		return isApproved();
+	}
+
+	@Override
+	public boolean isApproved() {
+		if (getStatus() == WorkflowConstants.STATUS_APPROVED) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isDenied() {
+		if (getStatus() == WorkflowConstants.STATUS_DENIED) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isDraft() {
+		if (getStatus() == WorkflowConstants.STATUS_DRAFT) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isExpired() {
+		if (getStatus() == WorkflowConstants.STATUS_EXPIRED) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isInactive() {
+		if (getStatus() == WorkflowConstants.STATUS_INACTIVE) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isIncomplete() {
+		if (getStatus() == WorkflowConstants.STATUS_INCOMPLETE) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isPending() {
+		if (getStatus() == WorkflowConstants.STATUS_PENDING) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isScheduled() {
+		if (getStatus() == WorkflowConstants.STATUS_SCHEDULED) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public BaseModel<?> getPermitRemoteModel() {
 		return _permitRemoteModel;
 	}
@@ -1011,7 +1262,7 @@ public class PermitClp extends BaseModelImpl<Permit> implements Permit {
 		clone.setBjbh(getBjbh());
 		clone.setHtxxbsbh(getHtxxbsbh());
 		clone.setSqbz(getSqbz());
-		clone.setSqzt(getSqzt());
+		clone.setStatus(getStatus());
 		clone.setBdh(getBdh());
 		clone.setYwbh(getYwbh());
 		clone.setSgxkzbh(getSgxkzbh());
@@ -1028,6 +1279,11 @@ public class PermitClp extends BaseModelImpl<Permit> implements Permit {
 		clone.setSjrlxdh(getSjrlxdh());
 		clone.setSlyj(getSlyj());
 		clone.setSlsj(getSlsj());
+		clone.setTitle(getTitle());
+		clone.setContent(getContent());
+		clone.setStatusByUserId(getStatusByUserId());
+		clone.setStatusByUserName(getStatusByUserName());
+		clone.setStatusDate(getStatusDate());
 
 		return clone;
 	}
@@ -1080,7 +1336,7 @@ public class PermitClp extends BaseModelImpl<Permit> implements Permit {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(57);
+		StringBundler sb = new StringBundler(67);
 
 		sb.append("{permitId=");
 		sb.append(getPermitId());
@@ -1104,8 +1360,8 @@ public class PermitClp extends BaseModelImpl<Permit> implements Permit {
 		sb.append(getHtxxbsbh());
 		sb.append(", sqbz=");
 		sb.append(getSqbz());
-		sb.append(", sqzt=");
-		sb.append(getSqzt());
+		sb.append(", status=");
+		sb.append(getStatus());
 		sb.append(", bdh=");
 		sb.append(getBdh());
 		sb.append(", ywbh=");
@@ -1138,6 +1394,16 @@ public class PermitClp extends BaseModelImpl<Permit> implements Permit {
 		sb.append(getSlyj());
 		sb.append(", slsj=");
 		sb.append(getSlsj());
+		sb.append(", title=");
+		sb.append(getTitle());
+		sb.append(", content=");
+		sb.append(getContent());
+		sb.append(", statusByUserId=");
+		sb.append(getStatusByUserId());
+		sb.append(", statusByUserName=");
+		sb.append(getStatusByUserName());
+		sb.append(", statusDate=");
+		sb.append(getStatusDate());
 		sb.append("}");
 
 		return sb.toString();
@@ -1145,7 +1411,7 @@ public class PermitClp extends BaseModelImpl<Permit> implements Permit {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(88);
+		StringBundler sb = new StringBundler(103);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.cp.permit.model.Permit");
@@ -1196,8 +1462,8 @@ public class PermitClp extends BaseModelImpl<Permit> implements Permit {
 		sb.append(getSqbz());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>sqzt</column-name><column-value><![CDATA[");
-		sb.append(getSqzt());
+			"<column><column-name>status</column-name><column-value><![CDATA[");
+		sb.append(getStatus());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>bdh</column-name><column-value><![CDATA[");
@@ -1263,6 +1529,26 @@ public class PermitClp extends BaseModelImpl<Permit> implements Permit {
 			"<column><column-name>slsj</column-name><column-value><![CDATA[");
 		sb.append(getSlsj());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>title</column-name><column-value><![CDATA[");
+		sb.append(getTitle());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>content</column-name><column-value><![CDATA[");
+		sb.append(getContent());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>statusByUserId</column-name><column-value><![CDATA[");
+		sb.append(getStatusByUserId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>statusByUserName</column-name><column-value><![CDATA[");
+		sb.append(getStatusByUserName());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>statusDate</column-name><column-value><![CDATA[");
+		sb.append(getStatusDate());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -1281,7 +1567,7 @@ public class PermitClp extends BaseModelImpl<Permit> implements Permit {
 	private String _bjbh;
 	private String _htxxbsbh;
 	private int _sqbz;
-	private int _sqzt;
+	private int _status;
 	private String _bdh;
 	private String _ywbh;
 	private String _sgxkzbh;
@@ -1298,6 +1584,12 @@ public class PermitClp extends BaseModelImpl<Permit> implements Permit {
 	private String _sjrlxdh;
 	private String _slyj;
 	private String _slsj;
+	private String _title;
+	private String _content;
+	private long _statusByUserId;
+	private String _statusByUserUuid;
+	private String _statusByUserName;
+	private Date _statusDate;
 	private BaseModel<?> _permitRemoteModel;
 	private Class<?> _clpSerializerClass = com.justonetech.cp.permit.service.ClpSerializer.class;
 }

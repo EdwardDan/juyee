@@ -302,7 +302,7 @@
 		<field name="bjbh" type="String" />
 		<field name="htxxbsbh" type="String" />
 		<field name="sqbz" type="int" />
-		<field name="sqzt" type="int" />
+		<field name="status" type="int" />
 		<field name="bdh" type="String" />
 		<field name="ywbh" type="String" />
 		<field name="sgxkzbh" type="String" />
@@ -319,6 +319,15 @@
 		<field name="sjrlxdh" type="String" />
 		<field name="slyj" type="String" />
 		<field name="slsj" type="String" />
+		<field name="title" type="String">
+			<hint name="max-length">200</hint>
+		</field>
+		<field name="content" type="String">
+			<hint name="max-length">1000</hint>
+		</field>
+		<field name="statusByUserId" type="long" />
+		<field name="statusByUserName" type="String" />
+		<field name="statusDate" type="Date" />
 	</model>
 	<model name="com.justonetech.cp.permit.model.ProjectProfile">
 		<field name="permitId" type="long" />

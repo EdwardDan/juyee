@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.service.ServiceContext;
@@ -72,7 +73,7 @@ public class PermitModelImpl extends BaseModelImpl<Permit>
 			{ "bjbh", Types.VARCHAR },
 			{ "htxxbsbh", Types.VARCHAR },
 			{ "sqbz", Types.INTEGER },
-			{ "sqzt", Types.INTEGER },
+			{ "status", Types.INTEGER },
 			{ "bdh", Types.VARCHAR },
 			{ "ywbh", Types.VARCHAR },
 			{ "sgxkzbh", Types.VARCHAR },
@@ -88,9 +89,14 @@ public class PermitModelImpl extends BaseModelImpl<Permit>
 			{ "sjr", Types.VARCHAR },
 			{ "sjrlxdh", Types.VARCHAR },
 			{ "slyj", Types.VARCHAR },
-			{ "slsj", Types.VARCHAR }
+			{ "slsj", Types.VARCHAR },
+			{ "title", Types.VARCHAR },
+			{ "content", Types.VARCHAR },
+			{ "statusByUserId", Types.BIGINT },
+			{ "statusByUserName", Types.VARCHAR },
+			{ "statusDate", Types.TIMESTAMP }
 		};
-	public static final String TABLE_SQL_CREATE = "create table cp_Permit (permitId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,zzjgdm VARCHAR(75) null,bjbh VARCHAR(75) null,htxxbsbh VARCHAR(75) null,sqbz INTEGER,sqzt INTEGER,bdh VARCHAR(75) null,ywbh VARCHAR(75) null,sgxkzbh VARCHAR(75) null,slbh VARCHAR(75) null,hjgsz INTEGER,hjgsh INTEGER,sqr VARCHAR(75) null,sqsx VARCHAR(75) null,sqh VARCHAR(75) null,cltjr VARCHAR(75) null,cltjrlxdh VARCHAR(75) null,cltjrlxdz VARCHAR(75) null,sjr VARCHAR(75) null,sjrlxdh VARCHAR(75) null,slyj VARCHAR(75) null,slsj VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table cp_Permit (permitId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,zzjgdm VARCHAR(75) null,bjbh VARCHAR(75) null,htxxbsbh VARCHAR(75) null,sqbz INTEGER,status INTEGER,bdh VARCHAR(75) null,ywbh VARCHAR(75) null,sgxkzbh VARCHAR(75) null,slbh VARCHAR(75) null,hjgsz INTEGER,hjgsh INTEGER,sqr VARCHAR(75) null,sqsx VARCHAR(75) null,sqh VARCHAR(75) null,cltjr VARCHAR(75) null,cltjrlxdh VARCHAR(75) null,cltjrlxdz VARCHAR(75) null,sjr VARCHAR(75) null,sjrlxdh VARCHAR(75) null,slyj VARCHAR(75) null,slsj VARCHAR(75) null,title VARCHAR(200) null,content VARCHAR(1000) null,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table cp_Permit";
 	public static final String ORDER_BY_JPQL = " ORDER BY permit.permitId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY cp_Permit.permitId ASC";
@@ -159,7 +165,7 @@ public class PermitModelImpl extends BaseModelImpl<Permit>
 		attributes.put("bjbh", getBjbh());
 		attributes.put("htxxbsbh", getHtxxbsbh());
 		attributes.put("sqbz", getSqbz());
-		attributes.put("sqzt", getSqzt());
+		attributes.put("status", getStatus());
 		attributes.put("bdh", getBdh());
 		attributes.put("ywbh", getYwbh());
 		attributes.put("sgxkzbh", getSgxkzbh());
@@ -176,6 +182,11 @@ public class PermitModelImpl extends BaseModelImpl<Permit>
 		attributes.put("sjrlxdh", getSjrlxdh());
 		attributes.put("slyj", getSlyj());
 		attributes.put("slsj", getSlsj());
+		attributes.put("title", getTitle());
+		attributes.put("content", getContent());
+		attributes.put("statusByUserId", getStatusByUserId());
+		attributes.put("statusByUserName", getStatusByUserName());
+		attributes.put("statusDate", getStatusDate());
 
 		return attributes;
 	}
@@ -248,10 +259,10 @@ public class PermitModelImpl extends BaseModelImpl<Permit>
 			setSqbz(sqbz);
 		}
 
-		Integer sqzt = (Integer)attributes.get("sqzt");
+		Integer status = (Integer)attributes.get("status");
 
-		if (sqzt != null) {
-			setSqzt(sqzt);
+		if (status != null) {
+			setStatus(status);
 		}
 
 		String bdh = (String)attributes.get("bdh");
@@ -348,6 +359,36 @@ public class PermitModelImpl extends BaseModelImpl<Permit>
 
 		if (slsj != null) {
 			setSlsj(slsj);
+		}
+
+		String title = (String)attributes.get("title");
+
+		if (title != null) {
+			setTitle(title);
+		}
+
+		String content = (String)attributes.get("content");
+
+		if (content != null) {
+			setContent(content);
+		}
+
+		Long statusByUserId = (Long)attributes.get("statusByUserId");
+
+		if (statusByUserId != null) {
+			setStatusByUserId(statusByUserId);
+		}
+
+		String statusByUserName = (String)attributes.get("statusByUserName");
+
+		if (statusByUserName != null) {
+			setStatusByUserName(statusByUserName);
+		}
+
+		Date statusDate = (Date)attributes.get("statusDate");
+
+		if (statusDate != null) {
+			setStatusDate(statusDate);
 		}
 	}
 
@@ -502,13 +543,13 @@ public class PermitModelImpl extends BaseModelImpl<Permit>
 	}
 
 	@Override
-	public int getSqzt() {
-		return _sqzt;
+	public int getStatus() {
+		return _status;
 	}
 
 	@Override
-	public void setSqzt(int sqzt) {
-		_sqzt = sqzt;
+	public void setStatus(int status) {
+		_status = status;
 	}
 
 	@Override
@@ -741,6 +782,170 @@ public class PermitModelImpl extends BaseModelImpl<Permit>
 		_slsj = slsj;
 	}
 
+	@Override
+	public String getTitle() {
+		if (_title == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _title;
+		}
+	}
+
+	@Override
+	public void setTitle(String title) {
+		_title = title;
+	}
+
+	@Override
+	public String getContent() {
+		if (_content == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _content;
+		}
+	}
+
+	@Override
+	public void setContent(String content) {
+		_content = content;
+	}
+
+	@Override
+	public long getStatusByUserId() {
+		return _statusByUserId;
+	}
+
+	@Override
+	public void setStatusByUserId(long statusByUserId) {
+		_statusByUserId = statusByUserId;
+	}
+
+	@Override
+	public String getStatusByUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getStatusByUserId(), "uuid",
+			_statusByUserUuid);
+	}
+
+	@Override
+	public void setStatusByUserUuid(String statusByUserUuid) {
+		_statusByUserUuid = statusByUserUuid;
+	}
+
+	@Override
+	public String getStatusByUserName() {
+		if (_statusByUserName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _statusByUserName;
+		}
+	}
+
+	@Override
+	public void setStatusByUserName(String statusByUserName) {
+		_statusByUserName = statusByUserName;
+	}
+
+	@Override
+	public Date getStatusDate() {
+		return _statusDate;
+	}
+
+	@Override
+	public void setStatusDate(Date statusDate) {
+		_statusDate = statusDate;
+	}
+
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #isApproved}
+	 */
+	@Override
+	public boolean getApproved() {
+		return isApproved();
+	}
+
+	@Override
+	public boolean isApproved() {
+		if (getStatus() == WorkflowConstants.STATUS_APPROVED) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isDenied() {
+		if (getStatus() == WorkflowConstants.STATUS_DENIED) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isDraft() {
+		if (getStatus() == WorkflowConstants.STATUS_DRAFT) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isExpired() {
+		if (getStatus() == WorkflowConstants.STATUS_EXPIRED) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isInactive() {
+		if (getStatus() == WorkflowConstants.STATUS_INACTIVE) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isIncomplete() {
+		if (getStatus() == WorkflowConstants.STATUS_INCOMPLETE) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isPending() {
+		if (getStatus() == WorkflowConstants.STATUS_PENDING) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	@Override
+	public boolean isScheduled() {
+		if (getStatus() == WorkflowConstants.STATUS_SCHEDULED) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -783,7 +988,7 @@ public class PermitModelImpl extends BaseModelImpl<Permit>
 		permitImpl.setBjbh(getBjbh());
 		permitImpl.setHtxxbsbh(getHtxxbsbh());
 		permitImpl.setSqbz(getSqbz());
-		permitImpl.setSqzt(getSqzt());
+		permitImpl.setStatus(getStatus());
 		permitImpl.setBdh(getBdh());
 		permitImpl.setYwbh(getYwbh());
 		permitImpl.setSgxkzbh(getSgxkzbh());
@@ -800,6 +1005,11 @@ public class PermitModelImpl extends BaseModelImpl<Permit>
 		permitImpl.setSjrlxdh(getSjrlxdh());
 		permitImpl.setSlyj(getSlyj());
 		permitImpl.setSlsj(getSlsj());
+		permitImpl.setTitle(getTitle());
+		permitImpl.setContent(getContent());
+		permitImpl.setStatusByUserId(getStatusByUserId());
+		permitImpl.setStatusByUserName(getStatusByUserName());
+		permitImpl.setStatusDate(getStatusDate());
 
 		permitImpl.resetOriginalValues();
 
@@ -921,7 +1131,7 @@ public class PermitModelImpl extends BaseModelImpl<Permit>
 
 		permitCacheModel.sqbz = getSqbz();
 
-		permitCacheModel.sqzt = getSqzt();
+		permitCacheModel.status = getStatus();
 
 		permitCacheModel.bdh = getBdh();
 
@@ -1039,12 +1249,47 @@ public class PermitModelImpl extends BaseModelImpl<Permit>
 			permitCacheModel.slsj = null;
 		}
 
+		permitCacheModel.title = getTitle();
+
+		String title = permitCacheModel.title;
+
+		if ((title != null) && (title.length() == 0)) {
+			permitCacheModel.title = null;
+		}
+
+		permitCacheModel.content = getContent();
+
+		String content = permitCacheModel.content;
+
+		if ((content != null) && (content.length() == 0)) {
+			permitCacheModel.content = null;
+		}
+
+		permitCacheModel.statusByUserId = getStatusByUserId();
+
+		permitCacheModel.statusByUserName = getStatusByUserName();
+
+		String statusByUserName = permitCacheModel.statusByUserName;
+
+		if ((statusByUserName != null) && (statusByUserName.length() == 0)) {
+			permitCacheModel.statusByUserName = null;
+		}
+
+		Date statusDate = getStatusDate();
+
+		if (statusDate != null) {
+			permitCacheModel.statusDate = statusDate.getTime();
+		}
+		else {
+			permitCacheModel.statusDate = Long.MIN_VALUE;
+		}
+
 		return permitCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(57);
+		StringBundler sb = new StringBundler(67);
 
 		sb.append("{permitId=");
 		sb.append(getPermitId());
@@ -1068,8 +1313,8 @@ public class PermitModelImpl extends BaseModelImpl<Permit>
 		sb.append(getHtxxbsbh());
 		sb.append(", sqbz=");
 		sb.append(getSqbz());
-		sb.append(", sqzt=");
-		sb.append(getSqzt());
+		sb.append(", status=");
+		sb.append(getStatus());
 		sb.append(", bdh=");
 		sb.append(getBdh());
 		sb.append(", ywbh=");
@@ -1102,6 +1347,16 @@ public class PermitModelImpl extends BaseModelImpl<Permit>
 		sb.append(getSlyj());
 		sb.append(", slsj=");
 		sb.append(getSlsj());
+		sb.append(", title=");
+		sb.append(getTitle());
+		sb.append(", content=");
+		sb.append(getContent());
+		sb.append(", statusByUserId=");
+		sb.append(getStatusByUserId());
+		sb.append(", statusByUserName=");
+		sb.append(getStatusByUserName());
+		sb.append(", statusDate=");
+		sb.append(getStatusDate());
 		sb.append("}");
 
 		return sb.toString();
@@ -1109,7 +1364,7 @@ public class PermitModelImpl extends BaseModelImpl<Permit>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(88);
+		StringBundler sb = new StringBundler(103);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.cp.permit.model.Permit");
@@ -1160,8 +1415,8 @@ public class PermitModelImpl extends BaseModelImpl<Permit>
 		sb.append(getSqbz());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>sqzt</column-name><column-value><![CDATA[");
-		sb.append(getSqzt());
+			"<column><column-name>status</column-name><column-value><![CDATA[");
+		sb.append(getStatus());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>bdh</column-name><column-value><![CDATA[");
@@ -1227,6 +1482,26 @@ public class PermitModelImpl extends BaseModelImpl<Permit>
 			"<column><column-name>slsj</column-name><column-value><![CDATA[");
 		sb.append(getSlsj());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>title</column-name><column-value><![CDATA[");
+		sb.append(getTitle());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>content</column-name><column-value><![CDATA[");
+		sb.append(getContent());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>statusByUserId</column-name><column-value><![CDATA[");
+		sb.append(getStatusByUserId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>statusByUserName</column-name><column-value><![CDATA[");
+		sb.append(getStatusByUserName());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>statusDate</column-name><column-value><![CDATA[");
+		sb.append(getStatusDate());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -1248,7 +1523,7 @@ public class PermitModelImpl extends BaseModelImpl<Permit>
 	private String _bjbh;
 	private String _htxxbsbh;
 	private int _sqbz;
-	private int _sqzt;
+	private int _status;
 	private String _bdh;
 	private String _ywbh;
 	private String _sgxkzbh;
@@ -1265,6 +1540,12 @@ public class PermitModelImpl extends BaseModelImpl<Permit>
 	private String _sjrlxdh;
 	private String _slyj;
 	private String _slsj;
+	private String _title;
+	private String _content;
+	private long _statusByUserId;
+	private String _statusByUserUuid;
+	private String _statusByUserName;
+	private Date _statusDate;
 	private long _columnBitmask;
 	private Permit _escapedModel;
 }

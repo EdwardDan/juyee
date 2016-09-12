@@ -37,7 +37,7 @@ import java.util.Date;
 public class PermitCacheModel implements CacheModel<Permit>, Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(57);
+		StringBundler sb = new StringBundler(67);
 
 		sb.append("{permitId=");
 		sb.append(permitId);
@@ -61,8 +61,8 @@ public class PermitCacheModel implements CacheModel<Permit>, Externalizable {
 		sb.append(htxxbsbh);
 		sb.append(", sqbz=");
 		sb.append(sqbz);
-		sb.append(", sqzt=");
-		sb.append(sqzt);
+		sb.append(", status=");
+		sb.append(status);
 		sb.append(", bdh=");
 		sb.append(bdh);
 		sb.append(", ywbh=");
@@ -95,6 +95,16 @@ public class PermitCacheModel implements CacheModel<Permit>, Externalizable {
 		sb.append(slyj);
 		sb.append(", slsj=");
 		sb.append(slsj);
+		sb.append(", title=");
+		sb.append(title);
+		sb.append(", content=");
+		sb.append(content);
+		sb.append(", statusByUserId=");
+		sb.append(statusByUserId);
+		sb.append(", statusByUserName=");
+		sb.append(statusByUserName);
+		sb.append(", statusDate=");
+		sb.append(statusDate);
 		sb.append("}");
 
 		return sb.toString();
@@ -152,7 +162,7 @@ public class PermitCacheModel implements CacheModel<Permit>, Externalizable {
 		}
 
 		permitImpl.setSqbz(sqbz);
-		permitImpl.setSqzt(sqzt);
+		permitImpl.setStatus(status);
 
 		if (bdh == null) {
 			permitImpl.setBdh(StringPool.BLANK);
@@ -255,6 +265,36 @@ public class PermitCacheModel implements CacheModel<Permit>, Externalizable {
 			permitImpl.setSlsj(slsj);
 		}
 
+		if (title == null) {
+			permitImpl.setTitle(StringPool.BLANK);
+		}
+		else {
+			permitImpl.setTitle(title);
+		}
+
+		if (content == null) {
+			permitImpl.setContent(StringPool.BLANK);
+		}
+		else {
+			permitImpl.setContent(content);
+		}
+
+		permitImpl.setStatusByUserId(statusByUserId);
+
+		if (statusByUserName == null) {
+			permitImpl.setStatusByUserName(StringPool.BLANK);
+		}
+		else {
+			permitImpl.setStatusByUserName(statusByUserName);
+		}
+
+		if (statusDate == Long.MIN_VALUE) {
+			permitImpl.setStatusDate(null);
+		}
+		else {
+			permitImpl.setStatusDate(new Date(statusDate));
+		}
+
 		permitImpl.resetOriginalValues();
 
 		return permitImpl;
@@ -273,7 +313,7 @@ public class PermitCacheModel implements CacheModel<Permit>, Externalizable {
 		bjbh = objectInput.readUTF();
 		htxxbsbh = objectInput.readUTF();
 		sqbz = objectInput.readInt();
-		sqzt = objectInput.readInt();
+		status = objectInput.readInt();
 		bdh = objectInput.readUTF();
 		ywbh = objectInput.readUTF();
 		sgxkzbh = objectInput.readUTF();
@@ -290,6 +330,11 @@ public class PermitCacheModel implements CacheModel<Permit>, Externalizable {
 		sjrlxdh = objectInput.readUTF();
 		slyj = objectInput.readUTF();
 		slsj = objectInput.readUTF();
+		title = objectInput.readUTF();
+		content = objectInput.readUTF();
+		statusByUserId = objectInput.readLong();
+		statusByUserName = objectInput.readUTF();
+		statusDate = objectInput.readLong();
 	}
 
 	@Override
@@ -332,7 +377,7 @@ public class PermitCacheModel implements CacheModel<Permit>, Externalizable {
 		}
 
 		objectOutput.writeInt(sqbz);
-		objectOutput.writeInt(sqzt);
+		objectOutput.writeInt(status);
 
 		if (bdh == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
@@ -434,6 +479,31 @@ public class PermitCacheModel implements CacheModel<Permit>, Externalizable {
 		else {
 			objectOutput.writeUTF(slsj);
 		}
+
+		if (title == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(title);
+		}
+
+		if (content == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(content);
+		}
+
+		objectOutput.writeLong(statusByUserId);
+
+		if (statusByUserName == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(statusByUserName);
+		}
+
+		objectOutput.writeLong(statusDate);
 	}
 
 	public long permitId;
@@ -447,7 +517,7 @@ public class PermitCacheModel implements CacheModel<Permit>, Externalizable {
 	public String bjbh;
 	public String htxxbsbh;
 	public int sqbz;
-	public int sqzt;
+	public int status;
 	public String bdh;
 	public String ywbh;
 	public String sgxkzbh;
@@ -464,4 +534,9 @@ public class PermitCacheModel implements CacheModel<Permit>, Externalizable {
 	public String sjrlxdh;
 	public String slyj;
 	public String slsj;
+	public String title;
+	public String content;
+	public long statusByUserId;
+	public String statusByUserName;
+	public long statusDate;
 }

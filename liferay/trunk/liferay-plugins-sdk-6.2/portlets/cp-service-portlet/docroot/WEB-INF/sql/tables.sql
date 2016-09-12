@@ -162,7 +162,7 @@ create table cp_Permit (
 	bjbh VARCHAR(75) null,
 	htxxbsbh VARCHAR(75) null,
 	sqbz INTEGER,
-	sqzt INTEGER,
+	status INTEGER,
 	bdh VARCHAR(75) null,
 	ywbh VARCHAR(75) null,
 	sgxkzbh VARCHAR(75) null,
@@ -178,7 +178,12 @@ create table cp_Permit (
 	sjr VARCHAR(75) null,
 	sjrlxdh VARCHAR(75) null,
 	slyj VARCHAR(75) null,
-	slsj VARCHAR(75) null
+	slsj VARCHAR(75) null,
+	title VARCHAR(200) null,
+	content VARCHAR(1000) null,
+	statusByUserId LONG,
+	statusByUserName VARCHAR(75) null,
+	statusDate DATE null
 );
 
 create table cp_Project (

@@ -60,7 +60,7 @@ public class PermitWrapper implements Permit, ModelWrapper<Permit> {
 		attributes.put("bjbh", getBjbh());
 		attributes.put("htxxbsbh", getHtxxbsbh());
 		attributes.put("sqbz", getSqbz());
-		attributes.put("sqzt", getSqzt());
+		attributes.put("status", getStatus());
 		attributes.put("bdh", getBdh());
 		attributes.put("ywbh", getYwbh());
 		attributes.put("sgxkzbh", getSgxkzbh());
@@ -77,6 +77,11 @@ public class PermitWrapper implements Permit, ModelWrapper<Permit> {
 		attributes.put("sjrlxdh", getSjrlxdh());
 		attributes.put("slyj", getSlyj());
 		attributes.put("slsj", getSlsj());
+		attributes.put("title", getTitle());
+		attributes.put("content", getContent());
+		attributes.put("statusByUserId", getStatusByUserId());
+		attributes.put("statusByUserName", getStatusByUserName());
+		attributes.put("statusDate", getStatusDate());
 
 		return attributes;
 	}
@@ -149,10 +154,10 @@ public class PermitWrapper implements Permit, ModelWrapper<Permit> {
 			setSqbz(sqbz);
 		}
 
-		Integer sqzt = (Integer)attributes.get("sqzt");
+		Integer status = (Integer)attributes.get("status");
 
-		if (sqzt != null) {
-			setSqzt(sqzt);
+		if (status != null) {
+			setStatus(status);
 		}
 
 		String bdh = (String)attributes.get("bdh");
@@ -249,6 +254,36 @@ public class PermitWrapper implements Permit, ModelWrapper<Permit> {
 
 		if (slsj != null) {
 			setSlsj(slsj);
+		}
+
+		String title = (String)attributes.get("title");
+
+		if (title != null) {
+			setTitle(title);
+		}
+
+		String content = (String)attributes.get("content");
+
+		if (content != null) {
+			setContent(content);
+		}
+
+		Long statusByUserId = (Long)attributes.get("statusByUserId");
+
+		if (statusByUserId != null) {
+			setStatusByUserId(statusByUserId);
+		}
+
+		String statusByUserName = (String)attributes.get("statusByUserName");
+
+		if (statusByUserName != null) {
+			setStatusByUserName(statusByUserName);
+		}
+
+		Date statusDate = (Date)attributes.get("statusDate");
+
+		if (statusDate != null) {
+			setStatusDate(statusDate);
 		}
 	}
 
@@ -515,23 +550,23 @@ public class PermitWrapper implements Permit, ModelWrapper<Permit> {
 	}
 
 	/**
-	* Returns the sqzt of this permit.
+	* Returns the status of this permit.
 	*
-	* @return the sqzt of this permit
+	* @return the status of this permit
 	*/
 	@Override
-	public int getSqzt() {
-		return _permit.getSqzt();
+	public int getStatus() {
+		return _permit.getStatus();
 	}
 
 	/**
-	* Sets the sqzt of this permit.
+	* Sets the status of this permit.
 	*
-	* @param sqzt the sqzt of this permit
+	* @param status the status of this permit
 	*/
 	@Override
-	public void setSqzt(int sqzt) {
-		_permit.setSqzt(sqzt);
+	public void setStatus(int status) {
+		_permit.setStatus(status);
 	}
 
 	/**
@@ -852,6 +887,216 @@ public class PermitWrapper implements Permit, ModelWrapper<Permit> {
 	@Override
 	public void setSlsj(java.lang.String slsj) {
 		_permit.setSlsj(slsj);
+	}
+
+	/**
+	* Returns the title of this permit.
+	*
+	* @return the title of this permit
+	*/
+	@Override
+	public java.lang.String getTitle() {
+		return _permit.getTitle();
+	}
+
+	/**
+	* Sets the title of this permit.
+	*
+	* @param title the title of this permit
+	*/
+	@Override
+	public void setTitle(java.lang.String title) {
+		_permit.setTitle(title);
+	}
+
+	/**
+	* Returns the content of this permit.
+	*
+	* @return the content of this permit
+	*/
+	@Override
+	public java.lang.String getContent() {
+		return _permit.getContent();
+	}
+
+	/**
+	* Sets the content of this permit.
+	*
+	* @param content the content of this permit
+	*/
+	@Override
+	public void setContent(java.lang.String content) {
+		_permit.setContent(content);
+	}
+
+	/**
+	* Returns the status by user ID of this permit.
+	*
+	* @return the status by user ID of this permit
+	*/
+	@Override
+	public long getStatusByUserId() {
+		return _permit.getStatusByUserId();
+	}
+
+	/**
+	* Sets the status by user ID of this permit.
+	*
+	* @param statusByUserId the status by user ID of this permit
+	*/
+	@Override
+	public void setStatusByUserId(long statusByUserId) {
+		_permit.setStatusByUserId(statusByUserId);
+	}
+
+	/**
+	* Returns the status by user uuid of this permit.
+	*
+	* @return the status by user uuid of this permit
+	* @throws SystemException if a system exception occurred
+	*/
+	@Override
+	public java.lang.String getStatusByUserUuid()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _permit.getStatusByUserUuid();
+	}
+
+	/**
+	* Sets the status by user uuid of this permit.
+	*
+	* @param statusByUserUuid the status by user uuid of this permit
+	*/
+	@Override
+	public void setStatusByUserUuid(java.lang.String statusByUserUuid) {
+		_permit.setStatusByUserUuid(statusByUserUuid);
+	}
+
+	/**
+	* Returns the status by user name of this permit.
+	*
+	* @return the status by user name of this permit
+	*/
+	@Override
+	public java.lang.String getStatusByUserName() {
+		return _permit.getStatusByUserName();
+	}
+
+	/**
+	* Sets the status by user name of this permit.
+	*
+	* @param statusByUserName the status by user name of this permit
+	*/
+	@Override
+	public void setStatusByUserName(java.lang.String statusByUserName) {
+		_permit.setStatusByUserName(statusByUserName);
+	}
+
+	/**
+	* Returns the status date of this permit.
+	*
+	* @return the status date of this permit
+	*/
+	@Override
+	public java.util.Date getStatusDate() {
+		return _permit.getStatusDate();
+	}
+
+	/**
+	* Sets the status date of this permit.
+	*
+	* @param statusDate the status date of this permit
+	*/
+	@Override
+	public void setStatusDate(java.util.Date statusDate) {
+		_permit.setStatusDate(statusDate);
+	}
+
+	/**
+	* @deprecated As of 6.1.0, replaced by {@link #isApproved()}
+	*/
+	@Override
+	public boolean getApproved() {
+		return _permit.getApproved();
+	}
+
+	/**
+	* Returns <code>true</code> if this permit is approved.
+	*
+	* @return <code>true</code> if this permit is approved; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isApproved() {
+		return _permit.isApproved();
+	}
+
+	/**
+	* Returns <code>true</code> if this permit is denied.
+	*
+	* @return <code>true</code> if this permit is denied; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isDenied() {
+		return _permit.isDenied();
+	}
+
+	/**
+	* Returns <code>true</code> if this permit is a draft.
+	*
+	* @return <code>true</code> if this permit is a draft; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isDraft() {
+		return _permit.isDraft();
+	}
+
+	/**
+	* Returns <code>true</code> if this permit is expired.
+	*
+	* @return <code>true</code> if this permit is expired; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isExpired() {
+		return _permit.isExpired();
+	}
+
+	/**
+	* Returns <code>true</code> if this permit is inactive.
+	*
+	* @return <code>true</code> if this permit is inactive; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isInactive() {
+		return _permit.isInactive();
+	}
+
+	/**
+	* Returns <code>true</code> if this permit is incomplete.
+	*
+	* @return <code>true</code> if this permit is incomplete; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isIncomplete() {
+		return _permit.isIncomplete();
+	}
+
+	/**
+	* Returns <code>true</code> if this permit is pending.
+	*
+	* @return <code>true</code> if this permit is pending; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isPending() {
+		return _permit.isPending();
+	}
+
+	/**
+	* Returns <code>true</code> if this permit is scheduled.
+	*
+	* @return <code>true</code> if this permit is scheduled; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isScheduled() {
+		return _permit.isScheduled();
 	}
 
 	@Override

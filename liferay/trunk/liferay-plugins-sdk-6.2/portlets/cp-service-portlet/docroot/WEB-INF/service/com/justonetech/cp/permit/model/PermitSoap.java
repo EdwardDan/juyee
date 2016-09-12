@@ -41,7 +41,7 @@ public class PermitSoap implements Serializable {
 		soapModel.setBjbh(model.getBjbh());
 		soapModel.setHtxxbsbh(model.getHtxxbsbh());
 		soapModel.setSqbz(model.getSqbz());
-		soapModel.setSqzt(model.getSqzt());
+		soapModel.setStatus(model.getStatus());
 		soapModel.setBdh(model.getBdh());
 		soapModel.setYwbh(model.getYwbh());
 		soapModel.setSgxkzbh(model.getSgxkzbh());
@@ -58,6 +58,11 @@ public class PermitSoap implements Serializable {
 		soapModel.setSjrlxdh(model.getSjrlxdh());
 		soapModel.setSlyj(model.getSlyj());
 		soapModel.setSlsj(model.getSlsj());
+		soapModel.setTitle(model.getTitle());
+		soapModel.setContent(model.getContent());
+		soapModel.setStatusByUserId(model.getStatusByUserId());
+		soapModel.setStatusByUserName(model.getStatusByUserName());
+		soapModel.setStatusDate(model.getStatusDate());
 
 		return soapModel;
 	}
@@ -198,12 +203,12 @@ public class PermitSoap implements Serializable {
 		_sqbz = sqbz;
 	}
 
-	public int getSqzt() {
-		return _sqzt;
+	public int getStatus() {
+		return _status;
 	}
 
-	public void setSqzt(int sqzt) {
-		_sqzt = sqzt;
+	public void setStatus(int status) {
+		_status = status;
 	}
 
 	public String getBdh() {
@@ -334,6 +339,46 @@ public class PermitSoap implements Serializable {
 		_slsj = slsj;
 	}
 
+	public String getTitle() {
+		return _title;
+	}
+
+	public void setTitle(String title) {
+		_title = title;
+	}
+
+	public String getContent() {
+		return _content;
+	}
+
+	public void setContent(String content) {
+		_content = content;
+	}
+
+	public long getStatusByUserId() {
+		return _statusByUserId;
+	}
+
+	public void setStatusByUserId(long statusByUserId) {
+		_statusByUserId = statusByUserId;
+	}
+
+	public String getStatusByUserName() {
+		return _statusByUserName;
+	}
+
+	public void setStatusByUserName(String statusByUserName) {
+		_statusByUserName = statusByUserName;
+	}
+
+	public Date getStatusDate() {
+		return _statusDate;
+	}
+
+	public void setStatusDate(Date statusDate) {
+		_statusDate = statusDate;
+	}
+
 	private long _permitId;
 	private long _groupId;
 	private long _companyId;
@@ -345,7 +390,7 @@ public class PermitSoap implements Serializable {
 	private String _bjbh;
 	private String _htxxbsbh;
 	private int _sqbz;
-	private int _sqzt;
+	private int _status;
 	private String _bdh;
 	private String _ywbh;
 	private String _sgxkzbh;
@@ -362,4 +407,9 @@ public class PermitSoap implements Serializable {
 	private String _sjrlxdh;
 	private String _slyj;
 	private String _slsj;
+	private String _title;
+	private String _content;
+	private long _statusByUserId;
+	private String _statusByUserName;
+	private Date _statusDate;
 }

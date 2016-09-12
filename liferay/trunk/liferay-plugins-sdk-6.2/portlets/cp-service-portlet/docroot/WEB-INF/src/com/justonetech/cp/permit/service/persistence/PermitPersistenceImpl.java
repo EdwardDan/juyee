@@ -878,7 +878,7 @@ public class PermitPersistenceImpl extends BasePersistenceImpl<Permit>
 		permitImpl.setBjbh(permit.getBjbh());
 		permitImpl.setHtxxbsbh(permit.getHtxxbsbh());
 		permitImpl.setSqbz(permit.getSqbz());
-		permitImpl.setSqzt(permit.getSqzt());
+		permitImpl.setStatus(permit.getStatus());
 		permitImpl.setBdh(permit.getBdh());
 		permitImpl.setYwbh(permit.getYwbh());
 		permitImpl.setSgxkzbh(permit.getSgxkzbh());
@@ -895,6 +895,11 @@ public class PermitPersistenceImpl extends BasePersistenceImpl<Permit>
 		permitImpl.setSjrlxdh(permit.getSjrlxdh());
 		permitImpl.setSlyj(permit.getSlyj());
 		permitImpl.setSlsj(permit.getSlsj());
+		permitImpl.setTitle(permit.getTitle());
+		permitImpl.setContent(permit.getContent());
+		permitImpl.setStatusByUserId(permit.getStatusByUserId());
+		permitImpl.setStatusByUserName(permit.getStatusByUserName());
+		permitImpl.setStatusDate(permit.getStatusDate());
 
 		return permitImpl;
 	}

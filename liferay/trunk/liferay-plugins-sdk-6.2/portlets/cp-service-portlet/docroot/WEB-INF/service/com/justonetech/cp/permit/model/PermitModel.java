@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.GroupedModel;
+import com.liferay.portal.model.WorkflowedModel;
 import com.liferay.portal.service.ServiceContext;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -40,7 +41,8 @@ import java.util.Date;
  * @see com.justonetech.cp.permit.model.impl.PermitModelImpl
  * @generated
  */
-public interface PermitModel extends BaseModel<Permit>, GroupedModel {
+public interface PermitModel extends BaseModel<Permit>, GroupedModel,
+	WorkflowedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -249,18 +251,20 @@ public interface PermitModel extends BaseModel<Permit>, GroupedModel {
 	public void setSqbz(int sqbz);
 
 	/**
-	 * Returns the sqzt of this permit.
+	 * Returns the status of this permit.
 	 *
-	 * @return the sqzt of this permit
+	 * @return the status of this permit
 	 */
-	public int getSqzt();
+	@Override
+	public int getStatus();
 
 	/**
-	 * Sets the sqzt of this permit.
+	 * Sets the status of this permit.
 	 *
-	 * @param sqzt the sqzt of this permit
+	 * @param status the status of this permit
 	 */
-	public void setSqzt(int sqzt);
+	@Override
+	public void setStatus(int status);
 
 	/**
 	 * Returns the bdh of this permit.
@@ -499,6 +503,172 @@ public interface PermitModel extends BaseModel<Permit>, GroupedModel {
 	 * @param slsj the slsj of this permit
 	 */
 	public void setSlsj(String slsj);
+
+	/**
+	 * Returns the title of this permit.
+	 *
+	 * @return the title of this permit
+	 */
+	@AutoEscape
+	public String getTitle();
+
+	/**
+	 * Sets the title of this permit.
+	 *
+	 * @param title the title of this permit
+	 */
+	public void setTitle(String title);
+
+	/**
+	 * Returns the content of this permit.
+	 *
+	 * @return the content of this permit
+	 */
+	@AutoEscape
+	public String getContent();
+
+	/**
+	 * Sets the content of this permit.
+	 *
+	 * @param content the content of this permit
+	 */
+	public void setContent(String content);
+
+	/**
+	 * Returns the status by user ID of this permit.
+	 *
+	 * @return the status by user ID of this permit
+	 */
+	@Override
+	public long getStatusByUserId();
+
+	/**
+	 * Sets the status by user ID of this permit.
+	 *
+	 * @param statusByUserId the status by user ID of this permit
+	 */
+	@Override
+	public void setStatusByUserId(long statusByUserId);
+
+	/**
+	 * Returns the status by user uuid of this permit.
+	 *
+	 * @return the status by user uuid of this permit
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public String getStatusByUserUuid() throws SystemException;
+
+	/**
+	 * Sets the status by user uuid of this permit.
+	 *
+	 * @param statusByUserUuid the status by user uuid of this permit
+	 */
+	@Override
+	public void setStatusByUserUuid(String statusByUserUuid);
+
+	/**
+	 * Returns the status by user name of this permit.
+	 *
+	 * @return the status by user name of this permit
+	 */
+	@AutoEscape
+	@Override
+	public String getStatusByUserName();
+
+	/**
+	 * Sets the status by user name of this permit.
+	 *
+	 * @param statusByUserName the status by user name of this permit
+	 */
+	@Override
+	public void setStatusByUserName(String statusByUserName);
+
+	/**
+	 * Returns the status date of this permit.
+	 *
+	 * @return the status date of this permit
+	 */
+	@Override
+	public Date getStatusDate();
+
+	/**
+	 * Sets the status date of this permit.
+	 *
+	 * @param statusDate the status date of this permit
+	 */
+	@Override
+	public void setStatusDate(Date statusDate);
+
+	/**
+	 * @deprecated As of 6.1.0, replaced by {@link #isApproved()}
+	 */
+	@Override
+	public boolean getApproved();
+
+	/**
+	 * Returns <code>true</code> if this permit is approved.
+	 *
+	 * @return <code>true</code> if this permit is approved; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isApproved();
+
+	/**
+	 * Returns <code>true</code> if this permit is denied.
+	 *
+	 * @return <code>true</code> if this permit is denied; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isDenied();
+
+	/**
+	 * Returns <code>true</code> if this permit is a draft.
+	 *
+	 * @return <code>true</code> if this permit is a draft; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isDraft();
+
+	/**
+	 * Returns <code>true</code> if this permit is expired.
+	 *
+	 * @return <code>true</code> if this permit is expired; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isExpired();
+
+	/**
+	 * Returns <code>true</code> if this permit is inactive.
+	 *
+	 * @return <code>true</code> if this permit is inactive; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isInactive();
+
+	/**
+	 * Returns <code>true</code> if this permit is incomplete.
+	 *
+	 * @return <code>true</code> if this permit is incomplete; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isIncomplete();
+
+	/**
+	 * Returns <code>true</code> if this permit is pending.
+	 *
+	 * @return <code>true</code> if this permit is pending; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isPending();
+
+	/**
+	 * Returns <code>true</code> if this permit is scheduled.
+	 *
+	 * @return <code>true</code> if this permit is scheduled; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isScheduled();
 
 	@Override
 	public boolean isNew();
