@@ -41,7 +41,8 @@
 					<td style="width: 10%;" class="text-right">状态</td>
 					<td style="width: 40%;" class="bg-white"><aui:select name="zt"
 							showEmptyOption="true" cssClass="input-small" label="">
-							<aui:option value="" label="请选择"></aui:option>
+							<aui:option value="1" label="填写"></aui:option>
+							<aui:option value="2" label="已备案"></aui:option>
 						</aui:select></td>
 				</tr>
 				<tr style="height: 40px;">
