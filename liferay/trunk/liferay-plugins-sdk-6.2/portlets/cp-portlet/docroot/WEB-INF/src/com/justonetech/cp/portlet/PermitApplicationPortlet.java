@@ -30,6 +30,7 @@ import com.justonetech.cp.permit.service.ParticipationUnitLocalServiceUtil;
 import com.justonetech.cp.permit.service.PermitLocalServiceUtil;
 import com.justonetech.cp.permit.service.ProjectProfileLocalServiceUtil;
 import com.justonetech.cp.permit.service.UnitProjectLocalServiceUtil;
+import com.justonetech.cp.util.CityPermitStatus;
 import com.justonetech.sys.model.Dictionary;
 import com.justonetech.sys.service.DictionaryLocalServiceUtil;
 import com.liferay.counter.service.CounterLocalServiceUtil;
@@ -109,7 +110,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
-
+		System.out.println(123);
 		String bjbh = ParamUtil.getString(renderRequest, "bjbh");
 		String wssqbh = ParamUtil.getString(renderRequest, "wssqbh");
 		String gcmc = ParamUtil.getString(renderRequest, "gcmc");
@@ -375,6 +376,12 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		permit.setGroupId(themeDisplay.getScopeGroupId());
 		permit.setCompanyId(themeDisplay.getCompanyId());
 		//保存状态
+
+		permit.setStatus(CityPermitStatus.STATUS_SB.getCode());
+
+		/*permit.setSqzt(CityPermitStatus.STATUS_SB.getCode());
+=======
+>>>>>>> .r1646*/
 		permit.setSqbz(0);
 		permit.setStatus(2);
 		PermitLocalServiceUtil.updatePermit(permit);
@@ -402,6 +409,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 	public void redirect(ActionRequest request, ActionResponse response, Permit permit, int sqbz) throws IOException {
 
 		String redirect = ParamUtil.getString(request, "redirectURL");
+		System.out.println(redirect);
 		int tabSqbz = 1;
 		if (permit.getSqbz() == sqbz && sqbz < 4) {
 			tabSqbz = sqbz + 1;
@@ -593,5 +601,24 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		}else
 			return "";
 	}
+	
+	public FileEntry uploadFileAnother(ResourceRequest request, String fileSourceName,
+			byte[] fileBytes, ServiceContext serviceContext,String portletId,String materialId,String fileTitle)
+			throws PortalException, SystemException, IOException {
+		User user = PortalUtil.getUser(request);
+		long userId = user.getUserId();
+		Long groupId = user.getGroupId();
+		Long rootFolderId = DLFileEntryTypeConstants.FILE_ENTRY_TYPE_ID_BASIC_DOCUMENT;
+		FileEntry fileEntry = null;
+		//为每一种材料名称创建一个文件夹,如果已有就不再创		
+		if (fileBytes != null) {
+			fileEntry = DLAppLocalServiceUtil.addFileEntry(userId, groupId,
+					rootFolderId, fileSourceName,
+					MimeTypesUtil.getContentType(fileSourceName), fileTitle, null,
+					null, fileBytes, serviceContext);
+		}
+		return fileEntry;
+	}
+
 }
 
