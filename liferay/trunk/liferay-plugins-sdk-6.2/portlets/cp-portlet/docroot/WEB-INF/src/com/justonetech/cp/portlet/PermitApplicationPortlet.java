@@ -12,7 +12,6 @@ import java.util.Locale;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletException;
-import javax.portlet.PortletPreferences;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
@@ -31,16 +30,17 @@ import com.justonetech.cp.permit.service.ParticipationUnitLocalServiceUtil;
 import com.justonetech.cp.permit.service.PermitLocalServiceUtil;
 import com.justonetech.cp.permit.service.ProjectProfileLocalServiceUtil;
 import com.justonetech.cp.permit.service.UnitProjectLocalServiceUtil;
-import com.justonetech.cp.util.CityPermitStatus;
 import com.justonetech.sys.model.Dictionary;
 import com.justonetech.sys.service.DictionaryLocalServiceUtil;
 import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.NoSuchWorkflowDefinitionLinkException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.search.ParseException;
+import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.FileUtil;
@@ -52,13 +52,17 @@ import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.WorkflowDefinitionLink;
+import com.liferay.portal.model.WorkflowInstanceLink;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
-import com.liferay.portal.theme.PortletDisplay;
+import com.liferay.portal.service.WorkflowDefinitionLinkLocalServiceUtil;
+import com.liferay.portal.service.WorkflowInstanceLinkLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.PortletPreferencesFactoryUtil;
+import com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryTypeConstants;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
@@ -182,7 +186,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		} else {
 			projectProfile = ProjectProfileLocalServiceUtil.createProjectProfile(CounterLocalServiceUtil.increment());
 			permit = PermitLocalServiceUtil.createPermit(projectProfile.getPermitId());
-			permit.setSqzt(1);
+			permit.setStatus(1);
 		}
 		permit.setSqbz(1);
 		projectProfile.setXmlx(xmlx);
@@ -314,11 +318,18 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		if (permit.getSqbz() == 3) {
 			permit.setSqbz(4);
 		}
+		if(permit.getStatus()<=2&&WorkflowInstanceLinkLocalServiceUtil.hasWorkflowInstanceLink(permit.getCompanyId(), 0L, Permit.class.getName(),permit.getPermitId())){
+			WorkflowInstanceLinkLocalServiceUtil.deleteWorkflowInstanceLinks(permit.getCompanyId(), 0L, Permit.class.getName(),permit.getPermitId());
+			permit.setStatus(1);
+		}
 		PermitLocalServiceUtil.updatePermit(permit);
 		redirect(request, response, permit, 4);
 	}
 	
 	public void submitAll(ActionRequest request,ActionResponse response) throws PortalException, SystemException{
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(Permit.class.getName(),
+				request);
+		ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
 		long permitId=ParamUtil.getLong(request, "permitId");
 		String ywbh = "JT";
 		Permit permit = PermitLocalServiceUtil.getPermit(permitId);
@@ -354,11 +365,37 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		} else if (num / 10000 < 1) {
 			ywbh = ywbh + num;
 		}
+		User user = PortalUtil.getUser(request);
+		if (Validator.isNotNull(user)) {
+			permit.setUserId(user.getUserId());
+			permit.setUserName(user.getFullName());
+			permit.setStatusByUserName(user.getFullName());
+		}
 		permit.setYwbh(ywbh);
+		permit.setGroupId(themeDisplay.getScopeGroupId());
+		permit.setCompanyId(themeDisplay.getCompanyId());
 		//保存状态
-		permit.setSqzt(CityPermitStatus.STATUS_SB.getCode());
 		permit.setSqbz(0);
+		permit.setStatus(2);
 		PermitLocalServiceUtil.updatePermit(permit);
+		WorkflowInstanceLinkLocalServiceUtil.deleteWorkflowInstanceLinks(permit.getCompanyId(), 0L, Permit.class.getName(),permit.getPermitId());
+		WorkflowDefinitionLink workflowDefinitionLink = null;
+		try {
+			workflowDefinitionLink = WorkflowDefinitionLinkLocalServiceUtil.getDefaultWorkflowDefinitionLink(
+					themeDisplay.getCompanyId(), Permit.class.getName(), 0, 0);
+		} catch (Exception e) {
+			if (e instanceof NoSuchWorkflowDefinitionLinkException) {
+				SessionMessages.add(request.getPortletSession(), "workflow-not-enabled");
+			}
+			e.printStackTrace();
+		}
+		if (permit != null && workflowDefinitionLink != null) {
+			AssetEntryLocalServiceUtil.updateEntry(themeDisplay.getUserId(), permit.getGroupId(),
+					Permit.class.getName(), permit.getPermitId(), null, null);
+			WorkflowHandlerRegistryUtil.startWorkflowInstance(permit.getCompanyId(),
+					permit.getUserId(), Permit.class.getName(),
+					permit.getPermitId(), permit, serviceContext);
+		}
 	}
 
 
@@ -401,6 +438,8 @@ public class PermitApplicationPortlet extends MVCPortlet {
 			for(ApplyMaterial applyMaterial:applyMaterials){
 				ApplyMaterialLocalServiceUtil.deleteApplyMaterial(applyMaterial);
 			}
+			Permit permit=PermitLocalServiceUtil.getPermit(Long.parseLong(permitId));
+			WorkflowInstanceLinkLocalServiceUtil.deleteWorkflowInstanceLinks(permit.getCompanyId(), 0L, Permit.class.getName(),permit.getPermitId());
 			PermitLocalServiceUtil.deletePermit(Long
 					.parseLong(permitId));
 		}
