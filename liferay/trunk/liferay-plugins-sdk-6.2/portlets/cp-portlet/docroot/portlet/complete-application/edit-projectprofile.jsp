@@ -23,6 +23,7 @@
 	model="<%=ProjectProfile.class%>" />
 <aui:form action="${saveProjectProfileURL}">
 	<aui:input name="permitId" type="hidden" value="<%=completeId%>" />
+	<aui:input name="completeId" type="hidden" value="<%=completeId%>" />
 	<aui:input name="bjbh" type="hidden" value="${bjbh }" />
 	<aui:input name="bdh" type="hidden" value="${bdh }" />
 	<aui:input name="sqbz" type="hidden" value="2" />
