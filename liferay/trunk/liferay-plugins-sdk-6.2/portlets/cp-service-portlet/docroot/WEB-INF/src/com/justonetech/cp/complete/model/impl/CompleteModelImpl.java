@@ -71,12 +71,12 @@ public class CompleteModelImpl extends BaseModelImpl<Complete>
 			{ "zzjgdm", Types.VARCHAR },
 			{ "bjbh", Types.VARCHAR },
 			{ "sqbz", Types.INTEGER },
-			{ "sqzt", Types.INTEGER },
+			{ "status", Types.INTEGER },
 			{ "babh", Types.VARCHAR },
 			{ "wssqbh", Types.VARCHAR },
 			{ "sbrq", Types.TIMESTAMP }
 		};
-	public static final String TABLE_SQL_CREATE = "create table cp_Complete (completeId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,zzjgdm VARCHAR(75) null,bjbh VARCHAR(75) null,sqbz INTEGER,sqzt INTEGER,babh VARCHAR(75) null,wssqbh VARCHAR(75) null,sbrq DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table cp_Complete (completeId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,zzjgdm VARCHAR(75) null,bjbh VARCHAR(75) null,sqbz INTEGER,status INTEGER,babh VARCHAR(75) null,wssqbh VARCHAR(75) null,sbrq DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table cp_Complete";
 	public static final String ORDER_BY_JPQL = " ORDER BY complete.completeId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY cp_Complete.completeId ASC";
@@ -144,7 +144,7 @@ public class CompleteModelImpl extends BaseModelImpl<Complete>
 		attributes.put("zzjgdm", getZzjgdm());
 		attributes.put("bjbh", getBjbh());
 		attributes.put("sqbz", getSqbz());
-		attributes.put("sqzt", getSqzt());
+		attributes.put("status", getStatus());
 		attributes.put("babh", getBabh());
 		attributes.put("wssqbh", getWssqbh());
 		attributes.put("sbrq", getSbrq());
@@ -214,10 +214,10 @@ public class CompleteModelImpl extends BaseModelImpl<Complete>
 			setSqbz(sqbz);
 		}
 
-		Integer sqzt = (Integer)attributes.get("sqzt");
+		Integer status = (Integer)attributes.get("status");
 
-		if (sqzt != null) {
-			setSqzt(sqzt);
+		if (status != null) {
+			setStatus(status);
 		}
 
 		String babh = (String)attributes.get("babh");
@@ -375,13 +375,13 @@ public class CompleteModelImpl extends BaseModelImpl<Complete>
 	}
 
 	@Override
-	public int getSqzt() {
-		return _sqzt;
+	public int getStatus() {
+		return _status;
 	}
 
 	@Override
-	public void setSqzt(int sqzt) {
-		_sqzt = sqzt;
+	public void setStatus(int status) {
+		_status = status;
 	}
 
 	@Override
@@ -465,7 +465,7 @@ public class CompleteModelImpl extends BaseModelImpl<Complete>
 		completeImpl.setZzjgdm(getZzjgdm());
 		completeImpl.setBjbh(getBjbh());
 		completeImpl.setSqbz(getSqbz());
-		completeImpl.setSqzt(getSqzt());
+		completeImpl.setStatus(getStatus());
 		completeImpl.setBabh(getBabh());
 		completeImpl.setWssqbh(getWssqbh());
 		completeImpl.setSbrq(getSbrq());
@@ -582,7 +582,7 @@ public class CompleteModelImpl extends BaseModelImpl<Complete>
 
 		completeCacheModel.sqbz = getSqbz();
 
-		completeCacheModel.sqzt = getSqzt();
+		completeCacheModel.status = getStatus();
 
 		completeCacheModel.babh = getBabh();
 
@@ -636,8 +636,8 @@ public class CompleteModelImpl extends BaseModelImpl<Complete>
 		sb.append(getBjbh());
 		sb.append(", sqbz=");
 		sb.append(getSqbz());
-		sb.append(", sqzt=");
-		sb.append(getSqzt());
+		sb.append(", status=");
+		sb.append(getStatus());
 		sb.append(", babh=");
 		sb.append(getBabh());
 		sb.append(", wssqbh=");
@@ -698,8 +698,8 @@ public class CompleteModelImpl extends BaseModelImpl<Complete>
 		sb.append(getSqbz());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>sqzt</column-name><column-value><![CDATA[");
-		sb.append(getSqzt());
+			"<column><column-name>status</column-name><column-value><![CDATA[");
+		sb.append(getStatus());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>babh</column-name><column-value><![CDATA[");
@@ -735,7 +735,7 @@ public class CompleteModelImpl extends BaseModelImpl<Complete>
 	private String _originalZzjgdm;
 	private String _bjbh;
 	private int _sqbz;
-	private int _sqzt;
+	private int _status;
 	private String _babh;
 	private String _wssqbh;
 	private Date _sbrq;

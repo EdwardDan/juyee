@@ -59,7 +59,7 @@ public class CompleteWrapper implements Complete, ModelWrapper<Complete> {
 		attributes.put("zzjgdm", getZzjgdm());
 		attributes.put("bjbh", getBjbh());
 		attributes.put("sqbz", getSqbz());
-		attributes.put("sqzt", getSqzt());
+		attributes.put("status", getStatus());
 		attributes.put("babh", getBabh());
 		attributes.put("wssqbh", getWssqbh());
 		attributes.put("sbrq", getSbrq());
@@ -129,10 +129,10 @@ public class CompleteWrapper implements Complete, ModelWrapper<Complete> {
 			setSqbz(sqbz);
 		}
 
-		Integer sqzt = (Integer)attributes.get("sqzt");
+		Integer status = (Integer)attributes.get("status");
 
-		if (sqzt != null) {
-			setSqzt(sqzt);
+		if (status != null) {
+			setStatus(status);
 		}
 
 		String babh = (String)attributes.get("babh");
@@ -397,23 +397,23 @@ public class CompleteWrapper implements Complete, ModelWrapper<Complete> {
 	}
 
 	/**
-	* Returns the sqzt of this complete.
+	* Returns the status of this complete.
 	*
-	* @return the sqzt of this complete
+	* @return the status of this complete
 	*/
 	@Override
-	public int getSqzt() {
-		return _complete.getSqzt();
+	public int getStatus() {
+		return _complete.getStatus();
 	}
 
 	/**
-	* Sets the sqzt of this complete.
+	* Sets the status of this complete.
 	*
-	* @param sqzt the sqzt of this complete
+	* @param status the status of this complete
 	*/
 	@Override
-	public void setSqzt(int sqzt) {
-		_complete.setSqzt(sqzt);
+	public void setStatus(int status) {
+		_complete.setStatus(status);
 	}
 
 	/**

@@ -234,18 +234,18 @@ public interface CompleteModel extends BaseModel<Complete>, GroupedModel {
 	public void setSqbz(int sqbz);
 
 	/**
-	 * Returns the sqzt of this complete.
+	 * Returns the status of this complete.
 	 *
-	 * @return the sqzt of this complete
+	 * @return the status of this complete
 	 */
-	public int getSqzt();
+	public int getStatus();
 
 	/**
-	 * Sets the sqzt of this complete.
+	 * Sets the status of this complete.
 	 *
-	 * @param sqzt the sqzt of this complete
+	 * @param status the status of this complete
 	 */
-	public void setSqzt(int sqzt);
+	public void setStatus(int status);
 
 	/**
 	 * Returns the babh of this complete.

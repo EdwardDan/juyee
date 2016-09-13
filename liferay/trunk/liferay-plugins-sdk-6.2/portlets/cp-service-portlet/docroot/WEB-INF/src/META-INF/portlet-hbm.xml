@@ -383,7 +383,7 @@
 		<property name="zzjgdm" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="bjbh" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="sqbz" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
-		<property name="sqzt" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="status" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="babh" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="wssqbh" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="sbrq" type="org.hibernate.type.TimestampType" />

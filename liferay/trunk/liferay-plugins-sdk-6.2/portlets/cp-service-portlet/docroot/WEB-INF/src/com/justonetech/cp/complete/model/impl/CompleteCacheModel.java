@@ -59,8 +59,8 @@ public class CompleteCacheModel implements CacheModel<Complete>, Externalizable 
 		sb.append(bjbh);
 		sb.append(", sqbz=");
 		sb.append(sqbz);
-		sb.append(", sqzt=");
-		sb.append(sqzt);
+		sb.append(", status=");
+		sb.append(status);
 		sb.append(", babh=");
 		sb.append(babh);
 		sb.append(", wssqbh=");
@@ -117,7 +117,7 @@ public class CompleteCacheModel implements CacheModel<Complete>, Externalizable 
 		}
 
 		completeImpl.setSqbz(sqbz);
-		completeImpl.setSqzt(sqzt);
+		completeImpl.setStatus(status);
 
 		if (babh == null) {
 			completeImpl.setBabh(StringPool.BLANK);
@@ -157,7 +157,7 @@ public class CompleteCacheModel implements CacheModel<Complete>, Externalizable 
 		zzjgdm = objectInput.readUTF();
 		bjbh = objectInput.readUTF();
 		sqbz = objectInput.readInt();
-		sqzt = objectInput.readInt();
+		status = objectInput.readInt();
 		babh = objectInput.readUTF();
 		wssqbh = objectInput.readUTF();
 		sbrq = objectInput.readLong();
@@ -196,7 +196,7 @@ public class CompleteCacheModel implements CacheModel<Complete>, Externalizable 
 		}
 
 		objectOutput.writeInt(sqbz);
-		objectOutput.writeInt(sqzt);
+		objectOutput.writeInt(status);
 
 		if (babh == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
@@ -225,7 +225,7 @@ public class CompleteCacheModel implements CacheModel<Complete>, Externalizable 
 	public String zzjgdm;
 	public String bjbh;
 	public int sqbz;
-	public int sqzt;
+	public int status;
 	public String babh;
 	public String wssqbh;
 	public long sbrq;

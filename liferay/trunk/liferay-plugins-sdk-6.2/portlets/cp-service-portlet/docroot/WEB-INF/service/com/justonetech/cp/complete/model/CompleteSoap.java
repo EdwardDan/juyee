@@ -40,7 +40,7 @@ public class CompleteSoap implements Serializable {
 		soapModel.setZzjgdm(model.getZzjgdm());
 		soapModel.setBjbh(model.getBjbh());
 		soapModel.setSqbz(model.getSqbz());
-		soapModel.setSqzt(model.getSqzt());
+		soapModel.setStatus(model.getStatus());
 		soapModel.setBabh(model.getBabh());
 		soapModel.setWssqbh(model.getWssqbh());
 		soapModel.setSbrq(model.getSbrq());
@@ -176,12 +176,12 @@ public class CompleteSoap implements Serializable {
 		_sqbz = sqbz;
 	}
 
-	public int getSqzt() {
-		return _sqzt;
+	public int getStatus() {
+		return _status;
 	}
 
-	public void setSqzt(int sqzt) {
-		_sqzt = sqzt;
+	public void setStatus(int status) {
+		_status = status;
 	}
 
 	public String getBabh() {
@@ -218,7 +218,7 @@ public class CompleteSoap implements Serializable {
 	private String _zzjgdm;
 	private String _bjbh;
 	private int _sqbz;
-	private int _sqzt;
+	private int _status;
 	private String _babh;
 	private String _wssqbh;
 	private Date _sbrq;

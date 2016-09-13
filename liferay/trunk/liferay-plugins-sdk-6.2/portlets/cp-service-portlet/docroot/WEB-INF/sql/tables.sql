@@ -23,7 +23,7 @@ create table cp_Complete (
 	zzjgdm VARCHAR(75) null,
 	bjbh VARCHAR(75) null,
 	sqbz INTEGER,
-	sqzt INTEGER,
+	status INTEGER,
 	babh VARCHAR(75) null,
 	wssqbh VARCHAR(75) null,
 	sbrq DATE null

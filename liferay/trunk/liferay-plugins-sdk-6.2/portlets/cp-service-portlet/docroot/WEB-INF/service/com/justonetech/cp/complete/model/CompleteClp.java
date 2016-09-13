@@ -84,7 +84,7 @@ public class CompleteClp extends BaseModelImpl<Complete> implements Complete {
 		attributes.put("zzjgdm", getZzjgdm());
 		attributes.put("bjbh", getBjbh());
 		attributes.put("sqbz", getSqbz());
-		attributes.put("sqzt", getSqzt());
+		attributes.put("status", getStatus());
 		attributes.put("babh", getBabh());
 		attributes.put("wssqbh", getWssqbh());
 		attributes.put("sbrq", getSbrq());
@@ -154,10 +154,10 @@ public class CompleteClp extends BaseModelImpl<Complete> implements Complete {
 			setSqbz(sqbz);
 		}
 
-		Integer sqzt = (Integer)attributes.get("sqzt");
+		Integer status = (Integer)attributes.get("status");
 
-		if (sqzt != null) {
-			setSqzt(sqzt);
+		if (status != null) {
+			setStatus(status);
 		}
 
 		String babh = (String)attributes.get("babh");
@@ -420,21 +420,21 @@ public class CompleteClp extends BaseModelImpl<Complete> implements Complete {
 	}
 
 	@Override
-	public int getSqzt() {
-		return _sqzt;
+	public int getStatus() {
+		return _status;
 	}
 
 	@Override
-	public void setSqzt(int sqzt) {
-		_sqzt = sqzt;
+	public void setStatus(int status) {
+		_status = status;
 
 		if (_completeRemoteModel != null) {
 			try {
 				Class<?> clazz = _completeRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setSqzt", int.class);
+				Method method = clazz.getMethod("setStatus", int.class);
 
-				method.invoke(_completeRemoteModel, sqzt);
+				method.invoke(_completeRemoteModel, status);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -590,7 +590,7 @@ public class CompleteClp extends BaseModelImpl<Complete> implements Complete {
 		clone.setZzjgdm(getZzjgdm());
 		clone.setBjbh(getBjbh());
 		clone.setSqbz(getSqbz());
-		clone.setSqzt(getSqzt());
+		clone.setStatus(getStatus());
 		clone.setBabh(getBabh());
 		clone.setWssqbh(getWssqbh());
 		clone.setSbrq(getSbrq());
@@ -668,8 +668,8 @@ public class CompleteClp extends BaseModelImpl<Complete> implements Complete {
 		sb.append(getBjbh());
 		sb.append(", sqbz=");
 		sb.append(getSqbz());
-		sb.append(", sqzt=");
-		sb.append(getSqzt());
+		sb.append(", status=");
+		sb.append(getStatus());
 		sb.append(", babh=");
 		sb.append(getBabh());
 		sb.append(", wssqbh=");
@@ -730,8 +730,8 @@ public class CompleteClp extends BaseModelImpl<Complete> implements Complete {
 		sb.append(getSqbz());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>sqzt</column-name><column-value><![CDATA[");
-		sb.append(getSqzt());
+			"<column><column-name>status</column-name><column-value><![CDATA[");
+		sb.append(getStatus());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>babh</column-name><column-value><![CDATA[");
@@ -762,7 +762,7 @@ public class CompleteClp extends BaseModelImpl<Complete> implements Complete {
 	private String _zzjgdm;
 	private String _bjbh;
 	private int _sqbz;
-	private int _sqzt;
+	private int _status;
 	private String _babh;
 	private String _wssqbh;
 	private Date _sbrq;

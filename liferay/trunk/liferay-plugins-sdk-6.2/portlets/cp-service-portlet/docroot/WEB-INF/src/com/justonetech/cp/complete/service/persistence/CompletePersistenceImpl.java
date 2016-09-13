@@ -882,7 +882,7 @@ public class CompletePersistenceImpl extends BasePersistenceImpl<Complete>
 		completeImpl.setZzjgdm(complete.getZzjgdm());
 		completeImpl.setBjbh(complete.getBjbh());
 		completeImpl.setSqbz(complete.getSqbz());
-		completeImpl.setSqzt(complete.getSqzt());
+		completeImpl.setStatus(complete.getStatus());
 		completeImpl.setBabh(complete.getBabh());
 		completeImpl.setWssqbh(complete.getWssqbh());
 		completeImpl.setSbrq(complete.getSbrq());
