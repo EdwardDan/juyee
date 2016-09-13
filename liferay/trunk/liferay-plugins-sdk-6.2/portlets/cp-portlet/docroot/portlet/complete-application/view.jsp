@@ -63,7 +63,7 @@
 				<%
 					CompleteProjectProfile projectProfile = CompleteProjectProfileLocalServiceUtil
 											.getCompleteProjectProfile(complete.getCompleteId());
-					int applyStatus = complete.getSqzt();
+					int status = complete.getStatus();
 				%>
 				<liferay-portlet:renderURL varImpl="rowURL">
 					<portlet:param name="completeId" value="${complete.completeId}" />
