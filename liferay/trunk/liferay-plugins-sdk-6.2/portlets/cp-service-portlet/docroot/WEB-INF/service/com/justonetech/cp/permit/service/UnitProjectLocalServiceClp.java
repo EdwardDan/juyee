@@ -122,6 +122,14 @@ public class UnitProjectLocalServiceClp implements UnitProjectLocalService {
 		_methodName20 = "countByPermitId";
 
 		_methodParameterTypes20 = new String[] { "long" };
+
+		_methodName21 = "findByBjbh";
+
+		_methodParameterTypes21 = new String[] { "java.lang.String", "int", "int" };
+
+		_methodName22 = "countByBjbh";
+
+		_methodParameterTypes22 = new String[] { "java.lang.String" };
 	}
 
 	@Override
@@ -722,6 +730,55 @@ public class UnitProjectLocalServiceClp implements UnitProjectLocalService {
 		return ((Integer)returnObj).intValue();
 	}
 
+	@Override
+	public java.util.List<com.justonetech.cp.permit.model.UnitProject> findByBjbh(
+		java.lang.String bjbh, int start, int end) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName21,
+					_methodParameterTypes21,
+					new Object[] { ClpSerializer.translateInput(bjbh), start, end });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<com.justonetech.cp.permit.model.UnitProject>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public int countByBjbh(java.lang.String bjbh) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName22,
+					_methodParameterTypes22,
+					new Object[] { ClpSerializer.translateInput(bjbh) });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return ((Integer)returnObj).intValue();
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -763,4 +820,8 @@ public class UnitProjectLocalServiceClp implements UnitProjectLocalService {
 	private String[] _methodParameterTypes19;
 	private String _methodName20;
 	private String[] _methodParameterTypes20;
+	private String _methodName21;
+	private String[] _methodParameterTypes21;
+	private String _methodName22;
+	private String[] _methodParameterTypes22;
 }

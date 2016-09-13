@@ -284,6 +284,15 @@ public class UnitProjectLocalServiceUtil {
 		return getService().countByPermitId(permitId);
 	}
 
+	public static java.util.List<com.justonetech.cp.permit.model.UnitProject> findByBjbh(
+		java.lang.String bjbh, int start, int end) {
+		return getService().findByBjbh(bjbh, start, end);
+	}
+
+	public static int countByBjbh(java.lang.String bjbh) {
+		return getService().countByBjbh(bjbh);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

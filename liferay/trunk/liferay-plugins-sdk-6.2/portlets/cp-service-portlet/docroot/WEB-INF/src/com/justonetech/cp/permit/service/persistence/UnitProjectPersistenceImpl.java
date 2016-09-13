@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnmodifiableList;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
@@ -574,6 +575,536 @@ public class UnitProjectPersistenceImpl extends BasePersistenceImpl<UnitProject>
 	}
 
 	private static final String _FINDER_COLUMN_PERMITID_PERMITID_2 = "unitProject.permitId = ?";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_BJBH = new FinderPath(UnitProjectModelImpl.ENTITY_CACHE_ENABLED,
+			UnitProjectModelImpl.FINDER_CACHE_ENABLED, UnitProjectImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByBjbh",
+			new String[] {
+				String.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_BJBH = new FinderPath(UnitProjectModelImpl.ENTITY_CACHE_ENABLED,
+			UnitProjectModelImpl.FINDER_CACHE_ENABLED, UnitProjectImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByBjbh",
+			new String[] { String.class.getName() },
+			UnitProjectModelImpl.BJBH_COLUMN_BITMASK |
+			UnitProjectModelImpl.GCBH_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_BJBH = new FinderPath(UnitProjectModelImpl.ENTITY_CACHE_ENABLED,
+			UnitProjectModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByBjbh",
+			new String[] { String.class.getName() });
+
+	/**
+	 * Returns all the unit projects where bjbh = &#63;.
+	 *
+	 * @param bjbh the bjbh
+	 * @return the matching unit projects
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<UnitProject> findByBjbh(String bjbh) throws SystemException {
+		return findByBjbh(bjbh, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the unit projects where bjbh = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.justonetech.cp.permit.model.impl.UnitProjectModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param bjbh the bjbh
+	 * @param start the lower bound of the range of unit projects
+	 * @param end the upper bound of the range of unit projects (not inclusive)
+	 * @return the range of matching unit projects
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<UnitProject> findByBjbh(String bjbh, int start, int end)
+		throws SystemException {
+		return findByBjbh(bjbh, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the unit projects where bjbh = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.justonetech.cp.permit.model.impl.UnitProjectModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param bjbh the bjbh
+	 * @param start the lower bound of the range of unit projects
+	 * @param end the upper bound of the range of unit projects (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching unit projects
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<UnitProject> findByBjbh(String bjbh, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_BJBH;
+			finderArgs = new Object[] { bjbh };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_BJBH;
+			finderArgs = new Object[] { bjbh, start, end, orderByComparator };
+		}
+
+		List<UnitProject> list = (List<UnitProject>)FinderCacheUtil.getResult(finderPath,
+				finderArgs, this);
+
+		if ((list != null) && !list.isEmpty()) {
+			for (UnitProject unitProject : list) {
+				if (!Validator.equals(bjbh, unitProject.getBjbh())) {
+					list = null;
+
+					break;
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_UNITPROJECT_WHERE);
+
+			boolean bindBjbh = false;
+
+			if (bjbh == null) {
+				query.append(_FINDER_COLUMN_BJBH_BJBH_1);
+			}
+			else if (bjbh.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_BJBH_BJBH_3);
+			}
+			else {
+				bindBjbh = true;
+
+				query.append(_FINDER_COLUMN_BJBH_BJBH_2);
+			}
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(UnitProjectModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (bindBjbh) {
+					qPos.add(bjbh);
+				}
+
+				if (!pagination) {
+					list = (List<UnitProject>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
+					Collections.sort(list);
+
+					list = new UnmodifiableList<UnitProject>(list);
+				}
+				else {
+					list = (List<UnitProject>)QueryUtil.list(q, getDialect(),
+							start, end);
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first unit project in the ordered set where bjbh = &#63;.
+	 *
+	 * @param bjbh the bjbh
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching unit project
+	 * @throws com.justonetech.cp.permit.NoSuchUnitProjectException if a matching unit project could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public UnitProject findByBjbh_First(String bjbh,
+		OrderByComparator orderByComparator)
+		throws NoSuchUnitProjectException, SystemException {
+		UnitProject unitProject = fetchByBjbh_First(bjbh, orderByComparator);
+
+		if (unitProject != null) {
+			return unitProject;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("bjbh=");
+		msg.append(bjbh);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchUnitProjectException(msg.toString());
+	}
+
+	/**
+	 * Returns the first unit project in the ordered set where bjbh = &#63;.
+	 *
+	 * @param bjbh the bjbh
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching unit project, or <code>null</code> if a matching unit project could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public UnitProject fetchByBjbh_First(String bjbh,
+		OrderByComparator orderByComparator) throws SystemException {
+		List<UnitProject> list = findByBjbh(bjbh, 0, 1, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last unit project in the ordered set where bjbh = &#63;.
+	 *
+	 * @param bjbh the bjbh
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching unit project
+	 * @throws com.justonetech.cp.permit.NoSuchUnitProjectException if a matching unit project could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public UnitProject findByBjbh_Last(String bjbh,
+		OrderByComparator orderByComparator)
+		throws NoSuchUnitProjectException, SystemException {
+		UnitProject unitProject = fetchByBjbh_Last(bjbh, orderByComparator);
+
+		if (unitProject != null) {
+			return unitProject;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("bjbh=");
+		msg.append(bjbh);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchUnitProjectException(msg.toString());
+	}
+
+	/**
+	 * Returns the last unit project in the ordered set where bjbh = &#63;.
+	 *
+	 * @param bjbh the bjbh
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching unit project, or <code>null</code> if a matching unit project could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public UnitProject fetchByBjbh_Last(String bjbh,
+		OrderByComparator orderByComparator) throws SystemException {
+		int count = countByBjbh(bjbh);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<UnitProject> list = findByBjbh(bjbh, count - 1, count,
+				orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the unit projects before and after the current unit project in the ordered set where bjbh = &#63;.
+	 *
+	 * @param projectId the primary key of the current unit project
+	 * @param bjbh the bjbh
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next unit project
+	 * @throws com.justonetech.cp.permit.NoSuchUnitProjectException if a unit project with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public UnitProject[] findByBjbh_PrevAndNext(long projectId, String bjbh,
+		OrderByComparator orderByComparator)
+		throws NoSuchUnitProjectException, SystemException {
+		UnitProject unitProject = findByPrimaryKey(projectId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			UnitProject[] array = new UnitProjectImpl[3];
+
+			array[0] = getByBjbh_PrevAndNext(session, unitProject, bjbh,
+					orderByComparator, true);
+
+			array[1] = unitProject;
+
+			array[2] = getByBjbh_PrevAndNext(session, unitProject, bjbh,
+					orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected UnitProject getByBjbh_PrevAndNext(Session session,
+		UnitProject unitProject, String bjbh,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_UNITPROJECT_WHERE);
+
+		boolean bindBjbh = false;
+
+		if (bjbh == null) {
+			query.append(_FINDER_COLUMN_BJBH_BJBH_1);
+		}
+		else if (bjbh.equals(StringPool.BLANK)) {
+			query.append(_FINDER_COLUMN_BJBH_BJBH_3);
+		}
+		else {
+			bindBjbh = true;
+
+			query.append(_FINDER_COLUMN_BJBH_BJBH_2);
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(UnitProjectModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		if (bindBjbh) {
+			qPos.add(bjbh);
+		}
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(unitProject);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<UnitProject> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the unit projects where bjbh = &#63; from the database.
+	 *
+	 * @param bjbh the bjbh
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public void removeByBjbh(String bjbh) throws SystemException {
+		for (UnitProject unitProject : findByBjbh(bjbh, QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS, null)) {
+			remove(unitProject);
+		}
+	}
+
+	/**
+	 * Returns the number of unit projects where bjbh = &#63;.
+	 *
+	 * @param bjbh the bjbh
+	 * @return the number of matching unit projects
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int countByBjbh(String bjbh) throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_BJBH;
+
+		Object[] finderArgs = new Object[] { bjbh };
+
+		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
+				this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_UNITPROJECT_WHERE);
+
+			boolean bindBjbh = false;
+
+			if (bjbh == null) {
+				query.append(_FINDER_COLUMN_BJBH_BJBH_1);
+			}
+			else if (bjbh.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_BJBH_BJBH_3);
+			}
+			else {
+				bindBjbh = true;
+
+				query.append(_FINDER_COLUMN_BJBH_BJBH_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (bindBjbh) {
+					qPos.add(bjbh);
+				}
+
+				count = (Long)q.uniqueResult();
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_BJBH_BJBH_1 = "unitProject.bjbh IS NULL";
+	private static final String _FINDER_COLUMN_BJBH_BJBH_2 = "unitProject.bjbh = ?";
+	private static final String _FINDER_COLUMN_BJBH_BJBH_3 = "(unitProject.bjbh IS NULL OR unitProject.bjbh = '')";
 
 	public UnitProjectPersistenceImpl() {
 		setModelClass(UnitProject.class);
@@ -814,6 +1345,23 @@ public class UnitProjectPersistenceImpl extends BasePersistenceImpl<UnitProject>
 
 				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_PERMITID, args);
 				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_PERMITID,
+					args);
+			}
+
+			if ((unitProjectModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_BJBH.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						unitProjectModelImpl.getOriginalBjbh()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_BJBH, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_BJBH,
+					args);
+
+				args = new Object[] { unitProjectModelImpl.getBjbh() };
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_BJBH, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_BJBH,
 					args);
 			}
 		}

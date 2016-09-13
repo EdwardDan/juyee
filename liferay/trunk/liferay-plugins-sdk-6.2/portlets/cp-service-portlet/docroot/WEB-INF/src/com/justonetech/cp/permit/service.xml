@@ -162,6 +162,9 @@
 		<finder name="PermitId" return-type="Collection">
 			<finder-column name="permitId"></finder-column>
 		</finder>
+		<finder name="Bjbh" return-type="Collection">
+			<finder-column name="bjbh"></finder-column>
+		</finder>
 	</entity>
 	<!-- 申请材料 -->
 	<entity name="ApplyMaterial" local-service="true"

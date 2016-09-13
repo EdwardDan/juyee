@@ -10,4 +10,5 @@ create index IX_D91E96C3 on cp_ParticipationUnit (permitId);
 
 create index IX_5095158D on cp_Permit (zzjgdm);
 
+create index IX_206BCF4B on cp_UnitProject (bjbh);
 create index IX_C9C93BD3 on cp_UnitProject (permitId);

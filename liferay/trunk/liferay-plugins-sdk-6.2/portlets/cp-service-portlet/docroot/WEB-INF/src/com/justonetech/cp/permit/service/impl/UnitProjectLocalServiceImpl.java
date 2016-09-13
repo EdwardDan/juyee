@@ -16,8 +16,6 @@ package com.justonetech.cp.permit.service.impl;
 
 import java.util.Collections;
 import java.util.List;
-
-import com.justonetech.cp.contract.service.impl.ContractLocalServiceImpl;
 import com.justonetech.cp.permit.model.UnitProject;
 import com.justonetech.cp.permit.service.base.UnitProjectLocalServiceBaseImpl;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -44,23 +42,42 @@ public class UnitProjectLocalServiceImpl extends UnitProjectLocalServiceBaseImpl
 	 *
 	 * Never reference this interface directly. Always use {@link com.justonetech.cp.permit.service.UnitProjectLocalServiceUtil} to access the unit project local service.
 	 */
-	private static Log log = LogFactoryUtil.getLog(UnitProjectLocalServiceImpl.class);
-	public List<UnitProject> findByPermitId(long permitId,int start,int end){
+	private static Log log = LogFactoryUtil
+			.getLog(UnitProjectLocalServiceImpl.class);
+
+	public List<UnitProject> findByPermitId(long permitId, int start, int end) {
 		try {
 			return unitProjectPersistence.findByPermitId(permitId, start, end);
-		}
-		catch (SystemException e) {
+		} catch (SystemException e) {
 			log.info(e.getMessage());
 		}
 		return Collections.emptyList();
 	}
-	
+
 	public int countByPermitId(long permitId) {
 
 		try {
 			return (int) unitProjectPersistence.countByPermitId(permitId);
+		} catch (SystemException e) {
+			log.info(e.getMessage());
 		}
-		catch (SystemException e) {
+		return 0;
+	}
+
+	public List<UnitProject> findByBjbh(String bjbh, int start, int end) {
+		try {
+			return unitProjectPersistence.findByBjbh(bjbh, start, end);
+		} catch (SystemException e) {
+			log.info(e.getMessage());
+		}
+		return Collections.emptyList();
+	}
+
+	public int countByBjbh(String bjbh) {
+
+		try {
+			return (int) unitProjectPersistence.countByBjbh(bjbh);
+		} catch (SystemException e) {
 			log.info(e.getMessage());
 		}
 		return 0;

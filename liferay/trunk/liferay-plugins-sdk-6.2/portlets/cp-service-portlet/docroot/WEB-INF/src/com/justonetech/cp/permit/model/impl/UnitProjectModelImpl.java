@@ -81,8 +81,9 @@ public class UnitProjectModelImpl extends BaseModelImpl<UnitProject>
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.column.bitmask.enabled.com.justonetech.cp.permit.model.UnitProject"),
 			true);
-	public static long PERMITID_COLUMN_BITMASK = 1L;
-	public static long GCBH_COLUMN_BITMASK = 2L;
+	public static long BJBH_COLUMN_BITMASK = 1L;
+	public static long PERMITID_COLUMN_BITMASK = 2L;
+	public static long GCBH_COLUMN_BITMASK = 4L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
 				"lock.expiration.time.com.justonetech.cp.permit.model.UnitProject"));
 
@@ -216,7 +217,17 @@ public class UnitProjectModelImpl extends BaseModelImpl<UnitProject>
 
 	@Override
 	public void setBjbh(String bjbh) {
+		_columnBitmask |= BJBH_COLUMN_BITMASK;
+
+		if (_originalBjbh == null) {
+			_originalBjbh = _bjbh;
+		}
+
 		_bjbh = bjbh;
+	}
+
+	public String getOriginalBjbh() {
+		return GetterUtil.getString(_originalBjbh);
 	}
 
 	@Override
@@ -357,6 +368,8 @@ public class UnitProjectModelImpl extends BaseModelImpl<UnitProject>
 
 		unitProjectModelImpl._setOriginalPermitId = false;
 
+		unitProjectModelImpl._originalBjbh = unitProjectModelImpl._bjbh;
+
 		unitProjectModelImpl._columnBitmask = 0;
 	}
 
@@ -471,6 +484,7 @@ public class UnitProjectModelImpl extends BaseModelImpl<UnitProject>
 	private long _originalPermitId;
 	private boolean _setOriginalPermitId;
 	private String _bjbh;
+	private String _originalBjbh;
 	private String _gcbh;
 	private String _gcmc;
 	private String _jsnr;

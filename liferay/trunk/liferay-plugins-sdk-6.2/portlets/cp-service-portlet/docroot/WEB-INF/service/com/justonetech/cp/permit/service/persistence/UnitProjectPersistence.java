@@ -176,6 +176,144 @@ public interface UnitProjectPersistence extends BasePersistence<UnitProject> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Returns all the unit projects where bjbh = &#63;.
+	*
+	* @param bjbh the bjbh
+	* @return the matching unit projects
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.justonetech.cp.permit.model.UnitProject> findByBjbh(
+		java.lang.String bjbh)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns a range of all the unit projects where bjbh = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.justonetech.cp.permit.model.impl.UnitProjectModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param bjbh the bjbh
+	* @param start the lower bound of the range of unit projects
+	* @param end the upper bound of the range of unit projects (not inclusive)
+	* @return the range of matching unit projects
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.justonetech.cp.permit.model.UnitProject> findByBjbh(
+		java.lang.String bjbh, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns an ordered range of all the unit projects where bjbh = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.justonetech.cp.permit.model.impl.UnitProjectModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param bjbh the bjbh
+	* @param start the lower bound of the range of unit projects
+	* @param end the upper bound of the range of unit projects (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching unit projects
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.justonetech.cp.permit.model.UnitProject> findByBjbh(
+		java.lang.String bjbh, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the first unit project in the ordered set where bjbh = &#63;.
+	*
+	* @param bjbh the bjbh
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching unit project
+	* @throws com.justonetech.cp.permit.NoSuchUnitProjectException if a matching unit project could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.justonetech.cp.permit.model.UnitProject findByBjbh_First(
+		java.lang.String bjbh,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.justonetech.cp.permit.NoSuchUnitProjectException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the first unit project in the ordered set where bjbh = &#63;.
+	*
+	* @param bjbh the bjbh
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching unit project, or <code>null</code> if a matching unit project could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.justonetech.cp.permit.model.UnitProject fetchByBjbh_First(
+		java.lang.String bjbh,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the last unit project in the ordered set where bjbh = &#63;.
+	*
+	* @param bjbh the bjbh
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching unit project
+	* @throws com.justonetech.cp.permit.NoSuchUnitProjectException if a matching unit project could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.justonetech.cp.permit.model.UnitProject findByBjbh_Last(
+		java.lang.String bjbh,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.justonetech.cp.permit.NoSuchUnitProjectException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the last unit project in the ordered set where bjbh = &#63;.
+	*
+	* @param bjbh the bjbh
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching unit project, or <code>null</code> if a matching unit project could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.justonetech.cp.permit.model.UnitProject fetchByBjbh_Last(
+		java.lang.String bjbh,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the unit projects before and after the current unit project in the ordered set where bjbh = &#63;.
+	*
+	* @param projectId the primary key of the current unit project
+	* @param bjbh the bjbh
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next unit project
+	* @throws com.justonetech.cp.permit.NoSuchUnitProjectException if a unit project with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.justonetech.cp.permit.model.UnitProject[] findByBjbh_PrevAndNext(
+		long projectId, java.lang.String bjbh,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.justonetech.cp.permit.NoSuchUnitProjectException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Removes all the unit projects where bjbh = &#63; from the database.
+	*
+	* @param bjbh the bjbh
+	* @throws SystemException if a system exception occurred
+	*/
+	public void removeByBjbh(java.lang.String bjbh)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the number of unit projects where bjbh = &#63;.
+	*
+	* @param bjbh the bjbh
+	* @return the number of matching unit projects
+	* @throws SystemException if a system exception occurred
+	*/
+	public int countByBjbh(java.lang.String bjbh)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Caches the unit project in the entity cache if it is enabled.
 	*
 	* @param unitProject the unit project

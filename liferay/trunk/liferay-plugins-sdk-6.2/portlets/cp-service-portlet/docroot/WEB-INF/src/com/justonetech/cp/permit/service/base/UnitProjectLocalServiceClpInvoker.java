@@ -121,6 +121,14 @@ public class UnitProjectLocalServiceClpInvoker {
 		_methodName55 = "countByPermitId";
 
 		_methodParameterTypes55 = new String[] { "long" };
+
+		_methodName56 = "findByBjbh";
+
+		_methodParameterTypes56 = new String[] { "java.lang.String", "int", "int" };
+
+		_methodName57 = "countByBjbh";
+
+		_methodParameterTypes57 = new String[] { "java.lang.String" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -236,6 +244,18 @@ public class UnitProjectLocalServiceClpInvoker {
 			return UnitProjectLocalServiceUtil.countByPermitId(((Long)arguments[0]).longValue());
 		}
 
+		if (_methodName56.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes56, parameterTypes)) {
+			return UnitProjectLocalServiceUtil.findByBjbh((java.lang.String)arguments[0],
+				((Integer)arguments[1]).intValue(),
+				((Integer)arguments[2]).intValue());
+		}
+
+		if (_methodName57.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes57, parameterTypes)) {
+			return UnitProjectLocalServiceUtil.countByBjbh((java.lang.String)arguments[0]);
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -279,4 +299,8 @@ public class UnitProjectLocalServiceClpInvoker {
 	private String[] _methodParameterTypes54;
 	private String _methodName55;
 	private String[] _methodParameterTypes55;
+	private String _methodName56;
+	private String[] _methodParameterTypes56;
+	private String _methodName57;
+	private String[] _methodParameterTypes57;
 }

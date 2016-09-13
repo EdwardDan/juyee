@@ -298,6 +298,17 @@ public class UnitProjectLocalServiceWrapper implements UnitProjectLocalService,
 		return _unitProjectLocalService.countByPermitId(permitId);
 	}
 
+	@Override
+	public java.util.List<com.justonetech.cp.permit.model.UnitProject> findByBjbh(
+		java.lang.String bjbh, int start, int end) {
+		return _unitProjectLocalService.findByBjbh(bjbh, start, end);
+	}
+
+	@Override
+	public int countByBjbh(java.lang.String bjbh) {
+		return _unitProjectLocalService.countByBjbh(bjbh);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

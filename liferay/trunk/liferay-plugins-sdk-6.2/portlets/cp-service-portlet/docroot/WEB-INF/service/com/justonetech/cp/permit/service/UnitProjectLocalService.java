@@ -258,4 +258,9 @@ public interface UnitProjectLocalService extends BaseLocalService,
 		long permitId, int start, int end);
 
 	public int countByPermitId(long permitId);
+
+	public java.util.List<com.justonetech.cp.permit.model.UnitProject> findByBjbh(
+		java.lang.String bjbh, int start, int end);
+
+	public int countByBjbh(java.lang.String bjbh);
 }
