@@ -57,13 +57,7 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 		int end = delta * cur;
 		List<Complete> completes = new ArrayList<Complete>();
 		int completesCount = 0;
-
-		try {
-			completes = CompleteLocalServiceUtil.getCompletes(-1, -1);
-		} catch (SystemException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		completes = CompleteLocalServiceUtil.getCompletes("", bjbh, wssqbh, gcmc, start, end);
 		completesCount = CompleteLocalServiceUtil.getCompletesCount("", bjbh, wssqbh, gcmc);
 		renderRequest.setAttribute("zzjgdm", zzjgdm);
 		renderRequest.setAttribute("bjbh", bjbh);
@@ -114,13 +108,20 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 
 	public void saveProjectProfile(ActionRequest request, ActionResponse response) throws SystemException,
 			PortalException {
+		long completeId = ParamUtil.getLong(request, "completeId");
 		long groupId = PortalUtil.getScopeGroupId(request);
 		long companyId = PortalUtil.getCompanyId(request);
 		long userId = PortalUtil.getUserId(request);
 		String userName = PortalUtil.getUserName(userId, "");
 		Date now = new Date();
-		String wssqbh = ParamUtil.getString(request, "wasqbh");
 		String bjbh = ParamUtil.getString(request, "bjbh");
+		Project project = null;
+		try {
+			project = ProjectLocalServiceUtil.getProject(bjbh);
+		} catch (PortalException | SystemException e) {
+			e.printStackTrace();
+		}
+		String wssqbh = project.getBj_webid();
 		String gcmc = ParamUtil.getString(request, "gcmc");
 		String jsdwmc = ParamUtil.getString(request, "jsdwmc");
 		String jsdwdz = ParamUtil.getString(request, "jsdwdz");
@@ -132,9 +133,14 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 		String bz = ParamUtil.getString(request, "bz");
 		Complete complete = null;
 		CompleteProjectProfile completeProjectProfile = null;
-		complete = CompleteLocalServiceUtil.createComplete(CounterLocalServiceUtil.increment());
-		completeProjectProfile = CompleteProjectProfileLocalServiceUtil.createCompleteProjectProfile(complete
-				.getCompleteId());
+		if (Validator.isNull(completeId)) {
+			complete = CompleteLocalServiceUtil.createComplete(CounterLocalServiceUtil.increment());
+			completeProjectProfile = CompleteProjectProfileLocalServiceUtil.createCompleteProjectProfile(complete
+					.getCompleteId());
+		} else {
+			complete = CompleteLocalServiceUtil.getComplete(completeId);
+			completeProjectProfile = CompleteProjectProfileLocalServiceUtil.getCompleteProjectProfile(completeId);
+		}
 		complete.setGroupId(groupId);
 		complete.setCompanyId(companyId);
 		complete.setUserId(userId);
@@ -161,7 +167,6 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 
 	public void deleteComplete(ActionRequest request, ActionResponse response) throws PortalException, SystemException {
 		long completeId = ParamUtil.getLong(request, "completeId");
-		System.out.println("==================="+completeId);
 		CompleteLocalServiceUtil.deleteComplete(completeId);
 		CompleteProjectProfileLocalServiceUtil.deleteCompleteProjectProfile(CompleteProjectProfileLocalServiceUtil
 				.getCompleteProjectProfile(completeId));
