@@ -14,7 +14,14 @@
 
 package com.justonetech.cp.complete.service.impl;
 
+import java.util.Collections;
+import java.util.List;
+
+import com.justonetech.cp.complete.model.CompleteUnitProject;
 import com.justonetech.cp.complete.service.base.CompleteUnitProjectLocalServiceBaseImpl;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 /**
  * The implementation of the complete unit project local service.
@@ -37,4 +44,28 @@ public class CompleteUnitProjectLocalServiceImpl
 	 *
 	 * Never reference this interface directly. Always use {@link com.justonetech.cp.complete.service.CompleteUnitProjectLocalServiceUtil} to access the complete unit project local service.
 	 */
+	private static Log log = LogFactoryUtil
+			.getLog(CompleteUnitProjectLocalServiceImpl.class);
+
+	public List<CompleteUnitProject> findByCompleteId(long completeId,
+			int start, int end) {
+		try {
+			return completeUnitProjectPersistence.findByCompleteId(completeId,
+					start, end);
+		} catch (SystemException e) {
+			log.info(e.getMessage());
+		}
+		return Collections.emptyList();
+	}
+
+	public int countByCompleteId(long completeId) {
+
+		try {
+			return (int) completeUnitProjectPersistence
+					.countByCompleteId(completeId);
+		} catch (SystemException e) {
+			log.info(e.getMessage());
+		}
+		return 0;
+	}
 }

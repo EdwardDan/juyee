@@ -290,6 +290,18 @@ public class CompleteApplyMaterialLocalServiceWrapper
 			parameterTypes, arguments);
 	}
 
+	@Override
+	public java.util.List<com.justonetech.cp.complete.model.CompleteApplyMaterial> findByCompleteId(
+		long completeId, int start, int end) {
+		return _completeApplyMaterialLocalService.findByCompleteId(completeId,
+			start, end);
+	}
+
+	@Override
+	public int countByCompleteId(long completeId) {
+		return _completeApplyMaterialLocalService.countByCompleteId(completeId);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

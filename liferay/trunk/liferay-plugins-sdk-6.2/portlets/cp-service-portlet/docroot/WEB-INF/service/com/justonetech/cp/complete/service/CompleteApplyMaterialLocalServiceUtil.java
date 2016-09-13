@@ -275,6 +275,15 @@ public class CompleteApplyMaterialLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static java.util.List<com.justonetech.cp.complete.model.CompleteApplyMaterial> findByCompleteId(
+		long completeId, int start, int end) {
+		return getService().findByCompleteId(completeId, start, end);
+	}
+
+	public static int countByCompleteId(long completeId) {
+		return getService().countByCompleteId(completeId);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

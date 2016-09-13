@@ -14,7 +14,14 @@
 
 package com.justonetech.cp.complete.service.impl;
 
+import java.util.Collections;
+import java.util.List;
+
+import com.justonetech.cp.complete.model.CompleteApplyMaterial;
 import com.justonetech.cp.complete.service.base.CompleteApplyMaterialLocalServiceBaseImpl;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 /**
  * The implementation of the complete apply material local service.
@@ -37,4 +44,28 @@ public class CompleteApplyMaterialLocalServiceImpl
 	 *
 	 * Never reference this interface directly. Always use {@link com.justonetech.cp.complete.service.CompleteApplyMaterialLocalServiceUtil} to access the complete apply material local service.
 	 */
+	
+	private static Log log = LogFactoryUtil
+			.getLog(CompleteApplyMaterialLocalServiceImpl.class);
+
+	public List<CompleteApplyMaterial> findByCompleteId(long completeId,
+			int start, int end) {
+		try {
+			return completeApplyMaterialPersistence.findByCompleteId(
+					completeId, start, end);
+		} catch (SystemException e) {
+			log.info(e.getMessage());
+		}
+		return Collections.emptyList();
+	}
+
+	public int countByCompleteId(long completeId) {
+		try {
+			return (int) completeApplyMaterialPersistence
+					.countByCompleteId(completeId);
+		} catch (SystemException e) {
+			log.info(e.getMessage());
+		}
+		return 0;
+	}
 }
