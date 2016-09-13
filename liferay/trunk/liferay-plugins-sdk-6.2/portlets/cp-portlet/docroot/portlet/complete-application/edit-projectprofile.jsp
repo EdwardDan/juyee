@@ -6,20 +6,13 @@
 	Long completeId = ParamUtil.getLong(request, "completeId");
 	CompleteProjectProfile completeProjectProfile = null;
 	Project project = null;
-	Complete complete=null;
-	if (completeId != 0) {
-		completeProjectProfile = CompleteProjectProfileLocalServiceUtil
-				.getCompleteProjectProfile(completeId);
+	if (Validator.isNotNull(bjbh)) {
+		project = ProjectLocalServiceUtil.getProject(bjbh);
+		request.setAttribute("project", project);
+	} 
+	if(Validator.isNotNull(completeId)){
+		completeProjectProfile = CompleteProjectProfileLocalServiceUtil.getCompleteProjectProfile(completeId);
 		request.setAttribute("completeProjectProfile", completeProjectProfile);
-		complete = CompleteLocalServiceUtil.getComplete(completeId);
-		request.setAttribute("bjbh",complete.getBjbh());
-		
-	} else {
-		if (Validator.isNotNull(bjbh)) {
-			project = ProjectLocalServiceUtil.getProject(bjbh);
-			request.setAttribute("project", project);
-			request.setAttribute("bjbh",bjbh);
-		}
 	}
 	/* Dictionary qxDic = DictionaryLocalServiceUtil.findByCode("qx");
 	List<Dictionary> qxDics = qxDic != null ? DictionaryLocalServiceUtil.findByParentId(
@@ -66,7 +59,7 @@
 				<td class="text-right">建设地点</td>
 				<td class="bg-white">
 				<aui:input name="jsdd" label="" type="text"
-					style="width:50%" value="${project.jsdd}" readonly="true"></aui:input>
+					cssClass="span12" value="${project.jsdd}" readonly="true"></aui:input>
 				</td>
 		
 			<td class="text-right">所在区县</td>
@@ -86,14 +79,12 @@
 		<tr class="body">
 			<td class="text-right">联系人</td>
 			<td class="bg-white" ><aui:input name="lxr"
-					label="" type="text" style="width:50%" value="${project.jsdwlxr}"
-					readonly="true">
+					label="" type="text" style="width:50%" value="${project.jsdwlxr}">
 				</aui:input></td>
 		
 			<td class="text-right">联系电话</td>
 			<td class="bg-white" ><aui:input name="lxdh"
-					label="" type="text" style="width:50%" value="${project.jsdwdh}"
-					readonly="true">
+					label="" type="text" style="width:50%" value="${project.jsdwdh}">
 				</aui:input></td>
 		</tr>
 		<tr class="body">
