@@ -70,7 +70,7 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 		String bjbh = ParamUtil.getString(renderRequest, "bjbh");
 		String wssqbh = ParamUtil.getString(renderRequest, "wssqbh");
 		String gcmc = ParamUtil.getString(renderRequest, "gcmc");
-		String zt = ParamUtil.getString(renderRequest, "zt");
+		int zt = ParamUtil.getInteger(renderRequest, "state");
 		int defaultDelta = GetterUtil.getInteger(PropsUtil.get(PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA));
 		int delta = ParamUtil.getInteger(renderRequest, "delta", defaultDelta);
 		int cur = ParamUtil.getInteger(renderRequest, "cur", 1);
@@ -78,8 +78,8 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 		int end = delta * cur;
 		List<Complete> completes = new ArrayList<Complete>();
 		int completesCount = 0;
-		completes = CompleteLocalServiceUtil.getCompletes("", bjbh, wssqbh, gcmc, start, end);
-		completesCount = CompleteLocalServiceUtil.getCompletesCount("", bjbh, wssqbh, gcmc);
+		completes = CompleteLocalServiceUtil.getCompletes("", bjbh, wssqbh, gcmc, zt, start, end);
+		completesCount = CompleteLocalServiceUtil.getCompletesCount("", bjbh, wssqbh, gcmc, zt);
 		renderRequest.setAttribute("zzjgdm", zzjgdm);
 		renderRequest.setAttribute("bjbh", bjbh);
 		renderRequest.setAttribute("wssqbh", wssqbh);
@@ -143,8 +143,8 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 			e.printStackTrace();
 		}
 		String wssqbh = project.getBj_webid();
-		long xmlx= ParamUtil.getLong(request, "xmlx");
-		long jsgcsx= ParamUtil.getLong(request, "jsgcsx");
+		long xmlx = ParamUtil.getLong(request, "xmlx");
+		long jsgcsx = ParamUtil.getLong(request, "jsgcsx");
 		String gcmc = ParamUtil.getString(request, "gcmc");
 		String jsdwmc = ParamUtil.getString(request, "jsdwmc");
 		String jsdwdz = ParamUtil.getString(request, "jsdwdz");
@@ -216,7 +216,6 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 		response.sendRedirect(redirect);
 	}
 
-	
 	public void saveCompleteApplyMaterials(ActionRequest request, ActionResponse response) throws SystemException,
 			PortalException, ParseException, IOException {
 		long completeId = ParamUtil.getLong(request, "completeId");
