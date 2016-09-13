@@ -61,7 +61,20 @@
 						}catch(Exception e){
 						}
 						}
-					int applyStatus=permit.getSqzt();
+					int applyStatus=permit.getStatus();
+					Project project =ProjectLocalServiceUtil.getProject(permit.getBjbh());
+					String type="";
+					if(project.getLxjb().equals("区县级机关或区县级单位")){
+		    			type="quxian";
+		    				}else{
+		    			type="shishu";
+		    				}
+					String status="";
+					if(project.getLxjb().equals("区县级机关或区县级单位")){
+						status=CountyPermitStatus.getNameByCode(permit.getStatus());
+					}else{
+						status=CityPermitStatus.getNameByCode(permit.getStatus());
+					}
 				%>
 				
 					<liferay-portlet:renderURL varImpl="rowURL">
@@ -97,13 +110,13 @@
 					<liferay-ui:search-container-column-text
 						value="<%=projectProfile.getGcmc() %>" name="工程名称" />
 				</c:if>
-				<liferay-ui:search-container-column-text property="sqzt" name="申请状态" />
+				<liferay-ui:search-container-column-text value="<%=status %>" name="申请状态" />
 				<liferay-ui:search-container-column-text name="操作">
 					<liferay-ui:icon-menu>
 						<c:if test="<%=(applyStatus>2)%>">
 							<liferay-ui:icon image="view" url="${viewPermitURL}" />
 						</c:if>  
-						<c:if test="<%=(applyStatus<=2)%>"> 
+						<c:if test='<%=(applyStatus<=2)||(applyStatus==4)||(applyStatus==6&&type.equals("shishu"))%>'> 
 							<liferay-ui:icon image="edit" url="${rowURL}" />
 							<liferay-ui:icon image="delete" label="删除" url="javascript:void(0);" onClick='<%=renderResponse.getNamespace() + "deletePermits("+permit.getPermitId()+");"%>' />
 						</c:if> 
