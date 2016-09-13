@@ -17,7 +17,7 @@
 %>
 <portlet:renderURL var="viewURL" />
 <portlet:actionURL var="saveProjectProfileURL" name="saveProjectProfile">
-	<portlet:param name="redirect" value="${viewURL}" />
+	<portlet:param name="redirectURL" value="${editCompleteURL}" />
 </portlet:actionURL>
 <aui:model-context bean="${projectProfile}"
 	model="<%=ProjectProfile.class%>" />
