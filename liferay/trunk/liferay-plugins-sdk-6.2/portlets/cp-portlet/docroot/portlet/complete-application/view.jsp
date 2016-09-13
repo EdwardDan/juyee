@@ -7,16 +7,17 @@
 	<portlet:param name="mvcPath"
 		value="${contextPath }/apply-complete.jsp" />
 </portlet:renderURL>
+<portlet:renderURL var="viewURL"/>
 <portlet:actionURL var="deleteCompletesURL" name="deleteCompletes">
 	<portlet:param name="redirect" value="${viewURL}" />
 </portlet:actionURL>
-<%
-	int rowNo = 0;
-%>
 <portlet:renderURL var="selectProjectURL">
 	<portlet:param name="mvcPath"
 		value="${contextPath }/select-project.jsp" />
 </portlet:renderURL>
+<%
+	int rowNo = 0;
+%>
 <liferay-ui:panel-container accordion="false" extended="true">
 	<liferay-ui:panel title="查询条件" collapsible="true">
 		<aui:form name="fm" method="get" action="${searchURL }">
@@ -53,36 +54,26 @@
 			</table>
 		</aui:form>
 	</liferay-ui:panel>
-
 	<liferay-ui:panel title="竣工备案列表" collapsible="false">
 		<liferay-ui:search-container emptyResultsMessage="没有施工许可数据。">
 			<liferay-ui:search-container-results results="${completes}"
-				total="${completesCount }">
+				total="${completesCount}">
 			</liferay-ui:search-container-results>
 			<liferay-ui:search-container-row className="Complete"
 				keyProperty="completeId" modelVar="complete">
 				<%
 					CompleteProjectProfile projectProfile = CompleteProjectProfileLocalServiceUtil
-											.getCompleteProjectProfile(complete
-													.getCompleteId());
-									int applyStatus = complete.getSqzt();
+											.getCompleteProjectProfile(complete.getCompleteId());
+					int applyStatus = complete.getSqzt();
 				%>
 				<liferay-portlet:renderURL varImpl="rowURL">
-					<portlet:param name="bjbh" value="${complete.bjbh}" />
-					<portlet:param name="sqbz" value="${complete.sqbz}" />
 					<portlet:param name="completeId" value="${complete.completeId}" />
 					<portlet:param name="mvcPath"
 						value="${contextPath }/edit-complete.jsp" />
 				</liferay-portlet:renderURL>
-				<portlet:renderURL var="viewCompleteURL">
-					<portlet:param name="mvcPath"
-						value="${contextPath}/view-complete.jsp" />
-					<portlet:param name="completeId" value="${complete.completeId}" />
-				</portlet:renderURL>
-
 				<liferay-ui:search-container-column-text
 					value="<%=String.valueOf(++rowNo)%>" />
-				<liferay-ui:search-container-column-text property="bjbh" name="报建编号" />
+				<liferay-ui:search-container-column-text value="${complete.bjbh}" name="报建编号" />
 				<liferay-ui:search-container-column-text property="wssqbh"
 					name="网上申请编号" />
 				<liferay-ui:search-container-column-text property="babh" name="备案编号" />
@@ -93,9 +84,24 @@
 					href="${rowURL }">
 					<fmt:formatDate value="${complete.sbrq}" pattern="yyyy-MM-dd" />
 				</liferay-ui:search-container-column-text>
-
+				<liferay-ui:search-container-column-text property="babh" name="状态" value="${complete.sqbz}"/>
+				<liferay-ui:search-container-column-text name="action">
+					<portlet:renderURL var="viewCompleteURL">
+						<portlet:param name="completeId" value="${complete.completeId}"/>
+						<portlet:param name="mvcPath" value="${contextPath }/view-complete.jsp"/>
+					</portlet:renderURL>
+					<portlet:actionURL var="deleteCompleteURL" name="deleteComplete">
+						<portlet:param name="completeId" value="${complete.completeId}"/>
+						<portlet:param name="redirect" value="${viewURL }" />
+					</portlet:actionURL>
+					<liferay-ui:icon-menu>
+						<liferay-ui:icon image="edit" url="${rowURL}"/>
+						<liferay-ui:icon image="view" url="${viewCompleteURL}"/>
+						<liferay-ui:icon-delete url="${deleteCompleteURL}"/>
+					</liferay-ui:icon-menu>
+				</liferay-ui:search-container-column-text>
 			</liferay-ui:search-container-row>
+			<liferay-ui:search-iterator />
 		</liferay-ui:search-container>
 	</liferay-ui:panel>
-
 </liferay-ui:panel-container>
