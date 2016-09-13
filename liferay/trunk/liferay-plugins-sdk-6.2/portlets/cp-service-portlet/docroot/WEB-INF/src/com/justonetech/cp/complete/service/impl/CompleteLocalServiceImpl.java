@@ -110,7 +110,7 @@ public class CompleteLocalServiceImpl extends CompleteLocalServiceBaseImpl {
 					projectProfileDQ));
 		}
 		if (sqzt > 0) {
-			dynamicQuery.add(PropertyFactoryUtil.forName("sqzt").eq(sqzt));
+			dynamicQuery.add(PropertyFactoryUtil.forName("status").eq(sqzt));
 		}
 		return dynamicQuery;
 	}
