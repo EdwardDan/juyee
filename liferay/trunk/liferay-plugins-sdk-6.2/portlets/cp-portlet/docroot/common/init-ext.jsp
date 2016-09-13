@@ -59,3 +59,4 @@
 <%@ page import="java.text.*"%>
 <%@ page import="com.liferay.portal.service.*"%>
 <%@ page import="com.liferay.portal.model.*"%>
+<%@page import="com.justonetech.cp.util.CpConstants"%>
