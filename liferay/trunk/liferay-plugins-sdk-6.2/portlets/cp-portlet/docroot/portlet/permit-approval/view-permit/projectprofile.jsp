@@ -146,4 +146,45 @@ tr.body td.content {
 				onClick="return false" />
 		</td>
 	</tr>
+	<c:choose>
+			<c:when test="${projectProfile.sfzftzl }">
+				<tr class="body" id="yzzpl">
+			</c:when>
+			<c:otherwise>
+				<tr class="body" id="yzzpl" style="display: none">
+			</c:otherwise>
+		</c:choose>
+		<td colspan="4">
+			<table style="width: 99%;">
+				<tr class="body">
+					<td class="text-right" rowspan="4">预制装配率</td>
+					<td class="bg-white" colspan="2">单跨跨径100米以下桥梁工程承台顶面以上构件</td>
+					<td class="bg-white"><aui:row><aui:input name="yzzpl1" label="" inlineField="true"
+							type="text" style="width:30px" value="${projectProfile.yzzpl1}">
+						</aui:input>%</aui:row></td>
+				</tr>
+				<tr class="body">
+					<td class="bg-white" colspan="2">隧道工程盾构段</td>
+					<td class="bg-white"><aui:row><aui:input name="yzzpl2" label="" inlineField="true"
+							type="text" style="width:30px" value="${projectProfile.yzzpl2}">
+						</aui:input>%</aui:row></td>
+				</tr>
+				<tr class="body">
+					<td class="bg-white" colspan="2">轨道交通工程地下过街通道</td>
+					<td class="bg-white"><aui:row><aui:input name="yzzpl3" label="" inlineField="true"
+							type="text" style="width:30px" value="${projectProfile.yzzpl3}">
+						</aui:input>%</aui:row></td>
+				</tr>
+				<tr class="body">
+					<td class="bg-white" colspan="2">水运工程（港口）桩顶面以上构件</td>
+					<td class="bg-white"><aui:row><aui:input name="yzzpl4" label="" inlineField="true"
+							type="text" style="width:30px" value="${projectProfile.yzzpl4}">
+						</aui:input>%</aui:row></td>
+				</tr>
+			</table>
+		</td>
+		</tr>
+		<tr class="body">
+			<td  class="bg-white" colspan="4">注:信息保存后，请进入参见单位和项目负责人信息页面，填写参建单位和项目负责人信息</td>
+		</tr>
 </table>
