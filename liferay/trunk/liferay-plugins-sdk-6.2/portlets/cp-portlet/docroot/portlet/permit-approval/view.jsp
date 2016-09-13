@@ -91,6 +91,13 @@
 					Long permitId = permit.getPermitId();
 					ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
 					request.setAttribute("projectProfile", projectProfile);
+					Project project=ProjectLocalServiceUtil.getProject(permit.getBjbh());
+					String status="";
+					if(project.getLxjb().equals("区县级机关或区县级单位")){
+						status=CountyPermitStatus.getColorNameByCode(permit.getStatus());
+					}else{
+						status=CityPermitStatus.getColorNameByCode(permit.getStatus());
+					}
 				%>
 				<liferay-ui:search-container-column-text name="序号"
 					value="<%=String.valueOf(++sortNo)%>" />
@@ -100,7 +107,7 @@
 				<liferay-ui:search-container-column-text property="bjbh" name="报建编号" />
 				<liferay-ui:search-container-column-text name="项目名称" value="${projectProfile.gcmc}"/>
 				<liferay-ui:search-container-column-text name="建设单位" value="${projectProfile.jsdwmc}"/>
-				<liferay-ui:search-container-column-text name="状态" property="sqzt"/>
+				<liferay-ui:search-container-column-text name="状态" value="<%=status %>"/>
 				<liferay-ui:search-container-column-text name="操作">
 					<portlet:renderURL var="viewPermitURL">
 						<portlet:param name="mvcPath" value="${contextPath}/view-permit.jsp"/>

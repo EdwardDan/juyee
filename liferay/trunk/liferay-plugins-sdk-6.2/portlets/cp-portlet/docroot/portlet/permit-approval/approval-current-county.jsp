@@ -2,27 +2,30 @@
 <%@ include file="/common/init.jsp"%>
 <%@ include file="init.jsp"%>
 <%
-	long permitId = ParamUtil.getLong(request, "permitId");
-	request.setAttribute("permitId", permitId);
 	Integer sqztInit = (Integer) request.getAttribute("sqztInit");
-	boolean issb = sqztInit == CountyPermitStatus.STATUS_SB.getCode();
-	boolean issj = sqztInit == CountyPermitStatus.STATUS_SJ_PASS.getCode()
-			||sqztInit == CountyPermitStatus.STATUS_SP_BACK.getCode();
-	boolean issl = sqztInit == CountyPermitStatus.STATUS_SL_PASS.getCode();
-	boolean issh = sqztInit == CountyPermitStatus.STATUS_SH_PASS.getCode();
-	boolean issp = sqztInit == CountyPermitStatus.STATUS_SP_PASS.getCode();
+	request.setAttribute("sqztInit", sqztInit);
+	long permitIdInit = ParamUtil.getLong(request, "permitId");
+	request.setAttribute("permitId",permitIdInit);
+	User me = PortalUtil.getUser(request);
+	List<Role> userRoles = RoleLocalServiceUtil.getUserRoles(me
+			.getUserId());
+	ArrayList<String> roles = new ArrayList<String>();
+	for (Role role : userRoles) {
+		roles.add(role.getRoleId() + "");
+	}
+	request.setAttribute("roles", roles.toString());
 %>
 <c:choose>
-	<c:when test="<%=issb%>">
+	<c:when test="${(sqztInit=='2'&&fn:contains(roles,'25982'))||(sqztInit=='8'&&fn:contains(roles,'25982'))}">
 		<jsp:include page="${contextPath }/approval-current-county/sj.jsp" />
 	</c:when>
-	<c:when test="<%=issj%>">
+	<c:when test="${sqztInit=='3'&&fn:contains(roles,'25983') }">
 		<jsp:include page="${contextPath }/approval-current-county/sl.jsp" />
 	</c:when>
-	<c:when test="<%=issl%>">
+	<c:when test="${sqztInit=='5'&&fn:contains(roles,'25984') }">
 		<jsp:include page="${contextPath }/approval-current-county/sh.jsp" />
 	</c:when>
-	<c:when test="<%=issh%>">
+	<c:when test="${sqztInit=='6'&&fn:contains(roles,'25986') }">
 		<jsp:include page="${contextPath }/approval-current-county/sp.jsp" />
 	</c:when>
 </c:choose>
