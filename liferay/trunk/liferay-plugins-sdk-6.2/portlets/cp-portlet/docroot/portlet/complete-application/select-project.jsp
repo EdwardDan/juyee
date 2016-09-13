@@ -64,7 +64,7 @@
 					n = num + "";
 				%>
 				<liferay-ui:search-container-column-text property="bjbh" name="报建编号" />
-				<liferay-ui:search-container-column-text property="xmmc" name="项目名称" href="${editCompleteURL}" />
+				<liferay-ui:search-container-column-text property="xmmc" name="项目名称" />
 				<liferay-ui:search-container-column-text property="bj_webid" name="网上申报编号"/>
 				<liferay-ui:search-container-column-text name="报建日期">
 					<fmt:formatDate value="${project.bjrq}" pattern="yyyy-MM-dd" />
