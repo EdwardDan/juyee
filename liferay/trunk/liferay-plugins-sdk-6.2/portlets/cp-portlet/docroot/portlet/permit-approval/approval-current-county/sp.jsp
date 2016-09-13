@@ -60,18 +60,6 @@
 		<br>
 				
 			</div>
-			<%-- <div class="btn-group">
-				<aui:button name="pass" value="审核通过" cssClass="btn" />
-			</div>
-			<div class="btn-group">
-				<aui:button name="close" value="审核退回" cssClass="btn" onClick="shth()" />
-			</div>
-			<div class="btn-group">
-				<aui:button name="close" value="补正退回" cssClass="btn" />
-			</div>
-			<div class="btn-group">
-				<aui:button name="close" value="内部退回" cssClass="btn" />
-			</div> --%>
 		</div>
 		<div class="text-center">
 		<div class="btn-group">
@@ -145,7 +133,7 @@
 var onTaskClickFn = A.rbind('onTaskClick', Liferay.WorkflowTasks,'<%= randomId %>');
 Liferay.delegateClick('<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(transitionName) %>taskChangeStatusLink', onTaskClickFn);
 </aui:script>
-				<%
+	<%
 		    		}
 		    	}
 		%>
