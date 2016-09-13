@@ -291,6 +291,50 @@ public interface CompleteModel extends BaseModel<Complete>, GroupedModel {
 	 */
 	public void setSbrq(Date sbrq);
 
+	/**
+	 * Returns the shyj of this complete.
+	 *
+	 * @return the shyj of this complete
+	 */
+	@AutoEscape
+	public String getShyj();
+
+	/**
+	 * Sets the shyj of this complete.
+	 *
+	 * @param shyj the shyj of this complete
+	 */
+	public void setShyj(String shyj);
+
+	/**
+	 * Returns the shr of this complete.
+	 *
+	 * @return the shr of this complete
+	 */
+	@AutoEscape
+	public String getShr();
+
+	/**
+	 * Sets the shr of this complete.
+	 *
+	 * @param shr the shr of this complete
+	 */
+	public void setShr(String shr);
+
+	/**
+	 * Returns the shrq of this complete.
+	 *
+	 * @return the shrq of this complete
+	 */
+	public Date getShrq();
+
+	/**
+	 * Sets the shrq of this complete.
+	 *
+	 * @param shrq the shrq of this complete
+	 */
+	public void setShrq(Date shrq);
+
 	@Override
 	public boolean isNew();
 

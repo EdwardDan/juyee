@@ -63,6 +63,9 @@ public class CompleteWrapper implements Complete, ModelWrapper<Complete> {
 		attributes.put("babh", getBabh());
 		attributes.put("wssqbh", getWssqbh());
 		attributes.put("sbrq", getSbrq());
+		attributes.put("shyj", getShyj());
+		attributes.put("shr", getShr());
+		attributes.put("shrq", getShrq());
 
 		return attributes;
 	}
@@ -151,6 +154,24 @@ public class CompleteWrapper implements Complete, ModelWrapper<Complete> {
 
 		if (sbrq != null) {
 			setSbrq(sbrq);
+		}
+
+		String shyj = (String)attributes.get("shyj");
+
+		if (shyj != null) {
+			setShyj(shyj);
+		}
+
+		String shr = (String)attributes.get("shr");
+
+		if (shr != null) {
+			setShr(shr);
+		}
+
+		Date shrq = (Date)attributes.get("shrq");
+
+		if (shrq != null) {
+			setShrq(shrq);
 		}
 	}
 
@@ -474,6 +495,66 @@ public class CompleteWrapper implements Complete, ModelWrapper<Complete> {
 	@Override
 	public void setSbrq(java.util.Date sbrq) {
 		_complete.setSbrq(sbrq);
+	}
+
+	/**
+	* Returns the shyj of this complete.
+	*
+	* @return the shyj of this complete
+	*/
+	@Override
+	public java.lang.String getShyj() {
+		return _complete.getShyj();
+	}
+
+	/**
+	* Sets the shyj of this complete.
+	*
+	* @param shyj the shyj of this complete
+	*/
+	@Override
+	public void setShyj(java.lang.String shyj) {
+		_complete.setShyj(shyj);
+	}
+
+	/**
+	* Returns the shr of this complete.
+	*
+	* @return the shr of this complete
+	*/
+	@Override
+	public java.lang.String getShr() {
+		return _complete.getShr();
+	}
+
+	/**
+	* Sets the shr of this complete.
+	*
+	* @param shr the shr of this complete
+	*/
+	@Override
+	public void setShr(java.lang.String shr) {
+		_complete.setShr(shr);
+	}
+
+	/**
+	* Returns the shrq of this complete.
+	*
+	* @return the shrq of this complete
+	*/
+	@Override
+	public java.util.Date getShrq() {
+		return _complete.getShrq();
+	}
+
+	/**
+	* Sets the shrq of this complete.
+	*
+	* @param shrq the shrq of this complete
+	*/
+	@Override
+	public void setShrq(java.util.Date shrq) {
+		_complete.setShrq(shrq);
 	}
 
 	@Override

@@ -44,6 +44,9 @@ public class CompleteSoap implements Serializable {
 		soapModel.setBabh(model.getBabh());
 		soapModel.setWssqbh(model.getWssqbh());
 		soapModel.setSbrq(model.getSbrq());
+		soapModel.setShyj(model.getShyj());
+		soapModel.setShr(model.getShr());
+		soapModel.setShrq(model.getShrq());
 
 		return soapModel;
 	}
@@ -208,6 +211,30 @@ public class CompleteSoap implements Serializable {
 		_sbrq = sbrq;
 	}
 
+	public String getShyj() {
+		return _shyj;
+	}
+
+	public void setShyj(String shyj) {
+		_shyj = shyj;
+	}
+
+	public String getShr() {
+		return _shr;
+	}
+
+	public void setShr(String shr) {
+		_shr = shr;
+	}
+
+	public Date getShrq() {
+		return _shrq;
+	}
+
+	public void setShrq(Date shrq) {
+		_shrq = shrq;
+	}
+
 	private long _completeId;
 	private long _groupId;
 	private long _companyId;
@@ -222,4 +249,7 @@ public class CompleteSoap implements Serializable {
 	private String _babh;
 	private String _wssqbh;
 	private Date _sbrq;
+	private String _shyj;
+	private String _shr;
+	private Date _shrq;
 }

@@ -26,7 +26,10 @@ create table cp_Complete (
 	status INTEGER,
 	babh VARCHAR(75) null,
 	wssqbh VARCHAR(75) null,
-	sbrq DATE null
+	sbrq DATE null,
+	shyj VARCHAR(1000) null,
+	shr VARCHAR(75) null,
+	shrq DATE null
 );
 
 create table cp_CompleteApplyMaterial (

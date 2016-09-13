@@ -429,6 +429,11 @@
 			<basic name="sbrq">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
+			<basic name="shyj" />
+			<basic name="shr" />
+			<basic name="shrq">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />

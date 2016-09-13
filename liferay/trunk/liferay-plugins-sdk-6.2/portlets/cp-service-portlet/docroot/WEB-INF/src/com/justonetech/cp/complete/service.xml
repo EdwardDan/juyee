@@ -27,6 +27,9 @@
 		<column name="babh" type="String" /><!-- 备案编号 -->
 		<column name="wssqbh" type="String" /><!-- 网上申请编号 -->
 		<column name="sbrq" type="Date" /><!-- 上报日期 -->
+		<column name="shyj" type="String" /><!-- 审核意见 -->
+		<column name="shr" type="String" /><!-- 审核人 -->
+		<column name="shrq" type="Date" /><!-- 审核日期 -->
 
 		<!-- Order -->
 		<finder name="Zzjgdm" return-type="Collection">

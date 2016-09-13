@@ -401,6 +401,11 @@
 		<field name="babh" type="String" />
 		<field name="wssqbh" type="String" />
 		<field name="sbrq" type="Date" />
+		<field name="shyj" type="String">
+			<hint name="max-length">1000</hint>
+		</field>
+		<field name="shr" type="String" />
+		<field name="shrq" type="Date" />
 	</model>
 	<model name="com.justonetech.cp.complete.model.CompleteApplyMaterial">
 		<field name="materialId" type="long" />
