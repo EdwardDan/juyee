@@ -58,7 +58,7 @@
 			<liferay-ui:search-container-results results="${projects}" total="${projectsCount}">
 			</liferay-ui:search-container-results>
 			<liferay-ui:search-container-row className="Project" modelVar="project" keyProperty="bjbh">
-				<liferay-ui:search-container-column-text value="<%=n%>" name=" " />
+				<liferay-ui:search-container-column-text value="<%=n%>" name="序号" />
 				<%
 					num = num + 1;
 					n = num + "";
