@@ -5,6 +5,8 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -80,7 +82,7 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 		int cur = ParamUtil.getInteger(renderRequest, "cur", 1);
 		int start = delta * (cur - 1);
 		int end = delta * cur;
-		List<Complete> completes = new ArrayList<Complete>();
+		List<Complete> completes = Collections.emptyList();
 		int completesCount = 0;
 		completes = CompleteLocalServiceUtil.getCompletes("", bjbh, wssqbh, gcmc, zt, start, end);
 		completesCount = CompleteLocalServiceUtil.getCompletesCount("", bjbh, wssqbh, gcmc, zt);
@@ -89,8 +91,6 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 		renderRequest.setAttribute("wssqbh", wssqbh);
 		renderRequest.setAttribute("gcmc", gcmc);
 		renderRequest.setAttribute("zt", zt);
-		renderRequest.setAttribute("delta", delta);
-		renderRequest.setAttribute("cur", cur);
 		renderRequest.setAttribute("completes", completes);
 		renderRequest.setAttribute("completesCount", completesCount);
 		super.doView(renderRequest, renderResponse);
