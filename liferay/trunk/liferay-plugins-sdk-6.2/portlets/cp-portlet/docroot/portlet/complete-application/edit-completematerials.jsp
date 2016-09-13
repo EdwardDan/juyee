@@ -1,7 +1,3 @@
-<%@page import="com.justonetech.cp.util.CpConstants"%>
-<%@page import="com.justonetech.cp.complete.model.CompleteApplyMaterial"%>
-<%@page
-	import="com.justonetech.cp.complete.service.CompleteApplyMaterialLocalServiceUtil"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
 <%@ include file="init.jsp"%>
