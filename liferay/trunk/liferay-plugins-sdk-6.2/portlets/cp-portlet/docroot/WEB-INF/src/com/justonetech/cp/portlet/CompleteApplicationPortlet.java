@@ -143,6 +143,8 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 			e.printStackTrace();
 		}
 		String wssqbh = project.getBj_webid();
+		long xmlx= ParamUtil.getLong(request, "xmlx");
+		long jsgcsx= ParamUtil.getLong(request, "jsgcsx");
 		String gcmc = ParamUtil.getString(request, "gcmc");
 		String jsdwmc = ParamUtil.getString(request, "jsdwmc");
 		String jsdwdz = ParamUtil.getString(request, "jsdwdz");
@@ -174,6 +176,8 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 		complete.setWssqbh(wssqbh);
 		complete.setSbrq(now);
 		completeProjectProfile.setBjbh(bjbh);
+		completeProjectProfile.setXmlx(xmlx);
+		completeProjectProfile.setJsgcsx(jsgcsx);
 		completeProjectProfile.setGcmc(gcmc);
 		completeProjectProfile.setJsdwmc(jsdwmc);
 		completeProjectProfile.setJsdwdz(jsdwdz);
