@@ -17,10 +17,15 @@
 	</liferay-ui:section>
 </liferay-ui:tabs>
 <br>
+<%
+	Long permitId = ParamUtil.getLong(request, "permitId");
+	request.setAttribute("permitId", permitId);
+%>
 <aui:button-row cssClass="text-center">
 	<portlet:renderURL var="printsjpzURL" windowState="pop_up">
 		<portlet:param name="mvcPath"
 			value="${contextPath}/print/sjpz.jsp" />
+		<portlet:param name="permitId" value="${permitId}"/>
 	</portlet:renderURL>
 	<portlet:renderURL var="printsltzsURL" windowState="pop_up">
 		<portlet:param name="mvcPath"
