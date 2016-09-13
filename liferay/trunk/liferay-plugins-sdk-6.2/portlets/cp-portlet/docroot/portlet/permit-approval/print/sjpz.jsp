@@ -8,6 +8,14 @@
 	visibility: hidden
 }
 </style>
+<%
+	Long permitId = ParamUtil.getLong(request, "permitId");
+	Permit permit = PermitLocalServiceUtil.getPermit(permitId);
+	List<ApplyMaterial> applyMaterials = ApplyMaterialLocalServiceUtil.findByPermitId(permitId, -1, -1);
+	request.setAttribute("permit", permit);
+	request.setAttribute("applyMaterials", applyMaterials);
+%>
+
 <OBJECT id="WebBrowser1" height=0 width=0
 	classid=CLSID:8856F961-340A-11D0-A96B-00C04FD705A2 name=wb></OBJECT>
 <html>
@@ -164,10 +172,10 @@ div.Section1 {
 			<span
 				style='font-size: 14.0pt; font-family: 宋体; mso-ascii-font-family: Calibri; mso-hansi-font-family: Calibri; mso-bidi-font-family: 宋体'>沪交管收字（</span><span
 				lang=EN-US style='font-size: 14.0pt'><span
-				style='mso-spacerun: yes'>&nbsp;${bean.hjgYear} </span></span><span
+				style='mso-spacerun: yes'>&nbsp;${permit.hjgsz} </span></span><span
 				style='font-size: 14.0pt; font-family: 宋体; mso-ascii-font-family: Calibri; mso-hansi-font-family: Calibri; mso-bidi-font-family: 宋体'>）第（</span><span
 				lang=EN-US style='font-size: 14.0pt'><span
-				style='mso-spacerun: yes'>&nbsp;${bean.hjgNum} </span></span><span
+				style='mso-spacerun: yes'>&nbsp;${permit.hjgsh} </span></span><span
 				style='font-size: 14.0pt; font-family: 宋体; mso-ascii-font-family: Calibri; mso-hansi-font-family: Calibri; mso-bidi-font-family: 宋体'>）号</span><span
 				lang=EN-US style='font-size: 14.0pt; mso-bidi-font-family: 宋体'><o:p></o:p></span>
 		</p>
@@ -179,11 +187,11 @@ div.Section1 {
 			<span
 				style='font-size: 14.0pt; line-height: 150%; font-family: 宋体; mso-ascii-font-family: Calibri; mso-hansi-font-family: Calibri; mso-bidi-font-family: 宋体'>申请人：</span><u><span
 				lang=EN-US style='font-size: 14.0pt; line-height: 150%'><span
-					style='mso-spacerun: yes'>&nbsp;${bean.applyPerson}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					style='mso-spacerun: yes'>&nbsp;${permit.sqr}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				</span></span></u><span
 				style='font-size: 14.0pt; line-height: 150%; font-family: 宋体; mso-ascii-font-family: Calibri; mso-hansi-font-family: Calibri; mso-bidi-font-family: 宋体'>申请号</span><span
 				style='font-size: 14.0pt; line-height: 150%'> <span
-				lang=EN-US>:<u><span style='mso-spacerun: yes'>&nbsp;${bean.applyNum}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				lang=EN-US>:<u><span style='mso-spacerun: yes'>&nbsp;${permit.sqh}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					</span></u></span></span><span lang=EN-US
 				style='font-size: 14.0pt; line-height: 150%; mso-bidi-font-family: "Times New Roman"'><o:p></o:p></span>
 		</p>
@@ -192,7 +200,7 @@ div.Section1 {
 			<span
 				style='font-size: 14.0pt; line-height: 150%; font-family: 宋体; mso-ascii-font-family: Calibri; mso-hansi-font-family: Calibri; mso-bidi-font-family: 宋体'>申请事项：</span><u><span
 				lang=EN-US style='font-size: 14.0pt; line-height: 150%'><span
-					style='mso-spacerun: yes'>&nbsp;${bean.applyMatter}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					style='mso-spacerun: yes'>&nbsp;${permit.sqsx}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				</span><span style='mso-spacerun: yes'>&nbsp;</span><span
 					style='mso-spacerun: yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span></u><span
 				lang=EN-US
@@ -259,32 +267,32 @@ div.Section1 {
 					</p>
 				</td>
 			</tr>
-			<c:forEach items="${applyList}" var="item" varStatus="status">
+			<c:forEach items="${applyMaterials}" var="item" varStatus="status">
 				<tr style='mso-yfti-irow:${status.index+1}'>
 					<td width=45 valign=top
 						style='width: 33.75pt; border: solid windowtext 1.0pt; border-top: none; mso-border-top-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt'>
 						<p class=NoSpacing align=center style='text-align: center'>
-							<span lang=EN-US style='font-size: 14.0pt'>${item.no}<o:p></o:p></span>
+							<span lang=EN-US style='font-size: 14.0pt'>${item.xh}<o:p></o:p></span>
 						</p>
 					</td>
 					<td width=442 valign=top
 						style='width: 331.65pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt'>
 						<p class=NoSpacing>
 							<span
-								style='font-size: 14.0pt; font-family: 宋体; mso-ascii-font-family: Calibri; mso-hansi-font-family: Calibri; mso-bidi-font-family: 宋体'>${item.materialName}</span>
+								style='font-size: 14.0pt; font-family: 宋体; mso-ascii-font-family: Calibri; mso-hansi-font-family: Calibri; mso-bidi-font-family: 宋体'>${item.clmc}</span>
 							<span lang=EN-US style='font-size: 14.0pt'><o:p></o:p></span>
 						</p>
 					</td>
 					<td width=60 valign=top
 						style='width: 45.0pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt'>
 						<p class=NoSpacing align=center style='text-align: center'>
-							<span lang=EN-US style='font-size: 14.0pt'>${item.yjNum}<o:p></o:p></span>
+							<span lang=EN-US style='font-size: 14.0pt'>${item.yjfs}<o:p></o:p></span>
 						</p>
 					</td>
 					<td width=60 valign=top
 						style='width: 45.0pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt'>
 						<p class=NoSpacing align=center style='text-align: center'>
-							<span lang=EN-US style='font-size: 14.0pt'>${item.sjNum}<o:p></o:p></span>
+							<span lang=EN-US style='font-size: 14.0pt'>${item.yjfs}<o:p></o:p></span>
 						</p>
 					</td>
 					<td width=33 valign=top
@@ -316,27 +324,27 @@ div.Section1 {
 
 		<p class=MsoNormal>
 			<span
-				style='font-size: 14.0pt; font-family: 宋体; mso-ascii-font-family: Calibri; mso-hansi-font-family: Calibri'>材料联系人：${bean.materialPerson}</span><span
+				style='font-size: 14.0pt; font-family: 宋体; mso-ascii-font-family: Calibri; mso-hansi-font-family: Calibri'>材料联系人：${permit.cltjr}</span><span
 				lang=EN-US style='font-size: 14.0pt'><span
 				style='mso-spacerun: yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			</span><span style='mso-spacerun: yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span
-				style='font-size: 14.0pt; font-family: 宋体; mso-ascii-font-family: Calibri; mso-hansi-font-family: Calibri'>收件人：${bean.receivePerson}</span><span
+				style='font-size: 14.0pt; font-family: 宋体; mso-ascii-font-family: Calibri; mso-hansi-font-family: Calibri'>收件人：${permit.sjr}</span><span
 				lang=EN-US style='font-size: 14.0pt'><o:p></o:p></span>
 		</p>
 
 		<p class=MsoNormal>
 			<span
-				style='font-size: 14.0pt; font-family: 宋体; mso-ascii-font-family: Calibri; mso-hansi-font-family: Calibri'>联系电话：${bean.materialPersonPhone}</span><span
+				style='font-size: 14.0pt; font-family: 宋体; mso-ascii-font-family: Calibri; mso-hansi-font-family: Calibri'>联系电话：${permit.cltjrlxdh}</span><span
 				lang=EN-US style='font-size: 14.0pt'><span
 				style='mso-spacerun: yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			</span><span style='mso-spacerun: yes'>&nbsp;&nbsp;&nbsp;&nbsp;</span></span><span
-				style='font-size: 14.0pt; font-family: 宋体; mso-ascii-font-family: Calibri; mso-hansi-font-family: Calibri'>联系电话：${bean.receivePersonPhone}</span><span
+				style='font-size: 14.0pt; font-family: 宋体; mso-ascii-font-family: Calibri; mso-hansi-font-family: Calibri'>联系电话：${permit.sjrlxdh}</span><span
 				lang=EN-US style='font-size: 14.0pt'><o:p></o:p></span>
 		</p>
 
 		<p class=MsoNormal>
 			<span
-				style='font-size: 14.0pt; font-family: 宋体; mso-ascii-font-family: Calibri; mso-hansi-font-family: Calibri'>联系地址：${bean.materialPersonAddress}</span><span
+				style='font-size: 14.0pt; font-family: 宋体; mso-ascii-font-family: Calibri; mso-hansi-font-family: Calibri'>联系地址：${permit.cltjrlxdz}</span><span
 				lang=EN-US style='font-size: 14.0pt'><o:p></o:p></span>
 		</p>
 

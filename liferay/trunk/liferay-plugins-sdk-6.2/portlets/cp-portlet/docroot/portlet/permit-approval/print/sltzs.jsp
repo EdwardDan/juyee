@@ -8,6 +8,11 @@
 	visibility: hidden
 }
 </style>
+<%
+	Long permitId = ParamUtil.getLong(request, "permitId");
+	Permit permit = PermitLocalServiceUtil.getPermit(permitId);
+	request.setAttribute("permit", permit);
+%>
 <OBJECT id="WebBrowser1" height=0 width=0
 	classid=CLSID:8856F961-340A-11D0-A96B-00C04FD705A2 name=wb></OBJECT>
 <html>
@@ -186,7 +191,7 @@ div.Section1 {
 
 		<p class=MsoNormal align=right style='text-align: right'>
 			<span
-				style='font-size: 14.0pt; font-family: 宋体; mso-ascii-font-family: Calibri; mso-hansi-font-family: Calibri; mso-bidi-font-family: 宋体'>编号：</span><span
+				style='font-size: 14.0pt; font-family: 宋体; mso-ascii-font-family: Calibri; mso-hansi-font-family: Calibri; mso-bidi-font-family: 宋体'>编号：${permit.slbh}</span><span
 				lang=EN-US
 				style='font-size: 14.0pt; mso-bidi-font-family: "Times New Roman"'><o:p></o:p></span>
 		</p>
@@ -200,7 +205,7 @@ div.Section1 {
 			<span
 				style='font-size: 14.0pt; line-height: 150%; font-family: 宋体; mso-ascii-font-family: Calibri; mso-hansi-font-family: Calibri; mso-bidi-font-family: 宋体'>（申请人名称）：</span><u><span
 				lang=EN-US style='font-size: 14.0pt; line-height: 150%'><span
-					style='mso-spacerun: yes'>&nbsp;${bean.applyPerson}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					style='mso-spacerun: yes'>&nbsp;${permit.sqr}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				</span><span style='mso-spacerun: yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
 					style='mso-spacerun: yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
 					<o:p></o:p></span></u>
@@ -212,23 +217,23 @@ div.Section1 {
 				lang=EN-US style='font-size: 14.0pt; line-height: 150%'><span
 					style='mso-spacerun: yes'>&nbsp;&nbsp; </span><span
 					style='mso-spacerun: yes'>&nbsp;<fmt:formatDate
-							value="${bean.submitDate}" pattern="yyyy" />&nbsp;
+							value="${permit.createDate}" pattern="yyyy" />&nbsp;
 				</span><span style='mso-spacerun: yes'>&nbsp;&nbsp;</span></span></u><span
 				style='font-size: 14.0pt; line-height: 150%; font-family: 宋体; mso-ascii-font-family: Calibri; mso-hansi-font-family: Calibri; mso-bidi-font-family: 宋体'>年</span><u><span
 				style='font-size: 14.0pt; line-height: 150%'> <span
 					lang=EN-US><span style='mso-spacerun: yes'>&nbsp;&nbsp;&nbsp;</span><span
 						style='mso-spacerun: yes'>&nbsp;<fmt:formatDate
-								value="${bean.submitDate}" pattern="MM" />&nbsp;&nbsp;&nbsp;
+								value="${permit.createDate}" pattern="MM" />&nbsp;&nbsp;&nbsp;
 					</span></span></span></u><span
 				style='font-size: 14.0pt; line-height: 150%; font-family: 宋体; mso-ascii-font-family: Calibri; mso-hansi-font-family: Calibri; mso-bidi-font-family: 宋体'>月</span><u><span
 				lang=EN-US style='font-size: 14.0pt; line-height: 150%'><span
 					style='mso-spacerun: yes'>&nbsp; </span><span
 					style='mso-spacerun: yes'>&nbsp;&nbsp;<fmt:formatDate
-							value="${bean.submitDate}" pattern="dd" />&nbsp;
+							value="${permit.createDate}" pattern="dd" />&nbsp;
 				</span><span style='mso-spacerun: yes'>&nbsp;&nbsp;&nbsp;</span></span></u><span
 				style='font-size: 14.0pt; line-height: 150%; font-family: 宋体; mso-ascii-font-family: Calibri; mso-hansi-font-family: Calibri; mso-bidi-font-family: 宋体'>日通过书面方式提出</span><u><span
 				lang=EN-US style='font-size: 14.0pt; line-height: 150%'><span
-					style='mso-spacerun: yes'>&nbsp;${bean.applyMatter}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					style='mso-spacerun: yes'>&nbsp;${permit.sqsx}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				</span><span style='mso-spacerun: yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
 					style='mso-spacerun: yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span></u><span
 				style='font-size: 14.0pt; line-height: 150%; font-family: 宋体; mso-ascii-font-family: Calibri; mso-hansi-font-family: Calibri; mso-bidi-font-family: 宋体'>申请，经审查，你（单位）的申请材料符合规定，本机关予以受理。</span><span
@@ -326,7 +331,7 @@ div.Section1 {
 	$(document).ready(
 			function() {
 				var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
-				var isIE11 = (/Trident\/7\./).test(navigator.userAgent);
+				var isIE11 = (/Trident\/7\./).test(userAgent);
 				var isIE = userAgent.indexOf("compatible") > -1
 						&& userAgent.indexOf("MSIE") > -1 && !isOpera; //判断是否IE浏览器
 				if (isIE||isIE11) {

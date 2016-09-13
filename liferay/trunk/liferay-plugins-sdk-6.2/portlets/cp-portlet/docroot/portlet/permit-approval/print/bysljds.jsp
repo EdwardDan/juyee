@@ -8,6 +8,11 @@
 	visibility: hidden
 }
 </style>
+<%
+	Long permitId = ParamUtil.getLong(request, "permitId");
+	Permit permit = PermitLocalServiceUtil.getPermit(permitId);
+	request.setAttribute("permit", permit);
+%>
 <OBJECT id="WebBrowser1" height=0 width=0 classid=CLSID:8856F961-340A-11D0-A96B-00C04FD705A2 name=wb></OBJECT> 
 <html>
 <head>
@@ -157,7 +162,7 @@ div.Section1 {
 
 		<p class=MsoNormal align=right style='text-align: right'>
 			<span
-				style='font-size: 14.0pt; font-family: 宋体; mso-ascii-font-family: Calibri; mso-hansi-font-family: Calibri; mso-bidi-font-family: 宋体'>编号：${bean.bjbh}</span><span
+				style='font-size: 14.0pt; font-family: 宋体; mso-ascii-font-family: Calibri; mso-hansi-font-family: Calibri; mso-bidi-font-family: 宋体'>编号：${permit.slbh}</span><span
 				lang=EN-US
 				style='font-size: 14.0pt; mso-bidi-font-family: "Times New Roman"'><o:p></o:p></span>
 		</p>
@@ -171,7 +176,7 @@ div.Section1 {
 			<span
 				style='font-size: 14.0pt; line-height: 150%; font-family: 宋体; mso-ascii-font-family: Calibri; mso-hansi-font-family: Calibri; mso-bidi-font-family: 宋体'>（申请人姓名或名称）：</span><u><span
 				lang=EN-US style='font-size: 14.0pt; line-height: 150%'><span
-					style='mso-spacerun: yes'>&nbsp;${bean.applyPerson}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					style='mso-spacerun: yes'>&nbsp;${permit.sqr}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				</span>
 				<o:p></o:p></span></u>
 		</p>
@@ -183,23 +188,23 @@ div.Section1 {
 				lang=EN-US style='font-size: 14.0pt; line-height: 150%'><span
 					style='mso-spacerun: yes'>&nbsp;&nbsp; </span><span
 					style='mso-spacerun: yes'>&nbsp;&nbsp;<fmt:formatDate
-							value="${bean.submitDate}" pattern="yyyy" />&nbsp;
+							value="${permit.createDate}" pattern="yyyy" />&nbsp;
 				</span><span style='mso-spacerun: yes'>&nbsp;&nbsp;</span></span></u><span
 				style='font-size: 14.0pt; line-height: 150%; font-family: 宋体; mso-ascii-font-family: Calibri; mso-hansi-font-family: Calibri; mso-bidi-font-family: 宋体'>年</span><u><span
 				style='font-size: 14.0pt; line-height: 150%'> <span
 					lang=EN-US><span style='mso-spacerun: yes'>&nbsp;&nbsp;&nbsp;</span><span
 						style='mso-spacerun: yes'>&nbsp;<fmt:formatDate
-								value="${bean.submitDate}" pattern="MM" />&nbsp;&nbsp;&nbsp;
+								value="${permit.createDate}" pattern="MM" />&nbsp;&nbsp;&nbsp;
 					</span></span></span></u><span
 				style='font-size: 14.0pt; line-height: 150%; font-family: 宋体; mso-ascii-font-family: Calibri; mso-hansi-font-family: Calibri; mso-bidi-font-family: 宋体'>月</span><u><span
 				lang=EN-US style='font-size: 14.0pt; line-height: 150%'><span
 					style='mso-spacerun: yes'>&nbsp; </span><span
 					style='mso-spacerun: yes'>&nbsp;&nbsp;<fmt:formatDate
-							value="${bean.submitDate}" pattern="dd" />&nbsp;
+							value="${permit.createDate}" pattern="dd" />&nbsp;
 				</span><span style='mso-spacerun: yes'>&nbsp;&nbsp;&nbsp;</span></span></u><span
 				style='font-size: 14.0pt; line-height: 150%; font-family: 宋体; mso-ascii-font-family: Calibri; mso-hansi-font-family: Calibri; mso-bidi-font-family: 宋体'>日通过书面方式提出</span><u><span
 				lang=EN-US style='font-size: 14.0pt; line-height: 150%'><span
-					style='mso-spacerun: yes'>&nbsp;${bean.applyMatter}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					style='mso-spacerun: yes'>&nbsp;${permit.sqsx}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				</span><span style='mso-spacerun: yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
 					style='mso-spacerun: yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span></u><span
 				style='font-size: 14.0pt; line-height: 150%; font-family: 宋体; mso-ascii-font-family: Calibri; mso-hansi-font-family: Calibri; mso-bidi-font-family: 宋体'>申请，因存在下列第</span><u><span

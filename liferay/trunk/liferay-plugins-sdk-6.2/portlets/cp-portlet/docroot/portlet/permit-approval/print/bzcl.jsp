@@ -8,6 +8,11 @@
 	visibility: hidden
 }
 </style>
+<%
+	Long permitId = ParamUtil.getLong(request, "permitId");
+	Permit permit = PermitLocalServiceUtil.getPermit(permitId);
+	request.setAttribute("permit", permit);
+%>
 <OBJECT id="WebBrowser1" height=0 width=0
 	classid=CLSID:8856F961-340A-11D0-A96B-00C04FD705A2 name=wb></OBJECT>
 <html>
@@ -28,7 +33,7 @@
 
 		<p class=MsoNormal align=right style='text-align: right'>
 			<span
-				style='font-size: 12.0pt; font-family: 宋体; mso-ascii-font-family: "Times New Roman"; mso-hansi-font-family: "Times New Roman"'>编号：</span><span
+				style='font-size: 12.0pt; font-family: 宋体; mso-ascii-font-family: "Times New Roman"; mso-hansi-font-family: "Times New Roman"'>编号：${permit.slbh}</span><span
 				lang=EN-US style='font-size: 12.0pt'><o:p></o:p></span>
 		</p>
 
@@ -37,30 +42,30 @@
 			<span
 				style='font-size: 12.0pt; line-height: 150%; font-family: 宋体; mso-ascii-font-family: "Times New Roman"; mso-hansi-font-family: "Times New Roman"'>（申请人姓名或者名称）：</span><u><span
 				lang=EN-US style='font-size: 12.0pt; line-height: 150%'><span
-					style='mso-spacerun: yes'>&nbsp;${bean.applyPerson}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					style='mso-spacerun: yes'>&nbsp;${permit.sqr}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				</span><span style='mso-spacerun: yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span
 					style='mso-spacerun: yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span></u><span
 				style='font-size: 12.0pt; line-height: 150%; font-family: 宋体; mso-ascii-font-family: "Times New Roman"; mso-hansi-font-family: "Times New Roman"'>经审查，你（单位）于</span><u><span
 				lang=EN-US style='font-size: 12.0pt; line-height: 150%'><span
 					style='mso-spacerun: yes'>&nbsp;&nbsp; </span><span
 					style='mso-spacerun: yes'>&nbsp;<fmt:formatDate
-							value="${bean.submitDate}" pattern="yyyy" />&nbsp;
+							value="${permit.createDate}" pattern="yyyy" />&nbsp;
 				</span><span style='mso-spacerun: yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span></u><span
 				style='font-size: 12.0pt; line-height: 150%; font-family: 宋体; mso-ascii-font-family: "Times New Roman"; mso-hansi-font-family: "Times New Roman"'>年</span><u><span
 				lang=EN-US style='font-size: 12.0pt; line-height: 150%'><span
 					style='mso-spacerun: yes'>&nbsp;&nbsp; </span><span
 					style='mso-spacerun: yes'>&nbsp;<fmt:formatDate
-							value="${bean.submitDate}" pattern="MM" />&nbsp;
+							value="${permit.createDate}" pattern="MM" />&nbsp;
 				</span><span style='mso-spacerun: yes'>&nbsp;&nbsp;&nbsp;&nbsp;</span></span></u><span
 				style='font-size: 12.0pt; line-height: 150%; font-family: 宋体; mso-ascii-font-family: "Times New Roman"; mso-hansi-font-family: "Times New Roman"'>月</span><u><span
 				lang=EN-US style='font-size: 12.0pt; line-height: 150%'><span
 					style='mso-spacerun: yes'>&nbsp;&nbsp;&nbsp; </span><span
 					style='mso-spacerun: yes'>&nbsp;<fmt:formatDate
-							value="${bean.submitDate}" pattern="dd" />&nbsp;
+							value="${permit.createDate}" pattern="dd" />&nbsp;
 				</span><span style='mso-spacerun: yes'>&nbsp;&nbsp;&nbsp;</span></span></u><span
 				style='font-size: 12.0pt; line-height: 150%; font-family: 宋体; mso-ascii-font-family: "Times New Roman"; mso-hansi-font-family: "Times New Roman"'>日提交</span><u><span
 				lang=EN-US style='font-size: 12.0pt; line-height: 150%'><span
-					style='mso-spacerun: yes'>&nbsp;${bean.applyMatter}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					style='mso-spacerun: yes'>&nbsp;${permit.sqsx}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				</span></span></u><span
 				style='font-size: 12.0pt; line-height: 150%; font-family: 宋体; mso-ascii-font-family: "Times New Roman"; mso-hansi-font-family: "Times New Roman"'>施工许可证申请，经初步审核，以下几项材料（不齐全或不符合法定形式），请你（单位）在收到本通知后</span><span
 				lang=EN-US style='font-size: 12.0pt; line-height: 150%'>20</span><span

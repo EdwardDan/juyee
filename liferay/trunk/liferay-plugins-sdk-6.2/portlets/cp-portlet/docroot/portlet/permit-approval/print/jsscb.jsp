@@ -8,6 +8,15 @@
 	visibility: hidden
 }
 </style>
+<%
+	Long permitId = ParamUtil.getLong(request, "permitId");
+	Permit permit = PermitLocalServiceUtil.getPermit(permitId);
+	ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
+	String xmlx = DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx()).getName();
+	request.setAttribute("permit", permit);
+	request.setAttribute("projectProfile", projectProfile);
+	request.setAttribute("xmlx", xmlx);
+%>
 <OBJECT id="WebBrowser1" height=0 width=0
 	classid=CLSID:8856F961-340A-11D0-A96B-00C04FD705A2 name=wb></OBJECT>
 <html>
@@ -229,7 +238,7 @@ div.Section1 {
 				<td width=447 colspan=3 valign=top
 					style='width: 335.5pt; border: solid black 1.0pt; border-left: none; mso-border-left-alt: solid black .5pt; mso-border-alt: solid black .5pt; padding: 0cm 5.4pt 0cm 5.4pt'>
 					<p class=MsoNoSpacing>
-						<span lang=EN-US style='font-size: 12.0pt'><o:p>&nbsp;${bean.projectName}</o:p></span>
+						<span lang=EN-US style='font-size: 12.0pt'><o:p>&nbsp;${projectProfile.gcmc}</o:p></span>
 					</p>
 				</td>
 			</tr>
@@ -245,7 +254,7 @@ div.Section1 {
 				<td width=447 colspan=3 valign=top
 					style='width: 335.5pt; border-top: none; border-left: none; border-bottom: solid black 1.0pt; border-right: solid black 1.0pt; mso-border-top-alt: solid black .5pt; mso-border-left-alt: solid black .5pt; mso-border-alt: solid black .5pt; padding: 0cm 5.4pt 0cm 5.4pt'>
 					<p class=MsoNoSpacing>
-						<span lang=EN-US style='font-size: 12.0pt'><o:p>&nbsp;${bean.buildName}</o:p></span>
+						<span lang=EN-US style='font-size: 12.0pt'><o:p>&nbsp;${projectProfile.jsdwmc}</o:p></span>
 					</p>
 				</td>
 			</tr>
@@ -261,7 +270,7 @@ div.Section1 {
 				<td width=149 valign=top
 					style='width: 111.8pt; border-top: none; border-left: none; border-bottom: solid black 1.0pt; border-right: solid black 1.0pt; mso-border-top-alt: solid black .5pt; mso-border-left-alt: solid black .5pt; mso-border-alt: solid black .5pt; padding: 0cm 5.4pt 0cm 5.4pt'>
 					<p class=MsoNoSpacing>
-						<span lang=EN-US style='font-size: 12.0pt'><o:p>&nbsp;${bean.projectType.name}</o:p></span>
+						<span lang=EN-US style='font-size: 12.0pt'><o:p>&nbsp;${xmlx}</o:p></span>
 					</p>
 				</td>
 				<td width=149 valign=top
