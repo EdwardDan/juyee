@@ -25,4 +25,37 @@ tr.body td.content {
 	request.setAttribute("projectProfile", projectProfile);
 	request.setAttribute("jsgclbs", jsgclbs);
 %>
-
+<table class="table table-bordered">
+	<tr class="body">
+		<td class="title">工程名称</td>
+		<td class="content" colspan="3">${projectProfile.gcmc}</td>
+	</tr>
+	<tr class="body">
+		<td class="title">建设单位名称</td>
+		<td class="content" colspan="3">${projectProfile.jsdwmc}</td>
+	</tr>
+	<tr class="body">
+		<td class="title">建设单位地址</td>
+		<td class="content" colspan="3">${projectProfile.jsdwdz}</td>
+	</tr>
+	<tr class="body">
+		<td class="title">建设地点</td>
+		<td class="content">${projectProfile.jsdd}</td>
+		<td class="title">所在区县</td>
+		<td class="content">${projectProfile.szqx}</td>
+	</tr>
+	<tr class="body">
+		<td class="title">法定代表人</td>
+		<td class="content" colspan="3">${projectProfile.fddbr}</td>
+	</tr>
+	<tr class="body">
+		<td class="title">联系人</td>
+		<td class="content">${projectProfile.lxr}</td>
+		<td class="title">联系电话</td>
+		<td class="content">${projectProfile.lxdh}</td>
+	</tr>
+	<tr class="body">
+		<td class="title">备注</td>
+		<td class="content" colspan="3">${projectProfile.bz}</td>
+	</tr>
+</table>
