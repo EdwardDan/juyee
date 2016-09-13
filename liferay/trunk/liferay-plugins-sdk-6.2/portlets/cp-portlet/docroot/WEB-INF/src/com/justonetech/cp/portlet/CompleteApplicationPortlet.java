@@ -20,10 +20,14 @@ import javax.servlet.http.HttpServletResponse;
 import com.justonetech.cp.complete.model.Complete;
 import com.justonetech.cp.complete.model.CompleteApplyMaterial;
 import com.justonetech.cp.complete.model.CompleteProjectProfile;
+import com.justonetech.cp.complete.model.CompleteUnitProject;
 import com.justonetech.cp.complete.service.CompleteApplyMaterialLocalServiceUtil;
 import com.justonetech.cp.complete.service.CompleteLocalServiceUtil;
 import com.justonetech.cp.complete.service.CompleteProjectProfileLocalServiceUtil;
+import com.justonetech.cp.complete.service.CompleteUnitProjectLocalServiceUtil;
 import com.justonetech.cp.permit.model.Permit;
+import com.justonetech.cp.permit.model.UnitProject;
+import com.justonetech.cp.permit.service.UnitProjectLocalServiceUtil;
 import com.justonetech.cp.project.model.Project;
 import com.justonetech.cp.project.service.ProjectLocalServiceUtil;
 import com.liferay.counter.service.CounterLocalServiceUtil;
@@ -70,7 +74,7 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 		String bjbh = ParamUtil.getString(renderRequest, "bjbh");
 		String wssqbh = ParamUtil.getString(renderRequest, "wssqbh");
 		String gcmc = ParamUtil.getString(renderRequest, "gcmc");
-		int status = ParamUtil.getInteger(renderRequest, "state");
+		int zt = ParamUtil.getInteger(renderRequest, "state");
 		int defaultDelta = GetterUtil.getInteger(PropsUtil.get(PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA));
 		int delta = ParamUtil.getInteger(renderRequest, "delta", defaultDelta);
 		int cur = ParamUtil.getInteger(renderRequest, "cur", 1);
@@ -78,13 +82,13 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 		int end = delta * cur;
 		List<Complete> completes = new ArrayList<Complete>();
 		int completesCount = 0;
-		completes = CompleteLocalServiceUtil.getCompletes("", bjbh, wssqbh, gcmc, status, start, end);
-		completesCount = CompleteLocalServiceUtil.getCompletesCount("", bjbh, wssqbh, gcmc, status);
+		completes = CompleteLocalServiceUtil.getCompletes("", bjbh, wssqbh, gcmc, zt, start, end);
+		completesCount = CompleteLocalServiceUtil.getCompletesCount("", bjbh, wssqbh, gcmc, zt);
 		renderRequest.setAttribute("zzjgdm", zzjgdm);
 		renderRequest.setAttribute("bjbh", bjbh);
 		renderRequest.setAttribute("wssqbh", wssqbh);
 		renderRequest.setAttribute("gcmc", gcmc);
-		renderRequest.setAttribute("status", status);
+		renderRequest.setAttribute("zt", zt);
 		renderRequest.setAttribute("delta", delta);
 		renderRequest.setAttribute("cur", cur);
 		renderRequest.setAttribute("completes", completes);
@@ -93,16 +97,19 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 	}
 
 	@Override
-	public void render(RenderRequest renderRequest, RenderResponse renderResponse) throws PortletException, IOException {
+	public void render(RenderRequest renderRequest,
+			RenderResponse renderResponse) throws PortletException, IOException {
 
 		String mvcPath = ParamUtil.getString(renderRequest, "mvcPath");
-		if (Validator.equals(mvcPath, "/portlet/complete-application/select-project.jsp")) {
+		if (Validator.equals(mvcPath,
+				"/portlet/complete-application/select-project.jsp")) {
 			String bjbh = ParamUtil.getString(renderRequest, "bjbh");
 			String wssqbh = ParamUtil.getString(renderRequest, "wssqbh");
 			String xmmc = ParamUtil.getString(renderRequest, "xmmc");
-			Date bjrqStart = ParamUtil.getDate(renderRequest, "bjrqStart", new SimpleDateFormat(dateFormatPattern),
-					null);
-			Date bjrqEnd = ParamUtil.getDate(renderRequest, "bjrqEnd", new SimpleDateFormat(dateFormatPattern), null);
+			Date bjrqStart = ParamUtil.getDate(renderRequest, "bjrqStart",
+					new SimpleDateFormat(dateFormatPattern), null);
+			Date bjrqEnd = ParamUtil.getDate(renderRequest, "bjrqEnd",
+					new SimpleDateFormat(dateFormatPattern), null);
 			String bjwcbj = ParamUtil.getString(renderRequest, "bjwcbj");
 			renderRequest.setAttribute("bjbh", bjbh);
 			renderRequest.setAttribute("wssqbh", wssqbh);
@@ -111,22 +118,50 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 			renderRequest.setAttribute("bjrqEnd", bjrqEnd);
 			renderRequest.setAttribute("bjwcbj", bjwcbj);
 			int projectsCount = 0;
-			int defaultDelta = GetterUtil.getInteger(PropsUtil.get(PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA));
-			int delta = ParamUtil.getInteger(renderRequest, "delta", defaultDelta);
+			int defaultDelta = GetterUtil.getInteger(PropsUtil
+					.get(PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA));
+			int delta = ParamUtil.getInteger(renderRequest, "delta",
+					defaultDelta);
 			int cur = ParamUtil.getInteger(renderRequest, "cur", 1);
 			int start = delta * (cur - 1);
 			int end = delta * cur;
-			List<Project> projects = ProjectLocalServiceUtil.getProjects("", bjbh, wssqbh, xmmc, bjrqStart, bjrqEnd,
-					bjwcbj, start, end);
-			projectsCount = ProjectLocalServiceUtil
-					.getProjectsCount("", bjbh, wssqbh, xmmc, bjrqStart, bjrqEnd, bjwcbj);
+			List<Project> projects = ProjectLocalServiceUtil.getProjects("",
+					bjbh, wssqbh, xmmc, bjrqStart, bjrqEnd, bjwcbj, start, end);
+			projectsCount = ProjectLocalServiceUtil.getProjectsCount("", bjbh,
+					wssqbh, xmmc, bjrqStart, bjrqEnd, bjwcbj);
 			renderRequest.setAttribute("projects", projects);
 			renderRequest.setAttribute("projectsCount", projectsCount);
-		} else if (Validator.equals(mvcPath, "/portlet/complete-application/edit-complete.jsp")) {
+		} else if (Validator.equals(mvcPath,
+				"/portlet/complete-application/edit-complete.jsp")) {
+			String bjbh = ParamUtil.getString(renderRequest, "bjbh");
+			renderRequest.setAttribute("bjbh", bjbh);
+		}else if(Validator.equals(mvcPath,
+				"/portlet/complete-application/select-permit-unitProject.jsp")){
+			
+			List<UnitProject>unitProjects=new ArrayList<UnitProject>();
+			String bjbh = ParamUtil.getString(renderRequest, "bjbh");
+			System.out.println(bjbh);
+			System.out.println(1212);
+			String completeId= renderRequest.getParameter("completeId");
+			System.out.println(bjbh);
+			int defaultDelta = GetterUtil.getInteger(PropsUtil
+					.get(PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA));
+			int delta = ParamUtil.getInteger(renderRequest, "delta",
+					defaultDelta);
+			int cur = ParamUtil.getInteger(renderRequest, "cur", 1);
+			int start = delta * (cur - 1);
+			int end = delta * cur;
+			if(Validator.isNotNull(bjbh)){
+				unitProjects=UnitProjectLocalServiceUtil.findByBjbh(bjbh, start, end);
+			}
+			renderRequest.setAttribute("bjbh", bjbh);
+			renderRequest.setAttribute("completeId", Long.valueOf(completeId));
+			renderRequest.setAttribute("unitProjects", unitProjects);
+			renderRequest.setAttribute("unitProjectCount", unitProjects.size());
 		}
+		
 		super.render(renderRequest, renderResponse);
 	}
-
 	public void saveProjectProfile(ActionRequest request, ActionResponse response) throws SystemException,
 			PortalException, IOException {
 		long completeId = ParamUtil.getLong(request, "completeId");
@@ -191,6 +226,43 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 		CompleteProjectProfileLocalServiceUtil.updateCompleteProjectProfile(completeProjectProfile);
 		redirect(request, response, complete, 1);
 	}
+	
+	public void saveUnitProjects(ActionRequest request, ActionResponse response) throws SystemException,
+	PortalException, IOException {
+		System.out.println(6666);
+		long completeId = ParamUtil.getLong(request, "completeId",0);
+		//删除原有数据
+		List<CompleteUnitProject> completeUnitProjects = CompleteUnitProjectLocalServiceUtil.findByCompleteId(completeId, -1, -1);
+		for (CompleteUnitProject completeUnitProject : completeUnitProjects) {
+			CompleteUnitProjectLocalServiceUtil.deleteCompleteUnitProject(completeUnitProject);
+		}
+		//
+		String bjbh = ParamUtil.getString(request, "bjbh");
+		String[] sgxkzbh = ParamUtil.getParameterValues(request, "sgxkzbh");
+		String[] gcbhs = ParamUtil.getParameterValues(request, "gcbh");
+		String[] gcmcs = ParamUtil.getParameterValues(request, "gcmc");
+		String[] jsnrs = ParamUtil.getParameterValues(request, "jsnr");
+		for (int i = 0; i < gcbhs.length - 1; i++) {
+			CompleteUnitProject unitProject = CompleteUnitProjectLocalServiceUtil.createCompleteUnitProject(CounterLocalServiceUtil.increment());
+			unitProject.setBjbh(bjbh);
+			unitProject.setCompleteId(completeId);
+			unitProject.setSgxkzbh(sgxkzbh[i]);
+			unitProject.setGcbh(gcbhs[i]);
+			unitProject.setGcmc(gcmcs[i]);
+			unitProject.setJsnr(jsnrs[i]);
+			CompleteUnitProjectLocalServiceUtil.addCompleteUnitProject(unitProject);
+		}
+		
+		Complete complete = CompleteLocalServiceUtil.getComplete(completeId);
+
+		if (complete.getSqbz() == 1) {
+			complete.setSqbz(2);
+		}
+		CompleteLocalServiceUtil.updateComplete(complete);
+		redirect(request, response, complete, 2);
+	}
+	
+	
 
 	public void deleteComplete(ActionRequest request, ActionResponse response) throws PortalException, SystemException {
 		long completeId = ParamUtil.getLong(request, "completeId");
@@ -212,6 +284,7 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 			tabSqbz = sqbz;
 		}
 		redirect += "&" + response.getNamespace() + "completeId=" + complete.getCompleteId();
+		redirect += "&" + response.getNamespace() + "bjbh=" + complete.getBjbh();
 		redirect += "&" + response.getNamespace() + "tabSqbz=" + tabSqbz;
 		response.sendRedirect(redirect);
 	}
