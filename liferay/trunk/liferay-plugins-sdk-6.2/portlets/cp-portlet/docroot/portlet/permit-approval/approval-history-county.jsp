@@ -38,6 +38,7 @@
 				Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
 				List<Integer> logTypes = new ArrayList<Integer>();
 				logTypes.add(WorkflowLog.TASK_COMPLETION);
+				if(WorkflowInstanceLinkLocalServiceUtil.hasWorkflowInstanceLink(me.getCompanyId(), 0L, "com.justonetech.cp.permit.model.Permit", permit.getPermitId())){
 				List<WorkflowLog> workflowLogs = WorkflowLogManagerUtil.getWorkflowLogsByWorkflowInstance(company.getCompanyId(), WorkflowInstanceLinkLocalServiceUtil.getWorkflowInstanceLink(me.getCompanyId(), 0L, "com.justonetech.cp.permit.model.Permit", permit.getPermitId()).getWorkflowInstanceId(), logTypes, QueryUtil.ALL_POS, QueryUtil.ALL_POS, WorkflowComparatorFactoryUtil.getLogCreateDateComparator(true));
 				for (WorkflowLog workflowLog : workflowLogs) {
 					Role curRole = null;
@@ -72,7 +73,7 @@
 		</tr>
 				<%
 				}
-				
+				}
 				%>
 </table>
 <script>

@@ -56,38 +56,39 @@
 				Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
 				List<Integer> logTypes = new ArrayList<Integer>();
 				logTypes.add(WorkflowLog.TASK_COMPLETION);
-				List<WorkflowLog> workflowLogs = WorkflowLogManagerUtil.getWorkflowLogsByWorkflowInstance(company.getCompanyId(), WorkflowInstanceLinkLocalServiceUtil.getWorkflowInstanceLink(me.getCompanyId(), 0L, "com.justonetech.cp.permit.model.Permit", permit.getPermitId()).getWorkflowInstanceId(), logTypes, QueryUtil.ALL_POS, QueryUtil.ALL_POS, WorkflowComparatorFactoryUtil.getLogCreateDateComparator(true));
-				for (WorkflowLog workflowLog : workflowLogs) {
-					Role curRole = null;
-					User curUser = null;
-					User auditUser=null;
-					String actorName = null;
-					String auditName=null;
-					if (workflowLog.getRoleId() != 0) {
-						curRole = RoleLocalServiceUtil.getRole(workflowLog.getRoleId());
-						actorName = curRole.getDescriptiveName();
-					}
-					else if (workflowLog.getUserId() != 0) {
-						curUser = UserLocalServiceUtil.getUser(workflowLog.getUserId());
-						actorName = curUser.getFullName();
-					}
-					if(workflowLog.getAuditUserId()!=0){
-						 auditUser = UserLocalServiceUtil.getUser(workflowLog.getAuditUserId());
-						auditName=auditUser.getFirstName();
-					}
-				   String state="";
-				   String comment="";
-				   if(workflowLog.getState().equals("yushen")){state="预审";}
-				   if(workflowLog.getState().equals("shoujian")){state="<a onclick='sj()'>收件</a>";}
-				   if(workflowLog.getState().equals("chushen")){state="<a onclick='cs()'>初审</a>";}
-				   if(workflowLog.getState().equals("fuhe")){state="<a onclick='fh()'>复核</a>";}
-				   if(workflowLog.getState().equals("shenhe")){state="<a onclick='sh()'>审核</a>";}
-				   if(workflowLog.getState().equals("fenguanlingdao")){state="分管领导审核";}
-				   if(workflowLog.getState().equals("zhongxinlingdao")){state="中心领导审核";}
-				   if(workflowLog.getState().equals("weijianshechu")){state="委建设处审核";}
-				   if(workflowLog.getState().equals("weishenpichu")){state="委审批处审核";}
-				   if(workflowLog.getState().equals("weilingdao")){state="委领导审核";}
-				   if(workflowLog.getState().equals("update")){continue;}
+				if(WorkflowInstanceLinkLocalServiceUtil.hasWorkflowInstanceLink(me.getCompanyId(), 0L, "com.justonetech.cp.permit.model.Permit", permit.getPermitId())){
+					List<WorkflowLog> workflowLogs = WorkflowLogManagerUtil.getWorkflowLogsByWorkflowInstance(company.getCompanyId(), WorkflowInstanceLinkLocalServiceUtil.getWorkflowInstanceLink(me.getCompanyId(), 0L, "com.justonetech.cp.permit.model.Permit", permit.getPermitId()).getWorkflowInstanceId(), logTypes, QueryUtil.ALL_POS, QueryUtil.ALL_POS, WorkflowComparatorFactoryUtil.getLogCreateDateComparator(true));
+					for (WorkflowLog workflowLog : workflowLogs) {
+						Role curRole = null;
+						User curUser = null;
+						User auditUser=null;
+						String actorName = null;
+						String auditName=null;
+						if (workflowLog.getRoleId() != 0) {
+							curRole = RoleLocalServiceUtil.getRole(workflowLog.getRoleId());
+							actorName = curRole.getDescriptiveName();
+						}
+						else if (workflowLog.getUserId() != 0) {
+							curUser = UserLocalServiceUtil.getUser(workflowLog.getUserId());
+							actorName = curUser.getFullName();
+						}
+						if(workflowLog.getAuditUserId()!=0){
+							 auditUser = UserLocalServiceUtil.getUser(workflowLog.getAuditUserId());
+							auditName=auditUser.getFirstName();
+						}
+					   String state="";
+					   String comment="";
+					   if(workflowLog.getState().equals("yushen")){state="预审";}
+					   if(workflowLog.getState().equals("shoujian")){state="<a onclick='sj()'>收件</a>";}
+					   if(workflowLog.getState().equals("chushen")){state="<a onclick='cs()'>初审</a>";}
+					   if(workflowLog.getState().equals("fuhe")){state="<a onclick='fh()'>复核</a>";}
+					   if(workflowLog.getState().equals("shenhe")){state="<a onclick='sh()'>审核</a>";}
+					   if(workflowLog.getState().equals("fenguanlingdao")){state="分管领导审核";}
+					   if(workflowLog.getState().equals("zhongxinlingdao")){state="中心领导审核";}
+					   if(workflowLog.getState().equals("weijianshechu")){state="委建设处审核";}
+					   if(workflowLog.getState().equals("weishenpichu")){state="委审批处审核";}
+					   if(workflowLog.getState().equals("weilingdao")){state="委领导审核";}
+					   if(workflowLog.getState().equals("update")){continue;}
 				%>
 <tr>
 							<td><%=state%></td>
@@ -96,6 +97,7 @@
 		<td><%=dateFormatDateTime.format(workflowLog.getCreateDate())%></td>
 		</tr>
 				<%
+				}
 				}
 				%> 
 </table>
