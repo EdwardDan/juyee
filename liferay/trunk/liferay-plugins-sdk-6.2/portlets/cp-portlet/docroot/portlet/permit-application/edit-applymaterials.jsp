@@ -1,4 +1,3 @@
-<%@page import="com.justonetech.cp.util.CpConstants"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
 <%@ include file="init.jsp"%>
@@ -14,7 +13,7 @@
 }
 </style>
 
-<% 	
+<%
 	List<Dictionary> materialDictionaries=new ArrayList<Dictionary>();
 	List<ApplyMaterial> applyMaterialList=new ArrayList<ApplyMaterial>();
 	Long permitId =ParamUtil.getLong(renderRequest,"permitId",0);
@@ -26,77 +25,72 @@
 		permit = PermitLocalServiceUtil.getPermit(permitId);
 		project=ProjectLocalServiceUtil.getProject(permit.getBjbh());
 		if(project.getLxjb().equals("区县级机关或区县级单位")){
-			type="quxian";
-				}else{
-			type="shishu";
-				}
+	type="quxian";
+		}else{
+	type="shishu";
+		}
 		applyMaterialList= ApplyMaterialLocalServiceUtil.findByPermitId(permitId, -1, -1);
 		if(WorkflowInstanceLinkLocalServiceUtil.hasWorkflowInstanceLink(permit.getCompanyId(), 0L, Permit.class.getName(),permit.getPermitId())){
-			canTj=false;
+	canTj=false;
 		}else{
-			canTj=true;
+	canTj=true;
 		}
 		//对材料表进行初始化
 		if(applyMaterialList.size()<=0){
-			
-			ProjectProfile projectProfile=ProjectProfileLocalServiceUtil.fetchProjectProfile(permitId);
-			long xmlxId=projectProfile.getXmlx();//项目类型
-			long jsgcsxId=projectProfile.getJsgcsx();//建设工程属性
-			if(Validator.isNotNull(xmlxId)&&Validator.isNotNull(jsgcsxId)){
-				Dictionary xmlxDictionary= DictionaryLocalServiceUtil.getDictionary(xmlxId);
-				Dictionary jsgcsxDictionary= DictionaryLocalServiceUtil.getDictionary(jsgcsxId);
-				String xmlxCode=xmlxDictionary.getCode();
-				String jsgcsxCode=jsgcsxDictionary.getCode();
-				if(CpConstants.XJ.equals(jsgcsxCode)||CpConstants.KJ.equals(jsgcsxCode)||CpConstants.GJ.equals(jsgcsxCode)){//新改扩
-					if(CpConstants.GK.equals(xmlxCode)){ 
-						Dictionary gk_xgk_Dictionary=DictionaryLocalServiceUtil.findByCode(CpConstants.GK_XGK);
-						materialDictionaries=DictionaryLocalServiceUtil.findByParentId(gk_xgk_Dictionary.getDictionaryId(), -1, -1);
-				}
-					if(CpConstants.HD.equals(xmlxCode)){
-						Dictionary hd_xgk_Dictionary=DictionaryLocalServiceUtil.findByCode(CpConstants.HD_XGK);
-						materialDictionaries=DictionaryLocalServiceUtil.findByParentId(hd_xgk_Dictionary.getDictionaryId(), -1, -1);
-					}
-					if(CpConstants.GL.equals(xmlxCode)){
-						Dictionary gl_xgk_Dictionary=DictionaryLocalServiceUtil.findByCode(CpConstants.GL_XGK);
-						materialDictionaries=DictionaryLocalServiceUtil.findByParentId(gl_xgk_Dictionary.getDictionaryId(), -1, -1);
-					}
-					if(CpConstants.SZ.equals(xmlxCode)){
-						Dictionary szjt_xgk_Dictionary=DictionaryLocalServiceUtil.findByCode(CpConstants.SZJT_XGK);
-						materialDictionaries=DictionaryLocalServiceUtil.findByParentId(szjt_xgk_Dictionary.getDictionaryId(), -1, -1);
-					}
-			
-					
-				}else{
-					
-					if(CpConstants.GL.equals(xmlxCode)){
-						Dictionary gl_xgk_Dictionary=DictionaryLocalServiceUtil.findByCode(CpConstants.GL_DX);
-						materialDictionaries=DictionaryLocalServiceUtil.findByParentId(gl_xgk_Dictionary.getDictionaryId(), -1, -1);
-					}
-					if(CpConstants.SZ.equals(xmlxCode)){
-						Dictionary szjt_xgk_Dictionary=DictionaryLocalServiceUtil.findByCode(CpConstants.SZJT_DX);
-						materialDictionaries=DictionaryLocalServiceUtil.findByParentId(szjt_xgk_Dictionary.getDictionaryId(), -1, -1);
-					}
-				}
+	
+	ProjectProfile projectProfile=ProjectProfileLocalServiceUtil.fetchProjectProfile(permitId);
+	long xmlxId=projectProfile.getXmlx();//项目类型
+	long jsgcsxId=projectProfile.getJsgcsx();//建设工程属性
+	if(Validator.isNotNull(xmlxId)&&Validator.isNotNull(jsgcsxId)){
+		Dictionary xmlxDictionary= DictionaryLocalServiceUtil.getDictionary(xmlxId);
+		Dictionary jsgcsxDictionary= DictionaryLocalServiceUtil.getDictionary(jsgcsxId);
+		String xmlxCode=xmlxDictionary.getCode();
+		String jsgcsxCode=jsgcsxDictionary.getCode();
+		if(CpConstants.XJ.equals(jsgcsxCode)||CpConstants. KJ.equals(jsgcsxCode)||CpConstants. GJ.equals(jsgcsxCode)){//新改扩
+			if(CpConstants. GK.equals(xmlxCode)){
+				Dictionary gk_xgk_Dictionary=DictionaryLocalServiceUtil.findByCode(CpConstants. GK_XGK);
+				materialDictionaries=DictionaryLocalServiceUtil.findByParentId(gk_xgk_Dictionary.getDictionaryId(), -1, -1);
 			}
-			
-			for(Dictionary dic: materialDictionaries){
-				 ApplyMaterial applyMaterial=ApplyMaterialLocalServiceUtil.createApplyMaterial(CounterLocalServiceUtil.increment());
-				 applyMaterial.setPermitId(permitId);
-				 applyMaterial.setXh(dic.getTag());
-				 applyMaterial.setClmc(dic.getName());
-				 applyMaterialList.add(applyMaterial);
-				 ApplyMaterialLocalServiceUtil.updateApplyMaterial(applyMaterial);		
+			if(CpConstants. HD.equals(xmlxCode)){
+				Dictionary hd_xgk_Dictionary=DictionaryLocalServiceUtil.findByCode(CpConstants. HD_XGK);
+				materialDictionaries=DictionaryLocalServiceUtil.findByParentId(hd_xgk_Dictionary.getDictionaryId(), -1, -1);
 			}
+			if(CpConstants. GL.equals(xmlxCode)){
+				Dictionary gl_xgk_Dictionary=DictionaryLocalServiceUtil.findByCode(CpConstants. GL_XGK);
+				materialDictionaries=DictionaryLocalServiceUtil.findByParentId(gl_xgk_Dictionary.getDictionaryId(), -1, -1);
+			}
+			if(CpConstants. SZ.equals(xmlxCode)){
+				Dictionary szjt_xgk_Dictionary=DictionaryLocalServiceUtil.findByCode(CpConstants. SZJT_XGK);
+				materialDictionaries=DictionaryLocalServiceUtil.findByParentId(szjt_xgk_Dictionary.getDictionaryId(), -1, -1);
+			}
+	
+			
+		}else{
+			
+			if(CpConstants. GL.equals(xmlxCode)){
+				Dictionary gl_xgk_Dictionary=DictionaryLocalServiceUtil.findByCode(CpConstants. GL_DX);
+				materialDictionaries=DictionaryLocalServiceUtil.findByParentId(gl_xgk_Dictionary.getDictionaryId(), -1, -1);
+			}
+			if(CpConstants. SZ.equals(xmlxCode)){
+				Dictionary szjt_xgk_Dictionary=DictionaryLocalServiceUtil.findByCode(CpConstants. SZJT_DX);
+				materialDictionaries=DictionaryLocalServiceUtil.findByParentId(szjt_xgk_Dictionary.getDictionaryId(), -1, -1);
+			}
+		}
+	}
+	
+	for(Dictionary dic: materialDictionaries){
+		 ApplyMaterial applyMaterial=ApplyMaterialLocalServiceUtil.createApplyMaterial(CounterLocalServiceUtil.increment());
+		 applyMaterial.setPermitId(permitId);
+		 applyMaterial.setXh(dic.getTag());
+		 applyMaterial.setClmc(dic.getName());
+		 applyMaterialList.add(applyMaterial);
+		 ApplyMaterialLocalServiceUtil.updateApplyMaterial(applyMaterial);		
+	}
 		}
 	
 	}
-	
-	
-	
-	
-	
 %>
-<portlet:renderURL var="viewURL"/>
+<portlet:renderURL var="viewURL" />
 <c:set var="namespace" value="<%=renderResponse.getNamespace()%>"></c:set>
 <portlet:resourceURL var="fileUpLoadURL" id="fileUpLoad" />
 <portlet:resourceURL var="fileDeleteURL" id="fileDelete" />
@@ -110,142 +104,156 @@
 </portlet:actionURL>
 
 
-<form id="fm" action="${fileSaveURL}" enctype="multipart/form-data" method="post">
+<form id="fm" action="${fileSaveURL}" enctype="multipart/form-data"
+	method="post">
 
-<aui:input type="hidden" name="permitId" value="<%=permitId%>"></aui:input>
-<aui:input name="type" type="hidden" value="<%=type%>" />
-<table class="table table-bordered" style="font-size: 14px;" id="fileTable">
-	<tr style="text-align: center; height: 45px;">
-		<td style="text-align: center; width: 5%;">序号</td>
-		<td style="text-align: center; width: 30%;">申请材料名称</td>
-		<td style="text-align: center; width: 45%;">附件</td>
-		<td style="text-align: center; width: 20%;">操作
-			<span class="taglib-icon-help">
-			<img id="yui_patched_v3_11_0_1_1473298445453_1601" tabindex="0" src="/html/themes/control_panel/images/portlet/help.png" onmouseover="Liferay.Portal.ToolTip.show(this);" onfocus="Liferay.Portal.ToolTip.show(this);" onblur="Liferay.Portal.ToolTip.hide();" aria-labelledby="vfyl" alt="">
-			<span id="vfyl" class="hide-accessible tooltip-text">注:请上传jpg或pdf格式的文件，jpg格式文件大小不能超过2M,pdf格式文件不能超过20M,如果文件超过限定大小，请拆分后重新上传！</span>
+	<aui:input type="hidden" name="permitId" value="<%=permitId%>"></aui:input>
+	<aui:input name="type" type="hidden" value="<%=type%>" />
+	<table class="table table-bordered" style="font-size: 14px;"
+		id="fileTable">
+		<tr style="text-align: center; height: 45px;">
+			<td style="text-align: center; width: 5%;">序号</td>
+			<td style="text-align: center; width: 30%;">申请材料名称</td>
+			<td style="text-align: center; width: 45%;">附件</td>
+			<td style="text-align: center; width: 20%;">操作 <span
+				class="taglib-icon-help"> <img
+					id="yui_patched_v3_11_0_1_1473298445453_1601" tabindex="0"
+					src="/html/themes/control_panel/images/portlet/help.png"
+					onmouseover="Liferay.Portal.ToolTip.show(this);"
+					onfocus="Liferay.Portal.ToolTip.show(this);"
+					onblur="Liferay.Portal.ToolTip.hide();" aria-labelledby="vfyl"
+					alt=""> <span id="vfyl" class="hide-accessible tooltip-text">注:请上传jpg或pdf格式的文件，jpg格式文件大小不能超过2M,pdf格式文件不能超过20M,如果文件超过限定大小，请拆分后重新上传！</span>
 			</span>
-		</td>
-	</tr>
-	<c:forEach items="<%=applyMaterialList%>" var="material" varStatus="status"> 
-		<tr style="text-align: center" class="fileTr">
-			<td style="text-align: center" class="fileNo">${material.xh}</td>
-			<td>${material.clmc}</td>
-			<td style="text-align: center">
-				<div id="fileDiv${status.index+1}">
-				<!-- todo
-				此处可以根据状态来隐藏删除按钮的显示，提交后删除按钮不再显示
-				 -->
-					<c:if test="${not empty material.fileEntryIds}">
-						<c:forEach items="${fn:split(material.fileEntryIds,',')}" var="fileEntryId" varStatus="statusSub">
-							<div name="file${status.index+1}">
-							<a class="fileName" href="javascript:void(0);">
-										${material.clmc}-${statusSub.index+1}.${fn:split(fileEntryId,'|')[1]}</a> &nbsp;&nbsp;&nbsp;
-							<a href='javascript:void(0)';  onclick="${renderResponse.namespace}fileDelete(this,${fn:split(fileEntryId,'|')[0]},${material.materialId})">删除</a></div>
-						</c:forEach>
-					</c:if>
-				</div>
-			</td>
-			<td style="text-align: center">
-				<input type="button" value="上传" onclick="document.getElementById('fileInput${status.index+1}').click();"> 
-				<input id="fileInput${status.index+1}" name="${namespace}fileInput${status.index+1}" type="file" multiple=""
-				style="display:none;width: 150px;" accept="application/pdf,image/jpeg"  onchange="${renderResponse.namespace}fileUpLoad(${status.index+1},${material.materialId},'<%=portletDisplay.getId() %>');"></input>
-	
 			</td>
 		</tr>
-	</c:forEach>
-	
-</table>
+		<c:forEach items="<%=applyMaterialList%>" var="material"
+			varStatus="status">
+			<tr style="text-align: center" class="fileTr">
+				<td style="text-align: center" class="fileNo">${material.xh}</td>
+				<td>${material.clmc}</td>
+				<td style="text-align: center">
+					<div id="fileDiv${status.index+1}">
+						<!-- todo
+				此处可以根据状态来隐藏删除按钮的显示，提交后删除按钮不再显示
+				 -->
+						<c:if test="${not empty material.fileEntryIds}">
+							<c:forEach items="${fn:split(material.fileEntryIds,',')}"
+								var="fileEntryId" varStatus="statusSub">
+								<div name="file${status.index+1}">
+									<a class="fileName" href="javascript:void(0);">
+										${material.clmc}-${statusSub.index+1}.${fn:split(fileEntryId,'|')[1]}</a>
+									&nbsp;&nbsp;&nbsp; <a href='javascript:void(0)'
+										;  onclick="${renderResponse.namespace}fileDelete(this,${fn:split(fileEntryId,'|')[0]},${material.materialId})">删除</a>
+								</div>
+							</c:forEach>
+						</c:if>
+					</div>
+				</td>
+				<td style="text-align: center"><input type="button" value="上传"
+					onclick="document.getElementById('fileInput${status.index+1}').click();">
+					<input id="fileInput${status.index+1}"
+					name="${namespace}fileInput${status.index+1}" type="file"
+					multiple="" style="display: none; width: 150px;"
+					accept="application/pdf,image/jpeg"
+					onchange="${renderResponse.namespace}fileUpLoad(${status.index+1},${material.materialId},'<%=portletDisplay.getId() %>');"></input>
 
-<div style="text-align: center">
-	<aui:button  value="保存"  onclick="saveMaterials()" cssClass="btn btn-primary"/>
-	<c:if test="<%=canTj %>"><aui:button  value="上报"  onclick="submitAll()" cssClass="btn btn-primary"/></c:if>
-	
-	<%
-		String randomId = StringPool.BLANK;
-		randomId = StringUtil.randomId();
-		String strBackUrl = "http://" + request.getServerName() //服务器地址  
-        + ":"   
-        + request.getServerPort() ;          //端口号  
+				</td>
+			</tr>
+		</c:forEach>
+
+	</table>
+
+	<div style="text-align: center">
+		<aui:button value="保存" onclick="saveMaterials()"
+			cssClass="btn btn-primary" />
+		<c:if test="<%=canTj%>">
+			<aui:button value="上报" onclick="submitAll()"
+				cssClass="btn btn-primary" />
+		</c:if>
+
+		<%
+			String randomId = StringPool.BLANK;
+				randomId = StringUtil.randomId();
+				String strBackUrl = "http://" + request.getServerName() //服务器地址  
+		        + ":"   
+		        + request.getServerPort() ;          //端口号  
 				String[] assetTypes = new String[1];
-		    	assetTypes[0]="com.justonetech.cp.permit.model.Permit";
-	    	OrderByComparator orderByComparator=null;
-		    	List<WorkflowTask> results1=null;
-		    	User me=PortalUtil.getUser(request);
-		    	if(null!=me){
-		    		try {
-		    			//遍历工作流任务
-		    		results1= WorkflowTaskManagerUtil.search(me.getCompanyId(), me.getUserId(), null, assetTypes, null, null, -1, -1, orderByComparator);
+				    	assetTypes[0]="com.justonetech.cp.permit.model.Permit";
+			    	OrderByComparator orderByComparator=null;
+				    	List<WorkflowTask> results1=null;
+				    	User me=PortalUtil.getUser(request);
+				    	if(null!=me){
+				    		try {
+				    			//遍历工作流任务
+				    		results1= WorkflowTaskManagerUtil.search(me.getCompanyId(), me.getUserId(), null, assetTypes, null, null, -1, -1, orderByComparator);
 				} catch (WorkflowException e3) {
 					// TODO Auto-generated catch block
 					e3.printStackTrace();
 				}
-		    	long workflowTaskId=0L;
-		    	long people=0L;
-		    	String url="";
-		    	List<String> transitionNames = null;//遍历工作流任务
-		    	String token="";//授权随机代码
-		    	if(Validator.isNotNull(permit)){
-		    		 project=ProjectLocalServiceUtil.getProject(permit.getBjbh());
-		    		if(project.getLxjb().equals("区县级机关或区县级单位")){
-		    			type="quxian";
-		    				}else{
-		    			type="shishu";
-		    				}
-		    		if(permit.getStatus()==4||(permit.getStatus()==6&&type.equals("shishu"))){
-		    		if(results1.size()>0){
-		    		//工作流任务
-		    	for(WorkflowTask task:results1){
-		    		if(null!=task){
-		    			if(KaleoTaskInstanceTokenLocalServiceUtil.getKaleoTaskInstanceToken(task.getWorkflowTaskId()).getClassPK()==permit.getPermitId()){
-		    				workflowTaskId=task.getWorkflowTaskId();
+				    	long workflowTaskId=0L;
+				    	long people=0L;
+				    	String url="";
+				    	List<String> transitionNames = null;//遍历工作流任务
+				    	String token="";//授权随机代码
+				    	if(Validator.isNotNull(permit)){
+				    		 project=ProjectLocalServiceUtil.getProject(permit.getBjbh());
+				    		if(project.getLxjb().equals("区县级机关或区县级单位")){
+				    			type="quxian";
+				    				}else{
+				    			type="shishu";
+				    				}
+				    		if(permit.getStatus()==4||(permit.getStatus()==6&&type.equals("shishu"))){
+				    		if(results1.size()>0){
+				    		//工作流任务
+				    	for(WorkflowTask task:results1){
+				    		if(null!=task){
+				    			if(KaleoTaskInstanceTokenLocalServiceUtil.getKaleoTaskInstanceToken(task.getWorkflowTaskId()).getClassPK()==permit.getPermitId()){
+				    				workflowTaskId=task.getWorkflowTaskId();
 							people=task.getAssigneeUserId();
 					}
-		    		}
-		    	}
-		    		}
-		    		token=com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
-		        if(workflowTaskId==0){
-		        	transitionNames=new ArrayList<String>();
-		        }else{
-		    	transitionNames=WorkflowTaskManagerUtil.getNextTransitionNames(me.getCompanyId(), me.getUserId(), workflowTaskId);
-		    	}
-		    			for(int i=transitionNames.size()-1;i>=0;i--){
-		    				String transitionName=transitionNames.get(i);
+				    		}
+				    	}
+				    		}
+				    		token=com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
+				        if(workflowTaskId==0){
+				        	transitionNames=new ArrayList<String>();
+				        }else{
+				    	transitionNames=WorkflowTaskManagerUtil.getNextTransitionNames(me.getCompanyId(), me.getUserId(), workflowTaskId);
+				    	}
+				    			for(int i=transitionNames.size()-1;i>=0;i--){
+				    				String transitionName=transitionNames.get(i);
 					String message = "proceed";
 					if (Validator.isNotNull(transitionName)) {
 						message = HtmlUtil.escape(transitionName);
 					}
 				url=strBackUrl+"/group/control_panel/manage/-/my_workflow_tasks/view/"+workflowTaskId+"?p_auth="+token+"&p_p_lifecycle=1&doAsGroupId="+PortalUtil.getUser(request).getGroupId()+"&refererPlid=25177&controlPanelCategory=my&_153_cmd=save&_153_assigneeUserId="+people+"&_153_redirect="+strBackUrl+"/web/guest/return&_153_struts_action=/my_workflow_tasks/edit_workflow_task&_153_transitionName="+message;
-				%>
-				<div class="hide" id="<%= randomId %>updateComments">
-	<aui:input  cols="55" name="_153_comment" id="_153_comment" label="审核意见" useNamespace="false" rows="10" type="textarea"/>
-</div>
+		%>
+		<div class="hide" id="<%=randomId%>updateComments">
+			<aui:input cols="55" name="_153_comment" id="_153_comment"
+				label="审核意见" useNamespace="false" rows="10" type="textarea" />
+		</div>
 		<liferay-ui:icon
-				cssClass='<%= "workflow-task-" + randomId + " task-change-status-link" %>'
-				id='<%= randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink" %>'
-				image="check"
-				message="<%= message %>"
-				method="get"
-				url="<%= url %>"
-			/>
-			<aui:script use="liferay-workflow-tasks">
+			cssClass='<%="workflow-task-" + randomId + " task-change-status-link"%>'
+			id='<%=randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink"%>'
+			image="check" message="<%=message%>" method="get" url="<%=url%>" />
+		<aui:script use="liferay-workflow-tasks">
 var onTaskClickFn = A.rbind('onTaskClick', Liferay.WorkflowTasks,'<%= randomId %>');
 Liferay.delegateClick('<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(transitionName) %>taskChangeStatusLink', onTaskClickFn);
 </aui:script>
-				<%
-		    		}
-		    	}
-		    	}
-		    	}
+	
+		
+<%
+			}
+				    	}
+				    	}
+				    	}
 		%>
-</div>
+	</div>
 
 
 </form>
 
-<form id="fmFile" enctype="multipart/form-data" method="post">
-
-</form>
+<form id="fmFile" enctype="multipart/form-data" method="post"></form>
 
 <script>
 	function saveMaterials(){
