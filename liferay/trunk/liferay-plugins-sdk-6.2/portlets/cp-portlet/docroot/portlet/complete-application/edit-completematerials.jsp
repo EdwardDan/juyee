@@ -1,3 +1,4 @@
+<%@page import="com.justonetech.cp.util.CpConstants"%>
 <%@page import="com.justonetech.cp.complete.model.CompleteApplyMaterial"%>
 <%@page
 	import="com.justonetech.cp.complete.service.CompleteApplyMaterialLocalServiceUtil"%>
@@ -23,7 +24,6 @@
 	Long completeId =1L;
 	if(Validator.isNotNull(completeId)){
 		  completeApplyMaterialList= CompleteApplyMaterialLocalServiceUtil.findByCompleteId(completeId, -1, -1);  
-
 		//对材料表进行初始化
 		if(completeApplyMaterialList.size()<=0){
 	
@@ -35,33 +35,30 @@
 		Dictionary jsgcsxDictionary= DictionaryLocalServiceUtil.getDictionary(jsgcsxId);
 		String xmlxCode=xmlxDictionary.getCode();
 		String jsgcsxCode=jsgcsxDictionary.getCode();
-		if("XJ".equals(jsgcsxCode)||"KJ".equals(jsgcsxCode)||"GJ".equals(jsgcsxCode)){//新改扩
-			if("GK".equals(xmlxCode)){ 
-				Dictionary gk_xgk_Dictionary=DictionaryLocalServiceUtil.findByCode("gk_xgk");
+		if(CpConstants.XJ.equals(jsgcsxCode)||CpConstants.KJ.equals(jsgcsxCode)||CpConstants.GJ.equals(jsgcsxCode)){//新改扩
+			if(CpConstants.GK.equals(xmlxCode)){ 
+				Dictionary gk_xgk_Dictionary=DictionaryLocalServiceUtil.findByCode(CpConstants.JG_GK_XGK);
 				materialDictionaries=DictionaryLocalServiceUtil.findByParentId(gk_xgk_Dictionary.getDictionaryId(), -1, -1);
 		}
-			if("HD".equals(xmlxCode)){
-				Dictionary hd_xgk_Dictionary=DictionaryLocalServiceUtil.findByCode("hd_xgk");
+			if(CpConstants.HD.equals(xmlxCode)){
+				Dictionary hd_xgk_Dictionary=DictionaryLocalServiceUtil.findByCode(CpConstants.JG_HD_XGK);
 				materialDictionaries=DictionaryLocalServiceUtil.findByParentId(hd_xgk_Dictionary.getDictionaryId(), -1, -1);
 			}
-			if("GL".equals(xmlxCode)){
-				Dictionary gl_xgk_Dictionary=DictionaryLocalServiceUtil.findByCode("gl_xgk");
+			if(CpConstants.GL.equals(xmlxCode)){
+				Dictionary gl_xgk_Dictionary=DictionaryLocalServiceUtil.findByCode(CpConstants.JG_GL_XGK);
 				materialDictionaries=DictionaryLocalServiceUtil.findByParentId(gl_xgk_Dictionary.getDictionaryId(), -1, -1);
 			}
-			if("SZ".equals(xmlxCode)){
-				Dictionary szjt_xgk_Dictionary=DictionaryLocalServiceUtil.findByCode("szjt_xgk");
+			if(CpConstants.SZ.equals(xmlxCode)){
+				Dictionary szjt_xgk_Dictionary=DictionaryLocalServiceUtil.findByCode(CpConstants.JG_SZJT_XGK);
 				materialDictionaries=DictionaryLocalServiceUtil.findByParentId(szjt_xgk_Dictionary.getDictionaryId(), -1, -1);
 			}
-	
-			
 		}else{
-			
-			if("GL".equals(xmlxCode)){
-				Dictionary gl_xgk_Dictionary=DictionaryLocalServiceUtil.findByCode("gl_dx");
+			if(CpConstants.GL.equals(xmlxCode)){
+				Dictionary gl_xgk_Dictionary=DictionaryLocalServiceUtil.findByCode(CpConstants.JG_GL_DX);
 				materialDictionaries=DictionaryLocalServiceUtil.findByParentId(gl_xgk_Dictionary.getDictionaryId(), -1, -1);
 			}
-			if("SZ".equals(xmlxCode)){
-				Dictionary szjt_xgk_Dictionary=DictionaryLocalServiceUtil.findByCode("szjt_dx");
+			if(CpConstants.SZ.equals(xmlxCode)){
+				Dictionary szjt_xgk_Dictionary=DictionaryLocalServiceUtil.findByCode(CpConstants.JG_SZJT_DX);
 				materialDictionaries=DictionaryLocalServiceUtil.findByParentId(szjt_xgk_Dictionary.getDictionaryId(), -1, -1);
 			}
 		}
