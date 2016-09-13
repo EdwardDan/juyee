@@ -18,8 +18,6 @@
     	permitUnitProjectIds=permitUnitProjectIdsStr.split(",");
     }
 	String bjbh = ParamUtil.getString(request, "bjbh");
-	System.out.println(2121);
-	System.out.println(bjbh);
 	long completeId = ParamUtil.getLong(request, "completeId");
 	List<CompleteUnitProject> completeUnitProjects=new ArrayList<CompleteUnitProject>();
 	Complete complete=null;
