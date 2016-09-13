@@ -14,10 +14,6 @@
 		completeProjectProfile = CompleteProjectProfileLocalServiceUtil.getCompleteProjectProfile(completeId);
 		request.setAttribute("completeProjectProfile", completeProjectProfile);
 	}
-	/* Dictionary qxDic = DictionaryLocalServiceUtil.findByCode("qx");
-	List<Dictionary> qxDics = qxDic != null ? DictionaryLocalServiceUtil.findByParentId(
-			qxDic.getDictionaryId(), -1, -1) : null;
-			request.setAttribute("qxDics",qxDics); */
 %>
 <portlet:renderURL var="viewURL" />
 <portlet:actionURL var="saveProjectProfileURL" name="saveProjectProfile">
@@ -35,7 +31,7 @@
 			<td class="text-right">工程名称</td>
 			<td class="bg-white" colspan="3">
 			<aui:input name="gcmc" label="" type="text"
-					style="width:50%" value="${project.xmmc}" readonly="true">
+					cssClass="span12" value="${project.xmmc}" readonly="true">
 				</aui:input></td>
 			</td>
 	</tr>
@@ -43,7 +39,7 @@
 			<td class="text-right">建设单位名称</td>
 			<td class="bg-white" colspan="3">
 			<aui:input name="jsdwmc" label="" type="text"
-					style="width:50%" value="${project.jsdw }" readonly="true">
+					cssClass="span12" value="${project.jsdw }" readonly="true">
 				</aui:input>
 			</td>
 	</tr>
@@ -51,7 +47,7 @@
 			<td class="text-right">建设单位地址</td>
 			<td class="bg-white"  colspan="3">
 				<aui:input name="jsdwdz" label="" type="text"
-					style="width:50%" value="${project.jsdwdz }" readonly="true">
+					cssClass="span12" value="${project.jsdwdz }" readonly="true">
 				</aui:input>
 			</td>
 		</tr>
@@ -65,26 +61,26 @@
 			<td class="text-right">所在区县</td>
 			<td class="bg-white" >
 				<aui:input name="szqx" label="" type="text"
-					style="width:50%" value="${project.szqx}" readonly="true">
+					cssClass="span12" value="${project.szqx}" readonly="true">
 				</aui:input>
 			</td>
 		</tr>
 		<tr class="body">
 			<td class="text-right">法定代表人</td>
 			<td class="bg-white" colspan="3"><aui:input name="fddbr"
-					label="" type="text" style="width:50%" value="${project.jsdwfr}"
+					label="" type="text" cssClass="span12" value="${project.jsdwfr}"
 					readonly="true">
 				</aui:input></td>
 		</tr>
 		<tr class="body">
 			<td class="text-right">联系人</td>
 			<td class="bg-white" ><aui:input name="lxr"
-					label="" type="text" style="width:50%" value="${project.jsdwlxr}">
+					label="" type="text" cssClass="span12" value="${project.jsdwlxr}">
 				</aui:input></td>
 		
 			<td class="text-right">联系电话</td>
 			<td class="bg-white" ><aui:input name="lxdh"
-					label="" type="text" style="width:50%" value="${project.jsdwdh}">
+					label="" type="text" cssClass="span12" value="${project.jsdwdh}">
 				</aui:input></td>
 		</tr>
 		<tr class="body">
