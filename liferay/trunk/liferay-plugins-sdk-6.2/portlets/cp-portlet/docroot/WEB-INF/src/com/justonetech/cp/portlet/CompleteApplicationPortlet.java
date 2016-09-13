@@ -16,6 +16,7 @@ import com.justonetech.cp.complete.model.Complete;
 import com.justonetech.cp.complete.model.CompleteProjectProfile;
 import com.justonetech.cp.complete.service.CompleteLocalServiceUtil;
 import com.justonetech.cp.complete.service.CompleteProjectProfileLocalServiceUtil;
+import com.justonetech.cp.permit.model.Permit;
 import com.justonetech.cp.project.model.Project;
 import com.justonetech.cp.project.service.ProjectLocalServiceUtil;
 import com.liferay.counter.model.Counter;
@@ -107,7 +108,7 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 	}
 
 	public void saveProjectProfile(ActionRequest request, ActionResponse response) throws SystemException,
-			PortalException {
+			PortalException, IOException {
 		long completeId = ParamUtil.getLong(request, "completeId");
 		long groupId = PortalUtil.getScopeGroupId(request);
 		long companyId = PortalUtil.getCompanyId(request);
@@ -149,6 +150,7 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 		complete.setModifiedDate(now);
 		complete.setBjbh(bjbh);
 		// complete.setBabh(babh);
+		complete.setSqbz(1);
 		complete.setWssqbh(wssqbh);
 		complete.setSbrq(now);
 		completeProjectProfile.setBjbh(bjbh);
@@ -163,6 +165,7 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 		completeProjectProfile.setBz(bz);
 		CompleteLocalServiceUtil.updateComplete(complete);
 		CompleteProjectProfileLocalServiceUtil.updateCompleteProjectProfile(completeProjectProfile);
+		redirect(request, response, complete, 1);
 	}
 
 	public void deleteComplete(ActionRequest request, ActionResponse response) throws PortalException, SystemException {
@@ -170,5 +173,21 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 		CompleteLocalServiceUtil.deleteComplete(completeId);
 		CompleteProjectProfileLocalServiceUtil.deleteCompleteProjectProfile(CompleteProjectProfileLocalServiceUtil
 				.getCompleteProjectProfile(completeId));
+	}
+	
+	public void redirect(ActionRequest request, ActionResponse response, Complete complete, int sqbz) throws IOException {
+
+		String redirect = ParamUtil.getString(request, "redirectURL");
+		int tabSqbz = 1;
+		if (complete.getSqbz() == sqbz && sqbz < 4) {
+			tabSqbz = sqbz + 1;
+		} else if (complete.getSqbz() == sqbz && sqbz == 4) {
+			tabSqbz = sqbz;
+		} else if (complete.getSqbz() > sqbz) {
+			tabSqbz = sqbz;
+		}
+		redirect += "&" + response.getNamespace() + "completeId=" + complete.getCompleteId();
+		redirect += "&" + response.getNamespace() + "tabSqbz=" + tabSqbz;
+		response.sendRedirect(redirect);
 	}
 }
