@@ -37,7 +37,7 @@ import java.util.Date;
 public class CompleteCacheModel implements CacheModel<Complete>, Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(29);
+		StringBundler sb = new StringBundler(35);
 
 		sb.append("{completeId=");
 		sb.append(completeId);
@@ -67,6 +67,12 @@ public class CompleteCacheModel implements CacheModel<Complete>, Externalizable 
 		sb.append(wssqbh);
 		sb.append(", sbrq=");
 		sb.append(sbrq);
+		sb.append(", shyj=");
+		sb.append(shyj);
+		sb.append(", shr=");
+		sb.append(shr);
+		sb.append(", shrq=");
+		sb.append(shrq);
 		sb.append("}");
 
 		return sb.toString();
@@ -140,6 +146,27 @@ public class CompleteCacheModel implements CacheModel<Complete>, Externalizable 
 			completeImpl.setSbrq(new Date(sbrq));
 		}
 
+		if (shyj == null) {
+			completeImpl.setShyj(StringPool.BLANK);
+		}
+		else {
+			completeImpl.setShyj(shyj);
+		}
+
+		if (shr == null) {
+			completeImpl.setShr(StringPool.BLANK);
+		}
+		else {
+			completeImpl.setShr(shr);
+		}
+
+		if (shrq == Long.MIN_VALUE) {
+			completeImpl.setShrq(null);
+		}
+		else {
+			completeImpl.setShrq(new Date(shrq));
+		}
+
 		completeImpl.resetOriginalValues();
 
 		return completeImpl;
@@ -161,6 +188,9 @@ public class CompleteCacheModel implements CacheModel<Complete>, Externalizable 
 		babh = objectInput.readUTF();
 		wssqbh = objectInput.readUTF();
 		sbrq = objectInput.readLong();
+		shyj = objectInput.readUTF();
+		shr = objectInput.readUTF();
+		shrq = objectInput.readLong();
 	}
 
 	@Override
@@ -213,6 +243,22 @@ public class CompleteCacheModel implements CacheModel<Complete>, Externalizable 
 		}
 
 		objectOutput.writeLong(sbrq);
+
+		if (shyj == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(shyj);
+		}
+
+		if (shr == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(shr);
+		}
+
+		objectOutput.writeLong(shrq);
 	}
 
 	public long completeId;
@@ -229,4 +275,7 @@ public class CompleteCacheModel implements CacheModel<Complete>, Externalizable 
 	public String babh;
 	public String wssqbh;
 	public long sbrq;
+	public String shyj;
+	public String shr;
+	public long shrq;
 }

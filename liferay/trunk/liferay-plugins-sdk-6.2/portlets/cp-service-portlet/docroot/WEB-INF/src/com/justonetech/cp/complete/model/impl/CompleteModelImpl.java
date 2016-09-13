@@ -74,9 +74,12 @@ public class CompleteModelImpl extends BaseModelImpl<Complete>
 			{ "status", Types.INTEGER },
 			{ "babh", Types.VARCHAR },
 			{ "wssqbh", Types.VARCHAR },
-			{ "sbrq", Types.TIMESTAMP }
+			{ "sbrq", Types.TIMESTAMP },
+			{ "shyj", Types.VARCHAR },
+			{ "shr", Types.VARCHAR },
+			{ "shrq", Types.TIMESTAMP }
 		};
-	public static final String TABLE_SQL_CREATE = "create table cp_Complete (completeId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,zzjgdm VARCHAR(75) null,bjbh VARCHAR(75) null,sqbz INTEGER,status INTEGER,babh VARCHAR(75) null,wssqbh VARCHAR(75) null,sbrq DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table cp_Complete (completeId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,zzjgdm VARCHAR(75) null,bjbh VARCHAR(75) null,sqbz INTEGER,status INTEGER,babh VARCHAR(75) null,wssqbh VARCHAR(75) null,sbrq DATE null,shyj VARCHAR(1000) null,shr VARCHAR(75) null,shrq DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table cp_Complete";
 	public static final String ORDER_BY_JPQL = " ORDER BY complete.completeId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY cp_Complete.completeId ASC";
@@ -148,6 +151,9 @@ public class CompleteModelImpl extends BaseModelImpl<Complete>
 		attributes.put("babh", getBabh());
 		attributes.put("wssqbh", getWssqbh());
 		attributes.put("sbrq", getSbrq());
+		attributes.put("shyj", getShyj());
+		attributes.put("shr", getShr());
+		attributes.put("shrq", getShrq());
 
 		return attributes;
 	}
@@ -236,6 +242,24 @@ public class CompleteModelImpl extends BaseModelImpl<Complete>
 
 		if (sbrq != null) {
 			setSbrq(sbrq);
+		}
+
+		String shyj = (String)attributes.get("shyj");
+
+		if (shyj != null) {
+			setShyj(shyj);
+		}
+
+		String shr = (String)attributes.get("shr");
+
+		if (shr != null) {
+			setShr(shr);
+		}
+
+		Date shrq = (Date)attributes.get("shrq");
+
+		if (shrq != null) {
+			setShrq(shrq);
 		}
 	}
 
@@ -424,6 +448,46 @@ public class CompleteModelImpl extends BaseModelImpl<Complete>
 		_sbrq = sbrq;
 	}
 
+	@Override
+	public String getShyj() {
+		if (_shyj == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _shyj;
+		}
+	}
+
+	@Override
+	public void setShyj(String shyj) {
+		_shyj = shyj;
+	}
+
+	@Override
+	public String getShr() {
+		if (_shr == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _shr;
+		}
+	}
+
+	@Override
+	public void setShr(String shr) {
+		_shr = shr;
+	}
+
+	@Override
+	public Date getShrq() {
+		return _shrq;
+	}
+
+	@Override
+	public void setShrq(Date shrq) {
+		_shrq = shrq;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -469,6 +533,9 @@ public class CompleteModelImpl extends BaseModelImpl<Complete>
 		completeImpl.setBabh(getBabh());
 		completeImpl.setWssqbh(getWssqbh());
 		completeImpl.setSbrq(getSbrq());
+		completeImpl.setShyj(getShyj());
+		completeImpl.setShr(getShr());
+		completeImpl.setShrq(getShrq());
 
 		completeImpl.resetOriginalValues();
 
@@ -609,12 +676,37 @@ public class CompleteModelImpl extends BaseModelImpl<Complete>
 			completeCacheModel.sbrq = Long.MIN_VALUE;
 		}
 
+		completeCacheModel.shyj = getShyj();
+
+		String shyj = completeCacheModel.shyj;
+
+		if ((shyj != null) && (shyj.length() == 0)) {
+			completeCacheModel.shyj = null;
+		}
+
+		completeCacheModel.shr = getShr();
+
+		String shr = completeCacheModel.shr;
+
+		if ((shr != null) && (shr.length() == 0)) {
+			completeCacheModel.shr = null;
+		}
+
+		Date shrq = getShrq();
+
+		if (shrq != null) {
+			completeCacheModel.shrq = shrq.getTime();
+		}
+		else {
+			completeCacheModel.shrq = Long.MIN_VALUE;
+		}
+
 		return completeCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(29);
+		StringBundler sb = new StringBundler(35);
 
 		sb.append("{completeId=");
 		sb.append(getCompleteId());
@@ -644,6 +736,12 @@ public class CompleteModelImpl extends BaseModelImpl<Complete>
 		sb.append(getWssqbh());
 		sb.append(", sbrq=");
 		sb.append(getSbrq());
+		sb.append(", shyj=");
+		sb.append(getShyj());
+		sb.append(", shr=");
+		sb.append(getShr());
+		sb.append(", shrq=");
+		sb.append(getShrq());
 		sb.append("}");
 
 		return sb.toString();
@@ -651,7 +749,7 @@ public class CompleteModelImpl extends BaseModelImpl<Complete>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(46);
+		StringBundler sb = new StringBundler(55);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.cp.complete.model.Complete");
@@ -713,6 +811,18 @@ public class CompleteModelImpl extends BaseModelImpl<Complete>
 			"<column><column-name>sbrq</column-name><column-value><![CDATA[");
 		sb.append(getSbrq());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>shyj</column-name><column-value><![CDATA[");
+		sb.append(getShyj());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>shr</column-name><column-value><![CDATA[");
+		sb.append(getShr());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>shrq</column-name><column-value><![CDATA[");
+		sb.append(getShrq());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -739,6 +849,9 @@ public class CompleteModelImpl extends BaseModelImpl<Complete>
 	private String _babh;
 	private String _wssqbh;
 	private Date _sbrq;
+	private String _shyj;
+	private String _shr;
+	private Date _shrq;
 	private long _columnBitmask;
 	private Complete _escapedModel;
 }
