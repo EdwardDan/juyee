@@ -17,9 +17,24 @@
 	List<Dictionary> materialDictionaries=new ArrayList<Dictionary>();
 	List<ApplyMaterial> applyMaterialList=new ArrayList<ApplyMaterial>();
 	Long permitId =ParamUtil.getLong(renderRequest,"permitId",0);
+	Project project = null;
+	String type="";
+	Permit permit=null;
+	Boolean canTj=null;
 	if(Validator.isNotNull(permitId)){
+		permit = PermitLocalServiceUtil.getPermit(permitId);
+		project=ProjectLocalServiceUtil.getProject(permit.getBjbh());
+		if(project.getLxjb().equals("区县级机关或区县级单位")){
+			type="quxian";
+				}else{
+			type="shishu";
+				}
 		applyMaterialList= ApplyMaterialLocalServiceUtil.findByPermitId(permitId, -1, -1);
-
+		if(WorkflowInstanceLinkLocalServiceUtil.hasWorkflowInstanceLink(permit.getCompanyId(), 0L, Permit.class.getName(),permit.getPermitId())){
+			canTj=false;
+		}else{
+			canTj=true;
+		}
 		//对材料表进行初始化
 		if(applyMaterialList.size()<=0){
 			
@@ -97,6 +112,7 @@
 <form id="fm" action="${fileSaveURL}" enctype="multipart/form-data" method="post">
 
 <aui:input type="hidden" name="permitId" value="<%=permitId%>"></aui:input>
+<aui:input name="type" type="hidden" value="<%=type%>" />
 <table class="table table-bordered" style="font-size: 14px;" id="fileTable">
 	<tr style="text-align: center; height: 45px;">
 		<td style="text-align: center; width: 5%;">序号</td>
@@ -141,7 +157,86 @@
 
 <div style="text-align: center">
 	<aui:button  value="保存"  onclick="saveMaterials()" cssClass="btn btn-primary"/>
-	<aui:button  value="上报"  onclick="submitAll()" cssClass="btn btn-primary"/>
+	<c:if test="<%=canTj %>"><aui:button  value="上报"  onclick="submitAll()" cssClass="btn btn-primary"/></c:if>
+	
+	<%
+		String randomId = StringPool.BLANK;
+		randomId = StringUtil.randomId();
+		String strBackUrl = "http://" + request.getServerName() //服务器地址  
+        + ":"   
+        + request.getServerPort() ;          //端口号  
+				String[] assetTypes = new String[1];
+		    	assetTypes[0]="com.justonetech.cp.permit.model.Permit";
+	    	OrderByComparator orderByComparator=null;
+		    	List<WorkflowTask> results1=null;
+		    	User me=PortalUtil.getUser(request);
+		    	if(null!=me){
+		    		try {
+		    			//遍历工作流任务
+		    		results1= WorkflowTaskManagerUtil.search(me.getCompanyId(), me.getUserId(), null, assetTypes, null, null, -1, -1, orderByComparator);
+				} catch (WorkflowException e3) {
+					// TODO Auto-generated catch block
+					e3.printStackTrace();
+				}
+		    	long workflowTaskId=0L;
+		    	long people=0L;
+		    	String url="";
+		    	List<String> transitionNames = null;//遍历工作流任务
+		    	String token="";//授权随机代码
+		    	if(Validator.isNotNull(permit)){
+		    		 project=ProjectLocalServiceUtil.getProject(permit.getBjbh());
+		    		if(project.getLxjb().equals("区县级机关或区县级单位")){
+		    			type="quxian";
+		    				}else{
+		    			type="shishu";
+		    				}
+		    		if(permit.getStatus()==4||(permit.getStatus()==6&&type.equals("shishu"))){
+		    		if(results1.size()>0){
+		    		//工作流任务
+		    	for(WorkflowTask task:results1){
+		    		if(null!=task){
+		    			if(KaleoTaskInstanceTokenLocalServiceUtil.getKaleoTaskInstanceToken(task.getWorkflowTaskId()).getClassPK()==permit.getPermitId()){
+		    				workflowTaskId=task.getWorkflowTaskId();
+							people=task.getAssigneeUserId();
+					}
+		    		}
+		    	}
+		    		}
+		    		token=com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
+		        if(workflowTaskId==0){
+		        	transitionNames=new ArrayList<String>();
+		        }else{
+		    	transitionNames=WorkflowTaskManagerUtil.getNextTransitionNames(me.getCompanyId(), me.getUserId(), workflowTaskId);
+		    	}
+		    			for(int i=transitionNames.size()-1;i>=0;i--){
+		    				String transitionName=transitionNames.get(i);
+					String message = "proceed";
+					if (Validator.isNotNull(transitionName)) {
+						message = HtmlUtil.escape(transitionName);
+					}
+				url=strBackUrl+"/group/control_panel/manage/-/my_workflow_tasks/view/"+workflowTaskId+"?p_auth="+token+"&p_p_lifecycle=1&doAsGroupId="+PortalUtil.getUser(request).getGroupId()+"&refererPlid=25177&controlPanelCategory=my&_153_cmd=save&_153_assigneeUserId="+people+"&_153_redirect="+strBackUrl+"/web/guest/return&_153_struts_action=/my_workflow_tasks/edit_workflow_task&_153_transitionName="+message;
+				%>
+				<div class="hide" id="<%= randomId %>updateComments">
+	<aui:input  cols="55" name="_153_comment" id="_153_comment" label="审核意见" useNamespace="false" rows="10" type="textarea"/>
+</div>
+		<liferay-ui:icon
+				cssClass='<%= "workflow-task-" + randomId + " task-change-status-link" %>'
+				id='<%= randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink" %>'
+				image="check"
+				message="<%= message %>"
+				method="get"
+				url="<%= url %>"
+			/>
+			<aui:script use="liferay-workflow-tasks">
+var onTaskClickFn = A.rbind('onTaskClick', Liferay.WorkflowTasks,'<%= randomId %>');
+Liferay.delegateClick('<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(transitionName) %>taskChangeStatusLink', onTaskClickFn);
+</aui:script>
+				<%
+		    		}
+		    	}
+		    	}
+		    	}
+		%>
 </div>
 
 
