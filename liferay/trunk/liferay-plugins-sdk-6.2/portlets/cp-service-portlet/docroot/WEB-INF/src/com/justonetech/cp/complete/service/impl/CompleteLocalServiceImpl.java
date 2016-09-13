@@ -60,7 +60,7 @@ public class CompleteLocalServiceImpl extends CompleteLocalServiceBaseImpl {
 
 	@SuppressWarnings("unchecked")
 	public List<Complete> getCompletes(String zzjgdm, String bjbh,
-			String wssqbh, String gcmc, String sqzt, int start, int end) {
+			String wssqbh, String gcmc, int sqzt, int start, int end) {
 
 		try {
 			return this.dynamicQuery(
@@ -73,7 +73,7 @@ public class CompleteLocalServiceImpl extends CompleteLocalServiceBaseImpl {
 	}
 
 	public int getCompletesCount(String zzjgdm, String bjbh, String wssqbh,
-			String gcmc, String sqzt) {
+			String gcmc, int sqzt) {
 
 		try {
 			return (int) this.dynamicQueryCount(createDynamicQuery(zzjgdm,
@@ -85,7 +85,7 @@ public class CompleteLocalServiceImpl extends CompleteLocalServiceBaseImpl {
 	}
 
 	public DynamicQuery createDynamicQuery(String zzjgdm, String bjbh,
-			String wssqbh, String gcmc, String sqzt) {
+			String wssqbh, String gcmc, int sqzt) {
 
 		DynamicQuery dynamicQuery = this.dynamicQuery();
 		if (!Validator.isBlank(zzjgdm)) {
@@ -109,7 +109,7 @@ public class CompleteLocalServiceImpl extends CompleteLocalServiceBaseImpl {
 			dynamicQuery.add(PropertyFactoryUtil.forName("completeId").in(
 					projectProfileDQ));
 		}
-		if (!Validator.isBlank(sqzt)) {
+		if (sqzt > 0) {
 			dynamicQuery.add(PropertyFactoryUtil.forName("sqzt").eq(sqzt));
 		}
 		return dynamicQuery;
