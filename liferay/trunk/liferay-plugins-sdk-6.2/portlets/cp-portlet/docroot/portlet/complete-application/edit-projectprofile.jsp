@@ -28,7 +28,7 @@
 %>
 <portlet:renderURL var="viewURL" />
 <portlet:actionURL var="saveProjectProfileURL" name="saveProjectProfile">
-	<portlet:param name="redirectURL" value="${editPermitURL}"/>
+	<portlet:param name="redirect" value="${viewURL}"/>
 </portlet:actionURL>
 <aui:model-context bean="${projectProfile}"
 	model="<%=ProjectProfile.class%>" />
@@ -100,7 +100,7 @@
 			<td class="text-right">备注</td>
 			<td class="bg-white" colspan="3">
 			<aui:input name="bz" label=""
-					type="textarea" style="width:60%" value="${completeProjectProfile.bz}">
+					type="textarea" cssClass="span12" value="${completeProjectProfile.bz}">
 				</aui:input>
 			</td>
 		</tr>
