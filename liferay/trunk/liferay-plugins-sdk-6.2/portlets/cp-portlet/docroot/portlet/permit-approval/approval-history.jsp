@@ -3,6 +3,7 @@
 <%@ include file="init.jsp"%>
 <%
 	long permitIdInit = ParamUtil.getLong(request, "permitId");
+    request.setAttribute("permitId", permitIdInit);
 	Permit permitInit = PermitLocalServiceUtil.getPermit(permitIdInit);
 	int sqztInit = permitInit.getStatus();
 	String bjbhInit = permitInit.getBjbh();

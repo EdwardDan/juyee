@@ -10,37 +10,51 @@
 		text-align:center;
 	}
 </style>
+<%
+	long permitId = ParamUtil.getLong(request, "permitId");
+	request.setAttribute("permitId", permitId);
+%>
 <c:set var="contextPath"
 	value="${request.contextPath}/portlet/permit-approval/approval-history-city" />
 <portlet:renderURL var="ysURL">
 	<portlet:param name="mvcPath" value="${contextPath}/ys.jsp" />
+	<portlet:param name="permitId" value="${permitId }" />
 </portlet:renderURL>
 <portlet:renderURL var="sjURL" windowState="pop_up">
 	<portlet:param name="mvcPath" value="${contextPath}/sj.jsp" />
+	<portlet:param name="permitId" value="${permitId }" />
 </portlet:renderURL>
 <portlet:renderURL var="csURL" windowState="pop_up">
 	<portlet:param name="mvcPath" value="${contextPath}/cs.jsp" />
+	<portlet:param name="permitId" value="${permitId }" />
 </portlet:renderURL>
 <portlet:renderURL var="fhURL" windowState="pop_up">
 	<portlet:param name="mvcPath" value="${contextPath}/fh.jsp" />
+	<portlet:param name="permitId" value="${permitId }" />
 </portlet:renderURL>
 <portlet:renderURL var="shURL" windowState="pop_up">
 	<portlet:param name="mvcPath" value="${contextPath}/sh.jsp" />
+	<portlet:param name="permitId" value="${permitId }" />
 </portlet:renderURL>
 <portlet:renderURL var="fgldshURL" >
 	<portlet:param name="mvcPath" value="${contextPath}/fgldsh.jsp" />
+	<portlet:param name="permitId" value="${permitId }" />
 </portlet:renderURL>
 <portlet:renderURL var="zxldshURL" >
 	<portlet:param name="mvcPath" value="${contextPath}/zxldsh.jsp" />
+	<portlet:param name="permitId" value="${permitId }" />
 </portlet:renderURL>
 <portlet:renderURL var="wjscshURL" >
 	<portlet:param name="mvcPath" value="${contextPath}/wjscsh.jsp" />
+	<portlet:param name="permitId" value="${permitId }" />
 </portlet:renderURL>
 <portlet:renderURL var="wspcshURL">
 	<portlet:param name="mvcPath" value="${contextPath}/wspcsh.jsp" />
+	<portlet:param name="permitId" value="${permitId }" />
 </portlet:renderURL>
 <portlet:renderURL var="wldshURL" >
 	<portlet:param name="mvcPath" value="${contextPath}/wldsh.jsp" />
+	<portlet:param name="permitId" value="${permitId }" />
 </portlet:renderURL>
 <table class="table table-border table-hover table-striped" style="width: 100% ；text-align:center;">
 	<thead>
