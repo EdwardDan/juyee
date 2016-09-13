@@ -289,24 +289,26 @@ public class CompleteLocalServiceWrapper implements CompleteLocalService,
 	@Override
 	public java.util.List<com.justonetech.cp.complete.model.Complete> getCompletes(
 		java.lang.String zzjgdm, java.lang.String bjbh,
-		java.lang.String wssqbh, java.lang.String gcmc, int start, int end) {
+		java.lang.String wssqbh, java.lang.String gcmc, java.lang.String sqzt,
+		int start, int end) {
 		return _completeLocalService.getCompletes(zzjgdm, bjbh, wssqbh, gcmc,
-			start, end);
+			sqzt, start, end);
 	}
 
 	@Override
 	public int getCompletesCount(java.lang.String zzjgdm,
-		java.lang.String bjbh, java.lang.String wssqbh, java.lang.String gcmc) {
+		java.lang.String bjbh, java.lang.String wssqbh, java.lang.String gcmc,
+		java.lang.String sqzt) {
 		return _completeLocalService.getCompletesCount(zzjgdm, bjbh, wssqbh,
-			gcmc);
+			gcmc, sqzt);
 	}
 
 	@Override
 	public com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQuery(
 		java.lang.String zzjgdm, java.lang.String bjbh,
-		java.lang.String wssqbh, java.lang.String gcmc) {
+		java.lang.String wssqbh, java.lang.String gcmc, java.lang.String sqzt) {
 		return _completeLocalService.createDynamicQuery(zzjgdm, bjbh, wssqbh,
-			gcmc);
+			gcmc, sqzt);
 	}
 
 	/**

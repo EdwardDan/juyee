@@ -60,11 +60,12 @@ public class CompleteLocalServiceImpl extends CompleteLocalServiceBaseImpl {
 
 	@SuppressWarnings("unchecked")
 	public List<Complete> getCompletes(String zzjgdm, String bjbh,
-			String wssqbh, String gcmc, int start, int end) {
+			String wssqbh, String gcmc, String sqzt, int start, int end) {
 
 		try {
 			return this.dynamicQuery(
-					createDynamicQuery(zzjgdm, bjbh, wssqbh, gcmc), start, end);
+					createDynamicQuery(zzjgdm, bjbh, wssqbh, gcmc, sqzt),
+					start, end);
 		} catch (SystemException e) {
 			log.info(e.getMessage());
 		}
@@ -72,11 +73,11 @@ public class CompleteLocalServiceImpl extends CompleteLocalServiceBaseImpl {
 	}
 
 	public int getCompletesCount(String zzjgdm, String bjbh, String wssqbh,
-			String gcmc) {
+			String gcmc, String sqzt) {
 
 		try {
 			return (int) this.dynamicQueryCount(createDynamicQuery(zzjgdm,
-					bjbh, wssqbh, gcmc));
+					bjbh, wssqbh, gcmc, sqzt));
 		} catch (SystemException e) {
 			log.info(e.getMessage());
 		}
@@ -84,7 +85,7 @@ public class CompleteLocalServiceImpl extends CompleteLocalServiceBaseImpl {
 	}
 
 	public DynamicQuery createDynamicQuery(String zzjgdm, String bjbh,
-			String wssqbh, String gcmc) {
+			String wssqbh, String gcmc, String sqzt) {
 
 		DynamicQuery dynamicQuery = this.dynamicQuery();
 		if (!Validator.isBlank(zzjgdm)) {
@@ -107,6 +108,9 @@ public class CompleteLocalServiceImpl extends CompleteLocalServiceBaseImpl {
 					"%" + gcmc + "%"));
 			dynamicQuery.add(PropertyFactoryUtil.forName("completeId").in(
 					projectProfileDQ));
+		}
+		if (!Validator.isBlank(sqzt)) {
+			dynamicQuery.add(PropertyFactoryUtil.forName("sqzt").eq(sqzt));
 		}
 		return dynamicQuery;
 	}
