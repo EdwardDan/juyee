@@ -140,10 +140,7 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 			
 			List<UnitProject>unitProjects=new ArrayList<UnitProject>();
 			String bjbh = ParamUtil.getString(renderRequest, "bjbh");
-			System.out.println(bjbh);
-			System.out.println(1212);
 			String completeId= renderRequest.getParameter("completeId");
-			System.out.println(bjbh);
 			int defaultDelta = GetterUtil.getInteger(PropsUtil
 					.get(PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA));
 			int delta = ParamUtil.getInteger(renderRequest, "delta",
@@ -229,9 +226,9 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 	
 	public void saveUnitProjects(ActionRequest request, ActionResponse response) throws SystemException,
 	PortalException, IOException {
-		System.out.println(6666);
 		long completeId = ParamUtil.getLong(request, "completeId",0);
 		//删除原有数据
+		if(completeId!=0){
 		List<CompleteUnitProject> completeUnitProjects = CompleteUnitProjectLocalServiceUtil.findByCompleteId(completeId, -1, -1);
 		for (CompleteUnitProject completeUnitProject : completeUnitProjects) {
 			CompleteUnitProjectLocalServiceUtil.deleteCompleteUnitProject(completeUnitProject);
@@ -259,7 +256,9 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 			complete.setSqbz(2);
 		}
 		CompleteLocalServiceUtil.updateComplete(complete);
+		
 		redirect(request, response, complete, 2);
+		}
 	}
 	
 	
