@@ -63,7 +63,7 @@
 				<%
 					CompleteProjectProfile projectProfile = CompleteProjectProfileLocalServiceUtil
 											.getCompleteProjectProfile(complete.getCompleteId());
-					int status = complete.getStatus();
+					int applyStatus = complete.getStatus();
 				%>
 				<liferay-portlet:renderURL varImpl="rowURL">
 					<portlet:param name="completeId" value="${complete.completeId}" />
@@ -84,7 +84,7 @@
 					href="${rowURL }">
 					<fmt:formatDate value="${complete.sbrq}" pattern="yyyy-MM-dd" />
 				</liferay-ui:search-container-column-text>
-				<liferay-ui:search-container-column-text property="babh" name="状态" value="${complete.sqbz}"/>
+				<liferay-ui:search-container-column-text property="status" name="状态" value="${complete.status}"/>
 				<liferay-ui:search-container-column-text name="action">
 					<portlet:actionURL var="deleteCompleteURL" name="deleteComplete">
 						<portlet:param name="completeId" value="${complete.completeId}"/>
