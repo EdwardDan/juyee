@@ -412,6 +412,8 @@
 	<model name="com.justonetech.cp.complete.model.CompleteProjectProfile">
 		<field name="completeId" type="long" />
 		<field name="bjbh" type="String" />
+		<field name="xmlx" type="long" />
+		<field name="jsgcsx" type="long" />
 		<field name="gcmc" type="String">
 			<hint name="max-length">500</hint>
 		</field>

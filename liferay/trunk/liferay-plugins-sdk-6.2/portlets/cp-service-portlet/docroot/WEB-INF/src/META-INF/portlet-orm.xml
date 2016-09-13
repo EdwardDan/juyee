@@ -451,6 +451,8 @@
 		<attributes>
 			<id name="completeId" />
 			<basic name="bjbh" />
+			<basic name="xmlx" />
+			<basic name="jsgcsx" />
 			<basic name="gcmc" />
 			<basic name="jsdwmc" />
 			<basic name="jsdwdz" />

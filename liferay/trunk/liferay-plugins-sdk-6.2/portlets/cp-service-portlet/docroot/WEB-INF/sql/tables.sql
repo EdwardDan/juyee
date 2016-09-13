@@ -40,6 +40,8 @@ create table cp_CompleteApplyMaterial (
 create table cp_CompleteProjectProfile (
 	completeId LONG not null primary key,
 	bjbh VARCHAR(75) null,
+	xmlx LONG,
+	jsgcsx LONG,
 	gcmc VARCHAR(500) null,
 	jsdwmc VARCHAR(500) null,
 	jsdwdz VARCHAR(500) null,

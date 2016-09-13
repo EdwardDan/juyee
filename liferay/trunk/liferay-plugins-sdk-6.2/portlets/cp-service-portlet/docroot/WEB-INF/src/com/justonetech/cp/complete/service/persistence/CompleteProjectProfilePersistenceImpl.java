@@ -331,6 +331,8 @@ public class CompleteProjectProfilePersistenceImpl extends BasePersistenceImpl<C
 
 		completeProjectProfileImpl.setCompleteId(completeProjectProfile.getCompleteId());
 		completeProjectProfileImpl.setBjbh(completeProjectProfile.getBjbh());
+		completeProjectProfileImpl.setXmlx(completeProjectProfile.getXmlx());
+		completeProjectProfileImpl.setJsgcsx(completeProjectProfile.getJsgcsx());
 		completeProjectProfileImpl.setGcmc(completeProjectProfile.getGcmc());
 		completeProjectProfileImpl.setJsdwmc(completeProjectProfile.getJsdwmc());
 		completeProjectProfileImpl.setJsdwdz(completeProjectProfile.getJsdwdz());

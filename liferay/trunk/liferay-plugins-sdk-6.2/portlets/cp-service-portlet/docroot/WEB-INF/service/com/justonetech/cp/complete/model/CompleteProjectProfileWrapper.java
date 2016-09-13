@@ -52,6 +52,8 @@ public class CompleteProjectProfileWrapper implements CompleteProjectProfile,
 
 		attributes.put("completeId", getCompleteId());
 		attributes.put("bjbh", getBjbh());
+		attributes.put("xmlx", getXmlx());
+		attributes.put("jsgcsx", getJsgcsx());
 		attributes.put("gcmc", getGcmc());
 		attributes.put("jsdwmc", getJsdwmc());
 		attributes.put("jsdwdz", getJsdwdz());
@@ -77,6 +79,18 @@ public class CompleteProjectProfileWrapper implements CompleteProjectProfile,
 
 		if (bjbh != null) {
 			setBjbh(bjbh);
+		}
+
+		Long xmlx = (Long)attributes.get("xmlx");
+
+		if (xmlx != null) {
+			setXmlx(xmlx);
+		}
+
+		Long jsgcsx = (Long)attributes.get("jsgcsx");
+
+		if (jsgcsx != null) {
+			setJsgcsx(jsgcsx);
 		}
 
 		String gcmc = (String)attributes.get("gcmc");
@@ -192,6 +206,46 @@ public class CompleteProjectProfileWrapper implements CompleteProjectProfile,
 	@Override
 	public void setBjbh(java.lang.String bjbh) {
 		_completeProjectProfile.setBjbh(bjbh);
+	}
+
+	/**
+	* Returns the xmlx of this complete project profile.
+	*
+	* @return the xmlx of this complete project profile
+	*/
+	@Override
+	public long getXmlx() {
+		return _completeProjectProfile.getXmlx();
+	}
+
+	/**
+	* Sets the xmlx of this complete project profile.
+	*
+	* @param xmlx the xmlx of this complete project profile
+	*/
+	@Override
+	public void setXmlx(long xmlx) {
+		_completeProjectProfile.setXmlx(xmlx);
+	}
+
+	/**
+	* Returns the jsgcsx of this complete project profile.
+	*
+	* @return the jsgcsx of this complete project profile
+	*/
+	@Override
+	public long getJsgcsx() {
+		return _completeProjectProfile.getJsgcsx();
+	}
+
+	/**
+	* Sets the jsgcsx of this complete project profile.
+	*
+	* @param jsgcsx the jsgcsx of this complete project profile
+	*/
+	@Override
+	public void setJsgcsx(long jsgcsx) {
+		_completeProjectProfile.setJsgcsx(jsgcsx);
 	}
 
 	/**

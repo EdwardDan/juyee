@@ -36,12 +36,16 @@ public class CompleteProjectProfileCacheModel implements CacheModel<CompleteProj
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(23);
+		StringBundler sb = new StringBundler(27);
 
 		sb.append("{completeId=");
 		sb.append(completeId);
 		sb.append(", bjbh=");
 		sb.append(bjbh);
+		sb.append(", xmlx=");
+		sb.append(xmlx);
+		sb.append(", jsgcsx=");
+		sb.append(jsgcsx);
 		sb.append(", gcmc=");
 		sb.append(gcmc);
 		sb.append(", jsdwmc=");
@@ -77,6 +81,9 @@ public class CompleteProjectProfileCacheModel implements CacheModel<CompleteProj
 		else {
 			completeProjectProfileImpl.setBjbh(bjbh);
 		}
+
+		completeProjectProfileImpl.setXmlx(xmlx);
+		completeProjectProfileImpl.setJsgcsx(jsgcsx);
 
 		if (gcmc == null) {
 			completeProjectProfileImpl.setGcmc(StringPool.BLANK);
@@ -150,6 +157,8 @@ public class CompleteProjectProfileCacheModel implements CacheModel<CompleteProj
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		completeId = objectInput.readLong();
 		bjbh = objectInput.readUTF();
+		xmlx = objectInput.readLong();
+		jsgcsx = objectInput.readLong();
 		gcmc = objectInput.readUTF();
 		jsdwmc = objectInput.readUTF();
 		jsdwdz = objectInput.readUTF();
@@ -172,6 +181,9 @@ public class CompleteProjectProfileCacheModel implements CacheModel<CompleteProj
 		else {
 			objectOutput.writeUTF(bjbh);
 		}
+
+		objectOutput.writeLong(xmlx);
+		objectOutput.writeLong(jsgcsx);
 
 		if (gcmc == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
@@ -239,6 +251,8 @@ public class CompleteProjectProfileCacheModel implements CacheModel<CompleteProj
 
 	public long completeId;
 	public String bjbh;
+	public long xmlx;
+	public long jsgcsx;
 	public String gcmc;
 	public String jsdwmc;
 	public String jsdwdz;

@@ -87,6 +87,34 @@ public interface CompleteProjectProfileModel extends BaseModel<CompleteProjectPr
 	public void setBjbh(String bjbh);
 
 	/**
+	 * Returns the xmlx of this complete project profile.
+	 *
+	 * @return the xmlx of this complete project profile
+	 */
+	public long getXmlx();
+
+	/**
+	 * Sets the xmlx of this complete project profile.
+	 *
+	 * @param xmlx the xmlx of this complete project profile
+	 */
+	public void setXmlx(long xmlx);
+
+	/**
+	 * Returns the jsgcsx of this complete project profile.
+	 *
+	 * @return the jsgcsx of this complete project profile
+	 */
+	public long getJsgcsx();
+
+	/**
+	 * Sets the jsgcsx of this complete project profile.
+	 *
+	 * @param jsgcsx the jsgcsx of this complete project profile
+	 */
+	public void setJsgcsx(long jsgcsx);
+
+	/**
 	 * Returns the gcmc of this complete project profile.
 	 *
 	 * @return the gcmc of this complete project profile

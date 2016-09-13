@@ -75,6 +75,8 @@ public class CompleteProjectProfileClp extends BaseModelImpl<CompleteProjectProf
 
 		attributes.put("completeId", getCompleteId());
 		attributes.put("bjbh", getBjbh());
+		attributes.put("xmlx", getXmlx());
+		attributes.put("jsgcsx", getJsgcsx());
 		attributes.put("gcmc", getGcmc());
 		attributes.put("jsdwmc", getJsdwmc());
 		attributes.put("jsdwdz", getJsdwdz());
@@ -100,6 +102,18 @@ public class CompleteProjectProfileClp extends BaseModelImpl<CompleteProjectProf
 
 		if (bjbh != null) {
 			setBjbh(bjbh);
+		}
+
+		Long xmlx = (Long)attributes.get("xmlx");
+
+		if (xmlx != null) {
+			setXmlx(xmlx);
+		}
+
+		Long jsgcsx = (Long)attributes.get("jsgcsx");
+
+		if (jsgcsx != null) {
+			setJsgcsx(jsgcsx);
 		}
 
 		String gcmc = (String)attributes.get("gcmc");
@@ -196,6 +210,52 @@ public class CompleteProjectProfileClp extends BaseModelImpl<CompleteProjectProf
 				Method method = clazz.getMethod("setBjbh", String.class);
 
 				method.invoke(_completeProjectProfileRemoteModel, bjbh);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public long getXmlx() {
+		return _xmlx;
+	}
+
+	@Override
+	public void setXmlx(long xmlx) {
+		_xmlx = xmlx;
+
+		if (_completeProjectProfileRemoteModel != null) {
+			try {
+				Class<?> clazz = _completeProjectProfileRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setXmlx", long.class);
+
+				method.invoke(_completeProjectProfileRemoteModel, xmlx);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public long getJsgcsx() {
+		return _jsgcsx;
+	}
+
+	@Override
+	public void setJsgcsx(long jsgcsx) {
+		_jsgcsx = jsgcsx;
+
+		if (_completeProjectProfileRemoteModel != null) {
+			try {
+				Class<?> clazz = _completeProjectProfileRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setJsgcsx", long.class);
+
+				method.invoke(_completeProjectProfileRemoteModel, jsgcsx);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -483,6 +543,8 @@ public class CompleteProjectProfileClp extends BaseModelImpl<CompleteProjectProf
 
 		clone.setCompleteId(getCompleteId());
 		clone.setBjbh(getBjbh());
+		clone.setXmlx(getXmlx());
+		clone.setJsgcsx(getJsgcsx());
 		clone.setGcmc(getGcmc());
 		clone.setJsdwmc(getJsdwmc());
 		clone.setJsdwdz(getJsdwdz());
@@ -544,12 +606,16 @@ public class CompleteProjectProfileClp extends BaseModelImpl<CompleteProjectProf
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(23);
+		StringBundler sb = new StringBundler(27);
 
 		sb.append("{completeId=");
 		sb.append(getCompleteId());
 		sb.append(", bjbh=");
 		sb.append(getBjbh());
+		sb.append(", xmlx=");
+		sb.append(getXmlx());
+		sb.append(", jsgcsx=");
+		sb.append(getJsgcsx());
 		sb.append(", gcmc=");
 		sb.append(getGcmc());
 		sb.append(", jsdwmc=");
@@ -575,7 +641,7 @@ public class CompleteProjectProfileClp extends BaseModelImpl<CompleteProjectProf
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(43);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.cp.complete.model.CompleteProjectProfile");
@@ -588,6 +654,14 @@ public class CompleteProjectProfileClp extends BaseModelImpl<CompleteProjectProf
 		sb.append(
 			"<column><column-name>bjbh</column-name><column-value><![CDATA[");
 		sb.append(getBjbh());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>xmlx</column-name><column-value><![CDATA[");
+		sb.append(getXmlx());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>jsgcsx</column-name><column-value><![CDATA[");
+		sb.append(getJsgcsx());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>gcmc</column-name><column-value><![CDATA[");
@@ -633,6 +707,8 @@ public class CompleteProjectProfileClp extends BaseModelImpl<CompleteProjectProf
 
 	private long _completeId;
 	private String _bjbh;
+	private long _xmlx;
+	private long _jsgcsx;
 	private String _gcmc;
 	private String _jsdwmc;
 	private String _jsdwdz;

@@ -43,6 +43,8 @@
 
 		<!-- Business fields -->
 		<column name="bjbh" type="String" /><!-- 报建编号 -->
+		<column name="xmlx" type="long" /><!--项目类型 -->
+		<column name="jsgcsx" type="long" /><!--建设工程属性 -->
 		<column name="gcmc" type="String" /><!-- 工程名称 -->
 		<column name="jsdwmc" type="String" /><!-- 建设单位名称 -->
 		<column name="jsdwdz" type="String" /><!-- 建设单位地址 -->

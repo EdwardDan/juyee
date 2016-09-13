@@ -60,6 +60,8 @@ public class CompleteProjectProfileModelImpl extends BaseModelImpl<CompleteProje
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "completeId", Types.BIGINT },
 			{ "bjbh", Types.VARCHAR },
+			{ "xmlx", Types.BIGINT },
+			{ "jsgcsx", Types.BIGINT },
 			{ "gcmc", Types.VARCHAR },
 			{ "jsdwmc", Types.VARCHAR },
 			{ "jsdwdz", Types.VARCHAR },
@@ -70,7 +72,7 @@ public class CompleteProjectProfileModelImpl extends BaseModelImpl<CompleteProje
 			{ "lxdh", Types.VARCHAR },
 			{ "bz", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table cp_CompleteProjectProfile (completeId LONG not null primary key,bjbh VARCHAR(75) null,gcmc VARCHAR(500) null,jsdwmc VARCHAR(500) null,jsdwdz VARCHAR(500) null,jsdd VARCHAR(500) null,szqx VARCHAR(75) null,fddbr VARCHAR(75) null,lxr VARCHAR(75) null,lxdh VARCHAR(75) null,bz VARCHAR(1000) null)";
+	public static final String TABLE_SQL_CREATE = "create table cp_CompleteProjectProfile (completeId LONG not null primary key,bjbh VARCHAR(75) null,xmlx LONG,jsgcsx LONG,gcmc VARCHAR(500) null,jsdwmc VARCHAR(500) null,jsdwdz VARCHAR(500) null,jsdd VARCHAR(500) null,szqx VARCHAR(75) null,fddbr VARCHAR(75) null,lxr VARCHAR(75) null,lxdh VARCHAR(75) null,bz VARCHAR(1000) null)";
 	public static final String TABLE_SQL_DROP = "drop table cp_CompleteProjectProfile";
 	public static final String ORDER_BY_JPQL = " ORDER BY completeProjectProfile.completeId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY cp_CompleteProjectProfile.completeId ASC";
@@ -126,6 +128,8 @@ public class CompleteProjectProfileModelImpl extends BaseModelImpl<CompleteProje
 
 		attributes.put("completeId", getCompleteId());
 		attributes.put("bjbh", getBjbh());
+		attributes.put("xmlx", getXmlx());
+		attributes.put("jsgcsx", getJsgcsx());
 		attributes.put("gcmc", getGcmc());
 		attributes.put("jsdwmc", getJsdwmc());
 		attributes.put("jsdwdz", getJsdwdz());
@@ -151,6 +155,18 @@ public class CompleteProjectProfileModelImpl extends BaseModelImpl<CompleteProje
 
 		if (bjbh != null) {
 			setBjbh(bjbh);
+		}
+
+		Long xmlx = (Long)attributes.get("xmlx");
+
+		if (xmlx != null) {
+			setXmlx(xmlx);
+		}
+
+		Long jsgcsx = (Long)attributes.get("jsgcsx");
+
+		if (jsgcsx != null) {
+			setJsgcsx(jsgcsx);
 		}
 
 		String gcmc = (String)attributes.get("gcmc");
@@ -231,6 +247,26 @@ public class CompleteProjectProfileModelImpl extends BaseModelImpl<CompleteProje
 	@Override
 	public void setBjbh(String bjbh) {
 		_bjbh = bjbh;
+	}
+
+	@Override
+	public long getXmlx() {
+		return _xmlx;
+	}
+
+	@Override
+	public void setXmlx(long xmlx) {
+		_xmlx = xmlx;
+	}
+
+	@Override
+	public long getJsgcsx() {
+		return _jsgcsx;
+	}
+
+	@Override
+	public void setJsgcsx(long jsgcsx) {
+		_jsgcsx = jsgcsx;
 	}
 
 	@Override
@@ -397,6 +433,8 @@ public class CompleteProjectProfileModelImpl extends BaseModelImpl<CompleteProje
 
 		completeProjectProfileImpl.setCompleteId(getCompleteId());
 		completeProjectProfileImpl.setBjbh(getBjbh());
+		completeProjectProfileImpl.setXmlx(getXmlx());
+		completeProjectProfileImpl.setJsgcsx(getJsgcsx());
 		completeProjectProfileImpl.setGcmc(getGcmc());
 		completeProjectProfileImpl.setJsdwmc(getJsdwmc());
 		completeProjectProfileImpl.setJsdwdz(getJsdwdz());
@@ -471,6 +509,10 @@ public class CompleteProjectProfileModelImpl extends BaseModelImpl<CompleteProje
 		if ((bjbh != null) && (bjbh.length() == 0)) {
 			completeProjectProfileCacheModel.bjbh = null;
 		}
+
+		completeProjectProfileCacheModel.xmlx = getXmlx();
+
+		completeProjectProfileCacheModel.jsgcsx = getJsgcsx();
 
 		completeProjectProfileCacheModel.gcmc = getGcmc();
 
@@ -549,12 +591,16 @@ public class CompleteProjectProfileModelImpl extends BaseModelImpl<CompleteProje
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(23);
+		StringBundler sb = new StringBundler(27);
 
 		sb.append("{completeId=");
 		sb.append(getCompleteId());
 		sb.append(", bjbh=");
 		sb.append(getBjbh());
+		sb.append(", xmlx=");
+		sb.append(getXmlx());
+		sb.append(", jsgcsx=");
+		sb.append(getJsgcsx());
 		sb.append(", gcmc=");
 		sb.append(getGcmc());
 		sb.append(", jsdwmc=");
@@ -580,7 +626,7 @@ public class CompleteProjectProfileModelImpl extends BaseModelImpl<CompleteProje
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(43);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.cp.complete.model.CompleteProjectProfile");
@@ -593,6 +639,14 @@ public class CompleteProjectProfileModelImpl extends BaseModelImpl<CompleteProje
 		sb.append(
 			"<column><column-name>bjbh</column-name><column-value><![CDATA[");
 		sb.append(getBjbh());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>xmlx</column-name><column-value><![CDATA[");
+		sb.append(getXmlx());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>jsgcsx</column-name><column-value><![CDATA[");
+		sb.append(getJsgcsx());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>gcmc</column-name><column-value><![CDATA[");
@@ -642,6 +696,8 @@ public class CompleteProjectProfileModelImpl extends BaseModelImpl<CompleteProje
 		};
 	private long _completeId;
 	private String _bjbh;
+	private long _xmlx;
+	private long _jsgcsx;
 	private String _gcmc;
 	private String _jsdwmc;
 	private String _jsdwdz;
