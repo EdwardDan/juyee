@@ -20,13 +20,11 @@
 <%
 	List<Dictionary> materialDictionaries=new ArrayList<Dictionary>();
 	List<CompleteApplyMaterial> completeApplyMaterialList=new ArrayList<CompleteApplyMaterial>();
-	/* Long completeId =ParamUtil.getLong(renderRequest,"completeId",0); */
-	Long completeId =1L;
+	 long completeId =ParamUtil.getLong(renderRequest,"completeId",0); 
 	if(Validator.isNotNull(completeId)){
 		  completeApplyMaterialList= CompleteApplyMaterialLocalServiceUtil.findByCompleteId(completeId, -1, -1);  
 		//对材料表进行初始化
 		if(completeApplyMaterialList.size()<=0){
-	
 	CompleteProjectProfile completeProjectProfile=CompleteProjectProfileLocalServiceUtil.fetchCompleteProjectProfile(completeId);
 	long xmlxId=completeProjectProfile.getXmlx();//项目类型
 	long jsgcsxId=completeProjectProfile.getJsgcsx();//建设工程属性
@@ -36,34 +34,33 @@
 		String xmlxCode=xmlxDictionary.getCode();
 		String jsgcsxCode=jsgcsxDictionary.getCode();
 		if(CpConstants.XJ.equals(jsgcsxCode)||CpConstants.KJ.equals(jsgcsxCode)||CpConstants.GJ.equals(jsgcsxCode)){//新改扩
-			if(CpConstants.GK.equals(xmlxCode)){ 
-				Dictionary gk_xgk_Dictionary=DictionaryLocalServiceUtil.findByCode(CpConstants.JG_GK_XGK);
-				materialDictionaries=DictionaryLocalServiceUtil.findByParentId(gk_xgk_Dictionary.getDictionaryId(), -1, -1);
+	if(CpConstants.GK.equals(xmlxCode)){ 
+		Dictionary gk_xgk_Dictionary=DictionaryLocalServiceUtil.findByCode(CpConstants.JG_GK_XGK);
+		materialDictionaries=DictionaryLocalServiceUtil.findByParentId(gk_xgk_Dictionary.getDictionaryId(), -1, -1);
 		}
-			if(CpConstants.HD.equals(xmlxCode)){
-				Dictionary hd_xgk_Dictionary=DictionaryLocalServiceUtil.findByCode(CpConstants.JG_HD_XGK);
-				materialDictionaries=DictionaryLocalServiceUtil.findByParentId(hd_xgk_Dictionary.getDictionaryId(), -1, -1);
-			}
-			if(CpConstants.GL.equals(xmlxCode)){
-				Dictionary gl_xgk_Dictionary=DictionaryLocalServiceUtil.findByCode(CpConstants.JG_GL_XGK);
-				materialDictionaries=DictionaryLocalServiceUtil.findByParentId(gl_xgk_Dictionary.getDictionaryId(), -1, -1);
-			}
-			if(CpConstants.SZ.equals(xmlxCode)){
-				Dictionary szjt_xgk_Dictionary=DictionaryLocalServiceUtil.findByCode(CpConstants.JG_SZJT_XGK);
-				materialDictionaries=DictionaryLocalServiceUtil.findByParentId(szjt_xgk_Dictionary.getDictionaryId(), -1, -1);
-			}
+	if(CpConstants.HD.equals(xmlxCode)){
+		Dictionary hd_xgk_Dictionary=DictionaryLocalServiceUtil.findByCode(CpConstants.JG_HD_XGK);
+		materialDictionaries=DictionaryLocalServiceUtil.findByParentId(hd_xgk_Dictionary.getDictionaryId(), -1, -1);
+	}
+	if(CpConstants.GL.equals(xmlxCode)){
+		Dictionary gl_xgk_Dictionary=DictionaryLocalServiceUtil.findByCode(CpConstants.JG_GL_XGK);
+		materialDictionaries=DictionaryLocalServiceUtil.findByParentId(gl_xgk_Dictionary.getDictionaryId(), -1, -1);
+	}
+	if(CpConstants.SZ.equals(xmlxCode)){
+		Dictionary szjt_xgk_Dictionary=DictionaryLocalServiceUtil.findByCode(CpConstants.JG_SZJT_XGK);
+		materialDictionaries=DictionaryLocalServiceUtil.findByParentId(szjt_xgk_Dictionary.getDictionaryId(), -1, -1);
+	}
 		}else{
-			if(CpConstants.GL.equals(xmlxCode)){
-				Dictionary gl_xgk_Dictionary=DictionaryLocalServiceUtil.findByCode(CpConstants.JG_GL_DX);
-				materialDictionaries=DictionaryLocalServiceUtil.findByParentId(gl_xgk_Dictionary.getDictionaryId(), -1, -1);
-			}
-			if(CpConstants.SZ.equals(xmlxCode)){
-				Dictionary szjt_xgk_Dictionary=DictionaryLocalServiceUtil.findByCode(CpConstants.JG_SZJT_DX);
-				materialDictionaries=DictionaryLocalServiceUtil.findByParentId(szjt_xgk_Dictionary.getDictionaryId(), -1, -1);
-			}
+	if(CpConstants.GL.equals(xmlxCode)){
+		Dictionary gl_xgk_Dictionary=DictionaryLocalServiceUtil.findByCode(CpConstants.JG_GL_DX);
+		materialDictionaries=DictionaryLocalServiceUtil.findByParentId(gl_xgk_Dictionary.getDictionaryId(), -1, -1);
+	}
+	if(CpConstants.SZ.equals(xmlxCode)){
+		Dictionary szjt_xgk_Dictionary=DictionaryLocalServiceUtil.findByCode(CpConstants.JG_SZJT_DX);
+		materialDictionaries=DictionaryLocalServiceUtil.findByParentId(szjt_xgk_Dictionary.getDictionaryId(), -1, -1);
+	}
 		}
 	}
-	
 	for(Dictionary dic: materialDictionaries){
 		CompleteApplyMaterial completeApplyMaterial=CompleteApplyMaterialLocalServiceUtil.createCompleteApplyMaterial(CounterLocalServiceUtil.increment());
 		 completeApplyMaterial.setCompleteId(completeId);
@@ -90,7 +87,7 @@
 </portlet:actionURL>
 
 
-<form id="fm" action="${fileSaveURL}" enctype="multipart/form-data"
+<aui:form id="fm" action="${fileSaveURL}" enctype="multipart/form-data"
 	method="post">
 
 	<aui:input type="hidden" name="completeId" value="<%=completeId%>"></aui:input>
@@ -149,33 +146,19 @@
 	</table>
 
 	<div style="text-align: center">
-		<aui:button value="保存" onclick="saveMaterials()"
+		<aui:button type="submit" value="保存" onclick="${fileSaveURL}"
 			cssClass="btn btn-primary" />
-		<aui:button value="上报" onclick="submitAll()"
+		<aui:button type="submit" value="上报"
+			onclick="${namespace }fm.action='${submitAllURL }'"
 			cssClass="btn btn-primary" />
 	</div>
 
 
-</form>
+</aui:form>
 
 <form id="fmFile" enctype="multipart/form-data" method="post"></form>
 
 <script>
-	function saveMaterials(){
-		document.getElementById("fm").action='${fileSaveURL}';
-		document.getElementById("fm").submit();
-	}
-
-	function submitAll(){
-		document.getElementById("fm").action='${submitAllURL}';
-		document.getElementById("fm").submit();
-		
-	}
-
-
-
-
-
 	//文件类型和大小的验证
 	function fileValidator(inputFileId){
 		 var fileInput = $("#"+inputFileId)[0];
@@ -201,9 +184,6 @@
 	     return true;
 	 }
 
-
-
-	
 		
 	/* 上传 */
 	function <portlet:namespace/>fileUpLoad(divNo,materialId,portletId) {
