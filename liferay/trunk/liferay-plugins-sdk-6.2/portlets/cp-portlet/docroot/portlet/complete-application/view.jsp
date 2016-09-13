@@ -1,6 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
-
 <c:set var="contextPath"
 	value="${request.contextPath}/portlet/complete-application" />
 <portlet:renderURL var="searchURL">
@@ -68,6 +67,7 @@
 				%>
 				<liferay-portlet:renderURL varImpl="rowURL">
 					<portlet:param name="completeId" value="${complete.completeId}" />
+					<portlet:param name="bjbh" value="${complete.bjbh}" />
 					<portlet:param name="mvcPath"
 						value="${contextPath }/edit-complete.jsp" />
 				</liferay-portlet:renderURL>
@@ -86,17 +86,12 @@
 				</liferay-ui:search-container-column-text>
 				<liferay-ui:search-container-column-text property="babh" name="状态" value="${complete.sqbz}"/>
 				<liferay-ui:search-container-column-text name="action">
-					<portlet:renderURL var="viewCompleteURL">
-						<portlet:param name="completeId" value="${complete.completeId}"/>
-						<portlet:param name="mvcPath" value="${contextPath }/view-complete.jsp"/>
-					</portlet:renderURL>
 					<portlet:actionURL var="deleteCompleteURL" name="deleteComplete">
 						<portlet:param name="completeId" value="${complete.completeId}"/>
 						<portlet:param name="redirect" value="${viewURL }" />
 					</portlet:actionURL>
 					<liferay-ui:icon-menu>
 						<liferay-ui:icon image="edit" url="${rowURL}"/>
-						<liferay-ui:icon image="view" url="${viewCompleteURL}"/>
 						<liferay-ui:icon-delete url="${deleteCompleteURL}"/>
 					</liferay-ui:icon-menu>
 				</liferay-ui:search-container-column-text>
