@@ -1,6 +1,8 @@
 package com.justonetech.cp.portlet;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -11,27 +13,45 @@ import javax.portlet.ActionResponse;
 import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+import javax.portlet.ResourceRequest;
+import javax.portlet.ResourceResponse;
+import javax.servlet.http.HttpServletResponse;
 
 import com.justonetech.cp.complete.model.Complete;
+import com.justonetech.cp.complete.model.CompleteApplyMaterial;
 import com.justonetech.cp.complete.model.CompleteProjectProfile;
+import com.justonetech.cp.complete.service.CompleteApplyMaterialLocalServiceUtil;
 import com.justonetech.cp.complete.service.CompleteLocalServiceUtil;
 import com.justonetech.cp.complete.service.CompleteProjectProfileLocalServiceUtil;
 import com.justonetech.cp.permit.model.Permit;
 import com.justonetech.cp.project.model.Project;
 import com.justonetech.cp.project.service.ProjectLocalServiceUtil;
-import com.liferay.counter.model.Counter;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.repository.model.FileEntry;
+import com.liferay.portal.kernel.search.ParseException;
+import com.liferay.portal.kernel.upload.UploadPortletRequest;
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.model.DLFileEntryTypeConstants;
+import com.liferay.portlet.documentlibrary.model.DLFolder;
+import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 public class CompleteApplicationPortlet extends MVCPortlet {
@@ -174,8 +194,9 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 		CompleteProjectProfileLocalServiceUtil.deleteCompleteProjectProfile(CompleteProjectProfileLocalServiceUtil
 				.getCompleteProjectProfile(completeId));
 	}
-	
-	public void redirect(ActionRequest request, ActionResponse response, Complete complete, int sqbz) throws IOException {
+
+	public void redirect(ActionRequest request, ActionResponse response, Complete complete, int sqbz)
+			throws IOException {
 
 		String redirect = ParamUtil.getString(request, "redirectURL");
 		int tabSqbz = 1;
@@ -190,4 +211,166 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 		redirect += "&" + response.getNamespace() + "tabSqbz=" + tabSqbz;
 		response.sendRedirect(redirect);
 	}
+
+	
+	public void saveCompleteApplyMaterials(ActionRequest request, ActionResponse response) throws SystemException,
+			PortalException, ParseException, IOException {
+		long completeId = ParamUtil.getLong(request, "completeId");
+		Complete complete = CompleteLocalServiceUtil.getComplete(completeId);
+		if (complete.getSqbz() == 3) {
+			complete.setSqbz(4);
+		}
+		CompleteLocalServiceUtil.updateComplete(complete);
+		// redirect(request, response, permit, 4);
+	}
+
+	@Override
+	public void serveResource(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException,
+			PortletException {
+		// TODO Auto-generated method stub
+
+		try {
+			String resourceId = resourceRequest.getResourceID();
+			String fileSourceName = "";
+			// 上传文件
+			if ("fileUpLoad".equals(resourceId)) {
+				UploadPortletRequest uploadPortletRequest = PortalUtil.getUploadPortletRequest(resourceRequest);
+
+				ServiceContext serviceContext;
+				com.liferay.portal.kernel.json.JSONObject fileJson = JSONFactoryUtil.createJSONObject();
+				serviceContext = ServiceContextFactory.getInstance(Permit.class.getName(), resourceRequest);
+				FileEntry fileEntry = null;
+				// 对应的是第几类材料的div
+				String divNo = ParamUtil.get(resourceRequest, "divNo", "");
+				// 文件材料的名称编号
+				String no = ParamUtil.get(resourceRequest, "no", "");
+				String fileExtension = ParamUtil.get(resourceRequest, "fileExtension", "");
+				String materialId = ParamUtil.get(resourceRequest, "materialId", "0");
+				String portletId = ParamUtil.get(resourceRequest, "portletId", "");
+				fileSourceName = uploadPortletRequest.getFileName("userfile");
+				InputStream stream = uploadPortletRequest.getFileAsStream("userfile");
+
+				/*
+				 * fileSourceName =
+				 * uploadPortletRequest.getFileName("fileInput"+divNo);
+				 * InputStream stream =
+				 * uploadPortletRequest.getFileAsStream("fileInput"+divNo);
+				 */
+				byte[] fileBytes = null;
+				if (null != stream) {
+					fileBytes = FileUtil.getBytes(stream);
+				}
+				if (!materialId.equals("0")) {
+					CompleteApplyMaterial completeApplyMaterial = CompleteApplyMaterialLocalServiceUtil
+							.getCompleteApplyMaterial(Long.valueOf(materialId));
+					String fileTitle = completeApplyMaterial.getClmc() + "-" + no + "." + fileExtension;
+
+					fileEntry = uploadFile(resourceRequest, fileSourceName, fileBytes, serviceContext, portletId,
+							materialId, fileTitle);
+
+					String fileEntryIds = completeApplyMaterial.getFileEntryIds();
+					// 添加第一条数据时
+					if (Validator.isNull(fileEntryIds)) {
+						fileEntryIds = fileEntry.getFileEntryId() + "|" + fileEntry.getExtension();
+					}
+					// 如果已有数据
+					else {
+						fileEntryIds = fileEntryIds + "," + fileEntry.getFileEntryId() + "|" + fileEntry.getExtension();
+						fileJson.put("fileId", fileEntry.getFileEntryId());
+					}
+					completeApplyMaterial.setFileEntryIds(fileEntryIds);
+					CompleteApplyMaterialLocalServiceUtil.updateCompleteApplyMaterial(completeApplyMaterial);
+					fileJson.put("materialName", completeApplyMaterial.getClmc());
+				}
+
+				HttpServletResponse response = PortalUtil.getHttpServletResponse(resourceResponse);
+				response.setContentType("text/html;charset=UTF-8");
+				PrintWriter out = null;
+				out = response.getWriter();
+				out.print(fileJson.toString());
+				out.flush();
+				out.close();
+			}
+
+			// 删除文件
+			if ("fileDelete".equals(resourceId)) {
+				String fileId = ParamUtil.get(resourceRequest, "fileId", "0");
+				String materialId = ParamUtil.get(resourceRequest, "materialId", "0");
+				if (!fileId.equals("0")) {
+					DLFileEntry dlFileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(fileId));
+					if (!materialId.equals("0")) {
+						CompleteApplyMaterial completeApplyMaterial = CompleteApplyMaterialLocalServiceUtil
+								.getCompleteApplyMaterial(Long.valueOf(materialId));
+						String fileEntryIds = completeApplyMaterial.getFileEntryIds();
+						fileEntryIds = fileEntryIds + ",";// 加上逗号为了容易替换
+						// 获取文件路径
+						String filePath = getFilePath(Long.valueOf(fileId));
+						String str = fileId + "\\|" + dlFileEntry.getExtension() + "\\,";
+						fileEntryIds = fileEntryIds.replaceFirst(str, "");
+						if (Validator.isNotNull(fileEntryIds)) {
+							fileEntryIds = fileEntryIds.substring(0, fileEntryIds.length() - 1);// 最后一步再把逗号去掉
+						}
+						completeApplyMaterial.setFileEntryIds(fileEntryIds);
+						CompleteApplyMaterialLocalServiceUtil.updateCompleteApplyMaterial(completeApplyMaterial);
+					}
+					DLFileEntryLocalServiceUtil.deleteDLFileEntry(Long.valueOf(fileId));
+				}
+			}
+
+		} catch (PortalException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		super.serveResource(resourceRequest, resourceResponse);
+	}
+
+	public FileEntry uploadFile(ResourceRequest request, String fileSourceName, byte[] fileBytes,
+			ServiceContext serviceContext, String portletId, String materialId, String fileTitle)
+			throws PortalException, SystemException, IOException {
+		User user = PortalUtil.getUser(request);
+		long userId = user.getUserId();
+		Long groupId = user.getGroupId();
+		Long rootFolderId = DLFileEntryTypeConstants.FILE_ENTRY_TYPE_ID_BASIC_DOCUMENT;
+		FileEntry fileEntry = null;
+		// 为每一种材料名称创建一个文件夹,如果已有就不再创建
+		DLFolder dlParentFolder = null;
+		DLFolder dlChildFolder = null;
+		if (Validator.isNotNull(portletId) && Validator.isNotNull(materialId)) {
+			dlParentFolder = DLFolderLocalServiceUtil.fetchFolder(groupId, rootFolderId, portletId);
+
+			if (Validator.isNotNull(dlParentFolder)) {
+				dlChildFolder = DLFolderLocalServiceUtil.fetchFolder(groupId, dlParentFolder.getFolderId(), materialId);
+				if (Validator.isNull(dlChildFolder)) {
+					dlChildFolder = DLFolderLocalServiceUtil.addFolder(userId, groupId, groupId, false,
+							dlParentFolder.getFolderId(), materialId, "", false, serviceContext);
+				}
+			} else {
+				dlParentFolder = DLFolderLocalServiceUtil.addFolder(userId, groupId, groupId, true, rootFolderId,
+						portletId, "", true, serviceContext);
+				dlChildFolder = DLFolderLocalServiceUtil.addFolder(userId, groupId, groupId, false,
+						dlParentFolder.getFolderId(), materialId, "", false, serviceContext);
+			}
+		}
+
+		if (fileBytes != null) {
+			fileEntry = DLAppLocalServiceUtil.addFileEntry(userId, groupId, dlChildFolder.getFolderId(),
+					fileSourceName, MimeTypesUtil.getContentType(fileSourceName), fileTitle, null, null, fileBytes,
+					serviceContext);
+		}
+		return fileEntry;
+	}
+
+	public static String getFilePath(Long fileEntryId) throws PortalException, SystemException {
+		if (Validator.isNotNull(fileEntryId)) {
+			DLFileEntry dLFileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(fileEntryId);
+			return dLFileEntry.getGroupId() + "/" + dLFileEntry.getFolderId() + "/" + dLFileEntry.getTitle();
+		} else
+			return "";
+	}
+
 }
