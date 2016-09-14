@@ -1,92 +1,5 @@
-<%@page
-	import="com.justonetech.cp.contract.service.ContractLocalServiceUtil"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ include file="/common/init.jsp"%>
-<%
-	String contractId = ParamUtil.getString(request, "bjbh");
-	Contract contract = ContractLocalServiceUtil.getContract(contractId);
-	request.setAttribute("contract", contract);
-%>
-<portlet:renderURL var="viewURL" />
-<liferay-ui:header title="查看详细信息" backURL="${viewURL}" />
-<style type="text/css">
-table {
-	width: 100%
-}
-
-tr.head  td {
-	text-align: center;
-	font-size: 16px;
-	font-family: "宋体";
-	font-weight: bold;
-}
-
-tr.body td.title {
-	width: 20%;
-	text-align: right;
-}
-
-tr.body td.content {
-	width: 30%;
-	background-color: white;
-}
-
-td.content span {
-	font-weight: bold;
-	color: #104E8B;
-}
-</style>
-<!-- 施工总包合同详细信息 -->
-<liferay-ui:panel-container accordion="false" extended="true">
-	<liferay-ui:panel title="项目信息" collapsible="false">
-		<table class="table table-bordered">
-			<tr class="body">
-				<td class="title">报建编号</td>
-				<td class="content">${contract.bjbh}</td>
-				<td class="title">所在地区</td>
-				<td class="content">${contract.szdq}</td>
-			</tr>
-			<tr class="body">
-				<td class="title">项目名称</td>
-				<td class="content" colspan="3">${contract.xmmc}</td>
-			</tr>
-			<tr class="body">
-				<td class="title">建设单位</td>
-				<td class="content" colspan="3">${contract.jsdw}</td>
-			</tr>
-			<tr class="body">
-				<td class="title">建设地点</td>
-				<td class="content" colspan="3">${contract.jsdd}</td>
-			</tr>
-			<tr class="body">
-				<td class="title">立项批文</td>
-				<td class="content">${contract.lxpw}</td>
-				<td class="title">批准文号</td>
-				<td class="content">${contract.pzwh}</td>
-			</tr>
-			<tr class="body">
-				<td class="title">单位性质</td>
-				<td class="content">${contract.dwxz}</td>
-				<td class="title">资金来源构成</td>
-				<td class="content">${contract.zjlygc}</td>
-			</tr>
-			<tr class="body">
-				<td class="title">总投资(万元)</td>
-				<td class="content">${contract.ztz}</td>
-				<td class="title">总建筑面积(㎡)</td>
-				<td class="content">${contract.zmj}</td>
-			</tr>
-			<tr class="body">
-				<td class="title">项目分类</td>
-				<td class="content">${contract.xmfl}</td>
-				<td class="title">建设规模</td>
-				<td class="content">${contract.jsgm}</td>
-			</tr>
-		</table>
-	</liferay-ui:panel>
-	<liferay-ui:panel title="合同信息报送编号:${contract.contractId}"
-		collapsible="false">
-		<table class="table table-bordered">
+<table class="table table-bordered">
 			<tr class="body">
 				<td class="title">施工标段号</td>
 				<td class="content">${contract.bdh}</td>
@@ -188,5 +101,3 @@ td.content span {
 				<td class="content" colspan="3">${contract.zxsm}</td>
 			</tr>
 		</table>
-	</liferay-ui:panel>
-</liferay-ui:panel-container>

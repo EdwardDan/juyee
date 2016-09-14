@@ -59,20 +59,7 @@
 				keyProperty="contractId" modelVar="contract">
 				<liferay-portlet:renderURL varImpl="rowURL">
 					<portlet:param name="bjbh" value="${contract.contractId}" />
-					<c:if
-						test="<%=contract.getHtbh()!=null && contract.getHtbh().length()>=2 && contract.getHtbh().substring(0, 2).equals(\"CZ\")%>">
-						<portlet:param name="mvcPath" value="${contextPath}/view-contract-cz.jsp" /> 
-					</c:if>
-					<c:if
-						test="<%=contract.getHtbh()!=null && contract.getHtbh().length()>=2 && contract.getHtbh().substring(0, 2).equals(\"VZ\")%>">
-						<portlet:param name="mvcPath"
-							value="${contextPath}/view-contract-vz.jsp" />
-					</c:if>
-					<c:if
-						test="<%=contract.getHtbh()!=null && contract.getHtbh().length()>=2 && contract.getHtbh().substring(0, 2).equals(\"WZ\")%>">
-						<portlet:param name="mvcPath"
-							value="${contextPath}/view-contract-wz.jsp" />
-					</c:if>
+						<portlet:param name="mvcPath" value="${contextPath}/view-contract.jsp" /> 
 				</liferay-portlet:renderURL>
 				<liferay-ui:search-container-column-text name="序号"
 					value="<%=String.valueOf(++sortNo)%>" />
