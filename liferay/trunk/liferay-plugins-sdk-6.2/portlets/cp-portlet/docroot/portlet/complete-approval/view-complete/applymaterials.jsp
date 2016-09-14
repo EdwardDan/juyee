@@ -1,7 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
 <%@ include file="../init.jsp"%>
-<link rel="stylesheet" href="/static/viewer-master/viewer.min.css">
 
 <style>
 .aui .table th, .aui .table td {
