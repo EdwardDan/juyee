@@ -78,7 +78,6 @@ create table cp_Contract (
 	lwfbhtbh VARCHAR(75) null,
 	htlx VARCHAR(75) null,
 	htzt VARCHAR(75) null,
-	zfbgx VARCHAR(75) null,
 	sfsl VARCHAR(75) null,
 	zxbz VARCHAR(75) null,
 	state_ VARCHAR(75) null,

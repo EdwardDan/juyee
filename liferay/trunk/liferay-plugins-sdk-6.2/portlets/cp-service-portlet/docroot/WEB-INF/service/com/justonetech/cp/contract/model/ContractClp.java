@@ -84,7 +84,6 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 		attributes.put("lwfbhtbh", getLwfbhtbh());
 		attributes.put("htlx", getHtlx());
 		attributes.put("htzt", getHtzt());
-		attributes.put("zfbgx", getZfbgx());
 		attributes.put("sfsl", getSfsl());
 		attributes.put("zxbz", getZxbz());
 		attributes.put("state", getState());
@@ -223,12 +222,6 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 
 		if (htzt != null) {
 			setHtzt(htzt);
-		}
-
-		String zfbgx = (String)attributes.get("zfbgx");
-
-		if (zfbgx != null) {
-			setZfbgx(zfbgx);
 		}
 
 		String sfsl = (String)attributes.get("sfsl");
@@ -886,29 +879,6 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 				Method method = clazz.getMethod("setHtzt", String.class);
 
 				method.invoke(_contractRemoteModel, htzt);
-			}
-			catch (Exception e) {
-				throw new UnsupportedOperationException(e);
-			}
-		}
-	}
-
-	@Override
-	public String getZfbgx() {
-		return _zfbgx;
-	}
-
-	@Override
-	public void setZfbgx(String zfbgx) {
-		_zfbgx = zfbgx;
-
-		if (_contractRemoteModel != null) {
-			try {
-				Class<?> clazz = _contractRemoteModel.getClass();
-
-				Method method = clazz.getMethod("setZfbgx", String.class);
-
-				method.invoke(_contractRemoteModel, zfbgx);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -2560,7 +2530,6 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 		clone.setLwfbhtbh(getLwfbhtbh());
 		clone.setHtlx(getHtlx());
 		clone.setHtzt(getHtzt());
-		clone.setZfbgx(getZfbgx());
 		clone.setSfsl(getSfsl());
 		clone.setZxbz(getZxbz());
 		clone.setState(getState());
@@ -2681,7 +2650,7 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(161);
+		StringBundler sb = new StringBundler(159);
 
 		sb.append("{contractId=");
 		sb.append(getContractId());
@@ -2705,8 +2674,6 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 		sb.append(getHtlx());
 		sb.append(", htzt=");
 		sb.append(getHtzt());
-		sb.append(", zfbgx=");
-		sb.append(getZfbgx());
 		sb.append(", sfsl=");
 		sb.append(getSfsl());
 		sb.append(", zxbz=");
@@ -2850,7 +2817,7 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(244);
+		StringBundler sb = new StringBundler(241);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.cp.contract.model.Contract");
@@ -2899,10 +2866,6 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 		sb.append(
 			"<column><column-name>htzt</column-name><column-value><![CDATA[");
 		sb.append(getHtzt());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>zfbgx</column-name><column-value><![CDATA[");
-		sb.append(getZfbgx());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>sfsl</column-name><column-value><![CDATA[");
@@ -3193,7 +3156,6 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 	private String _lwfbhtbh;
 	private String _htlx;
 	private String _htzt;
-	private String _zfbgx;
 	private String _sfsl;
 	private String _zxbz;
 	private String _state;

@@ -66,7 +66,6 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 			{ "lwfbhtbh", Types.VARCHAR },
 			{ "htlx", Types.VARCHAR },
 			{ "htzt", Types.VARCHAR },
-			{ "zfbgx", Types.VARCHAR },
 			{ "sfsl", Types.VARCHAR },
 			{ "zxbz", Types.VARCHAR },
 			{ "state_", Types.VARCHAR },
@@ -136,7 +135,7 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 			{ "zxsj", Types.TIMESTAMP },
 			{ "zxsm", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table cp_Contract (contractId VARCHAR(75) not null primary key,zzjgdm VARCHAR(75) null,htlb VARCHAR(75) null,id_ VARCHAR(75) null,htid VARCHAR(75) null,htbh VARCHAR(75) null,zbhtbh VARCHAR(75) null,fbhtbh VARCHAR(75) null,lwfbhtbh VARCHAR(75) null,htlx VARCHAR(75) null,htzt VARCHAR(75) null,zfbgx VARCHAR(75) null,sfsl VARCHAR(75) null,zxbz VARCHAR(75) null,state_ VARCHAR(75) null,bssj DATE null,slsj DATE null,bjbh VARCHAR(75) null,szdq VARCHAR(75) null,xmmc VARCHAR(75) null,jsdw VARCHAR(75) null,jsdd VARCHAR(300) null,lxpw VARCHAR(300) null,pzwh VARCHAR(75) null,dwxz VARCHAR(75) null,zjlygc VARCHAR(75) null,ztz VARCHAR(75) null,zmj VARCHAR(75) null,xmfl VARCHAR(75) null,jsgm VARCHAR(300) null,bdh VARCHAR(75) null,fbfs VARCHAR(75) null,cbfs VARCHAR(75) null,zycbht VARCHAR(75) null,zygclb VARCHAR(75) null,htmc VARCHAR(75) null,fbdw VARCHAR(75) null,cbdw VARCHAR(300) null,sjdw VARCHAR(75) null,xmfzr VARCHAR(75) null,xmfzrzjlx VARCHAR(75) null,xmfzrzjh VARCHAR(75) null,sjfzr VARCHAR(75) null,sjfzrzjlx VARCHAR(75) null,sjfzrzjh VARCHAR(75) null,kcdw VARCHAR(75) null,kcfzr VARCHAR(75) null,kcfzrzjlx VARCHAR(75) null,kcfzrzjh VARCHAR(75) null,sgdw VARCHAR(75) null,sgfzr VARCHAR(75) null,sgfzrzjlx VARCHAR(75) null,sgfzrzjh VARCHAR(75) null,xmlb VARCHAR(75) null,gclb VARCHAR(75) null,gcgm VARCHAR(300) null,sjxmlb VARCHAR(75) null,sjgclb VARCHAR(75) null,sjgcgm VARCHAR(75) null,sgxmlb VARCHAR(75) null,sggclb VARCHAR(75) null,sggcgm VARCHAR(75) null,kgrq DATE null,jgrq DATE null,jsfs VARCHAR(75) null,htj VARCHAR(75) null,sjf VARCHAR(75) null,kcf VARCHAR(75) null,jazj VARCHAR(75) null,zlje VARCHAR(75) null,zgj VARCHAR(75) null,wmcsf VARCHAR(75) null,htqdrq DATE null,htqzrq VARCHAR(300) null,cbnr VARCHAR(300) null,htsfwbmc VARCHAR(75) null,bz VARCHAR(300) null,sfzx VARCHAR(75) null,zxsj DATE null,zxsm VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table cp_Contract (contractId VARCHAR(75) not null primary key,zzjgdm VARCHAR(75) null,htlb VARCHAR(75) null,id_ VARCHAR(75) null,htid VARCHAR(75) null,htbh VARCHAR(75) null,zbhtbh VARCHAR(75) null,fbhtbh VARCHAR(75) null,lwfbhtbh VARCHAR(75) null,htlx VARCHAR(75) null,htzt VARCHAR(75) null,sfsl VARCHAR(75) null,zxbz VARCHAR(75) null,state_ VARCHAR(75) null,bssj DATE null,slsj DATE null,bjbh VARCHAR(75) null,szdq VARCHAR(75) null,xmmc VARCHAR(75) null,jsdw VARCHAR(75) null,jsdd VARCHAR(300) null,lxpw VARCHAR(300) null,pzwh VARCHAR(75) null,dwxz VARCHAR(75) null,zjlygc VARCHAR(75) null,ztz VARCHAR(75) null,zmj VARCHAR(75) null,xmfl VARCHAR(75) null,jsgm VARCHAR(300) null,bdh VARCHAR(75) null,fbfs VARCHAR(75) null,cbfs VARCHAR(75) null,zycbht VARCHAR(75) null,zygclb VARCHAR(75) null,htmc VARCHAR(75) null,fbdw VARCHAR(75) null,cbdw VARCHAR(300) null,sjdw VARCHAR(75) null,xmfzr VARCHAR(75) null,xmfzrzjlx VARCHAR(75) null,xmfzrzjh VARCHAR(75) null,sjfzr VARCHAR(75) null,sjfzrzjlx VARCHAR(75) null,sjfzrzjh VARCHAR(75) null,kcdw VARCHAR(75) null,kcfzr VARCHAR(75) null,kcfzrzjlx VARCHAR(75) null,kcfzrzjh VARCHAR(75) null,sgdw VARCHAR(75) null,sgfzr VARCHAR(75) null,sgfzrzjlx VARCHAR(75) null,sgfzrzjh VARCHAR(75) null,xmlb VARCHAR(75) null,gclb VARCHAR(75) null,gcgm VARCHAR(300) null,sjxmlb VARCHAR(75) null,sjgclb VARCHAR(75) null,sjgcgm VARCHAR(75) null,sgxmlb VARCHAR(75) null,sggclb VARCHAR(75) null,sggcgm VARCHAR(75) null,kgrq DATE null,jgrq DATE null,jsfs VARCHAR(75) null,htj VARCHAR(75) null,sjf VARCHAR(75) null,kcf VARCHAR(75) null,jazj VARCHAR(75) null,zlje VARCHAR(75) null,zgj VARCHAR(75) null,wmcsf VARCHAR(75) null,htqdrq DATE null,htqzrq VARCHAR(300) null,cbnr VARCHAR(300) null,htsfwbmc VARCHAR(75) null,bz VARCHAR(300) null,sfzx VARCHAR(75) null,zxsj DATE null,zxsm VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table cp_Contract";
 	public static final String ORDER_BY_JPQL = " ORDER BY contract.contractId DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY cp_Contract.contractId DESC";
@@ -201,7 +200,6 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 		attributes.put("lwfbhtbh", getLwfbhtbh());
 		attributes.put("htlx", getHtlx());
 		attributes.put("htzt", getHtzt());
-		attributes.put("zfbgx", getZfbgx());
 		attributes.put("sfsl", getSfsl());
 		attributes.put("zxbz", getZxbz());
 		attributes.put("state", getState());
@@ -340,12 +338,6 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 
 		if (htzt != null) {
 			setHtzt(htzt);
-		}
-
-		String zfbgx = (String)attributes.get("zfbgx");
-
-		if (zfbgx != null) {
-			setZfbgx(zfbgx);
 		}
 
 		String sfsl = (String)attributes.get("sfsl");
@@ -920,21 +912,6 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 	@Override
 	public void setHtzt(String htzt) {
 		_htzt = htzt;
-	}
-
-	@Override
-	public String getZfbgx() {
-		if (_zfbgx == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _zfbgx;
-		}
-	}
-
-	@Override
-	public void setZfbgx(String zfbgx) {
-		_zfbgx = zfbgx;
 	}
 
 	@Override
@@ -1952,7 +1929,6 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 		contractImpl.setLwfbhtbh(getLwfbhtbh());
 		contractImpl.setHtlx(getHtlx());
 		contractImpl.setHtzt(getHtzt());
-		contractImpl.setZfbgx(getZfbgx());
 		contractImpl.setSfsl(getSfsl());
 		contractImpl.setZxbz(getZxbz());
 		contractImpl.setState(getState());
@@ -2163,14 +2139,6 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 
 		if ((htzt != null) && (htzt.length() == 0)) {
 			contractCacheModel.htzt = null;
-		}
-
-		contractCacheModel.zfbgx = getZfbgx();
-
-		String zfbgx = contractCacheModel.zfbgx;
-
-		if ((zfbgx != null) && (zfbgx.length() == 0)) {
-			contractCacheModel.zfbgx = null;
 		}
 
 		contractCacheModel.sfsl = getSfsl();
@@ -2728,7 +2696,7 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(161);
+		StringBundler sb = new StringBundler(159);
 
 		sb.append("{contractId=");
 		sb.append(getContractId());
@@ -2752,8 +2720,6 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 		sb.append(getHtlx());
 		sb.append(", htzt=");
 		sb.append(getHtzt());
-		sb.append(", zfbgx=");
-		sb.append(getZfbgx());
 		sb.append(", sfsl=");
 		sb.append(getSfsl());
 		sb.append(", zxbz=");
@@ -2897,7 +2863,7 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(244);
+		StringBundler sb = new StringBundler(241);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.cp.contract.model.Contract");
@@ -2946,10 +2912,6 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 		sb.append(
 			"<column><column-name>htzt</column-name><column-value><![CDATA[");
 		sb.append(getHtzt());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>zfbgx</column-name><column-value><![CDATA[");
-		sb.append(getZfbgx());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>sfsl</column-name><column-value><![CDATA[");
@@ -3244,7 +3206,6 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 	private String _lwfbhtbh;
 	private String _htlx;
 	private String _htzt;
-	private String _zfbgx;
 	private String _sfsl;
 	private String _zxbz;
 	private String _state;

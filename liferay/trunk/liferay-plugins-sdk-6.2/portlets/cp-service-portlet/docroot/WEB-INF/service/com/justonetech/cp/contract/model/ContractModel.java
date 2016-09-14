@@ -225,21 +225,6 @@ public interface ContractModel extends BaseModel<Contract> {
 	public void setHtzt(String htzt);
 
 	/**
-	 * Returns the zfbgx of this contract.
-	 *
-	 * @return the zfbgx of this contract
-	 */
-	@AutoEscape
-	public String getZfbgx();
-
-	/**
-	 * Sets the zfbgx of this contract.
-	 *
-	 * @param zfbgx the zfbgx of this contract
-	 */
-	public void setZfbgx(String zfbgx);
-
-	/**
 	 * Returns the sfsl of this contract.
 	 *
 	 * @return the sfsl of this contract

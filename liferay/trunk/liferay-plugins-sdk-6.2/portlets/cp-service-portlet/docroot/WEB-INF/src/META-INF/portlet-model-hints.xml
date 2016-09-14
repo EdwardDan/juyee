@@ -200,7 +200,6 @@
 		<field name="lwfbhtbh" type="String" />
 		<field name="htlx" type="String" />
 		<field name="htzt" type="String" />
-		<field name="zfbgx" type="String" />
 		<field name="sfsl" type="String" />
 		<field name="zxbz" type="String" />
 		<field name="state" type="String" />

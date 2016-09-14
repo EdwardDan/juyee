@@ -37,7 +37,7 @@ import java.util.Date;
 public class ContractCacheModel implements CacheModel<Contract>, Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(161);
+		StringBundler sb = new StringBundler(159);
 
 		sb.append("{contractId=");
 		sb.append(contractId);
@@ -61,8 +61,6 @@ public class ContractCacheModel implements CacheModel<Contract>, Externalizable 
 		sb.append(htlx);
 		sb.append(", htzt=");
 		sb.append(htzt);
-		sb.append(", zfbgx=");
-		sb.append(zfbgx);
 		sb.append(", sfsl=");
 		sb.append(sfsl);
 		sb.append(", zxbz=");
@@ -283,13 +281,6 @@ public class ContractCacheModel implements CacheModel<Contract>, Externalizable 
 		}
 		else {
 			contractImpl.setHtzt(htzt);
-		}
-
-		if (zfbgx == null) {
-			contractImpl.setZfbgx(StringPool.BLANK);
-		}
-		else {
-			contractImpl.setZfbgx(zfbgx);
 		}
 
 		if (sfsl == null) {
@@ -786,7 +777,6 @@ public class ContractCacheModel implements CacheModel<Contract>, Externalizable 
 		lwfbhtbh = objectInput.readUTF();
 		htlx = objectInput.readUTF();
 		htzt = objectInput.readUTF();
-		zfbgx = objectInput.readUTF();
 		sfsl = objectInput.readUTF();
 		zxbz = objectInput.readUTF();
 		state = objectInput.readUTF();
@@ -935,13 +925,6 @@ public class ContractCacheModel implements CacheModel<Contract>, Externalizable 
 		}
 		else {
 			objectOutput.writeUTF(htzt);
-		}
-
-		if (zfbgx == null) {
-			objectOutput.writeUTF(StringPool.BLANK);
-		}
-		else {
-			objectOutput.writeUTF(zfbgx);
 		}
 
 		if (sfsl == null) {
@@ -1400,7 +1383,6 @@ public class ContractCacheModel implements CacheModel<Contract>, Externalizable 
 	public String lwfbhtbh;
 	public String htlx;
 	public String htzt;
-	public String zfbgx;
 	public String sfsl;
 	public String zxbz;
 	public String state;

@@ -184,7 +184,6 @@
 		<property name="lwfbhtbh" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="htlx" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="htzt" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="zfbgx" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="sfsl" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="zxbz" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="state" type="com.liferay.portal.dao.orm.hibernate.StringType" column="state_" />

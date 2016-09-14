@@ -60,7 +60,6 @@ public class ContractWrapper implements Contract, ModelWrapper<Contract> {
 		attributes.put("lwfbhtbh", getLwfbhtbh());
 		attributes.put("htlx", getHtlx());
 		attributes.put("htzt", getHtzt());
-		attributes.put("zfbgx", getZfbgx());
 		attributes.put("sfsl", getSfsl());
 		attributes.put("zxbz", getZxbz());
 		attributes.put("state", getState());
@@ -199,12 +198,6 @@ public class ContractWrapper implements Contract, ModelWrapper<Contract> {
 
 		if (htzt != null) {
 			setHtzt(htzt);
-		}
-
-		String zfbgx = (String)attributes.get("zfbgx");
-
-		if (zfbgx != null) {
-			setZfbgx(zfbgx);
 		}
 
 		String sfsl = (String)attributes.get("sfsl");
@@ -854,26 +847,6 @@ public class ContractWrapper implements Contract, ModelWrapper<Contract> {
 	@Override
 	public void setHtzt(java.lang.String htzt) {
 		_contract.setHtzt(htzt);
-	}
-
-	/**
-	* Returns the zfbgx of this contract.
-	*
-	* @return the zfbgx of this contract
-	*/
-	@Override
-	public java.lang.String getZfbgx() {
-		return _contract.getZfbgx();
-	}
-
-	/**
-	* Sets the zfbgx of this contract.
-	*
-	* @param zfbgx the zfbgx of this contract
-	*/
-	@Override
-	public void setZfbgx(java.lang.String zfbgx) {
-		_contract.setZfbgx(zfbgx);
 	}
 
 	/**

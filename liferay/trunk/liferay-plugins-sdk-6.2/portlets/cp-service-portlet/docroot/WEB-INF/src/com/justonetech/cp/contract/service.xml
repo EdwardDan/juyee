@@ -19,13 +19,12 @@
 		<column name="htlb" type="String" /><!-- 合同类别 -->
 		<column name="id" type="String"/><!-- id -->
 		<column name="htid" type="String" /><!-- 合同Id -->
-		<column name="htbh" type="String" /><!-- 合同编号 -->
+		<column name="htbh" type="String" /><!-- 合同编号/总分包关系 -->
 		<column name="zbhtbh" type="String" /><!-- 总包合同编号 -->
 		<column name="fbhtbh" type="String" /><!-- 分包合同编号 -->
 		<column name="lwfbhtbh" type="String" /><!-- lwfbhtbh -->
 		<column name="htlx" type="String" /><!-- 合同类型 -->
 		<column name="htzt" type="String" /><!-- 合同状态 -->
-		<column name="zfbgx" type="String" /><!-- 总分包关系 -->
 		<column name="sfsl" type="String" /><!-- sfsl -->
 		<column name="zxbz" type="String" /><!-- zxbz -->
 		<column name="state" type="String" /><!-- state -->

@@ -331,7 +331,6 @@ public class ContractPersistenceImpl extends BasePersistenceImpl<Contract>
 		contractImpl.setLwfbhtbh(contract.getLwfbhtbh());
 		contractImpl.setHtlx(contract.getHtlx());
 		contractImpl.setHtzt(contract.getHtzt());
-		contractImpl.setZfbgx(contract.getZfbgx());
 		contractImpl.setSfsl(contract.getSfsl());
 		contractImpl.setZxbz(contract.getZxbz());
 		contractImpl.setState(contract.getState());

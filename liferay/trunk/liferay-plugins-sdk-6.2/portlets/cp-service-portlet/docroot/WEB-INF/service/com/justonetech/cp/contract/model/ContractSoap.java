@@ -41,7 +41,6 @@ public class ContractSoap implements Serializable {
 		soapModel.setLwfbhtbh(model.getLwfbhtbh());
 		soapModel.setHtlx(model.getHtlx());
 		soapModel.setHtzt(model.getHtzt());
-		soapModel.setZfbgx(model.getZfbgx());
 		soapModel.setSfsl(model.getSfsl());
 		soapModel.setZxbz(model.getZxbz());
 		soapModel.setState(model.getState());
@@ -248,14 +247,6 @@ public class ContractSoap implements Serializable {
 
 	public void setHtzt(String htzt) {
 		_htzt = htzt;
-	}
-
-	public String getZfbgx() {
-		return _zfbgx;
-	}
-
-	public void setZfbgx(String zfbgx) {
-		_zfbgx = zfbgx;
 	}
 
 	public String getSfsl() {
@@ -813,7 +804,6 @@ public class ContractSoap implements Serializable {
 	private String _lwfbhtbh;
 	private String _htlx;
 	private String _htzt;
-	private String _zfbgx;
 	private String _sfsl;
 	private String _zxbz;
 	private String _state;
