@@ -52,7 +52,7 @@
 				<div>
 					<c:if test="<%=dlFileEntry.getExtension().equals(jpg)%>">
 						<a href="#" onclick="previewJpg(<%=materialList.get(i).getMaterialId()%>,<%=fileEntryId%>)"><%=fileName%></a>
-						<img src="/documents/<%=filePath%>" hidden="true" id=<%=fileEntryId%> alt="<%=dlFileEntry.getTitle()%>">
+						<img src="/documents/<%=filePath%>" style="display: none;" id=<%=fileEntryId%> alt="<%=dlFileEntry.getTitle()%>">
 					</c:if>
 					<c:if test="<%=dlFileEntry.getExtension().equals(pdf)%>">
 						
