@@ -1,3 +1,4 @@
+<%@page import="com.justonetech.cp.util.CompleteStatus"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
 <%@ include file="init.jsp"%>
@@ -91,15 +92,19 @@ tr.body td.content {
 					<fmt:formatDate value="${complete.sbrq}" pattern="yyyy-MM-dd" />
 				</liferay-ui:search-container-column-text>
 				<liferay-ui:search-container-column-text name="状态"
-					value="${(complete.status==2)?\"已备案\":\"填写\" }"/>
+					value="<%=CompleteStatus.getColorNameByCode(complete.getStatus()) %>"/>
 				<liferay-ui:search-container-column-text name="action">
 					<liferay-ui:icon-menu>
 					<portlet:renderURL var="viewCompleteURL">
 						<portlet:param name="mvcPath" value="${contextPath}/view-complete.jsp"/>
 						<portlet:param name="completeId" value="${complete.completeId}"/>
 					</portlet:renderURL>
+					<portlet:renderURL var="approvalCompleteURL">
+						<portlet:param name="mvcPath" value="${contextPath}/approval-complete.jsp"/>
+						<portlet:param name="completeId" value="${complete.completeId}"/>
+					</portlet:renderURL>
 						<liferay-ui:icon image="view" url="${viewCompleteURL}"/>
-						<liferay-ui:icon image="check" url="${rowURL}"/>
+						<liferay-ui:icon image="check" url="${approvalCompleteURL}"/>
 					</liferay-ui:icon-menu>
 				</liferay-ui:search-container-column-text>
 			</liferay-ui:search-container-row>
