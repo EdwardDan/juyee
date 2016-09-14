@@ -21,29 +21,56 @@
 </style>
 <%
 	long permitId = ParamUtil.getLong(renderRequest, "permitId");
-System.out.println("permitId========="+permitId);
 List<ParticipationUnit> participationUnits = ParticipationUnitLocalServiceUtil.findByPermitId(permitId,
 		-1, -1);
-/* if (participationUnits == null || participationUnits.size() == 0) {
+
+//从合同中将单位信息带过来
+Permit permit = PermitLocalServiceUtil.getPermit(permitId);
+
+permit = PermitLocalServiceUtil.getPermit(permitId);
+String htxxbsbh = permit.getHtxxbsbh();
+
+Contract contract = null;
+if (participationUnits == null || participationUnits.size() == 0) {
 	participationUnits = new ArrayList<ParticipationUnit>();
-	ParticipationUnit participationUnit = null;
-	try {
-		participationUnit = ParticipationUnitLocalServiceUtil
-		.createParticipationUnit(CounterLocalServiceUtil.increment());
-	} catch (SystemException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
+
+if (null != htxxbsbh && htxxbsbh.length() > 0) {
+	contract = ContractLocalServiceUtil.getContract(htxxbsbh);
+}
+
+if (null != contract) {
+	if (null != contract.getSjdw() && contract.getSjdw().length() > 0) {
+		ParticipationUnit participationUnit = ParticipationUnitLocalServiceUtil.createParticipationUnit(CounterLocalServiceUtil.increment());
+		participationUnit.setDwlx("设计单位");
+		participationUnit.setDwmc(contract.getSjdw());
+		participationUnit.setXmfzr(contract.getSjfzr());
+		participationUnit.setZjlx(contract.getSjfzrzjlx());
+		participationUnit.setZjh(contract.getSjfzrzjh());
+		participationUnit.setSfyssj(true);
+		participationUnits.add(participationUnit);
 	}
-	participationUnit.setDwlx("建设单位");
-	participationUnit.setDwmc("单位名称是是是是是是");
-	participationUnit.setXmfzr("黄家辉");
-	participationUnit.setZjlx("身份证");
-	participationUnit.setZjh("341225879785468245");
-	participationUnit.setDhhm("13127667037");
-	participationUnit.setSfyssj(true);
-	participationUnit.setPermitId(permitId);
-	participationUnits.add(participationUnit);
-} */
+	if (null != contract.getKcdw() && contract.getKcdw().length() > 0) {
+		ParticipationUnit participationUnit = ParticipationUnitLocalServiceUtil.createParticipationUnit(CounterLocalServiceUtil.increment());
+		participationUnit.setDwlx("勘察单位");
+		participationUnit.setDwmc(contract.getKcdw());
+		participationUnit.setXmfzr(contract.getKcfzr());
+		participationUnit.setZjlx(contract.getKcfzrzjlx());
+		participationUnit.setZjh(contract.getKcfzrzjh());
+		participationUnit.setSfyssj(true);
+		participationUnits.add(participationUnit);
+	}
+	if (null != contract.getSgdw() && contract.getSgdw().length() > 0) {
+		ParticipationUnit participationUnit = ParticipationUnitLocalServiceUtil.createParticipationUnit(CounterLocalServiceUtil.increment());
+		participationUnit.setDwlx("施工单位");
+		participationUnit.setDwmc(contract.getSgdw());
+		participationUnit.setXmfzr(contract.getSgfzr());
+		participationUnit.setZjlx(contract.getSgfzrzjlx());		
+		participationUnit.setZjh(contract.getSgfzrzjh());
+		participationUnit.setSfyssj(true);
+		participationUnits.add(participationUnit);
+	}
+}
+}
 
 request.setAttribute("participationUnits", participationUnits);
 
@@ -94,11 +121,13 @@ if(null!=dictionaryCertificateType){
 								<c:if test="${participationUnit. sfyssj }">disabled="disabled"</c:if> /></td>
 							<td style="width: 28%; text-align: left"><input
 								style="width: 98%" name="<portlet:namespace/>dwmc"
-								value="${participationUnit. dwmc}" required="required">
+								value="${participationUnit. dwmc}" required="required"
+								<c:if test="${participationUnit. sfyssj }">readonly="readonly"</c:if>>
 								<input name="<portlet:namespace/>sfyssj" type="hidden"
 								value="${participationUnit. sfyssj}"></td>
 							<td style="width: 13%; text-align: center"><select
 								id="<portlet:namespace/>dwlx" name="<portlet:namespace/>dwlx"
+								<c:if test="${participationUnit. sfyssj }">disabled="disabled"</c:if>
 								style="width: 100%">
 									<c:forEach items="${deptTypes }" var="deptType">
 										<option value="${deptType.name }"
@@ -131,8 +160,8 @@ if(null!=dictionaryCertificateType){
 
 	<aui:button-row>
 		<div style="text-align: center">
-				 <aui:button type="submit" value="保存" onClick="return submitSave()" /> 
-				 <aui:button type="cancel" value="返回" href="${viewURL}" />
+			<aui:button type="submit" value="保存" onClick="return submitSave()" />
+			<aui:button type="cancel" value="返回" href="${viewURL}" />
 		</div>
 	</aui:button-row>
 
@@ -222,6 +251,10 @@ if(null!=dictionaryCertificateType){
 			alert("单位类型存在重复！！")
 			return false;
 		}
+
+		$("select[name='<portlet:namespace/>dwlx']").each(function() {
+			$(this).removeAttr('disabled');
+		});
 		return true;
 	}
 </script>
