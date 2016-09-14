@@ -5,7 +5,7 @@ package com.justonetech.cp.util;
  */
 public enum CompleteStatus {
     STATUS_EDIT(1, "填写", "red", "tx"),
-    STATUS_SB(2,"已上报","yellow","ysb"),
+    STATUS_SB(2,"已上报","blue","ysb"),
     STATUS_PASS(3, "已备案", "green", "yba");
 
 	private int code;
