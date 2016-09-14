@@ -534,7 +534,6 @@ public class PermitApplicationPortlet extends MVCPortlet {
 						String fileEntryIds =applyMaterial.getFileEntryIds();
 						fileEntryIds=fileEntryIds+",";//加上逗号为了容易替换
 						//获取文件路径
-						String filePath=getFilePath(Long.valueOf(fileId));
 						String str=fileId+"\\|"+dlFileEntry.getExtension()+"\\,";
 						fileEntryIds=fileEntryIds.replaceFirst(str, "");
 						if(Validator.isNotNull(fileEntryIds)){
@@ -595,14 +594,6 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		return fileEntry;
 	}
 
-	
-	public static String getFilePath(Long fileEntryId) throws PortalException, SystemException {
-		if(Validator.isNotNull(fileEntryId)){
-			DLFileEntry dLFileEntry=DLFileEntryLocalServiceUtil.getDLFileEntry(fileEntryId);
-			return dLFileEntry.getGroupId() + "/" + dLFileEntry.getFolderId() + "/" + dLFileEntry.getTitle();
-		}else
-			return "";
-	}
 	
 	public FileEntry uploadFileAnother(ResourceRequest request, String fileSourceName,
 			byte[] fileBytes, ServiceContext serviceContext,String portletId,String materialId,String fileTitle)
