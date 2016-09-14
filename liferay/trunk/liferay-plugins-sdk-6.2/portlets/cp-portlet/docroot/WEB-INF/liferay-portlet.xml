@@ -46,6 +46,8 @@
 	<portlet>
 		<portlet-name>complete-application</portlet-name>
 		<icon>/icons/icon.png</icon>
+		<user-notification-definitions>warn-notification-definitions.xml</user-notification-definitions>
+        <user-notification-handler-class>com.justonetech.cp.notification.CompleteApplicationNotificationHandler</user-notification-handler-class>
 		<header-portlet-css>/css/main.css</header-portlet-css>
 		<footer-portlet-javascript>
 			/js/main.js
