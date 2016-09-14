@@ -294,7 +294,7 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 		if (complete.getSqbz() == 1) {
 			complete.setSqbz(2);
 		}
-		complete.setStatus(CompleteStatus.STATUS_BA.getCode());
+		complete.setStatus(CompleteStatus.STATUS_EDIT.getCode());
 		CompleteLocalServiceUtil.updateComplete(complete);
 		redirect(request, response, complete, 2);
 	}
