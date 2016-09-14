@@ -75,7 +75,7 @@
         gridinit($("#listGrid"), conf);
     });
     function doToBid(projId) {
-        loadAjaxData("mainContent", "${ctx}/projBid/bidGrid.do?projId=" + projId + "&typeCode=${typeCode}&account=${account}");
+        loadAjaxData("mainContent", "${ctx}/projBid/bidGrid.do?projId=" + projId + "&typeCode=${typeCode}");
     }
 </script>
 
