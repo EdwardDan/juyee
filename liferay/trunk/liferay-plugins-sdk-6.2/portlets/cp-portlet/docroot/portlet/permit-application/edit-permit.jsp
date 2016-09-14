@@ -16,6 +16,7 @@
 	renderRequest.setAttribute("tabSqbz", tabSqbz);
 	renderRequest.setAttribute("sqbz", sqbz);
 	String contractId = ParamUtil.getString(request, "contractId");
+	renderRequest.setAttribute("contractId",contractId);
 	Project project = null;
 	ProjectProfile projectProfile = null;
 	Contract contract = null;

@@ -53,6 +53,7 @@
 	<aui:input name="bjbh" type="hidden" value="${bjbh }" />
 	<aui:input name="bdh" type="hidden" value="${bdh }" />
 	<aui:input name="sqbz" type="hidden" value="2" />
+	<aui:input name="htxxbsbh" type="hidden" value="${contractId}" />
 	<table  class="table table-bordered" width="100%">
 	<tr class="body">
 			<td class="text-right">项目类型</td>
