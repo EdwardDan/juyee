@@ -178,6 +178,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		Long permitId = ParamUtil.getLong(request, "permitId");
 		String bjbh = ParamUtil.getString(request, "bjbh");
 		String bdh = ParamUtil.getString(request, "bdh");
+		String htxxbsbh=ParamUtil.getString(request, "htxxbsbh");
 
 		ProjectProfile projectProfile = null;
 		Permit permit = null;
@@ -190,6 +191,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 			permit.setStatus(1);
 		}
 		permit.setSqbz(1);
+		permit.setHtxxbsbh(htxxbsbh);
 		projectProfile.setXmlx(xmlx);
 		projectProfile.setLxjb(lxjb);
 		projectProfile.setXmxz(xmxz);
