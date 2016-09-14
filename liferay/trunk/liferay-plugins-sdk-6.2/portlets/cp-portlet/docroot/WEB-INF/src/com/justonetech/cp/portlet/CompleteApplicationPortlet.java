@@ -385,7 +385,6 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 						String fileEntryIds = completeApplyMaterial.getFileEntryIds();
 						fileEntryIds = fileEntryIds + ",";// 加上逗号为了容易替换
 						// 获取文件路径
-						String filePath = getFilePath(Long.valueOf(fileId));
 						String str = fileId + "\\|" + dlFileEntry.getExtension() + "\\,";
 						fileEntryIds = fileEntryIds.replaceFirst(str, "");
 						if (Validator.isNotNull(fileEntryIds)) {
@@ -444,14 +443,6 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 					serviceContext);
 		}
 		return fileEntry;
-	}
-
-	public static String getFilePath(Long fileEntryId) throws PortalException, SystemException {
-		if (Validator.isNotNull(fileEntryId)) {
-			DLFileEntry dLFileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(fileEntryId);
-			return dLFileEntry.getGroupId() + "/" + dLFileEntry.getFolderId() + "/" + dLFileEntry.getTitle();
-		} else
-			return "";
 	}
 
 	public void submitAll(ActionRequest request, ActionResponse response) throws PortalException, SystemException {
