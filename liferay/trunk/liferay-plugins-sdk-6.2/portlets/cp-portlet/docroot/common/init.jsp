@@ -17,7 +17,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/xml" prefix="x"%>
 <link rel="stylesheet" href="/static/viewer-master/viewer.min.css">
 <script src="/static/viewer-master/viewer.min.js"></script>
- 
+
 <%@ page import="java.util.*"%>
 <%@ page import="com.liferay.portal.kernel.util.*"%>
 <%@ page import="com.liferay.portal.kernel.dao.search.RowChecker"%>
