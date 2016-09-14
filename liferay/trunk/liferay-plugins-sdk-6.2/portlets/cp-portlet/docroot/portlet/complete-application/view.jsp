@@ -1,3 +1,4 @@
+<%@page import="com.justonetech.cp.util.CompleteStatus"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
 <c:set var="contextPath"
@@ -52,7 +53,7 @@
 		%>
 	<liferay-ui:panel title="竣工备案列表" collapsible="false">
 		<liferay-ui:tabs names="<%=stateLabel%>" param="state"
-			tabsValues="<%=stateValue%>" url="<%=searchURL%>" type="pills">
+			tabsValues="<%=stateValue%>" url="<%=viewURL%>" type="pills">
 		</liferay-ui:tabs>
 		<liferay-ui:search-container emptyResultsMessage="没有施工许可数据。">
 			<liferay-ui:search-container-results results="${completes}"
@@ -85,13 +86,7 @@
 					href="${rowURL }">
 					<fmt:formatDate value="${complete.sbrq}" pattern="yyyy-MM-dd" />
 				</liferay-ui:search-container-column-text>
-				<liferay-ui:search-container-column-text name="状态">
-					<c:choose>
-						<c:when test="${complete.status eq 0||complete.status eq 1}">保存</c:when>
-						<c:when test="${complete.status eq 2}">已上报</c:when>
-						<c:otherwise>已备案</c:otherwise>
-					</c:choose>
-				</liferay-ui:search-container-column-text>
+				<liferay-ui:search-container-column-text name="状态" value="<%=CompleteStatus.getColorNameByCode(complete.getStatus())%>"/>
 				<liferay-ui:search-container-column-text name="action">
 					<portlet:actionURL var="deleteCompleteURL" name="deleteComplete">
 						<portlet:param name="completeId" value="${complete.completeId}" />
@@ -103,7 +98,19 @@
 					</liferay-ui:icon-menu>
 				</liferay-ui:search-container-column-text>
 			</liferay-ui:search-container-row>
-			<liferay-ui:search-iterator />
+			<liferay-ui:search-iterator>
+				<%
+					String zzjgdm = (String)request.getAttribute("zzjgdm");
+					String bjbh = (String)request.getAttribute("bjbh");
+					String wssqbh = (String)request.getAttribute("wssqbh");
+					String gcmc = (String)request.getAttribute("gcmc");
+					PortletURL portletURL = searchContainer.getIteratorURL();
+					portletURL.setParameter("zzjgdm", zzjgdm);
+					portletURL.setParameter("bjbh", bjbh);
+					portletURL.setParameter("wssqbh", wssqbh);
+					portletURL.setParameter("gcmc", gcmc);
+				%>
+			</liferay-ui:search-iterator>
 		</liferay-ui:search-container>
 	</liferay-ui:panel>
 </liferay-ui:panel-container>
