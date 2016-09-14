@@ -146,7 +146,7 @@
 			<td class="text-right">建设地点所属区县</td>
 			<td class="bg-white" colspan="3">
 			<aui:select name="jsddssqx" label="" showEmptyOption="true"
-					type="select" style="width:70px">
+					type="select" style="width:70px" selected="">
 					<%
 						Dictionary dictionary = DictionaryLocalServiceUtil.findByCode(
 													"qx");
@@ -213,8 +213,8 @@
 		</tr>
 		<tr class="body">
 			<td class="text-right">房屋建筑面积(㎡)</td>
-			<td class="bg-white" colspan="3"><aui:input name="fwjzmj"
-					label="" type="text" style="width:18.7%" value="">
+			<td class="bg-white" colspan="3"><aui:input name="zmj"
+					label="" type="text" style="width:18.7%" value="${project.zmj}">
 				</aui:input></td>
 		</tr>
 		<tr class="body">
