@@ -14,9 +14,7 @@
 	<portlet:param name="mvcPath"
 		value="${contextPath }/select-project.jsp" />
 </portlet:renderURL>
-<%
-	int rowNo = 0;
-%>
+
 <liferay-ui:panel-container accordion="false" extended="true">
 	<liferay-ui:panel title="查询条件" collapsible="true">
 		<aui:form name="fm" method="get" action="${searchURL }">
@@ -36,14 +34,8 @@
 				</tr>
 				<tr>
 					<td style="width: 10%;" class="text-right">工程名称</td>
-					<td style="width: 40%;" class="bg-white"><aui:input
+					<td colspan="3" class="bg-white"><aui:input
 							type="text" name="gcmc" style="width:80%" label="" /></td>
-					<td style="width: 10%;" class="text-right">状态</td>
-					<td style="width: 40%;" class="bg-white"><aui:select name="zt"
-							showEmptyOption="true" cssClass="input-small" label="">
-							<aui:option value="1" label="填写"></aui:option>
-							<aui:option value="2" label="已备案"></aui:option>
-						</aui:select></td>
 				</tr>
 				<tr style="height: 40px;">
 					<td colspan="4" align="center" class="bg-white"><aui:button
@@ -53,7 +45,15 @@
 			</table>
 		</aui:form>
 	</liferay-ui:panel>
+		<%
+			int sortNo = 0;
+			String stateLabel = "所有,填写,已上报,已备案";
+			String stateValue = "0,1,2,3";
+		%>
 	<liferay-ui:panel title="竣工备案列表" collapsible="false">
+		<liferay-ui:tabs names="<%=stateLabel%>" param="state"
+			tabsValues="<%=stateValue%>" url="<%=searchURL%>" type="pills">
+		</liferay-ui:tabs>
 		<liferay-ui:search-container emptyResultsMessage="没有施工许可数据。">
 			<liferay-ui:search-container-results results="${completes}"
 				total="${completesCount}">
@@ -72,7 +72,7 @@
 						value="${contextPath }/edit-complete.jsp" />
 				</liferay-portlet:renderURL>
 				<liferay-ui:search-container-column-text
-					value="<%=String.valueOf(++rowNo)%>" />
+					value="<%=String.valueOf(++sortNo)%>" />
 				<liferay-ui:search-container-column-text value="${complete.bjbh}"
 					name="报建编号" />
 				<liferay-ui:search-container-column-text property="wssqbh"
