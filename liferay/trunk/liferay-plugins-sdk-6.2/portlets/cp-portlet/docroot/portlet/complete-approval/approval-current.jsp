@@ -11,7 +11,7 @@ List<Role> userRoles = RoleLocalServiceUtil.getUserRoles(me
 		.getUserId());
 ArrayList<String> roles = new ArrayList<String>();
 for (Role role : userRoles) {
-	roles.add(role.getRoleId() + "");
+	roles.add(role.getName() + "");
 }
 request.setAttribute("roles", roles.toString());
 %>
@@ -19,14 +19,14 @@ request.setAttribute("roles", roles.toString());
 	<portlet:param name="completeId" value="${completeId}" />
 </portlet:actionURL>
 <aui:form action="${saveCompleteURL}" method="post">
-	<c:if test="${complete.status==2&&fn:contains(roles,'29802')}">
+	<c:if test="${complete.status==2&&fn:contains(roles,'竣工备案审核')}">
 	<aui:input name="status" value="3" id="status" type="hidden" />
 	 <div class="text-center">
 		审核意见：
 		<textarea rows="3" name="<portlet:namespace/>shyj"  style="width: 70%; margin-bottom: 15px; margin-top: 15px"></textarea>
 	</div> 
 	</c:if>
-	<c:if test="${(complete.status==3)||(complete.status==2&&!fn:contains(roles,'29802'))}">
+	<c:if test="${(complete.status==3)||(complete.status==2&&!fn:contains(roles,'竣工备案审核'))}">
 	<div class="text-center">
 		审核意见：
 		<td class="text-left">${complete.shyj}</td>
@@ -36,7 +36,7 @@ request.setAttribute("roles", roles.toString());
 	<div class="text-center">
 	<div class="btn-group">
 		<aui:button-row>
-		<c:if test="${complete.status==2&&fn:contains(roles,'29802')}">
+		<c:if test="${complete.status==2&&fn:contains(roles,'竣工备案审核')}">
 			<aui:button name="pass" type="submit" 
 				value="审核通过" cssClass="btn btn-primary" />
 				</c:if>
