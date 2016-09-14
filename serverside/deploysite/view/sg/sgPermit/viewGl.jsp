@@ -400,7 +400,7 @@
                         </c:forEach>
                     </c:if>
 
-                    <c:if test="${(bean.status==STATUS_SH_PASS)||(bean.status==STATUS_SH_BACK)}">
+                    <c:if test="${(bean.status==STATUS_SH_PASS)||(bean.status==STATUS_SH_BACK)||(bean.status==STATUS_NB_BACK)}">
                         <c:forEach items="${historyOpinions}" var="item">
                             <c:if test="${item.status==STATUS_CS_PASS && item.projectType.id==bean.projectType.id}">
                                 <tr class="tr_dark">
@@ -434,7 +434,7 @@
                             </c:if>
                         </c:forEach>
                         <c:forEach items="${historyOpinions}" var="item">
-                            <c:if test="${(item.status==STATUS_SH_PASS||item.status==STATUS_SH_BACK) && item.projectType.id==bean.projectType.id}">
+                            <c:if test="${(item.status==STATUS_SH_PASS||item.status==STATUS_SH_BACK||bean.status==STATUS_NB_BACK) && item.projectType.id==bean.projectType.id}">
                                 <tr class="tr_dark">
                                     <td class="form_label_right" style="width: 20%;">审核意见：</td>
                                     <td class="form_content" style="width: 80%;">
@@ -485,7 +485,7 @@
                             </c:if>
                         </c:forEach>
                         <c:forEach items="${historyOpinions}" var="item">
-                            <c:if test="${(item.status==STATUS_SH_PASS||item.status==STATUS_SH_BACK) && item.projectType.id==bean.projectType.id}">
+                            <c:if test="${(item.status==STATUS_SH_PASS||item.status==STATUS_SH_BACK||bean.status==STATUS_NB_BACK) && item.projectType.id==bean.projectType.id}">
                                 <tr class="tr_dark">
                                     <td class="form_label_right" style="width: 20%;">审核意见：</td>
                                     <td class="form_content" style="width: 80%;">
@@ -552,7 +552,7 @@
                             </c:if>
                         </c:forEach>
                         <c:forEach items="${historyOpinions}" var="item">
-                            <c:if test="${(item.status==STATUS_SH_PASS||item.status==STATUS_SH_BACK) && item.projectType.id==bean.projectType.id}">
+                            <c:if test="${(item.status==STATUS_SH_PASS||item.status==STATUS_SH_BACK||bean.status==STATUS_NB_BACK) && item.projectType.id==bean.projectType.id}">
                                 <tr class="tr_dark">
                                     <td class="form_label_right" style="width: 20%;">审核意见：</td>
                                     <td class="form_content" style="width: 80%;">
@@ -635,7 +635,7 @@
                             </c:if>
                         </c:forEach>
                         <c:forEach items="${historyOpinions}" var="item">
-                            <c:if test="${(item.status==STATUS_SH_PASS||item.status==STATUS_SH_BACK) && item.projectType.id==bean.projectType.id}">
+                            <c:if test="${(item.status==STATUS_SH_PASS||item.status==STATUS_SH_BACK||bean.status==STATUS_NB_BACK) && item.projectType.id==bean.projectType.id}">
                                 <tr class="tr_dark">
                                     <td class="form_label_right" style="width: 20%;">审核意见：</td>
                                     <td class="form_content" style="width: 80%;">
@@ -738,7 +738,7 @@
                             </c:if>
                         </c:forEach>
                         <c:forEach items="${historyOpinions}" var="item">
-                            <c:if test="${(item.status==STATUS_SH_PASS||item.status==STATUS_SH_BACK) && item.projectType.id==bean.projectType.id}">
+                            <c:if test="${(item.status==STATUS_SH_PASS||item.status==STATUS_SH_BACK||bean.status==STATUS_NB_BACK) && item.projectType.id==bean.projectType.id}">
                                 <tr class="tr_dark">
                                     <td class="form_label_right" style="width: 20%;">审核意见：</td>
                                     <td class="form_content" style="width: 80%;">
@@ -861,7 +861,7 @@
                             </c:if>
                         </c:forEach>
                         <c:forEach items="${historyOpinions}" var="item">
-                            <c:if test="${(item.status==STATUS_SH_PASS||item.status==STATUS_SH_BACK) && item.projectType.id==bean.projectType.id}">
+                            <c:if test="${(item.status==STATUS_SH_PASS||item.status==STATUS_SH_BACK||bean.status==STATUS_NB_BACK) && item.projectType.id==bean.projectType.id}">
                                 <tr class="tr_dark">
                                     <td class="form_label_right" style="width: 20%;">审核意见：</td>
                                     <td class="form_content" style="width: 80%;">

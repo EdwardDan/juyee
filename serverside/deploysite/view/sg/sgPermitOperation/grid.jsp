@@ -9,15 +9,12 @@
                     '操作编码',
                     '操作名称',
                     '审核操作人'
-//                    '状态',
-//                    '操作'
                 ],
                 colModel: [
                     {name: 'id', width: 10, align: "center", searchtype: "integer", hidden: true},
                     {name: "optionCode", width: "100", align: "center", searchtype: "string", sortable: true},
                     {name: "optionName", width: "100", align: "center", searchtype: "string", sortable: true},
                     {name: "optionUser", width: "100", align: "center", searchtype: "string", sortable: true}
-//                    {name: "status", width: "100", align: "center", searchtype: "integer", sortable: true}
                 ],
                 actModel: [
 //                    {name: 'operation', width: 40, align: 'center'}
