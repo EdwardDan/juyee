@@ -27,6 +27,7 @@ import com.justonetech.cp.complete.service.CompleteApplyMaterialLocalServiceUtil
 import com.justonetech.cp.complete.service.CompleteLocalServiceUtil;
 import com.justonetech.cp.complete.service.CompleteProjectProfileLocalServiceUtil;
 import com.justonetech.cp.complete.service.CompleteUnitProjectLocalServiceUtil;
+import com.justonetech.cp.notification.CompleteApplicationNotificationHandler;
 import com.justonetech.cp.permit.model.Permit;
 import com.justonetech.cp.permit.model.UnitProject;
 import com.justonetech.cp.permit.service.UnitProjectLocalServiceUtil;
@@ -39,6 +40,7 @@ import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.repository.model.FileEntry;
@@ -54,9 +56,13 @@ import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
+import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.service.UserNotificationEventLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
@@ -504,6 +510,29 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 		complete.setSqbz(0);
 		complete.setStatus(CompleteStatus.STATUS_SB.getCode());
 		CompleteLocalServiceUtil.updateComplete(complete);
+
+		try {
+			User user = PortalUtil.getUser(request);
+			Role aRole = RoleLocalServiceUtil.fetchRole(user.getCompanyId(), "竣工备案审核");
+			long[] userIds = UserLocalServiceUtil.getRoleUserIds(aRole.getRoleId());
+			List<User> users = new ArrayList<User>();
+			for (long useId : userIds) {
+				users.add(UserLocalServiceUtil.getUser(useId));
+			}
+			ServiceContext serviceContext = ServiceContextFactory.getInstance(request);
+			JSONObject payloadJSON = JSONFactoryUtil.createJSONObject();
+			for (User a : users) {
+				UserNotificationEventLocalServiceUtil.addUserNotificationEvent(a.getUserId(),
+						CompleteApplicationNotificationHandler.PORTLET_ID, (new Date()).getTime(), user.getUserId(),
+						payloadJSON.toString(), false, serviceContext);
+			}
+		} catch (SystemException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (PortalException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
