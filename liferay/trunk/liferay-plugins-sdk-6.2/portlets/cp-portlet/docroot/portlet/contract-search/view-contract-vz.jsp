@@ -74,13 +74,13 @@ td.content span {
 				<td class="title">总投资(万元)</td>
 				<td class="content">${contract.ztz}</td>
 				<td class="title">总建筑面积(㎡)</td>
-				<td class="content">${contract.zjzmj}</td>
+				<td class="content">${contract.zmj}</td>
 			</tr>
 			<tr class="body">
 				<td class="title">项目分类</td>
 				<td class="content">${contract.xmfl}</td>
 				<td class="title">建设规模</td>
-				<td class="content">${contract.jzgm}</td>
+				<td class="content">${contract.jsgm}</td>
 			</tr>
 		</table>
 	</liferay-ui:panel>
@@ -122,24 +122,8 @@ td.content span {
 				<td class="content">${contract.sjfzrzjh}</td>
 			</tr>
 			<tr class="body">
-				<td class="title">勘察单位</td>
-				<td class="content" colspan="3">${contract.kcdwmc}</td>
-			</tr>
-			<tr class="body">
-				<td class="title">勘察负责人</td>
-				<td class="content">${contract.kcfzr}</td>
-				<td class="title"></td>
-				<td class="content"></td>
-			</tr>
-			<tr class="body">
-				<td class="title">证件类型</td>
-				<td class="content">${contract.kcfzrzjlx}</td>
-				<td class="title">证件号</td>
-				<td class="content">${contract.kcfzrzjh}</td>
-			</tr>
-			<tr class="body">
 				<td class="title">施工单位</td>
-				<td class="content" colspan="3">${contract.sgdwmc}</td>
+				<td class="content" colspan="3">${contract.sgdw}</td>
 			</tr>
 			<tr class="body">
 				<td class="title">施工负责人</td>
@@ -186,10 +170,6 @@ td.content span {
 				<td class="content">${contract.sjf}</td>
 			</tr>
 			<tr class="body">
-				<td class="title">勘察费(万元)</td>
-				<td class="content" colspan="3">${contract.kcf}</td>
-			</tr>
-			<tr class="body">
 				<td class="title">建安造价(万元)</td>
 				<td class="content" colspan="3">${contract.jazj}</td>
 			</tr>
@@ -202,7 +182,7 @@ td.content span {
 				<td class="content">${contract.zgj}</td>
 				<td class="title">安全防护文明施工<br>措施费(万元)
 				</td>
-				<td class="content">${contract.aqfhwmsgcsf}</td>
+				<td class="content">${contract.wmcsf}</td>
 			</tr>
 			<tr class="body">
 				<td class="title">合同签订日期</td>
@@ -214,11 +194,11 @@ td.content span {
 			</tr>
 			<tr class="body">
 				<td class="title">采用合同示范文本</td>
-				<td class="content" colspan="3">${contract.cyhtsfwb}</td>
+				<td class="content" colspan="3">${contract.htsfwbmc}</td>
 			</tr>
 			<tr class="body">
 				<td class="title">附注及其他说明</td>
-				<td class="content" colspan="3">${contract.fzjqtsm}</td>
+				<td class="content" colspan="3">${contract.bz}</td>
 			</tr>
 			<tr class="body">
 				<td class="title">是否注销</td>

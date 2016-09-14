@@ -74,13 +74,13 @@ td.content span {
 				<td class="title">总投资(万元)</td>
 				<td class="content">${contract.ztz}</td>
 				<td class="title">总建筑面积(㎡)</td>
-				<td class="content">${contract.zjzmj}</td>
+				<td class="content">${contract.zmj}</td>
 			</tr>
 			<tr class="body">
 				<td class="title">项目分类</td>
 				<td class="content">${contract.xmfl}</td>
 				<td class="title">建设规模</td>
-				<td class="content">${contract.jzgm}</td>
+				<td class="content">${contract.jsgm}</td>
 			</tr>
 		</table>
 	</liferay-ui:panel>
@@ -119,9 +119,9 @@ td.content span {
 			</tr>
 			<tr class="body">
 				<td class="title">证件类型</td>
-				<td class="content">${contract.kcfzrzjlx}</td>
+				<td class="content">${contract.xmfzrzjlx}</td>
 				<td class="title">证件号</td>
-				<td class="content">${contract.kcfzrzjh}</td>
+				<td class="content">${contract.xmfzrzjh}</td>
 			</tr>
 			<tr class="body">
 				<td class="title">项目类别</td>
@@ -144,7 +144,7 @@ td.content span {
 				<td class="content">${contract.zgj}</td>
 				<td class="title">安全防护文明施工<br>措施费(万元)
 				</td>
-				<td class="content">${contract.aqfhwmsgcsf}</td>
+				<td class="content">${contract.wmcsf}</td>
 			</tr>
 			<tr class="body">
 				<td class="title">开竣工日期</td>
@@ -168,11 +168,11 @@ td.content span {
 			</tr>
 			<tr class="body">
 				<td class="title">采用合同示范文本</td>
-				<td class="content" colspan="3">${contract.cyhtsfwb}</td>
+				<td class="content" colspan="3">${contract.htsfwbmc}</td>
 			</tr>
 			<tr class="body">
 				<td class="title">附注及其他说明</td>
-				<td class="content" colspan="3">${contract.fzjqtsm}</td>
+				<td class="content" colspan="3">${contract.bz}</td>
 			</tr>
 			<tr class="body">
 				<td class="title">是否注销</td>
