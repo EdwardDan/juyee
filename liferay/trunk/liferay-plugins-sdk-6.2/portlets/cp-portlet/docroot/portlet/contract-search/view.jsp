@@ -60,16 +60,16 @@
 				<liferay-portlet:renderURL varImpl="rowURL">
 					<portlet:param name="bjbh" value="${contract.contractId}" />
 					<c:if
-						test="<%=contract.getZfbgx().substring(0, 2).equals(\"CZ\")%>">
+						test="<%=contract.getHtbh()!=null && contract.getHtbh().length()>=2 && contract.getHtbh().substring(0, 2).equals(\"CZ\")%>">
 						<portlet:param name="mvcPath" value="${contextPath}/view-contract-cz.jsp" /> 
 					</c:if>
 					<c:if
-						test="<%=contract.getZfbgx().substring(0, 2).equals(\"VZ\")%>">
+						test="<%=contract.getHtbh()!=null && contract.getHtbh().length()>=2 && contract.getHtbh().substring(0, 2).equals(\"VZ\")%>">
 						<portlet:param name="mvcPath"
 							value="${contextPath}/view-contract-vz.jsp" />
 					</c:if>
 					<c:if
-						test="<%=contract.getZfbgx().substring(0, 2).equals(\"WZ\")%>">
+						test="<%=contract.getHtbh()!=null && contract.getHtbh().length()>=2 && contract.getHtbh().substring(0, 2).equals(\"WZ\")%>">
 						<portlet:param name="mvcPath"
 							value="${contextPath}/view-contract-wz.jsp" />
 					</c:if>
@@ -82,9 +82,9 @@
 					name="合同信息报送编号" />
 				<c:choose>
 					<c:when
-						test="<%=contract.getZfbgx().substring(0, 2).equals(\"CZ\")
-											|| contract.getZfbgx().substring(0, 2).equals(\"VZ\")
-											|| contract.getZfbgx().substring(0, 2).equals(\"WZ\")%>">
+						test="<%=(contract.getHtbh()!=null && contract.getHtbh().length()>=2 && contract.getHtbh().substring(0, 2).equals(\"CZ\"))
+											|| (contract.getHtbh()!=null && contract.getHtbh().length()>=2 && contract.getHtbh().substring(0, 2).equals(\"VZ\"))
+											|| (contract.getHtbh()!=null && contract.getHtbh().length()>=2 && contract.getHtbh().substring(0, 2).equals(\"WZ\"))%>">
 						<liferay-ui:search-container-column-text property="htmc"
 							name="合同名称" href="${rowURL}" />
 					</c:when>
