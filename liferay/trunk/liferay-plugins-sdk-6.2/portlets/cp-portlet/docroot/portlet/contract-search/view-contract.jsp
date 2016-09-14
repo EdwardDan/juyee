@@ -10,16 +10,6 @@
 	request.setAttribute("contract", contract);
 %>
 <style type="text/css">
-table {
-	width: 100%
-}
-
-tr.head  td {
-	text-align: center;
-	font-size: 16px;
-	font-family: "宋体";
-	font-weight: bold;
-}
 
 tr.body td.title {
 	width: 20%;
@@ -31,10 +21,6 @@ tr.body td.content {
 	background-color: white;
 }
 
-td.content span {
-	font-weight: bold;
-	color: #104E8B;
-}
 </style>
 <portlet:renderURL var="viewURL" />
 <liferay-ui:header title="查看详细信息" backURL="${viewURL}" />
