@@ -37,7 +37,7 @@ import java.util.Date;
 public class ContractCacheModel implements CacheModel<Contract>, Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(149);
+		StringBundler sb = new StringBundler(161);
 
 		sb.append("{contractId=");
 		sb.append(contractId);
@@ -45,20 +45,32 @@ public class ContractCacheModel implements CacheModel<Contract>, Externalizable 
 		sb.append(zzjgdm);
 		sb.append(", htlb=");
 		sb.append(htlb);
+		sb.append(", id=");
+		sb.append(id);
+		sb.append(", htid=");
+		sb.append(htid);
 		sb.append(", htbh=");
 		sb.append(htbh);
 		sb.append(", zbhtbh=");
 		sb.append(zbhtbh);
 		sb.append(", fbhtbh=");
 		sb.append(fbhtbh);
+		sb.append(", lwfbhtbh=");
+		sb.append(lwfbhtbh);
 		sb.append(", htlx=");
 		sb.append(htlx);
 		sb.append(", htzt=");
 		sb.append(htzt);
 		sb.append(", zfbgx=");
 		sb.append(zfbgx);
-		sb.append(", bsrq=");
-		sb.append(bsrq);
+		sb.append(", sfsl=");
+		sb.append(sfsl);
+		sb.append(", zxbz=");
+		sb.append(zxbz);
+		sb.append(", state=");
+		sb.append(state);
+		sb.append(", bssj=");
+		sb.append(bssj);
 		sb.append(", slsj=");
 		sb.append(slsj);
 		sb.append(", bjbh=");
@@ -81,12 +93,12 @@ public class ContractCacheModel implements CacheModel<Contract>, Externalizable 
 		sb.append(zjlygc);
 		sb.append(", ztz=");
 		sb.append(ztz);
-		sb.append(", zjzmj=");
-		sb.append(zjzmj);
+		sb.append(", zmj=");
+		sb.append(zmj);
 		sb.append(", xmfl=");
 		sb.append(xmfl);
-		sb.append(", jzgm=");
-		sb.append(jzgm);
+		sb.append(", jsgm=");
+		sb.append(jsgm);
 		sb.append(", bdh=");
 		sb.append(bdh);
 		sb.append(", fbfs=");
@@ -117,16 +129,16 @@ public class ContractCacheModel implements CacheModel<Contract>, Externalizable 
 		sb.append(sjfzrzjlx);
 		sb.append(", sjfzrzjh=");
 		sb.append(sjfzrzjh);
-		sb.append(", kcdwmc=");
-		sb.append(kcdwmc);
+		sb.append(", kcdw=");
+		sb.append(kcdw);
 		sb.append(", kcfzr=");
 		sb.append(kcfzr);
 		sb.append(", kcfzrzjlx=");
 		sb.append(kcfzrzjlx);
 		sb.append(", kcfzrzjh=");
 		sb.append(kcfzrzjh);
-		sb.append(", sgdwmc=");
-		sb.append(sgdwmc);
+		sb.append(", sgdw=");
+		sb.append(sgdw);
 		sb.append(", sgfzr=");
 		sb.append(sgfzr);
 		sb.append(", sgfzrzjlx=");
@@ -169,18 +181,18 @@ public class ContractCacheModel implements CacheModel<Contract>, Externalizable 
 		sb.append(zlje);
 		sb.append(", zgj=");
 		sb.append(zgj);
-		sb.append(", aqfhwmsgcsf=");
-		sb.append(aqfhwmsgcsf);
+		sb.append(", wmcsf=");
+		sb.append(wmcsf);
 		sb.append(", htqdrq=");
 		sb.append(htqdrq);
 		sb.append(", htqzrq=");
 		sb.append(htqzrq);
 		sb.append(", cbnr=");
 		sb.append(cbnr);
-		sb.append(", cyhtsfwb=");
-		sb.append(cyhtsfwb);
-		sb.append(", fzjqtsm=");
-		sb.append(fzjqtsm);
+		sb.append(", htsfwbmc=");
+		sb.append(htsfwbmc);
+		sb.append(", bz=");
+		sb.append(bz);
 		sb.append(", sfzx=");
 		sb.append(sfzx);
 		sb.append(", zxsj=");
@@ -203,13 +215,32 @@ public class ContractCacheModel implements CacheModel<Contract>, Externalizable 
 			contractImpl.setContractId(contractId);
 		}
 
-		contractImpl.setZzjgdm(zzjgdm);
+		if (zzjgdm == null) {
+			contractImpl.setZzjgdm(StringPool.BLANK);
+		}
+		else {
+			contractImpl.setZzjgdm(zzjgdm);
+		}
 
 		if (htlb == null) {
 			contractImpl.setHtlb(StringPool.BLANK);
 		}
 		else {
 			contractImpl.setHtlb(htlb);
+		}
+
+		if (id == null) {
+			contractImpl.setId(StringPool.BLANK);
+		}
+		else {
+			contractImpl.setId(id);
+		}
+
+		if (htid == null) {
+			contractImpl.setHtid(StringPool.BLANK);
+		}
+		else {
+			contractImpl.setHtid(htid);
 		}
 
 		if (htbh == null) {
@@ -233,6 +264,13 @@ public class ContractCacheModel implements CacheModel<Contract>, Externalizable 
 			contractImpl.setFbhtbh(fbhtbh);
 		}
 
+		if (lwfbhtbh == null) {
+			contractImpl.setLwfbhtbh(StringPool.BLANK);
+		}
+		else {
+			contractImpl.setLwfbhtbh(lwfbhtbh);
+		}
+
 		if (htlx == null) {
 			contractImpl.setHtlx(StringPool.BLANK);
 		}
@@ -254,11 +292,32 @@ public class ContractCacheModel implements CacheModel<Contract>, Externalizable 
 			contractImpl.setZfbgx(zfbgx);
 		}
 
-		if (bsrq == Long.MIN_VALUE) {
-			contractImpl.setBsrq(null);
+		if (sfsl == null) {
+			contractImpl.setSfsl(StringPool.BLANK);
 		}
 		else {
-			contractImpl.setBsrq(new Date(bsrq));
+			contractImpl.setSfsl(sfsl);
+		}
+
+		if (zxbz == null) {
+			contractImpl.setZxbz(StringPool.BLANK);
+		}
+		else {
+			contractImpl.setZxbz(zxbz);
+		}
+
+		if (state == null) {
+			contractImpl.setState(StringPool.BLANK);
+		}
+		else {
+			contractImpl.setState(state);
+		}
+
+		if (bssj == Long.MIN_VALUE) {
+			contractImpl.setBssj(null);
+		}
+		else {
+			contractImpl.setBssj(new Date(bssj));
 		}
 
 		if (slsj == Long.MIN_VALUE) {
@@ -338,11 +397,11 @@ public class ContractCacheModel implements CacheModel<Contract>, Externalizable 
 			contractImpl.setZtz(ztz);
 		}
 
-		if (zjzmj == null) {
-			contractImpl.setZjzmj(StringPool.BLANK);
+		if (zmj == null) {
+			contractImpl.setZmj(StringPool.BLANK);
 		}
 		else {
-			contractImpl.setZjzmj(zjzmj);
+			contractImpl.setZmj(zmj);
 		}
 
 		if (xmfl == null) {
@@ -352,11 +411,11 @@ public class ContractCacheModel implements CacheModel<Contract>, Externalizable 
 			contractImpl.setXmfl(xmfl);
 		}
 
-		if (jzgm == null) {
-			contractImpl.setJzgm(StringPool.BLANK);
+		if (jsgm == null) {
+			contractImpl.setJsgm(StringPool.BLANK);
 		}
 		else {
-			contractImpl.setJzgm(jzgm);
+			contractImpl.setJsgm(jsgm);
 		}
 
 		if (bdh == null) {
@@ -464,11 +523,11 @@ public class ContractCacheModel implements CacheModel<Contract>, Externalizable 
 			contractImpl.setSjfzrzjh(sjfzrzjh);
 		}
 
-		if (kcdwmc == null) {
-			contractImpl.setKcdwmc(StringPool.BLANK);
+		if (kcdw == null) {
+			contractImpl.setKcdw(StringPool.BLANK);
 		}
 		else {
-			contractImpl.setKcdwmc(kcdwmc);
+			contractImpl.setKcdw(kcdw);
 		}
 
 		if (kcfzr == null) {
@@ -492,11 +551,11 @@ public class ContractCacheModel implements CacheModel<Contract>, Externalizable 
 			contractImpl.setKcfzrzjh(kcfzrzjh);
 		}
 
-		if (sgdwmc == null) {
-			contractImpl.setSgdwmc(StringPool.BLANK);
+		if (sgdw == null) {
+			contractImpl.setSgdw(StringPool.BLANK);
 		}
 		else {
-			contractImpl.setSgdwmc(sgdwmc);
+			contractImpl.setSgdw(sgdw);
 		}
 
 		if (sgfzr == null) {
@@ -646,11 +705,11 @@ public class ContractCacheModel implements CacheModel<Contract>, Externalizable 
 			contractImpl.setZgj(zgj);
 		}
 
-		if (aqfhwmsgcsf == null) {
-			contractImpl.setAqfhwmsgcsf(StringPool.BLANK);
+		if (wmcsf == null) {
+			contractImpl.setWmcsf(StringPool.BLANK);
 		}
 		else {
-			contractImpl.setAqfhwmsgcsf(aqfhwmsgcsf);
+			contractImpl.setWmcsf(wmcsf);
 		}
 
 		if (htqdrq == Long.MIN_VALUE) {
@@ -674,18 +733,18 @@ public class ContractCacheModel implements CacheModel<Contract>, Externalizable 
 			contractImpl.setCbnr(cbnr);
 		}
 
-		if (cyhtsfwb == null) {
-			contractImpl.setCyhtsfwb(StringPool.BLANK);
+		if (htsfwbmc == null) {
+			contractImpl.setHtsfwbmc(StringPool.BLANK);
 		}
 		else {
-			contractImpl.setCyhtsfwb(cyhtsfwb);
+			contractImpl.setHtsfwbmc(htsfwbmc);
 		}
 
-		if (fzjqtsm == null) {
-			contractImpl.setFzjqtsm(StringPool.BLANK);
+		if (bz == null) {
+			contractImpl.setBz(StringPool.BLANK);
 		}
 		else {
-			contractImpl.setFzjqtsm(fzjqtsm);
+			contractImpl.setBz(bz);
 		}
 
 		if (sfzx == null) {
@@ -702,11 +761,11 @@ public class ContractCacheModel implements CacheModel<Contract>, Externalizable 
 			contractImpl.setZxsj(new Date(zxsj));
 		}
 
-		if (zxsm == Long.MIN_VALUE) {
-			contractImpl.setZxsm(null);
+		if (zxsm == null) {
+			contractImpl.setZxsm(StringPool.BLANK);
 		}
 		else {
-			contractImpl.setZxsm(new Date(zxsm));
+			contractImpl.setZxsm(zxsm);
 		}
 
 		contractImpl.resetOriginalValues();
@@ -717,15 +776,21 @@ public class ContractCacheModel implements CacheModel<Contract>, Externalizable 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		contractId = objectInput.readUTF();
-		zzjgdm = objectInput.readLong();
+		zzjgdm = objectInput.readUTF();
 		htlb = objectInput.readUTF();
+		id = objectInput.readUTF();
+		htid = objectInput.readUTF();
 		htbh = objectInput.readUTF();
 		zbhtbh = objectInput.readUTF();
 		fbhtbh = objectInput.readUTF();
+		lwfbhtbh = objectInput.readUTF();
 		htlx = objectInput.readUTF();
 		htzt = objectInput.readUTF();
 		zfbgx = objectInput.readUTF();
-		bsrq = objectInput.readLong();
+		sfsl = objectInput.readUTF();
+		zxbz = objectInput.readUTF();
+		state = objectInput.readUTF();
+		bssj = objectInput.readLong();
 		slsj = objectInput.readLong();
 		bjbh = objectInput.readUTF();
 		szdq = objectInput.readUTF();
@@ -737,9 +802,9 @@ public class ContractCacheModel implements CacheModel<Contract>, Externalizable 
 		dwxz = objectInput.readUTF();
 		zjlygc = objectInput.readUTF();
 		ztz = objectInput.readUTF();
-		zjzmj = objectInput.readUTF();
+		zmj = objectInput.readUTF();
 		xmfl = objectInput.readUTF();
-		jzgm = objectInput.readUTF();
+		jsgm = objectInput.readUTF();
 		bdh = objectInput.readUTF();
 		fbfs = objectInput.readUTF();
 		cbfs = objectInput.readUTF();
@@ -755,11 +820,11 @@ public class ContractCacheModel implements CacheModel<Contract>, Externalizable 
 		sjfzr = objectInput.readUTF();
 		sjfzrzjlx = objectInput.readUTF();
 		sjfzrzjh = objectInput.readUTF();
-		kcdwmc = objectInput.readUTF();
+		kcdw = objectInput.readUTF();
 		kcfzr = objectInput.readUTF();
 		kcfzrzjlx = objectInput.readUTF();
 		kcfzrzjh = objectInput.readUTF();
-		sgdwmc = objectInput.readUTF();
+		sgdw = objectInput.readUTF();
 		sgfzr = objectInput.readUTF();
 		sgfzrzjlx = objectInput.readUTF();
 		sgfzrzjh = objectInput.readUTF();
@@ -781,15 +846,15 @@ public class ContractCacheModel implements CacheModel<Contract>, Externalizable 
 		jazj = objectInput.readUTF();
 		zlje = objectInput.readUTF();
 		zgj = objectInput.readUTF();
-		aqfhwmsgcsf = objectInput.readUTF();
+		wmcsf = objectInput.readUTF();
 		htqdrq = objectInput.readLong();
 		htqzrq = objectInput.readUTF();
 		cbnr = objectInput.readUTF();
-		cyhtsfwb = objectInput.readUTF();
-		fzjqtsm = objectInput.readUTF();
+		htsfwbmc = objectInput.readUTF();
+		bz = objectInput.readUTF();
 		sfzx = objectInput.readUTF();
 		zxsj = objectInput.readLong();
-		zxsm = objectInput.readLong();
+		zxsm = objectInput.readUTF();
 	}
 
 	@Override
@@ -802,13 +867,32 @@ public class ContractCacheModel implements CacheModel<Contract>, Externalizable 
 			objectOutput.writeUTF(contractId);
 		}
 
-		objectOutput.writeLong(zzjgdm);
+		if (zzjgdm == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(zzjgdm);
+		}
 
 		if (htlb == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
 			objectOutput.writeUTF(htlb);
+		}
+
+		if (id == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(id);
+		}
+
+		if (htid == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(htid);
 		}
 
 		if (htbh == null) {
@@ -832,6 +916,13 @@ public class ContractCacheModel implements CacheModel<Contract>, Externalizable 
 			objectOutput.writeUTF(fbhtbh);
 		}
 
+		if (lwfbhtbh == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(lwfbhtbh);
+		}
+
 		if (htlx == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
@@ -853,7 +944,28 @@ public class ContractCacheModel implements CacheModel<Contract>, Externalizable 
 			objectOutput.writeUTF(zfbgx);
 		}
 
-		objectOutput.writeLong(bsrq);
+		if (sfsl == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(sfsl);
+		}
+
+		if (zxbz == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(zxbz);
+		}
+
+		if (state == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(state);
+		}
+
+		objectOutput.writeLong(bssj);
 		objectOutput.writeLong(slsj);
 
 		if (bjbh == null) {
@@ -926,11 +1038,11 @@ public class ContractCacheModel implements CacheModel<Contract>, Externalizable 
 			objectOutput.writeUTF(ztz);
 		}
 
-		if (zjzmj == null) {
+		if (zmj == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(zjzmj);
+			objectOutput.writeUTF(zmj);
 		}
 
 		if (xmfl == null) {
@@ -940,11 +1052,11 @@ public class ContractCacheModel implements CacheModel<Contract>, Externalizable 
 			objectOutput.writeUTF(xmfl);
 		}
 
-		if (jzgm == null) {
+		if (jsgm == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(jzgm);
+			objectOutput.writeUTF(jsgm);
 		}
 
 		if (bdh == null) {
@@ -1052,11 +1164,11 @@ public class ContractCacheModel implements CacheModel<Contract>, Externalizable 
 			objectOutput.writeUTF(sjfzrzjh);
 		}
 
-		if (kcdwmc == null) {
+		if (kcdw == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(kcdwmc);
+			objectOutput.writeUTF(kcdw);
 		}
 
 		if (kcfzr == null) {
@@ -1080,11 +1192,11 @@ public class ContractCacheModel implements CacheModel<Contract>, Externalizable 
 			objectOutput.writeUTF(kcfzrzjh);
 		}
 
-		if (sgdwmc == null) {
+		if (sgdw == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(sgdwmc);
+			objectOutput.writeUTF(sgdw);
 		}
 
 		if (sgfzr == null) {
@@ -1223,11 +1335,11 @@ public class ContractCacheModel implements CacheModel<Contract>, Externalizable 
 			objectOutput.writeUTF(zgj);
 		}
 
-		if (aqfhwmsgcsf == null) {
+		if (wmcsf == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(aqfhwmsgcsf);
+			objectOutput.writeUTF(wmcsf);
 		}
 
 		objectOutput.writeLong(htqdrq);
@@ -1246,18 +1358,18 @@ public class ContractCacheModel implements CacheModel<Contract>, Externalizable 
 			objectOutput.writeUTF(cbnr);
 		}
 
-		if (cyhtsfwb == null) {
+		if (htsfwbmc == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(cyhtsfwb);
+			objectOutput.writeUTF(htsfwbmc);
 		}
 
-		if (fzjqtsm == null) {
+		if (bz == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(fzjqtsm);
+			objectOutput.writeUTF(bz);
 		}
 
 		if (sfzx == null) {
@@ -1268,19 +1380,31 @@ public class ContractCacheModel implements CacheModel<Contract>, Externalizable 
 		}
 
 		objectOutput.writeLong(zxsj);
-		objectOutput.writeLong(zxsm);
+
+		if (zxsm == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(zxsm);
+		}
 	}
 
 	public String contractId;
-	public long zzjgdm;
+	public String zzjgdm;
 	public String htlb;
+	public String id;
+	public String htid;
 	public String htbh;
 	public String zbhtbh;
 	public String fbhtbh;
+	public String lwfbhtbh;
 	public String htlx;
 	public String htzt;
 	public String zfbgx;
-	public long bsrq;
+	public String sfsl;
+	public String zxbz;
+	public String state;
+	public long bssj;
 	public long slsj;
 	public String bjbh;
 	public String szdq;
@@ -1292,9 +1416,9 @@ public class ContractCacheModel implements CacheModel<Contract>, Externalizable 
 	public String dwxz;
 	public String zjlygc;
 	public String ztz;
-	public String zjzmj;
+	public String zmj;
 	public String xmfl;
-	public String jzgm;
+	public String jsgm;
 	public String bdh;
 	public String fbfs;
 	public String cbfs;
@@ -1310,11 +1434,11 @@ public class ContractCacheModel implements CacheModel<Contract>, Externalizable 
 	public String sjfzr;
 	public String sjfzrzjlx;
 	public String sjfzrzjh;
-	public String kcdwmc;
+	public String kcdw;
 	public String kcfzr;
 	public String kcfzrzjlx;
 	public String kcfzrzjh;
-	public String sgdwmc;
+	public String sgdw;
 	public String sgfzr;
 	public String sgfzrzjlx;
 	public String sgfzrzjh;
@@ -1336,13 +1460,13 @@ public class ContractCacheModel implements CacheModel<Contract>, Externalizable 
 	public String jazj;
 	public String zlje;
 	public String zgj;
-	public String aqfhwmsgcsf;
+	public String wmcsf;
 	public long htqdrq;
 	public String htqzrq;
 	public String cbnr;
-	public String cyhtsfwb;
-	public String fzjqtsm;
+	public String htsfwbmc;
+	public String bz;
 	public String sfzx;
 	public long zxsj;
-	public long zxsm;
+	public String zxsm;
 }

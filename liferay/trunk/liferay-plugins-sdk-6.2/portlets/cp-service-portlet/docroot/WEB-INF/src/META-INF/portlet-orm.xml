@@ -172,13 +172,23 @@
 			<id name="contractId" />
 			<basic name="zzjgdm" />
 			<basic name="htlb" />
+			<basic name="id">
+				<column name="ID_" />
+			</basic>
+			<basic name="htid" />
 			<basic name="htbh" />
 			<basic name="zbhtbh" />
 			<basic name="fbhtbh" />
+			<basic name="lwfbhtbh" />
 			<basic name="htlx" />
 			<basic name="htzt" />
 			<basic name="zfbgx" />
-			<basic name="bsrq">
+			<basic name="sfsl" />
+			<basic name="zxbz" />
+			<basic name="state">
+				<column name="STATE_" />
+			</basic>
+			<basic name="bssj">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<basic name="slsj">
@@ -194,9 +204,9 @@
 			<basic name="dwxz" />
 			<basic name="zjlygc" />
 			<basic name="ztz" />
-			<basic name="zjzmj" />
+			<basic name="zmj" />
 			<basic name="xmfl" />
-			<basic name="jzgm" />
+			<basic name="jsgm" />
 			<basic name="bdh" />
 			<basic name="fbfs" />
 			<basic name="cbfs" />
@@ -212,11 +222,11 @@
 			<basic name="sjfzr" />
 			<basic name="sjfzrzjlx" />
 			<basic name="sjfzrzjh" />
-			<basic name="kcdwmc" />
+			<basic name="kcdw" />
 			<basic name="kcfzr" />
 			<basic name="kcfzrzjlx" />
 			<basic name="kcfzrzjh" />
-			<basic name="sgdwmc" />
+			<basic name="sgdw" />
 			<basic name="sgfzr" />
 			<basic name="sgfzrzjlx" />
 			<basic name="sgfzrzjh" />
@@ -242,21 +252,19 @@
 			<basic name="jazj" />
 			<basic name="zlje" />
 			<basic name="zgj" />
-			<basic name="aqfhwmsgcsf" />
+			<basic name="wmcsf" />
 			<basic name="htqdrq">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<basic name="htqzrq" />
 			<basic name="cbnr" />
-			<basic name="cyhtsfwb" />
-			<basic name="fzjqtsm" />
+			<basic name="htsfwbmc" />
+			<basic name="bz" />
 			<basic name="sfzx" />
 			<basic name="zxsj">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
-			<basic name="zxsm">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
+			<basic name="zxsm" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />

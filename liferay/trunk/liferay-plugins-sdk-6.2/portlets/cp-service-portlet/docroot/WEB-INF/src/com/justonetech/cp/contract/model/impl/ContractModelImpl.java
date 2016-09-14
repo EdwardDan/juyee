@@ -18,7 +18,6 @@ import com.justonetech.cp.contract.model.Contract;
 import com.justonetech.cp.contract.model.ContractModel;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
-import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -57,15 +56,21 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 	public static final String TABLE_NAME = "cp_Contract";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "contractId", Types.VARCHAR },
-			{ "zzjgdm", Types.BIGINT },
+			{ "zzjgdm", Types.VARCHAR },
 			{ "htlb", Types.VARCHAR },
+			{ "id_", Types.VARCHAR },
+			{ "htid", Types.VARCHAR },
 			{ "htbh", Types.VARCHAR },
 			{ "zbhtbh", Types.VARCHAR },
 			{ "fbhtbh", Types.VARCHAR },
+			{ "lwfbhtbh", Types.VARCHAR },
 			{ "htlx", Types.VARCHAR },
 			{ "htzt", Types.VARCHAR },
 			{ "zfbgx", Types.VARCHAR },
-			{ "bsrq", Types.TIMESTAMP },
+			{ "sfsl", Types.VARCHAR },
+			{ "zxbz", Types.VARCHAR },
+			{ "state_", Types.VARCHAR },
+			{ "bssj", Types.TIMESTAMP },
 			{ "slsj", Types.TIMESTAMP },
 			{ "bjbh", Types.VARCHAR },
 			{ "szdq", Types.VARCHAR },
@@ -77,9 +82,9 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 			{ "dwxz", Types.VARCHAR },
 			{ "zjlygc", Types.VARCHAR },
 			{ "ztz", Types.VARCHAR },
-			{ "zjzmj", Types.VARCHAR },
+			{ "zmj", Types.VARCHAR },
 			{ "xmfl", Types.VARCHAR },
-			{ "jzgm", Types.VARCHAR },
+			{ "jsgm", Types.VARCHAR },
 			{ "bdh", Types.VARCHAR },
 			{ "fbfs", Types.VARCHAR },
 			{ "cbfs", Types.VARCHAR },
@@ -95,11 +100,11 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 			{ "sjfzr", Types.VARCHAR },
 			{ "sjfzrzjlx", Types.VARCHAR },
 			{ "sjfzrzjh", Types.VARCHAR },
-			{ "kcdwmc", Types.VARCHAR },
+			{ "kcdw", Types.VARCHAR },
 			{ "kcfzr", Types.VARCHAR },
 			{ "kcfzrzjlx", Types.VARCHAR },
 			{ "kcfzrzjh", Types.VARCHAR },
-			{ "sgdwmc", Types.VARCHAR },
+			{ "sgdw", Types.VARCHAR },
 			{ "sgfzr", Types.VARCHAR },
 			{ "sgfzrzjlx", Types.VARCHAR },
 			{ "sgfzrzjh", Types.VARCHAR },
@@ -121,20 +126,20 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 			{ "jazj", Types.VARCHAR },
 			{ "zlje", Types.VARCHAR },
 			{ "zgj", Types.VARCHAR },
-			{ "aqfhwmsgcsf", Types.VARCHAR },
+			{ "wmcsf", Types.VARCHAR },
 			{ "htqdrq", Types.TIMESTAMP },
 			{ "htqzrq", Types.VARCHAR },
 			{ "cbnr", Types.VARCHAR },
-			{ "cyhtsfwb", Types.VARCHAR },
-			{ "fzjqtsm", Types.VARCHAR },
+			{ "htsfwbmc", Types.VARCHAR },
+			{ "bz", Types.VARCHAR },
 			{ "sfzx", Types.VARCHAR },
 			{ "zxsj", Types.TIMESTAMP },
-			{ "zxsm", Types.TIMESTAMP }
+			{ "zxsm", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table cp_Contract (contractId VARCHAR(75) not null primary key,zzjgdm LONG,htlb VARCHAR(75) null,htbh VARCHAR(75) null,zbhtbh VARCHAR(75) null,fbhtbh VARCHAR(75) null,htlx VARCHAR(75) null,htzt VARCHAR(75) null,zfbgx VARCHAR(75) null,bsrq DATE null,slsj DATE null,bjbh VARCHAR(75) null,szdq VARCHAR(75) null,xmmc VARCHAR(75) null,jsdw VARCHAR(75) null,jsdd VARCHAR(75) null,lxpw VARCHAR(75) null,pzwh VARCHAR(75) null,dwxz VARCHAR(75) null,zjlygc VARCHAR(75) null,ztz VARCHAR(75) null,zjzmj VARCHAR(75) null,xmfl VARCHAR(75) null,jzgm VARCHAR(75) null,bdh VARCHAR(75) null,fbfs VARCHAR(75) null,cbfs VARCHAR(75) null,zycbht VARCHAR(75) null,zygclb VARCHAR(75) null,htmc VARCHAR(75) null,fbdw VARCHAR(75) null,cbdw VARCHAR(75) null,sjdw VARCHAR(75) null,xmfzr VARCHAR(75) null,xmfzrzjlx VARCHAR(75) null,xmfzrzjh VARCHAR(75) null,sjfzr VARCHAR(75) null,sjfzrzjlx VARCHAR(75) null,sjfzrzjh VARCHAR(75) null,kcdwmc VARCHAR(75) null,kcfzr VARCHAR(75) null,kcfzrzjlx VARCHAR(75) null,kcfzrzjh VARCHAR(75) null,sgdwmc VARCHAR(75) null,sgfzr VARCHAR(75) null,sgfzrzjlx VARCHAR(75) null,sgfzrzjh VARCHAR(75) null,xmlb VARCHAR(75) null,gclb VARCHAR(75) null,gcgm VARCHAR(75) null,sjxmlb VARCHAR(75) null,sjgclb VARCHAR(75) null,sjgcgm VARCHAR(75) null,sgxmlb VARCHAR(75) null,sggclb VARCHAR(75) null,sggcgm VARCHAR(75) null,kgrq DATE null,jgrq DATE null,jsfs VARCHAR(75) null,htj VARCHAR(75) null,sjf VARCHAR(75) null,kcf VARCHAR(75) null,jazj VARCHAR(75) null,zlje VARCHAR(75) null,zgj VARCHAR(75) null,aqfhwmsgcsf VARCHAR(75) null,htqdrq DATE null,htqzrq VARCHAR(75) null,cbnr VARCHAR(75) null,cyhtsfwb VARCHAR(75) null,fzjqtsm VARCHAR(75) null,sfzx VARCHAR(75) null,zxsj DATE null,zxsm DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table cp_Contract (contractId VARCHAR(75) not null primary key,zzjgdm VARCHAR(75) null,htlb VARCHAR(75) null,id_ VARCHAR(75) null,htid VARCHAR(75) null,htbh VARCHAR(75) null,zbhtbh VARCHAR(75) null,fbhtbh VARCHAR(75) null,lwfbhtbh VARCHAR(75) null,htlx VARCHAR(75) null,htzt VARCHAR(75) null,zfbgx VARCHAR(75) null,sfsl VARCHAR(75) null,zxbz VARCHAR(75) null,state_ VARCHAR(75) null,bssj DATE null,slsj DATE null,bjbh VARCHAR(75) null,szdq VARCHAR(75) null,xmmc VARCHAR(75) null,jsdw VARCHAR(75) null,jsdd VARCHAR(75) null,lxpw VARCHAR(75) null,pzwh VARCHAR(75) null,dwxz VARCHAR(75) null,zjlygc VARCHAR(75) null,ztz VARCHAR(75) null,zmj VARCHAR(75) null,xmfl VARCHAR(75) null,jsgm VARCHAR(75) null,bdh VARCHAR(75) null,fbfs VARCHAR(75) null,cbfs VARCHAR(75) null,zycbht VARCHAR(75) null,zygclb VARCHAR(75) null,htmc VARCHAR(75) null,fbdw VARCHAR(75) null,cbdw VARCHAR(75) null,sjdw VARCHAR(75) null,xmfzr VARCHAR(75) null,xmfzrzjlx VARCHAR(75) null,xmfzrzjh VARCHAR(75) null,sjfzr VARCHAR(75) null,sjfzrzjlx VARCHAR(75) null,sjfzrzjh VARCHAR(75) null,kcdw VARCHAR(75) null,kcfzr VARCHAR(75) null,kcfzrzjlx VARCHAR(75) null,kcfzrzjh VARCHAR(75) null,sgdw VARCHAR(75) null,sgfzr VARCHAR(75) null,sgfzrzjlx VARCHAR(75) null,sgfzrzjh VARCHAR(75) null,xmlb VARCHAR(75) null,gclb VARCHAR(75) null,gcgm VARCHAR(75) null,sjxmlb VARCHAR(75) null,sjgclb VARCHAR(75) null,sjgcgm VARCHAR(75) null,sgxmlb VARCHAR(75) null,sggclb VARCHAR(75) null,sggcgm VARCHAR(75) null,kgrq DATE null,jgrq DATE null,jsfs VARCHAR(75) null,htj VARCHAR(75) null,sjf VARCHAR(75) null,kcf VARCHAR(75) null,jazj VARCHAR(75) null,zlje VARCHAR(75) null,zgj VARCHAR(75) null,wmcsf VARCHAR(75) null,htqdrq DATE null,htqzrq VARCHAR(75) null,cbnr VARCHAR(75) null,htsfwbmc VARCHAR(75) null,bz VARCHAR(75) null,sfzx VARCHAR(75) null,zxsj DATE null,zxsm VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table cp_Contract";
-	public static final String ORDER_BY_JPQL = " ORDER BY contract.bsrq DESC";
-	public static final String ORDER_BY_SQL = " ORDER BY cp_Contract.bsrq DESC";
+	public static final String ORDER_BY_JPQL = " ORDER BY contract.contractId DESC";
+	public static final String ORDER_BY_SQL = " ORDER BY cp_Contract.contractId DESC";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
@@ -188,13 +193,19 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 		attributes.put("contractId", getContractId());
 		attributes.put("zzjgdm", getZzjgdm());
 		attributes.put("htlb", getHtlb());
+		attributes.put("id", getId());
+		attributes.put("htid", getHtid());
 		attributes.put("htbh", getHtbh());
 		attributes.put("zbhtbh", getZbhtbh());
 		attributes.put("fbhtbh", getFbhtbh());
+		attributes.put("lwfbhtbh", getLwfbhtbh());
 		attributes.put("htlx", getHtlx());
 		attributes.put("htzt", getHtzt());
 		attributes.put("zfbgx", getZfbgx());
-		attributes.put("bsrq", getBsrq());
+		attributes.put("sfsl", getSfsl());
+		attributes.put("zxbz", getZxbz());
+		attributes.put("state", getState());
+		attributes.put("bssj", getBssj());
 		attributes.put("slsj", getSlsj());
 		attributes.put("bjbh", getBjbh());
 		attributes.put("szdq", getSzdq());
@@ -206,9 +217,9 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 		attributes.put("dwxz", getDwxz());
 		attributes.put("zjlygc", getZjlygc());
 		attributes.put("ztz", getZtz());
-		attributes.put("zjzmj", getZjzmj());
+		attributes.put("zmj", getZmj());
 		attributes.put("xmfl", getXmfl());
-		attributes.put("jzgm", getJzgm());
+		attributes.put("jsgm", getJsgm());
 		attributes.put("bdh", getBdh());
 		attributes.put("fbfs", getFbfs());
 		attributes.put("cbfs", getCbfs());
@@ -224,11 +235,11 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 		attributes.put("sjfzr", getSjfzr());
 		attributes.put("sjfzrzjlx", getSjfzrzjlx());
 		attributes.put("sjfzrzjh", getSjfzrzjh());
-		attributes.put("kcdwmc", getKcdwmc());
+		attributes.put("kcdw", getKcdw());
 		attributes.put("kcfzr", getKcfzr());
 		attributes.put("kcfzrzjlx", getKcfzrzjlx());
 		attributes.put("kcfzrzjh", getKcfzrzjh());
-		attributes.put("sgdwmc", getSgdwmc());
+		attributes.put("sgdw", getSgdw());
 		attributes.put("sgfzr", getSgfzr());
 		attributes.put("sgfzrzjlx", getSgfzrzjlx());
 		attributes.put("sgfzrzjh", getSgfzrzjh());
@@ -250,12 +261,12 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 		attributes.put("jazj", getJazj());
 		attributes.put("zlje", getZlje());
 		attributes.put("zgj", getZgj());
-		attributes.put("aqfhwmsgcsf", getAqfhwmsgcsf());
+		attributes.put("wmcsf", getWmcsf());
 		attributes.put("htqdrq", getHtqdrq());
 		attributes.put("htqzrq", getHtqzrq());
 		attributes.put("cbnr", getCbnr());
-		attributes.put("cyhtsfwb", getCyhtsfwb());
-		attributes.put("fzjqtsm", getFzjqtsm());
+		attributes.put("htsfwbmc", getHtsfwbmc());
+		attributes.put("bz", getBz());
 		attributes.put("sfzx", getSfzx());
 		attributes.put("zxsj", getZxsj());
 		attributes.put("zxsm", getZxsm());
@@ -271,7 +282,7 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 			setContractId(contractId);
 		}
 
-		Long zzjgdm = (Long)attributes.get("zzjgdm");
+		String zzjgdm = (String)attributes.get("zzjgdm");
 
 		if (zzjgdm != null) {
 			setZzjgdm(zzjgdm);
@@ -281,6 +292,18 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 
 		if (htlb != null) {
 			setHtlb(htlb);
+		}
+
+		String id = (String)attributes.get("id");
+
+		if (id != null) {
+			setId(id);
+		}
+
+		String htid = (String)attributes.get("htid");
+
+		if (htid != null) {
+			setHtid(htid);
 		}
 
 		String htbh = (String)attributes.get("htbh");
@@ -301,6 +324,12 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 			setFbhtbh(fbhtbh);
 		}
 
+		String lwfbhtbh = (String)attributes.get("lwfbhtbh");
+
+		if (lwfbhtbh != null) {
+			setLwfbhtbh(lwfbhtbh);
+		}
+
 		String htlx = (String)attributes.get("htlx");
 
 		if (htlx != null) {
@@ -319,10 +348,28 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 			setZfbgx(zfbgx);
 		}
 
-		Date bsrq = (Date)attributes.get("bsrq");
+		String sfsl = (String)attributes.get("sfsl");
 
-		if (bsrq != null) {
-			setBsrq(bsrq);
+		if (sfsl != null) {
+			setSfsl(sfsl);
+		}
+
+		String zxbz = (String)attributes.get("zxbz");
+
+		if (zxbz != null) {
+			setZxbz(zxbz);
+		}
+
+		String state = (String)attributes.get("state");
+
+		if (state != null) {
+			setState(state);
+		}
+
+		Date bssj = (Date)attributes.get("bssj");
+
+		if (bssj != null) {
+			setBssj(bssj);
 		}
 
 		Date slsj = (Date)attributes.get("slsj");
@@ -391,10 +438,10 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 			setZtz(ztz);
 		}
 
-		String zjzmj = (String)attributes.get("zjzmj");
+		String zmj = (String)attributes.get("zmj");
 
-		if (zjzmj != null) {
-			setZjzmj(zjzmj);
+		if (zmj != null) {
+			setZmj(zmj);
 		}
 
 		String xmfl = (String)attributes.get("xmfl");
@@ -403,10 +450,10 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 			setXmfl(xmfl);
 		}
 
-		String jzgm = (String)attributes.get("jzgm");
+		String jsgm = (String)attributes.get("jsgm");
 
-		if (jzgm != null) {
-			setJzgm(jzgm);
+		if (jsgm != null) {
+			setJsgm(jsgm);
 		}
 
 		String bdh = (String)attributes.get("bdh");
@@ -499,10 +546,10 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 			setSjfzrzjh(sjfzrzjh);
 		}
 
-		String kcdwmc = (String)attributes.get("kcdwmc");
+		String kcdw = (String)attributes.get("kcdw");
 
-		if (kcdwmc != null) {
-			setKcdwmc(kcdwmc);
+		if (kcdw != null) {
+			setKcdw(kcdw);
 		}
 
 		String kcfzr = (String)attributes.get("kcfzr");
@@ -523,10 +570,10 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 			setKcfzrzjh(kcfzrzjh);
 		}
 
-		String sgdwmc = (String)attributes.get("sgdwmc");
+		String sgdw = (String)attributes.get("sgdw");
 
-		if (sgdwmc != null) {
-			setSgdwmc(sgdwmc);
+		if (sgdw != null) {
+			setSgdw(sgdw);
 		}
 
 		String sgfzr = (String)attributes.get("sgfzr");
@@ -655,10 +702,10 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 			setZgj(zgj);
 		}
 
-		String aqfhwmsgcsf = (String)attributes.get("aqfhwmsgcsf");
+		String wmcsf = (String)attributes.get("wmcsf");
 
-		if (aqfhwmsgcsf != null) {
-			setAqfhwmsgcsf(aqfhwmsgcsf);
+		if (wmcsf != null) {
+			setWmcsf(wmcsf);
 		}
 
 		Date htqdrq = (Date)attributes.get("htqdrq");
@@ -679,16 +726,16 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 			setCbnr(cbnr);
 		}
 
-		String cyhtsfwb = (String)attributes.get("cyhtsfwb");
+		String htsfwbmc = (String)attributes.get("htsfwbmc");
 
-		if (cyhtsfwb != null) {
-			setCyhtsfwb(cyhtsfwb);
+		if (htsfwbmc != null) {
+			setHtsfwbmc(htsfwbmc);
 		}
 
-		String fzjqtsm = (String)attributes.get("fzjqtsm");
+		String bz = (String)attributes.get("bz");
 
-		if (fzjqtsm != null) {
-			setFzjqtsm(fzjqtsm);
+		if (bz != null) {
+			setBz(bz);
 		}
 
 		String sfzx = (String)attributes.get("sfzx");
@@ -703,7 +750,7 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 			setZxsj(zxsj);
 		}
 
-		Date zxsm = (Date)attributes.get("zxsm");
+		String zxsm = (String)attributes.get("zxsm");
 
 		if (zxsm != null) {
 			setZxsm(zxsm);
@@ -726,12 +773,17 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 	}
 
 	@Override
-	public long getZzjgdm() {
-		return _zzjgdm;
+	public String getZzjgdm() {
+		if (_zzjgdm == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _zzjgdm;
+		}
 	}
 
 	@Override
-	public void setZzjgdm(long zzjgdm) {
+	public void setZzjgdm(String zzjgdm) {
 		_zzjgdm = zzjgdm;
 	}
 
@@ -748,6 +800,36 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 	@Override
 	public void setHtlb(String htlb) {
 		_htlb = htlb;
+	}
+
+	@Override
+	public String getId() {
+		if (_id == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _id;
+		}
+	}
+
+	@Override
+	public void setId(String id) {
+		_id = id;
+	}
+
+	@Override
+	public String getHtid() {
+		if (_htid == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _htid;
+		}
+	}
+
+	@Override
+	public void setHtid(String htid) {
+		_htid = htid;
 	}
 
 	@Override
@@ -796,6 +878,21 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 	}
 
 	@Override
+	public String getLwfbhtbh() {
+		if (_lwfbhtbh == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _lwfbhtbh;
+		}
+	}
+
+	@Override
+	public void setLwfbhtbh(String lwfbhtbh) {
+		_lwfbhtbh = lwfbhtbh;
+	}
+
+	@Override
 	public String getHtlx() {
 		if (_htlx == null) {
 			return StringPool.BLANK;
@@ -841,13 +938,58 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 	}
 
 	@Override
-	public Date getBsrq() {
-		return _bsrq;
+	public String getSfsl() {
+		if (_sfsl == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _sfsl;
+		}
 	}
 
 	@Override
-	public void setBsrq(Date bsrq) {
-		_bsrq = bsrq;
+	public void setSfsl(String sfsl) {
+		_sfsl = sfsl;
+	}
+
+	@Override
+	public String getZxbz() {
+		if (_zxbz == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _zxbz;
+		}
+	}
+
+	@Override
+	public void setZxbz(String zxbz) {
+		_zxbz = zxbz;
+	}
+
+	@Override
+	public String getState() {
+		if (_state == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _state;
+		}
+	}
+
+	@Override
+	public void setState(String state) {
+		_state = state;
+	}
+
+	@Override
+	public Date getBssj() {
+		return _bssj;
+	}
+
+	@Override
+	public void setBssj(Date bssj) {
+		_bssj = bssj;
 	}
 
 	@Override
@@ -1011,18 +1153,18 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 	}
 
 	@Override
-	public String getZjzmj() {
-		if (_zjzmj == null) {
+	public String getZmj() {
+		if (_zmj == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _zjzmj;
+			return _zmj;
 		}
 	}
 
 	@Override
-	public void setZjzmj(String zjzmj) {
-		_zjzmj = zjzmj;
+	public void setZmj(String zmj) {
+		_zmj = zmj;
 	}
 
 	@Override
@@ -1041,18 +1183,18 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 	}
 
 	@Override
-	public String getJzgm() {
-		if (_jzgm == null) {
+	public String getJsgm() {
+		if (_jsgm == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _jzgm;
+			return _jsgm;
 		}
 	}
 
 	@Override
-	public void setJzgm(String jzgm) {
-		_jzgm = jzgm;
+	public void setJsgm(String jsgm) {
+		_jsgm = jsgm;
 	}
 
 	@Override
@@ -1281,18 +1423,18 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 	}
 
 	@Override
-	public String getKcdwmc() {
-		if (_kcdwmc == null) {
+	public String getKcdw() {
+		if (_kcdw == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _kcdwmc;
+			return _kcdw;
 		}
 	}
 
 	@Override
-	public void setKcdwmc(String kcdwmc) {
-		_kcdwmc = kcdwmc;
+	public void setKcdw(String kcdw) {
+		_kcdw = kcdw;
 	}
 
 	@Override
@@ -1341,18 +1483,18 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 	}
 
 	@Override
-	public String getSgdwmc() {
-		if (_sgdwmc == null) {
+	public String getSgdw() {
+		if (_sgdw == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _sgdwmc;
+			return _sgdw;
 		}
 	}
 
 	@Override
-	public void setSgdwmc(String sgdwmc) {
-		_sgdwmc = sgdwmc;
+	public void setSgdw(String sgdw) {
+		_sgdw = sgdw;
 	}
 
 	@Override
@@ -1661,18 +1803,18 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 	}
 
 	@Override
-	public String getAqfhwmsgcsf() {
-		if (_aqfhwmsgcsf == null) {
+	public String getWmcsf() {
+		if (_wmcsf == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _aqfhwmsgcsf;
+			return _wmcsf;
 		}
 	}
 
 	@Override
-	public void setAqfhwmsgcsf(String aqfhwmsgcsf) {
-		_aqfhwmsgcsf = aqfhwmsgcsf;
+	public void setWmcsf(String wmcsf) {
+		_wmcsf = wmcsf;
 	}
 
 	@Override
@@ -1716,33 +1858,33 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 	}
 
 	@Override
-	public String getCyhtsfwb() {
-		if (_cyhtsfwb == null) {
+	public String getHtsfwbmc() {
+		if (_htsfwbmc == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _cyhtsfwb;
+			return _htsfwbmc;
 		}
 	}
 
 	@Override
-	public void setCyhtsfwb(String cyhtsfwb) {
-		_cyhtsfwb = cyhtsfwb;
+	public void setHtsfwbmc(String htsfwbmc) {
+		_htsfwbmc = htsfwbmc;
 	}
 
 	@Override
-	public String getFzjqtsm() {
-		if (_fzjqtsm == null) {
+	public String getBz() {
+		if (_bz == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _fzjqtsm;
+			return _bz;
 		}
 	}
 
 	@Override
-	public void setFzjqtsm(String fzjqtsm) {
-		_fzjqtsm = fzjqtsm;
+	public void setBz(String bz) {
+		_bz = bz;
 	}
 
 	@Override
@@ -1771,12 +1913,17 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 	}
 
 	@Override
-	public Date getZxsm() {
-		return _zxsm;
+	public String getZxsm() {
+		if (_zxsm == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _zxsm;
+		}
 	}
 
 	@Override
-	public void setZxsm(Date zxsm) {
+	public void setZxsm(String zxsm) {
 		_zxsm = zxsm;
 	}
 
@@ -1797,13 +1944,19 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 		contractImpl.setContractId(getContractId());
 		contractImpl.setZzjgdm(getZzjgdm());
 		contractImpl.setHtlb(getHtlb());
+		contractImpl.setId(getId());
+		contractImpl.setHtid(getHtid());
 		contractImpl.setHtbh(getHtbh());
 		contractImpl.setZbhtbh(getZbhtbh());
 		contractImpl.setFbhtbh(getFbhtbh());
+		contractImpl.setLwfbhtbh(getLwfbhtbh());
 		contractImpl.setHtlx(getHtlx());
 		contractImpl.setHtzt(getHtzt());
 		contractImpl.setZfbgx(getZfbgx());
-		contractImpl.setBsrq(getBsrq());
+		contractImpl.setSfsl(getSfsl());
+		contractImpl.setZxbz(getZxbz());
+		contractImpl.setState(getState());
+		contractImpl.setBssj(getBssj());
 		contractImpl.setSlsj(getSlsj());
 		contractImpl.setBjbh(getBjbh());
 		contractImpl.setSzdq(getSzdq());
@@ -1815,9 +1968,9 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 		contractImpl.setDwxz(getDwxz());
 		contractImpl.setZjlygc(getZjlygc());
 		contractImpl.setZtz(getZtz());
-		contractImpl.setZjzmj(getZjzmj());
+		contractImpl.setZmj(getZmj());
 		contractImpl.setXmfl(getXmfl());
-		contractImpl.setJzgm(getJzgm());
+		contractImpl.setJsgm(getJsgm());
 		contractImpl.setBdh(getBdh());
 		contractImpl.setFbfs(getFbfs());
 		contractImpl.setCbfs(getCbfs());
@@ -1833,11 +1986,11 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 		contractImpl.setSjfzr(getSjfzr());
 		contractImpl.setSjfzrzjlx(getSjfzrzjlx());
 		contractImpl.setSjfzrzjh(getSjfzrzjh());
-		contractImpl.setKcdwmc(getKcdwmc());
+		contractImpl.setKcdw(getKcdw());
 		contractImpl.setKcfzr(getKcfzr());
 		contractImpl.setKcfzrzjlx(getKcfzrzjlx());
 		contractImpl.setKcfzrzjh(getKcfzrzjh());
-		contractImpl.setSgdwmc(getSgdwmc());
+		contractImpl.setSgdw(getSgdw());
 		contractImpl.setSgfzr(getSgfzr());
 		contractImpl.setSgfzrzjlx(getSgfzrzjlx());
 		contractImpl.setSgfzrzjh(getSgfzrzjh());
@@ -1859,12 +2012,12 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 		contractImpl.setJazj(getJazj());
 		contractImpl.setZlje(getZlje());
 		contractImpl.setZgj(getZgj());
-		contractImpl.setAqfhwmsgcsf(getAqfhwmsgcsf());
+		contractImpl.setWmcsf(getWmcsf());
 		contractImpl.setHtqdrq(getHtqdrq());
 		contractImpl.setHtqzrq(getHtqzrq());
 		contractImpl.setCbnr(getCbnr());
-		contractImpl.setCyhtsfwb(getCyhtsfwb());
-		contractImpl.setFzjqtsm(getFzjqtsm());
+		contractImpl.setHtsfwbmc(getHtsfwbmc());
+		contractImpl.setBz(getBz());
 		contractImpl.setSfzx(getSfzx());
 		contractImpl.setZxsj(getZxsj());
 		contractImpl.setZxsm(getZxsm());
@@ -1878,7 +2031,7 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 	public int compareTo(Contract contract) {
 		int value = 0;
 
-		value = DateUtil.compareTo(getBsrq(), contract.getBsrq());
+		value = getContractId().compareTo(contract.getContractId());
 
 		value = value * -1;
 
@@ -1934,12 +2087,34 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 
 		contractCacheModel.zzjgdm = getZzjgdm();
 
+		String zzjgdm = contractCacheModel.zzjgdm;
+
+		if ((zzjgdm != null) && (zzjgdm.length() == 0)) {
+			contractCacheModel.zzjgdm = null;
+		}
+
 		contractCacheModel.htlb = getHtlb();
 
 		String htlb = contractCacheModel.htlb;
 
 		if ((htlb != null) && (htlb.length() == 0)) {
 			contractCacheModel.htlb = null;
+		}
+
+		contractCacheModel.id = getId();
+
+		String id = contractCacheModel.id;
+
+		if ((id != null) && (id.length() == 0)) {
+			contractCacheModel.id = null;
+		}
+
+		contractCacheModel.htid = getHtid();
+
+		String htid = contractCacheModel.htid;
+
+		if ((htid != null) && (htid.length() == 0)) {
+			contractCacheModel.htid = null;
 		}
 
 		contractCacheModel.htbh = getHtbh();
@@ -1966,6 +2141,14 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 			contractCacheModel.fbhtbh = null;
 		}
 
+		contractCacheModel.lwfbhtbh = getLwfbhtbh();
+
+		String lwfbhtbh = contractCacheModel.lwfbhtbh;
+
+		if ((lwfbhtbh != null) && (lwfbhtbh.length() == 0)) {
+			contractCacheModel.lwfbhtbh = null;
+		}
+
 		contractCacheModel.htlx = getHtlx();
 
 		String htlx = contractCacheModel.htlx;
@@ -1990,13 +2173,37 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 			contractCacheModel.zfbgx = null;
 		}
 
-		Date bsrq = getBsrq();
+		contractCacheModel.sfsl = getSfsl();
 
-		if (bsrq != null) {
-			contractCacheModel.bsrq = bsrq.getTime();
+		String sfsl = contractCacheModel.sfsl;
+
+		if ((sfsl != null) && (sfsl.length() == 0)) {
+			contractCacheModel.sfsl = null;
+		}
+
+		contractCacheModel.zxbz = getZxbz();
+
+		String zxbz = contractCacheModel.zxbz;
+
+		if ((zxbz != null) && (zxbz.length() == 0)) {
+			contractCacheModel.zxbz = null;
+		}
+
+		contractCacheModel.state = getState();
+
+		String state = contractCacheModel.state;
+
+		if ((state != null) && (state.length() == 0)) {
+			contractCacheModel.state = null;
+		}
+
+		Date bssj = getBssj();
+
+		if (bssj != null) {
+			contractCacheModel.bssj = bssj.getTime();
 		}
 		else {
-			contractCacheModel.bsrq = Long.MIN_VALUE;
+			contractCacheModel.bssj = Long.MIN_VALUE;
 		}
 
 		Date slsj = getSlsj();
@@ -2088,12 +2295,12 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 			contractCacheModel.ztz = null;
 		}
 
-		contractCacheModel.zjzmj = getZjzmj();
+		contractCacheModel.zmj = getZmj();
 
-		String zjzmj = contractCacheModel.zjzmj;
+		String zmj = contractCacheModel.zmj;
 
-		if ((zjzmj != null) && (zjzmj.length() == 0)) {
-			contractCacheModel.zjzmj = null;
+		if ((zmj != null) && (zmj.length() == 0)) {
+			contractCacheModel.zmj = null;
 		}
 
 		contractCacheModel.xmfl = getXmfl();
@@ -2104,12 +2311,12 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 			contractCacheModel.xmfl = null;
 		}
 
-		contractCacheModel.jzgm = getJzgm();
+		contractCacheModel.jsgm = getJsgm();
 
-		String jzgm = contractCacheModel.jzgm;
+		String jsgm = contractCacheModel.jsgm;
 
-		if ((jzgm != null) && (jzgm.length() == 0)) {
-			contractCacheModel.jzgm = null;
+		if ((jsgm != null) && (jsgm.length() == 0)) {
+			contractCacheModel.jsgm = null;
 		}
 
 		contractCacheModel.bdh = getBdh();
@@ -2232,12 +2439,12 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 			contractCacheModel.sjfzrzjh = null;
 		}
 
-		contractCacheModel.kcdwmc = getKcdwmc();
+		contractCacheModel.kcdw = getKcdw();
 
-		String kcdwmc = contractCacheModel.kcdwmc;
+		String kcdw = contractCacheModel.kcdw;
 
-		if ((kcdwmc != null) && (kcdwmc.length() == 0)) {
-			contractCacheModel.kcdwmc = null;
+		if ((kcdw != null) && (kcdw.length() == 0)) {
+			contractCacheModel.kcdw = null;
 		}
 
 		contractCacheModel.kcfzr = getKcfzr();
@@ -2264,12 +2471,12 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 			contractCacheModel.kcfzrzjh = null;
 		}
 
-		contractCacheModel.sgdwmc = getSgdwmc();
+		contractCacheModel.sgdw = getSgdw();
 
-		String sgdwmc = contractCacheModel.sgdwmc;
+		String sgdw = contractCacheModel.sgdw;
 
-		if ((sgdwmc != null) && (sgdwmc.length() == 0)) {
-			contractCacheModel.sgdwmc = null;
+		if ((sgdw != null) && (sgdw.length() == 0)) {
+			contractCacheModel.sgdw = null;
 		}
 
 		contractCacheModel.sgfzr = getSgfzr();
@@ -2442,12 +2649,12 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 			contractCacheModel.zgj = null;
 		}
 
-		contractCacheModel.aqfhwmsgcsf = getAqfhwmsgcsf();
+		contractCacheModel.wmcsf = getWmcsf();
 
-		String aqfhwmsgcsf = contractCacheModel.aqfhwmsgcsf;
+		String wmcsf = contractCacheModel.wmcsf;
 
-		if ((aqfhwmsgcsf != null) && (aqfhwmsgcsf.length() == 0)) {
-			contractCacheModel.aqfhwmsgcsf = null;
+		if ((wmcsf != null) && (wmcsf.length() == 0)) {
+			contractCacheModel.wmcsf = null;
 		}
 
 		Date htqdrq = getHtqdrq();
@@ -2475,20 +2682,20 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 			contractCacheModel.cbnr = null;
 		}
 
-		contractCacheModel.cyhtsfwb = getCyhtsfwb();
+		contractCacheModel.htsfwbmc = getHtsfwbmc();
 
-		String cyhtsfwb = contractCacheModel.cyhtsfwb;
+		String htsfwbmc = contractCacheModel.htsfwbmc;
 
-		if ((cyhtsfwb != null) && (cyhtsfwb.length() == 0)) {
-			contractCacheModel.cyhtsfwb = null;
+		if ((htsfwbmc != null) && (htsfwbmc.length() == 0)) {
+			contractCacheModel.htsfwbmc = null;
 		}
 
-		contractCacheModel.fzjqtsm = getFzjqtsm();
+		contractCacheModel.bz = getBz();
 
-		String fzjqtsm = contractCacheModel.fzjqtsm;
+		String bz = contractCacheModel.bz;
 
-		if ((fzjqtsm != null) && (fzjqtsm.length() == 0)) {
-			contractCacheModel.fzjqtsm = null;
+		if ((bz != null) && (bz.length() == 0)) {
+			contractCacheModel.bz = null;
 		}
 
 		contractCacheModel.sfzx = getSfzx();
@@ -2508,13 +2715,12 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 			contractCacheModel.zxsj = Long.MIN_VALUE;
 		}
 
-		Date zxsm = getZxsm();
+		contractCacheModel.zxsm = getZxsm();
 
-		if (zxsm != null) {
-			contractCacheModel.zxsm = zxsm.getTime();
-		}
-		else {
-			contractCacheModel.zxsm = Long.MIN_VALUE;
+		String zxsm = contractCacheModel.zxsm;
+
+		if ((zxsm != null) && (zxsm.length() == 0)) {
+			contractCacheModel.zxsm = null;
 		}
 
 		return contractCacheModel;
@@ -2522,7 +2728,7 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(149);
+		StringBundler sb = new StringBundler(161);
 
 		sb.append("{contractId=");
 		sb.append(getContractId());
@@ -2530,20 +2736,32 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 		sb.append(getZzjgdm());
 		sb.append(", htlb=");
 		sb.append(getHtlb());
+		sb.append(", id=");
+		sb.append(getId());
+		sb.append(", htid=");
+		sb.append(getHtid());
 		sb.append(", htbh=");
 		sb.append(getHtbh());
 		sb.append(", zbhtbh=");
 		sb.append(getZbhtbh());
 		sb.append(", fbhtbh=");
 		sb.append(getFbhtbh());
+		sb.append(", lwfbhtbh=");
+		sb.append(getLwfbhtbh());
 		sb.append(", htlx=");
 		sb.append(getHtlx());
 		sb.append(", htzt=");
 		sb.append(getHtzt());
 		sb.append(", zfbgx=");
 		sb.append(getZfbgx());
-		sb.append(", bsrq=");
-		sb.append(getBsrq());
+		sb.append(", sfsl=");
+		sb.append(getSfsl());
+		sb.append(", zxbz=");
+		sb.append(getZxbz());
+		sb.append(", state=");
+		sb.append(getState());
+		sb.append(", bssj=");
+		sb.append(getBssj());
 		sb.append(", slsj=");
 		sb.append(getSlsj());
 		sb.append(", bjbh=");
@@ -2566,12 +2784,12 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 		sb.append(getZjlygc());
 		sb.append(", ztz=");
 		sb.append(getZtz());
-		sb.append(", zjzmj=");
-		sb.append(getZjzmj());
+		sb.append(", zmj=");
+		sb.append(getZmj());
 		sb.append(", xmfl=");
 		sb.append(getXmfl());
-		sb.append(", jzgm=");
-		sb.append(getJzgm());
+		sb.append(", jsgm=");
+		sb.append(getJsgm());
 		sb.append(", bdh=");
 		sb.append(getBdh());
 		sb.append(", fbfs=");
@@ -2602,16 +2820,16 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 		sb.append(getSjfzrzjlx());
 		sb.append(", sjfzrzjh=");
 		sb.append(getSjfzrzjh());
-		sb.append(", kcdwmc=");
-		sb.append(getKcdwmc());
+		sb.append(", kcdw=");
+		sb.append(getKcdw());
 		sb.append(", kcfzr=");
 		sb.append(getKcfzr());
 		sb.append(", kcfzrzjlx=");
 		sb.append(getKcfzrzjlx());
 		sb.append(", kcfzrzjh=");
 		sb.append(getKcfzrzjh());
-		sb.append(", sgdwmc=");
-		sb.append(getSgdwmc());
+		sb.append(", sgdw=");
+		sb.append(getSgdw());
 		sb.append(", sgfzr=");
 		sb.append(getSgfzr());
 		sb.append(", sgfzrzjlx=");
@@ -2654,18 +2872,18 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 		sb.append(getZlje());
 		sb.append(", zgj=");
 		sb.append(getZgj());
-		sb.append(", aqfhwmsgcsf=");
-		sb.append(getAqfhwmsgcsf());
+		sb.append(", wmcsf=");
+		sb.append(getWmcsf());
 		sb.append(", htqdrq=");
 		sb.append(getHtqdrq());
 		sb.append(", htqzrq=");
 		sb.append(getHtqzrq());
 		sb.append(", cbnr=");
 		sb.append(getCbnr());
-		sb.append(", cyhtsfwb=");
-		sb.append(getCyhtsfwb());
-		sb.append(", fzjqtsm=");
-		sb.append(getFzjqtsm());
+		sb.append(", htsfwbmc=");
+		sb.append(getHtsfwbmc());
+		sb.append(", bz=");
+		sb.append(getBz());
 		sb.append(", sfzx=");
 		sb.append(getSfzx());
 		sb.append(", zxsj=");
@@ -2679,7 +2897,7 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(226);
+		StringBundler sb = new StringBundler(244);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.cp.contract.model.Contract");
@@ -2698,6 +2916,14 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 		sb.append(getHtlb());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>id</column-name><column-value><![CDATA[");
+		sb.append(getId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>htid</column-name><column-value><![CDATA[");
+		sb.append(getHtid());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>htbh</column-name><column-value><![CDATA[");
 		sb.append(getHtbh());
 		sb.append("]]></column-value></column>");
@@ -2708,6 +2934,10 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 		sb.append(
 			"<column><column-name>fbhtbh</column-name><column-value><![CDATA[");
 		sb.append(getFbhtbh());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>lwfbhtbh</column-name><column-value><![CDATA[");
+		sb.append(getLwfbhtbh());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>htlx</column-name><column-value><![CDATA[");
@@ -2722,8 +2952,20 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 		sb.append(getZfbgx());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>bsrq</column-name><column-value><![CDATA[");
-		sb.append(getBsrq());
+			"<column><column-name>sfsl</column-name><column-value><![CDATA[");
+		sb.append(getSfsl());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>zxbz</column-name><column-value><![CDATA[");
+		sb.append(getZxbz());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>state</column-name><column-value><![CDATA[");
+		sb.append(getState());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>bssj</column-name><column-value><![CDATA[");
+		sb.append(getBssj());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>slsj</column-name><column-value><![CDATA[");
@@ -2770,16 +3012,16 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 		sb.append(getZtz());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>zjzmj</column-name><column-value><![CDATA[");
-		sb.append(getZjzmj());
+			"<column><column-name>zmj</column-name><column-value><![CDATA[");
+		sb.append(getZmj());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>xmfl</column-name><column-value><![CDATA[");
 		sb.append(getXmfl());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>jzgm</column-name><column-value><![CDATA[");
-		sb.append(getJzgm());
+			"<column><column-name>jsgm</column-name><column-value><![CDATA[");
+		sb.append(getJsgm());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>bdh</column-name><column-value><![CDATA[");
@@ -2842,8 +3084,8 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 		sb.append(getSjfzrzjh());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>kcdwmc</column-name><column-value><![CDATA[");
-		sb.append(getKcdwmc());
+			"<column><column-name>kcdw</column-name><column-value><![CDATA[");
+		sb.append(getKcdw());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>kcfzr</column-name><column-value><![CDATA[");
@@ -2858,8 +3100,8 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 		sb.append(getKcfzrzjh());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>sgdwmc</column-name><column-value><![CDATA[");
-		sb.append(getSgdwmc());
+			"<column><column-name>sgdw</column-name><column-value><![CDATA[");
+		sb.append(getSgdw());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>sgfzr</column-name><column-value><![CDATA[");
@@ -2946,8 +3188,8 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 		sb.append(getZgj());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>aqfhwmsgcsf</column-name><column-value><![CDATA[");
-		sb.append(getAqfhwmsgcsf());
+			"<column><column-name>wmcsf</column-name><column-value><![CDATA[");
+		sb.append(getWmcsf());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>htqdrq</column-name><column-value><![CDATA[");
@@ -2962,12 +3204,12 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 		sb.append(getCbnr());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>cyhtsfwb</column-name><column-value><![CDATA[");
-		sb.append(getCyhtsfwb());
+			"<column><column-name>htsfwbmc</column-name><column-value><![CDATA[");
+		sb.append(getHtsfwbmc());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>fzjqtsm</column-name><column-value><![CDATA[");
-		sb.append(getFzjqtsm());
+			"<column><column-name>bz</column-name><column-value><![CDATA[");
+		sb.append(getBz());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>sfzx</column-name><column-value><![CDATA[");
@@ -2992,15 +3234,21 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 			Contract.class
 		};
 	private String _contractId;
-	private long _zzjgdm;
+	private String _zzjgdm;
 	private String _htlb;
+	private String _id;
+	private String _htid;
 	private String _htbh;
 	private String _zbhtbh;
 	private String _fbhtbh;
+	private String _lwfbhtbh;
 	private String _htlx;
 	private String _htzt;
 	private String _zfbgx;
-	private Date _bsrq;
+	private String _sfsl;
+	private String _zxbz;
+	private String _state;
+	private Date _bssj;
 	private Date _slsj;
 	private String _bjbh;
 	private String _szdq;
@@ -3012,9 +3260,9 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 	private String _dwxz;
 	private String _zjlygc;
 	private String _ztz;
-	private String _zjzmj;
+	private String _zmj;
 	private String _xmfl;
-	private String _jzgm;
+	private String _jsgm;
 	private String _bdh;
 	private String _fbfs;
 	private String _cbfs;
@@ -3030,11 +3278,11 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 	private String _sjfzr;
 	private String _sjfzrzjlx;
 	private String _sjfzrzjh;
-	private String _kcdwmc;
+	private String _kcdw;
 	private String _kcfzr;
 	private String _kcfzrzjlx;
 	private String _kcfzrzjh;
-	private String _sgdwmc;
+	private String _sgdw;
 	private String _sgfzr;
 	private String _sgfzrzjlx;
 	private String _sgfzrzjh;
@@ -3056,14 +3304,14 @@ public class ContractModelImpl extends BaseModelImpl<Contract>
 	private String _jazj;
 	private String _zlje;
 	private String _zgj;
-	private String _aqfhwmsgcsf;
+	private String _wmcsf;
 	private Date _htqdrq;
 	private String _htqzrq;
 	private String _cbnr;
-	private String _cyhtsfwb;
-	private String _fzjqtsm;
+	private String _htsfwbmc;
+	private String _bz;
 	private String _sfzx;
 	private Date _zxsj;
-	private Date _zxsm;
+	private String _zxsm;
 	private Contract _escapedModel;
 }

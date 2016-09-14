@@ -190,15 +190,21 @@
 	</model>
 	<model name="com.justonetech.cp.contract.model.Contract">
 		<field name="contractId" type="String" />
-		<field name="zzjgdm" type="long" />
+		<field name="zzjgdm" type="String" />
 		<field name="htlb" type="String" />
+		<field name="id" type="String" />
+		<field name="htid" type="String" />
 		<field name="htbh" type="String" />
 		<field name="zbhtbh" type="String" />
 		<field name="fbhtbh" type="String" />
+		<field name="lwfbhtbh" type="String" />
 		<field name="htlx" type="String" />
 		<field name="htzt" type="String" />
 		<field name="zfbgx" type="String" />
-		<field name="bsrq" type="Date" />
+		<field name="sfsl" type="String" />
+		<field name="zxbz" type="String" />
+		<field name="state" type="String" />
+		<field name="bssj" type="Date" />
 		<field name="slsj" type="Date" />
 		<field name="bjbh" type="String" />
 		<field name="szdq" type="String" />
@@ -210,9 +216,9 @@
 		<field name="dwxz" type="String" />
 		<field name="zjlygc" type="String" />
 		<field name="ztz" type="String" />
-		<field name="zjzmj" type="String" />
+		<field name="zmj" type="String" />
 		<field name="xmfl" type="String" />
-		<field name="jzgm" type="String" />
+		<field name="jsgm" type="String" />
 		<field name="bdh" type="String" />
 		<field name="fbfs" type="String" />
 		<field name="cbfs" type="String" />
@@ -228,11 +234,11 @@
 		<field name="sjfzr" type="String" />
 		<field name="sjfzrzjlx" type="String" />
 		<field name="sjfzrzjh" type="String" />
-		<field name="kcdwmc" type="String" />
+		<field name="kcdw" type="String" />
 		<field name="kcfzr" type="String" />
 		<field name="kcfzrzjlx" type="String" />
 		<field name="kcfzrzjh" type="String" />
-		<field name="sgdwmc" type="String" />
+		<field name="sgdw" type="String" />
 		<field name="sgfzr" type="String" />
 		<field name="sgfzrzjlx" type="String" />
 		<field name="sgfzrzjh" type="String" />
@@ -254,15 +260,15 @@
 		<field name="jazj" type="String" />
 		<field name="zlje" type="String" />
 		<field name="zgj" type="String" />
-		<field name="aqfhwmsgcsf" type="String" />
+		<field name="wmcsf" type="String" />
 		<field name="htqdrq" type="Date" />
 		<field name="htqzrq" type="String" />
 		<field name="cbnr" type="String" />
-		<field name="cyhtsfwb" type="String" />
-		<field name="fzjqtsm" type="String" />
+		<field name="htsfwbmc" type="String" />
+		<field name="bz" type="String" />
 		<field name="sfzx" type="String" />
 		<field name="zxsj" type="Date" />
-		<field name="zxsm" type="Date" />
+		<field name="zxsm" type="String" />
 	</model>
 	<model name="com.justonetech.cp.permit.model.ApplyMaterial">
 		<field name="materialId" type="long" />

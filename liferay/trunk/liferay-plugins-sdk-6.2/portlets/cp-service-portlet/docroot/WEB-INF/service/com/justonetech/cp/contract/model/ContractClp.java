@@ -19,7 +19,6 @@ import com.justonetech.cp.contract.service.ContractLocalServiceUtil;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.BaseModel;
@@ -77,13 +76,19 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 		attributes.put("contractId", getContractId());
 		attributes.put("zzjgdm", getZzjgdm());
 		attributes.put("htlb", getHtlb());
+		attributes.put("id", getId());
+		attributes.put("htid", getHtid());
 		attributes.put("htbh", getHtbh());
 		attributes.put("zbhtbh", getZbhtbh());
 		attributes.put("fbhtbh", getFbhtbh());
+		attributes.put("lwfbhtbh", getLwfbhtbh());
 		attributes.put("htlx", getHtlx());
 		attributes.put("htzt", getHtzt());
 		attributes.put("zfbgx", getZfbgx());
-		attributes.put("bsrq", getBsrq());
+		attributes.put("sfsl", getSfsl());
+		attributes.put("zxbz", getZxbz());
+		attributes.put("state", getState());
+		attributes.put("bssj", getBssj());
 		attributes.put("slsj", getSlsj());
 		attributes.put("bjbh", getBjbh());
 		attributes.put("szdq", getSzdq());
@@ -95,9 +100,9 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 		attributes.put("dwxz", getDwxz());
 		attributes.put("zjlygc", getZjlygc());
 		attributes.put("ztz", getZtz());
-		attributes.put("zjzmj", getZjzmj());
+		attributes.put("zmj", getZmj());
 		attributes.put("xmfl", getXmfl());
-		attributes.put("jzgm", getJzgm());
+		attributes.put("jsgm", getJsgm());
 		attributes.put("bdh", getBdh());
 		attributes.put("fbfs", getFbfs());
 		attributes.put("cbfs", getCbfs());
@@ -113,11 +118,11 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 		attributes.put("sjfzr", getSjfzr());
 		attributes.put("sjfzrzjlx", getSjfzrzjlx());
 		attributes.put("sjfzrzjh", getSjfzrzjh());
-		attributes.put("kcdwmc", getKcdwmc());
+		attributes.put("kcdw", getKcdw());
 		attributes.put("kcfzr", getKcfzr());
 		attributes.put("kcfzrzjlx", getKcfzrzjlx());
 		attributes.put("kcfzrzjh", getKcfzrzjh());
-		attributes.put("sgdwmc", getSgdwmc());
+		attributes.put("sgdw", getSgdw());
 		attributes.put("sgfzr", getSgfzr());
 		attributes.put("sgfzrzjlx", getSgfzrzjlx());
 		attributes.put("sgfzrzjh", getSgfzrzjh());
@@ -139,12 +144,12 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 		attributes.put("jazj", getJazj());
 		attributes.put("zlje", getZlje());
 		attributes.put("zgj", getZgj());
-		attributes.put("aqfhwmsgcsf", getAqfhwmsgcsf());
+		attributes.put("wmcsf", getWmcsf());
 		attributes.put("htqdrq", getHtqdrq());
 		attributes.put("htqzrq", getHtqzrq());
 		attributes.put("cbnr", getCbnr());
-		attributes.put("cyhtsfwb", getCyhtsfwb());
-		attributes.put("fzjqtsm", getFzjqtsm());
+		attributes.put("htsfwbmc", getHtsfwbmc());
+		attributes.put("bz", getBz());
 		attributes.put("sfzx", getSfzx());
 		attributes.put("zxsj", getZxsj());
 		attributes.put("zxsm", getZxsm());
@@ -160,7 +165,7 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 			setContractId(contractId);
 		}
 
-		Long zzjgdm = (Long)attributes.get("zzjgdm");
+		String zzjgdm = (String)attributes.get("zzjgdm");
 
 		if (zzjgdm != null) {
 			setZzjgdm(zzjgdm);
@@ -170,6 +175,18 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 
 		if (htlb != null) {
 			setHtlb(htlb);
+		}
+
+		String id = (String)attributes.get("id");
+
+		if (id != null) {
+			setId(id);
+		}
+
+		String htid = (String)attributes.get("htid");
+
+		if (htid != null) {
+			setHtid(htid);
 		}
 
 		String htbh = (String)attributes.get("htbh");
@@ -190,6 +207,12 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 			setFbhtbh(fbhtbh);
 		}
 
+		String lwfbhtbh = (String)attributes.get("lwfbhtbh");
+
+		if (lwfbhtbh != null) {
+			setLwfbhtbh(lwfbhtbh);
+		}
+
 		String htlx = (String)attributes.get("htlx");
 
 		if (htlx != null) {
@@ -208,10 +231,28 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 			setZfbgx(zfbgx);
 		}
 
-		Date bsrq = (Date)attributes.get("bsrq");
+		String sfsl = (String)attributes.get("sfsl");
 
-		if (bsrq != null) {
-			setBsrq(bsrq);
+		if (sfsl != null) {
+			setSfsl(sfsl);
+		}
+
+		String zxbz = (String)attributes.get("zxbz");
+
+		if (zxbz != null) {
+			setZxbz(zxbz);
+		}
+
+		String state = (String)attributes.get("state");
+
+		if (state != null) {
+			setState(state);
+		}
+
+		Date bssj = (Date)attributes.get("bssj");
+
+		if (bssj != null) {
+			setBssj(bssj);
 		}
 
 		Date slsj = (Date)attributes.get("slsj");
@@ -280,10 +321,10 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 			setZtz(ztz);
 		}
 
-		String zjzmj = (String)attributes.get("zjzmj");
+		String zmj = (String)attributes.get("zmj");
 
-		if (zjzmj != null) {
-			setZjzmj(zjzmj);
+		if (zmj != null) {
+			setZmj(zmj);
 		}
 
 		String xmfl = (String)attributes.get("xmfl");
@@ -292,10 +333,10 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 			setXmfl(xmfl);
 		}
 
-		String jzgm = (String)attributes.get("jzgm");
+		String jsgm = (String)attributes.get("jsgm");
 
-		if (jzgm != null) {
-			setJzgm(jzgm);
+		if (jsgm != null) {
+			setJsgm(jsgm);
 		}
 
 		String bdh = (String)attributes.get("bdh");
@@ -388,10 +429,10 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 			setSjfzrzjh(sjfzrzjh);
 		}
 
-		String kcdwmc = (String)attributes.get("kcdwmc");
+		String kcdw = (String)attributes.get("kcdw");
 
-		if (kcdwmc != null) {
-			setKcdwmc(kcdwmc);
+		if (kcdw != null) {
+			setKcdw(kcdw);
 		}
 
 		String kcfzr = (String)attributes.get("kcfzr");
@@ -412,10 +453,10 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 			setKcfzrzjh(kcfzrzjh);
 		}
 
-		String sgdwmc = (String)attributes.get("sgdwmc");
+		String sgdw = (String)attributes.get("sgdw");
 
-		if (sgdwmc != null) {
-			setSgdwmc(sgdwmc);
+		if (sgdw != null) {
+			setSgdw(sgdw);
 		}
 
 		String sgfzr = (String)attributes.get("sgfzr");
@@ -544,10 +585,10 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 			setZgj(zgj);
 		}
 
-		String aqfhwmsgcsf = (String)attributes.get("aqfhwmsgcsf");
+		String wmcsf = (String)attributes.get("wmcsf");
 
-		if (aqfhwmsgcsf != null) {
-			setAqfhwmsgcsf(aqfhwmsgcsf);
+		if (wmcsf != null) {
+			setWmcsf(wmcsf);
 		}
 
 		Date htqdrq = (Date)attributes.get("htqdrq");
@@ -568,16 +609,16 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 			setCbnr(cbnr);
 		}
 
-		String cyhtsfwb = (String)attributes.get("cyhtsfwb");
+		String htsfwbmc = (String)attributes.get("htsfwbmc");
 
-		if (cyhtsfwb != null) {
-			setCyhtsfwb(cyhtsfwb);
+		if (htsfwbmc != null) {
+			setHtsfwbmc(htsfwbmc);
 		}
 
-		String fzjqtsm = (String)attributes.get("fzjqtsm");
+		String bz = (String)attributes.get("bz");
 
-		if (fzjqtsm != null) {
-			setFzjqtsm(fzjqtsm);
+		if (bz != null) {
+			setBz(bz);
 		}
 
 		String sfzx = (String)attributes.get("sfzx");
@@ -592,7 +633,7 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 			setZxsj(zxsj);
 		}
 
-		Date zxsm = (Date)attributes.get("zxsm");
+		String zxsm = (String)attributes.get("zxsm");
 
 		if (zxsm != null) {
 			setZxsm(zxsm);
@@ -623,19 +664,19 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 	}
 
 	@Override
-	public long getZzjgdm() {
+	public String getZzjgdm() {
 		return _zzjgdm;
 	}
 
 	@Override
-	public void setZzjgdm(long zzjgdm) {
+	public void setZzjgdm(String zzjgdm) {
 		_zzjgdm = zzjgdm;
 
 		if (_contractRemoteModel != null) {
 			try {
 				Class<?> clazz = _contractRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setZzjgdm", long.class);
+				Method method = clazz.getMethod("setZzjgdm", String.class);
 
 				method.invoke(_contractRemoteModel, zzjgdm);
 			}
@@ -661,6 +702,52 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 				Method method = clazz.getMethod("setHtlb", String.class);
 
 				method.invoke(_contractRemoteModel, htlb);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getId() {
+		return _id;
+	}
+
+	@Override
+	public void setId(String id) {
+		_id = id;
+
+		if (_contractRemoteModel != null) {
+			try {
+				Class<?> clazz = _contractRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setId", String.class);
+
+				method.invoke(_contractRemoteModel, id);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getHtid() {
+		return _htid;
+	}
+
+	@Override
+	public void setHtid(String htid) {
+		_htid = htid;
+
+		if (_contractRemoteModel != null) {
+			try {
+				Class<?> clazz = _contractRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setHtid", String.class);
+
+				method.invoke(_contractRemoteModel, htid);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -738,6 +825,29 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 	}
 
 	@Override
+	public String getLwfbhtbh() {
+		return _lwfbhtbh;
+	}
+
+	@Override
+	public void setLwfbhtbh(String lwfbhtbh) {
+		_lwfbhtbh = lwfbhtbh;
+
+		if (_contractRemoteModel != null) {
+			try {
+				Class<?> clazz = _contractRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setLwfbhtbh", String.class);
+
+				method.invoke(_contractRemoteModel, lwfbhtbh);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
 	public String getHtlx() {
 		return _htlx;
 	}
@@ -807,21 +917,90 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 	}
 
 	@Override
-	public Date getBsrq() {
-		return _bsrq;
+	public String getSfsl() {
+		return _sfsl;
 	}
 
 	@Override
-	public void setBsrq(Date bsrq) {
-		_bsrq = bsrq;
+	public void setSfsl(String sfsl) {
+		_sfsl = sfsl;
 
 		if (_contractRemoteModel != null) {
 			try {
 				Class<?> clazz = _contractRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setBsrq", Date.class);
+				Method method = clazz.getMethod("setSfsl", String.class);
 
-				method.invoke(_contractRemoteModel, bsrq);
+				method.invoke(_contractRemoteModel, sfsl);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getZxbz() {
+		return _zxbz;
+	}
+
+	@Override
+	public void setZxbz(String zxbz) {
+		_zxbz = zxbz;
+
+		if (_contractRemoteModel != null) {
+			try {
+				Class<?> clazz = _contractRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setZxbz", String.class);
+
+				method.invoke(_contractRemoteModel, zxbz);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getState() {
+		return _state;
+	}
+
+	@Override
+	public void setState(String state) {
+		_state = state;
+
+		if (_contractRemoteModel != null) {
+			try {
+				Class<?> clazz = _contractRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setState", String.class);
+
+				method.invoke(_contractRemoteModel, state);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public Date getBssj() {
+		return _bssj;
+	}
+
+	@Override
+	public void setBssj(Date bssj) {
+		_bssj = bssj;
+
+		if (_contractRemoteModel != null) {
+			try {
+				Class<?> clazz = _contractRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setBssj", Date.class);
+
+				method.invoke(_contractRemoteModel, bssj);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -1083,21 +1262,21 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 	}
 
 	@Override
-	public String getZjzmj() {
-		return _zjzmj;
+	public String getZmj() {
+		return _zmj;
 	}
 
 	@Override
-	public void setZjzmj(String zjzmj) {
-		_zjzmj = zjzmj;
+	public void setZmj(String zmj) {
+		_zmj = zmj;
 
 		if (_contractRemoteModel != null) {
 			try {
 				Class<?> clazz = _contractRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setZjzmj", String.class);
+				Method method = clazz.getMethod("setZmj", String.class);
 
-				method.invoke(_contractRemoteModel, zjzmj);
+				method.invoke(_contractRemoteModel, zmj);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -1129,21 +1308,21 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 	}
 
 	@Override
-	public String getJzgm() {
-		return _jzgm;
+	public String getJsgm() {
+		return _jsgm;
 	}
 
 	@Override
-	public void setJzgm(String jzgm) {
-		_jzgm = jzgm;
+	public void setJsgm(String jsgm) {
+		_jsgm = jsgm;
 
 		if (_contractRemoteModel != null) {
 			try {
 				Class<?> clazz = _contractRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setJzgm", String.class);
+				Method method = clazz.getMethod("setJsgm", String.class);
 
-				method.invoke(_contractRemoteModel, jzgm);
+				method.invoke(_contractRemoteModel, jsgm);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -1497,21 +1676,21 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 	}
 
 	@Override
-	public String getKcdwmc() {
-		return _kcdwmc;
+	public String getKcdw() {
+		return _kcdw;
 	}
 
 	@Override
-	public void setKcdwmc(String kcdwmc) {
-		_kcdwmc = kcdwmc;
+	public void setKcdw(String kcdw) {
+		_kcdw = kcdw;
 
 		if (_contractRemoteModel != null) {
 			try {
 				Class<?> clazz = _contractRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setKcdwmc", String.class);
+				Method method = clazz.getMethod("setKcdw", String.class);
 
-				method.invoke(_contractRemoteModel, kcdwmc);
+				method.invoke(_contractRemoteModel, kcdw);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -1589,21 +1768,21 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 	}
 
 	@Override
-	public String getSgdwmc() {
-		return _sgdwmc;
+	public String getSgdw() {
+		return _sgdw;
 	}
 
 	@Override
-	public void setSgdwmc(String sgdwmc) {
-		_sgdwmc = sgdwmc;
+	public void setSgdw(String sgdw) {
+		_sgdw = sgdw;
 
 		if (_contractRemoteModel != null) {
 			try {
 				Class<?> clazz = _contractRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setSgdwmc", String.class);
+				Method method = clazz.getMethod("setSgdw", String.class);
 
-				method.invoke(_contractRemoteModel, sgdwmc);
+				method.invoke(_contractRemoteModel, sgdw);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -2095,21 +2274,21 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 	}
 
 	@Override
-	public String getAqfhwmsgcsf() {
-		return _aqfhwmsgcsf;
+	public String getWmcsf() {
+		return _wmcsf;
 	}
 
 	@Override
-	public void setAqfhwmsgcsf(String aqfhwmsgcsf) {
-		_aqfhwmsgcsf = aqfhwmsgcsf;
+	public void setWmcsf(String wmcsf) {
+		_wmcsf = wmcsf;
 
 		if (_contractRemoteModel != null) {
 			try {
 				Class<?> clazz = _contractRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setAqfhwmsgcsf", String.class);
+				Method method = clazz.getMethod("setWmcsf", String.class);
 
-				method.invoke(_contractRemoteModel, aqfhwmsgcsf);
+				method.invoke(_contractRemoteModel, wmcsf);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -2187,21 +2366,21 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 	}
 
 	@Override
-	public String getCyhtsfwb() {
-		return _cyhtsfwb;
+	public String getHtsfwbmc() {
+		return _htsfwbmc;
 	}
 
 	@Override
-	public void setCyhtsfwb(String cyhtsfwb) {
-		_cyhtsfwb = cyhtsfwb;
+	public void setHtsfwbmc(String htsfwbmc) {
+		_htsfwbmc = htsfwbmc;
 
 		if (_contractRemoteModel != null) {
 			try {
 				Class<?> clazz = _contractRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setCyhtsfwb", String.class);
+				Method method = clazz.getMethod("setHtsfwbmc", String.class);
 
-				method.invoke(_contractRemoteModel, cyhtsfwb);
+				method.invoke(_contractRemoteModel, htsfwbmc);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -2210,21 +2389,21 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 	}
 
 	@Override
-	public String getFzjqtsm() {
-		return _fzjqtsm;
+	public String getBz() {
+		return _bz;
 	}
 
 	@Override
-	public void setFzjqtsm(String fzjqtsm) {
-		_fzjqtsm = fzjqtsm;
+	public void setBz(String bz) {
+		_bz = bz;
 
 		if (_contractRemoteModel != null) {
 			try {
 				Class<?> clazz = _contractRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setFzjqtsm", String.class);
+				Method method = clazz.getMethod("setBz", String.class);
 
-				method.invoke(_contractRemoteModel, fzjqtsm);
+				method.invoke(_contractRemoteModel, bz);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -2279,19 +2458,19 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 	}
 
 	@Override
-	public Date getZxsm() {
+	public String getZxsm() {
 		return _zxsm;
 	}
 
 	@Override
-	public void setZxsm(Date zxsm) {
+	public void setZxsm(String zxsm) {
 		_zxsm = zxsm;
 
 		if (_contractRemoteModel != null) {
 			try {
 				Class<?> clazz = _contractRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setZxsm", Date.class);
+				Method method = clazz.getMethod("setZxsm", String.class);
 
 				method.invoke(_contractRemoteModel, zxsm);
 			}
@@ -2373,13 +2552,19 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 		clone.setContractId(getContractId());
 		clone.setZzjgdm(getZzjgdm());
 		clone.setHtlb(getHtlb());
+		clone.setId(getId());
+		clone.setHtid(getHtid());
 		clone.setHtbh(getHtbh());
 		clone.setZbhtbh(getZbhtbh());
 		clone.setFbhtbh(getFbhtbh());
+		clone.setLwfbhtbh(getLwfbhtbh());
 		clone.setHtlx(getHtlx());
 		clone.setHtzt(getHtzt());
 		clone.setZfbgx(getZfbgx());
-		clone.setBsrq(getBsrq());
+		clone.setSfsl(getSfsl());
+		clone.setZxbz(getZxbz());
+		clone.setState(getState());
+		clone.setBssj(getBssj());
 		clone.setSlsj(getSlsj());
 		clone.setBjbh(getBjbh());
 		clone.setSzdq(getSzdq());
@@ -2391,9 +2576,9 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 		clone.setDwxz(getDwxz());
 		clone.setZjlygc(getZjlygc());
 		clone.setZtz(getZtz());
-		clone.setZjzmj(getZjzmj());
+		clone.setZmj(getZmj());
 		clone.setXmfl(getXmfl());
-		clone.setJzgm(getJzgm());
+		clone.setJsgm(getJsgm());
 		clone.setBdh(getBdh());
 		clone.setFbfs(getFbfs());
 		clone.setCbfs(getCbfs());
@@ -2409,11 +2594,11 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 		clone.setSjfzr(getSjfzr());
 		clone.setSjfzrzjlx(getSjfzrzjlx());
 		clone.setSjfzrzjh(getSjfzrzjh());
-		clone.setKcdwmc(getKcdwmc());
+		clone.setKcdw(getKcdw());
 		clone.setKcfzr(getKcfzr());
 		clone.setKcfzrzjlx(getKcfzrzjlx());
 		clone.setKcfzrzjh(getKcfzrzjh());
-		clone.setSgdwmc(getSgdwmc());
+		clone.setSgdw(getSgdw());
 		clone.setSgfzr(getSgfzr());
 		clone.setSgfzrzjlx(getSgfzrzjlx());
 		clone.setSgfzrzjh(getSgfzrzjh());
@@ -2435,12 +2620,12 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 		clone.setJazj(getJazj());
 		clone.setZlje(getZlje());
 		clone.setZgj(getZgj());
-		clone.setAqfhwmsgcsf(getAqfhwmsgcsf());
+		clone.setWmcsf(getWmcsf());
 		clone.setHtqdrq(getHtqdrq());
 		clone.setHtqzrq(getHtqzrq());
 		clone.setCbnr(getCbnr());
-		clone.setCyhtsfwb(getCyhtsfwb());
-		clone.setFzjqtsm(getFzjqtsm());
+		clone.setHtsfwbmc(getHtsfwbmc());
+		clone.setBz(getBz());
 		clone.setSfzx(getSfzx());
 		clone.setZxsj(getZxsj());
 		clone.setZxsm(getZxsm());
@@ -2452,7 +2637,7 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 	public int compareTo(Contract contract) {
 		int value = 0;
 
-		value = DateUtil.compareTo(getBsrq(), contract.getBsrq());
+		value = getContractId().compareTo(contract.getContractId());
 
 		value = value * -1;
 
@@ -2496,7 +2681,7 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(149);
+		StringBundler sb = new StringBundler(161);
 
 		sb.append("{contractId=");
 		sb.append(getContractId());
@@ -2504,20 +2689,32 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 		sb.append(getZzjgdm());
 		sb.append(", htlb=");
 		sb.append(getHtlb());
+		sb.append(", id=");
+		sb.append(getId());
+		sb.append(", htid=");
+		sb.append(getHtid());
 		sb.append(", htbh=");
 		sb.append(getHtbh());
 		sb.append(", zbhtbh=");
 		sb.append(getZbhtbh());
 		sb.append(", fbhtbh=");
 		sb.append(getFbhtbh());
+		sb.append(", lwfbhtbh=");
+		sb.append(getLwfbhtbh());
 		sb.append(", htlx=");
 		sb.append(getHtlx());
 		sb.append(", htzt=");
 		sb.append(getHtzt());
 		sb.append(", zfbgx=");
 		sb.append(getZfbgx());
-		sb.append(", bsrq=");
-		sb.append(getBsrq());
+		sb.append(", sfsl=");
+		sb.append(getSfsl());
+		sb.append(", zxbz=");
+		sb.append(getZxbz());
+		sb.append(", state=");
+		sb.append(getState());
+		sb.append(", bssj=");
+		sb.append(getBssj());
 		sb.append(", slsj=");
 		sb.append(getSlsj());
 		sb.append(", bjbh=");
@@ -2540,12 +2737,12 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 		sb.append(getZjlygc());
 		sb.append(", ztz=");
 		sb.append(getZtz());
-		sb.append(", zjzmj=");
-		sb.append(getZjzmj());
+		sb.append(", zmj=");
+		sb.append(getZmj());
 		sb.append(", xmfl=");
 		sb.append(getXmfl());
-		sb.append(", jzgm=");
-		sb.append(getJzgm());
+		sb.append(", jsgm=");
+		sb.append(getJsgm());
 		sb.append(", bdh=");
 		sb.append(getBdh());
 		sb.append(", fbfs=");
@@ -2576,16 +2773,16 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 		sb.append(getSjfzrzjlx());
 		sb.append(", sjfzrzjh=");
 		sb.append(getSjfzrzjh());
-		sb.append(", kcdwmc=");
-		sb.append(getKcdwmc());
+		sb.append(", kcdw=");
+		sb.append(getKcdw());
 		sb.append(", kcfzr=");
 		sb.append(getKcfzr());
 		sb.append(", kcfzrzjlx=");
 		sb.append(getKcfzrzjlx());
 		sb.append(", kcfzrzjh=");
 		sb.append(getKcfzrzjh());
-		sb.append(", sgdwmc=");
-		sb.append(getSgdwmc());
+		sb.append(", sgdw=");
+		sb.append(getSgdw());
 		sb.append(", sgfzr=");
 		sb.append(getSgfzr());
 		sb.append(", sgfzrzjlx=");
@@ -2628,18 +2825,18 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 		sb.append(getZlje());
 		sb.append(", zgj=");
 		sb.append(getZgj());
-		sb.append(", aqfhwmsgcsf=");
-		sb.append(getAqfhwmsgcsf());
+		sb.append(", wmcsf=");
+		sb.append(getWmcsf());
 		sb.append(", htqdrq=");
 		sb.append(getHtqdrq());
 		sb.append(", htqzrq=");
 		sb.append(getHtqzrq());
 		sb.append(", cbnr=");
 		sb.append(getCbnr());
-		sb.append(", cyhtsfwb=");
-		sb.append(getCyhtsfwb());
-		sb.append(", fzjqtsm=");
-		sb.append(getFzjqtsm());
+		sb.append(", htsfwbmc=");
+		sb.append(getHtsfwbmc());
+		sb.append(", bz=");
+		sb.append(getBz());
 		sb.append(", sfzx=");
 		sb.append(getSfzx());
 		sb.append(", zxsj=");
@@ -2653,7 +2850,7 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(226);
+		StringBundler sb = new StringBundler(244);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.cp.contract.model.Contract");
@@ -2672,6 +2869,14 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 		sb.append(getHtlb());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>id</column-name><column-value><![CDATA[");
+		sb.append(getId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>htid</column-name><column-value><![CDATA[");
+		sb.append(getHtid());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>htbh</column-name><column-value><![CDATA[");
 		sb.append(getHtbh());
 		sb.append("]]></column-value></column>");
@@ -2682,6 +2887,10 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 		sb.append(
 			"<column><column-name>fbhtbh</column-name><column-value><![CDATA[");
 		sb.append(getFbhtbh());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>lwfbhtbh</column-name><column-value><![CDATA[");
+		sb.append(getLwfbhtbh());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>htlx</column-name><column-value><![CDATA[");
@@ -2696,8 +2905,20 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 		sb.append(getZfbgx());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>bsrq</column-name><column-value><![CDATA[");
-		sb.append(getBsrq());
+			"<column><column-name>sfsl</column-name><column-value><![CDATA[");
+		sb.append(getSfsl());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>zxbz</column-name><column-value><![CDATA[");
+		sb.append(getZxbz());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>state</column-name><column-value><![CDATA[");
+		sb.append(getState());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>bssj</column-name><column-value><![CDATA[");
+		sb.append(getBssj());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>slsj</column-name><column-value><![CDATA[");
@@ -2744,16 +2965,16 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 		sb.append(getZtz());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>zjzmj</column-name><column-value><![CDATA[");
-		sb.append(getZjzmj());
+			"<column><column-name>zmj</column-name><column-value><![CDATA[");
+		sb.append(getZmj());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>xmfl</column-name><column-value><![CDATA[");
 		sb.append(getXmfl());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>jzgm</column-name><column-value><![CDATA[");
-		sb.append(getJzgm());
+			"<column><column-name>jsgm</column-name><column-value><![CDATA[");
+		sb.append(getJsgm());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>bdh</column-name><column-value><![CDATA[");
@@ -2816,8 +3037,8 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 		sb.append(getSjfzrzjh());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>kcdwmc</column-name><column-value><![CDATA[");
-		sb.append(getKcdwmc());
+			"<column><column-name>kcdw</column-name><column-value><![CDATA[");
+		sb.append(getKcdw());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>kcfzr</column-name><column-value><![CDATA[");
@@ -2832,8 +3053,8 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 		sb.append(getKcfzrzjh());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>sgdwmc</column-name><column-value><![CDATA[");
-		sb.append(getSgdwmc());
+			"<column><column-name>sgdw</column-name><column-value><![CDATA[");
+		sb.append(getSgdw());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>sgfzr</column-name><column-value><![CDATA[");
@@ -2920,8 +3141,8 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 		sb.append(getZgj());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>aqfhwmsgcsf</column-name><column-value><![CDATA[");
-		sb.append(getAqfhwmsgcsf());
+			"<column><column-name>wmcsf</column-name><column-value><![CDATA[");
+		sb.append(getWmcsf());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>htqdrq</column-name><column-value><![CDATA[");
@@ -2936,12 +3157,12 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 		sb.append(getCbnr());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>cyhtsfwb</column-name><column-value><![CDATA[");
-		sb.append(getCyhtsfwb());
+			"<column><column-name>htsfwbmc</column-name><column-value><![CDATA[");
+		sb.append(getHtsfwbmc());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>fzjqtsm</column-name><column-value><![CDATA[");
-		sb.append(getFzjqtsm());
+			"<column><column-name>bz</column-name><column-value><![CDATA[");
+		sb.append(getBz());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>sfzx</column-name><column-value><![CDATA[");
@@ -2962,15 +3183,21 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 	}
 
 	private String _contractId;
-	private long _zzjgdm;
+	private String _zzjgdm;
 	private String _htlb;
+	private String _id;
+	private String _htid;
 	private String _htbh;
 	private String _zbhtbh;
 	private String _fbhtbh;
+	private String _lwfbhtbh;
 	private String _htlx;
 	private String _htzt;
 	private String _zfbgx;
-	private Date _bsrq;
+	private String _sfsl;
+	private String _zxbz;
+	private String _state;
+	private Date _bssj;
 	private Date _slsj;
 	private String _bjbh;
 	private String _szdq;
@@ -2982,9 +3209,9 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 	private String _dwxz;
 	private String _zjlygc;
 	private String _ztz;
-	private String _zjzmj;
+	private String _zmj;
 	private String _xmfl;
-	private String _jzgm;
+	private String _jsgm;
 	private String _bdh;
 	private String _fbfs;
 	private String _cbfs;
@@ -3000,11 +3227,11 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 	private String _sjfzr;
 	private String _sjfzrzjlx;
 	private String _sjfzrzjh;
-	private String _kcdwmc;
+	private String _kcdw;
 	private String _kcfzr;
 	private String _kcfzrzjlx;
 	private String _kcfzrzjh;
-	private String _sgdwmc;
+	private String _sgdw;
 	private String _sgfzr;
 	private String _sgfzrzjlx;
 	private String _sgfzrzjh;
@@ -3026,15 +3253,15 @@ public class ContractClp extends BaseModelImpl<Contract> implements Contract {
 	private String _jazj;
 	private String _zlje;
 	private String _zgj;
-	private String _aqfhwmsgcsf;
+	private String _wmcsf;
 	private Date _htqdrq;
 	private String _htqzrq;
 	private String _cbnr;
-	private String _cyhtsfwb;
-	private String _fzjqtsm;
+	private String _htsfwbmc;
+	private String _bz;
 	private String _sfzx;
 	private Date _zxsj;
-	private Date _zxsm;
+	private String _zxsm;
 	private BaseModel<?> _contractRemoteModel;
 	private Class<?> _clpSerializerClass = com.justonetech.cp.contract.service.ClpSerializer.class;
 }

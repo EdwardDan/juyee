@@ -79,14 +79,15 @@ public interface ContractModel extends BaseModel<Contract> {
 	 *
 	 * @return the zzjgdm of this contract
 	 */
-	public long getZzjgdm();
+	@AutoEscape
+	public String getZzjgdm();
 
 	/**
 	 * Sets the zzjgdm of this contract.
 	 *
 	 * @param zzjgdm the zzjgdm of this contract
 	 */
-	public void setZzjgdm(long zzjgdm);
+	public void setZzjgdm(String zzjgdm);
 
 	/**
 	 * Returns the htlb of this contract.
@@ -102,6 +103,36 @@ public interface ContractModel extends BaseModel<Contract> {
 	 * @param htlb the htlb of this contract
 	 */
 	public void setHtlb(String htlb);
+
+	/**
+	 * Returns the ID of this contract.
+	 *
+	 * @return the ID of this contract
+	 */
+	@AutoEscape
+	public String getId();
+
+	/**
+	 * Sets the ID of this contract.
+	 *
+	 * @param id the ID of this contract
+	 */
+	public void setId(String id);
+
+	/**
+	 * Returns the htid of this contract.
+	 *
+	 * @return the htid of this contract
+	 */
+	@AutoEscape
+	public String getHtid();
+
+	/**
+	 * Sets the htid of this contract.
+	 *
+	 * @param htid the htid of this contract
+	 */
+	public void setHtid(String htid);
 
 	/**
 	 * Returns the htbh of this contract.
@@ -149,6 +180,21 @@ public interface ContractModel extends BaseModel<Contract> {
 	public void setFbhtbh(String fbhtbh);
 
 	/**
+	 * Returns the lwfbhtbh of this contract.
+	 *
+	 * @return the lwfbhtbh of this contract
+	 */
+	@AutoEscape
+	public String getLwfbhtbh();
+
+	/**
+	 * Sets the lwfbhtbh of this contract.
+	 *
+	 * @param lwfbhtbh the lwfbhtbh of this contract
+	 */
+	public void setLwfbhtbh(String lwfbhtbh);
+
+	/**
 	 * Returns the htlx of this contract.
 	 *
 	 * @return the htlx of this contract
@@ -194,18 +240,63 @@ public interface ContractModel extends BaseModel<Contract> {
 	public void setZfbgx(String zfbgx);
 
 	/**
-	 * Returns the bsrq of this contract.
+	 * Returns the sfsl of this contract.
 	 *
-	 * @return the bsrq of this contract
+	 * @return the sfsl of this contract
 	 */
-	public Date getBsrq();
+	@AutoEscape
+	public String getSfsl();
 
 	/**
-	 * Sets the bsrq of this contract.
+	 * Sets the sfsl of this contract.
 	 *
-	 * @param bsrq the bsrq of this contract
+	 * @param sfsl the sfsl of this contract
 	 */
-	public void setBsrq(Date bsrq);
+	public void setSfsl(String sfsl);
+
+	/**
+	 * Returns the zxbz of this contract.
+	 *
+	 * @return the zxbz of this contract
+	 */
+	@AutoEscape
+	public String getZxbz();
+
+	/**
+	 * Sets the zxbz of this contract.
+	 *
+	 * @param zxbz the zxbz of this contract
+	 */
+	public void setZxbz(String zxbz);
+
+	/**
+	 * Returns the state of this contract.
+	 *
+	 * @return the state of this contract
+	 */
+	@AutoEscape
+	public String getState();
+
+	/**
+	 * Sets the state of this contract.
+	 *
+	 * @param state the state of this contract
+	 */
+	public void setState(String state);
+
+	/**
+	 * Returns the bssj of this contract.
+	 *
+	 * @return the bssj of this contract
+	 */
+	public Date getBssj();
+
+	/**
+	 * Sets the bssj of this contract.
+	 *
+	 * @param bssj the bssj of this contract
+	 */
+	public void setBssj(Date bssj);
 
 	/**
 	 * Returns the slsj of this contract.
@@ -372,19 +463,19 @@ public interface ContractModel extends BaseModel<Contract> {
 	public void setZtz(String ztz);
 
 	/**
-	 * Returns the zjzmj of this contract.
+	 * Returns the zmj of this contract.
 	 *
-	 * @return the zjzmj of this contract
+	 * @return the zmj of this contract
 	 */
 	@AutoEscape
-	public String getZjzmj();
+	public String getZmj();
 
 	/**
-	 * Sets the zjzmj of this contract.
+	 * Sets the zmj of this contract.
 	 *
-	 * @param zjzmj the zjzmj of this contract
+	 * @param zmj the zmj of this contract
 	 */
-	public void setZjzmj(String zjzmj);
+	public void setZmj(String zmj);
 
 	/**
 	 * Returns the xmfl of this contract.
@@ -402,19 +493,19 @@ public interface ContractModel extends BaseModel<Contract> {
 	public void setXmfl(String xmfl);
 
 	/**
-	 * Returns the jzgm of this contract.
+	 * Returns the jsgm of this contract.
 	 *
-	 * @return the jzgm of this contract
+	 * @return the jsgm of this contract
 	 */
 	@AutoEscape
-	public String getJzgm();
+	public String getJsgm();
 
 	/**
-	 * Sets the jzgm of this contract.
+	 * Sets the jsgm of this contract.
 	 *
-	 * @param jzgm the jzgm of this contract
+	 * @param jsgm the jsgm of this contract
 	 */
-	public void setJzgm(String jzgm);
+	public void setJsgm(String jsgm);
 
 	/**
 	 * Returns the bdh of this contract.
@@ -642,19 +733,19 @@ public interface ContractModel extends BaseModel<Contract> {
 	public void setSjfzrzjh(String sjfzrzjh);
 
 	/**
-	 * Returns the kcdwmc of this contract.
+	 * Returns the kcdw of this contract.
 	 *
-	 * @return the kcdwmc of this contract
+	 * @return the kcdw of this contract
 	 */
 	@AutoEscape
-	public String getKcdwmc();
+	public String getKcdw();
 
 	/**
-	 * Sets the kcdwmc of this contract.
+	 * Sets the kcdw of this contract.
 	 *
-	 * @param kcdwmc the kcdwmc of this contract
+	 * @param kcdw the kcdw of this contract
 	 */
-	public void setKcdwmc(String kcdwmc);
+	public void setKcdw(String kcdw);
 
 	/**
 	 * Returns the kcfzr of this contract.
@@ -702,19 +793,19 @@ public interface ContractModel extends BaseModel<Contract> {
 	public void setKcfzrzjh(String kcfzrzjh);
 
 	/**
-	 * Returns the sgdwmc of this contract.
+	 * Returns the sgdw of this contract.
 	 *
-	 * @return the sgdwmc of this contract
+	 * @return the sgdw of this contract
 	 */
 	@AutoEscape
-	public String getSgdwmc();
+	public String getSgdw();
 
 	/**
-	 * Sets the sgdwmc of this contract.
+	 * Sets the sgdw of this contract.
 	 *
-	 * @param sgdwmc the sgdwmc of this contract
+	 * @param sgdw the sgdw of this contract
 	 */
-	public void setSgdwmc(String sgdwmc);
+	public void setSgdw(String sgdw);
 
 	/**
 	 * Returns the sgfzr of this contract.
@@ -1030,19 +1121,19 @@ public interface ContractModel extends BaseModel<Contract> {
 	public void setZgj(String zgj);
 
 	/**
-	 * Returns the aqfhwmsgcsf of this contract.
+	 * Returns the wmcsf of this contract.
 	 *
-	 * @return the aqfhwmsgcsf of this contract
+	 * @return the wmcsf of this contract
 	 */
 	@AutoEscape
-	public String getAqfhwmsgcsf();
+	public String getWmcsf();
 
 	/**
-	 * Sets the aqfhwmsgcsf of this contract.
+	 * Sets the wmcsf of this contract.
 	 *
-	 * @param aqfhwmsgcsf the aqfhwmsgcsf of this contract
+	 * @param wmcsf the wmcsf of this contract
 	 */
-	public void setAqfhwmsgcsf(String aqfhwmsgcsf);
+	public void setWmcsf(String wmcsf);
 
 	/**
 	 * Returns the htqdrq of this contract.
@@ -1089,34 +1180,34 @@ public interface ContractModel extends BaseModel<Contract> {
 	public void setCbnr(String cbnr);
 
 	/**
-	 * Returns the cyhtsfwb of this contract.
+	 * Returns the htsfwbmc of this contract.
 	 *
-	 * @return the cyhtsfwb of this contract
+	 * @return the htsfwbmc of this contract
 	 */
 	@AutoEscape
-	public String getCyhtsfwb();
+	public String getHtsfwbmc();
 
 	/**
-	 * Sets the cyhtsfwb of this contract.
+	 * Sets the htsfwbmc of this contract.
 	 *
-	 * @param cyhtsfwb the cyhtsfwb of this contract
+	 * @param htsfwbmc the htsfwbmc of this contract
 	 */
-	public void setCyhtsfwb(String cyhtsfwb);
+	public void setHtsfwbmc(String htsfwbmc);
 
 	/**
-	 * Returns the fzjqtsm of this contract.
+	 * Returns the bz of this contract.
 	 *
-	 * @return the fzjqtsm of this contract
+	 * @return the bz of this contract
 	 */
 	@AutoEscape
-	public String getFzjqtsm();
+	public String getBz();
 
 	/**
-	 * Sets the fzjqtsm of this contract.
+	 * Sets the bz of this contract.
 	 *
-	 * @param fzjqtsm the fzjqtsm of this contract
+	 * @param bz the bz of this contract
 	 */
-	public void setFzjqtsm(String fzjqtsm);
+	public void setBz(String bz);
 
 	/**
 	 * Returns the sfzx of this contract.
@@ -1152,14 +1243,15 @@ public interface ContractModel extends BaseModel<Contract> {
 	 *
 	 * @return the zxsm of this contract
 	 */
-	public Date getZxsm();
+	@AutoEscape
+	public String getZxsm();
 
 	/**
 	 * Sets the zxsm of this contract.
 	 *
 	 * @param zxsm the zxsm of this contract
 	 */
-	public void setZxsm(Date zxsm);
+	public void setZxsm(String zxsm);
 
 	@Override
 	public boolean isNew();

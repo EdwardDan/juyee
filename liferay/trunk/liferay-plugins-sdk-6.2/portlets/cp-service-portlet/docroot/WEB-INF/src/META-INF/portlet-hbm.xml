@@ -174,15 +174,21 @@
 		<id name="contractId" type="java.lang.String">
 			<generator class="assigned" />
 		</id>
-		<property name="zzjgdm" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="zzjgdm" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="htlb" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="id" type="com.liferay.portal.dao.orm.hibernate.StringType" column="id_" />
+		<property name="htid" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="htbh" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="zbhtbh" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="fbhtbh" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="lwfbhtbh" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="htlx" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="htzt" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="zfbgx" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="bsrq" type="org.hibernate.type.TimestampType" />
+		<property name="sfsl" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="zxbz" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="state" type="com.liferay.portal.dao.orm.hibernate.StringType" column="state_" />
+		<property name="bssj" type="org.hibernate.type.TimestampType" />
 		<property name="slsj" type="org.hibernate.type.TimestampType" />
 		<property name="bjbh" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="szdq" type="com.liferay.portal.dao.orm.hibernate.StringType" />
@@ -194,9 +200,9 @@
 		<property name="dwxz" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="zjlygc" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="ztz" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="zjzmj" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="zmj" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="xmfl" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="jzgm" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="jsgm" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="bdh" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="fbfs" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="cbfs" type="com.liferay.portal.dao.orm.hibernate.StringType" />
@@ -212,11 +218,11 @@
 		<property name="sjfzr" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="sjfzrzjlx" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="sjfzrzjh" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="kcdwmc" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="kcdw" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="kcfzr" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="kcfzrzjlx" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="kcfzrzjh" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="sgdwmc" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="sgdw" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="sgfzr" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="sgfzrzjlx" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="sgfzrzjh" type="com.liferay.portal.dao.orm.hibernate.StringType" />
@@ -238,15 +244,15 @@
 		<property name="jazj" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="zlje" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="zgj" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="aqfhwmsgcsf" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="wmcsf" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="htqdrq" type="org.hibernate.type.TimestampType" />
 		<property name="htqzrq" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="cbnr" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="cyhtsfwb" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="fzjqtsm" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="htsfwbmc" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="bz" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="sfzx" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="zxsj" type="org.hibernate.type.TimestampType" />
-		<property name="zxsm" type="org.hibernate.type.TimestampType" />
+		<property name="zxsm" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="com.justonetech.cp.permit.model.impl.ApplyMaterialImpl" table="cp_ApplyMaterial">
 		<cache usage="read-write" />

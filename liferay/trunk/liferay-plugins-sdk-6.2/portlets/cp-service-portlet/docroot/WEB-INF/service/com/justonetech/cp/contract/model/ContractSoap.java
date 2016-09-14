@@ -33,13 +33,19 @@ public class ContractSoap implements Serializable {
 		soapModel.setContractId(model.getContractId());
 		soapModel.setZzjgdm(model.getZzjgdm());
 		soapModel.setHtlb(model.getHtlb());
+		soapModel.setId(model.getId());
+		soapModel.setHtid(model.getHtid());
 		soapModel.setHtbh(model.getHtbh());
 		soapModel.setZbhtbh(model.getZbhtbh());
 		soapModel.setFbhtbh(model.getFbhtbh());
+		soapModel.setLwfbhtbh(model.getLwfbhtbh());
 		soapModel.setHtlx(model.getHtlx());
 		soapModel.setHtzt(model.getHtzt());
 		soapModel.setZfbgx(model.getZfbgx());
-		soapModel.setBsrq(model.getBsrq());
+		soapModel.setSfsl(model.getSfsl());
+		soapModel.setZxbz(model.getZxbz());
+		soapModel.setState(model.getState());
+		soapModel.setBssj(model.getBssj());
 		soapModel.setSlsj(model.getSlsj());
 		soapModel.setBjbh(model.getBjbh());
 		soapModel.setSzdq(model.getSzdq());
@@ -51,9 +57,9 @@ public class ContractSoap implements Serializable {
 		soapModel.setDwxz(model.getDwxz());
 		soapModel.setZjlygc(model.getZjlygc());
 		soapModel.setZtz(model.getZtz());
-		soapModel.setZjzmj(model.getZjzmj());
+		soapModel.setZmj(model.getZmj());
 		soapModel.setXmfl(model.getXmfl());
-		soapModel.setJzgm(model.getJzgm());
+		soapModel.setJsgm(model.getJsgm());
 		soapModel.setBdh(model.getBdh());
 		soapModel.setFbfs(model.getFbfs());
 		soapModel.setCbfs(model.getCbfs());
@@ -69,11 +75,11 @@ public class ContractSoap implements Serializable {
 		soapModel.setSjfzr(model.getSjfzr());
 		soapModel.setSjfzrzjlx(model.getSjfzrzjlx());
 		soapModel.setSjfzrzjh(model.getSjfzrzjh());
-		soapModel.setKcdwmc(model.getKcdwmc());
+		soapModel.setKcdw(model.getKcdw());
 		soapModel.setKcfzr(model.getKcfzr());
 		soapModel.setKcfzrzjlx(model.getKcfzrzjlx());
 		soapModel.setKcfzrzjh(model.getKcfzrzjh());
-		soapModel.setSgdwmc(model.getSgdwmc());
+		soapModel.setSgdw(model.getSgdw());
 		soapModel.setSgfzr(model.getSgfzr());
 		soapModel.setSgfzrzjlx(model.getSgfzrzjlx());
 		soapModel.setSgfzrzjh(model.getSgfzrzjh());
@@ -95,12 +101,12 @@ public class ContractSoap implements Serializable {
 		soapModel.setJazj(model.getJazj());
 		soapModel.setZlje(model.getZlje());
 		soapModel.setZgj(model.getZgj());
-		soapModel.setAqfhwmsgcsf(model.getAqfhwmsgcsf());
+		soapModel.setWmcsf(model.getWmcsf());
 		soapModel.setHtqdrq(model.getHtqdrq());
 		soapModel.setHtqzrq(model.getHtqzrq());
 		soapModel.setCbnr(model.getCbnr());
-		soapModel.setCyhtsfwb(model.getCyhtsfwb());
-		soapModel.setFzjqtsm(model.getFzjqtsm());
+		soapModel.setHtsfwbmc(model.getHtsfwbmc());
+		soapModel.setBz(model.getBz());
 		soapModel.setSfzx(model.getSfzx());
 		soapModel.setZxsj(model.getZxsj());
 		soapModel.setZxsm(model.getZxsm());
@@ -164,11 +170,11 @@ public class ContractSoap implements Serializable {
 		_contractId = contractId;
 	}
 
-	public long getZzjgdm() {
+	public String getZzjgdm() {
 		return _zzjgdm;
 	}
 
-	public void setZzjgdm(long zzjgdm) {
+	public void setZzjgdm(String zzjgdm) {
 		_zzjgdm = zzjgdm;
 	}
 
@@ -178,6 +184,22 @@ public class ContractSoap implements Serializable {
 
 	public void setHtlb(String htlb) {
 		_htlb = htlb;
+	}
+
+	public String getId() {
+		return _id;
+	}
+
+	public void setId(String id) {
+		_id = id;
+	}
+
+	public String getHtid() {
+		return _htid;
+	}
+
+	public void setHtid(String htid) {
+		_htid = htid;
 	}
 
 	public String getHtbh() {
@@ -204,6 +226,14 @@ public class ContractSoap implements Serializable {
 		_fbhtbh = fbhtbh;
 	}
 
+	public String getLwfbhtbh() {
+		return _lwfbhtbh;
+	}
+
+	public void setLwfbhtbh(String lwfbhtbh) {
+		_lwfbhtbh = lwfbhtbh;
+	}
+
 	public String getHtlx() {
 		return _htlx;
 	}
@@ -228,12 +258,36 @@ public class ContractSoap implements Serializable {
 		_zfbgx = zfbgx;
 	}
 
-	public Date getBsrq() {
-		return _bsrq;
+	public String getSfsl() {
+		return _sfsl;
 	}
 
-	public void setBsrq(Date bsrq) {
-		_bsrq = bsrq;
+	public void setSfsl(String sfsl) {
+		_sfsl = sfsl;
+	}
+
+	public String getZxbz() {
+		return _zxbz;
+	}
+
+	public void setZxbz(String zxbz) {
+		_zxbz = zxbz;
+	}
+
+	public String getState() {
+		return _state;
+	}
+
+	public void setState(String state) {
+		_state = state;
+	}
+
+	public Date getBssj() {
+		return _bssj;
+	}
+
+	public void setBssj(Date bssj) {
+		_bssj = bssj;
 	}
 
 	public Date getSlsj() {
@@ -324,12 +378,12 @@ public class ContractSoap implements Serializable {
 		_ztz = ztz;
 	}
 
-	public String getZjzmj() {
-		return _zjzmj;
+	public String getZmj() {
+		return _zmj;
 	}
 
-	public void setZjzmj(String zjzmj) {
-		_zjzmj = zjzmj;
+	public void setZmj(String zmj) {
+		_zmj = zmj;
 	}
 
 	public String getXmfl() {
@@ -340,12 +394,12 @@ public class ContractSoap implements Serializable {
 		_xmfl = xmfl;
 	}
 
-	public String getJzgm() {
-		return _jzgm;
+	public String getJsgm() {
+		return _jsgm;
 	}
 
-	public void setJzgm(String jzgm) {
-		_jzgm = jzgm;
+	public void setJsgm(String jsgm) {
+		_jsgm = jsgm;
 	}
 
 	public String getBdh() {
@@ -468,12 +522,12 @@ public class ContractSoap implements Serializable {
 		_sjfzrzjh = sjfzrzjh;
 	}
 
-	public String getKcdwmc() {
-		return _kcdwmc;
+	public String getKcdw() {
+		return _kcdw;
 	}
 
-	public void setKcdwmc(String kcdwmc) {
-		_kcdwmc = kcdwmc;
+	public void setKcdw(String kcdw) {
+		_kcdw = kcdw;
 	}
 
 	public String getKcfzr() {
@@ -500,12 +554,12 @@ public class ContractSoap implements Serializable {
 		_kcfzrzjh = kcfzrzjh;
 	}
 
-	public String getSgdwmc() {
-		return _sgdwmc;
+	public String getSgdw() {
+		return _sgdw;
 	}
 
-	public void setSgdwmc(String sgdwmc) {
-		_sgdwmc = sgdwmc;
+	public void setSgdw(String sgdw) {
+		_sgdw = sgdw;
 	}
 
 	public String getSgfzr() {
@@ -676,12 +730,12 @@ public class ContractSoap implements Serializable {
 		_zgj = zgj;
 	}
 
-	public String getAqfhwmsgcsf() {
-		return _aqfhwmsgcsf;
+	public String getWmcsf() {
+		return _wmcsf;
 	}
 
-	public void setAqfhwmsgcsf(String aqfhwmsgcsf) {
-		_aqfhwmsgcsf = aqfhwmsgcsf;
+	public void setWmcsf(String wmcsf) {
+		_wmcsf = wmcsf;
 	}
 
 	public Date getHtqdrq() {
@@ -708,20 +762,20 @@ public class ContractSoap implements Serializable {
 		_cbnr = cbnr;
 	}
 
-	public String getCyhtsfwb() {
-		return _cyhtsfwb;
+	public String getHtsfwbmc() {
+		return _htsfwbmc;
 	}
 
-	public void setCyhtsfwb(String cyhtsfwb) {
-		_cyhtsfwb = cyhtsfwb;
+	public void setHtsfwbmc(String htsfwbmc) {
+		_htsfwbmc = htsfwbmc;
 	}
 
-	public String getFzjqtsm() {
-		return _fzjqtsm;
+	public String getBz() {
+		return _bz;
 	}
 
-	public void setFzjqtsm(String fzjqtsm) {
-		_fzjqtsm = fzjqtsm;
+	public void setBz(String bz) {
+		_bz = bz;
 	}
 
 	public String getSfzx() {
@@ -740,24 +794,30 @@ public class ContractSoap implements Serializable {
 		_zxsj = zxsj;
 	}
 
-	public Date getZxsm() {
+	public String getZxsm() {
 		return _zxsm;
 	}
 
-	public void setZxsm(Date zxsm) {
+	public void setZxsm(String zxsm) {
 		_zxsm = zxsm;
 	}
 
 	private String _contractId;
-	private long _zzjgdm;
+	private String _zzjgdm;
 	private String _htlb;
+	private String _id;
+	private String _htid;
 	private String _htbh;
 	private String _zbhtbh;
 	private String _fbhtbh;
+	private String _lwfbhtbh;
 	private String _htlx;
 	private String _htzt;
 	private String _zfbgx;
-	private Date _bsrq;
+	private String _sfsl;
+	private String _zxbz;
+	private String _state;
+	private Date _bssj;
 	private Date _slsj;
 	private String _bjbh;
 	private String _szdq;
@@ -769,9 +829,9 @@ public class ContractSoap implements Serializable {
 	private String _dwxz;
 	private String _zjlygc;
 	private String _ztz;
-	private String _zjzmj;
+	private String _zmj;
 	private String _xmfl;
-	private String _jzgm;
+	private String _jsgm;
 	private String _bdh;
 	private String _fbfs;
 	private String _cbfs;
@@ -787,11 +847,11 @@ public class ContractSoap implements Serializable {
 	private String _sjfzr;
 	private String _sjfzrzjlx;
 	private String _sjfzrzjh;
-	private String _kcdwmc;
+	private String _kcdw;
 	private String _kcfzr;
 	private String _kcfzrzjlx;
 	private String _kcfzrzjh;
-	private String _sgdwmc;
+	private String _sgdw;
 	private String _sgfzr;
 	private String _sgfzrzjlx;
 	private String _sgfzrzjh;
@@ -813,13 +873,13 @@ public class ContractSoap implements Serializable {
 	private String _jazj;
 	private String _zlje;
 	private String _zgj;
-	private String _aqfhwmsgcsf;
+	private String _wmcsf;
 	private Date _htqdrq;
 	private String _htqzrq;
 	private String _cbnr;
-	private String _cyhtsfwb;
-	private String _fzjqtsm;
+	private String _htsfwbmc;
+	private String _bz;
 	private String _sfzx;
 	private Date _zxsj;
-	private Date _zxsm;
+	private String _zxsm;
 }

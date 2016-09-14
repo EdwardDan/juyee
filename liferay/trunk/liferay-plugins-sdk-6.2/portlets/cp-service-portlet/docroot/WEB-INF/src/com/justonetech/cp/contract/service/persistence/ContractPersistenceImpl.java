@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.util.InstanceFactory;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
+import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnmodifiableList;
@@ -46,6 +47,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 /**
  * The persistence implementation for the contract service.
@@ -321,13 +323,19 @@ public class ContractPersistenceImpl extends BasePersistenceImpl<Contract>
 		contractImpl.setContractId(contract.getContractId());
 		contractImpl.setZzjgdm(contract.getZzjgdm());
 		contractImpl.setHtlb(contract.getHtlb());
+		contractImpl.setId(contract.getId());
+		contractImpl.setHtid(contract.getHtid());
 		contractImpl.setHtbh(contract.getHtbh());
 		contractImpl.setZbhtbh(contract.getZbhtbh());
 		contractImpl.setFbhtbh(contract.getFbhtbh());
+		contractImpl.setLwfbhtbh(contract.getLwfbhtbh());
 		contractImpl.setHtlx(contract.getHtlx());
 		contractImpl.setHtzt(contract.getHtzt());
 		contractImpl.setZfbgx(contract.getZfbgx());
-		contractImpl.setBsrq(contract.getBsrq());
+		contractImpl.setSfsl(contract.getSfsl());
+		contractImpl.setZxbz(contract.getZxbz());
+		contractImpl.setState(contract.getState());
+		contractImpl.setBssj(contract.getBssj());
 		contractImpl.setSlsj(contract.getSlsj());
 		contractImpl.setBjbh(contract.getBjbh());
 		contractImpl.setSzdq(contract.getSzdq());
@@ -339,9 +347,9 @@ public class ContractPersistenceImpl extends BasePersistenceImpl<Contract>
 		contractImpl.setDwxz(contract.getDwxz());
 		contractImpl.setZjlygc(contract.getZjlygc());
 		contractImpl.setZtz(contract.getZtz());
-		contractImpl.setZjzmj(contract.getZjzmj());
+		contractImpl.setZmj(contract.getZmj());
 		contractImpl.setXmfl(contract.getXmfl());
-		contractImpl.setJzgm(contract.getJzgm());
+		contractImpl.setJsgm(contract.getJsgm());
 		contractImpl.setBdh(contract.getBdh());
 		contractImpl.setFbfs(contract.getFbfs());
 		contractImpl.setCbfs(contract.getCbfs());
@@ -357,11 +365,11 @@ public class ContractPersistenceImpl extends BasePersistenceImpl<Contract>
 		contractImpl.setSjfzr(contract.getSjfzr());
 		contractImpl.setSjfzrzjlx(contract.getSjfzrzjlx());
 		contractImpl.setSjfzrzjh(contract.getSjfzrzjh());
-		contractImpl.setKcdwmc(contract.getKcdwmc());
+		contractImpl.setKcdw(contract.getKcdw());
 		contractImpl.setKcfzr(contract.getKcfzr());
 		contractImpl.setKcfzrzjlx(contract.getKcfzrzjlx());
 		contractImpl.setKcfzrzjh(contract.getKcfzrzjh());
-		contractImpl.setSgdwmc(contract.getSgdwmc());
+		contractImpl.setSgdw(contract.getSgdw());
 		contractImpl.setSgfzr(contract.getSgfzr());
 		contractImpl.setSgfzrzjlx(contract.getSgfzrzjlx());
 		contractImpl.setSgfzrzjh(contract.getSgfzrzjh());
@@ -383,12 +391,12 @@ public class ContractPersistenceImpl extends BasePersistenceImpl<Contract>
 		contractImpl.setJazj(contract.getJazj());
 		contractImpl.setZlje(contract.getZlje());
 		contractImpl.setZgj(contract.getZgj());
-		contractImpl.setAqfhwmsgcsf(contract.getAqfhwmsgcsf());
+		contractImpl.setWmcsf(contract.getWmcsf());
 		contractImpl.setHtqdrq(contract.getHtqdrq());
 		contractImpl.setHtqzrq(contract.getHtqzrq());
 		contractImpl.setCbnr(contract.getCbnr());
-		contractImpl.setCyhtsfwb(contract.getCyhtsfwb());
-		contractImpl.setFzjqtsm(contract.getFzjqtsm());
+		contractImpl.setHtsfwbmc(contract.getHtsfwbmc());
+		contractImpl.setBz(contract.getBz());
 		contractImpl.setSfzx(contract.getSfzx());
 		contractImpl.setZxsj(contract.getZxsj());
 		contractImpl.setZxsm(contract.getZxsm());
@@ -667,6 +675,11 @@ public class ContractPersistenceImpl extends BasePersistenceImpl<Contract>
 		return count.intValue();
 	}
 
+	@Override
+	protected Set<String> getBadColumnNames() {
+		return _badColumnNames;
+	}
+
 	/**
 	 * Initializes the contract persistence.
 	 */
@@ -706,6 +719,9 @@ public class ContractPersistenceImpl extends BasePersistenceImpl<Contract>
 	private static final boolean _HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE = GetterUtil.getBoolean(PropsUtil.get(
 				PropsKeys.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE));
 	private static Log _log = LogFactoryUtil.getLog(ContractPersistenceImpl.class);
+	private static Set<String> _badColumnNames = SetUtil.fromArray(new String[] {
+				"id", "state"
+			});
 	private static Contract _nullContract = new ContractImpl() {
 			@Override
 			public Object clone() {
