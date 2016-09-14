@@ -83,7 +83,7 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 		String bjbh = ParamUtil.getString(renderRequest, "bjbh");
 		String wssqbh = ParamUtil.getString(renderRequest, "wssqbh");
 		String gcmc = ParamUtil.getString(renderRequest, "gcmc");
-		int zt = ParamUtil.getInteger(renderRequest, "state");
+		int status = ParamUtil.getInteger(renderRequest, "state");
 		int defaultDelta = GetterUtil.getInteger(PropsUtil.get(PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA));
 		int delta = ParamUtil.getInteger(renderRequest, "delta", defaultDelta);
 		int cur = ParamUtil.getInteger(renderRequest, "cur", 1);
@@ -91,13 +91,13 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 		int end = delta * cur;
 		List<Complete> completes = Collections.emptyList();
 		int completesCount = 0;
-		completes = CompleteLocalServiceUtil.getCompletes("", bjbh, wssqbh, gcmc, zt, start, end);
-		completesCount = CompleteLocalServiceUtil.getCompletesCount("", bjbh, wssqbh, gcmc, zt);
+		completes = CompleteLocalServiceUtil.getCompletes("", bjbh, wssqbh, gcmc, status, start, end);
+		completesCount = CompleteLocalServiceUtil.getCompletesCount("", bjbh, wssqbh, gcmc, status);
 		renderRequest.setAttribute("zzjgdm", zzjgdm);
 		renderRequest.setAttribute("bjbh", bjbh);
 		renderRequest.setAttribute("wssqbh", wssqbh);
 		renderRequest.setAttribute("gcmc", gcmc);
-		renderRequest.setAttribute("zt", zt);
+		renderRequest.setAttribute("status", status);
 		renderRequest.setAttribute("completes", completes);
 		renderRequest.setAttribute("completesCount", completesCount);
 		super.doView(renderRequest, renderResponse);
