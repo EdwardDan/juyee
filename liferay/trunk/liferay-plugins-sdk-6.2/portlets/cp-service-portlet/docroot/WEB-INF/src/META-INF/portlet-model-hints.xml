@@ -210,15 +210,21 @@
 		<field name="szdq" type="String" />
 		<field name="xmmc" type="String" />
 		<field name="jsdw" type="String" />
-		<field name="jsdd" type="String" />
-		<field name="lxpw" type="String" />
+		<field name="jsdd" type="String">
+			<hint name="max-length">300</hint>
+		</field>
+		<field name="lxpw" type="String">
+			<hint name="max-length">300</hint>
+		</field>
 		<field name="pzwh" type="String" />
 		<field name="dwxz" type="String" />
 		<field name="zjlygc" type="String" />
 		<field name="ztz" type="String" />
 		<field name="zmj" type="String" />
 		<field name="xmfl" type="String" />
-		<field name="jsgm" type="String" />
+		<field name="jsgm" type="String">
+			<hint name="max-length">300</hint>
+		</field>
 		<field name="bdh" type="String" />
 		<field name="fbfs" type="String" />
 		<field name="cbfs" type="String" />
@@ -226,7 +232,9 @@
 		<field name="zygclb" type="String" />
 		<field name="htmc" type="String" />
 		<field name="fbdw" type="String" />
-		<field name="cbdw" type="String" />
+		<field name="cbdw" type="String">
+			<hint name="max-length">300</hint>
+		</field>
 		<field name="sjdw" type="String" />
 		<field name="xmfzr" type="String" />
 		<field name="xmfzrzjlx" type="String" />
@@ -244,7 +252,9 @@
 		<field name="sgfzrzjh" type="String" />
 		<field name="xmlb" type="String" />
 		<field name="gclb" type="String" />
-		<field name="gcgm" type="String" />
+		<field name="gcgm" type="String">
+			<hint name="max-length">300</hint>
+		</field>
 		<field name="sjxmlb" type="String" />
 		<field name="sjgclb" type="String" />
 		<field name="sjgcgm" type="String" />
@@ -262,10 +272,16 @@
 		<field name="zgj" type="String" />
 		<field name="wmcsf" type="String" />
 		<field name="htqdrq" type="Date" />
-		<field name="htqzrq" type="String" />
-		<field name="cbnr" type="String" />
+		<field name="htqzrq" type="String">
+			<hint name="max-length">300</hint>
+		</field>
+		<field name="cbnr" type="String">
+			<hint name="max-length">300</hint>
+		</field>
 		<field name="htsfwbmc" type="String" />
-		<field name="bz" type="String" />
+		<field name="bz" type="String">
+			<hint name="max-length">300</hint>
+		</field>
 		<field name="sfzx" type="String" />
 		<field name="zxsj" type="Date" />
 		<field name="zxsm" type="String" />
