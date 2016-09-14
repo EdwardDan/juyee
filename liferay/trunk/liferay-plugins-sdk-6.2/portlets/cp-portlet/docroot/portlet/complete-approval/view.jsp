@@ -72,8 +72,8 @@ tr.body td.content {
 
 	<%
 		int sortNo = 0;
-			String stateLabel = "所有,填写,已备案";
-			String stateValue = "0,1,2";
+		String stateLabel = "所有,填写,已上报,已备案";
+		String stateValue = "0,1,2,3";
 	%>
 	<liferay-ui:panel title="竣工备案列表" collapsible="false">
 		<liferay-ui:tabs names="<%=stateLabel%>" param="state"
