@@ -1,8 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
 <%@ include file="../init.jsp"%>
-<link rel="stylesheet" href="/static/viewer-master/viewer.min.css">
-<script src="/static/viewer-master/viewer.min.js"></script>
 <style>
 .aui .table th, .aui .table td {
 	vertical-align: middle;
@@ -50,6 +48,7 @@
 								String jpg = "jpg";
 								String pdf = "pdf";
 								String pdfURL = "/documents/"+filePath;
+							System.out.println("pdfURL=============="+pdfURL);
 				%>
 				<div>
 					<c:if test="<%=dlFileEntry.getExtension().equals(jpg)%>">
