@@ -15,6 +15,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/xml" prefix="x"%>
+<link rel="stylesheet" href="/static/viewer-master/viewer.min.css">
+<script src="/static/viewer-master/viewer.min.js"></script>
  
 <%@ page import="java.util.*"%>
 <%@ page import="com.liferay.portal.kernel.util.*"%>
