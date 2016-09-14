@@ -15,7 +15,6 @@ tr.body td.content {
 </style>
 <%
 	long completeId = ParamUtil.getLong(request, "completeId");
-	System.out.println("======================"+completeId);
 	Complete complete = CompleteLocalServiceUtil.getComplete(completeId);
 	CompleteProjectProfile completeProjectProfile = CompleteProjectProfileLocalServiceUtil.getCompleteProjectProfile(completeId);
 	
