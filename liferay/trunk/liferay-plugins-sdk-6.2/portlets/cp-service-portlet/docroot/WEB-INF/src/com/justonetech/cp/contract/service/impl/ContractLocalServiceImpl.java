@@ -137,9 +137,9 @@ public class ContractLocalServiceImpl extends ContractLocalServiceBaseImpl {
 		}
 		dynamicQuery.add(PropertyFactoryUtil.forName("htzt").eq("已报送"));
 		Junction junction = RestrictionsFactoryUtil.disjunction();
-		junction.add(PropertyFactoryUtil.forName("zfbgx").like("CZ%"));
-		junction.add(PropertyFactoryUtil.forName("zfbgx").like("VZ%"));
-		junction.add(PropertyFactoryUtil.forName("zfbgx").like("WZ%"));
+		junction.add(PropertyFactoryUtil.forName("htbh").like("CZ%"));
+		junction.add(PropertyFactoryUtil.forName("htbh").like("VZ%"));
+		junction.add(PropertyFactoryUtil.forName("htbh").like("WZ%"));
 		dynamicQuery.add(junction);
 		return dynamicQuery;
 	}
