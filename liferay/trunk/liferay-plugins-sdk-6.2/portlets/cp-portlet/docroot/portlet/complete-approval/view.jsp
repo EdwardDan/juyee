@@ -22,14 +22,6 @@ tr.body td.content {
 	int completesCount = CompleteLocalServiceUtil.getCompletesCount("", bjbh, wssqbh, gcmc, status);
 	request.setAttribute("completes", completes);
 	request.setAttribute("completesCount", completesCount);
-	User me = PortalUtil.getUser(request);
-	List<Role> userRoles = RoleLocalServiceUtil.getUserRoles(me
-			.getUserId());
-	ArrayList<String> roles = new ArrayList<String>();
-	for (Role role : userRoles) {
-		roles.add(role.getRoleId() + "");
-	}
-	request.setAttribute("roles", roles.toString());
 %>
 <portlet:renderURL var="searchURL" />
 <c:set var="contextPath"
@@ -112,7 +104,7 @@ tr.body td.content {
 						<portlet:param name="completeId" value="${complete.completeId}"/>
 					</portlet:renderURL>
 						<liferay-ui:icon image="view" url="${viewCompleteURL}"/>
-						<c:if test="${complete.status>1&&fn:contains(roles,'29802')}">
+						<c:if test="${complete.status>1}">
 						<liferay-ui:icon image="check" url="${approvalCompleteURL}"/>
 						</c:if>
 					</liferay-ui:icon-menu>
