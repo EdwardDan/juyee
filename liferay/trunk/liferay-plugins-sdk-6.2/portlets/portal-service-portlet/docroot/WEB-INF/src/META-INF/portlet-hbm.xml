@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="com.justonetech.portal.feedback.model.Feedback" />
+	<class name="com.justonetech.portal.feedback.model.impl.FeedbackImpl" table="portal_Feedback">
+		<cache usage="read-write" />
+		<id name="feedbackId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="zt" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="lx" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="fkrId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="fkrq" type="org.hibernate.type.TimestampType" />
+		<property name="fknr" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="hfrId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="hfrq" type="org.hibernate.type.TimestampType" />
+		<property name="hfjg" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+</hibernate-mapping>

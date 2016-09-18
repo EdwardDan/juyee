@@ -1,0 +1,1 @@
+create index IX_BAA9555A on portal_Feedback (fkrId);
