@@ -374,16 +374,14 @@ public class PermitApplicationPortlet extends MVCPortlet {
 			permit.setUserName(user.getFullName());
 			permit.setStatusByUserName(user.getFullName());
 		}
+		Date now = new Date();
+		permit.setCreateDate(now);
+		permit.setModifiedDate(now);
 		permit.setYwbh(ywbh);
 		permit.setGroupId(themeDisplay.getScopeGroupId());
 		permit.setCompanyId(themeDisplay.getCompanyId());
 		//保存状态
-
 		permit.setStatus(CityPermitStatus.STATUS_SB.getCode());
-
-		/*permit.setSqzt(CityPermitStatus.STATUS_SB.getCode());
-=======
->>>>>>> .r1646*/
 		permit.setSqbz(0);
 		permit.setStatus(2);
 		PermitLocalServiceUtil.updatePermit(permit);
