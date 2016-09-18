@@ -17,7 +17,7 @@
 							type="text" name="zylx" style="width:80%" label="" /></td>
 					<td style="width: 10%;" class="text-right">姓名</td>
 					<td style="width: 40%;" class="bg-white"><aui:input
-							type="text" name="xm" style="width:80%" label="" /></td>
+							type="text" name="xm" value="" style="width:80%" label="" /></td>
 				</tr>
 				<tr>
 					<td style="width: 10%;" class="text-right">证件编号</td>
@@ -25,8 +25,9 @@
 							type="text" name="certificateId" style="width:80%" label="" /></td>
 					<td style="width: 10%;" class="text-right">有效期</td>
 					<td style="width: 40%;" class="bg-white"><input type="text"
-						id="yxq" readonly="readonly" name="<portlet:namespace/>yxq"
-						style="width: 80%" class="field"
+						id="yxq" name="<portlet:namespace/>yxq" style="width: 80%"
+						class="field Wdate"
+						value="<fmt:formatDate value='${yxq }' pattern='yyyy-MM-dd' />"
 						onfocus="WdatePicker({yxq,lang:'zh-cn',dateFmt:'yyyy-MM-dd'})" /></td>
 				</tr>
 				<tr style="height: 40px;">
