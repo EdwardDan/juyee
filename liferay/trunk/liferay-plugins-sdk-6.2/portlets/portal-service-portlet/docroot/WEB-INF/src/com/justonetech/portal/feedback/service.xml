@@ -3,7 +3,7 @@
 <service-builder package-path="com.justonetech.portal.feedback">
 	<author>fanqi</author>
 	<namespace>portal</namespace>
-	<!-- 互动留言板 -->
+	<!-- 互动反馈 -->
 	<entity name="Feedback" local-service="true" remote-service="false">
 		<!-- PK fields -->
 		<column name="feedbackId" type="String" primary="true" /><!-- 留言Id -->
