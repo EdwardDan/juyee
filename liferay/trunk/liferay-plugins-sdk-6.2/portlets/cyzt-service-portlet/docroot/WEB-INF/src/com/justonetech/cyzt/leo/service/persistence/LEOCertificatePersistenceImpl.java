@@ -331,7 +331,7 @@ public class LEOCertificatePersistenceImpl extends BasePersistenceImpl<LEOCertif
 		leoCertificateImpl.setCreateDate(leoCertificate.getCreateDate());
 		leoCertificateImpl.setModifiedDate(leoCertificate.getModifiedDate());
 		leoCertificateImpl.setXm(leoCertificate.getXm());
-		leoCertificateImpl.setZjlx(leoCertificate.getZjlx());
+		leoCertificateImpl.setZylx(leoCertificate.getZylx());
 		leoCertificateImpl.setYxq(leoCertificate.getYxq());
 		leoCertificateImpl.setFzrq(leoCertificate.getFzrq());
 

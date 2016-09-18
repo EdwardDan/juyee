@@ -21,7 +21,7 @@
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<basic name="xm" />
-			<basic name="zjlx" />
+			<basic name="zylx" />
 			<basic name="yxq">
 				<temporal>TIMESTAMP</temporal>
 			</basic>

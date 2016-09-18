@@ -58,7 +58,7 @@ public class LEOCertificateWrapper implements LEOCertificate,
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("xm", getXm());
-		attributes.put("zjlx", getZjlx());
+		attributes.put("zylx", getZylx());
 		attributes.put("yxq", getYxq());
 		attributes.put("fzrq", getFzrq());
 
@@ -115,10 +115,10 @@ public class LEOCertificateWrapper implements LEOCertificate,
 			setXm(xm);
 		}
 
-		String zjlx = (String)attributes.get("zjlx");
+		String zylx = (String)attributes.get("zylx");
 
-		if (zjlx != null) {
-			setZjlx(zjlx);
+		if (zylx != null) {
+			setZylx(zylx);
 		}
 
 		Date yxq = (Date)attributes.get("yxq");
@@ -337,23 +337,23 @@ public class LEOCertificateWrapper implements LEOCertificate,
 	}
 
 	/**
-	* Returns the zjlx of this l e o certificate.
+	* Returns the zylx of this l e o certificate.
 	*
-	* @return the zjlx of this l e o certificate
+	* @return the zylx of this l e o certificate
 	*/
 	@Override
-	public java.lang.String getZjlx() {
-		return _leoCertificate.getZjlx();
+	public java.lang.String getZylx() {
+		return _leoCertificate.getZylx();
 	}
 
 	/**
-	* Sets the zjlx of this l e o certificate.
+	* Sets the zylx of this l e o certificate.
 	*
-	* @param zjlx the zjlx of this l e o certificate
+	* @param zylx the zylx of this l e o certificate
 	*/
 	@Override
-	public void setZjlx(java.lang.String zjlx) {
-		_leoCertificate.setZjlx(zjlx);
+	public void setZylx(java.lang.String zylx) {
+		_leoCertificate.setZylx(zylx);
 	}
 
 	/**

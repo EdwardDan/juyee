@@ -7,7 +7,7 @@ create table cyzt_LEOCertificate (
 	createDate DATE null,
 	modifiedDate DATE null,
 	xm VARCHAR(75) null,
-	zjlx VARCHAR(75) null,
+	zylx VARCHAR(75) null,
 	yxq DATE null,
 	fzrq DATE null
 );

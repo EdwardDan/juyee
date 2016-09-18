@@ -65,11 +65,11 @@ public class LEOCertificateModelImpl extends BaseModelImpl<LEOCertificate>
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
 			{ "xm", Types.VARCHAR },
-			{ "zjlx", Types.VARCHAR },
+			{ "zylx", Types.VARCHAR },
 			{ "yxq", Types.TIMESTAMP },
 			{ "fzrq", Types.TIMESTAMP }
 		};
-	public static final String TABLE_SQL_CREATE = "create table cyzt_LEOCertificate (certificateId VARCHAR(75) not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,xm VARCHAR(75) null,zjlx VARCHAR(75) null,yxq DATE null,fzrq DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table cyzt_LEOCertificate (certificateId VARCHAR(75) not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,xm VARCHAR(75) null,zylx VARCHAR(75) null,yxq DATE null,fzrq DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table cyzt_LEOCertificate";
 	public static final String ORDER_BY_JPQL = " ORDER BY leoCertificate.certificateId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY cyzt_LEOCertificate.certificateId ASC";
@@ -131,7 +131,7 @@ public class LEOCertificateModelImpl extends BaseModelImpl<LEOCertificate>
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("xm", getXm());
-		attributes.put("zjlx", getZjlx());
+		attributes.put("zylx", getZylx());
 		attributes.put("yxq", getYxq());
 		attributes.put("fzrq", getFzrq());
 
@@ -188,10 +188,10 @@ public class LEOCertificateModelImpl extends BaseModelImpl<LEOCertificate>
 			setXm(xm);
 		}
 
-		String zjlx = (String)attributes.get("zjlx");
+		String zylx = (String)attributes.get("zylx");
 
-		if (zjlx != null) {
-			setZjlx(zjlx);
+		if (zylx != null) {
+			setZylx(zylx);
 		}
 
 		Date yxq = (Date)attributes.get("yxq");
@@ -313,18 +313,18 @@ public class LEOCertificateModelImpl extends BaseModelImpl<LEOCertificate>
 	}
 
 	@Override
-	public String getZjlx() {
-		if (_zjlx == null) {
+	public String getZylx() {
+		if (_zylx == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _zjlx;
+			return _zylx;
 		}
 	}
 
 	@Override
-	public void setZjlx(String zjlx) {
-		_zjlx = zjlx;
+	public void setZylx(String zylx) {
+		_zylx = zylx;
 	}
 
 	@Override
@@ -369,7 +369,7 @@ public class LEOCertificateModelImpl extends BaseModelImpl<LEOCertificate>
 		leoCertificateImpl.setCreateDate(getCreateDate());
 		leoCertificateImpl.setModifiedDate(getModifiedDate());
 		leoCertificateImpl.setXm(getXm());
-		leoCertificateImpl.setZjlx(getZjlx());
+		leoCertificateImpl.setZylx(getZylx());
 		leoCertificateImpl.setYxq(getYxq());
 		leoCertificateImpl.setFzrq(getFzrq());
 
@@ -468,12 +468,12 @@ public class LEOCertificateModelImpl extends BaseModelImpl<LEOCertificate>
 			leoCertificateCacheModel.xm = null;
 		}
 
-		leoCertificateCacheModel.zjlx = getZjlx();
+		leoCertificateCacheModel.zylx = getZylx();
 
-		String zjlx = leoCertificateCacheModel.zjlx;
+		String zylx = leoCertificateCacheModel.zylx;
 
-		if ((zjlx != null) && (zjlx.length() == 0)) {
-			leoCertificateCacheModel.zjlx = null;
+		if ((zylx != null) && (zylx.length() == 0)) {
+			leoCertificateCacheModel.zylx = null;
 		}
 
 		Date yxq = getYxq();
@@ -517,8 +517,8 @@ public class LEOCertificateModelImpl extends BaseModelImpl<LEOCertificate>
 		sb.append(getModifiedDate());
 		sb.append(", xm=");
 		sb.append(getXm());
-		sb.append(", zjlx=");
-		sb.append(getZjlx());
+		sb.append(", zylx=");
+		sb.append(getZylx());
 		sb.append(", yxq=");
 		sb.append(getYxq());
 		sb.append(", fzrq=");
@@ -569,8 +569,8 @@ public class LEOCertificateModelImpl extends BaseModelImpl<LEOCertificate>
 		sb.append(getXm());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>zjlx</column-name><column-value><![CDATA[");
-		sb.append(getZjlx());
+			"<column><column-name>zylx</column-name><column-value><![CDATA[");
+		sb.append(getZylx());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>yxq</column-name><column-value><![CDATA[");
@@ -599,7 +599,7 @@ public class LEOCertificateModelImpl extends BaseModelImpl<LEOCertificate>
 	private Date _createDate;
 	private Date _modifiedDate;
 	private String _xm;
-	private String _zjlx;
+	private String _zylx;
 	private Date _yxq;
 	private Date _fzrq;
 	private LEOCertificate _escapedModel;

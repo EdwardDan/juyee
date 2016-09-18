@@ -10,7 +10,7 @@
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
 		<field name="xm" type="String" />
-		<field name="zjlx" type="String" />
+		<field name="zylx" type="String" />
 		<field name="yxq" type="Date" />
 		<field name="fzrq" type="Date" />
 	</model>

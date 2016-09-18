@@ -14,7 +14,19 @@
 
 package com.justonetech.cyzt.leo.service.impl;
 
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+
+import com.justonetech.cyzt.leo.model.LEOCertificate;
 import com.justonetech.cyzt.leo.service.base.LEOCertificateLocalServiceBaseImpl;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.OrderFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.Validator;
 
 /**
  * The implementation of the l e o certificate local service.
@@ -37,4 +49,47 @@ public class LEOCertificateLocalServiceImpl
 	 *
 	 * Never reference this interface directly. Always use {@link com.justonetech.cyzt.leo.service.LEOCertificateLocalServiceUtil} to access the l e o certificate local service.
 	 */
+	private static Log log = LogFactoryUtil.getLog(LEOCertificateLocalServiceImpl.class);
+
+	@SuppressWarnings("unchecked")
+	public List<LEOCertificate> getLEOCertificates(String xm,String zylx, String zjbh, Date fzrq, int start, int end) {
+
+		try {
+			return this.dynamicQuery(createDynamicQuery(xm,zylx,zjbh,fzrq), start, end);
+		}
+		catch (SystemException e) {
+			log.info(e.getMessage());
+		}
+		return Collections.emptyList();
+	}
+
+	public int getProjectsCount(String xm,String zylx, String zjbh, Date fzrq) {
+
+		try {
+			return (int) this.dynamicQueryCount(createDynamicQuery(xm,zylx,zjbh,fzrq));
+		}
+		catch (SystemException e) {
+			log.info(e.getMessage());
+		}
+		return 0;
+	}
+
+	public DynamicQuery createDynamicQuery(String xm,String zylx, String zjbh, Date fzrq) {
+
+		DynamicQuery dynamicQuery = this.dynamicQuery();
+		if (!Validator.isBlank(xm)) {
+			dynamicQuery.add(PropertyFactoryUtil.forName("xm").like("%" + xm + "%"));
+		}
+		if (!Validator.isBlank(zylx)) {
+			dynamicQuery.add(PropertyFactoryUtil.forName("zylx").like("%" + zylx + "%"));
+		}
+		if (!Validator.isBlank(zjbh)) {
+			dynamicQuery.add(PropertyFactoryUtil.forName("zjbh").like("%" + zjbh + "%"));
+		}
+		if (Validator.isNotNull(fzrq)) {
+			dynamicQuery.add(PropertyFactoryUtil.forName("fzrq").eq(fzrq));
+		}
+		dynamicQuery.addOrder(OrderFactoryUtil.asc("certificateId"));
+		return dynamicQuery;
+	}
 }

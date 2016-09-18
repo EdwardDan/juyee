@@ -253,4 +253,9 @@ public interface LEOTrainingLocalService extends BaseLocalService,
 	public java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
+
+	public java.util.List<com.justonetech.cyzt.leo.model.LEOTraining> findByZjbh(
+		java.lang.String zjbh, int start, int end);
+
+	public int countByZjbh(java.lang.String zjbh);
 }

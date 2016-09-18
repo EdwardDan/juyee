@@ -56,8 +56,8 @@ public class LEOCertificateCacheModel implements CacheModel<LEOCertificate>,
 		sb.append(modifiedDate);
 		sb.append(", xm=");
 		sb.append(xm);
-		sb.append(", zjlx=");
-		sb.append(zjlx);
+		sb.append(", zylx=");
+		sb.append(zylx);
 		sb.append(", yxq=");
 		sb.append(yxq);
 		sb.append(", fzrq=");
@@ -110,11 +110,11 @@ public class LEOCertificateCacheModel implements CacheModel<LEOCertificate>,
 			leoCertificateImpl.setXm(xm);
 		}
 
-		if (zjlx == null) {
-			leoCertificateImpl.setZjlx(StringPool.BLANK);
+		if (zylx == null) {
+			leoCertificateImpl.setZylx(StringPool.BLANK);
 		}
 		else {
-			leoCertificateImpl.setZjlx(zjlx);
+			leoCertificateImpl.setZylx(zylx);
 		}
 
 		if (yxq == Long.MIN_VALUE) {
@@ -146,7 +146,7 @@ public class LEOCertificateCacheModel implements CacheModel<LEOCertificate>,
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
 		xm = objectInput.readUTF();
-		zjlx = objectInput.readUTF();
+		zylx = objectInput.readUTF();
 		yxq = objectInput.readLong();
 		fzrq = objectInput.readLong();
 	}
@@ -182,11 +182,11 @@ public class LEOCertificateCacheModel implements CacheModel<LEOCertificate>,
 			objectOutput.writeUTF(xm);
 		}
 
-		if (zjlx == null) {
+		if (zylx == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(zjlx);
+			objectOutput.writeUTF(zylx);
 		}
 
 		objectOutput.writeLong(yxq);
@@ -201,7 +201,7 @@ public class LEOCertificateCacheModel implements CacheModel<LEOCertificate>,
 	public long createDate;
 	public long modifiedDate;
 	public String xm;
-	public String zjlx;
+	public String zylx;
 	public long yxq;
 	public long fzrq;
 }

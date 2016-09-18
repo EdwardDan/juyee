@@ -288,6 +288,28 @@ public class LEOCertificateLocalServiceWrapper
 			arguments);
 	}
 
+	@Override
+	public java.util.List<com.justonetech.cyzt.leo.model.LEOCertificate> getLEOCertificates(
+		java.lang.String xm, java.lang.String zylx, java.lang.String zjbh,
+		java.util.Date fzrq, int start, int end) {
+		return _leoCertificateLocalService.getLEOCertificates(xm, zylx, zjbh,
+			fzrq, start, end);
+	}
+
+	@Override
+	public int getProjectsCount(java.lang.String xm, java.lang.String zylx,
+		java.lang.String zjbh, java.util.Date fzrq) {
+		return _leoCertificateLocalService.getProjectsCount(xm, zylx, zjbh, fzrq);
+	}
+
+	@Override
+	public com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQuery(
+		java.lang.String xm, java.lang.String zylx, java.lang.String zjbh,
+		java.util.Date fzrq) {
+		return _leoCertificateLocalService.createDynamicQuery(xm, zylx, zjbh,
+			fzrq);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

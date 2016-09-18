@@ -38,7 +38,7 @@ public class LEOCertificateSoap implements Serializable {
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setXm(model.getXm());
-		soapModel.setZjlx(model.getZjlx());
+		soapModel.setZylx(model.getZylx());
 		soapModel.setYxq(model.getYxq());
 		soapModel.setFzrq(model.getFzrq());
 
@@ -157,12 +157,12 @@ public class LEOCertificateSoap implements Serializable {
 		_xm = xm;
 	}
 
-	public String getZjlx() {
-		return _zjlx;
+	public String getZylx() {
+		return _zylx;
 	}
 
-	public void setZjlx(String zjlx) {
-		_zjlx = zjlx;
+	public void setZylx(String zylx) {
+		_zylx = zylx;
 	}
 
 	public Date getYxq() {
@@ -189,7 +189,7 @@ public class LEOCertificateSoap implements Serializable {
 	private Date _createDate;
 	private Date _modifiedDate;
 	private String _xm;
-	private String _zjlx;
+	private String _zylx;
 	private Date _yxq;
 	private Date _fzrq;
 }

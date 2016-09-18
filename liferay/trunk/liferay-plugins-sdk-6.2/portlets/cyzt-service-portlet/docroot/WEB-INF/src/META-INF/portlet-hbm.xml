@@ -16,7 +16,7 @@
 		<property name="createDate" type="org.hibernate.type.TimestampType" />
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
 		<property name="xm" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="zjlx" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="zylx" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="yxq" type="org.hibernate.type.TimestampType" />
 		<property name="fzrq" type="org.hibernate.type.TimestampType" />
 	</class>

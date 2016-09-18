@@ -275,6 +275,23 @@ public class LEOCertificateLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static java.util.List<com.justonetech.cyzt.leo.model.LEOCertificate> getLEOCertificates(
+		java.lang.String xm, java.lang.String zylx, java.lang.String zjbh,
+		java.util.Date fzrq, int start, int end) {
+		return getService().getLEOCertificates(xm, zylx, zjbh, fzrq, start, end);
+	}
+
+	public static int getProjectsCount(java.lang.String xm,
+		java.lang.String zylx, java.lang.String zjbh, java.util.Date fzrq) {
+		return getService().getProjectsCount(xm, zylx, zjbh, fzrq);
+	}
+
+	public static com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQuery(
+		java.lang.String xm, java.lang.String zylx, java.lang.String zjbh,
+		java.util.Date fzrq) {
+		return getService().createDynamicQuery(xm, zylx, zjbh, fzrq);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

@@ -83,7 +83,7 @@ public class LEOCertificateClp extends BaseModelImpl<LEOCertificate>
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("xm", getXm());
-		attributes.put("zjlx", getZjlx());
+		attributes.put("zylx", getZylx());
 		attributes.put("yxq", getYxq());
 		attributes.put("fzrq", getFzrq());
 
@@ -140,10 +140,10 @@ public class LEOCertificateClp extends BaseModelImpl<LEOCertificate>
 			setXm(xm);
 		}
 
-		String zjlx = (String)attributes.get("zjlx");
+		String zylx = (String)attributes.get("zylx");
 
-		if (zjlx != null) {
-			setZjlx(zjlx);
+		if (zylx != null) {
+			setZylx(zylx);
 		}
 
 		Date yxq = (Date)attributes.get("yxq");
@@ -354,21 +354,21 @@ public class LEOCertificateClp extends BaseModelImpl<LEOCertificate>
 	}
 
 	@Override
-	public String getZjlx() {
-		return _zjlx;
+	public String getZylx() {
+		return _zylx;
 	}
 
 	@Override
-	public void setZjlx(String zjlx) {
-		_zjlx = zjlx;
+	public void setZylx(String zylx) {
+		_zylx = zylx;
 
 		if (_leoCertificateRemoteModel != null) {
 			try {
 				Class<?> clazz = _leoCertificateRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setZjlx", String.class);
+				Method method = clazz.getMethod("setZylx", String.class);
 
-				method.invoke(_leoCertificateRemoteModel, zjlx);
+				method.invoke(_leoCertificateRemoteModel, zylx);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -501,7 +501,7 @@ public class LEOCertificateClp extends BaseModelImpl<LEOCertificate>
 		clone.setCreateDate(getCreateDate());
 		clone.setModifiedDate(getModifiedDate());
 		clone.setXm(getXm());
-		clone.setZjlx(getZjlx());
+		clone.setZylx(getZylx());
 		clone.setYxq(getYxq());
 		clone.setFzrq(getFzrq());
 
@@ -566,8 +566,8 @@ public class LEOCertificateClp extends BaseModelImpl<LEOCertificate>
 		sb.append(getModifiedDate());
 		sb.append(", xm=");
 		sb.append(getXm());
-		sb.append(", zjlx=");
-		sb.append(getZjlx());
+		sb.append(", zylx=");
+		sb.append(getZylx());
 		sb.append(", yxq=");
 		sb.append(getYxq());
 		sb.append(", fzrq=");
@@ -618,8 +618,8 @@ public class LEOCertificateClp extends BaseModelImpl<LEOCertificate>
 		sb.append(getXm());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>zjlx</column-name><column-value><![CDATA[");
-		sb.append(getZjlx());
+			"<column><column-name>zylx</column-name><column-value><![CDATA[");
+		sb.append(getZylx());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>yxq</column-name><column-value><![CDATA[");
@@ -644,7 +644,7 @@ public class LEOCertificateClp extends BaseModelImpl<LEOCertificate>
 	private Date _createDate;
 	private Date _modifiedDate;
 	private String _xm;
-	private String _zjlx;
+	private String _zylx;
 	private Date _yxq;
 	private Date _fzrq;
 	private BaseModel<?> _leoCertificateRemoteModel;

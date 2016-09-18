@@ -207,19 +207,19 @@ public interface LEOCertificateModel extends BaseModel<LEOCertificate>,
 	public void setXm(String xm);
 
 	/**
-	 * Returns the zjlx of this l e o certificate.
+	 * Returns the zylx of this l e o certificate.
 	 *
-	 * @return the zjlx of this l e o certificate
+	 * @return the zylx of this l e o certificate
 	 */
 	@AutoEscape
-	public String getZjlx();
+	public String getZylx();
 
 	/**
-	 * Sets the zjlx of this l e o certificate.
+	 * Sets the zylx of this l e o certificate.
 	 *
-	 * @param zjlx the zjlx of this l e o certificate
+	 * @param zylx the zylx of this l e o certificate
 	 */
-	public void setZjlx(String zjlx);
+	public void setZylx(String zylx);
 
 	/**
 	 * Returns the yxq of this l e o certificate.

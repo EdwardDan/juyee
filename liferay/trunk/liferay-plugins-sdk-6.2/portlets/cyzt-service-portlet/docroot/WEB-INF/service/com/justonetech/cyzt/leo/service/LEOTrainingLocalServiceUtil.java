@@ -275,6 +275,15 @@ public class LEOTrainingLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static java.util.List<com.justonetech.cyzt.leo.model.LEOTraining> findByZjbh(
+		java.lang.String zjbh, int start, int end) {
+		return getService().findByZjbh(zjbh, start, end);
+	}
+
+	public static int countByZjbh(java.lang.String zjbh) {
+		return getService().countByZjbh(zjbh);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

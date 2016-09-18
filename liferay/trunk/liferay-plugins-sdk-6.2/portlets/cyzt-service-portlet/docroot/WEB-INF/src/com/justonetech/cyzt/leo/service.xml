@@ -20,7 +20,7 @@
 
 		<!-- Business fields -->
 		<column name="xm" type="String" /><!-- 姓名 -->
-		<column name="zjlx" type="String" /><!-- 证件类型 -->
+		<column name="zylx" type="String" /><!-- 专业类型 -->
 		<column name="yxq" type="Date" /><!-- 有效期 -->
 		<column name="fzrq" type="Date" /><!-- 发证日期 -->
 	</entity>

@@ -287,6 +287,17 @@ public class LEOTrainingLocalServiceWrapper implements LEOTrainingLocalService,
 			arguments);
 	}
 
+	@Override
+	public java.util.List<com.justonetech.cyzt.leo.model.LEOTraining> findByZjbh(
+		java.lang.String zjbh, int start, int end) {
+		return _leoTrainingLocalService.findByZjbh(zjbh, start, end);
+	}
+
+	@Override
+	public int countByZjbh(java.lang.String zjbh) {
+		return _leoTrainingLocalService.countByZjbh(zjbh);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */
