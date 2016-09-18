@@ -235,7 +235,7 @@
 		<liferay-ui:icon
 			cssClass='<%="workflow-task-" + randomId + " task-change-status-link"%>'
 			id='<%=randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink"%>'
-			image="check" message="<%=message%>" method="get" url="<%=url%>" />
+			image="sb" message="<%=message%>" method="get" url="<%=url%>" />
 		<aui:script use="liferay-workflow-tasks">
 var onTaskClickFn = A.rbind('onTaskClick', Liferay.WorkflowTasks,'<%= randomId %>');
 Liferay.delegateClick('<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(transitionName) %>taskChangeStatusLink', onTaskClickFn);

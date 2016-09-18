@@ -141,6 +141,16 @@
 				url="<%= url %>"
 			/>
 			</c:if>
+			<c:if test='<%=message.equals("补正退回") %>'>
+		<liferay-ui:icon
+				cssClass='<%= "workflow-task-" + randomId + " task-change-status-link" %>'
+				id='<%= randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink" %>'
+				image="bzth"
+				message="<%= message %>"
+				method="get"
+				url="<%= url %>"
+			/>
+			</c:if>
 			<aui:script use="liferay-workflow-tasks">
 var onTaskClickFn = A.rbind('onTaskClick', Liferay.WorkflowTasks,'<%= randomId %>');
 Liferay.delegateClick('<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(transitionName) %>taskChangeStatusLink', onTaskClickFn);
