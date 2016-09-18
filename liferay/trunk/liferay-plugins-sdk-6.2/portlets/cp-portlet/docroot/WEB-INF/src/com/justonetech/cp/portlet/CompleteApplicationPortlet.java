@@ -212,6 +212,7 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 		complete.setSqbz(1);
 		complete.setWssqbh(wssqbh);
 		complete.setSbrq(now);
+		complete.setStatus(CompleteStatus.STATUS_EDIT.getCode());
 		completeProjectProfile.setBjbh(bjbh);
 		completeProjectProfile.setXmlx(xmlx);
 		completeProjectProfile.setJsgcsx(jsgcsx);
