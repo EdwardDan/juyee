@@ -111,8 +111,8 @@
 	<c:if
 		test="<%=status == CityPermitStatus.STATUS_ZXLD_PASS.getCode()
 							|| status == CityPermitStatus.STATUS_WLD_PASS.getCode()%>">
-		<a class="btn" href="" target="_blank">开工备案</a>
 		<a class="btn" href="${printjsscbURL}" target="_blank">技术审查表</a>
+		<a class="btn" href="" target="_blank">开工备案</a>
 		<c:if test="<%=projectProfile.getXmxz() != 29769%>">
 			<a class="btn" href="${printsgxklszsURL}" target="_blank">施工许可(绿色)</a>
 		</c:if>
