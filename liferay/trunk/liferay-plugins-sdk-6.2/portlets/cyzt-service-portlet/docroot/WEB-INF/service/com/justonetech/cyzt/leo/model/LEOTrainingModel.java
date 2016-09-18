@@ -209,15 +209,14 @@ public interface LEOTrainingModel extends BaseModel<LEOTraining>, GroupedModel {
 	 *
 	 * @return the pxsj of this l e o training
 	 */
-	@AutoEscape
-	public String getPxsj();
+	public Date getPxsj();
 
 	/**
 	 * Sets the pxsj of this l e o training.
 	 *
 	 * @param pxsj the pxsj of this l e o training
 	 */
-	public void setPxsj(String pxsj);
+	public void setPxsj(Date pxsj);
 
 	/**
 	 * Returns the xcjysj of this l e o training.
@@ -238,14 +237,15 @@ public interface LEOTrainingModel extends BaseModel<LEOTraining>, GroupedModel {
 	 *
 	 * @return the pxnr of this l e o training
 	 */
-	public Date getPxnr();
+	@AutoEscape
+	public String getPxnr();
 
 	/**
 	 * Sets the pxnr of this l e o training.
 	 *
 	 * @param pxnr the pxnr of this l e o training
 	 */
-	public void setPxnr(Date pxnr);
+	public void setPxnr(String pxnr);
 
 	@Override
 	public boolean isNew();

@@ -32,8 +32,8 @@
 		<property name="createDate" type="org.hibernate.type.TimestampType" />
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
 		<property name="zjbh" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="pxsj" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="pxsj" type="org.hibernate.type.TimestampType" />
 		<property name="xcjysj" type="org.hibernate.type.TimestampType" />
-		<property name="pxnr" type="org.hibernate.type.TimestampType" />
+		<property name="pxnr" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 </hibernate-mapping>

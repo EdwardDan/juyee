@@ -48,13 +48,13 @@
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<basic name="zjbh" />
-			<basic name="pxsj" />
+			<basic name="pxsj">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
 			<basic name="xcjysj">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
-			<basic name="pxnr">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
+			<basic name="pxnr" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />

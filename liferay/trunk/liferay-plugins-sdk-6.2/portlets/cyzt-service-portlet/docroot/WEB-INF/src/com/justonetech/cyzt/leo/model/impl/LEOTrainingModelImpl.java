@@ -69,11 +69,11 @@ public class LEOTrainingModelImpl extends BaseModelImpl<LEOTraining>
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
 			{ "zjbh", Types.VARCHAR },
-			{ "pxsj", Types.VARCHAR },
+			{ "pxsj", Types.TIMESTAMP },
 			{ "xcjysj", Types.TIMESTAMP },
-			{ "pxnr", Types.TIMESTAMP }
+			{ "pxnr", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table cyzt_LEOTraining (trainingId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,zjbh VARCHAR(75) null,pxsj VARCHAR(75) null,xcjysj DATE null,pxnr DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table cyzt_LEOTraining (trainingId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,zjbh VARCHAR(75) null,pxsj DATE null,xcjysj DATE null,pxnr VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table cyzt_LEOTraining";
 	public static final String ORDER_BY_JPQL = " ORDER BY leoTraining.trainingId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY cyzt_LEOTraining.trainingId ASC";
@@ -196,7 +196,7 @@ public class LEOTrainingModelImpl extends BaseModelImpl<LEOTraining>
 			setZjbh(zjbh);
 		}
 
-		String pxsj = (String)attributes.get("pxsj");
+		Date pxsj = (Date)attributes.get("pxsj");
 
 		if (pxsj != null) {
 			setPxsj(pxsj);
@@ -208,7 +208,7 @@ public class LEOTrainingModelImpl extends BaseModelImpl<LEOTraining>
 			setXcjysj(xcjysj);
 		}
 
-		Date pxnr = (Date)attributes.get("pxnr");
+		String pxnr = (String)attributes.get("pxnr");
 
 		if (pxnr != null) {
 			setPxnr(pxnr);
@@ -326,17 +326,12 @@ public class LEOTrainingModelImpl extends BaseModelImpl<LEOTraining>
 	}
 
 	@Override
-	public String getPxsj() {
-		if (_pxsj == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _pxsj;
-		}
+	public Date getPxsj() {
+		return _pxsj;
 	}
 
 	@Override
-	public void setPxsj(String pxsj) {
+	public void setPxsj(Date pxsj) {
 		_pxsj = pxsj;
 	}
 
@@ -351,12 +346,17 @@ public class LEOTrainingModelImpl extends BaseModelImpl<LEOTraining>
 	}
 
 	@Override
-	public Date getPxnr() {
-		return _pxnr;
+	public String getPxnr() {
+		if (_pxnr == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _pxnr;
+		}
 	}
 
 	@Override
-	public void setPxnr(Date pxnr) {
+	public void setPxnr(String pxnr) {
 		_pxnr = pxnr;
 	}
 
@@ -505,12 +505,13 @@ public class LEOTrainingModelImpl extends BaseModelImpl<LEOTraining>
 			leoTrainingCacheModel.zjbh = null;
 		}
 
-		leoTrainingCacheModel.pxsj = getPxsj();
+		Date pxsj = getPxsj();
 
-		String pxsj = leoTrainingCacheModel.pxsj;
-
-		if ((pxsj != null) && (pxsj.length() == 0)) {
-			leoTrainingCacheModel.pxsj = null;
+		if (pxsj != null) {
+			leoTrainingCacheModel.pxsj = pxsj.getTime();
+		}
+		else {
+			leoTrainingCacheModel.pxsj = Long.MIN_VALUE;
 		}
 
 		Date xcjysj = getXcjysj();
@@ -522,13 +523,12 @@ public class LEOTrainingModelImpl extends BaseModelImpl<LEOTraining>
 			leoTrainingCacheModel.xcjysj = Long.MIN_VALUE;
 		}
 
-		Date pxnr = getPxnr();
+		leoTrainingCacheModel.pxnr = getPxnr();
 
-		if (pxnr != null) {
-			leoTrainingCacheModel.pxnr = pxnr.getTime();
-		}
-		else {
-			leoTrainingCacheModel.pxnr = Long.MIN_VALUE;
+		String pxnr = leoTrainingCacheModel.pxnr;
+
+		if ((pxnr != null) && (pxnr.length() == 0)) {
+			leoTrainingCacheModel.pxnr = null;
 		}
 
 		return leoTrainingCacheModel;
@@ -637,9 +637,9 @@ public class LEOTrainingModelImpl extends BaseModelImpl<LEOTraining>
 	private Date _modifiedDate;
 	private String _zjbh;
 	private String _originalZjbh;
-	private String _pxsj;
+	private Date _pxsj;
 	private Date _xcjysj;
-	private Date _pxnr;
+	private String _pxnr;
 	private long _columnBitmask;
 	private LEOTraining _escapedModel;
 }

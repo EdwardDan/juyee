@@ -21,7 +21,7 @@ create table cyzt_LEOTraining (
 	createDate DATE null,
 	modifiedDate DATE null,
 	zjbh VARCHAR(75) null,
-	pxsj VARCHAR(75) null,
+	pxsj DATE null,
 	xcjysj DATE null,
-	pxnr DATE null
+	pxnr VARCHAR(75) null
 );

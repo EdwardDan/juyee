@@ -104,11 +104,11 @@ public class LEOTrainingCacheModel implements CacheModel<LEOTraining>,
 			leoTrainingImpl.setZjbh(zjbh);
 		}
 
-		if (pxsj == null) {
-			leoTrainingImpl.setPxsj(StringPool.BLANK);
+		if (pxsj == Long.MIN_VALUE) {
+			leoTrainingImpl.setPxsj(null);
 		}
 		else {
-			leoTrainingImpl.setPxsj(pxsj);
+			leoTrainingImpl.setPxsj(new Date(pxsj));
 		}
 
 		if (xcjysj == Long.MIN_VALUE) {
@@ -118,11 +118,11 @@ public class LEOTrainingCacheModel implements CacheModel<LEOTraining>,
 			leoTrainingImpl.setXcjysj(new Date(xcjysj));
 		}
 
-		if (pxnr == Long.MIN_VALUE) {
-			leoTrainingImpl.setPxnr(null);
+		if (pxnr == null) {
+			leoTrainingImpl.setPxnr(StringPool.BLANK);
 		}
 		else {
-			leoTrainingImpl.setPxnr(new Date(pxnr));
+			leoTrainingImpl.setPxnr(pxnr);
 		}
 
 		leoTrainingImpl.resetOriginalValues();
@@ -140,9 +140,9 @@ public class LEOTrainingCacheModel implements CacheModel<LEOTraining>,
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
 		zjbh = objectInput.readUTF();
-		pxsj = objectInput.readUTF();
+		pxsj = objectInput.readLong();
 		xcjysj = objectInput.readLong();
-		pxnr = objectInput.readLong();
+		pxnr = objectInput.readUTF();
 	}
 
 	@Override
@@ -170,15 +170,15 @@ public class LEOTrainingCacheModel implements CacheModel<LEOTraining>,
 			objectOutput.writeUTF(zjbh);
 		}
 
-		if (pxsj == null) {
+		objectOutput.writeLong(pxsj);
+		objectOutput.writeLong(xcjysj);
+
+		if (pxnr == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(pxsj);
+			objectOutput.writeUTF(pxnr);
 		}
-
-		objectOutput.writeLong(xcjysj);
-		objectOutput.writeLong(pxnr);
 	}
 
 	public long trainingId;
@@ -189,7 +189,7 @@ public class LEOTrainingCacheModel implements CacheModel<LEOTraining>,
 	public long createDate;
 	public long modifiedDate;
 	public String zjbh;
-	public String pxsj;
+	public long pxsj;
 	public long xcjysj;
-	public long pxnr;
+	public String pxnr;
 }

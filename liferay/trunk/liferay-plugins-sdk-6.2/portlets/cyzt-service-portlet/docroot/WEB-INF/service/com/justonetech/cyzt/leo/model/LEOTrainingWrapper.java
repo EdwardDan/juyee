@@ -115,7 +115,7 @@ public class LEOTrainingWrapper implements LEOTraining,
 			setZjbh(zjbh);
 		}
 
-		String pxsj = (String)attributes.get("pxsj");
+		Date pxsj = (Date)attributes.get("pxsj");
 
 		if (pxsj != null) {
 			setPxsj(pxsj);
@@ -127,7 +127,7 @@ public class LEOTrainingWrapper implements LEOTraining,
 			setXcjysj(xcjysj);
 		}
 
-		Date pxnr = (Date)attributes.get("pxnr");
+		String pxnr = (String)attributes.get("pxnr");
 
 		if (pxnr != null) {
 			setPxnr(pxnr);
@@ -342,7 +342,7 @@ public class LEOTrainingWrapper implements LEOTraining,
 	* @return the pxsj of this l e o training
 	*/
 	@Override
-	public java.lang.String getPxsj() {
+	public java.util.Date getPxsj() {
 		return _leoTraining.getPxsj();
 	}
 
@@ -352,7 +352,7 @@ public class LEOTrainingWrapper implements LEOTraining,
 	* @param pxsj the pxsj of this l e o training
 	*/
 	@Override
-	public void setPxsj(java.lang.String pxsj) {
+	public void setPxsj(java.util.Date pxsj) {
 		_leoTraining.setPxsj(pxsj);
 	}
 
@@ -382,7 +382,7 @@ public class LEOTrainingWrapper implements LEOTraining,
 	* @return the pxnr of this l e o training
 	*/
 	@Override
-	public java.util.Date getPxnr() {
+	public java.lang.String getPxnr() {
 		return _leoTraining.getPxnr();
 	}
 
@@ -392,7 +392,7 @@ public class LEOTrainingWrapper implements LEOTraining,
 	* @param pxnr the pxnr of this l e o training
 	*/
 	@Override
-	public void setPxnr(java.util.Date pxnr) {
+	public void setPxnr(java.lang.String pxnr) {
 		_leoTraining.setPxnr(pxnr);
 	}
 

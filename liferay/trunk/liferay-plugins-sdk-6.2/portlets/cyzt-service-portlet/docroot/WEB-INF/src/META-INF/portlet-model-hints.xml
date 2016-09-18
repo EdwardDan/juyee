@@ -23,8 +23,8 @@
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
 		<field name="zjbh" type="String" />
-		<field name="pxsj" type="String" />
+		<field name="pxsj" type="Date" />
 		<field name="xcjysj" type="Date" />
-		<field name="pxnr" type="Date" />
+		<field name="pxnr" type="String" />
 	</model>
 </model-hints>

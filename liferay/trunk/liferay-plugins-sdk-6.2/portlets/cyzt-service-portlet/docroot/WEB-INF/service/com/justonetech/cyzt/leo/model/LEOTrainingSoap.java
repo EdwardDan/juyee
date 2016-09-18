@@ -157,11 +157,11 @@ public class LEOTrainingSoap implements Serializable {
 		_zjbh = zjbh;
 	}
 
-	public String getPxsj() {
+	public Date getPxsj() {
 		return _pxsj;
 	}
 
-	public void setPxsj(String pxsj) {
+	public void setPxsj(Date pxsj) {
 		_pxsj = pxsj;
 	}
 
@@ -173,11 +173,11 @@ public class LEOTrainingSoap implements Serializable {
 		_xcjysj = xcjysj;
 	}
 
-	public Date getPxnr() {
+	public String getPxnr() {
 		return _pxnr;
 	}
 
-	public void setPxnr(Date pxnr) {
+	public void setPxnr(String pxnr) {
 		_pxnr = pxnr;
 	}
 
@@ -189,7 +189,7 @@ public class LEOTrainingSoap implements Serializable {
 	private Date _createDate;
 	private Date _modifiedDate;
 	private String _zjbh;
-	private String _pxsj;
+	private Date _pxsj;
 	private Date _xcjysj;
-	private Date _pxnr;
+	private String _pxnr;
 }

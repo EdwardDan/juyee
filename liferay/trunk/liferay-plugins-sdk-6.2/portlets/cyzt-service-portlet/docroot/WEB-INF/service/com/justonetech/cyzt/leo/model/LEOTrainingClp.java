@@ -140,7 +140,7 @@ public class LEOTrainingClp extends BaseModelImpl<LEOTraining>
 			setZjbh(zjbh);
 		}
 
-		String pxsj = (String)attributes.get("pxsj");
+		Date pxsj = (Date)attributes.get("pxsj");
 
 		if (pxsj != null) {
 			setPxsj(pxsj);
@@ -152,7 +152,7 @@ public class LEOTrainingClp extends BaseModelImpl<LEOTraining>
 			setXcjysj(xcjysj);
 		}
 
-		Date pxnr = (Date)attributes.get("pxnr");
+		String pxnr = (String)attributes.get("pxnr");
 
 		if (pxnr != null) {
 			setPxnr(pxnr);
@@ -354,19 +354,19 @@ public class LEOTrainingClp extends BaseModelImpl<LEOTraining>
 	}
 
 	@Override
-	public String getPxsj() {
+	public Date getPxsj() {
 		return _pxsj;
 	}
 
 	@Override
-	public void setPxsj(String pxsj) {
+	public void setPxsj(Date pxsj) {
 		_pxsj = pxsj;
 
 		if (_leoTrainingRemoteModel != null) {
 			try {
 				Class<?> clazz = _leoTrainingRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setPxsj", String.class);
+				Method method = clazz.getMethod("setPxsj", Date.class);
 
 				method.invoke(_leoTrainingRemoteModel, pxsj);
 			}
@@ -400,19 +400,19 @@ public class LEOTrainingClp extends BaseModelImpl<LEOTraining>
 	}
 
 	@Override
-	public Date getPxnr() {
+	public String getPxnr() {
 		return _pxnr;
 	}
 
 	@Override
-	public void setPxnr(Date pxnr) {
+	public void setPxnr(String pxnr) {
 		_pxnr = pxnr;
 
 		if (_leoTrainingRemoteModel != null) {
 			try {
 				Class<?> clazz = _leoTrainingRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setPxnr", Date.class);
+				Method method = clazz.getMethod("setPxnr", String.class);
 
 				method.invoke(_leoTrainingRemoteModel, pxnr);
 			}
@@ -650,9 +650,9 @@ public class LEOTrainingClp extends BaseModelImpl<LEOTraining>
 	private Date _createDate;
 	private Date _modifiedDate;
 	private String _zjbh;
-	private String _pxsj;
+	private Date _pxsj;
 	private Date _xcjysj;
-	private Date _pxnr;
+	private String _pxnr;
 	private BaseModel<?> _leoTrainingRemoteModel;
 	private Class<?> _clpSerializerClass = com.justonetech.cyzt.leo.service.ClpSerializer.class;
 }
