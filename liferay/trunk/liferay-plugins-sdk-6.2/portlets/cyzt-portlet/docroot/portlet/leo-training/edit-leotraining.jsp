@@ -57,12 +57,12 @@ request.setAttribute("lEOCertificate", lEOCertificate);
 							<td style="width: 15%; text-align: center">${lEOCertificate.xm }</td>
 							<td style="width: 20%; text-align: center"><input
 								style="width: 98%" name="<portlet:namespace/>pxsj" id="pxsj"
-								readonly="readonly"
+								class="Wdate"
 								value="<fmt:formatDate value='${leoTraining.pxsj }' pattern='yyyy-MM-dd'/>"
 								onfocus="WdatePicker({pxsj,lang:'zh-cn',dateFmt:'yyyy-MM-dd'})" /></td>
 							<td style="width: 20%; text-align: center"><input
 								style="width: 95%" name="<portlet:namespace/>xcjysj" id="xcjysj"
-								readonly="readonly"
+								class="Wdate"
 								value="<fmt:formatDate value='${leoTraining.xcjysj }' pattern='yyyy-MM-dd'/>"
 								onfocus="WdatePicker({xcjysj,lang:'zh-cn',dateFmt:'yyyy-MM-dd'})"></td>
 							<td style="width: 43%; text-align: center"><aui:input
@@ -92,11 +92,11 @@ request.setAttribute("lEOCertificate", lEOCertificate);
 			<td style="width: 15%; text-align: center">${lEOCertificate.xm }</td>
 			<td style="width: 20%; text-align: center"><input
 				style="width: 95%" name="<portlet:namespace/>pxsj" id="pxsj"
-				value="" readonly="readonly"
+				value="" class="Wdate"
 				onfocus="WdatePicker({pxsj,lang:'zh-cn',dateFmt:'yyyy-MM-dd'})" /></td>
 			<td style="width: 20%; text-align: center"><input
 				style="width: 95%" name="<portlet:namespace/>xcjysj" id="xcjysj"
-				value="" readonly="readonly"
+				value="" class="Wdate"
 				onfocus="WdatePicker({xcjysj,lang:'zh-cn',dateFmt:'yyyy-MM-dd'})" />
 			</td>
 			<td style="width: 43%; text-align: center"><aui:input
