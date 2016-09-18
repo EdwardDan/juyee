@@ -56,11 +56,15 @@ request.setAttribute("lEOCertificate", lEOCertificate);
 								type="checkbox" name="<portlet:namespace/>isDelete" /></td>
 							<td style="width: 15%; text-align: center">${lEOCertificate.xm }</td>
 							<td style="width: 20%; text-align: center"><input
-								style="width: 98%" name="<portlet:namespace/>pxsj"
-								value="<fmt:formatDate value='${leoTraining.pxsj }' pattern='yyyy-MM-dd'/>" /></td>
+								style="width: 98%" name="<portlet:namespace/>pxsj" id="pxsj"
+								readonly="readonly"
+								value="<fmt:formatDate value='${leoTraining.pxsj }' pattern='yyyy-MM-dd'/>"
+								onfocus="WdatePicker({pxsj,lang:'zh-cn',dateFmt:'yyyy-MM-dd'})" /></td>
 							<td style="width: 20%; text-align: center"><input
-								style="width: 95%" name="<portlet:namespace/>xcjysj"
-								value="<fmt:formatDate value='${leoTraining.xcjysj }' pattern='yyyy-MM-dd'/>"></td>
+								style="width: 95%" name="<portlet:namespace/>xcjysj" id="xcjysj"
+								readonly="readonly"
+								value="<fmt:formatDate value='${leoTraining.xcjysj }' pattern='yyyy-MM-dd'/>"
+								onfocus="WdatePicker({xcjysj,lang:'zh-cn',dateFmt:'yyyy-MM-dd'})"></td>
 							<td style="width: 43%; text-align: center"><aui:input
 									style="width: 95%" name="pxnr" label="" type="textarea"
 									value="${leoTraining.pxnr }">
@@ -86,14 +90,17 @@ request.setAttribute("lEOCertificate", lEOCertificate);
 			<td style="width: 2%; text-align: center"><input type="checkbox"
 				name="<portlet:namespace/>isDelete" /></td>
 			<td style="width: 15%; text-align: center">${lEOCertificate.xm }</td>
-			<td style="width: 20%; text-align: center"><aui:input
-					style="width: 95%" name="pxsj" label="" value="">
-				</aui:input></td>
-			<td style="width: 20%; text-align: center"><aui:input
-					style="width: 95%" name="xcjysj" label="" value="">
-				</aui:input></td>
+			<td style="width: 20%; text-align: center"><input
+				style="width: 95%" name="<portlet:namespace/>pxsj" id="pxsj"
+				value="" readonly="readonly"
+				onfocus="WdatePicker({pxsj,lang:'zh-cn',dateFmt:'yyyy-MM-dd'})" /></td>
+			<td style="width: 20%; text-align: center"><input
+				style="width: 95%" name="<portlet:namespace/>xcjysj" id="xcjysj"
+				value="" readonly="readonly"
+				onfocus="WdatePicker({xcjysj,lang:'zh-cn',dateFmt:'yyyy-MM-dd'})" />
+			</td>
 			<td style="width: 43%; text-align: center"><aui:input
-					style="width: 95%" name="pxnr" label="" value="">
+					type="textarea" style="width: 95%" name="pxnr" label="" value="">
 				</aui:input></td>
 		</tr>
 	</tbody>
