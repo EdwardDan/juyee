@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
+<service-builder package-path="com.justonetech.portal.feedback">
+	<author>fanqi</author>
+	<namespace>portal</namespace>
+	<!-- 互动留言板 -->
+	<entity name="Feedback" local-service="true" remote-service="false">
+		<!-- PK fields -->
+		<column name="feedbackId" type="String" primary="true" /><!-- 留言Id -->
+
+		<!-- Group instance -->
+		<column name="groupId" type="long" />
+
+		<!-- Audit fields -->
+		<column name="companyId" type="long" />
+
+		<!-- Business fields -->
+		<column name="zt" type="String" /><!-- 主题 -->
+		<column name="lx" type="String" /><!-- 类型 -->
+		<column name="fkrId" type="Date" /><!-- 反馈人Id -->
+		<column name="fkrq" type="Date" /><!-- 反馈日期 -->
+		<column name="fknr" type="String" /><!-- 反馈内容 -->
+		<column name="hfrId" type="Date" /><!-- 回复人Id -->
+		<column name="hfrq" type="Date" /><!-- 回复日期 -->
+		<column name="hfjg" type="String" /><!-- 回复结果 -->
+
+		<!-- Order -->
+		<order>
+			<order-column name="feedbackId" order-by="desc"></order-column>
+		</order>
+
+		<!-- Finder methods -->
+		<finder name="FkrId" return-type="Collection">
+			<finder-column name="fkrId"></finder-column>
+		</finder>
+
+	</entity>
+
+</service-builder>
