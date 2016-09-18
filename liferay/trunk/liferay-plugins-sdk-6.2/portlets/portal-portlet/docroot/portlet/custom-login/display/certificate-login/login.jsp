@@ -55,7 +55,7 @@
 
 <style type="text/css">
 .bg1 {
-	background: url(http://jtjs.justonetech.com:8180/documents/20181/0/login_back.jpg/12516d4e-8d05-4fab-adf3-b7c066799875?t=1471228073000);
+	background: url(/documents/20181/0/login_back.jpg/12516d4e-8d05-4fab-adf3-b7c066799875?t=1471228073000);
 	background-repeat: no-repeat;
 	background-clip: content-box;
 	background-size: cover;
@@ -65,7 +65,7 @@
 .login {
 	width: 50%;
 	height: 40%;
-	background: url(http://jtjs.justonetech.com:8180/documents/20181/0/login_form.png/4e09dfaf-30b8-4465-a65f-be713276692a?t=1471245176656) no-repeat;
+	background: url(/documents/20181/0/login_form.png/4e09dfaf-30b8-4465-a65f-be713276692a?t=1471245176656) no-repeat;
 	background-size: 100% 100%;
 	-moz-box-shadow: 5px 5px 5px #999; /* For Firefox3.6+ */
 	-webkit-box-shadow: 5px 5px 5px #999; /* For Chrome5+, Safari5+ */
@@ -140,7 +140,7 @@
 .login .login_div .password_input {
 	vertical-align: middle;
 	border: 1px solid #9e9e9e;
-	background-image: url(http://jtjs.justonetech.com:8180/documents/20181/0/input_bg2.jpg/e3769618-8713-49fe-a7a9-83730c998d9d?t=1471228064000);
+	background-image: url(/documents/20181/0/input_bg2.jpg/e3769618-8713-49fe-a7a9-83730c998d9d?t=1471228064000);
 	background-repeat: no-repeat;
 	background-position: left;
 	text-indent: 25px;
