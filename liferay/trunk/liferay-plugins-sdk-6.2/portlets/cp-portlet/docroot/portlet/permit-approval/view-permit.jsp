@@ -119,5 +119,5 @@
 	<c:if test="<%=status == CityPermitStatus.STATUS_WLD_BACK.getCode()%>">
 		<a class="btn" href="" target="_blank">不予许可通知书</a>
 	</c:if>
-	<a class="btn" href="" target="_blank">施工许可</a>
+	<!-- <a class="btn" href="" target="_blank">施工许可</a> -->
 </aui:button-row>
