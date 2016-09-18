@@ -49,6 +49,7 @@
 		<portlet:param name="mvcPath"
 			value="${contextPath}/print/sgxklszs.jsp" />
 	</portlet:renderURL>
+	<c:if test="<%=!projectProfile.getLxjb().equals(\"区县级机关或区县级单位\") %>">
 	<c:if
 		test="<%=status != CityPermitStatus.STATUS_WZ.getCode()
 							&& status != CityPermitStatus.STATUS_EDIT.getCode()
@@ -120,4 +121,5 @@
 		<a class="btn" href="" target="_blank">不予许可通知书</a>
 	</c:if>
 	<!-- <a class="btn" href="" target="_blank">施工许可</a> -->
+	</c:if>
 </aui:button-row>
