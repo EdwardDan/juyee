@@ -1,6 +1,7 @@
 package com.justonetech.leo.portlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -10,13 +11,25 @@ import javax.portlet.ActionResponse;
 import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+import javax.portlet.ResourceRequest;
+import javax.portlet.ResourceResponse;
+import javax.servlet.http.HttpServletResponse;
 
 import com.justonetech.cyzt.leo.model.LEOCertificate;
 import com.justonetech.cyzt.leo.service.LEOCertificateLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsUtil;
+import com.liferay.portal.model.UserGroupRole;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextFactory;
+import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
+import com.liferay.portal.service.UserNotificationEventLocalServiceUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 /**
@@ -50,7 +63,7 @@ public class LEOCertificatePortlet extends MVCPortlet {
 		renderRequest.setAttribute("leoCertificates", leoCertificates);
 		renderRequest
 				.setAttribute("leoCertificatesCount", leoCertificatesCount);
-
+		
 		super.doView(renderRequest, renderResponse);
 	}
 
@@ -67,23 +80,17 @@ public class LEOCertificatePortlet extends MVCPortlet {
 		try {
 			leoCertificate = LEOCertificateLocalServiceUtil
 					.getLEOCertificate(certificateId);
-			LEOCertificateLocalServiceUtil.deleteLEOCertificate(leoCertificate);
-			leoCertificate.setXm(xm);
-			leoCertificate.setZylx(zylx);
-			leoCertificate.setFzrq(fzrq);
-			leoCertificate.setYxq(yxq);
-			LEOCertificateLocalServiceUtil.updateLEOCertificate(leoCertificate);
+			
 		} catch (Exception e) {
 			leoCertificate = LEOCertificateLocalServiceUtil
 					.createLEOCertificate(certificateId);
-			leoCertificate.setXm(xm);
-			leoCertificate.setZylx(zylx);
-			leoCertificate.setFzrq(fzrq);
-			leoCertificate.setYxq(yxq);
-			LEOCertificateLocalServiceUtil.addLEOCertificate(leoCertificate);
 		}
 
-		
+		leoCertificate.setXm(xm);
+		leoCertificate.setZylx(zylx);
+		leoCertificate.setFzrq(fzrq);
+		leoCertificate.setYxq(yxq);
+		LEOCertificateLocalServiceUtil.updateLEOCertificate(leoCertificate);
 	}
 
 	public void deleteLEOCertificate(ActionRequest request,
@@ -91,5 +98,30 @@ public class LEOCertificatePortlet extends MVCPortlet {
 		String certificateId = ParamUtil.getString(request, "certificateId");
 		LEOCertificate leoCertificate = LEOCertificateLocalServiceUtil.getLEOCertificate(certificateId);
 		LEOCertificateLocalServiceUtil.deleteLEOCertificate(leoCertificate);
+	}
+	
+	public void serveResource(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException, PortletException {
+		String certificateId = ParamUtil.getString(resourceRequest, "certificateId");
+		String result = "";
+		try {
+			LEOCertificateLocalServiceUtil.getLEOCertificate(certificateId);
+		} catch (Exception e) {
+			result = e.toString();
+		}
+		JSONArray userArray = JSONFactoryUtil.createJSONArray();
+		HttpServletResponse response = PortalUtil.getHttpServletResponse(resourceResponse);
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter out = null;
+		try {
+			out = response.getWriter();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		userArray.put(result);
+		out.println(userArray.toString());
+		out.flush();
+		out.close();
+		resourceResponse.setContentType("text/html");
+		super.serveResource(resourceRequest, resourceResponse);
 	}
 }
