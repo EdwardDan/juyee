@@ -110,7 +110,6 @@ public class PermitApplicationPortlet extends MVCPortlet {
 
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
-		System.out.println(123);
 		String bjbh = ParamUtil.getString(renderRequest, "bjbh");
 		String wssqbh = ParamUtil.getString(renderRequest, "wssqbh");
 		String gcmc = ParamUtil.getString(renderRequest, "gcmc");
