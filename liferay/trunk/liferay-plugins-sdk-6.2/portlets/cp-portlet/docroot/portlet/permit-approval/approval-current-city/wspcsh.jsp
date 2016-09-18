@@ -69,6 +69,7 @@
 				message="<%= message %>"
 				method="get"
 				url="<%= url %>"
+				onClick="xk()"
 			/>
 			</c:if>
 			<c:if test='<%=message.equals("不许可") %>'>
@@ -79,6 +80,7 @@
 				message="<%= message %>"
 				method="get"
 				url="<%= url %>"
+				onClick="byxk()"
 			/>
 			</c:if>
 			<c:if test='<%=message.equals("不通过") %>'>
@@ -105,3 +107,12 @@ Liferay.delegateClick('<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(tra
 			<aui:button name="close" value="关闭" cssClass="btn" href="${viewURL}" />
 		</div>
 	</div>
+	<script>
+	function xk(){
+		$("#_153_comment").val("<span style='color:red'>(许可)</span>");
+	}
+	function byxk(){
+		$("#_153_comment").val("<span style='color:red'>(不予许可)</span>");
+	}
+	</script>
+	
