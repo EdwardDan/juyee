@@ -30,18 +30,22 @@
 	<portlet:renderURL var="printsltzsURL" windowState="pop_up">
 		<portlet:param name="mvcPath"
 			value="${contextPath}/print/sltzs.jsp" />
+		<portlet:param name="permitId" value="${permitId}"/>
 	</portlet:renderURL>
 	<portlet:renderURL var="printbysljdsURL" windowState="pop_up">
 		<portlet:param name="mvcPath"
 			value="${contextPath}/print/bysljds.jsp" />
+		<portlet:param name="permitId" value="${permitId}"/>
 	</portlet:renderURL>
 	<portlet:renderURL var="printbzclURL" windowState="pop_up">
 		<portlet:param name="mvcPath"
 			value="${contextPath}/print/bzcl.jsp" />
+		<portlet:param name="permitId" value="${permitId}"/>
 	</portlet:renderURL>
 	<portlet:renderURL var="printjsscbURL" windowState="pop_up">
 		<portlet:param name="mvcPath"
 			value="${contextPath}/print/jsscb.jsp" />
+		<portlet:param name="permitId" value="${permitId}"/>
 	</portlet:renderURL>
 	<portlet:renderURL var="printsgxklszsURL" windowState="pop_up">
 		<portlet:param name="mvcPath"
