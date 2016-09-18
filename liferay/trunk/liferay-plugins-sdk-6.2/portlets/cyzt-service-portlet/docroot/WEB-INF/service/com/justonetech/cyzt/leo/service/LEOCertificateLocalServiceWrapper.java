@@ -291,23 +291,23 @@ public class LEOCertificateLocalServiceWrapper
 	@Override
 	public java.util.List<com.justonetech.cyzt.leo.model.LEOCertificate> getLEOCertificates(
 		java.lang.String xm, java.lang.String zylx, java.lang.String zjbh,
-		java.util.Date fzrq, int start, int end) {
+		java.util.Date yxq, int start, int end) {
 		return _leoCertificateLocalService.getLEOCertificates(xm, zylx, zjbh,
-			fzrq, start, end);
+			yxq, start, end);
 	}
 
 	@Override
 	public int getProjectsCount(java.lang.String xm, java.lang.String zylx,
-		java.lang.String zjbh, java.util.Date fzrq) {
-		return _leoCertificateLocalService.getProjectsCount(xm, zylx, zjbh, fzrq);
+		java.lang.String zjbh, java.util.Date yxq) {
+		return _leoCertificateLocalService.getProjectsCount(xm, zylx, zjbh, yxq);
 	}
 
 	@Override
 	public com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQuery(
 		java.lang.String xm, java.lang.String zylx, java.lang.String zjbh,
-		java.util.Date fzrq) {
+		java.util.Date yxq) {
 		return _leoCertificateLocalService.createDynamicQuery(xm, zylx, zjbh,
-			fzrq);
+			yxq);
 	}
 
 	/**

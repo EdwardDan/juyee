@@ -52,10 +52,10 @@ public class LEOCertificateLocalServiceImpl
 	private static Log log = LogFactoryUtil.getLog(LEOCertificateLocalServiceImpl.class);
 
 	@SuppressWarnings("unchecked")
-	public List<LEOCertificate> getLEOCertificates(String xm,String zylx, String zjbh, Date fzrq, int start, int end) {
+	public List<LEOCertificate> getLEOCertificates(String xm,String zylx, String zjbh, Date yxq, int start, int end) {
 
 		try {
-			return this.dynamicQuery(createDynamicQuery(xm,zylx,zjbh,fzrq), start, end);
+			return this.dynamicQuery(createDynamicQuery(xm,zylx,zjbh,yxq), start, end);
 		}
 		catch (SystemException e) {
 			log.info(e.getMessage());
@@ -63,10 +63,10 @@ public class LEOCertificateLocalServiceImpl
 		return Collections.emptyList();
 	}
 
-	public int getProjectsCount(String xm,String zylx, String zjbh, Date fzrq) {
+	public int getProjectsCount(String xm,String zylx, String zjbh, Date yxq) {
 
 		try {
-			return (int) this.dynamicQueryCount(createDynamicQuery(xm,zylx,zjbh,fzrq));
+			return (int) this.dynamicQueryCount(createDynamicQuery(xm,zylx,zjbh,yxq));
 		}
 		catch (SystemException e) {
 			log.info(e.getMessage());
@@ -74,7 +74,7 @@ public class LEOCertificateLocalServiceImpl
 		return 0;
 	}
 
-	public DynamicQuery createDynamicQuery(String xm,String zylx, String zjbh, Date fzrq) {
+	public DynamicQuery createDynamicQuery(String xm,String zylx, String zjbh, Date yxq) {
 
 		DynamicQuery dynamicQuery = this.dynamicQuery();
 		if (!Validator.isBlank(xm)) {
@@ -86,8 +86,8 @@ public class LEOCertificateLocalServiceImpl
 		if (!Validator.isBlank(zjbh)) {
 			dynamicQuery.add(PropertyFactoryUtil.forName("zjbh").like("%" + zjbh + "%"));
 		}
-		if (Validator.isNotNull(fzrq)) {
-			dynamicQuery.add(PropertyFactoryUtil.forName("fzrq").eq(fzrq));
+		if (Validator.isNotNull(yxq)) {
+			dynamicQuery.add(PropertyFactoryUtil.forName("yxq").eq(yxq));
 		}
 		dynamicQuery.addOrder(OrderFactoryUtil.asc("certificateId"));
 		return dynamicQuery;

@@ -694,7 +694,7 @@ public class LEOCertificateLocalServiceClp implements LEOCertificateLocalService
 	@Override
 	public java.util.List<com.justonetech.cyzt.leo.model.LEOCertificate> getLEOCertificates(
 		java.lang.String xm, java.lang.String zylx, java.lang.String zjbh,
-		java.util.Date fzrq, int start, int end) {
+		java.util.Date yxq, int start, int end) {
 		Object returnObj = null;
 
 		try {
@@ -707,7 +707,7 @@ public class LEOCertificateLocalServiceClp implements LEOCertificateLocalService
 						
 					ClpSerializer.translateInput(zjbh),
 						
-					ClpSerializer.translateInput(fzrq),
+					ClpSerializer.translateInput(yxq),
 						
 					start,
 						
@@ -731,7 +731,7 @@ public class LEOCertificateLocalServiceClp implements LEOCertificateLocalService
 
 	@Override
 	public int getProjectsCount(java.lang.String xm, java.lang.String zylx,
-		java.lang.String zjbh, java.util.Date fzrq) {
+		java.lang.String zjbh, java.util.Date yxq) {
 		Object returnObj = null;
 
 		try {
@@ -744,7 +744,7 @@ public class LEOCertificateLocalServiceClp implements LEOCertificateLocalService
 						
 					ClpSerializer.translateInput(zjbh),
 						
-					ClpSerializer.translateInput(fzrq)
+					ClpSerializer.translateInput(yxq)
 					});
 		}
 		catch (Throwable t) {
@@ -765,7 +765,7 @@ public class LEOCertificateLocalServiceClp implements LEOCertificateLocalService
 	@Override
 	public com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQuery(
 		java.lang.String xm, java.lang.String zylx, java.lang.String zjbh,
-		java.util.Date fzrq) {
+		java.util.Date yxq) {
 		Object returnObj = null;
 
 		try {
@@ -778,7 +778,7 @@ public class LEOCertificateLocalServiceClp implements LEOCertificateLocalService
 						
 					ClpSerializer.translateInput(zjbh),
 						
-					ClpSerializer.translateInput(fzrq)
+					ClpSerializer.translateInput(yxq)
 					});
 		}
 		catch (Throwable t) {
