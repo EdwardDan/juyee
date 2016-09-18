@@ -119,14 +119,46 @@ request.setAttribute("applyMaterials", applyMaterials);
 				<div class="hide" id="<%= randomId %>updateComments">
 	<aui:input cols="55" name="_153_comment" id="_153_comment" label="审核意见" useNamespace="false" rows="10" type="textarea" />
 </div>
+		<c:if test='<%=message.equals("通过") %>'>
 		<liferay-ui:icon
 				cssClass='<%= "workflow-task-" + randomId + " task-change-status-link" %>'
 				id='<%= randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink" %>'
-				image="check"
+				image="shtg"
 				message="<%= message %>"
 				method="get"
 				url="<%= url %>"
 			/>
+			</c:if>
+			<c:if test='<%=message.equals("不通过") %>'>
+		<liferay-ui:icon
+				cssClass='<%= "workflow-task-" + randomId + " task-change-status-link" %>'
+				id='<%= randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink" %>'
+				image="shth"
+				message="<%= message %>"
+				method="get"
+				url="<%= url %>"
+			/>
+			</c:if>
+			<c:if test='<%=message.equals("补正退回") %>'>
+		<liferay-ui:icon
+				cssClass='<%= "workflow-task-" + randomId + " task-change-status-link" %>'
+				id='<%= randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink" %>'
+				image="bzth"
+				message="<%= message %>"
+				method="get"
+				url="<%= url %>"
+			/>
+			</c:if>
+			<c:if test='<%=message.equals("内部退回") %>'>
+		<liferay-ui:icon
+				cssClass='<%= "workflow-task-" + randomId + " task-change-status-link" %>'
+				id='<%= randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink" %>'
+				image="nbth"
+				message="<%= message %>"
+				method="get"
+				url="<%= url %>"
+			/>
+			</c:if>
 			<aui:script use="liferay-workflow-tasks">
 var onTaskClickFn = A.rbind('onTaskClick', Liferay.WorkflowTasks,'<%= randomId %>');
 Liferay.delegateClick('<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(transitionName) %>taskChangeStatusLink', onTaskClickFn);

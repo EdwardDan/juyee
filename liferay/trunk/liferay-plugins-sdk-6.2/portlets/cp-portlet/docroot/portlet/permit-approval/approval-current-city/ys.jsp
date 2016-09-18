@@ -61,14 +61,26 @@
 				<div class="hide" id="<%= randomId %>updateComments">
 	<aui:input cols="55" name="_153_comment" id="_153_comment" label="审核意见" useNamespace="false" rows="10" type="textarea" />
 </div>
+<c:if test='<%=message.equals("通过") %>'>
 		<liferay-ui:icon
 				cssClass='<%= "workflow-task-" + randomId + " task-change-status-link" %>'
 				id='<%= randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink" %>'
-				image="check"
+				image="ystg"
 				message="<%= message %>"
 				method="get"
 				url="<%= url %>"
 			/>
+			</c:if>
+			<c:if test='<%=message.equals("不通过") %>'>
+		<liferay-ui:icon
+				cssClass='<%= "workflow-task-" + randomId + " task-change-status-link" %>'
+				id='<%= randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink" %>'
+				image="ysth"
+				message="<%= message %>"
+				method="get"
+				url="<%= url %>"
+			/>
+			</c:if>
 			<aui:script use="liferay-workflow-tasks">
 var onTaskClickFn = A.rbind('onTaskClick', Liferay.WorkflowTasks,'<%= randomId %>');
 Liferay.delegateClick('<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(transitionName) %>taskChangeStatusLink', onTaskClickFn);

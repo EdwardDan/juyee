@@ -115,7 +115,7 @@
 		<liferay-ui:icon
 				cssClass='<%= "workflow-task-" + randomId + " task-change-status-link" %>'
 				id='<%= randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink" %>'
-				image="check"
+				image="shtg"
 				message="<%= message %>"
 				method="get"
 				url="<%= url %>"
