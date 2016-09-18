@@ -2,7 +2,7 @@
 <%@ include file="/common/init.jsp"%>
 <style>
 body {
-	background-image: url('http://jtjs.justonetech.com:8180/documents/20181/26528/bg2.jpg/790f7e40-1897-4255-bd46-9a2a73e8bb5f?t=1471230827000');
+	background-image: url('/documents/20181/26528/bg2.jpg/790f7e40-1897-4255-bd46-9a2a73e8bb5f?t=1471230827000');
 	background-repeat: no-repeat;
 	background-clip: content-box;
 	background-size: 100% 100%;
@@ -14,7 +14,7 @@ body {
 	position: absolute;
 	left: calc(50% - 150px);
 	top: 30%;
-	background: url('http://jtjs.justonetech.com:8180/documents/20181/26528/title.png/a241be9f-cd0a-4693-9872-2dc45cdde235?t=1471247909387') no-repeat;
+	background: url('/documents/20181/26528/title.png/a241be9f-cd0a-4693-9872-2dc45cdde235?t=1471247909387') no-repeat;
 	background-size: cover;
 }
 
@@ -63,7 +63,7 @@ body {
 	margin: 8% 0;
 	height: 10%;
 	width: 78%;
-	background: url('http://jtjs.justonetech.com:8180/documents/20181/26528/titlez.png/c0971fda-277f-4c99-8905-274a20706c89?t=1471247910203') no-repeat;
+	background: url('/documents/20181/26528/titlez.png/c0971fda-277f-4c99-8905-274a20706c89?t=1471247910203') no-repeat;
 	background-size: 100% 100%;
 }
 
@@ -72,14 +72,14 @@ body {
 	height: 80% !important;
 	border-radius: 3px !important;
 	border: 1px solid #cccccc;
-	background-image: url('http://jtjs.justonetech.com:8180/documents/20181/26528/yhm.png/4f58e524-167e-4cb6-b442-49001d60a5c7?t=1471247910604');
+	background-image: url('/documents/20181/26528/yhm.png/4f58e524-167e-4cb6-b442-49001d60a5c7?t=1471247910604');
 	background-repeat: no-repeat;
 	background-position: left;
 	text-indent: 25px;
 }
 
 .login_input_password {
-	background-image: url('http://jtjs.justonetech.com:8180/documents/20181/26528/mm.png/87bb62c9-2731-4aba-9e76-e01036916d91?t=1471247908696');
+	background-image: url('/documents/20181/26528/mm.png/87bb62c9-2731-4aba-9e76-e01036916d91?t=1471247908696');
 	background-repeat: no-repeat;
 	background-position: left;
 	text-indent: 25px;
