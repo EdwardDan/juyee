@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="com.justonetech.cyzt.leo.model.LEOCertificate" />
+	<import class="com.justonetech.cyzt.leo.model.LEOTraining" />
+	<class name="com.justonetech.cyzt.leo.model.impl.LEOCertificateImpl" table="cyzt_LEOCertificate">
+		<cache usage="read-write" />
+		<id name="certificateId" type="java.lang.String">
+			<generator class="assigned" />
+		</id>
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="xm" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="zjlx" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="yxq" type="org.hibernate.type.TimestampType" />
+		<property name="fzrq" type="org.hibernate.type.TimestampType" />
+	</class>
+	<class name="com.justonetech.cyzt.leo.model.impl.LEOTrainingImpl" table="cyzt_LEOTraining">
+		<cache usage="read-write" />
+		<id name="trainingId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="zjbh" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="pxsj" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="xcjysj" type="org.hibernate.type.TimestampType" />
+		<property name="pxnr" type="org.hibernate.type.TimestampType" />
+	</class>
+</hibernate-mapping>

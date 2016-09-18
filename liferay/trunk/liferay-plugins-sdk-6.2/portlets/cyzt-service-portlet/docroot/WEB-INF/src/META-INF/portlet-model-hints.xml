@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.justonetech.cyzt.leo.model.LEOCertificate">
+		<field name="certificateId" type="String" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="xm" type="String" />
+		<field name="zjlx" type="String" />
+		<field name="yxq" type="Date" />
+		<field name="fzrq" type="Date" />
+	</model>
+	<model name="com.justonetech.cyzt.leo.model.LEOTraining">
+		<field name="trainingId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="zjbh" type="String" />
+		<field name="pxsj" type="String" />
+		<field name="xcjysj" type="Date" />
+		<field name="pxnr" type="Date" />
+	</model>
+</model-hints>
