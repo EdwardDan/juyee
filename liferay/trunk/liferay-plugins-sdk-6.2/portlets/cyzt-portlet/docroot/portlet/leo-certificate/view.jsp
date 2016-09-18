@@ -29,7 +29,7 @@
 					<td style="width: 35%;" class="content"><input type="text"
 						class="Wdate span12" id="yxq" name="<portlet:namespace/>yxq"
 						value=""
-						onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'yxq\')}',lang:'zh-cn',dateFmt:'yyyy-MM-dd'})" /></td>
+						onfocus="WdatePicker({lang:'zh-cn',dateFmt:'yyyy-MM-dd'})" /></td>
 				</tr>
 				<tr style="height: 40px;" class="body">
 					<td colspan="4" style="text-align: center" class="content"><aui:button
