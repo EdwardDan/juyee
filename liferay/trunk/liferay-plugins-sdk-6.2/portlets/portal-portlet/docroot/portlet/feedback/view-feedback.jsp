@@ -7,7 +7,7 @@
 <portlet:renderURL var="viewURL" />
 <%
 	long feedbackId = ParamUtil.getLong(request, "feedbackId");
-	Feedback feedback = FeedbackLocalServiceUtil.getFeedback(231532);
+	Feedback feedback = FeedbackLocalServiceUtil.getFeedback(feedbackId);
 	request.setAttribute("feedback", feedback);
 %>
 <aui:form id="fm" action="">
@@ -17,14 +17,14 @@
 			<table class="thead">
 				<tr>
 					<td colspan="2" class="head"><span
-						style="width: 5px; height: 20px; background-color: #ffa200; display: inline-block"></span><span>主任信箱</span>
+						style="width: 5px; height: 20px; background-color: #ffa200; display: inline-block"></span><span>查看</span>
 					</td>
 				</tr>
 			</table>
 		</div><br>
 	<aui:row style="margin-left:15px">
 		<aui:col span="2">
-			主题
+			主题:
 		</aui:col>
 		<aui:col span="10">
 			${feedback.zt}
@@ -32,13 +32,13 @@
 	</aui:row>
 	<aui:row style="margin-left:15px">
 		<aui:col span="2">
-			类型
+			类型:
 		</aui:col>
 		<aui:col span="4">
 			${feedback.lx}
 		</aui:col>
 		<aui:col span="2">
-			反馈日期
+			反馈日期:
 		</aui:col>
 		<aui:col span="4">
 			<fmt:formatDate value="${feedback.hfrq}" pattern="yyyy-MM-dd" />
