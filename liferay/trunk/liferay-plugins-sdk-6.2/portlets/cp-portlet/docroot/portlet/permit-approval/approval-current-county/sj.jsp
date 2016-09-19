@@ -23,6 +23,7 @@ span{
 
 <portlet:actionURL var="saveSjURL" name="saveSj">
 <portlet:param name="permitId" value="${permitId}"/>
+<portlet:param name="redirectURL" value="${approvalCurrentURL}"/>
 </portlet:actionURL>
 <form class="form-horizontal" action="${saveSjURL}" method="post">
 	<aui:row>

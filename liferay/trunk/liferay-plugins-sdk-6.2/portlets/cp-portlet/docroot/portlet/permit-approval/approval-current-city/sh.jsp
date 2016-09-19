@@ -11,6 +11,7 @@ request.setAttribute("applyMaterials", applyMaterials);
 
 <portlet:actionURL var="saveShURL" name="saveSh">
 	<portlet:param name="permitId" value="${permitId}" />
+	 <portlet:param name="redirectURL" value="${approvalCurrentURL}"/>
 </portlet:actionURL>
 <aui:form action="${saveShURL}" method="post">
 	<table style="width: 98%" class="table table-striped table-bordered table-hover">

@@ -11,6 +11,7 @@
 
 <portlet:actionURL var="saveCsURL" name="saveCs">
 	<portlet:param name="permitId" value="${permitId}" />
+	<portlet:param name="redirectURL" value="${approvalCurrentURL}"/>
 </portlet:actionURL>
 <aui:form action="${saveCsURL}" method="post">
 	<div class="text-center">

@@ -11,6 +11,7 @@
 
 <portlet:actionURL var="saveFhURL" name="saveFh">
 	<portlet:param name="permitId" value="${permitId}" />
+	 <portlet:param name="redirectURL" value="${approvalCurrentURL}"/>
 </portlet:actionURL>
 <aui:form action="${saveFhURL}" method="post">
 	<table style="width: 98%" class="table table-striped table-bordered table-hover">
