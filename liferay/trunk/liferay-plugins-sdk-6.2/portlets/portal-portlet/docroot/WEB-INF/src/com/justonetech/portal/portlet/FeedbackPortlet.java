@@ -121,6 +121,64 @@ public class FeedbackPortlet extends MVCPortlet {
 				log.error(e);
 			}
 		}
+		if ("feedback".equals(resourceId)) {
+			String loginUser = ParamUtil.get(resourceRequest, "_58_login", "");
+			String loginPassword = ParamUtil.get(resourceRequest, "_58_password", "");
+			Boolean loginState = false;
+			String responseContent = "";
+			try {
+				List<User> userList = UserLocalServiceUtil.getUsers(-1, -1);
+				
+				if (Validator.isNotNull(loginUser) && !loginUser.equals("请输入用户名")) {
+					User defaultUser = null;
+					for (User user : userList) {
+						if (loginUser.equals(user.getScreenName())) {
+							defaultUser = user;
+						}
+					}
+					if (Validator.isNotNull(defaultUser)) {
+						long companyId = PortalUtil.getCompanyId(resourceRequest);
+						int authResult = Authenticator.FAILURE;
+						try {
+							authResult = UserLocalServiceUtil.authenticateByScreenName(companyId, loginUser, loginPassword, null, null, null);
+						} catch (PortalException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						if (authResult == Authenticator.SUCCESS) {
+							loginState = true;
+						} else {
+							responseContent = "密码错误！";
+						}
+					} else {
+						responseContent = "用户名错误!";
+					}
+
+				} else {
+
+					responseContent = "请输入用户名和密码!";
+				}
+
+			} catch (SystemException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			JSONObject userJson = JSONFactoryUtil.createJSONObject();
+			userJson.put("loginState", loginState);
+			userJson.put("responseContent", responseContent);
+			HttpServletResponse response = PortalUtil.getHttpServletResponse(resourceResponse);
+			response.setContentType("text/html;charset=UTF-8");
+			PrintWriter out = null;
+			try {
+				out = response.getWriter();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			out.print(userJson.toString());
+			out.flush();
+			out.close();
+			resourceResponse.setContentType("text/html");
+		}
 		super.serveResource(resourceRequest, resourceResponse);
 	}
 
