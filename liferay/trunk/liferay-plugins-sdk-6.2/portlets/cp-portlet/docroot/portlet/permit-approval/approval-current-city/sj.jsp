@@ -19,11 +19,12 @@ span{
 	request.setAttribute("permitId", permitId);
 	Permit permit = PermitLocalServiceUtil.getPermit(permitId);
 	request.setAttribute("permit", permit);
-	
 %>
-
+<c:set var="contextPath"
+	value="${request.contextPath}/portlet/permit-approval/approval-current-city" />
 <portlet:actionURL var="saveSjURL" name="saveSj">
-<portlet:param name="permitId" value="${permitId}"/>
+	<portlet:param name="permitId" value="${permitId}"/>
+	<%-- <portlet:param name="redirect" value="${contextPath}/sj.jsp"/> --%>
 </portlet:actionURL>
 <form class="form-horizontal" action="${saveSjURL}" method="post">
 	<aui:row>
