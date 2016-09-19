@@ -4,10 +4,10 @@
 <%@ include file="/common/init.jsp"%>
 <link rel="stylesheet" type="text/css" href="/portal-portlet/portlet/feedback/css/query.css" />
 <portlet:renderURL var="viewURL" />
-<portlet:actionURL var="savFeedBack" name="saveFeedBack">
+<portlet:actionURL var="saveFeedBack" name="saveFeedBack">
 	<portlet:param name="redirect" value="${viewURL}"/>
 </portlet:actionURL>
-<aui:form id="fm" action="${savFeedBack }">
+<aui:form id="fm" action="${saveFeedBack }">
 	<div class="out">
 		<div class="middle"></div>
 		<div class="in">
@@ -37,7 +37,10 @@
 			最多可以再输入<span id="contentCounter" style="color: red"></span>个汉字
 		</aui:col>
 	</aui:row>
-
+	<portlet:resourceURL var="captchaURL">
+		<portlet:param name="struts_action" value="/login/captcha" />
+	</portlet:resourceURL>
+	<liferay-ui:captcha url="<%=captchaURL%>" />
 	<aui:row>
 		<aui:col span="12">
 		</aui:col>
