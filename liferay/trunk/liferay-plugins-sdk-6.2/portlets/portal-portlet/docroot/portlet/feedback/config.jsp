@@ -7,7 +7,7 @@
 	<aui:fieldset>
 		<aui:input type="text" name="displayPage" label="显示页面"
 			value="${displayPage}" required="true" />
-		<aui:select name="lx" label="类型" required="true"
+		<aui:select name="lx" label="类型"
 			showEmptyOption="true">
 			<aui:option label="主任信箱" value="主任信箱" />
 			<aui:option label="业务咨询" value="业务咨询" />
@@ -17,6 +17,5 @@
 	</aui:fieldset>
 	<aui:button-row>
 		<aui:button type="submit" />
-		<aui:button type="cancel" onClick="<%=viewURL.toString()%>" />
 	</aui:button-row>
 </aui:form>
