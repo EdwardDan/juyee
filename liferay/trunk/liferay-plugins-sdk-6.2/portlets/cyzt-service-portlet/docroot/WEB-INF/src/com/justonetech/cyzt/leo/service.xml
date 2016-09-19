@@ -24,10 +24,6 @@
 		<column name="zylx" type="String" /><!-- 专业类型 -->
 		<column name="yxq" type="Date" /><!-- 有效期 -->
 		<column name="fzrq" type="Date" /><!-- 发证日期 -->
-		<!-- Finder methods -->
-		<finder name="Zjbh" return-type="LEOCertificate">
-			<finder-column name="zjbh"></finder-column>
-		</finder>
 	</entity>
 	<!-- 执法人员培训 -->
 	<entity name="LEOTraining" local-service="true" remote-service="false">

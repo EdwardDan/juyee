@@ -311,12 +311,6 @@ public class LEOCertificateLocalServiceWrapper
 			yxq);
 	}
 
-	@Override
-	public com.justonetech.cyzt.leo.model.LEOCertificate findByZjbh(
-		java.lang.String zjbh, int start, int end) {
-		return _leoCertificateLocalService.findByZjbh(zjbh, start, end);
-	}
-
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

@@ -134,10 +134,6 @@ public class LEOCertificateLocalServiceClpInvoker {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.util.Date"
 			};
-
-		_methodName45 = "findByZjbh";
-
-		_methodParameterTypes45 = new String[] { "java.lang.String", "int", "int" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -264,13 +260,6 @@ public class LEOCertificateLocalServiceClpInvoker {
 				(java.util.Date)arguments[3]);
 		}
 
-		if (_methodName45.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes45, parameterTypes)) {
-			return LEOCertificateLocalServiceUtil.findByZjbh((java.lang.String)arguments[0],
-				((Integer)arguments[1]).intValue(),
-				((Integer)arguments[2]).intValue());
-		}
-
 		throw new UnsupportedOperationException();
 	}
 
@@ -316,6 +305,4 @@ public class LEOCertificateLocalServiceClpInvoker {
 	private String[] _methodParameterTypes43;
 	private String _methodName44;
 	private String[] _methodParameterTypes44;
-	private String _methodName45;
-	private String[] _methodParameterTypes45;
 }

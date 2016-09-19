@@ -93,15 +93,4 @@ public class LEOCertificateLocalServiceImpl extends LEOCertificateLocalServiceBa
 		dynamicQuery.addOrder(OrderFactoryUtil.asc("certificateId"));
 		return dynamicQuery;
 	}
-
-	public LEOCertificate findByZjbh(String zjbh, int start, int end) {
-
-		try {
-			return leoCertificatePersistence.findByZjbh(zjbh);
-		}
-		catch (NoSuchLEOCertificateException | SystemException e) {
-			log.info(e.getMessage());
-		}
-		return null;
-	}
 }

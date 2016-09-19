@@ -292,11 +292,6 @@ public class LEOCertificateLocalServiceUtil {
 		return getService().createDynamicQuery(xm, zylx, zjbh, yxq);
 	}
 
-	public static com.justonetech.cyzt.leo.model.LEOCertificate findByZjbh(
-		java.lang.String zjbh, int start, int end) {
-		return getService().findByZjbh(zjbh, start, end);
-	}
-
 	public static void clearService() {
 		_service = null;
 	}
