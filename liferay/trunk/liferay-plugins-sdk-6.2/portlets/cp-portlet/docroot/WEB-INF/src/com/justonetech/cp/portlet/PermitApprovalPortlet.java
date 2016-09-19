@@ -64,11 +64,11 @@ public class PermitApprovalPortlet extends MVCPortlet {
 		permit.setSqh(sqh);
 		permit.setSjrlxdh(sjrlxdh);
 		PermitLocalServiceUtil.updatePermit(permit);
-//		redirect(request, response);
+		redirect(request, response);
 	}
 
 	// 保存初审cs和sl
-	public void saveCs(ActionRequest request, ActionResponse response) throws SystemException {
+	public void saveCs(ActionRequest request, ActionResponse response) throws SystemException, IOException {
 		long permitId = ParamUtil.getLong(request, "permitId");
 		List<ApplyMaterial> applyMaterials = ApplyMaterialLocalServiceUtil.findByPermitId(permitId, -1, -1);
 		String[] csyjs = ParamUtil.getParameterValues(request, "csyj");
@@ -78,9 +78,10 @@ public class PermitApprovalPortlet extends MVCPortlet {
 			i++;
 			ApplyMaterialLocalServiceUtil.updateApplyMaterial(applyMaterial);
 		}
+		redirect(request, response);
 	}
 	// 保存复核fh和sh
-	public void saveFh(ActionRequest request, ActionResponse response) throws SystemException {
+	public void saveFh(ActionRequest request, ActionResponse response) throws SystemException, IOException {
 		long permitId = ParamUtil.getLong(request, "permitId");
 		List<ApplyMaterial> applyMaterials = ApplyMaterialLocalServiceUtil.findByPermitId(permitId, -1, -1);
 		String[] fhyjs = ParamUtil.getParameterValues(request, "fhyj");
@@ -90,10 +91,11 @@ public class PermitApprovalPortlet extends MVCPortlet {
 			i++;
 			ApplyMaterialLocalServiceUtil.updateApplyMaterial(applyMaterial);
 		}
+		redirect(request, response);
 	}
 	
 	// 保存审核sh和sp
-		public void saveSh(ActionRequest request, ActionResponse response) throws SystemException {
+		public void saveSh(ActionRequest request, ActionResponse response) throws SystemException, IOException {
 			long permitId = ParamUtil.getLong(request, "permitId");
 			List<ApplyMaterial> applyMaterials = ApplyMaterialLocalServiceUtil.findByPermitId(permitId, -1, -1);
 			String[] shyjs = ParamUtil.getParameterValues(request, "shyj");
@@ -103,11 +105,13 @@ public class PermitApprovalPortlet extends MVCPortlet {
 				i++;
 				ApplyMaterialLocalServiceUtil.updateApplyMaterial(applyMaterial);
 			}
+			redirect(request, response);
 		}
 		
-//		public void redirect(ActionRequest request, ActionResponse response) throws IOException {
-//			String redirect = ParamUtil.getString(request, "redirectURL");
-//			System.out.println("======================"+redirect);
-//			response.sendRedirect(redirect);
-//		}
+		public void redirect(ActionRequest request, ActionResponse response) throws IOException {
+			String redirect = ParamUtil.getString(request, "redirectURL");
+			String permitId = ParamUtil.getString(request, "permitId");
+			redirect += "&" + response.getNamespace() + "permitId=" + permitId;
+			response.sendRedirect(redirect);
+		}
 }
