@@ -33,7 +33,7 @@ public class PermitApprovalPortlet extends MVCPortlet {
 	}
 
 	// 保存收件sj
-	public void saveSj(ActionRequest request, ActionResponse response) throws PortalException, SystemException {
+	public void saveSj(ActionRequest request, ActionResponse response) throws PortalException, SystemException, IOException {
 		long permitId = ParamUtil.getLong(request, "permitId");
 		Permit permit = PermitLocalServiceUtil.getPermit(permitId);
 		String slbh = ParamUtil.getString(request, "slbh");
@@ -64,6 +64,7 @@ public class PermitApprovalPortlet extends MVCPortlet {
 		permit.setSqh(sqh);
 		permit.setSjrlxdh(sjrlxdh);
 		PermitLocalServiceUtil.updatePermit(permit);
+//		redirect(request, response);
 	}
 
 	// 保存初审cs和sl
@@ -78,7 +79,6 @@ public class PermitApprovalPortlet extends MVCPortlet {
 			ApplyMaterialLocalServiceUtil.updateApplyMaterial(applyMaterial);
 		}
 	}
-
 	// 保存复核fh和sh
 	public void saveFh(ActionRequest request, ActionResponse response) throws SystemException {
 		long permitId = ParamUtil.getLong(request, "permitId");
@@ -104,4 +104,10 @@ public class PermitApprovalPortlet extends MVCPortlet {
 				ApplyMaterialLocalServiceUtil.updateApplyMaterial(applyMaterial);
 			}
 		}
+		
+//		public void redirect(ActionRequest request, ActionResponse response) throws IOException {
+//			String redirect = ParamUtil.getString(request, "redirectURL");
+//			System.out.println("======================"+redirect);
+//			response.sendRedirect(redirect);
+//		}
 }
