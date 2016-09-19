@@ -5,6 +5,7 @@
 <link rel="stylesheet" type="text/css" href="/portal-portlet/portlet/feedback/css/query.css" />
 <portlet:renderURL var="viewURL" />
 <portlet:actionURL var="savFeedBack" name="saveFeedBack">
+	<portlet:param name="redirect" value="${viewURL}"/>
 </portlet:actionURL>
 <aui:form id="fm" action="${savFeedBack }">
 	<div class="out">
