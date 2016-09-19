@@ -113,31 +113,13 @@ public class FeedbackPortlet extends MVCPortlet {
 	@Override
 	public void serveResource(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException,
 			PortletException {
-		try {
-			com.liferay.portal.kernel.captcha.CaptchaUtil.serveImage(resourceRequest, resourceResponse);
-		} catch (Exception e) {
-			log.error(e);
-		}
 		String resourceId = resourceRequest.getResourceID();
-		if ("feedback".equals(resourceId)) {
-			Boolean loginState = false;
-			String responseContent = "";
-			JSONObject userJson = JSONFactoryUtil.createJSONObject();
-			userJson.put("loginState", loginState);
-			userJson.put("responseContent", responseContent);
-			HttpServletResponse response = PortalUtil.getHttpServletResponse(resourceResponse);
-			response.setContentType("text/html;charset=UTF-8");
-			PrintWriter out = null;
+		if(resourceId.equals("captchaID")){
 			try {
-				out = response.getWriter();
-			} catch (IOException e) {
-				e.printStackTrace();
+				com.liferay.portal.kernel.captcha.CaptchaUtil.serveImage(resourceRequest, resourceResponse);
+			} catch (Exception e) {
+				log.error(e);
 			}
-			out.print(userJson.toString());
-			out.flush();
-			out.close();
-			resourceResponse.setContentType("text/html");
-		
 		}
 		super.serveResource(resourceRequest, resourceResponse);
 	}
