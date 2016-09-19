@@ -1,12 +1,11 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
-<c:set var="contextPath" value="${request.contextPath}/portlet" />
+<c:set var="contextPath" value="${request.contextPath}/portlet/feedback" />
 <portlet:renderURL var="registerURL">
-	<portlet:param name="mvcPath" value="${contextPath}/feedback/register.jsp" />
+	<portlet:param name="mvcPath" value="${contextPath}/register.jsp" />
 </portlet:renderURL>
 <style type="text/css">
 div.main {
-	width:300px;
 	border-left: 1px solid #ddd;
 	border-bottom: 1px solid #ddd;
 	border-right: 1px solid #ddd;
@@ -72,6 +71,9 @@ table.thead tr td select {
 	width:25% !important;
 }
 </style>
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='/static/jquery/jquery-1.12.4.min.js'>"+"<"+"/script>");
+</script> 
 <div class="main">
 	<div class="head"></div>
 	<div class="body">
@@ -86,7 +88,7 @@ table.thead tr td select {
 		<form
 			action="${themeDisplay.getURLCurrent()}?p_p_id=58&amp;p_p_lifecycle=1&amp;p_p_state=normal&amp;p_p_mode=view&amp;p_p_col_id=column-1&amp;p_p_col_pos=2&amp;p_p_col_count=3&amp;_58_struts_action=%2Flogin%2Flogin"
 			class="form sign-in-form " id="<portlet:namespace/>_58_fm" method="post" name="<portlet:namespace/>_58_fm" autocomplete="off">
-			<input name="_58_formDate" type="hidden" value="1470964064174"> <input class="field" id="_58_saveLastPath"
+			<input class="field" id="_58_saveLastPath"
 				name="_58_saveLastPath" type="hidden" value="false"> <input class="field" id="_58_redirect" name="_58_redirect" type="hidden"
 				value="${themeDisplay.getURLCurrent()}"> <input class="field" id="_58_doActionAfterLogin" name="_58_doActionAfterLogin"
 				type="hidden" value="false">
@@ -105,7 +107,7 @@ table.thead tr td select {
 			</div>
 			<div id="loginMessage" class="loginMessage"></div>
 			<div>
-				<aui:button name="login" value="登录" onclick="validateForm()" />
+				<aui:button type="submit" value="登录" />
 				<aui:button name="register" value="注册" href="${registerURL}" />
 			</div>
 		</form>

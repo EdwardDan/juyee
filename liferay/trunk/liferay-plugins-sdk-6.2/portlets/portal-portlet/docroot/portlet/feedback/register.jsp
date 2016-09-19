@@ -6,7 +6,6 @@
 </portlet:actionURL>
 <style type="text/css">
 div.main {
-	width: 450px;
 	border-left: 1px solid #ddd;
 	border-bottom: 1px solid #ddd;
 	border-right: 1px solid #ddd;
