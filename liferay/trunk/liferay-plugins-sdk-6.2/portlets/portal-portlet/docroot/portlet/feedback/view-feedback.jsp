@@ -1,5 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
+<%@page
+	import="com.justonetech.portal.feedback.service.FeedbackLocalServiceUtil"%>
+<%@page import="com.justonetech.portal.feedback.model.Feedback"%>
 <portlet:renderURL var="viewURL" />
 <%
 	long feedbackId = ParamUtil.getLong(request, "feedbackId");
