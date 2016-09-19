@@ -17,8 +17,8 @@
 }
 </style>
 <%
-	String certificateId = ParamUtil.getString(renderRequest, "certificateId");
-List<LEOTraining> leoTrainings=LEOTrainingLocalServiceUtil.findByZjbh(certificateId,-1,-1);
+	long certificateId = ParamUtil.getLong(renderRequest, "certificateId");
+List<LEOTraining> leoTrainings=LEOTrainingLocalServiceUtil.findByCertificateId(certificateId,-1,-1);
 LEOCertificate lEOCertificate=LEOCertificateLocalServiceUtil.getLEOCertificate(certificateId);
 request.setAttribute("leoTrainings", leoTrainings);
 request.setAttribute("lEOCertificate", lEOCertificate);
@@ -82,7 +82,7 @@ request.setAttribute("lEOCertificate", lEOCertificate);
 			<aui:button type="cancel" value="返回" href="${viewURL}" />
 		</div>
 	</aui:button-row>
-
+ 
 </aui:form>
 <table style="display: none;" border="1">
 	<tbody id="hiddenStyle">

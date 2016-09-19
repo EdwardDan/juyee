@@ -46,7 +46,7 @@ public class LEOTrainingPortlet extends MVCPortlet {
 		}
 		String zylx = ParamUtil.getString(renderRequest, "zylx", "");
 		String xm = ParamUtil.getString(renderRequest, "xm", "");
-		String certificateId = ParamUtil.getString(renderRequest, "certificateId", "");
+		String zjbh = ParamUtil.getString(renderRequest, "zjbh", "");
 		Date yxq = ParamUtil.getDate(renderRequest, "yxq", new SimpleDateFormat(dateFormatPattern), null);
 		int defaultDelta = GetterUtil.getInteger(PropsUtil.get(PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA));
 		int delta = ParamUtil.getInteger(renderRequest, "delta", defaultDelta);
@@ -55,9 +55,9 @@ public class LEOTrainingPortlet extends MVCPortlet {
 		int end = delta * cur;
 		List<LEOCertificate> leoCertificates = Collections.emptyList();
 		int leoCertificatesCount = 0;
-		leoCertificates = LEOCertificateLocalServiceUtil.getLEOCertificates(xm, zylx, certificateId, yxq, start, end);
-		leoCertificatesCount = LEOCertificateLocalServiceUtil.getLEOCertificatesCount(xm, zylx, certificateId, yxq);
-		renderRequest.setAttribute("certificateId", certificateId);
+		leoCertificates = LEOCertificateLocalServiceUtil.getLEOCertificates(xm, zylx, zjbh, yxq, start, end);
+		leoCertificatesCount = LEOCertificateLocalServiceUtil.getLEOCertificatesCount(xm, zylx, zjbh, yxq);
+		renderRequest.setAttribute("zjbh", zjbh);
 		renderRequest.setAttribute("leoCertificates", leoCertificates);
 		renderRequest.setAttribute("leoCertificatesCount", leoCertificatesCount);
 		renderRequest.setAttribute("yxq", yxq);
