@@ -50,62 +50,12 @@
 			value="${contextPath}/print/sgxklszs.jsp" />
 	</portlet:renderURL>
 	<c:if test="<%=!projectProfile.getLxjb().equals(\"区县级机关或区县级单位\")%>">
-		<c:if
-			test="<%=status != CityPermitStatus.STATUS_WZ.getCode()
-								&& status != CityPermitStatus.STATUS_EDIT.getCode()
-								&& status != CityPermitStatus.STATUS_SB.getCode()
-								&& status != CityPermitStatus.STATUS_YS_PASS.getCode()
-								&& status != CityPermitStatus.STATUS_YS_BACK.getCode()%>">
+		<c:if test="<%=status >= 5%>">
 			<a class="btn" href="${printsjpzURL}" target="_blank">收件凭证</a>
 		</c:if>
-		<c:if
-			test="<%=status == CityPermitStatus.STATUS_SH_PASS.getCode()
-								|| status == CityPermitStatus.STATUS_SH_BACK.getCode()
-								|| status == CityPermitStatus.STATUS_FGLD_PASS.getCode()
-								|| status == CityPermitStatus.STATUS_FGLD_BACK.getCode()
-								|| status == CityPermitStatus.STATUS_ZXLD_PASS.getCode()
-								|| status == CityPermitStatus.STATUS_ZXLD_BACK.getCode()
-								|| status == CityPermitStatus.STATUS_JSC_XK.getCode()
-								|| status == CityPermitStatus.STATUS_JSC_BXK.getCode()
-								|| status == CityPermitStatus.STATUS_JSC_BACK.getCode()
-								|| status == CityPermitStatus.STATUS_SPC_XK.getCode()
-								|| status == CityPermitStatus.STATUS_SPC_BXK.getCode()
-								|| status == CityPermitStatus.STATUS_SPC_BACK.getCode()
-								|| status == CityPermitStatus.STATUS_WLD_PASS.getCode()
-								|| status == CityPermitStatus.STATUS_WLD_BACK.getCode()%>">
+		<c:if test="<%=status >= 9%>">
 			<a class="btn" href="${printsltzsURL}" target="_blank">受理通知书</a>
-		</c:if>
-		<c:if
-			test="<%=status == CityPermitStatus.STATUS_SH_PASS.getCode()
-								|| status == CityPermitStatus.STATUS_SH_BACK.getCode()
-								|| status == CityPermitStatus.STATUS_FGLD_PASS.getCode()
-								|| status == CityPermitStatus.STATUS_FGLD_BACK.getCode()
-								|| status == CityPermitStatus.STATUS_ZXLD_PASS.getCode()
-								|| status == CityPermitStatus.STATUS_ZXLD_BACK.getCode()
-								|| status == CityPermitStatus.STATUS_JSC_XK.getCode()
-								|| status == CityPermitStatus.STATUS_JSC_BXK.getCode()
-								|| status == CityPermitStatus.STATUS_JSC_BACK.getCode()
-								|| status == CityPermitStatus.STATUS_SPC_XK.getCode()
-								|| status == CityPermitStatus.STATUS_SPC_BXK.getCode()
-								|| status == CityPermitStatus.STATUS_SPC_BACK.getCode()
-								|| status == CityPermitStatus.STATUS_WLD_PASS.getCode()
-								|| status == CityPermitStatus.STATUS_WLD_BACK.getCode()%>">
 			<a class="btn" href="${printbysljdsURL}" target="_blank">不予受理决定书</a>
-		</c:if>
-		<c:if
-			test="<%=status == CityPermitStatus.STATUS_SH_PASS.getCode()
-								|| status == CityPermitStatus.STATUS_SH_BACK.getCode()
-								|| status == CityPermitStatus.STATUS_FGLD_PASS.getCode()
-								|| status == CityPermitStatus.STATUS_FGLD_BACK.getCode()
-								|| status == CityPermitStatus.STATUS_ZXLD_PASS.getCode()
-								|| status == CityPermitStatus.STATUS_JSC_XK.getCode()
-								|| status == CityPermitStatus.STATUS_JSC_BXK.getCode()
-								|| status == CityPermitStatus.STATUS_JSC_BACK.getCode()
-								|| status == CityPermitStatus.STATUS_SPC_XK.getCode()
-								|| status == CityPermitStatus.STATUS_SPC_BXK.getCode()
-								|| status == CityPermitStatus.STATUS_SPC_BACK.getCode()
-								|| status == CityPermitStatus.STATUS_WLD_PASS.getCode()
-								|| status == CityPermitStatus.STATUS_WLD_BACK.getCode()%>">
 			<a class="btn" href="${printbzclURL}" target="_blank">补正材料</a>
 		</c:if>
 		<c:if
@@ -129,28 +79,17 @@
 		<c:if test="<%=status == CityPermitStatus.STATUS_WLD_BACK.getCode()%>">
 			<a class="btn" href="" target="_blank">不予许可通知书</a>
 		</c:if>
-		<!-- <a class="btn" href="" target="_blank">施工许可</a> -->
 	</c:if>
 	<c:if test="<%=projectProfile.getLxjb().equals(\"区县级机关或区县级单位\")%>">
 		<c:if
-			test="<%=status != CountyPermitStatus.STATUS_WZ.getCode()
-								&& status != CountyPermitStatus.STATUS_EDIT.getCode()
-								&& status != CountyPermitStatus.STATUS_SB.getCode()%>">
+			test="<%=status >=3%>">
 			<a class="btn" href="${printsjpzURL}" target="_blank">收件凭证</a>
 		</c:if>
 		<c:if
 			test="<%=status == CountyPermitStatus.STATUS_SP_PASS.getCode()
 								|| status == CountyPermitStatus.STATUS_SP_BACK.getCode()%>">
 			<a class="btn" href="${printsltzsURL}" target="_blank">受理通知书</a>
-		</c:if>
-		<c:if
-			test="<%=status == CountyPermitStatus.STATUS_SP_PASS.getCode()
-								|| status == CountyPermitStatus.STATUS_SP_BACK.getCode()%>">
 			<a class="btn" href="${printbysljdsURL}" target="_blank">不予受理决定书</a>
-		</c:if>
-		<c:if
-			test="<%=status == CountyPermitStatus.STATUS_SP_PASS.getCode()
-								|| status == CountyPermitStatus.STATUS_SP_BACK.getCode()%>">
 			<a class="btn" href="${printbzclURL}" target="_blank">补正材料</a>
 		</c:if>
 		<c:if
