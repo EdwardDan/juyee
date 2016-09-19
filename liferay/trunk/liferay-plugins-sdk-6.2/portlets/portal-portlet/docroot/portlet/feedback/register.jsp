@@ -64,9 +64,13 @@ table.thead tr td select {
 	color: #ff954f;;
 }
 
-.register_input{
+.register_input {
 	margin: 10px auto 0px !important;
 	border-radius: 5px !important;
+}
+
+.register_table{
+	margin: 0px auto;
 }
 </style>
 <div class="main">
@@ -80,39 +84,60 @@ table.thead tr td select {
 		</table>
 	</div>
 	<div>
-		<form action="${registerURL}" method="post">
-			<table>
+		<aui:form action="${registerURL}" name="fm" method="post" >
+			<table class="register_table">
 				<tr>
-					<td width="25%" class="text-right"><span class="xh">*</span>用户名</td>
-					<td width="75%" class="text-left"><input type="text" name="<portlet:namespace/>yhm" value=""><span class="xh">(4-18个字符)</span></td>
+					<td class="text-right"><span class="xh">*</span>用户名</td>
+					<td class="text-left"><aui:input name="yhm" label="">
+							<aui:validator name="required" />
+							<aui:validator name="alphanum" />
+							<aui:validator name="maxLength">18</aui:validator>
+							<aui:validator name="minLength">4</aui:validator>
+						</aui:input></td>
 				</tr>
 				<tr>
 					<td class="text-right"><span class="xh">*</span>密码</td>
-					<td class="text-left"><input type="text" name="<portlet:namespace/>mm" value=""></td>
+					<td class="text-left"><aui:input name="mm" label="" type="password">
+							<aui:validator name="required" />
+						</aui:input></td>
 				</tr>
 				<tr>
 					<td class="text-right"><span class="xh">*</span>确认密码</td>
-					<td class="text-left"><input type="text" name="<portlet:namespace/>qrmm" value=""></td>
+					<td class="text-left"><aui:input name="qrmm" label="" type="password">
+							<aui:validator name="equalTo">'#<portlet:namespace />mm'</aui:validator>
+						</aui:input></td>
 				</tr>
 				<tr>
 					<td class="text-right"><span class="xh">*</span>身份证号</td>
-					<td class="text-left"><input type="text" name="<portlet:namespace/>sfzh" value=""></td>
+					<td class="text-left"><aui:input name="sfzh" label="">
+							<aui:validator name="required" />
+						</aui:input></td>
 				</tr>
 				<tr>
 					<td class="text-right"><span class="xh">*</span>姓名</td>
-					<td class="text-left"><input type="text" name="<portlet:namespace/>xm" value=""></td>
+					<td class="text-left"><aui:input name="xm" label="">
+							<aui:validator name="required" />
+						</aui:input></td>
 				</tr>
 				<tr>
 					<td class="text-right"><span class="xh">*</span>联系电话</td>
-					<td class="text-left"><input type="text" name="<portlet:namespace/>lxdh" value=""></td>
+					<td class="text-left"><aui:input name="lxdh" label="">
+							<aui:validator name="digits" />
+							<aui:validator name="required" />
+						</aui:input></td>
 				</tr>
 				<tr>
 					<td class="text-right"><span class="xh">*</span>邮箱地址</td>
-					<td class="text-left"><input type="text" name="<portlet:namespace/>yxdz" value=""></td>
+					<td class="text-left"><aui:input name="yxdz" label="">
+							<aui:validator name="email" />
+							<aui:validator name="required" />
+						</aui:input></td>
 				</tr>
 				<tr>
 					<td class="text-right">联系地址</td>
-					<td class="text-left"><input type="text" name="<portlet:namespace/>lxdz" value=""><span class="xh">(40个字符以内)</span></td>
+					<td class="text-left"><aui:input name="lxdz" label="">
+							<aui:validator name="maxLength">40</aui:validator>
+						</aui:input></td>
 				</tr>
 			</table>
 			<div class="text-center">
@@ -125,6 +150,6 @@ table.thead tr td select {
 					<aui:button name="close" value="取消" cssClass="btn" href="${viewURL}" />
 				</div>
 			</div>
-		</form>
+		</aui:form>
 	</div>
 </div>

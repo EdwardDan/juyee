@@ -60,20 +60,20 @@ table.thead tr td select {
 	border-radius: 5px
 }
 
-.login_input{
+.login_input {
 	margin: 10px auto 0px !important;
 	border-radius: 5px !important;
 }
 
-.login_input_yzm{
+.login_input_yzm {
 	margin: 10px auto 0px !important;
 	border-radius: 5px !important;
-	width:25% !important;
+	width: 25% !important;
 }
 </style>
 <script type="text/javascript">
     window.jQuery || document.write("<script src='/static/jquery/jquery-1.12.4.min.js'>"+"<"+"/script>");
-</script> 
+</script>
 <div class="main">
 	<div class="head"></div>
 	<div class="body">
@@ -86,15 +86,14 @@ table.thead tr td select {
 	</div>
 	<div class="text-center">
 		<form
-			action="${themeDisplay.getURLCurrent()}?p_p_id=58&amp;p_p_lifecycle=1&amp;p_p_state=normal&amp;p_p_mode=view&amp;p_p_col_id=column-1&amp;p_p_col_pos=2&amp;p_p_col_count=3&amp;_58_struts_action=%2Flogin%2Flogin"
+			action="${themeDisplay.getURLHome()}?p_p_id=58&amp;p_p_lifecycle=1&amp;p_p_state=normal&amp;p_p_mode=view&amp;p_p_col_id=column-1&amp;p_p_col_pos=2&amp;p_p_col_count=3&amp;_58_struts_action=%2Flogin%2Flogin"
 			class="form sign-in-form " id="<portlet:namespace/>_58_fm" method="post" name="<portlet:namespace/>_58_fm" autocomplete="off">
-			<input class="field" id="_58_saveLastPath"
-				name="_58_saveLastPath" type="hidden" value="false"> <input class="field" id="_58_redirect" name="_58_redirect" type="hidden"
-				value="${themeDisplay.getURLCurrent()}"> <input class="field" id="_58_doActionAfterLogin" name="_58_doActionAfterLogin"
-				type="hidden" value="false">
+			<input class="field" id="_58_saveLastPath" name="_58_saveLastPath" type="hidden" value="false"> <input class="field"
+				id="_58_redirect" name="_58_redirect" type="hidden" value="${themeDisplay.getURLCurrent()}"> <input class="field"
+				id="_58_doActionAfterLogin" name="_58_doActionAfterLogin" type="hidden" value="false">
 			<div class="login_div_user">
-				<input name="_58_login" id="_58_login" value="请输入用户名" style="color: #cccccc;" class="login_input" type="text"
-					onfocus="userFocus(this)" onblur="userBlur(this)">
+				<input name="_58_login" id="_58_login" value="请输入用户名" style="color: #cccccc;" class="login_input" type="text" onfocus="userFocus(this)"
+					onblur="userBlur(this)">
 			</div>
 
 			<div class="login_div_password">
@@ -102,12 +101,14 @@ table.thead tr td select {
 					onfocus="passwordFocus(this)" onblur="passwordBlur(this)">
 			</div>
 			<div>
-				<aui:input name="yzm" placeholder="验证码" label="" cssClass="login_input_yzm" ></aui:input>
-				<br>
+				<portlet:resourceURL var="captchaURL" id="captchaID">
+					<portlet:param name="struts_action" value="/login/captcha" />
+				</portlet:resourceURL>
+				<liferay-ui:captcha url="<%=captchaURL%>" />
 			</div>
 			<div id="loginMessage" class="loginMessage"></div>
 			<div>
-				<aui:button type="submit" value="登录" />
+				<aui:button name="login" value="登录" onClick="validateForm()" />
 				<aui:button name="register" value="注册" href="${registerURL}" />
 			</div>
 		</form>
@@ -161,7 +162,8 @@ table.thead tr td select {
 				url:"<%=loginUrl%>",
 					data : {
 						'<portlet:namespace/>_58_login' : $('#_58_login').val(),
-						'<portlet:namespace/>_58_password' : $('#_58_password').val()
+						'<portlet:namespace/>_58_password' : $('#_58_password')
+								.val()
 					},
 					error : function(err) {
 						alert("提交失败!");
@@ -169,7 +171,8 @@ table.thead tr td select {
 					success : function(data) {
 						var strJson = eval("(" + data + ")");
 						if (strJson.loginState == true) {
-							document.getElementById("<portlet:namespace/>_58_fm").submit();
+							document.getElementById(
+									"<portlet:namespace/>_58_fm").submit();
 						} else {
 							$("#loginMessage").text(strJson.responseContent);
 							document.getElementById("loginMessage").style.visibility = "visible";
