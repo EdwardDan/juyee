@@ -36,10 +36,10 @@ table {
 <table class="table table-border table-hover table-striped"
 	style="width: 100% ；text-align:center;">
 	<thead>
-		<th style="text-align: center" style="width:20%">审核步骤</th>
-		<th style="text-align: center" style="width:40%">审核意见</th>
-		<th style="text-align: center" style="width:20%">审核人</th>
-		<th style="text-align: center" style="width:20%">审核时间</th>
+		<th style="text-align: center;width:20%;border:1px solid #ddd;">审核步骤</th>
+		<th style="text-align: center;width:40%;border:1px solid #ddd;">审核意见</th>
+		<th style="text-align: center;width:20%;border:1px solid #ddd;">审核人</th>
+		<th style="text-align: center;width:20%;border:1px solid #ddd;">审核时间</th>
 	</thead>
 	<%
 		Long permitIdInit=ParamUtil.getLong(request,"permitId");
@@ -76,10 +76,10 @@ table {
 			   if(workflowLog.getState().equals("update2")){continue;}
 	%>
 	<tr>
-		<td><%=state%></td>
-		<td><%=workflowLog.getComment().equals("Assigned initial task.")?"":workflowLog.getComment()%></td>
-		<td><%=auditName%></td>
-		<td><%=dateFormatDateTime.format(workflowLog.getCreateDate())%></td>
+		<td style="border:1px solid #ddd;"><%=state%></td>
+		<td style="border:1px solid #ddd;"><%=workflowLog.getComment().equals("Assigned initial task.")?"":workflowLog.getComment()%></td>
+		<td style="border:1px solid #ddd;"><%=auditName%></td>
+		<td style="border:1px solid #ddd;"><%=dateFormatDateTime.format(workflowLog.getCreateDate())%></td>
 	</tr>
 	<%
 		}
