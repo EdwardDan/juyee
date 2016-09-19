@@ -3,6 +3,8 @@
 <%@page import="com.justonetech.portal.feedback.model.Feedback"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
+<c:set var="contextPath"
+	value="${request.contextPath}/portlet/feedback" />
 <style type="text/css">
 	<%@ include file="/portlet/feedback/css/query.css"%>
 </style>
@@ -12,8 +14,19 @@
 	String lx = ParamUtil.getString(request, "lx");
 	long fkrId = 0L;
 	long currentUserId = PortalUtil.getUserId(request);
-	request.setAttribute("zt", zt);
-	request.setAttribute("lx", lx);
+	long[] roleIds = user.getRoleIds();
+	
+	boolean isAplyUser = false;
+ 	for(long roleId : roleIds){
+ 		if(Validator.equals(roleId, 123)){
+ 	 		//if(Validator.equals(roleId, 20166)){
+ 			isAplyUser = true;
+ 			break;
+ 		}
+	}
+ 	request.setAttribute("isAplyUser", isAplyUser);
+ 	fkrId = isAplyUser?-1:fkrId;
+ 	
 %>
 <aui:form name="fm" id="fm" method="post" action="${searchURL }">
 	<div class="out">
@@ -46,22 +59,30 @@
 	</div>
 </aui:form>
 <liferay-ui:search-container emptyResultsMessage="没有互动反馈数据。">
-	<liferay-ui:search-container-results results="<%=FeedbackLocalServiceUtil.getFeedbacks(zt, lx, -1, searchContainer.getStart(), searchContainer.getEnd()) %>"
-		total="<%=FeedbackLocalServiceUtil.getFeedbacksCount(zt, lx, -1) %>">
-	</liferay-ui:search-container-results>
+	<liferay-ui:search-container-results results="<%=FeedbackLocalServiceUtil.getFeedbacks(zt, lx, fkrId, searchContainer.getStart(), searchContainer.getEnd()) %>"
+		total="<%=FeedbackLocalServiceUtil.getFeedbacksCount(zt, lx, fkrId) %>"/>
 	<liferay-ui:search-container-row
 		className="com.justonetech.portal.feedback.model.Feedback"
 		keyProperty="feedbackId" modelVar="feedback">
 		<liferay-ui:search-container-column-text property="zt" name="主题" />
 		<liferay-ui:search-container-column-text property="lx" name="类型" />
-		<liferay-ui:search-container-column-text name="反馈日期"
-			value="<%=DateUtil.getDate(feedback.getFkrq(), \"yyyy-MM-dd\", locale, timeZone)%>" />
-		<liferay-ui:search-container-column-text name="回复日期"
-			value="<%=DateUtil.getDate(feedback.getHfrq(), \"yyyy-MM-dd\", locale, timeZone)%>" />
+		<liferay-ui:search-container-column-text property="fkrq" name="反馈日期" />
+		<liferay-ui:search-container-column-text property="hfrq" name="回复日期" />
 		<liferay-ui:search-container-column-text name="action">
 			<liferay-ui:icon-menu>
-				<liferay-ui:icon image="view" label="查看" url="http://www.baidu.com" />
-				<liferay-ui:icon image="reply" label="回复" url="http://www.baidu.com" />
+				<portlet:renderURL var="viewFeedbackURL">
+					<portlet:param name="mvcPath" value="${contextPath }/view-feedback.jsp"/>
+					<portlet:param name="feedbackId" value="${feedback.feedbackId }"/>
+				</portlet:renderURL>
+				<liferay-ui:icon image="view" label="查看" url="${viewFeedbackURL }" />
+				<c:if test="${isAplyUser}">
+					<portlet:renderURL var="replyFeedbackURL">
+						<portlet:param name="mvcPath" value="${contextPath }/reply-feedback.jsp"/>
+						<portlet:param name="feedbackId" value="${feedback.feedbackId }"/>
+					</portlet:renderURL>
+					<liferay-ui:icon image="reply" label="回复" url="${replyFeedbackURL }" />
+				</c:if>
+
 			</liferay-ui:icon-menu>
 		</liferay-ui:search-container-column-text>
 	</liferay-ui:search-container-row>
