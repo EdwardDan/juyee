@@ -1,5 +1,3 @@
-<%@page import="javax.portlet.WindowState"%>
-<%@page import="com.liferay.portal.kernel.portlet.LiferayWindowState"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
 <link rel="stylesheet" type="text/css" href="/portal-portlet/portlet/feedback/css/query.css" />
@@ -47,7 +45,7 @@
 	</aui:row>
 	<aui:row>
 		<aui:col span="12" cssClass="text-center">
-			<aui:button type="submit" value="提交" />
+			<aui:button type="submit" value="提交" onClick="return onSubmit()"/>
 			<aui:button type="cancel" value="返回" href="${viewURL}" />
 		</aui:col>
 	</aui:row>
@@ -66,6 +64,11 @@
 		counter : '#ztCounter',
 		maxLength : 30
 	});
+	
+	function onSubmit(){
+		alert($("#<portlet:namespace/>captchaText").val());
+		return false;
+	}
 </aui:script>
 	
 
