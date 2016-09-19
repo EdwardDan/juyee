@@ -2,7 +2,6 @@ package com.justonetech.portal.portlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Enumeration;
@@ -24,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.justonetech.portal.feedback.model.Feedback;
 import com.justonetech.portal.feedback.service.FeedbackLocalServiceUtil;
 import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.captcha.CaptchaUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
@@ -86,6 +86,7 @@ public class FeedbackPortlet extends MVCPortlet {
 
 	public void saveFeedBack(ActionRequest request, ActionResponse response) throws SystemException, PortalException,
 			ParseException, IOException {
+		CaptchaUtil.check(request);
 		String zt = ParamUtil.getString(request, "zt");
 		String fknr = ParamUtil.getString(request, "fknr");
 		PortletPreferences preferences = request.getPreferences();
@@ -175,32 +176,6 @@ public class FeedbackPortlet extends MVCPortlet {
 		}
 	}
 
-	private void checkCaptcha(PortletRequest request) throws Exception {
-		String enteredCaptchaText = ParamUtil.getString(request, "captchaText");
-
-		PortletSession session = request.getPortletSession();
-		String captchaText = getCaptchaValueFromSession(session);
-		if (Validator.isNull(captchaText)) {
-			throw new Exception("Internal Error! Captcha text not found in session");
-		}
-		if (!captchaText.equals(enteredCaptchaText)) {
-			throw new Exception("Invalid captcha text. Please reenter.");
-		}
-	}
-
-	private String getCaptchaValueFromSession(PortletSession session) {
-		Enumeration<String> atNames = session.getAttributeNames();
-		while (atNames.hasMoreElements()) {
-			String name = atNames.nextElement();
-			if (name.contains("CAPTCHA_TEXT")) {
-				return (String) session.getAttribute(name);
-			}
-		}
-		return null;
-	}
-	
-
-	
 	public void register(ActionRequest request,ActionResponse response) throws PortalException, SystemException{
 		String yhm = ParamUtil.getString(request, "yhm");
 		String mm = ParamUtil.getString(request, "mm");
