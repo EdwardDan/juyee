@@ -7,20 +7,17 @@
 <%@page import="com.justonetech.cyzt.leo.model.LEOCertificate"%>
 <%@page import="java.util.List"%>
 <%
-	String certificateId = ParamUtil.getString(request,
-			"certificateId", "");
-	String dateFormatPattern = PropsUtil
-			.get("default.date.format.pattern");
+	long certificateId = ParamUtil.getLong(request,"certificateId", 0L);
+	String dateFormatPattern = PropsUtil.get("default.date.format.pattern");
 	LEOCertificate leoCertificate = null;
-	if (certificateId != "") {
-		leoCertificate = LEOCertificateLocalServiceUtil
-				.getLEOCertificate(certificateId);
+	if (certificateId != 0L) {
+		leoCertificate = LEOCertificateLocalServiceUtil.getLEOCertificate(certificateId);
 		System.out.println(leoCertificate);
 		if (leoCertificate != null) {
 			request.setAttribute("xm", leoCertificate.getXm());
 			request.setAttribute("zylx", leoCertificate.getZylx());
-			request.setAttribute("certificateId",
-					leoCertificate.getCertificateId());
+			request.setAttribute("zjbh",
+					leoCertificate.getZjbh());
 			request.setAttribute("fzrq", leoCertificate.getFzrq());
 			request.setAttribute("yxq", leoCertificate.getYxq());
 		}
@@ -36,7 +33,7 @@
 
 	<tr class="body">
 		<td style="width: 10%; text-align: right">证件编号</td>
-		<td class="content">${certificateId}</td>
+		<td class="content">${zjbh}</td>
 		<td style="width: 15%; text-align: right">发证日期</td>
 		<td style="width: 35%;" class="content"><fmt:formatDate value='${fzrq}' pattern='yyyy-MM-dd' /></td>
 	</tr>

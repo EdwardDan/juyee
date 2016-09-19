@@ -8,9 +8,6 @@
 <liferay-ui:panel-container accordion="false" extended="true">
 	<liferay-ui:panel title="查询条件" collapsible="true">
 		<aui:form name="fm" id="fm" method="get" action="${searchURL}">
-			<aui:input name="p_p_id" type="hidden" useNamespace="false"
-				value="${portletDisplay.id }"></aui:input>
-			<aui:input type="hidden" name="delta" value="${delta}"></aui:input>
 			<table style="width: 100%;" class="table table-bordered">
 				<tr class="body">
 					<td style="width: 10%; text-align: right">专业类型</td>
@@ -24,7 +21,7 @@
 				<tr class="body">
 					<td style="width: 10%; text-align: right">证件编号</td>
 					<td class="content"><aui:input type="text"
-							name="certificateId" label="" cssClass="span12" /></td>
+							name="zjbh" label="" cssClass="span12" /></td>
 					<td style="width: 15%; text-align: right">有效期</td>
 					<td style="width: 35%;" class="content"><input type="text"
 						class="Wdate span12" id="yxq" name="<portlet:namespace/>yxq"
@@ -60,7 +57,7 @@
 				<liferay-ui:search-container-column-text name="专业类型"
 					value="${leoCertificate.zylx}" />
 				<liferay-ui:search-container-column-text name="证件编号"
-					value="${leoCertificate.certificateId}" />
+					value="${leoCertificate.zjbh}" />
 				<liferay-ui:search-container-column-text name="发证日期">
 					<fmt:formatDate value='${leoCertificate.fzrq}' pattern='yyyy-MM-dd' />
 				</liferay-ui:search-container-column-text>

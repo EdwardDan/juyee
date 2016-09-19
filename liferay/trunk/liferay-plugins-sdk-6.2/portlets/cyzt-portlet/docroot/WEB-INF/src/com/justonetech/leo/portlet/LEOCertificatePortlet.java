@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.justonetech.cyzt.leo.model.LEOCertificate;
 import com.justonetech.cyzt.leo.service.LEOCertificateLocalServiceUtil;
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONArray;
@@ -44,13 +45,12 @@ public class LEOCertificatePortlet extends MVCPortlet {
 			RenderResponse renderResponse) throws IOException, PortletException {
 		String xm = ParamUtil.getString(renderRequest, "xm", "");
 		String zylx = ParamUtil.getString(renderRequest, "zylx", "");
-		String certificateId = ParamUtil.getString(renderRequest,
-				"certificateId", "");
+		String zjbh = ParamUtil.getString(renderRequest, "zjbh", "");
 		Date yxq = ParamUtil.getDate(renderRequest, "yxq",
 				new SimpleDateFormat(dateFormatPattern), null);
 
 		List<LEOCertificate> leoCertificates = LEOCertificateLocalServiceUtil
-				.getLEOCertificates(xm, zylx, certificateId, yxq, -1, -1);
+				.getLEOCertificates(xm, zylx, zjbh, yxq, -1, -1);
 
 		int leoCertificatesCount = 0;
 		try {
@@ -63,29 +63,32 @@ public class LEOCertificatePortlet extends MVCPortlet {
 		renderRequest.setAttribute("leoCertificates", leoCertificates);
 		renderRequest
 				.setAttribute("leoCertificatesCount", leoCertificatesCount);
-		
+
 		super.doView(renderRequest, renderResponse);
 	}
 
 	public void saveLEOCertificate(ActionRequest request,
 			ActionResponse response) throws SystemException {
+		long certificateId = ParamUtil.getLong(request, "certificateId",0L);
+		System.out.println(certificateId);
 		String xm = ParamUtil.getString(request, "xm");
 		String zylx = ParamUtil.getString(request, "zylx");
-		String certificateId = ParamUtil.getString(request, "certificateId");
+		String zjbh = ParamUtil.getString(request, "zjbh");
 		Date fzrq = ParamUtil.getDate(request, "fzrq", new SimpleDateFormat(
 				dateFormatPattern));
 		Date yxq = ParamUtil.getDate(request, "yxq", new SimpleDateFormat(
 				dateFormatPattern));
 		LEOCertificate leoCertificate = null;
 		try {
-			leoCertificate = LEOCertificateLocalServiceUtil
-					.getLEOCertificate(certificateId);
-			
+			if(certificateId==0L){
+				leoCertificate = LEOCertificateLocalServiceUtil.createLEOCertificate(CounterLocalServiceUtil.increment());
+			}else{
+				leoCertificate = LEOCertificateLocalServiceUtil.getLEOCertificate(certificateId);
+			}
 		} catch (Exception e) {
-			leoCertificate = LEOCertificateLocalServiceUtil
-					.createLEOCertificate(certificateId);
+			
 		}
-
+		leoCertificate.setZjbh(zjbh);
 		leoCertificate.setXm(xm);
 		leoCertificate.setZylx(zylx);
 		leoCertificate.setFzrq(fzrq);
@@ -95,21 +98,42 @@ public class LEOCertificatePortlet extends MVCPortlet {
 
 	public void deleteLEOCertificate(ActionRequest request,
 			ActionResponse response) throws PortalException, SystemException {
-		String certificateId = ParamUtil.getString(request, "certificateId");
-		LEOCertificate leoCertificate = LEOCertificateLocalServiceUtil.getLEOCertificate(certificateId);
+		long certificateId = ParamUtil.getLong(request, "certificateId",0L);
+		LEOCertificate leoCertificate = LEOCertificateLocalServiceUtil
+				.getLEOCertificate(certificateId);
 		LEOCertificateLocalServiceUtil.deleteLEOCertificate(leoCertificate);
 	}
-	
-	public void serveResource(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException, PortletException {
-		String certificateId = ParamUtil.getString(resourceRequest, "certificateId");
+
+	public void serveResource(ResourceRequest resourceRequest,
+			ResourceResponse resourceResponse) throws IOException,
+			PortletException {
+		String zjbh = ParamUtil.getString(resourceRequest, "zjbh","");
+		long certificateId = ParamUtil.getLong(resourceRequest, "certificateId",0L);
 		String result = "";
-		try {
-			LEOCertificateLocalServiceUtil.getLEOCertificate(certificateId);
-		} catch (Exception e) {
-			result = e.toString();
+		
+		List<LEOCertificate> leoCertificates =	LEOCertificateLocalServiceUtil.getLEOCertificates("", "", zjbh, null, -1, -1);
+		
+		if(leoCertificates.size()==0){
+			result = "Is not exist";//不存在
+		}else if(certificateId!=0L){
+			LEOCertificate leoCertificate = null;//存在但等于当前的证件编号
+			try {
+				leoCertificate = LEOCertificateLocalServiceUtil.getLEOCertificate(certificateId);
+			} catch (PortalException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SystemException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if(zjbh.equals(leoCertificate.getZjbh())){
+				result = "Is current zjbh";
+			}
 		}
+		
 		JSONArray userArray = JSONFactoryUtil.createJSONArray();
-		HttpServletResponse response = PortalUtil.getHttpServletResponse(resourceResponse);
+		HttpServletResponse response = PortalUtil
+				.getHttpServletResponse(resourceResponse);
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = null;
 		try {
