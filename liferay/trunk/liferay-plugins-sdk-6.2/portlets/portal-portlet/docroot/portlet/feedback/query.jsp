@@ -66,17 +66,15 @@ table.thead tr td select {
 			</tr>
 		</table>
 	</div>
-	<table class="thead" style="margin-top: 10px">
-		<tr>
-			<td><span>主题:&nbsp;<input name="subject"></span></td>
-			<td><span>类型:&nbsp;<select name="type">
-						<option>选择类型</option>
-				</select></span></td>
-		</tr>
-		<tr>
-			<td></td>
-			<td><a href="#" class="btn">查询</a></td>
-		</tr>
-	</table>
+	<aui:row>
+		<aui:col span="12" cssClass="text-center">
+		<aui:input type="text" name="subject" label="主题" inlineLabel="left" inlineField="true"></aui:input>
+		<aui:select name="type" label="类型" showEmptyOption="true" inlineLabel="left" inlineField="true"></aui:select>
+		</aui:col>
+	</aui:row>
+	<aui:button-row cssClass="text-center">
+		<aui:button type="submit"></aui:button>
+	</aui:button-row>
+
 	<br>
 </div>
