@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.ParseException;
+import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -86,22 +87,27 @@ public class FeedbackPortlet extends MVCPortlet {
 
 	public void saveFeedBack(ActionRequest request, ActionResponse response) throws SystemException, PortalException,
 			ParseException, IOException {
-		CaptchaUtil.check(request);
-		String zt = ParamUtil.getString(request, "zt");
-		String fknr = ParamUtil.getString(request, "fknr");
-		PortletPreferences preferences = request.getPreferences();
-		String lx = preferences.getValue("lx", StringPool.BLANK);
-		System.out.println(lx);
-		Feedback feedback = null;
-		feedback = FeedbackLocalServiceUtil.createFeedback(CounterLocalServiceUtil.increment());
-		feedback.setZt(zt);
-		feedback.setFknr(fknr);
-		feedback.setLx(lx);
-		feedback.setFkrq(new Date());
-		ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
-		feedback.setFkrId(themeDisplay.getRealUser().getUserId());
-		feedback.setFkrq(new Date());
-		FeedbackLocalServiceUtil.addFeedback(feedback);
+		try {
+			CaptchaUtil.check(request);
+			String zt = ParamUtil.getString(request, "zt");
+			String fknr = ParamUtil.getString(request, "fknr");
+			PortletPreferences preferences = request.getPreferences();
+			String lx = preferences.getValue("lx", StringPool.BLANK);
+			System.out.println(lx);
+			Feedback feedback = null;
+			feedback = FeedbackLocalServiceUtil.createFeedback(CounterLocalServiceUtil.increment());
+			feedback.setZt(zt);
+			feedback.setFknr(fknr);
+			feedback.setLx(lx);
+			feedback.setFkrq(new Date());
+			ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
+			feedback.setFkrId(themeDisplay.getRealUser().getUserId());
+			feedback.setFkrq(new Date());
+			FeedbackLocalServiceUtil.addFeedback(feedback);
+		} catch (Exception e) {
+			request.setAttribute("errorMessages", "验证码错误！！");
+			SessionErrors.add(request, "captcha-fail");
+		}
 	}
 
 	@Override
@@ -112,50 +118,10 @@ public class FeedbackPortlet extends MVCPortlet {
 		} catch (Exception e) {
 			log.error(e);
 		}
-		
 		String resourceId = resourceRequest.getResourceID();
 		if ("feedback".equals(resourceId)) {
-			String loginUser = ParamUtil.get(resourceRequest, "_58_login", "");
-			String loginPassword = ParamUtil.get(resourceRequest, "_58_password", "");
 			Boolean loginState = false;
 			String responseContent = "";
-			try {
-				List<User> userList = UserLocalServiceUtil.getUsers(-1, -1);
-				
-				if (Validator.isNotNull(loginUser) && !loginUser.equals("请输入用户名")) {
-					User defaultUser = null;
-					for (User user : userList) {
-						if (loginUser.equals(user.getScreenName())) {
-							defaultUser = user;
-						}
-					}
-					if (Validator.isNotNull(defaultUser)) {
-						long companyId = PortalUtil.getCompanyId(resourceRequest);
-						int authResult = Authenticator.FAILURE;
-						try {
-							authResult = UserLocalServiceUtil.authenticateByScreenName(companyId, loginUser, loginPassword, null, null, null);
-						} catch (PortalException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-						if (authResult == Authenticator.SUCCESS) {
-							loginState = true;
-						} else {
-							responseContent = "密码错误！";
-						}
-					} else {
-						responseContent = "用户名错误!";
-					}
-
-				} else {
-
-					responseContent = "请输入用户名和密码!";
-				}
-
-			} catch (SystemException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 			JSONObject userJson = JSONFactoryUtil.createJSONObject();
 			userJson.put("loginState", loginState);
 			userJson.put("responseContent", responseContent);
@@ -171,12 +137,12 @@ public class FeedbackPortlet extends MVCPortlet {
 			out.flush();
 			out.close();
 			resourceResponse.setContentType("text/html");
-			super.serveResource(resourceRequest, resourceResponse);
-
+		
 		}
+		super.serveResource(resourceRequest, resourceResponse);
 	}
 
-	public void register(ActionRequest request,ActionResponse response) throws PortalException, SystemException{
+	public void register(ActionRequest request, ActionResponse response) throws PortalException, SystemException {
 		String yhm = ParamUtil.getString(request, "yhm");
 		String mm = ParamUtil.getString(request, "mm");
 		String qrmm = ParamUtil.getString(request, "qrmm");
@@ -185,11 +151,12 @@ public class FeedbackPortlet extends MVCPortlet {
 		String lxdh = ParamUtil.getString(request, "lxdh");
 		String yxdz = ParamUtil.getString(request, "yxdz");
 		String lxdz = ParamUtil.getString(request, "lxdz");
-		createUser(yhm, mm, qrmm,xm,yxdz,request);
+		createUser(yhm, mm, qrmm, xm, yxdz, request);
 	}
-	
-	public void createUser(String yhm, String mm, String qrmm, String xm, String yxdz,ActionRequest request) throws PortalException, SystemException {
- 
+
+	public void createUser(String yhm, String mm, String qrmm, String xm, String yxdz, ActionRequest request)
+			throws PortalException, SystemException {
+
 		// 获取参数
 		long companyId = PortalUtil.getCompanyId(request);
 		boolean autoPassword = false;
@@ -222,7 +189,10 @@ public class FeedbackPortlet extends MVCPortlet {
 			User defaultUser = UserLocalServiceUtil.getDefaultUser(companyId);
 			long creatorUserId = defaultUser.getUserId();
 			ServiceContext serviceContext = ServiceContextFactory.getInstance(request);
-			User user = UserLocalServiceUtil.addUserWithWorkflow(creatorUserId, companyId, autoPassword, password1, password2, autoScreenName, screenName, emailAddress, facebookId, openId, locale, firstName, middleName, lastName, prefixId, suffixId, male, birthdayMonth, birthdayDay, birthdayYear, jobTitle, groupIds, organizationIds, roleIds, userGroupIds, sendEmail, serviceContext);
+			User user = UserLocalServiceUtil.addUserWithWorkflow(creatorUserId, companyId, autoPassword, password1,
+					password2, autoScreenName, screenName, emailAddress, facebookId, openId, locale, firstName,
+					middleName, lastName, prefixId, suffixId, male, birthdayMonth, birthdayDay, birthdayYear, jobTitle,
+					groupIds, organizationIds, roleIds, userGroupIds, sendEmail, serviceContext);
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println(e);
