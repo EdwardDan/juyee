@@ -56,7 +56,7 @@ public class LEOTrainingPortlet extends MVCPortlet {
 		List<LEOCertificate> leoCertificates = Collections.emptyList();
 		int leoCertificatesCount = 0;
 		leoCertificates = LEOCertificateLocalServiceUtil.getLEOCertificates(xm, zylx, certificateId, yxq, start, end);
-		leoCertificatesCount = LEOCertificateLocalServiceUtil.getProjectsCount(xm, zylx, certificateId, yxq);
+		leoCertificatesCount = LEOCertificateLocalServiceUtil.getLEOCertificatesCount(xm, zylx, certificateId, yxq);
 		renderRequest.setAttribute("certificateId", certificateId);
 		renderRequest.setAttribute("leoCertificates", leoCertificates);
 		renderRequest.setAttribute("leoCertificatesCount", leoCertificatesCount);
@@ -66,13 +66,13 @@ public class LEOTrainingPortlet extends MVCPortlet {
 
 	public void saveLEOTrainings(ActionRequest request, ActionResponse response) throws SystemException,
 			PortalException, IOException {
-		String certificateId = ParamUtil.getString(request, "certificateId");
+		long certificateId = ParamUtil.getLong(request, "certificateId");
 		Date[] pxsjs = ParamUtil.getDateValues(request, "pxsj", new SimpleDateFormat(dateFormatPattern), null);
 		Date[] xcjysjs = ParamUtil.getDateValues(request, "xcjysj", new SimpleDateFormat(dateFormatPattern), null);
 		String[] pxnrs = ParamUtil.getParameterValues(request, "pxnr");
 
 		// 保存前删除以前的数据
-		List<LEOTraining> leoTrainingsByZjbh = LEOTrainingLocalServiceUtil.findByZjbh(certificateId, -1, -1);
+		List<LEOTraining> leoTrainingsByZjbh = LEOTrainingLocalServiceUtil.findByCertificateId(certificateId, -1, -1);
 		if (null != leoTrainingsByZjbh && leoTrainingsByZjbh.size() > 0) {
 			for (LEOTraining leoTraining : leoTrainingsByZjbh) {
 				LEOTrainingLocalServiceUtil.deleteLEOTraining(leoTraining);
@@ -89,7 +89,7 @@ public class LEOTrainingPortlet extends MVCPortlet {
 				if (null != pxsjs && pxsjs.length > 0) {
 					leoTraining.setPxsj(pxsjs[i]);
 				}
-				leoTraining.setZjbh(certificateId);
+				leoTraining.setCertificateId(certificateId);
 				if (null != xcjysjs && xcjysjs.length > 0) {
 					leoTraining.setXcjysj(xcjysjs[i]);
 				}
