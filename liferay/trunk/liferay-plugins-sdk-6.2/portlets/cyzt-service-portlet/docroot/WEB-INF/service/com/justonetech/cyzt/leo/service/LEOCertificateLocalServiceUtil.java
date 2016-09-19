@@ -281,9 +281,9 @@ public class LEOCertificateLocalServiceUtil {
 		return getService().getLEOCertificates(xm, zylx, zjbh, yxq, start, end);
 	}
 
-	public static int getProjectsCount(java.lang.String xm,
+	public static int getLEOCertificatesCount(java.lang.String xm,
 		java.lang.String zylx, java.lang.String zjbh, java.util.Date yxq) {
-		return getService().getProjectsCount(xm, zylx, zjbh, yxq);
+		return getService().getLEOCertificatesCount(xm, zylx, zjbh, yxq);
 	}
 
 	public static com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQuery(

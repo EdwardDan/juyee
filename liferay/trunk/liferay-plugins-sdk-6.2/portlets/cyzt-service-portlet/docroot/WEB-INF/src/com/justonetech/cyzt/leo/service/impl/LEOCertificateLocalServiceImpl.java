@@ -64,7 +64,7 @@ public class LEOCertificateLocalServiceImpl extends LEOCertificateLocalServiceBa
 		return Collections.emptyList();
 	}
 
-	public int getProjectsCount(String xm, String zylx, String zjbh, Date yxq) {
+	public int getLEOCertificatesCount(String xm, String zylx, String zjbh, Date yxq) {
 
 		try {
 			return (int) this.dynamicQueryCount(createDynamicQuery(xm, zylx, zjbh, yxq));

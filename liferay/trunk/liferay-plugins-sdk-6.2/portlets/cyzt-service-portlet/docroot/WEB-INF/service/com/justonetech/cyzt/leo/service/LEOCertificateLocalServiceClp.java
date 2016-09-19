@@ -122,7 +122,7 @@ public class LEOCertificateLocalServiceClp implements LEOCertificateLocalService
 				"java.util.Date", "int", "int"
 			};
 
-		_methodName20 = "getProjectsCount";
+		_methodName20 = "getLEOCertificatesCount";
 
 		_methodParameterTypes20 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
@@ -730,8 +730,8 @@ public class LEOCertificateLocalServiceClp implements LEOCertificateLocalService
 	}
 
 	@Override
-	public int getProjectsCount(java.lang.String xm, java.lang.String zylx,
-		java.lang.String zjbh, java.util.Date yxq) {
+	public int getLEOCertificatesCount(java.lang.String xm,
+		java.lang.String zylx, java.lang.String zjbh, java.util.Date yxq) {
 		Object returnObj = null;
 
 		try {

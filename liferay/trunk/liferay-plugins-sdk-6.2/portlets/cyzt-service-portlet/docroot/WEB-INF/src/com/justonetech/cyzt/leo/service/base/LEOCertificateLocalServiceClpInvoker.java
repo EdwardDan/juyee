@@ -121,7 +121,7 @@ public class LEOCertificateLocalServiceClpInvoker {
 				"java.util.Date", "int", "int"
 			};
 
-		_methodName43 = "getProjectsCount";
+		_methodName43 = "getLEOCertificatesCount";
 
 		_methodParameterTypes43 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
@@ -252,7 +252,7 @@ public class LEOCertificateLocalServiceClpInvoker {
 
 		if (_methodName43.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes43, parameterTypes)) {
-			return LEOCertificateLocalServiceUtil.getProjectsCount((java.lang.String)arguments[0],
+			return LEOCertificateLocalServiceUtil.getLEOCertificatesCount((java.lang.String)arguments[0],
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
 				(java.util.Date)arguments[3]);
 		}

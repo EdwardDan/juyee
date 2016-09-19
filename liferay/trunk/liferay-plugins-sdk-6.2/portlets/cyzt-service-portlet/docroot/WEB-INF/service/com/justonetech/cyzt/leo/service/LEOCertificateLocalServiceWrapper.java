@@ -297,9 +297,10 @@ public class LEOCertificateLocalServiceWrapper
 	}
 
 	@Override
-	public int getProjectsCount(java.lang.String xm, java.lang.String zylx,
-		java.lang.String zjbh, java.util.Date yxq) {
-		return _leoCertificateLocalService.getProjectsCount(xm, zylx, zjbh, yxq);
+	public int getLEOCertificatesCount(java.lang.String xm,
+		java.lang.String zylx, java.lang.String zjbh, java.util.Date yxq) {
+		return _leoCertificateLocalService.getLEOCertificatesCount(xm, zylx,
+			zjbh, yxq);
 	}
 
 	@Override

@@ -260,8 +260,8 @@ public interface LEOCertificateLocalService extends BaseLocalService,
 		java.util.Date yxq, int start, int end);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getProjectsCount(java.lang.String xm, java.lang.String zylx,
-		java.lang.String zjbh, java.util.Date yxq);
+	public int getLEOCertificatesCount(java.lang.String xm,
+		java.lang.String zylx, java.lang.String zjbh, java.util.Date yxq);
 
 	public com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQuery(
 		java.lang.String xm, java.lang.String zylx, java.lang.String zjbh,
