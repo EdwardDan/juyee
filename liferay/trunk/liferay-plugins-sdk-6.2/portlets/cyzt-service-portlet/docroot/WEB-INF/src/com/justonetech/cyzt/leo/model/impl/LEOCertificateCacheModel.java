@@ -38,7 +38,7 @@ public class LEOCertificateCacheModel implements CacheModel<LEOCertificate>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(23);
+		StringBundler sb = new StringBundler(25);
 
 		sb.append("{certificateId=");
 		sb.append(certificateId);
@@ -56,6 +56,8 @@ public class LEOCertificateCacheModel implements CacheModel<LEOCertificate>,
 		sb.append(modifiedDate);
 		sb.append(", xm=");
 		sb.append(xm);
+		sb.append(", zjbh=");
+		sb.append(zjbh);
 		sb.append(", zylx=");
 		sb.append(zylx);
 		sb.append(", yxq=");
@@ -71,13 +73,7 @@ public class LEOCertificateCacheModel implements CacheModel<LEOCertificate>,
 	public LEOCertificate toEntityModel() {
 		LEOCertificateImpl leoCertificateImpl = new LEOCertificateImpl();
 
-		if (certificateId == null) {
-			leoCertificateImpl.setCertificateId(StringPool.BLANK);
-		}
-		else {
-			leoCertificateImpl.setCertificateId(certificateId);
-		}
-
+		leoCertificateImpl.setCertificateId(certificateId);
 		leoCertificateImpl.setGroupId(groupId);
 		leoCertificateImpl.setCompanyId(companyId);
 		leoCertificateImpl.setUserId(userId);
@@ -110,6 +106,13 @@ public class LEOCertificateCacheModel implements CacheModel<LEOCertificate>,
 			leoCertificateImpl.setXm(xm);
 		}
 
+		if (zjbh == null) {
+			leoCertificateImpl.setZjbh(StringPool.BLANK);
+		}
+		else {
+			leoCertificateImpl.setZjbh(zjbh);
+		}
+
 		if (zylx == null) {
 			leoCertificateImpl.setZylx(StringPool.BLANK);
 		}
@@ -138,7 +141,7 @@ public class LEOCertificateCacheModel implements CacheModel<LEOCertificate>,
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
-		certificateId = objectInput.readUTF();
+		certificateId = objectInput.readLong();
 		groupId = objectInput.readLong();
 		companyId = objectInput.readLong();
 		userId = objectInput.readLong();
@@ -146,6 +149,7 @@ public class LEOCertificateCacheModel implements CacheModel<LEOCertificate>,
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
 		xm = objectInput.readUTF();
+		zjbh = objectInput.readUTF();
 		zylx = objectInput.readUTF();
 		yxq = objectInput.readLong();
 		fzrq = objectInput.readLong();
@@ -154,13 +158,7 @@ public class LEOCertificateCacheModel implements CacheModel<LEOCertificate>,
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
-		if (certificateId == null) {
-			objectOutput.writeUTF(StringPool.BLANK);
-		}
-		else {
-			objectOutput.writeUTF(certificateId);
-		}
-
+		objectOutput.writeLong(certificateId);
 		objectOutput.writeLong(groupId);
 		objectOutput.writeLong(companyId);
 		objectOutput.writeLong(userId);
@@ -182,6 +180,13 @@ public class LEOCertificateCacheModel implements CacheModel<LEOCertificate>,
 			objectOutput.writeUTF(xm);
 		}
 
+		if (zjbh == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(zjbh);
+		}
+
 		if (zylx == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
@@ -193,7 +198,7 @@ public class LEOCertificateCacheModel implements CacheModel<LEOCertificate>,
 		objectOutput.writeLong(fzrq);
 	}
 
-	public String certificateId;
+	public long certificateId;
 	public long groupId;
 	public long companyId;
 	public long userId;
@@ -201,6 +206,7 @@ public class LEOCertificateCacheModel implements CacheModel<LEOCertificate>,
 	public long createDate;
 	public long modifiedDate;
 	public String xm;
+	public String zjbh;
 	public String zylx;
 	public long yxq;
 	public long fzrq;

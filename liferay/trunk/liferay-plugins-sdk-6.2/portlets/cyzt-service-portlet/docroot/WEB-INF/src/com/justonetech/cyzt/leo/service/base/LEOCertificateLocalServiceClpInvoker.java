@@ -32,11 +32,11 @@ public class LEOCertificateLocalServiceClpInvoker {
 
 		_methodName1 = "createLEOCertificate";
 
-		_methodParameterTypes1 = new String[] { "java.lang.String" };
+		_methodParameterTypes1 = new String[] { "long" };
 
 		_methodName2 = "deleteLEOCertificate";
 
-		_methodParameterTypes2 = new String[] { "java.lang.String" };
+		_methodParameterTypes2 = new String[] { "long" };
 
 		_methodName3 = "deleteLEOCertificate";
 
@@ -82,11 +82,11 @@ public class LEOCertificateLocalServiceClpInvoker {
 
 		_methodName10 = "fetchLEOCertificate";
 
-		_methodParameterTypes10 = new String[] { "java.lang.String" };
+		_methodParameterTypes10 = new String[] { "long" };
 
 		_methodName11 = "getLEOCertificate";
 
-		_methodParameterTypes11 = new String[] { "java.lang.String" };
+		_methodParameterTypes11 = new String[] { "long" };
 
 		_methodName12 = "getPersistedModel";
 
@@ -145,12 +145,12 @@ public class LEOCertificateLocalServiceClpInvoker {
 
 		if (_methodName1.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes1, parameterTypes)) {
-			return LEOCertificateLocalServiceUtil.createLEOCertificate((java.lang.String)arguments[0]);
+			return LEOCertificateLocalServiceUtil.createLEOCertificate(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName2.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes2, parameterTypes)) {
-			return LEOCertificateLocalServiceUtil.deleteLEOCertificate((java.lang.String)arguments[0]);
+			return LEOCertificateLocalServiceUtil.deleteLEOCertificate(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName3.equals(name) &&
@@ -196,12 +196,12 @@ public class LEOCertificateLocalServiceClpInvoker {
 
 		if (_methodName10.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes10, parameterTypes)) {
-			return LEOCertificateLocalServiceUtil.fetchLEOCertificate((java.lang.String)arguments[0]);
+			return LEOCertificateLocalServiceUtil.fetchLEOCertificate(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName11.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes11, parameterTypes)) {
-			return LEOCertificateLocalServiceUtil.getLEOCertificate((java.lang.String)arguments[0]);
+			return LEOCertificateLocalServiceUtil.getLEOCertificate(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName12.equals(name) &&

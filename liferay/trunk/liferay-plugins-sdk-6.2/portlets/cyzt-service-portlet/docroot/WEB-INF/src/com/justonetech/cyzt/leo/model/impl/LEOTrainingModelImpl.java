@@ -68,12 +68,12 @@ public class LEOTrainingModelImpl extends BaseModelImpl<LEOTraining>
 			{ "userName", Types.VARCHAR },
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
-			{ "zjbh", Types.VARCHAR },
+			{ "certificateId", Types.BIGINT },
 			{ "pxsj", Types.TIMESTAMP },
 			{ "xcjysj", Types.TIMESTAMP },
 			{ "pxnr", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table cyzt_LEOTraining (trainingId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,zjbh VARCHAR(75) null,pxsj DATE null,xcjysj DATE null,pxnr VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table cyzt_LEOTraining (trainingId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,certificateId LONG,pxsj DATE null,xcjysj DATE null,pxnr VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table cyzt_LEOTraining";
 	public static final String ORDER_BY_JPQL = " ORDER BY leoTraining.trainingId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY cyzt_LEOTraining.trainingId ASC";
@@ -89,7 +89,7 @@ public class LEOTrainingModelImpl extends BaseModelImpl<LEOTraining>
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.column.bitmask.enabled.com.justonetech.cyzt.leo.model.LEOTraining"),
 			true);
-	public static long ZJBH_COLUMN_BITMASK = 1L;
+	public static long CERTIFICATEID_COLUMN_BITMASK = 1L;
 	public static long TRAININGID_COLUMN_BITMASK = 2L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
 				"lock.expiration.time.com.justonetech.cyzt.leo.model.LEOTraining"));
@@ -138,7 +138,7 @@ public class LEOTrainingModelImpl extends BaseModelImpl<LEOTraining>
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("zjbh", getZjbh());
+		attributes.put("certificateId", getCertificateId());
 		attributes.put("pxsj", getPxsj());
 		attributes.put("xcjysj", getXcjysj());
 		attributes.put("pxnr", getPxnr());
@@ -190,10 +190,10 @@ public class LEOTrainingModelImpl extends BaseModelImpl<LEOTraining>
 			setModifiedDate(modifiedDate);
 		}
 
-		String zjbh = (String)attributes.get("zjbh");
+		Long certificateId = (Long)attributes.get("certificateId");
 
-		if (zjbh != null) {
-			setZjbh(zjbh);
+		if (certificateId != null) {
+			setCertificateId(certificateId);
 		}
 
 		Date pxsj = (Date)attributes.get("pxsj");
@@ -301,28 +301,25 @@ public class LEOTrainingModelImpl extends BaseModelImpl<LEOTraining>
 	}
 
 	@Override
-	public String getZjbh() {
-		if (_zjbh == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _zjbh;
-		}
+	public long getCertificateId() {
+		return _certificateId;
 	}
 
 	@Override
-	public void setZjbh(String zjbh) {
-		_columnBitmask |= ZJBH_COLUMN_BITMASK;
+	public void setCertificateId(long certificateId) {
+		_columnBitmask |= CERTIFICATEID_COLUMN_BITMASK;
 
-		if (_originalZjbh == null) {
-			_originalZjbh = _zjbh;
+		if (!_setOriginalCertificateId) {
+			_setOriginalCertificateId = true;
+
+			_originalCertificateId = _certificateId;
 		}
 
-		_zjbh = zjbh;
+		_certificateId = certificateId;
 	}
 
-	public String getOriginalZjbh() {
-		return GetterUtil.getString(_originalZjbh);
+	public long getOriginalCertificateId() {
+		return _originalCertificateId;
 	}
 
 	@Override
@@ -398,7 +395,7 @@ public class LEOTrainingModelImpl extends BaseModelImpl<LEOTraining>
 		leoTrainingImpl.setUserName(getUserName());
 		leoTrainingImpl.setCreateDate(getCreateDate());
 		leoTrainingImpl.setModifiedDate(getModifiedDate());
-		leoTrainingImpl.setZjbh(getZjbh());
+		leoTrainingImpl.setCertificateId(getCertificateId());
 		leoTrainingImpl.setPxsj(getPxsj());
 		leoTrainingImpl.setXcjysj(getXcjysj());
 		leoTrainingImpl.setPxnr(getPxnr());
@@ -454,7 +451,9 @@ public class LEOTrainingModelImpl extends BaseModelImpl<LEOTraining>
 	public void resetOriginalValues() {
 		LEOTrainingModelImpl leoTrainingModelImpl = this;
 
-		leoTrainingModelImpl._originalZjbh = leoTrainingModelImpl._zjbh;
+		leoTrainingModelImpl._originalCertificateId = leoTrainingModelImpl._certificateId;
+
+		leoTrainingModelImpl._setOriginalCertificateId = false;
 
 		leoTrainingModelImpl._columnBitmask = 0;
 	}
@@ -497,13 +496,7 @@ public class LEOTrainingModelImpl extends BaseModelImpl<LEOTraining>
 			leoTrainingCacheModel.modifiedDate = Long.MIN_VALUE;
 		}
 
-		leoTrainingCacheModel.zjbh = getZjbh();
-
-		String zjbh = leoTrainingCacheModel.zjbh;
-
-		if ((zjbh != null) && (zjbh.length() == 0)) {
-			leoTrainingCacheModel.zjbh = null;
-		}
+		leoTrainingCacheModel.certificateId = getCertificateId();
 
 		Date pxsj = getPxsj();
 
@@ -552,8 +545,8 @@ public class LEOTrainingModelImpl extends BaseModelImpl<LEOTraining>
 		sb.append(getCreateDate());
 		sb.append(", modifiedDate=");
 		sb.append(getModifiedDate());
-		sb.append(", zjbh=");
-		sb.append(getZjbh());
+		sb.append(", certificateId=");
+		sb.append(getCertificateId());
 		sb.append(", pxsj=");
 		sb.append(getPxsj());
 		sb.append(", xcjysj=");
@@ -602,8 +595,8 @@ public class LEOTrainingModelImpl extends BaseModelImpl<LEOTraining>
 		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>zjbh</column-name><column-value><![CDATA[");
-		sb.append(getZjbh());
+			"<column><column-name>certificateId</column-name><column-value><![CDATA[");
+		sb.append(getCertificateId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>pxsj</column-name><column-value><![CDATA[");
@@ -635,8 +628,9 @@ public class LEOTrainingModelImpl extends BaseModelImpl<LEOTraining>
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private String _zjbh;
-	private String _originalZjbh;
+	private long _certificateId;
+	private long _originalCertificateId;
+	private boolean _setOriginalCertificateId;
 	private Date _pxsj;
 	private Date _xcjysj;
 	private String _pxnr;

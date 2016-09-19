@@ -33,11 +33,11 @@ public class LEOCertificateLocalServiceClp implements LEOCertificateLocalService
 
 		_methodName1 = "createLEOCertificate";
 
-		_methodParameterTypes1 = new String[] { "java.lang.String" };
+		_methodParameterTypes1 = new String[] { "long" };
 
 		_methodName2 = "deleteLEOCertificate";
 
-		_methodParameterTypes2 = new String[] { "java.lang.String" };
+		_methodParameterTypes2 = new String[] { "long" };
 
 		_methodName3 = "deleteLEOCertificate";
 
@@ -83,11 +83,11 @@ public class LEOCertificateLocalServiceClp implements LEOCertificateLocalService
 
 		_methodName10 = "fetchLEOCertificate";
 
-		_methodParameterTypes10 = new String[] { "java.lang.String" };
+		_methodParameterTypes10 = new String[] { "long" };
 
 		_methodName11 = "getLEOCertificate";
 
-		_methodParameterTypes11 = new String[] { "java.lang.String" };
+		_methodParameterTypes11 = new String[] { "long" };
 
 		_methodName12 = "getPersistedModel";
 
@@ -169,13 +169,12 @@ public class LEOCertificateLocalServiceClp implements LEOCertificateLocalService
 
 	@Override
 	public com.justonetech.cyzt.leo.model.LEOCertificate createLEOCertificate(
-		java.lang.String certificateId) {
+		long certificateId) {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName1,
-					_methodParameterTypes1,
-					new Object[] { ClpSerializer.translateInput(certificateId) });
+					_methodParameterTypes1, new Object[] { certificateId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -194,15 +193,14 @@ public class LEOCertificateLocalServiceClp implements LEOCertificateLocalService
 
 	@Override
 	public com.justonetech.cyzt.leo.model.LEOCertificate deleteLEOCertificate(
-		java.lang.String certificateId)
+		long certificateId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName2,
-					_methodParameterTypes2,
-					new Object[] { ClpSerializer.translateInput(certificateId) });
+					_methodParameterTypes2, new Object[] { certificateId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -456,14 +454,13 @@ public class LEOCertificateLocalServiceClp implements LEOCertificateLocalService
 
 	@Override
 	public com.justonetech.cyzt.leo.model.LEOCertificate fetchLEOCertificate(
-		java.lang.String certificateId)
+		long certificateId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName10,
-					_methodParameterTypes10,
-					new Object[] { ClpSerializer.translateInput(certificateId) });
+					_methodParameterTypes10, new Object[] { certificateId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -486,15 +483,14 @@ public class LEOCertificateLocalServiceClp implements LEOCertificateLocalService
 
 	@Override
 	public com.justonetech.cyzt.leo.model.LEOCertificate getLEOCertificate(
-		java.lang.String certificateId)
+		long certificateId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName11,
-					_methodParameterTypes11,
-					new Object[] { ClpSerializer.translateInput(certificateId) });
+					_methodParameterTypes11, new Object[] { certificateId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);

@@ -53,29 +53,28 @@ public interface LEOCertificateModel extends BaseModel<LEOCertificate>,
 	 *
 	 * @return the primary key of this l e o certificate
 	 */
-	public String getPrimaryKey();
+	public long getPrimaryKey();
 
 	/**
 	 * Sets the primary key of this l e o certificate.
 	 *
 	 * @param primaryKey the primary key of this l e o certificate
 	 */
-	public void setPrimaryKey(String primaryKey);
+	public void setPrimaryKey(long primaryKey);
 
 	/**
 	 * Returns the certificate ID of this l e o certificate.
 	 *
 	 * @return the certificate ID of this l e o certificate
 	 */
-	@AutoEscape
-	public String getCertificateId();
+	public long getCertificateId();
 
 	/**
 	 * Sets the certificate ID of this l e o certificate.
 	 *
 	 * @param certificateId the certificate ID of this l e o certificate
 	 */
-	public void setCertificateId(String certificateId);
+	public void setCertificateId(long certificateId);
 
 	/**
 	 * Returns the group ID of this l e o certificate.
@@ -205,6 +204,21 @@ public interface LEOCertificateModel extends BaseModel<LEOCertificate>,
 	 * @param xm the xm of this l e o certificate
 	 */
 	public void setXm(String xm);
+
+	/**
+	 * Returns the zjbh of this l e o certificate.
+	 *
+	 * @return the zjbh of this l e o certificate
+	 */
+	@AutoEscape
+	public String getZjbh();
+
+	/**
+	 * Sets the zjbh of this l e o certificate.
+	 *
+	 * @param zjbh the zjbh of this l e o certificate
+	 */
+	public void setZjbh(String zjbh);
 
 	/**
 	 * Returns the zylx of this l e o certificate.

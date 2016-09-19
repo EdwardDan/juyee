@@ -52,12 +52,12 @@ public class LEOCertificateClp extends BaseModelImpl<LEOCertificate>
 	}
 
 	@Override
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _certificateId;
 	}
 
 	@Override
-	public void setPrimaryKey(String primaryKey) {
+	public void setPrimaryKey(long primaryKey) {
 		setCertificateId(primaryKey);
 	}
 
@@ -68,7 +68,7 @@ public class LEOCertificateClp extends BaseModelImpl<LEOCertificate>
 
 	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
-		setPrimaryKey((String)primaryKeyObj);
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	@Override
@@ -83,6 +83,7 @@ public class LEOCertificateClp extends BaseModelImpl<LEOCertificate>
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("xm", getXm());
+		attributes.put("zjbh", getZjbh());
 		attributes.put("zylx", getZylx());
 		attributes.put("yxq", getYxq());
 		attributes.put("fzrq", getFzrq());
@@ -92,7 +93,7 @@ public class LEOCertificateClp extends BaseModelImpl<LEOCertificate>
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
-		String certificateId = (String)attributes.get("certificateId");
+		Long certificateId = (Long)attributes.get("certificateId");
 
 		if (certificateId != null) {
 			setCertificateId(certificateId);
@@ -140,6 +141,12 @@ public class LEOCertificateClp extends BaseModelImpl<LEOCertificate>
 			setXm(xm);
 		}
 
+		String zjbh = (String)attributes.get("zjbh");
+
+		if (zjbh != null) {
+			setZjbh(zjbh);
+		}
+
 		String zylx = (String)attributes.get("zylx");
 
 		if (zylx != null) {
@@ -160,19 +167,19 @@ public class LEOCertificateClp extends BaseModelImpl<LEOCertificate>
 	}
 
 	@Override
-	public String getCertificateId() {
+	public long getCertificateId() {
 		return _certificateId;
 	}
 
 	@Override
-	public void setCertificateId(String certificateId) {
+	public void setCertificateId(long certificateId) {
 		_certificateId = certificateId;
 
 		if (_leoCertificateRemoteModel != null) {
 			try {
 				Class<?> clazz = _leoCertificateRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setCertificateId", String.class);
+				Method method = clazz.getMethod("setCertificateId", long.class);
 
 				method.invoke(_leoCertificateRemoteModel, certificateId);
 			}
@@ -354,6 +361,29 @@ public class LEOCertificateClp extends BaseModelImpl<LEOCertificate>
 	}
 
 	@Override
+	public String getZjbh() {
+		return _zjbh;
+	}
+
+	@Override
+	public void setZjbh(String zjbh) {
+		_zjbh = zjbh;
+
+		if (_leoCertificateRemoteModel != null) {
+			try {
+				Class<?> clazz = _leoCertificateRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setZjbh", String.class);
+
+				method.invoke(_leoCertificateRemoteModel, zjbh);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
 	public String getZylx() {
 		return _zylx;
 	}
@@ -501,6 +531,7 @@ public class LEOCertificateClp extends BaseModelImpl<LEOCertificate>
 		clone.setCreateDate(getCreateDate());
 		clone.setModifiedDate(getModifiedDate());
 		clone.setXm(getXm());
+		clone.setZjbh(getZjbh());
 		clone.setZylx(getZylx());
 		clone.setYxq(getYxq());
 		clone.setFzrq(getFzrq());
@@ -510,9 +541,17 @@ public class LEOCertificateClp extends BaseModelImpl<LEOCertificate>
 
 	@Override
 	public int compareTo(LEOCertificate leoCertificate) {
-		String primaryKey = leoCertificate.getPrimaryKey();
+		long primaryKey = leoCertificate.getPrimaryKey();
 
-		return getPrimaryKey().compareTo(primaryKey);
+		if (getPrimaryKey() < primaryKey) {
+			return -1;
+		}
+		else if (getPrimaryKey() > primaryKey) {
+			return 1;
+		}
+		else {
+			return 0;
+		}
 	}
 
 	@Override
@@ -527,9 +566,9 @@ public class LEOCertificateClp extends BaseModelImpl<LEOCertificate>
 
 		LEOCertificateClp leoCertificate = (LEOCertificateClp)obj;
 
-		String primaryKey = leoCertificate.getPrimaryKey();
+		long primaryKey = leoCertificate.getPrimaryKey();
 
-		if (getPrimaryKey().equals(primaryKey)) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {
@@ -543,12 +582,12 @@ public class LEOCertificateClp extends BaseModelImpl<LEOCertificate>
 
 	@Override
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(23);
+		StringBundler sb = new StringBundler(25);
 
 		sb.append("{certificateId=");
 		sb.append(getCertificateId());
@@ -566,6 +605,8 @@ public class LEOCertificateClp extends BaseModelImpl<LEOCertificate>
 		sb.append(getModifiedDate());
 		sb.append(", xm=");
 		sb.append(getXm());
+		sb.append(", zjbh=");
+		sb.append(getZjbh());
 		sb.append(", zylx=");
 		sb.append(getZylx());
 		sb.append(", yxq=");
@@ -579,7 +620,7 @@ public class LEOCertificateClp extends BaseModelImpl<LEOCertificate>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(40);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.cyzt.leo.model.LEOCertificate");
@@ -618,6 +659,10 @@ public class LEOCertificateClp extends BaseModelImpl<LEOCertificate>
 		sb.append(getXm());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>zjbh</column-name><column-value><![CDATA[");
+		sb.append(getZjbh());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>zylx</column-name><column-value><![CDATA[");
 		sb.append(getZylx());
 		sb.append("]]></column-value></column>");
@@ -635,7 +680,7 @@ public class LEOCertificateClp extends BaseModelImpl<LEOCertificate>
 		return sb.toString();
 	}
 
-	private String _certificateId;
+	private long _certificateId;
 	private long _groupId;
 	private long _companyId;
 	private long _userId;
@@ -644,6 +689,7 @@ public class LEOCertificateClp extends BaseModelImpl<LEOCertificate>
 	private Date _createDate;
 	private Date _modifiedDate;
 	private String _xm;
+	private String _zjbh;
 	private String _zylx;
 	private Date _yxq;
 	private Date _fzrq;

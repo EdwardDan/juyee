@@ -115,13 +115,13 @@ public class LEOTrainingLocalServiceClp implements LEOTrainingLocalService {
 
 		_methodParameterTypes17 = new String[] { "java.lang.String" };
 
-		_methodName19 = "findByZjbh";
+		_methodName19 = "findByCertificateId";
 
-		_methodParameterTypes19 = new String[] { "java.lang.String", "int", "int" };
+		_methodParameterTypes19 = new String[] { "long", "int", "int" };
 
-		_methodName20 = "countByZjbh";
+		_methodName20 = "countByCertificateId";
 
-		_methodParameterTypes20 = new String[] { "java.lang.String" };
+		_methodParameterTypes20 = new String[] { "long" };
 	}
 
 	@Override
@@ -675,14 +675,14 @@ public class LEOTrainingLocalServiceClp implements LEOTrainingLocalService {
 	}
 
 	@Override
-	public java.util.List<com.justonetech.cyzt.leo.model.LEOTraining> findByZjbh(
-		java.lang.String zjbh, int start, int end) {
+	public java.util.List<com.justonetech.cyzt.leo.model.LEOTraining> findByCertificateId(
+		long certificateId, int start, int end) {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName19,
 					_methodParameterTypes19,
-					new Object[] { ClpSerializer.translateInput(zjbh), start, end });
+					new Object[] { certificateId, start, end });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -700,13 +700,12 @@ public class LEOTrainingLocalServiceClp implements LEOTrainingLocalService {
 	}
 
 	@Override
-	public int countByZjbh(java.lang.String zjbh) {
+	public int countByCertificateId(long certificateId) {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName20,
-					_methodParameterTypes20,
-					new Object[] { ClpSerializer.translateInput(zjbh) });
+					_methodParameterTypes20, new Object[] { certificateId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);

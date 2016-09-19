@@ -254,8 +254,8 @@ public interface LEOTrainingLocalService extends BaseLocalService,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
 
-	public java.util.List<com.justonetech.cyzt.leo.model.LEOTraining> findByZjbh(
-		java.lang.String zjbh, int start, int end);
+	public java.util.List<com.justonetech.cyzt.leo.model.LEOTraining> findByCertificateId(
+		long certificateId, int start, int end);
 
-	public int countByZjbh(java.lang.String zjbh);
+	public int countByCertificateId(long certificateId);
 }

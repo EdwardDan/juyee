@@ -45,10 +45,10 @@ public class LEOTrainingLocalServiceImpl extends LEOTrainingLocalServiceBaseImpl
 	 */
 	private static Log log = LogFactoryUtil.getLog(LEOTrainingLocalServiceImpl.class);
 
-	public List<LEOTraining> findByZjbh(String zjbh, int start, int end) {
+	public List<LEOTraining> findByCertificateId(long certificateId, int start, int end) {
 
 		try {
-			return leoTrainingPersistence.findByZjbh(zjbh, start, end);
+			return leoTrainingPersistence.findByCertificateId(certificateId, start, end);
 		}
 		catch (SystemException e) {
 			log.info(e.getMessage());
@@ -56,10 +56,10 @@ public class LEOTrainingLocalServiceImpl extends LEOTrainingLocalServiceBaseImpl
 		return Collections.emptyList();
 	}
 
-	public int countByZjbh(String zjbh) {
+	public int countByCertificateId(long certificateId) {
 
 		try {
-			return leoTrainingPersistence.countByZjbh(zjbh);
+			return leoTrainingPersistence.countByCertificateId(certificateId);
 		}
 		catch (SystemException e) {
 			log.info(e.getMessage());

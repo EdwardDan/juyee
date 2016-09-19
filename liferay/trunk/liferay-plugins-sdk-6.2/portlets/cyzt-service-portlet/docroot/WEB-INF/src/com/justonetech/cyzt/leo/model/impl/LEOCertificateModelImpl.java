@@ -25,7 +25,11 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.impl.BaseModelImpl;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
+
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import java.io.Serializable;
 
@@ -57,7 +61,7 @@ public class LEOCertificateModelImpl extends BaseModelImpl<LEOCertificate>
 	 */
 	public static final String TABLE_NAME = "cyzt_LEOCertificate";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "certificateId", Types.VARCHAR },
+			{ "certificateId", Types.BIGINT },
 			{ "groupId", Types.BIGINT },
 			{ "companyId", Types.BIGINT },
 			{ "userId", Types.BIGINT },
@@ -65,11 +69,12 @@ public class LEOCertificateModelImpl extends BaseModelImpl<LEOCertificate>
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
 			{ "xm", Types.VARCHAR },
+			{ "zjbh", Types.VARCHAR },
 			{ "zylx", Types.VARCHAR },
 			{ "yxq", Types.TIMESTAMP },
 			{ "fzrq", Types.TIMESTAMP }
 		};
-	public static final String TABLE_SQL_CREATE = "create table cyzt_LEOCertificate (certificateId VARCHAR(75) not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,xm VARCHAR(75) null,zylx VARCHAR(75) null,yxq DATE null,fzrq DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table cyzt_LEOCertificate (certificateId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,xm VARCHAR(75) null,zjbh VARCHAR(75) null,zylx VARCHAR(75) null,yxq DATE null,fzrq DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table cyzt_LEOCertificate";
 	public static final String ORDER_BY_JPQL = " ORDER BY leoCertificate.certificateId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY cyzt_LEOCertificate.certificateId ASC";
@@ -90,12 +95,12 @@ public class LEOCertificateModelImpl extends BaseModelImpl<LEOCertificate>
 	}
 
 	@Override
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _certificateId;
 	}
 
 	@Override
-	public void setPrimaryKey(String primaryKey) {
+	public void setPrimaryKey(long primaryKey) {
 		setCertificateId(primaryKey);
 	}
 
@@ -106,7 +111,7 @@ public class LEOCertificateModelImpl extends BaseModelImpl<LEOCertificate>
 
 	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
-		setPrimaryKey((String)primaryKeyObj);
+		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
 	@Override
@@ -131,6 +136,7 @@ public class LEOCertificateModelImpl extends BaseModelImpl<LEOCertificate>
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("xm", getXm());
+		attributes.put("zjbh", getZjbh());
 		attributes.put("zylx", getZylx());
 		attributes.put("yxq", getYxq());
 		attributes.put("fzrq", getFzrq());
@@ -140,7 +146,7 @@ public class LEOCertificateModelImpl extends BaseModelImpl<LEOCertificate>
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
-		String certificateId = (String)attributes.get("certificateId");
+		Long certificateId = (Long)attributes.get("certificateId");
 
 		if (certificateId != null) {
 			setCertificateId(certificateId);
@@ -188,6 +194,12 @@ public class LEOCertificateModelImpl extends BaseModelImpl<LEOCertificate>
 			setXm(xm);
 		}
 
+		String zjbh = (String)attributes.get("zjbh");
+
+		if (zjbh != null) {
+			setZjbh(zjbh);
+		}
+
 		String zylx = (String)attributes.get("zylx");
 
 		if (zylx != null) {
@@ -208,17 +220,12 @@ public class LEOCertificateModelImpl extends BaseModelImpl<LEOCertificate>
 	}
 
 	@Override
-	public String getCertificateId() {
-		if (_certificateId == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _certificateId;
-		}
+	public long getCertificateId() {
+		return _certificateId;
 	}
 
 	@Override
-	public void setCertificateId(String certificateId) {
+	public void setCertificateId(long certificateId) {
 		_certificateId = certificateId;
 	}
 
@@ -313,6 +320,21 @@ public class LEOCertificateModelImpl extends BaseModelImpl<LEOCertificate>
 	}
 
 	@Override
+	public String getZjbh() {
+		if (_zjbh == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _zjbh;
+		}
+	}
+
+	@Override
+	public void setZjbh(String zjbh) {
+		_zjbh = zjbh;
+	}
+
+	@Override
 	public String getZylx() {
 		if (_zylx == null) {
 			return StringPool.BLANK;
@@ -348,6 +370,19 @@ public class LEOCertificateModelImpl extends BaseModelImpl<LEOCertificate>
 	}
 
 	@Override
+	public ExpandoBridge getExpandoBridge() {
+		return ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
+			LEOCertificate.class.getName(), getPrimaryKey());
+	}
+
+	@Override
+	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
+		ExpandoBridge expandoBridge = getExpandoBridge();
+
+		expandoBridge.setAttributes(serviceContext);
+	}
+
+	@Override
 	public LEOCertificate toEscapedModel() {
 		if (_escapedModel == null) {
 			_escapedModel = (LEOCertificate)ProxyUtil.newProxyInstance(_classLoader,
@@ -369,6 +404,7 @@ public class LEOCertificateModelImpl extends BaseModelImpl<LEOCertificate>
 		leoCertificateImpl.setCreateDate(getCreateDate());
 		leoCertificateImpl.setModifiedDate(getModifiedDate());
 		leoCertificateImpl.setXm(getXm());
+		leoCertificateImpl.setZjbh(getZjbh());
 		leoCertificateImpl.setZylx(getZylx());
 		leoCertificateImpl.setYxq(getYxq());
 		leoCertificateImpl.setFzrq(getFzrq());
@@ -380,9 +416,17 @@ public class LEOCertificateModelImpl extends BaseModelImpl<LEOCertificate>
 
 	@Override
 	public int compareTo(LEOCertificate leoCertificate) {
-		String primaryKey = leoCertificate.getPrimaryKey();
+		long primaryKey = leoCertificate.getPrimaryKey();
 
-		return getPrimaryKey().compareTo(primaryKey);
+		if (getPrimaryKey() < primaryKey) {
+			return -1;
+		}
+		else if (getPrimaryKey() > primaryKey) {
+			return 1;
+		}
+		else {
+			return 0;
+		}
 	}
 
 	@Override
@@ -397,9 +441,9 @@ public class LEOCertificateModelImpl extends BaseModelImpl<LEOCertificate>
 
 		LEOCertificate leoCertificate = (LEOCertificate)obj;
 
-		String primaryKey = leoCertificate.getPrimaryKey();
+		long primaryKey = leoCertificate.getPrimaryKey();
 
-		if (getPrimaryKey().equals(primaryKey)) {
+		if (getPrimaryKey() == primaryKey) {
 			return true;
 		}
 		else {
@@ -409,7 +453,7 @@ public class LEOCertificateModelImpl extends BaseModelImpl<LEOCertificate>
 
 	@Override
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
 	@Override
@@ -421,12 +465,6 @@ public class LEOCertificateModelImpl extends BaseModelImpl<LEOCertificate>
 		LEOCertificateCacheModel leoCertificateCacheModel = new LEOCertificateCacheModel();
 
 		leoCertificateCacheModel.certificateId = getCertificateId();
-
-		String certificateId = leoCertificateCacheModel.certificateId;
-
-		if ((certificateId != null) && (certificateId.length() == 0)) {
-			leoCertificateCacheModel.certificateId = null;
-		}
 
 		leoCertificateCacheModel.groupId = getGroupId();
 
@@ -468,6 +506,14 @@ public class LEOCertificateModelImpl extends BaseModelImpl<LEOCertificate>
 			leoCertificateCacheModel.xm = null;
 		}
 
+		leoCertificateCacheModel.zjbh = getZjbh();
+
+		String zjbh = leoCertificateCacheModel.zjbh;
+
+		if ((zjbh != null) && (zjbh.length() == 0)) {
+			leoCertificateCacheModel.zjbh = null;
+		}
+
 		leoCertificateCacheModel.zylx = getZylx();
 
 		String zylx = leoCertificateCacheModel.zylx;
@@ -499,7 +545,7 @@ public class LEOCertificateModelImpl extends BaseModelImpl<LEOCertificate>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(23);
+		StringBundler sb = new StringBundler(25);
 
 		sb.append("{certificateId=");
 		sb.append(getCertificateId());
@@ -517,6 +563,8 @@ public class LEOCertificateModelImpl extends BaseModelImpl<LEOCertificate>
 		sb.append(getModifiedDate());
 		sb.append(", xm=");
 		sb.append(getXm());
+		sb.append(", zjbh=");
+		sb.append(getZjbh());
 		sb.append(", zylx=");
 		sb.append(getZylx());
 		sb.append(", yxq=");
@@ -530,7 +578,7 @@ public class LEOCertificateModelImpl extends BaseModelImpl<LEOCertificate>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(40);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.cyzt.leo.model.LEOCertificate");
@@ -569,6 +617,10 @@ public class LEOCertificateModelImpl extends BaseModelImpl<LEOCertificate>
 		sb.append(getXm());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>zjbh</column-name><column-value><![CDATA[");
+		sb.append(getZjbh());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>zylx</column-name><column-value><![CDATA[");
 		sb.append(getZylx());
 		sb.append("]]></column-value></column>");
@@ -590,7 +642,7 @@ public class LEOCertificateModelImpl extends BaseModelImpl<LEOCertificate>
 	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			LEOCertificate.class
 		};
-	private String _certificateId;
+	private long _certificateId;
 	private long _groupId;
 	private long _companyId;
 	private long _userId;
@@ -599,6 +651,7 @@ public class LEOCertificateModelImpl extends BaseModelImpl<LEOCertificate>
 	private Date _createDate;
 	private Date _modifiedDate;
 	private String _xm;
+	private String _zjbh;
 	private String _zylx;
 	private Date _yxq;
 	private Date _fzrq;

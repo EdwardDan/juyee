@@ -53,7 +53,7 @@ public class LEOCertificateLocalServiceWrapper
 	*/
 	@Override
 	public com.justonetech.cyzt.leo.model.LEOCertificate createLEOCertificate(
-		java.lang.String certificateId) {
+		long certificateId) {
 		return _leoCertificateLocalService.createLEOCertificate(certificateId);
 	}
 
@@ -67,7 +67,7 @@ public class LEOCertificateLocalServiceWrapper
 	*/
 	@Override
 	public com.justonetech.cyzt.leo.model.LEOCertificate deleteLEOCertificate(
-		java.lang.String certificateId)
+		long certificateId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _leoCertificateLocalService.deleteLEOCertificate(certificateId);
@@ -186,7 +186,7 @@ public class LEOCertificateLocalServiceWrapper
 
 	@Override
 	public com.justonetech.cyzt.leo.model.LEOCertificate fetchLEOCertificate(
-		java.lang.String certificateId)
+		long certificateId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _leoCertificateLocalService.fetchLEOCertificate(certificateId);
 	}
@@ -201,7 +201,7 @@ public class LEOCertificateLocalServiceWrapper
 	*/
 	@Override
 	public com.justonetech.cyzt.leo.model.LEOCertificate getLEOCertificate(
-		java.lang.String certificateId)
+		long certificateId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _leoCertificateLocalService.getLEOCertificate(certificateId);

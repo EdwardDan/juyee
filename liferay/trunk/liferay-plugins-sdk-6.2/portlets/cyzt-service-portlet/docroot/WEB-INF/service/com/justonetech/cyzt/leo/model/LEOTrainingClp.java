@@ -82,7 +82,7 @@ public class LEOTrainingClp extends BaseModelImpl<LEOTraining>
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("zjbh", getZjbh());
+		attributes.put("certificateId", getCertificateId());
 		attributes.put("pxsj", getPxsj());
 		attributes.put("xcjysj", getXcjysj());
 		attributes.put("pxnr", getPxnr());
@@ -134,10 +134,10 @@ public class LEOTrainingClp extends BaseModelImpl<LEOTraining>
 			setModifiedDate(modifiedDate);
 		}
 
-		String zjbh = (String)attributes.get("zjbh");
+		Long certificateId = (Long)attributes.get("certificateId");
 
-		if (zjbh != null) {
-			setZjbh(zjbh);
+		if (certificateId != null) {
+			setCertificateId(certificateId);
 		}
 
 		Date pxsj = (Date)attributes.get("pxsj");
@@ -331,21 +331,21 @@ public class LEOTrainingClp extends BaseModelImpl<LEOTraining>
 	}
 
 	@Override
-	public String getZjbh() {
-		return _zjbh;
+	public long getCertificateId() {
+		return _certificateId;
 	}
 
 	@Override
-	public void setZjbh(String zjbh) {
-		_zjbh = zjbh;
+	public void setCertificateId(long certificateId) {
+		_certificateId = certificateId;
 
 		if (_leoTrainingRemoteModel != null) {
 			try {
 				Class<?> clazz = _leoTrainingRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setZjbh", String.class);
+				Method method = clazz.getMethod("setCertificateId", long.class);
 
-				method.invoke(_leoTrainingRemoteModel, zjbh);
+				method.invoke(_leoTrainingRemoteModel, certificateId);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -498,7 +498,7 @@ public class LEOTrainingClp extends BaseModelImpl<LEOTraining>
 		clone.setUserName(getUserName());
 		clone.setCreateDate(getCreateDate());
 		clone.setModifiedDate(getModifiedDate());
-		clone.setZjbh(getZjbh());
+		clone.setCertificateId(getCertificateId());
 		clone.setPxsj(getPxsj());
 		clone.setXcjysj(getXcjysj());
 		clone.setPxnr(getPxnr());
@@ -570,8 +570,8 @@ public class LEOTrainingClp extends BaseModelImpl<LEOTraining>
 		sb.append(getCreateDate());
 		sb.append(", modifiedDate=");
 		sb.append(getModifiedDate());
-		sb.append(", zjbh=");
-		sb.append(getZjbh());
+		sb.append(", certificateId=");
+		sb.append(getCertificateId());
 		sb.append(", pxsj=");
 		sb.append(getPxsj());
 		sb.append(", xcjysj=");
@@ -620,8 +620,8 @@ public class LEOTrainingClp extends BaseModelImpl<LEOTraining>
 		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>zjbh</column-name><column-value><![CDATA[");
-		sb.append(getZjbh());
+			"<column><column-name>certificateId</column-name><column-value><![CDATA[");
+		sb.append(getCertificateId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>pxsj</column-name><column-value><![CDATA[");
@@ -649,7 +649,7 @@ public class LEOTrainingClp extends BaseModelImpl<LEOTraining>
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private String _zjbh;
+	private long _certificateId;
 	private Date _pxsj;
 	private Date _xcjysj;
 	private String _pxnr;

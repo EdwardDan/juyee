@@ -190,19 +190,18 @@ public interface LEOTrainingModel extends BaseModel<LEOTraining>, GroupedModel {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
-	 * Returns the zjbh of this l e o training.
+	 * Returns the certificate ID of this l e o training.
 	 *
-	 * @return the zjbh of this l e o training
+	 * @return the certificate ID of this l e o training
 	 */
-	@AutoEscape
-	public String getZjbh();
+	public long getCertificateId();
 
 	/**
-	 * Sets the zjbh of this l e o training.
+	 * Sets the certificate ID of this l e o training.
 	 *
-	 * @param zjbh the zjbh of this l e o training
+	 * @param certificateId the certificate ID of this l e o training
 	 */
-	public void setZjbh(String zjbh);
+	public void setCertificateId(long certificateId);
 
 	/**
 	 * Returns the pxsj of this l e o training.

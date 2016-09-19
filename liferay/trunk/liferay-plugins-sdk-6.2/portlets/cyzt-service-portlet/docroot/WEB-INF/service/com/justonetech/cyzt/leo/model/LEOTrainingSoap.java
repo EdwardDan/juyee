@@ -37,7 +37,7 @@ public class LEOTrainingSoap implements Serializable {
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
-		soapModel.setZjbh(model.getZjbh());
+		soapModel.setCertificateId(model.getCertificateId());
 		soapModel.setPxsj(model.getPxsj());
 		soapModel.setXcjysj(model.getXcjysj());
 		soapModel.setPxnr(model.getPxnr());
@@ -149,12 +149,12 @@ public class LEOTrainingSoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
-	public String getZjbh() {
-		return _zjbh;
+	public long getCertificateId() {
+		return _certificateId;
 	}
 
-	public void setZjbh(String zjbh) {
-		_zjbh = zjbh;
+	public void setCertificateId(long certificateId) {
+		_certificateId = certificateId;
 	}
 
 	public Date getPxsj() {
@@ -188,7 +188,7 @@ public class LEOTrainingSoap implements Serializable {
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private String _zjbh;
+	private long _certificateId;
 	private Date _pxsj;
 	private Date _xcjysj;
 	private String _pxnr;

@@ -57,7 +57,7 @@ public class LEOTrainingWrapper implements LEOTraining,
 		attributes.put("userName", getUserName());
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
-		attributes.put("zjbh", getZjbh());
+		attributes.put("certificateId", getCertificateId());
 		attributes.put("pxsj", getPxsj());
 		attributes.put("xcjysj", getXcjysj());
 		attributes.put("pxnr", getPxnr());
@@ -109,10 +109,10 @@ public class LEOTrainingWrapper implements LEOTraining,
 			setModifiedDate(modifiedDate);
 		}
 
-		String zjbh = (String)attributes.get("zjbh");
+		Long certificateId = (Long)attributes.get("certificateId");
 
-		if (zjbh != null) {
-			setZjbh(zjbh);
+		if (certificateId != null) {
+			setCertificateId(certificateId);
 		}
 
 		Date pxsj = (Date)attributes.get("pxsj");
@@ -317,23 +317,23 @@ public class LEOTrainingWrapper implements LEOTraining,
 	}
 
 	/**
-	* Returns the zjbh of this l e o training.
+	* Returns the certificate ID of this l e o training.
 	*
-	* @return the zjbh of this l e o training
+	* @return the certificate ID of this l e o training
 	*/
 	@Override
-	public java.lang.String getZjbh() {
-		return _leoTraining.getZjbh();
+	public long getCertificateId() {
+		return _leoTraining.getCertificateId();
 	}
 
 	/**
-	* Sets the zjbh of this l e o training.
+	* Sets the certificate ID of this l e o training.
 	*
-	* @param zjbh the zjbh of this l e o training
+	* @param certificateId the certificate ID of this l e o training
 	*/
 	@Override
-	public void setZjbh(java.lang.String zjbh) {
-		_leoTraining.setZjbh(zjbh);
+	public void setCertificateId(long certificateId) {
+		_leoTraining.setCertificateId(certificateId);
 	}
 
 	/**

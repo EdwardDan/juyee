@@ -65,7 +65,7 @@ public interface LEOCertificateLocalService extends BaseLocalService,
 	* @return the new l e o certificate
 	*/
 	public com.justonetech.cyzt.leo.model.LEOCertificate createLEOCertificate(
-		java.lang.String certificateId);
+		long certificateId);
 
 	/**
 	* Deletes the l e o certificate with the primary key from the database. Also notifies the appropriate model listeners.
@@ -77,7 +77,7 @@ public interface LEOCertificateLocalService extends BaseLocalService,
 	*/
 	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
 	public com.justonetech.cyzt.leo.model.LEOCertificate deleteLEOCertificate(
-		java.lang.String certificateId)
+		long certificateId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -172,7 +172,7 @@ public interface LEOCertificateLocalService extends BaseLocalService,
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.justonetech.cyzt.leo.model.LEOCertificate fetchLEOCertificate(
-		java.lang.String certificateId)
+		long certificateId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
@@ -185,7 +185,7 @@ public interface LEOCertificateLocalService extends BaseLocalService,
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.justonetech.cyzt.leo.model.LEOCertificate getLEOCertificate(
-		java.lang.String certificateId)
+		long certificateId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

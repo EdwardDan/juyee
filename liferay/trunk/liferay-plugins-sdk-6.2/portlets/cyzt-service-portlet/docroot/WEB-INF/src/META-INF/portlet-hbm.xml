@@ -6,7 +6,7 @@
 	<import class="com.justonetech.cyzt.leo.model.LEOTraining" />
 	<class name="com.justonetech.cyzt.leo.model.impl.LEOCertificateImpl" table="cyzt_LEOCertificate">
 		<cache usage="read-write" />
-		<id name="certificateId" type="java.lang.String">
+		<id name="certificateId" type="long">
 			<generator class="assigned" />
 		</id>
 		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
@@ -16,6 +16,7 @@
 		<property name="createDate" type="org.hibernate.type.TimestampType" />
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
 		<property name="xm" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="zjbh" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="zylx" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="yxq" type="org.hibernate.type.TimestampType" />
 		<property name="fzrq" type="org.hibernate.type.TimestampType" />
@@ -31,7 +32,7 @@
 		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="createDate" type="org.hibernate.type.TimestampType" />
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
-		<property name="zjbh" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="certificateId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="pxsj" type="org.hibernate.type.TimestampType" />
 		<property name="xcjysj" type="org.hibernate.type.TimestampType" />
 		<property name="pxnr" type="com.liferay.portal.dao.orm.hibernate.StringType" />

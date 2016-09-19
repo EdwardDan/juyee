@@ -86,7 +86,7 @@ public abstract class LEOCertificateLocalServiceBaseImpl
 	 * @return the new l e o certificate
 	 */
 	@Override
-	public LEOCertificate createLEOCertificate(String certificateId) {
+	public LEOCertificate createLEOCertificate(long certificateId) {
 		return leoCertificatePersistence.create(certificateId);
 	}
 
@@ -100,7 +100,7 @@ public abstract class LEOCertificateLocalServiceBaseImpl
 	 */
 	@Indexable(type = IndexableType.DELETE)
 	@Override
-	public LEOCertificate deleteLEOCertificate(String certificateId)
+	public LEOCertificate deleteLEOCertificate(long certificateId)
 		throws PortalException, SystemException {
 		return leoCertificatePersistence.remove(certificateId);
 	}
@@ -213,7 +213,7 @@ public abstract class LEOCertificateLocalServiceBaseImpl
 	}
 
 	@Override
-	public LEOCertificate fetchLEOCertificate(String certificateId)
+	public LEOCertificate fetchLEOCertificate(long certificateId)
 		throws SystemException {
 		return leoCertificatePersistence.fetchByPrimaryKey(certificateId);
 	}
@@ -227,7 +227,7 @@ public abstract class LEOCertificateLocalServiceBaseImpl
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public LEOCertificate getLEOCertificate(String certificateId)
+	public LEOCertificate getLEOCertificate(long certificateId)
 		throws PortalException, SystemException {
 		return leoCertificatePersistence.findByPrimaryKey(certificateId);
 	}

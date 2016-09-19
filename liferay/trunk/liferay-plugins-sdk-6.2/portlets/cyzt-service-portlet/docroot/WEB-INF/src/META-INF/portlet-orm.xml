@@ -21,6 +21,7 @@
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<basic name="xm" />
+			<basic name="zjbh" />
 			<basic name="zylx" />
 			<basic name="yxq">
 				<temporal>TIMESTAMP</temporal>
@@ -47,7 +48,7 @@
 			<basic name="modifiedDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
-			<basic name="zjbh" />
+			<basic name="certificateId" />
 			<basic name="pxsj">
 				<temporal>TIMESTAMP</temporal>
 			</basic>

@@ -174,7 +174,7 @@ public class LEOCertificatePersistenceImpl extends BasePersistenceImpl<LEOCertif
 	 * @return the new l e o certificate
 	 */
 	@Override
-	public LEOCertificate create(String certificateId) {
+	public LEOCertificate create(long certificateId) {
 		LEOCertificate leoCertificate = new LEOCertificateImpl();
 
 		leoCertificate.setNew(true);
@@ -192,7 +192,7 @@ public class LEOCertificatePersistenceImpl extends BasePersistenceImpl<LEOCertif
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public LEOCertificate remove(String certificateId)
+	public LEOCertificate remove(long certificateId)
 		throws NoSuchLEOCertificateException, SystemException {
 		return remove((Serializable)certificateId);
 	}
@@ -331,6 +331,7 @@ public class LEOCertificatePersistenceImpl extends BasePersistenceImpl<LEOCertif
 		leoCertificateImpl.setCreateDate(leoCertificate.getCreateDate());
 		leoCertificateImpl.setModifiedDate(leoCertificate.getModifiedDate());
 		leoCertificateImpl.setXm(leoCertificate.getXm());
+		leoCertificateImpl.setZjbh(leoCertificate.getZjbh());
 		leoCertificateImpl.setZylx(leoCertificate.getZylx());
 		leoCertificateImpl.setYxq(leoCertificate.getYxq());
 		leoCertificateImpl.setFzrq(leoCertificate.getFzrq());
@@ -372,7 +373,7 @@ public class LEOCertificatePersistenceImpl extends BasePersistenceImpl<LEOCertif
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public LEOCertificate findByPrimaryKey(String certificateId)
+	public LEOCertificate findByPrimaryKey(long certificateId)
 		throws NoSuchLEOCertificateException, SystemException {
 		return findByPrimaryKey((Serializable)certificateId);
 	}
@@ -434,7 +435,7 @@ public class LEOCertificatePersistenceImpl extends BasePersistenceImpl<LEOCertif
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public LEOCertificate fetchByPrimaryKey(String certificateId)
+	public LEOCertificate fetchByPrimaryKey(long certificateId)
 		throws SystemException {
 		return fetchByPrimaryKey((Serializable)certificateId);
 	}

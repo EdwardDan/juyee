@@ -2,7 +2,7 @@
 
 <model-hints>
 	<model name="com.justonetech.cyzt.leo.model.LEOCertificate">
-		<field name="certificateId" type="String" />
+		<field name="certificateId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
@@ -10,6 +10,7 @@
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
 		<field name="xm" type="String" />
+		<field name="zjbh" type="String" />
 		<field name="zylx" type="String" />
 		<field name="yxq" type="Date" />
 		<field name="fzrq" type="Date" />
@@ -22,7 +23,7 @@
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="zjbh" type="String" />
+		<field name="certificateId" type="long" />
 		<field name="pxsj" type="Date" />
 		<field name="xcjysj" type="Date" />
 		<field name="pxnr" type="String" />

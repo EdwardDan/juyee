@@ -39,7 +39,6 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnmodifiableList;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
@@ -83,64 +82,68 @@ public class LEOTrainingPersistenceImpl extends BasePersistenceImpl<LEOTraining>
 	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(LEOTrainingModelImpl.ENTITY_CACHE_ENABLED,
 			LEOTrainingModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
-	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_ZJBH = new FinderPath(LEOTrainingModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_CERTIFICATEID =
+		new FinderPath(LEOTrainingModelImpl.ENTITY_CACHE_ENABLED,
 			LEOTrainingModelImpl.FINDER_CACHE_ENABLED, LEOTrainingImpl.class,
-			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByZjbh",
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByCertificateId",
 			new String[] {
-				String.class.getName(),
+				Long.class.getName(),
 				
 			Integer.class.getName(), Integer.class.getName(),
 				OrderByComparator.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ZJBH = new FinderPath(LEOTrainingModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CERTIFICATEID =
+		new FinderPath(LEOTrainingModelImpl.ENTITY_CACHE_ENABLED,
 			LEOTrainingModelImpl.FINDER_CACHE_ENABLED, LEOTrainingImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByZjbh",
-			new String[] { String.class.getName() },
-			LEOTrainingModelImpl.ZJBH_COLUMN_BITMASK);
-	public static final FinderPath FINDER_PATH_COUNT_BY_ZJBH = new FinderPath(LEOTrainingModelImpl.ENTITY_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByCertificateId",
+			new String[] { Long.class.getName() },
+			LEOTrainingModelImpl.CERTIFICATEID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_CERTIFICATEID = new FinderPath(LEOTrainingModelImpl.ENTITY_CACHE_ENABLED,
 			LEOTrainingModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByZjbh",
-			new String[] { String.class.getName() });
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCertificateId",
+			new String[] { Long.class.getName() });
 
 	/**
-	 * Returns all the l e o trainings where zjbh = &#63;.
+	 * Returns all the l e o trainings where certificateId = &#63;.
 	 *
-	 * @param zjbh the zjbh
+	 * @param certificateId the certificate ID
 	 * @return the matching l e o trainings
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<LEOTraining> findByZjbh(String zjbh) throws SystemException {
-		return findByZjbh(zjbh, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	public List<LEOTraining> findByCertificateId(long certificateId)
+		throws SystemException {
+		return findByCertificateId(certificateId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the l e o trainings where zjbh = &#63;.
+	 * Returns a range of all the l e o trainings where certificateId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.justonetech.cyzt.leo.model.impl.LEOTrainingModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param zjbh the zjbh
+	 * @param certificateId the certificate ID
 	 * @param start the lower bound of the range of l e o trainings
 	 * @param end the upper bound of the range of l e o trainings (not inclusive)
 	 * @return the range of matching l e o trainings
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<LEOTraining> findByZjbh(String zjbh, int start, int end)
-		throws SystemException {
-		return findByZjbh(zjbh, start, end, null);
+	public List<LEOTraining> findByCertificateId(long certificateId, int start,
+		int end) throws SystemException {
+		return findByCertificateId(certificateId, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the l e o trainings where zjbh = &#63;.
+	 * Returns an ordered range of all the l e o trainings where certificateId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.justonetech.cyzt.leo.model.impl.LEOTrainingModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param zjbh the zjbh
+	 * @param certificateId the certificate ID
 	 * @param start the lower bound of the range of l e o trainings
 	 * @param end the upper bound of the range of l e o trainings (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -148,8 +151,8 @@ public class LEOTrainingPersistenceImpl extends BasePersistenceImpl<LEOTraining>
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<LEOTraining> findByZjbh(String zjbh, int start, int end,
-		OrderByComparator orderByComparator) throws SystemException {
+	public List<LEOTraining> findByCertificateId(long certificateId, int start,
+		int end, OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
@@ -157,12 +160,16 @@ public class LEOTrainingPersistenceImpl extends BasePersistenceImpl<LEOTraining>
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
 				(orderByComparator == null)) {
 			pagination = false;
-			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ZJBH;
-			finderArgs = new Object[] { zjbh };
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CERTIFICATEID;
+			finderArgs = new Object[] { certificateId };
 		}
 		else {
-			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_ZJBH;
-			finderArgs = new Object[] { zjbh, start, end, orderByComparator };
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_CERTIFICATEID;
+			finderArgs = new Object[] {
+					certificateId,
+					
+					start, end, orderByComparator
+				};
 		}
 
 		List<LEOTraining> list = (List<LEOTraining>)FinderCacheUtil.getResult(finderPath,
@@ -170,7 +177,7 @@ public class LEOTrainingPersistenceImpl extends BasePersistenceImpl<LEOTraining>
 
 		if ((list != null) && !list.isEmpty()) {
 			for (LEOTraining leoTraining : list) {
-				if (!Validator.equals(zjbh, leoTraining.getZjbh())) {
+				if ((certificateId != leoTraining.getCertificateId())) {
 					list = null;
 
 					break;
@@ -191,19 +198,7 @@ public class LEOTrainingPersistenceImpl extends BasePersistenceImpl<LEOTraining>
 
 			query.append(_SQL_SELECT_LEOTRAINING_WHERE);
 
-			boolean bindZjbh = false;
-
-			if (zjbh == null) {
-				query.append(_FINDER_COLUMN_ZJBH_ZJBH_1);
-			}
-			else if (zjbh.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_ZJBH_ZJBH_3);
-			}
-			else {
-				bindZjbh = true;
-
-				query.append(_FINDER_COLUMN_ZJBH_ZJBH_2);
-			}
+			query.append(_FINDER_COLUMN_CERTIFICATEID_CERTIFICATEID_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -225,9 +220,7 @@ public class LEOTrainingPersistenceImpl extends BasePersistenceImpl<LEOTraining>
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				if (bindZjbh) {
-					qPos.add(zjbh);
-				}
+				qPos.add(certificateId);
 
 				if (!pagination) {
 					list = (List<LEOTraining>)QueryUtil.list(q, getDialect(),
@@ -260,19 +253,20 @@ public class LEOTrainingPersistenceImpl extends BasePersistenceImpl<LEOTraining>
 	}
 
 	/**
-	 * Returns the first l e o training in the ordered set where zjbh = &#63;.
+	 * Returns the first l e o training in the ordered set where certificateId = &#63;.
 	 *
-	 * @param zjbh the zjbh
+	 * @param certificateId the certificate ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching l e o training
 	 * @throws com.justonetech.cyzt.leo.NoSuchLEOTrainingException if a matching l e o training could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public LEOTraining findByZjbh_First(String zjbh,
+	public LEOTraining findByCertificateId_First(long certificateId,
 		OrderByComparator orderByComparator)
 		throws NoSuchLEOTrainingException, SystemException {
-		LEOTraining leoTraining = fetchByZjbh_First(zjbh, orderByComparator);
+		LEOTraining leoTraining = fetchByCertificateId_First(certificateId,
+				orderByComparator);
 
 		if (leoTraining != null) {
 			return leoTraining;
@@ -282,8 +276,8 @@ public class LEOTrainingPersistenceImpl extends BasePersistenceImpl<LEOTraining>
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-		msg.append("zjbh=");
-		msg.append(zjbh);
+		msg.append("certificateId=");
+		msg.append(certificateId);
 
 		msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -291,74 +285,17 @@ public class LEOTrainingPersistenceImpl extends BasePersistenceImpl<LEOTraining>
 	}
 
 	/**
-	 * Returns the first l e o training in the ordered set where zjbh = &#63;.
+	 * Returns the first l e o training in the ordered set where certificateId = &#63;.
 	 *
-	 * @param zjbh the zjbh
+	 * @param certificateId the certificate ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching l e o training, or <code>null</code> if a matching l e o training could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public LEOTraining fetchByZjbh_First(String zjbh,
+	public LEOTraining fetchByCertificateId_First(long certificateId,
 		OrderByComparator orderByComparator) throws SystemException {
-		List<LEOTraining> list = findByZjbh(zjbh, 0, 1, orderByComparator);
-
-		if (!list.isEmpty()) {
-			return list.get(0);
-		}
-
-		return null;
-	}
-
-	/**
-	 * Returns the last l e o training in the ordered set where zjbh = &#63;.
-	 *
-	 * @param zjbh the zjbh
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching l e o training
-	 * @throws com.justonetech.cyzt.leo.NoSuchLEOTrainingException if a matching l e o training could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public LEOTraining findByZjbh_Last(String zjbh,
-		OrderByComparator orderByComparator)
-		throws NoSuchLEOTrainingException, SystemException {
-		LEOTraining leoTraining = fetchByZjbh_Last(zjbh, orderByComparator);
-
-		if (leoTraining != null) {
-			return leoTraining;
-		}
-
-		StringBundler msg = new StringBundler(4);
-
-		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-		msg.append("zjbh=");
-		msg.append(zjbh);
-
-		msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-		throw new NoSuchLEOTrainingException(msg.toString());
-	}
-
-	/**
-	 * Returns the last l e o training in the ordered set where zjbh = &#63;.
-	 *
-	 * @param zjbh the zjbh
-	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching l e o training, or <code>null</code> if a matching l e o training could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public LEOTraining fetchByZjbh_Last(String zjbh,
-		OrderByComparator orderByComparator) throws SystemException {
-		int count = countByZjbh(zjbh);
-
-		if (count == 0) {
-			return null;
-		}
-
-		List<LEOTraining> list = findByZjbh(zjbh, count - 1, count,
+		List<LEOTraining> list = findByCertificateId(certificateId, 0, 1,
 				orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -369,18 +306,77 @@ public class LEOTrainingPersistenceImpl extends BasePersistenceImpl<LEOTraining>
 	}
 
 	/**
-	 * Returns the l e o trainings before and after the current l e o training in the ordered set where zjbh = &#63;.
+	 * Returns the last l e o training in the ordered set where certificateId = &#63;.
+	 *
+	 * @param certificateId the certificate ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching l e o training
+	 * @throws com.justonetech.cyzt.leo.NoSuchLEOTrainingException if a matching l e o training could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public LEOTraining findByCertificateId_Last(long certificateId,
+		OrderByComparator orderByComparator)
+		throws NoSuchLEOTrainingException, SystemException {
+		LEOTraining leoTraining = fetchByCertificateId_Last(certificateId,
+				orderByComparator);
+
+		if (leoTraining != null) {
+			return leoTraining;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("certificateId=");
+		msg.append(certificateId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchLEOTrainingException(msg.toString());
+	}
+
+	/**
+	 * Returns the last l e o training in the ordered set where certificateId = &#63;.
+	 *
+	 * @param certificateId the certificate ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching l e o training, or <code>null</code> if a matching l e o training could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public LEOTraining fetchByCertificateId_Last(long certificateId,
+		OrderByComparator orderByComparator) throws SystemException {
+		int count = countByCertificateId(certificateId);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<LEOTraining> list = findByCertificateId(certificateId, count - 1,
+				count, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the l e o trainings before and after the current l e o training in the ordered set where certificateId = &#63;.
 	 *
 	 * @param trainingId the primary key of the current l e o training
-	 * @param zjbh the zjbh
+	 * @param certificateId the certificate ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next l e o training
 	 * @throws com.justonetech.cyzt.leo.NoSuchLEOTrainingException if a l e o training with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public LEOTraining[] findByZjbh_PrevAndNext(long trainingId, String zjbh,
-		OrderByComparator orderByComparator)
+	public LEOTraining[] findByCertificateId_PrevAndNext(long trainingId,
+		long certificateId, OrderByComparator orderByComparator)
 		throws NoSuchLEOTrainingException, SystemException {
 		LEOTraining leoTraining = findByPrimaryKey(trainingId);
 
@@ -391,13 +387,13 @@ public class LEOTrainingPersistenceImpl extends BasePersistenceImpl<LEOTraining>
 
 			LEOTraining[] array = new LEOTrainingImpl[3];
 
-			array[0] = getByZjbh_PrevAndNext(session, leoTraining, zjbh,
-					orderByComparator, true);
+			array[0] = getByCertificateId_PrevAndNext(session, leoTraining,
+					certificateId, orderByComparator, true);
 
 			array[1] = leoTraining;
 
-			array[2] = getByZjbh_PrevAndNext(session, leoTraining, zjbh,
-					orderByComparator, false);
+			array[2] = getByCertificateId_PrevAndNext(session, leoTraining,
+					certificateId, orderByComparator, false);
 
 			return array;
 		}
@@ -409,8 +405,8 @@ public class LEOTrainingPersistenceImpl extends BasePersistenceImpl<LEOTraining>
 		}
 	}
 
-	protected LEOTraining getByZjbh_PrevAndNext(Session session,
-		LEOTraining leoTraining, String zjbh,
+	protected LEOTraining getByCertificateId_PrevAndNext(Session session,
+		LEOTraining leoTraining, long certificateId,
 		OrderByComparator orderByComparator, boolean previous) {
 		StringBundler query = null;
 
@@ -424,19 +420,7 @@ public class LEOTrainingPersistenceImpl extends BasePersistenceImpl<LEOTraining>
 
 		query.append(_SQL_SELECT_LEOTRAINING_WHERE);
 
-		boolean bindZjbh = false;
-
-		if (zjbh == null) {
-			query.append(_FINDER_COLUMN_ZJBH_ZJBH_1);
-		}
-		else if (zjbh.equals(StringPool.BLANK)) {
-			query.append(_FINDER_COLUMN_ZJBH_ZJBH_3);
-		}
-		else {
-			bindZjbh = true;
-
-			query.append(_FINDER_COLUMN_ZJBH_ZJBH_2);
-		}
+		query.append(_FINDER_COLUMN_CERTIFICATEID_CERTIFICATEID_2);
 
 		if (orderByComparator != null) {
 			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
@@ -506,9 +490,7 @@ public class LEOTrainingPersistenceImpl extends BasePersistenceImpl<LEOTraining>
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
-		if (bindZjbh) {
-			qPos.add(zjbh);
-		}
+		qPos.add(certificateId);
 
 		if (orderByComparator != null) {
 			Object[] values = orderByComparator.getOrderByConditionValues(leoTraining);
@@ -529,31 +511,33 @@ public class LEOTrainingPersistenceImpl extends BasePersistenceImpl<LEOTraining>
 	}
 
 	/**
-	 * Removes all the l e o trainings where zjbh = &#63; from the database.
+	 * Removes all the l e o trainings where certificateId = &#63; from the database.
 	 *
-	 * @param zjbh the zjbh
+	 * @param certificateId the certificate ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public void removeByZjbh(String zjbh) throws SystemException {
-		for (LEOTraining leoTraining : findByZjbh(zjbh, QueryUtil.ALL_POS,
-				QueryUtil.ALL_POS, null)) {
+	public void removeByCertificateId(long certificateId)
+		throws SystemException {
+		for (LEOTraining leoTraining : findByCertificateId(certificateId,
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(leoTraining);
 		}
 	}
 
 	/**
-	 * Returns the number of l e o trainings where zjbh = &#63;.
+	 * Returns the number of l e o trainings where certificateId = &#63;.
 	 *
-	 * @param zjbh the zjbh
+	 * @param certificateId the certificate ID
 	 * @return the number of matching l e o trainings
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public int countByZjbh(String zjbh) throws SystemException {
-		FinderPath finderPath = FINDER_PATH_COUNT_BY_ZJBH;
+	public int countByCertificateId(long certificateId)
+		throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_CERTIFICATEID;
 
-		Object[] finderArgs = new Object[] { zjbh };
+		Object[] finderArgs = new Object[] { certificateId };
 
 		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
 				this);
@@ -563,19 +547,7 @@ public class LEOTrainingPersistenceImpl extends BasePersistenceImpl<LEOTraining>
 
 			query.append(_SQL_COUNT_LEOTRAINING_WHERE);
 
-			boolean bindZjbh = false;
-
-			if (zjbh == null) {
-				query.append(_FINDER_COLUMN_ZJBH_ZJBH_1);
-			}
-			else if (zjbh.equals(StringPool.BLANK)) {
-				query.append(_FINDER_COLUMN_ZJBH_ZJBH_3);
-			}
-			else {
-				bindZjbh = true;
-
-				query.append(_FINDER_COLUMN_ZJBH_ZJBH_2);
-			}
+			query.append(_FINDER_COLUMN_CERTIFICATEID_CERTIFICATEID_2);
 
 			String sql = query.toString();
 
@@ -588,9 +560,7 @@ public class LEOTrainingPersistenceImpl extends BasePersistenceImpl<LEOTraining>
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				if (bindZjbh) {
-					qPos.add(zjbh);
-				}
+				qPos.add(certificateId);
 
 				count = (Long)q.uniqueResult();
 
@@ -609,9 +579,7 @@ public class LEOTrainingPersistenceImpl extends BasePersistenceImpl<LEOTraining>
 		return count.intValue();
 	}
 
-	private static final String _FINDER_COLUMN_ZJBH_ZJBH_1 = "leoTraining.zjbh IS NULL";
-	private static final String _FINDER_COLUMN_ZJBH_ZJBH_2 = "leoTraining.zjbh = ?";
-	private static final String _FINDER_COLUMN_ZJBH_ZJBH_3 = "(leoTraining.zjbh IS NULL OR leoTraining.zjbh = '')";
+	private static final String _FINDER_COLUMN_CERTIFICATEID_CERTIFICATEID_2 = "leoTraining.certificateId = ?";
 
 	public LEOTrainingPersistenceImpl() {
 		setModelClass(LEOTraining.class);
@@ -839,19 +807,21 @@ public class LEOTrainingPersistenceImpl extends BasePersistenceImpl<LEOTraining>
 
 		else {
 			if ((leoTrainingModelImpl.getColumnBitmask() &
-					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ZJBH.getColumnBitmask()) != 0) {
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CERTIFICATEID.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
-						leoTrainingModelImpl.getOriginalZjbh()
+						leoTrainingModelImpl.getOriginalCertificateId()
 					};
 
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_ZJBH, args);
-				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ZJBH,
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_CERTIFICATEID,
+					args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CERTIFICATEID,
 					args);
 
-				args = new Object[] { leoTrainingModelImpl.getZjbh() };
+				args = new Object[] { leoTrainingModelImpl.getCertificateId() };
 
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_ZJBH, args);
-				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ZJBH,
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_CERTIFICATEID,
+					args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CERTIFICATEID,
 					args);
 			}
 		}
@@ -879,7 +849,7 @@ public class LEOTrainingPersistenceImpl extends BasePersistenceImpl<LEOTraining>
 		leoTrainingImpl.setUserName(leoTraining.getUserName());
 		leoTrainingImpl.setCreateDate(leoTraining.getCreateDate());
 		leoTrainingImpl.setModifiedDate(leoTraining.getModifiedDate());
-		leoTrainingImpl.setZjbh(leoTraining.getZjbh());
+		leoTrainingImpl.setCertificateId(leoTraining.getCertificateId());
 		leoTrainingImpl.setPxsj(leoTraining.getPxsj());
 		leoTrainingImpl.setXcjysj(leoTraining.getXcjysj());
 		leoTrainingImpl.setPxnr(leoTraining.getPxnr());

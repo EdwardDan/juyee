@@ -38,6 +38,7 @@ public class LEOCertificateSoap implements Serializable {
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setXm(model.getXm());
+		soapModel.setZjbh(model.getZjbh());
 		soapModel.setZylx(model.getZylx());
 		soapModel.setYxq(model.getYxq());
 		soapModel.setFzrq(model.getFzrq());
@@ -85,19 +86,19 @@ public class LEOCertificateSoap implements Serializable {
 	public LEOCertificateSoap() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _certificateId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setCertificateId(pk);
 	}
 
-	public String getCertificateId() {
+	public long getCertificateId() {
 		return _certificateId;
 	}
 
-	public void setCertificateId(String certificateId) {
+	public void setCertificateId(long certificateId) {
 		_certificateId = certificateId;
 	}
 
@@ -157,6 +158,14 @@ public class LEOCertificateSoap implements Serializable {
 		_xm = xm;
 	}
 
+	public String getZjbh() {
+		return _zjbh;
+	}
+
+	public void setZjbh(String zjbh) {
+		_zjbh = zjbh;
+	}
+
 	public String getZylx() {
 		return _zylx;
 	}
@@ -181,7 +190,7 @@ public class LEOCertificateSoap implements Serializable {
 		_fzrq = fzrq;
 	}
 
-	private String _certificateId;
+	private long _certificateId;
 	private long _groupId;
 	private long _companyId;
 	private long _userId;
@@ -189,6 +198,7 @@ public class LEOCertificateSoap implements Serializable {
 	private Date _createDate;
 	private Date _modifiedDate;
 	private String _xm;
+	private String _zjbh;
 	private String _zylx;
 	private Date _yxq;
 	private Date _fzrq;

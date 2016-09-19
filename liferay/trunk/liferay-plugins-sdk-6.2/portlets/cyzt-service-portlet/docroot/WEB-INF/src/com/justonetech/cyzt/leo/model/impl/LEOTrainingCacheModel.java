@@ -54,8 +54,8 @@ public class LEOTrainingCacheModel implements CacheModel<LEOTraining>,
 		sb.append(createDate);
 		sb.append(", modifiedDate=");
 		sb.append(modifiedDate);
-		sb.append(", zjbh=");
-		sb.append(zjbh);
+		sb.append(", certificateId=");
+		sb.append(certificateId);
 		sb.append(", pxsj=");
 		sb.append(pxsj);
 		sb.append(", xcjysj=");
@@ -97,12 +97,7 @@ public class LEOTrainingCacheModel implements CacheModel<LEOTraining>,
 			leoTrainingImpl.setModifiedDate(new Date(modifiedDate));
 		}
 
-		if (zjbh == null) {
-			leoTrainingImpl.setZjbh(StringPool.BLANK);
-		}
-		else {
-			leoTrainingImpl.setZjbh(zjbh);
-		}
+		leoTrainingImpl.setCertificateId(certificateId);
 
 		if (pxsj == Long.MIN_VALUE) {
 			leoTrainingImpl.setPxsj(null);
@@ -139,7 +134,7 @@ public class LEOTrainingCacheModel implements CacheModel<LEOTraining>,
 		userName = objectInput.readUTF();
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
-		zjbh = objectInput.readUTF();
+		certificateId = objectInput.readLong();
 		pxsj = objectInput.readLong();
 		xcjysj = objectInput.readLong();
 		pxnr = objectInput.readUTF();
@@ -162,14 +157,7 @@ public class LEOTrainingCacheModel implements CacheModel<LEOTraining>,
 
 		objectOutput.writeLong(createDate);
 		objectOutput.writeLong(modifiedDate);
-
-		if (zjbh == null) {
-			objectOutput.writeUTF(StringPool.BLANK);
-		}
-		else {
-			objectOutput.writeUTF(zjbh);
-		}
-
+		objectOutput.writeLong(certificateId);
 		objectOutput.writeLong(pxsj);
 		objectOutput.writeLong(xcjysj);
 
@@ -188,7 +176,7 @@ public class LEOTrainingCacheModel implements CacheModel<LEOTraining>,
 	public String userName;
 	public long createDate;
 	public long modifiedDate;
-	public String zjbh;
+	public long certificateId;
 	public long pxsj;
 	public long xcjysj;
 	public String pxnr;

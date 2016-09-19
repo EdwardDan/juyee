@@ -111,162 +111,169 @@ public class LEOTrainingUtil {
 	}
 
 	/**
-	* Returns all the l e o trainings where zjbh = &#63;.
+	* Returns all the l e o trainings where certificateId = &#63;.
 	*
-	* @param zjbh the zjbh
+	* @param certificateId the certificate ID
 	* @return the matching l e o trainings
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<com.justonetech.cyzt.leo.model.LEOTraining> findByZjbh(
-		java.lang.String zjbh)
+	public static java.util.List<com.justonetech.cyzt.leo.model.LEOTraining> findByCertificateId(
+		long certificateId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByZjbh(zjbh);
+		return getPersistence().findByCertificateId(certificateId);
 	}
 
 	/**
-	* Returns a range of all the l e o trainings where zjbh = &#63;.
+	* Returns a range of all the l e o trainings where certificateId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.justonetech.cyzt.leo.model.impl.LEOTrainingModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param zjbh the zjbh
+	* @param certificateId the certificate ID
 	* @param start the lower bound of the range of l e o trainings
 	* @param end the upper bound of the range of l e o trainings (not inclusive)
 	* @return the range of matching l e o trainings
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<com.justonetech.cyzt.leo.model.LEOTraining> findByZjbh(
-		java.lang.String zjbh, int start, int end)
+	public static java.util.List<com.justonetech.cyzt.leo.model.LEOTraining> findByCertificateId(
+		long certificateId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByZjbh(zjbh, start, end);
+		return getPersistence().findByCertificateId(certificateId, start, end);
 	}
 
 	/**
-	* Returns an ordered range of all the l e o trainings where zjbh = &#63;.
+	* Returns an ordered range of all the l e o trainings where certificateId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.justonetech.cyzt.leo.model.impl.LEOTrainingModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param zjbh the zjbh
+	* @param certificateId the certificate ID
 	* @param start the lower bound of the range of l e o trainings
 	* @param end the upper bound of the range of l e o trainings (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching l e o trainings
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<com.justonetech.cyzt.leo.model.LEOTraining> findByZjbh(
-		java.lang.String zjbh, int start, int end,
+	public static java.util.List<com.justonetech.cyzt.leo.model.LEOTraining> findByCertificateId(
+		long certificateId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByZjbh(zjbh, start, end, orderByComparator);
+		return getPersistence()
+				   .findByCertificateId(certificateId, start, end,
+			orderByComparator);
 	}
 
 	/**
-	* Returns the first l e o training in the ordered set where zjbh = &#63;.
+	* Returns the first l e o training in the ordered set where certificateId = &#63;.
 	*
-	* @param zjbh the zjbh
+	* @param certificateId the certificate ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching l e o training
 	* @throws com.justonetech.cyzt.leo.NoSuchLEOTrainingException if a matching l e o training could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.justonetech.cyzt.leo.model.LEOTraining findByZjbh_First(
-		java.lang.String zjbh,
+	public static com.justonetech.cyzt.leo.model.LEOTraining findByCertificateId_First(
+		long certificateId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.justonetech.cyzt.leo.NoSuchLEOTrainingException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByZjbh_First(zjbh, orderByComparator);
+		return getPersistence()
+				   .findByCertificateId_First(certificateId, orderByComparator);
 	}
 
 	/**
-	* Returns the first l e o training in the ordered set where zjbh = &#63;.
+	* Returns the first l e o training in the ordered set where certificateId = &#63;.
 	*
-	* @param zjbh the zjbh
+	* @param certificateId the certificate ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching l e o training, or <code>null</code> if a matching l e o training could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.justonetech.cyzt.leo.model.LEOTraining fetchByZjbh_First(
-		java.lang.String zjbh,
+	public static com.justonetech.cyzt.leo.model.LEOTraining fetchByCertificateId_First(
+		long certificateId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().fetchByZjbh_First(zjbh, orderByComparator);
+		return getPersistence()
+				   .fetchByCertificateId_First(certificateId, orderByComparator);
 	}
 
 	/**
-	* Returns the last l e o training in the ordered set where zjbh = &#63;.
+	* Returns the last l e o training in the ordered set where certificateId = &#63;.
 	*
-	* @param zjbh the zjbh
+	* @param certificateId the certificate ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching l e o training
 	* @throws com.justonetech.cyzt.leo.NoSuchLEOTrainingException if a matching l e o training could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.justonetech.cyzt.leo.model.LEOTraining findByZjbh_Last(
-		java.lang.String zjbh,
+	public static com.justonetech.cyzt.leo.model.LEOTraining findByCertificateId_Last(
+		long certificateId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.justonetech.cyzt.leo.NoSuchLEOTrainingException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByZjbh_Last(zjbh, orderByComparator);
+		return getPersistence()
+				   .findByCertificateId_Last(certificateId, orderByComparator);
 	}
 
 	/**
-	* Returns the last l e o training in the ordered set where zjbh = &#63;.
+	* Returns the last l e o training in the ordered set where certificateId = &#63;.
 	*
-	* @param zjbh the zjbh
+	* @param certificateId the certificate ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching l e o training, or <code>null</code> if a matching l e o training could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.justonetech.cyzt.leo.model.LEOTraining fetchByZjbh_Last(
-		java.lang.String zjbh,
+	public static com.justonetech.cyzt.leo.model.LEOTraining fetchByCertificateId_Last(
+		long certificateId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().fetchByZjbh_Last(zjbh, orderByComparator);
+		return getPersistence()
+				   .fetchByCertificateId_Last(certificateId, orderByComparator);
 	}
 
 	/**
-	* Returns the l e o trainings before and after the current l e o training in the ordered set where zjbh = &#63;.
+	* Returns the l e o trainings before and after the current l e o training in the ordered set where certificateId = &#63;.
 	*
 	* @param trainingId the primary key of the current l e o training
-	* @param zjbh the zjbh
+	* @param certificateId the certificate ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next l e o training
 	* @throws com.justonetech.cyzt.leo.NoSuchLEOTrainingException if a l e o training with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.justonetech.cyzt.leo.model.LEOTraining[] findByZjbh_PrevAndNext(
-		long trainingId, java.lang.String zjbh,
+	public static com.justonetech.cyzt.leo.model.LEOTraining[] findByCertificateId_PrevAndNext(
+		long trainingId, long certificateId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.justonetech.cyzt.leo.NoSuchLEOTrainingException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByZjbh_PrevAndNext(trainingId, zjbh, orderByComparator);
+				   .findByCertificateId_PrevAndNext(trainingId, certificateId,
+			orderByComparator);
 	}
 
 	/**
-	* Removes all the l e o trainings where zjbh = &#63; from the database.
+	* Removes all the l e o trainings where certificateId = &#63; from the database.
 	*
-	* @param zjbh the zjbh
+	* @param certificateId the certificate ID
 	* @throws SystemException if a system exception occurred
 	*/
-	public static void removeByZjbh(java.lang.String zjbh)
+	public static void removeByCertificateId(long certificateId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		getPersistence().removeByZjbh(zjbh);
+		getPersistence().removeByCertificateId(certificateId);
 	}
 
 	/**
-	* Returns the number of l e o trainings where zjbh = &#63;.
+	* Returns the number of l e o trainings where certificateId = &#63;.
 	*
-	* @param zjbh the zjbh
+	* @param certificateId the certificate ID
 	* @return the number of matching l e o trainings
 	* @throws SystemException if a system exception occurred
 	*/
-	public static int countByZjbh(java.lang.String zjbh)
+	public static int countByCertificateId(long certificateId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().countByZjbh(zjbh);
+		return getPersistence().countByCertificateId(certificateId);
 	}
 
 	/**

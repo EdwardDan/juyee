@@ -58,6 +58,7 @@ public class LEOCertificateWrapper implements LEOCertificate,
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("xm", getXm());
+		attributes.put("zjbh", getZjbh());
 		attributes.put("zylx", getZylx());
 		attributes.put("yxq", getYxq());
 		attributes.put("fzrq", getFzrq());
@@ -67,7 +68,7 @@ public class LEOCertificateWrapper implements LEOCertificate,
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
-		String certificateId = (String)attributes.get("certificateId");
+		Long certificateId = (Long)attributes.get("certificateId");
 
 		if (certificateId != null) {
 			setCertificateId(certificateId);
@@ -115,6 +116,12 @@ public class LEOCertificateWrapper implements LEOCertificate,
 			setXm(xm);
 		}
 
+		String zjbh = (String)attributes.get("zjbh");
+
+		if (zjbh != null) {
+			setZjbh(zjbh);
+		}
+
 		String zylx = (String)attributes.get("zylx");
 
 		if (zylx != null) {
@@ -140,7 +147,7 @@ public class LEOCertificateWrapper implements LEOCertificate,
 	* @return the primary key of this l e o certificate
 	*/
 	@Override
-	public java.lang.String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _leoCertificate.getPrimaryKey();
 	}
 
@@ -150,7 +157,7 @@ public class LEOCertificateWrapper implements LEOCertificate,
 	* @param primaryKey the primary key of this l e o certificate
 	*/
 	@Override
-	public void setPrimaryKey(java.lang.String primaryKey) {
+	public void setPrimaryKey(long primaryKey) {
 		_leoCertificate.setPrimaryKey(primaryKey);
 	}
 
@@ -160,7 +167,7 @@ public class LEOCertificateWrapper implements LEOCertificate,
 	* @return the certificate ID of this l e o certificate
 	*/
 	@Override
-	public java.lang.String getCertificateId() {
+	public long getCertificateId() {
 		return _leoCertificate.getCertificateId();
 	}
 
@@ -170,7 +177,7 @@ public class LEOCertificateWrapper implements LEOCertificate,
 	* @param certificateId the certificate ID of this l e o certificate
 	*/
 	@Override
-	public void setCertificateId(java.lang.String certificateId) {
+	public void setCertificateId(long certificateId) {
 		_leoCertificate.setCertificateId(certificateId);
 	}
 
@@ -334,6 +341,26 @@ public class LEOCertificateWrapper implements LEOCertificate,
 	@Override
 	public void setXm(java.lang.String xm) {
 		_leoCertificate.setXm(xm);
+	}
+
+	/**
+	* Returns the zjbh of this l e o certificate.
+	*
+	* @return the zjbh of this l e o certificate
+	*/
+	@Override
+	public java.lang.String getZjbh() {
+		return _leoCertificate.getZjbh();
+	}
+
+	/**
+	* Sets the zjbh of this l e o certificate.
+	*
+	* @param zjbh the zjbh of this l e o certificate
+	*/
+	@Override
+	public void setZjbh(java.lang.String zjbh) {
+		_leoCertificate.setZjbh(zjbh);
 	}
 
 	/**

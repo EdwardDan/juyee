@@ -137,7 +137,7 @@ public class LEOCertificateUtil {
 	* @return the new l e o certificate
 	*/
 	public static com.justonetech.cyzt.leo.model.LEOCertificate create(
-		java.lang.String certificateId) {
+		long certificateId) {
 		return getPersistence().create(certificateId);
 	}
 
@@ -150,7 +150,7 @@ public class LEOCertificateUtil {
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.justonetech.cyzt.leo.model.LEOCertificate remove(
-		java.lang.String certificateId)
+		long certificateId)
 		throws com.justonetech.cyzt.leo.NoSuchLEOCertificateException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().remove(certificateId);
@@ -171,7 +171,7 @@ public class LEOCertificateUtil {
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.justonetech.cyzt.leo.model.LEOCertificate findByPrimaryKey(
-		java.lang.String certificateId)
+		long certificateId)
 		throws com.justonetech.cyzt.leo.NoSuchLEOCertificateException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().findByPrimaryKey(certificateId);
@@ -185,7 +185,7 @@ public class LEOCertificateUtil {
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.justonetech.cyzt.leo.model.LEOCertificate fetchByPrimaryKey(
-		java.lang.String certificateId)
+		long certificateId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().fetchByPrimaryKey(certificateId);
 	}

@@ -114,13 +114,13 @@ public class LEOTrainingLocalServiceClpInvoker {
 
 		_methodParameterTypes37 = new String[] { "java.lang.String" };
 
-		_methodName42 = "findByZjbh";
+		_methodName42 = "findByCertificateId";
 
-		_methodParameterTypes42 = new String[] { "java.lang.String", "int", "int" };
+		_methodParameterTypes42 = new String[] { "long", "int", "int" };
 
-		_methodName43 = "countByZjbh";
+		_methodName43 = "countByCertificateId";
 
-		_methodParameterTypes43 = new String[] { "java.lang.String" };
+		_methodParameterTypes43 = new String[] { "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -226,14 +226,14 @@ public class LEOTrainingLocalServiceClpInvoker {
 
 		if (_methodName42.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes42, parameterTypes)) {
-			return LEOTrainingLocalServiceUtil.findByZjbh((java.lang.String)arguments[0],
+			return LEOTrainingLocalServiceUtil.findByCertificateId(((Long)arguments[0]).longValue(),
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue());
 		}
 
 		if (_methodName43.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes43, parameterTypes)) {
-			return LEOTrainingLocalServiceUtil.countByZjbh((java.lang.String)arguments[0]);
+			return LEOTrainingLocalServiceUtil.countByCertificateId(((Long)arguments[0]).longValue());
 		}
 
 		throw new UnsupportedOperationException();

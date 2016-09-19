@@ -288,14 +288,15 @@ public class LEOTrainingLocalServiceWrapper implements LEOTrainingLocalService,
 	}
 
 	@Override
-	public java.util.List<com.justonetech.cyzt.leo.model.LEOTraining> findByZjbh(
-		java.lang.String zjbh, int start, int end) {
-		return _leoTrainingLocalService.findByZjbh(zjbh, start, end);
+	public java.util.List<com.justonetech.cyzt.leo.model.LEOTraining> findByCertificateId(
+		long certificateId, int start, int end) {
+		return _leoTrainingLocalService.findByCertificateId(certificateId,
+			start, end);
 	}
 
 	@Override
-	public int countByZjbh(java.lang.String zjbh) {
-		return _leoTrainingLocalService.countByZjbh(zjbh);
+	public int countByCertificateId(long certificateId) {
+		return _leoTrainingLocalService.countByCertificateId(certificateId);
 	}
 
 	/**
