@@ -23,11 +23,12 @@
 		</footer-portlet-javascript>
 		<css-class-wrapper>custom-login-portlet</css-class-wrapper>
 	</portlet>
-	
-	
+
+
 	<portlet>
 		<portlet-name>feedback</portlet-name>
 		<icon>/icons/icon.png</icon>
+		<configuration-action-class>com.justonetech.portal.portlet.FeedbackConfigurationAction</configuration-action-class>
 		<header-portlet-css>/css/main.css</header-portlet-css>
 		<footer-portlet-javascript>
 			/js/main.js

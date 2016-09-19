@@ -1,6 +1,11 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
-<c:set var="role" value="user" />
+<%@page import="javax.portlet.PortletPreferences"%>
+<%
+	PortletPreferences preferences = renderRequest.getPreferences();
+	String displayPage = preferences.getValue("displayPage", StringPool.BLANK);
+	renderRequest.setAttribute("displayPage", displayPage);
+%>
 <!--
 根据不同的权限加载不同的页面
 1. 如果用户没有登录则加载登录页面
@@ -12,8 +17,24 @@
 <!-- 登录 -->
 <%-- <jsp:include page='login.jsp'></jsp:include> --%>
 <!-- 添加反馈信息 -->
-<jsp:include page='add-feedback.jsp'></jsp:include>
+<%-- <jsp:include page='add-feedback.jsp'></jsp:include>--%>
 
 <!-- 查询反馈信息 -->
 <%-- <jsp:include page='query.jsp'></jsp:include> --%>
 
+
+<c:choose>
+	<c:when test='${!themeDisplay.isSignedIn()}'>
+		<jsp:include page='login.jsp'></jsp:include>
+	</c:when>
+	<c:otherwise>
+		<c:choose>
+			<c:when test='${displayPage eq ""}'>
+				<liferay-ui:message key="请配置显示页面"></liferay-ui:message>
+			</c:when>
+			<c:otherwise>
+				<jsp:include page='${displayPage}'></jsp:include>
+			</c:otherwise>
+		</c:choose>
+	</c:otherwise>
+</c:choose>

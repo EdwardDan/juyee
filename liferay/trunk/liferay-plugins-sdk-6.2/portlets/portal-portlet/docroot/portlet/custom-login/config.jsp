@@ -1,8 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
-<portlet:renderURL var="viewURL">
-	<portlet:param name="mvcPath" value="/portlet/custom-login/view.jsp"></portlet:param>
-</portlet:renderURL>
+<portlet:renderURL var="viewURL"/>
 <liferay-portlet:actionURL portletConfiguration="true"
 	var="configurationUrl" />
 <aui:form method="post" action="<%=configurationUrl%>">
