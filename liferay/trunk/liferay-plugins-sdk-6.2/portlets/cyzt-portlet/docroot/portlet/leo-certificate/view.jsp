@@ -11,25 +11,25 @@
 			<table style="width: 100%;" class="table table-bordered">
 				<tr class="body">
 					<td style="width: 10%; text-align: right">专业类型</td>
-					<td style="width: 40%;" class="content"><aui:input type="text"
+					<td style="width: 40%;" class="bg-white"><aui:input type="text"
 							name="zylx" label="" cssClass="span12" /></td>
 					<td style="width: 15%; text-align: right">姓名</td>
-					<td style="width: 35%;" class="content"><aui:input type="text"
+					<td style="width: 35%;" class="bg-white"><aui:input type="text"
 							name="xm" label="" cssClass="span12" /></td>
 				</tr>
 
 				<tr class="body">
 					<td style="width: 10%; text-align: right">证件编号</td>
-					<td class="content"><aui:input type="text"
+					<td class="bg-white"><aui:input type="text"
 							name="zjbh" label="" cssClass="span12" /></td>
 					<td style="width: 15%; text-align: right">有效期</td>
-					<td style="width: 35%;" class="content"><input type="text"
+					<td style="width: 35%;" class="bg-white"><input type="text"
 						class="Wdate span12" id="yxq" name="<portlet:namespace/>yxq"
 						value=""
 						onfocus="WdatePicker({lang:'zh-cn',dateFmt:'yyyy-MM-dd'})" /></td>
 				</tr>
 				<tr style="height: 40px;" class="body">
-					<td colspan="4" style="text-align: center" class="content"><aui:button
+					<td colspan="4" style="text-align: center" class="bg-white"><aui:button
 							type="submit" value="查询">
 							<portlet:renderURL var="addLEOCertificateURL">
 								<portlet:param name="mvcPath"
