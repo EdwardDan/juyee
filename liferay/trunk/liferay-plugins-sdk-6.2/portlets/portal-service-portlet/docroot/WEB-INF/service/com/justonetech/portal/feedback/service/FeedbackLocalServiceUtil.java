@@ -275,9 +275,9 @@ public class FeedbackLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
-	public static java.util.List<com.justonetech.portal.feedback.model.Feedback> getLEOCertificates(
+	public static java.util.List<com.justonetech.portal.feedback.model.Feedback> getFeedbacks(
 		java.lang.String zt, java.lang.String lx, long fkrId, int start, int end) {
-		return getService().getLEOCertificates(zt, lx, fkrId, start, end);
+		return getService().getFeedbacks(zt, lx, fkrId, start, end);
 	}
 
 	public static int getFeedbacksCount(java.lang.String zt,

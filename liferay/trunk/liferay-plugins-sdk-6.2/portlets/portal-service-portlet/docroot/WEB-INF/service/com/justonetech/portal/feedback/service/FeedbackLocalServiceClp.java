@@ -114,7 +114,7 @@ public class FeedbackLocalServiceClp implements FeedbackLocalService {
 
 		_methodParameterTypes17 = new String[] { "java.lang.String" };
 
-		_methodName19 = "getLEOCertificates";
+		_methodName19 = "getFeedbacks";
 
 		_methodParameterTypes19 = new String[] {
 				"java.lang.String", "java.lang.String", "long", "int", "int"
@@ -684,7 +684,7 @@ public class FeedbackLocalServiceClp implements FeedbackLocalService {
 	}
 
 	@Override
-	public java.util.List<com.justonetech.portal.feedback.model.Feedback> getLEOCertificates(
+	public java.util.List<com.justonetech.portal.feedback.model.Feedback> getFeedbacks(
 		java.lang.String zt, java.lang.String lx, long fkrId, int start, int end) {
 		Object returnObj = null;
 

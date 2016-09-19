@@ -50,7 +50,7 @@ public class FeedbackLocalServiceImpl extends FeedbackLocalServiceBaseImpl {
 	private static Log log = LogFactoryUtil.getLog(FeedbackLocalServiceImpl.class);
 
 	@SuppressWarnings("unchecked")
-	public List<Feedback> getLEOCertificates(String zt,String lx, long fkrId, int start, int end) {
+	public List<Feedback> getFeedbacks(String zt,String lx, long fkrId, int start, int end) {
 
 		try {
 			return this.dynamicQuery(createDynamicQuery(zt,lx,fkrId), start, end);

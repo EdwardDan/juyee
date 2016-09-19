@@ -287,10 +287,9 @@ public class FeedbackLocalServiceWrapper implements FeedbackLocalService,
 	}
 
 	@Override
-	public java.util.List<com.justonetech.portal.feedback.model.Feedback> getLEOCertificates(
+	public java.util.List<com.justonetech.portal.feedback.model.Feedback> getFeedbacks(
 		java.lang.String zt, java.lang.String lx, long fkrId, int start, int end) {
-		return _feedbackLocalService.getLEOCertificates(zt, lx, fkrId, start,
-			end);
+		return _feedbackLocalService.getFeedbacks(zt, lx, fkrId, start, end);
 	}
 
 	@Override

@@ -255,7 +255,7 @@ public interface FeedbackLocalService extends BaseLocalService,
 		throws java.lang.Throwable;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.justonetech.portal.feedback.model.Feedback> getLEOCertificates(
+	public java.util.List<com.justonetech.portal.feedback.model.Feedback> getFeedbacks(
 		java.lang.String zt, java.lang.String lx, long fkrId, int start, int end);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

@@ -114,7 +114,7 @@ public class FeedbackLocalServiceClpInvoker {
 
 		_methodParameterTypes33 = new String[] { "java.lang.String" };
 
-		_methodName38 = "getLEOCertificates";
+		_methodName38 = "getFeedbacks";
 
 		_methodParameterTypes38 = new String[] {
 				"java.lang.String", "java.lang.String", "long", "int", "int"
@@ -236,7 +236,7 @@ public class FeedbackLocalServiceClpInvoker {
 
 		if (_methodName38.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes38, parameterTypes)) {
-			return FeedbackLocalServiceUtil.getLEOCertificates((java.lang.String)arguments[0],
+			return FeedbackLocalServiceUtil.getFeedbacks((java.lang.String)arguments[0],
 				(java.lang.String)arguments[1],
 				((Long)arguments[2]).longValue(),
 				((Integer)arguments[3]).intValue(),
