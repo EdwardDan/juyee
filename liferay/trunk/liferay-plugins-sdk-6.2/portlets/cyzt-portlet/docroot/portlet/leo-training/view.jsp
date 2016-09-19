@@ -51,8 +51,7 @@
 					value="<%=String.valueOf(++sortNo)%>" />
 				<liferay-ui:search-container-column-text property="xm" name="姓名" />
 				<liferay-ui:search-container-column-text property="zylx" name="专业类型" />
-				<liferay-ui:search-container-column-text property="zjbh"
-					name="证件编号" />
+				<liferay-ui:search-container-column-text property="zjbh" name="证件编号" />
 				<liferay-ui:search-container-column-text name="发证日期">
 					<fmt:formatDate value="${leoCertificate.fzrq}" pattern="yyyy-MM-dd" />
 				</liferay-ui:search-container-column-text>
@@ -71,9 +70,15 @@
 			</liferay-ui:search-container-row>
 			<liferay-ui:search-iterator>
 				<%
-					String zjbh = (String) request.getAttribute("zjbh");
+					String zylx = (String) request.getAttribute("zylx");
+									String xm = (String) request.getAttribute("xm");
+									String zjbh = (String) request.getAttribute("zjbh");
+									String yxq = (String) request.getAttribute("yxq");
 									PortletURL portletURL = searchContainer.getIteratorURL();
 									portletURL.setParameter("zjbh", zjbh);
+									portletURL.setParameter("xm", xm);
+									portletURL.setParameter("zjbh", zjbh);
+									portletURL.setParameter("yxq", yxq);
 				%>
 			</liferay-ui:search-iterator>
 		</liferay-ui:search-container>
