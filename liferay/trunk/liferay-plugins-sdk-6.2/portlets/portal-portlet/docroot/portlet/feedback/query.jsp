@@ -15,9 +15,10 @@
 	long[] roleIds = user.getRoleIds();
 	
 	boolean isAplyUser = false;
+	long feedbackAplyRoleId = GetterUtil.getLong(PropsUtil.get("feedback.aply.role.id"));
+	
  	for(long roleId : roleIds){
- 		if(Validator.equals(roleId, 123)){
- 	 		//if(Validator.equals(roleId, 20166)){
+ 		if(Validator.equals(roleId, feedbackAplyRoleId)){
  			isAplyUser = true;
  			break;
  		}
