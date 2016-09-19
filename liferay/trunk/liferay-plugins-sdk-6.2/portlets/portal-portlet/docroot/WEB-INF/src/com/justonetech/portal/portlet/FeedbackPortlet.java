@@ -10,6 +10,7 @@ import java.util.List;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletException;
+import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletSession;
 import javax.portlet.RenderRequest;
@@ -29,6 +30,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.User;
@@ -77,8 +79,9 @@ public class FeedbackPortlet extends MVCPortlet {
 			ParseException, IOException {
 		String zt = ParamUtil.getString(request, "zt");
 		String fknr = ParamUtil.getString(request, "fknr");
-		String lx = ParamUtil.getString(request, "lx");
-
+		PortletPreferences preferences = request.getPreferences();
+		String lx = preferences.getValue("lx", StringPool.BLANK);
+		System.out.println(lx);
 		Feedback feedback = null;
 		feedback = FeedbackLocalServiceUtil.createFeedback(CounterLocalServiceUtil.increment());
 		feedback.setZt(zt);
