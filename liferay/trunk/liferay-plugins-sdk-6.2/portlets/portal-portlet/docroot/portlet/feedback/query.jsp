@@ -5,9 +5,7 @@
 <%@ include file="/common/init.jsp"%>
 <c:set var="contextPath"
 	value="${request.contextPath}/portlet/feedback" />
-<style type="text/css">
-	<%@ include file="/portlet/feedback/css/query.css"%>
-</style>
+<link rel="stylesheet" type="text/css" href="/portal-portlet/portlet/feedback/css/query.css" />
 <portlet:renderURL var="searchURL" />
 <%
 	String zt = ParamUtil.getString(request, "zt");

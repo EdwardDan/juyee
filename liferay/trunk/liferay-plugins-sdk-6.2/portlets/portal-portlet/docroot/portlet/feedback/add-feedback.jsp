@@ -2,9 +2,6 @@
 <%@page import="com.liferay.portal.kernel.portlet.LiferayWindowState"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
-<%-- <style type="text/css">
-	<%@ include file="/portlet/feedback/css/query.css"%>
-</style> --%>
 <link rel="stylesheet" type="text/css" href="/portal-portlet/portlet/feedback/css/query.css" />
 <portlet:renderURL var="viewURL" />
 <portlet:actionURL var="savFeedBack" name="saveFeedBack">
