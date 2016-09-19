@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
+import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -35,8 +36,10 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnmodifiableList;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
@@ -82,6 +85,254 @@ public class LEOCertificatePersistenceImpl extends BasePersistenceImpl<LEOCertif
 	public static final FinderPath FINDER_PATH_COUNT_ALL = new FinderPath(LEOCertificateModelImpl.ENTITY_CACHE_ENABLED,
 			LEOCertificateModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll", new String[0]);
+	public static final FinderPath FINDER_PATH_FETCH_BY_ZJBH = new FinderPath(LEOCertificateModelImpl.ENTITY_CACHE_ENABLED,
+			LEOCertificateModelImpl.FINDER_CACHE_ENABLED,
+			LEOCertificateImpl.class, FINDER_CLASS_NAME_ENTITY, "fetchByZjbh",
+			new String[] { String.class.getName() },
+			LEOCertificateModelImpl.ZJBH_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_ZJBH = new FinderPath(LEOCertificateModelImpl.ENTITY_CACHE_ENABLED,
+			LEOCertificateModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByZjbh",
+			new String[] { String.class.getName() });
+
+	/**
+	 * Returns the l e o certificate where zjbh = &#63; or throws a {@link com.justonetech.cyzt.leo.NoSuchLEOCertificateException} if it could not be found.
+	 *
+	 * @param zjbh the zjbh
+	 * @return the matching l e o certificate
+	 * @throws com.justonetech.cyzt.leo.NoSuchLEOCertificateException if a matching l e o certificate could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public LEOCertificate findByZjbh(String zjbh)
+		throws NoSuchLEOCertificateException, SystemException {
+		LEOCertificate leoCertificate = fetchByZjbh(zjbh);
+
+		if (leoCertificate == null) {
+			StringBundler msg = new StringBundler(4);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("zjbh=");
+			msg.append(zjbh);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchLEOCertificateException(msg.toString());
+		}
+
+		return leoCertificate;
+	}
+
+	/**
+	 * Returns the l e o certificate where zjbh = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param zjbh the zjbh
+	 * @return the matching l e o certificate, or <code>null</code> if a matching l e o certificate could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public LEOCertificate fetchByZjbh(String zjbh) throws SystemException {
+		return fetchByZjbh(zjbh, true);
+	}
+
+	/**
+	 * Returns the l e o certificate where zjbh = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param zjbh the zjbh
+	 * @param retrieveFromCache whether to use the finder cache
+	 * @return the matching l e o certificate, or <code>null</code> if a matching l e o certificate could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public LEOCertificate fetchByZjbh(String zjbh, boolean retrieveFromCache)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { zjbh };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_ZJBH,
+					finderArgs, this);
+		}
+
+		if (result instanceof LEOCertificate) {
+			LEOCertificate leoCertificate = (LEOCertificate)result;
+
+			if (!Validator.equals(zjbh, leoCertificate.getZjbh())) {
+				result = null;
+			}
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_SELECT_LEOCERTIFICATE_WHERE);
+
+			boolean bindZjbh = false;
+
+			if (zjbh == null) {
+				query.append(_FINDER_COLUMN_ZJBH_ZJBH_1);
+			}
+			else if (zjbh.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_ZJBH_ZJBH_3);
+			}
+			else {
+				bindZjbh = true;
+
+				query.append(_FINDER_COLUMN_ZJBH_ZJBH_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (bindZjbh) {
+					qPos.add(zjbh);
+				}
+
+				List<LEOCertificate> list = q.list();
+
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_ZJBH,
+						finderArgs, list);
+				}
+				else {
+					if ((list.size() > 1) && _log.isWarnEnabled()) {
+						_log.warn(
+							"LEOCertificatePersistenceImpl.fetchByZjbh(String, boolean) with parameters (" +
+							StringUtil.merge(finderArgs) +
+							") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
+					}
+
+					LEOCertificate leoCertificate = list.get(0);
+
+					result = leoCertificate;
+
+					cacheResult(leoCertificate);
+
+					if ((leoCertificate.getZjbh() == null) ||
+							!leoCertificate.getZjbh().equals(zjbh)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_ZJBH,
+							finderArgs, leoCertificate);
+					}
+				}
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_ZJBH,
+					finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		if (result instanceof List<?>) {
+			return null;
+		}
+		else {
+			return (LEOCertificate)result;
+		}
+	}
+
+	/**
+	 * Removes the l e o certificate where zjbh = &#63; from the database.
+	 *
+	 * @param zjbh the zjbh
+	 * @return the l e o certificate that was removed
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public LEOCertificate removeByZjbh(String zjbh)
+		throws NoSuchLEOCertificateException, SystemException {
+		LEOCertificate leoCertificate = findByZjbh(zjbh);
+
+		return remove(leoCertificate);
+	}
+
+	/**
+	 * Returns the number of l e o certificates where zjbh = &#63;.
+	 *
+	 * @param zjbh the zjbh
+	 * @return the number of matching l e o certificates
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int countByZjbh(String zjbh) throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_ZJBH;
+
+		Object[] finderArgs = new Object[] { zjbh };
+
+		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
+				this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_LEOCERTIFICATE_WHERE);
+
+			boolean bindZjbh = false;
+
+			if (zjbh == null) {
+				query.append(_FINDER_COLUMN_ZJBH_ZJBH_1);
+			}
+			else if (zjbh.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_ZJBH_ZJBH_3);
+			}
+			else {
+				bindZjbh = true;
+
+				query.append(_FINDER_COLUMN_ZJBH_ZJBH_2);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (bindZjbh) {
+					qPos.add(zjbh);
+				}
+
+				count = (Long)q.uniqueResult();
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_ZJBH_ZJBH_1 = "leoCertificate.zjbh IS NULL";
+	private static final String _FINDER_COLUMN_ZJBH_ZJBH_2 = "leoCertificate.zjbh = ?";
+	private static final String _FINDER_COLUMN_ZJBH_ZJBH_3 = "(leoCertificate.zjbh IS NULL OR leoCertificate.zjbh = '')";
 
 	public LEOCertificatePersistenceImpl() {
 		setModelClass(LEOCertificate.class);
@@ -97,6 +348,9 @@ public class LEOCertificatePersistenceImpl extends BasePersistenceImpl<LEOCertif
 		EntityCacheUtil.putResult(LEOCertificateModelImpl.ENTITY_CACHE_ENABLED,
 			LEOCertificateImpl.class, leoCertificate.getPrimaryKey(),
 			leoCertificate);
+
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_ZJBH,
+			new Object[] { leoCertificate.getZjbh() }, leoCertificate);
 
 		leoCertificate.resetOriginalValues();
 	}
@@ -154,6 +408,8 @@ public class LEOCertificatePersistenceImpl extends BasePersistenceImpl<LEOCertif
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache(leoCertificate);
 	}
 
 	@Override
@@ -164,6 +420,49 @@ public class LEOCertificatePersistenceImpl extends BasePersistenceImpl<LEOCertif
 		for (LEOCertificate leoCertificate : leoCertificates) {
 			EntityCacheUtil.removeResult(LEOCertificateModelImpl.ENTITY_CACHE_ENABLED,
 				LEOCertificateImpl.class, leoCertificate.getPrimaryKey());
+
+			clearUniqueFindersCache(leoCertificate);
+		}
+	}
+
+	protected void cacheUniqueFindersCache(LEOCertificate leoCertificate) {
+		if (leoCertificate.isNew()) {
+			Object[] args = new Object[] { leoCertificate.getZjbh() };
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_ZJBH, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_ZJBH, args,
+				leoCertificate);
+		}
+		else {
+			LEOCertificateModelImpl leoCertificateModelImpl = (LEOCertificateModelImpl)leoCertificate;
+
+			if ((leoCertificateModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_ZJBH.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] { leoCertificate.getZjbh() };
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_ZJBH, args,
+					Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_ZJBH, args,
+					leoCertificate);
+			}
+		}
+	}
+
+	protected void clearUniqueFindersCache(LEOCertificate leoCertificate) {
+		LEOCertificateModelImpl leoCertificateModelImpl = (LEOCertificateModelImpl)leoCertificate;
+
+		Object[] args = new Object[] { leoCertificate.getZjbh() };
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_ZJBH, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_ZJBH, args);
+
+		if ((leoCertificateModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_ZJBH.getColumnBitmask()) != 0) {
+			args = new Object[] { leoCertificateModelImpl.getOriginalZjbh() };
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_ZJBH, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_ZJBH, args);
 		}
 	}
 
@@ -302,13 +601,16 @@ public class LEOCertificatePersistenceImpl extends BasePersistenceImpl<LEOCertif
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 
-		if (isNew) {
+		if (isNew || !LEOCertificateModelImpl.COLUMN_BITMASK_ENABLED) {
 			FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 		}
 
 		EntityCacheUtil.putResult(LEOCertificateModelImpl.ENTITY_CACHE_ENABLED,
 			LEOCertificateImpl.class, leoCertificate.getPrimaryKey(),
 			leoCertificate);
+
+		clearUniqueFindersCache(leoCertificate);
+		cacheUniqueFindersCache(leoCertificate);
 
 		return leoCertificate;
 	}
@@ -646,9 +948,12 @@ public class LEOCertificatePersistenceImpl extends BasePersistenceImpl<LEOCertif
 	}
 
 	private static final String _SQL_SELECT_LEOCERTIFICATE = "SELECT leoCertificate FROM LEOCertificate leoCertificate";
+	private static final String _SQL_SELECT_LEOCERTIFICATE_WHERE = "SELECT leoCertificate FROM LEOCertificate leoCertificate WHERE ";
 	private static final String _SQL_COUNT_LEOCERTIFICATE = "SELECT COUNT(leoCertificate) FROM LEOCertificate leoCertificate";
+	private static final String _SQL_COUNT_LEOCERTIFICATE_WHERE = "SELECT COUNT(leoCertificate) FROM LEOCertificate leoCertificate WHERE ";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "leoCertificate.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No LEOCertificate exists with the primary key ";
+	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No LEOCertificate exists with the key {";
 	private static final boolean _HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE = GetterUtil.getBoolean(PropsUtil.get(
 				PropsKeys.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE));
 	private static Log _log = LogFactoryUtil.getLog(LEOCertificatePersistenceImpl.class);

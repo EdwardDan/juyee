@@ -18,7 +18,9 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import com.justonetech.cyzt.leo.NoSuchLEOCertificateException;
 import com.justonetech.cyzt.leo.model.LEOCertificate;
+import com.justonetech.cyzt.leo.model.LEOTraining;
 import com.justonetech.cyzt.leo.service.base.LEOCertificateLocalServiceBaseImpl;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.OrderFactoryUtil;
@@ -29,33 +31,32 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Validator;
 
 /**
- * The implementation of the l e o certificate local service.
- *
- * <p>
- * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.justonetech.cyzt.leo.service.LEOCertificateLocalService} interface.
- *
- * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
- * </p>
+ * The implementation of the l e o certificate local service. <p> All custom
+ * service methods should be put in this class. Whenever methods are added,
+ * rerun ServiceBuilder to copy their definitions into the
+ * {@link com.justonetech.cyzt.leo.service.LEOCertificateLocalService}
+ * interface. <p> This is a local service. Methods of this service will not have
+ * security checks based on the propagated JAAS credentials because this service
+ * can only be accessed from within the same VM. </p>
  *
  * @author fanqi
  * @see com.justonetech.cyzt.leo.service.base.LEOCertificateLocalServiceBaseImpl
  * @see com.justonetech.cyzt.leo.service.LEOCertificateLocalServiceUtil
  */
-public class LEOCertificateLocalServiceImpl
-	extends LEOCertificateLocalServiceBaseImpl {
+public class LEOCertificateLocalServiceImpl extends LEOCertificateLocalServiceBaseImpl {
+
 	/*
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this interface directly. Always use {@link com.justonetech.cyzt.leo.service.LEOCertificateLocalServiceUtil} to access the l e o certificate local service.
+	 * NOTE FOR DEVELOPERS: Never reference this interface directly. Always use
+	 * {@link com.justonetech.cyzt.leo.service.LEOCertificateLocalServiceUtil}
+	 * to access the l e o certificate local service.
 	 */
 	private static Log log = LogFactoryUtil.getLog(LEOCertificateLocalServiceImpl.class);
 
 	@SuppressWarnings("unchecked")
-	public List<LEOCertificate> getLEOCertificates(String xm,String zylx, String zjbh, Date yxq, int start, int end) {
+	public List<LEOCertificate> getLEOCertificates(String xm, String zylx, String zjbh, Date yxq, int start, int end) {
 
 		try {
-			return this.dynamicQuery(createDynamicQuery(xm,zylx,zjbh,yxq), start, end);
+			return this.dynamicQuery(createDynamicQuery(xm, zylx, zjbh, yxq), start, end);
 		}
 		catch (SystemException e) {
 			log.info(e.getMessage());
@@ -63,10 +64,10 @@ public class LEOCertificateLocalServiceImpl
 		return Collections.emptyList();
 	}
 
-	public int getProjectsCount(String xm,String zylx, String zjbh, Date yxq) {
+	public int getProjectsCount(String xm, String zylx, String zjbh, Date yxq) {
 
 		try {
-			return (int) this.dynamicQueryCount(createDynamicQuery(xm,zylx,zjbh,yxq));
+			return (int) this.dynamicQueryCount(createDynamicQuery(xm, zylx, zjbh, yxq));
 		}
 		catch (SystemException e) {
 			log.info(e.getMessage());
@@ -74,7 +75,7 @@ public class LEOCertificateLocalServiceImpl
 		return 0;
 	}
 
-	public DynamicQuery createDynamicQuery(String xm,String zylx, String zjbh, Date yxq) {
+	public DynamicQuery createDynamicQuery(String xm, String zylx, String zjbh, Date yxq) {
 
 		DynamicQuery dynamicQuery = this.dynamicQuery();
 		if (!Validator.isBlank(xm)) {
@@ -91,5 +92,16 @@ public class LEOCertificateLocalServiceImpl
 		}
 		dynamicQuery.addOrder(OrderFactoryUtil.asc("certificateId"));
 		return dynamicQuery;
+	}
+
+	public LEOCertificate findByZjbh(String zjbh, int start, int end) {
+
+		try {
+			return leoCertificatePersistence.findByZjbh(zjbh);
+		}
+		catch (NoSuchLEOCertificateException | SystemException e) {
+			log.info(e.getMessage());
+		}
+		return null;
 	}
 }

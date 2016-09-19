@@ -38,6 +38,64 @@ public interface LEOCertificatePersistence extends BasePersistence<LEOCertificat
 	 */
 
 	/**
+	* Returns the l e o certificate where zjbh = &#63; or throws a {@link com.justonetech.cyzt.leo.NoSuchLEOCertificateException} if it could not be found.
+	*
+	* @param zjbh the zjbh
+	* @return the matching l e o certificate
+	* @throws com.justonetech.cyzt.leo.NoSuchLEOCertificateException if a matching l e o certificate could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.justonetech.cyzt.leo.model.LEOCertificate findByZjbh(
+		java.lang.String zjbh)
+		throws com.justonetech.cyzt.leo.NoSuchLEOCertificateException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the l e o certificate where zjbh = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param zjbh the zjbh
+	* @return the matching l e o certificate, or <code>null</code> if a matching l e o certificate could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.justonetech.cyzt.leo.model.LEOCertificate fetchByZjbh(
+		java.lang.String zjbh)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the l e o certificate where zjbh = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param zjbh the zjbh
+	* @param retrieveFromCache whether to use the finder cache
+	* @return the matching l e o certificate, or <code>null</code> if a matching l e o certificate could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.justonetech.cyzt.leo.model.LEOCertificate fetchByZjbh(
+		java.lang.String zjbh, boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Removes the l e o certificate where zjbh = &#63; from the database.
+	*
+	* @param zjbh the zjbh
+	* @return the l e o certificate that was removed
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.justonetech.cyzt.leo.model.LEOCertificate removeByZjbh(
+		java.lang.String zjbh)
+		throws com.justonetech.cyzt.leo.NoSuchLEOCertificateException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the number of l e o certificates where zjbh = &#63;.
+	*
+	* @param zjbh the zjbh
+	* @return the number of matching l e o certificates
+	* @throws SystemException if a system exception occurred
+	*/
+	public int countByZjbh(java.lang.String zjbh)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Caches the l e o certificate in the entity cache if it is enabled.
 	*
 	* @param leoCertificate the l e o certificate

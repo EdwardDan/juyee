@@ -135,6 +135,10 @@ public class LEOCertificateLocalServiceClp implements LEOCertificateLocalService
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.util.Date"
 			};
+
+		_methodName22 = "findByZjbh";
+
+		_methodParameterTypes22 = new String[] { "java.lang.String", "int", "int" };
 	}
 
 	@Override
@@ -792,6 +796,31 @@ public class LEOCertificateLocalServiceClp implements LEOCertificateLocalService
 		return (com.liferay.portal.kernel.dao.orm.DynamicQuery)ClpSerializer.translateOutput(returnObj);
 	}
 
+	@Override
+	public com.justonetech.cyzt.leo.model.LEOCertificate findByZjbh(
+		java.lang.String zjbh, int start, int end) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName22,
+					_methodParameterTypes22,
+					new Object[] { ClpSerializer.translateInput(zjbh), start, end });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.justonetech.cyzt.leo.model.LEOCertificate)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableLocalService _invokableLocalService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -835,4 +864,6 @@ public class LEOCertificateLocalServiceClp implements LEOCertificateLocalService
 	private String[] _methodParameterTypes20;
 	private String _methodName21;
 	private String[] _methodParameterTypes21;
+	private String _methodName22;
+	private String[] _methodParameterTypes22;
 }

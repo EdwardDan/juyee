@@ -87,7 +87,11 @@ public class LEOCertificateModelImpl extends BaseModelImpl<LEOCertificate>
 	public static final boolean FINDER_CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.finder.cache.enabled.com.justonetech.cyzt.leo.model.LEOCertificate"),
 			true);
-	public static final boolean COLUMN_BITMASK_ENABLED = false;
+	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
+				"value.object.column.bitmask.enabled.com.justonetech.cyzt.leo.model.LEOCertificate"),
+			true);
+	public static long ZJBH_COLUMN_BITMASK = 1L;
+	public static long CERTIFICATEID_COLUMN_BITMASK = 2L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.util.service.ServiceProps.get(
 				"lock.expiration.time.com.justonetech.cyzt.leo.model.LEOCertificate"));
 
@@ -331,7 +335,17 @@ public class LEOCertificateModelImpl extends BaseModelImpl<LEOCertificate>
 
 	@Override
 	public void setZjbh(String zjbh) {
+		_columnBitmask |= ZJBH_COLUMN_BITMASK;
+
+		if (_originalZjbh == null) {
+			_originalZjbh = _zjbh;
+		}
+
 		_zjbh = zjbh;
+	}
+
+	public String getOriginalZjbh() {
+		return GetterUtil.getString(_originalZjbh);
 	}
 
 	@Override
@@ -367,6 +381,10 @@ public class LEOCertificateModelImpl extends BaseModelImpl<LEOCertificate>
 	@Override
 	public void setFzrq(Date fzrq) {
 		_fzrq = fzrq;
+	}
+
+	public long getColumnBitmask() {
+		return _columnBitmask;
 	}
 
 	@Override
@@ -458,6 +476,11 @@ public class LEOCertificateModelImpl extends BaseModelImpl<LEOCertificate>
 
 	@Override
 	public void resetOriginalValues() {
+		LEOCertificateModelImpl leoCertificateModelImpl = this;
+
+		leoCertificateModelImpl._originalZjbh = leoCertificateModelImpl._zjbh;
+
+		leoCertificateModelImpl._columnBitmask = 0;
 	}
 
 	@Override
@@ -652,8 +675,10 @@ public class LEOCertificateModelImpl extends BaseModelImpl<LEOCertificate>
 	private Date _modifiedDate;
 	private String _xm;
 	private String _zjbh;
+	private String _originalZjbh;
 	private String _zylx;
 	private Date _yxq;
 	private Date _fzrq;
+	private long _columnBitmask;
 	private LEOCertificate _escapedModel;
 }

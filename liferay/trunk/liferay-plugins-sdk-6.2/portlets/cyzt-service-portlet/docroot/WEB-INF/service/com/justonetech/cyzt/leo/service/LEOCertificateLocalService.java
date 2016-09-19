@@ -266,4 +266,7 @@ public interface LEOCertificateLocalService extends BaseLocalService,
 	public com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQuery(
 		java.lang.String xm, java.lang.String zylx, java.lang.String zjbh,
 		java.util.Date yxq);
+
+	public com.justonetech.cyzt.leo.model.LEOCertificate findByZjbh(
+		java.lang.String zjbh, int start, int end);
 }
