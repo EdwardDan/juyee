@@ -40,7 +40,7 @@
 	<%
 		int sortNo = 0;
 	%>
-	<liferay-ui:panel title="竣工备案列表" collapsible="false">
+	<liferay-ui:panel title="教育人员列表" collapsible="false">
 		<liferay-ui:search-container emptyResultsMessage="没有继续教育人员数据。">
 			<liferay-ui:search-container-results results="${leoCertificates}"
 				total="${leoCertificatesCount}">
