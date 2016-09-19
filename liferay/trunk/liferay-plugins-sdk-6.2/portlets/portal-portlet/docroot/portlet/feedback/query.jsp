@@ -3,26 +3,19 @@
 <%@page import="com.justonetech.portal.feedback.model.Feedback"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
-<%@ include file="/portlet/feedback/css/query.css"%>
+<style type="text/css">
+	<%@ include file="/portlet/feedback/css/query.css"%>
+</style>
 <portlet:renderURL var="searchURL" />
 <%
-	int delta = GetterUtil.getInteger(PropsUtil.get(PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA));
-	int pageSize = ParamUtil.getInteger(renderRequest, "delta", delta);
-	int pageNumber = ParamUtil.getInteger(renderRequest, "cur", 1);
-	int start = pageSize * (pageNumber - 1);
-	int end = pageSize * pageNumber;
 	String zt = ParamUtil.getString(request, "zt");
 	String lx = ParamUtil.getString(request, "lx");
-	System.out.println("zt============" + zt + "lx=============" + lx);
 	long fkrId = 0L;
 	long currentUserId = PortalUtil.getUserId(request);
-
-	List<Feedback> feedbacks = FeedbackLocalServiceUtil.getFeedbacks(zt, lx, -1, start, end);
-	int feedbackCount = FeedbackLocalServiceUtil.getFeedbacksCount(zt, lx, -1);
-	request.setAttribute("feedbacks", feedbacks);
-	request.setAttribute("feedbackCount", feedbackCount);
+	request.setAttribute("zt", zt);
+	request.setAttribute("lx", lx);
 %>
-<aui:form name="fm" id="fm" method="get" action="${searchURL }">
+<aui:form name="fm" id="fm" method="post" action="${searchURL }">
 	<div class="out">
 		<div class="middle"></div>
 		<div class="in">
@@ -53,8 +46,8 @@
 	</div>
 </aui:form>
 <liferay-ui:search-container emptyResultsMessage="没有互动反馈数据。">
-	<liferay-ui:search-container-results results="${feedbacks}"
-		total="${feedbackCount}">
+	<liferay-ui:search-container-results results="<%=FeedbackLocalServiceUtil.getFeedbacks(zt, lx, -1, searchContainer.getStart(), searchContainer.getEnd()) %>"
+		total="<%=FeedbackLocalServiceUtil.getFeedbacksCount(zt, lx, -1) %>">
 	</liferay-ui:search-container-results>
 	<liferay-ui:search-container-row
 		className="com.justonetech.portal.feedback.model.Feedback"
