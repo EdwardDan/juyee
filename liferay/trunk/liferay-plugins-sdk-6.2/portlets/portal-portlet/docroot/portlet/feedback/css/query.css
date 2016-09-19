@@ -1,9 +1,8 @@
-<style type="text/css">
 div.out {
 	border-left: 1px solid #ddd;
 	border-bottom: 1px solid #ddd;
 	border-right: 1px solid #ddd;
-	box-shadow: 2px 2px 2px #e8e8e8
+	box-shadow: 2px 2px 2px #e8e8e8;
 }
 
 div.middle {
@@ -27,4 +26,3 @@ table.thead tr td span {
 	vertical-align: middle;
 	font-family: "Microsoft YaHei UI";
 }
-</style>
