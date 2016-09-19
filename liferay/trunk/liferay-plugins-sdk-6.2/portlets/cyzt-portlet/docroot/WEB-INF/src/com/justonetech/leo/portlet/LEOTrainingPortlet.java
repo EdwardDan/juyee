@@ -58,6 +58,8 @@ public class LEOTrainingPortlet extends MVCPortlet {
 		leoCertificates = LEOCertificateLocalServiceUtil.getLEOCertificates(xm, zylx, zjbh, yxq, start, end);
 		leoCertificatesCount = LEOCertificateLocalServiceUtil.getLEOCertificatesCount(xm, zylx, zjbh, yxq);
 		renderRequest.setAttribute("zjbh", zjbh);
+		renderRequest.setAttribute("zylx", zylx);
+		renderRequest.setAttribute("xm", xm);
 		renderRequest.setAttribute("leoCertificates", leoCertificates);
 		renderRequest.setAttribute("leoCertificatesCount", leoCertificatesCount);
 		renderRequest.setAttribute("yxq", yxq);
