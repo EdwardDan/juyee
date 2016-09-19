@@ -1,6 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
 <link rel="stylesheet" type="text/css" href="/portal-portlet/portlet/feedback/css/query.css" />
+<liferay-ui:error key="captcha-fail" message="${errorMessages }"/>
+
 <portlet:renderURL var="viewURL" />
 <portlet:actionURL var="saveFeedBack" name="saveFeedBack">
 	<portlet:param name="redirect" value="${viewURL}"/>
@@ -35,7 +37,7 @@
 			最多可以再输入<span id="contentCounter" style="color: red"></span>个汉字
 		</aui:col>
 	</aui:row>
-	<portlet:resourceURL var="captchaURL">
+	<portlet:resourceURL var="captchaURL" id="captchaID">
 		<portlet:param name="struts_action" value="/login/captcha" />
 	</portlet:resourceURL>
 	<liferay-ui:captcha url="<%=captchaURL%>" />
@@ -45,7 +47,7 @@
 	</aui:row>
 	<aui:row>
 		<aui:col span="12" cssClass="text-center">
-			<aui:button type="submit" value="提交" onClick="return onSubmit()"/>
+			<aui:button type="submit" value="提交" />
 			<aui:button type="cancel" value="返回" href="${viewURL}" />
 		</aui:col>
 	</aui:row>
