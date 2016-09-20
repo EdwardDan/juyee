@@ -7,7 +7,7 @@
 <portlet:renderURL var="viewURL" />
 <%
 	long feedbackId = ParamUtil.getLong(request, "feedbackId");
-	Feedback feedback = FeedbackLocalServiceUtil.getFeedback(feedbackId);
+	Feedback feedback = FeedbackLocalServiceUtil.getFeedback(231532);
 	request.setAttribute("feedback", feedback);
 %>
 <aui:form id="fm" action="">
@@ -49,7 +49,7 @@
 			<aui:input name="fknr" label="内容" type="textarea" cssClass="span12"
 				disabled="true" value="${feedback.fknr}" style="height:100px" />
 		</aui:col>
-	</aui:row>
+	</aui:row><br>
 	<aui:row style="margin-left:15px">
 		<aui:col span="11">
 			<aui:input name="hfjg" label="回复结果" type="textarea" cssClass="span12"

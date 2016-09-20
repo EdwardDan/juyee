@@ -9,11 +9,6 @@ div.hf {
 	padding: 15px;
 }
 
-div.hf textarea {
-	width: 450px;
-	height: 200px;
-}
-
 div.hf button {
 	width: 100px;
 }
@@ -40,20 +35,43 @@ div.hf button {
 				</td>
 			</tr>
 		</table>
-	</div>
+	</div><br>
 	<aui:form id="fm" method="post" action="${saveReplyFeedBackURL}">
-		<div class="hf">主题: ${feedback.zt}</div>
-		<div class="hf">类型:
-			${feedback.lx}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;反馈日期:<fmt:formatDate value="${feedback.fkrq}" pattern="yyyy-MM-dd" /></div>
-		<div class="hf">反馈内容:</div>
+		<aui:row style="margin-left:15px">
+		<aui:col span="2">
+			主题:
+		</aui:col>
+		<aui:col span="10">
+			${feedback.zt}
+		</aui:col>
+	</aui:row>
+	<aui:row style="margin-left:15px">
+		<aui:col span="2">
+			类型:
+		</aui:col>
+		<aui:col span="4">
+			${feedback.lx}
+		</aui:col>
+		<aui:col span="2">
+			反馈日期:
+		</aui:col>
+		<aui:col span="4">
+			<fmt:formatDate value="${feedback.hfrq}" pattern="yyyy-MM-dd" />
+		</aui:col>
+	</aui:row>
+	<aui:row style="margin-left:15px">
+		<aui:col span="11">
+			<aui:input name="fknr" label="内容" type="textarea" cssClass="span12"
+				disabled="true" value="${feedback.fknr}" style="height:100px" />
+		</aui:col>
+	</aui:row><br>
+	<aui:row style="margin-left:15px">
+		<aui:col span="11">
+			<aui:input name="hfjg" label="回复结果" type="textarea" cssClass="span12"
+				  style="height:100px" />
+		</aui:col>
+	</aui:row>
 		<div class="hf">
-			<textarea readonly="readonly">${feedback.fknr}</textarea>
-		</div>
-		<div class="hf">回复结果:</div>
-		<div class="hf">
-			<aui:input name="hfjg" type="textarea" label=""></aui:input>
-		</div>
-		<div class="hf" style="width: 450px; text-align: center">
 			<aui:button type="submit" value="提交" />
 			<aui:button type="cancel" value="取消" href="${viewURL }" />
 		</div>
