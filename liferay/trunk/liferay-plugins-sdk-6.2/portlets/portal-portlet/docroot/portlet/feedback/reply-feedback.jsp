@@ -44,7 +44,7 @@ div.hf button {
 	<aui:form id="fm" method="post" action="${saveReplyFeedBackURL}">
 		<div class="hf">主题: ${feedback.zt}</div>
 		<div class="hf">类型:
-			${feedback.lx}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;反馈日期:<fmt:formatDate value="${feedback.hfrq}" pattern="yyyy-MM-dd" /></div>
+			${feedback.lx}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;反馈日期:<fmt:formatDate value="${feedback.fkrq}" pattern="yyyy-MM-dd" /></div>
 		<div class="hf">反馈内容:</div>
 		<div class="hf">
 			<textarea readonly="readonly">${feedback.fknr}</textarea>
