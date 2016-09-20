@@ -24,7 +24,7 @@
 			%>
 		</aui:select>
 		<aui:input type="text" name="action" label="操作"
-			value="${action}" required="true" />
+			value="${action}"/>
 	</aui:fieldset>
 	<aui:button-row>
 		<aui:button type="submit" />
