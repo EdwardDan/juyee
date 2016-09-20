@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Collections;
 import java.util.Date;
-import java.util.Enumeration;
 import java.util.List;
 import java.util.Locale;
 
@@ -12,8 +11,6 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletException;
 import javax.portlet.PortletPreferences;
-import javax.portlet.PortletRequest;
-import javax.portlet.PortletSession;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
@@ -32,6 +29,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.ParseException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -87,33 +85,54 @@ public class FeedbackPortlet extends MVCPortlet {
 
 	public void saveFeedBack(ActionRequest request, ActionResponse response) throws SystemException, PortalException,
 			ParseException, IOException {
-		try {
-			CaptchaUtil.check(request);
-			String zt = ParamUtil.getString(request, "zt");
-			String fknr = ParamUtil.getString(request, "fknr");
-			PortletPreferences preferences = request.getPreferences();
-			String lx = preferences.getValue("lx", StringPool.BLANK);
-			Feedback feedback = FeedbackLocalServiceUtil.createFeedback(CounterLocalServiceUtil.increment());
-			feedback.setZt(zt);
-			feedback.setFknr(fknr);
-			feedback.setLx(lx);
-			feedback.setFkrq(new Date());
-			ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
-			feedback.setFkrId(themeDisplay.getRealUser().getUserId());
-			feedback.setFkrq(new Date());
-			feedback.setGroupId(themeDisplay.getCompanyGroupId());
-			feedback.setCompanyId(themeDisplay.getCompanyId());
-			FeedbackLocalServiceUtil.addFeedback(feedback);
-		} catch (Exception e) {
-			request.setAttribute("errorMessages", "验证码错误！！");
-			SessionErrors.add(request, "captcha-fail");
-		}
+		String zt = ParamUtil.getString(request, "zt");
+		String fknr = ParamUtil.getString(request, "fknr");
+		PortletPreferences preferences = request.getPreferences();
+		String lx = preferences.getValue("lx", StringPool.BLANK);
+		Feedback feedback = FeedbackLocalServiceUtil.createFeedback(CounterLocalServiceUtil.increment());
+		feedback.setZt(zt);
+		feedback.setFknr(fknr);
+		feedback.setLx(lx);
+		feedback.setFkrq(new Date());
+		ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
+		feedback.setFkrId(themeDisplay.getRealUser().getUserId());
+		feedback.setFkrq(new Date());
+		feedback.setGroupId(themeDisplay.getCompanyGroupId());
+		feedback.setCompanyId(themeDisplay.getCompanyId());
+		FeedbackLocalServiceUtil.addFeedback(feedback);
 	}
+
+	public static final String CAPTCHA_TEXT = "CAPTCHA_TEXT";
 
 	@Override
 	public void serveResource(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException,
 			PortletException {
 		String resourceId = resourceRequest.getResourceID();
+
+		if (resourceId.equals("ajaxCaptcha")) {
+			String value = resourceRequest.getParameter("captchaText");
+			log.debug("captchaText:" + value);
+			if (value == null) {
+				try {
+					CaptchaUtil.serveImage(resourceRequest, resourceResponse);
+				} catch (Exception e) {
+					// _log.error(e);
+				}
+			} else // do verify
+			{
+				if (!Validator.isBlank(value)) {
+					resourceResponse.setContentType(ContentTypes.TEXT);
+					String answer = (String) resourceRequest.getPortletSession().getAttribute(CAPTCHA_TEXT);
+					log.debug("answer:" + answer);
+					String ret = String.valueOf(value.equalsIgnoreCase(answer));
+
+					// CaptchaUtil.check(resourceRequest);
+					resourceResponse.getPortletOutputStream().write(ret.getBytes());
+					log.debug("captcha verify:" + ret);
+				}
+			}
+		}
+
 		if (resourceId.equals("captchaID")) {
 			try {
 				com.liferay.portal.kernel.captcha.CaptchaUtil.serveImage(resourceRequest, resourceResponse);
