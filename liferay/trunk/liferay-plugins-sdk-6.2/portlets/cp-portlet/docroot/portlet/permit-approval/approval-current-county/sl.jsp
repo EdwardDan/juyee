@@ -15,13 +15,13 @@
 </portlet:actionURL>
 <aui:form action="${saveCsURL}" method="post">
 	<div class="text-center">
-		<table style="width: 98%" border="1">
-			<tr>
-				<td width="5%">序号</td>
-				<td width="30%">材料提交名称</td>
-				<td width="45%">审核要求</td>
-				<td width="20%">初审意见</td>
-			</tr>
+		<table style="width: 100%" class="table table-striped table-bordered table-hover">
+			<thead>
+				<th width="5%">序号</th>
+				<th width="30%">材料提交名称</th>
+				<th width="45%">审核要求</th>
+				<th width="20%">初审意见</th>
+			</thead>
 			<tbody id="applyMaterials">
 				<c:if test="${!empty applyMaterials}">
 					<c:forEach items="<%=applyMaterials%>" var="applyMaterial">
