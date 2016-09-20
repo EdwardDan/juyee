@@ -38,10 +38,14 @@
 			最多可以再输入<span id="contentCounter" style="color: red"></span>个汉字
 		</aui:col>
 		</aui:row>
-		<portlet:resourceURL var="captchaURL" id="captchaID">
-			<portlet:param name="struts_action" value="/login/captcha" />
-		</portlet:resourceURL>
-		<liferay-ui:captcha url="<%=captchaURL%>" />
+		<aui:row style="margin-left:15px">
+			<aui:col span="11">
+				<portlet:resourceURL var="captchaURL" id="captchaID">
+					<portlet:param name="struts_action" value="/login/captcha" />
+				</portlet:resourceURL>
+				<liferay-ui:captcha url="<%=captchaURL%>" />
+			</aui:col>
+		</aui:row>
 		<aui:row>
 			<aui:col span="12">
 			</aui:col>
@@ -69,6 +73,8 @@
 	});
 </aui:script>
 	
+
+
 
 
 
