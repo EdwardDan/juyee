@@ -56,7 +56,7 @@
 	<portlet:param name="mvcPath" value="${contextPath}/wldsh.jsp" />
 	<portlet:param name="permitId" value="${permitId }" />
 </portlet:renderURL>
-<table class="table table-border table-hover table-striped" style="width: 100% ；text-align:center;">
+<table class="table table-bordered table-hover table-striped" style="width: 100% ；text-align:center;">
 	<thead>
 		<th style="text-align: center" style="width:20%">审核步骤</th>
 		<th style="text-align: center" style="width:40%">审核意见</th>
