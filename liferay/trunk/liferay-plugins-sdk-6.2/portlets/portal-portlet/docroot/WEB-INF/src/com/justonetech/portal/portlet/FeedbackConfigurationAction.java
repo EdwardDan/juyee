@@ -28,6 +28,8 @@ public class FeedbackConfigurationAction extends DefaultConfigurationAction {
 		renderRequest.setAttribute("displayPage", displayPage);
 		String lxId = preferences.getValue("lxId", StringPool.BLANK);
 		renderRequest.setAttribute("lxId", GetterUtil.getLong(lxId));
+		String action = preferences.getValue("action", StringPool.BLANK);
+		renderRequest.setAttribute("action", action);
 		return "/portlet/feedback/config.jsp";
 	}
 	
@@ -45,6 +47,8 @@ public class FeedbackConfigurationAction extends DefaultConfigurationAction {
 			preferences.setValue("displayPage", displayPage);
 			String lxId = ParamUtil.getString(actionRequest, "lxId");
 			preferences.setValue("lxId", lxId);
+			String action = ParamUtil.getString(actionRequest, "action");
+			preferences.setValue("action", action);
 			preferences.store();
 			SessionMessages.add(actionRequest, "success");
 		}
