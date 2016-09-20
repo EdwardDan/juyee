@@ -16,7 +16,7 @@
 	request.setAttribute("roles", roles.toString());
 %>
 <c:choose>
-	<c:when test="${(sqztInit=='2'&&fn:contains(roles,'25982'))||(sqztInit=='8'&&fn:contains(roles,'25982'))}">
+	<c:when test="${(sqztInit=='2'&&fn:contains(roles,'25982'))||(sqztInit=='8'&&fn:contains(roles,'25982'))||(sqztInit=='9'&&fn:contains(roles,'25982'))}">
 		<jsp:include page="${contextPath }/approval-current-county/sj.jsp" />
 	</c:when>
 	<c:when test="${sqztInit=='3'&&fn:contains(roles,'25983') }">
