@@ -45,10 +45,9 @@
 		<portlet:param name="mvcPath" value="${contextPath}/print/jsscb.jsp" />
 		<portlet:param name="permitId" value="${permitId}" />
 	</portlet:renderURL>
-	<portlet:renderURL var="printsgxklszsURL" windowState="pop_up">
-		<portlet:param name="mvcPath"
-			value="${contextPath}/print/sgxklszs.jsp" />
-	</portlet:renderURL>
+	<portlet:actionURL var="printsgxkURL" name="generatePDF"> 
+		<portlet:param name="permitId" value="${permitId}" />
+	</portlet:actionURL>
 	<c:if test="<%=!projectProfile.getLxjb().equals(\"区县级机关或区县级单位\")%>">
 		<c:if test="<%=status >= 5%>">
 			<a class="btn" href="${printsjpzURL}" target="_blank">收件凭证</a>
@@ -57,6 +56,8 @@
 			<a class="btn" href="${printsltzsURL}" target="_blank">受理通知书</a>
 			<a class="btn" href="${printbysljdsURL}" target="_blank">不予受理决定书</a>
 			<a class="btn" href="${printbzclURL}" target="_blank">补正材料</a>
+		</c:if>
+		<c:if test="<%=status==23%>">
 		</c:if>
 		<c:if
 			test="<%=status == CityPermitStatus.STATUS_ZXLD_PASS.getCode()
@@ -71,7 +72,7 @@
 						<a class="btn" href="${printsgxklszsURL}" target="_blank">施工许可(绿色)</a>
 					</c:if>
 					<c:if test="<%=projectProfile.getXmxz() == 29769%>">
-						<a class="btn" href="${printsgxklszsURL}" target="_blank">施工许可</a>
+						<a class="btn" href="${printsgxkURL}">施工许可</a>
 					</c:if>
 				</c:otherwise>
 			</c:choose>
@@ -90,6 +91,8 @@
 								|| status == CountyPermitStatus.STATUS_SP_BACK.getCode()%>">
 			<a class="btn" href="${printsltzsURL}" target="_blank">受理通知书</a>
 			<a class="btn" href="${printbysljdsURL}" target="_blank">不予受理决定书</a>
+		</c:if>
+		<c:if test="<%=status==9%>">
 			<a class="btn" href="${printbzclURL}" target="_blank">补正材料</a>
 		</c:if>
 		<c:if
@@ -99,7 +102,7 @@
 					<a class="btn" href="" target="_blank">开工备案</a>
 				</c:when>
 				<c:otherwise>
-					<a class="btn" href="" target="_blank">施工许可</a>
+					<a class="btn" href="${printsgxkURL}">施工许可</a>
 				</c:otherwise>
 			</c:choose>
 		</c:if>
