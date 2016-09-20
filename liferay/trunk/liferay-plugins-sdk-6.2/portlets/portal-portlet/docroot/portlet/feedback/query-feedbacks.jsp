@@ -85,7 +85,7 @@
 					<portlet:param name="lx" value="<%=lx %>"/>
 				</portlet:renderURL>
 				<liferay-ui:icon image="view" label="查看" url="${viewFeedbackURL }" />
-				<c:if test="<%=Validator.equals(action, "aply") %>">
+				<c:if test='<%=Validator.equals(action, "aply") %>'>
 					<portlet:renderURL var="replyFeedbackURL">
 						<portlet:param name="mvcPath" value="${contextPath }/reply-feedback.jsp"/>
 						<portlet:param name="feedbackId" value="${feedback.feedbackId }"/>
