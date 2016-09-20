@@ -1,7 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
-<link rel="stylesheet" type="text/css"
-	href="/portal-portlet/portlet/feedback/css/query.css" />
 <c:set var="contextPath"
 	value="${request.contextPath}/portlet/feedback" />
 <style type="text/css">
@@ -31,7 +29,7 @@ div.hf button {
 	<div class="body">
 		<table class="thead">
 			<tr>
-				<td colspan="2" class="head"><span
+				<td colspan="2" class="td"><span
 					style="width: 5px; height: 20px; background-color: #ffa200; display: inline-block"></span><span>回复反馈</span>
 				</td>
 			</tr>
