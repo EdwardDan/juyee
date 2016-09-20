@@ -68,7 +68,7 @@ div.hf button {
 	<aui:row style="margin-left:15px">
 		<aui:col span="11">
 			<aui:input name="hfjg" label="回复结果" type="textarea" cssClass="span12"
-				  style="height:100px" />
+				  style="height:100px"  value="<%=Validator.isNotNull(feedback.getHfjg())?feedback.getHfjg():\"\" %>"/>
 		</aui:col>
 	</aui:row>
 		<div class="hf">
