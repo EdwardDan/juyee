@@ -75,7 +75,15 @@ public class FeedbackLocalServiceImpl extends FeedbackLocalServiceBaseImpl {
 	public DynamicQuery createDynamicQuery(String zt,long lxId, long fkrId) {
 
 		DynamicQuery dynamicQuery = this.dynamicQuery();
-
+		if(!Validator.isBlank(zt)){
+			dynamicQuery.add(PropertyFactoryUtil.forName("zt").like("%" + zt + "%"));
+		}
+		if(!Validator.equals(-1, lxId)){
+			dynamicQuery.add(PropertyFactoryUtil.forName("lxId").eq(lxId));
+		}
+		if(!Validator.equals(-1, fkrId)){
+			dynamicQuery.add(PropertyFactoryUtil.forName("fkrId").eq(fkrId));
+		}
 		dynamicQuery.addOrder(OrderFactoryUtil.desc("fkrq"));
 		return dynamicQuery;
 	}
