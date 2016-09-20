@@ -33,13 +33,13 @@ table {
 	<portlet:param name="mvcPath" value="${contextPath}/sp.jsp" />
 	<portlet:param name="permitId" value="${permitId }" />
 </portlet:renderURL>
-<table class="table table-border table-hover table-striped"
+<table class="table table-bordered table-hover table-striped"
 	style="width: 100% ；text-align:center;">
 	<thead>
-		<th style="text-align: center;width:20%;border:1px solid #ddd;">审核步骤</th>
-		<th style="text-align: center;width:40%;border:1px solid #ddd;">审核意见</th>
-		<th style="text-align: center;width:20%;border:1px solid #ddd;">审核人</th>
-		<th style="text-align: center;width:20%;border:1px solid #ddd;">审核时间</th>
+		<th style="text-align: center;width:20%;">审核步骤</th>
+		<th style="text-align: center;width:40%;">审核意见</th>
+		<th style="text-align: center;width:20%;">审核人</th>
+		<th style="text-align: center;width:20%;">审核时间</th>
 	</thead>
 	<%
 		Long permitIdInit=ParamUtil.getLong(request,"permitId");
@@ -84,10 +84,10 @@ table {
 			   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state41")){transition="补正退回";}
 	%>
 	<tr>
-		<td style="border:1px solid #ddd;"><%=state%>-<%=transition%></td>
-		<td style="border:1px solid #ddd;"><%=workflowLogs.get(i).getComment().equals("Assigned initial task.")?"":workflowLogs.get(i).getComment()%></td>
-		<td style="border:1px solid #ddd;"><%=auditName%></td>
-		<td style="border:1px solid #ddd;"><%=dateFormatDateTime.format(workflowLogs.get(i).getCreateDate())%></td>
+		<td><%=state%>-<%=transition%></td>
+		<td><%=workflowLogs.get(i).getComment().equals("Assigned initial task.")?"":workflowLogs.get(i).getComment()%></td>
+		<td><%=auditName%></td>
+		<td><%=dateFormatDateTime.format(workflowLogs.get(i).getCreateDate())%></td>
 	</tr>
 	<%
 		}
