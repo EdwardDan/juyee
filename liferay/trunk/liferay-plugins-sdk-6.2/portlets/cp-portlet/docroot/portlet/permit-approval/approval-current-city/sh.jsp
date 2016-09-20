@@ -118,6 +118,15 @@ request.setAttribute("applyMaterials", applyMaterials);
 				<div class="hide" id="<%= randomId %>updateComments">
 	<aui:input cols="55" name="_153_comment" id="_153_comment" label="审核意见" useNamespace="false" rows="10" type="textarea" />
 </div>
+<div class="hide" id="<%= randomId %>updateMessage">
+	<aui:select cols="55" name="_153_comment" id="_153_comment" label="退回选择意见" useNamespace="false"  cssClass="span3">
+	<aui:option value="该事项不属于本行政机关职权范围;">该事项不属于本行政机关职权范围;</aui:option>
+	<aui:option value="申请人隐瞒有关情况、提供虚假材料；">申请人隐瞒有关情况、提供虚假材料；</aui:option>
+	<aui:option value="不具备法定的申请主体资格；">不具备法定的申请主体资格；</aui:option>
+	<aui:option value="申请材料仍不齐全/不符合法定形式;">申请材料仍不齐全/不符合法定形式;</aui:option>
+	<aui:option value="（法律、法规、规章规定的其他不予受理的情形）。">（法律、法规、规章规定的其他不予受理的情形）。</aui:option>
+	</aui:select>
+</div>
 		<c:if test='<%=message.equals("通过") %>'>
 		<liferay-ui:icon
 				cssClass='<%= "workflow-task-" + randomId + " task-change-status-link" %>'
@@ -131,7 +140,7 @@ request.setAttribute("applyMaterials", applyMaterials);
 			<c:if test='<%=message.equals("不通过") %>'>
 		<liferay-ui:icon
 				cssClass='<%= "workflow-task-" + randomId + " task-change-status-link" %>'
-				id='<%= randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink" %>'
+				id='<%= randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink2" %>'
 				image="shth"
 				message="<%= message %>"
 				method="get"
@@ -159,8 +168,10 @@ request.setAttribute("applyMaterials", applyMaterials);
 			/>
 			</c:if>
 			<aui:script use="liferay-workflow-tasks">
-var onTaskClickFn = A.rbind('onTaskClick', Liferay.WorkflowTasks,'<%= randomId %>');
+var onTaskClickFn = A.rbind('onTaskClick', Liferay.WorkflowTasks,'<%= randomId %>',true);
+var onTaskClickFn2 = A.rbind('onTaskClick', Liferay.WorkflowTasks,'<%= randomId %>',false);
 Liferay.delegateClick('<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(transitionName) %>taskChangeStatusLink', onTaskClickFn);
+Liferay.delegateClick('<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(transitionName) %>taskChangeStatusLink2', onTaskClickFn2);
 </aui:script>
 				<%
 		    		}
