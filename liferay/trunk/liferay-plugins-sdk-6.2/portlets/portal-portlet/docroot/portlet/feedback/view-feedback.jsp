@@ -7,7 +7,7 @@
 <portlet:renderURL var="viewURL" />
 <%
 	long feedbackId = ParamUtil.getLong(request, "feedbackId");
-	Feedback feedback = FeedbackLocalServiceUtil.getFeedback(231532);
+	Feedback feedback = FeedbackLocalServiceUtil.getFeedback(feedbackId);
 	request.setAttribute("feedback", feedback);
 %>
 <aui:form id="fm" action="">
@@ -41,7 +41,7 @@
 			反馈日期:
 		</aui:col>
 		<aui:col span="4">
-			<fmt:formatDate value="${feedback.hfrq}" pattern="yyyy-MM-dd" />
+			<fmt:formatDate value="${feedback.fkrq}" pattern="yyyy-MM-dd" />
 		</aui:col>
 	</aui:row>
 	<aui:row style="margin-left:15px">
