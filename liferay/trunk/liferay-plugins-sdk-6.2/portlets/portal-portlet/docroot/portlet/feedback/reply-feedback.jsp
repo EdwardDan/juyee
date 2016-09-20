@@ -2,9 +2,10 @@
 <%@ include file="/common/init.jsp"%>
 <link rel="stylesheet" type="text/css"
 	href="/portal-portlet/portlet/feedback/css/query.css" />
+<c:set var="contextPath"
+	value="${request.contextPath}/portlet/feedback" />
 <style type="text/css">
 div.hf {
-	margin-top: 20px;
 	padding: 15px;
 }
 
@@ -23,6 +24,9 @@ div.hf button {
 	request.setAttribute("feedback", feedback);
 	request.setAttribute("feedbackId", feedbackId);
 %>
+<portlet:renderURL var="viewURL">
+	<portlet:param name="mvcPath" value="${contextPath}/view.jsp"/>
+</portlet:renderURL>
 <portlet:actionURL var="saveReplyFeedBackURL" name="saveReplyFeedback"> 
 	<portlet:param name="feedbackId" value="${feedbackId}"/>
 </portlet:actionURL>
