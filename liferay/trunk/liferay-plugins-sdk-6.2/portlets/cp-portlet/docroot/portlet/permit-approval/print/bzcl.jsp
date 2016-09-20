@@ -97,9 +97,9 @@
 				lang=EN-US style='font-size: 12.0pt; line-height: 150%'>20</span><span
 				style='font-size: 12.0pt; line-height: 150%; font-family: 宋体; mso-ascii-font-family: "Times New Roman"; mso-hansi-font-family: "Times New Roman"'>个工作日内补正如下材料，再行申请。</span><span
 				lang=EN-US style='font-size: 12.0pt; line-height: 150%'><o:p></o:p></span>
-		</p><%= comment%>
+		</p>
 		<p class=MsoNormal>
-			<span lang=EN-US style='font-size: 12.0pt'><o:p>&nbsp;</o:p></span>
+			<span lang=EN-US style='font-size: 12.0pt'><o:p><%= comment%></o:p></span>
 		</p>
 
 		<p class=MsoNormal style='line-height: 150%'>
