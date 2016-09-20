@@ -13,17 +13,30 @@
 	Permit permit = PermitLocalServiceUtil.getPermit(permitId);
 	request.setAttribute("permit", permit);
 	User me=PortalUtil.getUser(request);
+	
+	String bjbhInit = permit.getBjbh();
+	//根据报建编号获取报建项目信息
+	Project projectInit = ProjectLocalServiceUtil.getProject(bjbhInit);
+	String lxjbInit = projectInit.getLxjb();
+	String qxLxjbInit = "区县级机关或区县级单位";
 	String comment="";
 		Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
 		List<Integer> logTypes = new ArrayList<Integer>();
 		logTypes.add(WorkflowLog.TASK_COMPLETION);
 		if(WorkflowInstanceLinkLocalServiceUtil.hasWorkflowInstanceLink(me.getCompanyId(), 0L, "com.justonetech.cp.permit.model.Permit", permit.getPermitId())){
 		List<WorkflowLog> workflowLogs = WorkflowLogManagerUtil.getWorkflowLogsByWorkflowInstance(company.getCompanyId(), WorkflowInstanceLinkLocalServiceUtil.getWorkflowInstanceLink(me.getCompanyId(), 0L, "com.justonetech.cp.permit.model.Permit", permit.getPermitId()).getWorkflowInstanceId(), logTypes, QueryUtil.ALL_POS, QueryUtil.ALL_POS, WorkflowComparatorFactoryUtil.getLogCreateDateComparator(true));
-		for (WorkflowLog workflowLog : workflowLogs) {
-		   
-		   if(workflowLog.getState().equals("quxianshenpi")){comment=workflowLog.getComment();System.out.println("comment="+comment);
-		   }
+		if(lxjbInit.equals(qxLxjbInit)){
+			for (WorkflowLog workflowLog : workflowLogs) {
+				   if(workflowLog.getState().equals("quxianshenpi")){comment=workflowLog.getComment();
+				   }
+				}
+		}else{
+			for (WorkflowLog workflowLog : workflowLogs) {
+				   if(workflowLog.getState().equals("shenhe")){comment=workflowLog.getComment();
+				   }
+				}
 		}
+		
 		   }
 %>
 <OBJECT id="WebBrowser1" height=0 width=0
