@@ -45,30 +45,27 @@
 			<aui:col span="11">
 				<div class="taglib-captcha">
 					<aui:input label="验证码" name="captchaText" size="10" type="text"
-						value="" inlineLabel="true">
+						value="">
 						<aui:validator name="required" />
 						<aui:validator name="custom" errorMessage="错误的验证码。">
-        				function(val, fieldNode, ruleValue){ 
-        					if (val.trim().length != 4) 
-        						return false;
-        					var url = Liferay.Util.addParams('<portlet:namespace />captchaText=' + val, '${captchaURL }');
-        					console.log("url:" + url);
-        					var ret = false;
-        					AUI().use('aui-io-request', function(A){
-						        A.io.request(url, {
-						        	  sync: true,
-									  on: {
-									   success: function() {
-									     console.log("reponse:" + this.get('responseData'));
-									   	 ret = (this.get('responseData') == "true");   
-									   }
-									  }
+		        				function(val, fieldNode, ruleValue){ 
+		        					if (val.trim().length != 4) 
+		        						return false;
+		        					var url = Liferay.Util.addParams('<portlet:namespace />captchaText=' + val, '${captchaURL }');
+		        					var ret = false;
+		        					AUI().use('aui-io-request', function(A){
+						       		A.io.request(url, {
+							        	  sync: true,
+										  on: {
+											   success: function() {
+											   	 ret = (this.get('responseData') == "true");   
+											   }
+										  }
 									});
-						    });
-						    console.log("ret:" + ret);
-        					return ret;
-       					}
-    			</aui:validator>
+							    });
+		        					return ret;
+	       					}
+		    			</aui:validator>
 					</aui:input>
 					<img alt="<liferay-ui:message key="text-to-identify" />"
 						class="captcha" id="<portlet:namespace />captcha"
@@ -91,20 +88,11 @@
 										'src', url);
 							});
 				</aui:script>
-					
-
-
-			
 				</aui:col>
-		</aui:row>
-		<aui:row>
-			<aui:col span="12">
-			</aui:col>
 		</aui:row>
 		<aui:row>
 			<aui:col span="12" cssClass="text-center">
 				<aui:button type="submit" value="提交" />
-				<aui:button type="cancel" value="返回" href="${viewURL}" />
 			</aui:col>
 		</aui:row>
 		<br>
