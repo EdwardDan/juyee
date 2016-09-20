@@ -75,13 +75,14 @@
 	%>
 
 </table>
-<c:set var="contextPath" value="${request.contextPath}/portlet/permit-approval" />
+<c:set var="contextPath" value="${request.contextPath}/portlet/complete-approval" />
 <portlet:renderURL var="previewPdfURL" windowState="pop_up">
-	<portlet:param name="mvcPath" value="${contextPath}/view-permit/applymaterials-pdf.jsp" />
+	<portlet:param name="mvcPath" value="${contextPath}/view-complete/applymaterials-pdf.jsp" />
 </portlet:renderURL>
 <script>
 	function previewJpg(materialId,imgURL) {
 		$('.'+materialId).viewer();
+		
 		$('#'+imgURL).click();
 	}
 	
