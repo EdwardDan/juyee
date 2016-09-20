@@ -93,9 +93,7 @@ public class FeedbackPortlet extends MVCPortlet {
 			String fknr = ParamUtil.getString(request, "fknr");
 			PortletPreferences preferences = request.getPreferences();
 			String lx = preferences.getValue("lx", StringPool.BLANK);
-			System.out.println(lx);
-			Feedback feedback = null;
-			feedback = FeedbackLocalServiceUtil.createFeedback(CounterLocalServiceUtil.increment());
+			Feedback feedback = FeedbackLocalServiceUtil.createFeedback(CounterLocalServiceUtil.increment());
 			feedback.setZt(zt);
 			feedback.setFknr(fknr);
 			feedback.setLx(lx);
@@ -103,6 +101,8 @@ public class FeedbackPortlet extends MVCPortlet {
 			ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
 			feedback.setFkrId(themeDisplay.getRealUser().getUserId());
 			feedback.setFkrq(new Date());
+			feedback.setGroupId(themeDisplay.getCompanyGroupId());
+			feedback.setCompanyId(themeDisplay.getCompanyId());
 			FeedbackLocalServiceUtil.addFeedback(feedback);
 		} catch (Exception e) {
 			request.setAttribute("errorMessages", "验证码错误！！");
@@ -114,7 +114,7 @@ public class FeedbackPortlet extends MVCPortlet {
 	public void serveResource(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException,
 			PortletException {
 		String resourceId = resourceRequest.getResourceID();
-		if(resourceId.equals("captchaID")){
+		if (resourceId.equals("captchaID")) {
 			try {
 				com.liferay.portal.kernel.captcha.CaptchaUtil.serveImage(resourceRequest, resourceResponse);
 			} catch (Exception e) {
@@ -128,7 +128,7 @@ public class FeedbackPortlet extends MVCPortlet {
 			String responseContent = "";
 			try {
 				List<User> userList = UserLocalServiceUtil.getUsers(-1, -1);
-				
+
 				if (Validator.isNotNull(loginUser) && !loginUser.equals("请输入用户名")) {
 					User defaultUser = null;
 					for (User user : userList) {
@@ -140,7 +140,8 @@ public class FeedbackPortlet extends MVCPortlet {
 						long companyId = PortalUtil.getCompanyId(resourceRequest);
 						int authResult = Authenticator.FAILURE;
 						try {
-							authResult = UserLocalServiceUtil.authenticateByScreenName(companyId, loginUser, loginPassword, null, null, null);
+							authResult = UserLocalServiceUtil.authenticateByScreenName(companyId, loginUser,
+									loginPassword, null, null, null);
 						} catch (PortalException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
