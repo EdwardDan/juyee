@@ -26,9 +26,9 @@ div.hf button {
 <portlet:actionURL var="saveReplyFeedBackURL" name="saveReplyFeedback"> 
 	<portlet:param name="feedbackId" value="${feedbackId}"/>
 </portlet:actionURL>
-<div class="out">
-	<div class="middle"></div>
-	<div class="in">
+<div class="main">
+	<div class="head"></div>
+	<div class="body">
 		<table class="thead">
 			<tr>
 				<td colspan="2" class="head"><span
