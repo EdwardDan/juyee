@@ -12,6 +12,19 @@
 	Long permitId = ParamUtil.getLong(request, "permitId");
 	Permit permit = PermitLocalServiceUtil.getPermit(permitId);
 	request.setAttribute("permit", permit);
+	User me=PortalUtil.getUser(request);
+	String comment="";
+		Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
+		List<Integer> logTypes = new ArrayList<Integer>();
+		logTypes.add(WorkflowLog.TASK_COMPLETION);
+		if(WorkflowInstanceLinkLocalServiceUtil.hasWorkflowInstanceLink(me.getCompanyId(), 0L, "com.justonetech.cp.permit.model.Permit", permit.getPermitId())){
+		List<WorkflowLog> workflowLogs = WorkflowLogManagerUtil.getWorkflowLogsByWorkflowInstance(company.getCompanyId(), WorkflowInstanceLinkLocalServiceUtil.getWorkflowInstanceLink(me.getCompanyId(), 0L, "com.justonetech.cp.permit.model.Permit", permit.getPermitId()).getWorkflowInstanceId(), logTypes, QueryUtil.ALL_POS, QueryUtil.ALL_POS, WorkflowComparatorFactoryUtil.getLogCreateDateComparator(true));
+		for (WorkflowLog workflowLog : workflowLogs) {
+		   
+		   if(workflowLog.getState().equals("quxianshenpi")){comment=workflowLog.getComment();System.out.println("comment="+comment);
+		   }
+		}
+		   }
 %>
 <OBJECT id="WebBrowser1" height=0 width=0
 	classid=CLSID:8856F961-340A-11D0-A96B-00C04FD705A2 name=wb></OBJECT>
@@ -71,8 +84,7 @@
 				lang=EN-US style='font-size: 12.0pt; line-height: 150%'>20</span><span
 				style='font-size: 12.0pt; line-height: 150%; font-family: 宋体; mso-ascii-font-family: "Times New Roman"; mso-hansi-font-family: "Times New Roman"'>个工作日内补正如下材料，再行申请。</span><span
 				lang=EN-US style='font-size: 12.0pt; line-height: 150%'><o:p></o:p></span>
-		</p>
-
+		</p><%= comment%>
 		<p class=MsoNormal>
 			<span lang=EN-US style='font-size: 12.0pt'><o:p>&nbsp;</o:p></span>
 		</p>
