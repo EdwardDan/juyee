@@ -1,0 +1,28 @@
+div.main {
+	border-left: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+	box-shadow: 2px 2px 2px #e8e8e8;
+}
+
+div.head {
+	background-color: #00a2ee;
+	height: 10px;
+}
+
+div.body {
+	border-bottom: 1px solid #ddd;
+}
+
+table.thead tr td.td {
+	color: #0073d4;
+	font-size: 18px;
+	line-height: 30px;
+}
+
+table.thead tr td span {
+	margin-left: 15px;
+	display: inline-block;
+	vertical-align: middle;
+	font-family: "Microsoft YaHei UI";
+}
