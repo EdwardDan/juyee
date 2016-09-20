@@ -8,7 +8,7 @@
 	request.setAttribute("userName", userName);
 %>
 <c:if test="${themeDisplay.isSignedIn()}">
-	<div class="mian">
+	<div class="main">
 		<div class="head"></div>
 		<div class="body">
 			<table class="thead">
