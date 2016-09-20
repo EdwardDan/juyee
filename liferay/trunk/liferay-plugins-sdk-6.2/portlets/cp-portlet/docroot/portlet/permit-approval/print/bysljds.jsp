@@ -28,15 +28,19 @@ User me=PortalUtil.getUser(request);
 		if(WorkflowInstanceLinkLocalServiceUtil.hasWorkflowInstanceLink(me.getCompanyId(), 0L, "com.justonetech.cp.permit.model.Permit", permit.getPermitId())){
 		List<WorkflowLog> workflowLogs = WorkflowLogManagerUtil.getWorkflowLogsByWorkflowInstance(company.getCompanyId(), WorkflowInstanceLinkLocalServiceUtil.getWorkflowInstanceLink(me.getCompanyId(), 0L, "com.justonetech.cp.permit.model.Permit", permit.getPermitId()).getWorkflowInstanceId(), logTypes, QueryUtil.ALL_POS, QueryUtil.ALL_POS, WorkflowComparatorFactoryUtil.getLogCreateDateComparator(true));
 		if(lxjbInit.equals(qxLxjbInit)){
-			for (WorkflowLog workflowLog : workflowLogs) {
-				   if(workflowLog.getState().equals("quxianshenpi")){comment=workflowLog.getComment();
+			for(int i=0;i<workflowLogs.size();i++){
+				 if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state7")){
+				   if(workflowLogs.get(i).getState().equals("quxianshenpi")){comment=workflowLogs.get(i).getComment();
 				   }
 				}
+			}
 		}else{
-			for (WorkflowLog workflowLog : workflowLogs) {
-				   if(workflowLog.getState().equals("shenhe")){comment=workflowLog.getComment();
+			for(int i=0;i<workflowLogs.size();i++){
+				 if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state19")){
+				   if(workflowLogs.get(i).getState().equals("shenhe")){comment=workflowLogs.get(i).getComment();
 				   }
 				}
+			}
 		}
 		
 		   }
