@@ -14,7 +14,8 @@ public enum CountyPermitStatus {
     STATUS_SL_PASS(5, "受理通过", "green", "sl_pass"),
     STATUS_SH_PASS(6, "审核通过", "green", "sh_pass"),
     STATUS_SP_PASS(7, "审批通过", "green", "sp_pass"),
-    STATUS_SP_BACK(8, "审批退回", "red", "sp_back");
+    STATUS_SP_BACK(8, "审批退回", "red", "sp_back"),
+	STATUS_BZ_BACK(9, "补正退回", "red", "bz_back");
 
 	private int code;
 	private String name;
