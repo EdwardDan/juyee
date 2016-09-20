@@ -12,29 +12,6 @@ import com.liferay.portal.model.User;
 
 public class SendMessage {
 	// 状态对应编码
-	public static String PROJECT_TYPE_HD = "航道";
-	public static String PROJECT_TYPE_GL = "公路";
-	public static String PROJECT_TYPE_GKSS = "港口设施";
-	public static String PROJECT_TYPE_SZJC = "市政基础设施";
-
-	public static String TJ = "提交";
-	public static String YSTG = "预审通过";
-	public static String YSWTG = "预审未通过";
-	public static String XZZXSJTG = "行政服务中心收件通过";
-	public static String CSTG = "初审完成";
-	public static String FHWC = "复核完成";
-	public static String JGZXSHTG = "建管中心审核通过";
-	public static String JGZXSHBTG = "建管中心审核不通过";
-	public static String FGLDSHTG = "分管领导审核通过";
-	public static String FGLDSHWTG = "分管领导审核未通过";
-	public static String ZXLDSHTG = "中心领导审核通过";
-	public static String ZXLDSHBTG = "中心领导审核不通过";
-	public static String WJCXKHBXK = "委建设处许可和不许可";
-	public static String WJCTH = "委建设处退回";
-	public static String WSPCXKHBXK = "委审批处许可和不许可";
-	public static String WSPCTH = "委审批处退回";
-	public static String WLDXK = "委领导许可";
-	public static String WLDBYXK = "委领导不予许可";
 
 	private static String messageContent(int status, String commonContent,String type) {
 		String content = "";
@@ -126,6 +103,7 @@ public class SendMessage {
 			mobiles = mobiles.length() > 0 ? mobiles.substring(1) : "";
 		}
 
+		System.out.println("mobiles="+mobiles);
 		ProjectProfile projectProfile = null;
 		try {
 			projectProfile = ProjectProfileLocalServiceUtil.fetchProjectProfile(permit.getPermitId());
@@ -138,7 +116,7 @@ public class SendMessage {
 				+ (null != projectProfile ? projectProfile.getGcmc() : "") + "的项目施工许可";
 
 		String content = messageContent(status, commonContent,type);// 短信
-
+		System.out.println("content="+content);
 		if (mobiles.length() > 0) {
 			SendKxt.SendKxtSMS(content, mobiles);
 		}
