@@ -63,52 +63,74 @@
 		<th style="text-align: center" style="width:20%">审核人</th>
 		<th style="text-align: center" style="width:20%">审核时间</th>
 	</thead>
-	 <%
+	<%
 	Long permitIdInit=ParamUtil.getLong(request,"permitId");
 	Permit permit=PermitLocalServiceUtil.getPermit(permitIdInit);
 	User me=PortalUtil.getUser(request);
 				Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
 				List<Integer> logTypes = new ArrayList<Integer>();
 				logTypes.add(WorkflowLog.TASK_COMPLETION);
+				String transition="";
 				if(WorkflowInstanceLinkLocalServiceUtil.hasWorkflowInstanceLink(me.getCompanyId(), 0L, "com.justonetech.cp.permit.model.Permit", permit.getPermitId())){
 					List<WorkflowLog> workflowLogs = WorkflowLogManagerUtil.getWorkflowLogsByWorkflowInstance(company.getCompanyId(), WorkflowInstanceLinkLocalServiceUtil.getWorkflowInstanceLink(me.getCompanyId(), 0L, "com.justonetech.cp.permit.model.Permit", permit.getPermitId()).getWorkflowInstanceId(), logTypes, QueryUtil.ALL_POS, QueryUtil.ALL_POS, WorkflowComparatorFactoryUtil.getLogCreateDateComparator(true));
-					for (WorkflowLog workflowLog : workflowLogs) {
+					for(int i=0;i<workflowLogs.size();i++){
 						Role curRole = null;
 						User curUser = null;
 						User auditUser=null;
 						String actorName = null;
 						String auditName=null;
-						if (workflowLog.getRoleId() != 0) {
-							curRole = RoleLocalServiceUtil.getRole(workflowLog.getRoleId());
+						if (workflowLogs.get(i).getRoleId() != 0) {
+							curRole = RoleLocalServiceUtil.getRole(workflowLogs.get(i).getRoleId());
 							actorName = curRole.getDescriptiveName();
 						}
-						else if (workflowLog.getUserId() != 0) {
-							curUser = UserLocalServiceUtil.getUser(workflowLog.getUserId());
+						else if (workflowLogs.get(i).getUserId() != 0) {
+							curUser = UserLocalServiceUtil.getUser(workflowLogs.get(i).getUserId());
 							actorName = curUser.getFullName();
 						}
-						if(workflowLog.getAuditUserId()!=0){
-							 auditUser = UserLocalServiceUtil.getUser(workflowLog.getAuditUserId());
+						if(workflowLogs.get(i).getAuditUserId()!=0){
+							 auditUser = UserLocalServiceUtil.getUser(workflowLogs.get(i).getAuditUserId());
 							auditName=auditUser.getFirstName();
 						}
 					   String state="";
 					   String comment="";
-					   if(workflowLog.getState().equals("yushen")){state="预审";}
-					   if(workflowLog.getState().equals("shoujian")){state="<a onclick='sj()'>收件</a>";}
-					   if(workflowLog.getState().equals("chushen")){state="<a onclick='cs()'>初审</a>";}
-					   if(workflowLog.getState().equals("fuhe")){state="<a onclick='fh()'>复核</a>";}
-					   if(workflowLog.getState().equals("shenhe")){state="<a onclick='sh()'>审核</a>";}
-					   if(workflowLog.getState().equals("fenguanlingdao")){state="分管领导审核";}
-					   if(workflowLog.getState().equals("zhongxinlingdao")){state="中心领导审核";}
-					   if(workflowLog.getState().equals("weijianshechu")){state="委建设处审核";}
-					   if(workflowLog.getState().equals("weishenpichu")){state="委审批处审核";}
-					   if(workflowLog.getState().equals("weilingdao")){state="委领导审核";}
-					   if(workflowLog.getState().equals("update")){continue;}
+					   if(workflowLogs.get(i).getState().equals("yushen")){state="预审";}
+					   if(workflowLogs.get(i).getState().equals("shoujian")){state="<a onclick='sj()'>收件</a>";}
+					   if(workflowLogs.get(i).getState().equals("chushen")){state="<a onclick='cs()'>初审</a>";}
+					   if(workflowLogs.get(i).getState().equals("fuhe")){state="<a onclick='fh()'>复核</a>";}
+					   if(workflowLogs.get(i).getState().equals("shenhe")){state="<a onclick='sh()'>审核</a>";}
+					   if(workflowLogs.get(i).getState().equals("fenguanlingdao")){state="分管领导审核";}
+					   if(workflowLogs.get(i).getState().equals("zhongxinlingdao")){state="中心领导审核";}
+					   if(workflowLogs.get(i).getState().equals("weijianshechu")){state="委建设处审核";}
+					   if(workflowLogs.get(i).getState().equals("weishenpichu")){state="委审批处审核";}
+					   if(workflowLogs.get(i).getState().equals("weilingdao")){state="委领导审核";}
+					   if(workflowLogs.get(i).getState().equals("update")){continue;}
+					   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state10")){transition="预审退回";}
+					   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state11")){transition="预审通过";}
+					   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state8")){transition="收件退回";}
+					   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state12")){transition="收件通过";}
+					   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state13")){transition="初审通过";}
+					   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state14")){transition="复核通过";}
+					   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state15")){transition="审核通过";}
+					   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state40")){transition="补正退回";}
+					   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state19")){transition="审核退回";}
+					   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state17")){transition="审核通过";}
+					   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state16")){transition="审核退回";}
+					   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state18")){transition="审核退回";}
+					   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state21")){transition="审核通过";}
+					   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state20")){transition="审核退回";}
+					   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state22")){transition="<span style='color:red'>许可</span>";}
+					   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state31")){transition="<span style='color:red'>不许可</span>";}
+					   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state23")){transition="审核退回";}
+					   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state24")){transition="<span style='color:red'>许可</span>";}
+					   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state32")){transition="<span style='color:red'>不许可</span>";}
+					   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state33")){transition="<span style='color:red'>许可</span>";}
+					   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state34")){transition="<span style='color:red'>不许可</span>";}
 				%>
 <tr>
-							<td><%=state%></td>
-							<td><%=workflowLog.getComment() %></td>
+							<td><%=state%>-<%=transition %></td>
+							<td><%=workflowLogs.get(i).getComment() %></td>
 							<td><%= auditName%></td>
-		<td><%=dateFormatDateTime.format(workflowLog.getCreateDate())%></td>
+		<td><%=dateFormatDateTime.format(workflowLogs.get(i).getCreateDate())%></td>
 		</tr>
 				<%
 				}
