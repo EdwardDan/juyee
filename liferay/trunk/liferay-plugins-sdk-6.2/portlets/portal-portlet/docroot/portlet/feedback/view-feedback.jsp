@@ -5,7 +5,6 @@
 <%@page import="com.justonetech.portal.feedback.model.Feedback"%>
 <%@page import="com.justonetech.sys.service.DictionaryLocalServiceUtil"%>
 <%@page import="com.justonetech.sys.model.Dictionary"%>
-<link rel="stylesheet" type="text/css" href="/portal-portlet/portlet/feedback/css/query.css" />
 <portlet:renderURL var="viewURL" />
 <%
 	long feedbackId = ParamUtil.getLong(request, "feedbackId");
@@ -14,12 +13,12 @@
 	request.setAttribute("feedback", feedback);
 %>
 <aui:form id="fm" action="">
-<div class="mian">
+<div class="main">
 		<div class="head"></div>
 		<div class="body">
 			<table class="thead">
 				<tr>
-					<td colspan="2" class="head"><span
+					<td colspan="2" class="td"><span
 						style="width: 5px; height: 20px; background-color: #ffa200; display: inline-block"></span><span>查看</span>
 					</td>
 				</tr>
