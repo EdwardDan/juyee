@@ -24,7 +24,7 @@
 				<c:if test="${!empty participationUnits}">
 					<c:forEach items="${participationUnits}" var="participationUnit">
 						<tr height="29px">
-							<td style="width: 28%; text-align: left">${participationUnit. dwmc}</td>
+							<td style="width: 28%; text-align: center">${participationUnit. dwmc}</td>
 							<td style="width: 13%; text-align: center">${participationUnit. dwlx }
 							</td>
 							<td style="width: 10%; text-align: center">${participationUnit. xmfzr}</td>
