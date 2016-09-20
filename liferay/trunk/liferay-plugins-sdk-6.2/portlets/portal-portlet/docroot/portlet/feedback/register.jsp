@@ -91,7 +91,7 @@ table.thead tr td select {
 			method="post" name="<portlet:namespace/>_58_fm" autocomplete="off">
 			<input class="field" id="_58_saveLastPath" name="_58_saveLastPath"
 				type="hidden" value="false"> <input class="field"
-				id="_58_redirect" name="_58_redirect" type="hidden" value="">
+				id="_58_redirect" name="_58_redirect" type="hidden" value="${themeDisplay.getURLHome()}">
 			<input class="field" id="_58_doActionAfterLogin"
 				name="_58_doActionAfterLogin" type="hidden" value="false"> <input
 				class="field" id="_58_login" name="_58_login" type="hidden" value="">
@@ -192,7 +192,7 @@ table.thead tr td select {
 			return false;
 		}
 		if($("#<portlet:namespace/>qrmm").attr("class").toString().indexOf("error-field", 0)>0){
-			alert("请输入再次确认密码！");
+			alert("请确认密码与第一次输入的相同！");
 			return false;
 		}
 		if($("#<portlet:namespace/>sfzh").attr("class").toString().indexOf("error-field", 0)>0){
