@@ -15,9 +15,9 @@ div.hf button {
 </style>
 <%
 	long feedbackId = ParamUtil.getLong(request, "feedbackId");
-	Feedback feedback = FeedbackLocalServiceUtil.getFeedback(231532);
+	Feedback feedback = FeedbackLocalServiceUtil.getFeedback(feedbackId);
 	request.setAttribute("feedback", feedback);
-	request.setAttribute("feedbackId", 231532);
+	request.setAttribute("feedbackId", feedbackId);
 %>
 <portlet:renderURL var="viewURL">
 	<portlet:param name="mvcPath" value="${contextPath}/view.jsp"/>
