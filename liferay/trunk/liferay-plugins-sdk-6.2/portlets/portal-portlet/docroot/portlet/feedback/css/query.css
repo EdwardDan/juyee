@@ -1,16 +1,16 @@
-div.out {
+div.main {
 	border-left: 1px solid #ddd;
 	border-bottom: 1px solid #ddd;
 	border-right: 1px solid #ddd;
 	box-shadow: 2px 2px 2px #e8e8e8;
 }
 
-div.middle {
+div.head {
 	background-color: #00a2ee;
 	height: 10px;
 }
 
-div.in {
+div.body {
 	border-bottom: 1px solid #ddd;
 }
 
