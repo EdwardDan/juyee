@@ -43,7 +43,7 @@ div.hf button {
 			${feedback.lx}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;反馈日期:<fmt:formatDate value="${feedback.hfrq}" pattern="yyyy-MM-dd" /></div>
 		<div class="hf">反馈内容:</div>
 		<div class="hf">
-			<textarea>${feedback.fknr}</textarea>
+			<textarea readonly="readonly">${feedback.fknr}</textarea>
 		</div>
 		<div class="hf">回复结果:</div>
 		<div class="hf">
