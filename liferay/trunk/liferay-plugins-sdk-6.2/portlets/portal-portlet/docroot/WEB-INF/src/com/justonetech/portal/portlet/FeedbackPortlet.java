@@ -108,6 +108,18 @@ public class FeedbackPortlet extends MVCPortlet {
 		FeedbackLocalServiceUtil.addFeedback(feedback);
 	}
 
+	public void saveReplyFeedback(ActionRequest request, ActionResponse response) throws PortalException, SystemException {
+		long feedbackId = ParamUtil.getLong(request, "feedbackId");
+		String hfjg = ParamUtil.getString(request, "hfjg");
+		long userId = PortalUtil.getUserId(request);
+		Date now = new Date();
+		Feedback feedback = FeedbackLocalServiceUtil.getFeedback(feedbackId);
+		feedback.setHfjg(hfjg);
+		feedback.setHfrq(now);
+		feedback.setHfrId(userId);
+		FeedbackLocalServiceUtil.updateFeedback(feedback);
+	}
+	
 	public static final String CAPTCHA_TEXT = "CAPTCHA_TEXT";
 
 	@Override
