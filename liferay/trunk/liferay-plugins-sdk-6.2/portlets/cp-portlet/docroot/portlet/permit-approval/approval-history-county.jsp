@@ -48,38 +48,46 @@ table {
 			Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
 			List<Integer> logTypes = new ArrayList<Integer>();
 			logTypes.add(WorkflowLog.TASK_COMPLETION);
+			String transition="";
 			if(WorkflowInstanceLinkLocalServiceUtil.hasWorkflowInstanceLink(me.getCompanyId(), 0L, "com.justonetech.cp.permit.model.Permit", permit.getPermitId())){
 			List<WorkflowLog> workflowLogs = WorkflowLogManagerUtil.getWorkflowLogsByWorkflowInstance(company.getCompanyId(), WorkflowInstanceLinkLocalServiceUtil.getWorkflowInstanceLink(me.getCompanyId(), 0L, "com.justonetech.cp.permit.model.Permit", permit.getPermitId()).getWorkflowInstanceId(), logTypes, QueryUtil.ALL_POS, QueryUtil.ALL_POS, WorkflowComparatorFactoryUtil.getLogCreateDateComparator(true));
-			for (WorkflowLog workflowLog : workflowLogs) {
+			for(int i=0;i<workflowLogs.size();i++){
 				Role curRole = null;
 				User curUser = null;
 				User auditUser=null;
 				String actorName = null;
 				String auditName=null;
-				if (workflowLog.getRoleId() != 0) {
-					curRole = RoleLocalServiceUtil.getRole(workflowLog.getRoleId());
+				if (workflowLogs.get(i).getRoleId() != 0) {
+					curRole = RoleLocalServiceUtil.getRole(workflowLogs.get(i).getRoleId());
 					actorName = curRole.getDescriptiveName();
 				}
-				else if (workflowLog.getUserId() != 0) {
-					curUser = UserLocalServiceUtil.getUser(workflowLog.getUserId());
+				else if (workflowLogs.get(i).getUserId() != 0) {
+					curUser = UserLocalServiceUtil.getUser(workflowLogs.get(i).getUserId());
 					actorName = curUser.getFullName();
 				}
-				if(workflowLog.getAuditUserId()!=0){
-					 auditUser = UserLocalServiceUtil.getUser(workflowLog.getAuditUserId());
+				if(workflowLogs.get(i).getAuditUserId()!=0){
+					 auditUser = UserLocalServiceUtil.getUser(workflowLogs.get(i).getAuditUserId());
 					auditName=auditUser.getFirstName();
 				}
 			   String state="";
-			   if(workflowLog.getState().equals("shoulizhongxin")){state="<a onclick='sj()'>收件</a>";}
-			   if(workflowLog.getState().equals("quxianshouli")){state="<a onclick='sl()'>受理</a>";}
-			   if(workflowLog.getState().equals("quxianshenhe")){state="<a onclick='sh()'>审核</a>";}
-			   if(workflowLog.getState().equals("quxianshenpi")){state="<a onclick='sp()'>审批</a>";}
-			   if(workflowLog.getState().equals("update2")){continue;}
+			   if(workflowLogs.get(i).getState().equals("shoulizhongxin")){state="<a onclick='sj()'>收件</a>";}
+			   if(workflowLogs.get(i).getState().equals("quxianshouli")){state="<a onclick='sl()'>受理</a>";}
+			   if(workflowLogs.get(i).getState().equals("quxianshenhe")){state="<a onclick='sh()'>审核</a>";}
+			   if(workflowLogs.get(i).getState().equals("quxianshenpi")){state="<a onclick='sp()'>审批</a>";}
+			   if(workflowLogs.get(i).getState().equals("update2")){continue;}
+			   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state3")){transition="收件退回";}
+			   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state4")){transition="收件通过";}
+			   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state5")){transition="受理通过";}
+			   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state6")){transition="审核通过";}
+			   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state30")){transition="审批通过";}
+			   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state7")){transition="审批退回";}
+			   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state41")){transition="补正退回";}
 	%>
 	<tr>
-		<td style="border:1px solid #ddd;"><%=state%></td>
-		<td style="border:1px solid #ddd;"><%=workflowLog.getComment().equals("Assigned initial task.")?"":workflowLog.getComment()%></td>
+		<td style="border:1px solid #ddd;"><%=state%>-<%=transition%></td>
+		<td style="border:1px solid #ddd;"><%=workflowLogs.get(i).getComment().equals("Assigned initial task.")?"":workflowLogs.get(i).getComment()%></td>
 		<td style="border:1px solid #ddd;"><%=auditName%></td>
-		<td style="border:1px solid #ddd;"><%=dateFormatDateTime.format(workflowLog.getCreateDate())%></td>
+		<td style="border:1px solid #ddd;"><%=dateFormatDateTime.format(workflowLogs.get(i).getCreateDate())%></td>
 	</tr>
 	<%
 		}
