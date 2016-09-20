@@ -15,9 +15,9 @@ div.hf button {
 </style>
 <%
 	long feedbackId = ParamUtil.getLong(request, "feedbackId");
-	Feedback feedback = FeedbackLocalServiceUtil.getFeedback(feedbackId);
+	Feedback feedback = FeedbackLocalServiceUtil.getFeedback(231532);
 	request.setAttribute("feedback", feedback);
-	request.setAttribute("feedbackId", feedbackId);
+	request.setAttribute("feedbackId", 231532);
 %>
 <portlet:renderURL var="viewURL">
 	<portlet:param name="mvcPath" value="${contextPath}/view.jsp"/>
@@ -56,7 +56,7 @@ div.hf button {
 			反馈日期:
 		</aui:col>
 		<aui:col span="4">
-			<fmt:formatDate value="${feedback.hfrq}" pattern="yyyy-MM-dd" />
+			<fmt:formatDate value="${feedback.fkrq}" pattern="yyyy-MM-dd" />
 		</aui:col>
 	</aui:row>
 	<aui:row style="margin-left:15px">
