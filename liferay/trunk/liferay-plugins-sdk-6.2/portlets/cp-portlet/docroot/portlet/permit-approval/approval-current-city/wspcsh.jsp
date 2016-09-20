@@ -107,12 +107,3 @@ Liferay.delegateClick('<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(tra
 			<aui:button name="close" value="关闭" cssClass="btn" href="${viewURL}" />
 		</div>
 	</div>
-	<script>
-	function xk(){
-		$("#_153_comment").val("<span style='color:red'>(许可)</span>");
-	}
-	function byxk(){
-		$("#_153_comment").val("<span style='color:red'>(不予许可)</span>");
-	}
-	</script>
-	
