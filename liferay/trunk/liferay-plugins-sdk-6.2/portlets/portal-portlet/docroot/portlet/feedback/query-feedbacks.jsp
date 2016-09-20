@@ -44,10 +44,18 @@
 					inlineField="true"></aui:input>
 				<aui:select name="lxId" label="类型" showEmptyOption="true"
 					inlineLabel="left" inlineField="true">
-					<aui:option value="zrxx">主任信箱</aui:option>
-					<aui:option value="ywzx">业务咨询</aui:option>
-					<aui:option value="jy">建议</aui:option>
-					<aui:option value="wsts">网上投诉</aui:option>
+					<%
+						Dictionary dictionary = DictionaryLocalServiceUtil.findByCode("hdfklx");
+						if (Validator.isNotNull(dictionary)) {
+							List<Dictionary> dictionaries = DictionaryLocalServiceUtil.findByParentId(dictionary.getDictionaryId(), -1, -1);
+							for (Dictionary dic : dictionaries) {
+								request.setAttribute("dic", dic);
+					%>
+					<aui:option value="${dic.dictionaryId }" label="${dic.name }" selected="${lxId eq dic.dictionaryId}"/>
+					<%
+							}
+						}
+					%>
 				</aui:select>
 			</aui:col>
 		</aui:row>
