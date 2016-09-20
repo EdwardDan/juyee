@@ -5,13 +5,21 @@
 		<field name="feedbackId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
-		<field name="zt" type="String" />
-		<field name="lx" type="String" />
+		<field name="zt" type="String">
+			<hint name="max-length">30</hint>
+		</field>
+		<field name="lxId" type="long" />
 		<field name="fkrId" type="long" />
 		<field name="fkrq" type="Date" />
-		<field name="fknr" type="String" />
+		<field name="fknr" type="String">
+			<hint-collection name="TEXTAREA" />
+			<hint name="max-length">2000</hint>
+		</field>
 		<field name="hfrId" type="long" />
 		<field name="hfrq" type="Date" />
-		<field name="hfjg" type="String" />
+		<field name="hfjg" type="String">
+			<hint-collection name="TEXTAREA" />
+			<hint name="max-length">2000</hint>
+		</field>
 	</model>
 </model-hints>

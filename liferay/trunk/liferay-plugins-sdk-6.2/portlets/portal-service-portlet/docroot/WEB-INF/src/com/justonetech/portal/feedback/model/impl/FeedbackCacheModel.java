@@ -47,8 +47,8 @@ public class FeedbackCacheModel implements CacheModel<Feedback>, Externalizable 
 		sb.append(companyId);
 		sb.append(", zt=");
 		sb.append(zt);
-		sb.append(", lx=");
-		sb.append(lx);
+		sb.append(", lxId=");
+		sb.append(lxId);
 		sb.append(", fkrId=");
 		sb.append(fkrId);
 		sb.append(", fkrq=");
@@ -81,13 +81,7 @@ public class FeedbackCacheModel implements CacheModel<Feedback>, Externalizable 
 			feedbackImpl.setZt(zt);
 		}
 
-		if (lx == null) {
-			feedbackImpl.setLx(StringPool.BLANK);
-		}
-		else {
-			feedbackImpl.setLx(lx);
-		}
-
+		feedbackImpl.setLxId(lxId);
 		feedbackImpl.setFkrId(fkrId);
 
 		if (fkrq == Long.MIN_VALUE) {
@@ -131,7 +125,7 @@ public class FeedbackCacheModel implements CacheModel<Feedback>, Externalizable 
 		groupId = objectInput.readLong();
 		companyId = objectInput.readLong();
 		zt = objectInput.readUTF();
-		lx = objectInput.readUTF();
+		lxId = objectInput.readLong();
 		fkrId = objectInput.readLong();
 		fkrq = objectInput.readLong();
 		fknr = objectInput.readUTF();
@@ -154,13 +148,7 @@ public class FeedbackCacheModel implements CacheModel<Feedback>, Externalizable 
 			objectOutput.writeUTF(zt);
 		}
 
-		if (lx == null) {
-			objectOutput.writeUTF(StringPool.BLANK);
-		}
-		else {
-			objectOutput.writeUTF(lx);
-		}
-
+		objectOutput.writeLong(lxId);
 		objectOutput.writeLong(fkrId);
 		objectOutput.writeLong(fkrq);
 
@@ -186,7 +174,7 @@ public class FeedbackCacheModel implements CacheModel<Feedback>, Externalizable 
 	public long groupId;
 	public long companyId;
 	public String zt;
-	public String lx;
+	public long lxId;
 	public long fkrId;
 	public long fkrq;
 	public String fknr;

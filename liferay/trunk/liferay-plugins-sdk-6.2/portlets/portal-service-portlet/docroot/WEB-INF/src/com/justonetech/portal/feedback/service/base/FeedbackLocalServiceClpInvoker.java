@@ -117,19 +117,19 @@ public class FeedbackLocalServiceClpInvoker {
 		_methodName38 = "getFeedbacks";
 
 		_methodParameterTypes38 = new String[] {
-				"java.lang.String", "java.lang.String", "long", "int", "int"
+				"java.lang.String", "long", "long", "int", "int"
 			};
 
 		_methodName39 = "getFeedbacksCount";
 
 		_methodParameterTypes39 = new String[] {
-				"java.lang.String", "java.lang.String", "long"
+				"java.lang.String", "long", "long"
 			};
 
 		_methodName40 = "createDynamicQuery";
 
 		_methodParameterTypes40 = new String[] {
-				"java.lang.String", "java.lang.String", "long"
+				"java.lang.String", "long", "long"
 			};
 	}
 
@@ -237,7 +237,7 @@ public class FeedbackLocalServiceClpInvoker {
 		if (_methodName38.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes38, parameterTypes)) {
 			return FeedbackLocalServiceUtil.getFeedbacks((java.lang.String)arguments[0],
-				(java.lang.String)arguments[1],
+				((Long)arguments[1]).longValue(),
 				((Long)arguments[2]).longValue(),
 				((Integer)arguments[3]).intValue(),
 				((Integer)arguments[4]).intValue());
@@ -246,13 +246,15 @@ public class FeedbackLocalServiceClpInvoker {
 		if (_methodName39.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes39, parameterTypes)) {
 			return FeedbackLocalServiceUtil.getFeedbacksCount((java.lang.String)arguments[0],
-				(java.lang.String)arguments[1], ((Long)arguments[2]).longValue());
+				((Long)arguments[1]).longValue(),
+				((Long)arguments[2]).longValue());
 		}
 
 		if (_methodName40.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes40, parameterTypes)) {
 			return FeedbackLocalServiceUtil.createDynamicQuery((java.lang.String)arguments[0],
-				(java.lang.String)arguments[1], ((Long)arguments[2]).longValue());
+				((Long)arguments[1]).longValue(),
+				((Long)arguments[2]).longValue());
 		}
 
 		throw new UnsupportedOperationException();

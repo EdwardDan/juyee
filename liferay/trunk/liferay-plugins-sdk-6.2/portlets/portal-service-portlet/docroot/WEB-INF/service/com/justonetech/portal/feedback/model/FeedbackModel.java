@@ -117,19 +117,18 @@ public interface FeedbackModel extends BaseModel<Feedback> {
 	public void setZt(String zt);
 
 	/**
-	 * Returns the lx of this feedback.
+	 * Returns the lx ID of this feedback.
 	 *
-	 * @return the lx of this feedback
+	 * @return the lx ID of this feedback
 	 */
-	@AutoEscape
-	public String getLx();
+	public long getLxId();
 
 	/**
-	 * Sets the lx of this feedback.
+	 * Sets the lx ID of this feedback.
 	 *
-	 * @param lx the lx of this feedback
+	 * @param lxId the lx ID of this feedback
 	 */
-	public void setLx(String lx);
+	public void setLxId(long lxId);
 
 	/**
 	 * Returns the fkr ID of this feedback.

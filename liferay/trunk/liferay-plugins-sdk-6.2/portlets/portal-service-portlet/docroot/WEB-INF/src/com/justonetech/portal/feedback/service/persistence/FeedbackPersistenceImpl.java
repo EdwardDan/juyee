@@ -322,7 +322,7 @@ public class FeedbackPersistenceImpl extends BasePersistenceImpl<Feedback>
 		feedbackImpl.setGroupId(feedback.getGroupId());
 		feedbackImpl.setCompanyId(feedback.getCompanyId());
 		feedbackImpl.setZt(feedback.getZt());
-		feedbackImpl.setLx(feedback.getLx());
+		feedbackImpl.setLxId(feedback.getLxId());
 		feedbackImpl.setFkrId(feedback.getFkrId());
 		feedbackImpl.setFkrq(feedback.getFkrq());
 		feedbackImpl.setFknr(feedback.getFknr());

@@ -13,7 +13,7 @@
 			<basic name="groupId" />
 			<basic name="companyId" />
 			<basic name="zt" />
-			<basic name="lx" />
+			<basic name="lxId" />
 			<basic name="fkrId" />
 			<basic name="fkrq">
 				<temporal>TIMESTAMP</temporal>

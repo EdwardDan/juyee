@@ -64,7 +64,7 @@ public class FeedbackModelImpl extends BaseModelImpl<Feedback>
 			{ "groupId", Types.BIGINT },
 			{ "companyId", Types.BIGINT },
 			{ "zt", Types.VARCHAR },
-			{ "lx", Types.VARCHAR },
+			{ "lxId", Types.BIGINT },
 			{ "fkrId", Types.BIGINT },
 			{ "fkrq", Types.TIMESTAMP },
 			{ "fknr", Types.VARCHAR },
@@ -72,7 +72,7 @@ public class FeedbackModelImpl extends BaseModelImpl<Feedback>
 			{ "hfrq", Types.TIMESTAMP },
 			{ "hfjg", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table portal_Feedback (feedbackId LONG not null primary key,groupId LONG,companyId LONG,zt VARCHAR(75) null,lx VARCHAR(75) null,fkrId LONG,fkrq DATE null,fknr VARCHAR(75) null,hfrId LONG,hfrq DATE null,hfjg VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table portal_Feedback (feedbackId LONG not null primary key,groupId LONG,companyId LONG,zt VARCHAR(30) null,lxId LONG,fkrId LONG,fkrq DATE null,fknr VARCHAR(2000) null,hfrId LONG,hfrq DATE null,hfjg VARCHAR(2000) null)";
 	public static final String TABLE_SQL_DROP = "drop table portal_Feedback";
 	public static final String ORDER_BY_JPQL = " ORDER BY feedback.fkrq DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY portal_Feedback.fkrq DESC";
@@ -130,7 +130,7 @@ public class FeedbackModelImpl extends BaseModelImpl<Feedback>
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("zt", getZt());
-		attributes.put("lx", getLx());
+		attributes.put("lxId", getLxId());
 		attributes.put("fkrId", getFkrId());
 		attributes.put("fkrq", getFkrq());
 		attributes.put("fknr", getFknr());
@@ -167,10 +167,10 @@ public class FeedbackModelImpl extends BaseModelImpl<Feedback>
 			setZt(zt);
 		}
 
-		String lx = (String)attributes.get("lx");
+		Long lxId = (Long)attributes.get("lxId");
 
-		if (lx != null) {
-			setLx(lx);
+		if (lxId != null) {
+			setLxId(lxId);
 		}
 
 		Long fkrId = (Long)attributes.get("fkrId");
@@ -256,18 +256,13 @@ public class FeedbackModelImpl extends BaseModelImpl<Feedback>
 	}
 
 	@Override
-	public String getLx() {
-		if (_lx == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _lx;
-		}
+	public long getLxId() {
+		return _lxId;
 	}
 
 	@Override
-	public void setLx(String lx) {
-		_lx = lx;
+	public void setLxId(long lxId) {
+		_lxId = lxId;
 	}
 
 	@Override
@@ -371,7 +366,7 @@ public class FeedbackModelImpl extends BaseModelImpl<Feedback>
 		feedbackImpl.setGroupId(getGroupId());
 		feedbackImpl.setCompanyId(getCompanyId());
 		feedbackImpl.setZt(getZt());
-		feedbackImpl.setLx(getLx());
+		feedbackImpl.setLxId(getLxId());
 		feedbackImpl.setFkrId(getFkrId());
 		feedbackImpl.setFkrq(getFkrq());
 		feedbackImpl.setFknr(getFknr());
@@ -448,13 +443,7 @@ public class FeedbackModelImpl extends BaseModelImpl<Feedback>
 			feedbackCacheModel.zt = null;
 		}
 
-		feedbackCacheModel.lx = getLx();
-
-		String lx = feedbackCacheModel.lx;
-
-		if ((lx != null) && (lx.length() == 0)) {
-			feedbackCacheModel.lx = null;
-		}
+		feedbackCacheModel.lxId = getLxId();
 
 		feedbackCacheModel.fkrId = getFkrId();
 
@@ -509,8 +498,8 @@ public class FeedbackModelImpl extends BaseModelImpl<Feedback>
 		sb.append(getCompanyId());
 		sb.append(", zt=");
 		sb.append(getZt());
-		sb.append(", lx=");
-		sb.append(getLx());
+		sb.append(", lxId=");
+		sb.append(getLxId());
 		sb.append(", fkrId=");
 		sb.append(getFkrId());
 		sb.append(", fkrq=");
@@ -553,8 +542,8 @@ public class FeedbackModelImpl extends BaseModelImpl<Feedback>
 		sb.append(getZt());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>lx</column-name><column-value><![CDATA[");
-		sb.append(getLx());
+			"<column><column-name>lxId</column-name><column-value><![CDATA[");
+		sb.append(getLxId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>fkrId</column-name><column-value><![CDATA[");
@@ -594,7 +583,7 @@ public class FeedbackModelImpl extends BaseModelImpl<Feedback>
 	private long _groupId;
 	private long _companyId;
 	private String _zt;
-	private String _lx;
+	private long _lxId;
 	private long _fkrId;
 	private Date _fkrq;
 	private String _fknr;

@@ -78,7 +78,7 @@ public class FeedbackClp extends BaseModelImpl<Feedback> implements Feedback {
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("zt", getZt());
-		attributes.put("lx", getLx());
+		attributes.put("lxId", getLxId());
 		attributes.put("fkrId", getFkrId());
 		attributes.put("fkrq", getFkrq());
 		attributes.put("fknr", getFknr());
@@ -115,10 +115,10 @@ public class FeedbackClp extends BaseModelImpl<Feedback> implements Feedback {
 			setZt(zt);
 		}
 
-		String lx = (String)attributes.get("lx");
+		Long lxId = (Long)attributes.get("lxId");
 
-		if (lx != null) {
-			setLx(lx);
+		if (lxId != null) {
+			setLxId(lxId);
 		}
 
 		Long fkrId = (Long)attributes.get("fkrId");
@@ -251,21 +251,21 @@ public class FeedbackClp extends BaseModelImpl<Feedback> implements Feedback {
 	}
 
 	@Override
-	public String getLx() {
-		return _lx;
+	public long getLxId() {
+		return _lxId;
 	}
 
 	@Override
-	public void setLx(String lx) {
-		_lx = lx;
+	public void setLxId(long lxId) {
+		_lxId = lxId;
 
 		if (_feedbackRemoteModel != null) {
 			try {
 				Class<?> clazz = _feedbackRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setLx", String.class);
+				Method method = clazz.getMethod("setLxId", long.class);
 
-				method.invoke(_feedbackRemoteModel, lx);
+				method.invoke(_feedbackRemoteModel, lxId);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -484,7 +484,7 @@ public class FeedbackClp extends BaseModelImpl<Feedback> implements Feedback {
 		clone.setGroupId(getGroupId());
 		clone.setCompanyId(getCompanyId());
 		clone.setZt(getZt());
-		clone.setLx(getLx());
+		clone.setLxId(getLxId());
 		clone.setFkrId(getFkrId());
 		clone.setFkrq(getFkrq());
 		clone.setFknr(getFknr());
@@ -553,8 +553,8 @@ public class FeedbackClp extends BaseModelImpl<Feedback> implements Feedback {
 		sb.append(getCompanyId());
 		sb.append(", zt=");
 		sb.append(getZt());
-		sb.append(", lx=");
-		sb.append(getLx());
+		sb.append(", lxId=");
+		sb.append(getLxId());
 		sb.append(", fkrId=");
 		sb.append(getFkrId());
 		sb.append(", fkrq=");
@@ -597,8 +597,8 @@ public class FeedbackClp extends BaseModelImpl<Feedback> implements Feedback {
 		sb.append(getZt());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>lx</column-name><column-value><![CDATA[");
-		sb.append(getLx());
+			"<column><column-name>lxId</column-name><column-value><![CDATA[");
+		sb.append(getLxId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>fkrId</column-name><column-value><![CDATA[");
@@ -634,7 +634,7 @@ public class FeedbackClp extends BaseModelImpl<Feedback> implements Feedback {
 	private long _groupId;
 	private long _companyId;
 	private String _zt;
-	private String _lx;
+	private long _lxId;
 	private long _fkrId;
 	private Date _fkrq;
 	private String _fknr;

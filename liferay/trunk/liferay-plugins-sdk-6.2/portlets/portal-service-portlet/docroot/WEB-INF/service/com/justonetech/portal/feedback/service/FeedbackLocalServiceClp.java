@@ -117,19 +117,19 @@ public class FeedbackLocalServiceClp implements FeedbackLocalService {
 		_methodName19 = "getFeedbacks";
 
 		_methodParameterTypes19 = new String[] {
-				"java.lang.String", "java.lang.String", "long", "int", "int"
+				"java.lang.String", "long", "long", "int", "int"
 			};
 
 		_methodName20 = "getFeedbacksCount";
 
 		_methodParameterTypes20 = new String[] {
-				"java.lang.String", "java.lang.String", "long"
+				"java.lang.String", "long", "long"
 			};
 
 		_methodName21 = "createDynamicQuery";
 
 		_methodParameterTypes21 = new String[] {
-				"java.lang.String", "java.lang.String", "long"
+				"java.lang.String", "long", "long"
 			};
 	}
 
@@ -685,7 +685,7 @@ public class FeedbackLocalServiceClp implements FeedbackLocalService {
 
 	@Override
 	public java.util.List<com.justonetech.portal.feedback.model.Feedback> getFeedbacks(
-		java.lang.String zt, java.lang.String lx, long fkrId, int start, int end) {
+		java.lang.String zt, long lxId, long fkrId, int start, int end) {
 		Object returnObj = null;
 
 		try {
@@ -694,7 +694,7 @@ public class FeedbackLocalServiceClp implements FeedbackLocalService {
 					new Object[] {
 						ClpSerializer.translateInput(zt),
 						
-					ClpSerializer.translateInput(lx),
+					lxId,
 						
 					fkrId,
 						
@@ -719,20 +719,13 @@ public class FeedbackLocalServiceClp implements FeedbackLocalService {
 	}
 
 	@Override
-	public int getFeedbacksCount(java.lang.String zt, java.lang.String lx,
-		long fkrId) {
+	public int getFeedbacksCount(java.lang.String zt, long lxId, long fkrId) {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName20,
 					_methodParameterTypes20,
-					new Object[] {
-						ClpSerializer.translateInput(zt),
-						
-					ClpSerializer.translateInput(lx),
-						
-					fkrId
-					});
+					new Object[] { ClpSerializer.translateInput(zt), lxId, fkrId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -751,19 +744,13 @@ public class FeedbackLocalServiceClp implements FeedbackLocalService {
 
 	@Override
 	public com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQuery(
-		java.lang.String zt, java.lang.String lx, long fkrId) {
+		java.lang.String zt, long lxId, long fkrId) {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName21,
 					_methodParameterTypes21,
-					new Object[] {
-						ClpSerializer.translateInput(zt),
-						
-					ClpSerializer.translateInput(lx),
-						
-					fkrId
-					});
+					new Object[] { ClpSerializer.translateInput(zt), lxId, fkrId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);

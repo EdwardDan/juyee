@@ -16,7 +16,7 @@
 
 		<!-- Business fields -->
 		<column name="zt" type="String" /><!-- 主题 -->
-		<column name="lx" type="String" /><!-- 类型 -->
+		<column name="lxId" type="long" /><!-- 类型Id，对应互动反馈类型的下级字典 -->
 		<column name="fkrId" type="long" /><!-- 反馈人Id -->
 		<column name="fkrq" type="Date" /><!-- 反馈日期 -->
 		<column name="fknr" type="String" /><!-- 反馈内容 -->

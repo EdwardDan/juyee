@@ -34,7 +34,7 @@ public class FeedbackSoap implements Serializable {
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setZt(model.getZt());
-		soapModel.setLx(model.getLx());
+		soapModel.setLxId(model.getLxId());
 		soapModel.setFkrId(model.getFkrId());
 		soapModel.setFkrq(model.getFkrq());
 		soapModel.setFknr(model.getFknr());
@@ -125,12 +125,12 @@ public class FeedbackSoap implements Serializable {
 		_zt = zt;
 	}
 
-	public String getLx() {
-		return _lx;
+	public long getLxId() {
+		return _lxId;
 	}
 
-	public void setLx(String lx) {
-		_lx = lx;
+	public void setLxId(long lxId) {
+		_lxId = lxId;
 	}
 
 	public long getFkrId() {
@@ -185,7 +185,7 @@ public class FeedbackSoap implements Serializable {
 	private long _groupId;
 	private long _companyId;
 	private String _zt;
-	private String _lx;
+	private long _lxId;
 	private long _fkrId;
 	private Date _fkrq;
 	private String _fknr;

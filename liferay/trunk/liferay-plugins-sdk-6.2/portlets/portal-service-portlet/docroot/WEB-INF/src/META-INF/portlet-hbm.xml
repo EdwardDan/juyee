@@ -11,7 +11,7 @@
 		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="zt" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="lx" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="lxId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="fkrId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="fkrq" type="org.hibernate.type.TimestampType" />
 		<property name="fknr" type="com.liferay.portal.dao.orm.hibernate.StringType" />

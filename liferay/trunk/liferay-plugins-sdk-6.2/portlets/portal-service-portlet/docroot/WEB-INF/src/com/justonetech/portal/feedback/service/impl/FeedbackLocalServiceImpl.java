@@ -50,10 +50,10 @@ public class FeedbackLocalServiceImpl extends FeedbackLocalServiceBaseImpl {
 	private static Log log = LogFactoryUtil.getLog(FeedbackLocalServiceImpl.class);
 
 	@SuppressWarnings("unchecked")
-	public List<Feedback> getFeedbacks(String zt,String lx, long fkrId, int start, int end) {
+	public List<Feedback> getFeedbacks(String zt,long lxId, long fkrId, int start, int end) {
 
 		try {
-			return this.dynamicQuery(createDynamicQuery(zt,lx,fkrId), start, end);
+			return this.dynamicQuery(createDynamicQuery(zt,lxId,fkrId), start, end);
 		}
 		catch (SystemException e) {
 			log.info(e.getMessage());
@@ -61,10 +61,10 @@ public class FeedbackLocalServiceImpl extends FeedbackLocalServiceBaseImpl {
 		return Collections.emptyList();
 	}
 
-	public int getFeedbacksCount(String zt,String lx, long fkrId) {
+	public int getFeedbacksCount(String zt,long lxId, long fkrId) {
 
 		try {
-			return (int) this.dynamicQueryCount(createDynamicQuery(zt,lx,fkrId));
+			return (int) this.dynamicQueryCount(createDynamicQuery(zt,lxId,fkrId));
 		}
 		catch (SystemException e) {
 			log.info(e.getMessage());
@@ -72,18 +72,10 @@ public class FeedbackLocalServiceImpl extends FeedbackLocalServiceBaseImpl {
 		return 0;
 	}
 
-	public DynamicQuery createDynamicQuery(String zt,String lx, long fkrId) {
+	public DynamicQuery createDynamicQuery(String zt,long lxId, long fkrId) {
 
 		DynamicQuery dynamicQuery = this.dynamicQuery();
-		if (!Validator.isBlank(zt)) {
-			dynamicQuery.add(PropertyFactoryUtil.forName("zt").like("%" + zt + "%"));
-		}
-		if (!Validator.isBlank(lx)) {
-			dynamicQuery.add(PropertyFactoryUtil.forName("lx").like("%" + lx + "%"));
-		}
-		if (!Validator.equals(fkrId, -1)) {
-			dynamicQuery.add(PropertyFactoryUtil.forName("fkrId").eq(fkrId));
-		}
+
 		dynamicQuery.addOrder(OrderFactoryUtil.desc("fkrq"));
 		return dynamicQuery;
 	}

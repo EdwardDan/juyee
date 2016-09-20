@@ -276,18 +276,18 @@ public class FeedbackLocalServiceUtil {
 	}
 
 	public static java.util.List<com.justonetech.portal.feedback.model.Feedback> getFeedbacks(
-		java.lang.String zt, java.lang.String lx, long fkrId, int start, int end) {
-		return getService().getFeedbacks(zt, lx, fkrId, start, end);
+		java.lang.String zt, long lxId, long fkrId, int start, int end) {
+		return getService().getFeedbacks(zt, lxId, fkrId, start, end);
 	}
 
-	public static int getFeedbacksCount(java.lang.String zt,
-		java.lang.String lx, long fkrId) {
-		return getService().getFeedbacksCount(zt, lx, fkrId);
+	public static int getFeedbacksCount(java.lang.String zt, long lxId,
+		long fkrId) {
+		return getService().getFeedbacksCount(zt, lxId, fkrId);
 	}
 
 	public static com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQuery(
-		java.lang.String zt, java.lang.String lx, long fkrId) {
-		return getService().createDynamicQuery(zt, lx, fkrId);
+		java.lang.String zt, long lxId, long fkrId) {
+		return getService().createDynamicQuery(zt, lxId, fkrId);
 	}
 
 	public static void clearService() {

@@ -256,12 +256,11 @@ public interface FeedbackLocalService extends BaseLocalService,
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.justonetech.portal.feedback.model.Feedback> getFeedbacks(
-		java.lang.String zt, java.lang.String lx, long fkrId, int start, int end);
+		java.lang.String zt, long lxId, long fkrId, int start, int end);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getFeedbacksCount(java.lang.String zt, java.lang.String lx,
-		long fkrId);
+	public int getFeedbacksCount(java.lang.String zt, long lxId, long fkrId);
 
 	public com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQuery(
-		java.lang.String zt, java.lang.String lx, long fkrId);
+		java.lang.String zt, long lxId, long fkrId);
 }

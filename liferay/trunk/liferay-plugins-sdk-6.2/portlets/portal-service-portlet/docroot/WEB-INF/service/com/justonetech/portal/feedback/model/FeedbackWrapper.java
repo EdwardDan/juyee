@@ -53,7 +53,7 @@ public class FeedbackWrapper implements Feedback, ModelWrapper<Feedback> {
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("zt", getZt());
-		attributes.put("lx", getLx());
+		attributes.put("lxId", getLxId());
 		attributes.put("fkrId", getFkrId());
 		attributes.put("fkrq", getFkrq());
 		attributes.put("fknr", getFknr());
@@ -90,10 +90,10 @@ public class FeedbackWrapper implements Feedback, ModelWrapper<Feedback> {
 			setZt(zt);
 		}
 
-		String lx = (String)attributes.get("lx");
+		Long lxId = (Long)attributes.get("lxId");
 
-		if (lx != null) {
-			setLx(lx);
+		if (lxId != null) {
+			setLxId(lxId);
 		}
 
 		Long fkrId = (Long)attributes.get("fkrId");
@@ -234,23 +234,23 @@ public class FeedbackWrapper implements Feedback, ModelWrapper<Feedback> {
 	}
 
 	/**
-	* Returns the lx of this feedback.
+	* Returns the lx ID of this feedback.
 	*
-	* @return the lx of this feedback
+	* @return the lx ID of this feedback
 	*/
 	@Override
-	public java.lang.String getLx() {
-		return _feedback.getLx();
+	public long getLxId() {
+		return _feedback.getLxId();
 	}
 
 	/**
-	* Sets the lx of this feedback.
+	* Sets the lx ID of this feedback.
 	*
-	* @param lx the lx of this feedback
+	* @param lxId the lx ID of this feedback
 	*/
 	@Override
-	public void setLx(java.lang.String lx) {
-		_feedback.setLx(lx);
+	public void setLxId(long lxId) {
+		_feedback.setLxId(lxId);
 	}
 
 	/**
