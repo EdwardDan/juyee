@@ -12,6 +12,39 @@
 	Long permitId = ParamUtil.getLong(request, "permitId");
 	Permit permit = PermitLocalServiceUtil.getPermit(permitId);
 	request.setAttribute("permit", permit);
+	
+User me=PortalUtil.getUser(request);
+	
+	String bjbhInit = permit.getBjbh();
+	//根据报建编号获取报建项目信息
+	Project projectInit = ProjectLocalServiceUtil.getProject(bjbhInit);
+	String lxjbInit = projectInit.getLxjb();
+	String qxLxjbInit = "区县级机关或区县级单位";
+	String comment="";
+	String num="";
+		Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
+		List<Integer> logTypes = new ArrayList<Integer>();
+		logTypes.add(WorkflowLog.TASK_COMPLETION);
+		if(WorkflowInstanceLinkLocalServiceUtil.hasWorkflowInstanceLink(me.getCompanyId(), 0L, "com.justonetech.cp.permit.model.Permit", permit.getPermitId())){
+		List<WorkflowLog> workflowLogs = WorkflowLogManagerUtil.getWorkflowLogsByWorkflowInstance(company.getCompanyId(), WorkflowInstanceLinkLocalServiceUtil.getWorkflowInstanceLink(me.getCompanyId(), 0L, "com.justonetech.cp.permit.model.Permit", permit.getPermitId()).getWorkflowInstanceId(), logTypes, QueryUtil.ALL_POS, QueryUtil.ALL_POS, WorkflowComparatorFactoryUtil.getLogCreateDateComparator(true));
+		if(lxjbInit.equals(qxLxjbInit)){
+			for (WorkflowLog workflowLog : workflowLogs) {
+				   if(workflowLog.getState().equals("quxianshenpi")){comment=workflowLog.getComment();
+				   }
+				}
+		}else{
+			for (WorkflowLog workflowLog : workflowLogs) {
+				   if(workflowLog.getState().equals("shenhe")){comment=workflowLog.getComment();
+				   }
+				}
+		}
+		
+		   }
+		if(comment.equals("该事项不属于本行政机关职权范围;")){num="1";}
+		if(comment.equals("申请人隐瞒有关情况、提供虚假材料；")){num="2";}
+		if(comment.equals("不具备法定的申请主体资格；")){num="3";}
+		if(comment.equals("申请材料仍不齐全/不符合法定形式;")){num="4";}
+		if(comment.equals("（法律、法规、规章规定的其他不予受理的情形）。")){num="5";}
 %>
 <OBJECT id="WebBrowser1" height=0 width=0 classid=CLSID:8856F961-340A-11D0-A96B-00C04FD705A2 name=wb></OBJECT> 
 <html>
@@ -210,7 +243,7 @@ div.Section1 {
 				style='font-size: 14.0pt; line-height: 150%; font-family: 宋体; mso-ascii-font-family: Calibri; mso-hansi-font-family: Calibri; mso-bidi-font-family: 宋体'>申请，因存在下列第</span><u><span
 				lang=EN-US style='font-size: 14.0pt; line-height: 150%'><span
 					style='mso-spacerun: yes'>&nbsp; </span><span
-					style='mso-spacerun: yes'>&nbsp;${bean.backNum}&nbsp;</span><span
+					style='mso-spacerun: yes'>&nbsp;<%=num %>&nbsp;</span><span
 					style='mso-spacerun: yes'>&nbsp;&nbsp;</span></span></u><span
 				style='font-size: 14.0pt; line-height: 150%; font-family: 宋体; mso-ascii-font-family: Calibri; mso-hansi-font-family: Calibri; mso-bidi-font-family: 宋体'>种情形，根据《中华人民共和国行政许可法》的有关规定，本机关决定不予受理，并退回全部申请材料。</span><span
 				lang=EN-US
@@ -237,6 +270,12 @@ div.Section1 {
 		</c:forEach>
 
 		<p class=MsoNormal>
+		<span lang=EN-US style='font-size: 12.0pt; mso-bidi-font-family: 宋体'>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.该事项不属于本行政机关职权范围;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.申请人隐瞒有关情况、提供虚假材料；<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.不具备法定的申请主体资格；<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.申请材料仍不齐全/不符合法定形式;<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.(法律、法规、规章规定的其他不予受理的情形)<br/></span><br/>
 			<span lang=EN-US style='font-size: 14.0pt; mso-bidi-font-family: 宋体'><span
 				style='mso-tab-count: 1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			</span></span><span
