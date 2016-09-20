@@ -21,10 +21,10 @@
 		<jsp:include page="${contextPath }/approval-current-city/ys.jsp" />
 	</c:when>
 	<c:when
-		test="${(sqztInit=='3'&&fn:contains(roles,'25423'))||(sqztInit=='10'&&fn:contains(roles,'25423')) }">
+		test="${(sqztInit=='3'&&fn:contains(roles,'25423'))||(sqztInit=='10'&&fn:contains(roles,'25423'))||(sqztInit=='23'&&fn:contains(roles,'25423')) }">
 		<jsp:include page="${contextPath }/approval-current-city/sj.jsp" />
 	</c:when>
-	<c:when test="${sqztInit=='5'&&fn:contains(roles,'25424') }">
+	<c:when test="${(sqztInit=='5'&&fn:contains(roles,'25424'))||(sqztInit=='24'&&fn:contains(roles,'25424')) }">
 		<jsp:include page="${contextPath }/approval-current-city/cs.jsp" />
 	</c:when>
 	<c:when test="${sqztInit=='7'&&fn:contains(roles,'25425') }">
