@@ -21,6 +21,7 @@ import com.justonetech.portal.feedback.model.Feedback;
 import com.justonetech.portal.feedback.service.FeedbackLocalServiceUtil;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.captcha.CaptchaUtil;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONArray;
@@ -45,6 +46,12 @@ import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.expando.model.ExpandoColumn;
+import com.liferay.portlet.expando.model.ExpandoTable;
+import com.liferay.portlet.expando.model.ExpandoValue;
+import com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil;
+import com.liferay.portlet.expando.service.ExpandoTableLocalServiceUtil;
+import com.liferay.portlet.expando.service.ExpandoValueLocalServiceUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 /**
@@ -54,8 +61,7 @@ public class FeedbackPortlet extends MVCPortlet {
 	private static Log log = LogFactoryUtil.getLog(FeedbackPortlet.class);
 
 	@Override
-	public void doView(RenderRequest renderRequest,
-			RenderResponse renderResponse) throws IOException, PortletException {
+	public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
 		User user = null;
 		try {
 			user = PortalUtil.getUser(renderRequest);
@@ -66,8 +72,7 @@ public class FeedbackPortlet extends MVCPortlet {
 		String lx = ParamUtil.getString(renderRequest, "lx", "");
 		renderRequest.setAttribute("zt", zt);
 		renderRequest.setAttribute("lx", lx);
-		int defaultDelta = GetterUtil.getInteger(PropsUtil
-				.get(PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA));
+		int defaultDelta = GetterUtil.getInteger(PropsUtil.get(PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA));
 		int delta = ParamUtil.getInteger(renderRequest, "delta", defaultDelta);
 		int cur = ParamUtil.getInteger(renderRequest, "cur", 1);
 		int start = delta * (cur - 1);
@@ -86,21 +91,17 @@ public class FeedbackPortlet extends MVCPortlet {
 		super.doView(renderRequest, renderResponse);
 	}
 
-	public void saveFeedBack(ActionRequest request, ActionResponse response)
-			throws SystemException, PortalException, ParseException,
-			IOException {
+	public void saveFeedBack(ActionRequest request, ActionResponse response) throws SystemException, PortalException, ParseException, IOException {
 		String zt = ParamUtil.getString(request, "zt");
 		String fknr = ParamUtil.getString(request, "fknr");
 		PortletPreferences preferences = request.getPreferences();
 		String lx = preferences.getValue("lx", StringPool.BLANK);
-		Feedback feedback = FeedbackLocalServiceUtil
-				.createFeedback(CounterLocalServiceUtil.increment());
+		Feedback feedback = FeedbackLocalServiceUtil.createFeedback(CounterLocalServiceUtil.increment());
 		feedback.setZt(zt);
 		feedback.setFknr(fknr);
 		feedback.setLx(lx);
 		feedback.setFkrq(new Date());
-		ThemeDisplay themeDisplay = (ThemeDisplay) request
-				.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
 		feedback.setFkrId(themeDisplay.getRealUser().getUserId());
 		feedback.setFkrq(new Date());
 		feedback.setGroupId(themeDisplay.getCompanyGroupId());
@@ -123,9 +124,7 @@ public class FeedbackPortlet extends MVCPortlet {
 	public static final String CAPTCHA_TEXT = "CAPTCHA_TEXT";
 
 	@Override
-	public void serveResource(ResourceRequest resourceRequest,
-			ResourceResponse resourceResponse) throws IOException,
-			PortletException {
+	public void serveResource(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException, PortletException {
 		String resourceId = resourceRequest.getResourceID();
 
 		if (resourceId.equals("ajaxCaptcha")) {
@@ -141,14 +140,12 @@ public class FeedbackPortlet extends MVCPortlet {
 			{
 				if (!Validator.isBlank(value)) {
 					resourceResponse.setContentType(ContentTypes.TEXT);
-					String answer = (String) resourceRequest
-							.getPortletSession().getAttribute(CAPTCHA_TEXT);
+					String answer = (String) resourceRequest.getPortletSession().getAttribute(CAPTCHA_TEXT);
 					log.debug("answer:" + answer);
 					String ret = String.valueOf(value.equalsIgnoreCase(answer));
 
 					// CaptchaUtil.check(resourceRequest);
-					resourceResponse.getPortletOutputStream().write(
-							ret.getBytes());
+					resourceResponse.getPortletOutputStream().write(ret.getBytes());
 					log.debug("captcha verify:" + ret);
 				}
 			}
@@ -156,23 +153,21 @@ public class FeedbackPortlet extends MVCPortlet {
 
 		if (resourceId.equals("captchaID")) {
 			try {
-				com.liferay.portal.kernel.captcha.CaptchaUtil.serveImage(
-						resourceRequest, resourceResponse);
+				com.liferay.portal.kernel.captcha.CaptchaUtil.serveImage(resourceRequest, resourceResponse);
 			} catch (Exception e) {
 				log.error(e);
 			}
 		}
 		if ("feedback".equals(resourceId)) {
 			String loginUser = ParamUtil.get(resourceRequest, "_58_login", "");
-			String loginPassword = ParamUtil.get(resourceRequest,
-					"_58_password", "");
+			String loginPassword = ParamUtil.get(resourceRequest, "_58_password", "");
+
 			Boolean loginState = false;
 			String responseContent = "";
 			try {
 				List<User> userList = UserLocalServiceUtil.getUsers(-1, -1);
 
-				if (Validator.isNotNull(loginUser)
-						&& !loginUser.equals("请输入用户名")) {
+				if (Validator.isNotNull(loginUser) && !loginUser.equals("请输入用户名")) {
 					User defaultUser = null;
 					for (User user : userList) {
 						if (loginUser.equals(user.getScreenName())) {
@@ -180,14 +175,10 @@ public class FeedbackPortlet extends MVCPortlet {
 						}
 					}
 					if (Validator.isNotNull(defaultUser)) {
-						long companyId = PortalUtil
-								.getCompanyId(resourceRequest);
+						long companyId = PortalUtil.getCompanyId(resourceRequest);
 						int authResult = Authenticator.FAILURE;
 						try {
-							authResult = UserLocalServiceUtil
-									.authenticateByScreenName(companyId,
-											loginUser, loginPassword, null,
-											null, null);
+							authResult = UserLocalServiceUtil.authenticateByScreenName(companyId, loginUser, loginPassword, null, null, null);
 						} catch (PortalException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -210,11 +201,11 @@ public class FeedbackPortlet extends MVCPortlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+
 			JSONObject userJson = JSONFactoryUtil.createJSONObject();
 			userJson.put("loginState", loginState);
 			userJson.put("responseContent", responseContent);
-			HttpServletResponse response = PortalUtil
-					.getHttpServletResponse(resourceResponse);
+			HttpServletResponse response = PortalUtil.getHttpServletResponse(resourceResponse);
 			response.setContentType("text/html;charset=UTF-8");
 			PrintWriter out = null;
 			try {
@@ -222,6 +213,7 @@ public class FeedbackPortlet extends MVCPortlet {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+
 			out.print(userJson.toString());
 			out.flush();
 			out.close();
@@ -238,13 +230,12 @@ public class FeedbackPortlet extends MVCPortlet {
 			String lxdz = ParamUtil.getString(resourceRequest, "lxdz");
 			String exception = "";
 			try {
-				createUser(yhm, mm, qrmm, xm, yxdz, resourceRequest);
+				createUser(yhm, mm, qrmm, xm, yxdz, sfzh, lxdh, lxdz, resourceRequest);
 			} catch (Exception e) {
 				exception = e.toString();
 			}
 			JSONArray userArray = JSONFactoryUtil.createJSONArray();
-			HttpServletResponse response = PortalUtil
-					.getHttpServletResponse(resourceResponse);
+			HttpServletResponse response = PortalUtil.getHttpServletResponse(resourceResponse);
 			response.setContentType("text/html;charset=UTF-8");
 			PrintWriter out = null;
 			try {
@@ -262,9 +253,8 @@ public class FeedbackPortlet extends MVCPortlet {
 		super.serveResource(resourceRequest, resourceResponse);
 	}
 
-	public void createUser(String yhm, String mm, String qrmm, String xm,
-			String yxdz, ResourceRequest resourceRequest)
-			throws PortalException, SystemException {
+	public void createUser(String yhm, String mm, String qrmm, String xm, String yxdz, String sfzh, String lxdh, String lxdz,
+			ResourceRequest resourceRequest) throws PortalException, SystemException {
 
 		// 获取参数
 		long companyId = PortalUtil.getCompanyId(resourceRequest);
@@ -295,15 +285,18 @@ public class FeedbackPortlet extends MVCPortlet {
 
 		User defaultUser = UserLocalServiceUtil.getDefaultUser(companyId);
 		long creatorUserId = defaultUser.getUserId();
-		ServiceContext serviceContext = ServiceContextFactory
-				.getInstance(resourceRequest);
-		User user = UserLocalServiceUtil.addUserWithWorkflow(creatorUserId,
-				companyId, autoPassword, password1, password2, autoScreenName,
-				screenName, emailAddress, facebookId, openId, locale,
-				firstName, middleName, lastName, prefixId, suffixId, male,
-				birthdayMonth, birthdayDay, birthdayYear, jobTitle, groupIds,
-				organizationIds, roleIds, userGroupIds, sendEmail,
-				serviceContext);
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(resourceRequest);
+		User user = UserLocalServiceUtil.addUserWithWorkflow(creatorUserId, companyId, autoPassword, password1, password2, autoScreenName,
+				screenName, emailAddress, facebookId, openId, locale, firstName, middleName, lastName, prefixId, suffixId, male, birthdayMonth,
+				birthdayDay, birthdayYear, jobTitle, groupIds, organizationIds, roleIds, userGroupIds, sendEmail, serviceContext);
+
+		ExpandoTable eTable = ExpandoTableLocalServiceUtil.getDefaultTable(PortalUtil.getDefaultCompanyId(), User.class.getName());
+		ExpandoColumn eColumnSfzh = ExpandoColumnLocalServiceUtil.getColumn(eTable.getTableId(), "sfzh");
+		ExpandoValueLocalServiceUtil.addValue(eTable.getClassNameId(), eTable.getTableId(), eColumnSfzh.getColumnId(), user.getUserId(), sfzh);
+		ExpandoColumn eColumnLxdh = ExpandoColumnLocalServiceUtil.getColumn(eTable.getTableId(), "lxdh");
+		ExpandoValueLocalServiceUtil.addValue(eTable.getClassNameId(), eTable.getTableId(), eColumnLxdh.getColumnId(), user.getUserId(), lxdh);
+		ExpandoColumn eColumnLxdz = ExpandoColumnLocalServiceUtil.getColumn(eTable.getTableId(), "lxdz");
+		ExpandoValueLocalServiceUtil.addValue(eTable.getClassNameId(), eTable.getTableId(), eColumnLxdz.getColumnId(), user.getUserId(), lxdz);
 
 	}
 }
