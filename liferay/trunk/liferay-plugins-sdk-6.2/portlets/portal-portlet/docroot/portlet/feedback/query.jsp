@@ -13,7 +13,7 @@
 <%
 	String zt = ParamUtil.getString(request, "zt");
 	Long lxId = ParamUtil.getLong(request, "lxId",-1);
-	long fkrId = -1L;
+	long fkrId = user.getUserId();
 	long currentUserId = PortalUtil.getUserId(request);
 	long[] roleIds = user.getRoleIds();
 	
