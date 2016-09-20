@@ -26,7 +26,9 @@ public enum CityPermitStatus {
     STATUS_SPC_BXK(19, "审批处不许可", "red", "spcsh_bxk"),
     STATUS_SPC_BACK(20, "审批处审核退回", "red", "spcsh_back"),
     STATUS_WLD_PASS(21, "委领导许可", "green", "wldsh_pass"),
-    STATUS_WLD_BACK(22, "委领导不许可", "red", "wldsh_back");
+    STATUS_WLD_BACK(22, "委领导不许可", "red", "wldsh_back"),
+	STATUS_BZ_BACK(23, "补正退回", "red", "bz_back"),
+	STATUS_NB_BACK(24, "内部退回", "red", "nb_back");
 
 	private int code;
 	private String name;
