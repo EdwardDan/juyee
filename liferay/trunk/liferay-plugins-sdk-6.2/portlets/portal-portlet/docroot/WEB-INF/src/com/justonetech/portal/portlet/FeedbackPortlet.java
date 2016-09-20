@@ -2,7 +2,6 @@ package com.justonetech.portal.portlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -11,8 +10,6 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletException;
 import javax.portlet.PortletPreferences;
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 import javax.servlet.http.HttpServletResponse;
@@ -21,7 +18,6 @@ import com.justonetech.portal.feedback.model.Feedback;
 import com.justonetech.portal.feedback.service.FeedbackLocalServiceUtil;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.captcha.CaptchaUtil;
-import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONArray;
@@ -30,12 +26,9 @@ import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.ParseException;
-import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -48,7 +41,6 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.model.ExpandoColumn;
 import com.liferay.portlet.expando.model.ExpandoTable;
-import com.liferay.portlet.expando.model.ExpandoValue;
 import com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil;
 import com.liferay.portlet.expando.service.ExpandoTableLocalServiceUtil;
 import com.liferay.portlet.expando.service.ExpandoValueLocalServiceUtil;
@@ -60,46 +52,15 @@ import com.liferay.util.bridges.mvc.MVCPortlet;
 public class FeedbackPortlet extends MVCPortlet {
 	private static Log log = LogFactoryUtil.getLog(FeedbackPortlet.class);
 
-	@Override
-	public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
-		User user = null;
-		try {
-			user = PortalUtil.getUser(renderRequest);
-		} catch (PortalException | SystemException e) {
-			log.info(e.getMessage());
-		}
-		String zt = ParamUtil.getString(renderRequest, "zt", "");
-		String lx = ParamUtil.getString(renderRequest, "lx", "");
-		renderRequest.setAttribute("zt", zt);
-		renderRequest.setAttribute("lx", lx);
-		int defaultDelta = GetterUtil.getInteger(PropsUtil.get(PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA));
-		int delta = ParamUtil.getInteger(renderRequest, "delta", defaultDelta);
-		int cur = ParamUtil.getInteger(renderRequest, "cur", 1);
-		int start = delta * (cur - 1);
-		int end = delta * cur;
-		List<Feedback> feedbacks = Collections.emptyList();
-		int feedbacksCount = 0;
-		try {
-			feedbacks = FeedbackLocalServiceUtil.getFeedbacks(start, end);
-		} catch (SystemException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		feedbacksCount = FeedbackLocalServiceUtil.getFeedbacksCount(zt, lx, 0);
-		renderRequest.setAttribute("feedbacks", feedbacks);
-		renderRequest.setAttribute("feedbacksCount", feedbacksCount);
-		super.doView(renderRequest, renderResponse);
-	}
-
 	public void saveFeedBack(ActionRequest request, ActionResponse response) throws SystemException, PortalException, ParseException, IOException {
 		String zt = ParamUtil.getString(request, "zt");
 		String fknr = ParamUtil.getString(request, "fknr");
 		PortletPreferences preferences = request.getPreferences();
-		String lx = preferences.getValue("lx", StringPool.BLANK);
+		String lxId = preferences.getValue("lxId", StringPool.BLANK);
 		Feedback feedback = FeedbackLocalServiceUtil.createFeedback(CounterLocalServiceUtil.increment());
 		feedback.setZt(zt);
 		feedback.setFknr(fknr);
-		feedback.setLx(lx);
+		feedback.setLxId(Validator.isBlank(lxId)?0:GetterUtil.getLong(lxId));
 		feedback.setFkrq(new Date());
 		ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
 		feedback.setFkrId(themeDisplay.getRealUser().getUserId());

@@ -1,7 +1,16 @@
+<%@page import="com.justonetech.sys.service.DictionaryLocalServiceUtil"%>
+<%@page import="com.justonetech.sys.model.Dictionary"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
 <link rel="stylesheet" type="text/css"
 	href="/portal-portlet/portlet/feedback/css/query.css" />
+<%
+String lxId = (String)renderRequest.getAttribute("lxId");
+String lxName="";
+if(!Validator.isBlank(lxId)){
+	lxName = DictionaryLocalServiceUtil.getDictionary(GetterUtil.getLong(lxId)).getName();
+}
+%>
 <liferay-ui:error key="captcha-fail" message="${errorMessages }" />
 
 <portlet:renderURL var="viewURL" />
@@ -15,7 +24,7 @@
 			<table class="thead">
 				<tr>
 					<td colspan="2" class="head"><span
-						style="width: 5px; height: 20px; background-color: #ffa200; display: inline-block"></span><span>主任信箱</span>
+						style="width: 5px; height: 20px; background-color: #ffa200; display: inline-block"></span><span><%=lxName %></span>
 					</td>
 				</tr>
 			</table>

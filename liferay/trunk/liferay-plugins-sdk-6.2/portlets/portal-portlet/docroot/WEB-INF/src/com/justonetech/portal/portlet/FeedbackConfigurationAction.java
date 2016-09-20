@@ -9,6 +9,7 @@ import javax.portlet.RenderResponse;
 
 import com.liferay.portal.kernel.portlet.DefaultConfigurationAction;
 import com.liferay.portal.kernel.servlet.SessionMessages;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -25,8 +26,8 @@ public class FeedbackConfigurationAction extends DefaultConfigurationAction {
 				.getPortletSetup(renderRequest, portletId);
 		String displayPage = preferences.getValue("displayPage", StringPool.BLANK);
 		renderRequest.setAttribute("displayPage", displayPage);
-		String lx = preferences.getValue("lx", StringPool.BLANK);
-		renderRequest.setAttribute("lx", lx);
+		String lxId = preferences.getValue("lxId", StringPool.BLANK);
+		renderRequest.setAttribute("lxId", GetterUtil.getLong(lxId));
 		return "/portlet/feedback/config.jsp";
 	}
 	
@@ -42,8 +43,8 @@ public class FeedbackConfigurationAction extends DefaultConfigurationAction {
 		if (Validator.isNotNull(preferences)) {
 			String displayPage = ParamUtil.getString(actionRequest, "displayPage");
 			preferences.setValue("displayPage", displayPage);
-			String lx = ParamUtil.getString(actionRequest, "lx");
-			preferences.setValue("lx", lx);
+			String lxId = ParamUtil.getString(actionRequest, "lxId");
+			preferences.setValue("lxId", lxId);
 			preferences.store();
 			SessionMessages.add(actionRequest, "success");
 		}

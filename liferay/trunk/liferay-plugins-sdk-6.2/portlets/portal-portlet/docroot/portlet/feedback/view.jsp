@@ -5,6 +5,8 @@
 	PortletPreferences preferences = renderRequest.getPreferences();
 	String displayPage = preferences.getValue("displayPage", StringPool.BLANK);
 	renderRequest.setAttribute("displayPage", displayPage);
+	String lxId = preferences.getValue("lxId", StringPool.BLANK);
+	renderRequest.setAttribute("lxId", lxId);
 %>
 <c:choose>
 	<c:when test='${!themeDisplay.isSignedIn()}'>

@@ -3,10 +3,13 @@
 <%@page
 	import="com.justonetech.portal.feedback.service.FeedbackLocalServiceUtil"%>
 <%@page import="com.justonetech.portal.feedback.model.Feedback"%>
+<%@page import="com.justonetech.sys.service.DictionaryLocalServiceUtil"%>
+<%@page import="com.justonetech.sys.model.Dictionary"%>
 <link rel="stylesheet" type="text/css" href="/portal-portlet/portlet/feedback/css/query.css" />
 <portlet:renderURL var="viewURL" />
 <%
 	long feedbackId = ParamUtil.getLong(request, "feedbackId");
+	String lx = ParamUtil.getString(request, "lx");
 	Feedback feedback = FeedbackLocalServiceUtil.getFeedback(feedbackId);
 	request.setAttribute("feedback", feedback);
 %>
@@ -35,7 +38,7 @@
 			类型:
 		</aui:col>
 		<aui:col span="4">
-			${feedback.lx}
+			<%=lx %>
 		</aui:col>
 		<aui:col span="2">
 			反馈日期:

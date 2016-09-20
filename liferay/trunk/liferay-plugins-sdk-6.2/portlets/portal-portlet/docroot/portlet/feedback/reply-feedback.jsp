@@ -15,6 +15,7 @@ div.hf button {
 </style>
 <%
 	long feedbackId = ParamUtil.getLong(request, "feedbackId");
+	String lx = ParamUtil.getString(request, "lx");
 	Feedback feedback = FeedbackLocalServiceUtil.getFeedback(feedbackId);
 	request.setAttribute("feedback", feedback);
 	request.setAttribute("feedbackId", feedbackId);
@@ -50,7 +51,7 @@ div.hf button {
 			类型:
 		</aui:col>
 		<aui:col span="4">
-			${feedback.lx}
+			<%=lx %>
 		</aui:col>
 		<aui:col span="2">
 			反馈日期:
