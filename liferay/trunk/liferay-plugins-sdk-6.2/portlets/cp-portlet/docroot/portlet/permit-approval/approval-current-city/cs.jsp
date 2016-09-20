@@ -13,14 +13,12 @@ request.setAttribute("applyMaterials", applyMaterials);
 	 <portlet:param name="redirectURL" value="${approvalCurrentURL}"/>
 </portlet:actionURL>
 <aui:form action="${saveCsURL}" method="post">
-	<table style="width: 98%" class="table table-striped table-bordered table-hover">
+	<table style="width: 100%" class="table table-striped table-bordered table-hover">
 		<thead>
-			<tr>
 				<th width="5%" class="text-center">序号</th>
 				<th width="30%" class="text-center">材料提交名称</th>
 				<th width="45%" class="text-center">审核要求</th>
 				<th width="20%" class="text-center">初审意见</th>
-			</tr>
 		</thead>
 		<tbody id="applyMaterials">
 			<c:if test="${!empty applyMaterials}">
