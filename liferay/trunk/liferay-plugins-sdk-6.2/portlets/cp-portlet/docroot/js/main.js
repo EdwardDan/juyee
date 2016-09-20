@@ -2,12 +2,10 @@ AUI.add(
 		'liferay-workflow-tasks',
 		function(A) {
 			var WorkflowTasks = {
-				onTaskClick: function(event, randomId) {
+				onTaskClick: function(event, randomId,isbh) {
 					var instance = this;
-
 					var icon = event.currentTarget;
 					var li = icon.get('parentNode');
-
 					event.preventDefault();
 
 					var content = null;
@@ -25,28 +23,38 @@ AUI.add(
 					title = icon.text();
 
 
-					WorkflowTasks.showPopup(icon.attr('href'), A.one(content), title, randomId);
+					WorkflowTasks.showPopup(icon.attr('href'), A.one(content), title, randomId,isbh);
 				},
 
-				showPopup: function(url, content, title, randomId) {
+				showPopup: function(url, content, title, randomId,isbh) {
 					var form = A.Node.create('<form />');
 
 					form.setAttribute('action', url);
 					form.setAttribute('method', 'POST');
 
 					var comments = A.one('#' + randomId + 'updateComments');
-					var test=A.one('#'+randomId+'message');
-					
+					var message=A.one('#'+randomId+'updateMessage');
 					
 					if (content) {
 						form.append(content);
 						content.show();
 					}
 
-					if (comments) {
-						form.append(comments);
-						comments.show();
+					if(isbh){
+						if (comments) {
+							form.append(comments);
+							comments.show();
+						}
 					}
+					
+					
+					if(!isbh){
+						if(message){
+							form.append(message);
+							message.show();
+						}
+					}
+					
 
 					var dialog = Liferay.Util.Window.getWindow(
 						{
