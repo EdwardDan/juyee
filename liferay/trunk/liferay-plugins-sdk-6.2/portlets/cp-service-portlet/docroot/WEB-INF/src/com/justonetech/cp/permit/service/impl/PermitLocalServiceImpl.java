@@ -63,11 +63,34 @@ public class PermitLocalServiceImpl extends PermitLocalServiceBaseImpl {
 		}
 		return Collections.emptyList();
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Permit> getPermits(String ywbh, String bjbh, String gcmc, String xmlx,String jsdwmc,String status, int start, int end) {
+
+		try {
+			return this.dynamicQuery(createDynamicQuery(ywbh, bjbh, gcmc, xmlx,jsdwmc,status), start, end);
+		}
+		catch (SystemException e) {
+			log.info(e.getMessage());
+		}
+		return Collections.emptyList();
+	}
 
 	public int getPermitsCount(String zzjgdm, String bjbh, String wssqbh, String gcmc) {
 
 		try {
 			return (int) this.dynamicQueryCount(createDynamicQuery(zzjgdm, bjbh, wssqbh, gcmc));
+		}
+		catch (SystemException e) {
+			log.info(e.getMessage());
+		}
+		return 0;
+	}
+	
+	public int getPermitsCount(String ywbh, String bjbh, String gcmc, String xmlx,String jsdwmc,String status) {
+
+		try {
+			return (int) this.dynamicQueryCount(createDynamicQuery(ywbh, bjbh, gcmc, xmlx,jsdwmc,status));
 		}
 		catch (SystemException e) {
 			log.info(e.getMessage());
@@ -92,6 +115,30 @@ public class PermitLocalServiceImpl extends PermitLocalServiceBaseImpl {
 			projectProfileDQ.setProjection(ProjectionFactoryUtil.property("permitId"));
 			projectProfileDQ.add(PropertyFactoryUtil.forName("gcmc").like("%" + gcmc + "%"));
 			dynamicQuery.add(PropertyFactoryUtil.forName("permitId").in(projectProfileDQ));
+		}
+		return dynamicQuery;
+	}
+	
+	public DynamicQuery createDynamicQuery(String ywbh, String bjbh, String gcmc, String xmlx,String jsdwmc,String status) {
+
+		DynamicQuery dynamicQuery = this.dynamicQuery();
+		if (!Validator.isBlank(ywbh)) {
+			dynamicQuery.add(PropertyFactoryUtil.forName("ywbh").eq(ywbh));
+		}
+		if (!Validator.isBlank(bjbh)) {
+			dynamicQuery.add(PropertyFactoryUtil.forName("bjbh").like("%" + bjbh + "%"));
+		}
+		if (!Validator.isBlank(gcmc)) {
+			dynamicQuery.add(PropertyFactoryUtil.forName("gcmc").like("%" + gcmc + "%"));
+		}
+		if (!Validator.isBlank(xmlx)) {
+			dynamicQuery.add(PropertyFactoryUtil.forName("xmlx").like("%" + xmlx + "%"));
+		}
+		if (!Validator.isBlank(jsdwmc)) {
+			dynamicQuery.add(PropertyFactoryUtil.forName("jsdwmc").like("%" + jsdwmc + "%"));
+		}
+		if (!Validator.isBlank(status)) {
+			dynamicQuery.add(PropertyFactoryUtil.forName("status").like("%" + status + "%"));
 		}
 		return dynamicQuery;
 	}
