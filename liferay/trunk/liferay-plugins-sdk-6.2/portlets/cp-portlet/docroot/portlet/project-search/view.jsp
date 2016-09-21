@@ -9,8 +9,8 @@
 	<liferay-portlet:param name="bjbh" value="${bjbh }" />
 	<liferay-portlet:param name="wssqbh" value="${wssqbh }" />
 	<liferay-portlet:param name="xmmc" value="${xmmc }" />
-	<liferay-portlet:param name="bjrqStart" value="${bjrqStart }" />
-	<liferay-portlet:param name="bjrqEnd" value="${bjrqEnd }" />
+	<liferay-portlet:param name="bjrqStart" value="${bjrqStartStr }" />
+	<liferay-portlet:param name="bjrqEnd" value="${bjrqEndStr }" />
 	<liferay-portlet:param name="bjwcbj" value="${bjwcbj }" />
 	<liferay-portlet:param name="delta" value="${delta }" />
 	<liferay-portlet:param name="cur" value="${cur }" />
