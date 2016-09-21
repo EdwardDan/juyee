@@ -5,14 +5,6 @@
 input,textarea{
 	margin-bottom: 10px !important;
 }
-span{
-    font-size: 15px;
-    font-weight: 200;
-    padding-top: 5px;
-    padding-left: 5px;
-    padding-right: 5px;
-    top: -4px;
-}
 </style>
 <%
 	long permitId = ParamUtil.getLong(request, "permitId");
