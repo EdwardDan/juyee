@@ -54,8 +54,10 @@
 		</c:if>
 		<c:if test="<%=status >= 9%>">
 			<a class="btn" href="${printsltzsURL}" target="_blank">受理通知书</a>
-			<a class="btn" href="${printbysljdsURL}" target="_blank">不予受理决定书</a>
 			<a class="btn" href="${printbzclURL}" target="_blank">补正材料</a>
+		</c:if>
+		<c:if test="<%=status == 10%>">
+			<a class="btn" href="${printbysljdsURL}" target="_blank">不予受理决定书</a>
 		</c:if>
 		<c:if test="<%=status==23%>">
 		</c:if>
@@ -90,9 +92,9 @@
 			test="<%=status == CountyPermitStatus.STATUS_SP_PASS.getCode()
 								|| status == CountyPermitStatus.STATUS_SP_BACK.getCode()%>">
 			<a class="btn" href="${printsltzsURL}" target="_blank">受理通知书</a>
-			<a class="btn" href="${printbysljdsURL}" target="_blank">不予受理决定书</a>
 		</c:if>
 		<c:if test="<%=status==9%>">
+			<a class="btn" href="${printbysljdsURL}" target="_blank">不予受理决定书</a>
 			<a class="btn" href="${printbzclURL}" target="_blank">补正材料</a>
 		</c:if>
 		<c:if
