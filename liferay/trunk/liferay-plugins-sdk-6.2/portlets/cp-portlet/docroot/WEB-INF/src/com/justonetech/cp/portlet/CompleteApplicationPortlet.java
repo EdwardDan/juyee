@@ -121,12 +121,32 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 					null);
 			Date bjrqEnd = ParamUtil.getDate(renderRequest, "bjrqEnd", new SimpleDateFormat(dateFormatPattern), null);
 			String bjwcbj = ParamUtil.getString(renderRequest, "bjwcbj");
+			
+			String bjrqStartStr = null;
+			String bjrqEndStr = null;
+			SimpleDateFormat sdf = new SimpleDateFormat(dateFormatPattern);
+			if (bjrqStart != null) {
+				bjrqStartStr = sdf.format(bjrqStart);
+			}
+			if (bjrqStartStr == null) {
+				bjrqStartStr = ParamUtil.getString(renderRequest, "bjrqStartStr", "");
+			}
+			if (bjrqEnd != null) {
+				bjrqEndStr = sdf.format(bjrqEnd);
+			}
+			if (bjrqEndStr == null) {
+				bjrqEndStr = ParamUtil.getString(renderRequest, "bjrqEndStr", "");
+			}
+			renderRequest.setAttribute("bjrqStartStr", bjrqStartStr);
+			renderRequest.setAttribute("bjrqEndStr", bjrqEndStr);
+			
 			renderRequest.setAttribute("bjbh", bjbh);
 			renderRequest.setAttribute("wssqbh", wssqbh);
 			renderRequest.setAttribute("xmmc", xmmc);
 			renderRequest.setAttribute("bjrqStart", bjrqStart);
 			renderRequest.setAttribute("bjrqEnd", bjrqEnd);
 			renderRequest.setAttribute("bjwcbj", bjwcbj);
+			
 			int projectsCount = 0;
 			int defaultDelta = GetterUtil.getInteger(PropsUtil.get(PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA));
 			int delta = ParamUtil.getInteger(renderRequest, "delta", defaultDelta);
