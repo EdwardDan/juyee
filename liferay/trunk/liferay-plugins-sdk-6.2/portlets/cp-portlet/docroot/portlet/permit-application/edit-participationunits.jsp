@@ -102,15 +102,15 @@ if(null!=dictionaryCertificateType){
 	<div class="accordion-inner">
 		<table border="1" width="100%"
 			class="table table-bordered table-hover">
-			<tr height="29px">
-				<td style="width: 2%; text-align: center"></td>
-				<td style="width: 28%; text-align: center">单位名称</td>
-				<td style="width: 13%; text-align: center">单位类型</td>
-				<td style="width: 10%; text-align: center">项目负责人</td>
-				<td style="width: 12%; text-align: center">证件类型</td>
-				<td style="width: 20%; text-align: center">证件号</td>
-				<td style="width: 10%; text-align: center">手机号</td>
-			</tr>
+			<thead>
+				<th style="width: 2%; text-align: center"></th>
+				<th style="width: 28%; text-align: center">单位名称</th>
+				<th style="width: 13%; text-align: center">单位类型</th>
+				<th style="width: 10%; text-align: center">项目负责人</th>
+				<th style="width: 12%; text-align: center">证件类型</th>
+				<th style="width: 20%; text-align: center">证件号</th>
+				<th style="width: 10%; text-align: center">手机号</th>
+			</thead>
 
 			<tbody id="participationUnits">
 				<c:if test="${!empty participationUnits}">
