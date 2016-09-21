@@ -3,11 +3,10 @@
 <portlet:defineObjects />
 <c:set var="contextPath" value="${request.contextPath}/portlet" />
 <portlet:renderURL var="searchURL">
-	<portlet:param name="mvcPath" value="${contextPath }/apply-permit.jsp" />
 </portlet:renderURL>
 <liferay-ui:panel-container accordion="false" extended="true">
 	<liferay-ui:panel title="查询条件" collapsible="true">
-		<aui:form name="fm" id="fm" method="get" action="${searchURL}">
+		<aui:form name="fm" id="fm" method="post" action="${searchURL}">
 			<table style="width: 100%;" class="table table-bordered">
 				<tr class="body">
 					<td style="width: 10%; text-align: right">专业类型</td>
@@ -25,7 +24,7 @@
 					<td style="width: 15%; text-align: right">有效期</td>
 					<td style="width: 35%;" class="bg-white"><input type="text"
 						class="Wdate span12" id="yxq" name="<portlet:namespace/>yxq"
-						value=""
+						value="<fmt:formatDate value='${yxq}' pattern='yyyy-MM-dd' />"
 						onfocus="WdatePicker({lang:'zh-cn',dateFmt:'yyyy-MM-dd'})" /></td>
 				</tr>
 				<tr style="height: 40px;" class="body">

@@ -48,7 +48,7 @@ public class LEOCertificatePortlet extends MVCPortlet {
 		String zjbh = ParamUtil.getString(renderRequest, "zjbh", "");
 		Date yxq = ParamUtil.getDate(renderRequest, "yxq",
 				new SimpleDateFormat(dateFormatPattern), null);
-
+		renderRequest.setAttribute("yxq", yxq);
 		List<LEOCertificate> leoCertificates = LEOCertificateLocalServiceUtil
 				.getLEOCertificates(xm, zylx, zjbh, yxq, -1, -1);
 
