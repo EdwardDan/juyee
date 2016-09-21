@@ -942,6 +942,10 @@ html, body {
 #main-content .taglib-header {
 		display:none;
 }
+
+.aui .control-group {
+    margin-bottom: 0px;
+}
 /* ---------- catalogue ---------- */
 div.nav-menu {
             border-left: 1px solid #dbdbdb;
