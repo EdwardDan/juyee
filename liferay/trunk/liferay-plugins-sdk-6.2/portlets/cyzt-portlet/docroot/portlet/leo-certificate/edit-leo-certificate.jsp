@@ -69,8 +69,8 @@
 	<aui:row>
 		<div class="text-center">
 			<aui:button type="button" value="保存" onClick="checkIsExist()">
-				<portlet:renderURL var="viewURL" />
 			</aui:button>
+			<portlet:renderURL var="viewURL" />
 			<aui:button href="${viewURL}" value="取消"></aui:button>
 		</div>
 	</aui:row>
@@ -78,7 +78,7 @@
 <portlet:resourceURL var="ajaxUrl" id="checkIsExist" />
 <script>
 function checkIsExist(){
-	if($("#xm").val()!=""&&$("#zylx").val()!=""&&$("#zjbh").val()!=""&&$("#fzrq").val()!=""&&$("#yxq").val()!=""){
+	if($("#<portlet:namespace/>xm").val()!=""&&$("#<portlet:namespace/>zylx").val()!=""&&$("#<portlet:namespace/>zjbh").val()!=""&&$("#fzrq").val()!=""&&$("#yxq").val()!=""){
 		$.ajax({
 			type:"GET",
 			url:"<%=ajaxUrl%>",

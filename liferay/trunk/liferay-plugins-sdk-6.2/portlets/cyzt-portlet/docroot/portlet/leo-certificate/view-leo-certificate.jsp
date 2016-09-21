@@ -1,23 +1,20 @@
 <%@page import="sun.java2d.pipe.SpanShapeRenderer.Simple"%>
 <%@page import="com.liferay.portal.kernel.util.ParamUtil"%>
-<%@page
-	import="com.justonetech.cyzt.leo.service.LEOCertificateLocalServiceUtil"%>
+<%@page import="com.justonetech.cyzt.leo.service.LEOCertificateLocalServiceUtil"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
 <%@page import="com.justonetech.cyzt.leo.model.LEOCertificate"%>
 <%@page import="java.util.List"%>
 <%
-	long certificateId = ParamUtil.getLong(request,"certificateId", 0L);
+	long certificateId = ParamUtil.getLong(request, "certificateId", 0L);
 	String dateFormatPattern = PropsUtil.get("default.date.format.pattern");
 	LEOCertificate leoCertificate = null;
 	if (certificateId != 0L) {
 		leoCertificate = LEOCertificateLocalServiceUtil.getLEOCertificate(certificateId);
-		System.out.println(leoCertificate);
 		if (leoCertificate != null) {
 			request.setAttribute("xm", leoCertificate.getXm());
 			request.setAttribute("zylx", leoCertificate.getZylx());
-			request.setAttribute("zjbh",
-					leoCertificate.getZjbh());
+			request.setAttribute("zjbh", leoCertificate.getZjbh());
 			request.setAttribute("fzrq", leoCertificate.getFzrq());
 			request.setAttribute("yxq", leoCertificate.getYxq());
 		}
@@ -44,3 +41,9 @@
 		<td></td>
 	</tr>
 </table>
+<aui:row>
+	<div class="text-center">
+		<portlet:renderURL var="viewURL" />
+		<aui:button href="${viewURL}" value="返回"></aui:button>
+	</div>
+</aui:row>

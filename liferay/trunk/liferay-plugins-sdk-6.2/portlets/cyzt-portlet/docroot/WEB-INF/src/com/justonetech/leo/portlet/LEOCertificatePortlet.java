@@ -70,7 +70,6 @@ public class LEOCertificatePortlet extends MVCPortlet {
 	public void saveLEOCertificate(ActionRequest request,
 			ActionResponse response) throws SystemException {
 		long certificateId = ParamUtil.getLong(request, "certificateId",0L);
-		System.out.println(certificateId);
 		String xm = ParamUtil.getString(request, "xm");
 		String zylx = ParamUtil.getString(request, "zylx");
 		String zjbh = ParamUtil.getString(request, "zjbh");
