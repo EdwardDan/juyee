@@ -20,11 +20,11 @@
 <c:set var="namespace" value="<%=renderResponse.getNamespace()%>"></c:set>
 
 <table class="table table-bordered" style="font-size: 14px;" id="fileTable">
-	<tr style="text-align: center; height: 45px;">
-		<td style="text-align: center; width: 5%;">序号</td>
-		<td style="text-align: center; width: 40%;">申请材料名称</td>
-		<td style="text-align: center; width: 55%;">附件</td>
-	</tr>
+	<thead style="text-align: center; height: 45px;">
+		<th style="text-align: center; width: 5%;">序号</th>
+		<th style="text-align: center; width: 40%;">申请材料名称</th>
+		<th style="text-align: center; width: 55%;">附件</th>
+	</thead>
 	<%
 		for(int i=0;i<materialList.size();i++){
 	%>
