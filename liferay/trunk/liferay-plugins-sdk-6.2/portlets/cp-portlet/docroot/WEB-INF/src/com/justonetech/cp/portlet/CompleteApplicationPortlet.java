@@ -413,6 +413,8 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 	public FileEntry uploadFile(ResourceRequest request, String fileSourceName, byte[] fileBytes,
 			ServiceContext serviceContext, String portletId, String materialId, String fileTitle)
 			throws PortalException, SystemException, IOException {
+		serviceContext.setAddGuestPermissions(true);
+		serviceContext.setIndexingEnabled(true);
 		User user = PortalUtil.getUser(request);
 		long userId = user.getUserId();
 		Long groupId = user.getGroupId();

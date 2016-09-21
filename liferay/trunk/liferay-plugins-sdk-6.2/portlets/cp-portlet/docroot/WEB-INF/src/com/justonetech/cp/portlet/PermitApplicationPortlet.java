@@ -559,7 +559,6 @@ public class PermitApplicationPortlet extends MVCPortlet {
 	public FileEntry uploadFile(ResourceRequest request, String fileSourceName,
 			byte[] fileBytes, ServiceContext serviceContext,String portletId,String materialId,String fileTitle)
 			throws PortalException, SystemException, IOException {
-		 serviceContext = new ServiceContext();
 			serviceContext.setAddGuestPermissions(true);
 			serviceContext.setIndexingEnabled(true);
 
@@ -599,7 +598,6 @@ public class PermitApplicationPortlet extends MVCPortlet {
 	public FileEntry uploadFileAnother(ResourceRequest request, String fileSourceName,
 			byte[] fileBytes, ServiceContext serviceContext,String portletId,String materialId,String fileTitle)
 			throws PortalException, SystemException, IOException {
-		 serviceContext = new ServiceContext();
 			serviceContext.setAddGuestPermissions(true);
 			serviceContext.setIndexingEnabled(true);
 
