@@ -853,7 +853,7 @@ html, body {
 }
 
 .middle{
-    width:730px !important;
+    width:850px !important;
     margin: 0 auto;
 }
 
@@ -919,23 +919,29 @@ html, body {
 
 .syc3{
 	margin-top:35px !important;
-	width:337px !important;
-	height:262px !important;
+	width:685px !important;
+	height:453px !important;
 }
 
 .syc4{
 	margin-top:35px !important;
+	width:265px !important;
+	height:453px !important;
+	margin-left:10px !important;
+}
+
+.syc3_1{
 	width:337px !important;
-	height:262px !important;
+}
+
+.syc3_2{
+	width:337px !important;
 	margin-left:10px !important;
 }
 
-.syc5{
-	margin-top:35px !important;
-	width:266px !important;
-	margin-left:10px !important;
+#main-content .taglib-header {
+		display:none;
 }
-
 /* ---------- catalogue ---------- */
 div.nav-menu {
             border-left: 1px solid #dbdbdb;
