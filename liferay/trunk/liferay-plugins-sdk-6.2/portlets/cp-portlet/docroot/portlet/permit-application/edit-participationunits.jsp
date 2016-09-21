@@ -101,7 +101,7 @@ if(null!=dictionaryCertificateType){
 	</div>
 	<div class="accordion-inner">
 		<table border="1" width="100%"
-			class="table table-bordered table-hover">
+			class="table table-bordered table-hover" style="border-collapse: collapse !important;">
 			<thead>
 				<th style="width: 2%; text-align: center"></th>
 				<th style="width: 28%; text-align: center">单位名称</th>
