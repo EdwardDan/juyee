@@ -56,6 +56,19 @@ public class ProjectSearchPortlet extends MVCPortlet {
 		int start = delta * (cur - 1);
 		int end = delta * cur;
 
+		String bjrqStartStr = null;
+		String bjrqEndStr = null;
+		SimpleDateFormat sdf = new SimpleDateFormat(dateFormatPattern);
+		if (bjrqStart != null) {
+			bjrqStartStr = sdf.format(bjrqStart);
+		}
+		if (bjrqEnd != null) {
+			bjrqEndStr = sdf.format(bjrqEnd);
+		}
+		
+		renderRequest.setAttribute("bjrqStartStr", bjrqStartStr);
+		renderRequest.setAttribute("bjrqEndStr", bjrqEndStr);
+		
 		List<Project> projects = ProjectLocalServiceUtil.getProjects("", bjbh, wssqbh, xmmc, bjrqStart, bjrqEnd, bjwcbj, start, end);
 		int projectsCount = ProjectLocalServiceUtil.getProjectsCount("", bjbh, wssqbh, xmmc, bjrqStart, bjrqEnd, bjwcbj);
 		renderRequest.setAttribute("bjbh", bjbh);
