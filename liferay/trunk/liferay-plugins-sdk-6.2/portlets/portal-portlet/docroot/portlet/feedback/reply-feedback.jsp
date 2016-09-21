@@ -6,10 +6,6 @@
 div.hf {
 	padding: 15px;
 }
-
-div.hf button {
-	width: 100px;
-}
 </style>
 <%
 	long feedbackId = ParamUtil.getLong(request, "feedbackId");
@@ -66,9 +62,9 @@ div.hf button {
 	</aui:row><br>
 	<aui:row style="margin-left:15px">
 		<aui:col span="11">
-			<aui:input name="hfjg" label="回复结果" type="textarea" cssClass="span12"
+			<aui:input name="hfjg" label="回复结果" type="textarea" cssClass="span12" id="hfjg"
 				  style="height:100px"  value="<%=Validator.isNotNull(feedback.getHfjg())?feedback.getHfjg():\"\" %>"/>
-		</aui:col>
+				  最多可以再输入<span id="contentCounter" style="color: red"></span>个汉字</aui:col>
 	</aui:row>
 		<div class="hf">
 			<aui:button type="submit" value="提交" />
@@ -76,3 +72,10 @@ div.hf button {
 		</div>
 	</aui:form>
 </div>
+<aui:script use="aui-char-counter">
+	var counterVariable = new A.CharCounter({
+		input : '#<portlet:namespace/>hfjg',
+		counter : '#contentCounter',
+		maxLength : 2000
+	});
+</aui:script>
