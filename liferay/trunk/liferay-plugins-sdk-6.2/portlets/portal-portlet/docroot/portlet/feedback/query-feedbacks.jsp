@@ -9,7 +9,6 @@
 <%@ include file="/common/init.jsp"%>
 <c:set var="contextPath"
 	value="${request.contextPath}/portlet/feedback" />
-<link rel="stylesheet" type="text/css" href="/portal-portlet/portlet/feedback/css/query.css" />
 <portlet:renderURL var="searchURL" />
 <%
 	PortletPreferences preferences = renderRequest.getPreferences();
@@ -27,12 +26,12 @@
  	
 %>
 <aui:form name="fm" id="fm" method="post" action="${searchURL }">
-	<div class="out">
-		<div class="middle"></div>
-		<div class="in">
+	<div class="main">
+		<div class="head"></div>
+		<div class="body">
 			<table class="thead">
 				<tr>
-					<td colspan="2" class="head"><span
+					<td colspan="2" class="td"><span
 						style="width: 5px; height: 20px; background-color: #ffa200; display: inline-block"></span><span>回复查询</span>
 					</td>
 				</tr>

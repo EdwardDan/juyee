@@ -5,61 +5,6 @@
 	<portlet:param name="mvcPath" value="${contextPath}/register.jsp" />
 </portlet:renderURL>
 <style type="text/css">
-div.main {
-	border-left: 1px solid #ddd;
-	border-bottom: 1px solid #ddd;
-	border-right: 1px solid #ddd;
-	box-shadow: 2px 2px 2px #e8e8e8;
-	border-radius: 5px;
-}
-
-div.head {
-	background-color: #00a2ee;
-	height: 10px;
-}
-
-div.body {
-	border-bottom: 1px solid #ddd;
-}
-
-table.thead tr td.head {
-	color: #0073d4;
-	font-size: 18px;
-	line-height: 30px;
-}
-
-table.thead tr td span {
-	margin-left: 15px;
-	display: inline-block;
-	vertical-align: middle;
-	font-family: "Microsoft YaHei UI";
-}
-
-table.thead tr td a {
-	display: inline-block;
-	width: 160px;
-	height: 30px;
-	line-height: 30px;
-	text-align: center;
-	color: #fff;
-	border-radius: 5px;
-	text-decoration: none;
-	background-color: #ff954f;
-	margin-left: 56px
-}
-
-table.thead tr td input {
-	width: 200px;
-	height: 25px;
-	border-radius: 5px;
-}
-
-table.thead tr td select {
-	width: 200px;
-	height: 30px;
-	border-radius: 5px
-}
-
 .login_input {
 	margin: 10px auto 0px !important;
 }
@@ -73,7 +18,7 @@ table.thead tr td select {
 	<div class="body">
 		<table class="thead">
 			<tr>
-				<td colspan="2" class="head"><span style="width: 5px; height: 20px; background-color: #ffa200; display: inline-block"></span><span>用户登录</span>
+				<td colspan="2" class="td"><span style="width: 5px; height: 20px; background-color: #ffa200; display: inline-block"></span><span>用户登录</span>
 				</td>
 			</tr>
 		</table>
