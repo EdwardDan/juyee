@@ -9,8 +9,6 @@ import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
-import sun.invoke.empty.Empty;
-
 import com.justonetech.cp.permit.model.ApplyMaterial;
 import com.justonetech.cp.permit.model.Permit;
 import com.justonetech.cp.permit.service.ApplyMaterialLocalServiceUtil;
@@ -18,9 +16,7 @@ import com.justonetech.cp.permit.service.PermitLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
-import com.sun.xml.internal.ws.message.StringHeader;
 
 /**
  * Portlet implementation class PermitApprovalPortlet

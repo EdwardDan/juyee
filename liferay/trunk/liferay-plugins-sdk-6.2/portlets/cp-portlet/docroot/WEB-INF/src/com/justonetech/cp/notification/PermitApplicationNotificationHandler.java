@@ -7,12 +7,12 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.UserNotificationEvent;
 import com.liferay.portal.service.ServiceContext;
 
-public class CompleteApplicationNotificationHandler extends BaseUserNotificationHandler{
-	public static final String PORTLET_ID = "completeapplication_WAR_cpportlet";
+public class PermitApplicationNotificationHandler extends BaseUserNotificationHandler{
+	public static final String PORTLET_ID = "permitapplication_WAR_cpportlet";
 	
-	public CompleteApplicationNotificationHandler() {
+	public PermitApplicationNotificationHandler() {
 		  
-        setPortletId(com.justonetech.cp.notification.CompleteApplicationNotificationHandler.PORTLET_ID);
+        setPortletId(com.justonetech.cp.notification.PermitApplicationNotificationHandler.PORTLET_ID);
   
     }
 	
@@ -23,7 +23,7 @@ public class CompleteApplicationNotificationHandler extends BaseUserNotification
 	        JSONObject jsonObject = JSONFactoryUtil
 	                .createJSONObject(userNotificationEvent.getPayload());
 	        String title = "<strong>"
-	               +"您有一个竣工备案审核任务。"
+	               +"您有一个施工许可审核任务。"
 	                + "</strong>";
 	        String bodyText = "点击查看";
 	        StringBundler sb = new StringBundler(5);
@@ -31,7 +31,7 @@ public class CompleteApplicationNotificationHandler extends BaseUserNotification
 	        sb.append(title);
 	        sb.append("</div> <div ");
 	        sb.append("class=\"body\">");
-	        sb.append("<a href='/group/gcxm/-2'>");
+	        sb.append("<a href='/group/gcxm/-'>");
 	        sb.append(bodyText);
 	        sb.append("</a>");	        
 	        sb.append("</div>");
