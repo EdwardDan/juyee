@@ -26,10 +26,10 @@
 				<tr>
 					<td class="text-right">报建日期从</td>
 					<td class="bg-white"><aui:input type="text" name="bjrqStart"
-							cssClass="Wdate input-small" label=""
+							cssClass="Wdate input-small" label="" value="${bjrqStartStr}"
 							onfocus="WdatePicker({maxDate:\'#F{$dp.$D(\\'${renderResponse.namespace }bjrqEnd\\');}\'})"
 							inlineField="true"></aui:input> &nbsp;至&nbsp; <aui:input
-							type="text" name="bjrqEnd" cssClass="Wdate input-small" label=""
+							type="text" name="bjrqEnd" cssClass="Wdate input-small" label=""  value="${bjrqEndStr}"
 							onfocus="WdatePicker({minDate:\'#F{$dp.$D(\\'${renderResponse.namespace }bjrqStart\\');}\'})"
 							inlineField="true"></aui:input></td>
 					<td class="text-right">项目状态</td>
@@ -84,9 +84,19 @@
 			<liferay-ui:search-iterator>
 				<%
 					String bjbh = ParamUtil.getString(request, "bjbh");
+					String wssqbh = ParamUtil.getString(request, "wssqbh");
+					String xmmc = ParamUtil.getString(request, "xmmc");
+					String bjwcbj = ParamUtil.getString(request, "bjwcbj");
+					String bjrqStartStr = (String)request.getAttribute("bjrqStartStr");
+					String bjrqEndStr = (String)request.getAttribute("bjrqEndStr");
 					PortletURL portletURL = searchContainer.getIteratorURL();
 					portletURL.setParameter("mvcPath","/portlet/complete-application/select-project.jsp");
 					portletURL.setParameter("bjbh", bjbh);
+					portletURL.setParameter("wssqbh", wssqbh);
+					portletURL.setParameter("xmmc", xmmc);
+					portletURL.setParameter("bjwcbj", bjwcbj);
+					portletURL.setParameter("bjrqStart", bjrqStartStr);
+					portletURL.setParameter("bjrqEnd", bjrqEndStr);
 				%>
 			</liferay-ui:search-iterator>
 		</liferay-ui:search-container>
