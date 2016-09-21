@@ -381,7 +381,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		permit.setCompanyId(themeDisplay.getCompanyId());
 		//保存状态
 		permit.setStatus(CityPermitStatus.STATUS_SB.getCode());
-		permit.setSqbz(0);
+		permit.setSqbz(4);
 		permit.setStatus(2);
 		PermitLocalServiceUtil.updatePermit(permit);
 		WorkflowInstanceLinkLocalServiceUtil.deleteWorkflowInstanceLinks(permit.getCompanyId(), 0L, Permit.class.getName(),permit.getPermitId());
