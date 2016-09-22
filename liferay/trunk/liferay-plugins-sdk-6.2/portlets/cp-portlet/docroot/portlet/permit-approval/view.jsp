@@ -13,7 +13,7 @@ tr.body td.content {
 	String xmmc = ParamUtil.getString(request, "xmmc");
 	String xmlx = ParamUtil.getString(request, "xmlx");
 	String jsdw = ParamUtil.getString(request, "jsdw");
-	String state = ParamUtil.getString(request, "state");
+	String state = ParamUtil.getString(request, "state","sy");
 	request.setAttribute("ywbh", ywbh);
 	request.setAttribute("bjbh", bjbh);
 	request.setAttribute("xmmc", xmmc);
@@ -24,7 +24,7 @@ tr.body td.content {
 	if (xmlx != "") {
 		xmlxLong = Long.parseLong(xmlx);
 	}
-	String[] sss = PropsUtil.get("ss").split(",");//市属
+	 String[] sss = PropsUtil.get("ss").split(",");//市属
 	String[] qss = PropsUtil.get("qs").split(",");//区属
 	Dictionary xmlxDic = DictionaryLocalServiceUtil.findByCode("xmlx");
 	List<Dictionary> xmlxDics = DictionaryLocalServiceUtil.findByParentId(xmlxDic.getDictionaryId(), -1, -1);
@@ -33,7 +33,7 @@ tr.body td.content {
 	int cur = ParamUtil.getInteger(renderRequest, "cur", 1);
 	int start = delta * (cur - 1);
 	int end = delta * cur;
-	/* User user_ = UserServiceUtil.getCurrentUser();
+	 User user_ = UserServiceUtil.getCurrentUser();
 	List<Role> roles = user_.getRoles();
 	String gs = "";//根据角色来判断是市属还是区属
 	for(Role role:roles){
@@ -48,8 +48,7 @@ tr.body td.content {
 				gs="区属";
 			}
 		}
-	} */
-	String gs = "市属";//根据角色来判断是市属还是区属
+	} 
 	List<Permit> permits = PermitLocalServiceUtil.getPermits(ywbh, bjbh, xmmc, xmlxLong, jsdw, state, gs, start, end);
 	int permitsCount = PermitLocalServiceUtil.getPermitsCount(ywbh, bjbh, xmmc, xmlxLong, jsdw, state, gs);
 	request.setAttribute("permits", permits);
