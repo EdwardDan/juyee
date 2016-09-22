@@ -24,7 +24,8 @@ tr.body td.content {
 	if (xmlx != "") {
 		xmlxLong = Long.parseLong(xmlx);
 	}
-
+	String[] sss = PropsUtil.get("ss").split(",");//市属
+	String[] qss = PropsUtil.get("qs").split(",");//区属
 	Dictionary xmlxDic = DictionaryLocalServiceUtil.findByCode("xmlx");
 	List<Dictionary> xmlxDics = DictionaryLocalServiceUtil.findByParentId(xmlxDic.getDictionaryId(), -1, -1);
 	int defaultDelta = GetterUtil.getInteger(PropsUtil.get(PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA));
@@ -32,7 +33,22 @@ tr.body td.content {
 	int cur = ParamUtil.getInteger(renderRequest, "cur", 1);
 	int start = delta * (cur - 1);
 	int end = delta * cur;
-	String gs = "区属";//根据角色来判断是市属还是区属
+	User user_ = UserServiceUtil.getCurrentUser();
+	List<Role> roles = user_.getRoles();
+	String gs = "";//根据角色来判断是市属还是区属
+	for(Role role:roles){
+		String roleId = role.getRoleId()+"";
+		for(String ss:sss){
+			if(roleId.equals(ss)){
+				gs="市属";
+			}
+		}
+		for(String qs:qss){
+			if(roleId.equals(qs)){
+				gs="区属";
+			}
+		}
+	}
 	List<Permit> permits = PermitLocalServiceUtil.getPermits(ywbh, bjbh, xmmc, xmlxLong, jsdw, state, gs, start, end);
 	int permitsCount = PermitLocalServiceUtil.getPermitsCount(ywbh, bjbh, xmmc, xmlxLong, jsdw, state, gs);
 	request.setAttribute("permits", permits);
