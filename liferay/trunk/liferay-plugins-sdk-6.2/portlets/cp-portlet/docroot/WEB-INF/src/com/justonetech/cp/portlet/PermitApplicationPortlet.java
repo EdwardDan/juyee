@@ -59,6 +59,7 @@ import com.liferay.portal.model.WorkflowDefinitionLink;
 import com.liferay.portal.model.WorkflowInstanceLink;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
+import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.service.WorkflowDefinitionLinkLocalServiceUtil;
 import com.liferay.portal.service.WorkflowInstanceLinkLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -81,13 +82,27 @@ public class PermitApplicationPortlet extends MVCPortlet {
 
 	@Override
 	public void render(RenderRequest renderRequest, RenderResponse renderResponse) throws PortletException, IOException {
-		
+
 		String mvcPath = ParamUtil.getString(renderRequest, "mvcPath");
 		if (Validator.equals(mvcPath, "/portlet/permit-application/select-contract.jsp")) {
 			String bjbh = ParamUtil.getString(renderRequest, "bjbh", "");
 			String bdh = ParamUtil.getString(renderRequest, "bdh", "");
 			String htmc = ParamUtil.getString(renderRequest, "htmc", "");
+			User user = null;
+			try {
+				user = UserServiceUtil.getCurrentUser();
+			} catch (PortalException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SystemException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 			String zzjgdm = ParamUtil.getString(renderRequest, "zzjgdm", "");
+			if (user != null) {
+				zzjgdm = user.getScreenName();
+			}
 			renderRequest.setAttribute("bjbh", bjbh);
 			renderRequest.setAttribute("bdh", bdh);
 			renderRequest.setAttribute("htmc", htmc);
@@ -114,6 +129,20 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		String wssqbh = ParamUtil.getString(renderRequest, "wssqbh");
 		String gcmc = ParamUtil.getString(renderRequest, "gcmc");
 		String zzjgdm = ParamUtil.getString(renderRequest, "zzjgdm");
+		
+		User user = null;
+		try {
+			user = UserServiceUtil.getCurrentUser();
+		} catch (PortalException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (user != null) {
+			zzjgdm = user.getScreenName();
+		}
 		int defaultDelta = GetterUtil.getInteger(PropsUtil.get(PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA));
 		int delta = ParamUtil.getInteger(renderRequest, "delta", defaultDelta);
 		int cur = ParamUtil.getInteger(renderRequest, "cur", 1);
@@ -133,8 +162,9 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		super.doView(renderRequest, renderResponse);
 	}
 
-	public void saveProjectProfile(ActionRequest request, ActionResponse response) throws SystemException, PortalException, ParseException, IOException {
-		
+	public void saveProjectProfile(ActionRequest request, ActionResponse response) throws SystemException, PortalException, ParseException,
+			IOException {
+
 		Long xmlx = ParamUtil.getLong(request, "xmlx");
 		String lxjb = ParamUtil.getString(request, "lxjb");
 		Long xmxz = ParamUtil.getLong(request, "xmxz");
@@ -177,7 +207,21 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		Long permitId = ParamUtil.getLong(request, "permitId");
 		String bjbh = ParamUtil.getString(request, "bjbh");
 		String bdh = ParamUtil.getString(request, "bdh");
-		String htxxbsbh=ParamUtil.getString(request, "htxxbsbh");
+		String htxxbsbh = ParamUtil.getString(request, "htxxbsbh");
+		String zzjgdm = null;
+		User user = null;
+		try {
+			user = UserServiceUtil.getCurrentUser();
+		} catch (PortalException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (user != null) {
+			zzjgdm = user.getScreenName();
+		}
 
 		ProjectProfile projectProfile = null;
 		Permit permit = null;
@@ -231,15 +275,17 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		Locale locale = LocaleUtil.getDefault();
 		String currentDate = DateUtil.getCurrentDate("yyyy-MM-dd", locale);
 		String currentDateStr = currentDate.substring(2, 4) + currentDate.substring(5, 7);
-		ywbh = ywbh + currentDateStr+"0000";
-		permit.setYwbh(ywbh);		
+		ywbh = ywbh + currentDateStr + "0000";
+		permit.setYwbh(ywbh);
 		permit.setBjbh(bjbh);
 		permit.setBdh(bdh);
+		permit.setZzjgdm(zzjgdm);
 		PermitLocalServiceUtil.updatePermit(permit);
 		redirect(request, response, permit, 1);
 	}
 
-	public void saveParticipationUnits(ActionRequest request, ActionResponse response) throws SystemException, PortalException, ParseException, IOException {
+	public void saveParticipationUnits(ActionRequest request, ActionResponse response) throws SystemException, PortalException, ParseException,
+			IOException {
 
 		long permitId = ParamUtil.getLong(request, "permitId");
 		Permit permit = PermitLocalServiceUtil.getPermit(permitId);
@@ -314,25 +360,27 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		redirect(request, response, permit, 3);
 	}
 
-	public void saveApplyMaterials(ActionRequest request, ActionResponse response) throws SystemException, PortalException, ParseException, IOException {
+	public void saveApplyMaterials(ActionRequest request, ActionResponse response) throws SystemException, PortalException, ParseException,
+			IOException {
 		long permitId = ParamUtil.getLong(request, "permitId");
 		Permit permit = PermitLocalServiceUtil.getPermit(permitId);
 		if (permit.getSqbz() == 3) {
 			permit.setSqbz(4);
 		}
-		if(permit.getStatus()<=2&&WorkflowInstanceLinkLocalServiceUtil.hasWorkflowInstanceLink(permit.getCompanyId(), 0L, Permit.class.getName(),permit.getPermitId())){
-			WorkflowInstanceLinkLocalServiceUtil.deleteWorkflowInstanceLinks(permit.getCompanyId(), 0L, Permit.class.getName(),permit.getPermitId());
+		if (permit.getStatus() <= 2
+				&& WorkflowInstanceLinkLocalServiceUtil.hasWorkflowInstanceLink(permit.getCompanyId(), 0L, Permit.class.getName(),
+						permit.getPermitId())) {
+			WorkflowInstanceLinkLocalServiceUtil.deleteWorkflowInstanceLinks(permit.getCompanyId(), 0L, Permit.class.getName(), permit.getPermitId());
 			permit.setStatus(1);
 		}
 		PermitLocalServiceUtil.updatePermit(permit);
 		redirect(request, response, permit, 4);
 	}
-	
-	public void submitAll(ActionRequest request,ActionResponse response) throws PortalException, SystemException{
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(Permit.class.getName(),
-				request);
+
+	public void submitAll(ActionRequest request, ActionResponse response) throws PortalException, SystemException {
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(Permit.class.getName(), request);
 		ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
-		long permitId=ParamUtil.getLong(request, "permitId");
+		long permitId = ParamUtil.getLong(request, "permitId");
 		String ywbh = "JT";
 		Permit permit = PermitLocalServiceUtil.getPermit(permitId);
 
@@ -343,10 +391,10 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		String currentDate = DateUtil.getCurrentDate("yyyy-MM-dd", locale);
 		String currentDateStr = currentDate.substring(2, 4) + currentDate.substring(5, 7);
 		ywbh = ywbh + currentDateStr;
-		List<Permit> permits =PermitLocalServiceUtil.getPermits(-1, -1);
+		List<Permit> permits = PermitLocalServiceUtil.getPermits(-1, -1);
 		List<Long> nums = new ArrayList<Long>();
 		for (Permit permit_ : permits) {
-			if(Validator.isNotNull(permit_.getYwbh())&&permit_.getYwbh().substring(4, 8).equals(currentDateStr)){
+			if (Validator.isNotNull(permit_.getYwbh()) && permit_.getYwbh().substring(4, 8).equals(currentDateStr)) {
 				nums.add(Long.parseLong(permit_.getYwbh().substring(8, 12)));
 			}
 		}
@@ -379,16 +427,16 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		permit.setYwbh(ywbh);
 		permit.setGroupId(themeDisplay.getScopeGroupId());
 		permit.setCompanyId(themeDisplay.getCompanyId());
-		//保存状态
+		// 保存状态
 		permit.setStatus(CityPermitStatus.STATUS_SB.getCode());
 		permit.setSqbz(4);
 		permit.setStatus(2);
 		PermitLocalServiceUtil.updatePermit(permit);
-		WorkflowInstanceLinkLocalServiceUtil.deleteWorkflowInstanceLinks(permit.getCompanyId(), 0L, Permit.class.getName(),permit.getPermitId());
+		WorkflowInstanceLinkLocalServiceUtil.deleteWorkflowInstanceLinks(permit.getCompanyId(), 0L, Permit.class.getName(), permit.getPermitId());
 		WorkflowDefinitionLink workflowDefinitionLink = null;
 		try {
-			workflowDefinitionLink = WorkflowDefinitionLinkLocalServiceUtil.getDefaultWorkflowDefinitionLink(
-					themeDisplay.getCompanyId(), Permit.class.getName(), 0, 0);
+			workflowDefinitionLink = WorkflowDefinitionLinkLocalServiceUtil.getDefaultWorkflowDefinitionLink(themeDisplay.getCompanyId(),
+					Permit.class.getName(), 0, 0);
 		} catch (Exception e) {
 			if (e instanceof NoSuchWorkflowDefinitionLinkException) {
 				SessionMessages.add(request.getPortletSession(), "workflow-not-enabled");
@@ -396,14 +444,12 @@ public class PermitApplicationPortlet extends MVCPortlet {
 			e.printStackTrace();
 		}
 		if (permit != null && workflowDefinitionLink != null) {
-			AssetEntryLocalServiceUtil.updateEntry(themeDisplay.getUserId(), permit.getGroupId(),
-					Permit.class.getName(), permit.getPermitId(), null, null);
-			WorkflowHandlerRegistryUtil.startWorkflowInstance(permit.getCompanyId(),
-					permit.getUserId(), Permit.class.getName(),
+			AssetEntryLocalServiceUtil.updateEntry(themeDisplay.getUserId(), permit.getGroupId(), Permit.class.getName(), permit.getPermitId(), null,
+					null);
+			WorkflowHandlerRegistryUtil.startWorkflowInstance(permit.getCompanyId(), permit.getUserId(), Permit.class.getName(),
 					permit.getPermitId(), permit, serviceContext);
 		}
 	}
-
 
 	public void redirect(ActionRequest request, ActionResponse response, Permit permit, int sqbz) throws IOException {
 
@@ -421,97 +467,88 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		redirect += "&" + response.getNamespace() + "tabSqbz=" + tabSqbz;
 		response.sendRedirect(redirect);
 	}
-	
-	public void deletePermits(ActionRequest actionRequest,
-			ActionResponse actionResponse) throws NumberFormatException, PortalException, SystemException  {
-		String deletePermitIds = ParamUtil.getString(actionRequest,
-				"permitIds");
+
+	public void deletePermits(ActionRequest actionRequest, ActionResponse actionResponse) throws NumberFormatException, PortalException,
+			SystemException {
+		String deletePermitIds = ParamUtil.getString(actionRequest, "permitIds");
 		String[] permitIds = deletePermitIds.split(",");
 		for (String permitId : permitIds) {
-			ProjectProfileLocalServiceUtil.deleteProjectProfile(Long
-					.parseLong(permitId));
-			List<UnitProject> unitProjects = UnitProjectLocalServiceUtil.findByPermitId(Long
-					.parseLong(permitId), -1, -1);
+			ProjectProfileLocalServiceUtil.deleteProjectProfile(Long.parseLong(permitId));
+			List<UnitProject> unitProjects = UnitProjectLocalServiceUtil.findByPermitId(Long.parseLong(permitId), -1, -1);
 			for (UnitProject unitProject : unitProjects) {
 				UnitProjectLocalServiceUtil.deleteUnitProject(unitProject);
 			}
-			List<ParticipationUnit> participationUnits=ParticipationUnitLocalServiceUtil.findByPermitId(Long
-					.parseLong(permitId), -1, -1);
-			for(ParticipationUnit participationUnit:participationUnits){
+			List<ParticipationUnit> participationUnits = ParticipationUnitLocalServiceUtil.findByPermitId(Long.parseLong(permitId), -1, -1);
+			for (ParticipationUnit participationUnit : participationUnits) {
 				ParticipationUnitLocalServiceUtil.deleteParticipationUnit(participationUnit);
 			}
-			List<ApplyMaterial> applyMaterials=ApplyMaterialLocalServiceUtil.findByPermitId(Long
-					.parseLong(permitId), -1, -1);
-			for(ApplyMaterial applyMaterial:applyMaterials){
+			List<ApplyMaterial> applyMaterials = ApplyMaterialLocalServiceUtil.findByPermitId(Long.parseLong(permitId), -1, -1);
+			for (ApplyMaterial applyMaterial : applyMaterials) {
 				ApplyMaterialLocalServiceUtil.deleteApplyMaterial(applyMaterial);
 			}
-			Permit permit=PermitLocalServiceUtil.getPermit(Long.parseLong(permitId));
-			WorkflowInstanceLinkLocalServiceUtil.deleteWorkflowInstanceLinks(permit.getCompanyId(), 0L, Permit.class.getName(),permit.getPermitId());
-			PermitLocalServiceUtil.deletePermit(Long
-					.parseLong(permitId));
+			Permit permit = PermitLocalServiceUtil.getPermit(Long.parseLong(permitId));
+			WorkflowInstanceLinkLocalServiceUtil.deleteWorkflowInstanceLinks(permit.getCompanyId(), 0L, Permit.class.getName(), permit.getPermitId());
+			PermitLocalServiceUtil.deletePermit(Long.parseLong(permitId));
 		}
 	}
-	
+
 	@Override
-	public void serveResource(ResourceRequest resourceRequest,
-			ResourceResponse resourceResponse) throws IOException,
-			PortletException {
+	public void serveResource(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException, PortletException {
 		// TODO Auto-generated method stub
 
 		try {
 			String resourceId = resourceRequest.getResourceID();
 			String fileSourceName = "";
-			//上传文件
+			// 上传文件
 			if ("fileUpLoad".equals(resourceId)) {
-				UploadPortletRequest uploadPortletRequest = PortalUtil
-						.getUploadPortletRequest(resourceRequest);
+				UploadPortletRequest uploadPortletRequest = PortalUtil.getUploadPortletRequest(resourceRequest);
 
 				ServiceContext serviceContext;
 				JSONObject fileJson = JSONFactoryUtil.createJSONObject();
-				serviceContext = ServiceContextFactory.getInstance(
-						Permit.class.getName(), resourceRequest);
-				FileEntry fileEntry=null;
-				//对应的是第几类材料的div
-				String divNo=ParamUtil.get(resourceRequest, "divNo","");
-				//文件材料的名称编号
-				String no=ParamUtil.get(resourceRequest, "no","");
-				String fileExtension=ParamUtil.get(resourceRequest, "fileExtension","");
+				serviceContext = ServiceContextFactory.getInstance(Permit.class.getName(), resourceRequest);
+				FileEntry fileEntry = null;
+				// 对应的是第几类材料的div
+				String divNo = ParamUtil.get(resourceRequest, "divNo", "");
+				// 文件材料的名称编号
+				String no = ParamUtil.get(resourceRequest, "no", "");
+				String fileExtension = ParamUtil.get(resourceRequest, "fileExtension", "");
 				String materialId = ParamUtil.get(resourceRequest, "materialId", "0");
 				String portletId = ParamUtil.get(resourceRequest, "portletId", "");
 				fileSourceName = uploadPortletRequest.getFileName("userfile");
 				InputStream stream = uploadPortletRequest.getFileAsStream("userfile");
-				
+
 				/*
-				fileSourceName = uploadPortletRequest.getFileName("fileInput"+divNo);
-				InputStream stream = uploadPortletRequest.getFileAsStream("fileInput"+divNo);*/
-				byte[] fileBytes=null;
-				if(null!=stream){
-					fileBytes=FileUtil.getBytes(stream);
+				 * fileSourceName =
+				 * uploadPortletRequest.getFileName("fileInput"+divNo);
+				 * InputStream stream =
+				 * uploadPortletRequest.getFileAsStream("fileInput"+divNo);
+				 */
+				byte[] fileBytes = null;
+				if (null != stream) {
+					fileBytes = FileUtil.getBytes(stream);
 				}
-				if(!materialId.equals("0")){
-					ApplyMaterial applyMaterial=ApplyMaterialLocalServiceUtil.getApplyMaterial(Long.valueOf(materialId));
-					String fileTitle=applyMaterial.getClmc()+"-"+no+"."+fileExtension;
-					
-					fileEntry = uploadFile(resourceRequest,
-							fileSourceName, fileBytes, serviceContext,portletId,materialId,fileTitle);
-					
-					String fileEntryIds =applyMaterial.getFileEntryIds();
-					//添加第一条数据时
-					if(Validator.isNull(fileEntryIds)){
-						fileEntryIds=fileEntry.getFileEntryId()+"|"+fileEntry.getExtension();
+				if (!materialId.equals("0")) {
+					ApplyMaterial applyMaterial = ApplyMaterialLocalServiceUtil.getApplyMaterial(Long.valueOf(materialId));
+					String fileTitle = applyMaterial.getClmc() + "-" + no + "." + fileExtension;
+
+					fileEntry = uploadFile(resourceRequest, fileSourceName, fileBytes, serviceContext, portletId, materialId, fileTitle);
+
+					String fileEntryIds = applyMaterial.getFileEntryIds();
+					// 添加第一条数据时
+					if (Validator.isNull(fileEntryIds)) {
+						fileEntryIds = fileEntry.getFileEntryId() + "|" + fileEntry.getExtension();
 					}
-					//如果已有数据
-					else{
-						fileEntryIds=fileEntryIds+","+fileEntry.getFileEntryId()+"|"+fileEntry.getExtension();
+					// 如果已有数据
+					else {
+						fileEntryIds = fileEntryIds + "," + fileEntry.getFileEntryId() + "|" + fileEntry.getExtension();
 						fileJson.put("fileId", fileEntry.getFileEntryId());
 					}
 					applyMaterial.setFileEntryIds(fileEntryIds);
 					ApplyMaterialLocalServiceUtil.updateApplyMaterial(applyMaterial);
 					fileJson.put("materialName", applyMaterial.getClmc());
 				}
-				
-				HttpServletResponse response = PortalUtil
-							.getHttpServletResponse(resourceResponse);
+
+				HttpServletResponse response = PortalUtil.getHttpServletResponse(resourceResponse);
 				response.setContentType("text/html;charset=UTF-8");
 				PrintWriter out = null;
 				out = response.getWriter();
@@ -519,22 +556,22 @@ public class PermitApplicationPortlet extends MVCPortlet {
 				out.flush();
 				out.close();
 			}
-			
-			//删除文件
+
+			// 删除文件
 			if ("fileDelete".equals(resourceId)) {
 				String fileId = ParamUtil.get(resourceRequest, "fileId", "0");
 				String materialId = ParamUtil.get(resourceRequest, "materialId", "0");
 				if (!fileId.equals("0")) {
-					DLFileEntry dlFileEntry=DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(fileId));
-					if(!materialId.equals("0")){
-						ApplyMaterial applyMaterial=ApplyMaterialLocalServiceUtil.getApplyMaterial(Long.valueOf(materialId));
-						String fileEntryIds =applyMaterial.getFileEntryIds();
-						fileEntryIds=fileEntryIds+",";//加上逗号为了容易替换
-						//获取文件路径
-						String str=fileId+"\\|"+dlFileEntry.getExtension()+"\\,";
-						fileEntryIds=fileEntryIds.replaceFirst(str, "");
-						if(Validator.isNotNull(fileEntryIds)){
-							fileEntryIds=fileEntryIds.substring(0,fileEntryIds.length()-1);//最后一步再把逗号去掉
+					DLFileEntry dlFileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(fileId));
+					if (!materialId.equals("0")) {
+						ApplyMaterial applyMaterial = ApplyMaterialLocalServiceUtil.getApplyMaterial(Long.valueOf(materialId));
+						String fileEntryIds = applyMaterial.getFileEntryIds();
+						fileEntryIds = fileEntryIds + ",";// 加上逗号为了容易替换
+						// 获取文件路径
+						String str = fileId + "\\|" + dlFileEntry.getExtension() + "\\,";
+						fileEntryIds = fileEntryIds.replaceFirst(str, "");
+						if (Validator.isNotNull(fileEntryIds)) {
+							fileEntryIds = fileEntryIds.substring(0, fileEntryIds.length() - 1);// 最后一步再把逗号去掉
 						}
 						applyMaterial.setFileEntryIds(fileEntryIds);
 						ApplyMaterialLocalServiceUtil.updateApplyMaterial(applyMaterial);
@@ -542,7 +579,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 					DLFileEntryLocalServiceUtil.deleteDLFileEntry(Long.valueOf(fileId));
 				}
 			}
-			
+
 		} catch (PortalException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -554,11 +591,9 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		}
 		super.serveResource(resourceRequest, resourceResponse);
 	}
-	
 
-	public FileEntry uploadFile(ResourceRequest request, String fileSourceName,
-			byte[] fileBytes, ServiceContext serviceContext,String portletId,String materialId,String fileTitle)
-			throws PortalException, SystemException, IOException {
+	public FileEntry uploadFile(ResourceRequest request, String fileSourceName, byte[] fileBytes, ServiceContext serviceContext, String portletId,
+			String materialId, String fileTitle) throws PortalException, SystemException, IOException {
 			serviceContext.setAddGuestPermissions(true);
 			serviceContext.setIndexingEnabled(true);
 
@@ -567,37 +602,35 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		Long groupId = user.getGroupId();
 		Long rootFolderId = DLFileEntryTypeConstants.FILE_ENTRY_TYPE_ID_BASIC_DOCUMENT;
 		FileEntry fileEntry = null;
-		//为每一种材料名称创建一个文件夹,如果已有就不再创建
-		DLFolder dlParentFolder=null;
-		DLFolder dlChildFolder=null;
-		if(Validator.isNotNull(portletId)&&Validator.isNotNull(materialId)){
-			dlParentFolder=DLFolderLocalServiceUtil.fetchFolder(groupId, rootFolderId, portletId);
-			
-			if(Validator.isNotNull(dlParentFolder)){
-				dlChildFolder=DLFolderLocalServiceUtil.fetchFolder(groupId, dlParentFolder.getFolderId(), materialId);
-				if(Validator.isNull(dlChildFolder)){
-					dlChildFolder=DLFolderLocalServiceUtil.addFolder(userId, groupId, groupId, false, dlParentFolder.getFolderId(), materialId, "", false, serviceContext);
+		// 为每一种材料名称创建一个文件夹,如果已有就不再创建
+		DLFolder dlParentFolder = null;
+		DLFolder dlChildFolder = null;
+		if (Validator.isNotNull(portletId) && Validator.isNotNull(materialId)) {
+			dlParentFolder = DLFolderLocalServiceUtil.fetchFolder(groupId, rootFolderId, portletId);
+
+			if (Validator.isNotNull(dlParentFolder)) {
+				dlChildFolder = DLFolderLocalServiceUtil.fetchFolder(groupId, dlParentFolder.getFolderId(), materialId);
+				if (Validator.isNull(dlChildFolder)) {
+					dlChildFolder = DLFolderLocalServiceUtil.addFolder(userId, groupId, groupId, false, dlParentFolder.getFolderId(), materialId, "",
+							false, serviceContext);
 				}
-			}else{
-				dlParentFolder=DLFolderLocalServiceUtil.addFolder(userId, groupId, groupId, true, rootFolderId, portletId, "", true, serviceContext);
-				dlChildFolder=DLFolderLocalServiceUtil.addFolder(userId, groupId, groupId, false, dlParentFolder.getFolderId(), materialId, "", false, serviceContext);			
+			} else {
+				dlParentFolder = DLFolderLocalServiceUtil
+						.addFolder(userId, groupId, groupId, true, rootFolderId, portletId, "", true, serviceContext);
+				dlChildFolder = DLFolderLocalServiceUtil.addFolder(userId, groupId, groupId, false, dlParentFolder.getFolderId(), materialId, "",
+						false, serviceContext);
 			}
 		}
 
-		
 		if (fileBytes != null) {
-			fileEntry = DLAppLocalServiceUtil.addFileEntry(userId, groupId,
-					dlChildFolder.getFolderId(), fileSourceName,
-					MimeTypesUtil.getContentType(fileSourceName), fileTitle, null,
-					null, fileBytes, serviceContext);
+			fileEntry = DLAppLocalServiceUtil.addFileEntry(userId, groupId, dlChildFolder.getFolderId(), fileSourceName,
+					MimeTypesUtil.getContentType(fileSourceName), fileTitle, null, null, fileBytes, serviceContext);
 		}
 		return fileEntry;
 	}
 
-	
-	public FileEntry uploadFileAnother(ResourceRequest request, String fileSourceName,
-			byte[] fileBytes, ServiceContext serviceContext,String portletId,String materialId,String fileTitle)
-			throws PortalException, SystemException, IOException {
+	public FileEntry uploadFileAnother(ResourceRequest request, String fileSourceName, byte[] fileBytes, ServiceContext serviceContext,
+			String portletId, String materialId, String fileTitle) throws PortalException, SystemException, IOException {
 			serviceContext.setAddGuestPermissions(true);
 			serviceContext.setIndexingEnabled(true);
 
@@ -606,15 +639,12 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		Long groupId = user.getGroupId();
 		Long rootFolderId = DLFileEntryTypeConstants.FILE_ENTRY_TYPE_ID_BASIC_DOCUMENT;
 		FileEntry fileEntry = null;
-		//为每一种材料名称创建一个文件夹,如果已有就不再创		
+		// 为每一种材料名称创建一个文件夹,如果已有就不再创
 		if (fileBytes != null) {
-			fileEntry = DLAppLocalServiceUtil.addFileEntry(userId, groupId,
-					rootFolderId, fileSourceName,
-					MimeTypesUtil.getContentType(fileSourceName), fileTitle, null,
-					null, fileBytes, serviceContext);
+			fileEntry = DLAppLocalServiceUtil.addFileEntry(userId, groupId, rootFolderId, fileSourceName,
+					MimeTypesUtil.getContentType(fileSourceName), fileTitle, null, null, fileBytes, serviceContext);
 		}
 		return fileEntry;
 	}
 
 }
-
