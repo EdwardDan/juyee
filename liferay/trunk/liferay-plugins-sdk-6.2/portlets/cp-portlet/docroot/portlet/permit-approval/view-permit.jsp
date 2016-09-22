@@ -45,10 +45,15 @@
 		<portlet:param name="mvcPath" value="${contextPath}/print/jsscb.jsp" />
 		<portlet:param name="permitId" value="${permitId}" />
 	</portlet:renderURL>
-	<portlet:actionURL var="printsgxkURL" name="generatePDF"> 
+	<portlet:actionURL var="printsgxkURL" name="sgxk"> 
+		<portlet:param name="permitId" value="${permitId}" />
+	</portlet:actionURL>
+	<portlet:actionURL var="printsgxklsURL" name="sgxkls"> 
 		<portlet:param name="permitId" value="${permitId}" />
 	</portlet:actionURL>
 	<c:if test="<%=!projectProfile.getLxjb().equals(\"区县级机关或区县级单位\")%>">
+	<a class="btn" href="${printsgxkURL}">施工许可</a>
+	<a class="btn" href="${printsgxklsURL}" target="_blank">施工许可(绿色)</a>
 		<c:if test="<%=status >= 5%>">
 			<a class="btn" href="${printsjpzURL}" target="_blank">收件凭证</a>
 		</c:if>
@@ -62,8 +67,7 @@
 			<a class="btn" href="${printbzclURL}" target="_blank">补正材料</a>
 		</c:if>
 		<c:if
-			test="<%=status == CityPermitStatus.STATUS_ZXLD_PASS.getCode()
-								|| status == CityPermitStatus.STATUS_WLD_PASS.getCode()%>">
+			test="<%=status == CityPermitStatus.STATUS_WLD_PASS.getCode()%>">
 			<a class="btn" href="${printjsscbURL}" target="_blank">技术审查表</a>
 			<c:choose>
 				<c:when test="<%=projectProfile.getXmlx() == 29741%>">
