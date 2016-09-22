@@ -98,10 +98,20 @@ public class PermitApplicationPortlet extends MVCPortlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
+			
 			String zzjgdm = ParamUtil.getString(renderRequest, "zzjgdm", "");
 			if (user != null) {
-				zzjgdm = user.getScreenName();
+				try {
+					long[] roles = user.getRoleIds();
+					for(long role:roles){
+						if(role == 25421){
+							zzjgdm = user.getScreenName();
+						}
+					}
+				} catch (SystemException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			renderRequest.setAttribute("bjbh", bjbh);
 			renderRequest.setAttribute("bdh", bdh);
@@ -141,7 +151,17 @@ public class PermitApplicationPortlet extends MVCPortlet {
 			e.printStackTrace();
 		}
 		if (user != null) {
-			zzjgdm = user.getScreenName();
+			try {
+				long[] roles = user.getRoleIds();
+				for(long role:roles){
+					if(role == 25421){
+						zzjgdm = user.getScreenName();
+					}
+				}
+			} catch (SystemException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		int defaultDelta = GetterUtil.getInteger(PropsUtil.get(PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA));
 		int delta = ParamUtil.getInteger(renderRequest, "delta", defaultDelta);

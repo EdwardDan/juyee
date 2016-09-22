@@ -50,7 +50,17 @@ public class ContractSearchPortlet extends MVCPortlet {
 			e.printStackTrace();
 		}
 		if (user != null) {
-			zzjgdm = user.getScreenName();
+			try {
+				long[] roles = user.getRoleIds();
+				for(long role:roles){
+					if(role == 25421){
+						zzjgdm = user.getScreenName();
+					}
+				}
+			} catch (SystemException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		String bjbh = ParamUtil.getString(renderRequest, "bjbh");
 		String bdh = ParamUtil.getString(renderRequest, "bdh");

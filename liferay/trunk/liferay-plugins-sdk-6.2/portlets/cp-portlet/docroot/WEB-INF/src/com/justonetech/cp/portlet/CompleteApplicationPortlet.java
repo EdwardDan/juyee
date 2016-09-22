@@ -86,7 +86,18 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 		} catch (PortalException | SystemException e) {
 			log.info(e.getMessage());
 		}
-		String zzjgdm = Validator.isNull(user) ? "" : user.getScreenName();
+		String zzjgdm = "";
+		try {
+			long[] roles = user.getRoleIds();
+			for(long role:roles){
+				if(role == 25421){
+					zzjgdm = Validator.isNull(user) ? "" : user.getScreenName();
+				}
+			}
+		} catch (SystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		String bjbh = ParamUtil.getString(renderRequest, "bjbh");
 		String wssqbh = ParamUtil.getString(renderRequest, "wssqbh");
 		String gcmc = ParamUtil.getString(renderRequest, "gcmc");
@@ -128,7 +139,18 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 			} catch (PortalException | SystemException e) {
 				log.info(e.getMessage());
 			}
-			String zzjgdm = Validator.isNull(user) ? "" : user.getScreenName();
+			String zzjgdm = "";
+			try {
+				long[] roles = user.getRoleIds();
+				for(long role:roles){
+					if(role == 25421){
+						zzjgdm = Validator.isNull(user) ? "" : user.getScreenName();
+					}
+				}
+			} catch (SystemException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			String bjrqStartStr = null;
 			String bjrqEndStr = null;
 			SimpleDateFormat sdf = new SimpleDateFormat(dateFormatPattern);

@@ -43,7 +43,19 @@ public class ProjectSearchPortlet extends MVCPortlet {
 		catch (PortalException | SystemException e) {
 			log.info(e.getMessage());
 		}
-		String zzjgdm = Validator.isNull(user) ? "" : user.getScreenName();
+		String zzjgdm = "";
+		try {
+			long[] roles = user.getRoleIds();
+			for(long role:roles){
+				if(role == 25421){
+					zzjgdm = Validator.isNull(user) ? "" : user.getScreenName();
+				}
+			}
+		} catch (SystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		String bjbh = ParamUtil.getString(renderRequest, "bjbh");
 		String wssqbh = ParamUtil.getString(renderRequest, "wssqbh");
 		String xmmc = ParamUtil.getString(renderRequest, "xmmc");

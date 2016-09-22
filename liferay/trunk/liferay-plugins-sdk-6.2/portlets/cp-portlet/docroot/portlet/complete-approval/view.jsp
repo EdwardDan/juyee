@@ -30,7 +30,12 @@ tr.body td.content {
 
 	String zzjgdm = "";
 	if (user_ != null) {
-		zzjgdm = user_.getScreenName();
+		long[] roles = user.getRoleIds();
+		for(long role:roles){
+			if(role == 25421){
+				zzjgdm = user.getScreenName();
+			}
+		}
 	}
 	int defaultDelta = GetterUtil.getInteger(PropsUtil.get(PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA));
 	int delta = ParamUtil.getInteger(renderRequest, "delta", defaultDelta);
