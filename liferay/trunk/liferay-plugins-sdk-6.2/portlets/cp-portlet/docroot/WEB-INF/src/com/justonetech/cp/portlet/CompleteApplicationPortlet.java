@@ -63,6 +63,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.UserNotificationEventLocalServiceUtil;
+import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
@@ -97,8 +98,8 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 		int end = delta * cur;
 		List<Complete> completes = Collections.emptyList();
 		int completesCount = 0;
-		completes = CompleteLocalServiceUtil.getCompletes("", bjbh, wssqbh, gcmc, status, start, end);
-		completesCount = CompleteLocalServiceUtil.getCompletesCount("", bjbh, wssqbh, gcmc, status);
+		completes = CompleteLocalServiceUtil.getCompletes(zzjgdm, bjbh, wssqbh, gcmc, status, start, end);
+		completesCount = CompleteLocalServiceUtil.getCompletesCount(zzjgdm, bjbh, wssqbh, gcmc, status);
 		renderRequest.setAttribute("zzjgdm", zzjgdm);
 		renderRequest.setAttribute("bjbh", bjbh);
 		renderRequest.setAttribute("wssqbh", wssqbh);
@@ -121,7 +122,13 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 					null);
 			Date bjrqEnd = ParamUtil.getDate(renderRequest, "bjrqEnd", new SimpleDateFormat(dateFormatPattern), null);
 			String bjwcbj = ParamUtil.getString(renderRequest, "bjwcbj");
-			
+			User user = null;
+			try {
+				user = PortalUtil.getUser(renderRequest);
+			} catch (PortalException | SystemException e) {
+				log.info(e.getMessage());
+			}
+			String zzjgdm = Validator.isNull(user) ? "" : user.getScreenName();
 			String bjrqStartStr = null;
 			String bjrqEndStr = null;
 			SimpleDateFormat sdf = new SimpleDateFormat(dateFormatPattern);
@@ -153,10 +160,10 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 			int cur = ParamUtil.getInteger(renderRequest, "cur", 1);
 			int start = delta * (cur - 1);
 			int end = delta * cur;
-			List<Project> projects = ProjectLocalServiceUtil.getProjects("", bjbh, wssqbh, xmmc, bjrqStart, bjrqEnd,
+			List<Project> projects = ProjectLocalServiceUtil.getProjects(zzjgdm, bjbh, wssqbh, xmmc, bjrqStart, bjrqEnd,
 					bjwcbj, start, end);
 			projectsCount = ProjectLocalServiceUtil
-					.getProjectsCount("", bjbh, wssqbh, xmmc, bjrqStart, bjrqEnd, bjwcbj);
+					.getProjectsCount(zzjgdm, bjbh, wssqbh, xmmc, bjrqStart, bjrqEnd, bjwcbj);
 			renderRequest.setAttribute("projects", projects);
 			renderRequest.setAttribute("projectsCount", projectsCount);
 		} else if (Validator.equals(mvcPath, "/portlet/complete-application/edit-complete.jsp")) {
@@ -211,6 +218,21 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 		String lxr = ParamUtil.getString(request, "lxr");
 		String lxdh = ParamUtil.getString(request, "lxdh");
 		String bz = ParamUtil.getString(request, "bz");
+		String zzjgdm = "";
+		User user = null;
+		try {
+			user = UserServiceUtil.getCurrentUser();
+		} catch (PortalException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		if (user != null) {
+			zzjgdm = user.getScreenName();
+		}
 		Complete complete = null;
 		CompleteProjectProfile completeProjectProfile = null;
 		if (Validator.isNull(completeId)) {
@@ -221,6 +243,7 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 			complete = CompleteLocalServiceUtil.getComplete(completeId);
 			completeProjectProfile = CompleteProjectProfileLocalServiceUtil.getCompleteProjectProfile(completeId);
 		}
+		complete.setZzjgdm(zzjgdm);
 		complete.setGroupId(groupId);
 		complete.setCompanyId(companyId);
 		complete.setUserId(userId);
