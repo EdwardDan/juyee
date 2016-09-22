@@ -15,6 +15,7 @@
 package com.justonetech.cp.permit.service.impl;
 
 import java.util.Collections;
+import java.util.Dictionary;
 import java.util.List;
 
 import com.justonetech.cp.permit.model.Permit;
@@ -28,6 +29,7 @@ import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.nio.intraband.SystemDataType;
 import com.liferay.portal.kernel.util.Validator;
 
 /**
@@ -65,10 +67,10 @@ public class PermitLocalServiceImpl extends PermitLocalServiceBaseImpl {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Permit> getPermits(String ywbh, String bjbh, String gcmc, String xmlx,String jsdwmc,String status, int start, int end) {
+	public List<Permit> getPermits(String ywbh, String bjbh, String gcmc, Long xmlx,String jsdwmc,String status,String gs, int start, int end) {
 
 		try {
-			return this.dynamicQuery(createDynamicQuery(ywbh, bjbh, gcmc, xmlx,jsdwmc,status), start, end);
+			return this.dynamicQuery(createDynamicQuery(ywbh, bjbh, gcmc, xmlx,jsdwmc,status,gs), start, end);
 		}
 		catch (SystemException e) {
 			log.info(e.getMessage());
@@ -87,10 +89,10 @@ public class PermitLocalServiceImpl extends PermitLocalServiceBaseImpl {
 		return 0;
 	}
 	
-	public int getPermitsCount(String ywbh, String bjbh, String gcmc, String xmlx,String jsdwmc,String status) {
+	public int getPermitsCount(String ywbh, String bjbh, String gcmc, Long xmlx,String jsdwmc,String status,String gs) {
 
 		try {
-			return (int) this.dynamicQueryCount(createDynamicQuery(ywbh, bjbh, gcmc, xmlx,jsdwmc,status));
+			return (int) this.dynamicQueryCount(createDynamicQuery(ywbh, bjbh, gcmc, xmlx,jsdwmc,status,gs));
 		}
 		catch (SystemException e) {
 			log.info(e.getMessage());
@@ -119,26 +121,71 @@ public class PermitLocalServiceImpl extends PermitLocalServiceBaseImpl {
 		return dynamicQuery;
 	}
 	
-	public DynamicQuery createDynamicQuery(String ywbh, String bjbh, String gcmc, String xmlx,String jsdwmc,String status) {
+	public DynamicQuery createDynamicQuery(String ywbh, String bjbh, String gcmc, Long xmlx,String jsdwmc,String status,String gs) {
 
 		DynamicQuery dynamicQuery = this.dynamicQuery();
 		if (!Validator.isBlank(ywbh)) {
-			dynamicQuery.add(PropertyFactoryUtil.forName("ywbh").eq(ywbh));
+			dynamicQuery.add(PropertyFactoryUtil.forName("ywbh").like("%" + ywbh + "%"));
 		}
 		if (!Validator.isBlank(bjbh)) {
 			dynamicQuery.add(PropertyFactoryUtil.forName("bjbh").like("%" + bjbh + "%"));
 		}
 		if (!Validator.isBlank(gcmc)) {
-			dynamicQuery.add(PropertyFactoryUtil.forName("gcmc").like("%" + gcmc + "%"));
+			DynamicQuery projectProfileDQ = DynamicQueryFactoryUtil.forClass(ProjectProfile.class);
+			projectProfileDQ.setProjection(ProjectionFactoryUtil.property("permitId"));
+			projectProfileDQ.add(PropertyFactoryUtil.forName("gcmc").like("%" + gcmc + "%"));
+			dynamicQuery.add(PropertyFactoryUtil.forName("permitId").in(projectProfileDQ));
 		}
-		if (!Validator.isBlank(xmlx)) {
-			dynamicQuery.add(PropertyFactoryUtil.forName("xmlx").like("%" + xmlx + "%"));
+		if (null!=xmlx) {
+			DynamicQuery projectProfileDQ = DynamicQueryFactoryUtil.forClass(ProjectProfile.class);
+			projectProfileDQ.setProjection(ProjectionFactoryUtil.property("permitId"));			
+			projectProfileDQ.add(PropertyFactoryUtil.forName("xmlx").eq(xmlx));
+			dynamicQuery.add(PropertyFactoryUtil.forName("permitId").in(projectProfileDQ));
 		}
 		if (!Validator.isBlank(jsdwmc)) {
-			dynamicQuery.add(PropertyFactoryUtil.forName("jsdwmc").like("%" + jsdwmc + "%"));
+			DynamicQuery projectProfileDQ = DynamicQueryFactoryUtil.forClass(ProjectProfile.class);
+			projectProfileDQ.setProjection(ProjectionFactoryUtil.property("permitId"));
+			projectProfileDQ.add(PropertyFactoryUtil.forName("jsdwmc").like("%" + jsdwmc + "%"));
+			dynamicQuery.add(PropertyFactoryUtil.forName("permitId").in(projectProfileDQ));
 		}
-		if (!Validator.isBlank(status)) {
-			dynamicQuery.add(PropertyFactoryUtil.forName("status").like("%" + status + "%"));
+		String[] ss = {"国家部委或中央单位","市级机关或市级单位","其他"};
+		String[] qs = {"区县级机关或区县级单位"};
+		if(gs.equals("市属")){
+			if (!Validator.isBlank(status)) {
+				if("wtj".equals(status)){
+					int[] values = {1,4,6};
+					DynamicQuery projectProfileDQ = DynamicQueryFactoryUtil.forClass(ProjectProfile.class);
+					projectProfileDQ.setProjection(ProjectionFactoryUtil.property("permitId"));
+					projectProfileDQ.add(PropertyFactoryUtil.forName("lxjb").like("%" + ss[1] + "%"));
+					dynamicQuery.add(PropertyFactoryUtil.forName("permitId").in(projectProfileDQ));
+					dynamicQuery.add(PropertyFactoryUtil.forName("status").in(values));
+				}else if("ytj".equals(status)){
+					int[] values = {2,3,5,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24};
+					DynamicQuery projectProfileDQ = DynamicQueryFactoryUtil.forClass(ProjectProfile.class);
+					projectProfileDQ.setProjection(ProjectionFactoryUtil.property("permitId"));
+					projectProfileDQ.add(PropertyFactoryUtil.forName("lxjb").like("%" + ss[1] + "%"));
+					dynamicQuery.add(PropertyFactoryUtil.forName("permitId").in(projectProfileDQ));
+					dynamicQuery.add(PropertyFactoryUtil.forName("status").in(values));
+				}
+			}
+		}else if(gs.equals("区属")){
+			if (!Validator.isBlank(status)) {
+				if("wtj".equals(status)){
+					int[] values = {1,4};
+					DynamicQuery projectProfileDQ = DynamicQueryFactoryUtil.forClass(ProjectProfile.class);
+					projectProfileDQ.setProjection(ProjectionFactoryUtil.property("permitId"));
+					projectProfileDQ.add(PropertyFactoryUtil.forName("lxjb").like("%" + qs[0] + "%"));
+					dynamicQuery.add(PropertyFactoryUtil.forName("permitId").in(projectProfileDQ));
+					dynamicQuery.add(PropertyFactoryUtil.forName("status").in(values));
+				}else if("ytj".equals(status)){
+					int[] values = {2,3,5,6,7,8,9};
+					DynamicQuery projectProfileDQ = DynamicQueryFactoryUtil.forClass(ProjectProfile.class);
+					projectProfileDQ.setProjection(ProjectionFactoryUtil.property("permitId"));
+					projectProfileDQ.add(PropertyFactoryUtil.forName("lxjb").like("%" + qs[0] + "%"));
+					dynamicQuery.add(PropertyFactoryUtil.forName("permitId").in(projectProfileDQ));
+					dynamicQuery.add(PropertyFactoryUtil.forName("status").in(values));
+				}
+			}
 		}
 		return dynamicQuery;
 	}
