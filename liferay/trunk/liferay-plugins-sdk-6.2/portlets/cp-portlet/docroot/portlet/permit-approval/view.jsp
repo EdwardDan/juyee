@@ -33,7 +33,7 @@ tr.body td.content {
 	int cur = ParamUtil.getInteger(renderRequest, "cur", 1);
 	int start = delta * (cur - 1);
 	int end = delta * cur;
-	User user_ = UserServiceUtil.getCurrentUser();
+	/* User user_ = UserServiceUtil.getCurrentUser();
 	List<Role> roles = user_.getRoles();
 	String gs = "";//根据角色来判断是市属还是区属
 	for(Role role:roles){
@@ -48,14 +48,15 @@ tr.body td.content {
 				gs="区属";
 			}
 		}
-	}
+	} */
+	String gs = "市属";//根据角色来判断是市属还是区属
 	List<Permit> permits = PermitLocalServiceUtil.getPermits(ywbh, bjbh, xmmc, xmlxLong, jsdw, state, gs, start, end);
 	int permitsCount = PermitLocalServiceUtil.getPermitsCount(ywbh, bjbh, xmmc, xmlxLong, jsdw, state, gs);
 	request.setAttribute("permits", permits);
 	request.setAttribute("permitsCount", permitsCount);
 	request.setAttribute("xmlxDics", xmlxDics);
-	renderRequest.setAttribute("delta", delta);
-	renderRequest.setAttribute("cur", cur);
+	request.setAttribute("delta", delta);
+	request.setAttribute("cur", cur);
 %>
 <portlet:renderURL var="searchURL">
 	<liferay-portlet:param name="ywbh" value="${ywbh }" />
