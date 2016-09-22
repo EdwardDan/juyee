@@ -186,6 +186,8 @@ public class PermitLocalServiceImpl extends PermitLocalServiceBaseImpl {
 					dynamicQuery.add(PropertyFactoryUtil.forName("status").in(values));
 				}
 			}
+		}else{
+				dynamicQuery.add(PropertyFactoryUtil.forName("status").eq("-1"));
 		}
 		return dynamicQuery;
 	}

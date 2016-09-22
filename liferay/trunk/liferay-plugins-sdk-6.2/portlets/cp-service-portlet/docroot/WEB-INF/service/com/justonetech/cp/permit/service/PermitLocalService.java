@@ -256,10 +256,26 @@ public interface PermitLocalService extends BaseLocalService,
 		java.lang.String wssqbh, java.lang.String gcmc, int start, int end);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.justonetech.cp.permit.model.Permit> getPermits(
+		java.lang.String ywbh, java.lang.String bjbh, java.lang.String gcmc,
+		java.lang.Long xmlx, java.lang.String jsdwmc, java.lang.String status,
+		java.lang.String gs, int start, int end);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getPermitsCount(java.lang.String zzjgdm, java.lang.String bjbh,
 		java.lang.String wssqbh, java.lang.String gcmc);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getPermitsCount(java.lang.String ywbh, java.lang.String bjbh,
+		java.lang.String gcmc, java.lang.Long xmlx, java.lang.String jsdwmc,
+		java.lang.String status, java.lang.String gs);
 
 	public com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQuery(
 		java.lang.String zzjgdm, java.lang.String bjbh,
 		java.lang.String wssqbh, java.lang.String gcmc);
+
+	public com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQuery(
+		java.lang.String ywbh, java.lang.String bjbh, java.lang.String gcmc,
+		java.lang.Long xmlx, java.lang.String jsdwmc, java.lang.String status,
+		java.lang.String gs);
 }

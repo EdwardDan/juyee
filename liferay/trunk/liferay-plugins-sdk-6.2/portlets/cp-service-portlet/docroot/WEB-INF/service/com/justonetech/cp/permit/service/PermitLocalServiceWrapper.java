@@ -289,9 +289,26 @@ public class PermitLocalServiceWrapper implements PermitLocalService,
 	}
 
 	@Override
+	public java.util.List<com.justonetech.cp.permit.model.Permit> getPermits(
+		java.lang.String ywbh, java.lang.String bjbh, java.lang.String gcmc,
+		java.lang.Long xmlx, java.lang.String jsdwmc, java.lang.String status,
+		java.lang.String gs, int start, int end) {
+		return _permitLocalService.getPermits(ywbh, bjbh, gcmc, xmlx, jsdwmc,
+			status, gs, start, end);
+	}
+
+	@Override
 	public int getPermitsCount(java.lang.String zzjgdm, java.lang.String bjbh,
 		java.lang.String wssqbh, java.lang.String gcmc) {
 		return _permitLocalService.getPermitsCount(zzjgdm, bjbh, wssqbh, gcmc);
+	}
+
+	@Override
+	public int getPermitsCount(java.lang.String ywbh, java.lang.String bjbh,
+		java.lang.String gcmc, java.lang.Long xmlx, java.lang.String jsdwmc,
+		java.lang.String status, java.lang.String gs) {
+		return _permitLocalService.getPermitsCount(ywbh, bjbh, gcmc, xmlx,
+			jsdwmc, status, gs);
 	}
 
 	@Override
@@ -299,6 +316,15 @@ public class PermitLocalServiceWrapper implements PermitLocalService,
 		java.lang.String zzjgdm, java.lang.String bjbh,
 		java.lang.String wssqbh, java.lang.String gcmc) {
 		return _permitLocalService.createDynamicQuery(zzjgdm, bjbh, wssqbh, gcmc);
+	}
+
+	@Override
+	public com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQuery(
+		java.lang.String ywbh, java.lang.String bjbh, java.lang.String gcmc,
+		java.lang.Long xmlx, java.lang.String jsdwmc, java.lang.String status,
+		java.lang.String gs) {
+		return _permitLocalService.createDynamicQuery(ywbh, bjbh, gcmc, xmlx,
+			jsdwmc, status, gs);
 	}
 
 	/**

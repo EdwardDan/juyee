@@ -281,15 +281,40 @@ public class PermitLocalServiceUtil {
 		return getService().getPermits(zzjgdm, bjbh, wssqbh, gcmc, start, end);
 	}
 
+	public static java.util.List<com.justonetech.cp.permit.model.Permit> getPermits(
+		java.lang.String ywbh, java.lang.String bjbh, java.lang.String gcmc,
+		java.lang.Long xmlx, java.lang.String jsdwmc, java.lang.String status,
+		java.lang.String gs, int start, int end) {
+		return getService()
+				   .getPermits(ywbh, bjbh, gcmc, xmlx, jsdwmc, status, gs,
+			start, end);
+	}
+
 	public static int getPermitsCount(java.lang.String zzjgdm,
 		java.lang.String bjbh, java.lang.String wssqbh, java.lang.String gcmc) {
 		return getService().getPermitsCount(zzjgdm, bjbh, wssqbh, gcmc);
+	}
+
+	public static int getPermitsCount(java.lang.String ywbh,
+		java.lang.String bjbh, java.lang.String gcmc, java.lang.Long xmlx,
+		java.lang.String jsdwmc, java.lang.String status, java.lang.String gs) {
+		return getService()
+				   .getPermitsCount(ywbh, bjbh, gcmc, xmlx, jsdwmc, status, gs);
 	}
 
 	public static com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQuery(
 		java.lang.String zzjgdm, java.lang.String bjbh,
 		java.lang.String wssqbh, java.lang.String gcmc) {
 		return getService().createDynamicQuery(zzjgdm, bjbh, wssqbh, gcmc);
+	}
+
+	public static com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQuery(
+		java.lang.String ywbh, java.lang.String bjbh, java.lang.String gcmc,
+		java.lang.Long xmlx, java.lang.String jsdwmc, java.lang.String status,
+		java.lang.String gs) {
+		return getService()
+				   .createDynamicQuery(ywbh, bjbh, gcmc, xmlx, jsdwmc, status,
+			gs);
 	}
 
 	public static void clearService() {

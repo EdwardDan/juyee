@@ -121,17 +121,41 @@ public class PermitLocalServiceClp implements PermitLocalService {
 				"java.lang.String", "int", "int"
 			};
 
-		_methodName20 = "getPermitsCount";
+		_methodName20 = "getPermits";
 
 		_methodParameterTypes20 = new String[] {
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.Long", "java.lang.String", "java.lang.String",
+				"java.lang.String", "int", "int"
+			};
+
+		_methodName21 = "getPermitsCount";
+
+		_methodParameterTypes21 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String"
 			};
 
-		_methodName21 = "createDynamicQuery";
+		_methodName22 = "getPermitsCount";
 
-		_methodParameterTypes21 = new String[] {
+		_methodParameterTypes22 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.Long", "java.lang.String", "java.lang.String",
+				"java.lang.String"
+			};
+
+		_methodName23 = "createDynamicQuery";
+
+		_methodParameterTypes23 = new String[] {
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String"
+			};
+
+		_methodName24 = "createDynamicQuery";
+
+		_methodParameterTypes24 = new String[] {
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.Long", "java.lang.String", "java.lang.String",
 				"java.lang.String"
 			};
 	}
@@ -721,13 +745,58 @@ public class PermitLocalServiceClp implements PermitLocalService {
 	}
 
 	@Override
-	public int getPermitsCount(java.lang.String zzjgdm, java.lang.String bjbh,
-		java.lang.String wssqbh, java.lang.String gcmc) {
+	public java.util.List<com.justonetech.cp.permit.model.Permit> getPermits(
+		java.lang.String ywbh, java.lang.String bjbh, java.lang.String gcmc,
+		java.lang.Long xmlx, java.lang.String jsdwmc, java.lang.String status,
+		java.lang.String gs, int start, int end) {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName20,
 					_methodParameterTypes20,
+					new Object[] {
+						ClpSerializer.translateInput(ywbh),
+						
+					ClpSerializer.translateInput(bjbh),
+						
+					ClpSerializer.translateInput(gcmc),
+						
+					ClpSerializer.translateInput(xmlx),
+						
+					ClpSerializer.translateInput(jsdwmc),
+						
+					ClpSerializer.translateInput(status),
+						
+					ClpSerializer.translateInput(gs),
+						
+					start,
+						
+					end
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<com.justonetech.cp.permit.model.Permit>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public int getPermitsCount(java.lang.String zzjgdm, java.lang.String bjbh,
+		java.lang.String wssqbh, java.lang.String gcmc) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName21,
+					_methodParameterTypes21,
 					new Object[] {
 						ClpSerializer.translateInput(zzjgdm),
 						
@@ -754,14 +823,54 @@ public class PermitLocalServiceClp implements PermitLocalService {
 	}
 
 	@Override
+	public int getPermitsCount(java.lang.String ywbh, java.lang.String bjbh,
+		java.lang.String gcmc, java.lang.Long xmlx, java.lang.String jsdwmc,
+		java.lang.String status, java.lang.String gs) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName22,
+					_methodParameterTypes22,
+					new Object[] {
+						ClpSerializer.translateInput(ywbh),
+						
+					ClpSerializer.translateInput(bjbh),
+						
+					ClpSerializer.translateInput(gcmc),
+						
+					ClpSerializer.translateInput(xmlx),
+						
+					ClpSerializer.translateInput(jsdwmc),
+						
+					ClpSerializer.translateInput(status),
+						
+					ClpSerializer.translateInput(gs)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return ((Integer)returnObj).intValue();
+	}
+
+	@Override
 	public com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQuery(
 		java.lang.String zzjgdm, java.lang.String bjbh,
 		java.lang.String wssqbh, java.lang.String gcmc) {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName21,
-					_methodParameterTypes21,
+			returnObj = _invokableLocalService.invokeMethod(_methodName23,
+					_methodParameterTypes23,
 					new Object[] {
 						ClpSerializer.translateInput(zzjgdm),
 						
@@ -770,6 +879,47 @@ public class PermitLocalServiceClp implements PermitLocalService {
 					ClpSerializer.translateInput(wssqbh),
 						
 					ClpSerializer.translateInput(gcmc)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.liferay.portal.kernel.dao.orm.DynamicQuery)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQuery(
+		java.lang.String ywbh, java.lang.String bjbh, java.lang.String gcmc,
+		java.lang.Long xmlx, java.lang.String jsdwmc, java.lang.String status,
+		java.lang.String gs) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName24,
+					_methodParameterTypes24,
+					new Object[] {
+						ClpSerializer.translateInput(ywbh),
+						
+					ClpSerializer.translateInput(bjbh),
+						
+					ClpSerializer.translateInput(gcmc),
+						
+					ClpSerializer.translateInput(xmlx),
+						
+					ClpSerializer.translateInput(jsdwmc),
+						
+					ClpSerializer.translateInput(status),
+						
+					ClpSerializer.translateInput(gs)
 					});
 		}
 		catch (Throwable t) {
@@ -830,4 +980,10 @@ public class PermitLocalServiceClp implements PermitLocalService {
 	private String[] _methodParameterTypes20;
 	private String _methodName21;
 	private String[] _methodParameterTypes21;
+	private String _methodName22;
+	private String[] _methodParameterTypes22;
+	private String _methodName23;
+	private String[] _methodParameterTypes23;
+	private String _methodName24;
+	private String[] _methodParameterTypes24;
 }

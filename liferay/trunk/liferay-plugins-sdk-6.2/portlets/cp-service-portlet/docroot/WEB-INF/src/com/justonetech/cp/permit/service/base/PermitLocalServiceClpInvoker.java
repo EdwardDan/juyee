@@ -121,17 +121,41 @@ public class PermitLocalServiceClpInvoker {
 				"java.lang.String", "int", "int"
 			};
 
-		_methodName59 = "getPermitsCount";
+		_methodName59 = "getPermits";
 
 		_methodParameterTypes59 = new String[] {
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.Long", "java.lang.String", "java.lang.String",
+				"java.lang.String", "int", "int"
+			};
+
+		_methodName60 = "getPermitsCount";
+
+		_methodParameterTypes60 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String"
 			};
 
-		_methodName60 = "createDynamicQuery";
+		_methodName61 = "getPermitsCount";
 
-		_methodParameterTypes60 = new String[] {
+		_methodParameterTypes61 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.Long", "java.lang.String", "java.lang.String",
+				"java.lang.String"
+			};
+
+		_methodName62 = "createDynamicQuery";
+
+		_methodParameterTypes62 = new String[] {
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String"
+			};
+
+		_methodName63 = "createDynamicQuery";
+
+		_methodParameterTypes63 = new String[] {
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.Long", "java.lang.String", "java.lang.String",
 				"java.lang.String"
 			};
 	}
@@ -248,16 +272,42 @@ public class PermitLocalServiceClpInvoker {
 
 		if (_methodName59.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes59, parameterTypes)) {
+			return PermitLocalServiceUtil.getPermits((java.lang.String)arguments[0],
+				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
+				(java.lang.Long)arguments[3], (java.lang.String)arguments[4],
+				(java.lang.String)arguments[5], (java.lang.String)arguments[6],
+				((Integer)arguments[7]).intValue(),
+				((Integer)arguments[8]).intValue());
+		}
+
+		if (_methodName60.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes60, parameterTypes)) {
 			return PermitLocalServiceUtil.getPermitsCount((java.lang.String)arguments[0],
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
 				(java.lang.String)arguments[3]);
 		}
 
-		if (_methodName60.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes60, parameterTypes)) {
+		if (_methodName61.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes61, parameterTypes)) {
+			return PermitLocalServiceUtil.getPermitsCount((java.lang.String)arguments[0],
+				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
+				(java.lang.Long)arguments[3], (java.lang.String)arguments[4],
+				(java.lang.String)arguments[5], (java.lang.String)arguments[6]);
+		}
+
+		if (_methodName62.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes62, parameterTypes)) {
 			return PermitLocalServiceUtil.createDynamicQuery((java.lang.String)arguments[0],
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
 				(java.lang.String)arguments[3]);
+		}
+
+		if (_methodName63.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes63, parameterTypes)) {
+			return PermitLocalServiceUtil.createDynamicQuery((java.lang.String)arguments[0],
+				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
+				(java.lang.Long)arguments[3], (java.lang.String)arguments[4],
+				(java.lang.String)arguments[5], (java.lang.String)arguments[6]);
 		}
 
 		throw new UnsupportedOperationException();
@@ -305,4 +355,10 @@ public class PermitLocalServiceClpInvoker {
 	private String[] _methodParameterTypes59;
 	private String _methodName60;
 	private String[] _methodParameterTypes60;
+	private String _methodName61;
+	private String[] _methodParameterTypes61;
+	private String _methodName62;
+	private String[] _methodParameterTypes62;
+	private String _methodName63;
+	private String[] _methodParameterTypes63;
 }
