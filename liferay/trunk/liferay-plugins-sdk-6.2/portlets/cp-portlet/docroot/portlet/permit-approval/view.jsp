@@ -21,8 +21,8 @@
 	int cur = ParamUtil.getInteger(renderRequest, "cur", 1);
 	int start = delta * (cur - 1);
 	int end = delta * cur;
-	List<Permit> permits = PermitLocalServiceUtil.getPermits( start, end);
-	int permitsCount = PermitLocalServiceUtil.getPermitsCount("", "", "", "");
+	List<Permit> permits = PermitLocalServiceUtil.getPermits(ywbh, bjbh, xmmc, xmlx, jsdw, state, start, end);
+	int permitsCount = PermitLocalServiceUtil.getPermitsCount(ywbh, bjbh, xmmc, xmlx, jsdw, state);
 	request.setAttribute("permits", permits);
 	request.setAttribute("permitsCount", permitsCount);
 	request.setAttribute("xmlxDics", xmlxDics);
