@@ -154,17 +154,9 @@ public class PermitLocalServiceImpl extends PermitLocalServiceBaseImpl {
 			if (!Validator.isBlank(status)) {
 				if("wtj".equals(status)){
 					int[] values = {1,4,6};
-					DynamicQuery projectProfileDQ = DynamicQueryFactoryUtil.forClass(ProjectProfile.class);
-					projectProfileDQ.setProjection(ProjectionFactoryUtil.property("permitId"));
-					projectProfileDQ.add(PropertyFactoryUtil.forName("lxjb").like("%" + ss[1] + "%"));
-					dynamicQuery.add(PropertyFactoryUtil.forName("permitId").in(projectProfileDQ));
 					dynamicQuery.add(PropertyFactoryUtil.forName("status").in(values));
 				}else if("ytj".equals(status)){
 					int[] values = {2,3,5,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24};
-					DynamicQuery projectProfileDQ = DynamicQueryFactoryUtil.forClass(ProjectProfile.class);
-					projectProfileDQ.setProjection(ProjectionFactoryUtil.property("permitId"));
-					projectProfileDQ.add(PropertyFactoryUtil.forName("lxjb").like("%" + ss[1] + "%"));
-					dynamicQuery.add(PropertyFactoryUtil.forName("permitId").in(projectProfileDQ));
 					dynamicQuery.add(PropertyFactoryUtil.forName("status").in(values));
 				}
 			}
