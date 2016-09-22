@@ -166,6 +166,11 @@ public class PermitLocalServiceImpl extends PermitLocalServiceBaseImpl {
 					projectProfileDQ.add(PropertyFactoryUtil.forName("lxjb").like("%" + ss[1] + "%"));
 					dynamicQuery.add(PropertyFactoryUtil.forName("permitId").in(projectProfileDQ));
 					dynamicQuery.add(PropertyFactoryUtil.forName("status").in(values));
+				}else{
+					DynamicQuery projectProfileDQ = DynamicQueryFactoryUtil.forClass(ProjectProfile.class);
+					projectProfileDQ.setProjection(ProjectionFactoryUtil.property("permitId"));
+					projectProfileDQ.add(PropertyFactoryUtil.forName("lxjb").like("%" + ss[1] + "%"));
+					dynamicQuery.add(PropertyFactoryUtil.forName("permitId").in(projectProfileDQ));
 				}
 			}
 		}else if(gs.equals("区属")){
@@ -184,6 +189,11 @@ public class PermitLocalServiceImpl extends PermitLocalServiceBaseImpl {
 					projectProfileDQ.add(PropertyFactoryUtil.forName("lxjb").like("%" + qs[0] + "%"));
 					dynamicQuery.add(PropertyFactoryUtil.forName("permitId").in(projectProfileDQ));
 					dynamicQuery.add(PropertyFactoryUtil.forName("status").in(values));
+				}else{
+					DynamicQuery projectProfileDQ = DynamicQueryFactoryUtil.forClass(ProjectProfile.class);
+					projectProfileDQ.setProjection(ProjectionFactoryUtil.property("permitId"));
+					projectProfileDQ.add(PropertyFactoryUtil.forName("lxjb").like("%" + qs[0] + "%"));
+					dynamicQuery.add(PropertyFactoryUtil.forName("permitId").in(projectProfileDQ));
 				}
 			}
 		}else{
