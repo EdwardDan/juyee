@@ -1,2 +1,2 @@
 #set ($css_class = "${css_class} dockbar-split")
-#set ($static = "http://jtjs.justonetech.com:8180/static")
+#set ($static = "http://jtjs.justonetech.com:8084/static")
