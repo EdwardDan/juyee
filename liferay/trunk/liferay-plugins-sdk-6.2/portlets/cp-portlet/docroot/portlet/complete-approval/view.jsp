@@ -17,13 +17,28 @@ tr.body td.content {
 	request.setAttribute("wssqbh", wssqbh);
 	request.setAttribute("gcmc", gcmc);
 	request.setAttribute("status", status);
+	User user_ = null;
+	try {
+		user_ = UserServiceUtil.getCurrentUser();
+	} catch (PortalException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (SystemException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+
+	String zzjgdm = "";
+	if (user_ != null) {
+		zzjgdm = user_.getScreenName();
+	}
 	int defaultDelta = GetterUtil.getInteger(PropsUtil.get(PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA));
 	int delta = ParamUtil.getInteger(renderRequest, "delta", defaultDelta);
 	int cur = ParamUtil.getInteger(renderRequest, "cur", 1);
 	int start = delta * (cur - 1);
 	int end = delta * cur;
-	List<Complete> completes = CompleteLocalServiceUtil.getCompletes("", bjbh, wssqbh, gcmc, status, start, end);
-	int completesCount = CompleteLocalServiceUtil.getCompletesCount("", bjbh, wssqbh, gcmc, status);
+	List<Complete> completes = CompleteLocalServiceUtil.getCompletes(zzjgdm, bjbh, wssqbh, gcmc, status, start, end);
+	int completesCount = CompleteLocalServiceUtil.getCompletesCount(zzjgdm, bjbh, wssqbh, gcmc, status);
 	request.setAttribute("completes", completes);
 	request.setAttribute("completesCount", completesCount);
 	request.setAttribute("delta", delta);
