@@ -51,7 +51,7 @@ public class ProjectSearchPortlet extends MVCPortlet {
 					zzjgdm = Validator.isNull(user) ? "" : user.getScreenName();
 				}
 			}
-		} catch (SystemException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

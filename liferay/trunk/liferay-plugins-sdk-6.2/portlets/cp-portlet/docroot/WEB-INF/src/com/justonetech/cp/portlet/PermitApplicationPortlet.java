@@ -108,7 +108,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 							zzjgdm = user.getScreenName();
 						}
 					}
-				} catch (SystemException e) {
+				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
@@ -158,7 +158,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 						zzjgdm = user.getScreenName();
 					}
 				}
-			} catch (SystemException e) {
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

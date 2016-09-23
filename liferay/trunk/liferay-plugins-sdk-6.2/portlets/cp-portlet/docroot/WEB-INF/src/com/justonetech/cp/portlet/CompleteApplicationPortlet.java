@@ -110,7 +110,29 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 		List<Complete> completes = Collections.emptyList();
 		int completesCount = 0;
 		
-		String gs = "";
+		String[] sss = PropsUtil.get("ss").split(",");//市属
+		String[] qss = PropsUtil.get("qs").split(",");//区属
+		List<Role> roles = new ArrayList<Role>();
+		try {
+			roles = user.getRoles();
+		} catch (SystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String gs = "";//根据角色来判断是市属还是区属
+		for(Role role:roles){
+			String roleId = role.getRoleId()+"";
+			for(String ss:sss){
+				if(roleId.equals(ss)){
+					gs="市属";
+				}
+			}
+			for(String qs:qss){
+				if(roleId.equals(qs)){
+					gs="区属";
+				}
+			}
+		} 
 		
 		completes = CompleteLocalServiceUtil.getCompletes(zzjgdm, bjbh, wssqbh, gcmc, status, gs, start, end);
 		completesCount = CompleteLocalServiceUtil.getCompletesCount(zzjgdm, bjbh, wssqbh, gcmc, status, gs);
