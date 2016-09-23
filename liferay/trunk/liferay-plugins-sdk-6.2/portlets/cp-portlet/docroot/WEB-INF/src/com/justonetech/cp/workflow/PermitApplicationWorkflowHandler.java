@@ -30,10 +30,16 @@ public class PermitApplicationWorkflowHandler extends BaseWorkflowHandler {
     public  Permit updateStatus(int status,
             Map<String, Serializable> workflowContext) throws PortalException,
             SystemException {
+    	Thread thread = new Thread();
+    	try {
+			thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         long userId = GetterUtil.getLong(workflowContext.get(WorkflowConstants.CONTEXT_USER_ID));
         long resourcePrimKey = GetterUtil.getLong(workflowContext.get(WorkflowConstants.CONTEXT_ENTRY_CLASS_PK));
         Permit permit = PermitLocalServiceUtil.getPermit(resourcePrimKey);
-        System.out.println("status="+status);
         permit.setStatus(status);
         permit.setStatusByUserId(userId);
         permit.setStatusDate(new Date());
