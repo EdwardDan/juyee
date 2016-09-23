@@ -17,9 +17,8 @@ tr.body td.content {
 	request.setAttribute("wssqbh", wssqbh);
 	request.setAttribute("gcmc", gcmc);
 	request.setAttribute("status", status);
-	User user_ = null;
 	try {
-		user_ = UserServiceUtil.getCurrentUser();
+		user = UserServiceUtil.getCurrentUser();
 	} catch (PortalException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -29,7 +28,7 @@ tr.body td.content {
 	}
 
 	String zzjgdm = "";
-	if (user_ != null) {
+	if (user != null) {
 		long[] roles = user.getRoleIds();
 		for(long role:roles){
 			if(role == 25421){
@@ -42,7 +41,29 @@ tr.body td.content {
 	int cur = ParamUtil.getInteger(renderRequest, "cur", 1);
 	int start = delta * (cur - 1);
 	int end = delta * cur;
-	String gs = "";
+	String[] sss = PropsUtil.get("ss").split(",");//市属
+	String[] qss = PropsUtil.get("qs").split(",");//区属
+	List<Role> roles = new ArrayList<Role>();
+	try {
+		roles = user.getRoles();
+	} catch (SystemException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	String gs = "";//根据角色来判断是市属还是区属
+	for(Role role:roles){
+		String roleId = role.getRoleId()+"";
+		for(String ss:sss){
+			if(roleId.equals(ss)){
+				gs="市属";
+			}
+		}
+		for(String qs:qss){
+			if(roleId.equals(qs)){
+				gs="区属";
+			}
+		}
+	} 
 	List<Complete> completes = CompleteLocalServiceUtil.getCompletes(zzjgdm, bjbh, wssqbh, gcmc, status, gs, start, end);
 	int completesCount = CompleteLocalServiceUtil.getCompletesCount(zzjgdm, bjbh, wssqbh, gcmc, status, gs);
 	request.setAttribute("completes", completes);
