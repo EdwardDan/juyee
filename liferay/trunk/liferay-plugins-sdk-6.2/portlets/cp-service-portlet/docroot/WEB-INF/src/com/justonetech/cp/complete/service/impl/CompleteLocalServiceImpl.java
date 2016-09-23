@@ -97,8 +97,7 @@ public class CompleteLocalServiceImpl extends CompleteLocalServiceBaseImpl {
 			projectProfileDQ.add(PropertyFactoryUtil.forName("gcmc").like("%" + gcmc + "%"));
 			dynamicQuery.add(PropertyFactoryUtil.forName("completeId").in(projectProfileDQ));
 		}
-		String[] ss = {"国家部委或中央单位","市级机关或市级单位","其他"};
-		String[] qs = {"区县级机关或区县级单位"};
+
 		if(gs.equals("市属")){
 			if (sqzt > 0) {
 				dynamicQuery.add(PropertyFactoryUtil.forName("sqbz").eq(sqzt));
@@ -107,13 +106,13 @@ public class CompleteLocalServiceImpl extends CompleteLocalServiceBaseImpl {
 			if (sqzt > 0) {
 				DynamicQuery completeProjectProfileDQ = DynamicQueryFactoryUtil.forClass(CompleteProjectProfile.class);
 				completeProjectProfileDQ.setProjection(ProjectionFactoryUtil.property("completeId"));
-				completeProjectProfileDQ.add(PropertyFactoryUtil.forName("lxjb").like("%" + qs[0] + "%"));
+				completeProjectProfileDQ.add(PropertyFactoryUtil.forName("lxjb").like("%区县级机关或区县级单位%"));
 				dynamicQuery.add(PropertyFactoryUtil.forName("completeId").in(completeProjectProfileDQ));
 				dynamicQuery.add(PropertyFactoryUtil.forName("sqbz").eq(sqzt));
 			}else{
 				DynamicQuery completeProjectProfileDQ = DynamicQueryFactoryUtil.forClass(CompleteProjectProfile.class);
 				completeProjectProfileDQ.setProjection(ProjectionFactoryUtil.property("completeId"));
-				completeProjectProfileDQ.add(PropertyFactoryUtil.forName("lxjb").like("%" + qs[0] + "%"));
+				completeProjectProfileDQ.add(PropertyFactoryUtil.forName("lxjb").like("%区县级机关或区县级单位%"));
 				dynamicQuery.add(PropertyFactoryUtil.forName("completeId").in(completeProjectProfileDQ));
 			}
 		}
