@@ -45,6 +45,6 @@ public class ProvideSgxkzbh {
 			sgxkzbh = sgxkzbh + num;
 		}
 		permit1.setSgxkzbh(sgxkzbh);
-		PermitLocalServiceUtil.updatePermit(permit1);
+		com.justonetech.cp.permit.service.PermitLocalServiceUtil.updatePermit(permit1);
 	}
 }
