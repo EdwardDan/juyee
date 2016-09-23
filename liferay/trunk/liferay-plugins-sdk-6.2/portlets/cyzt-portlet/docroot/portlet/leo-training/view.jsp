@@ -73,12 +73,12 @@
 					String zylx = (String) request.getAttribute("zylx");
 									String xm = (String) request.getAttribute("xm");
 									String zjbh = (String) request.getAttribute("zjbh");
-									String yxq = (String) request.getAttribute("yxq");
+									String yxqStr = (String) request.getAttribute("yxqStr");
 									PortletURL portletURL = searchContainer.getIteratorURL();
 									portletURL.setParameter("zjbh", zjbh);
 									portletURL.setParameter("xm", xm);
 									portletURL.setParameter("zjbh", zjbh);
-									portletURL.setParameter("yxq", yxq);
+									portletURL.setParameter("yxq", yxqStr);
 				%>
 			</liferay-ui:search-iterator>
 		</liferay-ui:search-container>

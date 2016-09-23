@@ -53,11 +53,17 @@ public class LEOTrainingPortlet extends MVCPortlet {
 		int cur = ParamUtil.getInteger(renderRequest, "cur", 1);
 		int start = delta * (cur - 1);
 		int end = delta * cur;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String yxqStr = ParamUtil.getString(renderRequest, "yxqStr","");
+		if(yxq!=null){
+			yxqStr = sdf.format(yxq);
+		}
 		List<LEOCertificate> leoCertificates = Collections.emptyList();
 		int leoCertificatesCount = 0;
 		leoCertificates = LEOCertificateLocalServiceUtil.getLEOCertificates(xm, zylx, zjbh, yxq, start, end);
 		leoCertificatesCount = LEOCertificateLocalServiceUtil.getLEOCertificatesCount(xm, zylx, zjbh, yxq);
 		renderRequest.setAttribute("zjbh", zjbh);
+		renderRequest.setAttribute("yxqStr", yxqStr);
 		renderRequest.setAttribute("zylx", zylx);
 		renderRequest.setAttribute("xm", xm);
 		renderRequest.setAttribute("leoCertificates", leoCertificates);
