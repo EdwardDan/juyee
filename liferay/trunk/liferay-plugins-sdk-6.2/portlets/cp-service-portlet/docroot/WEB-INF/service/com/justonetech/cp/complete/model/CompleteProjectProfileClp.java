@@ -78,6 +78,7 @@ public class CompleteProjectProfileClp extends BaseModelImpl<CompleteProjectProf
 		attributes.put("xmlx", getXmlx());
 		attributes.put("jsgcsx", getJsgcsx());
 		attributes.put("gcmc", getGcmc());
+		attributes.put("lxjb", getLxjb());
 		attributes.put("jsdwmc", getJsdwmc());
 		attributes.put("jsdwdz", getJsdwdz());
 		attributes.put("jsdd", getJsdd());
@@ -120,6 +121,12 @@ public class CompleteProjectProfileClp extends BaseModelImpl<CompleteProjectProf
 
 		if (gcmc != null) {
 			setGcmc(gcmc);
+		}
+
+		String lxjb = (String)attributes.get("lxjb");
+
+		if (lxjb != null) {
+			setLxjb(lxjb);
 		}
 
 		String jsdwmc = (String)attributes.get("jsdwmc");
@@ -279,6 +286,29 @@ public class CompleteProjectProfileClp extends BaseModelImpl<CompleteProjectProf
 				Method method = clazz.getMethod("setGcmc", String.class);
 
 				method.invoke(_completeProjectProfileRemoteModel, gcmc);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getLxjb() {
+		return _lxjb;
+	}
+
+	@Override
+	public void setLxjb(String lxjb) {
+		_lxjb = lxjb;
+
+		if (_completeProjectProfileRemoteModel != null) {
+			try {
+				Class<?> clazz = _completeProjectProfileRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setLxjb", String.class);
+
+				method.invoke(_completeProjectProfileRemoteModel, lxjb);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -546,6 +576,7 @@ public class CompleteProjectProfileClp extends BaseModelImpl<CompleteProjectProf
 		clone.setXmlx(getXmlx());
 		clone.setJsgcsx(getJsgcsx());
 		clone.setGcmc(getGcmc());
+		clone.setLxjb(getLxjb());
 		clone.setJsdwmc(getJsdwmc());
 		clone.setJsdwdz(getJsdwdz());
 		clone.setJsdd(getJsdd());
@@ -606,7 +637,7 @@ public class CompleteProjectProfileClp extends BaseModelImpl<CompleteProjectProf
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(27);
+		StringBundler sb = new StringBundler(29);
 
 		sb.append("{completeId=");
 		sb.append(getCompleteId());
@@ -618,6 +649,8 @@ public class CompleteProjectProfileClp extends BaseModelImpl<CompleteProjectProf
 		sb.append(getJsgcsx());
 		sb.append(", gcmc=");
 		sb.append(getGcmc());
+		sb.append(", lxjb=");
+		sb.append(getLxjb());
 		sb.append(", jsdwmc=");
 		sb.append(getJsdwmc());
 		sb.append(", jsdwdz=");
@@ -641,7 +674,7 @@ public class CompleteProjectProfileClp extends BaseModelImpl<CompleteProjectProf
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(43);
+		StringBundler sb = new StringBundler(46);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.cp.complete.model.CompleteProjectProfile");
@@ -666,6 +699,10 @@ public class CompleteProjectProfileClp extends BaseModelImpl<CompleteProjectProf
 		sb.append(
 			"<column><column-name>gcmc</column-name><column-value><![CDATA[");
 		sb.append(getGcmc());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>lxjb</column-name><column-value><![CDATA[");
+		sb.append(getLxjb());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>jsdwmc</column-name><column-value><![CDATA[");
@@ -710,6 +747,7 @@ public class CompleteProjectProfileClp extends BaseModelImpl<CompleteProjectProf
 	private long _xmlx;
 	private long _jsgcsx;
 	private String _gcmc;
+	private String _lxjb;
 	private String _jsdwmc;
 	private String _jsdwdz;
 	private String _jsdd;

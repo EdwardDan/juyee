@@ -20,6 +20,7 @@ import java.util.List;
 import com.justonetech.cp.complete.model.Complete;
 import com.justonetech.cp.complete.model.CompleteProjectProfile;
 import com.justonetech.cp.complete.service.base.CompleteLocalServiceBaseImpl;
+import com.justonetech.cp.permit.model.ProjectProfile;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
@@ -58,27 +59,27 @@ public class CompleteLocalServiceImpl extends CompleteLocalServiceBaseImpl {
 	private static Log log = LogFactoryUtil.getLog(CompleteLocalServiceImpl.class);
 
 	@SuppressWarnings("unchecked")
-	public List<Complete> getCompletes(String zzjgdm, String bjbh, String wssqbh, String gcmc, int sqzt, int start, int end) {
+	public List<Complete> getCompletes(String zzjgdm, String bjbh, String wssqbh, String gcmc, int sqzt, String gs,int start, int end) {
 
 		try {
-			return this.dynamicQuery(createDynamicQuery(zzjgdm, bjbh, wssqbh, gcmc, sqzt), start, end);
+			return this.dynamicQuery(createDynamicQuery(zzjgdm, bjbh, wssqbh, gcmc, sqzt, gs), start, end);
 		} catch (SystemException e) {
 			log.info(e.getMessage());
 		}
 		return Collections.emptyList();
 	}
 
-	public int getCompletesCount(String zzjgdm, String bjbh, String wssqbh, String gcmc, int sqzt) {
+	public int getCompletesCount(String zzjgdm, String bjbh, String wssqbh, String gcmc, int sqzt,String gs) {
 
 		try {
-			return (int) this.dynamicQueryCount(createDynamicQuery(zzjgdm, bjbh, wssqbh, gcmc, sqzt));
+			return (int) this.dynamicQueryCount(createDynamicQuery(zzjgdm, bjbh, wssqbh, gcmc, sqzt, gs));
 		} catch (SystemException e) {
 			log.info(e.getMessage());
 		}
 		return 0;
 	}
 
-	public DynamicQuery createDynamicQuery(String zzjgdm, String bjbh, String wssqbh, String gcmc, int sqzt) {
+	public DynamicQuery createDynamicQuery(String zzjgdm, String bjbh, String wssqbh, String gcmc, int sqzt,String gs) {
 
 		DynamicQuery dynamicQuery = this.dynamicQuery();
 		if (!Validator.isBlank(zzjgdm)) {
@@ -96,8 +97,25 @@ public class CompleteLocalServiceImpl extends CompleteLocalServiceBaseImpl {
 			projectProfileDQ.add(PropertyFactoryUtil.forName("gcmc").like("%" + gcmc + "%"));
 			dynamicQuery.add(PropertyFactoryUtil.forName("completeId").in(projectProfileDQ));
 		}
-		if (sqzt > 0) {
-			dynamicQuery.add(PropertyFactoryUtil.forName("status").eq(sqzt));
+		String[] ss = {"国家部委或中央单位","市级机关或市级单位","其他"};
+		String[] qs = {"区县级机关或区县级单位"};
+		if(gs.equals("市属")){
+			if (sqzt > 0) {
+				dynamicQuery.add(PropertyFactoryUtil.forName("sqbz").eq(sqzt));
+			}
+		}else if(gs.equals("区属")){
+			if (sqzt > 0) {
+				DynamicQuery completeProjectProfileDQ = DynamicQueryFactoryUtil.forClass(CompleteProjectProfile.class);
+				completeProjectProfileDQ.setProjection(ProjectionFactoryUtil.property("completeId"));
+				completeProjectProfileDQ.add(PropertyFactoryUtil.forName("lxjb").like("%" + qs[0] + "%"));
+				dynamicQuery.add(PropertyFactoryUtil.forName("completeId").in(completeProjectProfileDQ));
+				dynamicQuery.add(PropertyFactoryUtil.forName("sqbz").eq(sqzt));
+			}else{
+				DynamicQuery completeProjectProfileDQ = DynamicQueryFactoryUtil.forClass(CompleteProjectProfile.class);
+				completeProjectProfileDQ.setProjection(ProjectionFactoryUtil.property("completeId"));
+				completeProjectProfileDQ.add(PropertyFactoryUtil.forName("lxjb").like("%" + qs[0] + "%"));
+				dynamicQuery.add(PropertyFactoryUtil.forName("completeId").in(completeProjectProfileDQ));
+			}
 		}
 		return dynamicQuery;
 	}

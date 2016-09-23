@@ -49,6 +49,7 @@
 		<column name="xmlx" type="long" /><!--项目类型 -->
 		<column name="jsgcsx" type="long" /><!--建设工程属性 -->
 		<column name="gcmc" type="String" /><!-- 工程名称 -->
+		<column name="lxjb" type="String" /><!--立项级别 -->
 		<column name="jsdwmc" type="String" /><!-- 建设单位名称 -->
 		<column name="jsdwdz" type="String" /><!-- 建设单位地址 -->
 		<column name="jsdd" type="String" /><!-- 建设地点 -->

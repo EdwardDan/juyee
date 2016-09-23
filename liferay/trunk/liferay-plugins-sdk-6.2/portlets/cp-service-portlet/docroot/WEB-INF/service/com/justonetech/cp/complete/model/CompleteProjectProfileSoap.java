@@ -35,6 +35,7 @@ public class CompleteProjectProfileSoap implements Serializable {
 		soapModel.setXmlx(model.getXmlx());
 		soapModel.setJsgcsx(model.getJsgcsx());
 		soapModel.setGcmc(model.getGcmc());
+		soapModel.setLxjb(model.getLxjb());
 		soapModel.setJsdwmc(model.getJsdwmc());
 		soapModel.setJsdwdz(model.getJsdwdz());
 		soapModel.setJsdd(model.getJsdd());
@@ -138,6 +139,14 @@ public class CompleteProjectProfileSoap implements Serializable {
 		_gcmc = gcmc;
 	}
 
+	public String getLxjb() {
+		return _lxjb;
+	}
+
+	public void setLxjb(String lxjb) {
+		_lxjb = lxjb;
+	}
+
 	public String getJsdwmc() {
 		return _jsdwmc;
 	}
@@ -207,6 +216,7 @@ public class CompleteProjectProfileSoap implements Serializable {
 	private long _xmlx;
 	private long _jsgcsx;
 	private String _gcmc;
+	private String _lxjb;
 	private String _jsdwmc;
 	private String _jsdwdz;
 	private String _jsdd;

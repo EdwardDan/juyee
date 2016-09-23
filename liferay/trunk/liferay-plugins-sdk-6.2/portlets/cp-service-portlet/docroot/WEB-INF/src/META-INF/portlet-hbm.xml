@@ -416,6 +416,7 @@
 		<property name="xmlx" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="jsgcsx" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="gcmc" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="lxjb" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="jsdwmc" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="jsdwdz" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="jsdd" type="com.liferay.portal.dao.orm.hibernate.StringType" />

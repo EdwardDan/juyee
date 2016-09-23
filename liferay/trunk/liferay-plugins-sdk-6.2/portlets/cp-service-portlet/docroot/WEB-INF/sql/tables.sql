@@ -47,6 +47,7 @@ create table cp_CompleteProjectProfile (
 	xmlx LONG,
 	jsgcsx LONG,
 	gcmc VARCHAR(500) null,
+	lxjb VARCHAR(75) null,
 	jsdwmc VARCHAR(500) null,
 	jsdwdz VARCHAR(500) null,
 	jsdd VARCHAR(500) null,

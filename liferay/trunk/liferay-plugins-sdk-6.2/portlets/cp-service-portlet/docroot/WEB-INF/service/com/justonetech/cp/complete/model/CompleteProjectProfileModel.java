@@ -130,6 +130,21 @@ public interface CompleteProjectProfileModel extends BaseModel<CompleteProjectPr
 	public void setGcmc(String gcmc);
 
 	/**
+	 * Returns the lxjb of this complete project profile.
+	 *
+	 * @return the lxjb of this complete project profile
+	 */
+	@AutoEscape
+	public String getLxjb();
+
+	/**
+	 * Sets the lxjb of this complete project profile.
+	 *
+	 * @param lxjb the lxjb of this complete project profile
+	 */
+	public void setLxjb(String lxjb);
+
+	/**
 	 * Returns the jsdwmc of this complete project profile.
 	 *
 	 * @return the jsdwmc of this complete project profile

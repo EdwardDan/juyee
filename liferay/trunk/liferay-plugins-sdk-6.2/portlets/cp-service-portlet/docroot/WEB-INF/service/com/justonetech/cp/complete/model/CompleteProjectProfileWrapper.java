@@ -55,6 +55,7 @@ public class CompleteProjectProfileWrapper implements CompleteProjectProfile,
 		attributes.put("xmlx", getXmlx());
 		attributes.put("jsgcsx", getJsgcsx());
 		attributes.put("gcmc", getGcmc());
+		attributes.put("lxjb", getLxjb());
 		attributes.put("jsdwmc", getJsdwmc());
 		attributes.put("jsdwdz", getJsdwdz());
 		attributes.put("jsdd", getJsdd());
@@ -97,6 +98,12 @@ public class CompleteProjectProfileWrapper implements CompleteProjectProfile,
 
 		if (gcmc != null) {
 			setGcmc(gcmc);
+		}
+
+		String lxjb = (String)attributes.get("lxjb");
+
+		if (lxjb != null) {
+			setLxjb(lxjb);
 		}
 
 		String jsdwmc = (String)attributes.get("jsdwmc");
@@ -266,6 +273,26 @@ public class CompleteProjectProfileWrapper implements CompleteProjectProfile,
 	@Override
 	public void setGcmc(java.lang.String gcmc) {
 		_completeProjectProfile.setGcmc(gcmc);
+	}
+
+	/**
+	* Returns the lxjb of this complete project profile.
+	*
+	* @return the lxjb of this complete project profile
+	*/
+	@Override
+	public java.lang.String getLxjb() {
+		return _completeProjectProfile.getLxjb();
+	}
+
+	/**
+	* Sets the lxjb of this complete project profile.
+	*
+	* @param lxjb the lxjb of this complete project profile
+	*/
+	@Override
+	public void setLxjb(java.lang.String lxjb) {
+		_completeProjectProfile.setLxjb(lxjb);
 	}
 
 	/**
