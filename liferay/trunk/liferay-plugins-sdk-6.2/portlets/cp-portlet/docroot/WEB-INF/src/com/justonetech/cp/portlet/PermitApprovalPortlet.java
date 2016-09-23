@@ -254,7 +254,7 @@ public class PermitApprovalPortlet extends MVCPortlet {
 		return map;
 	}
 	
-	public void provideSgxkzbh(long permitId) throws PortalException, SystemException{
+	public static void provideSgxkzbh(long permitId) throws PortalException, SystemException{
 		String ywbh = "JT";//JT
 		Permit permit1 = PermitLocalServiceUtil.getPermit(permitId);
 		ywbh = ywbh + permit1.getBjbh() + permit1.getBdh();//报建编号+标段号
