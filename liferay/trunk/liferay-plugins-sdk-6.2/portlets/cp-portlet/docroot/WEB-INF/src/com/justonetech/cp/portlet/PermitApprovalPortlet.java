@@ -26,6 +26,7 @@ import com.justonetech.cp.permit.service.ApplyMaterialLocalServiceUtil;
 import com.justonetech.cp.permit.service.ParticipationUnitLocalServiceUtil;
 import com.justonetech.cp.permit.service.PermitLocalServiceUtil;
 import com.justonetech.cp.permit.service.ProjectProfileLocalServiceUtil;
+import com.justonetech.cp.util.ExcelPrintManager;
 import com.justonetech.sys.model.Dictionary;
 import com.justonetech.sys.service.DictionaryLocalServiceUtil;
 import com.liferay.counter.service.CounterLocalServiceUtil;
@@ -35,6 +36,7 @@ import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
@@ -50,6 +52,8 @@ import com.lowagie.text.pdf.PdfStamper;
  * Portlet implementation class PermitApprovalPortlet
  */
 public class PermitApprovalPortlet extends MVCPortlet {
+	private ExcelPrintManager excelPrintManager;
+	
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
 		// TODO Auto-generated method stub
@@ -260,6 +264,43 @@ public class PermitApprovalPortlet extends MVCPortlet {
 		map.put("bz", bz);
 		return map;
 	}
+	
+	// 导出excel
+		public void sgxkExcel(ActionRequest actionRequest, ActionResponse actionResponse) throws PortalException,
+				SystemException, IOException {
+			long permitId = ParamUtil.getLong(actionRequest, "permitId");
+			Permit permit = PermitLocalServiceUtil.getPermit(permitId);
+			ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
+			String xmlx = DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx()).getName();
+			Map<String, Object> map = new HashMap<String, Object>();
+			String fileName = xmlx + "施工许可证.xls";
+			String title = "上海市(" + xmlx + "(工程施工许可证";
+			String titleFl = "";
+			if (xmlx.equals("港口")) {
+				titleFl = "根据《中华人民共和国港口法》等相关法律规定，经审查，本工程符合施工条件，准予施工。";
+			} else if (xmlx.equals("公路")) {
+				titleFl = "根据《中华人民共和国公路法》等相关法律规定，经审查，本工程符合施工条件，准予施工。";
+			} else {
+				titleFl = "根据《中华人民共和国交通建设法》等相关法律规定，经审查，本工程符合施工条件，准予施工。";
+			}
+			map.put("title", title);
+			map.put("titleFl", titleFl);
+			map.put("permit", permit);
+			map.put("projectProfile", projectProfile);
+			System.out.println("===================" + Permit.class.getSimpleName());
+			excelPrintManager.printExcel(PortalUtil.getHttpServletResponse(actionResponse),
+					PortalUtil.getHttpServletRequest(actionRequest), Permit.class.getSimpleName(), "施工许可绿色证书.xls", map,
+					fileName);
+		}
+
+		public void sgxklsExcel(ActionRequest request, ActionResponse response) {
+
+		}
+
+		public void kgbaExcel(ActionRequest request, ActionResponse response) {
+
+		}
+
 	
 	public void provideSgxkzbh(long permitId) throws PortalException, SystemException{
 		String sgxkzbh = "JT";//JT
