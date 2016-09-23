@@ -41,8 +41,8 @@ tr.body td.content {
 	int cur = ParamUtil.getInteger(renderRequest, "cur", 1);
 	int start = delta * (cur - 1);
 	int end = delta * cur;
-	String[] sss = PropsUtil.get("ss").split(",");//市属
-	String[] qss = PropsUtil.get("qs").split(",");//区属
+	String[] sss = PropsUtil.get("jgbass").split(",");//市属
+	String[] qss = PropsUtil.get("jgbaqs").split(",");//区属
 	List<Role> roles = new ArrayList<Role>();
 	try {
 		roles = user.getRoles();
