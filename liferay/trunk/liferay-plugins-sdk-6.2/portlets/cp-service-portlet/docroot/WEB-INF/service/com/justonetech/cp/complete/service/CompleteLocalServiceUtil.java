@@ -277,26 +277,26 @@ public class CompleteLocalServiceUtil {
 
 	public static java.util.List<com.justonetech.cp.complete.model.Complete> getCompletes(
 		java.lang.String zzjgdm, java.lang.String bjbh,
-		java.lang.String wssqbh, java.lang.String gcmc, int sqzt,
+		java.lang.String wssqbh, java.lang.String gcmc, int status,
 		java.lang.String gs, int start, int end) {
 		return getService()
-				   .getCompletes(zzjgdm, bjbh, wssqbh, gcmc, sqzt, gs, start,
+				   .getCompletes(zzjgdm, bjbh, wssqbh, gcmc, status, gs, start,
 			end);
 	}
 
 	public static int getCompletesCount(java.lang.String zzjgdm,
 		java.lang.String bjbh, java.lang.String wssqbh, java.lang.String gcmc,
-		int sqzt, java.lang.String gs) {
+		int status, java.lang.String gs) {
 		return getService()
-				   .getCompletesCount(zzjgdm, bjbh, wssqbh, gcmc, sqzt, gs);
+				   .getCompletesCount(zzjgdm, bjbh, wssqbh, gcmc, status, gs);
 	}
 
 	public static com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQuery(
 		java.lang.String zzjgdm, java.lang.String bjbh,
-		java.lang.String wssqbh, java.lang.String gcmc, int sqzt,
+		java.lang.String wssqbh, java.lang.String gcmc, int status,
 		java.lang.String gs) {
 		return getService()
-				   .createDynamicQuery(zzjgdm, bjbh, wssqbh, gcmc, sqzt, gs);
+				   .createDynamicQuery(zzjgdm, bjbh, wssqbh, gcmc, status, gs);
 	}
 
 	public static void clearService() {

@@ -257,16 +257,16 @@ public interface CompleteLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.justonetech.cp.complete.model.Complete> getCompletes(
 		java.lang.String zzjgdm, java.lang.String bjbh,
-		java.lang.String wssqbh, java.lang.String gcmc, int sqzt,
+		java.lang.String wssqbh, java.lang.String gcmc, int status,
 		java.lang.String gs, int start, int end);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getCompletesCount(java.lang.String zzjgdm,
 		java.lang.String bjbh, java.lang.String wssqbh, java.lang.String gcmc,
-		int sqzt, java.lang.String gs);
+		int status, java.lang.String gs);
 
 	public com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQuery(
 		java.lang.String zzjgdm, java.lang.String bjbh,
-		java.lang.String wssqbh, java.lang.String gcmc, int sqzt,
+		java.lang.String wssqbh, java.lang.String gcmc, int status,
 		java.lang.String gs);
 }

@@ -59,27 +59,27 @@ public class CompleteLocalServiceImpl extends CompleteLocalServiceBaseImpl {
 	private static Log log = LogFactoryUtil.getLog(CompleteLocalServiceImpl.class);
 
 	@SuppressWarnings("unchecked")
-	public List<Complete> getCompletes(String zzjgdm, String bjbh, String wssqbh, String gcmc, int sqzt, String gs,int start, int end) {
+	public List<Complete> getCompletes(String zzjgdm, String bjbh, String wssqbh, String gcmc, int status, String gs,int start, int end) {
 
 		try {
-			return this.dynamicQuery(createDynamicQuery(zzjgdm, bjbh, wssqbh, gcmc, sqzt, gs), start, end);
+			return this.dynamicQuery(createDynamicQuery(zzjgdm, bjbh, wssqbh, gcmc, status, gs), start, end);
 		} catch (SystemException e) {
 			log.info(e.getMessage());
 		}
 		return Collections.emptyList();
 	}
 
-	public int getCompletesCount(String zzjgdm, String bjbh, String wssqbh, String gcmc, int sqzt,String gs) {
+	public int getCompletesCount(String zzjgdm, String bjbh, String wssqbh, String gcmc, int status,String gs) {
 
 		try {
-			return (int) this.dynamicQueryCount(createDynamicQuery(zzjgdm, bjbh, wssqbh, gcmc, sqzt, gs));
+			return (int) this.dynamicQueryCount(createDynamicQuery(zzjgdm, bjbh, wssqbh, gcmc, status, gs));
 		} catch (SystemException e) {
 			log.info(e.getMessage());
 		}
 		return 0;
 	}
 
-	public DynamicQuery createDynamicQuery(String zzjgdm, String bjbh, String wssqbh, String gcmc, int sqzt,String gs) {
+	public DynamicQuery createDynamicQuery(String zzjgdm, String bjbh, String wssqbh, String gcmc, int status,String gs) {
 
 		DynamicQuery dynamicQuery = this.dynamicQuery();
 		if (!Validator.isBlank(zzjgdm)) {
@@ -99,16 +99,16 @@ public class CompleteLocalServiceImpl extends CompleteLocalServiceBaseImpl {
 		}
 
 		if(gs.equals("市属")){
-			if (sqzt > 0) {
-				dynamicQuery.add(PropertyFactoryUtil.forName("sqbz").eq(sqzt));
+			if (status > 0) {
+				dynamicQuery.add(PropertyFactoryUtil.forName("sqbz").eq(status));
 			}
 		}else if(gs.equals("区属")){
-			if (sqzt > 0) {
+			if (status > 0) {
 				DynamicQuery completeProjectProfileDQ = DynamicQueryFactoryUtil.forClass(CompleteProjectProfile.class);
 				completeProjectProfileDQ.setProjection(ProjectionFactoryUtil.property("completeId"));
 				completeProjectProfileDQ.add(PropertyFactoryUtil.forName("lxjb").like("%区县级机关或区县级单位%"));
 				dynamicQuery.add(PropertyFactoryUtil.forName("completeId").in(completeProjectProfileDQ));
-				dynamicQuery.add(PropertyFactoryUtil.forName("sqbz").eq(sqzt));
+				dynamicQuery.add(PropertyFactoryUtil.forName("status").eq(status));
 			}else{
 				DynamicQuery completeProjectProfileDQ = DynamicQueryFactoryUtil.forClass(CompleteProjectProfile.class);
 				completeProjectProfileDQ.setProjection(ProjectionFactoryUtil.property("completeId"));

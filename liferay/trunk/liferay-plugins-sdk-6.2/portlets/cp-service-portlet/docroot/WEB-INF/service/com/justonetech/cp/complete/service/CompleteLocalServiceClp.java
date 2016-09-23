@@ -689,7 +689,7 @@ public class CompleteLocalServiceClp implements CompleteLocalService {
 	@Override
 	public java.util.List<com.justonetech.cp.complete.model.Complete> getCompletes(
 		java.lang.String zzjgdm, java.lang.String bjbh,
-		java.lang.String wssqbh, java.lang.String gcmc, int sqzt,
+		java.lang.String wssqbh, java.lang.String gcmc, int status,
 		java.lang.String gs, int start, int end) {
 		Object returnObj = null;
 
@@ -705,7 +705,7 @@ public class CompleteLocalServiceClp implements CompleteLocalService {
 						
 					ClpSerializer.translateInput(gcmc),
 						
-					sqzt,
+					status,
 						
 					ClpSerializer.translateInput(gs),
 						
@@ -732,7 +732,7 @@ public class CompleteLocalServiceClp implements CompleteLocalService {
 	@Override
 	public int getCompletesCount(java.lang.String zzjgdm,
 		java.lang.String bjbh, java.lang.String wssqbh, java.lang.String gcmc,
-		int sqzt, java.lang.String gs) {
+		int status, java.lang.String gs) {
 		Object returnObj = null;
 
 		try {
@@ -747,7 +747,7 @@ public class CompleteLocalServiceClp implements CompleteLocalService {
 						
 					ClpSerializer.translateInput(gcmc),
 						
-					sqzt,
+					status,
 						
 					ClpSerializer.translateInput(gs)
 					});
@@ -770,7 +770,7 @@ public class CompleteLocalServiceClp implements CompleteLocalService {
 	@Override
 	public com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQuery(
 		java.lang.String zzjgdm, java.lang.String bjbh,
-		java.lang.String wssqbh, java.lang.String gcmc, int sqzt,
+		java.lang.String wssqbh, java.lang.String gcmc, int status,
 		java.lang.String gs) {
 		Object returnObj = null;
 
@@ -786,7 +786,7 @@ public class CompleteLocalServiceClp implements CompleteLocalService {
 						
 					ClpSerializer.translateInput(gcmc),
 						
-					sqzt,
+					status,
 						
 					ClpSerializer.translateInput(gs)
 					});
