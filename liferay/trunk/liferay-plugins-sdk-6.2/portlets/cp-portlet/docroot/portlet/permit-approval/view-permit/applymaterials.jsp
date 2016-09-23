@@ -22,7 +22,6 @@
 		
 	ApplyMaterial applyMaterial=materialList.get(i);
 	String fileEntryIds=applyMaterial.getFileEntryIds();
-	/* if(Validator.isNotNull(fileEntryIds)){ */
 	String[] fileEntryIdsArr=fileEntryIds.split("\\,");
 	List<DLFileEntry> list=new ArrayList<DLFileEntry>();
 	if(null!=fileEntryIdsArr&&fileEntryIdsArr.length>0){
@@ -30,9 +29,6 @@
 		if(Validator.isNotNull(fileEntryIdsArr[j])){
 	String fileEntryId=fileEntryIdsArr[j].split("\\|")[0];
 	DLFileEntry dlFileEntry=DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(fileEntryId));
-	/* String filePath=dlFileEntry.getGroupId() + "/" + dlFileEntry.getFolderId() + "/" + dlFileEntry.getTitle(); */
-	/* String fileName=applyMaterial.getClmc()+"-"+(j+1)+"."+dlFileEntry.getExtension(); */
-	/* String pdfURL = "/documents/"+filePath; */
 		list.add(dlFileEntry);
 	}
 	
@@ -49,9 +45,6 @@
 		if(Validator.isNotNull(bzclIdsArr[j])){
 	String fileEntryId=bzclIdsArr[j].split("\\|")[0];
 	DLFileEntry dlFileEntry=DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(fileEntryId));
-	/* String filePath=dlFileEntry.getGroupId() + "/" + dlFileEntry.getFolderId() + "/" + dlFileEntry.getTitle(); */
-	/* String fileName=applyMaterial.getClmc()+"-"+(j+1)+"."+dlFileEntry.getExtension(); */
-	/* String pdfURL = "/documents/"+filePath; */
 		listBzcl.add(dlFileEntry);
 	}
 		
