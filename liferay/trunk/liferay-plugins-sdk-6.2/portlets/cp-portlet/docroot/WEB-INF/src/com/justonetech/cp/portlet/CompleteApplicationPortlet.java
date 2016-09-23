@@ -94,7 +94,7 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 					zzjgdm = Validator.isNull(user) ? "" : user.getScreenName();
 				}
 			}
-		} catch (SystemException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -109,8 +109,11 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 		int end = delta * cur;
 		List<Complete> completes = Collections.emptyList();
 		int completesCount = 0;
-		completes = CompleteLocalServiceUtil.getCompletes(zzjgdm, bjbh, wssqbh, gcmc, status, start, end);
-		completesCount = CompleteLocalServiceUtil.getCompletesCount(zzjgdm, bjbh, wssqbh, gcmc, status);
+		
+		String gs = "";
+		
+		completes = CompleteLocalServiceUtil.getCompletes(zzjgdm, bjbh, wssqbh, gcmc, status, gs, start, end);
+		completesCount = CompleteLocalServiceUtil.getCompletesCount(zzjgdm, bjbh, wssqbh, gcmc, status, gs);
 		renderRequest.setAttribute("zzjgdm", zzjgdm);
 		renderRequest.setAttribute("bjbh", bjbh);
 		renderRequest.setAttribute("wssqbh", wssqbh);
@@ -147,7 +150,7 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 						zzjgdm = Validator.isNull(user) ? "" : user.getScreenName();
 					}
 				}
-			} catch (SystemException e) {
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
