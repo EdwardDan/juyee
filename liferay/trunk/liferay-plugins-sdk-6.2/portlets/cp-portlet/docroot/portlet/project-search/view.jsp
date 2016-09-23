@@ -11,7 +11,6 @@
 	<liferay-portlet:param name="bjrqEnd" value="${bjrqEndStr }" />
 	<liferay-portlet:param name="bjwcbj" value="${bjwcbj }" />
 	<liferay-portlet:param name="delta" value="${delta }" />
-	<liferay-portlet:param name="cur" value="${cur }" />
 </liferay-portlet:renderURL>
 <liferay-ui:panel-container accordion="false" extended="true">
 	<liferay-ui:panel title="查询条件" collapsible="true">
