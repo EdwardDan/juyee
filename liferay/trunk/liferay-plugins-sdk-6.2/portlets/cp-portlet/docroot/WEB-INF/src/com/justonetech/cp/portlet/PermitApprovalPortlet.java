@@ -53,7 +53,7 @@ import com.lowagie.text.pdf.PdfStamper;
  */
 public class PermitApprovalPortlet extends MVCPortlet {
 	private ExcelPrintManager excelPrintManager;
-	
+
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
 		// TODO Auto-generated method stub
@@ -61,7 +61,8 @@ public class PermitApprovalPortlet extends MVCPortlet {
 	}
 
 	// 保存收件sj
-	public void saveSj(ActionRequest request, ActionResponse response) throws PortalException, SystemException, IOException {
+	public void saveSj(ActionRequest request, ActionResponse response) throws PortalException, SystemException,
+			IOException {
 		long permitId = ParamUtil.getLong(request, "permitId");
 		Permit permit = PermitLocalServiceUtil.getPermit(permitId);
 		String slbh = ParamUtil.getString(request, "slbh");
@@ -145,8 +146,8 @@ public class PermitApprovalPortlet extends MVCPortlet {
 	}
 
 	// 施工许可
-	public void sgxk(ActionRequest request, ActionResponse response) throws PortalException, SystemException, IOException, DocumentException,
-			com.lowagie.text.DocumentException {
+	public void sgxk(ActionRequest request, ActionResponse response) throws PortalException, SystemException,
+			IOException, DocumentException, com.lowagie.text.DocumentException {
 		long permitId = ParamUtil.getLong(request, "permitId");
 		ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
 		String xmlx = DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx()).getName();
@@ -157,8 +158,8 @@ public class PermitApprovalPortlet extends MVCPortlet {
 	}
 
 	// 施工许可(绿色)
-	public void sgxkls(ActionRequest request, ActionResponse response) throws PortalException, SystemException, IOException, DocumentException,
-			com.lowagie.text.DocumentException {
+	public void sgxkls(ActionRequest request, ActionResponse response) throws PortalException, SystemException,
+			IOException, DocumentException, com.lowagie.text.DocumentException {
 		long permitId = ParamUtil.getLong(request, "permitId");
 		ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
 		String xmlx = DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx()).getName();
@@ -169,8 +170,9 @@ public class PermitApprovalPortlet extends MVCPortlet {
 	}
 
 	// 生成许可证pdf
-	public void fillTemplate(ActionRequest request, ActionResponse response, DLFileEntry fileEntry, String newPDFPath, Map<String, String> map)
-			throws IOException, DocumentException, PortalException, SystemException, com.lowagie.text.DocumentException {
+	public void fillTemplate(ActionRequest request, ActionResponse response, DLFileEntry fileEntry, String newPDFPath,
+			Map<String, String> map) throws IOException, DocumentException, PortalException, SystemException,
+			com.lowagie.text.DocumentException {
 		long permitId = ParamUtil.getLong(request, "permitId");
 		Permit permit = PermitLocalServiceUtil.getPermit(permitId);
 		ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
@@ -201,8 +203,8 @@ public class PermitApprovalPortlet extends MVCPortlet {
 		ServiceContext serviceContext = new ServiceContext();
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setIndexingEnabled(true);
-		DLAppLocalServiceUtil.addFileEntry(20199, 20195, 28426, file.getName(), "application/pdf", permit.getSgxkzbh(), null,
-				null, file, serviceContext);
+		DLAppLocalServiceUtil.addFileEntry(20199, 20195, 28426, file.getName(), "application/pdf", permit.getSgxkzbh(),
+				null, null, file, serviceContext);
 	}
 
 	public Map<String, String> getMap(long permitId, String xmlx) throws PortalException, SystemException {
@@ -264,61 +266,60 @@ public class PermitApprovalPortlet extends MVCPortlet {
 		map.put("bz", bz);
 		return map;
 	}
-	
+
 	// 导出excel
-		public void sgxkExcel(ActionRequest actionRequest, ActionResponse actionResponse) throws PortalException,
-				SystemException, IOException {
-			long permitId = ParamUtil.getLong(actionRequest, "permitId");
-			Permit permit = PermitLocalServiceUtil.getPermit(permitId);
-			ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
-			String xmlx = DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx()).getName();
-			Map<String, Object> map = new HashMap<String, Object>();
-			String fileName = xmlx + "施工许可证.xls";
-			String title = "上海市(" + xmlx + "(工程施工许可证";
-			String titleFl = "";
-			if (xmlx.equals("港口")) {
-				titleFl = "根据《中华人民共和国港口法》等相关法律规定，经审查，本工程符合施工条件，准予施工。";
-			} else if (xmlx.equals("公路")) {
-				titleFl = "根据《中华人民共和国公路法》等相关法律规定，经审查，本工程符合施工条件，准予施工。";
-			} else {
-				titleFl = "根据《中华人民共和国交通建设法》等相关法律规定，经审查，本工程符合施工条件，准予施工。";
-			}
-			map.put("title", title);
-			map.put("titleFl", titleFl);
-			map.put("permit", permit);
-			map.put("projectProfile", projectProfile);
-			System.out.println("===================" + Permit.class.getSimpleName());
-			excelPrintManager.printExcel(PortalUtil.getHttpServletResponse(actionResponse),
-					PortalUtil.getHttpServletRequest(actionRequest), Permit.class.getSimpleName(), "施工许可绿色证书.xls", map,
-					fileName);
+	public void sgxkExcel(ActionRequest actionRequest, ActionResponse actionResponse) throws PortalException,
+			SystemException, IOException {
+		long permitId = ParamUtil.getLong(actionRequest, "permitId");
+		Permit permit = PermitLocalServiceUtil.getPermit(permitId);
+		ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
+		String xmlx = DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx()).getName();
+		Map<String, Object> map = new HashMap<String, Object>();
+		String fileName = xmlx + "施工许可证.xls";
+		String title = "上海市(" + xmlx + "(工程施工许可证";
+		String titleFl = "";
+		if (xmlx.equals("港口")) {
+			titleFl = "根据《中华人民共和国港口法》等相关法律规定，经审查，本工程符合施工条件，准予施工。";
+		} else if (xmlx.equals("公路")) {
+			titleFl = "根据《中华人民共和国公路法》等相关法律规定，经审查，本工程符合施工条件，准予施工。";
+		} else {
+			titleFl = "根据《中华人民共和国交通建设法》等相关法律规定，经审查，本工程符合施工条件，准予施工。";
 		}
+		map.put("title", title);
+		map.put("titleFl", titleFl);
+		map.put("permit", permit);
+		map.put("projectProfile", projectProfile);
+		System.out.println("===================" + Permit.class.getSimpleName());
+		excelPrintManager.printExcel(PortalUtil.getHttpServletResponse(actionResponse),
+				PortalUtil.getHttpServletRequest(actionRequest), Permit.class.getSimpleName(), "施工许可绿色证书.xls", map,
+				fileName);
+	}
 
-		public void sgxklsExcel(ActionRequest request, ActionResponse response) {
+	public void sgxklsExcel(ActionRequest request, ActionResponse response) {
 
-		}
+	}
 
-		public void kgbaExcel(ActionRequest request, ActionResponse response) {
+	public void kgbaExcel(ActionRequest request, ActionResponse response) {
 
-		}
+	}
 
-	
-	public void provideSgxkzbh(long permitId) throws PortalException, SystemException{
-		String sgxkzbh = "JT";//JT
+	public void provideSgxkzbh(long permitId) throws PortalException, SystemException {
+		String sgxkzbh = "JT";// JT
 		Permit permit1 = PermitLocalServiceUtil.getPermit(permitId);
-		sgxkzbh = sgxkzbh + permit1.getBjbh() + permit1.getBdh();//报建编号+标段号
+		sgxkzbh = sgxkzbh + permit1.getBjbh() + permit1.getBdh();// 报建编号+标段号
 		Locale locale = LocaleUtil.getDefault();
 		String currentDate = DateUtil.getCurrentDate("yyyy-MM-dd", locale);
 		String currentDateStr = currentDate.substring(2, 4);
-		sgxkzbh = sgxkzbh + currentDateStr;//两位年份
+		sgxkzbh = sgxkzbh + currentDateStr;// 两位年份
 		ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
 		Dictionary xmlx = DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx());
-		sgxkzbh = sgxkzbh + xmlx.getCode();//类别
-		
+		sgxkzbh = sgxkzbh + xmlx.getCode();// 类别
+
 		List<Permit> permits = PermitLocalServiceUtil.getPermits(-1, -1);
 		int num = 1;
-		for(Permit permit2:permits){
+		for (Permit permit2 : permits) {
 			String bjbh = permit2.getSgxkzbh().substring(2, 12);
-			if(bjbh.equals(permit1.getBjbh())){
+			if (bjbh.equals(permit1.getBjbh())) {
 				num++;
 			}
 		}
