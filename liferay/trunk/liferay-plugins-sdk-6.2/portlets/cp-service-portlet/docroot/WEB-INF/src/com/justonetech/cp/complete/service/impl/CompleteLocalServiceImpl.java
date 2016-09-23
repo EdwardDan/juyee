@@ -100,7 +100,7 @@ public class CompleteLocalServiceImpl extends CompleteLocalServiceBaseImpl {
 
 		if(gs.equals("市属")){
 			if (status > 0) {
-				dynamicQuery.add(PropertyFactoryUtil.forName("sqbz").eq(status));
+				dynamicQuery.add(PropertyFactoryUtil.forName("status").eq(status));
 			}
 		}else if(gs.equals("区属")){
 			if (status > 0) {
@@ -114,6 +114,10 @@ public class CompleteLocalServiceImpl extends CompleteLocalServiceBaseImpl {
 				completeProjectProfileDQ.setProjection(ProjectionFactoryUtil.property("completeId"));
 				completeProjectProfileDQ.add(PropertyFactoryUtil.forName("lxjb").like("%区县级机关或区县级单位%"));
 				dynamicQuery.add(PropertyFactoryUtil.forName("completeId").in(completeProjectProfileDQ));
+			}
+		}else{
+			if (status > 0) {
+				dynamicQuery.add(PropertyFactoryUtil.forName("status").eq(status));
 			}
 		}
 		return dynamicQuery;
