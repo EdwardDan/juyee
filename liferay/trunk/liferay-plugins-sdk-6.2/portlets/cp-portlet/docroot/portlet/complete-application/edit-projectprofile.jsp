@@ -63,6 +63,19 @@
 					%>
 				</aui:select></td>
 		</tr>
+			<tr class="body">
+		<td class="text-right">立项级别</td>
+			<td class="bg-white"><aui:input name="lxjb" label=""
+					type="text" cssClass="span12" value="${project.lxjb}"
+					readonly="true">
+				</aui:input></td>
+				<td class="text-right">所在区县</td>
+			<td class="bg-white"><aui:input name="szqx" label=""
+					type="text" cssClass="span12" value="${project.szqx}"
+					readonly="true">
+				</aui:input></td>
+		</tr>
+		
 		<tr class="body">
 			<td class="text-right">工程名称</td>
 			<td class="bg-white" colspan="3"><aui:input name="gcmc" label=""
@@ -86,15 +99,9 @@
 		</tr>
 		<tr>
 			<td class="text-right">建设地点</td>
-			<td class="bg-white"><aui:input name="jsdd" label="" type="text"
+			<td class="bg-white" colspan="3"><aui:input name="jsdd" label="" type="text"
 					cssClass="span12" value="${project.jsdd}" readonly="true"></aui:input>
 			</td>
-
-			<td class="text-right">所在区县</td>
-			<td class="bg-white"><aui:input name="szqx" label=""
-					type="text" cssClass="span12" value="${project.szqx}"
-					readonly="true">
-				</aui:input></td>
 		</tr>
 		<tr class="body">
 			<td class="text-right">法定代表人</td>

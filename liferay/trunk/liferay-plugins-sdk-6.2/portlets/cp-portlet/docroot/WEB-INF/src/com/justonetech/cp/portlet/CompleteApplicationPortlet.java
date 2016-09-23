@@ -240,6 +240,7 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 		String lxr = ParamUtil.getString(request, "lxr");
 		String lxdh = ParamUtil.getString(request, "lxdh");
 		String bz = ParamUtil.getString(request, "bz");
+		String lxjb = ParamUtil.getString(request, "lxjb");
 		String zzjgdm = "";
 		User user = null;
 		try {
@@ -279,6 +280,7 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 		complete.setSbrq(now);
 		complete.setStatus(CompleteStatus.STATUS_EDIT.getCode());
 		completeProjectProfile.setBjbh(bjbh);
+		completeProjectProfile.setLxjb(lxjb);
 		completeProjectProfile.setXmlx(xmlx);
 		completeProjectProfile.setJsgcsx(jsgcsx);
 		completeProjectProfile.setGcmc(gcmc);
@@ -569,10 +571,13 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 		complete.setSqbz(0);
 		complete.setStatus(CompleteStatus.STATUS_SB.getCode());
 		CompleteLocalServiceUtil.updateComplete(complete);
-
+		
 		try {
 			User user = PortalUtil.getUser(request);
-			Role aRole = RoleLocalServiceUtil.fetchRole(user.getCompanyId(), "竣工备案审核");
+			Role aRole =null;
+//			if(completeProjectProfile.getLxjb)
+			 aRole = RoleLocalServiceUtil.fetchRole(user.getCompanyId(), "市竣工备案审核");
+			 aRole = RoleLocalServiceUtil.fetchRole(user.getCompanyId(), "区竣工备案审核");
 			long[] userIds = UserLocalServiceUtil.getRoleUserIds(aRole.getRoleId());
 			List<User> users = new ArrayList<User>();
 			for (long useId : userIds) {
