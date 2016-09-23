@@ -30,9 +30,11 @@ public class ProvideSgxkzbh {
 		List<Permit> permits = PermitLocalServiceUtil.getPermits(-1, -1);
 		int num = 1;
 		for(Permit permit2:permits){
-			String bjbh = permit2.getSgxkzbh().substring(2, 12);
-			if(bjbh.equals(permit1.getBjbh())){
-				num++;
+			if(permit2.getSgxkzbh()!=null&&permit2.getSgxkzbh()!=""){
+				String bjbh = permit2.getSgxkzbh().substring(2, 12);
+				if(bjbh.equals(permit1.getBjbh())){
+					num++;
+				}
 			}
 		}
 		if (num / 10 < 1) {
