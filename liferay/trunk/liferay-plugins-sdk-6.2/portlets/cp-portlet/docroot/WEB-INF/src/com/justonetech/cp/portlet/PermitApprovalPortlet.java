@@ -197,7 +197,7 @@ public class PermitApprovalPortlet extends MVCPortlet {
 		ServiceContext serviceContext = new ServiceContext();
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setIndexingEnabled(true);
-		DLAppLocalServiceUtil.addFileEntry(20199, 20195, 28426, file.getName(), "application/pdf", CounterLocalServiceUtil.increment() + "", null,
+		DLAppLocalServiceUtil.addFileEntry(20199, 20195, 28426, file.getName(), "application/pdf", permit.getSgxkzbh(), null,
 				null, file, serviceContext);
 	}
 
@@ -206,7 +206,7 @@ public class PermitApprovalPortlet extends MVCPortlet {
 		Permit permit = PermitLocalServiceUtil.getPermit(permitId);
 		ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
 		String title = "上海市(" + xmlx + ")工程施工许可证";
-		String bh = permit.getYwbh();
+		String bh = permit.getSgxkzbh();
 		String gj = "";
 		if (xmlx.equals("港口")) {
 			gj = "根据《中华人民共和国港口法》等相关法律规定，经审查，本工程符合施工条件，准予施工。";
