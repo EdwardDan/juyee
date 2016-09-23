@@ -56,6 +56,7 @@ public class ApplyMaterialWrapper implements ApplyMaterial,
 		attributes.put("yjfs", getYjfs());
 		attributes.put("sjfs", getSjfs());
 		attributes.put("fileEntryIds", getFileEntryIds());
+		attributes.put("bzclIds", getBzclIds());
 		attributes.put("shyq", getShyq());
 		attributes.put("csyj", getCsyj());
 		attributes.put("fhyj", getFhyj());
@@ -106,6 +107,12 @@ public class ApplyMaterialWrapper implements ApplyMaterial,
 
 		if (fileEntryIds != null) {
 			setFileEntryIds(fileEntryIds);
+		}
+
+		String bzclIds = (String)attributes.get("bzclIds");
+
+		if (bzclIds != null) {
+			setBzclIds(bzclIds);
 		}
 
 		String shyq = (String)attributes.get("shyq");
@@ -291,6 +298,26 @@ public class ApplyMaterialWrapper implements ApplyMaterial,
 	@Override
 	public void setFileEntryIds(java.lang.String fileEntryIds) {
 		_applyMaterial.setFileEntryIds(fileEntryIds);
+	}
+
+	/**
+	* Returns the bzcl IDs of this apply material.
+	*
+	* @return the bzcl IDs of this apply material
+	*/
+	@Override
+	public java.lang.String getBzclIds() {
+		return _applyMaterial.getBzclIds();
+	}
+
+	/**
+	* Sets the bzcl IDs of this apply material.
+	*
+	* @param bzclIds the bzcl IDs of this apply material
+	*/
+	@Override
+	public void setBzclIds(java.lang.String bzclIds) {
+		_applyMaterial.setBzclIds(bzclIds);
 	}
 
 	/**

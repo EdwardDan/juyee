@@ -159,6 +159,21 @@ public interface ApplyMaterialModel extends BaseModel<ApplyMaterial> {
 	public void setFileEntryIds(String fileEntryIds);
 
 	/**
+	 * Returns the bzcl IDs of this apply material.
+	 *
+	 * @return the bzcl IDs of this apply material
+	 */
+	@AutoEscape
+	public String getBzclIds();
+
+	/**
+	 * Sets the bzcl IDs of this apply material.
+	 *
+	 * @param bzclIds the bzcl IDs of this apply material
+	 */
+	public void setBzclIds(String bzclIds);
+
+	/**
 	 * Returns the shyq of this apply material.
 	 *
 	 * @return the shyq of this apply material

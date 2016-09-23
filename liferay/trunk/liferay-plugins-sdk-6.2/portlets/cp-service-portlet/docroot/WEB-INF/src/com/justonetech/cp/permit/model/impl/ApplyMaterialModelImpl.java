@@ -65,12 +65,13 @@ public class ApplyMaterialModelImpl extends BaseModelImpl<ApplyMaterial>
 			{ "yjfs", Types.INTEGER },
 			{ "sjfs", Types.INTEGER },
 			{ "fileEntryIds", Types.VARCHAR },
+			{ "bzclIds", Types.VARCHAR },
 			{ "shyq", Types.VARCHAR },
 			{ "csyj", Types.VARCHAR },
 			{ "fhyj", Types.VARCHAR },
 			{ "shyj", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table cp_ApplyMaterial (materialId LONG not null primary key,permitId LONG,xh VARCHAR(75) null,clmc VARCHAR(75) null,yjfs INTEGER,sjfs INTEGER,fileEntryIds VARCHAR(500) null,shyq VARCHAR(75) null,csyj VARCHAR(75) null,fhyj VARCHAR(75) null,shyj VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table cp_ApplyMaterial (materialId LONG not null primary key,permitId LONG,xh VARCHAR(75) null,clmc VARCHAR(75) null,yjfs INTEGER,sjfs INTEGER,fileEntryIds VARCHAR(500) null,bzclIds VARCHAR(75) null,shyq VARCHAR(75) null,csyj VARCHAR(75) null,fhyj VARCHAR(75) null,shyj VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table cp_ApplyMaterial";
 	public static final String ORDER_BY_JPQL = " ORDER BY applyMaterial.materialId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY cp_ApplyMaterial.materialId ASC";
@@ -135,6 +136,7 @@ public class ApplyMaterialModelImpl extends BaseModelImpl<ApplyMaterial>
 		attributes.put("yjfs", getYjfs());
 		attributes.put("sjfs", getSjfs());
 		attributes.put("fileEntryIds", getFileEntryIds());
+		attributes.put("bzclIds", getBzclIds());
 		attributes.put("shyq", getShyq());
 		attributes.put("csyj", getCsyj());
 		attributes.put("fhyj", getFhyj());
@@ -185,6 +187,12 @@ public class ApplyMaterialModelImpl extends BaseModelImpl<ApplyMaterial>
 
 		if (fileEntryIds != null) {
 			setFileEntryIds(fileEntryIds);
+		}
+
+		String bzclIds = (String)attributes.get("bzclIds");
+
+		if (bzclIds != null) {
+			setBzclIds(bzclIds);
 		}
 
 		String shyq = (String)attributes.get("shyq");
@@ -312,6 +320,21 @@ public class ApplyMaterialModelImpl extends BaseModelImpl<ApplyMaterial>
 	}
 
 	@Override
+	public String getBzclIds() {
+		if (_bzclIds == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _bzclIds;
+		}
+	}
+
+	@Override
+	public void setBzclIds(String bzclIds) {
+		_bzclIds = bzclIds;
+	}
+
+	@Override
 	public String getShyq() {
 		if (_shyq == null) {
 			return StringPool.BLANK;
@@ -409,6 +432,7 @@ public class ApplyMaterialModelImpl extends BaseModelImpl<ApplyMaterial>
 		applyMaterialImpl.setYjfs(getYjfs());
 		applyMaterialImpl.setSjfs(getSjfs());
 		applyMaterialImpl.setFileEntryIds(getFileEntryIds());
+		applyMaterialImpl.setBzclIds(getBzclIds());
 		applyMaterialImpl.setShyq(getShyq());
 		applyMaterialImpl.setCsyj(getCsyj());
 		applyMaterialImpl.setFhyj(getFhyj());
@@ -514,6 +538,14 @@ public class ApplyMaterialModelImpl extends BaseModelImpl<ApplyMaterial>
 			applyMaterialCacheModel.fileEntryIds = null;
 		}
 
+		applyMaterialCacheModel.bzclIds = getBzclIds();
+
+		String bzclIds = applyMaterialCacheModel.bzclIds;
+
+		if ((bzclIds != null) && (bzclIds.length() == 0)) {
+			applyMaterialCacheModel.bzclIds = null;
+		}
+
 		applyMaterialCacheModel.shyq = getShyq();
 
 		String shyq = applyMaterialCacheModel.shyq;
@@ -551,7 +583,7 @@ public class ApplyMaterialModelImpl extends BaseModelImpl<ApplyMaterial>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(23);
+		StringBundler sb = new StringBundler(25);
 
 		sb.append("{materialId=");
 		sb.append(getMaterialId());
@@ -567,6 +599,8 @@ public class ApplyMaterialModelImpl extends BaseModelImpl<ApplyMaterial>
 		sb.append(getSjfs());
 		sb.append(", fileEntryIds=");
 		sb.append(getFileEntryIds());
+		sb.append(", bzclIds=");
+		sb.append(getBzclIds());
 		sb.append(", shyq=");
 		sb.append(getShyq());
 		sb.append(", csyj=");
@@ -582,7 +616,7 @@ public class ApplyMaterialModelImpl extends BaseModelImpl<ApplyMaterial>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(40);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.cp.permit.model.ApplyMaterial");
@@ -615,6 +649,10 @@ public class ApplyMaterialModelImpl extends BaseModelImpl<ApplyMaterial>
 		sb.append(
 			"<column><column-name>fileEntryIds</column-name><column-value><![CDATA[");
 		sb.append(getFileEntryIds());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>bzclIds</column-name><column-value><![CDATA[");
+		sb.append(getBzclIds());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>shyq</column-name><column-value><![CDATA[");
@@ -651,6 +689,7 @@ public class ApplyMaterialModelImpl extends BaseModelImpl<ApplyMaterial>
 	private int _yjfs;
 	private int _sjfs;
 	private String _fileEntryIds;
+	private String _bzclIds;
 	private String _shyq;
 	private String _csyj;
 	private String _fhyj;

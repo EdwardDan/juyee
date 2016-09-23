@@ -295,6 +295,7 @@
 		<field name="fileEntryIds" type="String">
 			<hint name="max-length">500</hint>
 		</field>
+		<field name="bzclIds" type="String" />
 		<field name="shyq" type="String" />
 		<field name="csyj" type="String" />
 		<field name="fhyj" type="String" />

@@ -278,6 +278,7 @@
 			<basic name="yjfs" />
 			<basic name="sjfs" />
 			<basic name="fileEntryIds" />
+			<basic name="bzclIds" />
 			<basic name="shyq" />
 			<basic name="csyj" />
 			<basic name="fhyj" />
