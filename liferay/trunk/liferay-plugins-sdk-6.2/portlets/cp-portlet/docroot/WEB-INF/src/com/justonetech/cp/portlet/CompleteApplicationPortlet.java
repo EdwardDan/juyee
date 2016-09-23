@@ -576,9 +576,11 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 		try {
 			User user = PortalUtil.getUser(request);
 			Role aRole =null;
-//			if(completeProjectProfile.getLxjb)
-			 aRole = RoleLocalServiceUtil.fetchRole(user.getCompanyId(), "市竣工备案审核");
-			 aRole = RoleLocalServiceUtil.fetchRole(user.getCompanyId(), "区竣工备案审核");
+			if(completeProjectProfile.getLxjb().equals("区县级机关或区县级单位")){
+				 aRole = RoleLocalServiceUtil.fetchRole(user.getCompanyId(), "区竣工备案审核");
+			}else{
+				aRole = RoleLocalServiceUtil.fetchRole(user.getCompanyId(), "市竣工备案审核");
+			}
 			long[] userIds = UserLocalServiceUtil.getRoleUserIds(aRole.getRoleId());
 			List<User> users = new ArrayList<User>();
 			for (long useId : userIds) {
