@@ -42,8 +42,9 @@ tr.body td.content {
 	int cur = ParamUtil.getInteger(renderRequest, "cur", 1);
 	int start = delta * (cur - 1);
 	int end = delta * cur;
-	List<Complete> completes = CompleteLocalServiceUtil.getCompletes(zzjgdm, bjbh, wssqbh, gcmc, status, start, end);
-	int completesCount = CompleteLocalServiceUtil.getCompletesCount(zzjgdm, bjbh, wssqbh, gcmc, status);
+	String gs = "";
+	List<Complete> completes = CompleteLocalServiceUtil.getCompletes(zzjgdm, bjbh, wssqbh, gcmc, status, gs, start, end);
+	int completesCount = CompleteLocalServiceUtil.getCompletesCount(zzjgdm, bjbh, wssqbh, gcmc, status, gs);
 	request.setAttribute("completes", completes);
 	request.setAttribute("completesCount", completesCount);
 	request.setAttribute("delta", delta);
