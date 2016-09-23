@@ -77,6 +77,7 @@ public class PermitWrapper implements Permit, ModelWrapper<Permit> {
 		attributes.put("sjrlxdh", getSjrlxdh());
 		attributes.put("slyj", getSlyj());
 		attributes.put("slsj", getSlsj());
+		attributes.put("sgxkzFileEntryId", getSgxkzFileEntryId());
 		attributes.put("title", getTitle());
 		attributes.put("content", getContent());
 		attributes.put("statusByUserId", getStatusByUserId());
@@ -254,6 +255,12 @@ public class PermitWrapper implements Permit, ModelWrapper<Permit> {
 
 		if (slsj != null) {
 			setSlsj(slsj);
+		}
+
+		Long sgxkzFileEntryId = (Long)attributes.get("sgxkzFileEntryId");
+
+		if (sgxkzFileEntryId != null) {
+			setSgxkzFileEntryId(sgxkzFileEntryId);
 		}
 
 		String title = (String)attributes.get("title");
@@ -887,6 +894,26 @@ public class PermitWrapper implements Permit, ModelWrapper<Permit> {
 	@Override
 	public void setSlsj(java.lang.String slsj) {
 		_permit.setSlsj(slsj);
+	}
+
+	/**
+	* Returns the sgxkz file entry ID of this permit.
+	*
+	* @return the sgxkz file entry ID of this permit
+	*/
+	@Override
+	public long getSgxkzFileEntryId() {
+		return _permit.getSgxkzFileEntryId();
+	}
+
+	/**
+	* Sets the sgxkz file entry ID of this permit.
+	*
+	* @param sgxkzFileEntryId the sgxkz file entry ID of this permit
+	*/
+	@Override
+	public void setSgxkzFileEntryId(long sgxkzFileEntryId) {
+		_permit.setSgxkzFileEntryId(sgxkzFileEntryId);
 	}
 
 	/**

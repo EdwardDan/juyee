@@ -58,6 +58,7 @@ public class PermitSoap implements Serializable {
 		soapModel.setSjrlxdh(model.getSjrlxdh());
 		soapModel.setSlyj(model.getSlyj());
 		soapModel.setSlsj(model.getSlsj());
+		soapModel.setSgxkzFileEntryId(model.getSgxkzFileEntryId());
 		soapModel.setTitle(model.getTitle());
 		soapModel.setContent(model.getContent());
 		soapModel.setStatusByUserId(model.getStatusByUserId());
@@ -339,6 +340,14 @@ public class PermitSoap implements Serializable {
 		_slsj = slsj;
 	}
 
+	public long getSgxkzFileEntryId() {
+		return _sgxkzFileEntryId;
+	}
+
+	public void setSgxkzFileEntryId(long sgxkzFileEntryId) {
+		_sgxkzFileEntryId = sgxkzFileEntryId;
+	}
+
 	public String getTitle() {
 		return _title;
 	}
@@ -407,6 +416,7 @@ public class PermitSoap implements Serializable {
 	private String _sjrlxdh;
 	private String _slyj;
 	private String _slsj;
+	private long _sgxkzFileEntryId;
 	private String _title;
 	private String _content;
 	private long _statusByUserId;

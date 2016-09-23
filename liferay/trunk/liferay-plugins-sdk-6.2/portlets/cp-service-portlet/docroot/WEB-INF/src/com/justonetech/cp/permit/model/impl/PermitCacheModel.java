@@ -37,7 +37,7 @@ import java.util.Date;
 public class PermitCacheModel implements CacheModel<Permit>, Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(67);
+		StringBundler sb = new StringBundler(69);
 
 		sb.append("{permitId=");
 		sb.append(permitId);
@@ -95,6 +95,8 @@ public class PermitCacheModel implements CacheModel<Permit>, Externalizable {
 		sb.append(slyj);
 		sb.append(", slsj=");
 		sb.append(slsj);
+		sb.append(", sgxkzFileEntryId=");
+		sb.append(sgxkzFileEntryId);
 		sb.append(", title=");
 		sb.append(title);
 		sb.append(", content=");
@@ -265,6 +267,8 @@ public class PermitCacheModel implements CacheModel<Permit>, Externalizable {
 			permitImpl.setSlsj(slsj);
 		}
 
+		permitImpl.setSgxkzFileEntryId(sgxkzFileEntryId);
+
 		if (title == null) {
 			permitImpl.setTitle(StringPool.BLANK);
 		}
@@ -330,6 +334,7 @@ public class PermitCacheModel implements CacheModel<Permit>, Externalizable {
 		sjrlxdh = objectInput.readUTF();
 		slyj = objectInput.readUTF();
 		slsj = objectInput.readUTF();
+		sgxkzFileEntryId = objectInput.readLong();
 		title = objectInput.readUTF();
 		content = objectInput.readUTF();
 		statusByUserId = objectInput.readLong();
@@ -480,6 +485,8 @@ public class PermitCacheModel implements CacheModel<Permit>, Externalizable {
 			objectOutput.writeUTF(slsj);
 		}
 
+		objectOutput.writeLong(sgxkzFileEntryId);
+
 		if (title == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
@@ -534,6 +541,7 @@ public class PermitCacheModel implements CacheModel<Permit>, Externalizable {
 	public String sjrlxdh;
 	public String slyj;
 	public String slsj;
+	public long sgxkzFileEntryId;
 	public String title;
 	public String content;
 	public long statusByUserId;

@@ -895,6 +895,7 @@ public class PermitPersistenceImpl extends BasePersistenceImpl<Permit>
 		permitImpl.setSjrlxdh(permit.getSjrlxdh());
 		permitImpl.setSlyj(permit.getSlyj());
 		permitImpl.setSlsj(permit.getSlsj());
+		permitImpl.setSgxkzFileEntryId(permit.getSgxkzFileEntryId());
 		permitImpl.setTitle(permit.getTitle());
 		permitImpl.setContent(permit.getContent());
 		permitImpl.setStatusByUserId(permit.getStatusByUserId());

@@ -191,6 +191,7 @@ create table cp_Permit (
 	sjrlxdh VARCHAR(75) null,
 	slyj VARCHAR(75) null,
 	slsj VARCHAR(75) null,
+	sgxkzFileEntryId LONG,
 	title VARCHAR(200) null,
 	content VARCHAR(1000) null,
 	statusByUserId LONG,

@@ -505,6 +505,20 @@ public interface PermitModel extends BaseModel<Permit>, GroupedModel,
 	public void setSlsj(String slsj);
 
 	/**
+	 * Returns the sgxkz file entry ID of this permit.
+	 *
+	 * @return the sgxkz file entry ID of this permit
+	 */
+	public long getSgxkzFileEntryId();
+
+	/**
+	 * Sets the sgxkz file entry ID of this permit.
+	 *
+	 * @param sgxkzFileEntryId the sgxkz file entry ID of this permit
+	 */
+	public void setSgxkzFileEntryId(long sgxkzFileEntryId);
+
+	/**
 	 * Returns the title of this permit.
 	 *
 	 * @return the title of this permit
