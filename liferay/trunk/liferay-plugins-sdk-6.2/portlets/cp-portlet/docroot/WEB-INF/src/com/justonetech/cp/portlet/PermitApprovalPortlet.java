@@ -261,17 +261,17 @@ public class PermitApprovalPortlet extends MVCPortlet {
 		return map;
 	}
 	
-	public static void provideSgxkzbh(long permitId) throws PortalException, SystemException{
-		String ywbh = "JT";//JT
+	public void provideSgxkzbh(long permitId) throws PortalException, SystemException{
+		String sgxkzbh = "JT";//JT
 		Permit permit1 = PermitLocalServiceUtil.getPermit(permitId);
-		ywbh = ywbh + permit1.getBjbh() + permit1.getBdh();//报建编号+标段号
+		sgxkzbh = sgxkzbh + permit1.getBjbh() + permit1.getBdh();//报建编号+标段号
 		Locale locale = LocaleUtil.getDefault();
 		String currentDate = DateUtil.getCurrentDate("yyyy-MM-dd", locale);
 		String currentDateStr = currentDate.substring(2, 4);
-		ywbh = ywbh + currentDateStr;//两位年份
+		sgxkzbh = sgxkzbh + currentDateStr;//两位年份
 		ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
 		Dictionary xmlx = DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx());
-		ywbh = ywbh + xmlx.getCode();//类别
+		sgxkzbh = sgxkzbh + xmlx.getCode();//类别
 		
 		List<Permit> permits = PermitLocalServiceUtil.getPermits(-1, -1);
 		int num = 1;
@@ -282,11 +282,13 @@ public class PermitApprovalPortlet extends MVCPortlet {
 			}
 		}
 		if (num / 10 < 1) {
-			ywbh = ywbh + "00" + num;
+			sgxkzbh = sgxkzbh + "00" + num;
 		} else if (num / 100 < 1) {
-			ywbh = ywbh + "0" + num;
+			sgxkzbh = sgxkzbh + "0" + num;
 		} else if (num / 1000 < 1) {
-			ywbh = ywbh + num;
+			sgxkzbh = sgxkzbh + num;
 		}
+		permit1.setSgxkzbh(sgxkzbh);
+		PermitLocalServiceUtil.updatePermit(permit1);
 	}
 }
