@@ -64,7 +64,6 @@ tr.body td.content {
 	<liferay-portlet:param name="xmlx" value="${xmlx }" />
 	<liferay-portlet:param name="jsdw" value="${jsdw }" />
 	<liferay-portlet:param name="delta" value="${delta }" />
-	<liferay-portlet:param name="cur" value="${cur }" />
 </portlet:renderURL>
 <c:set var="contextPath" value="${request.contextPath}/portlet/permit-approval" />
 <liferay-ui:panel-container accordion="false" extended="true">
