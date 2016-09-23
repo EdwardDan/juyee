@@ -5,10 +5,13 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -73,6 +76,7 @@ import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 public class CompleteApplicationPortlet extends MVCPortlet {
 	private static Log log = LogFactoryUtil.getLog(CompleteApplicationPortlet.class);
@@ -576,15 +580,29 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 		try {
 			User user = PortalUtil.getUser(request);
 			Role aRole =null;
+			Set<Long> userIdsList=new HashSet<Long>();
+			List<User> users = new ArrayList<User>();
+			long[] userIds =null;
 			if(completeProjectProfile.getLxjb().equals("区县级机关或区县级单位")){
 				 aRole = RoleLocalServiceUtil.fetchRole(user.getCompanyId(), "区竣工备案审核");
+				 userIds=UserLocalServiceUtil.getRoleUserIds(aRole.getRoleId());
+				 for (long useId : userIds) {
+						userIdsList.add(useId);
+					}
+				 aRole = RoleLocalServiceUtil.fetchRole(user.getCompanyId(), "市竣工备案审核");
+				 userIds=UserLocalServiceUtil.getRoleUserIds(aRole.getRoleId());
+				 for (long useId : userIds) {
+						userIdsList.add(useId);
+					}
+				 for(long userId:userIdsList){
+					 users.add(UserLocalServiceUtil.getUser(userId));
+				 }
 			}else{
 				aRole = RoleLocalServiceUtil.fetchRole(user.getCompanyId(), "市竣工备案审核");
-			}
-			long[] userIds = UserLocalServiceUtil.getRoleUserIds(aRole.getRoleId());
-			List<User> users = new ArrayList<User>();
-			for (long useId : userIds) {
-				users.add(UserLocalServiceUtil.getUser(useId));
+				 userIds = UserLocalServiceUtil.getRoleUserIds(aRole.getRoleId());
+				 for (long useId : userIds) {
+						users.add(UserLocalServiceUtil.getUser(useId));
+					}
 			}
 			ServiceContext serviceContext = ServiceContextFactory.getInstance(request);
 			JSONObject payloadJSON = JSONFactoryUtil.createJSONObject();
