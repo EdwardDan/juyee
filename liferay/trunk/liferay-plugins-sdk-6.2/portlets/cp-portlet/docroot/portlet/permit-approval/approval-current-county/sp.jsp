@@ -133,7 +133,7 @@
 	<aui:option value="（法律、法规、规章规定的其他不予受理的情形）。">（法律、法规、规章规定的其他不予受理的情形）。</aui:option>
 	</aui:select>
 </div>
-		<c:if test='<%=message.equals("通过") %>'>
+		<c:if test='<%=message.equals("通过")&&!Validator.isBlank(applyMaterials.get(0).getShyj()) %>'>
 		<liferay-ui:icon
 				cssClass='<%= "workflow-task-" + randomId + " task-change-status-link" %>'
 				id='<%= randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink" %>'
@@ -143,7 +143,7 @@
 				url="<%= url %>"
 			/>
 			</c:if>
-			<c:if test='<%=message.equals("不通过") %>'>
+			<c:if test='<%=message.equals("不通过")&&!Validator.isBlank(applyMaterials.get(0).getShyj()) %>'>
 		<liferay-ui:icon
 				cssClass='<%= "workflow-task-" + randomId + " task-change-status-link" %>'
 				id='<%= randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink2" %>'
@@ -153,7 +153,7 @@
 				url="<%= url %>"
 			/>
 			</c:if>
-			<c:if test='<%=message.equals("补正退回") %>'>
+			<c:if test='<%=message.equals("补正退回")&&!Validator.isBlank(applyMaterials.get(0).getShyj()) %>'>
 		<liferay-ui:icon
 				cssClass='<%= "workflow-task-" + randomId + " task-change-status-link" %>'
 				id='<%= randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink" %>'
@@ -163,12 +163,41 @@
 				url="<%= url %>"
 			/>
 			</c:if>
+			<c:if test='<%=message.equals("通过")&&Validator.isBlank(applyMaterials.get(0).getShyj()) %>'>
+		<liferay-ui:icon
+				cssClass='<%= "workflow-task-" + randomId + " task-change-status-link" %>'
+				id='<%= randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink" %>'
+				image="shtgx"
+				message="<%= message %>"
+				method="get"
+			/>
+			</c:if>
+			<c:if test='<%=message.equals("不通过")&&Validator.isBlank(applyMaterials.get(0).getShyj()) %>'>
+		<liferay-ui:icon
+				cssClass='<%= "workflow-task-" + randomId + " task-change-status-link" %>'
+				id='<%= randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink2" %>'
+				image="shthx"
+				message="<%= message %>"
+				method="get"
+			/>
+			</c:if>
+			<c:if test='<%=message.equals("补正退回")&&Validator.isBlank(applyMaterials.get(0).getShyj()) %>'>
+		<liferay-ui:icon
+				cssClass='<%= "workflow-task-" + randomId + " task-change-status-link" %>'
+				id='<%= randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink" %>'
+				image="bzthx"
+				message="<%= message %>"
+				method="get"
+			/>
+			</c:if>
+			<c:if test="<%=!Validator.isBlank(applyMaterials.get(0).getShyj()) %>">
 			<aui:script use="liferay-workflow-tasks">
 var onTaskClickFn = A.rbind('onTaskClick', Liferay.WorkflowTasks,'<%= randomId %>',true);
 var onTaskClickFn2 = A.rbind('onTaskClick', Liferay.WorkflowTasks,'<%= randomId %>',false);
 Liferay.delegateClick('<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(transitionName) %>taskChangeStatusLink', onTaskClickFn);
 Liferay.delegateClick('<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(transitionName) %>taskChangeStatusLink2', onTaskClickFn2);
 </aui:script>
+</c:if>
 	<%
 		    		}
 		    	}
