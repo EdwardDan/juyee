@@ -1,5 +1,7 @@
-<%@page import="com.justonetech.cp.complete.service.CompleteApplyMaterialLocalServiceUtil"%>
-<%@page import="com.justonetech.cp.complete.service.CompleteUnitProjectLocalServiceUtil"%>
+<%@page
+	import="com.justonetech.cp.complete.service.CompleteApplyMaterialLocalServiceUtil"%>
+<%@page
+	import="com.justonetech.cp.complete.service.CompleteUnitProjectLocalServiceUtil"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
 <%@ include file="init.jsp"%>
@@ -33,8 +35,8 @@
 
 
 <portlet:renderURL var="selectUnitProjectURL">
-	<portlet:param name="bjbh" value="${bjbh}"/>
-	<portlet:param name="completeId" value="${completeId}"/>
+	<portlet:param name="bjbh" value="${bjbh}" />
+	<portlet:param name="completeId" value="${completeId}" />
 	<portlet:param name="mvcPath"
 		value="${contextPath }/select-permit-unitProject.jsp" />
 </portlet:renderURL>
@@ -47,8 +49,10 @@
 	<div class="divAccordion-inner">
 		<aui:row>
 			<aui:col span="12">
-				<aui:button type="button" value="添加" class="btn" style="" href="${selectUnitProjectURL}" />
-				<aui:button type="button" value="删除" class="btn" style="" onclick="${renderResponse.namespace}changeLine(this)" />
+				<aui:button type="button" value="添加" class="btn" style=""
+					onclick="${renderResponse.namespace}renderAdd()" />
+				<aui:button type="button" value="删除" class="btn" style=""
+					onclick="${renderResponse.namespace}changeLine(this)" />
 			</aui:col>
 		</aui:row>
 	</div>
@@ -62,27 +66,40 @@
 				<td style="width: 65%; text-align: center">建设内容</td>
 			</tr>
 			<tbody id="unitProjects">
-				
-					<c:forEach items="<%=completeUnitProjects%>" var="unitProject">
-						<tr>
-							<td style="width: 2%; text-align: center"><input type="checkbox" name="<portlet:namespace/>isDelete" /></td>
-							<td><input name="<portlet:namespace/>sgxkzbh" value="${unitProject.sgxkzbh}" readonly="true" type="text" style="width: 85%;" label="" /></td>
-							<td><input name="<portlet:namespace/>gcbh" value="${unitProject.gcbh}" type="text" style="width: 93%;" label="" /></td>
-							<td><input name="<portlet:namespace/>gcmc" value="${unitProject.gcmc}" type="text" style="width: 98%;" label="" /></td>
-							<td><input name="<portlet:namespace/>jsnr" value="${unitProject.jsnr}" type="text" style="width: 98%;" label="" /></td>
-						</tr>
-					</c:forEach>
-				
+
+				<c:forEach items="<%=completeUnitProjects%>" var="unitProject">
+					<tr>
+						<td style="width: 2%; text-align: center"><input
+							type="checkbox" name="<portlet:namespace/>isDelete" /></td>
+						<td><input name="<portlet:namespace/>permitUnitProjectId"
+							value="${unitProject.permitUnitProjectId}" type="hidden" /> <input
+							name="<portlet:namespace/>sgxkzbh" value="${unitProject.sgxkzbh}"
+							readonly="true" type="text" style="width: 85%;" /></td>
+						<td><input name="<portlet:namespace/>gcbh"
+							value="${unitProject.gcbh}" type="text" style="width: 93%;" /></td>
+						<td><input name="<portlet:namespace/>gcmc"
+							value="${unitProject.gcmc}" type="text" style="width: 98%;" /></td>
+						<td><input name="<portlet:namespace/>jsnr"
+							value="${unitProject.jsnr}" type="text" style="width: 98%;" /></td>
+					</tr>
+				</c:forEach>
+
 			</tbody>
 		</table>
-		<table style="display:none;" border="1" width="90%">
+		<table style="display: none;" border="1" width="90%">
 			<tbody id="hiddenStyle">
 				<tr>
-					<td style="width: 2%; text-align: center"><input type="checkbox" name="<portlet:namespace/>isDelete" /></td>
-					<td><input name="<portlet:namespace/>sgxkzbh"  type="text" style="width: 85%;" label="" /></td>
-					<td><input name="<portlet:namespace/>gcbh" type="text" style="width: 93%;" label="" /></td>
-					<td><input name="<portlet:namespace/>gcmc" type="text" style="width: 98%;" label="" /></td>
-					<td><input name="<portlet:namespace/>jsnr" type="text" style="width: 98%;" label="" /></td>
+					<td style="width: 2%; text-align: center"><input
+						type="checkbox" name="<portlet:namespace/>isDelete" /></td>
+					<td><input name="<portlet:namespace/>permitUnitProjectId"
+						value="" type="hidden" /> <input
+						name="<portlet:namespace/>sgxkzbh" type="text" style="width: 85%;" /></td>
+					<td><input name="<portlet:namespace/>gcbh" type="text"
+						style="width: 93%;" /></td>
+					<td><input name="<portlet:namespace/>gcmc" type="text"
+						style="width: 98%;" /></td>
+					<td><input name="<portlet:namespace/>jsnr" type="text"
+						style="width: 98%;" /></td>
 				</tr>
 			</tbody>
 		</table>
@@ -90,8 +107,8 @@
 	</div>
 	<aui:button-row>
 		<div style="text-align: center">
-		<aui:button type="submit" value="保存" /> 
-		<aui:button type="cancel" value="返回" href="${viewURL}" />
+			<aui:button type="submit" value="保存" />
+			<aui:button type="cancel" value="返回" href="${viewURL}" />
 		</div>
 	</aui:button-row>
 
@@ -99,10 +116,8 @@
 
 </aui:form>
 <script>
-	
-	$(function(){
-		<%
-		UnitProject unitProject=null;
+	$(function() {
+<%UnitProject unitProject=null;
 		Permit permit=null;
 		if(Validator.isNotNull(permitUnitProjectIds)&&permitUnitProjectIds.length>0){
 			for(String permitUnitProjectId:permitUnitProjectIds){
@@ -113,20 +128,26 @@
 						permit=PermitLocalServiceUtil.getPermit(permitId);
 						renderRequest.setAttribute("sgxkzbh", permit.getSgxkzbh());
 					}
+					renderRequest.setAttribute("permitUnitProjectId", permitUnitProjectId);
 					renderRequest.setAttribute("gcbh", unitProject.getGcbh());
 					renderRequest.setAttribute("gcmc", unitProject.getGcmc());
-					renderRequest.setAttribute("jsnr", unitProject.getJsnr()); 
-		%>
-		$("#unitProjects").append($("#hiddenStyle").html()); 
-		$("#unitProjects>tr:last-child").find("input[name=<portlet:namespace/>sgxkzbh]").val('${sgxkzbh}');
-		$("#unitProjects>tr:last-child").find("input[name=<portlet:namespace/>gcbh]").val('${gcbh}');
-		$("#unitProjects>tr:last-child").find("input[name=<portlet:namespace/>gcmc]").val('${gcmc}');
-		$("#unitProjects>tr:last-child").find("input[name=<portlet:namespace/>jsnr]").val('${jsnr}');			
-		<%					
-				}
+					renderRequest.setAttribute("jsnr", unitProject.getJsnr());%>
+	$("#unitProjects").append($("#hiddenStyle").html());
+
+		$("#unitProjects>tr:last-child").find(
+				"input[name=<portlet:namespace/>permitUnitProjectId]").val(
+				'${permitUnitProjectId}');
+		$("#unitProjects>tr:last-child").find(
+				"input[name=<portlet:namespace/>sgxkzbh]").val('${sgxkzbh}');
+		$("#unitProjects>tr:last-child").find(
+				"input[name=<portlet:namespace/>gcbh]").val('${gcbh}');
+		$("#unitProjects>tr:last-child").find(
+				"input[name=<portlet:namespace/>gcmc]").val('${gcmc}');
+		$("#unitProjects>tr:last-child").find(
+				"input[name=<portlet:namespace/>jsnr]").val('${jsnr}');
+<%}
 			}
-		}
-		%>
+		}%>
 	});
 
 	function <portlet:namespace/>changeLine(obj) {
@@ -136,9 +157,23 @@
 					$(this).parent().parent().remove();
 				}
 			});
-		}	
+		}
 	}
 
-	
+	function <portlet:namespace/>renderAdd() {
+		var permitUnitProjectIds = "";
+		$("input[name='<portlet:namespace/>permitUnitProjectId']").each(
+				function(index) {
+					permitUnitProjectIds += "," + $(this).val();
+				});
+		if ("," != permitUnitProjectIds) {
+			permitUnitProjectIds = permitUnitProjectIds.substring(1,
+					permitUnitProjectIds.length - 1)
+		} else {
+			permitUnitProjectIds = "";
+		}
+		location.href = '${selectUnitProjectURL}&<portlet:namespace/>permitUnitProjectIds='
+				+ permitUnitProjectIds;
+	}
 </script>
 
