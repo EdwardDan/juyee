@@ -28,8 +28,10 @@
 	for(int j=0;j<fileEntryIdsArr.length;j++){
 		if(Validator.isNotNull(fileEntryIdsArr[j])){
 	String fileEntryId=fileEntryIdsArr[j].split("\\|")[0];
+	System.out.println("fileEntryId============="+fileEntryId);
 	DLFileEntry dlFileEntry=DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(fileEntryId));
 		list.add(dlFileEntry);
+		System.out.println("dlFileEntry.getTitle()============="+dlFileEntry.getTitle());
 	}
 	
 		}
@@ -44,7 +46,9 @@
 	for(int j=0;j<bzclIdsArr.length;j++){
 		if(Validator.isNotNull(bzclIdsArr[j])){
 	String fileEntryId=bzclIdsArr[j].split("\\|")[0];
+	System.out.println("bzclId============="+fileEntryId);
 	DLFileEntry dlFileEntry=DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(fileEntryId));
+	System.out.println("dlFileEntry.title============="+dlFileEntry.getTitle());
 		listBzcl.add(dlFileEntry);
 	}
 		
@@ -117,24 +121,24 @@
 
 				<td style="text-align: center">
 					<div class="${material.materialId}">
-						<c:if test="${not empty material.fileEntryIds}">
+						<c:if test="${not empty material.bzclIds}">
 							<c:forEach items="${mapBzcl[material.materialId]}"
-								var="dlFileEntry" varStatus="varNo">
+								var="dlFileEntry" varStatus="varStausNo">
 								<div>
-									<c:set var="filePath"
+									<c:set var="filePathBzcl"
 										value="${dlFileEntry.groupId }/${dlFileEntry.folderId}/${dlFileEntry.title }" />
-									<c:set var="fileName"
-										value="${material.clmc }-${varNo.index+1 }.${dlFileEntry.extension }" />
+									<c:set var="fileNameBzcl"
+										value="${material.clmc }-${varStausNo.index+1 }.${dlFileEntry.extension }" />
 									<c:if test="${dlFileEntry. extension eq jpg}">
 										<a href="#"
-											onclick="previewJpg(${material.materialId},${dlFileEntry.fileEntryId})">${material.clmc }补正材料-${varNo.index+1 }.${dlFileEntry.extension }</a>
-										<img src="/documents/${filePath }" style="display: none;"
+											onclick="previewJpg(${material.materialId},${dlFileEntry.fileEntryId})">${material.clmc }补正材料-${varStausNo.index+1 }.${dlFileEntry.extension }</a>
+										<img src="/documents/${filePathBzcl }" style="display: none;"
 											id="${dlFileEntry.fileEntryId}" alt="${dlFileEntry.title}">
 									</c:if>
 									<c:if test="${dlFileEntry.extension eq pdf}">
-										<a href="#" onclick="previewPdf('/documents/${filePath}')">${material.clmc }补正材料-${varNo.index+1 }.${dlFileEntry.extension }</a>
+										<a href="#" onclick="previewPdf('/documents/${filePathBzcl}')">${material.clmc }补正材料-${varStausNo.index+1 }.${dlFileEntry.extension }</a>
 									</c:if>
-									<a href="/documents/${filePath }?&download=true">下载</a>
+									<a href="/documents/${filePathBzcl }?&download=true">下载</a>
 								</div>
 							</c:forEach>
 						</c:if>
