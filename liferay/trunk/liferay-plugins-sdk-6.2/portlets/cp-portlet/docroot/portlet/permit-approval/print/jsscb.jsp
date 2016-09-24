@@ -16,6 +16,44 @@
 	request.setAttribute("permit", permit);
 	request.setAttribute("projectProfile", projectProfile);
 	request.setAttribute("xmlx", xmlx);
+	User me=PortalUtil.getUser(request);
+				Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
+				List<Integer> logTypes = new ArrayList<Integer>();
+				logTypes.add(WorkflowLog.TASK_COMPLETION);
+				String csPeople="";
+				Date csDate=null;
+				String csOpinion="";
+				String fhPeople="";
+				Date fhDate=null;
+				String fhOpinion="";
+				String shPeople="";
+				Date shDate=null;
+				String shOpinion="";
+				String fgldPeople="";
+				Date fgldDate=null;
+				String fgldOpinion="";
+				String zxldPeople="";
+				Date zxldDate=null;
+				String zxldOpinion="";
+				if(WorkflowInstanceLinkLocalServiceUtil.hasWorkflowInstanceLink(me.getCompanyId(), 0L, "com.justonetech.cp.permit.model.Permit", permit.getPermitId())){
+					List<WorkflowLog> workflowLogs = WorkflowLogManagerUtil.getWorkflowLogsByWorkflowInstance(company.getCompanyId(), WorkflowInstanceLinkLocalServiceUtil.getWorkflowInstanceLink(me.getCompanyId(), 0L, "com.justonetech.cp.permit.model.Permit", permit.getPermitId()).getWorkflowInstanceId(), logTypes, QueryUtil.ALL_POS, QueryUtil.ALL_POS, WorkflowComparatorFactoryUtil.getLogCreateDateComparator(true));
+					for(int i=0;i<workflowLogs.size();i++){
+						Role curRole = null;
+						User curUser = null;
+						User auditUser=null;
+						String actorName = null;
+						String auditName=null;
+						if(workflowLogs.get(i).getAuditUserId()!=0){
+							 auditUser = UserLocalServiceUtil.getUser(workflowLogs.get(i).getAuditUserId());
+							auditName=auditUser.getFirstName();
+						}
+					   if(workflowLogs.get(i).getState().equals("chushen")){csPeople=auditName;csOpinion=workflowLogs.get(i).getComment();csDate=workflowLogs.get(i).getCreateDate();}
+					   if(workflowLogs.get(i).getState().equals("fuhe")){fhPeople=auditName;fhOpinion=workflowLogs.get(i).getComment();fhDate=workflowLogs.get(i).getCreateDate();}
+					   if(workflowLogs.get(i).getState().equals("shenhe")){shPeople=auditName;shOpinion=workflowLogs.get(i).getComment();shDate=workflowLogs.get(i).getCreateDate();}
+					   if(workflowLogs.get(i).getState().equals("fenguanlingdao")){fgldPeople=auditName;fgldOpinion=workflowLogs.get(i).getComment();fgldDate=workflowLogs.get(i).getCreateDate();}
+					   if(workflowLogs.get(i).getState().equals("zhongxinlingdao")){zxldPeople=auditName;zxldOpinion=workflowLogs.get(i).getComment();zxldDate=workflowLogs.get(i).getCreateDate();}
+					}
+				}
 %>
 <OBJECT id="WebBrowser1" height=0 width=0
 	classid=CLSID:8856F961-340A-11D0-A96B-00C04FD705A2 name=wb></OBJECT>
@@ -301,11 +339,11 @@ div.Section1 {
 					style='width: 335.5pt; border-top: none; border-left: none; border-bottom: solid black 1.0pt; border-right: solid black 1.0pt; mso-border-top-alt: solid black .5pt; mso-border-left-alt: solid black .5pt; mso-border-alt: solid black .5pt; padding: 0cm 5.4pt 0cm 5.4pt'>
 					<p class=MsoNoSpacing>
 						<span lang=EN-US style='font-size: 12.0pt'><o:p>
-								<sys:toHtml>${bean.csOpinion}</sys:toHtml>
+								<sys:toHtml><%=csOpinion %></sys:toHtml>
 							</o:p></span>
 					</p>
 					<p class=MsoNoSpacing>
-						<span lang=EN-US style='font-size: 12.0pt'><o:p>${bean.csUser}</o:p></span>
+						<span lang=EN-US style='font-size: 12.0pt'><o:p><%=csPeople %></o:p></span>
 					</p>
 					<p class=MsoNoSpacing>
 						<span lang=EN-US style='font-size: 12.0pt'><o:p>&nbsp;</o:p></span>
@@ -317,7 +355,7 @@ div.Section1 {
 							style='mso-spacerun: yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span>
 						<span
 							style='font-size: 12.0pt; font-family: 宋体; mso-ascii-font-family: Calibri; mso-hansi-font-family: Calibri'><fmt:formatDate
-								value="${bean.csDate}" pattern="yyyy年MM月dd日" /></span>
+								value="<%=csDate %>" pattern="yyyy年MM月dd日" /></span>
 					</p>
 				</td>
 			</tr>
@@ -334,11 +372,11 @@ div.Section1 {
 					style='width: 335.5pt; border-top: none; border-left: none; border-bottom: solid black 1.0pt; border-right: solid black 1.0pt; mso-border-top-alt: solid black .5pt; mso-border-left-alt: solid black .5pt; mso-border-alt: solid black .5pt; padding: 0cm 5.4pt 0cm 5.4pt'>
 					<p class=MsoNoSpacing>
 						<span lang=EN-US style='font-size: 12.0pt'><o:p>
-								<sys:toHtml>${bean.fhOpinion}</sys:toHtml>
+								<sys:toHtml><%=fhOpinion %></sys:toHtml>
 							</o:p></span>
 					</p>
 					<p class=MsoNoSpacing>
-						<span lang=EN-US style='font-size: 12.0pt'><o:p>${bean.fhUser}</o:p></span>
+						<span lang=EN-US style='font-size: 12.0pt'><o:p><%=fhPeople %></o:p></span>
 					</p>
 					<p class=MsoNoSpacing>
 						<span lang=EN-US style='font-size: 12.0pt'><o:p>&nbsp;</o:p></span>
@@ -350,7 +388,7 @@ div.Section1 {
 							style='mso-spacerun: yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span>
 						<span
 							style='font-size: 12.0pt; font-family: 宋体; mso-ascii-font-family: Calibri; mso-hansi-font-family: Calibri'><fmt:formatDate
-								value="${bean.fhDate}" pattern="yyyy年MM月dd日" /></span>
+								value="<%=fhDate %>" pattern="yyyy年MM月dd日" /></span>
 					</p>
 				</td>
 			</tr>
@@ -367,11 +405,11 @@ div.Section1 {
 					style='width: 335.5pt; border-top: none; border-left: none; border-bottom: solid black 1.0pt; border-right: solid black 1.0pt; mso-border-top-alt: solid black .5pt; mso-border-left-alt: solid black .5pt; mso-border-alt: solid black .5pt; padding: 0cm 5.4pt 0cm 5.4pt'>
 					<p class=MsoNoSpacing>
 						<span lang=EN-US style='font-size: 12.0pt'><o:p>
-								<sys:toHtml>${bean.shOpinion}</sys:toHtml>
+								<sys:toHtml><%=shOpinion %></sys:toHtml>
 							</o:p></span>
 					</p>
 					<p class=MsoNoSpacing>
-						<span lang=EN-US style='font-size: 12.0pt'><o:p>${bean.shUser}</o:p></span>
+						<span lang=EN-US style='font-size: 12.0pt'><o:p><%=shPeople %></o:p></span>
 					</p>
 					<p class=MsoNoSpacing>
 						<span lang=EN-US style='font-size: 12.0pt'><o:p>&nbsp;</o:p></span>
@@ -383,7 +421,7 @@ div.Section1 {
 							style='mso-spacerun: yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span>
 						<span
 							style='font-size: 12.0pt; font-family: 宋体; mso-ascii-font-family: Calibri; mso-hansi-font-family: Calibri'><fmt:formatDate
-								value="${bean.shDate}" pattern="yyyy年MM月dd日" /></span>
+								value="<%=shDate %>" pattern="yyyy年MM月dd日" /></span>
 					</p>
 				</td>
 			</tr>
@@ -400,11 +438,11 @@ div.Section1 {
 					style='width: 335.5pt; border-top: none; border-left: none; border-bottom: solid black 1.0pt; border-right: solid black 1.0pt; mso-border-top-alt: solid black .5pt; mso-border-left-alt: solid black .5pt; mso-border-alt: solid black .5pt; padding: 0cm 5.4pt 0cm 5.4pt'>
 					<p class=MsoNoSpacing>
 						<span lang=EN-US style='font-size: 12.0pt'><o:p>
-								<sys:toHtml>${bean.fgldOpinion}</sys:toHtml>
+								<sys:toHtml><%=fgldOpinion %></sys:toHtml>
 							</o:p></span>
 					</p>
 					<p class=MsoNoSpacing>
-						<span lang=EN-US style='font-size: 12.0pt'><o:p>${bean.fgldUser}</o:p></span>
+						<span lang=EN-US style='font-size: 12.0pt'><o:p><%=fgldPeople %></o:p></span>
 					</p>
 					<p class=MsoNoSpacing>
 						<span lang=EN-US style='font-size: 12.0pt'><o:p>&nbsp;</o:p></span>
@@ -416,7 +454,7 @@ div.Section1 {
 							style='mso-spacerun: yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span>
 						<span
 							style='font-size: 12.0pt; font-family: 宋体; mso-ascii-font-family: Calibri; mso-hansi-font-family: Calibri'><fmt:formatDate
-								value="${bean.fgldDate}" pattern="yyyy年MM月dd日" /></span>
+								value="<%=fgldDate %>" pattern="yyyy年MM月dd日" /></span>
 					</p>
 				</td>
 			</tr>
@@ -433,11 +471,11 @@ div.Section1 {
 					style='width: 335.5pt; border-top: none; border-left: none; border-bottom: solid black 1.0pt; border-right: solid black 1.0pt; mso-border-top-alt: solid black .5pt; mso-border-left-alt: solid black .5pt; mso-border-alt: solid black .5pt; padding: 0cm 5.4pt 0cm 5.4pt'>
 					<p class=MsoNoSpacing>
 						<span lang=EN-US style='font-size: 12.0pt'><o:p>
-								<sys:toHtml>${bean.zxldOpinion}</sys:toHtml>
+								<sys:toHtml><%=zxldOpinion %></sys:toHtml>
 							</o:p></span>
 					</p>
 					<p class=MsoNoSpacing>
-						<span lang=EN-US style='font-size: 12.0pt'><o:p>${bean.zxldUser}</o:p></span>
+						<span lang=EN-US style='font-size: 12.0pt'><o:p><%=zxldPeople %></o:p></span>
 					</p>
 					<p class=MsoNoSpacing>
 						<span lang=EN-US style='font-size: 12.0pt'><o:p>&nbsp;</o:p></span>
@@ -449,7 +487,7 @@ div.Section1 {
 							style='mso-spacerun: yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span>
 						<span
 							style='font-size: 12.0pt; font-family: 宋体; mso-ascii-font-family: Calibri; mso-hansi-font-family: Calibri'><fmt:formatDate
-								value="${bean.zxldDate}" pattern="yyyy年MM月dd日" /></span>
+								value="<%=zxldDate %>" pattern="yyyy年MM月dd日" /></span>
 					</p>
 				</td>
 			</tr>
