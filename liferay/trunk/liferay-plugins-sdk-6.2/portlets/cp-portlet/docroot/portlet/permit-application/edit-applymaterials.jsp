@@ -47,47 +47,54 @@
 		String xmlxCode=xmlxDictionary.getCode();
 		String jsgcsxCode=jsgcsxDictionary.getCode();
 		if(CpConstants.XJ.equals(jsgcsxCode)||CpConstants. KJ.equals(jsgcsxCode)||CpConstants. GJ.equals(jsgcsxCode)){//新改扩
-			if(CpConstants. GK.equals(xmlxCode)){
-				Dictionary gk_xgk_Dictionary=DictionaryLocalServiceUtil.findByCode(CpConstants. GK_XGK);
-				materialDictionaries=DictionaryLocalServiceUtil.findByParentId(gk_xgk_Dictionary.getDictionaryId(), -1, -1);
-			}
-			if(CpConstants. HD.equals(xmlxCode)){
-				Dictionary hd_xgk_Dictionary=DictionaryLocalServiceUtil.findByCode(CpConstants. HD_XGK);
-				materialDictionaries=DictionaryLocalServiceUtil.findByParentId(hd_xgk_Dictionary.getDictionaryId(), -1, -1);
-			}
-			if(CpConstants. GL.equals(xmlxCode)){
-				Dictionary gl_xgk_Dictionary=DictionaryLocalServiceUtil.findByCode(CpConstants. GL_XGK);
-				materialDictionaries=DictionaryLocalServiceUtil.findByParentId(gl_xgk_Dictionary.getDictionaryId(), -1, -1);
-			}
-			if(CpConstants. SZ.equals(xmlxCode)){
-				Dictionary szjt_xgk_Dictionary=DictionaryLocalServiceUtil.findByCode(CpConstants. SZJT_XGK);
-				materialDictionaries=DictionaryLocalServiceUtil.findByParentId(szjt_xgk_Dictionary.getDictionaryId(), -1, -1);
-			}
+	if(CpConstants. GK.equals(xmlxCode)){
+		Dictionary gk_xgk_Dictionary=DictionaryLocalServiceUtil.findByCode(CpConstants. GK_XGK);
+		materialDictionaries=DictionaryLocalServiceUtil.findByParentId(gk_xgk_Dictionary.getDictionaryId(), -1, -1);
+	}
+	if(CpConstants. HD.equals(xmlxCode)){
+		Dictionary hd_xgk_Dictionary=DictionaryLocalServiceUtil.findByCode(CpConstants. HD_XGK);
+		materialDictionaries=DictionaryLocalServiceUtil.findByParentId(hd_xgk_Dictionary.getDictionaryId(), -1, -1);
+	}
+	if(CpConstants. GL.equals(xmlxCode)){
+		Dictionary gl_xgk_Dictionary=DictionaryLocalServiceUtil.findByCode(CpConstants. GL_XGK);
+		materialDictionaries=DictionaryLocalServiceUtil.findByParentId(gl_xgk_Dictionary.getDictionaryId(), -1, -1);
+	}
+	if(CpConstants. SZ.equals(xmlxCode)){
+		Dictionary szjt_xgk_Dictionary=DictionaryLocalServiceUtil.findByCode(CpConstants. SZJT_XGK);
+		materialDictionaries=DictionaryLocalServiceUtil.findByParentId(szjt_xgk_Dictionary.getDictionaryId(), -1, -1);
+	}
 	
-			
+	
 		}else{
-			
-			if(CpConstants. GL.equals(xmlxCode)){
-				Dictionary gl_xgk_Dictionary=DictionaryLocalServiceUtil.findByCode(CpConstants. GL_DX);
-				materialDictionaries=DictionaryLocalServiceUtil.findByParentId(gl_xgk_Dictionary.getDictionaryId(), -1, -1);
-			}
-			if(CpConstants. SZ.equals(xmlxCode)){
-				Dictionary szjt_xgk_Dictionary=DictionaryLocalServiceUtil.findByCode(CpConstants. SZJT_DX);
-				materialDictionaries=DictionaryLocalServiceUtil.findByParentId(szjt_xgk_Dictionary.getDictionaryId(), -1, -1);
-			}
+	
+	if(CpConstants. GL.equals(xmlxCode)){
+		Dictionary gl_xgk_Dictionary=DictionaryLocalServiceUtil.findByCode(CpConstants. GL_DX);
+		materialDictionaries=DictionaryLocalServiceUtil.findByParentId(gl_xgk_Dictionary.getDictionaryId(), -1, -1);
+	}
+	if(CpConstants. SZ.equals(xmlxCode)){
+		Dictionary szjt_xgk_Dictionary=DictionaryLocalServiceUtil.findByCode(CpConstants. SZJT_DX);
+		materialDictionaries=DictionaryLocalServiceUtil.findByParentId(szjt_xgk_Dictionary.getDictionaryId(), -1, -1);
+	}
 		}
 	}
 	
 	for(Dictionary dic: materialDictionaries){
-		 ApplyMaterial applyMaterial=ApplyMaterialLocalServiceUtil.createApplyMaterial(CounterLocalServiceUtil.increment());
-		 applyMaterial.setPermitId(permitId);
-		 applyMaterial.setXh(dic.getTag());
-		 applyMaterial.setClmc(dic.getName());
-		 applyMaterialList.add(applyMaterial);
-		 ApplyMaterialLocalServiceUtil.updateApplyMaterial(applyMaterial);		
-	}
+				ApplyMaterial applyMaterial = ApplyMaterialLocalServiceUtil
+						.createApplyMaterial(CounterLocalServiceUtil
+								.increment());
+				applyMaterial.setPermitId(permitId);
+				applyMaterial.setXh(dic.getTag());
+				applyMaterial.setClmc(dic.getName());
+				applyMaterial.setShyj(dic.getCustomField1());
+				applyMaterial.setYjfs(Validator.isNumber(dic
+						.getCustomField2()) ? GetterUtil.getInteger(dic
+						.getCustomField2()) : 0);
+				applyMaterialList.add(applyMaterial);
+				ApplyMaterialLocalServiceUtil
+						.updateApplyMaterial(applyMaterial);
+			}
 		}
-	
+
 	}
 %>
 <portlet:renderURL var="viewURL" />
