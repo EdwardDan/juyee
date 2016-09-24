@@ -147,7 +147,7 @@ span {
 				<td style="text-align: center">${material.yjfs}</td>
 				<td style="text-align: center"><aui:input name="sjfs" label=""
 						cssClass="input-mini text-center" value="${material.sjfs}">
-						<aui:validator name="digits" />
+						<aui:validator name="number" />
 					</aui:input></td>
 			</tr>
 		</c:forEach>
