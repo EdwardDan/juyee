@@ -74,19 +74,19 @@
 			<th style="text-align: center; width: 25%;">申请材料名称</th>
 			<th style="text-align: center; width: 30%;">附件</th>
 			<c:if test="${permit.status!=10}">
-			<th style="text-align: center; width: 15%;">补正材料查看</th>
+				<th style="text-align: center; width: 15%;">补正材料查看</th>
 			</c:if>
 			<c:if test="${permit.status==10}">
-			<th style="text-align: center; width: 15%;">补正材料</th>
-			<th style="text-align: center; width: 10%;">操作 <span
-				class="taglib-icon-help"> <img
-					id="yui_patched_v3_11_0_1_1473298445453_1601" tabindex="0"
-					src="/html/themes/control_panel/images/portlet/help.png"
-					onmouseover="Liferay.Portal.ToolTip.show(this);"
-					onfocus="Liferay.Portal.ToolTip.show(this);"
-					onblur="Liferay.Portal.ToolTip.hide();" aria-labelledby="vfyl"
-					alt=""> <span id="vfyl" class="hide-accessible tooltip-text">注:请上传jpg或pdf格式的文件，jpg格式文件大小不能超过2M,pdf格式文件不能超过20M,如果文件超过限定大小，请拆分后重新上传！</span>
-			</span></th>
+				<th style="text-align: center; width: 15%;">补正材料</th>
+				<th style="text-align: center; width: 10%;">操作 <span
+					class="taglib-icon-help"> <img
+						id="yui_patched_v3_11_0_1_1473298445453_1601" tabindex="0"
+						src="/html/themes/control_panel/images/portlet/help.png"
+						onmouseover="Liferay.Portal.ToolTip.show(this);"
+						onfocus="Liferay.Portal.ToolTip.show(this);"
+						onblur="Liferay.Portal.ToolTip.hide();" aria-labelledby="vfyl"
+						alt=""> <span id="vfyl" class="hide-accessible tooltip-text">注:请上传jpg或pdf格式的文件，jpg格式文件大小不能超过2M,pdf格式文件不能超过20M,如果文件超过限定大小，请拆分后重新上传！</span>
+				</span></th>
 			</c:if>
 		</thead>
 		<c:forEach items="<%=materialList%>" var="material" varStatus="status">
@@ -119,61 +119,62 @@
 					</div>
 				</td>
 
-<c:if test="${permit.status!=10}">
-				<td style="text-align: center">
-					<div class="${material.materialId}">
-						<c:if test="${not empty material.bzclIds}">
-							<c:forEach items="${mapBzcl[material.materialId]}"
-								var="dlFileEntry" varStatus="varStausNo">
-								<div>
-									<c:set var="filePathBzcl"
-										value="${dlFileEntry.groupId }/${dlFileEntry.folderId}/${dlFileEntry.title }" />
-									<c:set var="fileNameBzcl"
-										value="${material.clmc }-${varStausNo.index+1 }.${dlFileEntry.extension }" />
-									<c:if test="${dlFileEntry. extension eq jpg}">
-										<a href="#"
-											onclick="previewJpg(${material.materialId},${dlFileEntry.fileEntryId})">${material.clmc }补正材料-${varStausNo.index+1 }.${dlFileEntry.extension }</a>
-										<img src="/documents/${filePathBzcl }" style="display: none;"
-											id="${dlFileEntry.fileEntryId}" alt="${dlFileEntry.title}">
-									</c:if>
-									<c:if test="${dlFileEntry.extension eq pdf}">
-										<a href="#" onclick="previewPdf('/documents/${filePathBzcl}')">${material.clmc }补正材料-${varStausNo.index+1 }.${dlFileEntry.extension }</a>
-									</c:if>
-									<a href="/documents/${filePathBzcl }?&download=true">下载</a>
-								</div>
-							</c:forEach>
-						</c:if>
-					</div>
-				</td>
-</c:if>
-<c:if test="${permit.status==10}">
-				<td style="text-align: center">
-					<div id="fileDivBzcl${status.index+1}">
-						<!-- todo
+				<c:if test="${permit.status!=10}">
+					<td style="text-align: center">
+						<div class="${material.materialId}">
+							<c:if test="${not empty material.bzclIds}">
+								<c:forEach items="${mapBzcl[material.materialId]}"
+									var="dlFileEntry" varStatus="varStausNo">
+									<div>
+										<c:set var="filePathBzcl"
+											value="${dlFileEntry.groupId }/${dlFileEntry.folderId}/${dlFileEntry.title }" />
+										<c:set var="fileNameBzcl"
+											value="${material.clmc }-${varStausNo.index+1 }.${dlFileEntry.extension }" />
+										<c:if test="${dlFileEntry. extension eq jpg}">
+											<a href="#"
+												onclick="previewJpg(${material.materialId},${dlFileEntry.fileEntryId})">${material.clmc }补正材料-${varStausNo.index+1 }.${dlFileEntry.extension }</a>
+											<img src="/documents/${filePathBzcl }" style="display: none;"
+												id="${dlFileEntry.fileEntryId}" alt="${dlFileEntry.title}">
+										</c:if>
+										<c:if test="${dlFileEntry.extension eq pdf}">
+											<a href="#"
+												onclick="previewPdf('/documents/${filePathBzcl}')">${material.clmc }补正材料-${varStausNo.index+1 }.${dlFileEntry.extension }</a>
+										</c:if>
+										<a href="/documents/${filePathBzcl }?&download=true">下载</a>
+									</div>
+								</c:forEach>
+							</c:if>
+						</div>
+					</td>
+				</c:if>
+				<c:if test="${permit.status==10}">
+					<td style="text-align: center">
+						<div id="fileDivBzcl${status.index+1}">
+							<!-- todo
 				此处可以根据状态来隐藏删除按钮的显示，提交后删除按钮不再显示
 				 -->
-						<c:if test="${not empty material.bzclIds}">
-							<c:forEach items="${fn:split(material.bzclIds,',')}" var="bzclId"
-								varStatus="statusSub">
-								<div name="fileBzcl${status.index+1}">
-									<a class="fileName" href="javascript:void(0);">
-										${material.clmc}补正材料-${statusSub.index+1}.${fn:split(bzclId,'|')[1]}
-									</a> &nbsp;&nbsp;&nbsp; <a href='javascript:void(0)'
-										;  onclick="${namespace}fileBzclDelete(this,${fn:split(bzclId,'|')[0]},${material.materialId})">删除</a>
-								</div>
-							</c:forEach>
-						</c:if>
-					</div>
-				</td>
-				<td style="text-align: center"><input type="button" value="上传"
-					onclick="document.getElementById('fileBzclInput${status.index+1}').click();">
-					<input id="fileBzclInput${status.index+1}"
-					name="${namespace}fileBzclInput${status.index+1}" type="file"
-					multiple="" style="display: none; width: 150px;"
-					accept="application/pdf,image/jpeg"
-					onchange="${namespace}fileBzclUpLoad(${status.index+1},${material.materialId},'<%=portletDisplay.getId() %>');"></input>
+							<c:if test="${not empty material.bzclIds}">
+								<c:forEach items="${fn:split(material.bzclIds,',')}"
+									var="bzclId" varStatus="statusSub">
+									<div name="fileBzcl${status.index+1}">
+										<a class="fileName" href="javascript:void(0);">
+											${material.clmc}补正材料-${statusSub.index+1}.${fn:split(bzclId,'|')[1]}
+										</a> &nbsp;&nbsp;&nbsp; <a href='javascript:void(0)'
+											;  onclick="${namespace}fileBzclDelete(this,${fn:split(bzclId,'|')[0]},${material.materialId})">删除</a>
+									</div>
+								</c:forEach>
+							</c:if>
+						</div>
+					</td>
+					<td style="text-align: center"><input type="button" value="上传"
+						onclick="document.getElementById('fileBzclInput${status.index+1}').click();">
+						<input id="fileBzclInput${status.index+1}"
+						name="${namespace}fileBzclInput${status.index+1}" type="file"
+						multiple="" style="display: none; width: 150px;"
+						accept="application/pdf,image/jpeg"
+						onchange="${namespace}fileBzclUpLoad(${status.index+1},${material.materialId},'<%=portletDisplay.getId() %>');"></input>
 
-				</td>
+					</td>
 				</c:if>
 			</tr>
 		</c:forEach>
