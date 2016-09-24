@@ -245,7 +245,7 @@ public class PermitApprovalPortlet extends MVCPortlet {
 		String jhjg = sdf.format(projectProfile.getJhjg());
 		String jhkgrq = jhkg.substring(0, 4) + "年" + jhkg.substring(4, 6) + "月" + jhkg.substring(6, 8) + "日";
 		String jhjgrq = jhjg.substring(0, 4) + "年" + jhjg.substring(4, 6) + "月" + jhjg.substring(6, 8) + "日";
-		String bz = "根据《中华人民共和国交通建设法》等相关法律规定，经审查，本工程符合施工条件，准予施工。";
+		String bz = "";
 		map.put("xmtzgs", xmtzgs);
 		map.put("htjg", htjg);
 		map.put("gcwz", gcwz);
