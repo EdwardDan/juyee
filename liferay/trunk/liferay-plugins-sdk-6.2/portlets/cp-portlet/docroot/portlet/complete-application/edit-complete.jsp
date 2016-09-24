@@ -37,7 +37,7 @@
 </style>
 <c:if test="${completeId ne 0}">
 	<c:set var="editCompleteURL"
-		value="${editCompleteURL }&${renderResponse.namespace}completeId=${completeId}"></c:set>
+		value="${editCompleteURL }&${renderResponse.namespace}completeId=${completeId}&${renderResponse.namespace}bjbh=${bjbh }"></c:set>
 </c:if>
 <div class="alert alert-info">
 	<span class="sp">当前报建编号：${bjbh}</span><span class="sp">项目名称：${xmmc}</span>
