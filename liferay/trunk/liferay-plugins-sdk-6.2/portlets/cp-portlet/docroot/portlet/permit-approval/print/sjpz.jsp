@@ -292,7 +292,7 @@ div.Section1 {
 					<td width=60 valign=top
 						style='width: 45.0pt; border-top: none; border-left: none; border-bottom: solid windowtext 1.0pt; border-right: solid windowtext 1.0pt; mso-border-top-alt: solid windowtext .5pt; mso-border-left-alt: solid windowtext .5pt; mso-border-alt: solid windowtext .5pt; padding: 0cm 5.4pt 0cm 5.4pt'>
 						<p class=NoSpacing align=center style='text-align: center'>
-							<span lang=EN-US style='font-size: 14.0pt'>${item.yjfs}<o:p></o:p></span>
+							<span lang=EN-US style='font-size: 14.0pt'>${item.sjfs}<o:p></o:p></span>
 						</p>
 					</td>
 					<td width=33 valign=top
