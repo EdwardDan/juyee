@@ -20,6 +20,7 @@
 <%
 	Long permitId = ParamUtil.getLong(request, "permitId");
 	Permit permit = PermitLocalServiceUtil.getPermit(permitId);
+	long sgxkzFileEntry = permit.getSgxkzFileEntryId();
 	ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
 	int status = permit.getStatus();
 	request.setAttribute("permitId", permitId);
@@ -84,6 +85,9 @@
 		<c:if test="<%=status == CityPermitStatus.STATUS_WLD_PASS.getCode()%>">
 			<c:choose>
 				<c:when test="<%=projectProfile.getXmlx() == 29741%>">
+					<c:if test="<%=sgxkzFileEntry!=0 %>">
+						<a class="btn" href="${printkgbaURL}">开工备案Pdf</a>
+					</c:if>
 					<a class="btn" href="${printkgbaURL}">开工备案Pdf</a>
 					<a class="btn" href="${printkgba}">开工备案Excel</a>
 				</c:when>
