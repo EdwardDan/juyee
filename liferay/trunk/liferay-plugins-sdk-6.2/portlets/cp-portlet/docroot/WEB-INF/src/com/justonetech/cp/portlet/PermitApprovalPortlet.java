@@ -26,7 +26,6 @@ import javax.servlet.http.HttpServletResponse;
 import net.sf.jxls.transformer.XLSTransformer;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.tools.ant.types.CommandlineJava.SysProperties;
 
 import com.itextpdf.text.DocumentException;
 import com.justonetech.cp.permit.model.ApplyMaterial;
@@ -39,10 +38,8 @@ import com.justonetech.cp.permit.service.PermitLocalServiceUtil;
 import com.justonetech.cp.permit.service.ProjectProfileLocalServiceUtil;
 import com.justonetech.sys.model.Dictionary;
 import com.justonetech.sys.service.DictionaryLocalServiceUtil;
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.servlet.ServletResponseUtil;
