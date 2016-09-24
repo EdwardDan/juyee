@@ -38,6 +38,7 @@ import com.justonetech.cp.permit.service.PermitLocalServiceUtil;
 import com.justonetech.cp.permit.service.ProjectProfileLocalServiceUtil;
 import com.justonetech.sys.model.Dictionary;
 import com.justonetech.sys.service.DictionaryLocalServiceUtil;
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
@@ -169,12 +170,15 @@ public class PermitApprovalPortlet extends MVCPortlet {
 	public void sgxk(ActionRequest request, ActionResponse response) throws PortalException, SystemException,
 			IOException, DocumentException, com.lowagie.text.DocumentException {
 		long permitId = ParamUtil.getLong(request, "permitId");
+		Permit permit = PermitLocalServiceUtil.getPermit(permitId);
+		permit.setSgxkzFileEntryId(CounterLocalServiceUtil.increment());
+		PermitLocalServiceUtil.updatePermit(permit);
 		ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
 		String xmlx = DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx()).getName();
-		DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(39945);
+		DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(29087);
 		String newPDFPath = "F://jtjs//" + xmlx + "施工许可证书.pdf";
 		Map<String, String> map = getMap(permitId, xmlx);
-		fillTemplate(request, response, fileEntry, newPDFPath, map);
+		fillTemplate(fileEntry, newPDFPath, map);
 	}
 
 	// 施工许可(绿色)pdf
@@ -183,29 +187,29 @@ public class PermitApprovalPortlet extends MVCPortlet {
 		long permitId = ParamUtil.getLong(request, "permitId");
 		ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
 		String xmlx = DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx()).getName();
-		DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(39977);
+		DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(29017);
 		String newPDFPath = "F://jtjs//" + xmlx + "施工许可证书(绿色通道).pdf";
 		Map<String, String> map = getMap(permitId, xmlx);
-		fillTemplate(request, response, fileEntry, newPDFPath, map);
+		fillTemplate( fileEntry, newPDFPath, map);
 	}
 	
 	//开工备案pdf
 	public void kgba(ActionRequest request, ActionResponse response) throws PortalException, SystemException, IOException, DocumentException, com.lowagie.text.DocumentException {
 		long permitId = ParamUtil.getLong(request, "permitId");
 		Map<String, String> map = getKgbaMap(permitId);
-		DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(39913);
+		DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(29801);
 		String newPDFPath = "F://jtjs//航道工程开工备案表.pdf";
-		fillTemplate(request, response, fileEntry, newPDFPath, map);
+		fillTemplate(fileEntry, newPDFPath, map);
 	}
 
 	// 生成许可证pdf
-	public void fillTemplate(ActionRequest request, ActionResponse response, DLFileEntry fileEntry, String newPDFPath,
+	public FileEntry fillTemplate( DLFileEntry fileEntry, String newPDFPath,
 			Map<String, String> map) throws IOException, DocumentException, PortalException, SystemException,
 			com.lowagie.text.DocumentException {
-		long permitId = ParamUtil.getLong(request, "permitId");
-		Permit permit = PermitLocalServiceUtil.getPermit(permitId);
-		ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
-		String xmlx = DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx()).getName();//
+//		long permitId = ParamUtil.getLong(request, "permitId");
+//		Permit permit = PermitLocalServiceUtil.getPermit(permitId);
+//		ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
+//		String xmlx = DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx()).getName();
 		PdfReader pdfReader = new PdfReader(fileEntry.getContentStream());
 		File file = new File(newPDFPath);
 		file.delete();
@@ -232,7 +236,7 @@ public class PermitApprovalPortlet extends MVCPortlet {
 		ServiceContext serviceContext = new ServiceContext();
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setIndexingEnabled(true);
-		DLAppLocalServiceUtil.addFileEntry(20199, 20195, 28426, file.getName(), "application/pdf", permit.getSgxkzbh(),
+		return DLAppLocalServiceUtil.addFileEntry(20199, 20195, 28426, file.getName(), "application/pdf", CounterLocalServiceUtil.increment()+"",
 				null, null, file, serviceContext);
 	}
 	
@@ -446,11 +450,25 @@ public class PermitApprovalPortlet extends MVCPortlet {
 		try {
 			String resourceId = resourceRequest.getResourceID();
 			String fileSourceName = "";
+			//生成开工备案pdf
+			if(resourceId.equals("printkgbaPdf")){
+				long permitId = ParamUtil.getLong(resourceRequest, "permitId");
+				Permit permit = PermitLocalServiceUtil.getPermit(permitId);
+				if(permit.getSgxkzFileEntryId()==0){
+					Map<String, String> map = getKgbaMap(permitId);
+					DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(29801);
+					String newPDFPath = "F://jtjs//航道工程开工备案表.pdf";
+					fillTemplate(fileEntry, newPDFPath, map);
+				}else{
+					DLFileEntry dlFileEntry =DLFileEntryLocalServiceUtil.getDLFileEntry(permit.getSgxkzFileEntryId());
+					String downloadURL = "/documents/" + dlFileEntry.getGroupId()+"/"+dlFileEntry.getFolderId()+"/"+dlFileEntry.getTitle();
+				}
+			}
 			//生成开工备案excel
 			if(resourceId.equals("printkgbaExcel")){
 				long permitId = ParamUtil.getLong(resourceRequest, "permitId");
 				Map<String, String> map = getKgbaMap(permitId);
-				DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(39929);
+				DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(29715);
 				XLSTransformer transformer = new XLSTransformer();
 		        HSSFWorkbook hssfWorkbook = transformer.transformXLS(fileEntry.getContentStream(), map);
 		        ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -465,9 +483,9 @@ public class PermitApprovalPortlet extends MVCPortlet {
 				long permitId = ParamUtil.getLong(resourceRequest, "permitId");
 				ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
 				String xmlx = DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx()).getName();
-				String fileName = xmlx+"施工许可.xls";
+				String fileName = xmlx+"施工许可证书.xls";
 				Map<String, String> map = getMap(permitId, xmlx);
-				DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(39961 );
+				DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(29682 );
 				XLSTransformer transformer = new XLSTransformer();
 		        HSSFWorkbook hssfWorkbook = transformer.transformXLS(fileEntry.getContentStream(), map);
 		        ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -482,9 +500,9 @@ public class PermitApprovalPortlet extends MVCPortlet {
 				long permitId = ParamUtil.getLong(resourceRequest, "permitId");
 				ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
 				String xmlx = DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx()).getName();
-				String fileName = xmlx+"施工许可(绿色).xls";
+				String fileName = xmlx+"施工许可证书(绿色通道).xls";
 				Map<String, String> map = getMap(permitId, xmlx);
-				DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(39993);
+				DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(29668);
 				XLSTransformer transformer = new XLSTransformer();
 		        HSSFWorkbook hssfWorkbook = transformer.transformXLS(fileEntry.getContentStream(), map);
 		        ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -586,6 +604,12 @@ public class PermitApprovalPortlet extends MVCPortlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (DocumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (com.lowagie.text.DocumentException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		super.serveResource(resourceRequest, resourceResponse);
