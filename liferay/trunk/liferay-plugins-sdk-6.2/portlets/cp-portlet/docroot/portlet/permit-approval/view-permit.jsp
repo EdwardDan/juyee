@@ -45,15 +45,25 @@
 		<portlet:param name="mvcPath" value="${contextPath}/print/jsscb.jsp" />
 		<portlet:param name="permitId" value="${permitId}" />
 	</portlet:renderURL>
-	<portlet:actionURL var="printsgxkURL" name="sgxk"> 
+	<portlet:actionURL var="printsgxkURL" name="sgxk">
 		<portlet:param name="permitId" value="${permitId}" />
 	</portlet:actionURL>
-	<portlet:actionURL var="printsgxklsURL" name="sgxkls"> 
+	<portlet:actionURL var="printsgxklsURL" name="sgxkls">
 		<portlet:param name="permitId" value="${permitId}" />
 	</portlet:actionURL>
+	<portlet:actionURL var="printkgbaURL" name="kgba"> 
+		<portlet:param name="permitId" value="${permitId}" />
+	</portlet:actionURL>
+	<portlet:resourceURL var="printsgxk" id="ptintsgxkExcel">  
+		<portlet:param name="permitId" value="${permitId}" /> 
+	</portlet:resourceURL>
+	<portlet:resourceURL var="printsgxkls" id="printsgxklsExcel">
+		<portlet:param name="permitId" value="${permitId}" />
+	</portlet:resourceURL>
+	<portlet:resourceURL var="printkgba" id="printkgbaExcel">
+		<portlet:param name="permitId" value="${permitId}" />
+	</portlet:resourceURL>
 	<c:if test="<%=!projectProfile.getLxjb().equals(\"区县级机关或区县级单位\")%>">
-	<a class="btn" href="${printsgxkURL}">施工许可</a>
-	<a class="btn" href="${printsgxklsURL}" target="_blank">施工许可(绿色)</a>
 		<c:if test="<%=status >= 5%>">
 			<a class="btn" href="${printsjpzURL}" target="_blank">收件凭证</a>
 		</c:if>
@@ -63,22 +73,28 @@
 		<c:if test="<%=status == 10%>">
 			<a class="btn" href="${printbysljdsURL}" target="_blank">不予受理决定书</a>
 		</c:if>
-		<c:if test="<%=status==23%>">
+		<c:if test="<%=status == 23%>">
 			<a class="btn" href="${printbzclURL}" target="_blank">补正材料</a>
 		</c:if>
 		<c:if
-			test="<%=status == CityPermitStatus.STATUS_WLD_PASS.getCode()%>">
+			test="<%=status == CityPermitStatus.STATUS_ZXLD_PASS.getCode()
+								|| status == CityPermitStatus.STATUS_WLD_PASS.getCode()%>">
 			<a class="btn" href="${printjsscbURL}" target="_blank">技术审查表</a>
+		</c:if>
+		<c:if test="<%=status == CityPermitStatus.STATUS_WLD_PASS.getCode()%>">
 			<c:choose>
 				<c:when test="<%=projectProfile.getXmlx() == 29741%>">
-					<a class="btn" href="" target="_blank">开工备案</a>
+					<a class="btn" href="${printkgbaURL}">开工备案Pdf</a>
+					<a class="btn" href="${printkgba}">开工备案Excel</a>
 				</c:when>
 				<c:otherwise>
 					<c:if test="<%=projectProfile.getXmxz() != 29769%>">
-						<a class="btn" href="${printsgxklszsURL}" target="_blank">施工许可(绿色)</a>
+						<a class="btn" href="${printsgxklszsURL}" >施工许可(绿色)Pdf</a>
+						<a class="btn" href="${printsgxkls}">施工许可(绿色)Excel</a>
 					</c:if>
 					<c:if test="<%=projectProfile.getXmxz() == 29769%>">
-						<a class="btn" href="${printsgxkURL}">施工许可</a>
+						<a class="btn" href="${printsgxkURL}">施工许可Pdf</a>
+						<a class="btn" href="${printsgxk}">施工许可Excel</a>
 					</c:if>
 				</c:otherwise>
 			</c:choose>
@@ -88,8 +104,7 @@
 		</c:if>
 	</c:if>
 	<c:if test="<%=projectProfile.getLxjb().equals(\"区县级机关或区县级单位\")%>">
-		<c:if
-			test="<%=status >=3%>">
+		<c:if test="<%=status >= 3%>">
 			<a class="btn" href="${printsjpzURL}" target="_blank">收件凭证</a>
 		</c:if>
 		<c:if
@@ -97,20 +112,28 @@
 								|| status == CountyPermitStatus.STATUS_SP_BACK.getCode()%>">
 			<a class="btn" href="${printsltzsURL}" target="_blank">受理通知书</a>
 		</c:if>
-		<c:if test="<%=status==8%>">
+		<c:if test="<%=status == 8%>">
 			<a class="btn" href="${printbysljdsURL}" target="_blank">不予受理决定书</a>
 		</c:if>
-		<c:if test="<%=status==9%>">
+		<c:if test="<%=status == 9%>">
 			<a class="btn" href="${printbzclURL}" target="_blank">补正材料</a>
 		</c:if>
 		<c:if
 			test="<%=status == CountyPermitStatus.STATUS_SP_PASS.getCode()%>">
 			<c:choose>
 				<c:when test="<%=projectProfile.getXmlx() == 29741%>">
-					<a class="btn" href="" target="_blank">开工备案</a>
+					<a class="btn" href="${printkgbaURL}">开工备案Pdf</a>
+					<a class="btn" href="${printkgba}">开工备案Excel</a>
 				</c:when>
 				<c:otherwise>
-					<a class="btn" href="${printsgxkURL}">施工许可</a>
+					<c:if test="<%=projectProfile.getXmxz() != 29769%>">
+						<a class="btn" href="${printsgxklszsURL}">施工许可(绿色)Pdf</a>
+						<a class="btn" href="${printsgxkls}">施工许可(绿色)Excel</a>
+					</c:if>
+					<c:if test="<%=projectProfile.getXmxz() == 29769%>">
+						<a class="btn" href="${printsgxkURL}">施工许可Pdf</a>
+						<a class="btn" href="${printsgxk}">施工许可Excel</a>
+					</c:if>
 				</c:otherwise>
 			</c:choose>
 		</c:if>
