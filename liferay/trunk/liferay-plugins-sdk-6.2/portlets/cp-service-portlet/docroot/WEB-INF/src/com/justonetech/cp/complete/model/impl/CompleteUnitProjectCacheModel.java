@@ -36,12 +36,14 @@ public class CompleteUnitProjectCacheModel implements CacheModel<CompleteUnitPro
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(15);
+		StringBundler sb = new StringBundler(17);
 
 		sb.append("{projectId=");
 		sb.append(projectId);
 		sb.append(", completeId=");
 		sb.append(completeId);
+		sb.append(", permitUnitProjectId=");
+		sb.append(permitUnitProjectId);
 		sb.append(", bjbh=");
 		sb.append(bjbh);
 		sb.append(", sgxkzbh=");
@@ -63,6 +65,7 @@ public class CompleteUnitProjectCacheModel implements CacheModel<CompleteUnitPro
 
 		completeUnitProjectImpl.setProjectId(projectId);
 		completeUnitProjectImpl.setCompleteId(completeId);
+		completeUnitProjectImpl.setPermitUnitProjectId(permitUnitProjectId);
 
 		if (bjbh == null) {
 			completeUnitProjectImpl.setBjbh(StringPool.BLANK);
@@ -108,6 +111,7 @@ public class CompleteUnitProjectCacheModel implements CacheModel<CompleteUnitPro
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		projectId = objectInput.readLong();
 		completeId = objectInput.readLong();
+		permitUnitProjectId = objectInput.readLong();
 		bjbh = objectInput.readUTF();
 		sgxkzbh = objectInput.readUTF();
 		gcbh = objectInput.readUTF();
@@ -120,6 +124,7 @@ public class CompleteUnitProjectCacheModel implements CacheModel<CompleteUnitPro
 		throws IOException {
 		objectOutput.writeLong(projectId);
 		objectOutput.writeLong(completeId);
+		objectOutput.writeLong(permitUnitProjectId);
 
 		if (bjbh == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
@@ -159,6 +164,7 @@ public class CompleteUnitProjectCacheModel implements CacheModel<CompleteUnitPro
 
 	public long projectId;
 	public long completeId;
+	public long permitUnitProjectId;
 	public String bjbh;
 	public String sgxkzbh;
 	public String gcbh;

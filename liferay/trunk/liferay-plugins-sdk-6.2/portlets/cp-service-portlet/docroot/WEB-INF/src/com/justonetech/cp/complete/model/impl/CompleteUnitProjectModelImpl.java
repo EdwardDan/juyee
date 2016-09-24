@@ -60,13 +60,14 @@ public class CompleteUnitProjectModelImpl extends BaseModelImpl<CompleteUnitProj
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "projectId", Types.BIGINT },
 			{ "completeId", Types.BIGINT },
+			{ "permitUnitProjectId", Types.BIGINT },
 			{ "bjbh", Types.VARCHAR },
 			{ "sgxkzbh", Types.VARCHAR },
 			{ "gcbh", Types.VARCHAR },
 			{ "gcmc", Types.VARCHAR },
 			{ "jsnr", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table cp_CompleteUnitProject (projectId LONG not null primary key,completeId LONG,bjbh VARCHAR(75) null,sgxkzbh VARCHAR(75) null,gcbh VARCHAR(75) null,gcmc VARCHAR(500) null,jsnr VARCHAR(1000) null)";
+	public static final String TABLE_SQL_CREATE = "create table cp_CompleteUnitProject (projectId LONG not null primary key,completeId LONG,permitUnitProjectId LONG,bjbh VARCHAR(75) null,sgxkzbh VARCHAR(75) null,gcbh VARCHAR(75) null,gcmc VARCHAR(500) null,jsnr VARCHAR(1000) null)";
 	public static final String TABLE_SQL_DROP = "drop table cp_CompleteUnitProject";
 	public static final String ORDER_BY_JPQL = " ORDER BY completeUnitProject.gcbh ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY cp_CompleteUnitProject.gcbh ASC";
@@ -126,6 +127,7 @@ public class CompleteUnitProjectModelImpl extends BaseModelImpl<CompleteUnitProj
 
 		attributes.put("projectId", getProjectId());
 		attributes.put("completeId", getCompleteId());
+		attributes.put("permitUnitProjectId", getPermitUnitProjectId());
 		attributes.put("bjbh", getBjbh());
 		attributes.put("sgxkzbh", getSgxkzbh());
 		attributes.put("gcbh", getGcbh());
@@ -147,6 +149,12 @@ public class CompleteUnitProjectModelImpl extends BaseModelImpl<CompleteUnitProj
 
 		if (completeId != null) {
 			setCompleteId(completeId);
+		}
+
+		Long permitUnitProjectId = (Long)attributes.get("permitUnitProjectId");
+
+		if (permitUnitProjectId != null) {
+			setPermitUnitProjectId(permitUnitProjectId);
 		}
 
 		String bjbh = (String)attributes.get("bjbh");
@@ -210,6 +218,16 @@ public class CompleteUnitProjectModelImpl extends BaseModelImpl<CompleteUnitProj
 
 	public long getOriginalCompleteId() {
 		return _originalCompleteId;
+	}
+
+	@Override
+	public long getPermitUnitProjectId() {
+		return _permitUnitProjectId;
+	}
+
+	@Override
+	public void setPermitUnitProjectId(long permitUnitProjectId) {
+		_permitUnitProjectId = permitUnitProjectId;
 	}
 
 	@Override
@@ -322,6 +340,7 @@ public class CompleteUnitProjectModelImpl extends BaseModelImpl<CompleteUnitProj
 
 		completeUnitProjectImpl.setProjectId(getProjectId());
 		completeUnitProjectImpl.setCompleteId(getCompleteId());
+		completeUnitProjectImpl.setPermitUnitProjectId(getPermitUnitProjectId());
 		completeUnitProjectImpl.setBjbh(getBjbh());
 		completeUnitProjectImpl.setSgxkzbh(getSgxkzbh());
 		completeUnitProjectImpl.setGcbh(getGcbh());
@@ -392,6 +411,8 @@ public class CompleteUnitProjectModelImpl extends BaseModelImpl<CompleteUnitProj
 
 		completeUnitProjectCacheModel.completeId = getCompleteId();
 
+		completeUnitProjectCacheModel.permitUnitProjectId = getPermitUnitProjectId();
+
 		completeUnitProjectCacheModel.bjbh = getBjbh();
 
 		String bjbh = completeUnitProjectCacheModel.bjbh;
@@ -437,12 +458,14 @@ public class CompleteUnitProjectModelImpl extends BaseModelImpl<CompleteUnitProj
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(15);
+		StringBundler sb = new StringBundler(17);
 
 		sb.append("{projectId=");
 		sb.append(getProjectId());
 		sb.append(", completeId=");
 		sb.append(getCompleteId());
+		sb.append(", permitUnitProjectId=");
+		sb.append(getPermitUnitProjectId());
 		sb.append(", bjbh=");
 		sb.append(getBjbh());
 		sb.append(", sgxkzbh=");
@@ -460,7 +483,7 @@ public class CompleteUnitProjectModelImpl extends BaseModelImpl<CompleteUnitProj
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(28);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.cp.complete.model.CompleteUnitProject");
@@ -473,6 +496,10 @@ public class CompleteUnitProjectModelImpl extends BaseModelImpl<CompleteUnitProj
 		sb.append(
 			"<column><column-name>completeId</column-name><column-value><![CDATA[");
 		sb.append(getCompleteId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>permitUnitProjectId</column-name><column-value><![CDATA[");
+		sb.append(getPermitUnitProjectId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>bjbh</column-name><column-value><![CDATA[");
@@ -508,6 +535,7 @@ public class CompleteUnitProjectModelImpl extends BaseModelImpl<CompleteUnitProj
 	private long _completeId;
 	private long _originalCompleteId;
 	private boolean _setOriginalCompleteId;
+	private long _permitUnitProjectId;
 	private String _bjbh;
 	private String _sgxkzbh;
 	private String _gcbh;

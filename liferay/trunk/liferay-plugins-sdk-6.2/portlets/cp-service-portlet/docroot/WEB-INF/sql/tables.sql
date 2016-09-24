@@ -61,6 +61,7 @@ create table cp_CompleteProjectProfile (
 create table cp_CompleteUnitProject (
 	projectId LONG not null primary key,
 	completeId LONG,
+	permitUnitProjectId LONG,
 	bjbh VARCHAR(75) null,
 	sgxkzbh VARCHAR(75) null,
 	gcbh VARCHAR(75) null,

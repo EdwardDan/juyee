@@ -51,6 +51,7 @@ public class CompleteUnitProjectWrapper implements CompleteUnitProject,
 
 		attributes.put("projectId", getProjectId());
 		attributes.put("completeId", getCompleteId());
+		attributes.put("permitUnitProjectId", getPermitUnitProjectId());
 		attributes.put("bjbh", getBjbh());
 		attributes.put("sgxkzbh", getSgxkzbh());
 		attributes.put("gcbh", getGcbh());
@@ -72,6 +73,12 @@ public class CompleteUnitProjectWrapper implements CompleteUnitProject,
 
 		if (completeId != null) {
 			setCompleteId(completeId);
+		}
+
+		Long permitUnitProjectId = (Long)attributes.get("permitUnitProjectId");
+
+		if (permitUnitProjectId != null) {
+			setPermitUnitProjectId(permitUnitProjectId);
 		}
 
 		String bjbh = (String)attributes.get("bjbh");
@@ -163,6 +170,26 @@ public class CompleteUnitProjectWrapper implements CompleteUnitProject,
 	@Override
 	public void setCompleteId(long completeId) {
 		_completeUnitProject.setCompleteId(completeId);
+	}
+
+	/**
+	* Returns the permit unit project ID of this complete unit project.
+	*
+	* @return the permit unit project ID of this complete unit project
+	*/
+	@Override
+	public long getPermitUnitProjectId() {
+		return _completeUnitProject.getPermitUnitProjectId();
+	}
+
+	/**
+	* Sets the permit unit project ID of this complete unit project.
+	*
+	* @param permitUnitProjectId the permit unit project ID of this complete unit project
+	*/
+	@Override
+	public void setPermitUnitProjectId(long permitUnitProjectId) {
+		_completeUnitProject.setPermitUnitProjectId(permitUnitProjectId);
 	}
 
 	/**

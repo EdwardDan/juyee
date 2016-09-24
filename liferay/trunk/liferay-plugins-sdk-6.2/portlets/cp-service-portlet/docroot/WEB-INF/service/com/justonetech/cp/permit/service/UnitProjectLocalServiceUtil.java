@@ -289,8 +289,21 @@ public class UnitProjectLocalServiceUtil {
 		return getService().findByBjbh(bjbh, start, end);
 	}
 
+	public static java.util.List<com.justonetech.cp.permit.model.UnitProject> findByBjbhAndPermitUnitProjectIds(
+		java.lang.String bjbh, java.lang.Long[] permitUnitProjectIds,
+		int start, int end) {
+		return getService()
+				   .findByBjbhAndPermitUnitProjectIds(bjbh,
+			permitUnitProjectIds, start, end);
+	}
+
 	public static int countByBjbh(java.lang.String bjbh) {
 		return getService().countByBjbh(bjbh);
+	}
+
+	public static com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQuery(
+		java.lang.String bjbh, java.lang.Long[] permitUnitProjectIds) {
+		return getService().createDynamicQuery(bjbh, permitUnitProjectIds);
 	}
 
 	public static void clearService() {

@@ -16,20 +16,31 @@ package com.justonetech.cp.permit.service.impl;
 
 import java.util.Collections;
 import java.util.List;
+
+import com.justonetech.cp.permit.model.ProjectProfile;
 import com.justonetech.cp.permit.model.UnitProject;
 import com.justonetech.cp.permit.service.base.UnitProjectLocalServiceBaseImpl;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.Validator;
 
 /**
  * The implementation of the unit project local service.
  *
  * <p>
- * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.justonetech.cp.permit.service.UnitProjectLocalService} interface.
+ * All custom service methods should be put in this class. Whenever methods are
+ * added, rerun ServiceBuilder to copy their definitions into the
+ * {@link com.justonetech.cp.permit.service.UnitProjectLocalService} interface.
  *
  * <p>
- * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
+ * This is a local service. Methods of this service will not have security
+ * checks based on the propagated JAAS credentials because this service can only
+ * be accessed from within the same VM.
  * </p>
  *
  * @author fanqi
@@ -39,11 +50,12 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 public class UnitProjectLocalServiceImpl extends UnitProjectLocalServiceBaseImpl {
 	/*
 	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this interface directly. Always use {@link com.justonetech.cp.permit.service.UnitProjectLocalServiceUtil} to access the unit project local service.
+	 * 
+	 * Never reference this interface directly. Always use {@link
+	 * com.justonetech.cp.permit.service.UnitProjectLocalServiceUtil} to access
+	 * the unit project local service.
 	 */
-	private static Log log = LogFactoryUtil
-			.getLog(UnitProjectLocalServiceImpl.class);
+	private static Log log = LogFactoryUtil.getLog(UnitProjectLocalServiceImpl.class);
 
 	public List<UnitProject> findByPermitId(long permitId, int start, int end) {
 		try {
@@ -73,6 +85,16 @@ public class UnitProjectLocalServiceImpl extends UnitProjectLocalServiceBaseImpl
 		return Collections.emptyList();
 	}
 
+	public List<UnitProject> findByBjbhAndPermitUnitProjectIds(String bjbh, Long[] permitUnitProjectIds, int start,
+			int end) {
+		try {
+			return this.dynamicQuery(createDynamicQuery(bjbh,  permitUnitProjectIds), start, end);
+		} catch (SystemException e) {
+			log.info(e.getMessage());
+		}
+		return Collections.emptyList();
+	}
+
 	public int countByBjbh(String bjbh) {
 
 		try {
@@ -81,5 +103,19 @@ public class UnitProjectLocalServiceImpl extends UnitProjectLocalServiceBaseImpl
 			log.info(e.getMessage());
 		}
 		return 0;
+	}
+
+	public DynamicQuery createDynamicQuery(String bjbh, Long[] permitUnitProjectIds) {
+
+		DynamicQuery dynamicQuery = this.dynamicQuery();
+		if(null!=permitUnitProjectIds){
+			DynamicQuery unitProjectDQ = DynamicQueryFactoryUtil.forClass(UnitProject.class);
+			unitProjectDQ.setProjection(ProjectionFactoryUtil.property("projectId"));
+			unitProjectDQ.add(PropertyFactoryUtil.forName("projectId").in(permitUnitProjectIds));
+			dynamicQuery.add(PropertyFactoryUtil.forName("projectId").notIn(unitProjectDQ));
+		}
+
+		dynamicQuery.add(PropertyFactoryUtil.forName("bjbh").like("%" + bjbh + "%"));
+		return dynamicQuery;
 	}
 }

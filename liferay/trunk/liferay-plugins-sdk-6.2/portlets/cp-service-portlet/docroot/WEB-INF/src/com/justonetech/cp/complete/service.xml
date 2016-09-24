@@ -68,6 +68,7 @@
 
 		<!-- Business fields -->
 		<column name="completeId" type="long" /><!-- 项目备案Id -->
+		<column name="permitUnitProjectId" type="long" /><!-- 施工许可单位工程Id -->
 		<column name="bjbh" type="String" /><!-- 报建编号 -->
 		<column name="sgxkzbh" type="String" /><!-- 施工许可证编号 -->
 		<column name="gcbh" type="String" /><!-- 工程编号 -->

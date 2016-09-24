@@ -849,6 +849,7 @@ public class CompleteUnitProjectPersistenceImpl extends BasePersistenceImpl<Comp
 
 		completeUnitProjectImpl.setProjectId(completeUnitProject.getProjectId());
 		completeUnitProjectImpl.setCompleteId(completeUnitProject.getCompleteId());
+		completeUnitProjectImpl.setPermitUnitProjectId(completeUnitProject.getPermitUnitProjectId());
 		completeUnitProjectImpl.setBjbh(completeUnitProject.getBjbh());
 		completeUnitProjectImpl.setSgxkzbh(completeUnitProject.getSgxkzbh());
 		completeUnitProjectImpl.setGcbh(completeUnitProject.getGcbh());

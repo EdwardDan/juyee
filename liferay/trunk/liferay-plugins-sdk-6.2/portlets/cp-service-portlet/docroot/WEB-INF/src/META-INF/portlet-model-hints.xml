@@ -468,6 +468,7 @@
 	<model name="com.justonetech.cp.complete.model.CompleteUnitProject">
 		<field name="projectId" type="long" />
 		<field name="completeId" type="long" />
+		<field name="permitUnitProjectId" type="long" />
 		<field name="bjbh" type="String" />
 		<field name="sgxkzbh" type="String" />
 		<field name="gcbh" type="String" />

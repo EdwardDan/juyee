@@ -31,6 +31,7 @@ public class CompleteUnitProjectSoap implements Serializable {
 
 		soapModel.setProjectId(model.getProjectId());
 		soapModel.setCompleteId(model.getCompleteId());
+		soapModel.setPermitUnitProjectId(model.getPermitUnitProjectId());
 		soapModel.setBjbh(model.getBjbh());
 		soapModel.setSgxkzbh(model.getSgxkzbh());
 		soapModel.setGcbh(model.getGcbh());
@@ -107,6 +108,14 @@ public class CompleteUnitProjectSoap implements Serializable {
 		_completeId = completeId;
 	}
 
+	public long getPermitUnitProjectId() {
+		return _permitUnitProjectId;
+	}
+
+	public void setPermitUnitProjectId(long permitUnitProjectId) {
+		_permitUnitProjectId = permitUnitProjectId;
+	}
+
 	public String getBjbh() {
 		return _bjbh;
 	}
@@ -149,6 +158,7 @@ public class CompleteUnitProjectSoap implements Serializable {
 
 	private long _projectId;
 	private long _completeId;
+	private long _permitUnitProjectId;
 	private String _bjbh;
 	private String _sgxkzbh;
 	private String _gcbh;

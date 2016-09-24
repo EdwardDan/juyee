@@ -127,9 +127,21 @@ public class UnitProjectLocalServiceClp implements UnitProjectLocalService {
 
 		_methodParameterTypes21 = new String[] { "java.lang.String", "int", "int" };
 
-		_methodName22 = "countByBjbh";
+		_methodName22 = "findByBjbhAndPermitUnitProjectIds";
 
-		_methodParameterTypes22 = new String[] { "java.lang.String" };
+		_methodParameterTypes22 = new String[] {
+				"java.lang.String", "java.lang.Long[][]", "int", "int"
+			};
+
+		_methodName23 = "countByBjbh";
+
+		_methodParameterTypes23 = new String[] { "java.lang.String" };
+
+		_methodName24 = "createDynamicQuery";
+
+		_methodParameterTypes24 = new String[] {
+				"java.lang.String", "java.lang.Long[][]"
+			};
 	}
 
 	@Override
@@ -756,12 +768,46 @@ public class UnitProjectLocalServiceClp implements UnitProjectLocalService {
 	}
 
 	@Override
-	public int countByBjbh(java.lang.String bjbh) {
+	public java.util.List<com.justonetech.cp.permit.model.UnitProject> findByBjbhAndPermitUnitProjectIds(
+		java.lang.String bjbh, java.lang.Long[] permitUnitProjectIds,
+		int start, int end) {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName22,
 					_methodParameterTypes22,
+					new Object[] {
+						ClpSerializer.translateInput(bjbh),
+						
+					ClpSerializer.translateInput(permitUnitProjectIds),
+						
+					start,
+						
+					end
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<com.justonetech.cp.permit.model.UnitProject>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public int countByBjbh(java.lang.String bjbh) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName23,
+					_methodParameterTypes23,
 					new Object[] { ClpSerializer.translateInput(bjbh) });
 		}
 		catch (Throwable t) {
@@ -777,6 +823,35 @@ public class UnitProjectLocalServiceClp implements UnitProjectLocalService {
 		}
 
 		return ((Integer)returnObj).intValue();
+	}
+
+	@Override
+	public com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQuery(
+		java.lang.String bjbh, java.lang.Long[] permitUnitProjectIds) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableLocalService.invokeMethod(_methodName24,
+					_methodParameterTypes24,
+					new Object[] {
+						ClpSerializer.translateInput(bjbh),
+						
+					ClpSerializer.translateInput(permitUnitProjectIds)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.liferay.portal.kernel.dao.orm.DynamicQuery)ClpSerializer.translateOutput(returnObj);
 	}
 
 	private InvokableLocalService _invokableLocalService;
@@ -824,4 +899,8 @@ public class UnitProjectLocalServiceClp implements UnitProjectLocalService {
 	private String[] _methodParameterTypes21;
 	private String _methodName22;
 	private String[] _methodParameterTypes22;
+	private String _methodName23;
+	private String[] _methodParameterTypes23;
+	private String _methodName24;
+	private String[] _methodParameterTypes24;
 }

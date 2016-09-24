@@ -262,5 +262,12 @@ public interface UnitProjectLocalService extends BaseLocalService,
 	public java.util.List<com.justonetech.cp.permit.model.UnitProject> findByBjbh(
 		java.lang.String bjbh, int start, int end);
 
+	public java.util.List<com.justonetech.cp.permit.model.UnitProject> findByBjbhAndPermitUnitProjectIds(
+		java.lang.String bjbh, java.lang.Long[] permitUnitProjectIds,
+		int start, int end);
+
 	public int countByBjbh(java.lang.String bjbh);
+
+	public com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQuery(
+		java.lang.String bjbh, java.lang.Long[] permitUnitProjectIds);
 }

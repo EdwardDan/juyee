@@ -75,6 +75,7 @@ public class CompleteUnitProjectClp extends BaseModelImpl<CompleteUnitProject>
 
 		attributes.put("projectId", getProjectId());
 		attributes.put("completeId", getCompleteId());
+		attributes.put("permitUnitProjectId", getPermitUnitProjectId());
 		attributes.put("bjbh", getBjbh());
 		attributes.put("sgxkzbh", getSgxkzbh());
 		attributes.put("gcbh", getGcbh());
@@ -96,6 +97,12 @@ public class CompleteUnitProjectClp extends BaseModelImpl<CompleteUnitProject>
 
 		if (completeId != null) {
 			setCompleteId(completeId);
+		}
+
+		Long permitUnitProjectId = (Long)attributes.get("permitUnitProjectId");
+
+		if (permitUnitProjectId != null) {
+			setPermitUnitProjectId(permitUnitProjectId);
 		}
 
 		String bjbh = (String)attributes.get("bjbh");
@@ -168,6 +175,31 @@ public class CompleteUnitProjectClp extends BaseModelImpl<CompleteUnitProject>
 				Method method = clazz.getMethod("setCompleteId", long.class);
 
 				method.invoke(_completeUnitProjectRemoteModel, completeId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public long getPermitUnitProjectId() {
+		return _permitUnitProjectId;
+	}
+
+	@Override
+	public void setPermitUnitProjectId(long permitUnitProjectId) {
+		_permitUnitProjectId = permitUnitProjectId;
+
+		if (_completeUnitProjectRemoteModel != null) {
+			try {
+				Class<?> clazz = _completeUnitProjectRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setPermitUnitProjectId",
+						long.class);
+
+				method.invoke(_completeUnitProjectRemoteModel,
+					permitUnitProjectId);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -363,6 +395,7 @@ public class CompleteUnitProjectClp extends BaseModelImpl<CompleteUnitProject>
 
 		clone.setProjectId(getProjectId());
 		clone.setCompleteId(getCompleteId());
+		clone.setPermitUnitProjectId(getPermitUnitProjectId());
 		clone.setBjbh(getBjbh());
 		clone.setSgxkzbh(getSgxkzbh());
 		clone.setGcbh(getGcbh());
@@ -418,12 +451,14 @@ public class CompleteUnitProjectClp extends BaseModelImpl<CompleteUnitProject>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(15);
+		StringBundler sb = new StringBundler(17);
 
 		sb.append("{projectId=");
 		sb.append(getProjectId());
 		sb.append(", completeId=");
 		sb.append(getCompleteId());
+		sb.append(", permitUnitProjectId=");
+		sb.append(getPermitUnitProjectId());
 		sb.append(", bjbh=");
 		sb.append(getBjbh());
 		sb.append(", sgxkzbh=");
@@ -441,7 +476,7 @@ public class CompleteUnitProjectClp extends BaseModelImpl<CompleteUnitProject>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(28);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.cp.complete.model.CompleteUnitProject");
@@ -454,6 +489,10 @@ public class CompleteUnitProjectClp extends BaseModelImpl<CompleteUnitProject>
 		sb.append(
 			"<column><column-name>completeId</column-name><column-value><![CDATA[");
 		sb.append(getCompleteId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>permitUnitProjectId</column-name><column-value><![CDATA[");
+		sb.append(getPermitUnitProjectId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>bjbh</column-name><column-value><![CDATA[");
@@ -483,6 +522,7 @@ public class CompleteUnitProjectClp extends BaseModelImpl<CompleteUnitProject>
 
 	private long _projectId;
 	private long _completeId;
+	private long _permitUnitProjectId;
 	private String _bjbh;
 	private String _sgxkzbh;
 	private String _gcbh;

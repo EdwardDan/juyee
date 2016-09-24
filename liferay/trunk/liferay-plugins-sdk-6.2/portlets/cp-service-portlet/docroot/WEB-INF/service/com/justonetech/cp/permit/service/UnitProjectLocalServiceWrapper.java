@@ -305,8 +305,23 @@ public class UnitProjectLocalServiceWrapper implements UnitProjectLocalService,
 	}
 
 	@Override
+	public java.util.List<com.justonetech.cp.permit.model.UnitProject> findByBjbhAndPermitUnitProjectIds(
+		java.lang.String bjbh, java.lang.Long[] permitUnitProjectIds,
+		int start, int end) {
+		return _unitProjectLocalService.findByBjbhAndPermitUnitProjectIds(bjbh,
+			permitUnitProjectIds, start, end);
+	}
+
+	@Override
 	public int countByBjbh(java.lang.String bjbh) {
 		return _unitProjectLocalService.countByBjbh(bjbh);
+	}
+
+	@Override
+	public com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQuery(
+		java.lang.String bjbh, java.lang.Long[] permitUnitProjectIds) {
+		return _unitProjectLocalService.createDynamicQuery(bjbh,
+			permitUnitProjectIds);
 	}
 
 	/**

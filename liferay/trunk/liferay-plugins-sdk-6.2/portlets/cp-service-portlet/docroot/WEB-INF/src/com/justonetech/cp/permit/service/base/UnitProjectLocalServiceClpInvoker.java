@@ -126,9 +126,21 @@ public class UnitProjectLocalServiceClpInvoker {
 
 		_methodParameterTypes56 = new String[] { "java.lang.String", "int", "int" };
 
-		_methodName57 = "countByBjbh";
+		_methodName57 = "findByBjbhAndPermitUnitProjectIds";
 
-		_methodParameterTypes57 = new String[] { "java.lang.String" };
+		_methodParameterTypes57 = new String[] {
+				"java.lang.String", "java.lang.Long[][]", "int", "int"
+			};
+
+		_methodName58 = "countByBjbh";
+
+		_methodParameterTypes58 = new String[] { "java.lang.String" };
+
+		_methodName59 = "createDynamicQuery";
+
+		_methodParameterTypes59 = new String[] {
+				"java.lang.String", "java.lang.Long[][]"
+			};
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -253,7 +265,21 @@ public class UnitProjectLocalServiceClpInvoker {
 
 		if (_methodName57.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes57, parameterTypes)) {
+			return UnitProjectLocalServiceUtil.findByBjbhAndPermitUnitProjectIds((java.lang.String)arguments[0],
+				(java.lang.Long[])arguments[1],
+				((Integer)arguments[2]).intValue(),
+				((Integer)arguments[3]).intValue());
+		}
+
+		if (_methodName58.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes58, parameterTypes)) {
 			return UnitProjectLocalServiceUtil.countByBjbh((java.lang.String)arguments[0]);
+		}
+
+		if (_methodName59.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes59, parameterTypes)) {
+			return UnitProjectLocalServiceUtil.createDynamicQuery((java.lang.String)arguments[0],
+				(java.lang.Long[])arguments[1]);
 		}
 
 		throw new UnsupportedOperationException();
@@ -303,4 +329,8 @@ public class UnitProjectLocalServiceClpInvoker {
 	private String[] _methodParameterTypes56;
 	private String _methodName57;
 	private String[] _methodParameterTypes57;
+	private String _methodName58;
+	private String[] _methodParameterTypes58;
+	private String _methodName59;
+	private String[] _methodParameterTypes59;
 }

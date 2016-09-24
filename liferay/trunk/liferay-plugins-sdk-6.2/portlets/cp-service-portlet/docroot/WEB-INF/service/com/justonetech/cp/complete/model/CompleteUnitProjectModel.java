@@ -86,6 +86,20 @@ public interface CompleteUnitProjectModel extends BaseModel<CompleteUnitProject>
 	public void setCompleteId(long completeId);
 
 	/**
+	 * Returns the permit unit project ID of this complete unit project.
+	 *
+	 * @return the permit unit project ID of this complete unit project
+	 */
+	public long getPermitUnitProjectId();
+
+	/**
+	 * Sets the permit unit project ID of this complete unit project.
+	 *
+	 * @param permitUnitProjectId the permit unit project ID of this complete unit project
+	 */
+	public void setPermitUnitProjectId(long permitUnitProjectId);
+
+	/**
 	 * Returns the bjbh of this complete unit project.
 	 *
 	 * @return the bjbh of this complete unit project

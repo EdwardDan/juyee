@@ -486,6 +486,7 @@
 		<attributes>
 			<id name="projectId" />
 			<basic name="completeId" />
+			<basic name="permitUnitProjectId" />
 			<basic name="bjbh" />
 			<basic name="sgxkzbh" />
 			<basic name="gcbh" />

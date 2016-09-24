@@ -433,6 +433,7 @@
 			<generator class="assigned" />
 		</id>
 		<property name="completeId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="permitUnitProjectId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="bjbh" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="sgxkzbh" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="gcbh" type="com.liferay.portal.dao.orm.hibernate.StringType" />
