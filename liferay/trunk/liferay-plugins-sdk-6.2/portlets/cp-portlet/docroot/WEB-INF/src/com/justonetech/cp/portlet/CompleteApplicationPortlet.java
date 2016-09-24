@@ -93,8 +93,8 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 		String zzjgdm = "";
 		try {
 			long[] roles = user.getRoleIds();
-			for(long role:roles){
-				if(role == 25421){
+			for (long role : roles) {
+				if (role == 25421) {
 					zzjgdm = Validator.isNull(user) ? "" : user.getScreenName();
 				}
 			}
@@ -113,7 +113,7 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 		int end = delta * cur;
 		List<Complete> completes = Collections.emptyList();
 		int completesCount = 0;
-		String gs = "";//根据角色来判断是市属还是区属
+		String gs = "";// 根据角色来判断是市属还是区属
 		completes = CompleteLocalServiceUtil.getCompletes(zzjgdm, bjbh, wssqbh, gcmc, status, gs, start, end);
 		completesCount = CompleteLocalServiceUtil.getCompletesCount(zzjgdm, bjbh, wssqbh, gcmc, status, gs);
 		renderRequest.setAttribute("zzjgdm", zzjgdm);
@@ -147,8 +147,8 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 			String zzjgdm = "";
 			try {
 				long[] roles = user.getRoleIds();
-				for(long role:roles){
-					if(role == 25421){
+				for (long role : roles) {
+					if (role == 25421) {
 						zzjgdm = Validator.isNull(user) ? "" : user.getScreenName();
 					}
 				}
@@ -173,24 +173,24 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 			}
 			renderRequest.setAttribute("bjrqStartStr", bjrqStartStr);
 			renderRequest.setAttribute("bjrqEndStr", bjrqEndStr);
-			
+
 			renderRequest.setAttribute("bjbh", bjbh);
 			renderRequest.setAttribute("wssqbh", wssqbh);
 			renderRequest.setAttribute("xmmc", xmmc);
 			renderRequest.setAttribute("bjrqStart", bjrqStart);
 			renderRequest.setAttribute("bjrqEnd", bjrqEnd);
 			renderRequest.setAttribute("bjwcbj", bjwcbj);
-			
+
 			int projectsCount = 0;
 			int defaultDelta = GetterUtil.getInteger(PropsUtil.get(PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA));
 			int delta = ParamUtil.getInteger(renderRequest, "delta", defaultDelta);
 			int cur = ParamUtil.getInteger(renderRequest, "cur", 1);
 			int start = delta * (cur - 1);
 			int end = delta * cur;
-			List<Project> projects = ProjectLocalServiceUtil.getProjects(zzjgdm, bjbh, wssqbh, xmmc, bjrqStart, bjrqEnd,
-					bjwcbj, start, end);
-			projectsCount = ProjectLocalServiceUtil
-					.getProjectsCount(zzjgdm, bjbh, wssqbh, xmmc, bjrqStart, bjrqEnd, bjwcbj);
+			List<Project> projects = ProjectLocalServiceUtil.getProjects(zzjgdm, bjbh, wssqbh, xmmc, bjrqStart,
+					bjrqEnd, bjwcbj, start, end);
+			projectsCount = ProjectLocalServiceUtil.getProjectsCount(zzjgdm, bjbh, wssqbh, xmmc, bjrqStart, bjrqEnd,
+					bjwcbj);
 			renderRequest.setAttribute("projects", projects);
 			renderRequest.setAttribute("projectsCount", projectsCount);
 		} else if (Validator.equals(mvcPath, "/portlet/complete-application/edit-complete.jsp")) {
@@ -201,14 +201,30 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 			List<UnitProject> unitProjects = new ArrayList<UnitProject>();
 			String bjbh = ParamUtil.getString(renderRequest, "bjbh");
 			String completeId = renderRequest.getParameter("completeId");
+			String permitUnitProjectIds = renderRequest.getParameter("permitUnitProjectIds");
 			int defaultDelta = GetterUtil.getInteger(PropsUtil.get(PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA));
 			int delta = ParamUtil.getInteger(renderRequest, "delta", defaultDelta);
 			int cur = ParamUtil.getInteger(renderRequest, "cur", 1);
 			int start = delta * (cur - 1);
 			int end = delta * cur;
 			if (Validator.isNotNull(bjbh)) {
-				unitProjects = UnitProjectLocalServiceUtil.findByBjbh(bjbh, start, end);
+
+				String[] permitUnitProjectIdArr = null;
+				Long[] longPermitUnitProjectIds = null;
+				if (permitUnitProjectIds != null && permitUnitProjectIds.length() > 0) {
+					permitUnitProjectIdArr = permitUnitProjectIds.split(",");
+					longPermitUnitProjectIds = new Long[permitUnitProjectIdArr.length];
+					if (null != permitUnitProjectIdArr && permitUnitProjectIdArr.length > 0) {
+						for (int i = 0; i < longPermitUnitProjectIds.length; i++) {
+							longPermitUnitProjectIds[i] = Long.valueOf(permitUnitProjectIdArr[i]);
+						}
+					}
+				}
+
+				unitProjects = UnitProjectLocalServiceUtil.findByBjbhAndPermitUnitProjectIds(bjbh,
+						longPermitUnitProjectIds, start, end);
 			}
+			renderRequest.setAttribute("permitUnitProjectIds", permitUnitProjectIds);
 			renderRequest.setAttribute("bjbh", bjbh);
 			renderRequest.setAttribute("completeId", Long.valueOf(completeId));
 			renderRequest.setAttribute("unitProjects", unitProjects);
@@ -313,6 +329,7 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 				CompleteUnitProjectLocalServiceUtil.deleteCompleteUnitProject(completeUnitProject);
 			}
 			//
+			String[] permitUnitProjectIds = ParamUtil.getParameterValues(request, "permitUnitProjectId");
 			String bjbh = ParamUtil.getString(request, "bjbh");
 			String[] sgxkzbh = ParamUtil.getParameterValues(request, "sgxkzbh");
 			String[] gcbhs = ParamUtil.getParameterValues(request, "gcbh");
@@ -327,6 +344,8 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 				unitProject.setGcbh(gcbhs[i]);
 				unitProject.setGcmc(gcmcs[i]);
 				unitProject.setJsnr(jsnrs[i]);
+				unitProject.setJsnr(jsnrs[i]);
+				unitProject.setPermitUnitProjectId(Long.valueOf(permitUnitProjectIds[i]));
 				CompleteUnitProjectLocalServiceUtil.addCompleteUnitProject(unitProject);
 			}
 
@@ -576,33 +595,33 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 		complete.setSqbz(0);
 		complete.setStatus(CompleteStatus.STATUS_SB.getCode());
 		CompleteLocalServiceUtil.updateComplete(complete);
-		
+
 		try {
 			User user = PortalUtil.getUser(request);
-			Role aRole =null;
-			Set<Long> userIdsList=new HashSet<Long>();
+			Role aRole = null;
+			Set<Long> userIdsList = new HashSet<Long>();
 			List<User> users = new ArrayList<User>();
-			long[] userIds =null;
-			if(completeProjectProfile.getLxjb().equals("区县级机关或区县级单位")){
-				 aRole = RoleLocalServiceUtil.fetchRole(user.getCompanyId(), "区竣工备案审核");
-				 userIds=UserLocalServiceUtil.getRoleUserIds(aRole.getRoleId());
-				 for (long useId : userIds) {
-						userIdsList.add(useId);
-					}
-				 aRole = RoleLocalServiceUtil.fetchRole(user.getCompanyId(), "市竣工备案审核");
-				 userIds=UserLocalServiceUtil.getRoleUserIds(aRole.getRoleId());
-				 for (long useId : userIds) {
-						userIdsList.add(useId);
-					}
-				 for(long userId:userIdsList){
-					 users.add(UserLocalServiceUtil.getUser(userId));
-				 }
-			}else{
+			long[] userIds = null;
+			if (completeProjectProfile.getLxjb().equals("区县级机关或区县级单位")) {
+				aRole = RoleLocalServiceUtil.fetchRole(user.getCompanyId(), "区竣工备案审核");
+				userIds = UserLocalServiceUtil.getRoleUserIds(aRole.getRoleId());
+				for (long useId : userIds) {
+					userIdsList.add(useId);
+				}
 				aRole = RoleLocalServiceUtil.fetchRole(user.getCompanyId(), "市竣工备案审核");
-				 userIds = UserLocalServiceUtil.getRoleUserIds(aRole.getRoleId());
-				 for (long useId : userIds) {
-						users.add(UserLocalServiceUtil.getUser(useId));
-					}
+				userIds = UserLocalServiceUtil.getRoleUserIds(aRole.getRoleId());
+				for (long useId : userIds) {
+					userIdsList.add(useId);
+				}
+				for (long userId : userIdsList) {
+					users.add(UserLocalServiceUtil.getUser(userId));
+				}
+			} else {
+				aRole = RoleLocalServiceUtil.fetchRole(user.getCompanyId(), "市竣工备案审核");
+				userIds = UserLocalServiceUtil.getRoleUserIds(aRole.getRoleId());
+				for (long useId : userIds) {
+					users.add(UserLocalServiceUtil.getUser(useId));
+				}
 			}
 			ServiceContext serviceContext = ServiceContextFactory.getInstance(request);
 			JSONObject payloadJSON = JSONFactoryUtil.createJSONObject();
