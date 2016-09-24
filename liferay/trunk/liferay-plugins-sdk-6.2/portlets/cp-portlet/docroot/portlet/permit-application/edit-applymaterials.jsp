@@ -171,8 +171,15 @@
 	</table>
 
 	<div style="text-align: center">
-		<aui:button value="保存" onclick="saveMaterials()"
+	<c:if test="${permit.status!=2 }">
+	<aui:button value="保存" onclick="saveMaterials()"
 			cssClass="btn btn-primary" />
+			</c:if>
+			<c:if test="${permit.status==2 }">
+	<aui:button value="保存" onclick="submitAll()"
+			cssClass="btn btn-primary" />
+			</c:if>
+		
 		<c:if test="<%=canTj%>">
 			<aui:button value="上报" onclick="submitAll()"
 				cssClass="btn btn-primary" />
