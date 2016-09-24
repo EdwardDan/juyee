@@ -173,7 +173,7 @@ public class PermitApprovalPortlet extends MVCPortlet {
 		long permitId = ParamUtil.getLong(request, "permitId");
 		ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
 		String xmlx = DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx()).getName();
-		DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(29087);
+		DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(39945);
 		String newPDFPath = "F://jtjs//" + xmlx + "施工许可证书.pdf";
 		Map<String, String> map = getMap(permitId, xmlx);
 		fillTemplate(request, response, fileEntry, newPDFPath, map);
@@ -185,7 +185,7 @@ public class PermitApprovalPortlet extends MVCPortlet {
 		long permitId = ParamUtil.getLong(request, "permitId");
 		ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
 		String xmlx = DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx()).getName();
-		DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(29017);
+		DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(39977);
 		String newPDFPath = "F://jtjs//" + xmlx + "施工许可证书(绿色通道).pdf";
 		Map<String, String> map = getMap(permitId, xmlx);
 		fillTemplate(request, response, fileEntry, newPDFPath, map);
@@ -195,7 +195,7 @@ public class PermitApprovalPortlet extends MVCPortlet {
 	public void kgba(ActionRequest request, ActionResponse response) throws PortalException, SystemException, IOException, DocumentException, com.lowagie.text.DocumentException {
 		long permitId = ParamUtil.getLong(request, "permitId");
 		Map<String, String> map = getKgbaMap(permitId);
-		DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(29302);
+		DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(39913);
 		String newPDFPath = "F://jtjs//航道工程开工备案表.pdf";
 		fillTemplate(request, response, fileEntry, newPDFPath, map);
 	}
@@ -452,7 +452,7 @@ public class PermitApprovalPortlet extends MVCPortlet {
 			if(resourceId.equals("printkgbaExcel")){
 				long permitId = ParamUtil.getLong(resourceRequest, "permitId");
 				Map<String, String> map = getKgbaMap(permitId);
-				DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(29715);
+				DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(39929);
 				XLSTransformer transformer = new XLSTransformer();
 		        HSSFWorkbook hssfWorkbook = transformer.transformXLS(fileEntry.getContentStream(), map);
 		        ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -469,7 +469,7 @@ public class PermitApprovalPortlet extends MVCPortlet {
 				String xmlx = DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx()).getName();
 				String fileName = xmlx+"施工许可.xls";
 				Map<String, String> map = getMap(permitId, xmlx);
-				DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(29682);
+				DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(39961 );
 				XLSTransformer transformer = new XLSTransformer();
 		        HSSFWorkbook hssfWorkbook = transformer.transformXLS(fileEntry.getContentStream(), map);
 		        ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -486,7 +486,7 @@ public class PermitApprovalPortlet extends MVCPortlet {
 				String xmlx = DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx()).getName();
 				String fileName = xmlx+"施工许可(绿色).xls";
 				Map<String, String> map = getMap(permitId, xmlx);
-				DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(29668);
+				DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(39993);
 				XLSTransformer transformer = new XLSTransformer();
 		        HSSFWorkbook hssfWorkbook = transformer.transformXLS(fileEntry.getContentStream(), map);
 		        ByteArrayOutputStream baos = new ByteArrayOutputStream();
