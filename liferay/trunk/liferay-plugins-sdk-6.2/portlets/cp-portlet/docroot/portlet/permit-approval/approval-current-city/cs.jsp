@@ -109,6 +109,7 @@ request.setAttribute("applyMaterials", applyMaterials);
 				<div class="hide" id="<%= randomId %>updateComments">
 	<aui:input cols="55" name="_153_comment" id="_153_comment" label="审核意见" useNamespace="false" rows="10" type="textarea" />
 </div>
+		<c:if test='<%=!Validator.isBlank(applyMaterials.get(0).getCsyj())%>'>
 		<liferay-ui:icon
 				cssClass='<%= "workflow-task-" + randomId + " task-change-status-link" %>'
 				id='<%= randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink" %>'
@@ -121,6 +122,16 @@ request.setAttribute("applyMaterials", applyMaterials);
 var onTaskClickFn = A.rbind('onTaskClick', Liferay.WorkflowTasks,'<%= randomId %>',true);
 Liferay.delegateClick('<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(transitionName) %>taskChangeStatusLink', onTaskClickFn);
 </aui:script>
+</c:if>
+<c:if test='<%=Validator.isBlank(applyMaterials.get(0).getCsyj())%>'>
+<liferay-ui:icon
+				cssClass='<%= "workflow-task-" + randomId + " task-change-status-link" %>'
+				id='<%= randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink" %>'
+				image="shtgx"
+				message="<%= message %>"
+				method="get"
+			/>
+</c:if>
 				<%
 		    		}
 		    	}
