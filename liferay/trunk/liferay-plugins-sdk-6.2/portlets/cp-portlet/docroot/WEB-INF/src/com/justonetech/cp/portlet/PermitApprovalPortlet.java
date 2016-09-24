@@ -2,7 +2,6 @@ package com.justonetech.cp.portlet;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,7 +27,6 @@ import net.sf.jxls.transformer.XLSTransformer;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
-import com.alibaba.fastjson.JSONObject;
 import com.itextpdf.text.DocumentException;
 import com.justonetech.cp.permit.model.ApplyMaterial;
 import com.justonetech.cp.permit.model.ParticipationUnit;
@@ -42,10 +40,10 @@ import com.justonetech.sys.model.Dictionary;
 import com.justonetech.sys.service.DictionaryLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.servlet.ServletResponseUtil;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
-import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.FileUtil;
