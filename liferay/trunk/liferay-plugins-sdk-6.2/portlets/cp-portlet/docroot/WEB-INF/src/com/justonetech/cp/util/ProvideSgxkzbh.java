@@ -30,7 +30,6 @@ public class ProvideSgxkzbh {
 		List<Permit> permits = PermitLocalServiceUtil.getPermits(-1, -1);
 		int num = 1;
 		for(Permit permit2:permits){
-			System.out.println(num+":"+permit2.getSgxkzbh().length());
 			if(permit2.getSgxkzbh().trim()!=null&&permit2.getSgxkzbh().trim()!=""){
 				String bjbh = permit2.getSgxkzbh().substring(2, 12);
 				if(bjbh.equals(permit1.getBjbh())){
