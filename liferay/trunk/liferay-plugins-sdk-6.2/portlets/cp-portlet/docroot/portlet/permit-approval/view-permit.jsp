@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
 <%@ include file="init.jsp"%>
+<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <liferay-ui:header title="施工许可申请查看" backURL="${viewURL }" />
 <liferay-ui:tabs names="工程概况,参建单位,单位工程,申请材料" refresh="false">
 	<liferay-ui:section>
@@ -20,7 +21,6 @@
 <%
 	Long permitId = ParamUtil.getLong(request, "permitId");
 	Permit permit = PermitLocalServiceUtil.getPermit(permitId);
-	long sgxkzFileEntry = permit.getSgxkzFileEntryId();
 	ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
 	int status = permit.getStatus();
 	request.setAttribute("permitId", permitId);
@@ -46,15 +46,12 @@
 		<portlet:param name="mvcPath" value="${contextPath}/print/jsscb.jsp" />
 		<portlet:param name="permitId" value="${permitId}" />
 	</portlet:renderURL>
-	<portlet:actionURL var="printsgxkURL" name="sgxk">
-		<portlet:param name="permitId" value="${permitId}" />
-	</portlet:actionURL>
-	<portlet:actionURL var="printsgxklsURL" name="sgxkls">
-		<portlet:param name="permitId" value="${permitId}" />
-	</portlet:actionURL>
-	<portlet:actionURL var="printkgbaURL" name="kgba"> 
-		<portlet:param name="permitId" value="${permitId}" />
-	</portlet:actionURL>
+	<portlet:resourceURL var="printsgxkURL" id="printsgxkPdf">
+	</portlet:resourceURL>
+	<portlet:resourceURL var="printsgxklsURL" id="printsgxklsPdf">
+	</portlet:resourceURL>
+	<portlet:resourceURL var="printkgbaURL" id="printkgbaPdf"> 
+	</portlet:resourceURL>
 	<portlet:resourceURL var="printsgxk" id="ptintsgxkExcel">  
 		<portlet:param name="permitId" value="${permitId}" /> 
 	</portlet:resourceURL>
@@ -85,19 +82,16 @@
 		<c:if test="<%=status == CityPermitStatus.STATUS_WLD_PASS.getCode()%>">
 			<c:choose>
 				<c:when test="<%=projectProfile.getXmlx() == 29741%>">
-					<c:if test="<%=sgxkzFileEntry!=0 %>">
-						<a class="btn" href="${printkgbaURL}">开工备案Pdf</a>
-					</c:if>
-					<a class="btn" href="${printkgbaURL}">开工备案Pdf</a>
+					<a class="btn" onclick="kgba()">开工备案Pdf</a>
 					<a class="btn" href="${printkgba}">开工备案Excel</a>
 				</c:when>
 				<c:otherwise>
 					<c:if test="<%=projectProfile.getXmxz() != 29769%>">
-						<a class="btn" href="${printsgxklszsURL}" >施工许可(绿色)Pdf</a>
+						<a class="btn" onclick="sgxk()" >施工许可(绿色)Pdf</a>
 						<a class="btn" href="${printsgxkls}">施工许可(绿色)Excel</a>
 					</c:if>
 					<c:if test="<%=projectProfile.getXmxz() == 29769%>">
-						<a class="btn" href="${printsgxkURL}">施工许可Pdf</a>
+						<a class="btn" onclick="sgxkls()">施工许可Pdf</a>
 						<a class="btn" href="${printsgxk}">施工许可Excel</a>
 					</c:if>
 				</c:otherwise>
@@ -126,20 +120,58 @@
 			test="<%=status == CountyPermitStatus.STATUS_SP_PASS.getCode()%>">
 			<c:choose>
 				<c:when test="<%=projectProfile.getXmlx() == 29741%>">
-					<a class="btn" href="${printkgbaURL}">开工备案Pdf</a>
+					<a class="btn" onclick="kgba()">开工备案Pdf</a>
 					<a class="btn" href="${printkgba}">开工备案Excel</a>
 				</c:when>
 				<c:otherwise>
 					<c:if test="<%=projectProfile.getXmxz() != 29769%>">
-						<a class="btn" href="${printsgxklszsURL}">施工许可(绿色)Pdf</a>
+						<a class="btn" onclick="sgxk()" >施工许可(绿色)Pdf</a>
 						<a class="btn" href="${printsgxkls}">施工许可(绿色)Excel</a>
 					</c:if>
 					<c:if test="<%=projectProfile.getXmxz() == 29769%>">
-						<a class="btn" href="${printsgxkURL}">施工许可Pdf</a>
+						<a class="btn" onclick="sgxkls()">施工许可Pdf</a>
 						<a class="btn" href="${printsgxk}">施工许可Excel</a>
 					</c:if>
 				</c:otherwise>
 			</c:choose>
 		</c:if>
 	</c:if>
+<script type="text/javascript">
+	function kgba(){
+		$.ajax({
+			type:"GET",	
+			url:"<%=printkgbaURL%>",
+			data:{
+				'permitId':<%=permitId%>
+			},
+			success:function(data){
+				location.href=data;
+			}
+		})
+	}
+	function sgxk(){
+		$.ajax({
+			type:"GET",
+			url:"<%=printsgxkURL%>",
+			data:{
+				'permitId':<%=permitId%>
+			},
+			success:function(data){
+				location.href=data;
+			}
+		})
+	}
+	function sgxkls(){
+		$.ajax({
+			type:"GET",
+			url:"<%=printsgxklsURL%>",
+			data:{
+				'permitId':<%=permitId%>
+			},
+			success:function(data){
+				location.href=data;
+			}
+		})
+	}
+</script>
 </aui:button-row>
