@@ -14,6 +14,8 @@
 
 <%
 	long permitId =ParamUtil.getLong(renderRequest,"permitId");
+	Permit permit = PermitLocalServiceUtil.getPermit(permitId);
+	request.setAttribute("permit", permit);
 	List<ApplyMaterial> materialList=ApplyMaterialLocalServiceUtil.findByPermitId(permitId, -1, -1);
 	Map<Long,List<DLFileEntry>> map=new HashMap<Long,List<DLFileEntry>>();
 	Map<Long,List<DLFileEntry>> mapBzcl=new HashMap<Long,List<DLFileEntry>>();
@@ -28,10 +30,8 @@
 	for(int j=0;j<fileEntryIdsArr.length;j++){
 		if(Validator.isNotNull(fileEntryIdsArr[j])){
 	String fileEntryId=fileEntryIdsArr[j].split("\\|")[0];
-	System.out.println("fileEntryId============="+fileEntryId);
 	DLFileEntry dlFileEntry=DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(fileEntryId));
 		list.add(dlFileEntry);
-		System.out.println("dlFileEntry.getTitle()============="+dlFileEntry.getTitle());
 	}
 	
 		}
@@ -46,9 +46,7 @@
 	for(int j=0;j<bzclIdsArr.length;j++){
 		if(Validator.isNotNull(bzclIdsArr[j])){
 	String fileEntryId=bzclIdsArr[j].split("\\|")[0];
-	System.out.println("bzclId============="+fileEntryId);
 	DLFileEntry dlFileEntry=DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(fileEntryId));
-	System.out.println("dlFileEntry.title============="+dlFileEntry.getTitle());
 		listBzcl.add(dlFileEntry);
 	}
 		
@@ -75,7 +73,10 @@
 			<th style="text-align: center; width: 5%;">序号</th>
 			<th style="text-align: center; width: 25%;">申请材料名称</th>
 			<th style="text-align: center; width: 30%;">附件</th>
+			<c:if test="${permit.status!=10}">
 			<th style="text-align: center; width: 15%;">补正材料查看</th>
+			</c:if>
+			<c:if test="${permit.status==10}">
 			<th style="text-align: center; width: 15%;">补正材料</th>
 			<th style="text-align: center; width: 10%;">操作 <span
 				class="taglib-icon-help"> <img
@@ -86,7 +87,7 @@
 					onblur="Liferay.Portal.ToolTip.hide();" aria-labelledby="vfyl"
 					alt=""> <span id="vfyl" class="hide-accessible tooltip-text">注:请上传jpg或pdf格式的文件，jpg格式文件大小不能超过2M,pdf格式文件不能超过20M,如果文件超过限定大小，请拆分后重新上传！</span>
 			</span></th>
-
+			</c:if>
 		</thead>
 		<c:forEach items="<%=materialList%>" var="material" varStatus="status">
 			<tr style="text-align: center" class="fileTr">
@@ -118,7 +119,7 @@
 					</div>
 				</td>
 
-
+<c:if test="${permit.status!=10}">
 				<td style="text-align: center">
 					<div class="${material.materialId}">
 						<c:if test="${not empty material.bzclIds}">
@@ -144,7 +145,8 @@
 						</c:if>
 					</div>
 				</td>
-
+</c:if>
+<c:if test="${permit.status==10}">
 				<td style="text-align: center">
 					<div id="fileDivBzcl${status.index+1}">
 						<!-- todo
@@ -172,6 +174,7 @@
 					onchange="${namespace}fileBzclUpLoad(${status.index+1},${material.materialId},'<%=portletDisplay.getId() %>');"></input>
 
 				</td>
+				</c:if>
 			</tr>
 		</c:forEach>
 
