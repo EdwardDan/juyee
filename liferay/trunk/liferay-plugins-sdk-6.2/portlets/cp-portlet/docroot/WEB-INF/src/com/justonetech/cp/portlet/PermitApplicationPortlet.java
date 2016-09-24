@@ -289,14 +289,16 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		projectProfile.setYzzpl3(yzzpl3);
 		projectProfile.setYzzpl4(yzzpl4);
 		ProjectProfileLocalServiceUtil.updateProjectProfile(projectProfile);
-		String ywbh = "JT";
-		Dictionary xmlxDic = DictionaryLocalServiceUtil.getDictionary(xmlx);
-		ywbh = ywbh + xmlxDic.getCode();
-		Locale locale = LocaleUtil.getDefault();
-		String currentDate = DateUtil.getCurrentDate("yyyy-MM-dd", locale);
-		String currentDateStr = currentDate.substring(2, 4) + currentDate.substring(5, 7);
-		ywbh = ywbh + currentDateStr + "0000";
-		permit.setYwbh(ywbh);
+		if(Validator.isNull(permit.getYwbh())){
+			String ywbh = "JT";
+			Dictionary xmlxDic = DictionaryLocalServiceUtil.getDictionary(xmlx);
+			ywbh = ywbh + xmlxDic.getCode();
+			Locale locale = LocaleUtil.getDefault();
+			String currentDate = DateUtil.getCurrentDate("yyyy-MM-dd", locale);
+			String currentDateStr = currentDate.substring(2, 4) + currentDate.substring(5, 7);
+			ywbh = ywbh + currentDateStr + "0000";
+			permit.setYwbh(ywbh);
+		}
 		permit.setBjbh(bjbh);
 		permit.setBdh(bdh);
 		permit.setZzjgdm(zzjgdm);
