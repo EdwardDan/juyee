@@ -198,7 +198,7 @@ public class PermitApprovalPortlet extends MVCPortlet {
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setIndexingEnabled(true);
 		long userId = PortalUtil.getUserId(request);
-		long repositoryId = PortalUtil.getScopeGroupId(request);
+		long repositoryId = Long.valueOf(PropsUtil.get("global.group.id"));
 		long folderId = Long.valueOf(PropsUtil.get("sgxkz.pdf.folder.id"));
 		return DLAppLocalServiceUtil.addFileEntry(userId, repositoryId, folderId, file.getName(), "application/pdf",permit.getSgxkzbh(),
 				null, null, file, serviceContext);
@@ -221,7 +221,7 @@ public class PermitApprovalPortlet extends MVCPortlet {
 		String jsdw = projectProfile.getJsdwmc();
 		String gcmc = projectProfile.getGcmc();
 		String gcwz = projectProfile.getJsdd();
-		String gcnr = "根据《中华人民共和国交通建设法》等相关法律规定，经审查，本工程符合施工条件，准予施工根据《中华人民共和国交通建设法》等相关法律规定，经审查，本工程符合施工条件，准予施工根据《中华人民共和国交通建设法》等相关法律规定，经审查，本工程符合施工条件，准予施工";
+		String gcnr = projectProfile.getJsgcgm();
 		String xmtzgs = projectProfile.getXmtzgs() + "(万元)";
 		String htjg = projectProfile.getHtjg() + "(万元)";
 		String sjdw = "";
@@ -413,6 +413,8 @@ public class PermitApprovalPortlet extends MVCPortlet {
 		if(permit.getSgxkzFileEntryId()==0){
 			DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(fileEntryId);
 			FileEntry file = fillTemplate(fileEntry, newPDFPath, map,request,response,permit);
+			permit.setSgxkzFileEntryId(file.getFileEntryId());
+			PermitLocalServiceUtil.updatePermit(permit);
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
 			downloadURL = "/documents/" + file.getGroupId()+"/"+file.getFolderId()+"/"+file.getTitle()+"?&download=true";
 		}else{
@@ -432,7 +434,8 @@ public class PermitApprovalPortlet extends MVCPortlet {
 			//生成开工备案pdf
 			if(resourceId.equals("printkgbaPdf")){
 				long permitId = ParamUtil.getLong(resourceRequest, "permitId");
-				String newPDFPath = PropsUtil.get("sgxkzs.folder.id");
+				Permit permit = PermitLocalServiceUtil.getPermit(permitId);
+				String newPDFPath = PropsUtil.get("sgxkz.temp.folder.id")+permit.getSgxkzbh()+".pdf";
 				Map<String, String> map = getKgbaMap(permitId);
 				String downloadURL = getDownLoadURL(resourceRequest,resourceResponse,permitId,Long.valueOf(PropsUtil.get("sgxkz.hd.pdf.template.id")),newPDFPath,map);
 				 PrintWriter out = resourceResponse.getWriter();
@@ -445,9 +448,10 @@ public class PermitApprovalPortlet extends MVCPortlet {
 				long permitId = ParamUtil.getLong(resourceRequest, "permitId");
 				ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
 				String xmlx = DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx()).getName();
-				String newPDFPath = PropsUtil.get("sgxkzs.folder.id");
+				Permit permit = PermitLocalServiceUtil.getPermit(permitId);
+				String newPDFPath = PropsUtil.get("sgxkz.temp.folder.id")+permit.getSgxkzbh()+".pdf";
 				Map<String, String> map = getMap(permitId, xmlx);
-				String downloadURL =getDownLoadURL(resourceRequest,resourceResponse,permitId, Long.valueOf(PropsUtil.get("sgxkz.hd.pdf.template.id")),newPDFPath,map);
+				String downloadURL =getDownLoadURL(resourceRequest,resourceResponse,permitId, Long.valueOf(PropsUtil.get("sgxkz.pdf.template.id")),newPDFPath,map);
 				 PrintWriter out = resourceResponse.getWriter();
 				 out.println(downloadURL);
 				 out.flush();
@@ -455,11 +459,11 @@ public class PermitApprovalPortlet extends MVCPortlet {
 			}
 			//生成施工许可绿色pdf
 			if(resourceId.equals("printsgxklsPdf")){
-				System.out.println("施工许可绿色");
 				long permitId = ParamUtil.getLong(resourceRequest, "permitId");
 				ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
 				String xmlx = DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx()).getName();
-				String newPDFPath = PropsUtil.get("sgxkzs.folder.id");
+				Permit permit = PermitLocalServiceUtil.getPermit(permitId);
+				String newPDFPath = PropsUtil.get("sgxkz.temp.folder.id")+permit.getSgxkzbh()+".pdf";
 				Map<String, String> map = getMap(permitId, xmlx);
 				String downloadURL =getDownLoadURL(resourceRequest,resourceResponse,permitId, Long.valueOf(PropsUtil.get("sgxkz.ls.pdf.template.id")),newPDFPath,map);
 				PrintWriter out = resourceResponse.getWriter();
@@ -470,25 +474,28 @@ public class PermitApprovalPortlet extends MVCPortlet {
 			//生成开工备案excel
 			if(resourceId.equals("printkgbaExcel")){
 				long permitId = ParamUtil.getLong(resourceRequest, "permitId");
+				Permit permit = PermitLocalServiceUtil.getPermit(permitId);
+				String fileName = permit.getSgxkzbh()+".xls";
 				Map<String, String> map = getKgbaMap(permitId);
-				DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(29715);
+				DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(PropsUtil.get("sgxkz.hd.xls.template.id")));
 				XLSTransformer transformer = new XLSTransformer();
 		        HSSFWorkbook hssfWorkbook = transformer.transformXLS(fileEntry.getContentStream(), map);
 		        ByteArrayOutputStream baos = new ByteArrayOutputStream();
 				hssfWorkbook.write(baos);
 				HttpServletRequest req = PortalUtil.getHttpServletRequest(resourceRequest);
 				HttpServletResponse res = PortalUtil.getHttpServletResponse(resourceResponse);
-				ServletResponseUtil.sendFile(req, res, "航道工程建设开工备案.xls", baos.toByteArray(),
+				ServletResponseUtil.sendFile(req, res, fileName, baos.toByteArray(),
 						ContentTypes.APPLICATION_VND_MS_EXCEL);
 			}
 			//生成施工许可excel
 			if(resourceId.equals("ptintsgxkExcel")){
 				long permitId = ParamUtil.getLong(resourceRequest, "permitId");
+				Permit permit = PermitLocalServiceUtil.getPermit(permitId);
+				String fileName = permit.getSgxkzbh()+".xls";
 				ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
 				String xmlx = DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx()).getName();
-				String fileName = xmlx+"施工许可证书.xls";
 				Map<String, String> map = getMap(permitId, xmlx);
-				DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(29682 );
+				DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(PropsUtil.get("sgxkz.xls.template.id")) );
 				XLSTransformer transformer = new XLSTransformer();
 		        HSSFWorkbook hssfWorkbook = transformer.transformXLS(fileEntry.getContentStream(), map);
 		        ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -501,11 +508,12 @@ public class PermitApprovalPortlet extends MVCPortlet {
 			//生成施工许可绿色excel
 			if(resourceId.equals("printsgxklsExcel")){
 				long permitId = ParamUtil.getLong(resourceRequest, "permitId");
+				Permit permit = PermitLocalServiceUtil.getPermit(permitId);
+				String fileName = permit.getSgxkzbh()+".xls";
 				ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
 				String xmlx = DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx()).getName();
-				String fileName = xmlx+"施工许可证书(绿色通道).xls";
 				Map<String, String> map = getMap(permitId, xmlx);
-				DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(29668);
+				DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(PropsUtil.get("sgxkz.ls.xls.template.id")));
 				XLSTransformer transformer = new XLSTransformer();
 		        HSSFWorkbook hssfWorkbook = transformer.transformXLS(fileEntry.getContentStream(), map);
 		        ByteArrayOutputStream baos = new ByteArrayOutputStream();
