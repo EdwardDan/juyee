@@ -121,7 +121,7 @@ tr.body td.content {
 		<td class="content">${projectProfile.jsdwsjh}</td>
 	</tr>
 	<tr class="body">
-		<td class="title">建设用地批准文件或房地产产权证编号</td>
+		<td class="title">工地批文名称及文号</td>
 		<td class="content" colspan="3">${projectProfile.jsydpzwjhfdccqzbh}</td>
 	</tr>
 	<tr class="body">
