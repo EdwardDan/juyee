@@ -92,10 +92,10 @@ tr.body td.content {
 		<td class="title">国有资金比重%</td>
 		<td class="content" colspan="3">${projectProfile.gyzjbz}</td>
 	</tr>
-	<tr class="body">
+<%-- 	<tr class="body">
 		<td class="title">房屋建筑面积(㎡)</td>
 		<td class="content" colspan="3">${projectProfile.fwjzmj}</td>
-	</tr>
+	</tr> --%>
 	<tr class="body">
 		<td class="title">合同价格(万元)</td>
 		<td class="content">${projectProfile.htjg}</td>
