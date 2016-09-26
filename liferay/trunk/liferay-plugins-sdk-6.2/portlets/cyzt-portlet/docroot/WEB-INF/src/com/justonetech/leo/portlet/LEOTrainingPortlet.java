@@ -47,7 +47,12 @@ public class LEOTrainingPortlet extends MVCPortlet {
 		String zylx = ParamUtil.getString(renderRequest, "zylx", "");
 		String xm = ParamUtil.getString(renderRequest, "xm", "");
 		String zjbh = ParamUtil.getString(renderRequest, "zjbh", "");
-		Date yxq = ParamUtil.getDate(renderRequest, "yxq", new SimpleDateFormat(dateFormatPattern), null);
+		Date yxq = null;
+		try {
+			yxq = ParamUtil.getDate(renderRequest, "yxq", new SimpleDateFormat(dateFormatPattern), null);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		int defaultDelta = GetterUtil.getInteger(PropsUtil.get(PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA));
 		int delta = ParamUtil.getInteger(renderRequest, "delta", defaultDelta);
 		int cur = ParamUtil.getInteger(renderRequest, "cur", 1);

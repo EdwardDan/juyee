@@ -41,7 +41,12 @@ public class LEOCertificatePortlet extends MVCPortlet {
 		String xm = ParamUtil.getString(renderRequest, "xm", "");
 		String zylx = ParamUtil.getString(renderRequest, "zylx", "");
 		String zjbh = ParamUtil.getString(renderRequest, "zjbh", "");
-		Date yxq = ParamUtil.getDate(renderRequest, "yxq", new SimpleDateFormat(dateFormatPattern), null);
+		Date yxq = null;
+		try {
+			yxq = ParamUtil.getDate(renderRequest, "yxq", new SimpleDateFormat(dateFormatPattern), null);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		String yxqStr = null;
 		SimpleDateFormat sdf = new SimpleDateFormat(dateFormatPattern);
 		if (yxq != null) {
