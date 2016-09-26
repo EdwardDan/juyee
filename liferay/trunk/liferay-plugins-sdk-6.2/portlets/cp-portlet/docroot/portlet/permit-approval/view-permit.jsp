@@ -1,7 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
 <%@ include file="init.jsp"%>
-<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='/static/jquery/jquery-1.12.4.min.js'>"+"<"+"/script>");
+</script> 
 <liferay-ui:header title="施工许可申请查看" backURL="${viewURL }" />
 <liferay-ui:tabs names="工程概况,参建单位,单位工程,申请材料" refresh="false">
 	<liferay-ui:section>
