@@ -298,7 +298,9 @@
 		<field name="bzclIds" type="String">
 			<hint name="max-length">500</hint>
 		</field>
-		<field name="shyq" type="String" />
+		<field name="shyq" type="String">
+			<hint name="max-length">1000</hint>
+		</field>
 		<field name="csyj" type="String" />
 		<field name="fhyj" type="String" />
 		<field name="shyj" type="String" />
