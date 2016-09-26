@@ -212,12 +212,12 @@
 					style="width:50%" value="">
 				</aui:input></td>
 		</tr>
-		<tr class="body">
+		<%-- <tr class="body">
 			<td class="text-right">房屋建筑面积(㎡)</td>
 			<td class="bg-white" colspan="3"><aui:input name="zmj"
 					label="" type="text" style="width:18.7%" value="${project.zmj}">
 				</aui:input></td>
-		</tr>
+		</tr> --%>
 		<tr class="body">
 			<td class="text-right">合同价格(万元)</td>
 			<td class="bg-white"><aui:input name="htjg" label="" type="text"
@@ -261,7 +261,7 @@
 			</td>
 		</tr>
 		<tr class="body">
-			<td class="text-right">建设用地批准文件或房地产产权证编号</td>
+			<td class="text-right">工地批文名称及文号</td>
 			<td class="bg-white" colspan="3"><aui:input
 					name="jsydpzwjhfdccqzbh" label="" type="text" style="width:50%"
 					value="">
