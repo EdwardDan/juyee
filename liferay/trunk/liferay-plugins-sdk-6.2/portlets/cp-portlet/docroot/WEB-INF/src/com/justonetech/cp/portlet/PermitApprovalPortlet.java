@@ -452,7 +452,7 @@ public class PermitApprovalPortlet extends MVCPortlet {
 				 out.flush();
 				 out.close();
 			}
-			//生成施工许可绿色pdf
+			//生成施工许可pdf
 			if(resourceId.equals("printsgxkPdf")){
 				long permitId = ParamUtil.getLong(resourceRequest, "permitId");
 				ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
@@ -460,7 +460,7 @@ public class PermitApprovalPortlet extends MVCPortlet {
 				Permit permit = PermitLocalServiceUtil.getPermit(permitId);
 				String newPDFPath = PropsUtil.get("sgxkz.temp.folder.id")+permit.getSgxkzbh()+".pdf";
 				Map<String, String> map = getMap(permitId, xmlx);
-				String downloadURL =getDownLoadURL(resourceRequest,resourceResponse,permitId, Long.valueOf(PropsUtil.get("sgxkz.ls.pdf.template.id")),newPDFPath,map);
+				String downloadURL =getDownLoadURL(resourceRequest,resourceResponse,permitId, Long.valueOf(PropsUtil.get("sgxkz.pdf.template.id")),newPDFPath,map);
 				 PrintWriter out = resourceResponse.getWriter();
 				 out.println(downloadURL);
 				 out.flush();
