@@ -20,7 +20,7 @@ public class ProvideSgxkzbh {
 	public static void provideSgxkzbh(long permitId) throws PortalException, SystemException{
 		String sgxkzbh = "JT";//JT
 		Permit permit1 = PermitLocalServiceUtil.getPermit(permitId);
-		sgxkzbh = sgxkzbh + permit1.getBjbh() + permit1.getBdh();//报建编号+标段号
+		sgxkzbh = sgxkzbh + permit1.getBjbh() + permit1.getBdh()+"-";//报建编号+标段号
 		Locale locale = LocaleUtil.getDefault();
 		String currentDate = DateUtil.getCurrentDate("yyyy-MM-dd", locale);
 		String currentDateStr = currentDate.substring(2, 4);
@@ -28,12 +28,12 @@ public class ProvideSgxkzbh {
 		ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
 		Dictionary xmlx = DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx());
 		sgxkzbh = sgxkzbh + xmlx.getCode();//类别
-		
 		List<Permit> permits = PermitLocalServiceUtil.getPermits(-1, -1);
 		int num = 1;
 		for(Permit permit2:permits){
-			if(permit2.getSgxkzbh().trim()!=null&&permit2.getSgxkzbh().trim()!=""){
+			if(permit2.getSgxkzbh().trim()!=null&&permit2.getSgxkzbh().trim()!=""&&permit2.getSgxkzbh().length()>12){
 				String bjbh = permit2.getSgxkzbh().substring(2, 12);
+				System.out.println("bjbh="+bjbh);
 				if(bjbh.equals(permit1.getBjbh())){
 					num++;
 				}
