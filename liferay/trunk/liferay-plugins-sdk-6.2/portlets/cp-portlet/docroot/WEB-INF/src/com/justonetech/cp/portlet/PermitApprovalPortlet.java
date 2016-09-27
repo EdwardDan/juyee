@@ -452,7 +452,7 @@ public class PermitApprovalPortlet extends MVCPortlet {
 				 out.flush();
 				 out.close();
 			}
-			//生成施工许可pdf
+			//生成施工许可绿色pdf
 			if(resourceId.equals("printsgxkPdf")){
 				long permitId = ParamUtil.getLong(resourceRequest, "permitId");
 				ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
