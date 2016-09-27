@@ -85,7 +85,7 @@
 				applyMaterial.setPermitId(permitId);
 				applyMaterial.setXh(dic.getTag());
 				applyMaterial.setClmc(dic.getName());
-				applyMaterial.setShyj(dic.getCustomField1());
+				applyMaterial.setShyq(dic.getCustomField1());
 				applyMaterial.setYjfs(Validator.isNumber(dic
 						.getCustomField2()) ? GetterUtil.getInteger(dic
 						.getCustomField2()) : 0);
