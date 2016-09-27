@@ -138,6 +138,7 @@ request.setAttribute("applyMaterials", applyMaterials);
 				message="<%= message %>"
 				method="get"
 				url="<%= url %>"
+				onClick="shyj()"
 			/>
 			</c:if>
 			<c:if test='<%=message.equals("不通过")&&!Validator.isBlank(applyMaterials.get(0).getShyj()) %>'>
@@ -148,6 +149,7 @@ request.setAttribute("applyMaterials", applyMaterials);
 				message="<%= message %>"
 				method="get"
 				url="<%= url %>"
+				onClick="noShyj()"
 			/>
 			</c:if>
 			<c:if test='<%=message.equals("补正退回")&&!Validator.isBlank(applyMaterials.get(0).getShyj()) %>'>
@@ -158,6 +160,7 @@ request.setAttribute("applyMaterials", applyMaterials);
 				message="<%= message %>"
 				method="get"
 				url="<%= url %>"
+				onClick="noShyj()"
 			/>
 			</c:if>
 			<c:if test='<%=message.equals("内部退回")&&!Validator.isBlank(applyMaterials.get(0).getShyj()) %>'>
@@ -168,6 +171,7 @@ request.setAttribute("applyMaterials", applyMaterials);
 				message="<%= message %>"
 				method="get"
 				url="<%= url %>"
+				onClick="noShyj()"
 			/>
 			</c:if>
 			<c:if test='<%=message.equals("通过")&&Validator.isBlank(applyMaterials.get(0).getShyj()) %>'>
@@ -310,3 +314,11 @@ Liferay.delegateClick('<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(tra
 
 	
 </aui:script>
+<script type="text/javascript">
+function shyj(){
+	$("#_153_comment").val("所提交材料符合要求，拟同意。");
+}
+function noShyj(){
+	$("#_153_comment").val("");
+}
+</script>

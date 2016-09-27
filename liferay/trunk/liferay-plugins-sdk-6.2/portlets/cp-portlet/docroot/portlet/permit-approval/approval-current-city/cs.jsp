@@ -117,6 +117,7 @@ request.setAttribute("applyMaterials", applyMaterials);
 				message="<%= message %>"
 				method="get"
 				url="<%= url %>"
+				onClick="csyj()"
 			/>
 			<aui:script use="liferay-workflow-tasks">
 var onTaskClickFn = A.rbind('onTaskClick', Liferay.WorkflowTasks,'<%= randomId %>',true);
@@ -140,3 +141,7 @@ Liferay.delegateClick('<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(tra
 	</aui:button-row>	</div>
 	</div>
 </aui:form>
+<script type="text/javascript">
+function csyj(){
+	$("#_153_comment").val("经初审，所提交材料符合要求。");
+}</script>

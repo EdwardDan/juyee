@@ -125,6 +125,7 @@
 				message="<%= message %>"
 				method="get"
 				url="<%= url %>"
+				onClick="fhyj()"
 			/>
 			<aui:script use="liferay-workflow-tasks">
 var onTaskClickFn = A.rbind('onTaskClick', Liferay.WorkflowTasks,'<%= randomId %>',true);
@@ -152,3 +153,8 @@ Liferay.delegateClick('<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(tra
 	</div>
 	</div>
 </aui:form>
+<script type="text/javascript">
+function fhyj(){
+	$("#_153_comment").val("经复审，所提交材料符合要求。");
+}
+</script>

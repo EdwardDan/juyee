@@ -68,6 +68,7 @@
 				message="<%= message %>"
 				method="get"
 				url="<%= url %>"
+				onClick="shtg()"
 			/>
 			</c:if>
 			<c:if test='<%=message.equals("不通过") %>'>
@@ -78,6 +79,7 @@
 				message="<%= message %>"
 				method="get"
 				url="<%= url %>"
+				onClick="shth()"
 			/>
 			</c:if>
 			<aui:script use="liferay-workflow-tasks">
@@ -94,3 +96,11 @@ Liferay.delegateClick('<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(tra
 			<aui:button name="close" value="关闭" cssClass="btn" href="${viewURL}" />
 		</div>
 	</div>
+	<script type="text/javascript">
+function shtg(){
+	$("#_153_comment").val("拟同意。");
+}
+function shth(){
+	$("#_153_comment").val("");
+}
+</script>
