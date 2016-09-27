@@ -460,7 +460,7 @@ public class PermitApprovalPortlet extends MVCPortlet {
 				Permit permit = PermitLocalServiceUtil.getPermit(permitId);
 				String newPDFPath = PropsUtil.get("sgxkz.temp.folder.id")+permit.getSgxkzbh()+".pdf";
 				Map<String, String> map = getMap(permitId, xmlx);
-				String downloadURL =getDownLoadURL(resourceRequest,resourceResponse,permitId, Long.valueOf(PropsUtil.get("sgxkz.pdf.template.id")),newPDFPath,map);
+				String downloadURL =getDownLoadURL(resourceRequest,resourceResponse,permitId, Long.valueOf(PropsUtil.get("sgxkz.ls.pdf.template.id")),newPDFPath,map);
 				 PrintWriter out = resourceResponse.getWriter();
 				 out.println(downloadURL);
 				 out.flush();
