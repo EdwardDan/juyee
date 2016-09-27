@@ -89,11 +89,11 @@
 				</c:when>
 				<c:otherwise>
 					<c:if test="<%=projectProfile.getXmxz() != 29769%>">
-						<a class="btn" onclick="sgxk()" >施工许可(绿色)Pdf</a>
+						<a class="btn" onclick="sgxkls()" >施工许可(绿色)Pdf</a>
 						<a class="btn" href="${printsgxkls}">施工许可(绿色)Excel</a>
 					</c:if>
 					<c:if test="<%=projectProfile.getXmxz() == 29769%>">
-						<a class="btn" onclick="sgxkls()">施工许可Pdf</a>
+						<a class="btn" onclick="sgxk()">施工许可Pdf</a>
 						<a class="btn" href="${printsgxk}">施工许可Excel</a>
 					</c:if>
 				</c:otherwise>
@@ -127,11 +127,11 @@
 				</c:when>
 				<c:otherwise>
 					<c:if test="<%=projectProfile.getXmxz() != 29769%>">
-						<a class="btn" onclick="sgxk()" >施工许可(绿色)Pdf</a>
+						<a class="btn" onclick="sgxkls()" >施工许可(绿色)Pdf</a>
 						<a class="btn" href="${printsgxkls}">施工许可(绿色)Excel</a>
 					</c:if>
 					<c:if test="<%=projectProfile.getXmxz() == 29769%>">
-						<a class="btn" onclick="sgxkls()">施工许可Pdf</a>
+						<a class="btn" onclick="sgxk()">施工许可Pdf</a>
 						<a class="btn" href="${printsgxk}">施工许可Excel</a>
 					</c:if>
 				</c:otherwise>
