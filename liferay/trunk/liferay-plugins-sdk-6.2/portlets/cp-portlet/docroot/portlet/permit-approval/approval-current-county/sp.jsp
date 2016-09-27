@@ -125,13 +125,16 @@
 </div> 
  
 <div class="hide" id="<%= randomId %>updateMessage">
-	<aui:select cols="55" name="_153_comment" id="_153_comment" label="退回选择意见" useNamespace="false"  cssClass="span3">
+	<aui:select cols="55" name="_153_comment" id="_153_comment2" label="退回选择意见" useNamespace="false"  cssClass="span3">
 	<aui:option value="该事项不属于本行政机关职权范围;">该事项不属于本行政机关职权范围;</aui:option>
 	<aui:option value="申请人隐瞒有关情况、提供虚假材料；">申请人隐瞒有关情况、提供虚假材料；</aui:option>
 	<aui:option value="不具备法定的申请主体资格；">不具备法定的申请主体资格；</aui:option>
 	<aui:option value="申请材料仍不齐全/不符合法定形式;">申请材料仍不齐全/不符合法定形式;</aui:option>
 	<aui:option value="（法律、法规、规章规定的其他不予受理的情形）。">（法律、法规、规章规定的其他不予受理的情形）。</aui:option>
 	</aui:select>
+</div>
+<div class="hide" id="<%= randomId %>updateBuZheng">
+<aui:input cols="55" name="_153_comment" id="_153_comment3" label="补正材料" useNamespace="false" rows="10" type="textarea" />
 </div>
 		<c:if test='<%=message.equals("通过")&&!Validator.isBlank(applyMaterials.get(0).getShyj()) %>'>
 		<liferay-ui:icon
@@ -146,7 +149,7 @@
 			<c:if test='<%=message.equals("不通过")&&!Validator.isBlank(applyMaterials.get(0).getShyj()) %>'>
 		<liferay-ui:icon
 				cssClass='<%= "workflow-task-" + randomId + " task-change-status-link" %>'
-				id='<%= randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink2" %>'
+				id='<%= randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink3" %>'
 				image="shth"
 				message="<%= message %>"
 				method="get"
@@ -156,7 +159,7 @@
 			<c:if test='<%=message.equals("补正退回")&&!Validator.isBlank(applyMaterials.get(0).getShyj()) %>'>
 		<liferay-ui:icon
 				cssClass='<%= "workflow-task-" + randomId + " task-change-status-link" %>'
-				id='<%= randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink" %>'
+				id='<%= randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink2" %>'
 				image="bzth"
 				message="<%= message %>"
 				method="get"
@@ -175,7 +178,7 @@
 			<c:if test='<%=message.equals("不通过")&&Validator.isBlank(applyMaterials.get(0).getShyj()) %>'>
 		<liferay-ui:icon
 				cssClass='<%= "workflow-task-" + randomId + " task-change-status-link" %>'
-				id='<%= randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink2" %>'
+				id='<%= randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink3" %>'
 				image="shthx"
 				message="<%= message %>"
 				method="get"
@@ -184,7 +187,7 @@
 			<c:if test='<%=message.equals("补正退回")&&Validator.isBlank(applyMaterials.get(0).getShyj()) %>'>
 		<liferay-ui:icon
 				cssClass='<%= "workflow-task-" + randomId + " task-change-status-link" %>'
-				id='<%= randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink" %>'
+				id='<%= randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink2" %>'
 				image="bzthx"
 				message="<%= message %>"
 				method="get"
@@ -192,10 +195,12 @@
 			</c:if>
 			<c:if test="<%=!Validator.isBlank(applyMaterials.get(0).getShyj()) %>">
 			<aui:script use="liferay-workflow-tasks">
-var onTaskClickFn = A.rbind('onTaskClick', Liferay.WorkflowTasks,'<%= randomId %>',true);
-var onTaskClickFn2 = A.rbind('onTaskClick', Liferay.WorkflowTasks,'<%= randomId %>',false);
-Liferay.delegateClick('<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(transitionName) %>taskChangeStatusLink', onTaskClickFn);
-Liferay.delegateClick('<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(transitionName) %>taskChangeStatusLink2', onTaskClickFn2);
+			var onTaskClickFn = A.rbind('onTaskClick', Liferay.WorkflowTasks,'<%= randomId %>','normal');
+			var onTaskClickFn2 = A.rbind('onTaskClick', Liferay.WorkflowTasks,'<%= randomId %>','bzth');
+			var onTaskClickFn3 = A.rbind('onTaskClick', Liferay.WorkflowTasks,'<%= randomId %>','shth');
+			Liferay.delegateClick('<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(transitionName) %>taskChangeStatusLink', onTaskClickFn);
+			Liferay.delegateClick('<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(transitionName) %>taskChangeStatusLink2', onTaskClickFn2);
+			Liferay.delegateClick('<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(transitionName) %>taskChangeStatusLink3', onTaskClickFn3);
 </aui:script>
 </c:if>
 	<%

@@ -44,6 +44,10 @@ User me=PortalUtil.getUser(request);
 		}
 		
 		   }
+		if(comment.indexOf("&")>0){
+			comment=comment.substring(comment.indexOf("&")+1);//因为意见和评论合并，故在此处划分
+		}
+		System.out.println("comment="+comment);
 		if(comment.equals("该事项不属于本行政机关职权范围;")){num="1";}
 		if(comment.equals("申请人隐瞒有关情况、提供虚假材料；")){num="2";}
 		if(comment.equals("不具备法定的申请主体资格；")){num="3";}
