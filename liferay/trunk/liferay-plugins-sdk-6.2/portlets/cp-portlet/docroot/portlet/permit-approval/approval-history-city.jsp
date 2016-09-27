@@ -48,10 +48,6 @@
 	<portlet:param name="mvcPath" value="${contextPath}/wjscsh.jsp" />
 	<portlet:param name="permitId" value="${permitId }" />
 </portlet:renderURL>
-<portlet:renderURL var="wspcshURL">
-	<portlet:param name="mvcPath" value="${contextPath}/wspcsh.jsp" />
-	<portlet:param name="permitId" value="${permitId }" />
-</portlet:renderURL>
 <portlet:renderURL var="wldshURL" >
 	<portlet:param name="mvcPath" value="${contextPath}/wldsh.jsp" />
 	<portlet:param name="permitId" value="${permitId }" />
@@ -101,7 +97,6 @@
 					   if(workflowLogs.get(i).getState().equals("fenguanlingdao")){state="分管领导审核";}
 					   if(workflowLogs.get(i).getState().equals("zhongxinlingdao")){state="中心领导审核";}
 					   if(workflowLogs.get(i).getState().equals("weijianshechu")){state="委建设处审核";}
-					   if(workflowLogs.get(i).getState().equals("weishenpichu")){state="委审批处审核";}
 					   if(workflowLogs.get(i).getState().equals("weilingdao")){state="委领导审核";}
 					   if(workflowLogs.get(i).getState().equals("update")){continue;}
 					   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state10")){transition="预审退回";}
@@ -121,8 +116,6 @@
 					   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state22")){transition="<span style='color:red'>许可</span>";}
 					   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state31")){transition="<span style='color:red'>不许可</span>";}
 					   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state23")){transition="审核退回";}
-					   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state24")){transition="<span style='color:red'>许可</span>";}
-					   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state32")){transition="<span style='color:red'>不许可</span>";}
 					   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state33")){transition="<span style='color:red'>许可</span>";}
 					   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state34")){transition="<span style='color:red'>不许可</span>";}
 				%>

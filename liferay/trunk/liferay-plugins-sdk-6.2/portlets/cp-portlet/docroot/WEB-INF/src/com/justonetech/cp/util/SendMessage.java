@@ -55,16 +55,10 @@ public class SendMessage {
 		}
 
 		if (status == CityPermitStatus.STATUS_JSC_XK.getCode() || status == CityPermitStatus.STATUS_JSC_BXK.getCode()) {
-			content += commonContent + "委建设处审查已完成，请委审批处进行审查。";
+			content += commonContent + "委建设处审查已完成，请委领导进行审查。";
 		}
 		if (status == CityPermitStatus.STATUS_JSC_BACK.getCode()) {
 			content += commonContent + "建设处未通过审查，请中心领导进行审查。";
-		}
-		if (status == CityPermitStatus.STATUS_SPC_XK.getCode() || status == CityPermitStatus.STATUS_SPC_BXK.getCode()) {
-			content += commonContent + "委审批处审查已完成，请委领导进行审查。";
-		}
-		if (status == CityPermitStatus.STATUS_SPC_BACK.getCode()) {
-			content += commonContent + "委审批处未通过审查，请委建设处进行审查。";
 		}
 		if (status == CityPermitStatus.STATUS_WLD_PASS.getCode()) {
 			if(type.equals("JSDW")){

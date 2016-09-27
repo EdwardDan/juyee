@@ -49,11 +49,7 @@
 		<jsp:include page="${contextPath }/approval-current-city/wjscsh.jsp" />
 	</c:when>
 	<c:when
-		test="${(sqztInit=='15'&&fn:contains(roles,'25430'))||(sqztInit=='16'&&fn:contains(roles,'25430')) }">
-		<jsp:include page="${contextPath }/approval-current-city/wspcsh.jsp" />
-	</c:when>
-	<c:when
-		test="${(sqztInit=='18'&&fn:contains(roles,'25431'))|| (sqztInit=='19'&&fn:contains(roles,'25431'))}">
+		test="${(sqztInit=='15'&&fn:contains(roles,'25431'))|| (sqztInit=='16'&&fn:contains(roles,'25431'))}">
 		<jsp:include page="${contextPath }/approval-current-city/wldsh.jsp" />
 	</c:when>
 </c:choose>
