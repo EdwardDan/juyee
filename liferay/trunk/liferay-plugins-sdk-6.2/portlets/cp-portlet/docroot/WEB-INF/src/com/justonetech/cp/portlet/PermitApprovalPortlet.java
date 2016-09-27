@@ -446,7 +446,7 @@ public class PermitApprovalPortlet extends MVCPortlet {
 				Permit permit = PermitLocalServiceUtil.getPermit(permitId);
 				String newPDFPath = PropsUtil.get("sgxkz.temp.folder.id")+permit.getSgxkzbh()+".pdf";
 				Map<String, String> map = getKgbaMap(permitId);
-				String downloadURL = getDownLoadURL(resourceRequest,resourceResponse,permitId,Long.valueOf(PropsUtil.get("sgxkz.hd.pdf.template")),newPDFPath,map);
+				String downloadURL = getDownLoadURL(resourceRequest,resourceResponse,permitId,Long.valueOf(PropsUtil.get("sgxkz.hd.pdf.template.id")),newPDFPath,map);
 				 PrintWriter out = resourceResponse.getWriter();
 				 out.println(downloadURL);
 				 out.flush();
@@ -460,7 +460,7 @@ public class PermitApprovalPortlet extends MVCPortlet {
 				Permit permit = PermitLocalServiceUtil.getPermit(permitId);
 				String newPDFPath = PropsUtil.get("sgxkz.temp.folder.id")+permit.getSgxkzbh()+".pdf";
 				Map<String, String> map = getMap(permitId, xmlx);
-				String downloadURL =getDownLoadURL(resourceRequest,resourceResponse,permitId, Long.valueOf(PropsUtil.get("sgxkz.pdf.template")),newPDFPath,map);
+				String downloadURL =getDownLoadURL(resourceRequest,resourceResponse,permitId, Long.valueOf(PropsUtil.get("sgxkz.pdf.template.id")),newPDFPath,map);
 				 PrintWriter out = resourceResponse.getWriter();
 				 out.println(downloadURL);
 				 out.flush();
@@ -474,7 +474,7 @@ public class PermitApprovalPortlet extends MVCPortlet {
 				Permit permit = PermitLocalServiceUtil.getPermit(permitId);
 				String newPDFPath = PropsUtil.get("sgxkz.temp.folder.id")+permit.getSgxkzbh()+".pdf";
 				Map<String, String> map = getMap(permitId, xmlx);
-				String downloadURL =getDownLoadURL(resourceRequest,resourceResponse,permitId, Long.valueOf(PropsUtil.get("sgxkz.ls.pdf.template")),newPDFPath,map);
+				String downloadURL =getDownLoadURL(resourceRequest,resourceResponse,permitId, Long.valueOf(PropsUtil.get("sgxkz.ls.pdf.template.id")),newPDFPath,map);
 				PrintWriter out = resourceResponse.getWriter();
 				 out.println(downloadURL);
 				 out.flush();
@@ -486,7 +486,7 @@ public class PermitApprovalPortlet extends MVCPortlet {
 				Permit permit = PermitLocalServiceUtil.getPermit(permitId);
 				String fileName = permit.getSgxkzbh()+".xls";
 				Map<String, String> map = getKgbaMap(permitId);
-				DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(PropsUtil.get("sgxkz.hd.xls.template")));
+				DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(PropsUtil.get("sgxkz.hd.xls.template.id")));
 				XLSTransformer transformer = new XLSTransformer();
 		        HSSFWorkbook hssfWorkbook = transformer.transformXLS(fileEntry.getContentStream(), map);
 		        ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -504,7 +504,7 @@ public class PermitApprovalPortlet extends MVCPortlet {
 				ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
 				String xmlx = DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx()).getName();
 				Map<String, String> map = getMap(permitId, xmlx);
-				DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(PropsUtil.get("sgxkz.xls.template")) );
+				DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(PropsUtil.get("sgxkz.xls.template.id")) );
 				XLSTransformer transformer = new XLSTransformer();
 		        HSSFWorkbook hssfWorkbook = transformer.transformXLS(fileEntry.getContentStream(), map);
 		        ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -522,7 +522,7 @@ public class PermitApprovalPortlet extends MVCPortlet {
 				ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
 				String xmlx = DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx()).getName();
 				Map<String, String> map = getMap(permitId, xmlx);
-				DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(PropsUtil.get("sgxkz.ls.xls.template")));
+				DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(PropsUtil.get("sgxkz.ls.xls.template.id")));
 				XLSTransformer transformer = new XLSTransformer();
 		        HSSFWorkbook hssfWorkbook = transformer.transformXLS(fileEntry.getContentStream(), map);
 		        ByteArrayOutputStream baos = new ByteArrayOutputStream();
