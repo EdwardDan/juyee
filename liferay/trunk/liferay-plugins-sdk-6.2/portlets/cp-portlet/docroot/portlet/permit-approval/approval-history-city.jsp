@@ -128,7 +128,7 @@
 				%>
 <tr>
 							<td><%=state%>-<%=transition %></td>
-							<td><%=workflowLogs.get(i).getComment() %></td>
+							<td><%=workflowLogs.get(i).getComment().indexOf("&")<0?workflowLogs.get(i).getComment():workflowLogs.get(i).getComment().substring(0,workflowLogs.get(i).getComment().indexOf("&")) %></td>
 							<td><%= auditName%></td>
 		<td><%=dateFormatDateTime.format(workflowLogs.get(i).getCreateDate())%></td>
 		</tr>
