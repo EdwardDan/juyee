@@ -108,8 +108,6 @@ public class LEOTrainingPortlet extends MVCPortlet {
 				}
 				LEOTrainingLocalServiceUtil.addLEOTraining(leoTraining);
 			}
-
 		}
 	}
-
 }
