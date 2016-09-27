@@ -97,6 +97,7 @@
 					   if(workflowLogs.get(i).getState().equals("fenguanlingdao")){state="分管领导审核";}
 					   if(workflowLogs.get(i).getState().equals("zhongxinlingdao")){state="中心领导审核";}
 					   if(workflowLogs.get(i).getState().equals("weijianshechu")){state="委建设处审核";}
+					   if(workflowLogs.get(i).getState().equals("weishenpichu")){continue;}
 					   if(workflowLogs.get(i).getState().equals("weilingdao")){state="委领导审核";}
 					   if(workflowLogs.get(i).getState().equals("update")){continue;}
 					   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state10")){transition="预审退回";}
