@@ -32,7 +32,7 @@ tr.body td.content {
 	int cur = ParamUtil.getInteger(renderRequest, "cur", 1);
 	int start = delta * (cur - 1);
 	int end = delta * cur;
-	String[] sss = PropsUtil.get("sgxkss").split(",");//市属
+ 	String[] sss = PropsUtil.get("sgxkss").split(",");//市属
 	String[] qss = PropsUtil.get("sgxkqs").split(",");//区属
 	 User user_ = UserServiceUtil.getCurrentUser();
 	List<Role> roles = user_.getRoles();
@@ -49,9 +49,9 @@ tr.body td.content {
 				gs="区属";
 			}
 		}
-	} 
-	List<Permit> permits = PermitLocalServiceUtil.getPermits(ywbh, bjbh, xmmc, xmlxLong, jsdw, state, gs, start, end);
-	int permitsCount = PermitLocalServiceUtil.getPermitsCount(ywbh, bjbh, xmmc, xmlxLong, jsdw, state, gs);
+	}  
+	List<Permit> permits = PermitLocalServiceUtil.getPermits(ywbh, bjbh, xmmc, xmlxLong, jsdw, state, "市属", start, end);
+	int permitsCount = PermitLocalServiceUtil.getPermitsCount(ywbh, bjbh, xmmc, xmlxLong, jsdw, state, "区属");
 	request.setAttribute("permits", permits);
 	request.setAttribute("permitsCount", permitsCount);
 	request.setAttribute("xmlxDics", xmlxDics);
@@ -102,8 +102,8 @@ tr.body td.content {
 	</liferay-ui:panel>
 	<%
 		int sortNo = 0;
-			String stateLabel = "所有,未提交,已提交";
-			String stateValue = "sy,wtj,ytj";
+			String stateLabel = "审核中,审核完成,未提交";
+			String stateValue = "shz,shwc,wtj";
 	%>
 	<liferay-portlet:renderURL varImpl="iteratorURL" plid="${plid}" portletName="${portletDisplay.id }">
 		<liferay-portlet:param name="ywbh" value="${ywbh }" />
