@@ -221,11 +221,11 @@ public class PermitApprovalPortlet extends MVCPortlet {
 			String bh = permit.getSgxkzbh();
 			String gj = "";
 			if (xmlx.equals("港口")) {
-				gj = "　　根据《中华人民共和国港口法》等相关法律规定，经审查，本工程符合施工条件，准予施工。";
+				gj = "根据《中华人民共和国港口法》等相关法律规定，经审查，本工程符合施工条件，准予施工。";
 			} else if (xmlx.equals("公路")) {
-				gj = "　　根据《中华人民共和国公路法》等相关法律规定，经审查，本工程符合施工条件，准予施工。";
+				gj = "根据《中华人民共和国公路法》等相关法律规定，经审查，本工程符合施工条件，准予施工。";
 			} else {
-				gj = "　　根据《中华人民共和国交通建设法》等相关法律规定，经审查，本工程符合施工条件，准予施工。";
+				gj = "根据《中华人民共和国交通建设法》等相关法律规定，经审查，本工程符合施工条件，准予施工。";
 			}
 			String jsdw = projectProfile.getJsdwmc();
 			String gcmc = projectProfile.getGcmc();
