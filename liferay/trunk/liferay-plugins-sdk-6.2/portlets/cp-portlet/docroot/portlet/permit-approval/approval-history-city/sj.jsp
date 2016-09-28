@@ -55,6 +55,3 @@ tr.body td.content {
 		<td class="content">${permit.sjrlxdh}</td>
 	</tr>
 </table>
-<aui:button-row cssClass="text-center">
-	<aui:button type="cancel" value="关闭" href="#" />
-</aui:button-row>
