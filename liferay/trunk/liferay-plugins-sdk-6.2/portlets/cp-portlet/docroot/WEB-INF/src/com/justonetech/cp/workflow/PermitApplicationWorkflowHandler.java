@@ -78,7 +78,6 @@ public class PermitApplicationWorkflowHandler extends BaseWorkflowHandler {
 		for(Permit permit2:permits){
 			if(permit2.getSgxkzbh().trim()!=null&&permit2.getSgxkzbh().trim()!=""&&permit2.getSgxkzbh().length()>12){
 				String bjbh = permit2.getSgxkzbh().substring(2, 12);
-				System.out.println("bjbh="+bjbh);
 				if(bjbh.equals(permit1.getBjbh())){
 					num++;
 				}
