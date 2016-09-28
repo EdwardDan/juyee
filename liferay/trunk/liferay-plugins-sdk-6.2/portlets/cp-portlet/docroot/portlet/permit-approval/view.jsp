@@ -1,3 +1,4 @@
+<%@page import="com.itextpdf.text.log.SysoLogger"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
 <%@ include file="init.jsp"%>
@@ -13,7 +14,7 @@ tr.body td.content {
 	String xmmc = ParamUtil.getString(request, "xmmc");
 	String xmlx = ParamUtil.getString(request, "xmlx");
 	String jsdw = ParamUtil.getString(request, "jsdw");
-	String state = ParamUtil.getString(request, "state","sy");
+	String state = ParamUtil.getString(request, "state","shz");
 	request.setAttribute("ywbh", ywbh);
 	request.setAttribute("bjbh", bjbh);
 	request.setAttribute("xmmc", xmmc);
@@ -50,8 +51,9 @@ tr.body td.content {
 			}
 		}
 	}  
-	List<Permit> permits = PermitLocalServiceUtil.getPermits(ywbh, bjbh, xmmc, xmlxLong, jsdw, state, "市属", start, end);
-	int permitsCount = PermitLocalServiceUtil.getPermitsCount(ywbh, bjbh, xmmc, xmlxLong, jsdw, state, "区属");
+	System.out.println("gs="+gs+","+"state="+state);
+	List<Permit> permits = PermitLocalServiceUtil.getPermits(ywbh, bjbh, xmmc, xmlxLong, jsdw, state, gs, start, end);
+	int permitsCount = PermitLocalServiceUtil.getPermitsCount(ywbh, bjbh, xmmc, xmlxLong, jsdw, state, gs);
 	request.setAttribute("permits", permits);
 	request.setAttribute("permitsCount", permitsCount);
 	request.setAttribute("xmlxDics", xmlxDics);
