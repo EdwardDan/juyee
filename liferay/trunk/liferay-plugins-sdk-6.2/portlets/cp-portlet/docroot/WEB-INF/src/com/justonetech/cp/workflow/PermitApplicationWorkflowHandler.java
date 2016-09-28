@@ -45,11 +45,11 @@ public class PermitApplicationWorkflowHandler extends BaseWorkflowHandler {
         ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(resourcePrimKey);
         if(projectProfile.getLxjb().contains("区县级机关或区县级单位")){
         	if(status==7){
-        		provideSgxkzbh(resourcePrimKey);
+        		permit.setSgxkzbh(provideSgxkzbh(resourcePrimKey));
         	}
         }else{
         	if(status==21){
-        		provideSgxkzbh(resourcePrimKey);
+        		permit.setSgxkzbh(provideSgxkzbh(resourcePrimKey));
         	}
         }
         
@@ -62,7 +62,7 @@ public class PermitApplicationWorkflowHandler extends BaseWorkflowHandler {
         return permit;
     }
     
-    public static void provideSgxkzbh(long permitId) throws PortalException, SystemException{
+    public String provideSgxkzbh(long permitId) throws PortalException, SystemException{
 		String sgxkzbh = "JT";//JT
 		Permit permit1 = PermitLocalServiceUtil.getPermit(permitId);
 		sgxkzbh = sgxkzbh + permit1.getBjbh() + permit1.getBdh()+"-";//报建编号+标段号
@@ -91,7 +91,6 @@ public class PermitApplicationWorkflowHandler extends BaseWorkflowHandler {
 		} else if (num / 1000 < 1) {
 			sgxkzbh = sgxkzbh + num;
 		}
-		permit1.setSgxkzbh(sgxkzbh);
-		com.justonetech.cp.permit.service.PermitLocalServiceUtil.updatePermit(permit1);
+		return sgxkzbh;
 	}
 }  
