@@ -14,6 +14,7 @@
 
 package com.justonetech.cp.permit.service.impl;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Dictionary;
 import java.util.List;
@@ -22,11 +23,14 @@ import com.justonetech.cp.permit.model.Permit;
 import com.justonetech.cp.permit.model.ProjectProfile;
 import com.justonetech.cp.permit.service.base.PermitLocalServiceBaseImpl;
 import com.justonetech.cp.project.service.impl.ProjectLocalServiceImpl;
+import com.liferay.portal.kernel.dao.orm.Criterion;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.Junction;
 import com.liferay.portal.kernel.dao.orm.OrderFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -139,7 +143,7 @@ public class PermitLocalServiceImpl extends PermitLocalServiceBaseImpl {
 		}
 		if (null!=xmlx) {
 			DynamicQuery projectProfileDQ = DynamicQueryFactoryUtil.forClass(ProjectProfile.class);
-			projectProfileDQ.setProjection(ProjectionFactoryUtil.property("permitId"));			
+			projectProfileDQ.setProjection(ProjectionFactoryUtil.property("permitId"));
 			projectProfileDQ.add(PropertyFactoryUtil.forName("xmlx").eq(xmlx));
 			dynamicQuery.add(PropertyFactoryUtil.forName("permitId").in(projectProfileDQ));
 		}
@@ -149,38 +153,104 @@ public class PermitLocalServiceImpl extends PermitLocalServiceBaseImpl {
 			projectProfileDQ.add(PropertyFactoryUtil.forName("jsdwmc").like("%" + jsdwmc + "%"));
 			dynamicQuery.add(PropertyFactoryUtil.forName("permitId").in(projectProfileDQ));
 		}
+		
 		String[] ss = {"国家部委或中央单位","市级机关或市级单位","其他"};
 		String[] qs = {"区县级机关或区县级单位"};
 		if(gs.equals("市属")){
+			Junction junction = RestrictionsFactoryUtil.disjunction();
 			if (!Validator.isBlank(status)) {
 				if("wtj".equals(status)){
-					int[] values = {1,4,6};
-					dynamicQuery.add(PropertyFactoryUtil.forName("status").in(values));
-				}else if("ytj".equals(status)){
-					int[] values = {2,3,5,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24};
-					dynamicQuery.add(PropertyFactoryUtil.forName("status").in(values));
+					int ssValues = 6;
+					List<Integer> qsValues = new ArrayList<Integer>();
+					qsValues.add(1);
+					qsValues.add(4);
+					DynamicQuery projectProfileDQ = DynamicQueryFactoryUtil.forClass(ProjectProfile.class);
+					projectProfileDQ.setProjection(ProjectionFactoryUtil.property("permitId"));
+					projectProfileDQ.add(PropertyFactoryUtil.forName("lxjb").in(ss));
+					
+					Criterion criterion = PropertyFactoryUtil.forName("permitId").in(projectProfileDQ);
+					criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.eq("status", ssValues));
+					junction.add(criterion);
+					
+					Criterion criterion_ = RestrictionsFactoryUtil.in("status", qsValues);
+					junction.add(criterion_);
+					dynamicQuery.add(junction);
+				}else if("shz".equals(status)){
+					List<Integer> ssValues = new ArrayList<Integer>();
+					ssValues.add(2);
+					ssValues.add(3);
+					ssValues.add(5);
+					ssValues.add(7);
+					ssValues.add(8);
+					ssValues.add(9);
+					ssValues.add(10);
+					ssValues.add(11);
+					ssValues.add(12);
+					ssValues.add(13);
+					ssValues.add(14);
+					ssValues.add(15);
+					ssValues.add(17);
+					ssValues.add(23);
+					ssValues.add(24);
+					List<Integer> qsValues = new ArrayList<Integer>();
+					qsValues.add(2);
+					qsValues.add(3);
+					qsValues.add(5);
+					qsValues.add(6);
+					qsValues.add(8);
+					qsValues.add(9);
+					DynamicQuery projectProfileDQ1 = DynamicQueryFactoryUtil.forClass(ProjectProfile.class);
+					projectProfileDQ1.setProjection(ProjectionFactoryUtil.property("permitId"));
+					projectProfileDQ1.add(PropertyFactoryUtil.forName("lxjb").in(ss));
+					Criterion criterion = PropertyFactoryUtil.forName("permitId").in(projectProfileDQ1);
+					criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.in("status", ssValues));
+					junction.add(criterion);
+					DynamicQuery projectProfileDQ2 = DynamicQueryFactoryUtil.forClass(ProjectProfile.class);
+					projectProfileDQ2.setProjection(ProjectionFactoryUtil.property("permitId"));
+					projectProfileDQ2.add(PropertyFactoryUtil.forName("lxjb").in(qs));
+					Criterion criterion2 = PropertyFactoryUtil.forName("permitId").in(projectProfileDQ2);
+					criterion2 = RestrictionsFactoryUtil.and(criterion2, RestrictionsFactoryUtil.in("status", qsValues));
+					junction.add(criterion2);
+					dynamicQuery.add(junction);
+				}else if("shwc".equals(status)){
+					List<Integer> ssValues = new ArrayList<Integer>();
+					ssValues.add(21);
+					ssValues.add(22);
+					List<Integer> qsValues = new ArrayList<Integer>();
+					qsValues.add(7);
+					DynamicQuery projectProfileDQ1 = DynamicQueryFactoryUtil.forClass(ProjectProfile.class);
+					projectProfileDQ1.setProjection(ProjectionFactoryUtil.property("permitId"));
+					projectProfileDQ1.add(PropertyFactoryUtil.forName("lxjb").in(ss));
+					Criterion criterion = PropertyFactoryUtil.forName("permitId").in(projectProfileDQ1);
+					criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.in("status", ssValues));
+					junction.add(criterion);
+					DynamicQuery projectProfileDQ2 = DynamicQueryFactoryUtil.forClass(ProjectProfile.class);
+					projectProfileDQ2.setProjection(ProjectionFactoryUtil.property("permitId"));
+					projectProfileDQ2.add(PropertyFactoryUtil.forName("lxjb").in(qs));
+					Criterion criterion2 = PropertyFactoryUtil.forName("permitId").in(projectProfileDQ2);
+					criterion2 = RestrictionsFactoryUtil.and(criterion2, RestrictionsFactoryUtil.in("status", qsValues));
+					junction.add(criterion2);
+					dynamicQuery.add(junction);
 				}
 			}
 		}else if(gs.equals("区属")){
 			if (!Validator.isBlank(status)) {
+				DynamicQuery projectProfileDQ = DynamicQueryFactoryUtil.forClass(ProjectProfile.class);
+				projectProfileDQ.setProjection(ProjectionFactoryUtil.property("permitId"));
+				projectProfileDQ.add(PropertyFactoryUtil.forName("lxjb").in(qs));
 				if("wtj".equals(status)){
 					int[] values = {1,4};
-					DynamicQuery projectProfileDQ = DynamicQueryFactoryUtil.forClass(ProjectProfile.class);
-					projectProfileDQ.setProjection(ProjectionFactoryUtil.property("permitId"));
-					projectProfileDQ.add(PropertyFactoryUtil.forName("lxjb").like("%" + qs[0] + "%"));
 					dynamicQuery.add(PropertyFactoryUtil.forName("permitId").in(projectProfileDQ));
 					dynamicQuery.add(PropertyFactoryUtil.forName("status").in(values));
-				}else if("ytj".equals(status)){
-					int[] values = {2,3,5,6,7,8,9};
-					DynamicQuery projectProfileDQ = DynamicQueryFactoryUtil.forClass(ProjectProfile.class);
-					projectProfileDQ.setProjection(ProjectionFactoryUtil.property("permitId"));
-					projectProfileDQ.add(PropertyFactoryUtil.forName("lxjb").like("%" + qs[0] + "%"));
+				}else if("shz".equals(status)){
+					int[] values = {2,3,5,6,8,9};
+					dynamicQuery.add(PropertyFactoryUtil.forName("permitId").in(projectProfileDQ));
+					dynamicQuery.add(PropertyFactoryUtil.forName("status").in(values));
+				}else if("shwc".equals(status)){
+					int[] values = {7};
 					dynamicQuery.add(PropertyFactoryUtil.forName("permitId").in(projectProfileDQ));
 					dynamicQuery.add(PropertyFactoryUtil.forName("status").in(values));
 				}else{
-					DynamicQuery projectProfileDQ = DynamicQueryFactoryUtil.forClass(ProjectProfile.class);
-					projectProfileDQ.setProjection(ProjectionFactoryUtil.property("permitId"));
-					projectProfileDQ.add(PropertyFactoryUtil.forName("lxjb").like("%" + qs[0] + "%"));
 					dynamicQuery.add(PropertyFactoryUtil.forName("permitId").in(projectProfileDQ));
 				}
 			}
