@@ -137,9 +137,21 @@
 			dialog : {
 				centered : true,
 				width : 800,
-				height : 600
+				height : 600,
+				modal : true,
+				toolbars : {
+					footer : [ {
+						label : Liferay.Language.get('close'),
+						on : {
+							click : function() {
+								var dialog = Liferay.Util.Window.getById('<portlet:namespace/>sj');
+								dialog.destroy();
+							}
+						}
+					} ]
+				}
 			},
-			id : 'popup',
+			id : '<portlet:namespace/>sj',
 			title : '收件',
 			uri : '${sjURL}',
 			destroyOnClose : true
@@ -150,9 +162,21 @@
 			dialog : {
 				centered : true,
 				width : 800,
-				height : 600
+				height : 600,
+				modal : true,
+				toolbars : {
+					footer : [ {
+						label : Liferay.Language.get('close'),
+						on : {
+							click : function() {
+								var dialog = Liferay.Util.Window.getById('<portlet:namespace/>cs');
+								dialog.destroy();
+							}
+						}
+					} ]
+				}
 			},
-			id : 'popup',
+			id : '<portlet:namespace/>cs',
 			title : '初审',
 			uri : '${csURL}',
 			destroyOnClose : true
@@ -163,9 +187,21 @@
 			dialog : {
 				centered : true,
 				width : 800,
-				height : 600
+				height : 600,
+				modal : true,
+				toolbars : {
+					footer : [ {
+						label : Liferay.Language.get('close'),
+						on : {
+							click : function() {
+								var dialog = Liferay.Util.Window.getById('<portlet:namespace/>fh');
+								dialog.destroy();
+							}
+						}
+					} ]
+				}
 			},
-			id : 'popup',
+			id : '<portlet:namespace/>fh',
 			title : '复核',
 			uri : '${fhURL}',
 			destroyOnClose : true
@@ -176,9 +212,21 @@
 			dialog : {
 				centered : true,
 				width : 800,
-				height : 600
+				height : 600,
+				modal : true,
+				toolbars : {
+					footer : [ {
+						label : Liferay.Language.get('close'),
+						on : {
+							click : function() {
+								var dialog = Liferay.Util.Window.getById('<portlet:namespace/>sh');
+								dialog.destroy();
+							}
+						}
+					} ]
+				}
 			},
-			id : 'popup',
+			id : '<portlet:namespace/>sh',
 			title : '审核',
 			uri : '${shURL}',
 			destroyOnClose : true
