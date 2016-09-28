@@ -36,6 +36,3 @@
 		</c:if>
 	</tbody>
 </table>
-<aui:button-row cssClass="text-center">
-	<aui:button type="cancel" value="关闭" href="#" />
-</aui:button-row>
