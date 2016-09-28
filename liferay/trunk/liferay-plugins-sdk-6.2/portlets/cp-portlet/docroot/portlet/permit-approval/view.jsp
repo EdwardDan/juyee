@@ -51,7 +51,6 @@ tr.body td.content {
 			}
 		}
 	}  
-	System.out.println("gs="+gs+","+"state="+state);
 	List<Permit> permits = PermitLocalServiceUtil.getPermits(ywbh, bjbh, xmmc, xmlxLong, jsdw, state, gs, start, end);
 	int permitsCount = PermitLocalServiceUtil.getPermitsCount(ywbh, bjbh, xmmc, xmlxLong, jsdw, state, gs);
 	request.setAttribute("permits", permits);
