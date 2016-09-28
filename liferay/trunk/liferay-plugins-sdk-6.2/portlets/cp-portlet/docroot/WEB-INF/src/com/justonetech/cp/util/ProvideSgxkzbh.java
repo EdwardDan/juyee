@@ -17,46 +17,6 @@ import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.Validator;
 
 public class ProvideSgxkzbh {
-	public synchronized static void provideSgxkzbh(long permitId) throws PortalException, SystemException{
-		String sgxkzbh = "JT";//JT
-		Permit permit1 = PermitLocalServiceUtil.getPermit(permitId);
-		sgxkzbh = sgxkzbh + permit1.getBjbh() + permit1.getBdh()+"-";//报建编号+标段号
-		Locale locale = LocaleUtil.getDefault();
-		String currentDate = DateUtil.getCurrentDate("yyyy-MM-dd", locale);
-		String currentDateStr = currentDate.substring(2, 4);
-		sgxkzbh = sgxkzbh + currentDateStr;//两位年份
-		ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
-		Dictionary xmlx = DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx());
-		sgxkzbh = sgxkzbh + xmlx.getCode();//类别
-		List<Permit> permits = PermitLocalServiceUtil.getPermits(-1, -1);
-		int num = 1;
-		for(Permit permit2:permits){
-			if(permit2.getSgxkzbh().trim()!=null&&permit2.getSgxkzbh().trim()!=""&&permit2.getSgxkzbh().length()>12){
-				String bjbh = permit2.getSgxkzbh().substring(2, 12);
-				System.out.println("bjbh="+bjbh);
-				if(bjbh.equals(permit1.getBjbh())){
-					num++;
-				}
-			}
-		}
-		if (num / 10 < 1) {
-			sgxkzbh = sgxkzbh + "00" + num;
-		} else if (num / 100 < 1) {
-			sgxkzbh = sgxkzbh + "0" + num;
-		} else if (num / 1000 < 1) {
-			sgxkzbh = sgxkzbh + num;
-		}
-		permit1.setSgxkzbh(sgxkzbh);
-		com.justonetech.cp.permit.service.PermitLocalServiceUtil.updatePermit(permit1);
-		Thread thread = new Thread();
-		try {
-			thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
 	public static void updateYwbh(long permitId) throws PortalException, SystemException {
 		String ywbh = "JT";
 		Permit permit = PermitLocalServiceUtil.getPermit(permitId);
