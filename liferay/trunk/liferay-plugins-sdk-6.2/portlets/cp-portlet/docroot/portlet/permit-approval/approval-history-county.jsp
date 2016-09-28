@@ -100,9 +100,21 @@ table {
 			dialog : {
 				centered : true,
 				width : 800,
-				height : 600
+				height : 600,
+				modal : true,
+				toolbars : {
+					footer : [ {
+						label : Liferay.Language.get('close'),
+						on : {
+							click : function() {
+								var dialog = Liferay.Util.Window.getById('<portlet:namespace/>sj');
+								dialog.destroy();
+							}
+						}
+					} ]
+				}
 			},
-			id : 'popup',
+			id : '<portlet:namespace/>sj',
 			title : '收件',
 			uri : '${sjURL}',
 			destroyOnClose : true
@@ -113,9 +125,21 @@ table {
 			dialog : {
 				centered : true,
 				width : 800,
-				height : 600
+				height : 600,
+				modal : true,
+				toolbars : {
+					footer : [ {
+						label : Liferay.Language.get('close'),
+						on : {
+							click : function() {
+								var dialog = Liferay.Util.Window.getById('<portlet:namespace/>sl');
+								dialog.destroy();
+							}
+						}
+					} ]
+				}
 			},
-			id : 'popup',
+			id : '<portlet:namespace/>sl',
 			title : '受理',
 			uri : '${slURL}',
 			destroyOnClose : true
@@ -126,9 +150,21 @@ table {
 			dialog : {
 				centered : true,
 				width : 800,
-				height : 600
+				height : 600,
+				modal : true,
+				toolbars : {
+					footer : [ {
+						label : Liferay.Language.get('close'),
+						on : {
+							click : function() {
+								var dialog = Liferay.Util.Window.getById('<portlet:namespace/>sh');
+								dialog.destroy();
+							}
+						}
+					} ]
+				}
 			},
-			id : 'popup',
+			id : '<portlet:namespace/>sh',
 			title : '审核',
 			uri : '${shURL}',
 			destroyOnClose : true
@@ -139,9 +175,21 @@ table {
 			dialog : {
 				centered : true,
 				width : 800,
-				height : 600
+				height : 600,
+				modal : true,
+				toolbars : {
+					footer : [ {
+						label : Liferay.Language.get('close'),
+						on : {
+							click : function() {
+								var dialog = Liferay.Util.Window.getById('<portlet:namespace/>sp');
+								dialog.destroy();
+							}
+						}
+					} ]
+				}
 			},
-			id : 'popup',
+			id : '<portlet:namespace/>sp',
 			title : '审批',
 			uri : '${spURL}',
 			destroyOnClose : true
