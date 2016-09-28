@@ -261,7 +261,7 @@
 			</td>
 		</tr>
 		<tr class="body">
-			<td class="text-right">工地批文名称及文号</td>
+			<td class="text-right">用地批文名称及文号</td>
 			<td class="bg-white" colspan="3"><aui:input
 					name="jsydpzwjhfdccqzbh" label="" type="text" style="width:50%"
 					value="">
