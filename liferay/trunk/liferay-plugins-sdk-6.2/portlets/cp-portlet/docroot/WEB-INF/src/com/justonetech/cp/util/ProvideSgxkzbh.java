@@ -17,7 +17,7 @@ import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.Validator;
 
 public class ProvideSgxkzbh {
-	public static void provideSgxkzbh(long permitId) throws PortalException, SystemException{
+	public synchronized static void provideSgxkzbh(long permitId) throws PortalException, SystemException{
 		String sgxkzbh = "JT";//JT
 		Permit permit1 = PermitLocalServiceUtil.getPermit(permitId);
 		sgxkzbh = sgxkzbh + permit1.getBjbh() + permit1.getBdh()+"-";//报建编号+标段号
@@ -48,6 +48,13 @@ public class ProvideSgxkzbh {
 		}
 		permit1.setSgxkzbh(sgxkzbh);
 		com.justonetech.cp.permit.service.PermitLocalServiceUtil.updatePermit(permit1);
+		Thread thread = new Thread();
+		try {
+			thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public static void updateYwbh(long permitId) throws PortalException, SystemException {
