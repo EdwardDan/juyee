@@ -94,7 +94,7 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 		try {
 			long[] roles = user.getRoleIds();
 			for (long role : roles) {
-				if (role == 25421) {
+				if (role == Long.parseLong(PropsUtil.get("jsdw"))) {
 					zzjgdm = Validator.isNull(user) ? "" : user.getScreenName();
 				}
 			}
@@ -148,7 +148,7 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 			try {
 				long[] roles = user.getRoleIds();
 				for (long role : roles) {
-					if (role == 25421) {
+					if (role == Long.parseLong(PropsUtil.get("jsdw"))) {
 						zzjgdm = Validator.isNull(user) ? "" : user.getScreenName();
 					}
 				}
