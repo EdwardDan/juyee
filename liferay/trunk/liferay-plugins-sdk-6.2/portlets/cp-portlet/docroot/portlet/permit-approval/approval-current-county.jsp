@@ -14,18 +14,22 @@
 		roles.add(role.getRoleId() + "");
 	}
 	request.setAttribute("roles", roles.toString());
+	request.setAttribute("qxslzx",PropsUtil.get("qxslzx"));
+	request.setAttribute("qxslry",PropsUtil.get("qxslry"));
+	request.setAttribute("qxshry",PropsUtil.get("qxshry"));
+	request.setAttribute("qxspry",PropsUtil.get("qxspry"));
 %>
 <c:choose>
-	<c:when test="${(sqztInit=='2'&&fn:contains(roles,'25982'))||(sqztInit=='8'&&fn:contains(roles,'25982'))||(sqztInit=='9'&&fn:contains(roles,'25982'))}">
+	<c:when test="${(sqztInit=='2'&&fn:contains(roles,qxslzx))||(sqztInit=='8'&&fn:contains(roles,qxslzx))||(sqztInit=='9'&&fn:contains(roles,qxslzx))}">
 		<jsp:include page="${contextPath }/approval-current-county/sj.jsp" />
 	</c:when>
-	<c:when test="${sqztInit=='3'&&fn:contains(roles,'25983') }">
+	<c:when test="${sqztInit=='3'&&fn:contains(roles,qxslry) }">
 		<jsp:include page="${contextPath }/approval-current-county/sl.jsp" />
 	</c:when>
-	<c:when test="${sqztInit=='5'&&fn:contains(roles,'25984') }">
+	<c:when test="${sqztInit=='5'&&fn:contains(roles,qxshry) }">
 		<jsp:include page="${contextPath }/approval-current-county/sh.jsp" />
 	</c:when>
-	<c:when test="${sqztInit=='6'&&fn:contains(roles,'25986') }">
+	<c:when test="${sqztInit=='6'&&fn:contains(roles,qxspry) }">
 		<jsp:include page="${contextPath }/approval-current-county/sp.jsp" />
 	</c:when>
 </c:choose>

@@ -31,7 +31,7 @@ tr.body td.content {
 	if (user != null) {
 		long[] roles = user.getRoleIds();
 		for(long role:roles){
-			if(role == 25421){
+			if(role == Long.parseLong(PropsUtil.get("jsdw"))){
 				zzjgdm = user.getScreenName();
 			}
 		}
