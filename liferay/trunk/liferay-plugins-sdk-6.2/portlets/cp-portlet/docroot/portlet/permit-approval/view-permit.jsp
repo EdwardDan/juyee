@@ -54,7 +54,7 @@
 	</portlet:resourceURL>
 	<portlet:resourceURL var="printkgbaURL" id="printkgbaPdf"> 
 	</portlet:resourceURL>
-	<portlet:resourceURL var="printsgxk" id="ptintsgxkExcel">  
+	<portlet:resourceURL var="printsgxk" id="printsgxkExcel">  
 		<portlet:param name="permitId" value="${permitId}" /> 
 	</portlet:resourceURL>
 	<portlet:resourceURL var="printsgxkls" id="printsgxklsExcel">
