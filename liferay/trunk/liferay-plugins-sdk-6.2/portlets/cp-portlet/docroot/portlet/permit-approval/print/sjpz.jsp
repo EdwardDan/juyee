@@ -17,7 +17,7 @@
 %>
 
 <OBJECT id="WebBrowser1" height=0 width=0
-	classid="CLSID:8856F961-340A-11D0-A96B-00C04FD705A2" name="wb"></OBJECT>
+	classid="CLSID:8856F961-340A-11D0-A96B-00C04FD705A2" name="WebBrowser1"></OBJECT>
 <html>
 <head>
 <title>上海市${title}项目申请材料收件凭证</title>
