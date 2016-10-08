@@ -4,28 +4,25 @@ package com.justonetech.cp.util;
  * 施工许可管理状态
  */
 public enum CityPermitStatus {
-	STATUS_WZ(0, "未知", "yellow", "wz"),
     STATUS_EDIT(1, "填写", "red", "tx"),
     STATUS_SB(2, "已上报", "blue", "submit"),
-    STATUS_YS_PASS(3, "预审通过(请到行政服务中心受理)", "blue", "jgzx_ys_pass"),
-    STATUS_YS_BACK(4, "预审退回", "blue", "jgzx_ys_back"),
-    STATUS_SJ_PASS(5, "收件通过", "green", "slzx_pass"),
-    STATUS_SJ_BACK(6, "收件退回", "red", "slzx_back"),
-    STATUS_CS_PASS(7, "初审通过", "green", "cs_pass"),
-    STATUS_FH_PASS(8, "复核通过", "green", "fh_pass"),
-    STATUS_SH_PASS(9, "审核通过", "green", "sh_pass"),
-    STATUS_SH_BACK(10, "审核退回", "red", "sh_back"),
-    STATUS_FGLD_PASS(11, "分管领导审核通过", "green", "fgldsh_pass"),
-    STATUS_FGLD_BACK(12, "分管领导审核退回", "red", "fgldsh_back"),
-    STATUS_ZXLD_PASS(13, "中心领导审核通过", "green", "fgldsh_pass"),
-    STATUS_ZXLD_BACK(14, "中心领导审核退回", "red", "zxldsh_back"),
-    STATUS_JSC_XK(15, "建设处许可", "green", "jscsh_xk"),
-    STATUS_JSC_BXK(16, "建设处不许可", "red", "jscsh_bxk"),
-    STATUS_JSC_BACK(17, "建设处审核退回", "red", "jscsh_back"),
-    STATUS_WLD_PASS(21, "委领导许可", "green", "wldsh_pass"),
-    STATUS_WLD_BACK(22, "委领导不许可", "red", "wldsh_back"),
-	STATUS_BZ_BACK(23, "补正退回", "red", "bz_back"),
-	STATUS_NB_BACK(24, "内部退回", "red", "nb_back");
+    STATUS_CS_PASS(3, "初审通过", "green", "cs_pass"),
+    STATUS_CS_BACK(4, "初审退回", "red", "cs_back"),
+    STATUS_FH_PASS(5, "复核通过", "green", "fh_pass"),
+    STATUS_FH_BACK(6, "复核退回", "red", "fh_back"),
+    STATUS_SH_PASS(7, "审核通过", "green", "sh_pass"),
+    STATUS_SH_BACK(8, "审核退回", "red", "sh_back"),
+    STATUS_FGLD_PASS(9, "分管领导审核通过", "green", "fgldsh_pass"),
+    STATUS_FGLD_BACK(10, "分管领导审核退回", "red", "fgldsh_back"),
+    STATUS_ZXLD_PASS(11, "中心领导审核通过", "green", "zxldsh_pass"),
+    STATUS_ZXLD_BACK(12, "中心领导审核退回", "red", "zxldsh_back"),
+    STATUS_SJ_PASS(13, "收件通过", "green", "slzx_pass"),
+    STATUS_JSC_XK(14, "建设处许可", "green", "jscsh_xk"),
+    STATUS_JSC_BXK(15, "建设处不许可", "red", "jscsh_bxk"),
+    STATUS_JSC_BACK(16, "建设处审核退回", "red", "jscsh_back"),
+    STATUS_JSC_SLTH(17, "建设处受理退回", "red", "jscsh_slth"),
+    STATUS_WLD_PASS(18, "委领导许可", "green", "wldsh_pass"),
+    STATUS_WLD_BACK(19, "委领导不许可", "red", "wldsh_back");
 
 	private int code;
 	private String name;
