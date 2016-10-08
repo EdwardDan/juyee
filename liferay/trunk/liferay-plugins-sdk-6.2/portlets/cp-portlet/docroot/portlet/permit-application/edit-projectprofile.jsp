@@ -312,7 +312,7 @@
 						</aui:input>
 					</c:when>
 					<c:otherwise>
-						<aui:input name="sfzftzl" id="sfzftzl" label="是否政府投资类"
+						<aui:input name="sfzftzl" id="sfzftzl" label="是否政府投资类(如是政府投资类，请填写)"
 							type="checkbox" checked="false" onchange="showYzzpl(this)">
 						</aui:input>
 					</c:otherwise>
