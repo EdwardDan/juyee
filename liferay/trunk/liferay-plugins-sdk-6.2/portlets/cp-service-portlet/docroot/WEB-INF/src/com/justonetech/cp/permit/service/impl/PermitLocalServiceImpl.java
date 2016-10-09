@@ -72,10 +72,10 @@ public class PermitLocalServiceImpl extends PermitLocalServiceBaseImpl {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Permit> getPermits(String ywbh, String bjbh, String gcmc, Long xmlx,String jsdwmc,String status,String gs, int start, int end) {
+	public List<Permit> getPermits(String ywbh, String bjbh, String gcmc, long[] xmlxs,String jsdwmc,String status,String gs, int start, int end) {
 
 		try {
-			return this.dynamicQuery(createDynamicQuery(ywbh, bjbh, gcmc, xmlx,jsdwmc,status,gs), start, end);
+			return this.dynamicQuery(createDynamicQuery(ywbh, bjbh, gcmc, xmlxs,jsdwmc,status,gs), start, end);
 		}
 		catch (SystemException e) {
 			log.info(e.getMessage());
@@ -94,10 +94,10 @@ public class PermitLocalServiceImpl extends PermitLocalServiceBaseImpl {
 		return 0;
 	}
 	
-	public int getPermitsCount(String ywbh, String bjbh, String gcmc, Long xmlx,String jsdwmc,String status,String gs) {
+	public int getPermitsCount(String ywbh, String bjbh, String gcmc, long[] xmlxs,String jsdwmc,String status,String gs) {
 
 		try {
-			return (int) this.dynamicQueryCount(createDynamicQuery(ywbh, bjbh, gcmc, xmlx,jsdwmc,status,gs));
+			return (int) this.dynamicQueryCount(createDynamicQuery(ywbh, bjbh, gcmc, xmlxs,jsdwmc,status,gs));
 		}
 		catch (SystemException e) {
 			log.info(e.getMessage());
@@ -126,7 +126,7 @@ public class PermitLocalServiceImpl extends PermitLocalServiceBaseImpl {
 		return dynamicQuery;
 	}
 	
-	public DynamicQuery createDynamicQuery(String ywbh, String bjbh, String gcmc, Long xmlx,String jsdwmc,String status,String gs) {
+	public DynamicQuery createDynamicQuery(String ywbh, String bjbh, String gcmc, long[] xmlxs,String jsdwmc,String status,String gs) {
 
 		DynamicQuery dynamicQuery = this.dynamicQuery();
 		if (!Validator.isBlank(ywbh)) {
@@ -141,11 +141,16 @@ public class PermitLocalServiceImpl extends PermitLocalServiceBaseImpl {
 			projectProfileDQ.add(PropertyFactoryUtil.forName("gcmc").like("%" + gcmc + "%"));
 			dynamicQuery.add(PropertyFactoryUtil.forName("permitId").in(projectProfileDQ));
 		}
-		if (null!=xmlx) {
-			DynamicQuery projectProfileDQ = DynamicQueryFactoryUtil.forClass(ProjectProfile.class);
-			projectProfileDQ.setProjection(ProjectionFactoryUtil.property("permitId"));
-			projectProfileDQ.add(PropertyFactoryUtil.forName("xmlx").eq(xmlx));
-			dynamicQuery.add(PropertyFactoryUtil.forName("permitId").in(projectProfileDQ));
+		if (xmlxs.length>0) {
+			Junction junction = RestrictionsFactoryUtil.disjunction();
+			for(long xmlx:xmlxs){
+				DynamicQuery projectProfileDQ = DynamicQueryFactoryUtil.forClass(ProjectProfile.class);
+				projectProfileDQ.setProjection(ProjectionFactoryUtil.property("permitId"));
+				projectProfileDQ.add(PropertyFactoryUtil.forName("xmlx").eq(xmlx));
+				Criterion criterion = PropertyFactoryUtil.forName("permitId").in(projectProfileDQ);
+				junction.add(criterion);
+			}
+			dynamicQuery.add(junction);
 		}
 		if (!Validator.isBlank(jsdwmc)) {
 			DynamicQuery projectProfileDQ = DynamicQueryFactoryUtil.forClass(ProjectProfile.class);
@@ -180,6 +185,7 @@ public class PermitLocalServiceImpl extends PermitLocalServiceBaseImpl {
 					ssValues.add(2);
 					ssValues.add(3);
 					ssValues.add(5);
+					ssValues.add(6);
 					ssValues.add(7);
 					ssValues.add(8);
 					ssValues.add(9);
@@ -189,9 +195,8 @@ public class PermitLocalServiceImpl extends PermitLocalServiceBaseImpl {
 					ssValues.add(13);
 					ssValues.add(14);
 					ssValues.add(15);
+					ssValues.add(16);
 					ssValues.add(17);
-					ssValues.add(23);
-					ssValues.add(24);
 					List<Integer> qsValues = new ArrayList<Integer>();
 					qsValues.add(2);
 					qsValues.add(3);
@@ -214,8 +219,8 @@ public class PermitLocalServiceImpl extends PermitLocalServiceBaseImpl {
 					dynamicQuery.add(junction);
 				}else if("shwc".equals(status)){
 					List<Integer> ssValues = new ArrayList<Integer>();
-					ssValues.add(21);
-					ssValues.add(22);
+					ssValues.add(18);
+					ssValues.add(19);
 					List<Integer> qsValues = new ArrayList<Integer>();
 					qsValues.add(7);
 					DynamicQuery projectProfileDQ1 = DynamicQueryFactoryUtil.forClass(ProjectProfile.class);

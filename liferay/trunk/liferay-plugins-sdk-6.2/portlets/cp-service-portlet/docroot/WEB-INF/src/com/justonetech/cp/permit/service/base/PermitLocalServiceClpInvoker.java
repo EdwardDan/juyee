@@ -125,7 +125,7 @@ public class PermitLocalServiceClpInvoker {
 
 		_methodParameterTypes59 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.Long", "java.lang.String", "java.lang.String",
+				"long[][]", "java.lang.String", "java.lang.String",
 				"java.lang.String", "int", "int"
 			};
 
@@ -140,7 +140,7 @@ public class PermitLocalServiceClpInvoker {
 
 		_methodParameterTypes61 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.Long", "java.lang.String", "java.lang.String",
+				"long[][]", "java.lang.String", "java.lang.String",
 				"java.lang.String"
 			};
 
@@ -155,7 +155,7 @@ public class PermitLocalServiceClpInvoker {
 
 		_methodParameterTypes63 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.Long", "java.lang.String", "java.lang.String",
+				"long[][]", "java.lang.String", "java.lang.String",
 				"java.lang.String"
 			};
 	}
@@ -274,7 +274,7 @@ public class PermitLocalServiceClpInvoker {
 				Arrays.deepEquals(_methodParameterTypes59, parameterTypes)) {
 			return PermitLocalServiceUtil.getPermits((java.lang.String)arguments[0],
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
-				(java.lang.Long)arguments[3], (java.lang.String)arguments[4],
+				(long[])arguments[3], (java.lang.String)arguments[4],
 				(java.lang.String)arguments[5], (java.lang.String)arguments[6],
 				((Integer)arguments[7]).intValue(),
 				((Integer)arguments[8]).intValue());
@@ -291,7 +291,7 @@ public class PermitLocalServiceClpInvoker {
 				Arrays.deepEquals(_methodParameterTypes61, parameterTypes)) {
 			return PermitLocalServiceUtil.getPermitsCount((java.lang.String)arguments[0],
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
-				(java.lang.Long)arguments[3], (java.lang.String)arguments[4],
+				(long[])arguments[3], (java.lang.String)arguments[4],
 				(java.lang.String)arguments[5], (java.lang.String)arguments[6]);
 		}
 
@@ -306,7 +306,7 @@ public class PermitLocalServiceClpInvoker {
 				Arrays.deepEquals(_methodParameterTypes63, parameterTypes)) {
 			return PermitLocalServiceUtil.createDynamicQuery((java.lang.String)arguments[0],
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
-				(java.lang.Long)arguments[3], (java.lang.String)arguments[4],
+				(long[])arguments[3], (java.lang.String)arguments[4],
 				(java.lang.String)arguments[5], (java.lang.String)arguments[6]);
 		}
 

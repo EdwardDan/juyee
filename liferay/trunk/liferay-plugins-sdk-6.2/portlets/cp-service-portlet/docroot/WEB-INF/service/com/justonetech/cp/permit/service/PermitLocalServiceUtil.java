@@ -283,10 +283,10 @@ public class PermitLocalServiceUtil {
 
 	public static java.util.List<com.justonetech.cp.permit.model.Permit> getPermits(
 		java.lang.String ywbh, java.lang.String bjbh, java.lang.String gcmc,
-		java.lang.Long xmlx, java.lang.String jsdwmc, java.lang.String status,
+		long[] xmlxs, java.lang.String jsdwmc, java.lang.String status,
 		java.lang.String gs, int start, int end) {
 		return getService()
-				   .getPermits(ywbh, bjbh, gcmc, xmlx, jsdwmc, status, gs,
+				   .getPermits(ywbh, bjbh, gcmc, xmlxs, jsdwmc, status, gs,
 			start, end);
 	}
 
@@ -296,10 +296,10 @@ public class PermitLocalServiceUtil {
 	}
 
 	public static int getPermitsCount(java.lang.String ywbh,
-		java.lang.String bjbh, java.lang.String gcmc, java.lang.Long xmlx,
+		java.lang.String bjbh, java.lang.String gcmc, long[] xmlxs,
 		java.lang.String jsdwmc, java.lang.String status, java.lang.String gs) {
 		return getService()
-				   .getPermitsCount(ywbh, bjbh, gcmc, xmlx, jsdwmc, status, gs);
+				   .getPermitsCount(ywbh, bjbh, gcmc, xmlxs, jsdwmc, status, gs);
 	}
 
 	public static com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQuery(
@@ -310,10 +310,10 @@ public class PermitLocalServiceUtil {
 
 	public static com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQuery(
 		java.lang.String ywbh, java.lang.String bjbh, java.lang.String gcmc,
-		java.lang.Long xmlx, java.lang.String jsdwmc, java.lang.String status,
+		long[] xmlxs, java.lang.String jsdwmc, java.lang.String status,
 		java.lang.String gs) {
 		return getService()
-				   .createDynamicQuery(ywbh, bjbh, gcmc, xmlx, jsdwmc, status,
+				   .createDynamicQuery(ywbh, bjbh, gcmc, xmlxs, jsdwmc, status,
 			gs);
 	}
 

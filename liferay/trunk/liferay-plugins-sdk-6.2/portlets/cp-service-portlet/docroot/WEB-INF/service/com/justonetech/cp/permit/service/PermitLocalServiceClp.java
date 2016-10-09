@@ -125,7 +125,7 @@ public class PermitLocalServiceClp implements PermitLocalService {
 
 		_methodParameterTypes20 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.Long", "java.lang.String", "java.lang.String",
+				"long[][]", "java.lang.String", "java.lang.String",
 				"java.lang.String", "int", "int"
 			};
 
@@ -140,7 +140,7 @@ public class PermitLocalServiceClp implements PermitLocalService {
 
 		_methodParameterTypes22 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.Long", "java.lang.String", "java.lang.String",
+				"long[][]", "java.lang.String", "java.lang.String",
 				"java.lang.String"
 			};
 
@@ -155,7 +155,7 @@ public class PermitLocalServiceClp implements PermitLocalService {
 
 		_methodParameterTypes24 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.Long", "java.lang.String", "java.lang.String",
+				"long[][]", "java.lang.String", "java.lang.String",
 				"java.lang.String"
 			};
 	}
@@ -747,7 +747,7 @@ public class PermitLocalServiceClp implements PermitLocalService {
 	@Override
 	public java.util.List<com.justonetech.cp.permit.model.Permit> getPermits(
 		java.lang.String ywbh, java.lang.String bjbh, java.lang.String gcmc,
-		java.lang.Long xmlx, java.lang.String jsdwmc, java.lang.String status,
+		long[] xmlxs, java.lang.String jsdwmc, java.lang.String status,
 		java.lang.String gs, int start, int end) {
 		Object returnObj = null;
 
@@ -761,7 +761,7 @@ public class PermitLocalServiceClp implements PermitLocalService {
 						
 					ClpSerializer.translateInput(gcmc),
 						
-					ClpSerializer.translateInput(xmlx),
+					ClpSerializer.translateInput(xmlxs),
 						
 					ClpSerializer.translateInput(jsdwmc),
 						
@@ -824,7 +824,7 @@ public class PermitLocalServiceClp implements PermitLocalService {
 
 	@Override
 	public int getPermitsCount(java.lang.String ywbh, java.lang.String bjbh,
-		java.lang.String gcmc, java.lang.Long xmlx, java.lang.String jsdwmc,
+		java.lang.String gcmc, long[] xmlxs, java.lang.String jsdwmc,
 		java.lang.String status, java.lang.String gs) {
 		Object returnObj = null;
 
@@ -838,7 +838,7 @@ public class PermitLocalServiceClp implements PermitLocalService {
 						
 					ClpSerializer.translateInput(gcmc),
 						
-					ClpSerializer.translateInput(xmlx),
+					ClpSerializer.translateInput(xmlxs),
 						
 					ClpSerializer.translateInput(jsdwmc),
 						
@@ -899,7 +899,7 @@ public class PermitLocalServiceClp implements PermitLocalService {
 	@Override
 	public com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQuery(
 		java.lang.String ywbh, java.lang.String bjbh, java.lang.String gcmc,
-		java.lang.Long xmlx, java.lang.String jsdwmc, java.lang.String status,
+		long[] xmlxs, java.lang.String jsdwmc, java.lang.String status,
 		java.lang.String gs) {
 		Object returnObj = null;
 
@@ -913,7 +913,7 @@ public class PermitLocalServiceClp implements PermitLocalService {
 						
 					ClpSerializer.translateInput(gcmc),
 						
-					ClpSerializer.translateInput(xmlx),
+					ClpSerializer.translateInput(xmlxs),
 						
 					ClpSerializer.translateInput(jsdwmc),
 						
