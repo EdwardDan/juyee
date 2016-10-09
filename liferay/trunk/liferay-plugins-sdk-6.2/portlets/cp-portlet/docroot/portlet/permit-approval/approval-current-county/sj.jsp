@@ -2,6 +2,11 @@
 <%@ include file="/common/init.jsp"%>
 <%@ include file="../init.jsp"%>
 <style>
+.table tr td input {
+	color: #8B8B83;
+	border: #D4D4D4 1px solid;
+}
+
 input, textarea {
 	margin-bottom: 10px !important;
 }
@@ -137,15 +142,14 @@ input, textarea {
 				</td>
 				<td style="text-align: left">${material.shyq}</td>
 				<td style="text-align: center">${material.yjfs}</td>
-				<td style="text-align: center"><aui:input name="sjfs" label=""
-						cssClass="input-mini text-center" value="${material.sjfs}">
-						<aui:validator name="number" />
-					</aui:input></td>
+				<td style="text-align: center"><input
+					name="<portlet:namespace/>sjfs" class="input-mini text-center"
+					value="${material.sjfs}"
+					onkeyup="this.value=this.value.replace(/[^\d]/g,'')" /></td>
 			</tr>
 		</c:forEach>
 
 	</table>
-
 
 	<aui:row>
 		<aui:col span="6" cssClass="text-left">
@@ -238,54 +242,54 @@ input, textarea {
 					cssClass="btn btn-primary" />
 				<%
 					String randomId = StringPool.BLANK;
-								randomId = StringUtil.randomId();
-								String strBackUrl = "http://" + request.getServerName() //服务器地址  
-						        + ":"   
-						        + request.getServerPort() ;          //端口号  
-								String[] assetTypes = new String[1];
-								    	assetTypes[0]="com.justonetech.cp.permit.model.Permit";
-							    	OrderByComparator orderByComparator=null;
-								    	List<WorkflowTask> results1=null;
-								    	User me=PortalUtil.getUser(request);
-								    	if(null!=me){
-								    		try {
-								    			//遍历工作流任务
-								    		results1= WorkflowTaskManagerUtil.search(me.getCompanyId(), me.getUserId(), null, assetTypes, null, null, -1, -1, orderByComparator);
-								} catch (WorkflowException e3) {
-									// TODO Auto-generated catch block
-									e3.printStackTrace();
-								}
-								    	long workflowTaskId=0L;
-								    	long people=0L;
-								    	String url="";
-								    	List<String> transitionNames = null;//遍历工作流任务
-								    	String token="";//授权随机代码
-								    	if(null!=permit){
-								    		if(results1.size()>0){
-								    		//工作流任务
-								    	for(WorkflowTask task:results1){
-								    		if(null!=task){
-								    			if(KaleoTaskInstanceTokenLocalServiceUtil.getKaleoTaskInstanceToken(task.getWorkflowTaskId()).getClassPK()==permit.getPermitId()){
-								    				workflowTaskId=task.getWorkflowTaskId();
-											people=task.getAssigneeUserId();
-									}
-								    		}
-								    	}
-								    		}
-								    		token=com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
-								        if(workflowTaskId==0){
-								        	transitionNames=new ArrayList<String>();
-								        }else{
-								    	transitionNames=WorkflowTaskManagerUtil.getNextTransitionNames(me.getCompanyId(), me.getUserId(), workflowTaskId);
-								    	}
-								    	}
-								    			for(int i=transitionNames.size()-1;i>=0;i--){
-								    				String transitionName=transitionNames.get(i);
-									String message = "proceed";
-									if (Validator.isNotNull(transitionName)) {
-										message = HtmlUtil.escape(transitionName);
-									}
-								url=strBackUrl+"/group/control_panel/manage/-/my_workflow_tasks/view/"+workflowTaskId+"?p_auth="+token+"&p_p_lifecycle=1&doAsGroupId="+PortalUtil.getUser(request).getGroupId()+"&refererPlid=25177&controlPanelCategory=my&_153_cmd=save&_153_assigneeUserId="+people+"&_153_redirect="+strBackUrl+themeDisplay.getURLCurrent()+"&_153_struts_action=/my_workflow_tasks/edit_workflow_task&_153_transitionName="+message;
+												randomId = StringUtil.randomId();
+												String strBackUrl = "http://" + request.getServerName() //服务器地址  
+										        + ":"   
+										        + request.getServerPort() ;          //端口号  
+												String[] assetTypes = new String[1];
+												    	assetTypes[0]="com.justonetech.cp.permit.model.Permit";
+											    	OrderByComparator orderByComparator=null;
+												    	List<WorkflowTask> results1=null;
+												    	User me=PortalUtil.getUser(request);
+												    	if(null!=me){
+												    		try {
+												    			//遍历工作流任务
+												    		results1= WorkflowTaskManagerUtil.search(me.getCompanyId(), me.getUserId(), null, assetTypes, null, null, -1, -1, orderByComparator);
+												} catch (WorkflowException e3) {
+													// TODO Auto-generated catch block
+													e3.printStackTrace();
+												}
+												    	long workflowTaskId=0L;
+												    	long people=0L;
+												    	String url="";
+												    	List<String> transitionNames = null;//遍历工作流任务
+												    	String token="";//授权随机代码
+												    	if(null!=permit){
+												    		if(results1.size()>0){
+												    		//工作流任务
+												    	for(WorkflowTask task:results1){
+												    		if(null!=task){
+												    			if(KaleoTaskInstanceTokenLocalServiceUtil.getKaleoTaskInstanceToken(task.getWorkflowTaskId()).getClassPK()==permit.getPermitId()){
+												    				workflowTaskId=task.getWorkflowTaskId();
+															people=task.getAssigneeUserId();
+													}
+												    		}
+												    	}
+												    		}
+												    		token=com.liferay.portal.security.auth.AuthTokenUtil.getToken(request);
+												        if(workflowTaskId==0){
+												        	transitionNames=new ArrayList<String>();
+												        }else{
+												    	transitionNames=WorkflowTaskManagerUtil.getNextTransitionNames(me.getCompanyId(), me.getUserId(), workflowTaskId);
+												    	}
+												    	}
+												    			for(int i=transitionNames.size()-1;i>=0;i--){
+												    				String transitionName=transitionNames.get(i);
+													String message = "proceed";
+													if (Validator.isNotNull(transitionName)) {
+														message = HtmlUtil.escape(transitionName);
+													}
+												url=strBackUrl+"/group/control_panel/manage/-/my_workflow_tasks/view/"+workflowTaskId+"?p_auth="+token+"&p_p_lifecycle=1&doAsGroupId="+PortalUtil.getUser(request).getGroupId()+"&refererPlid=25177&controlPanelCategory=my&_153_cmd=save&_153_assigneeUserId="+people+"&_153_redirect="+strBackUrl+themeDisplay.getURLCurrent()+"&_153_struts_action=/my_workflow_tasks/edit_workflow_task&_153_transitionName="+message;
 				%>
 				<div class="hide" id="<%=randomId%>updateComments">
 					<aui:input cols="55" name="_153_comment" id="_153_comment"
@@ -332,6 +336,10 @@ input, textarea {
 										onTaskClickFn);
 					</aui:script>
 						
+
+
+
+
 
 
 				
