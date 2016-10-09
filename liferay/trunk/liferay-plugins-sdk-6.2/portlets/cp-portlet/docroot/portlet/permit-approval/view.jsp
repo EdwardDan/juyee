@@ -9,23 +9,77 @@ tr.body td.content {
 </style>
 <liferay-ui:header title="施工许可审核" />
 <%
+	User user_ = UserServiceUtil.getCurrentUser();
+	List<Role> roles = user_.getRoles();
 	String ywbh = ParamUtil.getString(request, "ywbh");
 	String bjbh = ParamUtil.getString(request, "bjbh");
 	String xmmc = ParamUtil.getString(request, "xmmc");
 	String xmlx = ParamUtil.getString(request, "xmlx");
 	String jsdw = ParamUtil.getString(request, "jsdw");
-	String state = ParamUtil.getString(request, "state","shz");
+	String state = ParamUtil.getString(request, "state", "shz");
 	request.setAttribute("ywbh", ywbh);
 	request.setAttribute("bjbh", bjbh);
 	request.setAttribute("xmmc", xmmc);
 	request.setAttribute("xmlx", xmlx);
 	request.setAttribute("jsdw", jsdw);
 	request.setAttribute("state", state);
-	Long xmlxLong = null;
-	if (xmlx != "") {
-		xmlxLong = Long.parseLong(xmlx);
+	long[] xmlxLongs = new long[7];
+	long[] szjcs = {42455,42457,42459};//市政基础
+	long[] ghgs = {42454,42456,42458};//公航港
+	String xmlxCheck = "";
+	for(Role role:roles){
+		for(long szjc:szjcs){
+			if(szjc == role.getRoleId()){
+				xmlxCheck = "szjc";
+			}
+		}
+		for(long ghg:ghgs){
+			if(ghg == role.getRoleId()){
+				xmlxCheck = "ghg";
+			}
+		}
 	}
 	
+	if (xmlxCheck.equals("ghg")) {
+		xmlxLongs[0] = 29740;
+		xmlxLongs[1] = 29741;
+		xmlxLongs[2] = 29742;
+	} else if(xmlxCheck.equals("szjc")){
+		xmlxLongs[0] = 29743;
+		xmlxLongs[1] = 43840;
+		xmlxLongs[2] = 43841;
+		xmlxLongs[3] = 43842;
+	}else{
+		xmlxLongs[0] = 29740;
+		xmlxLongs[1] = 29741;
+		xmlxLongs[2] = 29742;
+		xmlxLongs[3] = 29743;
+		xmlxLongs[4] = 43840;
+		xmlxLongs[5] = 43841;
+		xmlxLongs[6] = 43842;
+	}
+
+	if (xmlx != null && !xmlx.trim().equals("")) {
+		long xmlxLong = Long.parseLong(xmlx);
+		boolean check = false;
+		for (long xmlxLong_ : xmlxLongs) {
+			if (xmlxLong_ == xmlxLong) {
+				check = true;
+			}
+		}
+		if (check) {
+			xmlxLongs[0] = xmlxLong;
+		} else {
+			xmlxLongs[0] = 0;
+		}
+		xmlxLongs[1] = 0;
+		xmlxLongs[2] = 0;
+		xmlxLongs[3] = 0;
+		xmlxLongs[4] = 0;
+		xmlxLongs[5] = 0;
+		xmlxLongs[6] = 0;
+	}
+
 	Dictionary xmlxDic = DictionaryLocalServiceUtil.findByCode("xmlx");
 	List<Dictionary> xmlxDics = DictionaryLocalServiceUtil.findByParentId(xmlxDic.getDictionaryId(), -1, -1);
 	int defaultDelta = GetterUtil.getInteger(PropsUtil.get(PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA));
@@ -33,26 +87,26 @@ tr.body td.content {
 	int cur = ParamUtil.getInteger(renderRequest, "cur", 1);
 	int start = delta * (cur - 1);
 	int end = delta * cur;
- 	String[] sss = PropsUtil.get("sgxkss").split(",");//市属
+	String[] sss = PropsUtil.get("sgxkss").split(",");//市属
 	String[] qss = PropsUtil.get("sgxkqs").split(",");//区属
-	 User user_ = UserServiceUtil.getCurrentUser();
-	List<Role> roles = user_.getRoles();
+	
+	
 	String gs = "";//根据角色来判断是市属还是区属
-	for(Role role:roles){
-		String roleId = role.getRoleId()+"";
-		for(String ss:sss){
-			if(roleId.equals(ss)){
-				gs="市属";
+	for (Role role : roles) {
+		String roleId = role.getRoleId() + "";
+		for (String ss : sss) {
+			if (roleId.equals(ss)) {
+				gs = "市属";
 			}
 		}
-		for(String qs:qss){
-			if(roleId.equals(qs)){
-				gs="区属";
+		for (String qs : qss) {
+			if (roleId.equals(qs)) {
+				gs = "区属";
 			}
 		}
-	}  
-	List<Permit> permits = PermitLocalServiceUtil.getPermits(ywbh, bjbh, xmmc, xmlxLong, jsdw, state, gs, start, end);
-	int permitsCount = PermitLocalServiceUtil.getPermitsCount(ywbh, bjbh, xmmc, xmlxLong, jsdw, state, gs);
+	}
+	List<Permit> permits = PermitLocalServiceUtil.getPermits(ywbh, bjbh, xmmc, xmlxLongs, jsdw, state, gs, start, end);
+	int permitsCount = PermitLocalServiceUtil.getPermitsCount(ywbh, bjbh, xmmc, xmlxLongs, jsdw, state, gs);
 	request.setAttribute("permits", permits);
 	request.setAttribute("permitsCount", permitsCount);
 	request.setAttribute("xmlxDics", xmlxDics);
