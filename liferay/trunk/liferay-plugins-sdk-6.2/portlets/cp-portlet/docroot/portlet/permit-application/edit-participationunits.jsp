@@ -74,8 +74,8 @@ if (null != contract) {
 
 request.setAttribute("participationUnits", participationUnits);
 
-Dictionary dictionaryDeptType = DictionaryLocalServiceUtil.findByCode("dwlx");
-Dictionary dictionaryCertificateType = DictionaryLocalServiceUtil.findByCode("zjlx");
+Dictionary dictionaryDeptType = DictionaryLocalServiceUtil.findByCode(CpConstants.CJDW_DWLX);
+Dictionary dictionaryCertificateType = DictionaryLocalServiceUtil.findByCode(CpConstants.CJDW_ZJLX);
 if(null!=dictionaryDeptType){
 	List<Dictionary> deptTypes = DictionaryLocalServiceUtil.findByParentId( dictionaryDeptType.getDictionaryId(), -1, -1);
 	request.setAttribute("deptTypes", deptTypes);
