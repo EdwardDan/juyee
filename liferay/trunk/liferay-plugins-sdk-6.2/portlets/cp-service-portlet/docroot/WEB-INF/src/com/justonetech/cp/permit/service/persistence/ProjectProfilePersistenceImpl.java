@@ -338,7 +338,6 @@ public class ProjectProfilePersistenceImpl extends BasePersistenceImpl<ProjectPr
 		projectProfileImpl.setJsdwlxdh(projectProfile.getJsdwlxdh());
 		projectProfileImpl.setJsdwlxr(projectProfile.getJsdwlxr());
 		projectProfileImpl.setJsdwsjh(projectProfile.getJsdwsjh());
-		projectProfileImpl.setJsydpzwjhfdccqzbh(projectProfile.getJsydpzwjhfdccqzbh());
 		projectProfileImpl.setJsgcghxkzbh(projectProfile.getJsgcghxkzbh());
 		projectProfileImpl.setXckgqk(projectProfile.getXckgqk());
 		projectProfileImpl.setXmlx(projectProfile.getXmlx());
@@ -360,6 +359,40 @@ public class ProjectProfilePersistenceImpl extends BasePersistenceImpl<ProjectPr
 		projectProfileImpl.setYzzpl3(projectProfile.getYzzpl3());
 		projectProfileImpl.setYzzpl4(projectProfile.getYzzpl4());
 		projectProfileImpl.setTjsj(projectProfile.getTjsj());
+		projectProfileImpl.setGcnr(projectProfile.getGcnr());
+		projectProfileImpl.setSgxkzsbz(projectProfile.getSgxkzsbz());
+		projectProfileImpl.setGkpzhhzjghwh(projectProfile.getGkpzhhzjghwh());
+		projectProfileImpl.setPfhhzrq(projectProfile.getPfhhzrq());
+		projectProfileImpl.setCbsjpzjghwh(projectProfile.getCbsjpzjghwh());
+		projectProfileImpl.setPfrq(projectProfile.getPfrq());
+		projectProfileImpl.setPfgq(projectProfile.getPfgq());
+		projectProfileImpl.setPzjghwh(projectProfile.getPzjghwh());
+		projectProfileImpl.setXmdw(projectProfile.getXmdw());
+		projectProfileImpl.setXmfzr(projectProfile.getXmfzr());
+		projectProfileImpl.setXmfzrlxdh(projectProfile.getXmfzrlxdh());
+		projectProfileImpl.setSj_zbfs(projectProfile.getSj_zbfs());
+		projectProfileImpl.setSj_zbj(projectProfile.getSj_zbj());
+		projectProfileImpl.setSj_zzdj(projectProfile.getSj_zzdj());
+		projectProfileImpl.setSj_zzdjzsbh(projectProfile.getSj_zzdjzsbh());
+		projectProfileImpl.setSj_xmfzr(projectProfile.getSj_xmfzr());
+		projectProfileImpl.setSj_zmfzrzsbh(projectProfile.getSj_zmfzrzsbh());
+		projectProfileImpl.setJl_zbfs(projectProfile.getJl_zbfs());
+		projectProfileImpl.setJl_zbj(projectProfile.getJl_zbj());
+		projectProfileImpl.setJl_zzdj(projectProfile.getJl_zzdj());
+		projectProfileImpl.setJl_zzdjzsbh(projectProfile.getJl_zzdjzsbh());
+		projectProfileImpl.setJl_zj(projectProfile.getJl_zj());
+		projectProfileImpl.setJl_zjzsbh(projectProfile.getJl_zjzsbh());
+		projectProfileImpl.setSg_zbfs(projectProfile.getSg_zbfs());
+		projectProfileImpl.setSg_zbj(projectProfile.getSg_zbj());
+		projectProfileImpl.setSg_zzdj(projectProfile.getSg_zzdj());
+		projectProfileImpl.setSg_zzdjzsbh(projectProfile.getSg_zzdjzsbh());
+		projectProfileImpl.setSg_xmjl(projectProfile.getSg_xmjl());
+		projectProfileImpl.setSg_xmjlzsbh(projectProfile.getSg_xmjlzsbh());
+		projectProfileImpl.setJszjjhlsqk(projectProfile.getJszjjhlsqk());
+		projectProfileImpl.setDcqwcqk(projectProfile.getDcqwcqk());
+		projectProfileImpl.setSgzbqk(projectProfile.getSgzbqk());
+		projectProfileImpl.setSytdxgwj(projectProfile.getSytdxgwj());
+		projectProfileImpl.setGczljddjqk(projectProfile.getGczljddjqk());
 
 		return projectProfileImpl;
 	}

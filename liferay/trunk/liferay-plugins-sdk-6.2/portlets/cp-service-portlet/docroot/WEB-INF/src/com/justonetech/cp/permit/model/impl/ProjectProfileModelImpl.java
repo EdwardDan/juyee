@@ -74,7 +74,6 @@ public class ProjectProfileModelImpl extends BaseModelImpl<ProjectProfile>
 			{ "jsdwlxdh", Types.VARCHAR },
 			{ "jsdwlxr", Types.VARCHAR },
 			{ "jsdwsjh", Types.VARCHAR },
-			{ "jsydpzwjhfdccqzbh", Types.VARCHAR },
 			{ "jsgcghxkzbh", Types.VARCHAR },
 			{ "xckgqk", Types.VARCHAR },
 			{ "xmlx", Types.BIGINT },
@@ -95,9 +94,43 @@ public class ProjectProfileModelImpl extends BaseModelImpl<ProjectProfile>
 			{ "yzzpl2", Types.VARCHAR },
 			{ "yzzpl3", Types.VARCHAR },
 			{ "yzzpl4", Types.VARCHAR },
-			{ "tjsj", Types.TIMESTAMP }
+			{ "tjsj", Types.TIMESTAMP },
+			{ "gcnr", Types.VARCHAR },
+			{ "sgxkzsbz", Types.VARCHAR },
+			{ "gkpzhhzjghwh", Types.VARCHAR },
+			{ "pfhhzrq", Types.TIMESTAMP },
+			{ "cbsjpzjghwh", Types.VARCHAR },
+			{ "pfrq", Types.TIMESTAMP },
+			{ "pfgq", Types.INTEGER },
+			{ "pzjghwh", Types.VARCHAR },
+			{ "xmdw", Types.VARCHAR },
+			{ "xmfzr", Types.VARCHAR },
+			{ "xmfzrlxdh", Types.VARCHAR },
+			{ "sj_zbfs", Types.VARCHAR },
+			{ "sj_zbj", Types.VARCHAR },
+			{ "sj_zzdj", Types.VARCHAR },
+			{ "sj_zzdjzsbh", Types.VARCHAR },
+			{ "sj_xmfzr", Types.VARCHAR },
+			{ "sj_zmfzrzsbh", Types.VARCHAR },
+			{ "jl_zbfs", Types.VARCHAR },
+			{ "jl_zbj", Types.VARCHAR },
+			{ "jl_zzdj", Types.VARCHAR },
+			{ "jl_zzdjzsbh", Types.VARCHAR },
+			{ "jl_zj", Types.VARCHAR },
+			{ "jl_zjzsbh", Types.VARCHAR },
+			{ "sg_zbfs", Types.VARCHAR },
+			{ "sg_zbj", Types.VARCHAR },
+			{ "sg_zzdj", Types.VARCHAR },
+			{ "sg_zzdjzsbh", Types.VARCHAR },
+			{ "sg_xmjl", Types.VARCHAR },
+			{ "sg_xmjlzsbh", Types.VARCHAR },
+			{ "jszjjhlsqk", Types.VARCHAR },
+			{ "dcqwcqk", Types.VARCHAR },
+			{ "sgzbqk", Types.VARCHAR },
+			{ "sytdxgwj", Types.VARCHAR },
+			{ "gczljddjqk", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table cp_ProjectProfile (permitId LONG not null primary key,bjbh VARCHAR(75) null,jsdwmc VARCHAR(300) null,jsdwxz VARCHAR(75) null,jsdwdz VARCHAR(300) null,gcmc VARCHAR(300) null,jsdd VARCHAR(300) null,jsgcgm VARCHAR(500) null,fwjzmj VARCHAR(75) null,htjg VARCHAR(75) null,htgq INTEGER,fddbr VARCHAR(75) null,jsdwlxdh VARCHAR(75) null,jsdwlxr VARCHAR(75) null,jsdwsjh VARCHAR(75) null,jsydpzwjhfdccqzbh VARCHAR(75) null,jsgcghxkzbh VARCHAR(75) null,xckgqk VARCHAR(75) null,xmlx LONG,lxjb VARCHAR(75) null,xmxz LONG,ssqx VARCHAR(75) null,ywbm VARCHAR(75) null,jsddssqx LONG,jsgclb VARCHAR(75) null,jsgcsx LONG,gyzjbz VARCHAR(75) null,zbjg VARCHAR(75) null,xmtzgs VARCHAR(75) null,jhkg DATE null,jhjg DATE null,sfzftzl BOOLEAN,yzzpl1 VARCHAR(75) null,yzzpl2 VARCHAR(75) null,yzzpl3 VARCHAR(75) null,yzzpl4 VARCHAR(75) null,tjsj DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table cp_ProjectProfile (permitId LONG not null primary key,bjbh VARCHAR(75) null,jsdwmc VARCHAR(300) null,jsdwxz VARCHAR(75) null,jsdwdz VARCHAR(300) null,gcmc VARCHAR(300) null,jsdd VARCHAR(300) null,jsgcgm VARCHAR(500) null,fwjzmj VARCHAR(75) null,htjg VARCHAR(75) null,htgq INTEGER,fddbr VARCHAR(75) null,jsdwlxdh VARCHAR(75) null,jsdwlxr VARCHAR(75) null,jsdwsjh VARCHAR(75) null,jsgcghxkzbh VARCHAR(75) null,xckgqk VARCHAR(75) null,xmlx LONG,lxjb VARCHAR(75) null,xmxz LONG,ssqx VARCHAR(75) null,ywbm VARCHAR(75) null,jsddssqx LONG,jsgclb VARCHAR(75) null,jsgcsx LONG,gyzjbz VARCHAR(75) null,zbjg VARCHAR(75) null,xmtzgs VARCHAR(75) null,jhkg DATE null,jhjg DATE null,sfzftzl BOOLEAN,yzzpl1 VARCHAR(75) null,yzzpl2 VARCHAR(75) null,yzzpl3 VARCHAR(75) null,yzzpl4 VARCHAR(75) null,tjsj DATE null,gcnr VARCHAR(100) null,sgxkzsbz VARCHAR(75) null,gkpzhhzjghwh VARCHAR(75) null,pfhhzrq DATE null,cbsjpzjghwh VARCHAR(75) null,pfrq DATE null,pfgq INTEGER,pzjghwh VARCHAR(75) null,xmdw VARCHAR(75) null,xmfzr VARCHAR(75) null,xmfzrlxdh VARCHAR(75) null,sj_zbfs VARCHAR(75) null,sj_zbj VARCHAR(75) null,sj_zzdj VARCHAR(75) null,sj_zzdjzsbh VARCHAR(75) null,sj_xmfzr VARCHAR(75) null,sj_zmfzrzsbh VARCHAR(75) null,jl_zbfs VARCHAR(75) null,jl_zbj VARCHAR(75) null,jl_zzdj VARCHAR(75) null,jl_zzdjzsbh VARCHAR(75) null,jl_zj VARCHAR(75) null,jl_zjzsbh VARCHAR(75) null,sg_zbfs VARCHAR(75) null,sg_zbj VARCHAR(75) null,sg_zzdj VARCHAR(75) null,sg_zzdjzsbh VARCHAR(75) null,sg_xmjl VARCHAR(75) null,sg_xmjlzsbh VARCHAR(75) null,jszjjhlsqk VARCHAR(200) null,dcqwcqk VARCHAR(200) null,sgzbqk VARCHAR(200) null,sytdxgwj VARCHAR(200) null,gczljddjqk VARCHAR(200) null)";
 	public static final String TABLE_SQL_DROP = "drop table cp_ProjectProfile";
 	public static final String ORDER_BY_JPQL = " ORDER BY projectProfile.permitId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY cp_ProjectProfile.permitId ASC";
@@ -166,7 +199,6 @@ public class ProjectProfileModelImpl extends BaseModelImpl<ProjectProfile>
 		attributes.put("jsdwlxdh", getJsdwlxdh());
 		attributes.put("jsdwlxr", getJsdwlxr());
 		attributes.put("jsdwsjh", getJsdwsjh());
-		attributes.put("jsydpzwjhfdccqzbh", getJsydpzwjhfdccqzbh());
 		attributes.put("jsgcghxkzbh", getJsgcghxkzbh());
 		attributes.put("xckgqk", getXckgqk());
 		attributes.put("xmlx", getXmlx());
@@ -188,6 +220,40 @@ public class ProjectProfileModelImpl extends BaseModelImpl<ProjectProfile>
 		attributes.put("yzzpl3", getYzzpl3());
 		attributes.put("yzzpl4", getYzzpl4());
 		attributes.put("tjsj", getTjsj());
+		attributes.put("gcnr", getGcnr());
+		attributes.put("sgxkzsbz", getSgxkzsbz());
+		attributes.put("gkpzhhzjghwh", getGkpzhhzjghwh());
+		attributes.put("pfhhzrq", getPfhhzrq());
+		attributes.put("cbsjpzjghwh", getCbsjpzjghwh());
+		attributes.put("pfrq", getPfrq());
+		attributes.put("pfgq", getPfgq());
+		attributes.put("pzjghwh", getPzjghwh());
+		attributes.put("xmdw", getXmdw());
+		attributes.put("xmfzr", getXmfzr());
+		attributes.put("xmfzrlxdh", getXmfzrlxdh());
+		attributes.put("sj_zbfs", getSj_zbfs());
+		attributes.put("sj_zbj", getSj_zbj());
+		attributes.put("sj_zzdj", getSj_zzdj());
+		attributes.put("sj_zzdjzsbh", getSj_zzdjzsbh());
+		attributes.put("sj_xmfzr", getSj_xmfzr());
+		attributes.put("sj_zmfzrzsbh", getSj_zmfzrzsbh());
+		attributes.put("jl_zbfs", getJl_zbfs());
+		attributes.put("jl_zbj", getJl_zbj());
+		attributes.put("jl_zzdj", getJl_zzdj());
+		attributes.put("jl_zzdjzsbh", getJl_zzdjzsbh());
+		attributes.put("jl_zj", getJl_zj());
+		attributes.put("jl_zjzsbh", getJl_zjzsbh());
+		attributes.put("sg_zbfs", getSg_zbfs());
+		attributes.put("sg_zbj", getSg_zbj());
+		attributes.put("sg_zzdj", getSg_zzdj());
+		attributes.put("sg_zzdjzsbh", getSg_zzdjzsbh());
+		attributes.put("sg_xmjl", getSg_xmjl());
+		attributes.put("sg_xmjlzsbh", getSg_xmjlzsbh());
+		attributes.put("jszjjhlsqk", getJszjjhlsqk());
+		attributes.put("dcqwcqk", getDcqwcqk());
+		attributes.put("sgzbqk", getSgzbqk());
+		attributes.put("sytdxgwj", getSytdxgwj());
+		attributes.put("gczljddjqk", getGczljddjqk());
 
 		return attributes;
 	}
@@ -282,12 +348,6 @@ public class ProjectProfileModelImpl extends BaseModelImpl<ProjectProfile>
 
 		if (jsdwsjh != null) {
 			setJsdwsjh(jsdwsjh);
-		}
-
-		String jsydpzwjhfdccqzbh = (String)attributes.get("jsydpzwjhfdccqzbh");
-
-		if (jsydpzwjhfdccqzbh != null) {
-			setJsydpzwjhfdccqzbh(jsydpzwjhfdccqzbh);
 		}
 
 		String jsgcghxkzbh = (String)attributes.get("jsgcghxkzbh");
@@ -414,6 +474,210 @@ public class ProjectProfileModelImpl extends BaseModelImpl<ProjectProfile>
 
 		if (tjsj != null) {
 			setTjsj(tjsj);
+		}
+
+		String gcnr = (String)attributes.get("gcnr");
+
+		if (gcnr != null) {
+			setGcnr(gcnr);
+		}
+
+		String sgxkzsbz = (String)attributes.get("sgxkzsbz");
+
+		if (sgxkzsbz != null) {
+			setSgxkzsbz(sgxkzsbz);
+		}
+
+		String gkpzhhzjghwh = (String)attributes.get("gkpzhhzjghwh");
+
+		if (gkpzhhzjghwh != null) {
+			setGkpzhhzjghwh(gkpzhhzjghwh);
+		}
+
+		Date pfhhzrq = (Date)attributes.get("pfhhzrq");
+
+		if (pfhhzrq != null) {
+			setPfhhzrq(pfhhzrq);
+		}
+
+		String cbsjpzjghwh = (String)attributes.get("cbsjpzjghwh");
+
+		if (cbsjpzjghwh != null) {
+			setCbsjpzjghwh(cbsjpzjghwh);
+		}
+
+		Date pfrq = (Date)attributes.get("pfrq");
+
+		if (pfrq != null) {
+			setPfrq(pfrq);
+		}
+
+		Integer pfgq = (Integer)attributes.get("pfgq");
+
+		if (pfgq != null) {
+			setPfgq(pfgq);
+		}
+
+		String pzjghwh = (String)attributes.get("pzjghwh");
+
+		if (pzjghwh != null) {
+			setPzjghwh(pzjghwh);
+		}
+
+		String xmdw = (String)attributes.get("xmdw");
+
+		if (xmdw != null) {
+			setXmdw(xmdw);
+		}
+
+		String xmfzr = (String)attributes.get("xmfzr");
+
+		if (xmfzr != null) {
+			setXmfzr(xmfzr);
+		}
+
+		String xmfzrlxdh = (String)attributes.get("xmfzrlxdh");
+
+		if (xmfzrlxdh != null) {
+			setXmfzrlxdh(xmfzrlxdh);
+		}
+
+		String sj_zbfs = (String)attributes.get("sj_zbfs");
+
+		if (sj_zbfs != null) {
+			setSj_zbfs(sj_zbfs);
+		}
+
+		String sj_zbj = (String)attributes.get("sj_zbj");
+
+		if (sj_zbj != null) {
+			setSj_zbj(sj_zbj);
+		}
+
+		String sj_zzdj = (String)attributes.get("sj_zzdj");
+
+		if (sj_zzdj != null) {
+			setSj_zzdj(sj_zzdj);
+		}
+
+		String sj_zzdjzsbh = (String)attributes.get("sj_zzdjzsbh");
+
+		if (sj_zzdjzsbh != null) {
+			setSj_zzdjzsbh(sj_zzdjzsbh);
+		}
+
+		String sj_xmfzr = (String)attributes.get("sj_xmfzr");
+
+		if (sj_xmfzr != null) {
+			setSj_xmfzr(sj_xmfzr);
+		}
+
+		String sj_zmfzrzsbh = (String)attributes.get("sj_zmfzrzsbh");
+
+		if (sj_zmfzrzsbh != null) {
+			setSj_zmfzrzsbh(sj_zmfzrzsbh);
+		}
+
+		String jl_zbfs = (String)attributes.get("jl_zbfs");
+
+		if (jl_zbfs != null) {
+			setJl_zbfs(jl_zbfs);
+		}
+
+		String jl_zbj = (String)attributes.get("jl_zbj");
+
+		if (jl_zbj != null) {
+			setJl_zbj(jl_zbj);
+		}
+
+		String jl_zzdj = (String)attributes.get("jl_zzdj");
+
+		if (jl_zzdj != null) {
+			setJl_zzdj(jl_zzdj);
+		}
+
+		String jl_zzdjzsbh = (String)attributes.get("jl_zzdjzsbh");
+
+		if (jl_zzdjzsbh != null) {
+			setJl_zzdjzsbh(jl_zzdjzsbh);
+		}
+
+		String jl_zj = (String)attributes.get("jl_zj");
+
+		if (jl_zj != null) {
+			setJl_zj(jl_zj);
+		}
+
+		String jl_zjzsbh = (String)attributes.get("jl_zjzsbh");
+
+		if (jl_zjzsbh != null) {
+			setJl_zjzsbh(jl_zjzsbh);
+		}
+
+		String sg_zbfs = (String)attributes.get("sg_zbfs");
+
+		if (sg_zbfs != null) {
+			setSg_zbfs(sg_zbfs);
+		}
+
+		String sg_zbj = (String)attributes.get("sg_zbj");
+
+		if (sg_zbj != null) {
+			setSg_zbj(sg_zbj);
+		}
+
+		String sg_zzdj = (String)attributes.get("sg_zzdj");
+
+		if (sg_zzdj != null) {
+			setSg_zzdj(sg_zzdj);
+		}
+
+		String sg_zzdjzsbh = (String)attributes.get("sg_zzdjzsbh");
+
+		if (sg_zzdjzsbh != null) {
+			setSg_zzdjzsbh(sg_zzdjzsbh);
+		}
+
+		String sg_xmjl = (String)attributes.get("sg_xmjl");
+
+		if (sg_xmjl != null) {
+			setSg_xmjl(sg_xmjl);
+		}
+
+		String sg_xmjlzsbh = (String)attributes.get("sg_xmjlzsbh");
+
+		if (sg_xmjlzsbh != null) {
+			setSg_xmjlzsbh(sg_xmjlzsbh);
+		}
+
+		String jszjjhlsqk = (String)attributes.get("jszjjhlsqk");
+
+		if (jszjjhlsqk != null) {
+			setJszjjhlsqk(jszjjhlsqk);
+		}
+
+		String dcqwcqk = (String)attributes.get("dcqwcqk");
+
+		if (dcqwcqk != null) {
+			setDcqwcqk(dcqwcqk);
+		}
+
+		String sgzbqk = (String)attributes.get("sgzbqk");
+
+		if (sgzbqk != null) {
+			setSgzbqk(sgzbqk);
+		}
+
+		String sytdxgwj = (String)attributes.get("sytdxgwj");
+
+		if (sytdxgwj != null) {
+			setSytdxgwj(sytdxgwj);
+		}
+
+		String gczljddjqk = (String)attributes.get("gczljddjqk");
+
+		if (gczljddjqk != null) {
+			setGczljddjqk(gczljddjqk);
 		}
 	}
 
@@ -630,21 +894,6 @@ public class ProjectProfileModelImpl extends BaseModelImpl<ProjectProfile>
 	@Override
 	public void setJsdwsjh(String jsdwsjh) {
 		_jsdwsjh = jsdwsjh;
-	}
-
-	@Override
-	public String getJsydpzwjhfdccqzbh() {
-		if (_jsydpzwjhfdccqzbh == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _jsydpzwjhfdccqzbh;
-		}
-	}
-
-	@Override
-	public void setJsydpzwjhfdccqzbh(String jsydpzwjhfdccqzbh) {
-		_jsydpzwjhfdccqzbh = jsydpzwjhfdccqzbh;
 	}
 
 	@Override
@@ -928,6 +1177,501 @@ public class ProjectProfileModelImpl extends BaseModelImpl<ProjectProfile>
 	}
 
 	@Override
+	public String getGcnr() {
+		if (_gcnr == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _gcnr;
+		}
+	}
+
+	@Override
+	public void setGcnr(String gcnr) {
+		_gcnr = gcnr;
+	}
+
+	@Override
+	public String getSgxkzsbz() {
+		if (_sgxkzsbz == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _sgxkzsbz;
+		}
+	}
+
+	@Override
+	public void setSgxkzsbz(String sgxkzsbz) {
+		_sgxkzsbz = sgxkzsbz;
+	}
+
+	@Override
+	public String getGkpzhhzjghwh() {
+		if (_gkpzhhzjghwh == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _gkpzhhzjghwh;
+		}
+	}
+
+	@Override
+	public void setGkpzhhzjghwh(String gkpzhhzjghwh) {
+		_gkpzhhzjghwh = gkpzhhzjghwh;
+	}
+
+	@Override
+	public Date getPfhhzrq() {
+		return _pfhhzrq;
+	}
+
+	@Override
+	public void setPfhhzrq(Date pfhhzrq) {
+		_pfhhzrq = pfhhzrq;
+	}
+
+	@Override
+	public String getCbsjpzjghwh() {
+		if (_cbsjpzjghwh == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _cbsjpzjghwh;
+		}
+	}
+
+	@Override
+	public void setCbsjpzjghwh(String cbsjpzjghwh) {
+		_cbsjpzjghwh = cbsjpzjghwh;
+	}
+
+	@Override
+	public Date getPfrq() {
+		return _pfrq;
+	}
+
+	@Override
+	public void setPfrq(Date pfrq) {
+		_pfrq = pfrq;
+	}
+
+	@Override
+	public int getPfgq() {
+		return _pfgq;
+	}
+
+	@Override
+	public void setPfgq(int pfgq) {
+		_pfgq = pfgq;
+	}
+
+	@Override
+	public String getPzjghwh() {
+		if (_pzjghwh == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _pzjghwh;
+		}
+	}
+
+	@Override
+	public void setPzjghwh(String pzjghwh) {
+		_pzjghwh = pzjghwh;
+	}
+
+	@Override
+	public String getXmdw() {
+		if (_xmdw == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _xmdw;
+		}
+	}
+
+	@Override
+	public void setXmdw(String xmdw) {
+		_xmdw = xmdw;
+	}
+
+	@Override
+	public String getXmfzr() {
+		if (_xmfzr == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _xmfzr;
+		}
+	}
+
+	@Override
+	public void setXmfzr(String xmfzr) {
+		_xmfzr = xmfzr;
+	}
+
+	@Override
+	public String getXmfzrlxdh() {
+		if (_xmfzrlxdh == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _xmfzrlxdh;
+		}
+	}
+
+	@Override
+	public void setXmfzrlxdh(String xmfzrlxdh) {
+		_xmfzrlxdh = xmfzrlxdh;
+	}
+
+	@Override
+	public String getSj_zbfs() {
+		if (_sj_zbfs == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _sj_zbfs;
+		}
+	}
+
+	@Override
+	public void setSj_zbfs(String sj_zbfs) {
+		_sj_zbfs = sj_zbfs;
+	}
+
+	@Override
+	public String getSj_zbj() {
+		if (_sj_zbj == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _sj_zbj;
+		}
+	}
+
+	@Override
+	public void setSj_zbj(String sj_zbj) {
+		_sj_zbj = sj_zbj;
+	}
+
+	@Override
+	public String getSj_zzdj() {
+		if (_sj_zzdj == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _sj_zzdj;
+		}
+	}
+
+	@Override
+	public void setSj_zzdj(String sj_zzdj) {
+		_sj_zzdj = sj_zzdj;
+	}
+
+	@Override
+	public String getSj_zzdjzsbh() {
+		if (_sj_zzdjzsbh == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _sj_zzdjzsbh;
+		}
+	}
+
+	@Override
+	public void setSj_zzdjzsbh(String sj_zzdjzsbh) {
+		_sj_zzdjzsbh = sj_zzdjzsbh;
+	}
+
+	@Override
+	public String getSj_xmfzr() {
+		if (_sj_xmfzr == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _sj_xmfzr;
+		}
+	}
+
+	@Override
+	public void setSj_xmfzr(String sj_xmfzr) {
+		_sj_xmfzr = sj_xmfzr;
+	}
+
+	@Override
+	public String getSj_zmfzrzsbh() {
+		if (_sj_zmfzrzsbh == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _sj_zmfzrzsbh;
+		}
+	}
+
+	@Override
+	public void setSj_zmfzrzsbh(String sj_zmfzrzsbh) {
+		_sj_zmfzrzsbh = sj_zmfzrzsbh;
+	}
+
+	@Override
+	public String getJl_zbfs() {
+		if (_jl_zbfs == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _jl_zbfs;
+		}
+	}
+
+	@Override
+	public void setJl_zbfs(String jl_zbfs) {
+		_jl_zbfs = jl_zbfs;
+	}
+
+	@Override
+	public String getJl_zbj() {
+		if (_jl_zbj == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _jl_zbj;
+		}
+	}
+
+	@Override
+	public void setJl_zbj(String jl_zbj) {
+		_jl_zbj = jl_zbj;
+	}
+
+	@Override
+	public String getJl_zzdj() {
+		if (_jl_zzdj == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _jl_zzdj;
+		}
+	}
+
+	@Override
+	public void setJl_zzdj(String jl_zzdj) {
+		_jl_zzdj = jl_zzdj;
+	}
+
+	@Override
+	public String getJl_zzdjzsbh() {
+		if (_jl_zzdjzsbh == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _jl_zzdjzsbh;
+		}
+	}
+
+	@Override
+	public void setJl_zzdjzsbh(String jl_zzdjzsbh) {
+		_jl_zzdjzsbh = jl_zzdjzsbh;
+	}
+
+	@Override
+	public String getJl_zj() {
+		if (_jl_zj == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _jl_zj;
+		}
+	}
+
+	@Override
+	public void setJl_zj(String jl_zj) {
+		_jl_zj = jl_zj;
+	}
+
+	@Override
+	public String getJl_zjzsbh() {
+		if (_jl_zjzsbh == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _jl_zjzsbh;
+		}
+	}
+
+	@Override
+	public void setJl_zjzsbh(String jl_zjzsbh) {
+		_jl_zjzsbh = jl_zjzsbh;
+	}
+
+	@Override
+	public String getSg_zbfs() {
+		if (_sg_zbfs == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _sg_zbfs;
+		}
+	}
+
+	@Override
+	public void setSg_zbfs(String sg_zbfs) {
+		_sg_zbfs = sg_zbfs;
+	}
+
+	@Override
+	public String getSg_zbj() {
+		if (_sg_zbj == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _sg_zbj;
+		}
+	}
+
+	@Override
+	public void setSg_zbj(String sg_zbj) {
+		_sg_zbj = sg_zbj;
+	}
+
+	@Override
+	public String getSg_zzdj() {
+		if (_sg_zzdj == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _sg_zzdj;
+		}
+	}
+
+	@Override
+	public void setSg_zzdj(String sg_zzdj) {
+		_sg_zzdj = sg_zzdj;
+	}
+
+	@Override
+	public String getSg_zzdjzsbh() {
+		if (_sg_zzdjzsbh == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _sg_zzdjzsbh;
+		}
+	}
+
+	@Override
+	public void setSg_zzdjzsbh(String sg_zzdjzsbh) {
+		_sg_zzdjzsbh = sg_zzdjzsbh;
+	}
+
+	@Override
+	public String getSg_xmjl() {
+		if (_sg_xmjl == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _sg_xmjl;
+		}
+	}
+
+	@Override
+	public void setSg_xmjl(String sg_xmjl) {
+		_sg_xmjl = sg_xmjl;
+	}
+
+	@Override
+	public String getSg_xmjlzsbh() {
+		if (_sg_xmjlzsbh == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _sg_xmjlzsbh;
+		}
+	}
+
+	@Override
+	public void setSg_xmjlzsbh(String sg_xmjlzsbh) {
+		_sg_xmjlzsbh = sg_xmjlzsbh;
+	}
+
+	@Override
+	public String getJszjjhlsqk() {
+		if (_jszjjhlsqk == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _jszjjhlsqk;
+		}
+	}
+
+	@Override
+	public void setJszjjhlsqk(String jszjjhlsqk) {
+		_jszjjhlsqk = jszjjhlsqk;
+	}
+
+	@Override
+	public String getDcqwcqk() {
+		if (_dcqwcqk == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _dcqwcqk;
+		}
+	}
+
+	@Override
+	public void setDcqwcqk(String dcqwcqk) {
+		_dcqwcqk = dcqwcqk;
+	}
+
+	@Override
+	public String getSgzbqk() {
+		if (_sgzbqk == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _sgzbqk;
+		}
+	}
+
+	@Override
+	public void setSgzbqk(String sgzbqk) {
+		_sgzbqk = sgzbqk;
+	}
+
+	@Override
+	public String getSytdxgwj() {
+		if (_sytdxgwj == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _sytdxgwj;
+		}
+	}
+
+	@Override
+	public void setSytdxgwj(String sytdxgwj) {
+		_sytdxgwj = sytdxgwj;
+	}
+
+	@Override
+	public String getGczljddjqk() {
+		if (_gczljddjqk == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _gczljddjqk;
+		}
+	}
+
+	@Override
+	public void setGczljddjqk(String gczljddjqk) {
+		_gczljddjqk = gczljddjqk;
+	}
+
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return ExpandoBridgeFactoryUtil.getExpandoBridge(0,
 			ProjectProfile.class.getName(), getPrimaryKey());
@@ -969,7 +1713,6 @@ public class ProjectProfileModelImpl extends BaseModelImpl<ProjectProfile>
 		projectProfileImpl.setJsdwlxdh(getJsdwlxdh());
 		projectProfileImpl.setJsdwlxr(getJsdwlxr());
 		projectProfileImpl.setJsdwsjh(getJsdwsjh());
-		projectProfileImpl.setJsydpzwjhfdccqzbh(getJsydpzwjhfdccqzbh());
 		projectProfileImpl.setJsgcghxkzbh(getJsgcghxkzbh());
 		projectProfileImpl.setXckgqk(getXckgqk());
 		projectProfileImpl.setXmlx(getXmlx());
@@ -991,6 +1734,40 @@ public class ProjectProfileModelImpl extends BaseModelImpl<ProjectProfile>
 		projectProfileImpl.setYzzpl3(getYzzpl3());
 		projectProfileImpl.setYzzpl4(getYzzpl4());
 		projectProfileImpl.setTjsj(getTjsj());
+		projectProfileImpl.setGcnr(getGcnr());
+		projectProfileImpl.setSgxkzsbz(getSgxkzsbz());
+		projectProfileImpl.setGkpzhhzjghwh(getGkpzhhzjghwh());
+		projectProfileImpl.setPfhhzrq(getPfhhzrq());
+		projectProfileImpl.setCbsjpzjghwh(getCbsjpzjghwh());
+		projectProfileImpl.setPfrq(getPfrq());
+		projectProfileImpl.setPfgq(getPfgq());
+		projectProfileImpl.setPzjghwh(getPzjghwh());
+		projectProfileImpl.setXmdw(getXmdw());
+		projectProfileImpl.setXmfzr(getXmfzr());
+		projectProfileImpl.setXmfzrlxdh(getXmfzrlxdh());
+		projectProfileImpl.setSj_zbfs(getSj_zbfs());
+		projectProfileImpl.setSj_zbj(getSj_zbj());
+		projectProfileImpl.setSj_zzdj(getSj_zzdj());
+		projectProfileImpl.setSj_zzdjzsbh(getSj_zzdjzsbh());
+		projectProfileImpl.setSj_xmfzr(getSj_xmfzr());
+		projectProfileImpl.setSj_zmfzrzsbh(getSj_zmfzrzsbh());
+		projectProfileImpl.setJl_zbfs(getJl_zbfs());
+		projectProfileImpl.setJl_zbj(getJl_zbj());
+		projectProfileImpl.setJl_zzdj(getJl_zzdj());
+		projectProfileImpl.setJl_zzdjzsbh(getJl_zzdjzsbh());
+		projectProfileImpl.setJl_zj(getJl_zj());
+		projectProfileImpl.setJl_zjzsbh(getJl_zjzsbh());
+		projectProfileImpl.setSg_zbfs(getSg_zbfs());
+		projectProfileImpl.setSg_zbj(getSg_zbj());
+		projectProfileImpl.setSg_zzdj(getSg_zzdj());
+		projectProfileImpl.setSg_zzdjzsbh(getSg_zzdjzsbh());
+		projectProfileImpl.setSg_xmjl(getSg_xmjl());
+		projectProfileImpl.setSg_xmjlzsbh(getSg_xmjlzsbh());
+		projectProfileImpl.setJszjjhlsqk(getJszjjhlsqk());
+		projectProfileImpl.setDcqwcqk(getDcqwcqk());
+		projectProfileImpl.setSgzbqk(getSgzbqk());
+		projectProfileImpl.setSytdxgwj(getSytdxgwj());
+		projectProfileImpl.setGczljddjqk(getGczljddjqk());
 
 		projectProfileImpl.resetOriginalValues();
 
@@ -1155,14 +1932,6 @@ public class ProjectProfileModelImpl extends BaseModelImpl<ProjectProfile>
 			projectProfileCacheModel.jsdwsjh = null;
 		}
 
-		projectProfileCacheModel.jsydpzwjhfdccqzbh = getJsydpzwjhfdccqzbh();
-
-		String jsydpzwjhfdccqzbh = projectProfileCacheModel.jsydpzwjhfdccqzbh;
-
-		if ((jsydpzwjhfdccqzbh != null) && (jsydpzwjhfdccqzbh.length() == 0)) {
-			projectProfileCacheModel.jsydpzwjhfdccqzbh = null;
-		}
-
 		projectProfileCacheModel.jsgcghxkzbh = getJsgcghxkzbh();
 
 		String jsgcghxkzbh = projectProfileCacheModel.jsgcghxkzbh;
@@ -1304,12 +2073,280 @@ public class ProjectProfileModelImpl extends BaseModelImpl<ProjectProfile>
 			projectProfileCacheModel.tjsj = Long.MIN_VALUE;
 		}
 
+		projectProfileCacheModel.gcnr = getGcnr();
+
+		String gcnr = projectProfileCacheModel.gcnr;
+
+		if ((gcnr != null) && (gcnr.length() == 0)) {
+			projectProfileCacheModel.gcnr = null;
+		}
+
+		projectProfileCacheModel.sgxkzsbz = getSgxkzsbz();
+
+		String sgxkzsbz = projectProfileCacheModel.sgxkzsbz;
+
+		if ((sgxkzsbz != null) && (sgxkzsbz.length() == 0)) {
+			projectProfileCacheModel.sgxkzsbz = null;
+		}
+
+		projectProfileCacheModel.gkpzhhzjghwh = getGkpzhhzjghwh();
+
+		String gkpzhhzjghwh = projectProfileCacheModel.gkpzhhzjghwh;
+
+		if ((gkpzhhzjghwh != null) && (gkpzhhzjghwh.length() == 0)) {
+			projectProfileCacheModel.gkpzhhzjghwh = null;
+		}
+
+		Date pfhhzrq = getPfhhzrq();
+
+		if (pfhhzrq != null) {
+			projectProfileCacheModel.pfhhzrq = pfhhzrq.getTime();
+		}
+		else {
+			projectProfileCacheModel.pfhhzrq = Long.MIN_VALUE;
+		}
+
+		projectProfileCacheModel.cbsjpzjghwh = getCbsjpzjghwh();
+
+		String cbsjpzjghwh = projectProfileCacheModel.cbsjpzjghwh;
+
+		if ((cbsjpzjghwh != null) && (cbsjpzjghwh.length() == 0)) {
+			projectProfileCacheModel.cbsjpzjghwh = null;
+		}
+
+		Date pfrq = getPfrq();
+
+		if (pfrq != null) {
+			projectProfileCacheModel.pfrq = pfrq.getTime();
+		}
+		else {
+			projectProfileCacheModel.pfrq = Long.MIN_VALUE;
+		}
+
+		projectProfileCacheModel.pfgq = getPfgq();
+
+		projectProfileCacheModel.pzjghwh = getPzjghwh();
+
+		String pzjghwh = projectProfileCacheModel.pzjghwh;
+
+		if ((pzjghwh != null) && (pzjghwh.length() == 0)) {
+			projectProfileCacheModel.pzjghwh = null;
+		}
+
+		projectProfileCacheModel.xmdw = getXmdw();
+
+		String xmdw = projectProfileCacheModel.xmdw;
+
+		if ((xmdw != null) && (xmdw.length() == 0)) {
+			projectProfileCacheModel.xmdw = null;
+		}
+
+		projectProfileCacheModel.xmfzr = getXmfzr();
+
+		String xmfzr = projectProfileCacheModel.xmfzr;
+
+		if ((xmfzr != null) && (xmfzr.length() == 0)) {
+			projectProfileCacheModel.xmfzr = null;
+		}
+
+		projectProfileCacheModel.xmfzrlxdh = getXmfzrlxdh();
+
+		String xmfzrlxdh = projectProfileCacheModel.xmfzrlxdh;
+
+		if ((xmfzrlxdh != null) && (xmfzrlxdh.length() == 0)) {
+			projectProfileCacheModel.xmfzrlxdh = null;
+		}
+
+		projectProfileCacheModel.sj_zbfs = getSj_zbfs();
+
+		String sj_zbfs = projectProfileCacheModel.sj_zbfs;
+
+		if ((sj_zbfs != null) && (sj_zbfs.length() == 0)) {
+			projectProfileCacheModel.sj_zbfs = null;
+		}
+
+		projectProfileCacheModel.sj_zbj = getSj_zbj();
+
+		String sj_zbj = projectProfileCacheModel.sj_zbj;
+
+		if ((sj_zbj != null) && (sj_zbj.length() == 0)) {
+			projectProfileCacheModel.sj_zbj = null;
+		}
+
+		projectProfileCacheModel.sj_zzdj = getSj_zzdj();
+
+		String sj_zzdj = projectProfileCacheModel.sj_zzdj;
+
+		if ((sj_zzdj != null) && (sj_zzdj.length() == 0)) {
+			projectProfileCacheModel.sj_zzdj = null;
+		}
+
+		projectProfileCacheModel.sj_zzdjzsbh = getSj_zzdjzsbh();
+
+		String sj_zzdjzsbh = projectProfileCacheModel.sj_zzdjzsbh;
+
+		if ((sj_zzdjzsbh != null) && (sj_zzdjzsbh.length() == 0)) {
+			projectProfileCacheModel.sj_zzdjzsbh = null;
+		}
+
+		projectProfileCacheModel.sj_xmfzr = getSj_xmfzr();
+
+		String sj_xmfzr = projectProfileCacheModel.sj_xmfzr;
+
+		if ((sj_xmfzr != null) && (sj_xmfzr.length() == 0)) {
+			projectProfileCacheModel.sj_xmfzr = null;
+		}
+
+		projectProfileCacheModel.sj_zmfzrzsbh = getSj_zmfzrzsbh();
+
+		String sj_zmfzrzsbh = projectProfileCacheModel.sj_zmfzrzsbh;
+
+		if ((sj_zmfzrzsbh != null) && (sj_zmfzrzsbh.length() == 0)) {
+			projectProfileCacheModel.sj_zmfzrzsbh = null;
+		}
+
+		projectProfileCacheModel.jl_zbfs = getJl_zbfs();
+
+		String jl_zbfs = projectProfileCacheModel.jl_zbfs;
+
+		if ((jl_zbfs != null) && (jl_zbfs.length() == 0)) {
+			projectProfileCacheModel.jl_zbfs = null;
+		}
+
+		projectProfileCacheModel.jl_zbj = getJl_zbj();
+
+		String jl_zbj = projectProfileCacheModel.jl_zbj;
+
+		if ((jl_zbj != null) && (jl_zbj.length() == 0)) {
+			projectProfileCacheModel.jl_zbj = null;
+		}
+
+		projectProfileCacheModel.jl_zzdj = getJl_zzdj();
+
+		String jl_zzdj = projectProfileCacheModel.jl_zzdj;
+
+		if ((jl_zzdj != null) && (jl_zzdj.length() == 0)) {
+			projectProfileCacheModel.jl_zzdj = null;
+		}
+
+		projectProfileCacheModel.jl_zzdjzsbh = getJl_zzdjzsbh();
+
+		String jl_zzdjzsbh = projectProfileCacheModel.jl_zzdjzsbh;
+
+		if ((jl_zzdjzsbh != null) && (jl_zzdjzsbh.length() == 0)) {
+			projectProfileCacheModel.jl_zzdjzsbh = null;
+		}
+
+		projectProfileCacheModel.jl_zj = getJl_zj();
+
+		String jl_zj = projectProfileCacheModel.jl_zj;
+
+		if ((jl_zj != null) && (jl_zj.length() == 0)) {
+			projectProfileCacheModel.jl_zj = null;
+		}
+
+		projectProfileCacheModel.jl_zjzsbh = getJl_zjzsbh();
+
+		String jl_zjzsbh = projectProfileCacheModel.jl_zjzsbh;
+
+		if ((jl_zjzsbh != null) && (jl_zjzsbh.length() == 0)) {
+			projectProfileCacheModel.jl_zjzsbh = null;
+		}
+
+		projectProfileCacheModel.sg_zbfs = getSg_zbfs();
+
+		String sg_zbfs = projectProfileCacheModel.sg_zbfs;
+
+		if ((sg_zbfs != null) && (sg_zbfs.length() == 0)) {
+			projectProfileCacheModel.sg_zbfs = null;
+		}
+
+		projectProfileCacheModel.sg_zbj = getSg_zbj();
+
+		String sg_zbj = projectProfileCacheModel.sg_zbj;
+
+		if ((sg_zbj != null) && (sg_zbj.length() == 0)) {
+			projectProfileCacheModel.sg_zbj = null;
+		}
+
+		projectProfileCacheModel.sg_zzdj = getSg_zzdj();
+
+		String sg_zzdj = projectProfileCacheModel.sg_zzdj;
+
+		if ((sg_zzdj != null) && (sg_zzdj.length() == 0)) {
+			projectProfileCacheModel.sg_zzdj = null;
+		}
+
+		projectProfileCacheModel.sg_zzdjzsbh = getSg_zzdjzsbh();
+
+		String sg_zzdjzsbh = projectProfileCacheModel.sg_zzdjzsbh;
+
+		if ((sg_zzdjzsbh != null) && (sg_zzdjzsbh.length() == 0)) {
+			projectProfileCacheModel.sg_zzdjzsbh = null;
+		}
+
+		projectProfileCacheModel.sg_xmjl = getSg_xmjl();
+
+		String sg_xmjl = projectProfileCacheModel.sg_xmjl;
+
+		if ((sg_xmjl != null) && (sg_xmjl.length() == 0)) {
+			projectProfileCacheModel.sg_xmjl = null;
+		}
+
+		projectProfileCacheModel.sg_xmjlzsbh = getSg_xmjlzsbh();
+
+		String sg_xmjlzsbh = projectProfileCacheModel.sg_xmjlzsbh;
+
+		if ((sg_xmjlzsbh != null) && (sg_xmjlzsbh.length() == 0)) {
+			projectProfileCacheModel.sg_xmjlzsbh = null;
+		}
+
+		projectProfileCacheModel.jszjjhlsqk = getJszjjhlsqk();
+
+		String jszjjhlsqk = projectProfileCacheModel.jszjjhlsqk;
+
+		if ((jszjjhlsqk != null) && (jszjjhlsqk.length() == 0)) {
+			projectProfileCacheModel.jszjjhlsqk = null;
+		}
+
+		projectProfileCacheModel.dcqwcqk = getDcqwcqk();
+
+		String dcqwcqk = projectProfileCacheModel.dcqwcqk;
+
+		if ((dcqwcqk != null) && (dcqwcqk.length() == 0)) {
+			projectProfileCacheModel.dcqwcqk = null;
+		}
+
+		projectProfileCacheModel.sgzbqk = getSgzbqk();
+
+		String sgzbqk = projectProfileCacheModel.sgzbqk;
+
+		if ((sgzbqk != null) && (sgzbqk.length() == 0)) {
+			projectProfileCacheModel.sgzbqk = null;
+		}
+
+		projectProfileCacheModel.sytdxgwj = getSytdxgwj();
+
+		String sytdxgwj = projectProfileCacheModel.sytdxgwj;
+
+		if ((sytdxgwj != null) && (sytdxgwj.length() == 0)) {
+			projectProfileCacheModel.sytdxgwj = null;
+		}
+
+		projectProfileCacheModel.gczljddjqk = getGczljddjqk();
+
+		String gczljddjqk = projectProfileCacheModel.gczljddjqk;
+
+		if ((gczljddjqk != null) && (gczljddjqk.length() == 0)) {
+			projectProfileCacheModel.gczljddjqk = null;
+		}
+
 		return projectProfileCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(75);
+		StringBundler sb = new StringBundler(141);
 
 		sb.append("{permitId=");
 		sb.append(getPermitId());
@@ -1341,8 +2378,6 @@ public class ProjectProfileModelImpl extends BaseModelImpl<ProjectProfile>
 		sb.append(getJsdwlxr());
 		sb.append(", jsdwsjh=");
 		sb.append(getJsdwsjh());
-		sb.append(", jsydpzwjhfdccqzbh=");
-		sb.append(getJsydpzwjhfdccqzbh());
 		sb.append(", jsgcghxkzbh=");
 		sb.append(getJsgcghxkzbh());
 		sb.append(", xckgqk=");
@@ -1385,6 +2420,74 @@ public class ProjectProfileModelImpl extends BaseModelImpl<ProjectProfile>
 		sb.append(getYzzpl4());
 		sb.append(", tjsj=");
 		sb.append(getTjsj());
+		sb.append(", gcnr=");
+		sb.append(getGcnr());
+		sb.append(", sgxkzsbz=");
+		sb.append(getSgxkzsbz());
+		sb.append(", gkpzhhzjghwh=");
+		sb.append(getGkpzhhzjghwh());
+		sb.append(", pfhhzrq=");
+		sb.append(getPfhhzrq());
+		sb.append(", cbsjpzjghwh=");
+		sb.append(getCbsjpzjghwh());
+		sb.append(", pfrq=");
+		sb.append(getPfrq());
+		sb.append(", pfgq=");
+		sb.append(getPfgq());
+		sb.append(", pzjghwh=");
+		sb.append(getPzjghwh());
+		sb.append(", xmdw=");
+		sb.append(getXmdw());
+		sb.append(", xmfzr=");
+		sb.append(getXmfzr());
+		sb.append(", xmfzrlxdh=");
+		sb.append(getXmfzrlxdh());
+		sb.append(", sj_zbfs=");
+		sb.append(getSj_zbfs());
+		sb.append(", sj_zbj=");
+		sb.append(getSj_zbj());
+		sb.append(", sj_zzdj=");
+		sb.append(getSj_zzdj());
+		sb.append(", sj_zzdjzsbh=");
+		sb.append(getSj_zzdjzsbh());
+		sb.append(", sj_xmfzr=");
+		sb.append(getSj_xmfzr());
+		sb.append(", sj_zmfzrzsbh=");
+		sb.append(getSj_zmfzrzsbh());
+		sb.append(", jl_zbfs=");
+		sb.append(getJl_zbfs());
+		sb.append(", jl_zbj=");
+		sb.append(getJl_zbj());
+		sb.append(", jl_zzdj=");
+		sb.append(getJl_zzdj());
+		sb.append(", jl_zzdjzsbh=");
+		sb.append(getJl_zzdjzsbh());
+		sb.append(", jl_zj=");
+		sb.append(getJl_zj());
+		sb.append(", jl_zjzsbh=");
+		sb.append(getJl_zjzsbh());
+		sb.append(", sg_zbfs=");
+		sb.append(getSg_zbfs());
+		sb.append(", sg_zbj=");
+		sb.append(getSg_zbj());
+		sb.append(", sg_zzdj=");
+		sb.append(getSg_zzdj());
+		sb.append(", sg_zzdjzsbh=");
+		sb.append(getSg_zzdjzsbh());
+		sb.append(", sg_xmjl=");
+		sb.append(getSg_xmjl());
+		sb.append(", sg_xmjlzsbh=");
+		sb.append(getSg_xmjlzsbh());
+		sb.append(", jszjjhlsqk=");
+		sb.append(getJszjjhlsqk());
+		sb.append(", dcqwcqk=");
+		sb.append(getDcqwcqk());
+		sb.append(", sgzbqk=");
+		sb.append(getSgzbqk());
+		sb.append(", sytdxgwj=");
+		sb.append(getSytdxgwj());
+		sb.append(", gczljddjqk=");
+		sb.append(getGczljddjqk());
 		sb.append("}");
 
 		return sb.toString();
@@ -1392,7 +2495,7 @@ public class ProjectProfileModelImpl extends BaseModelImpl<ProjectProfile>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(115);
+		StringBundler sb = new StringBundler(214);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.cp.permit.model.ProjectProfile");
@@ -1457,10 +2560,6 @@ public class ProjectProfileModelImpl extends BaseModelImpl<ProjectProfile>
 		sb.append(
 			"<column><column-name>jsdwsjh</column-name><column-value><![CDATA[");
 		sb.append(getJsdwsjh());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>jsydpzwjhfdccqzbh</column-name><column-value><![CDATA[");
-		sb.append(getJsydpzwjhfdccqzbh());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>jsgcghxkzbh</column-name><column-value><![CDATA[");
@@ -1546,6 +2645,142 @@ public class ProjectProfileModelImpl extends BaseModelImpl<ProjectProfile>
 			"<column><column-name>tjsj</column-name><column-value><![CDATA[");
 		sb.append(getTjsj());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>gcnr</column-name><column-value><![CDATA[");
+		sb.append(getGcnr());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>sgxkzsbz</column-name><column-value><![CDATA[");
+		sb.append(getSgxkzsbz());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>gkpzhhzjghwh</column-name><column-value><![CDATA[");
+		sb.append(getGkpzhhzjghwh());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>pfhhzrq</column-name><column-value><![CDATA[");
+		sb.append(getPfhhzrq());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>cbsjpzjghwh</column-name><column-value><![CDATA[");
+		sb.append(getCbsjpzjghwh());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>pfrq</column-name><column-value><![CDATA[");
+		sb.append(getPfrq());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>pfgq</column-name><column-value><![CDATA[");
+		sb.append(getPfgq());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>pzjghwh</column-name><column-value><![CDATA[");
+		sb.append(getPzjghwh());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>xmdw</column-name><column-value><![CDATA[");
+		sb.append(getXmdw());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>xmfzr</column-name><column-value><![CDATA[");
+		sb.append(getXmfzr());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>xmfzrlxdh</column-name><column-value><![CDATA[");
+		sb.append(getXmfzrlxdh());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>sj_zbfs</column-name><column-value><![CDATA[");
+		sb.append(getSj_zbfs());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>sj_zbj</column-name><column-value><![CDATA[");
+		sb.append(getSj_zbj());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>sj_zzdj</column-name><column-value><![CDATA[");
+		sb.append(getSj_zzdj());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>sj_zzdjzsbh</column-name><column-value><![CDATA[");
+		sb.append(getSj_zzdjzsbh());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>sj_xmfzr</column-name><column-value><![CDATA[");
+		sb.append(getSj_xmfzr());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>sj_zmfzrzsbh</column-name><column-value><![CDATA[");
+		sb.append(getSj_zmfzrzsbh());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>jl_zbfs</column-name><column-value><![CDATA[");
+		sb.append(getJl_zbfs());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>jl_zbj</column-name><column-value><![CDATA[");
+		sb.append(getJl_zbj());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>jl_zzdj</column-name><column-value><![CDATA[");
+		sb.append(getJl_zzdj());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>jl_zzdjzsbh</column-name><column-value><![CDATA[");
+		sb.append(getJl_zzdjzsbh());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>jl_zj</column-name><column-value><![CDATA[");
+		sb.append(getJl_zj());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>jl_zjzsbh</column-name><column-value><![CDATA[");
+		sb.append(getJl_zjzsbh());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>sg_zbfs</column-name><column-value><![CDATA[");
+		sb.append(getSg_zbfs());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>sg_zbj</column-name><column-value><![CDATA[");
+		sb.append(getSg_zbj());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>sg_zzdj</column-name><column-value><![CDATA[");
+		sb.append(getSg_zzdj());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>sg_zzdjzsbh</column-name><column-value><![CDATA[");
+		sb.append(getSg_zzdjzsbh());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>sg_xmjl</column-name><column-value><![CDATA[");
+		sb.append(getSg_xmjl());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>sg_xmjlzsbh</column-name><column-value><![CDATA[");
+		sb.append(getSg_xmjlzsbh());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>jszjjhlsqk</column-name><column-value><![CDATA[");
+		sb.append(getJszjjhlsqk());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>dcqwcqk</column-name><column-value><![CDATA[");
+		sb.append(getDcqwcqk());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>sgzbqk</column-name><column-value><![CDATA[");
+		sb.append(getSgzbqk());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>sytdxgwj</column-name><column-value><![CDATA[");
+		sb.append(getSytdxgwj());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>gczljddjqk</column-name><column-value><![CDATA[");
+		sb.append(getGczljddjqk());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -1571,7 +2806,6 @@ public class ProjectProfileModelImpl extends BaseModelImpl<ProjectProfile>
 	private String _jsdwlxdh;
 	private String _jsdwlxr;
 	private String _jsdwsjh;
-	private String _jsydpzwjhfdccqzbh;
 	private String _jsgcghxkzbh;
 	private String _xckgqk;
 	private long _xmlx;
@@ -1593,5 +2827,39 @@ public class ProjectProfileModelImpl extends BaseModelImpl<ProjectProfile>
 	private String _yzzpl3;
 	private String _yzzpl4;
 	private Date _tjsj;
+	private String _gcnr;
+	private String _sgxkzsbz;
+	private String _gkpzhhzjghwh;
+	private Date _pfhhzrq;
+	private String _cbsjpzjghwh;
+	private Date _pfrq;
+	private int _pfgq;
+	private String _pzjghwh;
+	private String _xmdw;
+	private String _xmfzr;
+	private String _xmfzrlxdh;
+	private String _sj_zbfs;
+	private String _sj_zbj;
+	private String _sj_zzdj;
+	private String _sj_zzdjzsbh;
+	private String _sj_xmfzr;
+	private String _sj_zmfzrzsbh;
+	private String _jl_zbfs;
+	private String _jl_zbj;
+	private String _jl_zzdj;
+	private String _jl_zzdjzsbh;
+	private String _jl_zj;
+	private String _jl_zjzsbh;
+	private String _sg_zbfs;
+	private String _sg_zbj;
+	private String _sg_zzdj;
+	private String _sg_zzdjzsbh;
+	private String _sg_xmjl;
+	private String _sg_xmjlzsbh;
+	private String _jszjjhlsqk;
+	private String _dcqwcqk;
+	private String _sgzbqk;
+	private String _sytdxgwj;
+	private String _gczljddjqk;
 	private ProjectProfile _escapedModel;
 }

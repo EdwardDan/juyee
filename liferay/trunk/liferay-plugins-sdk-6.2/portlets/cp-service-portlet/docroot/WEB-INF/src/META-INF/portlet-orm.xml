@@ -370,7 +370,6 @@
 			<basic name="jsdwlxdh" />
 			<basic name="jsdwlxr" />
 			<basic name="jsdwsjh" />
-			<basic name="jsydpzwjhfdccqzbh" />
 			<basic name="jsgcghxkzbh" />
 			<basic name="xckgqk" />
 			<basic name="xmlx" />
@@ -398,6 +397,44 @@
 			<basic name="tjsj">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
+			<basic name="gcnr" />
+			<basic name="sgxkzsbz" />
+			<basic name="gkpzhhzjghwh" />
+			<basic name="pfhhzrq">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="cbsjpzjghwh" />
+			<basic name="pfrq">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="pfgq" />
+			<basic name="pzjghwh" />
+			<basic name="xmdw" />
+			<basic name="xmfzr" />
+			<basic name="xmfzrlxdh" />
+			<basic name="sj_zbfs" />
+			<basic name="sj_zbj" />
+			<basic name="sj_zzdj" />
+			<basic name="sj_zzdjzsbh" />
+			<basic name="sj_xmfzr" />
+			<basic name="sj_zmfzrzsbh" />
+			<basic name="jl_zbfs" />
+			<basic name="jl_zbj" />
+			<basic name="jl_zzdj" />
+			<basic name="jl_zzdjzsbh" />
+			<basic name="jl_zj" />
+			<basic name="jl_zjzsbh" />
+			<basic name="sg_zbfs" />
+			<basic name="sg_zbj" />
+			<basic name="sg_zzdj" />
+			<basic name="sg_zzdjzsbh" />
+			<basic name="sg_xmjl" />
+			<basic name="sg_xmjlzsbh" />
+			<basic name="jszjjhlsqk" />
+			<basic name="dcqwcqk" />
+			<basic name="sgzbqk" />
+			<basic name="sytdxgwj" />
+			<basic name="gczljddjqk" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />

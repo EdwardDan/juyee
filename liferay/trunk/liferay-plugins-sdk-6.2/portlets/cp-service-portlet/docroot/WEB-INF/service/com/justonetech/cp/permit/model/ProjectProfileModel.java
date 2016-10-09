@@ -283,21 +283,6 @@ public interface ProjectProfileModel extends BaseModel<ProjectProfile> {
 	public void setJsdwsjh(String jsdwsjh);
 
 	/**
-	 * Returns the jsydpzwjhfdccqzbh of this project profile.
-	 *
-	 * @return the jsydpzwjhfdccqzbh of this project profile
-	 */
-	@AutoEscape
-	public String getJsydpzwjhfdccqzbh();
-
-	/**
-	 * Sets the jsydpzwjhfdccqzbh of this project profile.
-	 *
-	 * @param jsydpzwjhfdccqzbh the jsydpzwjhfdccqzbh of this project profile
-	 */
-	public void setJsydpzwjhfdccqzbh(String jsydpzwjhfdccqzbh);
-
-	/**
 	 * Returns the jsgcghxkzbh of this project profile.
 	 *
 	 * @return the jsgcghxkzbh of this project profile
@@ -610,6 +595,513 @@ public interface ProjectProfileModel extends BaseModel<ProjectProfile> {
 	 * @param tjsj the tjsj of this project profile
 	 */
 	public void setTjsj(Date tjsj);
+
+	/**
+	 * Returns the gcnr of this project profile.
+	 *
+	 * @return the gcnr of this project profile
+	 */
+	@AutoEscape
+	public String getGcnr();
+
+	/**
+	 * Sets the gcnr of this project profile.
+	 *
+	 * @param gcnr the gcnr of this project profile
+	 */
+	public void setGcnr(String gcnr);
+
+	/**
+	 * Returns the sgxkzsbz of this project profile.
+	 *
+	 * @return the sgxkzsbz of this project profile
+	 */
+	@AutoEscape
+	public String getSgxkzsbz();
+
+	/**
+	 * Sets the sgxkzsbz of this project profile.
+	 *
+	 * @param sgxkzsbz the sgxkzsbz of this project profile
+	 */
+	public void setSgxkzsbz(String sgxkzsbz);
+
+	/**
+	 * Returns the gkpzhhzjghwh of this project profile.
+	 *
+	 * @return the gkpzhhzjghwh of this project profile
+	 */
+	@AutoEscape
+	public String getGkpzhhzjghwh();
+
+	/**
+	 * Sets the gkpzhhzjghwh of this project profile.
+	 *
+	 * @param gkpzhhzjghwh the gkpzhhzjghwh of this project profile
+	 */
+	public void setGkpzhhzjghwh(String gkpzhhzjghwh);
+
+	/**
+	 * Returns the pfhhzrq of this project profile.
+	 *
+	 * @return the pfhhzrq of this project profile
+	 */
+	public Date getPfhhzrq();
+
+	/**
+	 * Sets the pfhhzrq of this project profile.
+	 *
+	 * @param pfhhzrq the pfhhzrq of this project profile
+	 */
+	public void setPfhhzrq(Date pfhhzrq);
+
+	/**
+	 * Returns the cbsjpzjghwh of this project profile.
+	 *
+	 * @return the cbsjpzjghwh of this project profile
+	 */
+	@AutoEscape
+	public String getCbsjpzjghwh();
+
+	/**
+	 * Sets the cbsjpzjghwh of this project profile.
+	 *
+	 * @param cbsjpzjghwh the cbsjpzjghwh of this project profile
+	 */
+	public void setCbsjpzjghwh(String cbsjpzjghwh);
+
+	/**
+	 * Returns the pfrq of this project profile.
+	 *
+	 * @return the pfrq of this project profile
+	 */
+	public Date getPfrq();
+
+	/**
+	 * Sets the pfrq of this project profile.
+	 *
+	 * @param pfrq the pfrq of this project profile
+	 */
+	public void setPfrq(Date pfrq);
+
+	/**
+	 * Returns the pfgq of this project profile.
+	 *
+	 * @return the pfgq of this project profile
+	 */
+	public int getPfgq();
+
+	/**
+	 * Sets the pfgq of this project profile.
+	 *
+	 * @param pfgq the pfgq of this project profile
+	 */
+	public void setPfgq(int pfgq);
+
+	/**
+	 * Returns the pzjghwh of this project profile.
+	 *
+	 * @return the pzjghwh of this project profile
+	 */
+	@AutoEscape
+	public String getPzjghwh();
+
+	/**
+	 * Sets the pzjghwh of this project profile.
+	 *
+	 * @param pzjghwh the pzjghwh of this project profile
+	 */
+	public void setPzjghwh(String pzjghwh);
+
+	/**
+	 * Returns the xmdw of this project profile.
+	 *
+	 * @return the xmdw of this project profile
+	 */
+	@AutoEscape
+	public String getXmdw();
+
+	/**
+	 * Sets the xmdw of this project profile.
+	 *
+	 * @param xmdw the xmdw of this project profile
+	 */
+	public void setXmdw(String xmdw);
+
+	/**
+	 * Returns the xmfzr of this project profile.
+	 *
+	 * @return the xmfzr of this project profile
+	 */
+	@AutoEscape
+	public String getXmfzr();
+
+	/**
+	 * Sets the xmfzr of this project profile.
+	 *
+	 * @param xmfzr the xmfzr of this project profile
+	 */
+	public void setXmfzr(String xmfzr);
+
+	/**
+	 * Returns the xmfzrlxdh of this project profile.
+	 *
+	 * @return the xmfzrlxdh of this project profile
+	 */
+	@AutoEscape
+	public String getXmfzrlxdh();
+
+	/**
+	 * Sets the xmfzrlxdh of this project profile.
+	 *
+	 * @param xmfzrlxdh the xmfzrlxdh of this project profile
+	 */
+	public void setXmfzrlxdh(String xmfzrlxdh);
+
+	/**
+	 * Returns the sj_zbfs of this project profile.
+	 *
+	 * @return the sj_zbfs of this project profile
+	 */
+	@AutoEscape
+	public String getSj_zbfs();
+
+	/**
+	 * Sets the sj_zbfs of this project profile.
+	 *
+	 * @param sj_zbfs the sj_zbfs of this project profile
+	 */
+	public void setSj_zbfs(String sj_zbfs);
+
+	/**
+	 * Returns the sj_zbj of this project profile.
+	 *
+	 * @return the sj_zbj of this project profile
+	 */
+	@AutoEscape
+	public String getSj_zbj();
+
+	/**
+	 * Sets the sj_zbj of this project profile.
+	 *
+	 * @param sj_zbj the sj_zbj of this project profile
+	 */
+	public void setSj_zbj(String sj_zbj);
+
+	/**
+	 * Returns the sj_zzdj of this project profile.
+	 *
+	 * @return the sj_zzdj of this project profile
+	 */
+	@AutoEscape
+	public String getSj_zzdj();
+
+	/**
+	 * Sets the sj_zzdj of this project profile.
+	 *
+	 * @param sj_zzdj the sj_zzdj of this project profile
+	 */
+	public void setSj_zzdj(String sj_zzdj);
+
+	/**
+	 * Returns the sj_zzdjzsbh of this project profile.
+	 *
+	 * @return the sj_zzdjzsbh of this project profile
+	 */
+	@AutoEscape
+	public String getSj_zzdjzsbh();
+
+	/**
+	 * Sets the sj_zzdjzsbh of this project profile.
+	 *
+	 * @param sj_zzdjzsbh the sj_zzdjzsbh of this project profile
+	 */
+	public void setSj_zzdjzsbh(String sj_zzdjzsbh);
+
+	/**
+	 * Returns the sj_xmfzr of this project profile.
+	 *
+	 * @return the sj_xmfzr of this project profile
+	 */
+	@AutoEscape
+	public String getSj_xmfzr();
+
+	/**
+	 * Sets the sj_xmfzr of this project profile.
+	 *
+	 * @param sj_xmfzr the sj_xmfzr of this project profile
+	 */
+	public void setSj_xmfzr(String sj_xmfzr);
+
+	/**
+	 * Returns the sj_zmfzrzsbh of this project profile.
+	 *
+	 * @return the sj_zmfzrzsbh of this project profile
+	 */
+	@AutoEscape
+	public String getSj_zmfzrzsbh();
+
+	/**
+	 * Sets the sj_zmfzrzsbh of this project profile.
+	 *
+	 * @param sj_zmfzrzsbh the sj_zmfzrzsbh of this project profile
+	 */
+	public void setSj_zmfzrzsbh(String sj_zmfzrzsbh);
+
+	/**
+	 * Returns the jl_zbfs of this project profile.
+	 *
+	 * @return the jl_zbfs of this project profile
+	 */
+	@AutoEscape
+	public String getJl_zbfs();
+
+	/**
+	 * Sets the jl_zbfs of this project profile.
+	 *
+	 * @param jl_zbfs the jl_zbfs of this project profile
+	 */
+	public void setJl_zbfs(String jl_zbfs);
+
+	/**
+	 * Returns the jl_zbj of this project profile.
+	 *
+	 * @return the jl_zbj of this project profile
+	 */
+	@AutoEscape
+	public String getJl_zbj();
+
+	/**
+	 * Sets the jl_zbj of this project profile.
+	 *
+	 * @param jl_zbj the jl_zbj of this project profile
+	 */
+	public void setJl_zbj(String jl_zbj);
+
+	/**
+	 * Returns the jl_zzdj of this project profile.
+	 *
+	 * @return the jl_zzdj of this project profile
+	 */
+	@AutoEscape
+	public String getJl_zzdj();
+
+	/**
+	 * Sets the jl_zzdj of this project profile.
+	 *
+	 * @param jl_zzdj the jl_zzdj of this project profile
+	 */
+	public void setJl_zzdj(String jl_zzdj);
+
+	/**
+	 * Returns the jl_zzdjzsbh of this project profile.
+	 *
+	 * @return the jl_zzdjzsbh of this project profile
+	 */
+	@AutoEscape
+	public String getJl_zzdjzsbh();
+
+	/**
+	 * Sets the jl_zzdjzsbh of this project profile.
+	 *
+	 * @param jl_zzdjzsbh the jl_zzdjzsbh of this project profile
+	 */
+	public void setJl_zzdjzsbh(String jl_zzdjzsbh);
+
+	/**
+	 * Returns the jl_zj of this project profile.
+	 *
+	 * @return the jl_zj of this project profile
+	 */
+	@AutoEscape
+	public String getJl_zj();
+
+	/**
+	 * Sets the jl_zj of this project profile.
+	 *
+	 * @param jl_zj the jl_zj of this project profile
+	 */
+	public void setJl_zj(String jl_zj);
+
+	/**
+	 * Returns the jl_zjzsbh of this project profile.
+	 *
+	 * @return the jl_zjzsbh of this project profile
+	 */
+	@AutoEscape
+	public String getJl_zjzsbh();
+
+	/**
+	 * Sets the jl_zjzsbh of this project profile.
+	 *
+	 * @param jl_zjzsbh the jl_zjzsbh of this project profile
+	 */
+	public void setJl_zjzsbh(String jl_zjzsbh);
+
+	/**
+	 * Returns the sg_zbfs of this project profile.
+	 *
+	 * @return the sg_zbfs of this project profile
+	 */
+	@AutoEscape
+	public String getSg_zbfs();
+
+	/**
+	 * Sets the sg_zbfs of this project profile.
+	 *
+	 * @param sg_zbfs the sg_zbfs of this project profile
+	 */
+	public void setSg_zbfs(String sg_zbfs);
+
+	/**
+	 * Returns the sg_zbj of this project profile.
+	 *
+	 * @return the sg_zbj of this project profile
+	 */
+	@AutoEscape
+	public String getSg_zbj();
+
+	/**
+	 * Sets the sg_zbj of this project profile.
+	 *
+	 * @param sg_zbj the sg_zbj of this project profile
+	 */
+	public void setSg_zbj(String sg_zbj);
+
+	/**
+	 * Returns the sg_zzdj of this project profile.
+	 *
+	 * @return the sg_zzdj of this project profile
+	 */
+	@AutoEscape
+	public String getSg_zzdj();
+
+	/**
+	 * Sets the sg_zzdj of this project profile.
+	 *
+	 * @param sg_zzdj the sg_zzdj of this project profile
+	 */
+	public void setSg_zzdj(String sg_zzdj);
+
+	/**
+	 * Returns the sg_zzdjzsbh of this project profile.
+	 *
+	 * @return the sg_zzdjzsbh of this project profile
+	 */
+	@AutoEscape
+	public String getSg_zzdjzsbh();
+
+	/**
+	 * Sets the sg_zzdjzsbh of this project profile.
+	 *
+	 * @param sg_zzdjzsbh the sg_zzdjzsbh of this project profile
+	 */
+	public void setSg_zzdjzsbh(String sg_zzdjzsbh);
+
+	/**
+	 * Returns the sg_xmjl of this project profile.
+	 *
+	 * @return the sg_xmjl of this project profile
+	 */
+	@AutoEscape
+	public String getSg_xmjl();
+
+	/**
+	 * Sets the sg_xmjl of this project profile.
+	 *
+	 * @param sg_xmjl the sg_xmjl of this project profile
+	 */
+	public void setSg_xmjl(String sg_xmjl);
+
+	/**
+	 * Returns the sg_xmjlzsbh of this project profile.
+	 *
+	 * @return the sg_xmjlzsbh of this project profile
+	 */
+	@AutoEscape
+	public String getSg_xmjlzsbh();
+
+	/**
+	 * Sets the sg_xmjlzsbh of this project profile.
+	 *
+	 * @param sg_xmjlzsbh the sg_xmjlzsbh of this project profile
+	 */
+	public void setSg_xmjlzsbh(String sg_xmjlzsbh);
+
+	/**
+	 * Returns the jszjjhlsqk of this project profile.
+	 *
+	 * @return the jszjjhlsqk of this project profile
+	 */
+	@AutoEscape
+	public String getJszjjhlsqk();
+
+	/**
+	 * Sets the jszjjhlsqk of this project profile.
+	 *
+	 * @param jszjjhlsqk the jszjjhlsqk of this project profile
+	 */
+	public void setJszjjhlsqk(String jszjjhlsqk);
+
+	/**
+	 * Returns the dcqwcqk of this project profile.
+	 *
+	 * @return the dcqwcqk of this project profile
+	 */
+	@AutoEscape
+	public String getDcqwcqk();
+
+	/**
+	 * Sets the dcqwcqk of this project profile.
+	 *
+	 * @param dcqwcqk the dcqwcqk of this project profile
+	 */
+	public void setDcqwcqk(String dcqwcqk);
+
+	/**
+	 * Returns the sgzbqk of this project profile.
+	 *
+	 * @return the sgzbqk of this project profile
+	 */
+	@AutoEscape
+	public String getSgzbqk();
+
+	/**
+	 * Sets the sgzbqk of this project profile.
+	 *
+	 * @param sgzbqk the sgzbqk of this project profile
+	 */
+	public void setSgzbqk(String sgzbqk);
+
+	/**
+	 * Returns the sytdxgwj of this project profile.
+	 *
+	 * @return the sytdxgwj of this project profile
+	 */
+	@AutoEscape
+	public String getSytdxgwj();
+
+	/**
+	 * Sets the sytdxgwj of this project profile.
+	 *
+	 * @param sytdxgwj the sytdxgwj of this project profile
+	 */
+	public void setSytdxgwj(String sytdxgwj);
+
+	/**
+	 * Returns the gczljddjqk of this project profile.
+	 *
+	 * @return the gczljddjqk of this project profile
+	 */
+	@AutoEscape
+	public String getGczljddjqk();
+
+	/**
+	 * Sets the gczljddjqk of this project profile.
+	 *
+	 * @param gczljddjqk the gczljddjqk of this project profile
+	 */
+	public void setGczljddjqk(String gczljddjqk);
 
 	@Override
 	public boolean isNew();

@@ -42,7 +42,7 @@
 		<column name="slyj" type="String" /><!--受理意见 -->
 		<column name="slsj" type="String" /><!--受理时间 -->
 		<column name="sgxkzFileEntryId" type="long" /><!--施工许可证FileEntryId -->
-		
+
 		<!-- workFlow -->
 		<column name="title" type="String"></column>
 		<column name="content" type="String"></column>
@@ -85,8 +85,7 @@
 		<column name="jsdwlxdh" type="String" /><!-- 建设单位联系电话 -->
 		<column name="jsdwlxr" type="String" /><!-- 建设单位联系人 -->
 		<column name="jsdwsjh" type="String" /><!-- 联系人手机号 -->
-		<column name="jsydpzwjhfdccqzbh" type="String" /><!-- 建设用地批准文件或房地产产权证编号 -->
-		<column name="jsgcghxkzbh" type="String" /><!-- 建设工程规划许可证编号 -->
+		<column name="jsgcghxkzbh" type="String" /><!-- 建设工程规划许可证编号（名称及文号） -->
 		<column name="xckgqk" type="String" /><!--现场开工情况 -->
 		<column name="xmlx" type="long" /><!--项目类型 -->
 		<column name="lxjb" type="String" /><!--立项级别 -->
@@ -107,6 +106,41 @@
 		<column name="yzzpl3" type="String" /><!--预制装配率 -->
 		<column name="yzzpl4" type="String" /><!--预制装配率 -->
 		<column name="tjsj" type="Date" /><!--提交时间 -->
+		<column name="gcnr" type="String" /><!--工程内容 -->
+		<column name="sgxkzsbz" type="String" /><!--施工许可证书备注 -->
+		<!-- 航道有关扩展字段 -->
+		<column name="gkpzhhzjghwh" type="String" /><!--工可批准或核准机关和文号 -->
+		<column name="pfhhzrq" type="Date" /><!--批复或核准日期 -->
+		<column name="cbsjpzjghwh" type="String" /><!--初步设计批准机关和文号 -->
+		<column name="pfrq" type="Date" /><!--批复日期 -->
+		<column name="pfgq" type="int" /><!--批复工期 -->
+		<column name="pzjghwh" type="String" /><!--批准机关和文号 -->
+		<column name="xmdw" type="String" /><!--项目单位 -->
+		<column name="xmfzr" type="String" /><!--项目负责人 -->
+		<column name="xmfzrlxdh" type="String" /><!--项目负责人联系电话 -->
+		<column name="sj_zbfs" type="String" /><!--主要设计单位_招标方式 -->
+		<column name="sj_zbj" type="String" /><!--主要设计单位_中标价 -->
+		<column name="sj_zzdj" type="String" /><!--主要设计单位_资质等级 -->
+		<column name="sj_zzdjzsbh" type="String" /><!--主要设计单位_资质等级证书编号 -->
+		<column name="sj_xmfzr" type="String" /><!--主要设计单位_项目负责人 -->
+		<column name="sj_zmfzrzsbh" type="String" /><!--主要设计单位_项目负责人证书编号 -->
+		<column name="jl_zbfs" type="String" /><!--主要监理单位_招标方式 -->
+		<column name="jl_zbj" type="String" /><!--主要监理单位_中标价 -->
+		<column name="jl_zzdj" type="String" /><!--主要监理单位_资质等级 -->
+		<column name="jl_zzdjzsbh" type="String" /><!--主要监理单位_资质等级证书编号 -->
+		<column name="jl_zj" type="String" /><!--主要监理单位_总监 -->
+		<column name="jl_zjzsbh" type="String" /><!--主要监理单位_总监证书编号 -->
+		<column name="sg_zbfs" type="String" /><!--主要施工单位_招标方式 -->
+		<column name="sg_zbj" type="String" /><!--主要施工单位_中标价 -->
+		<column name="sg_zzdj" type="String" /><!--主要施工单位_资质等级 -->
+		<column name="sg_zzdjzsbh" type="String" /><!--主要施工单位_资质等级证书编号 -->
+		<column name="sg_xmjl" type="String" /><!--主要施工单位_项目经理 -->
+		<column name="sg_xmjlzsbh" type="String" /><!--主要施工单位_项目经理证书编号 -->
+		<column name="jszjjhlsqk" type="String" /><!--建设资金计划落实情况 -->
+		<column name="dcqwcqk" type="String" /><!--动、拆迁完成情况 -->
+		<column name="sgzbqk" type="String" /><!--施工准备情况 -->
+		<column name="sytdxgwj" type="String" /><!--使用土地等相关文件 -->
+		<column name="gczljddjqk" type="String" /><!--工程质量（施工安全）监督登记情况 -->
 
 		<!-- Order -->
 
