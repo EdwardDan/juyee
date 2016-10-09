@@ -24,7 +24,7 @@ public class CpConstants {
 
 	public static final String JG_GL_DX = "jg_gl_dx";//竣工-港口-大修
 	public static final String JG_SZJT_DX = "jg_szjt_dx";//竣工-市政交通-大修
-	public static final String CJDW_DWLX = "cjdwxmlx";//参建单位单位类型
+	public static final String CJDW_DWLX = "cjdwdwlx";//参建单位单位类型
 	public static final String CJDW_ZJLX = "zjlx";//参建单位证件类型
 	
 }
