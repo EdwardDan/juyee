@@ -112,13 +112,13 @@ public class PermitApplicationPortlet extends MVCPortlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+
 			String zzjgdm = ParamUtil.getString(renderRequest, "zzjgdm", "");
 			if (user != null) {
 				try {
 					long[] roles = user.getRoleIds();
-					for(long role:roles){
-						if(role == Long.parseLong(PropsUtil.get("jsdw"))){
+					for (long role : roles) {
+						if (role == Long.parseLong(PropsUtil.get("jsdw"))) {
 							zzjgdm = user.getScreenName();
 						}
 					}
@@ -153,7 +153,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		String wssqbh = ParamUtil.getString(renderRequest, "wssqbh");
 		String gcmc = ParamUtil.getString(renderRequest, "gcmc");
 		String zzjgdm = ParamUtil.getString(renderRequest, "zzjgdm");
-		
+
 		User user = null;
 		try {
 			user = UserServiceUtil.getCurrentUser();
@@ -167,8 +167,8 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		if (user != null) {
 			try {
 				long[] roles = user.getRoleIds();
-				for(long role:roles){
-					if(role == Long.parseLong(PropsUtil.get("jsdw"))){
+				for (long role : roles) {
+					if (role == Long.parseLong(PropsUtil.get("jsdw"))) {
 						zzjgdm = user.getScreenName();
 					}
 				}
@@ -196,8 +196,8 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		super.doView(renderRequest, renderResponse);
 	}
 
-	public void saveProjectProfile(ActionRequest request, ActionResponse response) throws SystemException, PortalException, ParseException,
-			IOException {
+	public void saveProjectProfile(ActionRequest request, ActionResponse response) throws SystemException,
+			PortalException, ParseException, IOException {
 
 		Long xmlx = ParamUtil.getLong(request, "xmlx");
 		String lxjb = ParamUtil.getString(request, "lxjb");
@@ -303,7 +303,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		projectProfile.setYzzpl3(yzzpl3);
 		projectProfile.setYzzpl4(yzzpl4);
 		ProjectProfileLocalServiceUtil.updateProjectProfile(projectProfile);
-		if(Validator.isNull(permit.getYwbh())){
+		if (Validator.isNull(permit.getYwbh())) {
 			String ywbh = "JT";
 			Dictionary xmlxDic = DictionaryLocalServiceUtil.getDictionary(xmlx);
 			ywbh = ywbh + xmlxDic.getCode();
@@ -320,8 +320,8 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		redirect(request, response, permit, 1);
 	}
 
-	public void saveParticipationUnits(ActionRequest request, ActionResponse response) throws SystemException, PortalException, ParseException,
-			IOException {
+	public void saveParticipationUnits(ActionRequest request, ActionResponse response) throws SystemException,
+			PortalException, ParseException, IOException {
 
 		long permitId = ParamUtil.getLong(request, "permitId");
 		Permit permit = PermitLocalServiceUtil.getPermit(permitId);
@@ -345,7 +345,8 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		String[] zjhs = ParamUtil.getParameterValues(request, "zjh");
 		String[] dhhms = ParamUtil.getParameterValues(request, "dhhm");
 		for (int i = 0; i < dwmcs.length; i++) {
-			ParticipationUnit participationUnit = ParticipationUnitLocalServiceUtil.createParticipationUnit(CounterLocalServiceUtil.increment());
+			ParticipationUnit participationUnit = ParticipationUnitLocalServiceUtil
+					.createParticipationUnit(CounterLocalServiceUtil.increment());
 			participationUnit.setDwmc(dwmcs[i]);
 			participationUnit.setSfyssj(Boolean.valueOf(sfssjs[i]));
 			participationUnit.setDwlx(dwlxs[i]);
@@ -366,7 +367,8 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		redirect(request, response, permit, 2);
 	}
 
-	public void saveUnitProjects(ActionRequest request, ActionResponse response) throws SystemException, PortalException, ParseException, IOException {
+	public void saveUnitProjects(ActionRequest request, ActionResponse response) throws SystemException,
+			PortalException, ParseException, IOException {
 
 		long permitId = ParamUtil.getLong(request, "permitId");
 
@@ -379,7 +381,8 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		String[] gcmcs = ParamUtil.getParameterValues(request, "gcmc");
 		String[] jsnrs = ParamUtil.getParameterValues(request, "jsnr");
 		for (int i = 0; i < gcbhs.length - 1; i++) {
-			UnitProject unitProject = UnitProjectLocalServiceUtil.createUnitProject(CounterLocalServiceUtil.increment());
+			UnitProject unitProject = UnitProjectLocalServiceUtil
+					.createUnitProject(CounterLocalServiceUtil.increment());
 			unitProject.setBjbh(bjbh);
 			unitProject.setPermitId(permitId);
 			unitProject.setGcbh(gcbhs[i]);
@@ -396,17 +399,18 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		redirect(request, response, permit, 3);
 	}
 
-	public void saveApplyMaterials(ActionRequest request, ActionResponse response) throws SystemException, PortalException, ParseException,
-			IOException {
+	public void saveApplyMaterials(ActionRequest request, ActionResponse response) throws SystemException,
+			PortalException, ParseException, IOException {
 		long permitId = ParamUtil.getLong(request, "permitId");
 		Permit permit = PermitLocalServiceUtil.getPermit(permitId);
 		if (permit.getSqbz() == 3) {
 			permit.setSqbz(4);
 		}
 		if (permit.getStatus() <= 2
-				&& WorkflowInstanceLinkLocalServiceUtil.hasWorkflowInstanceLink(permit.getCompanyId(), 0L, Permit.class.getName(),
-						permit.getPermitId())) {
-			WorkflowInstanceLinkLocalServiceUtil.deleteWorkflowInstanceLinks(permit.getCompanyId(), 0L, Permit.class.getName(), permit.getPermitId());
+				&& WorkflowInstanceLinkLocalServiceUtil.hasWorkflowInstanceLink(permit.getCompanyId(), 0L,
+						Permit.class.getName(), permit.getPermitId())) {
+			WorkflowInstanceLinkLocalServiceUtil.deleteWorkflowInstanceLinks(permit.getCompanyId(), 0L,
+					Permit.class.getName(), permit.getPermitId());
 			permit.setStatus(1);
 		}
 		PermitLocalServiceUtil.updatePermit(permit);
@@ -468,11 +472,12 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		permit.setSqbz(4);
 		permit.setStatus(2);
 		PermitLocalServiceUtil.updatePermit(permit);
-		WorkflowInstanceLinkLocalServiceUtil.deleteWorkflowInstanceLinks(permit.getCompanyId(), 0L, Permit.class.getName(), permit.getPermitId());
+		WorkflowInstanceLinkLocalServiceUtil.deleteWorkflowInstanceLinks(permit.getCompanyId(), 0L,
+				Permit.class.getName(), permit.getPermitId());
 		WorkflowDefinitionLink workflowDefinitionLink = null;
 		try {
-			workflowDefinitionLink = WorkflowDefinitionLinkLocalServiceUtil.getDefaultWorkflowDefinitionLink(themeDisplay.getCompanyId(),
-					Permit.class.getName(), 0, 0);
+			workflowDefinitionLink = WorkflowDefinitionLinkLocalServiceUtil.getDefaultWorkflowDefinitionLink(
+					themeDisplay.getCompanyId(), Permit.class.getName(), 0, 0);
 		} catch (Exception e) {
 			if (e instanceof NoSuchWorkflowDefinitionLinkException) {
 				SessionMessages.add(request.getPortletSession(), "workflow-not-enabled");
@@ -480,10 +485,10 @@ public class PermitApplicationPortlet extends MVCPortlet {
 			e.printStackTrace();
 		}
 		if (permit != null && workflowDefinitionLink != null) {
-			AssetEntryLocalServiceUtil.updateEntry(themeDisplay.getUserId(), permit.getGroupId(), Permit.class.getName(), permit.getPermitId(), null,
-					null);
-			WorkflowHandlerRegistryUtil.startWorkflowInstance(permit.getCompanyId(), permit.getUserId(), Permit.class.getName(),
-					permit.getPermitId(), permit, serviceContext);
+			AssetEntryLocalServiceUtil.updateEntry(themeDisplay.getUserId(), permit.getGroupId(),
+					Permit.class.getName(), permit.getPermitId(), null, null);
+			WorkflowHandlerRegistryUtil.startWorkflowInstance(permit.getCompanyId(), permit.getUserId(),
+					Permit.class.getName(), permit.getPermitId(), permit, serviceContext);
 		}
 	}
 
@@ -504,26 +509,30 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		response.sendRedirect(redirect);
 	}
 
-	public void deletePermits(ActionRequest actionRequest, ActionResponse actionResponse) throws NumberFormatException, PortalException,
-			SystemException {
+	public void deletePermits(ActionRequest actionRequest, ActionResponse actionResponse) throws NumberFormatException,
+			PortalException, SystemException {
 		String deletePermitIds = ParamUtil.getString(actionRequest, "permitIds");
 		String[] permitIds = deletePermitIds.split(",");
 		for (String permitId : permitIds) {
 			ProjectProfileLocalServiceUtil.deleteProjectProfile(Long.parseLong(permitId));
-			List<UnitProject> unitProjects = UnitProjectLocalServiceUtil.findByPermitId(Long.parseLong(permitId), -1, -1);
+			List<UnitProject> unitProjects = UnitProjectLocalServiceUtil.findByPermitId(Long.parseLong(permitId), -1,
+					-1);
 			for (UnitProject unitProject : unitProjects) {
 				UnitProjectLocalServiceUtil.deleteUnitProject(unitProject);
 			}
-			List<ParticipationUnit> participationUnits = ParticipationUnitLocalServiceUtil.findByPermitId(Long.parseLong(permitId), -1, -1);
+			List<ParticipationUnit> participationUnits = ParticipationUnitLocalServiceUtil.findByPermitId(
+					Long.parseLong(permitId), -1, -1);
 			for (ParticipationUnit participationUnit : participationUnits) {
 				ParticipationUnitLocalServiceUtil.deleteParticipationUnit(participationUnit);
 			}
-			List<ApplyMaterial> applyMaterials = ApplyMaterialLocalServiceUtil.findByPermitId(Long.parseLong(permitId), -1, -1);
+			List<ApplyMaterial> applyMaterials = ApplyMaterialLocalServiceUtil.findByPermitId(Long.parseLong(permitId),
+					-1, -1);
 			for (ApplyMaterial applyMaterial : applyMaterials) {
 				ApplyMaterialLocalServiceUtil.deleteApplyMaterial(applyMaterial);
 			}
 			Permit permit = PermitLocalServiceUtil.getPermit(Long.parseLong(permitId));
-			WorkflowInstanceLinkLocalServiceUtil.deleteWorkflowInstanceLinks(permit.getCompanyId(), 0L, Permit.class.getName(), permit.getPermitId());
+			WorkflowInstanceLinkLocalServiceUtil.deleteWorkflowInstanceLinks(permit.getCompanyId(), 0L,
+					Permit.class.getName(), permit.getPermitId());
 			PermitLocalServiceUtil.deletePermit(Long.parseLong(permitId));
 		}
 	}
@@ -588,9 +597,122 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		return map;
 	}
 	
-	public FileEntry fillTemplate( DLFileEntry fileEntry, String newPDFPath,
-			Map<String, String> map,ResourceRequest request, ResourceResponse response,Permit permit) throws IOException, DocumentException, PortalException, SystemException,
-			com.lowagie.text.DocumentException {
+	public Map<String, String> getKgbaMap(long permitId) throws PortalException, SystemException {
+		Map<String, String> map = new HashMap<String, String>();
+		Permit permit =PermitLocalServiceUtil.getPermit(permitId);
+		ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
+		String babh = permit.getSgxkzbh();
+		String xmmc = projectProfile.getGcmc();
+		String jsdd = projectProfile.getJsdd();
+		String tzly = "";
+		String gkpzwh = "";
+		String hzrq = "";
+		String tzgs = projectProfile.getXmtzgs();
+		String cbpzwh = "";
+		String pfrq = "";
+		String pfgq = "";
+		String jsgm = projectProfile.getJsgcgm();
+		String pzjghwh = "";
+		String xmdw = "";
+		String xmdwfzr = "";
+		String xmdwfzrlxdh = "";
+		String sjdw = "";
+		String jldw = "";
+		String sgdw = "";
+		List<ParticipationUnit> participationUnits = ParticipationUnitLocalServiceUtil.findByPermitId(permitId, -1, -1);
+		for (ParticipationUnit participationUnit : participationUnits) {
+			if (participationUnit.getDwlx().equals("设计单位")) {
+				sjdw = participationUnit.getDwmc();
+			}
+			if (participationUnit.getDwlx().equals("监理单位")) {
+				jldw = participationUnit.getDwmc();
+			}
+			if (participationUnit.getDwlx().equals("施工单位")) {
+				sgdw = participationUnit.getDwmc();
+			}
+		} 
+		String sjdwzbfs = "";
+		String sjdwzbj = "";
+		String sjdwzzdj = "";
+		String sjdwzzdjzs = "";
+		String sjdwxmfzr = "";
+		String sjdwxmfzrzs = "";
+		
+		String jldwzbfs = "";
+		String jldwzbj = "";
+		String jldwzzdj = "";
+		String jldwzzdjzs = "";
+		String jldwzj = "";
+		String jldwzjzs = "";
+		
+		String sgdwzbfs = "";
+		String sgdwzbj = "";
+		String sgdwzzdj = "";
+		String sgdwzzdjzs = "";
+		String sgdwxmjl = "";
+		String sgdwxmjlzs = "";  	
+		
+		String jszjjh = "";
+		String dcqwcqk = "";
+		String sgzbqk = "";
+		String xgwj = "";
+		String gczljd = "";
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		String jhkgrq = sdf.format(projectProfile.getJhkg());
+		String jhjgrq = sdf.format(projectProfile.getJhjg());
+		String jhkg = jhkgrq.substring(0, 4) + "年" + jhkgrq.substring(4, 6) + "月" + jhkgrq.substring(6, 8) + "日";
+		String jhwg = jhjgrq.substring(0, 4) + "年" + jhjgrq.substring(4, 6) + "月" + jhjgrq.substring(6, 8) + "日";
+		map.put("babh", babh);
+		map.put("xmmc", xmmc);
+		map.put("jsdd", jsdd);
+		map.put("tzly", tzly);
+		map.put("gkpzwh", gkpzwh);
+		map.put("hzrq", hzrq);
+		map.put("tzgs", tzgs);
+		map.put("cbpzwh", cbpzwh);
+		map.put("pfrq", pfrq);
+		map.put("pfgq", pfgq);
+		map.put("jsgm", jsgm);
+		map.put("pzjghwh", pzjghwh);
+		map.put("xmdw", xmdw);
+		map.put("xmdwfzr", xmdwfzr);
+		map.put("xmdwfzrlxdh", xmdwfzrlxdh);
+		map.put("sjdw", sjdw);
+		map.put("sjdwzbfs", sjdwzbfs);
+		map.put("sjdwzbj", sjdwzbj);
+		map.put("sjdwzzdj", sjdwzzdj);
+		map.put("sjdwzzdjzs", sjdwzzdjzs);
+		map.put("sjdwxmfzr", sjdwxmfzr);
+		map.put("sjdwxmfzrzs", sjdwxmfzrzs);
+		map.put("jldw", jldw);
+		map.put("jldwzbfs", jldwzbfs);
+		map.put("jldwzbj", jldwzbj);
+		map.put("jldwzzdj", jldwzzdj);
+		map.put("jldwzzdjzs", jldwzzdjzs);
+		map.put("jldwzj", jldwzj);
+		map.put("jldwzjzs", jldwzjzs);
+		map.put("sgdw", sgdw);
+		map.put("sgdwzbfs", sgdwzbfs);
+		map.put("sgdwzbj", sgdwzbj);
+		map.put("sgdwzzdj", sgdwzzdj);
+		map.put("sgdwzzdjzs", sgdwzzdjzs);
+		map.put("sgdwxmjl", sgdwxmjl);
+		map.put("sgdwxmjlzs", sgdwxmjlzs);
+		map.put("jszjjh", jszjjh);
+		map.put("dcqwcqk", dcqwcqk);
+		map.put("sgzbqk", sgzbqk);
+		map.put("xgwj", xgwj);
+		map.put("gczljd", gczljd);
+		
+		map.put("jhkg", jhkg);
+		map.put("jhwg", jhwg);
+		return map;
+	}
+
+	public FileEntry fillTemplate(DLFileEntry fileEntry, String newPDFPath, Map<String, String> map,
+			ResourceRequest request, ResourceResponse response, Permit permit) throws IOException, DocumentException,
+			PortalException, SystemException, com.lowagie.text.DocumentException {
 		PdfReader pdfReader = new PdfReader(fileEntry.getContentStream());
 		File file = new File(newPDFPath);
 		file.delete();
@@ -608,9 +730,10 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		Document document = new Document();
 		PdfCopy pdfCopy = new PdfCopy(document, outputStream);
 		document.open();
-		for (int i=1;i<=pdfReader.getNumberOfPages();i++) {
-			PdfImportedPage importedPage = pdfCopy.getImportedPage(new PdfReader(byteArrayOutputStream.toByteArray()), i);
-			pdfCopy.addPage(importedPage);	
+		for (int i = 1; i <= pdfReader.getNumberOfPages(); i++) {
+			PdfImportedPage importedPage = pdfCopy.getImportedPage(new PdfReader(byteArrayOutputStream.toByteArray()),
+					i);
+			pdfCopy.addPage(importedPage);
 		}
 
 		document.close();
@@ -620,27 +743,32 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		long userId = PortalUtil.getUserId(request);
 		long repositoryId = Long.valueOf(PropsUtil.get("global.group.id"));
 		long folderId = Long.valueOf(PropsUtil.get("sgxkz.pdf.folder.id"));
-		return DLAppLocalServiceUtil.addFileEntry(userId, repositoryId, folderId, file.getName(), "application/pdf",CounterLocalServiceUtil.increment()+"",
-				null, null, file, serviceContext);
+		return DLAppLocalServiceUtil.addFileEntry(userId, repositoryId, folderId, file.getName(), "application/pdf",
+				CounterLocalServiceUtil.increment() + "", null, null, file, serviceContext);
 	}
-	
-	public String getViewURL(ResourceRequest request,ResourceResponse response, long permitId,long fileEntryId,String newPDFPath,Map<String,String> map) throws PortalException, SystemException, IOException, DocumentException, com.lowagie.text.DocumentException {
+
+	public String getViewURL(ResourceRequest request, ResourceResponse response, long permitId, long fileEntryId,
+			String newPDFPath, Map<String, String> map) throws PortalException, SystemException, IOException,
+			DocumentException, com.lowagie.text.DocumentException {
 		String viewURL = "";
 		Permit permit = PermitLocalServiceUtil.getPermit(permitId);
-		if(permit.getSgxkzFileEntryId()==0){
+		if (permit.getSgxkzFileEntryId() == 0) {
 			DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(fileEntryId);
-			FileEntry file = fillTemplate(fileEntry, newPDFPath, map,request,response,permit);
+			FileEntry file = fillTemplate(fileEntry, newPDFPath, map, request, response, permit);
 			permit.setSgxkzFileEntryId(file.getFileEntryId());
 			PermitLocalServiceUtil.updatePermit(permit);
-			viewURL = "/documents/" + file.getGroupId()+"/"+file.getFolderId()+"/"+file.getTitle();
-		}else{
-			DLFileEntry dlFileEntry =DLFileEntryLocalServiceUtil.getDLFileEntry(permit.getSgxkzFileEntryId());
-			viewURL = "/documents/" + dlFileEntry.getGroupId()+"/"+dlFileEntry.getFolderId()+"/"+dlFileEntry.getTitle();
+			viewURL = "/documents/" + file.getGroupId() + "/" + file.getFolderId() + "/" + file.getTitle();
+		} else {
+			DLFileEntry dlFileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(permit.getSgxkzFileEntryId());
+			viewURL = "/documents/" + dlFileEntry.getGroupId() + "/" + dlFileEntry.getFolderId() + "/"
+					+ dlFileEntry.getTitle();
 		}
 		return viewURL;
 	}
+
 	@Override
-	public void serveResource(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException, PortletException {
+	public void serveResource(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException,
+			PortletException {
 
 		try {
 			String resourceId = resourceRequest.getResourceID();
@@ -648,15 +776,29 @@ public class PermitApplicationPortlet extends MVCPortlet {
 			long permitId = ParamUtil.getLong(resourceRequest, "permitId");
 			Permit permit = PermitLocalServiceUtil.getPermit(permitId);
 			ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
-			if("view".equals(resourceId)){
+			if ("view".equals(resourceId)) {
 				String xmlx = DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx()).getName();
-				Map<String, String> map = getMap(permitId, xmlx);
-				String newPDFPath = PropsUtil.get("sgxkz.temp.folder")+permit.getSgxkzbh()+".pdf";
-				String viewURL = getViewURL(resourceRequest,resourceResponse,permitId,Long.valueOf(PropsUtil.get("sgxkz.pdf.template")),newPDFPath,map);
+				Map<String, String> map = null;
+				String newPDFPath = PropsUtil.get("sgxkz.temp.folder") + permit.getSgxkzbh() + ".pdf";
+				String viewURL = "";
+				if (xmlx.equals("航道")) {
+					map = getKgbaMap(permitId);
+					viewURL = getViewURL(resourceRequest, resourceResponse, permitId,
+							Long.valueOf(PropsUtil.get("sgxkz.hd.pdf.template")), newPDFPath, map);
+				} else {
+					map = getMap(permitId, xmlx);
+					if (projectProfile.getXmxz() == 29769) {
+						viewURL = getViewURL(resourceRequest, resourceResponse, permitId,
+								Long.valueOf(PropsUtil.get("sgxkz.pdf.template")), newPDFPath, map);
+					} else {
+						viewURL = getViewURL(resourceRequest, resourceResponse, permitId,
+								Long.valueOf(PropsUtil.get("sgxkz.ls.pdf.template")), newPDFPath, map);
+					}
+				}
 				PrintWriter out = resourceResponse.getWriter();
-				 out.println(viewURL);
-				 out.flush();
-				 out.close();
+				out.println(viewURL);
+				out.flush();
+				out.close();
 			}
 			// 上传文件
 			if ("fileUpLoad".equals(resourceId)) {
@@ -687,10 +829,12 @@ public class PermitApplicationPortlet extends MVCPortlet {
 					fileBytes = FileUtil.getBytes(stream);
 				}
 				if (!materialId.equals("0")) {
-					ApplyMaterial applyMaterial = ApplyMaterialLocalServiceUtil.getApplyMaterial(Long.valueOf(materialId));
+					ApplyMaterial applyMaterial = ApplyMaterialLocalServiceUtil.getApplyMaterial(Long
+							.valueOf(materialId));
 					String fileTitle = applyMaterial.getClmc() + "-" + no + "." + fileExtension;
 
-					fileEntry = uploadFile(resourceRequest, fileSourceName, fileBytes, serviceContext, portletId, materialId, fileTitle);
+					fileEntry = uploadFile(resourceRequest, fileSourceName, fileBytes, serviceContext, portletId,
+							materialId, fileTitle);
 
 					String fileEntryIds = applyMaterial.getFileEntryIds();
 					// 添加第一条数据时
@@ -723,7 +867,8 @@ public class PermitApplicationPortlet extends MVCPortlet {
 				if (!fileId.equals("0")) {
 					DLFileEntry dlFileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(fileId));
 					if (!materialId.equals("0")) {
-						ApplyMaterial applyMaterial = ApplyMaterialLocalServiceUtil.getApplyMaterial(Long.valueOf(materialId));
+						ApplyMaterial applyMaterial = ApplyMaterialLocalServiceUtil.getApplyMaterial(Long
+								.valueOf(materialId));
 						String fileEntryIds = applyMaterial.getFileEntryIds();
 						fileEntryIds = fileEntryIds + ",";// 加上逗号为了容易替换
 						// 获取文件路径
@@ -760,10 +905,11 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		super.serveResource(resourceRequest, resourceResponse);
 	}
 
-	public FileEntry uploadFile(ResourceRequest request, String fileSourceName, byte[] fileBytes, ServiceContext serviceContext, String portletId,
-			String materialId, String fileTitle) throws PortalException, SystemException, IOException {
-			serviceContext.setAddGuestPermissions(true);
-			serviceContext.setIndexingEnabled(true);
+	public FileEntry uploadFile(ResourceRequest request, String fileSourceName, byte[] fileBytes,
+			ServiceContext serviceContext, String portletId, String materialId, String fileTitle)
+			throws PortalException, SystemException, IOException {
+		serviceContext.setAddGuestPermissions(true);
+		serviceContext.setIndexingEnabled(true);
 
 		User user = PortalUtil.getUser(request);
 		long userId = user.getUserId();
@@ -779,28 +925,30 @@ public class PermitApplicationPortlet extends MVCPortlet {
 			if (Validator.isNotNull(dlParentFolder)) {
 				dlChildFolder = DLFolderLocalServiceUtil.fetchFolder(groupId, dlParentFolder.getFolderId(), materialId);
 				if (Validator.isNull(dlChildFolder)) {
-					dlChildFolder = DLFolderLocalServiceUtil.addFolder(userId, groupId, groupId, false, dlParentFolder.getFolderId(), materialId, "",
-							false, serviceContext);
+					dlChildFolder = DLFolderLocalServiceUtil.addFolder(userId, groupId, groupId, false,
+							dlParentFolder.getFolderId(), materialId, "", false, serviceContext);
 				}
 			} else {
-				dlParentFolder = DLFolderLocalServiceUtil
-						.addFolder(userId, groupId, groupId, true, rootFolderId, portletId, "", true, serviceContext);
-				dlChildFolder = DLFolderLocalServiceUtil.addFolder(userId, groupId, groupId, false, dlParentFolder.getFolderId(), materialId, "",
-						false, serviceContext);
+				dlParentFolder = DLFolderLocalServiceUtil.addFolder(userId, groupId, groupId, true, rootFolderId,
+						portletId, "", true, serviceContext);
+				dlChildFolder = DLFolderLocalServiceUtil.addFolder(userId, groupId, groupId, false,
+						dlParentFolder.getFolderId(), materialId, "", false, serviceContext);
 			}
 		}
 
 		if (fileBytes != null) {
-			fileEntry = DLAppLocalServiceUtil.addFileEntry(userId, groupId, dlChildFolder.getFolderId(), fileSourceName,
-					MimeTypesUtil.getContentType(fileSourceName), fileTitle, null, null, fileBytes, serviceContext);
+			fileEntry = DLAppLocalServiceUtil.addFileEntry(userId, groupId, dlChildFolder.getFolderId(),
+					fileSourceName, MimeTypesUtil.getContentType(fileSourceName), fileTitle, null, null, fileBytes,
+					serviceContext);
 		}
 		return fileEntry;
 	}
 
-	public FileEntry uploadFileAnother(ResourceRequest request, String fileSourceName, byte[] fileBytes, ServiceContext serviceContext,
-			String portletId, String materialId, String fileTitle) throws PortalException, SystemException, IOException {
-			serviceContext.setAddGuestPermissions(true);
-			serviceContext.setIndexingEnabled(true);
+	public FileEntry uploadFileAnother(ResourceRequest request, String fileSourceName, byte[] fileBytes,
+			ServiceContext serviceContext, String portletId, String materialId, String fileTitle)
+			throws PortalException, SystemException, IOException {
+		serviceContext.setAddGuestPermissions(true);
+		serviceContext.setIndexingEnabled(true);
 
 		User user = PortalUtil.getUser(request);
 		long userId = user.getUserId();
@@ -814,7 +962,5 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		}
 		return fileEntry;
 	}
-	
-	
 
 }
