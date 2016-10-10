@@ -207,6 +207,12 @@
 				</aui:input></td>
 		</tr>
 		<tr class="body">
+			<td class="text-right">工程内容</td>
+			<td class="bg-white" colspan="3"><aui:input name="gcnr" id="gcnr"
+					label="" type="text" style="width:50%" value="">
+				</aui:input>最多可以再输入<span id="contentCounter" style="color: red"></span>个汉字</td>
+		</tr>
+		<tr class="body">
 			<td class="text-right">国有资金比重%</td>
 			<td class="bg-white" colspan="3"><aui:input name="gyzjbz" label="" type="text"
 					style="width:50%" value="">
@@ -260,13 +266,13 @@
 					</aui:input>
 			</td>
 		</tr>
-		<tr class="body">
+		<%-- <tr class="body">
 			<td class="text-right">用地批文名称及文号</td>
 			<td class="bg-white" colspan="3"><aui:input
 					name="jsydpzwjhfdccqzbh" label="" type="text" style="width:50%"
 					value="">
 				</aui:input></td>
-		</tr>
+		</tr> --%>
 		<tr class="body">
 			<td class="text-right">建设工程规划许可证编号</td>
 			<td class="bg-white" colspan="3"><aui:input name="jsgcghxkzbh"
@@ -303,6 +309,12 @@
 					name="<portlet:namespace/>jhjg" value="${jhjg}" 
 					onfocus="WdatePicker({minDate:'#F{$dp.$D(\'jhjg\')}',lang:'zh-cn',dateFmt:'yyyy-MM-dd'})"
 			required="required"/></td>
+		</tr>
+		<tr class="body">
+			<td class="text-right">备注</td>
+			<td class="bg-white" colspan="3"><aui:input name="sgxkzsbz" id="sgxkzsbz"
+					label="" type="text" style="width:50%" value="">
+				</aui:input>最多可以再输入<span id="contentCounterBz" style="color: red"></span>个汉字</td>
 		</tr>
 	<tr class="body">
 			<td class="bg-white" colspan="4"><c:choose>
@@ -366,9 +378,20 @@
 	</div>
 
 </aui:form>
+<aui:script use="aui-char-counter">
+	var counterVariable = new A.CharCounter({
+		input : '#<portlet:namespace/>sgxkzsbz',
+		counter : '#contentCounterBz',
+		maxLength : 44
+	});
+var counterVariable = new A.CharCounter({
+	input : '#<portlet:namespace/>gcnr',
+	counter : '#contentCounter',
+	maxLength : 84
+});
+</aui:script>
 
 <script>
-
 function showYzzpl(obj) {	
     if (obj.checked) {
         $("#sfzftzl").val("true");
