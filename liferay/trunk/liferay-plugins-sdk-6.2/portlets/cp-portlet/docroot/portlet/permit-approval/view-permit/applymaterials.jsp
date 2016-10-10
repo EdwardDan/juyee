@@ -19,6 +19,7 @@
 	List<ApplyMaterial> materialList=ApplyMaterialLocalServiceUtil.findByPermitId(permitId, -1, -1);
 	Map<Long,List<DLFileEntry>> map=new HashMap<Long,List<DLFileEntry>>();
 	Map<Long,List<DLFileEntry>> mapBzcl=new HashMap<Long,List<DLFileEntry>>();
+	Map<Long,List<DLFileEntry>> mapWjscbzcl=new HashMap<Long,List<DLFileEntry>>();
 	if(null!=materialList){
 	for(int i=0;i<materialList.size();i++){
 		
@@ -54,6 +55,27 @@
 	mapBzcl.put(materialList.get(i).getMaterialId(), listBzcl);
 	}
 	}
+	
+	String wjscbzclIds=applyMaterial.getWjscbzclIds();
+	if(Validator.isNotNull(wjscbzclIds)){
+	String[] wjscbzclIdsArr=wjscbzclIds.split("\\,");
+	List<DLFileEntry> listWjscbzcl=new ArrayList<DLFileEntry>();
+	if(null!=wjscbzclIdsArr&&wjscbzclIdsArr.length>0){
+	for(int j=0;j<wjscbzclIdsArr.length;j++){
+		if(Validator.isNotNull(wjscbzclIdsArr[j])){
+	String fileEntryId=wjscbzclIdsArr[j].split("\\|")[0];
+	DLFileEntry dlFileEntry=DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(fileEntryId));
+		listWjscbzcl.add(dlFileEntry);
+	}
+		
+		}
+	
+	mapWjscbzcl.put(materialList.get(i).getMaterialId(), listWjscbzcl);
+	
+	}
+	}
+	
+	
 	}
 	}
 	String jpg = "jpg";
@@ -62,6 +84,7 @@
 	request.setAttribute("pdf", pdf);
 	request.setAttribute("map", map);
 	request.setAttribute("mapBzcl", mapBzcl);
+	request.setAttribute("mapWjscbzcl", mapWjscbzcl);
 %>
 
 <c:set var="namespace" value="<%=renderResponse.getNamespace()%>"></c:set>
@@ -88,6 +111,23 @@
 						alt=""> <span id="vfyl" class="hide-accessible tooltip-text">注:请上传jpg或pdf格式的文件，jpg格式文件大小不能超过2M,pdf格式文件不能超过20M,如果文件超过限定大小，请拆分后重新上传！</span>
 				</span></th>
 			</c:if>
+	<!--委建设处时的补正材料  -->
+			<c:if test="${permit.status!=24}">
+				<th style="text-align: center; width: 15%;">委建设处补正材料查看</th>
+			</c:if>
+			<c:if test="${permit.status!=24}">
+				<th style="text-align: center; width: 15%;">委建设处补正材料</th>
+				<th style="text-align: center; width: 10%;">操作 <span
+					class="taglib-icon-help"> <img
+						id="yui_patched_v3_11_0_1_1473298445453_1601" tabindex="0"
+						src="/html/themes/control_panel/images/portlet/help.png"
+						onmouseover="Liferay.Portal.ToolTip.show(this);"
+						onfocus="Liferay.Portal.ToolTip.show(this);"
+						onblur="Liferay.Portal.ToolTip.hide();" aria-labelledby="vfyl"
+						alt=""> <span id="vfyl" class="hide-accessible tooltip-text">注:请上传jpg或pdf格式的文件，jpg格式文件大小不能超过2M,pdf格式文件不能超过20M,如果文件超过限定大小，请拆分后重新上传！</span>
+				</span></th>
+			</c:if>
+
 		</thead>
 		<c:forEach items="<%=materialList%>" var="material" varStatus="status">
 			<tr style="text-align: center" class="fileTr">
@@ -176,6 +216,71 @@
 
 					</td>
 				</c:if>
+				
+				
+				<!-- 委建设处补正材料 -->
+				<c:if test="${permit.status!=24}">
+					<td style="text-align: center">
+					
+						<div class="${material.materialId}">
+							<c:if test="${not empty material.wjscbzclIds}">
+								<c:forEach items="${mapWjscbzcl[material.materialId]}"
+									var="dlFileEntry" varStatus="varStausNo">
+									<div>
+										<c:set var="filePathWjscbzcl"
+											value="${dlFileEntry.groupId }/${dlFileEntry.folderId}/${dlFileEntry.title }" />
+										<c:set var="fileNameWjscbzcl"
+											value="${material.clmc }-${varStausNo.index+1 }.${dlFileEntry.extension }" />
+										<c:if test="${dlFileEntry. extension eq jpg}">
+											<a href="#"
+												onclick="previewJpg(${material.materialId},${dlFileEntry.fileEntryId})">${material.clmc }补正材料(委建设处)-${varStausNo.index+1 }.${dlFileEntry.extension }</a>
+											<img src="/documents/${filePathWjscbzcl }" style="display: none;"
+												id="${dlFileEntry.fileEntryId}" alt="${dlFileEntry.title}">
+										</c:if>
+										<c:if test="${dlFileEntry.extension eq pdf}">
+											<a href="#"
+												onclick="previewPdf('/documents/${filePathWjscbzcl}')">${material.clmc }补正材料(委建设处)-${varStausNo.index+1 }.${dlFileEntry.extension }</a>
+										</c:if>
+										<a href="/documents/${filePathWjscbzcl }?&download=true">下载</a>
+									</div>
+								</c:forEach>
+							</c:if>
+						</div>
+					</td>
+				</c:if>
+
+
+
+				<c:if test="${permit.status!=24}">
+					<td style="text-align: center">
+						<div id="fileDivWjscbzcl${status.index+1}">
+							<!-- todo
+				此处可以根据状态来隐藏删除按钮的显示，提交后删除按钮不再显示
+				 -->
+							<c:if test="${not empty material.wjscbzclIds}">
+								<c:forEach items="${fn:split(material.wjscbzclIds,',')}"
+									var="wjscbzclId" varStatus="statusSub">
+									<div name="fileWjscbzcl${status.index+1}">
+										<a class="fileName" href="javascript:void(0);">
+											${material.clmc}补正材料(委建设处)-${statusSub.index+1}.${fn:split(wjscbzclId,'|')[1]}
+										</a> &nbsp;&nbsp;&nbsp; <a href='javascript:void(0)'
+											;  onclick="${namespace}fileWjscbzclDelete(this,${fn:split(wjscbzclId,'|')[0]},${material.materialId})">删除</a>
+									</div>
+								</c:forEach>
+							</c:if>
+						</div>
+					</td>
+					<td style="text-align: center"><input type="button" value="上传"
+						onclick="document.getElementById('fileWjscbzclInput${status.index+1}').click();">
+						<input id="fileWjscbzclInput${status.index+1}"
+						name="${namespace}fileWjscbzclInput${status.index+1}" type="file"
+						multiple="" style="display: none; width: 150px;"
+						accept="application/pdf,image/jpeg"
+						onchange="${namespace}fileWjscbzclUpLoad(${status.index+1},${material.materialId},'<%=portletDisplay.getId() %>');"></input>
+
+					</td>
+				</c:if>
+				
 			</tr>
 		</c:forEach>
 
@@ -191,6 +296,9 @@
 </portlet:renderURL>
 <portlet:resourceURL var="fileBzclUpLoadURL" id="fileBzclUpLoad" />
 <portlet:resourceURL var="fileBzclDeleteURL" id="fileBzclDelete" />
+<!-- 委建设处补正材料 -->
+<portlet:resourceURL var="fileWjscbzclUpLoadURL" id="fileWjscbzclUpLoad" />
+<portlet:resourceURL var="fileWjscbzclDeleteURL" id="fileWjscbzclDelete" />
 <script>
 	function previewJpg(materialId,imgURL) {
 		$('.'+materialId).viewer();
@@ -330,7 +438,89 @@
 		});
 		$('#fileDivBzcl'+divNo).empty().append(sortEle);
 	}
+	
+	/* 委建设处补正材料上传 */
+	function <portlet:namespace/>fileWjscbzclUpLoad(divNo,materialId,portletId) {
+		if(fileValidator("fileWjscbzclInput"+divNo)){
+			var fileWjscbzclExtension=$("#fileWjscbzclInput"+divNo)[0].files[0].name.split('.').pop();
+			var no = findFileWjscbzclNo(divNo);
+			var fmFile = document.getElementById("fmFile");
+			var oMyForm = new FormData(fmFile);
+			oMyForm.append("<portlet:namespace/>divNo",divNo);
+			oMyForm.append("<portlet:namespace/>materialId",materialId);
+			oMyForm.append("<portlet:namespace/>portletId",portletId);
+			oMyForm.append("<portlet:namespace/>userfileWjscbzcl", $("#fileWjscbzclInput"+divNo)[0].files[0]);
+			oMyForm.append("<portlet:namespace/>no", no);
+			oMyForm.append("<portlet:namespace/>fileWjscbzclExtension", fileWjscbzclExtension);
+			$.ajax({
+						url : "<%=fileWjscbzclUpLoadURL%>",
+						type : "post",
+						data : oMyForm,
+						cache : false,
+						processData : false,
+						contentType : false,
+						success : function(data) {
+							var fileData = eval("(" + data + ")");
+							var ele = "<div name='fileWjscbzcl"+divNo+"'><a class='fileWjscbzclName' href='javascript:void(0);'>"
+							+ fileData.materialName+"补正材料(委建设处)-"+no+"."+fileWjscbzclExtension
+							+ "</a> &nbsp;&nbsp;&nbsp;<a href='javascript:void(0)';  onclick='${renderResponse.namespace}fileWjscbzclDelete(this,"
+							+ fileData.fileWjscbzclId + ","+materialId+")'>删除</a></div>";
+							$("#fileDivWjscbzcl" + divNo).append(ele);
+							domSortWjscbzcl(divNo); 
+							alert("上传成功！");				
+						},
+						error : function(e) {
+							alert("网络错误，请重试！！");
+						}
+					});
+		}
+	}
 
+	/* 委建设处补正材料上传删除 */
+	function <portlet:namespace/>fileWjscbzclDelete(divObj, fileId, materialId) {
+		if (!confirm("确定要删除此文件吗？"))
+			return;
+		$.ajax({
+			url : "<%=fileWjscbzclDeleteURL%>",
+			type : "post",
+			data : {
+				'<portlet:namespace/>fileWjscbzclId' : fileId,
+				'<portlet:namespace/>materialId' : materialId
+			},
+			success : function(data) {
+				$(divObj).parent().remove();
+				alert("成功删除文件!");
+			},
+			error : function(e) {
+				alert("网络错误，请重试！！");
+			}
+		});
+	}
+	
+	/* 查找某一类文件的数量 */
+	function findFileWjscbzclNo(divNo) {
+		var indexNo = 0;
+		var fileNameNoArr=new Array();
+		$("div[name^='fileWjscbzcl" + divNo + "']").each(function() {
+			var text=$(this).children("a.fileWjscbzclName").text().split('.')[0].split('-')[1];
+			//把已有的附件名称后缀的数字放到数组中
+			fileNameNoArr[indexNo]=text;
+			indexNo = (indexNo + 1);
+		});
+		//判断数组中从1开始缺少哪些数字，缺少的数字即为需要的数字
+		return getNo(fileNameNoArr);
+	}
+	
+	/* 给div元素重新排序 */
+	function domSortWjscbzcl(divNo){
+		var sortEle=$("div[name^='fileBzcl" + divNo + "']").sort(function(a,b){
+		    var valveNumOfa = $(a).children("a.fileWjscbzclName").text().split('.')[0].split('-')[1];
+		    var valveNumOfb = $(b).children("a.fileWjscbzclName").text().split('.')[0].split('-')[1];
+		    if(parseInt(valveNumOfa) < parseInt(valveNumOfb)) return -1;
+		    else return 1;
+		});
+		$('#fileDivBzcl'+divNo).empty().append(sortEle);
+	}
 	
 </script>
 
