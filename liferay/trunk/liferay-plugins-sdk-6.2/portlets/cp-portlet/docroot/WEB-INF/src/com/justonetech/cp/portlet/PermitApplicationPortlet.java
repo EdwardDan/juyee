@@ -530,7 +530,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		String jsdw = projectProfile.getJsdwmc();
 		String gcmc = projectProfile.getGcmc();
 		String gcwz = projectProfile.getJsdd();
-		String gcnr = projectProfile.getJsgcgm();
+		String gcnr = projectProfile.getGcnr();
 		String xmtzgs = projectProfile.getXmtzgs() + "万元";
 		String htjg = projectProfile.getHtjg() + "万元";
 		String sjdw = "";
@@ -554,7 +554,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		String jhjg = sdf.format(projectProfile.getJhjg());
 		String jhkgrq = jhkg.substring(0, 4) + "年" + jhkg.substring(4, 6) + "月" + jhkg.substring(6, 8) + "日";
 		String jhjgrq = jhjg.substring(0, 4) + "年" + jhjg.substring(4, 6) + "月" + jhjg.substring(6, 8) + "日";
-		String bz = "";
+		String bz = projectProfile.getSgxkzsbz();
 		map.put("xmtzgs", xmtzgs);
 		map.put("htjg", htjg);
 		map.put("gcwz", gcwz);
