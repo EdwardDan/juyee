@@ -2,6 +2,7 @@ package com.justonetech.cp.portlet;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,7 +23,12 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import net.sf.jxls.transformer.XLSTransformer;
+
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 import com.itextpdf.text.DocumentException;
 import com.justonetech.cp.contract.model.Contract;
@@ -49,8 +55,10 @@ import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.search.ParseException;
+import com.liferay.portal.kernel.servlet.ServletResponseUtil;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -218,6 +226,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		}
 		Long jsgcsx = ParamUtil.getLong(request, "jsgcsx");
 		String jsgcgm = ParamUtil.getString(request, "jsgcgm");
+		String gcnr = ParamUtil.getString(request, "gcnr");
 		String gyzjbz = ParamUtil.getString(request, "gyzjbz");
 		String fwjzmj = ParamUtil.getString(request, "fwjzmj");
 		String htjg = ParamUtil.getString(request, "htjg");
@@ -228,11 +237,11 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		String jsdwlxdh = ParamUtil.getString(request, "jsdwlxdh");
 		String jsdwlxr = ParamUtil.getString(request, "jsdwlxr");
 		String jsdwsjh = ParamUtil.getString(request, "jsdwsjh");
-		String jsydpzwjhfdccqzbh = ParamUtil.getString(request, "jsydpzwjhfdccqzbh");
 		String jsgcghxkzbh = ParamUtil.getString(request, "jsgcghxkzbh");
 		String xckgqk = ParamUtil.getString(request, "xckgqk");
 		Date jhkg = ParamUtil.getDate(request, "jhkg", new SimpleDateFormat(dateFormatPattern));
 		Date jhjg = ParamUtil.getDate(request, "jhjg", new SimpleDateFormat(dateFormatPattern));
+		String sgxkzsbz = ParamUtil.getString(request, "sgxkzsbz");
 		Boolean sfzftzl = ParamUtil.getBoolean(request, "sfzftzl");
 		String yzzpl1 = ParamUtil.getString(request, "yzzpl1");
 		String yzzpl2 = ParamUtil.getString(request, "yzzpl2");
@@ -282,6 +291,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		projectProfile.setJsgclb(jsgclbs);
 		projectProfile.setJsgcsx(jsgcsx);
 		projectProfile.setJsgcgm(jsgcgm);
+		projectProfile.setGcnr(gcnr);
 		projectProfile.setGyzjbz(gyzjbz);
 		projectProfile.setFwjzmj(fwjzmj);
 		projectProfile.setHtjg(htjg);
@@ -292,11 +302,11 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		projectProfile.setJsdwlxdh(jsdwlxdh);
 		projectProfile.setJsdwlxr(jsdwlxr);
 		projectProfile.setJsdwsjh(jsdwsjh);
-		projectProfile.setJsydpzwjhfdccqzbh(jsydpzwjhfdccqzbh);
 		projectProfile.setJsgcghxkzbh(jsgcghxkzbh);
 		projectProfile.setXckgqk(xckgqk);
 		projectProfile.setJhkg(jhkg);
 		projectProfile.setJhjg(jhjg);
+		projectProfile.setSgxkzsbz(sgxkzsbz);
 		projectProfile.setSfzftzl(sfzftzl);
 		projectProfile.setYzzpl1(yzzpl1);
 		projectProfile.setYzzpl2(yzzpl2);
@@ -676,7 +686,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		return map;
 	}
 
-	public FileEntry fillTemplate(DLFileEntry fileEntry, String newPDFPath, Map<String, String> map,
+	public FileInputStream fillTemplate(DLFileEntry fileEntry, String newPDFPath, Map<String, String> map,
 			ResourceRequest request, ResourceResponse response, Permit permit) throws IOException, DocumentException,
 			PortalException, SystemException, com.lowagie.text.DocumentException {
 		PdfReader pdfReader = new PdfReader(fileEntry.getContentStream());
@@ -701,36 +711,25 @@ public class PermitApplicationPortlet extends MVCPortlet {
 					i);
 			pdfCopy.addPage(importedPage);
 		}
-
 		document.close();
+		FileInputStream fis = new FileInputStream(file);
 		ServiceContext serviceContext = new ServiceContext();
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setIndexingEnabled(true);
-		long userId = PortalUtil.getUserId(request);
-		long repositoryId = Long.valueOf(PropsUtil.get("global.group.id"));
-		long folderId = Long.valueOf(PropsUtil.get("sgxkz.pdf.folder.id"));
-		return DLAppLocalServiceUtil.addFileEntry(userId, repositoryId, folderId, file.getName(), "application/pdf",
-				CounterLocalServiceUtil.increment() + "", null, null, file, serviceContext);
+		return fis;
 	}
-
-	public String getViewURL(ResourceRequest request, ResourceResponse response, long permitId, long fileEntryId,
-			String newPDFPath, Map<String, String> map) throws PortalException, SystemException, IOException,
-			DocumentException, com.lowagie.text.DocumentException {
-		String viewURL = "";
-		Permit permit = PermitLocalServiceUtil.getPermit(permitId);
-		if (permit.getSgxkzFileEntryId() == 0) {
-			DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(fileEntryId);
-			FileEntry file = fillTemplate(fileEntry, newPDFPath, map, request, response, permit);
-			permit.setSgxkzFileEntryId(file.getFileEntryId());
-			PermitLocalServiceUtil.updatePermit(permit);
-			viewURL = "/documents/" + file.getGroupId() + "/" + file.getFolderId() + "/" + file.getTitle();
-		} else {
-			DLFileEntry dlFileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(permit.getSgxkzFileEntryId());
-			viewURL = "/documents/" + dlFileEntry.getGroupId() + "/" + dlFileEntry.getFolderId() + "/"
-					+ dlFileEntry.getTitle();
-		}
-		return viewURL;
-	}
+	
+		private byte[] inputStreamToByte(InputStream is) throws IOException{
+		  ByteArrayOutputStream bytestream = new ByteArrayOutputStream();
+		  byte[] buffer=new byte[1024];
+		  int ch;
+		  while ((ch = is.read(buffer)) != -1) {
+		   bytestream.write(buffer,0,ch);
+		  }
+		  byte data[] = bytestream.toByteArray();
+		  bytestream.close();
+		  return data;
+		 }
 
 	@Override
 	public void serveResource(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException,
@@ -742,30 +741,40 @@ public class PermitApplicationPortlet extends MVCPortlet {
 			long permitId = ParamUtil.getLong(resourceRequest, "permitId");
 			Permit permit = PermitLocalServiceUtil.getPermit(permitId);
 			ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
+			String xmlx = DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx()).getName();
 			if ("view".equals(resourceId)) {
-				String xmlx = DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx()).getName();
 				Map<String, String> map = null;
-				String newPDFPath = PropsUtil.get("sgxkz.temp.folder") + permit.getSgxkzbh() + ".pdf";
-				String viewURL = "";
-				if (xmlx.equals("航道")) {
-					map = getKgbaMap(permitId);
-					viewURL = getViewURL(resourceRequest, resourceResponse, permitId,
-							Long.valueOf(PropsUtil.get("sgxkz.hd.pdf.template")), newPDFPath, map);
-				} else {
-					map = getMap(permitId, xmlx);
-					if (projectProfile.getXmxz() == 29769) {
-						viewURL = getViewURL(resourceRequest, resourceResponse, permitId,
-								Long.valueOf(PropsUtil.get("sgxkz.pdf.template")), newPDFPath, map);
-					} else {
-						viewURL = getViewURL(resourceRequest, resourceResponse, permitId,
-								Long.valueOf(PropsUtil.get("sgxkz.ls.pdf.template")), newPDFPath, map);
-					}
-				}
-				PrintWriter out = resourceResponse.getWriter();
-				out.println(viewURL);
-				out.flush();
-				out.close();
+				map = getMap(permitId, xmlx);
+				String newPDFPath = PropsUtil.get("sgxkz.temp.folder.id") + CounterLocalServiceUtil.increment() + ".pdf";
+				FileInputStream fis = fillTemplate(DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(PropsUtil.get("sgxkz.pdf.template"))), newPDFPath, map, resourceRequest, resourceResponse, permit);
+				byte[] data = inputStreamToByte(fis);
+				System.out.println("================"+data.length);
+				HttpServletRequest req = PortalUtil.getHttpServletRequest(resourceRequest);
+				HttpServletResponse res = PortalUtil.getHttpServletResponse(resourceResponse);
+				ServletResponseUtil.sendFile(req, res, CounterLocalServiceUtil.increment()+"", data,
+						ContentTypes.APPLICATION_PDF);
+//				String viewURL = "";
+//				if (xmlx.equals("航道")) {
+//					map = getKgbaMap(permitId);
+//					viewURL = getViewURL(resourceRequest, resourceResponse, permitId,
+//							Long.valueOf(PropsUtil.get("sgxkz.hd.pdf.template")), newPDFPath, map);
+//				} else {
+//					map = getMap(permitId, xmlx);
+//					if (projectProfile.getXmxz() == 29769) {
+//						viewURL = getViewURL(resourceRequest, resourceResponse, permitId,
+//								Long.valueOf(PropsUtil.get("sgxkz.pdf.template")), newPDFPath, map);
+//					} else {
+//						viewURL = getViewURL(resourceRequest, resourceResponse, permitId,
+//								Long.valueOf(PropsUtil.get("sgxkz.ls.pdf.template")), newPDFPath, map);
+//					}
+//				}
+//				PrintWriter out = resourceResponse.getWriter();
+//				out.println(viewURL);
+//				out.flush();
+//				out.close();
 			}
+			
+			
 			// 上传文件
 			if ("fileUpLoad".equals(resourceId)) {
 				UploadPortletRequest uploadPortletRequest = PortalUtil.getUploadPortletRequest(resourceRequest);
@@ -867,8 +876,13 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		} catch (com.lowagie.text.DocumentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}  
 		super.serveResource(resourceRequest, resourceResponse);
+	}
+
+	private byte[] toByteArray(FileInputStream fis) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	public FileEntry uploadFile(ResourceRequest request, String fileSourceName, byte[] fileBytes,
