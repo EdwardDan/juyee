@@ -117,7 +117,7 @@
 				<div class="hide" id="<%= randomId %>updateComments">
 	<aui:input cols="55" name="_153_comment" id="_153_comment" label="审核意见" useNamespace="false" rows="10" type="textarea" />
 </div>
-<c:if test='<%=!Validator.isBlank(applyMaterials.get(0).getFhyj())%>'>
+<c:if test='<%=message.equals("通过")&&!Validator.isBlank(applyMaterials.get(0).getFhyj())%>'>
 		<liferay-ui:icon
 				cssClass='<%= "workflow-task-" + randomId + " task-change-status-link" %>'
 				id='<%= randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink" %>'
@@ -127,16 +127,36 @@
 				url="<%= url %>"
 				onClick="fhyj()"
 			/>
+			</c:if>
+			<c:if test='<%=message.equals("不通过")&&!Validator.isBlank(applyMaterials.get(0).getFhyj())%>'>
+		<liferay-ui:icon
+				cssClass='<%= "workflow-task-" + randomId + " task-change-status-link" %>'
+				id='<%= randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink" %>'
+				image="shth"
+				message="<%= message %>"
+				method="get"
+				url="<%= url %>"
+				onClick="noFhyj()"
+			/>
+			</c:if>
 			<aui:script use="liferay-workflow-tasks">
 var onTaskClickFn = A.rbind('onTaskClick', Liferay.WorkflowTasks,'<%= randomId %>',true);
 Liferay.delegateClick('<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(transitionName) %>taskChangeStatusLink', onTaskClickFn);
 </aui:script>
-</c:if>
-<c:if test='<%=Validator.isBlank(applyMaterials.get(0).getFhyj())%>'>
+<c:if test='<%=message.equals("通过")&&Validator.isBlank(applyMaterials.get(0).getFhyj())%>'>
 <liferay-ui:icon
 				cssClass='<%= "workflow-task-" + randomId + " task-change-status-link" %>'
 				id='<%= randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink" %>'
 				image="shtgx"
+				message="<%= message %>"
+				method="get"
+			/>
+</c:if>
+<c:if test='<%=message.equals("不通过")&&Validator.isBlank(applyMaterials.get(0).getFhyj())%>'>
+<liferay-ui:icon
+				cssClass='<%= "workflow-task-" + randomId + " task-change-status-link" %>'
+				id='<%= randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink" %>'
+				image="shthx"
 				message="<%= message %>"
 				method="get"
 			/>
@@ -156,5 +176,8 @@ Liferay.delegateClick('<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(tra
 <script type="text/javascript">
 function fhyj(){
 	$("#_153_comment").val("经复审，所提交材料符合要求。");
+}
+function noFhyj(){
+	$("#_153_comment").val("");
 }
 </script>

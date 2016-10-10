@@ -89,7 +89,7 @@
 						}
 					   String state="";
 					   String comment="";
-					   if(workflowLogs.get(i).getState().equals("yushen")){state="预审";}
+					  if(workflowLogs.get(i).getState().equals("yushen")){continue;} 
 					   if(workflowLogs.get(i).getState().equals("shoujian")){state="<a onclick='sj()'>收件</a>";}
 					   if(workflowLogs.get(i).getState().equals("chushen")){state="<a onclick='cs()'>初审</a>";}
 					   if(workflowLogs.get(i).getState().equals("fuhe")){state="<a onclick='fh()'>复核</a>";}
@@ -100,23 +100,23 @@
 					   if(workflowLogs.get(i).getState().equals("weishenpichu")){continue;}
 					   if(workflowLogs.get(i).getState().equals("weilingdao")){state="委领导审核";}
 					   if(workflowLogs.get(i).getState().equals("update")){continue;}
-					   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state10")){transition="预审退回";}
-					   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state11")){transition="预审通过";}
 					   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state8")){transition="收件退回";}
 					   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state12")){transition="收件通过";}
 					   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state13")){transition="初审通过";}
+					   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state10")){transition="初审退回";}
 					   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state14")){transition="复核通过";}
+					   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state12")){transition="复核退回";}
 					   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state15")){transition="审核通过";}
-					   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state40")){transition="补正退回";}
 					   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state19")){transition="审核退回";}
 					   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state17")){transition="审核通过";}
 					   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state16")){transition="审核退回";}
+					   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state11")){transition="审核通过";}
 					   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state18")){transition="审核退回";}
-					   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state21")){transition="审核通过";}
+					   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state21")){transition="收件通过";}
 					   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state20")){transition="审核退回";}
-					   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state22")){transition="<span style='color:red'>许可</span>";}
-					   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state31")){transition="<span style='color:red'>不许可</span>";}
-					   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state23")){transition="审核退回";}
+					   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state22")){transition="受理退回";}
+					   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state24")){transition="<span style='color:red'>许可</span>";}
+					   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state32")){transition="<span style='color:red'>不许可</span>";}
 					   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state33")){transition="<span style='color:red'>许可</span>";}
 					   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state34")){transition="<span style='color:red'>不许可</span>";}
 				%>
