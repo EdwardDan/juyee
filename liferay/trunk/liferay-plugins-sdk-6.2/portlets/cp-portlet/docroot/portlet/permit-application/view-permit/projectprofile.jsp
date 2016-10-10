@@ -89,6 +89,10 @@ tr.body td.content {
 		<td class="content" colspan="3">${projectProfile.jsgcgm}</td>
 	</tr>
 	<tr class="body">
+		<td class="title">工程内容</td>
+		<td class="content" colspan="3">${projectProfile.gcnr}</td>
+	</tr>
+	<tr class="body">
 		<td class="title">国有资金比重%</td>
 		<td class="content" colspan="3">${projectProfile.gyzjbz}</td>
 	</tr>
@@ -120,10 +124,10 @@ tr.body td.content {
 		<td class="title">联系人手机号</td>
 		<td class="content">${projectProfile.jsdwsjh}</td>
 	</tr>
-	<tr class="body">
+	<%-- <tr class="body">
 		<td class="title">用地批文名称及文号</td>
 		<td class="content" colspan="3">${projectProfile.jsydpzwjhfdccqzbh}</td>
-	</tr>
+	</tr> --%>
 	<tr class="body">
 		<td class="title">建设工程规划许可证编号</td>
 		<td class="content" colspan="3">${projectProfile.jsgcghxkzbh}</td>
@@ -139,6 +143,10 @@ tr.body td.content {
 		<td class="title">计划竣工</td>
 		<td class="content"><fmt:formatDate value="${project.jhjg}"
 				pattern="yyyy-MM-dd" /></td>
+	</tr>
+	<tr class="body">
+		<td class="title">备注</td>
+		<td class="content" colspan="3">${projectProfile.sgxkzsbz}</td>
 	</tr>
 	<tr class="body">
 		<td colspan="4" style="background-color: white" class="sfzftzl"><aui:input name="是否政府投资类"
