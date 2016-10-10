@@ -532,7 +532,7 @@ public class PermitApprovalPortlet extends MVCPortlet {
 				ServletResponseUtil.sendFile(req, res, fileName, baos.toByteArray(),
 						ContentTypes.APPLICATION_VND_MS_EXCEL);
 			}
-			// 上传文件
+			// 上传建管中心补正材料文件
 			if ("fileBzclUpLoad".equals(resourceId)) {
 				UploadPortletRequest uploadPortletRequest = PortalUtil.getUploadPortletRequest(resourceRequest);
 
@@ -592,7 +592,7 @@ public class PermitApprovalPortlet extends MVCPortlet {
 				out.close();
 			}
 
-			// 删除文件
+			// 删除建管中心补正材料文件
 			if ("fileBzclDelete".equals(resourceId)) {
 				String fileId = ParamUtil.get(resourceRequest, "fileBzclId", "0");
 				String materialId = ParamUtil.get(resourceRequest, "materialId", "0");
@@ -615,6 +615,95 @@ public class PermitApprovalPortlet extends MVCPortlet {
 					DLFileEntryLocalServiceUtil.deleteDLFileEntry(Long.valueOf(fileId));
 				}
 			}
+			
+			
+			// 上传委建设处补正材料文件
+			if ("fileWjscbzclUpLoad".equals(resourceId)) {
+				UploadPortletRequest uploadPortletRequest = PortalUtil.getUploadPortletRequest(resourceRequest);
+
+				ServiceContext serviceContext;
+				com.liferay.portal.kernel.json.JSONObject fileJson = JSONFactoryUtil.createJSONObject();
+				serviceContext = ServiceContextFactory.getInstance(Permit.class.getName(), resourceRequest);
+				FileEntry fileEntry = null;
+				// 对应的是第几类材料的div
+				String divNo = ParamUtil.get(resourceRequest, "divNo", "");
+				// 文件材料的名称编号
+				String no = ParamUtil.get(resourceRequest, "no", "");
+				String fileExtension = ParamUtil.get(resourceRequest, "fileWjscbzclExtension", "");
+				String materialId = ParamUtil.get(resourceRequest, "materialId", "0");
+				String portletId = ParamUtil.get(resourceRequest, "portletId", "");
+				fileSourceName = uploadPortletRequest.getFileName("userfileWjscbzcl");
+				InputStream stream = uploadPortletRequest.getFileAsStream("userfileWjscbzcl");
+
+				/*
+				 * fileSourceName =
+				 * uploadPortletRequest.getFileName("fileInput"+divNo);
+				 * InputStream stream =
+				 * uploadPortletRequest.getFileAsStream("fileInput"+divNo);
+				 */
+				byte[] fileBytes = null;
+				if (null != stream) {
+					fileBytes = FileUtil.getBytes(stream);
+				}
+				if (!materialId.equals("0")) {
+					ApplyMaterial applyMaterial = ApplyMaterialLocalServiceUtil.getApplyMaterial(Long
+							.valueOf(materialId));
+					String fileTitle = applyMaterial.getClmc() + "补正材料(委建设处)-" + no + "." + fileExtension;
+
+					fileEntry = uploadFile(resourceRequest, fileSourceName, fileBytes, serviceContext, portletId,
+							materialId, fileTitle);
+
+					String wjscbzclIds = applyMaterial.getWjscbzclIds();
+					// 添加第一条数据时
+					if (Validator.isNull(wjscbzclIds)) {
+						wjscbzclIds = fileEntry.getFileEntryId() + "|" + fileEntry.getExtension();
+					}
+					// 如果已有数据
+					else {
+						wjscbzclIds = wjscbzclIds + "," + fileEntry.getFileEntryId() + "|" + fileEntry.getExtension();
+						fileJson.put("fileWjscbzclId", fileEntry.getFileEntryId());
+					}
+					applyMaterial.setWjscbzclIds(wjscbzclIds);
+					ApplyMaterialLocalServiceUtil.updateApplyMaterial(applyMaterial);
+					fileJson.put("materialName", applyMaterial.getClmc());
+				}
+
+				HttpServletResponse response = PortalUtil.getHttpServletResponse(resourceResponse);
+				response.setContentType("text/html;charset=UTF-8");
+				PrintWriter out = null;
+				out = response.getWriter();
+				out.print(fileJson.toString());
+				out.flush();
+				out.close();
+			}			
+			
+			//删除委建设处材料文件
+			if ("fileWjscbzclDelete".equals(resourceId)) {
+				String fileId = ParamUtil.get(resourceRequest, "fileWjscbzclId", "0");
+				String materialId = ParamUtil.get(resourceRequest, "materialId", "0");
+				if (!fileId.equals("0")) {
+					DLFileEntry dlFileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(fileId));
+					if (!materialId.equals("0")) {
+						ApplyMaterial applyMaterial = ApplyMaterialLocalServiceUtil.getApplyMaterial(Long
+								.valueOf(materialId));
+						String wjscbzclIds = applyMaterial.getWjscbzclIds();
+						wjscbzclIds = wjscbzclIds + ",";// 加上逗号为了容易替换
+						// 获取文件路径
+						String str = fileId + "\\|" + dlFileEntry.getExtension() + "\\,";
+						wjscbzclIds = wjscbzclIds.replaceFirst(str, "");
+						if (Validator.isNotNull(wjscbzclIds)) {
+							wjscbzclIds = wjscbzclIds.substring(0, wjscbzclIds.length() - 1);// 最后一步再把逗号去掉
+						}
+						applyMaterial.setWjscbzclIds(wjscbzclIds);
+						ApplyMaterialLocalServiceUtil.updateApplyMaterial(applyMaterial);
+					}
+					DLFileEntryLocalServiceUtil.deleteDLFileEntry(Long.valueOf(fileId));
+				}
+			}
+						
+			
+			
+			
 
 		} catch (PortalException e) {
 			// TODO Auto-generated catch block
