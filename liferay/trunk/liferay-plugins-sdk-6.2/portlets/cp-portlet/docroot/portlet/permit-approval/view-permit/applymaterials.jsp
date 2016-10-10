@@ -112,10 +112,10 @@
 				</span></th>
 			</c:if>
 	<!--委建设处时的补正材料  -->
-			<c:if test="${permit.status!=24}">
+			<c:if test="${permit.status!=13}">
 				<th style="text-align: center; width: 15%;">委建设处补正材料查看</th>
 			</c:if>
-			<c:if test="${permit.status!=24}">
+			<c:if test="${permit.status==13}">
 				<th style="text-align: center; width: 15%;">委建设处补正材料</th>
 				<th style="text-align: center; width: 10%;">操作 <span
 					class="taglib-icon-help"> <img
@@ -219,7 +219,7 @@
 				
 				
 				<!-- 委建设处补正材料 -->
-				<c:if test="${permit.status!=24}">
+				<c:if test="${permit.status!=13}">
 					<td style="text-align: center">
 					
 						<div class="${material.materialId}">
@@ -251,7 +251,7 @@
 
 
 
-				<c:if test="${permit.status!=24}">
+				<c:if test="${permit.status==13}">
 					<td style="text-align: center">
 						<div id="fileDivWjscbzcl${status.index+1}">
 							<!-- todo
