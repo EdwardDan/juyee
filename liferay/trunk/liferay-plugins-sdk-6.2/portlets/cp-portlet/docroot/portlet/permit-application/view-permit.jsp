@@ -55,9 +55,6 @@
 			data:{
 				'permitId':<%=permitIdInit%>
 			},
-			 success:function(data){
-				location.href=data;
-			} 
 		})
 	}
 </script>
