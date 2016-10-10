@@ -871,10 +871,6 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		super.serveResource(resourceRequest, resourceResponse);
 	}
 
-	private byte[] toByteArray(FileInputStream fis) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	public FileEntry uploadFile(ResourceRequest request, String fileSourceName, byte[] fileBytes,
 			ServiceContext serviceContext, String portletId, String materialId, String fileTitle)
