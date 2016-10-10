@@ -307,47 +307,31 @@ span {
 						label="审核意见" useNamespace="false" rows="10" type="textarea" />
 				</div>
 				<c:choose>
-					<c:when
-						test='<%=message.equals("通过")&&!Validator.isBlank(permit.getSlbh())%>'>
-						<liferay-ui:icon
-							cssClass='<%="workflow-task-" + randomId + " task-change-status-link"%>'
-							id='<%=randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink"%>'
-							image="sjtg" message="<%=message%>" method="get" url="<%=url%>" />
-					</c:when>
-					<c:when
-						test='<%=message.equals("不通过")&&!Validator.isBlank(permit.getSlbh())%>'>
-						<liferay-ui:icon
-							cssClass='<%="workflow-task-" + randomId + " task-change-status-link"%>'
-							id='<%=randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink"%>'
-							image="sjth" message="<%=message%>" method="get" url="<%=url%>" />
-					</c:when>
-					<c:when
-						test='<%=message.equals("通过")&&Validator.isBlank(permit.getSlbh())%>'>
-						<liferay-ui:icon
-							cssClass='<%="workflow-task-" + randomId + " task-change-status-link"%>'
-							id='<%=randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink"%>'
-							image="sjtgx" message="<%=message%>" method="get" />
-					</c:when>
-					<c:when
-						test='<%=message.equals("不通过")&&Validator.isBlank(permit.getSlbh())%>'>
-						<liferay-ui:icon
-							cssClass='<%="workflow-task-" + randomId + " task-change-status-link"%>'
-							id='<%=randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink"%>'
-							image="sjthx" message="<%=message%>" method="get" />
-					</c:when>
-
-				</c:choose>
+<c:when test='<%=!Validator.isBlank(permit.getSlbh())%>'>
+<liferay-ui:icon
+				cssClass='<%= "workflow-task-" + randomId + " task-change-status-link" %>'
+				id='<%= randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink" %>'
+				image="sjtg"
+				message="<%= message %>"
+				method="get"
+				url="<%= url %>"
+			/> 
+			</c:when>
+			<c:when test='<%=Validator.isBlank(permit.getSlbh())%>'>
+<liferay-ui:icon
+				cssClass='<%= "workflow-task-" + randomId + " task-change-status-link" %>'
+				id='<%= randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink" %>'
+				image="sjtgx"
+				message="<%= message %>"
+				method="get"
+			/> 
+			</c:when>
+</c:choose>
 				<c:if test="<%=!Validator.isBlank(permit.getSlbh())%>">
 					<aui:script use="liferay-workflow-tasks">
 var onTaskClickFn = A.rbind('onTaskClick', Liferay.WorkflowTasks,'<%= randomId %>',true);
 Liferay.delegateClick('<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(transitionName) %>taskChangeStatusLink', onTaskClickFn);
 </aui:script>
-	
-
-
-
-
-				
 </c:if>
 
 				<%
