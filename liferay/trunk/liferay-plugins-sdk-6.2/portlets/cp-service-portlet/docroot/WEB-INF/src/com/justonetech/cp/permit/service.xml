@@ -109,6 +109,7 @@
 		<column name="gcnr" type="String" /><!--工程内容 -->
 		<column name="sgxkzsbz" type="String" /><!--施工许可证书备注 -->
 		<!-- 航道有关扩展字段 -->
+		<column name="tzly" type="String" /><!--投资来源 -->
 		<column name="gkpzhhzjghwh" type="String" /><!--工可批准或核准机关和文号 -->
 		<column name="pfhhzrq" type="Date" /><!--批复或核准日期 -->
 		<column name="cbsjpzjghwh" type="String" /><!--初步设计批准机关和文号 -->

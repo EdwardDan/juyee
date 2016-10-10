@@ -394,6 +394,7 @@ create table cp_ProjectProfile (
 	tjsj DATE null,
 	gcnr VARCHAR(100) null,
 	sgxkzsbz VARCHAR(75) null,
+	tzly VARCHAR(75) null,
 	gkpzhhzjghwh VARCHAR(75) null,
 	pfhhzrq DATE null,
 	cbsjpzjghwh VARCHAR(75) null,

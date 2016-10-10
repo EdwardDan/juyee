@@ -366,6 +366,7 @@
 		<property name="tjsj" type="org.hibernate.type.TimestampType" />
 		<property name="gcnr" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="sgxkzsbz" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="tzly" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="gkpzhhzjghwh" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="pfhhzrq" type="org.hibernate.type.TimestampType" />
 		<property name="cbsjpzjghwh" type="com.liferay.portal.dao.orm.hibernate.StringType" />

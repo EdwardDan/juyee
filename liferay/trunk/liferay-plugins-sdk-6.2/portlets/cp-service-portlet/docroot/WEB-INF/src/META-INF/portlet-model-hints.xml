@@ -410,6 +410,7 @@
 			<hint name="max-length">100</hint>
 		</field>
 		<field name="sgxkzsbz" type="String" />
+		<field name="tzly" type="String" />
 		<field name="gkpzhhzjghwh" type="String" />
 		<field name="pfhhzrq" type="Date" />
 		<field name="cbsjpzjghwh" type="String" />

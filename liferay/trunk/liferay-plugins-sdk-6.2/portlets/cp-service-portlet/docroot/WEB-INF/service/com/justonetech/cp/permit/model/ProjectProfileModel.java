@@ -627,6 +627,21 @@ public interface ProjectProfileModel extends BaseModel<ProjectProfile> {
 	public void setSgxkzsbz(String sgxkzsbz);
 
 	/**
+	 * Returns the tzly of this project profile.
+	 *
+	 * @return the tzly of this project profile
+	 */
+	@AutoEscape
+	public String getTzly();
+
+	/**
+	 * Sets the tzly of this project profile.
+	 *
+	 * @param tzly the tzly of this project profile
+	 */
+	public void setTzly(String tzly);
+
+	/**
 	 * Returns the gkpzhhzjghwh of this project profile.
 	 *
 	 * @return the gkpzhhzjghwh of this project profile

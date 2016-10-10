@@ -88,6 +88,7 @@ public class ProjectProfileWrapper implements ProjectProfile,
 		attributes.put("tjsj", getTjsj());
 		attributes.put("gcnr", getGcnr());
 		attributes.put("sgxkzsbz", getSgxkzsbz());
+		attributes.put("tzly", getTzly());
 		attributes.put("gkpzhhzjghwh", getGkpzhhzjghwh());
 		attributes.put("pfhhzrq", getPfhhzrq());
 		attributes.put("cbsjpzjghwh", getCbsjpzjghwh());
@@ -355,6 +356,12 @@ public class ProjectProfileWrapper implements ProjectProfile,
 
 		if (sgxkzsbz != null) {
 			setSgxkzsbz(sgxkzsbz);
+		}
+
+		String tzly = (String)attributes.get("tzly");
+
+		if (tzly != null) {
+			setTzly(tzly);
 		}
 
 		String gkpzhhzjghwh = (String)attributes.get("gkpzhhzjghwh");
@@ -1356,6 +1363,26 @@ public class ProjectProfileWrapper implements ProjectProfile,
 	@Override
 	public void setSgxkzsbz(java.lang.String sgxkzsbz) {
 		_projectProfile.setSgxkzsbz(sgxkzsbz);
+	}
+
+	/**
+	* Returns the tzly of this project profile.
+	*
+	* @return the tzly of this project profile
+	*/
+	@Override
+	public java.lang.String getTzly() {
+		return _projectProfile.getTzly();
+	}
+
+	/**
+	* Sets the tzly of this project profile.
+	*
+	* @param tzly the tzly of this project profile
+	*/
+	@Override
+	public void setTzly(java.lang.String tzly) {
+		_projectProfile.setTzly(tzly);
 	}
 
 	/**

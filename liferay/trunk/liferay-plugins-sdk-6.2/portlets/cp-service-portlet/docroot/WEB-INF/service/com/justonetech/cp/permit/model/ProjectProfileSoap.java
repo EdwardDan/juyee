@@ -68,6 +68,7 @@ public class ProjectProfileSoap implements Serializable {
 		soapModel.setTjsj(model.getTjsj());
 		soapModel.setGcnr(model.getGcnr());
 		soapModel.setSgxkzsbz(model.getSgxkzsbz());
+		soapModel.setTzly(model.getTzly());
 		soapModel.setGkpzhhzjghwh(model.getGkpzhhzjghwh());
 		soapModel.setPfhhzrq(model.getPfhhzrq());
 		soapModel.setCbsjpzjghwh(model.getCbsjpzjghwh());
@@ -463,6 +464,14 @@ public class ProjectProfileSoap implements Serializable {
 		_sgxkzsbz = sgxkzsbz;
 	}
 
+	public String getTzly() {
+		return _tzly;
+	}
+
+	public void setTzly(String tzly) {
+		_tzly = tzly;
+	}
+
 	public String getGkpzhhzjghwh() {
 		return _gkpzhhzjghwh;
 	}
@@ -781,6 +790,7 @@ public class ProjectProfileSoap implements Serializable {
 	private Date _tjsj;
 	private String _gcnr;
 	private String _sgxkzsbz;
+	private String _tzly;
 	private String _gkpzhhzjghwh;
 	private Date _pfhhzrq;
 	private String _cbsjpzjghwh;
