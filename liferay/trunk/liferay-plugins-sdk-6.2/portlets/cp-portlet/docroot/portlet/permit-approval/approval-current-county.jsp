@@ -21,15 +21,15 @@
 %>
 <c:choose>
 	<c:when test="${(sqztInit=='2'&&fn:contains(roles,qxslzx))||(sqztInit=='8'&&fn:contains(roles,qxslzx))||(sqztInit=='9'&&fn:contains(roles,qxslzx))}">
-		<jsp:include page="${contextPath }/approval-current-county/sj.jsp" />
+		受理中心收件<jsp:include page="${contextPath }/approval-current-county/sj.jsp" />
 	</c:when>
 	<c:when test="${sqztInit=='3'&&fn:contains(roles,qxslry) }">
-		<jsp:include page="${contextPath }/approval-current-county/sl.jsp" />
+		区县受理<jsp:include page="${contextPath }/approval-current-county/sl.jsp" />
 	</c:when>
 	<c:when test="${sqztInit=='5'&&fn:contains(roles,qxshry) }">
-		<jsp:include page="${contextPath }/approval-current-county/sh.jsp" />
+		区县审核<jsp:include page="${contextPath }/approval-current-county/sh.jsp" />
 	</c:when>
 	<c:when test="${sqztInit=='6'&&fn:contains(roles,qxspry) }">
-		<jsp:include page="${contextPath }/approval-current-county/sp.jsp" />
+		区县审批<jsp:include page="${contextPath }/approval-current-county/sp.jsp" />
 	</c:when>
 </c:choose>
