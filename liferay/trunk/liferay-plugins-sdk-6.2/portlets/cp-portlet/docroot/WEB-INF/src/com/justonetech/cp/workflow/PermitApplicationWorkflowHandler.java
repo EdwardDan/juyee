@@ -1,6 +1,7 @@
 package com.justonetech.cp.workflow;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -17,6 +18,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.BaseWorkflowHandler;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
@@ -47,8 +49,14 @@ public class PermitApplicationWorkflowHandler extends BaseWorkflowHandler {
         	if(status==7){
         		permit.setSgxkzbh(provideSgxkzbh(resourcePrimKey));
         	}
+        	if(status==2){
+        		permit.setYwbh(updateYwbh(resourcePrimKey));
+        	}
         }else{
-        	if(status==21){
+        	if(status==2){
+        		permit.setYwbh(updateYwbh(resourcePrimKey));
+        	}
+        	if(status==18){
         		permit.setSgxkzbh(provideSgxkzbh(resourcePrimKey));
         	}
         }
@@ -91,5 +99,42 @@ public class PermitApplicationWorkflowHandler extends BaseWorkflowHandler {
 			sgxkzbh = sgxkzbh + num;
 		}
 		return sgxkzbh;
+	}
+    
+    
+    public  String updateYwbh(long permitId) throws PortalException, SystemException {
+		String ywbh = "JT";
+		ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
+		Dictionary xmlx = DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx());
+		ywbh = ywbh + xmlx.getCode();
+		Locale locale = LocaleUtil.getDefault();
+		String currentDate = DateUtil.getCurrentDate("yyyy-MM-dd", locale);
+		String currentDateStr = currentDate.substring(2, 4) + currentDate.substring(5, 7);
+		ywbh = ywbh + currentDateStr;
+		List<Permit> permits = PermitLocalServiceUtil.getPermits(-1, -1);
+		List<Long> nums = new ArrayList<Long>();
+		for (Permit permit_ : permits) {
+			if (Validator.isNotNull(permit_.getYwbh()) && permit_.getYwbh().substring(4, 8).equals(currentDateStr)) {
+				nums.add(Long.parseLong(permit_.getYwbh().substring(8, 12)));
+			}
+		}
+		Long num = 0L;
+		for (Long num_ : nums) {
+			if (num_ > num) {
+				num = num_;
+			}
+		}
+		num++;
+
+		if (num / 10 < 1) {
+			ywbh = ywbh + "000" + num;
+		} else if (num / 100 < 1) {
+			ywbh = ywbh + "00" + num;
+		} else if (num / 1000 < 1) {
+			ywbh = ywbh + "0" + num;
+		} else if (num / 10000 < 1) {
+			ywbh = ywbh + num;
+		}
+		return ywbh;
 	}
 }  
