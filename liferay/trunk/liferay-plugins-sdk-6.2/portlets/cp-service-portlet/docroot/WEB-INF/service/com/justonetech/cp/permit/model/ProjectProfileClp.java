@@ -121,18 +121,21 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 		attributes.put("xmdw", getXmdw());
 		attributes.put("xmfzr", getXmfzr());
 		attributes.put("xmfzrlxdh", getXmfzrlxdh());
+		attributes.put("zysjdw", getZysjdw());
 		attributes.put("sj_zbfs", getSj_zbfs());
 		attributes.put("sj_zbj", getSj_zbj());
 		attributes.put("sj_zzdj", getSj_zzdj());
 		attributes.put("sj_zzdjzsbh", getSj_zzdjzsbh());
 		attributes.put("sj_xmfzr", getSj_xmfzr());
 		attributes.put("sj_zmfzrzsbh", getSj_zmfzrzsbh());
+		attributes.put("zyjldw", getZyjldw());
 		attributes.put("jl_zbfs", getJl_zbfs());
 		attributes.put("jl_zbj", getJl_zbj());
 		attributes.put("jl_zzdj", getJl_zzdj());
 		attributes.put("jl_zzdjzsbh", getJl_zzdjzsbh());
 		attributes.put("jl_zj", getJl_zj());
 		attributes.put("jl_zjzsbh", getJl_zjzsbh());
+		attributes.put("zysgdw", getZysgdw());
 		attributes.put("sg_zbfs", getSg_zbfs());
 		attributes.put("sg_zbj", getSg_zbj());
 		attributes.put("sg_zzdj", getSg_zzdj());
@@ -432,6 +435,12 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 			setXmfzrlxdh(xmfzrlxdh);
 		}
 
+		String zysjdw = (String)attributes.get("zysjdw");
+
+		if (zysjdw != null) {
+			setZysjdw(zysjdw);
+		}
+
 		String sj_zbfs = (String)attributes.get("sj_zbfs");
 
 		if (sj_zbfs != null) {
@@ -468,6 +477,12 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 			setSj_zmfzrzsbh(sj_zmfzrzsbh);
 		}
 
+		String zyjldw = (String)attributes.get("zyjldw");
+
+		if (zyjldw != null) {
+			setZyjldw(zyjldw);
+		}
+
 		String jl_zbfs = (String)attributes.get("jl_zbfs");
 
 		if (jl_zbfs != null) {
@@ -502,6 +517,12 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 
 		if (jl_zjzsbh != null) {
 			setJl_zjzsbh(jl_zjzsbh);
+		}
+
+		String zysgdw = (String)attributes.get("zysgdw");
+
+		if (zysgdw != null) {
+			setZysgdw(zysgdw);
 		}
 
 		String sg_zbfs = (String)attributes.get("sg_zbfs");
@@ -1658,6 +1679,29 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 	}
 
 	@Override
+	public String getZysjdw() {
+		return _zysjdw;
+	}
+
+	@Override
+	public void setZysjdw(String zysjdw) {
+		_zysjdw = zysjdw;
+
+		if (_projectProfileRemoteModel != null) {
+			try {
+				Class<?> clazz = _projectProfileRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setZysjdw", String.class);
+
+				method.invoke(_projectProfileRemoteModel, zysjdw);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
 	public String getSj_zbfs() {
 		return _sj_zbfs;
 	}
@@ -1796,6 +1840,29 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 	}
 
 	@Override
+	public String getZyjldw() {
+		return _zyjldw;
+	}
+
+	@Override
+	public void setZyjldw(String zyjldw) {
+		_zyjldw = zyjldw;
+
+		if (_projectProfileRemoteModel != null) {
+			try {
+				Class<?> clazz = _projectProfileRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setZyjldw", String.class);
+
+				method.invoke(_projectProfileRemoteModel, zyjldw);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
 	public String getJl_zbfs() {
 		return _jl_zbfs;
 	}
@@ -1926,6 +1993,29 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 				Method method = clazz.getMethod("setJl_zjzsbh", String.class);
 
 				method.invoke(_projectProfileRemoteModel, jl_zjzsbh);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getZysgdw() {
+		return _zysgdw;
+	}
+
+	@Override
+	public void setZysgdw(String zysgdw) {
+		_zysgdw = zysgdw;
+
+		if (_projectProfileRemoteModel != null) {
+			try {
+				Class<?> clazz = _projectProfileRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setZysgdw", String.class);
+
+				method.invoke(_projectProfileRemoteModel, zysgdw);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -2304,18 +2394,21 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 		clone.setXmdw(getXmdw());
 		clone.setXmfzr(getXmfzr());
 		clone.setXmfzrlxdh(getXmfzrlxdh());
+		clone.setZysjdw(getZysjdw());
 		clone.setSj_zbfs(getSj_zbfs());
 		clone.setSj_zbj(getSj_zbj());
 		clone.setSj_zzdj(getSj_zzdj());
 		clone.setSj_zzdjzsbh(getSj_zzdjzsbh());
 		clone.setSj_xmfzr(getSj_xmfzr());
 		clone.setSj_zmfzrzsbh(getSj_zmfzrzsbh());
+		clone.setZyjldw(getZyjldw());
 		clone.setJl_zbfs(getJl_zbfs());
 		clone.setJl_zbj(getJl_zbj());
 		clone.setJl_zzdj(getJl_zzdj());
 		clone.setJl_zzdjzsbh(getJl_zzdjzsbh());
 		clone.setJl_zj(getJl_zj());
 		clone.setJl_zjzsbh(getJl_zjzsbh());
+		clone.setZysgdw(getZysgdw());
 		clone.setSg_zbfs(getSg_zbfs());
 		clone.setSg_zbj(getSg_zbj());
 		clone.setSg_zzdj(getSg_zzdj());
@@ -2379,7 +2472,7 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(141);
+		StringBundler sb = new StringBundler(147);
 
 		sb.append("{permitId=");
 		sb.append(getPermitId());
@@ -2475,6 +2568,8 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 		sb.append(getXmfzr());
 		sb.append(", xmfzrlxdh=");
 		sb.append(getXmfzrlxdh());
+		sb.append(", zysjdw=");
+		sb.append(getZysjdw());
 		sb.append(", sj_zbfs=");
 		sb.append(getSj_zbfs());
 		sb.append(", sj_zbj=");
@@ -2487,6 +2582,8 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 		sb.append(getSj_xmfzr());
 		sb.append(", sj_zmfzrzsbh=");
 		sb.append(getSj_zmfzrzsbh());
+		sb.append(", zyjldw=");
+		sb.append(getZyjldw());
 		sb.append(", jl_zbfs=");
 		sb.append(getJl_zbfs());
 		sb.append(", jl_zbj=");
@@ -2499,6 +2596,8 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 		sb.append(getJl_zj());
 		sb.append(", jl_zjzsbh=");
 		sb.append(getJl_zjzsbh());
+		sb.append(", zysgdw=");
+		sb.append(getZysgdw());
 		sb.append(", sg_zbfs=");
 		sb.append(getSg_zbfs());
 		sb.append(", sg_zbj=");
@@ -2528,7 +2627,7 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(214);
+		StringBundler sb = new StringBundler(223);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.cp.permit.model.ProjectProfile");
@@ -2723,6 +2822,10 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 		sb.append(getXmfzrlxdh());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>zysjdw</column-name><column-value><![CDATA[");
+		sb.append(getZysjdw());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>sj_zbfs</column-name><column-value><![CDATA[");
 		sb.append(getSj_zbfs());
 		sb.append("]]></column-value></column>");
@@ -2747,6 +2850,10 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 		sb.append(getSj_zmfzrzsbh());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>zyjldw</column-name><column-value><![CDATA[");
+		sb.append(getZyjldw());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>jl_zbfs</column-name><column-value><![CDATA[");
 		sb.append(getJl_zbfs());
 		sb.append("]]></column-value></column>");
@@ -2769,6 +2876,10 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 		sb.append(
 			"<column><column-name>jl_zjzsbh</column-name><column-value><![CDATA[");
 		sb.append(getJl_zjzsbh());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>zysgdw</column-name><column-value><![CDATA[");
+		sb.append(getZysgdw());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>sg_zbfs</column-name><column-value><![CDATA[");
@@ -2867,18 +2978,21 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 	private String _xmdw;
 	private String _xmfzr;
 	private String _xmfzrlxdh;
+	private String _zysjdw;
 	private String _sj_zbfs;
 	private String _sj_zbj;
 	private String _sj_zzdj;
 	private String _sj_zzdjzsbh;
 	private String _sj_xmfzr;
 	private String _sj_zmfzrzsbh;
+	private String _zyjldw;
 	private String _jl_zbfs;
 	private String _jl_zbj;
 	private String _jl_zzdj;
 	private String _jl_zzdjzsbh;
 	private String _jl_zj;
 	private String _jl_zjzsbh;
+	private String _zysgdw;
 	private String _sg_zbfs;
 	private String _sg_zbj;
 	private String _sg_zzdj;

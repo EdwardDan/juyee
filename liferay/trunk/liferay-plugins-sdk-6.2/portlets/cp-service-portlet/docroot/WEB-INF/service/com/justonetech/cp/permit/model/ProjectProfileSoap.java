@@ -77,18 +77,21 @@ public class ProjectProfileSoap implements Serializable {
 		soapModel.setXmdw(model.getXmdw());
 		soapModel.setXmfzr(model.getXmfzr());
 		soapModel.setXmfzrlxdh(model.getXmfzrlxdh());
+		soapModel.setZysjdw(model.getZysjdw());
 		soapModel.setSj_zbfs(model.getSj_zbfs());
 		soapModel.setSj_zbj(model.getSj_zbj());
 		soapModel.setSj_zzdj(model.getSj_zzdj());
 		soapModel.setSj_zzdjzsbh(model.getSj_zzdjzsbh());
 		soapModel.setSj_xmfzr(model.getSj_xmfzr());
 		soapModel.setSj_zmfzrzsbh(model.getSj_zmfzrzsbh());
+		soapModel.setZyjldw(model.getZyjldw());
 		soapModel.setJl_zbfs(model.getJl_zbfs());
 		soapModel.setJl_zbj(model.getJl_zbj());
 		soapModel.setJl_zzdj(model.getJl_zzdj());
 		soapModel.setJl_zzdjzsbh(model.getJl_zzdjzsbh());
 		soapModel.setJl_zj(model.getJl_zj());
 		soapModel.setJl_zjzsbh(model.getJl_zjzsbh());
+		soapModel.setZysgdw(model.getZysgdw());
 		soapModel.setSg_zbfs(model.getSg_zbfs());
 		soapModel.setSg_zbj(model.getSg_zbj());
 		soapModel.setSg_zzdj(model.getSg_zzdj());
@@ -532,6 +535,14 @@ public class ProjectProfileSoap implements Serializable {
 		_xmfzrlxdh = xmfzrlxdh;
 	}
 
+	public String getZysjdw() {
+		return _zysjdw;
+	}
+
+	public void setZysjdw(String zysjdw) {
+		_zysjdw = zysjdw;
+	}
+
 	public String getSj_zbfs() {
 		return _sj_zbfs;
 	}
@@ -580,6 +591,14 @@ public class ProjectProfileSoap implements Serializable {
 		_sj_zmfzrzsbh = sj_zmfzrzsbh;
 	}
 
+	public String getZyjldw() {
+		return _zyjldw;
+	}
+
+	public void setZyjldw(String zyjldw) {
+		_zyjldw = zyjldw;
+	}
+
 	public String getJl_zbfs() {
 		return _jl_zbfs;
 	}
@@ -626,6 +645,14 @@ public class ProjectProfileSoap implements Serializable {
 
 	public void setJl_zjzsbh(String jl_zjzsbh) {
 		_jl_zjzsbh = jl_zjzsbh;
+	}
+
+	public String getZysgdw() {
+		return _zysgdw;
+	}
+
+	public void setZysgdw(String zysgdw) {
+		_zysgdw = zysgdw;
 	}
 
 	public String getSg_zbfs() {
@@ -763,18 +790,21 @@ public class ProjectProfileSoap implements Serializable {
 	private String _xmdw;
 	private String _xmfzr;
 	private String _xmfzrlxdh;
+	private String _zysjdw;
 	private String _sj_zbfs;
 	private String _sj_zbj;
 	private String _sj_zzdj;
 	private String _sj_zzdjzsbh;
 	private String _sj_xmfzr;
 	private String _sj_zmfzrzsbh;
+	private String _zyjldw;
 	private String _jl_zbfs;
 	private String _jl_zbj;
 	private String _jl_zzdj;
 	private String _jl_zzdjzsbh;
 	private String _jl_zj;
 	private String _jl_zjzsbh;
+	private String _zysgdw;
 	private String _sg_zbfs;
 	private String _sg_zbj;
 	private String _sg_zzdj;

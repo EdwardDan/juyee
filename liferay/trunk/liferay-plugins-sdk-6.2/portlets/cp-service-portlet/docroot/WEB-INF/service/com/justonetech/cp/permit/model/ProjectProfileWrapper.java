@@ -97,18 +97,21 @@ public class ProjectProfileWrapper implements ProjectProfile,
 		attributes.put("xmdw", getXmdw());
 		attributes.put("xmfzr", getXmfzr());
 		attributes.put("xmfzrlxdh", getXmfzrlxdh());
+		attributes.put("zysjdw", getZysjdw());
 		attributes.put("sj_zbfs", getSj_zbfs());
 		attributes.put("sj_zbj", getSj_zbj());
 		attributes.put("sj_zzdj", getSj_zzdj());
 		attributes.put("sj_zzdjzsbh", getSj_zzdjzsbh());
 		attributes.put("sj_xmfzr", getSj_xmfzr());
 		attributes.put("sj_zmfzrzsbh", getSj_zmfzrzsbh());
+		attributes.put("zyjldw", getZyjldw());
 		attributes.put("jl_zbfs", getJl_zbfs());
 		attributes.put("jl_zbj", getJl_zbj());
 		attributes.put("jl_zzdj", getJl_zzdj());
 		attributes.put("jl_zzdjzsbh", getJl_zzdjzsbh());
 		attributes.put("jl_zj", getJl_zj());
 		attributes.put("jl_zjzsbh", getJl_zjzsbh());
+		attributes.put("zysgdw", getZysgdw());
 		attributes.put("sg_zbfs", getSg_zbfs());
 		attributes.put("sg_zbj", getSg_zbj());
 		attributes.put("sg_zzdj", getSg_zzdj());
@@ -408,6 +411,12 @@ public class ProjectProfileWrapper implements ProjectProfile,
 			setXmfzrlxdh(xmfzrlxdh);
 		}
 
+		String zysjdw = (String)attributes.get("zysjdw");
+
+		if (zysjdw != null) {
+			setZysjdw(zysjdw);
+		}
+
 		String sj_zbfs = (String)attributes.get("sj_zbfs");
 
 		if (sj_zbfs != null) {
@@ -444,6 +453,12 @@ public class ProjectProfileWrapper implements ProjectProfile,
 			setSj_zmfzrzsbh(sj_zmfzrzsbh);
 		}
 
+		String zyjldw = (String)attributes.get("zyjldw");
+
+		if (zyjldw != null) {
+			setZyjldw(zyjldw);
+		}
+
 		String jl_zbfs = (String)attributes.get("jl_zbfs");
 
 		if (jl_zbfs != null) {
@@ -478,6 +493,12 @@ public class ProjectProfileWrapper implements ProjectProfile,
 
 		if (jl_zjzsbh != null) {
 			setJl_zjzsbh(jl_zjzsbh);
+		}
+
+		String zysgdw = (String)attributes.get("zysgdw");
+
+		if (zysgdw != null) {
+			setZysgdw(zysgdw);
 		}
 
 		String sg_zbfs = (String)attributes.get("sg_zbfs");
@@ -1518,6 +1539,26 @@ public class ProjectProfileWrapper implements ProjectProfile,
 	}
 
 	/**
+	* Returns the zysjdw of this project profile.
+	*
+	* @return the zysjdw of this project profile
+	*/
+	@Override
+	public java.lang.String getZysjdw() {
+		return _projectProfile.getZysjdw();
+	}
+
+	/**
+	* Sets the zysjdw of this project profile.
+	*
+	* @param zysjdw the zysjdw of this project profile
+	*/
+	@Override
+	public void setZysjdw(java.lang.String zysjdw) {
+		_projectProfile.setZysjdw(zysjdw);
+	}
+
+	/**
 	* Returns the sj_zbfs of this project profile.
 	*
 	* @return the sj_zbfs of this project profile
@@ -1638,6 +1679,26 @@ public class ProjectProfileWrapper implements ProjectProfile,
 	}
 
 	/**
+	* Returns the zyjldw of this project profile.
+	*
+	* @return the zyjldw of this project profile
+	*/
+	@Override
+	public java.lang.String getZyjldw() {
+		return _projectProfile.getZyjldw();
+	}
+
+	/**
+	* Sets the zyjldw of this project profile.
+	*
+	* @param zyjldw the zyjldw of this project profile
+	*/
+	@Override
+	public void setZyjldw(java.lang.String zyjldw) {
+		_projectProfile.setZyjldw(zyjldw);
+	}
+
+	/**
 	* Returns the jl_zbfs of this project profile.
 	*
 	* @return the jl_zbfs of this project profile
@@ -1755,6 +1816,26 @@ public class ProjectProfileWrapper implements ProjectProfile,
 	@Override
 	public void setJl_zjzsbh(java.lang.String jl_zjzsbh) {
 		_projectProfile.setJl_zjzsbh(jl_zjzsbh);
+	}
+
+	/**
+	* Returns the zysgdw of this project profile.
+	*
+	* @return the zysgdw of this project profile
+	*/
+	@Override
+	public java.lang.String getZysgdw() {
+		return _projectProfile.getZysgdw();
+	}
+
+	/**
+	* Sets the zysgdw of this project profile.
+	*
+	* @param zysgdw the zysgdw of this project profile
+	*/
+	@Override
+	public void setZysgdw(java.lang.String zysgdw) {
+		_projectProfile.setZysgdw(zysgdw);
 	}
 
 	/**

@@ -759,6 +759,21 @@ public interface ProjectProfileModel extends BaseModel<ProjectProfile> {
 	public void setXmfzrlxdh(String xmfzrlxdh);
 
 	/**
+	 * Returns the zysjdw of this project profile.
+	 *
+	 * @return the zysjdw of this project profile
+	 */
+	@AutoEscape
+	public String getZysjdw();
+
+	/**
+	 * Sets the zysjdw of this project profile.
+	 *
+	 * @param zysjdw the zysjdw of this project profile
+	 */
+	public void setZysjdw(String zysjdw);
+
+	/**
 	 * Returns the sj_zbfs of this project profile.
 	 *
 	 * @return the sj_zbfs of this project profile
@@ -849,6 +864,21 @@ public interface ProjectProfileModel extends BaseModel<ProjectProfile> {
 	public void setSj_zmfzrzsbh(String sj_zmfzrzsbh);
 
 	/**
+	 * Returns the zyjldw of this project profile.
+	 *
+	 * @return the zyjldw of this project profile
+	 */
+	@AutoEscape
+	public String getZyjldw();
+
+	/**
+	 * Sets the zyjldw of this project profile.
+	 *
+	 * @param zyjldw the zyjldw of this project profile
+	 */
+	public void setZyjldw(String zyjldw);
+
+	/**
 	 * Returns the jl_zbfs of this project profile.
 	 *
 	 * @return the jl_zbfs of this project profile
@@ -937,6 +967,21 @@ public interface ProjectProfileModel extends BaseModel<ProjectProfile> {
 	 * @param jl_zjzsbh the jl_zjzsbh of this project profile
 	 */
 	public void setJl_zjzsbh(String jl_zjzsbh);
+
+	/**
+	 * Returns the zysgdw of this project profile.
+	 *
+	 * @return the zysgdw of this project profile
+	 */
+	@AutoEscape
+	public String getZysgdw();
+
+	/**
+	 * Sets the zysgdw of this project profile.
+	 *
+	 * @param zysgdw the zysgdw of this project profile
+	 */
+	public void setZysgdw(String zysgdw);
 
 	/**
 	 * Returns the sg_zbfs of this project profile.

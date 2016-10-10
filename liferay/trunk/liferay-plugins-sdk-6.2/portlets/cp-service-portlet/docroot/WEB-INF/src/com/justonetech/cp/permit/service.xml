@@ -118,18 +118,21 @@
 		<column name="xmdw" type="String" /><!--项目单位 -->
 		<column name="xmfzr" type="String" /><!--项目负责人 -->
 		<column name="xmfzrlxdh" type="String" /><!--项目负责人联系电话 -->
+		<column name="zysjdw" type="String" /><!--主要设计单位 -->
 		<column name="sj_zbfs" type="String" /><!--主要设计单位_招标方式 -->
 		<column name="sj_zbj" type="String" /><!--主要设计单位_中标价 -->
 		<column name="sj_zzdj" type="String" /><!--主要设计单位_资质等级 -->
 		<column name="sj_zzdjzsbh" type="String" /><!--主要设计单位_资质等级证书编号 -->
 		<column name="sj_xmfzr" type="String" /><!--主要设计单位_项目负责人 -->
 		<column name="sj_zmfzrzsbh" type="String" /><!--主要设计单位_项目负责人证书编号 -->
+		<column name="zyjldw" type="String" /><!--主要监理单位 -->
 		<column name="jl_zbfs" type="String" /><!--主要监理单位_招标方式 -->
 		<column name="jl_zbj" type="String" /><!--主要监理单位_中标价 -->
 		<column name="jl_zzdj" type="String" /><!--主要监理单位_资质等级 -->
 		<column name="jl_zzdjzsbh" type="String" /><!--主要监理单位_资质等级证书编号 -->
 		<column name="jl_zj" type="String" /><!--主要监理单位_总监 -->
 		<column name="jl_zjzsbh" type="String" /><!--主要监理单位_总监证书编号 -->
+		<column name="zysgdw" type="String" /><!--主要施工单位 -->
 		<column name="sg_zbfs" type="String" /><!--主要施工单位_招标方式 -->
 		<column name="sg_zbj" type="String" /><!--主要施工单位_中标价 -->
 		<column name="sg_zzdj" type="String" /><!--主要施工单位_资质等级 -->

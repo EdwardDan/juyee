@@ -419,18 +419,27 @@
 		<field name="xmdw" type="String" />
 		<field name="xmfzr" type="String" />
 		<field name="xmfzrlxdh" type="String" />
+		<field name="zysjdw" type="String">
+			<hint name="max-length">300</hint>
+		</field>
 		<field name="sj_zbfs" type="String" />
 		<field name="sj_zbj" type="String" />
 		<field name="sj_zzdj" type="String" />
 		<field name="sj_zzdjzsbh" type="String" />
 		<field name="sj_xmfzr" type="String" />
 		<field name="sj_zmfzrzsbh" type="String" />
+		<field name="zyjldw" type="String">
+			<hint name="max-length">300</hint>
+		</field>
 		<field name="jl_zbfs" type="String" />
 		<field name="jl_zbj" type="String" />
 		<field name="jl_zzdj" type="String" />
 		<field name="jl_zzdjzsbh" type="String" />
 		<field name="jl_zj" type="String" />
 		<field name="jl_zjzsbh" type="String" />
+		<field name="zysgdw" type="String">
+			<hint name="max-length">300</hint>
+		</field>
 		<field name="sg_zbfs" type="String" />
 		<field name="sg_zbj" type="String" />
 		<field name="sg_zzdj" type="String" />

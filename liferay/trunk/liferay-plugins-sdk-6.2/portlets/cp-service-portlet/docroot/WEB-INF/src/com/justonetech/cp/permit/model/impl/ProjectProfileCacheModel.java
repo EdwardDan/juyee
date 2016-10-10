@@ -38,7 +38,7 @@ public class ProjectProfileCacheModel implements CacheModel<ProjectProfile>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(141);
+		StringBundler sb = new StringBundler(147);
 
 		sb.append("{permitId=");
 		sb.append(permitId);
@@ -134,6 +134,8 @@ public class ProjectProfileCacheModel implements CacheModel<ProjectProfile>,
 		sb.append(xmfzr);
 		sb.append(", xmfzrlxdh=");
 		sb.append(xmfzrlxdh);
+		sb.append(", zysjdw=");
+		sb.append(zysjdw);
 		sb.append(", sj_zbfs=");
 		sb.append(sj_zbfs);
 		sb.append(", sj_zbj=");
@@ -146,6 +148,8 @@ public class ProjectProfileCacheModel implements CacheModel<ProjectProfile>,
 		sb.append(sj_xmfzr);
 		sb.append(", sj_zmfzrzsbh=");
 		sb.append(sj_zmfzrzsbh);
+		sb.append(", zyjldw=");
+		sb.append(zyjldw);
 		sb.append(", jl_zbfs=");
 		sb.append(jl_zbfs);
 		sb.append(", jl_zbj=");
@@ -158,6 +162,8 @@ public class ProjectProfileCacheModel implements CacheModel<ProjectProfile>,
 		sb.append(jl_zj);
 		sb.append(", jl_zjzsbh=");
 		sb.append(jl_zjzsbh);
+		sb.append(", zysgdw=");
+		sb.append(zysgdw);
 		sb.append(", sg_zbfs=");
 		sb.append(sg_zbfs);
 		sb.append(", sg_zbj=");
@@ -478,6 +484,13 @@ public class ProjectProfileCacheModel implements CacheModel<ProjectProfile>,
 			projectProfileImpl.setXmfzrlxdh(xmfzrlxdh);
 		}
 
+		if (zysjdw == null) {
+			projectProfileImpl.setZysjdw(StringPool.BLANK);
+		}
+		else {
+			projectProfileImpl.setZysjdw(zysjdw);
+		}
+
 		if (sj_zbfs == null) {
 			projectProfileImpl.setSj_zbfs(StringPool.BLANK);
 		}
@@ -520,6 +533,13 @@ public class ProjectProfileCacheModel implements CacheModel<ProjectProfile>,
 			projectProfileImpl.setSj_zmfzrzsbh(sj_zmfzrzsbh);
 		}
 
+		if (zyjldw == null) {
+			projectProfileImpl.setZyjldw(StringPool.BLANK);
+		}
+		else {
+			projectProfileImpl.setZyjldw(zyjldw);
+		}
+
 		if (jl_zbfs == null) {
 			projectProfileImpl.setJl_zbfs(StringPool.BLANK);
 		}
@@ -560,6 +580,13 @@ public class ProjectProfileCacheModel implements CacheModel<ProjectProfile>,
 		}
 		else {
 			projectProfileImpl.setJl_zjzsbh(jl_zjzsbh);
+		}
+
+		if (zysgdw == null) {
+			projectProfileImpl.setZysgdw(StringPool.BLANK);
+		}
+		else {
+			projectProfileImpl.setZysgdw(zysgdw);
 		}
 
 		if (sg_zbfs == null) {
@@ -693,18 +720,21 @@ public class ProjectProfileCacheModel implements CacheModel<ProjectProfile>,
 		xmdw = objectInput.readUTF();
 		xmfzr = objectInput.readUTF();
 		xmfzrlxdh = objectInput.readUTF();
+		zysjdw = objectInput.readUTF();
 		sj_zbfs = objectInput.readUTF();
 		sj_zbj = objectInput.readUTF();
 		sj_zzdj = objectInput.readUTF();
 		sj_zzdjzsbh = objectInput.readUTF();
 		sj_xmfzr = objectInput.readUTF();
 		sj_zmfzrzsbh = objectInput.readUTF();
+		zyjldw = objectInput.readUTF();
 		jl_zbfs = objectInput.readUTF();
 		jl_zbj = objectInput.readUTF();
 		jl_zzdj = objectInput.readUTF();
 		jl_zzdjzsbh = objectInput.readUTF();
 		jl_zj = objectInput.readUTF();
 		jl_zjzsbh = objectInput.readUTF();
+		zysgdw = objectInput.readUTF();
 		sg_zbfs = objectInput.readUTF();
 		sg_zbj = objectInput.readUTF();
 		sg_zzdj = objectInput.readUTF();
@@ -982,6 +1012,13 @@ public class ProjectProfileCacheModel implements CacheModel<ProjectProfile>,
 			objectOutput.writeUTF(xmfzrlxdh);
 		}
 
+		if (zysjdw == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(zysjdw);
+		}
+
 		if (sj_zbfs == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
@@ -1024,6 +1061,13 @@ public class ProjectProfileCacheModel implements CacheModel<ProjectProfile>,
 			objectOutput.writeUTF(sj_zmfzrzsbh);
 		}
 
+		if (zyjldw == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(zyjldw);
+		}
+
 		if (jl_zbfs == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
@@ -1064,6 +1108,13 @@ public class ProjectProfileCacheModel implements CacheModel<ProjectProfile>,
 		}
 		else {
 			objectOutput.writeUTF(jl_zjzsbh);
+		}
+
+		if (zysgdw == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(zysgdw);
 		}
 
 		if (sg_zbfs == null) {
@@ -1191,18 +1242,21 @@ public class ProjectProfileCacheModel implements CacheModel<ProjectProfile>,
 	public String xmdw;
 	public String xmfzr;
 	public String xmfzrlxdh;
+	public String zysjdw;
 	public String sj_zbfs;
 	public String sj_zbj;
 	public String sj_zzdj;
 	public String sj_zzdjzsbh;
 	public String sj_xmfzr;
 	public String sj_zmfzrzsbh;
+	public String zyjldw;
 	public String jl_zbfs;
 	public String jl_zbj;
 	public String jl_zzdj;
 	public String jl_zzdjzsbh;
 	public String jl_zj;
 	public String jl_zjzsbh;
+	public String zysgdw;
 	public String sg_zbfs;
 	public String sg_zbj;
 	public String sg_zzdj;

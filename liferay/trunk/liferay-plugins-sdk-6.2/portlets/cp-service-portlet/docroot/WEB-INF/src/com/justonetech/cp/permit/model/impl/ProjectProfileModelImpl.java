@@ -106,18 +106,21 @@ public class ProjectProfileModelImpl extends BaseModelImpl<ProjectProfile>
 			{ "xmdw", Types.VARCHAR },
 			{ "xmfzr", Types.VARCHAR },
 			{ "xmfzrlxdh", Types.VARCHAR },
+			{ "zysjdw", Types.VARCHAR },
 			{ "sj_zbfs", Types.VARCHAR },
 			{ "sj_zbj", Types.VARCHAR },
 			{ "sj_zzdj", Types.VARCHAR },
 			{ "sj_zzdjzsbh", Types.VARCHAR },
 			{ "sj_xmfzr", Types.VARCHAR },
 			{ "sj_zmfzrzsbh", Types.VARCHAR },
+			{ "zyjldw", Types.VARCHAR },
 			{ "jl_zbfs", Types.VARCHAR },
 			{ "jl_zbj", Types.VARCHAR },
 			{ "jl_zzdj", Types.VARCHAR },
 			{ "jl_zzdjzsbh", Types.VARCHAR },
 			{ "jl_zj", Types.VARCHAR },
 			{ "jl_zjzsbh", Types.VARCHAR },
+			{ "zysgdw", Types.VARCHAR },
 			{ "sg_zbfs", Types.VARCHAR },
 			{ "sg_zbj", Types.VARCHAR },
 			{ "sg_zzdj", Types.VARCHAR },
@@ -130,7 +133,7 @@ public class ProjectProfileModelImpl extends BaseModelImpl<ProjectProfile>
 			{ "sytdxgwj", Types.VARCHAR },
 			{ "gczljddjqk", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table cp_ProjectProfile (permitId LONG not null primary key,bjbh VARCHAR(75) null,jsdwmc VARCHAR(300) null,jsdwxz VARCHAR(75) null,jsdwdz VARCHAR(300) null,gcmc VARCHAR(300) null,jsdd VARCHAR(300) null,jsgcgm VARCHAR(500) null,fwjzmj VARCHAR(75) null,htjg VARCHAR(75) null,htgq INTEGER,fddbr VARCHAR(75) null,jsdwlxdh VARCHAR(75) null,jsdwlxr VARCHAR(75) null,jsdwsjh VARCHAR(75) null,jsgcghxkzbh VARCHAR(75) null,xckgqk VARCHAR(75) null,xmlx LONG,lxjb VARCHAR(75) null,xmxz LONG,ssqx VARCHAR(75) null,ywbm VARCHAR(75) null,jsddssqx LONG,jsgclb VARCHAR(75) null,jsgcsx LONG,gyzjbz VARCHAR(75) null,zbjg VARCHAR(75) null,xmtzgs VARCHAR(75) null,jhkg DATE null,jhjg DATE null,sfzftzl BOOLEAN,yzzpl1 VARCHAR(75) null,yzzpl2 VARCHAR(75) null,yzzpl3 VARCHAR(75) null,yzzpl4 VARCHAR(75) null,tjsj DATE null,gcnr VARCHAR(100) null,sgxkzsbz VARCHAR(75) null,gkpzhhzjghwh VARCHAR(75) null,pfhhzrq DATE null,cbsjpzjghwh VARCHAR(75) null,pfrq DATE null,pfgq INTEGER,pzjghwh VARCHAR(75) null,xmdw VARCHAR(75) null,xmfzr VARCHAR(75) null,xmfzrlxdh VARCHAR(75) null,sj_zbfs VARCHAR(75) null,sj_zbj VARCHAR(75) null,sj_zzdj VARCHAR(75) null,sj_zzdjzsbh VARCHAR(75) null,sj_xmfzr VARCHAR(75) null,sj_zmfzrzsbh VARCHAR(75) null,jl_zbfs VARCHAR(75) null,jl_zbj VARCHAR(75) null,jl_zzdj VARCHAR(75) null,jl_zzdjzsbh VARCHAR(75) null,jl_zj VARCHAR(75) null,jl_zjzsbh VARCHAR(75) null,sg_zbfs VARCHAR(75) null,sg_zbj VARCHAR(75) null,sg_zzdj VARCHAR(75) null,sg_zzdjzsbh VARCHAR(75) null,sg_xmjl VARCHAR(75) null,sg_xmjlzsbh VARCHAR(75) null,jszjjhlsqk VARCHAR(200) null,dcqwcqk VARCHAR(200) null,sgzbqk VARCHAR(200) null,sytdxgwj VARCHAR(200) null,gczljddjqk VARCHAR(200) null)";
+	public static final String TABLE_SQL_CREATE = "create table cp_ProjectProfile (permitId LONG not null primary key,bjbh VARCHAR(75) null,jsdwmc VARCHAR(300) null,jsdwxz VARCHAR(75) null,jsdwdz VARCHAR(300) null,gcmc VARCHAR(300) null,jsdd VARCHAR(300) null,jsgcgm VARCHAR(500) null,fwjzmj VARCHAR(75) null,htjg VARCHAR(75) null,htgq INTEGER,fddbr VARCHAR(75) null,jsdwlxdh VARCHAR(75) null,jsdwlxr VARCHAR(75) null,jsdwsjh VARCHAR(75) null,jsgcghxkzbh VARCHAR(75) null,xckgqk VARCHAR(75) null,xmlx LONG,lxjb VARCHAR(75) null,xmxz LONG,ssqx VARCHAR(75) null,ywbm VARCHAR(75) null,jsddssqx LONG,jsgclb VARCHAR(75) null,jsgcsx LONG,gyzjbz VARCHAR(75) null,zbjg VARCHAR(75) null,xmtzgs VARCHAR(75) null,jhkg DATE null,jhjg DATE null,sfzftzl BOOLEAN,yzzpl1 VARCHAR(75) null,yzzpl2 VARCHAR(75) null,yzzpl3 VARCHAR(75) null,yzzpl4 VARCHAR(75) null,tjsj DATE null,gcnr VARCHAR(100) null,sgxkzsbz VARCHAR(75) null,gkpzhhzjghwh VARCHAR(75) null,pfhhzrq DATE null,cbsjpzjghwh VARCHAR(75) null,pfrq DATE null,pfgq INTEGER,pzjghwh VARCHAR(75) null,xmdw VARCHAR(75) null,xmfzr VARCHAR(75) null,xmfzrlxdh VARCHAR(75) null,zysjdw VARCHAR(300) null,sj_zbfs VARCHAR(75) null,sj_zbj VARCHAR(75) null,sj_zzdj VARCHAR(75) null,sj_zzdjzsbh VARCHAR(75) null,sj_xmfzr VARCHAR(75) null,sj_zmfzrzsbh VARCHAR(75) null,zyjldw VARCHAR(300) null,jl_zbfs VARCHAR(75) null,jl_zbj VARCHAR(75) null,jl_zzdj VARCHAR(75) null,jl_zzdjzsbh VARCHAR(75) null,jl_zj VARCHAR(75) null,jl_zjzsbh VARCHAR(75) null,zysgdw VARCHAR(300) null,sg_zbfs VARCHAR(75) null,sg_zbj VARCHAR(75) null,sg_zzdj VARCHAR(75) null,sg_zzdjzsbh VARCHAR(75) null,sg_xmjl VARCHAR(75) null,sg_xmjlzsbh VARCHAR(75) null,jszjjhlsqk VARCHAR(200) null,dcqwcqk VARCHAR(200) null,sgzbqk VARCHAR(200) null,sytdxgwj VARCHAR(200) null,gczljddjqk VARCHAR(200) null)";
 	public static final String TABLE_SQL_DROP = "drop table cp_ProjectProfile";
 	public static final String ORDER_BY_JPQL = " ORDER BY projectProfile.permitId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY cp_ProjectProfile.permitId ASC";
@@ -231,18 +234,21 @@ public class ProjectProfileModelImpl extends BaseModelImpl<ProjectProfile>
 		attributes.put("xmdw", getXmdw());
 		attributes.put("xmfzr", getXmfzr());
 		attributes.put("xmfzrlxdh", getXmfzrlxdh());
+		attributes.put("zysjdw", getZysjdw());
 		attributes.put("sj_zbfs", getSj_zbfs());
 		attributes.put("sj_zbj", getSj_zbj());
 		attributes.put("sj_zzdj", getSj_zzdj());
 		attributes.put("sj_zzdjzsbh", getSj_zzdjzsbh());
 		attributes.put("sj_xmfzr", getSj_xmfzr());
 		attributes.put("sj_zmfzrzsbh", getSj_zmfzrzsbh());
+		attributes.put("zyjldw", getZyjldw());
 		attributes.put("jl_zbfs", getJl_zbfs());
 		attributes.put("jl_zbj", getJl_zbj());
 		attributes.put("jl_zzdj", getJl_zzdj());
 		attributes.put("jl_zzdjzsbh", getJl_zzdjzsbh());
 		attributes.put("jl_zj", getJl_zj());
 		attributes.put("jl_zjzsbh", getJl_zjzsbh());
+		attributes.put("zysgdw", getZysgdw());
 		attributes.put("sg_zbfs", getSg_zbfs());
 		attributes.put("sg_zbj", getSg_zbj());
 		attributes.put("sg_zzdj", getSg_zzdj());
@@ -542,6 +548,12 @@ public class ProjectProfileModelImpl extends BaseModelImpl<ProjectProfile>
 			setXmfzrlxdh(xmfzrlxdh);
 		}
 
+		String zysjdw = (String)attributes.get("zysjdw");
+
+		if (zysjdw != null) {
+			setZysjdw(zysjdw);
+		}
+
 		String sj_zbfs = (String)attributes.get("sj_zbfs");
 
 		if (sj_zbfs != null) {
@@ -578,6 +590,12 @@ public class ProjectProfileModelImpl extends BaseModelImpl<ProjectProfile>
 			setSj_zmfzrzsbh(sj_zmfzrzsbh);
 		}
 
+		String zyjldw = (String)attributes.get("zyjldw");
+
+		if (zyjldw != null) {
+			setZyjldw(zyjldw);
+		}
+
 		String jl_zbfs = (String)attributes.get("jl_zbfs");
 
 		if (jl_zbfs != null) {
@@ -612,6 +630,12 @@ public class ProjectProfileModelImpl extends BaseModelImpl<ProjectProfile>
 
 		if (jl_zjzsbh != null) {
 			setJl_zjzsbh(jl_zjzsbh);
+		}
+
+		String zysgdw = (String)attributes.get("zysgdw");
+
+		if (zysgdw != null) {
+			setZysgdw(zysgdw);
 		}
 
 		String sg_zbfs = (String)attributes.get("sg_zbfs");
@@ -1327,6 +1351,21 @@ public class ProjectProfileModelImpl extends BaseModelImpl<ProjectProfile>
 	}
 
 	@Override
+	public String getZysjdw() {
+		if (_zysjdw == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _zysjdw;
+		}
+	}
+
+	@Override
+	public void setZysjdw(String zysjdw) {
+		_zysjdw = zysjdw;
+	}
+
+	@Override
 	public String getSj_zbfs() {
 		if (_sj_zbfs == null) {
 			return StringPool.BLANK;
@@ -1417,6 +1456,21 @@ public class ProjectProfileModelImpl extends BaseModelImpl<ProjectProfile>
 	}
 
 	@Override
+	public String getZyjldw() {
+		if (_zyjldw == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _zyjldw;
+		}
+	}
+
+	@Override
+	public void setZyjldw(String zyjldw) {
+		_zyjldw = zyjldw;
+	}
+
+	@Override
 	public String getJl_zbfs() {
 		if (_jl_zbfs == null) {
 			return StringPool.BLANK;
@@ -1504,6 +1558,21 @@ public class ProjectProfileModelImpl extends BaseModelImpl<ProjectProfile>
 	@Override
 	public void setJl_zjzsbh(String jl_zjzsbh) {
 		_jl_zjzsbh = jl_zjzsbh;
+	}
+
+	@Override
+	public String getZysgdw() {
+		if (_zysgdw == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _zysgdw;
+		}
+	}
+
+	@Override
+	public void setZysgdw(String zysgdw) {
+		_zysgdw = zysgdw;
 	}
 
 	@Override
@@ -1745,18 +1814,21 @@ public class ProjectProfileModelImpl extends BaseModelImpl<ProjectProfile>
 		projectProfileImpl.setXmdw(getXmdw());
 		projectProfileImpl.setXmfzr(getXmfzr());
 		projectProfileImpl.setXmfzrlxdh(getXmfzrlxdh());
+		projectProfileImpl.setZysjdw(getZysjdw());
 		projectProfileImpl.setSj_zbfs(getSj_zbfs());
 		projectProfileImpl.setSj_zbj(getSj_zbj());
 		projectProfileImpl.setSj_zzdj(getSj_zzdj());
 		projectProfileImpl.setSj_zzdjzsbh(getSj_zzdjzsbh());
 		projectProfileImpl.setSj_xmfzr(getSj_xmfzr());
 		projectProfileImpl.setSj_zmfzrzsbh(getSj_zmfzrzsbh());
+		projectProfileImpl.setZyjldw(getZyjldw());
 		projectProfileImpl.setJl_zbfs(getJl_zbfs());
 		projectProfileImpl.setJl_zbj(getJl_zbj());
 		projectProfileImpl.setJl_zzdj(getJl_zzdj());
 		projectProfileImpl.setJl_zzdjzsbh(getJl_zzdjzsbh());
 		projectProfileImpl.setJl_zj(getJl_zj());
 		projectProfileImpl.setJl_zjzsbh(getJl_zjzsbh());
+		projectProfileImpl.setZysgdw(getZysgdw());
 		projectProfileImpl.setSg_zbfs(getSg_zbfs());
 		projectProfileImpl.setSg_zbj(getSg_zbj());
 		projectProfileImpl.setSg_zzdj(getSg_zzdj());
@@ -2157,6 +2229,14 @@ public class ProjectProfileModelImpl extends BaseModelImpl<ProjectProfile>
 			projectProfileCacheModel.xmfzrlxdh = null;
 		}
 
+		projectProfileCacheModel.zysjdw = getZysjdw();
+
+		String zysjdw = projectProfileCacheModel.zysjdw;
+
+		if ((zysjdw != null) && (zysjdw.length() == 0)) {
+			projectProfileCacheModel.zysjdw = null;
+		}
+
 		projectProfileCacheModel.sj_zbfs = getSj_zbfs();
 
 		String sj_zbfs = projectProfileCacheModel.sj_zbfs;
@@ -2205,6 +2285,14 @@ public class ProjectProfileModelImpl extends BaseModelImpl<ProjectProfile>
 			projectProfileCacheModel.sj_zmfzrzsbh = null;
 		}
 
+		projectProfileCacheModel.zyjldw = getZyjldw();
+
+		String zyjldw = projectProfileCacheModel.zyjldw;
+
+		if ((zyjldw != null) && (zyjldw.length() == 0)) {
+			projectProfileCacheModel.zyjldw = null;
+		}
+
 		projectProfileCacheModel.jl_zbfs = getJl_zbfs();
 
 		String jl_zbfs = projectProfileCacheModel.jl_zbfs;
@@ -2251,6 +2339,14 @@ public class ProjectProfileModelImpl extends BaseModelImpl<ProjectProfile>
 
 		if ((jl_zjzsbh != null) && (jl_zjzsbh.length() == 0)) {
 			projectProfileCacheModel.jl_zjzsbh = null;
+		}
+
+		projectProfileCacheModel.zysgdw = getZysgdw();
+
+		String zysgdw = projectProfileCacheModel.zysgdw;
+
+		if ((zysgdw != null) && (zysgdw.length() == 0)) {
+			projectProfileCacheModel.zysgdw = null;
 		}
 
 		projectProfileCacheModel.sg_zbfs = getSg_zbfs();
@@ -2346,7 +2442,7 @@ public class ProjectProfileModelImpl extends BaseModelImpl<ProjectProfile>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(141);
+		StringBundler sb = new StringBundler(147);
 
 		sb.append("{permitId=");
 		sb.append(getPermitId());
@@ -2442,6 +2538,8 @@ public class ProjectProfileModelImpl extends BaseModelImpl<ProjectProfile>
 		sb.append(getXmfzr());
 		sb.append(", xmfzrlxdh=");
 		sb.append(getXmfzrlxdh());
+		sb.append(", zysjdw=");
+		sb.append(getZysjdw());
 		sb.append(", sj_zbfs=");
 		sb.append(getSj_zbfs());
 		sb.append(", sj_zbj=");
@@ -2454,6 +2552,8 @@ public class ProjectProfileModelImpl extends BaseModelImpl<ProjectProfile>
 		sb.append(getSj_xmfzr());
 		sb.append(", sj_zmfzrzsbh=");
 		sb.append(getSj_zmfzrzsbh());
+		sb.append(", zyjldw=");
+		sb.append(getZyjldw());
 		sb.append(", jl_zbfs=");
 		sb.append(getJl_zbfs());
 		sb.append(", jl_zbj=");
@@ -2466,6 +2566,8 @@ public class ProjectProfileModelImpl extends BaseModelImpl<ProjectProfile>
 		sb.append(getJl_zj());
 		sb.append(", jl_zjzsbh=");
 		sb.append(getJl_zjzsbh());
+		sb.append(", zysgdw=");
+		sb.append(getZysgdw());
 		sb.append(", sg_zbfs=");
 		sb.append(getSg_zbfs());
 		sb.append(", sg_zbj=");
@@ -2495,7 +2597,7 @@ public class ProjectProfileModelImpl extends BaseModelImpl<ProjectProfile>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(214);
+		StringBundler sb = new StringBundler(223);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.cp.permit.model.ProjectProfile");
@@ -2690,6 +2792,10 @@ public class ProjectProfileModelImpl extends BaseModelImpl<ProjectProfile>
 		sb.append(getXmfzrlxdh());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>zysjdw</column-name><column-value><![CDATA[");
+		sb.append(getZysjdw());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>sj_zbfs</column-name><column-value><![CDATA[");
 		sb.append(getSj_zbfs());
 		sb.append("]]></column-value></column>");
@@ -2714,6 +2820,10 @@ public class ProjectProfileModelImpl extends BaseModelImpl<ProjectProfile>
 		sb.append(getSj_zmfzrzsbh());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>zyjldw</column-name><column-value><![CDATA[");
+		sb.append(getZyjldw());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>jl_zbfs</column-name><column-value><![CDATA[");
 		sb.append(getJl_zbfs());
 		sb.append("]]></column-value></column>");
@@ -2736,6 +2846,10 @@ public class ProjectProfileModelImpl extends BaseModelImpl<ProjectProfile>
 		sb.append(
 			"<column><column-name>jl_zjzsbh</column-name><column-value><![CDATA[");
 		sb.append(getJl_zjzsbh());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>zysgdw</column-name><column-value><![CDATA[");
+		sb.append(getZysgdw());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>sg_zbfs</column-name><column-value><![CDATA[");
@@ -2838,18 +2952,21 @@ public class ProjectProfileModelImpl extends BaseModelImpl<ProjectProfile>
 	private String _xmdw;
 	private String _xmfzr;
 	private String _xmfzrlxdh;
+	private String _zysjdw;
 	private String _sj_zbfs;
 	private String _sj_zbj;
 	private String _sj_zzdj;
 	private String _sj_zzdjzsbh;
 	private String _sj_xmfzr;
 	private String _sj_zmfzrzsbh;
+	private String _zyjldw;
 	private String _jl_zbfs;
 	private String _jl_zbj;
 	private String _jl_zzdj;
 	private String _jl_zzdjzsbh;
 	private String _jl_zj;
 	private String _jl_zjzsbh;
+	private String _zysgdw;
 	private String _sg_zbfs;
 	private String _sg_zbj;
 	private String _sg_zzdj;
