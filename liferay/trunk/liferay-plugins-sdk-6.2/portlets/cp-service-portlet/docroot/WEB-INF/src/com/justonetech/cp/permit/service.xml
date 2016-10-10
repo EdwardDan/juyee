@@ -219,6 +219,7 @@
 		<column name="sjfs" type="int" /><!-- 实交份数 -->
 		<column name="fileEntryIds" type="String" /><!-- 文件Id集合 -->
 		<column name="bzclIds" type="String" /><!-- 补正材料Id集合 -->
+		<column name="wjscbzclIds" type="String" /><!-- 委建设处补正材料Id集合 -->
 		<!-- Workflow fields -->
 		<column name="shyq" type="String" /><!-- 审核要求 -->
 		<column name="csyj" type="String" /><!-- 初审意见 -->

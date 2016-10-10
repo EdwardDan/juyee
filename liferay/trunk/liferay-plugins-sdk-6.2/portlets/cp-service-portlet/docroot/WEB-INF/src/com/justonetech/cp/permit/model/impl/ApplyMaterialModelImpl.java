@@ -66,12 +66,13 @@ public class ApplyMaterialModelImpl extends BaseModelImpl<ApplyMaterial>
 			{ "sjfs", Types.INTEGER },
 			{ "fileEntryIds", Types.VARCHAR },
 			{ "bzclIds", Types.VARCHAR },
+			{ "wjscbzclIds", Types.VARCHAR },
 			{ "shyq", Types.VARCHAR },
 			{ "csyj", Types.VARCHAR },
 			{ "fhyj", Types.VARCHAR },
 			{ "shyj", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table cp_ApplyMaterial (materialId LONG not null primary key,permitId LONG,xh VARCHAR(75) null,clmc VARCHAR(75) null,yjfs INTEGER,sjfs INTEGER,fileEntryIds VARCHAR(500) null,bzclIds VARCHAR(500) null,shyq VARCHAR(1000) null,csyj VARCHAR(75) null,fhyj VARCHAR(75) null,shyj VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table cp_ApplyMaterial (materialId LONG not null primary key,permitId LONG,xh VARCHAR(75) null,clmc VARCHAR(75) null,yjfs INTEGER,sjfs INTEGER,fileEntryIds VARCHAR(500) null,bzclIds VARCHAR(500) null,wjscbzclIds VARCHAR(500) null,shyq VARCHAR(1000) null,csyj VARCHAR(75) null,fhyj VARCHAR(75) null,shyj VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table cp_ApplyMaterial";
 	public static final String ORDER_BY_JPQL = " ORDER BY applyMaterial.materialId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY cp_ApplyMaterial.materialId ASC";
@@ -137,6 +138,7 @@ public class ApplyMaterialModelImpl extends BaseModelImpl<ApplyMaterial>
 		attributes.put("sjfs", getSjfs());
 		attributes.put("fileEntryIds", getFileEntryIds());
 		attributes.put("bzclIds", getBzclIds());
+		attributes.put("wjscbzclIds", getWjscbzclIds());
 		attributes.put("shyq", getShyq());
 		attributes.put("csyj", getCsyj());
 		attributes.put("fhyj", getFhyj());
@@ -193,6 +195,12 @@ public class ApplyMaterialModelImpl extends BaseModelImpl<ApplyMaterial>
 
 		if (bzclIds != null) {
 			setBzclIds(bzclIds);
+		}
+
+		String wjscbzclIds = (String)attributes.get("wjscbzclIds");
+
+		if (wjscbzclIds != null) {
+			setWjscbzclIds(wjscbzclIds);
 		}
 
 		String shyq = (String)attributes.get("shyq");
@@ -335,6 +343,21 @@ public class ApplyMaterialModelImpl extends BaseModelImpl<ApplyMaterial>
 	}
 
 	@Override
+	public String getWjscbzclIds() {
+		if (_wjscbzclIds == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _wjscbzclIds;
+		}
+	}
+
+	@Override
+	public void setWjscbzclIds(String wjscbzclIds) {
+		_wjscbzclIds = wjscbzclIds;
+	}
+
+	@Override
 	public String getShyq() {
 		if (_shyq == null) {
 			return StringPool.BLANK;
@@ -433,6 +456,7 @@ public class ApplyMaterialModelImpl extends BaseModelImpl<ApplyMaterial>
 		applyMaterialImpl.setSjfs(getSjfs());
 		applyMaterialImpl.setFileEntryIds(getFileEntryIds());
 		applyMaterialImpl.setBzclIds(getBzclIds());
+		applyMaterialImpl.setWjscbzclIds(getWjscbzclIds());
 		applyMaterialImpl.setShyq(getShyq());
 		applyMaterialImpl.setCsyj(getCsyj());
 		applyMaterialImpl.setFhyj(getFhyj());
@@ -546,6 +570,14 @@ public class ApplyMaterialModelImpl extends BaseModelImpl<ApplyMaterial>
 			applyMaterialCacheModel.bzclIds = null;
 		}
 
+		applyMaterialCacheModel.wjscbzclIds = getWjscbzclIds();
+
+		String wjscbzclIds = applyMaterialCacheModel.wjscbzclIds;
+
+		if ((wjscbzclIds != null) && (wjscbzclIds.length() == 0)) {
+			applyMaterialCacheModel.wjscbzclIds = null;
+		}
+
 		applyMaterialCacheModel.shyq = getShyq();
 
 		String shyq = applyMaterialCacheModel.shyq;
@@ -583,7 +615,7 @@ public class ApplyMaterialModelImpl extends BaseModelImpl<ApplyMaterial>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(27);
 
 		sb.append("{materialId=");
 		sb.append(getMaterialId());
@@ -601,6 +633,8 @@ public class ApplyMaterialModelImpl extends BaseModelImpl<ApplyMaterial>
 		sb.append(getFileEntryIds());
 		sb.append(", bzclIds=");
 		sb.append(getBzclIds());
+		sb.append(", wjscbzclIds=");
+		sb.append(getWjscbzclIds());
 		sb.append(", shyq=");
 		sb.append(getShyq());
 		sb.append(", csyj=");
@@ -616,7 +650,7 @@ public class ApplyMaterialModelImpl extends BaseModelImpl<ApplyMaterial>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(40);
+		StringBundler sb = new StringBundler(43);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.cp.permit.model.ApplyMaterial");
@@ -655,6 +689,10 @@ public class ApplyMaterialModelImpl extends BaseModelImpl<ApplyMaterial>
 		sb.append(getBzclIds());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>wjscbzclIds</column-name><column-value><![CDATA[");
+		sb.append(getWjscbzclIds());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>shyq</column-name><column-value><![CDATA[");
 		sb.append(getShyq());
 		sb.append("]]></column-value></column>");
@@ -690,6 +728,7 @@ public class ApplyMaterialModelImpl extends BaseModelImpl<ApplyMaterial>
 	private int _sjfs;
 	private String _fileEntryIds;
 	private String _bzclIds;
+	private String _wjscbzclIds;
 	private String _shyq;
 	private String _csyj;
 	private String _fhyj;

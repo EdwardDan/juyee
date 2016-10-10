@@ -7,6 +7,7 @@ create table cp_ApplyMaterial (
 	sjfs INTEGER,
 	fileEntryIds VARCHAR(500) null,
 	bzclIds VARCHAR(500) null,
+	wjscbzclIds VARCHAR(500) null,
 	shyq VARCHAR(1000) null,
 	csyj VARCHAR(75) null,
 	fhyj VARCHAR(75) null,

@@ -81,6 +81,7 @@ public class ApplyMaterialClp extends BaseModelImpl<ApplyMaterial>
 		attributes.put("sjfs", getSjfs());
 		attributes.put("fileEntryIds", getFileEntryIds());
 		attributes.put("bzclIds", getBzclIds());
+		attributes.put("wjscbzclIds", getWjscbzclIds());
 		attributes.put("shyq", getShyq());
 		attributes.put("csyj", getCsyj());
 		attributes.put("fhyj", getFhyj());
@@ -137,6 +138,12 @@ public class ApplyMaterialClp extends BaseModelImpl<ApplyMaterial>
 
 		if (bzclIds != null) {
 			setBzclIds(bzclIds);
+		}
+
+		String wjscbzclIds = (String)attributes.get("wjscbzclIds");
+
+		if (wjscbzclIds != null) {
+			setWjscbzclIds(wjscbzclIds);
 		}
 
 		String shyq = (String)attributes.get("shyq");
@@ -349,6 +356,29 @@ public class ApplyMaterialClp extends BaseModelImpl<ApplyMaterial>
 	}
 
 	@Override
+	public String getWjscbzclIds() {
+		return _wjscbzclIds;
+	}
+
+	@Override
+	public void setWjscbzclIds(String wjscbzclIds) {
+		_wjscbzclIds = wjscbzclIds;
+
+		if (_applyMaterialRemoteModel != null) {
+			try {
+				Class<?> clazz = _applyMaterialRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setWjscbzclIds", String.class);
+
+				method.invoke(_applyMaterialRemoteModel, wjscbzclIds);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
 	public String getShyq() {
 		return _shyq;
 	}
@@ -518,6 +548,7 @@ public class ApplyMaterialClp extends BaseModelImpl<ApplyMaterial>
 		clone.setSjfs(getSjfs());
 		clone.setFileEntryIds(getFileEntryIds());
 		clone.setBzclIds(getBzclIds());
+		clone.setWjscbzclIds(getWjscbzclIds());
 		clone.setShyq(getShyq());
 		clone.setCsyj(getCsyj());
 		clone.setFhyj(getFhyj());
@@ -580,7 +611,7 @@ public class ApplyMaterialClp extends BaseModelImpl<ApplyMaterial>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(27);
 
 		sb.append("{materialId=");
 		sb.append(getMaterialId());
@@ -598,6 +629,8 @@ public class ApplyMaterialClp extends BaseModelImpl<ApplyMaterial>
 		sb.append(getFileEntryIds());
 		sb.append(", bzclIds=");
 		sb.append(getBzclIds());
+		sb.append(", wjscbzclIds=");
+		sb.append(getWjscbzclIds());
 		sb.append(", shyq=");
 		sb.append(getShyq());
 		sb.append(", csyj=");
@@ -613,7 +646,7 @@ public class ApplyMaterialClp extends BaseModelImpl<ApplyMaterial>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(40);
+		StringBundler sb = new StringBundler(43);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.cp.permit.model.ApplyMaterial");
@@ -652,6 +685,10 @@ public class ApplyMaterialClp extends BaseModelImpl<ApplyMaterial>
 		sb.append(getBzclIds());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>wjscbzclIds</column-name><column-value><![CDATA[");
+		sb.append(getWjscbzclIds());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>shyq</column-name><column-value><![CDATA[");
 		sb.append(getShyq());
 		sb.append("]]></column-value></column>");
@@ -681,6 +718,7 @@ public class ApplyMaterialClp extends BaseModelImpl<ApplyMaterial>
 	private int _sjfs;
 	private String _fileEntryIds;
 	private String _bzclIds;
+	private String _wjscbzclIds;
 	private String _shyq;
 	private String _csyj;
 	private String _fhyj;

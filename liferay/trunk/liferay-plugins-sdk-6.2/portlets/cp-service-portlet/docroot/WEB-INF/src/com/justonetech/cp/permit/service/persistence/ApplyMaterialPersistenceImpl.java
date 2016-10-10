@@ -846,6 +846,7 @@ public class ApplyMaterialPersistenceImpl extends BasePersistenceImpl<ApplyMater
 		applyMaterialImpl.setSjfs(applyMaterial.getSjfs());
 		applyMaterialImpl.setFileEntryIds(applyMaterial.getFileEntryIds());
 		applyMaterialImpl.setBzclIds(applyMaterial.getBzclIds());
+		applyMaterialImpl.setWjscbzclIds(applyMaterial.getWjscbzclIds());
 		applyMaterialImpl.setShyq(applyMaterial.getShyq());
 		applyMaterialImpl.setCsyj(applyMaterial.getCsyj());
 		applyMaterialImpl.setFhyj(applyMaterial.getFhyj());

@@ -265,6 +265,7 @@
 		<property name="sjfs" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="fileEntryIds" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="bzclIds" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="wjscbzclIds" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="shyq" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="csyj" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="fhyj" type="com.liferay.portal.dao.orm.hibernate.StringType" />

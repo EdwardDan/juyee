@@ -37,6 +37,7 @@ public class ApplyMaterialSoap implements Serializable {
 		soapModel.setSjfs(model.getSjfs());
 		soapModel.setFileEntryIds(model.getFileEntryIds());
 		soapModel.setBzclIds(model.getBzclIds());
+		soapModel.setWjscbzclIds(model.getWjscbzclIds());
 		soapModel.setShyq(model.getShyq());
 		soapModel.setCsyj(model.getCsyj());
 		soapModel.setFhyj(model.getFhyj());
@@ -157,6 +158,14 @@ public class ApplyMaterialSoap implements Serializable {
 		_bzclIds = bzclIds;
 	}
 
+	public String getWjscbzclIds() {
+		return _wjscbzclIds;
+	}
+
+	public void setWjscbzclIds(String wjscbzclIds) {
+		_wjscbzclIds = wjscbzclIds;
+	}
+
 	public String getShyq() {
 		return _shyq;
 	}
@@ -197,6 +206,7 @@ public class ApplyMaterialSoap implements Serializable {
 	private int _sjfs;
 	private String _fileEntryIds;
 	private String _bzclIds;
+	private String _wjscbzclIds;
 	private String _shyq;
 	private String _csyj;
 	private String _fhyj;

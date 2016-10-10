@@ -57,6 +57,7 @@ public class ApplyMaterialWrapper implements ApplyMaterial,
 		attributes.put("sjfs", getSjfs());
 		attributes.put("fileEntryIds", getFileEntryIds());
 		attributes.put("bzclIds", getBzclIds());
+		attributes.put("wjscbzclIds", getWjscbzclIds());
 		attributes.put("shyq", getShyq());
 		attributes.put("csyj", getCsyj());
 		attributes.put("fhyj", getFhyj());
@@ -113,6 +114,12 @@ public class ApplyMaterialWrapper implements ApplyMaterial,
 
 		if (bzclIds != null) {
 			setBzclIds(bzclIds);
+		}
+
+		String wjscbzclIds = (String)attributes.get("wjscbzclIds");
+
+		if (wjscbzclIds != null) {
+			setWjscbzclIds(wjscbzclIds);
 		}
 
 		String shyq = (String)attributes.get("shyq");
@@ -318,6 +325,26 @@ public class ApplyMaterialWrapper implements ApplyMaterial,
 	@Override
 	public void setBzclIds(java.lang.String bzclIds) {
 		_applyMaterial.setBzclIds(bzclIds);
+	}
+
+	/**
+	* Returns the wjscbzcl IDs of this apply material.
+	*
+	* @return the wjscbzcl IDs of this apply material
+	*/
+	@Override
+	public java.lang.String getWjscbzclIds() {
+		return _applyMaterial.getWjscbzclIds();
+	}
+
+	/**
+	* Sets the wjscbzcl IDs of this apply material.
+	*
+	* @param wjscbzclIds the wjscbzcl IDs of this apply material
+	*/
+	@Override
+	public void setWjscbzclIds(java.lang.String wjscbzclIds) {
+		_applyMaterial.setWjscbzclIds(wjscbzclIds);
 	}
 
 	/**

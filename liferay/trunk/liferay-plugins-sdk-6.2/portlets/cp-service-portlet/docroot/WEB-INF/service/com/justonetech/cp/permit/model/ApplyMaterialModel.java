@@ -174,6 +174,21 @@ public interface ApplyMaterialModel extends BaseModel<ApplyMaterial> {
 	public void setBzclIds(String bzclIds);
 
 	/**
+	 * Returns the wjscbzcl IDs of this apply material.
+	 *
+	 * @return the wjscbzcl IDs of this apply material
+	 */
+	@AutoEscape
+	public String getWjscbzclIds();
+
+	/**
+	 * Sets the wjscbzcl IDs of this apply material.
+	 *
+	 * @param wjscbzclIds the wjscbzcl IDs of this apply material
+	 */
+	public void setWjscbzclIds(String wjscbzclIds);
+
+	/**
 	 * Returns the shyq of this apply material.
 	 *
 	 * @return the shyq of this apply material
