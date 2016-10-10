@@ -421,40 +421,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(Permit.class.getName(), request);
 		ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
 		long permitId = ParamUtil.getLong(request, "permitId");
-		String ywbh = "JT";
 		Permit permit = PermitLocalServiceUtil.getPermit(permitId);
-
-		ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
-		Dictionary xmlx = DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx());
-		ywbh = ywbh + xmlx.getCode();
-		Locale locale = LocaleUtil.getDefault();
-		String currentDate = DateUtil.getCurrentDate("yyyy-MM-dd", locale);
-		String currentDateStr = currentDate.substring(2, 4) + currentDate.substring(5, 7);
-		ywbh = ywbh + currentDateStr;
-		List<Permit> permits = PermitLocalServiceUtil.getPermits(-1, -1);
-		List<Long> nums = new ArrayList<Long>();
-		for (Permit permit_ : permits) {
-			if (Validator.isNotNull(permit_.getYwbh()) && permit_.getYwbh().substring(4, 8).equals(currentDateStr)) {
-				nums.add(Long.parseLong(permit_.getYwbh().substring(8, 12)));
-			}
-		}
-		Long num = 0L;
-		for (Long num_ : nums) {
-			if (num_ > num) {
-				num = num_;
-			}
-		}
-		num++;
-
-		if (num / 10 < 1) {
-			ywbh = ywbh + "000" + num;
-		} else if (num / 100 < 1) {
-			ywbh = ywbh + "00" + num;
-		} else if (num / 1000 < 1) {
-			ywbh = ywbh + "0" + num;
-		} else if (num / 10000 < 1) {
-			ywbh = ywbh + num;
-		}
 		User user = PortalUtil.getUser(request);
 		if (Validator.isNotNull(user)) {
 			permit.setUserId(user.getUserId());
@@ -464,7 +431,6 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		Date now = new Date();
 		permit.setCreateDate(now);
 		permit.setModifiedDate(now);
-		permit.setYwbh(ywbh);
 		permit.setGroupId(themeDisplay.getScopeGroupId());
 		permit.setCompanyId(themeDisplay.getCompanyId());
 		// 保存状态
