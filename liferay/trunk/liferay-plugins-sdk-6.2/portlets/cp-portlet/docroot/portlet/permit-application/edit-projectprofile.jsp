@@ -57,8 +57,8 @@
 	<table  class="table table-bordered" width="100%">
 	<tr class="body">
 			<td class="text-right">项目类型</td>
-			<td class="bg-white"><aui:select name="xmlx" label="" 
-					type="select" style="width:50%">
+			<td class="bg-white"><aui:select name="xmlx" label="" id="xmlx" 
+					type="select" style="width:50%" onChange="change()">
 					<%
 						Dictionary dictionary = DictionaryLocalServiceUtil.findByCode(
 													"xmlx");
@@ -310,6 +310,202 @@
 					onfocus="WdatePicker({minDate:'#F{$dp.$D(\'jhjg\')}',lang:'zh-cn',dateFmt:'yyyy-MM-dd'})"
 			required="required"/></td>
 		</tr>
+		<tbody style="display: none" id="hd">
+		<tr class="body">
+			<td class="text-center" colspan="4">主要设计单位</td>
+		</tr>
+		<tr class="body">
+			<td class="text-right">主要设计单位</td>
+			<td class="bg-white" colspan="3"><aui:input name="zysjdw"
+					label="" type="text" style="width:50%" value="">
+				</aui:input></td>
+		</tr>
+		<tr class="body">
+			<td class="text-right">招标方式</td>
+			<td class="bg-white"><aui:input name="sj_zbfs" label="" type="text"
+					style="width:50%" >
+				</aui:input></td>
+			<td class="text-right">中标价</td>
+			<td class="bg-white"><aui:input name="sj_zbj" label=""
+					type="text" style="width:50%" >
+				</aui:input></td>
+		</tr>
+		<tr class="body">
+			<td class="text-right">资质等级</td>
+			<td class="bg-white"><aui:input name="sj_zzdj" label="" type="text"
+					style="width:50%" >
+				</aui:input></td>
+			<td class="text-right">资质等级证书编号</td>
+			<td class="bg-white"><aui:input name="sj_zzdjzsbh" label=""
+					type="text" style="width:50%" >
+				</aui:input></td>
+		</tr>
+		<tr class="body">
+			<td class="text-right">项目负责人</td>
+			<td class="bg-white"><aui:input name="sj_xmfzr" label="" type="text"
+					style="width:50%" >
+				</aui:input></td>
+			<td class="text-right">项目负责人证书编号</td>
+			<td class="bg-white"><aui:input name="sj_zmfzrzsbh" label=""
+					type="text" style="width:50%" >
+				</aui:input></td>
+		</tr>
+		<tr class="body">
+			<td class="text-center" colspan="4">主要监理单位</td>
+		</tr>
+		<tr class="body">
+			<td class="text-right">主要监理单位</td>
+			<td class="bg-white" colspan="3"><aui:input name="zyjldw"
+					label="" type="text" style="width:50%" value="">
+				</aui:input></td>
+		</tr>
+		<tr class="body">
+			<td class="text-right">招标方式</td>
+			<td class="bg-white"><aui:input name="jl_zbfs" label="" type="text"
+					style="width:50%" >
+				</aui:input></td>
+			<td class="text-right">中标价</td>
+			<td class="bg-white"><aui:input name="jl_zbj" label=""
+					type="text" style="width:50%" >
+				</aui:input></td>
+		</tr>
+		<tr class="body">
+			<td class="text-right">资质等级</td>
+			<td class="bg-white"><aui:input name="jl_zzdj" label="" type="text"
+					style="width:50%" >
+				</aui:input></td>
+			<td class="text-right">资质等级证书编号</td>
+			<td class="bg-white"><aui:input name="jl_zzdjzsbh" label=""
+					type="text" style="width:50%" >
+				</aui:input></td>
+		</tr>
+		<tr class="body">
+			<td class="text-right">总监</td>
+			<td class="bg-white"><aui:input name="jl_zj" label="" type="text"
+					style="width:50%" >
+				</aui:input></td>
+			<td class="text-right">总监证书编号</td>
+			<td class="bg-white"><aui:input name="jl_zjzsbh" label=""
+					type="text" style="width:50%" >
+				</aui:input></td>
+		</tr>
+		<tr class="body">
+			<td class="text-center" colspan="4">主要施工单位</td>
+		</tr>
+		<tr class="body">
+			<td class="text-right">主要施工单位</td>
+			<td class="bg-white" colspan="3"><aui:input name="zysgdw" 
+					label="" type="text" style="width:50%" value="">
+				</aui:input></td>
+		</tr>
+		<tr class="body">
+			<td class="text-right">招标方式</td>
+			<td class="bg-white"><aui:input name="sg_zbfs" label="" type="text"
+					style="width:50%" >
+				</aui:input></td>
+			<td class="text-right">中标价</td>
+			<td class="bg-white"><aui:input name="sg_zbj" label=""
+					type="text" style="width:50%" >
+				</aui:input></td>
+		</tr>
+		<tr class="body">
+			<td class="text-right">资质等级</td>
+			<td class="bg-white"><aui:input name="sg_zzdj" label="" type="text"
+					style="width:50%" >
+				</aui:input></td>
+			<td class="text-right">资质等级证书编号</td>
+			<td class="bg-white"><aui:input name="sg_zzdjzsbh" label=""
+					type="text" style="width:50%" >
+				</aui:input></td>
+		</tr>
+		<tr class="body">
+			<td class="text-right">项目经理</td>
+			<td class="bg-white"><aui:input name="sg_xmjl" label="" type="text"
+					style="width:50%" >
+				</aui:input></td>
+			<td class="text-right">项目经理证书编号</td>
+			<td class="bg-white"><aui:input name="sg_xmjlzsbh" label=""
+					type="text" style="width:50%" >
+				</aui:input></td>
+		</tr>
+		<tr class="body">
+			<td class="text-center" colspan="4">建设依据</td>
+		</tr>
+		<tr class="body">
+			<td class="text-right">工可批准或核准机关和文号</td>
+			<td class="bg-white" colspan="3"><aui:input name="gkpzhhzjghwh" 
+					label="" type="text" style="width:50%" value="">
+				</aui:input></td>
+		</tr>
+		<tr class="body">
+			<td class="text-right">批复或核准日期</td>
+			<td class="bg-white"><aui:input name="pfhhzrq" label="" type="text"
+					style="width:50%" >
+				</aui:input></td>
+			<td class="text-right">投资估算</td>
+			<td class="bg-white"><aui:input name="xmtzgs" label=""
+					type="text" style="width:50%" >
+				</aui:input></td>
+		</tr>
+		<tr class="body">
+			<td class="text-right">初步设计批准机关和文号</td>
+			<td class="bg-white" colspan="3"><aui:input name="cbsjpzjghwh" 
+					label="" type="text" style="width:50%" value="">
+				</aui:input></td>
+		</tr>
+		<tr class="body">
+			<td class="text-right">批复日期</td>
+			<td class="bg-white"><aui:input name="pfrq" label="" type="text"
+					style="width:50%" >
+				</aui:input></td>
+			<td class="text-right">批复工期</td>
+			<td class="bg-white"><aui:input name="pfgq" label=""
+					type="text" style="width:50%" >
+				</aui:input></td>
+		</tr>
+		<tr class="body">
+			<td class="text-right">主体工程施工图审批批准机关和文号</td>
+			<td class="bg-white" colspan="3"><aui:input name="pzjghwh" 
+					label="" type="text" style="width:50%" value="">
+				</aui:input></td>
+		</tr>
+		<tr class="body">
+			<td class="text-right">投资来源</td>
+			<td class="bg-white" colspan="3"><aui:input name="tzly" 
+					label="" type="text" style="width:50%" value="">
+				</aui:input></td>
+		</tr>
+		<tr class="body">
+			<td class="text-right">建设资金计划落实情况 </td>
+			<td class="bg-white" colspan="3"><aui:input name="jszjjhlsqk" 
+					label="" type="text" style="width:50%" value="">
+				</aui:input></td>
+		</tr>
+		<tr class="body">
+			<td class="text-right">动、拆迁完成情况 </td>
+			<td class="bg-white" colspan="3"><aui:input name="dcqwcqk" 
+					label="" type="text" style="width:50%" value="">
+				</aui:input></td>
+		</tr>
+		<tr class="body">
+			<td class="text-right">施工准备情况 </td>
+			<td class="bg-white" colspan="3"><aui:input name="sgzbqk" 
+					label="" type="text" style="width:50%" value="">
+				</aui:input></td>
+		</tr>
+		<tr class="body">
+			<td class="text-right">使用土地等相关文件 </td>
+			<td class="bg-white" colspan="3"><aui:input name="sytdxgwj" 
+					label="" type="text" style="width:50%" value="">
+				</aui:input></td>
+		</tr>
+		<tr class="body">
+			<td class="text-right">工程质量（施工安全）监督登记情况 </td>
+			<td class="bg-white" colspan="3"><aui:input name="gczljddjqk" 
+					label="" type="text" style="width:50%" value="">
+				</aui:input></td>
+		</tr>
+		</tbody>
 		<tr class="body">
 			<td class="text-right">备注</td>
 			<td class="bg-white" colspan="3"><aui:input name="sgxkzsbz" id="sgxkzsbz"
@@ -392,6 +588,14 @@ var counterVariable = new A.CharCounter({
 </aui:script>
 
 <script>
+function change(){
+	if($("#<portlet:namespace/>xmlx").val()==29741){
+		document.getElementById("hd").style.display = "";
+	}else{
+		document.getElementById("hd").style.display = "none";
+	}
+}
+
 function showYzzpl(obj) {	
     if (obj.checked) {
         $("#sfzftzl").val("true");
