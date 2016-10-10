@@ -73,10 +73,10 @@
 			<th style="text-align: center; width: 5%;">序号</th>
 			<th style="text-align: center; width: 25%;">申请材料名称</th>
 			<th style="text-align: center; width: 30%;">附件</th>
-			<c:if test="${permit.status!=24}">
+			<c:if test="${!(permit.status==2||permit.status==3||permit.status==5||permit.status==6||permit.status==10)}">
 				<th style="text-align: center; width: 15%;">补正材料查看</th>
 			</c:if>
-			<c:if test="${permit.status==24}">
+			<c:if test="${permit.status==2||permit.status==3||permit.status==5||permit.status==6||permit.status==10}">
 				<th style="text-align: center; width: 15%;">补正材料</th>
 				<th style="text-align: center; width: 10%;">操作 <span
 					class="taglib-icon-help"> <img
@@ -119,7 +119,7 @@
 					</div>
 				</td>
 
-				<c:if test="${permit.status!=24}">
+				<c:if test="${!(permit.status==2||permit.status==3||permit.status==5||permit.status==6||permit.status==10)}">
 					<td style="text-align: center">
 						<div class="${material.materialId}">
 							<c:if test="${not empty material.bzclIds}">
@@ -147,7 +147,7 @@
 						</div>
 					</td>
 				</c:if>
-				<c:if test="${permit.status==24}">
+				<c:if test="${permit.status==2||permit.status==3||permit.status==5||permit.status==6||permit.status==10}">
 					<td style="text-align: center">
 						<div id="fileDivBzcl${status.index+1}">
 							<!-- todo
