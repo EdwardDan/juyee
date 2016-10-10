@@ -719,17 +719,17 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		return fis;
 	}
 	
-		private byte[] inputStreamToByte(InputStream is) throws IOException{
-		  ByteArrayOutputStream bytestream = new ByteArrayOutputStream();
-		  byte[] buffer=new byte[1024];
-		  int ch;
-		  while ((ch = is.read(buffer)) != -1) {
-		   bytestream.write(buffer,0,ch);
-		  }
-		  byte data[] = bytestream.toByteArray();
-		  bytestream.close();
-		  return data;
-		 }
+	private byte[] inputStreamToByte(InputStream is) throws IOException {
+		ByteArrayOutputStream bytestream = new ByteArrayOutputStream();
+		byte[] buffer = new byte[1024];
+		int ch;
+		while ((ch = is.read(buffer)) != -1) {
+			bytestream.write(buffer, 0, ch);
+		}
+		byte data[] = bytestream.toByteArray();
+		bytestream.close();
+		return data;
+	}
 
 	@Override
 	public void serveResource(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException,
@@ -746,32 +746,23 @@ public class PermitApplicationPortlet extends MVCPortlet {
 				Map<String, String> map = null;
 				map = getMap(permitId, xmlx);
 				String newPDFPath = PropsUtil.get("sgxkz.temp.folder.id") + CounterLocalServiceUtil.increment() + ".pdf";
-				FileInputStream fis = fillTemplate(DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(PropsUtil.get("sgxkz.pdf.template"))), newPDFPath, map, resourceRequest, resourceResponse, permit);
+				FileInputStream fis = null;
+				if (xmlx.equals("航道")) {
+				map = getKgbaMap(permitId);
+				fis = fillTemplate(DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(PropsUtil.get("sgxkz.hd.pdf.template"))), newPDFPath, map, resourceRequest, resourceResponse, permit);
+			} else {
+				map = getMap(permitId, xmlx);
+				if (projectProfile.getXmxz() == 29769) {
+					fis = fillTemplate(DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(PropsUtil.get("sgxkz.pdf.template"))), newPDFPath, map, resourceRequest, resourceResponse, permit);
+				} else {
+					fis = fillTemplate(DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(PropsUtil.get("sgxkz.ls.pdf.template"))), newPDFPath, map, resourceRequest, resourceResponse, permit);
+				}
+			}
 				byte[] data = inputStreamToByte(fis);
-				System.out.println("================"+data.length);
 				HttpServletRequest req = PortalUtil.getHttpServletRequest(resourceRequest);
 				HttpServletResponse res = PortalUtil.getHttpServletResponse(resourceResponse);
 				ServletResponseUtil.sendFile(req, res, CounterLocalServiceUtil.increment()+"", data,
 						ContentTypes.APPLICATION_PDF);
-//				String viewURL = "";
-//				if (xmlx.equals("航道")) {
-//					map = getKgbaMap(permitId);
-//					viewURL = getViewURL(resourceRequest, resourceResponse, permitId,
-//							Long.valueOf(PropsUtil.get("sgxkz.hd.pdf.template")), newPDFPath, map);
-//				} else {
-//					map = getMap(permitId, xmlx);
-//					if (projectProfile.getXmxz() == 29769) {
-//						viewURL = getViewURL(resourceRequest, resourceResponse, permitId,
-//								Long.valueOf(PropsUtil.get("sgxkz.pdf.template")), newPDFPath, map);
-//					} else {
-//						viewURL = getViewURL(resourceRequest, resourceResponse, permitId,
-//								Long.valueOf(PropsUtil.get("sgxkz.ls.pdf.template")), newPDFPath, map);
-//					}
-//				}
-//				PrintWriter out = resourceResponse.getWriter();
-//				out.println(viewURL);
-//				out.flush();
-//				out.close();
 			}
 			
 			
