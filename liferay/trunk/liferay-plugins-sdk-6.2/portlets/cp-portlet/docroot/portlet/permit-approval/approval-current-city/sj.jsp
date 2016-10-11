@@ -307,21 +307,40 @@ span {
 						label="审核意见" useNamespace="false" rows="10" type="textarea" />
 				</div>
 				<c:choose>
-<c:when test='<%=!Validator.isBlank(permit.getSlbh())%>'>
+<c:when test='<%=message.equals("通过")&&!Validator.isBlank(permit.getSlbh())%>'>
 <liferay-ui:icon
 				cssClass='<%= "workflow-task-" + randomId + " task-change-status-link" %>'
 				id='<%= randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink" %>'
-				image="sjtg"
+				image="hdtg"
 				message="<%= message %>"
 				method="get"
 				url="<%= url %>"
 			/> 
 			</c:when>
-			<c:when test='<%=Validator.isBlank(permit.getSlbh())%>'>
+			<c:when test='<%=message.equals("不通过")&&!Validator.isBlank(permit.getSlbh())%>'>
 <liferay-ui:icon
 				cssClass='<%= "workflow-task-" + randomId + " task-change-status-link" %>'
 				id='<%= randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink" %>'
-				image="sjtgx"
+				image="bytg"
+				message="<%= message %>"
+				method="get"
+				url="<%= url %>"
+			/> 
+			</c:when>
+			<c:when test='<%=message.equals("通过")&&Validator.isBlank(permit.getSlbh())%>'>
+<liferay-ui:icon
+				cssClass='<%= "workflow-task-" + randomId + " task-change-status-link" %>'
+				id='<%= randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink" %>'
+				image="hdtgx"
+				message="<%= message %>"
+				method="get"
+			/> 
+			</c:when>
+				<c:when test='<%=message.equals("不通过")&&Validator.isBlank(permit.getSlbh())%>'>
+<liferay-ui:icon
+				cssClass='<%= "workflow-task-" + randomId + " task-change-status-link" %>'
+				id='<%= randomId + HtmlUtil.escapeAttribute(transitionName) + "taskChangeStatusLink" %>'
+				image="bytgx"
 				message="<%= message %>"
 				method="get"
 			/> 

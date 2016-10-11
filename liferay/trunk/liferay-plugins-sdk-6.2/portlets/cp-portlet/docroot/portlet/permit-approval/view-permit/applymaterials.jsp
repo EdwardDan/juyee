@@ -97,10 +97,10 @@
 			<th style="text-align: center; width: 25%;">申请材料名称</th>
 			<th style="text-align: center; width: 30%;">附件</th>
 			<c:if test="${!(permit.status==2||permit.status==3||permit.status==5||permit.status==6||permit.status==10)}">
-				<th style="text-align: center; width: 15%;">补正材料查看</th>
+				<th style="text-align: center; width: 15%;">建管中心补正材料查看</th>
 			</c:if>
 			<c:if test="${permit.status==2||permit.status==3||permit.status==5||permit.status==6||permit.status==10}">
-				<th style="text-align: center; width: 15%;">补正材料</th>
+				<th style="text-align: center; width: 15%;">建管中心补正材料</th>
 				<th style="text-align: center; width: 10%;">操作 <span
 					class="taglib-icon-help"> <img
 						id="yui_patched_v3_11_0_1_1473298445453_1601" tabindex="0"
@@ -172,13 +172,13 @@
 											value="${material.clmc }-${varStausNo.index+1 }.${dlFileEntry.extension }" />
 										<c:if test="${dlFileEntry. extension eq jpg}">
 											<a href="#"
-												onclick="previewJpg(${material.materialId},${dlFileEntry.fileEntryId})">${material.clmc }补正材料-${varStausNo.index+1 }.${dlFileEntry.extension }</a>
+												onclick="previewJpg(${material.materialId},${dlFileEntry.fileEntryId})">${material.clmc }建管中心补正材料-${varStausNo.index+1 }.${dlFileEntry.extension }</a>
 											<img src="/documents/${filePathBzcl }" style="display: none;"
 												id="${dlFileEntry.fileEntryId}" alt="${dlFileEntry.title}">
 										</c:if>
 										<c:if test="${dlFileEntry.extension eq pdf}">
 											<a href="#"
-												onclick="previewPdf('/documents/${filePathBzcl}')">${material.clmc }补正材料-${varStausNo.index+1 }.${dlFileEntry.extension }</a>
+												onclick="previewPdf('/documents/${filePathBzcl}')">${material.clmc }建管中心补正材料-${varStausNo.index+1 }.${dlFileEntry.extension }</a>
 										</c:if>
 										<a href="/documents/${filePathBzcl }?&download=true">下载</a>
 									</div>
