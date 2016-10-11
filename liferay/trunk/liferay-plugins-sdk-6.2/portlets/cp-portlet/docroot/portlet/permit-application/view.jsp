@@ -99,7 +99,7 @@
 						<c:if test="<%=(applyStatus>2)%>">
 							<liferay-ui:icon image="view" url="${viewPermitURL}" />
 						</c:if>
-						<c:if test='<%=(applyStatus<=2)||(applyStatus==4)||(applyStatus==6&&type.equals("shishu"))%>'>
+						<c:if test='<%=(applyStatus<=2)||(applyStatus==4)||(applyStatus==17&&type.equals("shishu"))%>'>
 							<liferay-ui:icon image="edit" url="${rowURL}" />
 							<liferay-ui:icon image="delete" label="删除" url="javascript:void(0);"
 								onClick='<%=renderResponse.getNamespace() + "deletePermits("+permit.getPermitId()+");"%>' />

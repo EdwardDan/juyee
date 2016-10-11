@@ -216,7 +216,7 @@
 				    				}else{
 				    			type="shishu";
 				    				}
-				    		if(permit.getStatus()==4||(permit.getStatus()==6&&type.equals("shishu"))){
+				    		if(permit.getStatus()==4||(permit.getStatus()==17&&type.equals("shishu"))){
 				    		if(results1.size()>0){
 				    		//工作流任务
 				    	for(WorkflowTask task:results1){
