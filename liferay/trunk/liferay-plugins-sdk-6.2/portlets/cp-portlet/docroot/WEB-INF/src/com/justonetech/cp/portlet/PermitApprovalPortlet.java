@@ -557,7 +557,7 @@ public class PermitApprovalPortlet extends MVCPortlet {
 				if (!materialId.equals("0")) {
 					ApplyMaterial applyMaterial = ApplyMaterialLocalServiceUtil.getApplyMaterial(Long
 							.valueOf(materialId));
-					String fileTitle = applyMaterial.getClmc() + "补正材料-" + no + "." + fileExtension;
+					String fileTitle = applyMaterial.getClmc() + "建管中心补正材料-" + no + "." + fileExtension;
 
 					fileEntry = uploadFile(resourceRequest, fileSourceName, fileBytes, serviceContext, portletId,
 							materialId, fileTitle);
