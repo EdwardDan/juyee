@@ -165,7 +165,8 @@ public class PermitLocalServiceImpl extends PermitLocalServiceBaseImpl {
 			Junction junction = RestrictionsFactoryUtil.disjunction();
 			if (!Validator.isBlank(status)) {
 				if("wtj".equals(status)){
-					int ssValues = 6;
+					List<Integer> ssValues = new ArrayList<Integer>();
+					ssValues.add(17);
 					List<Integer> qsValues = new ArrayList<Integer>();
 					qsValues.add(1);
 					qsValues.add(4);
@@ -174,7 +175,7 @@ public class PermitLocalServiceImpl extends PermitLocalServiceBaseImpl {
 					projectProfileDQ.add(PropertyFactoryUtil.forName("lxjb").in(ss));
 					
 					Criterion criterion = PropertyFactoryUtil.forName("permitId").in(projectProfileDQ);
-					criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.eq("status", ssValues));
+					criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.in("status", ssValues));
 					junction.add(criterion);
 					
 					Criterion criterion_ = RestrictionsFactoryUtil.in("status", qsValues);
@@ -196,7 +197,6 @@ public class PermitLocalServiceImpl extends PermitLocalServiceBaseImpl {
 					ssValues.add(14);
 					ssValues.add(15);
 					ssValues.add(16);
-					ssValues.add(17);
 					List<Integer> qsValues = new ArrayList<Integer>();
 					qsValues.add(2);
 					qsValues.add(3);
