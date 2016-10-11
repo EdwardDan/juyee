@@ -28,9 +28,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.Authenticator;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
-import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.model.ExpandoColumn;
 import com.liferay.portlet.expando.model.ExpandoTable;
@@ -48,19 +46,6 @@ public class CustomLoginPortlet extends MVCPortlet {
 
 	@Override
 	public void render(RenderRequest renderRequest, RenderResponse renderResponse) throws PortletException, IOException {
-
-		try {
-			User user = UserServiceUtil.getCurrentUser();
-			ExpandoTable eTable = ExpandoTableLocalServiceUtil.getDefaultTable(PortalUtil.getDefaultCompanyId(), User.class.getName());
-			ExpandoColumn eColumn = ExpandoColumnLocalServiceUtil.getColumn(eTable.getTableId(), "digitalCertificate");
-			ExpandoValue expandoTable = ExpandoValueLocalServiceUtil.getValue(eTable.getTableId(), eColumn.getColumnId(), user.getUserId());
-			String digitalCertificateData = expandoTable.getData();
-			com.alibaba.fastjson.JSONObject digitalCertificate = com.alibaba.fastjson.JSONObject.parseObject(digitalCertificateData);
-			renderRequest.setAttribute("digitalCertificate", digitalCertificate);
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		
 		renderRequest.setAttribute("UUID", UUID.randomUUID().toString());
 		renderRequest.setAttribute("certSwitch", true);
 		PortletPreferences preferences = renderRequest.getPreferences();
