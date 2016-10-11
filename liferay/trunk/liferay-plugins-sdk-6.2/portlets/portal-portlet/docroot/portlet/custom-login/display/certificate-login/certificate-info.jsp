@@ -1,8 +1,26 @@
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
+<%@page import="com.liferay.portlet.expando.model.ExpandoColumn"%>
+<%@page import="com.liferay.portlet.expando.model.ExpandoTable"%>
+<%@page import="com.liferay.portlet.expando.model.ExpandoValue"%>
+<%@page import="com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil"%>
+<%@page import="com.liferay.portlet.expando.service.ExpandoTableLocalServiceUtil"%>
+<%@page import="com.liferay.portlet.expando.service.ExpandoValueLocalServiceUtil"%>
 <portlet:defineObjects />
-
+<%
+	try {
+		User user_ = UserServiceUtil.getCurrentUser();
+		ExpandoTable eTable = ExpandoTableLocalServiceUtil.getDefaultTable(PortalUtil.getDefaultCompanyId(), User.class.getName());
+		ExpandoColumn eColumn = ExpandoColumnLocalServiceUtil.getColumn(eTable.getTableId(), "digitalCertificate");
+		ExpandoValue expandoTable = ExpandoValueLocalServiceUtil.getValue(eTable.getTableId(), eColumn.getColumnId(), user_.getUserId());
+		String digitalCertificateData = expandoTable.getData();
+		com.alibaba.fastjson.JSONObject digitalCertificate = com.alibaba.fastjson.JSONObject.parseObject(digitalCertificateData);
+		renderRequest.setAttribute("digitalCertificate", digitalCertificate);
+	} catch (Exception e) {
+		// TODO: handle exception
+	}
+%>
 <liferay-ui:panel-container accordion="false" extended="true">
 	<liferay-ui:panel title="当前证书信息" collapsible="false">
 		<table cellpadding="0" cellspacing="0" class="table table-bordered">
