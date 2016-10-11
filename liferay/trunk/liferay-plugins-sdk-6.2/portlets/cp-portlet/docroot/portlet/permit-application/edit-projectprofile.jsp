@@ -29,6 +29,13 @@
 			request.setAttribute("jhjg", endDate);
 			
 		}
+		String pfhhzrq = "",pfrq= "" ;
+		if(null != projectProfile.getPfhhzrq()&&null != projectProfile.getPfrq()){
+			pfhhzrq = DateUtil.getDate(projectProfile.getPfhhzrq(), defaultDateFormatPattern, locale, timeZone);
+			pfrq = DateUtil.getDate(projectProfile.getPfrq(), defaultDateFormatPattern, locale, timeZone);
+			request.setAttribute("pfhhzrq", pfhhzrq);
+			request.setAttribute("pfrq", pfrq);
+		}
 		
 	} else {
 		if (Validator.isNotNull(bjbh)) {
@@ -317,37 +324,37 @@
 		<tr class="body">
 			<td class="text-right">主要设计单位</td>
 			<td class="bg-white" colspan="3"><aui:input name="zysjdw"
-					label="" type="text" style="width:50%" value="">
+					label="" type="text" style="width:50%" value="${projectProfile.zysjdw}">
 				</aui:input></td>
 		</tr>
 		<tr class="body">
 			<td class="text-right">招标方式</td>
 			<td class="bg-white"><aui:input name="sj_zbfs" label="" type="text"
-					style="width:50%" >
+					style="width:50%" value="${projectProfile.sj_zbfs}">
 				</aui:input></td>
 			<td class="text-right">中标价</td>
 			<td class="bg-white"><aui:input name="sj_zbj" label=""
-					type="text" style="width:50%" >
+					type="text" style="width:50%" value="${projectProfile.sj_zbj}">
 				</aui:input></td>
 		</tr>
 		<tr class="body">
 			<td class="text-right">资质等级</td>
 			<td class="bg-white"><aui:input name="sj_zzdj" label="" type="text"
-					style="width:50%" >
+					style="width:50%" value="${projectProfile.sj_zzdj}">
 				</aui:input></td>
 			<td class="text-right">资质等级证书编号</td>
 			<td class="bg-white"><aui:input name="sj_zzdjzsbh" label=""
-					type="text" style="width:50%" >
+					type="text" style="width:50%" value="${projectProfile.sj_zzdjzsbh}">
 				</aui:input></td>
 		</tr>
 		<tr class="body">
 			<td class="text-right">项目负责人</td>
 			<td class="bg-white"><aui:input name="sj_xmfzr" label="" type="text"
-					style="width:50%" >
+					style="width:50%" value="${projectProfile.sj_xmfzr}">
 				</aui:input></td>
 			<td class="text-right">项目负责人证书编号</td>
-			<td class="bg-white"><aui:input name="sj_zmfzrzsbh" label=""
-					type="text" style="width:50%" >
+			<td class="bg-white"><aui:input name="sj_xmfzrzsbh" label=""
+					type="text" style="width:50%" value="${projectProfile.sj_xmfzrzsbh}">
 				</aui:input></td>
 		</tr>
 		<tr class="body">
@@ -356,37 +363,37 @@
 		<tr class="body">
 			<td class="text-right">主要监理单位</td>
 			<td class="bg-white" colspan="3"><aui:input name="zyjldw"
-					label="" type="text" style="width:50%" value="">
+					label="" type="text" style="width:50%" value="${projectProfile.zyjldw}">
 				</aui:input></td>
 		</tr>
 		<tr class="body">
 			<td class="text-right">招标方式</td>
 			<td class="bg-white"><aui:input name="jl_zbfs" label="" type="text"
-					style="width:50%" >
+					style="width:50%" value="${projectProfile.jl_zbfs}">
 				</aui:input></td>
 			<td class="text-right">中标价</td>
 			<td class="bg-white"><aui:input name="jl_zbj" label=""
-					type="text" style="width:50%" >
+					type="text" style="width:50%" value="${projectProfile.jl_zbj}">
 				</aui:input></td>
 		</tr>
 		<tr class="body">
 			<td class="text-right">资质等级</td>
 			<td class="bg-white"><aui:input name="jl_zzdj" label="" type="text"
-					style="width:50%" >
+					style="width:50%" value="${projectProfile.jl_zzdj}">
 				</aui:input></td>
 			<td class="text-right">资质等级证书编号</td>
 			<td class="bg-white"><aui:input name="jl_zzdjzsbh" label=""
-					type="text" style="width:50%" >
+					type="text" style="width:50%" value="${projectProfile.jl_zzdjzsbh }">
 				</aui:input></td>
 		</tr>
 		<tr class="body">
 			<td class="text-right">总监</td>
 			<td class="bg-white"><aui:input name="jl_zj" label="" type="text"
-					style="width:50%" >
+					style="width:50%" value="${projectProfile.jl_zj}">
 				</aui:input></td>
 			<td class="text-right">总监证书编号</td>
 			<td class="bg-white"><aui:input name="jl_zjzsbh" label=""
-					type="text" style="width:50%" >
+					type="text" style="width:50%" value="${projectProfile.jl_zjzsbh}">
 				</aui:input></td>
 		</tr>
 		<tr class="body">
@@ -395,37 +402,37 @@
 		<tr class="body">
 			<td class="text-right">主要施工单位</td>
 			<td class="bg-white" colspan="3"><aui:input name="zysgdw" 
-					label="" type="text" style="width:50%" value="">
+					label="" type="text" style="width:50%" value="${projectProfile.zysgdw}">
 				</aui:input></td>
 		</tr>
 		<tr class="body">
 			<td class="text-right">招标方式</td>
 			<td class="bg-white"><aui:input name="sg_zbfs" label="" type="text"
-					style="width:50%" >
+					style="width:50%" value="${projectProfile.sg_zbfs}">
 				</aui:input></td>
 			<td class="text-right">中标价</td>
 			<td class="bg-white"><aui:input name="sg_zbj" label=""
-					type="text" style="width:50%" >
+					type="text" style="width:50%" value="${projectProfile.sg_zbj}">
 				</aui:input></td>
 		</tr>
 		<tr class="body">
 			<td class="text-right">资质等级</td>
 			<td class="bg-white"><aui:input name="sg_zzdj" label="" type="text"
-					style="width:50%" >
+					style="width:50%" value="${projectProfile.sg_zzdj }">
 				</aui:input></td>
 			<td class="text-right">资质等级证书编号</td>
 			<td class="bg-white"><aui:input name="sg_zzdjzsbh" label=""
-					type="text" style="width:50%" >
+					type="text" style="width:50%" value="${projectProfile.sg_zzdjzsbh}">
 				</aui:input></td>
 		</tr>
 		<tr class="body">
 			<td class="text-right">项目经理</td>
 			<td class="bg-white"><aui:input name="sg_xmjl" label="" type="text"
-					style="width:50%" >
+					style="width:50%" value="${projectProfile.sg_xmjl }">
 				</aui:input></td>
 			<td class="text-right">项目经理证书编号</td>
 			<td class="bg-white"><aui:input name="sg_xmjlzsbh" label=""
-					type="text" style="width:50%" >
+					type="text" style="width:50%" value="${projectProfile.sg_xmjlzsbh }">
 				</aui:input></td>
 		</tr>
 		<tr class="body">
@@ -434,82 +441,92 @@
 		<tr class="body">
 			<td class="text-right">工可批准或核准机关和文号</td>
 			<td class="bg-white" colspan="3"><aui:input name="gkpzhhzjghwh" 
-					label="" type="text" style="width:50%" value="">
+					label="" type="text" style="width:50%" value="${projectProfile.gkpzhhzjghwh }">
 				</aui:input></td>
 		</tr>
 		<tr class="body">
 			<td class="text-right">批复或核准日期</td>
-			<td class="bg-white"><aui:input name="pfhhzrq" label="" type="text"
-					style="width:50%" >
-				</aui:input></td>
-			<td class="text-right">投资估算</td>
-			<td class="bg-white"><aui:input name="xmtzgs" label=""
-					type="text" style="width:50%" >
-				</aui:input></td>
+			<td class="bg-white" colspan="3"><input name="<portlet:namespace/>pfhhzrq" label="" type="text" class="Wdate"
+				onfocus="WdatePicker()"	style="width:50%" value="${pfhhzrq }"/></td>
 		</tr>
 		<tr class="body">
 			<td class="text-right">初步设计批准机关和文号</td>
 			<td class="bg-white" colspan="3"><aui:input name="cbsjpzjghwh" 
-					label="" type="text" style="width:50%" value="">
+					label="" type="text" style="width:50%" value="${projectProfile.cbsjpzjghwh}">
 				</aui:input></td>
 		</tr>
 		<tr class="body">
 			<td class="text-right">批复日期</td>
-			<td class="bg-white"><aui:input name="pfrq" label="" type="text"
-					style="width:50%" >
-				</aui:input></td>
-			<td class="text-right">批复工期</td>
+			<td class="bg-white"><input name="<portlet:namespace/>pfrq" label="" type="text" class="Wdate"
+					onfocus="WdatePicker()" style="width:50%" value="${pfrq}"/></td>
+			<td class="text-right">批复工期(天)</td>
 			<td class="bg-white"><aui:input name="pfgq" label=""
-					type="text" style="width:50%" >
+					type="number" style="width:50%" value="${projectProfile.pfgq}">
 				</aui:input></td>
 		</tr>
 		<tr class="body">
 			<td class="text-right">主体工程施工图审批批准机关和文号</td>
 			<td class="bg-white" colspan="3"><aui:input name="pzjghwh" 
-					label="" type="text" style="width:50%" value="">
+					label="" type="text" style="width:50%" value="${projectProfile.pzjghwh}">
 				</aui:input></td>
 		</tr>
 		<tr class="body">
 			<td class="text-right">投资来源</td>
 			<td class="bg-white" colspan="3"><aui:input name="tzly" 
-					label="" type="text" style="width:50%" value="">
+					label="" type="text" style="width:50%" value="${projectProfile.tzly}">
 				</aui:input></td>
 		</tr>
 		<tr class="body">
 			<td class="text-right">建设资金计划落实情况 </td>
 			<td class="bg-white" colspan="3"><aui:input name="jszjjhlsqk" 
-					label="" type="text" style="width:50%" value="">
+					label="" type="text" style="width:50%" value="${projectProfile.jszjjhlsqk}">
 				</aui:input></td>
 		</tr>
 		<tr class="body">
 			<td class="text-right">动、拆迁完成情况 </td>
 			<td class="bg-white" colspan="3"><aui:input name="dcqwcqk" 
-					label="" type="text" style="width:50%" value="">
+					label="" type="text" style="width:50%" value="${projectProfile.dcqwcqk}">
 				</aui:input></td>
 		</tr>
 		<tr class="body">
 			<td class="text-right">施工准备情况 </td>
 			<td class="bg-white" colspan="3"><aui:input name="sgzbqk" 
-					label="" type="text" style="width:50%" value="">
+					label="" type="text" style="width:50%" value="${projectProfile.sgzbqk}">
 				</aui:input></td>
 		</tr>
 		<tr class="body">
 			<td class="text-right">使用土地等相关文件 </td>
 			<td class="bg-white" colspan="3"><aui:input name="sytdxgwj" 
-					label="" type="text" style="width:50%" value="">
+					label="" type="text" style="width:50%" value="${projectProfile.sytdxgwj}">
 				</aui:input></td>
 		</tr>
 		<tr class="body">
 			<td class="text-right">工程质量（施工安全）监督登记情况 </td>
 			<td class="bg-white" colspan="3"><aui:input name="gczljddjqk" 
-					label="" type="text" style="width:50%" value="">
+					label="" type="text" style="width:50%" value="${projectProfile.gczljddjqk}">
+				</aui:input></td>
+		</tr>
+		<tr class="body">
+			<td class="text-right">项目单位</td>
+			<td class="bg-white" colspan="3"><aui:input name="xmdw"
+					label="" type="text" style="width:50%" value="${projectProfile.xmdw}">
+				</aui:input></td>
+		</tr>
+		<tr class="body">
+			<td class="text-right">项目单位负责人</td>
+			<td class="bg-white"><aui:input name="xmfzr" label="" type="text"
+					style="width:50%" value="${projectProfile.xmfzr}">
+				</aui:input></td>
+			<td class="text-right">项目负责人联系电话</td>
+			<td class="bg-white"><aui:input name="xmfzrlxdh" label="" id="xmfzrlxdh"
+					type="text" style="width:50%" value="${projectProfile.xmfzrlxdh}">
 				</aui:input></td>
 		</tr>
 		</tbody>
 		<tr class="body">
 			<td class="text-right">备注</td>
 			<td class="bg-white" colspan="3"><aui:input name="sgxkzsbz" id="sgxkzsbz"
-					label="" type="text" style="width:50%" value="">
+					label="" type="text" style="width:50%" value="${projectProfile.sgxkzsbz}">
 				</aui:input>最多可以再输入<span id="contentCounterBz" style="color: red"></span>个汉字</td>
 		</tr>
 	<tr class="body">
@@ -588,6 +605,12 @@ var counterVariable = new A.CharCounter({
 </aui:script>
 
 <script>
+$(document).ready(function(){
+	if($("#<portlet:namespace/>xmlx").val()==29741){
+		document.getElementById("hd").style.display = "";
+	}
+})
+
 function change(){
 	if($("#<portlet:namespace/>xmlx").val()==29741){
 		document.getElementById("hd").style.display = "";
@@ -611,14 +634,22 @@ function showYzzpl(obj) {
  */
 function checkInputMobilesNormal() {
     var mobiles = $("#<portlet:namespace />jsdwsjh").val();
+    var xmfzrlxdh = $("#<portlat:namespace/>xmfzrlxdh").val();
     var reg = /^1[3|4|5|7|8][0-9]\d{8}$/;
-    if (mobiles != null && mobiles != "") {
+    if ((mobiles != null && mobiles != "")||(xmfzrlxdh != null && xmfzrlxdh != "")) {
         if (mobiles.indexOf(",") == -1) {
             if (!reg.test(mobiles)) {
                 alert('“' + mobiles + '”是无效的手机号码！');
                 focusInput($("#<portlet:namespace />jsdwsjh"));
                 return false;
             }
+        if (xmfzrlxdh.indexOf(",") == -1) {
+             if (!reg.test(xmfzrlxdh)) {
+                    alert('“' + xmfzrlxdh + '”是无效的手机号码！');
+                    focusInput($("#<portlet:namespace />xmfzrlxdh"));
+                return false;
+            }  
+        }
         } else {
             var arr = mobiles.split(",");
             var length = arr.length;
@@ -631,7 +662,7 @@ function checkInputMobilesNormal() {
             }
         }
     }
-    if(mobiles==""){
+    if(mobiles==""||xmfzrlxdh==""){ 
     	 alert('手机号不能为空！');
          focusInput($("#<portlet:namespace />jsdwsjh"));
     	return false;
