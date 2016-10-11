@@ -56,7 +56,7 @@ public class PermitApplicationWorkflowHandler extends BaseWorkflowHandler {
         	if(status==2){
         		permit.setYwbh(updateYwbh(resourcePrimKey));
         	}
-        	if(status==18){
+        	if(status==14||status==15){
         		permit.setSgxkzbh(provideSgxkzbh(resourcePrimKey));
         	}
         }

@@ -20,7 +20,7 @@ public enum CityPermitStatus {
     STATUS_JSC_XK(14, "建设处许可", "green", "jscsh_xk"),
     STATUS_JSC_BXK(15, "建设处不许可", "red", "jscsh_bxk"),
     STATUS_JSC_BACK(16, "建设处审核退回", "red", "jscsh_back"),
-    STATUS_JSC_SLTH(17, "建设处受理退回", "red", "jscsh_slth"),
+    STATUS_SJ_BACK(17, "收件退回", "red", "slzx_back"),
     STATUS_WLD_PASS(18, "委领导许可", "green", "wldsh_pass"),
     STATUS_WLD_BACK(19, "委领导不许可", "red", "wldsh_back");
 

@@ -18,15 +18,6 @@ public class SendMessage {
 		if (status == CityPermitStatus.STATUS_SB.getCode()) {
 			content += commonContent + "申请已提交，请进行初审。";
 		}
-//		if (status == CityPermitStatus.STATUS_YS_PASS.getCode()) {
-//			content += commonContent + "已通过预审，请将纸质材料送至行政服务中心。";
-//		}
-//		if (status == CityPermitStatus.STATUS_YS_BACK.getCode()) {
-//			content += commonContent + "未通过预审，请在系统中修改后提交。";
-//		}
-//		if (status == CityPermitStatus.STATUS_SJ_PASS.getCode()) {// 无未通过
-//			content += commonContent + "收件已完成，请进行初审。";
-//		}
 		if (status == CityPermitStatus.STATUS_CS_PASS.getCode()) {
 			content += commonContent + "初审已完成，请进行复核。";
 		}
@@ -66,10 +57,10 @@ public class SendMessage {
 			content += commonContent + "委建设处审查已完成，请委领导进行审查。";
 		}
 		if (status == CityPermitStatus.STATUS_JSC_BACK.getCode()) {
-			content += commonContent + "委建设处未通过审查，请中心领导进行审查。";
-		}
-		if (status == CityPermitStatus.STATUS_JSC_SLTH.getCode()) {
 			content += commonContent + "书面材料不全，请联系申报人补正材料。";
+		}
+		if (status == CityPermitStatus.STATUS_SJ_BACK.getCode()) {
+			content += commonContent + "未通过审核，请在系统中修改后提交。";
 		}
 		if (status == CityPermitStatus.STATUS_WLD_PASS.getCode()) {
 			if(type.equals("JSDW")){
