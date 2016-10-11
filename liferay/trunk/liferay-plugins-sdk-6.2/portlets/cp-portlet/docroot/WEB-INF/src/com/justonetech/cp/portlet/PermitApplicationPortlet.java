@@ -397,7 +397,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		projectProfile.setZysjdw(zysjdw);
 		projectProfile.setSj_zbfs(sj_zbfs);
 		projectProfile.setSj_zbj(sj_zbj);
-		projectProfile.setSj_zzdj(sj_zzdjzsbh);
+		projectProfile.setSj_zzdj(sj_zzdj);
 		projectProfile.setSj_zzdjzsbh(sj_zzdjzsbh);
 		projectProfile.setSj_xmfzr(sj_xmfzr);
 		projectProfile.setSj_xmfzrzsbh(sj_xmfzrzsbh);
@@ -406,7 +406,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		projectProfile.setJl_zbj(jl_zbj);
 		projectProfile.setJl_zzdj(jl_zzdj);
 		projectProfile.setJl_zzdjzsbh(jl_zzdjzsbh);
-		projectProfile.setJl_zj(jl_zjzsbh);
+		projectProfile.setJl_zj(jl_zj);
 		projectProfile.setJl_zjzsbh(jl_zjzsbh);
 		projectProfile.setZysgdw(zysgdw);
 		projectProfile.setSg_zbfs(sg_zbfs);
@@ -688,67 +688,60 @@ public class PermitApplicationPortlet extends MVCPortlet {
 	}
 	
 	public Map<String, String> getKgbaMap(long permitId) throws PortalException, SystemException {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		Map<String, String> map = new HashMap<String, String>();
 		Permit permit =PermitLocalServiceUtil.getPermit(permitId);
 		ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
 		String babh = permit.getSgxkzbh();
 		String xmmc = projectProfile.getGcmc();
 		String jsdd = projectProfile.getJsdd();
-		String tzly = "";
-		String gkpzwh = "";
-		String hzrq = "";
+		String tzly = projectProfile.getTzly();
+		String gkpzwh = projectProfile.getGkpzhhzjghwh();
+		Date pfhhzrqDate = projectProfile.getPfhhzrq();
+		String pfhhzrq = sdf.format(pfhhzrqDate);
+		String hzrq = pfhhzrq.substring(0, 4) + "年" + pfhhzrq.substring(4, 6) + "月" + pfhhzrq.substring(6, 8) + "日";
 		String tzgs = projectProfile.getXmtzgs();
-		String cbpzwh = "";
-		String pfrq = "";
-		String pfgq = "";
-		String jsgm = projectProfile.getJsgcgm();
-		String pzjghwh = "";
-		String xmdw = "";
-		String xmdwfzr = "";
-		String xmdwfzrlxdh = "";
-		String sjdw = "";
-		String jldw = "";
-		String sgdw = "";
-		List<ParticipationUnit> participationUnits = ParticipationUnitLocalServiceUtil.findByPermitId(permitId, -1, -1);
-		for (ParticipationUnit participationUnit : participationUnits) {
-			if (participationUnit.getDwlx().equals("设计单位")) {
-				sjdw = participationUnit.getDwmc();
-			}
-			if (participationUnit.getDwlx().equals("监理单位")) {
-				jldw = participationUnit.getDwmc();
-			}
-			if (participationUnit.getDwlx().equals("施工单位")) {
-				sgdw = participationUnit.getDwmc();
-			}
-		} 
-		String sjdwzbfs = "";
-		String sjdwzbj = "";
-		String sjdwzzdj = "";
-		String sjdwzzdjzs = "";
-		String sjdwxmfzr = "";
-		String sjdwxmfzrzs = "";
+		String cbpzwh = projectProfile.getCbsjpzjghwh();
+		Date pfrqDate = projectProfile.getPfrq();
+		String pfrqStr = sdf.format(pfrqDate);
+		String pfrq = pfrqStr.substring(0, 4) + "年" + pfrqStr.substring(4, 6) + "月" + pfrqStr.substring(6, 8) + "日";
+		String pfgq = projectProfile.getPfgq()+"天";
+		String jsgm = projectProfile.getJsgcgm()+"。"+projectProfile.getGcnr();
+		String pzjghwh = projectProfile.getPzjghwh();
+		String xmdw = projectProfile.getXmdw();
+		String xmdwfzr = projectProfile.getXmfzr();
+		String xmdwfzrlxdh = projectProfile.getXmfzrlxdh();
+		String sjdw = projectProfile.getZyjldw();
+		String sjdwzbfs = projectProfile.getSj_zbfs();
+		String sjdwzbj = projectProfile.getSj_zbj();
+		String sjdwzzdj = projectProfile.getSj_zzdj();
+		String sjdwzzdjzs = projectProfile.getSj_zzdjzsbh();
+		String sjdwxmfzr = projectProfile.getSj_xmfzr();
+		String sjdwxmfzrzs = projectProfile.getSj_xmfzrzsbh();
 		
-		String jldwzbfs = "";
-		String jldwzbj = "";
-		String jldwzzdj = "";
-		String jldwzzdjzs = "";
-		String jldwzj = "";
-		String jldwzjzs = "";
+		String jldw = projectProfile.getZyjldw();
+		String jldwzbfs = projectProfile.getJl_zbfs();
+		String jldwzbj = projectProfile.getJl_zbj();
+		String jldwzzdj = projectProfile.getJl_zzdj();
+		String jldwzzdjzs = projectProfile.getJl_zzdjzsbh();
+		String jldwzj = projectProfile .getJl_zj();
+		String jldwzjzs = projectProfile.getJl_zjzsbh();
 		
-		String sgdwzbfs = "";
-		String sgdwzbj = "";
-		String sgdwzzdj = "";
-		String sgdwzzdjzs = "";
-		String sgdwxmjl = "";
-		String sgdwxmjlzs = "";  	
+		String sgdw = projectProfile.getZysgdw();
+		String sgdwzbfs = projectProfile.getSg_zbfs();
+		String sgdwzbj = projectProfile.getSg_zbj();
+		String sgdwzzdj = projectProfile.getSg_zzdj();
+		String sgdwzzdjzs = projectProfile.getSg_zzdjzsbh();
+		String sgdwxmjl = projectProfile.getSg_xmjl();
+		String sgdwxmjlzs = projectProfile.getSg_xmjlzsbh();  	
 		
-		String jszjjh = "";
-		String dcqwcqk = "";
-		String sgzbqk = "";
-		String xgwj = "";
-		String gczljd = "";
+		String jszjjh = projectProfile.getJszjjhlsqk();
+		String dcqwcqk = projectProfile.getDcqwcqk();
+		String sgzbqk = projectProfile.getSgzbqk();
+		String xgwj = projectProfile.getSytdxgwj();
+		String gczljd = projectProfile.getGczljddjqk();
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		
 		String jhkgrq = sdf.format(projectProfile.getJhkg());
 		String jhjgrq = sdf.format(projectProfile.getJhjg());
 		String jhkg = jhkgrq.substring(0, 4) + "年" + jhkgrq.substring(4, 6) + "月" + jhkgrq.substring(6, 8) + "日";
