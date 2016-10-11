@@ -19,6 +19,7 @@ tr.body td.content {
 	long permitId = ParamUtil.getLong(request, "permitId");
 	Permit permit = PermitLocalServiceUtil.getPermit(permitId);
 	ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
+	String xmlx =  DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx()).getName();
 	String jsddssqx = projectProfile.getJsddssqx() == 0 ? null : DictionaryLocalServiceUtil.getDictionary(
 			projectProfile.getJsddssqx()).getName();
 	Dictionary jsgclb = DictionaryLocalServiceUtil.findByCode("jsgclb");
@@ -28,10 +29,13 @@ tr.body td.content {
 	request.setAttribute("projectProfile", projectProfile);
 	request.setAttribute("jsddssqx", jsddssqx);
 	request.setAttribute("jsgclbs", jsgclbs);
+	request.setAttribute("xmlx", xmlx);
 %>
 <table class="table table-bordered">
+	
 	<tr class="body">
-		<td class="title">项目类型</td>
+		
+		<td class="title">项目类型<input name="xmlx" id="xmlx" type="hidden" value="${xmlx}"/></td>
 		<td class="content"><%=DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx()).getName()%></td>
 		<td class="title">立项级别</td>
 		<td class="content">${projectProfile.lxjb}</td>
@@ -138,10 +142,10 @@ tr.body td.content {
 	</tr>
 	<tr class="body">
 		<td class="title">计划开工</td>
-		<td class="content"><fmt:formatDate value="${project.jhkg}"
+		<td class="content"><fmt:formatDate value="${projectProfile.jhkg}"
 				pattern="yyyy-MM-dd" /></td>
 		<td class="title">计划竣工</td>
-		<td class="content"><fmt:formatDate value="${project.jhjg}"
+		<td class="content"><fmt:formatDate value="${projectProfile.jhjg}"
 				pattern="yyyy-MM-dd" /></td>
 	</tr>
 	<tbody style="display: none" id="hd">
@@ -229,7 +233,8 @@ tr.body td.content {
 		</tr>
 		<tr class="body">
 			<td class="text-right">批复或核准日期</td>
-			<td class="bg-white" colspan="3">${pfhhzrq}</td>
+			<td class="bg-white" colspan="3"><fmt:formatDate value="${projectProfile.pfhhzrq}"
+				pattern="yyyy-MM-dd" /></td>
 		</tr>
 		<tr class="body">
 			<td class="text-right">初步设计批准机关和文号</td>
@@ -237,7 +242,8 @@ tr.body td.content {
 		</tr>
 		<tr class="body">
 			<td class="text-right">批复日期</td>
-			<td class="bg-white">${pfrq}</td>
+			<td class="bg-white"><fmt:formatDate value="${projectProfile.pfrq}"
+				pattern="yyyy-MM-dd" /></td>
 			<td class="text-right">批复工期(天)</td>
 			<td class="bg-white">${projectProfile.pfgq}</td>
 		</tr>
@@ -291,3 +297,12 @@ tr.body td.content {
 		</td>
 	</tr>
 </table>
+
+<script>
+$(document).ready(function(){
+	var xmlx = $("#xmlx").val();
+	if(xmlx=="航道"){
+		document.getElementById("hd").style.display = "";
+	} 
+})
+</script>
