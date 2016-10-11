@@ -125,7 +125,7 @@
 		<column name="sj_zzdj" type="String" /><!--主要设计单位_资质等级 -->
 		<column name="sj_zzdjzsbh" type="String" /><!--主要设计单位_资质等级证书编号 -->
 		<column name="sj_xmfzr" type="String" /><!--主要设计单位_项目负责人 -->
-		<column name="sj_zmfzrzsbh" type="String" /><!--主要设计单位_项目负责人证书编号 -->
+		<column name="sj_xmfzrzsbh" type="String" /><!--主要设计单位_项目负责人证书编号 -->
 		<column name="zyjldw" type="String" /><!--主要监理单位 -->
 		<column name="jl_zbfs" type="String" /><!--主要监理单位_招标方式 -->
 		<column name="jl_zbj" type="String" /><!--主要监理单位_中标价 -->

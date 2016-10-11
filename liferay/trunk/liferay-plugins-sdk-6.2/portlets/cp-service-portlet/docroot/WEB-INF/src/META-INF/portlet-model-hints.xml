@@ -428,7 +428,7 @@
 		<field name="sj_zzdj" type="String" />
 		<field name="sj_zzdjzsbh" type="String" />
 		<field name="sj_xmfzr" type="String" />
-		<field name="sj_zmfzrzsbh" type="String" />
+		<field name="sj_xmfzrzsbh" type="String" />
 		<field name="zyjldw" type="String">
 			<hint name="max-length">300</hint>
 		</field>

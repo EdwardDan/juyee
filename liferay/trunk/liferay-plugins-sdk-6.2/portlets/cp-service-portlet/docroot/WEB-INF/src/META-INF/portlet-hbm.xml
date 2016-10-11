@@ -382,7 +382,7 @@
 		<property name="sj_zzdj" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="sj_zzdjzsbh" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="sj_xmfzr" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="sj_zmfzrzsbh" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="sj_xmfzrzsbh" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="zyjldw" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="jl_zbfs" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="jl_zbj" type="com.liferay.portal.dao.orm.hibernate.StringType" />

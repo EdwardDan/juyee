@@ -410,7 +410,7 @@ create table cp_ProjectProfile (
 	sj_zzdj VARCHAR(75) null,
 	sj_zzdjzsbh VARCHAR(75) null,
 	sj_xmfzr VARCHAR(75) null,
-	sj_zmfzrzsbh VARCHAR(75) null,
+	sj_xmfzrzsbh VARCHAR(75) null,
 	zyjldw VARCHAR(300) null,
 	jl_zbfs VARCHAR(75) null,
 	jl_zbj VARCHAR(75) null,

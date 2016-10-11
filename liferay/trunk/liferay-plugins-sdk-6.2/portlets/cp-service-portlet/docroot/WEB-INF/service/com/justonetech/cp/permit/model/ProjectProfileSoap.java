@@ -84,7 +84,7 @@ public class ProjectProfileSoap implements Serializable {
 		soapModel.setSj_zzdj(model.getSj_zzdj());
 		soapModel.setSj_zzdjzsbh(model.getSj_zzdjzsbh());
 		soapModel.setSj_xmfzr(model.getSj_xmfzr());
-		soapModel.setSj_zmfzrzsbh(model.getSj_zmfzrzsbh());
+		soapModel.setSj_xmfzrzsbh(model.getSj_xmfzrzsbh());
 		soapModel.setZyjldw(model.getZyjldw());
 		soapModel.setJl_zbfs(model.getJl_zbfs());
 		soapModel.setJl_zbj(model.getJl_zbj());
@@ -592,12 +592,12 @@ public class ProjectProfileSoap implements Serializable {
 		_sj_xmfzr = sj_xmfzr;
 	}
 
-	public String getSj_zmfzrzsbh() {
-		return _sj_zmfzrzsbh;
+	public String getSj_xmfzrzsbh() {
+		return _sj_xmfzrzsbh;
 	}
 
-	public void setSj_zmfzrzsbh(String sj_zmfzrzsbh) {
-		_sj_zmfzrzsbh = sj_zmfzrzsbh;
+	public void setSj_xmfzrzsbh(String sj_xmfzrzsbh) {
+		_sj_xmfzrzsbh = sj_xmfzrzsbh;
 	}
 
 	public String getZyjldw() {
@@ -806,7 +806,7 @@ public class ProjectProfileSoap implements Serializable {
 	private String _sj_zzdj;
 	private String _sj_zzdjzsbh;
 	private String _sj_xmfzr;
-	private String _sj_zmfzrzsbh;
+	private String _sj_xmfzrzsbh;
 	private String _zyjldw;
 	private String _jl_zbfs;
 	private String _jl_zbj;

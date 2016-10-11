@@ -864,19 +864,19 @@ public interface ProjectProfileModel extends BaseModel<ProjectProfile> {
 	public void setSj_xmfzr(String sj_xmfzr);
 
 	/**
-	 * Returns the sj_zmfzrzsbh of this project profile.
+	 * Returns the sj_xmfzrzsbh of this project profile.
 	 *
-	 * @return the sj_zmfzrzsbh of this project profile
+	 * @return the sj_xmfzrzsbh of this project profile
 	 */
 	@AutoEscape
-	public String getSj_zmfzrzsbh();
+	public String getSj_xmfzrzsbh();
 
 	/**
-	 * Sets the sj_zmfzrzsbh of this project profile.
+	 * Sets the sj_xmfzrzsbh of this project profile.
 	 *
-	 * @param sj_zmfzrzsbh the sj_zmfzrzsbh of this project profile
+	 * @param sj_xmfzrzsbh the sj_xmfzrzsbh of this project profile
 	 */
-	public void setSj_zmfzrzsbh(String sj_zmfzrzsbh);
+	public void setSj_xmfzrzsbh(String sj_xmfzrzsbh);
 
 	/**
 	 * Returns the zyjldw of this project profile.

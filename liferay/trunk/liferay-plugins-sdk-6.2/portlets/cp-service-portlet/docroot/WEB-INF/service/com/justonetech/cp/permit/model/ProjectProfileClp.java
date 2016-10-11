@@ -128,7 +128,7 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 		attributes.put("sj_zzdj", getSj_zzdj());
 		attributes.put("sj_zzdjzsbh", getSj_zzdjzsbh());
 		attributes.put("sj_xmfzr", getSj_xmfzr());
-		attributes.put("sj_zmfzrzsbh", getSj_zmfzrzsbh());
+		attributes.put("sj_xmfzrzsbh", getSj_xmfzrzsbh());
 		attributes.put("zyjldw", getZyjldw());
 		attributes.put("jl_zbfs", getJl_zbfs());
 		attributes.put("jl_zbj", getJl_zbj());
@@ -478,10 +478,10 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 			setSj_xmfzr(sj_xmfzr);
 		}
 
-		String sj_zmfzrzsbh = (String)attributes.get("sj_zmfzrzsbh");
+		String sj_xmfzrzsbh = (String)attributes.get("sj_xmfzrzsbh");
 
-		if (sj_zmfzrzsbh != null) {
-			setSj_zmfzrzsbh(sj_zmfzrzsbh);
+		if (sj_xmfzrzsbh != null) {
+			setSj_xmfzrzsbh(sj_xmfzrzsbh);
 		}
 
 		String zyjldw = (String)attributes.get("zyjldw");
@@ -1847,21 +1847,21 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 	}
 
 	@Override
-	public String getSj_zmfzrzsbh() {
-		return _sj_zmfzrzsbh;
+	public String getSj_xmfzrzsbh() {
+		return _sj_xmfzrzsbh;
 	}
 
 	@Override
-	public void setSj_zmfzrzsbh(String sj_zmfzrzsbh) {
-		_sj_zmfzrzsbh = sj_zmfzrzsbh;
+	public void setSj_xmfzrzsbh(String sj_xmfzrzsbh) {
+		_sj_xmfzrzsbh = sj_xmfzrzsbh;
 
 		if (_projectProfileRemoteModel != null) {
 			try {
 				Class<?> clazz = _projectProfileRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setSj_zmfzrzsbh", String.class);
+				Method method = clazz.getMethod("setSj_xmfzrzsbh", String.class);
 
-				method.invoke(_projectProfileRemoteModel, sj_zmfzrzsbh);
+				method.invoke(_projectProfileRemoteModel, sj_xmfzrzsbh);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -2431,7 +2431,7 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 		clone.setSj_zzdj(getSj_zzdj());
 		clone.setSj_zzdjzsbh(getSj_zzdjzsbh());
 		clone.setSj_xmfzr(getSj_xmfzr());
-		clone.setSj_zmfzrzsbh(getSj_zmfzrzsbh());
+		clone.setSj_xmfzrzsbh(getSj_xmfzrzsbh());
 		clone.setZyjldw(getZyjldw());
 		clone.setJl_zbfs(getJl_zbfs());
 		clone.setJl_zbj(getJl_zbj());
@@ -2613,8 +2613,8 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 		sb.append(getSj_zzdjzsbh());
 		sb.append(", sj_xmfzr=");
 		sb.append(getSj_xmfzr());
-		sb.append(", sj_zmfzrzsbh=");
-		sb.append(getSj_zmfzrzsbh());
+		sb.append(", sj_xmfzrzsbh=");
+		sb.append(getSj_xmfzrzsbh());
 		sb.append(", zyjldw=");
 		sb.append(getZyjldw());
 		sb.append(", jl_zbfs=");
@@ -2883,8 +2883,8 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 		sb.append(getSj_xmfzr());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>sj_zmfzrzsbh</column-name><column-value><![CDATA[");
-		sb.append(getSj_zmfzrzsbh());
+			"<column><column-name>sj_xmfzrzsbh</column-name><column-value><![CDATA[");
+		sb.append(getSj_xmfzrzsbh());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>zyjldw</column-name><column-value><![CDATA[");
@@ -3022,7 +3022,7 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 	private String _sj_zzdj;
 	private String _sj_zzdjzsbh;
 	private String _sj_xmfzr;
-	private String _sj_zmfzrzsbh;
+	private String _sj_xmfzrzsbh;
 	private String _zyjldw;
 	private String _jl_zbfs;
 	private String _jl_zbj;

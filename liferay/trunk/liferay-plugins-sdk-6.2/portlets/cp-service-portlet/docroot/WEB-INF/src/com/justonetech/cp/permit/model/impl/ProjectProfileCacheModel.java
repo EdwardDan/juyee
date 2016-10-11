@@ -148,8 +148,8 @@ public class ProjectProfileCacheModel implements CacheModel<ProjectProfile>,
 		sb.append(sj_zzdjzsbh);
 		sb.append(", sj_xmfzr=");
 		sb.append(sj_xmfzr);
-		sb.append(", sj_zmfzrzsbh=");
-		sb.append(sj_zmfzrzsbh);
+		sb.append(", sj_xmfzrzsbh=");
+		sb.append(sj_xmfzrzsbh);
 		sb.append(", zyjldw=");
 		sb.append(zyjldw);
 		sb.append(", jl_zbfs=");
@@ -535,11 +535,11 @@ public class ProjectProfileCacheModel implements CacheModel<ProjectProfile>,
 			projectProfileImpl.setSj_xmfzr(sj_xmfzr);
 		}
 
-		if (sj_zmfzrzsbh == null) {
-			projectProfileImpl.setSj_zmfzrzsbh(StringPool.BLANK);
+		if (sj_xmfzrzsbh == null) {
+			projectProfileImpl.setSj_xmfzrzsbh(StringPool.BLANK);
 		}
 		else {
-			projectProfileImpl.setSj_zmfzrzsbh(sj_zmfzrzsbh);
+			projectProfileImpl.setSj_xmfzrzsbh(sj_xmfzrzsbh);
 		}
 
 		if (zyjldw == null) {
@@ -736,7 +736,7 @@ public class ProjectProfileCacheModel implements CacheModel<ProjectProfile>,
 		sj_zzdj = objectInput.readUTF();
 		sj_zzdjzsbh = objectInput.readUTF();
 		sj_xmfzr = objectInput.readUTF();
-		sj_zmfzrzsbh = objectInput.readUTF();
+		sj_xmfzrzsbh = objectInput.readUTF();
 		zyjldw = objectInput.readUTF();
 		jl_zbfs = objectInput.readUTF();
 		jl_zbj = objectInput.readUTF();
@@ -1071,11 +1071,11 @@ public class ProjectProfileCacheModel implements CacheModel<ProjectProfile>,
 			objectOutput.writeUTF(sj_xmfzr);
 		}
 
-		if (sj_zmfzrzsbh == null) {
+		if (sj_xmfzrzsbh == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(sj_zmfzrzsbh);
+			objectOutput.writeUTF(sj_xmfzrzsbh);
 		}
 
 		if (zyjldw == null) {
@@ -1266,7 +1266,7 @@ public class ProjectProfileCacheModel implements CacheModel<ProjectProfile>,
 	public String sj_zzdj;
 	public String sj_zzdjzsbh;
 	public String sj_xmfzr;
-	public String sj_zmfzrzsbh;
+	public String sj_xmfzrzsbh;
 	public String zyjldw;
 	public String jl_zbfs;
 	public String jl_zbj;
