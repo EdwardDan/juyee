@@ -10,14 +10,14 @@
 	<title>${the_title} - ${company_name}</title>
 	${theme.include(top_head_include)}
 	<link rel="stylesheet" href="${ace_folder}/css/ace-custom.css" />
-	<script src="${jquery_folder}/jquery-1.12.4.min.js"></script>
+	<script src="${jquery_folder}/jquery-1.12.4.min.js" type="text/javascript"></script>
 	
 </head>
 
 <body class="navbar-fixed">
 	${theme.include(body_top_include)}
 	<div class="navbar navbar-fixed-top ace-navbar">
-	    <div class="navbar-inner">
+	    <div class="navbar-inner out-navbar-inner">
 				<a href="${site_default_url}" class="brand">
 					<img alt="${logo_description}" height="${site_logo_height}" src="${site_logo}" width="${site_logo_width}" />
 					<small>

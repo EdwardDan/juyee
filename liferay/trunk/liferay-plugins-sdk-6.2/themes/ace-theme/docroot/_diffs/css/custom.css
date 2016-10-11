@@ -782,9 +782,13 @@ input[type="radio"],input[type="checkbox"] {
 
 .aui .navbar .navbar-inner{
 	min-height: 0px !important;
-	min-width: 700px;
+	min-width: 750px;
 }
 
 .aui body{
 	min-width:1200px;
+}
+
+.out-navbar-inner{
+	min-width: 1200px !important;
 }
