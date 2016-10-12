@@ -15,6 +15,7 @@
 <%
 	long permitId =ParamUtil.getLong(renderRequest,"permitId");
 	Permit permit = PermitLocalServiceUtil.getPermit(permitId);
+	ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
 	request.setAttribute("permit", permit);
 	List<ApplyMaterial> materialList=ApplyMaterialLocalServiceUtil.findByPermitId(permitId, -1, -1);
 	Map<Long,List<DLFileEntry>> map=new HashMap<Long,List<DLFileEntry>>();
@@ -96,6 +97,7 @@
 			<th style="text-align: center; width: 5%;">序号</th>
 			<th style="text-align: center; width: 25%;">申请材料名称</th>
 			<th style="text-align: center; width: 30%;">附件</th>
+			<c:if test="<%=!projectProfile.getLxjb().equals(\"区县级机关或区县级单位\")%>">
 			<c:if test="${!(permit.status==2||permit.status==3||permit.status==5||permit.status==6||permit.status==10)}">
 				<th style="text-align: center; width: 15%;">建管中心补正材料查看</th>
 			</c:if>
@@ -127,7 +129,7 @@
 						alt=""> <span id="vfyl" class="hide-accessible tooltip-text">注:请上传jpg或pdf格式的文件，jpg格式文件大小不能超过2M,pdf格式文件不能超过20M,如果文件超过限定大小，请拆分后重新上传！</span>
 				</span></th>
 			</c:if>
-
+</c:if>
 		</thead>
 		<c:forEach items="<%=materialList%>" var="material" varStatus="status">
 			<tr style="text-align: center" class="fileTr">
@@ -158,7 +160,7 @@
 						</c:if>
 					</div>
 				</td>
-
+		<c:if test="<%=!projectProfile.getLxjb().equals(\"区县级机关或区县级单位\")%>">
 				<c:if test="${!(permit.status==2||permit.status==3||permit.status==5||permit.status==6||permit.status==10)}">
 					<td style="text-align: center">
 						<div class="${material.materialId}">
@@ -279,6 +281,7 @@
 						onchange="${namespace}fileWjscbzclUpLoad(${status.index+1},${material.materialId},'<%=portletDisplay.getId() %>');"></input>
 
 					</td>
+				</c:if>
 				</c:if>
 				
 			</tr>
