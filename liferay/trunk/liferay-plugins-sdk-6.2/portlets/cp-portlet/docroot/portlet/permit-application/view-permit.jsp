@@ -18,7 +18,7 @@
 			canView=true;
 		}
 	} else {
-		if (permitInit.getStatus() == 4 || permitInit.getStatus() == 6) {
+		if (permitInit.getStatus() == 4 || permitInit.getStatus() == 17) {
 			tabNames = "审核意见,工程概况,参建单位,单位工程,申请材料";
 			canView=true;
 		}
