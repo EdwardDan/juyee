@@ -54,22 +54,21 @@ table {
 			   String state="";
 			   if(workflowLogs.get(i).getState().equals("shoulizhongxin")){state="收件";}
 			   if(workflowLogs.get(i).getState().equals("quxianshouli")){state="受理";}
-			   if(workflowLogs.get(i).getState().equals("yushen")){state="预审";}
+			   if(workflowLogs.get(i).getState().equals("chushen")){state="初审";}
 			   if(workflowLogs.get(i).getState().equals("shoujian")){state="收件";}
 			   if(workflowLogs.get(i).getState().equals("quxianshenhe")){continue;}
 			   if(workflowLogs.get(i).getState().equals("quxianshenpi")){continue;}
-			   if(workflowLogs.get(i).getState().equals("chushen")){continue;}
 			   if(workflowLogs.get(i).getState().equals("fuhe")){continue;}
 			   if(workflowLogs.get(i).getState().equals("shenhe")){continue;}
 			   if(workflowLogs.get(i).getState().equals("fenguanlingdao")){continue;}
 			   if(workflowLogs.get(i).getState().equals("zhongxinlingdao")){continue;}
 			   if(workflowLogs.get(i).getState().equals("weijianshechu")){continue;}
-			   if(workflowLogs.get(i).getState().equals("weishenpichu")){continue;}
 			   if(workflowLogs.get(i).getState().equals("weilingdao")){continue;}
 			   if(workflowLogs.get(i).getState().equals("update")){continue;}
-			   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state10")){transition="预审退回";}
-			   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state8")){transition="收件退回";}
+			   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state10")){transition="初审退回";}
 			   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state3")){transition="收件退回";}
+			   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state20")){transition="不予通过";}
+			   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state13")){continue;}
 			   
 	%>
 	<tr>
