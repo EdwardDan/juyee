@@ -29,6 +29,7 @@ import com.liferay.portal.security.auth.Authenticator;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.model.ExpandoColumn;
 import com.liferay.portlet.expando.model.ExpandoTable;
@@ -255,7 +256,40 @@ public class CustomLoginPortlet extends MVCPortlet {
 				}
 			}
 		}
+		
+		if ("certificate-info".equals(resourceId)) {
+			try {
+				User user = UserServiceUtil.getCurrentUser();
+				ExpandoTable eTable = ExpandoTableLocalServiceUtil.getDefaultTable(PortalUtil.getDefaultCompanyId(), User.class.getName());
+				ExpandoColumn eColumn = ExpandoColumnLocalServiceUtil.getColumn(eTable.getTableId(), "digitalCertificate");
+				ExpandoValue expandoTable = ExpandoValueLocalServiceUtil.getValue(eTable.getTableId(), eColumn.getColumnId(), user.getUserId());
+				String digitalCertificateData = expandoTable.getData();
+				com.alibaba.fastjson.JSONObject digitalCertificate = com.alibaba.fastjson.JSONObject.parseObject(digitalCertificateData);
+				com.liferay.portal.kernel.json.JSONObject userJson = JSONFactoryUtil.createJSONObject();
 
+				userJson.put("userOrganization",digitalCertificate.getString("userOrganization"));
+				userJson.put("UniqueID",digitalCertificate.getString("UniqueID"));
+				userJson.put("certificateSerialNo",digitalCertificate.getString("certificateSerialNo"));
+				userJson.put("expirationDate",digitalCertificate.getString("expirationDate"));
+				userJson.put("userName",digitalCertificate.getString("userName"));
+				
+				HttpServletResponse response = PortalUtil.getHttpServletResponse(resourceResponse);
+				response.setContentType("text/html;charset=UTF-8");
+				PrintWriter out = null;
+				try {
+					out = response.getWriter();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				out.print(userJson.toString());
+				out.flush();
+				out.close();
+				resourceResponse.setContentType("text/html");
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			super.serveResource(resourceRequest, resourceResponse);
+		}
 	}
 
 	public void createUser(String UniqueID, String prikeypwd, String userName, Long companyId_, ResourceRequest resourceRequest) throws PortalException, SystemException {
