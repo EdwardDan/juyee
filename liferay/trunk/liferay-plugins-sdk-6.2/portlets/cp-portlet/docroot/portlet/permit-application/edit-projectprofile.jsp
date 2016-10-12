@@ -317,7 +317,183 @@
 					onfocus="WdatePicker({minDate:'#F{$dp.$D(\'jhjg\')}',lang:'zh-cn',dateFmt:'yyyy-MM-dd'})"
 			required="required"/></td>
 		</tr>
-		<tbody style="display: none" id="hd">
+		<tbody id="hd">
+		</tbody>
+		<tr class="body">
+			<td class="text-right">备注</td>
+			<td class="bg-white" colspan="3"><aui:input name="sgxkzsbz" id="sgxkzsbz"
+					label="" type="text" style="width:50%" value="${projectProfile.sgxkzsbz}">
+				</aui:input>最多可以再输入<span id="contentCounterBz" style="color: red"></span>个汉字</td>
+		</tr>
+	<tr class="body">
+			<td class="bg-white" colspan="4"><c:choose>
+					<c:when test="${projectProfile.sfzftzl }">
+						<aui:input name="sfzftzl" id="sfzftzl" label="是否政府投资类"
+							type="checkbox" checked="true" onchange="showYzzpl(this)">
+						</aui:input>
+					</c:when>
+					<c:otherwise>
+						<aui:input name="sfzftzl" id="sfzftzl" label="是否政府投资类(如是政府投资类，请填写)"
+							type="checkbox" checked="false" onchange="showYzzpl(this)">
+						</aui:input>
+					</c:otherwise>
+				</c:choose></td>
+		</tr>
+		<c:choose>
+			<c:when test="${projectProfile.sfzftzl }">
+				<tr class="body" id="yzzpl">
+			</c:when>
+			<c:otherwise>
+				<tr class="body" id="yzzpl" style="display: none">
+			</c:otherwise>
+		</c:choose>
+		<td colspan="4"> 
+			<table style="width: 99%;">
+				<tr class="body">
+					<td class="text-right" rowspan="4">预制装配率</td>
+					<td class="bg-white" colspan="2">单跨跨径100米以下桥梁工程承台顶面以上构件</td>
+					<td class="bg-white"><aui:row><aui:input name="yzzpl1" label="" inlineField="true"
+							type="text" style="width:30px" value="">
+						</aui:input>%</aui:row></td>
+				</tr>
+				<tr class="body">
+					<td class="bg-white" colspan="2">隧道工程盾构段</td>
+					<td class="bg-white"><aui:row><aui:input name="yzzpl2" label="" inlineField="true"
+							type="text" style="width:30px" value="">
+						</aui:input>%</aui:row></td>
+				</tr>
+				<tr class="body">
+					<td class="bg-white" colspan="2">轨道交通工程地下过街通道</td>
+					<td class="bg-white"><aui:row><aui:input name="yzzpl3" label="" inlineField="true"
+							type="text" style="width:30px" value="">
+						</aui:input>%</aui:row></td>
+				</tr>
+				<tr class="body">
+					<td class="bg-white" colspan="2">水运工程（港口）桩顶面以上构件</td>
+					<td class="bg-white"><aui:row><aui:input name="yzzpl4" label="" inlineField="true"
+							type="text" style="width:30px" value="">
+						</aui:input>%</aui:row></td>
+				</tr>
+			</table>
+		</td>
+		<tr class="body">
+			<td  class="bg-white" colspan="4">注:信息保存后，请进入参见单位和项目负责人信息页面，填写参建单位和项目负责人信息</td>
+		</tr>
+	</table>
+	<div style="text-align: center">
+	<aui:button type="submit"  onClick="return checkInputMobilesNormal();"/> <aui:button
+					value="返回" href="${viewURL}" />
+	</div>
+
+</aui:form>
+<aui:script use="aui-char-counter">
+	var counterVariable = new A.CharCounter({
+		input : '#<portlet:namespace/>sgxkzsbz',
+		counter : '#contentCounterBz',
+		maxLength : 44
+	});
+var counterVariable = new A.CharCounter({
+	input : '#<portlet:namespace/>gcnr',
+	counter : '#contentCounter',
+	maxLength : 84
+});
+</aui:script>
+
+<script>
+$(document).ready(function(){
+	if($("#<portlet:namespace/>xmlx").val()==29741){
+		document.getElementById("hd").style.display = "";
+	}
+})
+
+function change(){
+	if($("#<portlet:namespace/>xmlx").val()==29741){
+		$("#hd").append($("#hiddenStyle").html());
+	}else{
+		document.getElementById("hd").style.display = "none";
+	}
+}
+
+function showYzzpl(obj) {	
+    if (obj.checked) {
+        $("#sfzftzl").val("true");
+        document.getElementById("yzzpl").style.display = "";
+    } else {
+        $("#sfzftzl").val("false");
+        document.getElementById("yzzpl").style.display = "none";
+    }
+}
+
+/**
+ * 检查手动输入的电话号码是否符合手机号码规范。
+ */
+function checkInputMobilesNormal() {
+    var mobiles = $("#<portlet:namespace />jsdwsjh").val();
+    var xmfzrlxdh;
+    if($("#<portlet:namespace/>xmlx").val()==29741){
+    	xmfzrlxdh = $("#<portlet:namespace/>xmfzrlxdh").val();
+    }
+    var reg = /^1[3|4|5|7|8][0-9]\d{8}$/;
+    if (mobiles != null && mobiles != "") {
+        if (mobiles.indexOf(",") == -1) {
+            if (!reg.test(mobiles)) {
+                alert('“' + mobiles + '”是无效的手机号码！');
+                focusInput($("#<portlet:namespace />jsdwsjh"));
+                return false;
+            }
+        }
+        else {
+            var arr = mobiles.split(",");
+            var length = arr.length;
+            for (var i = 0; i < length; i++) {
+                if (!reg.test(arr[i])) {
+                	alert('“' + arr[i] + '”是无效的手机号码！');
+                	focusInput($("#<portlet:namespace />jsdwsjh"));
+                    return false;
+                }
+            }
+        }
+    }
+    if (xmfzrlxdh != null && xmfzrlxdh != "") {
+        if (xmfzrlxdh.indexOf(",") == -1) {
+            if (!reg.test(xmfzrlxdh)) {
+                alert('“' + xmfzrlxdh + '”是无效的手机号码！');
+                focusInput($("#<portlet:namespace />xmfzrlxdh"));
+                return false;
+            }
+        }
+        else {
+            var arr = mobiles.split(",");
+            var length = arr.length;
+            for (var i = 0; i < length; i++) {
+                if (!reg.test(arr[i])) {
+                	alert('“' + arr[i] + '”是无效的手机号码！');
+                	focusInput($("#<portlet:namespace />xmfzrlxdh"));
+                    return false;
+                }
+            }
+        }
+    }
+    if(mobiles==""){ 
+    	alert('手机号不能为空！');
+        focusInput($("#<portlet:namespace />jsdwsjh"));
+    	return false;
+    }
+    if(xmfzrlxdh==""){ 
+   		alert('手机号不能为空！');
+        focusInput($("#<portlet:namespace />xmfzrlxdh"));
+   		return false;
+   }
+    return true;
+}
+
+function focusInput(obj) {
+	$(obj).css("border", "1px solid red");
+}
+</script>
+
+		<table class="table table-bordered" width="100%" style="display: none;">
+		<tbody id="hiddenStyle">
 		<tr class="body">
 			<td class="text-center" colspan="4">主要设计单位</td>
 		</tr>
@@ -524,176 +700,5 @@
 					type="text" style="width:50%" value="${projectProfile.xmfzrlxdh}"><aui:validator name="required"/>
 				</aui:input></td>
 		</tr>
-		</tbody>
-		<tr class="body">
-			<td class="text-right">备注</td>
-			<td class="bg-white" colspan="3"><aui:input name="sgxkzsbz" id="sgxkzsbz"
-					label="" type="text" style="width:50%" value="${projectProfile.sgxkzsbz}">
-				</aui:input>最多可以再输入<span id="contentCounterBz" style="color: red"></span>个汉字</td>
-		</tr>
-	<tr class="body">
-			<td class="bg-white" colspan="4"><c:choose>
-					<c:when test="${projectProfile.sfzftzl }">
-						<aui:input name="sfzftzl" id="sfzftzl" label="是否政府投资类"
-							type="checkbox" checked="true" onchange="showYzzpl(this)">
-						</aui:input>
-					</c:when>
-					<c:otherwise>
-						<aui:input name="sfzftzl" id="sfzftzl" label="是否政府投资类(如是政府投资类，请填写)"
-							type="checkbox" checked="false" onchange="showYzzpl(this)">
-						</aui:input>
-					</c:otherwise>
-				</c:choose></td>
-		</tr>
-		<c:choose>
-			<c:when test="${projectProfile.sfzftzl }">
-				<tr class="body" id="yzzpl">
-			</c:when>
-			<c:otherwise>
-				<tr class="body" id="yzzpl" style="display: none">
-			</c:otherwise>
-		</c:choose>
-		<td colspan="4"> 
-			<table style="width: 99%;">
-				<tr class="body">
-					<td class="text-right" rowspan="4">预制装配率</td>
-					<td class="bg-white" colspan="2">单跨跨径100米以下桥梁工程承台顶面以上构件</td>
-					<td class="bg-white"><aui:row><aui:input name="yzzpl1" label="" inlineField="true"
-							type="text" style="width:30px" value="">
-						</aui:input>%</aui:row></td>
-				</tr>
-				<tr class="body">
-					<td class="bg-white" colspan="2">隧道工程盾构段</td>
-					<td class="bg-white"><aui:row><aui:input name="yzzpl2" label="" inlineField="true"
-							type="text" style="width:30px" value="">
-						</aui:input>%</aui:row></td>
-				</tr>
-				<tr class="body">
-					<td class="bg-white" colspan="2">轨道交通工程地下过街通道</td>
-					<td class="bg-white"><aui:row><aui:input name="yzzpl3" label="" inlineField="true"
-							type="text" style="width:30px" value="">
-						</aui:input>%</aui:row></td>
-				</tr>
-				<tr class="body">
-					<td class="bg-white" colspan="2">水运工程（港口）桩顶面以上构件</td>
-					<td class="bg-white"><aui:row><aui:input name="yzzpl4" label="" inlineField="true"
-							type="text" style="width:30px" value="">
-						</aui:input>%</aui:row></td>
-				</tr>
-			</table>
-		</td>
-		<tr class="body">
-			<td  class="bg-white" colspan="4">注:信息保存后，请进入参见单位和项目负责人信息页面，填写参建单位和项目负责人信息</td>
-		</tr>
-	</table>
-	<div style="text-align: center">
-	<aui:button type="submit"  onClick="return checkInputMobilesNormal();"/> <aui:button
-					value="返回" href="${viewURL}" />
-	</div>
-
-</aui:form>
-<aui:script use="aui-char-counter">
-	var counterVariable = new A.CharCounter({
-		input : '#<portlet:namespace/>sgxkzsbz',
-		counter : '#contentCounterBz',
-		maxLength : 44
-	});
-var counterVariable = new A.CharCounter({
-	input : '#<portlet:namespace/>gcnr',
-	counter : '#contentCounter',
-	maxLength : 84
-});
-</aui:script>
-
-<script>
-$(document).ready(function(){
-	if($("#<portlet:namespace/>xmlx").val()==29741){
-		document.getElementById("hd").style.display = "";
-	}
-})
-
-function change(){
-	if($("#<portlet:namespace/>xmlx").val()==29741){
-		document.getElementById("hd").style.display = "";
-	}else{
-		document.getElementById("hd").style.display = "none";
-	}
-}
-
-function showYzzpl(obj) {	
-    if (obj.checked) {
-        $("#sfzftzl").val("true");
-        document.getElementById("yzzpl").style.display = "";
-    } else {
-        $("#sfzftzl").val("false");
-        document.getElementById("yzzpl").style.display = "none";
-    }
-}
-
-/**
- * 检查手动输入的电话号码是否符合手机号码规范。
- */
-function checkInputMobilesNormal() {
-    var mobiles = $("#<portlet:namespace />jsdwsjh").val();
-    var xmfzrlxdh;
-    if($("#<portlet:namespace/>xmlx").val()==29741){
-    	xmfzrlxdh = $("#<portlet:namespace/>xmfzrlxdh").val();
-    }
-    var reg = /^1[3|4|5|7|8][0-9]\d{8}$/;
-    if (mobiles != null && mobiles != "") {
-        if (mobiles.indexOf(",") == -1) {
-            if (!reg.test(mobiles)) {
-                alert('“' + mobiles + '”是无效的手机号码！');
-                focusInput($("#<portlet:namespace />jsdwsjh"));
-                return false;
-            }
-        }
-        else {
-            var arr = mobiles.split(",");
-            var length = arr.length;
-            for (var i = 0; i < length; i++) {
-                if (!reg.test(arr[i])) {
-                	alert('“' + arr[i] + '”是无效的手机号码！');
-                	focusInput($("#<portlet:namespace />jsdwsjh"));
-                    return false;
-                }
-            }
-        }
-    }
-    if (xmfzrlxdh != null && xmfzrlxdh != "") {
-        if (xmfzrlxdh.indexOf(",") == -1) {
-            if (!reg.test(xmfzrlxdh)) {
-                alert('“' + xmfzrlxdh + '”是无效的手机号码！');
-                focusInput($("#<portlet:namespace />xmfzrlxdh"));
-                return false;
-            }
-        }
-        else {
-            var arr = mobiles.split(",");
-            var length = arr.length;
-            for (var i = 0; i < length; i++) {
-                if (!reg.test(arr[i])) {
-                	alert('“' + arr[i] + '”是无效的手机号码！');
-                	focusInput($("#<portlet:namespace />xmfzrlxdh"));
-                    return false;
-                }
-            }
-        }
-    }
-    if(mobiles==""){ 
-    	alert('手机号不能为空！');
-        focusInput($("#<portlet:namespace />jsdwsjh"));
-    	return false;
-    }
-    if(xmfzrlxdh==""){ 
-   		alert('手机号不能为空！');
-        focusInput($("#<portlet:namespace />xmfzrlxdh"));
-   		return false;
-   }
-    return true;
-}
-
-function focusInput(obj) {
-	$(obj).css("border", "1px solid red");
-}
-</script>
+		<tbody id="hiddenStyle">
+		</table>
