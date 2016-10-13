@@ -64,7 +64,7 @@
 		<portlet:param name="permitId" value="${permitId}" />
 	</portlet:resourceURL>
 	<c:if test="<%=!projectProfile.getLxjb().equals(\"区县级机关或区县级单位\")%>">
-		<c:if test="<%=status >= 5%>">
+		<c:if test="<%=status >= 13&&status!=17%>">
 			<a class="btn" href="${printsjpzURL}" target="_blank">收件凭证</a>
 		</c:if>
 		<%-- <c:if test="<%=status >= 9%>">
