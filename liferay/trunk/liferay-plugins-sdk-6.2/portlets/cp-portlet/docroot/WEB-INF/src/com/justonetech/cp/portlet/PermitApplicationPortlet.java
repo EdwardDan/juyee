@@ -876,9 +876,9 @@ public class PermitApplicationPortlet extends MVCPortlet {
 				HttpServletResponse response = PortalUtil.getHttpServletResponse(resourceResponse);
 				File file = null;
 				if (xmlx.equals("航道")) {
-					file = new File("f:\\temp\\开工备案.pdf");
+					file = new File("D:\\temp\\开工备案.pdf");
 				} else {
-					file = new File("f:\\temp\\施工许可证书.pdf");
+					file = new File("D:\\temp\\施工许可证书.pdf");
 				}
 				byte[] bytes = FileUtil.getBytes(file);
 				if (xmlx.equals("航道")) {
