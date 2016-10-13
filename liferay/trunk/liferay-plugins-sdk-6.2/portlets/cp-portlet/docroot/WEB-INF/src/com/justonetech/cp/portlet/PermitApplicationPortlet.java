@@ -3,6 +3,7 @@ package com.justonetech.cp.portlet;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,11 +24,13 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.sf.jxls.transformer.XLSTransformer;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 import com.itextpdf.text.DocumentException;
@@ -792,7 +795,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		return map;
 	}
 
-	public FileInputStream fillTemplate(DLFileEntry fileEntry, String newPDFPath, Map<String, String> map,
+	public void fillTemplate(DLFileEntry fileEntry, String newPDFPath, Map<String, String> map,
 			ResourceRequest request, ResourceResponse response, Permit permit) throws IOException, DocumentException,
 			PortalException, SystemException, com.lowagie.text.DocumentException {
 		PdfReader pdfReader = new PdfReader(fileEntry.getContentStream());
@@ -818,11 +821,6 @@ public class PermitApplicationPortlet extends MVCPortlet {
 			pdfCopy.addPage(importedPage);
 		}
 		document.close();
-		FileInputStream fis = new FileInputStream(file);
-		ServiceContext serviceContext = new ServiceContext();
-		serviceContext.setAddGuestPermissions(true);
-		serviceContext.setIndexingEnabled(true);
-		return fis;
 	}
 	
 	private byte[] inputStreamToByte(InputStream is) throws IOException {
@@ -852,29 +850,39 @@ public class PermitApplicationPortlet extends MVCPortlet {
 				Map<String, String> map = null;
 				map = getMap(permitId, xmlx);
 				String newPDFPath = "";
-				if(xmlx.equals("航道")){
+				if (xmlx.equals("航道")) {
 					newPDFPath = PropsUtil.get("sgxkz.temp.folder.id") + "开工备案.pdf";
-				}else{
+				} else {
 					newPDFPath = PropsUtil.get("sgxkz.temp.folder.id") + "施工许可证书.pdf";
 				}
-				FileInputStream fis = null;
 				if (xmlx.equals("航道")) {
-				map = getKgbaMap(permitId);
-				fis = fillTemplate(DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(PropsUtil.get("sgxkz.hd.pdf.template"))), newPDFPath, map, resourceRequest, resourceResponse, permit);
-			} else {
-				map = getMap(permitId, xmlx);
-				if (projectProfile.getXmxz() == 29769) {
-					fis = fillTemplate(DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(PropsUtil.get("sgxkz.pdf.template"))), newPDFPath, map, resourceRequest, resourceResponse, permit);
+					map = getKgbaMap(permitId);
+					fillTemplate(DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(PropsUtil
+							.get("sgxkz.hd.pdf.template.id"))), newPDFPath, map, resourceRequest, resourceResponse, permit);
 				} else {
-					fis = fillTemplate(DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(PropsUtil.get("sgxkz.ls.pdf.template"))), newPDFPath, map, resourceRequest, resourceResponse, permit);
+					map = getMap(permitId, xmlx);
+					if (projectProfile.getXmxz() == 29769) {
+						fillTemplate(DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(PropsUtil
+								.get("sgxkz.pdf.template.id"))), newPDFPath, map, resourceRequest, resourceResponse,
+								permit);
+					} else {
+						fillTemplate(DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(PropsUtil
+								.get("sgxkz.ls.pdf.template.id"))), newPDFPath, map, resourceRequest, resourceResponse,
+								permit);
+					}
 				}
-			}
-				byte[] data = inputStreamToByte(fis);
-				fis.close();
-				HttpServletRequest req = PortalUtil.getHttpServletRequest(resourceRequest);
-				HttpServletResponse res = PortalUtil.getHttpServletResponse(resourceResponse);
-				ServletResponseUtil.sendFile(req, res, CounterLocalServiceUtil.increment()+"", data,
-						ContentTypes.APPLICATION_PDF);
+
+				HttpServletRequest request = PortalUtil.getHttpServletRequest(resourceRequest);
+				HttpServletResponse response = PortalUtil.getHttpServletResponse(resourceResponse);
+				File file = null;
+				if (xmlx.equals("航道")) {
+					file = new File("f:\\temp\\开工备案.pdf");
+				} else {
+					file = new File("f:\\temp\\施工许可证书.pdf");
+				}
+				byte[] bytes = FileUtil.getBytes(file);
+
+				ServletResponseUtil.sendFile(request, response, "开工备案.pdf", bytes, ContentTypes.APPLICATION_PDF);
 			}
 			
 			
@@ -970,9 +978,15 @@ public class PermitApplicationPortlet extends MVCPortlet {
 			e.printStackTrace();
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
+//		} catch (DocumentException e) {
+//			e.printStackTrace();
+//		} catch (com.lowagie.text.DocumentException e) {
+//			e.printStackTrace();
 		} catch (DocumentException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (com.lowagie.text.DocumentException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}  
 		super.serveResource(resourceRequest, resourceResponse);
