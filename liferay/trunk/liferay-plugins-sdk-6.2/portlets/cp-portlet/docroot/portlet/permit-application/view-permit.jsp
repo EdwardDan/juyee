@@ -43,19 +43,15 @@
 		<jsp:include page="${contextPath }/view-permit/applymaterials.jsp" />
 	</liferay-ui:section>
 </liferay-ui:tabs>
-<portlet:resourceURL var="viewCertificateURL" id="view"></portlet:resourceURL>
+<portlet:resourceURL var="viewCertificateURL" id="view">
+	<portlet:param name="permitId" value="${permitInit}"/>
+</portlet:resourceURL>
 <aui:button-row cssClass="text-center">
 	<a class="btn" onclick="viewCertificate()">预览施工许可证书</a>
 </aui:button-row>
 <script type="text/javascript">
 	function viewCertificate(){
-		$.ajax({
-			type:"GET",
-			url:"<%=viewCertificateURL%>",
-			data:{
-				'permitId':<%=permitIdInit%>
-			},
-		})
+		window.location = '${viewCertificateURL}';
 	}
 </script>
 
