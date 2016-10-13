@@ -10,6 +10,13 @@
             {name:"bdh", rule:"validate[required,maxSize[100]]"}
         ];
         validateInit(validateCondition, formId);
+        if (${bean.isZftzl}) {
+            $("#isZftzl").val("true");
+            document.getElementById("yzzpl").style.display = "";
+        } else {
+            $("#isZftzl").val("false");
+            document.getElementById("yzzpl").style.display = "none";
+        }
     });
 
     //保存操作
@@ -268,7 +275,7 @@
                 <tr class="tr_light">
                     <td colspan="4" class="form_content">
                         <input type="checkbox" id="isZftzl" name="isZftzl"
-                               <c:if test="${not empty bean.isZftzl}">checked </c:if>
+                               <c:if test="${bean.isZftzl}">checked </c:if>
                                onchange="showYzzpl()">是否政府投资类
                     </td>
                 </tr>
