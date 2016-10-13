@@ -101,7 +101,8 @@ if(null!=dictionaryCertificateType){
 	</div>
 	<div class="accordion-inner">
 		<table border="1" width="100%"
-			class="table table-bordered table-hover" style="border-collapse: collapse !important;">
+			class="table table-bordered table-hover"
+			style="border-collapse: collapse !important;">
 			<thead>
 				<th style="width: 2%; text-align: center"></th>
 				<th style="width: 28%; text-align: center">单位名称</th>
@@ -237,15 +238,20 @@ if(null!=dictionaryCertificateType){
 		var deptCodes = "";
 		var flagDept = true;
 		var len = $("select[name='<portlet:namespace/>dwlx']").length;
-		$("select[name='<portlet:namespace/>dwlx']").each(function(i) {
-			if (i <= (len - 2)) {
-				if (deptCodes.indexOf($(this).val()) != -1) {
-					flagDept = false;
-				}
-				deptCodes = deptCodes + "," + $(this).val();
-			}
+		$("select[name='<portlet:namespace/>dwlx']").each(
+				function(i) {
+					if (i <= (len - 2)) {
+						if (deptCodes.indexOf($(this).val()) != -1) {
+							if ($(this).val() != '专业分包单位'
+									&& $(this).val() != '劳务分包单位') {
+								flagDept = false;
+							}
 
-		});
+						}
+						deptCodes = deptCodes + "," + $(this).val();
+					}
+
+				});
 
 		if (!flagDept) {
 			alert("单位类型存在重复！！")
