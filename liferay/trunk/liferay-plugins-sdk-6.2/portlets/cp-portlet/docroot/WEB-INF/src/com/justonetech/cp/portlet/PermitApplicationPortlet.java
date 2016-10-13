@@ -131,7 +131,6 @@ public class PermitApplicationPortlet extends MVCPortlet {
 						}
 					}
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -852,17 +851,22 @@ public class PermitApplicationPortlet extends MVCPortlet {
 			if ("view".equals(resourceId)) {
 				Map<String, String> map = null;
 				map = getMap(permitId, xmlx);
-				String newPDFPath = PropsUtil.get("sgxkz.temp.folder.id") + CounterLocalServiceUtil.increment() + ".pdf";
+				String newPDFPath = "";
+				if(xmlx.equals("航道")){
+					newPDFPath = PropsUtil.get("sgxkz.temp.folder.id") + "开工备案.pdf";
+				}else{
+					newPDFPath = PropsUtil.get("sgxkz.temp.folder.id") + "施工许可证书.pdf";
+				}
 				FileInputStream fis = null;
 				if (xmlx.equals("航道")) {
 				map = getKgbaMap(permitId);
-				fis = fillTemplate(DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(PropsUtil.get("sgxkz.hd.pdf.template.id"))), newPDFPath, map, resourceRequest, resourceResponse, permit);
+				fis = fillTemplate(DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(PropsUtil.get("sgxkz.hd.pdf.template"))), newPDFPath, map, resourceRequest, resourceResponse, permit);
 			} else {
 				map = getMap(permitId, xmlx);
 				if (projectProfile.getXmxz() == 29769) {
-					fis = fillTemplate(DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(PropsUtil.get("sgxkz.pdf.template.id"))), newPDFPath, map, resourceRequest, resourceResponse, permit);
+					fis = fillTemplate(DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(PropsUtil.get("sgxkz.pdf.template"))), newPDFPath, map, resourceRequest, resourceResponse, permit);
 				} else {
-					fis = fillTemplate(DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(PropsUtil.get("sgxkz.ls.pdf.template.id"))), newPDFPath, map, resourceRequest, resourceResponse, permit);
+					fis = fillTemplate(DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(PropsUtil.get("sgxkz.ls.pdf.template"))), newPDFPath, map, resourceRequest, resourceResponse, permit);
 				}
 			}
 				byte[] data = inputStreamToByte(fis);
