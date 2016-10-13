@@ -881,8 +881,11 @@ public class PermitApplicationPortlet extends MVCPortlet {
 					file = new File("f:\\temp\\施工许可证书.pdf");
 				}
 				byte[] bytes = FileUtil.getBytes(file);
-
+				if (xmlx.equals("航道")) {
 				ServletResponseUtil.sendFile(request, response, "开工备案.pdf", bytes, ContentTypes.APPLICATION_PDF);
+				}else{
+					ServletResponseUtil.sendFile(request, response, "施工许可证书.pdf", bytes, ContentTypes.APPLICATION_PDF);
+				}
 			}
 			
 			
