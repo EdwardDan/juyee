@@ -692,9 +692,8 @@ public class PermitApplicationPortlet extends MVCPortlet {
 	public Map<String, String> getKgbaMap(long permitId) throws PortalException, SystemException {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		Map<String, String> map = new HashMap<String, String>();
-		Permit permit =PermitLocalServiceUtil.getPermit(permitId);
 		ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
-		String babh = permit.getSgxkzbh();
+		String babh = "";
 		String xmmc = projectProfile.getGcmc();
 		String jsdd = projectProfile.getJsdd();
 		String tzly = projectProfile.getTzly();
@@ -848,7 +847,6 @@ public class PermitApplicationPortlet extends MVCPortlet {
 			String xmlx = DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx()).getName();
 			if ("view".equals(resourceId)) {
 				Map<String, String> map = null;
-				map = getMap(permitId, xmlx);
 				String newPDFPath = "";
 				if (xmlx.equals("航道")) {
 					newPDFPath = PropsUtil.get("sgxkz.temp.folder.id") + "开工备案.pdf";
