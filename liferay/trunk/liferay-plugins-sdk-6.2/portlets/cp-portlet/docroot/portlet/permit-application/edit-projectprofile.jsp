@@ -66,7 +66,7 @@
 	<aui:input name="htxxbsbh" type="hidden" value="${contractId}" />
 	<table  class="table table-bordered" width="100%">
 	<tr class="body">
-			<td class="text-right">项目类型</td>
+			<td class="text-right" style="width:20%">项目类型</td>
 			<td class="bg-white"><aui:select name="xmlx" label="" id="xmlx" 
 					type="select" style="width:50%" onChange="change()">
 					<%
