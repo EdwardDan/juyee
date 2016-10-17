@@ -10,7 +10,7 @@
             {name:"bdh", rule:"validate[required,maxSize[100]]"}
         ];
         validateInit(validateCondition, formId);
-        if (null !=${bean.isZftzl} && '' !=${bean.isZftzl}) {
+        if (${not empty bean.isZftzl}) {
             if (${bean.isZftzl}) {
                 $("#isZftzl").val("true");
                 document.getElementById("yzzpl").style.display = "";
