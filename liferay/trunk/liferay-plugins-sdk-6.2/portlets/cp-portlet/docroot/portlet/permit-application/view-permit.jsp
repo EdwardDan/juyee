@@ -10,6 +10,7 @@
 	Permit permitInit = PermitLocalServiceUtil.getPermit(permitIdInit);
 	Project projectInit = ProjectLocalServiceUtil.getProject(permitInit
 			.getBjbh());
+	int status = PermitLocalServiceUtil.getPermit(permitIdInit).getStatus();
 	String tabNames = "工程概况,参建单位,单位工程,申请材料";
 	Boolean canView=false;
 	if (projectInit.getLxjb().equals("区县级机关或区县级单位")) {
@@ -46,9 +47,11 @@
 <portlet:resourceURL var="viewCertificateURL" id="view">
 	<portlet:param name="permitId" value="${permitInit}"/>
 </portlet:resourceURL>
+<c:if test="<%=status!=CityPermitStatus.STATUS_SJ_BACK.getCode()||status!=CityPermitStatus.STATUS_CS_BACK.getCode()||status!=CountyPermitStatus.STATUS_SJ_BACK.getCode()%>" >
 <aui:button-row cssClass="text-center">
 	<a class="btn" onclick="viewCertificate()">预览施工许可证书</a>
 </aui:button-row>
+</c:if>
 <script type="text/javascript">
 	function viewCertificate(){
 		window.location = '${viewCertificateURL}';
