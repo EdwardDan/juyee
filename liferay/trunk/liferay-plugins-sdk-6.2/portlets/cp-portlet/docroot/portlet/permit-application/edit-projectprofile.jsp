@@ -452,7 +452,7 @@
 		<tr class="body">
 			<td class="text-right">批复或核准日期</td>
 			<td class="bg-white" colspan="3"><input name="<portlet:namespace/>pfhhzrq" label="" type="text" class="Wdate"
-				onfocus="WdatePicker()"	style="width:50%" value="${pfhhzrq }" required="required"/></td>
+				onfocus="WdatePicker()"	style="width:18.5%" value="${pfhhzrq }" required="required"/></td>
 		</tr>
 		<tr class="body">
 			<td class="text-right">初步设计批准机关和文号</td>
