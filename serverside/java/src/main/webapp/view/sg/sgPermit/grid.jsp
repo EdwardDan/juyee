@@ -11,11 +11,8 @@
                     '业务编号',
                     '报建编号',
                     '项目名称',
-//                    '字号',
                     '项目类型',
                     '建设单位',
-//                    '申请人',
-//                    '申请号',
                     '状态code',
                     '状态',
                     '操作'
@@ -68,7 +65,7 @@
                             if (${canSlAudit}) {
                                 opButton += '<input type="button" value="收件" onclick="doAccept(' + id + ')" class="button_normal"/> ';
                             }
-                        } else if (status == '${STATUS_SLZX_PASS}') {
+                        } else if (status == '${STATUS_SLZX_PASS}' || status == '${STATUS_NB_BACK}') {
                             if (${canCsAudit}) {
                                 opButton += '<input type="button" value="初审" onclick="doAudit(' + id + ')" class="button_normal"/> ';
                             }

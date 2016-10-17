@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/common/taglibs.jsp" %>
+<%@ include file="/common/header.jsp" %>
 <script type="text/javascript">
     $(function () {
         var conf = {
@@ -9,15 +10,12 @@
                     '操作编码',
                     '操作名称',
                     '审核操作人'
-//                    '状态',
-//                    '操作'
                 ],
                 colModel: [
                     {name: 'id', width: 10, align: "center", searchtype: "integer", hidden: true},
                     {name: "optionCode", width: "100", align: "center", searchtype: "string", sortable: true},
                     {name: "optionName", width: "100", align: "center", searchtype: "string", sortable: true},
                     {name: "optionUser", width: "100", align: "center", searchtype: "string", sortable: true}
-//                    {name: "status", width: "100", align: "center", searchtype: "integer", sortable: true}
                 ],
                 actModel: [
 //                    {name: 'operation', width: 40, align: 'center'}

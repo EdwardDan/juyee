@@ -1693,6 +1693,11 @@ public abstract class BaseSgPermit implements Serializable, Auditable {
         builder.append(sgUnitManager);
         builder.append(jlUnitManager);
         builder.append(projectPlanCost);
+        builder.append(isZftzl);
+        builder.append(yzzpl_1);
+        builder.append(yzzpl_2);
+        builder.append(yzzpl_3);
+        builder.append(yzzpl_4);
         return builder.toString();
     }
 

@@ -30,6 +30,9 @@ public class UserManager {
     public final String USERTYPE_NET = "NET_PROJECT";    //用户类型--网上报建用户
     public final String USERTYPE_SYS = "SYS_USER";    //用户类型--系统用户
 
+	public final String USERTYPE_SITE = "SITE_UNIT";    //用户类型--企业用户
+	public final String SITE_USERNAME_KEY = "SITE_USERNAME";    //用户类型--企业用户，放置登录名
+
 	/**
 	 * 通过属性进行查询
 	 *

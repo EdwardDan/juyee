@@ -55,7 +55,7 @@ public class SgPermitManager {
     /**
      * 自动生成业务编码
      *
-     * @param type     。
+     * @param type 。
      * @return 。
      */
     public String getBizCode(String type) {
@@ -123,6 +123,7 @@ public class SgPermitManager {
         model.addAttribute("STATUS_SPC_BACK", SgPermitStatus.STATUS_SPC_BACK.getCode());//建管中心领导审核退回
         model.addAttribute("STATUS_WLD_PASS", SgPermitStatus.STATUS_WLD_PASS.getCode());//委领导审核通过
         model.addAttribute("STATUS_WLD_BACK", SgPermitStatus.STATUS_WLD_BACK.getCode());//委领导审核退回
+        model.addAttribute("STATUS_NB_BACK", SgPermitStatus.STATUS_NB_BACK.getCode());//内部退回
 
         //退回材料枚举类
         SgPermitNotAcceptMat[] mats = SgPermitNotAcceptMat.values();
@@ -306,6 +307,7 @@ public class SgPermitManager {
 
     /**
      * 获取历史信息
+     *
      * @param sgPermit ，
      */
     public List<SgPermitHistoryOpinion> getHistorys(SgPermit sgPermit) {

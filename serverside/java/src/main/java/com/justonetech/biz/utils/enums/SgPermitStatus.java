@@ -32,7 +32,8 @@ public enum SgPermitStatus {
     STATUS_SPC_BXK(21, "审批处不许可", "red", "spcsh_bxk"),
     STATUS_SPC_BACK(22, "审批处审核退回", "red", "spcsh_back"),
     STATUS_WLD_PASS(23, "委领导许可", "green", "wldsh_pass"),
-    STATUS_WLD_BACK(24, "委领导不许可", "red", "wldsh_back");
+    STATUS_WLD_BACK(24, "委领导不许可", "red", "wldsh_back"),
+    STATUS_NB_BACK(25, "内部退回", "red", "nb_back");
 
     private int code;
     private String name;

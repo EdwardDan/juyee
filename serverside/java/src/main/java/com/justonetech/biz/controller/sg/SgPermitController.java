@@ -140,12 +140,12 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
             }
             String hql = "from SgPermit where 1=1";
             if (StringHelper.isEmpty(queryStatus)) {
-                hql += " and status >=" + SgPermitStatus.STATUS_SUBMIT.getCode() + " and status<=" + SgPermitStatus.STATUS_WLD_BACK.getCode();
+                hql += " and status >=" + SgPermitStatus.STATUS_SUBMIT.getCode();
             } else {
                 if (SgPermitStatus.STATUS_CH.getCode() == JspHelper.getInteger(queryStatus) || SgPermitStatus.STATUS_EDIT.getCode() == JspHelper.getInteger(queryStatus)) {
                     hql += " and status=" + queryStatus;
                 } else if (SgPermitStatus.STATUS_SUBMIT.getCode() == JspHelper.getInteger(queryStatus)) {
-                    hql += " and status >=" + SgPermitStatus.STATUS_SUBMIT.getCode() + " and status<=" + SgPermitStatus.STATUS_WLD_BACK.getCode();
+                    hql += " and status >=" + SgPermitStatus.STATUS_SUBMIT.getCode();
                 }
             }
             if (null != sysUser.getRegPerson()) {
@@ -328,7 +328,12 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
     public String audit(Model model, Long id) {
         SgPermit sgPermit = sgPermitService.get(id);
         model.addAttribute("bean", sgPermit);
-        List<Map<String, Object>> applyList = sgPermitManager.getMaterials(sgPermit, "view", "apply");//处理申请材料数据
+        List<Map<String, Object>> applyList;
+        if (sgPermit.getStatus() == SgPermitStatus.STATUS_NB_BACK.getCode() || sgPermit.getStatus() == SgPermitStatus.STATUS_SLZX_PASS.getCode()) {
+            applyList = sgPermitManager.getMaterials(sgPermit, "edit", "apply");//处理申请材料数据
+        } else {
+            applyList = sgPermitManager.getMaterials(sgPermit, "view", "apply");//处理申请材料数据
+        }
         model.addAttribute("applyList", applyList);
         List<Map<String, Object>> submitList = sgPermitManager.getMaterials(sgPermit, "edit", "submit");//处理申请材料数据
         model.addAttribute("submitList", submitList);
@@ -585,16 +590,29 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
                         "buildSiteCounty",
                         "nationalFundsPro",
                         "sgUnitManager",
-                        "jlUnitManager",
-                        "isZftzl",
-                        "yzzpl_1",
-                        "yzzpl_2",
-                        "yzzpl_3",
-                        "yzzpl_4",
+                        "jlUnitManager"
                 });
             } else {
                 target = entity;
             }
+            String isZftzl = request.getParameter("isZftzl");
+            String yzzpl_1 = request.getParameter("yzzpl_1");
+            String yzzpl_2 = request.getParameter("yzzpl_2");
+            String yzzpl_3 = request.getParameter("yzzpl_3");
+            String yzzpl_4 = request.getParameter("yzzpl_4");
+            if (!StringHelper.isEmpty(isZftzl)) {
+                if ("true".equals(isZftzl)) {
+                    target.setIsZftzl(true);
+                } else {
+                    target.setIsZftzl(false);
+                }
+            } else {
+                target.setIsZftzl(false);
+            }
+            target.setYzzpl_1(yzzpl_1);
+            target.setYzzpl_2(yzzpl_2);
+            target.setYzzpl_3(yzzpl_3);
+            target.setYzzpl_4(yzzpl_4);
             target.setAreaCode("sh");
             target.setAreaName("上海市");
             String buildSiteCounty = request.getParameter("buildSiteCounty");
@@ -799,7 +817,7 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
             } else if (status == SgPermitStatus.STATUS_FH_PASS.getCode() || status == SgPermitStatus.STATUS_FH_BACK.getCode()) { //复审
                 target.setFhUser(sysUser.getDisplayName());
                 target.setFhDate(date);
-            } else if (status == SgPermitStatus.STATUS_SH_PASS.getCode() || status == SgPermitStatus.STATUS_SH_BACK.getCode()) { //审核
+            } else if (status == SgPermitStatus.STATUS_SH_PASS.getCode() || status == SgPermitStatus.STATUS_SH_BACK.getCode() || status == SgPermitStatus.STATUS_NB_BACK.getCode()) { //审核
                 target.setShUser(sysUser.getDisplayName());
                 target.setShDate(date);
             } else if (status == SgPermitStatus.STATUS_FGLD_PASS.getCode() || status == SgPermitStatus.STATUS_FGLD_BACK.getCode()) { //分管领导审核
@@ -819,6 +837,27 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
                 target.setWldDate(date);
             }
             sgPermitService.save(target);
+
+            //保存材料信息
+            List<SgMaterial> saveMaterialList = new ArrayList<SgMaterial>();
+            String[] noMaterials = request.getParameterValues("noMaterial");//序号
+            if (null != noMaterials && noMaterials.length > 0) {
+                for (String no : noMaterials) {
+                    List<SgMaterial> materials = sgMaterialService.findByQuery("from SgMaterial where no=" + no + " and sgPermit.id=" + target.getId());
+                    if (null != materials && materials.size() > 0) {
+                        SgMaterial sgMaterial = materials.iterator().next();
+                        //附件
+                        String docId = request.getParameter("docId" + no);//附件
+                        if (!StringHelper.isEmpty(docId)) {
+                            DocDocument docDocument = documentManager.getDocDocument(Long.valueOf(docId));
+                            sgMaterial.setDoc(docDocument);
+                        }
+                        saveMaterialList.add(sgMaterial);
+                    }
+                }
+            }
+            sgMaterialService.batchSave(saveMaterialList, saveMaterialList.size());
+
             //保存历史审核信息
             SgPermitHistoryOpinion historyOpinion = new SgPermitHistoryOpinion();
             historyOpinion.setSgPermit(target);
@@ -829,7 +868,7 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
             } else if (status == SgPermitStatus.STATUS_FH_PASS.getCode() || status == SgPermitStatus.STATUS_FH_BACK.getCode()) { //复审
                 historyOpinion.setOpinion(target.getFhOpinion());
                 historyOpinion.setAuditDate(target.getFhDate());
-            } else if (status == SgPermitStatus.STATUS_SH_PASS.getCode() || status == SgPermitStatus.STATUS_SH_BACK.getCode()) { //审核
+            } else if (status == SgPermitStatus.STATUS_SH_PASS.getCode() || status == SgPermitStatus.STATUS_SH_BACK.getCode() || status == SgPermitStatus.STATUS_NB_BACK.getCode()) { //审核
                 historyOpinion.setOpinion(target.getShOpinion());
                 historyOpinion.setAuditDate(target.getShDate());
             } else if (status == SgPermitStatus.STATUS_FGLD_PASS.getCode() || status == SgPermitStatus.STATUS_FGLD_BACK.getCode()) { //分管领导审核
@@ -864,7 +903,7 @@ public class SgPermitController extends BaseCRUDActionController<SgPermit> {
                             opinion.setIsFhOpinion(false);
                         }
                     }
-                    if (status == SgPermitStatus.STATUS_SH_PASS.getCode()) {
+                    if (status == SgPermitStatus.STATUS_SH_PASS.getCode() || status == SgPermitStatus.STATUS_NB_BACK.getCode()) {
                         String shOpinion = request.getParameter("isShOpinion" + no);
                         if (!StringHelper.isEmpty(shOpinion) && Constants.FLAG_TRUE.equals(shOpinion)) {
                             opinion.setIsShOpinion(true);

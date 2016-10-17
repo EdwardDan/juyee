@@ -56,37 +56,31 @@ public class LoginController extends BaseCRUDActionController {
      */
     @RequestMapping
     public void dispatch(Model model, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
+        Object jumpUrl = session.getAttribute("jumpUrl");
         String contextPath = request.getContextPath();
         String url = "/mainPage/index.do";
+        if (null != jumpUrl) {
+            String jumpUrlNew = JspHelper.getString(jumpUrl);
+            url = jumpUrlNew;
+        }
         BaseUser baseUser = SpringSecurityUtils.getCurrentUser();
         if (baseUser != null) {
-//            System.out.println("baseUser.getIdCard() = " + baseUser.getIdCard());
-            String user_type = JspHelper.getString(session.getAttribute(userManager.USERTYPE_KEY));
-            if (userManager.USERTYPE_NET.equals(user_type)) {
-                //网上报建用户转到报建页面
-                url = "/netProject/index.do";
-                baseUser.setIdCard(userManager.USERTYPE_NET);
-                session.removeAttribute(userManager.USERTYPE_KEY);
+            SysUser user = sysUserManager.getSysUser();
+            Long lastUpdateTime = 0l;
+            if (user.getPasswordUpdateTime() != null) {
+                lastUpdateTime = user.getPasswordUpdateTime().getTime();
+            }
+            Long today = System.currentTimeMillis();
+            int days = (int) (((today - lastUpdateTime) / 3600000) / 24);
+            if (days >= 90) {
+                session.setAttribute("noticePassword", "您已经3个月没有修改密码，请及时修改密码！");
+            }
 
-            } else {
-                SysUser user = sysUserManager.getSysUser();
-                Long lastUpdateTime = 0l;
-                if (user.getPasswordUpdateTime() != null) {
-                    lastUpdateTime = user.getPasswordUpdateTime().getTime();
-                }
-                Long today = System.currentTimeMillis();
-                int days = (int) (((today - lastUpdateTime) / 3600000) / 24);
-//            logger.debug("days = ====================" + days);
-                if (days >= 90) {
-                    session.setAttribute("noticePassword", "您已经3个月没有修改密码，请及时修改密码！");
-                }
+            sysUserManager.loadUserPrivileges(user.getId(), true);
 
-                sysUserManager.loadUserPrivileges(user.getId(), true);
-
-                if (user.getRegPerson() != null) {
-                    //网站登录转到监管平台页面
-                    url = "/platform/index.do";
-                }
+            if (user.getRegPerson() != null) {
+                //网站登录转到监管平台页面
+                url = "/platform/index.do";
             }
         }
         url = contextPath + url;
@@ -94,8 +88,6 @@ public class LoginController extends BaseCRUDActionController {
         sysLogManager.log(request, Constants.LOG_TYPE_LOGIN);
 
         response.sendRedirect(url);
-//        model.addAttribute("url", url);
-//        return "login_dispatch";
     }
 
     /**

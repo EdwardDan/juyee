@@ -5,6 +5,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.net.URL;
 
@@ -56,4 +57,13 @@ public class UrlParser {
     }
 
 
+    /**
+     * 获取当前路径前缀
+     * @param request .
+     * @return .
+     */
+    public static String getFrontUrl(HttpServletRequest request){
+        String path = request.getContextPath();
+        return request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+    }
 }

@@ -4,15 +4,31 @@ import com.justonetech.biz.daoservice.AreaSgPermitService;
 import com.justonetech.biz.daoservice.SgPermitService;
 import com.justonetech.biz.domain.AreaSgPermit;
 import com.justonetech.biz.domain.SgPermit;
+import com.justonetech.biz.manager.SiteMenuManager;
 import com.justonetech.biz.utils.Constants;
+import com.justonetech.biz.utils.SysUtils;
+import com.justonetech.biz.utils.UrlParser;
+import com.justonetech.biz.utils.operationMsg.OperationMsgManager;
 import com.justonetech.core.controller.BaseCRUDActionController;
+import com.justonetech.core.utils.JspHelper;
+import com.justonetech.core.utils.RandomUtils;
 import com.justonetech.system.domain.SysUser;
+import com.justonetech.system.filter.CustomAuthenticationProcessingFilter;
+import com.justonetech.system.manager.SysLogCustomManager;
 import com.justonetech.system.manager.SysUserManager;
+import com.justonetech.system.manager.UserManager;
+import net.sf.json.JSONObject;
+import org.hibernate.util.StringHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.net.URLDecoder;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -29,6 +45,12 @@ public class PlatformController extends BaseCRUDActionController {
 
     @Autowired
     private AreaSgPermitService areaSgPermitService;
+
+    @Autowired
+    private UserManager userManager;
+
+    @Autowired
+    private SysLogCustomManager sysLogManager;
 
     /**
      * 监管平台首页
@@ -105,103 +127,6 @@ public class PlatformController extends BaseCRUDActionController {
         return "view/platform/mainQxsgxk";
     }
 
-
-//    /**
-//     * 主页面--监督预约列表
-//     *
-//     * @param model .
-//     * @return .
-//     */
-//    @RequestMapping
-//    public String mainJdyy(Model model) {
-//        //外网项目用户和工地用户只能查看本项目范围的记录
-//        String hql = "from OrderFormDeploy where 1=1";
-//
-//        hql += orderFormManager.getOrderFormFilterHql();
-//
-//        hql += " order by orderForm.orderCode desc";
-////        System.out.println("..............hql = " + hql);
-//        List<OrderFormDeploy> list = orderFormDeployService.findByQuery(hql);
-//        if (list.size() > 5) {
-//            list = list.subList(0, 5);
-//        }
-//        model.addAttribute("list", list);
-//
-//        return "view/platform/mainJdyy";
-//    }
-//
-//    /**
-//     * 主页面--工地申报统计
-//     *
-//     * @param model .
-//     * @return .
-//     */
-//    @RequestMapping
-//    public String mainGdsb(Model model) {
-//        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-//        SysUser sysUser = sysUserManager.getSysUser();
-//        Long userId = sysUser.getId();
-//        List<BpmProcessDefinition> definitionList = bpmProcessDefinitionManager.getBpmProcessDefinitionListByCode(Constants.BPM_PROCESS_DEFINITION_CATEGORY_GD, false);
-//        for (BpmProcessDefinition data : definitionList) {
-//            String code = data.getCode();
-//            int waitAuditCount = bpmProcessInstanceManager.getWaitAuditList(code, userId).size();
-//            int hasAuditCount = bpmProcessInstanceManager.getHasAuditList(code, userId).size();
-//
-//            Map<String, Object> map = new HashMap<String, Object>();
-//            map.put("code", code);
-//            map.put("name", data.getName());
-//            map.put("waitAuditCount", waitAuditCount);
-//            map.put("hasAuditCount", hasAuditCount);
-//            map.put("totalAuditCount", (waitAuditCount + hasAuditCount));
-//
-//            list.add(map);
-//        }
-//        model.addAttribute("list", list);
-//
-//        model.addAttribute("categoryCode", Constants.BPM_PROCESS_DEFINITION_CATEGORY_GD);
-//
-//        return "view/platform/mainGdsb";
-//    }
-//
-//    /**
-//     * 主页面--网上办事流程
-//     *
-//     * @param model .
-//     * @return .
-//     */
-//    @RequestMapping
-//    public String mainWsbslc(Model model) {
-//
-//        //信息列表
-//        int recordCount = 5;
-////        List<OaInfoApply> infoList = oaPublicInfoManager.getPublicList(Constants.OA_PUBLIC_INFO_RANGE_OUT, Constants.OA_PUBLIC_INO_TYPE_WSBSLC, recordCount);
-////        model.addAttribute("infoList", infoList);
-//        model.addAttribute("recordCount", recordCount);
-//
-//        //最多显示字符数
-//        model.addAttribute("maxWordCount", 30);
-//
-//        //发布范围
-//        model.addAttribute("range", Constants.OA_PUBLIC_INFO_RANGE_OUT);
-////        model.addAttribute("typeCode", Constants.OA_PUBLIC_INO_TYPE_WSBSLC);
-//
-//        return "view/platform/mainWsbslc";
-//    }
-//
-//    /**
-//     * 主页面--整改单据统计
-//     *
-//     * @param model .
-//     * @return .
-//     */
-//    @RequestMapping
-//    public String mainZgdj(Model model) {
-////        List<Map<String, Object>> pollingFormCalc = pollingFormManager.getPollingFormCalc("1901-01-01", DateTimeHelper.getCurrentDate(), true);
-////        model.addAttribute("list", pollingFormCalc);
-//
-//        return "view/platform/mainZgdj";
-//    }
-
     /**
      * 附件下载
      *
@@ -211,5 +136,131 @@ public class PlatformController extends BaseCRUDActionController {
     public String attachDownload() {
 
         return "view/platform/mainDownload";
+    }
+
+
+    /**
+     * 外网权限登录时验证接口
+     * http://192.168.1.89:8084/platform/loginCheck.do?account=admin&password=1234
+     *
+     * @return .
+     */
+    @RequestMapping
+    public String loginCheck(Model model, HttpServletRequest request) {
+        String loginName = request.getParameter("loginName");
+        String password = request.getParameter("password");
+        String jumpUrl = request.getParameter("jumpUrl");
+
+        HashMap<String, String> map = new HashMap<String, String>();
+        map.put("msg", "用户名或密码不正确，请重新输入！");
+        map.put("success", "false");
+        map.put("url", "");
+        if (!StringHelper.isEmpty(loginName) && !StringHelper.isEmpty(password)) {
+            //查询用户是否存在
+            SysUser sysUser = sysUserManager.getSysUser(loginName);
+            if (sysUser != null) {
+//                String savePass = SysUtils.getPassword(sysUser.getPassword());
+                //查询用户是否合法
+//                if (password.equals(savePass)) {
+                if (password.equals(sysUser.getMd5Pass())) {
+                    map.put("msg", "验证通过！");
+                    map.put("success", "true");
+
+                    String basePath = UrlParser.getFrontUrl(request);
+                    String url = basePath + "platform/loginProcess.do" + "?loginName=" + loginName + "&jumpUrl=" + jumpUrl;
+                    map.put("url", url);
+                    request.getSession().setAttribute("SITE_USER", loginName);
+                }
+            }
+        }
+        model.addAttribute("msg", JSONObject.fromObject(map).toString());
+        return "common/msg";
+    }
+
+    /**
+     * 登录处理过程
+     * http://192.168.1.89:8084/platform/loginProcess.do?account=admin
+     *
+     * @param model   .
+     * @param request .
+     * @return .
+     */
+    @RequestMapping
+    public String loginProcess(Model model, HttpServletRequest request) {
+        String loginName = JspHelper.getString(request.getParameter("loginName"));
+        String jumpUrl = request.getParameter("jumpUrl");
+        HttpSession session = request.getSession();
+        String site_user = JspHelper.getString(request.getSession().getAttribute("SITE_USER"));
+//        System.out.println("loginName = " + loginName);
+//        System.out.println("site_user = " + site_user);
+//        System.out.println("jumpUrl = " + jumpUrl);
+        SysUser sysUser = sysUserManager.getSysUser(loginName);
+        if (sysUser != null) {
+            String j_validation_code = RandomUtils.generateString("0123456789", 4);
+            session.setAttribute(CustomAuthenticationProcessingFilter.VALIDATION_CODE, j_validation_code);
+
+            model.addAttribute("j_username", loginName);
+            model.addAttribute("j_password", SysUtils.getPassword(sysUser.getPassword()));
+            model.addAttribute("j_validation_code", j_validation_code);
+            model.addAttribute("jumpUrl", jumpUrl);
+
+            session.setAttribute(userManager.USERTYPE_KEY, userManager.USERTYPE_SITE);
+            session.setAttribute("jumpUrl", jumpUrl);
+
+            return "view/loginLiferay/dispatch";
+
+        } else {
+            return OperationMsgManager.errorMsg(model, null, "未找到此用户，请重新登录！");
+        }
+    }
+
+    /**
+     * liferay网站跳转http://192.168.1.89:8084/platform/jump.do?code=cljcys
+     *
+     * @param model   .
+     * @param request .
+     */
+    @RequestMapping
+    public String jump(Model model, HttpServletRequest request) throws IOException {
+        String basePath = UrlParser.getFrontUrl(request);
+        String code = request.getParameter("code");   //菜单编码
+        String account = request.getParameter("account");
+        String name = request.getParameter("name");
+        String type = request.getParameter("type");
+        if (!com.justonetech.core.utils.StringHelper.isEmpty(name)) {
+            name = URLDecoder.decode(name, "utf-8");
+        }
+
+        String menuLink = SiteMenuManager.getActualLink(code, account, name, type);
+        System.out.println("menuLink = " + menuLink);
+        if (menuLink != null) {
+            String url = basePath + menuLink;
+            System.out.println("url = " + url);
+            model.addAttribute("url", url);
+        }
+        HttpSession session = request.getSession();
+        session.setAttribute(userManager.USERTYPE_KEY, userManager.USERTYPE_SITE);
+        session.setAttribute(userManager.SITE_USERNAME_KEY, account);
+
+        return "view/platform/jump";
+    }
+
+    /**
+     * 测试专用
+     * http://192.168.1.89:8084/platform/jump.do?code=cljcys
+     *
+     * @param model .
+     */
+    @RequestMapping
+    public String liferayJump(Model model, String loginName, String password, String jumpUrl, HttpSession session) throws IOException {
+        model.addAttribute("loginName", loginName);
+        model.addAttribute("password", password);
+        model.addAttribute("jumpUrl", jumpUrl);
+        Object site_user = session.getAttribute("SITE_USER");
+        String sessionUser = JspHelper.getString(site_user);
+        model.addAttribute("isLogin", sessionUser.equals(loginName));
+
+        return "view/platform/liferayJump";
+
     }
 }
