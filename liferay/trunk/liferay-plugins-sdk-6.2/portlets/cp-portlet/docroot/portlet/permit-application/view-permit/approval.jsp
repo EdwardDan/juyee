@@ -53,7 +53,7 @@ table {
 				}
 			   String state="";
 			   if(workflowLogs.get(i).getState().equals("shoulizhongxin")){state="收件";}
-			   if(workflowLogs.get(i).getState().equals("quxianshouli")){state="受理";}
+			   if(workflowLogs.get(i).getState().equals("quxianshouli")){continue;}
 			   if(workflowLogs.get(i).getState().equals("chushen")){state="初审";}
 			   if(workflowLogs.get(i).getState().equals("shoujian")){state="收件";}
 			   if(workflowLogs.get(i).getState().equals("quxianshenhe")){continue;}
@@ -69,6 +69,7 @@ table {
 			   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state3")){transition="收件退回";}
 			   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state20")){transition="不予通过";}
 			   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state13")){continue;}
+			   if(KaleoLogLocalServiceUtil.getKaleoLog(workflowLogs.get(i).getWorkflowLogId()+1).getKaleoNodeName().equals("state4")){continue;}
 			   
 	%>
 	<tr>
