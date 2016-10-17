@@ -569,9 +569,9 @@ public class PermitApprovalPortlet extends MVCPortlet {
 					}
 					// 如果已有数据
 					else {
-						bzclIds = bzclIds + "," + fileEntry.getFileEntryId() + "|" + fileEntry.getExtension();
-						fileJson.put("fileBzclId", fileEntry.getFileEntryId());
+						bzclIds = bzclIds + "," + fileEntry.getFileEntryId() + "|" + fileEntry.getExtension();	
 					}
+					fileJson.put("fileBzclId", fileEntry.getFileEntryId());
 					applyMaterial.setBzclIds(bzclIds);
 					ApplyMaterialLocalServiceUtil.updateApplyMaterial(applyMaterial);
 					fileJson.put("materialName", applyMaterial.getClmc());
@@ -654,9 +654,9 @@ public class PermitApprovalPortlet extends MVCPortlet {
 					}
 					// 如果已有数据
 					else {
-						wjscbzclIds = wjscbzclIds + "," + fileEntry.getFileEntryId() + "|" + fileEntry.getExtension();
-						fileJson.put("fileWjscbzclId", fileEntry.getFileEntryId());
+						wjscbzclIds = wjscbzclIds + "," + fileEntry.getFileEntryId() + "|" + fileEntry.getExtension();						
 					}
+					fileJson.put("fileWjscbzclId", fileEntry.getFileEntryId());
 					applyMaterial.setWjscbzclIds(wjscbzclIds);
 					ApplyMaterialLocalServiceUtil.updateApplyMaterial(applyMaterial);
 					fileJson.put("materialName", applyMaterial.getClmc());
