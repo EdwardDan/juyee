@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
 <%@ include file="init.jsp"%>
-
+<%@ page import="com.liferay.util.*"%>
 <style>
 .aui .table th, .aui .table td {
 	vertical-align: middle;
@@ -14,6 +14,7 @@
 </style>
 
 <%
+	String uploadProgressId = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
 	List<Dictionary> materialDictionaries=new ArrayList<Dictionary>();
 	List<ApplyMaterial> applyMaterialList=new ArrayList<ApplyMaterial>();
 	Long permitId =ParamUtil.getLong(renderRequest,"permitId",0);
@@ -79,24 +80,27 @@
 	}
 	
 	for(Dictionary dic: materialDictionaries){
-				ApplyMaterial applyMaterial = ApplyMaterialLocalServiceUtil
-						.createApplyMaterial(CounterLocalServiceUtil
-								.increment());
-				applyMaterial.setPermitId(permitId);
-				applyMaterial.setXh(dic.getTag());
-				applyMaterial.setClmc(dic.getName());
-				applyMaterial.setShyq(dic.getCustomField1());
-				applyMaterial.setYjfs(Validator.isNumber(dic
-						.getCustomField2()) ? GetterUtil.getInteger(dic
-						.getCustomField2()) : 0);
-				applyMaterialList.add(applyMaterial);
-				ApplyMaterialLocalServiceUtil
-						.updateApplyMaterial(applyMaterial);
-			}
+		ApplyMaterial applyMaterial = ApplyMaterialLocalServiceUtil
+				.createApplyMaterial(CounterLocalServiceUtil
+						.increment());
+		applyMaterial.setPermitId(permitId);
+		applyMaterial.setXh(dic.getTag());
+		applyMaterial.setClmc(dic.getName());
+		applyMaterial.setShyq(dic.getCustomField1());
+		applyMaterial.setYjfs(Validator.isNumber(dic
+				.getCustomField2()) ? GetterUtil.getInteger(dic
+				.getCustomField2()) : 0);
+		applyMaterialList.add(applyMaterial);
+		ApplyMaterialLocalServiceUtil
+				.updateApplyMaterial(applyMaterial);
+	}
 		}
 
 	}
 %>
+
+<liferay-ui:upload-progress id="<%=uploadProgressId%>"
+	message="uploading" />
 <portlet:renderURL var="viewURL" />
 <c:set var="namespace" value="<%=renderResponse.getNamespace()%>"></c:set>
 <portlet:resourceURL var="fileUpLoadURL" id="fileUpLoad" />
@@ -109,11 +113,8 @@
 <portlet:actionURL var="submitAllURL" name="submitAll">
 	<portlet:param name="redirect" value="${viewURL}" />
 </portlet:actionURL>
-
-
 <form id="fm" action="${fileSaveURL}" enctype="multipart/form-data"
 	method="post">
-
 	<aui:input type="hidden" name="permitId" value="<%=permitId%>"></aui:input>
 	<aui:input name="type" type="hidden" value="<%=type%>" />
 	<table class="table table-bordered" style="font-size: 14px;"
@@ -171,15 +172,15 @@
 	</table>
 
 	<div style="text-align: center">
-	<c:if test="${permit.status!=2 }">
-	<aui:button value="保存" onclick="saveMaterials()"
-			cssClass="btn btn-primary" />
-			</c:if>
-			<c:if test="${permit.status==2 }">
-	<aui:button value="保存" onclick="submitAll()"
-			cssClass="btn btn-primary" />
-			</c:if>
-		
+		<c:if test="${permit.status!=2 }">
+			<aui:button value="保存" onclick="saveMaterials()"
+				cssClass="btn btn-primary" />
+		</c:if>
+		<c:if test="${permit.status==2 }">
+			<aui:button value="保存" onclick="submitAll()"
+				cssClass="btn btn-primary" />
+		</c:if>
+
 		<c:if test="<%=canTj%>">
 			<aui:button value="上报" onclick="submitAll()"
 				cssClass="btn btn-primary" />
@@ -189,8 +190,8 @@
 			String randomId = StringPool.BLANK;
 				randomId = StringUtil.randomId();
 				String strBackUrl = "http://" + request.getServerName() //服务器地址  
-		        + ":"   
-		        + request.getServerPort() ;          //端口号  
+				        + ":"   
+				        + request.getServerPort() ;          //端口号  
 				String[] assetTypes = new String[1];
 				    	assetTypes[0]="com.justonetech.cp.permit.model.Permit";
 			    	OrderByComparator orderByComparator=null;
@@ -255,6 +256,8 @@ var onTaskClickFn = A.rbind('onTaskClick', Liferay.WorkflowTasks,'<%= randomId %
 Liferay.delegateClick('<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(transitionName) %>taskChangeStatusLink', onTaskClickFn);
 </aui:script>
 	
+
+
 		
 <%
 			}
@@ -342,7 +345,7 @@ Liferay.delegateClick('<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(tra
 							+ fileData.fileId + ","+materialId+")'>删除</a></div>";
 							$("#fileDiv" + divNo).append(ele);
 							domSort(divNo); 
-							alert("上传成功！");				
+							<%= uploadProgressId %>.startProgress();
 						},
 						error : function(e) {
 							alert("网络错误，请重试！！");
