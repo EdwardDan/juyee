@@ -1,3 +1,4 @@
+
 package com.justonetech.cp.portlet;
 
 import java.io.IOException;
@@ -79,15 +80,19 @@ import com.liferay.util.bridges.mvc.MVCPortlet;
 import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 public class CompleteApplicationPortlet extends MVCPortlet {
+
 	private static Log log = LogFactoryUtil.getLog(CompleteApplicationPortlet.class);
 	private static String dateFormatPattern = PropsUtil.get("default.date.format.pattern");
 
 	@Override
-	public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
+	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
+		throws IOException, PortletException {
+
 		User user = null;
 		try {
 			user = PortalUtil.getUser(renderRequest);
-		} catch (PortalException | SystemException e) {
+		}
+		catch (PortalException | SystemException e) {
 			log.info(e.getMessage());
 		}
 		String zzjgdm = "";
@@ -98,7 +103,8 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 					zzjgdm = Validator.isNull(user) ? "" : user.getScreenName();
 				}
 			}
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -127,21 +133,23 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 	}
 
 	@Override
-	public void render(RenderRequest renderRequest, RenderResponse renderResponse) throws PortletException, IOException {
+	public void render(RenderRequest renderRequest, RenderResponse renderResponse)
+		throws PortletException, IOException {
 
 		String mvcPath = ParamUtil.getString(renderRequest, "mvcPath");
 		if (Validator.equals(mvcPath, "/portlet/complete-application/select-project.jsp")) {
 			String bjbh = ParamUtil.getString(renderRequest, "bjbh");
 			String wssqbh = ParamUtil.getString(renderRequest, "wssqbh");
 			String xmmc = ParamUtil.getString(renderRequest, "xmmc");
-			Date bjrqStart = ParamUtil.getDate(renderRequest, "bjrqStart", new SimpleDateFormat(dateFormatPattern),
-					null);
+			Date bjrqStart =
+				ParamUtil.getDate(renderRequest, "bjrqStart", new SimpleDateFormat(dateFormatPattern), null);
 			Date bjrqEnd = ParamUtil.getDate(renderRequest, "bjrqEnd", new SimpleDateFormat(dateFormatPattern), null);
 			String bjwcbj = ParamUtil.getString(renderRequest, "bjwcbj");
 			User user = null;
 			try {
 				user = PortalUtil.getUser(renderRequest);
-			} catch (PortalException | SystemException e) {
+			}
+			catch (PortalException | SystemException e) {
 				log.info(e.getMessage());
 			}
 			String zzjgdm = "";
@@ -152,7 +160,8 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 						zzjgdm = Validator.isNull(user) ? "" : user.getScreenName();
 					}
 				}
-			} catch (Exception e) {
+			}
+			catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -187,16 +196,18 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 			int cur = ParamUtil.getInteger(renderRequest, "cur", 1);
 			int start = delta * (cur - 1);
 			int end = delta * cur;
-			List<Project> projects = ProjectLocalServiceUtil.getProjects(zzjgdm, bjbh, wssqbh, xmmc, bjrqStart,
-					bjrqEnd, bjwcbj, start, end);
-			projectsCount = ProjectLocalServiceUtil.getProjectsCount(zzjgdm, bjbh, wssqbh, xmmc, bjrqStart, bjrqEnd,
-					bjwcbj);
+			List<Project> projects =
+				ProjectLocalServiceUtil.getProjects(zzjgdm, bjbh, wssqbh, xmmc, bjrqStart, bjrqEnd, bjwcbj, start, end);
+			projectsCount =
+				ProjectLocalServiceUtil.getProjectsCount(zzjgdm, bjbh, wssqbh, xmmc, bjrqStart, bjrqEnd, bjwcbj);
 			renderRequest.setAttribute("projects", projects);
 			renderRequest.setAttribute("projectsCount", projectsCount);
-		} else if (Validator.equals(mvcPath, "/portlet/complete-application/edit-complete.jsp")) {
+		}
+		else if (Validator.equals(mvcPath, "/portlet/complete-application/edit-complete.jsp")) {
 			String bjbh = ParamUtil.getString(renderRequest, "bjbh");
 			renderRequest.setAttribute("bjbh", bjbh);
-		} else if (Validator.equals(mvcPath, "/portlet/complete-application/select-permit-unitProject.jsp")) {
+		}
+		else if (Validator.equals(mvcPath, "/portlet/complete-application/select-permit-unitProject.jsp")) {
 
 			List<UnitProject> unitProjects = new ArrayList<UnitProject>();
 			String bjbh = ParamUtil.getString(renderRequest, "bjbh");
@@ -221,8 +232,9 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 					}
 				}
 
-				unitProjects = UnitProjectLocalServiceUtil.findByBjbhAndPermitUnitProjectIds(bjbh,
-						longPermitUnitProjectIds, start, end);
+				unitProjects =
+					UnitProjectLocalServiceUtil.findByBjbhAndPermitUnitProjectIds(
+						bjbh, longPermitUnitProjectIds, start, end);
 			}
 			renderRequest.setAttribute("permitUnitProjectIds", permitUnitProjectIds);
 			renderRequest.setAttribute("bjbh", bjbh);
@@ -234,8 +246,9 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 		super.render(renderRequest, renderResponse);
 	}
 
-	public void saveProjectProfile(ActionRequest request, ActionResponse response) throws SystemException,
-			PortalException, IOException {
+	public void saveProjectProfile(ActionRequest request, ActionResponse response)
+		throws SystemException, PortalException, IOException {
+
 		long completeId = ParamUtil.getLong(request, "completeId");
 		long groupId = PortalUtil.getScopeGroupId(request);
 		long companyId = PortalUtil.getCompanyId(request);
@@ -246,7 +259,8 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 		Project project = null;
 		try {
 			project = ProjectLocalServiceUtil.getProject(bjbh);
-		} catch (PortalException | SystemException e) {
+		}
+		catch (PortalException | SystemException e) {
 			e.printStackTrace();
 		}
 		String wssqbh = project.getBj_webid();
@@ -266,10 +280,12 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 		User user = null;
 		try {
 			user = UserServiceUtil.getCurrentUser();
-		} catch (PortalException e) {
+		}
+		catch (PortalException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (SystemException e) {
+		}
+		catch (SystemException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -281,9 +297,10 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 		CompleteProjectProfile completeProjectProfile = null;
 		if (Validator.isNull(completeId)) {
 			complete = CompleteLocalServiceUtil.createComplete(CounterLocalServiceUtil.increment());
-			completeProjectProfile = CompleteProjectProfileLocalServiceUtil.createCompleteProjectProfile(complete
-					.getCompleteId());
-		} else {
+			completeProjectProfile =
+				CompleteProjectProfileLocalServiceUtil.createCompleteProjectProfile(complete.getCompleteId());
+		}
+		else {
 			complete = CompleteLocalServiceUtil.getComplete(completeId);
 			completeProjectProfile = CompleteProjectProfileLocalServiceUtil.getCompleteProjectProfile(completeId);
 		}
@@ -318,13 +335,14 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 		redirect(request, response, complete, 1);
 	}
 
-	public void saveUnitProjects(ActionRequest request, ActionResponse response) throws SystemException,
-			PortalException, IOException {
+	public void saveUnitProjects(ActionRequest request, ActionResponse response)
+		throws SystemException, PortalException, IOException {
+
 		long completeId = ParamUtil.getLong(request, "completeId", 0);
 		// 删除原有数据
 		if (completeId != 0) {
-			List<CompleteUnitProject> completeUnitProjects = CompleteUnitProjectLocalServiceUtil.findByCompleteId(
-					completeId, -1, -1);
+			List<CompleteUnitProject> completeUnitProjects =
+				CompleteUnitProjectLocalServiceUtil.findByCompleteId(completeId, -1, -1);
 			for (CompleteUnitProject completeUnitProject : completeUnitProjects) {
 				CompleteUnitProjectLocalServiceUtil.deleteCompleteUnitProject(completeUnitProject);
 			}
@@ -336,8 +354,8 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 			String[] gcmcs = ParamUtil.getParameterValues(request, "gcmc");
 			String[] jsnrs = ParamUtil.getParameterValues(request, "jsnr");
 			for (int i = 0; i < gcbhs.length - 1; i++) {
-				CompleteUnitProject unitProject = CompleteUnitProjectLocalServiceUtil
-						.createCompleteUnitProject(CounterLocalServiceUtil.increment());
+				CompleteUnitProject unitProject =
+					CompleteUnitProjectLocalServiceUtil.createCompleteUnitProject(CounterLocalServiceUtil.increment());
 				unitProject.setBjbh(bjbh);
 				unitProject.setCompleteId(completeId);
 				unitProject.setSgxkzbh(sgxkzbh[i]);
@@ -360,23 +378,26 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 		}
 	}
 
-	public void deleteComplete(ActionRequest request, ActionResponse response) throws PortalException, SystemException {
+	public void deleteComplete(ActionRequest request, ActionResponse response)
+		throws PortalException, SystemException {
+
 		long completeId = ParamUtil.getLong(request, "completeId");
 		CompleteLocalServiceUtil.deleteComplete(completeId);
-		CompleteProjectProfileLocalServiceUtil.deleteCompleteProjectProfile(CompleteProjectProfileLocalServiceUtil
-				.getCompleteProjectProfile(completeId));
+		CompleteProjectProfileLocalServiceUtil.deleteCompleteProjectProfile(CompleteProjectProfileLocalServiceUtil.getCompleteProjectProfile(completeId));
 	}
 
 	public void redirect(ActionRequest request, ActionResponse response, Complete complete, int sqbz)
-			throws IOException {
+		throws IOException {
 
 		String redirect = ParamUtil.getString(request, "redirectURL");
 		int tabSqbz = 1;
 		if (complete.getSqbz() == sqbz && sqbz < 4) {
 			tabSqbz = sqbz + 1;
-		} else if (complete.getSqbz() == sqbz && sqbz == 4) {
+		}
+		else if (complete.getSqbz() == sqbz && sqbz == 4) {
 			tabSqbz = sqbz;
-		} else if (complete.getSqbz() > sqbz) {
+		}
+		else if (complete.getSqbz() > sqbz) {
 			tabSqbz = sqbz;
 		}
 		redirect += "&" + response.getNamespace() + "completeId=" + complete.getCompleteId();
@@ -385,8 +406,9 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 		response.sendRedirect(redirect);
 	}
 
-	public void saveCompleteApplyMaterials(ActionRequest request, ActionResponse response) throws SystemException,
-			PortalException, ParseException, IOException {
+	public void saveCompleteApplyMaterials(ActionRequest request, ActionResponse response)
+		throws SystemException, PortalException, ParseException, IOException {
+
 		long completeId = ParamUtil.getLong(request, "completeId");
 		Complete complete = CompleteLocalServiceUtil.getComplete(completeId);
 		if (complete.getSqbz() == 1) {
@@ -398,8 +420,9 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 	}
 
 	@Override
-	public void serveResource(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException,
-			PortletException {
+	public void serveResource(ResourceRequest resourceRequest, ResourceResponse resourceResponse)
+		throws IOException, PortletException {
+
 		// TODO Auto-generated method stub
 
 		try {
@@ -434,12 +457,14 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 					fileBytes = FileUtil.getBytes(stream);
 				}
 				if (!materialId.equals("0")) {
-					CompleteApplyMaterial completeApplyMaterial = CompleteApplyMaterialLocalServiceUtil
-							.getCompleteApplyMaterial(Long.valueOf(materialId));
+					CompleteApplyMaterial completeApplyMaterial =
+						CompleteApplyMaterialLocalServiceUtil.getCompleteApplyMaterial(Long.valueOf(materialId));
 					String fileTitle = completeApplyMaterial.getClmc() + "-" + no + "." + fileExtension;
 
-					fileEntry = uploadFile(resourceRequest, fileSourceName, fileBytes, serviceContext, portletId,
-							materialId, fileTitle);
+					fileEntry =
+						uploadFile(
+							resourceRequest, fileSourceName, fileBytes, serviceContext, portletId, materialId,
+							fileTitle);
 
 					String fileEntryIds = completeApplyMaterial.getFileEntryIds();
 					// 添加第一条数据时
@@ -448,9 +473,9 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 					}
 					// 如果已有数据
 					else {
-						fileEntryIds = fileEntryIds + "," + fileEntry.getFileEntryId() + "|" + fileEntry.getExtension();
-						fileJson.put("fileId", fileEntry.getFileEntryId());
+						fileEntryIds = fileEntryIds + "," + fileEntry.getFileEntryId() + "|" + fileEntry.getExtension();						
 					}
+					fileJson.put("fileId", fileEntry.getFileEntryId());
 					completeApplyMaterial.setFileEntryIds(fileEntryIds);
 					CompleteApplyMaterialLocalServiceUtil.updateCompleteApplyMaterial(completeApplyMaterial);
 					fileJson.put("materialName", completeApplyMaterial.getClmc());
@@ -472,8 +497,8 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 				if (!fileId.equals("0")) {
 					DLFileEntry dlFileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(fileId));
 					if (!materialId.equals("0")) {
-						CompleteApplyMaterial completeApplyMaterial = CompleteApplyMaterialLocalServiceUtil
-								.getCompleteApplyMaterial(Long.valueOf(materialId));
+						CompleteApplyMaterial completeApplyMaterial =
+							CompleteApplyMaterialLocalServiceUtil.getCompleteApplyMaterial(Long.valueOf(materialId));
 						String fileEntryIds = completeApplyMaterial.getFileEntryIds();
 						fileEntryIds = fileEntryIds + ",";// 加上逗号为了容易替换
 						// 获取文件路径
@@ -489,21 +514,26 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 				}
 			}
 
-		} catch (PortalException e) {
+		}
+		catch (PortalException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (SystemException e) {
+		}
+		catch (SystemException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (IOException e) {
+		}
+		catch (IOException e) {
 			e.printStackTrace();
 		}
 		super.serveResource(resourceRequest, resourceResponse);
 	}
 
-	public FileEntry uploadFile(ResourceRequest request, String fileSourceName, byte[] fileBytes,
-			ServiceContext serviceContext, String portletId, String materialId, String fileTitle)
-			throws PortalException, SystemException, IOException {
+	public FileEntry uploadFile(
+		ResourceRequest request, String fileSourceName, byte[] fileBytes, ServiceContext serviceContext,
+		String portletId, String materialId, String fileTitle)
+		throws PortalException, SystemException, IOException {
+
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setIndexingEnabled(true);
 		User user = PortalUtil.getUser(request);
@@ -520,33 +550,42 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 			if (Validator.isNotNull(dlParentFolder)) {
 				dlChildFolder = DLFolderLocalServiceUtil.fetchFolder(groupId, dlParentFolder.getFolderId(), materialId);
 				if (Validator.isNull(dlChildFolder)) {
-					dlChildFolder = DLFolderLocalServiceUtil.addFolder(userId, groupId, groupId, false,
-							dlParentFolder.getFolderId(), materialId, "", false, serviceContext);
+					dlChildFolder =
+						DLFolderLocalServiceUtil.addFolder(
+							userId, groupId, groupId, false, dlParentFolder.getFolderId(), materialId, "", false,
+							serviceContext);
 				}
-			} else {
-				dlParentFolder = DLFolderLocalServiceUtil.addFolder(userId, groupId, groupId, true, rootFolderId,
-						portletId, "", true, serviceContext);
-				dlChildFolder = DLFolderLocalServiceUtil.addFolder(userId, groupId, groupId, false,
-						dlParentFolder.getFolderId(), materialId, "", false, serviceContext);
+			}
+			else {
+				dlParentFolder =
+					DLFolderLocalServiceUtil.addFolder(
+						userId, groupId, groupId, true, rootFolderId, portletId, "", true, serviceContext);
+				dlChildFolder =
+					DLFolderLocalServiceUtil.addFolder(
+						userId, groupId, groupId, false, dlParentFolder.getFolderId(), materialId, "", false,
+						serviceContext);
 			}
 		}
 
 		if (fileBytes != null) {
-			fileEntry = DLAppLocalServiceUtil.addFileEntry(userId, groupId, dlChildFolder.getFolderId(),
-					fileSourceName, MimeTypesUtil.getContentType(fileSourceName), fileTitle, null, null, fileBytes,
-					serviceContext);
+			fileEntry =
+				DLAppLocalServiceUtil.addFileEntry(
+					userId, groupId, dlChildFolder.getFolderId(), fileSourceName,
+					MimeTypesUtil.getContentType(fileSourceName), fileTitle, null, null, fileBytes, serviceContext);
 		}
 		return fileEntry;
 	}
 
-	public void submitAll(ActionRequest request, ActionResponse response) throws PortalException, SystemException {
+	public void submitAll(ActionRequest request, ActionResponse response)
+		throws PortalException, SystemException {
+
 		ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
 		long completeId = ParamUtil.getLong(request, "completeId");
 		String babh = "JT";
 		Complete complete = CompleteLocalServiceUtil.getComplete(completeId);
 
-		CompleteProjectProfile completeProjectProfile = CompleteProjectProfileLocalServiceUtil
-				.getCompleteProjectProfile(completeId);
+		CompleteProjectProfile completeProjectProfile =
+			CompleteProjectProfileLocalServiceUtil.getCompleteProjectProfile(completeId);
 		Dictionary xmlx = DictionaryLocalServiceUtil.getDictionary(completeProjectProfile.getXmlx());
 		babh = babh + xmlx.getCode();
 		Locale locale = LocaleUtil.getDefault();
@@ -558,8 +597,8 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 		if (null != completes && completes.size() > 0) {
 			for (Complete complete_ : completes) {
 				if (null != complete.getBabh() && complete.getBabh().length() > 0) {
-					if (Validator.isNotNull(complete_.getBabh())
-							&& complete_.getBabh().substring(4, 8).equals(currentDateStr)) {
+					if (Validator.isNotNull(complete_.getBabh()) &&
+						complete_.getBabh().substring(4, 8).equals(currentDateStr)) {
 						nums.add(Long.parseLong(complete_.getBabh().substring(8, 12)));
 					}
 				}
@@ -580,11 +619,14 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 
 		if (num / 10 < 1) {
 			babh = babh + "000" + num;
-		} else if (num / 100 < 1) {
+		}
+		else if (num / 100 < 1) {
 			babh = babh + "00" + num;
-		} else if (num / 1000 < 1) {
+		}
+		else if (num / 1000 < 1) {
 			babh = babh + "0" + num;
-		} else if (num / 10000 < 1) {
+		}
+		else if (num / 10000 < 1) {
 			babh = babh + num;
 		}
 
@@ -616,7 +658,8 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 				for (long userId : userIdsList) {
 					users.add(UserLocalServiceUtil.getUser(userId));
 				}
-			} else {
+			}
+			else {
 				aRole = RoleLocalServiceUtil.fetchRole(user.getCompanyId(), "市竣工备案审核");
 				userIds = UserLocalServiceUtil.getRoleUserIds(aRole.getRoleId());
 				for (long useId : userIds) {
@@ -626,14 +669,16 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 			ServiceContext serviceContext = ServiceContextFactory.getInstance(request);
 			JSONObject payloadJSON = JSONFactoryUtil.createJSONObject();
 			for (User a : users) {
-				UserNotificationEventLocalServiceUtil.addUserNotificationEvent(a.getUserId(),
-						CompleteApplicationNotificationHandler.PORTLET_ID, (new Date()).getTime(), user.getUserId(),
-						payloadJSON.toString(), false, serviceContext);
+				UserNotificationEventLocalServiceUtil.addUserNotificationEvent(
+					a.getUserId(), CompleteApplicationNotificationHandler.PORTLET_ID, (new Date()).getTime(),
+					user.getUserId(), payloadJSON.toString(), false, serviceContext);
 			}
-		} catch (SystemException e1) {
+		}
+		catch (SystemException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		} catch (PortalException e) {
+		}
+		catch (PortalException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
