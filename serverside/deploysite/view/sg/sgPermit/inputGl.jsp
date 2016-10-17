@@ -6,16 +6,18 @@
     $(function () {
         //页面验证初始化
         var validateCondition = [
-            {name:"bjbh", rule:"validate[required,maxSize[100]]"},
-            {name:"bdh", rule:"validate[required,maxSize[100]]"}
+            {name: "bjbh", rule: "validate[required,maxSize[100]]"},
+            {name: "bdh", rule: "validate[required,maxSize[100]]"}
         ];
         validateInit(validateCondition, formId);
-        if (${bean.isZftzl}) {
-            $("#isZftzl").val("true");
-            document.getElementById("yzzpl").style.display = "";
-        } else {
-            $("#isZftzl").val("false");
-            document.getElementById("yzzpl").style.display = "none";
+        if (null !=${bean.isZftzl} && '' !=${bean.isZftzl}) {
+            if (${bean.isZftzl}) {
+                $("#isZftzl").val("true");
+                document.getElementById("yzzpl").style.display = "";
+            } else {
+                $("#isZftzl").val("false");
+                document.getElementById("yzzpl").style.display = "none";
+            }
         }
     });
 
