@@ -123,6 +123,7 @@ public class PermitLocalServiceImpl extends PermitLocalServiceBaseImpl {
 			projectProfileDQ.add(PropertyFactoryUtil.forName("gcmc").like("%" + gcmc + "%"));
 			dynamicQuery.add(PropertyFactoryUtil.forName("permitId").in(projectProfileDQ));
 		}
+		dynamicQuery.addOrder(OrderFactoryUtil.desc("permitId"));
 		return dynamicQuery;
 	}
 	
