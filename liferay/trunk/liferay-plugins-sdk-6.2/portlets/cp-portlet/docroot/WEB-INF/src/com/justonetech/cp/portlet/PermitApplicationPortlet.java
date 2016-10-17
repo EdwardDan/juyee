@@ -931,8 +931,8 @@ public class PermitApplicationPortlet extends MVCPortlet {
 					// 如果已有数据
 					else {
 						fileEntryIds = fileEntryIds + "," + fileEntry.getFileEntryId() + "|" + fileEntry.getExtension();
-						fileJson.put("fileId", fileEntry.getFileEntryId());
 					}
+					fileJson.put("fileId", fileEntry.getFileEntryId());
 					applyMaterial.setFileEntryIds(fileEntryIds);
 					ApplyMaterialLocalServiceUtil.updateApplyMaterial(applyMaterial);
 					fileJson.put("materialName", applyMaterial.getClmc());
