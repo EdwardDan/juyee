@@ -103,7 +103,7 @@
 	message="uploading" />
 <portlet:renderURL var="viewURL" />
 <c:set var="namespace" value="<%=renderResponse.getNamespace()%>"></c:set>
-<portlet:resourceURL var="fileUpLoadURL" id="fileUpLoad" />
+<portlet:resourceURL var="fileUpLoadURL" id="fileUpLoad"/>
 <portlet:resourceURL var="fileDeleteURL" id="fileDelete" />
 
 <portlet:actionURL var="fileSaveURL" name="saveApplyMaterials">
@@ -324,12 +324,14 @@ Liferay.delegateClick('<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(tra
 			var no = findFileNo(divNo);
 			var fmFile = document.getElementById("fmFile");
 			var oMyForm = new FormData(fmFile);
+			var STR_VALUE = 'value';
 			oMyForm.append("<portlet:namespace/>divNo",divNo);
 			oMyForm.append("<portlet:namespace/>materialId",materialId);
 			oMyForm.append("<portlet:namespace/>portletId",portletId);
 			oMyForm.append("<portlet:namespace/>userfile", $("#fileInput"+divNo)[0].files[0]);
 			oMyForm.append("<portlet:namespace/>no", no);
 			oMyForm.append("<portlet:namespace/>fileExtension", fileExtension);
+			<%= uploadProgressId %>.set(STR_VALUE, 0);
 			$.ajax({
 						url : "<%=fileUpLoadURL%>",
 						type : "post",
