@@ -384,6 +384,10 @@
 		}
 	}
 
+	function <portlet:namespace/>clearValue(btn){
+		var input=$(btn);
+		input.replaceWith(input.val('').clone(true));
+	}
 	/* 删除 */
 	function <portlet:namespace/>fileBzclDelete(divObj, fileId, materialId) {
 		if (!confirm("确定要删除此文件吗？"))
