@@ -2,8 +2,6 @@ package com.justonetech.cp.portlet;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,14 +22,8 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import net.sf.jxls.transformer.XLSTransformer;
-
-import org.apache.commons.io.IOUtils;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 import com.itextpdf.text.DocumentException;
 import com.justonetech.cp.contract.model.Contract;
@@ -49,7 +41,6 @@ import com.justonetech.cp.permit.service.UnitProjectLocalServiceUtil;
 import com.justonetech.cp.util.CityPermitStatus;
 import com.justonetech.sys.model.Dictionary;
 import com.justonetech.sys.service.DictionaryLocalServiceUtil;
-import com.liferay.counter.model.Counter;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.NoSuchWorkflowDefinitionLinkException;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -75,7 +66,6 @@ import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.WorkflowDefinitionLink;
-import com.liferay.portal.model.WorkflowInstanceLink;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.service.UserServiceUtil;
