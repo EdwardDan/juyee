@@ -44,7 +44,11 @@ public class SendMessage {
 			content += commonContent + "未通过审定，请重新进行审核。";
 		}
 		if (status == CityPermitStatus.STATUS_ZXLD_PASS.getCode()) {
-			content += commonContent + "已通过审核，请准备收件。";
+			if(type.equals("JSDW")){
+				content += commonContent + "已通过审核，请将纸质材料送至行政服务中心。";		
+			}else{
+				content += commonContent + "已通过审核，请准备收件。";
+			}
 		}
 		if (status == CityPermitStatus.STATUS_ZXLD_BACK.getCode()) {
 			content += commonContent + "未通过审查，请重新进行审定。";
