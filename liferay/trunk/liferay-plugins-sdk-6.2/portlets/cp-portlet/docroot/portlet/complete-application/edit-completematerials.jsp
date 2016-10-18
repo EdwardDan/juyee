@@ -133,7 +133,7 @@
 					name="${namespace}fileInput${status.index+1}" type="file"
 					multiple="" style="display: none; width: 150px;"
 					accept="application/pdf,image/jpeg"
-					onchange="${renderResponse.namespace}fileUpLoad(${status.index+1},${material.materialId},'<%=portletDisplay.getId() %>');"></input>
+					onchange="${renderResponse.namespace}fileUpLoad(${status.index+1},${material.materialId},'<%=portletDisplay.getId() %>');${renderResponse.namespace}clearValue(this)"></input>
 
 				</td>
 			</tr>
@@ -217,7 +217,12 @@
 					});
 		}
 	}
+	function <portlet:namespace/>clearValue(btn){
+		var input=$(btn);
+		input.replaceWith(input.val('').clone(true));
+	}
 
+	
 	/* 删除 */
 	function <portlet:namespace/>fileDelete(divObj, fileId, materialId) {
 		if (!confirm("确定要删除此文件吗？"))
