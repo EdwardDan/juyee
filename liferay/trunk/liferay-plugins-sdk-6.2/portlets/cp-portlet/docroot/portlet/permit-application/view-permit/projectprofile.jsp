@@ -95,7 +95,7 @@ tr.body td.content {
 	<tr class="body">
 		<td class="text-right">公里数</td>
 		<td class="bg-white">${projectProfile.gls}</td>
-		<td class="text-right">建筑面积</td>
+		<td class="text-right">建筑面积(㎡)</td>
 		<td class="bg-white">${projectProfile.jzmj}</td>
 	</tr>
 	<tr class="body">
