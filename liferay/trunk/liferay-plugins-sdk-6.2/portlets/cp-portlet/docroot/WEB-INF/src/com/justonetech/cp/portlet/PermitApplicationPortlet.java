@@ -1,19 +1,13 @@
 package com.justonetech.cp.portlet;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -22,10 +16,8 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.itextpdf.text.DocumentException;
 import com.justonetech.cp.contract.model.Contract;
 import com.justonetech.cp.contract.service.ContractLocalServiceUtil;
 import com.justonetech.cp.permit.model.ApplyMaterial;
@@ -49,10 +41,8 @@ import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.search.ParseException;
-import com.liferay.portal.kernel.servlet.ServletResponseUtil;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
-import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -81,12 +71,6 @@ import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
-import com.lowagie.text.Document;
-import com.lowagie.text.pdf.AcroFields;
-import com.lowagie.text.pdf.PdfCopy;
-import com.lowagie.text.pdf.PdfImportedPage;
-import com.lowagie.text.pdf.PdfReader;
-import com.lowagie.text.pdf.PdfStamper;
 
 /**
  * Portlet implementation class PermitApplicationPortlet
@@ -218,6 +202,13 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		}
 		Long jsgcsx = ParamUtil.getLong(request, "jsgcsx");
 		String jsgcgm = ParamUtil.getString(request, "jsgcgm");
+		String gls = ParamUtil.getString(request, "gls");
+		String jzmj = ParamUtil.getString(request, "jzmj");
+		int qlsl = ParamUtil.getInteger(request, "qlsl");
+		String qlkd = ParamUtil.getString(request, "qlkd");
+		int guijiaosl = ParamUtil.getInteger(request, "guijiaosl");
+		int sdsl = ParamUtil.getInteger(request, "sdsl");
+		int gaojiasl = ParamUtil.getInteger(request, "gaojiasl");
 		String gcnr = ParamUtil.getString(request, "gcnr");
 		String gyzjbz = ParamUtil.getString(request, "gyzjbz");
 		String fwjzmj = ParamUtil.getString(request, "fwjzmj");
@@ -360,6 +351,13 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		projectProfile.setJsgclb(jsgclbs);
 		projectProfile.setJsgcsx(jsgcsx);
 		projectProfile.setJsgcgm(jsgcgm);
+		projectProfile.setGls(gls);
+		projectProfile.setJzmj(jzmj);
+		projectProfile.setQlsl(qlsl);
+		projectProfile.setQlkd(qlkd);
+		projectProfile.setGuijiaosl(guijiaosl);
+		projectProfile.setSdsl(sdsl);
+		projectProfile.setGaojiasl(gaojiasl);
 		projectProfile.setGcnr(gcnr);
 		projectProfile.setGyzjbz(gyzjbz);
 		projectProfile.setFwjzmj(fwjzmj);
