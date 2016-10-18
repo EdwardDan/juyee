@@ -93,6 +93,28 @@ tr.body td.content {
 		<td class="content" colspan="3">${projectProfile.jsgcgm}</td>
 	</tr>
 	<tr class="body">
+		<td class="text-right">公里数</td>
+		<td class="bg-white">${projectProfile.gls}</td>
+		<td class="text-right">建筑面积</td>
+		<td class="bg-white">${projectProfile.jzmj}</td>
+	</tr>
+	<tr class="body">
+		<td class="text-right">桥梁数量</td>
+		<td class="bg-white">${projectProfile.qlsl}</td>
+		<td class="text-right">桥梁跨度</td>
+		<td class="bg-white">${projectProfile.qlkd}</td>
+	</tr>
+	<tr class="body">
+		<td class="text-right">轨交数量</td>
+		<td class="bg-white">${projectProfile.guijiaosl}</td>
+		<td class="text-right">隧道数量</td>
+		<td class="bg-white">${projectProfile.sdsl}</td>
+	</tr>
+	<tr class="body">
+		<td class="text-right">高架数量</td>
+		<td class="bg-white" colspan="3">${projectProfile.gaojiasl}</td>
+	</tr>
+	<tr class="body">
 		<td class="title">工程内容</td>
 		<td class="content" colspan="3">${projectProfile.gcnr}</td>
 	</tr>
