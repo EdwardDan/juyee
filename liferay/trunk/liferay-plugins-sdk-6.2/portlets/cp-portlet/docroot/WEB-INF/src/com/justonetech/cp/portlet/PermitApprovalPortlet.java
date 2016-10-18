@@ -219,7 +219,10 @@ public class PermitApprovalPortlet extends MVCPortlet {
 			Permit permit = PermitLocalServiceUtil.getPermit(permitId);
 			ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
 			String title = "上海市(" + xmlx + ")工程施工许可证";
-			String bh = permit.getSgxkzbh();
+			String bh = "";
+			if(Validator.isNotNull(permit.getSgxkzbh())){
+				bh = permit.getSgxkzbh();
+			}
 			String gj = "";
 			if (xmlx.equals("港口")) {
 				gj = "根据《中华人民共和国港口法》等相关法律规定，经审查，本工程符合施工条件，准予施工。";
@@ -279,7 +282,10 @@ public class PermitApprovalPortlet extends MVCPortlet {
 			Map<String, String> map = new HashMap<String, String>();
 			Permit permit =PermitLocalServiceUtil.getPermit(permitId);
 			ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
-			String babh = permit.getSgxkzbh();
+			String babh = "";
+			if(Validator.isNotNull(permit.getSgxkzbh())){
+				babh = permit.getSgxkzbh();
+			}
 			String xmmc = projectProfile.getGcmc();
 			String jsdd = projectProfile.getJsdd();
 			String tzly = projectProfile.getTzly();
@@ -427,6 +433,33 @@ public class PermitApprovalPortlet extends MVCPortlet {
 		return downloadURL;
 	}
 	
+	public void generatePDF(DLFileEntry fileEntry, String newPDFPath, Map<String, String> map,
+			ResourceRequest request, ResourceResponse response, Permit permit) throws IOException, DocumentException,
+			PortalException, SystemException, com.lowagie.text.DocumentException {
+		PdfReader pdfReader = new PdfReader(fileEntry.getContentStream());
+		File file = new File(newPDFPath);
+		FileOutputStream outputStream = new FileOutputStream(file);
+		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+		PdfStamper pdfStamper = new PdfStamper(pdfReader, byteArrayOutputStream);
+		AcroFields acroFields = pdfStamper.getAcroFields();
+		Iterator<String> iterator = acroFields.getFields().keySet().iterator();
+		while (iterator.hasNext()) {
+			String data = iterator.next().toString();
+			acroFields.setField(data, map.get(data));
+		}
+		pdfStamper.setFormFlattening(true);
+		pdfStamper.close();
+		Document document = new Document();
+		PdfCopy pdfCopy = new PdfCopy(document, outputStream);
+		document.open();
+		for (int i = 1; i <= pdfReader.getNumberOfPages(); i++) {
+			PdfImportedPage importedPage = pdfCopy.getImportedPage(new PdfReader(byteArrayOutputStream.toByteArray()),
+					i);
+			pdfCopy.addPage(importedPage);
+		}
+		document.close();
+	}
+	
 	@Override
 	public void serveResource(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException,
 			PortletException {
@@ -434,6 +467,51 @@ public class PermitApprovalPortlet extends MVCPortlet {
 		try {
 			String resourceId = resourceRequest.getResourceID();
 			String fileSourceName = "";
+			//预览证书
+			if(resourceId.equals("view")){
+				long permitId = ParamUtil.getLong(resourceRequest, "permitId");
+				Permit permit = PermitLocalServiceUtil.getPermit(permitId);
+				ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
+				String xmlx = DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx()).getName();
+				Map<String, String> map = null;
+				String newPDFPath = "";
+				if (xmlx.equals("航道")) {
+					newPDFPath = PropsUtil.get("sgxkz.temp.folder.id") + "航道开工备案.pdf";
+				} else {
+					newPDFPath = PropsUtil.get("sgxkz.temp.folder.id") + "施工许可证书.pdf";
+				}
+				if (xmlx.equals("航道")) {
+					map = getKgbaMap(permitId);
+					generatePDF(DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(PropsUtil
+							.get("sgxkz.hd.pdf.template.id"))), newPDFPath, map, resourceRequest, resourceResponse, permit);
+				} else {
+					map = getMap(permitId, xmlx);
+					if (projectProfile.getXmxz() == 29769) {
+						generatePDF(DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(PropsUtil
+								.get("sgxkz.pdf.template.id"))), newPDFPath, map, resourceRequest, resourceResponse,
+								permit);
+					} else {
+						generatePDF(DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(PropsUtil
+								.get("sgxkz.ls.pdf.template.id"))), newPDFPath, map, resourceRequest, resourceResponse,
+								permit);
+					}
+				}
+
+				HttpServletRequest request = PortalUtil.getHttpServletRequest(resourceRequest);
+				HttpServletResponse response = PortalUtil.getHttpServletResponse(resourceResponse);
+				File file = null;
+				if (xmlx.equals("航道")) {
+					file = new File("D:\\temp\\航道开工备案.pdf");
+				} else {
+					file = new File("D:\\temp\\施工许可证书.pdf");
+				}
+				byte[] bytes = FileUtil.getBytes(file);
+				if (xmlx.equals("航道")) {
+					ServletResponseUtil.sendFile(request, response, "航道开工备案.pdf", bytes, ContentTypes.APPLICATION_PDF);
+				}else{
+					ServletResponseUtil.sendFile(request, response, "施工许可证书.pdf", bytes, ContentTypes.APPLICATION_PDF);
+				}
+			}
 			//生成开工备案pdf
 			if(resourceId.equals("printkgbaPdf")){
 				long permitId = ParamUtil.getLong(resourceRequest, "permitId");
