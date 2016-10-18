@@ -38,7 +38,7 @@ public class ProjectProfileCacheModel implements CacheModel<ProjectProfile>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(149);
+		StringBundler sb = new StringBundler(163);
 
 		sb.append("{permitId=");
 		sb.append(permitId);
@@ -116,6 +116,20 @@ public class ProjectProfileCacheModel implements CacheModel<ProjectProfile>,
 		sb.append(gcnr);
 		sb.append(", sgxkzsbz=");
 		sb.append(sgxkzsbz);
+		sb.append(", gls=");
+		sb.append(gls);
+		sb.append(", jzmj=");
+		sb.append(jzmj);
+		sb.append(", qlsl=");
+		sb.append(qlsl);
+		sb.append(", qlkd=");
+		sb.append(qlkd);
+		sb.append(", guijiaosl=");
+		sb.append(guijiaosl);
+		sb.append(", sdsl=");
+		sb.append(sdsl);
+		sb.append(", gaojiasl=");
+		sb.append(gaojiasl);
 		sb.append(", tzly=");
 		sb.append(tzly);
 		sb.append(", gkpzhhzjghwh=");
@@ -428,6 +442,33 @@ public class ProjectProfileCacheModel implements CacheModel<ProjectProfile>,
 			projectProfileImpl.setSgxkzsbz(sgxkzsbz);
 		}
 
+		if (gls == null) {
+			projectProfileImpl.setGls(StringPool.BLANK);
+		}
+		else {
+			projectProfileImpl.setGls(gls);
+		}
+
+		if (jzmj == null) {
+			projectProfileImpl.setJzmj(StringPool.BLANK);
+		}
+		else {
+			projectProfileImpl.setJzmj(jzmj);
+		}
+
+		projectProfileImpl.setQlsl(qlsl);
+
+		if (qlkd == null) {
+			projectProfileImpl.setQlkd(StringPool.BLANK);
+		}
+		else {
+			projectProfileImpl.setQlkd(qlkd);
+		}
+
+		projectProfileImpl.setGuijiaosl(guijiaosl);
+		projectProfileImpl.setSdsl(sdsl);
+		projectProfileImpl.setGaojiasl(gaojiasl);
+
 		if (tzly == null) {
 			projectProfileImpl.setTzly(StringPool.BLANK);
 		}
@@ -720,6 +761,13 @@ public class ProjectProfileCacheModel implements CacheModel<ProjectProfile>,
 		tjsj = objectInput.readLong();
 		gcnr = objectInput.readUTF();
 		sgxkzsbz = objectInput.readUTF();
+		gls = objectInput.readUTF();
+		jzmj = objectInput.readUTF();
+		qlsl = objectInput.readInt();
+		qlkd = objectInput.readUTF();
+		guijiaosl = objectInput.readInt();
+		sdsl = objectInput.readInt();
+		gaojiasl = objectInput.readInt();
 		tzly = objectInput.readUTF();
 		gkpzhhzjghwh = objectInput.readUTF();
 		pfhhzrq = objectInput.readLong();
@@ -974,6 +1022,33 @@ public class ProjectProfileCacheModel implements CacheModel<ProjectProfile>,
 		else {
 			objectOutput.writeUTF(sgxkzsbz);
 		}
+
+		if (gls == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(gls);
+		}
+
+		if (jzmj == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(jzmj);
+		}
+
+		objectOutput.writeInt(qlsl);
+
+		if (qlkd == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(qlkd);
+		}
+
+		objectOutput.writeInt(guijiaosl);
+		objectOutput.writeInt(sdsl);
+		objectOutput.writeInt(gaojiasl);
 
 		if (tzly == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
@@ -1250,6 +1325,13 @@ public class ProjectProfileCacheModel implements CacheModel<ProjectProfile>,
 	public long tjsj;
 	public String gcnr;
 	public String sgxkzsbz;
+	public String gls;
+	public String jzmj;
+	public int qlsl;
+	public String qlkd;
+	public int guijiaosl;
+	public int sdsl;
+	public int gaojiasl;
 	public String tzly;
 	public String gkpzhhzjghwh;
 	public long pfhhzrq;

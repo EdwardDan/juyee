@@ -108,6 +108,14 @@
 		<column name="tjsj" type="Date" /><!--提交时间 -->
 		<column name="gcnr" type="String" /><!--工程内容 -->
 		<column name="sgxkzsbz" type="String" /><!--施工许可证书备注 -->
+		<column name="gls" type="String" /><!--公里数 -->
+		<column name="jzmj" type="String" /><!--建筑面积 -->
+		<column name="qlsl" type="int" /><!--桥梁数量 -->
+		<column name="qlkd" type="String" /><!--桥梁跨度 -->
+		<column name="guijiaosl" type="int" /><!--轨交数量 -->
+		<column name="sdsl" type="int" /><!--隧道数量 -->
+		<column name="gaojiasl" type="int" /><!--高架数量 -->
+
 		<!-- 航道有关扩展字段 -->
 		<column name="tzly" type="String" /><!--投资来源 -->
 		<column name="gkpzhhzjghwh" type="String" /><!--工可批准或核准机关和文号 -->

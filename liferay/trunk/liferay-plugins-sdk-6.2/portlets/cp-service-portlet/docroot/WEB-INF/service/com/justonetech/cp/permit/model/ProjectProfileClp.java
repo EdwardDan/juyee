@@ -112,6 +112,13 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 		attributes.put("tjsj", getTjsj());
 		attributes.put("gcnr", getGcnr());
 		attributes.put("sgxkzsbz", getSgxkzsbz());
+		attributes.put("gls", getGls());
+		attributes.put("jzmj", getJzmj());
+		attributes.put("qlsl", getQlsl());
+		attributes.put("qlkd", getQlkd());
+		attributes.put("guijiaosl", getGuijiaosl());
+		attributes.put("sdsl", getSdsl());
+		attributes.put("gaojiasl", getGaojiasl());
 		attributes.put("tzly", getTzly());
 		attributes.put("gkpzhhzjghwh", getGkpzhhzjghwh());
 		attributes.put("pfhhzrq", getPfhhzrq());
@@ -380,6 +387,48 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 
 		if (sgxkzsbz != null) {
 			setSgxkzsbz(sgxkzsbz);
+		}
+
+		String gls = (String)attributes.get("gls");
+
+		if (gls != null) {
+			setGls(gls);
+		}
+
+		String jzmj = (String)attributes.get("jzmj");
+
+		if (jzmj != null) {
+			setJzmj(jzmj);
+		}
+
+		Integer qlsl = (Integer)attributes.get("qlsl");
+
+		if (qlsl != null) {
+			setQlsl(qlsl);
+		}
+
+		String qlkd = (String)attributes.get("qlkd");
+
+		if (qlkd != null) {
+			setQlkd(qlkd);
+		}
+
+		Integer guijiaosl = (Integer)attributes.get("guijiaosl");
+
+		if (guijiaosl != null) {
+			setGuijiaosl(guijiaosl);
+		}
+
+		Integer sdsl = (Integer)attributes.get("sdsl");
+
+		if (sdsl != null) {
+			setSdsl(sdsl);
+		}
+
+		Integer gaojiasl = (Integer)attributes.get("gaojiasl");
+
+		if (gaojiasl != null) {
+			setGaojiasl(gaojiasl);
 		}
 
 		String tzly = (String)attributes.get("tzly");
@@ -1479,6 +1528,167 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 	}
 
 	@Override
+	public String getGls() {
+		return _gls;
+	}
+
+	@Override
+	public void setGls(String gls) {
+		_gls = gls;
+
+		if (_projectProfileRemoteModel != null) {
+			try {
+				Class<?> clazz = _projectProfileRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setGls", String.class);
+
+				method.invoke(_projectProfileRemoteModel, gls);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getJzmj() {
+		return _jzmj;
+	}
+
+	@Override
+	public void setJzmj(String jzmj) {
+		_jzmj = jzmj;
+
+		if (_projectProfileRemoteModel != null) {
+			try {
+				Class<?> clazz = _projectProfileRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setJzmj", String.class);
+
+				method.invoke(_projectProfileRemoteModel, jzmj);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public int getQlsl() {
+		return _qlsl;
+	}
+
+	@Override
+	public void setQlsl(int qlsl) {
+		_qlsl = qlsl;
+
+		if (_projectProfileRemoteModel != null) {
+			try {
+				Class<?> clazz = _projectProfileRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setQlsl", int.class);
+
+				method.invoke(_projectProfileRemoteModel, qlsl);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getQlkd() {
+		return _qlkd;
+	}
+
+	@Override
+	public void setQlkd(String qlkd) {
+		_qlkd = qlkd;
+
+		if (_projectProfileRemoteModel != null) {
+			try {
+				Class<?> clazz = _projectProfileRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setQlkd", String.class);
+
+				method.invoke(_projectProfileRemoteModel, qlkd);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public int getGuijiaosl() {
+		return _guijiaosl;
+	}
+
+	@Override
+	public void setGuijiaosl(int guijiaosl) {
+		_guijiaosl = guijiaosl;
+
+		if (_projectProfileRemoteModel != null) {
+			try {
+				Class<?> clazz = _projectProfileRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setGuijiaosl", int.class);
+
+				method.invoke(_projectProfileRemoteModel, guijiaosl);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public int getSdsl() {
+		return _sdsl;
+	}
+
+	@Override
+	public void setSdsl(int sdsl) {
+		_sdsl = sdsl;
+
+		if (_projectProfileRemoteModel != null) {
+			try {
+				Class<?> clazz = _projectProfileRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setSdsl", int.class);
+
+				method.invoke(_projectProfileRemoteModel, sdsl);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public int getGaojiasl() {
+		return _gaojiasl;
+	}
+
+	@Override
+	public void setGaojiasl(int gaojiasl) {
+		_gaojiasl = gaojiasl;
+
+		if (_projectProfileRemoteModel != null) {
+			try {
+				Class<?> clazz = _projectProfileRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setGaojiasl", int.class);
+
+				method.invoke(_projectProfileRemoteModel, gaojiasl);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
 	public String getTzly() {
 		return _tzly;
 	}
@@ -2415,6 +2625,13 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 		clone.setTjsj(getTjsj());
 		clone.setGcnr(getGcnr());
 		clone.setSgxkzsbz(getSgxkzsbz());
+		clone.setGls(getGls());
+		clone.setJzmj(getJzmj());
+		clone.setQlsl(getQlsl());
+		clone.setQlkd(getQlkd());
+		clone.setGuijiaosl(getGuijiaosl());
+		clone.setSdsl(getSdsl());
+		clone.setGaojiasl(getGaojiasl());
 		clone.setTzly(getTzly());
 		clone.setGkpzhhzjghwh(getGkpzhhzjghwh());
 		clone.setPfhhzrq(getPfhhzrq());
@@ -2503,7 +2720,7 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(149);
+		StringBundler sb = new StringBundler(163);
 
 		sb.append("{permitId=");
 		sb.append(getPermitId());
@@ -2581,6 +2798,20 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 		sb.append(getGcnr());
 		sb.append(", sgxkzsbz=");
 		sb.append(getSgxkzsbz());
+		sb.append(", gls=");
+		sb.append(getGls());
+		sb.append(", jzmj=");
+		sb.append(getJzmj());
+		sb.append(", qlsl=");
+		sb.append(getQlsl());
+		sb.append(", qlkd=");
+		sb.append(getQlkd());
+		sb.append(", guijiaosl=");
+		sb.append(getGuijiaosl());
+		sb.append(", sdsl=");
+		sb.append(getSdsl());
+		sb.append(", gaojiasl=");
+		sb.append(getGaojiasl());
 		sb.append(", tzly=");
 		sb.append(getTzly());
 		sb.append(", gkpzhhzjghwh=");
@@ -2660,7 +2891,7 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(226);
+		StringBundler sb = new StringBundler(247);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.cp.permit.model.ProjectProfile");
@@ -2817,6 +3048,34 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 		sb.append(
 			"<column><column-name>sgxkzsbz</column-name><column-value><![CDATA[");
 		sb.append(getSgxkzsbz());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>gls</column-name><column-value><![CDATA[");
+		sb.append(getGls());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>jzmj</column-name><column-value><![CDATA[");
+		sb.append(getJzmj());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>qlsl</column-name><column-value><![CDATA[");
+		sb.append(getQlsl());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>qlkd</column-name><column-value><![CDATA[");
+		sb.append(getQlkd());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>guijiaosl</column-name><column-value><![CDATA[");
+		sb.append(getGuijiaosl());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>sdsl</column-name><column-value><![CDATA[");
+		sb.append(getSdsl());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>gaojiasl</column-name><column-value><![CDATA[");
+		sb.append(getGaojiasl());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>tzly</column-name><column-value><![CDATA[");
@@ -3006,6 +3265,13 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 	private Date _tjsj;
 	private String _gcnr;
 	private String _sgxkzsbz;
+	private String _gls;
+	private String _jzmj;
+	private int _qlsl;
+	private String _qlkd;
+	private int _guijiaosl;
+	private int _sdsl;
+	private int _gaojiasl;
 	private String _tzly;
 	private String _gkpzhhzjghwh;
 	private Date _pfhhzrq;

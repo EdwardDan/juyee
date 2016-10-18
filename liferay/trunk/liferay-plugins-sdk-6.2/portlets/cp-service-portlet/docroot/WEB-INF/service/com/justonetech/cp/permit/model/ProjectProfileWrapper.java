@@ -88,6 +88,13 @@ public class ProjectProfileWrapper implements ProjectProfile,
 		attributes.put("tjsj", getTjsj());
 		attributes.put("gcnr", getGcnr());
 		attributes.put("sgxkzsbz", getSgxkzsbz());
+		attributes.put("gls", getGls());
+		attributes.put("jzmj", getJzmj());
+		attributes.put("qlsl", getQlsl());
+		attributes.put("qlkd", getQlkd());
+		attributes.put("guijiaosl", getGuijiaosl());
+		attributes.put("sdsl", getSdsl());
+		attributes.put("gaojiasl", getGaojiasl());
 		attributes.put("tzly", getTzly());
 		attributes.put("gkpzhhzjghwh", getGkpzhhzjghwh());
 		attributes.put("pfhhzrq", getPfhhzrq());
@@ -356,6 +363,48 @@ public class ProjectProfileWrapper implements ProjectProfile,
 
 		if (sgxkzsbz != null) {
 			setSgxkzsbz(sgxkzsbz);
+		}
+
+		String gls = (String)attributes.get("gls");
+
+		if (gls != null) {
+			setGls(gls);
+		}
+
+		String jzmj = (String)attributes.get("jzmj");
+
+		if (jzmj != null) {
+			setJzmj(jzmj);
+		}
+
+		Integer qlsl = (Integer)attributes.get("qlsl");
+
+		if (qlsl != null) {
+			setQlsl(qlsl);
+		}
+
+		String qlkd = (String)attributes.get("qlkd");
+
+		if (qlkd != null) {
+			setQlkd(qlkd);
+		}
+
+		Integer guijiaosl = (Integer)attributes.get("guijiaosl");
+
+		if (guijiaosl != null) {
+			setGuijiaosl(guijiaosl);
+		}
+
+		Integer sdsl = (Integer)attributes.get("sdsl");
+
+		if (sdsl != null) {
+			setSdsl(sdsl);
+		}
+
+		Integer gaojiasl = (Integer)attributes.get("gaojiasl");
+
+		if (gaojiasl != null) {
+			setGaojiasl(gaojiasl);
 		}
 
 		String tzly = (String)attributes.get("tzly");
@@ -1363,6 +1412,146 @@ public class ProjectProfileWrapper implements ProjectProfile,
 	@Override
 	public void setSgxkzsbz(java.lang.String sgxkzsbz) {
 		_projectProfile.setSgxkzsbz(sgxkzsbz);
+	}
+
+	/**
+	* Returns the gls of this project profile.
+	*
+	* @return the gls of this project profile
+	*/
+	@Override
+	public java.lang.String getGls() {
+		return _projectProfile.getGls();
+	}
+
+	/**
+	* Sets the gls of this project profile.
+	*
+	* @param gls the gls of this project profile
+	*/
+	@Override
+	public void setGls(java.lang.String gls) {
+		_projectProfile.setGls(gls);
+	}
+
+	/**
+	* Returns the jzmj of this project profile.
+	*
+	* @return the jzmj of this project profile
+	*/
+	@Override
+	public java.lang.String getJzmj() {
+		return _projectProfile.getJzmj();
+	}
+
+	/**
+	* Sets the jzmj of this project profile.
+	*
+	* @param jzmj the jzmj of this project profile
+	*/
+	@Override
+	public void setJzmj(java.lang.String jzmj) {
+		_projectProfile.setJzmj(jzmj);
+	}
+
+	/**
+	* Returns the qlsl of this project profile.
+	*
+	* @return the qlsl of this project profile
+	*/
+	@Override
+	public int getQlsl() {
+		return _projectProfile.getQlsl();
+	}
+
+	/**
+	* Sets the qlsl of this project profile.
+	*
+	* @param qlsl the qlsl of this project profile
+	*/
+	@Override
+	public void setQlsl(int qlsl) {
+		_projectProfile.setQlsl(qlsl);
+	}
+
+	/**
+	* Returns the qlkd of this project profile.
+	*
+	* @return the qlkd of this project profile
+	*/
+	@Override
+	public java.lang.String getQlkd() {
+		return _projectProfile.getQlkd();
+	}
+
+	/**
+	* Sets the qlkd of this project profile.
+	*
+	* @param qlkd the qlkd of this project profile
+	*/
+	@Override
+	public void setQlkd(java.lang.String qlkd) {
+		_projectProfile.setQlkd(qlkd);
+	}
+
+	/**
+	* Returns the guijiaosl of this project profile.
+	*
+	* @return the guijiaosl of this project profile
+	*/
+	@Override
+	public int getGuijiaosl() {
+		return _projectProfile.getGuijiaosl();
+	}
+
+	/**
+	* Sets the guijiaosl of this project profile.
+	*
+	* @param guijiaosl the guijiaosl of this project profile
+	*/
+	@Override
+	public void setGuijiaosl(int guijiaosl) {
+		_projectProfile.setGuijiaosl(guijiaosl);
+	}
+
+	/**
+	* Returns the sdsl of this project profile.
+	*
+	* @return the sdsl of this project profile
+	*/
+	@Override
+	public int getSdsl() {
+		return _projectProfile.getSdsl();
+	}
+
+	/**
+	* Sets the sdsl of this project profile.
+	*
+	* @param sdsl the sdsl of this project profile
+	*/
+	@Override
+	public void setSdsl(int sdsl) {
+		_projectProfile.setSdsl(sdsl);
+	}
+
+	/**
+	* Returns the gaojiasl of this project profile.
+	*
+	* @return the gaojiasl of this project profile
+	*/
+	@Override
+	public int getGaojiasl() {
+		return _projectProfile.getGaojiasl();
+	}
+
+	/**
+	* Sets the gaojiasl of this project profile.
+	*
+	* @param gaojiasl the gaojiasl of this project profile
+	*/
+	@Override
+	public void setGaojiasl(int gaojiasl) {
+		_projectProfile.setGaojiasl(gaojiasl);
 	}
 
 	/**

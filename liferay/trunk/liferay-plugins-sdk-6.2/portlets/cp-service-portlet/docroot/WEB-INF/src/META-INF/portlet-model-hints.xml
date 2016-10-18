@@ -410,6 +410,13 @@
 			<hint name="max-length">100</hint>
 		</field>
 		<field name="sgxkzsbz" type="String" />
+		<field name="gls" type="String" />
+		<field name="jzmj" type="String" />
+		<field name="qlsl" type="int" />
+		<field name="qlkd" type="String" />
+		<field name="guijiaosl" type="int" />
+		<field name="sdsl" type="int" />
+		<field name="gaojiasl" type="int" />
 		<field name="tzly" type="String" />
 		<field name="gkpzhhzjghwh" type="String" />
 		<field name="pfhhzrq" type="Date" />

@@ -68,6 +68,13 @@ public class ProjectProfileSoap implements Serializable {
 		soapModel.setTjsj(model.getTjsj());
 		soapModel.setGcnr(model.getGcnr());
 		soapModel.setSgxkzsbz(model.getSgxkzsbz());
+		soapModel.setGls(model.getGls());
+		soapModel.setJzmj(model.getJzmj());
+		soapModel.setQlsl(model.getQlsl());
+		soapModel.setQlkd(model.getQlkd());
+		soapModel.setGuijiaosl(model.getGuijiaosl());
+		soapModel.setSdsl(model.getSdsl());
+		soapModel.setGaojiasl(model.getGaojiasl());
 		soapModel.setTzly(model.getTzly());
 		soapModel.setGkpzhhzjghwh(model.getGkpzhhzjghwh());
 		soapModel.setPfhhzrq(model.getPfhhzrq());
@@ -464,6 +471,62 @@ public class ProjectProfileSoap implements Serializable {
 		_sgxkzsbz = sgxkzsbz;
 	}
 
+	public String getGls() {
+		return _gls;
+	}
+
+	public void setGls(String gls) {
+		_gls = gls;
+	}
+
+	public String getJzmj() {
+		return _jzmj;
+	}
+
+	public void setJzmj(String jzmj) {
+		_jzmj = jzmj;
+	}
+
+	public int getQlsl() {
+		return _qlsl;
+	}
+
+	public void setQlsl(int qlsl) {
+		_qlsl = qlsl;
+	}
+
+	public String getQlkd() {
+		return _qlkd;
+	}
+
+	public void setQlkd(String qlkd) {
+		_qlkd = qlkd;
+	}
+
+	public int getGuijiaosl() {
+		return _guijiaosl;
+	}
+
+	public void setGuijiaosl(int guijiaosl) {
+		_guijiaosl = guijiaosl;
+	}
+
+	public int getSdsl() {
+		return _sdsl;
+	}
+
+	public void setSdsl(int sdsl) {
+		_sdsl = sdsl;
+	}
+
+	public int getGaojiasl() {
+		return _gaojiasl;
+	}
+
+	public void setGaojiasl(int gaojiasl) {
+		_gaojiasl = gaojiasl;
+	}
+
 	public String getTzly() {
 		return _tzly;
 	}
@@ -790,6 +853,13 @@ public class ProjectProfileSoap implements Serializable {
 	private Date _tjsj;
 	private String _gcnr;
 	private String _sgxkzsbz;
+	private String _gls;
+	private String _jzmj;
+	private int _qlsl;
+	private String _qlkd;
+	private int _guijiaosl;
+	private int _sdsl;
+	private int _gaojiasl;
 	private String _tzly;
 	private String _gkpzhhzjghwh;
 	private Date _pfhhzrq;

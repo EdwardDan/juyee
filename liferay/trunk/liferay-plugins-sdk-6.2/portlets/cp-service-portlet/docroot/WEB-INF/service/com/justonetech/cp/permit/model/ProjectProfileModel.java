@@ -627,6 +627,107 @@ public interface ProjectProfileModel extends BaseModel<ProjectProfile> {
 	public void setSgxkzsbz(String sgxkzsbz);
 
 	/**
+	 * Returns the gls of this project profile.
+	 *
+	 * @return the gls of this project profile
+	 */
+	@AutoEscape
+	public String getGls();
+
+	/**
+	 * Sets the gls of this project profile.
+	 *
+	 * @param gls the gls of this project profile
+	 */
+	public void setGls(String gls);
+
+	/**
+	 * Returns the jzmj of this project profile.
+	 *
+	 * @return the jzmj of this project profile
+	 */
+	@AutoEscape
+	public String getJzmj();
+
+	/**
+	 * Sets the jzmj of this project profile.
+	 *
+	 * @param jzmj the jzmj of this project profile
+	 */
+	public void setJzmj(String jzmj);
+
+	/**
+	 * Returns the qlsl of this project profile.
+	 *
+	 * @return the qlsl of this project profile
+	 */
+	public int getQlsl();
+
+	/**
+	 * Sets the qlsl of this project profile.
+	 *
+	 * @param qlsl the qlsl of this project profile
+	 */
+	public void setQlsl(int qlsl);
+
+	/**
+	 * Returns the qlkd of this project profile.
+	 *
+	 * @return the qlkd of this project profile
+	 */
+	@AutoEscape
+	public String getQlkd();
+
+	/**
+	 * Sets the qlkd of this project profile.
+	 *
+	 * @param qlkd the qlkd of this project profile
+	 */
+	public void setQlkd(String qlkd);
+
+	/**
+	 * Returns the guijiaosl of this project profile.
+	 *
+	 * @return the guijiaosl of this project profile
+	 */
+	public int getGuijiaosl();
+
+	/**
+	 * Sets the guijiaosl of this project profile.
+	 *
+	 * @param guijiaosl the guijiaosl of this project profile
+	 */
+	public void setGuijiaosl(int guijiaosl);
+
+	/**
+	 * Returns the sdsl of this project profile.
+	 *
+	 * @return the sdsl of this project profile
+	 */
+	public int getSdsl();
+
+	/**
+	 * Sets the sdsl of this project profile.
+	 *
+	 * @param sdsl the sdsl of this project profile
+	 */
+	public void setSdsl(int sdsl);
+
+	/**
+	 * Returns the gaojiasl of this project profile.
+	 *
+	 * @return the gaojiasl of this project profile
+	 */
+	public int getGaojiasl();
+
+	/**
+	 * Sets the gaojiasl of this project profile.
+	 *
+	 * @param gaojiasl the gaojiasl of this project profile
+	 */
+	public void setGaojiasl(int gaojiasl);
+
+	/**
 	 * Returns the tzly of this project profile.
 	 *
 	 * @return the tzly of this project profile
