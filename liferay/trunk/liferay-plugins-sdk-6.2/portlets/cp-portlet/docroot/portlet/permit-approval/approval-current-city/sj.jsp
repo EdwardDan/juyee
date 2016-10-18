@@ -10,15 +10,6 @@ input, textarea {
 	color: #8B8B83;
 	border: #D4D4D4 1px solid;
 }
-
-span {
-	font-size: 15px;
-	font-weight: 200;
-	padding-top: 5px;
-	padding-left: 5px;
-	padding-right: 5px;
-	top: -4px;
-}
 </style>
 <%
 	long permitId = ParamUtil.getLong(request, "permitId");
@@ -244,13 +235,12 @@ span {
 	</aui:row>
 
 	<div class="text-center">
+	<div class="btn-group">
+		<aui:button-row>
 		<div class="btn-group">
 			<aui:button name="submit" type="submit" value="保存"
 				cssClass="btn btn-primary" />
 		</div>
-		<div class="btn-group">
-			<!-- <aui:button name="pass" value="审核通过" cssClass="btn btn-primary" /> -->
-			<aui:button-row>
 				<%
 					String randomId = StringPool.BLANK;
 																								randomId = StringUtil.randomId();
@@ -352,15 +342,15 @@ var onTaskClickFn = A.rbind('onTaskClick', Liferay.WorkflowTasks,'<%= randomId %
 Liferay.delegateClick('<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(transitionName) %>taskChangeStatusLink', onTaskClickFn);
 </aui:script>
 </c:if>
-
 				<%
 					}
 						}
 				%>
-			</aui:button-row>
-		</div>
 		<div class="btn-group">
 			<aui:button name="close" value="关闭" cssClass="btn" href="${viewURL}" />
 		</div>
+		</aui:button-row>
+	</div>
+	</div>
 	</div>
 </form>

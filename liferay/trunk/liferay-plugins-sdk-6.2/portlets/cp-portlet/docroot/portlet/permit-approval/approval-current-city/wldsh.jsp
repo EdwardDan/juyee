@@ -91,9 +91,8 @@ Liferay.delegateClick('<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(tra
 		    		}
 		    	}
 		%>
-	</aui:button-row>
-		</div>
 		<div class="btn-group">
 			<aui:button name="close" value="关闭" cssClass="btn" href="${viewURL}" />
 		</div>
+	</aui:button-row>
 	</div>

@@ -61,9 +61,43 @@
 						    				}
 							String status="";
 							if(project.getLxjb().equals("区县级机关或区县级单位")){
-								status=CountyPermitStatus.getNameByCode(permit.getStatus());
+								if(permit.getStatus()==1){
+									status="填写";
+								}
+								if(permit.getStatus()==2){
+									status="已上报";
+								}
+								if(permit.getStatus()>=3&&permit.getStatus()<7||permit.getStatus()>7){
+									status="收件通过";
+								}
+								if(permit.getStatus()==7){
+									status="审批通过";
+								}
 							}else{
-								status=CityPermitStatus.getNameByCode(permit.getStatus());
+								if(permit.getStatus()==1){
+									status="填写";
+								}
+								if(permit.getStatus()==2){
+									status="已上报";
+								}
+								if(permit.getStatus()==3){
+									status="初审退回";
+								}
+								if(permit.getStatus()>3&&permit.getStatus()<13){
+									status="已上报";
+								}
+								if(permit.getStatus()>=13&&permit.getStatus()<17){
+									status="收件通过";
+								}
+								if(permit.getStatus()==17){
+									status="收件退回";
+								}
+								if(permit.getStatus()==18){
+									status="委领导许可";
+								}
+								if(permit.getStatus()==19){
+									status="委领导不许可";
+								}
 							}
 				%>
 
