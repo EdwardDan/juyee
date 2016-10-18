@@ -47,15 +47,6 @@
 <portlet:resourceURL var="viewCertificateURL" id="view">
 	<portlet:param name="permitId" value="${permitInit}"/>
 </portlet:resourceURL>
-<c:if test="<%=status!=CityPermitStatus.STATUS_SJ_BACK.getCode()&&status!=CityPermitStatus.STATUS_CS_BACK.getCode()&&status!=CountyPermitStatus.STATUS_SJ_BACK.getCode()%>" >
-<aui:button-row cssClass="text-center">
-	<a class="btn" onclick="viewCertificate()">预览施工许可证书</a>
-</aui:button-row>
-</c:if>
-<script type="text/javascript">
-	function viewCertificate(){
-		window.location = '${viewCertificateURL}';
-	}
-</script>
+
 
 
