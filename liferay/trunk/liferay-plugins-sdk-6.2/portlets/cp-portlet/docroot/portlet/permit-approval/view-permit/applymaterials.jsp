@@ -214,7 +214,7 @@
 						name="${namespace}fileBzclInput${status.index+1}" type="file"
 						multiple="" style="display: none; width: 150px;"
 						accept="application/pdf,image/jpeg"
-						onchange="${namespace}fileBzclUpLoad(${status.index+1},${material.materialId},'<%=portletDisplay.getId() %>');"></input>
+						onchange="${namespace}fileBzclUpLoad(${status.index+1},${material.materialId},'<%=portletDisplay.getId() %>');${namespace}clearValue(this);"></input>
 
 					</td>
 				</c:if>
@@ -278,12 +278,11 @@
 						name="${namespace}fileWjscbzclInput${status.index+1}" type="file"
 						multiple="" style="display: none; width: 150px;"
 						accept="application/pdf,image/jpeg"
-						onchange="${namespace}fileWjscbzclUpLoad(${status.index+1},${material.materialId},'<%=portletDisplay.getId() %>');"></input>
+						onchange="${namespace}fileWjscbzclUpLoad(${status.index+1},${material.materialId},'<%=portletDisplay.getId() %>');${namespace}clearValue(this);"></input>
 
 					</td>
 				</c:if>
 				</c:if>
-				
 			</tr>
 		</c:forEach>
 
@@ -477,6 +476,11 @@
 						}
 					});
 		}
+	}
+	
+	function <portlet:namespace/>clearValue(btn){
+		var input=$(btn);
+		input.replaceWith(input.val('').clone(true));
 	}
 
 	/* 委建设处补正材料上传删除 */
