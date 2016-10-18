@@ -63,7 +63,13 @@
 	<portlet:resourceURL var="printkgba" id="printkgbaExcel">
 		<portlet:param name="permitId" value="${permitId}" />
 	</portlet:resourceURL>
+	<portlet:resourceURL var="viewCertificateURL" id="view">
+	<portlet:param name="permitId" value="${permitInit}"/>
+</portlet:resourceURL>
 	<c:if test="<%=!projectProfile.getLxjb().equals(\"区县级机关或区县级单位\")%>">
+		<c:if test="<%=status >=2&& status<=16%>">
+			<a class="btn" onclick="viewCertificate()">预览施工许可证书</a>
+		</c:if>
 		<c:if test="<%=status >= 13&&status!=17%>">
 			<a class="btn" href="${printsjpzURL}" target="_blank">收件凭证</a>
 		</c:if>
@@ -104,6 +110,9 @@
 		</c:if>
 	</c:if>
 	<c:if test="<%=projectProfile.getLxjb().equals(\"区县级机关或区县级单位\")%>">
+		<c:if test="<%=status >=2&&status!=4&&status!=7%>">
+			<a class="btn" onclick="viewCertificate()">预览施工许可证书</a>
+		</c:if>
 		<c:if test="<%=status >= 3%>">
 			<a class="btn" href="${printsjpzURL}" target="_blank">收件凭证</a>
 		</c:if>
@@ -118,8 +127,7 @@
 		<c:if test="<%=status == 9%>">
 			<a class="btn" href="${printbzclURL}" target="_blank">补正材料</a>
 		</c:if>
-		<c:if
-			test="<%=status == CountyPermitStatus.STATUS_SP_PASS.getCode()%>">
+		<c:if test="<%=status == CountyPermitStatus.STATUS_SP_PASS.getCode()%>">
 			<c:choose>
 				<c:when test="<%=projectProfile.getXmlx() == 29741%>">
 					<a class="btn" onclick="kgba()">开工备案Pdf</a>
@@ -139,6 +147,10 @@
 		</c:if>
 	</c:if>
 <script type="text/javascript">
+	function viewCertificate(){
+		window.location = '${viewCertificateURL}';
+	}
+	
 	function kgba(){
 		$.ajax({
 			type:"GET",	
