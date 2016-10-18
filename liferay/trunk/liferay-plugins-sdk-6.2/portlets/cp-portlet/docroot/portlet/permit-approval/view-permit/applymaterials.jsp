@@ -90,6 +90,8 @@
 
 <c:set var="namespace" value="<%=renderResponse.getNamespace()%>"></c:set>
 
+<div id="loading" style="position:fixed;margin-left:41%;">
+</div>
 <form id="fm" enctype="multipart/form-data" method="post">
 	<table class="table table-bordered" style="font-size: 14px;"
 		id="fileTable">
@@ -367,6 +369,9 @@
 						cache : false,
 						processData : false,
 						contentType : false,
+						beforeSend:function(XMLHttpRequest){
+							$("#loading").html("<img src='/cp-portlet/icons/loading.gif' style='width:100px;height:100px;'></img>");
+						},
 						success : function(data) {
 							var fileData = eval("(" + data + ")");
 							var ele = "<div name='fileBzcl"+divNo+"'><a class='fileBzclName' href='javascript:void(0);'>"
@@ -375,6 +380,7 @@
 							+ fileData.fileBzclId + ","+materialId+")'>删除</a></div>";
 							$("#fileDivBzcl" + divNo).append(ele);
 							domSort(divNo); 
+							$("#loading").html("");
 							alert("上传成功！");				
 						},
 						error : function(e) {
@@ -465,6 +471,9 @@
 						cache : false,
 						processData : false,
 						contentType : false,
+						beforeSend:function(XMLHttpRequest){
+							$("#loading").html("<img src='/cp-portlet/icons/loading.gif' style='width:100px;height:100px;'></img>");
+						},
 						success : function(data) {
 							var fileData = eval("(" + data + ")");
 							var ele = "<div name='fileWjscbzcl"+divNo+"'><a class='fileWjscbzclName' href='javascript:void(0);'>"
@@ -473,6 +482,7 @@
 							+ fileData.fileWjscbzclId + ","+materialId+")'>删除</a></div>";
 							$("#fileDivWjscbzcl" + divNo).append(ele);
 							domSortWjscbzcl(divNo); 
+							$("#loading").html("");
 							alert("上传成功！");				
 						},
 						error : function(e) {

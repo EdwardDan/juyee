@@ -69,6 +69,8 @@
 	
 	}
 %>
+<div id="loading" style="position:fixed;margin-left:41%;">
+</div>
 <portlet:renderURL var="viewURL" />
 <c:set var="namespace" value="<%=renderResponse.getNamespace()%>"></c:set>
 <portlet:resourceURL var="fileUpLoadURL" id="fileUpLoad" />
@@ -201,6 +203,9 @@
 						cache : false,
 						processData : false,
 						contentType : false,
+						beforeSend:function(XMLHttpRequest){
+							$("#loading").html("<img src='/cp-portlet/icons/loading.gif' style='width:100px;height:100px;'></img>");
+						},
 						success : function(data) {
 							var fileData = eval("(" + data + ")");
 							var ele = "<div name='file"+divNo+"'><a class='fileName' href='javascript:void(0);'>"
@@ -209,6 +214,7 @@
 							+ fileData.fileId + ","+materialId+")'>删除</a></div>";
 							$("#fileDiv" + divNo).append(ele);
 							domSort(divNo); 
+							$("#loading").html("");
 							alert("上传成功！");				
 						},
 						error : function(e) {

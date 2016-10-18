@@ -1,7 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
 <%@ include file="init.jsp"%>
-<%@ page import="com.liferay.util.*"%>
 <style>
 .aui .table th, .aui .table td {
 	vertical-align: middle;
@@ -12,9 +11,7 @@
 	width: 150px;
 }
 </style>
-
 <%
-	String uploadProgressId = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
 	List<Dictionary> materialDictionaries=new ArrayList<Dictionary>();
 	List<ApplyMaterial> applyMaterialList=new ArrayList<ApplyMaterial>();
 	Long permitId =ParamUtil.getLong(renderRequest,"permitId",0);
@@ -98,9 +95,8 @@
 
 	}
 %>
-
-<liferay-ui:upload-progress id="<%=uploadProgressId%>"
-	message="uploading" />
+<div id="loading" style="position:fixed;margin-left:41%;">
+</div>
 <portlet:renderURL var="viewURL" />
 <c:set var="namespace" value="<%=renderResponse.getNamespace()%>"></c:set>
 <portlet:resourceURL var="fileUpLoadURL" id="fileUpLoad"/>
@@ -324,14 +320,12 @@ Liferay.delegateClick('<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(tra
 			var no = findFileNo(divNo);
 			var fmFile = document.getElementById("fmFile");
 			var oMyForm = new FormData(fmFile);
-			var STR_VALUE = 'value';
 			oMyForm.append("<portlet:namespace/>divNo",divNo);
 			oMyForm.append("<portlet:namespace/>materialId",materialId);
 			oMyForm.append("<portlet:namespace/>portletId",portletId);
 			oMyForm.append("<portlet:namespace/>userfile", $("#fileInput"+divNo)[0].files[0]);
 			oMyForm.append("<portlet:namespace/>no", no);
 			oMyForm.append("<portlet:namespace/>fileExtension", fileExtension);
-			<%= uploadProgressId %>.set(STR_VALUE, 0);
 			$.ajax({
 						url : "<%=fileUpLoadURL%>",
 						type : "post",
@@ -339,6 +333,9 @@ Liferay.delegateClick('<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(tra
 						cache : false,
 						processData : false,
 						contentType : false,
+						beforeSend:function(XMLHttpRequest){
+							$("#loading").html("<img src='/cp-portlet/icons/loading.gif' style='width:100px;height:100px;'></img>");
+						},
 						success : function(data) {
 							var fileData = eval("(" + data + ")");
 							var ele = "<div name='file"+divNo+"'><a class='fileName' href='javascript:void(0);'>"
@@ -347,7 +344,8 @@ Liferay.delegateClick('<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(tra
 							+ fileData.fileId + ","+materialId+")'>删除</a></div>";
 							$("#fileDiv" + divNo).append(ele);
 							domSort(divNo); 
-							<%= uploadProgressId %>.startProgress();
+							$("#loading").html("");
+							alert("上传成功！");
 						},
 						error : function(e) {
 							alert("网络错误，请重试！！");
