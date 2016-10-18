@@ -221,15 +221,15 @@
 			<td class="bg-white"><aui:input name="gls" label="" type="text"
 					style="width:50%">
 				</aui:input></td>
-			<td class="text-right">建筑面积</td>
+			<td class="text-right">建筑面积(㎡)</td>
 			<td class="bg-white"><aui:input name="jzmj" label="" type="text"
 					style="width:50%">
 				</aui:input></td>
 		</tr>
 		<tr class="body">
 			<td class="text-right">桥梁数量</td>
-			<td class="bg-white"><aui:input name="qlsl" label="" type="text"
-					style="width:50%">
+			<td class="bg-white"><aui:input name="qlsl" label="" type="text" placeholder="请输入正整数"
+					style="width:50%" onkeyup="this.value=this.value.replace(/[^\d]/ig,'')">
 				</aui:input></td>
 			<td class="text-right">桥梁跨度</td>
 			<td class="bg-white"><aui:input name="qlkd" label="" type="text"
@@ -238,18 +238,18 @@
 		</tr>
 		<tr class="body">
 			<td class="text-right">轨交数量</td>
-			<td class="bg-white"><aui:input name="guijiaosl" label="" type="text"
-					style="width:50%">
+			<td class="bg-white"><aui:input name="guijiaosl" label="" type="text" placeholder="请输入正整数"
+					style="width:50%" onkeyup="this.value=this.value.replace(/[^\d]/ig,'')">
 				</aui:input></td>
 			<td class="text-right">隧道数量</td>
-			<td class="bg-white"><aui:input name="sdsl" label="" type="text"
-					style="width:50%">
+			<td class="bg-white"><aui:input name="sdsl" label="" type="text" placeholder="请输入正整数"
+					style="width:50%" onkeyup="this.value=this.value.replace(/[^\d]/ig,'')">
 				</aui:input></td>
 		</tr>
 		<tr class="body">
 			<td class="text-right">高架数量</td>
-			<td class="bg-white" colspan="3"><aui:input name="gaojiasl"
-					label="" type="text" style="width:18.7%" value="">
+			<td class="bg-white" colspan="3"><aui:input name="gaojiasl" placeholder="请输入正整数"
+					label="" type="text" style="width:18.7%" onkeyup="this.value=this.value.replace(/[^\d]/ig,'')">
 				</aui:input></td>
 		</tr>
 		<tr class="body">
