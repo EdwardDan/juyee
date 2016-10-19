@@ -350,9 +350,11 @@ Liferay.delegateClick('<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(tra
 							+ fileData.fileId + ","+materialId+")'>删除</a></div>";
 							$("#fileDiv" + divNo).append(ele);
 							domSort(divNo); 
+							alert("上传成功！");
+						},
+						complete:function(){
 							hideMask();
 							$("#loading").html("");
-							alert("上传成功！");
 						},
 						error : function(e) {
 							alert("网络错误，请重试！！");
