@@ -10,6 +10,11 @@
 .aui input[type="file"] {
 	width: 150px;
 }
+ .mask {       
+            position: absolute; top: 0px; filter: alpha(opacity=60); background-color: #777;     
+            z-index: 1002; left: 0px;     
+            opacity:0.5; -moz-opacity:0.5;     
+        }   
 </style>
 
 <%
@@ -90,8 +95,8 @@
 
 <c:set var="namespace" value="<%=renderResponse.getNamespace()%>"></c:set>
 
-<div id="loading" style="position:fixed;margin-left:41%;">
-</div>
+<div id="mask" class="mask"><div id="loading" style="position:fixed;margin-left:41%;margin-top:20%">
+</div></div>    
 <form id="fm" enctype="multipart/form-data" method="post">
 	<table class="table table-bordered" style="font-size: 14px;"
 		id="fileTable">
@@ -371,6 +376,7 @@
 						contentType : false,
 						beforeSend:function(XMLHttpRequest){
 							$("#loading").html("<img src='/cp-portlet/icons/loading.gif' style='width:100px;height:100px;'></img>");
+							showMask();
 						},
 						success : function(data) {
 							var fileData = eval("(" + data + ")");
@@ -380,6 +386,7 @@
 							+ fileData.fileBzclId + ","+materialId+")'>删除</a></div>";
 							$("#fileDivBzcl" + divNo).append(ele);
 							domSort(divNo); 
+							hideMask();
 							$("#loading").html("");
 							alert("上传成功！");				
 						},
@@ -473,6 +480,7 @@
 						contentType : false,
 						beforeSend:function(XMLHttpRequest){
 							$("#loading").html("<img src='/cp-portlet/icons/loading.gif' style='width:100px;height:100px;'></img>");
+							showMask();
 						},
 						success : function(data) {
 							var fileData = eval("(" + data + ")");
@@ -482,6 +490,7 @@
 							+ fileData.fileWjscbzclId + ","+materialId+")'>删除</a></div>";
 							$("#fileDivWjscbzcl" + divNo).append(ele);
 							domSortWjscbzcl(divNo); 
+							hideMask();
 							$("#loading").html("");
 							alert("上传成功！");				
 						},
@@ -543,6 +552,15 @@
 		$('#fileDivBzcl'+divNo).empty().append(sortEle);
 	}
 	
+	 function showMask(){     
+	        $("#mask").css("height",$(document).height());     
+	        $("#mask").css("width",$(document).width());     
+	        $("#mask").show();     
+	    }  
+	    //隐藏遮罩层  
+	    function hideMask(){     
+	        $("#mask").hide();     
+	    }  
 </script>
 
 

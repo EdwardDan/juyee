@@ -11,6 +11,12 @@
 .aui input[type="file"] {
 	width: 150px;
 }
+
+ .mask {       
+            position: absolute; top: 0px; filter: alpha(opacity=60); background-color: #777;     
+            z-index: 1002; left: 0px;     
+            opacity:0.5; -moz-opacity:0.5;     
+        }   
 </style>
 
 <%
@@ -69,8 +75,8 @@
 	
 	}
 %>
-<div id="loading" style="position:fixed;margin-left:41%;">
-</div>
+<div id="mask" class="mask"><div id="loading" style="position:fixed;margin-left:41%;margin-top:20%">
+</div></div>    
 <portlet:renderURL var="viewURL" />
 <c:set var="namespace" value="<%=renderResponse.getNamespace()%>"></c:set>
 <portlet:resourceURL var="fileUpLoadURL" id="fileUpLoad" />
@@ -205,6 +211,7 @@
 						contentType : false,
 						beforeSend:function(XMLHttpRequest){
 							$("#loading").html("<img src='/cp-portlet/icons/loading.gif' style='width:100px;height:100px;'></img>");
+							showMask();							
 						},
 						success : function(data) {
 							var fileData = eval("(" + data + ")");
@@ -214,6 +221,7 @@
 							+ fileData.fileId + ","+materialId+")'>删除</a></div>";
 							$("#fileDiv" + divNo).append(ele);
 							domSort(divNo); 
+							hideMask();
 							$("#loading").html("");
 							alert("上传成功！");				
 						},
@@ -285,5 +293,16 @@
 		});
 		$('#fileDiv'+divNo).empty().append(sortEle);
 	}
+	
+	
+	 function showMask(){     
+	        $("#mask").css("height",$(document).height());     
+	        $("#mask").css("width",$(document).width());     
+	        $("#mask").show();     
+	    }  
+	    //隐藏遮罩层  
+	    function hideMask(){     
+	        $("#mask").hide();     
+	    }  
 
 </script>
