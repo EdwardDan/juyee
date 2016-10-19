@@ -75,7 +75,7 @@
 	
 	}
 %>
-<div id="mask" class="mask"><div id="loading" style="position:fixed;margin-left:41%;margin-top:20%">
+<div id="mask" class="mask"><div id="loading" style="position:fixed;margin-left:46%;margin-top:20%">
 </div></div>    
 <portlet:renderURL var="viewURL" />
 <c:set var="namespace" value="<%=renderResponse.getNamespace()%>"></c:set>
