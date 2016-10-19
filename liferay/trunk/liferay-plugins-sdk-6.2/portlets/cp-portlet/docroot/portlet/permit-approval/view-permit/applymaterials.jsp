@@ -95,7 +95,7 @@
 
 <c:set var="namespace" value="<%=renderResponse.getNamespace()%>"></c:set>
 
-<div id="mask" class="mask"><div id="loading" style="position:fixed;margin-left:46%;margin-top:20%">
+<div id="mask" class="mask"><div id="loading" style="position:fixed;top:50%;left:50%">
 </div></div>    
 <form id="fm" enctype="multipart/form-data" method="post">
 	<table class="table table-bordered" style="font-size: 14px;"
@@ -375,7 +375,7 @@
 						processData : false,
 						contentType : false,
 						beforeSend:function(XMLHttpRequest){
-							$("#loading").html("<img src='/cp-portlet/icons/loading.gif' style='width:100px;height:100px;'></img>");
+							$("#loading").html("<img src='/cp-portlet/icons/loading2.gif' style='width:100px;height:100px;'></img>");
 							showMask();
 						},
 						success : function(data) {
@@ -479,7 +479,7 @@
 						processData : false,
 						contentType : false,
 						beforeSend:function(XMLHttpRequest){
-							$("#loading").html("<img src='/cp-portlet/icons/loading.gif' style='width:100px;height:100px;'></img>");
+							$("#loading").html("<img src='/cp-portlet/icons/loading2.gif' style='width:100px;height:100px;'></img>");
 							showMask();
 						},
 						success : function(data) {
