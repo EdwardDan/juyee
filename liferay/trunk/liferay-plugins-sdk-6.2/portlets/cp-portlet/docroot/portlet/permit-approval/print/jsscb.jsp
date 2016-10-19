@@ -522,7 +522,7 @@ div.Section1 {
 				var isIE = userAgent.indexOf("compatible") > -1
 						&& userAgent.indexOf("MSIE") > -1 && !isOpera; //判断是否IE浏览器
 				if (isIE||isIE11) {
-					document.getElementById("printPreivew").style.display="";
+					/* document.getElementById("printPreivew").style.display=""; */
 				}
 			})
 </script>
