@@ -80,10 +80,10 @@
 								if(permit.getStatus()==2){
 									status="已上报";
 								}
-								if(permit.getStatus()==3){
+								if(permit.getStatus()==4){
 									status="初审退回";
 								}
-								if(permit.getStatus()>3&&permit.getStatus()<13){
+								if(permit.getStatus()==3||(permit.getStatus()>4&&permit.getStatus()<13)){
 									status="已上报";
 								}
 								if(permit.getStatus()>=13&&permit.getStatus()<17){
