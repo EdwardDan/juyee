@@ -616,12 +616,13 @@ public class PermitApprovalPortlet extends MVCPortlet {
 				String divNo = ParamUtil.get(resourceRequest, "divNo", "");
 				// 文件材料的名称编号
 				String no = ParamUtil.get(resourceRequest, "no", "");
-				String fileExtension = ParamUtil.get(resourceRequest, "fileBzclExtension", "");
+				String fileExtension = ParamUtil.get(resourceRequest, "fileExtension", "");
 				String materialId = ParamUtil.get(resourceRequest, "materialId", "0");
 				String portletId = ParamUtil.get(resourceRequest, "portletId", "");
 				fileSourceName = uploadPortletRequest.getFileName("fileBzclInput"+divNo);
 				InputStream stream = uploadPortletRequest.getFileAsStream("fileBzclInput"+divNo);
-
+				
+				
 				/*
 				 * fileSourceName =
 				 * uploadPortletRequest.getFileName("fileInput"+divNo);
@@ -656,7 +657,7 @@ public class PermitApprovalPortlet extends MVCPortlet {
 					/*fileJson.put("materialName", applyMaterial.getClmc());*/
 					bzclResponseStr+="|"+applyMaterial.getClmc();
 				}
-
+				System.out.println(bzclResponseStr);
 				HttpServletResponse response = PortalUtil.getHttpServletResponse(resourceResponse);
 				response.setContentType("text/plain");
 				PrintWriter out = null;
@@ -703,12 +704,11 @@ public class PermitApprovalPortlet extends MVCPortlet {
 				String divNo = ParamUtil.get(resourceRequest, "divNo", "");
 				// 文件材料的名称编号
 				String no = ParamUtil.get(resourceRequest, "no", "");
-				String fileExtension = ParamUtil.get(resourceRequest, "fileWjscbzclExtension", "");
+				String fileExtension = ParamUtil.get(resourceRequest, "fileExtension", "");
 				String materialId = ParamUtil.get(resourceRequest, "materialId", "0");
 				String portletId = ParamUtil.get(resourceRequest, "portletId", "");
 				fileSourceName = uploadPortletRequest.getFileName("fileWjscbzclInput"+divNo);
 				InputStream stream = uploadPortletRequest.getFileAsStream("fileWjscbzclInput"+divNo);
-
 				/*
 				 * fileSourceName =
 				 * uploadPortletRequest.getFileName("fileInput"+divNo);
