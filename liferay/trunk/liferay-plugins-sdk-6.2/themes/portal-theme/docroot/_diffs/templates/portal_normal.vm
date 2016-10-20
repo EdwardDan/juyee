@@ -35,6 +35,7 @@
         }
     </script>
     <script src="http://apps.bdimg.com/libs/jquery/1.11.3/jquery.min.js"></script>
+	<!--[if lt IE 9]><script>window.location.href='/static/upgrade-your-browser.html?referrer='+location.href;</script><![endif]-->
 </head>
 
 <body class="$css_class">
