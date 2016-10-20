@@ -226,9 +226,9 @@ function <portlet:namespace/>fileUpLoad(divNo,materialId,portletId) {
 	var file=getFile("fileInput"+divNo);
 	var fileExtension=fileValidator("fileInput"+divNo);
 	var no = findFileNo(divNo);
+	if(fileExtension){
 	$("#loading").html("<img src='/cp-portlet/icons/loading2.gif' style='width:100px;height:100px;'></img>");
 	showMask();
-	if(fileExtension){
     $.ajaxFileUpload
     (
         {

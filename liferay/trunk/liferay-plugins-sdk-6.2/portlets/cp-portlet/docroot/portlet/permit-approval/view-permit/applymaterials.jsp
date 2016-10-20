@@ -390,9 +390,9 @@
 		var file=getFile("fileBzclInput"+divNo);
 		var fileExtension=fileValidator("fileBzclInput"+divNo);
 		var no = findFileNo(divNo);
+		if(fileExtension){
 		$("#loading").html("<img src='/cp-portlet/icons/loading2.gif' style='width:100px;height:100px;'></img>");
 		showMask();
-		if(fileExtension){
 	    $.ajaxFileUpload
 	    (
 	        {
@@ -547,9 +547,9 @@
 	var file=getFile("fileWjscbzclInput"+divNo);
 	var fileExtension=fileValidator("fileWjscbzclInput"+divNo);
 	var no = findFileWjscbzclNo(divNo);
+	if(fileExtension){
 	$("#loading").html("<img src='/cp-portlet/icons/loading2.gif' style='width:100px;height:100px;'></img>");
 	showMask();
-	if(fileExtension){
     $.ajaxFileUpload
     (
         {
