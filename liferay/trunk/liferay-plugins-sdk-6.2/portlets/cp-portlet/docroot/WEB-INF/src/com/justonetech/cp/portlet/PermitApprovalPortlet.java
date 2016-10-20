@@ -619,8 +619,8 @@ public class PermitApprovalPortlet extends MVCPortlet {
 				String fileExtension = ParamUtil.get(resourceRequest, "fileBzclExtension", "");
 				String materialId = ParamUtil.get(resourceRequest, "materialId", "0");
 				String portletId = ParamUtil.get(resourceRequest, "portletId", "");
-				fileSourceName = uploadPortletRequest.getFileName("userfileBzcl");
-				InputStream stream = uploadPortletRequest.getFileAsStream("userfileBzcl");
+				fileSourceName = uploadPortletRequest.getFileName("fileBzclInput"+divNo);
+				InputStream stream = uploadPortletRequest.getFileAsStream("fileBzclInput"+divNo);
 
 				/*
 				 * fileSourceName =
@@ -706,8 +706,8 @@ public class PermitApprovalPortlet extends MVCPortlet {
 				String fileExtension = ParamUtil.get(resourceRequest, "fileWjscbzclExtension", "");
 				String materialId = ParamUtil.get(resourceRequest, "materialId", "0");
 				String portletId = ParamUtil.get(resourceRequest, "portletId", "");
-				fileSourceName = uploadPortletRequest.getFileName("userfileWjscbzcl");
-				InputStream stream = uploadPortletRequest.getFileAsStream("userfileWjscbzcl");
+				fileSourceName = uploadPortletRequest.getFileName("fileWjscbzclInput"+divNo);
+				InputStream stream = uploadPortletRequest.getFileAsStream("fileWjscbzclInput"+divNo);
 
 				/*
 				 * fileSourceName =
@@ -745,7 +745,7 @@ public class PermitApprovalPortlet extends MVCPortlet {
 				}
 
 				HttpServletResponse response = PortalUtil.getHttpServletResponse(resourceResponse);
-				response.setContentType("text/html;charset=UTF-8");
+				response.setContentType("text/plain");
 				PrintWriter out = null;
 				out = response.getWriter();
 				out.print(wjscbzclResponseStr);
