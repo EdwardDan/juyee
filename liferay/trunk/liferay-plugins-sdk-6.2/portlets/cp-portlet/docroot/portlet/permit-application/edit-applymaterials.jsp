@@ -1,7 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
 <%@ include file="init.jsp"%>
-<%@ page import="com.liferay.util.*"%>
 
 <style>
 .aui .table th, .aui .table td {
@@ -12,10 +11,13 @@
 .aui input[type="file"] {
 	width: 150px;
 }
+ .mask {       
+            position: absolute; top: 0px; filter: alpha(opacity=60); background-color: #777;     
+            z-index: 1002; left: 0px;     
+            opacity:0.5; -moz-opacity:0.5;     
+        }   
 </style>
-
 <%
-	String uploadProgressId = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
 	List<Dictionary> materialDictionaries=new ArrayList<Dictionary>();
 	List<ApplyMaterial> applyMaterialList=new ArrayList<ApplyMaterial>();
 	Long permitId =ParamUtil.getLong(renderRequest,"permitId",0);
@@ -101,8 +103,8 @@
 	System.out.println(11111);
 %>
 
-<liferay-ui:upload-progress id="<%=uploadProgressId%>"
-	message="uploading" />
+<div id="mask" class="mask"><div id="loading" style="position:fixed;top:50%;left:50%">
+</div></div>    
 <portlet:renderURL var="viewURL" />
 <c:set var="namespace" value="<%=renderResponse.getNamespace()%>"></c:set>
 <portlet:resourceURL var="fileUpLoadURL" id="fileUpLoad"/>
@@ -118,7 +120,6 @@
 
 <portlet:actionURL var="upLoadTestURL" name="upLoadResponse">
 </portlet:actionURL>
-
 
 <form id="fm" action="${fileSaveURL}" enctype="multipart/form-data"
 	method="post">
@@ -281,6 +282,8 @@ function ajaxFileUpload(divNo,materialId,portletId) {
 	var file=getFile("fileInput"+divNo);
 	var fileExtension=fileValidator("fileInput"+divNo);
 	var no = findFileNo(divNo);
+	$("#loading").html("<img src='/cp-portlet/icons/loading2.gif' style='width:100px;height:100px;'></img>");
+	showMask();
 	if(fileExtension){
     $.ajaxFileUpload
     (
@@ -300,7 +303,12 @@ function ajaxFileUpload(divNo,materialId,portletId) {
 				+ fileId + ","+materialId+")'>删除</a></div>"; 
             	 $("#fileDiv" + divNo).append(ele);
 					domSort(divNo); 
+					alert("上传成功！");		
             },
+            complete:function(){
+				hideMask();
+				$("#loading").html("");
+			},
             error: function (data, status, e)//服务器响应失败处理函数
             {
                 alert(e);
@@ -387,7 +395,7 @@ function ajaxFileUpload(divNo,materialId,portletId) {
 	}
 	
 
-	/* 删除 */
+	/* 删除 */ 
 	function <portlet:namespace/>fileDelete(divObj, fileId, materialId) {
 		if (!confirm("确定要删除此文件吗？"))
 			return;
@@ -465,5 +473,14 @@ function ajaxFileUpload(divNo,materialId,portletId) {
 		});
 		$('#fileDiv'+divNo).empty().append(sortEle);
 	}
+	 function showMask(){     
+	        $("#mask").css("height",$(document).height());     
+	        $("#mask").css("width",$(document).width());     
+	        $("#mask").show();     
+	    }  
+	    //隐藏遮罩层  
+	    function hideMask(){     
+	        $("#mask").hide();     
+	    }  
 </script>
 
