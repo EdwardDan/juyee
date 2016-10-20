@@ -1,13 +1,19 @@
 package com.justonetech.cp.portlet;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -16,8 +22,10 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.itextpdf.text.DocumentException;
 import com.justonetech.cp.contract.model.Contract;
 import com.justonetech.cp.contract.service.ContractLocalServiceUtil;
 import com.justonetech.cp.permit.model.ApplyMaterial;
@@ -41,8 +49,10 @@ import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.search.ParseException;
+import com.liferay.portal.kernel.servlet.ServletResponseUtil;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -71,6 +81,12 @@ import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
+import com.lowagie.text.Document;
+import com.lowagie.text.pdf.AcroFields;
+import com.lowagie.text.pdf.PdfCopy;
+import com.lowagie.text.pdf.PdfImportedPage;
+import com.lowagie.text.pdf.PdfReader;
+import com.lowagie.text.pdf.PdfStamper;
 
 /**
  * Portlet implementation class PermitApplicationPortlet
@@ -202,13 +218,6 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		}
 		Long jsgcsx = ParamUtil.getLong(request, "jsgcsx");
 		String jsgcgm = ParamUtil.getString(request, "jsgcgm");
-		String gls = ParamUtil.getString(request, "gls");
-		String jzmj = ParamUtil.getString(request, "jzmj");
-		int qlsl = ParamUtil.getInteger(request, "qlsl");
-		String qlkd = ParamUtil.getString(request, "qlkd");
-		int guijiaosl = ParamUtil.getInteger(request, "guijiaosl");
-		int sdsl = ParamUtil.getInteger(request, "sdsl");
-		int gaojiasl = ParamUtil.getInteger(request, "gaojiasl");
 		String gcnr = ParamUtil.getString(request, "gcnr");
 		String gyzjbz = ParamUtil.getString(request, "gyzjbz");
 		String fwjzmj = ParamUtil.getString(request, "fwjzmj");
@@ -351,13 +360,6 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		projectProfile.setJsgclb(jsgclbs);
 		projectProfile.setJsgcsx(jsgcsx);
 		projectProfile.setJsgcgm(jsgcgm);
-		projectProfile.setGls(gls);
-		projectProfile.setJzmj(jzmj);
-		projectProfile.setQlsl(qlsl);
-		projectProfile.setQlkd(qlkd);
-		projectProfile.setGuijiaosl(guijiaosl);
-		projectProfile.setSdsl(sdsl);
-		projectProfile.setGaojiasl(gaojiasl);
 		projectProfile.setGcnr(gcnr);
 		projectProfile.setGyzjbz(gyzjbz);
 		projectProfile.setFwjzmj(fwjzmj);
@@ -617,6 +619,211 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		}
 	}
 
+	public Map<String, String> getMap(long permitId, String xmlx) throws PortalException, SystemException {
+		Map<String, String> map = new HashMap<String, String>();
+		Permit permit = PermitLocalServiceUtil.getPermit(permitId);
+		ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
+		String title = "上海市(" + xmlx + ")工程施工许可证";
+		String bh = "";
+		String gj = "";
+		if (xmlx.equals("港口")) {
+			gj = "根据《中华人民共和国港口法》等相关法律规定，经审查，本工程符合施工条件，准予施工。";
+		} else if (xmlx.equals("公路")) {
+			gj = "根据《中华人民共和国公路法》等相关法律规定，经审查，本工程符合施工条件，准予施工。";
+		} else {
+			gj = "根据《中华人民共和国交通建设法》等相关法律规定，经审查，本工程符合施工条件，准予施工。";
+		}
+		String jsdw = projectProfile.getJsdwmc();
+		String gcmc = projectProfile.getGcmc();
+		String gcwz = projectProfile.getJsdd();
+		String gcnr = projectProfile.getGcnr();
+		String xmtzgs = projectProfile.getXmtzgs() + "万元";
+		String htjg = projectProfile.getHtjg() + "万元";
+		String sjdw = "";
+		String sgdw = "";
+		String jldw = "";
+
+		List<ParticipationUnit> participationUnits = ParticipationUnitLocalServiceUtil.findByPermitId(permitId, -1, -1);
+		for (ParticipationUnit participationUnit : participationUnits) {
+			if (participationUnit.getDwlx().equals("设计单位")) {
+				sjdw = participationUnit.getDwmc();
+			}
+			if (participationUnit.getDwlx().equals("施工单位")) {
+				sgdw = participationUnit.getDwmc();
+			}
+			if (participationUnit.getDwlx().equals("监理单位")) {
+				jldw = participationUnit.getDwmc();
+			}
+		}
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		String jhkg = sdf.format(projectProfile.getJhkg());
+		String jhjg = sdf.format(projectProfile.getJhjg());
+		String jhkgrq = jhkg.substring(0, 4) + "年" + jhkg.substring(4, 6) + "月" + jhkg.substring(6, 8) + "日";
+		String jhjgrq = jhjg.substring(0, 4) + "年" + jhjg.substring(4, 6) + "月" + jhjg.substring(6, 8) + "日";
+		String bz = projectProfile.getSgxkzsbz();
+		map.put("xmtzgs", xmtzgs);
+		map.put("htjg", htjg);
+		map.put("gcwz", gcwz);
+		map.put("gcnr", gcnr);
+		map.put("jsdw", jsdw);
+		map.put("gcmc", gcmc);
+		map.put("bh", bh);
+		map.put("gj", gj);
+		map.put("title", title);
+		map.put("jhkgrq", jhkgrq);
+		map.put("jhjgrq", jhjgrq);
+		map.put("sgdw", sgdw);
+		map.put("jldw", jldw);
+		map.put("sjdw", sjdw);
+		map.put("bz", bz);
+		return map;
+	}
+	
+	public Map<String, String> getKgbaMap(long permitId) throws PortalException, SystemException {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		Map<String, String> map = new HashMap<String, String>();
+		ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
+		String babh = "";
+		String xmmc = projectProfile.getGcmc();
+		String jsdd = projectProfile.getJsdd();
+		String tzly = projectProfile.getTzly();
+		String gkpzwh = projectProfile.getGkpzhhzjghwh();
+		Date pfhhzrqDate = projectProfile.getPfhhzrq();
+		String pfhhzrq = sdf.format(pfhhzrqDate);
+		String hzrq = pfhhzrq.substring(0, 4) + "年" + pfhhzrq.substring(4, 6) + "月" + pfhhzrq.substring(6, 8) + "日";
+		String tzgs = projectProfile.getXmtzgs();
+		String cbpzwh = projectProfile.getCbsjpzjghwh();
+		Date pfrqDate = projectProfile.getPfrq();
+		String pfrqStr = sdf.format(pfrqDate);
+		String pfrq = pfrqStr.substring(0, 4) + "年" + pfrqStr.substring(4, 6) + "月" + pfrqStr.substring(6, 8) + "日";
+		String pfgq = projectProfile.getPfgq()+"天";
+		String jsgm = projectProfile.getJsgcgm()+"。"+projectProfile.getGcnr();
+		String pzjghwh = projectProfile.getPzjghwh();
+		String xmdw = projectProfile.getXmdw();
+		String xmdwfzr = projectProfile.getXmfzr();
+		String xmdwfzrlxdh = projectProfile.getXmfzrlxdh();
+		String sjdw = projectProfile.getZyjldw();
+		String sjdwzbfs = projectProfile.getSj_zbfs();
+		String sjdwzbj = projectProfile.getSj_zbj();
+		String sjdwzzdj = projectProfile.getSj_zzdj();
+		String sjdwzzdjzs = projectProfile.getSj_zzdjzsbh();
+		String sjdwxmfzr = projectProfile.getSj_xmfzr();
+		String sjdwxmfzrzs = projectProfile.getSj_xmfzrzsbh();
+		
+		String jldw = projectProfile.getZyjldw();
+		String jldwzbfs = projectProfile.getJl_zbfs();
+		String jldwzbj = projectProfile.getJl_zbj();
+		String jldwzzdj = projectProfile.getJl_zzdj();
+		String jldwzzdjzs = projectProfile.getJl_zzdjzsbh();
+		String jldwzj = projectProfile .getJl_zj();
+		String jldwzjzs = projectProfile.getJl_zjzsbh();
+		
+		String sgdw = projectProfile.getZysgdw();
+		String sgdwzbfs = projectProfile.getSg_zbfs();
+		String sgdwzbj = projectProfile.getSg_zbj();
+		String sgdwzzdj = projectProfile.getSg_zzdj();
+		String sgdwzzdjzs = projectProfile.getSg_zzdjzsbh();
+		String sgdwxmjl = projectProfile.getSg_xmjl();
+		String sgdwxmjlzs = projectProfile.getSg_xmjlzsbh();  	
+		
+		String jszjjh = projectProfile.getJszjjhlsqk();
+		String dcqwcqk = projectProfile.getDcqwcqk();
+		String sgzbqk = projectProfile.getSgzbqk();
+		String xgwj = projectProfile.getSytdxgwj();
+		String gczljd = projectProfile.getGczljddjqk();
+		
+		
+		String jhkgrq = sdf.format(projectProfile.getJhkg());
+		String jhjgrq = sdf.format(projectProfile.getJhjg());
+		String jhkg = jhkgrq.substring(0, 4) + "年" + jhkgrq.substring(4, 6) + "月" + jhkgrq.substring(6, 8) + "日";
+		String jhwg = jhjgrq.substring(0, 4) + "年" + jhjgrq.substring(4, 6) + "月" + jhjgrq.substring(6, 8) + "日";
+		map.put("babh", babh);
+		map.put("xmmc", xmmc);
+		map.put("jsdd", jsdd);
+		map.put("tzly", tzly);
+		map.put("gkpzwh", gkpzwh);
+		map.put("hzrq", hzrq);
+		map.put("tzgs", tzgs);
+		map.put("cbpzwh", cbpzwh);
+		map.put("pfrq", pfrq);
+		map.put("pfgq", pfgq);
+		map.put("jsgm", jsgm);
+		map.put("pzjghwh", pzjghwh);
+		map.put("xmdw", xmdw);
+		map.put("xmdwfzr", xmdwfzr);
+		map.put("xmdwfzrlxdh", xmdwfzrlxdh);
+		map.put("sjdw", sjdw);
+		map.put("sjdwzbfs", sjdwzbfs);
+		map.put("sjdwzbj", sjdwzbj);
+		map.put("sjdwzzdj", sjdwzzdj);
+		map.put("sjdwzzdjzs", sjdwzzdjzs);
+		map.put("sjdwxmfzr", sjdwxmfzr);
+		map.put("sjdwxmfzrzs", sjdwxmfzrzs);
+		map.put("jldw", jldw);
+		map.put("jldwzbfs", jldwzbfs);
+		map.put("jldwzbj", jldwzbj);
+		map.put("jldwzzdj", jldwzzdj);
+		map.put("jldwzzdjzs", jldwzzdjzs);
+		map.put("jldwzj", jldwzj);
+		map.put("jldwzjzs", jldwzjzs);
+		map.put("sgdw", sgdw);
+		map.put("sgdwzbfs", sgdwzbfs);
+		map.put("sgdwzbj", sgdwzbj);
+		map.put("sgdwzzdj", sgdwzzdj);
+		map.put("sgdwzzdjzs", sgdwzzdjzs);
+		map.put("sgdwxmjl", sgdwxmjl);
+		map.put("sgdwxmjlzs", sgdwxmjlzs);
+		map.put("jszjjh", jszjjh);
+		map.put("dcqwcqk", dcqwcqk);
+		map.put("sgzbqk", sgzbqk);
+		map.put("xgwj", xgwj);
+		map.put("gczljd", gczljd);
+		
+		map.put("jhkg", jhkg);
+		map.put("jhwg", jhwg);
+		return map;
+	}
+
+	public void fillTemplate(DLFileEntry fileEntry, String newPDFPath, Map<String, String> map,
+			ResourceRequest request, ResourceResponse response, Permit permit) throws IOException, DocumentException,
+			PortalException, SystemException, com.lowagie.text.DocumentException {
+		PdfReader pdfReader = new PdfReader(fileEntry.getContentStream());
+		File file = new File(newPDFPath);
+		file.delete();
+		FileOutputStream outputStream = new FileOutputStream(file);
+		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+		PdfStamper pdfStamper = new PdfStamper(pdfReader, byteArrayOutputStream);
+		AcroFields acroFields = pdfStamper.getAcroFields();
+		Iterator<String> iterator = acroFields.getFields().keySet().iterator();
+		while (iterator.hasNext()) {
+			String data = iterator.next().toString();
+			acroFields.setField(data, map.get(data));
+		}
+		pdfStamper.setFormFlattening(true);
+		pdfStamper.close();
+		Document document = new Document();
+		PdfCopy pdfCopy = new PdfCopy(document, outputStream);
+		document.open();
+		for (int i = 1; i <= pdfReader.getNumberOfPages(); i++) {
+			PdfImportedPage importedPage = pdfCopy.getImportedPage(new PdfReader(byteArrayOutputStream.toByteArray()),
+					i);
+			pdfCopy.addPage(importedPage);
+		}
+		document.close();
+	}
+	
+	private byte[] inputStreamToByte(InputStream is) throws IOException {
+		ByteArrayOutputStream bytestream = new ByteArrayOutputStream();
+		byte[] buffer = new byte[1024];
+		int ch;
+		while ((ch = is.read(buffer)) != -1) {
+			bytestream.write(buffer, 0, ch);
+		}
+		byte data[] = bytestream.toByteArray();
+		bytestream.close();
+		return data;
+	}
+
 	@Override
 	public void serveResource(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException,
 			PortletException {
@@ -628,30 +835,59 @@ public class PermitApplicationPortlet extends MVCPortlet {
 			Permit permit = PermitLocalServiceUtil.getPermit(permitId);
 			ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
 			String xmlx = DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx()).getName();
-			// 上传文件
+			if ("view".equals(resourceId)) {
+				Map<String, String> map = null;
+				String newPDFPath = "";
+				if (xmlx.equals("航道")) {
+					newPDFPath = PropsUtil.get("sgxkz.temp.folder.id") + "开工备案.pdf";
+				} else {
+					newPDFPath = PropsUtil.get("sgxkz.temp.folder.id") + "施工许可证书.pdf";
+				}
+				if (xmlx.equals("航道")) {
+					map = getKgbaMap(permitId);
+					fillTemplate(DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(PropsUtil
+							.get("sgxkz.hd.pdf.template.id"))), newPDFPath, map, resourceRequest, resourceResponse, permit);
+				} else {
+					map = getMap(permitId, xmlx);
+					if (projectProfile.getXmxz() == 29769) {
+						fillTemplate(DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(PropsUtil
+								.get("sgxkz.pdf.template.id"))), newPDFPath, map, resourceRequest, resourceResponse,
+								permit);
+					} else {
+						fillTemplate(DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(PropsUtil
+								.get("sgxkz.ls.pdf.template.id"))), newPDFPath, map, resourceRequest, resourceResponse,
+								permit);
+					}
+				}
+
+				HttpServletRequest request = PortalUtil.getHttpServletRequest(resourceRequest);
+				HttpServletResponse response = PortalUtil.getHttpServletResponse(resourceResponse);
+				File file = null;
+				if (xmlx.equals("航道")) {
+					file = new File("D:\\temp\\开工备案.pdf");
+				} else {
+					file = new File("D:\\temp\\施工许可证书.pdf");
+				}
+				byte[] bytes = FileUtil.getBytes(file);
+				if (xmlx.equals("航道")) {
+				ServletResponseUtil.sendFile(request, response, "开工备案.pdf", bytes, ContentTypes.APPLICATION_PDF);
+				}else{
+					ServletResponseUtil.sendFile(request, response, "施工许可证书.pdf", bytes, ContentTypes.APPLICATION_PDF);
+				}
+			}
 			if ("fileUpLoad".equals(resourceId)) {
 				UploadPortletRequest uploadPortletRequest = PortalUtil.getUploadPortletRequest(resourceRequest);
-
-				ServiceContext serviceContext;
-				JSONObject fileJson = JSONFactoryUtil.createJSONObject();
-				serviceContext = ServiceContextFactory.getInstance(Permit.class.getName(), resourceRequest);
-				FileEntry fileEntry = null;
-				// 对应的是第几类材料的div
-				String divNo = ParamUtil.get(resourceRequest, "divNo", "");
-				// 文件材料的名称编号
-				String no = ParamUtil.get(resourceRequest, "no", "");
-				String fileExtension = ParamUtil.get(resourceRequest, "fileExtension", "");
+				ServiceContext serviceContext = ServiceContextFactory.getInstance(Permit.class.getName(), resourceRequest);
 				String materialId = ParamUtil.get(resourceRequest, "materialId", "0");
-				String portletId = ParamUtil.get(resourceRequest, "portletId", "");
-				fileSourceName = uploadPortletRequest.getFileName("userfile");
-				InputStream stream = uploadPortletRequest.getFileAsStream("userfile");
-
-				/*
-				 * fileSourceName =
-				 * uploadPortletRequest.getFileName("fileInput"+divNo);
-				 * InputStream stream =
-				 * uploadPortletRequest.getFileAsStream("fileInput"+divNo);
-				 */
+				String divNo = ParamUtil.get(resourceRequest, "divNo", "0");
+				String portletId = ParamUtil.get(resourceRequest, "portletId", "0");
+				String no = ParamUtil.get(resourceRequest, "no", "0");
+				String fileExtension = ParamUtil.get(resourceRequest, "fileExtension", "0");
+				fileSourceName = uploadPortletRequest.getFileName("fileInput"+divNo);
+				InputStream stream = uploadPortletRequest.getFileAsStream("fileInput"+divNo);
+				
+				FileEntry fileEntry = null;
+				String responseStr="";//服务器返回前台的数据
 				byte[] fileBytes = null;
 				if (null != stream) {
 					fileBytes = FileUtil.getBytes(stream);
@@ -673,25 +909,33 @@ public class PermitApplicationPortlet extends MVCPortlet {
 					else {
 						fileEntryIds = fileEntryIds + "," + fileEntry.getFileEntryId() + "|" + fileEntry.getExtension();
 					}
-					fileJson.put("fileId", fileEntry.getFileEntryId());
+					/*fileJson.put("fileId", fileEntry.getFileEntryId());*/
+					responseStr+=fileEntry.getFileEntryId();
 					applyMaterial.setFileEntryIds(fileEntryIds);
 					ApplyMaterialLocalServiceUtil.updateApplyMaterial(applyMaterial);
-					fileJson.put("materialName", applyMaterial.getClmc());
+					/*fileJson.put("materialName", applyMaterial.getClmc());*/
+					responseStr+="|"+applyMaterial.getClmc();
 				}
-
-				HttpServletResponse response = PortalUtil.getHttpServletResponse(resourceResponse);
-				response.setContentType("text/html;charset=UTF-8");
+				
+				HttpServletResponse httpServletResponse = PortalUtil.getHttpServletResponse(resourceResponse);
+				httpServletResponse.setContentType("text/plain");
 				PrintWriter out = null;
-				out = response.getWriter();
-				out.print(fileJson.toString());
+				out = httpServletResponse.getWriter();
+				out.print(responseStr);
+				/*System.out.println(333);*/
 				out.flush();
 				out.close();
+				
+				
 			}
-
+			
+			
 			// 删除文件
 			if ("fileDelete".equals(resourceId)) {
 				String fileId = ParamUtil.get(resourceRequest, "fileId", "0");
 				String materialId = ParamUtil.get(resourceRequest, "materialId", "0");
+				System.out.println(fileId);
+				System.out.println(materialId);
 				if (!fileId.equals("0")) {
 					DLFileEntry dlFileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(fileId));
 					if (!materialId.equals("0")) {
@@ -720,6 +964,12 @@ public class PermitApplicationPortlet extends MVCPortlet {
 			e.printStackTrace();
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
+		} catch (DocumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (com.lowagie.text.DocumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}  
 		super.serveResource(resourceRequest, resourceResponse);
 	}
@@ -728,6 +978,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 	public FileEntry uploadFile(ResourceRequest request, String fileSourceName, byte[] fileBytes,
 			ServiceContext serviceContext, String portletId, String materialId, String fileTitle)
 			throws PortalException, SystemException, IOException {
+		System.out.println(222);
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setIndexingEnabled(true);
 
@@ -782,5 +1033,51 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		}
 		return fileEntry;
 	}
+	
+	public void upLoadResponse(ActionRequest request, ActionResponse response) throws PortalException, SystemException, IOException{
+		System.out.println(123);
+		UploadPortletRequest uploadPortletRequest = PortalUtil.getUploadPortletRequest(request);
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(Permit.class.getName(), request);
+		String materialId = ParamUtil.get(request, "materialId", "0");
+		String fileSourceName = uploadPortletRequest.getFileName("fileName");
+		InputStream stream = uploadPortletRequest.getFileAsStream("fileName");
+		System.out.println(fileSourceName);
+		System.out.println(FileUtil.getBytes(stream).length);
+		System.out.println(fileSourceName);
+		System.out.println(materialId);
+		/*byte[] bytes=FileUtil.getBytes(stream);*/
+		/*if(fileSourceName!=null){
+			uploadFileTest(request,fileSourceName,bytes,serviceContext);
+		}*/
+		JSONObject fileJson = JSONFactoryUtil.createJSONObject();
+		fileJson.put(materialId, "555");
+		HttpServletResponse httpServletResponse = PortalUtil.getHttpServletResponse(response);
+		httpServletResponse.setContentType("application/json");
+		PrintWriter out = null;
+		out = httpServletResponse.getWriter();
+		out.print(fileJson.toString());
+		System.out.println(333);
+		out.flush();
+		out.close();
+
+	}
+	public FileEntry uploadFileTest(ActionRequest request, String fileSourceName, byte[] fileBytes,
+		ServiceContext serviceContext)
+		throws PortalException, SystemException, IOException {
+	serviceContext.setAddGuestPermissions(true);
+	serviceContext.setIndexingEnabled(true);
+
+	User user = PortalUtil.getUser(request);
+	long userId = user.getUserId();
+	Long groupId = user.getGroupId();
+	FileEntry fileEntry = null;
+	// 为每一种材料名称创建一个文件夹,如果已有就不再创
+	if (fileBytes != null) {
+		fileEntry = DLAppLocalServiceUtil.addFileEntry(userId, groupId, groupId, fileSourceName,
+				MimeTypesUtil.getContentType(fileSourceName), fileSourceName, null, null, fileBytes, serviceContext);
+	}
+	return fileEntry;
+}
+	
 
 }
