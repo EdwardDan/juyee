@@ -1,6 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
 <%@ include file="init.jsp"%>
+<%@ page import="com.liferay.util.*"%>
+
 <style>
 .aui .table th, .aui .table td {
 	vertical-align: middle;
@@ -10,13 +12,10 @@
 .aui input[type="file"] {
 	width: 150px;
 }
- .mask {       
-            position: absolute; top: 0px; filter: alpha(opacity=60); background-color: #777;     
-            z-index: 1002; left: 0px;     
-            opacity:0.5; -moz-opacity:0.5;     
-        }   
 </style>
+
 <%
+	String uploadProgressId = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
 	List<Dictionary> materialDictionaries=new ArrayList<Dictionary>();
 	List<ApplyMaterial> applyMaterialList=new ArrayList<ApplyMaterial>();
 	Long permitId =ParamUtil.getLong(renderRequest,"permitId",0);
@@ -99,9 +98,11 @@
 		}
 
 	}
+	System.out.println(11111);
 %>
-<div id="mask" class="mask"><div id="loading" style="position:fixed;top:50%;left:50%">
-</div></div>    
+
+<liferay-ui:upload-progress id="<%=uploadProgressId%>"
+	message="uploading" />
 <portlet:renderURL var="viewURL" />
 <c:set var="namespace" value="<%=renderResponse.getNamespace()%>"></c:set>
 <portlet:resourceURL var="fileUpLoadURL" id="fileUpLoad"/>
@@ -114,6 +115,11 @@
 <portlet:actionURL var="submitAllURL" name="submitAll">
 	<portlet:param name="redirect" value="${viewURL}" />
 </portlet:actionURL>
+
+<portlet:actionURL var="upLoadTestURL" name="upLoadResponse">
+</portlet:actionURL>
+
+
 <form id="fm" action="${fileSaveURL}" enctype="multipart/form-data"
 	method="post">
 	<aui:input type="hidden" name="permitId" value="<%=permitId%>"></aui:input>
@@ -158,13 +164,12 @@
 						</c:if>
 					</div>
 				</td>
-				<td style="text-align: center"><input type="button" value="上传"
+				<td style="text-align: center">
+				<input type="button" value="上传"
 					onclick="document.getElementById('fileInput${status.index+1}').click();">
 					<input id="fileInput${status.index+1}"
-					name="${namespace}fileInput${status.index+1}" type="file"
-					multiple="" style="display: none; width: 150px;"
-					accept="application/pdf,image/jpeg"
-					onchange="${renderResponse.namespace}fileUpLoad(${status.index+1},${material.materialId},'<%=portletDisplay.getId() %>');${renderResponse.namespace}clearValue(this);"></input>
+					name="${namespace}fileInput${status.index+1}" type="file" accept="application/pdf,image/jpeg"
+					 style="display:none; width: 150px;" onchange="ajaxFileUpload(${status.index+1},${material.materialId},'<%=portletDisplay.getId() %>');"></input>
 
 				</td>
 			</tr>
@@ -271,9 +276,41 @@ Liferay.delegateClick('<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(tra
 
 </form>
 
-<form id="fmFile" enctype="multipart/form-data" method="post"></form>
-
 <script>
+function ajaxFileUpload(divNo,materialId,portletId) {
+	var file=getFile("fileInput"+divNo);
+	var fileExtension=fileValidator("fileInput"+divNo);
+	var no = findFileNo(divNo);
+	if(fileExtension){
+    $.ajaxFileUpload
+    (
+        {
+            url: '${fileUpLoadURL}', //用于文件上传的服务器端请求地址
+            secureuri: false, //是否需要安全协议，一般设置为false
+            fileElementId: 'fileInput'+divNo, //文件上传域的ID
+            data:{${namespace}materialId:materialId,${namespace}divNo:divNo,${namespace}portletId:portletId,${namespace}no:no,${namespace}fileExtension:fileExtension}, 
+            dataType: 'string', //返回值类型 一般设置为json 
+            success: function (data)  //服务器成功响应处理函数
+            {
+            	var dataArray=data.replace("</pre>","").replace(/<pre.*>/,"");
+            	var fileId=dataArray.split('|')[0];var materialName=dataArray.split('|')[1];
+            	 var ele = "<div name='file"+divNo+"'><a class='fileName' href='javascript:void(0);'>"
+				+ materialName+"-"+no+"."+fileExtension
+				+ "</a> &nbsp;&nbsp;&nbsp;<a href='javascript:void(0)';  onclick='${renderResponse.namespace}fileDelete(this,"
+				+ fileId + ","+materialId+")'>删除</a></div>"; 
+            	 $("#fileDiv" + divNo).append(ele);
+					domSort(divNo); 
+            },
+            error: function (data, status, e)//服务器响应失败处理函数
+            {
+                alert(e);
+            }
+        }
+    )
+	}
+    return false;
+}
+
 	function saveMaterials(){
 		document.getElementById("fm").action='${fileSaveURL}';
 		document.getElementById("fm").submit();
@@ -285,18 +322,30 @@ Liferay.delegateClick('<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(tra
 		
 	}
 
-
-
-
-
 	//文件类型和大小的验证
 	function fileValidator(inputFileId){
-		 var fileInput = $("#"+inputFileId)[0];
-         if(fileInput){
-         	var fileName=fileInput.files[0].name;
-         	var fileExtension=fileName.split('.').pop().toUpperCase();
-	        var fileSize  =Math.ceil(fileInput.files[0].size / (1024*1024)) ;//M为单位
-	        if(fileExtension!="JPG"&&fileExtension!="PDF"){
+		//判断使用浏览器
+		var browserCfg = {}; 
+		var ua = window.navigator.userAgent;
+		if (ua.indexOf("MSIE")>=1){ browserCfg.ie = true; }
+		var obj_file = document.getElementById(inputFileId); 
+		if(obj_file.value==""){ alert("请先选择上传文件"); return; } 
+		var fileSize;
+		var fileName;
+		var fileExtension;
+		if(browserCfg.ie){
+			var fileobject = new ActiveXObject ("Scripting.FileSystemObject");//获取上传文件的对象
+			var file = fileobject.GetFile (obj_file.value);
+			fileSize=Math.ceil(file.size/(1024*1024));
+			fileName=file.name;
+		}else{
+			var fileInput = $("#"+inputFileId)[0];
+			fileName=fileInput.files[0].name;
+			fileSize=Math.ceil(fileInput.files[0].size / (1024*1024)) ;
+		}
+		if(fileName){
+			var fileExtension=fileName.split('.').pop().toUpperCase();
+			if(fileExtension!="JPG"&&fileExtension!="PDF"){
 	        	alert("文件上传仅限于jpg或者pdf格式！");
 	        	return false;
 	        }else if(fileExtension=="JPG"){
@@ -309,60 +358,29 @@ Liferay.delegateClick('<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(tra
 	        		alert("上传的pdf文件超过20M,请压缩或拆分后上传！")
 	        		return false;
 	        	}
-	        }	         
-         }      
-	     return true;
-	 }
-
-
-
-	
-		
-	/* 上传 */
-	function <portlet:namespace/>fileUpLoad(divNo,materialId,portletId) {
-		if(fileValidator("fileInput"+divNo)){
-			var fileExtension=$("#fileInput"+divNo)[0].files[0].name.split('.').pop();
-			var no = findFileNo(divNo);
-			var fmFile = document.getElementById("fmFile");
-			var oMyForm = new FormData(fmFile);
-			oMyForm.append("<portlet:namespace/>divNo",divNo);
-			oMyForm.append("<portlet:namespace/>materialId",materialId);
-			oMyForm.append("<portlet:namespace/>portletId",portletId);
-			oMyForm.append("<portlet:namespace/>userfile", $("#fileInput"+divNo)[0].files[0]);
-			oMyForm.append("<portlet:namespace/>no", no);
-			oMyForm.append("<portlet:namespace/>fileExtension", fileExtension);
-			$.ajax({
-						url : "<%=fileUpLoadURL%>",
-						type : "post",
-						data : oMyForm,
-						cache : false,
-						processData : false,
-						contentType : false,
-						beforeSend:function(XMLHttpRequest){
-							$("#loading").html("<img src='/cp-portlet/icons/loading2.gif' style='width:100px;height:100px;'></img>");
-							showMask();
-						},
-						success : function(data) {
-							var fileData = eval("(" + data + ")");
-							var ele = "<div name='file"+divNo+"'><a class='fileName' href='javascript:void(0);'>"
-							+ fileData.materialName+"-"+no+"."+fileExtension
-							+ "</a> &nbsp;&nbsp;&nbsp;<a href='javascript:void(0)';  onclick='${renderResponse.namespace}fileDelete(this,"
-							+ fileData.fileId + ","+materialId+")'>删除</a></div>";
-							$("#fileDiv" + divNo).append(ele);
-							domSort(divNo); 
-							alert("上传成功！");
-						},
-						complete:function(){
-							hideMask();
-							$("#loading").html("");
-						},
-						error : function(e) {
-							alert("网络错误，请重试！！");
-						}
-					});
+	        }	       
 		}
+	     return fileExtension.toLowerCase();
+	 }
+	
+	function getFile(inputFileId){
+		//判断使用浏览器
+		var browserCfg = {}; 
+		var ua = window.navigator.userAgent;
+		if (ua.indexOf("MSIE")>=1){ browserCfg.ie = true; }
+		var obj_file = document.getElementById(inputFileId); 
+		var file;
+		if(browserCfg.ie){
+			var fileobject = new ActiveXObject ("Scripting.FileSystemObject");//获取上传文件的对象
+			file = fileobject.GetFile (obj_file.value);
+		}else{
+			var fileInput = $("#"+inputFileId)[0];
+			file=fileInput.files[0];
+		}
+		return file;
 	}
 
+	
 	function <portlet:namespace/>clearValue(btn){
 		var input=$(btn);
 		input.replaceWith(input.val('').clone(true));
@@ -404,6 +422,28 @@ Liferay.delegateClick('<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(tra
 	}
 	
 	function getNo(fileNameNoArr){
+		//如果是ie8浏览器，添加indexof方法
+		if (!Array.prototype.indexOf)
+		{
+		  Array.prototype.indexOf = function(elt /*, from*/)
+		  {
+		    var len = this.length >>> 0;
+
+		    var from = Number(arguments[1]) || 0;
+		    from = (from < 0)
+		         ? Math.ceil(from)
+		         : Math.floor(from);
+		    if (from < 0)
+		      from += len;
+		    for (; from < len; from++)
+		    {
+		      if (from in this &&
+		          this[from] === elt)
+		        return from;
+		    }
+		    return -1;
+		  };
+		}
 		var no;
 		for(var i=1;i<50;i++){
 			var r=fileNameNoArr.indexOf(i.toString());
@@ -425,16 +465,5 @@ Liferay.delegateClick('<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(tra
 		});
 		$('#fileDiv'+divNo).empty().append(sortEle);
 	}
-	
-	
-	 function showMask(){     
-	        $("#mask").css("height",$(document).height());     
-	        $("#mask").css("width",$(document).width());     
-	        $("#mask").show();     
-	    }  
-	    //隐藏遮罩层  
-	    function hideMask(){     
-	        $("#mask").hide();     
-	    }  
-
 </script>
+
