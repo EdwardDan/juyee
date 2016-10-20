@@ -386,7 +386,7 @@
 		return file;
 	}
 
-	function fileBzclUpLoad(divNo,materialId,portletId) {
+	function <portlet:namespace/>fileBzclUpLoad(divNo,materialId,portletId) {
 		var file=getFile("fileBzclInput"+divNo);
 		var fileExtension=fileValidator("fileBzclInput"+divNo);
 		var no = findFileNo(divNo);
@@ -536,7 +536,7 @@
 	
 	
 	/* 委建设处补正材料上传 */
-	function fileWjscbzclUpLoad(divNo,materialId,portletId) {
+	function <portlet:namespace/>fileWjscbzclUpLoad(divNo,materialId,portletId) {
 	var file=getFile("fileWjscbzclInput"+divNo);
 	var fileExtension=fileValidator("fileWjscbzclInput"+divNo);
 	var no = findFileWjscbzclNo(divNo);
