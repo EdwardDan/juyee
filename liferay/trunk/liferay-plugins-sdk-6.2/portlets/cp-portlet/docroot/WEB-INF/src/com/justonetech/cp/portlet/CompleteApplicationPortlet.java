@@ -444,9 +444,17 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 				String fileExtension = ParamUtil.get(resourceRequest, "fileExtension", "");
 				String materialId = ParamUtil.get(resourceRequest, "materialId", "0");
 				String portletId = ParamUtil.get(resourceRequest, "portletId", "");
-				fileSourceName = uploadPortletRequest.getFileName("userfile");
-				InputStream stream = uploadPortletRequest.getFileAsStream("userfile");
-
+				fileSourceName = uploadPortletRequest.getFileName("fileInput"+divNo);
+				InputStream stream = uploadPortletRequest.getFileAsStream("fileInput"+divNo);
+				System.out.println(no);
+				System.out.println(fileExtension);
+				System.out.println(materialId);
+				System.out.println(portletId);
+				System.out.println(fileSourceName);
+				
+				
+				
+				
 				/*
 				 * fileSourceName =
 				 * uploadPortletRequest.getFileName("fileInput"+divNo);
@@ -485,7 +493,7 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 				}
 
 				HttpServletResponse response = PortalUtil.getHttpServletResponse(resourceResponse);
-				response.setContentType("text/html;charset=UTF-8");
+				response.setContentType("text/plain");
 				PrintWriter out = null;
 				out = response.getWriter();
 				out.print(reponseStr);
