@@ -11,7 +11,7 @@
 	${theme.include(top_head_include)}
 	<link rel="stylesheet" href="${ace_folder}/css/ace-custom.css" />
 	<script src="${jquery_folder}/jquery-1.12.4.min.js" type="text/javascript"></script>
-	
+	<!--[if lt IE 9]><script>window.location.href='/static/upgrade-your-browser.html?referrer='+location.href;</script><![endif]-->
 </head>
 
 <body class="navbar-fixed">
