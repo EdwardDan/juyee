@@ -433,7 +433,8 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 				UploadPortletRequest uploadPortletRequest = PortalUtil.getUploadPortletRequest(resourceRequest);
 
 				ServiceContext serviceContext;
-				com.liferay.portal.kernel.json.JSONObject fileJson = JSONFactoryUtil.createJSONObject();
+				/*com.liferay.portal.kernel.json.JSONObject fileJson = JSONFactoryUtil.createJSONObject();*/
+				String reponseStr="";
 				serviceContext = ServiceContextFactory.getInstance(Permit.class.getName(), resourceRequest);
 				FileEntry fileEntry = null;
 				// 对应的是第几类材料的div
@@ -475,17 +476,19 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 					else {
 						fileEntryIds = fileEntryIds + "," + fileEntry.getFileEntryId() + "|" + fileEntry.getExtension();						
 					}
-					fileJson.put("fileId", fileEntry.getFileEntryId());
+					/*fileJson.put("fileId", fileEntry.getFileEntryId());*/
+					reponseStr+=fileEntry.getFileEntryId();
 					completeApplyMaterial.setFileEntryIds(fileEntryIds);
 					CompleteApplyMaterialLocalServiceUtil.updateCompleteApplyMaterial(completeApplyMaterial);
-					fileJson.put("materialName", completeApplyMaterial.getClmc());
+					/*fileJson.put("materialName", completeApplyMaterial.getClmc());*/
+					reponseStr+="|"+completeApplyMaterial.getClmc();
 				}
 
 				HttpServletResponse response = PortalUtil.getHttpServletResponse(resourceResponse);
 				response.setContentType("text/html;charset=UTF-8");
 				PrintWriter out = null;
 				out = response.getWriter();
-				out.print(fileJson.toString());
+				out.print(reponseStr);
 				out.flush();
 				out.close();
 			}
