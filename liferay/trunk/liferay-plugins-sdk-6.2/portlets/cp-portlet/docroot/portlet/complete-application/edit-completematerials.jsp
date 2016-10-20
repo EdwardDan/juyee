@@ -222,7 +222,7 @@ function getFile(inputFileId){
 }
 	
 
-function fileUpLoad(divNo,materialId,portletId) {
+function <portlet:namespace/>fileUpLoad(divNo,materialId,portletId) {
 	var file=getFile("fileInput"+divNo);
 	var fileExtension=fileValidator("fileInput"+divNo);
 	var no = findFileNo(divNo);
