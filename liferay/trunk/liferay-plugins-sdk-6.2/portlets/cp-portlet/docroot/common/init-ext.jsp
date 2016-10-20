@@ -23,8 +23,9 @@
 %>
 <script type="text/javascript" src="/static/My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript">
-    window.jQuery || document.write("<script src='/static/jquery/jquery-1.12.4.min.js'>"+"<"+"/script>");
+    window.jQuery || document.write("<script src='/static/jquery/jquery-1.12.4.js'>"+"<"+"/script>");
 </script> 
+<script type="text/javascript" src="/static/jquery/ajaxfileupload.js"></script>
 
 <%@page import="com.justonetech.cp.util.PortletKeys"%>
 <%@page import="com.justonetech.cp.contract.model.*"%> 
