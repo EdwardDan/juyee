@@ -609,7 +609,7 @@ public class PermitApprovalPortlet extends MVCPortlet {
 				UploadPortletRequest uploadPortletRequest = PortalUtil.getUploadPortletRequest(resourceRequest);
 
 				ServiceContext serviceContext;
-				com.liferay.portal.kernel.json.JSONObject fileJson = JSONFactoryUtil.createJSONObject();
+				String bzclResponseStr="";
 				serviceContext = ServiceContextFactory.getInstance(Permit.class.getName(), resourceRequest);
 				FileEntry fileEntry = null;
 				// 对应的是第几类材料的div
@@ -649,17 +649,19 @@ public class PermitApprovalPortlet extends MVCPortlet {
 					else {
 						bzclIds = bzclIds + "," + fileEntry.getFileEntryId() + "|" + fileEntry.getExtension();	
 					}
-					fileJson.put("fileBzclId", fileEntry.getFileEntryId());
+					/*fileJson.put("fileBzclId", fileEntry.getFileEntryId());*/
+					bzclResponseStr+=fileEntry.getFileEntryId();
 					applyMaterial.setBzclIds(bzclIds);
 					ApplyMaterialLocalServiceUtil.updateApplyMaterial(applyMaterial);
-					fileJson.put("materialName", applyMaterial.getClmc());
+					/*fileJson.put("materialName", applyMaterial.getClmc());*/
+					bzclResponseStr+="|"+applyMaterial.getClmc();
 				}
 
 				HttpServletResponse response = PortalUtil.getHttpServletResponse(resourceResponse);
-				response.setContentType("text/html;charset=UTF-8");
+				response.setContentType("text/plain");
 				PrintWriter out = null;
 				out = response.getWriter();
-				out.print(fileJson.toString());
+				out.print(bzclResponseStr);
 				out.flush();
 				out.close();
 			}
@@ -694,7 +696,7 @@ public class PermitApprovalPortlet extends MVCPortlet {
 				UploadPortletRequest uploadPortletRequest = PortalUtil.getUploadPortletRequest(resourceRequest);
 
 				ServiceContext serviceContext;
-				com.liferay.portal.kernel.json.JSONObject fileJson = JSONFactoryUtil.createJSONObject();
+				String wjscbzclResponseStr="";
 				serviceContext = ServiceContextFactory.getInstance(Permit.class.getName(), resourceRequest);
 				FileEntry fileEntry = null;
 				// 对应的是第几类材料的div
@@ -734,17 +736,19 @@ public class PermitApprovalPortlet extends MVCPortlet {
 					else {
 						wjscbzclIds = wjscbzclIds + "," + fileEntry.getFileEntryId() + "|" + fileEntry.getExtension();						
 					}
-					fileJson.put("fileWjscbzclId", fileEntry.getFileEntryId());
+					/*fileJson.put("fileWjscbzclId", fileEntry.getFileEntryId());*/
+					wjscbzclResponseStr+=fileEntry.getFileEntryId();
 					applyMaterial.setWjscbzclIds(wjscbzclIds);
 					ApplyMaterialLocalServiceUtil.updateApplyMaterial(applyMaterial);
-					fileJson.put("materialName", applyMaterial.getClmc());
+					/*fileJson.put("materialName", applyMaterial.getClmc());*/
+					wjscbzclResponseStr+="|"+applyMaterial.getClmc();
 				}
 
 				HttpServletResponse response = PortalUtil.getHttpServletResponse(resourceResponse);
 				response.setContentType("text/html;charset=UTF-8");
 				PrintWriter out = null;
 				out = response.getWriter();
-				out.print(fileJson.toString());
+				out.print(wjscbzclResponseStr);
 				out.flush();
 				out.close();
 			}			
@@ -772,10 +776,6 @@ public class PermitApprovalPortlet extends MVCPortlet {
 					DLFileEntryLocalServiceUtil.deleteDLFileEntry(Long.valueOf(fileId));
 				}
 			}
-						
-			
-			
-			
 
 		} catch (PortalException e) {
 			// TODO Auto-generated catch block
