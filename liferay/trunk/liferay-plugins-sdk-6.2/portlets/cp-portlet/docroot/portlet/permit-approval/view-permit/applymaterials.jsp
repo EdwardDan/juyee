@@ -328,33 +328,104 @@
 		});
 	}
 	
-	//文件类型和大小的验证
+	/文件类型和大小的验证
 	function fileValidator(inputFileId){
-		 var fileInput = $("#"+inputFileId)[0];
-         if(fileInput){
-         	var fileName=fileInput.files[0].name;
-         	var fileBzclExtension=fileName.split('.').pop().toUpperCase();
-	        var fileSize  =Math.ceil(fileInput.files[0].size / (1024*1024)) ;//M为单位
-	        if(fileBzclExtension!="JPG"&&fileBzclExtension!="PDF"){
+		//判断使用浏览器
+		var browserCfg = {}; 
+		var ua = window.navigator.userAgent;
+		if (ua.indexOf("MSIE")>=1){ browserCfg.ie = true; }
+		var obj_file = document.getElementById(inputFileId); 
+		if(obj_file.value==""){ alert("请先选择上传文件"); return; } 
+		var fileSize;
+		var fileName;
+		var fileExtension;
+		if(browserCfg.ie){
+			var fileobject = new ActiveXObject ("Scripting.FileSystemObject");//获取上传文件的对象
+			var file = fileobject.GetFile (obj_file.value);
+			fileSize=Math.ceil(file.size/(1024*1024));
+			fileName=file.name;
+		}else{
+			var fileInput = $("#"+inputFileId)[0];
+			fileName=fileInput.files[0].name;
+			fileSize=Math.ceil(fileInput.files[0].size / (1024*1024)) ;
+		}
+		if(fileName){
+			var fileExtension=fileName.split('.').pop().toUpperCase();
+			if(fileExtension!="JPG"&&fileExtension!="PDF"){
 	        	alert("文件上传仅限于jpg或者pdf格式！");
 	        	return false;
-	        }else if(fileBzclExtension=="JPG"){
+	        }else if(fileExtension=="JPG"){
 	        	if(fileSize>2){	
 	        		alert("上传的jpg文件超过2M,请压缩后上传！")
 	        		return false;
 	        	}
-	        }else if(fileBzclExtension=="PDF"){
+	        }else if(fileExtension=="PDF"){
 	        	if(fileSize>20){	
 	        		alert("上传的pdf文件超过20M,请压缩或拆分后上传！")
 	        		return false;
 	        	}
-	        }	         
-         }      
-	     return true;
+	        }	       
+		}
+	     return fileExtension.toLowerCase();
 	 }
+	
+	function getFile(inputFileId){
+		//判断使用浏览器
+		var browserCfg = {}; 
+		var ua = window.navigator.userAgent;
+		if (ua.indexOf("MSIE")>=1){ browserCfg.ie = true; }
+		var obj_file = document.getElementById(inputFileId); 
+		var file;
+		if(browserCfg.ie){
+			var fileobject = new ActiveXObject ("Scripting.FileSystemObject");//获取上传文件的对象
+			file = fileobject.GetFile (obj_file.value);
+		}else{
+			var fileInput = $("#"+inputFileId)[0];
+			file=fileInput.files[0];
+		}
+		return file;
+	}
+
+	function fileBzclUpLoad(divNo,materialId,portletId) {
+		var file=getFile("fileBzclInput"+divNo);
+		var fileExtension=fileValidator("fileBzclInput"+divNo);
+		var no = findFileNo(divNo);
+		if(fileExtension){
+	    $.ajaxFileUpload
+	    (
+	        {
+	            url: '${fileBzclUpLoadURL}', //用于文件上传的服务器端请求地址
+	            secureuri: false, //是否需要安全协议，一般设置为false
+	            fileElementId: 'fileBzclInput'+divNo, //文件上传域的ID
+	            data:{${namespace}materialId:materialId,${namespace}divNo:divNo,${namespace}portletId:portletId,${namespace}no:no,${namespace}fileExtension:fileExtension}, 
+	            dataType: 'string', //返回值类型 一般设置为json 
+	            success: function (data)  //服务器成功响应处理函数
+	            {
+	            	var dataArray=data.replace("</pre>","").replace(/<pre.*>/,"");
+	            	var fileId=dataArray.split('|')[0];var materialName=dataArray.split('|')[1];
+	            	 var ele = "<div name='fileBzcl"+divNo+"'><a class='fileName' href='javascript:void(0);'>"
+					+ materialName+"-"+no+"."+fileExtension
+					+ "</a> &nbsp;&nbsp;&nbsp;<a href='javascript:void(0)';  onclick='${renderResponse.namespace}fileBzclDelete(this,"
+					+ fileId + ","+materialId+")'>删除</a></div>"; 
+	            	 $("#fileDivBzcl" + divNo).append(ele);
+						domSort(divNo); 
+	            },
+	            error: function (data, status, e)//服务器响应失败处理函数
+	            {
+	                alert("网络错误，请重试！");
+	            }
+	        }
+	    )
+		}
+	    return false;
+	}
 
 	
-	/* 上传 */
+	
+	
+	
+	
+	<%-- /* 上传 */
 	function <portlet:namespace/>fileBzclUpLoad(divNo,materialId,portletId) {
 		if(fileValidator("fileBzclInput"+divNo)){
 			var fileBzclExtension=$("#fileBzclInput"+divNo)[0].files[0].name.split('.').pop();
@@ -397,7 +468,7 @@
 						}
 					});
 		}
-	}
+	} --%>
 
 	function <portlet:namespace/>clearValue(btn){
 		var input=$(btn);
@@ -460,8 +531,46 @@
 		$('#fileDivBzcl'+divNo).empty().append(sortEle);
 	}
 	
+	
+	
+	
+	
 	/* 委建设处补正材料上传 */
-	function <portlet:namespace/>fileWjscbzclUpLoad(divNo,materialId,portletId) {
+	function fileWjscbzclUpLoad(divNo,materialId,portletId) {
+	var file=getFile("fileWjscbzclInput"+divNo);
+	var fileExtension=fileValidator("fileWjscbzclInput"+divNo);
+	var no = findFileWjscbzclNo(divNo);
+	if(fileExtension){
+    $.ajaxFileUpload
+    (
+        {
+            url: '${fileWjscbzclUpLoadURL}', //用于文件上传的服务器端请求地址
+            secureuri: false, //是否需要安全协议，一般设置为false
+            fileElementId: 'fileWjscbzclInput'+divNo, //文件上传域的ID
+            data:{${namespace}materialId:materialId,${namespace}divNo:divNo,${namespace}portletId:portletId,${namespace}no:no,${namespace}fileExtension:fileExtension}, 
+            dataType: 'string', //返回值类型 一般设置为json 
+            success: function (data)  //服务器成功响应处理函数
+            {
+            	var dataArray=data.replace("</pre>","").replace(/<pre.*>/,"");
+            	var fileId=dataArray.split('|')[0];var materialName=dataArray.split('|')[1];
+            	 var ele = "<div name='fileWjscbzcl"+divNo+"'><a class='fileWjscbzclName' href='javascript:void(0);'>"
+				+ materialName+"-"+no+"."+fileExtension
+				+ "</a> &nbsp;&nbsp;&nbsp;<a href='javascript:void(0)';  onclick='${renderResponse.namespace}fileWjscbzclDelete(this,"
+				+ fileId + ","+materialId+")'>删除</a></div>"; 
+            	 $("#fileDivWjscbzcl" + divNo).append(ele);
+            	 domSortWjscbzcl(divNo); 
+            },
+            error: function (data, status, e)//服务器响应失败处理函数
+            {
+                alert("网络错误，请重试！！");
+            }
+        }
+    )
+	}
+    return false;
+}
+
+	<%-- function <portlet:namespace/>fileWjscbzclUpLoad(divNo,materialId,portletId) {
 		if(fileValidator("fileWjscbzclInput"+divNo)){
 			var fileWjscbzclExtension=$("#fileWjscbzclInput"+divNo)[0].files[0].name.split('.').pop();
 			var no = findFileWjscbzclNo(divNo);
@@ -504,7 +613,7 @@
 					});
 		}
 	}
-	
+	 --%>
 	function <portlet:namespace/>clearValue(btn){
 		var input=$(btn);
 		input.replaceWith(input.val('').clone(true));
