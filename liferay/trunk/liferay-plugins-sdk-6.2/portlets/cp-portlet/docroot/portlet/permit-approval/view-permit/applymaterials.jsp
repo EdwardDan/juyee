@@ -390,8 +390,6 @@
 		var file=getFile("fileBzclInput"+divNo);
 		var fileExtension=fileValidator("fileBzclInput"+divNo);
 		var no = findFileNo(divNo);
-		$("#loading").html("<img src='/cp-portlet/icons/loading2.gif' style='width:100px;height:100px;'></img>");
-		showMask();
 		if(fileExtension){
 	    $.ajaxFileUpload
 	    (
@@ -411,12 +409,7 @@
 					+ fileId + ","+materialId+")'>删除</a></div>"; 
 	            	 $("#fileDivBzcl" + divNo).append(ele);
 						domSort(divNo); 
-						alert("上传成功！");	
 	            },
-	            complete:function(){
-					hideMask();
-					$("#loading").html("");
-				},
 	            error: function (data, status, e)//服务器响应失败处理函数
 	            {
 	                alert("网络错误，请重试！");
@@ -547,8 +540,6 @@
 	var file=getFile("fileWjscbzclInput"+divNo);
 	var fileExtension=fileValidator("fileWjscbzclInput"+divNo);
 	var no = findFileWjscbzclNo(divNo);
-	$("#loading").html("<img src='/cp-portlet/icons/loading2.gif' style='width:100px;height:100px;'></img>");
-	showMask();
 	if(fileExtension){
     $.ajaxFileUpload
     (
@@ -568,12 +559,7 @@
 				+ fileId + ","+materialId+")'>删除</a></div>"; 
             	 $("#fileDivWjscbzcl" + divNo).append(ele);
             	 domSortWjscbzcl(divNo); 
-            	 alert("上传成功！");		
             },
-            complete:function(){
-				hideMask();
-				$("#loading").html("");
-			},
             error: function (data, status, e)//服务器响应失败处理函数
             {
                 alert("网络错误，请重试！！");
