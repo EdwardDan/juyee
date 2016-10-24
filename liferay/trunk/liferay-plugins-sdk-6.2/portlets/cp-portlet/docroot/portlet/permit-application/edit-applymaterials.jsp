@@ -100,7 +100,6 @@
 		}
 
 	}
-	System.out.println(11111);
 %>
 
 <div id="mask" class="mask"><div id="loading" style="position:fixed;top:50%;left:50%">
