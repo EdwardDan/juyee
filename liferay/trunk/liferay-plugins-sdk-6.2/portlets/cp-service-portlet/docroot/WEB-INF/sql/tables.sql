@@ -89,7 +89,7 @@ create table cp_Contract (
 	slsj DATE null,
 	bjbh VARCHAR(75) null,
 	szdq VARCHAR(75) null,
-	xmmc VARCHAR(75) null,
+	xmmc VARCHAR(200) null,
 	jsdw VARCHAR(75) null,
 	jsdd VARCHAR(300) null,
 	lxpw VARCHAR(300) null,

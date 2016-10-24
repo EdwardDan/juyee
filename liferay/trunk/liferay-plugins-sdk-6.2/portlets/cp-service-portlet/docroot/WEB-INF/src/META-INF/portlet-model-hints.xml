@@ -207,7 +207,9 @@
 		<field name="slsj" type="Date" />
 		<field name="bjbh" type="String" />
 		<field name="szdq" type="String" />
-		<field name="xmmc" type="String" />
+		<field name="xmmc" type="String">
+			<hint name="max-length">200</hint>
+		</field>
 		<field name="jsdw" type="String" />
 		<field name="jsdd" type="String">
 			<hint name="max-length">300</hint>
@@ -475,7 +477,9 @@
 		<field name="permitId" type="long" />
 		<field name="bjbh" type="String" />
 		<field name="gcbh" type="String" />
-		<field name="gcmc" type="String" />
+		<field name="gcmc" type="String">
+			<hint name="max-length">500</hint>
+		</field>
 		<field name="jsnr" type="String" />
 	</model>
 	<model name="com.justonetech.cp.complete.model.Complete">
@@ -504,7 +508,9 @@
 		<field name="completeId" type="long" />
 		<field name="xh" type="String" />
 		<field name="clmc" type="String" />
-		<field name="fileEntryIds" type="String" />
+		<field name="fileEntryIds" type="String">
+			<hint name="max-length">500</hint>
+		</field>
 	</model>
 	<model name="com.justonetech.cp.complete.model.CompleteProjectProfile">
 		<field name="completeId" type="long" />
