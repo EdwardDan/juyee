@@ -234,7 +234,7 @@ public class PermitApprovalPortlet extends MVCPortlet {
 			String jsdw = projectProfile.getJsdwmc();
 			String gcmc = projectProfile.getGcmc();
 			String gcwz = projectProfile.getJsdd();
-			String gcnr = projectProfile.getJsgcgm();
+			String gcnr = projectProfile.getGcnr();
 			String xmtzgs = projectProfile.getXmtzgs() + "万元";
 			String htjg = projectProfile.getHtjg() + "万元";
 			String sjdw = "";

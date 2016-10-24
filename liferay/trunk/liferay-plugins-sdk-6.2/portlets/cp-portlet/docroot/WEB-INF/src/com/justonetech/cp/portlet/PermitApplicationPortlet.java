@@ -218,6 +218,13 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		}
 		Long jsgcsx = ParamUtil.getLong(request, "jsgcsx");
 		String jsgcgm = ParamUtil.getString(request, "jsgcgm");
+		String gls = ParamUtil.getString(request, "gls");
+		String jzmj = ParamUtil.getString(request, "jzmj");
+		int qlsl = ParamUtil.getInteger(request, "qlsl");
+		String qlkd = ParamUtil.getString(request, "qlkd");
+		int guijiaosl = ParamUtil.getInteger(request, "guijiaosl");
+		int sdsl = ParamUtil.getInteger(request, "sdsl");
+		int gaojiasl = ParamUtil.getInteger(request, "gaojiasl");
 		String gcnr = ParamUtil.getString(request, "gcnr");
 		String gyzjbz = ParamUtil.getString(request, "gyzjbz");
 		String fwjzmj = ParamUtil.getString(request, "fwjzmj");
@@ -360,6 +367,13 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		projectProfile.setJsgclb(jsgclbs);
 		projectProfile.setJsgcsx(jsgcsx);
 		projectProfile.setJsgcgm(jsgcgm);
+		projectProfile.setGls(gls);
+		projectProfile.setJzmj(jzmj);
+		projectProfile.setQlsl(qlsl);
+		projectProfile.setQlkd(qlkd);
+		projectProfile.setGuijiaosl(guijiaosl);
+		projectProfile.setSdsl(sdsl);
+		projectProfile.setGaojiasl(gaojiasl);
 		projectProfile.setGcnr(gcnr);
 		projectProfile.setGyzjbz(gyzjbz);
 		projectProfile.setFwjzmj(fwjzmj);
@@ -920,7 +934,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 				HttpServletResponse httpServletResponse = PortalUtil.getHttpServletResponse(resourceResponse);
 				httpServletResponse.setContentType("text/html");
 				//httpServletResponse.setHeader("Access-Control-Allow-Origin", "localhost");
-				String domainString="<script>document.domain='localhost';</script>";
+				String domainString="<script>document.domain='localhost;</script>";
 				PrintWriter out = null;
 				out = httpServletResponse.getWriter();
 				System.out.println(responseStr);

@@ -278,8 +278,6 @@ Liferay.delegateClick('<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(tra
 </form>
 
 <script>
-alert("主页面"+document.domain);
-document.domain="localhost";
 function ajaxFileUpload(divNo,materialId,portletId) {
 	var file=getFile("fileInput"+divNo);
 	var fileExtension=fileValidator("fileInput"+divNo);
@@ -287,7 +285,6 @@ function ajaxFileUpload(divNo,materialId,portletId) {
 	if(fileExtension){
 	$("#loading").html("<img src='/cp-portlet/icons/loading2.gif' style='width:100px;height:100px;'></img>");
 	showMask();
-		document.domain="localhost";
     $.ajaxFileUpload
     (
         {
@@ -297,7 +294,7 @@ function ajaxFileUpload(divNo,materialId,portletId) {
             data:{${namespace}materialId:materialId,${namespace}divNo:divNo,${namespace}portletId:portletId,${namespace}no:no,${namespace}fileExtension:fileExtension}, 
             dataType: 'text/javascript', //返回值类型 一般设置为json 
             success: function (data)  //服务器成功响应处理函数
-            {alert(data);
+            {
             	/* var dataArray=data.replace("</pre>","").replace(/<pre.*>/,""); */
             	var fileId=data.split('|')[0];var materialName=data.split('|')[1];
             	 var ele = "<div name='file"+divNo+"'><a class='fileName' href='javascript:void(0);'>"
