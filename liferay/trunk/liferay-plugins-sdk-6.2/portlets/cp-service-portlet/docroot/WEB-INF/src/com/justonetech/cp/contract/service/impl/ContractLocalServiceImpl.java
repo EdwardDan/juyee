@@ -143,7 +143,7 @@ public class ContractLocalServiceImpl extends ContractLocalServiceBaseImpl {
 		
 		DynamicQuery projectProfileDQ = DynamicQueryFactoryUtil.forClass(Project.class);
 		projectProfileDQ.setProjection(ProjectionFactoryUtil.property("bjbh"));
-		projectProfileDQ.add(PropertyFactoryUtil.forName("lxjb").eq(""));
+		projectProfileDQ.add(PropertyFactoryUtil.forName("lxjb").isEmpty());
 		dynamicQuery.add(PropertyFactoryUtil.forName("bjbh").notIn(projectProfileDQ));
 		
 		dynamicQuery.add(PropertyFactoryUtil.forName("htzt").eq("已报送"));
