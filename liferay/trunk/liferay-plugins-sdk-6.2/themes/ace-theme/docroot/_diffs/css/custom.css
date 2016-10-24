@@ -727,10 +727,6 @@ input[type="radio"],input[type="checkbox"] {
 	background-color: #fff !important;
 }
 
-.aui .table th, .aui .table td{
-	text-align:center;
-}
-
 #breadcrumbs {
 	margin-bottom: 0px !important;
 }
