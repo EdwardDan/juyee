@@ -934,10 +934,9 @@ public class PermitApplicationPortlet extends MVCPortlet {
 				HttpServletResponse httpServletResponse = PortalUtil.getHttpServletResponse(resourceResponse);
 				httpServletResponse.setContentType("text/html");
 				//httpServletResponse.setHeader("Access-Control-Allow-Origin", "localhost");
-				String domainString="<script>document.domain='localhost;</script>";
+				String domainString="<script>document.domain='jtjg.sh.cn';</script>";
 				PrintWriter out = null;
 				out = httpServletResponse.getWriter();
-				System.out.println(responseStr);
 				out.print(domainString+responseStr);
 				/*System.out.println(333);*/
 				out.flush();
