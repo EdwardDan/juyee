@@ -278,6 +278,8 @@ Liferay.delegateClick('<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(tra
 </form>
 
 <script>
+alert("主页面"+document.domain);
+document.domain="localhost";
 function ajaxFileUpload(divNo,materialId,portletId) {
 	var file=getFile("fileInput"+divNo);
 	var fileExtension=fileValidator("fileInput"+divNo);
@@ -285,6 +287,7 @@ function ajaxFileUpload(divNo,materialId,portletId) {
 	if(fileExtension){
 	$("#loading").html("<img src='/cp-portlet/icons/loading2.gif' style='width:100px;height:100px;'></img>");
 	showMask();
+		document.domain="localhost";
     $.ajaxFileUpload
     (
         {
@@ -292,11 +295,11 @@ function ajaxFileUpload(divNo,materialId,portletId) {
             secureuri: false, //是否需要安全协议，一般设置为false
             fileElementId: 'fileInput'+divNo, //文件上传域的ID
             data:{${namespace}materialId:materialId,${namespace}divNo:divNo,${namespace}portletId:portletId,${namespace}no:no,${namespace}fileExtension:fileExtension}, 
-            dataType: 'string', //返回值类型 一般设置为json 
+            dataType: 'text/javascript', //返回值类型 一般设置为json 
             success: function (data)  //服务器成功响应处理函数
-            {
-            	var dataArray=data.replace("</pre>","").replace(/<pre.*>/,"");
-            	var fileId=dataArray.split('|')[0];var materialName=dataArray.split('|')[1];
+            {alert(data);
+            	/* var dataArray=data.replace("</pre>","").replace(/<pre.*>/,""); */
+            	var fileId=data.split('|')[0];var materialName=data.split('|')[1];
             	 var ele = "<div name='file"+divNo+"'><a class='fileName' href='javascript:void(0);'>"
 				+ materialName+"-"+no+"."+fileExtension
 				+ "</a> &nbsp;&nbsp;&nbsp;<a href='javascript:void(0)';  onclick='${renderResponse.namespace}fileDelete(this,"
@@ -335,9 +338,10 @@ function ajaxFileUpload(divNo,materialId,portletId) {
 		//判断使用浏览器
 		var browserCfg = {}; 
 		var ua = window.navigator.userAgent;
+		var fileInput = $("#"+inputFileId)[0];
 		if (ua.indexOf("MSIE")>=1){ browserCfg.ie = true; }
 		var obj_file = document.getElementById(inputFileId); 
-		if(obj_file.value==""){ alert("请先选择上传文件"); return; } 
+		if(!fileInput){ alert("请先选择上传文件"); return; } 
 		var fileSize;
 		var fileName;
 		var fileExtension;
@@ -346,11 +350,11 @@ function ajaxFileUpload(divNo,materialId,portletId) {
 			var file = fileobject.GetFile (obj_file.value);
 			fileSize=Math.ceil(file.size/(1024*1024));
 			fileName=file.name;
-		}else{
-			var fileInput = $("#"+inputFileId)[0];
+		}else{ 
+			
 			fileName=fileInput.files[0].name;
 			fileSize=Math.ceil(fileInput.files[0].size / (1024*1024)) ;
-		}
+		} 
 		if(fileName){
 			var fileExtension=fileName.split('.').pop().toUpperCase();
 			if(fileExtension!="JPG"&&fileExtension!="PDF"){
