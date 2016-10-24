@@ -19,8 +19,13 @@ import java.util.List;
 
 import com.justonetech.cp.contract.model.Contract;
 import com.justonetech.cp.contract.service.base.ContractLocalServiceBaseImpl;
+import com.justonetech.cp.permit.model.ProjectProfile;
+import com.justonetech.cp.project.model.Project;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.Junction;
+import com.liferay.portal.kernel.dao.orm.OrderFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -135,12 +140,19 @@ public class ContractLocalServiceImpl extends ContractLocalServiceBaseImpl {
 		if (!Validator.isBlank(htmc)) {
 			dynamicQuery.add(PropertyFactoryUtil.forName("htmc").like("%" + htmc + "%"));
 		}
+		
+		DynamicQuery projectProfileDQ = DynamicQueryFactoryUtil.forClass(Project.class);
+		projectProfileDQ.setProjection(ProjectionFactoryUtil.property("bjbh"));
+		projectProfileDQ.add(PropertyFactoryUtil.forName("lxjb").eq(""));
+		dynamicQuery.add(PropertyFactoryUtil.forName("bjbh").notIn(projectProfileDQ));
+		
 		dynamicQuery.add(PropertyFactoryUtil.forName("htzt").eq("已报送"));
 		Junction junction = RestrictionsFactoryUtil.disjunction();
 		junction.add(PropertyFactoryUtil.forName("htbh").like("CZ%"));
 		junction.add(PropertyFactoryUtil.forName("htbh").like("VZ%"));
 		junction.add(PropertyFactoryUtil.forName("htbh").like("WZ%"));
 		dynamicQuery.add(junction);
+		dynamicQuery.addOrder(OrderFactoryUtil.desc("contractId"));
 		return dynamicQuery;
 	}
 }
