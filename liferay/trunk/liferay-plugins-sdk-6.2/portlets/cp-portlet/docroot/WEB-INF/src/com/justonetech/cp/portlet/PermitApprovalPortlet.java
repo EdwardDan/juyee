@@ -659,10 +659,11 @@ public class PermitApprovalPortlet extends MVCPortlet {
 				}
 				System.out.println(bzclResponseStr);
 				HttpServletResponse response = PortalUtil.getHttpServletResponse(resourceResponse);
-				response.setContentType("text/plain");
+				response.setContentType("text/html");
+				String domainString="<script>document.domain='jtjg.sh.cn';</script>";
 				PrintWriter out = null;
 				out = response.getWriter();
-				out.print(bzclResponseStr);
+				out.print(domainString+bzclResponseStr);
 				out.flush();
 				out.close();
 			}
@@ -745,10 +746,11 @@ public class PermitApprovalPortlet extends MVCPortlet {
 				}
 
 				HttpServletResponse response = PortalUtil.getHttpServletResponse(resourceResponse);
-				response.setContentType("text/plain");
+				response.setContentType("text/html");
+				String domainString="<script>document.domain='jtjg.sh.cn';</script>";
 				PrintWriter out = null;
 				out = response.getWriter();
-				out.print(wjscbzclResponseStr);
+				out.print(domainString+wjscbzclResponseStr);
 				out.flush();
 				out.close();
 			}			

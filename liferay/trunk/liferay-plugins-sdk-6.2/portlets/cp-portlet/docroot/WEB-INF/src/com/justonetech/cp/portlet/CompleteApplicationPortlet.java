@@ -493,7 +493,7 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 				}
 
 				HttpServletResponse response = PortalUtil.getHttpServletResponse(resourceResponse);
-				response.setContentType("text/plain");
+				response.setContentType("text/html");
 				PrintWriter out = null;
 				out = response.getWriter();
 				out.print(reponseStr);

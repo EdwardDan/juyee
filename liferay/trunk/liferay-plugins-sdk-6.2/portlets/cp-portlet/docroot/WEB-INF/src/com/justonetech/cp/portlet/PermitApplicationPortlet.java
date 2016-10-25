@@ -938,6 +938,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 				PrintWriter out = null;
 				out = httpServletResponse.getWriter();
 				out.print(domainString+responseStr);
+//				out.print(responseStr);
 				/*System.out.println(333);*/
 				out.flush();
 				out.close();
