@@ -31,11 +31,11 @@
 <script>
 		var FileAPI = {
 			  debug: true
-			, staticPath: '/static/dist/'
+			, staticPath: '/static/fileAPI/'
 		};
 	</script>
 
-<script type="text/javascript" src="/static/dist/FileAPI.min.js"></script>
+<script type="text/javascript" src="/static/fileAPI/FileAPI.min.js"></script>
 <script type="text/javascript" src="/static/jquery/ajaxfileupload.js"></script>
 
 
