@@ -400,11 +400,11 @@
 	            secureuri: false, //是否需要安全协议，一般设置为false
 	            fileElementId: 'fileBzclInput'+divNo, //文件上传域的ID
 	            data:{${namespace}materialId:materialId,${namespace}divNo:divNo,${namespace}portletId:portletId,${namespace}no:no,${namespace}fileExtension:fileExtension}, 
-	            dataType: 'string', //返回值类型 一般设置为json 
+	            dataType: 'text/javascript', //返回值类型 一般设置为json 
 	            success: function (data)  //服务器成功响应处理函数
 	            {
-	            	var dataArray=data.replace("</pre>","").replace(/<pre.*>/,"");
-	            	var fileId=dataArray.split('|')[0];var materialName=dataArray.split('|')[1];
+	            	/* var dataArray=data.replace("</pre>","").replace(/<pre.*>/,""); */
+	            	var fileId=data.split('|')[0];var materialName=data.split('|')[1];
 	            	 var ele = "<div name='fileBzcl"+divNo+"'><a class='fileName' href='javascript:void(0);'>"
 					+ materialName+"-"+no+"."+fileExtension
 					+ "</a> &nbsp;&nbsp;&nbsp;<a href='javascript:void(0)';  onclick='${renderResponse.namespace}fileBzclDelete(this,"
@@ -557,11 +557,11 @@
             secureuri: false, //是否需要安全协议，一般设置为false
             fileElementId: 'fileWjscbzclInput'+divNo, //文件上传域的ID
             data:{${namespace}materialId:materialId,${namespace}divNo:divNo,${namespace}portletId:portletId,${namespace}no:no,${namespace}fileExtension:fileExtension}, 
-            dataType: 'string', //返回值类型 一般设置为json 
+            dataType: 'text/javascript', //返回值类型 一般设置为json 
             success: function (data)  //服务器成功响应处理函数
             {
-            	var dataArray=data.replace("</pre>","").replace(/<pre.*>/,"");
-            	var fileId=dataArray.split('|')[0];var materialName=dataArray.split('|')[1];
+            	/* var dataArray=data.replace("</pre>","").replace(/<pre.*>/,""); */
+            	var fileId=data.split('|')[0];var materialName=data.split('|')[1];
             	 var ele = "<div name='fileWjscbzcl"+divNo+"'><a class='fileWjscbzclName' href='javascript:void(0);'>"
 				+ materialName+"-"+no+"."+fileExtension
 				+ "</a> &nbsp;&nbsp;&nbsp;<a href='javascript:void(0)';  onclick='${renderResponse.namespace}fileWjscbzclDelete(this,"
