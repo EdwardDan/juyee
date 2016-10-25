@@ -3,6 +3,37 @@
 <%@ include file="init.jsp"%>
 
 <style>
+.b-button {
+			display: inline-block;
+			*display: inline;
+			*zoom: 1;
+			position: relative;
+			overflow: hidden;
+			cursor: pointer;
+			padding: 4px 15px;
+			vertical-align: middle;
+			border: 1px solid #ccc;
+			border-radius: 3px;
+			background-color: #f5f5f5;
+			background: -moz-linear-gradient(top, #fff 0%, #f5f5f5 49%, #ececec 50%, #eee 100%);
+			background: -webkit-linear-gradient(top, #fff 0%,#f5f5f5 49%,#ececec 50%,#eee 100%);
+			background: -o-linear-gradient(top, #fff 0%,#f5f5f5 49%,#ececec 50%,#eee 100%);
+			background: linear-gradient(to bottom, #fff 0%,#f5f5f5 49%,#ececec 50%,#eee 100%);
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			user-select: none;
+		}
+.b-button__input {
+				cursor: pointer;
+				opacity: 0;
+				filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0);
+				top: -10px;
+				right: -40px;
+				font-size: 50px;
+				position: absolute;
+			}
+.b-button__text {
+			}
 .aui .table th, .aui .table td {
 	vertical-align: middle;
 	padding: 8px;
@@ -169,7 +200,7 @@
 					onclick="document.getElementById('fileInput${status.index+1}').click();">
 					<input id="fileInput${status.index+1}"
 					name="${namespace}fileInput${status.index+1}" type="file" accept="application/pdf,image/jpeg"
-					 style="display:none; width: 150px;" onchange="ajaxFileUpload(${status.index+1},${material.materialId},'<%=portletDisplay.getId() %>');"></input>
+					 style="display:none; width: 150px;" onchange="${renderResponse.namespace}ajaxFileUpload(this,${status.index+1},${material.materialId},'<%=portletDisplay.getId() %>');"></input>
 
 				</td>
 			</tr>
@@ -277,9 +308,9 @@ Liferay.delegateClick('<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(tra
 </form>
 
 <script>
-function ajaxFileUpload(divNo,materialId,portletId) {
-	var file=getFile("fileInput"+divNo);
-	var fileExtension=fileValidator("fileInput"+divNo);
+function <portlet:namespace/>ajaxFileUpload(inputFile,divNo,materialId,portletId) {
+	var file= FileAPI.getFiles(inputFile)[0];
+	var fileExtension=fileValidator(file);
 	var no = findFileNo(divNo);
 	if(fileExtension){
 	$("#loading").html("<img src='/cp-portlet/icons/loading2.gif' style='width:100px;height:100px;'></img>");
@@ -330,47 +361,31 @@ function ajaxFileUpload(divNo,materialId,portletId) {
 	}
 
 	//文件类型和大小的验证
-	function fileValidator(inputFileId){
+	function fileValidator(file){
 		//判断使用浏览器
-		var browserCfg = {}; 
-		var ua = window.navigator.userAgent;
-		var fileInput = $("#"+inputFileId)[0];
-		if (ua.indexOf("MSIE")>=1){ browserCfg.ie = true; }
-		var obj_file = document.getElementById(inputFileId); 
-		if(!fileInput){ alert("请先选择上传文件"); return; } 
-		var fileSize;
-		var fileName;
+		if(!file){ alert("请先选择上传文件"); return; } 
+		var fileSize=Math.ceil(file.size/(1024*1024));
+		var fileName=file.name;
 		var fileExtension;
-		if(browserCfg.ie){
-			var fileobject = new ActiveXObject ("Scripting.FileSystemObject");//获取上传文件的对象
-			var file = fileobject.GetFile (obj_file.value);
-			fileSize=Math.ceil(file.size/(1024*1024));
-			fileName=file.name;
-		}else{ 
-			
-			fileName=fileInput.files[0].name;
-			fileSize=Math.ceil(fileInput.files[0].size / (1024*1024)) ;
-		} 
 		if(fileName){
-			var fileExtension=fileName.split('.').pop().toUpperCase();
+			fileExtension=fileName.split('.').pop().toUpperCase();
 			if(fileExtension!="JPG"&&fileExtension!="PDF"){
 	        	alert("文件上传仅限于jpg或者pdf格式！");
 	        	return false;
 	        }else if(fileExtension=="JPG"){
 	        	if(fileSize>2){	
-	        		alert("上传的jpg文件超过2M,请压缩后上传！")
+	        		alert("上传的jpg文件超过2M,请压缩后上传！");
 	        		return false;
 	        	}
 	        }else if(fileExtension=="PDF"){
 	        	if(fileSize>20){	
-	        		alert("上传的pdf文件超过20M,请压缩或拆分后上传！")
+	        		alert("上传的pdf文件超过20M,请压缩或拆分后上传！");
 	        		return false;
 	        	}
 	        }	       
 		}
 	     return fileExtension.toLowerCase();
 	 }
-	
 	function getFile(inputFileId){
 		//判断使用浏览器
 		var browserCfg = {}; 
@@ -483,4 +498,3 @@ function ajaxFileUpload(divNo,materialId,portletId) {
 	        $("#mask").hide();     
 	    }  
 </script>
-
