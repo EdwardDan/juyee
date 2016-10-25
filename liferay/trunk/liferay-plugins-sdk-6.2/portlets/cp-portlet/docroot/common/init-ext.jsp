@@ -31,7 +31,7 @@
 <script>
 		var FileAPI = {
 			  debug: true
-			, staticPath: 'http://mailru.github.io/FileAPI/dist/'
+			, staticPath: '/static/dist/'
 		};
 	</script>
 
