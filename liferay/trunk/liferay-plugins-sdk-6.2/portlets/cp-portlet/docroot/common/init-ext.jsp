@@ -21,11 +21,23 @@
 	request.setAttribute("defaultTimeFormatPattern",
 			defaultTimeFormatPattern);
 %>
+
+<script src="/static/jquery.min.js"></script>
 <script type="text/javascript" src="/static/My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript">
-    window.jQuery || document.write("<script src='/static/jquery/jquery-1.12.4.js'>"+"<"+"/script>");
+    window.jQuery || document.write("<script src='/static/dist/jquery.min.js'>"+"<"+"/script>");
 </script> 
+
+<script>
+		var FileAPI = {
+			  debug: true
+			, staticPath: 'http://mailru.github.io/FileAPI/dist/'
+		};
+	</script>
+
+<script type="text/javascript" src="/static/dist/FileAPI.min.js"></script>
 <script type="text/javascript" src="/static/jquery/ajaxfileupload.js"></script>
+
 
 <%@page import="com.justonetech.cp.util.PortletKeys"%>
 <%@page import="com.justonetech.cp.contract.model.*"%> 
