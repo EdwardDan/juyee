@@ -386,24 +386,7 @@ function <portlet:namespace/>ajaxFileUpload(inputFile,divNo,materialId,portletId
 		}
 	     return fileExtension.toLowerCase();
 	 }
-	function getFile(inputFileId){
-		//判断使用浏览器
-		var browserCfg = {}; 
-		var ua = window.navigator.userAgent;
-		if (ua.indexOf("MSIE")>=1){ browserCfg.ie = true; }
-		var obj_file = document.getElementById(inputFileId); 
-		var file;
-		if(browserCfg.ie){
-			var fileobject = new ActiveXObject ("Scripting.FileSystemObject");//获取上传文件的对象
-			file = fileobject.GetFile (obj_file.value);
-		}else{
-			var fileInput = $("#"+inputFileId)[0];
-			file=fileInput.files[0];
-		}
-		return file;
-	}
 
-	
 	function <portlet:namespace/>clearValue(btn){
 		var input=$(btn);
 		input.replaceWith(input.val('').clone(true));
