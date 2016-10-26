@@ -452,78 +452,6 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 		try {
 			String resourceId = resourceRequest.getResourceID();
 			String fileSourceName = "";
-			// 上传文件
-			if ("fileUpLoad".equals(resourceId)) {
-				UploadPortletRequest uploadPortletRequest = PortalUtil.getUploadPortletRequest(resourceRequest);
-
-				ServiceContext serviceContext;
-				/*com.liferay.portal.kernel.json.JSONObject fileJson = JSONFactoryUtil.createJSONObject();*/
-				String reponseStr="";
-				serviceContext = ServiceContextFactory.getInstance(Permit.class.getName(), resourceRequest);
-				FileEntry fileEntry = null;
-				// 对应的是第几类材料的div
-				String divNo = ParamUtil.get(resourceRequest, "divNo", "");
-				// 文件材料的名称编号
-				String no = ParamUtil.get(resourceRequest, "no", "");
-				String fileExtension = ParamUtil.get(resourceRequest, "fileExtension", "");
-				String materialId = ParamUtil.get(resourceRequest, "materialId", "0");
-				String portletId = ParamUtil.get(resourceRequest, "portletId", "");
-				fileSourceName = uploadPortletRequest.getFileName("fileInput"+divNo);
-				InputStream stream = uploadPortletRequest.getFileAsStream("fileInput"+divNo);
-				System.out.println(no);
-				System.out.println(fileExtension);
-				System.out.println(materialId);
-				System.out.println(portletId);
-				System.out.println(fileSourceName);
-				
-				
-				
-				
-				/*
-				 * fileSourceName =
-				 * uploadPortletRequest.getFileName("fileInput"+divNo);
-				 * InputStream stream =
-				 * uploadPortletRequest.getFileAsStream("fileInput"+divNo);
-				 */
-				byte[] fileBytes = null;
-				if (null != stream) {
-					fileBytes = FileUtil.getBytes(stream);
-				}
-				if (!materialId.equals("0")) {
-					CompleteApplyMaterial completeApplyMaterial =
-						CompleteApplyMaterialLocalServiceUtil.getCompleteApplyMaterial(Long.valueOf(materialId));
-					String fileTitle = completeApplyMaterial.getClmc() + "-" + no + "." + fileExtension;
-//
-//					fileEntry =
-//						uploadFile(
-//							resourceRequest, fileSourceName, fileBytes, serviceContext, portletId, materialId,
-//							fileTitle);
-
-					String fileEntryIds = completeApplyMaterial.getFileEntryIds();
-					// 添加第一条数据时
-					if (Validator.isNull(fileEntryIds)) {
-						fileEntryIds = fileEntry.getFileEntryId() + "|" + fileEntry.getExtension();
-					}
-					// 如果已有数据
-					else {
-						fileEntryIds = fileEntryIds + "," + fileEntry.getFileEntryId() + "|" + fileEntry.getExtension();						
-					}
-					/*fileJson.put("fileId", fileEntry.getFileEntryId());*/
-					reponseStr+=fileEntry.getFileEntryId();
-					completeApplyMaterial.setFileEntryIds(fileEntryIds);
-					CompleteApplyMaterialLocalServiceUtil.updateCompleteApplyMaterial(completeApplyMaterial);
-					/*fileJson.put("materialName", completeApplyMaterial.getClmc());*/
-					reponseStr+="|"+completeApplyMaterial.getClmc();
-				}
-
-				HttpServletResponse response = PortalUtil.getHttpServletResponse(resourceResponse);
-				response.setContentType("text/html");
-				PrintWriter out = null;
-				out = response.getWriter();
-				out.print(reponseStr);
-				out.flush();
-				out.close();
-			}
 
 			// 删除文件
 			if ("fileDelete".equals(resourceId)) {
@@ -556,9 +484,6 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 		}
 		catch (SystemException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		catch (IOException e) {
 			e.printStackTrace();
 		}
 		super.serveResource(resourceRequest, resourceResponse);
