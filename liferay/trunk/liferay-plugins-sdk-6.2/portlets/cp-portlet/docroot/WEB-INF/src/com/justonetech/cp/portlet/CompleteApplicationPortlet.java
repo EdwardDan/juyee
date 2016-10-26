@@ -94,13 +94,17 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 		 String path = ParamUtil.getString(renderRequest, "path");
 			if (path.contains("loginPage")) {
 				renderRequest.setAttribute("divNo",path.substring(path.indexOf("e")+1,path.indexOf("/"))); 
-				renderRequest.setAttribute("materialId", path.substring(path.indexOf("/")+1));
+				renderRequest.setAttribute("materialId", path.substring(path.indexOf("/")+1,path.lastIndexOf("/")));
+				renderRequest.setAttribute("no", path.substring(path.lastIndexOf("/")+1));
 				include("/portlet/complete-application/login.jsp", renderRequest, renderResponse);
 			}
 			else if (path.contains("details")) {
+				System.out.println("details");
 				renderRequest.setAttribute("name",ParamUtil.getString(renderRequest, "name"));
+				renderRequest.setAttribute("upLoadMessage",ParamUtil.getString(renderRequest, "upLoadMessage"));
 				renderRequest.setAttribute("fieId",ParamUtil.getString(renderRequest, "fieId"));
 				renderRequest.setAttribute("divNo",ParamUtil.getString(renderRequest, "divNo"));
+				renderRequest.setAttribute("no",ParamUtil.getString(renderRequest, "no"));
 				renderRequest.setAttribute("materialId",ParamUtil.getString(renderRequest, "materialId"));
 				renderRequest.setAttribute("materialName",ParamUtil.getString(renderRequest, "materialName"));
 				renderRequest.setAttribute("fileExtension",ParamUtil.getString(renderRequest, "fileExtension"));
@@ -717,17 +721,8 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 	
 	public void addDLFileEntry(ActionRequest actionRequest, ActionResponse actionResponse) {
 		try {
-			long userId = PortalUtil.getUserId(actionRequest);
-			long groupId = PortalUtil.getScopeGroupId(actionRequest);
-			long repositoryId = groupId;
-			long folderId = ParamUtil.getLong(actionRequest, "folderId");
 			UploadPortletRequest uploadPortletRequest = PortalUtil.getUploadPortletRequest(actionRequest);
-
 			String sourceFileName = uploadPortletRequest.getFileName("file");
-			String mimeType = MimeTypesUtil.getContentType(uploadPortletRequest.getFullFileName("file"));
-			String title = ParamUtil.getString(actionRequest, "title");
-			String description = ParamUtil.getString(actionRequest, "description", StringPool.BLANK);
-			String changeLog = ParamUtil.getString(actionRequest, "changeLog", StringPool.BLANK);
 			File file = uploadPortletRequest.getFile("file");
 			ServiceContext serviceContext = ServiceContextFactory.getInstance(DLFileEntry.class.getName(), actionRequest);
 			String[] groupPermissions = { "VIEW" };
@@ -735,25 +730,63 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 			String materialId=ParamUtil.getString(actionRequest, "materialId");
 			actionResponse.setRenderParameter("materialId", materialId);
 			byte[] fileBytes = null;
+			long fileSize=0l;
+			FileEntry fileEntry=null;
 			if (null != file) {
 				fileBytes = FileUtil.getBytes(file);
+				fileSize=fileBytes.length/1024/1024;
 			}
 			String fileTitle = "";
-			String fileExtension=sourceFileName.substring(sourceFileName.lastIndexOf(".")+1);
-			if (!materialId.equals("0")) {
+			
+			String fileExtension=sourceFileName.substring(sourceFileName.lastIndexOf(".")+1).toUpperCase().trim();
+			String upLoadMessage="上传成功！";
+			Boolean upLoadStatus=true;
+			if(!fileExtension.equals("JPG")&&!fileExtension.equals("PDF")){
+				upLoadMessage="文件上传仅限于jpg或者pdf格式！";
+				upLoadStatus=false;
+	        }else if(fileExtension.equals("JPG")){
+	        	if(fileSize>2){	
+	        		upLoadMessage="上传的jpg文件超过2M,请压缩后上传！";
+	        		upLoadStatus=false;
+	        	}
+	        }else if(fileExtension.equals("PDF")){
+	        	if(fileSize>20){	
+	        		upLoadMessage="上传的pdf文件超过20M,请压缩或拆分后上传！";
+	        		upLoadStatus=false;
+	        	}
+	        }
+			
+			
+			
+			
+			if (!materialId.equals("0")&upLoadStatus) {
 				CompleteApplyMaterial completeApplyMaterial = CompleteApplyMaterialLocalServiceUtil.getCompleteApplyMaterial(Long
 						.valueOf(materialId));
-				 fileTitle = completeApplyMaterial.getClmc() + "-" + ParamUtil.getString(actionRequest, "divNo") + "." + fileExtension;
-				actionResponse.setRenderParameter("materialName", completeApplyMaterial.getClmc());
+				 fileTitle = completeApplyMaterial.getClmc() + "-" + ParamUtil.getString(actionRequest, "no") + "." + fileExtension.toLowerCase();
+				 fileEntry=uploadFile(actionRequest, sourceFileName, fileBytes, serviceContext, "completeapplication_WAR_cpportlet", materialId, fileTitle);	
+				 String fileEntryIds = completeApplyMaterial.getFileEntryIds();
+						// 添加第一条数据时
+						if (Validator.isNull(fileEntryIds)) {
+							fileEntryIds = fileEntry.getFileEntryId() + "|" + fileEntry.getExtension();
+						}
+						// 如果已有数据
+						else {
+							fileEntryIds = fileEntryIds + "," + fileEntry.getFileEntryId() + "|" + fileEntry.getExtension();						
+						}
+						completeApplyMaterial.setFileEntryIds(fileEntryIds);
+						CompleteApplyMaterialLocalServiceUtil.updateCompleteApplyMaterial(completeApplyMaterial);
+				 actionResponse.setRenderParameter("materialName", completeApplyMaterial.getClmc());
+				 actionResponse.setRenderParameter("fieId", Long.toString(fileEntry.getFileEntryId()));
+				 actionResponse.setRenderParameter("name", sourceFileName);
+					actionResponse.setRenderParameter("divNo", ParamUtil.getString(actionRequest, "divNo"));
+					actionResponse.setRenderParameter("no", ParamUtil.getString(actionRequest, "no"));
+					actionResponse.setRenderParameter("fileExtension", fileExtension.toLowerCase());
 			}
-			FileEntry fileEntry=uploadFile(actionRequest, sourceFileName, fileBytes, serviceContext, "completeapplication_WAR_cpportlet", materialId, fileTitle);
-			actionResponse.setRenderParameter("fieId", Long.toString(fileEntry.getFileEntryId()));
 			actionResponse.setRenderParameter("path", "details");
-			actionResponse.setRenderParameter("name", sourceFileName);
-			actionResponse.setRenderParameter("divNo", ParamUtil.getString(actionRequest, "divNo"));
-			actionResponse.setRenderParameter("fileExtension", fileExtension);
+			actionResponse.setRenderParameter("upLoadMessage", upLoadMessage);
+			System.out.println("enter details");
 		} catch (Exception e) {
-			SessionErrors.add(actionRequest, e.getClass());
+			e.printStackTrace();
 		}
 	}
 	

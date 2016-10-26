@@ -113,9 +113,6 @@
 </portlet:renderURL>
 
 
-<%-- <aui:input type="text" name="test" value=""/>
-<aui:button name="login" type="button" id="login" value="上传文件" /> --%>
-
 
 
 <!-- For Closing -->
@@ -123,13 +120,13 @@
 Liferay.provide(window,'<portlet:namespace/>closeYourPopUp',
 	    function(data, dialogId) {
 		var A = AUI();
-		var fileId=data.split('/')[4];var materialName=data.split('/')[1]; var no=data.split('/')[2]; var fileExtension=data.split('/')[3];var materialId=data.split('/')[0];
-		var ele = "<div name='file"+no+"'><a class='fileName' href='javascript:void(0);'>"
+		var fileId=data.split('/')[4];var materialName=data.split('/')[1]; var divNo=data.split('/')[2]; var fileExtension=data.split('/')[3];var materialId=data.split('/')[0];var no=data.split('/')[5];
+		var ele = "<div name='file"+divNo+"'><a class='fileName' href='javascript:void(0);'>"
 		+ materialName+"-"+no+"."+fileExtension
 		+ "</a> &nbsp;&nbsp;&nbsp;<a href='javascript:void(0)';  onclick='${renderResponse.namespace}fileDelete(this,"
 		+ fileId + ","+materialId+")'>删除</a></div>"; 
-    	 $("#fileDiv" + no).append(ele);
-			domSort(no);  
+    	 $("#fileDiv" + divNo).append(ele);
+			domSort(divNo);  
 		var dialog = Liferay.Util.Window.getById(dialogId);
 		dialog.destroy();
 	},
@@ -178,7 +175,7 @@ Liferay.provide(window,'<portlet:namespace/>closeYourPopUp',
 		<c:forEach items="<%=completeApplyMaterialList%>" var="material"
 			varStatus="status">
 			<tr style="text-align: center" class="fileTr">
-				<td style="text-align: center" class="fileNo">${material.xh}</td>
+				<td style="text-align: center" class="fileNo">${status.index+1}</td>
 				<td>${material.clmc}</td>
 				<td style="text-align: center">
 					<div id="fileDiv${status.index+1}">
@@ -205,6 +202,7 @@ Liferay.provide(window,'<portlet:namespace/>closeYourPopUp',
 			</tr>
 			  <aui:script use="liferay-util-window">
 A.one('#<portlet:namespace/>login${status.index+1}').on('click', function(event) {
+	var no = findFileNo('${status.index+1}');
     <!-- alert("open"); -->
 	Liferay.Util.openWindow({
 		dialog: {
@@ -215,7 +213,7 @@ A.one('#<portlet:namespace/>login${status.index+1}').on('click', function(event)
 		},
 		id: '<portlet:namespace/>dialog',
 		title: '文件上传',
-		uri: '<%=loginURL %>${status.index+1}/${material.materialId}'
+		uri: '<%=loginURL %>${status.index+1}/${material.materialId}/'+no
 	});
 });
 </aui:script>
