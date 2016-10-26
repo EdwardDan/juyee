@@ -24,10 +24,11 @@
 		<aui:field-wrapper>
 			<c:if test="<%=fileMaxSize != 0%>">
 				<div class="alert alert-info">
-					<%="PDF文件大小不能超过"+String.valueOf(fileMaxSize)+"MB,JPG文件大小不能超过2MB"%>
+					<%="PDF文件大小不能超过20MB,JPG文件大小不能超过2MB"%>
 				</div>
 			</c:if>
 		</aui:field-wrapper>
+		
 		<aui:input type="file" name="file" style="width: auto;">
 			<aui:validator name="required" />
 		</aui:input>
@@ -56,4 +57,6 @@ function <portlet:namespace />saveFileEntry() {
 				Liferay.Util.getOpener().<portlet:namespace/>closeYourPopUp(
 						data, '<portlet:namespace/>dialog');
 			});
+
+	
 </aui:script>
