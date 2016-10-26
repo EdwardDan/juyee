@@ -1,12 +1,12 @@
 
 package com.justonetech.cp.portlet;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
@@ -17,6 +17,7 @@ import java.util.Set;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletException;
+import javax.portlet.PortletRequestDispatcher;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
@@ -32,8 +33,10 @@ import com.justonetech.cp.complete.service.CompleteLocalServiceUtil;
 import com.justonetech.cp.complete.service.CompleteProjectProfileLocalServiceUtil;
 import com.justonetech.cp.complete.service.CompleteUnitProjectLocalServiceUtil;
 import com.justonetech.cp.notification.CompleteApplicationNotificationHandler;
+import com.justonetech.cp.permit.model.ApplyMaterial;
 import com.justonetech.cp.permit.model.Permit;
 import com.justonetech.cp.permit.model.UnitProject;
+import com.justonetech.cp.permit.service.ApplyMaterialLocalServiceUtil;
 import com.justonetech.cp.permit.service.UnitProjectLocalServiceUtil;
 import com.justonetech.cp.project.model.Project;
 import com.justonetech.cp.project.service.ProjectLocalServiceUtil;
@@ -49,6 +52,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.search.ParseException;
+import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.FileUtil;
@@ -58,6 +62,7 @@ import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Role;
@@ -73,11 +78,10 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryTypeConstants;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
-import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 public class CompleteApplicationPortlet extends MVCPortlet {
 
@@ -87,7 +91,22 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
-
+		 String path = ParamUtil.getString(renderRequest, "path");
+			if (path.contains("loginPage")) {
+				renderRequest.setAttribute("divNo",path.substring(path.indexOf("e")+1,path.indexOf("/"))); 
+				renderRequest.setAttribute("materialId", path.substring(path.indexOf("/")+1));
+				include("/portlet/complete-application/login.jsp", renderRequest, renderResponse);
+			}
+			else if (path.contains("details")) {
+				renderRequest.setAttribute("name",ParamUtil.getString(renderRequest, "name"));
+				renderRequest.setAttribute("fieId",ParamUtil.getString(renderRequest, "fieId"));
+				renderRequest.setAttribute("divNo",ParamUtil.getString(renderRequest, "divNo"));
+				renderRequest.setAttribute("materialId",ParamUtil.getString(renderRequest, "materialId"));
+				renderRequest.setAttribute("materialName",ParamUtil.getString(renderRequest, "materialName"));
+				renderRequest.setAttribute("fileExtension",ParamUtil.getString(renderRequest, "fileExtension"));
+				include("/portlet/complete-application/details.jsp", renderRequest, renderResponse);
+			}
+			else {
 		User user = null;
 		try {
 			user = PortalUtil.getUser(renderRequest);
@@ -130,6 +149,7 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 		renderRequest.setAttribute("completes", completes);
 		renderRequest.setAttribute("completesCount", completesCount);
 		super.doView(renderRequest, renderResponse);
+			}
 	}
 
 	@Override
@@ -469,11 +489,11 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 					CompleteApplyMaterial completeApplyMaterial =
 						CompleteApplyMaterialLocalServiceUtil.getCompleteApplyMaterial(Long.valueOf(materialId));
 					String fileTitle = completeApplyMaterial.getClmc() + "-" + no + "." + fileExtension;
-
-					fileEntry =
-						uploadFile(
-							resourceRequest, fileSourceName, fileBytes, serviceContext, portletId, materialId,
-							fileTitle);
+//
+//					fileEntry =
+//						uploadFile(
+//							resourceRequest, fileSourceName, fileBytes, serviceContext, portletId, materialId,
+//							fileTitle);
 
 					String fileEntryIds = completeApplyMaterial.getFileEntryIds();
 					// 添加第一条数据时
@@ -541,7 +561,7 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 	}
 
 	public FileEntry uploadFile(
-		ResourceRequest request, String fileSourceName, byte[] fileBytes, ServiceContext serviceContext,
+		ActionRequest request, String fileSourceName, byte[] fileBytes, ServiceContext serviceContext,
 		String portletId, String materialId, String fileTitle)
 		throws PortalException, SystemException, IOException {
 
@@ -694,5 +714,58 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 			e.printStackTrace();
 		}
 	}
+	
+	public void addDLFileEntry(ActionRequest actionRequest, ActionResponse actionResponse) {
+		try {
+			long userId = PortalUtil.getUserId(actionRequest);
+			long groupId = PortalUtil.getScopeGroupId(actionRequest);
+			long repositoryId = groupId;
+			long folderId = ParamUtil.getLong(actionRequest, "folderId");
+			UploadPortletRequest uploadPortletRequest = PortalUtil.getUploadPortletRequest(actionRequest);
+
+			String sourceFileName = uploadPortletRequest.getFileName("file");
+			String mimeType = MimeTypesUtil.getContentType(uploadPortletRequest.getFullFileName("file"));
+			String title = ParamUtil.getString(actionRequest, "title");
+			String description = ParamUtil.getString(actionRequest, "description", StringPool.BLANK);
+			String changeLog = ParamUtil.getString(actionRequest, "changeLog", StringPool.BLANK);
+			File file = uploadPortletRequest.getFile("file");
+			ServiceContext serviceContext = ServiceContextFactory.getInstance(DLFileEntry.class.getName(), actionRequest);
+			String[] groupPermissions = { "VIEW" };
+			serviceContext.setGroupPermissions(groupPermissions);
+			String materialId=ParamUtil.getString(actionRequest, "materialId");
+			actionResponse.setRenderParameter("materialId", materialId);
+			byte[] fileBytes = null;
+			if (null != file) {
+				fileBytes = FileUtil.getBytes(file);
+			}
+			String fileTitle = "";
+			String fileExtension=sourceFileName.substring(sourceFileName.lastIndexOf(".")+1);
+			if (!materialId.equals("0")) {
+				CompleteApplyMaterial completeApplyMaterial = CompleteApplyMaterialLocalServiceUtil.getCompleteApplyMaterial(Long
+						.valueOf(materialId));
+				 fileTitle = completeApplyMaterial.getClmc() + "-" + ParamUtil.getString(actionRequest, "divNo") + "." + fileExtension;
+				actionResponse.setRenderParameter("materialName", completeApplyMaterial.getClmc());
+			}
+			FileEntry fileEntry=uploadFile(actionRequest, sourceFileName, fileBytes, serviceContext, "completeapplication_WAR_cpportlet", materialId, fileTitle);
+			actionResponse.setRenderParameter("fieId", Long.toString(fileEntry.getFileEntryId()));
+			actionResponse.setRenderParameter("path", "details");
+			actionResponse.setRenderParameter("name", sourceFileName);
+			actionResponse.setRenderParameter("divNo", ParamUtil.getString(actionRequest, "divNo"));
+			actionResponse.setRenderParameter("fileExtension", fileExtension);
+		} catch (Exception e) {
+			SessionErrors.add(actionRequest, e.getClass());
+		}
+	}
+	
+	public void include(String path, RenderRequest renderRequest, RenderResponse renderResponse) throws IOException,
+	PortletException {
+		PortletRequestDispatcher portletRequestDispatcher = getPortletContext().getRequestDispatcher(path);
+		if (portletRequestDispatcher == null) {
+		} else {
+	portletRequestDispatcher.include(renderRequest, renderResponse);
+		}
+}
+	
+
 
 }
