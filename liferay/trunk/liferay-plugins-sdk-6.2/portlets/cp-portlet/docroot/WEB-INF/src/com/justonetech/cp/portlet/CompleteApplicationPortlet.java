@@ -33,10 +33,8 @@ import com.justonetech.cp.complete.service.CompleteLocalServiceUtil;
 import com.justonetech.cp.complete.service.CompleteProjectProfileLocalServiceUtil;
 import com.justonetech.cp.complete.service.CompleteUnitProjectLocalServiceUtil;
 import com.justonetech.cp.notification.CompleteApplicationNotificationHandler;
-import com.justonetech.cp.permit.model.ApplyMaterial;
 import com.justonetech.cp.permit.model.Permit;
 import com.justonetech.cp.permit.model.UnitProject;
-import com.justonetech.cp.permit.service.ApplyMaterialLocalServiceUtil;
 import com.justonetech.cp.permit.service.UnitProjectLocalServiceUtil;
 import com.justonetech.cp.project.model.Project;
 import com.justonetech.cp.project.service.ProjectLocalServiceUtil;
@@ -62,7 +60,6 @@ import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Role;
@@ -99,7 +96,6 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 				include("/portlet/complete-application/login.jsp", renderRequest, renderResponse);
 			}
 			else if (path.contains("details")) {
-				System.out.println("details");
 				renderRequest.setAttribute("name",ParamUtil.getString(renderRequest, "name"));
 				renderRequest.setAttribute("upLoadMessage",ParamUtil.getString(renderRequest, "upLoadMessage"));
 				renderRequest.setAttribute("fieId",ParamUtil.getString(renderRequest, "fieId"));
@@ -159,7 +155,7 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 	@Override
 	public void render(RenderRequest renderRequest, RenderResponse renderResponse)
 		throws PortletException, IOException {
-
+		try{
 		String mvcPath = ParamUtil.getString(renderRequest, "mvcPath");
 		if (Validator.equals(mvcPath, "/portlet/complete-application/select-project.jsp")) {
 			String bjbh = ParamUtil.getString(renderRequest, "bjbh");
@@ -268,6 +264,10 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 		}
 
 		super.render(renderRequest, renderResponse);
+		}catch(Exception e){
+			e.printStackTrace();
+			SessionErrors.add(renderRequest, e.getClass());
+		}
 	}
 
 	public void saveProjectProfile(ActionRequest request, ActionResponse response)
@@ -443,51 +443,6 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 		redirect(request, response, complete, 2);
 	}
 
-	@Override
-	public void serveResource(ResourceRequest resourceRequest, ResourceResponse resourceResponse)
-		throws IOException, PortletException {
-
-		// TODO Auto-generated method stub
-
-		try {
-			String resourceId = resourceRequest.getResourceID();
-			String fileSourceName = "";
-
-			// 删除文件
-			if ("fileDelete".equals(resourceId)) {
-				String fileId = ParamUtil.get(resourceRequest, "fileId", "0");
-				String materialId = ParamUtil.get(resourceRequest, "materialId", "0");
-				if (!fileId.equals("0")) {
-					DLFileEntry dlFileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(fileId));
-					if (!materialId.equals("0")) {
-						CompleteApplyMaterial completeApplyMaterial =
-							CompleteApplyMaterialLocalServiceUtil.getCompleteApplyMaterial(Long.valueOf(materialId));
-						String fileEntryIds = completeApplyMaterial.getFileEntryIds();
-						fileEntryIds = fileEntryIds + ",";// 加上逗号为了容易替换
-						// 获取文件路径
-						String str = fileId + "\\|" + dlFileEntry.getExtension() + "\\,";
-						fileEntryIds = fileEntryIds.replaceFirst(str, "");
-						if (Validator.isNotNull(fileEntryIds)) {
-							fileEntryIds = fileEntryIds.substring(0, fileEntryIds.length() - 1);// 最后一步再把逗号去掉
-						}
-						completeApplyMaterial.setFileEntryIds(fileEntryIds);
-						CompleteApplyMaterialLocalServiceUtil.updateCompleteApplyMaterial(completeApplyMaterial);
-					}
-					DLFileEntryLocalServiceUtil.deleteDLFileEntry(Long.valueOf(fileId));
-				}
-			}
-
-		}
-		catch (PortalException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		catch (SystemException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		super.serveResource(resourceRequest, resourceResponse);
-	}
 
 	public FileEntry uploadFile(
 		ActionRequest request, String fileSourceName, byte[] fileBytes, ServiceContext serviceContext,
@@ -709,9 +664,8 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 			}
 			actionResponse.setRenderParameter("path", "details");
 			actionResponse.setRenderParameter("upLoadMessage", upLoadMessage);
-			System.out.println("enter details");
 		} catch (Exception e) {
-			e.printStackTrace();
+			SessionErrors.add(actionRequest, e.getClass());
 		}
 	}
 	
@@ -724,6 +678,4 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 		}
 }
 	
-
-
 }
