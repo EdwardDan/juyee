@@ -106,6 +106,38 @@
 	
 	}
 %>
+
+ <%@page import="com.liferay.portal.kernel.portlet.LiferayWindowState"%>
+  <portlet:renderURL var="loginURL" windowState="<%=LiferayWindowState.POP_UP.toString()%>">
+   <portlet:param name="path" value="loginPage" />
+</portlet:renderURL>
+
+
+<%-- <aui:input type="text" name="test" value=""/>
+<aui:button name="login" type="button" id="login" value="上传文件" /> --%>
+
+
+
+<!-- For Closing -->
+<aui:script>
+Liferay.provide(window,'<portlet:namespace/>closeYourPopUp',
+	    function(data, dialogId) {
+		var A = AUI();
+		var fileId=data.split('/')[4];var materialName=data.split('/')[1]; var no=data.split('/')[2]; var fileExtension=data.split('/')[3];var materialId=data.split('/')[0];
+		var ele = "<div name='file"+no+"'><a class='fileName' href='javascript:void(0);'>"
+		+ materialName+"-"+no+"."+fileExtension
+		+ "</a> &nbsp;&nbsp;&nbsp;<a href='javascript:void(0)';  onclick='${renderResponse.namespace}fileDelete(this,"
+		+ fileId + ","+materialId+")'>删除</a></div>"; 
+    	 $("#fileDiv" + no).append(ele);
+			domSort(no);  
+		var dialog = Liferay.Util.Window.getById(dialogId);
+		dialog.destroy();
+	},
+	['liferay-util-window']
+);
+</aui:script>
+
+
 <div id="mask" class="mask"><div id="loading" style="position:fixed;top:50%;left:50%">
 </div></div>    
 <portlet:renderURL var="viewURL" />
@@ -166,13 +198,28 @@
 						</c:if>
 					</div>
 				</td>
-				<td style="text-align: center"><input type="button" value="上传"
-					onclick="document.getElementById('fileInput${status.index+1}').click();">
-<input id="fileInput${status.index+1}"
-					name="${namespace}fileInput${status.index+1}" type="file" accept="application/pdf,image/jpeg"
-					 style="display:none; width: 150px;" onchange="${renderResponse.namespace}ajaxFileUpload(this,${status.index+1},${material.materialId},'<%=portletDisplay.getId() %>');"></input>
+				<td style="text-align: center">
+				<aui:button name="login${status.index+1}" type="button"  value="上传" />
+				
 				</td>
 			</tr>
+			  <aui:script use="liferay-util-window">
+A.one('#<portlet:namespace/>login${status.index+1}').on('click', function(event) {
+    <!-- alert("open"); -->
+	Liferay.Util.openWindow({
+		dialog: {
+			centered: true,
+			height: 500,
+			modal: true,
+			width: 500
+		},
+		id: '<portlet:namespace/>dialog',
+		title: '文件上传',
+		uri: '<%=loginURL %>${status.index+1}/${material.materialId}'
+	});
+});
+</aui:script>
+			
 		</c:forEach>
 
 	</table>
