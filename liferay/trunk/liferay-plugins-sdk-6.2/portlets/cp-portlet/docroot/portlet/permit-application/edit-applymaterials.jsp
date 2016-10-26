@@ -428,28 +428,6 @@ function <portlet:namespace/>ajaxFileUpload(inputFile,divNo,materialId,portletId
 	}
 	
 	function getNo(fileNameNoArr){
-		//如果是ie8浏览器，添加indexof方法
-		if (!Array.prototype.indexOf)
-		{
-		  Array.prototype.indexOf = function(elt /*, from*/)
-		  {
-		    var len = this.length >>> 0;
-
-		    var from = Number(arguments[1]) || 0;
-		    from = (from < 0)
-		         ? Math.ceil(from)
-		         : Math.floor(from);
-		    if (from < 0)
-		      from += len;
-		    for (; from < len; from++)
-		    {
-		      if (from in this &&
-		          this[from] === elt)
-		        return from;
-		    }
-		    return -1;
-		  };
-		}
 		var no;
 		for(var i=1;i<50;i++){
 			var r=fileNameNoArr.indexOf(i.toString());
@@ -459,7 +437,6 @@ function <portlet:namespace/>ajaxFileUpload(inputFile,divNo,materialId,portletId
 			}
 		}
 	}
-	
 	
 	/* 给div元素重新排序 */
 	function domSort(divNo){
