@@ -22,7 +22,6 @@
 
 <aui:form action="<%=addDLFileEntryURL%>" enctype="multipart/form-data"
 	name="fm">
-	fileProperty:${fileProperty}
 		<aui:field-wrapper>
 			<c:if test="<%=fileMaxSize != 0%>">
 				<div class="alert alert-info">
