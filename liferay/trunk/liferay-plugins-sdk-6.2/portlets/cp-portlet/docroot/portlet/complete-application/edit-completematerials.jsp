@@ -98,9 +98,7 @@ Liferay.provide(window,'<portlet:namespace/>closeYourPopUp',
 	['liferay-util-window']
 );
 </aui:script>
-
-<div id="mask" class="mask"><div id="loading" style="position:fixed;top:50%;left:50%">
-</div></div>    
+  
 <portlet:renderURL var="viewURL" />
 <c:set var="namespace" value="<%=renderResponse.getNamespace()%>"></c:set>
 <portlet:resourceURL var="fileUpLoadURL" id="fileUpLoad" />
@@ -193,6 +191,19 @@ A.one('#<portlet:namespace/>login${status.index+1}').on('click', function(event)
 </aui:form>
 
 <script>
+
+	function saveMaterials(){
+		document.getElementById("fm").action='${fileSaveURL}';
+		document.getElementById("fm").submit();
+	}
+	
+	function submitAll(){
+		document.getElementById("fm").action='${submitAllURL}';
+		document.getElementById("fm").submit();
+		
+	}
+
+
 
 	/* 删除 */
 	function <portlet:namespace/>fileDelete(divObj, fileId, materialId) {
