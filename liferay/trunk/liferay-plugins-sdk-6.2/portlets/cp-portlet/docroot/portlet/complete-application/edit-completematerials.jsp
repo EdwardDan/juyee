@@ -76,8 +76,8 @@
 %>
 
  <%@page import="com.liferay.portal.kernel.portlet.LiferayWindowState"%>
-  <portlet:renderURL var="loginURL" windowState="<%=LiferayWindowState.POP_UP.toString()%>">
-   <portlet:param name="path" value="loginPage" />
+  <portlet:renderURL var="uploadFile" windowState="<%=LiferayWindowState.POP_UP.toString()%>">
+   <portlet:param name="path" value="uploadFile" />
 </portlet:renderURL>
 
 <!-- For Closing -->
@@ -174,7 +174,7 @@ A.one('#<portlet:namespace/>login${status.index+1}').on('click', function(event)
 		},
 		id: '<portlet:namespace/>dialog',
 		title: '文件上传',
-		uri: '<%=loginURL %>${status.index+1}/${material.materialId}/'+no
+		uri: '<%=uploadFile %>${status.index+1}/${material.materialId}/'+no
 	});
 });
 </aui:script>

@@ -10,9 +10,8 @@
 	  fileMaxSize /= 1024*1024; 
 %>
 <portlet:renderURL var="viewURL">
-<portlet:param name="path" value="details" /> 
+<portlet:param name="path" value="uploadResult" /> 
 </portlet:renderURL>
-
 <portlet:actionURL name="addDLFileEntry" var="addDLFileEntryURL">
 	<portlet:param name="divNo" value="${divNo}" />
 	<portlet:param name="no" value="${no}" />
