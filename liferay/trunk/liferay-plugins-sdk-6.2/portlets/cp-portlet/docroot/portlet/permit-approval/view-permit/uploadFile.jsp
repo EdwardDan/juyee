@@ -17,11 +17,12 @@
 	<portlet:param name="divNo" value="${divNo}" />
 	<portlet:param name="no" value="${no}" />
 	<portlet:param name="materialId" value="${materialId}" />
-	<portlet:param name="fileProperty" value="${fileProperty}" />
+	<portlet:param name="uploadfileType" value="${uploadfileType}" />
 </portlet:actionURL>
 
 <aui:form action="<%=addDLFileEntryURL%>" enctype="multipart/form-data"
 	name="fm">
+	fileProperty:${fileProperty}
 		<aui:field-wrapper>
 			<c:if test="<%=fileMaxSize != 0%>">
 				<div class="alert alert-info">
