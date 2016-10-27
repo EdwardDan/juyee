@@ -87,12 +87,12 @@ public class PermitApprovalPortlet extends MVCPortlet {
 			String divNo=pathParam[0].substring(pathParam[0].length()-1);
 			String materialId=pathParam[1];
 			String no=pathParam[2];
-			String fileProperty=pathParam[3];
+			String uploadfileType=pathParam[3];
 			renderRequest.setAttribute("divNo",divNo); 
 			renderRequest.setAttribute("materialId", materialId);
 			renderRequest.setAttribute("no", no);
-			renderRequest.setAttribute("fileProperty",fileProperty);
-			include("/portlet/permit-application/uploadFile.jsp", renderRequest, renderResponse);
+			renderRequest.setAttribute("uploadfileType",uploadfileType);
+			include("/portlet/permit-approval/view-permit/uploadFile.jsp", renderRequest, renderResponse);
 		}
 		else if (path.contains("uploadResult")) {
 			renderRequest.setAttribute("name",ParamUtil.getString(renderRequest, "name"));
@@ -103,7 +103,8 @@ public class PermitApprovalPortlet extends MVCPortlet {
 			renderRequest.setAttribute("materialId",ParamUtil.getString(renderRequest, "materialId"));
 			renderRequest.setAttribute("materialName",ParamUtil.getString(renderRequest, "materialName"));
 			renderRequest.setAttribute("fileExtension",ParamUtil.getString(renderRequest, "fileExtension"));
-			include("/portlet/permit-application/uploadResult.jsp", renderRequest, renderResponse);
+			renderRequest.setAttribute("uploadfileType",ParamUtil.getString(renderRequest, "uploadfileType"));
+			include("/portlet/permit-approval/view-permit/uploadResult.jsp", renderRequest, renderResponse);
 		}
 		else {
 		super.doView(renderRequest, renderResponse);}
@@ -495,9 +496,7 @@ public class PermitApprovalPortlet extends MVCPortlet {
 			String[] groupPermissions = { "VIEW" };
 			serviceContext.setGroupPermissions(groupPermissions);
 			String materialId=ParamUtil.getString(actionRequest, "materialId");
-			String fileProperty=ParamUtil.getString(actionRequest, "fileProperty");
-			
-			/*actionResponse.setRenderParameter("materialId", materialId);*/
+			String uploadfileType=ParamUtil.getString(actionRequest, "uploadfileType");
 			byte[] fileBytes = null;
 			long fileSize=0l;
 			FileEntry fileEntry=null;
@@ -529,10 +528,12 @@ public class PermitApprovalPortlet extends MVCPortlet {
 					.valueOf(materialId));
 				String fileEntryIds="";
 				
-				if(fileProperty.equals("jgzxFile")){
+				System.out.println(uploadfileType);
+				
+				if(uploadfileType.equals("jgzxFile")){
 					 fileTitle = applyMaterial.getClmc() +"补正材料(建管中心)"+ "-" + ParamUtil.getString(actionRequest, "no") + "." + fileExtension.toLowerCase();
 					 fileEntryIds = applyMaterial.getBzclIds();
-				}else if(fileProperty.equals("wjscFile")){
+				}else if(uploadfileType.equals("wjscFile")){
 					 fileTitle = applyMaterial.getClmc() +"补正材料(委建设处)"+ "-" + ParamUtil.getString(actionRequest, "no") + "." + fileExtension.toLowerCase();
 					 fileEntryIds = applyMaterial.getWjscbzclIds();
 				}
@@ -546,20 +547,22 @@ public class PermitApprovalPortlet extends MVCPortlet {
 					else {
 						fileEntryIds = fileEntryIds + "," + fileEntry.getFileEntryId() + "|" + fileEntry.getExtension();						
 					}
-				 if(fileProperty.equals("jgzxFile")){
+				 if(uploadfileType.equals("jgzxFile")){
 					 applyMaterial.setBzclIds(fileEntryIds);
 					 actionResponse.setRenderParameter("materialName", applyMaterial.getClmc()+"补正材料(建管中心)");
-				}else if(fileProperty.equals("wjscFile")){
+				}else if(uploadfileType.equals("wjscFile")){
 					applyMaterial.setWjscbzclIds(fileEntryIds);
 					actionResponse.setRenderParameter("materialName", applyMaterial.getClmc()+"补正材料(委建设处)");
 				}
 				ApplyMaterialLocalServiceUtil.updateApplyMaterial(applyMaterial); 
+				actionResponse.setRenderParameter("materialId", materialId);
 				actionResponse.setRenderParameter("fieId", Long.toString(fileEntry.getFileEntryId()));
 				actionResponse.setRenderParameter("name", sourceFileName);
 				actionResponse.setRenderParameter("divNo", ParamUtil.getString(actionRequest, "divNo"));
 				actionResponse.setRenderParameter("no", ParamUtil.getString(actionRequest, "no"));
 				actionResponse.setRenderParameter("fileExtension", fileExtension.toLowerCase());
 			}
+			actionResponse.setRenderParameter("uploadfileType", uploadfileType);
 			actionResponse.setRenderParameter("path", "uploadResult");
 			actionResponse.setRenderParameter("upLoadMessage", upLoadMessage);
 		} catch (Exception e) {
