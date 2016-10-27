@@ -51,6 +51,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.search.ParseException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.FileUtil;
@@ -89,13 +90,13 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 		 String path = ParamUtil.getString(renderRequest, "path");
-			if (path.contains("loginPage")) {
+			if (path.contains("uploadFile")) {
 				renderRequest.setAttribute("divNo",path.substring(path.indexOf("e")+1,path.indexOf("/"))); 
 				renderRequest.setAttribute("materialId", path.substring(path.indexOf("/")+1,path.lastIndexOf("/")));
 				renderRequest.setAttribute("no", path.substring(path.lastIndexOf("/")+1));
 				include("/portlet/complete-application/uploadFile.jsp", renderRequest, renderResponse);
 			}
-			else if (path.contains("details")) {
+			else if (path.contains("uploadResult")) {
 				renderRequest.setAttribute("name",ParamUtil.getString(renderRequest, "name"));
 				renderRequest.setAttribute("upLoadMessage",ParamUtil.getString(renderRequest, "upLoadMessage"));
 				renderRequest.setAttribute("fieId",ParamUtil.getString(renderRequest, "fieId"));
@@ -617,22 +618,25 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 				fileSize=fileBytes.length/1024/1024;
 			}
 			String fileTitle = "";
-			
 			String fileExtension=sourceFileName.substring(sourceFileName.lastIndexOf(".")+1).toUpperCase().trim();
+			
 			String upLoadMessage="上传成功！";
 			Boolean upLoadStatus=true;
 			if(!fileExtension.equals("JPG")&&!fileExtension.equals("PDF")){
 				upLoadMessage="文件上传仅限于jpg或者pdf格式！";
 				upLoadStatus=false;
+				SessionErrors.add(actionRequest, "error-key"); 
 	        }else if(fileExtension.equals("JPG")){
 	        	if(fileSize>2){	
 	        		upLoadMessage="上传的jpg文件超过2M,请压缩后上传！";
 	        		upLoadStatus=false;
+	        		SessionErrors.add(actionRequest, "error-key"); 
 	        	}
 	        }else if(fileExtension.equals("PDF")){
 	        	if(fileSize>20){	
 	        		upLoadMessage="上传的pdf文件超过20M,请压缩或拆分后上传！";
 	        		upLoadStatus=false;
+	        		SessionErrors.add(actionRequest, "error-key"); 
 	        	}
 	        }
 			
@@ -661,11 +665,13 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 					actionResponse.setRenderParameter("divNo", ParamUtil.getString(actionRequest, "divNo"));
 					actionResponse.setRenderParameter("no", ParamUtil.getString(actionRequest, "no"));
 					actionResponse.setRenderParameter("fileExtension", fileExtension.toLowerCase());
+					SessionMessages.add(actionRequest, "request_processed"); 
 			}
-			actionResponse.setRenderParameter("path", "details");
+			actionResponse.setRenderParameter("path", "uploadResult");
 			actionResponse.setRenderParameter("upLoadMessage", upLoadMessage);
+			
 		} catch (Exception e) {
-			SessionErrors.add(actionRequest, e.getClass());
+			e.printStackTrace();
 		}
 	}
 	
