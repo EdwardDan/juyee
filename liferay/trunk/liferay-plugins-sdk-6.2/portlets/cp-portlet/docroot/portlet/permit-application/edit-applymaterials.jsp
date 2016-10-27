@@ -3,37 +3,6 @@
 <%@ include file="init.jsp"%>
 
 <style>
-.b-button {
-			display: inline-block;
-			*display: inline;
-			*zoom: 1;
-			position: relative;
-			overflow: hidden;
-			cursor: pointer;
-			padding: 4px 15px;
-			vertical-align: middle;
-			border: 1px solid #ccc;
-			border-radius: 3px;
-			background-color: #f5f5f5;
-			background: -moz-linear-gradient(top, #fff 0%, #f5f5f5 49%, #ececec 50%, #eee 100%);
-			background: -webkit-linear-gradient(top, #fff 0%,#f5f5f5 49%,#ececec 50%,#eee 100%);
-			background: -o-linear-gradient(top, #fff 0%,#f5f5f5 49%,#ececec 50%,#eee 100%);
-			background: linear-gradient(to bottom, #fff 0%,#f5f5f5 49%,#ececec 50%,#eee 100%);
-			-webkit-user-select: none;
-			-moz-user-select: none;
-			user-select: none;
-		}
-.b-button__input {
-				cursor: pointer;
-				opacity: 0;
-				filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0);
-				top: -10px;
-				right: -40px;
-				font-size: 50px;
-				position: absolute;
-			}
-.b-button__text {
-			}
 .aui .table th, .aui .table td {
 	vertical-align: middle;
 	padding: 8px;
@@ -132,9 +101,29 @@
 
 	}
 %>
+ <%@page import="com.liferay.portal.kernel.portlet.LiferayWindowState"%>
+  <portlet:renderURL var="loginURL" windowState="<%=LiferayWindowState.POP_UP.toString()%>">
+   <portlet:param name="path" value="uploadFile" />
+</portlet:renderURL>
 
-<div id="mask" class="mask"><div id="loading" style="position:fixed;top:50%;left:50%">
-</div></div>    
+<aui:script>
+Liferay.provide(window,'<portlet:namespace/>closeYourPopUp',
+	    function(data, dialogId) {
+		var A = AUI();
+		var fileId=data.split('/')[4];var materialName=data.split('/')[1]; var divNo=data.split('/')[2]; var fileExtension=data.split('/')[3];var materialId=data.split('/')[0];var no=data.split('/')[5];
+		var ele = "<div name='file"+divNo+"'><a class='fileName' href='javascript:void(0);'>"
+		+ materialName+"-"+no+"."+fileExtension
+		+ "</a> &nbsp;&nbsp;&nbsp;<a href='javascript:void(0)';  onclick='${renderResponse.namespace}fileDelete(this,"
+		+ fileId + ","+materialId+")'>删除</a></div>"; 
+    	 $("#fileDiv" + divNo).append(ele);
+			domSort(divNo);  
+		var dialog = Liferay.Util.Window.getById(dialogId);
+		dialog.destroy();
+	},
+	['liferay-util-window']
+);
+</aui:script>
+
 <portlet:renderURL var="viewURL" />
 <c:set var="namespace" value="<%=renderResponse.getNamespace()%>"></c:set>
 <portlet:resourceURL var="fileUpLoadURL" id="fileUpLoad"/>
@@ -196,14 +185,31 @@
 					</div>
 				</td>
 				<td style="text-align: center">
-				<input type="button" value="上传"
-					onclick="document.getElementById('fileInput${status.index+1}').click();">
-					<input id="fileInput${status.index+1}"
-					name="${namespace}fileInput${status.index+1}" type="file" accept="application/pdf,image/jpeg"
-					 style="display:none; width: 150px;" onchange="${renderResponse.namespace}ajaxFileUpload(this,${status.index+1},${material.materialId},'<%=portletDisplay.getId() %>');"></input>
-
+				<aui:button name="login${status.index+1}" type="button"  value="上传" />
 				</td>
 			</tr>
+			<aui:script use="liferay-util-window">
+A.one('#<portlet:namespace/>login${status.index+1}').on('click', function(event) {
+	var no = findFileNo('${status.index+1}');
+    <!-- alert("open"); -->
+	Liferay.Util.openWindow({
+		dialog: {
+			centered: true,
+			height: 500,
+			modal: true,
+			width: 500
+		},
+		id: '<portlet:namespace/>dialog',
+		title: '文件上传',
+		uri: '<%=loginURL %>${status.index+1}/${material.materialId}/'+no
+	});
+});
+</aui:script>
+			
+			
+			
+			
+			
 		</c:forEach>
 
 	</table>
@@ -308,46 +314,6 @@ Liferay.delegateClick('<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(tra
 </form>
 
 <script>
-function <portlet:namespace/>ajaxFileUpload(inputFile,divNo,materialId,portletId) {
-	var file= FileAPI.getFiles(inputFile)[0];
-	var fileExtension=fileValidator(file);
-	var no = findFileNo(divNo);
-	if(fileExtension){
-	$("#loading").html("<img src='/cp-portlet/icons/loading2.gif' style='width:100px;height:100px;'></img>");
-	showMask();
-    $.ajaxFileUpload
-    (
-        {
-            url: '${fileUpLoadURL}', //用于文件上传的服务器端请求地址
-            secureuri: false, //是否需要安全协议，一般设置为false
-            fileElementId: 'fileInput'+divNo, //文件上传域的ID
-            data:{${namespace}materialId:materialId,${namespace}divNo:divNo,${namespace}portletId:portletId,${namespace}no:no,${namespace}fileExtension:fileExtension}, 
-            dataType: 'text/javascript', //返回值类型 一般设置为json 
-            success: function (data)  //服务器成功响应处理函数
-            {
-            	/* var dataArray=data.replace("</pre>","").replace(/<pre.*>/,""); */
-            	var fileId=data.split('|')[0];var materialName=data.split('|')[1];
-            	 var ele = "<div name='file"+divNo+"'><a class='fileName' href='javascript:void(0);'>"
-				+ materialName+"-"+no+"."+fileExtension
-				+ "</a> &nbsp;&nbsp;&nbsp;<a href='javascript:void(0)';  onclick='${renderResponse.namespace}fileDelete(this,"
-				+ fileId + ","+materialId+")'>删除</a></div>"; 
-            	 $("#fileDiv" + divNo).append(ele);
-					domSort(divNo); 
-					alert("上传成功！");		
-            },
-            complete:function(){
-				hideMask();
-				$("#loading").html("");
-			},
-            error: function (data, status, e)//服务器响应失败处理函数
-            {
-                alert(e);
-            }
-        }
-    )
-	}
-    return false;
-}
 
 	function saveMaterials(){
 		document.getElementById("fm").action='${fileSaveURL}';
