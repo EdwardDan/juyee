@@ -107,15 +107,30 @@
 <aui:script>
 Liferay.provide(window,'<portlet:namespace/>closeYourPopUp',
 	    function(data, dialogId) {
-		alert(data);
-		/* var A = AUI();
-		var fileId=data.split('/')[4];var materialName=data.split('/')[1]; var divNo=data.split('/')[2]; var fileExtension=data.split('/')[3];var materialId=data.split('/')[0];var no=data.split('/')[5];
-		var ele = "<div name='file"+divNo+"'><a class='fileName' href='javascript:void(0);'>"
-		+ materialName+"-"+no+"."+fileExtension
-		+ "</a> &nbsp;&nbsp;&nbsp;<a href='javascript:void(0)';  onclick='${renderResponse.namespace}fileDelete(this,"
-		+ fileId + ","+materialId+")'>删除</a></div>"; 
-    	 $("#fileDiv" + divNo).append(ele);
-			domSort(divNo);   */
+	    var A = AUI();
+	    var dataParam=data.split('/');
+	    var materialId=dataParam[0];
+	    var materialName=dataParam[1];
+	    var divNo=dataParam[2];
+	    var fileExtension=dataParam[3];
+		var fileId=dataParam[4]; 
+		var no=dataParam[5];
+		var uploadfileType=dataParam[6];
+		if("jgzxFile"==uploadfileType){
+			var ele = "<div name='fileBzcl"+divNo+"'><a class='fileBzclName' href='javascript:void(0);'>"
+			+ materialName+"-"+no+"."+fileExtension
+			+ "</a> &nbsp;&nbsp;&nbsp;<a href='javascript:void(0)';  onclick='${renderResponse.namespace}fileBzclDelete(this,"
+			+ fileId + ","+materialId+")'>删除</a></div>";
+			$("#fileDivBzcl" + divNo).append(ele);
+			domSort(divNo); 
+		}else if("wjscFile"==uploadfileType){
+			var ele = "<div name='fileWjscbzcl"+divNo+"'><a class='fileWjscbzclName' href='javascript:void(0);'>"
+			+ materialName+"-"+no+"."+fileExtension
+			+ "</a> &nbsp;&nbsp;&nbsp;<a href='javascript:void(0)';  onclick='${renderResponse.namespace}fileWjscbzclDelete(this,"
+			+ fileId + ","+materialId+")'>删除</a></div>"; 
+        	 $("#fileDivWjscbzcl" + divNo).append(ele);
+        	 domSortWjscbzcl(divNo); 
+		}
 		var dialog = Liferay.Util.Window.getById(dialogId);
 		dialog.destroy();
 	},
@@ -293,7 +308,7 @@ Liferay.provide(window,'<portlet:namespace/>closeYourPopUp',
 
 
 
-					<c:if test="${permit.status==13}">
+					<%-- <c:if test="${permit.status==13}">   需要恢复--%>
 						<td style="text-align: center">
 							<div id="fileDivWjscbzcl${status.index+1}">
 								<!-- todo
@@ -315,7 +330,7 @@ Liferay.provide(window,'<portlet:namespace/>closeYourPopUp',
 						<td style="text-align: center"><aui:button
 								name="uploadWJSCFile${status.index+1}" type="button" value="上传" /></td>
 					</c:if>
-				</c:if>
+				<%-- </c:if> --%>
 			</tr>
 
 			<aui:script use="liferay-util-window">
@@ -336,7 +351,7 @@ Liferay.provide(window,'<portlet:namespace/>closeYourPopUp',
 				});
 				
 				A.one('#<portlet:namespace/>uploadWJSCFile${status.index+1}').on('click', function(event) {
-					var no = findFileNo('${status.index+1}');
+					var no = findFileWjscbzclNo('${status.index+1}');
 				    <!-- alert("open"); -->
 					Liferay.Util.openWindow({
 						dialog: {
@@ -350,9 +365,6 @@ Liferay.provide(window,'<portlet:namespace/>closeYourPopUp',
 						uri: '<%=uploadURL %>${status.index+1}/${material.materialId}/'+no+'/wjscFile'
 					});
 				});
-				
-				
-				
 			</aui:script>
 </c:forEach>
 
