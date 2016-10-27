@@ -359,7 +359,7 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 		CompleteProjectProfileLocalServiceUtil.updateCompleteProjectProfile(completeProjectProfile);
 		redirect(request, response, complete, 1);
 	}
-
+   
 	public void saveUnitProjects(ActionRequest request, ActionResponse response)
 		throws SystemException, PortalException, IOException {
 
@@ -444,7 +444,46 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 		redirect(request, response, complete, 2);
 	}
 
-
+	@Override
+	public void serveResource(ResourceRequest resourceRequest, ResourceResponse resourceResponse)
+		throws IOException, PortletException {
+		try {
+			String resourceId = resourceRequest.getResourceID();
+			String fileSourceName = "";
+			// 删除文件
+			if ("fileDelete".equals(resourceId)) {
+				String fileId = ParamUtil.get(resourceRequest, "fileId", "0");
+				String materialId = ParamUtil.get(resourceRequest, "materialId", "0");
+				if (!fileId.equals("0")) {
+					DLFileEntry dlFileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(fileId));
+					if (!materialId.equals("0")) {
+						CompleteApplyMaterial completeApplyMaterial =
+							CompleteApplyMaterialLocalServiceUtil.getCompleteApplyMaterial(Long.valueOf(materialId));
+						String fileEntryIds = completeApplyMaterial.getFileEntryIds();
+						fileEntryIds = fileEntryIds + ",";// 加上逗号为了容易替换
+						// 获取文件路径
+						String str = fileId + "\\|" + dlFileEntry.getExtension() + "\\,";
+						fileEntryIds = fileEntryIds.replaceFirst(str, "");
+						if (Validator.isNotNull(fileEntryIds)) {
+							fileEntryIds = fileEntryIds.substring(0, fileEntryIds.length() - 1);// 最后一步再把逗号去掉
+						}
+						completeApplyMaterial.setFileEntryIds(fileEntryIds);
+						CompleteApplyMaterialLocalServiceUtil.updateCompleteApplyMaterial(completeApplyMaterial);
+					}
+					DLFileEntryLocalServiceUtil.deleteDLFileEntry(Long.valueOf(fileId));
+				}
+			}
+		}
+		catch (PortalException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (SystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		super.serveResource(resourceRequest, resourceResponse);
+	}
 	public FileEntry uploadFile(
 		ActionRequest request, String fileSourceName, byte[] fileBytes, ServiceContext serviceContext,
 		String portletId, String materialId, String fileTitle)
@@ -639,10 +678,7 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 	        		SessionErrors.add(actionRequest, "error-key"); 
 	        	}
 	        }
-			
-			
-			
-			
+
 			if (!materialId.equals("0")&upLoadStatus) {
 				CompleteApplyMaterial completeApplyMaterial = CompleteApplyMaterialLocalServiceUtil.getCompleteApplyMaterial(Long
 						.valueOf(materialId));
@@ -669,7 +705,6 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 			}
 			actionResponse.setRenderParameter("path", "uploadResult");
 			actionResponse.setRenderParameter("upLoadMessage", upLoadMessage);
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
