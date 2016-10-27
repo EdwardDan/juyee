@@ -93,7 +93,7 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 				renderRequest.setAttribute("divNo",path.substring(path.indexOf("e")+1,path.indexOf("/"))); 
 				renderRequest.setAttribute("materialId", path.substring(path.indexOf("/")+1,path.lastIndexOf("/")));
 				renderRequest.setAttribute("no", path.substring(path.lastIndexOf("/")+1));
-				include("/portlet/complete-application/login.jsp", renderRequest, renderResponse);
+				include("/portlet/complete-application/uploadFile.jsp", renderRequest, renderResponse);
 			}
 			else if (path.contains("details")) {
 				renderRequest.setAttribute("name",ParamUtil.getString(renderRequest, "name"));
@@ -104,7 +104,7 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 				renderRequest.setAttribute("materialId",ParamUtil.getString(renderRequest, "materialId"));
 				renderRequest.setAttribute("materialName",ParamUtil.getString(renderRequest, "materialName"));
 				renderRequest.setAttribute("fileExtension",ParamUtil.getString(renderRequest, "fileExtension"));
-				include("/portlet/complete-application/details.jsp", renderRequest, renderResponse);
+				include("/portlet/complete-application/uploadResult.jsp", renderRequest, renderResponse);
 			}
 			else {
 		User user = null;
