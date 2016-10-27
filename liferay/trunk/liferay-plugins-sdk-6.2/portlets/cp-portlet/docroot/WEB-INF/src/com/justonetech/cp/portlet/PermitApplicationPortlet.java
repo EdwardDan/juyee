@@ -1035,9 +1035,6 @@ public class PermitApplicationPortlet extends MVCPortlet {
 	        	}
 	        }
 			
-			
-			
-			
 			if (!materialId.equals("0")&upLoadStatus) {
 				
 				ApplyMaterial applyMaterial = ApplyMaterialLocalServiceUtil.getApplyMaterial(Long
@@ -1078,23 +1075,5 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		}
 }
 
-	/*public FileEntry uploadFileAnother(ResourceRequest request, String fileSourceName, byte[] fileBytes,
-			ServiceContext serviceContext, String portletId, String materialId, String fileTitle)
-			throws PortalException, SystemException, IOException {
-		serviceContext.setAddGuestPermissions(true);
-		serviceContext.setIndexingEnabled(true);
-
-		User user = PortalUtil.getUser(request);
-		long userId = user.getUserId();
-		Long groupId = user.getGroupId();
-		Long rootFolderId = DLFileEntryTypeConstants.FILE_ENTRY_TYPE_ID_BASIC_DOCUMENT;
-		FileEntry fileEntry = null;
-		// 为每一种材料名称创建一个文件夹,如果已有就不再创
-		if (fileBytes != null) {
-			fileEntry = DLAppLocalServiceUtil.addFileEntry(userId, groupId, rootFolderId, fileSourceName,
-					MimeTypesUtil.getContentType(fileSourceName), fileTitle, null, null, fileBytes, serviceContext);
-		}
-		return fileEntry;
-	}*/
 
 }
