@@ -669,13 +669,13 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 	        	if(fileSize>2){	
 	        		upLoadMessage="上传的jpg文件超过2M,请压缩后上传！";
 	        		upLoadStatus=false;
-	        		SessionErrors.add(actionRequest, "error-key"); 
+	        		SessionErrors.add(actionRequest, "error-key-2"); 
 	        	}
 	        }else if(fileExtension.equals("PDF")){
 	        	if(fileSize>20){	
 	        		upLoadMessage="上传的pdf文件超过20M,请压缩或拆分后上传！";
 	        		upLoadStatus=false;
-	        		SessionErrors.add(actionRequest, "error-key"); 
+	        		SessionErrors.add(actionRequest, "error-key-3"); 
 	        	}
 	        }
 
@@ -701,7 +701,7 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 					actionResponse.setRenderParameter("divNo", ParamUtil.getString(actionRequest, "divNo"));
 					actionResponse.setRenderParameter("no", ParamUtil.getString(actionRequest, "no"));
 					actionResponse.setRenderParameter("fileExtension", fileExtension.toLowerCase());
-					SessionMessages.add(actionRequest, "request_processed"); 
+					SessionMessages.add(actionRequest, "request_processed",completeApplyMaterial.getClmc()+"上传成功！"); 
 			}
 			actionResponse.setRenderParameter("path", "uploadResult");
 			actionResponse.setRenderParameter("upLoadMessage", upLoadMessage);
