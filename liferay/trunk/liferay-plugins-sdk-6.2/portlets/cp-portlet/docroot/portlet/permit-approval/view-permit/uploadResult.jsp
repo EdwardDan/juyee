@@ -8,8 +8,10 @@
 	A.one('#<portlet:namespace/>cancel').on(
 			'click',
 			function(event) {
-				var data = '${materialId}/${materialName}/${divNo}/${fileExtension}/${fieId}/${no}';
-				
+				var data;
+				if('${uploadfileType}'){
+					data = '${materialId}/${materialName}/${divNo}/${fileExtension}/${fieId}/${no}/${uploadfileType}';
+				}
 				Liferay.Util.getOpener().<portlet:namespace/>closeYourPopUp(
 						data, '<portlet:namespace/>dialog');
 			});
