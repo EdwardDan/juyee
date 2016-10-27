@@ -148,8 +148,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
 		String path = ParamUtil.getString(renderRequest, "path");
-		System.out.println("upLoadFilePage"+path);
-		if (path.contains("upLoadFile")) {
+		if (path.contains("uploadFile")) {
 			String[] pathParam=path.split("\\/");
 			String divNo=pathParam[0].substring(pathParam[0].length()-1);
 			String materialId=pathParam[1];
@@ -157,9 +156,9 @@ public class PermitApplicationPortlet extends MVCPortlet {
 			renderRequest.setAttribute("divNo",divNo); 
 			renderRequest.setAttribute("materialId", materialId);
 			renderRequest.setAttribute("no", no);
-			include("/portlet/permit-application/upLoadFile.jsp", renderRequest, renderResponse);
+			include("/portlet/permit-application/uploadFile.jsp", renderRequest, renderResponse);
 		}
-		else if (path.contains("upLoadResult")) {
+		else if (path.contains("uploadResult")) {
 			renderRequest.setAttribute("name",ParamUtil.getString(renderRequest, "name"));
 			renderRequest.setAttribute("upLoadMessage",ParamUtil.getString(renderRequest, "upLoadMessage"));
 			renderRequest.setAttribute("fieId",ParamUtil.getString(renderRequest, "fieId"));
@@ -168,7 +167,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 			renderRequest.setAttribute("materialId",ParamUtil.getString(renderRequest, "materialId"));
 			renderRequest.setAttribute("materialName",ParamUtil.getString(renderRequest, "materialName"));
 			renderRequest.setAttribute("fileExtension",ParamUtil.getString(renderRequest, "fileExtension"));
-			include("/portlet/permit-application/upLoadResult.jsp", renderRequest, renderResponse);
+			include("/portlet/permit-application/uploadResult.jsp", renderRequest, renderResponse);
 		}
 		else {
 
@@ -1063,9 +1062,8 @@ public class PermitApplicationPortlet extends MVCPortlet {
 					actionResponse.setRenderParameter("no", ParamUtil.getString(actionRequest, "no"));
 					actionResponse.setRenderParameter("fileExtension", fileExtension.toLowerCase());
 			}
-			actionResponse.setRenderParameter("path", "upLoadResult");
+			actionResponse.setRenderParameter("path", "uploadResult");
 			actionResponse.setRenderParameter("upLoadMessage", upLoadMessage);
-			System.out.println("enter details");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
