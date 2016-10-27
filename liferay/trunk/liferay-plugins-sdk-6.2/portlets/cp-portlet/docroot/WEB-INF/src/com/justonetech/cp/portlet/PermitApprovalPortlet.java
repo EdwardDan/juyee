@@ -17,6 +17,7 @@ import java.util.Map;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletException;
+import javax.portlet.PortletRequestDispatcher;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
@@ -80,7 +81,32 @@ public class PermitApprovalPortlet extends MVCPortlet {
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
 		// TODO Auto-generated method stub
-		super.doView(renderRequest, renderResponse);
+		String path = ParamUtil.getString(renderRequest, "path");
+		if (path.contains("uploadFile")) {
+			String[] pathParam=path.split("\\/");
+			String divNo=pathParam[0].substring(pathParam[0].length()-1);
+			String materialId=pathParam[1];
+			String no=pathParam[2];
+			String fileProperty=pathParam[3];
+			renderRequest.setAttribute("divNo",divNo); 
+			renderRequest.setAttribute("materialId", materialId);
+			renderRequest.setAttribute("no", no);
+			renderRequest.setAttribute("fileProperty",fileProperty);
+			include("/portlet/permit-application/uploadFile.jsp", renderRequest, renderResponse);
+		}
+		else if (path.contains("uploadResult")) {
+			renderRequest.setAttribute("name",ParamUtil.getString(renderRequest, "name"));
+			renderRequest.setAttribute("upLoadMessage",ParamUtil.getString(renderRequest, "upLoadMessage"));
+			renderRequest.setAttribute("fieId",ParamUtil.getString(renderRequest, "fieId"));
+			renderRequest.setAttribute("divNo",ParamUtil.getString(renderRequest, "divNo"));
+			renderRequest.setAttribute("no",ParamUtil.getString(renderRequest, "no"));
+			renderRequest.setAttribute("materialId",ParamUtil.getString(renderRequest, "materialId"));
+			renderRequest.setAttribute("materialName",ParamUtil.getString(renderRequest, "materialName"));
+			renderRequest.setAttribute("fileExtension",ParamUtil.getString(renderRequest, "fileExtension"));
+			include("/portlet/permit-application/uploadResult.jsp", renderRequest, renderResponse);
+		}
+		else {
+		super.doView(renderRequest, renderResponse);}
 	}
 
 	// 保存收件sj
@@ -460,6 +486,91 @@ public class PermitApprovalPortlet extends MVCPortlet {
 		document.close();
 	}
 	
+	public void addDLFileEntry(ActionRequest actionRequest, ActionResponse actionResponse) {
+		try {
+			UploadPortletRequest uploadPortletRequest = PortalUtil.getUploadPortletRequest(actionRequest);
+			String sourceFileName = uploadPortletRequest.getFileName("file");
+			File file = uploadPortletRequest.getFile("file");
+			ServiceContext serviceContext = ServiceContextFactory.getInstance(DLFileEntry.class.getName(), actionRequest);
+			String[] groupPermissions = { "VIEW" };
+			serviceContext.setGroupPermissions(groupPermissions);
+			String materialId=ParamUtil.getString(actionRequest, "materialId");
+			String fileProperty=ParamUtil.getString(actionRequest, "fileProperty");
+			
+			/*actionResponse.setRenderParameter("materialId", materialId);*/
+			byte[] fileBytes = null;
+			long fileSize=0l;
+			FileEntry fileEntry=null;
+			if (null != file) {
+				fileBytes = FileUtil.getBytes(file);
+				fileSize=fileBytes.length/1024/1024;
+			}
+			String fileTitle = "";
+			
+			String fileExtension=sourceFileName.substring(sourceFileName.lastIndexOf(".")+1).toUpperCase().trim();
+			String upLoadMessage="上传成功！";
+			Boolean upLoadStatus=true;
+			if(!fileExtension.equals("JPG")&&!fileExtension.equals("PDF")){
+				upLoadMessage="文件上传仅限于jpg或者pdf格式！";
+				upLoadStatus=false;
+	        }else if(fileExtension.equals("JPG")){
+	        	if(fileSize>2){	
+	        		upLoadMessage="上传的jpg文件超过2M,请压缩后上传！";
+	        		upLoadStatus=false;
+	        	}
+	        }else if(fileExtension.equals("PDF")){
+	        	if(fileSize>20){	
+	        		upLoadMessage="上传的pdf文件超过20M,请压缩或拆分后上传！";
+	        		upLoadStatus=false;
+	        	}
+	        }
+			if (!materialId.equals("0")&upLoadStatus) {
+				ApplyMaterial applyMaterial = ApplyMaterialLocalServiceUtil.getApplyMaterial(Long
+					.valueOf(materialId));
+				String fileEntryIds="";
+				
+				if(fileProperty.equals("jgzxFile")){
+					 fileTitle = applyMaterial.getClmc() +"补正材料(建管中心)"+ "-" + ParamUtil.getString(actionRequest, "no") + "." + fileExtension.toLowerCase();
+					 fileEntryIds = applyMaterial.getBzclIds();
+				}else if(fileProperty.equals("wjscFile")){
+					 fileTitle = applyMaterial.getClmc() +"补正材料(委建设处)"+ "-" + ParamUtil.getString(actionRequest, "no") + "." + fileExtension.toLowerCase();
+					 fileEntryIds = applyMaterial.getWjscbzclIds();
+				}
+	
+				 fileEntry=uploadFile(actionRequest, sourceFileName, fileBytes, serviceContext, "permitapplication_WAR_cpportlet", materialId, fileTitle);	
+				// 添加第一条数据时
+				 if (Validator.isNull(fileEntryIds)) {
+						fileEntryIds = fileEntry.getFileEntryId() + "|" + fileEntry.getExtension();
+					}
+					// 如果已有数据
+					else {
+						fileEntryIds = fileEntryIds + "," + fileEntry.getFileEntryId() + "|" + fileEntry.getExtension();						
+					}
+				 if(fileProperty.equals("jgzxFile")){
+					 applyMaterial.setBzclIds(fileEntryIds);
+					 actionResponse.setRenderParameter("materialName", applyMaterial.getClmc()+"补正材料(建管中心)");
+				}else if(fileProperty.equals("wjscFile")){
+					applyMaterial.setWjscbzclIds(fileEntryIds);
+					actionResponse.setRenderParameter("materialName", applyMaterial.getClmc()+"补正材料(委建设处)");
+				}
+				ApplyMaterialLocalServiceUtil.updateApplyMaterial(applyMaterial); 
+				actionResponse.setRenderParameter("fieId", Long.toString(fileEntry.getFileEntryId()));
+				actionResponse.setRenderParameter("name", sourceFileName);
+				actionResponse.setRenderParameter("divNo", ParamUtil.getString(actionRequest, "divNo"));
+				actionResponse.setRenderParameter("no", ParamUtil.getString(actionRequest, "no"));
+				actionResponse.setRenderParameter("fileExtension", fileExtension.toLowerCase());
+			}
+			actionResponse.setRenderParameter("path", "uploadResult");
+			actionResponse.setRenderParameter("upLoadMessage", upLoadMessage);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+	
+	
 	@Override
 	public void serveResource(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException,
 			PortletException {
@@ -604,69 +715,7 @@ public class PermitApprovalPortlet extends MVCPortlet {
 				ServletResponseUtil.sendFile(req, res, fileName, baos.toByteArray(),
 						ContentTypes.APPLICATION_VND_MS_EXCEL);
 			}
-			// 上传建管中心补正材料文件
-			if ("fileBzclUpLoad".equals(resourceId)) {
-				UploadPortletRequest uploadPortletRequest = PortalUtil.getUploadPortletRequest(resourceRequest);
-
-				ServiceContext serviceContext;
-				String bzclResponseStr="";
-				serviceContext = ServiceContextFactory.getInstance(Permit.class.getName(), resourceRequest);
-				FileEntry fileEntry = null;
-				// 对应的是第几类材料的div
-				String divNo = ParamUtil.get(resourceRequest, "divNo", "");
-				// 文件材料的名称编号
-				String no = ParamUtil.get(resourceRequest, "no", "");
-				String fileExtension = ParamUtil.get(resourceRequest, "fileExtension", "");
-				String materialId = ParamUtil.get(resourceRequest, "materialId", "0");
-				String portletId = ParamUtil.get(resourceRequest, "portletId", "");
-				fileSourceName = uploadPortletRequest.getFileName("fileBzclInput"+divNo);
-				InputStream stream = uploadPortletRequest.getFileAsStream("fileBzclInput"+divNo);
-				
-				
-				/*
-				 * fileSourceName =
-				 * uploadPortletRequest.getFileName("fileInput"+divNo);
-				 * InputStream stream =
-				 * uploadPortletRequest.getFileAsStream("fileInput"+divNo);
-				 */
-				byte[] fileBytes = null;
-				if (null != stream) {
-					fileBytes = FileUtil.getBytes(stream);
-				}
-				if (!materialId.equals("0")) {
-					ApplyMaterial applyMaterial = ApplyMaterialLocalServiceUtil.getApplyMaterial(Long
-							.valueOf(materialId));
-					String fileTitle = applyMaterial.getClmc() + "建管中心补正材料-" + no + "." + fileExtension;
-
-					fileEntry = uploadFile(resourceRequest, fileSourceName, fileBytes, serviceContext, portletId,
-							materialId, fileTitle);
-
-					String bzclIds = applyMaterial.getBzclIds();
-					// 添加第一条数据时
-					if (Validator.isNull(bzclIds)) {
-						bzclIds = fileEntry.getFileEntryId() + "|" + fileEntry.getExtension();
-					}
-					// 如果已有数据
-					else {
-						bzclIds = bzclIds + "," + fileEntry.getFileEntryId() + "|" + fileEntry.getExtension();	
-					}
-					/*fileJson.put("fileBzclId", fileEntry.getFileEntryId());*/
-					bzclResponseStr+=fileEntry.getFileEntryId();
-					applyMaterial.setBzclIds(bzclIds);
-					ApplyMaterialLocalServiceUtil.updateApplyMaterial(applyMaterial);
-					/*fileJson.put("materialName", applyMaterial.getClmc());*/
-					bzclResponseStr+="|"+applyMaterial.getClmc();
-				}
-				System.out.println(bzclResponseStr);
-				HttpServletResponse response = PortalUtil.getHttpServletResponse(resourceResponse);
-				response.setContentType("text/html");
-				String domainString="<script>document.domain='jtjg.sh.cn';</script>";
-				PrintWriter out = null;
-				out = response.getWriter();
-				out.print(domainString+bzclResponseStr);
-				out.flush();
-				out.close();
-			}
+			
 
 			// 删除建管中心补正材料文件
 			if ("fileBzclDelete".equals(resourceId)) {
@@ -691,69 +740,6 @@ public class PermitApprovalPortlet extends MVCPortlet {
 					DLFileEntryLocalServiceUtil.deleteDLFileEntry(Long.valueOf(fileId));
 				}
 			}
-			
-			
-			// 上传委建设处补正材料文件
-			if ("fileWjscbzclUpLoad".equals(resourceId)) {
-				UploadPortletRequest uploadPortletRequest = PortalUtil.getUploadPortletRequest(resourceRequest);
-
-				ServiceContext serviceContext;
-				String wjscbzclResponseStr="";
-				serviceContext = ServiceContextFactory.getInstance(Permit.class.getName(), resourceRequest);
-				FileEntry fileEntry = null;
-				// 对应的是第几类材料的div
-				String divNo = ParamUtil.get(resourceRequest, "divNo", "");
-				// 文件材料的名称编号
-				String no = ParamUtil.get(resourceRequest, "no", "");
-				String fileExtension = ParamUtil.get(resourceRequest, "fileExtension", "");
-				String materialId = ParamUtil.get(resourceRequest, "materialId", "0");
-				String portletId = ParamUtil.get(resourceRequest, "portletId", "");
-				fileSourceName = uploadPortletRequest.getFileName("fileWjscbzclInput"+divNo);
-				InputStream stream = uploadPortletRequest.getFileAsStream("fileWjscbzclInput"+divNo);
-				/*
-				 * fileSourceName =
-				 * uploadPortletRequest.getFileName("fileInput"+divNo);
-				 * InputStream stream =
-				 * uploadPortletRequest.getFileAsStream("fileInput"+divNo);
-				 */
-				byte[] fileBytes = null;
-				if (null != stream) {
-					fileBytes = FileUtil.getBytes(stream);
-				}
-				if (!materialId.equals("0")) {
-					ApplyMaterial applyMaterial = ApplyMaterialLocalServiceUtil.getApplyMaterial(Long
-							.valueOf(materialId));
-					String fileTitle = applyMaterial.getClmc() + "补正材料(委建设处)-" + no + "." + fileExtension;
-
-					fileEntry = uploadFile(resourceRequest, fileSourceName, fileBytes, serviceContext, portletId,
-							materialId, fileTitle);
-
-					String wjscbzclIds = applyMaterial.getWjscbzclIds();
-					// 添加第一条数据时
-					if (Validator.isNull(wjscbzclIds)) {
-						wjscbzclIds = fileEntry.getFileEntryId() + "|" + fileEntry.getExtension();
-					}
-					// 如果已有数据
-					else {
-						wjscbzclIds = wjscbzclIds + "," + fileEntry.getFileEntryId() + "|" + fileEntry.getExtension();						
-					}
-					/*fileJson.put("fileWjscbzclId", fileEntry.getFileEntryId());*/
-					wjscbzclResponseStr+=fileEntry.getFileEntryId();
-					applyMaterial.setWjscbzclIds(wjscbzclIds);
-					ApplyMaterialLocalServiceUtil.updateApplyMaterial(applyMaterial);
-					/*fileJson.put("materialName", applyMaterial.getClmc());*/
-					wjscbzclResponseStr+="|"+applyMaterial.getClmc();
-				}
-
-				HttpServletResponse response = PortalUtil.getHttpServletResponse(resourceResponse);
-				response.setContentType("text/html");
-				String domainString="<script>document.domain='jtjg.sh.cn';</script>";
-				PrintWriter out = null;
-				out = response.getWriter();
-				out.print(domainString+wjscbzclResponseStr);
-				out.flush();
-				out.close();
-			}			
 			
 			//删除委建设处材料文件
 			if ("fileWjscbzclDelete".equals(resourceId)) {
@@ -797,7 +783,7 @@ public class PermitApprovalPortlet extends MVCPortlet {
 		super.serveResource(resourceRequest, resourceResponse);
 	}
 
-	public FileEntry uploadFile(ResourceRequest request, String fileSourceName, byte[] fileBytes,
+	public FileEntry uploadFile(ActionRequest request, String fileSourceName, byte[] fileBytes,
 			ServiceContext serviceContext, String portletId, String materialId, String fileTitle)
 			throws PortalException, SystemException, IOException {
 		serviceContext.setAddGuestPermissions(true);
@@ -835,4 +821,16 @@ public class PermitApprovalPortlet extends MVCPortlet {
 		}
 		return fileEntry;
 	}
+	public void include(String path, RenderRequest renderRequest, RenderResponse renderResponse) throws IOException,
+	PortletException {
+		PortletRequestDispatcher portletRequestDispatcher = getPortletContext().getRequestDispatcher(path);
+		if (portletRequestDispatcher == null) {
+		} else {
+	portletRequestDispatcher.include(renderRequest, renderResponse);
+		}
+}
+	
+	
+	
+	
 }
