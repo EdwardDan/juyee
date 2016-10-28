@@ -2,6 +2,16 @@
 <%@ include file="/common/init.jsp"%>
 <%@ include file="init.jsp"%>
 
+<%
+String backUrl_dynamic=PortalUtil.getCurrentURL(renderRequest); 
+%>
+
+<a href="<%=backUrl_dynamic%>" id="refreshCurrentPage"></a>
+
+
+
+
+
 <style>
 .aui .table th, .aui .table td {
 	vertical-align: middle;
@@ -101,6 +111,9 @@
 
 	}
 %>
+
+
+
  <%@page import="com.liferay.portal.kernel.portlet.LiferayWindowState"%>
   <portlet:renderURL var="loginURL" windowState="<%=LiferayWindowState.POP_UP.toString()%>">
    <portlet:param name="path" value="uploadFile" />
@@ -109,16 +122,11 @@
 <aui:script>
 Liferay.provide(window,'<portlet:namespace/>closeYourPopUp',
 	    function(data, dialogId) {
-		var A = AUI();
-		var fileId=data.split('/')[4];var materialName=data.split('/')[1]; var divNo=data.split('/')[2]; var fileExtension=data.split('/')[3];var materialId=data.split('/')[0];var no=data.split('/')[5];
-		var ele = "<div name='file"+divNo+"'><a class='fileName' href='javascript:void(0);'>"
-		+ materialName+"-"+no+"."+fileExtension
-		+ "</a> &nbsp;&nbsp;&nbsp;<a href='javascript:void(0)';  onclick='${renderResponse.namespace}fileDelete(this,"
-		+ fileId + ","+materialId+")'>删除</a></div>"; 
-    	 $("#fileDiv" + divNo).append(ele);
-			domSort(divNo);  
+		alert(123);
+		var A = AUI(); 
 		var dialog = Liferay.Util.Window.getById(dialogId);
 		dialog.destroy();
+		document.getElementById("refreshCurrentPage").click();
 	},
 	['liferay-util-window']
 );
