@@ -149,26 +149,34 @@ public class PermitApplicationPortlet extends MVCPortlet {
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
 		String path = ParamUtil.getString(renderRequest, "path");
 		if (path.contains("uploadFile")) {
-			String[] pathParam=path.split("\\/");
-			String divNo=pathParam[0].substring(pathParam[0].length()-1);
-			String materialId=pathParam[1];
-			String no=pathParam[2];
-			renderRequest.setAttribute("divNo",divNo); 
-			renderRequest.setAttribute("materialId", materialId);
-			renderRequest.setAttribute("no", no);
+			path=path.replace("uploadFile", "");
+			if(Validator.isNotNull(path)){
+				String[] pathParam=path.split("\\/");
+				String divNo=pathParam[0];
+				String materialId=pathParam[1];
+				String no=pathParam[2];
+				renderRequest.setAttribute("divNo",divNo); 
+				renderRequest.setAttribute("materialId", materialId);
+				renderRequest.setAttribute("no", no);
+			}else{
+				renderRequest.setAttribute("divNo",ParamUtil.getString(renderRequest, "divNo"));
+				renderRequest.setAttribute("materialId",ParamUtil.getString(renderRequest, "materialId"));
+				renderRequest.setAttribute("no",ParamUtil.getString(renderRequest, "no"));
+				renderRequest.setAttribute("upLoadMessage",ParamUtil.getString(renderRequest, "upLoadMessage"));
+			}
 			include("/portlet/permit-application/uploadFile.jsp", renderRequest, renderResponse);
 		}
-		else if (path.contains("uploadResult")) {
-			renderRequest.setAttribute("name",ParamUtil.getString(renderRequest, "name"));
-			renderRequest.setAttribute("upLoadMessage",ParamUtil.getString(renderRequest, "upLoadMessage"));
-			renderRequest.setAttribute("fieId",ParamUtil.getString(renderRequest, "fieId"));
-			renderRequest.setAttribute("divNo",ParamUtil.getString(renderRequest, "divNo"));
-			renderRequest.setAttribute("no",ParamUtil.getString(renderRequest, "no"));
-			renderRequest.setAttribute("materialId",ParamUtil.getString(renderRequest, "materialId"));
-			renderRequest.setAttribute("materialName",ParamUtil.getString(renderRequest, "materialName"));
-			renderRequest.setAttribute("fileExtension",ParamUtil.getString(renderRequest, "fileExtension"));
-			include("/portlet/permit-application/uploadResult.jsp", renderRequest, renderResponse);
-		}
+//		else if (path.contains("uploadResult")) {
+//			renderRequest.setAttribute("name",ParamUtil.getString(renderRequest, "name"));
+//			renderRequest.setAttribute("upLoadMessage",ParamUtil.getString(renderRequest, "upLoadMessage"));
+//			renderRequest.setAttribute("fieId",ParamUtil.getString(renderRequest, "fieId"));
+//			renderRequest.setAttribute("divNo",ParamUtil.getString(renderRequest, "divNo"));
+//			renderRequest.setAttribute("no",ParamUtil.getString(renderRequest, "no"));
+//			renderRequest.setAttribute("materialId",ParamUtil.getString(renderRequest, "materialId"));
+//			renderRequest.setAttribute("materialName",ParamUtil.getString(renderRequest, "materialName"));
+//			renderRequest.setAttribute("fileExtension",ParamUtil.getString(renderRequest, "fileExtension"));
+//			include("/portlet/permit-application/uploadResult.jsp", renderRequest, renderResponse);
+//		}
 		else {
 
 		String bjbh = ParamUtil.getString(renderRequest, "bjbh");
@@ -1008,6 +1016,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 			serviceContext.setGroupPermissions(groupPermissions);
 			String materialId=ParamUtil.getString(actionRequest, "materialId");
 			actionResponse.setRenderParameter("materialId", materialId);
+			String no=ParamUtil.getString(actionRequest, "no");
 			byte[] fileBytes = null;
 			long fileSize=0l;
 			FileEntry fileEntry=null;
@@ -1039,7 +1048,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 				
 				ApplyMaterial applyMaterial = ApplyMaterialLocalServiceUtil.getApplyMaterial(Long
 						.valueOf(materialId));
-				 fileTitle = applyMaterial.getClmc() + "-" + ParamUtil.getString(actionRequest, "no") + "." + fileExtension.toLowerCase();
+				 fileTitle = applyMaterial.getClmc() + "-" + no + "." + fileExtension.toLowerCase();
 				 fileEntry=uploadFile(actionRequest, sourceFileName, fileBytes, serviceContext, "permitapplication_WAR_cpportlet", materialId, fileTitle);	
 				 String fileEntryIds = applyMaterial.getFileEntryIds();
 						// 添加第一条数据时
@@ -1052,14 +1061,17 @@ public class PermitApplicationPortlet extends MVCPortlet {
 						}
 						applyMaterial.setFileEntryIds(fileEntryIds);
 						ApplyMaterialLocalServiceUtil.updateApplyMaterial(applyMaterial);
+						no=(Integer.valueOf(no)+1)+"";	
 				 actionResponse.setRenderParameter("materialName", applyMaterial.getClmc());
 				 actionResponse.setRenderParameter("fieId", Long.toString(fileEntry.getFileEntryId()));
 				 actionResponse.setRenderParameter("name", sourceFileName);
-					actionResponse.setRenderParameter("divNo", ParamUtil.getString(actionRequest, "divNo"));
-					actionResponse.setRenderParameter("no", ParamUtil.getString(actionRequest, "no"));
-					actionResponse.setRenderParameter("fileExtension", fileExtension.toLowerCase());
+				actionResponse.setRenderParameter("divNo", ParamUtil.getString(actionRequest, "divNo"));
+				actionResponse.setRenderParameter("no", no);
+				actionResponse.setRenderParameter("fileExtension", fileExtension.toLowerCase());
+				SessionMessages.add(actionRequest, "request_processed",applyMaterial.getClmc()+"上传成功！"); 	
 			}
-			actionResponse.setRenderParameter("path", "uploadResult");
+			SessionMessages.add(actionRequest, "completeapplication_WAR_cpportlet" + SessionMessages. KEY_SUFFIX_HIDE_DEFAULT_ERROR_MESSAGE);
+			actionResponse.setRenderParameter("path", "uploadFile");
 			actionResponse.setRenderParameter("upLoadMessage", upLoadMessage);
 		} catch (Exception e) {
 			e.printStackTrace();
