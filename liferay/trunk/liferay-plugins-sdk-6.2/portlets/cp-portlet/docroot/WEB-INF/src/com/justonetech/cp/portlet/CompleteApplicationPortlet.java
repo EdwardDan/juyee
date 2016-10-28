@@ -48,6 +48,7 @@ import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.portlet.LiferayPortletConfig;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.search.ParseException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
@@ -73,12 +74,14 @@ import com.liferay.portal.service.UserNotificationEventLocalServiceUtil;
 import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.PortletConfigFactoryUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryTypeConstants;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
+import com.liferay.portlet.portletconfiguration.util.PortletConfigurationUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 public class CompleteApplicationPortlet extends MVCPortlet {
@@ -90,10 +93,24 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 		 String path = ParamUtil.getString(renderRequest, "path");
+		 System.out.println(path);
 			if (path.contains("uploadFile")) {
-				renderRequest.setAttribute("divNo",path.substring(path.indexOf("e")+1,path.indexOf("/"))); 
-				renderRequest.setAttribute("materialId", path.substring(path.indexOf("/")+1,path.lastIndexOf("/")));
-				renderRequest.setAttribute("no", path.substring(path.lastIndexOf("/")+1));
+				path=path.replace("uploadFile", "");
+				if(Validator.isNotNull(path)){
+					String[] pathParam=path.split("\\/");
+					String divNo=pathParam[0];
+					String materialId=pathParam[1];
+					String no=pathParam[2];
+					String completeId=pathParam[3];
+					renderRequest.setAttribute("divNo",divNo); 
+					renderRequest.setAttribute("materialId", materialId);
+					renderRequest.setAttribute("no", no);
+				}else{
+					renderRequest.setAttribute("divNo",ParamUtil.getString(renderRequest, "divNo"));
+					renderRequest.setAttribute("materialId",ParamUtil.getString(renderRequest, "materialId"));
+					renderRequest.setAttribute("no",ParamUtil.getString(renderRequest, "no"));
+					renderRequest.setAttribute("upLoadMessage",ParamUtil.getString(renderRequest, "upLoadMessage"));
+				}
 				include("/portlet/complete-application/uploadFile.jsp", renderRequest, renderResponse);
 			}
 			else if (path.contains("uploadResult")) {
@@ -649,6 +666,7 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 			serviceContext.setGroupPermissions(groupPermissions);
 			String materialId=ParamUtil.getString(actionRequest, "materialId");
 			actionResponse.setRenderParameter("materialId", materialId);
+			String no=ParamUtil.getString(actionRequest, "no");
 			byte[] fileBytes = null;
 			long fileSize=0l;
 			FileEntry fileEntry=null;
@@ -669,13 +687,13 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 	        	if(fileSize>2){	
 	        		upLoadMessage="上传的jpg文件超过2M,请压缩后上传！";
 	        		upLoadStatus=false;
-	        		SessionErrors.add(actionRequest, "error-key-2"); 
+	        		SessionErrors.add(actionRequest, "error-key"); 
 	        	}
 	        }else if(fileExtension.equals("PDF")){
 	        	if(fileSize>20){	
 	        		upLoadMessage="上传的pdf文件超过20M,请压缩或拆分后上传！";
 	        		upLoadStatus=false;
-	        		SessionErrors.add(actionRequest, "error-key-3"); 
+	        		SessionErrors.add(actionRequest, "error-key"); 
 	        	}
 	        }
 
@@ -695,15 +713,24 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 						}
 						completeApplyMaterial.setFileEntryIds(fileEntryIds);
 						CompleteApplyMaterialLocalServiceUtil.updateCompleteApplyMaterial(completeApplyMaterial);
+						 no=(Integer.valueOf(no)+1)+"";	
+						 System.out.println(no);
 				 actionResponse.setRenderParameter("materialName", completeApplyMaterial.getClmc());
 				 actionResponse.setRenderParameter("fieId", Long.toString(fileEntry.getFileEntryId()));
 				 actionResponse.setRenderParameter("name", sourceFileName);
 					actionResponse.setRenderParameter("divNo", ParamUtil.getString(actionRequest, "divNo"));
-					actionResponse.setRenderParameter("no", ParamUtil.getString(actionRequest, "no"));
+					actionResponse.setRenderParameter("no", no);
 					actionResponse.setRenderParameter("fileExtension", fileExtension.toLowerCase());
+					//删除掉默认的成功信息
+					//SessionMessages.add(actionRequest, "completeapplication_WAR_cpportlet" + SessionMessages.KEY_SUFFIX_HIDE_DEFAULT_SUCCESS_MESSAGE);
+					//覆盖掉默认的成功信息
 					SessionMessages.add(actionRequest, "request_processed",completeApplyMaterial.getClmc()+"上传成功！"); 
+					
+					
 			}
-			actionResponse.setRenderParameter("path", "uploadResult");
+			//SessionErrors.add(actionRequest, "error-key","this is the error message");
+			SessionMessages.add(actionRequest, "completeapplication_WAR_cpportlet" + SessionMessages. KEY_SUFFIX_HIDE_DEFAULT_ERROR_MESSAGE);
+						actionResponse.setRenderParameter("path", "uploadFile");
 			actionResponse.setRenderParameter("upLoadMessage", upLoadMessage);
 		} catch (Exception e) {
 			e.printStackTrace();
