@@ -280,6 +280,23 @@ Liferay.provide(window,'<portlet:namespace/>closeYourPopUp',
 						</td>
 						<td style="text-align: center"><aui:button
 								name="uploadJGZXFile${status.index+1}" type="button" value="上传" /></td>
+								<aui:script use="liferay-util-window">
+				A.one('#<portlet:namespace/>uploadJGZXFile${status.index+1}').on('click', function(event) {
+					var no = findFileNo('${status.index+1}');
+				    <!-- alert("open"); -->
+					Liferay.Util.openWindow({
+						dialog: {
+							centered: true,
+							height: 500,
+							modal: true,
+							width: 500
+						},
+						id: '<portlet:namespace/>dialog',
+						title: '文件上传',
+						uri: '<%=uploadURL %>${status.index+1}/${material.materialId}/'+no+'/jgzxFile'
+					});
+				});
+				</aui:script>
 					</c:if>
 
 
@@ -317,7 +334,7 @@ Liferay.provide(window,'<portlet:namespace/>closeYourPopUp',
 
 
 
-					<%-- <c:if test="${permit.status==13}">   需要恢复--%>
+					 <c:if test="${permit.status==13}">  
 						<td style="text-align: center">
 							<div id="fileDivWjscbzcl${status.index+1}">
 								<!-- todo
@@ -338,28 +355,8 @@ Liferay.provide(window,'<portlet:namespace/>closeYourPopUp',
 						</td>
 						<td style="text-align: center"><aui:button
 								name="uploadWJSCFile${status.index+1}" type="button" value="上传" /></td>
-					</c:if>
-				<%-- </c:if> --%>
-			</tr>
-
-			<aui:script use="liferay-util-window">
-				A.one('#<portlet:namespace/>uploadJGZXFile${status.index+1}').on('click', function(event) {
-					var no = findFileNo('${status.index+1}');
-				    <!-- alert("open"); -->
-					Liferay.Util.openWindow({
-						dialog: {
-							centered: true,
-							height: 500,
-							modal: true,
-							width: 500
-						},
-						id: '<portlet:namespace/>dialog',
-						title: '文件上传',
-						uri: '<%=uploadURL %>${status.index+1}/${material.materialId}/'+no+'/jgzxFile'
-					});
-				});
-				
-				A.one('#<portlet:namespace/>uploadWJSCFile${status.index+1}').on('click', function(event) {
+								<aui:script use="liferay-util-window">
+								A.one('#<portlet:namespace/>uploadWJSCFile${status.index+1}').on('click', function(event) {
 					var no = findFileWjscbzclNo('${status.index+1}');
 				    <!-- alert("open"); -->
 					Liferay.Util.openWindow({
@@ -375,6 +372,13 @@ Liferay.provide(window,'<portlet:namespace/>closeYourPopUp',
 					});
 				});
 			</aui:script>
+					</c:if>
+				 </c:if>
+			</tr>
+
+			
+				
+				
 </c:forEach>
 
 	</table>
