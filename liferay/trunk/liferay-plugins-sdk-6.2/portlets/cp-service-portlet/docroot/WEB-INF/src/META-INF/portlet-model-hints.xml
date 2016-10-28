@@ -217,7 +217,9 @@
 		<field name="lxpw" type="String">
 			<hint name="max-length">300</hint>
 		</field>
-		<field name="pzwh" type="String" />
+		<field name="pzwh" type="String">
+		<hint name="max-length">100</hint>
+		</field>
 		<field name="dwxz" type="String" />
 		<field name="zjlygc" type="String" />
 		<field name="ztz" type="String" />
@@ -231,7 +233,9 @@
 		<field name="cbfs" type="String" />
 		<field name="zycbht" type="String" />
 		<field name="zygclb" type="String" />
-		<field name="htmc" type="String" />
+		<field name="htmc" type="String">
+		<hint name="max-length">200</hint>
+		</field>
 		<field name="fbdw" type="String" />
 		<field name="cbdw" type="String">
 			<hint name="max-length">300</hint>
