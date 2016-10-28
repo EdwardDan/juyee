@@ -2,12 +2,6 @@
 <%@ include file="/common/init.jsp"%>
 <%@ include file="init.jsp"%>
 
-
-<%
-String backUrl_dynamic=PortalUtil.getCurrentURL(renderRequest); 
-%>
-
-<a href="<%=backUrl_dynamic%>" id="refreshCurrentPage"></a>
 <style>
 .aui .table th, .aui .table td {
 	vertical-align: middle;
