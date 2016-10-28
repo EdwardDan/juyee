@@ -46,6 +46,8 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.servlet.ServletResponseUtil;
+import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.DateUtil;
@@ -83,18 +85,27 @@ public class PermitApprovalPortlet extends MVCPortlet {
 		// TODO Auto-generated method stub
 		String path = ParamUtil.getString(renderRequest, "path");
 		if (path.contains("uploadFile")) {
-			String[] pathParam=path.split("\\/");
-			String divNo=pathParam[0].substring(pathParam[0].length()-1);
-			String materialId=pathParam[1];
-			String no=pathParam[2];
-			String uploadfileType=pathParam[3];
-			renderRequest.setAttribute("divNo",divNo); 
-			renderRequest.setAttribute("materialId", materialId);
-			renderRequest.setAttribute("no", no);
-			renderRequest.setAttribute("uploadfileType",uploadfileType);
+			path=path.replace("uploadFile", "");
+			if(Validator.isNotNull(path)){
+				String[] pathParam=path.split("\\/");
+				String divNo=pathParam[0];
+				String materialId=pathParam[1];
+				String no=pathParam[2];
+				String uploadfileType=pathParam[3];
+				renderRequest.setAttribute("divNo",divNo); 
+				renderRequest.setAttribute("materialId", materialId);
+				renderRequest.setAttribute("no", no);
+				renderRequest.setAttribute("uploadfileType",uploadfileType);
+			}else{
+				renderRequest.setAttribute("divNo",ParamUtil.getString(renderRequest, "divNo"));
+				renderRequest.setAttribute("materialId",ParamUtil.getString(renderRequest, "materialId"));
+				renderRequest.setAttribute("no",ParamUtil.getString(renderRequest, "no"));
+				renderRequest.setAttribute("upLoadMessage",ParamUtil.getString(renderRequest, "upLoadMessage"));
+				renderRequest.setAttribute("uploadfileType",ParamUtil.getString(renderRequest, "uploadfileType"));
+			}
 			include("/portlet/permit-approval/view-permit/uploadFile.jsp", renderRequest, renderResponse);
 		}
-		else if (path.contains("uploadResult")) {
+		/*else if (path.contains("uploadResult")) {
 			renderRequest.setAttribute("name",ParamUtil.getString(renderRequest, "name"));
 			renderRequest.setAttribute("upLoadMessage",ParamUtil.getString(renderRequest, "upLoadMessage"));
 			renderRequest.setAttribute("fieId",ParamUtil.getString(renderRequest, "fieId"));
@@ -105,7 +116,7 @@ public class PermitApprovalPortlet extends MVCPortlet {
 			renderRequest.setAttribute("fileExtension",ParamUtil.getString(renderRequest, "fileExtension"));
 			renderRequest.setAttribute("uploadfileType",ParamUtil.getString(renderRequest, "uploadfileType"));
 			include("/portlet/permit-approval/view-permit/uploadResult.jsp", renderRequest, renderResponse);
-		}
+		}*/
 		else {
 		super.doView(renderRequest, renderResponse);}
 	}
@@ -497,6 +508,7 @@ public class PermitApprovalPortlet extends MVCPortlet {
 			serviceContext.setGroupPermissions(groupPermissions);
 			String materialId=ParamUtil.getString(actionRequest, "materialId");
 			String uploadfileType=ParamUtil.getString(actionRequest, "uploadfileType");
+			String no=ParamUtil.getString(actionRequest, "no");
 			byte[] fileBytes = null;
 			long fileSize=0l;
 			FileEntry fileEntry=null;
@@ -512,24 +524,24 @@ public class PermitApprovalPortlet extends MVCPortlet {
 			if(!fileExtension.equals("JPG")&&!fileExtension.equals("PDF")){
 				upLoadMessage="文件上传仅限于jpg或者pdf格式！";
 				upLoadStatus=false;
+				SessionErrors.add(actionRequest, "error-key");
 	        }else if(fileExtension.equals("JPG")){
 	        	if(fileSize>2){	
 	        		upLoadMessage="上传的jpg文件超过2M,请压缩后上传！";
 	        		upLoadStatus=false;
+	        		SessionErrors.add(actionRequest, "error-key");
 	        	}
 	        }else if(fileExtension.equals("PDF")){
 	        	if(fileSize>20){	
 	        		upLoadMessage="上传的pdf文件超过20M,请压缩或拆分后上传！";
 	        		upLoadStatus=false;
+	        		SessionErrors.add(actionRequest, "error-key");
 	        	}
 	        }
 			if (!materialId.equals("0")&upLoadStatus) {
 				ApplyMaterial applyMaterial = ApplyMaterialLocalServiceUtil.getApplyMaterial(Long
 					.valueOf(materialId));
 				String fileEntryIds="";
-				
-				System.out.println(uploadfileType);
-				
 				if(uploadfileType.equals("jgzxFile")){
 					 fileTitle = applyMaterial.getClmc() +"补正材料(建管中心)"+ "-" + ParamUtil.getString(actionRequest, "no") + "." + fileExtension.toLowerCase();
 					 fileEntryIds = applyMaterial.getBzclIds();
@@ -555,15 +567,18 @@ public class PermitApprovalPortlet extends MVCPortlet {
 					actionResponse.setRenderParameter("materialName", applyMaterial.getClmc()+"补正材料(委建设处)");
 				}
 				ApplyMaterialLocalServiceUtil.updateApplyMaterial(applyMaterial); 
+				no=(Integer.valueOf(no)+1)+"";	
 				actionResponse.setRenderParameter("materialId", materialId);
 				actionResponse.setRenderParameter("fieId", Long.toString(fileEntry.getFileEntryId()));
 				actionResponse.setRenderParameter("name", sourceFileName);
 				actionResponse.setRenderParameter("divNo", ParamUtil.getString(actionRequest, "divNo"));
-				actionResponse.setRenderParameter("no", ParamUtil.getString(actionRequest, "no"));
+				actionResponse.setRenderParameter("no", no);
 				actionResponse.setRenderParameter("fileExtension", fileExtension.toLowerCase());
+				SessionMessages.add(actionRequest, "request_processed",applyMaterial.getClmc()+"上传成功！"); 
 			}
+			SessionMessages.add(actionRequest, "permitapproval_WAR_cpportlet" + SessionMessages. KEY_SUFFIX_HIDE_DEFAULT_ERROR_MESSAGE);
 			actionResponse.setRenderParameter("uploadfileType", uploadfileType);
-			actionResponse.setRenderParameter("path", "uploadResult");
+			actionResponse.setRenderParameter("path", "uploadFile");
 			actionResponse.setRenderParameter("upLoadMessage", upLoadMessage);
 		} catch (Exception e) {
 			e.printStackTrace();
