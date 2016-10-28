@@ -122,7 +122,6 @@ String backUrl_dynamic=PortalUtil.getCurrentURL(renderRequest);
 <aui:script>
 Liferay.provide(window,'<portlet:namespace/>closeYourPopUp',
 	    function(data, dialogId) {
-		alert(123);
 		var A = AUI(); 
 		var dialog = Liferay.Util.Window.getById(dialogId);
 		dialog.destroy();
