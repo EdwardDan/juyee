@@ -1,6 +1,13 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
 <%@ include file="init.jsp"%>
+
+
+<%
+String backUrl_dynamic=PortalUtil.getCurrentURL(renderRequest); 
+%>
+
+<a href="<%=backUrl_dynamic%>" id="refreshCurrentPage">跳转</a>
 <style>
 .aui .table th, .aui .table td {
 	vertical-align: middle;
@@ -85,15 +92,16 @@
 Liferay.provide(window,'<portlet:namespace/>closeYourPopUp',
 	    function(data, dialogId) {
 		var A = AUI();
-		var fileId=data.split('/')[4];var materialName=data.split('/')[1]; var divNo=data.split('/')[2]; var fileExtension=data.split('/')[3];var materialId=data.split('/')[0];var no=data.split('/')[5];
+		/* var fileId=data.split('/')[4];var materialName=data.split('/')[1]; var divNo=data.split('/')[2]; var fileExtension=data.split('/')[3];var materialId=data.split('/')[0];var no=data.split('/')[5];
 		var ele = "<div name='file"+divNo+"'><a class='fileName' href='javascript:void(0);'>"
 		+ materialName+"-"+no+"."+fileExtension
 		+ "</a> &nbsp;&nbsp;&nbsp;<a href='javascript:void(0)';  onclick='${renderResponse.namespace}fileDelete(this,"
 		+ fileId + ","+materialId+")'>删除</a></div>"; 
     	 $("#fileDiv" + divNo).append(ele);
-			domSort(divNo);  
+			domSort(divNo);   */
 		var dialog = Liferay.Util.Window.getById(dialogId);
 		dialog.destroy();
+		document.getElementById("refreshCurrentPage").click();
 	},
 	['liferay-util-window']
 );
@@ -174,7 +182,7 @@ A.one('#<portlet:namespace/>login${status.index+1}').on('click', function(event)
 		},
 		id: '<portlet:namespace/>dialog',
 		title: '文件上传',
-		uri: '<%=uploadFile %>${status.index+1}/${material.materialId}/'+no
+		uri: '<%=uploadFile %>${status.index+1}/${material.materialId}/'+no+'/${completeId}'
 	});
 });
 </aui:script>
