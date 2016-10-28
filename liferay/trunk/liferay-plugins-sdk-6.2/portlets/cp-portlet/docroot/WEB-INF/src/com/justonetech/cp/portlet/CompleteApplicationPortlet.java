@@ -93,7 +93,6 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 		 String path = ParamUtil.getString(renderRequest, "path");
-		 System.out.println(path);
 			if (path.contains("uploadFile")) {
 				path=path.replace("uploadFile", "");
 				if(Validator.isNotNull(path)){
@@ -101,7 +100,6 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 					String divNo=pathParam[0];
 					String materialId=pathParam[1];
 					String no=pathParam[2];
-					String completeId=pathParam[3];
 					renderRequest.setAttribute("divNo",divNo); 
 					renderRequest.setAttribute("materialId", materialId);
 					renderRequest.setAttribute("no", no);
@@ -113,7 +111,7 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 				}
 				include("/portlet/complete-application/uploadFile.jsp", renderRequest, renderResponse);
 			}
-			else if (path.contains("uploadResult")) {
+			/*else if (path.contains("uploadResult")) {
 				renderRequest.setAttribute("name",ParamUtil.getString(renderRequest, "name"));
 				renderRequest.setAttribute("upLoadMessage",ParamUtil.getString(renderRequest, "upLoadMessage"));
 				renderRequest.setAttribute("fieId",ParamUtil.getString(renderRequest, "fieId"));
@@ -123,7 +121,7 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 				renderRequest.setAttribute("materialName",ParamUtil.getString(renderRequest, "materialName"));
 				renderRequest.setAttribute("fileExtension",ParamUtil.getString(renderRequest, "fileExtension"));
 				include("/portlet/complete-application/uploadResult.jsp", renderRequest, renderResponse);
-			}
+			}*/
 			else {
 		User user = null;
 		try {
@@ -700,7 +698,7 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 			if (!materialId.equals("0")&upLoadStatus) {
 				CompleteApplyMaterial completeApplyMaterial = CompleteApplyMaterialLocalServiceUtil.getCompleteApplyMaterial(Long
 						.valueOf(materialId));
-				 fileTitle = completeApplyMaterial.getClmc() + "-" + ParamUtil.getString(actionRequest, "no") + "." + fileExtension.toLowerCase();
+				 fileTitle = completeApplyMaterial.getClmc() + "-" + no + "." + fileExtension.toLowerCase();
 				 fileEntry=uploadFile(actionRequest, sourceFileName, fileBytes, serviceContext, "completeapplication_WAR_cpportlet", materialId, fileTitle);	
 				 String fileEntryIds = completeApplyMaterial.getFileEntryIds();
 						// 添加第一条数据时
@@ -714,23 +712,20 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 						completeApplyMaterial.setFileEntryIds(fileEntryIds);
 						CompleteApplyMaterialLocalServiceUtil.updateCompleteApplyMaterial(completeApplyMaterial);
 						 no=(Integer.valueOf(no)+1)+"";	
-						 System.out.println(no);
 				 actionResponse.setRenderParameter("materialName", completeApplyMaterial.getClmc());
 				 actionResponse.setRenderParameter("fieId", Long.toString(fileEntry.getFileEntryId()));
 				 actionResponse.setRenderParameter("name", sourceFileName);
-					actionResponse.setRenderParameter("divNo", ParamUtil.getString(actionRequest, "divNo"));
-					actionResponse.setRenderParameter("no", no);
-					actionResponse.setRenderParameter("fileExtension", fileExtension.toLowerCase());
+				actionResponse.setRenderParameter("divNo", ParamUtil.getString(actionRequest, "divNo"));
+				actionResponse.setRenderParameter("no", no);
+				actionResponse.setRenderParameter("fileExtension", fileExtension.toLowerCase());
 					//删除掉默认的成功信息
 					//SessionMessages.add(actionRequest, "completeapplication_WAR_cpportlet" + SessionMessages.KEY_SUFFIX_HIDE_DEFAULT_SUCCESS_MESSAGE);
 					//覆盖掉默认的成功信息
-					SessionMessages.add(actionRequest, "request_processed",completeApplyMaterial.getClmc()+"上传成功！"); 
-					
-					
+				SessionMessages.add(actionRequest, "request_processed",completeApplyMaterial.getClmc()+"上传成功！"); 	
 			}
 			//SessionErrors.add(actionRequest, "error-key","this is the error message");
 			SessionMessages.add(actionRequest, "completeapplication_WAR_cpportlet" + SessionMessages. KEY_SUFFIX_HIDE_DEFAULT_ERROR_MESSAGE);
-						actionResponse.setRenderParameter("path", "uploadFile");
+			actionResponse.setRenderParameter("path", "uploadFile");
 			actionResponse.setRenderParameter("upLoadMessage", upLoadMessage);
 		} catch (Exception e) {
 			e.printStackTrace();
