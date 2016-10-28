@@ -9,8 +9,9 @@
 	}
 	  fileMaxSize /= 1024*1024; 
 %>
+<liferay-ui:error key="error-key" message="${upLoadMessage}上传失败！"></liferay-ui:error>
 <portlet:renderURL var="viewExtURL">
-<portlet:param name="path" value="uploadResult" /> 
+<portlet:param name="path" value="uploadFile" /> 
 </portlet:renderURL>
 
 <portlet:actionURL name="addDLFileEntry" var="addDLFileEntryURL">
@@ -25,7 +26,7 @@
 		<aui:field-wrapper>
 			<c:if test="<%=fileMaxSize != 0%>">
 				<div class="alert alert-info">
-					<%="PDF文件大小不能超过"+String.valueOf(fileMaxSize)+"MB,JPG文件大小不能超过2MB"%>
+					<%="PDF文件大小不能超过20MB,JPG文件大小不能超过2MB"%>
 				</div>
 			</c:if>
 		</aui:field-wrapper>
@@ -53,7 +54,7 @@ function <portlet:namespace />saveFileEntry() {
 	A.one('#<portlet:namespace/>cancel').on(
 			'click',
 			function(event) {	
-				var data = '';
+				var data = '${curTab}';
 				Liferay.Util.getOpener().<portlet:namespace/>closeYourPopUp(
 						data, '<portlet:namespace/>dialog');
 			});
