@@ -51,6 +51,7 @@ import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.search.ParseException;
 import com.liferay.portal.kernel.servlet.ServletResponseUtil;
+import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.ContentTypes;
@@ -1032,15 +1033,18 @@ public class PermitApplicationPortlet extends MVCPortlet {
 			if(!fileExtension.equals("JPG")&&!fileExtension.equals("PDF")){
 				upLoadMessage="文件上传仅限于jpg或者pdf格式！";
 				upLoadStatus=false;
+				SessionErrors.add(actionRequest, "error-key"); 
 	        }else if(fileExtension.equals("JPG")){
 	        	if(fileSize>2){	
 	        		upLoadMessage="上传的jpg文件超过2M,请压缩后上传！";
 	        		upLoadStatus=false;
+	        		SessionErrors.add(actionRequest, "error-key"); 
 	        	}
 	        }else if(fileExtension.equals("PDF")){
 	        	if(fileSize>20){	
 	        		upLoadMessage="上传的pdf文件超过20M,请压缩或拆分后上传！";
 	        		upLoadStatus=false;
+	        		SessionErrors.add(actionRequest, "error-key"); 
 	        	}
 	        }
 			
@@ -1070,7 +1074,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 				actionResponse.setRenderParameter("fileExtension", fileExtension.toLowerCase());
 				SessionMessages.add(actionRequest, "request_processed",applyMaterial.getClmc()+"上传成功！"); 	
 			}
-			SessionMessages.add(actionRequest, "completeapplication_WAR_cpportlet" + SessionMessages. KEY_SUFFIX_HIDE_DEFAULT_ERROR_MESSAGE);
+			SessionMessages.add(actionRequest, "permitapplication_WAR_cpportlet" + SessionMessages. KEY_SUFFIX_HIDE_DEFAULT_ERROR_MESSAGE);
 			actionResponse.setRenderParameter("path", "uploadFile");
 			actionResponse.setRenderParameter("upLoadMessage", upLoadMessage);
 		} catch (Exception e) {
