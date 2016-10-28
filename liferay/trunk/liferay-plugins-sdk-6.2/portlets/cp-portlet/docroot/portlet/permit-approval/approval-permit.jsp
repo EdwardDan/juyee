@@ -4,9 +4,11 @@
 <%
 	long permitId = ParamUtil.getLong(request, "permitId");
 	long xmlx = ProjectProfileLocalServiceUtil.getProjectProfile(permitId).getXmlx();
+	String curTab = ParamUtil.getString(request, "curTab" , "审核");
+	request.setAttribute("curTab", curTab);
 %>
 <liferay-ui:header title="施工许可申请审核" backURL="${viewURL }" />
-<liferay-ui:tabs names="审核,工程概况,参建单位,单位工程,申请材料" refresh="false">
+<liferay-ui:tabs names="审核,工程概况,参建单位,单位工程,申请材料" refresh="false" value="${curTab}">
 	<liferay-ui:section>
 		<liferay-ui:panel-container accordion="false" extended="true">
 			<liferay-ui:panel title="历史审核步骤" collapsible="true">
