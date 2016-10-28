@@ -3,11 +3,11 @@
 <%@ include file="init.jsp"%>
 <%
 	String uploadProgressId = "dlFileEntryUploadProgress";
-	long fileMaxSize = PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE);
+	/* long fileMaxSize = PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE);
 	if (fileMaxSize == 0) {
 		fileMaxSize = PrefsPropsUtil.getLong(PropsKeys.UPLOAD_SERVLET_REQUEST_IMPL_MAX_SIZE);
 	}
-	  fileMaxSize /= 1024*1024; 
+	  fileMaxSize /= 1024*1024;  */
 %>
 <liferay-ui:error key="error-key" message="${upLoadMessage}上传失败！"></liferay-ui:error>
 <portlet:renderURL var="viewURL">
@@ -23,11 +23,9 @@
 <aui:form action="<%=addDLFileEntryURL%>" enctype="multipart/form-data"
 	name="fm">
 		<aui:field-wrapper>
-			<c:if test="<%=fileMaxSize != 0%>">
 				<div class="alert alert-info">
-					<%="PDF文件大小不能超过"+String.valueOf(fileMaxSize)+"MB,JPG文件大小不能超过2MB"%>
+					<%="PDF文件大小不能超过20MB,JPG文件大小不能超过2MB"%>
 				</div>
-			</c:if>
 		</aui:field-wrapper>
 		<aui:input type="file" name="file" style="width: auto;">
 			<aui:validator name="required" />
