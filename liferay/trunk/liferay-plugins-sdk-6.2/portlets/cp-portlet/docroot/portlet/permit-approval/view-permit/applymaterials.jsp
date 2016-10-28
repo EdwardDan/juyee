@@ -183,7 +183,7 @@ Liferay.provide(window,'<portlet:namespace/>closeYourPopUp',
 				<c:if test="${permit.status!=13}">
 					<th style="text-align: center; width: 15%;">委建设处补正材料查看</th>
 				</c:if>
-				<c:if test="${permit.status==13}">
+				<%-- <c:if test="${permit.status==13}"> --%>
 					<th style="text-align: center; width: 15%;">委建设处补正材料</th>
 					<th style="text-align: center; width: 10%;">操作 <span
 						class="taglib-icon-help"> <img
@@ -196,7 +196,7 @@ Liferay.provide(window,'<portlet:namespace/>closeYourPopUp',
 							class="hide-accessible tooltip-text">注:请上传jpg或pdf格式的文件，jpg格式文件大小不能超过2M,pdf格式文件不能超过20M,如果文件超过限定大小，请拆分后重新上传！</span>
 					</span></th>
 				</c:if>
-			</c:if>
+			<%-- </c:if> --%>
 		</thead>
 		<c:forEach items="<%=materialList%>" var="material" varStatus="status">
 			<tr style="text-align: center" class="fileTr">
