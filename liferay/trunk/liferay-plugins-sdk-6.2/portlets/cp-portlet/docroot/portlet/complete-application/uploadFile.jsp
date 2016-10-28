@@ -9,14 +9,17 @@
 	}
 	  fileMaxSize /= 1024*1024; 
 %>
+<liferay-ui:error key="error-key" message="${upLoadMessage}上传失败！"></liferay-ui:error>
 <portlet:renderURL var="viewURL">
-<portlet:param name="path" value="uploadResult" /> 
+<portlet:param name="path" value="uploadFile" /> 
 </portlet:renderURL>
 <portlet:actionURL name="addDLFileEntry" var="addDLFileEntryURL">
 	<portlet:param name="divNo" value="${divNo}" />
 	<portlet:param name="no" value="${no}" />
 	<portlet:param name="materialId" value="${materialId}" />
 </portlet:actionURL>
+
+
 
 <aui:form action="<%=addDLFileEntryURL%>" enctype="multipart/form-data"
 	name="fm">
