@@ -1,6 +1,13 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
 <%@ include file="../init.jsp"%>
+<%
+String currentURL=PortalUtil.getCurrentURL(renderRequest); 
+renderRequest.setAttribute("currentURL", currentURL);
+%>
+
+<a href="${currentURL}&<portlet:namespace/>curTab=申请材料" id="refreshCurrentPage"></a>
+
 <style>
 .aui .table th, .aui .table td {
 	vertical-align: middle;
@@ -108,7 +115,8 @@
 Liferay.provide(window,'<portlet:namespace/>closeYourPopUp',
 	    function(data, dialogId) {
 	    var A = AUI();
-	    var dataParam=data.split('/');
+	    var curTab=data.trim();
+	   /*  var dataParam=data.split('/');
 	    var materialId=dataParam[0];
 	    var materialName=dataParam[1];
 	    var divNo=dataParam[2];
@@ -130,9 +138,10 @@ Liferay.provide(window,'<portlet:namespace/>closeYourPopUp',
 			+ fileId + ","+materialId+")'>删除</a></div>"; 
         	 $("#fileDivWjscbzcl" + divNo).append(ele);
         	 domSortWjscbzcl(divNo); 
-		}
+		} */
 		var dialog = Liferay.Util.Window.getById(dialogId);
 		dialog.destroy();
+		document.getElementById("refreshCurrentPage").click();
 	},
 	['liferay-util-window']
 );
