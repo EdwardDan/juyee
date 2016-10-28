@@ -781,9 +781,6 @@ input[type="radio"],input[type="checkbox"] {
 	min-width: 750px;
 }
 
-.aui body{
-	min-width:1200px;
-}
 
 .out-navbar-inner{
 	min-width: 1200px !important;
