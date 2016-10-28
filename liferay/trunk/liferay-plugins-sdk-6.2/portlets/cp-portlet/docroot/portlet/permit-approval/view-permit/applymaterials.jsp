@@ -269,7 +269,7 @@ Liferay.provide(window,'<portlet:namespace/>closeYourPopUp',
 									<c:forEach items="${fn:split(material.bzclIds,',')}"
 										var="bzclId" varStatus="statusSub">
 										<div name="fileBzcl${status.index+1}">
-											<a class="fileName" href="javascript:void(0);">
+											<a class="fileBzclName" href="javascript:void(0);">
 												${material.clmc}补正材料-${statusSub.index+1}.${fn:split(bzclId,'|')[1]}
 											</a> &nbsp;&nbsp;&nbsp; <a href='javascript:void(0)'
 												;  onclick="${namespace}fileBzclDelete(this,${fn:split(bzclId,'|')[0]},${material.materialId})">删除</a>
@@ -344,7 +344,7 @@ Liferay.provide(window,'<portlet:namespace/>closeYourPopUp',
 									<c:forEach items="${fn:split(material.wjscbzclIds,',')}"
 										var="wjscbzclId" varStatus="statusSub">
 										<div name="fileWjscbzcl${status.index+1}">
-											<a class="fileName" href="javascript:void(0);">
+											<a class="fileWjscbzclName" href="javascript:void(0);">
 												${material.clmc}补正材料(委建设处)-${statusSub.index+1}.${fn:split(wjscbzclId,'|')[1]}
 											</a> &nbsp;&nbsp;&nbsp; <a href='javascript:void(0)'
 												;  onclick="${namespace}fileWjscbzclDelete(this,${fn:split(wjscbzclId,'|')[0]},${material.materialId})">删除</a>
