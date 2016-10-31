@@ -25,18 +25,8 @@
 <script src="/static/jquery.min.js"></script>
 <script type="text/javascript" src="/static/My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript">
-    window.jQuery || document.write("<script src='/static/dist/jquery.min.js'>"+"<"+"/script>");
+    window.jQuery || document.write("<script src='/static/dist/jquery-1.12.4.min.js'>"+"<"+"/script>");
 </script> 
-
-<script>
-		var FileAPI = {
-			  debug: true
-			, staticPath: '/static/fileAPI/'
-		};
-	</script>
-
-<script type="text/javascript" src="/static/fileAPI/FileAPI.min.js"></script>
-<script type="text/javascript" src="/static/jquery/ajaxfileupload.js"></script>
 
 
 <%@page import="com.justonetech.cp.util.PortletKeys"%>
