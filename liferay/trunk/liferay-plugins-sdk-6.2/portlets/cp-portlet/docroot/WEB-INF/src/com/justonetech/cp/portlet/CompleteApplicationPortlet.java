@@ -111,17 +111,6 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 				}
 				include("/portlet/complete-application/uploadFile.jsp", renderRequest, renderResponse);
 			}
-			/*else if (path.contains("uploadResult")) {
-				renderRequest.setAttribute("name",ParamUtil.getString(renderRequest, "name"));
-				renderRequest.setAttribute("upLoadMessage",ParamUtil.getString(renderRequest, "upLoadMessage"));
-				renderRequest.setAttribute("fieId",ParamUtil.getString(renderRequest, "fieId"));
-				renderRequest.setAttribute("divNo",ParamUtil.getString(renderRequest, "divNo"));
-				renderRequest.setAttribute("no",ParamUtil.getString(renderRequest, "no"));
-				renderRequest.setAttribute("materialId",ParamUtil.getString(renderRequest, "materialId"));
-				renderRequest.setAttribute("materialName",ParamUtil.getString(renderRequest, "materialName"));
-				renderRequest.setAttribute("fileExtension",ParamUtil.getString(renderRequest, "fileExtension"));
-				include("/portlet/complete-application/uploadResult.jsp", renderRequest, renderResponse);
-			}*/
 			else {
 		User user = null;
 		try {
