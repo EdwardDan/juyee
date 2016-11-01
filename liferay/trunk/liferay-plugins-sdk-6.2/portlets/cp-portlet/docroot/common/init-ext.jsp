@@ -25,7 +25,7 @@
 
 <script type="text/javascript" src="/static/My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript">
-    window.jQuery || document.write("<script src='/static/dist/jquery-1.12.4.min.js'>"+"<"+"/script>");
+    window.jQuery || document.write("<script src='/static/jquery/jquery-1.12.4.min.js'>"+"<"+"/script>");
 </script> 
 
 
