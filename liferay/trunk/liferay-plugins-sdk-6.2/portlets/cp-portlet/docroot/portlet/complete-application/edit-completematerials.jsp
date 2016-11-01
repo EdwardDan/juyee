@@ -2,7 +2,7 @@
 <%@ include file="/common/init.jsp"%>
 <%@ include file="init.jsp"%>
 <%
-String backUrl_dynamic=PortalUtil.getCurrentURL(renderRequest); 
+	String backUrl_dynamic=PortalUtil.getCurrentURL(renderRequest);
 %>
 
 <a href="<%=backUrl_dynamic%>" id="refreshCurrentPage"></a>
@@ -16,11 +16,16 @@ String backUrl_dynamic=PortalUtil.getCurrentURL(renderRequest);
 	width: 150px;
 }
 
- .mask {       
-            position: absolute; top: 0px; filter: alpha(opacity=60); background-color: #777;     
-            z-index: 1002; left: 0px;     
-            opacity:0.5; -moz-opacity:0.5;     
-        }   
+.mask {
+	position: absolute;
+	top: 0px;
+	filter: alpha(opacity = 60);
+	background-color: #777;
+	z-index: 1002;
+	left: 0px;
+	opacity: 0.5;
+	-moz-opacity: 0.5;
+}
 </style>
 
 <%
@@ -81,9 +86,10 @@ String backUrl_dynamic=PortalUtil.getCurrentURL(renderRequest);
 	renderRequest.setAttribute("materialSize", completeApplyMaterialList.size());
 %>
 
- <%@page import="com.liferay.portal.kernel.portlet.LiferayWindowState"%>
-  <portlet:renderURL var="uploadFileURL" windowState="<%=LiferayWindowState.POP_UP.toString()%>">
-   <portlet:param name="path" value="uploadFile" />
+<%@page import="com.liferay.portal.kernel.portlet.LiferayWindowState"%>
+<portlet:renderURL var="uploadFileURL"
+	windowState="<%=LiferayWindowState.POP_UP.toString()%>">
+	<portlet:param name="path" value="uploadFile" />
 </portlet:renderURL>
 
 <!-- For Closing -->
@@ -98,7 +104,9 @@ Liferay.provide(window,'<portlet:namespace/>closeYourPopUp',
 	['liferay-util-window']
 );
 </aui:script>
-  
+	
+
+
 <portlet:renderURL var="viewURL" />
 <c:set var="namespace" value="<%=renderResponse.getNamespace()%>"></c:set>
 <portlet:resourceURL var="fileUpLoadURL" id="fileUpLoad" />
@@ -139,37 +147,35 @@ Liferay.provide(window,'<portlet:namespace/>closeYourPopUp',
 				renderRequest.setAttribute("applyMaterialId", completeApplyMaterial.getMaterialId());
 				renderRequest.setAttribute("no1", i+1);
 		%>
-				<tr style="text-align: center" class="fileTr">
-				<td style="text-align: center" class="fileNo"><%=completeApplyMaterial.getXh()%></td>
-				<td><%=completeApplyMaterial.getClmc() %></td>
-				<td style="text-align: center">
-					<div id="fileDiv${no1}">
-						<% 
+		<tr style="text-align: center" class="fileTr">
+			<td style="text-align: center" class="fileNo"><%=completeApplyMaterial.getXh()%></td>
+			<td><%=completeApplyMaterial.getClmc()%></td>
+			<td style="text-align: center">
+				<div id="fileDiv${no1}">
+					<%
 						String fileEntryIds=completeApplyMaterial.getFileEntryIds();
-						if(Validator.isNotNull(fileEntryIds)){
-							String[] fileEntryIdArr=fileEntryIds.split("\\,");
-							for(int j=0; j<fileEntryIdArr.length;j++){
-								String fileEntryId=fileEntryIdArr[j].split("\\|")[0];
-								renderRequest.setAttribute("no2", j+1);
-								DLFileEntry dlFileEntry=DLFileEntryLocalServiceUtil.getFileEntry(Long.valueOf(fileEntryId));
-						%>
-								<div name="file${no1}">
-									<a class="fileName" href="javascript:void(0);">
-										<%=dlFileEntry.getTitle() %></a>
-									&nbsp;&nbsp;&nbsp; <a href='javascript:void(0)'
-										;  onclick="${renderResponse.namespace}fileDelete(this,<%=fileEntryId%>,<%=completeApplyMaterial.getMaterialId() %>)">删除</a>
-								</div>
-						<% 
-							}
-						}
-						%>
+									if(Validator.isNotNull(fileEntryIds)){
+										String[] fileEntryIdArr=fileEntryIds.split("\\,");
+										for(int j=0; j<fileEntryIdArr.length;j++){
+											String fileEntryId=fileEntryIdArr[j].split("\\|")[0];
+											renderRequest.setAttribute("no2", j+1);
+											DLFileEntry dlFileEntry=DLFileEntryLocalServiceUtil.getFileEntry(Long.valueOf(fileEntryId));
+					%>
+					<div name="file${no1}">
+						<a class="fileName" href="javascript:void(0);"> <%=dlFileEntry.getTitle()%></a>
+						&nbsp;&nbsp;&nbsp; <a href='javascript:void(0)'
+							;  onclick="${renderResponse.namespace}fileDelete(this,<%=fileEntryId%>,<%=completeApplyMaterial.getMaterialId() %>)">删除</a>
 					</div>
-				</td>
-				<td style="text-align: center">
-				<aui:button name="login${no1}" type="button"  value="上传" />
-				</td>
-				</tr>
-				<aui:script use="liferay-util-window">
+					<%
+						}
+									}
+					%>
+				</div>
+			</td>
+			<td style="text-align: center"><aui:button name="login${no1}"
+					type="button" value="上传" /></td>
+		</tr>
+		<aui:script use="liferay-util-window">
 					A.one('#<portlet:namespace/>login${no1}').on('click', function(event) {
 						var no = findFileNo('${no1}');
 					    <!-- alert("open"); -->
@@ -178,36 +184,51 @@ Liferay.provide(window,'<portlet:namespace/>closeYourPopUp',
 								centered: true,
 								height: 500,
 								modal: true,
-								width: 500
+								width: 500,
+								/* after: {
+									render: function(evt) {
+										alert('dialog help');
+											}
+										} */
 							},
 							id: '<portlet:namespace/>dialog',
 							title: '文件上传',
-							uri: '<%=uploadFileURL%>${no1}/${applyMaterialId}/'+no
+							uri: '<%=uploadFileURL%>${no1}/${applyMaterialId}/'+no,
 						});
-					});
+						$("button.close").css("display","none");
+					}); 
 				</aui:script>
-		<%	
-				
+				<%
 			}
 		%>
+		</table>
 
-
-</table>
-
-<div style="text-align: center">
+	<div style="text-align: center">
 		<aui:button type="submit" value="保存" onclick="${fileSaveURL}"
 			cssClass="btn btn-primary" />
 		<aui:button type="submit" value="上报"
 			onclick="${namespace }fm.action='${submitAllURL }'"
 			cssClass="btn btn-primary" />
-</div>
+	</div>
 </aui:form>
 
 <script>
+	/* $('.close-content').live('mouseover',function(event){
+		alert(123);
+		/* document.getElementById("refreshCurrentPage").click(); */
+	/*});  */
+
+	function hideTheXButton(){
+		alert(444);
+		var btn=$('.close-content');
+		btn.remove();
+		console.log(btn);
+	}
 
 	function saveMaterials(){
 		document.getElementById("fm").action='${fileSaveURL}';
 		document.getElementById("fm").submit();
+		alert(555);
 	}
 	
 	function submitAll(){
@@ -272,11 +293,13 @@ Liferay.provide(window,'<portlet:namespace/>closeYourPopUp',
 		$('#fileDiv'+divNo).empty().append(sortEle);
 	}
 	
+	
 	$(function(){
 		//当文档加载完给每种材料对应的附件进行排序
 		var materialSizeInt=parseInt('${materialSize}');
 		for(var divNo=1;divNo<=materialSizeInt;divNo++){
 			domSort(divNo);
 		}
+		//为弹出框的X关闭按钮添加事件
 	});
 </script>
