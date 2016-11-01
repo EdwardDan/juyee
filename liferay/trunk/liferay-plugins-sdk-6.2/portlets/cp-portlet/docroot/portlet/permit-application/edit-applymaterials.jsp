@@ -5,13 +5,7 @@
 <%
 String backUrl_dynamic=PortalUtil.getCurrentURL(renderRequest); 
 %>
-
 <a href="<%=backUrl_dynamic%>" id="refreshCurrentPage"></a>
-
-
-
-
-
 <style>
 .aui .table th, .aui .table td {
 	vertical-align: middle;
@@ -110,12 +104,11 @@ String backUrl_dynamic=PortalUtil.getCurrentURL(renderRequest);
 		}
 
 	}
+	renderRequest.setAttribute("materialSize", applyMaterialList.size());
 %>
 
-
-
  <%@page import="com.liferay.portal.kernel.portlet.LiferayWindowState"%>
-  <portlet:renderURL var="loginURL" windowState="<%=LiferayWindowState.POP_UP.toString()%>">
+  <portlet:renderURL var="uploadFileURL" windowState="<%=LiferayWindowState.POP_UP.toString()%>">
    <portlet:param name="path" value="uploadFile" />
 </portlet:renderURL>
 
@@ -168,56 +161,64 @@ Liferay.provide(window,'<portlet:namespace/>closeYourPopUp',
 			</span>
 			</td>
 		</tr>
-		<c:forEach items="<%=applyMaterialList%>" var="material"
-			varStatus="status">
-			<tr style="text-align: center" class="fileTr">
-				<td style="text-align: center" class="fileNo">${material.xh}</td>
-				<td>${material.clmc}</td>
+		<%
+			for(int i=0;i<applyMaterialList.size();i++){
+				ApplyMaterial applyMaterial=applyMaterialList.get(i);
+				renderRequest.setAttribute("applyMaterialId", applyMaterial.getMaterialId());
+				renderRequest.setAttribute("no1", i+1);
+		%>
+				<tr style="text-align: center" class="fileTr">
+				<td style="text-align: center" class="fileNo"><%=applyMaterial.getXh()%></td>
+				<td><%=applyMaterial.getClmc() %></td>
 				<td style="text-align: center">
-					<div id="fileDiv${status.index+1}">
-						<!-- todo
-				此处可以根据状态来隐藏删除按钮的显示，提交后删除按钮不再显示
-				 -->
-						<c:if test="${not empty material.fileEntryIds}">
-							<c:forEach items="${fn:split(material.fileEntryIds,',')}"
-								var="fileEntryId" varStatus="statusSub">
-								<div name="file${status.index+1}">
+					<div id="fileDiv${no1}">
+						<% 
+						String fileEntryIds=applyMaterial.getFileEntryIds();
+						if(Validator.isNotNull(fileEntryIds)){
+							String[] fileEntryIdArr=fileEntryIds.split("\\,");
+							for(int j=0; j<fileEntryIdArr.length;j++){
+								String fileEntryId=fileEntryIdArr[j].split("\\|")[0];
+								renderRequest.setAttribute("no2", j+1);
+								DLFileEntry dlFileEntry=DLFileEntryLocalServiceUtil.getFileEntry(Long.valueOf(fileEntryId));
+						%>
+								<div name="file${no1}">
 									<a class="fileName" href="javascript:void(0);">
-										${material.clmc}-${statusSub.index+1}.${fn:split(fileEntryId,'|')[1]}</a>
+										<%=dlFileEntry.getTitle() %></a>
 									&nbsp;&nbsp;&nbsp; <a href='javascript:void(0)'
-										;  onclick="${renderResponse.namespace}fileDelete(this,${fn:split(fileEntryId,'|')[0]},${material.materialId})">删除</a>
+										;  onclick="${renderResponse.namespace}fileDelete(this,<%=fileEntryId%>,<%=applyMaterial.getMaterialId() %>)">删除</a>
 								</div>
-							</c:forEach>
-						</c:if>
+						<% 
+							}
+						}
+						%>
 					</div>
 				</td>
 				<td style="text-align: center">
-				<aui:button name="login${status.index+1}" type="button"  value="上传" />
+				<aui:button name="login${no1}" type="button"  value="上传" />
 				</td>
-			</tr>
-			<aui:script use="liferay-util-window">
-A.one('#<portlet:namespace/>login${status.index+1}').on('click', function(event) {
-	var no = findFileNo('${status.index+1}');
-    <!-- alert("open"); -->
-	Liferay.Util.openWindow({
-		dialog: {
-			centered: true,
-			height: 500,
-			modal: true,
-			width: 500
-		},
-		id: '<portlet:namespace/>dialog',
-		title: '文件上传',
-		uri: '<%=loginURL %>${status.index+1}/${material.materialId}/'+no
-	});
-});
-</aui:script>
-			
-			
-			
-			
-			
-		</c:forEach>
+				</tr>
+				<aui:script use="liferay-util-window">
+					A.one('#<portlet:namespace/>login${no1}').on('click', function(event) {
+						var no = findFileNo('${no1}');
+					    <!-- alert("open"); -->
+						Liferay.Util.openWindow({
+							dialog: {
+								centered: true,
+								height: 500,
+								modal: true,
+								width: 500
+							},
+							id: '<portlet:namespace/>dialog',
+							title: '文件上传',
+							uri: '<%=uploadFileURL%>${no1}/${applyMaterialId}/'+no
+						});
+						$("button.close").css("display","none");
+					});
+				</aui:script>
+		<%	
+				
+			}
+		%>
 
 	</table>
 
@@ -305,8 +306,6 @@ A.one('#<portlet:namespace/>login${status.index+1}').on('click', function(event)
 var onTaskClickFn = A.rbind('onTaskClick', Liferay.WorkflowTasks,'<%= randomId %>');
 Liferay.delegateClick('<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(transitionName) %>taskChangeStatusLink', onTaskClickFn);
 </aui:script>
-	
-
 
 		
 <%
@@ -332,39 +331,6 @@ Liferay.delegateClick('<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(tra
 		document.getElementById("fm").submit();
 		
 	}
-
-	//文件类型和大小的验证
-	function fileValidator(file){
-		//判断使用浏览器
-		if(!file){ alert("请先选择上传文件"); return; } 
-		var fileSize=Math.ceil(file.size/(1024*1024));
-		var fileName=file.name;
-		var fileExtension;
-		if(fileName){
-			fileExtension=fileName.split('.').pop().toUpperCase();
-			if(fileExtension!="JPG"&&fileExtension!="PDF"){
-	        	alert("文件上传仅限于jpg或者pdf格式！");
-	        	return false;
-	        }else if(fileExtension=="JPG"){
-	        	if(fileSize>2){	
-	        		alert("上传的jpg文件超过2M,请压缩后上传！");
-	        		return false;
-	        	}
-	        }else if(fileExtension=="PDF"){
-	        	if(fileSize>20){	
-	        		alert("上传的pdf文件超过20M,请压缩或拆分后上传！");
-	        		return false;
-	        	}
-	        }	       
-		}
-	     return fileExtension.toLowerCase();
-	 }
-
-	function <portlet:namespace/>clearValue(btn){
-		var input=$(btn);
-		input.replaceWith(input.val('').clone(true));
-	}
-	
 
 	/* 删除 */ 
 	function <portlet:namespace/>fileDelete(divObj, fileId, materialId) {
@@ -410,7 +376,6 @@ Liferay.delegateClick('<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(tra
 			}
 		}
 	}
-	
 	/* 给div元素重新排序 */
 	function domSort(divNo){
 		var sortEle=$("div[name^='file" + divNo + "']").sort(function(a,b){
@@ -421,13 +386,12 @@ Liferay.delegateClick('<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(tra
 		});
 		$('#fileDiv'+divNo).empty().append(sortEle);
 	}
-	 function showMask(){     
-	        $("#mask").css("height",$(document).height());     
-	        $("#mask").css("width",$(document).width());     
-	        $("#mask").show();     
-	    }  
-	    //隐藏遮罩层  
-	    function hideMask(){     
-	        $("#mask").hide();     
-	    }  
+
+	$(function(){
+		//当文档加载完给每种材料对应的附件进行排序
+		var materialSizeInt=parseInt('${materialSize}');
+		for(var divNo=1;divNo<=materialSizeInt;divNo++){
+			domSort(divNo);
+		}
+	});
 </script>
