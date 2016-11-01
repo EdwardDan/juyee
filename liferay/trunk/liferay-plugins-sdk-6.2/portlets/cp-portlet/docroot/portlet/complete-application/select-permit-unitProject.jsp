@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
+<%@ include file="init.jsp"%>
 <%@ page import="com.justonetech.cp.permit.model.ParticipationUnit"%>
 
 <!-- <style>
@@ -10,8 +11,13 @@
 
 
 </style> -->
-
-
+<%
+renderRequest.setAttribute("completeId", ParamUtil.getLong(request, "completeId"));
+renderRequest.setAttribute("bjbh", ParamUtil.getString(request, "bjbh"));
+%>
+	<c:set var="editCompleteURL"
+		value="${editCompleteURL }&${renderResponse.namespace}completeId=${completeId}&${renderResponse.namespace}bjbh=${bjbh }"></c:set>
+<liferay-ui:header title="单位工程列表" backURL='${editCompleteURL.concat("&_").concat(portletDisplay.id).concat("_tabSqbz=2")}'></liferay-ui:header>
 <c:set var="contextPath"
 	value="${request.contextPath}/portlet/complete-application" />
 <portlet:renderURL var="searchURL">
