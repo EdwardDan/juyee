@@ -705,13 +705,13 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 				 actionResponse.setRenderParameter("fieId", Long.toString(fileEntry.getFileEntryId()));
 				 actionResponse.setRenderParameter("name", sourceFileName);
 				actionResponse.setRenderParameter("divNo", ParamUtil.getString(actionRequest, "divNo"));
-				actionResponse.setRenderParameter("no", no);
 				actionResponse.setRenderParameter("fileExtension", fileExtension.toLowerCase());
 					//删除掉默认的成功信息
 					//SessionMessages.add(actionRequest, "completeapplication_WAR_cpportlet" + SessionMessages.KEY_SUFFIX_HIDE_DEFAULT_SUCCESS_MESSAGE);
 					//覆盖掉默认的成功信息
 				SessionMessages.add(actionRequest, "request_processed",completeApplyMaterial.getClmc()+"上传成功！"); 	
 			}
+			actionResponse.setRenderParameter("no", no);
 			//SessionErrors.add(actionRequest, "error-key","this is the error message");
 			SessionMessages.add(actionRequest, "completeapplication_WAR_cpportlet" + SessionMessages. KEY_SUFFIX_HIDE_DEFAULT_ERROR_MESSAGE);
 			actionResponse.setRenderParameter("path", "uploadFile");
