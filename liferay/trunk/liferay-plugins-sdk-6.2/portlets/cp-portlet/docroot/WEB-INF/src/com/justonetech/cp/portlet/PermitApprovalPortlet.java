@@ -109,30 +109,7 @@ public class PermitApprovalPortlet extends MVCPortlet {
 			}
 			include("/portlet/permit-approval/view-permit/uploadFile.jsp", renderRequest, renderResponse);
 		}
-		/*
-		 * else if (path.contains("uploadResult")) {
-		 * renderRequest.setAttribute("name",ParamUtil.getString(renderRequest,
-		 * "name"));
-		 * renderRequest.setAttribute("upLoadMessage",ParamUtil.getString
-		 * (renderRequest, "upLoadMessage"));
-		 * renderRequest.setAttribute("fieId",ParamUtil.getString(renderRequest,
-		 * "fieId"));
-		 * renderRequest.setAttribute("divNo",ParamUtil.getString(renderRequest,
-		 * "divNo"));
-		 * renderRequest.setAttribute("no",ParamUtil.getString(renderRequest,
-		 * "no"));
-		 * renderRequest.setAttribute("materialId",ParamUtil.getString(renderRequest
-		 * , "materialId"));
-		 * renderRequest.setAttribute("materialName",ParamUtil.
-		 * getString(renderRequest, "materialName"));
-		 * renderRequest.setAttribute(
-		 * "fileExtension",ParamUtil.getString(renderRequest, "fileExtension"));
-		 * renderRequest
-		 * .setAttribute("uploadfileType",ParamUtil.getString(renderRequest,
-		 * "uploadfileType"));
-		 * include("/portlet/permit-approval/view-permit/uploadResult.jsp",
-		 * renderRequest, renderResponse); }
-		 */
+		
 		else {
 			super.doView(renderRequest, renderResponse);
 		}
@@ -562,6 +539,7 @@ public class PermitApprovalPortlet extends MVCPortlet {
 			};
 			serviceContext.setGroupPermissions(groupPermissions);
 			String materialId = ParamUtil.getString(actionRequest, "materialId");
+			actionResponse.setRenderParameter("materialId", materialId);
 			String uploadfileType = ParamUtil.getString(actionRequest, "uploadfileType");
 			String no = ParamUtil.getString(actionRequest, "no");
 			byte[] fileBytes = null;
@@ -838,11 +816,14 @@ public class PermitApprovalPortlet extends MVCPortlet {
 					DLFileEntryLocalServiceUtil.deleteDLFileEntry(Long.valueOf(fileId));
 				}
 			}
-
+			System.out.println(resourceId);
 			// 删除委建设处材料文件
 			if ("fileWjscbzclDelete".equals(resourceId)) {
+				System.out.println("fileWjscbzclDelete");
 				String fileId = ParamUtil.get(resourceRequest, "fileWjscbzclId", "0");
 				String materialId = ParamUtil.get(resourceRequest, "materialId", "0");
+				System.out.println(fileId);
+				System.out.println(materialId);
 				if (!fileId.equals("0")) {
 					DLFileEntry dlFileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(fileId));
 					if (!materialId.equals("0")) {
@@ -852,6 +833,7 @@ public class PermitApprovalPortlet extends MVCPortlet {
 						wjscbzclIds = wjscbzclIds + ",";// 加上逗号为了容易替换
 						// 获取文件路径
 						String str = fileId + "\\|" + dlFileEntry.getExtension() + "\\,";
+						System.out.println(str);
 						wjscbzclIds = wjscbzclIds.replaceFirst(str, "");
 						if (Validator.isNotNull(wjscbzclIds)) {
 							wjscbzclIds = wjscbzclIds.substring(0, wjscbzclIds.length() - 1);// 最后一步再把逗号去掉
