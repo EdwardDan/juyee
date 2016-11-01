@@ -167,17 +167,6 @@ public class PermitApplicationPortlet extends MVCPortlet {
 			}
 			include("/portlet/permit-application/uploadFile.jsp", renderRequest, renderResponse);
 		}
-//		else if (path.contains("uploadResult")) {
-//			renderRequest.setAttribute("name",ParamUtil.getString(renderRequest, "name"));
-//			renderRequest.setAttribute("upLoadMessage",ParamUtil.getString(renderRequest, "upLoadMessage"));
-//			renderRequest.setAttribute("fieId",ParamUtil.getString(renderRequest, "fieId"));
-//			renderRequest.setAttribute("divNo",ParamUtil.getString(renderRequest, "divNo"));
-//			renderRequest.setAttribute("no",ParamUtil.getString(renderRequest, "no"));
-//			renderRequest.setAttribute("materialId",ParamUtil.getString(renderRequest, "materialId"));
-//			renderRequest.setAttribute("materialName",ParamUtil.getString(renderRequest, "materialName"));
-//			renderRequest.setAttribute("fileExtension",ParamUtil.getString(renderRequest, "fileExtension"));
-//			include("/portlet/permit-application/uploadResult.jsp", renderRequest, renderResponse);
-//		}
 		else {
 
 		String bjbh = ParamUtil.getString(renderRequest, "bjbh");
@@ -984,7 +973,6 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		DLFolder dlChildFolder = null;
 		if (Validator.isNotNull(portletId) && Validator.isNotNull(materialId)) {
 			dlParentFolder = DLFolderLocalServiceUtil.fetchFolder(groupId, rootFolderId, portletId);
-
 			if (Validator.isNotNull(dlParentFolder)) {
 				dlChildFolder = DLFolderLocalServiceUtil.fetchFolder(groupId, dlParentFolder.getFolderId(), materialId);
 				if (Validator.isNull(dlChildFolder)) {
@@ -1070,10 +1058,10 @@ public class PermitApplicationPortlet extends MVCPortlet {
 				 actionResponse.setRenderParameter("fieId", Long.toString(fileEntry.getFileEntryId()));
 				 actionResponse.setRenderParameter("name", sourceFileName);
 				actionResponse.setRenderParameter("divNo", ParamUtil.getString(actionRequest, "divNo"));
-				actionResponse.setRenderParameter("no", no);
 				actionResponse.setRenderParameter("fileExtension", fileExtension.toLowerCase());
 				SessionMessages.add(actionRequest, "request_processed",applyMaterial.getClmc()+"上传成功！"); 	
 			}
+			actionResponse.setRenderParameter("no", no);
 			SessionMessages.add(actionRequest, "permitapplication_WAR_cpportlet" + SessionMessages. KEY_SUFFIX_HIDE_DEFAULT_ERROR_MESSAGE);
 			actionResponse.setRenderParameter("path", "uploadFile");
 			actionResponse.setRenderParameter("upLoadMessage", upLoadMessage);
