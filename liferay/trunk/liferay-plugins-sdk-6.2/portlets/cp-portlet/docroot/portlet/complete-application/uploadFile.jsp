@@ -39,7 +39,7 @@
 	</aui:button-row>
 </aui:form>
 <liferay-ui:upload-progress id="<%=uploadProgressId%>"
-	message="uploading" redirect="<%=viewURL%>" />
+	message="uploading" redirect="<%=viewURL%>" updatePeriod="500"/>
 
 <aui:script>
 function <portlet:namespace />saveFileEntry() {
