@@ -1,3 +1,4 @@
+
 package com.justonetech.cp.portlet;
 
 import java.io.ByteArrayOutputStream;
@@ -81,49 +82,66 @@ import com.lowagie.text.pdf.PdfStamper;
 public class PermitApprovalPortlet extends MVCPortlet {
 
 	@Override
-	public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws IOException, PortletException {
+	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
+		throws IOException, PortletException {
+
 		// TODO Auto-generated method stub
 		String path = ParamUtil.getString(renderRequest, "path");
 		if (path.contains("uploadFile")) {
-			path=path.replace("uploadFile", "");
-			if(Validator.isNotNull(path)){
-				String[] pathParam=path.split("\\/");
-				String divNo=pathParam[0];
-				String materialId=pathParam[1];
-				String no=pathParam[2];
-				String uploadfileType=pathParam[3];
-				renderRequest.setAttribute("divNo",divNo); 
+			path = path.replace("uploadFile", "");
+			if (Validator.isNotNull(path)) {
+				String[] pathParam = path.split("\\/");
+				String divNo = pathParam[0];
+				String materialId = pathParam[1];
+				String no = pathParam[2];
+				String uploadfileType = pathParam[3];
+				renderRequest.setAttribute("divNo", divNo);
 				renderRequest.setAttribute("materialId", materialId);
 				renderRequest.setAttribute("no", no);
-				renderRequest.setAttribute("uploadfileType",uploadfileType);
-			}else{
-				renderRequest.setAttribute("divNo",ParamUtil.getString(renderRequest, "divNo"));
-				renderRequest.setAttribute("materialId",ParamUtil.getString(renderRequest, "materialId"));
-				renderRequest.setAttribute("no",ParamUtil.getString(renderRequest, "no"));
-				renderRequest.setAttribute("upLoadMessage",ParamUtil.getString(renderRequest, "upLoadMessage"));
-				renderRequest.setAttribute("uploadfileType",ParamUtil.getString(renderRequest, "uploadfileType"));
+				renderRequest.setAttribute("uploadfileType", uploadfileType);
+			}
+			else {
+				renderRequest.setAttribute("divNo", ParamUtil.getString(renderRequest, "divNo"));
+				renderRequest.setAttribute("materialId", ParamUtil.getString(renderRequest, "materialId"));
+				renderRequest.setAttribute("no", ParamUtil.getString(renderRequest, "no"));
+				renderRequest.setAttribute("upLoadMessage", ParamUtil.getString(renderRequest, "upLoadMessage"));
+				renderRequest.setAttribute("uploadfileType", ParamUtil.getString(renderRequest, "uploadfileType"));
 			}
 			include("/portlet/permit-approval/view-permit/uploadFile.jsp", renderRequest, renderResponse);
 		}
-		/*else if (path.contains("uploadResult")) {
-			renderRequest.setAttribute("name",ParamUtil.getString(renderRequest, "name"));
-			renderRequest.setAttribute("upLoadMessage",ParamUtil.getString(renderRequest, "upLoadMessage"));
-			renderRequest.setAttribute("fieId",ParamUtil.getString(renderRequest, "fieId"));
-			renderRequest.setAttribute("divNo",ParamUtil.getString(renderRequest, "divNo"));
-			renderRequest.setAttribute("no",ParamUtil.getString(renderRequest, "no"));
-			renderRequest.setAttribute("materialId",ParamUtil.getString(renderRequest, "materialId"));
-			renderRequest.setAttribute("materialName",ParamUtil.getString(renderRequest, "materialName"));
-			renderRequest.setAttribute("fileExtension",ParamUtil.getString(renderRequest, "fileExtension"));
-			renderRequest.setAttribute("uploadfileType",ParamUtil.getString(renderRequest, "uploadfileType"));
-			include("/portlet/permit-approval/view-permit/uploadResult.jsp", renderRequest, renderResponse);
-		}*/
+		/*
+		 * else if (path.contains("uploadResult")) {
+		 * renderRequest.setAttribute("name",ParamUtil.getString(renderRequest,
+		 * "name"));
+		 * renderRequest.setAttribute("upLoadMessage",ParamUtil.getString
+		 * (renderRequest, "upLoadMessage"));
+		 * renderRequest.setAttribute("fieId",ParamUtil.getString(renderRequest,
+		 * "fieId"));
+		 * renderRequest.setAttribute("divNo",ParamUtil.getString(renderRequest,
+		 * "divNo"));
+		 * renderRequest.setAttribute("no",ParamUtil.getString(renderRequest,
+		 * "no"));
+		 * renderRequest.setAttribute("materialId",ParamUtil.getString(renderRequest
+		 * , "materialId"));
+		 * renderRequest.setAttribute("materialName",ParamUtil.
+		 * getString(renderRequest, "materialName"));
+		 * renderRequest.setAttribute(
+		 * "fileExtension",ParamUtil.getString(renderRequest, "fileExtension"));
+		 * renderRequest
+		 * .setAttribute("uploadfileType",ParamUtil.getString(renderRequest,
+		 * "uploadfileType"));
+		 * include("/portlet/permit-approval/view-permit/uploadResult.jsp",
+		 * renderRequest, renderResponse); }
+		 */
 		else {
-		super.doView(renderRequest, renderResponse);}
+			super.doView(renderRequest, renderResponse);
+		}
 	}
 
 	// 保存收件sj
-	public void saveSj(ActionRequest request, ActionResponse response) throws PortalException, SystemException,
-			IOException {
+	public void saveSj(ActionRequest request, ActionResponse response)
+		throws PortalException, SystemException, IOException {
+
 		long permitId = ParamUtil.getLong(request, "permitId");
 		Permit permit = PermitLocalServiceUtil.getPermit(permitId);
 		String slbh = ParamUtil.getString(request, "slbh");
@@ -142,7 +160,8 @@ public class PermitApprovalPortlet extends MVCPortlet {
 		try {
 			permit.setHjgsz(Integer.parseInt(hjgsz));
 			permit.setHjgsh(Integer.parseInt(hjgsh));
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			// TODO: handle exception
 		}
 
@@ -167,7 +186,9 @@ public class PermitApprovalPortlet extends MVCPortlet {
 	}
 
 	// 保存初审cs和sl
-	public void saveCs(ActionRequest request, ActionResponse response) throws SystemException, IOException {
+	public void saveCs(ActionRequest request, ActionResponse response)
+		throws SystemException, IOException {
+
 		long permitId = ParamUtil.getLong(request, "permitId");
 		List<ApplyMaterial> applyMaterials = ApplyMaterialLocalServiceUtil.findByPermitId(permitId, -1, -1);
 		String[] csyjs = ParamUtil.getParameterValues(request, "csyj");
@@ -181,7 +202,9 @@ public class PermitApprovalPortlet extends MVCPortlet {
 	}
 
 	// 保存复核fh和sh
-	public void saveFh(ActionRequest request, ActionResponse response) throws SystemException, IOException {
+	public void saveFh(ActionRequest request, ActionResponse response)
+		throws SystemException, IOException {
+
 		long permitId = ParamUtil.getLong(request, "permitId");
 		List<ApplyMaterial> applyMaterials = ApplyMaterialLocalServiceUtil.findByPermitId(permitId, -1, -1);
 		String[] fhyjs = ParamUtil.getParameterValues(request, "fhyj");
@@ -195,7 +218,9 @@ public class PermitApprovalPortlet extends MVCPortlet {
 	}
 
 	// 保存审核sh和sp
-	public void saveSh(ActionRequest request, ActionResponse response) throws SystemException, IOException {
+	public void saveSh(ActionRequest request, ActionResponse response)
+		throws SystemException, IOException {
+
 		long permitId = ParamUtil.getLong(request, "permitId");
 		List<ApplyMaterial> applyMaterials = ApplyMaterialLocalServiceUtil.findByPermitId(permitId, -1, -1);
 		String[] shyjs = ParamUtil.getParameterValues(request, "shyj");
@@ -208,7 +233,9 @@ public class PermitApprovalPortlet extends MVCPortlet {
 		redirect(request, response);
 	}
 
-	public void redirect(ActionRequest request, ActionResponse response) throws IOException {
+	public void redirect(ActionRequest request, ActionResponse response)
+		throws IOException {
+
 		String redirect = ParamUtil.getString(request, "redirectURL");
 		String permitId = ParamUtil.getString(request, "permitId");
 		redirect += "&" + response.getNamespace() + "permitId=" + permitId;
@@ -216,215 +243,226 @@ public class PermitApprovalPortlet extends MVCPortlet {
 	}
 
 	// 生成许可证pdf
-		public FileEntry fillTemplate( DLFileEntry fileEntry, String newPDFPath,
-				Map<String, String> map,ResourceRequest request, ResourceResponse response,Permit permit) throws IOException, DocumentException, PortalException, SystemException,
-				com.lowagie.text.DocumentException {
-			PdfReader pdfReader = new PdfReader(fileEntry.getContentStream());
-			File file = new File(newPDFPath);
-			file.delete();
-			FileOutputStream outputStream = new FileOutputStream(file);
-			ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-			PdfStamper pdfStamper = new PdfStamper(pdfReader, byteArrayOutputStream);
-			AcroFields acroFields = pdfStamper.getAcroFields();
-			Iterator<String> iterator = acroFields.getFields().keySet().iterator();
-			while (iterator.hasNext()) {
-				String data = iterator.next().toString();
-				acroFields.setField(data, map.get(data));
-			}
-			pdfStamper.setFormFlattening(true);
-			pdfStamper.close();
-			Document document = new Document();
-			PdfCopy pdfCopy = new PdfCopy(document, outputStream);
-			document.open();
-			for (int i=1;i<=pdfReader.getNumberOfPages();i++) {
-				PdfImportedPage importedPage = pdfCopy.getImportedPage(new PdfReader(byteArrayOutputStream.toByteArray()), i);
-				pdfCopy.addPage(importedPage);	
-			}
+	public FileEntry fillTemplate(
+		DLFileEntry fileEntry, String newPDFPath, Map<String, String> map, ResourceRequest request,
+		ResourceResponse response, Permit permit)
+		throws IOException, DocumentException, PortalException, SystemException, com.lowagie.text.DocumentException {
 
-			document.close();
-			ServiceContext serviceContext = new ServiceContext();
-			serviceContext.setAddGuestPermissions(true);
-			serviceContext.setIndexingEnabled(true);
-			long userId = PortalUtil.getUserId(request);
-			long repositoryId = Long.valueOf(PropsUtil.get("global.group.id"));
-			long folderId = Long.valueOf(PropsUtil.get("sgxkz.pdf.folder.id"));
-			return DLAppLocalServiceUtil.addFileEntry(userId, repositoryId, folderId, file.getName(), "application/pdf",permit.getSgxkzbh(),
-					null, null, file, serviceContext);
+		PdfReader pdfReader = new PdfReader(fileEntry.getContentStream());
+		File file = new File(newPDFPath);
+		file.delete();
+		FileOutputStream outputStream = new FileOutputStream(file);
+		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+		PdfStamper pdfStamper = new PdfStamper(pdfReader, byteArrayOutputStream);
+		AcroFields acroFields = pdfStamper.getAcroFields();
+		Iterator<String> iterator = acroFields.getFields().keySet().iterator();
+		while (iterator.hasNext()) {
+			String data = iterator.next().toString();
+			acroFields.setField(data, map.get(data));
+		}
+		pdfStamper.setFormFlattening(true);
+		pdfStamper.close();
+		Document document = new Document();
+		PdfCopy pdfCopy = new PdfCopy(document, outputStream);
+		document.open();
+		for (int i = 1; i <= pdfReader.getNumberOfPages(); i++) {
+			PdfImportedPage importedPage =
+				pdfCopy.getImportedPage(new PdfReader(byteArrayOutputStream.toByteArray()), i);
+			pdfCopy.addPage(importedPage);
 		}
 
-		public Map<String, String> getMap(long permitId, String xmlx) throws PortalException, SystemException {
-			Map<String, String> map = new HashMap<String, String>();
-			Permit permit = PermitLocalServiceUtil.getPermit(permitId);
-			ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
-			String title = "上海市(" + xmlx + ")工程施工许可证";
-			String bh = "";
-			if(Validator.isNotNull(permit.getSgxkzbh())){
-				bh = permit.getSgxkzbh();
-			}
-			String gj = "";
-			if (xmlx.equals("港口")) {
-				gj = "根据《中华人民共和国港口法》等相关法律规定，经审查，本工程符合施工条件，准予施工。";
-			} else if (xmlx.equals("公路")) {
-				gj = "根据《中华人民共和国公路法》等相关法律规定，经审查，本工程符合施工条件，准予施工。";
-			} else {
-				gj = "根据《中华人民共和国交通建设法》等相关法律规定，经审查，本工程符合施工条件，准予施工。";
-			}
-			String jsdw = projectProfile.getJsdwmc();
-			String gcmc = projectProfile.getGcmc();
-			String gcwz = projectProfile.getJsdd();
-			String gcnr = projectProfile.getGcnr();
-			String xmtzgs = projectProfile.getXmtzgs() + "万元";
-			String htjg = projectProfile.getHtjg() + "万元";
-			String sjdw = "";
-			String sgdw = "";
-			String jldw = "";
+		document.close();
+		ServiceContext serviceContext = new ServiceContext();
+		serviceContext.setAddGuestPermissions(true);
+		serviceContext.setIndexingEnabled(true);
+		long userId = PortalUtil.getUserId(request);
+		long repositoryId = Long.valueOf(PropsUtil.get("global.group.id"));
+		long folderId = Long.valueOf(PropsUtil.get("sgxkz.pdf.folder.id"));
+		return DLAppLocalServiceUtil.addFileEntry(
+			userId, repositoryId, folderId, file.getName(), "application/pdf", permit.getSgxkzbh(), null, null, file,
+			serviceContext);
+	}
 
-			List<ParticipationUnit> participationUnits = ParticipationUnitLocalServiceUtil.findByPermitId(permitId, -1, -1);
-			for (ParticipationUnit participationUnit : participationUnits) {
-				if (participationUnit.getDwlx().equals("设计单位")) {
-					sjdw = participationUnit.getDwmc();
-				}
-				if (participationUnit.getDwlx().equals("施工单位")) {
-					sgdw = participationUnit.getDwmc();
-				}
-				if (participationUnit.getDwlx().equals("监理单位")) {
-					jldw = participationUnit.getDwmc();
-				}
-			}
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-			String jhkg = sdf.format(projectProfile.getJhkg());
-			String jhjg = sdf.format(projectProfile.getJhjg());
-			String jhkgrq = jhkg.substring(0, 4) + "年" + jhkg.substring(4, 6) + "月" + jhkg.substring(6, 8) + "日";
-			String jhjgrq = jhjg.substring(0, 4) + "年" + jhjg.substring(4, 6) + "月" + jhjg.substring(6, 8) + "日";
-			String bz = "";
-			map.put("xmtzgs", xmtzgs);
-			map.put("htjg", htjg);
-			map.put("gcwz", gcwz);
-			map.put("gcnr", gcnr);
-			map.put("jsdw", jsdw);
-			map.put("gcmc", gcmc);
-			map.put("bh", bh);
-			map.put("gj", gj);
-			map.put("title", title);
-			map.put("jhkgrq", jhkgrq);
-			map.put("jhjgrq", jhjgrq);
-			map.put("sgdw", sgdw);
-			map.put("jldw", jldw);
-			map.put("sjdw", sjdw);
-			map.put("bz", bz);
-			return map;
+	public Map<String, String> getMap(long permitId, String xmlx)
+		throws PortalException, SystemException {
+
+		Map<String, String> map = new HashMap<String, String>();
+		Permit permit = PermitLocalServiceUtil.getPermit(permitId);
+		ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
+		String title = "上海市(" + xmlx + ")工程施工许可证";
+		String bh = "";
+		if (Validator.isNotNull(permit.getSgxkzbh())) {
+			bh = permit.getSgxkzbh();
 		}
-
-		public Map<String, String> getKgbaMap(long permitId) throws PortalException, SystemException {
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-			Map<String, String> map = new HashMap<String, String>();
-			Permit permit =PermitLocalServiceUtil.getPermit(permitId);
-			ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
-			String babh = "";
-			if(Validator.isNotNull(permit.getSgxkzbh())){
-				babh = permit.getSgxkzbh();
-			}
-			String xmmc = projectProfile.getGcmc();
-			String jsdd = projectProfile.getJsdd();
-			String tzly = projectProfile.getTzly();
-			String gkpzwh = projectProfile.getGkpzhhzjghwh();
-			Date pfhhzrqDate = projectProfile.getPfhhzrq();
-			String pfhhzrq = sdf.format(pfhhzrqDate);
-			String hzrq = pfhhzrq.substring(0, 4) + "年" + pfhhzrq.substring(4, 6) + "月" + pfhhzrq.substring(6, 8) + "日";
-			String tzgs = projectProfile.getXmtzgs();
-			String cbpzwh = projectProfile.getCbsjpzjghwh();
-			Date pfrqDate = projectProfile.getPfrq();
-			String pfrqStr = sdf.format(pfrqDate);
-			String pfrq = pfrqStr.substring(0, 4) + "年" + pfrqStr.substring(4, 6) + "月" + pfrqStr.substring(6, 8) + "日";
-			String pfgq = projectProfile.getPfgq()+"天";
-			String jsgm = projectProfile.getJsgcgm()+"。"+projectProfile.getGcnr();
-			String pzjghwh = projectProfile.getPzjghwh();
-			String xmdw = projectProfile.getXmdw();
-			String xmdwfzr = projectProfile.getXmfzr();
-			String xmdwfzrlxdh = projectProfile.getXmfzrlxdh();
-			String sjdw = projectProfile.getZyjldw();
-			String sjdwzbfs = projectProfile.getSj_zbfs();
-			String sjdwzbj = projectProfile.getSj_zbj();
-			String sjdwzzdj = projectProfile.getSj_zzdj();
-			String sjdwzzdjzs = projectProfile.getSj_zzdjzsbh();
-			String sjdwxmfzr = projectProfile.getSj_xmfzr();
-			String sjdwxmfzrzs = projectProfile.getSj_xmfzrzsbh();
-			
-			String jldw = projectProfile.getZyjldw();
-			String jldwzbfs = projectProfile.getJl_zbfs();
-			String jldwzbj = projectProfile.getJl_zbj();
-			String jldwzzdj = projectProfile.getJl_zzdj();
-			String jldwzzdjzs = projectProfile.getJl_zzdjzsbh();
-			String jldwzj = projectProfile .getJl_zj();
-			String jldwzjzs = projectProfile.getJl_zjzsbh();
-			
-			String sgdw = projectProfile.getZysgdw();
-			String sgdwzbfs = projectProfile.getSg_zbfs();
-			String sgdwzbj = projectProfile.getSg_zbj();
-			String sgdwzzdj = projectProfile.getSg_zzdj();
-			String sgdwzzdjzs = projectProfile.getSg_zzdjzsbh();
-			String sgdwxmjl = projectProfile.getSg_xmjl();
-			String sgdwxmjlzs = projectProfile.getSg_xmjlzsbh();  	
-			
-			String jszjjh = projectProfile.getJszjjhlsqk();
-			String dcqwcqk = projectProfile.getDcqwcqk();
-			String sgzbqk = projectProfile.getSgzbqk();
-			String xgwj = projectProfile.getSytdxgwj();
-			String gczljd = projectProfile.getGczljddjqk();
-			
-			
-			String jhkgrq = sdf.format(projectProfile.getJhkg());
-			String jhjgrq = sdf.format(projectProfile.getJhjg());
-			String jhkg = jhkgrq.substring(0, 4) + "年" + jhkgrq.substring(4, 6) + "月" + jhkgrq.substring(6, 8) + "日";
-			String jhwg = jhjgrq.substring(0, 4) + "年" + jhjgrq.substring(4, 6) + "月" + jhjgrq.substring(6, 8) + "日";
-			map.put("babh", babh);
-			map.put("xmmc", xmmc);
-			map.put("jsdd", jsdd);
-			map.put("tzly", tzly);
-			map.put("gkpzwh", gkpzwh);
-			map.put("hzrq", hzrq);
-			map.put("tzgs", tzgs);
-			map.put("cbpzwh", cbpzwh);
-			map.put("pfrq", pfrq);
-			map.put("pfgq", pfgq);
-			map.put("jsgm", jsgm);
-			map.put("pzjghwh", pzjghwh);
-			map.put("xmdw", xmdw);
-			map.put("xmdwfzr", xmdwfzr);
-			map.put("xmdwfzrlxdh", xmdwfzrlxdh);
-			map.put("sjdw", sjdw);
-			map.put("sjdwzbfs", sjdwzbfs);
-			map.put("sjdwzbj", sjdwzbj);
-			map.put("sjdwzzdj", sjdwzzdj);
-			map.put("sjdwzzdjzs", sjdwzzdjzs);
-			map.put("sjdwxmfzr", sjdwxmfzr);
-			map.put("sjdwxmfzrzs", sjdwxmfzrzs);
-			map.put("jldw", jldw);
-			map.put("jldwzbfs", jldwzbfs);
-			map.put("jldwzbj", jldwzbj);
-			map.put("jldwzzdj", jldwzzdj);
-			map.put("jldwzzdjzs", jldwzzdjzs);
-			map.put("jldwzj", jldwzj);
-			map.put("jldwzjzs", jldwzjzs);
-			map.put("sgdw", sgdw);
-			map.put("sgdwzbfs", sgdwzbfs);
-			map.put("sgdwzbj", sgdwzbj);
-			map.put("sgdwzzdj", sgdwzzdj);
-			map.put("sgdwzzdjzs", sgdwzzdjzs);
-			map.put("sgdwxmjl", sgdwxmjl);
-			map.put("sgdwxmjlzs", sgdwxmjlzs);
-			map.put("jszjjh", jszjjh);
-			map.put("dcqwcqk", dcqwcqk);
-			map.put("sgzbqk", sgzbqk);
-			map.put("xgwj", xgwj);
-			map.put("gczljd", gczljd);
-			
-			map.put("jhkg", jhkg);
-			map.put("jhwg", jhwg);
-			return map;
+		String gj = "";
+		if (xmlx.equals("港口")) {
+			gj = "根据《中华人民共和国港口法》等相关法律规定，经审查，本工程符合施工条件，准予施工。";
 		}
+		else if (xmlx.equals("公路")) {
+			gj = "根据《中华人民共和国公路法》等相关法律规定，经审查，本工程符合施工条件，准予施工。";
+		}
+		else {
+			gj = "根据《中华人民共和国交通建设法》等相关法律规定，经审查，本工程符合施工条件，准予施工。";
+		}
+		String jsdw = projectProfile.getJsdwmc();
+		String gcmc = projectProfile.getGcmc();
+		String gcwz = projectProfile.getJsdd();
+		String gcnr = projectProfile.getGcnr();
+		String xmtzgs = projectProfile.getXmtzgs() + "万元";
+		String htjg = projectProfile.getHtjg() + "万元";
+		String sjdw = "";
+		String sgdw = "";
+		String jldw = "";
 
-	public void provideSgxkzbh(long permitId) throws PortalException, SystemException {
+		List<ParticipationUnit> participationUnits = ParticipationUnitLocalServiceUtil.findByPermitId(permitId, -1, -1);
+		for (ParticipationUnit participationUnit : participationUnits) {
+			if (participationUnit.getDwlx().equals("设计单位")) {
+				sjdw = participationUnit.getDwmc();
+			}
+			if (participationUnit.getDwlx().equals("施工单位")) {
+				sgdw = participationUnit.getDwmc();
+			}
+			if (participationUnit.getDwlx().equals("监理单位")) {
+				jldw = participationUnit.getDwmc();
+			}
+		}
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		String jhkg = sdf.format(projectProfile.getJhkg());
+		String jhjg = sdf.format(projectProfile.getJhjg());
+		String jhkgrq = jhkg.substring(0, 4) + "年" + jhkg.substring(4, 6) + "月" + jhkg.substring(6, 8) + "日";
+		String jhjgrq = jhjg.substring(0, 4) + "年" + jhjg.substring(4, 6) + "月" + jhjg.substring(6, 8) + "日";
+		String bz = "";
+		map.put("xmtzgs", xmtzgs);
+		map.put("htjg", htjg);
+		map.put("gcwz", gcwz);
+		map.put("gcnr", gcnr);
+		map.put("jsdw", jsdw);
+		map.put("gcmc", gcmc);
+		map.put("bh", bh);
+		map.put("gj", gj);
+		map.put("title", title);
+		map.put("jhkgrq", jhkgrq);
+		map.put("jhjgrq", jhjgrq);
+		map.put("sgdw", sgdw);
+		map.put("jldw", jldw);
+		map.put("sjdw", sjdw);
+		map.put("bz", bz);
+		return map;
+	}
+
+	public Map<String, String> getKgbaMap(long permitId)
+		throws PortalException, SystemException {
+
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		Map<String, String> map = new HashMap<String, String>();
+		Permit permit = PermitLocalServiceUtil.getPermit(permitId);
+		ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
+		String babh = "";
+		if (Validator.isNotNull(permit.getSgxkzbh())) {
+			babh = permit.getSgxkzbh();
+		}
+		String xmmc = projectProfile.getGcmc();
+		String jsdd = projectProfile.getJsdd();
+		String tzly = projectProfile.getTzly();
+		String gkpzwh = projectProfile.getGkpzhhzjghwh();
+		Date pfhhzrqDate = projectProfile.getPfhhzrq();
+		String pfhhzrq = sdf.format(pfhhzrqDate);
+		String hzrq = pfhhzrq.substring(0, 4) + "年" + pfhhzrq.substring(4, 6) + "月" + pfhhzrq.substring(6, 8) + "日";
+		String tzgs = projectProfile.getXmtzgs();
+		String cbpzwh = projectProfile.getCbsjpzjghwh();
+		Date pfrqDate = projectProfile.getPfrq();
+		String pfrqStr = sdf.format(pfrqDate);
+		String pfrq = pfrqStr.substring(0, 4) + "年" + pfrqStr.substring(4, 6) + "月" + pfrqStr.substring(6, 8) + "日";
+		String pfgq = projectProfile.getPfgq() + "天";
+		String jsgm = projectProfile.getJsgcgm() + "。" + projectProfile.getGcnr();
+		String pzjghwh = projectProfile.getPzjghwh();
+		String xmdw = projectProfile.getXmdw();
+		String xmdwfzr = projectProfile.getXmfzr();
+		String xmdwfzrlxdh = projectProfile.getXmfzrlxdh();
+		String sjdw = projectProfile.getZyjldw();
+		String sjdwzbfs = projectProfile.getSj_zbfs();
+		String sjdwzbj = projectProfile.getSj_zbj();
+		String sjdwzzdj = projectProfile.getSj_zzdj();
+		String sjdwzzdjzs = projectProfile.getSj_zzdjzsbh();
+		String sjdwxmfzr = projectProfile.getSj_xmfzr();
+		String sjdwxmfzrzs = projectProfile.getSj_xmfzrzsbh();
+
+		String jldw = projectProfile.getZyjldw();
+		String jldwzbfs = projectProfile.getJl_zbfs();
+		String jldwzbj = projectProfile.getJl_zbj();
+		String jldwzzdj = projectProfile.getJl_zzdj();
+		String jldwzzdjzs = projectProfile.getJl_zzdjzsbh();
+		String jldwzj = projectProfile.getJl_zj();
+		String jldwzjzs = projectProfile.getJl_zjzsbh();
+
+		String sgdw = projectProfile.getZysgdw();
+		String sgdwzbfs = projectProfile.getSg_zbfs();
+		String sgdwzbj = projectProfile.getSg_zbj();
+		String sgdwzzdj = projectProfile.getSg_zzdj();
+		String sgdwzzdjzs = projectProfile.getSg_zzdjzsbh();
+		String sgdwxmjl = projectProfile.getSg_xmjl();
+		String sgdwxmjlzs = projectProfile.getSg_xmjlzsbh();
+
+		String jszjjh = projectProfile.getJszjjhlsqk();
+		String dcqwcqk = projectProfile.getDcqwcqk();
+		String sgzbqk = projectProfile.getSgzbqk();
+		String xgwj = projectProfile.getSytdxgwj();
+		String gczljd = projectProfile.getGczljddjqk();
+
+		String jhkgrq = sdf.format(projectProfile.getJhkg());
+		String jhjgrq = sdf.format(projectProfile.getJhjg());
+		String jhkg = jhkgrq.substring(0, 4) + "年" + jhkgrq.substring(4, 6) + "月" + jhkgrq.substring(6, 8) + "日";
+		String jhwg = jhjgrq.substring(0, 4) + "年" + jhjgrq.substring(4, 6) + "月" + jhjgrq.substring(6, 8) + "日";
+		map.put("babh", babh);
+		map.put("xmmc", xmmc);
+		map.put("jsdd", jsdd);
+		map.put("tzly", tzly);
+		map.put("gkpzwh", gkpzwh);
+		map.put("hzrq", hzrq);
+		map.put("tzgs", tzgs);
+		map.put("cbpzwh", cbpzwh);
+		map.put("pfrq", pfrq);
+		map.put("pfgq", pfgq);
+		map.put("jsgm", jsgm);
+		map.put("pzjghwh", pzjghwh);
+		map.put("xmdw", xmdw);
+		map.put("xmdwfzr", xmdwfzr);
+		map.put("xmdwfzrlxdh", xmdwfzrlxdh);
+		map.put("sjdw", sjdw);
+		map.put("sjdwzbfs", sjdwzbfs);
+		map.put("sjdwzbj", sjdwzbj);
+		map.put("sjdwzzdj", sjdwzzdj);
+		map.put("sjdwzzdjzs", sjdwzzdjzs);
+		map.put("sjdwxmfzr", sjdwxmfzr);
+		map.put("sjdwxmfzrzs", sjdwxmfzrzs);
+		map.put("jldw", jldw);
+		map.put("jldwzbfs", jldwzbfs);
+		map.put("jldwzbj", jldwzbj);
+		map.put("jldwzzdj", jldwzzdj);
+		map.put("jldwzzdjzs", jldwzzdjzs);
+		map.put("jldwzj", jldwzj);
+		map.put("jldwzjzs", jldwzjzs);
+		map.put("sgdw", sgdw);
+		map.put("sgdwzbfs", sgdwzbfs);
+		map.put("sgdwzbj", sgdwzbj);
+		map.put("sgdwzzdj", sgdwzzdj);
+		map.put("sgdwzzdjzs", sgdwzzdjzs);
+		map.put("sgdwxmjl", sgdwxmjl);
+		map.put("sgdwxmjlzs", sgdwxmjlzs);
+		map.put("jszjjh", jszjjh);
+		map.put("dcqwcqk", dcqwcqk);
+		map.put("sgzbqk", sgzbqk);
+		map.put("xgwj", xgwj);
+		map.put("gczljd", gczljd);
+
+		map.put("jhkg", jhkg);
+		map.put("jhwg", jhwg);
+		return map;
+	}
+
+	public void provideSgxkzbh(long permitId)
+		throws PortalException, SystemException {
+
 		String sgxkzbh = "JT";// JT
 		Permit permit1 = PermitLocalServiceUtil.getPermit(permitId);
 		sgxkzbh = sgxkzbh + permit1.getBjbh() + permit1.getBdh();// 报建编号+标段号
@@ -446,34 +484,47 @@ public class PermitApprovalPortlet extends MVCPortlet {
 		}
 		if (num / 10 < 1) {
 			sgxkzbh = sgxkzbh + "00" + num;
-		} else if (num / 100 < 1) {
+		}
+		else if (num / 100 < 1) {
 			sgxkzbh = sgxkzbh + "0" + num;
-		} else if (num / 1000 < 1) {
+		}
+		else if (num / 1000 < 1) {
 			sgxkzbh = sgxkzbh + num;
 		}
 		permit1.setSgxkzbh(sgxkzbh);
 		PermitLocalServiceUtil.updatePermit(permit1);
 	}
 
-	public String getDownLoadURL(ResourceRequest request,ResourceResponse response, long permitId,long fileEntryId,String newPDFPath,Map<String,String> map) throws PortalException, SystemException, IOException, DocumentException, com.lowagie.text.DocumentException {
+	public String getDownLoadURL(
+		ResourceRequest request, ResourceResponse response, long permitId, long fileEntryId, String newPDFPath,
+		Map<String, String> map)
+		throws PortalException, SystemException, IOException, DocumentException, com.lowagie.text.DocumentException {
+
 		String downloadURL = "";
 		Permit permit = PermitLocalServiceUtil.getPermit(permitId);
-		if(permit.getSgxkzFileEntryId()==0){
+		if (permit.getSgxkzFileEntryId() == 0) {
 			DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(fileEntryId);
-			FileEntry file = fillTemplate(fileEntry, newPDFPath, map,request,response,permit);
+			FileEntry file = fillTemplate(fileEntry, newPDFPath, map, request, response, permit);
 			permit.setSgxkzFileEntryId(file.getFileEntryId());
 			PermitLocalServiceUtil.updatePermit(permit);
-			downloadURL = "/documents/" + file.getGroupId()+"/"+file.getFolderId()+"/"+file.getTitle()+"?&download=true";
-		}else{
-			DLFileEntry dlFileEntry =DLFileEntryLocalServiceUtil.getDLFileEntry(permit.getSgxkzFileEntryId());
-			downloadURL = "/documents/" + dlFileEntry.getGroupId()+"/"+dlFileEntry.getFolderId()+"/"+dlFileEntry.getTitle()+"?&download=true";
+			downloadURL =
+				"/documents/" + file.getGroupId() + "/" + file.getFolderId() + "/" + file.getTitle() +
+					"?&download=true";
+		}
+		else {
+			DLFileEntry dlFileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(permit.getSgxkzFileEntryId());
+			downloadURL =
+				"/documents/" + dlFileEntry.getGroupId() + "/" + dlFileEntry.getFolderId() + "/" +
+					dlFileEntry.getTitle() + "?&download=true";
 		}
 		return downloadURL;
 	}
-	
-	public void generatePDF(DLFileEntry fileEntry, String newPDFPath, Map<String, String> map,
-			ResourceRequest request, ResourceResponse response, Permit permit) throws IOException, DocumentException,
-			PortalException, SystemException, com.lowagie.text.DocumentException {
+
+	public void generatePDF(
+		DLFileEntry fileEntry, String newPDFPath, Map<String, String> map, ResourceRequest request,
+		ResourceResponse response, Permit permit)
+		throws IOException, DocumentException, PortalException, SystemException, com.lowagie.text.DocumentException {
+
 		PdfReader pdfReader = new PdfReader(fileEntry.getContentStream());
 		File file = new File(newPDFPath);
 		FileOutputStream outputStream = new FileOutputStream(file);
@@ -491,113 +542,125 @@ public class PermitApprovalPortlet extends MVCPortlet {
 		PdfCopy pdfCopy = new PdfCopy(document, outputStream);
 		document.open();
 		for (int i = 1; i <= pdfReader.getNumberOfPages(); i++) {
-			PdfImportedPage importedPage = pdfCopy.getImportedPage(new PdfReader(byteArrayOutputStream.toByteArray()),
-					i);
+			PdfImportedPage importedPage =
+				pdfCopy.getImportedPage(new PdfReader(byteArrayOutputStream.toByteArray()), i);
 			pdfCopy.addPage(importedPage);
 		}
 		document.close();
 	}
-	
+
 	public void addDLFileEntry(ActionRequest actionRequest, ActionResponse actionResponse) {
+
 		try {
 			UploadPortletRequest uploadPortletRequest = PortalUtil.getUploadPortletRequest(actionRequest);
 			String sourceFileName = uploadPortletRequest.getFileName("file");
 			File file = uploadPortletRequest.getFile("file");
-			ServiceContext serviceContext = ServiceContextFactory.getInstance(DLFileEntry.class.getName(), actionRequest);
-			String[] groupPermissions = { "VIEW" };
+			ServiceContext serviceContext =
+				ServiceContextFactory.getInstance(DLFileEntry.class.getName(), actionRequest);
+			String[] groupPermissions = {
+				"VIEW"
+			};
 			serviceContext.setGroupPermissions(groupPermissions);
-			String materialId=ParamUtil.getString(actionRequest, "materialId");
-			String uploadfileType=ParamUtil.getString(actionRequest, "uploadfileType");
-			String no=ParamUtil.getString(actionRequest, "no");
+			String materialId = ParamUtil.getString(actionRequest, "materialId");
+			String uploadfileType = ParamUtil.getString(actionRequest, "uploadfileType");
+			String no = ParamUtil.getString(actionRequest, "no");
 			byte[] fileBytes = null;
-			long fileSize=0l;
-			FileEntry fileEntry=null;
+			long fileSize = 0l;
+			FileEntry fileEntry = null;
 			if (null != file) {
 				fileBytes = FileUtil.getBytes(file);
-				fileSize=fileBytes.length/1024/1024;
+				fileSize = fileBytes.length / 1024 / 1024;
 			}
 			String fileTitle = "";
-			
-			String fileExtension=sourceFileName.substring(sourceFileName.lastIndexOf(".")+1).toUpperCase().trim();
-			String upLoadMessage="上传成功！";
-			Boolean upLoadStatus=true;
-			if(!fileExtension.equals("JPG")&&!fileExtension.equals("PDF")){
-				upLoadMessage="文件上传仅限于jpg或者pdf格式！";
-				upLoadStatus=false;
+
+			String fileExtension = sourceFileName.substring(sourceFileName.lastIndexOf(".") + 1).toUpperCase().trim();
+			String upLoadMessage = "上传成功！";
+			Boolean upLoadStatus = true;
+			if (!fileExtension.equals("JPG") && !fileExtension.equals("PDF")) {
+				upLoadMessage = "文件上传仅限于jpg或者pdf格式！";
+				upLoadStatus = false;
 				SessionErrors.add(actionRequest, "error-key");
-	        }else if(fileExtension.equals("JPG")){
-	        	if(fileSize>2){	
-	        		upLoadMessage="上传的jpg文件超过2M,请压缩后上传！";
-	        		upLoadStatus=false;
-	        		SessionErrors.add(actionRequest, "error-key");
-	        	}
-	        }else if(fileExtension.equals("PDF")){
-	        	if(fileSize>20){	
-	        		upLoadMessage="上传的pdf文件超过20M,请压缩或拆分后上传！";
-	        		upLoadStatus=false;
-	        		SessionErrors.add(actionRequest, "error-key");
-	        	}
-	        }
-			if (!materialId.equals("0")&upLoadStatus) {
-				ApplyMaterial applyMaterial = ApplyMaterialLocalServiceUtil.getApplyMaterial(Long
-					.valueOf(materialId));
-				String fileEntryIds="";
-				if(uploadfileType.equals("jgzxFile")){
-					 fileTitle = applyMaterial.getClmc() +"补正材料(建管中心)"+ "-" + ParamUtil.getString(actionRequest, "no") + "." + fileExtension.toLowerCase();
-					 fileEntryIds = applyMaterial.getBzclIds();
-				}else if(uploadfileType.equals("wjscFile")){
-					 fileTitle = applyMaterial.getClmc() +"补正材料(委建设处)"+ "-" + ParamUtil.getString(actionRequest, "no") + "." + fileExtension.toLowerCase();
-					 fileEntryIds = applyMaterial.getWjscbzclIds();
+			}
+			else if (fileExtension.equals("JPG")) {
+				if (fileSize > 2) {
+					upLoadMessage = "上传的jpg文件超过2M,请压缩后上传！";
+					upLoadStatus = false;
+					SessionErrors.add(actionRequest, "error-key");
 				}
-	
-				 fileEntry=uploadFile(actionRequest, sourceFileName, fileBytes, serviceContext, "permitapplication_WAR_cpportlet", materialId, fileTitle);	
+			}
+			else if (fileExtension.equals("PDF")) {
+				if (fileSize > 20) {
+					upLoadMessage = "上传的pdf文件超过20M,请压缩或拆分后上传！";
+					upLoadStatus = false;
+					SessionErrors.add(actionRequest, "error-key");
+				}
+			}
+			if (!materialId.equals("0") & upLoadStatus) {
+				ApplyMaterial applyMaterial = ApplyMaterialLocalServiceUtil.getApplyMaterial(Long.valueOf(materialId));
+				String fileEntryIds = "";
+				if (uploadfileType.equals("jgzxFile")) {
+					fileTitle =
+						applyMaterial.getClmc() + "补正材料(建管中心)" + "-" + ParamUtil.getString(actionRequest, "no") + "." +
+							fileExtension.toLowerCase();
+					fileEntryIds = applyMaterial.getBzclIds();
+				}
+				else if (uploadfileType.equals("wjscFile")) {
+					fileTitle =
+						applyMaterial.getClmc() + "补正材料(委建设处)" + "-" + ParamUtil.getString(actionRequest, "no") + "." +
+							fileExtension.toLowerCase();
+					fileEntryIds = applyMaterial.getWjscbzclIds();
+				}
+
+				fileEntry =
+					uploadFile(
+						actionRequest, sourceFileName, fileBytes, serviceContext, "permitapplication_WAR_cpportlet",
+						materialId, fileTitle);
 				// 添加第一条数据时
-				 if (Validator.isNull(fileEntryIds)) {
-						fileEntryIds = fileEntry.getFileEntryId() + "|" + fileEntry.getExtension();
-					}
-					// 如果已有数据
-					else {
-						fileEntryIds = fileEntryIds + "," + fileEntry.getFileEntryId() + "|" + fileEntry.getExtension();						
-					}
-				 if(uploadfileType.equals("jgzxFile")){
-					 applyMaterial.setBzclIds(fileEntryIds);
-					 actionResponse.setRenderParameter("materialName", applyMaterial.getClmc()+"补正材料(建管中心)");
-				}else if(uploadfileType.equals("wjscFile")){
-					applyMaterial.setWjscbzclIds(fileEntryIds);
-					actionResponse.setRenderParameter("materialName", applyMaterial.getClmc()+"补正材料(委建设处)");
+				if (Validator.isNull(fileEntryIds)) {
+					fileEntryIds = fileEntry.getFileEntryId() + "|" + fileEntry.getExtension();
 				}
-				ApplyMaterialLocalServiceUtil.updateApplyMaterial(applyMaterial); 
-				no=(Integer.valueOf(no)+1)+"";	
+				// 如果已有数据
+				else {
+					fileEntryIds = fileEntryIds + "," + fileEntry.getFileEntryId() + "|" + fileEntry.getExtension();
+				}
+				if (uploadfileType.equals("jgzxFile")) {
+					applyMaterial.setBzclIds(fileEntryIds);
+					actionResponse.setRenderParameter("materialName", applyMaterial.getClmc() + "补正材料(建管中心)");
+				}
+				else if (uploadfileType.equals("wjscFile")) {
+					applyMaterial.setWjscbzclIds(fileEntryIds);
+					actionResponse.setRenderParameter("materialName", applyMaterial.getClmc() + "补正材料(委建设处)");
+				}
+				ApplyMaterialLocalServiceUtil.updateApplyMaterial(applyMaterial);
+				no = (Integer.valueOf(no) + 1) + "";
 				actionResponse.setRenderParameter("materialId", materialId);
 				actionResponse.setRenderParameter("fieId", Long.toString(fileEntry.getFileEntryId()));
 				actionResponse.setRenderParameter("name", sourceFileName);
 				actionResponse.setRenderParameter("divNo", ParamUtil.getString(actionRequest, "divNo"));
-				actionResponse.setRenderParameter("no", no);
 				actionResponse.setRenderParameter("fileExtension", fileExtension.toLowerCase());
-				SessionMessages.add(actionRequest, "request_processed",applyMaterial.getClmc()+"上传成功！"); 
+				SessionMessages.add(actionRequest, "request_processed", applyMaterial.getClmc() + "上传成功！");
 			}
-			SessionMessages.add(actionRequest, "permitapproval_WAR_cpportlet" + SessionMessages. KEY_SUFFIX_HIDE_DEFAULT_ERROR_MESSAGE);
+			actionResponse.setRenderParameter("no", no);
+			SessionMessages.add(actionRequest, "permitapproval_WAR_cpportlet" +
+				SessionMessages.KEY_SUFFIX_HIDE_DEFAULT_ERROR_MESSAGE);
 			actionResponse.setRenderParameter("uploadfileType", uploadfileType);
 			actionResponse.setRenderParameter("path", "uploadFile");
 			actionResponse.setRenderParameter("upLoadMessage", upLoadMessage);
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	
-	
-	
-	
+
 	@Override
-	public void serveResource(ResourceRequest resourceRequest, ResourceResponse resourceResponse) throws IOException,
-			PortletException {
+	public void serveResource(ResourceRequest resourceRequest, ResourceResponse resourceResponse)
+		throws IOException, PortletException {
 
 		try {
 			String resourceId = resourceRequest.getResourceID();
 			String fileSourceName = "";
-			//预览证书
-			if(resourceId.equals("view")){
+			// 预览证书
+			if (resourceId.equals("view")) {
 				long permitId = ParamUtil.getLong(resourceRequest, "permitId");
 				Permit permit = PermitLocalServiceUtil.getPermit(permitId);
 				ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
@@ -606,23 +669,27 @@ public class PermitApprovalPortlet extends MVCPortlet {
 				String newPDFPath = "";
 				if (xmlx.equals("航道")) {
 					newPDFPath = PropsUtil.get("sgxkz.temp.folder.id") + "航道开工备案.pdf";
-				} else {
+				}
+				else {
 					newPDFPath = PropsUtil.get("sgxkz.temp.folder.id") + "施工许可证书.pdf";
 				}
 				if (xmlx.equals("航道")) {
 					map = getKgbaMap(permitId);
-					generatePDF(DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(PropsUtil
-							.get("sgxkz.hd.pdf.template.id"))), newPDFPath, map, resourceRequest, resourceResponse, permit);
-				} else {
+					generatePDF(
+						DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(PropsUtil.get("sgxkz.hd.pdf.template.id"))),
+						newPDFPath, map, resourceRequest, resourceResponse, permit);
+				}
+				else {
 					map = getMap(permitId, xmlx);
 					if (projectProfile.getXmxz() == 29769) {
-						generatePDF(DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(PropsUtil
-								.get("sgxkz.pdf.template.id"))), newPDFPath, map, resourceRequest, resourceResponse,
-								permit);
-					} else {
-						generatePDF(DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(PropsUtil
-								.get("sgxkz.ls.pdf.template.id"))), newPDFPath, map, resourceRequest, resourceResponse,
-								permit);
+						generatePDF(
+							DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(PropsUtil.get("sgxkz.pdf.template.id"))),
+							newPDFPath, map, resourceRequest, resourceResponse, permit);
+					}
+					else {
+						generatePDF(
+							DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(PropsUtil.get("sgxkz.ls.pdf.template.id"))),
+							newPDFPath, map, resourceRequest, resourceResponse, permit);
 					}
 				}
 
@@ -631,109 +698,122 @@ public class PermitApprovalPortlet extends MVCPortlet {
 				File file = null;
 				if (xmlx.equals("航道")) {
 					file = new File("D:\\temp\\航道开工备案.pdf");
-				} else {
+				}
+				else {
 					file = new File("D:\\temp\\施工许可证书.pdf");
 				}
 				byte[] bytes = FileUtil.getBytes(file);
 				if (xmlx.equals("航道")) {
 					ServletResponseUtil.sendFile(request, response, "航道开工备案.pdf", bytes, ContentTypes.APPLICATION_PDF);
-				}else{
+				}
+				else {
 					ServletResponseUtil.sendFile(request, response, "施工许可证书.pdf", bytes, ContentTypes.APPLICATION_PDF);
 				}
 			}
-			//生成开工备案pdf
-			if(resourceId.equals("printkgbaPdf")){
+			// 生成开工备案pdf
+			if (resourceId.equals("printkgbaPdf")) {
 				long permitId = ParamUtil.getLong(resourceRequest, "permitId");
 				Permit permit = PermitLocalServiceUtil.getPermit(permitId);
-				String newPDFPath = PropsUtil.get("sgxkz.temp.folder.id")+permit.getSgxkzbh()+".pdf";
+				String newPDFPath = PropsUtil.get("sgxkz.temp.folder.id") + permit.getSgxkzbh() + ".pdf";
 				Map<String, String> map = getKgbaMap(permitId);
-				String downloadURL = getDownLoadURL(resourceRequest,resourceResponse,permitId,Long.valueOf(PropsUtil.get("sgxkz.hd.pdf.template.id")),newPDFPath,map);
-				 PrintWriter out = resourceResponse.getWriter();
-				 out.println(downloadURL);
-				 out.flush();
-				 out.close();
-			}
-			//生成施工许可pdf
-			if(resourceId.equals("printsgxkPdf")){
-				long permitId = ParamUtil.getLong(resourceRequest, "permitId");
-				ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
-				String xmlx = DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx()).getName();
-				Permit permit = PermitLocalServiceUtil.getPermit(permitId);
-				String newPDFPath = PropsUtil.get("sgxkz.temp.folder.id")+permit.getSgxkzbh()+".pdf";
-				Map<String, String> map = getMap(permitId, xmlx);
-				String downloadURL =getDownLoadURL(resourceRequest,resourceResponse,permitId, Long.valueOf(PropsUtil.get("sgxkz.pdf.template.id")),newPDFPath,map);
-				 PrintWriter out = resourceResponse.getWriter();
-				 out.println(downloadURL);
-				 out.flush();
-				 out.close();
-			}
-			//生成施工许可绿色pdf
-			if(resourceId.equals("printsgxklsPdf")){
-				long permitId = ParamUtil.getLong(resourceRequest, "permitId");
-				ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
-				String xmlx = DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx()).getName();
-				Permit permit = PermitLocalServiceUtil.getPermit(permitId);
-				String newPDFPath = PropsUtil.get("sgxkz.temp.folder.id")+permit.getSgxkzbh()+".pdf";
-				Map<String, String> map = getMap(permitId, xmlx);
-				String downloadURL =getDownLoadURL(resourceRequest,resourceResponse,permitId, Long.valueOf(PropsUtil.get("sgxkz.ls.pdf.template.id")),newPDFPath,map);
+				String downloadURL =
+					getDownLoadURL(
+						resourceRequest, resourceResponse, permitId,
+						Long.valueOf(PropsUtil.get("sgxkz.hd.pdf.template.id")), newPDFPath, map);
 				PrintWriter out = resourceResponse.getWriter();
-				 out.println(downloadURL);
-				 out.flush();
-				 out.close();
+				out.println(downloadURL);
+				out.flush();
+				out.close();
 			}
-			//生成开工备案excel
-			if(resourceId.equals("printkgbaExcel")){
+			// 生成施工许可pdf
+			if (resourceId.equals("printsgxkPdf")) {
+				long permitId = ParamUtil.getLong(resourceRequest, "permitId");
+				ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
+				String xmlx = DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx()).getName();
+				Permit permit = PermitLocalServiceUtil.getPermit(permitId);
+				String newPDFPath = PropsUtil.get("sgxkz.temp.folder.id") + permit.getSgxkzbh() + ".pdf";
+				Map<String, String> map = getMap(permitId, xmlx);
+				String downloadURL =
+					getDownLoadURL(
+						resourceRequest, resourceResponse, permitId,
+						Long.valueOf(PropsUtil.get("sgxkz.pdf.template.id")), newPDFPath, map);
+				PrintWriter out = resourceResponse.getWriter();
+				out.println(downloadURL);
+				out.flush();
+				out.close();
+			}
+			// 生成施工许可绿色pdf
+			if (resourceId.equals("printsgxklsPdf")) {
+				long permitId = ParamUtil.getLong(resourceRequest, "permitId");
+				ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
+				String xmlx = DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx()).getName();
+				Permit permit = PermitLocalServiceUtil.getPermit(permitId);
+				String newPDFPath = PropsUtil.get("sgxkz.temp.folder.id") + permit.getSgxkzbh() + ".pdf";
+				Map<String, String> map = getMap(permitId, xmlx);
+				String downloadURL =
+					getDownLoadURL(
+						resourceRequest, resourceResponse, permitId,
+						Long.valueOf(PropsUtil.get("sgxkz.ls.pdf.template.id")), newPDFPath, map);
+				PrintWriter out = resourceResponse.getWriter();
+				out.println(downloadURL);
+				out.flush();
+				out.close();
+			}
+			// 生成开工备案excel
+			if (resourceId.equals("printkgbaExcel")) {
 				long permitId = ParamUtil.getLong(resourceRequest, "permitId");
 				Permit permit = PermitLocalServiceUtil.getPermit(permitId);
-				String fileName = permit.getSgxkzbh()+".xls";
+				String fileName = permit.getSgxkzbh() + ".xls";
 				Map<String, String> map = getKgbaMap(permitId);
-				DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(PropsUtil.get("sgxkz.hd.xls.template.id")));
+				DLFileEntry fileEntry =
+					DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(PropsUtil.get("sgxkz.hd.xls.template.id")));
 				XLSTransformer transformer = new XLSTransformer();
-		        HSSFWorkbook hssfWorkbook = transformer.transformXLS(fileEntry.getContentStream(), map);
-		        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+				HSSFWorkbook hssfWorkbook = transformer.transformXLS(fileEntry.getContentStream(), map);
+				ByteArrayOutputStream baos = new ByteArrayOutputStream();
 				hssfWorkbook.write(baos);
 				HttpServletRequest req = PortalUtil.getHttpServletRequest(resourceRequest);
 				HttpServletResponse res = PortalUtil.getHttpServletResponse(resourceResponse);
-				ServletResponseUtil.sendFile(req, res, fileName, baos.toByteArray(),
-						ContentTypes.APPLICATION_VND_MS_EXCEL);
+				ServletResponseUtil.sendFile(
+					req, res, fileName, baos.toByteArray(), ContentTypes.APPLICATION_VND_MS_EXCEL);
 			}
-			//生成施工许可excel
-			if(resourceId.equals("ptintsgxkExcel")){
+			// 生成施工许可excel
+			if (resourceId.equals("ptintsgxkExcel")) {
 				long permitId = ParamUtil.getLong(resourceRequest, "permitId");
 				Permit permit = PermitLocalServiceUtil.getPermit(permitId);
-				String fileName = permit.getSgxkzbh()+".xls";
+				String fileName = permit.getSgxkzbh() + ".xls";
 				ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
 				String xmlx = DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx()).getName();
 				Map<String, String> map = getMap(permitId, xmlx);
-				DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(PropsUtil.get("sgxkz.xls.template.id")) );
+				DLFileEntry fileEntry =
+					DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(PropsUtil.get("sgxkz.xls.template.id")));
 				XLSTransformer transformer = new XLSTransformer();
-		        HSSFWorkbook hssfWorkbook = transformer.transformXLS(fileEntry.getContentStream(), map);
-		        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+				HSSFWorkbook hssfWorkbook = transformer.transformXLS(fileEntry.getContentStream(), map);
+				ByteArrayOutputStream baos = new ByteArrayOutputStream();
 				hssfWorkbook.write(baos);
 				HttpServletRequest req = PortalUtil.getHttpServletRequest(resourceRequest);
 				HttpServletResponse res = PortalUtil.getHttpServletResponse(resourceResponse);
-				ServletResponseUtil.sendFile(req, res, fileName, baos.toByteArray(),
-						ContentTypes.APPLICATION_VND_MS_EXCEL);
+				ServletResponseUtil.sendFile(
+					req, res, fileName, baos.toByteArray(), ContentTypes.APPLICATION_VND_MS_EXCEL);
 			}
-			//生成施工许可绿色excel
-			if(resourceId.equals("printsgxklsExcel")){
+			// 生成施工许可绿色excel
+			if (resourceId.equals("printsgxklsExcel")) {
 				long permitId = ParamUtil.getLong(resourceRequest, "permitId");
 				Permit permit = PermitLocalServiceUtil.getPermit(permitId);
-				String fileName = permit.getSgxkzbh()+".xls";
+				String fileName = permit.getSgxkzbh() + ".xls";
 				ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
 				String xmlx = DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx()).getName();
 				Map<String, String> map = getMap(permitId, xmlx);
-				DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(PropsUtil.get("sgxkz.ls.xls.template.id")));
+				DLFileEntry fileEntry =
+					DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(PropsUtil.get("sgxkz.ls.xls.template.id")));
 				XLSTransformer transformer = new XLSTransformer();
-		        HSSFWorkbook hssfWorkbook = transformer.transformXLS(fileEntry.getContentStream(), map);
-		        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+				HSSFWorkbook hssfWorkbook = transformer.transformXLS(fileEntry.getContentStream(), map);
+				ByteArrayOutputStream baos = new ByteArrayOutputStream();
 				hssfWorkbook.write(baos);
 				HttpServletRequest req = PortalUtil.getHttpServletRequest(resourceRequest);
 				HttpServletResponse res = PortalUtil.getHttpServletResponse(resourceResponse);
-				ServletResponseUtil.sendFile(req, res, fileName, baos.toByteArray(),
-						ContentTypes.APPLICATION_VND_MS_EXCEL);
+				ServletResponseUtil.sendFile(
+					req, res, fileName, baos.toByteArray(), ContentTypes.APPLICATION_VND_MS_EXCEL);
 			}
-			
 
 			// 删除建管中心补正材料文件
 			if ("fileBzclDelete".equals(resourceId)) {
@@ -742,8 +822,8 @@ public class PermitApprovalPortlet extends MVCPortlet {
 				if (!fileId.equals("0")) {
 					DLFileEntry dlFileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(fileId));
 					if (!materialId.equals("0")) {
-						ApplyMaterial applyMaterial = ApplyMaterialLocalServiceUtil.getApplyMaterial(Long
-								.valueOf(materialId));
+						ApplyMaterial applyMaterial =
+							ApplyMaterialLocalServiceUtil.getApplyMaterial(Long.valueOf(materialId));
 						String bzclIds = applyMaterial.getBzclIds();
 						bzclIds = bzclIds + ",";// 加上逗号为了容易替换
 						// 获取文件路径
@@ -758,16 +838,16 @@ public class PermitApprovalPortlet extends MVCPortlet {
 					DLFileEntryLocalServiceUtil.deleteDLFileEntry(Long.valueOf(fileId));
 				}
 			}
-			
-			//删除委建设处材料文件
+
+			// 删除委建设处材料文件
 			if ("fileWjscbzclDelete".equals(resourceId)) {
 				String fileId = ParamUtil.get(resourceRequest, "fileWjscbzclId", "0");
 				String materialId = ParamUtil.get(resourceRequest, "materialId", "0");
 				if (!fileId.equals("0")) {
 					DLFileEntry dlFileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(fileId));
 					if (!materialId.equals("0")) {
-						ApplyMaterial applyMaterial = ApplyMaterialLocalServiceUtil.getApplyMaterial(Long
-								.valueOf(materialId));
+						ApplyMaterial applyMaterial =
+							ApplyMaterialLocalServiceUtil.getApplyMaterial(Long.valueOf(materialId));
 						String wjscbzclIds = applyMaterial.getWjscbzclIds();
 						wjscbzclIds = wjscbzclIds + ",";// 加上逗号为了容易替换
 						// 获取文件路径
@@ -783,27 +863,34 @@ public class PermitApprovalPortlet extends MVCPortlet {
 				}
 			}
 
-		} catch (PortalException e) {
+		}
+		catch (PortalException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (SystemException e) {
+		}
+		catch (SystemException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (IOException e) {
+		}
+		catch (IOException e) {
 			e.printStackTrace();
-		} catch (DocumentException e) {
+		}
+		catch (DocumentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (com.lowagie.text.DocumentException e) {
+		}
+		catch (com.lowagie.text.DocumentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		super.serveResource(resourceRequest, resourceResponse);
 	}
 
-	public FileEntry uploadFile(ActionRequest request, String fileSourceName, byte[] fileBytes,
-			ServiceContext serviceContext, String portletId, String materialId, String fileTitle)
-			throws PortalException, SystemException, IOException {
+	public FileEntry uploadFile(
+		ActionRequest request, String fileSourceName, byte[] fileBytes, ServiceContext serviceContext,
+		String portletId, String materialId, String fileTitle)
+		throws PortalException, SystemException, IOException {
+
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setIndexingEnabled(true);
 
@@ -821,34 +908,41 @@ public class PermitApprovalPortlet extends MVCPortlet {
 			if (Validator.isNotNull(dlParentFolder)) {
 				dlChildFolder = DLFolderLocalServiceUtil.fetchFolder(groupId, dlParentFolder.getFolderId(), materialId);
 				if (Validator.isNull(dlChildFolder)) {
-					dlChildFolder = DLFolderLocalServiceUtil.addFolder(userId, groupId, groupId, false,
-							dlParentFolder.getFolderId(), materialId, "", false, serviceContext);
+					dlChildFolder =
+						DLFolderLocalServiceUtil.addFolder(
+							userId, groupId, groupId, false, dlParentFolder.getFolderId(), materialId, "", false,
+							serviceContext);
 				}
-			} else {
-				dlParentFolder = DLFolderLocalServiceUtil.addFolder(userId, groupId, groupId, true, rootFolderId,
-						portletId, "", true, serviceContext);
-				dlChildFolder = DLFolderLocalServiceUtil.addFolder(userId, groupId, groupId, false,
-						dlParentFolder.getFolderId(), materialId, "", false, serviceContext);
+			}
+			else {
+				dlParentFolder =
+					DLFolderLocalServiceUtil.addFolder(
+						userId, groupId, groupId, true, rootFolderId, portletId, "", true, serviceContext);
+				dlChildFolder =
+					DLFolderLocalServiceUtil.addFolder(
+						userId, groupId, groupId, false, dlParentFolder.getFolderId(), materialId, "", false,
+						serviceContext);
 			}
 		}
 
 		if (fileBytes != null) {
-			fileEntry = DLAppLocalServiceUtil.addFileEntry(userId, groupId, dlChildFolder.getFolderId(),
-					fileSourceName, MimeTypesUtil.getContentType(fileSourceName), fileTitle, null, null, fileBytes,
-					serviceContext);
+			fileEntry =
+				DLAppLocalServiceUtil.addFileEntry(
+					userId, groupId, dlChildFolder.getFolderId(), fileSourceName,
+					MimeTypesUtil.getContentType(fileSourceName), fileTitle, null, null, fileBytes, serviceContext);
 		}
 		return fileEntry;
 	}
-	public void include(String path, RenderRequest renderRequest, RenderResponse renderResponse) throws IOException,
-	PortletException {
+
+	public void include(String path, RenderRequest renderRequest, RenderResponse renderResponse)
+		throws IOException, PortletException {
+
 		PortletRequestDispatcher portletRequestDispatcher = getPortletContext().getRequestDispatcher(path);
 		if (portletRequestDispatcher == null) {
-		} else {
-	portletRequestDispatcher.include(renderRequest, renderResponse);
 		}
-}
-	
-	
-	
-	
+		else {
+			portletRequestDispatcher.include(renderRequest, renderResponse);
+		}
+	}
+
 }
