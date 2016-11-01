@@ -6,7 +6,8 @@ String currentURL=PortalUtil.getCurrentURL(renderRequest);
 renderRequest.setAttribute("currentURL", currentURL);
 %>
 
-<a href="${currentURL}&<portlet:namespace/>curTab=申请材料" id="refreshCurrentPage"></a>
+<a href="${currentURL}&<portlet:namespace/>curTab=申请材料"
+	id="refreshCurrentPage"></a>
 
 <style>
 .aui .table th, .aui .table td {
@@ -106,9 +107,10 @@ renderRequest.setAttribute("currentURL", currentURL);
 	request.setAttribute("mapWjscbzcl", mapWjscbzcl);
 %>
 
- <%@page import="com.liferay.portal.kernel.portlet.LiferayWindowState"%>
-  <portlet:renderURL var="uploadURL" windowState="<%=LiferayWindowState.POP_UP.toString()%>">
-   <portlet:param name="path" value="uploadFile" />
+<%@page import="com.liferay.portal.kernel.portlet.LiferayWindowState"%>
+<portlet:renderURL var="uploadURL"
+	windowState="<%=LiferayWindowState.POP_UP.toString()%>">
+	<portlet:param name="path" value="uploadFile" />
 </portlet:renderURL>
 
 <aui:script>
@@ -116,29 +118,6 @@ Liferay.provide(window,'<portlet:namespace/>closeYourPopUp',
 	    function(data, dialogId) {
 	    var A = AUI();
 	    var curTab=data.trim();
-	   /*  var dataParam=data.split('/');
-	    var materialId=dataParam[0];
-	    var materialName=dataParam[1];
-	    var divNo=dataParam[2];
-	    var fileExtension=dataParam[3];
-		var fileId=dataParam[4]; 
-		var no=dataParam[5];
-		var uploadfileType=dataParam[6];
-		if("jgzxFile"==uploadfileType){
-			var ele = "<div name='fileBzcl"+divNo+"'><a class='fileBzclName' href='javascript:void(0);'>"
-			+ materialName+"-"+no+"."+fileExtension
-			+ "</a> &nbsp;&nbsp;&nbsp;<a href='javascript:void(0)';  onclick='${renderResponse.namespace}fileBzclDelete(this,"
-			+ fileId + ","+materialId+")'>删除</a></div>";
-			$("#fileDivBzcl" + divNo).append(ele);
-			domSort(divNo); 
-		}else if("wjscFile"==uploadfileType){
-			var ele = "<div name='fileWjscbzcl"+divNo+"'><a class='fileWjscbzclName' href='javascript:void(0);'>"
-			+ materialName+"-"+no+"."+fileExtension
-			+ "</a> &nbsp;&nbsp;&nbsp;<a href='javascript:void(0)';  onclick='${renderResponse.namespace}fileWjscbzclDelete(this,"
-			+ fileId + ","+materialId+")'>删除</a></div>"; 
-        	 $("#fileDivWjscbzcl" + divNo).append(ele);
-        	 domSortWjscbzcl(divNo); 
-		} */
 		var dialog = Liferay.Util.Window.getById(dialogId);
 		dialog.destroy();
 		document.getElementById("refreshCurrentPage").click();
@@ -146,7 +125,6 @@ Liferay.provide(window,'<portlet:namespace/>closeYourPopUp',
 	['liferay-util-window']
 );
 </aui:script>
-
 
 <c:set var="namespace" value="<%=renderResponse.getNamespace()%>"></c:set>
 
@@ -183,21 +161,21 @@ Liferay.provide(window,'<portlet:namespace/>closeYourPopUp',
 				<c:if test="${permit.status!=13}">
 					<th style="text-align: center; width: 15%;">委建设处补正材料查看</th>
 				</c:if>
-				 <c:if test="${permit.status==13}"> 
-					<th style="text-align: center; width: 15%;">委建设处补正材料</th>
-					<th style="text-align: center; width: 10%;">操作 <span
-						class="taglib-icon-help"> <img
-							id="yui_patched_v3_11_0_1_1473298445453_1601" tabindex="0"
-							src="/html/themes/control_panel/images/portlet/help.png"
-							onmouseover="Liferay.Portal.ToolTip.show(this);"
-							onfocus="Liferay.Portal.ToolTip.show(this);"
-							onblur="Liferay.Portal.ToolTip.hide();" aria-labelledby="vfyl"
-							alt=""> <span id="vfyl"
-							class="hide-accessible tooltip-text">注:请上传jpg或pdf格式的文件，jpg格式文件大小不能超过2M,pdf格式文件不能超过20M,如果文件超过限定大小，请拆分后重新上传！</span>
-					</span></th>
-				</c:if>
-		</c:if> 
+				<c:if test="${permit.status==13}">
+				<th style="text-align: center; width: 15%;">委建设处补正材料</th>
+				<th style="text-align: center; width: 10%;">操作 <span
+					class="taglib-icon-help"> <img
+						id="yui_patched_v3_11_0_1_1473298445453_1601" tabindex="0"
+						src="/html/themes/control_panel/images/portlet/help.png"
+						onmouseover="Liferay.Portal.ToolTip.show(this);"
+						onfocus="Liferay.Portal.ToolTip.show(this);"
+						onblur="Liferay.Portal.ToolTip.hide();" aria-labelledby="vfyl"
+						alt=""> <span id="vfyl" class="hide-accessible tooltip-text">注:请上传jpg或pdf格式的文件，jpg格式文件大小不能超过2M,pdf格式文件不能超过20M,如果文件超过限定大小，请拆分后重新上传！</span>
+				</span></th>
+			</c:if>
+			</c:if>
 		</thead>
+		
 		<c:forEach items="<%=materialList%>" var="material" varStatus="status">
 			<tr style="text-align: center" class="fileTr">
 				<td style="text-align: center" class="fileNo">${material.xh}</td>
@@ -235,6 +213,8 @@ Liferay.provide(window,'<portlet:namespace/>closeYourPopUp',
 								<c:if test="${not empty material.bzclIds}">
 									<c:forEach items="${mapBzcl[material.materialId]}"
 										var="dlFileEntry" varStatus="varStausNo">
+										
+										
 										<div>
 											<c:set var="filePathBzcl"
 												value="${dlFileEntry.groupId }/${dlFileEntry.folderId}/${dlFileEntry.title }" />
@@ -266,42 +246,26 @@ Liferay.provide(window,'<portlet:namespace/>closeYourPopUp',
 				此处可以根据状态来隐藏删除按钮的显示，提交后删除按钮不再显示
 				 -->
 								<c:if test="${not empty material.bzclIds}">
-									<c:forEach items="${fn:split(material.bzclIds,',')}"
-										var="bzclId" varStatus="statusSub">
-										<div name="fileBzcl${status.index+1}">
-											<a class="fileBzclName" href="javascript:void(0);">
-												${material.clmc}补正材料-${statusSub.index+1}.${fn:split(bzclId,'|')[1]}
+								<c:forEach items="${mapBzcl[material.materialId]}"
+										var="dlFileEntry" varStatus="statusJgzx">
+									<div name="fileBzcl${status.index+1}">
+										<a class="fileBzclName" href="javascript:void(0);">
+												${dlFileEntry.title}
 											</a> &nbsp;&nbsp;&nbsp; <a href='javascript:void(0)'
-												;  onclick="${namespace}fileBzclDelete(this,${fn:split(bzclId,'|')[0]},${material.materialId})">删除</a>
-										</div>
-									</c:forEach>
+												;  onclick="${namespace}fileBzclDelete(this,${dlFileEntry.fileEntryId},${material.materialId})">删除</a>
+									</div>	
+
+								</c:forEach>		
 								</c:if>
 							</div>
 						</td>
 						<td style="text-align: center"><aui:button
-								name="uploadJGZXFile${status.index+1}" type="button" value="上传" /></td>
-								<aui:script use="liferay-util-window">
-				A.one('#<portlet:namespace/>uploadJGZXFile${status.index+1}').on('click', function(event) {
-					var no = findFileNo('${status.index+1}');
-				    <!-- alert("open"); -->
-					Liferay.Util.openWindow({
-						dialog: {
-							centered: true,
-							height: 500,
-							modal: true,
-							width: 500
-						},
-						id: '<portlet:namespace/>dialog',
-						title: '文件上传',
-						uri: '<%=uploadURL %>${status.index+1}/${material.materialId}/'+no+'/jgzxFile'
-					});
-				});
-				</aui:script>
-					</c:if>
+								name="uploadJGZXFile${status.index+1}" type="button" value="上传" onclick="newWindow('${uploadURL}','${status.index+1}','${material.materialId}','jgzxFile')"/></td>
+				</c:if>
 
 
 					<!-- 委建设处补正材料 -->
-					<c:if test="${permit.status!=13}">
+				<c:if test="${permit.status!=13}">
 						<td style="text-align: center">
 
 							<div class="${material.materialId}">
@@ -330,56 +294,37 @@ Liferay.provide(window,'<portlet:namespace/>closeYourPopUp',
 								</c:if>
 							</div>
 						</td>
-					</c:if>
+					</c:if> 
 
 
 
-					 <c:if test="${permit.status==13}">  
+					<c:if test="${permit.status==13}">
 						<td style="text-align: center">
 							<div id="fileDivWjscbzcl${status.index+1}">
 								<!-- todo
 				此处可以根据状态来隐藏删除按钮的显示，提交后删除按钮不再显示
 				 -->
 								<c:if test="${not empty material.wjscbzclIds}">
-									<c:forEach items="${fn:split(material.wjscbzclIds,',')}"
-										var="wjscbzclId" varStatus="statusSub">
-										<div name="fileWjscbzcl${status.index+1}">
-											<a class="fileWjscbzclName" href="javascript:void(0);">
-												${material.clmc}补正材料(委建设处)-${statusSub.index+1}.${fn:split(wjscbzclId,'|')[1]}
+								
+									<c:forEach items="${mapWjscbzcl[material.materialId]}"
+										var="dlFileEntry" varStatus="statusWjsc">
+									<div name="fileBzcl${status.index+1}">
+										<a class="fileBzclName" href="javascript:void(0);">
+												${dlFileEntry.title}
 											</a> &nbsp;&nbsp;&nbsp; <a href='javascript:void(0)'
-												;  onclick="${namespace}fileWjscbzclDelete(this,${fn:split(wjscbzclId,'|')[0]},${material.materialId})">删除</a>
-										</div>
+												;  onclick="${namespace}fileWjscbzclDelete(this,${dlFileEntry.fileEntryId},${material.materialId})">删除</a>
+									</div>	
+
 									</c:forEach>
 								</c:if>
 							</div>
 						</td>
 						<td style="text-align: center"><aui:button
-								name="uploadWJSCFile${status.index+1}" type="button" value="上传" /></td>
-								<aui:script use="liferay-util-window">
-								A.one('#<portlet:namespace/>uploadWJSCFile${status.index+1}').on('click', function(event) {
-					var no = findFileWjscbzclNo('${status.index+1}');
-				    <!-- alert("open"); -->
-					Liferay.Util.openWindow({
-						dialog: {
-							centered: true,
-							height: 500,
-							modal: true,
-							width: 500
-						},
-						id: '<portlet:namespace/>dialog',
-						title: '文件上传',
-						uri: '<%=uploadURL %>${status.index+1}/${material.materialId}/'+no+'/wjscFile'
-					});
-				});
-			</aui:script>
-					</c:if>
-				 </c:if>
-			</tr>
+								name="uploadWJSCFile${status.index+1}" type="button" value="上传" onclick="newWindow('${uploadURL}','${status.index+1}','${material.materialId}','wjscFile')"/></td>
+			</c:if>
+				</c:if>
 
-			
-				
-				
-</c:forEach>
+		</c:forEach>
 
 	</table>
 </form>
@@ -396,7 +341,34 @@ Liferay.provide(window,'<portlet:namespace/>closeYourPopUp',
 <!-- 委建设处补正材料 -->
 
 <portlet:resourceURL var="fileWjscbzclDeleteURL" id="fileWjscbzclDelete" />
+
+<aui:script use="liferay-util-window">
+	Liferay.provide(window, 'newWindow', function(url,divNo,materialId,uploadOrganisation) {
+		var no;
+		if("wjscFile"==uploadOrganisation){
+			no = findFileWjscbzclNo(divNo);
+		}else{
+			no = findFileNo(divNo);
+		}
+		Liferay.Util.openWindow({
+			dialog: {
+				centered: true,
+				height: 500,
+				modal: true,
+				width: 500
+			},
+			id: '<portlet:namespace/>dialog',
+			title: '文件上传',
+			uri: url+divNo+'/'+materialId+'/'+no+'/'+uploadOrganisation
+		});
+		$("button.close").css("display","none");
+	});				
+				
+								
+</aui:script>
+
 <script>
+
 	function previewJpg(materialId,imgURL) {
 		$('.'+materialId).viewer();
 		$('#'+imgURL).click();
@@ -415,13 +387,6 @@ Liferay.provide(window,'<portlet:namespace/>closeYourPopUp',
 			destroyOnClose : true
 		});
 	}
-	
-	
-	
-	
-	
-	
-	
 
 	function <portlet:namespace/>clearValue(btn){
 		var input=$(btn);
@@ -454,6 +419,7 @@ Liferay.provide(window,'<portlet:namespace/>closeYourPopUp',
 		$("div[name^='fileBzcl" + divNo + "']").each(function() {
 			var text=$(this).children("a.fileBzclName").text().split('.')[0].split('-')[1];
 			//把已有的附件名称后缀的数字放到数组中
+			alert(text);
 			fileNameNoArr[indexNo]=text;
 			indexNo = (indexNo + 1);
 		});
