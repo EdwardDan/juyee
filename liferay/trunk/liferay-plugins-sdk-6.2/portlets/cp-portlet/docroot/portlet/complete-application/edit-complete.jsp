@@ -44,7 +44,7 @@
 </div>
 <ul class="nav nav-tabs">
 	<li class="${tabSqbz eq 1?"active":"" }">
-		<a href="${editPermitURL }&_${portletDisplay.id }_tabSqbz=1">工程概况</a>
+		<a href="${editCompleteURL }&_${portletDisplay.id }_tabSqbz=1">工程概况</a>
 	</li>
 	<li class="${tabSqbz eq 2?"active":"" } ${sqbz lt 2?"disabled":"" }">
 		<a href="${sqbz lt 2?"javascript:void(0);":editCompleteURL.concat("&_").concat(portletDisplay.id).concat("_tabSqbz=2") }">单位工程列表</a>
