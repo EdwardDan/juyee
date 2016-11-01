@@ -22,7 +22,7 @@
 			defaultTimeFormatPattern);
 %>
 
-<script src="/static/jquery.min.js"></script>
+
 <script type="text/javascript" src="/static/My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript">
     window.jQuery || document.write("<script src='/static/dist/jquery-1.12.4.min.js'>"+"<"+"/script>");
