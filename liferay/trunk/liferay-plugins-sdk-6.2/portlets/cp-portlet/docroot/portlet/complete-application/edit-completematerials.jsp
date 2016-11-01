@@ -185,11 +185,6 @@ Liferay.provide(window,'<portlet:namespace/>closeYourPopUp',
 								height: 500,
 								modal: true,
 								width: 500,
-								/* after: {
-									render: function(evt) {
-										alert('dialog help');
-											}
-										} */
 							},
 							id: '<portlet:namespace/>dialog',
 							title: '文件上传',
