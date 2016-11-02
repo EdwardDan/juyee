@@ -354,6 +354,9 @@
 		<field name="sjrlxdh" type="String" />
 		<field name="slyj" type="String" />
 		<field name="slsj" type="String" />
+		<field name="nsgnr" type="String">
+			<hint name="max-length">84</hint>
+		</field>
 		<field name="sgxkzFileEntryId" type="long" />
 		<field name="title" type="String">
 			<hint name="max-length">200</hint>

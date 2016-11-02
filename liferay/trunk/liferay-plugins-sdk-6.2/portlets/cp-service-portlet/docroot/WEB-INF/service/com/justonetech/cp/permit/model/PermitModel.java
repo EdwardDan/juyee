@@ -505,6 +505,21 @@ public interface PermitModel extends BaseModel<Permit>, GroupedModel,
 	public void setSlsj(String slsj);
 
 	/**
+	 * Returns the nsgnr of this permit.
+	 *
+	 * @return the nsgnr of this permit
+	 */
+	@AutoEscape
+	public String getNsgnr();
+
+	/**
+	 * Sets the nsgnr of this permit.
+	 *
+	 * @param nsgnr the nsgnr of this permit
+	 */
+	public void setNsgnr(String nsgnr);
+
+	/**
 	 * Returns the sgxkz file entry ID of this permit.
 	 *
 	 * @return the sgxkz file entry ID of this permit

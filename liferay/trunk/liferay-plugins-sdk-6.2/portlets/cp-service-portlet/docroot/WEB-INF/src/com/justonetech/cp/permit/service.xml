@@ -41,6 +41,7 @@
 		<column name="sjrlxdh" type="String" /><!--收件人联系电话 -->
 		<column name="slyj" type="String" /><!--受理意见 -->
 		<column name="slsj" type="String" /><!--受理时间 -->
+		<column name="nsgnr" type="String" /><!--拟施工内容 -->
 		<column name="sgxkzFileEntryId" type="long" /><!--施工许可证FileEntryId -->
 
 		<!-- workFlow -->

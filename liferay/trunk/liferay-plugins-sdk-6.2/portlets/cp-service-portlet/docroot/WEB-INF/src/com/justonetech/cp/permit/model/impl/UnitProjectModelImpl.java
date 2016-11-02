@@ -65,7 +65,7 @@ public class UnitProjectModelImpl extends BaseModelImpl<UnitProject>
 			{ "gcmc", Types.VARCHAR },
 			{ "jsnr", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table cp_UnitProject (projectId LONG not null primary key,permitId LONG,bjbh VARCHAR(75) null,gcbh VARCHAR(75) null,gcmc VARCHAR(75) null,jsnr VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table cp_UnitProject (projectId LONG not null primary key,permitId LONG,bjbh VARCHAR(75) null,gcbh VARCHAR(75) null,gcmc VARCHAR(500) null,jsnr VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table cp_UnitProject";
 	public static final String ORDER_BY_JPQL = " ORDER BY unitProject.gcbh ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY cp_UnitProject.gcbh ASC";

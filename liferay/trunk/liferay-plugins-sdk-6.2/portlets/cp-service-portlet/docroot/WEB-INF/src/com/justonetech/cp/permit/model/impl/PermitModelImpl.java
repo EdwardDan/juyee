@@ -90,6 +90,7 @@ public class PermitModelImpl extends BaseModelImpl<Permit>
 			{ "sjrlxdh", Types.VARCHAR },
 			{ "slyj", Types.VARCHAR },
 			{ "slsj", Types.VARCHAR },
+			{ "nsgnr", Types.VARCHAR },
 			{ "sgxkzFileEntryId", Types.BIGINT },
 			{ "title", Types.VARCHAR },
 			{ "content", Types.VARCHAR },
@@ -97,7 +98,7 @@ public class PermitModelImpl extends BaseModelImpl<Permit>
 			{ "statusByUserName", Types.VARCHAR },
 			{ "statusDate", Types.TIMESTAMP }
 		};
-	public static final String TABLE_SQL_CREATE = "create table cp_Permit (permitId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,zzjgdm VARCHAR(75) null,bjbh VARCHAR(75) null,htxxbsbh VARCHAR(75) null,sqbz INTEGER,status INTEGER,bdh VARCHAR(75) null,ywbh VARCHAR(75) null,sgxkzbh VARCHAR(75) null,slbh VARCHAR(75) null,hjgsz INTEGER,hjgsh INTEGER,sqr VARCHAR(75) null,sqsx VARCHAR(75) null,sqh VARCHAR(75) null,cltjr VARCHAR(75) null,cltjrlxdh VARCHAR(75) null,cltjrlxdz VARCHAR(75) null,sjr VARCHAR(75) null,sjrlxdh VARCHAR(75) null,slyj VARCHAR(75) null,slsj VARCHAR(75) null,sgxkzFileEntryId LONG,title VARCHAR(200) null,content VARCHAR(1000) null,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table cp_Permit (permitId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,zzjgdm VARCHAR(75) null,bjbh VARCHAR(75) null,htxxbsbh VARCHAR(75) null,sqbz INTEGER,status INTEGER,bdh VARCHAR(75) null,ywbh VARCHAR(75) null,sgxkzbh VARCHAR(75) null,slbh VARCHAR(75) null,hjgsz INTEGER,hjgsh INTEGER,sqr VARCHAR(75) null,sqsx VARCHAR(75) null,sqh VARCHAR(75) null,cltjr VARCHAR(75) null,cltjrlxdh VARCHAR(75) null,cltjrlxdz VARCHAR(75) null,sjr VARCHAR(75) null,sjrlxdh VARCHAR(75) null,slyj VARCHAR(75) null,slsj VARCHAR(75) null,nsgnr VARCHAR(84) null,sgxkzFileEntryId LONG,title VARCHAR(200) null,content VARCHAR(1000) null,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table cp_Permit";
 	public static final String ORDER_BY_JPQL = " ORDER BY permit.permitId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY cp_Permit.permitId ASC";
@@ -183,6 +184,7 @@ public class PermitModelImpl extends BaseModelImpl<Permit>
 		attributes.put("sjrlxdh", getSjrlxdh());
 		attributes.put("slyj", getSlyj());
 		attributes.put("slsj", getSlsj());
+		attributes.put("nsgnr", getNsgnr());
 		attributes.put("sgxkzFileEntryId", getSgxkzFileEntryId());
 		attributes.put("title", getTitle());
 		attributes.put("content", getContent());
@@ -361,6 +363,12 @@ public class PermitModelImpl extends BaseModelImpl<Permit>
 
 		if (slsj != null) {
 			setSlsj(slsj);
+		}
+
+		String nsgnr = (String)attributes.get("nsgnr");
+
+		if (nsgnr != null) {
+			setNsgnr(nsgnr);
 		}
 
 		Long sgxkzFileEntryId = (Long)attributes.get("sgxkzFileEntryId");
@@ -791,6 +799,21 @@ public class PermitModelImpl extends BaseModelImpl<Permit>
 	}
 
 	@Override
+	public String getNsgnr() {
+		if (_nsgnr == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _nsgnr;
+		}
+	}
+
+	@Override
+	public void setNsgnr(String nsgnr) {
+		_nsgnr = nsgnr;
+	}
+
+	@Override
 	public long getSgxkzFileEntryId() {
 		return _sgxkzFileEntryId;
 	}
@@ -1023,6 +1046,7 @@ public class PermitModelImpl extends BaseModelImpl<Permit>
 		permitImpl.setSjrlxdh(getSjrlxdh());
 		permitImpl.setSlyj(getSlyj());
 		permitImpl.setSlsj(getSlsj());
+		permitImpl.setNsgnr(getNsgnr());
 		permitImpl.setSgxkzFileEntryId(getSgxkzFileEntryId());
 		permitImpl.setTitle(getTitle());
 		permitImpl.setContent(getContent());
@@ -1268,6 +1292,14 @@ public class PermitModelImpl extends BaseModelImpl<Permit>
 			permitCacheModel.slsj = null;
 		}
 
+		permitCacheModel.nsgnr = getNsgnr();
+
+		String nsgnr = permitCacheModel.nsgnr;
+
+		if ((nsgnr != null) && (nsgnr.length() == 0)) {
+			permitCacheModel.nsgnr = null;
+		}
+
 		permitCacheModel.sgxkzFileEntryId = getSgxkzFileEntryId();
 
 		permitCacheModel.title = getTitle();
@@ -1310,7 +1342,7 @@ public class PermitModelImpl extends BaseModelImpl<Permit>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(69);
+		StringBundler sb = new StringBundler(71);
 
 		sb.append("{permitId=");
 		sb.append(getPermitId());
@@ -1368,6 +1400,8 @@ public class PermitModelImpl extends BaseModelImpl<Permit>
 		sb.append(getSlyj());
 		sb.append(", slsj=");
 		sb.append(getSlsj());
+		sb.append(", nsgnr=");
+		sb.append(getNsgnr());
 		sb.append(", sgxkzFileEntryId=");
 		sb.append(getSgxkzFileEntryId());
 		sb.append(", title=");
@@ -1387,7 +1421,7 @@ public class PermitModelImpl extends BaseModelImpl<Permit>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(106);
+		StringBundler sb = new StringBundler(109);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.cp.permit.model.Permit");
@@ -1506,6 +1540,10 @@ public class PermitModelImpl extends BaseModelImpl<Permit>
 		sb.append(getSlsj());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>nsgnr</column-name><column-value><![CDATA[");
+		sb.append(getNsgnr());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>sgxkzFileEntryId</column-name><column-value><![CDATA[");
 		sb.append(getSgxkzFileEntryId());
 		sb.append("]]></column-value></column>");
@@ -1567,6 +1605,7 @@ public class PermitModelImpl extends BaseModelImpl<Permit>
 	private String _sjrlxdh;
 	private String _slyj;
 	private String _slsj;
+	private String _nsgnr;
 	private long _sgxkzFileEntryId;
 	private String _title;
 	private String _content;

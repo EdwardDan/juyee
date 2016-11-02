@@ -317,6 +317,7 @@
 		<property name="sjrlxdh" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="slyj" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="slsj" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="nsgnr" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="sgxkzFileEntryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="title" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="content" type="com.liferay.portal.dao.orm.hibernate.StringType" />

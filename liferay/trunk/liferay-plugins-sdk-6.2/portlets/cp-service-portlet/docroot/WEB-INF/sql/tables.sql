@@ -193,6 +193,7 @@ create table cp_Permit (
 	sjrlxdh VARCHAR(75) null,
 	slyj VARCHAR(75) null,
 	slsj VARCHAR(75) null,
+	nsgnr VARCHAR(84) null,
 	sgxkzFileEntryId LONG,
 	title VARCHAR(200) null,
 	content VARCHAR(1000) null,
@@ -444,6 +445,6 @@ create table cp_UnitProject (
 	permitId LONG,
 	bjbh VARCHAR(75) null,
 	gcbh VARCHAR(75) null,
-	gcmc VARCHAR(75) null,
+	gcmc VARCHAR(500) null,
 	jsnr VARCHAR(75) null
 );

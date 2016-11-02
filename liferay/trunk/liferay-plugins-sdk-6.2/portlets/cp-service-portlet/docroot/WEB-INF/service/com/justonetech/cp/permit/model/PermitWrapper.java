@@ -77,6 +77,7 @@ public class PermitWrapper implements Permit, ModelWrapper<Permit> {
 		attributes.put("sjrlxdh", getSjrlxdh());
 		attributes.put("slyj", getSlyj());
 		attributes.put("slsj", getSlsj());
+		attributes.put("nsgnr", getNsgnr());
 		attributes.put("sgxkzFileEntryId", getSgxkzFileEntryId());
 		attributes.put("title", getTitle());
 		attributes.put("content", getContent());
@@ -255,6 +256,12 @@ public class PermitWrapper implements Permit, ModelWrapper<Permit> {
 
 		if (slsj != null) {
 			setSlsj(slsj);
+		}
+
+		String nsgnr = (String)attributes.get("nsgnr");
+
+		if (nsgnr != null) {
+			setNsgnr(nsgnr);
 		}
 
 		Long sgxkzFileEntryId = (Long)attributes.get("sgxkzFileEntryId");
@@ -894,6 +901,26 @@ public class PermitWrapper implements Permit, ModelWrapper<Permit> {
 	@Override
 	public void setSlsj(java.lang.String slsj) {
 		_permit.setSlsj(slsj);
+	}
+
+	/**
+	* Returns the nsgnr of this permit.
+	*
+	* @return the nsgnr of this permit
+	*/
+	@Override
+	public java.lang.String getNsgnr() {
+		return _permit.getNsgnr();
+	}
+
+	/**
+	* Sets the nsgnr of this permit.
+	*
+	* @param nsgnr the nsgnr of this permit
+	*/
+	@Override
+	public void setNsgnr(java.lang.String nsgnr) {
+		_permit.setNsgnr(nsgnr);
 	}
 
 	/**

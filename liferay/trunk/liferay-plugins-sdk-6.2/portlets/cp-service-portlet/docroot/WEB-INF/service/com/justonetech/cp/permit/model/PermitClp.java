@@ -103,6 +103,7 @@ public class PermitClp extends BaseModelImpl<Permit> implements Permit {
 		attributes.put("sjrlxdh", getSjrlxdh());
 		attributes.put("slyj", getSlyj());
 		attributes.put("slsj", getSlsj());
+		attributes.put("nsgnr", getNsgnr());
 		attributes.put("sgxkzFileEntryId", getSgxkzFileEntryId());
 		attributes.put("title", getTitle());
 		attributes.put("content", getContent());
@@ -281,6 +282,12 @@ public class PermitClp extends BaseModelImpl<Permit> implements Permit {
 
 		if (slsj != null) {
 			setSlsj(slsj);
+		}
+
+		String nsgnr = (String)attributes.get("nsgnr");
+
+		if (nsgnr != null) {
+			setNsgnr(nsgnr);
 		}
 
 		Long sgxkzFileEntryId = (Long)attributes.get("sgxkzFileEntryId");
@@ -975,6 +982,29 @@ public class PermitClp extends BaseModelImpl<Permit> implements Permit {
 	}
 
 	@Override
+	public String getNsgnr() {
+		return _nsgnr;
+	}
+
+	@Override
+	public void setNsgnr(String nsgnr) {
+		_nsgnr = nsgnr;
+
+		if (_permitRemoteModel != null) {
+			try {
+				Class<?> clazz = _permitRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setNsgnr", String.class);
+
+				method.invoke(_permitRemoteModel, nsgnr);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
 	public long getSgxkzFileEntryId() {
 		return _sgxkzFileEntryId;
 	}
@@ -1310,6 +1340,7 @@ public class PermitClp extends BaseModelImpl<Permit> implements Permit {
 		clone.setSjrlxdh(getSjrlxdh());
 		clone.setSlyj(getSlyj());
 		clone.setSlsj(getSlsj());
+		clone.setNsgnr(getNsgnr());
 		clone.setSgxkzFileEntryId(getSgxkzFileEntryId());
 		clone.setTitle(getTitle());
 		clone.setContent(getContent());
@@ -1368,7 +1399,7 @@ public class PermitClp extends BaseModelImpl<Permit> implements Permit {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(69);
+		StringBundler sb = new StringBundler(71);
 
 		sb.append("{permitId=");
 		sb.append(getPermitId());
@@ -1426,6 +1457,8 @@ public class PermitClp extends BaseModelImpl<Permit> implements Permit {
 		sb.append(getSlyj());
 		sb.append(", slsj=");
 		sb.append(getSlsj());
+		sb.append(", nsgnr=");
+		sb.append(getNsgnr());
 		sb.append(", sgxkzFileEntryId=");
 		sb.append(getSgxkzFileEntryId());
 		sb.append(", title=");
@@ -1445,7 +1478,7 @@ public class PermitClp extends BaseModelImpl<Permit> implements Permit {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(106);
+		StringBundler sb = new StringBundler(109);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.cp.permit.model.Permit");
@@ -1564,6 +1597,10 @@ public class PermitClp extends BaseModelImpl<Permit> implements Permit {
 		sb.append(getSlsj());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>nsgnr</column-name><column-value><![CDATA[");
+		sb.append(getNsgnr());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>sgxkzFileEntryId</column-name><column-value><![CDATA[");
 		sb.append(getSgxkzFileEntryId());
 		sb.append("]]></column-value></column>");
@@ -1622,6 +1659,7 @@ public class PermitClp extends BaseModelImpl<Permit> implements Permit {
 	private String _sjrlxdh;
 	private String _slyj;
 	private String _slsj;
+	private String _nsgnr;
 	private long _sgxkzFileEntryId;
 	private String _title;
 	private String _content;
