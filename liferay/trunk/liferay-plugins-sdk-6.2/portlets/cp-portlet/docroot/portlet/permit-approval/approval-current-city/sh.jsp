@@ -4,6 +4,8 @@
 <%
 	long permitId = ParamUtil.getLong(request, "permitId");
 request.setAttribute("permitId", permitId);
+Permit permit = PermitLocalServiceUtil.getPermit(permitId);
+request.setAttribute("permit", permit);
 List<ApplyMaterial> applyMaterials = ApplyMaterialLocalServiceUtil.findByPermitId(permitId, -1, -1);
 request.setAttribute("applyMaterials", applyMaterials);
 	int num = 1;
@@ -55,7 +57,12 @@ request.setAttribute("applyMaterials", applyMaterials);
 		</tbody>
 
 	</table>
-
+<div class="text-center">
+		<aui:input type="text" name="nsgnr" label="拟施工内容：" inlineLabel="left" 
+				value="${permit.nsgnr}" style="width: 30%; margin-bottom: 15px; margin-top: 15px" ></aui:input>
+				<div style="margin-top:-15px">
+					最多可以再输入<span id="contentCounter" style="color: red"></span>个汉字</div>
+	</div> 
 	<div class="text-center">
 		<div class="btn-group">
 				<aui:button-row>
@@ -66,7 +73,7 @@ request.setAttribute("applyMaterials", applyMaterials);
 		Long permitIdInit=ParamUtil.getLong(request,"permitId");
 		String randomId = StringPool.BLANK;
 		randomId = StringUtil.randomId();
-		Permit permit=PermitLocalServiceUtil.getPermit(permitIdInit);
+	    permit=PermitLocalServiceUtil.getPermit(permitIdInit);
 		String strBackUrl = "http://" + request.getServerName() //服务器地址  
         + ":"   
         + request.getServerPort() ;          //端口号  
@@ -266,3 +273,11 @@ function noShyj(){
 	$("#_153_comment").val("");
 }
 </script>
+
+<aui:script use="aui-char-counter">
+var counterVariable = new A.CharCounter({
+	input : '#<portlet:namespace/>nsgnr',
+	counter : '#contentCounter',
+	maxLength : 84
+});
+</aui:script>

@@ -232,8 +232,18 @@ input, textarea {
 					value="${permit.sjrlxdh}">
 			</div>
 		</aui:col>
+		</aui:row>
+		<aui:row>
+		<aui:col span="12" cssClass="text-left">
+		<label class="control-label" for="nsgnr">拟施工内容：</label>
+		<div class="controls">
+				<aui:input type="text" name="nsgnr" label=""
+				value="${permit.nsgnr}" style="width:30%" ></aui:input>
+				<div style="margin-top:-25px">
+					最多可以再输入<span id="contentCounter" style="color: red"></span>个汉字</div>
+					</div>
+		</aui:col>
 	</aui:row>
-
 	<div class="text-center">
 	<div class="btn-group">
 		<aui:button-row>
@@ -354,3 +364,10 @@ Liferay.delegateClick('<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(tra
 	</div>
 	</div>
 </form>
+<aui:script use="aui-char-counter">
+var counterVariable = new A.CharCounter({
+	input : '#<portlet:namespace/>nsgnr',
+	counter : '#contentCounter',
+	maxLength : 84
+});
+</aui:script>

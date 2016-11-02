@@ -132,6 +132,7 @@ public class PermitApprovalPortlet extends MVCPortlet {
 		String sjr = ParamUtil.getString(request, "sjr");
 		String sqh = ParamUtil.getString(request, "sqh");
 		String sjrlxdh = ParamUtil.getString(request, "sjrlxdh");
+		String nsgnr = ParamUtil.getString(request, "nsgnr");
 		permit.setSlbh(slbh);
 		permit.setCltjr(cltjr);
 		try {
@@ -149,6 +150,7 @@ public class PermitApprovalPortlet extends MVCPortlet {
 		permit.setSjr(sjr);
 		permit.setSqh(sqh);
 		permit.setSjrlxdh(sjrlxdh);
+		permit.setNsgnr(nsgnr);
 		PermitLocalServiceUtil.updatePermit(permit);
 
 		// 保存附件信息
@@ -164,9 +166,13 @@ public class PermitApprovalPortlet extends MVCPortlet {
 
 	// 保存初审cs和sl
 	public void saveCs(ActionRequest request, ActionResponse response)
-		throws SystemException, IOException {
+		throws SystemException, IOException, PortalException {
 
 		long permitId = ParamUtil.getLong(request, "permitId");
+		Permit permit = PermitLocalServiceUtil.getPermit(permitId);
+		String nsgnr = ParamUtil.getString(request, "nsgnr");
+		permit.setNsgnr(nsgnr);
+		PermitLocalServiceUtil.updatePermit(permit);
 		List<ApplyMaterial> applyMaterials = ApplyMaterialLocalServiceUtil.findByPermitId(permitId, -1, -1);
 		String[] csyjs = ParamUtil.getParameterValues(request, "csyj");
 		int i = 0;
@@ -180,9 +186,13 @@ public class PermitApprovalPortlet extends MVCPortlet {
 
 	// 保存复核fh和sh
 	public void saveFh(ActionRequest request, ActionResponse response)
-		throws SystemException, IOException {
+		throws SystemException, IOException, PortalException {
 
 		long permitId = ParamUtil.getLong(request, "permitId");
+		Permit permit = PermitLocalServiceUtil.getPermit(permitId);
+		String nsgnr = ParamUtil.getString(request, "nsgnr");
+		permit.setNsgnr(nsgnr);
+		PermitLocalServiceUtil.updatePermit(permit);
 		List<ApplyMaterial> applyMaterials = ApplyMaterialLocalServiceUtil.findByPermitId(permitId, -1, -1);
 		String[] fhyjs = ParamUtil.getParameterValues(request, "fhyj");
 		int i = 0;
@@ -196,9 +206,13 @@ public class PermitApprovalPortlet extends MVCPortlet {
 
 	// 保存审核sh和sp
 	public void saveSh(ActionRequest request, ActionResponse response)
-		throws SystemException, IOException {
+		throws SystemException, IOException, PortalException {
 
 		long permitId = ParamUtil.getLong(request, "permitId");
+		Permit permit = PermitLocalServiceUtil.getPermit(permitId);
+		String nsgnr = ParamUtil.getString(request, "nsgnr");
+		permit.setNsgnr(nsgnr);
+		PermitLocalServiceUtil.updatePermit(permit);
 		List<ApplyMaterial> applyMaterials = ApplyMaterialLocalServiceUtil.findByPermitId(permitId, -1, -1);
 		String[] shyjs = ParamUtil.getParameterValues(request, "shyj");
 		int i = 0;
@@ -209,6 +223,19 @@ public class PermitApprovalPortlet extends MVCPortlet {
 		}
 		redirect(request, response);
 	}
+	
+	// 保存审核通用
+		public void saveTy(ActionRequest request, ActionResponse response)
+			throws SystemException, IOException, PortalException {
+
+			long permitId = ParamUtil.getLong(request, "permitId");
+			Permit permit = PermitLocalServiceUtil.getPermit(permitId);
+			String nsgnr = ParamUtil.getString(request, "nsgnr");
+			permit.setNsgnr(nsgnr);
+			PermitLocalServiceUtil.updatePermit(permit);
+			redirect(request, response);
+		}
+	
 
 	public void redirect(ActionRequest request, ActionResponse response)
 		throws IOException {

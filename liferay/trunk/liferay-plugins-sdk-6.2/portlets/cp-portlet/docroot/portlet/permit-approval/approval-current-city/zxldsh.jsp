@@ -1,14 +1,33 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
 <%@ include file="../init.jsp"%>
+<%
+Long permitId=ParamUtil.getLong(request,"permitId");
+Permit permit = PermitLocalServiceUtil.getPermit(permitId);
+request.setAttribute("permit", permit);
+%>
+<portlet:actionURL var="saveTyURL" name="saveTy">
+	<portlet:param name="permitId" value="${permitId}" />
+	 <portlet:param name="redirectURL" value="${approvalCurrentURL}"/>
+</portlet:actionURL>
+<aui:form action="${saveTyURL}" method="post">
+<div class="text-center">
+		<aui:input type="text" name="nsgnr" label="拟施工内容：" inlineLabel="left" 
+				value="${permit.nsgnr}" style="width: 30%; margin-bottom: 15px; margin-top: 15px" ></aui:input>
+					最多可以再输入<span id="contentCounter" style="color: red"></span>个汉字
+	</div> 
+
 	<div class="text-center">
 		<div class="btn-group">
 				<aui:button-row>
+				<div class="btn-group">
+			<aui:button name="pass" type="submit" value="保存" cssClass="btn btn-primary" />
+		</div>
 		<%
 		Long permitIdInit=ParamUtil.getLong(request,"permitId");
 		String randomId = StringPool.BLANK;
 		randomId = StringUtil.randomId();
-		Permit permit=PermitLocalServiceUtil.getPermit(permitIdInit);
+	    permit=PermitLocalServiceUtil.getPermit(permitIdInit);
 		String strBackUrl = "http://" + request.getServerName() //服务器地址  
         + ":"   
         + request.getServerPort() ;          //端口号  
@@ -96,6 +115,7 @@ Liferay.delegateClick('<portlet:namespace /><%= randomId + HtmlUtil.escapeJS(tra
 		</div>
 			</aui:button-row>
 	</div>
+	</aui:form>
 	<script type="text/javascript">
 function shtg(){
 	$("#_153_comment").val("同意上报。");
@@ -104,3 +124,10 @@ function shth(){
 	$("#_153_comment").val("");
 }
 </script>
+<aui:script use="aui-char-counter">
+var counterVariable = new A.CharCounter({
+	input : '#<portlet:namespace/>nsgnr',
+	counter : '#contentCounter',
+	maxLength : 84
+});
+</aui:script>
