@@ -48,7 +48,12 @@ public class LEOCertificatePortlet extends MVCPortlet {
 			// TODO: handle exception
 		}
 		String yxqStr = null;
-		SimpleDateFormat sdf = new SimpleDateFormat(dateFormatPattern);
+		SimpleDateFormat sdf = null;
+		try {
+			sdf = new SimpleDateFormat(dateFormatPattern);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		if (yxq != null) {
 			yxqStr = sdf.format(yxq);
 		}
