@@ -266,6 +266,8 @@ public class PermitApprovalPortlet extends MVCPortlet {
 		Map<String, String> map = new HashMap<String, String>();
 		Permit permit = PermitLocalServiceUtil.getPermit(permitId);
 		ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
+		String lxjb = projectProfile.getLxjb();
+		int status = permit.getStatus();
 		String title = "上海市(" + xmlx + ")工程施工许可证";
 		String bh = "";
 		if (Validator.isNotNull(permit.getSgxkzbh())) {
@@ -284,7 +286,16 @@ public class PermitApprovalPortlet extends MVCPortlet {
 		String jsdw = projectProfile.getJsdwmc();
 		String gcmc = projectProfile.getGcmc();
 		String gcwz = projectProfile.getJsdd();
-		String gcnr = projectProfile.getGcnr();
+		String gcnr = "";
+        if(lxjb.equals("市级机关或市级单位")){
+             if(status >=3&&status!=4&&status!=17){
+                  gcnr = permit.getNsgnr();
+             }else{
+                  gcnr = projectProfile.getGcnr();
+             }
+        }else{
+             gcnr = projectProfile.getGcnr();
+        }
 		String xmtzgs = projectProfile.getXmtzgs() + "万元";
 		String htjg = projectProfile.getHtjg() + "万元";
 		String sjdw = "";
@@ -334,6 +345,8 @@ public class PermitApprovalPortlet extends MVCPortlet {
 		Map<String, String> map = new HashMap<String, String>();
 		Permit permit = PermitLocalServiceUtil.getPermit(permitId);
 		ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
+		String lxjb = projectProfile.getLxjb();
+		int status = permit.getStatus();
 		String babh = "";
 		if (Validator.isNotNull(permit.getSgxkzbh())) {
 			babh = permit.getSgxkzbh();
@@ -351,7 +364,17 @@ public class PermitApprovalPortlet extends MVCPortlet {
 		String pfrqStr = sdf.format(pfrqDate);
 		String pfrq = pfrqStr.substring(0, 4) + "年" + pfrqStr.substring(4, 6) + "月" + pfrqStr.substring(6, 8) + "日";
 		String pfgq = projectProfile.getPfgq() + "天";
-		String jsgm = projectProfile.getJsgcgm() + "。" + projectProfile.getGcnr();
+		String gcnr = "";
+        if(lxjb.equals("市级机关或市级单位")){
+             if(status >=3&&status!=4&&status!=17){
+                  gcnr = permit.getNsgnr();
+             }else{
+                  gcnr = projectProfile.getGcnr();
+             }
+        }else{
+             gcnr = projectProfile.getGcnr();
+        }
+        String jsgm = projectProfile.getJsgcgm()+"。"+gcnr;
 		String pzjghwh = projectProfile.getPzjghwh();
 		String xmdw = projectProfile.getXmdw();
 		String xmdwfzr = projectProfile.getXmfzr();
