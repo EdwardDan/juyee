@@ -19,8 +19,6 @@ tr.body td.content {
 	long permitId = ParamUtil.getLong(request, "permitId");
 	Permit permit = PermitLocalServiceUtil.getPermit(permitId);
 	ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
-	String lxjb = projectProfile.getLxjb();
-	int status = permit.getStatus();
 	String xmlx =  DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx()).getName();
 	String jsddssqx = projectProfile.getJsddssqx() == 0 ? null : DictionaryLocalServiceUtil.getDictionary(
 			projectProfile.getJsddssqx()).getName();
@@ -32,8 +30,6 @@ tr.body td.content {
 	request.setAttribute("jsddssqx", jsddssqx);
 	request.setAttribute("jsgclbs", jsgclbs);
 	request.setAttribute("xmlx", xmlx);
-	request.setAttribute("lxjb", lxjb);
-	request.setAttribute("status", status);
 %>
 <table class="table table-bordered">
 	<tr class="body">
@@ -118,12 +114,7 @@ tr.body td.content {
 	</tr>
 	<tr class="body">
 		<td class="title">工程内容</td>
-		<c:when test="<%=lxjb.equals("市级机关或市级单位")&&status >=3&&status!=4&&status!=17%>">
-			<td class="content" colspan="3">${permit.nsgnr}</td>
-		</c:when>
-		<c:otherwise>
-			<td class="content" colspan="3">${projectProfile.gcnr}</td>
-		</c:otherwise>
+		<td class="content" colspan="3">${projectProfile.gcnr}</td>
 	</tr>
 	<tr class="body">
 		<td class="title">国有资金比重%</td>
