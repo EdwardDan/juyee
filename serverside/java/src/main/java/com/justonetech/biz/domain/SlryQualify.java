@@ -1,7 +1,7 @@
 package com.justonetech.biz.domain;
 
 import com.justonetech.biz.domain.base.BaseSlryQualify;
-
+import com.justonetech.biz.utils.enums.SlryQualifyStatus;
 
 
 public class SlryQualify extends BaseSlryQualify {
@@ -20,6 +20,11 @@ public class SlryQualify extends BaseSlryQualify {
 	}
 
 /*[CONSTRUCTOR MARKER END]*/
+
+	public String getStatusName()
+	{
+		return SlryQualifyStatus.getColorNameByCode(getStatus());
+	}
 
 
 }
