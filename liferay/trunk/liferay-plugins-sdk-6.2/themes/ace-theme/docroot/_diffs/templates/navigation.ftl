@@ -49,6 +49,36 @@
                 	<b class="arrow icon-angle-down"></b>
             	</#if>
 	          </a>
+	          
+	          <#if nav_level_2_item.hasChildren()>
+			    <ul class="submenu">
+			    <#list nav_level_2_item.getChildren() as nav_level_3_item>
+			        <#assign nav_level_3_item_url = nav_level_3_item.getURL() />
+			        <#assign nav_level_3_item_selected = "" />
+			        <#assign nav_level_3_item_has_child = "" />
+			        
+			        <#if nav_level_3_item.isSelected() || themeDisplay.getLayout().getParentLayoutId() == nav_level_3_item.getLayoutId()>
+			          <#assign nav_level_3_item_selected = "active" />
+			        </#if>
+			        
+			        <#if nav_level_3_item.hasChildren()>
+			        	<#assign nav_level_3_item_has_child = "dropdown-toggle" />
+		        		<#assign nav_level_3_item_url = "#" />
+			        </#if>
+			        
+			        <li class="${nav_level_3_item_selected}">
+			          <a class="${nav_level_3_item_has_child}" href="${nav_level_3_item_url}" ${nav_level_3_item.getTarget()}>
+			            <i class="icon-double-angle-right"></i>
+			            ${nav_level_3_item.getName()}
+			            <#if nav_level_3_item.hasChildren()>
+		                	<b class="arrow icon-angle-down"></b>
+		            	</#if>
+			          </a>
+			        </li>
+			    </#list>
+			    </ul>
+			    </#if>
+	          
 	        </li>
 	    </#list>
 	    </ul>
