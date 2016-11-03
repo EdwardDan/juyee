@@ -9,23 +9,15 @@ body {
 }
 
 .title {
-	width: 300px;
-	height: 40px;
 	position: absolute;
-	left: calc(50% - 150px);
-	top: 30%;
 	background: url('/documents/20181/26528/title.png/a241be9f-cd0a-4693-9872-2dc45cdde235?t=1471247909387') no-repeat;
 	background-size: cover;
 }
 
 .login {
-	width: 300px;
-	height: 220px;
 	box-shadow: 2px 2px 3px #888888;
 	background-color: white;
 	position: absolute;
-	left: calc(50% - 150px);
-	top: 40%;
 	border: 1px solid #cccccc;
 	border-radius: 5px;
 	filter: alpha(opacity = 95);
@@ -54,7 +46,7 @@ body {
 	width: 78%;
 	height: 12%;
 	left: 10%;
-	margin: 3% 0 0 0;
+	margin: 1% 0 0 0;
 }
 
 .login_tag {
@@ -121,9 +113,9 @@ body {
 
 <form action="${themeDisplay.getURLCurrent()}?p_p_id=58&amp;p_p_lifecycle=1&amp;p_p_state=normal&amp;p_p_mode=view&amp;p_p_col_id=column-1&amp;p_p_col_pos=2&amp;p_p_col_count=3&amp;_58_struts_action=%2Flogin%2Flogin" class="form sign-in-form " id="_58_fm" method="post" name="_58_fm" autocomplete="off">
 	<input name="_58_formDate" type="hidden" value="1470964064174"> <input class="field" id="_58_saveLastPath" name="_58_saveLastPath" type="hidden" value="false"> <input class="field" id="_58_redirect" name="_58_redirect" type="hidden" value="${redirectPage}"> <input class="field" id="_58_doActionAfterLogin" name="_58_doActionAfterLogin" type="hidden" value="false">
-	<div style="width: 100%; height: 400px">
-		<div class="title"></div>
-		<div class="login">
+	<div id=login_div>
+		<div class="title" id="title"></div>
+		<div class="login" id="login">
 			<div class="login_tag"></div>
 
 			<div class="login_div_user">
@@ -154,6 +146,13 @@ body {
 				login_body[0].style.height = $(window).height() + "px";
 				login_body[0].style.backgroundSize = $(window).width() + "px"
 						+ " " + $(window).height() + "px";
+				$("#login_div").width("100%");
+				$("#login_div").height(($(window).height()*0.65) + "px");
+				var loginDivHeight = $("#login_div").height();
+				var loginDivWidth = $("#login_div").width();
+				$("#title").attr("style","height:" + loginDivHeight*0.10 + "px;width:" + loginDivWidth*0.30 + "px;top:" + loginDivHeight*0.25 + "px;left:" + loginDivWidth*0.35 + "px" );
+				$("#login").attr("style","height:" + loginDivHeight*0.50 + "px;width:" + loginDivWidth*0.26 + "px;top:" + loginDivHeight*0.35 + "px;left:" + loginDivWidth*0.37 + "px" );
+				
 				$(window).resize(
 						function() {
 							login_body[0].style.width = $(window).width()
@@ -163,6 +162,12 @@ body {
 							login_body[0].style.backgroundSize = $(window)
 									.width()
 									+ "px" + " " + $(window).height() + "px";
+							$("#login_div").height(($(window).height()*0.65) + "px");
+							loginDivHeight = $("#login_div").height();
+							loginDivWidth = $("#login_div").width();
+							$("#title").attr("style","height:" + loginDivHeight*0.10 + "px;width:" + loginDivWidth*0.30 + "px;top:" + loginDivHeight*0.25 + "px;left:" + loginDivWidth*0.35 + "px" );
+							$("#login").attr("style","height:" + loginDivHeight*0.50 + "px;width:" + loginDivWidth*0.26 + "px;top:" + loginDivHeight*0.35 + "px;left:" + loginDivWidth*0.37 + "px" );
+							
 						});
 			});
 	
