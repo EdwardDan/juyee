@@ -31,7 +31,6 @@
 </script>
 <form:form commandName="bean">
     <form:hidden path="id"/>
-    <form:hidden path="status"/>
     <form:hidden path="name"/>
     <form:hidden path="sex"/>
     <form:hidden path="birthDate"/>
