@@ -154,7 +154,7 @@ tr.body td.content {
 						</portlet:renderURL>
 						<liferay-ui:icon image="view" url="${viewCompleteURL}" />
 						<c:if test="${complete.status>1}">
-							<liferay-ui:icon image="check" url="${approvalCompleteURL}" />
+							<liferay-ui:icon image="checked" url="${approvalCompleteURL}" />
 						</c:if>
 					</liferay-ui:icon-menu>
 				</liferay-ui:search-container-column-text>
