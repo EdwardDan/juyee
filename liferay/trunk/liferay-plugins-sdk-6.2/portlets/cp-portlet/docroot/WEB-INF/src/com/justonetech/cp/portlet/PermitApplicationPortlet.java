@@ -248,6 +248,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		int gaojiasl = ParamUtil.getInteger(request, "gaojiasl");
 		String gcnr = ParamUtil.getString(request, "gcnr");
 		String gyzjbz = ParamUtil.getString(request, "gyzjbz");
+		String zgj = ParamUtil.getString(request, "zgj");
 		String fwjzmj = ParamUtil.getString(request, "fwjzmj");
 		String htjg = ParamUtil.getString(request, "htjg");
 		int htgq = ParamUtil.getInteger(request, "htgq");
@@ -397,6 +398,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		projectProfile.setGaojiasl(gaojiasl);
 		projectProfile.setGcnr(gcnr);
 		projectProfile.setGyzjbz(gyzjbz);
+		projectProfile.setZgj(zgj);
 		projectProfile.setFwjzmj(fwjzmj);
 		projectProfile.setHtjg(htjg);
 		projectProfile.setHtgq(htgq);
