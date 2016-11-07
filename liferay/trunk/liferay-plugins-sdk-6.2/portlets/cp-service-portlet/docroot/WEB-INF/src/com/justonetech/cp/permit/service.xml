@@ -116,6 +116,7 @@
 		<column name="guijiaosl" type="int" /><!--轨交数量 -->
 		<column name="sdsl" type="int" /><!--隧道数量 -->
 		<column name="gaojiasl" type="int" /><!--高架数量 -->
+		<column name="zgj" type="String" /><!-- 暂估价（万元） -->
 
 		<!-- 航道有关扩展字段 -->
 		<column name="tzly" type="String" /><!--投资来源 -->
