@@ -75,12 +75,16 @@ if (null != contract) {
 		ParticipationUnit participationUnit = ParticipationUnitLocalServiceUtil.createParticipationUnit(CounterLocalServiceUtil.increment());
 		participationUnit.setDwlx("施工单位");
 		if(contract.getBdh().contains("W")){
+			if(null != contract.getSgdw() && contract.getSgdw().length() > 0){
 	participationUnit.setDwmc(contract.getSgdw());
 	participationUnit.setXmfzr(contract.getSgfzr());
 	participationUnit.setZjlx(contract.getSgfzrzjlx());		
 	participationUnit.setZjh(contract.getSgfzrzjh());
+			}
 		}else{
+			if(null != contract.getFbdw() && contract.getFbdw().length() > 0){
 	participationUnit.setDwmc(contract.getFbdw());
+			}
 		}
 		
 		participationUnits.add(participationUnit);
