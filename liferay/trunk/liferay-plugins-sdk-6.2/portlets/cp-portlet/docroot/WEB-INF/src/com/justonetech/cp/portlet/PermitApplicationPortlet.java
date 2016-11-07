@@ -104,7 +104,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 			String htmc = ParamUtil.getString(renderRequest, "htmc", "");
 			User user = null;
 			try {
-				user = UserServiceUtil.getCurrentUser();
+				user = PortalUtil.getUser(renderRequest);
 			} catch (PortalException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -114,6 +114,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 			}
 
 			String zzjgdm = ParamUtil.getString(renderRequest, "zzjgdm", "");
+			
 			if (user != null) {
 				try {
 					long[] roles = user.getRoleIds();
@@ -173,10 +174,10 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		String wssqbh = ParamUtil.getString(renderRequest, "wssqbh");
 		String gcmc = ParamUtil.getString(renderRequest, "gcmc");
 		String zzjgdm = ParamUtil.getString(renderRequest, "zzjgdm");
-
+		
 		User user = null;
 		try {
-			user = UserServiceUtil.getCurrentUser();
+			user = PortalUtil.getUser(renderRequest);
 		} catch (PortalException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -350,7 +351,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		String zzjgdm = null;
 		User user = null;
 		try {
-			user = UserServiceUtil.getCurrentUser();
+			user = PortalUtil.getUser(request);
 		} catch (PortalException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

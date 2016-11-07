@@ -18,7 +18,7 @@ tr.body td.content {
 	request.setAttribute("gcmc", gcmc);
 	request.setAttribute("status", status);
 	try {
-		user = UserServiceUtil.getCurrentUser();
+		user = PortalUtil.getUser(request);
 	} catch (PortalException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();

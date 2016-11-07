@@ -9,7 +9,7 @@ tr.body td.content {
 </style>
 <liferay-ui:header title="施工许可审核" />
 <%
-	User user_ = UserServiceUtil.getCurrentUser();
+	User user_ = PortalUtil.getUser(request);
 	List<Role> roles = user_.getRoles();
 	String ywbh = ParamUtil.getString(request, "ywbh");
 	String bjbh = ParamUtil.getString(request, "bjbh");

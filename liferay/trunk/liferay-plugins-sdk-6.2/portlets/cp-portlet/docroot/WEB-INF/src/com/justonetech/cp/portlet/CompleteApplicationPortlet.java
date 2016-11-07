@@ -308,7 +308,7 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 		String zzjgdm = "";
 		User user = null;
 		try {
-			user = UserServiceUtil.getCurrentUser();
+			user = PortalUtil.getUser(request);
 		}
 		catch (PortalException e) {
 			// TODO Auto-generated catch block

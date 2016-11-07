@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserServiceUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 /**
@@ -41,7 +42,7 @@ public class ContractSearchPortlet extends MVCPortlet {
 		String zzjgdm = "";
 		User user = null;
 		try {
-			user = UserServiceUtil.getCurrentUser();
+			user = PortalUtil.getUser(renderRequest);
 		} catch (PortalException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
