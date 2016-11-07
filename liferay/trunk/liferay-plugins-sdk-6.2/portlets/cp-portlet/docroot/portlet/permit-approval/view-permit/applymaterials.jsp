@@ -419,7 +419,6 @@ Liferay.provide(window,'<portlet:namespace/>closeYourPopUp',
 		$("div[name^='fileBzcl" + divNo + "']").each(function() {
 			var text=$(this).children("a.fileBzclName").text().split('.')[0].split('-')[1];
 			//把已有的附件名称后缀的数字放到数组中
-			alert(text);
 			fileNameNoArr[indexNo]=text;
 			indexNo = (indexNo + 1);
 		});
