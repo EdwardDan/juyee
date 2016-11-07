@@ -265,7 +265,7 @@
 				</aui:input></td>
 			<td class="text-right">暂估价(万元)</td>
 			<td class="bg-white"><aui:input name="zgj" label="" type="text"
-					style="width:50%" value="${contract.zgj}">
+					style="width:50%">
 				</aui:input></td>
 		</tr>
 		<%-- <tr class="body">
