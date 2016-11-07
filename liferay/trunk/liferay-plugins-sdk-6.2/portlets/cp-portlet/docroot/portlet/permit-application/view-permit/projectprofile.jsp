@@ -120,7 +120,9 @@ tr.body td.content {
 	</tr>
 	<tr class="body">
 		<td class="title">国有资金比重%</td>
-		<td class="content" colspan="3">${projectProfile.gyzjbz}</td>
+		<td class="content">${projectProfile.gyzjbz}</td>
+		<td class="title">暂估价(万元)</td>
+		<td class="content">${projectProfile.zgj}</td>
 	</tr>
 <%-- 	<tr class="body">
 		<td class="title">房屋建筑面积(㎡)</td>
