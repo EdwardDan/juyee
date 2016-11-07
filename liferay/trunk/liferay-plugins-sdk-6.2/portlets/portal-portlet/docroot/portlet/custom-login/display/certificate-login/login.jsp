@@ -289,7 +289,7 @@ form.login_form {
 					'<portlet:namespace/>content' : $('#<portlet:namespace/>content').val()
 				},
 				error : function(err) {
-					alert("提交失败!");
+					alert("登录失败，请联系系统管理员!");
 				},
 				success : function(data) {
 					var strJson = eval("(" + data + ")");
