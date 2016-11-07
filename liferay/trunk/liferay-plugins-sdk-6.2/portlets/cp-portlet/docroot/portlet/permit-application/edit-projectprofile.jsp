@@ -5,6 +5,11 @@
 <%
 	String bjbh = ParamUtil.getString(request, "bjbh");
 	Long permitId = ParamUtil.getLong(request, "permitId");
+	String contractId = ParamUtil.getString(request, "contractId");
+	Contract contract = null;
+	if(Validator.isNotNull(contractId)){
+		contract = ContractLocalServiceUtil.getContract(contractId);
+	}
 	ProjectProfile projectProfile = null;
 	Project project = null;
 	Permit permit=null;
@@ -51,6 +56,7 @@
 			
 			long xmlx = ParamUtil.getLong(request, "xmlx");
 			request.setAttribute("xmlx",xmlx);
+			request.setAttribute("contract",contract);
 %>
 <portlet:renderURL var="viewURL" />
 <portlet:actionURL var="saveProjectProfileURL" name="saveProjectProfile">
@@ -265,7 +271,7 @@
 				</aui:input></td>
 			<td class="text-right">暂估价(万元)</td>
 			<td class="bg-white"><aui:input name="zgj" label="" type="text"
-					style="width:50%">
+					style="width:50%" value="${contract.zgj}">
 				</aui:input></td>
 		</tr>
 		<%-- <tr class="body">
@@ -281,7 +287,7 @@
 				</aui:input></td>
 			<td class="text-right">合同工期(日历天)</td>
 			<td class="bg-white"><aui:input name="htgq" label="" type="text"
-					style="width:50%" value="">
+					style="width:50%">
 				</aui:input></td>
 		</tr>
 			<tr class="body">
