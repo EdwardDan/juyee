@@ -109,8 +109,7 @@
 			<a class="btn" href="${printbzclURL}" target="_blank">补正材料</a>
 		</c:if> --%>
 		<c:if
-			test="<%=status == CityPermitStatus.STATUS_ZXLD_PASS.getCode()
-								|| status == CityPermitStatus.STATUS_WLD_PASS.getCode()%>">
+			test="<%=status >=12&&status!=16&&status!=17%>">
 			<a class="btn" href="${printjsscbURL}" target="_blank">技术审查表</a>
 		</c:if>
 		<c:if test="<%=status==14&&status==15&&status==18%>">
