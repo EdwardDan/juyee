@@ -113,7 +113,7 @@
 								|| status == CityPermitStatus.STATUS_WLD_PASS.getCode()%>">
 			<a class="btn" href="${printjsscbURL}" target="_blank">技术审查表</a>
 		</c:if>
-		<c:if test="<%=status == CityPermitStatus.STATUS_WLD_PASS.getCode()%>">
+		<c:if test="<%=status>=14&&status!=16&&status!=17%>">
 			<c:choose>
 				<c:when test="<%=projectProfile.getXmlx() == 29741%>">
 					<a class="btn" onclick="kgba()">开工备案Pdf</a>
