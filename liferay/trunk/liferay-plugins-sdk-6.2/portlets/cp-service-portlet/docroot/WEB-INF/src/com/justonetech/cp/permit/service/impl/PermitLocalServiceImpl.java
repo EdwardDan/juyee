@@ -167,10 +167,12 @@ public class PermitLocalServiceImpl extends PermitLocalServiceBaseImpl {
 			if (!Validator.isBlank(status)) {
 				if("wtj".equals(status)){
 					List<Integer> ssValues = new ArrayList<Integer>();
+					ssValues.add(1);
+					ssValues.add(4);
 					ssValues.add(17);
-					List<Integer> qsValues = new ArrayList<Integer>();
-					qsValues.add(1);
-					qsValues.add(4);
+//					List<Integer> qsValues = new ArrayList<Integer>();
+//					qsValues.add(1);
+//					qsValues.add(4);
 					DynamicQuery projectProfileDQ = DynamicQueryFactoryUtil.forClass(ProjectProfile.class);
 					projectProfileDQ.setProjection(ProjectionFactoryUtil.property("permitId"));
 					projectProfileDQ.add(PropertyFactoryUtil.forName("lxjb").in(ss));
@@ -179,8 +181,8 @@ public class PermitLocalServiceImpl extends PermitLocalServiceBaseImpl {
 					criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.in("status", ssValues));
 					junction.add(criterion);
 					
-					Criterion criterion_ = RestrictionsFactoryUtil.in("status", qsValues);
-					junction.add(criterion_);
+//					Criterion criterion_ = RestrictionsFactoryUtil.in("status", qsValues);//获取区属的列表信息
+//					junction.add(criterion_);
 					dynamicQuery.add(junction);
 				}else if("shz".equals(status)){
 					List<Integer> ssValues = new ArrayList<Integer>();
@@ -198,44 +200,44 @@ public class PermitLocalServiceImpl extends PermitLocalServiceBaseImpl {
 					ssValues.add(14);
 					ssValues.add(15);
 					ssValues.add(16);
-					List<Integer> qsValues = new ArrayList<Integer>();
-					qsValues.add(2);
-					qsValues.add(3);
-					qsValues.add(5);
-					qsValues.add(6);
-					qsValues.add(8);
-					qsValues.add(9);
+//					List<Integer> qsValues = new ArrayList<Integer>();//获取区属的列表信息
+//					qsValues.add(2);
+//					qsValues.add(3);
+//					qsValues.add(5);
+//					qsValues.add(6);
+//					qsValues.add(8);
+//					qsValues.add(9);
 					DynamicQuery projectProfileDQ1 = DynamicQueryFactoryUtil.forClass(ProjectProfile.class);
 					projectProfileDQ1.setProjection(ProjectionFactoryUtil.property("permitId"));
 					projectProfileDQ1.add(PropertyFactoryUtil.forName("lxjb").in(ss));
 					Criterion criterion = PropertyFactoryUtil.forName("permitId").in(projectProfileDQ1);
 					criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.in("status", ssValues));
 					junction.add(criterion);
-					DynamicQuery projectProfileDQ2 = DynamicQueryFactoryUtil.forClass(ProjectProfile.class);
-					projectProfileDQ2.setProjection(ProjectionFactoryUtil.property("permitId"));
-					projectProfileDQ2.add(PropertyFactoryUtil.forName("lxjb").in(qs));
-					Criterion criterion2 = PropertyFactoryUtil.forName("permitId").in(projectProfileDQ2);
-					criterion2 = RestrictionsFactoryUtil.and(criterion2, RestrictionsFactoryUtil.in("status", qsValues));
-					junction.add(criterion2);
+//					DynamicQuery projectProfileDQ2 = DynamicQueryFactoryUtil.forClass(ProjectProfile.class);//获取区属的列表信息
+//					projectProfileDQ2.setProjection(ProjectionFactoryUtil.property("permitId"));
+//					projectProfileDQ2.add(PropertyFactoryUtil.forName("lxjb").in(qs));
+//					Criterion criterion2 = PropertyFactoryUtil.forName("permitId").in(projectProfileDQ2);
+//					criterion2 = RestrictionsFactoryUtil.and(criterion2, RestrictionsFactoryUtil.in("status", qsValues));
+//					junction.add(criterion2);
 					dynamicQuery.add(junction);
 				}else if("shwc".equals(status)){
 					List<Integer> ssValues = new ArrayList<Integer>();
 					ssValues.add(18);
 					ssValues.add(19);
-					List<Integer> qsValues = new ArrayList<Integer>();
-					qsValues.add(7);
+//					List<Integer> qsValues = new ArrayList<Integer>();
+//					qsValues.add(7);
 					DynamicQuery projectProfileDQ1 = DynamicQueryFactoryUtil.forClass(ProjectProfile.class);
 					projectProfileDQ1.setProjection(ProjectionFactoryUtil.property("permitId"));
 					projectProfileDQ1.add(PropertyFactoryUtil.forName("lxjb").in(ss));
 					Criterion criterion = PropertyFactoryUtil.forName("permitId").in(projectProfileDQ1);
 					criterion = RestrictionsFactoryUtil.and(criterion, RestrictionsFactoryUtil.in("status", ssValues));
 					junction.add(criterion);
-					DynamicQuery projectProfileDQ2 = DynamicQueryFactoryUtil.forClass(ProjectProfile.class);
-					projectProfileDQ2.setProjection(ProjectionFactoryUtil.property("permitId"));
-					projectProfileDQ2.add(PropertyFactoryUtil.forName("lxjb").in(qs));
-					Criterion criterion2 = PropertyFactoryUtil.forName("permitId").in(projectProfileDQ2);
-					criterion2 = RestrictionsFactoryUtil.and(criterion2, RestrictionsFactoryUtil.in("status", qsValues));
-					junction.add(criterion2);
+//					DynamicQuery projectProfileDQ2 = DynamicQueryFactoryUtil.forClass(ProjectProfile.class);//获取区属的列表信息
+//					projectProfileDQ2.setProjection(ProjectionFactoryUtil.property("permitId"));
+//					projectProfileDQ2.add(PropertyFactoryUtil.forName("lxjb").in(qs));
+//					Criterion criterion2 = PropertyFactoryUtil.forName("permitId").in(projectProfileDQ2);
+//					criterion2 = RestrictionsFactoryUtil.and(criterion2, RestrictionsFactoryUtil.in("status", qsValues));
+//					junction.add(criterion2);
 					dynamicQuery.add(junction);
 				}
 			}

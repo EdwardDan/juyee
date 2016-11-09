@@ -38,7 +38,7 @@ public class ProjectProfileCacheModel implements CacheModel<ProjectProfile>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(163);
+		StringBundler sb = new StringBundler(165);
 
 		sb.append("{permitId=");
 		sb.append(permitId);
@@ -130,6 +130,8 @@ public class ProjectProfileCacheModel implements CacheModel<ProjectProfile>,
 		sb.append(sdsl);
 		sb.append(", gaojiasl=");
 		sb.append(gaojiasl);
+		sb.append(", zgj=");
+		sb.append(zgj);
 		sb.append(", tzly=");
 		sb.append(tzly);
 		sb.append(", gkpzhhzjghwh=");
@@ -469,6 +471,13 @@ public class ProjectProfileCacheModel implements CacheModel<ProjectProfile>,
 		projectProfileImpl.setSdsl(sdsl);
 		projectProfileImpl.setGaojiasl(gaojiasl);
 
+		if (zgj == null) {
+			projectProfileImpl.setZgj(StringPool.BLANK);
+		}
+		else {
+			projectProfileImpl.setZgj(zgj);
+		}
+
 		if (tzly == null) {
 			projectProfileImpl.setTzly(StringPool.BLANK);
 		}
@@ -768,6 +777,7 @@ public class ProjectProfileCacheModel implements CacheModel<ProjectProfile>,
 		guijiaosl = objectInput.readInt();
 		sdsl = objectInput.readInt();
 		gaojiasl = objectInput.readInt();
+		zgj = objectInput.readUTF();
 		tzly = objectInput.readUTF();
 		gkpzhhzjghwh = objectInput.readUTF();
 		pfhhzrq = objectInput.readLong();
@@ -1049,6 +1059,13 @@ public class ProjectProfileCacheModel implements CacheModel<ProjectProfile>,
 		objectOutput.writeInt(guijiaosl);
 		objectOutput.writeInt(sdsl);
 		objectOutput.writeInt(gaojiasl);
+
+		if (zgj == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(zgj);
+		}
 
 		if (tzly == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
@@ -1332,6 +1349,7 @@ public class ProjectProfileCacheModel implements CacheModel<ProjectProfile>,
 	public int guijiaosl;
 	public int sdsl;
 	public int gaojiasl;
+	public String zgj;
 	public String tzly;
 	public String gkpzhhzjghwh;
 	public long pfhhzrq;

@@ -119,6 +119,7 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 		attributes.put("guijiaosl", getGuijiaosl());
 		attributes.put("sdsl", getSdsl());
 		attributes.put("gaojiasl", getGaojiasl());
+		attributes.put("zgj", getZgj());
 		attributes.put("tzly", getTzly());
 		attributes.put("gkpzhhzjghwh", getGkpzhhzjghwh());
 		attributes.put("pfhhzrq", getPfhhzrq());
@@ -429,6 +430,12 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 
 		if (gaojiasl != null) {
 			setGaojiasl(gaojiasl);
+		}
+
+		String zgj = (String)attributes.get("zgj");
+
+		if (zgj != null) {
+			setZgj(zgj);
 		}
 
 		String tzly = (String)attributes.get("tzly");
@@ -1689,6 +1696,29 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 	}
 
 	@Override
+	public String getZgj() {
+		return _zgj;
+	}
+
+	@Override
+	public void setZgj(String zgj) {
+		_zgj = zgj;
+
+		if (_projectProfileRemoteModel != null) {
+			try {
+				Class<?> clazz = _projectProfileRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setZgj", String.class);
+
+				method.invoke(_projectProfileRemoteModel, zgj);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
 	public String getTzly() {
 		return _tzly;
 	}
@@ -2632,6 +2662,7 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 		clone.setGuijiaosl(getGuijiaosl());
 		clone.setSdsl(getSdsl());
 		clone.setGaojiasl(getGaojiasl());
+		clone.setZgj(getZgj());
 		clone.setTzly(getTzly());
 		clone.setGkpzhhzjghwh(getGkpzhhzjghwh());
 		clone.setPfhhzrq(getPfhhzrq());
@@ -2720,7 +2751,7 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(163);
+		StringBundler sb = new StringBundler(165);
 
 		sb.append("{permitId=");
 		sb.append(getPermitId());
@@ -2812,6 +2843,8 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 		sb.append(getSdsl());
 		sb.append(", gaojiasl=");
 		sb.append(getGaojiasl());
+		sb.append(", zgj=");
+		sb.append(getZgj());
 		sb.append(", tzly=");
 		sb.append(getTzly());
 		sb.append(", gkpzhhzjghwh=");
@@ -2891,7 +2924,7 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(247);
+		StringBundler sb = new StringBundler(250);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.cp.permit.model.ProjectProfile");
@@ -3076,6 +3109,10 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 		sb.append(
 			"<column><column-name>gaojiasl</column-name><column-value><![CDATA[");
 		sb.append(getGaojiasl());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>zgj</column-name><column-value><![CDATA[");
+		sb.append(getZgj());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>tzly</column-name><column-value><![CDATA[");
@@ -3272,6 +3309,7 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 	private int _guijiaosl;
 	private int _sdsl;
 	private int _gaojiasl;
+	private String _zgj;
 	private String _tzly;
 	private String _gkpzhhzjghwh;
 	private Date _pfhhzrq;

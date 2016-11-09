@@ -374,6 +374,7 @@
 		<property name="guijiaosl" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="sdsl" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="gaojiasl" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="zgj" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="tzly" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="gkpzhhzjghwh" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="pfhhzrq" type="org.hibernate.type.TimestampType" />

@@ -95,6 +95,7 @@ public class ProjectProfileWrapper implements ProjectProfile,
 		attributes.put("guijiaosl", getGuijiaosl());
 		attributes.put("sdsl", getSdsl());
 		attributes.put("gaojiasl", getGaojiasl());
+		attributes.put("zgj", getZgj());
 		attributes.put("tzly", getTzly());
 		attributes.put("gkpzhhzjghwh", getGkpzhhzjghwh());
 		attributes.put("pfhhzrq", getPfhhzrq());
@@ -405,6 +406,12 @@ public class ProjectProfileWrapper implements ProjectProfile,
 
 		if (gaojiasl != null) {
 			setGaojiasl(gaojiasl);
+		}
+
+		String zgj = (String)attributes.get("zgj");
+
+		if (zgj != null) {
+			setZgj(zgj);
 		}
 
 		String tzly = (String)attributes.get("tzly");
@@ -1552,6 +1559,26 @@ public class ProjectProfileWrapper implements ProjectProfile,
 	@Override
 	public void setGaojiasl(int gaojiasl) {
 		_projectProfile.setGaojiasl(gaojiasl);
+	}
+
+	/**
+	* Returns the zgj of this project profile.
+	*
+	* @return the zgj of this project profile
+	*/
+	@Override
+	public java.lang.String getZgj() {
+		return _projectProfile.getZgj();
+	}
+
+	/**
+	* Sets the zgj of this project profile.
+	*
+	* @param zgj the zgj of this project profile
+	*/
+	@Override
+	public void setZgj(java.lang.String zgj) {
+		_projectProfile.setZgj(zgj);
 	}
 
 	/**

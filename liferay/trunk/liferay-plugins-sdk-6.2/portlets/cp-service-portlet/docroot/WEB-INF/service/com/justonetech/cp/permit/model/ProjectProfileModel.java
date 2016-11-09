@@ -728,6 +728,21 @@ public interface ProjectProfileModel extends BaseModel<ProjectProfile> {
 	public void setGaojiasl(int gaojiasl);
 
 	/**
+	 * Returns the zgj of this project profile.
+	 *
+	 * @return the zgj of this project profile
+	 */
+	@AutoEscape
+	public String getZgj();
+
+	/**
+	 * Sets the zgj of this project profile.
+	 *
+	 * @param zgj the zgj of this project profile
+	 */
+	public void setZgj(String zgj);
+
+	/**
 	 * Returns the tzly of this project profile.
 	 *
 	 * @return the tzly of this project profile

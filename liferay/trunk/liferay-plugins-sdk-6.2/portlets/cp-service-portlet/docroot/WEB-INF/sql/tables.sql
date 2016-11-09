@@ -402,6 +402,7 @@ create table cp_ProjectProfile (
 	guijiaosl INTEGER,
 	sdsl INTEGER,
 	gaojiasl INTEGER,
+	zgj VARCHAR(75) null,
 	tzly VARCHAR(75) null,
 	gkpzhhzjghwh VARCHAR(75) null,
 	pfhhzrq DATE null,
