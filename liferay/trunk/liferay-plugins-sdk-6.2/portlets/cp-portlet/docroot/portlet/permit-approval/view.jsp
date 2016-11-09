@@ -9,22 +9,21 @@ tr.body td.content {
 </style>
 <liferay-ui:header title="施工许可审核" />
 <%
-String range="";
-String friendlyURL=PortalUtil.getCurrentURL(request);
-if(friendlyURL.indexOf("?")<0){
-	if(friendlyURL.contains("shishu")){
-		range="shishu";
+	String gs = "";//根据角色来判断是市属还是区属
+	String friendlyURL=PortalUtil.getCurrentURL(request);
+	if(friendlyURL.indexOf("?")<0){
+		if(friendlyURL.contains("shishu")){
+			gs = "市属";
+		}else{
+			gs = "区属";
+		}
 	}else{
-		range="qushu";
+		if(friendlyURL.substring(0,friendlyURL.indexOf("?")).contains("shishu")){
+			gs = "市属";
+		}else{
+			gs = "区属";
+		}
 	}
-}else{
-	if(friendlyURL.substring(0,friendlyURL.indexOf("?")).contains("shishu")){
-		range="shishu";
-	}else{
-		range="qushu";
-	}
-}
-System.out.println("range="+range);
 	User user_ = PortalUtil.getUser(request);
 	List<Role> roles = user_.getRoles();
 	String ywbh = ParamUtil.getString(request, "ywbh");
@@ -106,8 +105,7 @@ System.out.println("range="+range);
 	String[] sss = PropsUtil.get("sgxkss").split(",");//市属
 	String[] qss = PropsUtil.get("sgxkqs").split(",");//区属
 	
-	
-	String gs = "";//根据角色来判断是市属还是区属
+	/* String gs = "";//根据角色来判断是市属还是区属
 	for (Role role : roles) {
 		String roleId = role.getRoleId() + "";
 		for (String ss : sss) {
@@ -120,7 +118,7 @@ System.out.println("range="+range);
 				gs = "区属";
 			}
 		}
-	}
+	} */
 	List<Permit> permits = PermitLocalServiceUtil.getPermits(ywbh, bjbh, xmmc, xmlxLongs, jsdw, state, gs, start, end);
 	int permitsCount = PermitLocalServiceUtil.getPermitsCount(ywbh, bjbh, xmmc, xmlxLongs, jsdw, state, gs);
 	request.setAttribute("permits", permits);
