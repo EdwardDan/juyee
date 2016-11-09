@@ -9,6 +9,22 @@ tr.body td.content {
 </style>
 <liferay-ui:header title="施工许可审核" />
 <%
+String range="";
+String friendlyURL=PortalUtil.getCurrentURL(request);
+if(friendlyURL.indexOf("?")<0){
+	if(friendlyURL.contains("shishu")){
+		range="shishu";
+	}else{
+		range="qushu";
+	}
+}else{
+	if(friendlyURL.substring(0,friendlyURL.indexOf("?")).contains("shishu")){
+		range="shishu";
+	}else{
+		range="qushu";
+	}
+}
+System.out.println("range="+range);
 	User user_ = PortalUtil.getUser(request);
 	List<Role> roles = user_.getRoles();
 	String ywbh = ParamUtil.getString(request, "ywbh");
