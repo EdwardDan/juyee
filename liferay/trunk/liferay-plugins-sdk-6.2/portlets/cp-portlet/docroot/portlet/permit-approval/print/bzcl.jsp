@@ -42,7 +42,7 @@
 		}
 		
 		   }
-		if(comment.indexOf("&")>0){
+		if(comment.indexOf("&")>=0){
 			comment=comment.substring(comment.indexOf("&")+1);//因为意见和评论合并，故在此处划分
 		}
 %>
