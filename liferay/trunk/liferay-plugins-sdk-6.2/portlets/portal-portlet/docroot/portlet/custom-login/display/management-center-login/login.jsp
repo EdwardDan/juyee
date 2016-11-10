@@ -142,7 +142,8 @@
 			<div id="loginMessage" class="loginMessage"></div>
 
 			<div class="login_div_btn">
-				<input type="button" class="login_login_btn" onclick="validateForm()" value="登录">
+				<input type="button" class="login_login_btn" onclick="validateForm()" value="登录" style="width: 246px"><br>
+				<span style="font-size: 12px">技术支持电话：15950151489</span>
 			</div>
 		</div>
 	</div>
