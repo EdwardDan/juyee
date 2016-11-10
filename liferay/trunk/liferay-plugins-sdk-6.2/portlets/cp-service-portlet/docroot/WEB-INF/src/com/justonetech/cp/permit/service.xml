@@ -117,6 +117,9 @@
 		<column name="sdsl" type="int" /><!--隧道数量 -->
 		<column name="gaojiasl" type="int" /><!--高架数量 -->
 		<column name="zgj" type="String" /><!-- 暂估价（万元） -->
+		<column name="zsqxks" type="Date" /><!-- 证书期限（开始时间） -->
+		<column name="zsqxjs" type="Date" /><!-- 证书期限 （结束时间）-->
+		<column name="cnsx" type="String" /><!-- 承诺事项 -->
 
 		<!-- 航道有关扩展字段 -->
 		<column name="tzly" type="String" /><!--投资来源 -->

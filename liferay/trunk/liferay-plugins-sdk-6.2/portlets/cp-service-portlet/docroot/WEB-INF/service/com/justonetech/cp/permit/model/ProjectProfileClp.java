@@ -120,6 +120,9 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 		attributes.put("sdsl", getSdsl());
 		attributes.put("gaojiasl", getGaojiasl());
 		attributes.put("zgj", getZgj());
+		attributes.put("zsqxks", getZsqxks());
+		attributes.put("zsqxjs", getZsqxjs());
+		attributes.put("cnsx", getCnsx());
 		attributes.put("tzly", getTzly());
 		attributes.put("gkpzhhzjghwh", getGkpzhhzjghwh());
 		attributes.put("pfhhzrq", getPfhhzrq());
@@ -436,6 +439,24 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 
 		if (zgj != null) {
 			setZgj(zgj);
+		}
+
+		Date zsqxks = (Date)attributes.get("zsqxks");
+
+		if (zsqxks != null) {
+			setZsqxks(zsqxks);
+		}
+
+		Date zsqxjs = (Date)attributes.get("zsqxjs");
+
+		if (zsqxjs != null) {
+			setZsqxjs(zsqxjs);
+		}
+
+		String cnsx = (String)attributes.get("cnsx");
+
+		if (cnsx != null) {
+			setCnsx(cnsx);
 		}
 
 		String tzly = (String)attributes.get("tzly");
@@ -1719,6 +1740,75 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 	}
 
 	@Override
+	public Date getZsqxks() {
+		return _zsqxks;
+	}
+
+	@Override
+	public void setZsqxks(Date zsqxks) {
+		_zsqxks = zsqxks;
+
+		if (_projectProfileRemoteModel != null) {
+			try {
+				Class<?> clazz = _projectProfileRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setZsqxks", Date.class);
+
+				method.invoke(_projectProfileRemoteModel, zsqxks);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public Date getZsqxjs() {
+		return _zsqxjs;
+	}
+
+	@Override
+	public void setZsqxjs(Date zsqxjs) {
+		_zsqxjs = zsqxjs;
+
+		if (_projectProfileRemoteModel != null) {
+			try {
+				Class<?> clazz = _projectProfileRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setZsqxjs", Date.class);
+
+				method.invoke(_projectProfileRemoteModel, zsqxjs);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getCnsx() {
+		return _cnsx;
+	}
+
+	@Override
+	public void setCnsx(String cnsx) {
+		_cnsx = cnsx;
+
+		if (_projectProfileRemoteModel != null) {
+			try {
+				Class<?> clazz = _projectProfileRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setCnsx", String.class);
+
+				method.invoke(_projectProfileRemoteModel, cnsx);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
 	public String getTzly() {
 		return _tzly;
 	}
@@ -2663,6 +2753,9 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 		clone.setSdsl(getSdsl());
 		clone.setGaojiasl(getGaojiasl());
 		clone.setZgj(getZgj());
+		clone.setZsqxks(getZsqxks());
+		clone.setZsqxjs(getZsqxjs());
+		clone.setCnsx(getCnsx());
 		clone.setTzly(getTzly());
 		clone.setGkpzhhzjghwh(getGkpzhhzjghwh());
 		clone.setPfhhzrq(getPfhhzrq());
@@ -2751,7 +2844,7 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(165);
+		StringBundler sb = new StringBundler(171);
 
 		sb.append("{permitId=");
 		sb.append(getPermitId());
@@ -2845,6 +2938,12 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 		sb.append(getGaojiasl());
 		sb.append(", zgj=");
 		sb.append(getZgj());
+		sb.append(", zsqxks=");
+		sb.append(getZsqxks());
+		sb.append(", zsqxjs=");
+		sb.append(getZsqxjs());
+		sb.append(", cnsx=");
+		sb.append(getCnsx());
 		sb.append(", tzly=");
 		sb.append(getTzly());
 		sb.append(", gkpzhhzjghwh=");
@@ -2924,7 +3023,7 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(250);
+		StringBundler sb = new StringBundler(259);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.cp.permit.model.ProjectProfile");
@@ -3113,6 +3212,18 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 		sb.append(
 			"<column><column-name>zgj</column-name><column-value><![CDATA[");
 		sb.append(getZgj());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>zsqxks</column-name><column-value><![CDATA[");
+		sb.append(getZsqxks());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>zsqxjs</column-name><column-value><![CDATA[");
+		sb.append(getZsqxjs());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>cnsx</column-name><column-value><![CDATA[");
+		sb.append(getCnsx());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>tzly</column-name><column-value><![CDATA[");
@@ -3310,6 +3421,9 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 	private int _sdsl;
 	private int _gaojiasl;
 	private String _zgj;
+	private Date _zsqxks;
+	private Date _zsqxjs;
+	private String _cnsx;
 	private String _tzly;
 	private String _gkpzhhzjghwh;
 	private Date _pfhhzrq;

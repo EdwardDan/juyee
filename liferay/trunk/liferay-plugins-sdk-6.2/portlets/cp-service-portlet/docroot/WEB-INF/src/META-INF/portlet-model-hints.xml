@@ -427,6 +427,9 @@
 		<field name="sdsl" type="int" />
 		<field name="gaojiasl" type="int" />
 		<field name="zgj" type="String" />
+		<field name="zsqxks" type="Date" />
+		<field name="zsqxjs" type="Date" />
+		<field name="cnsx" type="String" />
 		<field name="tzly" type="String" />
 		<field name="gkpzhhzjghwh" type="String" />
 		<field name="pfhhzrq" type="Date" />

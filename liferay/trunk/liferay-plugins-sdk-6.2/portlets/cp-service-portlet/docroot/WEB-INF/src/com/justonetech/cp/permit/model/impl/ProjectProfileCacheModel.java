@@ -38,7 +38,7 @@ public class ProjectProfileCacheModel implements CacheModel<ProjectProfile>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(165);
+		StringBundler sb = new StringBundler(171);
 
 		sb.append("{permitId=");
 		sb.append(permitId);
@@ -132,6 +132,12 @@ public class ProjectProfileCacheModel implements CacheModel<ProjectProfile>,
 		sb.append(gaojiasl);
 		sb.append(", zgj=");
 		sb.append(zgj);
+		sb.append(", zsqxks=");
+		sb.append(zsqxks);
+		sb.append(", zsqxjs=");
+		sb.append(zsqxjs);
+		sb.append(", cnsx=");
+		sb.append(cnsx);
 		sb.append(", tzly=");
 		sb.append(tzly);
 		sb.append(", gkpzhhzjghwh=");
@@ -478,6 +484,27 @@ public class ProjectProfileCacheModel implements CacheModel<ProjectProfile>,
 			projectProfileImpl.setZgj(zgj);
 		}
 
+		if (zsqxks == Long.MIN_VALUE) {
+			projectProfileImpl.setZsqxks(null);
+		}
+		else {
+			projectProfileImpl.setZsqxks(new Date(zsqxks));
+		}
+
+		if (zsqxjs == Long.MIN_VALUE) {
+			projectProfileImpl.setZsqxjs(null);
+		}
+		else {
+			projectProfileImpl.setZsqxjs(new Date(zsqxjs));
+		}
+
+		if (cnsx == null) {
+			projectProfileImpl.setCnsx(StringPool.BLANK);
+		}
+		else {
+			projectProfileImpl.setCnsx(cnsx);
+		}
+
 		if (tzly == null) {
 			projectProfileImpl.setTzly(StringPool.BLANK);
 		}
@@ -778,6 +805,9 @@ public class ProjectProfileCacheModel implements CacheModel<ProjectProfile>,
 		sdsl = objectInput.readInt();
 		gaojiasl = objectInput.readInt();
 		zgj = objectInput.readUTF();
+		zsqxks = objectInput.readLong();
+		zsqxjs = objectInput.readLong();
+		cnsx = objectInput.readUTF();
 		tzly = objectInput.readUTF();
 		gkpzhhzjghwh = objectInput.readUTF();
 		pfhhzrq = objectInput.readLong();
@@ -1067,6 +1097,16 @@ public class ProjectProfileCacheModel implements CacheModel<ProjectProfile>,
 			objectOutput.writeUTF(zgj);
 		}
 
+		objectOutput.writeLong(zsqxks);
+		objectOutput.writeLong(zsqxjs);
+
+		if (cnsx == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(cnsx);
+		}
+
 		if (tzly == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
@@ -1350,6 +1390,9 @@ public class ProjectProfileCacheModel implements CacheModel<ProjectProfile>,
 	public int sdsl;
 	public int gaojiasl;
 	public String zgj;
+	public long zsqxks;
+	public long zsqxjs;
+	public String cnsx;
 	public String tzly;
 	public String gkpzhhzjghwh;
 	public long pfhhzrq;

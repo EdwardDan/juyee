@@ -743,6 +743,49 @@ public interface ProjectProfileModel extends BaseModel<ProjectProfile> {
 	public void setZgj(String zgj);
 
 	/**
+	 * Returns the zsqxks of this project profile.
+	 *
+	 * @return the zsqxks of this project profile
+	 */
+	public Date getZsqxks();
+
+	/**
+	 * Sets the zsqxks of this project profile.
+	 *
+	 * @param zsqxks the zsqxks of this project profile
+	 */
+	public void setZsqxks(Date zsqxks);
+
+	/**
+	 * Returns the zsqxjs of this project profile.
+	 *
+	 * @return the zsqxjs of this project profile
+	 */
+	public Date getZsqxjs();
+
+	/**
+	 * Sets the zsqxjs of this project profile.
+	 *
+	 * @param zsqxjs the zsqxjs of this project profile
+	 */
+	public void setZsqxjs(Date zsqxjs);
+
+	/**
+	 * Returns the cnsx of this project profile.
+	 *
+	 * @return the cnsx of this project profile
+	 */
+	@AutoEscape
+	public String getCnsx();
+
+	/**
+	 * Sets the cnsx of this project profile.
+	 *
+	 * @param cnsx the cnsx of this project profile
+	 */
+	public void setCnsx(String cnsx);
+
+	/**
 	 * Returns the tzly of this project profile.
 	 *
 	 * @return the tzly of this project profile

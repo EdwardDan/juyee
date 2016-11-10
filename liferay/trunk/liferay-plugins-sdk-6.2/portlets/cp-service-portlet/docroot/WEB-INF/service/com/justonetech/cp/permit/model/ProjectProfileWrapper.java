@@ -96,6 +96,9 @@ public class ProjectProfileWrapper implements ProjectProfile,
 		attributes.put("sdsl", getSdsl());
 		attributes.put("gaojiasl", getGaojiasl());
 		attributes.put("zgj", getZgj());
+		attributes.put("zsqxks", getZsqxks());
+		attributes.put("zsqxjs", getZsqxjs());
+		attributes.put("cnsx", getCnsx());
 		attributes.put("tzly", getTzly());
 		attributes.put("gkpzhhzjghwh", getGkpzhhzjghwh());
 		attributes.put("pfhhzrq", getPfhhzrq());
@@ -412,6 +415,24 @@ public class ProjectProfileWrapper implements ProjectProfile,
 
 		if (zgj != null) {
 			setZgj(zgj);
+		}
+
+		Date zsqxks = (Date)attributes.get("zsqxks");
+
+		if (zsqxks != null) {
+			setZsqxks(zsqxks);
+		}
+
+		Date zsqxjs = (Date)attributes.get("zsqxjs");
+
+		if (zsqxjs != null) {
+			setZsqxjs(zsqxjs);
+		}
+
+		String cnsx = (String)attributes.get("cnsx");
+
+		if (cnsx != null) {
+			setCnsx(cnsx);
 		}
 
 		String tzly = (String)attributes.get("tzly");
@@ -1579,6 +1600,66 @@ public class ProjectProfileWrapper implements ProjectProfile,
 	@Override
 	public void setZgj(java.lang.String zgj) {
 		_projectProfile.setZgj(zgj);
+	}
+
+	/**
+	* Returns the zsqxks of this project profile.
+	*
+	* @return the zsqxks of this project profile
+	*/
+	@Override
+	public java.util.Date getZsqxks() {
+		return _projectProfile.getZsqxks();
+	}
+
+	/**
+	* Sets the zsqxks of this project profile.
+	*
+	* @param zsqxks the zsqxks of this project profile
+	*/
+	@Override
+	public void setZsqxks(java.util.Date zsqxks) {
+		_projectProfile.setZsqxks(zsqxks);
+	}
+
+	/**
+	* Returns the zsqxjs of this project profile.
+	*
+	* @return the zsqxjs of this project profile
+	*/
+	@Override
+	public java.util.Date getZsqxjs() {
+		return _projectProfile.getZsqxjs();
+	}
+
+	/**
+	* Sets the zsqxjs of this project profile.
+	*
+	* @param zsqxjs the zsqxjs of this project profile
+	*/
+	@Override
+	public void setZsqxjs(java.util.Date zsqxjs) {
+		_projectProfile.setZsqxjs(zsqxjs);
+	}
+
+	/**
+	* Returns the cnsx of this project profile.
+	*
+	* @return the cnsx of this project profile
+	*/
+	@Override
+	public java.lang.String getCnsx() {
+		return _projectProfile.getCnsx();
+	}
+
+	/**
+	* Sets the cnsx of this project profile.
+	*
+	* @param cnsx the cnsx of this project profile
+	*/
+	@Override
+	public void setCnsx(java.lang.String cnsx) {
+		_projectProfile.setCnsx(cnsx);
 	}
 
 	/**

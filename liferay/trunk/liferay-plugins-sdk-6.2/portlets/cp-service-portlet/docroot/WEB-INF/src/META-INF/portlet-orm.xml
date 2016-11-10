@@ -409,6 +409,13 @@
 			<basic name="sdsl" />
 			<basic name="gaojiasl" />
 			<basic name="zgj" />
+			<basic name="zsqxks">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="zsqxjs">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="cnsx" />
 			<basic name="tzly" />
 			<basic name="gkpzhhzjghwh" />
 			<basic name="pfhhzrq">
