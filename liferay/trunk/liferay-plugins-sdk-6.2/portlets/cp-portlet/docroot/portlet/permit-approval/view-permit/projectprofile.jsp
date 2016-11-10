@@ -20,6 +20,7 @@ tr.body td.content {
 	Permit permit = PermitLocalServiceUtil.getPermit(permitId);
 	ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
 	String xmlx =  DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx()).getName();
+	String xmxz = DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmxz()).getName();
 	String jsddssqx = projectProfile.getJsddssqx() == 0 ? null : DictionaryLocalServiceUtil.getDictionary(
 			projectProfile.getJsddssqx()).getName();
 	Dictionary jsgclb = DictionaryLocalServiceUtil.findByCode("jsgclb");
@@ -30,6 +31,7 @@ tr.body td.content {
 	request.setAttribute("jsddssqx", jsddssqx);
 	request.setAttribute("jsgclbs", jsgclbs);
 	request.setAttribute("xmlx", xmlx);
+	request.setAttribute("xmxz", xmxz);
 %>
 <table class="table table-bordered">
 	<tr class="body">
@@ -170,6 +172,18 @@ tr.body td.content {
 		<td class="content"><fmt:formatDate value="${projectProfile.jhjg}"
 				pattern="yyyy-MM-dd" /></td>
 	</tr>
+	<c:if test="${xmxz eq '市重大工程'}">
+		<tr class="body">
+				<td class="text-right">证书期限</td>
+				<td class="bg-white" colspan="3">从<fmt:formatDate value="${projectProfile.zsqxks}"
+				pattern="yyyy-MM-dd" />至<fmt:formatDate value="${projectProfile.zsqxjs}"
+				pattern="yyyy-MM-dd" /></td>
+			</tr>
+			<tr class="body">
+				<td class="text-right">承诺事项</td>
+				<td class="bg-white" colspan="3">${projectProfile.cnsx}</td>
+			</tr>
+	</c:if>
 	<tbody style="display: none" id="hd">
 		<tr class="body">
 			<td class="text-center" colspan="4">主要设计单位</td>
