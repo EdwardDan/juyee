@@ -89,7 +89,7 @@
     }
 
     .login_login_btn {
-        width: 100% !important;
+        width: 246px !important;
         height: 100% !important;
         border-radius: 3px;
         border: none;
@@ -142,7 +142,7 @@
 			<div id="loginMessage" class="loginMessage"></div>
 
 			<div class="login_div_btn">
-				<input type="button" class="login_login_btn" onclick="validateForm()" value="登录" style="width: 246px"><br>
+				<input type="button" class="login_login_btn" onclick="validateForm()" value="登录"><br>
 				<span style="font-size: 12px">技术支持电话：15950151489</span>
 			</div>
 		</div>
@@ -152,6 +152,7 @@
 <script>
 $(document).ready(
         function() {
+        	document.onkeydown=keyDownSearch;
             var body = document.getElementsByTagName("body");
             body[0].style.backgroundSize = $(window).width() + "px"
             + " " + $(window).height() + "px";
