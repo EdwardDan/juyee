@@ -36,7 +36,6 @@ tr.body td.content {
 <table class="table table-bordered">
 	
 	<tr class="body">
-		
 		<td class="title">项目类型<input name="xmlx" id="xmlx" type="hidden" value="${xmlx}"/></td>
 		<td class="content"><%=DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx()).getName()%></td>
 		<td class="title">立项级别</td>
@@ -174,7 +173,7 @@ tr.body td.content {
 		<td class="content"><fmt:formatDate value="${projectProfile.jhjg}"
 				pattern="yyyy-MM-dd" /></td>
 	</tr>
-	<c:if test="${xmxz eq '市重大工程'}">
+	<c:if test="${xmxz eq '年度市重大工程'}">
 		<tr class="body">
 				<td class="text-right">证书期限</td>
 				<td class="bg-white" colspan="3">从<fmt:formatDate value="${projectProfile.zsqxks}"
