@@ -262,6 +262,13 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		String xckgqk = ParamUtil.getString(request, "xckgqk");
 		Date jhkg = ParamUtil.getDate(request, "jhkg", new SimpleDateFormat(dateFormatPattern));
 		Date jhjg = ParamUtil.getDate(request, "jhjg", new SimpleDateFormat(dateFormatPattern));
+		Date zsqxks = null,zsqxjs = null;
+		if(Validator.isNotNull(ParamUtil.getDate(request, "zsqxks",new SimpleDateFormat(dateFormatPattern)))){
+			zsqxks = ParamUtil.getDate(request, "zsqxks",new SimpleDateFormat(dateFormatPattern));
+			zsqxjs = ParamUtil.getDate(request, "zsqxjs",new SimpleDateFormat(dateFormatPattern));
+		}
+		String cnsx = ParamUtil.getString(request, "cnsx");
+		System.out.println("=================="+zsqxks+zsqxjs+cnsx);
 		String tzly = "";
 		String gkpzhhzjghwh = "";
 		Date pfhhzrq = null;
@@ -339,6 +346,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 			sytdxgwj = ParamUtil.getString(request, "sytdxgwj");
 			gczljddjqk = ParamUtil.getString(request, "gczljddjqk");
 		}
+		
 		String sgxkzsbz = ParamUtil.getString(request, "sgxkzsbz");
 		Boolean sfzftzl = ParamUtil.getBoolean(request, "sfzftzl");
 		String yzzpl1 = ParamUtil.getString(request, "yzzpl1");
@@ -412,6 +420,9 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		projectProfile.setXckgqk(xckgqk);
 		projectProfile.setJhkg(jhkg);
 		projectProfile.setJhjg(jhjg);
+		projectProfile.setZsqxks(zsqxks);
+		projectProfile.setZsqxjs(zsqxjs);
+		projectProfile.setCnsx(cnsx);
 		
 		projectProfile.setTzly(tzly);
 		projectProfile.setGkpzhhzjghwh(gkpzhhzjghwh);
@@ -586,7 +597,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		permit.setModifiedDate(now);
 		permit.setGroupId(themeDisplay.getScopeGroupId());
 		permit.setCompanyId(themeDisplay.getCompanyId());
-		// 保存状态
+		// 淇濆瓨鐘舵��
 		permit.setStatus(CityPermitStatus.STATUS_SB.getCode());
 		permit.setSqbz(4);
 		permit.setStatus(2);
@@ -660,43 +671,43 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		Map<String, String> map = new HashMap<String, String>();
 		Permit permit = PermitLocalServiceUtil.getPermit(permitId);
 		ProjectProfile projectProfile = ProjectProfileLocalServiceUtil.getProjectProfile(permitId);
-		String title = "上海市(" + xmlx + ")工程施工许可证";
+		String title = "涓婃捣甯�(" + xmlx + ")宸ョ▼鏂藉伐璁稿彲璇�";
 		String bh = "";
 		String gj = "";
-		if (xmlx.equals("港口")) {
-			gj = "根据《中华人民共和国港口法》等相关法律规定，经审查，本工程符合施工条件，准予施工。";
-		} else if (xmlx.equals("公路")) {
-			gj = "根据《中华人民共和国公路法》等相关法律规定，经审查，本工程符合施工条件，准予施工。";
+		if (xmlx.equals("娓彛")) {
+			gj = "鏍规嵁銆婁腑鍗庝汉姘戝叡鍜屽浗娓彛娉曘�嬬瓑鐩稿叧娉曞緥瑙勫畾锛岀粡瀹℃煡锛屾湰宸ョ▼绗﹀悎鏂藉伐鏉′欢锛屽噯浜堟柦宸ャ��";
+		} else if (xmlx.equals("鍏矾")) {
+			gj = "鏍规嵁銆婁腑鍗庝汉姘戝叡鍜屽浗鍏矾娉曘�嬬瓑鐩稿叧娉曞緥瑙勫畾锛岀粡瀹℃煡锛屾湰宸ョ▼绗﹀悎鏂藉伐鏉′欢锛屽噯浜堟柦宸ャ��";
 		} else {
-			gj = "根据《中华人民共和国交通建设法》等相关法律规定，经审查，本工程符合施工条件，准予施工。";
+			gj = "鏍规嵁銆婁腑鍗庝汉姘戝叡鍜屽浗浜ら�氬缓璁炬硶銆嬬瓑鐩稿叧娉曞緥瑙勫畾锛岀粡瀹℃煡锛屾湰宸ョ▼绗﹀悎鏂藉伐鏉′欢锛屽噯浜堟柦宸ャ��";
 		}
 		String jsdw = projectProfile.getJsdwmc();
 		String gcmc = projectProfile.getGcmc();
 		String gcwz = projectProfile.getJsdd();
 		String gcnr = projectProfile.getGcnr();
-		String xmtzgs = projectProfile.getXmtzgs() + "万元";
-		String htjg = projectProfile.getHtjg() + "万元";
+		String xmtzgs = projectProfile.getXmtzgs() + "涓囧厓";
+		String htjg = projectProfile.getHtjg() + "涓囧厓";
 		String sjdw = "";
 		String sgdw = "";
 		String jldw = "";
 
 		List<ParticipationUnit> participationUnits = ParticipationUnitLocalServiceUtil.findByPermitId(permitId, -1, -1);
 		for (ParticipationUnit participationUnit : participationUnits) {
-			if (participationUnit.getDwlx().equals("设计单位")) {
+			if (participationUnit.getDwlx().equals("璁捐鍗曚綅")) {
 				sjdw = participationUnit.getDwmc();
 			}
-			if (participationUnit.getDwlx().equals("施工单位")) {
+			if (participationUnit.getDwlx().equals("鏂藉伐鍗曚綅")) {
 				sgdw = participationUnit.getDwmc();
 			}
-			if (participationUnit.getDwlx().equals("监理单位")) {
+			if (participationUnit.getDwlx().equals("鐩戠悊鍗曚綅")) {
 				jldw = participationUnit.getDwmc();
 			}
 		}
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 		String jhkg = sdf.format(projectProfile.getJhkg());
 		String jhjg = sdf.format(projectProfile.getJhjg());
-		String jhkgrq = jhkg.substring(0, 4) + "年" + jhkg.substring(4, 6) + "月" + jhkg.substring(6, 8) + "日";
-		String jhjgrq = jhjg.substring(0, 4) + "年" + jhjg.substring(4, 6) + "月" + jhjg.substring(6, 8) + "日";
+		String jhkgrq = jhkg.substring(0, 4) + "骞�" + jhkg.substring(4, 6) + "鏈�" + jhkg.substring(6, 8) + "鏃�";
+		String jhjgrq = jhjg.substring(0, 4) + "骞�" + jhjg.substring(4, 6) + "鏈�" + jhjg.substring(6, 8) + "鏃�";
 		String bz = projectProfile.getSgxkzsbz();
 		map.put("xmtzgs", xmtzgs);
 		map.put("htjg", htjg);
@@ -727,14 +738,14 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		String gkpzwh = projectProfile.getGkpzhhzjghwh();
 		Date pfhhzrqDate = projectProfile.getPfhhzrq();
 		String pfhhzrq = sdf.format(pfhhzrqDate);
-		String hzrq = pfhhzrq.substring(0, 4) + "年" + pfhhzrq.substring(4, 6) + "月" + pfhhzrq.substring(6, 8) + "日";
+		String hzrq = pfhhzrq.substring(0, 4) + "骞�" + pfhhzrq.substring(4, 6) + "鏈�" + pfhhzrq.substring(6, 8) + "鏃�";
 		String tzgs = projectProfile.getXmtzgs();
 		String cbpzwh = projectProfile.getCbsjpzjghwh();
 		Date pfrqDate = projectProfile.getPfrq();
 		String pfrqStr = sdf.format(pfrqDate);
-		String pfrq = pfrqStr.substring(0, 4) + "年" + pfrqStr.substring(4, 6) + "月" + pfrqStr.substring(6, 8) + "日";
-		String pfgq = projectProfile.getPfgq()+"天";
-		String jsgm = projectProfile.getJsgcgm()+"。"+projectProfile.getGcnr();
+		String pfrq = pfrqStr.substring(0, 4) + "骞�" + pfrqStr.substring(4, 6) + "鏈�" + pfrqStr.substring(6, 8) + "鏃�";
+		String pfgq = projectProfile.getPfgq()+"澶�";
+		String jsgm = projectProfile.getJsgcgm()+"銆�"+projectProfile.getGcnr();
 		String pzjghwh = projectProfile.getPzjghwh();
 		String xmdw = projectProfile.getXmdw();
 		String xmdwfzr = projectProfile.getXmfzr();
@@ -772,8 +783,8 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		
 		String jhkgrq = sdf.format(projectProfile.getJhkg());
 		String jhjgrq = sdf.format(projectProfile.getJhjg());
-		String jhkg = jhkgrq.substring(0, 4) + "年" + jhkgrq.substring(4, 6) + "月" + jhkgrq.substring(6, 8) + "日";
-		String jhwg = jhjgrq.substring(0, 4) + "年" + jhjgrq.substring(4, 6) + "月" + jhjgrq.substring(6, 8) + "日";
+		String jhkg = jhkgrq.substring(0, 4) + "骞�" + jhkgrq.substring(4, 6) + "鏈�" + jhkgrq.substring(6, 8) + "鏃�";
+		String jhwg = jhjgrq.substring(0, 4) + "骞�" + jhjgrq.substring(4, 6) + "鏈�" + jhjgrq.substring(6, 8) + "鏃�";
 		map.put("babh", babh);
 		map.put("xmmc", xmmc);
 		map.put("jsdd", jsdd);
@@ -875,12 +886,12 @@ public class PermitApplicationPortlet extends MVCPortlet {
 			if ("view".equals(resourceId)) {
 				Map<String, String> map = null;
 				String newPDFPath = "";
-				if (xmlx.equals("航道")) {
-					newPDFPath = PropsUtil.get("sgxkz.temp.folder.id") + "开工备案.pdf";
+				if (xmlx.equals("鑸亾")) {
+					newPDFPath = PropsUtil.get("sgxkz.temp.folder.id") + "寮�宸ュ妗�.pdf";
 				} else {
-					newPDFPath = PropsUtil.get("sgxkz.temp.folder.id") + "施工许可证书.pdf";
+					newPDFPath = PropsUtil.get("sgxkz.temp.folder.id") + "鏂藉伐璁稿彲璇佷功.pdf";
 				}
-				if (xmlx.equals("航道")) {
+				if (xmlx.equals("鑸亾")) {
 					map = getKgbaMap(permitId);
 					fillTemplate(DLFileEntryLocalServiceUtil.getDLFileEntry(Long.valueOf(PropsUtil
 							.get("sgxkz.hd.pdf.template.id"))), newPDFPath, map, resourceRequest, resourceResponse, permit);
@@ -900,21 +911,21 @@ public class PermitApplicationPortlet extends MVCPortlet {
 				HttpServletRequest request = PortalUtil.getHttpServletRequest(resourceRequest);
 				HttpServletResponse response = PortalUtil.getHttpServletResponse(resourceResponse);
 				File file = null;
-				if (xmlx.equals("航道")) {
-					file = new File("D:\\temp\\开工备案.pdf");
+				if (xmlx.equals("鑸亾")) {
+					file = new File("D:\\temp\\寮�宸ュ妗�.pdf");
 				} else {
-					file = new File("D:\\temp\\施工许可证书.pdf");
+					file = new File("D:\\temp\\鏂藉伐璁稿彲璇佷功.pdf");
 				}
 				byte[] bytes = FileUtil.getBytes(file);
-				if (xmlx.equals("航道")) {
-				ServletResponseUtil.sendFile(request, response, "开工备案.pdf", bytes, ContentTypes.APPLICATION_PDF);
+				if (xmlx.equals("鑸亾")) {
+				ServletResponseUtil.sendFile(request, response, "寮�宸ュ妗�.pdf", bytes, ContentTypes.APPLICATION_PDF);
 				}else{
-					ServletResponseUtil.sendFile(request, response, "施工许可证书.pdf", bytes, ContentTypes.APPLICATION_PDF);
+					ServletResponseUtil.sendFile(request, response, "鏂藉伐璁稿彲璇佷功.pdf", bytes, ContentTypes.APPLICATION_PDF);
 				}
 			}
 			
 			
-			// 删除文件
+			// 鍒犻櫎鏂囦欢
 			if ("fileDelete".equals(resourceId)) {
 				String fileId = ParamUtil.get(resourceRequest, "fileId", "0");
 				String materialId = ParamUtil.get(resourceRequest, "materialId", "0");
@@ -926,12 +937,12 @@ public class PermitApplicationPortlet extends MVCPortlet {
 						ApplyMaterial applyMaterial = ApplyMaterialLocalServiceUtil.getApplyMaterial(Long
 								.valueOf(materialId));
 						String fileEntryIds = applyMaterial.getFileEntryIds();
-						fileEntryIds = fileEntryIds + ",";// 加上逗号为了容易替换
-						// 获取文件路径
+						fileEntryIds = fileEntryIds + ",";// 鍔犱笂閫楀彿涓轰簡瀹规槗鏇挎崲
+						// 鑾峰彇鏂囦欢璺緞
 						String str = fileId + "\\|" + dlFileEntry.getExtension() + "\\,";
 						fileEntryIds = fileEntryIds.replaceFirst(str, "");
 						if (Validator.isNotNull(fileEntryIds)) {
-							fileEntryIds = fileEntryIds.substring(0, fileEntryIds.length() - 1);// 最后一步再把逗号去掉
+							fileEntryIds = fileEntryIds.substring(0, fileEntryIds.length() - 1);// 鏈�鍚庝竴姝ュ啀鎶婇�楀彿鍘绘帀
 						}
 						applyMaterial.setFileEntryIds(fileEntryIds);
 						ApplyMaterialLocalServiceUtil.updateApplyMaterial(applyMaterial);
@@ -971,7 +982,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		Long groupId = user.getGroupId();
 		Long rootFolderId = DLFileEntryTypeConstants.FILE_ENTRY_TYPE_ID_BASIC_DOCUMENT;
 		FileEntry fileEntry = null;
-		// 为每一种材料名称创建一个文件夹,如果已有就不再创建
+		// 涓烘瘡涓�绉嶆潗鏂欏悕绉板垱寤轰竴涓枃浠跺す,濡傛灉宸叉湁灏变笉鍐嶅垱寤�
 		DLFolder dlParentFolder = null;
 		DLFolder dlChildFolder = null;
 		if (Validator.isNotNull(portletId) && Validator.isNotNull(materialId)) {
@@ -1019,21 +1030,21 @@ public class PermitApplicationPortlet extends MVCPortlet {
 			String fileTitle = "";
 			
 			String fileExtension=sourceFileName.substring(sourceFileName.lastIndexOf(".")+1).toUpperCase().trim();
-			String upLoadMessage="上传成功！";
+			String upLoadMessage="涓婁紶鎴愬姛锛�";
 			Boolean upLoadStatus=true;
 			if(!fileExtension.equals("JPG")&&!fileExtension.equals("PDF")){
-				upLoadMessage="文件上传仅限于jpg或者pdf格式！";
+				upLoadMessage="鏂囦欢涓婁紶浠呴檺浜巎pg鎴栬�卲df鏍煎紡锛�";
 				upLoadStatus=false;
 				SessionErrors.add(actionRequest, "error-key"); 
 	        }else if(fileExtension.equals("JPG")){
 	        	if(fileSize>2){	
-	        		upLoadMessage="上传的jpg文件超过2M,请压缩后上传！";
+	        		upLoadMessage="涓婁紶鐨刯pg鏂囦欢瓒呰繃2M,璇峰帇缂╁悗涓婁紶锛�";
 	        		upLoadStatus=false;
 	        		SessionErrors.add(actionRequest, "error-key"); 
 	        	}
 	        }else if(fileExtension.equals("PDF")){
 	        	if(fileSize>20){	
-	        		upLoadMessage="上传的pdf文件超过20M,请压缩或拆分后上传！";
+	        		upLoadMessage="涓婁紶鐨刾df鏂囦欢瓒呰繃20M,璇峰帇缂╂垨鎷嗗垎鍚庝笂浼狅紒";
 	        		upLoadStatus=false;
 	        		SessionErrors.add(actionRequest, "error-key"); 
 	        	}
@@ -1046,11 +1057,11 @@ public class PermitApplicationPortlet extends MVCPortlet {
 				 fileTitle = applyMaterial.getClmc() + "-" + no + "." + fileExtension.toLowerCase();
 				 fileEntry=uploadFile(actionRequest, sourceFileName, fileBytes, serviceContext, "permitapplication_WAR_cpportlet", materialId, fileTitle);	
 				 String fileEntryIds = applyMaterial.getFileEntryIds();
-						// 添加第一条数据时
+						// 娣诲姞绗竴鏉℃暟鎹椂
 						if (Validator.isNull(fileEntryIds)) {
 							fileEntryIds = fileEntry.getFileEntryId() + "|" + fileEntry.getExtension();
 						}
-						// 如果已有数据
+						// 濡傛灉宸叉湁鏁版嵁
 						else {
 							fileEntryIds = fileEntryIds + "," + fileEntry.getFileEntryId() + "|" + fileEntry.getExtension();						
 						}
@@ -1062,7 +1073,7 @@ public class PermitApplicationPortlet extends MVCPortlet {
 				 actionResponse.setRenderParameter("name", sourceFileName);
 				actionResponse.setRenderParameter("divNo", ParamUtil.getString(actionRequest, "divNo"));
 				actionResponse.setRenderParameter("fileExtension", fileExtension.toLowerCase());
-				SessionMessages.add(actionRequest, "request_processed",applyMaterial.getClmc()+"上传成功！"); 	
+				SessionMessages.add(actionRequest, "request_processed",applyMaterial.getClmc()+"涓婁紶鎴愬姛锛�"); 	
 			}
 			actionResponse.setRenderParameter("no", no);
 			SessionMessages.add(actionRequest, "permitapplication_WAR_cpportlet" + SessionMessages. KEY_SUFFIX_HIDE_DEFAULT_ERROR_MESSAGE);
