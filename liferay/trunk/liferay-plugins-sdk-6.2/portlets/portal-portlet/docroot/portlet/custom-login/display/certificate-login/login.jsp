@@ -173,11 +173,12 @@ form.login_form {
 			</div>
 
 			<div class="login_btn">
-				<button class="submit_button" type='button' id="btnSub" name="btnSub" onclick="loginToBSDT()">登录</button>
+				<button class="submit_button" type='button' id="btnSub" name="btnSub" onclick="loginToBSDT()">登录</button><br><br>
+				<span>技术支持电话：15950151489</span>
 			</div>
 
 			<div class="login_description">
-				1、企业用户请持法人一证通登录。<a href="https://www.ciac.sh.cn/CIACuserportal/Help/AboutLogin.aspx" target="_Blank">查看登录流程</a><br /> 2、证书驱动<a href="http://www.962600.com/Service/Index/16?subId=19" target="_Blank">下载地址</a><br /> 3、数字证书<a href="https://www.ciac.sh.cn/CIACuserportal/Content/File/%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E5%8A%9E%E7%90%86%E9%A1%BB%E7%9F%A5.doc" target="_Blank">办理须知</a>
+				1、企业用户请持法人一证通登录。<a href="https://www.ciac.sh.cn/CIACuserportal/Help/AboutLogin.aspx" target="_Blank">查看登录流程</a><br /> 2、证书助手安装包<a href="http://www.962600.com/Service/Index/16?subId=19" target="_Blank">下载地址</a><br /> 3、数字证书<a href="https://www.ciac.sh.cn/CIACuserportal/Content/File/%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E5%8A%9E%E7%90%86%E9%A1%BB%E7%9F%A5.doc" target="_Blank">办理须知</a>
 			</div>
 		</div>
 	</div>
