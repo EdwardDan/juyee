@@ -14,9 +14,13 @@
 	Project project = null;
 	Permit permit=null;
 	String ywbh="";
+	long xmxz = 0;
+	long xmlx = 0;
 	if (permitId != 0) {
 		projectProfile = ProjectProfileLocalServiceUtil
 				.getProjectProfile(permitId);
+		xmlx = projectProfile.getXmlx();
+		xmxz = projectProfile.getXmxz();
 		request.setAttribute("projectProfile", projectProfile);
 		permit = PermitLocalServiceUtil.getPermit(permitId);
 		ywbh=permit.getYwbh();
@@ -51,6 +55,8 @@
 		}
 		
 	} else {
+		xmlx = ParamUtil.getLong(request, "xmlx");
+		xmxz = ParamUtil.getLong(request, "xmxz"); 
 		if (Validator.isNotNull(bjbh)) {
 			project = ProjectLocalServiceUtil.getProject(bjbh);
 			request.setAttribute("project", project);
@@ -61,10 +67,6 @@
 	List<Dictionary> jsgclbs = jsgclbDic != null ? DictionaryLocalServiceUtil.findByParentId(
 			jsgclbDic.getDictionaryId(), -1, -1) : null;
 			request.setAttribute("jsgclbs",jsgclbs);
-			
-			long xmlx = ParamUtil.getLong(request, "xmlx");
-			long xmxz = ParamUtil.getLong(request, "xmxz");
-			System.out.println("==================="+xmlx);	
 			request.setAttribute("xmlx",xmlx);
 			request.setAttribute("xmxz",xmxz);
 			request.setAttribute("contract",contract);
