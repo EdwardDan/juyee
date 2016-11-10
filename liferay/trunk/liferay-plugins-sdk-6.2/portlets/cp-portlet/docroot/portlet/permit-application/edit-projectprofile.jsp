@@ -34,6 +34,14 @@
 			request.setAttribute("jhjg", endDate);
 			
 		}
+		if (null != projectProfile.getZsqxks()&&null != projectProfile.getZsqxjs()) {
+			startDate = DateUtil.getDate(projectProfile.getZsqxks(), defaultDateFormatPattern, locale,
+					timeZone);
+			endDate = DateUtil.getDate(projectProfile.getZsqxjs(), defaultDateFormatPattern, locale, timeZone);
+			request.setAttribute("zsqxks", startDate);
+			request.setAttribute("zsqxjs", endDate);
+			
+		}
 		String pfhhzrq = "",pfrq= "" ;
 		if(null != projectProfile.getPfhhzrq()&&null != projectProfile.getPfrq()){
 			pfhhzrq = DateUtil.getDate(projectProfile.getPfhhzrq(), defaultDateFormatPattern, locale, timeZone);
@@ -55,7 +63,10 @@
 			request.setAttribute("jsgclbs",jsgclbs);
 			
 			long xmlx = ParamUtil.getLong(request, "xmlx");
+			long xmxz = ParamUtil.getLong(request, "xmxz");
+			System.out.println("==================="+xmlx);	
 			request.setAttribute("xmlx",xmlx);
+			request.setAttribute("xmxz",xmxz);
 			request.setAttribute("contract",contract);
 %>
 <portlet:renderURL var="viewURL" />
@@ -98,7 +109,7 @@
 		<tr class="body">
 			<td class="text-right">项目性质</td>
 			<td class="bg-white"><aui:select name="xmxz" label=""
-					type="select" style="width:50%">
+					type="select" style="width:50%" onChange="changexz()">
 					<%
 						Dictionary dictionary = DictionaryLocalServiceUtil.findByCode(
 													"xmxz");
@@ -359,12 +370,12 @@
 			<td class="text-right">计划开工</td>
 			<td class="bg-white"><input type="text" class="Wdate" id="jhkg"
 					name="<portlet:namespace/>jhkg" value="${jhkg}" 
-					onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'jhkg\')}',lang:'zh-cn',dateFmt:'yyyy-MM-dd'})"
+					onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'jhjg\')}',lang:'zh-cn',dateFmt:'yyyy-MM-dd'})"
 			required="required"/></td>
 			<td class="text-right">计划竣工</td>
 			<td class="bg-white"><input type="text" class="Wdate" id="jhjg"
 					name="<portlet:namespace/>jhjg" value="${jhjg}" 
-					onfocus="WdatePicker({minDate:'#F{$dp.$D(\'jhjg\')}',lang:'zh-cn',dateFmt:'yyyy-MM-dd'})"
+					onfocus="WdatePicker({minDate:'#F{$dp.$D(\'jhkg\')}',lang:'zh-cn',dateFmt:'yyyy-MM-dd'})"
 			required="required"/></td>
 		</tr>
 		<c:if test="${xmlx==29741}">
@@ -575,6 +586,24 @@
 				</aui:input></td>
 		</tr>
 		</c:if>
+		<c:if test="${xmxz==29770}">
+			<tr class="body">
+				<td class="text-right">证书期限</td>
+				<td class="bg-white" colspan="3">从<input type="text" class="Wdate" id="zsqxks"
+						name="<portlet:namespace/>zsqxks" value="${zsqxks}" 
+						onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'zsqxjs\')}',lang:'zh-cn',dateFmt:'yyyy-MM-dd'})"
+				required="required"/>至<input type="text" class="Wdate" id="zsqxjs"
+						name="<portlet:namespace/>zsqxjs" value="${zsqxjs}" 
+						onfocus="WdatePicker({minDate:'#F{$dp.$D(\'zsqxks\')}',lang:'zh-cn',dateFmt:'yyyy-MM-dd'})"
+				required="required"/></td>
+			</tr>
+			<tr class="body">
+				<td class="text-right">承诺事项</td>
+				<td class="bg-white" colspan="3"><aui:input name="cnsx" id="cnsx"
+						label="" type="text" style="width:50%">
+					</aui:input></td>
+			</tr>
+		</c:if>
 		<tr class="body">
 			<td class="text-right">备注</td>
 			<td class="bg-white" colspan="3"><aui:input name="sgxkzsbz" id="sgxkzsbz"
@@ -664,6 +693,14 @@ function change(){
 		url=url.substr(0,a);
 	}
 	window.location.href=url+"&<portlet:namespace/>xmlx="+document.getElementById("<portlet:namespace/>xmlx").value;
+}
+function changexz(){
+	var url=window.location.href;
+	if(url.indexOf('xmxz')>=0){
+		var a=url.indexOf("&<portlet:namespace/>xmxz=")
+		url=url.substr(0,a);
+	}
+	window.location.href=url+"&<portlet:namespace/>xmxz="+document.getElementById("<portlet:namespace/>xmxz").value;
 }
 
 
