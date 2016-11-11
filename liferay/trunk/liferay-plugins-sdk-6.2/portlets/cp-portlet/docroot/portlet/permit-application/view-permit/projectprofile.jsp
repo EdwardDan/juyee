@@ -34,7 +34,6 @@ tr.body td.content {
 	request.setAttribute("xmxz", xmxz);
 %>
 <table class="table table-bordered">
-	
 	<tr class="body">
 		<td class="title">项目类型<input name="xmlx" id="xmlx" type="hidden" value="${xmlx}"/></td>
 		<td class="content"><%=DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx()).getName()%></td>
