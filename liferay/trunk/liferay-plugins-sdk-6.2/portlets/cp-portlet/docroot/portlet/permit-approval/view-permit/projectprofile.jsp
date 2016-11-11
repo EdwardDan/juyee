@@ -345,19 +345,19 @@ tr.body td.content {
 				<tr class="body">
 					<td class="text-right" rowspan="4">预制装配率</td>
 					<td class="bg-white">单跨跨径100米以下桥梁工程承台顶面以上构件</td>
-					<td class="bg-white"><aui:row>${projectProfile.yzzpl1}%</aui:row></td>
+					<td class="bg-white" colspan="2"><aui:row>${projectProfile.yzzpl1}%</aui:row></td>
 				</tr>
 				<tr class="body">
 					<td class="bg-white">隧道工程盾构段</td>
-					<td class="bg-white"><aui:row>${projectProfile.yzzpl2}%</aui:row></td>
+					<td class="bg-white" colspan="2"><aui:row>${projectProfile.yzzpl2}%</aui:row></td>
 				</tr>
 				<tr class="body">
 					<td class="bg-white">轨道交通工程地下过街通道</td>
-					<td class="bg-white"><aui:row>${projectProfile.yzzpl3}%</aui:row></td>
+					<td class="bg-white" colspan="2"><aui:row>${projectProfile.yzzpl3}%</aui:row></td>
 				</tr>
 				<tr class="body">
 					<td class="bg-white">水运工程（港口）桩顶面以上构件</td>
-					<td class="bg-white"><aui:row>${projectProfile.yzzpl4}%</aui:row></td>
+					<td class="bg-white" colspan="2"><aui:row>${projectProfile.yzzpl4}%</aui:row></td>
 				</tr>
 				<tr class="body">
 					<td class="text-right" rowspan="4">BIM技术应用</td>
