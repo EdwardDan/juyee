@@ -352,6 +352,9 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		String yzzpl2 = ParamUtil.getString(request, "yzzpl2");
 		String yzzpl3 = ParamUtil.getString(request, "yzzpl3");
 		String yzzpl4 = ParamUtil.getString(request, "yzzpl4");
+		String bimsj = ParamUtil.getString(request, "bimsj");
+		String bimsg = ParamUtil.getString(request, "bimsg");
+		String bimyw = ParamUtil.getString(request, "bimyw");
 		Long permitId = ParamUtil.getLong(request, "permitId");
 		String bjbh = ParamUtil.getString(request, "bjbh");
 		String bdh = ParamUtil.getString(request, "bdh");
@@ -465,6 +468,10 @@ public class PermitApplicationPortlet extends MVCPortlet {
 		projectProfile.setYzzpl2(yzzpl2);
 		projectProfile.setYzzpl3(yzzpl3);
 		projectProfile.setYzzpl4(yzzpl4);
+		projectProfile.setBimsg(bimsg);
+        projectProfile.setBimsj(bimsj);
+        projectProfile.setBimyw(bimyw);
+
 		ProjectProfileLocalServiceUtil.updateProjectProfile(projectProfile);
 		if (Validator.isNull(permit.getYwbh())) {
 			String ywbh = "JT";
