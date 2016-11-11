@@ -474,7 +474,7 @@ public class CompleteApplicationPortlet extends MVCPortlet {
 						completeApplyMaterial.setFileEntryIds(fileEntryIds);
 						CompleteApplyMaterialLocalServiceUtil.updateCompleteApplyMaterial(completeApplyMaterial);
 					}
-					DLFileEntryLocalServiceUtil.deleteDLFileEntry(Long.valueOf(fileId));
+					DLFileEntryLocalServiceUtil.deleteFileEntry(Long.valueOf(fileId));
 				}
 			}
 		}
