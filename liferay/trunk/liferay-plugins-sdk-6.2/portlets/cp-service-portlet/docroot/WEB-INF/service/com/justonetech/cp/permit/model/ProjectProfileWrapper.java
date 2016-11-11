@@ -85,6 +85,9 @@ public class ProjectProfileWrapper implements ProjectProfile,
 		attributes.put("yzzpl2", getYzzpl2());
 		attributes.put("yzzpl3", getYzzpl3());
 		attributes.put("yzzpl4", getYzzpl4());
+		attributes.put("bimsj", getBimsj());
+		attributes.put("bimsg", getBimsg());
+		attributes.put("bimyw", getBimyw());
 		attributes.put("tjsj", getTjsj());
 		attributes.put("gcnr", getGcnr());
 		attributes.put("sgxkzsbz", getSgxkzsbz());
@@ -349,6 +352,24 @@ public class ProjectProfileWrapper implements ProjectProfile,
 
 		if (yzzpl4 != null) {
 			setYzzpl4(yzzpl4);
+		}
+
+		String bimsj = (String)attributes.get("bimsj");
+
+		if (bimsj != null) {
+			setBimsj(bimsj);
+		}
+
+		String bimsg = (String)attributes.get("bimsg");
+
+		if (bimsg != null) {
+			setBimsg(bimsg);
+		}
+
+		String bimyw = (String)attributes.get("bimyw");
+
+		if (bimyw != null) {
+			setBimyw(bimyw);
 		}
 
 		Date tjsj = (Date)attributes.get("tjsj");
@@ -1380,6 +1401,66 @@ public class ProjectProfileWrapper implements ProjectProfile,
 	@Override
 	public void setYzzpl4(java.lang.String yzzpl4) {
 		_projectProfile.setYzzpl4(yzzpl4);
+	}
+
+	/**
+	* Returns the bimsj of this project profile.
+	*
+	* @return the bimsj of this project profile
+	*/
+	@Override
+	public java.lang.String getBimsj() {
+		return _projectProfile.getBimsj();
+	}
+
+	/**
+	* Sets the bimsj of this project profile.
+	*
+	* @param bimsj the bimsj of this project profile
+	*/
+	@Override
+	public void setBimsj(java.lang.String bimsj) {
+		_projectProfile.setBimsj(bimsj);
+	}
+
+	/**
+	* Returns the bimsg of this project profile.
+	*
+	* @return the bimsg of this project profile
+	*/
+	@Override
+	public java.lang.String getBimsg() {
+		return _projectProfile.getBimsg();
+	}
+
+	/**
+	* Sets the bimsg of this project profile.
+	*
+	* @param bimsg the bimsg of this project profile
+	*/
+	@Override
+	public void setBimsg(java.lang.String bimsg) {
+		_projectProfile.setBimsg(bimsg);
+	}
+
+	/**
+	* Returns the bimyw of this project profile.
+	*
+	* @return the bimyw of this project profile
+	*/
+	@Override
+	public java.lang.String getBimyw() {
+		return _projectProfile.getBimyw();
+	}
+
+	/**
+	* Sets the bimyw of this project profile.
+	*
+	* @param bimyw the bimyw of this project profile
+	*/
+	@Override
+	public void setBimyw(java.lang.String bimyw) {
+		_projectProfile.setBimyw(bimyw);
 	}
 
 	/**

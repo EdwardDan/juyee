@@ -106,6 +106,10 @@
 		<column name="yzzpl2" type="String" /><!--预制装配率 -->
 		<column name="yzzpl3" type="String" /><!--预制装配率 -->
 		<column name="yzzpl4" type="String" /><!--预制装配率 -->
+		<column name="bimsj" type="String" /><!--BIM技术应用设计阶段 -->
+		<column name="bimsg" type="String" /><!--BIM技术应用施工阶段  -->
+		<column name="bimyw" type="String" /><!--BIM技术应用运维阶段  -->
+		
 		<column name="tjsj" type="Date" /><!--提交时间 -->
 		<column name="gcnr" type="String" /><!--工程内容 -->
 		<column name="sgxkzsbz" type="String" /><!--施工许可证书备注 -->

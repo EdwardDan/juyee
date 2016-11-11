@@ -364,6 +364,9 @@
 		<property name="yzzpl2" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="yzzpl3" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="yzzpl4" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="bimsj" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="bimsg" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="bimyw" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="tjsj" type="org.hibernate.type.TimestampType" />
 		<property name="gcnr" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="sgxkzsbz" type="com.liferay.portal.dao.orm.hibernate.StringType" />

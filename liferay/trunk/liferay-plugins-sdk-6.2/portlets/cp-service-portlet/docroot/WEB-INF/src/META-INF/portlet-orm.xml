@@ -396,6 +396,9 @@
 			<basic name="yzzpl2" />
 			<basic name="yzzpl3" />
 			<basic name="yzzpl4" />
+			<basic name="bimsj" />
+			<basic name="bimsg" />
+			<basic name="bimyw" />
 			<basic name="tjsj">
 				<temporal>TIMESTAMP</temporal>
 			</basic>

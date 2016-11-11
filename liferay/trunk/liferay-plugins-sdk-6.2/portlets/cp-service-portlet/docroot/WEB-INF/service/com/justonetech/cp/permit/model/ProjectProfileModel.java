@@ -583,6 +583,51 @@ public interface ProjectProfileModel extends BaseModel<ProjectProfile> {
 	public void setYzzpl4(String yzzpl4);
 
 	/**
+	 * Returns the bimsj of this project profile.
+	 *
+	 * @return the bimsj of this project profile
+	 */
+	@AutoEscape
+	public String getBimsj();
+
+	/**
+	 * Sets the bimsj of this project profile.
+	 *
+	 * @param bimsj the bimsj of this project profile
+	 */
+	public void setBimsj(String bimsj);
+
+	/**
+	 * Returns the bimsg of this project profile.
+	 *
+	 * @return the bimsg of this project profile
+	 */
+	@AutoEscape
+	public String getBimsg();
+
+	/**
+	 * Sets the bimsg of this project profile.
+	 *
+	 * @param bimsg the bimsg of this project profile
+	 */
+	public void setBimsg(String bimsg);
+
+	/**
+	 * Returns the bimyw of this project profile.
+	 *
+	 * @return the bimyw of this project profile
+	 */
+	@AutoEscape
+	public String getBimyw();
+
+	/**
+	 * Sets the bimyw of this project profile.
+	 *
+	 * @param bimyw the bimyw of this project profile
+	 */
+	public void setBimyw(String bimyw);
+
+	/**
 	 * Returns the tjsj of this project profile.
 	 *
 	 * @return the tjsj of this project profile

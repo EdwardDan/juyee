@@ -38,7 +38,7 @@ public class ProjectProfileCacheModel implements CacheModel<ProjectProfile>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(171);
+		StringBundler sb = new StringBundler(177);
 
 		sb.append("{permitId=");
 		sb.append(permitId);
@@ -110,6 +110,12 @@ public class ProjectProfileCacheModel implements CacheModel<ProjectProfile>,
 		sb.append(yzzpl3);
 		sb.append(", yzzpl4=");
 		sb.append(yzzpl4);
+		sb.append(", bimsj=");
+		sb.append(bimsj);
+		sb.append(", bimsg=");
+		sb.append(bimsg);
+		sb.append(", bimyw=");
+		sb.append(bimyw);
 		sb.append(", tjsj=");
 		sb.append(tjsj);
 		sb.append(", gcnr=");
@@ -427,6 +433,27 @@ public class ProjectProfileCacheModel implements CacheModel<ProjectProfile>,
 		}
 		else {
 			projectProfileImpl.setYzzpl4(yzzpl4);
+		}
+
+		if (bimsj == null) {
+			projectProfileImpl.setBimsj(StringPool.BLANK);
+		}
+		else {
+			projectProfileImpl.setBimsj(bimsj);
+		}
+
+		if (bimsg == null) {
+			projectProfileImpl.setBimsg(StringPool.BLANK);
+		}
+		else {
+			projectProfileImpl.setBimsg(bimsg);
+		}
+
+		if (bimyw == null) {
+			projectProfileImpl.setBimyw(StringPool.BLANK);
+		}
+		else {
+			projectProfileImpl.setBimyw(bimyw);
 		}
 
 		if (tjsj == Long.MIN_VALUE) {
@@ -794,6 +821,9 @@ public class ProjectProfileCacheModel implements CacheModel<ProjectProfile>,
 		yzzpl2 = objectInput.readUTF();
 		yzzpl3 = objectInput.readUTF();
 		yzzpl4 = objectInput.readUTF();
+		bimsj = objectInput.readUTF();
+		bimsg = objectInput.readUTF();
+		bimyw = objectInput.readUTF();
 		tjsj = objectInput.readLong();
 		gcnr = objectInput.readUTF();
 		sgxkzsbz = objectInput.readUTF();
@@ -1045,6 +1075,27 @@ public class ProjectProfileCacheModel implements CacheModel<ProjectProfile>,
 		}
 		else {
 			objectOutput.writeUTF(yzzpl4);
+		}
+
+		if (bimsj == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(bimsj);
+		}
+
+		if (bimsg == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(bimsg);
+		}
+
+		if (bimyw == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(bimyw);
 		}
 
 		objectOutput.writeLong(tjsj);
@@ -1379,6 +1430,9 @@ public class ProjectProfileCacheModel implements CacheModel<ProjectProfile>,
 	public String yzzpl2;
 	public String yzzpl3;
 	public String yzzpl4;
+	public String bimsj;
+	public String bimsg;
+	public String bimyw;
 	public long tjsj;
 	public String gcnr;
 	public String sgxkzsbz;

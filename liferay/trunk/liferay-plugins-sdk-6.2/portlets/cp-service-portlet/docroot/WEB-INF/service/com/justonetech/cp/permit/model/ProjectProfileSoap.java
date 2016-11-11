@@ -65,6 +65,9 @@ public class ProjectProfileSoap implements Serializable {
 		soapModel.setYzzpl2(model.getYzzpl2());
 		soapModel.setYzzpl3(model.getYzzpl3());
 		soapModel.setYzzpl4(model.getYzzpl4());
+		soapModel.setBimsj(model.getBimsj());
+		soapModel.setBimsg(model.getBimsg());
+		soapModel.setBimyw(model.getBimyw());
 		soapModel.setTjsj(model.getTjsj());
 		soapModel.setGcnr(model.getGcnr());
 		soapModel.setSgxkzsbz(model.getSgxkzsbz());
@@ -449,6 +452,30 @@ public class ProjectProfileSoap implements Serializable {
 
 	public void setYzzpl4(String yzzpl4) {
 		_yzzpl4 = yzzpl4;
+	}
+
+	public String getBimsj() {
+		return _bimsj;
+	}
+
+	public void setBimsj(String bimsj) {
+		_bimsj = bimsj;
+	}
+
+	public String getBimsg() {
+		return _bimsg;
+	}
+
+	public void setBimsg(String bimsg) {
+		_bimsg = bimsg;
+	}
+
+	public String getBimyw() {
+		return _bimyw;
+	}
+
+	public void setBimyw(String bimyw) {
+		_bimyw = bimyw;
 	}
 
 	public Date getTjsj() {
@@ -886,6 +913,9 @@ public class ProjectProfileSoap implements Serializable {
 	private String _yzzpl2;
 	private String _yzzpl3;
 	private String _yzzpl4;
+	private String _bimsj;
+	private String _bimsg;
+	private String _bimyw;
 	private Date _tjsj;
 	private String _gcnr;
 	private String _sgxkzsbz;

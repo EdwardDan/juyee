@@ -414,6 +414,9 @@
 		<field name="yzzpl2" type="String" />
 		<field name="yzzpl3" type="String" />
 		<field name="yzzpl4" type="String" />
+		<field name="bimsj" type="String" />
+		<field name="bimsg" type="String" />
+		<field name="bimyw" type="String" />
 		<field name="tjsj" type="Date" />
 		<field name="gcnr" type="String">
 			<hint name="max-length">100</hint>

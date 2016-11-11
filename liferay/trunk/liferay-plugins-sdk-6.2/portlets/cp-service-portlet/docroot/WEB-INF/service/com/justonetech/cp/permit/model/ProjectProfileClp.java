@@ -109,6 +109,9 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 		attributes.put("yzzpl2", getYzzpl2());
 		attributes.put("yzzpl3", getYzzpl3());
 		attributes.put("yzzpl4", getYzzpl4());
+		attributes.put("bimsj", getBimsj());
+		attributes.put("bimsg", getBimsg());
+		attributes.put("bimyw", getBimyw());
 		attributes.put("tjsj", getTjsj());
 		attributes.put("gcnr", getGcnr());
 		attributes.put("sgxkzsbz", getSgxkzsbz());
@@ -373,6 +376,24 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 
 		if (yzzpl4 != null) {
 			setYzzpl4(yzzpl4);
+		}
+
+		String bimsj = (String)attributes.get("bimsj");
+
+		if (bimsj != null) {
+			setBimsj(bimsj);
+		}
+
+		String bimsg = (String)attributes.get("bimsg");
+
+		if (bimsg != null) {
+			setBimsg(bimsg);
+		}
+
+		String bimyw = (String)attributes.get("bimyw");
+
+		if (bimyw != null) {
+			setBimyw(bimyw);
 		}
 
 		Date tjsj = (Date)attributes.get("tjsj");
@@ -1479,6 +1500,75 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 				Method method = clazz.getMethod("setYzzpl4", String.class);
 
 				method.invoke(_projectProfileRemoteModel, yzzpl4);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getBimsj() {
+		return _bimsj;
+	}
+
+	@Override
+	public void setBimsj(String bimsj) {
+		_bimsj = bimsj;
+
+		if (_projectProfileRemoteModel != null) {
+			try {
+				Class<?> clazz = _projectProfileRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setBimsj", String.class);
+
+				method.invoke(_projectProfileRemoteModel, bimsj);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getBimsg() {
+		return _bimsg;
+	}
+
+	@Override
+	public void setBimsg(String bimsg) {
+		_bimsg = bimsg;
+
+		if (_projectProfileRemoteModel != null) {
+			try {
+				Class<?> clazz = _projectProfileRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setBimsg", String.class);
+
+				method.invoke(_projectProfileRemoteModel, bimsg);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getBimyw() {
+		return _bimyw;
+	}
+
+	@Override
+	public void setBimyw(String bimyw) {
+		_bimyw = bimyw;
+
+		if (_projectProfileRemoteModel != null) {
+			try {
+				Class<?> clazz = _projectProfileRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setBimyw", String.class);
+
+				method.invoke(_projectProfileRemoteModel, bimyw);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -2742,6 +2832,9 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 		clone.setYzzpl2(getYzzpl2());
 		clone.setYzzpl3(getYzzpl3());
 		clone.setYzzpl4(getYzzpl4());
+		clone.setBimsj(getBimsj());
+		clone.setBimsg(getBimsg());
+		clone.setBimyw(getBimyw());
 		clone.setTjsj(getTjsj());
 		clone.setGcnr(getGcnr());
 		clone.setSgxkzsbz(getSgxkzsbz());
@@ -2844,7 +2937,7 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(171);
+		StringBundler sb = new StringBundler(177);
 
 		sb.append("{permitId=");
 		sb.append(getPermitId());
@@ -2916,6 +3009,12 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 		sb.append(getYzzpl3());
 		sb.append(", yzzpl4=");
 		sb.append(getYzzpl4());
+		sb.append(", bimsj=");
+		sb.append(getBimsj());
+		sb.append(", bimsg=");
+		sb.append(getBimsg());
+		sb.append(", bimyw=");
+		sb.append(getBimyw());
 		sb.append(", tjsj=");
 		sb.append(getTjsj());
 		sb.append(", gcnr=");
@@ -3023,7 +3122,7 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(259);
+		StringBundler sb = new StringBundler(268);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.cp.permit.model.ProjectProfile");
@@ -3168,6 +3267,18 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 		sb.append(
 			"<column><column-name>yzzpl4</column-name><column-value><![CDATA[");
 		sb.append(getYzzpl4());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>bimsj</column-name><column-value><![CDATA[");
+		sb.append(getBimsj());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>bimsg</column-name><column-value><![CDATA[");
+		sb.append(getBimsg());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>bimyw</column-name><column-value><![CDATA[");
+		sb.append(getBimyw());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>tjsj</column-name><column-value><![CDATA[");
@@ -3410,6 +3521,9 @@ public class ProjectProfileClp extends BaseModelImpl<ProjectProfile>
 	private String _yzzpl2;
 	private String _yzzpl3;
 	private String _yzzpl4;
+	private String _bimsj;
+	private String _bimsg;
+	private String _bimyw;
 	private Date _tjsj;
 	private String _gcnr;
 	private String _sgxkzsbz;
