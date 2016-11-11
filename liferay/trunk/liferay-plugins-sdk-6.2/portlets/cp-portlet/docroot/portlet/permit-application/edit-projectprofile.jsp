@@ -644,28 +644,49 @@
 			<table style="width: 99%;">
 				<tr class="body">
 					<td class="text-right" rowspan="4">预制装配率</td>
-					<td class="bg-white" colspan="2">单跨跨径100米以下桥梁工程承台顶面以上构件</td>
-					<td class="bg-white"><aui:row><aui:input name="yzzpl1" label="" inlineField="true"
+					<td class="bg-white">单跨跨径100米以下桥梁工程承台顶面以上构件</td>
+					<td class="bg-white" colspan="2"><aui:row><aui:input name="yzzpl1" label="" inlineField="true"
 							type="text" style="width:30px" value="">
 						</aui:input>%</aui:row></td>
 				</tr>
 				<tr class="body">
-					<td class="bg-white" colspan="2">隧道工程盾构段</td>
-					<td class="bg-white"><aui:row><aui:input name="yzzpl2" label="" inlineField="true"
+					<td class="bg-white" >隧道工程盾构段</td>
+					<td class="bg-white" colspan="2"><aui:row><aui:input name="yzzpl2" label="" inlineField="true"
 							type="text" style="width:30px" value="">
 						</aui:input>%</aui:row></td>
 				</tr>
 				<tr class="body">
-					<td class="bg-white" colspan="2">轨道交通工程地下过街通道</td>
-					<td class="bg-white"><aui:row><aui:input name="yzzpl3" label="" inlineField="true"
+					<td class="bg-white" >轨道交通工程地下过街通道</td>
+					<td class="bg-white" colspan="2"><aui:row><aui:input name="yzzpl3" label="" inlineField="true"
 							type="text" style="width:30px" value="">
 						</aui:input>%</aui:row></td>
 				</tr>
 				<tr class="body">
-					<td class="bg-white" colspan="2">水运工程（港口）桩顶面以上构件</td>
-					<td class="bg-white"><aui:row><aui:input name="yzzpl4" label="" inlineField="true"
+					<td class="bg-white" >水运工程（港口）桩顶面以上构件</td>
+					<td class="bg-white" colspan="2"><aui:row><aui:input name="yzzpl4" label="" inlineField="true"
 							type="text" style="width:30px" value="">
 						</aui:input>%</aui:row></td>
+				</tr>
+				<tr class="body">
+					<td class="text-right" rowspan="4">BIM技术应用</td>
+				</tr>
+				<tr class="body">
+					<td class="bg-white" >设计阶段</td>
+					<td class="bg-white" colspan="2"><aui:row>BIM应用点：<aui:input name="bimsj" label="" inlineField="true"
+							type="text"  value="">
+						</aui:input></aui:row></td>
+				</tr>
+				<tr class="body">
+					<td class="bg-white" >施工阶段</td>
+					<td class="bg-white" colspan="2"><aui:row>BIM应用点：<aui:input name="bimsg" label="" inlineField="true"
+							type="text"  value="">
+						</aui:input></aui:row></td>
+				</tr>
+				<tr class="body">
+					<td class="bg-white" >运维阶段</td>
+					<td class="bg-white" colspan="2"><aui:row>BIM应用点：<aui:input name="bimyw" label="" inlineField="true"
+							type="text"  value="">
+						</aui:input></aui:row></td>
 				</tr>
 			</table>
 		</td>
