@@ -58,7 +58,12 @@ public class SendMessage {
 		}
 		
 		if (status == CityPermitStatus.STATUS_JSC_XK.getCode() || status == CityPermitStatus.STATUS_JSC_BXK.getCode()) {
-			content += commonContent + "委建设处审查已完成，请委领导进行审查。";
+			if(type.equals("JSC")){
+				content += commonContent + "委建设处审查已完成，请委领导进行审查。";
+			}
+			if(type.equals("ZXLD")){
+				content += commonContent + "委建设处审查已完成。";		
+			}
 		}
 		if (status == CityPermitStatus.STATUS_JSC_BACK.getCode()) {
 			content += commonContent + "书面材料不全，请联系申报人补正材料。";
@@ -69,12 +74,20 @@ public class SendMessage {
 		if (status == CityPermitStatus.STATUS_WLD_PASS.getCode()) {
 			if(type.equals("JSDW")){
 				content += commonContent + "审查已完成，请至交通委行政服务中心领证。";		
-			}else{
+			}
+			if(type.equals("SLZX")){
 				content += commonContent + "审查已完成，请准备好施工许可证。";
+			}
+			if(type.equals("ZXLD")){
+				content += commonContent + "委领导审查已完成。";
 			}
 		}
 		if (status == CityPermitStatus.STATUS_WLD_BACK.getCode()) {
-			content += commonContent + "不予行政许可。";
+			if(type.equals("ZXLD")){
+				content += commonContent +"委领导审查已完成。";
+			}else{
+				content += commonContent + "不予行政许可。";
+			}
 		}
 
 		return content;

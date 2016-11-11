@@ -39,6 +39,16 @@
 	<portlet>
 		<portlet-name>permit-approval</portlet-name>
 		<icon>/icons/icon.png</icon>
+		<scheduler-entry>
+		<scheduler-event-listener-class>
+	com.justonetech.cp.quartz.permitSendMessage
+	</scheduler-event-listener-class>
+       <trigger>
+       <cron>
+       <cron-trigger-value>0 0 9 * * ?</cron-trigger-value>
+       </cron>
+       </trigger>
+</scheduler-entry>
 		<header-portlet-css>/css/main.css</header-portlet-css>
 		<footer-portlet-javascript>
 			/js/main.js
