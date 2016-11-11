@@ -121,11 +121,13 @@ tr.body td.content {
 	} */
 	List<Permit> permits = PermitLocalServiceUtil.getPermits(ywbh, bjbh, xmmc, xmlxLongs, jsdw, state, gs, start, end);
 	int permitsCount = PermitLocalServiceUtil.getPermitsCount(ywbh, bjbh, xmmc, xmlxLongs, jsdw, state, gs);
+	long notGreen = Long.valueOf(PropsUtil.get("notGreen"));
 	request.setAttribute("permits", permits);
 	request.setAttribute("permitsCount", permitsCount);
 	request.setAttribute("xmlxDics", xmlxDics);
 	request.setAttribute("delta", delta);
 	request.setAttribute("cur", cur);
+	request.setAttribute("notGreen", notGreen);
 %>
 <portlet:renderURL var="searchURL">
 	<liferay-portlet:param name="ywbh" value="${ywbh }" />
@@ -204,7 +206,7 @@ tr.body td.content {
 									}
 				%>
 				<liferay-ui:search-container-column-text name="序号" value="<%=String.valueOf(++sortNo)%>" />
-				<liferay-ui:search-container-column-text name="绿色" value="${projectProfile.xmxz==29769?'':'★'}" />
+				<liferay-ui:search-container-column-text name="绿色" value="${projectProfile.xmxz==notGreen?'':'★'}" />
 				<liferay-ui:search-container-column-text name="项目类型" value="<%=DictionaryLocalServiceUtil.getDictionary(projectProfile.getXmlx()).getName()%>" />
 				<liferay-ui:search-container-column-text property="ywbh" name="业务编号" />
 				<liferay-ui:search-container-column-text property="bjbh" name="报建编号" />
