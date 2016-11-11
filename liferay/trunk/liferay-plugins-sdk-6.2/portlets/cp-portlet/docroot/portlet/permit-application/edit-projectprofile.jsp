@@ -63,6 +63,8 @@
 			request.setAttribute("bjbh",bjbh);
 		}
 	}
+	long isHd = Long.valueOf(PropsUtil.get("isHd"));
+	long green = Long.valueOf(PropsUtil.get("green"));
 	Dictionary jsgclbDic = DictionaryLocalServiceUtil.findByCode("jsgclb");
 	List<Dictionary> jsgclbs = jsgclbDic != null ? DictionaryLocalServiceUtil.findByParentId(
 			jsgclbDic.getDictionaryId(), -1, -1) : null;
@@ -70,6 +72,10 @@
 			request.setAttribute("xmlx",xmlx);
 			request.setAttribute("xmxz",xmxz);
 			request.setAttribute("contract",contract);
+			request.setAttribute("green",green);
+			request.setAttribute("isHd",isHd);
+			
+	
 %>
 <portlet:renderURL var="viewURL" />
 <portlet:actionURL var="saveProjectProfileURL" name="saveProjectProfile">
@@ -380,7 +386,7 @@
 					onfocus="WdatePicker({minDate:'#F{$dp.$D(\'jhkg\')}',lang:'zh-cn',dateFmt:'yyyy-MM-dd'})"
 			required="required"/></td>
 		</tr>
-		<c:if test="${xmlx==29741}">
+		<c:if test="${xmlx==isHd}">
 		<tr class="body">
 			<td class="text-center" colspan="4">主要设计单位</td>
 		</tr>
@@ -588,7 +594,7 @@
 				</aui:input></td>
 		</tr>
 		</c:if>
-		<c:if test="${xmxz==29770}">
+		<c:if test="${xmxz==green}">
 			<tr class="body">
 				<td class="text-right">证书期限</td>
 				<td class="bg-white" colspan="3">从<input type="text" class="Wdate" id="zsqxks"
