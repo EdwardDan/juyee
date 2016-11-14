@@ -1,3 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
-管理中心
+<script>
+	window.location.href = "${redirectPage}";
+</script>

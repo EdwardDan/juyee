@@ -6,6 +6,9 @@
 	
 	
 	$(function() {
+		if(${themeDisplay.isSignedIn()}){
+			window.location.href = "${redirectPage}";
+		}
 		getExplorer();
 		document.onkeydown=keyDownSearch;  
 	});
