@@ -2,7 +2,7 @@
 <!DOCTYPE liferay-portlet-app PUBLIC "-//Liferay//DTD Portlet Application 6.2.0//EN" "http://www.liferay.com/dtd/liferay-portlet-app_6_2_0.dtd">
 
 <liferay-portlet-app>
-	
+
 	<portlet>
 		<portlet-name>project-search</portlet-name>
 		<icon>/icon/icon.png</icon>
@@ -25,9 +25,9 @@
 		<portlet-name>permit-application</portlet-name>
 		<icon>/icons/icon.png</icon>
 		<user-notification-definitions>warn-notification-definitions.xml</user-notification-definitions>
-        <user-notification-handler-class>com.justonetech.cp.notification.PermitApplicationNotificationHandler</user-notification-handler-class>
+		<user-notification-handler-class>com.justonetech.cp.notification.PermitApplicationNotificationHandler</user-notification-handler-class>
 		<asset-renderer-factory>com.justonetech.cp.asset.PermitApplicationAssetRenderFactory</asset-renderer-factory>
-	    <workflow-handler>com.justonetech.cp.workflow.PermitApplicationWorkflowHandler</workflow-handler>
+		<workflow-handler>com.justonetech.cp.workflow.PermitApplicationWorkflowHandler</workflow-handler>
 		<header-portlet-css>/css/main.css</header-portlet-css>
 		<footer-portlet-javascript>
 			/js/main.js
@@ -40,15 +40,15 @@
 		<portlet-name>permit-approval</portlet-name>
 		<icon>/icons/icon.png</icon>
 		<scheduler-entry>
-		<scheduler-event-listener-class>
-	com.justonetech.cp.quartz.permitSendMessage
-	</scheduler-event-listener-class>
-       <trigger>
-       <cron>
-       <cron-trigger-value>0 0 9 * * ?</cron-trigger-value>
-       </cron>
-       </trigger>
-</scheduler-entry>
+			<scheduler-event-listener-class>
+				com.justonetech.cp.quartz.PermitSendMessage 
+			</scheduler-event-listener-class>
+			<trigger>
+				<cron>
+					<cron-trigger-value>0 0 9 * * ?</cron-trigger-value>
+				</cron>
+			</trigger>
+		</scheduler-entry>
 		<header-portlet-css>/css/main.css</header-portlet-css>
 		<footer-portlet-javascript>
 			/js/main.js
@@ -59,7 +59,7 @@
 		<portlet-name>complete-application</portlet-name>
 		<icon>/icons/icon.png</icon>
 		<user-notification-definitions>warn-notification-definitions.xml</user-notification-definitions>
-        <user-notification-handler-class>com.justonetech.cp.notification.CompleteApplicationNotificationHandler</user-notification-handler-class>
+		<user-notification-handler-class>com.justonetech.cp.notification.CompleteApplicationNotificationHandler</user-notification-handler-class>
 		<header-portlet-css>/css/main.css</header-portlet-css>
 		<footer-portlet-javascript>
 			/js/main.js

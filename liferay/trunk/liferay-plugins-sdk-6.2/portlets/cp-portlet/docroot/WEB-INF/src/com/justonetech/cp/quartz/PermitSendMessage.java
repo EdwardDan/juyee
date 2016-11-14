@@ -34,79 +34,78 @@ public class PermitSendMessage implements MessageListener {
 
 	protected void doReceive(Message message) throws Exception {
 		_log.info(new Date() + "定时器任务已启动");
-		System.out.println("sadada");
-//		long[] xmlxLongs = new long[7];
-//		xmlxLongs[0] = 29740;
-//		xmlxLongs[1] = 29741;
-//		xmlxLongs[2] = 29742;
-//		xmlxLongs[3] = 29743;
-//		xmlxLongs[4] = 43840;
-//		xmlxLongs[5] = 43841;
-//		xmlxLongs[6] = 43842;
-//		List<Permit> permitSs = PermitLocalServiceUtil.getPermits("", "", "",
-//				xmlxLongs, "", "shwc", "市属", -1, -1);
-//		for (Permit permitInitSs : permitSs) {
-//			ProjectProfile projectProfileInitSs = ProjectProfileLocalServiceUtil
-//					.getProjectProfile(permitInitSs.getPermitId());
-//			if (projectProfileInitSs.getXmxz() == Long.parseLong(PropsUtil.get("green"))) {
-//				if (null != projectProfileInitSs.getZsqxjs()) {
-//					Long day = daysOfTwo(new Date(),
-//							projectProfileInitSs.getZsqxjs());
-//					if (day.equals(new Long(30))) {
-//						String content = "报建编号" + permitInitSs.getBjbh()
-//								+ ",标段号" + permitInitSs.getBdh() + "，项目名称为"
-//								+ projectProfileInitSs.getGcmc()
-//								+ "的项目施工许可还有一个月就要到期，请尽快处理。";
-//						System.out.println(content);
-//						// 申请人
-//						SendKxt.SendKxtSMS(content,
-//								projectProfileInitSs.getJsdwsjh());
-//					}
-//					if (day.equals(new Long(0))) {
-//						String content = "报建编号" + permitInitSs.getBjbh()
-//								+ ",标段号" + permitInitSs.getBdh() + "，项目名称为"
-//								+ projectProfileInitSs.getGcmc()
-//								+ "的项目施工许可已到期。";
-//						System.out.println(content);
-//						Dictionary dictionary = DictionaryLocalServiceUtil
-//								.getDictionary(projectProfileInitSs.getXmlx());
-//						// 申请人
-//						SendKxt.SendKxtSMS(content,
-//								projectProfileInitSs.getJsdwsjh());
-//						// 初审人员
-//						if (dictionary.getName().equals("公路")
-//								|| dictionary.getName().equals("航道")
-//								|| dictionary.getName().equals("港口设施")) {
-//							List<User> csUsers = UserLocalServiceUtil
-//									.getRoleUsers(Long.parseLong(PropsUtil
-//											.get("jgzxcsryhgg")));
-//							sendQuartzMessage(content, csUsers, "");
-//							List<User> fhUsers = UserLocalServiceUtil
-//									.getRoleUsers(Long.parseLong(PropsUtil
-//											.get("jgzxfhryhgg")));
-//							sendQuartzMessage(content, fhUsers, "");
-//							List<User> shUsers = UserLocalServiceUtil
-//									.getRoleUsers(Long.parseLong(PropsUtil
-//											.get("jgzxshryhgg")));
-//							sendQuartzMessage(content, shUsers, "");
-//						} else {
-//							List<User> csUsers = UserLocalServiceUtil
-//									.getRoleUsers(Long.parseLong(PropsUtil
-//											.get("jgzxcsrysz")));
-//							sendQuartzMessage(content, csUsers, "");
-//							List<User> fhUsers = UserLocalServiceUtil
-//									.getRoleUsers(Long.parseLong(PropsUtil
-//											.get("jgzxfhrysz")));
-//							sendQuartzMessage(content, fhUsers, "");
-//							List<User> shUsers = UserLocalServiceUtil
-//									.getRoleUsers(Long.parseLong(PropsUtil
-//											.get("jgzxshrysz")));
-//							sendQuartzMessage(content, shUsers, "");
-//						}
-//					}
-//				}
-//			}
-//		}
+		long[] xmlxLongs = new long[7];
+		xmlxLongs[0] = 29740;
+		xmlxLongs[1] = 29741;
+		xmlxLongs[2] = 29742;
+		xmlxLongs[3] = 29743;
+		xmlxLongs[4] = 43840;
+		xmlxLongs[5] = 43841;
+		xmlxLongs[6] = 43842;
+		List<Permit> permitSs = PermitLocalServiceUtil.getPermits("", "", "",
+				xmlxLongs, "", "shwc", "市属", -1, -1);
+		for (Permit permitInitSs : permitSs) {
+			ProjectProfile projectProfileInitSs = ProjectProfileLocalServiceUtil
+					.getProjectProfile(permitInitSs.getPermitId());
+			if (projectProfileInitSs.getXmxz() == Long.parseLong(PropsUtil.get("green"))) {
+				if (null != projectProfileInitSs.getZsqxjs()) {
+					Long day = daysOfTwo(new Date(),
+							projectProfileInitSs.getZsqxjs());
+					if (day.equals(new Long(30))) {
+						String content = "报建编号" + permitInitSs.getBjbh()
+								+ ",标段号" + permitInitSs.getBdh() + "，项目名称为"
+								+ projectProfileInitSs.getGcmc()
+								+ "的项目施工许可还有一个月就要到期，请尽快处理。";
+						System.out.println(content);
+						// 申请人
+						SendKxt.SendKxtSMS(content,
+								projectProfileInitSs.getJsdwsjh());
+					}
+					if (day.equals(new Long(0))) {
+						String content = "报建编号" + permitInitSs.getBjbh()
+								+ ",标段号" + permitInitSs.getBdh() + "，项目名称为"
+								+ projectProfileInitSs.getGcmc()
+								+ "的项目施工许可已到期。";
+						System.out.println(content);
+						Dictionary dictionary = DictionaryLocalServiceUtil
+								.getDictionary(projectProfileInitSs.getXmlx());
+						// 申请人
+						SendKxt.SendKxtSMS(content,
+								projectProfileInitSs.getJsdwsjh());
+						// 初审人员
+						if (dictionary.getName().equals("公路")
+								|| dictionary.getName().equals("航道")
+								|| dictionary.getName().equals("港口设施")) {
+							List<User> csUsers = UserLocalServiceUtil
+									.getRoleUsers(Long.parseLong(PropsUtil
+											.get("jgzxcsryhgg")));
+							sendQuartzMessage(content, csUsers, "");
+							List<User> fhUsers = UserLocalServiceUtil
+									.getRoleUsers(Long.parseLong(PropsUtil
+											.get("jgzxfhryhgg")));
+							sendQuartzMessage(content, fhUsers, "");
+							List<User> shUsers = UserLocalServiceUtil
+									.getRoleUsers(Long.parseLong(PropsUtil
+											.get("jgzxshryhgg")));
+							sendQuartzMessage(content, shUsers, "");
+						} else {
+							List<User> csUsers = UserLocalServiceUtil
+									.getRoleUsers(Long.parseLong(PropsUtil
+											.get("jgzxcsrysz")));
+							sendQuartzMessage(content, csUsers, "");
+							List<User> fhUsers = UserLocalServiceUtil
+									.getRoleUsers(Long.parseLong(PropsUtil
+											.get("jgzxfhrysz")));
+							sendQuartzMessage(content, fhUsers, "");
+							List<User> shUsers = UserLocalServiceUtil
+									.getRoleUsers(Long.parseLong(PropsUtil
+											.get("jgzxshrysz")));
+							sendQuartzMessage(content, shUsers, "");
+						}
+					}
+				}
+			}
+		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(PermitSendMessage.class);
