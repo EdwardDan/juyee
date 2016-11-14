@@ -137,7 +137,7 @@ public class CustomLoginPortlet extends MVCPortlet {
 			// 获取证书链
 			// FileInputStream oFile = new
 			// FileInputStream(PropsUtil.get("sheca.certificate.chain.file"));
-			FileInputStream oFile = new FileInputStream("D:/server/jtjs-demo/SHECA_G2.spc");
+			FileInputStream oFile = new FileInputStream(PropsUtil.get("sheca.certificate.chain.file"));
 			byte[] bChain = null;
 			int iFile = 0;
 			try {
