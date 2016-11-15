@@ -722,7 +722,7 @@ function change(){
 		url=url.substr(0,a);
 	}
 	window.location.href=url+"&<portlet:namespace/>xmlx="+document.getElementById("<portlet:namespace/>xmlx").value+
-		"&"+"&<portlet:namespace/>xmxz="+document.getElementById("<portlet:namespace/>xmxz").value;
+		"&<portlet:namespace/>xmxz="+document.getElementById("<portlet:namespace/>xmxz").value;
 }
 function changexz(){
 	var url=window.location.href;
@@ -731,7 +731,7 @@ function changexz(){
 		url=url.substr(0,a);
 	}
 	window.location.href=url+"&<portlet:namespace/>xmxz="+document.getElementById("<portlet:namespace/>xmxz").value+
-		"&"+"&<portlet:namespace/>xmlx="+document.getElementById("<portlet:namespace/>xmlx").value;
+		"&<portlet:namespace/>xmlx="+document.getElementById("<portlet:namespace/>xmlx").value;
 }
 
 
