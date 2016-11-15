@@ -282,9 +282,9 @@ public class CustomLoginPortlet extends MVCPortlet {
 		int birthdayDay = 1;
 		int birthdayYear = 1970;
 		String jobTitle = "";
-		long[] groupIds = { 20181 };
+		long[] groupIds = { Long.parseLong(PropsUtil.get("bsdtGroupId")) };
 		long[] organizationIds = null;
-		long[] roleIds = null;
+		long[] roleIds = { Long.parseLong(PropsUtil.get("jsdw")) };
 		long[] userGroupIds = null;
 		boolean sendEmail = false;
 
