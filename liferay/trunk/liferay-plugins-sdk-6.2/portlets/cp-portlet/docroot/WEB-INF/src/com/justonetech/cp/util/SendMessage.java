@@ -141,7 +141,12 @@ public class SendMessage {
 	public static void sendSMS(String url,String content,String mobiles)
 			throws ClientProtocolException, IOException {
 		HttpClient httpClient = new DefaultHttpClient();
+		try{
 		HttpGet httpGet = new HttpGet(url + "/sendSMSServlet?content="+content+"&mobiles="+mobiles);
 		httpClient.execute(httpGet);
+		System.out.println(url + "/sendSMSServlet?content="+content+"&mobiles="+mobiles);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 }
