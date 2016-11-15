@@ -61,17 +61,17 @@ tr.body td.content {
 		xmlxLongs[2] = 29742;
 	} else if(xmlxCheck.equals("szjc")){
 		xmlxLongs[0] = 29743;
-		xmlxLongs[1] = 43840;
-		xmlxLongs[2] = 43841;
-		xmlxLongs[3] = 43842;
+		xmlxLongs[1] = 39382;
+		xmlxLongs[2] = 39383;
+		xmlxLongs[3] = 39384;
 	}else{
 		xmlxLongs[0] = 29740;
 		xmlxLongs[1] = 29741;
 		xmlxLongs[2] = 29742;
 		xmlxLongs[3] = 29743;
-		xmlxLongs[4] = 43840;
-		xmlxLongs[5] = 43841;
-		xmlxLongs[6] = 43842;
+		xmlxLongs[4] = 39382;
+		xmlxLongs[5] = 39383;
+		xmlxLongs[6] = 39384;
 	}
 
 	if (xmlx != null && !xmlx.trim().equals("")) {
