@@ -891,7 +891,7 @@ public class PermitApprovalPortlet extends MVCPortlet {
 						applyMaterial.setWjscbzclIds(wjscbzclIds);
 						ApplyMaterialLocalServiceUtil.updateApplyMaterial(applyMaterial);
 					}
-					DLFileEntryLocalServiceUtil.deleteDLFileEntry(Long.valueOf(fileId));
+					DLFileEntryLocalServiceUtil.deleteFileEntry(Long.valueOf(fileId));
 				}
 			}
 
