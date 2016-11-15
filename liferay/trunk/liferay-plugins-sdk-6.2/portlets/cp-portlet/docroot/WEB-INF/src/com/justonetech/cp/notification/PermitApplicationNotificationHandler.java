@@ -31,9 +31,9 @@ public class PermitApplicationNotificationHandler extends BaseUserNotificationHa
 	        sb.append(title);
 	        sb.append("</div> <div ");
 	        sb.append("class=\"body\">");
-	        sb.append("<a href='/group/gcxm/-'>");
+//	        sb.append("<a href='/group/gcxm/shishu'>");
 	        sb.append(bodyText);
-	        sb.append("</a>");	        
+//	        sb.append("</a>");	        
 	        sb.append("</div>");
 	        return sb.toString();
 	    }
