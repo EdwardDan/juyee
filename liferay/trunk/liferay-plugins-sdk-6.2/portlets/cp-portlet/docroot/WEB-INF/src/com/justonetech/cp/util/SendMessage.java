@@ -1,11 +1,16 @@
 package com.justonetech.cp.util;
 
+import java.io.IOException;
 import java.util.List;
+
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
 
 import com.justonetech.cp.permit.model.Permit;
 import com.justonetech.cp.permit.model.ProjectProfile;
 import com.justonetech.cp.permit.service.ProjectProfileLocalServiceUtil;
-import com.justonetech.kxt.SendKxt;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Phone;
 import com.liferay.portal.model.User;
@@ -93,11 +98,11 @@ public class SendMessage {
 		return content;
 	}
 
-	public static void sendMessageByUsers(Permit permit, List<User> userList, int status) {
-		sendMessage(permit, userList, status, "","");
+	public static void sendMessageByUsers(Permit permit, List<User> userList, int status,String url) throws ClientProtocolException, IOException {
+		sendMessage(permit, userList, status, "","",url);
 	}
 
-	public static void sendMessage(Permit permit, List<User> userList, int status, String mobiles,String type) {
+	public static void sendMessage(Permit permit, List<User> userList, int status, String mobiles,String type,String url) throws ClientProtocolException, IOException {
 		// String mobiles = "";// 发送信息的电话号码
 		if (null != userList && userList.size() > 0) {
 			for (User user : userList) {
@@ -127,10 +132,16 @@ public class SendMessage {
 				+ (null != projectProfile ? projectProfile.getGcmc() : "") + "的项目施工许可";
 
 		String content = messageContent(status, commonContent,type);// 短信
-		System.out.println("content="+content);
 		if (mobiles.length() > 0) {
-			SendKxt.SendKxtSMS(content, mobiles);
+			sendSMS(url,content,mobiles);
+//			SendKxt.SendKxtSMS(content, mobiles);
 		}
 	}
-
+	
+	public static void sendSMS(String url,String content,String mobiles)
+			throws ClientProtocolException, IOException {
+		HttpClient httpClient = new DefaultHttpClient();
+		HttpGet httpGet = new HttpGet(url + "/sendSMSServlet?content="+content+"&mobiles="+mobiles);
+		httpClient.execute(httpGet);
+	}
 }

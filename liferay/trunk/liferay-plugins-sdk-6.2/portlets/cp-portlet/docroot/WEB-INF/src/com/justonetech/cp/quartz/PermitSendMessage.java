@@ -1,14 +1,19 @@
 package com.justonetech.cp.quartz;
 
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
 
 import com.justonetech.cp.permit.model.Permit;
 import com.justonetech.cp.permit.model.ProjectProfile;
 import com.justonetech.cp.permit.service.PermitLocalServiceUtil;
 import com.justonetech.cp.permit.service.ProjectProfileLocalServiceUtil;
-import com.justonetech.kxt.SendKxt;
 import com.justonetech.sys.model.Dictionary;
 import com.justonetech.sys.service.DictionaryLocalServiceUtil;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -34,6 +39,7 @@ public class PermitSendMessage implements MessageListener {
 
 	protected void doReceive(Message message) throws Exception {
 		_log.info(new Date() + "定时器任务已启动");
+		String url=PropsUtil.get("sms.hook.path");
 		long[] xmlxLongs = new long[7];
 		xmlxLongs[0] = 29740;
 		xmlxLongs[1] = 29741;
@@ -58,8 +64,9 @@ public class PermitSendMessage implements MessageListener {
 								+ "的项目施工许可还有一个月就要到期，请尽快处理。";
 						System.out.println(content);
 						// 申请人
-						SendKxt.SendKxtSMS(content,
-								projectProfileInitSs.getJsdwsjh());
+//						SendKxt.SendKxtSMS(content,
+//								projectProfileInitSs.getJsdwsjh());
+						sendSMS(url, content, projectProfileInitSs.getJsdwsjh());
 					}
 					if (day.equals(new Long(0))) {
 						String content = "报建编号" + permitInitSs.getBjbh()
@@ -70,8 +77,9 @@ public class PermitSendMessage implements MessageListener {
 						Dictionary dictionary = DictionaryLocalServiceUtil
 								.getDictionary(projectProfileInitSs.getXmlx());
 						// 申请人
-						SendKxt.SendKxtSMS(content,
-								projectProfileInitSs.getJsdwsjh());
+//						SendKxt.SendKxtSMS(content,
+//								projectProfileInitSs.getJsdwsjh());
+						sendSMS(url, content, projectProfileInitSs.getJsdwsjh());
 						// 初审人员
 						if (dictionary.getName().equals("公路")
 								|| dictionary.getName().equals("航道")
@@ -79,28 +87,28 @@ public class PermitSendMessage implements MessageListener {
 							List<User> csUsers = UserLocalServiceUtil
 									.getRoleUsers(Long.parseLong(PropsUtil
 											.get("jgzxcsryhgg")));
-							sendQuartzMessage(content, csUsers, "");
+							sendQuartzMessage(content, csUsers, "",url);
 							List<User> fhUsers = UserLocalServiceUtil
 									.getRoleUsers(Long.parseLong(PropsUtil
 											.get("jgzxfhryhgg")));
-							sendQuartzMessage(content, fhUsers, "");
+							sendQuartzMessage(content, fhUsers, "",url);
 							List<User> shUsers = UserLocalServiceUtil
 									.getRoleUsers(Long.parseLong(PropsUtil
 											.get("jgzxshryhgg")));
-							sendQuartzMessage(content, shUsers, "");
+							sendQuartzMessage(content, shUsers, "",url);
 						} else {
 							List<User> csUsers = UserLocalServiceUtil
 									.getRoleUsers(Long.parseLong(PropsUtil
 											.get("jgzxcsrysz")));
-							sendQuartzMessage(content, csUsers, "");
+							sendQuartzMessage(content, csUsers, "",url);
 							List<User> fhUsers = UserLocalServiceUtil
 									.getRoleUsers(Long.parseLong(PropsUtil
 											.get("jgzxfhrysz")));
-							sendQuartzMessage(content, fhUsers, "");
+							sendQuartzMessage(content, fhUsers, "",url);
 							List<User> shUsers = UserLocalServiceUtil
 									.getRoleUsers(Long.parseLong(PropsUtil
 											.get("jgzxshrysz")));
-							sendQuartzMessage(content, shUsers, "");
+							sendQuartzMessage(content, shUsers, "",url);
 						}
 					}
 				}
@@ -127,7 +135,7 @@ public class PermitSendMessage implements MessageListener {
 	}
 
 	public static void sendQuartzMessage(String content, List<User> userList,
-			String mobiles) {
+			String mobiles,String url) throws ClientProtocolException, IOException {
 		// String mobiles = "";// 发送信息的电话号码
 		if (null != userList && userList.size() > 0) {
 			for (User user : userList) {
@@ -146,8 +154,15 @@ public class PermitSendMessage implements MessageListener {
 			mobiles = mobiles.length() > 0 ? mobiles.substring(1) : "";
 		}
 		if (mobiles.length() > 0) {
-			SendKxt.SendKxtSMS(content, mobiles);
+			sendSMS(url,content,mobiles);
 		}
 	}
 
+	public static void sendSMS(String url,String content,String mobiles)
+			throws ClientProtocolException, IOException {
+		HttpClient httpClient = new DefaultHttpClient();
+		HttpGet httpGet = new HttpGet(url+"/sendSMSServlet?content="+content+"&mobiles="+mobiles);
+		httpClient.execute(httpGet);
+	}
+	
 }
