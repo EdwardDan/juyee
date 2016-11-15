@@ -109,10 +109,10 @@
 			<a class="btn" href="${printbzclURL}" target="_blank">补正材料</a>
 		</c:if> --%>
 		<c:if
-			test="<%=status >=12&&status!=16&&status!=17%>">
+			test="<%=status >=11&&status!=12&&status!=16&&status!=17%>">
 			<a class="btn" href="${printjsscbURL}" target="_blank">技术审查表</a>
 		</c:if>
-		<c:if test="<%=status==14&&status==15&&status==18%>">
+		<c:if test="<%=status==14 || status==15 || status==18%>">
 			<c:choose>
 				<c:when test="<%=projectProfile.getXmlx() == 29741%>">
 					<a class="btn" onclick="kgba()">开工备案Pdf</a>
