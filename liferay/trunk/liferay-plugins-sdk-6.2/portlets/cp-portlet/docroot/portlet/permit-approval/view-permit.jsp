@@ -173,7 +173,7 @@
 	</c:if>
 <script type="text/javascript">
 	function viewCertificate(){
-		window.location = '${viewCertificateURL}';
+		window.open('${viewCertificateURL}','_blank');
 	}
 	
 	function kgba(){
