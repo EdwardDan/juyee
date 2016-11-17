@@ -10,5 +10,6 @@
 		<portlet id="permit-approval"></portlet>
 		<portlet id="complete-application"></portlet>
 		<portlet id="complete-approval"></portlet>
+		<portlet id="project-sync"></portlet>
 	</category>
 </display>
