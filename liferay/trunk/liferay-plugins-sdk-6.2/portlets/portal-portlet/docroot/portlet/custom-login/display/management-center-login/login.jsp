@@ -124,22 +124,19 @@
 
 <portlet:resourceURL var="loginUrl" id="Management-Center-login" />
 
-<form action="${themeDisplay.getURLCurrent()}?p_p_id=58&amp;p_p_lifecycle=1&amp;p_p_state=normal&amp;p_p_mode=view&amp;p_p_col_id=column-1&amp;p_p_col_pos=2&amp;p_p_col_count=3&amp;_58_struts_action=%2Flogin%2Flogin" class="form sign-in-form " id="_58_fm" method="post" name="_58_fm" autocomplete="on">
+<form action="${themeDisplay.getURLCurrent()}?p_p_id=58&amp;p_p_lifecycle=1&amp;p_p_state=normal&amp;p_p_mode=view&amp;p_p_col_id=column-1&amp;p_p_col_pos=2&amp;p_p_col_count=3&amp;_58_struts_action=%2Flogin%2Flogin" class="form sign-in-form " id="_58_fm" method="post" name="_58_fm" autocomplete="off">
 	<input name="_58_formDate" type="hidden" value="1470964064174"> <input class="field" id="_58_saveLastPath" name="_58_saveLastPath" type="hidden" value="false"> <input class="field" id="_58_redirect" name="_58_redirect" type="hidden" value="${redirectPage}"> <input class="field" id="_58_doActionAfterLogin" name="_58_doActionAfterLogin" type="hidden" value="false">
-	<input name="_58_login" id="_58_login"  type="hidden"  >
-	<input name="_58_password" id="_58_password"  type="hidden"  >
-</form>	
 	<div id=login_div>
 		<div class="title" id="title"></div>
 		<div class="login" id="login">
 			<div class="login_tag"></div>
 
 			<div class="login_div_user">
-				<input id="loginInput" value="请输入用户名" class="login_input_user" type="text" onfocus="userFocus(this)" onblur="userBlur(this)">
+				<input name="_58_login" id="_58_login" value="请输入用户名" class="login_input_user" type="text" onfocus="userFocus(this)" onblur="userBlur(this)">
 			</div>
 
 			<div class="login_div_password">
-				<input id="passwordInput" value="请输入密码" class="login_input_password" type="text" onfocus="passwordFocus(this)" onblur="passwordBlur(this)">
+				<input name="_58_password" id="_58_password" value="请输入密码" class="login_input_password" type="text" onfocus="passwordFocus(this)" onblur="passwordBlur(this)">
 			</div>
 
 			<div id="loginMessage" class="loginMessage"></div>
@@ -150,8 +147,8 @@
 			</div>
 		</div>
 	</div>
+</form>
 
-<script type="text/javascript" src="/portal-portlet/js/des.js"></script>
 <script>
 $(document).ready(
         function() {
@@ -186,8 +183,8 @@ $(document).ready(
 				type:"post",
 				url:"<%=loginUrl%>",
 			data : {
-				'<portlet:namespace/>_58_login' : $('#loginInput').val(),
-				'<portlet:namespace/>_58_password' : $('#passwordInput').val()
+				'<portlet:namespace/>_58_login' : $('#_58_login').val(),
+				'<portlet:namespace/>_58_password' : $('#_58_password').val()
 			},
 			error : function(err) {
 				alert("提交失败!");
@@ -195,16 +192,6 @@ $(document).ready(
 			success : function(data) {
 				var strJson = eval("(" + data + ")");
 				if (strJson.loginState == true) {
-					var key1 = "1";
-					var key2 = "2";
-					var key3 = "3";
-					
-					var login = $('#loginInput').val();
-					login = strEnc(login,key1,key2,key3); 	
-					var password = $('#passwordInput').val();
-					password = strEnc(password,key1,key2,key3); 	
-					$('#_58_login').val(login)
-					$('#_58_password').val(password)
 					document.getElementById("_58_fm").submit();
 				} else {
 					$("#loginMessage").text(strJson.responseContent);
