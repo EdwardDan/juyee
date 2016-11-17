@@ -308,4 +308,21 @@ public class SysMenuManager {
             return String.format(FORMAT_TYPE, treeidIncrease);
         }
     }
+
+    /**
+     * 获取菜单名称
+     *
+     * @param url .
+     * @return .
+     */
+    public SysMenu getMenusName(String url){
+        SysMenu sysMenu=new SysMenu();
+        if (!org.hibernate.util.StringHelper.isEmpty(url)) {
+            List<SysMenu> sysMenus = sysMenuService.findByQuery("from SysMenu where isValid=1 and url=? order by treeId asc", url.substring(1));
+            if(null!=sysMenus&&sysMenus.size()>0){
+                sysMenu=sysMenus.iterator().next();
+            }
+        }
+        return sysMenu;
+    }
 }

@@ -10,15 +10,7 @@
             {name: "bdh", rule: "validate[required,maxSize[100]]"}
         ];
         validateInit(validateCondition, formId);
-        if (${not empty bean.isZftzl}) {
-            if (${bean.isZftzl}) {
-                $("#isZftzl").val("true");
-                document.getElementById("yzzpl").style.display = "";
-            } else {
-                $("#isZftzl").val("false");
-                document.getElementById("yzzpl").style.display = "none";
-            }
-        }
+        showYzzpl();
     });
 
     //保存操作

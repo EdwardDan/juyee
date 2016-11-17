@@ -1,6 +1,8 @@
 package com.justonetech.system.filter;
 
+import com.justonetech.system.manager.SysLogCustomManager;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.web.authentication.AbstractProcessingFilter;
 
@@ -18,6 +20,9 @@ import java.io.IOException;
  * To change this template use File | Settings | File Templates.
  */
 public class CustomAuthenticationProcessingFilter implements Filter {
+    @Autowired
+    private SysLogCustomManager sysLogCustomManager;
+
     public static String VALIDATION_CODE = "VALIDATION_CODE";
     public static String J_VALIDATION_CODE = "j_validation_code";
     public void destroy() {
@@ -26,6 +31,9 @@ public class CustomAuthenticationProcessingFilter implements Filter {
 
     public void doFilter(ServletRequest request, ServletResponse response,
                          FilterChain chain) throws IOException, ServletException {
+
+        sysLogCustomManager.logAll((HttpServletRequest) request);  //保存系统日志
+
         if ((request != null) && request instanceof HttpServletRequest) {
             HttpServletRequest req = (HttpServletRequest) request;
             HttpSession session = req.getSession();

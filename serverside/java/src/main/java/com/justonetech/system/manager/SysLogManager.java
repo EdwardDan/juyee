@@ -72,6 +72,7 @@ public class SysLogManager implements UserLogger, WSLogService {
             bean.setEnterTime(DateTimeHelper.getTimestamp());
         } else if(logType.equals(Constants.LOG_TYPE_LOGOUT)) {
             bean.setOutTime(DateTimeHelper.getTimestamp());
+            bean.setPageUrl("*退出系统*");
         }
 
         this.save(bean);
