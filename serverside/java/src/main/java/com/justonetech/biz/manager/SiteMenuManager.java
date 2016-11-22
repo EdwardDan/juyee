@@ -70,6 +70,9 @@ public class SiteMenuManager {
     private static String[] menu_ZXYH = new String[]{"zxyh", "在线用户", "sysOnlineUser/grid.do"};
     private static String[] menu_CZRZ = new String[]{"czrz", "操作日志", "sysLog/grid.do"};
 
+    private static String[] menu_SGXK = new String[]{"sgxkjb", "施工许可（旧版）", "sgPermit/grid.do"};
+    private static String[] menu_QXSGXK = new String[]{"qxsgxkjb", "区县施工许可（旧版）", "areaSgPermit/grid.do"};
+
     private static void init() {
         if (menuMap == null) {
             menuMap = new HashMap<String, String[]>();
@@ -120,6 +123,9 @@ public class SiteMenuManager {
             menuMap.put(menu_ZHGL[0], menu_ZHGL);
             menuMap.put(menu_ZXYH[0], menu_ZXYH);
             menuMap.put(menu_CZRZ[0], menu_CZRZ);
+
+            menuMap.put(menu_SGXK[0], menu_SGXK);
+            menuMap.put(menu_QXSGXK[0], menu_QXSGXK);
         }
     }
 
