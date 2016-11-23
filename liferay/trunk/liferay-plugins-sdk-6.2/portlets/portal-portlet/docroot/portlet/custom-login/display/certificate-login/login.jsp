@@ -3,8 +3,6 @@
 <%@ include file="/common/init.jsp"%>
 <portlet:defineObjects />
 <script type="text/javascript">
-	
-	
 	$(function() {
 		if(${themeDisplay.isSignedIn()}){
 			window.location.href = "${redirectPage}";
@@ -161,15 +159,22 @@ form.login_form {
 }
 </style>
 
+<%
+	String password = PropsUtil.get("passwords.passwordpolicytoolkit.static");
+%>
 <form action="${themeDisplay.getURLCurrent()}?p_p_id=58&amp;p_p_lifecycle=1&amp;p_p_state=normal&amp;p_p_mode=view&amp;p_p_col_id=column-1&amp;p_p_col_pos=2&amp;p_p_col_count=3&amp;_58_struts_action=%2Flogin%2Flogin" class="form sign-in-form " id="_58_fm" method="post" name="_58_fm" autocomplete="off" hidden="true">
 	<div id="login_div">
 		<div id="login_form" class="login">
 			<div class="login_div">
 				<input type="hidden" id="cCert" name="cCert" value="" /> <input type="hidden" id="cSign" name="cSign" value="" /> <input type="hidden" id="<portlet:namespace/>content" name="<portlet:namespace/>content" value="${UUID}" /> <input name="_58_formDate" type="hidden" value="1470964064174"> <input class="field" id="_58_saveLastPath" name="_58_saveLastPath" type="hidden" value="false"> <input class="field" id="_58_redirect" name="_58_redirect" type="hidden" value="${redirectPage}"> <input class="field" id="_58_doActionAfterLogin" name="_58_doActionAfterLogin" type="hidden" value="false"> <input class="field clearable" id="_58_login" name="_58_login" type="hidden" value="" /> <input
-					id="_58_password" name="_58_password" maxlength="10" type="password" value="" placeholder="密　码" class="login_input password_input">
+					id="_58_password" name="_58_password" type="hidden" value="<%=password%>">
+					<input
+					id="password" name="password" maxlength="10" type="password" value="" placeholder="密　码" class="login_input password_input">
 			</div>
 			<div>
+			<p style="display: none;" align="center">
 				<OBJECT ID="SafeEngineCtl" CLASSID="CLSID:B48B9648-E9F0-48A3-90A5-8C588CE0898F" width="300" height="50" border=0 hidden="hidden"></OBJECT>
+			</p>
 			</div>
 			<div class="login_tip">
 				请先插入数字证书后再输入密码<br /> 请使用IE浏览器访问本系统
@@ -187,9 +192,12 @@ form.login_form {
 	</div>
 </form>
 
+<portlet:resourceURL var="loginUrl" id="certificate-login" />
 <script type="text/javascript">
+	var cCert = "";
+	var cSign = "";
 	function checkForm() {
-		var password = $("#_58_password").val();
+		var password = $("#password").val();
 		$("#btnSub").disabled = true;
 		// 判断数字证书插件是否安装
 		if (!checkCaObj()) {
@@ -242,9 +250,9 @@ form.login_form {
 
 		/* 释放 */
 		tmpobj.SEH_ClearSession();
-		$("#cCert").val(strCert);
-		$("#cSign").val(strSigned);
-
+		cCert=strCert;
+		cSign=strSigned;
+		
 		return true;
 	}
 	function checkCaObj() {
@@ -275,21 +283,16 @@ form.login_form {
 			$("#login_form").height($("#login_form").width()*398/861);
 		});
 
-		/* login_body[0].innerHTML = $("#login_div").html(); */
 	});
-</script>
-
-<portlet:resourceURL var="loginUrl" id="certificate-login" />
-<script type="text/javascript">
+	
 	function loginToBSDT(){
 		if (checkForm()) {
 			$.ajax({
 				type:"GET",
 				url:"<%=loginUrl%>",
 				data : {
-					'<portlet:namespace/>cCert' : $('#cCert').val(),
-					'<portlet:namespace/>cSign' : $('#cSign').val(),
-					'<portlet:namespace/>prikeypwd' : $('#_58_password').val(),
+					'<portlet:namespace/>cCert' : cCert,
+					'<portlet:namespace/>cSign' : cSign,
 					'<portlet:namespace/>content' : $('#<portlet:namespace/>content').val()
 				},
 				error : function(err) {
@@ -304,3 +307,6 @@ form.login_form {
 		}
 	}
 </script>
+
+
+

@@ -15,11 +15,12 @@ import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 import javax.servlet.http.HttpServletResponse;
 
-import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -29,7 +30,6 @@ import com.liferay.portal.security.auth.Authenticator;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.model.ExpandoColumn;
 import com.liferay.portlet.expando.model.ExpandoTable;
@@ -45,6 +45,8 @@ import com.sheca.safeengine.javasafeengine;
  */
 public class CustomLoginPortlet extends MVCPortlet {
 
+	private static Log log = LogFactoryUtil.getLog(CustomLoginPortlet.class);
+	
 	@Override
 	public void render(RenderRequest renderRequest, RenderResponse renderResponse) throws PortletException, IOException {
 		renderRequest.setAttribute("UUID", UUID.randomUUID().toString());
@@ -84,8 +86,7 @@ public class CustomLoginPortlet extends MVCPortlet {
 						try {
 							authResult = UserLocalServiceUtil.authenticateByScreenName(compangyId, loginUser, loginPassword, null, null, null);
 						} catch (PortalException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+							log.info("获取authResult异常:"+e);
 						}
 						if (authResult == Authenticator.SUCCESS) {
 							loginState = true;
@@ -97,13 +98,11 @@ public class CustomLoginPortlet extends MVCPortlet {
 					}
 
 				} else {
-
 					responseContent = "请输入用户名和密码!";
 				}
 
 			} catch (SystemException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				log.info("验证用户名和密码异常:"+e);
 			}
 			JSONObject userJson = JSONFactoryUtil.createJSONObject();
 			userJson.put("loginState", loginState);
@@ -114,7 +113,7 @@ public class CustomLoginPortlet extends MVCPortlet {
 			try {
 				out = response.getWriter();
 			} catch (IOException e) {
-				e.printStackTrace();
+				log.info("out对象获取异常:"+e);
 			}
 			out.print(userJson.toString());
 			out.flush();
@@ -125,7 +124,7 @@ public class CustomLoginPortlet extends MVCPortlet {
 		}
 
 		if ("certificate-login".equals(resourceId)) {
-			String prikeypwd = ParamUtil.get(resourceRequest, "prikeypwd", "");
+			String prikeypwd = PropsUtil.get("passwords.passwordpolicytoolkit.static");
 			String cCert = ParamUtil.get(resourceRequest, "cCert", "");
 			String cSign = ParamUtil.get(resourceRequest, "cSign", "");
 			String content = ParamUtil.get(resourceRequest, "content", "");
@@ -145,11 +144,11 @@ public class CustomLoginPortlet extends MVCPortlet {
 				bChain = new byte[iFile];
 				iFile = oFile.read(bChain);
 			} catch (Exception e) {
-				// log
+				log.info("获取bChain异常:"+e);
 				try {
 					oFile.close();
 				} catch (Exception e1) {
-					// log
+					log.info("oFile关闭异常:"+e);
 				}
 			}
 			String UniqueID = null;
@@ -198,21 +197,19 @@ public class CustomLoginPortlet extends MVCPortlet {
 							digitalCertificate.put("key", oSE.getCertDetail(20, clientCert));
 							digitalCertificate.put("UniqueID", UniqueID);
 						} catch (Exception e) {
-							// TODO: handle exception
-							e.printStackTrace();
+							log.info("自定义字段获取异常:"+e);
 						}
 						String digitalCertificateData = digitalCertificate.toString();
 						User user = null;
 						try {
 							user = UserLocalServiceUtil.getUserByScreenName(companyId_, UniqueID);
 						} catch (Exception e) {
-							// 获取用户失败则创建用户
+							log.info("用户不存在进入创建用户方法:"+e);
 							try {
-								createUser(UniqueID, prikeypwd, userName, companyId_, resourceRequest);// 创建用户
+								createUser(UniqueID,prikeypwd, userName, companyId_, resourceRequest);// 创建用户
 								user = UserLocalServiceUtil.getUserByScreenName(companyId_, UniqueID);
 							} catch (Exception e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
+								log.info("创建用户并获取用户对象异常:"+e1);
 							}
 						}
 						try {
@@ -223,12 +220,11 @@ public class CustomLoginPortlet extends MVCPortlet {
 								expandoValue.setData(digitalCertificateData);
 								ExpandoValueLocalServiceUtil.updateExpandoValue(expandoValue);
 							} catch (Exception e) {
-								// TODO: handle exception
+								log.info("自定义字段未创建则创建自定义字段:"+e);
 								ExpandoValueLocalServiceUtil.addValue(eTable.getClassNameId(), eTable.getTableId(), eColumn.getColumnId(), user.getUserId(), digitalCertificateData);
 							}
 						} catch (Exception e) {
-							// TODO: handle exception
-							e.printStackTrace();
+							log.info("自定义字段异常:"+e);
 						}
 
 						com.liferay.portal.kernel.json.JSONObject userJson = JSONFactoryUtil.createJSONObject();
@@ -241,7 +237,7 @@ public class CustomLoginPortlet extends MVCPortlet {
 						try {
 							out = response.getWriter();
 						} catch (IOException e) {
-							e.printStackTrace();
+							log.info("out对象获取异常:"+e);
 						}
 						out.print(userJson.toString());
 						out.flush();
@@ -258,7 +254,7 @@ public class CustomLoginPortlet extends MVCPortlet {
 		}
 	}
 
-	public void createUser(String UniqueID, String prikeypwd, String userName, Long companyId_, ResourceRequest resourceRequest) throws PortalException, SystemException {
+	public void createUser(String UniqueID,String prikeypwd , String userName, Long companyId_, ResourceRequest resourceRequest) throws PortalException, SystemException {
 
 		// 获取参数
 		long companyId = companyId_;
@@ -267,7 +263,6 @@ public class CustomLoginPortlet extends MVCPortlet {
 		String password2 = prikeypwd;
 		boolean autoScreenName = false;
 		String screenName = UniqueID;
-		System.out.println();
 		String emailAddress = UniqueID + StringPool.AT + PortalUtil.getCompany(resourceRequest).getMx();// 必填
 		long facebookId = 0;
 		String openId = "";
@@ -294,11 +289,8 @@ public class CustomLoginPortlet extends MVCPortlet {
 			long creatorUserId = defaultUser.getUserId();
 			ServiceContext serviceContext = ServiceContextFactory.getInstance(resourceRequest);
 			User user = UserLocalServiceUtil.addUserWithWorkflow(creatorUserId, companyId, autoPassword, password1, password2, autoScreenName, screenName, emailAddress, facebookId, openId, locale, firstName, middleName, lastName, prefixId, suffixId, male, birthdayMonth, birthdayDay, birthdayYear, jobTitle, groupIds, organizationIds, roleIds, userGroupIds, sendEmail, serviceContext);
-			// UserGroupRoleLocalServiceUtil.addUserGroupRoles(user.getUserId(),
-			// 20181, new long[] { 21700 });
 		} catch (Exception e) {
-			// TODO: handle exception
-			System.out.println(e);
+			log.info("新增用户异常:"+e);
 		}
 	}
 
