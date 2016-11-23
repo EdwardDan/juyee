@@ -35,6 +35,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 
@@ -351,6 +353,17 @@ public class OaReceiveController extends BaseCRUDActionController<OaReceive> {
         //处理其他业务逻辑
         model.addAttribute("bean2", node);
         return "view/oa/oaReceive/audit";
+    }
+
+    @RequestMapping
+    public String print(Model model, Long id){
+        OaReceive oaReceive = oaReceiveService.get(id);
+        Timestamp ts = oaReceive.getNodeReceiveTime();
+        DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+        String receiveTime = sdf.format(ts);
+        model.addAttribute("bean",oaReceive);
+        model.addAttribute("receiveTime",receiveTime);
+        return "view/oa/oaReceive/print";
     }
 
     /**
