@@ -5,6 +5,9 @@
     function doAudit(id) {
         openNewWindow("new","收文管理审核", "${ctx}/oaReceive/audit.do?id=" + id, true,600,400);
     }
+    function print(id){
+        window.open("${ctx}/oaReceive/print.do?id=" + id,"_blank");
+    }
 </script>
 <style type="text/css">
     .td_border {
@@ -118,7 +121,9 @@
                 <td class="form_border" align="center" colspan="6">
                     <%--<c:if test="${type=='view'}"> &nbsp;是否打印日志:&nbsp;<input type="checkbox" value="1" name="isPrintNode" id="isPrintNode">--%>
                         <%--<input type="button" value="打印" class="button_confirm" onclick=""></c:if>--%>
-                    <input type="button" value="关闭" class="button_cancel" onclick="closeWindow()">
+                        <input type="button" value="打印" class="button_print" onclick="print('${bean.id}')">
+                        <a href="/oaReceive/print.jsp" target="_blank" class="btn">打印收文处理单</a>
+                        <input type="button" value="关闭" class="button_" onclick="closeWindow()">
                 </td>
             </tr>
         </table>
