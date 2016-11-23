@@ -87,7 +87,7 @@
 
     <p class=MsoNormal style='margin-right:11.3pt;word-break:break-all'><span
             style='font-size:14.0pt;font-family:仿宋_GB2312'>收文编号<span lang=EN-US>:</span>${bean.code}<span lang=EN-US>&nbsp;&nbsp;
-&nbsp;</span>收文日期：${receiveTime}<span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;</span>收文日期：<fmt:formatDate value="${bean.receiveDate}" pattern="yyyy-MM-dd"/><span lang=EN-US>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </span></span></p>
 
     <table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0 width=568
@@ -111,7 +111,7 @@
             <td width=105 colspan=2 style='width:78.7pt;border:solid windowtext 1.0pt;
   border-left:none;padding:0cm 5.4pt 0cm 5.4pt;height:46.35pt'>
                 <p class=MsoNormal align=center style='text-align:center'><span
-                        style='font-size:14.0pt;font-family:仿宋_GB2312'>${bean.year}</span></p>
+                        style='font-size:14.0pt;font-family:仿宋_GB2312'><fmt:formatDate value="${bean.writtenDate}" pattern="yyyy-MM-dd"/></span></p>
             </td>
         </tr>
         <tr style='height:45.5pt'>
