@@ -355,14 +355,17 @@ public class OaReceiveController extends BaseCRUDActionController<OaReceive> {
         return "view/oa/oaReceive/audit";
     }
 
+    /**
+     * 打印收文表单
+     *
+     * @param id    .
+     * @param model .
+     * @return .
+     */
     @RequestMapping
     public String print(Model model, Long id){
         OaReceive oaReceive = oaReceiveService.get(id);
-        Timestamp ts = oaReceive.getNodeReceiveTime();
-        DateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-        String receiveTime = sdf.format(ts);
         model.addAttribute("bean",oaReceive);
-        model.addAttribute("receiveTime",receiveTime);
         return "view/oa/oaReceive/print";
     }
 
