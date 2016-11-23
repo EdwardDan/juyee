@@ -112,7 +112,6 @@ public class ProjectQueryStageController extends BaseCRUDActionController<ProjIn
             SysUser sysUser = sysUserManager.getSysUser();
             //是否是建设单位用户
             if (null != sysUser) {
-                System.out.println("sysUser.getDisplayName() = " + sysUser.getDisplayName());
                 SysPerson person = sysUser.getPerson();
                 if (null != person) {
                     SysDept dept = person.getDept();

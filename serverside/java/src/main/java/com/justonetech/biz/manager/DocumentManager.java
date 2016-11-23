@@ -1,14 +1,14 @@
 package com.justonetech.biz.manager;
 
-import com.justonetech.core.utils.FormatUtils;
-import com.justonetech.core.utils.JspHelper;
-import com.justonetech.core.utils.StringHelper;
 import com.justonetech.biz.daoservice.DocCategoryService;
 import com.justonetech.biz.daoservice.DocDocumentAttachService;
 import com.justonetech.biz.daoservice.DocDocumentService;
 import com.justonetech.biz.domain.DocCategory;
 import com.justonetech.biz.domain.DocDocument;
 import com.justonetech.biz.domain.DocDocumentAttach;
+import com.justonetech.core.utils.FormatUtils;
+import com.justonetech.core.utils.JspHelper;
+import com.justonetech.core.utils.StringHelper;
 import com.justonetech.system.daoservice.SysDeptService;
 import com.justonetech.system.domain.SysPerson;
 import com.justonetech.system.domain.SysUser;
@@ -148,9 +148,12 @@ public class DocumentManager {
             return button;
         }
         Set<DocDocumentAttach> attachs = document.getDocDocumentAttachs();
-        for (DocDocumentAttach attach : attachs) {
-            button += FormatUtils.format(DOWNLOAD_BUTTON, String.valueOf(attach.getId()), attach.getFileName());
+        if (null != attachs && attachs.size() > 0) {
+            for (DocDocumentAttach attach : attachs) {
+                button += FormatUtils.format(DOWNLOAD_BUTTON, String.valueOf(attach.getId()), attach.getFileName());
+            }
         }
+
         return button;
     }
 

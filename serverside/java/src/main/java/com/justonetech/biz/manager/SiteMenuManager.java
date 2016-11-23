@@ -73,6 +73,11 @@ public class SiteMenuManager {
     private static String[] menu_SGXK = new String[]{"sgxkjb", "施工许可（旧版）", "sgPermit/grid.do"};
     private static String[] menu_QXSGXK = new String[]{"qxsgxkjb", "区县施工许可（旧版）", "areaSgPermit/grid.do"};
 
+    private static String[] menu_BZYJTJ = new String[]{"bztjtj", "办证推进统计", "projectQueryStage/viewStage.do"};
+    private static String[] menu_XXJDTJ = new String[]{"xxjdtj", "形象进度统计", "projectQueryNode/viewNode.do"};
+    private static String[] menu_QYZZTJ = new String[]{"qyzztj", "企业资质统计", "unitQualifyQuery/list.do"};
+    private static String[] menu_ZYZGTJ = new String[]{"zyzgtj", "执业资格统计", "personQualifyQuery/list.do"};
+
     private static void init() {
         if (menuMap == null) {
             menuMap = new HashMap<String, String[]>();
@@ -126,6 +131,11 @@ public class SiteMenuManager {
 
             menuMap.put(menu_SGXK[0], menu_SGXK);
             menuMap.put(menu_QXSGXK[0], menu_QXSGXK);
+
+            menuMap.put(menu_BZYJTJ[0], menu_BZYJTJ);
+            menuMap.put(menu_XXJDTJ[0], menu_XXJDTJ);
+            menuMap.put(menu_QYZZTJ[0], menu_QYZZTJ);
+            menuMap.put(menu_ZYZGTJ[0], menu_ZYZGTJ);
         }
     }
 
