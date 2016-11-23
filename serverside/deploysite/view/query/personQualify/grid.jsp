@@ -34,7 +34,8 @@
             userOpts:{
                 defaultQuery:{ "groupOp":"AND", "rules":[
                     { "field":"姓名", "op":"cn", "data":""},
-                    { "field":"身份证", "op":"cn", "data":""}
+                    { "field":"身份证", "op":"cn", "data":""},
+                    { "field":"证书名称", "op":"cn", "data":""}
                 ]},
                 queryButton:$("#queryButton"),
                 queryDesc:$("#queryConditionDesc")
