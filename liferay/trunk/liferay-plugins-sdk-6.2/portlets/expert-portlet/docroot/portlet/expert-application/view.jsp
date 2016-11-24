@@ -1,5 +1,15 @@
-<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
-
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ include file="/common/init.jsp"%>
 <portlet:defineObjects />
 
-This is the <b>专家申报</b> portlet in View mode.
+申请（按钮）
+
+列表
+<c:set var="contextPath"
+	value="${request.contextPath}/portlet/expert-application" />
+<portlet:renderURL var="addExpertURL">
+	<portlet:param name="mvcPath" value="${contextPath}/add-expert.jsp"/>
+</portlet:renderURL>
+
+<aui:button href="${addExpertURL}" value="申请"></aui:button>
+
