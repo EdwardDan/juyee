@@ -1,6 +1,9 @@
 package com.justonetech.expert.portlet;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -29,11 +32,14 @@ public class ExpertApplicationPortlet extends MVCPortlet {
 		super.render(renderRequest, renderResponse);
 	}
 	
-	public void saveJbxx(ActionRequest request,ActionResponse response) throws SystemException {
+	//保存基本信息
+	public void saveJbxx(ActionRequest request,ActionResponse response) throws SystemException, ParseException {
 		String xm = ParamUtil.getString(request, "xm");
 		String xb = ParamUtil.getString(request, "xb");
 		String sfzh = ParamUtil.getString(request, "sfzh");
-		/*String csny = ParamUtil.getString(request, "csny");*/
+		String csnyStr = sfzh.substring(6, 10)+"-"+sfzh.substring(10, 12);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
+		java.util.Date csny = sdf.parse(csnyStr);
 		String gzdw = ParamUtil.getString(request, "gzdw");
 		String dzyx = ParamUtil.getString(request, "dzyx");
 		String txdz = ParamUtil.getString(request, "txdz");
@@ -50,6 +56,7 @@ public class ExpertApplicationPortlet extends MVCPortlet {
 		jbxx.setXb(xm);
 		jbxx.setXb(xb);
 		jbxx.setSfzh(sfzh);
+		jbxx.setCsny(csny);
 		jbxx.setGzdw(gzdw);
 		jbxx.setDzyx(dzyx);
 		jbxx.setTxdz(txdz);
