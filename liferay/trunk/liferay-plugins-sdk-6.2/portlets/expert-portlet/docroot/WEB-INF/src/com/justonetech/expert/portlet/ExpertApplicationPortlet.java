@@ -1,7 +1,6 @@
 package com.justonetech.expert.portlet;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -11,8 +10,8 @@ import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
-import com.justonetech.expert.model.Jbxx;
-import com.justonetech.expert.service.JbxxLocalServiceUtil;
+import com.justonetech.expert.model.Expert;
+import com.justonetech.expert.service.ExpertLocalServiceUtil;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -52,23 +51,23 @@ public class ExpertApplicationPortlet extends MVCPortlet {
 		String sjhm = ParamUtil.getString(request, "sjhm");
 		String lxdh = ParamUtil.getString(request, "lxdh");
 		String cz = ParamUtil.getString(request, "cz");
-		Jbxx jbxx = JbxxLocalServiceUtil.createJbxx(CounterLocalServiceUtil.increment());
-		jbxx.setXb(xm);
-		jbxx.setXb(xb);
-		jbxx.setSfzh(sfzh);
-		jbxx.setCsny(csny);
-		jbxx.setGzdw(gzdw);
-		jbxx.setDzyx(dzyx);
-		jbxx.setTxdz(txdz);
-		jbxx.setYzbm(yzbm);
-		jbxx.setXrzw(xrzw);
-		jbxx.setZc(zc);
-		jbxx.setZyzg(zyzg);
-		jbxx.setCszy(cszy);
-		jbxx.setZygznx(zygznx);
-		jbxx.setSjhm(sjhm);
-		jbxx.setLxdh(lxdh);
-		jbxx.setCz(cz);
-		JbxxLocalServiceUtil.updateJbxx(jbxx);
+		Expert expert = ExpertLocalServiceUtil.createExpert(CounterLocalServiceUtil.increment());
+		expert.setXm(xm);
+		expert.setXb(xb);
+		expert.setSfzh(sfzh);
+		expert.setCsny(csny);
+		expert.setGzdw(gzdw);
+		expert.setDzyx(dzyx);
+		expert.setTxdz(txdz);
+		expert.setYzbm(yzbm);
+		expert.setXrzw(xrzw);
+		expert.setZc(zc);
+		expert.setZyzg(zyzg);
+		expert.setCszy(cszy);
+		expert.setZygznx(zygznx);
+		expert.setSjhm(sjhm);
+		expert.setLxdh(lxdh);
+		expert.setCz(cz);
+		ExpertLocalServiceUtil.updateExpert(expert);
 	}
 }
