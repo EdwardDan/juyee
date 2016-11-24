@@ -37,8 +37,8 @@
 		</tr>
 		<tr>
 			<td class="text-right">身份证号</td>
-			<td class="bg-white" colspan="3"><aui:input name="sfzh" value="${expert.sfzh}"
-					id="sfzh" label="" cssClass="span6" onblur="toCsny()">
+			<td class="bg-white" colspan="3"><aui:input id="sfzh" name="sfzh" value="${expert.sfzh}"
+					label="" cssClass="span6" onblur="return identifySfzh()" onChange="toCsny()">
 					<aui:validator name="required"/>
 				</aui:input></td>
 		</tr>
@@ -55,7 +55,7 @@
 					<aui:validator name="required" />
 				</aui:input></td>
 			<td class="text-right">电子邮箱</td>
-			<td class="bg-white"><aui:input name="dzyx" label="" value="${expert.dzyx}"
+			<td class="bg-white"><aui:input id="dzyx" name="dzyx" label="" value="${expert.dzyx}"
 					cssClass="span6"></aui:input></td>
 		</tr>
 		<tr>
@@ -106,30 +106,41 @@
 		</tr>
 	</table>
 	<div style="text-align: center">
-		<aui:button type="submit" onClick="return checkInputMobilesNormal();" />
+		<aui:button type="submit" onClick="return identify();" />
 		<aui:button value="返回" href="${viewURL}" />
 	</div>
 </aui:form>
 <script>
-	function checkInputMobilesNormal() {
+	function identify() {
 		var mobiles = $("#<portlet:namespace/>sjhm").val();
-
-		var reg = /^1[3|4|5|7|8][0-9]\d{8}$/;
+		var sfzh = $("#<portlet:namespace />sfzh").val();
+		var dzyx = $("#<portlet:namespace/>dzyx").val();
+		var regSjhm = /^1[3|4|5|7|8][0-9]\d{8}$/;
+		var regSfzh = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+		var regDzyx = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/;
+		if (regSfzh.test(sfzh) === false) {
+            alert("无效的身份证号！");
+            return false;
+        }
+		if(dzyx.length!=0){
+			if(regDzyx.test(dzyx)===false){
+				alert("无效的电子邮箱！");
+	            return false;
+			}
+		}
 		if (mobiles != null && mobiles != "") {
 			if (mobiles.indexOf(",") == -1) {
-				if (!reg.test(mobiles)) {
-					alert('“' + mobiles + '”是无效的手机号码！');
+				if (!regSjhm.test(mobiles)) {
+					alert("无效的手机号码！");
 					return false;
-					/* focusInput($("#<portlet:namespace />sjhm")); */
 				}
 			} else {
 				var arr = mobiles.split(",");
 				var length = arr.length;
 				for (var i = 0; i < length; i++) {
-					if (!reg.test(arr[i])) {
-						alert('“' + arr[i] + '”是无效的手机号码！');
+					if (!regSjhm.test(arr[i])) {
+						alert("无效的手机号码！");
 						return false;
-						/* focusInput($("#<portlet:namespace />sjhm")); */
 					}
 				}
 			}
@@ -137,10 +148,9 @@
 		if (mobiles == "") {
 			alert('手机号不能为空！');
 			return false;
-			/* focusInput($("#<portlet:namespace />sjhm")); */
 		}
-	}
-	function toCsny() {
+	}	
+	function toCsny(){
 		var sfzh = $("#<portlet:namespace />sfzh").val();
 		var csn = sfzh.substr(6, 4);
 		var csy = sfzh.substr(10, 2);
