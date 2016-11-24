@@ -60,12 +60,12 @@ public class ZqtzjkrzqkModelImpl extends BaseModelImpl<Zqtzjkrzqk>
 	public static final String TABLE_NAME = "expert_Zqtzjkrzqk";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "zqtzjkrzqkId", Types.BIGINT },
-			{ "expertId", Types.VARCHAR },
+			{ "expertId", Types.BIGINT },
 			{ "zjkxtlsdw", Types.VARCHAR },
 			{ "sqzy", Types.VARCHAR },
 			{ "pzrq", Types.TIMESTAMP }
 		};
-	public static final String TABLE_SQL_CREATE = "create table expert_Zqtzjkrzqk (zqtzjkrzqkId LONG not null primary key,expertId VARCHAR(75) null,zjkxtlsdw VARCHAR(75) null,sqzy VARCHAR(75) null,pzrq DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table expert_Zqtzjkrzqk (zqtzjkrzqkId LONG not null primary key,expertId LONG,zjkxtlsdw VARCHAR(75) null,sqzy VARCHAR(75) null,pzrq DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table expert_Zqtzjkrzqk";
 	public static final String ORDER_BY_JPQL = " ORDER BY zqtzjkrzqk.zqtzjkrzqkId DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY expert_Zqtzjkrzqk.zqtzjkrzqkId DESC";
@@ -136,7 +136,7 @@ public class ZqtzjkrzqkModelImpl extends BaseModelImpl<Zqtzjkrzqk>
 			setZqtzjkrzqkId(zqtzjkrzqkId);
 		}
 
-		String expertId = (String)attributes.get("expertId");
+		Long expertId = (Long)attributes.get("expertId");
 
 		if (expertId != null) {
 			setExpertId(expertId);
@@ -172,17 +172,12 @@ public class ZqtzjkrzqkModelImpl extends BaseModelImpl<Zqtzjkrzqk>
 	}
 
 	@Override
-	public String getExpertId() {
-		if (_expertId == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _expertId;
-		}
+	public long getExpertId() {
+		return _expertId;
 	}
 
 	@Override
-	public void setExpertId(String expertId) {
+	public void setExpertId(long expertId) {
 		_expertId = expertId;
 	}
 
@@ -326,12 +321,6 @@ public class ZqtzjkrzqkModelImpl extends BaseModelImpl<Zqtzjkrzqk>
 
 		zqtzjkrzqkCacheModel.expertId = getExpertId();
 
-		String expertId = zqtzjkrzqkCacheModel.expertId;
-
-		if ((expertId != null) && (expertId.length() == 0)) {
-			zqtzjkrzqkCacheModel.expertId = null;
-		}
-
 		zqtzjkrzqkCacheModel.zjkxtlsdw = getZjkxtlsdw();
 
 		String zjkxtlsdw = zqtzjkrzqkCacheModel.zjkxtlsdw;
@@ -418,7 +407,7 @@ public class ZqtzjkrzqkModelImpl extends BaseModelImpl<Zqtzjkrzqk>
 			Zqtzjkrzqk.class
 		};
 	private long _zqtzjkrzqkId;
-	private String _expertId;
+	private long _expertId;
 	private String _zjkxtlsdw;
 	private String _sqzy;
 	private Date _pzrq;

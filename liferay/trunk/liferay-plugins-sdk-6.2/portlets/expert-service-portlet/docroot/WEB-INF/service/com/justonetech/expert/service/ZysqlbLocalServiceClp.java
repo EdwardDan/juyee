@@ -116,16 +116,11 @@ public class ZysqlbLocalServiceClp implements ZysqlbLocalService {
 
 		_methodName19 = "getZysqlbs";
 
-		_methodParameterTypes19 = new String[] {
-				"java.lang.String", "java.lang.String", "java.lang.String",
-				"int", "int"
-			};
+		_methodParameterTypes19 = new String[] { "java.lang.String", "int", "int" };
 
 		_methodName20 = "createDynamicQuery";
 
-		_methodParameterTypes20 = new String[] {
-				"java.lang.String", "java.lang.String", "java.lang.String"
-			};
+		_methodParameterTypes20 = new String[] { "java.lang.String" };
 	}
 
 	@Override
@@ -676,19 +671,14 @@ public class ZysqlbLocalServiceClp implements ZysqlbLocalService {
 
 	@Override
 	public java.util.List<com.justonetech.expert.model.Zysqlb> getZysqlbs(
-		java.lang.String xm, java.lang.String zc, java.lang.String cszy,
-		int start, int end) {
+		java.lang.String keyWord, int start, int end) {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName19,
 					_methodParameterTypes19,
 					new Object[] {
-						ClpSerializer.translateInput(xm),
-						
-					ClpSerializer.translateInput(zc),
-						
-					ClpSerializer.translateInput(cszy),
+						ClpSerializer.translateInput(keyWord),
 						
 					start,
 						
@@ -712,19 +702,13 @@ public class ZysqlbLocalServiceClp implements ZysqlbLocalService {
 
 	@Override
 	public com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQuery(
-		java.lang.String xm, java.lang.String zc, java.lang.String cszy) {
+		java.lang.String keyWord) {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName20,
 					_methodParameterTypes20,
-					new Object[] {
-						ClpSerializer.translateInput(xm),
-						
-					ClpSerializer.translateInput(zc),
-						
-					ClpSerializer.translateInput(cszy)
-					});
+					new Object[] { ClpSerializer.translateInput(keyWord) });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);

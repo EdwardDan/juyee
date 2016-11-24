@@ -66,7 +66,7 @@ public class ZzjlWrapper implements Zzjl, ModelWrapper<Zzjl> {
 			setZzjlId(zzjlId);
 		}
 
-		String expertId = (String)attributes.get("expertId");
+		Long expertId = (Long)attributes.get("expertId");
 
 		if (expertId != null) {
 			setExpertId(expertId);
@@ -143,7 +143,7 @@ public class ZzjlWrapper implements Zzjl, ModelWrapper<Zzjl> {
 	* @return the expert ID of this zzjl
 	*/
 	@Override
-	public java.lang.String getExpertId() {
+	public long getExpertId() {
 		return _zzjl.getExpertId();
 	}
 
@@ -153,7 +153,7 @@ public class ZzjlWrapper implements Zzjl, ModelWrapper<Zzjl> {
 	* @param expertId the expert ID of this zzjl
 	*/
 	@Override
-	public void setExpertId(java.lang.String expertId) {
+	public void setExpertId(long expertId) {
 		_zzjl.setExpertId(expertId);
 	}
 

@@ -90,7 +90,7 @@ public class XlxxClp extends BaseModelImpl<Xlxx> implements Xlxx {
 			setXlxxId(xlxxId);
 		}
 
-		String expertId = (String)attributes.get("expertId");
+		Long expertId = (Long)attributes.get("expertId");
 
 		if (expertId != null) {
 			setExpertId(expertId);
@@ -145,19 +145,19 @@ public class XlxxClp extends BaseModelImpl<Xlxx> implements Xlxx {
 	}
 
 	@Override
-	public String getExpertId() {
+	public long getExpertId() {
 		return _expertId;
 	}
 
 	@Override
-	public void setExpertId(String expertId) {
+	public void setExpertId(long expertId) {
 		_expertId = expertId;
 
 		if (_xlxxRemoteModel != null) {
 			try {
 				Class<?> clazz = _xlxxRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setExpertId", String.class);
+				Method method = clazz.getMethod("setExpertId", long.class);
 
 				method.invoke(_xlxxRemoteModel, expertId);
 			}
@@ -452,7 +452,7 @@ public class XlxxClp extends BaseModelImpl<Xlxx> implements Xlxx {
 	}
 
 	private long _xlxxId;
-	private String _expertId;
+	private long _expertId;
 	private String _byyx;
 	private String _sxzy;
 	private String _xlhxw;

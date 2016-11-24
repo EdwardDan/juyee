@@ -91,7 +91,7 @@ public class ZqtzjkrzqkClp extends BaseModelImpl<Zqtzjkrzqk>
 			setZqtzjkrzqkId(zqtzjkrzqkId);
 		}
 
-		String expertId = (String)attributes.get("expertId");
+		Long expertId = (Long)attributes.get("expertId");
 
 		if (expertId != null) {
 			setExpertId(expertId);
@@ -140,19 +140,19 @@ public class ZqtzjkrzqkClp extends BaseModelImpl<Zqtzjkrzqk>
 	}
 
 	@Override
-	public String getExpertId() {
+	public long getExpertId() {
 		return _expertId;
 	}
 
 	@Override
-	public void setExpertId(String expertId) {
+	public void setExpertId(long expertId) {
 		_expertId = expertId;
 
 		if (_zqtzjkrzqkRemoteModel != null) {
 			try {
 				Class<?> clazz = _zqtzjkrzqkRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setExpertId", String.class);
+				Method method = clazz.getMethod("setExpertId", long.class);
 
 				method.invoke(_zqtzjkrzqkRemoteModel, expertId);
 			}
@@ -417,7 +417,7 @@ public class ZqtzjkrzqkClp extends BaseModelImpl<Zqtzjkrzqk>
 	}
 
 	private long _zqtzjkrzqkId;
-	private String _expertId;
+	private long _expertId;
 	private String _zjkxtlsdw;
 	private String _sqzy;
 	private Date _pzrq;

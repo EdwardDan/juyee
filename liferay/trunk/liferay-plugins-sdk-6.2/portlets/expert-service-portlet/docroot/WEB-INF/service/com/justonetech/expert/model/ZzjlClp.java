@@ -90,7 +90,7 @@ public class ZzjlClp extends BaseModelImpl<Zzjl> implements Zzjl {
 			setZzjlId(zzjlId);
 		}
 
-		String expertId = (String)attributes.get("expertId");
+		Long expertId = (Long)attributes.get("expertId");
 
 		if (expertId != null) {
 			setExpertId(expertId);
@@ -145,19 +145,19 @@ public class ZzjlClp extends BaseModelImpl<Zzjl> implements Zzjl {
 	}
 
 	@Override
-	public String getExpertId() {
+	public long getExpertId() {
 		return _expertId;
 	}
 
 	@Override
-	public void setExpertId(String expertId) {
+	public void setExpertId(long expertId) {
 		_expertId = expertId;
 
 		if (_zzjlRemoteModel != null) {
 			try {
 				Class<?> clazz = _zzjlRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setExpertId", String.class);
+				Method method = clazz.getMethod("setExpertId", long.class);
 
 				method.invoke(_zzjlRemoteModel, expertId);
 			}
@@ -452,7 +452,7 @@ public class ZzjlClp extends BaseModelImpl<Zzjl> implements Zzjl {
 	}
 
 	private long _zzjlId;
-	private String _expertId;
+	private long _expertId;
 	private String _zzdw;
 	private String _qzny;
 	private String _cszyzygz;

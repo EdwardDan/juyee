@@ -66,7 +66,7 @@ public class XlxxWrapper implements Xlxx, ModelWrapper<Xlxx> {
 			setXlxxId(xlxxId);
 		}
 
-		String expertId = (String)attributes.get("expertId");
+		Long expertId = (Long)attributes.get("expertId");
 
 		if (expertId != null) {
 			setExpertId(expertId);
@@ -143,7 +143,7 @@ public class XlxxWrapper implements Xlxx, ModelWrapper<Xlxx> {
 	* @return the expert ID of this xlxx
 	*/
 	@Override
-	public java.lang.String getExpertId() {
+	public long getExpertId() {
 		return _xlxx.getExpertId();
 	}
 
@@ -153,7 +153,7 @@ public class XlxxWrapper implements Xlxx, ModelWrapper<Xlxx> {
 	* @param expertId the expert ID of this xlxx
 	*/
 	@Override
-	public void setExpertId(java.lang.String expertId) {
+	public void setExpertId(long expertId) {
 		_xlxx.setExpertId(expertId);
 	}
 

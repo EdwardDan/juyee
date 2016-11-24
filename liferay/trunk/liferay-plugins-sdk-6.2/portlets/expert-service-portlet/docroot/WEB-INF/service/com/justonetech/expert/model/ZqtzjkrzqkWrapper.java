@@ -66,7 +66,7 @@ public class ZqtzjkrzqkWrapper implements Zqtzjkrzqk, ModelWrapper<Zqtzjkrzqk> {
 			setZqtzjkrzqkId(zqtzjkrzqkId);
 		}
 
-		String expertId = (String)attributes.get("expertId");
+		Long expertId = (Long)attributes.get("expertId");
 
 		if (expertId != null) {
 			setExpertId(expertId);
@@ -137,7 +137,7 @@ public class ZqtzjkrzqkWrapper implements Zqtzjkrzqk, ModelWrapper<Zqtzjkrzqk> {
 	* @return the expert ID of this zqtzjkrzqk
 	*/
 	@Override
-	public java.lang.String getExpertId() {
+	public long getExpertId() {
 		return _zqtzjkrzqk.getExpertId();
 	}
 
@@ -147,7 +147,7 @@ public class ZqtzjkrzqkWrapper implements Zqtzjkrzqk, ModelWrapper<Zqtzjkrzqk> {
 	* @param expertId the expert ID of this zqtzjkrzqk
 	*/
 	@Override
-	public void setExpertId(java.lang.String expertId) {
+	public void setExpertId(long expertId) {
 		_zqtzjkrzqk.setExpertId(expertId);
 	}
 

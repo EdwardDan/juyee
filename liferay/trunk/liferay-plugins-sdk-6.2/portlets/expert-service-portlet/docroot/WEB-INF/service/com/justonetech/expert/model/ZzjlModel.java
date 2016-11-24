@@ -76,15 +76,14 @@ public interface ZzjlModel extends BaseModel<Zzjl> {
 	 *
 	 * @return the expert ID of this zzjl
 	 */
-	@AutoEscape
-	public String getExpertId();
+	public long getExpertId();
 
 	/**
 	 * Sets the expert ID of this zzjl.
 	 *
 	 * @param expertId the expert ID of this zzjl
 	 */
-	public void setExpertId(String expertId);
+	public void setExpertId(long expertId);
 
 	/**
 	 * Returns the zzdw of this zzjl.

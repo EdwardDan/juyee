@@ -40,7 +40,7 @@ create table expert_Jbxx (
 
 create table expert_Xlxx (
 	xlxxId LONG not null primary key,
-	expertId VARCHAR(75) null,
+	expertId LONG,
 	byyx VARCHAR(75) null,
 	sxzy VARCHAR(75) null,
 	xlhxw VARCHAR(75) null,
@@ -49,7 +49,7 @@ create table expert_Xlxx (
 
 create table expert_Zqtzjkrzqk (
 	zqtzjkrzqkId LONG not null primary key,
-	expertId VARCHAR(75) null,
+	expertId LONG,
 	zjkxtlsdw VARCHAR(75) null,
 	sqzy VARCHAR(75) null,
 	pzrq DATE null
@@ -57,7 +57,7 @@ create table expert_Zqtzjkrzqk (
 
 create table expert_Zysqlb (
 	zysqlbId LONG not null primary key,
-	expertId VARCHAR(75) null,
+	expertId LONG,
 	sx VARCHAR(75) null,
 	zy VARCHAR(75) null,
 	zt INTEGER,
@@ -68,7 +68,7 @@ create table expert_Zysqlb (
 
 create table expert_Zzjl (
 	zzjlId LONG not null primary key,
-	expertId VARCHAR(75) null,
+	expertId LONG,
 	zzdw VARCHAR(75) null,
 	qzny VARCHAR(75) null,
 	cszyzygz VARCHAR(75) null,

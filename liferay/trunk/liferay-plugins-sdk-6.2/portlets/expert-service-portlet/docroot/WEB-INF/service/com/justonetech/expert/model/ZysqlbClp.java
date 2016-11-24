@@ -93,7 +93,7 @@ public class ZysqlbClp extends BaseModelImpl<Zysqlb> implements Zysqlb {
 			setZysqlbId(zysqlbId);
 		}
 
-		String expertId = (String)attributes.get("expertId");
+		Long expertId = (Long)attributes.get("expertId");
 
 		if (expertId != null) {
 			setExpertId(expertId);
@@ -160,19 +160,19 @@ public class ZysqlbClp extends BaseModelImpl<Zysqlb> implements Zysqlb {
 	}
 
 	@Override
-	public String getExpertId() {
+	public long getExpertId() {
 		return _expertId;
 	}
 
 	@Override
-	public void setExpertId(String expertId) {
+	public void setExpertId(long expertId) {
 		_expertId = expertId;
 
 		if (_zysqlbRemoteModel != null) {
 			try {
 				Class<?> clazz = _zysqlbRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setExpertId", String.class);
+				Method method = clazz.getMethod("setExpertId", long.class);
 
 				method.invoke(_zysqlbRemoteModel, expertId);
 			}
@@ -527,7 +527,7 @@ public class ZysqlbClp extends BaseModelImpl<Zysqlb> implements Zysqlb {
 	}
 
 	private long _zysqlbId;
-	private String _expertId;
+	private long _expertId;
 	private String _sx;
 	private String _zy;
 	private int _zt;

@@ -34,7 +34,7 @@
 		<id name="xlxxId" type="long">
 			<generator class="assigned" />
 		</id>
-		<property name="expertId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="expertId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="byyx" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="sxzy" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="xlhxw" type="com.liferay.portal.dao.orm.hibernate.StringType" />
@@ -45,7 +45,7 @@
 		<id name="zqtzjkrzqkId" type="long">
 			<generator class="assigned" />
 		</id>
-		<property name="expertId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="expertId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="zjkxtlsdw" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="sqzy" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="pzrq" type="org.hibernate.type.TimestampType" />
@@ -55,7 +55,7 @@
 		<id name="zysqlbId" type="long">
 			<generator class="assigned" />
 		</id>
-		<property name="expertId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="expertId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="sx" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="zy" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="zt" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
@@ -68,7 +68,7 @@
 		<id name="zzjlId" type="long">
 			<generator class="assigned" />
 		</id>
-		<property name="expertId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="expertId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="zzdw" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="qzny" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="cszyzygz" type="com.liferay.portal.dao.orm.hibernate.StringType" />

@@ -42,7 +42,7 @@
 		<column name="xlxxId" type="long" primary="true" />
 
 		<!-- Business fields -->
-		<column name="expertId" type="String" /><!-- 专家id -->
+		<column name="expertId" type="long" /><!-- 专家id -->
 		<column name="byyx" type="String" /><!-- 毕业院校 -->
 		<column name="sxzy" type="String" /><!-- 所学专业 -->
 		<column name="xlhxw" type="String" /><!-- 学历和学位 -->
@@ -62,7 +62,7 @@
 		<column name="zzjlId" type="long" primary="true" />
 
 		<!-- Business fields -->
-		<column name="expertId" type="String" /><!-- 专家id -->
+		<column name="expertId" type="long" /><!-- 专家id -->
 		<column name="zzdw" type="String" /><!-- 工作单位 -->
 		<column name="qzny" type="String" /><!-- 起止年月 -->
 		<column name="cszyzygz" type="String" /><!-- 从事主要专业工作 -->
@@ -82,7 +82,7 @@
 		<column name="zqtzjkrzqkId" type="long" primary="true" />
 
 		<!-- Business fields -->
-		<column name="expertId" type="String" /><!-- 专家id -->
+		<column name="expertId" type="long" /><!-- 专家id -->
 		<column name="zjkxtlsdw" type="String" /><!-- 专家库系统隶属单位 -->
 		<column name="sqzy" type="String" /><!-- 申请专业 -->
 		<column name="pzrq" type="Date" /><!-- 批准日期 -->
@@ -101,7 +101,7 @@
 		<column name="zysqlbId" type="long" primary="true" />
 
 		<!-- Business fields -->
-		<column name="expertId" type="String" /><!-- 专家id -->
+		<column name="expertId" type="long" /><!-- 专家id -->
 		<column name="sx" type="String" /><!-- 一级（事项） -->
 		<column name="zy" type="String" /><!-- 二级（专业） -->
 		<column name="zt" type="int" /><!-- 状态 -->

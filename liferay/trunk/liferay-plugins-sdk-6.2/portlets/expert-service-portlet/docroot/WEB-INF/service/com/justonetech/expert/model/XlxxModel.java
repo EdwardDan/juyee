@@ -76,15 +76,14 @@ public interface XlxxModel extends BaseModel<Xlxx> {
 	 *
 	 * @return the expert ID of this xlxx
 	 */
-	@AutoEscape
-	public String getExpertId();
+	public long getExpertId();
 
 	/**
 	 * Sets the expert ID of this xlxx.
 	 *
 	 * @param expertId the expert ID of this xlxx
 	 */
-	public void setExpertId(String expertId);
+	public void setExpertId(long expertId);
 
 	/**
 	 * Returns the byyx of this xlxx.

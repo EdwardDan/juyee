@@ -69,7 +69,7 @@ public class ZysqlbWrapper implements Zysqlb, ModelWrapper<Zysqlb> {
 			setZysqlbId(zysqlbId);
 		}
 
-		String expertId = (String)attributes.get("expertId");
+		Long expertId = (Long)attributes.get("expertId");
 
 		if (expertId != null) {
 			setExpertId(expertId);
@@ -158,7 +158,7 @@ public class ZysqlbWrapper implements Zysqlb, ModelWrapper<Zysqlb> {
 	* @return the expert ID of this zysqlb
 	*/
 	@Override
-	public java.lang.String getExpertId() {
+	public long getExpertId() {
 		return _zysqlb.getExpertId();
 	}
 
@@ -168,7 +168,7 @@ public class ZysqlbWrapper implements Zysqlb, ModelWrapper<Zysqlb> {
 	* @param expertId the expert ID of this zysqlb
 	*/
 	@Override
-	public void setExpertId(java.lang.String expertId) {
+	public void setExpertId(long expertId) {
 		_zysqlb.setExpertId(expertId);
 	}
 

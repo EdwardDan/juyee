@@ -58,13 +58,13 @@ public class ZzjlModelImpl extends BaseModelImpl<Zzjl> implements ZzjlModel {
 	public static final String TABLE_NAME = "expert_Zzjl";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "zzjlId", Types.BIGINT },
-			{ "expertId", Types.VARCHAR },
+			{ "expertId", Types.BIGINT },
 			{ "zzdw", Types.VARCHAR },
 			{ "qzny", Types.VARCHAR },
 			{ "cszyzygz", Types.VARCHAR },
 			{ "zw", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table expert_Zzjl (zzjlId LONG not null primary key,expertId VARCHAR(75) null,zzdw VARCHAR(75) null,qzny VARCHAR(75) null,cszyzygz VARCHAR(75) null,zw VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table expert_Zzjl (zzjlId LONG not null primary key,expertId LONG,zzdw VARCHAR(75) null,qzny VARCHAR(75) null,cszyzygz VARCHAR(75) null,zw VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table expert_Zzjl";
 	public static final String ORDER_BY_JPQL = " ORDER BY zzjl.zzjlId DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY expert_Zzjl.zzjlId DESC";
@@ -136,7 +136,7 @@ public class ZzjlModelImpl extends BaseModelImpl<Zzjl> implements ZzjlModel {
 			setZzjlId(zzjlId);
 		}
 
-		String expertId = (String)attributes.get("expertId");
+		Long expertId = (Long)attributes.get("expertId");
 
 		if (expertId != null) {
 			setExpertId(expertId);
@@ -178,17 +178,12 @@ public class ZzjlModelImpl extends BaseModelImpl<Zzjl> implements ZzjlModel {
 	}
 
 	@Override
-	public String getExpertId() {
-		if (_expertId == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _expertId;
-		}
+	public long getExpertId() {
+		return _expertId;
 	}
 
 	@Override
-	public void setExpertId(String expertId) {
+	public void setExpertId(long expertId) {
 		_expertId = expertId;
 	}
 
@@ -353,12 +348,6 @@ public class ZzjlModelImpl extends BaseModelImpl<Zzjl> implements ZzjlModel {
 
 		zzjlCacheModel.expertId = getExpertId();
 
-		String expertId = zzjlCacheModel.expertId;
-
-		if ((expertId != null) && (expertId.length() == 0)) {
-			zzjlCacheModel.expertId = null;
-		}
-
 		zzjlCacheModel.zzdw = getZzdw();
 
 		String zzdw = zzjlCacheModel.zzdw;
@@ -456,7 +445,7 @@ public class ZzjlModelImpl extends BaseModelImpl<Zzjl> implements ZzjlModel {
 	private static ClassLoader _classLoader = Zzjl.class.getClassLoader();
 	private static Class<?>[] _escapedModelInterfaces = new Class[] { Zzjl.class };
 	private long _zzjlId;
-	private String _expertId;
+	private long _expertId;
 	private String _zzdw;
 	private String _qzny;
 	private String _cszyzygz;

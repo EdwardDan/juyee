@@ -95,11 +95,11 @@ public class ZzjlSoap implements Serializable {
 		_zzjlId = zzjlId;
 	}
 
-	public String getExpertId() {
+	public long getExpertId() {
 		return _expertId;
 	}
 
-	public void setExpertId(String expertId) {
+	public void setExpertId(long expertId) {
 		_expertId = expertId;
 	}
 
@@ -136,7 +136,7 @@ public class ZzjlSoap implements Serializable {
 	}
 
 	private long _zzjlId;
-	private String _expertId;
+	private long _expertId;
 	private String _zzdw;
 	private String _qzny;
 	private String _cszyzygz;

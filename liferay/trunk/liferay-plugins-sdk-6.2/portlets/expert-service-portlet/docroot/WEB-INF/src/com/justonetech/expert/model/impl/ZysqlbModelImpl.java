@@ -60,7 +60,7 @@ public class ZysqlbModelImpl extends BaseModelImpl<Zysqlb>
 	public static final String TABLE_NAME = "expert_Zysqlb";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "zysqlbId", Types.BIGINT },
-			{ "expertId", Types.VARCHAR },
+			{ "expertId", Types.BIGINT },
 			{ "sx", Types.VARCHAR },
 			{ "zy", Types.VARCHAR },
 			{ "zt", Types.INTEGER },
@@ -68,7 +68,7 @@ public class ZysqlbModelImpl extends BaseModelImpl<Zysqlb>
 			{ "shr", Types.VARCHAR },
 			{ "shrq", Types.TIMESTAMP }
 		};
-	public static final String TABLE_SQL_CREATE = "create table expert_Zysqlb (zysqlbId LONG not null primary key,expertId VARCHAR(75) null,sx VARCHAR(75) null,zy VARCHAR(75) null,zt INTEGER,shyj VARCHAR(75) null,shr VARCHAR(75) null,shrq DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table expert_Zysqlb (zysqlbId LONG not null primary key,expertId LONG,sx VARCHAR(75) null,zy VARCHAR(75) null,zt INTEGER,shyj VARCHAR(75) null,shr VARCHAR(75) null,shrq DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table expert_Zysqlb";
 	public static final String ORDER_BY_JPQL = " ORDER BY zysqlb.zysqlbId DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY expert_Zysqlb.zysqlbId DESC";
@@ -142,7 +142,7 @@ public class ZysqlbModelImpl extends BaseModelImpl<Zysqlb>
 			setZysqlbId(zysqlbId);
 		}
 
-		String expertId = (String)attributes.get("expertId");
+		Long expertId = (Long)attributes.get("expertId");
 
 		if (expertId != null) {
 			setExpertId(expertId);
@@ -196,17 +196,12 @@ public class ZysqlbModelImpl extends BaseModelImpl<Zysqlb>
 	}
 
 	@Override
-	public String getExpertId() {
-		if (_expertId == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _expertId;
-		}
+	public long getExpertId() {
+		return _expertId;
 	}
 
 	@Override
-	public void setExpertId(String expertId) {
+	public void setExpertId(long expertId) {
 		_expertId = expertId;
 	}
 
@@ -393,12 +388,6 @@ public class ZysqlbModelImpl extends BaseModelImpl<Zysqlb>
 
 		zysqlbCacheModel.expertId = getExpertId();
 
-		String expertId = zysqlbCacheModel.expertId;
-
-		if ((expertId != null) && (expertId.length() == 0)) {
-			zysqlbCacheModel.expertId = null;
-		}
-
 		zysqlbCacheModel.sx = getSx();
 
 		String sx = zysqlbCacheModel.sx;
@@ -519,7 +508,7 @@ public class ZysqlbModelImpl extends BaseModelImpl<Zysqlb>
 	private static ClassLoader _classLoader = Zysqlb.class.getClassLoader();
 	private static Class<?>[] _escapedModelInterfaces = new Class[] { Zysqlb.class };
 	private long _zysqlbId;
-	private String _expertId;
+	private long _expertId;
 	private String _sx;
 	private String _zy;
 	private int _zt;

@@ -59,13 +59,7 @@ public class XlxxCacheModel implements CacheModel<Xlxx>, Externalizable {
 		XlxxImpl xlxxImpl = new XlxxImpl();
 
 		xlxxImpl.setXlxxId(xlxxId);
-
-		if (expertId == null) {
-			xlxxImpl.setExpertId(StringPool.BLANK);
-		}
-		else {
-			xlxxImpl.setExpertId(expertId);
-		}
+		xlxxImpl.setExpertId(expertId);
 
 		if (byyx == null) {
 			xlxxImpl.setByyx(StringPool.BLANK);
@@ -103,7 +97,7 @@ public class XlxxCacheModel implements CacheModel<Xlxx>, Externalizable {
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		xlxxId = objectInput.readLong();
-		expertId = objectInput.readUTF();
+		expertId = objectInput.readLong();
 		byyx = objectInput.readUTF();
 		sxzy = objectInput.readUTF();
 		xlhxw = objectInput.readUTF();
@@ -114,13 +108,7 @@ public class XlxxCacheModel implements CacheModel<Xlxx>, Externalizable {
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(xlxxId);
-
-		if (expertId == null) {
-			objectOutput.writeUTF(StringPool.BLANK);
-		}
-		else {
-			objectOutput.writeUTF(expertId);
-		}
+		objectOutput.writeLong(expertId);
 
 		if (byyx == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
@@ -152,7 +140,7 @@ public class XlxxCacheModel implements CacheModel<Xlxx>, Externalizable {
 	}
 
 	public long xlxxId;
-	public String expertId;
+	public long expertId;
 	public String byyx;
 	public String sxzy;
 	public String xlhxw;

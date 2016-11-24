@@ -95,11 +95,11 @@ public class XlxxSoap implements Serializable {
 		_xlxxId = xlxxId;
 	}
 
-	public String getExpertId() {
+	public long getExpertId() {
 		return _expertId;
 	}
 
-	public void setExpertId(String expertId) {
+	public void setExpertId(long expertId) {
 		_expertId = expertId;
 	}
 
@@ -136,7 +136,7 @@ public class XlxxSoap implements Serializable {
 	}
 
 	private long _xlxxId;
-	private String _expertId;
+	private long _expertId;
 	private String _byyx;
 	private String _sxzy;
 	private String _xlhxw;

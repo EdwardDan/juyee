@@ -58,13 +58,13 @@ public class XlxxModelImpl extends BaseModelImpl<Xlxx> implements XlxxModel {
 	public static final String TABLE_NAME = "expert_Xlxx";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "xlxxId", Types.BIGINT },
-			{ "expertId", Types.VARCHAR },
+			{ "expertId", Types.BIGINT },
 			{ "byyx", Types.VARCHAR },
 			{ "sxzy", Types.VARCHAR },
 			{ "xlhxw", Types.VARCHAR },
 			{ "zxsj", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table expert_Xlxx (xlxxId LONG not null primary key,expertId VARCHAR(75) null,byyx VARCHAR(75) null,sxzy VARCHAR(75) null,xlhxw VARCHAR(75) null,zxsj VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table expert_Xlxx (xlxxId LONG not null primary key,expertId LONG,byyx VARCHAR(75) null,sxzy VARCHAR(75) null,xlhxw VARCHAR(75) null,zxsj VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table expert_Xlxx";
 	public static final String ORDER_BY_JPQL = " ORDER BY xlxx.xlxxId DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY expert_Xlxx.xlxxId DESC";
@@ -136,7 +136,7 @@ public class XlxxModelImpl extends BaseModelImpl<Xlxx> implements XlxxModel {
 			setXlxxId(xlxxId);
 		}
 
-		String expertId = (String)attributes.get("expertId");
+		Long expertId = (Long)attributes.get("expertId");
 
 		if (expertId != null) {
 			setExpertId(expertId);
@@ -178,17 +178,12 @@ public class XlxxModelImpl extends BaseModelImpl<Xlxx> implements XlxxModel {
 	}
 
 	@Override
-	public String getExpertId() {
-		if (_expertId == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _expertId;
-		}
+	public long getExpertId() {
+		return _expertId;
 	}
 
 	@Override
-	public void setExpertId(String expertId) {
+	public void setExpertId(long expertId) {
 		_expertId = expertId;
 	}
 
@@ -353,12 +348,6 @@ public class XlxxModelImpl extends BaseModelImpl<Xlxx> implements XlxxModel {
 
 		xlxxCacheModel.expertId = getExpertId();
 
-		String expertId = xlxxCacheModel.expertId;
-
-		if ((expertId != null) && (expertId.length() == 0)) {
-			xlxxCacheModel.expertId = null;
-		}
-
 		xlxxCacheModel.byyx = getByyx();
 
 		String byyx = xlxxCacheModel.byyx;
@@ -456,7 +445,7 @@ public class XlxxModelImpl extends BaseModelImpl<Xlxx> implements XlxxModel {
 	private static ClassLoader _classLoader = Xlxx.class.getClassLoader();
 	private static Class<?>[] _escapedModelInterfaces = new Class[] { Xlxx.class };
 	private long _xlxxId;
-	private String _expertId;
+	private long _expertId;
 	private String _byyx;
 	private String _sxzy;
 	private String _xlhxw;
