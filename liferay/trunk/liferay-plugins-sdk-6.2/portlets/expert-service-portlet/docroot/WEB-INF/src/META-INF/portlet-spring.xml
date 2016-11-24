@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<bean id="com.justonetech.expert.service.JbxxLocalService" class="com.justonetech.expert.service.impl.JbxxLocalServiceImpl" />
+	<bean id="com.justonetech.expert.service.persistence.JbxxPersistence" class="com.justonetech.expert.service.persistence.JbxxPersistenceImpl" parent="basePersistence" />
+	<bean id="com.justonetech.expert.service.XlxxLocalService" class="com.justonetech.expert.service.impl.XlxxLocalServiceImpl" />
+	<bean id="com.justonetech.expert.service.persistence.XlxxPersistence" class="com.justonetech.expert.service.persistence.XlxxPersistenceImpl" parent="basePersistence" />
+	<bean id="com.justonetech.expert.service.ZqtzjkrzqkLocalService" class="com.justonetech.expert.service.impl.ZqtzjkrzqkLocalServiceImpl" />
+	<bean id="com.justonetech.expert.service.persistence.ZqtzjkrzqkPersistence" class="com.justonetech.expert.service.persistence.ZqtzjkrzqkPersistenceImpl" parent="basePersistence" />
+	<bean id="com.justonetech.expert.service.ZysqlbLocalService" class="com.justonetech.expert.service.impl.ZysqlbLocalServiceImpl" />
+	<bean id="com.justonetech.expert.service.persistence.ZysqlbPersistence" class="com.justonetech.expert.service.persistence.ZysqlbPersistenceImpl" parent="basePersistence" />
+	<bean id="com.justonetech.expert.service.ZzjlLocalService" class="com.justonetech.expert.service.impl.ZzjlLocalServiceImpl" />
+	<bean id="com.justonetech.expert.service.persistence.ZzjlPersistence" class="com.justonetech.expert.service.persistence.ZzjlPersistenceImpl" parent="basePersistence" />
+</beans>

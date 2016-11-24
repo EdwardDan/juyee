@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd">
+	<persistence-unit-metadata>
+		<xml-mapping-metadata-complete/>
+		<persistence-unit-defaults>
+			<access>PROPERTY</access>
+		</persistence-unit-defaults>
+	</persistence-unit-metadata>
+	<mapped-superclass class="com.justonetech.expert.model.impl.JbxxModelImpl">
+		<attributes>
+			<id name="jbxxId" />
+			<basic name="xm" />
+			<basic name="xb" />
+			<basic name="sfzh" />
+			<basic name="csny">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="gzdw" />
+			<basic name="dzyx" />
+			<basic name="txdz" />
+			<basic name="yzbm" />
+			<basic name="xrzw" />
+			<basic name="zc" />
+			<basic name="zyzg" />
+			<basic name="cszy" />
+			<basic name="zygznx" />
+			<basic name="sjhm" />
+			<basic name="lxdh" />
+			<basic name="cz" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.justonetech.expert.model.impl.XlxxModelImpl">
+		<attributes>
+			<id name="xlxxId" />
+			<basic name="byyx" />
+			<basic name="sxzy" />
+			<basic name="xlhxw" />
+			<basic name="zxsj" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.justonetech.expert.model.impl.ZqtzjkrzqkModelImpl">
+		<attributes>
+			<id name="zqtzjkrzqkId" />
+			<basic name="zjkxtlsdw" />
+			<basic name="sqzy" />
+			<basic name="pzrq">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.justonetech.expert.model.impl.ZysqlbModelImpl">
+		<attributes>
+			<id name="zysqlbId" />
+			<basic name="sx" />
+			<basic name="zy" />
+			<basic name="zt" />
+			<basic name="shyj" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.justonetech.expert.model.impl.ZzjlModelImpl">
+		<attributes>
+			<id name="zzjlId" />
+			<basic name="zzdw" />
+			<basic name="qzny" />
+			<basic name="cszyzygz" />
+			<basic name="zw" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<entity class="com.justonetech.expert.model.impl.JbxxImpl" name="Jbxx">
+		<table name="expert_Jbxx" />
+		<attributes />
+	</entity>
+	<entity class="com.justonetech.expert.model.impl.XlxxImpl" name="Xlxx">
+		<table name="expert_Xlxx" />
+		<attributes />
+	</entity>
+	<entity class="com.justonetech.expert.model.impl.ZqtzjkrzqkImpl" name="Zqtzjkrzqk">
+		<table name="expert_Zqtzjkrzqk" />
+		<attributes />
+	</entity>
+	<entity class="com.justonetech.expert.model.impl.ZysqlbImpl" name="Zysqlb">
+		<table name="expert_Zysqlb" />
+		<attributes />
+	</entity>
+	<entity class="com.justonetech.expert.model.impl.ZzjlImpl" name="Zzjl">
+		<table name="expert_Zzjl" />
+		<attributes />
+	</entity>
+</entity-mappings>

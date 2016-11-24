@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.justonetech.expert.model.Jbxx">
+		<field name="jbxxId" type="long" />
+		<field name="xm" type="String" />
+		<field name="xb" type="String" />
+		<field name="sfzh" type="String" />
+		<field name="csny" type="Date" />
+		<field name="gzdw" type="String" />
+		<field name="dzyx" type="String" />
+		<field name="txdz" type="String" />
+		<field name="yzbm" type="String" />
+		<field name="xrzw" type="String" />
+		<field name="zc" type="String" />
+		<field name="zyzg" type="String" />
+		<field name="cszy" type="String" />
+		<field name="zygznx" type="String" />
+		<field name="sjhm" type="String" />
+		<field name="lxdh" type="String" />
+		<field name="cz" type="String" />
+	</model>
+	<model name="com.justonetech.expert.model.Xlxx">
+		<field name="xlxxId" type="long" />
+		<field name="byyx" type="String" />
+		<field name="sxzy" type="String" />
+		<field name="xlhxw" type="String" />
+		<field name="zxsj" type="String" />
+	</model>
+	<model name="com.justonetech.expert.model.Zqtzjkrzqk">
+		<field name="zqtzjkrzqkId" type="long" />
+		<field name="zjkxtlsdw" type="String" />
+		<field name="sqzy" type="String" />
+		<field name="pzrq" type="Date" />
+	</model>
+	<model name="com.justonetech.expert.model.Zysqlb">
+		<field name="zysqlbId" type="long" />
+		<field name="sx" type="String" />
+		<field name="zy" type="String" />
+		<field name="zt" type="String" />
+		<field name="shyj" type="String" />
+	</model>
+	<model name="com.justonetech.expert.model.Zzjl">
+		<field name="zzjlId" type="long" />
+		<field name="zzdw" type="String" />
+		<field name="qzny" type="String" />
+		<field name="cszyzygz" type="String" />
+		<field name="zw" type="String" />
+	</model>
+</model-hints>
