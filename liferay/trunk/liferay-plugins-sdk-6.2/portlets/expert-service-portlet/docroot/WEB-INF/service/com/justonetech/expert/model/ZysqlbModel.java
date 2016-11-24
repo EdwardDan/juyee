@@ -123,15 +123,14 @@ public interface ZysqlbModel extends BaseModel<Zysqlb> {
 	 *
 	 * @return the zt of this zysqlb
 	 */
-	@AutoEscape
-	public String getZt();
+	public int getZt();
 
 	/**
 	 * Sets the zt of this zysqlb.
 	 *
 	 * @param zt the zt of this zysqlb
 	 */
-	public void setZt(String zt);
+	public void setZt(int zt);
 
 	/**
 	 * Returns the shyj of this zysqlb.

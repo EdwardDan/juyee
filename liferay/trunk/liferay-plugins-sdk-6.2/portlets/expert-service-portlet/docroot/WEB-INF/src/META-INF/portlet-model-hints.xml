@@ -40,7 +40,7 @@
 		<field name="expertId" type="String" />
 		<field name="sx" type="String" />
 		<field name="zy" type="String" />
-		<field name="zt" type="String" />
+		<field name="zt" type="int" />
 		<field name="shyj" type="String" />
 		<field name="shr" type="String" />
 		<field name="shrq" type="Date" />

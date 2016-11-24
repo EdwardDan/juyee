@@ -87,7 +87,7 @@ public class ZysqlbWrapper implements Zysqlb, ModelWrapper<Zysqlb> {
 			setZy(zy);
 		}
 
-		String zt = (String)attributes.get("zt");
+		Integer zt = (Integer)attributes.get("zt");
 
 		if (zt != null) {
 			setZt(zt);
@@ -218,7 +218,7 @@ public class ZysqlbWrapper implements Zysqlb, ModelWrapper<Zysqlb> {
 	* @return the zt of this zysqlb
 	*/
 	@Override
-	public java.lang.String getZt() {
+	public int getZt() {
 		return _zysqlb.getZt();
 	}
 
@@ -228,7 +228,7 @@ public class ZysqlbWrapper implements Zysqlb, ModelWrapper<Zysqlb> {
 	* @param zt the zt of this zysqlb
 	*/
 	@Override
-	public void setZt(java.lang.String zt) {
+	public void setZt(int zt) {
 		_zysqlb.setZt(zt);
 	}
 

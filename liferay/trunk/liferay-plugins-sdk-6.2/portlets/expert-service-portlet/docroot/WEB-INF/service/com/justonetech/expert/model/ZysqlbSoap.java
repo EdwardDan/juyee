@@ -122,11 +122,11 @@ public class ZysqlbSoap implements Serializable {
 		_zy = zy;
 	}
 
-	public String getZt() {
+	public int getZt() {
 		return _zt;
 	}
 
-	public void setZt(String zt) {
+	public void setZt(int zt) {
 		_zt = zt;
 	}
 
@@ -158,7 +158,7 @@ public class ZysqlbSoap implements Serializable {
 	private String _expertId;
 	private String _sx;
 	private String _zy;
-	private String _zt;
+	private int _zt;
 	private String _shyj;
 	private String _shr;
 	private Date _shrq;

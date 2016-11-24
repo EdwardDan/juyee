@@ -111,7 +111,7 @@ public class ZysqlbClp extends BaseModelImpl<Zysqlb> implements Zysqlb {
 			setZy(zy);
 		}
 
-		String zt = (String)attributes.get("zt");
+		Integer zt = (Integer)attributes.get("zt");
 
 		if (zt != null) {
 			setZt(zt);
@@ -229,19 +229,19 @@ public class ZysqlbClp extends BaseModelImpl<Zysqlb> implements Zysqlb {
 	}
 
 	@Override
-	public String getZt() {
+	public int getZt() {
 		return _zt;
 	}
 
 	@Override
-	public void setZt(String zt) {
+	public void setZt(int zt) {
 		_zt = zt;
 
 		if (_zysqlbRemoteModel != null) {
 			try {
 				Class<?> clazz = _zysqlbRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setZt", String.class);
+				Method method = clazz.getMethod("setZt", int.class);
 
 				method.invoke(_zysqlbRemoteModel, zt);
 			}
@@ -530,7 +530,7 @@ public class ZysqlbClp extends BaseModelImpl<Zysqlb> implements Zysqlb {
 	private String _expertId;
 	private String _sx;
 	private String _zy;
-	private String _zt;
+	private int _zt;
 	private String _shyj;
 	private String _shr;
 	private Date _shrq;

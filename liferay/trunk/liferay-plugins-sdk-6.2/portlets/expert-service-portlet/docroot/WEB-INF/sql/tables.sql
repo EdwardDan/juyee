@@ -60,7 +60,7 @@ create table expert_Zysqlb (
 	expertId VARCHAR(75) null,
 	sx VARCHAR(75) null,
 	zy VARCHAR(75) null,
-	zt VARCHAR(75) null,
+	zt INTEGER,
 	shyj VARCHAR(75) null,
 	shr VARCHAR(75) null,
 	shrq DATE null

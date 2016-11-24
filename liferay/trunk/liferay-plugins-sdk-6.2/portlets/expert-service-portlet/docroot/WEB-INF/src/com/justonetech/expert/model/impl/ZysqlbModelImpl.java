@@ -63,12 +63,12 @@ public class ZysqlbModelImpl extends BaseModelImpl<Zysqlb>
 			{ "expertId", Types.VARCHAR },
 			{ "sx", Types.VARCHAR },
 			{ "zy", Types.VARCHAR },
-			{ "zt", Types.VARCHAR },
+			{ "zt", Types.INTEGER },
 			{ "shyj", Types.VARCHAR },
 			{ "shr", Types.VARCHAR },
 			{ "shrq", Types.TIMESTAMP }
 		};
-	public static final String TABLE_SQL_CREATE = "create table expert_Zysqlb (zysqlbId LONG not null primary key,expertId VARCHAR(75) null,sx VARCHAR(75) null,zy VARCHAR(75) null,zt VARCHAR(75) null,shyj VARCHAR(75) null,shr VARCHAR(75) null,shrq DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table expert_Zysqlb (zysqlbId LONG not null primary key,expertId VARCHAR(75) null,sx VARCHAR(75) null,zy VARCHAR(75) null,zt INTEGER,shyj VARCHAR(75) null,shr VARCHAR(75) null,shrq DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table expert_Zysqlb";
 	public static final String ORDER_BY_JPQL = " ORDER BY zysqlb.zysqlbId DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY expert_Zysqlb.zysqlbId DESC";
@@ -160,7 +160,7 @@ public class ZysqlbModelImpl extends BaseModelImpl<Zysqlb>
 			setZy(zy);
 		}
 
-		String zt = (String)attributes.get("zt");
+		Integer zt = (Integer)attributes.get("zt");
 
 		if (zt != null) {
 			setZt(zt);
@@ -241,17 +241,12 @@ public class ZysqlbModelImpl extends BaseModelImpl<Zysqlb>
 	}
 
 	@Override
-	public String getZt() {
-		if (_zt == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _zt;
-		}
+	public int getZt() {
+		return _zt;
 	}
 
 	@Override
-	public void setZt(String zt) {
+	public void setZt(int zt) {
 		_zt = zt;
 	}
 
@@ -422,12 +417,6 @@ public class ZysqlbModelImpl extends BaseModelImpl<Zysqlb>
 
 		zysqlbCacheModel.zt = getZt();
 
-		String zt = zysqlbCacheModel.zt;
-
-		if ((zt != null) && (zt.length() == 0)) {
-			zysqlbCacheModel.zt = null;
-		}
-
 		zysqlbCacheModel.shyj = getShyj();
 
 		String shyj = zysqlbCacheModel.shyj;
@@ -533,7 +522,7 @@ public class ZysqlbModelImpl extends BaseModelImpl<Zysqlb>
 	private String _expertId;
 	private String _sx;
 	private String _zy;
-	private String _zt;
+	private int _zt;
 	private String _shyj;
 	private String _shr;
 	private Date _shrq;

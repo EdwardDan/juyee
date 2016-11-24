@@ -58,7 +58,7 @@
 		<property name="expertId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="sx" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="zy" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="zt" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="zt" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="shyj" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="shr" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="shrq" type="org.hibernate.type.TimestampType" />

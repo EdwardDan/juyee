@@ -87,12 +87,7 @@ public class ZysqlbCacheModel implements CacheModel<Zysqlb>, Externalizable {
 			zysqlbImpl.setZy(zy);
 		}
 
-		if (zt == null) {
-			zysqlbImpl.setZt(StringPool.BLANK);
-		}
-		else {
-			zysqlbImpl.setZt(zt);
-		}
+		zysqlbImpl.setZt(zt);
 
 		if (shyj == null) {
 			zysqlbImpl.setShyj(StringPool.BLANK);
@@ -126,7 +121,7 @@ public class ZysqlbCacheModel implements CacheModel<Zysqlb>, Externalizable {
 		expertId = objectInput.readUTF();
 		sx = objectInput.readUTF();
 		zy = objectInput.readUTF();
-		zt = objectInput.readUTF();
+		zt = objectInput.readInt();
 		shyj = objectInput.readUTF();
 		shr = objectInput.readUTF();
 		shrq = objectInput.readLong();
@@ -158,12 +153,7 @@ public class ZysqlbCacheModel implements CacheModel<Zysqlb>, Externalizable {
 			objectOutput.writeUTF(zy);
 		}
 
-		if (zt == null) {
-			objectOutput.writeUTF(StringPool.BLANK);
-		}
-		else {
-			objectOutput.writeUTF(zt);
-		}
+		objectOutput.writeInt(zt);
 
 		if (shyj == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
@@ -186,7 +176,7 @@ public class ZysqlbCacheModel implements CacheModel<Zysqlb>, Externalizable {
 	public String expertId;
 	public String sx;
 	public String zy;
-	public String zt;
+	public int zt;
 	public String shyj;
 	public String shr;
 	public long shrq;
