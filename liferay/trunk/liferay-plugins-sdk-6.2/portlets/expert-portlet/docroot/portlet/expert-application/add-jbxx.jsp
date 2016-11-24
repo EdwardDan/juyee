@@ -45,9 +45,9 @@
 		</tr>
 		<tr>
 			<td class="text-right">出生年月</td>
-			<td class="bg-white" colspan="3"><aui:input name="cs" id="csn"
-					label="" cssClass="span3" readonly="true" value="${csn}"></aui:input>年<aui:input
-					name="csy" id="csy" label="" cssClass="span3" readonly="true" value="${csy}"></aui:input>月</td>
+			<td class="bg-white" colspan="3" style="white-space:nowrap;"><input name="cs" id="csn"
+					label="" readonly="true" value="${csn}"/>年<input
+					name="csy" id="csy" label=""  readonly="true" value="${csy}"/>月</td>
 		</tr>
 		<tr>
 			<td class="text-right">工作单位</td>
@@ -155,7 +155,7 @@
 		var sfzh = $("#<portlet:namespace />sfzh").val();
 		var csn = sfzh.substr(6, 4);
 		var csy = sfzh.substr(10, 2);
-		$("#<portlet:namespace />csn").val(csn);
-		$("#<portlet:namespace />csy").val(csy);
+		$("#csn").val(csn);
+		$("#csy").val(csy);
 	}
 </script>
