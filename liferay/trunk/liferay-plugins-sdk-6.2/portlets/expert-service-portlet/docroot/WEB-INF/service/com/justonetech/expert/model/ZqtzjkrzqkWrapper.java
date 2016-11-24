@@ -50,6 +50,7 @@ public class ZqtzjkrzqkWrapper implements Zqtzjkrzqk, ModelWrapper<Zqtzjkrzqk> {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("zqtzjkrzqkId", getZqtzjkrzqkId());
+		attributes.put("expertId", getExpertId());
 		attributes.put("zjkxtlsdw", getZjkxtlsdw());
 		attributes.put("sqzy", getSqzy());
 		attributes.put("pzrq", getPzrq());
@@ -63,6 +64,12 @@ public class ZqtzjkrzqkWrapper implements Zqtzjkrzqk, ModelWrapper<Zqtzjkrzqk> {
 
 		if (zqtzjkrzqkId != null) {
 			setZqtzjkrzqkId(zqtzjkrzqkId);
+		}
+
+		String expertId = (String)attributes.get("expertId");
+
+		if (expertId != null) {
+			setExpertId(expertId);
 		}
 
 		String zjkxtlsdw = (String)attributes.get("zjkxtlsdw");
@@ -122,6 +129,26 @@ public class ZqtzjkrzqkWrapper implements Zqtzjkrzqk, ModelWrapper<Zqtzjkrzqk> {
 	@Override
 	public void setZqtzjkrzqkId(long zqtzjkrzqkId) {
 		_zqtzjkrzqk.setZqtzjkrzqkId(zqtzjkrzqkId);
+	}
+
+	/**
+	* Returns the expert ID of this zqtzjkrzqk.
+	*
+	* @return the expert ID of this zqtzjkrzqk
+	*/
+	@Override
+	public java.lang.String getExpertId() {
+		return _zqtzjkrzqk.getExpertId();
+	}
+
+	/**
+	* Sets the expert ID of this zqtzjkrzqk.
+	*
+	* @param expertId the expert ID of this zqtzjkrzqk
+	*/
+	@Override
+	public void setExpertId(java.lang.String expertId) {
+		_zqtzjkrzqk.setExpertId(expertId);
 	}
 
 	/**

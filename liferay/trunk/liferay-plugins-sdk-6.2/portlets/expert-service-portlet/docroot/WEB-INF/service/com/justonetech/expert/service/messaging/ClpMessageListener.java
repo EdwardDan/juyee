@@ -15,7 +15,7 @@
 package com.justonetech.expert.service.messaging;
 
 import com.justonetech.expert.service.ClpSerializer;
-import com.justonetech.expert.service.JbxxLocalServiceUtil;
+import com.justonetech.expert.service.ExpertLocalServiceUtil;
 import com.justonetech.expert.service.XlxxLocalServiceUtil;
 import com.justonetech.expert.service.ZqtzjkrzqkLocalServiceUtil;
 import com.justonetech.expert.service.ZysqlbLocalServiceUtil;
@@ -39,7 +39,7 @@ public class ClpMessageListener extends BaseMessageListener {
 
 		if (command.equals("undeploy") &&
 				servletContextName.equals(getServletContextName())) {
-			JbxxLocalServiceUtil.clearService();
+			ExpertLocalServiceUtil.clearService();
 
 			XlxxLocalServiceUtil.clearService();
 

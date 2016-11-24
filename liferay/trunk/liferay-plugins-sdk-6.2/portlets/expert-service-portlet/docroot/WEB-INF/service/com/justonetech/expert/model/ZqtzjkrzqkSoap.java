@@ -31,6 +31,7 @@ public class ZqtzjkrzqkSoap implements Serializable {
 		ZqtzjkrzqkSoap soapModel = new ZqtzjkrzqkSoap();
 
 		soapModel.setZqtzjkrzqkId(model.getZqtzjkrzqkId());
+		soapModel.setExpertId(model.getExpertId());
 		soapModel.setZjkxtlsdw(model.getZjkxtlsdw());
 		soapModel.setSqzy(model.getSqzy());
 		soapModel.setPzrq(model.getPzrq());
@@ -94,6 +95,14 @@ public class ZqtzjkrzqkSoap implements Serializable {
 		_zqtzjkrzqkId = zqtzjkrzqkId;
 	}
 
+	public String getExpertId() {
+		return _expertId;
+	}
+
+	public void setExpertId(String expertId) {
+		_expertId = expertId;
+	}
+
 	public String getZjkxtlsdw() {
 		return _zjkxtlsdw;
 	}
@@ -119,6 +128,7 @@ public class ZqtzjkrzqkSoap implements Serializable {
 	}
 
 	private long _zqtzjkrzqkId;
+	private String _expertId;
 	private String _zjkxtlsdw;
 	private String _sqzy;
 	private Date _pzrq;

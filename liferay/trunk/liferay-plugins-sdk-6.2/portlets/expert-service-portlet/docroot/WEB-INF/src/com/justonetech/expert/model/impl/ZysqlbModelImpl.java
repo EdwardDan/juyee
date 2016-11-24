@@ -60,6 +60,7 @@ public class ZysqlbModelImpl extends BaseModelImpl<Zysqlb>
 	public static final String TABLE_NAME = "expert_Zysqlb";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "zysqlbId", Types.BIGINT },
+			{ "expertId", Types.VARCHAR },
 			{ "sx", Types.VARCHAR },
 			{ "zy", Types.VARCHAR },
 			{ "zt", Types.VARCHAR },
@@ -67,7 +68,7 @@ public class ZysqlbModelImpl extends BaseModelImpl<Zysqlb>
 			{ "shr", Types.VARCHAR },
 			{ "shrq", Types.TIMESTAMP }
 		};
-	public static final String TABLE_SQL_CREATE = "create table expert_Zysqlb (zysqlbId LONG not null primary key,sx VARCHAR(75) null,zy VARCHAR(75) null,zt VARCHAR(75) null,shyj VARCHAR(75) null,shr VARCHAR(75) null,shrq DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table expert_Zysqlb (zysqlbId LONG not null primary key,expertId VARCHAR(75) null,sx VARCHAR(75) null,zy VARCHAR(75) null,zt VARCHAR(75) null,shyj VARCHAR(75) null,shr VARCHAR(75) null,shrq DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table expert_Zysqlb";
 	public static final String ORDER_BY_JPQL = " ORDER BY zysqlb.zysqlbId DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY expert_Zysqlb.zysqlbId DESC";
@@ -122,6 +123,7 @@ public class ZysqlbModelImpl extends BaseModelImpl<Zysqlb>
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("zysqlbId", getZysqlbId());
+		attributes.put("expertId", getExpertId());
 		attributes.put("sx", getSx());
 		attributes.put("zy", getZy());
 		attributes.put("zt", getZt());
@@ -138,6 +140,12 @@ public class ZysqlbModelImpl extends BaseModelImpl<Zysqlb>
 
 		if (zysqlbId != null) {
 			setZysqlbId(zysqlbId);
+		}
+
+		String expertId = (String)attributes.get("expertId");
+
+		if (expertId != null) {
+			setExpertId(expertId);
 		}
 
 		String sx = (String)attributes.get("sx");
@@ -185,6 +193,21 @@ public class ZysqlbModelImpl extends BaseModelImpl<Zysqlb>
 	@Override
 	public void setZysqlbId(long zysqlbId) {
 		_zysqlbId = zysqlbId;
+	}
+
+	@Override
+	public String getExpertId() {
+		if (_expertId == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _expertId;
+		}
+	}
+
+	@Override
+	public void setExpertId(String expertId) {
+		_expertId = expertId;
 	}
 
 	@Override
@@ -300,6 +323,7 @@ public class ZysqlbModelImpl extends BaseModelImpl<Zysqlb>
 		ZysqlbImpl zysqlbImpl = new ZysqlbImpl();
 
 		zysqlbImpl.setZysqlbId(getZysqlbId());
+		zysqlbImpl.setExpertId(getExpertId());
 		zysqlbImpl.setSx(getSx());
 		zysqlbImpl.setZy(getZy());
 		zysqlbImpl.setZt(getZt());
@@ -372,6 +396,14 @@ public class ZysqlbModelImpl extends BaseModelImpl<Zysqlb>
 
 		zysqlbCacheModel.zysqlbId = getZysqlbId();
 
+		zysqlbCacheModel.expertId = getExpertId();
+
+		String expertId = zysqlbCacheModel.expertId;
+
+		if ((expertId != null) && (expertId.length() == 0)) {
+			zysqlbCacheModel.expertId = null;
+		}
+
 		zysqlbCacheModel.sx = getSx();
 
 		String sx = zysqlbCacheModel.sx;
@@ -426,10 +458,12 @@ public class ZysqlbModelImpl extends BaseModelImpl<Zysqlb>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(15);
+		StringBundler sb = new StringBundler(17);
 
 		sb.append("{zysqlbId=");
 		sb.append(getZysqlbId());
+		sb.append(", expertId=");
+		sb.append(getExpertId());
 		sb.append(", sx=");
 		sb.append(getSx());
 		sb.append(", zy=");
@@ -449,7 +483,7 @@ public class ZysqlbModelImpl extends BaseModelImpl<Zysqlb>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(28);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.expert.model.Zysqlb");
@@ -458,6 +492,10 @@ public class ZysqlbModelImpl extends BaseModelImpl<Zysqlb>
 		sb.append(
 			"<column><column-name>zysqlbId</column-name><column-value><![CDATA[");
 		sb.append(getZysqlbId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>expertId</column-name><column-value><![CDATA[");
+		sb.append(getExpertId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>sx</column-name><column-value><![CDATA[");
@@ -492,6 +530,7 @@ public class ZysqlbModelImpl extends BaseModelImpl<Zysqlb>
 	private static ClassLoader _classLoader = Zysqlb.class.getClassLoader();
 	private static Class<?>[] _escapedModelInterfaces = new Class[] { Zysqlb.class };
 	private long _zysqlbId;
+	private String _expertId;
 	private String _sx;
 	private String _zy;
 	private String _zt;

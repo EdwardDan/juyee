@@ -38,10 +38,12 @@ public class ZqtzjkrzqkCacheModel implements CacheModel<Zqtzjkrzqk>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(9);
+		StringBundler sb = new StringBundler(11);
 
 		sb.append("{zqtzjkrzqkId=");
 		sb.append(zqtzjkrzqkId);
+		sb.append(", expertId=");
+		sb.append(expertId);
 		sb.append(", zjkxtlsdw=");
 		sb.append(zjkxtlsdw);
 		sb.append(", sqzy=");
@@ -58,6 +60,13 @@ public class ZqtzjkrzqkCacheModel implements CacheModel<Zqtzjkrzqk>,
 		ZqtzjkrzqkImpl zqtzjkrzqkImpl = new ZqtzjkrzqkImpl();
 
 		zqtzjkrzqkImpl.setZqtzjkrzqkId(zqtzjkrzqkId);
+
+		if (expertId == null) {
+			zqtzjkrzqkImpl.setExpertId(StringPool.BLANK);
+		}
+		else {
+			zqtzjkrzqkImpl.setExpertId(expertId);
+		}
 
 		if (zjkxtlsdw == null) {
 			zqtzjkrzqkImpl.setZjkxtlsdw(StringPool.BLANK);
@@ -88,6 +97,7 @@ public class ZqtzjkrzqkCacheModel implements CacheModel<Zqtzjkrzqk>,
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		zqtzjkrzqkId = objectInput.readLong();
+		expertId = objectInput.readUTF();
 		zjkxtlsdw = objectInput.readUTF();
 		sqzy = objectInput.readUTF();
 		pzrq = objectInput.readLong();
@@ -97,6 +107,13 @@ public class ZqtzjkrzqkCacheModel implements CacheModel<Zqtzjkrzqk>,
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(zqtzjkrzqkId);
+
+		if (expertId == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(expertId);
+		}
 
 		if (zjkxtlsdw == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
@@ -116,6 +133,7 @@ public class ZqtzjkrzqkCacheModel implements CacheModel<Zqtzjkrzqk>,
 	}
 
 	public long zqtzjkrzqkId;
+	public String expertId;
 	public String zjkxtlsdw;
 	public String sqzy;
 	public long pzrq;

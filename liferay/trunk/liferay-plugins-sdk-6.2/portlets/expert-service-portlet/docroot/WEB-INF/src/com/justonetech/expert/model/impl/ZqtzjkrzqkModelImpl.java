@@ -60,11 +60,12 @@ public class ZqtzjkrzqkModelImpl extends BaseModelImpl<Zqtzjkrzqk>
 	public static final String TABLE_NAME = "expert_Zqtzjkrzqk";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "zqtzjkrzqkId", Types.BIGINT },
+			{ "expertId", Types.VARCHAR },
 			{ "zjkxtlsdw", Types.VARCHAR },
 			{ "sqzy", Types.VARCHAR },
 			{ "pzrq", Types.TIMESTAMP }
 		};
-	public static final String TABLE_SQL_CREATE = "create table expert_Zqtzjkrzqk (zqtzjkrzqkId LONG not null primary key,zjkxtlsdw VARCHAR(75) null,sqzy VARCHAR(75) null,pzrq DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table expert_Zqtzjkrzqk (zqtzjkrzqkId LONG not null primary key,expertId VARCHAR(75) null,zjkxtlsdw VARCHAR(75) null,sqzy VARCHAR(75) null,pzrq DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table expert_Zqtzjkrzqk";
 	public static final String ORDER_BY_JPQL = " ORDER BY zqtzjkrzqk.zqtzjkrzqkId DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY expert_Zqtzjkrzqk.zqtzjkrzqkId DESC";
@@ -119,6 +120,7 @@ public class ZqtzjkrzqkModelImpl extends BaseModelImpl<Zqtzjkrzqk>
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("zqtzjkrzqkId", getZqtzjkrzqkId());
+		attributes.put("expertId", getExpertId());
 		attributes.put("zjkxtlsdw", getZjkxtlsdw());
 		attributes.put("sqzy", getSqzy());
 		attributes.put("pzrq", getPzrq());
@@ -132,6 +134,12 @@ public class ZqtzjkrzqkModelImpl extends BaseModelImpl<Zqtzjkrzqk>
 
 		if (zqtzjkrzqkId != null) {
 			setZqtzjkrzqkId(zqtzjkrzqkId);
+		}
+
+		String expertId = (String)attributes.get("expertId");
+
+		if (expertId != null) {
+			setExpertId(expertId);
 		}
 
 		String zjkxtlsdw = (String)attributes.get("zjkxtlsdw");
@@ -161,6 +169,21 @@ public class ZqtzjkrzqkModelImpl extends BaseModelImpl<Zqtzjkrzqk>
 	@Override
 	public void setZqtzjkrzqkId(long zqtzjkrzqkId) {
 		_zqtzjkrzqkId = zqtzjkrzqkId;
+	}
+
+	@Override
+	public String getExpertId() {
+		if (_expertId == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _expertId;
+		}
+	}
+
+	@Override
+	public void setExpertId(String expertId) {
+		_expertId = expertId;
 	}
 
 	@Override
@@ -231,6 +254,7 @@ public class ZqtzjkrzqkModelImpl extends BaseModelImpl<Zqtzjkrzqk>
 		ZqtzjkrzqkImpl zqtzjkrzqkImpl = new ZqtzjkrzqkImpl();
 
 		zqtzjkrzqkImpl.setZqtzjkrzqkId(getZqtzjkrzqkId());
+		zqtzjkrzqkImpl.setExpertId(getExpertId());
 		zqtzjkrzqkImpl.setZjkxtlsdw(getZjkxtlsdw());
 		zqtzjkrzqkImpl.setSqzy(getSqzy());
 		zqtzjkrzqkImpl.setPzrq(getPzrq());
@@ -300,6 +324,14 @@ public class ZqtzjkrzqkModelImpl extends BaseModelImpl<Zqtzjkrzqk>
 
 		zqtzjkrzqkCacheModel.zqtzjkrzqkId = getZqtzjkrzqkId();
 
+		zqtzjkrzqkCacheModel.expertId = getExpertId();
+
+		String expertId = zqtzjkrzqkCacheModel.expertId;
+
+		if ((expertId != null) && (expertId.length() == 0)) {
+			zqtzjkrzqkCacheModel.expertId = null;
+		}
+
 		zqtzjkrzqkCacheModel.zjkxtlsdw = getZjkxtlsdw();
 
 		String zjkxtlsdw = zqtzjkrzqkCacheModel.zjkxtlsdw;
@@ -330,10 +362,12 @@ public class ZqtzjkrzqkModelImpl extends BaseModelImpl<Zqtzjkrzqk>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(9);
+		StringBundler sb = new StringBundler(11);
 
 		sb.append("{zqtzjkrzqkId=");
 		sb.append(getZqtzjkrzqkId());
+		sb.append(", expertId=");
+		sb.append(getExpertId());
 		sb.append(", zjkxtlsdw=");
 		sb.append(getZjkxtlsdw());
 		sb.append(", sqzy=");
@@ -347,7 +381,7 @@ public class ZqtzjkrzqkModelImpl extends BaseModelImpl<Zqtzjkrzqk>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(16);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.expert.model.Zqtzjkrzqk");
@@ -356,6 +390,10 @@ public class ZqtzjkrzqkModelImpl extends BaseModelImpl<Zqtzjkrzqk>
 		sb.append(
 			"<column><column-name>zqtzjkrzqkId</column-name><column-value><![CDATA[");
 		sb.append(getZqtzjkrzqkId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>expertId</column-name><column-value><![CDATA[");
+		sb.append(getExpertId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>zjkxtlsdw</column-name><column-value><![CDATA[");
@@ -380,6 +418,7 @@ public class ZqtzjkrzqkModelImpl extends BaseModelImpl<Zqtzjkrzqk>
 			Zqtzjkrzqk.class
 		};
 	private long _zqtzjkrzqkId;
+	private String _expertId;
 	private String _zjkxtlsdw;
 	private String _sqzy;
 	private Date _pzrq;

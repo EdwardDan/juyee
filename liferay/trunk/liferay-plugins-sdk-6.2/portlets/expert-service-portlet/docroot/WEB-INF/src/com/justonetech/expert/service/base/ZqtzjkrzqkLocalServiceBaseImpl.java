@@ -16,7 +16,7 @@ package com.justonetech.expert.service.base;
 
 import com.justonetech.expert.model.Zqtzjkrzqk;
 import com.justonetech.expert.service.ZqtzjkrzqkLocalService;
-import com.justonetech.expert.service.persistence.JbxxPersistence;
+import com.justonetech.expert.service.persistence.ExpertPersistence;
 import com.justonetech.expert.service.persistence.XlxxPersistence;
 import com.justonetech.expert.service.persistence.ZqtzjkrzqkPersistence;
 import com.justonetech.expert.service.persistence.ZysqlbPersistence;
@@ -285,40 +285,40 @@ public abstract class ZqtzjkrzqkLocalServiceBaseImpl
 	}
 
 	/**
-	 * Returns the jbxx local service.
+	 * Returns the expert local service.
 	 *
-	 * @return the jbxx local service
+	 * @return the expert local service
 	 */
-	public com.justonetech.expert.service.JbxxLocalService getJbxxLocalService() {
-		return jbxxLocalService;
+	public com.justonetech.expert.service.ExpertLocalService getExpertLocalService() {
+		return expertLocalService;
 	}
 
 	/**
-	 * Sets the jbxx local service.
+	 * Sets the expert local service.
 	 *
-	 * @param jbxxLocalService the jbxx local service
+	 * @param expertLocalService the expert local service
 	 */
-	public void setJbxxLocalService(
-		com.justonetech.expert.service.JbxxLocalService jbxxLocalService) {
-		this.jbxxLocalService = jbxxLocalService;
+	public void setExpertLocalService(
+		com.justonetech.expert.service.ExpertLocalService expertLocalService) {
+		this.expertLocalService = expertLocalService;
 	}
 
 	/**
-	 * Returns the jbxx persistence.
+	 * Returns the expert persistence.
 	 *
-	 * @return the jbxx persistence
+	 * @return the expert persistence
 	 */
-	public JbxxPersistence getJbxxPersistence() {
-		return jbxxPersistence;
+	public ExpertPersistence getExpertPersistence() {
+		return expertPersistence;
 	}
 
 	/**
-	 * Sets the jbxx persistence.
+	 * Sets the expert persistence.
 	 *
-	 * @param jbxxPersistence the jbxx persistence
+	 * @param expertPersistence the expert persistence
 	 */
-	public void setJbxxPersistence(JbxxPersistence jbxxPersistence) {
-		this.jbxxPersistence = jbxxPersistence;
+	public void setExpertPersistence(ExpertPersistence expertPersistence) {
+		this.expertPersistence = expertPersistence;
 	}
 
 	/**
@@ -646,10 +646,10 @@ public abstract class ZqtzjkrzqkLocalServiceBaseImpl
 		}
 	}
 
-	@BeanReference(type = com.justonetech.expert.service.JbxxLocalService.class)
-	protected com.justonetech.expert.service.JbxxLocalService jbxxLocalService;
-	@BeanReference(type = JbxxPersistence.class)
-	protected JbxxPersistence jbxxPersistence;
+	@BeanReference(type = com.justonetech.expert.service.ExpertLocalService.class)
+	protected com.justonetech.expert.service.ExpertLocalService expertLocalService;
+	@BeanReference(type = ExpertPersistence.class)
+	protected ExpertPersistence expertPersistence;
 	@BeanReference(type = com.justonetech.expert.service.XlxxLocalService.class)
 	protected com.justonetech.expert.service.XlxxLocalService xlxxLocalService;
 	@BeanReference(type = XlxxPersistence.class)

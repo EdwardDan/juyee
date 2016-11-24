@@ -2,14 +2,14 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping default-lazy="false" auto-import="false">
-	<import class="com.justonetech.expert.model.Jbxx" />
+	<import class="com.justonetech.expert.model.Expert" />
 	<import class="com.justonetech.expert.model.Xlxx" />
 	<import class="com.justonetech.expert.model.Zqtzjkrzqk" />
 	<import class="com.justonetech.expert.model.Zysqlb" />
 	<import class="com.justonetech.expert.model.Zzjl" />
-	<class name="com.justonetech.expert.model.impl.JbxxImpl" table="expert_Jbxx">
+	<class name="com.justonetech.expert.model.impl.ExpertImpl" table="expert_Expert">
 		<cache usage="read-write" />
-		<id name="jbxxId" type="long">
+		<id name="expertId" type="long">
 			<generator class="assigned" />
 		</id>
 		<property name="xm" type="com.liferay.portal.dao.orm.hibernate.StringType" />
@@ -34,6 +34,7 @@
 		<id name="xlxxId" type="long">
 			<generator class="assigned" />
 		</id>
+		<property name="expertId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="byyx" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="sxzy" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="xlhxw" type="com.liferay.portal.dao.orm.hibernate.StringType" />
@@ -44,6 +45,7 @@
 		<id name="zqtzjkrzqkId" type="long">
 			<generator class="assigned" />
 		</id>
+		<property name="expertId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="zjkxtlsdw" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="sqzy" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="pzrq" type="org.hibernate.type.TimestampType" />
@@ -53,6 +55,7 @@
 		<id name="zysqlbId" type="long">
 			<generator class="assigned" />
 		</id>
+		<property name="expertId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="sx" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="zy" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="zt" type="com.liferay.portal.dao.orm.hibernate.StringType" />
@@ -65,6 +68,7 @@
 		<id name="zzjlId" type="long">
 			<generator class="assigned" />
 		</id>
+		<property name="expertId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="zzdw" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="qzny" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="cszyzygz" type="com.liferay.portal.dao.orm.hibernate.StringType" />

@@ -31,6 +31,7 @@ public class ZysqlbSoap implements Serializable {
 		ZysqlbSoap soapModel = new ZysqlbSoap();
 
 		soapModel.setZysqlbId(model.getZysqlbId());
+		soapModel.setExpertId(model.getExpertId());
 		soapModel.setSx(model.getSx());
 		soapModel.setZy(model.getZy());
 		soapModel.setZt(model.getZt());
@@ -97,6 +98,14 @@ public class ZysqlbSoap implements Serializable {
 		_zysqlbId = zysqlbId;
 	}
 
+	public String getExpertId() {
+		return _expertId;
+	}
+
+	public void setExpertId(String expertId) {
+		_expertId = expertId;
+	}
+
 	public String getSx() {
 		return _sx;
 	}
@@ -146,6 +155,7 @@ public class ZysqlbSoap implements Serializable {
 	}
 
 	private long _zysqlbId;
+	private String _expertId;
 	private String _sx;
 	private String _zy;
 	private String _zt;

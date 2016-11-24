@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 
 <model-hints>
-	<model name="com.justonetech.expert.model.Jbxx">
-		<field name="jbxxId" type="long" />
+	<model name="com.justonetech.expert.model.Expert">
+		<field name="expertId" type="long" />
 		<field name="xm" type="String" />
 		<field name="xb" type="String" />
 		<field name="sfzh" type="String" />
@@ -22,6 +22,7 @@
 	</model>
 	<model name="com.justonetech.expert.model.Xlxx">
 		<field name="xlxxId" type="long" />
+		<field name="expertId" type="String" />
 		<field name="byyx" type="String" />
 		<field name="sxzy" type="String" />
 		<field name="xlhxw" type="String" />
@@ -29,12 +30,14 @@
 	</model>
 	<model name="com.justonetech.expert.model.Zqtzjkrzqk">
 		<field name="zqtzjkrzqkId" type="long" />
+		<field name="expertId" type="String" />
 		<field name="zjkxtlsdw" type="String" />
 		<field name="sqzy" type="String" />
 		<field name="pzrq" type="Date" />
 	</model>
 	<model name="com.justonetech.expert.model.Zysqlb">
 		<field name="zysqlbId" type="long" />
+		<field name="expertId" type="String" />
 		<field name="sx" type="String" />
 		<field name="zy" type="String" />
 		<field name="zt" type="String" />
@@ -44,6 +47,7 @@
 	</model>
 	<model name="com.justonetech.expert.model.Zzjl">
 		<field name="zzjlId" type="long" />
+		<field name="expertId" type="String" />
 		<field name="zzdw" type="String" />
 		<field name="qzny" type="String" />
 		<field name="cszyzygz" type="String" />

@@ -74,6 +74,7 @@ public class ZysqlbClp extends BaseModelImpl<Zysqlb> implements Zysqlb {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("zysqlbId", getZysqlbId());
+		attributes.put("expertId", getExpertId());
 		attributes.put("sx", getSx());
 		attributes.put("zy", getZy());
 		attributes.put("zt", getZt());
@@ -90,6 +91,12 @@ public class ZysqlbClp extends BaseModelImpl<Zysqlb> implements Zysqlb {
 
 		if (zysqlbId != null) {
 			setZysqlbId(zysqlbId);
+		}
+
+		String expertId = (String)attributes.get("expertId");
+
+		if (expertId != null) {
+			setExpertId(expertId);
 		}
 
 		String sx = (String)attributes.get("sx");
@@ -145,6 +152,29 @@ public class ZysqlbClp extends BaseModelImpl<Zysqlb> implements Zysqlb {
 				Method method = clazz.getMethod("setZysqlbId", long.class);
 
 				method.invoke(_zysqlbRemoteModel, zysqlbId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getExpertId() {
+		return _expertId;
+	}
+
+	@Override
+	public void setExpertId(String expertId) {
+		_expertId = expertId;
+
+		if (_zysqlbRemoteModel != null) {
+			try {
+				Class<?> clazz = _zysqlbRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setExpertId", String.class);
+
+				method.invoke(_zysqlbRemoteModel, expertId);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -360,6 +390,7 @@ public class ZysqlbClp extends BaseModelImpl<Zysqlb> implements Zysqlb {
 		ZysqlbClp clone = new ZysqlbClp();
 
 		clone.setZysqlbId(getZysqlbId());
+		clone.setExpertId(getExpertId());
 		clone.setSx(getSx());
 		clone.setZy(getZy());
 		clone.setZt(getZt());
@@ -426,10 +457,12 @@ public class ZysqlbClp extends BaseModelImpl<Zysqlb> implements Zysqlb {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(15);
+		StringBundler sb = new StringBundler(17);
 
 		sb.append("{zysqlbId=");
 		sb.append(getZysqlbId());
+		sb.append(", expertId=");
+		sb.append(getExpertId());
 		sb.append(", sx=");
 		sb.append(getSx());
 		sb.append(", zy=");
@@ -449,7 +482,7 @@ public class ZysqlbClp extends BaseModelImpl<Zysqlb> implements Zysqlb {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(28);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.expert.model.Zysqlb");
@@ -458,6 +491,10 @@ public class ZysqlbClp extends BaseModelImpl<Zysqlb> implements Zysqlb {
 		sb.append(
 			"<column><column-name>zysqlbId</column-name><column-value><![CDATA[");
 		sb.append(getZysqlbId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>expertId</column-name><column-value><![CDATA[");
+		sb.append(getExpertId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>sx</column-name><column-value><![CDATA[");
@@ -490,6 +527,7 @@ public class ZysqlbClp extends BaseModelImpl<Zysqlb> implements Zysqlb {
 	}
 
 	private long _zysqlbId;
+	private String _expertId;
 	private String _sx;
 	private String _zy;
 	private String _zt;

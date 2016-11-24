@@ -58,12 +58,13 @@ public class ZzjlModelImpl extends BaseModelImpl<Zzjl> implements ZzjlModel {
 	public static final String TABLE_NAME = "expert_Zzjl";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "zzjlId", Types.BIGINT },
+			{ "expertId", Types.VARCHAR },
 			{ "zzdw", Types.VARCHAR },
 			{ "qzny", Types.VARCHAR },
 			{ "cszyzygz", Types.VARCHAR },
 			{ "zw", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table expert_Zzjl (zzjlId LONG not null primary key,zzdw VARCHAR(75) null,qzny VARCHAR(75) null,cszyzygz VARCHAR(75) null,zw VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table expert_Zzjl (zzjlId LONG not null primary key,expertId VARCHAR(75) null,zzdw VARCHAR(75) null,qzny VARCHAR(75) null,cszyzygz VARCHAR(75) null,zw VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table expert_Zzjl";
 	public static final String ORDER_BY_JPQL = " ORDER BY zzjl.zzjlId DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY expert_Zzjl.zzjlId DESC";
@@ -118,6 +119,7 @@ public class ZzjlModelImpl extends BaseModelImpl<Zzjl> implements ZzjlModel {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("zzjlId", getZzjlId());
+		attributes.put("expertId", getExpertId());
 		attributes.put("zzdw", getZzdw());
 		attributes.put("qzny", getQzny());
 		attributes.put("cszyzygz", getCszyzygz());
@@ -132,6 +134,12 @@ public class ZzjlModelImpl extends BaseModelImpl<Zzjl> implements ZzjlModel {
 
 		if (zzjlId != null) {
 			setZzjlId(zzjlId);
+		}
+
+		String expertId = (String)attributes.get("expertId");
+
+		if (expertId != null) {
+			setExpertId(expertId);
 		}
 
 		String zzdw = (String)attributes.get("zzdw");
@@ -167,6 +175,21 @@ public class ZzjlModelImpl extends BaseModelImpl<Zzjl> implements ZzjlModel {
 	@Override
 	public void setZzjlId(long zzjlId) {
 		_zzjlId = zzjlId;
+	}
+
+	@Override
+	public String getExpertId() {
+		if (_expertId == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _expertId;
+		}
+	}
+
+	@Override
+	public void setExpertId(String expertId) {
+		_expertId = expertId;
 	}
 
 	@Override
@@ -257,6 +280,7 @@ public class ZzjlModelImpl extends BaseModelImpl<Zzjl> implements ZzjlModel {
 		ZzjlImpl zzjlImpl = new ZzjlImpl();
 
 		zzjlImpl.setZzjlId(getZzjlId());
+		zzjlImpl.setExpertId(getExpertId());
 		zzjlImpl.setZzdw(getZzdw());
 		zzjlImpl.setQzny(getQzny());
 		zzjlImpl.setCszyzygz(getCszyzygz());
@@ -327,6 +351,14 @@ public class ZzjlModelImpl extends BaseModelImpl<Zzjl> implements ZzjlModel {
 
 		zzjlCacheModel.zzjlId = getZzjlId();
 
+		zzjlCacheModel.expertId = getExpertId();
+
+		String expertId = zzjlCacheModel.expertId;
+
+		if ((expertId != null) && (expertId.length() == 0)) {
+			zzjlCacheModel.expertId = null;
+		}
+
 		zzjlCacheModel.zzdw = getZzdw();
 
 		String zzdw = zzjlCacheModel.zzdw;
@@ -364,10 +396,12 @@ public class ZzjlModelImpl extends BaseModelImpl<Zzjl> implements ZzjlModel {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(11);
+		StringBundler sb = new StringBundler(13);
 
 		sb.append("{zzjlId=");
 		sb.append(getZzjlId());
+		sb.append(", expertId=");
+		sb.append(getExpertId());
 		sb.append(", zzdw=");
 		sb.append(getZzdw());
 		sb.append(", qzny=");
@@ -383,7 +417,7 @@ public class ZzjlModelImpl extends BaseModelImpl<Zzjl> implements ZzjlModel {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(22);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.expert.model.Zzjl");
@@ -392,6 +426,10 @@ public class ZzjlModelImpl extends BaseModelImpl<Zzjl> implements ZzjlModel {
 		sb.append(
 			"<column><column-name>zzjlId</column-name><column-value><![CDATA[");
 		sb.append(getZzjlId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>expertId</column-name><column-value><![CDATA[");
+		sb.append(getExpertId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>zzdw</column-name><column-value><![CDATA[");
@@ -418,6 +456,7 @@ public class ZzjlModelImpl extends BaseModelImpl<Zzjl> implements ZzjlModel {
 	private static ClassLoader _classLoader = Zzjl.class.getClassLoader();
 	private static Class<?>[] _escapedModelInterfaces = new Class[] { Zzjl.class };
 	private long _zzjlId;
+	private String _expertId;
 	private String _zzdw;
 	private String _qzny;
 	private String _cszyzygz;

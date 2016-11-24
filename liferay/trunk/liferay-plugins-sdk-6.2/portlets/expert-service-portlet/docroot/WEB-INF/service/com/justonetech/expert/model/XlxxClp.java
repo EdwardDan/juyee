@@ -73,6 +73,7 @@ public class XlxxClp extends BaseModelImpl<Xlxx> implements Xlxx {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("xlxxId", getXlxxId());
+		attributes.put("expertId", getExpertId());
 		attributes.put("byyx", getByyx());
 		attributes.put("sxzy", getSxzy());
 		attributes.put("xlhxw", getXlhxw());
@@ -87,6 +88,12 @@ public class XlxxClp extends BaseModelImpl<Xlxx> implements Xlxx {
 
 		if (xlxxId != null) {
 			setXlxxId(xlxxId);
+		}
+
+		String expertId = (String)attributes.get("expertId");
+
+		if (expertId != null) {
+			setExpertId(expertId);
 		}
 
 		String byyx = (String)attributes.get("byyx");
@@ -130,6 +137,29 @@ public class XlxxClp extends BaseModelImpl<Xlxx> implements Xlxx {
 				Method method = clazz.getMethod("setXlxxId", long.class);
 
 				method.invoke(_xlxxRemoteModel, xlxxId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getExpertId() {
+		return _expertId;
+	}
+
+	@Override
+	public void setExpertId(String expertId) {
+		_expertId = expertId;
+
+		if (_xlxxRemoteModel != null) {
+			try {
+				Class<?> clazz = _xlxxRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setExpertId", String.class);
+
+				method.invoke(_xlxxRemoteModel, expertId);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -299,6 +329,7 @@ public class XlxxClp extends BaseModelImpl<Xlxx> implements Xlxx {
 		XlxxClp clone = new XlxxClp();
 
 		clone.setXlxxId(getXlxxId());
+		clone.setExpertId(getExpertId());
 		clone.setByyx(getByyx());
 		clone.setSxzy(getSxzy());
 		clone.setXlhxw(getXlhxw());
@@ -363,10 +394,12 @@ public class XlxxClp extends BaseModelImpl<Xlxx> implements Xlxx {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(11);
+		StringBundler sb = new StringBundler(13);
 
 		sb.append("{xlxxId=");
 		sb.append(getXlxxId());
+		sb.append(", expertId=");
+		sb.append(getExpertId());
 		sb.append(", byyx=");
 		sb.append(getByyx());
 		sb.append(", sxzy=");
@@ -382,7 +415,7 @@ public class XlxxClp extends BaseModelImpl<Xlxx> implements Xlxx {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(22);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.expert.model.Xlxx");
@@ -391,6 +424,10 @@ public class XlxxClp extends BaseModelImpl<Xlxx> implements Xlxx {
 		sb.append(
 			"<column><column-name>xlxxId</column-name><column-value><![CDATA[");
 		sb.append(getXlxxId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>expertId</column-name><column-value><![CDATA[");
+		sb.append(getExpertId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>byyx</column-name><column-value><![CDATA[");
@@ -415,6 +452,7 @@ public class XlxxClp extends BaseModelImpl<Xlxx> implements Xlxx {
 	}
 
 	private long _xlxxId;
+	private String _expertId;
 	private String _byyx;
 	private String _sxzy;
 	private String _xlhxw;

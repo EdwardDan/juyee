@@ -73,6 +73,7 @@ public class ZzjlClp extends BaseModelImpl<Zzjl> implements Zzjl {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("zzjlId", getZzjlId());
+		attributes.put("expertId", getExpertId());
 		attributes.put("zzdw", getZzdw());
 		attributes.put("qzny", getQzny());
 		attributes.put("cszyzygz", getCszyzygz());
@@ -87,6 +88,12 @@ public class ZzjlClp extends BaseModelImpl<Zzjl> implements Zzjl {
 
 		if (zzjlId != null) {
 			setZzjlId(zzjlId);
+		}
+
+		String expertId = (String)attributes.get("expertId");
+
+		if (expertId != null) {
+			setExpertId(expertId);
 		}
 
 		String zzdw = (String)attributes.get("zzdw");
@@ -130,6 +137,29 @@ public class ZzjlClp extends BaseModelImpl<Zzjl> implements Zzjl {
 				Method method = clazz.getMethod("setZzjlId", long.class);
 
 				method.invoke(_zzjlRemoteModel, zzjlId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getExpertId() {
+		return _expertId;
+	}
+
+	@Override
+	public void setExpertId(String expertId) {
+		_expertId = expertId;
+
+		if (_zzjlRemoteModel != null) {
+			try {
+				Class<?> clazz = _zzjlRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setExpertId", String.class);
+
+				method.invoke(_zzjlRemoteModel, expertId);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -299,6 +329,7 @@ public class ZzjlClp extends BaseModelImpl<Zzjl> implements Zzjl {
 		ZzjlClp clone = new ZzjlClp();
 
 		clone.setZzjlId(getZzjlId());
+		clone.setExpertId(getExpertId());
 		clone.setZzdw(getZzdw());
 		clone.setQzny(getQzny());
 		clone.setCszyzygz(getCszyzygz());
@@ -363,10 +394,12 @@ public class ZzjlClp extends BaseModelImpl<Zzjl> implements Zzjl {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(11);
+		StringBundler sb = new StringBundler(13);
 
 		sb.append("{zzjlId=");
 		sb.append(getZzjlId());
+		sb.append(", expertId=");
+		sb.append(getExpertId());
 		sb.append(", zzdw=");
 		sb.append(getZzdw());
 		sb.append(", qzny=");
@@ -382,7 +415,7 @@ public class ZzjlClp extends BaseModelImpl<Zzjl> implements Zzjl {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(22);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.expert.model.Zzjl");
@@ -391,6 +424,10 @@ public class ZzjlClp extends BaseModelImpl<Zzjl> implements Zzjl {
 		sb.append(
 			"<column><column-name>zzjlId</column-name><column-value><![CDATA[");
 		sb.append(getZzjlId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>expertId</column-name><column-value><![CDATA[");
+		sb.append(getExpertId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>zzdw</column-name><column-value><![CDATA[");
@@ -415,6 +452,7 @@ public class ZzjlClp extends BaseModelImpl<Zzjl> implements Zzjl {
 	}
 
 	private long _zzjlId;
+	private String _expertId;
 	private String _zzdw;
 	private String _qzny;
 	private String _cszyzygz;

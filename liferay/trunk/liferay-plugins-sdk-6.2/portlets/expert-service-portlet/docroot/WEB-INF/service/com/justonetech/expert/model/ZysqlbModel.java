@@ -74,6 +74,21 @@ public interface ZysqlbModel extends BaseModel<Zysqlb> {
 	public void setZysqlbId(long zysqlbId);
 
 	/**
+	 * Returns the expert ID of this zysqlb.
+	 *
+	 * @return the expert ID of this zysqlb
+	 */
+	@AutoEscape
+	public String getExpertId();
+
+	/**
+	 * Sets the expert ID of this zysqlb.
+	 *
+	 * @param expertId the expert ID of this zysqlb
+	 */
+	public void setExpertId(String expertId);
+
+	/**
 	 * Returns the sx of this zysqlb.
 	 *
 	 * @return the sx of this zysqlb

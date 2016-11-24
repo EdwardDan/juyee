@@ -35,10 +35,12 @@ import java.io.ObjectOutput;
 public class XlxxCacheModel implements CacheModel<Xlxx>, Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(11);
+		StringBundler sb = new StringBundler(13);
 
 		sb.append("{xlxxId=");
 		sb.append(xlxxId);
+		sb.append(", expertId=");
+		sb.append(expertId);
 		sb.append(", byyx=");
 		sb.append(byyx);
 		sb.append(", sxzy=");
@@ -57,6 +59,13 @@ public class XlxxCacheModel implements CacheModel<Xlxx>, Externalizable {
 		XlxxImpl xlxxImpl = new XlxxImpl();
 
 		xlxxImpl.setXlxxId(xlxxId);
+
+		if (expertId == null) {
+			xlxxImpl.setExpertId(StringPool.BLANK);
+		}
+		else {
+			xlxxImpl.setExpertId(expertId);
+		}
 
 		if (byyx == null) {
 			xlxxImpl.setByyx(StringPool.BLANK);
@@ -94,6 +103,7 @@ public class XlxxCacheModel implements CacheModel<Xlxx>, Externalizable {
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		xlxxId = objectInput.readLong();
+		expertId = objectInput.readUTF();
 		byyx = objectInput.readUTF();
 		sxzy = objectInput.readUTF();
 		xlhxw = objectInput.readUTF();
@@ -104,6 +114,13 @@ public class XlxxCacheModel implements CacheModel<Xlxx>, Externalizable {
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(xlxxId);
+
+		if (expertId == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(expertId);
+		}
 
 		if (byyx == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
@@ -135,6 +152,7 @@ public class XlxxCacheModel implements CacheModel<Xlxx>, Externalizable {
 	}
 
 	public long xlxxId;
+	public String expertId;
 	public String byyx;
 	public String sxzy;
 	public String xlhxw;

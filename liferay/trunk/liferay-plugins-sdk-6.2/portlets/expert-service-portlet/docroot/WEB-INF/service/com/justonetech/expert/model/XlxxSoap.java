@@ -30,6 +30,7 @@ public class XlxxSoap implements Serializable {
 		XlxxSoap soapModel = new XlxxSoap();
 
 		soapModel.setXlxxId(model.getXlxxId());
+		soapModel.setExpertId(model.getExpertId());
 		soapModel.setByyx(model.getByyx());
 		soapModel.setSxzy(model.getSxzy());
 		soapModel.setXlhxw(model.getXlhxw());
@@ -94,6 +95,14 @@ public class XlxxSoap implements Serializable {
 		_xlxxId = xlxxId;
 	}
 
+	public String getExpertId() {
+		return _expertId;
+	}
+
+	public void setExpertId(String expertId) {
+		_expertId = expertId;
+	}
+
 	public String getByyx() {
 		return _byyx;
 	}
@@ -127,6 +136,7 @@ public class XlxxSoap implements Serializable {
 	}
 
 	private long _xlxxId;
+	private String _expertId;
 	private String _byyx;
 	private String _sxzy;
 	private String _xlhxw;

@@ -75,6 +75,7 @@ public class ZqtzjkrzqkClp extends BaseModelImpl<Zqtzjkrzqk>
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("zqtzjkrzqkId", getZqtzjkrzqkId());
+		attributes.put("expertId", getExpertId());
 		attributes.put("zjkxtlsdw", getZjkxtlsdw());
 		attributes.put("sqzy", getSqzy());
 		attributes.put("pzrq", getPzrq());
@@ -88,6 +89,12 @@ public class ZqtzjkrzqkClp extends BaseModelImpl<Zqtzjkrzqk>
 
 		if (zqtzjkrzqkId != null) {
 			setZqtzjkrzqkId(zqtzjkrzqkId);
+		}
+
+		String expertId = (String)attributes.get("expertId");
+
+		if (expertId != null) {
+			setExpertId(expertId);
 		}
 
 		String zjkxtlsdw = (String)attributes.get("zjkxtlsdw");
@@ -125,6 +132,29 @@ public class ZqtzjkrzqkClp extends BaseModelImpl<Zqtzjkrzqk>
 				Method method = clazz.getMethod("setZqtzjkrzqkId", long.class);
 
 				method.invoke(_zqtzjkrzqkRemoteModel, zqtzjkrzqkId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getExpertId() {
+		return _expertId;
+	}
+
+	@Override
+	public void setExpertId(String expertId) {
+		_expertId = expertId;
+
+		if (_zqtzjkrzqkRemoteModel != null) {
+			try {
+				Class<?> clazz = _zqtzjkrzqkRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setExpertId", String.class);
+
+				method.invoke(_zqtzjkrzqkRemoteModel, expertId);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -271,6 +301,7 @@ public class ZqtzjkrzqkClp extends BaseModelImpl<Zqtzjkrzqk>
 		ZqtzjkrzqkClp clone = new ZqtzjkrzqkClp();
 
 		clone.setZqtzjkrzqkId(getZqtzjkrzqkId());
+		clone.setExpertId(getExpertId());
 		clone.setZjkxtlsdw(getZjkxtlsdw());
 		clone.setSqzy(getSqzy());
 		clone.setPzrq(getPzrq());
@@ -334,10 +365,12 @@ public class ZqtzjkrzqkClp extends BaseModelImpl<Zqtzjkrzqk>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(9);
+		StringBundler sb = new StringBundler(11);
 
 		sb.append("{zqtzjkrzqkId=");
 		sb.append(getZqtzjkrzqkId());
+		sb.append(", expertId=");
+		sb.append(getExpertId());
 		sb.append(", zjkxtlsdw=");
 		sb.append(getZjkxtlsdw());
 		sb.append(", sqzy=");
@@ -351,7 +384,7 @@ public class ZqtzjkrzqkClp extends BaseModelImpl<Zqtzjkrzqk>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(16);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.expert.model.Zqtzjkrzqk");
@@ -360,6 +393,10 @@ public class ZqtzjkrzqkClp extends BaseModelImpl<Zqtzjkrzqk>
 		sb.append(
 			"<column><column-name>zqtzjkrzqkId</column-name><column-value><![CDATA[");
 		sb.append(getZqtzjkrzqkId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>expertId</column-name><column-value><![CDATA[");
+		sb.append(getExpertId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>zjkxtlsdw</column-name><column-value><![CDATA[");
@@ -380,6 +417,7 @@ public class ZqtzjkrzqkClp extends BaseModelImpl<Zqtzjkrzqk>
 	}
 
 	private long _zqtzjkrzqkId;
+	private String _expertId;
 	private String _zjkxtlsdw;
 	private String _sqzy;
 	private Date _pzrq;

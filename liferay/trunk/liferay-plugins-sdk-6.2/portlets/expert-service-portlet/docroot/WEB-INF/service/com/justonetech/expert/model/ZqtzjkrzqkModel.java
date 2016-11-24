@@ -74,6 +74,21 @@ public interface ZqtzjkrzqkModel extends BaseModel<Zqtzjkrzqk> {
 	public void setZqtzjkrzqkId(long zqtzjkrzqkId);
 
 	/**
+	 * Returns the expert ID of this zqtzjkrzqk.
+	 *
+	 * @return the expert ID of this zqtzjkrzqk
+	 */
+	@AutoEscape
+	public String getExpertId();
+
+	/**
+	 * Sets the expert ID of this zqtzjkrzqk.
+	 *
+	 * @param expertId the expert ID of this zqtzjkrzqk
+	 */
+	public void setExpertId(String expertId);
+
+	/**
 	 * Returns the zjkxtlsdw of this zqtzjkrzqk.
 	 *
 	 * @return the zjkxtlsdw of this zqtzjkrzqk

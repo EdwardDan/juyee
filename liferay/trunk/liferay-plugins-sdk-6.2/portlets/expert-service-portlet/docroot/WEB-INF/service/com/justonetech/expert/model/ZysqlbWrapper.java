@@ -50,6 +50,7 @@ public class ZysqlbWrapper implements Zysqlb, ModelWrapper<Zysqlb> {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("zysqlbId", getZysqlbId());
+		attributes.put("expertId", getExpertId());
 		attributes.put("sx", getSx());
 		attributes.put("zy", getZy());
 		attributes.put("zt", getZt());
@@ -66,6 +67,12 @@ public class ZysqlbWrapper implements Zysqlb, ModelWrapper<Zysqlb> {
 
 		if (zysqlbId != null) {
 			setZysqlbId(zysqlbId);
+		}
+
+		String expertId = (String)attributes.get("expertId");
+
+		if (expertId != null) {
+			setExpertId(expertId);
 		}
 
 		String sx = (String)attributes.get("sx");
@@ -143,6 +150,26 @@ public class ZysqlbWrapper implements Zysqlb, ModelWrapper<Zysqlb> {
 	@Override
 	public void setZysqlbId(long zysqlbId) {
 		_zysqlb.setZysqlbId(zysqlbId);
+	}
+
+	/**
+	* Returns the expert ID of this zysqlb.
+	*
+	* @return the expert ID of this zysqlb
+	*/
+	@Override
+	public java.lang.String getExpertId() {
+		return _zysqlb.getExpertId();
+	}
+
+	/**
+	* Sets the expert ID of this zysqlb.
+	*
+	* @param expertId the expert ID of this zysqlb
+	*/
+	@Override
+	public void setExpertId(java.lang.String expertId) {
+		_zysqlb.setExpertId(expertId);
 	}
 
 	/**

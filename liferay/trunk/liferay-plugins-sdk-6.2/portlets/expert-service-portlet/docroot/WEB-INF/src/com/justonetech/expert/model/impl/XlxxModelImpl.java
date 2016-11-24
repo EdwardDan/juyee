@@ -58,12 +58,13 @@ public class XlxxModelImpl extends BaseModelImpl<Xlxx> implements XlxxModel {
 	public static final String TABLE_NAME = "expert_Xlxx";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "xlxxId", Types.BIGINT },
+			{ "expertId", Types.VARCHAR },
 			{ "byyx", Types.VARCHAR },
 			{ "sxzy", Types.VARCHAR },
 			{ "xlhxw", Types.VARCHAR },
 			{ "zxsj", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table expert_Xlxx (xlxxId LONG not null primary key,byyx VARCHAR(75) null,sxzy VARCHAR(75) null,xlhxw VARCHAR(75) null,zxsj VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table expert_Xlxx (xlxxId LONG not null primary key,expertId VARCHAR(75) null,byyx VARCHAR(75) null,sxzy VARCHAR(75) null,xlhxw VARCHAR(75) null,zxsj VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table expert_Xlxx";
 	public static final String ORDER_BY_JPQL = " ORDER BY xlxx.xlxxId DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY expert_Xlxx.xlxxId DESC";
@@ -118,6 +119,7 @@ public class XlxxModelImpl extends BaseModelImpl<Xlxx> implements XlxxModel {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("xlxxId", getXlxxId());
+		attributes.put("expertId", getExpertId());
 		attributes.put("byyx", getByyx());
 		attributes.put("sxzy", getSxzy());
 		attributes.put("xlhxw", getXlhxw());
@@ -132,6 +134,12 @@ public class XlxxModelImpl extends BaseModelImpl<Xlxx> implements XlxxModel {
 
 		if (xlxxId != null) {
 			setXlxxId(xlxxId);
+		}
+
+		String expertId = (String)attributes.get("expertId");
+
+		if (expertId != null) {
+			setExpertId(expertId);
 		}
 
 		String byyx = (String)attributes.get("byyx");
@@ -167,6 +175,21 @@ public class XlxxModelImpl extends BaseModelImpl<Xlxx> implements XlxxModel {
 	@Override
 	public void setXlxxId(long xlxxId) {
 		_xlxxId = xlxxId;
+	}
+
+	@Override
+	public String getExpertId() {
+		if (_expertId == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _expertId;
+		}
+	}
+
+	@Override
+	public void setExpertId(String expertId) {
+		_expertId = expertId;
 	}
 
 	@Override
@@ -257,6 +280,7 @@ public class XlxxModelImpl extends BaseModelImpl<Xlxx> implements XlxxModel {
 		XlxxImpl xlxxImpl = new XlxxImpl();
 
 		xlxxImpl.setXlxxId(getXlxxId());
+		xlxxImpl.setExpertId(getExpertId());
 		xlxxImpl.setByyx(getByyx());
 		xlxxImpl.setSxzy(getSxzy());
 		xlxxImpl.setXlhxw(getXlhxw());
@@ -327,6 +351,14 @@ public class XlxxModelImpl extends BaseModelImpl<Xlxx> implements XlxxModel {
 
 		xlxxCacheModel.xlxxId = getXlxxId();
 
+		xlxxCacheModel.expertId = getExpertId();
+
+		String expertId = xlxxCacheModel.expertId;
+
+		if ((expertId != null) && (expertId.length() == 0)) {
+			xlxxCacheModel.expertId = null;
+		}
+
 		xlxxCacheModel.byyx = getByyx();
 
 		String byyx = xlxxCacheModel.byyx;
@@ -364,10 +396,12 @@ public class XlxxModelImpl extends BaseModelImpl<Xlxx> implements XlxxModel {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(11);
+		StringBundler sb = new StringBundler(13);
 
 		sb.append("{xlxxId=");
 		sb.append(getXlxxId());
+		sb.append(", expertId=");
+		sb.append(getExpertId());
 		sb.append(", byyx=");
 		sb.append(getByyx());
 		sb.append(", sxzy=");
@@ -383,7 +417,7 @@ public class XlxxModelImpl extends BaseModelImpl<Xlxx> implements XlxxModel {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(22);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.expert.model.Xlxx");
@@ -392,6 +426,10 @@ public class XlxxModelImpl extends BaseModelImpl<Xlxx> implements XlxxModel {
 		sb.append(
 			"<column><column-name>xlxxId</column-name><column-value><![CDATA[");
 		sb.append(getXlxxId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>expertId</column-name><column-value><![CDATA[");
+		sb.append(getExpertId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>byyx</column-name><column-value><![CDATA[");
@@ -418,6 +456,7 @@ public class XlxxModelImpl extends BaseModelImpl<Xlxx> implements XlxxModel {
 	private static ClassLoader _classLoader = Xlxx.class.getClassLoader();
 	private static Class<?>[] _escapedModelInterfaces = new Class[] { Xlxx.class };
 	private long _xlxxId;
+	private String _expertId;
 	private String _byyx;
 	private String _sxzy;
 	private String _xlhxw;

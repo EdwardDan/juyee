@@ -14,7 +14,7 @@
 
 package com.justonetech.expert.service;
 
-import com.justonetech.expert.model.JbxxClp;
+import com.justonetech.expert.model.ExpertClp;
 import com.justonetech.expert.model.XlxxClp;
 import com.justonetech.expert.model.ZqtzjkrzqkClp;
 import com.justonetech.expert.model.ZysqlbClp;
@@ -106,8 +106,8 @@ public class ClpSerializer {
 
 		String oldModelClassName = oldModelClass.getName();
 
-		if (oldModelClassName.equals(JbxxClp.class.getName())) {
-			return translateInputJbxx(oldModel);
+		if (oldModelClassName.equals(ExpertClp.class.getName())) {
+			return translateInputExpert(oldModel);
 		}
 
 		if (oldModelClassName.equals(XlxxClp.class.getName())) {
@@ -141,10 +141,10 @@ public class ClpSerializer {
 		return newList;
 	}
 
-	public static Object translateInputJbxx(BaseModel<?> oldModel) {
-		JbxxClp oldClpModel = (JbxxClp)oldModel;
+	public static Object translateInputExpert(BaseModel<?> oldModel) {
+		ExpertClp oldClpModel = (ExpertClp)oldModel;
 
-		BaseModel<?> newModel = oldClpModel.getJbxxRemoteModel();
+		BaseModel<?> newModel = oldClpModel.getExpertRemoteModel();
 
 		newModel.setModelAttributes(oldClpModel.getModelAttributes());
 
@@ -209,8 +209,8 @@ public class ClpSerializer {
 		String oldModelClassName = oldModelClass.getName();
 
 		if (oldModelClassName.equals(
-					"com.justonetech.expert.model.impl.JbxxImpl")) {
-			return translateOutputJbxx(oldModel);
+					"com.justonetech.expert.model.impl.ExpertImpl")) {
+			return translateOutputExpert(oldModel);
 		}
 		else if (oldModelClassName.endsWith("Clp")) {
 			try {
@@ -473,8 +473,8 @@ public class ClpSerializer {
 			return new SystemException();
 		}
 
-		if (className.equals("com.justonetech.expert.NoSuchJbxxException")) {
-			return new com.justonetech.expert.NoSuchJbxxException();
+		if (className.equals("com.justonetech.expert.NoSuchExpertException")) {
+			return new com.justonetech.expert.NoSuchExpertException();
 		}
 
 		if (className.equals("com.justonetech.expert.NoSuchXlxxException")) {
@@ -496,12 +496,12 @@ public class ClpSerializer {
 		return throwable;
 	}
 
-	public static Object translateOutputJbxx(BaseModel<?> oldModel) {
-		JbxxClp newModel = new JbxxClp();
+	public static Object translateOutputExpert(BaseModel<?> oldModel) {
+		ExpertClp newModel = new ExpertClp();
 
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
-		newModel.setJbxxRemoteModel(oldModel);
+		newModel.setExpertRemoteModel(oldModel);
 
 		return newModel;
 	}

@@ -1,3 +1,23 @@
+create table expert_Expert (
+	expertId LONG not null primary key,
+	xm VARCHAR(75) null,
+	xb VARCHAR(75) null,
+	sfzh VARCHAR(75) null,
+	csny DATE null,
+	gzdw VARCHAR(75) null,
+	dzyx VARCHAR(75) null,
+	txdz VARCHAR(75) null,
+	yzbm VARCHAR(75) null,
+	xrzw VARCHAR(75) null,
+	zc VARCHAR(75) null,
+	zyzg VARCHAR(75) null,
+	cszy VARCHAR(75) null,
+	zygznx VARCHAR(75) null,
+	sjhm VARCHAR(75) null,
+	lxdh VARCHAR(75) null,
+	cz VARCHAR(75) null
+);
+
 create table expert_Jbxx (
 	jbxxId LONG not null primary key,
 	xm VARCHAR(75) null,
@@ -20,6 +40,7 @@ create table expert_Jbxx (
 
 create table expert_Xlxx (
 	xlxxId LONG not null primary key,
+	expertId VARCHAR(75) null,
 	byyx VARCHAR(75) null,
 	sxzy VARCHAR(75) null,
 	xlhxw VARCHAR(75) null,
@@ -28,6 +49,7 @@ create table expert_Xlxx (
 
 create table expert_Zqtzjkrzqk (
 	zqtzjkrzqkId LONG not null primary key,
+	expertId VARCHAR(75) null,
 	zjkxtlsdw VARCHAR(75) null,
 	sqzy VARCHAR(75) null,
 	pzrq DATE null
@@ -35,6 +57,7 @@ create table expert_Zqtzjkrzqk (
 
 create table expert_Zysqlb (
 	zysqlbId LONG not null primary key,
+	expertId VARCHAR(75) null,
 	sx VARCHAR(75) null,
 	zy VARCHAR(75) null,
 	zt VARCHAR(75) null,
@@ -45,6 +68,7 @@ create table expert_Zysqlb (
 
 create table expert_Zzjl (
 	zzjlId LONG not null primary key,
+	expertId VARCHAR(75) null,
 	zzdw VARCHAR(75) null,
 	qzny VARCHAR(75) null,
 	cszyzygz VARCHAR(75) null,

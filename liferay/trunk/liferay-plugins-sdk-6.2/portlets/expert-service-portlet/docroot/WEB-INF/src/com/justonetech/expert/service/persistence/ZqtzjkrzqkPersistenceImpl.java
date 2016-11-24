@@ -320,6 +320,7 @@ public class ZqtzjkrzqkPersistenceImpl extends BasePersistenceImpl<Zqtzjkrzqk>
 		zqtzjkrzqkImpl.setPrimaryKey(zqtzjkrzqk.getPrimaryKey());
 
 		zqtzjkrzqkImpl.setZqtzjkrzqkId(zqtzjkrzqk.getZqtzjkrzqkId());
+		zqtzjkrzqkImpl.setExpertId(zqtzjkrzqk.getExpertId());
 		zqtzjkrzqkImpl.setZjkxtlsdw(zqtzjkrzqk.getZjkxtlsdw());
 		zqtzjkrzqkImpl.setSqzy(zqtzjkrzqk.getSqzy());
 		zqtzjkrzqkImpl.setPzrq(zqtzjkrzqk.getPzrq());

@@ -49,6 +49,7 @@ public class XlxxWrapper implements Xlxx, ModelWrapper<Xlxx> {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("xlxxId", getXlxxId());
+		attributes.put("expertId", getExpertId());
 		attributes.put("byyx", getByyx());
 		attributes.put("sxzy", getSxzy());
 		attributes.put("xlhxw", getXlhxw());
@@ -63,6 +64,12 @@ public class XlxxWrapper implements Xlxx, ModelWrapper<Xlxx> {
 
 		if (xlxxId != null) {
 			setXlxxId(xlxxId);
+		}
+
+		String expertId = (String)attributes.get("expertId");
+
+		if (expertId != null) {
+			setExpertId(expertId);
 		}
 
 		String byyx = (String)attributes.get("byyx");
@@ -128,6 +135,26 @@ public class XlxxWrapper implements Xlxx, ModelWrapper<Xlxx> {
 	@Override
 	public void setXlxxId(long xlxxId) {
 		_xlxx.setXlxxId(xlxxId);
+	}
+
+	/**
+	* Returns the expert ID of this xlxx.
+	*
+	* @return the expert ID of this xlxx
+	*/
+	@Override
+	public java.lang.String getExpertId() {
+		return _xlxx.getExpertId();
+	}
+
+	/**
+	* Sets the expert ID of this xlxx.
+	*
+	* @param expertId the expert ID of this xlxx
+	*/
+	@Override
+	public void setExpertId(java.lang.String expertId) {
+		_xlxx.setExpertId(expertId);
 	}
 
 	/**

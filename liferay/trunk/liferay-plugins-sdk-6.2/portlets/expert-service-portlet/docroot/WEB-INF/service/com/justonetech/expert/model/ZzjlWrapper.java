@@ -49,6 +49,7 @@ public class ZzjlWrapper implements Zzjl, ModelWrapper<Zzjl> {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("zzjlId", getZzjlId());
+		attributes.put("expertId", getExpertId());
 		attributes.put("zzdw", getZzdw());
 		attributes.put("qzny", getQzny());
 		attributes.put("cszyzygz", getCszyzygz());
@@ -63,6 +64,12 @@ public class ZzjlWrapper implements Zzjl, ModelWrapper<Zzjl> {
 
 		if (zzjlId != null) {
 			setZzjlId(zzjlId);
+		}
+
+		String expertId = (String)attributes.get("expertId");
+
+		if (expertId != null) {
+			setExpertId(expertId);
 		}
 
 		String zzdw = (String)attributes.get("zzdw");
@@ -128,6 +135,26 @@ public class ZzjlWrapper implements Zzjl, ModelWrapper<Zzjl> {
 	@Override
 	public void setZzjlId(long zzjlId) {
 		_zzjl.setZzjlId(zzjlId);
+	}
+
+	/**
+	* Returns the expert ID of this zzjl.
+	*
+	* @return the expert ID of this zzjl
+	*/
+	@Override
+	public java.lang.String getExpertId() {
+		return _zzjl.getExpertId();
+	}
+
+	/**
+	* Sets the expert ID of this zzjl.
+	*
+	* @param expertId the expert ID of this zzjl
+	*/
+	@Override
+	public void setExpertId(java.lang.String expertId) {
+		_zzjl.setExpertId(expertId);
 	}
 
 	/**

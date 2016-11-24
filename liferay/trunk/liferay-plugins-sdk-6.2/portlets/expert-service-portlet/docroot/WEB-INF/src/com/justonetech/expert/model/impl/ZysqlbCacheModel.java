@@ -37,10 +37,12 @@ import java.util.Date;
 public class ZysqlbCacheModel implements CacheModel<Zysqlb>, Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(15);
+		StringBundler sb = new StringBundler(17);
 
 		sb.append("{zysqlbId=");
 		sb.append(zysqlbId);
+		sb.append(", expertId=");
+		sb.append(expertId);
 		sb.append(", sx=");
 		sb.append(sx);
 		sb.append(", zy=");
@@ -63,6 +65,13 @@ public class ZysqlbCacheModel implements CacheModel<Zysqlb>, Externalizable {
 		ZysqlbImpl zysqlbImpl = new ZysqlbImpl();
 
 		zysqlbImpl.setZysqlbId(zysqlbId);
+
+		if (expertId == null) {
+			zysqlbImpl.setExpertId(StringPool.BLANK);
+		}
+		else {
+			zysqlbImpl.setExpertId(expertId);
+		}
 
 		if (sx == null) {
 			zysqlbImpl.setSx(StringPool.BLANK);
@@ -114,6 +123,7 @@ public class ZysqlbCacheModel implements CacheModel<Zysqlb>, Externalizable {
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		zysqlbId = objectInput.readLong();
+		expertId = objectInput.readUTF();
 		sx = objectInput.readUTF();
 		zy = objectInput.readUTF();
 		zt = objectInput.readUTF();
@@ -126,6 +136,13 @@ public class ZysqlbCacheModel implements CacheModel<Zysqlb>, Externalizable {
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(zysqlbId);
+
+		if (expertId == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(expertId);
+		}
 
 		if (sx == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
@@ -166,6 +183,7 @@ public class ZysqlbCacheModel implements CacheModel<Zysqlb>, Externalizable {
 	}
 
 	public long zysqlbId;
+	public String expertId;
 	public String sx;
 	public String zy;
 	public String zt;

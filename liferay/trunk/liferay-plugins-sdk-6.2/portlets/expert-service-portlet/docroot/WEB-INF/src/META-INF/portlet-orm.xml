@@ -7,9 +7,9 @@
 			<access>PROPERTY</access>
 		</persistence-unit-defaults>
 	</persistence-unit-metadata>
-	<mapped-superclass class="com.justonetech.expert.model.impl.JbxxModelImpl">
+	<mapped-superclass class="com.justonetech.expert.model.impl.ExpertModelImpl">
 		<attributes>
-			<id name="jbxxId" />
+			<id name="expertId" />
 			<basic name="xm" />
 			<basic name="xb" />
 			<basic name="sfzh" />
@@ -36,6 +36,7 @@
 	<mapped-superclass class="com.justonetech.expert.model.impl.XlxxModelImpl">
 		<attributes>
 			<id name="xlxxId" />
+			<basic name="expertId" />
 			<basic name="byyx" />
 			<basic name="sxzy" />
 			<basic name="xlhxw" />
@@ -48,6 +49,7 @@
 	<mapped-superclass class="com.justonetech.expert.model.impl.ZqtzjkrzqkModelImpl">
 		<attributes>
 			<id name="zqtzjkrzqkId" />
+			<basic name="expertId" />
 			<basic name="zjkxtlsdw" />
 			<basic name="sqzy" />
 			<basic name="pzrq">
@@ -61,6 +63,7 @@
 	<mapped-superclass class="com.justonetech.expert.model.impl.ZysqlbModelImpl">
 		<attributes>
 			<id name="zysqlbId" />
+			<basic name="expertId" />
 			<basic name="sx" />
 			<basic name="zy" />
 			<basic name="zt" />
@@ -77,6 +80,7 @@
 	<mapped-superclass class="com.justonetech.expert.model.impl.ZzjlModelImpl">
 		<attributes>
 			<id name="zzjlId" />
+			<basic name="expertId" />
 			<basic name="zzdw" />
 			<basic name="qzny" />
 			<basic name="cszyzygz" />
@@ -86,8 +90,8 @@
 			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
-	<entity class="com.justonetech.expert.model.impl.JbxxImpl" name="Jbxx">
-		<table name="expert_Jbxx" />
+	<entity class="com.justonetech.expert.model.impl.ExpertImpl" name="Expert">
+		<table name="expert_Expert" />
 		<attributes />
 	</entity>
 	<entity class="com.justonetech.expert.model.impl.XlxxImpl" name="Xlxx">

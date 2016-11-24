@@ -314,6 +314,7 @@ public class XlxxPersistenceImpl extends BasePersistenceImpl<Xlxx>
 		xlxxImpl.setPrimaryKey(xlxx.getPrimaryKey());
 
 		xlxxImpl.setXlxxId(xlxx.getXlxxId());
+		xlxxImpl.setExpertId(xlxx.getExpertId());
 		xlxxImpl.setByyx(xlxx.getByyx());
 		xlxxImpl.setSxzy(xlxx.getSxzy());
 		xlxxImpl.setXlhxw(xlxx.getXlhxw());

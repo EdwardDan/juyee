@@ -317,6 +317,7 @@ public class ZysqlbPersistenceImpl extends BasePersistenceImpl<Zysqlb>
 		zysqlbImpl.setPrimaryKey(zysqlb.getPrimaryKey());
 
 		zysqlbImpl.setZysqlbId(zysqlb.getZysqlbId());
+		zysqlbImpl.setExpertId(zysqlb.getExpertId());
 		zysqlbImpl.setSx(zysqlb.getSx());
 		zysqlbImpl.setZy(zysqlb.getZy());
 		zysqlbImpl.setZt(zysqlb.getZt());
