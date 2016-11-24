@@ -113,6 +113,19 @@ public class ZysqlbLocalServiceClpInvoker {
 		_methodName49 = "setBeanIdentifier";
 
 		_methodParameterTypes49 = new String[] { "java.lang.String" };
+
+		_methodName54 = "getZysqlbs";
+
+		_methodParameterTypes54 = new String[] {
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"int", "int"
+			};
+
+		_methodName55 = "createDynamicQuery";
+
+		_methodParameterTypes55 = new String[] {
+				"java.lang.String", "java.lang.String", "java.lang.String"
+			};
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -216,6 +229,20 @@ public class ZysqlbLocalServiceClpInvoker {
 			return null;
 		}
 
+		if (_methodName54.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes54, parameterTypes)) {
+			return ZysqlbLocalServiceUtil.getZysqlbs((java.lang.String)arguments[0],
+				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
+				((Integer)arguments[3]).intValue(),
+				((Integer)arguments[4]).intValue());
+		}
+
+		if (_methodName55.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes55, parameterTypes)) {
+			return ZysqlbLocalServiceUtil.createDynamicQuery((java.lang.String)arguments[0],
+				(java.lang.String)arguments[1], (java.lang.String)arguments[2]);
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -255,4 +282,8 @@ public class ZysqlbLocalServiceClpInvoker {
 	private String[] _methodParameterTypes48;
 	private String _methodName49;
 	private String[] _methodParameterTypes49;
+	private String _methodName54;
+	private String[] _methodParameterTypes54;
+	private String _methodName55;
+	private String[] _methodParameterTypes55;
 }

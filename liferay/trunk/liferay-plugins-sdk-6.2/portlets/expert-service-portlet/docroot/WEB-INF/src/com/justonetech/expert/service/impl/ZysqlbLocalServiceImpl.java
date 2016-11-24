@@ -14,7 +14,21 @@
 
 package com.justonetech.expert.service.impl;
 
+import java.util.Collections;
+import java.util.List;
+
+import com.justonetech.expert.model.Expert;
+import com.justonetech.expert.model.Zysqlb;
 import com.justonetech.expert.service.base.ZysqlbLocalServiceBaseImpl;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.OrderFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.Validator;
 
 /**
  * The implementation of the zysqlb local service.
@@ -36,4 +50,43 @@ public class ZysqlbLocalServiceImpl extends ZysqlbLocalServiceBaseImpl {
 	 *
 	 * Never reference this interface directly. Always use {@link com.justonetech.expert.service.ZysqlbLocalServiceUtil} to access the zysqlb local service.
 	 */
+	private static Log log = LogFactoryUtil.getLog(ZysqlbLocalServiceImpl.class);
+	
+	@SuppressWarnings("unchecked")
+	public List<Zysqlb> getZysqlbs(String xm, String zc, String cszy, int start, int end) {
+
+		try {
+			return this.dynamicQuery(createDynamicQuery(xm, zc, cszy), start, end);
+		}
+		catch (SystemException e) {
+			log.info(e.getMessage());
+		}
+		return Collections.emptyList();
+	}
+	
+	public DynamicQuery createDynamicQuery(String xm, String zc, String cszy) {
+
+		DynamicQuery dynamicQuery = this.dynamicQuery();
+		if (!Validator.isBlank(xm)) {
+			DynamicQuery projectProfileDQ = DynamicQueryFactoryUtil.forClass(Expert.class);
+			projectProfileDQ.setProjection(ProjectionFactoryUtil.property("expertId"));
+			projectProfileDQ.add(PropertyFactoryUtil.forName("xm").like("%" + xm + "%"));
+			dynamicQuery.add(PropertyFactoryUtil.forName("expertId").in(projectProfileDQ));
+		}
+		if (!Validator.isBlank(zc)) {
+			DynamicQuery projectProfileDQ = DynamicQueryFactoryUtil.forClass(Expert.class);
+			projectProfileDQ.setProjection(ProjectionFactoryUtil.property("expertId"));
+			projectProfileDQ.add(PropertyFactoryUtil.forName("zc").like("%" + zc + "%"));
+			dynamicQuery.add(PropertyFactoryUtil.forName("expertId").in(projectProfileDQ));
+		}
+		if (!Validator.isBlank(cszy)) {
+			DynamicQuery projectProfileDQ = DynamicQueryFactoryUtil.forClass(Expert.class);
+			projectProfileDQ.setProjection(ProjectionFactoryUtil.property("expertId"));
+			projectProfileDQ.add(PropertyFactoryUtil.forName("cszy").like("%" + cszy + "%"));
+			dynamicQuery.add(PropertyFactoryUtil.forName("expertId").in(projectProfileDQ));
+		}
+		dynamicQuery.addOrder(OrderFactoryUtil.desc("expertId"));
+		return dynamicQuery;
+	}
+	
 }
