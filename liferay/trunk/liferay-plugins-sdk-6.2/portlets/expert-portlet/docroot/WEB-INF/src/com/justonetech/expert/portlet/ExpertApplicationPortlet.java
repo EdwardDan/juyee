@@ -13,8 +13,10 @@ import javax.portlet.RenderResponse;
 import com.justonetech.expert.model.Expert;
 import com.justonetech.expert.service.ExpertLocalServiceUtil;
 import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 /**
@@ -32,7 +34,7 @@ public class ExpertApplicationPortlet extends MVCPortlet {
 	}
 	
 	//保存基本信息
-	public void saveJbxx(ActionRequest request,ActionResponse response) throws SystemException, ParseException {
+	public void saveJbxx(ActionRequest request,ActionResponse response) throws SystemException, ParseException, PortalException {
 		String xm = ParamUtil.getString(request, "xm");
 		String xb = ParamUtil.getString(request, "xb");
 		String sfzh = ParamUtil.getString(request, "sfzh");
@@ -51,7 +53,13 @@ public class ExpertApplicationPortlet extends MVCPortlet {
 		String sjhm = ParamUtil.getString(request, "sjhm");
 		String lxdh = ParamUtil.getString(request, "lxdh");
 		String cz = ParamUtil.getString(request, "cz");
-		Expert expert = ExpertLocalServiceUtil.createExpert(CounterLocalServiceUtil.increment());
+		long expertId = ParamUtil.getLong(request, "expertId");
+		Expert expert = null;
+		if(Validator.isNotNull(expertId)){
+			expert = ExpertLocalServiceUtil.getExpert(expertId);
+		}else{
+			expert = ExpertLocalServiceUtil.createExpert(CounterLocalServiceUtil.increment());
+		}
 		expert.setXm(xm);
 		expert.setXb(xb);
 		expert.setSfzh(sfzh);
