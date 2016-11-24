@@ -27,13 +27,13 @@
 		</tr>
 		<tr>
 			<td class="text-right">出生年月</td>
-			<td class="bg-white" colspan="3">${csn}">年${csy}月</td>
+			<td class="bg-white" colspan="3">${csn}年${csy}月</td>
 		</tr>
 		<tr>
 			<td class="text-right">工作单位</td>
-			<td class="bg-white">${expert.gzdw}"</td>
+			<td class="bg-white">${expert.gzdw}</td>
 			<td class="text-right">电子邮箱</td>
-			<td class="bg-white">${expert.dzyx}"</td>
+			<td class="bg-white">${expert.dzyx}</td>
 		</tr>
 		<tr>
 			<td class="text-right">通信地址</td>
