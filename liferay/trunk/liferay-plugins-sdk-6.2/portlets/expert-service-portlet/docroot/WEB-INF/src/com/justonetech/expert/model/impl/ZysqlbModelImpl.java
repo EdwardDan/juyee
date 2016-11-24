@@ -33,6 +33,7 @@ import java.io.Serializable;
 
 import java.sql.Types;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -62,9 +63,11 @@ public class ZysqlbModelImpl extends BaseModelImpl<Zysqlb>
 			{ "sx", Types.VARCHAR },
 			{ "zy", Types.VARCHAR },
 			{ "zt", Types.VARCHAR },
-			{ "shyj", Types.VARCHAR }
+			{ "shyj", Types.VARCHAR },
+			{ "shr", Types.VARCHAR },
+			{ "shrq", Types.TIMESTAMP }
 		};
-	public static final String TABLE_SQL_CREATE = "create table expert_Zysqlb (zysqlbId LONG not null primary key,sx VARCHAR(75) null,zy VARCHAR(75) null,zt VARCHAR(75) null,shyj VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table expert_Zysqlb (zysqlbId LONG not null primary key,sx VARCHAR(75) null,zy VARCHAR(75) null,zt VARCHAR(75) null,shyj VARCHAR(75) null,shr VARCHAR(75) null,shrq DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table expert_Zysqlb";
 	public static final String ORDER_BY_JPQL = " ORDER BY zysqlb.zysqlbId DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY expert_Zysqlb.zysqlbId DESC";
@@ -123,6 +126,8 @@ public class ZysqlbModelImpl extends BaseModelImpl<Zysqlb>
 		attributes.put("zy", getZy());
 		attributes.put("zt", getZt());
 		attributes.put("shyj", getShyj());
+		attributes.put("shr", getShr());
+		attributes.put("shrq", getShrq());
 
 		return attributes;
 	}
@@ -157,6 +162,18 @@ public class ZysqlbModelImpl extends BaseModelImpl<Zysqlb>
 
 		if (shyj != null) {
 			setShyj(shyj);
+		}
+
+		String shr = (String)attributes.get("shr");
+
+		if (shr != null) {
+			setShr(shr);
+		}
+
+		Date shrq = (Date)attributes.get("shrq");
+
+		if (shrq != null) {
+			setShrq(shrq);
 		}
 	}
 
@@ -231,6 +248,31 @@ public class ZysqlbModelImpl extends BaseModelImpl<Zysqlb>
 	}
 
 	@Override
+	public String getShr() {
+		if (_shr == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _shr;
+		}
+	}
+
+	@Override
+	public void setShr(String shr) {
+		_shr = shr;
+	}
+
+	@Override
+	public Date getShrq() {
+		return _shrq;
+	}
+
+	@Override
+	public void setShrq(Date shrq) {
+		_shrq = shrq;
+	}
+
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return ExpandoBridgeFactoryUtil.getExpandoBridge(0,
 			Zysqlb.class.getName(), getPrimaryKey());
@@ -262,6 +304,8 @@ public class ZysqlbModelImpl extends BaseModelImpl<Zysqlb>
 		zysqlbImpl.setZy(getZy());
 		zysqlbImpl.setZt(getZt());
 		zysqlbImpl.setShyj(getShyj());
+		zysqlbImpl.setShr(getShr());
+		zysqlbImpl.setShrq(getShrq());
 
 		zysqlbImpl.resetOriginalValues();
 
@@ -360,12 +404,29 @@ public class ZysqlbModelImpl extends BaseModelImpl<Zysqlb>
 			zysqlbCacheModel.shyj = null;
 		}
 
+		zysqlbCacheModel.shr = getShr();
+
+		String shr = zysqlbCacheModel.shr;
+
+		if ((shr != null) && (shr.length() == 0)) {
+			zysqlbCacheModel.shr = null;
+		}
+
+		Date shrq = getShrq();
+
+		if (shrq != null) {
+			zysqlbCacheModel.shrq = shrq.getTime();
+		}
+		else {
+			zysqlbCacheModel.shrq = Long.MIN_VALUE;
+		}
+
 		return zysqlbCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(11);
+		StringBundler sb = new StringBundler(15);
 
 		sb.append("{zysqlbId=");
 		sb.append(getZysqlbId());
@@ -377,6 +438,10 @@ public class ZysqlbModelImpl extends BaseModelImpl<Zysqlb>
 		sb.append(getZt());
 		sb.append(", shyj=");
 		sb.append(getShyj());
+		sb.append(", shr=");
+		sb.append(getShr());
+		sb.append(", shrq=");
+		sb.append(getShrq());
 		sb.append("}");
 
 		return sb.toString();
@@ -384,7 +449,7 @@ public class ZysqlbModelImpl extends BaseModelImpl<Zysqlb>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(25);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.expert.model.Zysqlb");
@@ -410,6 +475,14 @@ public class ZysqlbModelImpl extends BaseModelImpl<Zysqlb>
 			"<column><column-name>shyj</column-name><column-value><![CDATA[");
 		sb.append(getShyj());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>shr</column-name><column-value><![CDATA[");
+		sb.append(getShr());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>shrq</column-name><column-value><![CDATA[");
+		sb.append(getShrq());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -423,5 +496,7 @@ public class ZysqlbModelImpl extends BaseModelImpl<Zysqlb>
 	private String _zy;
 	private String _zt;
 	private String _shyj;
+	private String _shr;
+	private Date _shrq;
 	private Zysqlb _escapedModel;
 }

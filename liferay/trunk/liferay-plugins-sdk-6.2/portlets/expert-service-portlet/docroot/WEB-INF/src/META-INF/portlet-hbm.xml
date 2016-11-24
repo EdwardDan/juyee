@@ -57,6 +57,8 @@
 		<property name="zy" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="zt" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="shyj" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="shr" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="shrq" type="org.hibernate.type.TimestampType" />
 	</class>
 	<class name="com.justonetech.expert.model.impl.ZzjlImpl" table="expert_Zzjl">
 		<cache usage="read-write" />

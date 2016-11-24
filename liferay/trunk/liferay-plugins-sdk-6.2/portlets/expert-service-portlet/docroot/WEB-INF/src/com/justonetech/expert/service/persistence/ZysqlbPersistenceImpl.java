@@ -321,6 +321,8 @@ public class ZysqlbPersistenceImpl extends BasePersistenceImpl<Zysqlb>
 		zysqlbImpl.setZy(zysqlb.getZy());
 		zysqlbImpl.setZt(zysqlb.getZt());
 		zysqlbImpl.setShyj(zysqlb.getShyj());
+		zysqlbImpl.setShr(zysqlb.getShr());
+		zysqlbImpl.setShrq(zysqlb.getShrq());
 
 		return zysqlbImpl;
 	}

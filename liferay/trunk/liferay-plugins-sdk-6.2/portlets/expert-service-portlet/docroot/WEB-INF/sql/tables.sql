@@ -38,7 +38,9 @@ create table expert_Zysqlb (
 	sx VARCHAR(75) null,
 	zy VARCHAR(75) null,
 	zt VARCHAR(75) null,
-	shyj VARCHAR(75) null
+	shyj VARCHAR(75) null,
+	shr VARCHAR(75) null,
+	shrq DATE null
 );
 
 create table expert_Zzjl (

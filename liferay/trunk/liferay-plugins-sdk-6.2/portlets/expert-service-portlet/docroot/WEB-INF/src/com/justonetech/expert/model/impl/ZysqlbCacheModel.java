@@ -25,6 +25,8 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
+import java.util.Date;
+
 /**
  * The cache model class for representing Zysqlb in entity cache.
  *
@@ -35,7 +37,7 @@ import java.io.ObjectOutput;
 public class ZysqlbCacheModel implements CacheModel<Zysqlb>, Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(11);
+		StringBundler sb = new StringBundler(15);
 
 		sb.append("{zysqlbId=");
 		sb.append(zysqlbId);
@@ -47,6 +49,10 @@ public class ZysqlbCacheModel implements CacheModel<Zysqlb>, Externalizable {
 		sb.append(zt);
 		sb.append(", shyj=");
 		sb.append(shyj);
+		sb.append(", shr=");
+		sb.append(shr);
+		sb.append(", shrq=");
+		sb.append(shrq);
 		sb.append("}");
 
 		return sb.toString();
@@ -86,6 +92,20 @@ public class ZysqlbCacheModel implements CacheModel<Zysqlb>, Externalizable {
 			zysqlbImpl.setShyj(shyj);
 		}
 
+		if (shr == null) {
+			zysqlbImpl.setShr(StringPool.BLANK);
+		}
+		else {
+			zysqlbImpl.setShr(shr);
+		}
+
+		if (shrq == Long.MIN_VALUE) {
+			zysqlbImpl.setShrq(null);
+		}
+		else {
+			zysqlbImpl.setShrq(new Date(shrq));
+		}
+
 		zysqlbImpl.resetOriginalValues();
 
 		return zysqlbImpl;
@@ -98,6 +118,8 @@ public class ZysqlbCacheModel implements CacheModel<Zysqlb>, Externalizable {
 		zy = objectInput.readUTF();
 		zt = objectInput.readUTF();
 		shyj = objectInput.readUTF();
+		shr = objectInput.readUTF();
+		shrq = objectInput.readLong();
 	}
 
 	@Override
@@ -132,6 +154,15 @@ public class ZysqlbCacheModel implements CacheModel<Zysqlb>, Externalizable {
 		else {
 			objectOutput.writeUTF(shyj);
 		}
+
+		if (shr == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(shr);
+		}
+
+		objectOutput.writeLong(shrq);
 	}
 
 	public long zysqlbId;
@@ -139,4 +170,6 @@ public class ZysqlbCacheModel implements CacheModel<Zysqlb>, Externalizable {
 	public String zy;
 	public String zt;
 	public String shyj;
+	public String shr;
+	public long shrq;
 }

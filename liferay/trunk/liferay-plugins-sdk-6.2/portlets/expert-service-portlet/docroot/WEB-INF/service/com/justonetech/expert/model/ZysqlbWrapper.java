@@ -17,6 +17,7 @@ package com.justonetech.expert.model;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelWrapper;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -53,6 +54,8 @@ public class ZysqlbWrapper implements Zysqlb, ModelWrapper<Zysqlb> {
 		attributes.put("zy", getZy());
 		attributes.put("zt", getZt());
 		attributes.put("shyj", getShyj());
+		attributes.put("shr", getShr());
+		attributes.put("shrq", getShrq());
 
 		return attributes;
 	}
@@ -87,6 +90,18 @@ public class ZysqlbWrapper implements Zysqlb, ModelWrapper<Zysqlb> {
 
 		if (shyj != null) {
 			setShyj(shyj);
+		}
+
+		String shr = (String)attributes.get("shr");
+
+		if (shr != null) {
+			setShr(shr);
+		}
+
+		Date shrq = (Date)attributes.get("shrq");
+
+		if (shrq != null) {
+			setShrq(shrq);
 		}
 	}
 
@@ -208,6 +223,46 @@ public class ZysqlbWrapper implements Zysqlb, ModelWrapper<Zysqlb> {
 	@Override
 	public void setShyj(java.lang.String shyj) {
 		_zysqlb.setShyj(shyj);
+	}
+
+	/**
+	* Returns the shr of this zysqlb.
+	*
+	* @return the shr of this zysqlb
+	*/
+	@Override
+	public java.lang.String getShr() {
+		return _zysqlb.getShr();
+	}
+
+	/**
+	* Sets the shr of this zysqlb.
+	*
+	* @param shr the shr of this zysqlb
+	*/
+	@Override
+	public void setShr(java.lang.String shr) {
+		_zysqlb.setShr(shr);
+	}
+
+	/**
+	* Returns the shrq of this zysqlb.
+	*
+	* @return the shrq of this zysqlb
+	*/
+	@Override
+	public java.util.Date getShrq() {
+		return _zysqlb.getShrq();
+	}
+
+	/**
+	* Sets the shrq of this zysqlb.
+	*
+	* @param shrq the shrq of this zysqlb
+	*/
+	@Override
+	public void setShrq(java.util.Date shrq) {
+		_zysqlb.setShrq(shrq);
 	}
 
 	@Override

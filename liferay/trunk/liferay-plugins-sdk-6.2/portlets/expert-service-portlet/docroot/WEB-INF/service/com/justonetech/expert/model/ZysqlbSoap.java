@@ -17,6 +17,7 @@ package com.justonetech.expert.model;
 import java.io.Serializable;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -34,6 +35,8 @@ public class ZysqlbSoap implements Serializable {
 		soapModel.setZy(model.getZy());
 		soapModel.setZt(model.getZt());
 		soapModel.setShyj(model.getShyj());
+		soapModel.setShr(model.getShr());
+		soapModel.setShrq(model.getShrq());
 
 		return soapModel;
 	}
@@ -126,9 +129,27 @@ public class ZysqlbSoap implements Serializable {
 		_shyj = shyj;
 	}
 
+	public String getShr() {
+		return _shr;
+	}
+
+	public void setShr(String shr) {
+		_shr = shr;
+	}
+
+	public Date getShrq() {
+		return _shrq;
+	}
+
+	public void setShrq(Date shrq) {
+		_shrq = shrq;
+	}
+
 	private long _zysqlbId;
 	private String _sx;
 	private String _zy;
 	private String _zt;
 	private String _shyj;
+	private String _shr;
+	private Date _shrq;
 }

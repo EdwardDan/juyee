@@ -23,6 +23,8 @@ import com.liferay.portlet.expando.model.ExpandoBridge;
 
 import java.io.Serializable;
 
+import java.util.Date;
+
 /**
  * The base model interface for the Zysqlb service. Represents a row in the &quot;expert_Zysqlb&quot; database table, with each column mapped to a property of this class.
  *
@@ -130,6 +132,35 @@ public interface ZysqlbModel extends BaseModel<Zysqlb> {
 	 * @param shyj the shyj of this zysqlb
 	 */
 	public void setShyj(String shyj);
+
+	/**
+	 * Returns the shr of this zysqlb.
+	 *
+	 * @return the shr of this zysqlb
+	 */
+	@AutoEscape
+	public String getShr();
+
+	/**
+	 * Sets the shr of this zysqlb.
+	 *
+	 * @param shr the shr of this zysqlb
+	 */
+	public void setShr(String shr);
+
+	/**
+	 * Returns the shrq of this zysqlb.
+	 *
+	 * @return the shrq of this zysqlb
+	 */
+	public Date getShrq();
+
+	/**
+	 * Sets the shrq of this zysqlb.
+	 *
+	 * @param shrq the shrq of this zysqlb
+	 */
+	public void setShrq(Date shrq);
 
 	@Override
 	public boolean isNew();

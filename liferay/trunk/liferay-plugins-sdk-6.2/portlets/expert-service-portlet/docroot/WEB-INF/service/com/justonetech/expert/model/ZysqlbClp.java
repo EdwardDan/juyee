@@ -28,6 +28,7 @@ import java.io.Serializable;
 
 import java.lang.reflect.Method;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -77,6 +78,8 @@ public class ZysqlbClp extends BaseModelImpl<Zysqlb> implements Zysqlb {
 		attributes.put("zy", getZy());
 		attributes.put("zt", getZt());
 		attributes.put("shyj", getShyj());
+		attributes.put("shr", getShr());
+		attributes.put("shrq", getShrq());
 
 		return attributes;
 	}
@@ -111,6 +114,18 @@ public class ZysqlbClp extends BaseModelImpl<Zysqlb> implements Zysqlb {
 
 		if (shyj != null) {
 			setShyj(shyj);
+		}
+
+		String shr = (String)attributes.get("shr");
+
+		if (shr != null) {
+			setShr(shr);
+		}
+
+		Date shrq = (Date)attributes.get("shrq");
+
+		if (shrq != null) {
+			setShrq(shrq);
 		}
 	}
 
@@ -229,6 +244,52 @@ public class ZysqlbClp extends BaseModelImpl<Zysqlb> implements Zysqlb {
 		}
 	}
 
+	@Override
+	public String getShr() {
+		return _shr;
+	}
+
+	@Override
+	public void setShr(String shr) {
+		_shr = shr;
+
+		if (_zysqlbRemoteModel != null) {
+			try {
+				Class<?> clazz = _zysqlbRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setShr", String.class);
+
+				method.invoke(_zysqlbRemoteModel, shr);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public Date getShrq() {
+		return _shrq;
+	}
+
+	@Override
+	public void setShrq(Date shrq) {
+		_shrq = shrq;
+
+		if (_zysqlbRemoteModel != null) {
+			try {
+				Class<?> clazz = _zysqlbRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setShrq", Date.class);
+
+				method.invoke(_zysqlbRemoteModel, shrq);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
 	public BaseModel<?> getZysqlbRemoteModel() {
 		return _zysqlbRemoteModel;
 	}
@@ -303,6 +364,8 @@ public class ZysqlbClp extends BaseModelImpl<Zysqlb> implements Zysqlb {
 		clone.setZy(getZy());
 		clone.setZt(getZt());
 		clone.setShyj(getShyj());
+		clone.setShr(getShr());
+		clone.setShrq(getShrq());
 
 		return clone;
 	}
@@ -363,7 +426,7 @@ public class ZysqlbClp extends BaseModelImpl<Zysqlb> implements Zysqlb {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(11);
+		StringBundler sb = new StringBundler(15);
 
 		sb.append("{zysqlbId=");
 		sb.append(getZysqlbId());
@@ -375,6 +438,10 @@ public class ZysqlbClp extends BaseModelImpl<Zysqlb> implements Zysqlb {
 		sb.append(getZt());
 		sb.append(", shyj=");
 		sb.append(getShyj());
+		sb.append(", shr=");
+		sb.append(getShr());
+		sb.append(", shrq=");
+		sb.append(getShrq());
 		sb.append("}");
 
 		return sb.toString();
@@ -382,7 +449,7 @@ public class ZysqlbClp extends BaseModelImpl<Zysqlb> implements Zysqlb {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(25);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.expert.model.Zysqlb");
@@ -408,6 +475,14 @@ public class ZysqlbClp extends BaseModelImpl<Zysqlb> implements Zysqlb {
 			"<column><column-name>shyj</column-name><column-value><![CDATA[");
 		sb.append(getShyj());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>shr</column-name><column-value><![CDATA[");
+		sb.append(getShr());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>shrq</column-name><column-value><![CDATA[");
+		sb.append(getShrq());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -419,6 +494,8 @@ public class ZysqlbClp extends BaseModelImpl<Zysqlb> implements Zysqlb {
 	private String _zy;
 	private String _zt;
 	private String _shyj;
+	private String _shr;
+	private Date _shrq;
 	private BaseModel<?> _zysqlbRemoteModel;
 	private Class<?> _clpSerializerClass = com.justonetech.expert.service.ClpSerializer.class;
 }

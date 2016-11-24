@@ -65,6 +65,10 @@
 			<basic name="zy" />
 			<basic name="zt" />
 			<basic name="shyj" />
+			<basic name="shr" />
+			<basic name="shrq">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />

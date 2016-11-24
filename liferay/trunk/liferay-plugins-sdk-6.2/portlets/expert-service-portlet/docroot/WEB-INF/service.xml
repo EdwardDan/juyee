@@ -102,6 +102,8 @@
 		<column name="zy" type="String" /><!-- 二级（专业） -->
 		<column name="zt" type="String" /><!-- 状态 -->
 		<column name="shyj" type="String" /><!-- 审核意见 -->
+		<column name="shr" type="String" /><!-- 审核人 -->
+		<column name="shrq" type="Date" /><!-- 审核日期 -->
 
 		<!-- Order -->
 		<order>
