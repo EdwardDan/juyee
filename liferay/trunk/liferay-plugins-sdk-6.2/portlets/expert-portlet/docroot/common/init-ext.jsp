@@ -6,7 +6,6 @@
 <%@ page import="com.liferay.counter.service.CounterLocalServiceUtil"%>
 
 
-
 <%@ page import="java.text.SimpleDateFormat"%>
 <%@ page import="com.liferay.portal.kernel.workflow.WorkflowTask" %>
 <%@ page import="com.liferay.portal.kernel.workflow.WorkflowTaskManagerUtil" %>

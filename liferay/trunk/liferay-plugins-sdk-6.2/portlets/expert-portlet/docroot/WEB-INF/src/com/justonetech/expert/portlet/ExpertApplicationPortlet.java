@@ -12,8 +12,8 @@ import javax.portlet.RenderResponse;
 
 import com.justonetech.expert.model.Expert;
 import com.justonetech.expert.service.ExpertLocalServiceUtil;
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -28,10 +28,19 @@ public class ExpertApplicationPortlet extends MVCPortlet {
 			throws PortletException, IOException {
 		// TODO Auto-generated method stub
 		String tabNum = ParamUtil.get(renderRequest, "tabNum", "1");
-		System.out.println(tabNum);
 		renderRequest.setAttribute("tabNum", tabNum);
 		super.render(renderRequest, renderResponse);
 	}
+
+
+	public void deleteExpert(ActionRequest request,ActionResponse response) throws NumberFormatException, PortalException, SystemException{
+		String expertId = ParamUtil.get(request, "expertId", "");
+		if(expertId!=""){
+			Expert expert = ExpertLocalServiceUtil.getExpert(Long.parseLong(expertId));
+			ExpertLocalServiceUtil.deleteExpert(expert);
+		}
+	}
+
 	
 	//保存基本信息
 	public void saveJbxx(ActionRequest request,ActionResponse response) throws SystemException, ParseException, PortalException {
@@ -77,5 +86,6 @@ public class ExpertApplicationPortlet extends MVCPortlet {
 		expert.setLxdh(lxdh);
 		expert.setCz(cz);
 		ExpertLocalServiceUtil.updateExpert(expert);
+
 	}
 }
