@@ -9,13 +9,16 @@
 </portlet:actionURL>
 <%
 	long expertId = ParamUtil.getLong(request, "expertId");
-	Expert expert = ExpertLocalServiceUtil.getExpert(expertId);
-	String csny = expert.getSfzh().substring(6,12);
-	String csn = csny.substring(0, 4);
-	String csy = csny.substring(4,6);
-	request.setAttribute("expert", expert);
-	request.setAttribute("csn", csn);
-	request.setAttribute("csy", csy);
+	Expert expert = null;
+	if(expertId!=0){
+		expert = ExpertLocalServiceUtil.getExpert(expertId);
+		String csny = expert.getSfzh().substring(6,12);
+		String csn = csny.substring(0, 4);
+		String csy = csny.substring(4,6);
+		request.setAttribute("expert", expert);
+		request.setAttribute("csn", csn);
+		request.setAttribute("csy", csy);
+	}
 %>
 <aui:form action="${saveJbxxURL}">
 	<aui:input name="expertId" type="hidden" value="<%=expertId%>" />
