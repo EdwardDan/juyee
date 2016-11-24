@@ -74,7 +74,7 @@ public class ZzjlClp extends BaseModelImpl<Zzjl> implements Zzjl {
 
 		attributes.put("zzjlId", getZzjlId());
 		attributes.put("expertId", getExpertId());
-		attributes.put("zzdw", getZzdw());
+		attributes.put("gzdw", getGzdw());
 		attributes.put("qzny", getQzny());
 		attributes.put("cszyzygz", getCszyzygz());
 		attributes.put("zw", getZw());
@@ -96,10 +96,10 @@ public class ZzjlClp extends BaseModelImpl<Zzjl> implements Zzjl {
 			setExpertId(expertId);
 		}
 
-		String zzdw = (String)attributes.get("zzdw");
+		String gzdw = (String)attributes.get("gzdw");
 
-		if (zzdw != null) {
-			setZzdw(zzdw);
+		if (gzdw != null) {
+			setGzdw(gzdw);
 		}
 
 		String qzny = (String)attributes.get("qzny");
@@ -168,21 +168,21 @@ public class ZzjlClp extends BaseModelImpl<Zzjl> implements Zzjl {
 	}
 
 	@Override
-	public String getZzdw() {
-		return _zzdw;
+	public String getGzdw() {
+		return _gzdw;
 	}
 
 	@Override
-	public void setZzdw(String zzdw) {
-		_zzdw = zzdw;
+	public void setGzdw(String gzdw) {
+		_gzdw = gzdw;
 
 		if (_zzjlRemoteModel != null) {
 			try {
 				Class<?> clazz = _zzjlRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setZzdw", String.class);
+				Method method = clazz.getMethod("setGzdw", String.class);
 
-				method.invoke(_zzjlRemoteModel, zzdw);
+				method.invoke(_zzjlRemoteModel, gzdw);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -330,7 +330,7 @@ public class ZzjlClp extends BaseModelImpl<Zzjl> implements Zzjl {
 
 		clone.setZzjlId(getZzjlId());
 		clone.setExpertId(getExpertId());
-		clone.setZzdw(getZzdw());
+		clone.setGzdw(getGzdw());
 		clone.setQzny(getQzny());
 		clone.setCszyzygz(getCszyzygz());
 		clone.setZw(getZw());
@@ -400,8 +400,8 @@ public class ZzjlClp extends BaseModelImpl<Zzjl> implements Zzjl {
 		sb.append(getZzjlId());
 		sb.append(", expertId=");
 		sb.append(getExpertId());
-		sb.append(", zzdw=");
-		sb.append(getZzdw());
+		sb.append(", gzdw=");
+		sb.append(getGzdw());
 		sb.append(", qzny=");
 		sb.append(getQzny());
 		sb.append(", cszyzygz=");
@@ -430,8 +430,8 @@ public class ZzjlClp extends BaseModelImpl<Zzjl> implements Zzjl {
 		sb.append(getExpertId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>zzdw</column-name><column-value><![CDATA[");
-		sb.append(getZzdw());
+			"<column><column-name>gzdw</column-name><column-value><![CDATA[");
+		sb.append(getGzdw());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>qzny</column-name><column-value><![CDATA[");
@@ -453,7 +453,7 @@ public class ZzjlClp extends BaseModelImpl<Zzjl> implements Zzjl {
 
 	private long _zzjlId;
 	private long _expertId;
-	private String _zzdw;
+	private String _gzdw;
 	private String _qzny;
 	private String _cszyzygz;
 	private String _zw;

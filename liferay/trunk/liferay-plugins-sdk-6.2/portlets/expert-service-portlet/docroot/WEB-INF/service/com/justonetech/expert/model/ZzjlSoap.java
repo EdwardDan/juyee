@@ -31,7 +31,7 @@ public class ZzjlSoap implements Serializable {
 
 		soapModel.setZzjlId(model.getZzjlId());
 		soapModel.setExpertId(model.getExpertId());
-		soapModel.setZzdw(model.getZzdw());
+		soapModel.setGzdw(model.getGzdw());
 		soapModel.setQzny(model.getQzny());
 		soapModel.setCszyzygz(model.getCszyzygz());
 		soapModel.setZw(model.getZw());
@@ -103,12 +103,12 @@ public class ZzjlSoap implements Serializable {
 		_expertId = expertId;
 	}
 
-	public String getZzdw() {
-		return _zzdw;
+	public String getGzdw() {
+		return _gzdw;
 	}
 
-	public void setZzdw(String zzdw) {
-		_zzdw = zzdw;
+	public void setGzdw(String gzdw) {
+		_gzdw = gzdw;
 	}
 
 	public String getQzny() {
@@ -137,7 +137,7 @@ public class ZzjlSoap implements Serializable {
 
 	private long _zzjlId;
 	private long _expertId;
-	private String _zzdw;
+	private String _gzdw;
 	private String _qzny;
 	private String _cszyzygz;
 	private String _zw;

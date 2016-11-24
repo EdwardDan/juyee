@@ -41,8 +41,8 @@ public class ZzjlCacheModel implements CacheModel<Zzjl>, Externalizable {
 		sb.append(zzjlId);
 		sb.append(", expertId=");
 		sb.append(expertId);
-		sb.append(", zzdw=");
-		sb.append(zzdw);
+		sb.append(", gzdw=");
+		sb.append(gzdw);
 		sb.append(", qzny=");
 		sb.append(qzny);
 		sb.append(", cszyzygz=");
@@ -61,11 +61,11 @@ public class ZzjlCacheModel implements CacheModel<Zzjl>, Externalizable {
 		zzjlImpl.setZzjlId(zzjlId);
 		zzjlImpl.setExpertId(expertId);
 
-		if (zzdw == null) {
-			zzjlImpl.setZzdw(StringPool.BLANK);
+		if (gzdw == null) {
+			zzjlImpl.setGzdw(StringPool.BLANK);
 		}
 		else {
-			zzjlImpl.setZzdw(zzdw);
+			zzjlImpl.setGzdw(gzdw);
 		}
 
 		if (qzny == null) {
@@ -98,7 +98,7 @@ public class ZzjlCacheModel implements CacheModel<Zzjl>, Externalizable {
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		zzjlId = objectInput.readLong();
 		expertId = objectInput.readLong();
-		zzdw = objectInput.readUTF();
+		gzdw = objectInput.readUTF();
 		qzny = objectInput.readUTF();
 		cszyzygz = objectInput.readUTF();
 		zw = objectInput.readUTF();
@@ -110,11 +110,11 @@ public class ZzjlCacheModel implements CacheModel<Zzjl>, Externalizable {
 		objectOutput.writeLong(zzjlId);
 		objectOutput.writeLong(expertId);
 
-		if (zzdw == null) {
+		if (gzdw == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(zzdw);
+			objectOutput.writeUTF(gzdw);
 		}
 
 		if (qzny == null) {
@@ -141,7 +141,7 @@ public class ZzjlCacheModel implements CacheModel<Zzjl>, Externalizable {
 
 	public long zzjlId;
 	public long expertId;
-	public String zzdw;
+	public String gzdw;
 	public String qzny;
 	public String cszyzygz;
 	public String zw;

@@ -59,12 +59,12 @@ public class ZzjlModelImpl extends BaseModelImpl<Zzjl> implements ZzjlModel {
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "zzjlId", Types.BIGINT },
 			{ "expertId", Types.BIGINT },
-			{ "zzdw", Types.VARCHAR },
+			{ "gzdw", Types.VARCHAR },
 			{ "qzny", Types.VARCHAR },
 			{ "cszyzygz", Types.VARCHAR },
 			{ "zw", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table expert_Zzjl (zzjlId LONG not null primary key,expertId LONG,zzdw VARCHAR(75) null,qzny VARCHAR(75) null,cszyzygz VARCHAR(75) null,zw VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table expert_Zzjl (zzjlId LONG not null primary key,expertId LONG,gzdw VARCHAR(75) null,qzny VARCHAR(75) null,cszyzygz VARCHAR(75) null,zw VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table expert_Zzjl";
 	public static final String ORDER_BY_JPQL = " ORDER BY zzjl.zzjlId DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY expert_Zzjl.zzjlId DESC";
@@ -120,7 +120,7 @@ public class ZzjlModelImpl extends BaseModelImpl<Zzjl> implements ZzjlModel {
 
 		attributes.put("zzjlId", getZzjlId());
 		attributes.put("expertId", getExpertId());
-		attributes.put("zzdw", getZzdw());
+		attributes.put("gzdw", getGzdw());
 		attributes.put("qzny", getQzny());
 		attributes.put("cszyzygz", getCszyzygz());
 		attributes.put("zw", getZw());
@@ -142,10 +142,10 @@ public class ZzjlModelImpl extends BaseModelImpl<Zzjl> implements ZzjlModel {
 			setExpertId(expertId);
 		}
 
-		String zzdw = (String)attributes.get("zzdw");
+		String gzdw = (String)attributes.get("gzdw");
 
-		if (zzdw != null) {
-			setZzdw(zzdw);
+		if (gzdw != null) {
+			setGzdw(gzdw);
 		}
 
 		String qzny = (String)attributes.get("qzny");
@@ -188,18 +188,18 @@ public class ZzjlModelImpl extends BaseModelImpl<Zzjl> implements ZzjlModel {
 	}
 
 	@Override
-	public String getZzdw() {
-		if (_zzdw == null) {
+	public String getGzdw() {
+		if (_gzdw == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _zzdw;
+			return _gzdw;
 		}
 	}
 
 	@Override
-	public void setZzdw(String zzdw) {
-		_zzdw = zzdw;
+	public void setGzdw(String gzdw) {
+		_gzdw = gzdw;
 	}
 
 	@Override
@@ -276,7 +276,7 @@ public class ZzjlModelImpl extends BaseModelImpl<Zzjl> implements ZzjlModel {
 
 		zzjlImpl.setZzjlId(getZzjlId());
 		zzjlImpl.setExpertId(getExpertId());
-		zzjlImpl.setZzdw(getZzdw());
+		zzjlImpl.setGzdw(getGzdw());
 		zzjlImpl.setQzny(getQzny());
 		zzjlImpl.setCszyzygz(getCszyzygz());
 		zzjlImpl.setZw(getZw());
@@ -348,12 +348,12 @@ public class ZzjlModelImpl extends BaseModelImpl<Zzjl> implements ZzjlModel {
 
 		zzjlCacheModel.expertId = getExpertId();
 
-		zzjlCacheModel.zzdw = getZzdw();
+		zzjlCacheModel.gzdw = getGzdw();
 
-		String zzdw = zzjlCacheModel.zzdw;
+		String gzdw = zzjlCacheModel.gzdw;
 
-		if ((zzdw != null) && (zzdw.length() == 0)) {
-			zzjlCacheModel.zzdw = null;
+		if ((gzdw != null) && (gzdw.length() == 0)) {
+			zzjlCacheModel.gzdw = null;
 		}
 
 		zzjlCacheModel.qzny = getQzny();
@@ -391,8 +391,8 @@ public class ZzjlModelImpl extends BaseModelImpl<Zzjl> implements ZzjlModel {
 		sb.append(getZzjlId());
 		sb.append(", expertId=");
 		sb.append(getExpertId());
-		sb.append(", zzdw=");
-		sb.append(getZzdw());
+		sb.append(", gzdw=");
+		sb.append(getGzdw());
 		sb.append(", qzny=");
 		sb.append(getQzny());
 		sb.append(", cszyzygz=");
@@ -421,8 +421,8 @@ public class ZzjlModelImpl extends BaseModelImpl<Zzjl> implements ZzjlModel {
 		sb.append(getExpertId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>zzdw</column-name><column-value><![CDATA[");
-		sb.append(getZzdw());
+			"<column><column-name>gzdw</column-name><column-value><![CDATA[");
+		sb.append(getGzdw());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>qzny</column-name><column-value><![CDATA[");
@@ -446,7 +446,7 @@ public class ZzjlModelImpl extends BaseModelImpl<Zzjl> implements ZzjlModel {
 	private static Class<?>[] _escapedModelInterfaces = new Class[] { Zzjl.class };
 	private long _zzjlId;
 	private long _expertId;
-	private String _zzdw;
+	private String _gzdw;
 	private String _qzny;
 	private String _cszyzygz;
 	private String _zw;

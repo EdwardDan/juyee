@@ -63,7 +63,7 @@
 
 		<!-- Business fields -->
 		<column name="expertId" type="long" /><!-- 专家id -->
-		<column name="zzdw" type="String" /><!-- 工作单位 -->
+		<column name="gzdw" type="String" /><!-- 工作单位 -->
 		<column name="qzny" type="String" /><!-- 起止年月 -->
 		<column name="cszyzygz" type="String" /><!-- 从事主要专业工作 -->
 		<column name="zw" type="String" /><!-- 职务 -->

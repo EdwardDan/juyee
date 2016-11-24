@@ -69,7 +69,7 @@
 			<generator class="assigned" />
 		</id>
 		<property name="expertId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="zzdw" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="gzdw" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="qzny" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="cszyzygz" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="zw" type="com.liferay.portal.dao.orm.hibernate.StringType" />

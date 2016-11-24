@@ -315,7 +315,7 @@ public class ZzjlPersistenceImpl extends BasePersistenceImpl<Zzjl>
 
 		zzjlImpl.setZzjlId(zzjl.getZzjlId());
 		zzjlImpl.setExpertId(zzjl.getExpertId());
-		zzjlImpl.setZzdw(zzjl.getZzdw());
+		zzjlImpl.setGzdw(zzjl.getGzdw());
 		zzjlImpl.setQzny(zzjl.getQzny());
 		zzjlImpl.setCszyzygz(zzjl.getCszyzygz());
 		zzjlImpl.setZw(zzjl.getZw());

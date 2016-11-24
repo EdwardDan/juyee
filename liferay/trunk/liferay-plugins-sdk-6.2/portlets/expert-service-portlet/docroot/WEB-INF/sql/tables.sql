@@ -69,7 +69,7 @@ create table expert_Zysqlb (
 create table expert_Zzjl (
 	zzjlId LONG not null primary key,
 	expertId LONG,
-	zzdw VARCHAR(75) null,
+	gzdw VARCHAR(75) null,
 	qzny VARCHAR(75) null,
 	cszyzygz VARCHAR(75) null,
 	zw VARCHAR(75) null

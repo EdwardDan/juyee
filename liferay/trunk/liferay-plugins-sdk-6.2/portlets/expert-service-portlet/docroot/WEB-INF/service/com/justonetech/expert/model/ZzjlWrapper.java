@@ -50,7 +50,7 @@ public class ZzjlWrapper implements Zzjl, ModelWrapper<Zzjl> {
 
 		attributes.put("zzjlId", getZzjlId());
 		attributes.put("expertId", getExpertId());
-		attributes.put("zzdw", getZzdw());
+		attributes.put("gzdw", getGzdw());
 		attributes.put("qzny", getQzny());
 		attributes.put("cszyzygz", getCszyzygz());
 		attributes.put("zw", getZw());
@@ -72,10 +72,10 @@ public class ZzjlWrapper implements Zzjl, ModelWrapper<Zzjl> {
 			setExpertId(expertId);
 		}
 
-		String zzdw = (String)attributes.get("zzdw");
+		String gzdw = (String)attributes.get("gzdw");
 
-		if (zzdw != null) {
-			setZzdw(zzdw);
+		if (gzdw != null) {
+			setGzdw(gzdw);
 		}
 
 		String qzny = (String)attributes.get("qzny");
@@ -158,23 +158,23 @@ public class ZzjlWrapper implements Zzjl, ModelWrapper<Zzjl> {
 	}
 
 	/**
-	* Returns the zzdw of this zzjl.
+	* Returns the gzdw of this zzjl.
 	*
-	* @return the zzdw of this zzjl
+	* @return the gzdw of this zzjl
 	*/
 	@Override
-	public java.lang.String getZzdw() {
-		return _zzjl.getZzdw();
+	public java.lang.String getGzdw() {
+		return _zzjl.getGzdw();
 	}
 
 	/**
-	* Sets the zzdw of this zzjl.
+	* Sets the gzdw of this zzjl.
 	*
-	* @param zzdw the zzdw of this zzjl
+	* @param gzdw the gzdw of this zzjl
 	*/
 	@Override
-	public void setZzdw(java.lang.String zzdw) {
-		_zzjl.setZzdw(zzdw);
+	public void setGzdw(java.lang.String gzdw) {
+		_zzjl.setGzdw(gzdw);
 	}
 
 	/**

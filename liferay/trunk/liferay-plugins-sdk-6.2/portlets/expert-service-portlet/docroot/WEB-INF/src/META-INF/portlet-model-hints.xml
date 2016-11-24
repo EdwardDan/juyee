@@ -48,7 +48,7 @@
 	<model name="com.justonetech.expert.model.Zzjl">
 		<field name="zzjlId" type="long" />
 		<field name="expertId" type="long" />
-		<field name="zzdw" type="String" />
+		<field name="gzdw" type="String" />
 		<field name="qzny" type="String" />
 		<field name="cszyzygz" type="String" />
 		<field name="zw" type="String" />
