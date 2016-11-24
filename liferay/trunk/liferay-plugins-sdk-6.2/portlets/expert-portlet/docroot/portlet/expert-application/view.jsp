@@ -38,7 +38,7 @@
 		<liferay-ui:search-container-column-text name="action">
 		
 			<portlet:renderURL var="viewExpertURL">
-				<portlet:param name="mvcPath" value="${contextPath }/add-expert.jsp"/>
+				<portlet:param name="mvcPath" value="${contextPath }/view-expert.jsp"/>
 				<portlet:param name="expertId" value="${expert.expertId}" />
 			</portlet:renderURL>
 			
