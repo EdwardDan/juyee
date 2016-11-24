@@ -6,6 +6,7 @@
 <portlet:defineObjects />
 <portlet:renderURL var="viewURL" />
 <portlet:actionURL var="saveJbxxURL" name="saveJbxx">
+	<portlet:param name="redirect" value="${viewURL }" />
 </portlet:actionURL>
 <%
 	long expertId = ParamUtil.getLong(request, "expertId");
@@ -38,7 +39,7 @@
 		<tr>
 			<td class="text-right">身份证号</td>
 			<td class="bg-white" colspan="3"><aui:input id="sfzh" name="sfzh" value="${expert.sfzh}"
-					label="" cssClass="span6" onblur="return identifySfzh()" onChange="toCsny()">
+					label="" cssClass="span6" onChange="toCsny()">
 					<aui:validator name="required"/>
 				</aui:input></td>
 		</tr>
