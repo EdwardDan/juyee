@@ -115,10 +115,9 @@
 </aui:form>
 <script>
 	function identify() {
-		var mobiles = document.getElementById("<portlet:namespace />sjhm");
-		alert(mobiles);
-		var sfzh = $("#<portlet:namespace />sfzh").val();
-		var dzyx = $("#<portlet:namespace/>dzyx").val();
+		var sfzh = document.getElementById("<portlet:namespace/>sfzh").value;
+		var mobiles = document.getElementById("<portlet:namespace/>sjhm").value;
+		var dzyx = document.getElementById("<portlet:namespace/>dzyx").value;
 		var regSjhm = /^1[3|4|5|7|8][0-9]\d{8}$/;
 		var regSfzh = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
 		var regDzyx = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/;
@@ -155,10 +154,10 @@
 		}
 	}	
 	function toCsny(){
-		var sfzh = $("#<portlet:namespace />sfzh").val();
+		var sfzh = document.getElementById("<portlet:namespace/>sfzh").value;
 		var csn = sfzh.substr(6, 4);
 		var csy = sfzh.substr(10, 2);
-		$("#csn").val(csn);
-		$("#csy").val(csy);
+		document.getElementById("csn").value = csn;
+		document.getElementById("csy").value = csy;
 	}
 </script>
