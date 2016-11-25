@@ -22,6 +22,7 @@
 	<c:set var="addExpertUrl"
 		value="${addExpertURL}&${renderResponse.namespace}expertId=${expertId}"></c:set>
 </c:if>
+
 <liferay-ui:header title="添加专家申报" backURL="${viewURL }" />
 
 <ul class="nav nav-tabs">
@@ -43,7 +44,7 @@
 </ul>
 <c:choose>
 	<c:when test="${tabNum eq 1}">
-		<jsp:include page="${contextPath }/add-expert.jsp"/>
+		<jsp:include page="${contextPath }/add-jbxx.jsp"/>
 	</c:when>
 	<c:when test="${tabNum eq 2}">
 		<jsp:include page="${contextPath }/add-xlxx.jsp"/>
