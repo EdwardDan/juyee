@@ -38,10 +38,8 @@ public class ExpertApprovalPortlet extends MVCPortlet {
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
-		System.out.println("enter doView------");
 		List<Map<String, Object>> list=new ArrayList<Map<String,Object>>();
 		String keyword=ParamUtil.getString(renderRequest, "keyword");
-		System.out.println("keyword------"+keyword);
 		int delta = GetterUtil.getInteger(PropsUtil.get(PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA));
 		int pageSize = ParamUtil.getInteger(renderRequest, "delta", delta);
 		int pageNumber = ParamUtil.getInteger(renderRequest, "cur", 1);
@@ -51,7 +49,6 @@ public class ExpertApprovalPortlet extends MVCPortlet {
 		int zysqlbsCount = 0;
 		try {
 			zysqlbs = ZysqlbLocalServiceUtil.getZysqlbs(keyword,start, end);
-			System.out.println("zysqlbs.size()------"+zysqlbs.size());
 			if(zysqlbs.size()>=0){
 				for (Zysqlb zysqlb : zysqlbs) {
 					Map<String, Object>map=new HashMap<String, Object>();
@@ -59,6 +56,7 @@ public class ExpertApprovalPortlet extends MVCPortlet {
 					map.put("zysqlbId",zysqlb.getZysqlbId());
 					map.put("name",expert.getXm());
 					map.put("sex",expert.getXb());
+					map.put("expertId",expert.getExpertId());
 					map.put("sx",zysqlb.getSx());
 					map.put("zy",zysqlb.getZy());
 					map.put("zt",ExpertApprovalStatus.getNameByCode(zysqlb.getZt()));
@@ -82,22 +80,22 @@ public class ExpertApprovalPortlet extends MVCPortlet {
 		long zysqlbId =ParamUtil.getLong(request, "zysqlbId", 0);
 		
 		String expertStatus=ParamUtil.getString(request, "expertStatus");
-		System.out.println("expertStatus-------------"+expertStatus);
 		String shyj=ParamUtil.getString(request, "shyj");
 		String shr=ParamUtil.getString(request, "shr");
 		Date shrq = ParamUtil.getDate(request, "shrq", new SimpleDateFormat("yyyy-MM-dd"),null);
-		System.out.println("shrq-------------"+shrq);
 		if(zysqlbId!=0){
 			Zysqlb zysqlb=ZysqlbLocalServiceUtil.getZysqlb(zysqlbId);
-			if(Validator.isNotNull(expertStatus))
-			zysqlb.setZt(Integer.valueOf(expertStatus));
+			if(Validator.isNotNull(expertStatus)){
+				if(expertStatus.equals("preExpert"))
+				zysqlb.setZt(ExpertApprovalStatus.STATUS_YB.getCode());
+				if(expertStatus.equals("fomalExpert"))
+				zysqlb.setZt(ExpertApprovalStatus.STATUS_ZS.getCode());
+			}
 			zysqlb.setShyj(shyj);
 			zysqlb.setShr(shr);
 			zysqlb.setShrq(shrq);
 			ZysqlbLocalServiceUtil.updateZysqlb(zysqlb);
-		}
-		System.out.println("this is the success page");
-		
+		}		
 	}
 	
 	
