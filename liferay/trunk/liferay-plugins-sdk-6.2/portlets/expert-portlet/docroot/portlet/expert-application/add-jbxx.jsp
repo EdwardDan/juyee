@@ -4,7 +4,6 @@
 <%@ include file="/common/init.jsp"%>
 <%@ include file="init.jsp"%>
 <portlet:defineObjects />
-<portlet:renderURL var="viewURL" />
 <portlet:actionURL var="saveJbxxURL" name="saveJbxx">
 	<portlet:param name="redirectURL" value="${addExpertUrl}"/>
 </portlet:actionURL>

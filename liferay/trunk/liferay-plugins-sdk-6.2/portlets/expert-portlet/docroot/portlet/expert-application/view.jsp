@@ -16,8 +16,6 @@
 	request.setAttribute("expertsCount", expertsCount);
 %>
 
-<portlet:renderURL var="viewURL"/>
-
 <style>
 .application {
 	position: relative;
@@ -25,7 +23,6 @@
 }
 </style>
 <aui:button href="${addExpertUrl}" value="申请" cssClass="application"></aui:button>
-
 
 <portlet:renderURL var="searchURL">
 	<liferay-portlet:param name="cur" value="${cur }" />

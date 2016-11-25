@@ -11,16 +11,18 @@
 	if(Validator.isNotNull(expertId)){
 		expert = ExpertLocalServiceUtil.getExpert(expertId);
 		sqbz = expert.getSqbz()<5 ? expert.getSqbz()+1 : 5;
+		System.out.println("sqbz:"+sqbz);
 	}
 	int tabNum = ParamUtil.getInteger(request, "tabNum",sqbz);
 	tabNum = tabNum>sqbz?sqbz:tabNum;
+	System.out.println("tabNum:"+tabNum);
 	request.setAttribute("expertId", expertId);
 	request.setAttribute("sqbz", sqbz);
 	request.setAttribute("tabNum", tabNum);
 %>
-<c:if test="${permitId ne 0}">
+<c:if test="${expertId ne 0}">
 	<c:set var="addExpertUrl"
-		value="${addExpertURL}&${renderResponse.namespace}expertId=${expertId}"></c:set>
+		value="${addExpertUrl}&${renderResponse.namespace}expertId=${expertId}"></c:set>
 </c:if>
 
 <liferay-ui:header title="添加专家申报" backURL="${viewURL }" />
