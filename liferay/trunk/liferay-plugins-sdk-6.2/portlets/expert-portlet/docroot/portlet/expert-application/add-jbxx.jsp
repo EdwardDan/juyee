@@ -31,10 +31,13 @@
 					<aui:validator name="required" />
 				</aui:input></td>
 			<td class="text-right" width="20%">性别</td>
-			<td class="bg-white" width="30%"><aui:input name="xb" label="" value="${expert.xb}"
-					cssClass="span6">
-					<aui:validator name="required" />
-				</aui:input></td>
+			<td class="bg-white" width="30%">
+				<aui:select name="xb" label="" cssClass="span6">
+					<aui:option value="0"> </aui:option>
+					<aui:option value="1">男</aui:option>
+					<aui:option value="2">女</aui:option>
+					<aui:validator name="required"></aui:validator>
+				</aui:select></td>
 		</tr>
 		<tr>
 			<td class="text-right">身份证号</td>
@@ -113,7 +116,8 @@
 </aui:form>
 <script>
 	function identify() {
-		var mobiles = $("#<portlet:namespace/>sjhm").val();
+		var mobiles = document.getElementById("<portlet:namespace />sjhm");
+		alert(mobiles);
 		var sfzh = $("#<portlet:namespace />sfzh").val();
 		var dzyx = $("#<portlet:namespace/>dzyx").val();
 		var regSjhm = /^1[3|4|5|7|8][0-9]\d{8}$/;
