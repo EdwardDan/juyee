@@ -28,14 +28,14 @@ request.setAttribute("expertId",expertId);
 	<aui:input name="zt" type="hidden" value="3" />
 	<table class="table table-bordered" width="100%">
 		<tr>
-			<td class="text-left">选择申请事项:</td>
-			<td class="bg-white">
+			<td class="text-left" width="10%">选择申请事项:</td>
+			<td class="bg-white"  width="90%">
 					${dictionary.name }
 				</td>
 				</tr>
 				<tr>
 			<td class="text-right">选择专业类别</td>
-			<td class="bg-white" colspan="3">
+			<td class="bg-white">
 				<div id="<portlet:namespace />zyInput">
 					<%
 											Dictionary dic = DictionaryLocalServiceUtil.getDictionary(Long.parseLong(zysqlb.getSx()));

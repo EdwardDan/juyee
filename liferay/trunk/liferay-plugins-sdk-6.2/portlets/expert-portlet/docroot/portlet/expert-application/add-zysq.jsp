@@ -27,6 +27,8 @@ tr.body td.content {
 	<portlet:param name="mvcPath" value="${contextPath }/add-zysqnr.jsp" />
 	<portlet:param name="expertId" value="${expertId}" />
 </portlet:renderURL>
+<c:set var="backUrl"
+	value="${addExpertUrl}&${renderResponse.namespace}expertId=${expertId}"></c:set>
 <tr style="height: 40px;">
 	<td colspan="4" align="center" class="bg-white"><aui:button
 			type="button" value="添加" href="${addZysqURL}"></aui:button></td>
@@ -55,7 +57,7 @@ tr.body td.content {
 		<liferay-ui:search-container-column-text name="操作">
 			<portlet:actionURL var="deleteZysqlbURL" name="deleteZysqlb">
 				<portlet:param name="zysqlbId" value="${zysqlb.zysqlbId}" />
-				<portlet:param name="redirect" value="${addExpertUrl }" />
+				<portlet:param name="redirect" value="${backUrl }" />
 			</portlet:actionURL>
 			<liferay-portlet:actionURL var="editZysqlbURL" name="editZysqlb">
 				<portlet:param name="zysqlbId" value="${zysqlb.zysqlbId}" />
