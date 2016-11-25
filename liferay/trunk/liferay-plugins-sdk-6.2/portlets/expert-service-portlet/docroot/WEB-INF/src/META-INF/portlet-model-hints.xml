@@ -40,7 +40,7 @@
 		<field name="expertId" type="long" />
 		<field name="sx" type="String" />
 		<field name="zy" type="String">
-		<hint name="max-length">2000</hint>
+			<hint name="max-length">2000</hint>
 		</field>
 		<field name="zt" type="int" />
 		<field name="shyj" type="String" />

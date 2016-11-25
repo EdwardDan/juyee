@@ -59,7 +59,7 @@ create table expert_Zysqlb (
 	zysqlbId LONG not null primary key,
 	expertId LONG,
 	sx VARCHAR(75) null,
-	zy VARCHAR(75) null,
+	zy VARCHAR(2000) null,
 	zt INTEGER,
 	shyj VARCHAR(75) null,
 	shr VARCHAR(75) null,

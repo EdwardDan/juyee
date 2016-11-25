@@ -68,7 +68,7 @@ public class ZysqlbModelImpl extends BaseModelImpl<Zysqlb>
 			{ "shr", Types.VARCHAR },
 			{ "shrq", Types.TIMESTAMP }
 		};
-	public static final String TABLE_SQL_CREATE = "create table expert_Zysqlb (zysqlbId LONG not null primary key,expertId LONG,sx VARCHAR(75) null,zy VARCHAR(75) null,zt INTEGER,shyj VARCHAR(75) null,shr VARCHAR(75) null,shrq DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table expert_Zysqlb (zysqlbId LONG not null primary key,expertId LONG,sx VARCHAR(75) null,zy VARCHAR(2000) null,zt INTEGER,shyj VARCHAR(75) null,shr VARCHAR(75) null,shrq DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table expert_Zysqlb";
 	public static final String ORDER_BY_JPQL = " ORDER BY zysqlb.zysqlbId DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY expert_Zysqlb.zysqlbId DESC";
