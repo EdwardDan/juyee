@@ -11,7 +11,7 @@
 	request.setAttribute("expertId",expertId);
 %>
 <c:set var="backUrl"
-		value="${addExpertUrl}&${renderResponse.namespace}expertId=${expertId}"></c:set>
+	value="${addExpertUrl}&${renderResponse.namespace}expertId=${expertId}"></c:set>
 <aui:model-context bean="${zysqlb}" model="<%=Zysqlb.class %>" />
 <liferay-ui:header title='${empty zysqlb?"添加":"编辑"}专业申请'
 	backURL="${backUrl}" />
@@ -30,29 +30,30 @@
 					onChange='<%= renderResponse.getNamespace() + "fetchZys();"%>'>
 					<%
 						Dictionary dictionary = DictionaryLocalServiceUtil.findByCode("sqsx");
-																	if (null != dictionary) {
-																		List<Dictionary> dictionaries = DictionaryLocalServiceUtil.findByParentId(
-																				dictionary.getDictionaryId(), -1, -1);
-																		for (Dictionary dic : dictionaries) {
+																				if (null != dictionary) {
+																					List<Dictionary> dictionaries = DictionaryLocalServiceUtil.findByParentId(
+																							dictionary.getDictionaryId(), -1, -1);
+																					for (Dictionary dic : dictionaries) {
 					%>
 					<aui:option value="<%=dic.getDictionaryId()%>"><%=dic.getName()%></aui:option>
 					<%
 						}
-																	}
+																				}
 					%>
-				</aui:select></td></tr>
+				</aui:select></td>
+		</tr>
 		<tr>
 			<td class="text-left">选择专业类别</td>
 			<td class="bg-white">
 				<div id="<portlet:namespace />zyInput">
 					<%
 						if(null==zysqlb){
-											Dictionary dic = DictionaryLocalServiceUtil.findByCode("jssc");
-											if (null != dic) {
-												List<Dictionary> jssc = DictionaryLocalServiceUtil
-														.findByParentId( dic.getDictionaryId(), -1, -1);
-												request.setAttribute("jssc", jssc);
-											}
+														Dictionary dic = DictionaryLocalServiceUtil.findByCode("jssc");
+														if (null != dic) {
+															List<Dictionary> jssc = DictionaryLocalServiceUtil
+																	.findByParentId( dic.getDictionaryId(), -1, -1);
+															request.setAttribute("jssc", jssc);
+														}
 					%>
 					<c:forEach items="${jssc}" var="jssc" varStatus="sortNo">
 						<input name="<portlet:namespace/>zy" type="checkbox"
@@ -61,13 +62,13 @@
 					</c:forEach>
 					<%
 						}
-									else{ 
-											Dictionary dic = DictionaryLocalServiceUtil.getDictionary(Long.parseLong(zysqlb.getSx()));
-											if (null != dic) {
-												List<Dictionary> lb = DictionaryLocalServiceUtil
-														.findByParentId( dic.getDictionaryId(), -1, -1);
-												request.setAttribute("lb", lb);
-											}
+												else{ 
+														Dictionary dic = DictionaryLocalServiceUtil.getDictionary(Long.parseLong(zysqlb.getSx()));
+														if (null != dic) {
+															List<Dictionary> lb = DictionaryLocalServiceUtil
+																	.findByParentId( dic.getDictionaryId(), -1, -1);
+															request.setAttribute("lb", lb);
+														}
 					%>
 					<c:forEach items="${lb}" var="lb" varStatus="sortNo">
 						<c:choose>
@@ -88,10 +89,11 @@
 						}
 					%>
 				</div>
-			</td></tr>
+			</td>
+		</tr>
 	</table>
 	<div style="text-align: center">
-		<aui:button type="submit" value="提交" />
+		<aui:button type="submit" value="提交" onClick="return checkBoxs()" />
 		<aui:button type="cancel" value="取消" href="${backUrl}" />
 	</div>
 </aui:form>
@@ -129,3 +131,24 @@ Liferay.provide(
 	    }
 	);
 </aui:script>
+	
+
+<script>
+function checkBoxs(){
+	var checkArry = document.getElementsByName("<portlet:namespace/>zy");
+	var flag = false;
+    for (var i = 0; i < checkArry.length; i++) { 
+        if(checkArry[i].checked == true){
+            //选中的操作
+            flag =true;
+        }
+    }
+    if (flag==true){
+    	return true;
+    }else{
+    	alert("请至少选择一个！");
+    	return false;
+    }
+	
+}
+</script>

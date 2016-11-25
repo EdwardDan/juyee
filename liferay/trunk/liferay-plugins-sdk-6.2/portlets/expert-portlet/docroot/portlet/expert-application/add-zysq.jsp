@@ -24,7 +24,7 @@ tr.body td.content {
 	request.setAttribute("zysqlbsCount", zysqlbsCount);
 %>
 <portlet:renderURL var="addZysqURL">
-	<portlet:param name="mvcPath" value="${contextPath }/zysq.jsp" />
+	<portlet:param name="mvcPath" value="${contextPath }/add-zysqnr.jsp" />
 	<portlet:param name="expertId" value="${expertId}" />
 </portlet:renderURL>
 <tr style="height: 40px;">
@@ -60,7 +60,7 @@ tr.body td.content {
 			<liferay-portlet:actionURL var="editZysqlbURL" name="editZysqlb">
 				<portlet:param name="zysqlbId" value="${zysqlb.zysqlbId}" />
 				<portlet:param name="expertId" value="${expertId}" />
-				<portlet:param name="mvcPath" value="${contextPath }/zysq.jsp" />
+				<portlet:param name="mvcPath" value="${contextPath }/add-zysqnr.jsp" />
 			</liferay-portlet:actionURL>
 			<liferay-ui:icon-menu>
 				<liferay-ui:icon image="view" url="${viewZysqlbURL }" />

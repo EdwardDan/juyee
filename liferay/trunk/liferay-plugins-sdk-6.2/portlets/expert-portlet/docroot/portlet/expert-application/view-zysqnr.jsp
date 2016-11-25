@@ -15,11 +15,13 @@ request.setAttribute("zysqlb",zysqlb);
 long expertId = ParamUtil.getLong(request, "expertId");
 request.setAttribute("expertId",expertId);
 %>
-<c:set var="backUrl"
-		value="${addExpertUrl}&${renderResponse.namespace}expertId=${expertId}"></c:set>
+<portlet:renderURL var="viewExpertURL">
+		<portlet:param name="mvcPath" value="${contextPath }/view-expert.jsp"/>
+		<portlet:param name="expertId" value="${expertId}" />
+</portlet:renderURL>
 <aui:model-context bean="${zysqlb}" model="<%=Zysqlb.class %>" />
 <liferay-ui:header title='查看专业申请'
-	backURL="${backUrl}" />
+	backURL="${viewExpertURL}" />
 <aui:form>
 	<aui:input name="expertId" type="hidden" value="2" />
 	<aui:input name="zysqlbId" type="hidden" />
