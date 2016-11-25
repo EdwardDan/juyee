@@ -39,7 +39,7 @@ tr.body td.content {
 		className="com.justonetech.expert.model.Zysqlb" keyProperty="zysqlbId"
 		modelVar="zysqlb">
 		<portlet:renderURL var="viewZysqlbURL">
-			<portlet:param name="mvcPath" value="${contextPath}/view-zysq.jsp" />
+			<portlet:param name="mvcPath" value="${contextPath}/view-zysqnr.jsp" />
 			<portlet:param name="zysqlbId" value="${zysqlb.zysqlbId}" />
 			<portlet:param name="expertId" value="${expertId}" />
 		</portlet:renderURL>
