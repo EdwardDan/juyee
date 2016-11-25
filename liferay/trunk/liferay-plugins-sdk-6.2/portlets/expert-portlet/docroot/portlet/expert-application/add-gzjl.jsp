@@ -1,5 +1,3 @@
-<%@page import="com.justonetech.expert.model.Gzjl"%>
-<%@page import="com.justonetech.expert.service.GzjlLocalServiceUtil"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
 <%@ include file="init.jsp"%>
@@ -7,7 +5,7 @@
 
 <portlet:renderURL var="viewURL" />
 <portlet:actionURL var="saveGzjlURL" name="saveGzjls">
-	<%-- <portlet:param name="redirectURL" value="${viewURL }" /> --%>
+	<portlet:param name="redirectURL" value="${addExpertUrl}" />
 </portlet:actionURL>
 
 <%
@@ -34,7 +32,7 @@
 			</thead>
 			<tbody id="gzjlData">
 				<c:if test="${!empty gzjls}">
-					<c:forEach items="${gzjls }" var="gzjl">
+					<c:forEach items="${gzjls }" var="gzjl" varStatus="indexNo">
 						<tr>
 							<td></td>
 							<td><aui:input name="gzdw" value="${gzjl.gzdw }"
@@ -54,7 +52,7 @@
 			</tbody>
 			<tbody id="hiddenStyle" style="display: none">
 				<tr>
-					<td></td>
+					<td>${indexNo.index +1}</td>
 					<td><aui:input name="gzdw_stand" value="" style="width: 98%;"
 							type="text" label="" /></td>
 					<td><aui:input name="qzny_stand" value="" type="text"

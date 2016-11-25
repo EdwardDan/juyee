@@ -1,7 +1,3 @@
-<%@page import="com.justonetech.expert.model.Xlxx"%>
-<%@page import="com.justonetech.expert.service.XlxxLocalServiceUtil"%>
-<%@page import="com.justonetech.expert.model.Expert"%>
-<%@page import="com.justonetech.expert.service.ExpertLocalServiceUtil"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
 <%@ include file="init.jsp"%>
@@ -9,7 +5,7 @@
 
 <portlet:renderURL var="viewURL" />
 <portlet:actionURL var="saveXlxxURL" name="saveXlxxs">
-	<%-- <portlet:param name="redirectURL" value="${viewURL }" /> --%>
+	<portlet:param name="redirectURL" value="${addExpertUrl}"/>
 </portlet:actionURL>
 
 <%
@@ -36,9 +32,9 @@
 			</thead>
 			<tbody id="xlxx">
 				<c:if test="${!empty xlxxs}">
-					<c:forEach items="${xlxxs }" var="xlxx">
+					<c:forEach items="${xlxxs }" var="xlxx" varStatus="indexNo">
 						<tr>
-							<td></td>
+							<td>${indexNo.index +1}</td>
 							<td><aui:input name="byyx" value="${xlxx.byyx }"
 									style="width: 98%;" type="text" label="" /></td>
 							<td><aui:input name="sxzy" value="${xlxx.sxzy }" type="text"
