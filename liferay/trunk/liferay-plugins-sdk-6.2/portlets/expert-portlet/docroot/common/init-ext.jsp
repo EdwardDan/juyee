@@ -28,6 +28,6 @@
 <script type="text/javascript">
     window.jQuery || document.write("<script src='/static/jquery/jquery-1.12.4.min.js'>"+"<"+"/script>");
 </script> 
-<%@ page import="com.justonetech.expert.service.ZysqlbLocalServiceUtil" %>
-<%@ page import="com.justonetech.expert.model.Zysqlb" %>
-<%@ page import="com.justonetech.expert.model.ZysqlbClp" %>
+<%@ page import="com.justonetech.expert.service.*" %>
+<%@ page import="com.justonetech.expert.model.*" %>
+<%@ page import="com.justonetech.expert.model.*" %>
