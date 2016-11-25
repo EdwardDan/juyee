@@ -3,6 +3,7 @@ package com.justonetech.expert.portlet;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -71,6 +72,7 @@ public class ExpertApprovalPortlet extends MVCPortlet {
 			e.printStackTrace();
 		}
 		renderRequest.setAttribute("list", list);
+		renderRequest.setAttribute("zysqlbs", zysqlbs);
 		renderRequest.setAttribute("zysqlbsCount", zysqlbsCount);
 		renderRequest.setAttribute("keyword", keyword);
 		super.doView(renderRequest, renderResponse);
@@ -95,7 +97,7 @@ public class ExpertApprovalPortlet extends MVCPortlet {
 			zysqlb.setShr(shr);
 			zysqlb.setShrq(shrq);
 			ZysqlbLocalServiceUtil.updateZysqlb(zysqlb);
-		}		
+		}
 	}
 	
 	
