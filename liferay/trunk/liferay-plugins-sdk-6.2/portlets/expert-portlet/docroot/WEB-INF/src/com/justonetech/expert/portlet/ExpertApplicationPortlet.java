@@ -45,7 +45,7 @@ public class ExpertApplicationPortlet extends MVCPortlet {
 
 	
 	//保存基本信息
-	public void saveJbxx(ActionRequest request,ActionResponse response) throws SystemException, ParseException, PortalException {
+	public void saveJbxx(ActionRequest request,ActionResponse response) throws SystemException, ParseException, PortalException, IOException {
 		String xm = ParamUtil.getString(request, "xm");
 		String xb = ParamUtil.getString(request, "xb");
 		String sfzh = ParamUtil.getString(request, "sfzh");
@@ -89,7 +89,7 @@ public class ExpertApplicationPortlet extends MVCPortlet {
 		expert.setCz(cz);
 		expert.setSqbz(1);
 		ExpertLocalServiceUtil.updateExpert(expert);
-
+		redirect(request, response, expert, 1);
 	}
 	public void redirect(ActionRequest request, ActionResponse response, Expert expert, int sqbz) throws IOException {
 		String redirect = ParamUtil.getString(request, "redirectURL");
