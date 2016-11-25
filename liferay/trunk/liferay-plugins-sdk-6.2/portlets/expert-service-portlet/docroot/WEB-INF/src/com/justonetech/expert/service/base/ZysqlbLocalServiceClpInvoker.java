@@ -118,9 +118,17 @@ public class ZysqlbLocalServiceClpInvoker {
 
 		_methodParameterTypes54 = new String[] { "java.lang.String", "int", "int" };
 
-		_methodName55 = "createDynamicQuery";
+		_methodName55 = "getZysqlbs";
 
-		_methodParameterTypes55 = new String[] { "java.lang.String" };
+		_methodParameterTypes55 = new String[] { "long", "int", "int" };
+
+		_methodName56 = "createDynamicQuery";
+
+		_methodParameterTypes56 = new String[] { "long" };
+
+		_methodName57 = "createDynamicQuery";
+
+		_methodParameterTypes57 = new String[] { "java.lang.String" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -233,6 +241,18 @@ public class ZysqlbLocalServiceClpInvoker {
 
 		if (_methodName55.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes55, parameterTypes)) {
+			return ZysqlbLocalServiceUtil.getZysqlbs(((Long)arguments[0]).longValue(),
+				((Integer)arguments[1]).intValue(),
+				((Integer)arguments[2]).intValue());
+		}
+
+		if (_methodName56.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes56, parameterTypes)) {
+			return ZysqlbLocalServiceUtil.createDynamicQuery(((Long)arguments[0]).longValue());
+		}
+
+		if (_methodName57.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes57, parameterTypes)) {
 			return ZysqlbLocalServiceUtil.createDynamicQuery((java.lang.String)arguments[0]);
 		}
 
@@ -279,4 +299,8 @@ public class ZysqlbLocalServiceClpInvoker {
 	private String[] _methodParameterTypes54;
 	private String _methodName55;
 	private String[] _methodParameterTypes55;
+	private String _methodName56;
+	private String[] _methodParameterTypes56;
+	private String _methodName57;
+	private String[] _methodParameterTypes57;
 }

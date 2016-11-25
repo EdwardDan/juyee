@@ -278,6 +278,16 @@ public class ZysqlbLocalServiceUtil {
 		return getService().getZysqlbs(keyWord, start, end);
 	}
 
+	public static java.util.List<com.justonetech.expert.model.Zysqlb> getZysqlbs(
+		long expertId, int start, int end) {
+		return getService().getZysqlbs(expertId, start, end);
+	}
+
+	public static com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQuery(
+		long expertId) {
+		return getService().createDynamicQuery(expertId);
+	}
+
 	public static com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQuery(
 		java.lang.String keyWord) {
 		return getService().createDynamicQuery(keyWord);

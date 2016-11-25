@@ -254,6 +254,13 @@ public interface ZysqlbLocalService extends BaseLocalService,
 	public java.util.List<com.justonetech.expert.model.Zysqlb> getZysqlbs(
 		java.lang.String keyWord, int start, int end);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.justonetech.expert.model.Zysqlb> getZysqlbs(
+		long expertId, int start, int end);
+
+	public com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQuery(
+		long expertId);
+
 	public com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQuery(
 		java.lang.String keyWord);
 }

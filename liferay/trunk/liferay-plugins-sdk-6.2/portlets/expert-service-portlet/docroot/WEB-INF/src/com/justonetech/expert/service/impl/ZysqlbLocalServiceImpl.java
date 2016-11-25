@@ -18,6 +18,7 @@ import java.util.Collections;
 import java.util.List;
 
 import com.justonetech.expert.model.Expert;
+import com.justonetech.expert.model.Zqtzjkrzqk;
 import com.justonetech.expert.model.Zysqlb;
 import com.justonetech.expert.service.base.ZysqlbLocalServiceBaseImpl;
 import com.liferay.portal.kernel.dao.orm.Criterion;
@@ -71,6 +72,27 @@ public class ZysqlbLocalServiceImpl extends ZysqlbLocalServiceBaseImpl {
 			log.info(e.getMessage());
 		}
 		return Collections.emptyList();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Zysqlb> getZysqlbs(long expertId, int start, int end) {
+
+		try {
+			return this.dynamicQuery(createDynamicQuery(expertId), start, end);
+		} catch (SystemException e) {
+			log.info(e.getMessage());
+		}
+		return Collections.emptyList();
+	}
+
+	public DynamicQuery createDynamicQuery(long expertId) {
+
+		DynamicQuery dynamicQuery = this.dynamicQuery();
+
+		dynamicQuery.add(PropertyFactoryUtil.forName("expertId").eq(expertId));
+
+		dynamicQuery.addOrder(OrderFactoryUtil.desc("expertId"));
+		return dynamicQuery;
 	}
 
 	public DynamicQuery createDynamicQuery(String keyWord) {

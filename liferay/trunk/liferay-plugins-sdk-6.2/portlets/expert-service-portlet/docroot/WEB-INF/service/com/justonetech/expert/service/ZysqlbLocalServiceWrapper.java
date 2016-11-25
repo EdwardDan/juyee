@@ -287,6 +287,18 @@ public class ZysqlbLocalServiceWrapper implements ZysqlbLocalService,
 	}
 
 	@Override
+	public java.util.List<com.justonetech.expert.model.Zysqlb> getZysqlbs(
+		long expertId, int start, int end) {
+		return _zysqlbLocalService.getZysqlbs(expertId, start, end);
+	}
+
+	@Override
+	public com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQuery(
+		long expertId) {
+		return _zysqlbLocalService.createDynamicQuery(expertId);
+	}
+
+	@Override
 	public com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQuery(
 		java.lang.String keyWord) {
 		return _zysqlbLocalService.createDynamicQuery(keyWord);
