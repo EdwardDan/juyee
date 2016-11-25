@@ -23,6 +23,7 @@ import com.justonetech.expert.service.ZysqlbLocalServiceUtil;
 import com.justonetech.expert.util.ExpertApprovalStatus;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -71,6 +72,7 @@ public class ExpertApprovalPortlet extends MVCPortlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println("list----------"+list);
 		renderRequest.setAttribute("list", list);
 		renderRequest.setAttribute("zysqlbs", zysqlbs);
 		renderRequest.setAttribute("zysqlbsCount", zysqlbsCount);
@@ -80,8 +82,8 @@ public class ExpertApprovalPortlet extends MVCPortlet {
 	
 	public void saveAuditInfo(ActionRequest request,ActionResponse response) throws PortalException, SystemException{
 		long zysqlbId =ParamUtil.getLong(request, "zysqlbId", 0);
-		
 		String expertStatus=ParamUtil.getString(request, "expertStatus");
+		System.out.println("expertStatus----------"+expertStatus);
 		String shyj=ParamUtil.getString(request, "shyj");
 		String shr=ParamUtil.getString(request, "shr");
 		Date shrq = ParamUtil.getDate(request, "shrq", new SimpleDateFormat("yyyy-MM-dd"),null);
@@ -98,6 +100,8 @@ public class ExpertApprovalPortlet extends MVCPortlet {
 			zysqlb.setShrq(shrq);
 			ZysqlbLocalServiceUtil.updateZysqlb(zysqlb);
 		}
+		SessionMessages.add(request, "request_processed","数据保存成功！");
+		response.setRenderParameter("mvcPath", "/portlet/expert-approval/successPage.jsp");
 	}
 	
 	
