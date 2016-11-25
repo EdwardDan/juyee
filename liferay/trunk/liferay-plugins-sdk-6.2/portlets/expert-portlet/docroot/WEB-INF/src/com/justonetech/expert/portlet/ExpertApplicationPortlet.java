@@ -3,6 +3,8 @@ package com.justonetech.expert.portlet;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -11,12 +13,18 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
 import com.justonetech.expert.model.Expert;
+import com.justonetech.expert.model.Gzjl;
+import com.justonetech.expert.model.Xlxx;
+import com.justonetech.expert.model.Zqtzjkrzqk;
 import com.justonetech.expert.service.ExpertLocalServiceUtil;
+import com.justonetech.expert.service.GzjlLocalServiceUtil;
 import com.justonetech.expert.service.XlxxLocalServiceUtil;
-import com.justonetech.expert.service.ZysqlbLocalServiceUtil;
-import com.liferay.portal.kernel.exception.PortalException;
+import com.justonetech.expert.service.ZqtzjkrzqkLocalServiceUtil;
 import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.bridges.mvc.MVCPortlet;
@@ -25,6 +33,8 @@ import com.liferay.util.bridges.mvc.MVCPortlet;
  * Portlet implementation class ExpertApplicationPortlet
  */
 public class ExpertApplicationPortlet extends MVCPortlet {
+	private static Log log = LogFactoryUtil.getLog(ExpertApplicationPortlet.class);
+	
 	@Override
 	public void render(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws PortletException, IOException {
@@ -106,4 +116,92 @@ public class ExpertApplicationPortlet extends MVCPortlet {
 		redirect += "&" + response.getNamespace() + "tabNum=" + tabNum;
 		response.sendRedirect(redirect);
 	}
-}
+	
+	// 保存学历信息
+		public void saveXlxxs(ActionRequest request, ActionResponse response) throws SystemException {
+			long expertId = ParamUtil.getLong(request, "expertId");
+			String[] byyxs = ParamUtil.getParameterValues(request, "byyx");
+			String[] sxzys = ParamUtil.getParameterValues(request, "sxzy");
+			String[] xlhxws = ParamUtil.getParameterValues(request, "xlhxw");
+			String[] zxsjs = ParamUtil.getParameterValues(request, "zxsj");
+
+			List<Xlxx> xlxxs = XlxxLocalServiceUtil.getXlxxs(expertId, -1, -1);
+			if (null != xlxxs && xlxxs.size() > 0) {
+				for (Xlxx xlxx : xlxxs) {
+					XlxxLocalServiceUtil.deleteXlxx(xlxx);
+				}
+			}
+
+			if (null != byyxs && byyxs.length > 0) {
+				for (int i = 0; i < byyxs.length; i++) {
+					Xlxx xlxx = XlxxLocalServiceUtil.createXlxx(CounterLocalServiceUtil.increment());
+					xlxx.setByyx(byyxs[i]);
+					xlxx.setSxzy(sxzys[i]);
+					xlxx.setXlhxw(xlhxws[i]);
+					xlxx.setZxsj(zxsjs[i]);
+					xlxx.setExpertId(expertId);
+					XlxxLocalServiceUtil.addXlxx(xlxx);
+				}
+
+			}
+		}
+
+		// 保存工作简历
+		public void saveGzjls(ActionRequest request, ActionResponse response) throws SystemException {
+			long expertId = ParamUtil.getLong(request, "expertId");
+			String[] gzdws = ParamUtil.getParameterValues(request, "gzdw");
+			String[] qznys = ParamUtil.getParameterValues(request, "qzny");
+			String[] cszyzygzs = ParamUtil.getParameterValues(request, "cszyzygz");
+			String[] zws = ParamUtil.getParameterValues(request, "zw");
+
+			List<Gzjl> gzjls = GzjlLocalServiceUtil.getGzjls(expertId, -1, -1);
+			if (null != gzjls && gzjls.size() > 0) {
+				for (Gzjl gzjl : gzjls) {
+					GzjlLocalServiceUtil.deleteGzjl(gzjl);
+				}
+			}
+
+			if (null != gzdws && gzdws.length > 0) {
+				for (int i = 0; i < gzdws.length; i++) {
+					Gzjl gzjl = GzjlLocalServiceUtil.createGzjl(CounterLocalServiceUtil.increment());
+					gzjl.setGzdw(gzdws[i]);
+					gzjl.setQzny(qznys[i]);
+					gzjl.setCszyzygz(cszyzygzs[i]);
+					gzjl.setZw(zws[i]);
+					gzjl.setExpertId(expertId);
+					GzjlLocalServiceUtil.addGzjl(gzjl);
+				}
+
+			}
+		}
+		
+		// 保存在其他专家库任职情况
+			public void saveZqtzjkrzqks(ActionRequest request, ActionResponse response) throws SystemException {
+				long expertId = ParamUtil.getLong(request, "expertId");
+				String[] zjkxtlsdws = ParamUtil.getParameterValues(request, "zjkxtlsdw");
+				String[] sqzys = ParamUtil.getParameterValues(request, "sqzy");
+				Date[] pzrqs = ParamUtil.getDateValues(request, "pzrq", new SimpleDateFormat("yyyy-MM-dd"),null);
+
+				List<Zqtzjkrzqk> zqtzjkrzqks = ZqtzjkrzqkLocalServiceUtil.getZqtzjkrzqks(expertId, -1, -1);
+				if (null != zqtzjkrzqks && zqtzjkrzqks.size() > 0) {
+					for (Zqtzjkrzqk zqtzjkrzqk : zqtzjkrzqks) {
+						ZqtzjkrzqkLocalServiceUtil.deleteZqtzjkrzqk(zqtzjkrzqk);
+					}
+				}
+
+				if (null != zjkxtlsdws && zjkxtlsdws.length > 0) {
+					for (int i = 0; i < zjkxtlsdws.length; i++) {
+						Zqtzjkrzqk zqtzjkrzqk = ZqtzjkrzqkLocalServiceUtil.createZqtzjkrzqk(CounterLocalServiceUtil.increment());
+						zqtzjkrzqk.setZjkxtlsdw(zjkxtlsdws[i]);
+						zqtzjkrzqk.setSqzy(sqzys[i]);
+						zqtzjkrzqk.setPzrq(pzrqs[i]);
+						zqtzjkrzqk.setExpertId(expertId);
+						ZqtzjkrzqkLocalServiceUtil.addZqtzjkrzqk(zqtzjkrzqk);
+					}
+
+				}
+			}
+			
+			
+	}
+
