@@ -10,7 +10,11 @@
 		</portlet-class>
 		<init-param>
 			<name>view-template</name>
-			<value>/portlet/expert-application/view.jsp</value>
+			<value>/portlet/expert-application/add-zysq.jsp</value>
+		</init-param>
+		<init-param>
+			<name>copy-request-parameters</name>
+			<value>true</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
