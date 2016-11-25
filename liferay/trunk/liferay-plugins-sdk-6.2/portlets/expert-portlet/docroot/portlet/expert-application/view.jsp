@@ -5,7 +5,12 @@
 <%@	page import="com.justonetech.expert.service.ExpertLocalServiceUtil"%>
 <portlet:defineObjects />
 <%
-	List<Expert> experts = ExpertLocalServiceUtil.getExperts(-1, -1);
+	int defaultDelta = GetterUtil.getInteger(PropsUtil.get(PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA));
+	int delta = ParamUtil.getInteger(renderRequest, "delta", defaultDelta);
+	int cur = ParamUtil.getInteger(renderRequest, "cur", 1);
+	int start = delta * (cur - 1);
+	int end = delta * cur;
+	List<Expert> experts = ExpertLocalServiceUtil.getExperts(start, end);
 	int expertsCount = ExpertLocalServiceUtil.getExperts(-1, -1).size();
 	request.setAttribute("experts", experts);
 	request.setAttribute("expertsCount", expertsCount);
@@ -22,6 +27,11 @@
 <aui:button href="${addExpertUrl}" value="申请" cssClass="application"></aui:button>
 
 
+<portlet:renderURL var="searchURL">
+	<liferay-portlet:param name="cur" value="${cur }" />
+	<liferay-portlet:param name="delta" value="${delta }" />
+</portlet:renderURL>
+
 <liferay-ui:search-container emptyResultsMessage="没有专家申请信息。">
 
 	<liferay-ui:search-container-results results="${experts}" total="${expertsCount}">
@@ -31,7 +41,11 @@
 		className="com.justonetech.expert.model.Expert" keyProperty="expertId"
 		modelVar="expert">
 
-		<liferay-ui:search-container-column-text property="xm" name="专家姓名" />
+		<liferay-ui:search-container-column-text property="xm" name="姓名" />
+		
+		<liferay-ui:search-container-column-text property="xb" name="性别" />
+		
+		<liferay-ui:search-container-column-text property="sjhm" name="手机号码" />
 
 		<liferay-ui:search-container-column-text property="gzdw" name="工作单位" />
 
