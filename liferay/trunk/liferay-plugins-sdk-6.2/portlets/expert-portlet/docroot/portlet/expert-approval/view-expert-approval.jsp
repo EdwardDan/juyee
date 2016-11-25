@@ -62,6 +62,6 @@
 			'click',
 			function(event) {	
 				var data = '';
-				Liferay.Util.getOpener().closeYourPopUp('<portlet:namespace/>dialogView');
-			});
+				Liferay.Util.getOpener().closeYourPopUp(data,'<portlet:namespace/>dialogView');
+	});
 </aui:script>
