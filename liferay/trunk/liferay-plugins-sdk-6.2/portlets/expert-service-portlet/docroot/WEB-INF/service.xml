@@ -56,10 +56,10 @@
 	</entity>
 	
 	<!-- 工作简历 -->
-	<entity name="Zzjl" local-service="true" remote-service="false">
+	<entity name="Gzjl" local-service="true" remote-service="false">
 
 		<!-- PK fields -->
-		<column name="zzjlId" type="long" primary="true" />
+		<column name="GzjlId" type="long" primary="true" />
 
 		<!-- Business fields -->
 		<column name="expertId" type="long" /><!-- 专家id -->
@@ -70,7 +70,7 @@
 
 		<!-- Order -->
 		<order>
-			<order-column name="zzjlId" order-by="desc"></order-column>
+			<order-column name="GzjlId" order-by="desc"></order-column>
 		</order>
 		
 	</entity>

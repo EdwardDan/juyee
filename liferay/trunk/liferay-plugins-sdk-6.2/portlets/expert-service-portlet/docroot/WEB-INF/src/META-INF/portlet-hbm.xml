@@ -3,10 +3,10 @@
 
 <hibernate-mapping default-lazy="false" auto-import="false">
 	<import class="com.justonetech.expert.model.Expert" />
+	<import class="com.justonetech.expert.model.Gzjl" />
 	<import class="com.justonetech.expert.model.Xlxx" />
 	<import class="com.justonetech.expert.model.Zqtzjkrzqk" />
 	<import class="com.justonetech.expert.model.Zysqlb" />
-	<import class="com.justonetech.expert.model.Zzjl" />
 	<class name="com.justonetech.expert.model.impl.ExpertImpl" table="expert_Expert">
 		<cache usage="read-write" />
 		<id name="expertId" type="long">
@@ -28,6 +28,17 @@
 		<property name="sjhm" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="lxdh" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="cz" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.justonetech.expert.model.impl.GzjlImpl" table="expert_Gzjl">
+		<cache usage="read-write" />
+		<id name="GzjlId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="expertId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="gzdw" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="qzny" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="cszyzygz" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="zw" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="com.justonetech.expert.model.impl.XlxxImpl" table="expert_Xlxx">
 		<cache usage="read-write" />
@@ -62,16 +73,5 @@
 		<property name="shyj" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="shr" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="shrq" type="org.hibernate.type.TimestampType" />
-	</class>
-	<class name="com.justonetech.expert.model.impl.ZzjlImpl" table="expert_Zzjl">
-		<cache usage="read-write" />
-		<id name="zzjlId" type="long">
-			<generator class="assigned" />
-		</id>
-		<property name="expertId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="gzdw" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="qzny" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="cszyzygz" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="zw" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 </hibernate-mapping>

@@ -15,10 +15,10 @@
 package com.justonetech.expert.service;
 
 import com.justonetech.expert.model.ExpertClp;
+import com.justonetech.expert.model.GzjlClp;
 import com.justonetech.expert.model.XlxxClp;
 import com.justonetech.expert.model.ZqtzjkrzqkClp;
 import com.justonetech.expert.model.ZysqlbClp;
-import com.justonetech.expert.model.ZzjlClp;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -110,6 +110,10 @@ public class ClpSerializer {
 			return translateInputExpert(oldModel);
 		}
 
+		if (oldModelClassName.equals(GzjlClp.class.getName())) {
+			return translateInputGzjl(oldModel);
+		}
+
 		if (oldModelClassName.equals(XlxxClp.class.getName())) {
 			return translateInputXlxx(oldModel);
 		}
@@ -120,10 +124,6 @@ public class ClpSerializer {
 
 		if (oldModelClassName.equals(ZysqlbClp.class.getName())) {
 			return translateInputZysqlb(oldModel);
-		}
-
-		if (oldModelClassName.equals(ZzjlClp.class.getName())) {
-			return translateInputZzjl(oldModel);
 		}
 
 		return oldModel;
@@ -145,6 +145,16 @@ public class ClpSerializer {
 		ExpertClp oldClpModel = (ExpertClp)oldModel;
 
 		BaseModel<?> newModel = oldClpModel.getExpertRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
+	public static Object translateInputGzjl(BaseModel<?> oldModel) {
+		GzjlClp oldClpModel = (GzjlClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getGzjlRemoteModel();
 
 		newModel.setModelAttributes(oldClpModel.getModelAttributes());
 
@@ -181,16 +191,6 @@ public class ClpSerializer {
 		return newModel;
 	}
 
-	public static Object translateInputZzjl(BaseModel<?> oldModel) {
-		ZzjlClp oldClpModel = (ZzjlClp)oldModel;
-
-		BaseModel<?> newModel = oldClpModel.getZzjlRemoteModel();
-
-		newModel.setModelAttributes(oldClpModel.getModelAttributes());
-
-		return newModel;
-	}
-
 	public static Object translateInput(Object obj) {
 		if (obj instanceof BaseModel<?>) {
 			return translateInput((BaseModel<?>)obj);
@@ -211,6 +211,43 @@ public class ClpSerializer {
 		if (oldModelClassName.equals(
 					"com.justonetech.expert.model.impl.ExpertImpl")) {
 			return translateOutputExpert(oldModel);
+		}
+		else if (oldModelClassName.endsWith("Clp")) {
+			try {
+				ClassLoader classLoader = ClpSerializer.class.getClassLoader();
+
+				Method getClpSerializerClassMethod = oldModelClass.getMethod(
+						"getClpSerializerClass");
+
+				Class<?> oldClpSerializerClass = (Class<?>)getClpSerializerClassMethod.invoke(oldModel);
+
+				Class<?> newClpSerializerClass = classLoader.loadClass(oldClpSerializerClass.getName());
+
+				Method translateOutputMethod = newClpSerializerClass.getMethod("translateOutput",
+						BaseModel.class);
+
+				Class<?> oldModelModelClass = oldModel.getModelClass();
+
+				Method getRemoteModelMethod = oldModelClass.getMethod("get" +
+						oldModelModelClass.getSimpleName() + "RemoteModel");
+
+				Object oldRemoteModel = getRemoteModelMethod.invoke(oldModel);
+
+				BaseModel<?> newModel = (BaseModel<?>)translateOutputMethod.invoke(null,
+						oldRemoteModel);
+
+				return newModel;
+			}
+			catch (Throwable t) {
+				if (_log.isInfoEnabled()) {
+					_log.info("Unable to translate " + oldModelClassName, t);
+				}
+			}
+		}
+
+		if (oldModelClassName.equals(
+					"com.justonetech.expert.model.impl.GzjlImpl")) {
+			return translateOutputGzjl(oldModel);
 		}
 		else if (oldModelClassName.endsWith("Clp")) {
 			try {
@@ -356,43 +393,6 @@ public class ClpSerializer {
 			}
 		}
 
-		if (oldModelClassName.equals(
-					"com.justonetech.expert.model.impl.ZzjlImpl")) {
-			return translateOutputZzjl(oldModel);
-		}
-		else if (oldModelClassName.endsWith("Clp")) {
-			try {
-				ClassLoader classLoader = ClpSerializer.class.getClassLoader();
-
-				Method getClpSerializerClassMethod = oldModelClass.getMethod(
-						"getClpSerializerClass");
-
-				Class<?> oldClpSerializerClass = (Class<?>)getClpSerializerClassMethod.invoke(oldModel);
-
-				Class<?> newClpSerializerClass = classLoader.loadClass(oldClpSerializerClass.getName());
-
-				Method translateOutputMethod = newClpSerializerClass.getMethod("translateOutput",
-						BaseModel.class);
-
-				Class<?> oldModelModelClass = oldModel.getModelClass();
-
-				Method getRemoteModelMethod = oldModelClass.getMethod("get" +
-						oldModelModelClass.getSimpleName() + "RemoteModel");
-
-				Object oldRemoteModel = getRemoteModelMethod.invoke(oldModel);
-
-				BaseModel<?> newModel = (BaseModel<?>)translateOutputMethod.invoke(null,
-						oldRemoteModel);
-
-				return newModel;
-			}
-			catch (Throwable t) {
-				if (_log.isInfoEnabled()) {
-					_log.info("Unable to translate " + oldModelClassName, t);
-				}
-			}
-		}
-
 		return oldModel;
 	}
 
@@ -477,6 +477,10 @@ public class ClpSerializer {
 			return new com.justonetech.expert.NoSuchExpertException();
 		}
 
+		if (className.equals("com.justonetech.expert.NoSuchGzjlException")) {
+			return new com.justonetech.expert.NoSuchGzjlException();
+		}
+
 		if (className.equals("com.justonetech.expert.NoSuchXlxxException")) {
 			return new com.justonetech.expert.NoSuchXlxxException();
 		}
@@ -489,10 +493,6 @@ public class ClpSerializer {
 			return new com.justonetech.expert.NoSuchZysqlbException();
 		}
 
-		if (className.equals("com.justonetech.expert.NoSuchZzjlException")) {
-			return new com.justonetech.expert.NoSuchZzjlException();
-		}
-
 		return throwable;
 	}
 
@@ -502,6 +502,16 @@ public class ClpSerializer {
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
 		newModel.setExpertRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputGzjl(BaseModel<?> oldModel) {
+		GzjlClp newModel = new GzjlClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setGzjlRemoteModel(oldModel);
 
 		return newModel;
 	}
@@ -532,16 +542,6 @@ public class ClpSerializer {
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
 		newModel.setZysqlbRemoteModel(oldModel);
-
-		return newModel;
-	}
-
-	public static Object translateOutputZzjl(BaseModel<?> oldModel) {
-		ZzjlClp newModel = new ZzjlClp();
-
-		newModel.setModelAttributes(oldModel.getModelAttributes());
-
-		newModel.setZzjlRemoteModel(oldModel);
 
 		return newModel;
 	}

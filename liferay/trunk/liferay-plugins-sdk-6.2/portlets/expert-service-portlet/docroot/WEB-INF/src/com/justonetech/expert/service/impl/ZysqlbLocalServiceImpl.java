@@ -78,39 +78,47 @@ public class ZysqlbLocalServiceImpl extends ZysqlbLocalServiceBaseImpl {
 		DynamicQuery dynamicQuery = this.dynamicQuery();
 		Junction junction = RestrictionsFactoryUtil.disjunction();
 
-		DynamicQuery projectProfileDQ = DynamicQueryFactoryUtil
+		DynamicQuery projectProfileDQ1 = DynamicQueryFactoryUtil
 				.forClass(Expert.class);
-		projectProfileDQ.setProjection(ProjectionFactoryUtil
+		projectProfileDQ1.setProjection(ProjectionFactoryUtil
 				.property("expertId"));
-		projectProfileDQ.add(PropertyFactoryUtil.forName("xm").like(
+		projectProfileDQ1.add(PropertyFactoryUtil.forName("xm").like(
 				"%" + keyWord + "%"));
 		Criterion criterion = PropertyFactoryUtil.forName("expertId").in(
-				projectProfileDQ);
+				projectProfileDQ1);
 		junction.add(criterion);
 
-		projectProfileDQ.setProjection(ProjectionFactoryUtil
+		DynamicQuery projectProfileDQ2 = DynamicQueryFactoryUtil
+				.forClass(Expert.class);
+		projectProfileDQ2.setProjection(ProjectionFactoryUtil
 				.property("expertId"));
-		projectProfileDQ.add(PropertyFactoryUtil.forName("zc").like(
+		projectProfileDQ2.add(PropertyFactoryUtil.forName("zc").like(
 				"%" + keyWord + "%"));
 		criterion = PropertyFactoryUtil.forName("expertId")
-				.in(projectProfileDQ);
+				.in(projectProfileDQ2);
 		junction.add(criterion);
 
-		projectProfileDQ.setProjection(ProjectionFactoryUtil
+		DynamicQuery projectProfileDQ3 = DynamicQueryFactoryUtil
+				.forClass(Expert.class);
+		projectProfileDQ3.setProjection(ProjectionFactoryUtil
 				.property("expertId"));
-		projectProfileDQ.add(PropertyFactoryUtil.forName("zyzg").like(
+		projectProfileDQ3.add(PropertyFactoryUtil.forName("zyzg").like(
 				"%" + keyWord + "%"));
 		criterion = PropertyFactoryUtil.forName("expertId")
-				.in(projectProfileDQ);
+				.in(projectProfileDQ3);
 		junction.add(criterion);
 
-		projectProfileDQ.setProjection(ProjectionFactoryUtil
+		DynamicQuery projectProfileDQ4 = DynamicQueryFactoryUtil
+				.forClass(Expert.class);
+		projectProfileDQ4.setProjection(ProjectionFactoryUtil
 				.property("expertId"));
-		projectProfileDQ.add(PropertyFactoryUtil.forName("cszy").like(
+		projectProfileDQ4.add(PropertyFactoryUtil.forName("cszy").like(
 				"%" + keyWord + "%"));
 		criterion = PropertyFactoryUtil.forName("expertId")
-				.in(projectProfileDQ);
+				.in(projectProfileDQ4);
 		junction.add(criterion);
+		
+		dynamicQuery.add(junction);
 
 		dynamicQuery.addOrder(OrderFactoryUtil.desc("expertId"));
 		return dynamicQuery;

@@ -14,7 +14,7 @@
 
 package com.justonetech.expert.service.base;
 
-import com.justonetech.expert.service.XlxxLocalServiceUtil;
+import com.justonetech.expert.service.GzjlLocalServiceUtil;
 
 import java.util.Arrays;
 
@@ -22,26 +22,26 @@ import java.util.Arrays;
  * @author fanqi
  * @generated
  */
-public class XlxxLocalServiceClpInvoker {
-	public XlxxLocalServiceClpInvoker() {
-		_methodName0 = "addXlxx";
+public class GzjlLocalServiceClpInvoker {
+	public GzjlLocalServiceClpInvoker() {
+		_methodName0 = "addGzjl";
 
 		_methodParameterTypes0 = new String[] {
-				"com.justonetech.expert.model.Xlxx"
+				"com.justonetech.expert.model.Gzjl"
 			};
 
-		_methodName1 = "createXlxx";
+		_methodName1 = "createGzjl";
 
 		_methodParameterTypes1 = new String[] { "long" };
 
-		_methodName2 = "deleteXlxx";
+		_methodName2 = "deleteGzjl";
 
 		_methodParameterTypes2 = new String[] { "long" };
 
-		_methodName3 = "deleteXlxx";
+		_methodName3 = "deleteGzjl";
 
 		_methodParameterTypes3 = new String[] {
-				"com.justonetech.expert.model.Xlxx"
+				"com.justonetech.expert.model.Gzjl"
 			};
 
 		_methodName4 = "dynamicQuery";
@@ -80,11 +80,11 @@ public class XlxxLocalServiceClpInvoker {
 				"com.liferay.portal.kernel.dao.orm.Projection"
 			};
 
-		_methodName10 = "fetchXlxx";
+		_methodName10 = "fetchGzjl";
 
 		_methodParameterTypes10 = new String[] { "long" };
 
-		_methodName11 = "getXlxx";
+		_methodName11 = "getGzjl";
 
 		_methodParameterTypes11 = new String[] { "long" };
 
@@ -92,18 +92,18 @@ public class XlxxLocalServiceClpInvoker {
 
 		_methodParameterTypes12 = new String[] { "java.io.Serializable" };
 
-		_methodName13 = "getXlxxs";
+		_methodName13 = "getGzjls";
 
 		_methodParameterTypes13 = new String[] { "int", "int" };
 
-		_methodName14 = "getXlxxsCount";
+		_methodName14 = "getGzjlsCount";
 
 		_methodParameterTypes14 = new String[] {  };
 
-		_methodName15 = "updateXlxx";
+		_methodName15 = "updateGzjl";
 
 		_methodParameterTypes15 = new String[] {
-				"com.justonetech.expert.model.Xlxx"
+				"com.justonetech.expert.model.Gzjl"
 			};
 
 		_methodName48 = "getBeanIdentifier";
@@ -114,7 +114,7 @@ public class XlxxLocalServiceClpInvoker {
 
 		_methodParameterTypes49 = new String[] { "java.lang.String" };
 
-		_methodName54 = "getXlxxs";
+		_methodName54 = "getGzjls";
 
 		_methodParameterTypes54 = new String[] { "long", "int", "int" };
 
@@ -127,44 +127,44 @@ public class XlxxLocalServiceClpInvoker {
 		Object[] arguments) throws Throwable {
 		if (_methodName0.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes0, parameterTypes)) {
-			return XlxxLocalServiceUtil.addXlxx((com.justonetech.expert.model.Xlxx)arguments[0]);
+			return GzjlLocalServiceUtil.addGzjl((com.justonetech.expert.model.Gzjl)arguments[0]);
 		}
 
 		if (_methodName1.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes1, parameterTypes)) {
-			return XlxxLocalServiceUtil.createXlxx(((Long)arguments[0]).longValue());
+			return GzjlLocalServiceUtil.createGzjl(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName2.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes2, parameterTypes)) {
-			return XlxxLocalServiceUtil.deleteXlxx(((Long)arguments[0]).longValue());
+			return GzjlLocalServiceUtil.deleteGzjl(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName3.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes3, parameterTypes)) {
-			return XlxxLocalServiceUtil.deleteXlxx((com.justonetech.expert.model.Xlxx)arguments[0]);
+			return GzjlLocalServiceUtil.deleteGzjl((com.justonetech.expert.model.Gzjl)arguments[0]);
 		}
 
 		if (_methodName4.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes4, parameterTypes)) {
-			return XlxxLocalServiceUtil.dynamicQuery();
+			return GzjlLocalServiceUtil.dynamicQuery();
 		}
 
 		if (_methodName5.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes5, parameterTypes)) {
-			return XlxxLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0]);
+			return GzjlLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0]);
 		}
 
 		if (_methodName6.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes6, parameterTypes)) {
-			return XlxxLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
+			return GzjlLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue());
 		}
 
 		if (_methodName7.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes7, parameterTypes)) {
-			return XlxxLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
+			return GzjlLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue(),
 				(com.liferay.portal.kernel.util.OrderByComparator)arguments[3]);
@@ -172,68 +172,68 @@ public class XlxxLocalServiceClpInvoker {
 
 		if (_methodName8.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes8, parameterTypes)) {
-			return XlxxLocalServiceUtil.dynamicQueryCount((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0]);
+			return GzjlLocalServiceUtil.dynamicQueryCount((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0]);
 		}
 
 		if (_methodName9.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes9, parameterTypes)) {
-			return XlxxLocalServiceUtil.dynamicQueryCount((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
+			return GzjlLocalServiceUtil.dynamicQueryCount((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
 				(com.liferay.portal.kernel.dao.orm.Projection)arguments[1]);
 		}
 
 		if (_methodName10.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes10, parameterTypes)) {
-			return XlxxLocalServiceUtil.fetchXlxx(((Long)arguments[0]).longValue());
+			return GzjlLocalServiceUtil.fetchGzjl(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName11.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes11, parameterTypes)) {
-			return XlxxLocalServiceUtil.getXlxx(((Long)arguments[0]).longValue());
+			return GzjlLocalServiceUtil.getGzjl(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName12.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes12, parameterTypes)) {
-			return XlxxLocalServiceUtil.getPersistedModel((java.io.Serializable)arguments[0]);
+			return GzjlLocalServiceUtil.getPersistedModel((java.io.Serializable)arguments[0]);
 		}
 
 		if (_methodName13.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes13, parameterTypes)) {
-			return XlxxLocalServiceUtil.getXlxxs(((Integer)arguments[0]).intValue(),
+			return GzjlLocalServiceUtil.getGzjls(((Integer)arguments[0]).intValue(),
 				((Integer)arguments[1]).intValue());
 		}
 
 		if (_methodName14.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes14, parameterTypes)) {
-			return XlxxLocalServiceUtil.getXlxxsCount();
+			return GzjlLocalServiceUtil.getGzjlsCount();
 		}
 
 		if (_methodName15.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes15, parameterTypes)) {
-			return XlxxLocalServiceUtil.updateXlxx((com.justonetech.expert.model.Xlxx)arguments[0]);
+			return GzjlLocalServiceUtil.updateGzjl((com.justonetech.expert.model.Gzjl)arguments[0]);
 		}
 
 		if (_methodName48.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes48, parameterTypes)) {
-			return XlxxLocalServiceUtil.getBeanIdentifier();
+			return GzjlLocalServiceUtil.getBeanIdentifier();
 		}
 
 		if (_methodName49.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes49, parameterTypes)) {
-			XlxxLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
+			GzjlLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
 		if (_methodName54.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes54, parameterTypes)) {
-			return XlxxLocalServiceUtil.getXlxxs(((Long)arguments[0]).longValue(),
+			return GzjlLocalServiceUtil.getGzjls(((Long)arguments[0]).longValue(),
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue());
 		}
 
 		if (_methodName55.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes55, parameterTypes)) {
-			return XlxxLocalServiceUtil.createDynamicQuery(((Long)arguments[0]).longValue());
+			return GzjlLocalServiceUtil.createDynamicQuery(((Long)arguments[0]).longValue());
 		}
 
 		throw new UnsupportedOperationException();

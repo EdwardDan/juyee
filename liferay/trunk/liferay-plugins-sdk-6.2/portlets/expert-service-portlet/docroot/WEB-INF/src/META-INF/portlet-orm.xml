@@ -33,6 +33,19 @@
 			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="com.justonetech.expert.model.impl.GzjlModelImpl">
+		<attributes>
+			<id name="GzjlId" />
+			<basic name="expertId" />
+			<basic name="gzdw" />
+			<basic name="qzny" />
+			<basic name="cszyzygz" />
+			<basic name="zw" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="com.justonetech.expert.model.impl.XlxxModelImpl">
 		<attributes>
 			<id name="xlxxId" />
@@ -77,21 +90,12 @@
 			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
-	<mapped-superclass class="com.justonetech.expert.model.impl.ZzjlModelImpl">
-		<attributes>
-			<id name="zzjlId" />
-			<basic name="expertId" />
-			<basic name="gzdw" />
-			<basic name="qzny" />
-			<basic name="cszyzygz" />
-			<basic name="zw" />
-			<transient name="modelAttributes" />
-			<transient name="primaryKey" />
-			<transient name="primaryKeyObj" />
-		</attributes>
-	</mapped-superclass>
 	<entity class="com.justonetech.expert.model.impl.ExpertImpl" name="Expert">
 		<table name="expert_Expert" />
+		<attributes />
+	</entity>
+	<entity class="com.justonetech.expert.model.impl.GzjlImpl" name="Gzjl">
+		<table name="expert_Gzjl" />
 		<attributes />
 	</entity>
 	<entity class="com.justonetech.expert.model.impl.XlxxImpl" name="Xlxx">
@@ -104,10 +108,6 @@
 	</entity>
 	<entity class="com.justonetech.expert.model.impl.ZysqlbImpl" name="Zysqlb">
 		<table name="expert_Zysqlb" />
-		<attributes />
-	</entity>
-	<entity class="com.justonetech.expert.model.impl.ZzjlImpl" name="Zzjl">
-		<table name="expert_Zzjl" />
 		<attributes />
 	</entity>
 </entity-mappings>

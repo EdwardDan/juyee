@@ -275,6 +275,16 @@ public class ZqtzjkrzqkLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static java.util.List<com.justonetech.expert.model.Zqtzjkrzqk> getZqtzjkrzqks(
+		long expertId, int start, int end) {
+		return getService().getZqtzjkrzqks(expertId, start, end);
+	}
+
+	public static com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQuery(
+		long expertId) {
+		return getService().createDynamicQuery(expertId);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

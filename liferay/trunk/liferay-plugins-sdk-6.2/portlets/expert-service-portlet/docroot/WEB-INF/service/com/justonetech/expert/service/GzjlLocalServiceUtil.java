@@ -19,74 +19,74 @@ import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.service.InvokableLocalService;
 
 /**
- * Provides the local service utility for Xlxx. This utility wraps
- * {@link com.justonetech.expert.service.impl.XlxxLocalServiceImpl} and is the
+ * Provides the local service utility for Gzjl. This utility wraps
+ * {@link com.justonetech.expert.service.impl.GzjlLocalServiceImpl} and is the
  * primary access point for service operations in application layer code running
  * on the local server. Methods of this service will not have security checks
  * based on the propagated JAAS credentials because this service can only be
  * accessed from within the same VM.
  *
  * @author fanqi
- * @see XlxxLocalService
- * @see com.justonetech.expert.service.base.XlxxLocalServiceBaseImpl
- * @see com.justonetech.expert.service.impl.XlxxLocalServiceImpl
+ * @see GzjlLocalService
+ * @see com.justonetech.expert.service.base.GzjlLocalServiceBaseImpl
+ * @see com.justonetech.expert.service.impl.GzjlLocalServiceImpl
  * @generated
  */
-public class XlxxLocalServiceUtil {
+public class GzjlLocalServiceUtil {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this class directly. Add custom service methods to {@link com.justonetech.expert.service.impl.XlxxLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
+	 * Never modify this class directly. Add custom service methods to {@link com.justonetech.expert.service.impl.GzjlLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
 
 	/**
-	* Adds the xlxx to the database. Also notifies the appropriate model listeners.
+	* Adds the gzjl to the database. Also notifies the appropriate model listeners.
 	*
-	* @param xlxx the xlxx
-	* @return the xlxx that was added
+	* @param gzjl the gzjl
+	* @return the gzjl that was added
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.justonetech.expert.model.Xlxx addXlxx(
-		com.justonetech.expert.model.Xlxx xlxx)
+	public static com.justonetech.expert.model.Gzjl addGzjl(
+		com.justonetech.expert.model.Gzjl gzjl)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().addXlxx(xlxx);
+		return getService().addGzjl(gzjl);
 	}
 
 	/**
-	* Creates a new xlxx with the primary key. Does not add the xlxx to the database.
+	* Creates a new gzjl with the primary key. Does not add the gzjl to the database.
 	*
-	* @param xlxxId the primary key for the new xlxx
-	* @return the new xlxx
+	* @param GzjlId the primary key for the new gzjl
+	* @return the new gzjl
 	*/
-	public static com.justonetech.expert.model.Xlxx createXlxx(long xlxxId) {
-		return getService().createXlxx(xlxxId);
+	public static com.justonetech.expert.model.Gzjl createGzjl(long GzjlId) {
+		return getService().createGzjl(GzjlId);
 	}
 
 	/**
-	* Deletes the xlxx with the primary key from the database. Also notifies the appropriate model listeners.
+	* Deletes the gzjl with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param xlxxId the primary key of the xlxx
-	* @return the xlxx that was removed
-	* @throws PortalException if a xlxx with the primary key could not be found
+	* @param GzjlId the primary key of the gzjl
+	* @return the gzjl that was removed
+	* @throws PortalException if a gzjl with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.justonetech.expert.model.Xlxx deleteXlxx(long xlxxId)
+	public static com.justonetech.expert.model.Gzjl deleteGzjl(long GzjlId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().deleteXlxx(xlxxId);
+		return getService().deleteGzjl(GzjlId);
 	}
 
 	/**
-	* Deletes the xlxx from the database. Also notifies the appropriate model listeners.
+	* Deletes the gzjl from the database. Also notifies the appropriate model listeners.
 	*
-	* @param xlxx the xlxx
-	* @return the xlxx that was removed
+	* @param gzjl the gzjl
+	* @return the gzjl that was removed
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.justonetech.expert.model.Xlxx deleteXlxx(
-		com.justonetech.expert.model.Xlxx xlxx)
+	public static com.justonetech.expert.model.Gzjl deleteGzjl(
+		com.justonetech.expert.model.Gzjl gzjl)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().deleteXlxx(xlxx);
+		return getService().deleteGzjl(gzjl);
 	}
 
 	public static com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery() {
@@ -111,7 +111,7 @@ public class XlxxLocalServiceUtil {
 	* Performs a dynamic query on the database and returns a range of the matching rows.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.justonetech.expert.model.impl.XlxxModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.justonetech.expert.model.impl.GzjlModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param dynamicQuery the dynamic query
@@ -131,7 +131,7 @@ public class XlxxLocalServiceUtil {
 	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.justonetech.expert.model.impl.XlxxModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.justonetech.expert.model.impl.GzjlModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param dynamicQuery the dynamic query
@@ -179,23 +179,23 @@ public class XlxxLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery, projection);
 	}
 
-	public static com.justonetech.expert.model.Xlxx fetchXlxx(long xlxxId)
+	public static com.justonetech.expert.model.Gzjl fetchGzjl(long GzjlId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().fetchXlxx(xlxxId);
+		return getService().fetchGzjl(GzjlId);
 	}
 
 	/**
-	* Returns the xlxx with the primary key.
+	* Returns the gzjl with the primary key.
 	*
-	* @param xlxxId the primary key of the xlxx
-	* @return the xlxx
-	* @throws PortalException if a xlxx with the primary key could not be found
+	* @param GzjlId the primary key of the gzjl
+	* @return the gzjl
+	* @throws PortalException if a gzjl with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.justonetech.expert.model.Xlxx getXlxx(long xlxxId)
+	public static com.justonetech.expert.model.Gzjl getGzjl(long GzjlId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().getXlxx(xlxxId);
+		return getService().getGzjl(GzjlId);
 	}
 
 	public static com.liferay.portal.model.PersistedModel getPersistedModel(
@@ -206,45 +206,45 @@ public class XlxxLocalServiceUtil {
 	}
 
 	/**
-	* Returns a range of all the xlxxs.
+	* Returns a range of all the gzjls.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.justonetech.expert.model.impl.XlxxModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.justonetech.expert.model.impl.GzjlModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param start the lower bound of the range of xlxxs
-	* @param end the upper bound of the range of xlxxs (not inclusive)
-	* @return the range of xlxxs
+	* @param start the lower bound of the range of gzjls
+	* @param end the upper bound of the range of gzjls (not inclusive)
+	* @return the range of gzjls
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<com.justonetech.expert.model.Xlxx> getXlxxs(
+	public static java.util.List<com.justonetech.expert.model.Gzjl> getGzjls(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getXlxxs(start, end);
+		return getService().getGzjls(start, end);
 	}
 
 	/**
-	* Returns the number of xlxxs.
+	* Returns the number of gzjls.
 	*
-	* @return the number of xlxxs
+	* @return the number of gzjls
 	* @throws SystemException if a system exception occurred
 	*/
-	public static int getXlxxsCount()
+	public static int getGzjlsCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getXlxxsCount();
+		return getService().getGzjlsCount();
 	}
 
 	/**
-	* Updates the xlxx in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
+	* Updates the gzjl in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	*
-	* @param xlxx the xlxx
-	* @return the xlxx that was updated
+	* @param gzjl the gzjl
+	* @return the gzjl that was updated
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.justonetech.expert.model.Xlxx updateXlxx(
-		com.justonetech.expert.model.Xlxx xlxx)
+	public static com.justonetech.expert.model.Gzjl updateGzjl(
+		com.justonetech.expert.model.Gzjl gzjl)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().updateXlxx(xlxx);
+		return getService().updateGzjl(gzjl);
 	}
 
 	/**
@@ -271,9 +271,9 @@ public class XlxxLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
-	public static java.util.List<com.justonetech.expert.model.Xlxx> getXlxxs(
+	public static java.util.List<com.justonetech.expert.model.Gzjl> getGzjls(
 		long expertId, int start, int end) {
-		return getService().getXlxxs(expertId, start, end);
+		return getService().getGzjls(expertId, start, end);
 	}
 
 	public static com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQuery(
@@ -285,19 +285,19 @@ public class XlxxLocalServiceUtil {
 		_service = null;
 	}
 
-	public static XlxxLocalService getService() {
+	public static GzjlLocalService getService() {
 		if (_service == null) {
 			InvokableLocalService invokableLocalService = (InvokableLocalService)PortletBeanLocatorUtil.locate(ClpSerializer.getServletContextName(),
-					XlxxLocalService.class.getName());
+					GzjlLocalService.class.getName());
 
-			if (invokableLocalService instanceof XlxxLocalService) {
-				_service = (XlxxLocalService)invokableLocalService;
+			if (invokableLocalService instanceof GzjlLocalService) {
+				_service = (GzjlLocalService)invokableLocalService;
 			}
 			else {
-				_service = new XlxxLocalServiceClp(invokableLocalService);
+				_service = new GzjlLocalServiceClp(invokableLocalService);
 			}
 
-			ReferenceRegistry.registerReference(XlxxLocalServiceUtil.class,
+			ReferenceRegistry.registerReference(GzjlLocalServiceUtil.class,
 				"_service");
 		}
 
@@ -307,8 +307,8 @@ public class XlxxLocalServiceUtil {
 	/**
 	 * @deprecated As of 6.2.0
 	 */
-	public void setService(XlxxLocalService service) {
+	public void setService(GzjlLocalService service) {
 	}
 
-	private static XlxxLocalService _service;
+	private static GzjlLocalService _service;
 }

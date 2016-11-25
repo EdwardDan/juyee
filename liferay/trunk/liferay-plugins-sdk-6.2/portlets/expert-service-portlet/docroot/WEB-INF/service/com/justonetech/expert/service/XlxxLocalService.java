@@ -249,4 +249,11 @@ public interface XlxxLocalService extends BaseLocalService, InvokableLocalServic
 	public java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.justonetech.expert.model.Xlxx> getXlxxs(
+		long expertId, int start, int end);
+
+	public com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQuery(
+		long expertId);
 }

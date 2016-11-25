@@ -16,10 +16,10 @@ package com.justonetech.expert.service.messaging;
 
 import com.justonetech.expert.service.ClpSerializer;
 import com.justonetech.expert.service.ExpertLocalServiceUtil;
+import com.justonetech.expert.service.GzjlLocalServiceUtil;
 import com.justonetech.expert.service.XlxxLocalServiceUtil;
 import com.justonetech.expert.service.ZqtzjkrzqkLocalServiceUtil;
 import com.justonetech.expert.service.ZysqlbLocalServiceUtil;
-import com.justonetech.expert.service.ZzjlLocalServiceUtil;
 
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
@@ -41,13 +41,13 @@ public class ClpMessageListener extends BaseMessageListener {
 				servletContextName.equals(getServletContextName())) {
 			ExpertLocalServiceUtil.clearService();
 
+			GzjlLocalServiceUtil.clearService();
+
 			XlxxLocalServiceUtil.clearService();
 
 			ZqtzjkrzqkLocalServiceUtil.clearService();
 
 			ZysqlbLocalServiceUtil.clearService();
-
-			ZzjlLocalServiceUtil.clearService();
 		}
 	}
 }

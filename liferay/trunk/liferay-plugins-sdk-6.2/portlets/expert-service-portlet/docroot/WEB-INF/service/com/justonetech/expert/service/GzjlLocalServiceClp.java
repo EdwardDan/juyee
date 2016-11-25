@@ -20,29 +20,28 @@ import com.liferay.portal.service.InvokableLocalService;
  * @author fanqi
  * @generated
  */
-public class ZqtzjkrzqkLocalServiceClp implements ZqtzjkrzqkLocalService {
-	public ZqtzjkrzqkLocalServiceClp(
-		InvokableLocalService invokableLocalService) {
+public class GzjlLocalServiceClp implements GzjlLocalService {
+	public GzjlLocalServiceClp(InvokableLocalService invokableLocalService) {
 		_invokableLocalService = invokableLocalService;
 
-		_methodName0 = "addZqtzjkrzqk";
+		_methodName0 = "addGzjl";
 
 		_methodParameterTypes0 = new String[] {
-				"com.justonetech.expert.model.Zqtzjkrzqk"
+				"com.justonetech.expert.model.Gzjl"
 			};
 
-		_methodName1 = "createZqtzjkrzqk";
+		_methodName1 = "createGzjl";
 
 		_methodParameterTypes1 = new String[] { "long" };
 
-		_methodName2 = "deleteZqtzjkrzqk";
+		_methodName2 = "deleteGzjl";
 
 		_methodParameterTypes2 = new String[] { "long" };
 
-		_methodName3 = "deleteZqtzjkrzqk";
+		_methodName3 = "deleteGzjl";
 
 		_methodParameterTypes3 = new String[] {
-				"com.justonetech.expert.model.Zqtzjkrzqk"
+				"com.justonetech.expert.model.Gzjl"
 			};
 
 		_methodName4 = "dynamicQuery";
@@ -81,11 +80,11 @@ public class ZqtzjkrzqkLocalServiceClp implements ZqtzjkrzqkLocalService {
 				"com.liferay.portal.kernel.dao.orm.Projection"
 			};
 
-		_methodName10 = "fetchZqtzjkrzqk";
+		_methodName10 = "fetchGzjl";
 
 		_methodParameterTypes10 = new String[] { "long" };
 
-		_methodName11 = "getZqtzjkrzqk";
+		_methodName11 = "getGzjl";
 
 		_methodParameterTypes11 = new String[] { "long" };
 
@@ -93,18 +92,18 @@ public class ZqtzjkrzqkLocalServiceClp implements ZqtzjkrzqkLocalService {
 
 		_methodParameterTypes12 = new String[] { "java.io.Serializable" };
 
-		_methodName13 = "getZqtzjkrzqks";
+		_methodName13 = "getGzjls";
 
 		_methodParameterTypes13 = new String[] { "int", "int" };
 
-		_methodName14 = "getZqtzjkrzqksCount";
+		_methodName14 = "getGzjlsCount";
 
 		_methodParameterTypes14 = new String[] {  };
 
-		_methodName15 = "updateZqtzjkrzqk";
+		_methodName15 = "updateGzjl";
 
 		_methodParameterTypes15 = new String[] {
-				"com.justonetech.expert.model.Zqtzjkrzqk"
+				"com.justonetech.expert.model.Gzjl"
 			};
 
 		_methodName16 = "getBeanIdentifier";
@@ -115,7 +114,7 @@ public class ZqtzjkrzqkLocalServiceClp implements ZqtzjkrzqkLocalService {
 
 		_methodParameterTypes17 = new String[] { "java.lang.String" };
 
-		_methodName19 = "getZqtzjkrzqks";
+		_methodName19 = "getGzjls";
 
 		_methodParameterTypes19 = new String[] { "long", "int", "int" };
 
@@ -125,15 +124,15 @@ public class ZqtzjkrzqkLocalServiceClp implements ZqtzjkrzqkLocalService {
 	}
 
 	@Override
-	public com.justonetech.expert.model.Zqtzjkrzqk addZqtzjkrzqk(
-		com.justonetech.expert.model.Zqtzjkrzqk zqtzjkrzqk)
+	public com.justonetech.expert.model.Gzjl addGzjl(
+		com.justonetech.expert.model.Gzjl gzjl)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName0,
 					_methodParameterTypes0,
-					new Object[] { ClpSerializer.translateInput(zqtzjkrzqk) });
+					new Object[] { ClpSerializer.translateInput(gzjl) });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -151,17 +150,16 @@ public class ZqtzjkrzqkLocalServiceClp implements ZqtzjkrzqkLocalService {
 			}
 		}
 
-		return (com.justonetech.expert.model.Zqtzjkrzqk)ClpSerializer.translateOutput(returnObj);
+		return (com.justonetech.expert.model.Gzjl)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
-	public com.justonetech.expert.model.Zqtzjkrzqk createZqtzjkrzqk(
-		long zqtzjkrzqkId) {
+	public com.justonetech.expert.model.Gzjl createGzjl(long GzjlId) {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName1,
-					_methodParameterTypes1, new Object[] { zqtzjkrzqkId });
+					_methodParameterTypes1, new Object[] { GzjlId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -175,19 +173,18 @@ public class ZqtzjkrzqkLocalServiceClp implements ZqtzjkrzqkLocalService {
 			}
 		}
 
-		return (com.justonetech.expert.model.Zqtzjkrzqk)ClpSerializer.translateOutput(returnObj);
+		return (com.justonetech.expert.model.Gzjl)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
-	public com.justonetech.expert.model.Zqtzjkrzqk deleteZqtzjkrzqk(
-		long zqtzjkrzqkId)
+	public com.justonetech.expert.model.Gzjl deleteGzjl(long GzjlId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName2,
-					_methodParameterTypes2, new Object[] { zqtzjkrzqkId });
+					_methodParameterTypes2, new Object[] { GzjlId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -209,19 +206,19 @@ public class ZqtzjkrzqkLocalServiceClp implements ZqtzjkrzqkLocalService {
 			}
 		}
 
-		return (com.justonetech.expert.model.Zqtzjkrzqk)ClpSerializer.translateOutput(returnObj);
+		return (com.justonetech.expert.model.Gzjl)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
-	public com.justonetech.expert.model.Zqtzjkrzqk deleteZqtzjkrzqk(
-		com.justonetech.expert.model.Zqtzjkrzqk zqtzjkrzqk)
+	public com.justonetech.expert.model.Gzjl deleteGzjl(
+		com.justonetech.expert.model.Gzjl gzjl)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName3,
 					_methodParameterTypes3,
-					new Object[] { ClpSerializer.translateInput(zqtzjkrzqk) });
+					new Object[] { ClpSerializer.translateInput(gzjl) });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -239,7 +236,7 @@ public class ZqtzjkrzqkLocalServiceClp implements ZqtzjkrzqkLocalService {
 			}
 		}
 
-		return (com.justonetech.expert.model.Zqtzjkrzqk)ClpSerializer.translateOutput(returnObj);
+		return (com.justonetech.expert.model.Gzjl)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
@@ -440,14 +437,13 @@ public class ZqtzjkrzqkLocalServiceClp implements ZqtzjkrzqkLocalService {
 	}
 
 	@Override
-	public com.justonetech.expert.model.Zqtzjkrzqk fetchZqtzjkrzqk(
-		long zqtzjkrzqkId)
+	public com.justonetech.expert.model.Gzjl fetchGzjl(long GzjlId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName10,
-					_methodParameterTypes10, new Object[] { zqtzjkrzqkId });
+					_methodParameterTypes10, new Object[] { GzjlId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -465,19 +461,18 @@ public class ZqtzjkrzqkLocalServiceClp implements ZqtzjkrzqkLocalService {
 			}
 		}
 
-		return (com.justonetech.expert.model.Zqtzjkrzqk)ClpSerializer.translateOutput(returnObj);
+		return (com.justonetech.expert.model.Gzjl)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
-	public com.justonetech.expert.model.Zqtzjkrzqk getZqtzjkrzqk(
-		long zqtzjkrzqkId)
+	public com.justonetech.expert.model.Gzjl getGzjl(long GzjlId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName11,
-					_methodParameterTypes11, new Object[] { zqtzjkrzqkId });
+					_methodParameterTypes11, new Object[] { GzjlId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -499,7 +494,7 @@ public class ZqtzjkrzqkLocalServiceClp implements ZqtzjkrzqkLocalService {
 			}
 		}
 
-		return (com.justonetech.expert.model.Zqtzjkrzqk)ClpSerializer.translateOutput(returnObj);
+		return (com.justonetech.expert.model.Gzjl)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
@@ -538,7 +533,7 @@ public class ZqtzjkrzqkLocalServiceClp implements ZqtzjkrzqkLocalService {
 	}
 
 	@Override
-	public java.util.List<com.justonetech.expert.model.Zqtzjkrzqk> getZqtzjkrzqks(
+	public java.util.List<com.justonetech.expert.model.Gzjl> getGzjls(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
@@ -563,11 +558,11 @@ public class ZqtzjkrzqkLocalServiceClp implements ZqtzjkrzqkLocalService {
 			}
 		}
 
-		return (java.util.List<com.justonetech.expert.model.Zqtzjkrzqk>)ClpSerializer.translateOutput(returnObj);
+		return (java.util.List<com.justonetech.expert.model.Gzjl>)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
-	public int getZqtzjkrzqksCount()
+	public int getGzjlsCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
@@ -595,15 +590,15 @@ public class ZqtzjkrzqkLocalServiceClp implements ZqtzjkrzqkLocalService {
 	}
 
 	@Override
-	public com.justonetech.expert.model.Zqtzjkrzqk updateZqtzjkrzqk(
-		com.justonetech.expert.model.Zqtzjkrzqk zqtzjkrzqk)
+	public com.justonetech.expert.model.Gzjl updateGzjl(
+		com.justonetech.expert.model.Gzjl gzjl)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableLocalService.invokeMethod(_methodName15,
 					_methodParameterTypes15,
-					new Object[] { ClpSerializer.translateInput(zqtzjkrzqk) });
+					new Object[] { ClpSerializer.translateInput(gzjl) });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -621,7 +616,7 @@ public class ZqtzjkrzqkLocalServiceClp implements ZqtzjkrzqkLocalService {
 			}
 		}
 
-		return (com.justonetech.expert.model.Zqtzjkrzqk)ClpSerializer.translateOutput(returnObj);
+		return (com.justonetech.expert.model.Gzjl)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
@@ -675,7 +670,7 @@ public class ZqtzjkrzqkLocalServiceClp implements ZqtzjkrzqkLocalService {
 	}
 
 	@Override
-	public java.util.List<com.justonetech.expert.model.Zqtzjkrzqk> getZqtzjkrzqks(
+	public java.util.List<com.justonetech.expert.model.Gzjl> getGzjls(
 		long expertId, int start, int end) {
 		Object returnObj = null;
 
@@ -696,7 +691,7 @@ public class ZqtzjkrzqkLocalServiceClp implements ZqtzjkrzqkLocalService {
 			}
 		}
 
-		return (java.util.List<com.justonetech.expert.model.Zqtzjkrzqk>)ClpSerializer.translateOutput(returnObj);
+		return (java.util.List<com.justonetech.expert.model.Gzjl>)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override

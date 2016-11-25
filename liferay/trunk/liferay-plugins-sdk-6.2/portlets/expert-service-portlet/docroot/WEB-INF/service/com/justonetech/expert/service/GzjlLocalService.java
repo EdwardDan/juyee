@@ -25,72 +25,70 @@ import com.liferay.portal.service.InvokableLocalService;
 import com.liferay.portal.service.PersistedModelLocalService;
 
 /**
- * Provides the local service interface for Zqtzjkrzqk. Methods of this
+ * Provides the local service interface for Gzjl. Methods of this
  * service will not have security checks based on the propagated JAAS
  * credentials because this service can only be accessed from within the same
  * VM.
  *
  * @author fanqi
- * @see ZqtzjkrzqkLocalServiceUtil
- * @see com.justonetech.expert.service.base.ZqtzjkrzqkLocalServiceBaseImpl
- * @see com.justonetech.expert.service.impl.ZqtzjkrzqkLocalServiceImpl
+ * @see GzjlLocalServiceUtil
+ * @see com.justonetech.expert.service.base.GzjlLocalServiceBaseImpl
+ * @see com.justonetech.expert.service.impl.GzjlLocalServiceImpl
  * @generated
  */
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface ZqtzjkrzqkLocalService extends BaseLocalService,
-	InvokableLocalService, PersistedModelLocalService {
+public interface GzjlLocalService extends BaseLocalService, InvokableLocalService,
+	PersistedModelLocalService {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link ZqtzjkrzqkLocalServiceUtil} to access the zqtzjkrzqk local service. Add custom service methods to {@link com.justonetech.expert.service.impl.ZqtzjkrzqkLocalServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link GzjlLocalServiceUtil} to access the gzjl local service. Add custom service methods to {@link com.justonetech.expert.service.impl.GzjlLocalServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 
 	/**
-	* Adds the zqtzjkrzqk to the database. Also notifies the appropriate model listeners.
+	* Adds the gzjl to the database. Also notifies the appropriate model listeners.
 	*
-	* @param zqtzjkrzqk the zqtzjkrzqk
-	* @return the zqtzjkrzqk that was added
+	* @param gzjl the gzjl
+	* @return the gzjl that was added
 	* @throws SystemException if a system exception occurred
 	*/
 	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.REINDEX)
-	public com.justonetech.expert.model.Zqtzjkrzqk addZqtzjkrzqk(
-		com.justonetech.expert.model.Zqtzjkrzqk zqtzjkrzqk)
+	public com.justonetech.expert.model.Gzjl addGzjl(
+		com.justonetech.expert.model.Gzjl gzjl)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Creates a new zqtzjkrzqk with the primary key. Does not add the zqtzjkrzqk to the database.
+	* Creates a new gzjl with the primary key. Does not add the gzjl to the database.
 	*
-	* @param zqtzjkrzqkId the primary key for the new zqtzjkrzqk
-	* @return the new zqtzjkrzqk
+	* @param GzjlId the primary key for the new gzjl
+	* @return the new gzjl
 	*/
-	public com.justonetech.expert.model.Zqtzjkrzqk createZqtzjkrzqk(
-		long zqtzjkrzqkId);
+	public com.justonetech.expert.model.Gzjl createGzjl(long GzjlId);
 
 	/**
-	* Deletes the zqtzjkrzqk with the primary key from the database. Also notifies the appropriate model listeners.
+	* Deletes the gzjl with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param zqtzjkrzqkId the primary key of the zqtzjkrzqk
-	* @return the zqtzjkrzqk that was removed
-	* @throws PortalException if a zqtzjkrzqk with the primary key could not be found
+	* @param GzjlId the primary key of the gzjl
+	* @return the gzjl that was removed
+	* @throws PortalException if a gzjl with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
-	public com.justonetech.expert.model.Zqtzjkrzqk deleteZqtzjkrzqk(
-		long zqtzjkrzqkId)
+	public com.justonetech.expert.model.Gzjl deleteGzjl(long GzjlId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Deletes the zqtzjkrzqk from the database. Also notifies the appropriate model listeners.
+	* Deletes the gzjl from the database. Also notifies the appropriate model listeners.
 	*
-	* @param zqtzjkrzqk the zqtzjkrzqk
-	* @return the zqtzjkrzqk that was removed
+	* @param gzjl the gzjl
+	* @return the gzjl that was removed
 	* @throws SystemException if a system exception occurred
 	*/
 	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.DELETE)
-	public com.justonetech.expert.model.Zqtzjkrzqk deleteZqtzjkrzqk(
-		com.justonetech.expert.model.Zqtzjkrzqk zqtzjkrzqk)
+	public com.justonetech.expert.model.Gzjl deleteGzjl(
+		com.justonetech.expert.model.Gzjl gzjl)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery();
@@ -111,7 +109,7 @@ public interface ZqtzjkrzqkLocalService extends BaseLocalService,
 	* Performs a dynamic query on the database and returns a range of the matching rows.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.justonetech.expert.model.impl.ZqtzjkrzqkModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.justonetech.expert.model.impl.GzjlModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param dynamicQuery the dynamic query
@@ -129,7 +127,7 @@ public interface ZqtzjkrzqkLocalService extends BaseLocalService,
 	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.justonetech.expert.model.impl.ZqtzjkrzqkModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.justonetech.expert.model.impl.GzjlModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param dynamicQuery the dynamic query
@@ -171,21 +169,19 @@ public interface ZqtzjkrzqkLocalService extends BaseLocalService,
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.justonetech.expert.model.Zqtzjkrzqk fetchZqtzjkrzqk(
-		long zqtzjkrzqkId)
+	public com.justonetech.expert.model.Gzjl fetchGzjl(long GzjlId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns the zqtzjkrzqk with the primary key.
+	* Returns the gzjl with the primary key.
 	*
-	* @param zqtzjkrzqkId the primary key of the zqtzjkrzqk
-	* @return the zqtzjkrzqk
-	* @throws PortalException if a zqtzjkrzqk with the primary key could not be found
+	* @param GzjlId the primary key of the gzjl
+	* @return the gzjl
+	* @throws PortalException if a gzjl with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.justonetech.expert.model.Zqtzjkrzqk getZqtzjkrzqk(
-		long zqtzjkrzqkId)
+	public com.justonetech.expert.model.Gzjl getGzjl(long GzjlId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -197,42 +193,42 @@ public interface ZqtzjkrzqkLocalService extends BaseLocalService,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns a range of all the zqtzjkrzqks.
+	* Returns a range of all the gzjls.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.justonetech.expert.model.impl.ZqtzjkrzqkModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.justonetech.expert.model.impl.GzjlModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
-	* @param start the lower bound of the range of zqtzjkrzqks
-	* @param end the upper bound of the range of zqtzjkrzqks (not inclusive)
-	* @return the range of zqtzjkrzqks
+	* @param start the lower bound of the range of gzjls
+	* @param end the upper bound of the range of gzjls (not inclusive)
+	* @return the range of gzjls
 	* @throws SystemException if a system exception occurred
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.justonetech.expert.model.Zqtzjkrzqk> getZqtzjkrzqks(
+	public java.util.List<com.justonetech.expert.model.Gzjl> getGzjls(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns the number of zqtzjkrzqks.
+	* Returns the number of gzjls.
 	*
-	* @return the number of zqtzjkrzqks
+	* @return the number of gzjls
 	* @throws SystemException if a system exception occurred
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getZqtzjkrzqksCount()
+	public int getGzjlsCount()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Updates the zqtzjkrzqk in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
+	* Updates the gzjl in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	*
-	* @param zqtzjkrzqk the zqtzjkrzqk
-	* @return the zqtzjkrzqk that was updated
+	* @param gzjl the gzjl
+	* @return the gzjl that was updated
 	* @throws SystemException if a system exception occurred
 	*/
 	@com.liferay.portal.kernel.search.Indexable(type = IndexableType.REINDEX)
-	public com.justonetech.expert.model.Zqtzjkrzqk updateZqtzjkrzqk(
-		com.justonetech.expert.model.Zqtzjkrzqk zqtzjkrzqk)
+	public com.justonetech.expert.model.Gzjl updateGzjl(
+		com.justonetech.expert.model.Gzjl gzjl)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
@@ -255,7 +251,7 @@ public interface ZqtzjkrzqkLocalService extends BaseLocalService,
 		throws java.lang.Throwable;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.justonetech.expert.model.Zqtzjkrzqk> getZqtzjkrzqks(
+	public java.util.List<com.justonetech.expert.model.Gzjl> getGzjls(
 		long expertId, int start, int end);
 
 	public com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQuery(

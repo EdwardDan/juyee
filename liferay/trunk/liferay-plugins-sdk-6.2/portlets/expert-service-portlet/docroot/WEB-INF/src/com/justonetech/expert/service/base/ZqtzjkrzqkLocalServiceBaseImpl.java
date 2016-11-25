@@ -17,10 +17,10 @@ package com.justonetech.expert.service.base;
 import com.justonetech.expert.model.Zqtzjkrzqk;
 import com.justonetech.expert.service.ZqtzjkrzqkLocalService;
 import com.justonetech.expert.service.persistence.ExpertPersistence;
+import com.justonetech.expert.service.persistence.GzjlPersistence;
 import com.justonetech.expert.service.persistence.XlxxPersistence;
 import com.justonetech.expert.service.persistence.ZqtzjkrzqkPersistence;
 import com.justonetech.expert.service.persistence.ZysqlbPersistence;
-import com.justonetech.expert.service.persistence.ZzjlPersistence;
 
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.bean.IdentifiableBean;
@@ -322,6 +322,43 @@ public abstract class ZqtzjkrzqkLocalServiceBaseImpl
 	}
 
 	/**
+	 * Returns the gzjl local service.
+	 *
+	 * @return the gzjl local service
+	 */
+	public com.justonetech.expert.service.GzjlLocalService getGzjlLocalService() {
+		return gzjlLocalService;
+	}
+
+	/**
+	 * Sets the gzjl local service.
+	 *
+	 * @param gzjlLocalService the gzjl local service
+	 */
+	public void setGzjlLocalService(
+		com.justonetech.expert.service.GzjlLocalService gzjlLocalService) {
+		this.gzjlLocalService = gzjlLocalService;
+	}
+
+	/**
+	 * Returns the gzjl persistence.
+	 *
+	 * @return the gzjl persistence
+	 */
+	public GzjlPersistence getGzjlPersistence() {
+		return gzjlPersistence;
+	}
+
+	/**
+	 * Sets the gzjl persistence.
+	 *
+	 * @param gzjlPersistence the gzjl persistence
+	 */
+	public void setGzjlPersistence(GzjlPersistence gzjlPersistence) {
+		this.gzjlPersistence = gzjlPersistence;
+	}
+
+	/**
 	 * Returns the xlxx local service.
 	 *
 	 * @return the xlxx local service
@@ -431,43 +468,6 @@ public abstract class ZqtzjkrzqkLocalServiceBaseImpl
 	 */
 	public void setZysqlbPersistence(ZysqlbPersistence zysqlbPersistence) {
 		this.zysqlbPersistence = zysqlbPersistence;
-	}
-
-	/**
-	 * Returns the zzjl local service.
-	 *
-	 * @return the zzjl local service
-	 */
-	public com.justonetech.expert.service.ZzjlLocalService getZzjlLocalService() {
-		return zzjlLocalService;
-	}
-
-	/**
-	 * Sets the zzjl local service.
-	 *
-	 * @param zzjlLocalService the zzjl local service
-	 */
-	public void setZzjlLocalService(
-		com.justonetech.expert.service.ZzjlLocalService zzjlLocalService) {
-		this.zzjlLocalService = zzjlLocalService;
-	}
-
-	/**
-	 * Returns the zzjl persistence.
-	 *
-	 * @return the zzjl persistence
-	 */
-	public ZzjlPersistence getZzjlPersistence() {
-		return zzjlPersistence;
-	}
-
-	/**
-	 * Sets the zzjl persistence.
-	 *
-	 * @param zzjlPersistence the zzjl persistence
-	 */
-	public void setZzjlPersistence(ZzjlPersistence zzjlPersistence) {
-		this.zzjlPersistence = zzjlPersistence;
 	}
 
 	/**
@@ -650,6 +650,10 @@ public abstract class ZqtzjkrzqkLocalServiceBaseImpl
 	protected com.justonetech.expert.service.ExpertLocalService expertLocalService;
 	@BeanReference(type = ExpertPersistence.class)
 	protected ExpertPersistence expertPersistence;
+	@BeanReference(type = com.justonetech.expert.service.GzjlLocalService.class)
+	protected com.justonetech.expert.service.GzjlLocalService gzjlLocalService;
+	@BeanReference(type = GzjlPersistence.class)
+	protected GzjlPersistence gzjlPersistence;
 	@BeanReference(type = com.justonetech.expert.service.XlxxLocalService.class)
 	protected com.justonetech.expert.service.XlxxLocalService xlxxLocalService;
 	@BeanReference(type = XlxxPersistence.class)
@@ -662,10 +666,6 @@ public abstract class ZqtzjkrzqkLocalServiceBaseImpl
 	protected com.justonetech.expert.service.ZysqlbLocalService zysqlbLocalService;
 	@BeanReference(type = ZysqlbPersistence.class)
 	protected ZysqlbPersistence zysqlbPersistence;
-	@BeanReference(type = com.justonetech.expert.service.ZzjlLocalService.class)
-	protected com.justonetech.expert.service.ZzjlLocalService zzjlLocalService;
-	@BeanReference(type = ZzjlPersistence.class)
-	protected ZzjlPersistence zzjlPersistence;
 	@BeanReference(type = com.liferay.counter.service.CounterLocalService.class)
 	protected com.liferay.counter.service.CounterLocalService counterLocalService;
 	@BeanReference(type = com.liferay.portal.service.ResourceLocalService.class)

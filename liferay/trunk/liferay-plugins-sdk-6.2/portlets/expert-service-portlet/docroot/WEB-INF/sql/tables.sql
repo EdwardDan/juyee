@@ -18,6 +18,15 @@ create table expert_Expert (
 	cz VARCHAR(75) null
 );
 
+create table expert_Gzjl (
+	GzjlId LONG not null primary key,
+	expertId LONG,
+	gzdw VARCHAR(75) null,
+	qzny VARCHAR(75) null,
+	cszyzygz VARCHAR(75) null,
+	zw VARCHAR(75) null
+);
+
 create table expert_Jbxx (
 	jbxxId LONG not null primary key,
 	xm VARCHAR(75) null,

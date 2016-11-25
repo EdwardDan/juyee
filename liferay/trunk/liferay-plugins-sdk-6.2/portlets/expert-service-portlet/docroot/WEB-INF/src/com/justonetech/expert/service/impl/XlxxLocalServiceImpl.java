@@ -14,7 +14,25 @@
 
 package com.justonetech.expert.service.impl;
 
+import java.util.Collections;
+import java.util.List;
+
+import com.justonetech.expert.model.Expert;
+import com.justonetech.expert.model.Xlxx;
+import com.justonetech.expert.model.Zysqlb;
 import com.justonetech.expert.service.base.XlxxLocalServiceBaseImpl;
+import com.liferay.portal.kernel.dao.orm.Criterion;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.Junction;
+import com.liferay.portal.kernel.dao.orm.OrderFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.Validator;
 
 /**
  * The implementation of the xlxx local service.
@@ -36,4 +54,28 @@ public class XlxxLocalServiceImpl extends XlxxLocalServiceBaseImpl {
 	 *
 	 * Never reference this interface directly. Always use {@link com.justonetech.expert.service.XlxxLocalServiceUtil} to access the xlxx local service.
 	 */
+	private static Log log = LogFactoryUtil
+			.getLog(XlxxLocalServiceImpl.class);
+
+	@SuppressWarnings("unchecked")
+	public List<Xlxx> getXlxxs(long expertId, int start, int end) {
+
+		try {
+			return this.dynamicQuery(createDynamicQuery(expertId), start, end);
+		} catch (SystemException e) {
+			log.info(e.getMessage());
+		}
+		return Collections.emptyList();
+	}
+
+	public DynamicQuery createDynamicQuery(long expertId) {
+
+		DynamicQuery dynamicQuery = this.dynamicQuery();
+
+		dynamicQuery.add(PropertyFactoryUtil.forName("expertId").eq(expertId));
+
+		dynamicQuery.addOrder(OrderFactoryUtil.desc("expertId"));
+		return dynamicQuery;
+	}
+	
 }

@@ -18,8 +18,8 @@ import java.util.Collections;
 import java.util.List;
 
 import com.justonetech.expert.model.Gzjl;
-import com.justonetech.expert.model.Zqtzjkrzqk;
-import com.justonetech.expert.service.base.ZqtzjkrzqkLocalServiceBaseImpl;
+import com.justonetech.expert.model.Xlxx;
+import com.justonetech.expert.service.base.GzjlLocalServiceBaseImpl;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.OrderFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
@@ -28,31 +28,30 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 /**
- * The implementation of the zqtzjkrzqk local service.
+ * The implementation of the gzjl local service.
  *
  * <p>
- * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.justonetech.expert.service.ZqtzjkrzqkLocalService} interface.
+ * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.justonetech.expert.service.GzjlLocalService} interface.
  *
  * <p>
  * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
  * </p>
  *
  * @author fanqi
- * @see com.justonetech.expert.service.base.ZqtzjkrzqkLocalServiceBaseImpl
- * @see com.justonetech.expert.service.ZqtzjkrzqkLocalServiceUtil
+ * @see com.justonetech.expert.service.base.GzjlLocalServiceBaseImpl
+ * @see com.justonetech.expert.service.GzjlLocalServiceUtil
  */
-public class ZqtzjkrzqkLocalServiceImpl extends ZqtzjkrzqkLocalServiceBaseImpl {
+public class GzjlLocalServiceImpl extends GzjlLocalServiceBaseImpl {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never reference this interface directly. Always use {@link com.justonetech.expert.service.ZqtzjkrzqkLocalServiceUtil} to access the zqtzjkrzqk local service.
+	 * Never reference this interface directly. Always use {@link com.justonetech.expert.service.GzjlLocalServiceUtil} to access the gzjl local service.
 	 */
-	
 	private static Log log = LogFactoryUtil
-			.getLog(ZqtzjkrzqkLocalServiceImpl.class);
+			.getLog(GzjlLocalServiceImpl.class);
 
 	@SuppressWarnings("unchecked")
-	public List<Zqtzjkrzqk> getZqtzjkrzqks(long expertId, int start, int end) {
+	public List<Gzjl> getGzjls(long expertId, int start, int end) {
 
 		try {
 			return this.dynamicQuery(createDynamicQuery(expertId), start, end);
@@ -71,4 +70,5 @@ public class ZqtzjkrzqkLocalServiceImpl extends ZqtzjkrzqkLocalServiceBaseImpl {
 		dynamicQuery.addOrder(OrderFactoryUtil.desc("expertId"));
 		return dynamicQuery;
 	}
+	
 }

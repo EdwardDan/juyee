@@ -113,6 +113,14 @@ public class ZqtzjkrzqkLocalServiceClpInvoker {
 		_methodName49 = "setBeanIdentifier";
 
 		_methodParameterTypes49 = new String[] { "java.lang.String" };
+
+		_methodName54 = "getZqtzjkrzqks";
+
+		_methodParameterTypes54 = new String[] { "long", "int", "int" };
+
+		_methodName55 = "createDynamicQuery";
+
+		_methodParameterTypes55 = new String[] { "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -216,6 +224,18 @@ public class ZqtzjkrzqkLocalServiceClpInvoker {
 			return null;
 		}
 
+		if (_methodName54.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes54, parameterTypes)) {
+			return ZqtzjkrzqkLocalServiceUtil.getZqtzjkrzqks(((Long)arguments[0]).longValue(),
+				((Integer)arguments[1]).intValue(),
+				((Integer)arguments[2]).intValue());
+		}
+
+		if (_methodName55.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes55, parameterTypes)) {
+			return ZqtzjkrzqkLocalServiceUtil.createDynamicQuery(((Long)arguments[0]).longValue());
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -255,4 +275,8 @@ public class ZqtzjkrzqkLocalServiceClpInvoker {
 	private String[] _methodParameterTypes48;
 	private String _methodName49;
 	private String[] _methodParameterTypes49;
+	private String _methodName54;
+	private String[] _methodParameterTypes54;
+	private String _methodName55;
+	private String[] _methodParameterTypes55;
 }

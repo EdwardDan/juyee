@@ -280,6 +280,18 @@ public class XlxxLocalServiceWrapper implements XlxxLocalService,
 		return _xlxxLocalService.invokeMethod(name, parameterTypes, arguments);
 	}
 
+	@Override
+	public java.util.List<com.justonetech.expert.model.Xlxx> getXlxxs(
+		long expertId, int start, int end) {
+		return _xlxxLocalService.getXlxxs(expertId, start, end);
+	}
+
+	@Override
+	public com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQuery(
+		long expertId) {
+		return _xlxxLocalService.createDynamicQuery(expertId);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

@@ -287,6 +287,18 @@ public class ZqtzjkrzqkLocalServiceWrapper implements ZqtzjkrzqkLocalService,
 			arguments);
 	}
 
+	@Override
+	public java.util.List<com.justonetech.expert.model.Zqtzjkrzqk> getZqtzjkrzqks(
+		long expertId, int start, int end) {
+		return _zqtzjkrzqkLocalService.getZqtzjkrzqks(expertId, start, end);
+	}
+
+	@Override
+	public com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQuery(
+		long expertId) {
+		return _zqtzjkrzqkLocalService.createDynamicQuery(expertId);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

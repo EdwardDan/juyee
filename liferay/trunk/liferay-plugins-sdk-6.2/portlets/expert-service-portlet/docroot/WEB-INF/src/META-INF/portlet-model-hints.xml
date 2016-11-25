@@ -20,6 +20,14 @@
 		<field name="lxdh" type="String" />
 		<field name="cz" type="String" />
 	</model>
+	<model name="com.justonetech.expert.model.Gzjl">
+		<field name="GzjlId" type="long" />
+		<field name="expertId" type="long" />
+		<field name="gzdw" type="String" />
+		<field name="qzny" type="String" />
+		<field name="cszyzygz" type="String" />
+		<field name="zw" type="String" />
+	</model>
 	<model name="com.justonetech.expert.model.Xlxx">
 		<field name="xlxxId" type="long" />
 		<field name="expertId" type="long" />
@@ -46,13 +54,5 @@
 		<field name="shyj" type="String" />
 		<field name="shr" type="String" />
 		<field name="shrq" type="Date" />
-	</model>
-	<model name="com.justonetech.expert.model.Zzjl">
-		<field name="zzjlId" type="long" />
-		<field name="expertId" type="long" />
-		<field name="gzdw" type="String" />
-		<field name="qzny" type="String" />
-		<field name="cszyzygz" type="String" />
-		<field name="zw" type="String" />
 	</model>
 </model-hints>
