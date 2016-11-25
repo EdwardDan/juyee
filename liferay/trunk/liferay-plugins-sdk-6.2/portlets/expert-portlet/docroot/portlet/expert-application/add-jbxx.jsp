@@ -32,12 +32,11 @@
 				</aui:input></td>
 			<td class="text-right" width="20%">性别</td>
 			<td class="bg-white" width="30%">
-				<aui:select name="xb" label="" cssClass="span6">
-					<aui:option value="0"> </aui:option>
-					<aui:option value="1">男</aui:option>
-					<aui:option value="2">女</aui:option>
-					<aui:validator name="required"></aui:validator>
-				</aui:select></td>
+				<aui:select name="xb" label="" cssClass="span6"> 
+					<aui:option value="男" selected="${expert.xb eq '男'}">男</aui:option>
+					<aui:option value="女" selected="${expert.xb eq '女'}">女</aui:option>
+				</aui:select>
+			</td>
 		</tr>
 		<tr>
 			<td class="text-right">身份证号</td>
