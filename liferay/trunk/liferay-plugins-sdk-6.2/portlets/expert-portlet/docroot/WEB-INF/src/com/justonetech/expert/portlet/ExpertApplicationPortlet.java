@@ -1,6 +1,7 @@
 package com.justonetech.expert.portlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -11,18 +12,27 @@ import javax.portlet.ActionResponse;
 import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+import javax.portlet.ResourceRequest;
+import javax.portlet.ResourceResponse;
 
 import com.justonetech.expert.model.Expert;
 import com.justonetech.expert.model.Gzjl;
 import com.justonetech.expert.model.Xlxx;
 import com.justonetech.expert.model.Zqtzjkrzqk;
+import com.justonetech.expert.model.Zysqlb;
 import com.justonetech.expert.service.ExpertLocalServiceUtil;
 import com.justonetech.expert.service.GzjlLocalServiceUtil;
 import com.justonetech.expert.service.XlxxLocalServiceUtil;
 import com.justonetech.expert.service.ZqtzjkrzqkLocalServiceUtil;
+import com.justonetech.expert.service.ZysqlbLocalServiceUtil;
+import com.justonetech.sys.model.Dictionary;
+import com.justonetech.sys.service.DictionaryLocalServiceUtil;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -202,6 +212,80 @@ public class ExpertApplicationPortlet extends MVCPortlet {
 				}
 			}
 			
+			@Override
+			public void serveResource(ResourceRequest resourceRequest,
+					ResourceResponse resourceResponse) throws IOException,
+					PortletException {
+				String selectedVal = ParamUtil.getString(resourceRequest, "subject");
+				List<Dictionary> zyList = null;
+				try {
+					Dictionary zy = DictionaryLocalServiceUtil.getDictionary(Long
+							.parseLong(selectedVal));
+					zyList = DictionaryLocalServiceUtil.findByParentId(
+							zy.getDictionaryId(), -1, -1);
+
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+				JSONObject jsonObject = null;
+				for (Dictionary a : zyList) {
+					jsonObject = JSONFactoryUtil.createJSONObject();
+					jsonObject.put("name", a.getName());
+					jsonObject.put("id", a.getDictionaryId());
+					jsonArray.put(jsonObject);
+				}
+				resourceResponse.setContentType("text/javascript");
+				PrintWriter out = null;
+				try {
+					out = resourceResponse.getWriter();
+					out.println(jsonArray);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				out.flush();
+				out.close();
+			}
+
+			public void saveZysqlb(ActionRequest request, ActionResponse response) throws SystemException,
+			PortalException, ParseException, IOException {
+				
+				String zysqlbId = ParamUtil.getString(request, "zysqlbId");
+				String sx = ParamUtil.getString(request, "sx");
+				String[] zy = ParamUtil.getParameterValues(request, "zy");
+				String zylb="";
+				for(String lb:zy){
+					Dictionary lbDic = DictionaryLocalServiceUtil.getDictionary(Long.parseLong(lb));
+					zylb+=lbDic.getName()+" ";
+				}
+				long expertId = ParamUtil.getLong(request,"expertId");
+				int zt = ParamUtil.getInteger(request, "zt");
+				Zysqlb zysqlb = null;
+				if(zysqlbId.equals("")){
+				 zysqlb = ZysqlbLocalServiceUtil.createZysqlb(CounterLocalServiceUtil.increment());
+				}else{
+				zysqlb = ZysqlbLocalServiceUtil.getZysqlb(Long.parseLong(zysqlbId));
+				}
+				zysqlb.setSx(sx);
+				zysqlb.setZy(zylb);
+				zysqlb.setZt(zt);
+				zysqlb.setExpertId(expertId);
+				ZysqlbLocalServiceUtil.updateZysqlb(zysqlb);
+			}
 			
+			  public void editZysqlb(ActionRequest actionRequest, ActionResponse actionResponse)
+				        throws IOException, PortletException, PortalException, SystemException {
+				   String zysqlbId = ParamUtil.getString(actionRequest, "zysqlbId");
+			        Zysqlb zysqlb = ZysqlbLocalServiceUtil.getZysqlb(Long.parseLong(zysqlbId));
+			        actionRequest.setAttribute("zysqlb", zysqlb);
+			  }
+			  
+			  public void deleteZysqlb(ActionRequest actionRequest, ActionResponse actionResponse)
+				        throws IOException, PortletException, PortalException, SystemException {
+				   String zysqlbId = ParamUtil.getString(actionRequest, "zysqlbId");
+				   System.out.println("zysqlbId="+zysqlbId);
+			       ZysqlbLocalServiceUtil.deleteZysqlb(Long.parseLong(zysqlbId));
+			  }
 	}
 
