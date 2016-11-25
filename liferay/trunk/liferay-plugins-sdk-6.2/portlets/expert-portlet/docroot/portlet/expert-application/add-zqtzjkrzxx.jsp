@@ -22,9 +22,9 @@
 		<table width="100%" class="table table-bordered table-hover">
 			<thead>
 				<th style="width: 5%; text-align: center">序号</th>
-				<th style="width: 30%; text-align: center">专家库系统隶属单位</th>
-				<th style="width: 30%; text-align: center">申请专业</th>
-				<th style="width: 30%; text-align: center">批准日期</th>
+				<th style="width: 37%; text-align: center">专家库系统隶属单位</th>
+				<th style="width: 38%; text-align: center">申请专业</th>
+				<th style="width: 15%; text-align: center">批准日期</th>
 				<th style="width: 5%; text-align: center"><input type="button"
 					value="添加" class="btn" style=""
 					onclick="${renderResponse.namespace}changeLine(this)" /></th>
@@ -38,8 +38,8 @@
 									style="width: 98%;" type="text" label="" /></td>
 							<td><aui:input name="sqzy" value="${zqtzjkrzqk.sqzy }" type="text"
 									style="width: 98%;" label="" /></td>
-							<td><aui:input name="pzrq" value="${zqtzjkrzqk.pzrq }"
-									type="text" style="width: 98%;" label="" /></td>
+							<td><input name="<portlet:namespace/>pzrq" id="<portlet:namespace/>pzrq" value='<fmt:formatDate value="${zqtzjkrzqk.pzrq }" pattern="yyyy-MM-dd"/>'
+									type="text" style="width: 98%;" onfocus="WdatePicker({lang:'zh-cn'})"/></td>
 							<td><input type="button" value="删除" class="btn" style=""
 								onclick="${renderResponse.namespace}changeLine(this)" /></td>
 						</tr>
@@ -55,7 +55,7 @@
 					<td><aui:input name="sqzy_stand" value="" type="text"
 							style="width: 98%;" label="" /></td>
 					<td><aui:input name="pzrq_stand" value="" type="text"
-							style="width: 98%;" label="" /></td>
+							style="width: 98%;" label="" onfocus="WdatePicker({lang:'zh-cn'})"/></td>
 					<td><input type="button" value="删除" class="btn" style=""
 						onclick="${renderResponse.namespace}changeLine(this)" /></td>
 				</tr>
