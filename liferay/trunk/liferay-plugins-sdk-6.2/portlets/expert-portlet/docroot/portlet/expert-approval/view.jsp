@@ -3,6 +3,9 @@
 
 <c:set var="contextPath" value="${request.contextPath}/portlet/expert-approval" />
 
+<portlet:renderURL var="viewExpertURL" />
+<a href="${viewExpertURL}" id="refreshCurrentPage"></a>
+
 <style>
 .aui .navbar .btn{
 margin-top:0px;
@@ -12,7 +15,7 @@ margin-top:0px;
 margin-top:9px;
 }
 </style>
-<portlet:renderURL var="viewExpertURL" />
+
 <aui:form  action="${viewExpertURL}" name="fm">
 <div class="container-fluid">
 	<div class="row-fluid">
@@ -109,6 +112,8 @@ Liferay.provide(window,'closeYourPopUp',
             var A = AUI();
             var dialog = Liferay.Util.Window.getById(dialogId);
             dialog.destroy();
+          /* if('<portlet:namespace/>dialogEdit'==dialogId)
+            document.getElementById("refreshCurrentPage").click();  */
         },
         ['liferay-util-window']
 );
