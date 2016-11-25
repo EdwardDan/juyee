@@ -1,8 +1,27 @@
+<%@page import="com.justonetech.expert.service.ExpertLocalServiceUtil"%>
+<%@page import="com.justonetech.expert.model.Expert"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
 <%@ include file="init.jsp"%>
 <portlet:defineObjects />
-
+<%
+	int sqbz = 1;
+	long expertId = ParamUtil.getLong(request, "expertId",0);
+	Expert expert = null;
+	if(Validator.isNotNull(expertId)){
+		expert = ExpertLocalServiceUtil.getExpert(expertId);
+		sqbz = expert.getSqbz()<5 ? expert.getSqbz()+1 : 5;
+	}
+	int tabNum = ParamUtil.getInteger(request, "tabNum",sqbz);
+	tabNum = tabNum>sqbz?sqbz:tabNum;
+	request.setAttribute("expertId", expertId);
+	request.setAttribute("sqbz", sqbz);
+	request.setAttribute("tabNum", tabNum);
+%>
+<c:if test="${permitId ne 0}">
+	<c:set var="addExpertUrl"
+		value="${addExpertURL}&${renderResponse.namespace}expertId=${expertId}"></c:set>
+</c:if>
 <liferay-ui:header title="添加专家申报" backURL="${viewURL }" />
 
 <ul class="nav nav-tabs">
