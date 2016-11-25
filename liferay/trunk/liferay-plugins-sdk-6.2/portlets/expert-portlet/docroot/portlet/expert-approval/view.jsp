@@ -32,8 +32,8 @@ margin-top:9px;
 			
 			<!-- 点击姓名时跳转的页面 -->
 			<liferay-portlet:renderURL varImpl="rowURL">
-				<portlet:param name="zysqlbId" value="${map.zysqlbId}" />
-				<portlet:param name="mvcPath" value="${contextPath}/viewDetail.jsp" />
+				<portlet:param name="expertId" value="${map.expertId}" />
+				<portlet:param name="mvcPath" value="${request.contextPath}/portlet/expert-application/view-expert.jsp" />
 			</liferay-portlet:renderURL> 
 
 			<liferay-ui:search-container-column-text  name="姓名" href="${rowURL}">
@@ -60,18 +60,18 @@ margin-top:9px;
 				<liferay-ui:icon-menu>
 				
 					<!--查看的页面  -->
-					<portlet:actionURL var="viewURL" name="viewZysqlb">
+					<portlet:renderURL var="viewURL" windowState="pop_up">
 						<portlet:param name="zysqlbId" value="${map.zysqlbId}" />
-						<portlet:param name="mvcPath" value="${contextPath }/viewDetail.jsp" />
-					</portlet:actionURL>
+						<portlet:param name="mvcPath" value="${contextPath }/view-expert-approval.jsp" />
+					</portlet:renderURL>
 					
 					<!--审核的页面  -->
 					 <portlet:renderURL var="approvalURL" windowState="pop_up">
    						<portlet:param name="zysqlbId" value="${map.zysqlbId}"/>
-   						<portlet:param name="mvcPath" value="${contextPath }/expertApproval.jsp" />
+   						<portlet:param name="mvcPath" value="${contextPath }/edit-expert-approval.jsp" />
 					</portlet:renderURL>
-					<liferay-ui:icon image="view" label="查看" url="${viewURL}" />
-					<liferay-ui:icon image="checked" label="审批" url="javascript:void(0);" onClick="newWindow('${approvalURL}');" />
+					<liferay-ui:icon image="view" label="查看" url="javascript:void(0);" onClick="newWindow('${viewURL}','view');" />
+					<liferay-ui:icon image="checked" label="审批" url="javascript:void(0);" onClick="newWindow('${approvalURL}','approval');" />
 				</liferay-ui:icon-menu>
 			</liferay-ui:search-container-column-text>
 		</liferay-ui:search-container-row>
@@ -85,17 +85,19 @@ margin-top:9px;
 </aui:form>	
 
 <aui:script use="liferay-util-window">
-Liferay.provide(window, 'newWindow', function(url) {		
-	var instance = this;
+Liferay.provide(window, 'newWindow', function(url,param) {
+	var title,dialogId;
+	if(param=="view"){title='专家审批查看';dialogId='<portlet:namespace/>dialogView';}
+	if(param=="approval"){title='专家审批';dialogId='<portlet:namespace/>dialogEdit';}
 	Liferay.Util.openWindow({
 		dialog : {
 			centered: true,
-			height: 800,
+			height: 600,
 			modal: true,
 			width: 800
 		},
-		id: '<portlet:namespace/>dialog',
-		title : '专家审核',
+		id: dialogId,
+		title : title,
 		uri : url,
 		destroyOnClose : true
 	});
