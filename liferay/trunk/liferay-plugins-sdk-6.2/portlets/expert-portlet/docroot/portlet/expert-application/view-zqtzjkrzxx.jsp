@@ -29,7 +29,7 @@
 								<td>${indexNo.index +1}</td>
 							<td>${zqtzjkrzqk.zjkxtlsdw }</td>
 							<td>${zqtzjkrzqk.sqzy }</td>
-							<td>${zqtzjkrzqk.pzrq }</td>
+							<td><fmt:formatDate value="${zqtzjkrzqk.pzrq }" pattern="yyyy-MM-dd"/></td>
 						</tr>
 
 					</c:forEach>
