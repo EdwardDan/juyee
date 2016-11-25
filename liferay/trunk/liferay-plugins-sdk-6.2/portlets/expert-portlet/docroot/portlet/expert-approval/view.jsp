@@ -108,15 +108,13 @@ Liferay.provide(window, 'newWindow', function(url,param) {
 
 
 Liferay.provide(window,'closeYourPopUp',
-        function(dialogId) {
+        function(data,dialogId) {
             var A = AUI();
             var dialog = Liferay.Util.Window.getById(dialogId);
             dialog.destroy();
-          /* if('<portlet:namespace/>dialogEdit'==dialogId)
-            document.getElementById("refreshCurrentPage").click();  */
+          if('<portlet:namespace/>dialogEdit'==dialogId&&data=="success")
+            document.getElementById("refreshCurrentPage").click();
         },
         ['liferay-util-window']
 );
-
-
 </aui:script>
