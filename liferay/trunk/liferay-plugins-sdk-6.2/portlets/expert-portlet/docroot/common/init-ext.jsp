@@ -23,3 +23,11 @@
 <%@ page import="java.text.*"%>
 <%@ page import="com.liferay.portal.service.*"%>
 <%@ page import="com.liferay.portal.model.*"%>
+
+<script type="text/javascript" src="/static/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='/static/jquery/jquery-1.12.4.min.js'>"+"<"+"/script>");
+</script> 
+<%@ page import="com.justonetech.expert.service.ZysqlbLocalServiceUtil" %>
+<%@ page import="com.justonetech.expert.model.Zysqlb" %>
+<%@ page import="com.justonetech.expert.model.ZysqlbClp" %>
