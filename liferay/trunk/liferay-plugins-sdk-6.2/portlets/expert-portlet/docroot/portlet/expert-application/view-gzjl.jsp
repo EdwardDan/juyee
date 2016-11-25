@@ -24,7 +24,7 @@
 				<c:if test="${!empty gzjls}">
 					<c:forEach items="${gzjls }" var="gzjl" varStatus="indexNo">
 						<tr>
-							<td></td>
+							<td>${indexNo.index+1 }</td>
 							<td>${gzjl.gzdw }</td>
 							<td>${gzjl.qzny }</td>
 							<td>${gzjl.cszyzygz }</td>
