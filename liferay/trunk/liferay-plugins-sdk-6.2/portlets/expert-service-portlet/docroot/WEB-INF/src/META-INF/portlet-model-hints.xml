@@ -19,6 +19,7 @@
 		<field name="sjhm" type="String" />
 		<field name="lxdh" type="String" />
 		<field name="cz" type="String" />
+		<field name="sqbz" type="int" />
 	</model>
 	<model name="com.justonetech.expert.model.Gzjl">
 		<field name="GzjlId" type="long" />

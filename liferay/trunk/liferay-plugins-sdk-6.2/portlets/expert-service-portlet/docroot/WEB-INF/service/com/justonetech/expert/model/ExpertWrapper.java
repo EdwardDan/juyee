@@ -66,6 +66,7 @@ public class ExpertWrapper implements Expert, ModelWrapper<Expert> {
 		attributes.put("sjhm", getSjhm());
 		attributes.put("lxdh", getLxdh());
 		attributes.put("cz", getCz());
+		attributes.put("sqbz", getSqbz());
 
 		return attributes;
 	}
@@ -172,6 +173,12 @@ public class ExpertWrapper implements Expert, ModelWrapper<Expert> {
 
 		if (cz != null) {
 			setCz(cz);
+		}
+
+		Integer sqbz = (Integer)attributes.get("sqbz");
+
+		if (sqbz != null) {
+			setSqbz(sqbz);
 		}
 	}
 
@@ -533,6 +540,26 @@ public class ExpertWrapper implements Expert, ModelWrapper<Expert> {
 	@Override
 	public void setCz(java.lang.String cz) {
 		_expert.setCz(cz);
+	}
+
+	/**
+	* Returns the sqbz of this expert.
+	*
+	* @return the sqbz of this expert
+	*/
+	@Override
+	public int getSqbz() {
+		return _expert.getSqbz();
+	}
+
+	/**
+	* Sets the sqbz of this expert.
+	*
+	* @param sqbz the sqbz of this expert
+	*/
+	@Override
+	public void setSqbz(int sqbz) {
+		_expert.setSqbz(sqbz);
 	}
 
 	@Override

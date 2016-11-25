@@ -333,6 +333,7 @@ public class ExpertPersistenceImpl extends BasePersistenceImpl<Expert>
 		expertImpl.setSjhm(expert.getSjhm());
 		expertImpl.setLxdh(expert.getLxdh());
 		expertImpl.setCz(expert.getCz());
+		expertImpl.setSqbz(expert.getSqbz());
 
 		return expertImpl;
 	}

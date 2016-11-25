@@ -28,6 +28,7 @@
 		<property name="sjhm" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="lxdh" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="cz" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="sqbz" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 	</class>
 	<class name="com.justonetech.expert.model.impl.GzjlImpl" table="expert_Gzjl">
 		<cache usage="read-write" />

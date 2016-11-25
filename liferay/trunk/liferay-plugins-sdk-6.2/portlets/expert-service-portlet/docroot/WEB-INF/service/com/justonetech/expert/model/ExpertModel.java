@@ -312,6 +312,20 @@ public interface ExpertModel extends BaseModel<Expert> {
 	 */
 	public void setCz(String cz);
 
+	/**
+	 * Returns the sqbz of this expert.
+	 *
+	 * @return the sqbz of this expert
+	 */
+	public int getSqbz();
+
+	/**
+	 * Sets the sqbz of this expert.
+	 *
+	 * @param sqbz the sqbz of this expert
+	 */
+	public void setSqbz(int sqbz);
+
 	@Override
 	public boolean isNew();
 

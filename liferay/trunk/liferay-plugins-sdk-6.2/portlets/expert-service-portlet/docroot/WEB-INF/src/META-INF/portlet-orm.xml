@@ -28,6 +28,7 @@
 			<basic name="sjhm" />
 			<basic name="lxdh" />
 			<basic name="cz" />
+			<basic name="sqbz" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />

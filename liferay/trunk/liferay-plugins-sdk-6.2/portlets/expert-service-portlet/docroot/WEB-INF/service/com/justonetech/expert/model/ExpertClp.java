@@ -90,6 +90,7 @@ public class ExpertClp extends BaseModelImpl<Expert> implements Expert {
 		attributes.put("sjhm", getSjhm());
 		attributes.put("lxdh", getLxdh());
 		attributes.put("cz", getCz());
+		attributes.put("sqbz", getSqbz());
 
 		return attributes;
 	}
@@ -196,6 +197,12 @@ public class ExpertClp extends BaseModelImpl<Expert> implements Expert {
 
 		if (cz != null) {
 			setCz(cz);
+		}
+
+		Integer sqbz = (Integer)attributes.get("sqbz");
+
+		if (sqbz != null) {
+			setSqbz(sqbz);
 		}
 	}
 
@@ -590,6 +597,29 @@ public class ExpertClp extends BaseModelImpl<Expert> implements Expert {
 		}
 	}
 
+	@Override
+	public int getSqbz() {
+		return _sqbz;
+	}
+
+	@Override
+	public void setSqbz(int sqbz) {
+		_sqbz = sqbz;
+
+		if (_expertRemoteModel != null) {
+			try {
+				Class<?> clazz = _expertRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setSqbz", int.class);
+
+				method.invoke(_expertRemoteModel, sqbz);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
 	public BaseModel<?> getExpertRemoteModel() {
 		return _expertRemoteModel;
 	}
@@ -676,6 +706,7 @@ public class ExpertClp extends BaseModelImpl<Expert> implements Expert {
 		clone.setSjhm(getSjhm());
 		clone.setLxdh(getLxdh());
 		clone.setCz(getCz());
+		clone.setSqbz(getSqbz());
 
 		return clone;
 	}
@@ -736,7 +767,7 @@ public class ExpertClp extends BaseModelImpl<Expert> implements Expert {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(35);
+		StringBundler sb = new StringBundler(37);
 
 		sb.append("{expertId=");
 		sb.append(getExpertId());
@@ -772,6 +803,8 @@ public class ExpertClp extends BaseModelImpl<Expert> implements Expert {
 		sb.append(getLxdh());
 		sb.append(", cz=");
 		sb.append(getCz());
+		sb.append(", sqbz=");
+		sb.append(getSqbz());
 		sb.append("}");
 
 		return sb.toString();
@@ -779,7 +812,7 @@ public class ExpertClp extends BaseModelImpl<Expert> implements Expert {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(55);
+		StringBundler sb = new StringBundler(58);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.expert.model.Expert");
@@ -853,6 +886,10 @@ public class ExpertClp extends BaseModelImpl<Expert> implements Expert {
 			"<column><column-name>cz</column-name><column-value><![CDATA[");
 		sb.append(getCz());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>sqbz</column-name><column-value><![CDATA[");
+		sb.append(getSqbz());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -876,6 +913,7 @@ public class ExpertClp extends BaseModelImpl<Expert> implements Expert {
 	private String _sjhm;
 	private String _lxdh;
 	private String _cz;
+	private int _sqbz;
 	private BaseModel<?> _expertRemoteModel;
 	private Class<?> _clpSerializerClass = com.justonetech.expert.service.ClpSerializer.class;
 }

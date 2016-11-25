@@ -47,6 +47,7 @@ public class ExpertSoap implements Serializable {
 		soapModel.setSjhm(model.getSjhm());
 		soapModel.setLxdh(model.getLxdh());
 		soapModel.setCz(model.getCz());
+		soapModel.setSqbz(model.getSqbz());
 
 		return soapModel;
 	}
@@ -235,6 +236,14 @@ public class ExpertSoap implements Serializable {
 		_cz = cz;
 	}
 
+	public int getSqbz() {
+		return _sqbz;
+	}
+
+	public void setSqbz(int sqbz) {
+		_sqbz = sqbz;
+	}
+
 	private long _expertId;
 	private String _xm;
 	private String _xb;
@@ -252,4 +261,5 @@ public class ExpertSoap implements Serializable {
 	private String _sjhm;
 	private String _lxdh;
 	private String _cz;
+	private int _sqbz;
 }

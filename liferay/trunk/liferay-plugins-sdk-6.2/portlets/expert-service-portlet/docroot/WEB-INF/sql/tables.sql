@@ -15,7 +15,8 @@ create table expert_Expert (
 	zygznx VARCHAR(75) null,
 	sjhm VARCHAR(75) null,
 	lxdh VARCHAR(75) null,
-	cz VARCHAR(75) null
+	cz VARCHAR(75) null,
+	sqbz INTEGER
 );
 
 create table expert_Gzjl (

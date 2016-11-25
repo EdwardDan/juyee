@@ -27,6 +27,7 @@
 		<column name="sjhm" type="String" /><!-- 手机号码 -->
 		<column name="lxdh" type="String" /><!-- 联系电话 -->
 		<column name="cz" type="String" /><!-- 传真 -->
+		<column name="sqbz" type="int" /><!-- 申请步骤 -->
 
 		<!-- Order -->
 		<order>

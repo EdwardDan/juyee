@@ -37,7 +37,7 @@ import java.util.Date;
 public class ExpertCacheModel implements CacheModel<Expert>, Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(35);
+		StringBundler sb = new StringBundler(37);
 
 		sb.append("{expertId=");
 		sb.append(expertId);
@@ -73,6 +73,8 @@ public class ExpertCacheModel implements CacheModel<Expert>, Externalizable {
 		sb.append(lxdh);
 		sb.append(", cz=");
 		sb.append(cz);
+		sb.append(", sqbz=");
+		sb.append(sqbz);
 		sb.append("}");
 
 		return sb.toString();
@@ -196,6 +198,8 @@ public class ExpertCacheModel implements CacheModel<Expert>, Externalizable {
 			expertImpl.setCz(cz);
 		}
 
+		expertImpl.setSqbz(sqbz);
+
 		expertImpl.resetOriginalValues();
 
 		return expertImpl;
@@ -220,6 +224,7 @@ public class ExpertCacheModel implements CacheModel<Expert>, Externalizable {
 		sjhm = objectInput.readUTF();
 		lxdh = objectInput.readUTF();
 		cz = objectInput.readUTF();
+		sqbz = objectInput.readInt();
 	}
 
 	@Override
@@ -333,6 +338,8 @@ public class ExpertCacheModel implements CacheModel<Expert>, Externalizable {
 		else {
 			objectOutput.writeUTF(cz);
 		}
+
+		objectOutput.writeInt(sqbz);
 	}
 
 	public long expertId;
@@ -352,4 +359,5 @@ public class ExpertCacheModel implements CacheModel<Expert>, Externalizable {
 	public String sjhm;
 	public String lxdh;
 	public String cz;
+	public int sqbz;
 }

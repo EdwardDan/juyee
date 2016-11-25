@@ -75,9 +75,10 @@ public class ExpertModelImpl extends BaseModelImpl<Expert>
 			{ "zygznx", Types.VARCHAR },
 			{ "sjhm", Types.VARCHAR },
 			{ "lxdh", Types.VARCHAR },
-			{ "cz", Types.VARCHAR }
+			{ "cz", Types.VARCHAR },
+			{ "sqbz", Types.INTEGER }
 		};
-	public static final String TABLE_SQL_CREATE = "create table expert_Expert (expertId LONG not null primary key,xm VARCHAR(75) null,xb VARCHAR(75) null,sfzh VARCHAR(75) null,csny DATE null,gzdw VARCHAR(75) null,dzyx VARCHAR(75) null,txdz VARCHAR(75) null,yzbm VARCHAR(75) null,xrzw VARCHAR(75) null,zc VARCHAR(75) null,zyzg VARCHAR(75) null,cszy VARCHAR(75) null,zygznx VARCHAR(75) null,sjhm VARCHAR(75) null,lxdh VARCHAR(75) null,cz VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table expert_Expert (expertId LONG not null primary key,xm VARCHAR(75) null,xb VARCHAR(75) null,sfzh VARCHAR(75) null,csny DATE null,gzdw VARCHAR(75) null,dzyx VARCHAR(75) null,txdz VARCHAR(75) null,yzbm VARCHAR(75) null,xrzw VARCHAR(75) null,zc VARCHAR(75) null,zyzg VARCHAR(75) null,cszy VARCHAR(75) null,zygznx VARCHAR(75) null,sjhm VARCHAR(75) null,lxdh VARCHAR(75) null,cz VARCHAR(75) null,sqbz INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table expert_Expert";
 	public static final String ORDER_BY_JPQL = " ORDER BY expert.expertId DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY expert_Expert.expertId DESC";
@@ -148,6 +149,7 @@ public class ExpertModelImpl extends BaseModelImpl<Expert>
 		attributes.put("sjhm", getSjhm());
 		attributes.put("lxdh", getLxdh());
 		attributes.put("cz", getCz());
+		attributes.put("sqbz", getSqbz());
 
 		return attributes;
 	}
@@ -254,6 +256,12 @@ public class ExpertModelImpl extends BaseModelImpl<Expert>
 
 		if (cz != null) {
 			setCz(cz);
+		}
+
+		Integer sqbz = (Integer)attributes.get("sqbz");
+
+		if (sqbz != null) {
+			setSqbz(sqbz);
 		}
 	}
 
@@ -503,6 +511,16 @@ public class ExpertModelImpl extends BaseModelImpl<Expert>
 	}
 
 	@Override
+	public int getSqbz() {
+		return _sqbz;
+	}
+
+	@Override
+	public void setSqbz(int sqbz) {
+		_sqbz = sqbz;
+	}
+
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return ExpandoBridgeFactoryUtil.getExpandoBridge(0,
 			Expert.class.getName(), getPrimaryKey());
@@ -546,6 +564,7 @@ public class ExpertModelImpl extends BaseModelImpl<Expert>
 		expertImpl.setSjhm(getSjhm());
 		expertImpl.setLxdh(getLxdh());
 		expertImpl.setCz(getCz());
+		expertImpl.setSqbz(getSqbz());
 
 		expertImpl.resetOriginalValues();
 
@@ -741,12 +760,14 @@ public class ExpertModelImpl extends BaseModelImpl<Expert>
 			expertCacheModel.cz = null;
 		}
 
+		expertCacheModel.sqbz = getSqbz();
+
 		return expertCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(35);
+		StringBundler sb = new StringBundler(37);
 
 		sb.append("{expertId=");
 		sb.append(getExpertId());
@@ -782,6 +803,8 @@ public class ExpertModelImpl extends BaseModelImpl<Expert>
 		sb.append(getLxdh());
 		sb.append(", cz=");
 		sb.append(getCz());
+		sb.append(", sqbz=");
+		sb.append(getSqbz());
 		sb.append("}");
 
 		return sb.toString();
@@ -789,7 +812,7 @@ public class ExpertModelImpl extends BaseModelImpl<Expert>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(55);
+		StringBundler sb = new StringBundler(58);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.expert.model.Expert");
@@ -863,6 +886,10 @@ public class ExpertModelImpl extends BaseModelImpl<Expert>
 			"<column><column-name>cz</column-name><column-value><![CDATA[");
 		sb.append(getCz());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>sqbz</column-name><column-value><![CDATA[");
+		sb.append(getSqbz());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -888,5 +915,6 @@ public class ExpertModelImpl extends BaseModelImpl<Expert>
 	private String _sjhm;
 	private String _lxdh;
 	private String _cz;
+	private int _sqbz;
 	private Expert _escapedModel;
 }
