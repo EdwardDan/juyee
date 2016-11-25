@@ -11,11 +11,9 @@
 	if(Validator.isNotNull(expertId)){
 		expert = ExpertLocalServiceUtil.getExpert(expertId);
 		sqbz = expert.getSqbz()<5 ? expert.getSqbz()+1 : 5;
-		System.out.println("sqbz:"+sqbz);
 	}
 	int tabNum = ParamUtil.getInteger(request, "tabNum",sqbz);
 	tabNum = tabNum>sqbz?sqbz:tabNum;
-	System.out.println("tabNum:"+tabNum);
 	request.setAttribute("expertId", expertId);
 	request.setAttribute("sqbz", sqbz);
 	request.setAttribute("tabNum", tabNum);
@@ -31,16 +29,16 @@
 	<li class="${tabNum eq 1?"active":"" }">
 		<a href="${addExpertUrl }&_${portletDisplay.id }_tabNum=1">基本信息</a>
 	</li>
-	<li class="${tabNum eq 2?"active":"" }">
+	<li class="${tabNum eq 2?"active":"" }${sqbz lt 2?"disabled":"" }">
 		<a href="${sqbz lt 2?"javascript:void(0);":addExpertUrl.concat("&_").concat(portletDisplay.id).concat("_tabNum=2") }">学历信息</a>
 	</li>
-	<li class="${tabNum eq 3?"active":"" }">
+	<li class="${tabNum eq 3?"active":"" }${sqbz lt 3?"disabled":"" }">
 		<a href="${sqbz lt 3?"javascript:void(0);":addExpertUrl.concat("&_").concat(portletDisplay.id).concat("_tabNum=3") }">工作简历</a>
 	</li>
-	<li class="${tabNum eq 4?"active":"" }">
+	<li class="${tabNum eq 4?"active":"" }${sqbz lt 4?"disabled":"" }">
 		<a href="${sqbz lt 4?"javascript:void(0);":addExpertUrl.concat("&_").concat(portletDisplay.id).concat("_tabNum=4") }">在其它专家库任职情况</a>
 	</li>
-	<li class="${tabNum eq 5?"active":"" }">
+	<li class="${tabNum eq 5?"active":"" }${sqbz lt 5?"disabled":"" }">
 		<a href="${sqbz lt 5?"javascript:void(0);":addExpertUrl.concat("&_").concat(portletDisplay.id).concat("_tabNum=5") }">专业申请</a>
 	</li>
 </ul>

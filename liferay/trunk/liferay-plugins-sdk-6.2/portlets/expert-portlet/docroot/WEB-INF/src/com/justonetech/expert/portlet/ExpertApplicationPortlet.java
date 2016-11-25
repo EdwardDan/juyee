@@ -114,7 +114,6 @@ public class ExpertApplicationPortlet extends MVCPortlet {
 		}
 		redirect += "&" + response.getNamespace() + "expertId=" + expert.getExpertId();
 		redirect += "&" + response.getNamespace() + "tabNum=" + tabNum;
-		System.out.println("==============="+redirect);
 		response.sendRedirect(redirect);
 	}
 	
