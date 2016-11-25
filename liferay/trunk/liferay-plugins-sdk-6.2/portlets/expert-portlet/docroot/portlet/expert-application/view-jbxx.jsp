@@ -13,6 +13,7 @@
 	request.setAttribute("expert", expert);
 	request.setAttribute("csn", csn);
 	request.setAttribute("csy", csy);
+	request.setAttribute("expertId", expertId);
 %>
 <table class="table table-bordered" width="100%">
 		<tr>

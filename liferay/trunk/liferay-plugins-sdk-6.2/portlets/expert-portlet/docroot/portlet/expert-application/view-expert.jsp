@@ -3,21 +3,33 @@
 <%@ include file="init.jsp"%>
 <portlet:defineObjects />
 
+<%
+	long expertId = ParamUtil.getLong(request, "expertId");
+	request.setAttribute("expertId", expertId);
+%>
+
+<liferay-ui:header title="查看专家申报" backURL="${viewURL }" />
+
+<portlet:renderURL var="viewExpertURL">
+		<portlet:param name="mvcPath" value="${contextPath }/view-expert.jsp"/>
+		<portlet:param name="expertId" value="${expertId}" />
+</portlet:renderURL>
+
 <ul class="nav nav-tabs">
 	<li class="${tabNum eq 1?"active":"" }">
-		<a href="${addExpertUrl }&_${portletDisplay.id }_tabNum=1">基本信息</a>
+		<a href="${viewExpertURL }&_${portletDisplay.id }_tabNum=1">基本信息</a>
 	</li>
 	<li class="${tabNum eq 2?"active":"" }">
-		<a href="${sqbz lt 2?"javascript:void(0);":addExpertUrl.concat("&_").concat(portletDisplay.id).concat("_tabNum=2") }">学历信息</a>
+		<a href="${sqbz lt 2?"javascript:void(0);":viewExpertURL.concat("&_").concat(portletDisplay.id).concat("_tabNum=2") }">学历信息</a>
 	</li>
 	<li class="${tabNum eq 3?"active":"" }">
-		<a href="${sqbz lt 3?"javascript:void(0);":addExpertUrl.concat("&_").concat(portletDisplay.id).concat("_tabNum=3") }">工作简历</a>
+		<a href="${sqbz lt 3?"javascript:void(0);":viewExpertURL.concat("&_").concat(portletDisplay.id).concat("_tabNum=3") }">工作简历</a>
 	</li>
 	<li class="${tabNum eq 4?"active":"" }">
-		<a href="${sqbz lt 4?"javascript:void(0);":addExpertUrl.concat("&_").concat(portletDisplay.id).concat("_tabNum=4") }">在其它专家库任职情况</a>
+		<a href="${sqbz lt 4?"javascript:void(0);":viewExpertURL.concat("&_").concat(portletDisplay.id).concat("_tabNum=4") }">在其它专家库任职情况</a>
 	</li>
 	<li class="${tabNum eq 5?"active":"" }">
-		<a href="${sqbz lt 5?"javascript:void(0);":addExpertUrl.concat("&_").concat(portletDisplay.id).concat("_tabNum=5") }">专业申请</a>
+		<a href="${sqbz lt 5?"javascript:void(0);":viewExpertURL.concat("&_").concat(portletDisplay.id).concat("_tabNum=5") }">专业申请</a>
 	</li>
 </ul>
 <c:choose>

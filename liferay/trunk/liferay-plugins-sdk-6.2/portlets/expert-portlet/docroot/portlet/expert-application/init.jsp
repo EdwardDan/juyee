@@ -3,4 +3,4 @@
 <liferay-portlet:renderURL var="addExpertUrl">
 	<portlet:param name="mvcPath" value="${contextPath }/add-expert.jsp" />
 </liferay-portlet:renderURL>
-
+<portlet:renderURL var="viewURL" />

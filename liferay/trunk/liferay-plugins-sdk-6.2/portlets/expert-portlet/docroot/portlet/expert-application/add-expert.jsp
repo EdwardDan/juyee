@@ -3,6 +3,8 @@
 <%@ include file="init.jsp"%>
 <portlet:defineObjects />
 
+<liferay-ui:header title="添加专家申报" backURL="${viewURL }" />
+
 <ul class="nav nav-tabs">
 	<li class="${tabNum eq 1?"active":"" }">
 		<a href="${addExpertUrl }&_${portletDisplay.id }_tabNum=1">基本信息</a>
