@@ -16,7 +16,7 @@
 	request.setAttribute("expertsCount", expertsCount);
 %>
 
-<portlet:renderURL var="viewURL"></portlet:renderURL>
+<portlet:renderURL var="viewURL"/>
 
 <style>
 .application {
