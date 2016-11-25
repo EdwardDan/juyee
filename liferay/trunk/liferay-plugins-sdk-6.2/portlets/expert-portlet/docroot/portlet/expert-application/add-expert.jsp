@@ -22,7 +22,7 @@
 </ul>
 <c:choose>
 	<c:when test="${tabNum eq 1}">
-		<jsp:include page="${contextPath }/add-jbxx.jsp"/>
+		<jsp:include page="${contextPath }/add-expert.jsp"/>
 	</c:when>
 	<c:when test="${tabNum eq 2}">
 		<jsp:include page="${contextPath }/add-xlxx.jsp"/>
