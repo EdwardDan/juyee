@@ -1,8 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ include file="/common/init.jsp"%>
-<%@ page import="com.justonetech.expert.service.ZysqlbLocalServiceUtil" %>
-<%@ page import="com.justonetech.expert.model.Zysqlb" %>
-<%@ page import="com.justonetech.expert.model.ZysqlbClp" %>
+
 <%
 	long zysqlbId=ParamUtil.getLong(request, "zysqlbId",0);
 	Zysqlb zysqlb=new ZysqlbClp();
@@ -22,16 +20,16 @@
 
 	<table class="table table-bordered">
 		<tr style="height:30px;">
-			<td class="span12" style="text-align: center;" colspan="2">
-			<aui:input type="radio" name="expertStatus" label="加入预备专家库" inlineLabel="right" disabled="true" inlineField="true" value="1" checked="true"></aui:input>
+			<td class="span12" style="text-align: center;vertical-align:middle;" colspan="2">
+			<aui:input type="radio" name="expertStatus" label="加入预备专家库" inlineLabel="true" disabled="true" inlineField="true" value="1" checked="true"></aui:input>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<aui:input type="radio" name="expertStatus" label="加入正式专家库" inlineLabel="right" disabled="true" inlineField="true" value="2"></aui:input>
+			<aui:input type="radio" name="expertStatus" label="加入正式专家库" inlineLabel="true" disabled="true" inlineField="true" value="2"></aui:input>
 			</td>
 		</tr>
 
 		<tr style="height:60px;">
-			<td class="span2" style="text-align: right;">审核意见</td>
-			<td class="span10" >
+			<td class="span2" style="text-align: right;vertical-align:middle;">审核意见</td>
+			<td class="span10" style="vertical-align:middle;" >
 			${zysqlb.shyj}
 			</td>
 		</tr>
@@ -39,13 +37,13 @@
 
 
 		<tr style="height:60px;">
-			<td class="span2" style="text-align: right;">审核人</td>
-			<td class="span10">${zysqlb.shr}</td>
+			<td class="span2" style="text-align: right;vertical-align:middle;">审核人</td>
+			<td class="span10" style="vertical-align:middle;">${zysqlb.shr}</td>
 		</tr>
 
 		<tr style="height:60px;">
-			<td class="span2" style="text-align: right;">审核日期</td>
-			<td class="span10">
+			<td class="span2" style="text-align: right;vertical-align:middle;">审核日期</td>
+			<td class="span10" style="vertical-align:middle;">
 			<fmt:formatDate value="${zysqlb.shrq}" pattern="yyyy-MM-dd"/>
 			</td>
 		</tr>
