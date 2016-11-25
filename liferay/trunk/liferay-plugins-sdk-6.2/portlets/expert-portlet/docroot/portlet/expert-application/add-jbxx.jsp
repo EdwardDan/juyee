@@ -6,7 +6,7 @@
 <portlet:defineObjects />
 <portlet:renderURL var="viewURL" />
 <portlet:actionURL var="saveJbxxURL" name="saveJbxx">
-	<portlet:param name="redirect" value="${viewURL }" />
+	<portlet:param name="redirectURL" value="${addExpertUrl}"/>
 </portlet:actionURL>
 <%
 	long expertId = ParamUtil.getLong(request, "expertId");
