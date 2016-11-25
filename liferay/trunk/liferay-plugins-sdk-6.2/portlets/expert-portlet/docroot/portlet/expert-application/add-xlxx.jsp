@@ -1,3 +1,4 @@
+<%@page import="com.justonetech.expert.model.Xlxx"%>
 <%@page import="com.justonetech.expert.service.XlxxLocalServiceUtil"%>
 <%@page import="com.justonetech.expert.model.Expert"%>
 <%@page import="com.justonetech.expert.service.ExpertLocalServiceUtil"%>
@@ -6,22 +7,21 @@
 <%@ include file="init.jsp"%>
 <portlet:defineObjects />
 
-<portlet:renderURL var="viewURL"/>
+<portlet:renderURL var="viewURL" />
 <portlet:actionURL var="saveXlxxURL" name="saveXlxxs">
 	<%-- <portlet:param name="redirectURL" value="${viewURL }" /> --%>
 </portlet:actionURL>
 
 <%
 	long expertId = ParamUtil.getLong(request, "expertId");
-	Expert expert = null;
 	if(expertId!=0){
-		expert = ExpertLocalServiceUtil.getExpert(expertId);
-		request.setAttribute("expert", expert);
+	List<Xlxx>	xlxxs = XlxxLocalServiceUtil.getXlxxs(expertId, -1,-1);
+	request.setAttribute("xlxxs", xlxxs);
 	}
 %>
 
 <aui:form action="${saveXlxxURL}">
-<aui:input name="expertId" type="hidden" value="${expertId }"></aui:input>
+	<aui:input name="expertId" type="hidden" value="${expertId }"></aui:input>
 	<div class="accordion-inner">
 		<table width="100%" class="table table-bordered table-hover">
 			<thead>
@@ -35,13 +35,30 @@
 					onclick="${renderResponse.namespace}changeLine(this)" /></th>
 			</thead>
 			<tbody id="xlxx">
-			
+				<c:if test="${!empty xlxxs}">
+					<c:forEach items="${xlxxs }" var="xlxx">
+						<tr>
+							<td></td>
+							<td><aui:input name="byyx" value="${xlxx.byyx }"
+									style="width: 98%;" type="text" label="" /></td>
+							<td><aui:input name="sxzy" value="${xlxx.sxzy }" type="text"
+									style="width: 98%;" label="" /></td>
+							<td><aui:input name="xlhxw" value="${xlxx.xlhxw }"
+									type="text" style="width: 98%;" label="" /></td>
+							<td><aui:input name="zxsj" value="${xlxx.zxsj }" type="text"
+									style="width: 98%;" label="" /></td>
+							<td><input type="button" value="删除" class="btn" style=""
+								onclick="${renderResponse.namespace}changeLine(this)" /></td>
+						</tr>
+
+					</c:forEach>
+				</c:if>
 			</tbody>
 			<tbody id="hiddenStyle" style="display: none">
 				<tr>
 					<td></td>
-					<td><aui:input name="byyx_stand" value="" 
-							style="width: 98%;" type="text" label="" /></td>
+					<td><aui:input name="byyx_stand" value="" style="width: 98%;"
+							type="text" label="" /></td>
 					<td><aui:input name="sxzy_stand" value="" type="text"
 							style="width: 98%;" label="" /></td>
 					<td><aui:input name="xlhxw_stand" value="" type="text"
@@ -66,13 +83,14 @@
 	function <portlet:namespace/>changeLine(obj) {
 		if (obj.value == "添加") {
 			var html = document.getElementById("hiddenStyle");
-			 var tbody = document.getElementById("xlxx");  
-			 var rnum = tbody.rows.length+1;  
-			 html.rows[0].cells[0].innerHTML = rnum;
-			 
-			 var reg = new RegExp("_stand","g")
-			 
-			  tbody.insertRow().innerHTML=html.rows[0].innerHTML.replace(reg,"");
+			var tbody = document.getElementById("xlxx");
+			var rnum = tbody.rows.length + 1;
+			html.rows[0].cells[0].innerHTML = rnum;
+
+			var reg = new RegExp("_stand", "g")
+
+			tbody.insertRow().innerHTML = html.rows[0].innerHTML.replace(reg,
+					"");
 		} else {
 			if (confirm("确定要删除吗？")) {
 				var tb = obj.parentNode.parentNode.parentNode;
