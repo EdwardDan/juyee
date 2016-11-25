@@ -87,6 +87,7 @@ public class ExpertApplicationPortlet extends MVCPortlet {
 		expert.setSjhm(sjhm);
 		expert.setLxdh(lxdh);
 		expert.setCz(cz);
+		expert.setSqbz(1);
 		ExpertLocalServiceUtil.updateExpert(expert);
 
 	}
