@@ -36,13 +36,13 @@
 						<tr>
 							<td>${indexNo.index +1}</td>
 							<td><aui:input name="byyx" value="${xlxx.byyx }"
-									style="width: 98%;" type="text" label="" /></td>
+									style="width: 95%;" type="text" label="" /></td>
 							<td><aui:input name="sxzy" value="${xlxx.sxzy }" type="text"
-									style="width: 98%;" label="" /></td>
+									style="width: 95%;" label="" /></td>
 							<td><aui:input name="xlhxw" value="${xlxx.xlhxw }"
-									type="text" style="width: 98%;" label="" /></td>
+									type="text" style="width: 95%;" label="" /></td>
 							<td><aui:input name="zxsj" value="${xlxx.zxsj }" type="text"
-									style="width: 98%;" label="" /></td>
+									style="width: 95%;" label="" /></td>
 							<td><input type="button" value="删除" class="btn" style=""
 								onclick="${renderResponse.namespace}changeLine(this)" /></td>
 						</tr>
@@ -53,14 +53,14 @@
 			<tbody id="hiddenStyle" style="display: none">
 				<tr>
 					<td></td>
-					<td><aui:input name="byyx_stand" value="" style="width: 98%;"
+					<td><aui:input name="byyx_stand" value="" style="width: 95%;"
 							type="text" label="" /></td>
 					<td><aui:input name="sxzy_stand" value="" type="text"
-							style="width: 98%;" label="" /></td>
+							style="width: 95%;" label="" /></td>
 					<td><aui:input name="xlhxw_stand" value="" type="text"
-							style="width: 98%;" label="" /></td>
+							style="width: 95%;" label="" /></td>
 					<td><aui:input name="zxsj_stand" value="" type="text"
-							style="width: 98%;" label="" /></td>
+							style="width: 95%;" label="" /></td>
 					<td><input type="button" value="删除" class="btn" style=""
 						onclick="${renderResponse.namespace}changeLine(this)" /></td>
 				</tr>
