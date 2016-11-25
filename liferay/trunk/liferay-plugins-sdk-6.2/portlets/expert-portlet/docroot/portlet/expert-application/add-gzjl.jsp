@@ -34,7 +34,7 @@
 				<c:if test="${!empty gzjls}">
 					<c:forEach items="${gzjls }" var="gzjl" varStatus="indexNo">
 						<tr>
-							<td></td>
+							<td>${indexNo.index+1 }</td>
 							<td><aui:input name="gzdw" value="${gzjl.gzdw }"
 									style="width: 98%;" type="text" label="" /></td>
 							<td><aui:input name="qzny" value="${gzjl.qzny }" type="text"
