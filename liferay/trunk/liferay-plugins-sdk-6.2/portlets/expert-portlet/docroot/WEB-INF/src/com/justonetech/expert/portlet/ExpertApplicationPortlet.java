@@ -90,4 +90,19 @@ public class ExpertApplicationPortlet extends MVCPortlet {
 		ExpertLocalServiceUtil.updateExpert(expert);
 
 	}
+	public void redirect(ActionRequest request, ActionResponse response, Expert expert, int sqbz) throws IOException {
+		String redirect = ParamUtil.getString(request, "redirectURL");
+		System.out.println("==============="+redirect);
+		int tabNum = 1;
+		if (expert.getSqbz() == sqbz && sqbz < 5) {
+			tabNum = sqbz + 1;
+		} else if (expert.getSqbz() == sqbz && sqbz == 4) {
+			tabNum = sqbz;
+		} else if (expert.getSqbz() > sqbz) {
+			tabNum = sqbz;
+		}
+		redirect += "&" + response.getNamespace() + "experetId=" + expert.getExpertId();
+		redirect += "&" + response.getNamespace() + "tabNum=" + tabNum;
+		response.sendRedirect(redirect);
+	}
 }
