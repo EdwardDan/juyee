@@ -5,7 +5,6 @@ import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Dictionary;
 import java.util.List;
 
 import javax.portlet.ActionRequest;
@@ -26,6 +25,8 @@ import com.justonetech.expert.service.GzjlLocalServiceUtil;
 import com.justonetech.expert.service.XlxxLocalServiceUtil;
 import com.justonetech.expert.service.ZqtzjkrzqkLocalServiceUtil;
 import com.justonetech.expert.service.ZysqlbLocalServiceUtil;
+import com.justonetech.sys.model.Dictionary;
+import com.justonetech.sys.service.DictionaryLocalServiceUtil;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -105,7 +106,9 @@ public class ExpertApplicationPortlet extends MVCPortlet {
 		expert.setSjhm(sjhm);
 		expert.setLxdh(lxdh);
 		expert.setCz(cz);
-		expert.setSqbz(1);
+		if(expert.getSqbz()<1){
+			expert.setSqbz(1);
+		}
 		ExpertLocalServiceUtil.updateExpert(expert);
 		redirect(request, response, expert, 1);
 	}
@@ -161,7 +164,10 @@ public class ExpertApplicationPortlet extends MVCPortlet {
 
 		}
 		Expert expert = ExpertLocalServiceUtil.getExpert(expertId);
-		expert.setSqbz(2);
+		if(expert.getSqbz()<2){
+			expert.setSqbz(2);
+		}
+		
 		ExpertLocalServiceUtil.updateExpert(expert);
 		redirect(request, response, expert, 2);
 	}
@@ -201,7 +207,9 @@ public class ExpertApplicationPortlet extends MVCPortlet {
 
 		}
 		Expert expert = ExpertLocalServiceUtil.getExpert(expertId);
-		expert.setSqbz(3);
+		if(expert.getSqbz()<3){
+			expert.setSqbz(3);
+		}
 		ExpertLocalServiceUtil.updateExpert(expert);
 		redirect(request, response, expert, 3);
 	}
@@ -238,7 +246,9 @@ public class ExpertApplicationPortlet extends MVCPortlet {
 
 		}
 		Expert expert = ExpertLocalServiceUtil.getExpert(expertId);
-		expert.setSqbz(4);
+		if(expert.getSqbz()<4){
+			expert.setSqbz(4);
+		}
 		ExpertLocalServiceUtil.updateExpert(expert);
 		redirect(request, response, expert, 4);
 	}
