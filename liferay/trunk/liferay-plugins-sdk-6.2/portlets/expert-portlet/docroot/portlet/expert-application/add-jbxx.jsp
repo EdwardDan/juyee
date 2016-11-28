@@ -140,8 +140,14 @@
 <script>	
 	function toCsny(){
 		var sfzh = document.getElementById("<portlet:namespace/>sfzh").value;
-		var csn = sfzh.substr(6, 4);
-		var csy = sfzh.substr(10, 2);
+		if(sfzh.length == 18){
+			var csn = sfzh.substr(6, 4);
+			var csy = sfzh.substr(10, 2);	
+		}else{
+			var csn = "19"+sfzh.substr(6, 2);
+			var csy = sfzh.substr(8, 2);
+		}
+		
 		document.getElementById("csn").value = csn;
 		document.getElementById("csy").value = csy;
 	}
