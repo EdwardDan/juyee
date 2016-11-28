@@ -13,7 +13,12 @@
 	long expertId = 0l;
 	if(experts.size()>0){
 			expertId = experts.get(0).getExpertId();
-			String csny = experts.get(0).getSfzh().substring(6,12);
+			String csny = "";
+			if(experts.get(0).getSfzh().length()==18){
+				csny = experts.get(0).getSfzh().substring(6,12);
+			}else{
+				csny = "19"+experts.get(0).getSfzh().substring(6,12);
+			}
 			String csn = csny.substring(0, 4);
 			String csy = csny.substring(4,6);
 			request.setAttribute("expert", experts.get(0));
