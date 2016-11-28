@@ -48,7 +48,7 @@
 			<td class="text-right">出生年月</td>
 			<td class="bg-white" colspan="3" style="white-space:nowrap;"><input name="cs" id="csn"
 					label="" readonly="true" value="${csn}"/>年<input
-					name="csy" id="csy" label=""  readonly="true" value="${csy}"/>月</td>
+					name="csy" id="csy"  readonly="true" value="${csy}"/>月</td>
 		</tr>
 		<tr>
 			<td class="text-right">工作单位</td>
