@@ -785,3 +785,8 @@ input[type="radio"],input[type="checkbox"] {
 .out-navbar-inner{
 	min-width: 1200px !important;
 }
+
+#sidebar{
+	overflow:auto;
+	overflow-x: hidden;
+}
