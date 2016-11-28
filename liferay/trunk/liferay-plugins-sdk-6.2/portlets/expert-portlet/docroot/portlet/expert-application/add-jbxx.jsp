@@ -42,6 +42,16 @@
 			<td class="bg-white" colspan="3"><aui:input id="sfzh" name="sfzh" value="${expert.sfzh}"
 					label="" cssClass="span6" onChange="toCsny()">
 					<aui:validator name="required"/>
+					<aui:validator name="custom" errorMessage="请输入有效的身份证号。">
+						function(val){
+							var regSfzh = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+							if (regSfzh.test(val) == false) {
+					            return false;
+					        }else{
+					        	return true;
+					        }
+						}
+					</aui:validator>
 				</aui:input></td>
 		</tr>
 		<tr>
@@ -57,8 +67,10 @@
 					<aui:validator name="required" />
 				</aui:input></td>
 			<td class="text-right">电子邮箱</td>
-			<td class="bg-white"><aui:input id="dzyx" name="dzyx" label="" value="${expert.dzyx}"
-					cssClass="span6"></aui:input></td>
+			<td class="bg-white">
+				<aui:input id="dzyx" name="dzyx" label="" value="${expert.dzyx}" cssClass="span6">
+					<aui:validator name="email"/>
+				</aui:input></td>
 		</tr>
 		<tr>
 			<td class="text-right">通信地址</td>
@@ -93,10 +105,21 @@
 			<td class="bg-white"><aui:input name="zygznx" label="" value="${expert.zygznx}"
 					cssClass="span6"></aui:input></td>
 			<td class="text-right">手机号码</td>
-			<td class="bg-white"><aui:input id="sjhm" name="sjhm" label="" value="${expert.sjhm}"
-					cssClass="span6">
+			<td class="bg-white">
+				<aui:input id="sjhm" name="sjhm" label="" value="${expert.sjhm}" cssClass="span6">
 					<aui:validator name="required" />
-				</aui:input></td>
+					<aui:validator name="custom" errorMessage="请输入有效的手机号码。">
+						function(val){
+							var regSjhm = /^1[3|4|5|7|8][0-9]\d{8}$/;
+							if (regSjhm.test(val) == false) {
+					            return false;
+					        }else{
+					        	return true;
+					        }
+						}
+					</aui:validator>
+				</aui:input>
+			</td>
 		</tr>
 		<tr>
 			<td class="text-right">联系电话</td>
@@ -108,50 +131,11 @@
 		</tr>
 	</table>
 	<div style="text-align: center">
-		<aui:button type="submit" onClick="return identify();" />
+		<aui:button type="submit"/>
 		<aui:button value="返回" href="${viewURL}" />
 	</div>
 </aui:form>
-<script>
-	function identify() {
-		var sfzh = document.getElementById("<portlet:namespace/>sfzh").value;
-		var mobiles = document.getElementById("<portlet:namespace/>sjhm").value;
-		var dzyx = document.getElementById("<portlet:namespace/>dzyx").value;
-		var regSjhm = /^1[3|4|5|7|8][0-9]\d{8}$/;
-		var regSfzh = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
-		var regDzyx = /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/;
-		if (regSfzh.test(sfzh) === false) {
-            alert("无效的身份证号！");
-            return false;
-        }
-		if(dzyx.length!=0){
-			if(regDzyx.test(dzyx)===false){
-				alert("无效的电子邮箱！");
-	            return false;
-			}
-		}
-		if (mobiles != null && mobiles != "") {
-			if (mobiles.indexOf(",") == -1) {
-				if (!regSjhm.test(mobiles)) {
-					alert("无效的手机号码！");
-					return false;
-				}
-			} else {
-				var arr = mobiles.split(",");
-				var length = arr.length;
-				for (var i = 0; i < length; i++) {
-					if (!regSjhm.test(arr[i])) {
-						alert("无效的手机号码！");
-						return false;
-					}
-				}
-			}
-		}
-		if (mobiles == "") {
-			alert('手机号不能为空！');
-			return false;
-		}
-	}	
+<script>	
 	function toCsny(){
 		var sfzh = document.getElementById("<portlet:namespace/>sfzh").value;
 		var csn = sfzh.substr(6, 4);
