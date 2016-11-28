@@ -65,15 +65,21 @@ public class ExpertApplicationPortlet extends MVCPortlet {
 		}
 	}
 
-	// 保存基本信息
+	// 淇濆瓨鍩烘湰淇℃伅
 	public void saveJbxx(ActionRequest request, ActionResponse response) throws SystemException, ParseException,
 			PortalException, IOException {
 		String xm = ParamUtil.getString(request, "xm");
 		String xb = ParamUtil.getString(request, "xb");
 		String sfzh = ParamUtil.getString(request, "sfzh");
-		String csnyStr = sfzh.substring(6, 10) + "-" + sfzh.substring(10, 12);
+		String csnyStr = "";
+		if(sfzh.length()==18){
+			csnyStr = sfzh.substring(6, 10) + "-" + sfzh.substring(10, 12);
+		}else{
+			csnyStr = "19"+sfzh.substring(6, 8) + "-" + sfzh.substring(8, 10);
+		}
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
 		java.util.Date csny = sdf.parse(csnyStr);
+		System.out.println("================"+csny);
 		String gzdw = ParamUtil.getString(request, "gzdw");
 		String dzyx = ParamUtil.getString(request, "dzyx");
 		String txdz = ParamUtil.getString(request, "txdz");
@@ -133,7 +139,7 @@ public class ExpertApplicationPortlet extends MVCPortlet {
 		response.sendRedirect(redirect);
 	}
 
-	// 保存学历信息
+	// 淇濆瓨瀛﹀巻淇℃伅
 	public void saveXlxxs(ActionRequest request, ActionResponse response) throws SystemException, PortalException,
 			IOException {
 		long expertId = ParamUtil.getLong(request, "expertId");
@@ -176,7 +182,7 @@ public class ExpertApplicationPortlet extends MVCPortlet {
 		redirect(request, response, expert, 2);
 	}
 
-	// 保存工作简历
+	// 淇濆瓨宸ヤ綔绠�鍘�
 	public void saveGzjls(ActionRequest request, ActionResponse response) throws SystemException, PortalException,
 			IOException {
 		long expertId = ParamUtil.getLong(request, "expertId");
@@ -218,7 +224,7 @@ public class ExpertApplicationPortlet extends MVCPortlet {
 		redirect(request, response, expert, 3);
 	}
 
-	// 保存在其他专家库任职情况
+	// 淇濆瓨鍦ㄥ叾浠栦笓瀹跺簱浠昏亴鎯呭喌
 	public void saveZqtzjkrzqks(ActionRequest request, ActionResponse response) throws SystemException,
 			PortalException, IOException {
 		long expertId = ParamUtil.getLong(request, "expertId");
