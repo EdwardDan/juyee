@@ -142,7 +142,7 @@ public class ZysqlbLocalServiceImpl extends ZysqlbLocalServiceBaseImpl {
 		
 		dynamicQuery.add(junction);
 
-		dynamicQuery.addOrder(OrderFactoryUtil.desc("expertId"));
+		dynamicQuery.addOrder(OrderFactoryUtil.desc("zysqlbId"));
 		return dynamicQuery;
 	}
 

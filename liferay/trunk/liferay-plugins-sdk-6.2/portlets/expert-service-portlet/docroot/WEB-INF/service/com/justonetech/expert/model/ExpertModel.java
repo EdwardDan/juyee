@@ -15,6 +15,7 @@
 package com.justonetech.expert.model;
 
 import com.liferay.portal.kernel.bean.AutoEscape;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.service.ServiceContext;
@@ -72,6 +73,35 @@ public interface ExpertModel extends BaseModel<Expert> {
 	 * @param expertId the expert ID of this expert
 	 */
 	public void setExpertId(long expertId);
+
+	/**
+	 * Returns the user ID of this expert.
+	 *
+	 * @return the user ID of this expert
+	 */
+	public long getUserId();
+
+	/**
+	 * Sets the user ID of this expert.
+	 *
+	 * @param userId the user ID of this expert
+	 */
+	public void setUserId(long userId);
+
+	/**
+	 * Returns the user uuid of this expert.
+	 *
+	 * @return the user uuid of this expert
+	 * @throws SystemException if a system exception occurred
+	 */
+	public String getUserUuid() throws SystemException;
+
+	/**
+	 * Sets the user uuid of this expert.
+	 *
+	 * @param userUuid the user uuid of this expert
+	 */
+	public void setUserUuid(String userUuid);
 
 	/**
 	 * Returns the xm of this expert.

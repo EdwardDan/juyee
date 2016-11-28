@@ -18,6 +18,7 @@ import com.justonetech.expert.model.Expert;
 import com.justonetech.expert.model.ExpertModel;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -25,6 +26,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
@@ -60,6 +62,7 @@ public class ExpertModelImpl extends BaseModelImpl<Expert>
 	public static final String TABLE_NAME = "expert_Expert";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "expertId", Types.BIGINT },
+			{ "userId", Types.BIGINT },
 			{ "xm", Types.VARCHAR },
 			{ "xb", Types.VARCHAR },
 			{ "sfzh", Types.VARCHAR },
@@ -78,7 +81,7 @@ public class ExpertModelImpl extends BaseModelImpl<Expert>
 			{ "cz", Types.VARCHAR },
 			{ "sqbz", Types.INTEGER }
 		};
-	public static final String TABLE_SQL_CREATE = "create table expert_Expert (expertId LONG not null primary key,xm VARCHAR(75) null,xb VARCHAR(75) null,sfzh VARCHAR(75) null,csny DATE null,gzdw VARCHAR(75) null,dzyx VARCHAR(75) null,txdz VARCHAR(75) null,yzbm VARCHAR(75) null,xrzw VARCHAR(75) null,zc VARCHAR(75) null,zyzg VARCHAR(75) null,cszy VARCHAR(75) null,zygznx VARCHAR(75) null,sjhm VARCHAR(75) null,lxdh VARCHAR(75) null,cz VARCHAR(75) null,sqbz INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table expert_Expert (expertId LONG not null primary key,userId LONG,xm VARCHAR(75) null,xb VARCHAR(75) null,sfzh VARCHAR(75) null,csny DATE null,gzdw VARCHAR(75) null,dzyx VARCHAR(75) null,txdz VARCHAR(75) null,yzbm VARCHAR(75) null,xrzw VARCHAR(75) null,zc VARCHAR(75) null,zyzg VARCHAR(75) null,cszy VARCHAR(75) null,zygznx VARCHAR(75) null,sjhm VARCHAR(75) null,lxdh VARCHAR(75) null,cz VARCHAR(75) null,sqbz INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table expert_Expert";
 	public static final String ORDER_BY_JPQL = " ORDER BY expert.expertId DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY expert_Expert.expertId DESC";
@@ -133,6 +136,7 @@ public class ExpertModelImpl extends BaseModelImpl<Expert>
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("expertId", getExpertId());
+		attributes.put("userId", getUserId());
 		attributes.put("xm", getXm());
 		attributes.put("xb", getXb());
 		attributes.put("sfzh", getSfzh());
@@ -160,6 +164,12 @@ public class ExpertModelImpl extends BaseModelImpl<Expert>
 
 		if (expertId != null) {
 			setExpertId(expertId);
+		}
+
+		Long userId = (Long)attributes.get("userId");
+
+		if (userId != null) {
+			setUserId(userId);
 		}
 
 		String xm = (String)attributes.get("xm");
@@ -273,6 +283,26 @@ public class ExpertModelImpl extends BaseModelImpl<Expert>
 	@Override
 	public void setExpertId(long expertId) {
 		_expertId = expertId;
+	}
+
+	@Override
+	public long getUserId() {
+		return _userId;
+	}
+
+	@Override
+	public void setUserId(long userId) {
+		_userId = userId;
+	}
+
+	@Override
+	public String getUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
+	}
+
+	@Override
+	public void setUserUuid(String userUuid) {
+		_userUuid = userUuid;
 	}
 
 	@Override
@@ -548,6 +578,7 @@ public class ExpertModelImpl extends BaseModelImpl<Expert>
 		ExpertImpl expertImpl = new ExpertImpl();
 
 		expertImpl.setExpertId(getExpertId());
+		expertImpl.setUserId(getUserId());
 		expertImpl.setXm(getXm());
 		expertImpl.setXb(getXb());
 		expertImpl.setSfzh(getSfzh());
@@ -630,6 +661,8 @@ public class ExpertModelImpl extends BaseModelImpl<Expert>
 		ExpertCacheModel expertCacheModel = new ExpertCacheModel();
 
 		expertCacheModel.expertId = getExpertId();
+
+		expertCacheModel.userId = getUserId();
 
 		expertCacheModel.xm = getXm();
 
@@ -767,10 +800,12 @@ public class ExpertModelImpl extends BaseModelImpl<Expert>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(39);
 
 		sb.append("{expertId=");
 		sb.append(getExpertId());
+		sb.append(", userId=");
+		sb.append(getUserId());
 		sb.append(", xm=");
 		sb.append(getXm());
 		sb.append(", xb=");
@@ -812,7 +847,7 @@ public class ExpertModelImpl extends BaseModelImpl<Expert>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(58);
+		StringBundler sb = new StringBundler(61);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.expert.model.Expert");
@@ -821,6 +856,10 @@ public class ExpertModelImpl extends BaseModelImpl<Expert>
 		sb.append(
 			"<column><column-name>expertId</column-name><column-value><![CDATA[");
 		sb.append(getExpertId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userId</column-name><column-value><![CDATA[");
+		sb.append(getUserId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>xm</column-name><column-value><![CDATA[");
@@ -899,6 +938,8 @@ public class ExpertModelImpl extends BaseModelImpl<Expert>
 	private static ClassLoader _classLoader = Expert.class.getClassLoader();
 	private static Class<?>[] _escapedModelInterfaces = new Class[] { Expert.class };
 	private long _expertId;
+	private long _userId;
+	private String _userUuid;
 	private String _xm;
 	private String _xb;
 	private String _sfzh;

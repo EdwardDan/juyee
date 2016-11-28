@@ -11,6 +11,7 @@
 		<column name="expertId" type="long" primary="true" />
 
 		<!-- Business fields -->
+		<column name="userId" type="long" /><!-- 用户id -->
 		<column name="xm" type="String" /><!-- 姓名 -->
 		<column name="xb" type="String" /><!-- 性别 -->
 		<column name="sfzh" type="String" /><!-- 身份证号 -->

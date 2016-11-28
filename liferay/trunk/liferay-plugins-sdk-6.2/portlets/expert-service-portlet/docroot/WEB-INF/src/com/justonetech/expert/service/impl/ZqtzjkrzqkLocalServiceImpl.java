@@ -68,7 +68,7 @@ public class ZqtzjkrzqkLocalServiceImpl extends ZqtzjkrzqkLocalServiceBaseImpl {
 
 		dynamicQuery.add(PropertyFactoryUtil.forName("expertId").eq(expertId));
 
-		dynamicQuery.addOrder(OrderFactoryUtil.desc("expertId"));
+		dynamicQuery.addOrder(OrderFactoryUtil.desc("zqtzjkrzqkId"));
 		return dynamicQuery;
 	}
 }

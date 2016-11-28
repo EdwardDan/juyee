@@ -37,10 +37,12 @@ import java.util.Date;
 public class ExpertCacheModel implements CacheModel<Expert>, Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(39);
 
 		sb.append("{expertId=");
 		sb.append(expertId);
+		sb.append(", userId=");
+		sb.append(userId);
 		sb.append(", xm=");
 		sb.append(xm);
 		sb.append(", xb=");
@@ -85,6 +87,7 @@ public class ExpertCacheModel implements CacheModel<Expert>, Externalizable {
 		ExpertImpl expertImpl = new ExpertImpl();
 
 		expertImpl.setExpertId(expertId);
+		expertImpl.setUserId(userId);
 
 		if (xm == null) {
 			expertImpl.setXm(StringPool.BLANK);
@@ -208,6 +211,7 @@ public class ExpertCacheModel implements CacheModel<Expert>, Externalizable {
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		expertId = objectInput.readLong();
+		userId = objectInput.readLong();
 		xm = objectInput.readUTF();
 		xb = objectInput.readUTF();
 		sfzh = objectInput.readUTF();
@@ -231,6 +235,7 @@ public class ExpertCacheModel implements CacheModel<Expert>, Externalizable {
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(expertId);
+		objectOutput.writeLong(userId);
 
 		if (xm == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
@@ -343,6 +348,7 @@ public class ExpertCacheModel implements CacheModel<Expert>, Externalizable {
 	}
 
 	public long expertId;
+	public long userId;
 	public String xm;
 	public String xb;
 	public String sfzh;

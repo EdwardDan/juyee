@@ -1,5 +1,6 @@
 create table expert_Expert (
 	expertId LONG not null primary key,
+	userId LONG,
 	xm VARCHAR(75) null,
 	xb VARCHAR(75) null,
 	sfzh VARCHAR(75) null,

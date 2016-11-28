@@ -14,7 +14,18 @@
 
 package com.justonetech.expert.service.impl;
 
+import java.util.Collections;
+import java.util.List;
+
+import com.justonetech.expert.model.Expert;
+import com.justonetech.expert.model.Xlxx;
 import com.justonetech.expert.service.base.ExpertLocalServiceBaseImpl;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.OrderFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 /**
  * The implementation of the expert local service.
@@ -36,4 +47,28 @@ public class ExpertLocalServiceImpl extends ExpertLocalServiceBaseImpl {
 	 *
 	 * Never reference this interface directly. Always use {@link com.justonetech.expert.service.ExpertLocalServiceUtil} to access the expert local service.
 	 */
+	private static Log log = LogFactoryUtil
+			.getLog(ExpertLocalServiceImpl.class);
+
+	@SuppressWarnings("unchecked")
+	public List<Expert> getExperts(long userId, int start, int end) {
+
+		try {
+			return this.dynamicQuery(createDynamicQuery(userId), start, end);
+		} catch (SystemException e) {
+			log.info(e.getMessage());
+		}
+		return Collections.emptyList();
+	}
+
+	public DynamicQuery createDynamicQuery(long userId) {
+
+		DynamicQuery dynamicQuery = this.dynamicQuery();
+
+		dynamicQuery.add(PropertyFactoryUtil.forName("userId").eq(userId));
+
+		dynamicQuery.addOrder(OrderFactoryUtil.desc("expertId"));
+		return dynamicQuery;
+	}
+	
 }

@@ -74,7 +74,7 @@ public class XlxxLocalServiceImpl extends XlxxLocalServiceBaseImpl {
 
 		dynamicQuery.add(PropertyFactoryUtil.forName("expertId").eq(expertId));
 
-		dynamicQuery.addOrder(OrderFactoryUtil.desc("expertId"));
+		dynamicQuery.addOrder(OrderFactoryUtil.desc("xlxxId"));
 		return dynamicQuery;
 	}
 	

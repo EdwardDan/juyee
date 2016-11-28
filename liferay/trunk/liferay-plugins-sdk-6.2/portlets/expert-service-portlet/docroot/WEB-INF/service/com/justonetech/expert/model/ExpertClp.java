@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.impl.BaseModelImpl;
+import com.liferay.portal.util.PortalUtil;
 
 import java.io.Serializable;
 
@@ -74,6 +75,7 @@ public class ExpertClp extends BaseModelImpl<Expert> implements Expert {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("expertId", getExpertId());
+		attributes.put("userId", getUserId());
 		attributes.put("xm", getXm());
 		attributes.put("xb", getXb());
 		attributes.put("sfzh", getSfzh());
@@ -101,6 +103,12 @@ public class ExpertClp extends BaseModelImpl<Expert> implements Expert {
 
 		if (expertId != null) {
 			setExpertId(expertId);
+		}
+
+		Long userId = (Long)attributes.get("userId");
+
+		if (userId != null) {
+			setUserId(userId);
 		}
 
 		String xm = (String)attributes.get("xm");
@@ -227,6 +235,39 @@ public class ExpertClp extends BaseModelImpl<Expert> implements Expert {
 				throw new UnsupportedOperationException(e);
 			}
 		}
+	}
+
+	@Override
+	public long getUserId() {
+		return _userId;
+	}
+
+	@Override
+	public void setUserId(long userId) {
+		_userId = userId;
+
+		if (_expertRemoteModel != null) {
+			try {
+				Class<?> clazz = _expertRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setUserId", long.class);
+
+				method.invoke(_expertRemoteModel, userId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
+	}
+
+	@Override
+	public void setUserUuid(String userUuid) {
+		_userUuid = userUuid;
 	}
 
 	@Override
@@ -690,6 +731,7 @@ public class ExpertClp extends BaseModelImpl<Expert> implements Expert {
 		ExpertClp clone = new ExpertClp();
 
 		clone.setExpertId(getExpertId());
+		clone.setUserId(getUserId());
 		clone.setXm(getXm());
 		clone.setXb(getXb());
 		clone.setSfzh(getSfzh());
@@ -767,10 +809,12 @@ public class ExpertClp extends BaseModelImpl<Expert> implements Expert {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(39);
 
 		sb.append("{expertId=");
 		sb.append(getExpertId());
+		sb.append(", userId=");
+		sb.append(getUserId());
 		sb.append(", xm=");
 		sb.append(getXm());
 		sb.append(", xb=");
@@ -812,7 +856,7 @@ public class ExpertClp extends BaseModelImpl<Expert> implements Expert {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(58);
+		StringBundler sb = new StringBundler(61);
 
 		sb.append("<model><model-name>");
 		sb.append("com.justonetech.expert.model.Expert");
@@ -821,6 +865,10 @@ public class ExpertClp extends BaseModelImpl<Expert> implements Expert {
 		sb.append(
 			"<column><column-name>expertId</column-name><column-value><![CDATA[");
 		sb.append(getExpertId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userId</column-name><column-value><![CDATA[");
+		sb.append(getUserId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>xm</column-name><column-value><![CDATA[");
@@ -897,6 +945,8 @@ public class ExpertClp extends BaseModelImpl<Expert> implements Expert {
 	}
 
 	private long _expertId;
+	private long _userId;
+	private String _userUuid;
 	private String _xm;
 	private String _xb;
 	private String _sfzh;

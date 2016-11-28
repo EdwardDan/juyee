@@ -12,6 +12,7 @@
 		<id name="expertId" type="long">
 			<generator class="assigned" />
 		</id>
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="xm" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="xb" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="sfzh" type="com.liferay.portal.dao.orm.hibernate.StringType" />

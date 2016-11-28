@@ -10,6 +10,7 @@
 	<mapped-superclass class="com.justonetech.expert.model.impl.ExpertModelImpl">
 		<attributes>
 			<id name="expertId" />
+			<basic name="userId" />
 			<basic name="xm" />
 			<basic name="xb" />
 			<basic name="sfzh" />
@@ -32,6 +33,7 @@
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.justonetech.expert.model.impl.GzjlModelImpl">

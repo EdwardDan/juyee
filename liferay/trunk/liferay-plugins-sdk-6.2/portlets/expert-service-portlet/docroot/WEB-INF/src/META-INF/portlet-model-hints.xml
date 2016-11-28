@@ -3,6 +3,7 @@
 <model-hints>
 	<model name="com.justonetech.expert.model.Expert">
 		<field name="expertId" type="long" />
+		<field name="userId" type="long" />
 		<field name="xm" type="String" />
 		<field name="xb" type="String" />
 		<field name="sfzh" type="String" />

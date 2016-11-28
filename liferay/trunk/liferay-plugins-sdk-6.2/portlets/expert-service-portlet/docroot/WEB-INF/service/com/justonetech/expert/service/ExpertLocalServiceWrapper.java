@@ -280,6 +280,18 @@ public class ExpertLocalServiceWrapper implements ExpertLocalService,
 		return _expertLocalService.invokeMethod(name, parameterTypes, arguments);
 	}
 
+	@Override
+	public java.util.List<com.justonetech.expert.model.Expert> getExperts(
+		long userId, int start, int end) {
+		return _expertLocalService.getExperts(userId, start, end);
+	}
+
+	@Override
+	public com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQuery(
+		long userId) {
+		return _expertLocalService.createDynamicQuery(userId);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

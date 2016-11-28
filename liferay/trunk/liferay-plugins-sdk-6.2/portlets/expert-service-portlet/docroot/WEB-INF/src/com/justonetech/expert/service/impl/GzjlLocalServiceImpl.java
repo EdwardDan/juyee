@@ -67,7 +67,7 @@ public class GzjlLocalServiceImpl extends GzjlLocalServiceBaseImpl {
 
 		dynamicQuery.add(PropertyFactoryUtil.forName("expertId").eq(expertId));
 
-		dynamicQuery.addOrder(OrderFactoryUtil.desc("expertId"));
+		dynamicQuery.addOrder(OrderFactoryUtil.desc("GzjlId"));
 		return dynamicQuery;
 	}
 	

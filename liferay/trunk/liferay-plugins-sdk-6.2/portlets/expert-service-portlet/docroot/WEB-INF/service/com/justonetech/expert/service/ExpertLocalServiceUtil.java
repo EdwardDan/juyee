@@ -273,6 +273,16 @@ public class ExpertLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static java.util.List<com.justonetech.expert.model.Expert> getExperts(
+		long userId, int start, int end) {
+		return getService().getExperts(userId, start, end);
+	}
+
+	public static com.liferay.portal.kernel.dao.orm.DynamicQuery createDynamicQuery(
+		long userId) {
+		return getService().createDynamicQuery(userId);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

@@ -317,6 +317,7 @@ public class ExpertPersistenceImpl extends BasePersistenceImpl<Expert>
 		expertImpl.setPrimaryKey(expert.getPrimaryKey());
 
 		expertImpl.setExpertId(expert.getExpertId());
+		expertImpl.setUserId(expert.getUserId());
 		expertImpl.setXm(expert.getXm());
 		expertImpl.setXb(expert.getXb());
 		expertImpl.setSfzh(expert.getSfzh());

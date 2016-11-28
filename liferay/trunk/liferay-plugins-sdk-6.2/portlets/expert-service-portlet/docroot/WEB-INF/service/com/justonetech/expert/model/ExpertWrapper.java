@@ -50,6 +50,7 @@ public class ExpertWrapper implements Expert, ModelWrapper<Expert> {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("expertId", getExpertId());
+		attributes.put("userId", getUserId());
 		attributes.put("xm", getXm());
 		attributes.put("xb", getXb());
 		attributes.put("sfzh", getSfzh());
@@ -77,6 +78,12 @@ public class ExpertWrapper implements Expert, ModelWrapper<Expert> {
 
 		if (expertId != null) {
 			setExpertId(expertId);
+		}
+
+		Long userId = (Long)attributes.get("userId");
+
+		if (userId != null) {
+			setUserId(userId);
 		}
 
 		String xm = (String)attributes.get("xm");
@@ -220,6 +227,48 @@ public class ExpertWrapper implements Expert, ModelWrapper<Expert> {
 	@Override
 	public void setExpertId(long expertId) {
 		_expert.setExpertId(expertId);
+	}
+
+	/**
+	* Returns the user ID of this expert.
+	*
+	* @return the user ID of this expert
+	*/
+	@Override
+	public long getUserId() {
+		return _expert.getUserId();
+	}
+
+	/**
+	* Sets the user ID of this expert.
+	*
+	* @param userId the user ID of this expert
+	*/
+	@Override
+	public void setUserId(long userId) {
+		_expert.setUserId(userId);
+	}
+
+	/**
+	* Returns the user uuid of this expert.
+	*
+	* @return the user uuid of this expert
+	* @throws SystemException if a system exception occurred
+	*/
+	@Override
+	public java.lang.String getUserUuid()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _expert.getUserUuid();
+	}
+
+	/**
+	* Sets the user uuid of this expert.
+	*
+	* @param userUuid the user uuid of this expert
+	*/
+	@Override
+	public void setUserUuid(java.lang.String userUuid) {
+		_expert.setUserUuid(userUuid);
 	}
 
 	/**
