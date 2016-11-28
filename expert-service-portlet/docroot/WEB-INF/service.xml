@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
+<service-builder package-path="com.justonetech.expert">
+	<author>fanqi</author>
+	<namespace>expert</namespace>
+	
+	<!-- 基本信息 -->
+	<entity name="Expert" local-service="true" remote-service="false">
+
+		<!-- PK fields -->
+		<column name="expertId" type="long" primary="true" />
+
+		<!-- Business fields -->
+		<column name="userId" type="long" /><!-- 用户id -->
+		<column name="xm" type="String" /><!-- 姓名 -->
+		<column name="xb" type="String" /><!-- 性别 -->
+		<column name="sfzh" type="String" /><!-- 身份证号 -->
+		<column name="csny" type="Date" /><!-- 出生年月 -->
+		<column name="gzdw" type="String" /><!-- 工作单位 -->
+		<column name="dzyx" type="String" /><!-- 电子邮箱 -->
+		<column name="txdz" type="String" /><!-- 通信地址 -->
+		<column name="yzbm" type="String" /><!-- 邮政编码 -->
+		<column name="xrzw" type="String" /><!-- 现任职务 -->
+		<column name="zc" type="String" /><!-- 职称 -->
+		<column name="zyzg" type="String" /><!-- 执业资格 -->
+		<column name="cszy" type="String" /><!-- 从事专业 -->
+		<column name="zygznx" type="String" /><!-- 专业工作年限 -->
+		<column name="sjhm" type="String" /><!-- 手机号码 -->
+		<column name="lxdh" type="String" /><!-- 联系电话 -->
+		<column name="cz" type="String" /><!-- 传真 -->
+		<column name="sqbz" type="int" /><!-- 申请步骤 -->
+
+		<!-- Order -->
+		<order>
+			<order-column name="expertId" order-by="desc"></order-column>
+		</order>
+		
+	</entity>
+	
+	<!-- 学历信息 -->
+	<entity name="Xlxx" local-service="true" remote-service="false">
+
+		<!-- PK fields -->
+		<column name="xlxxId" type="long" primary="true" />
+
+		<!-- Business fields -->
+		<column name="expertId" type="long" /><!-- 专家id -->
+		<column name="byyx" type="String" /><!-- 毕业院校 -->
+		<column name="sxzy" type="String" /><!-- 所学专业 -->
+		<column name="xlhxw" type="String" /><!-- 学历和学位 -->
+		<column name="zxsj" type="String" /><!-- 在校时间 -->
+
+		<!-- Order -->
+		<order>
+			<order-column name="xlxxId" order-by="desc"></order-column>
+		</order>
+		
+	</entity>
+	
+	<!-- 工作简历 -->
+	<entity name="Gzjl" local-service="true" remote-service="false">
+
+		<!-- PK fields -->
+		<column name="GzjlId" type="long" primary="true" />
+
+		<!-- Business fields -->
+		<column name="expertId" type="long" /><!-- 专家id -->
+		<column name="gzdw" type="String" /><!-- 工作单位 -->
+		<column name="qzny" type="String" /><!-- 起止年月 -->
+		<column name="cszyzygz" type="String" /><!-- 从事主要专业工作 -->
+		<column name="zw" type="String" /><!-- 职务 -->
+
+		<!-- Order -->
+		<order>
+			<order-column name="GzjlId" order-by="desc"></order-column>
+		</order>
+		
+	</entity>
+	
+	<!-- 在其他专家库任职情况 -->
+	<entity name="Zqtzjkrzqk" local-service="true" remote-service="false">
+
+		<!-- PK fields -->
+		<column name="zqtzjkrzqkId" type="long" primary="true" />
+
+		<!-- Business fields -->
+		<column name="expertId" type="long" /><!-- 专家id -->
+		<column name="zjkxtlsdw" type="String" /><!-- 专家库系统隶属单位 -->
+		<column name="sqzy" type="String" /><!-- 申请专业 -->
+		<column name="pzrq" type="Date" /><!-- 批准日期 -->
+
+		<!-- Order -->
+		<order>
+			<order-column name="zqtzjkrzqkId" order-by="desc"></order-column>
+		</order>
+		
+	</entity>
+	
+	<!-- 专业申请列表 -->
+	<entity name="Zysqlb" local-service="true" remote-service="false">
+
+		<!-- PK fields -->
+		<column name="zysqlbId" type="long" primary="true" />
+
+		<!-- Business fields -->
+		<column name="expertId" type="long" /><!-- 专家id -->
+		<column name="sx" type="String" /><!-- 一级（事项） -->
+		<column name="zy" type="String" /><!-- 二级（专业） -->
+		<column name="zt" type="int" /><!-- 状态 -->
+		<column name="shyj" type="String" /><!-- 审核意见 -->
+		<column name="shr" type="String" /><!-- 审核人 -->
+		<column name="shrq" type="Date" /><!-- 审核日期 -->
+
+		<!-- Order -->
+		<order>
+			<order-column name="zysqlbId" order-by="desc"></order-column>
+		</order>
+		
+	</entity>
+	
+</service-builder>
