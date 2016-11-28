@@ -26,6 +26,7 @@ margin-top:9px;
 	</div>
 </div>
 
+<br>
 
 <liferay-ui:search-container emptyResultsMessage="没有找到专家审批信息"  rowChecker="<%=new RowChecker(renderResponse)%>">
 		<liferay-ui:search-container-results results="${list}"
@@ -35,8 +36,8 @@ margin-top:9px;
 			
 			<!-- 点击姓名时跳转的页面 -->
 			<liferay-portlet:renderURL varImpl="rowURL">
-				<portlet:param name="expertId" value="${map.expertId}" />
 				<portlet:param name="mvcPath" value="${request.contextPath}/portlet/expert-application/view-expert.jsp" />
+				<portlet:param name="expertId" value="${map.expertId}" />
 			</liferay-portlet:renderURL> 
 
 			<liferay-ui:search-container-column-text  name="姓名" href="${rowURL}">

@@ -8,17 +8,19 @@
 	<portlet:param name="redirectURL" value="${addExpertUrl}"/>
 </portlet:actionURL>
 <%
-	long expertId = ParamUtil.getLong(request, "expertId");
-	Expert expert = null;
-	if(expertId!=0){
-		expert = ExpertLocalServiceUtil.getExpert(expertId);
-		String csny = expert.getSfzh().substring(6,12);
-		String csn = csny.substring(0, 4);
-		String csy = csny.substring(4,6);
-		request.setAttribute("expert", expert);
-		request.setAttribute("csn", csn);
-		request.setAttribute("csy", csy);
+	long userId = user.getUserId();
+	List<Expert> experts = ExpertLocalServiceUtil.getExperts(userId, -1, -1);
+	long expertId = 0l;
+	if(experts.size()>0){
+			expertId = experts.get(0).getExpertId();
+			String csny = experts.get(0).getSfzh().substring(6,12);
+			String csn = csny.substring(0, 4);
+			String csy = csny.substring(4,6);
+			request.setAttribute("expert", experts.get(0));
+			request.setAttribute("csn", csn);
+			request.setAttribute("csy", csy);
 	}
+	
 %>
 <aui:form action="${saveJbxxURL}">
 	<aui:input name="expertId" type="hidden" value="<%=expertId%>" />

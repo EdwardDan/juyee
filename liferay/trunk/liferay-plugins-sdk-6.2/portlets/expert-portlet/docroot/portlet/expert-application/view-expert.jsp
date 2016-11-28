@@ -4,7 +4,8 @@
 <portlet:defineObjects />
 
 <%
-	long expertId = ParamUtil.getLong(request, "expertId");
+	String expertIdStr = ParamUtil.getString(request, "expertId","0l");
+	long expertId = Long.parseLong(expertIdStr);
 	request.setAttribute("expertId", expertId);
 %>
 

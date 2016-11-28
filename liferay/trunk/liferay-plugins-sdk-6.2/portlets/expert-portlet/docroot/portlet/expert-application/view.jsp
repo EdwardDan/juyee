@@ -22,7 +22,11 @@
 	left: 93%;
 }
 </style>
+<div>
 <aui:button href="${addExpertUrl}" value="申请" cssClass="application"></aui:button>
+</div>
+
+<br>
 
 <portlet:renderURL var="searchURL">
 	<liferay-portlet:param name="cur" value="${cur }" />

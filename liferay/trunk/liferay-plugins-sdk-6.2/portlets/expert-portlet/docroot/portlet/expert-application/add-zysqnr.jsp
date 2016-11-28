@@ -58,7 +58,7 @@
 					<c:forEach items="${jssc}" var="jssc" varStatus="sortNo">
 						<input name="<portlet:namespace/>zy" type="checkbox"
 							id="jssc${sortNo.index}" value="${jssc.dictionaryId}"
-							inlineField="true">${jssc. name}</input>
+							inlineField="true">${jssc. name}</input><br>
 					</c:forEach>
 					<%
 						}

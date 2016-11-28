@@ -36,7 +36,7 @@ import com.sun.xml.internal.ws.api.ha.HaInfo;
  * Portlet implementation class ExpertApprovalPortlet
  */
 public class ExpertApprovalPortlet extends MVCPortlet {
- 
+	
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
@@ -72,12 +72,19 @@ public class ExpertApprovalPortlet extends MVCPortlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("list----------"+list);
 		renderRequest.setAttribute("list", list);
 		renderRequest.setAttribute("zysqlbs", zysqlbs);
 		renderRequest.setAttribute("zysqlbsCount", zysqlbsCount);
 		renderRequest.setAttribute("keyword", keyword);
 		super.doView(renderRequest, renderResponse);
+	}
+	
+	@Override
+	public void render(RenderRequest renderRequest, RenderResponse renderResponse) throws PortletException, IOException {
+		// TODO Auto-generated method stub
+		String tabNum = ParamUtil.get(renderRequest, "tabNum", "1");
+		renderRequest.setAttribute("tabNum", tabNum);
+		super.render(renderRequest, renderResponse);
 	}
 	
 	public void saveAuditInfo(ActionRequest request,ActionResponse response) throws PortalException, SystemException{

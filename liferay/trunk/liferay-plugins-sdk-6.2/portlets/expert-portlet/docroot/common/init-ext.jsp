@@ -23,6 +23,8 @@
 <%@ page import="java.text.*"%>
 <%@ page import="com.liferay.portal.service.*"%>
 <%@ page import="com.liferay.portal.model.*"%>
+<%@ page import="com.justonetech.expert.model.*"%>
+<%@ page import="com.justonetech.expert.service.*"%>
 
 <script type="text/javascript" src="/static/My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript">

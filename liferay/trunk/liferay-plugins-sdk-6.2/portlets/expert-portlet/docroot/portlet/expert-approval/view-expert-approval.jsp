@@ -34,8 +34,6 @@
 			</td>
 		</tr>
 
-
-
 		<tr style="height:60px;">
 			<td class="span2" style="text-align: right;vertical-align:middle;">审核人</td>
 			<td class="span10" style="vertical-align:middle;">${zysqlb.shr}</td>

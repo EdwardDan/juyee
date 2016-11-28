@@ -10,7 +10,7 @@
 		</portlet-class>
 		<init-param>
 			<name>view-template</name>
-			<value>/portlet/expert-application/view.jsp</value>
+			<value>/portlet/expert-application/add-expert.jsp</value>
 		</init-param>
 		<init-param>
 			<name>copy-request-parameters</name>

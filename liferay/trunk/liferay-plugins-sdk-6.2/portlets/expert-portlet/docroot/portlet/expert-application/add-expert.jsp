@@ -6,13 +6,14 @@
 <portlet:defineObjects />
 <%
 	int sqbz = 1;
-	long expertId = ParamUtil.getLong(request, "expertId",0);
-	Expert expert = null;
-	if(Validator.isNotNull(expertId)){
-		expert = ExpertLocalServiceUtil.getExpert(expertId);
-		sqbz = expert.getSqbz()<5 ? expert.getSqbz()+1 : 5;
+	long userId = user.getUserId();
+	List<Expert> experts = ExpertLocalServiceUtil.getExperts(userId, -1, -1);
+	long expertId = 0l;
+	if(experts.size()>0){
+		expertId = experts.get(0).getExpertId();
+		sqbz = experts.get(0).getSqbz()<5 ? experts.get(0).getSqbz()+1 : 5;
 	}
-	int tabNum = ParamUtil.getInteger(request, "tabNum",sqbz);
+	int tabNum = ParamUtil.getInteger(request, "tabNum",1);
 	tabNum = tabNum>sqbz?sqbz:tabNum;
 	request.setAttribute("expertId", expertId);
 	request.setAttribute("sqbz", sqbz);
@@ -23,7 +24,7 @@
 		value="${addExpertUrl}&${renderResponse.namespace}expertId=${expertId}"></c:set>
 </c:if>
 
-<liferay-ui:header title="添加专家申报" backURL="${viewURL }" />
+<%-- <liferay-ui:header title="添加专家申报" backURL="${viewURL }" /> --%>
 
 <ul class="nav nav-tabs">
 	<li class="${tabNum eq 1?"active":"" }">

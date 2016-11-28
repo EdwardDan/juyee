@@ -37,6 +37,9 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.User;
+import com.liferay.portal.util.Portal;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 /**
@@ -90,6 +93,8 @@ public class ExpertApplicationPortlet extends MVCPortlet {
 		} else {
 			expert = ExpertLocalServiceUtil.createExpert(CounterLocalServiceUtil.increment());
 		}
+		User user  = PortalUtil.getUser(request);
+		expert.setUserId(user.getUserId());
 		expert.setXm(xm);
 		expert.setXb(xb);
 		expert.setSfzh(sfzh);
@@ -115,7 +120,6 @@ public class ExpertApplicationPortlet extends MVCPortlet {
 
 	public void redirect(ActionRequest request, ActionResponse response, Expert expert, int sqbz) throws IOException {
 		String redirect = ParamUtil.getString(request, "redirectURL");
-		System.out.println("===============" + redirect);
 		int tabNum = 1;
 		if (expert.getSqbz() == sqbz && sqbz < 5) {
 			tabNum = sqbz + 1;
